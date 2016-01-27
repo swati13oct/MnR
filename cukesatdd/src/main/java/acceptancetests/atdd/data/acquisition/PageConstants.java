@@ -55,5 +55,19 @@ public class PageConstants {
 	
 	public static final String AGENTS_AND_BROKERS_PAGE = "agentsAndBrokersPage";
 
+	public static final String AARP_ABOUT_US_PAGE = "aboutUsAARPPage";
+
+	public static final String AARP_Contact_US_PAGE = "contactUsAARPPage";
+
+	public static final String AARP_SITE_MAP_PAGE = "siteMapAARPPage";
+
+	public static final String AARP_PRIVACY_POLICY_PAGE = "privacyPolicyAARPPage";
+
+	public static final String AARP_TERMS_AND_CONDITIONS_PAGE = "termsnConditionsAARPPage";
+
+	public static final String AARP_DISCLAIMERS_PAGE = "disclaimersAARPPage";
+
+	public static final String AARP_AGENTS_AND_BROKERS_PAGE = "agentsnBrokersAARPPage";
+
 
 }

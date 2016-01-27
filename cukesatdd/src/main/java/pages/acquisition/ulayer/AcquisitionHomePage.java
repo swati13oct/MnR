@@ -5,13 +5,18 @@ package pages.acquisition.ulayer;
 
 import java.util.List;
 
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.FindBys;
 import org.openqa.selenium.support.PageFactory;
 
+import acceptancetests.atdd.data.CommonConstants;
 import acceptancetests.atdd.data.MRConstants;
+import acceptancetests.atdd.data.PageData;
+import acceptancetests.atdd.util.CommonUtility;
 import atdd.framework.UhcDriver;
 
 /**
@@ -40,8 +45,34 @@ public class AcquisitionHomePage extends UhcDriver {
 
 	@FindBys(value = { @FindBy(xpath = "//table[@id='selectcountytable']/tbody/tr/td") })
 	List<WebElement> countyRows;
+	
+	@FindBy(id = "gf_lnk_1")
+	private WebElement footerHomeLink;
+	
+	@FindBy(id = "gf_lnk_2")
+	private WebElement footerAboutUsLink;
+	
+	@FindBy(id = "gf_lnk_3")
+	private WebElement footerContactUsLink;
+
+	@FindBy(id = "gf_lnk_4")
+	private WebElement footerSiteMapLink;
+
+	@FindBy(id = "gf_lnk_5")
+	private WebElement footerPrivacyPolicyLink;
+
+	@FindBy(id = "gf_lnk_6")
+	private WebElement footerTermsnConditionsLink;
+	
+	@FindBy(id = "gf_lnk_7")
+	private WebElement footerDisclaimersLink;
+	
+	@FindBy(id = "gf_lnk_8")
+	private WebElement footerAgentsnBrokersLink;
 
 	private static String AARP_ACQISITION_PAGE_URL = MRConstants.AARP_URL;
+	private PageData globalFooter;
+	public JSONObject globalFooterJson;
 
 	public AcquisitionHomePage(WebDriver driver) {
 		super(driver);
@@ -113,6 +144,40 @@ public class AcquisitionHomePage extends UhcDriver {
 	public String selectsHomeFooter() {
 
 		return homefooter.getText();
+	}
+	
+	public JSONObject accessGlobalFooter() {
+		String fileName = CommonConstants.GLOBAL_FOOTER_PAGE_DATA;
+        globalFooter = CommonUtility.readPageData(fileName,
+                     CommonConstants.PAGE_OBJECT_DIRECTORY_ULAYER_ACQ);
+        
+        JSONObject jsonObject = new JSONObject();
+        for (String key : globalFooter.getExpectedData().keySet()) {
+        WebElement element = findElement(globalFooter.getExpectedData()
+        .get(key));
+        if (element != null) {
+        if(validate(element)){
+        try {
+        jsonObject.put(key, element.getText());
+        } catch (JSONException e) {
+        // TODO Auto-generated catch block
+        e.printStackTrace();
+        }
+        }
+        }
+        }
+        globalFooterJson = jsonObject;
+        
+        
+        return globalFooterJson;
+	}
+	
+	public AboutUsAARPPage aboutUsFooterClick() {
+		footerAboutUsLink.click();
+		if (driver.getTitle().equalsIgnoreCase("About UnitedHealthcare® | AARP® Medicare Plans from UnitedHealthcare")) {
+			return new AboutUsAARPPage(driver);
+		}
+		return null;
 	}
 
 }

@@ -1,0 +1,25 @@
+/**
+ * 
+ */
+package atdd.runners;
+
+import org.junit.runner.RunWith;
+
+import cucumber.junit.Cucumber;
+
+/**
+ * @author rkodumur
+ *
+ */
+
+@RunWith(Cucumber.class)
+@Cucumber.Options(glue = { "atdd.framework","acceptancetests.globalfooter" }, 
+		features = { "feature/gloabal-footer" }, 
+		format = {
+		"pretty", "html:reports/test-report" }, tags ={"@footerUlayer"})
+
+public class RunMRCukesGlobalFooterUlayer {
+
+}
+
+
