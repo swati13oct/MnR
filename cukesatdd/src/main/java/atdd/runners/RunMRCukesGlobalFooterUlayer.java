@@ -14,7 +14,7 @@ import cucumber.junit.Cucumber;
 
 @RunWith(Cucumber.class)
 @Cucumber.Options(glue = { "atdd.framework","acceptancetests.globalfooter" }, 
-		features = { "feature/gloabal-footer" }, 
+		features = { "feature/global-footer" }, 
 		format = {
 		"pretty", "html:reports/test-report" }, tags ={"@footerUlayer"})
 
