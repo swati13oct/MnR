@@ -1,0 +1,37 @@
+{
+"Default":{
+"standardNetworkPharmaciesRadioButton": "Standard Network Pharmacies",
+"pharmacyNetworkPharmacyRadioButton": "Pharmacy Saver\u2122 Pharmacy   ",
+"preferredMailServicePharmacyRadioButton": "Preferred Mail Service Pharmacy",
+"milesDropDown": "1 mile\n2 miles\n5 miles\n10 miles\n15 miles\n25 miles",
+"zipcode": "10003",
+"editZipcodeLink": "Edit pharmacy ZIP code",
+"pharmacyList":[{"pharmacy":"Pharmacy Distance Total Annual Drug Cost Total Annual Savings # of Drugs with Pharmacy Saver\u2122 Pricing"},
+				{"pharmacy":"1 DUANE READE #14265\n\n0.09 mi\nSee on map\nselect\n$2,687.88\n$0\n0 of 1"},
+				{"pharmacy":"2 DUANE READE #14387\n\n0.15 mi\nSee on map\nselect\n$2,687.88\n$0\n0 of 1"},
+				{"pharmacy":"3 WALGREENS #6159 6159\n\n0.17 mi\nSee on map\nselect\n$2,687.88\n$0\n0 of 1"}],	
+"nextResultsLink": "Next results",
+"footerNote": "More Information\nThis directory is current as of the first Sunday of each month.\n\nAll network pharmacies may not be listed in this directory. Inclusion of a pharmacy does not guarantee that the pharmacy is open, is at the same location as listed in this online directory, or is included in the network. The pharmacy network may change at any time. You will receive notice when necessary. Please contact UnitedHealthcare\u00AE for details.\n\nPharmacy Saver\u2122 Program\nDrugs and prices may vary between pharmacies and are subject to change during the plan year. Prices are based on quantity filled at the pharmacy. Quantities may be limited by pharmacy based on their dispensing policy or by the plan based on Quantity Limit requirements; if prescription is in excess of a limit, co-pay amounts may be higher.\nThis information is not a complete description of benefits. Contact the plan for more information. Limitations, co-payments, and restrictions may apply. Benefits, premium and/or co-payment/co-insurance may change on January 1 each year.\n\nOther pharmacies are available in our network. Members may use any pharmacy in the network, but may not receive Pharmacy Saver pricing. Pharmacies participating in the Pharmacy Saver program may not be available in all areas."
+},
+"Standard Network Pharmacy_15 miles":{
+"standardNetworkPharmaciesRadioButton": "Standard Network Pharmacies",
+"pharmacyNetworkPharmacyRadioButton": "Pharmacy Saver\u2122 Pharmacy   ",
+"preferredMailServicePharmacyRadioButton": "Preferred Mail Service Pharmacy",
+"milesDropDown": "1 mile\n2 miles\n5 miles\n10 miles\n15 miles\n25 miles",
+"zipcode": "10003",
+"editZipcodeLink": "Edit pharmacy ZIP code",
+"pharmacyList":[{"pharmacy":"Pharmacy Distance"},
+			   {"pharmacy":"1 AVALON CHEMISTS\n\n0 mi\nSee on map Selected"},
+			   {"pharmacy":"2 ABACUS PHARMACY\n\n0.16 mi\nSee on map\nselect"},
+			   {"pharmacy":"3 CVS PHARMACY #10828 10828\n\n0.2 mi\nSee on map\nselect"},
+			   {"pharmacy":"4 KMART PHARMACY7777 7777\n\n0.24 mi\nSee on map\nselect"},
+			   {"pharmacy":"5 CVS PHARMACY 02557\n\n0.25 mi\nSee on map\nselect"},
+			   {"pharmacy":"6 NEW YORK CITY PHARMACY\n\n0.27 mi\nSee on map\nselect"},
+			   {"pharmacy":"7 ESQUIRE PHARMACY\n\n0.28 mi\nSee on map\nselect"},
+			   {"pharmacy":"8 NATES PHARMACY\n\n0.29 mi\nSee on map\nselect"},
+			   {"pharmacy":"9 CVS PHARMACY 02427\n\n0.32 mi\nSee on map\nselect"},
+			   {"pharmacy":"10 UNIVERSITY CHEMISTS\n\n0.33 mi\nSee on map\nselect"}],	
+"nextResultsLink": "Next results",
+"footerNote": "More Information\nThis directory is current as of the first Sunday of each month.\n\nAll network pharmacies may not be listed in this directory. Inclusion of a pharmacy does not guarantee that the pharmacy is open, is at the same location as listed in this online directory, or is included in the network. The pharmacy network may change at any time. You will receive notice when necessary. Please contact UnitedHealthcare\u00AE for details."
+}
+}

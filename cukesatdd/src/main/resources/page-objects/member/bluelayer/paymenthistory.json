@@ -1,0 +1,33 @@
+{
+"url":null,
+"expectedData":{
+"totalAmountDue":{
+"identifier": "xpath",
+"elementName": "//div[@id='paymentHistoryApp']/div[1]/div[1]/div/div/div[2]/table[1]/tbody/tr[1]/td[2]"
+},
+"paymentMethod" : {
+"identifier": "xpath",
+"elementName": "//div[@id='paymentHistoryApp']/div[1]/div[1]/div/div/div[2]/table[1]/tbody/tr[3]/td[2]"
+},
+"paymentHistoryTable":{
+"identifier": "xpath",
+"elementName": "//div[@id='paymentHistoryApp']/div[1]/div[2]/div/div[2]/div[4]/div/div[2]"
+},
+"memberName":{
+"identifier":"id",
+"elementName":"welcomeText"
+},
+"planName1":{
+"identifier":"xpath",
+"elementName":"//div[@id='planinformation']/div[2]/h3"
+},
+"memberId1":{
+"identifier":"id",
+"elementName":"memberID"
+},
+"planStatus1":{
+"identifier":"id",
+"elementName":"status"
+}
+}
+}

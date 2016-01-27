@@ -1,0 +1,252 @@
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd">
+  <description>Build: @build.number@; Build Time: @build.time@; SVN URL: @svn.url@; SVN Version: @svn.version@</description>
+  <!-- WSS Signature keystore location, usernames, passwords -->
+  <!-- FindConsumer KeyStore Info -->
+  <bean class="java.lang.String" id="wssKeystoreLocation_FindConsumer">
+    <constructor-arg value="file:/portal/conf/partd_external/wsskeystore/test/findConsumerKeyStore.jks" />
+  </bean>
+  <bean class="java.lang.String" id="wssKeystoreUsername_FindConsumer">
+    <constructor-arg value="findConsumer" />
+  </bean>
+  <bean class="java.lang.String" id="wssKeystorePassword_FindConsumer">
+    <constructor-arg value="wesbfc" />
+  </bean>
+  <!-- CreateFulfillmentRequest KeyStore Info -->
+  <bean class="java.lang.String" id="wssKeystoreLocation_CreateFulfillmentRequest">
+    <constructor-arg value="file:/portal/conf/partd_external/wsskeystore/test/createFulfillmentRequestKeyStore.jks" />
+  </bean>
+  <bean class="java.lang.String" id="wssKeystoreUsername_CreateFulfillmentRequest">
+    <constructor-arg value="createFulfillmentRequest" />
+  </bean>
+  <bean class="java.lang.String" id="wssKeystorePassword_CreateFulfillmentRequest">
+    <constructor-arg value="wesbcfr" />
+  </bean>
+  <!-- GetDemographics KeyStore Info -->
+  <bean class="java.lang.String" id="wssKeystoreLocation_GetDemographics">
+    <constructor-arg value="file:/portal/conf/partd_external/wsskeystore/test/getDemographicsKeyStore.jks" />
+  </bean>
+  <bean class="java.lang.String" id="wssKeystoreUsername_GetDemographics">
+    <constructor-arg value="getdemographics" />
+  </bean>
+  <bean class="java.lang.String" id="wssKeystorePassword_GetDemographics">
+    <constructor-arg value="wesbgdm" />
+  </bean>
+  <!-- GetListPolicy KeyStore Info -->
+  <bean class="java.lang.String" id="wssKeystoreLocation_GetListPolicy">
+    <constructor-arg value="file:/portal/conf/partd_external/wsskeystore/test/getListPolicyKeyStore.jks" />
+  </bean>
+  <bean class="java.lang.String" id="wssKeystoreUsername_GetListPolicy">
+    <constructor-arg value="getListPolicy" />
+  </bean>
+  <bean class="java.lang.String" id="wssKeystorePassword_GetListPolicy">
+    <constructor-arg value="wesbglp" />
+  </bean>
+  <!-- MaintainDemographics KeyStore Info -->
+  <bean class="java.lang.String" id="wssKeystoreLocation_MaintainDemographics">
+    <constructor-arg value="file:/portal/conf/partd_external/wsskeystore/test/maintainDemographicsKeyStore.jks" />
+  </bean>
+  <bean class="java.lang.String" id="wssKeystoreUsername_MaintainDemographics">
+    <constructor-arg value="maintaindemographics" />
+  </bean>
+  <bean class="java.lang.String" id="wssKeystorePassword_MaintainDemographics">
+    <constructor-arg value="wesbmdm" />
+  </bean>
+  <!-- GetDeliveryPreferences KeyStore Info -->
+  <bean class="java.lang.String" id="wssKeystoreLocation_GetDeliveryPreferences">
+    <constructor-arg value="file:/portal/conf/partd_external/wsskeystore/test/getDeliveryPreferencesKeyStore.jks" />
+  </bean>
+  <bean class="java.lang.String" id="wssKeystoreUsername_GetDeliveryPreferences">
+    <constructor-arg value="getDeliveryPreferences" />
+  </bean>
+  <bean class="java.lang.String" id="wssKeystorePassword_GetDeliveryPreferences">
+    <constructor-arg value="wesbgdp" />
+  </bean>
+  <!-- MaintainDeliveryPreferences KeyStore Info -->
+  <bean class="java.lang.String" id="wssKeystoreLocation_MaintainDeliveryPreferences">
+    <constructor-arg value="file:/portal/conf/partd_external/wsskeystore/test/maintainDeliveryPreferencesKeyStore.jks" />
+  </bean>
+  <bean class="java.lang.String" id="wssKeystoreUsername_MaintainDeliveryPreferences">
+    <constructor-arg value="maintainDeliveryPreferences" />
+  </bean>
+  <bean class="java.lang.String" id="wssKeystorePassword_MaintainDeliveryPreferences">
+    <constructor-arg value="wesbmdp" />
+  </bean>
+  <!-- MaintainCustomerAccount KeyStore Info -->
+  <bean class="java.lang.String" id="wssKeystoreLocation_MaintainCustomerAccount">
+    <constructor-arg value="file:/portal/conf/partd_external/wsskeystore/test/maintainCustomerAccountKeyStore.jks" />
+  </bean>
+  <bean class="java.lang.String" id="wssKeystoreUsername_MaintainCustomerAccount">
+    <constructor-arg value="maintainCustomerAccount" />
+  </bean>
+  <bean class="java.lang.String" id="wssKeystorePassword_MaintainCustomerAccount">
+    <constructor-arg value="wesbmca" />
+  </bean>
+  <!-- GetCustomerAccount KeyStore Info -->
+  <bean class="java.lang.String" id="wssKeystoreLocation_GetCustomerAccount">
+    <constructor-arg value="file:/portal/conf/partd_external/wsskeystore/test/getCustomerAccountKeyStore.jks" />
+  </bean>
+  <bean class="java.lang.String" id="wssKeystoreUsername_GetCustomerAccount">
+    <constructor-arg value="getCustomerAccount" />
+  </bean>
+  <bean class="java.lang.String" id="wssKeystorePassword_GetCustomerAccount">
+    <constructor-arg value="wesbgca" />
+  </bean>
+  <!-- GetPremiumDetail KeyStore Info -->
+  <bean class="java.lang.String" id="wssKeystoreLocation_GetPremiumDetail">
+    <constructor-arg value="file:/portal/conf/partd_external/wsskeystore/test/getPremiumDetailKeyStore.jks" />
+  </bean>
+  <bean class="java.lang.String" id="wssKeystoreUsername_GetPremiumDetail">
+    <constructor-arg value="getPremiumDetail" />
+  </bean>
+  <bean class="java.lang.String" id="wssKeystorePassword_GetPremiumDetail">
+    <constructor-arg value="wesbgpd" />
+  </bean>
+  <!-- GetBillingDetails KeyStore Info -->
+  <bean class="java.lang.String" id="wssKeystoreLocation_GetBillingDetails">
+    <constructor-arg value="file:/portal/conf/partd_external/wsskeystore/test/getBillingDetailsKeyStore.jks" />
+  </bean>
+  <bean class="java.lang.String" id="wssKeystoreUsername_GetBillingDetails">
+    <constructor-arg value="getBillingDetails" />
+  </bean>
+  <bean class="java.lang.String" id="wssKeystorePassword_GetBillingDetails">
+    <constructor-arg value="wesbgbd" />
+  </bean>
+  <!-- GetBillingSummary KeyStore Info -->
+  <bean class="java.lang.String" id="wssKeystoreLocation_GetBillingSummary">
+    <constructor-arg value="file:/portal/conf/partd_external/wsskeystore/test/getBillingSummaryKeyStore.jks" />
+  </bean>
+  <bean class="java.lang.String" id="wssKeystoreUsername_GetBillingSummary">
+    <constructor-arg value="getBillingSummary" />
+  </bean>
+  <bean class="java.lang.String" id="wssKeystorePassword_GetBillingSummary">
+    <constructor-arg value="wesbgbs" />
+  </bean>
+  
+  
+<!-- GetClaimDetails KeyStore Info -->
+<bean class="java.lang.String" id="wssKeystoreLocation_GetClaimDetails">
+	<constructor-arg value="file:/portal/conf/partd_external/wsskeystore/test/getClaimDetailsKeyStore.jks" />
+</bean>
+<bean class="java.lang.String" id="wssKeystoreUsername_GetClaimDetails">
+	<constructor-arg value="getClaimDetails" />
+</bean>
+<bean class="java.lang.String" id="wssKeystorePassword_GetClaimDetails">
+	<constructor-arg value="wesbgcd" />
+</bean>
+
+<!-- GetClaimSummary KeyStore Info -->
+<bean class="java.lang.String" id="wssKeystoreLocation_GetClaimSummary">
+	<constructor-arg value="file:/portal/conf/partd_external/wsskeystore/test/getClaimSummaryKeyStore.jks" />
+</bean>
+<bean class="java.lang.String" id="wssKeystoreUsername_GetClaimSummary">
+	<constructor-arg value="getClaimSummary" />
+</bean>
+<bean class="java.lang.String" id="wssKeystorePassword_GetClaimSummary">
+	<constructor-arg value="wesbgcs" />
+</bean>
+
+<!-- GetBenefitProfile KeyStore Info -->
+<bean class="java.lang.String" id="wssKeystoreLocation_GetBenefitProfile">
+	<constructor-arg value="file:/portal/conf/partd_external/wsskeystore/test/getBenefitProfileKeyStore.jks" />
+</bean>
+<bean class="java.lang.String" id="wssKeystoreUsername_GetBenefitProfile">
+	<constructor-arg value="getBenefitProfile" />
+</bean>
+<bean class="java.lang.String" id="wssKeystorePassword_GetBenefitProfile">
+	<constructor-arg value="wesbgbp" />
+</bean>
+
+<!-- CreateContactHistory KeyStore Info -->
+<bean class="java.lang.String" id="wssKeystoreLocation_CreateContactHistory">
+	<constructor-arg value="file:/portal/conf/partd_external/wsskeystore/test/createContactHistory.jks" />
+</bean>
+<bean class="java.lang.String" id="wssKeystoreUsername_CreateContactHistory">
+	<constructor-arg value="createcontacthistorytrust" />
+</bean>
+<bean class="java.lang.String" id="wssKeystorePassword_CreateContactHistory">
+	<constructor-arg value="wesbcch" />
+</bean>
+<!-- GetDocumentMaterials KeyStore Info -->
+<bean class="java.lang.String" id="wssKeystoreLocation_GetDocumentMaterials">
+	<constructor-arg value="file:/portal/conf/partd_external/wsskeystore/test/getDocumentMaterialsKeyStore.jks" />
+</bean>
+<bean class="java.lang.String" id="wssKeystoreUsername_GetDocumentMaterials">
+	<constructor-arg value="getdocumentmaterials" />
+</bean>
+<bean class="java.lang.String" id="wssKeystorePassword_GetDocumentMaterials">
+	<constructor-arg value="wesbgdm" />
+</bean> 
+
+<bean class="java.lang.String" id="wssKeystoreLocation_GetFulfillmentKeys">
+                <constructor-arg value="file:/portal/conf/partd_external/wsskeystore/test/getFulfillmentKeysKeyStore.jks" />                
+</bean>
+<bean class="java.lang.String" id="wssKeystoreUsername_GetFulfillmentKeys">
+                <constructor-arg value="getFulfillmentKeys" />
+</bean>
+<bean class="java.lang.String" id="wssKeystorePassword_GetFulfillmentKeys">
+                <constructor-arg value="wesbgfk" />
+</bean>  
+<!-- GetFulfillmentDocument KeyStore Info -->
+<bean class="java.lang.String" id="wssKeystoreLocation_GetFulfillmentDocument">
+                <constructor-arg value="file:/portal/conf/partd_external/wsskeystore/test/getFulfillmentDocumentKeyStore.jks" />
+</bean>
+<bean class="java.lang.String" id="wssKeystoreUsername_GetFulfillmentDocument">
+                <constructor-arg value="getFulfillmentDocument" />
+</bean>
+<bean class="java.lang.String" id="wssKeystorePassword_GetFulfillmentDocument">
+                <constructor-arg value="wesbgfd" />
+</bean>  
+
+
+<!-- GetCommunicationCategory KeyStore Info -->
+<bean class="java.lang.String" id="wssKeystoreLocation_GetCommunicationCategory">
+          <constructor-arg value="file:/portal/conf/partd_external/wsskeystore/test/getCommunicationCategoryKeyStore.jks" />        
+</bean>
+<bean class="java.lang.String" id="wssKeystoreUsername_GetCommunicationCategory">
+          <constructor-arg value="getcommcat" />
+</bean>
+<bean class="java.lang.String" id="wssKeystorePassword_GetCommunicationCategory">
+          <constructor-arg value="wesbgcc" />
+</bean>
+
+ <!-- CreatePayment KeyStore Info -->
+<bean class="java.lang.String" id="wssKeystoreLocation_CreatePayment">
+                <constructor-arg value="file:/portal/conf/partd_external/wsskeystore/test/createPaymentKeyStore.jks" />
+</bean>
+<bean class="java.lang.String" id="wssKeystoreUsername_CreatePayment">
+                <constructor-arg value="createPayment" />
+</bean>
+<bean class="java.lang.String" id="wssKeystorePassword_CreatePayment">
+                <constructor-arg value="wesbcp" />
+</bean>
+    
+<!-- create payment Security Interceptors -->
+
+<bean id="wesbCreatePaymentSecurityInterceptor" class="org.springframework.ws.soap.security.wss4j.Wss4jSecurityInterceptor">
+        <property name="securementActions" value="Signature"/>
+        <property name="securementMustUnderstand" ref="wesbSecurementMustUnderstand"/>
+        <property name="securementUsername" ref="wssKeystoreUsername_CreatePayment"/>
+        <property name="securementPassword" ref="wssKeystorePassword_CreatePayment"/>
+        <property name="securementSignatureParts" ref="wesbSecurementSignatureParts" />        
+        <property name="securementSignatureCrypto">
+            <bean class="org.springframework.ws.soap.security.wss4j.support.CryptoFactoryBean">
+                <property name="keyStorePassword" ref="wssKeystorePassword_CreatePayment"/>
+                <property name="keyStoreLocation" ref="wssKeystoreLocation_CreatePayment"/>
+            </bean>
+        </property>
+    </bean>
+
+ <!-- UPM3 Security Interceptors -->
+    <bean id="upmUsernameTokenSecurityInterceptor" class="org.springframework.ws.soap.security.wss4j.Wss4jSecurityInterceptor">
+        <property name="securementActions" value="Timestamp UsernameToken"/>
+        <property name="securementUsername" value="umr_system_id"/>
+        <property name="securementPassword" value="BRrxR%&lt;a"/> <!-- BRrxR%<a -->
+        <property name="securementPasswordType" ref="wesbPasswordType"/>
+        <property name="securementUsernameTokenElements" value="Nonce Created"/>
+    </bean>
+	
+	<bean class="java.lang.String" id="novuEncryptionKey">
+		<constructor-arg value="replace_this_with_a_real_key_in_production" />
+		<!--<constructor-arg value="44ac3db6-61ee-4506-a19d-6cbb85ff367e-59b33bd6-1b30-4ebb-8746-38cf1f059e9e" /> -->
+	</bean> 
+</beans>

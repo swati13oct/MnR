@@ -1,0 +1,71 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xsi:schemaLocation="
+	http://www.springframework.org/schema/beans
+	http://www.springframework.org/schema/beans/spring-beans-3.1.xsd">
+
+	<bean id="portalDataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
+		<property name="driverClassName">
+			<value>oracle.jdbc.driver.OracleDriver</value>
+		</property>
+
+		<!-- ****** CURRENT DEV-A INSTANCE ******
+		<property name="url" value="jdbc:oracle:thin:@dbsld0001.uhc.com:1521:OCPDV011"/>
+        <property name="username" value="ovation_alpha_app"/>
+        <property name="password" value="A992x4zu"/>
+		****************************************** -->
+
+		<!-- ****** CURRENT DEV-B INSTANCE ******
+		<property name="url" value="jdbc:oracle:thin:@dbsld0001.uhc.com:1521:OCPDV011"/>
+        <property name="username" value="ovation_bravo_app"/>
+        <property name="password" value="kiQw3Aiy"/>
+		****************************************** -->
+
+		<!-- ****** CURRENT DEV-C INSTANCE (NOT WORKING, Use DEV-A) ******
+		<property name="url" value="jdbc:oracle:thin:@dbsld0001.uhc.com:1521:OCPDV011"/>
+        <property name="username" value="ovation_charlie_app"/>
+        <property name="password" value="ovation421"/>
+		****************************************** -->
+
+		<!-- ****** CURRENT TEST-A INSTANCE ***** -->
+		<property name="url" value="jdbc:oracle:thin:@dbslt0003.uhc.com:1521:OCPTS011"/>
+		<property name="username" value="ovation_alpha_app"/>
+		<property name="password" value="D2d3e2ln"/>
+		<!-- ****************************************** -->
+
+		<!-- ****** CURRENT TEST-B INSTANCE *****
+		<property name="url" value="jdbc:oracle:thin:@dbslt0003.uhc.com:1521:OCPTS011"/>
+        <property name="username" value="ovation_bravo_app"/>
+        <property name="password" value="270nVVnz"/>
+		****************************************** -->
+
+		<!-- ****** CURRENT STAGE INSTANCE *****
+		<property name="url" value="jdbc:oracle:thin:@(DESCRIPTION =(ADDRESS = (PROTOCOL = TCP)(HOST = orass0003)(PORT = 1521))(CONNECT_DATA = (SERVER = DEDICATED)(SERVICE_NAME = ocpst01svc.uhc.com)))"/>
+        <property name="username" value="ovation_app"/>
+        <property name="password" value="3vu8zi9Y"/>
+		****************************************** -->
+
+		<property name="initialSize" value="1"/>
+		<property name="maxActive" value="10"/>
+		<property name="maxIdle" value="5"/>
+		<property name="defaultAutoCommit" value="true"/>
+		<property name="removeAbandonedTimeout">
+			<value>1800000</value>
+		</property>
+		<property name="timeBetweenEvictionRunsMillis">
+			<value>180000</value>
+		</property>
+	</bean>
+
+	<bean id="hibernateProperties" class="org.springframework.beans.factory.config.PropertiesFactoryBean">
+		<property name="properties">
+			<props>
+				<prop key="hibernate.dialect">org.hibernate.dialect.Oracle9Dialect</prop>
+				<prop key="hibernate.show_sql">false</prop>
+				<prop key="hibernate.jdbc.fetch_size">100</prop>
+				<prop key="hibernate.default_schema">ovationa</prop>
+			</props>
+		</property>
+	</bean>
+
+</beans>

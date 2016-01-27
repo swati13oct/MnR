@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+           http://www.springframework.org/schema/util 
+           http://www.springframework.org/schema/util/spring-util-3.1.xsd">
+
+	<util:list id="pcpPlanIdList" list-class="java.util.ArrayList">
+		<value>H1045001</value>
+		<value>H1045005</value>
+		<value>H1045012</value>
+		<value>H1045016</value>
+		<value>H1045018</value>
+		<value>H1045023</value>
+	</util:list>
+
+	<!-- <bean id="enableSecurity" class="java.lang.Boolean">
+		<constructor-arg value="false" />
+	</bean>
+
+	<bean
+		class="com.uhg.uhcmr.service.pharmacysearchservice.portlet.PharmacyGeoLocationOptions"
+		id="pharmacyGeoLocationOptions">
+		<property name="enableAddressEntry" value="true" />
+		<property name="enableGoogleMaps" value="true" />
+	</bean>
+
+	<bean id="soapProxyPassThroughOnSwitch" class="java.lang.Boolean">
+		<constructor-arg value="true" />
+	</bean>
+
+	<bean id="enableHostSecurity" class="java.lang.Boolean">
+		<constructor-arg value="false" />
+	</bean> -->
+
+	<bean id="bluelayerPageUrl" class="java.lang.String">
+	<constructor-arg
+	    	value= "https://member.awe-test-a-uhcmedicaresolutions.uhc.com/guest/home.html" />
+	</bean>
+
+	<util:list id="allowedHosts" list-class="java.util.ArrayList" />
+	<util:list id="allowedSubnets" list-class="java.util.ArrayList" />
+</beans>

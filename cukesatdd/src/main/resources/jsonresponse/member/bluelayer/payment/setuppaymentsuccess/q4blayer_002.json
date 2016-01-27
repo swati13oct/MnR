@@ -1,0 +1,10 @@
+{
+"paymentType" : "Recurring EFT",
+"dateSubmitted" : "12/23/2015",
+"paymentAmount" : "The current monthly premium amount due each month.   ",
+"routingNumber" : "123000000",
+"accountNumber" : "1234567890",
+"accountHolderName": "first second third",
+"memberId1": "824145384-00",
+"memberName1":"GVKX IVAWG"
+}

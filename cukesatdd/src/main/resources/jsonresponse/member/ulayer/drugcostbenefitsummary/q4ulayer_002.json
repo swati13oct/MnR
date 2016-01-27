@@ -1,0 +1,13 @@
+{
+"outOfPocketCosts": "Your out-of-pocket costs:     \n$386.34",
+"totalDrugCosts": "Your total drug costs:     \n$3,188.19",
+"drugPaymentStage": "Coverage Gap",
+"yearlyDeductibleStageCol1": "Your plan has no deductible",
+"yearlyDeductibleStageCol2": "You have no deductible",
+"initialCovergeStageCol1": "Up to $3,310.00 in total drug costs",
+"initialCovergeStageCol2": "Total drug costs     to date: $3,188.19",
+"covergeGapStageCol1": "After $3,310.00 in total\ndrug costs up to\n$4,850.00 in out-of-pocket costs.",
+"covergeGapStageCol2": "You pay no more than 58% of the total cost for generic drugs or 45% of the total cost for brand name drugs, for any drug tier during the coverage gap.\n\nYour out-of-pocket      costs\nto date: $386.34\nAmount left before Stage 4: $4,463.66",
+"catastropicCovergeStageCol1": "After $4,850.00 in out-of-pocket costs; no limit.",
+"catastropicCovergeStageCol2": "For each prescription, you pay the greater of: a payment equal to 5% of the cost of the drug (this is called \"co-insurance\"), or a $2.95 co-pay for generic drugs (including brand drugs treated as generic) and a $7.40 co-pay for all other drugs."
+}

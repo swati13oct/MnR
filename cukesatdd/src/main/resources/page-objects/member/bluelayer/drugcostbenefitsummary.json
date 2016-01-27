@@ -1,0 +1,46 @@
+{
+"url":null,
+"expectedData":{
+"planName1":{
+"identifier":"xpath",
+"elementName":"//div[@id='planinformation']/div[2]/h3"
+},
+"memberId1":{
+"identifier":"id",
+"elementName":"memberID"
+},
+"planStatus1":{
+"identifier":"xpath",
+"elementName":"//div[@id='planinformation']/div[2]/div[5]/span[2]"
+},
+"groupId1":
+{
+"identifier":"xpath",
+"elementName":"//div[@id='planinformation']/div[2]/div[1]/span[2]"
+},
+"memberName":{
+"identifier":"id",
+"elementName":"welcomeText"
+},
+"prescriptionDrugCostInfo":{
+"identifier":"xpath",
+"elementName":"//div[@id='main_content']/div[2]/div/div[2]/div[2]/div/p[1]"
+},
+"prescriptionDrugEobStatementLink":{
+"identifier":"linkText",
+"elementName":"view your monthly Prescription Drug EOB statements online"
+},
+"readPrescriptionDrugEobLink":{
+"identifier":"linkText",
+"elementName":"How to Read Your Prescription Drug EOB"
+},
+"drugCostDetailsInfo":{
+"identifier":"xpath",
+"elementName":"//div[@id='main_content']/div[2]/div/div[2]/div[2]/div/p[3]"
+},
+"customerServiceLink":{
+"identifier":"linkText",
+"elementName":"Customer Service"
+}
+}
+}

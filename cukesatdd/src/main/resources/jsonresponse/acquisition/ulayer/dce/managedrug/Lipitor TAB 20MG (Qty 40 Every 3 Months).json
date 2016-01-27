@@ -1,0 +1,17 @@
+{
+    "slectPharmacy": "Pick a pharmacy",
+    "drugs": [
+        {
+            "selectedDrug": "Lipitor TAB 20MG\nQty 40 Every 3 Months",
+            "switchGenericLink": "",
+            "deleteLink": "Delete",
+            "editLink": "Edit"
+        }
+    ],
+    "addDrugHeading": "You added Lipitor to your Drug List.",
+    "currentPharmacy": [
+        {
+            "bottomPharmacyName": "Current Pharmacy: None Selected"
+        }
+    ]
+}

@@ -1,0 +1,78 @@
+package pages.acquisition.ulayer;
+
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
+
+import acceptancetests.atdd.data.MRConstants;
+import atdd.framework.UhcDriver;
+
+/**
+ * @author pperugu
+ *
+ */
+public class RegistrationHomePage extends UhcDriver{
+
+	@FindBy(id = "memberid1")
+	private WebElement memberid1;
+
+	@FindBy(name = "memberIdNumber2")
+	private WebElement memberIdNumber2;
+
+	@FindBy(id = "month")
+	private WebElement monthToEnter;
+
+	@FindBy(id = "day")
+	private WebElement dayToEnter;
+
+	@FindBy(id = "year")
+	private WebElement yearToEnter;
+
+	@FindBy(name = "continue")
+	private WebElement continueButton;
+
+	private static String PAGE_URL = MRConstants.AARPM_REGISTRATION_URL;
+
+	public RegistrationHomePage(WebDriver driver) {
+		super(driver);
+		PageFactory.initElements(driver, this);
+		openAndValidate();
+	}
+
+	public PlanConfirmationPage registerWith(String memberId, String dateOfbirth) {
+
+		String[] memberIdArray = memberId.split("-");
+		String[] doBArray = dateOfbirth.split("-");
+		String month = doBArray[0];
+		String day = doBArray[1];
+		String year = doBArray[2];
+
+		sendkeys(memberid1, memberIdArray[0]);
+		if (memberIdArray.length > 1) {
+			sendkeys(memberIdNumber2, memberIdArray[1]);
+		}
+		sendkeys(monthToEnter, month);
+		sendkeys(dayToEnter, day);
+		sendkeys(yearToEnter, year);
+
+		continueButton.click();
+
+		if (driver.getTitle().equalsIgnoreCase(
+				"AARP Medicare Plans | Registration"))
+			return new PlanConfirmationPage(driver);
+		else
+			return null;
+	}
+
+	@Override
+	public void openAndValidate() {
+		start(PAGE_URL);
+		validate(memberid1);
+		validate(memberIdNumber2);
+		validate(monthToEnter);
+		validate(dayToEnter);
+		validate(yearToEnter);
+		
+	}
+}

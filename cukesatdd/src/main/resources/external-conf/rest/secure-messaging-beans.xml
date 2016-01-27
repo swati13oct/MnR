@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:util="http://www.springframework.org/schema/util"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+           http://www.springframework.org/schema/util 
+           http://www.springframework.org/schema/util/spring-util-3.1.xsd">
+
+
+<!-- 	space_id   client_id   							client_secret
+AARP Dev    53  9d3056a2-36af-4f55-aae9-032e0eb44739    5fe7db49-0b5b-4300-b2c0-3aa4ab8406e3
+AARP Stage  54  87f3a710-d3b8-4074-bb6b-8542cdafdc93    73e272bf-e22d-48c4-9fac-6c28ede17d8b
+AARP Prod   55  2d565e62-b044-43e6-849f-859a91765351    7d77be7e-9691-4dbd-9bd2-1317be400034
+UMS Dev 	56  754c2e82-ff06-45e8-98ca-e82e2b13b0ea    bf98ff3f-9be5-41ab-bbd2-4dc835ec3162
+UMS Stage   57  b08d7f43-1ccc-4d29-841f-4e383e6cc8df    4464b34c-5ee2-4b12-a38c-0488e1623056
+UMS Prod    58  5593bef5-32f0-44de-99be-8d75623099bb    dfdc5bbd-e8ea-420d-9b63-43f794dac926
+ -->
+
+    <!-- DEV/TEST/QA CONFIGURATION -->
+    <util:map id="aarpmMessengerConfig" map-class="java.util.HashMap" key-type="java.lang.String" value-type="java.lang.String">
+        <entry key="space_id" value="53" />
+        <entry key="client_id" value="9d3056a2-36af-4f55-aae9-032e0eb44739"/>
+        <entry key="client_secret" value="5fe7db49-0b5b-4300-b2c0-3aa4ab8406e3"/>
+    </util:map>
+    
+    <util:map id="uhcmMessengerConfig" map-class="java.util.HashMap" key-type="java.lang.String" value-type="java.lang.String">
+        <entry key="space_id" value="56"/>
+        <entry key="client_id" value="754c2e82-ff06-45e8-98ca-e82e2b13b0ea"/>
+        <entry key="client_secret" value="bf98ff3f-9be5-41ab-bbd2-4dc835ec3162"/>
+    </util:map>
+	
+	<!-- STAGE CONFIGURATION 
+    <util:map id="aarpmMessengerConfig" map-class="java.util.HashMap" key-type="java.lang.String" value-type="java.lang.String">
+        <entry key="space_id" value="54" />
+        <entry key="client_id" value="87f3a710-d3b8-4074-bb6b-8542cdafdc93"/>
+        <entry key="client_secret" value="73e272bf-e22d-48c4-9fac-6c28ede17d8b"/>
+    </util:map>
+    
+    <util:map id="uhcmMessengerConfig" map-class="java.util.HashMap" key-type="java.lang.String" value-type="java.lang.String">
+        <entry key="space_id" value="57"/>
+        <entry key="client_id" value="b08d7f43-1ccc-4d29-841f-4e383e6cc8df"/>
+        <entry key="client_secret" value="4464b34c-5ee2-4b12-a38c-0488e1623056"/>
+    </util:map>
+	-->
+	
+	<!-- PROD CONFIGURATION 
+    <util:map id="aarpmMessengerConfig" map-class="java.util.HashMap" key-type="java.lang.String" value-type="java.lang.String">
+        <entry key="space_id" value="55" />
+        <entry key="client_id" value="2d565e62-b044-43e6-849f-859a91765351"/>
+        <entry key="client_secret" value="7d77be7e-9691-4dbd-9bd2-1317be400034"/>
+    </util:map>
+    
+    <util:map id="uhcmMessengerConfig" map-class="java.util.HashMap" key-type="java.lang.String" value-type="java.lang.String">
+        <entry key="space_id" value="58"/>
+        <entry key="client_id" value="5593bef5-32f0-44de-99be-8d75623099bb"/>
+        <entry key="client_secret" value="dfdc5bbd-e8ea-420d-9b63-43f794dac926"/>
+    </util:map>
+	-->
+
+    <bean id="secureMessagingEndpointPrefix" class="java.lang.String">
+        <constructor-arg value="https://secure-messaging.optum.com/v2" />
+    </bean>
+</beans>

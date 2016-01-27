@@ -1,0 +1,33 @@
+{
+"url":null,
+"expectedData":{
+"planHighlights":{
+"identifier":"xpath",
+"elementName":".//div[@class='vppcardholder']/table/tbody/tr/td[1]/div[1]/div[2]"
+},
+"annualDeductible": {
+"identifier":"xpath",
+"elementName":".//div[@class='plansumcontent']/p[4]"
+},
+"benefits_prescriptionDrugCost":{
+"identifier":"className",
+"elementName":"prescription_drugcost_copay"
+},
+"monthlyPremium":{
+"identifier":"xpath",
+"elementName":".//div[@class='plan_paragraph vppplancost card_benefits']/div[2]/p[2]"
+},
+"drugInformation":{
+"identifier":"id",
+"elementName":"drugs_info"
+},
+"planDetailsLink":{
+"identifier":"id",
+"elementName":"viewDetailsPDP"
+},
+"enrollPlanLink":{
+"identifier":"id",
+"elementName":"enrollPDP"
+}
+}
+}

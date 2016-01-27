@@ -1,0 +1,15 @@
+{
+"153138145787108":{
+"dateFilled" : "11/09/2015",
+"rxNumber" : "112312362377",
+"medication" : "ADVAIR DISKU AER 100/50",
+"pharmacyName" : "OPTUMRX",
+"memberPaid" : "$3.60",
+"planPaid" : "$2.27",
+"manufacturerPaid" : "$0.00",
+"potentialSavings" : "Please contact UnitedHealthcare to see if you are eligible for savings on your prescriptions.",
+"outOfPocketCosts" : "$65.87",
+"totalDrugCosts" : "$65.87",
+"drugPaymentStage" : "Initial Coverage    "
+}
+}

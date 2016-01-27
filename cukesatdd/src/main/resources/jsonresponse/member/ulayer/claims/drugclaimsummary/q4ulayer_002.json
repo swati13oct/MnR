@@ -1,0 +1,78 @@
+{
+"Last 90 Days":{
+"drugClaimsHeading":"My Prescription Drug Claims",
+"searchResultMessage":"You have 1 drug claims from the Last 90 Days. For more information about an individual claim, click on \"More info\" under \"Claim Details\".",
+"evenClaimRow":"12/23/2015 980877655649 ADVAIR DISKU AER 100/50 WALGREENS #2445 $22.32 $0.00",
+
+"tableFooter":"Total\n$0.00"
+},
+"Last 6 Months":{
+"drugClaimsHeading":"My Prescription Drug Claims",
+"searchResultMessage":"You have 12 drug claims from the Last 6 Months. For more information about an individual claim, click on \"More info\" under \"Claim Details\".",
+"oddClaimRow":[
+ 		{
+            "odd": "09/11/2015 227877888347 TRECATOR TAB 250MG WALGREENS #13877 $1.00 $0.00"
+        },
+        {
+            "odd": "09/09/2015 978876766778 COZAAR TAB 100MG WALGREENS #13877 $20.00 $0.00"
+        },
+        {
+            "odd": "09/01/2015 966486776657 COZAAR TAB 100MG WALGREENS #13877 $48.87 $0.00"
+        },
+        {
+            "odd": "08/03/2015 981876786557 COZAAR TAB 100MG WALGREENS #13877 $10.00 $0.00"
+        },
+        {
+            "odd": "07/28/2015 986765754647 COZAAR TAB 100MG WALGREENS #13877 $3.60 $42.06"
+        },
+        {
+            "odd": "07/10/2015 997876766657 COZAAR TAB 100MG WALGREENS #13877 $48.87 $0.00"
+        }    
+],
+"evenClaimRow":[
+ 		{
+            "even": "12/23/2015 980877655649 ADVAIR DISKU AER 100/50 WALGREENS #2445 $22.32 $0.00"
+        },
+        {
+            "even": "09/10/2015 765765668347 TRECATOR TAB 250MG WALGREENS #13877 $1.00 $0.00"
+        },
+        {
+            "even": "09/09/2015 227877888347 TRECATOR TAB 250MG WALGREENS #13877 $1.00 $0.00"
+        },
+        {
+            "even": "08/09/2015 917666756657 LIPITOR TAB 10MG WALGREENS #2445 $0.12 $19.88"
+        },
+        {
+            "even": "08/02/2015 981312376557 COZAAR TAB 100MG WALGREENS #13877 $10.00 $0.00"
+        },
+        {
+            "even": "07/18/2015 986776766757 COZAAR TAB 100MG WALGREENS #13877 $3.60 $42.06"
+        }        
+],
+"tableFooter":"Total\n$104.00"
+},
+"12-11-2015_09-01-2015":{
+"drugClaimsHeading":"My Prescription Drug Claims",
+"customResultMessage":"You have 5 drug claims from 09/01/2015 to 12/11/2015. For more information about an individual claim, click on \"More info\" under \"Claim Details\".",
+"oddClaimRow":[
+ 		{
+            "odd": "09/10/2015 765765668347 TRECATOR TAB 250MG WALGREENS #13877 $1.00 $0.00"
+        },
+        {
+            "odd": "09/09/2015 227877888347 TRECATOR TAB 250MG WALGREENS #13877 $1.00 $0.00"
+        } 
+],
+"evenClaimRow":[
+ 		{
+            "even": "09/11/2015 227877888347 TRECATOR TAB 250MG WALGREENS #13877 $1.00 $0.00"
+        },
+        {
+            "even": "09/09/2015 978876766778 COZAAR TAB 100MG WALGREENS #13877 $20.00 $0.00"
+        },
+        {
+            "even": "09/01/2015 966486776657 COZAAR TAB 100MG WALGREENS #13877 $48.87 $0.00"
+        }     
+],
+"tableFooter":"Total\n$0.00"
+}
+}

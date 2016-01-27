@@ -1,0 +1,29 @@
+{
+"url":null,
+"expectedData":{
+"firstName":{
+"identifier": "id",
+"elementName": "consumerFirstName"
+},
+"lastName" :{
+"identifier": "id",
+"elementName": "consumerLastName"
+},
+"dateOfBirth" :{
+"identifier": "id",
+"elementName": "consumerDOB"
+},
+"userName" :{
+"identifier": "id",
+"elementName": "consumerUserName"
+},
+"password" :{
+"identifier": "xpath",
+"elementName": "//table[@class='pers_info_table margin_left_60px regsuccesstable']/tbody/tr[5]/td[2]/p"
+},
+"emailAddress" :{
+"identifier": "id",
+"elementName": "consumerEmail"
+}
+}
+}
