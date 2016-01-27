@@ -1,0 +1,37 @@
+{
+"url":null,
+"expectedData":{
+"footerHomeLink":{
+"identifier":"linkText",
+"elementName":"Home"
+},
+"footerAboutUsLink":{
+"identifier":"linkText",
+"elementName":"About Us"
+},
+"footerContactUsLink":{
+"identifier":"linkText",
+"elementName":"Contact Us"
+},
+"footerSiteMapLink":{
+"identifier":"linkText",
+"elementName":"Site Map"
+},
+"footerPrivacyPolicyLink":{
+"identifier":"linkText",
+"elementName":"Privacy Policy"
+},
+"footerTermsAndConditionsLink":{
+"identifier":"linkText",
+"elementName":"Terms and Conditions"
+},
+"footerDisclaimersLink":{
+"identifier":"linkText",
+"elementName":"Disclaimers"
+},
+"footerAgentsAndBrokersLink":{
+"identifier":"linkText",
+"elementName":"Agents & Brokers"
+}
+}
+}

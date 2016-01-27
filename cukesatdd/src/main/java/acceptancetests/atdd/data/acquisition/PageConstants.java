@@ -41,4 +41,19 @@ public class PageConstants {
 
 	public static final String AFTER_DOSAGE_SELECTION = "afterDosageSelection";
 
+	public static final String SITE_MAP_PAGE = "siteMapPage";
+	
+	public static final String ABOUT_US_PAGE = "aboutUsPage";
+	
+	public static final String CONTACT_US_PAGE = "contactUsPage";
+	
+	public static final String PRIVACY_POLICY_PAGE = "privacyPolicyPage";
+	
+	public static final String TERMS_OF_USE_PAGE = "termsOfUsePage";
+	
+	public static final String DISCLAIMERS_PAGE = "disclaimersPage";
+	
+	public static final String AGENTS_AND_BROKERS_PAGE = "agentsAndBrokersPage";
+
+
 }
