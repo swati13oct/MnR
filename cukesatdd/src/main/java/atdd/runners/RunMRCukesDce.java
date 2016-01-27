@@ -12,7 +12,7 @@ import cucumber.junit.Cucumber;
  *
  */
 @RunWith(Cucumber.class)
-@Cucumber.Options(glue = { "atdd.framework","acceptancetests.dceVpp" }, 
+@Cucumber.Options(glue = { "atdd.framework","acceptancetests.dcevpp" }, 
 		features = { "feature/dcevpp" }, 
 		format = {
 		"pretty", "html:reports/test-report" }, tags ={"@dceVppTestAARP"})
