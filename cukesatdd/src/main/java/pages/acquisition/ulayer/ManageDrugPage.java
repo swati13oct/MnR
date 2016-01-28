@@ -181,7 +181,7 @@ public class ManageDrugPage extends UhcDriver {
 
 	@Override
 	public void openAndValidate() {
-		validate(plusSign);
+		//validate(plusSign);
 
 		if (!selectedDrug.isEmpty()) {
 		JSONObject jsonObject = new JSONObject();
