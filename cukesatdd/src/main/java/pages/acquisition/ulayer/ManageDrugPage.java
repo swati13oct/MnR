@@ -31,8 +31,8 @@ public class ManageDrugPage extends UhcDriver {
 	@FindBy(xpath = "//div[@class='costSavingsDrawer cb']")
 	private WebElement switchTogenericButton;
 
-	@FindBy(css = "div > img[alt=\"Plus Image\"]")
-	WebElement plusSign;
+	/*@FindBy(css = "div > img[alt=\"Plus Image\"]")
+	WebElement plusSign;*/
 
 	@FindBy(xpath = "//div[@class='reduceCosts generic']")
 	private WebElement reduceCostPath;
@@ -83,7 +83,7 @@ public class ManageDrugPage extends UhcDriver {
 	}
 
 	public AddDrugPage navigateToAddDrug() {
-		plusSign.click();
+		/*plusSign.click();
 		try {
 			if (plusSign.isDisplayed()) {
 				CommonUtility.waitForElementToDisappear(driver, plusSign,
@@ -96,7 +96,7 @@ public class ManageDrugPage extends UhcDriver {
 		} catch (Exception e) {
 			System.out.println("pharmacySearchButton not found");
 		}
-		
+		*/
 		if(currentUrl().contains("drugSearch"))
 		{
 			return new AddDrugPage(driver);
