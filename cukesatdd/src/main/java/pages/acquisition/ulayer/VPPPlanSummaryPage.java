@@ -237,7 +237,12 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		return null;
 	}
 	
-	
+	public GetStartedPage navigateToSummaryPage(String planType) {
+		if (planType.equalsIgnoreCase("PDP")) {
+			showPdpPlans.click();
+		} 
+		return new GetStartedPage(driver);
+	}
 	
 }
 

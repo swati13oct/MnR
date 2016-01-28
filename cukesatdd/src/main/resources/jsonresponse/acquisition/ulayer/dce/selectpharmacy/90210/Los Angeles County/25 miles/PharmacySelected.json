@@ -14,7 +14,12 @@
         }
     ],
     "previousLink": "Previous results",
-    "pharmacies": [
+    "pharmacies": [    
+     	{
+            "pharmacyDistance": "2.17",
+            "selectLink": "Selected",
+            "pharmacyName": "CVS PHARMACY 09652"
+        },
         {
             "pharmacyDistance": "1.32",
             "selectLink": "Select",
@@ -44,12 +49,7 @@
             "pharmacyDistance": "2.12",
             "selectLink": "Select",
             "pharmacyName": "WEST KNOLL PHARMACY"
-        },
-        {
-            "pharmacyDistance": "2.17",
-            "selectLink": "Select",
-            "pharmacyName": "CVS PHARMACY 09652"
-        },
+        },       
         {
             "pharmacyDistance": "2.18",
             "selectLink": "Select",

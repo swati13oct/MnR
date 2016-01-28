@@ -90,23 +90,25 @@ public class DceVppPlanSummaryAarpStepDefinition {
 		GetStartedPage getStartedPage = acqusitionHomePage
 				.navigateToPrescriptionDrug();
 		LocationSearchPage enterZipCode = getStartedPage.getStarted();
-		ManageDrugPage manageDrugPage = enterZipCode.enterLocation(zipCode,
-				county, planYear);
-
-		if (manageDrugPage != null) {
-			getLoginScenario().saveBean(PageConstants.MANAGE_DRUG_PAGE,
-					manageDrugPage);
-
-		}
+		AddDrugPage addDrugPage = enterZipCode.enterLoc(zipCode,county, planYear);
+		if (addDrugPage != null) {
+			getLoginScenario().saveBean(PageConstants.ADD_DRUG_PAGE,
+					addDrugPage);
+			
+		} 
 	}
 
 	@When("^the user search the drug using drug initials in AARP site$")
 	public void user_validated_drugInformation(DataTable givenAttributes) {
 		String drugInitials = givenAttributes.getGherkinRows().get(0)
 				.getCells().get(0);
-		ManageDrugPage manageDrugPage = (ManageDrugPage) getLoginScenario()
+/*		ManageDrugPage manageDrugPage = (ManageDrugPage) getLoginScenario()
 				.getBean(PageConstants.MANAGE_DRUG_PAGE);
-		AddDrugPage addDrugPage = manageDrugPage.navigateToAddDrug();
+				
+		AddDrugPage addDrugPage = manageDrugPage.navigateToAddDrug();*/
+		AddDrugPage addDrugPage = (AddDrugPage) getLoginScenario().getBean(
+				PageConstants.ADD_DRUG_PAGE);
+		
 		addDrugPage.enterDrugInitials(drugInitials);
 
 		/* Get actual Json */

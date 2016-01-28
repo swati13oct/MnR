@@ -108,5 +108,11 @@ public class AcquisitionHomePage extends UhcDriver {
 		}
 		return null;
 	}
+	
+	public VPPPlanSummaryPage enterZipcode(String zipCode, String county, String planYear){
+		sendkeys(zipCodeField, zipCode);		
+		viewPlansButton.click();
+		return new VPPPlanSummaryPage(driver);	
+	}
 
 }

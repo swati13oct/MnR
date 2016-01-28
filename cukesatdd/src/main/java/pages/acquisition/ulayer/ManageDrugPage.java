@@ -49,8 +49,17 @@ public class ManageDrugPage extends UhcDriver {
 	@FindBy(xpath = "//div[@id='dcemodal']/div/div/div[8]/div[4]/a[2]")
 	private WebElement pharmacySearchButton;
 	
+	@FindBy(xpath="//div[@class='delete']/a")
+	WebElement drugDelete;
+	
 	@FindBy(linkText = "Close and apply changes")
 	WebElement applyChangesButton;
+	
+	@FindBy(xpath = "//div[@class='addDrugBox']")
+	WebElement adddrugdiv;
+	
+	@FindBy(xpath="//div[@class='tabsHead']/div[2]")
+	WebElement selectPharmacyTab;
 
 	public JSONObject manageDrugJson;
 
@@ -278,6 +287,34 @@ public class ManageDrugPage extends UhcDriver {
 				+ manageDrugJson);
 	}
 	
+
+	}
+	
+	public AddDrugPage addDrugFlowCheck() {		
+		drugDelete.click();
+		if(currentUrl().contains("drugSearch"))
+		{
+			return new AddDrugPage(driver);
+		}		
+		
+		return null;
+	}
+	
+	public void clickAddImage() {       
+        validate(adddrugdiv);
+        adddrugdiv.click();
+	}
+	
+	public void swithedToSelectPharmacyTab(){
+		selectPharmacyTab.click();
+	}
+	
+	public SelectPharmacyPage navigateToUpdatedPharmacyPage() {
+		if (currentUrl().contains("selectPharmacy")) {
+			return new SelectPharmacyPage(driver);
+		} else {
+			return null;
+		}
 
 	}
 

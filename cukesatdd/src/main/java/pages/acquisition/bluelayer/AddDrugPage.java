@@ -14,8 +14,8 @@ import acceptancetests.atdd.util.CommonUtility;
 
 public class AddDrugPage {
 
-	@FindBy(css = "div > img[alt=\"Plus Image\"]")
-	WebElement plusSign;
+	/*@FindBy(css = "div > img[alt=\"Plus Image\"]")
+	WebElement plusSign;*/
 
 	@FindBy(xpath = "//div[@class='drugDropDownList']")
 	private WebElement drugDropDownList;
@@ -48,6 +48,17 @@ public class AddDrugPage {
 	@FindBy(linkText = "View plan results")
 	private WebElement viewPlansLink;
 	
+	@FindBy(className = "drugSearchBox")
+	WebElement drugSearchBox;
+	
+	@FindBy(xpath="//div[@class='tabsHead']/div[2]")
+	WebElement selectPharmacyTab;
+	
+	@FindBy(xpath="//div[@class='tabsHead']/div")
+	WebElement manageDrugTab;
+	
+	@FindBy(xpath="//div[@class='delete']/a")
+	private WebElement drugDelete;	
 
 	private WebDriver driver;
 
@@ -58,7 +69,7 @@ public class AddDrugPage {
 	}
 
 	public void enterDrugInitials(String drugInitials) {
-		plusSign.click();
+		//plusSign.click();
 		drugNameField.click();
 		drugNameField.clear();
 		drugNameField.sendKeys(drugInitials);
@@ -141,6 +152,33 @@ public class AddDrugPage {
 		applyChangesButton.click();
 		System.out.println("changes");
 		
+	}
+	
+	public void validateAddDrugFlow(){
+		validate(drugSearchBox);
+		selectPharmacyTab.click();
+		manageDrugTab.click();
+		validate(drugSearchBox);
+		
+	}
+	
+	private boolean validate(WebElement element) {
+		try {
+			if (element.isDisplayed()) {
+				System.out.println("Element found!!!!");
+				return true;
+			} else {
+				System.out.println("Element not found/not visible");
+			}
+		} catch (Exception e) {
+			System.out.println("Exception: Element not found/not visible");
+
+		}
+		return false;
+	}
+	
+	public void addDrugFlowCheck(){
+		drugDelete.click();
 	}
 
 }

@@ -269,5 +269,12 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		// TODO Auto-generated method stub
 		return null;
 	}
+	
+	public EstimateDrugCostPage navigateToSummaryPage(String planType) {
+		if (planType.equalsIgnoreCase("PDP")) {
+			showPdpPlans.click();
+		} 
+		return new EstimateDrugCostPage(driver);
+	}
 
 }
