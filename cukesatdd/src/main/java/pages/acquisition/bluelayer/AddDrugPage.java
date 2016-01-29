@@ -16,6 +16,9 @@ public class AddDrugPage {
 
 	/*@FindBy(css = "div > img[alt=\"Plus Image\"]")
 	WebElement plusSign;*/
+	
+	@FindBy(xpath = "//div[@class='addDrugBox']")
+	WebElement adddrugdiv;
 
 	@FindBy(xpath = "//div[@class='drugDropDownList']")
 	private WebElement drugDropDownList;
@@ -179,6 +182,13 @@ public class AddDrugPage {
 	
 	public void addDrugFlowCheck(){
 		drugDelete.click();
+	}
+
+	public void clickAddImage() {
+		// TODO Auto-generated method stub
+		validate(adddrugdiv);
+		adddrugdiv.click();
+		
 	}
 
 }

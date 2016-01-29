@@ -190,7 +190,25 @@ public class DceVppAddDrugFowUmsStepDefinition {
 			} else {
 				Assert.fail("unsuccessfull navigation to add drug page");
 			}
-		}
-
-
+	 }
+			
+			@And("^user selects the low cost options in UMS site$")
+			public void user_selects_lowCost(DataTable drugAttributes) {
+				String drugName = drugAttributes.getGherkinRows().get(0).getCells().get(0);
+				SelectGenericPage selectGenericPage = (SelectGenericPage) getLoginScenario().getBean(PageConstants.SELECT_GENERIC_PAGE);
+				AddDrugPage addDrugPage = selectGenericPage.selectGeneric(drugName);
+				if (addDrugPage != null) {
+					getLoginScenario().saveBean(PageConstants.ADD_DRUG_PAGE,
+							addDrugPage);
+					Assert.assertTrue(true);
+				} else {
+					Assert.fail("generic drug selection unsuccessful");
+				}
+			}
+			@And("^the user wants to add some more drug$")
+			public void user_select_anotherdrug(){
+				AddDrugPage addDrugPage = (AddDrugPage) getLoginScenario().getBean(
+						PageConstants.ADD_DRUG_PAGE);
+				addDrugPage.clickAddImage();
+			}
 }
