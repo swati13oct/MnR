@@ -61,6 +61,13 @@ public class ManageDrugPage extends UhcDriver {
 	@FindBy(xpath="//div[@class='tabsHead']/div[2]")
 	WebElement selectPharmacyTab;
 
+	
+	@FindBy(xpath = "/html/body/div[3]/div/table/tbody/tr[3]/td/div/div/div/div/div[7]/form/div[2]/span[3]/p/span")
+	private WebElement expectedTooltip;
+	
+	@FindBy(xpath = "//span[@class='tooltipalign']/p/span")
+	private WebElement addtooltip;
+
 	public JSONObject manageDrugJson;
 
 	private PageData drugInfo;
@@ -317,5 +324,18 @@ public class ManageDrugPage extends UhcDriver {
 		}
 
 	}
+
+	public void toolTipValidation() {
+		try {
+			Thread.sleep(5000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		validate(expectedTooltip);
+		validate(addtooltip);
+		System.out.println("Tool tips validated");
+	}
+
 
 }
