@@ -7,16 +7,17 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+
+import com.thoughtworks.selenium.webdriven.commands.WaitForPageToLoad;
+
 import atdd.framework.UhcDriver;
 
 /**
  * @author rkodumur
  *
  */
-public class DisclaimersAARPPage extends UhcDriver{
-	@FindBy(id = "gf_lnk_8")
-	private WebElement footerAgentsnBrokersLink;
-
+public class DisclaimersAARPPage extends GlobalFooterWebElements{
+	 
 	public DisclaimersAARPPage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
@@ -30,7 +31,9 @@ public class DisclaimersAARPPage extends UhcDriver{
 	}
 
 	public AgentsnBrokersAARPPage agentsnbrokersFooterClick() {
+		validate(footerAgentsnBrokersLink);
 		footerAgentsnBrokersLink.click();
+		validate(footerAgentsnBrokersLink);
 		if(driver.getTitle().equalsIgnoreCase("Health Insurance Broker & Agent Tools | AARP® Medicare Plans from UnitedHealthcare®")){
 			return new AgentsnBrokersAARPPage(driver);
 		}

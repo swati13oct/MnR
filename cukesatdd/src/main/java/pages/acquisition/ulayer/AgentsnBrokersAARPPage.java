@@ -14,10 +14,8 @@ import atdd.framework.UhcDriver;
  * @author rkodumur
  *
  */
-public class AgentsnBrokersAARPPage extends UhcDriver{
-	@FindBy(id = "gf_lnk_1")
-	private WebElement footerHomeLink;
-
+public class AgentsnBrokersAARPPage extends GlobalFooterWebElements{
+	 
 	public AgentsnBrokersAARPPage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
@@ -31,7 +29,9 @@ public class AgentsnBrokersAARPPage extends UhcDriver{
 	}
 
 	public AcquisitionHomePage homeFooterClick() {
+		validate(footerHomeLink);
 		footerHomeLink.click();
+		validate(footerHomeLink);
 		if (driver.getTitle().equalsIgnoreCase("Medicare Plans | AARP® Medicare Plans from UnitedHealthcare®")) {
 			return new AcquisitionHomePage(driver);
 		}

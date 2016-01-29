@@ -12,11 +12,8 @@ import atdd.framework.UhcDriver;
  * @author rkodumur
  *
  */
-public class AboutUsAARPPage extends UhcDriver{
+public class AboutUsAARPPage extends GlobalFooterWebElements{
 	
-	@FindBy(id = "gf_lnk_3")
-	private WebElement footerContactUsLink;
-
 	public AboutUsAARPPage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
@@ -30,7 +27,9 @@ public class AboutUsAARPPage extends UhcDriver{
 	}
 
 	public ContactUsAARPPage contactUsFooterClick() {
+		validate(footerContactUsLink);
 		footerContactUsLink.click();
+		validate(footerContactUsLink);
 		if (driver.getTitle().equalsIgnoreCase("Contact UnitedHealthcare® | AARP® Medicare Plans from UnitedHealthcare")) {
 			return new ContactUsAARPPage(driver);
 		}

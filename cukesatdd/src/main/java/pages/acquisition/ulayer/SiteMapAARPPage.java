@@ -13,11 +13,8 @@ import atdd.framework.UhcDriver;
  * @author rkodumur
  *
  */
-public class SiteMapAARPPage extends UhcDriver {
-	
-	@FindBy(id = "gf_lnk_5")
-	private WebElement footerPrivacyPolicyLink;
-
+public class SiteMapAARPPage extends GlobalFooterWebElements {
+	 
 	public SiteMapAARPPage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
@@ -31,7 +28,9 @@ public class SiteMapAARPPage extends UhcDriver {
 	}
 
 	public PrivacyPolicyAARPPage privacypolicyFooterClick() {
+		validate(footerPrivacyPolicyLink);
 		footerPrivacyPolicyLink.click();
+		validate(footerPrivacyPolicyLink);
 		if (driver.getTitle().equalsIgnoreCase("Privacy Policy | AARP® Medicare Plans from UnitedHealthcare®")) {
 			return new PrivacyPolicyAARPPage(driver);
 		}

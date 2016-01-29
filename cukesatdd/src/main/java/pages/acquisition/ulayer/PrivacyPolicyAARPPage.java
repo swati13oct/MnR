@@ -13,10 +13,8 @@ import atdd.framework.UhcDriver;
  * @author rkodumur
  *
  */
-public class PrivacyPolicyAARPPage extends UhcDriver{
-	@FindBy(id = "gf_lnk_6")
-	private WebElement footerTermsnConditionsLink;
-
+public class PrivacyPolicyAARPPage extends GlobalFooterWebElements{
+ 
 	public PrivacyPolicyAARPPage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
@@ -30,7 +28,9 @@ public class PrivacyPolicyAARPPage extends UhcDriver{
 	}
 
 	public TermsnConditionsAARPPage termsnconditionsFooterClick() {
+		validate(footerTermsnConditionsLink);
 		footerTermsnConditionsLink.click();
+		validate(footerTermsnConditionsLink);
 		if (driver.getTitle().equalsIgnoreCase("Terms & Conditions | AARP® Medicare Plans from UnitedHealthcare®")) {
 			return new TermsnConditionsAARPPage(driver);
 		}

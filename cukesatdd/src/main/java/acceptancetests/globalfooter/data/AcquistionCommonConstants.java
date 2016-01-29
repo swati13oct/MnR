@@ -24,6 +24,14 @@ public class AcquistionCommonConstants {
 	public static final String AGENTS_AND_BROKERS_ACTUAL = "agentsAndBrokersActualJson";
 	public static final String AGENTS_AND_BROKERS_EXPECTED = "agentsAndBrokersExpectedJson";
 	
+	public static final String VIEW_ALL_DISCLAIMER_NAME = "disclaimer";
+	public static final String VIEW_ALL_DISCLAIMER_ACTUAL = "viewAllDisclaimerActualJson";
+	public static final String VIEW_ALL_DISCLAIMER_EXPECTED = "viewAllDisclaimerExpectedJson";
+	
+	public static final String HIDE_DISCLAIMER_NAME = "disclaimer";
+	public static final String HIDE_DISCLAIMER_ACTUAL = "hideDisclaimerActualJson";
+	public static final String HIDE_DISCLAIMER_EXPECTED = "hideDisclaimerExpectedJson";
+	
 	
 	
 

@@ -16,23 +16,30 @@ import pages.acquisition.ulayer.AcquisitionHomePage;
 import pages.acquisition.ulayer.AgentsnBrokersAARPPage;
 import pages.acquisition.ulayer.ContactUsAARPPage;
 import pages.acquisition.ulayer.DisclaimersAARPPage;
+import pages.acquisition.ulayer.DiscoverMoreResourcesPage;
+import pages.acquisition.ulayer.ExploreChangingPlansPage;
+import pages.acquisition.ulayer.LearnAboutMedicarePage;
+import pages.acquisition.ulayer.MedicareAdvantagePlansPage;
+import pages.acquisition.ulayer.MedicarePrescriptionDrugPlansPage;
+import pages.acquisition.ulayer.MedicareSupplementInsurancePlansPage;
+import pages.acquisition.ulayer.PrepareforInitialEnrollmentPage;
 import pages.acquisition.ulayer.PrivacyPolicyAARPPage;
 import pages.acquisition.ulayer.SiteMapAARPPage;
 import pages.acquisition.ulayer.TermsnConditionsAARPPage;
-import cucumber.annotation.en.And;
-import cucumber.annotation.en.Given;
-import cucumber.annotation.en.Then;
-import cucumber.annotation.en.When;
 import acceptancetests.atdd.data.CommonConstants;
 import acceptancetests.atdd.data.acquisition.PageConstants;
 import acceptancetests.globalfooter.data.AcquistionCommonConstants;
 import atdd.framework.MRScenario;
+import cucumber.annotation.en.And;
+import cucumber.annotation.en.Given;
+import cucumber.annotation.en.Then;
+import cucumber.annotation.en.When;
 
 /**
  * @author rkodumur
  *
  */
-public class GlobalFooterStepDefinition {
+public class GlobalFooterAARPStepDefinition {
 	
 	@Autowired
 	MRScenario loginScenario;
@@ -59,7 +66,7 @@ public class GlobalFooterStepDefinition {
 				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
 		JSONObject globalFooterActual = aquisitionhomepage.accessGlobalFooter();
 		/* Get expected data */
-		String fileName = "globalfooter";
+		String fileName = "globalfooterexpected";
 		String directory = CommonConstants.ACQUISITION_EXPECTED_DIRECTORY
 				+ File.separator + CommonConstants.SITE_ULAYER
 				+ File.separator
@@ -195,6 +202,172 @@ public class GlobalFooterStepDefinition {
 		} else {
 			Assert.fail("home page not found");
 		}
+	}
+	
+	
+	/* Navigation link Section Test Cases -  Start - Column 1*/
+	/*@And("^user clicks on visit aarp org link from footer of the AARP Medicare Plans home page$")
+	public void clicks_visit_aarp_org() {
+		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage)getLoginScenario()
+				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+		if(aquisitionhomepage!= null){
+			GlobalFooterWebElements.aarpOrgLink.click();
+			Assert.assertTrue(true);
+		} else {
+			Assert.fail("home page not found");
+		}
+		
+	}*/
+	
+	
+	/* Navigation link Section Test Cases -  Start - Column 2 links */
+	
+	@And("^user clicks on medicare advantage plan link from footer of the AARP Medicare Plans home page$")
+	public void click_medicare_advantage_plans() {
+		AcquisitionHomePage aquisitionhomepage  = (AcquisitionHomePage) getLoginScenario()
+				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+		MedicareAdvantagePlansPage medicareAdvantagePlansPage = aquisitionhomepage.medicareAdvantagePlansClick();
+		if(medicareAdvantagePlansPage!= null){
+			getLoginScenario().saveBean(PageConstants.MEDICARE_ADVANTAGE_PLANS_PAGE,
+					medicareAdvantagePlansPage);
+			
+			Assert.assertTrue(true);
+		} else {
+			Assert.fail("home page not found");
+		}
+	}
+	
+	@And("^user clicks on medicare supplement insurance plans link from footer of the AARP Medicare Plans home page$")
+	public void click_supplement_insurance_plans() {
+		MedicareAdvantagePlansPage medicareAdvantagePlanPage  = (MedicareAdvantagePlansPage) getLoginScenario()
+				.getBean(PageConstants.MEDICARE_ADVANTAGE_PLANS_PAGE);
+		MedicareSupplementInsurancePlansPage medicareSupplementInsurancePlansPage = medicareAdvantagePlanPage.medicareSupplementFooterClick();
+		if(medicareSupplementInsurancePlansPage!= null){
+			getLoginScenario().saveBean(PageConstants.MEDICARE_SUPPLEMENT_INSURANCE_PLANS_PAGE,
+					medicareSupplementInsurancePlansPage);
+			
+			Assert.assertTrue(true);
+		} else {
+			Assert.fail("home page not found");
+		}
+	}
+	
+	@And("^user clicks on medicare prescription drug plans from footer of the AARP Medicare Plans home page$")
+	public void medicare_prescription_drug_plans() {
+		MedicareSupplementInsurancePlansPage medicareSupplementInsurancePlansPage  = (MedicareSupplementInsurancePlansPage) getLoginScenario()
+				.getBean(PageConstants.MEDICARE_SUPPLEMENT_INSURANCE_PLANS_PAGE);
+		MedicarePrescriptionDrugPlansPage medicarePrescriptionDrugPlansPage = medicareSupplementInsurancePlansPage.medicarePrescriptionFooterClick();
+		if(medicarePrescriptionDrugPlansPage!= null){
+			getLoginScenario().saveBean(PageConstants.MEDICARE_PRESCRIPTION_DRUG_PLANS_PAGE,
+					medicarePrescriptionDrugPlansPage);
+			
+			Assert.assertTrue(true);
+		} else {
+			Assert.fail("home page not found");
+		}
+	}
+	
+	
+	
+	/* Navigation link Section Test Cases -  Start - Column 3 links  */
+	@And("^user clicks on learn about medicare link from footer of the AARP Medicare Plans home page$")
+	public void learn_about_medicare() {
+		MedicarePrescriptionDrugPlansPage medicarePrescriptionDrugPlansPage  = (MedicarePrescriptionDrugPlansPage) getLoginScenario()
+				.getBean(PageConstants.MEDICARE_PRESCRIPTION_DRUG_PLANS_PAGE);
+		LearnAboutMedicarePage learnAboutMedicarePage = medicarePrescriptionDrugPlansPage.learnAboutMedicareFooterClick();
+		if(learnAboutMedicarePage!= null){
+			getLoginScenario().saveBean(PageConstants.LEARN_ABOUT_MEDICARE_PAGE,
+					learnAboutMedicarePage);
+			
+			Assert.assertTrue(true);
+		} else {
+			Assert.fail("home page not found");
+		}
+	}
+	
+	@And("^user clicks on prepare for initial enrollment link from footer of the AARP Medicare Plans home page$")
+	public void prepare_for_initial_enrollment() {
+		LearnAboutMedicarePage learnAboutMedicarePage  = (LearnAboutMedicarePage) getLoginScenario()
+				.getBean(PageConstants.LEARN_ABOUT_MEDICARE_PAGE);
+		PrepareforInitialEnrollmentPage prepareforInitialEnrollmentPage = learnAboutMedicarePage.prepareforInitialEnrollmentFooterClick();
+		if(prepareforInitialEnrollmentPage!= null){
+			getLoginScenario().saveBean(PageConstants.PREPARE_FOR_INITIAL_ENROLLMENT_PAGE,
+					prepareforInitialEnrollmentPage);
+			
+			Assert.assertTrue(true);
+		} else {
+			Assert.fail("home page not found");
+		}
+	}
+	
+	@And("^user clicks on explore changing plans link from footer of the AARP Medicare Plans home page$")
+	public void explore_changing_plans() {
+		PrepareforInitialEnrollmentPage prepareforInitialEnrollmentPage  = (PrepareforInitialEnrollmentPage) getLoginScenario()
+				.getBean(PageConstants.PREPARE_FOR_INITIAL_ENROLLMENT_PAGE);
+		ExploreChangingPlansPage exploreChangingPlansPage = prepareforInitialEnrollmentPage.exploreChangingPlansFooterClick();
+		if(exploreChangingPlansPage!= null){
+			getLoginScenario().saveBean(PageConstants.EXPLORE_CHANGING_PLANS_PAGE,
+					exploreChangingPlansPage);
+			
+			Assert.assertTrue(true);
+		} else {
+			Assert.fail("home page not found");
+		}
+	}
+	
+	
+	@And("^user clicks on discover more resources link from footer of the AARP Medicare Plans home page$")
+	public void discover_more_resources() {
+		ExploreChangingPlansPage exploreChangingPlansPage  = (ExploreChangingPlansPage) getLoginScenario()
+				.getBean(PageConstants.EXPLORE_CHANGING_PLANS_PAGE);
+		DiscoverMoreResourcesPage discoverMoreResourcesPage = exploreChangingPlansPage.discoverMoreResourcesFooterClick();
+		if(discoverMoreResourcesPage!= null){
+			getLoginScenario().saveBean(PageConstants.DISCOVER_MORE_RESOURCES_PAGE,
+					discoverMoreResourcesPage);
+			
+			Assert.assertTrue(true);
+		} else {
+			Assert.fail("home page not found");
+		}
+	}
+	
+	
+	
+	
+	@And("^user clicks on Home link from footer of the discover more resources page$")
+	public void click_home_from_discover_more_resources() {
+		DiscoverMoreResourcesPage discoverMoreResourcesPage  = (DiscoverMoreResourcesPage) getLoginScenario()
+				.getBean(PageConstants.DISCOVER_MORE_RESOURCES_PAGE);
+		AcquisitionHomePage acquisitionHomePage = discoverMoreResourcesPage.acquisitionHomeFooterClick();
+		if(acquisitionHomePage!= null){
+			getLoginScenario().saveBean(PageConstants.ACQUISITION_HOME_PAGE,
+					acquisitionHomePage);
+			Assert.assertTrue(true);
+		} else {
+			Assert.fail("Aboutus page not found");
+		}
+			
+		
+	}
+
+	
+/* Dislaimer Information Section*/
+	
+	@And("^user clicks on view disclaimer information section links from footer of the AARP Medicare Plans home page$")
+	public void click_view_disclaimer_information() {
+		
+		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage)getLoginScenario()
+				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+		aquisitionhomepage = aquisitionhomepage.veiwAllDisclaimerLinkSectionLinksClick();
+		if(aquisitionhomepage!= null){
+			getLoginScenario().saveBean(PageConstants.ACQUISITION_HOME_PAGE,
+					aquisitionhomepage);
+			Assert.assertTrue(true);
+		} else {
+			Assert.fail("Aboutus page not found");
+		}
+		
+		
 	}
 	
 	@Then("^the user validates all links in the global footer of AARP site$")

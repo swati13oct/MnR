@@ -559,7 +559,7 @@ public class CommonConstants {
 
 	public static final String PHARMACY_INFORMATION_PAGE_DATA = "pharmacyInformation.json";
 
-	public static final String GLOBAL_FOOTER_PAGE_DATA = "globalfooter.json";
+	public static final String GLOBAL_FOOTER_PAGE_DATA = "globalfooteractual.json";
 	
 	public static final String SITE_MAP_PAGE_DATA = "sitemap.json";
 	
@@ -568,5 +568,7 @@ public class CommonConstants {
 	public static final String CONTACT_US_PAGE_DATA = "contactus.json";
 	
 	public static final String AGENTS_AND_BROKERS_PAGE_DATA = "agentsandbrokers.json";
+	
+	public static final String HOME_PAGE_DISCLAIMER_DATA = "viewalldisclaimer.json";
 	
 }

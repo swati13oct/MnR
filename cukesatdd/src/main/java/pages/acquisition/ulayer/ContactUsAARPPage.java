@@ -7,11 +7,8 @@ import org.openqa.selenium.support.PageFactory;
 
 import atdd.framework.UhcDriver;
 
-public class ContactUsAARPPage extends UhcDriver{
-	
-	@FindBy(id = "gf_lnk_4")
-	private WebElement footerSiteMapLink;
-
+public class ContactUsAARPPage extends GlobalFooterWebElements{
+	 
 	public ContactUsAARPPage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
@@ -25,7 +22,9 @@ public class ContactUsAARPPage extends UhcDriver{
 	}
 
 	public SiteMapAARPPage siteMapFooterClick() {
+		validate(footerSiteMapLink);
 		footerSiteMapLink.click();
+		validate(footerSiteMapLink);
 		if (driver.getTitle().equalsIgnoreCase("Site Map | AARP® Medicare Plans from UnitedHealthcare®")) {
 			return new SiteMapAARPPage(driver);
 		}

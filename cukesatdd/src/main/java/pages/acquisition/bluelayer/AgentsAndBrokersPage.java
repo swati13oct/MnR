@@ -10,16 +10,16 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
+import pages.acquisition.bluelayer.GlobalFooterWebElements;
 import acceptancetests.atdd.data.CommonConstants;
 import acceptancetests.atdd.data.PageData;
 import acceptancetests.atdd.util.CommonUtility;
-import atdd.framework.UhcDriver;
 
 /**
  * @author saduri
  *
  */
-public class AgentsAndBrokersPage extends UhcDriver{
+public class AgentsAndBrokersPage extends GlobalFooterWebElements{
 	
 	@FindBy(className = "med_cont")
 	private WebElement agentsAndBrokersTable;
@@ -30,6 +30,8 @@ public class AgentsAndBrokersPage extends UhcDriver{
 	private PageData agentsAndBrokers;
 
 	public JSONObject agentsAndBrokersJson;
+	
+	
 
 	public AgentsAndBrokersPage(WebDriver driver) {
 		super(driver);
@@ -70,6 +72,13 @@ public JSONObject agentsAndBrokers() {
 		
 		return agentsAndBrokersJson;
 		
+	}
+	public AcquisitionHomePage homeFooterClick() {
+	footerHomeLink.click();
+	if (driver.getTitle().equalsIgnoreCase("Medicare Plans for Different Needs | UnitedHealthcare�")) {
+	return new AcquisitionHomePage(driver);
+	}
+	return null;
 	}
 
 }
