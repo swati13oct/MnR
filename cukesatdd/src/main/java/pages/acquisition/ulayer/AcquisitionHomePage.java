@@ -111,6 +111,7 @@ public class AcquisitionHomePage extends GlobalFooterWebElements {
 		validate(prescriptionsLink);
 		validate(zipCodeField);
 		validate(viewPlansButton);
+		validate(footnotesContent);
 	}
 
 	public VPPPlanSummaryPage searchPlans(String zipcode, String countyName) {

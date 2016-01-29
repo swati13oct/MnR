@@ -198,6 +198,7 @@ public SiteMapUMSPage siteMapFooterClick() {
               validate(zipCodeField);
               validate(viewPlansButton);
               validate(footerHomeLink);
+              validate(footnotesContent);
               
               //validate(footerHealthAndWellnessLink);
               validate(footerAboutUsLink);

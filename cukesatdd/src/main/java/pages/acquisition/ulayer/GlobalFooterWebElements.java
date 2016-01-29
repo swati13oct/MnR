@@ -42,6 +42,9 @@ public class GlobalFooterWebElements  extends UhcDriver{
 	@FindBys(value = { @FindBy(xpath = "(//a[contains(text(),'Visit AARP.org')])[2]") })
 	public static WebElement aarpOrgLink;
 	
+	@FindBys(value = { @FindBy(id = "footnotes1" )})
+	public static WebElement footnotesContent;
+	
 			
 	@FindBy(id = "gfn_lnk_row2_2")
 	 public static WebElement medicareAdvantagePlansLink;

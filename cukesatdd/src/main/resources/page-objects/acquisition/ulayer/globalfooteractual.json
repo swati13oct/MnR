@@ -76,6 +76,10 @@
 "hideDiscliamerInformation":{
 "identifier":"linkText",
 "elementName":"Hide discliamer information"
+},
+"footnotesContent":{
+"identifier":"id",
+"elementName":"footnotes1"
 }
 
 }
