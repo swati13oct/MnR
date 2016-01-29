@@ -30,6 +30,7 @@ import acceptancetests.atdd.data.CommonConstants;
 import acceptancetests.atdd.data.acquisition.PageConstants;
 import acceptancetests.globalfooter.data.AcquistionCommonConstants;
 import atdd.framework.MRScenario;
+import cucumber.annotation.After;
 import cucumber.annotation.en.And;
 import cucumber.annotation.en.Given;
 import cucumber.annotation.en.Then;
@@ -54,7 +55,7 @@ public class GlobalFooterAARPStepDefinition {
 
 		AcquisitionHomePage aquisitionhomepage = new AcquisitionHomePage(wd);
 
-		getLoginScenario().saveBean("webDriver", wd);
+		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
 		getLoginScenario().saveBean(PageConstants.ACQUISITION_HOME_PAGE,
 				aquisitionhomepage);
 	}
@@ -390,6 +391,15 @@ public class GlobalFooterAARPStepDefinition {
 		}
 
 	}
+	
+	@After
+    public void tearDown() {
+           WebDriver wd = (WebDriver) getLoginScenario().getBean(
+                        CommonConstants.WEBDRIVER);
+           wd.quit();
+           getLoginScenario().flushBeans();
+    }
+
 	
 
 }

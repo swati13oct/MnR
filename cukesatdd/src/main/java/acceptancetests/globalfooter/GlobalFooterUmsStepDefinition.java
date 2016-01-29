@@ -56,7 +56,7 @@ public class GlobalFooterUmsStepDefinition {
 
 		AcquisitionHomePage aquisitionhomepage = new AcquisitionHomePage(wd);
 
-		getLoginScenario().saveBean("webDriver", wd);
+		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
 		getLoginScenario().saveBean(PageConstants.ACQUISITION_HOME_PAGE,
 				aquisitionhomepage);
 	}
