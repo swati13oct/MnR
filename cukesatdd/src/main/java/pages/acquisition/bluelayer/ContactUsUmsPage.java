@@ -36,7 +36,9 @@ public class ContactUsUmsPage extends UhcDriver{
 	}
 	
 	public PrivacyPolicyUmsPage privacyPolicyClick() {
+		validate(privacyPolicyLink);
 		privacyPolicyLink.click();
+		validate(privacyPolicyLink);
 		if(driver.getTitle().equalsIgnoreCase("Privacy Policy | UnitedHealthcare®")){
 			return new PrivacyPolicyUmsPage(driver);
 		}

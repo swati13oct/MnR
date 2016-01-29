@@ -47,10 +47,6 @@ public class GlobalFooterWebElements extends UhcDriver {
 	public static WebElement footerAgentsnBrokersLink;
 	
 	
-	@FindBys(value = { @FindBy(xpath = "(//a[contains(text(),'Visit AARP.org')])[2]") })
-	public static WebElement aarpOrgLink;
-	
-			
 	@FindBy(id = "gfn_lnk_row2_2")
 	 public static WebElement medicareAdvantagePlansLink;
 	
@@ -81,7 +77,7 @@ public class GlobalFooterWebElements extends UhcDriver {
 	@FindBy(linkText = "Hide discliamer information")
 	 public static WebElement hideDiscliamerInformation;
 	
-	@FindBy(linkText = "//a[contains(text(),'Back to Top')])[2]")
+	@FindBy(css = "a.backtotop1.hideLink")
 	 public static WebElement disclaimerBackToTopLink;
 	
 	@FindBy(id = "proceed")

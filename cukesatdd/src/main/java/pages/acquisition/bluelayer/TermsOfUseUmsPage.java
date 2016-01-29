@@ -33,7 +33,9 @@ public class TermsOfUseUmsPage extends UhcDriver{
 	}
 	
 	public DisclaimersPage disclaimersClick() {
+		validate(disclaimersLink);
 		disclaimersLink.click();
+		validate(disclaimersLink);
 		if(driver.getTitle().equalsIgnoreCase("Disclaimers | UnitedHealthcare®")){
 			return new DisclaimersPage(driver);
 		}

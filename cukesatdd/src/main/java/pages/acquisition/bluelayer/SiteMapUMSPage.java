@@ -90,7 +90,9 @@ public JSONObject siteMap() {
 	}
 
 public AboutUsPage aboutUsClick() {
+	validate(aboutUsLink);
 	aboutUsLink.click();
+	validate(aboutUsLink);
 	if(driver.getTitle().equalsIgnoreCase("About UnitedHealthcare® | UnitedHealthcare")){
 		return new AboutUsPage(driver);
 	}

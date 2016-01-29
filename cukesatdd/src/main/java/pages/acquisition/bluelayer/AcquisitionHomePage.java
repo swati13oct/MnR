@@ -179,7 +179,9 @@ public class AcquisitionHomePage extends GlobalFooterWebElements {
        }
        
 public SiteMapUMSPage siteMapFooterClick() {
+		validate(footerSiteMapLink);
        footerSiteMapLink.click();
+       validate(footerSiteMapLink);
        if(driver.getTitle().equalsIgnoreCase("Site Map | UnitedHealthcare®")){
               return new SiteMapUMSPage(driver);
        }
@@ -239,13 +241,30 @@ public SiteMapUMSPage siteMapFooterClick() {
        }
        
        public MedicareAdvantagePlansuhcPage medicareAdvantagePlansClick() {
+    	    validate(medicareAdvantagePlansLink);
               medicareAdvantagePlansLink.click();
+              validate(medicareAdvantagePlansLink);
               if(driver.getTitle().equalsIgnoreCase("Medicare Advantage Plans | UnitedHealthcare®")){
               return new MedicareAdvantagePlansuhcPage(driver);
               }
 
               return null;
               }
+
+	public AcquisitionHomePage veiwAllDisclaimerLinkSectionLinksClick() {
+		validate(GlobalFooterWebElements.viewAllDisclaimerInformationLink);
+		GlobalFooterWebElements.viewAllDisclaimerInformationLink.click();
+		
+		validate(GlobalFooterWebElements.disclaimerBackToTopLink);
+		GlobalFooterWebElements.disclaimerBackToTopLink.click();
+		
+		validate(GlobalFooterWebElements.hideDiscliamerInformation);
+		GlobalFooterWebElements.hideDiscliamerInformation.click();
+		if(driver.getTitle().equalsIgnoreCase("Medicare Plans for Different Needs | UnitedHealthcare®")){
+			return new AcquisitionHomePage(driver);
+		}
+		return null;
+	}
        
        
        

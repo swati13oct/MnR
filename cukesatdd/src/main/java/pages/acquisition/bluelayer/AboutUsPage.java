@@ -70,7 +70,9 @@ public JSONObject aboutUs() {
 	}
 
 public ContactUsUmsPage contactUsClick() {
+	validate(contactUsLink);
 	contactUsLink.click();
+	validate(contactUsLink);
 	if(driver.getTitle().equalsIgnoreCase("Contact UnitedHealthcare® | UnitedHealthcare")){
 		return new ContactUsUmsPage(driver);
 	}

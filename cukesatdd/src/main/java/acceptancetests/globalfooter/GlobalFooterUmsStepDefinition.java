@@ -28,7 +28,6 @@ import pages.acquisition.bluelayer.PrepareForInitialEnrollmentuhcPage;
 import pages.acquisition.bluelayer.PrivacyPolicyUmsPage;
 import pages.acquisition.bluelayer.SiteMapUMSPage;
 import pages.acquisition.bluelayer.TermsOfUseUmsPage;
-import pages.acquisition.ulayer.DiscoverMoreResourcesPage;
 import acceptancetests.atdd.data.CommonConstants;
 import acceptancetests.atdd.data.acquisition.PageConstants;
 import acceptancetests.globalfooter.data.AcquistionCommonConstants;
@@ -95,26 +94,6 @@ public class GlobalFooterUmsStepDefinition {
 
 	}
 
-	@Then("^the user validates links in the global footer in UHC Medicaresolutions Site$")
-	public void user_validate_following_links_ums() {
-
-		JSONObject globalFooterActual = (JSONObject) getLoginScenario()
-				.getBean(AcquistionCommonConstants.GLOBAL_FOOTER_ACTUAL);
-
-		JSONObject globalFooterExpected = (JSONObject) getLoginScenario()
-				.getBean(AcquistionCommonConstants.GLOBAL_FOOTER_EXPECTED);
-
-		System.out.println("globalFooterActual---->" + globalFooterActual);
-		System.out.println("globalFooterExpected---->" + globalFooterExpected);
-		try {
-			JSONAssert.assertEquals(globalFooterExpected, globalFooterActual,
-					true);
-		} catch (JSONException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
-	}
 	
 	@And("^the user clicks on Sitemap link from home page footer UHC Medicaresolutions Site$")
 	public void user_clicks_Sitemap_links_ums() {
@@ -418,124 +397,43 @@ public class GlobalFooterUmsStepDefinition {
 	
 /* Dislaimer Information Section*/
 	
-	@And("^user clicks on view disclaimer information link from footer of the UHC Medicare Solutions home page$")
+	@And("^user clicks on view disclaimer information section links from footer of the UHC Medicare Solutions home page$")
 	public void click_view_disclaimer_information() {
 		
 		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage)getLoginScenario()
 				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
-		JSONObject homePageDisclaimerActualJson = aquisitionhomepage.accessViewAllDisclaimerInformation();
-		/* Get expected data */
-		String fileName = "viewalldisclaimer";
-		String directory = CommonConstants.ACQUISITION_EXPECTED_DIRECTORY
-				+ File.separator + CommonConstants.SITE_BLUELAYER
-				+ File.separator
-				+ AcquistionCommonConstants.VIEW_ALL_DISCLAIMER_NAME
-				+ File.separator;
-		JSONObject viewAllDisclaimerExpectedJson = MRScenario.readExpectedJson(
-				fileName, directory);
-
-		getLoginScenario().saveBean(
-				AcquistionCommonConstants.VIEW_ALL_DISCLAIMER_ACTUAL,
-				homePageDisclaimerActualJson);
-		getLoginScenario().saveBean(
-				AcquistionCommonConstants.VIEW_ALL_DISCLAIMER_EXPECTED,
-				viewAllDisclaimerExpectedJson);
-	}
-	
-	@Then("^user validates content on view disclaimer information link from footer of the UHC Medicare Solutions home page$")
-	public void validates_content_on_show_view_disclaimer(){
-		
-		JSONObject homePageDisclaimerActualJson = (JSONObject) getLoginScenario()
-				.getBean(AcquistionCommonConstants.VIEW_ALL_DISCLAIMER_ACTUAL);
-
-		JSONObject viewAllDisclaimerExpectedJson = (JSONObject) getLoginScenario()
-				.getBean(AcquistionCommonConstants.VIEW_ALL_DISCLAIMER_EXPECTED);
-
-		System.out.println("homePageDisclaimerActualJson---->" + homePageDisclaimerActualJson);
-		System.out.println("viewAllDisclaimerExpectedJson---->" + viewAllDisclaimerExpectedJson);
-		try {
-			JSONAssert.assertEquals(viewAllDisclaimerExpectedJson, homePageDisclaimerActualJson,
-					true);
-		} catch (JSONException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		aquisitionhomepage = aquisitionhomepage.veiwAllDisclaimerLinkSectionLinksClick();
+		if(aquisitionhomepage!= null){
+			getLoginScenario().saveBean(PageConstants.ACQUISITION_HOME_PAGE,
+					aquisitionhomepage);
+			Assert.assertTrue(true);
+		} else {
+			Assert.fail("Home page not found");
 		}
 		
-	}
-	
-	@And("^user clicks on hide disclaimer information link from footer of the UHC Medicare Solutions home page$")
-	public void hide_disclaimer_information(){
 		
-		AcquisitionHomePage acquisitionHomePage = (AcquisitionHomePage)getLoginScenario()
-				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
-		JSONObject homePageDisclaimerHideActualJson = acquisitionHomePage.accessViewAllDisclaimerHideInformation();
-		/* Get expected data */
-		String fileName = "hidedisclaimer";
-		String directory = CommonConstants.ACQUISITION_EXPECTED_DIRECTORY
-				+ File.separator + CommonConstants.SITE_BLUELAYER
-				+ File.separator
-				+ AcquistionCommonConstants.VIEW_ALL_DISCLAIMER_NAME
-				+ File.separator;
-		JSONObject hideDisclaimerExpectedJson = MRScenario.readExpectedJson(
-				fileName, directory);
-
-		getLoginScenario().saveBean(
-				AcquistionCommonConstants.HIDE_DISCLAIMER_ACTUAL,
-				homePageDisclaimerHideActualJson);
-		getLoginScenario().saveBean(
-				AcquistionCommonConstants.HIDE_DISCLAIMER_EXPECTED,
-				hideDisclaimerExpectedJson);
 		
 	}
 	
-	@Then("^user validates content on clicking hide disclaimer information link from footer of the UHC Medicare Solutions home page$")
-	public void validates_content_on_hide_disclaimer(){
-		
-		JSONObject homePageDisclaimerHideActualJson = (JSONObject) getLoginScenario()
-				.getBean(AcquistionCommonConstants.HIDE_DISCLAIMER_ACTUAL);
+	@Then("^the user validates links in the global footer in UHC Medicaresolutions Site$")
+	public void user_validate_following_links_ums() {
 
-		JSONObject hideDisclaimerExpectedJson = (JSONObject) getLoginScenario()
-				.getBean(AcquistionCommonConstants.HIDE_DISCLAIMER_EXPECTED);
+		JSONObject globalFooterActual = (JSONObject) getLoginScenario()
+				.getBean(AcquistionCommonConstants.GLOBAL_FOOTER_ACTUAL);
 
-		System.out.println("homePageDisclaimerHideActualJson---->" + homePageDisclaimerHideActualJson);
-		System.out.println("hideDisclaimerExpectedJson---->" + hideDisclaimerExpectedJson);
+		JSONObject globalFooterExpected = (JSONObject) getLoginScenario()
+				.getBean(AcquistionCommonConstants.GLOBAL_FOOTER_EXPECTED);
+
+		System.out.println("globalFooterActual---->" + globalFooterActual);
+		System.out.println("globalFooterExpected---->" + globalFooterExpected);
 		try {
-			JSONAssert.assertEquals(hideDisclaimerExpectedJson, homePageDisclaimerHideActualJson,
-					true);
-		} catch (JSONException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-	}
-	
-
-	
-	@Then("^the user validates sections on Agents & Brokers page$")
-	public void user_validate_AgentsAndBrokers_links_ums() {
-
-		JSONObject agentsAndBrokersActualJson = (JSONObject) getLoginScenario()
-				.getBean(AcquistionCommonConstants.AGENTS_AND_BROKERS_ACTUAL);
-
-		JSONObject agentsAndBrokersExpectedJson = (JSONObject) getLoginScenario()
-				.getBean(AcquistionCommonConstants.AGENTS_AND_BROKERS_EXPECTED);
-
-		System.out.println("agentsAndBrokersActualJson---->" + agentsAndBrokersActualJson);
-		System.out.println("agentsAndBrokersExpectedJson---->" + agentsAndBrokersExpectedJson);
-		try {
-			JSONAssert.assertEquals(agentsAndBrokersExpectedJson, agentsAndBrokersActualJson,
+			JSONAssert.assertEquals(globalFooterExpected, globalFooterActual,
 					true);
 		} catch (JSONException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
-	}
-		
-		
-		
-	
-	
-	
+	}	
 
 }

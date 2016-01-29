@@ -28,9 +28,10 @@ public class LearnAboutMedicareuhcPage extends GlobalFooterWebElements{
 	}
 
 	public PrepareForInitialEnrollmentuhcPage prepareForInitialEnrollmentFooterClick() {
-
+		validate(prepareForInitialEnrollmentLink);
 		prepareForInitialEnrollmentLink.click();
-		if(driver.getTitle().equalsIgnoreCase("Prepare for Your Medicare Initial Enrollment Period | UnitedHealthcareï¿½")){
+		validate(prepareForInitialEnrollmentLink);
+		if(driver.getTitle().equalsIgnoreCase("Prepare for Your Medicare Initial Enrollment Period | UnitedHealthcare®")){
 			return new PrepareForInitialEnrollmentuhcPage(driver);
 		}
 		return null;

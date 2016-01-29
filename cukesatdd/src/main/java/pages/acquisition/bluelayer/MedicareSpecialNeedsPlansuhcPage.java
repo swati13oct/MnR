@@ -20,8 +20,10 @@ public class MedicareSpecialNeedsPlansuhcPage extends GlobalFooterWebElements{
 	}
 	
 	public LearnAboutMedicareuhcPage learnAboutMedicareFooterClick() {
+		validate(learnAboutMedicareLink);
 		learnAboutMedicareLink.click();
-		if(driver.getTitle().equalsIgnoreCase("Learn About Medicare | UnitedHealthcareï¿½"))
+		validate(learnAboutMedicareLink);
+		if(driver.getTitle().equalsIgnoreCase("Learn About Medicare | UnitedHealthcare®"))
 		{
 		return new LearnAboutMedicareuhcPage(driver);
 		}

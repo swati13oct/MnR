@@ -30,8 +30,10 @@ public class MedicarePrescriptionDrugPlansuhcPage extends GlobalFooterWebElement
 
 	public MedicareSpecialNeedsPlansuhcPage medicareSpecialNeedsPlansClick() {
 		
+		validate(medicareSpecialNeedPlansLink);
 		medicareSpecialNeedPlansLink.click();
-		if(driver.getTitle().equalsIgnoreCase("Medicare Special Needs Plans | UnitedHealthcareï¿½")){
+		validate(medicareSpecialNeedPlansLink);
+		if(driver.getTitle().equalsIgnoreCase("Medicare Special Needs Plans | UnitedHealthcare®")){
 			return new MedicareSpecialNeedsPlansuhcPage(driver);
 		}
 		return null;

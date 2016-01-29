@@ -29,8 +29,10 @@ public class PrepareForInitialEnrollmentuhcPage extends GlobalFooterWebElements{
 	}
 
 	public ExploreChangingPlansuhcPage exploreChangingPlansFooterClick() {
+		validate(exploreChangingPlansLink);
 		exploreChangingPlansLink.click();
-		if(driver.getTitle().equalsIgnoreCase("Change Medicare Plans | UnitedHealthcareï¿½")){
+		validate(exploreChangingPlansLink);
+		if(driver.getTitle().equalsIgnoreCase("Change Medicare Plans | UnitedHealthcare®")){
 			return new ExploreChangingPlansuhcPage(driver); 
 		}
 		return null;

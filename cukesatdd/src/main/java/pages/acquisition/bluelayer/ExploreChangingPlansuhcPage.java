@@ -28,8 +28,10 @@ public class ExploreChangingPlansuhcPage extends GlobalFooterWebElements{
 	}
 
 	public DiscoverMoreResourcesuhcPage discoverMoreResourcesFooterClick() {
+		validate(discoverMoreResourcesLink);
 		discoverMoreResourcesLink.click();
-		if(driver.getTitle().equalsIgnoreCase("Discover More Medicare Resources & Information | UnitedHealthcareï¿½")){
+		validate(discoverMoreResourcesLink);
+		if(driver.getTitle().equalsIgnoreCase("Discover More Medicare Resources & Information | UnitedHealthcare®")){
 			return new DiscoverMoreResourcesuhcPage(driver);
 		}
 		return null;

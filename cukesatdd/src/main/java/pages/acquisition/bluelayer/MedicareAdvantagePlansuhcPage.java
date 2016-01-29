@@ -29,7 +29,9 @@ public class MedicareAdvantagePlansuhcPage extends GlobalFooterWebElements{
 	}
 
 	public MedicareSupplementPlansuhcPage medicareSupplementPlansClick() {
+		validate(medicareSupplementInsurancePlansLink);
 		medicareSupplementInsurancePlansLink.click();
+		validate(medicareSupplementInsurancePlansLink);
 		if(driver.getTitle().equalsIgnoreCase("UnitedHealthcare Medicare Solutions | AARP Medicare Supplement Plans")){
 			return new MedicareSupplementPlansuhcPage(driver);
 		}

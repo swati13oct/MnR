@@ -3,7 +3,6 @@ Feature:To test Global Footer links in UMS site
 Scenario:To verify links displayed in Global footer section in UMS site
 Given the user is on the UHC Medicaresolutions Site
 When user accesses global footer UHC Medicaresolutions Site
-Then the user validates links in the global footer in UHC Medicaresolutions Site
 And the user clicks on Sitemap link from home page footer UHC Medicaresolutions Site
 And the user clicks on Aboutus link from home page footer UHC Medicaresolutions Site
 And the user clicks on Contactus link from about us page footer UHC Medicaresolutions Site
@@ -21,9 +20,7 @@ And user clicks on Prepare For Initial Enrollment link from footer of the Learn 
 And user clicks on Explore Changing plans link from footer of the Prepare For Initial Enrollment page bluelayer
 And user clicks on Discover More Resources link from footer of the Explore Changing plans page bluelayer
 And user clicks on Home link from footer of the discover more resources page bluelayer
-And user clicks on view disclaimer information link from footer of the UHC Medicare Solutions home page
-And user validates content on view disclaimer information link from footer of the UHC Medicare Solutions home page
-And user clicks on hide disclaimer information link from footer of the UHC Medicare Solutions home page
-And user validates content on clicking hide disclaimer information link from footer of the UHC Medicare Solutions home page
-Then the user validates sections on Agents & Brokers page
+And user clicks on view disclaimer information section links from footer of the UHC Medicare Solutions home page
+Then the user validates links in the global footer in UHC Medicaresolutions Site
+
 

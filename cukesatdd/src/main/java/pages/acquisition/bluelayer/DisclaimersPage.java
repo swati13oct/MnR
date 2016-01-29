@@ -31,7 +31,9 @@ public class DisclaimersPage extends UhcDriver{
 		
 	}
 	public AgentsAndBrokersPage agentsAndBrokersClick() {
+		validate(agentAndBrokersLink);
 		agentAndBrokersLink.click();
+		validate(agentAndBrokersLink);
 		if(driver.getTitle().equalsIgnoreCase("Health Insurance Broker & Agent Resources | UnitedHealthcare®")){
 			return new AgentsAndBrokersPage(driver);
 		}

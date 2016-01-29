@@ -28,8 +28,8 @@ public class DiscoverMoreResourcesuhcPage extends GlobalFooterWebElements{
 public AcquisitionHomePage acquisitionHomeFooterClick() {
 		
 		footerHomeLink.click();
-		
-		if (driver.getTitle().equalsIgnoreCase("Medicare Plans | AARPï¿½ Medicare Plans from UnitedHealthcareï¿½")) {
+		validate(footerHomeLink);
+		if (driver.getTitle().equalsIgnoreCase("Medicare Plans for Different Needs | UnitedHealthcare®")) {
 			return new AcquisitionHomePage(driver);
 		}else{
 		

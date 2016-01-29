@@ -32,7 +32,9 @@ public class PrivacyPolicyUmsPage extends UhcDriver{
 	}
 	
 	public TermsOfUseUmsPage termsOfUseClick() {
+		validate(termsOfUseLink);
 		termsOfUseLink.click();
+		validate(termsOfUseLink);
 		if(driver.getTitle().equalsIgnoreCase("Terms of Use | UnitedHealthcare®")){
 			return new TermsOfUseUmsPage(driver);
 		}

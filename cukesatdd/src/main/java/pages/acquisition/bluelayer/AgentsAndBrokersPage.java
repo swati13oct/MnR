@@ -74,8 +74,10 @@ public JSONObject agentsAndBrokers() {
 		
 	}
 	public AcquisitionHomePage homeFooterClick() {
+	validate(footerHomeLink);
 	footerHomeLink.click();
-	if (driver.getTitle().equalsIgnoreCase("Medicare Plans for Different Needs | UnitedHealthcareï¿½")) {
+	validate(footerHomeLink);
+	if (driver.getTitle().equalsIgnoreCase("Medicare Plans for Different Needs | UnitedHealthcare®")) {
 	return new AcquisitionHomePage(driver);
 	}
 	return null;
