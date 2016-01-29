@@ -265,7 +265,7 @@ public class AcquisitionHomePage extends GlobalFooterWebElements {
 		if (driver
 				.getTitle()
 				.equalsIgnoreCase(
-						"Medicare Advantage Plans | AARP® Medicare Plans from UnitedHealthcare®")) {
+						"Medicare Plans | AARP® Medicare Plans from UnitedHealthcare®")) {
 			return new AcquisitionHomePage(driver);
 		}
 		return null;
