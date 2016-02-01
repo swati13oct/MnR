@@ -39,6 +39,14 @@ public class PageConstants {
 
 	public static final String MANAGE_DRUG_PAGE = "manageDrugPage";
 
-	public static final String AFTER_DOSAGE_SELECTION = "afterDosageSelection";
+	public static final String AFTER_DOSAGE_SELECTION = "afterDosageSelection";	public static final String PLAN_INFORMATION = "planInformationPage";
 
-}
+	public static final String BENEFICIARY_INFORMATION_PAGE = "beneficiaryInformationPage";
+
+	public static final String ADDITIONAL_INFORMATION_PAGE = "additionalInformation";
+
+	public static final String REVIEW_APPLICATION_PAGE = "reviewApplication";
+
+	public static final String SUBMIT_APPLICATION_PAGE = "submitApplicationPage";
+
+	public static final String ENROLLMENT_CONFIRMATION_PAGE = "enrollmentConfirmationPage";}

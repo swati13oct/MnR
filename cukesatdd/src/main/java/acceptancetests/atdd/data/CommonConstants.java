@@ -558,5 +558,27 @@ public class CommonConstants {
 	public static final String SELECT_PHARMACIES_PAGE_DATA = "selectpharmacy.json";
 
 	public static final String PHARMACY_INFORMATION_PAGE_DATA = "pharmacyInformation.json";
+
+	public static final String ENROLL_PLAN_INFO_PAGE_DATA = "enrollinplan.json";
+
+	public static final String MA_PLAN_INFORMATION_PAGE_DATA = "maplaninformation.json";
+
+	public static final String PDP_PLAN_INFORMATION_PAGE_DATA = "pdpplaninformation.json";
+
+	public static final String BENEFICIARY_INFORMATION_PAGE_DATA = "beneficiaryinformation.json";
+	
+	public static final String MA_ADDITIONAL_INFORMATION_PAGE_DATA = "maadditionalinformation.json";
+	
+	public static final String PDP_ADDITIONAL_INFORMATION_PAGE_DATA = "pdpadditionalinformation.json";
+
+	public static final String MA_REVIEW_APPLICATION_PAGE_DATA = "mareviewapplication.json";
+	
+	public static final String PDP_REVIEW_APPLICATION_PAGE_DATA = "pdpreviewapplication.json";
+
+	public static final String SUBMIT_APPLICATION_PAGE_DATA = "submitapplication.json";
+
+	public static final String ENROLLMENT_CONFIRMATION_PAGE_DATA = "enrollmentconfirmation.json";
+	
+	
 	
 }
