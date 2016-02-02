@@ -1,4 +1,4 @@
-@dceVppTestUhc1
+@dceVppTestUhc
 Feature: To test DCE to VPP plan Summary flow Edit Flow in UMS site
 Scenario Outline: To Verify the drugs and plan summary Edit Flow for non AEP period 
 Given the zipcode and county information for DCE to Vpp Plan summary flow in UMS site
