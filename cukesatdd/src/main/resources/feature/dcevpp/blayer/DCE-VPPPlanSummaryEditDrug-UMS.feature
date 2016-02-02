@@ -62,7 +62,7 @@ Then the user validates the available pharmacies in the selected zipcode in UMS 
 And user views list of pharmacies available in UMS site
 And user selects the pharmacy from the list of pharmacies in UMS site
 	| <pharmacyName> |
-When user switches to manage drug page and then to pharmacy page again in UMS site	
+When user switches to pharmacy page again in UMS site
 Then the user validates the order of pharmacies in UMS site
 
 Examples:
