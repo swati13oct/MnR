@@ -11,14 +11,12 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
 import acceptancetests.atdd.util.CommonUtility;
+import atdd.framework.UhcDriver;
 
-public class AddDrugPage {
+public class AddDrugPage extends UhcDriver {
 
 	/*@FindBy(css = "div > img[alt=\"Plus Image\"]")
 	WebElement plusSign;*/
-	
-	@FindBy(xpath = "//div[@class='addDrugBox']")
-	WebElement adddrugdiv;
 
 	@FindBy(xpath = "//div[@class='drugDropDownList']")
 	private WebElement drugDropDownList;
@@ -35,7 +33,10 @@ public class AddDrugPage {
 	@FindBy(id = "dcemodal")
 	WebElement drugsAdded;
 	
-	@FindBy(xpath = "//div[@class='tab selectedTab']")
+	/*@FindBy(xpath = "//div[@class='tab selectedTab']")
+	private WebElement pharmacySearchTab;*/
+	
+	@FindBy(xpath="//div[@class='tabsHead']/div[2]")
 	private WebElement pharmacySearchTab;
 
 
@@ -63,10 +64,11 @@ public class AddDrugPage {
 	@FindBy(xpath="//div[@class='delete']/a")
 	private WebElement drugDelete;	
 
-	private WebDriver driver;
-
+	@FindBy(className = "addDrugBox")
+	WebElement adddrugdiv;
+	
 	public AddDrugPage(WebDriver driver) {
-		this.driver = driver;
+		super(driver);
 		// Initialise Elements
 		PageFactory.initElements(driver, this);
 	}
@@ -113,7 +115,7 @@ public class AddDrugPage {
 		return drugsAdded.getText();
 	}
 
-	public PharmacySearchPage navigateToPharmacyPage() {
+/*	public PharmacySearchPage navigateToPharmacyPage() {
 		pharmacySearchTab.click();
 		if (driver
 				.getTitle()
@@ -125,7 +127,26 @@ public class AddDrugPage {
 		}
 		
 		
-	}
+	}*/
+	public PharmacySearchPage navigateToPharmacyPage() {
+		
+		try {
+			Thread.sleep(5000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		pharmacySearchTab.click();
+		if (driver.getTitle().equalsIgnoreCase("Our Medicare Plan Types | UnitedHealthcare®")) {
+			System.out.println("navigateToPharmacyPage if");
+	        return new PharmacySearchPage(driver);
+		} else {
+			System.out.println("navigateToPharmacyPage else");
+		   return null;
+		}
+
+
+		}
 
 	public VPPPlanSummaryPage navigateToHealthPlansPage() {
 		
@@ -165,7 +186,7 @@ public class AddDrugPage {
 		
 	}
 	
-	private boolean validate(WebElement element) {
+	/*private boolean validate(WebElement element) {
 		try {
 			if (element.isDisplayed()) {
 				System.out.println("Element found!!!!");
@@ -178,17 +199,23 @@ public class AddDrugPage {
 
 		}
 		return false;
-	}
+	}*/
 	
 	public void addDrugFlowCheck(){
 		drugDelete.click();
 	}
-
-	public void clickAddImage() {
-		// TODO Auto-generated method stub
-		validate(adddrugdiv);
-		adddrugdiv.click();
-		
+	
+	public void clickAddImage() {       
+        
+        adddrugdiv.click();
 	}
+	
+	@Override
+	public void openAndValidate() {
+		
+
+	}
+	
+	
 
 }
