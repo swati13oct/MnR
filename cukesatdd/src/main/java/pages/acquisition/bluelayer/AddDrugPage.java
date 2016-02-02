@@ -9,7 +9,6 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-  
 import acceptancetests.atdd.util.CommonUtility;
 import atdd.framework.UhcDriver;
 
@@ -217,5 +216,17 @@ public class AddDrugPage extends UhcDriver {
 	}
 	
 	
+	public void swithedToSelectPharmacyTab(){
+		selectPharmacyTab.click();
+	}
+	
+	public PharmacySearchPage navigateToUpdatedPharmacyPage() {
+		if (currentUrl().contains("selectPharmacy")) {
+			return new PharmacySearchPage(driver);
+		} else {
+			return null;
+		}
+
+	}
 
 }

@@ -23,6 +23,7 @@ import pages.acquisition.bluelayer.PharmacySearchPage;
 import pages.acquisition.bluelayer.SelectDosagePage;
 import pages.acquisition.bluelayer.SelectGenericPage;
 import pages.acquisition.bluelayer.VPPPlanSummaryPage;
+import pages.acquisition.ulayer.SelectPharmacyPage;
 import acceptancetests.atdd.data.CommonConstants;
 import acceptancetests.atdd.data.acquisition.PageConstants;
 import acceptancetests.dce.data.DceCommonConstants;
@@ -66,6 +67,8 @@ public class DceVppPlanSummaryEditDrugUmsStepDefinition {
 		}
 		String zipCode = givenAttributesMap.get("Zip Code");
 		String county = givenAttributesMap.get("County");
+		getLoginScenario().saveBean(DceCommonConstants.ZIPCODE, zipCode);
+		getLoginScenario().saveBean(DceCommonConstants.COUNTY_NAME, county);
 		WebDriver wd = getLoginScenario().getWebDriver();
 		AcquisitionHomePage acqusitionHomePage = new AcquisitionHomePage(wd);
 		EstimateDrugCostPage estimateDrugCost = acqusitionHomePage
@@ -208,8 +211,55 @@ public class DceVppPlanSummaryEditDrugUmsStepDefinition {
 		PharmacySearchPage pharmacySearchPage = (PharmacySearchPage) getLoginScenario().getBean(PageConstants.PHARMACY_SEARCH_PAGE);
 		PharmacySearchPage updatedPharmacyPage = pharmacySearchPage.searchPharmacies(pharmacyType, distance);
 		
+		if (updatedPharmacyPage != null) {
+			getLoginScenario().saveBean(PageConstants.PHARMACY_SEARCH_PAGE,
+					updatedPharmacyPage);
+			/* Get Actual Data */
+			JSONObject availablePharmaciesActualJson = updatedPharmacyPage.availablePharmaciesJson;
+			getLoginScenario().saveBean(
+					DceCommonConstants.AVAILABLE_PHARMACIES_ACTUAL,
+					availablePharmaciesActualJson);
+
+			/* Get Expected Data */
+			String zipcode = (String) getLoginScenario().getBean(
+					DceCommonConstants.ZIPCODE);
+			String county = (String) getLoginScenario().getBean(
+					DceCommonConstants.COUNTY_NAME);
+
+			String miles = "15 miles";
+			//String pharmacyType = "All Pharmacies";
+			String fileName = pharmacyType;
+			String directory = CommonConstants.ACQUISITION_EXPECTED_DIRECTORY
+					+ File.separator + CommonConstants.SITE_BLUELAYER
+					+ File.separator + DceCommonConstants.SELECT_PHARMACY_FLOW
+					+ File.separator + zipcode + File.separator + county
+					+ File.separator + miles + File.separator;
+			JSONObject availablePharmaciesExpectedJson = updatedPharmacyPage
+					.getExpectedData(fileName, directory);
+			getLoginScenario().saveBean(
+					DceCommonConstants.AVAILABLE_PHARMACIES_EXPECTED,
+					availablePharmaciesExpectedJson);
+
+		}
+
+		
 	}
 	
+	@Then("^the user validates the available pharmacies in the selected zipcode in UMS site$")
+	public void validate_available_pharmacies() {
+		JSONObject availablePharmaciesActualJson = (JSONObject) getLoginScenario()
+				.getBean(DceCommonConstants.AVAILABLE_PHARMACIES_ACTUAL);
+		JSONObject availablePharmaciesExpectedJson = (JSONObject) getLoginScenario()
+				.getBean(DceCommonConstants.AVAILABLE_PHARMACIES_EXPECTED);
+		try {
+			JSONAssert.assertEquals(availablePharmaciesExpectedJson,
+					availablePharmaciesActualJson, true);
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+	}
 	@And("^user views list of pharmacies available in UMS site$")
 	public void user_views_pharmacyList() {
 		PharmacySearchPage pharmacySearchPage = (PharmacySearchPage) getLoginScenario().getBean(PageConstants.PHARMACY_SEARCH_PAGE);	
@@ -225,14 +275,56 @@ public class DceVppPlanSummaryEditDrugUmsStepDefinition {
 		getLoginScenario().saveBean(DceCommonConstants.PHARMACY_NAME,
 				pharmacyName);
 		 AddDrugPage addDrugPage = pharmacySearchPage.selectPharmacy(pharmacyName);
-		 if (addDrugPage != null) {
+		 
+		if (addDrugPage != null) {
 				getLoginScenario().saveBean(PageConstants.ADD_DRUG_PAGE,
 						addDrugPage);
 				Assert.assertTrue(true);
 			} else {
 				Assert.fail("pharmacy selection fails");
 			}
+		 
+	}
+	
+	@When("^user switches to pharmacy page again in UMS site$")
+	public void user_switches_to_pharmacy(){
+	
+		AddDrugPage addDrugPage = (AddDrugPage) getLoginScenario().getBean(PageConstants.ADD_DRUG_PAGE);
+		addDrugPage.swithedToSelectPharmacyTab();
+		 
+		 PharmacySearchPage pharmacySearch = addDrugPage.navigateToUpdatedPharmacyPage();
+			
+		 JSONObject availablePharmaciesActualJson = pharmacySearch.availablePharmaciesJson;
+		 getLoginScenario().saveBean(DceCommonConstants.AVAILABLE_PHARMACIES_ACTUAL, availablePharmaciesActualJson);
+		 
+		 String zipcode = (String)getLoginScenario().getBean(DceCommonConstants.ZIPCODE);
+		 String miles = "15 miles";
+			String county =(String) getLoginScenario().getBean(DceCommonConstants.COUNTY_NAME);
+			String fileName = "PharmacySelected";
+			String directory = CommonConstants.ACQUISITION_EXPECTED_DIRECTORY+File.separator+CommonConstants.SITE_BLUELAYER+File.separator+DceCommonConstants.SELECT_PHARMACY_FLOW+File.separator+zipcode+File.separator+county+File.separator+miles+File.separator;
+			JSONObject availablePharmaciesExpectedJson = pharmacySearch.getExpectedData(fileName,directory);
+			getLoginScenario().saveBean(DceCommonConstants.AVAILABLE_PHARMACIES_EXPECTED, availablePharmaciesExpectedJson);
+			System.out.println("=====availablePharmaciesActualJson======="+availablePharmaciesActualJson);
+			System.out.println("======availablePharmaciesExpectedJson======"+availablePharmaciesExpectedJson);
+			
 		
+	}
+	
+	@Then("^the user validates the order of pharmacies in UMS site$")
+	public void user_validates_pharmacy(){
+		
+		JSONObject availablePharmaciesActualJson = (JSONObject) getLoginScenario()
+				.getBean(DceCommonConstants.AVAILABLE_PHARMACIES_ACTUAL);
+		JSONObject availablePharmaciesExpectedJson = (JSONObject) getLoginScenario()
+				.getBean(DceCommonConstants.AVAILABLE_PHARMACIES_EXPECTED);
+		
+		try {
+			JSONAssert.assertEquals(availablePharmaciesActualJson, availablePharmaciesExpectedJson, true);
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
 	}
 	
 	@And("^user view the plan results in UMS site$")
