@@ -10,7 +10,9 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-public class SelectDosagePage {
+import atdd.framework.UhcDriver;
+
+public class SelectDosagePage extends UhcDriver {
 
 	@FindBy(className = "borderBtmGrey")
 	List<WebElement> drugDosages;
@@ -21,10 +23,8 @@ public class SelectDosagePage {
 	@FindBy(linkText = "Continue")
 	WebElement continueButton;
 
-	private WebDriver driver;
-
 	public SelectDosagePage(WebDriver driver) {
-		this.driver = driver;
+		super(driver);
 		// Initialise Elements
 		PageFactory.initElements(driver, this);
 	}
@@ -84,6 +84,12 @@ public class SelectDosagePage {
 				}
 			}
 		}
+
+	}
+	
+	@Override
+	public void openAndValidate() {
+		
 
 	}
 

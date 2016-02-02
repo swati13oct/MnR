@@ -10,7 +10,9 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-public class SelectGenericPage {
+import atdd.framework.UhcDriver;
+
+public class SelectGenericPage extends UhcDriver {
 	
 	/*@FindBy(name = "drug")
 	List<WebElement> drugNames;*/
@@ -18,12 +20,8 @@ public class SelectGenericPage {
 	@FindBy(linkText = "Continue")
 	WebElement continueButton;
 	
-	
-	
-	private WebDriver driver;
-
 	public SelectGenericPage(WebDriver driver) {
-		this.driver = driver;
+		super(driver);
 		// Initialise Elements
 		PageFactory.initElements(driver, this);
 	}
@@ -50,6 +48,10 @@ public class SelectGenericPage {
 		}
 
 		
+		
+	}
+	@Override
+	public void openAndValidate() {
 		
 	}
 
