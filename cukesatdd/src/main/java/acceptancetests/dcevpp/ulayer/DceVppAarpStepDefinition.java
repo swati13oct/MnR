@@ -41,7 +41,7 @@ import cucumber.table.DataTable;
  *
  */
 
-public class DceVppPlanSummaryAarpStepDefinition {
+public class DceVppAarpStepDefinition {
 
 	@Autowired
 	MRScenario loginScenario;
@@ -213,7 +213,8 @@ public class DceVppPlanSummaryAarpStepDefinition {
 		String quantity = dosageAttributesMap.get("Quantity");
 		String drugFrequency = dosageAttributesMap.get("Drug Frequency");
 		String packages = dosageAttributesMap.get("Packages");
-		getLoginScenario().saveBean(DceCommonConstants.DOSAGE_MAP, dosageAttributesMap);
+		getLoginScenario().saveBean(DceCommonConstants.DOSAGE_MAP,
+				dosageAttributesMap);
 		Object object = (Object) selectDosagePage.selectDosage(drugDosage,
 				quantity, drugFrequency, packages);
 		if (object != null) {
@@ -281,9 +282,8 @@ public class DceVppPlanSummaryAarpStepDefinition {
 						manageDrugExpectedJson);
 			}
 		}
-		
-		else
-		{
+
+		else {
 			ManageDrugPage manageDrugPage = (ManageDrugPage) getLoginScenario()
 					.getBean(PageConstants.AFTER_DOSAGE_SELECTION);
 			if (manageDrugPage != null) {
@@ -296,14 +296,17 @@ public class DceVppPlanSummaryAarpStepDefinition {
 						manageDrugActualJson);
 
 				/* Get Expected data */
-				Map<String, String> dosageAttributesMap = (Map<String, String> )getLoginScenario().getBean(DceCommonConstants.DOSAGE_MAP);
+				Map<String, String> dosageAttributesMap = (Map<String, String>) getLoginScenario()
+						.getBean(DceCommonConstants.DOSAGE_MAP);
 				String drugDosage = dosageAttributesMap.get("Drug Dosage");
 				String quantity = dosageAttributesMap.get("Quantity");
-				String drugFrequency = dosageAttributesMap.get("Drug Frequency");
+				String drugFrequency = dosageAttributesMap
+						.get("Drug Frequency");
 				String packages = dosageAttributesMap.get("Packages");
-				String fileName = drugDosage+" (Qty "+ quantity + " " + drugFrequency+")";
-				getLoginScenario().saveBean(DceCommonConstants.DRUG_WITH_DOSAGE,
-						fileName);
+				String fileName = drugDosage + " (Qty " + quantity + " "
+						+ drugFrequency + ")";
+				getLoginScenario().saveBean(
+						DceCommonConstants.DRUG_WITH_DOSAGE, fileName);
 				String directory = CommonConstants.ACQUISITION_EXPECTED_DIRECTORY
 						+ File.separator
 						+ CommonConstants.SITE_ULAYER
@@ -316,7 +319,7 @@ public class DceVppPlanSummaryAarpStepDefinition {
 						DceCommonConstants.MANAGE_DRUG_EXPECTED,
 						manageDrugExpectedJson);
 			}
-			
+
 		}
 
 	}
@@ -449,6 +452,10 @@ public class DceVppPlanSummaryAarpStepDefinition {
 				.getBean(DceCommonConstants.AVAILABLE_PHARMACIES_ACTUAL);
 		JSONObject availablePharmaciesExpectedJson = (JSONObject) getLoginScenario()
 				.getBean(DceCommonConstants.AVAILABLE_PHARMACIES_EXPECTED);
+		System.out.println("availablePharmaciesExpectedJson---->"
+				+ availablePharmaciesExpectedJson);
+		System.out.println("availablePharmaciesActualJson---->"
+				+ availablePharmaciesActualJson);
 		try {
 			JSONAssert.assertEquals(availablePharmaciesExpectedJson,
 					availablePharmaciesActualJson, true);
@@ -466,8 +473,10 @@ public class DceVppPlanSummaryAarpStepDefinition {
 				.getCells().get(0);
 		getLoginScenario().saveBean(DceCommonConstants.PHARMACY_NAME,
 				pharmacyName);
-		ManageDrugPage manageDrugPage = pharmacySearchPage
-				.selectPharmacy(pharmacyName);
+		String pharmacyType = (String) getLoginScenario().getBean(
+				DceCommonConstants.PHARMACY_TYPE);
+		ManageDrugPage manageDrugPage = pharmacySearchPage.selectPharmacy(
+				pharmacyName, pharmacyType);
 		if (manageDrugPage != null) {
 			getLoginScenario().saveBean(PageConstants.MANAGE_DRUG_PAGE,
 					manageDrugPage);
@@ -477,11 +486,18 @@ public class DceVppPlanSummaryAarpStepDefinition {
 					manageDrugActualJson);
 
 			/* Get Expected Data */
-			String fileName = pharmacyName;
+			String fileName = null;
+			if (!pharmacyType
+					.equalsIgnoreCase("Preferred Mail Service Pharmacy")) {
+				fileName = pharmacyName;
+			} else {
+				fileName = pharmacyType;
+			}
 			String drugWithDosage = (String) getLoginScenario().getBean(
 					DceCommonConstants.DRUG_WITH_DOSAGE);
-			String pharmacyType = (String) getLoginScenario().getBean(
-					DceCommonConstants.PHARMACY_TYPE);
+			if (drugWithDosage.contains("/")) {
+				drugWithDosage = drugWithDosage.replaceAll("/", "_");
+			}
 			String distance = (String) getLoginScenario().getBean(
 					DceCommonConstants.DISTANCE);
 			String directory = CommonConstants.ACQUISITION_EXPECTED_DIRECTORY
@@ -673,8 +689,19 @@ public class DceVppPlanSummaryAarpStepDefinition {
 				DceCommonConstants.COUNTY_NAME);
 		String drugWithDosage = (String) getLoginScenario().getBean(
 				DceCommonConstants.DRUG_WITH_DOSAGE);
-		String pharmacyName = (String) getLoginScenario().getBean(
-				DceCommonConstants.PHARMACY_NAME);
+		if (drugWithDosage.contains("/")) {
+			drugWithDosage = drugWithDosage.replaceAll("/", "_");
+		}
+		String pharmacyName = null;
+		String pharmacyType = (String) getLoginScenario().getBean(
+				DceCommonConstants.PHARMACY_TYPE);
+		if (!pharmacyType
+				.equalsIgnoreCase("Preferred Mail Service Pharmacy")) {
+			pharmacyName = (String) getLoginScenario().getBean(
+					DceCommonConstants.PHARMACY_NAME);
+		} else {
+			pharmacyName = pharmacyType;
+		}
 		String directory = CommonConstants.ACQUISITION_EXPECTED_DIRECTORY
 				+ File.separator + CommonConstants.SITE_ULAYER + File.separator
 				+ VPPCommonConstants.VPP_PLAN_FLOW_NAME + File.separator
@@ -692,7 +719,7 @@ public class DceVppPlanSummaryAarpStepDefinition {
 		}
 
 	}
-	
+
 	@When("^the user view plan details of the above selected plan in AARP site$")
 	public void user_views_plandetails_selected_plan_aarp() {
 		String planName = (String) getLoginScenario().getBean(
@@ -701,8 +728,9 @@ public class DceVppPlanSummaryAarpStepDefinition {
 				DceCommonConstants.ZIPCODE);
 		String county = (String) getLoginScenario().getBean(
 				DceCommonConstants.COUNTY_NAME);
-		
-		String planType = (String)getLoginScenario().getBean(VPPCommonConstants.PLAN_TYPE);
+
+		String planType = (String) getLoginScenario().getBean(
+				VPPCommonConstants.PLAN_TYPE);
 		VPPPlanSummaryPage vppPlanSummaryPage = (VPPPlanSummaryPage) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 
@@ -723,15 +751,26 @@ public class DceVppPlanSummaryAarpStepDefinition {
 			String fileName = planName;
 			String drugWithDosage = (String) getLoginScenario().getBean(
 					DceCommonConstants.DRUG_WITH_DOSAGE);
-			String pharmacyName = (String) getLoginScenario().getBean(
-					DceCommonConstants.PHARMACY_NAME);
+			if (drugWithDosage.contains("/")) {
+				drugWithDosage = drugWithDosage.replaceAll("/", "_");
+			}
+			String pharmacyName = null;
+			String pharmacyType = (String) getLoginScenario().getBean(
+					DceCommonConstants.PHARMACY_TYPE);
+			if (!pharmacyType
+					.equalsIgnoreCase("Preferred Mail Service Pharmacy")) {
+				pharmacyName = (String) getLoginScenario().getBean(
+						DceCommonConstants.PHARMACY_NAME);
+			} else {
+				pharmacyName = pharmacyType;
+			}
 			String directory = CommonConstants.ACQUISITION_EXPECTED_DIRECTORY
 					+ File.separator + CommonConstants.SITE_ULAYER
 					+ File.separator
 					+ VPPCommonConstants.VPP_PLAN_DETAILS_FLOW_NAME
 					+ File.separator + zipcode + File.separator + county
-					+ File.separator+ drugWithDosage + File.separator + pharmacyName
-					+ File.separator;
+					+ File.separator + drugWithDosage + File.separator
+					+ pharmacyName + File.separator;
 			JSONObject planDetailsExpectedJson = MRScenario.readExpectedJson(
 					fileName, directory);
 			getLoginScenario().saveBean(
@@ -747,11 +786,11 @@ public class DceVppPlanSummaryAarpStepDefinition {
 				.getBean(VPPCommonConstants.VPP_PLAN_DETAIL_ACTUAL);
 		JSONObject planDetailsExpectedJson = (JSONObject) getLoginScenario()
 				.getBean(VPPCommonConstants.VPP_PLAN_DETAIL_EXPECTED);
-		
+
 		System.out
-		.println("planDetailsActualJson---->" + planDetailsActualJson);
-		System.out
-		.println("planDetailsExpectedJson---->" + planDetailsExpectedJson);
+				.println("planDetailsActualJson---->" + planDetailsActualJson);
+		System.out.println("planDetailsExpectedJson---->"
+				+ planDetailsExpectedJson);
 		try {
 			JSONAssert.assertEquals(planDetailsExpectedJson,
 					planDetailsActualJson, true);
@@ -760,7 +799,143 @@ public class DceVppPlanSummaryAarpStepDefinition {
 			e.printStackTrace();
 		}
 	}
+	
+	@When("^the user view available options to save on drugs in AARP site$")
+	public void ways_to_save()
+	{
+		PlanDetailsPage vppPlanDetailsPage = (PlanDetailsPage)getLoginScenario().getBean(PageConstants.VPP_PLAN_DETAILS_PAGE);
+		ManageDrugPage manageDrugPage = vppPlanDetailsPage.showWaysToSave();
+		
+		/*Get Actual Json*/
+		JSONObject manageDrugActualJson = manageDrugPage.manageDrugJson;
+		getLoginScenario().saveBean(DceCommonConstants.MANAGE_DRUG_ACTUAL, manageDrugActualJson);
+		
+		/*Get Expected Json*/
+		String zipcode = (String) getLoginScenario().getBean(
+				DceCommonConstants.ZIPCODE);
+		String county = (String) getLoginScenario().getBean(
+				DceCommonConstants.COUNTY_NAME);
+		String planName = (String) getLoginScenario().getBean(
+				VPPCommonConstants.PLAN_NAME);
+		String fileName = planName;
+		String pharmacyName = null;
+		String pharmacyType = (String) getLoginScenario().getBean(
+				DceCommonConstants.PHARMACY_TYPE);
+		if (!pharmacyType
+				.equalsIgnoreCase("Preferred Mail Service Pharmacy")) {
+			pharmacyName = (String)getLoginScenario().getBean(DceCommonConstants.PHARMACY_NAME);
+		} else {
+			pharmacyName = pharmacyType;
+		}
+		String drugWithDosage = (String) getLoginScenario().getBean(
+				DceCommonConstants.DRUG_WITH_DOSAGE);
+		if (drugWithDosage.contains("/")) {
+			drugWithDosage = drugWithDosage.replaceAll("/", "_");
+		}
+		String distance = (String) getLoginScenario().getBean(
+				DceCommonConstants.DISTANCE);
+		
+		String directory = CommonConstants.ACQUISITION_EXPECTED_DIRECTORY
+				+ File.separator + CommonConstants.SITE_ULAYER
+				+ File.separator + DceCommonConstants.MANAGE_DRUG_FLOW
+				+ File.separator + drugWithDosage + File.separator+pharmacyName+File.separator;
+		
+		JSONObject manageDrugExpectedJson = manageDrugPage.getExpectedData(
+				fileName, directory);
+		getLoginScenario().saveBean(DceCommonConstants.MANAGE_DRUG_EXPECTED, manageDrugExpectedJson);
+		
+		
+	}
+	
+	@Then("^the user validates the available options to save on drug in AARP site$")
+	public void validate_manageDrug_with_waysToSave()
+	{
+		JSONObject manageDrugExpectedJson = (JSONObject)getLoginScenario().getBean(DceCommonConstants.MANAGE_DRUG_EXPECTED);
+		System.out.println("manage drug expected with ways to save---->"+manageDrugExpectedJson);
+		JSONObject manageDrugActualJson = (JSONObject)getLoginScenario().getBean(DceCommonConstants.MANAGE_DRUG_ACTUAL);
+		System.out.println("manage drug actual with ways to save---->"+manageDrugActualJson);
+		try {
+			JSONAssert.assertEquals(manageDrugExpectedJson, manageDrugActualJson, true);
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+	}
 
+	@When("^the user views reduce costs on the selected drug in AARP site$")
+	public void reduce_costs_for_selected_drug()
+	{
+		ManageDrugPage manageDrugPage = (ManageDrugPage) getLoginScenario().getBean(PageConstants.MANAGE_DRUG_PAGE);
+		Map<String,String> dosageAttributesMap = (Map<String,String>)getLoginScenario().getBean(DceCommonConstants.DOSAGE_MAP);
+		String drugDosage = dosageAttributesMap.get("Drug Dosage");
+		String quantity = dosageAttributesMap.get("Quantity");
+		String drugFrequency = dosageAttributesMap.get("Drug Frequency");
+		ManageDrugPage manageDrugPageWithReduceCost = manageDrugPage.reduceCostForADrug(drugDosage, quantity, drugFrequency);
+		
+		/*get actual response*/
+		JSONObject manageDrugActualJson = manageDrugPageWithReduceCost.manageDrugJson;
+		getLoginScenario().saveBean(DceCommonConstants.MANAGE_DRUG_ACTUAL, manageDrugActualJson);
+		
+		/*get expected response*/
+		String fileName = "reducecosts";
+		String zipcode = (String) getLoginScenario().getBean(
+				DceCommonConstants.ZIPCODE);
+		String county = (String) getLoginScenario().getBean(
+				DceCommonConstants.COUNTY_NAME);
+		String pharmacyName = null;
+		String pharmacyType = (String) getLoginScenario().getBean(
+				DceCommonConstants.PHARMACY_TYPE);
+		if (!pharmacyType
+				.equalsIgnoreCase("Preferred Mail Service Pharmacy")) {
+			pharmacyName = (String)getLoginScenario().getBean(DceCommonConstants.PHARMACY_NAME);
+		} else {
+			pharmacyName = pharmacyType;
+		}
+		String drugWithDosage = (String) getLoginScenario().getBean(
+				DceCommonConstants.DRUG_WITH_DOSAGE);
+		if (drugWithDosage.contains("/")) {
+			drugWithDosage = drugWithDosage.replaceAll("/", "_");
+		}
+		
+		String directory = CommonConstants.ACQUISITION_EXPECTED_DIRECTORY
+				+ File.separator + CommonConstants.SITE_ULAYER
+				+ File.separator + DceCommonConstants.MANAGE_DRUG_FLOW
+				+ File.separator + drugWithDosage + File.separator+pharmacyName+File.separator;
+		
+		JSONObject manageDrugExpectedJson = manageDrugPage.getExpectedData(
+				fileName, directory);
+		getLoginScenario().saveBean(DceCommonConstants.MANAGE_DRUG_EXPECTED, manageDrugExpectedJson);
+		
+	}
+	
+	@Then("^the user validates the savings available for generic drug of the selected drug in AARP site$")
+	public void validate_savings_available()
+	{
+		JSONObject manageDrugExpectedJson = (JSONObject)getLoginScenario().getBean(DceCommonConstants.MANAGE_DRUG_EXPECTED);
+		System.out.println("manage drug expected with reduce cost--->"+manageDrugExpectedJson);
+		JSONObject manageDrugActualJson = (JSONObject)getLoginScenario().getBean(DceCommonConstants.MANAGE_DRUG_ACTUAL);
+		System.out.println("manage drug actual with reduce cost---->"+manageDrugActualJson);
+		try {
+			JSONAssert.assertEquals(manageDrugExpectedJson, manageDrugActualJson, true);
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+	}
+	
+	@When("^the user switches to generic drug in AARP site$")
+	public void switch_to_generic_drug()
+	{
+		ManageDrugPage manageDrugPage = (ManageDrugPage) getLoginScenario().getBean(PageConstants.MANAGE_DRUG_PAGE);
+		Map<String,String> dosageAttributesMap = (Map<String,String>)getLoginScenario().getBean(DceCommonConstants.DOSAGE_MAP);
+		String drugDosage = dosageAttributesMap.get("Drug Dosage");
+		String quantity = dosageAttributesMap.get("Quantity");
+		String drugFrequency = dosageAttributesMap.get("Drug Frequency");
+		ManageDrugPage manageDrugPageWithReduceCost = manageDrugPage.switchToGeneric(drugDosage, quantity, drugFrequency);
+		
+	}
 	@After
 	public void tearDown() {
 		WebDriver wd = (WebDriver) getLoginScenario().getBean("webDriver");

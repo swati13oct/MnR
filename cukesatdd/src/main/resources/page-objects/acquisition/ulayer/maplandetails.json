@@ -13,6 +13,10 @@
 "identifier":"id",
 "elementName":"optionalInclude"
 },
+"noRidersAvailable":{
+"identifier":"className",
+"elementName":"nocoverage"
+},
 "prescriptionDrugCovrageLink":{
 "identifier":"id",
 "elementName":"prescriptionInclude"
@@ -25,9 +29,13 @@
 "identifier":"id",
 "elementName":"medicalInclude"
 },
-"enrollInPlan":{
-"identifier":"id",
-"elementName":"enrollDetails"
+"enrollInPlanLinkTopSection":{
+"identifier":"xpath",
+"elementName":"//td[@class='whatsincluded']/div[2]/p/a"
+},
+"backToplansLinkTopSection":{
+"identifier":"xpath",
+"elementName":"//div[@id='planBelowSection']/table/tbody/tr[1]/td[1]/p/a"
 },
 "monthlyPremium":{
 "identifier":"xpath",
@@ -57,7 +65,7 @@
 "identifier":"xpath",
 "elementName":"//table[@id='medicalTable']/tbody/tr[7]/td[2]"
 },
-"impatientHospitalCare":{
+"inpatientHospitalCare":{
 "identifier":"xpath",
 "elementName":"//table[@id='medicalTable']/tbody/tr[8]/td[2]"
 },
@@ -112,10 +120,6 @@
 "evidenceOfCoverageLink":{
 "identifier":"xpath",
 "elementName":"//table[@id='medicalTable']/tbody/tr[20]/td/div[2]/p/a"
-},
-"routinePhysical":{
-"identifier":"xpath",
-"elementName":"//table[@id='additionalTable']/tbody/tr[1]/td[2]"
 },
 "routinePhysical":{
 "identifier":"xpath",
@@ -225,6 +229,30 @@
 "identifier":"linkText",
 "elementName":"Enter drug information"
 },
+"selectedDrugName":{
+"identifier":"xpath",
+"elementName":"//div[@id='yourDruglist']/div[2]/table/tbody/tr[2]/td[1]"
+},
+"selectedDrugCoverageDetails":{
+"identifier":"xpath",
+"elementName":"//div[@id='yourDruglist']/div[2]/table/tbody/tr[2]/td[2]"
+},
+"ics_copay_or_coinsurance":{
+"identifier":"xpath",
+"elementName":"//div[@id='yourDruglist']/div[2]/table/tbody/tr[2]/td[3]"
+},
+"estimateAnnualCostViewDetailsLink":{
+"identifier":"id",
+"elementName":"loadDrugCostModelDetails"
+},
+"estimateTotalAnnualCost":{
+"identifier":"className",
+"elementName":"totalCopay"
+},
+"currentPharmacy":{
+"identifier":"className",
+"elementName":"currentpharmacy"
+},
 "providerSearchLink":{
 "identifier":"linkText",
 "elementName":"Look up Provider"
@@ -252,6 +280,14 @@
 "formularyDrugCostDrescription":{
 "identifier":"xpath",
 "elementName":"//div[@id='planCost']/table/tbody/tr[3]/td[2]"
+},
+"formularyDrugMonthlyCost":{
+"identifier":"xpath",
+"elementName":"//div[@id='planCost']/table/tbody/tr[3]/td[3]"
+},
+"formularyDrugAnnualCost":{
+"identifier":"xpath",
+"elementName":"//div[@id='planCost']/table/tbody/tr[3]/td[4]"
 },
 "medicalBenefitsDrescription":{
 "identifier":"xpath",
@@ -283,11 +319,11 @@
 },
 "planDocumentsEnglish":{
 "identifier":"xpath",
-"elementName":"//div[@class='mapTable']/div[3]/div/table/tbody/tr/td[2]"
+"elementName":"//div[@class='mapTable']/div[3]/div[1]/table/tbody/tr/td[2]"
 },
 "planDocumentsOtherLanguages":{
 "identifier":"xpath",
-"elementName":"//div[@class='mapTable']/div[3]/div/table/tbody/tr/td[3]"
+"elementName":"//div[@class='mapTable']/div[3]/div[1]/table/tbody/tr/td[3]"
 },
 "medicalProvidersEnglish":{
 "identifier":"xpath",
@@ -300,6 +336,18 @@
 "prescriptionDrugCoverageDocsEnglish":{
 "identifier":"xpath",
 "elementName":"//div[@class='mapTable']/div[3]/div[3]/table/tbody/tr/td[2]"
+},
+"prescriptionDrugCoverageDocsOtherLanguages":{
+"identifier":"xpath",
+"elementName":"//div[@class='mapTable']/div[3]/div[3]/table/tbody/tr/td[3]"
+},
+"enrollInPlanLinkBottomSection":{
+"identifier":"xpath",
+"elementName":"//div[@class='parbase section plandetailsbacktoallplansandenroll']/div[1]/div[1]/p/a"
+},
+"backToplansLinkBottomSection":{
+"identifier":"xpath",
+"elementName":"//div[@class='parbase section plandetailsbacktoallplansandenroll']/div[1]/div[2]/div/p/a/span"
 }
 }
 }

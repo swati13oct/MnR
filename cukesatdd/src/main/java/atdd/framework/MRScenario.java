@@ -35,6 +35,7 @@ import javax.naming.directory.InitialDirContext;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.springframework.ldap.core.DistinguishedName;
 import org.springframework.stereotype.Component;
@@ -647,6 +648,10 @@ public class MRScenario {
 
 	public static JSONObject readExpectedJson(String fileName, String directory) {
 
+		if(fileName.contains("/"))
+		{
+			fileName = fileName.replaceAll("/", "_");
+		}
 		fileName = fileName + ".json";
 		JSONObject jsonObject = null;
 		String parentDirectory = null;

@@ -2,13 +2,13 @@
     "slectPharmacy": "Pick a pharmacy",
     "drugs": [
         {
-            "selectedDrug": "Lipitor TAB 20MG\nQty 40 Every 3 Months",
+            "selectedDrug": "Depo-Provera 150MG INJ 150MG/ML\nQty 10 Every 3 Months",
             "switchGenericLink": "Switch to generic",
             "deleteLink": "Delete",
             "editLink": "Edit"
         }
     ],
-    "addDrugHeading": "You added Lipitor to your Drug List.",
+    "addDrugHeading": "You added Depo-Provera 150MG to your Drug List.",
     "currentPharmacy": [
         {
             "bottomPharmacyName": "Current Pharmacy: None Selected"

@@ -218,7 +218,8 @@ public class DceVppPlanDetailsAarpStepDefinition {
 	public void user_selects_pharmacy(DataTable pharmacyAttributes){
 		SelectPharmacyPage pharmacySearchPage = (SelectPharmacyPage) getLoginScenario().getBean(PageConstants.PHARMACY_SEARCH_PAGE);
 		String pharmacyName = pharmacyAttributes.getGherkinRows().get(0).getCells().get(0);
-		 ManageDrugPage manageDrugPage = pharmacySearchPage.selectPharmacy(pharmacyName);
+		String pharmacyType = (String) getLoginScenario().getBean(DceCommonConstants.PHARMACY_TYPE);
+		 ManageDrugPage manageDrugPage = pharmacySearchPage.selectPharmacy(pharmacyName, pharmacyType);
 		 if (manageDrugPage != null) {
 				getLoginScenario().saveBean(PageConstants.MANAGE_DRUG_PAGE,
 						manageDrugPage);
