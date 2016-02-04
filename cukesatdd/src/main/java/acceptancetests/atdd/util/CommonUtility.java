@@ -10,6 +10,7 @@ import java.util.Iterator;
 import org.codehaus.jackson.JsonParseException;
 import org.codehaus.jackson.map.JsonMappingException;
 import org.codehaus.jackson.map.ObjectMapper;
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.openqa.selenium.By;
@@ -125,6 +126,27 @@ public class CommonUtility {
 			waitForElementToDisappear(driver, element, timeout);
 		}
 		}
+	}
+
+	public static JSONObject concatenateJsons(
+			JSONObject firstPlanInformationExpected,
+			JSONObject secondPlanInformationExpected) {
+		Iterator<?> itr = secondPlanInformationExpected.keys();
+		while (itr.hasNext()) {
+			String key = (String) itr.next();
+			
+			try {
+				int lengthOfArray = secondPlanInformationExpected.getJSONArray(key).length();
+				for(int i=0;i<lengthOfArray; i++){
+				firstPlanInformationExpected = firstPlanInformationExpected.append(key, secondPlanInformationExpected.getJSONArray(key).get(i));
+				}
+			} catch (JSONException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		return firstPlanInformationExpected;
+		
 	}
 
 

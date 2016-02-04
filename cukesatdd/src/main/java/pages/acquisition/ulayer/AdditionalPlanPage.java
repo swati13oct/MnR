@@ -1,11 +1,14 @@
 package pages.acquisition.ulayer;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.NoSuchElementException;
+import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
+import acceptancetests.atdd.data.CommonConstants;
 import acceptancetests.atdd.util.CommonUtility;
 import atdd.framework.UhcDriver;
 
@@ -36,17 +39,24 @@ public class AdditionalPlanPage extends UhcDriver{
 	public PlanConfirmationPage addAnotherPlan(String addditionaPlanId) {
 
 		String[] planIdArray = addditionaPlanId.split("-");
-
-		memberId1.click();
-		memberId1.clear();
-		memberId1.sendKeys(planIdArray[0]);
+		sendkeys(memberId1, planIdArray[0]);
 		if (planIdArray.length > 1) {
-			memberId2.click();
-			memberId2.clear();
-			memberId2.sendKeys(planIdArray[1]);
+			sendkeys(memberId2, planIdArray[1]);
 		}
 		popupSubmitButton.click();
-		CommonUtility.checkPageIsReady(driver);
+		try {
+			if (popupSubmitButton.isDisplayed()) {
+				CommonUtility.waitForElementToDisappear(driver, popupSubmitButton,
+						CommonConstants.TIMEOUT_30);
+			}
+		} catch (NoSuchElementException e) {
+			System.out.println("popupSubmitButton not found");
+		} catch (TimeoutException ex) {
+			System.out.println("popupSubmitButton not found");
+		} catch (Exception e) {
+			System.out.println("popupSubmitButton not found");
+		}
+
 		if (driver.getTitle().equalsIgnoreCase(
 				"AARP Medicare Plans | Registration")) {
 			return new PlanConfirmationPage(driver);
