@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<soapenv:Envelope xmlns:soapenv="http://www.w3.org/2003/05/soap-envelope">
+   <soapenv:Header xmlns:wsa="http://www.w3.org/2005/08/addressing">
+      <s:Security xmlns:s="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd" xmlns:u="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd">
+         <u:Timestamp>
+            <u:Created>2016-02-03T09:53:34.887Z</u:Created>
+         </u:Timestamp>
+      </s:Security>
+      <v100:LookupKey xmlns:v100="http://eaf4esb.wesb.uhc.com/schema/framework/EAF4ESBLookupKey/v1_00">
+         <v100:environment>test_sys1</v100:environment>
+      </v100:LookupKey>
+      <wsa:Action>http://eaf4esb.wesb.uhc.com/schema/contract/consumer/getCustomerAccount/v1_00/GetCustomerAccount/getCustomerAccountResponse</wsa:Action>
+      <wsa:RelatesTo>urn:uuid:2f5d83c4-7c6b-40d7-ae4a-d1dcbcec2275</wsa:RelatesTo>
+   </soapenv:Header>
+   <soapenv:Body>
+      <v100:getCustomerAccountResponse xmlns:v100="http://eaf4esb.wesb.uhc.com/schema/contract/consumer/getCustomerAccount/v1_00" xmlns:v210="http://ovations.unitedhealthgroup.com/schema/ovations/consumer/v2_10" xmlns:v400="http://enterprise.unitedhealthgroup.com/schema/canoncial/base/common/v4_00" xmlns:v403="http://enterprise.unitedhealthgroup.com/schema/canoncial/consumer/v4_03" xmlns:v403_1="http://enterprise.unitedhealthgroup.com/schema/canoncial/base/demographic/v4_03">
+         <getCustomerAccountResponse>
+            <Consumer BusinessType="GOVT">
+               <OvationsConsumer>
+                  <v403:ConsumerPreference>
+                     <v403:ContactMechanism>
+                        <v403_1:Address>
+                           <v403_1:ContactTypeCode>PERMANENT</v403_1:ContactTypeCode>
+                           <v403_1:EffectiveDates>
+                              <v400:StartDate>2010-11-01</v400:StartDate>
+                           </v403_1:EffectiveDates>
+                           <v403_1:AddressID>46234558</v403_1:AddressID>
+                           <v403_1:AddressLine1>313 VIIKTGUK</v403_1:AddressLine1>
+                           <v403_1:AddressLine2>MAINST</v403_1:AddressLine2>
+                           <v403_1:City>VGTTWUXZIAK</v403_1:City>
+                           <v403_1:State>CT</v403_1:State>
+                           <v403_1:ZipCode>
+                              <v403_1:Zip5>06492</v403_1:Zip5>
+                              <v403_1:Zip4>4734</v403_1:Zip4>
+                           </v403_1:ZipCode>
+                           <v403_1:FipsCountyCode>
+                              <v403_1:CountyCode>3028</v403_1:CountyCode>
+                           </v403_1:FipsCountyCode>
+                           <v403_1:CountryCode>US</v403_1:CountryCode>
+                        </v403_1:Address>
+                        <v403_1:Phone>
+                           <v403_1:ContactTypeCode>DAYTIME</v403_1:ContactTypeCode>
+                           <v403_1:Area>752</v403_1:Area>
+                           <v403_1:Subscriber>7808328</v403_1:Subscriber>
+                        </v403_1:Phone>
+                        <v403_1:Phone>
+                           <v403_1:ContactTypeCode>EVENING</v403_1:ContactTypeCode>
+                           <v403_1:Area>111</v403_1:Area>
+                           <v403_1:Subscriber>1111111</v403_1:Subscriber>
+                        </v403_1:Phone>
+                     </v403:ContactMechanism>
+                  </v403:ConsumerPreference>
+                  <v210:InvalidAddressInd>N</v210:InvalidAddressInd>
+                  <v210:OutOfAreaInfo/>
+               </OvationsConsumer>
+            </Consumer>
+         </getCustomerAccountResponse>
+      </v100:getCustomerAccountResponse>
+   </soapenv:Body>
+</soapenv:Envelope>
