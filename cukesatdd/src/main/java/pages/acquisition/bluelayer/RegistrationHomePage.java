@@ -29,7 +29,7 @@ public class RegistrationHomePage extends UhcDriver {
 	@FindBy(id = "year")
 	private WebElement yearToEnter;
 
-	@FindBy(name = "continue")
+	@FindBy(name = "Continue")
 	private WebElement continueButton;
 
 	private static String PAGE_URL = MRConstants.UHCM_REGISTRATION_URL;
@@ -71,6 +71,7 @@ public class RegistrationHomePage extends UhcDriver {
 		validate(monthToEnter);
 		validate(dayToEnter);
 		validate(yearToEnter);
+		validate(continueButton);
 
 	}
 }

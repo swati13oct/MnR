@@ -588,6 +588,8 @@ public class CommonConstants {
 	public static final String SUBMIT_APPLICATION_PAGE_DATA = "submitapplication.json";
 
 	public static final String ENROLLMENT_CONFIRMATION_PAGE_DATA = "enrollmentconfirmation.json";
+
+	public static final String LOGIN_ASSISTANCE_MESSAGE_PAGE_DATA = "loginassistancemessage.json";
 	
 	
 	

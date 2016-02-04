@@ -1,4 +1,4 @@
-@vppTest
+@vppTest1
 Feature: To test plan details for a zipcode in AARP site
 Scenario Outline: Verify plan details in AARP site
 Given the user is on AARP medicare site landing page

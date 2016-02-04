@@ -49,4 +49,12 @@ public class PageConstants {
 
 	public static final String SUBMIT_APPLICATION_PAGE = "submitApplicationPage";
 
-	public static final String ENROLLMENT_CONFIRMATION_PAGE = "enrollmentConfirmationPage";}
+	public static final String ENROLLMENT_CONFIRMATION_PAGE = "enrollmentConfirmationPage";
+	
+	public static final String LOGIN_ASSISTANCE_PAGE = "loginAssistancePage";
+
+	public static final String PERSONAL_IDENTIFICATION_PAGE = "personalIdentificationPage";
+
+	public static final String LOGIN_ASSISTANCE_MESSAGE_PAGE = "loginAssitanceMessagePage";
+
+}

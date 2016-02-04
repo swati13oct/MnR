@@ -17,8 +17,8 @@ Then user registers successfully in UMS site
 	
 Examples:
 	| planMemberId	 | dateOfBirth | additionalMemberId | userName           | password   | confirmPassword | email          	| confirmEmail      |
-	| 0110425671     | 08-05-1932  | 923552129-11       | q4blgroup_049      | Password@1 | Password@1      | GPS_UHC@OPTUM.COM	| GPS_UHC@OPTUM.COM |
-	| 975017589-01   | 08-06-1939  | 1007606011         | q4blgroup_059      | Password@1 | Password@1      | TEST@OPTUM.COM	| TEST@OPTUM.COM    |
+##	| 0110425671     | 08-05-1932  | 923552129-11       | q4blgroup_049      | Password@1 | Password@1      | GPS_UHC@OPTUM.COM	| GPS_UHC@OPTUM.COM |
+##	| 975017589-01   | 08-06-1939  | 1007606011         | q4blgroup_059      | Password@1 | Password@1      | TEST@OPTUM.COM	| TEST@OPTUM.COM    |
 
 Scenario Outline: Verify registration for individual or group members in UMS site
 Given the following details with which the member registers in UMS site
@@ -40,4 +40,4 @@ Examples:
 #	 | 0141695071   | 10-11-1946  | q3uhcgrp_098       | Password@1 | Password@1      | UHCMNRPORTALS@GMAIL.COM | UHCMNRPORTALS@GMAIL.COM |
 #	 | 907051786-11 | 09-05-1940  | q3uhcgrp_001       | Password@1 | Password@1      | UHCMNRPORTALS@GMAIL.COM | UHCMNRPORTALS@GMAIL.COM |
 
-	
+##WORKING	
