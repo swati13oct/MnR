@@ -97,6 +97,21 @@ public class GlobalFooterWebElements extends UhcDriver {
 	
 	@FindBy(id = "gfn_lnk_row2_5")
 	 public static WebElement medicareSpecialNeedPlansLink;
+	
+	@FindBy(xpath = "//ul[@class='menu-links']/li[2]/a")
+	 public static WebElement importantDisclosuresLink;
+	
+	@FindBy(id = "ghn_lnk_1")
+	 public static WebElement navigationSectionHomeLink;
+	
+	@FindBy(id = "ghn_lnk_2")
+	 public static WebElement navigationSectionOurPlansLink;
+	
+	@FindBy(id = "ghn_lnk_3")
+	 public static WebElement navigationSectionmedicareEducationLink;
+	
+	@FindBy(xpath = "//div[@class='nav-search']/form/input")
+	 public static WebElement navigationSectionEnterSearch;
 
 	@Override
 	public void openAndValidate() {

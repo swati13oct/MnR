@@ -32,6 +32,10 @@ public class AcquistionCommonConstants {
 	public static final String HIDE_DISCLAIMER_ACTUAL = "hideDisclaimerActualJson";
 	public static final String HIDE_DISCLAIMER_EXPECTED = "hideDisclaimerExpectedJson";
 	
+	public static final String GLOBAL_HEADER_FLOW_NAME = "globalheader";
+	public static final String GLOBAL_HEADER_ACTUAL = "globalHeaderActual";
+	public static final String GLOBAL_HEADER_EXPECTED = "globalHeaderExpectedJson";
+	
 	
 	
 

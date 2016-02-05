@@ -571,4 +571,6 @@ public class CommonConstants {
 	
 	public static final String HOME_PAGE_DISCLAIMER_DATA = "viewalldisclaimer.json";
 	
+	public static final String GLOBAL_HEADER_PAGE_DATA = "globalheaderactual.json";
+	
 }

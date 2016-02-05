@@ -18,6 +18,9 @@ public class DisclaimersPage extends UhcDriver{
 	
 	@FindBy(id = "gf_lnk_8")
 	private WebElement agentAndBrokersLink;
+	
+	@FindBy(xpath = "//div[@id='header']/div/div/a/img")
+	private WebElement unitedHealthCareLogo;
 
 	public DisclaimersPage(WebDriver driver) {
 		super(driver);
@@ -28,6 +31,7 @@ public class DisclaimersPage extends UhcDriver{
 	@Override
 	public void openAndValidate() {
 		
+		validate(unitedHealthCareLogo);
 		
 	}
 	public AgentsAndBrokersPage agentsAndBrokersClick() {
@@ -40,5 +44,19 @@ public class DisclaimersPage extends UhcDriver{
 		return null;
 			
 		}
+	
+	public AcquisitionHomePage unitedHealthCareLogoClick() {
+		validate(unitedHealthCareLogo);
+		unitedHealthCareLogo.click();
+		validate(unitedHealthCareLogo);
+		if (driver
+				.getTitle()
+				.equalsIgnoreCase(
+						"Medicare Plans for Different Needs | UnitedHealthcare®")) {
+			return new AcquisitionHomePage(driver);
+		}
+		return null;
+
+	}
 
 }

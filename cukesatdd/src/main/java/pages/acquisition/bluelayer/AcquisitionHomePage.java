@@ -53,6 +53,15 @@ public class AcquisitionHomePage extends GlobalFooterWebElements {
        private PageData homePageDisclaimerHide;
        public JSONObject homePageDisclaimerHideJson;
        
+       private PageData globalFooter;
+
+       public JSONObject globalFooterJson;
+       
+       private PageData globalHeader;
+
+       public JSONObject globalHeaderJson;
+       
+       
        
 
        
@@ -64,9 +73,7 @@ public class AcquisitionHomePage extends GlobalFooterWebElements {
               openAndValidate();
        }
        
-       private PageData globalFooter;
-
-       public JSONObject globalFooterJson;
+       
        
        
 
@@ -123,6 +130,34 @@ public class AcquisitionHomePage extends GlobalFooterWebElements {
               return globalFooterJson;
               
        }
+       
+       public JSONObject accessingGlobalHeader() {
+           
+           String fileName = CommonConstants.GLOBAL_HEADER_PAGE_DATA;
+           globalHeader = CommonUtility.readPageData(fileName,
+                        CommonConstants.PAGE_OBJECT_DIRECTORY_BLUELAYER_ACQ);
+           
+           JSONObject jsonObject = new JSONObject();
+           for (String key : globalHeader.getExpectedData().keySet()) {
+           WebElement element = findElement(globalHeader.getExpectedData()
+           .get(key));
+           if (element != null) {
+           if(validate(element)){
+           try {
+           jsonObject.put(key, element.getText());
+           } catch (JSONException e) {
+           // TODO Auto-generated catch block
+           e.printStackTrace();
+           }
+           }
+           }
+           }
+           globalHeaderJson = jsonObject;
+           
+           
+           return globalHeaderJson;
+           
+    }
        
        public JSONObject accessViewAllDisclaimerInformation() {
               disclaimerViewLink.click();
@@ -266,6 +301,42 @@ public SiteMapUMSPage siteMapFooterClick() {
 		}
 		return null;
 	}
+	
+	public DisclaimersPage importantDisclaimersClick() {
+	    validate(importantDisclosuresLink);
+	    importantDisclosuresLink.click();
+          validate(importantDisclosuresLink);
+          if(driver.getTitle().equalsIgnoreCase("Disclaimers | UnitedHealthcare®")){
+          return new DisclaimersPage(driver);
+          }
+
+          return null;
+          }
+	
+	public AcquisitionHomePage navigationSectionHomeLinkClick() {
+	    validate(navigationSectionHomeLink);
+	    navigationSectionHomeLink.click();
+          validate(navigationSectionHomeLink);
+          if(driver.getTitle().equalsIgnoreCase("Medicare Plans for Different Needs | UnitedHealthcare®")){
+          return new AcquisitionHomePage(driver);
+          }
+
+          return null;
+          }
+	
+	
+	
+	public Boolean navigationSectionEnterSearchClick() {
+	    validate(navigationSectionEnterSearch);
+	    navigationSectionEnterSearch.click();
+	    navigationSectionEnterSearch.sendKeys("home");
+	    String search = navigationSectionEnterSearch.getAttribute("value");
+          if(search.equalsIgnoreCase("home")){
+        	  return true;
+          }
+
+          return false;
+          }
        
        
        
