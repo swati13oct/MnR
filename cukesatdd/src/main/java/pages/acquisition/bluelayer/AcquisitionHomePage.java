@@ -62,9 +62,6 @@ public class AcquisitionHomePage extends GlobalFooterWebElements {
        public JSONObject globalHeaderJson;
        
        
-       
-
-       
        private static String UMS_ACQISITION_PAGE_URL = MRConstants.UHC_URL;
 
        public AcquisitionHomePage(WebDriver driver) {
@@ -72,9 +69,6 @@ public class AcquisitionHomePage extends GlobalFooterWebElements {
               PageFactory.initElements(driver, this);
               openAndValidate();
        }
-       
-       
-       
        
 
        public EstimateDrugCostPage switchToPrescriptionDrug() {
@@ -229,6 +223,11 @@ public SiteMapUMSPage siteMapFooterClick() {
        @Override
        public void openAndValidate() {
               start(UMS_ACQISITION_PAGE_URL);
+              validate(navigationSectionHomeLink);
+              validate(navigationSectionOurPlansLink);
+              validate(navigationSectionmedicareEducationLink);
+              validate(navigationSectionEnterSearch);
+              
               validate(prescriptionsLink);
               validate(zipCodeField);
               validate(viewPlansButton);
