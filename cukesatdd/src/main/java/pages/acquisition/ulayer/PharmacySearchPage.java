@@ -1,7 +1,7 @@
 /**
  * 
  */
-package pages.acquisition.bluelayer;
+package pages.acquisition.ulayer;
 
 import java.util.List;
 
@@ -60,7 +60,7 @@ public class PharmacySearchPage extends UhcDriver {
 	@FindBys(value = { @FindBy(xpath = "//ul[@id='pharm_services']/li") })
 	private List<WebElement> pharmacyTypesCheckboxes;
 
-	@FindBy(xpath = "//form[@id='searchCriteria']/div[3]/p[2]/span")
+	@FindBy(xpath = "//form[@id='searchCriteria']/div[3]/h3")
 	private WebElement narrowYourSearchContent;
 
 	@FindBy(xpath = "//div[@id='medicareTitle']/h1")
@@ -92,7 +92,7 @@ public class PharmacySearchPage extends UhcDriver {
 			}
 		}
 		if (driver.getTitle().equalsIgnoreCase(
-				"Locate a Pharmacy | UnitedHealthcare®")) {
+				"Find a Pharmacy | AARP® Medicare Plans from UnitedHealthcare®")) {
 			return new PharmacySearchPage(driver);
 		}
 		return null;

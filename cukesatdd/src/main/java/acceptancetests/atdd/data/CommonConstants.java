@@ -591,6 +591,4 @@ public class CommonConstants {
 
 	public static final String LOGIN_ASSISTANCE_MESSAGE_PAGE_DATA = "loginassistancemessage.json";
 	
-	
-	
 }

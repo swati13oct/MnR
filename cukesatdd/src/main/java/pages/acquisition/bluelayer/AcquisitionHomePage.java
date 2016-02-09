@@ -35,7 +35,10 @@ public class AcquisitionHomePage extends UhcDriver {
 	private WebElement homefooter;
 
 	@FindBys(value = { @FindBy(xpath = "//table[@id='selectcountytable']/tbody/tr/td") })
-	List<WebElement> countyRows;
+	private List<WebElement> countyRows;
+	
+	@FindBy(linkText = "pharmacy")
+	private WebElement pharmacyLink;
 
 	private static String UMS_ACQISITION_PAGE_URL = MRConstants.UHC_URL;
 
@@ -69,6 +72,16 @@ public class AcquisitionHomePage extends UhcDriver {
 		}
 		return null;
 
+	}
+	
+	public PharmacySearchPage navigateToPharmacyLocator() {
+		pharmacyLink.click();
+		if(driver.getTitle().equalsIgnoreCase("Locate a Pharmacy | UnitedHealthcare®"))
+		{
+			return new PharmacySearchPage(driver); 
+		}
+		return null;
+		
 	}
 
 	public String selectsHomeFooter() {

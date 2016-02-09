@@ -1,0 +1,20 @@
+{
+"pharmacySaverRightRailWidget":"Pharmacy SaverTM offers prescriptions as low as $1.501.\nPharmacy SaverTM is a cost savings prescription drug program available to you as a plan member. UnitedHealthcare® has worked with many of our network pharmacies to offer even lower prices on many common prescription drugs. You may be able to pay less than your plan co-pay for your prescription drugs with the Pharmacy Saver program. Simply use one of the participating pharmacies and show your member ID card.\nLook up qualifying drugs, prices and participating pharmacies\n1Drugs and prices may vary between pharmacies and are subject to change during the plan year. Prices are based on quantity filled at the pharmacy. Quantities may be limited by pharmacy based on their dispensing policy or by the plan based on Quantity Limit requirements; if prescription is in excess of a limit, co-pay amounts may be higher.",
+"evenPharmacyRow":[
+					{"even":"2\nSAMS PHARMACY 10-6630 106630\n7370 WEST 52ND AVENUE\nARVADA, CO 80002\n303-420-7770 (TTY 711)\nPharmacy Saver™ Program\nStandard Network Pharmacy\nStandard Network Pharmacy (90-day)\n0.4 Miles\nView Map"},
+					{"even":"4\nSAFEWAY PHARMACY #1479 1479\n3900 WADSWORTH BOULEVARD\nWHEATRIDGE, CO 80033\n303-456-4413 (TTY 711)\nPharmacy Saver™ Program\nStandard Network Pharmacy\nStandard Network Pharmacy (90-day)\n1.4 Miles\nView Map"},
+					{"even":"6\nKING SOOPERS PHARMACY 620022\n9731 W 58TH AVE\nARVADA, CO 80002\n303-421-1200 (TTY 711)\nPharmacy Saver™ Program\nStandard Network Pharmacy\nStandard Network Pharmacy (90-day)\nE-prescribing\n1.4 Miles\nView Map"},
+					{"even":"8\nWAL-MART PHARMACY 10-5957 105957\n5957 W 44TH AVE\nWHEAT RIDGE, CO 80212\n303-222-4474 (TTY 711)\nPharmacy Saver™ Program\nStandard Network Pharmacy\nStandard Network Pharmacy (90-day)\n1.5 Miles\nView Map"},
+					{"even":"10\nWHEAT RIDGE PROFESSIONAL PHARMAC\n6650 W 38TH AVE\nWHEAT RIDGE, CO 80033\n303-421-6111 (TTY 711)\nStandard Network Pharmacy\nStandard Network Pharmacy (90-day)\n1.7 Miles\nView Map"}
+				],
+"pharmacyTitleText":"Pharmacies close to 80002 for AARP MedicareComplete SecureHorizons Plan 1 (HMO)",
+"contactUsRightRailWidget":"Contact OptumRx\nOptumRx Preferred Mail Service Pharmacy\nPO Box 2975\nShawnee Mission, KS 66201-1375\nCall toll-free: 1-877-266-4832, 24 hours a day, 7 days a week. TTY users, call: 711.",
+"preferredMailRightRailWidget":"Preferred Mail Service Pharmacy\nGet savings and convenience delivered right to your mailbox when you use home delivery through OptumRx, your plan's preferred mail service pharmacy. You could pay less for the same medications.\nLearn more about the OptumRx Preferred Mail Service Pharmacy",
+"oddPharmacyRow":[
+					{"odd":"1\nCOSTCO PHARMACY 676\n5195 WADSWORTH BLVD\nARVADA, CO 80002\n303-463-3602 (TTY 711)\nStandard Network Pharmacy\nStandard Network Pharmacy (90-day)\nE-prescribing\n0.1 Miles\nView Map"},
+					{"odd":"3\nWALGREENS #4366 4366\n4401 WADSWORTH BLVD\nWHEATRIDGE, CO 80033\n303-463-7719 (TTY 711)\nPharmacy Saver™ Program\nStandard Network Pharmacy\nOpen 24 hours\nStandard Network Pharmacy (90-day)\nE-prescribing\n1 Miles\nView Map"},
+					{"odd":"5\nPIONEER PHARMACY LLC\n3895 UPHAM ST\nWHEATRIDGE, CO 80033\n303-252-7990 (TTY 711)\nStandard Network Pharmacy\nLong-term care\n1.4 Miles\nView Map"},
+					{"odd":"7\nTARGET PHARMACY 2021\n5071 KIPLING ST\nWHEAT RIDGE, CO 80033\n303-209-1849 (TTY 711)\nPharmacy Saver™ Program\nStandard Network Pharmacy\nStandard Network Pharmacy (90-day)\nE-prescribing\n1.5 Miles\nView Map"},
+					{"odd":"9\nKMART PHARMACY4129 4129\n9881 W 58TH AVE\nARVADA, CO 80002\n303-422-8008 (TTY 711)\nStandard Network Pharmacy\nStandard Network Pharmacy (90-day)\n1.5 Miles\nView Map"}
+				]
+}

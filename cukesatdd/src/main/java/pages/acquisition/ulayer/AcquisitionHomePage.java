@@ -10,7 +10,6 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.FindBys;
 import org.openqa.selenium.support.PageFactory;
-
 import acceptancetests.atdd.data.MRConstants;
 import atdd.framework.UhcDriver;
 
@@ -37,6 +36,9 @@ public class AcquisitionHomePage extends UhcDriver {
 
 	@FindBy(linkText = "Look up ZIP code")
 	private WebElement lookupZipcode;
+	
+	@FindBy(linkText = "pharmacy")
+	private WebElement pharmacyLink;
 
 	@FindBys(value = { @FindBy(xpath = "//table[@id='selectcountytable']/tbody/tr/td") })
 	List<WebElement> countyRows;
@@ -113,6 +115,15 @@ public class AcquisitionHomePage extends UhcDriver {
 	public String selectsHomeFooter() {
 
 		return homefooter.getText();
+	}
+
+	public PharmacySearchPage navigateToPharmacyLocator() {
+		pharmacyLink.click();
+		if(driver.getTitle().equalsIgnoreCase("Find a Pharmacy | AARP® Medicare Plans from UnitedHealthcare®"))
+		{
+			return new PharmacySearchPage(driver); 
+		}
+		return null;
 	}
 
 }

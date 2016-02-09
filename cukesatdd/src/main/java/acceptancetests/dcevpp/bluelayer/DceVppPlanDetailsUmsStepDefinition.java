@@ -14,7 +14,7 @@ import pages.acquisition.bluelayer.AcquisitionHomePage;
 import pages.acquisition.bluelayer.AddDrugPage;
 import pages.acquisition.bluelayer.EnterZipCodePage;
 import pages.acquisition.bluelayer.EstimateDrugCostPage;
-import pages.acquisition.bluelayer.PharmacySearchPage;
+import pages.acquisition.bluelayer.PharmacySelectorPage;
 import pages.acquisition.bluelayer.PlanDetailsPage;
 import pages.acquisition.bluelayer.VPPPlanSummaryPage;
 import pages.acquisition.bluelayer.SelectDosagePage;
@@ -168,7 +168,7 @@ public class DceVppPlanDetailsUmsStepDefinition {
 	@And("^the user performs pharmacy search in the UMS site$")
 	public void user_performs_paharmacySearch() {
 		AddDrugPage addDrugPage = (AddDrugPage) getLoginScenario().getBean(PageConstants.ADD_DRUG_PAGE);
-		PharmacySearchPage pharmacySearchPage = addDrugPage.navigateToPharmacyPage();
+		PharmacySelectorPage pharmacySearchPage = addDrugPage.navigateToPharmacyPage();
 		if (pharmacySearchPage != null) {
 			getLoginScenario().saveBean(PageConstants.PHARMACY_SEARCH_PAGE,
 					pharmacySearchPage);
@@ -190,13 +190,13 @@ public class DceVppPlanDetailsUmsStepDefinition {
 		}
 		String pharmacyType = pharmacyAttributesMap.get("Pharmacy Type");
 		String distance = pharmacyAttributesMap.get("Distance");
-		PharmacySearchPage pharmacySearchPage = (PharmacySearchPage) getLoginScenario().getBean(PageConstants.PHARMACY_SEARCH_PAGE);
+		PharmacySelectorPage pharmacySearchPage = (PharmacySelectorPage) getLoginScenario().getBean(PageConstants.PHARMACY_SEARCH_PAGE);
 		pharmacySearchPage.selectPharmacyType(pharmacyType, distance);
 	}
 	
 	@And("^the user views list of pharmacies available in the UMS site$")
 	public void user_views_pharmacyList() {
-		PharmacySearchPage pharmacySearchPage = (PharmacySearchPage) getLoginScenario().getBean(PageConstants.PHARMACY_SEARCH_PAGE);	
+		PharmacySelectorPage pharmacySearchPage = (PharmacySelectorPage) getLoginScenario().getBean(PageConstants.PHARMACY_SEARCH_PAGE);	
 		String pharmacyList = pharmacySearchPage.getPharmacyList();
 		System.out.println("pharmacyList====>"+pharmacyList);
 	}
@@ -204,7 +204,7 @@ public class DceVppPlanDetailsUmsStepDefinition {
 	
 	@And("^the user selects from the list of pharmacies in the UMS site$")
 	public void user_selects_pharmacy(DataTable pharmacyAttributes){
-		PharmacySearchPage pharmacySearchPage = (PharmacySearchPage) getLoginScenario().getBean(PageConstants.PHARMACY_SEARCH_PAGE);
+		PharmacySelectorPage pharmacySearchPage = (PharmacySelectorPage) getLoginScenario().getBean(PageConstants.PHARMACY_SEARCH_PAGE);
 		String pharmacyName = pharmacyAttributes.getGherkinRows().get(0).getCells().get(0);
 		 AddDrugPage addDrugPage = pharmacySearchPage.selectPharmacy(pharmacyName);
 		 if (addDrugPage != null) {

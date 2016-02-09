@@ -99,13 +99,13 @@ public class AddDrugPage {
 		return drugsAdded.getText();
 	}
 
-	public PharmacySearchPage navigateToPharmacyPage() {
+	public PharmacySelectorPage navigateToPharmacyPage() {
 		pharmacySearchTab.click();
 		if (driver
 				.getTitle()
 				.equalsIgnoreCase(
 						"Our Medicare Plan Types | UnitedHealthcare®")) {
-			return new PharmacySearchPage(driver);
+			return new PharmacySelectorPage(driver);
 		} else {
 			return null;
 		}
