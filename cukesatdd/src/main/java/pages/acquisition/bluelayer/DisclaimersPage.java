@@ -19,7 +19,7 @@ public class DisclaimersPage extends UhcDriver{
 	@FindBy(id = "gf_lnk_8")
 	private WebElement agentAndBrokersLink;
 	
-	@FindBy(xpath = "//div[@id='header']/div/div/a/img")
+	@FindBy(xpath = "//h1[@class='logo']/a/p/img")
 	private WebElement unitedHealthCareLogo;
 
 	public DisclaimersPage(WebDriver driver) {

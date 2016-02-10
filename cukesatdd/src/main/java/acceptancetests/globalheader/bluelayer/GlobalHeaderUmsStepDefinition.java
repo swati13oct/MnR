@@ -113,7 +113,7 @@ public class GlobalHeaderUmsStepDefinition {
 		}
 	}
 	
-/*	@And("^user clicks on home link in navigation section on UHC Medicaresolutions Site page$")
+	@And("^user clicks on home link in navigation section on UHC Medicaresolutions Site page$")
 	public void user_clicks_HomeLink_navigation_ums() {
 		
 		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
@@ -127,7 +127,7 @@ public class GlobalHeaderUmsStepDefinition {
 		else{
 			Assert.fail("Error in disclaimers page");
 		}
-	}*/
+	}
 	
 /*	
 	@And("^user clicks on Our Plans link in navigation section on UHC Medicaresolutions Site page$")
