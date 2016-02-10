@@ -2,6 +2,7 @@ package pages.acquisition.bluelayer;
 
 /*@author pagarwa5*/
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.json.JSONException;
@@ -47,6 +48,9 @@ public class AcquisitionHomePage extends GlobalFooterWebElements {
        @FindBy(className = "disclaimer hideLink")
        private WebElement disclaimerHideLink;
        
+       @FindBy(id = "medicareTitle")
+   	   private WebElement medicareTitleText;
+       
        private PageData homePageDisclaimer;
        public JSONObject homePageDisclaimerJson;
        
@@ -60,6 +64,9 @@ public class AcquisitionHomePage extends GlobalFooterWebElements {
        private PageData globalHeader;
 
        public JSONObject globalHeaderJson;
+       
+       private PageData alreadyPlanMember;
+   	   public JSONObject alreadyPlanMemberJson;
        
        
        private static String UMS_ACQISITION_PAGE_URL = MRConstants.UHC_URL;
@@ -337,10 +344,87 @@ public SiteMapUMSPage siteMapFooterClick() {
           return false;
           }
        
-       
-       
-       
-       
+	public Boolean validate_alreadyPlanMemberButton_inactive() {
+
+		return validate(alreadyPlanMemberButtonInactive);
+	}
+
+	public Boolean validate_alreadyPlanMemberButton_active() {
+		validate(alreadyPlanMemberButton);
+		alreadyPlanMemberButton.click();
+		return validate(alreadyPlanMemberButtonActive);
+		}
+	
+	public JSONObject getAlreadyPlanMemberJSON() {
+		String fileName = CommonConstants.ALREADY_PLAN_MEMBER_PAGE_DATA;
+		alreadyPlanMember = CommonUtility.readPageData(fileName,
+				CommonConstants.PAGE_OBJECT_DIRECTORY_BLUELAYER_ACQ);
+
+		JSONObject jsonObject = new JSONObject();
+		for (String key : alreadyPlanMember.getExpectedData().keySet()) {
+			WebElement element = findElement(alreadyPlanMember.getExpectedData()
+					.get(key));
+			if (element != null) {
+				if (validate(element)) {
+					try {
+						jsonObject.put(key, element.getText());
+					} catch (JSONException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				}
+			}
+		}
+		alreadyPlanMemberJson = jsonObject;
+
+		return alreadyPlanMemberJson;
+	}
+
+	public Boolean validate_textField() {
+		validate(usernameField);
+		usernameField.click();
+		usernameField.sendKeys("q1blayer");
+		String user = usernameField.getAttribute("value");
+		validate(passwordField);
+		passwordField.click();
+		passwordField.sendKeys("Password");
+		String pass = passwordField.getAttribute("value");
+		if(user.equalsIgnoreCase("q1blayer") && pass.equalsIgnoreCase("Password")){
+			return true;
+		}
+		return false;
+	}
+
+	public LoginAssistancePage forgotUsernamePasswordClick() {
+		validate(forgotUsernameLink);
+		forgotUsernameLink.click();
+		ArrayList<String> tabs = new ArrayList<String> (driver.getWindowHandles());
+	    driver.switchTo().window(tabs.get(1));
+	    validate(medicareTitleText);
+		if(driver.getTitle().equalsIgnoreCase("UnitedHealthcare Medicare Solutions |Username and Password Assistance"))
+		{
+			return new LoginAssistancePage(driver);
+		}
+		return null;
+	
+	}
+
+	public RegistrationHomePage registerHereLinkClick() {
+		ArrayList<String> tabs = new ArrayList<String> (driver.getWindowHandles());
+	    driver.switchTo().window(tabs.get(0));
+	    validate(alreadyPlanMemberButton);
+		alreadyPlanMemberButton.click();
+	    validate(registerHereLink);
+		registerHereLink.click();
+		ArrayList<String> tabs1= new ArrayList<String> (driver.getWindowHandles());
+		 driver.switchTo().window(tabs1.get(2));
+	    validate(medicareTitleText);
+		if(driver.getTitle().equalsIgnoreCase("UnitedHealthcare Medicare Solutions | Registration"))
+		{
+			return new RegistrationHomePage(driver);
+		}
+		return null;
+	}      
 
 }
 

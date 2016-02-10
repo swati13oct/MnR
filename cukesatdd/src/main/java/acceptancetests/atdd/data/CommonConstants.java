@@ -573,4 +573,6 @@ public class CommonConstants {
 	
 	public static final String GLOBAL_HEADER_PAGE_DATA = "globalheaderactual.json";
 	
+	public static final String ALREADY_PLAN_MEMBER_PAGE_DATA = "alreadyPlanMemberActual.json";
+	
 }

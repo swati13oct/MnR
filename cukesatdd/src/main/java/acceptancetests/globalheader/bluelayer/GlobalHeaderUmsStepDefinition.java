@@ -14,7 +14,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import pages.acquisition.bluelayer.AcquisitionHomePage;
 import pages.acquisition.bluelayer.DisclaimersPage;
+import pages.acquisition.bluelayer.LoginAssistancePage;
 import pages.acquisition.bluelayer.OurPlansPage;
+import pages.acquisition.bluelayer.RegistrationHomePage;
 import acceptancetests.atdd.data.CommonConstants;
 import acceptancetests.atdd.data.acquisition.PageConstants;
 import acceptancetests.globalfooter.data.AcquistionCommonConstants;
@@ -183,7 +185,131 @@ public class GlobalHeaderUmsStepDefinition {
 		}
 
 	}
+	@When("^the header is rendered, the Already a Member button should display in it's inactive state on the Brand section of UMS site$")
+	public void access_brand_section() {
+		AcquisitionHomePage acquisitionHomePage = (AcquisitionHomePage) getLoginScenario()
+				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+		Boolean state = acquisitionHomePage
+				.validate_alreadyPlanMemberButton_inactive();
+		if (state != null && state == true) {
+			Assert.assertTrue(true);
+		} else {
+			Assert.fail("Already a Member button is not inactive");
+		}
+
+	}
+
+	@And("^user clicks on Already a member button in its inactive state on the Brand section of UMS site$")
+	public void click_alreadyPlanMember() {
+		AcquisitionHomePage acquisitionHomePage = (AcquisitionHomePage) getLoginScenario()
+				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+		Boolean state = acquisitionHomePage
+				.validate_alreadyPlanMemberButton_active();
+		// getting actual json object
+		JSONObject alreadyPlanMemberActualJson = acquisitionHomePage
+				.getAlreadyPlanMemberJSON();
+		/* Get expected data */
+		String fileName = "alreadyPlanMemberExpected";
+		String directory = CommonConstants.ACQUISITION_EXPECTED_DIRECTORY
+				+ File.separator + CommonConstants.SITE_BLUELAYER
+				+ File.separator + AcquistionCommonConstants.HEADER_FLOW_NAME
+				+ File.separator;
+		JSONObject alreadyPlanMemberExpectedJson = MRScenario.readExpectedJson(
+				fileName, directory);
+
+		getLoginScenario().saveBean(
+				AcquistionCommonConstants.ALREADY_PLAN_MEMBER_ACTUAL,
+				alreadyPlanMemberActualJson);
+		getLoginScenario().saveBean(
+				AcquistionCommonConstants.ALREADY_PLAN_MEMBER_EXPECTED,
+				alreadyPlanMemberExpectedJson);
+
+		if (state != null && state == true) {
+			Assert.assertTrue(true);
+		} else {
+			Assert.fail("Already a Member button dropdown is not displayed");
+		}
+	}
+
+	@And("^user clicks on user name, password text field in the Already a plan member drop down of UMS site$")
+	public void click_field() {
+		AcquisitionHomePage acquisitionHomePage = (AcquisitionHomePage) getLoginScenario()
+				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+		Boolean value = acquisitionHomePage.validate_textField();
+		if (value != null && value == true) {
+			Assert.assertTrue(true);
+		} else {
+			Assert.fail("failed");
+		}
+
+	}
+
+	@And("^user clicks on forgot your username or password link of UMS site$")
+	public void click_forgotUsernamePassword() {
+		AcquisitionHomePage acquisitionHomePage = (AcquisitionHomePage) getLoginScenario()
+				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+		LoginAssistancePage loginAssistancePage = acquisitionHomePage
+				.forgotUsernamePasswordClick();
+		if (loginAssistancePage != null) {
+			getLoginScenario().saveBean(PageConstants.LOGIN_ASSISTANCE_PAGE,
+					loginAssistancePage);
+			Assert.assertTrue(true);
+
+		} else {
+			Assert.fail("Login Assistance page not found");
+		}
+
+	}
+
+	@And("^user switches back to acquisition home page of UMS Site$")
+	public void backToHomePage() {
+		LoginAssistancePage loginAssistancePage = (LoginAssistancePage) getLoginScenario()
+				.getBean(PageConstants.LOGIN_ASSISTANCE_PAGE);
+		AcquisitionHomePage acquisitionHomePage = loginAssistancePage
+				.switchBack();
+		if (acquisitionHomePage != null) {
+			getLoginScenario().saveBean(PageConstants.ACQUISITION_HOME_PAGE,
+					acquisitionHomePage);
+			Assert.assertTrue(true);
+
+		} else {
+			Assert.fail("Home page not found");
+		}
+
+	}
 	
-	
+	@And("^user clicks on register here link of UMS site$")
+	public void click_registerHere()
+	{
+		AcquisitionHomePage acquisitionHomePage = (AcquisitionHomePage) getLoginScenario()
+				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+		RegistrationHomePage registrationHomePage=acquisitionHomePage.registerHereLinkClick();
+		if(registrationHomePage!= null){
+			Assert.assertTrue(true);
+		} else {
+			Assert.fail("Registration page not found");
+		}
+		
+	}
+	@Then("^user validates all the elements in the Already a plan member drop down of UMS site$")
+	public void validate_allElements()
+	{
+		JSONObject alreadyPlanMemberActualJson = (JSONObject) getLoginScenario()
+				.getBean(AcquistionCommonConstants.ALREADY_PLAN_MEMBER_ACTUAL);
+
+		JSONObject alreadyPlanMemberExpectedJson = (JSONObject) getLoginScenario()
+				.getBean(AcquistionCommonConstants.ALREADY_PLAN_MEMBER_EXPECTED);
+
+		System.out.println("alreadyPlanMemberActualJson---->" + alreadyPlanMemberActualJson);
+		System.out.println("alreadyPlanMemberExpectedJson---->" + alreadyPlanMemberExpectedJson);
+		try {
+			JSONAssert.assertEquals(alreadyPlanMemberExpectedJson, alreadyPlanMemberActualJson,
+					true);
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+	}
 
 }

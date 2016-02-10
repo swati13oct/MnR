@@ -112,6 +112,33 @@ public class GlobalFooterWebElements extends UhcDriver {
 	
 	@FindBy(id = "search-field")
 	 public static WebElement navigationSectionEnterSearch;
+	
+	@FindBy(className = "menu-dropdown")
+	 public static WebElement alreadyPlanMemberButtonInactive;
+	
+	@FindBy(xpath="//div[@class='menu-dropdown active']")
+	 public static WebElement alreadyPlanMemberButtonActive;
+	
+	@FindBy(xpath="//div[@class='menu-dropdown']/div[1]/span")
+	 public static WebElement alreadyPlanMemberButton;
+	
+	@FindBy(className="sign-in-text")
+	 public static WebElement signInText;
+	
+	@FindBy(id = "top-user")
+	 public static WebElement usernameField;
+	
+	@FindBy(id = "top-pass")
+	 public static WebElement passwordField;
+	
+	@FindBy(xpath = "//div[@class='menu-dropdown active']/div[2]/div/a")
+	 public static WebElement forgotUsernameLink;
+	
+	@FindBy(xpath = "//div[@class='menu-dropdown active']/div[2]/div/span[2]/a")
+	 public static WebElement registerHereLink;
+	
+	@FindBy(className = "not-registered-text")
+	 public static WebElement notRegisteredText;
 
 	@Override
 	public void openAndValidate() {
