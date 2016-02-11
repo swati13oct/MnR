@@ -39,5 +39,19 @@ public class DisclaimersAARPPage extends GlobalFooterWebElements{
 		}
 		return null;
 	}
+	
+	public AcquisitionHomePage logoClick() {
+		validate(logoLink);
+		logoLink.click();
+		validate(logoLink);
+		if (driver
+				.getTitle()
+				.equalsIgnoreCase(
+						"Medicare Plans | AARP® Medicare Plans from UnitedHealthcare®")) {
+			return new AcquisitionHomePage(driver);
+		}
+		
+		return null;
+	}
 
 }

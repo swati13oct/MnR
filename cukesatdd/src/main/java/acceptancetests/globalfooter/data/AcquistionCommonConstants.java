@@ -36,6 +36,8 @@ public class AcquistionCommonConstants {
 	public static final String GLOBAL_HEADER_ACTUAL = "globalHeaderActual";
 	public static final String GLOBAL_HEADER_EXPECTED = "globalHeaderExpectedJson";
 	public static final String HEADER_FLOW_NAME = "header";
+	public static final String HEADER_ACTUAL = "headerActualJson";
+	public static final String HEADER_EXPECTED = "headerExpectedJson";
 	public static final String ALREADY_PLAN_MEMBER_ACTUAL = "alreadyPlanMemberActualJson";
 	public static final String ALREADY_PLAN_MEMBER_EXPECTED = "alreadyPlanMemberExpectedJson";
 	
