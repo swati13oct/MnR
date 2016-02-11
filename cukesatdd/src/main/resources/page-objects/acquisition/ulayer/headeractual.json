@@ -1,0 +1,17 @@
+{
+"url":null,
+"expectedData":{
+"logoLink":{
+"identifier":"xpath",
+"elementName":"//h1[@class='logo']/a"
+},
+"importantDisclosuresLink":{
+"identifier":"xpath",
+"elementName":"//ul[@class='menu-links']/li[2]/a"
+},
+"visitAARPLink":{
+"identifier":"xpath",
+"elementName":"//ul[@class='menu-links']/li[1]/a"
+}
+}
+}
