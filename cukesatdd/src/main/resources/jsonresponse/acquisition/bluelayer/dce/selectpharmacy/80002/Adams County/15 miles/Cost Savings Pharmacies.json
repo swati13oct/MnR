@@ -1,0 +1,89 @@
+{
+   "pharmacyTypes":[
+      {
+         "pharmacyDropDown":"Pharmacy Saver™ Pharmacy"
+      },
+      {
+         "pharmacyDropDown":"Standard Network Pharmacy"
+      },
+      {
+         "pharmacyDropDown":"Preferred Mail Service Pharmacy"
+      }
+   ],
+   "previousLink":"Previous results",
+   "pharmacies":[
+      {
+         "pharmacyDistance":"0.14",
+         "selectLink":"Select",
+         "pharmacyName":"COSTCO PHARMACY 676"
+      },
+      {
+         "pharmacyDistance":"1.4",
+         "selectLink":"Select",
+         "pharmacyName":"PIONEER PHARMACY LLC"
+      },
+      {
+         "pharmacyDistance":"1.52",
+         "selectLink":"Select",
+         "pharmacyName":"KMART PHARMACY4129 4129"
+      },
+      {
+         "pharmacyDistance":"1.69",
+         "selectLink":"Select",
+         "pharmacyName":"WHEAT RIDGE PROFESSIONAL PHARMAC"
+      },
+      {
+         "pharmacyDistance":"2.1",
+         "selectLink":"Select",
+         "pharmacyName":"MEDSTUFF INC 1"
+      },
+      {
+         "pharmacyDistance":"2.91",
+         "selectLink":"Select",
+         "pharmacyName":"WARD ROAD PHARMACY"
+      },
+      {
+         "pharmacyDistance":"3.59",
+         "selectLink":"Select",
+         "pharmacyName":"BLUE SPRUCE PHARMACY"
+      },
+      {
+         "pharmacyDistance":"4.81",
+         "selectLink":"Select",
+         "pharmacyName":"FRONTIER PHARMACY"
+      },
+      {
+         "pharmacyDistance":"4.84",
+         "selectLink":"Select",
+         "pharmacyName":"COAST TO COAST COMPOUNDING"
+      },
+      {
+         "pharmacyDistance":"5",
+         "selectLink":"Select",
+         "pharmacyName":"COSTCO PHARMACY 440"
+      }
+   ],
+   "zipcode":"80002",
+   "editZipCodeLink":"Edit ZIP code",
+   "miles":[
+      {
+         "milesDropDown":"1 mile"
+      },
+      {
+         "milesDropDown":"2 miles"
+      },
+      {
+         "milesDropDown":"5 miles"
+      },
+      {
+         "milesDropDown":"10 miles"
+      },
+      {
+         "milesDropDown":"15 miles"
+      },
+      {
+         "milesDropDown":"25 miles"
+      }
+   ],
+   "nextLink":"Next results"
+}

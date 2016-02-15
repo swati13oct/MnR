@@ -12,7 +12,6 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-
 import acceptancetests.atdd.data.CommonConstants;
 import acceptancetests.atdd.data.ElementData;
 import acceptancetests.atdd.data.PageData;
@@ -268,6 +267,33 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	public String viewplans(String planName) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	public GetStartedPage clicksOnEnterDrugInformationLink(String planName) {
+		if (planName.contains("HMO")) {
+			for (WebElement plan : maPlanElement) {
+				if (plan.getText().contains(planName)) {
+					ElementData elementData = new ElementData("id",
+							"enterDrugMA");
+					findChildElement(elementData, plan).click();
+				}
+			}
+		}
+		if (planName.contains("PDP")) {
+			for (WebElement plan : pdpPlanElement) {
+				if (plan.getText().contains(planName)) {
+					ElementData elementData = new ElementData("id",
+							"enterDrugPDP"); // TODO Re-check
+					findChildElement(elementData, plan).click();
+				}
+			}
+		}
+		if (driver.getTitle().equalsIgnoreCase(
+				"Our Medicare Plan Types | UnitedHealthcare®")) {
+			return new GetStartedPage(driver);
+		}
+		return null;
+
 	}
 
 }

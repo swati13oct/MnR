@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <searchMembersResponse xmlns="http://www.uhc.com/2009/12/29/com/uhg/ovations/portal/rxconnection/membersearch/service" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+         <members>
+            <member>
+               <accountId>P0281123708007</accountId>
+               <birthDate>1936-07-08T05:00:00Z</birthDate>
+               <carrierId>PDP9604</carrierId>
+               <city>FTC UWGA</city>
+               <firstName>RVEA</firstName>
+               <fromDate>2015-01-01T06:00:00Z</fromDate>
+               <groupId>GS5805002E</groupId>
+               <lastName>BTT</lastName>
+               <medicareId>037242344A</medicareId>
+               <memberId>0131159581</memberId>
+               <state>NY</state>
+               <throughDate>2039-12-31T06:00:00Z</throughDate>
+            </member>
+         </members>
+      </searchMembersResponse>
+   </soapenv:Body>
+</soapenv:Envelope>

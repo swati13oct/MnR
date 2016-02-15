@@ -14,8 +14,10 @@ import pages.acquisition.bluelayer.AcquisitionHomePage;
 import pages.acquisition.bluelayer.AddDrugPage;
 import pages.acquisition.bluelayer.EnterZipCodePage;
 import pages.acquisition.bluelayer.EstimateDrugCostPage;
+import pages.acquisition.bluelayer.ManageDrugPage;
 import pages.acquisition.bluelayer.PharmacySelectorPage;
 import pages.acquisition.bluelayer.PlanDetailsPage;
+import pages.acquisition.bluelayer.SelectPharmacyPage;
 import pages.acquisition.bluelayer.VPPPlanSummaryPage;
 import pages.acquisition.bluelayer.SelectDosagePage;
 import pages.acquisition.bluelayer.SelectGenericPage;
@@ -132,7 +134,7 @@ public class DceVppPlanDetailsUmsStepDefinition {
 		String drugQuantity = dosageAttributesMap.get("Drug Quantity");
 		String drugFrequency = dosageAttributesMap.get("Drug Frequency");
 		String packages = dosageAttributesMap.get("Packages");
-		SelectGenericPage selectGenericPage = selectDosagePage.selectDosage(
+		SelectGenericPage selectGenericPage = (SelectGenericPage) selectDosagePage.selectDosage(
 				drugDosage, drugQuantity, drugFrequency,packages);
 		if (selectGenericPage != null) {
 			getLoginScenario().saveBean(PageConstants.SELECT_GENERIC_PAGE,
@@ -148,10 +150,10 @@ public class DceVppPlanDetailsUmsStepDefinition {
 	public void user_selects_lowCostOptions(DataTable drugAttributes) {
 		String drugName = drugAttributes.getGherkinRows().get(0).getCells().get(0);
 		SelectGenericPage selectGenericPage = (SelectGenericPage) getLoginScenario().getBean(PageConstants.SELECT_GENERIC_PAGE);
-		AddDrugPage addDrugPage = selectGenericPage.selectGeneric(drugName);
-		if (addDrugPage != null) {
-			getLoginScenario().saveBean(PageConstants.ADD_DRUG_PAGE,
-					addDrugPage);
+		ManageDrugPage manageDrugPage =selectGenericPage.selectGeneric(drugName);
+		if (manageDrugPage != null) {
+			getLoginScenario().saveBean(PageConstants.MANAGE_DRUG_PAGE,
+					manageDrugPage);
 			Assert.assertTrue(true);
 		} else {
 			Assert.fail("generic drug selection unsuccessful");
@@ -160,15 +162,17 @@ public class DceVppPlanDetailsUmsStepDefinition {
 	}
 	@And("^the user views all the added drugs in the UMS site$")
 	public void user_views_drugs_added() {
-		AddDrugPage addDrugPage = (AddDrugPage) getLoginScenario().getBean(PageConstants.ADD_DRUG_PAGE);
-		String drugsAdded  = addDrugPage.validateDrugsAdded();
-		System.out.println("drugsAdded"+ drugsAdded);
+		ManageDrugPage manageDrugPage = (ManageDrugPage) getLoginScenario().getBean(
+				PageConstants.MANAGE_DRUG_PAGE);
+		/*String drugsAdded  = addDrugPage.validateDrugsAdded();
+		System.out.println("drugsAdded"+ drugsAdded);*/
 	}
 	
 	@And("^the user performs pharmacy search in the UMS site$")
 	public void user_performs_paharmacySearch() {
-		AddDrugPage addDrugPage = (AddDrugPage) getLoginScenario().getBean(PageConstants.ADD_DRUG_PAGE);
-		PharmacySelectorPage pharmacySearchPage = addDrugPage.navigateToPharmacyPage();
+		ManageDrugPage manageDrugPage = (ManageDrugPage) getLoginScenario().getBean(
+				PageConstants.MANAGE_DRUG_PAGE);
+		SelectPharmacyPage pharmacySearchPage = manageDrugPage.navigateToPharmacyPage();
 		if (pharmacySearchPage != null) {
 			getLoginScenario().saveBean(PageConstants.PHARMACY_SEARCH_PAGE,
 					pharmacySearchPage);
@@ -190,7 +194,7 @@ public class DceVppPlanDetailsUmsStepDefinition {
 		}
 		String pharmacyType = pharmacyAttributesMap.get("Pharmacy Type");
 		String distance = pharmacyAttributesMap.get("Distance");
-		PharmacySelectorPage pharmacySearchPage = (PharmacySelectorPage) getLoginScenario().getBean(PageConstants.PHARMACY_SEARCH_PAGE);
+		SelectPharmacyPage pharmacySearchPage = (SelectPharmacyPage) getLoginScenario().getBean(PageConstants.PHARMACY_SEARCH_PAGE);
 		pharmacySearchPage.selectPharmacyType(pharmacyType, distance);
 	}
 	
@@ -219,8 +223,9 @@ public class DceVppPlanDetailsUmsStepDefinition {
 	
 	@And("^the user views the plan results in the UMS site$")
 	public void user_views_plan_results(){
-		AddDrugPage addDrugPage = (AddDrugPage) getLoginScenario().getBean(PageConstants.ADD_DRUG_PAGE);
-		VPPPlanSummaryPage healthPlansPage  = addDrugPage.navigateToHealthPlansPage();
+		ManageDrugPage manageDrugPage = (ManageDrugPage) getLoginScenario().getBean(
+				PageConstants.MANAGE_DRUG_PAGE);
+		VPPPlanSummaryPage healthPlansPage = manageDrugPage.navigateToPlanSummaryPage();
 		if (healthPlansPage != null) {
 			getLoginScenario().saveBean(PageConstants.HEALTH_PLANS_PAGE,
 					healthPlansPage);

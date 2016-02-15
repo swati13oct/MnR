@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<s:Envelope xmlns:s="http://schemas.xmlsoap.org/soap/envelope/">
+   <s:Body>
+      <GetCountiesByZipcodeResponse xmlns="http://mapsservices.uhc.com/">
+         <GetCountiesByZipcodeResult xmlns:a="http://schemas.datacontract.org/2004/07/UHG.MAPS.Core.Dto" xmlns:i="http://www.w3.org/2001/XMLSchema-instance">
+            <a:County>
+               <a:CmsCode>420</a:CmsCode>
+               <a:CmsName>New York</a:CmsName>
+               <a:FipsCode>061</a:FipsCode>
+               <a:FipsName>New York County</a:FipsName>
+               <a:State>
+                  <a:CmsCode>33</a:CmsCode>
+                  <a:Code>NY</a:Code>
+                  <a:FipsStateID>36</a:FipsStateID>
+                  <a:Name>New York</a:Name>
+               </a:State>
+            </a:County>
+         </GetCountiesByZipcodeResult>
+      </GetCountiesByZipcodeResponse>
+   </s:Body>
+</s:Envelope>

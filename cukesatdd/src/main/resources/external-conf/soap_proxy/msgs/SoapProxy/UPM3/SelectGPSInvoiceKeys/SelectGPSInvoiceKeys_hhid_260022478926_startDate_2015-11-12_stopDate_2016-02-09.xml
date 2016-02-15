@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
+   <soap:Body>
+      <ns1:invokeServiceResponse xmlns:ns1="http://upm3.uhc.com/colddocument/selectgpsinvoicekeys/v1">
+         <return xmlns:ns2="http://upm3.uhc.com/colddocument/selectgpsinvoicekeys/v1">
+            <responseHeader>
+               <serviceCallStatus>SUCCESS</serviceCallStatus>
+               <externalId xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true"/>
+               <serviceName>SelectGPSInvoiceKeys</serviceName>
+               <serviceVersion>1</serviceVersion>
+               <logLevel>DEFAULT</logLevel>
+               <upmEnvironment>u3c-ts2</upmEnvironment>
+               <internalUse>
+                  <uid>[[EWP||223172467]UPM3-BRAVO-FRONTEND]</uid>
+                  <serviceName>SelectGPSInvoiceKeys</serviceName>
+                  <serviceVersion>1</serviceVersion>
+                  <originalConsumer>EWP</originalConsumer>
+                  <originalServiceName>SelectGPSInvoiceKeys</originalServiceName>
+                  <originalServiceVersion>1</originalServiceVersion>
+                  <logSequence>14</logSequence>
+                  <uidGeneratedBy>DP</uidGeneratedBy>
+               </internalUse>
+            </responseHeader>
+         </return>
+      </ns1:invokeServiceResponse>
+   </soap:Body>
+</soap:Envelope>

@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<soapenv:Envelope xmlns:soapenv="http://www.w3.org/2003/05/soap-envelope">
+   <soapenv:Header xmlns:wsa="http://www.w3.org/2005/08/addressing">
+      <s:Security xmlns:s="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd" xmlns:u="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd">
+         <u:Timestamp>
+            <u:Created>2016-02-09T10:30:29.300Z</u:Created>
+         </u:Timestamp>
+      </s:Security>
+      <v100:LookupKey xmlns:v100="http://eaf4esb.wesb.uhc.com/schema/framework/EAF4ESBLookupKey/v1_00">
+         <v100:environment>test_sys1</v100:environment>
+      </v100:LookupKey>
+      <wsa:Action>http://eaf4esb.wesb.uhc.com/schema/contract/planpolicy/getlistpolicy/v1_10/GetListPolicy/getListPolicyInfoResponse</wsa:Action>
+      <wsa:RelatesTo>urn:uuid:3a4dae8a-c720-4d30-aa6d-00749beadaeb</wsa:RelatesTo>
+   </soapenv:Header>
+   <soapenv:Body>
+      <v110:getListPolicyInfoResponse xmlns:v110="http://eaf4esb.wesb.uhc.com/schema/contract/planpolicy/getlistpolicy/v1_10" xmlns:v210="http://ovations.unitedhealthgroup.com/schema/ovations/planpolicy/regionplan/v2_10" xmlns:v210_1="http://ovations.unitedhealthgroup.com/schema/ovations/planpolicy/individual/v2_10" xmlns:v210_2="http://ovations.unitedhealthgroup.com/schema/ovations/common/v2_10" xmlns:v210_3="http://ovations.unitedhealthgroup.com/schema/ovations/planpolicy/plan/v2_10" xmlns:v210_4="http://ovations.unitedhealthgroup.com/schema/ovations/consumer/v2_10" xmlns:v210_5="http://ovations.unitedhealthgroup.com/schema/ovations/customer/v2_10" xmlns:v400="http://enterprise.unitedhealthgroup.com/schema/canoncial/base/common/v4_00" xmlns:v403="http://enterprise.unitedhealthgroup.com/schema/canoncial/planpolicy/plan/v4_03" xmlns:v403_1="http://enterprise.unitedhealthgroup.com/schema/canoncial/base/demographic/v4_03">
+         <v110:GetListPolicyResponse>
+            <ConsumerAccount BusinessType="GOVT">
+               <Individual>
+                  <Plan>
+                     <v403:PlanID>33961002</v403:PlanID>
+                     <v403:Contract>
+                        <v403:ContractNo>S5805</v403:ContractNo>
+                     </v403:Contract>
+                     <v403:PBPNo>811</v403:PBPNo>
+                     <v403:BusinessSegment>PDP</v403:BusinessSegment>
+                     <v403:PlanTypeCode>EMPLOYER_PDP</v403:PlanTypeCode>
+                     <v403:PlanName>UnitedHealthcare MedicareRx for Groups (PDP)</v403:PlanName>
+                     <v403:EffectiveDates>
+                        <v400:StartDate>2013-02-01</v400:StartDate>
+                     </v403:EffectiveDates>
+                     <v210:RegionID>999</v210:RegionID>
+                     <v210:RxPlanInd>Y</v210:RxPlanInd>
+                     <v210_1:AdditionalAttribute>
+                        <v210_2:Name>ElectionType</v210_2:Name>
+                        <v210_2:Value>SEP EGHP</v210_2:Value>
+                     </v210_1:AdditionalAttribute>
+                     <v210_1:AdditionalAttribute>
+                        <v210_2:Name>PlanMemberNo</v210_2:Name>
+                        <v210_2:Value>013115958-1</v210_2:Value>
+                     </v210_1:AdditionalAttribute>
+                     <v210_1:AdditionalAttribute>
+                        <v210_2:Name>PlanSystemTypeID</v210_2:Name>
+                        <v210_2:Value>PBM</v210_2:Value>
+                     </v210_1:AdditionalAttribute>
+                     <v210_1:PlanProfile>
+                        <v210_3:EffectiveDates>
+                           <v400:StartDate>2013-02-01</v400:StartDate>
+                           <v400:StopDate>9999-12-31</v400:StopDate>
+                        </v210_3:EffectiveDates>
+                        <v210_3:UncoveredMonths>0</v210_3:UncoveredMonths>
+                        <v210_3:CredibleCoverageInd>Y</v210_3:CredibleCoverageInd>
+                        <v210_3:NetLepAmount>0</v210_3:NetLepAmount>
+                        <v210_3:CopayCategoryID>0</v210_3:CopayCategoryID>
+                     </v210_1:PlanProfile>
+                     <v210_1:PlanCode>E</v210_1:PlanCode>
+                     <v210_1:PlanCategory>PDP</v210_1:PlanCategory>
+                     <v210_1:PlanStatus>ACTIVE</v210_1:PlanStatus>
+                     <v210_1:RxInfo>
+                        <v210_3:RxBin>610097</v210_3:RxBin>
+                        <v210_3:RxGroup>HPA</v210_3:RxGroup>
+                        <v210_3:RxPCN>9999</v210_3:RxPCN>
+                     </v210_1:RxInfo>
+                  </Plan>
+                  <Consumer>
+                     <v210_4:OvationsMemberProfile>
+                        <v210_4:MemberNo>13115958-1</v210_4:MemberNo>
+                        <v210_4:SystemID>
+                           <v210_4:MemberNoSystemID>PBM</v210_4:MemberNoSystemID>
+                        </v210_4:SystemID>
+                        <v210_4:EffectiveDates>
+                           <v400:StartDate>2013-02-01</v400:StartDate>
+                        </v210_4:EffectiveDates>
+                     </v210_4:OvationsMemberProfile>
+                  </Consumer>
+                  <EmployerType>
+                     <v210_5:EmployerID>23708</v210_5:EmployerID>
+                     <v210_5:EmployerName>HP</v210_5:EmployerName>
+                     <v210_5:Branch>
+                        <v210_5:BranchID>78171</v210_5:BranchID>
+                        <v210_5:BranchName> BRANCH 007  EMP (23708)</v210_5:BranchName>
+                        <v210_5:BranchNo>007</v210_5:BranchNo>
+                     </v210_5:Branch>
+                     <v210_5:EmployerContact>
+                        <v403_1:Address>
+                           <v403_1:ZipCode>
+                              <v403_1:Zip5>94304</v403_1:Zip5>
+                           </v403_1:ZipCode>
+                           <v403_1:CountryCode>US</v403_1:CountryCode>
+                        </v403_1:Address>
+                     </v210_5:EmployerContact>
+                     <v210_5:EmployersType>SUBSIDIZED</v210_5:EmployersType>
+                     <v210_5:EmployerGroup>800 SERIES CUSTOM</v210_5:EmployerGroup>
+                     <v210_5:EffectiveDates>
+                        <v400:StartDate>2013-02-01</v400:StartDate>
+                        <v400:StopDate>2014-12-31</v400:StopDate>
+                     </v210_5:EffectiveDates>
+                  </EmployerType>
+                  <EmployerType>
+                     <v210_5:EmployerID>23708</v210_5:EmployerID>
+                     <v210_5:EmployerName>HP</v210_5:EmployerName>
+                     <v210_5:Branch>
+                        <v210_5:BranchID>78171</v210_5:BranchID>
+                        <v210_5:BranchName> BRANCH 007  EMP (23708)</v210_5:BranchName>
+                        <v210_5:BranchNo>007</v210_5:BranchNo>
+                     </v210_5:Branch>
+                     <v210_5:EmployerContact>
+                        <v403_1:Address>
+                           <v403_1:ZipCode>
+                              <v403_1:Zip5>94304</v403_1:Zip5>
+                           </v403_1:ZipCode>
+                           <v403_1:CountryCode>US</v403_1:CountryCode>
+                        </v403_1:Address>
+                     </v210_5:EmployerContact>
+                     <v210_5:EmployersType>SUBSIDIZED</v210_5:EmployersType>
+                     <v210_5:EmployerGroup>800 SERIES CUSTOM</v210_5:EmployerGroup>
+                     <v210_5:EffectiveDates>
+                        <v400:StartDate>2015-01-01</v400:StartDate>
+                        <v400:StopDate>9999-12-31</v400:StopDate>
+                     </v210_5:EffectiveDates>
+                  </EmployerType>
+               </Individual>
+            </ConsumerAccount>
+         </v110:GetListPolicyResponse>
+      </v110:getListPolicyInfoResponse>
+   </soapenv:Body>
+</soapenv:Envelope>

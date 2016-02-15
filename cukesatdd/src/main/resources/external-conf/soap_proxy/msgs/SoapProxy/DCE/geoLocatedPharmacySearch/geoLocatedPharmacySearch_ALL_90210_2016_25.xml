@@ -1,0 +1,325 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/">
+   <soapenv:Body>
+      <geoLocatedPharmacySearchResponse xmlns="http://www.uhc.com/dcewebservice/2014/05/21/service/geoLocatedPharmacySearch/">
+         <geoLocatedPharmacySearchResultList>
+            <geoLocatedPharmacySearchResult>
+               <geoLocatedPharmacySearchCriteria>
+                  <pharmacyAddress>
+                     <addressLine1/>
+                     <addressLine2/>
+                     <city/>
+                     <zipCode>90210</zipCode>
+                  </pharmacyAddress>
+                  <radius>25</radius>
+                  <yearFilter>2016</yearFilter>
+                  <paginationIndex>1</paginationIndex>
+                  <maxRecordPerPage>10</maxRecordPerPage>
+               </geoLocatedPharmacySearchCriteria>
+               <geoLocatedPharmacyList>
+                  <geoLocatedPharmacy>
+                     <latitude>34.0908596</latitude>
+                     <longitude>-118.3926447</longitude>
+                     <pharmacyNumber>0576148</pharmacyNumber>
+                     <pharmacyName><![CDATA[HORTON AND CONVERSE PHARMACY 33]]></pharmacyName>
+                     <pharmacyType>4</pharmacyType>
+                     <network>Rx</network>
+                     <twentyFourHour>false</twentyFourHour>
+                     <ninetyDay>true</ninetyDay>
+                     <retail>true</retail>
+                     <mailOrder>false</mailOrder>
+                     <longTermCare>false</longTermCare>
+                     <homeInfusionSpecialty>false</homeInfusionSpecialty>
+                     <indianTribalUnion>false</indianTribalUnion>
+                     <pharmacySaver>false</pharmacySaver>
+                     <eprescription>true</eprescription>
+                     <preferredNetwork>false</preferredNetwork>
+                     <npiNumber>1073683157</npiNumber>
+                     <year>2016</year>
+                     <pharmacyAddress>
+                        <addressLine1><![CDATA[9201 W SUNSET BLVD]]></addressLine1>
+                        <addressLine2/>
+                        <city><![CDATA[LOS ANGELES]]></city>
+                        <state>CA</state>
+                        <zipCode>90069</zipCode>
+                        <phoneNumber>3232720488</phoneNumber>
+                        <TTY>711</TTY>
+                     </pharmacyAddress>
+                     <distanceFromSearchLocation>1.32</distanceFromSearchLocation>
+                  </geoLocatedPharmacy>
+                  <geoLocatedPharmacy>
+                     <latitude>34.0832919</latitude>
+                     <longitude>-118.3868974</longitude>
+                     <pharmacyNumber>0594855</pharmacyNumber>
+                     <pharmacyName><![CDATA[VONS PHARMACY #2739 2739]]></pharmacyName>
+                     <pharmacyType>4</pharmacyType>
+                     <network>Rx</network>
+                     <twentyFourHour>false</twentyFourHour>
+                     <ninetyDay>true</ninetyDay>
+                     <retail>true</retail>
+                     <mailOrder>false</mailOrder>
+                     <longTermCare>false</longTermCare>
+                     <homeInfusionSpecialty>false</homeInfusionSpecialty>
+                     <indianTribalUnion>false</indianTribalUnion>
+                     <pharmacySaver>true</pharmacySaver>
+                     <eprescription>true</eprescription>
+                     <preferredNetwork>true</preferredNetwork>
+                     <npiNumber>1992741508</npiNumber>
+                     <year>2016</year>
+                     <pharmacyAddress>
+                        <addressLine1><![CDATA[8969 SANTA MONICA BLVD]]></addressLine1>
+                        <addressLine2/>
+                        <city><![CDATA[WEST HOLLYWOOD]]></city>
+                        <state>CA</state>
+                        <zipCode>90069</zipCode>
+                        <phoneNumber>3102735126</phoneNumber>
+                        <TTY>711</TTY>
+                     </pharmacyAddress>
+                     <distanceFromSearchLocation>1.92</distanceFromSearchLocation>
+                  </geoLocatedPharmacy>
+                  <geoLocatedPharmacy>
+                     <latitude>34.0843878</latitude>
+                     <longitude>-118.3854302</longitude>
+                     <pharmacyNumber>5629110</pharmacyNumber>
+                     <pharmacyName><![CDATA[GREAT EARTH COMPOUNDS]]></pharmacyName>
+                     <pharmacyType>4</pharmacyType>
+                     <network>Rx</network>
+                     <twentyFourHour>false</twentyFourHour>
+                     <ninetyDay>true</ninetyDay>
+                     <retail>true</retail>
+                     <mailOrder>false</mailOrder>
+                     <longTermCare>false</longTermCare>
+                     <homeInfusionSpecialty>false</homeInfusionSpecialty>
+                     <indianTribalUnion>false</indianTribalUnion>
+                     <pharmacySaver>false</pharmacySaver>
+                     <eprescription>false</eprescription>
+                     <preferredNetwork>false</preferredNetwork>
+                     <npiNumber>1316123334</npiNumber>
+                     <year>2016</year>
+                     <pharmacyAddress>
+                        <addressLine1><![CDATA[8941 SANTA MONICA BLVD]]></addressLine1>
+                        <addressLine2/>
+                        <city><![CDATA[WEST HOLLYWOOD]]></city>
+                        <state>CA</state>
+                        <zipCode>90069</zipCode>
+                        <phoneNumber>3236500025</phoneNumber>
+                        <TTY>711</TTY>
+                     </pharmacyAddress>
+                     <distanceFromSearchLocation>1.92</distanceFromSearchLocation>
+                  </geoLocatedPharmacy>
+                  <geoLocatedPharmacy>
+                     <latitude>34.0879096</latitude>
+                     <longitude>-118.3793749</longitude>
+                     <pharmacyNumber>0558796</pharmacyNumber>
+                     <pharmacyName><![CDATA[CARE PLUS CVS/PHARMACY # 02801]]></pharmacyName>
+                     <pharmacyType>4</pharmacyType>
+                     <network>Rx</network>
+                     <twentyFourHour>false</twentyFourHour>
+                     <ninetyDay>true</ninetyDay>
+                     <retail>true</retail>
+                     <mailOrder>false</mailOrder>
+                     <longTermCare>false</longTermCare>
+                     <homeInfusionSpecialty>false</homeInfusionSpecialty>
+                     <indianTribalUnion>false</indianTribalUnion>
+                     <pharmacySaver>false</pharmacySaver>
+                     <eprescription>false</eprescription>
+                     <preferredNetwork>false</preferredNetwork>
+                     <npiNumber>1407965973</npiNumber>
+                     <year>2016</year>
+                     <pharmacyAddress>
+                        <addressLine1><![CDATA[8607 SANTA MONICA BLVD]]></addressLine1>
+                        <addressLine2/>
+                        <city><![CDATA[WEST HOLLYWOOD]]></city>
+                        <state>CA</state>
+                        <zipCode>90069</zipCode>
+                        <phoneNumber>3106599810</phoneNumber>
+                        <TTY>711</TTY>
+                     </pharmacyAddress>
+                     <distanceFromSearchLocation>2.06</distanceFromSearchLocation>
+                  </geoLocatedPharmacy>
+                  <geoLocatedPharmacy>
+                     <latitude>34.0881411</latitude>
+                     <longitude>-118.3786569</longitude>
+                     <pharmacyNumber>0519528</pharmacyNumber>
+                     <pharmacyName><![CDATA[CAPITOL DRUGS]]></pharmacyName>
+                     <pharmacyType>4</pharmacyType>
+                     <network>Rx</network>
+                     <twentyFourHour>false</twentyFourHour>
+                     <ninetyDay>true</ninetyDay>
+                     <retail>true</retail>
+                     <mailOrder>false</mailOrder>
+                     <longTermCare>false</longTermCare>
+                     <homeInfusionSpecialty>false</homeInfusionSpecialty>
+                     <indianTribalUnion>false</indianTribalUnion>
+                     <pharmacySaver>false</pharmacySaver>
+                     <eprescription>true</eprescription>
+                     <preferredNetwork>false</preferredNetwork>
+                     <npiNumber>1952317273</npiNumber>
+                     <year>2016</year>
+                     <pharmacyAddress>
+                        <addressLine1><![CDATA[8578 SANTA MONICA BLVD]]></addressLine1>
+                        <addressLine2/>
+                        <city><![CDATA[WEST HOLLYWOOD]]></city>
+                        <state>CA</state>
+                        <zipCode>90069</zipCode>
+                        <phoneNumber>3102890773</phoneNumber>
+                        <TTY>711</TTY>
+                     </pharmacyAddress>
+                     <distanceFromSearchLocation>2.09</distanceFromSearchLocation>
+                  </geoLocatedPharmacy>
+                  <geoLocatedPharmacy>
+                     <latitude>34.0889471</latitude>
+                     <longitude>-118.3775141</longitude>
+                     <pharmacyNumber>0519453</pharmacyNumber>
+                     <pharmacyName><![CDATA[WEST KNOLL PHARMACY]]></pharmacyName>
+                     <pharmacyType>4</pharmacyType>
+                     <network>Rx</network>
+                     <twentyFourHour>false</twentyFourHour>
+                     <ninetyDay>true</ninetyDay>
+                     <retail>true</retail>
+                     <mailOrder>false</mailOrder>
+                     <longTermCare>false</longTermCare>
+                     <homeInfusionSpecialty>false</homeInfusionSpecialty>
+                     <indianTribalUnion>false</indianTribalUnion>
+                     <pharmacySaver>false</pharmacySaver>
+                     <eprescription>true</eprescription>
+                     <preferredNetwork>false</preferredNetwork>
+                     <npiNumber>1902827975</npiNumber>
+                     <year>2016</year>
+                     <pharmacyAddress>
+                        <addressLine1><![CDATA[8547 SANTA MONICA BLVD]]></addressLine1>
+                        <addressLine2/>
+                        <city><![CDATA[WEST ]]><![CDATA[HOLLYWOOD]]></city>
+                        <state>CA</state>
+                        <zipCode>90069</zipCode>
+                        <phoneNumber>3106572027</phoneNumber>
+                        <TTY>711</TTY>
+                     </pharmacyAddress>
+                     <distanceFromSearchLocation>2.12</distanceFromSearchLocation>
+                  </geoLocatedPharmacy>
+                  <geoLocatedPharmacy>
+                     <latitude>34.0897443</latitude>
+                     <longitude>-118.3759959</longitude>
+                     <pharmacyNumber>5618509</pharmacyNumber>
+                     <pharmacyName><![CDATA[CVS PHARMACY 09652]]></pharmacyName>
+                     <pharmacyType>4</pharmacyType>
+                     <network>Rx</network>
+                     <twentyFourHour>false</twentyFourHour>
+                     <ninetyDay>true</ninetyDay>
+                     <retail>true</retail>
+                     <mailOrder>false</mailOrder>
+                     <longTermCare>false</longTermCare>
+                     <homeInfusionSpecialty>false</homeInfusionSpecialty>
+                     <indianTribalUnion>false</indianTribalUnion>
+                     <pharmacySaver>false</pharmacySaver>
+                     <eprescription>true</eprescription>
+                     <preferredNetwork>false</preferredNetwork>
+                     <npiNumber>1053353243</npiNumber>
+                     <year>2016</year>
+                     <pharmacyAddress>
+                        <addressLine1><![CDATA[8491 WEST SANTA MONICA BOULEVARD]]></addressLine1>
+                        <addressLine2/>
+                        <city><![CDATA[WEST HOLLYWOOD]]></city>
+                        <state>CA</state>
+                        <zipCode>90069</zipCode>
+                        <phoneNumber>3103607303</phoneNumber>
+                        <TTY>711</TTY>
+                     </pharmacyAddress>
+                     <distanceFromSearchLocation>2.17</distanceFromSearchLocation>
+                  </geoLocatedPharmacy>
+                  <geoLocatedPharmacy>
+                     <latitude>34.0892884</latitude>
+                     <longitude>-118.376061</longitude>
+                     <pharmacyNumber>5643374</pharmacyNumber>
+                     <pharmacyName><![CDATA[COMMUNITY, A WALGREENS PHARMACY]]></pharmacyName>
+                     <pharmacyType>4</pharmacyType>
+                     <network>Rx</network>
+                     <twentyFourHour>false</twentyFourHour>
+                     <ninetyDay>true</ninetyDay>
+                     <retail>true</retail>
+                     <mailOrder>false</mailOrder>
+                     <longTermCare>false</longTermCare>
+                     <homeInfusionSpecialty>false</homeInfusionSpecialty>
+                     <indianTribalUnion>false</indianTribalUnion>
+                     <pharmacySaver>true</pharmacySaver>
+                     <eprescription>false</eprescription>
+                     <preferredNetwork>true</preferredNetwork>
+                     <npiNumber>1467724716</npiNumber>
+                     <year>2016</year>
+                     <pharmacyAddress>
+                        <addressLine1><![CDATA[8490 SANTA MONICA BLVD]]></addressLine1>
+                        <addressLine2><![CDATA[STE 1]]></addressLine2>
+                        <city><![CDATA[WEST HOLLYWOOD]]></city>
+                        <state>CA</state>
+                        <zipCode>90069</zipCode>
+                        <phoneNumber>3106574333</phoneNumber>
+                        <TTY>711</TTY>
+                     </pharmacyAddress>
+                     <distanceFromSearchLocation>2.18</distanceFromSearchLocation>
+                  </geoLocatedPharmacy>
+                  <geoLocatedPharmacy>
+                     <latitude>34.0703331</latitude>
+                     <longitude>-118.4009414</longitude>
+                     <pharmacyNumber>0509301</pharmacyNumber>
+                     <pharmacyName><![CDATA[GARFIELD PHARMACY]]></pharmacyName>
+                     <pharmacyType>4</pharmacyType>
+                     <network>Rx</network>
+                     <twentyFourHour>false</twentyFourHour>
+                     <ninetyDay>true</ninetyDay>
+                     <retail>true</retail>
+                     <mailOrder>false</mailOrder>
+                     <longTermCare>false</longTermCare>
+                     <homeInfusionSpecialty>false</homeInfusionSpecialty>
+                     <indianTribalUnion>false</indianTribalUnion>
+                     <pharmacySaver>false</pharmacySaver>
+                     <eprescription>true</eprescription>
+                     <preferredNetwork>false</preferredNetwork>
+                     <npiNumber>1306939731</npiNumber>
+                     <year>2016</year>
+                     <pharmacyAddress>
+                        <addressLine1><![CDATA[9400 BRIGHTON WAY]]></addressLine1>
+                        <addressLine2/>
+                        <city><![CDATA[BEVERLY HILLS]]></city>
+                        <state>CA</state>
+                        <zipCode>90210</zipCode>
+                        <phoneNumber>3102740144</phoneNumber>
+                        <TTY>711</TTY>
+                     </pharmacyAddress>
+                     <distanceFromSearchLocation>2.32</distanceFromSearchLocation>
+                  </geoLocatedPharmacy>
+                  <geoLocatedPharmacy>
+                     <latitude>34.0699959</latitude>
+                     <longitude>-118.3997899</longitude>
+                     <pharmacyNumber>0516899</pharmacyNumber>
+                     <pharmacyName><![CDATA[RITE AID PHARMACY 05462 05462]]></pharmacyName>
+                     <pharmacyType>4</pharmacyType>
+                     <network>Rx</network>
+                     <twentyFourHour>true</twentyFourHour>
+                     <ninetyDay>true</ninetyDay>
+                     <retail>true</retail>
+                     <mailOrder>false</mailOrder>
+                     <longTermCare>false</longTermCare>
+                     <homeInfusionSpecialty>false</homeInfusionSpecialty>
+                     <indianTribalUnion>false</indianTribalUnion>
+                     <pharmacySaver>false</pharmacySaver>
+                     <eprescription>true</eprescription>
+                     <preferredNetwork>false</preferredNetwork>
+                     <npiNumber>1225044514</npiNumber>
+                     <year>2016</year>
+                     <pharmacyAddress>
+                        <addressLine1><![CDATA[300 NORTH CANON DRIVE]]></addressLine1>
+                        <addressLine2/>
+                        <city><![CDATA[BEVERLY HILLS]]></city>
+                        <state>CA</state>
+                        <zipCode>90210</zipCode>
+                        <phoneNumber>3102733561</phoneNumber>
+                        <TTY>711</TTY>
+                     </pharmacyAddress>
+                     <distanceFromSearchLocation>2.36</distanceFromSearchLocation>
+                  </geoLocatedPharmacy>
+               </geoLocatedPharmacyList>
+            </geoLocatedPharmacySearchResult>
+         </geoLocatedPharmacySearchResultList>
+      </geoLocatedPharmacySearchResponse>
+   </soapenv:Body>
+</soapenv:Envelope>

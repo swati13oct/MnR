@@ -1,0 +1,19 @@
+{
+    "drugOptionsAvailable": [
+        {
+            "autoCompleteDrugs": "Depo-Estradiol"
+        },
+        {
+            "autoCompleteDrugs": "Depo-Medrol"
+        },
+        {
+            "autoCompleteDrugs": "Depo-Provera 150MG"
+        },
+        {
+            "autoCompleteDrugs": "Depo-Provera 400MG"
+        },
+        {
+            "autoCompleteDrugs": "Depo-Subq Provera 104"
+        }
+    ]
+}
