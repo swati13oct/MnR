@@ -58,5 +58,9 @@ public class PageConstants {
 	public static final String LOGIN_ASSISTANCE_MESSAGE_PAGE = "loginAssitanceMessagePage";
 
 	public static final String PHARMACY_RESULTS_PAGE = "pharmacyResultPage";
+	
+	public static final String REQUEST_MORE_HELP_INFORMATION_PAGE = "requestHelpAndInformationPage";
+
+	public static final String REQUEST_AGENT_APPOINTMENT_PAGE = "requestAgentAppointmentPage";
 
 }

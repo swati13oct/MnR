@@ -235,6 +235,13 @@ public abstract class UhcDriver {
 					Select select = new Select(selectElement);
 					element = select.getOptions();
 				}
+				else if(identifierArr[1].equalsIgnoreCase("id"))
+				{
+					WebElement selectElement = driver.findElement(By.id(elementData
+							.getElementName()));
+					Select select = new Select(selectElement);
+					element = select.getOptions();
+				}
 			}
 			return element;
 		} catch (Exception e) {

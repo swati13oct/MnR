@@ -5,12 +5,18 @@ package pages.acquisition.ulayer;
 
 import java.util.List;
 
+import org.openqa.selenium.NoSuchElementException;
+import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.FindBys;
 import org.openqa.selenium.support.PageFactory;
+
+import acceptancetests.atdd.data.CommonConstants;
 import acceptancetests.atdd.data.MRConstants;
+import acceptancetests.atdd.util.CommonUtility;
 import atdd.framework.UhcDriver;
 
 /**
@@ -42,6 +48,12 @@ public class AcquisitionHomePage extends UhcDriver {
 
 	@FindBys(value = { @FindBy(xpath = "//table[@id='selectcountytable']/tbody/tr/td") })
 	List<WebElement> countyRows;
+	
+	@FindBy(id= "insuranceplan")
+	private WebElement ourPlans;
+	
+	@FindBy(linkText ="Request More Help and Information")
+	private WebElement ma_moreHelpInfoLink;
 
 	private static String AARP_ACQISITION_PAGE_URL = MRConstants.AARP_URL;
 
@@ -125,5 +137,32 @@ public class AcquisitionHomePage extends UhcDriver {
 		}
 		return null;
 	}
+	
+	public RequestHelpAndInformationPage navigateToMaMoreHelpAndInfo()
+	{
+		Actions actions = new Actions(driver);
+		actions.moveToElement(ourPlans);
+		actions.moveToElement(ma_moreHelpInfoLink);
+		actions.click().build().perform();
+		
+		try {
+			if (zipCodeField.isDisplayed()) {
+				CommonUtility.waitForElementToDisappear(driver, zipCodeField,
+						CommonConstants.TIMEOUT_30);
+			}
+		} catch (NoSuchElementException e) {
+			System.out.println("zipCodeField not found");
+		} catch (TimeoutException ex) {
+			System.out.println("zipCodeField not found");
+		} catch (Exception e) {
+			System.out.println("zipCodeField not found");
+		}
+		if (currentUrl().contains("medicare-advantage-plans/request-information.html")) {
+			return new RequestHelpAndInformationPage(driver);
+		}
+		
+		return null;
+	}
+	
 
 }
