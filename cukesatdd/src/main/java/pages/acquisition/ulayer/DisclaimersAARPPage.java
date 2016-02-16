@@ -17,6 +17,9 @@ import atdd.framework.UhcDriver;
  *
  */
 public class DisclaimersAARPPage extends GlobalFooterWebElements{
+	
+	@FindBy(xpath = "//*[@id='site-wrapper']/div[3]/div[1]/header/div[2]/h1/a/p/img")
+	private WebElement aarpunitedHealthCareLogo;
 	 
 	public DisclaimersAARPPage(WebDriver driver) {
 		super(driver);
@@ -54,4 +57,17 @@ public class DisclaimersAARPPage extends GlobalFooterWebElements{
 		return null;
 	}
 
+	public AcquisitionHomePage unitedHealthCareLogoClick() {
+		validate(aarpunitedHealthCareLogo);
+		aarpunitedHealthCareLogo.click();
+		validate(aarpunitedHealthCareLogo);
+		if (driver
+				.getTitle()
+				.equalsIgnoreCase(
+						"Medicare Plans | AARP® Medicare Plans from UnitedHealthcare®")) {
+			return new AcquisitionHomePage(driver);
+		}
+		return null;
+	
+	}
 }

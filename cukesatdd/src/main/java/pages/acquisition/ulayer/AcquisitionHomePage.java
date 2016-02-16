@@ -71,6 +71,9 @@ public class AcquisitionHomePage extends GlobalFooterWebElements {
 
 	private PageData homePageDisclaimer;
 	public JSONObject homePageDisclaimerJson;
+	
+	@FindBy(id = "ghn_lnk_1")
+	 public static WebElement navigationSectionHomeLink;
 
 	private PageData homePageDisclaimerHide;
 	public JSONObject homePageDisclaimerHideJson;
@@ -80,6 +83,10 @@ public class AcquisitionHomePage extends GlobalFooterWebElements {
 	
 	private PageData header;
 	public JSONObject headerJson;
+	
+	private PageData globalHeader;
+
+    public JSONObject globalHeaderJson;
 
 	public AcquisitionHomePage(WebDriver driver) {
 		super(driver);
@@ -99,6 +106,35 @@ public class AcquisitionHomePage extends GlobalFooterWebElements {
 		}
 
 	}
+	
+	
+	 public JSONObject accessingGlobalHeader() {
+	        
+	        String fileName = CommonConstants.GLOBAL_HEADER_PAGE_DATA;
+	        globalHeader = CommonUtility.readPageData(fileName,
+	                     CommonConstants.PAGE_OBJECT_DIRECTORY_ULAYER_ACQ);
+	        
+	        JSONObject jsonObject = new JSONObject();
+	        for (String key : globalHeader.getExpectedData().keySet()) {
+	        WebElement element = findElement(globalHeader.getExpectedData()
+	        .get(key));
+	        if (element != null) {
+	        if(validate(element)){
+	        try {
+	        jsonObject.put(key, element.getText());
+	        } catch (JSONException e) {
+	        // TODO Auto-generated catch block
+	        e.printStackTrace();
+	        }
+	        }
+	        }
+	        }
+	        globalHeaderJson = jsonObject;
+	        
+	        
+	        return globalHeaderJson;
+	        
+	 }
 
 	public ZipcodeLookupPage looksupforZipcodes() {
 
@@ -149,6 +185,7 @@ public class AcquisitionHomePage extends GlobalFooterWebElements {
 		return null;
 	}
 
+	
 	public String selectsHomeFooter() {
 
 		return homefooter.getText();
@@ -425,6 +462,48 @@ public class AcquisitionHomePage extends GlobalFooterWebElements {
 		}
 		return null;
 	}
+	public DisclaimersAARPPage importantDisclaimersClick() {
+	    validate(importantDisclosuresLink);
+	    importantDisclosuresLink.click();
+          validate(importantDisclosuresLink);
+          if(driver.getTitle().equalsIgnoreCase("Disclaimers | AARP® Medicare Plans from UnitedHealthcare®")){
+          return new DisclaimersAARPPage(driver);
+          }
+
+          return null;
+          }
 	
+	public AcquisitionHomePage navigationSectionHomeLinkClick() {
+	    validate(navigationSectionHomeLink);
+	    navigationSectionHomeLink.click();
+          validate(navigationSectionHomeLink);
+          if(driver.getTitle().equalsIgnoreCase("Medicare Plans | AARP® Medicare Plans from UnitedHealthcare®")){
+          return new AcquisitionHomePage(driver);
+          }
+
+          return null;
+          }
+	public OurPlansPage navigationSectionOurPlansLinkClick() {
+	    validate(navigationSectionOurPlansLink);
+	    navigationSectionOurPlansLink.click();
+          validate(navigationSectionOurPlansLink);
+          if(driver.getTitle().equalsIgnoreCase("Our Medicare Plan Types | AARP® Medicare Plans from UnitedHealthcare®")){
+          return new OurPlansPage(driver);
+          }
+
+          return null;
+          }
+	
+	public Boolean navigationSectionEnterSearchClick() {
+	    validate(navigationSectionEnterSearch);
+	    navigationSectionEnterSearch.click();
+	    navigationSectionEnterSearch.sendKeys("home");
+	    String search = navigationSectionEnterSearch.getAttribute("value");
+          if(search.equalsIgnoreCase("home")){
+        	  return true;
+          }
+
+          return false;
+          }
 	
 }

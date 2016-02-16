@@ -133,6 +133,12 @@ public class GlobalFooterWebElements  extends UhcDriver{
 	@FindBy(className = "not-registered-text")
 	 public static WebElement notRegisteredText;
 	
+	@FindBy(xpath = "//div[@class='nav-search']/form/input")
+	 public static WebElement navigationSectionEnterSearch;
+	
+	@FindBy(id = "ghn_lnk_2")
+	 public static WebElement navigationSectionOurPlansLink;
+	
 	
 
 	@Override
