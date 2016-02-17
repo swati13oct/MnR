@@ -4,7 +4,6 @@
 package pages.acquisition.ulayer;
 
 import java.io.File;
-import java.util.List;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -15,7 +14,6 @@ import acceptancetests.agentappointment.data.RequestAgentAppointmentConstants;
 import acceptancetests.atdd.data.CommonConstants;
 import acceptancetests.atdd.data.PageData;
 import acceptancetests.atdd.util.CommonUtility;
-import acceptancetests.dce.data.DceCommonConstants;
 import atdd.framework.MRScenario;
 import atdd.framework.UhcDriver;
 

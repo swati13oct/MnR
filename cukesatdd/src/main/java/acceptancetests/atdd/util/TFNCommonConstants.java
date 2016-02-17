@@ -17,6 +17,11 @@ public class TFNCommonConstants {
 	public static final String YAHOO = "yahoo";
 	public static final String BING = "bing";
 	public static final String NOT_APPLICABLE = "notApplicable";
+	public static final String PSC_CODE = "pscCode";
+	public static final String SEARCH_ENGINE = "searchEngine";
+	public static final String TFN_FLOW_NAME = "tollfreenumber";
+	public static final String TFN_ACTUAL = "TFNActual";
+	public static final String TFN_EXPECTED = "TFNExpected";
 	
 	public static String[] source = {GOOGLE, YAHOO, BING,NOT_APPLICABLE};
 	public static CampaignPSC[] umsCampaignPSCs = {new CampaignPSC("https://www.google.com", "880188"), new CampaignPSC("https://www.yahoo.com", "880189"), new CampaignPSC("https://www.bing.com", "880187"),new CampaignPSC("https://www.uhcmedicaresolutions.com", "880180")};

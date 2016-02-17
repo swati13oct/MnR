@@ -15,7 +15,7 @@ import cucumber.junit.Cucumber;
 @Cucumber.Options(glue = { "atdd.framework","acceptancetests.tollfreenumber" }, 
 		features = { "feature/toll-free-number" }, 
 		format = {
-		"pretty", "html:reports/test-report" }, tags ={"@TFN"})
+		"pretty", "html:reports/test-report" }, tags ={"@TFNtest"})
 public class RunMRCukesTFNTest {
 
 }

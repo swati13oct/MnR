@@ -2,8 +2,6 @@ package pages.acquisition.ulayer;
 
 /*@author pagarwa5*/
 
-import java.util.List;
-
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;

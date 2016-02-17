@@ -63,4 +63,10 @@ public class PageConstants {
 
 	public static final String REQUEST_AGENT_APPOINTMENT_PAGE = "requestAgentAppointmentPage";
 
+	public static final String MA_VPP_PAGE = "maViewPlansAndPricingPage";
+
+	public static final String PDP_VPP_PAGE = "pdpViewPlansAndPricingPage";
+
+	public static final String MS_VPP_PAGE = "msViewPlansAndPricingPage";
+
 }
