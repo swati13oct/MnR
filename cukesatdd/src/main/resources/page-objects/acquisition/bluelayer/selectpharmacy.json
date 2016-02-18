@@ -28,10 +28,12 @@
 "pharmacies":{
 "identifier":"className",
 "elementName":"rowBorder"
+
 },
 "selectButton":{
 "identifier":"xpath",
 "elementName":"//div[@id='dcemodal']/div/div/form/div[6]/a/span"
+
 }
 }
 }

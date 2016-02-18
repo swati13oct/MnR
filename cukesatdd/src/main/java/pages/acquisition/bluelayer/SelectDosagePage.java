@@ -24,6 +24,7 @@ public class SelectDosagePage extends UhcDriver{
 	
 
 
+
 	@FindBy(className = "borderBtmGrey")
 	List<WebElement> drugDosage;
 
@@ -207,6 +208,11 @@ public class SelectDosagePage extends UhcDriver{
 	
 	/*
 
+import atdd.framework.UhcDriver;
+
+public class SelectDosagePage extends UhcDriver {
+
+
 	@FindBy(className = "borderBtmGrey")
 	List<WebElement> drugDosages;
 
@@ -216,10 +222,8 @@ public class SelectDosagePage extends UhcDriver{
 	@FindBy(linkText = "Continue")
 	WebElement continueButton;
 
-	private WebDriver driver;
-
 	public SelectDosagePage(WebDriver driver) {
-		this.driver = driver;
+		super(driver);
 		// Initialise Elements
 		PageFactory.initElements(driver, this);
 	}
@@ -279,6 +283,12 @@ public class SelectDosagePage extends UhcDriver{
 				}
 			}
 		}
+
+	}
+	
+	@Override
+	public void openAndValidate() {
+		
 
 	}
 

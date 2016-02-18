@@ -428,6 +428,12 @@ public SiteMapUMSPage siteMapFooterClick() {
 		return null;
 	
 	}
+	
+	public VPPPlanSummaryPage enterZipcode(String zipCode, String county, String planYear){
+		sendkeys(zipCodeField, zipCode);		
+		viewPlansButton.click();
+		return new VPPPlanSummaryPage(driver);	
+	}
 
 	public RegistrationHomePage registerHereLinkClick() {
 		ArrayList<String> tabs = new ArrayList<String> (driver.getWindowHandles());

@@ -21,7 +21,11 @@ import acceptancetests.dce.data.DceCommonConstants;
 import atdd.framework.MRScenario;
 import atdd.framework.UhcDriver;
 
-public class SelectGenericPage extends UhcDriver{
+
+import atdd.framework.UhcDriver;
+
+public class SelectGenericPage extends UhcDriver {
+
 	
 	@FindBy(linkText = "Continue")
 	WebElement continueButton;
@@ -162,12 +166,8 @@ public class SelectGenericPage extends UhcDriver{
 	@FindBy(linkText = "Continue")
 	WebElement continueButton;
 	
-	
-	
-	private WebDriver driver;
-
 	public SelectGenericPage(WebDriver driver) {
-		this.driver = driver;
+		super(driver);
 		// Initialise Elements
 		PageFactory.initElements(driver, this);
 	}
@@ -194,6 +194,10 @@ public class SelectGenericPage extends UhcDriver{
 		}
 
 		
+		
+	}
+	@Override
+	public void openAndValidate() {
 		
 	}
 

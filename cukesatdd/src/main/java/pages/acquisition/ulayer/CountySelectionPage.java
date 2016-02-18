@@ -65,5 +65,30 @@ public class CountySelectionPage extends UhcDriver{
 		}
 		
 	}
+	
+	public AddDrugPage chooseCounty(String county)
+	{
+		if(counties.size()>1)
+		{
+			for(WebElement countyElement :counties)
+			{
+				String elementId = countyElement.getAttribute("id");
+				if(elementId.contains(county))
+				{
+					countyElement.click();
+					System.out.println("county clicked");
+				}
+				
+				
+			}	
+			
+			continueButton.click();
+		}
+		if(currentUrl().contains("drugSearch"))
+		{
+			return new AddDrugPage(driver);
+		}
+		return null;
+	}
 
 }

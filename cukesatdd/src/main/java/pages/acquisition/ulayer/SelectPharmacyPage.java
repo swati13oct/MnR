@@ -33,6 +33,7 @@ public class SelectPharmacyPage extends UhcDriver {
 	@FindBy(className = "pharmacyName")
 	WebElement pharmacyName;
 
+
 	@FindBy(className = "pharmacyDropDown")
 	WebElement pharmacyDropDown;
 
@@ -40,6 +41,9 @@ public class SelectPharmacyPage extends UhcDriver {
 	WebElement selectButton;
 
 	@FindBy(className = "select_link")
+
+	@FindBy(className = "dceBlueBtn")
+
 	WebElement selectLink;
 
 	private PageData pharmacies;
@@ -85,6 +89,7 @@ public class SelectPharmacyPage extends UhcDriver {
 		return pharmacyTable.getText();
 	}
 
+
 	public ManageDrugPage selectPharmacy(String pharmacyName,
 			String pharmacyType) {
 		if (!pharmacyType.equalsIgnoreCase("Preferred Mail Service Pharmacy")) {
@@ -97,6 +102,17 @@ public class SelectPharmacyPage extends UhcDriver {
 					selectLink.click();
 					break;
 				}
+
+	public ManageDrugPage selectPharmacy(String pharmacyName) {
+		for (WebElement element : pharmacyRows) {
+			if (element.getText().contains(pharmacyName)) {
+				ElementData elementData = new ElementData("className",
+						"dceBlueBtn");
+				WebElement selectLink = findChildElement(elementData, element);
+				selectLink.click();
+				break;
+			}
+
 
 			}
 		}

@@ -11,6 +11,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+
 import acceptancetests.atdd.data.CommonConstants;
 import acceptancetests.atdd.data.ElementData;
 import acceptancetests.atdd.data.PageData;
@@ -128,6 +129,15 @@ public class AddDrugPage extends UhcDriver{
 	/*@FindBy(css = "div > img[alt=\"Plus Image\"]")
 	WebElement plusSign;
 
+import acceptancetests.atdd.util.CommonUtility;
+import atdd.framework.UhcDriver;
+
+public class AddDrugPage extends UhcDriver {
+
+	/*@FindBy(css = "div > img[alt=\"Plus Image\"]")
+	WebElement plusSign;*/
+
+
 	@FindBy(xpath = "//div[@class='drugDropDownList']")
 	private WebElement drugDropDownList;
 	
@@ -143,7 +153,10 @@ public class AddDrugPage extends UhcDriver{
 	@FindBy(id = "dcemodal")
 	WebElement drugsAdded;
 	
-	@FindBy(xpath = "//div[@class='tab selectedTab']")
+	/*@FindBy(xpath = "//div[@class='tab selectedTab']")
+	private WebElement pharmacySearchTab;*/
+	
+	@FindBy(xpath="//div[@class='tabsHead']/div[2]")
 	private WebElement pharmacySearchTab;
 
 	@FindBy(name = "drugname")
@@ -158,12 +171,33 @@ public class AddDrugPage extends UhcDriver{
 	@FindBy(linkText = "View plan results")
 	private WebElement viewPlansLink;
 	
+
 	private PageData drugList;
 
 	public JSONObject drugListJson;
 
 	public AddDrugPage(WebDriver driver) {
 		super(driver);
+
+	@FindBy(className = "drugSearchBox")
+	WebElement drugSearchBox;
+	
+	@FindBy(xpath="//div[@class='tabsHead']/div[2]")
+	WebElement selectPharmacyTab;
+	
+	@FindBy(xpath="//div[@class='tabsHead']/div")
+	WebElement manageDrugTab;
+	
+	@FindBy(xpath="//div[@class='delete']/a")
+	private WebElement drugDelete;	
+
+	@FindBy(className = "addDrugBox")
+	WebElement adddrugdiv;
+	
+	public AddDrugPage(WebDriver driver) {
+		super(driver);
+		// Initialise Elements
+
 		PageFactory.initElements(driver, this);
 		String fileName = CommonConstants.ADD_DRUG_PAGE_DATA;
 		drugList = CommonUtility.readPageData(fileName,
@@ -173,6 +207,7 @@ public class AddDrugPage extends UhcDriver{
 	}
 
 	public void enterDrugInitials(String drugInitials) {
+
 		sendkeys(drugSearchBox, drugInitials);
 		CommonUtility.waitForPageLoad(driver, drugDropDown,
 				CommonConstants.TIMEOUT_40);
@@ -216,6 +251,12 @@ public class AddDrugPage extends UhcDriver{
 		}
 		drugListJson = jsonObject;
 		System.out.println("drugListJson------>" + drugListJson);
+
+		//plusSign.click();
+		drugNameField.click();
+		drugNameField.clear();
+		drugNameField.sendKeys(drugInitials);
+
 	}
 
 	public String getDrugList() {
@@ -253,7 +294,11 @@ public class AddDrugPage extends UhcDriver{
 		return drugsAdded.getText();
 	}
 
+
 	public PharmacySelectorPage navigateToPharmacyPage() {
+
+/*	public PharmacySearchPage navigateToPharmacyPage() {
+
 		pharmacySearchTab.click();
 		if (driver
 				.getTitle()
@@ -265,7 +310,26 @@ public class AddDrugPage extends UhcDriver{
 		}
 		
 		
-	}
+	}*/
+	public PharmacySearchPage navigateToPharmacyPage() {
+		
+		try {
+			Thread.sleep(5000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		pharmacySearchTab.click();
+		if (driver.getTitle().equalsIgnoreCase("Our Medicare Plan Types | UnitedHealthcare®")) {
+			System.out.println("navigateToPharmacyPage if");
+	        return new PharmacySearchPage(driver);
+		} else {
+			System.out.println("navigateToPharmacyPage else");
+		   return null;
+		}
+
+
+		}
 
 	public VPPPlanSummaryPage navigateToHealthPlansPage() {
 		
@@ -295,6 +359,58 @@ public class AddDrugPage extends UhcDriver{
 		applyChangesButton.click();
 		System.out.println("changes");
 		
+	}
+	
+	public void validateAddDrugFlow(){
+		validate(drugSearchBox);
+		selectPharmacyTab.click();
+		manageDrugTab.click();
+		validate(drugSearchBox);
+		
+	}
+	
+	/*private boolean validate(WebElement element) {
+		try {
+			if (element.isDisplayed()) {
+				System.out.println("Element found!!!!");
+				return true;
+			} else {
+				System.out.println("Element not found/not visible");
+			}
+		} catch (Exception e) {
+			System.out.println("Exception: Element not found/not visible");
+
+		}
+		return false;
+	}*/
+	
+	public void addDrugFlowCheck(){
+		drugDelete.click();
+	}
+	
+	public void clickAddImage() {       
+        
+        adddrugdiv.click();
+	}
+	
+	@Override
+	public void openAndValidate() {
+		
+
+	}
+	
+	
+	public void swithedToSelectPharmacyTab(){
+		selectPharmacyTab.click();
+	}
+	
+	public PharmacySearchPage navigateToUpdatedPharmacyPage() {
+		if (currentUrl().contains("selectPharmacy")) {
+			return new PharmacySearchPage(driver);
+		} else {
+			return null;
+		}
+
 	}
 
 	@Override

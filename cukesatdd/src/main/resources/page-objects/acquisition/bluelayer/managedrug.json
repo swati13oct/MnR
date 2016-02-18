@@ -17,6 +17,7 @@
 "identifier":"className",
 "elementName":"drugDetailsMessage"
 },
+
 "annualDrugCost":{
 "identifier":"className",
 "elementName":"estimateDrug"
@@ -24,6 +25,15 @@
 "planResultsLink":{
 "identifier":"linkText",
 "elementName":"View plan results"
+
+"planResultsLink":{
+"identifier":"linkText",
+"elementName":"View plan results"
+},
+"applyChangesLink":{
+"identifier":"linkText",
+"elementName":"Close and apply changes"
+
 }
 }
 }

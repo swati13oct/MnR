@@ -58,5 +58,30 @@ public class LocationSearchPage extends UhcDriver{
 		validate(continueButton);
 		
 	}
+	
+	public AddDrugPage enterLoc(String zipCode, String county, String planYear) {
+		sendkeys(zipCodeField, zipCode);
+		if(null!=planYear)
+		{
+			String planYearXpath = "//div[@class='marginBottom25']//span[.='"+planYear+"']";
+			driver.findElement(By.xpath(planYearXpath)).click();
+			System.out.println("year");
+		}
+		continueButton.click();
+		
+		if(currentUrl().contains("drugSearch"))
+		{
+			return new AddDrugPage(driver);
+		}
+		else if(currentUrl().contains("enterZipCode"))
+		{
+			CountySelectionPage countySelectionPage = new CountySelectionPage(driver);
+			AddDrugPage addDrugPage = countySelectionPage.chooseCounty(county);
+			return addDrugPage;
+		}
+		
+		return null;
+		
+	}
 
 }

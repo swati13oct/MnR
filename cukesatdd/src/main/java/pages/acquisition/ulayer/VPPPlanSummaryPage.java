@@ -43,8 +43,13 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	@FindBy(xpath = "//div[@class='disabledprint ng-scope']")
 	List<WebElement> pdpPlanElement;
 	
+
 	@FindBy(xpath = "//div[@id='chooseplan']/div/div/h3")
 	private WebElement pageHeading;
+
+	@FindBy(id = "editDrugMA")
+	private WebElement editDrugListLink;
+
 
 	private PageData vppPlanSummary;
 
@@ -239,6 +244,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		return null;
 	}
 
+
 	public EnrollPlanInfoPage clicksOnEnrollInplanLink(String planName) {
 		if (planName.contains("HMO")) {
 			for (WebElement plan : maPlanElement) {
@@ -263,7 +269,44 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		}
 		return null;
 	}	
+
 	
+	public GetStartedPage navigateToSummaryPage(String planType) {
+		if (planType.equalsIgnoreCase("PDP")) {
+			showPdpPlans.click();
+		} 
+		return new GetStartedPage(driver);
+	}
+
+	
+    public ManageDrugPage navigateToEditDrugList(String planName) {
+		
+		if (planName.contains("HMO")) {
+			ElementData elementData = new ElementData("id", "editDrugMA");
+			WebElement element = getViewPlanDetailsElement(maPlanElement,
+					elementData, planName);
+			if (element != null) {
+				element.click();
+
+			}
+
+		} else if (planName.contains("PDP")) {
+			ElementData elementData = new ElementData("id", "editDrugMA");
+			WebElement element = getViewPlanDetailsElement(pdpPlanElement,
+					elementData, planName);
+			if (element != null) {
+				element.click();
+
+			}
+
+		}
+		CommonUtility.checkPageIsReady(driver);
+		if (currentUrl().contains("manageDrugList")) {
+			return new ManageDrugPage(driver);
+		}
+
+		return null;
+	}
 	
 }
 

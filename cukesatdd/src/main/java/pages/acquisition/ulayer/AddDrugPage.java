@@ -32,6 +32,12 @@ public class AddDrugPage extends UhcDriver {
 
 	@FindBy(className = "drugSearchBox")
 	WebElement drugSearchBox;
+	
+	@FindBy(xpath="//div[@class='tabsHead']/div[2]")
+	WebElement selectPharmacyTab;
+	
+	@FindBy(xpath="//div[@class='tabsHead']/div")
+	WebElement manageDrugTab;
 
 	private PageData drugList;
 
@@ -120,6 +126,13 @@ public class AddDrugPage extends UhcDriver {
 	public void openAndValidate() {
 		validate(drugSearchBox);
 
+	}
+	
+	public void validateAddDrugFlow(){
+		validate(drugSearchBox);
+		selectPharmacyTab.click();
+		manageDrugTab.click();
+		validate(drugSearchBox);
 	}
 
 }

@@ -63,6 +63,9 @@ public class AcquisitionHomePage extends GlobalFooterWebElements {
 
 	@FindBys(value = { @FindBy(xpath = "//table[@id='selectcountytable']/tbody/tr/td") })
 	List<WebElement> countyRows;
+	
+	@FindBy(xpath = "/html/body/div[3]/div/table/tbody/tr[3]/td/table/tbody/tr[2]/td/div/div[2]/div/div/div[2]/div/ul/li[2]/a")
+	WebElement zipCodebtn;
 
 
 	@FindBy(className = "disclaimer hideLink")
@@ -222,6 +225,12 @@ public class AcquisitionHomePage extends GlobalFooterWebElements {
 	public String selectsHomeFooter() {
 
 		return homefooter.getText();
+	}
+	
+	public VPPPlanSummaryPage enterZipcode(String zipCode, String county, String planYear){
+		sendkeys(zipCodeField, zipCode);		
+		zipCodebtn.click();
+		return new VPPPlanSummaryPage(driver);	
 	}
 
 

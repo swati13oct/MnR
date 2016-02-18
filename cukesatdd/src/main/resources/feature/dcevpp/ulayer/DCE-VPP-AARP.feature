@@ -120,7 +120,8 @@ Examples:
 #	| 80002   | Adams County       | rest	      |  Restasis     |  Restasis EMU 0.05% | Plastic Container of 1.0(sold in a package of 60) | 2        | Every 3 months | no               | null             | Cost Savings Pharmacies     | 15 miles   |  SAMS PHARMACY 10-6630 106630   | PDP      | AARP MedicareRx Preferred (PDP) | 
 
 
-Scenario Outline: To Verify the drugs and ways to save options for non AEP period 
+	 
+Scenario Outline: To Verify the manage drug page and verify tooltips for AARP Site 
 Given the user is on the AARP medicare site landing page
 When the user performs drug search using the following information in AARP site
 	| Zip Code    | <zipcode>  |
@@ -137,8 +138,9 @@ When the user selects the following dosage information in AARP site
 	| Drug Frequency | <drugFrequency> |
 	| Packages       | <packages>      |
 And the user selects low cost options for above selected drug in AARP site
-	| Generic Available | <genericAvailable> |
-	| Brand or Generic  | <brand/generic>    |
+
+	| <brand/generic> |
+
 Then the user validates all the drugs added in dce flow in AARP site
 When the user search for pharmacies in dce flow in AARP site
 Then the user validates the available pharmacies in the selected zipcode in AARP site
@@ -156,6 +158,7 @@ When the user views plans of the below plan type in AARP site
 Then the user validates the available plans for selected plan types in AARP site
 And the user validates the plan summary for the below plan in AARP site
 	| Plan Name | <planName> |
+
 When the user view plan details of the above selected plan in AARP site
 Then the user validates the details of the selected plan in AARP site
 When the user view available options to save on drugs in AARP site
@@ -171,3 +174,12 @@ Then the user validates the plan details of the above selected plan after switch
 Examples:
 	| zipcode | county             | drugInitials | drugName           |  drugDosage	                  | packages                                          | quantity | drugFrequency  | genericAvailable | brand/generic                                           | pharmacyType	 	 	          | distance   |  pharmacyName          | plantype | planName 					          |
 	| 30002   | DeKalb County      | depo	      | Depo-Provera 150MG |  Depo-Provera 150MG INJ 150MG/ML | 1.0ML Syringe(sold in a package of 1)             | 10       | Every 3 months | yes              | Depo-Provera 150MG INJ 150MG/ML (Qty 10 Every 3 Months) | Preferred Mail Service Pharmacy  | 15 miles   |  null                  | MAPD     | AARP MedicareComplete Plan 2 (HMO)   |	 
+
+When the user click the Edit Drug List link in plan summary page of AARP site
+Then user validated estimated drug cost and tooltip in AARP site
+
+Examples:
+	| zipcode | county             | drugInitials | drugName      |  drugDosage	        | packages | quantity | drugFrequency  | brand/generic                            | pharmacyType	 	 		 | distance   |  pharmacyName          | plantype | planName 					                         |
+	| 90210   | Los Angeles County | lipi	      |  Lipitor      |  Lipitor TAB 20MG   | null     | 40       | Every 3 months | Lipitor TAB 20MG (Qty 40 Every 3 Months) | Standard Network Pharmacy   | 25 miles   |  CVS PHARMACY 09652    | MAPD     | AARP MedicareComplete SecureHorizons Plan 2 (HMO)  |
+	 
+
