@@ -127,13 +127,5 @@ public class PageConstants {
 
 	public static final String MEDICARE_DISCOVER_MORE_RESOURCES_UHC_PAGE = "discoverMoreResourcesuhcPage";
 	
-	public static final String LOGIN_ASSISTANCE_PAGE = "loginAssistancePage";
-	
-	
-	 
-	
-	
-	
-
 
 }

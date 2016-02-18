@@ -64,6 +64,8 @@ public class AcquisitionHomePage extends GlobalFooterWebElements {
        public JSONObject globalFooterJson;
        
        private PageData globalHeader;
+       
+       private PageData globalFooter;
 
        public JSONObject globalHeaderJson;
        
