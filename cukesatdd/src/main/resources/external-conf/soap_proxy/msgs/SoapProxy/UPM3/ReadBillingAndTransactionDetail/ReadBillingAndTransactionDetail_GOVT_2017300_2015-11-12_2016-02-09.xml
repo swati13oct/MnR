@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
+   <soap:Body>
+      <ns1:invokeServiceResponse xmlns:ns1="http://upm3.uhc.com/ovationsmember/readbillingandtransactiondetail/v1">
+         <return xmlns:ns2="http://upm3.uhc.com/ovationsmember/readbillingandtransactiondetail/v1">
+            <responseHeader>
+               <serviceCallStatus>ERROR</serviceCallStatus>
+               <externalId xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true"/>
+               <serviceName>ReadBillingAndTransactionDetail</serviceName>
+               <serviceVersion>1</serviceVersion>
+               <logLevel>DEFAULT</logLevel>
+               <upmEnvironment>u3c-ts2</upmEnvironment>
+               <statusMessages>
+                  <statusMessageLevel>FAULT</statusMessageLevel>
+                  <messageType>DataServerTimeout</messageType>
+                  <statusMessage>Could not send Message.</statusMessage>
+                  <hopLocation xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true"/>
+                  <stackTrace xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true"/>
+                  <statusOrigin>UPM</statusOrigin>
+                  <vrcStatusGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true"/>
+               </statusMessages>
+               <internalUse>
+                  <uid>[[EWP||223234483]UPM3-BRAVO-FRONTEND]</uid>
+                  <serviceName>ReadBillingAndTransactionDetail</serviceName>
+                  <serviceVersion>1</serviceVersion>
+                  <originalConsumer>EWP</originalConsumer>
+                  <originalServiceName>ReadBillingAndTransactionDetail</originalServiceName>
+                  <originalServiceVersion>1</originalServiceVersion>
+                  <logSequence>7</logSequence>
+                  <uidGeneratedBy>DP</uidGeneratedBy>
+               </internalUse>
+            </responseHeader>
+         </return>
+      </ns1:invokeServiceResponse>
+   </soap:Body>
+</soap:Envelope>

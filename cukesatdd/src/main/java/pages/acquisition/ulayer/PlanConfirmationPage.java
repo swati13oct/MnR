@@ -1,5 +1,9 @@
 package pages.acquisition.ulayer;
 
+import java.util.List;
+import java.util.Map;
+
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.openqa.selenium.By;
@@ -55,20 +59,46 @@ public class PlanConfirmationPage extends UhcDriver {
 
 		JSONObject jsonObject = new JSONObject();
 		for (String key : planConfirmation.getExpectedData().keySet()) {
-			WebElement element = findElement(planConfirmation.getExpectedData()
-					.get(key));
-			if (element != null) {
-				validate(element);
+			List<WebElement> elements = findElements(planConfirmation
+					.getExpectedData().get(key));
+			if (elements.size() == 1) {
+				if (validate(elements.get(0))) {
+					try {
+						jsonObject.put(key, elements.get(0).getText());
+					} catch (JSONException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				}
+			} else if (elements.size() > 1) {
+				JSONArray jsonArray = new JSONArray();
+				for (WebElement element : elements) {
+
+					if (validate(element)) {
+						try {
+							JSONObject jsonObjectForArray = new JSONObject();
+							jsonObjectForArray.put(planConfirmation
+									.getExpectedData().get(key)
+									.getElementName(), element.getText());
+							jsonArray.put(jsonObjectForArray);
+						} catch (JSONException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+					}
+				}
 				try {
-					jsonObject.put(key, element.getText());
+					jsonObject.put(key, jsonArray);
 				} catch (JSONException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
+
 			}
 
 		}
 		planConfirmationJson = jsonObject;
 	}
+
 
 }

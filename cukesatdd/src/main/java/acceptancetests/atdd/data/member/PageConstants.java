@@ -79,6 +79,7 @@ public class PageConstants {
 	public static final String SETUP_PAYMENTS_SUCCESS_PAGE = "setupAutoPaymentSuccessPage";
 
 	public static final String DRUG_COST_BENEFITS_SUMMARY_PAGE = "drugCostandBenefitSummaryPage";
+	
 	public static final String DRUG_CLAIM_SUMMARY_PAGE = "drugClaimSummaryPage";
 
 	public static final String DRUG_CLAIM_DETAILS_PAGE = "drugClaimDetailsPage";
@@ -99,4 +100,4 @@ public class PageConstants {
 
 	public static final String PHARMACY_TYPES = "pharmacyTypeArray";
 
-}
+	public static final String REGISTRATION_HOME_PAGE = "registrationHomePage";}

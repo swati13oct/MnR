@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/">
+   <soapenv:Body>
+      <geoLocatedPharmacySearchResponse xmlns="http://www.uhc.com/dcewebservice/2014/05/21/service/geoLocatedPharmacySearch/">
+         <geoLocatedPharmacySearchResultList>
+            <geoLocatedPharmacySearchResult>
+               <geoLocatedPharmacySearchCriteria>
+                  <pharmacyAddress>
+                     <addressLine1/>
+                     <addressLine2/>
+                     <city/>
+                     <zipCode>78006</zipCode>
+                  </pharmacyAddress>
+                  <radius>25</radius>
+                  <yearFilter>2016</yearFilter>
+                  <inclusiveAllFilters>
+                     <twentyFourHourTypeFilter>Y</twentyFourHourTypeFilter>
+                     <ninetyDayTypeFilter/>
+                     <longTermCareTypeFilter/>
+                     <specialtyTypeFilter/>
+                     <retailTypeFilter>Y</retailTypeFilter>
+                     <indianTribalUnionFilter/>
+                     <mailOrderTypeFilter/>
+                     <pharmacySaverFilter/>
+                     <preferredNetworkFilter/>
+                  </inclusiveAllFilters>
+                  <paginationIndex>1</paginationIndex>
+                  <maxRecordPerPage>10</maxRecordPerPage>
+               </geoLocatedPharmacySearchCriteria>
+               <maxRecordCountReached>true</maxRecordCountReached>
+               <geoLocatedPharmacyList>
+                  <geoLocatedPharmacy>
+                     <latitude>29.7814569</latitude>
+                     <longitude>-98.728433</longitude>
+                     <pharmacyNumber>4512186</pharmacyNumber>
+                     <pharmacyName><![CDATA[WALGREENS #5765 5765]]></pharmacyName>
+                     <pharmacyType>4</pharmacyType>
+                     <network>Rx</network>
+                     <twentyFourHour>true</twentyFourHour>
+                     <ninetyDay>true</ninetyDay>
+                     <retail>true</retail>
+                     <mailOrder>false</mailOrder>
+                     <longTermCare>false</longTermCare>
+                     <homeInfusionSpecialty>false</homeInfusionSpecialty>
+                     <indianTribalUnion>false</indianTribalUnion>
+                     <pharmacySaver>true</pharmacySaver>
+                     <eprescription>true</eprescription>
+                     <preferredNetwork>true</preferredNetwork>
+                     <npiNumber>1679588651</npiNumber>
+                     <year>2016</year>
+                     <pharmacyAddress>
+                        <addressLine1><![CDATA[1223 S MAIN ST]]></addressLine1>
+                        <addressLine2/>
+                        <city><![CDATA[BOERNE]]></city>
+                        <state>TX</state>
+                        <zipCode>78006</zipCode>
+                        <phoneNumber>8302499565</phoneNumber>
+                        <TTY>711</TTY>
+                     </pharmacyAddress>
+                     <distanceFromSearchLocation>9.5</distanceFromSearchLocation>
+                  </geoLocatedPharmacy>
+                  <geoLocatedPharmacy>
+                     <latitude>29.627333</latitude>
+                     <longitude>-98.4956816</longitude>
+                     <pharmacyNumber>4508187</pharmacyNumber>
+                     <pharmacyName><![CDATA[WALGREENS #4838 4838]]></pharmacyName>
+                     <pharmacyType>4</pharmacyType>
+                     <network>Rx</network>
+                     <twentyFourHour>true</twentyFourHour>
+                     <ninetyDay>true</ninetyDay>
+                     <retail>true</retail>
+                     <mailOrder>false</mailOrder>
+                     <longTermCare>false</longTermCare>
+                     <homeInfusionSpecialty>false</homeInfusionSpecialty>
+                     <indianTribalUnion>false</indianTribalUnion>
+                     <pharmacySaver>true</pharmacySaver>
+                     <eprescription>true</eprescription>
+                     <preferredNetwork>true</preferredNetwork>
+                     <npiNumber>1033124003</npiNumber>
+                     <year>2016</year>
+                     <pharmacyAddress>
+                        <addressLine1><![CDATA[19203 STONE OAK PKWY]]></addressLine1>
+                        <addressLine2/>
+                        <city><![CDATA[SAN ANTONIO]]></city>
+                        <state>TX</state>
+                        <zipCode>78258</zipCode>
+                        <phoneNumber>2104030002</phoneNumber>
+                        <TTY>711</TTY>
+                     </pharmacyAddress>
+                     <distanceFromSearchLocation>23.6</distanceFromSearchLocation>
+                  </geoLocatedPharmacy>
+               </geoLocatedPharmacyList>
+            </geoLocatedPharmacySearchResult>
+         </geoLocatedPharmacySearchResultList>
+      </geoLocatedPharmacySearchResponse>
+   </soapenv:Body>
+</soapenv:Envelope>

@@ -30,7 +30,7 @@ public class CreateAccountPage extends UhcDriver {
 	@FindBy(id = "confirm_email")
 	private WebElement confirmEmailAdrField;
 
-	@FindBy(name = "continue")
+	@FindBy(name = "Continue")
 	private WebElement continueButton;
 
 	public CreateAccountPage(WebDriver driver) {

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<soapenv:Envelope xmlns:soapenv="http://www.w3.org/2003/05/soap-envelope">
+   <soapenv:Header xmlns:wsa="http://www.w3.org/2005/08/addressing">
+      <s:Security xmlns:s="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd" xmlns:u="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd">
+         <u:Timestamp>
+            <u:Created>2016-02-02T14:27:13.490Z</u:Created>
+         </u:Timestamp>
+      </s:Security>
+      <v100:LookupKey xmlns:v100="http://eaf4esb.wesb.uhc.com/schema/framework/EAF4ESBLookupKey/v1_00">
+         <v100:environment>test_sys1</v100:environment>
+      </v100:LookupKey>
+      <wsa:Action>http://GetDeliveryPreferencesMediation/GetDeliveryPreferences/GetDeliveryPreferences/getDeliveryPreferencesInfoResponse</wsa:Action>
+      <wsa:RelatesTo>urn:uuid:e4094e81-5975-44d0-9988-ee6a35b81651</wsa:RelatesTo>
+   </soapenv:Header>
+   <soapenv:Body>
+      <pr:getDeliveryPreferencesInfoResponse xmlns:pr="http://GetDeliveryPreferencesMediation/GetDeliveryPreferences" xmlns:v210="http://eaf4esb.wesb.uhc.com/schema/contract/consumer/getdeliverypreferences/v2_10" xmlns:v405="http://enterprise.unitedhealthgroup.com/schema/message/messageresponse/v4_05" xmlns:v405_1="http://enterprise.unitedhealthgroup.com/schema/message/response/v4_05">
+         <v210:GetDeliveryPreferencesResponse UID="A2615002-0152-4000-E000-782D0A72EC72">
+            <v405:response BusinessType="GOVT">
+               <v405_1:type>ERROR</v405_1:type>
+               <v405_1:description>Electronic Fulfillment is not available for this type of fulfillment and this member plan</v405_1:description>
+               <v405_1:code>-29212</v405_1:code>
+               <v405_1:severity>BUSINESS VALIDATION</v405_1:severity>
+            </v405:response>
+         </v210:GetDeliveryPreferencesResponse>
+      </pr:getDeliveryPreferencesInfoResponse>
+   </soapenv:Body>
+</soapenv:Envelope>

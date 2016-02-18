@@ -39,6 +39,7 @@ public class AcquisitionHomePage extends GlobalFooterWebElements {
        @FindBy(id = "homefooter")
        private WebElement homefooter;
 
+
        @FindBys(value = { @FindBy(xpath = "//table[@id='selectcountytable']/tbody/tr/td") })
        List<WebElement> countyRows;
        
@@ -58,6 +59,13 @@ public class AcquisitionHomePage extends GlobalFooterWebElements {
        public JSONObject homePageDisclaimerHideJson;
        
        private PageData globalFooter;
+
+	@FindBys(value = { @FindBy(xpath = "//table[@id='selectcountytable']/tbody/tr/td") })
+	private List<WebElement> countyRows;
+	
+	@FindBy(linkText = "pharmacy")
+	private WebElement pharmacyLink;
+
 
        public JSONObject globalFooterJson;
        
@@ -308,6 +316,7 @@ public SiteMapUMSPage siteMapFooterClick() {
 		return null;
 	}
 	
+
 	public DisclaimersPage importantDisclaimersClick() {
 	    validate(importantDisclosuresLink);
 	    importantDisclosuresLink.click();
@@ -315,6 +324,17 @@ public SiteMapUMSPage siteMapFooterClick() {
           if(driver.getTitle().equalsIgnoreCase("Disclaimers | UnitedHealthcare®")){
           return new DisclaimersPage(driver);
           }
+
+	public PharmacySearchPage navigateToPharmacyLocator() {
+		pharmacyLink.click();
+		if(driver.getTitle().equalsIgnoreCase("Locate a Pharmacy | UnitedHealthcare®"))
+		{
+			return new PharmacySearchPage(driver); 
+		}
+		return null;
+		
+	}
+
 
           return null;
           }

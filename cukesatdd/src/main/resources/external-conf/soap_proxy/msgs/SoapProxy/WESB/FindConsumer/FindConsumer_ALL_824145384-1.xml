@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<soapenv:Envelope xmlns:soapenv="http://www.w3.org/2003/05/soap-envelope">
+   <soapenv:Header xmlns:wsa="http://www.w3.org/2005/08/addressing">
+      <s:Security xmlns:s="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd" xmlns:u="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd">
+         <u:Timestamp>
+            <u:Created>2016-02-03T08:05:27.86Z</u:Created>
+         </u:Timestamp>
+      </s:Security>
+      <wsa:Action>http://eaf4esb.wesb.uhc.com/schema/contract/consumer/v2_00/ConsumerService/findConsumerResponse</wsa:Action>
+      <wsa:RelatesTo>urn:uuid:648289a9-f665-4b39-a946-2f00a7326346</wsa:RelatesTo>
+   </soapenv:Header>
+   <soapenv:Body>
+      <v200:findConsumerResponse xmlns:v200="http://eaf4esb.wesb.uhc.com/schema/contract/consumer/v2_00" xmlns:v210="http://ovations.unitedhealthgroup.com/schema/ovations/consumer/v2_10" xmlns:v400="http://enterprise.unitedhealthgroup.com/schema/message/messageresponse/v4_00" xmlns:v400_1="http://enterprise.unitedhealthgroup.com/schema/message/response/v4_00" xmlns:v403="http://enterprise.unitedhealthgroup.com/schema/canoncial/consumer/v4_03" xmlns:v403_1="http://enterprise.unitedhealthgroup.com/schema/canoncial/base/demographic/v4_03">
+         <findConsumerResponse>
+            <v400:response BusinessType="SHIP">
+               <v400_1:type>ERROR</v400_1:type>
+               <v400_1:description>COMPAS SOAP Fault: en:Server Validation error  -20012 Record not found. </v400_1:description>
+               <v400_1:severity>BUSINESS VALIDATION</v400_1:severity>
+            </v400:response>
+            <v200:Consumer BusinessType="GOVT">
+               <ConsumerList>
+                  <v403:ConsumerPerson>
+                     <v403:ConsumerPersonDetail>
+                        <v403_1:Name>
+                           <v403_1:FirstName>AWDG</v403_1:FirstName>
+                           <v403_1:MiddleName>Y</v403_1:MiddleName>
+                           <v403_1:LastName>OWRIA</v403_1:LastName>
+                        </v403_1:Name>
+                        <v403_1:DateOfBirth>1939-07-02</v403_1:DateOfBirth>
+                        <v403_1:PersonAge>76</v403_1:PersonAge>
+                     </v403:ConsumerPersonDetail>
+                     <v403:ConsumerMedicareDetail/>
+                  </v403:ConsumerPerson>
+                  <v403:ConsumerPreference>
+                     <v403:ContactMechanism>
+                        <v403_1:Address>
+                           <v403_1:AddressLine1>313 VIIKTGUK</v403_1:AddressLine1>
+                           <v403_1:AddressLine2>MAINST</v403_1:AddressLine2>
+                           <v403_1:City>VGTTWUXZIAK</v403_1:City>
+                           <v403_1:State>CT</v403_1:State>
+                           <v403_1:ZipCode>
+                              <v403_1:Zip5>06492</v403_1:Zip5>
+                              <v403_1:Zip4>4734</v403_1:Zip4>
+                           </v403_1:ZipCode>
+                           <v403_1:CountryCode>US</v403_1:CountryCode>
+                        </v403_1:Address>
+                        <v403_1:Phone>
+                           <v403_1:ContactTypeCode>EVENING</v403_1:ContactTypeCode>
+                           <v403_1:Area>111</v403_1:Area>
+                           <v403_1:Subscriber>1111111</v403_1:Subscriber>
+                        </v403_1:Phone>
+                     </v403:ContactMechanism>
+                  </v403:ConsumerPreference>
+                  <v210:LOB>SECUREHORIZONS</v210:LOB>
+                  <v210:OvationsMemberProfile>
+                     <v210:MemberNo>824145384-1</v210:MemberNo>
+                  </v210:OvationsMemberProfile>
+                  <v200:AccountID>30017624303</v200:AccountID>
+                  <v200:IndividualID>500017522405</v200:IndividualID>
+               </ConsumerList>
+            </v200:Consumer>
+         </findConsumerResponse>
+      </v200:findConsumerResponse>
+   </soapenv:Body>
+</soapenv:Envelope>

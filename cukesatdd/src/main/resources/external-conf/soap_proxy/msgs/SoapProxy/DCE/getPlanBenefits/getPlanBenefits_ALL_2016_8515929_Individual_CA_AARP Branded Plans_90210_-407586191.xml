@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/">
+   <soapenv:Body>
+      <getPlanBenefitsResponse xmlns:dt="http://ovations.uhg.com/drug_type/yr2008/v1/" xmlns:gpb="http://ovations.uhg.com/dce/getPlanBenefits/yr2008/v1/" xmlns:base="http://ovations.uhg.com/base/yr2008/v1/" xmlns:pt="http://ovations.uhg.com/plan_type/yr2008/v1/">
+         <planSearchCriteriaResponseList>
+            <planSearchCriteriaResponse>
+               <pt:planSearchCriteria>
+                  <base:planYear>2016</base:planYear>
+                  <base:stateCode>CA</base:stateCode>
+                  <base:zipCode5>90210</base:zipCode5>
+                  <base:cmsCountyCodeList>
+                     <base:cmsCountyCode>200</base:cmsCountyCode>
+                     <base:cmsCountyCode>201</base:cmsCountyCode>
+                     <base:cmsCountyCode>210</base:cmsCountyCode>
+                  </base:cmsCountyCodeList>
+                  <pt:planTypeList>
+                     <pt:planType>
+                        <pt:name>PDP</pt:name>
+                        <pt:category>Individual</pt:category>
+                     </pt:planType>
+                  </pt:planTypeList>
+                  <pt:brandTypeList>
+                     <pt:brandType>
+                        <pt:name>AARP</pt:name>
+                        <pt:description>AARP Branded Plans</pt:description>
+                     </pt:brandType>
+                  </pt:brandTypeList>
+               </pt:planSearchCriteria>
+            </planSearchCriteriaResponse>
+         </planSearchCriteriaResponseList>
+      </getPlanBenefitsResponse>
+   </soapenv:Body>
+</soapenv:Envelope>

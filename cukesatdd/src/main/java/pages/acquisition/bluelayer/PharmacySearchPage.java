@@ -1,79 +1,170 @@
+/**
+ * 
+ */
 package pages.acquisition.bluelayer;
-
-/*@author pagarwa5*/
 
 import java.util.List;
 
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.FindBys;
 import org.openqa.selenium.support.PageFactory;
 
-public class PharmacySearchPage {
+import acceptancetests.atdd.data.ElementData;
+import acceptancetests.atdd.util.CommonUtility;
+import atdd.framework.UhcDriver;
 
-	@FindBy(xpath = "//div[@class='pharmacyListScroll']")
-	WebElement pharmacyTable;
+/**
+ * @author pagarwa5
+ *
+ */
+public class PharmacySearchPage extends UhcDriver {
 
-	private WebDriver driver;
+	@FindBy(id = "zipCode")
+	private WebElement zipcodeField;
+
+	@FindBy(id = "showresults")
+	private WebElement distanceField;
+
+	@FindBy(id = "continue")
+	private WebElement continueField;
+
+	@FindBy(id = "selectcounty_box")
+	private WebElement countyPopOut;
+
+	@FindBy(id = "selectcountytable")
+	private WebElement selectcountytable;
+
+	@FindBy(id = "plan")
+	private WebElement planNameDropDown;
+
+	@FindBys(value = { @FindBy(xpath = "//select[@id='plan']/option") })
+	private List<WebElement> planNamesList;
+
+	@FindBys(value = { @FindBy(xpath = "//table[@id='selectcountytable']/tbody/tr") })
+	private List<WebElement> countyList;
+
+	@FindBy(id = "pharmacies")
+	private WebElement allPharmacies;
+
+	@FindBy(id = "services")
+	private WebElement particularServices;
+
+	@FindBy(id = "find_searchbtn")
+	private WebElement searchPharmaciesButton;
+
+	@FindBys(value = { @FindBy(xpath = "//select/option") })
+	private List<WebElement> distanceDropDown;
+
+	@FindBys(value = { @FindBy(xpath = "//ul[@id='pharm_services']/li") })
+	private List<WebElement> pharmacyTypesCheckboxes;
+
+	@FindBy(xpath = "//form[@id='searchCriteria']/div[3]/p[2]/span")
+	private WebElement narrowYourSearchContent;
+
+	@FindBy(xpath = "//div[@id='medicareTitle']/h1")
+	private WebElement pharmacyResultHeader;
+	
+	@FindBy(id = "services")
+	private WebElement pharmacyTypeSelectionRadioButton;
 
 	public PharmacySearchPage(WebDriver driver) {
-		this.driver = driver;
-		// Initialise Elements
+		super(driver);
 		PageFactory.initElements(driver, this);
+		openAndValidate();
 	}
 
-	public void selectPharmacyType(String pharmacyType, String distance) {
+	public PharmacySearchPage enterZipDistanceDetails(String zipcode,
+			String distance, String county) {
 
-		String pharmacyPath = "//div[@id='dcemodal']/div/div/form/div[5]/div[12]/select[1]/*[. = '"
-				+ pharmacyType + "']";
-		WebElement pharmacyTypeSelected = driver.findElement(By
-				.xpath(pharmacyPath));
-		if (!pharmacyTypeSelected.isSelected()) {
-			pharmacyTypeSelected.click();
-		}
+		sendkeys(zipcodeField, zipcode);
+		selectFromDropDown(distanceDropDown, distance);
 
-		String distancePath = "//div[@id='dcemodal']/div/div/form/div[5]/div[12]/select[2]/*[. = '"
-				+ distance + "']";
-		WebElement distanceSelected = driver
-				.findElement(By.xpath(distancePath));
-		if (!distanceSelected.isSelected()) {
-			distanceSelected.click();
-		}
-
-	}
-
-	public String getPharmacyList() {
-
-		return pharmacyTable.getText();
-	}
-
-	public AddDrugPage selectPharmacy(String pharmacyName) {
-/*
-		WebElement pharmacyTable = driver.findElement(By
-				.xpath("//div[@class='pharmacyListScroll']"));*/
-		List<WebElement> allRows = pharmacyTable.findElements(By.tagName("tr"));
-		for (WebElement row : allRows) {
-			List<WebElement> cells = row.findElements(By.tagName("td"));
-			WebElement pharmacyNameElement = cells.get(0);
-			String[] pharmacyArray = pharmacyNameElement.getText().split("\\n");
-			if (pharmacyArray[1].equalsIgnoreCase(pharmacyName)) {
-				WebElement selectLink = cells.get(1);
-				selectLink.getText();
-				selectLink.findElement(By.linkText("Select")).click();
-				System.out.println("clicked");
-				break;
-				/*selectLink.findElement(By.xpath("//*[contains(text(), 'Select')]")).click();*/
+		continueField.click();
+		CommonUtility.checkPageIsReady(driver);
+		if (countyPopOut.isDisplayed()) {
+			for (WebElement webElement : countyList) {
+				if (webElement.getText().contains(county)) {
+					webElement.click();
+					break;
+				}
 			}
 		}
-		if (driver
-				.getTitle()
-				.equalsIgnoreCase(
-						"Our Medicare Plan Types | UnitedHealthcare®")) {
-			return new AddDrugPage(driver);
-		} else {
-			return null;
+		if (driver.getTitle().equalsIgnoreCase(
+				"Locate a Pharmacy | UnitedHealthcare®")) {
+			return new PharmacySearchPage(driver);
 		}
+		return null;
+	}
+
+	public PharmacySearchPage selectsPlanName(String planName) {
+		selectFromDropDown(planNamesList, planName);
+		if (narrowYourSearchContent.getText().equalsIgnoreCase(
+				"Narrow your search")) {
+			return new PharmacySearchPage(driver);
+		}
+		return null;
+	}
+
+	public PharmacyResultPage searchesPharmacy() {
+
+		searchPharmaciesButton.click();
+		CommonUtility.checkPageIsReady(driver);
+
+		if (pharmacyResultHeader.getText().equalsIgnoreCase(
+				"Pharmacies Available in Your Area")) {
+			return new PharmacyResultPage(driver);
+		}
+		return null;
+
+	}
+
+
+
+	public PharmacyResultPage showAllPharmacies() {
+		allPharmacies.click();
+		searchPharmaciesButton.click();
+		
+		if (pharmacyResultHeader.getText().equalsIgnoreCase(
+				"Pharmacies Available in Your Area")) {
+			return new PharmacyResultPage(driver);
+		}
+		return null;
+	}
+
+	public PharmacySearchPage showParticularService() {
+		particularServices.click();
+		return new PharmacySearchPage(driver);
+
+	}
+
+	@Override
+	public void openAndValidate() {
+		validate(continueField);
+	}
+
+	public PharmacyResultPage searchSelectingPharmacyTypes(
+			String[] pharmacyTypeArray) {
+
+		pharmacyTypeSelectionRadioButton.click();
+		for (String pharmacyType : pharmacyTypeArray) {
+			for (WebElement checkBox : pharmacyTypesCheckboxes) {
+				if (checkBox.getText().equalsIgnoreCase(pharmacyType)) {
+					ElementData elementData = new ElementData("id",
+							"pharmacyTypesCheckboxes");
+					findChildElement(elementData, checkBox).click();
+				}
+			}
+		}
+
+		searchPharmaciesButton.click();
+
+		if (pharmacyResultHeader.getText().equalsIgnoreCase(
+				"Pharmacies Available in Your Area")) {
+			return new PharmacyResultPage(driver);
+		}
+		return null;
 	}
 
 }

@@ -8,6 +8,8 @@ import java.util.List;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.openqa.selenium.NoSuchElementException;
+import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -26,6 +28,9 @@ public class PlanDetailsPage extends UhcDriver {
 
 	@FindBy(id = "planDetailsPage")
 	private WebElement plandetails;
+	
+	@FindBy(id = "learnmorebtnDetails")
+	private WebElement waysToSaveLink;
 	
 	private PageData vppPlanDetails;
 
@@ -49,6 +54,29 @@ public class PlanDetailsPage extends UhcDriver {
 				CommonConstants.PAGE_OBJECT_DIRECTORY_ULAYER_ACQ);
 		openAndValidate();
 	}
+	
+	public ManageDrugPage showWaysToSave(){
+		waysToSaveLink.click();
+		try{
+		if(waysToSaveLink.isDisplayed()){
+			CommonUtility.waitForElementToDisappear(driver, waysToSaveLink,
+					CommonConstants.TIMEOUT_30);
+		}
+	} catch (NoSuchElementException e) {
+		System.out.println("waysToSaveLink not found");
+	} catch (TimeoutException ex) {
+		System.out.println("waysToSaveLink not found");
+	} catch (Exception e) {
+		System.out.println("waysToSaveLink not found");
+	}
+	if (currentUrl().contains("manageDrugList")) {
+		return new ManageDrugPage(driver);
+	} else {
+		return null;
+	}
+			
+		
+	}
 
 	public String getContent() {
 		return plandetails.getText();
@@ -67,6 +95,7 @@ public class PlanDetailsPage extends UhcDriver {
 	@Override
 	public void openAndValidate() {
 		validate(plandetails);
+		validate(waysToSaveLink);
 		JSONObject jsonObject = new JSONObject();
 		for (String key : vppPlanDetails.getExpectedData().keySet()) {
 			List<WebElement> elements = findElements(vppPlanDetails.getExpectedData()

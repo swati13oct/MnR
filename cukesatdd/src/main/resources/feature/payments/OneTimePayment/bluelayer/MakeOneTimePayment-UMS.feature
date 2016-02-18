@@ -1,4 +1,4 @@
-@paymentUms
+@payments
 Feature: To test the payment flow on UMS site 
 Scenario Outline: Verify one time payment for total ammount due in UMS site 
 Given registered UMS with a planType member in UMS site

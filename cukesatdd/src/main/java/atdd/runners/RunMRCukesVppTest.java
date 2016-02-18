@@ -14,7 +14,7 @@ import cucumber.junit.Cucumber;
 @Cucumber.Options(glue = { "atdd.framework","acceptancetests.vpp" }, 
 		features = { "feature/vpp" }, 
 		format = {
-		"pretty", "html:reports/test-report" }, tags ={"@vppTest1"})
+		"pretty", "html:reports/test-report" }, tags ={"@vppTest"})
 
 public class RunMRCukesVppTest {
 	

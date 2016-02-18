@@ -8,7 +8,6 @@ import java.util.List;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -43,6 +42,9 @@ public class VPPPlanSummaryPage extends UhcDriver {
 
 	@FindBy(xpath = "//div[@class='disabledprint ng-scope']")
 	List<WebElement> pdpPlanElement;
+	
+	@FindBy(xpath = "//div[@id='chooseplan']/div/div/h3")
+	private WebElement pageHeading;
 
 	private PageData vppPlanSummary;
 
@@ -236,7 +238,31 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		}
 		return null;
 	}
-	
+
+	public EnrollPlanInfoPage clicksOnEnrollInplanLink(String planName) {
+		if (planName.contains("HMO")) {
+			for (WebElement plan : maPlanElement) {
+				if (plan.getText().contains(planName)) {
+					ElementData elementData = new ElementData("id", "enrollMA");
+					findChildElement(elementData, plan).click();
+				}
+			}
+		}
+		if (planName.contains("PDP")) {
+			for (WebElement plan : pdpPlanElement) {
+				if (plan.getText().contains(planName)) {
+					ElementData elementData = new ElementData("id", "enrollPDP"); // TODO:
+																					// Re-check
+					findChildElement(elementData, plan).click();
+				}
+			}
+		}
+		if (pageHeading.getText().equalsIgnoreCase(
+				"You Have Chosen to Enroll in the Following Plan")) {
+			return new EnrollPlanInfoPage(driver);
+		}
+		return null;
+	}	
 	
 	
 }

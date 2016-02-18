@@ -8,7 +8,9 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
+import pages.acquisition.bluelayer.LoginAssistancePage;
 import acceptancetests.atdd.data.MRConstants;
+import acceptancetests.atdd.util.CommonUtility;
 import atdd.framework.UhcDriver;
 
 /**
@@ -30,6 +32,13 @@ public class LoginPage extends UhcDriver {
 
 	@FindBy(xpath = "//div[@class='fd_userPassSection']/button")
 	private WebElement signInButton;
+	
+	@FindBy(linkText = "Forgot your username or password?")
+	private WebElement forgotUsernamePasswordLink;
+	
+	@FindBy(id = "usercheckbox")
+	private WebElement userNameCheckBox;
+		 
 
 	public LoginPage(WebDriver driver) {
 		super(driver);
@@ -85,6 +94,19 @@ public class LoginPage extends UhcDriver {
 		start(PAGE_URL);
 		validate(loginIn);
 
+	}
+
+	public LoginAssistancePage navigateToLoginAssistance() {
+		loginIn.click();
+		forgotUsernamePasswordLink.click();
+		CommonUtility.waitForPageLoad(driver, userNameCheckBox, 5);
+		if(driver.getTitle().equalsIgnoreCase("UnitedHealthcare Medicare Solutions |Username and Password Assistance"))
+		{
+			return new LoginAssistancePage(driver);
+		}
+		
+		return null;
+	
 	}
 
 }

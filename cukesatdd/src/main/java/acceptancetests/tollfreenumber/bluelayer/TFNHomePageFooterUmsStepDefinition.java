@@ -19,7 +19,6 @@ import pages.acquisition.bluelayer.SearchResultsPage;
 import acceptancetests.atdd.util.CampaignPSC;
 import acceptancetests.atdd.util.TFNCommonConstants;
 import atdd.framework.MRScenario;
-import cucumber.annotation.After;
 import cucumber.annotation.en.Given;
 import cucumber.annotation.en.Then;
 import cucumber.annotation.en.When;
@@ -92,12 +91,5 @@ public class TFNHomePageFooterUmsStepDefinition {
 		System.out.println("HomeFooterContent" + footerContent);
 	}
 
-	@After
-	public void tearDown() {
-
-		WebDriver wd = (WebDriver) getLoginScenario().getBean("webDriver");
-		wd.close();
-		wd.quit();
-	}
 
 }

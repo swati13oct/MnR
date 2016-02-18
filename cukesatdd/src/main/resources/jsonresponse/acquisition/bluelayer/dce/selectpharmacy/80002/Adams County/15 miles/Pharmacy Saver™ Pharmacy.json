@@ -1,0 +1,68 @@
+{"pharmacyTypes":[
+					{"pharmacyDropDown":"Pharmacy Saver™ Pharmacy"},
+					{"pharmacyDropDown":"Standard Network Pharmacy"},
+					{"pharmacyDropDown":"Preferred Mail Service Pharmacy"}
+				],
+"previousLink":"Previous results",
+"pharmacies":[
+				{
+				"pharmacyDistance":"0.41",
+				"selectLink":"Select",
+				"pharmacyName":"SAMS PHARMACY 10-6630 106630"
+				},
+				{
+				"pharmacyDistance":"0.95",
+				"selectLink":"Select",
+				"pharmacyName":"WALGREENS #4366 4366"
+				},
+				{"pharmacyDistance":"1.38",
+				"selectLink":"Select",
+				"pharmacyName":"SAFEWAY PHARMACY #1479 1479"
+				},
+				{"pharmacyDistance":"1.43",
+				"selectLink":"Select",
+				"pharmacyName":"KING SOOPERS PHARMACY 620022"
+				},
+				{
+				"pharmacyDistance":"1.48",
+				"selectLink":"Select",
+				"pharmacyName":"TARGET PHARMACY 2021"
+				},
+				{
+				"pharmacyDistance":"1.49",
+				"selectLink":"Select",
+				"pharmacyName":"WAL-MART PHARMACY 10-5957 105957"
+				},
+				{
+				"pharmacyDistance":"1.79",
+				"selectLink":"Select",
+				"pharmacyName":"WALGREENS #9034 9034"
+				},
+				{
+				"pharmacyDistance":"2.19",
+				"selectLink":"Select",
+				"pharmacyName":"KING SOOPERS PHARMACY 620057"
+				},
+				{
+				"pharmacyDistance":"2.22",
+				"selectLink":"Select",
+				"pharmacyName":"WALGREENS #3266 3266"
+				},
+				{
+				"pharmacyDistance":"2.26",
+				"selectLink":"Select",
+				"pharmacyName":"KING SOOPERS PHARMACY 620003"
+				}
+			],
+"zipcode":"80002",
+"editZipCodeLink":"Edit ZIP code",
+"miles":[
+			{"milesDropDown":"1 mile"},
+			{"milesDropDown":"2 miles"},
+			{"milesDropDown":"5 miles"},
+			{"milesDropDown":"10 miles"},
+			{"milesDropDown":"15 miles"},
+			{"milesDropDown":"25 miles"}
+		],
+"nextLink":"Next results"
+}

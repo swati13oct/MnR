@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
+   <soap:Body>
+      <ns1:invokeServiceResponse xmlns:ns1="http://upm3.uhc.com/colddocument/selectgpsinvoicekeys/v1">
+         <return xmlns:ns2="http://upm3.uhc.com/colddocument/selectgpsinvoicekeys/v1">
+            <responseHeader>
+               <serviceCallStatus>SUCCESS</serviceCallStatus>
+               <externalId xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true"/>
+               <serviceName>SelectGPSInvoiceKeys</serviceName>
+               <serviceVersion>1</serviceVersion>
+               <logLevel>DEFAULT</logLevel>
+               <upmEnvironment>u3c-ts2</upmEnvironment>
+               <internalUse>
+                  <uid>[[EWP||203750962]UPM3-BRAVO-FRONTEND]</uid>
+                  <serviceName>SelectGPSInvoiceKeys</serviceName>
+                  <serviceVersion>1</serviceVersion>
+                  <originalConsumer>EWP</originalConsumer>
+                  <originalServiceName>SelectGPSInvoiceKeys</originalServiceName>
+                  <originalServiceVersion>1</originalServiceVersion>
+                  <logSequence>14</logSequence>
+                  <uidGeneratedBy>DP</uidGeneratedBy>
+               </internalUse>
+            </responseHeader>
+            <documentInformation>
+               <documentKey>
+                  <billDueDate>2015-04-01</billDueDate>
+                  <dateOfBirth>1935-04-30</dateOfBirth>
+                  <householdId>2017300</householdId>
+                  <invoiceId>328841596</invoiceId>
+                  <medicareId>410569371A</medicareId>
+                  <memberId>0019389581</memberId>
+               </documentKey>
+               <espKey>
+                  <numPages>4</numPages>
+                  <repositoryName>175001M.45.93</repositoryName>
+                  <type>AFP</type>
+               </espKey>
+            </documentInformation>
+            <documentInformation>
+               <documentKey>
+                  <billDueDate>2015-04-01</billDueDate>
+                  <dateOfBirth>1935-04-30</dateOfBirth>
+                  <householdId>2017300</householdId>
+                  <invoiceId>328841596</invoiceId>
+                  <medicareId>410569371A</medicareId>
+                  <memberId>0019389581</memberId>
+               </documentKey>
+               <espKey>
+                  <numPages>4</numPages>
+                  <repositoryName>175001M.46.21</repositoryName>
+                  <type>AFP</type>
+               </espKey>
+            </documentInformation>
+         </return>
+      </ns1:invokeServiceResponse>
+   </soap:Body>
+</soap:Envelope>
