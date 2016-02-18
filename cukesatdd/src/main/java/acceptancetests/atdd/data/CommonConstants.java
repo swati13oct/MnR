@@ -569,6 +569,31 @@ public class CommonConstants {
 
 	public static final String PHARMACY_INFORMATION_PAGE_DATA = "pharmacyInformation.json";
 
+	public static final String GLOBAL_FOOTER_PAGE_DATA = "globalfooteractual.json";
+
+
+
+
+
+
+	
+
+	public static final String SITE_MAP_PAGE_DATA = "sitemap.json";
+	
+	public static final String ABOUT_US_PAGE_DATA = "aboutus.json";
+	
+	public static final String CONTACT_US_PAGE_DATA = "contactus.json";
+	
+	public static final String AGENTS_AND_BROKERS_PAGE_DATA = "agentsandbrokers.json";
+	
+	public static final String HOME_PAGE_DISCLAIMER_DATA = "viewalldisclaimer.json";
+	
+	public static final String GLOBAL_HEADER_PAGE_DATA = "globalheaderactual.json";
+	
+	public static final String ALREADY_PLAN_MEMBER_PAGE_DATA = "alreadyPlanMemberActual.json";
+	
+	public static final String HEADER_PAGE_DATA = "headeractual.json";
+		
 	public static final String ENROLL_PLAN_INFO_PAGE_DATA = "enrollinplan.json";
 
 	public static final String MA_PLAN_INFORMATION_PAGE_DATA = "maplaninformation.json";
@@ -577,6 +602,7 @@ public class CommonConstants {
 
 	public static final String BENEFICIARY_INFORMATION_PAGE_DATA = "beneficiaryinformation.json";
 	
+
 	public static final String MA_ADDITIONAL_INFORMATION_PAGE_DATA = "maadditionalinformation.json";
 	
 	public static final String PDP_ADDITIONAL_INFORMATION_PAGE_DATA = "pdpadditionalinformation.json";
@@ -594,5 +620,4 @@ public class CommonConstants {
 	public static final String AGENT_CONFIRMATION_PAGE_DATA = "agentappointmentconfirmation.json";
 
 	public static final String MA_VPP_PAGE_DATA = "maVpp.json";
-	
-}
+	}

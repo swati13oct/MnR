@@ -3,6 +3,8 @@
  */
 package pages.acquisition.bluelayer;
 
+import java.util.ArrayList;
+
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -15,7 +17,7 @@ import atdd.framework.UhcDriver;
  * @author pperugu
  *
  */
-public class LoginAssistancePage extends UhcDriver{
+public class LoginAssistancePage extends GlobalFooterWebElements {
 	
 	@FindBy(id = "usercheckbox")
 	private WebElement userNameCheckBox;
@@ -65,4 +67,16 @@ public class LoginAssistancePage extends UhcDriver{
 		
 	}
 
+
+	public AcquisitionHomePage switchBack() {
+		ArrayList<String> tabs = new ArrayList<String> (driver.getWindowHandles());
+		driver.switchTo().window(tabs.get(0));
+		validate(forgotUsernameLink);
+		if(driver.getTitle().equalsIgnoreCase("Medicare Plans for Different Needs | UnitedHealthcare®"))
+		{
+			return new AcquisitionHomePage(driver);
+		}
+		return null;
+	}	
+	
 }
