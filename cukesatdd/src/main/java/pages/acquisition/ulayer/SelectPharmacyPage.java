@@ -85,13 +85,14 @@ public class SelectPharmacyPage extends UhcDriver {
 		return pharmacyTable.getText();
 	}
 
+
 	public ManageDrugPage selectPharmacy(String pharmacyName,
 			String pharmacyType) {
 		if (!pharmacyType.equalsIgnoreCase("Preferred Mail Service Pharmacy")) {
 			for (WebElement element : pharmacyRows) {
 				if (element.getText().contains(pharmacyName)) {
 					ElementData elementData = new ElementData("className",
-							"selectLink");
+							"dceBlueBtn");
 					WebElement selectLink = findChildElement(elementData,
 							element);
 					selectLink.click();
@@ -121,6 +122,7 @@ public class SelectPharmacyPage extends UhcDriver {
 		} else {
 			return null;
 		}
+	
 	}
 
 	@Override

@@ -68,15 +68,17 @@ public class DceVppPlanDetailsAarpStepDefinition {
 		AcquisitionHomePage acqusitionHomePage = new AcquisitionHomePage(wd);
 		GetStartedPage estimateDrugCost = acqusitionHomePage.navigateToPrescriptionDrug();
 		LocationSearchPage enterZipCode = estimateDrugCost.getStarted();
-		ManageDrugPage manageDrugPage = enterZipCode.enterLocation(zipCode, county, planYear);
+		
+		/*As per the new requirement this should be changed to AddDrugPage*/
+		AddDrugPage addDrugPage = enterZipCode.enterLocation(zipCode, county, planYear);
 		/*PlansummaryPage pg = new PlansummaryPage(wd);
 		PlanDetailsPage planDetailsPage = pg.navigateToPlanDetails("AARP MedicareComplete SecureHorizons Plan 2 (HMO)");
 		String planDetails = planDetailsPage.getPlanDetails();
 		System.out.println("planDetails===========>"+planDetails);*/
-		if (manageDrugPage != null) {
+		if (addDrugPage != null) {
 			getLoginScenario().saveBean("webDriver", wd);
-			getLoginScenario().saveBean(PageConstants.MANAGE_DRUG_PAGE,
-					manageDrugPage);
+			getLoginScenario().saveBean(PageConstants.ADD_DRUG_PAGE,
+					addDrugPage);
 			Assert.assertTrue(true);
 		} else {
 			Assert.fail("unsuccessfull navigation to add drug page");
@@ -88,7 +90,7 @@ public class DceVppPlanDetailsAarpStepDefinition {
 		String drugInitials = givenAttributes.getGherkinRows().get(0)
 				.getCells().get(0);
 		AddDrugPage addDrugPage = (AddDrugPage) getLoginScenario().getBean(
-				PageConstants.MANAGE_DRUG_PAGE);
+				PageConstants.ADD_DRUG_PAGE);
 		addDrugPage.enterDrugInitials(drugInitials);
 	}
 

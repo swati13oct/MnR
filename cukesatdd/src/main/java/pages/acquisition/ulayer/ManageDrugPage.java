@@ -32,8 +32,8 @@ public class ManageDrugPage extends UhcDriver {
 	@FindBy(xpath = "//div[@class='costSavingsDrawer cb']")
 	private WebElement switchTogenericButton;
 
-	@FindBy(css = "div > img[alt=\"Plus Image\"]")
-	WebElement plusSign;
+	/*@FindBy(css = "div > img[alt=\"Plus Image\"]")
+	WebElement plusSign;*/
 
 	@FindBy(xpath = "//div[@class='reduceCosts generic']")
 	private WebElement reduceCostPath;
@@ -52,9 +52,25 @@ public class ManageDrugPage extends UhcDriver {
 
 	@FindBy(xpath = "//div[@id='dcemodal']/div/div/div[8]/div[4]/a[2]")
 	private WebElement pharmacySearchButton;
-
+	
+	@FindBy(xpath="//div[@class='delete']/a")
+	WebElement drugDelete;
+	
 	@FindBy(linkText = "Close and apply changes")
 	WebElement applyChangesButton;
+	
+	@FindBy(xpath = "//div[@class='addDrugBox']")
+	WebElement adddrugdiv;
+	
+	@FindBy(xpath="//div[@class='tabsHead']/div[2]")
+	WebElement selectPharmacyTab;
+
+	
+	@FindBy(xpath = "/html/body/div[3]/div/table/tbody/tr[3]/td/div/div/div/div/div[7]/form/div[2]/span[3]/p/span")
+	private WebElement expectedTooltip;
+	
+	@FindBy(xpath = "//span[@class='tooltipalign']/p/span")
+	private WebElement addtooltip;
 
 	public JSONObject manageDrugJson;
 
@@ -77,26 +93,6 @@ public class ManageDrugPage extends UhcDriver {
 
 	}
 
-	public AddDrugPage navigateToAddDrug() {
-		plusSign.click();
-		try {
-			if (plusSign.isDisplayed()) {
-				CommonUtility.waitForElementToDisappear(driver, plusSign,
-						CommonConstants.TIMEOUT_30);
-			}
-		} catch (NoSuchElementException e) {
-			System.out.println("pharmacySearchButton not found");
-		} catch (TimeoutException ex) {
-			System.out.println("pharmacySearchButton not found");
-		} catch (Exception e) {
-			System.out.println("pharmacySearchButton not found");
-		}
-
-		if (currentUrl().contains("drugSearch")) {
-			return new AddDrugPage(driver);
-		}
-		return null;
-	}
 
 	public SelectPharmacyPage navigateToPharmacyPage() {
 		pharmacySearchButton.click();
@@ -222,7 +218,7 @@ public class ManageDrugPage extends UhcDriver {
 
 	@Override
 	public void openAndValidate() {
-		validate(plusSign);
+		//validate(plusSign);
 
 		if (!selectedDrug.isEmpty()) {
 			JSONObject jsonObject = new JSONObject();
@@ -367,5 +363,58 @@ public class ManageDrugPage extends UhcDriver {
 			return null;
 		}
 	}
+	
+	public AddDrugPage addDrugFlowCheck() {		
+		drugDelete.click();
+		if(currentUrl().contains("drugSearch"))
+		{
+			return new AddDrugPage(driver);
+		}		
+		
+		return null;
+	}
+	
+	public void clickAddImage() {       
+        validate(adddrugdiv);
+        adddrugdiv.click();
+	}
+	
+	
+	/*
+	 * TODO: CodeMonkeys Team: The below two methods can be combined and such that clicking on the pharmacy tab and returning 
+	 * 
+	 * 
+	 * select pharmacy page/screen can be done in a single method, which will make it similar to other methods written 
+	 * 
+	 * in the framework for navigation
+	 * 
+	 * */
+	public void swithedToSelectPharmacyTab(){
+		selectPharmacyTab.click();
+	}
+	
+	public SelectPharmacyPage navigateToUpdatedPharmacyPage() {
+		if (currentUrl().contains("selectPharmacy")) {
+			return new SelectPharmacyPage(driver);
+		} else {
+			return null;
+		}
+
+	}
+
+	/*End of TODO: CodeMonkeys Team*/
+	
+	public void toolTipValidation() {
+		try {
+			Thread.sleep(5000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		validate(expectedTooltip);
+		validate(addtooltip);
+		System.out.println("Tool tips validated");
+	}
+
 
 }

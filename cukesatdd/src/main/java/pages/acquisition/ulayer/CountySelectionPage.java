@@ -30,7 +30,7 @@ public class CountySelectionPage extends UhcDriver{
 	    openAndValidate();
 	}
 	
-	public ManageDrugPage selectCounty(String county)
+	public AddDrugPage selectCounty(String county)
 	{
 		if(counties.size()>1)
 		{
@@ -48,9 +48,9 @@ public class CountySelectionPage extends UhcDriver{
 			
 			continueButton.click();
 		}
-		if(currentUrl().contains("manageDrugList"))
+		if(currentUrl().contains("drugSearch"))
 		{
-			return new ManageDrugPage(driver);
+			return new AddDrugPage(driver);
 		}
 		return null;
 	}
@@ -64,6 +64,31 @@ public class CountySelectionPage extends UhcDriver{
 			validate(county);
 		}
 		
+	}
+	
+	public AddDrugPage chooseCounty(String county)
+	{
+		if(counties.size()>1)
+		{
+			for(WebElement countyElement :counties)
+			{
+				String elementId = countyElement.getAttribute("id");
+				if(elementId.contains(county))
+				{
+					countyElement.click();
+					System.out.println("county clicked");
+				}
+				
+				
+			}	
+			
+			continueButton.click();
+		}
+		if(currentUrl().contains("drugSearch"))
+		{
+			return new AddDrugPage(driver);
+		}
+		return null;
 	}
 
 }

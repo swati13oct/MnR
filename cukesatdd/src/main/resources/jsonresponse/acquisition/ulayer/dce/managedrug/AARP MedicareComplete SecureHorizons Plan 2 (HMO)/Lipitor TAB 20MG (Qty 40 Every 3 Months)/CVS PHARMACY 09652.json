@@ -2,16 +2,17 @@
     "drugs": [
         {
             "selectedDrug": "Lipitor TAB 20MG\nQty 40 Every 3 Months",
-            "switchGenericLink": "Switch to generic",
+            "reduceCostsLink": "Reduce Costs",
             "deleteLink": "Delete",
             "editLink": "Edit"
         }
     ],
-    "planResultsLink": "View plan results",
-    "addDrugHeading": "",
+    "applyChangesLink": "Close and apply changes",
+    "addDrugHeading": "You may be able to save by switching to a generic drug. Select \"Reduce costs\" to view savings available.",
     "currentPharmacy": [
         {
             "bottomPharmacyName": "Current Pharmacy: CVS PHARMACY 09652\nType: Standard Network Pharmacy Edit Pharmacy"
         }
-    ]
+    ],
+    "annualDrugCost":"Estimated annual drug costs: $5,574.60     "
 }

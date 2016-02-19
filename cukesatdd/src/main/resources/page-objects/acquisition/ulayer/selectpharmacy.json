@@ -19,11 +19,11 @@
 },
 "previousLink":{
 "identifier":"linkText",
-"elementName":"Previous results"
+"elementName":"Previous 10 results"
 },
 "nextLink":{
 "identifier":"linkText",
-"elementName":"Next results"
+"elementName":"Next 10 results"
 },
 "pharmacies":{
 "identifier":"className",

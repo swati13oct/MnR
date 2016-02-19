@@ -13,7 +13,7 @@
             "pharmacyDropDown": "Preferred Mail Service Pharmacy"
         }
     ],
-    "previousLink": "Previous results",
+    "previousLink": "Previous 10 results",
     "pharmacies": [
         {
             "pharmacyDistance": "0.41",
@@ -51,7 +51,7 @@
             "pharmacyName": "WALGREENS #9034 9034"
         },
         {
-            "pharmacyDistance": "2.17",
+            "pharmacyDistance": "2.19",
             "selectLink": "Select",
             "pharmacyName": "KING SOOPERS PHARMACY 620057"
         },
@@ -88,5 +88,5 @@
             "milesDropDown": "25 miles"
         }
     ],
-    "nextLink": "Next results"
+    "nextLink": "Next 10 results"
 }

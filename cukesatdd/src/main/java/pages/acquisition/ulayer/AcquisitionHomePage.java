@@ -4,23 +4,22 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.json.JSONException;
-import org.json.JSONObject;import org.openqa.selenium.NoSuchElementException;
-import org.openqa.selenium.TimeoutException;import org.openqa.selenium.WebDriver;
+import org.json.JSONObject;
+import org.openqa.selenium.NoSuchElementException;
+import org.openqa.selenium.TimeoutException;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.FindBys;
 import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
-import com.thoughtworks.selenium.webdriven.commands.WaitForPageToLoad;
-
-import acceptancetests.atdd.data.CommonConstants;import acceptancetests.atdd.data.MRConstants;
-
-import atdd.framework.UhcDriver;
+import acceptancetests.atdd.data.CommonConstants;
+import acceptancetests.atdd.data.MRConstants;
 import acceptancetests.atdd.data.PageData;
 import acceptancetests.atdd.util.CommonUtility;
+
+
 /**
  * @author pperugu
  *
@@ -53,6 +52,10 @@ public class AcquisitionHomePage extends GlobalFooterWebElements {
 
 	@FindBys(value = { @FindBy(xpath = "//table[@id='selectcountytable']/tbody/tr/td") })
 	List<WebElement> countyRows;
+	
+	@FindBy(xpath = "/html/body/div[3]/div/table/tbody/tr[3]/td/table/tbody/tr[2]/td/div/div[2]/div/div/div[2]/div/ul/li[2]/a")
+	WebElement zipCodebtn;
+
 
 	@FindBy(className = "disclaimer hideLink")
 	private WebElement disclaimerHideLink;
@@ -82,16 +85,20 @@ public class AcquisitionHomePage extends GlobalFooterWebElements {
 	private WebElement feedBackPopUp;
 
 	@FindBy(xpath = "//div[@id='ipeL']/div[2]/map/area[3]")
-	private WebElement popUpcloseLink;	private static String AARP_ACQISITION_PAGE_URL = MRConstants.AARP_URL;
+	private WebElement popUpcloseLink;
+
+	@FindBy(id = "ghn_lnk_1")
+	public static WebElement navigationSectionHomeLink;
+
+	private static String AARP_ACQISITION_PAGE_URL = MRConstants.AARP_URL;
+	
 	private PageData globalFooter;
+	
 	public JSONObject globalFooterJson;
 
 	private PageData homePageDisclaimer;
 	public JSONObject homePageDisclaimerJson;
 	
-	@FindBy(id = "ghn_lnk_1")
-	 public static WebElement navigationSectionHomeLink;
-
 	private PageData homePageDisclaimerHide;
 	public JSONObject homePageDisclaimerHideJson;
 	
@@ -209,6 +216,13 @@ public class AcquisitionHomePage extends GlobalFooterWebElements {
 
 		return homefooter.getText();
 	}
+	
+	public VPPPlanSummaryPage enterZipcode(String zipCode, String county, String planYear){
+		sendkeys(zipCodeField, zipCode);		
+		zipCodebtn.click();
+		return new VPPPlanSummaryPage(driver);	
+	}
+
 
 	public JSONObject accessGlobalFooter() {
 		String fileName = CommonConstants.GLOBAL_FOOTER_PAGE_DATA;
@@ -304,6 +318,19 @@ public class AcquisitionHomePage extends GlobalFooterWebElements {
 		}
 		return null;
 	}
+	
+	public PharmacySearchPage navigateToPharmacyLocator() {
+		pharmacyLink.click();
+		if (driver
+				.getTitle()
+				.equalsIgnoreCase(
+						"Find a Pharmacy | AARP® Medicare Plans from UnitedHealthcare®")) {
+			return new PharmacySearchPage(driver);
+
+		}
+		return null;
+	}
+
 
 	public MedicareAdvantagePlansPage medicareAdvantagePlansClick() {
 		validate(GlobalFooterWebElements.medicareAdvantagePlansLink);
@@ -524,16 +551,7 @@ public class AcquisitionHomePage extends GlobalFooterWebElements {
 
           return false;
           }
-	public PharmacySearchPage navigateToPharmacyLocator() {
-		pharmacyLink.click();
-		if (driver
-				.getTitle()
-				.equalsIgnoreCase(
-						"Find a Pharmacy | AARP® Medicare Plans from UnitedHealthcare®")) {
-			return new PharmacySearchPage(driver);
-		}
-		return null;
-	}
+	
 
 	public RequestHelpAndInformationPage navigateToMaMoreHelpAndInfo() {
 		Actions actions = new Actions(driver);
@@ -590,4 +608,6 @@ public class AcquisitionHomePage extends GlobalFooterWebElements {
 		}
 		return null;
 	}
+
+
 }

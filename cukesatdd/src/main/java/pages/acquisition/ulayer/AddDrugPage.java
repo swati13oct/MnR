@@ -32,6 +32,12 @@ public class AddDrugPage extends UhcDriver {
 
 	@FindBy(className = "drugSearchBox")
 	WebElement drugSearchBox;
+	
+	@FindBy(xpath="//div[@class='tabsHead']/div[2]")
+	WebElement selectPharmacyTab;
+	
+	@FindBy(xpath="//div[@class='tabsHead']/div")
+	WebElement manageDrugTab;
 
 	private PageData drugList;
 
@@ -120,6 +126,20 @@ public class AddDrugPage extends UhcDriver {
 	public void openAndValidate() {
 		validate(drugSearchBox);
 
+	}
+	
+	/*
+	 * TODO: CodeMonkeys Team: Please check if this is required. 
+	 * 
+	 * In this framework we perform validations by comparing JSONObjects 
+	 * 
+	 * 
+	 * */
+	public void validateAddDrugFlow(){
+		validate(drugSearchBox);
+		selectPharmacyTab.click();
+		manageDrugTab.click();
+		validate(drugSearchBox);
 	}
 
 }

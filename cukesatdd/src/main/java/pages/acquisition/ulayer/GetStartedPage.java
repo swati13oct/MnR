@@ -14,6 +14,9 @@ public class GetStartedPage extends UhcDriver {
 	
 	@FindBy(linkText = "Get started")
 	private WebElement getStartedLink;
+	
+	@FindBy(xpath = "/html/body/div[3]/div/table/tbody/tr[3]/td/div/table/tbody/tr[2]/td/div/div/div/div[3]/div/div[3]/div[4]/div/div[2]/div/div/div/div/div/div/div[2]/table/tbody/tr/td[3]/div/div[2]/div/div/p/a")
+	WebElement enterDrugLink;
 
 	public GetStartedPage(WebDriver driver) {
 		 super(driver);
@@ -35,6 +38,13 @@ public class GetStartedPage extends UhcDriver {
 	@Override
 	public void openAndValidate() {
 		validate(getStartedLink);
+		
+	}
+	
+	public AddDrugPage navigateToDCE(){
+		enterDrugLink.click();
+		getStartedLink.click();
+		return new AddDrugPage(driver);
 		
 	}
 

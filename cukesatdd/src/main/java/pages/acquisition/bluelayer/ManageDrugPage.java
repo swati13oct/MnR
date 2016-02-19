@@ -31,7 +31,7 @@ public class ManageDrugPage extends UhcDriver {
 
 	@FindBy(xpath = "//div[@class='costSavingsDrawer cb']")
 	private WebElement switchTogenericButton;
-
+	
 	@FindBy(css = "div > img[alt=\"Plus Image\"]")
 	WebElement plusSign;
 
@@ -59,6 +59,22 @@ public class ManageDrugPage extends UhcDriver {
 	@FindBy(linkText = "Close and apply changes")
 	WebElement applyChangesButton;
 
+	@FindBy(xpath="//div[@class='delete']/a")
+	WebElement drugDelete;
+	
+	@FindBy(xpath = "//div[@class='addDrugBox']")
+	WebElement adddrugdiv;
+	
+	@FindBy(xpath="//div[@class='tabsHead']/div[2]")
+	WebElement selectPharmacyTab;
+
+	
+	@FindBy(xpath = "/html/body/div[3]/div/table/tbody/tr[3]/td/div/div/div/div/div[7]/form/div[2]/span[3]/p/span")
+	private WebElement expectedTooltip;
+	
+	@FindBy(xpath = "//span[@class='tooltipalign']/p/span")
+	private WebElement addtooltip;
+
 	public JSONObject manageDrugJson;
 
 	private PageData drugInfo;
@@ -79,6 +95,7 @@ public class ManageDrugPage extends UhcDriver {
 		openAndValidate();
 
 	}
+
 
 	public AddDrugPage navigateToAddDrug() {
 		plusSign.click();
@@ -225,7 +242,8 @@ public class ManageDrugPage extends UhcDriver {
 
 	@Override
 	public void openAndValidate() {
-		validate(plusSign);
+
+		//validate(plusSign);
 
 		if (!selectedDrug.isEmpty()) {
 			JSONObject jsonObject = new JSONObject();
@@ -334,6 +352,8 @@ public class ManageDrugPage extends UhcDriver {
 					+ manageDrugJson);
 		}
 
+	
+
 	}
 
 	public ManageDrugPage switchToGeneric(String drugDosage, String quantity,
@@ -415,6 +435,41 @@ public class ManageDrugPage extends UhcDriver {
 		return null;
 
 	
+		}
+	
+	public AddDrugPage addDrugFlowCheck() {		
+		drugDelete.click();
+		if(currentUrl().contains("drugSearch"))
+		{
+			return new AddDrugPage(driver);
+		}		
+		
+		return null;
 	}
+	
+	public void clickAddImage() {       
+        validate(adddrugdiv);
+        adddrugdiv.click();
+	}
+	
+	public void swithedToSelectPharmacyTab(){
+		selectPharmacyTab.click();
+	}
+	
+	
+
+	public void toolTipValidation() {
+		try {
+			Thread.sleep(5000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		validate(expectedTooltip);
+		validate(addtooltip);
+		System.out.println("Tool tips validated");
+	}
+
+
 
 }

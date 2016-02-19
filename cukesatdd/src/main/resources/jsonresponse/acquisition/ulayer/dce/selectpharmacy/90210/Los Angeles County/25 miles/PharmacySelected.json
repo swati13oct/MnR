@@ -12,61 +12,60 @@
         {
             "pharmacyDropDown": "Preferred Mail Service Pharmacy"
         }
-    ],
-    "previousLink": "Previous 10 results",
-    "pharmacies": [
-        {
-            "pharmacyDistance": "0.14",
-            "selectLink": "Select",
-            "pharmacyName": "COSTCO PHARMACY 676"
+    ],    
+    "pharmacies": [    
+     	{
+            "pharmacyDistance": "2.17",
+            "selectLink": "Selected",
+            "pharmacyName": "CVS PHARMACY 09652"
         },
         {
-            "pharmacyDistance": "0.41",
+            "pharmacyDistance": "1.32",
             "selectLink": "Select",
-            "pharmacyName": "SAMS PHARMACY 10-6630 106630"
+            "pharmacyName": "HORTON AND CONVERSE PHARMACY 33"
         },
         {
-            "pharmacyDistance": "0.95",
+            "pharmacyDistance": "1.92",
             "selectLink": "Select",
-            "pharmacyName": "WALGREENS #4366 4366"
+            "pharmacyName": "VONS PHARMACY #2739 2739"
         },
         {
-            "pharmacyDistance": "1.38",
+            "pharmacyDistance": "1.92",
             "selectLink": "Select",
-            "pharmacyName": "SAFEWAY PHARMACY #1479 1479"
+            "pharmacyName": "GREAT EARTH COMPOUNDS"
         },
         {
-            "pharmacyDistance": "1.4",
+            "pharmacyDistance": "2.06",
             "selectLink": "Select",
-            "pharmacyName": "PIONEER PHARMACY LLC"
+            "pharmacyName": "CARE PLUS CVS/PHARMACY # 02801"
         },
         {
-            "pharmacyDistance": "1.43",
+            "pharmacyDistance": "2.09",
             "selectLink": "Select",
-            "pharmacyName": "KING SOOPERS PHARMACY 620022"
+            "pharmacyName": "CAPITOL DRUGS"
         },
         {
-            "pharmacyDistance": "1.48",
+            "pharmacyDistance": "2.12",
             "selectLink": "Select",
-            "pharmacyName": "TARGET PHARMACY 2021"
+            "pharmacyName": "WEST KNOLL PHARMACY"
+        },       
+        {
+            "pharmacyDistance": "2.18",
+            "selectLink": "Select",
+            "pharmacyName": "COMMUNITY, A WALGREENS PHARMACY"
         },
         {
-            "pharmacyDistance": "1.49",
+            "pharmacyDistance": "2.32",
             "selectLink": "Select",
-            "pharmacyName": "WAL-MART PHARMACY 10-5957 105957"
+            "pharmacyName": "GARFIELD PHARMACY"
         },
         {
-            "pharmacyDistance": "1.52",
+            "pharmacyDistance": "2.36",
             "selectLink": "Select",
-            "pharmacyName": "KMART PHARMACY4129 4129"
-        },
-        {
-            "pharmacyDistance": "1.69",
-            "selectLink": "Select",
-            "pharmacyName": "WHEAT RIDGE PROFESSIONAL PHARMAC"
+            "pharmacyName": "RITE AID PHARMACY 05462 05462"
         }
     ],
-    "zipcode": "80002",
+    "zipcode": "90210",
     "editZipCodeLink": "Edit ZIP code",
     "miles": [
         {
@@ -87,6 +86,5 @@
         {
             "milesDropDown": "25 miles"
         }
-    ],
-    "nextLink": "Next 10 results"
+    ]   
 }

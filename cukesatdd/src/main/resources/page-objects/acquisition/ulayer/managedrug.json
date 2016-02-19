@@ -24,6 +24,10 @@
 "planResultsLink":{
 "identifier":"linkText",
 "elementName":"View plan results"
+},
+"applyChangesLink":{
+"identifier":"linkText",
+"elementName":"Close and apply changes"
 }
 }
 }
