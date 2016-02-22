@@ -139,6 +139,21 @@ public class GlobalFooterWebElements extends UhcDriver {
 	
 	@FindBy(className = "not-registered-text")
 	 public static WebElement notRegisteredText;
+	
+	@FindBy(id = "ghn_lnk_3")
+	 public static WebElement navigationSectionMedicareEducationLink;
+	
+	@FindBy(xpath = "//div[@id='subnav_3']/div/div/div/div/div/h3/a/span")
+	 public static WebElement learnAboutMedicareMedicareEducationLink;
+	
+	@FindBy(xpath = "//div[@id='subnav_3']/div/div/div/div[2]/div/h3/a/span")
+	 public static WebElement exploreChangingPlansMedicareEducationLink;
+	
+	@FindBy(xpath = "//div[@id='subnav_3']/div/div/div/div/div[2]/h3/a/span")
+	 public static WebElement prepareForInitialEnrollmentMedicareEducationLink;
+	
+	@FindBy(xpath = "//div[@id='subnav_3']/div/div/div/div[2]/div[2]/h3/a/span")
+	 public static WebElement discoverMoreResourcesMedicareEducationLink;
 
 	@Override
 	public void openAndValidate() {

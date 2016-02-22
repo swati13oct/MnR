@@ -9,11 +9,13 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.FindBys;
 import org.openqa.selenium.support.PageFactory;
 
 import pages.acquisition.bluelayer.GlobalFooterWebElements;
+import pages.acquisition.ulayer.LearnAboutMedicarePage;
 import acceptancetests.atdd.data.CommonConstants;
 import acceptancetests.atdd.data.MRConstants;
 import acceptancetests.atdd.data.PageData;
@@ -67,6 +69,9 @@ public class AcquisitionHomePage extends GlobalFooterWebElements {
        
        private PageData alreadyPlanMember;
    	   public JSONObject alreadyPlanMemberJson;
+   	   
+	   	private PageData medicareEducationDropDown;
+		public JSONObject medicareEducationDropDownJson;
        
        
        private static String UMS_ACQISITION_PAGE_URL = MRConstants.UHC_URL;
@@ -235,13 +240,13 @@ public SiteMapUMSPage siteMapFooterClick() {
               validate(navigationSectionmedicareEducationLink);
               validate(navigationSectionEnterSearch);
               
-              validate(prescriptionsLink);
-              validate(zipCodeField);
-              validate(viewPlansButton);
-              validate(footerHomeLink);
-              validate(footnotesContent);
+             	validate(prescriptionsLink);
+            	validate(zipCodeField);
+              	validate(viewPlansButton);
+              	validate(footerHomeLink);
+              	validate(footnotesContent);
               
-              //validate(footerHealthAndWellnessLink);
+              	validate(footerHealthAndWellnessLink);
               validate(footerAboutUsLink);
               validate(footerContactUsLink);
               validate(footerSiteMapLink);
@@ -423,6 +428,53 @@ public SiteMapUMSPage siteMapFooterClick() {
 		{
 			return new RegistrationHomePage(driver);
 		}
+		return null;
+	}
+
+
+	public JSONObject accessMedicareEducationDropDown() {
+		
+		validate(navigationSectionMedicareEducationLink);
+		
+		Actions actions = new Actions(driver);
+        actions.moveToElement(navigationSectionMedicareEducationLink);
+        actions.moveToElement(learnAboutMedicareMedicareEducationLink);
+        actions.perform();
+		String fileName = CommonConstants.MEDICARE_EDUCATION_SECTION_DATA;
+		medicareEducationDropDown = CommonUtility.readPageData(fileName,
+			CommonConstants.PAGE_OBJECT_DIRECTORY_BLUELAYER_ACQ);
+
+	JSONObject jsonObject = new JSONObject();
+	for (String key : medicareEducationDropDown.getExpectedData().keySet()) {
+		WebElement element = findElement(medicareEducationDropDown.getExpectedData()
+				.get(key));
+		if (element != null) {
+			if (validate(element)) {
+				try {
+					jsonObject.put(key, element.getText());
+				} catch (JSONException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		}
+	}
+	medicareEducationDropDownJson = jsonObject;
+
+	return medicareEducationDropDownJson;
+	}
+
+
+	public LearnAboutMedicareuhcPage learnAboutMedicareClick() {
+		validate(navigationSectionMedicareEducationLink);
+		Actions actions = new Actions(driver);
+        actions.moveToElement(navigationSectionMedicareEducationLink);
+        actions.moveToElement(learnAboutMedicareMedicareEducationLink);
+        actions.click().build().perform();
+        if(driver.getTitle().equalsIgnoreCase("Learn About Medicare | UnitedHealthcare®")){
+            return new LearnAboutMedicareuhcPage(driver);
+            }
+
 		return null;
 	}      
 

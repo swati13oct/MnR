@@ -1,7 +1,7 @@
 /**
  * 
  */
-package acceptancetests.headernavigation.ulayer;
+package acceptancetests.headernavigation.bluelayer;
 
 import java.io.File;
 
@@ -12,11 +12,11 @@ import org.openqa.selenium.WebDriver;
 import org.skyscreamer.jsonassert.JSONAssert;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import pages.acquisition.ulayer.AcquisitionHomePage;
-import pages.acquisition.ulayer.DiscoverMoreResourcesPage;
-import pages.acquisition.ulayer.ExploreChangingPlansPage;
-import pages.acquisition.ulayer.LearnAboutMedicarePage;
-import pages.acquisition.ulayer.PrepareforInitialEnrollmentPage;
+import pages.acquisition.bluelayer.AcquisitionHomePage;
+import pages.acquisition.bluelayer.DiscoverMoreResourcesuhcPage;
+import pages.acquisition.bluelayer.ExploreChangingPlansuhcPage;
+import pages.acquisition.bluelayer.LearnAboutMedicareuhcPage;
+import pages.acquisition.bluelayer.PrepareForInitialEnrollmentuhcPage;
 import acceptancetests.atdd.data.CommonConstants;
 import acceptancetests.atdd.data.acquisition.PageConstants;
 import acceptancetests.globalfooter.data.AcquistionCommonConstants;
@@ -31,7 +31,7 @@ import cucumber.annotation.en.When;
  * @author saduri
  *
  */
-public class MedicareEducationAarpStepDefinition {
+public class MedicareEducationUmsStepDefinition {
 	
 	@Autowired
 	MRScenario loginScenario;
@@ -40,8 +40,8 @@ public class MedicareEducationAarpStepDefinition {
 		return loginScenario;
 	}
 	
-	@Given("^user is on the AARP Medicare Plans home page$")
-	public void the_user_on_AARP_Medicareplans_Site() {
+	@Given("^user is on the UHC Medicare Solutions home page$")
+	public void the_user_on_UMS_Medicaresolutions_Site() {
 		WebDriver wd = getLoginScenario().getWebDriver();
 
 		AcquisitionHomePage aquisitionhomepage = new AcquisitionHomePage(wd);
@@ -51,7 +51,7 @@ public class MedicareEducationAarpStepDefinition {
 				aquisitionhomepage);
 	}
 	
-	@When("^user accesses Medicare Education section AARP Medicareplans Site$")
+	@When("^user accesses Medicare Education section UHC Medicare Solutions Site$")
 	public void medicare_education() {
 		
 		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
@@ -60,7 +60,7 @@ public class MedicareEducationAarpStepDefinition {
 		/* Get expected data */
 		String fileName = "medicareeducationdropdownexpected";
 		String directory = CommonConstants.ACQUISITION_EXPECTED_DIRECTORY
-				+ File.separator + CommonConstants.SITE_ULAYER
+				+ File.separator + CommonConstants.SITE_BLUELAYER
 				+ File.separator
 				+ AcquistionCommonConstants.MEDICARE_EDUCATION_DROP_DOWN_NAME
 				+ File.separator;
@@ -76,30 +76,29 @@ public class MedicareEducationAarpStepDefinition {
 	
 	}
 	
-	@And("^user clicks on LearnAboutMedicare link by hovering on Medicare Education of the AARP Medicare Plans home page$")
+	@And("^user clicks on LearnAboutMedicare link by hovering on Medicare Education of the UHC Medicare Solutions home page$")
 	public void click_learnaboutmedicare() {
 		AcquisitionHomePage aquisitionhomepage  = (AcquisitionHomePage) getLoginScenario()
 				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
-		LearnAboutMedicarePage learnAboutMedicarePage = aquisitionhomepage.learnAboutMedicareClick();
-		if(learnAboutMedicarePage!= null){
+		LearnAboutMedicareuhcPage learnAboutMedicareuhcPage = aquisitionhomepage.learnAboutMedicareClick();
+		if(learnAboutMedicareuhcPage!= null){
 			getLoginScenario().saveBean(PageConstants.LEARN_ABOUT_MEDICARE_PAGE,
-					learnAboutMedicarePage);
+					learnAboutMedicareuhcPage);
 			Assert.assertTrue(true);
 		} else {
 			Assert.fail("Learn about us page not found");
 		}
-			
 		
 	}
 	
-	@And("^user clicks on ExploreChangingPlans link by hovering on Medicare Education of the AARP Medicare Plans home page$")
+	@And("^user clicks on ExploreChangingPlans link by hovering on Medicare Education of the UHC Medicare Solutions home page$")
 	public void click_exploreChangingPlans() {
-		LearnAboutMedicarePage learnAboutMedicarePage  = (LearnAboutMedicarePage) getLoginScenario()
+		LearnAboutMedicareuhcPage learnAboutMedicarePage  = (LearnAboutMedicareuhcPage) getLoginScenario()
 				.getBean(PageConstants.LEARN_ABOUT_MEDICARE_PAGE);
-		ExploreChangingPlansPage exploreChangingPlansPage = learnAboutMedicarePage.exploreChangingPlansClick();
-		if(exploreChangingPlansPage!= null){
+		ExploreChangingPlansuhcPage exploreChangingPlansuhcPage = learnAboutMedicarePage.exploreChangingPlansClick();
+		if(exploreChangingPlansuhcPage!= null){
 			getLoginScenario().saveBean(PageConstants.EXPLORE_CHANGING_PLANS_PAGE,
-					exploreChangingPlansPage);
+					exploreChangingPlansuhcPage);
 			Assert.assertTrue(true);
 		} else {
 			Assert.fail("Explore Changing Plans page not found");
@@ -108,14 +107,14 @@ public class MedicareEducationAarpStepDefinition {
 		
 	}
 	
-	@And("^user clicks on PrepareForInitialEnrollment link by hovering on Medicare Education of the AARP Medicare Plans home page$")
+	@And("^user clicks on PrepareForInitialEnrollment link by hovering on Medicare Education of the UHC Medicare Solutions home page$")
 	public void click_prepareForInitialEnrollment() {
-		ExploreChangingPlansPage exploreChangingPlansPage  = (ExploreChangingPlansPage) getLoginScenario()
+		ExploreChangingPlansuhcPage exploreChangingPlansPage  = (ExploreChangingPlansuhcPage) getLoginScenario()
 				.getBean(PageConstants.EXPLORE_CHANGING_PLANS_PAGE);
-		PrepareforInitialEnrollmentPage prepareforInitialEnrollmentPage = exploreChangingPlansPage.prepareForInitialEnrollmentClick();
-		if(prepareforInitialEnrollmentPage!= null){
+		PrepareForInitialEnrollmentuhcPage prepareforInitialEnrollmentuhcPage = exploreChangingPlansPage.prepareForInitialEnrollmentClick();
+		if(prepareforInitialEnrollmentuhcPage!= null){
 			getLoginScenario().saveBean(PageConstants.PREPARE_FOR_INITIAL_ENROLLMENT_PAGE,
-					prepareforInitialEnrollmentPage);
+					prepareforInitialEnrollmentuhcPage);
 			Assert.assertTrue(true);
 		} else {
 			Assert.fail("Prepare for Initial Enrollment page not found");
@@ -124,14 +123,14 @@ public class MedicareEducationAarpStepDefinition {
 		
 	}
 	
-	@And("^user clicks on DiscoverMoreResources link by hovering on Medicare Education of the AARP Medicare Plans home page$")
+	@And("^user clicks on DiscoverMoreResources link by hovering on Medicare Education of the UHC Medicare Solutions home page$")
 	public void click_discoverMoreResources() {
-		PrepareforInitialEnrollmentPage prepareforInitialEnrollmentPage  = (PrepareforInitialEnrollmentPage) getLoginScenario()
+		PrepareForInitialEnrollmentuhcPage prepareforInitialEnrollmentuhcPage  = (PrepareForInitialEnrollmentuhcPage) getLoginScenario()
 				.getBean(PageConstants.PREPARE_FOR_INITIAL_ENROLLMENT_PAGE);
-		DiscoverMoreResourcesPage discoverMoreResourcesPage = prepareforInitialEnrollmentPage.discoverMoreResourcesClick();
-		if(discoverMoreResourcesPage!= null){
+		DiscoverMoreResourcesuhcPage discoverMoreResourcesuhcPage = prepareforInitialEnrollmentuhcPage.discoverMoreResourcesClick();
+		if(discoverMoreResourcesuhcPage!= null){
 			getLoginScenario().saveBean(PageConstants.DISCOVER_MORE_RESOURCES_PAGE,
-					discoverMoreResourcesPage);
+					discoverMoreResourcesuhcPage);
 			Assert.assertTrue(true);
 		} else {
 			Assert.fail("Discover More Resources page not found");
@@ -140,10 +139,8 @@ public class MedicareEducationAarpStepDefinition {
 		
 	}
 	
-	
-	
-	@Then("^the user validates all links in the medicare education drop down of AARP site$")
-	public void user_validate_medicare_education_links_aarp() {
+	@Then("^the user validates all links in the medicare education drop down of UMS site$")
+	public void user_validate_medicare_education_links_ums() {
 
 		JSONObject medicareEducationDropDowmActual = (JSONObject) getLoginScenario()
 				.getBean(AcquistionCommonConstants.MEDICARE_EDUCATION_DROP_DOWN_ACTUAL);
@@ -163,16 +160,14 @@ public class MedicareEducationAarpStepDefinition {
 
 	}
 	
-	@After
+	/*@After
     public void tearDown() {
            WebDriver wd = (WebDriver) getLoginScenario().getBean(
                         CommonConstants.WEBDRIVER);
            wd.quit();
            getLoginScenario().flushBeans();
-    }
-
+    }*/
+	
 	
 
 }
-
-
