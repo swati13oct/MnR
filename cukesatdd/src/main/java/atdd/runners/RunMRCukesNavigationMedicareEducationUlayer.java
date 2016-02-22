@@ -17,6 +17,6 @@ import cucumber.junit.Cucumber;
 		features = { "feature/medicare-education" }, 
 		format = {
 		"pretty", "html:reports/test-report" }, tags ={"@medicareEducationUlayer"})
-public class RunMRCukesNavigationMedicareEducation {
+public class RunMRCukesNavigationMedicareEducationUlayer {
 
 }
