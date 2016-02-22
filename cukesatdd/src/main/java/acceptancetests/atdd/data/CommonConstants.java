@@ -569,9 +569,8 @@ public class CommonConstants {
 
 	public static final String PHARMACY_INFORMATION_PAGE_DATA = "pharmacyInformation.json";
 
-
 	public static final String GLOBAL_FOOTER_PAGE_DATA = "globalfooteractual.json";
-	
+
 	public static final String SITE_MAP_PAGE_DATA = "sitemap.json";
 	
 	public static final String ABOUT_US_PAGE_DATA = "aboutus.json";
@@ -614,5 +613,9 @@ public class CommonConstants {
 
 	public static final String MA_VPP_PAGE_DATA = "maVpp.json";
 
+
 	
 }
+
+
+

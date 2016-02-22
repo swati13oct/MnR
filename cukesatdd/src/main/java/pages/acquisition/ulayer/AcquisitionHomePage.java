@@ -3,32 +3,21 @@ package pages.acquisition.ulayer;
 import java.util.ArrayList;
 import java.util.List;
 
-
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.TimeoutException;
-
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.FindBys;
 import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
-
-
-import com.thoughtworks.selenium.webdriven.commands.WaitForPageToLoad;
 
 import acceptancetests.atdd.data.CommonConstants;
 import acceptancetests.atdd.data.MRConstants;
 import acceptancetests.atdd.data.PageData;
 import acceptancetests.atdd.util.CommonUtility;
-
-
-import atdd.framework.UhcDriver;
 
 
 /**
@@ -98,17 +87,18 @@ public class AcquisitionHomePage extends GlobalFooterWebElements {
 	@FindBy(xpath = "//div[@id='ipeL']/div[2]/map/area[3]")
 	private WebElement popUpcloseLink;
 
+	@FindBy(id = "ghn_lnk_1")
+	public static WebElement navigationSectionHomeLink;
 
 	private static String AARP_ACQISITION_PAGE_URL = MRConstants.AARP_URL;
+	
 	private PageData globalFooter;
+	
 	public JSONObject globalFooterJson;
 
 	private PageData homePageDisclaimer;
 	public JSONObject homePageDisclaimerJson;
 	
-	@FindBy(id = "ghn_lnk_1")
-	 public static WebElement navigationSectionHomeLink;
-
 	private PageData homePageDisclaimerHide;
 	public JSONObject homePageDisclaimerHideJson;
 	
@@ -325,7 +315,10 @@ public class AcquisitionHomePage extends GlobalFooterWebElements {
 				.equalsIgnoreCase(
 						"About UnitedHealthcare® | AARP® Medicare Plans from UnitedHealthcare")) {
 			return new AboutUsAARPPage(driver);
-
+		}
+		return null;
+	}
+	
 	public PharmacySearchPage navigateToPharmacyLocator() {
 		pharmacyLink.click();
 		if (driver

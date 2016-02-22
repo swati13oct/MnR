@@ -14,14 +14,12 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+
 import acceptancetests.atdd.data.CommonConstants;
 import acceptancetests.atdd.data.PageData;
 import acceptancetests.atdd.util.CommonUtility;
 import acceptancetests.dce.data.DceCommonConstants;
 import atdd.framework.MRScenario;
-import atdd.framework.UhcDriver;
-
-
 import atdd.framework.UhcDriver;
 
 public class SelectGenericPage extends UhcDriver {

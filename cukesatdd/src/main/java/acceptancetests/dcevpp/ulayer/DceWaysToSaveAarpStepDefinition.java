@@ -66,11 +66,11 @@ public class DceWaysToSaveAarpStepDefinition {
 		AcquisitionHomePage acqusitionHomePage = new AcquisitionHomePage(wd);
 		GetStartedPage estimateDrugCost = acqusitionHomePage.navigateToPrescriptionDrug();
 		LocationSearchPage enterZipCode = estimateDrugCost.getStarted();
-		ManageDrugPage manageDrugPage = enterZipCode.enterLocation(zipCode, county,planYear);
-		if (manageDrugPage != null) {
+		AddDrugPage addDrugPage = enterZipCode.enterLocation(zipCode, county,planYear);
+		if (addDrugPage != null) {
 			getLoginScenario().saveBean("webDriver", wd);
-			getLoginScenario().saveBean(PageConstants.MANAGE_DRUG_PAGE,
-					manageDrugPage);
+			getLoginScenario().saveBean(PageConstants.ADD_DRUG_PAGE,
+					addDrugPage);
 			Assert.assertTrue(true);
 		} else {
 			Assert.fail("unsuccessfull navigation to add drug page");

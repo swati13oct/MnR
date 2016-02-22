@@ -27,7 +27,7 @@ public class LocationSearchPage extends UhcDriver{
 	       openAndValidate();
 	}
 
-	public ManageDrugPage enterLocation(String zipCode, String county, String planYear) {
+	public AddDrugPage enterLocation(String zipCode, String county, String planYear) {
 		sendkeys(zipCodeField, zipCode);
 		if(null!=planYear)
 		{
@@ -37,15 +37,15 @@ public class LocationSearchPage extends UhcDriver{
 		}
 		continueButton.click();
 		
-		if(currentUrl().contains("manageDrugList"))
+		if(currentUrl().contains("drugSearch"))
 		{
-			return new ManageDrugPage(driver);
+			return new AddDrugPage(driver);
 		}
 		else if(currentUrl().contains("enterZipCode"))
 		{
 			CountySelectionPage countySelectionPage = new CountySelectionPage(driver);
-			ManageDrugPage manageDrugPage = countySelectionPage.selectCounty(county);
-			return manageDrugPage;
+			AddDrugPage addDrugPage = countySelectionPage.selectCounty(county);
+			return addDrugPage;
 		}
 		
 		return null;
@@ -58,6 +58,15 @@ public class LocationSearchPage extends UhcDriver{
 		validate(continueButton);
 		
 	}
+	
+	
+	/*
+	 * TODO: CodeMonkeys Team: Please check if this is required. Because a similar method is written above that does the same.
+	 * 
+	 * The method is using selenium operation for which we consume the wrapper methods written in UhcDriver
+	 * 
+	 * 
+	 * */
 	
 	public AddDrugPage enterLoc(String zipCode, String county, String planYear) {
 		sendkeys(zipCodeField, zipCode);

@@ -43,13 +43,11 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	@FindBy(xpath = "//div[@class='disabledprint ng-scope']")
 	List<WebElement> pdpPlanElement;
 	
-
 	@FindBy(xpath = "//div[@id='chooseplan']/div/div/h3")
 	private WebElement pageHeading;
 
 	@FindBy(id = "editDrugMA")
 	private WebElement editDrugListLink;
-
 
 	private PageData vppPlanSummary;
 
@@ -278,7 +276,6 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		return new GetStartedPage(driver);
 	}
 
-	
     public ManageDrugPage navigateToEditDrugList(String planName) {
 		
 		if (planName.contains("HMO")) {

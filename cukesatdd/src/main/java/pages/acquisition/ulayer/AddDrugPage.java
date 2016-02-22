@@ -128,6 +128,13 @@ public class AddDrugPage extends UhcDriver {
 
 	}
 	
+	/*
+	 * TODO: CodeMonkeys Team: Please check if this is required. 
+	 * 
+	 * In this framework we perform validations by comparing JSONObjects 
+	 * 
+	 * 
+	 * */
 	public void validateAddDrugFlow(){
 		validate(drugSearchBox);
 		selectPharmacyTab.click();

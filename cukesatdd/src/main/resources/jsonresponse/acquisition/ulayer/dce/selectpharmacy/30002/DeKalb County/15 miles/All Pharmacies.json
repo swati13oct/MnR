@@ -13,7 +13,7 @@
             "pharmacyDropDown": "Preferred Mail Service Pharmacy"
         }
     ],
-    "previousLink": "Previous results",
+    "previousLink": "Previous 10 results",
     "pharmacies": [
         {
             "pharmacyDistance": "0.72",
@@ -36,7 +36,7 @@
             "pharmacyName": "QOL MEDS 10958"
         },
         {
-            "pharmacyDistance": "1.64",
+            "pharmacyDistance": "1.62",
             "selectLink": "Select",
             "pharmacyName": "KROGER PHARMACY 11459"
         },
@@ -61,7 +61,7 @@
             "pharmacyName": "CVS PHARMACY 02175"
         },
         {
-            "pharmacyDistance": "1.95",
+            "pharmacyDistance": "1.94",
             "selectLink": "Select",
             "pharmacyName": "CVS PHARMACY 07778"
         }
@@ -88,5 +88,5 @@
             "milesDropDown": "25 miles"
         }
     ],
-    "nextLink": "Next results"
+    "nextLink": "Next 10 results"
 }

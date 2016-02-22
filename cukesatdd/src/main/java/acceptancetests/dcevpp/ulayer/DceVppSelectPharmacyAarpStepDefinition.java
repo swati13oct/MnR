@@ -338,7 +338,15 @@ public class DceVppSelectPharmacyAarpStepDefinition {
 		SelectPharmacyPage pharmacySearchPage = (SelectPharmacyPage) getLoginScenario().getBean(PageConstants.PHARMACY_SEARCH_PAGE);
 		String pharmacyName = pharmacyAttributes.getGherkinRows().get(0).getCells().get(0);
 		getLoginScenario().saveBean(DceCommonConstants.PHARMACY_NAME, pharmacyName);
-		 ManageDrugPage manageDrugPage = pharmacySearchPage.selectPharmacy(pharmacyName);
+		
+		/*
+		 * TODO: CodeMonkeys Team: To include all scenarios and all types of pharmacies we need to pass pharmacyType to the below method
+		 * 
+		 * As of now passing it as null, please make sure to pass the required value here
+		 * 
+		 * 
+		 * */
+		 ManageDrugPage manageDrugPage = pharmacySearchPage.selectPharmacy(pharmacyName, null);
 		 manageDrugPage.swithedToSelectPharmacyTab();
 		 
 		 SelectPharmacyPage pharmacySearch = manageDrugPage.navigateToUpdatedPharmacyPage();

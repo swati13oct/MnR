@@ -21,9 +21,6 @@ import acceptancetests.atdd.util.CommonUtility;
 import atdd.framework.UhcDriver;
 
 public class SelectDosagePage extends UhcDriver{
-	
-
-
 
 	@FindBy(className = "borderBtmGrey")
 	List<WebElement> drugDosage;
@@ -207,11 +204,19 @@ public class SelectDosagePage extends UhcDriver{
 	
 	
 	/*
+<<<<<<< HEAD
 
 import atdd.framework.UhcDriver;
 
 public class SelectDosagePage extends UhcDriver {
 
+=======
+=======
+import atdd.framework.UhcDriver;
+
+public class SelectDosagePage extends UhcDriver {
+>>>>>>> remotes/origin/codeMonkeys
+>>>>>>> remotes/origin/theATeam
 
 	@FindBy(className = "borderBtmGrey")
 	List<WebElement> drugDosages;

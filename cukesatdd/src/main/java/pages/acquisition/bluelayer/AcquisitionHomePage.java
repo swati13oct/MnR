@@ -39,8 +39,7 @@ public class AcquisitionHomePage extends GlobalFooterWebElements {
        @FindBy(id = "homefooter")
        private WebElement homefooter;
 
-
-       @FindBys(value = { @FindBy(xpath = "//table[@id='selectcountytable']/tbody/tr/td") })
+		@FindBys(value = { @FindBy(xpath = "//table[@id='selectcountytable']/tbody/tr/td") })
        List<WebElement> countyRows;
        
        @FindBy(linkText = "View all disclaimer information")
@@ -51,6 +50,9 @@ public class AcquisitionHomePage extends GlobalFooterWebElements {
        
        @FindBy(id = "medicareTitle")
    	   private WebElement medicareTitleText;
+
+		@FindBy(linkText = "pharmacy")
+		private WebElement pharmacyLink;
        
        private PageData homePageDisclaimer;
        public JSONObject homePageDisclaimerJson;
@@ -60,17 +62,9 @@ public class AcquisitionHomePage extends GlobalFooterWebElements {
        
        private PageData globalFooter;
 
-	@FindBys(value = { @FindBy(xpath = "//table[@id='selectcountytable']/tbody/tr/td") })
-	private List<WebElement> countyRows;
-	
-	@FindBy(linkText = "pharmacy")
-	private WebElement pharmacyLink;
-
-
        public JSONObject globalFooterJson;
        
        private PageData globalHeader;
-
        public JSONObject globalHeaderJson;
        
        private PageData alreadyPlanMember;
@@ -315,7 +309,6 @@ public SiteMapUMSPage siteMapFooterClick() {
 		}
 		return null;
 	}
-	
 
 	public DisclaimersPage importantDisclaimersClick() {
 	    validate(importantDisclosuresLink);
@@ -324,20 +317,9 @@ public SiteMapUMSPage siteMapFooterClick() {
           if(driver.getTitle().equalsIgnoreCase("Disclaimers | UnitedHealthcare®")){
           return new DisclaimersPage(driver);
           }
-
-	public PharmacySearchPage navigateToPharmacyLocator() {
-		pharmacyLink.click();
-		if(driver.getTitle().equalsIgnoreCase("Locate a Pharmacy | UnitedHealthcare®"))
-		{
-			return new PharmacySearchPage(driver); 
-		}
-		return null;
-		
-	}
-
-
           return null;
-          }
+    }
+	
 	
 	public AcquisitionHomePage navigationSectionHomeLinkClick() {
 	    validate(navigationSectionHomeLink);
@@ -450,7 +432,17 @@ public SiteMapUMSPage siteMapFooterClick() {
 			return new RegistrationHomePage(driver);
 		}
 		return null;
-	}      
+	}     
+
+	public PharmacySearchPage navigateToPharmacyLocator() {
+		pharmacyLink.click();
+		if(driver.getTitle().equalsIgnoreCase("Locate a Pharmacy | UnitedHealthcare®"))
+		{
+			return new PharmacySearchPage(driver); 
+		}
+		return null;
+		
+	} 
 
 }
 

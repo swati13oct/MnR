@@ -3,7 +3,7 @@
 					{"pharmacyDropDown":"Standard Network Pharmacy"},
 					{"pharmacyDropDown":"Preferred Mail Service Pharmacy"}
 				],
-"previousLink":"Previous results",
+"previousLink":"Previous 10 results",
 "pharmacies":[
 				{
 				"pharmacyDistance":"0.41",
@@ -64,5 +64,5 @@
 			{"milesDropDown":"15 miles"},
 			{"milesDropDown":"25 miles"}
 		],
-"nextLink":"Next results"
+"nextLink":"Next 10 results"
 }

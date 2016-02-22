@@ -5,23 +5,22 @@ package pages.acquisition.bluelayer;
 
 import java.util.List;
 
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.TimeoutException;
-
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.FindBys;
 import org.openqa.selenium.support.PageFactory;
 
-
+import acceptancetests.atdd.data.CommonConstants;
 import acceptancetests.atdd.data.ElementData;
+import acceptancetests.atdd.data.PageData;
 import acceptancetests.atdd.util.CommonUtility;
+import atdd.framework.MRScenario;
 import atdd.framework.UhcDriver;
 
 /**
@@ -78,16 +77,6 @@ public class PharmacySearchPage extends UhcDriver {
 	@FindBy(id = "services")
 	private WebElement pharmacyTypeSelectionRadioButton;
 
-import pages.acquisition.ulayer.ManageDrugPage;
-import atdd.framework.MRScenario;
-import atdd.framework.UhcDriver;
-import acceptancetests.atdd.data.CommonConstants;
-import acceptancetests.atdd.data.ElementData;
-import acceptancetests.atdd.data.PageData;
-import acceptancetests.atdd.util.CommonUtility;
-
-public class PharmacySearchPage extends UhcDriver{
-
 	@FindBy(xpath = "//div[@class='pharmacyListScroll']")
 	private WebElement pharmacyTable;
 	
@@ -105,8 +94,6 @@ public class PharmacySearchPage extends UhcDriver{
 	
 	public JSONObject availablePharmaciesJson;
 	
-
-
 	private PageData pharmacies;
 	
 	public PageData pharmacyInfo;
@@ -183,16 +170,10 @@ public class PharmacySearchPage extends UhcDriver{
 		return null;
 	}
 
-
 	public PharmacySearchPage showParticularService() {
 		particularServices.click();
 		return new PharmacySearchPage(driver);
 
-	}
-
-	@Override
-	public void openAndValidate() {
-		validate(continueField);
 	}
 
 	public PharmacyResultPage searchSelectingPharmacyTypes(
@@ -206,97 +187,71 @@ public class PharmacySearchPage extends UhcDriver{
 							"pharmacyTypesCheckboxes");
 					findChildElement(elementData, checkBox).click();
 				}
-
-	/*public AddDrugPage selectPharmacy(String pharmacyName) {
-
-		WebElement pharmacyTable = driver.findElement(By
-				.xpath("//div[@class='pharmacyListScroll']"));
-		List<WebElement> allRows = pharmacyTable.findElements(By.tagName("tr"));
-		for (WebElement row : allRows) {
-			List<WebElement> cells = row.findElements(By.tagName("td"));
-			WebElement pharmacyNameElement = cells.get(0);
-			String[] pharmacyArray = pharmacyNameElement.getText().split("\\n");
-			if (pharmacyArray[1].equalsIgnoreCase(pharmacyName)) {
-				WebElement selectLink = cells.get(1);
-				selectLink.getText();
-				selectLink.findElement(By.linkText("Select")).click();
-				System.out.println("clicked");
-				break;
-				selectLink.findElement(By.xpath("//*[contains(text(), 'Select')]")).click();
-
+				
 			}
-		}
-
-		searchPharmaciesButton.click();
-
-		if (pharmacyResultHeader.getText().equalsIgnoreCase(
-				"Pharmacies Available in Your Area")) {
-			return new PharmacyResultPage(driver);
 		}
 		return null;
 	}
+	
+		public AddDrugPage selectPharmacy(String pharmacyName) {
+			for (WebElement element : pharmacyRows) {
+				if (element.getText().contains(pharmacyName)) {
+					ElementData elementData = new ElementData("className",
+							"dceBlueBtn");
+					WebElement selectLink = findChildElement(elementData, element);
+					selectLink.click();
+					break;
+				}
+
+			}
+			try {
+				if (pharmacyTable.isDisplayed()) {
+					CommonUtility.waitForElementToDisappear(driver, pharmacyTable,
+							CommonConstants.TIMEOUT_30);
+				}
+			} catch (NoSuchElementException e) {
+				System.out.println("pharmacyTable not found");
+			} catch (TimeoutException ex) {
+				System.out.println("pharmacyTable not found");
+			} catch (Exception e) {
+				System.out.println("pharmacyTable not found");
+			}
+			if (currentUrl().contains("manageDrugList")) {
+				return new AddDrugPage(driver);
+			} else {
+				return null;
+			}
+		}
+
+		public PharmacySearchPage searchPharmacies(String pharmacyType,
+				String distance) {
+			try {
+				Thread.sleep(5000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			/*ElementData pharmacyTypeElement = new ElementData("select:className",
+					"pharmacyDropDown");
+			List<WebElement> pharmacyTypeOptions = findElements(pharmacyTypeElement);
 	*/
-	
-	public AddDrugPage selectPharmacy(String pharmacyName) {
-		for (WebElement element : pharmacyRows) {
-			if (element.getText().contains(pharmacyName)) {
-				ElementData elementData = new ElementData("className",
-						"dceBlueBtn");
-				WebElement selectLink = findChildElement(elementData, element);
-				selectLink.click();
-				break;
+			for (WebElement pharmacyTypeOption : pharmacyDropDowmElements) {
+				if (pharmacyTypeOption.getText().equalsIgnoreCase(pharmacyType)) {
+					pharmacyTypeOption.click();
+				}
 			}
+	/*
+			ElementData distanceElement = new ElementData("select:className",
+					"milesDropDown");
+			List<WebElement> distanceOptions = findElements(distanceElement);*/
 
-		}
-		try {
-			if (pharmacyTable.isDisplayed()) {
-				CommonUtility.waitForElementToDisappear(driver, pharmacyTable,
-						CommonConstants.TIMEOUT_30);
+			for (WebElement distanceOption : milesDropDownElements) {
+				if (distanceOption.getText().equalsIgnoreCase(distance)) {
+					distanceOption.click();
+				}
 			}
-		} catch (NoSuchElementException e) {
-			System.out.println("pharmacyTable not found");
-		} catch (TimeoutException ex) {
-			System.out.println("pharmacyTable not found");
-		} catch (Exception e) {
-			System.out.println("pharmacyTable not found");
+			return new PharmacySearchPage(driver);
 		}
-		if (currentUrl().contains("manageDrugList")) {
-			return new AddDrugPage(driver);
-		} else {
-			return null;
-		}
-	}
-
-	public PharmacySearchPage searchPharmacies(String pharmacyType,
-			String distance) {
-		try {
-			Thread.sleep(5000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		/*ElementData pharmacyTypeElement = new ElementData("select:className",
-				"pharmacyDropDown");
-		List<WebElement> pharmacyTypeOptions = findElements(pharmacyTypeElement);
-*/
-		for (WebElement pharmacyTypeOption : pharmacyDropDowmElements) {
-			if (pharmacyTypeOption.getText().equalsIgnoreCase(pharmacyType)) {
-				pharmacyTypeOption.click();
-			}
-		}
-/*
-		ElementData distanceElement = new ElementData("select:className",
-				"milesDropDown");
-		List<WebElement> distanceOptions = findElements(distanceElement);*/
-
-		for (WebElement distanceOption : milesDropDownElements) {
-			if (distanceOption.getText().equalsIgnoreCase(distance)) {
-				distanceOption.click();
-			}
-		}
-		return new PharmacySearchPage(driver);
-	}
-	
 	
 	@Override
 	public void openAndValidate() {
@@ -407,6 +362,11 @@ public class PharmacySearchPage extends UhcDriver{
 		JSONObject availablePharmaciesExpectedJson = MRScenario
 				.readExpectedJson(fileName, directory);
 		return availablePharmaciesExpectedJson;
+	}
+	
+	public String getPharmacyList() {
+
+		return pharmacyTable.getText();
 	}
 	
 

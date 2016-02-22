@@ -17,7 +17,7 @@ public class VPPCommonConstants {
 
 	public static final String VPP_PLAN_SUMMARY_EXPECTED = "planSummaryExpectedJson";
 
-	public static final String VPP_PLAN_SUMMARY_ACTUAL = "planSummaryExpectedJson";
+	public static final String VPP_PLAN_SUMMARY_ACTUAL = "planSummaryActualJson";
 
 	public static final String PLAN_NAME = "planName";
 

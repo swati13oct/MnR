@@ -90,25 +90,22 @@ public class DceVppAarpStepDefinition {
 		GetStartedPage getStartedPage = acqusitionHomePage
 				.navigateToPrescriptionDrug();
 		LocationSearchPage enterZipCode = getStartedPage.getStarted();
-		AddDrugPage addDrugPage = enterZipCode.enterLoc(zipCode,county, planYear);
+		AddDrugPage addDrugPage = enterZipCode.enterLocation(zipCode,
+				county, planYear);
+
 		if (addDrugPage != null) {
 			getLoginScenario().saveBean(PageConstants.ADD_DRUG_PAGE,
 					addDrugPage);
-			
-		} 
+
+		}
 	}
 
 	@When("^the user search the drug using drug initials in AARP site$")
 	public void user_validated_drugInformation(DataTable givenAttributes) {
 		String drugInitials = givenAttributes.getGherkinRows().get(0)
 				.getCells().get(0);
-/*		ManageDrugPage manageDrugPage = (ManageDrugPage) getLoginScenario()
-				.getBean(PageConstants.MANAGE_DRUG_PAGE);
-				
-		AddDrugPage addDrugPage = manageDrugPage.navigateToAddDrug();*/
-		AddDrugPage addDrugPage = (AddDrugPage) getLoginScenario().getBean(
-				PageConstants.ADD_DRUG_PAGE);
-		
+		AddDrugPage addDrugPage = (AddDrugPage) getLoginScenario()
+				.getBean(PageConstants.ADD_DRUG_PAGE);
 		addDrugPage.enterDrugInitials(drugInitials);
 
 		/* Get actual Json */
@@ -579,8 +576,12 @@ public class DceVppAarpStepDefinition {
 	public void user_validates_following_benefits_ui_aarp() {
 		JSONObject planSummaryActualJson = (JSONObject) getLoginScenario()
 				.getBean(VPPCommonConstants.VPP_PLAN_SUMMARY_ACTUAL);
+		
+		System.out.println("planSummaryActualJson plan count----->"+planSummaryActualJson);
 		JSONObject planSummaryExpectedJson = (JSONObject) getLoginScenario()
 				.getBean(VPPCommonConstants.VPP_PLAN_SUMMARY_EXPECTED);
+		
+		System.out.println("planSummaryExpectedJson plan count----->"+planSummaryExpectedJson);
 		try {
 			JSONAssert.assertEquals(planSummaryExpectedJson,
 					planSummaryActualJson, true);
@@ -802,7 +803,6 @@ public class DceVppAarpStepDefinition {
 		}
 	}
 	
-
 	@When("^the user view available options to save on drugs in AARP site$")
 	public void ways_to_save()
 	{
@@ -859,47 +859,11 @@ public class DceVppAarpStepDefinition {
 		System.out.println("manage drug actual with ways to save---->"+manageDrugActualJson);
 		try {
 			JSONAssert.assertEquals(manageDrugExpectedJson, manageDrugActualJson, true);
-
-	@When("^the user click the Edit Drug List link in plan summary page of AARP site$")
-	public void user_clicks_edit_drug_list() {
-		VPPPlanSummaryPage planSummaryPage = (VPPPlanSummaryPage)getLoginScenario().getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
-		String planName = getLoginScenario().getBean(VPPCommonConstants.PLAN_NAME).toString();
-		
-		ManageDrugPage manageDrugListPage = planSummaryPage.navigateToEditDrugList(planName);
-		JSONObject manageDrugExpectedJson = null;
-		JSONObject manageDrugListActualJson = null;
-		if(manageDrugListPage!=null){
-			manageDrugListActualJson = manageDrugListPage.manageDrugJson;
-			
-			String pharmacyName = (String) getLoginScenario().getBean(DceCommonConstants.PHARMACY_NAME);
-			/*Get Expected Data*/
-			
-			String fileName = pharmacyName;
-			String drugWithDosage = (String)getLoginScenario().getBean(DceCommonConstants.DRUG_WITH_DOSAGE);
-			String pharmacyType = (String)getLoginScenario().getBean(DceCommonConstants.PHARMACY_TYPE);
-			String distance = (String)getLoginScenario().getBean(DceCommonConstants.DISTANCE);
-			String directory = CommonConstants.ACQUISITION_EXPECTED_DIRECTORY+File.separator+CommonConstants.SITE_ULAYER+File.separator+DceCommonConstants.MANAGE_DRUG_FLOW+File.separator+planName+File.separator+drugWithDosage+File.separator;
-			
-				manageDrugExpectedJson  = manageDrugListPage.getExpectedData(fileName, directory);
-			getLoginScenario().saveBean(DceCommonConstants.MANAGE_DRUG_EXPECTED, manageDrugExpectedJson);
-		}
-		
-		try {
-			JSONAssert.assertEquals(manageDrugExpectedJson, manageDrugListActualJson, true);
-
 		} catch (JSONException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
-
-   }
-
-	@Then("^user validated estimated drug cost and tooltip in AARP site$")
-	public void user_validates_estimated_drug_cost() {
-		ManageDrugPage manageDrugPage = (ManageDrugPage)getLoginScenario().getBean(PageConstants.MANAGE_DRUG_PAGE);
-		manageDrugPage.toolTipValidation();
-
 	}
 
 	@When("^the user views reduce costs on the selected drug in AARP site$")
@@ -974,6 +938,45 @@ public class DceVppAarpStepDefinition {
 		String drugFrequency = dosageAttributesMap.get("Drug Frequency");
 		ManageDrugPage manageDrugPageWithReduceCost = manageDrugPage.switchToGeneric(drugDosage, quantity, drugFrequency);
 		
+	}
+	
+	@When("^the user click the Edit Drug List link in plan summary page of AARP site$")
+	public void user_clicks_edit_drug_list() {
+		VPPPlanSummaryPage planSummaryPage = (VPPPlanSummaryPage)getLoginScenario().getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		String planName = getLoginScenario().getBean(VPPCommonConstants.PLAN_NAME).toString();
+		
+		ManageDrugPage manageDrugListPage = planSummaryPage.navigateToEditDrugList(planName);
+		JSONObject manageDrugExpectedJson = null;
+		JSONObject manageDrugListActualJson = null;
+		if(manageDrugListPage!=null){
+			manageDrugListActualJson = manageDrugListPage.manageDrugJson;
+			
+			String pharmacyName = (String) getLoginScenario().getBean(DceCommonConstants.PHARMACY_NAME);
+			/*Get Expected Data*/
+			
+			String fileName = pharmacyName;
+			String drugWithDosage = (String)getLoginScenario().getBean(DceCommonConstants.DRUG_WITH_DOSAGE);
+			String pharmacyType = (String)getLoginScenario().getBean(DceCommonConstants.PHARMACY_TYPE);
+			String distance = (String)getLoginScenario().getBean(DceCommonConstants.DISTANCE);
+			String directory = CommonConstants.ACQUISITION_EXPECTED_DIRECTORY+File.separator+CommonConstants.SITE_ULAYER+File.separator+DceCommonConstants.MANAGE_DRUG_FLOW+File.separator+planName+File.separator+drugWithDosage+File.separator;
+			
+				manageDrugExpectedJson  = manageDrugListPage.getExpectedData(fileName, directory);
+			getLoginScenario().saveBean(DceCommonConstants.MANAGE_DRUG_EXPECTED, manageDrugExpectedJson);
+		}
+		
+		try {
+			JSONAssert.assertEquals(manageDrugExpectedJson, manageDrugListActualJson, true);
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+   }
+
+	@Then("^user validated estimated drug cost and tooltip in AARP site$")
+	public void user_validates_estimated_drug_cost() {
+		ManageDrugPage manageDrugPage = (ManageDrugPage)getLoginScenario().getBean(PageConstants.MANAGE_DRUG_PAGE);
+		manageDrugPage.toolTipValidation();
 	}
 	@After
 	public void tearDown() {

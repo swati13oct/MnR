@@ -52,12 +52,10 @@ public class ManageDrugPage extends UhcDriver {
 
 	@FindBy(xpath = "//div[@id='dcemodal']/div/div/div[8]/div[4]/a[2]")
 	private WebElement pharmacySearchButton;
-
 	
 	@FindBy(xpath="//div[@class='delete']/a")
 	WebElement drugDelete;
 	
-
 	@FindBy(linkText = "Close and apply changes")
 	WebElement applyChangesButton;
 	
@@ -95,32 +93,6 @@ public class ManageDrugPage extends UhcDriver {
 
 	}
 
-	public AddDrugPage navigateToAddDrug() {
-		/*plusSign.click();
-		try {
-			if (plusSign.isDisplayed()) {
-				CommonUtility.waitForElementToDisappear(driver, plusSign,
-						CommonConstants.TIMEOUT_30);
-			}
-		} catch (NoSuchElementException e) {
-			System.out.println("pharmacySearchButton not found");
-		} catch (TimeoutException ex) {
-			System.out.println("pharmacySearchButton not found");
-		} catch (Exception e) {
-			System.out.println("pharmacySearchButton not found");
-		}
-
-
-		if (currentUrl().contains("drugSearch")) {
-
-		*/
-		if(currentUrl().contains("drugSearch"))
-		{
-
-			return new AddDrugPage(driver);
-		}
-		return null;
-	}
 
 	public SelectPharmacyPage navigateToPharmacyPage() {
 		pharmacySearchButton.click();
@@ -407,6 +379,16 @@ public class ManageDrugPage extends UhcDriver {
         adddrugdiv.click();
 	}
 	
+	
+	/*
+	 * TODO: CodeMonkeys Team: The below two methods can be combined and such that clicking on the pharmacy tab and returning 
+	 * 
+	 * 
+	 * select pharmacy page/screen can be done in a single method, which will make it similar to other methods written 
+	 * 
+	 * in the framework for navigation
+	 * 
+	 * */
 	public void swithedToSelectPharmacyTab(){
 		selectPharmacyTab.click();
 	}
@@ -420,6 +402,8 @@ public class ManageDrugPage extends UhcDriver {
 
 	}
 
+	/*End of TODO: CodeMonkeys Team*/
+	
 	public void toolTipValidation() {
 		try {
 			Thread.sleep(5000);

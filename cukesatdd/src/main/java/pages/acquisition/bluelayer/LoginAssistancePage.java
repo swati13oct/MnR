@@ -3,33 +3,20 @@
  */
 package pages.acquisition.bluelayer;
 
-
 import java.util.ArrayList;
 
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.support.PageFactory;
-
-
-
-/**
- * @author rkodumur
- *
- */
-public class LoginAssistancePage extends GlobalFooterWebElements {
-
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
 import acceptancetests.login.data.LoginCommonConstants;
-import atdd.framework.UhcDriver;
-
 /**
- * @author pperugu
+ * @author rkodumur
  *
  */
-public class LoginAssistancePage extends UhcDriver{
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+
+public class LoginAssistancePage extends GlobalFooterWebElements {
 	
 	@FindBy(id = "usercheckbox")
 	private WebElement userNameCheckBox;
@@ -43,7 +30,6 @@ public class LoginAssistancePage extends UhcDriver{
 	@FindBy(xpath = "//div[@id='personalIndentificationPageDiv']/div/h3")
 	private WebElement pageHeading;
 
-
 	public LoginAssistancePage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
@@ -52,27 +38,12 @@ public class LoginAssistancePage extends UhcDriver{
 
 	@Override
 	public void openAndValidate() {
-
-		// TODO Auto-generated method stub
-		
-	}
-
-	public AcquisitionHomePage switchBack() {
-		ArrayList<String> tabs = new ArrayList<String> (driver.getWindowHandles());
-		driver.switchTo().window(tabs.get(0));
-		validate(forgotUsernameLink);
-		if(driver.getTitle().equalsIgnoreCase("Medicare Plans for Different Needs | UnitedHealthcare®"))
-		{
-			return new AcquisitionHomePage(driver);
-		}
-		return null;
-	}	
-
 		validate(userNameCheckBox);		
 		validate(passwordCheckBox);	
 		validate(continueButton);
 		
 	}
+
 
 	public PersonalIdentificationPage navigatesToPersonalDetailsPage(String[] choiceSelected) {
 		
@@ -97,4 +68,15 @@ public class LoginAssistancePage extends UhcDriver{
 	}
 
 
+	public AcquisitionHomePage switchBack() {
+		ArrayList<String> tabs = new ArrayList<String> (driver.getWindowHandles());
+		driver.switchTo().window(tabs.get(0));
+		validate(forgotUsernameLink);
+		if(driver.getTitle().equalsIgnoreCase("Medicare Plans for Different Needs | UnitedHealthcare®"))
+		{
+			return new AcquisitionHomePage(driver);
+		}
+		return null;
+	}	
+	
 }

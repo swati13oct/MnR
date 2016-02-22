@@ -1,27 +1,20 @@
-/**
- * 
- */
 package pages.acquisition.ulayer;
 
 
 import java.util.ArrayList;
 
-
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-import acceptancetests.login.data.LoginCommonConstants;
-import atdd.framework.UhcDriver;
 
+import acceptancetests.login.data.LoginCommonConstants;
 
 /**
- * @author rkodumur
- * 
+ * @author pperugu
  *
  */
 public class LoginAssistancePage extends GlobalFooterWebElements{
-
 	
 	@FindBy(id = "usercheckbox")
 	private WebElement userNameCheckBox;
@@ -35,7 +28,6 @@ public class LoginAssistancePage extends GlobalFooterWebElements{
 	@FindBy(xpath = "//div[@id='personalIndentificationPageDiv']/div/h3")
 	private WebElement pageHeading;
 
-
 	public LoginAssistancePage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
@@ -44,27 +36,12 @@ public class LoginAssistancePage extends GlobalFooterWebElements{
 
 	@Override
 	public void openAndValidate() {
-
-		
-		
-	}
-	
-public AcquisitionHomePage switchBack() {
-		
-		ArrayList<String> tabs = new ArrayList<String> (driver.getWindowHandles());
-		driver.switchTo().window(tabs.get(0));
-		validate(forgotUsernameLink);
-		if(driver.getTitle().equalsIgnoreCase("Medicare Plans | AARP® Medicare Plans from UnitedHealthcare®"))
-		{
-			return new AcquisitionHomePage(driver);
-		}
-		//return null;
-
 		validate(userNameCheckBox);		
 		validate(passwordCheckBox);	
 		validate(continueButton);
 		
 	}
+	
 
 	public PersonalIdentificationPage navigatesToPersonalDetailsPage(String[] choiceSelected) {
 		
@@ -84,9 +61,20 @@ public AcquisitionHomePage switchBack() {
 		if(pageHeading.getText().equalsIgnoreCase("Personal Identification")){
 			return new PersonalIdentificationPage(driver);
 		}
-		//return null;
+		return null;
 		
-
+	}
+	
+	public AcquisitionHomePage switchBack() {
+		
+		ArrayList<String> tabs = new ArrayList<String> (driver.getWindowHandles());
+		driver.switchTo().window(tabs.get(0));
+		validate(forgotUsernameLink);
+		if(driver.getTitle().equalsIgnoreCase("Medicare Plans | AARP® Medicare Plans from UnitedHealthcare®"))
+		{
+			return new AcquisitionHomePage(driver);
+		}
+		return null;
 	}
 
 }
