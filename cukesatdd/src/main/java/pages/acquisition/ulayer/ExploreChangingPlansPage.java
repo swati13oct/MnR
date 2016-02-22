@@ -1,6 +1,7 @@
 package pages.acquisition.ulayer;
 
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.PageFactory;
 
 public class ExploreChangingPlansPage extends GlobalFooterWebElements {
@@ -29,6 +30,22 @@ public class ExploreChangingPlansPage extends GlobalFooterWebElements {
 			
 		}
 		
+	}
+
+	public PrepareforInitialEnrollmentPage prepareForInitialEnrollmentClick() {
+		validate(prepareForInitialEnrollmentMedicareEducationLink);
+		Actions actions = new Actions(driver);
+	    actions.moveToElement(navigationSectionMedicareEducationLink);
+	    actions.moveToElement(prepareForInitialEnrollmentMedicareEducationLink);
+	    actions.click().build().perform();
+	    validate(navigationSectionMedicareEducationLink);
+		if (driver.getTitle().equalsIgnoreCase("Medicare Initial Enrollment Period | AARP® Medicare Plans from UnitedHealthcare®")) {
+			return new PrepareforInitialEnrollmentPage(driver);
+		}else{
+		
+			return null;
+			
+		}
 	}
 
 

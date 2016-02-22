@@ -41,6 +41,10 @@ public class AcquistionCommonConstants {
 	public static final String ALREADY_PLAN_MEMBER_ACTUAL = "alreadyPlanMemberActualJson";
 	public static final String ALREADY_PLAN_MEMBER_EXPECTED = "alreadyPlanMemberExpectedJson";
 	
+	public static final String MEDICARE_EDUCATION_DROP_DOWN_NAME = "medicareeducationdropdown";
+	public static final String MEDICARE_EDUCATION_DROP_DOWN_ACTUAL = "medicareEducationDropDownActual";
+	public static final String MEDICARE_EDUCATION_DROP_DOWN_EXPECTED = "medicareEducationDropDownExpectedJson";
+	
 	
 	
 

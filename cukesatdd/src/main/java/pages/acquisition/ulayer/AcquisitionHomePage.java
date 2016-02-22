@@ -10,6 +10,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.FindBys;
 import org.openqa.selenium.support.PageFactory;
@@ -80,6 +81,9 @@ public class AcquisitionHomePage extends GlobalFooterWebElements {
 	
 	private PageData alreadyPlanMember;
 	public JSONObject alreadyPlanMemberJson;
+	
+	private PageData medicareEducationDropDown;
+	public JSONObject medicareEducationDropDownJson;
 	
 	private PageData header;
 	public JSONObject headerJson;
@@ -414,6 +418,38 @@ public class AcquisitionHomePage extends GlobalFooterWebElements {
 
 		return alreadyPlanMemberJson;
 	}
+	
+	public JSONObject accessMedicareEducationDropDown() {
+
+		validate(navigationSectionMedicareEducationLink);
+		
+		Actions actions = new Actions(driver);
+        actions.moveToElement(navigationSectionMedicareEducationLink);
+        actions.moveToElement(learnAboutMedicareMedicareEducationLink);
+        actions.perform();
+		String fileName = CommonConstants.MEDICARE_EDUCATION_SECTION_DATA;
+		medicareEducationDropDown = CommonUtility.readPageData(fileName,
+			CommonConstants.PAGE_OBJECT_DIRECTORY_ULAYER_ACQ);
+
+	JSONObject jsonObject = new JSONObject();
+	for (String key : medicareEducationDropDown.getExpectedData().keySet()) {
+		WebElement element = findElement(medicareEducationDropDown.getExpectedData()
+				.get(key));
+		if (element != null) {
+			if (validate(element)) {
+				try {
+					jsonObject.put(key, element.getText());
+				} catch (JSONException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		}
+	}
+	medicareEducationDropDownJson = jsonObject;
+
+	return medicareEducationDropDownJson;
+	}
 
 	public Boolean validate_textField() {
 		
@@ -505,5 +541,20 @@ public class AcquisitionHomePage extends GlobalFooterWebElements {
 
           return false;
           }
+
+	public LearnAboutMedicarePage learnAboutMedicareClick() {
+		validate(navigationSectionMedicareEducationLink);
+		Actions actions = new Actions(driver);
+        actions.moveToElement(navigationSectionMedicareEducationLink);
+        actions.moveToElement(learnAboutMedicareMedicareEducationLink);
+        actions.click().build().perform();
+        if(driver.getTitle().equalsIgnoreCase("Learn About Medicare | AARP® Medicare Plans from UnitedHealthcare®")){
+            return new LearnAboutMedicarePage(driver);
+            }
+
+		return null;
+	}
+
+	
 	
 }
