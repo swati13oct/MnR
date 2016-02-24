@@ -72,6 +72,9 @@ public class AcquisitionHomePage extends GlobalFooterWebElements {
    	   
 	   	private PageData medicareEducationDropDown;
 		public JSONObject medicareEducationDropDownJson;
+		
+		private PageData ourPlansNav;
+		public JSONObject ourPlansNavJson;
        
        
        private static String UMS_ACQISITION_PAGE_URL = MRConstants.UHC_URL;
@@ -246,7 +249,7 @@ public SiteMapUMSPage siteMapFooterClick() {
               	validate(footerHomeLink);
               	validate(footnotesContent);
               
-              	validate(footerHealthAndWellnessLink);
+              	//validate(footerHealthAndWellnessLink);
               validate(footerAboutUsLink);
               validate(footerContactUsLink);
               validate(footerSiteMapLink);
@@ -430,6 +433,46 @@ public SiteMapUMSPage siteMapFooterClick() {
 		}
 		return null;
 	}
+	
+	public JSONObject accessingOurPlansNav() {
+		ourPlansHover();
+		return getOurPlanDropDownJson();
+	}
+	
+	public JSONObject getOurPlanDropDownJson(){
+		String fileName = CommonConstants.OUR_PLANS_NAV_PAGE_DATA;
+        ourPlansNav = CommonUtility.readPageData(fileName,
+                     CommonConstants.PAGE_OBJECT_DIRECTORY_BLUELAYER_ACQ);
+        
+        JSONObject jsonObject = new JSONObject();
+        for (String key : ourPlansNav.getExpectedData().keySet()) {
+        WebElement element = findElement(ourPlansNav.getExpectedData()
+        .get(key));
+        if (element != null) {
+        if(validate(element)){
+        try {
+        jsonObject.put(key, element.getText());
+        } catch (JSONException e) {
+        // TODO Auto-generated catch block
+        e.printStackTrace();
+        }
+        }
+        }
+        }
+        ourPlansNavJson = jsonObject;
+        
+        
+        return ourPlansNavJson;
+	}
+	
+	public JSONObject enterZipCode(String zipCode) {
+		ourPlansHover();
+		validate(zipcodeField);
+		zipcodeField.sendKeys(zipCode);
+		findPlansButton.click();		
+		return getOurPlanDropDownJson();
+		
+	}
 
 
 	public JSONObject accessMedicareEducationDropDown() {
@@ -477,6 +520,43 @@ public SiteMapUMSPage siteMapFooterClick() {
 
 		return null;
 	}      
+	
+	public MedicareAdvantagePlansuhcPage headerMedicareAdvantageClick() {
+		ourPlansHover();
+		validate(headerMedicareAdvantagePlansLink);
+		headerMedicareAdvantagePlansLink.click();
+        validate(headerMedicareAdvantagePlansLink);
+        if(driver.getTitle().equalsIgnoreCase("Medicare Advantage Plans | UnitedHealthcare®")){
+        return new MedicareAdvantagePlansuhcPage(driver);
+        }
+
+        return null;
+	}
+
+
+	public MedicareSpecialNeedsPlansuhcPage medicareSpecialNeedPlansLinkClick() {
+		ourPlansHover();
+		validate(headerMedicareSpecialNeedPlansLink);
+		headerMedicareSpecialNeedPlansLink.click();
+		validate(headerMedicareSpecialNeedPlansLink);
+		if(driver.getTitle().equalsIgnoreCase("Medicare Special Needs Plans | UnitedHealthcare®")){
+			return new MedicareSpecialNeedsPlansuhcPage(driver);
+		}
+		return null;
+	}
+
+
+	public OurPlansPage findPlanButtonClick(String zipCode) {
+		ourPlansHover();
+		validate(zipcodeField);
+		zipcodeField.sendKeys(zipCode);
+		findPlansButton.click();
+		if(driver.getTitle().equalsIgnoreCase("Our Medicare Plan Types | UnitedHealthcare®")){
+			return new OurPlansPage(driver);
+		}
+		return null;
+	}      
+
 
 }
 

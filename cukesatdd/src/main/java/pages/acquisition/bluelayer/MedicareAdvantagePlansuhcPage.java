@@ -38,5 +38,17 @@ public class MedicareAdvantagePlansuhcPage extends GlobalFooterWebElements{
 	
 		return null;
 	}
+	
+	public MedicareAdvantageRequestMoreHelpPage requestPersonalhelpInformationClick() {
+		ourPlansHover();
+		validate(medicareAdvantagePlansRequestMoreHelpLink);
+		medicareAdvantagePlansRequestMoreHelpLink.click();
+		validate(medicareAdvantagePlansRequestMoreHelpLink);
+		if(driver.getTitle().equalsIgnoreCase("Request Information about Medicare Advantage Plans | UnitedHealthcare®")){
+			return new MedicareAdvantageRequestMoreHelpPage(driver);
+		}
+	
+		return null;
+	}
 
 }

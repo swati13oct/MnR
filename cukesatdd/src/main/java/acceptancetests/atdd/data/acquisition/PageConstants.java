@@ -101,6 +101,18 @@ public class PageConstants {
 	
 	public static final String LOGIN_ASSISTANCE_PAGE = "loginAssistancePage";
 	
+	public static final String MEDICARE_ADVANTAGE_REQUEST_MORE_HELP_PAGE = "medicareAdvantageRequestMoreHelpPage";
+
+	public static final String MEDICARE_PRESCRIPTION_DRUG_REQUEST_MORE_HELP_PAGE = "medicarePrescriptionDrugPlansuhcPage";
+
+	public static final String MEDICARE_SELECT_HOSPITAL_DIRECTORY_PAGE = "medicareSelectHospitalDirectoryPage";
+
+	public static final String RESUME_YOUR_SAVED_APPLICATION_PAGE = "resumeYourSavedApplicationPage";
+
+	public static final String SPECIAL_NEEDS_GET_ENROLMENT_INFO_PAGE = "specialNeedGetEnrollmentInformationPage";
+
+	public static final String PLAN_SELECTOR_PAGE = "planSelectorPage";
+	
 	
 	 
 	

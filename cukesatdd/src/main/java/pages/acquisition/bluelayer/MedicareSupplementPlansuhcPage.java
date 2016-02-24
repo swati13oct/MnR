@@ -36,5 +36,16 @@ public class MedicareSupplementPlansuhcPage extends GlobalFooterWebElements{
 		}
 		return null;
 	}
+	
+	public MedicareSelectHospitalDirectoryPage medicareSelectHosipitalDirectoryClick() {
+		ourPlansHover();
+		validate(medicareSelectHosipitalDirectoryLink);
+		medicareSelectHosipitalDirectoryLink.click();
+		validate(medicareSelectHosipitalDirectoryLink);
+		if(driver.getTitle().equalsIgnoreCase("UnitedHealthcare Medicare Solutions | Medicare Select Hospital Directory")){
+			return new MedicareSelectHospitalDirectoryPage(driver);
+		}
+		return null;
+	}
 
 }

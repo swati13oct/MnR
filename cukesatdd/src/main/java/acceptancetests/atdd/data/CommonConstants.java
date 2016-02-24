@@ -579,4 +579,6 @@ public class CommonConstants {
 	
 	public static final String MEDICARE_EDUCATION_SECTION_DATA = "medicareEducationSectionActual.json";
 	
+	public static final String OUR_PLANS_NAV_PAGE_DATA = "ourPlansDropdownActual.json";
+	
 }
