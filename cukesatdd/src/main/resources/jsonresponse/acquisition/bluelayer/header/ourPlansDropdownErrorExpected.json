@@ -1,0 +1,19 @@
+{
+"headerMedicareAdvantagePlansLink":"Medicare Advantage Plans",
+"medicareAdvantagePlansRequestMoreHelpLink":"Request Personal Help & Information",
+"headerMedicarePrescriptionDrugPlansLink":"Medicare Prescription Drug Plans",
+"headerMedicareSupplementPlansLink":"Medicare Supplement Plans",
+"headerMedicareSpecialNeedPlansLink":"Medicare Special Needs Plans",
+"prescriptiondrugPlansRequestMoreHelpLink":"Request Personal Help & Information",
+"medicareSelectHosipitalDirectoryLink":"Medicare Select Hospital Directory",
+"resumeYourSavedApplicationLink":"Resume Your Saved Application",
+"specialNeedPlansGetEnrollmentInformationLink":"Get Enrollment Information",
+"medicareAdvantagePlansContent":"Medicare Advantage plans cover your hospital (Medicare Part A) and doctor (Medicare Part B), just like Original Medicare, But many offer additional benefits, as well.",
+"medicareSupplementPlansContent":"Medicare Supplement Plans provide additional help with some of the out-of-pocket expenses not paid by Medicare Parts A & B",
+"prescriptionDrugPlansContent":"Medicare prescription drug plans (Medicare Part D) help cover the cost of your prescription drugs.",
+"findPlansContent":"Find all plans in your area",
+"needHelpContent":"Need help finding a ZIP code?",
+"findRightPlanContent":"Find the right plan for you",
+"lookupZipcodeLink":"Look up ZIP code",
+"errorMsg":"Please enter a valid zip code."
+}
