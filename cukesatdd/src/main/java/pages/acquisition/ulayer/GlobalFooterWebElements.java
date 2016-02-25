@@ -155,7 +155,14 @@ public class GlobalFooterWebElements  extends UhcDriver{
 	
 	@FindBy(xpath = "//div[@id='subnav_3']/div/div/div/div[2]/div[2]/h3/a/span")
 	 public static WebElement discoverMoreResourcesMedicareEducationLink;
-
+	
+	@FindBy(xpath = "//div[@class='top-menu']/div/div[2]/div/form/span/p")
+	 public static WebElement alreadyMemberInvalidCredsErrorMessage;
+	
+	@FindBy(xpath = "//div[@class='top-menu']/div/div[2]/div/form/button")
+	 public static WebElement signInButton;
+	
+	
 
 	@Override
 	public void openAndValidate() {

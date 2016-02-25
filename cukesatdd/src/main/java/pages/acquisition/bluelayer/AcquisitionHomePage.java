@@ -16,6 +16,7 @@ import org.openqa.selenium.support.PageFactory;
 
 import pages.acquisition.bluelayer.GlobalFooterWebElements;
 import pages.acquisition.ulayer.LearnAboutMedicarePage;
+import pages.member.bluelayer.AccountHomePage;
 import acceptancetests.atdd.data.CommonConstants;
 import acceptancetests.atdd.data.MRConstants;
 import acceptancetests.atdd.data.PageData;
@@ -554,6 +555,30 @@ public SiteMapUMSPage siteMapFooterClick() {
 		if(driver.getTitle().equalsIgnoreCase("Our Medicare Plan Types | UnitedHealthcare®")){
 			return new OurPlansPage(driver);
 		}
+		return null;
+	}
+
+
+	public Boolean signin_error() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+	public Boolean signinErrorValidation() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+	public Boolean signin_successful() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+	public AccountHomePage signinClick() {
+		// TODO Auto-generated method stub
 		return null;
 	}      
 

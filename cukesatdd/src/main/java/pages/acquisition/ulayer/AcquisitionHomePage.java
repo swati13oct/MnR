@@ -8,17 +8,15 @@ import java.util.List;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.openqa.selenium.Alert;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.FindBys;
 import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
-import com.thoughtworks.selenium.webdriven.commands.WaitForPageToLoad;
-
+import pages.member.ulayer.AccountHomePage;
 import acceptancetests.atdd.data.CommonConstants;
 import acceptancetests.atdd.data.MRConstants;
 import acceptancetests.atdd.data.PageData;
@@ -550,6 +548,62 @@ public class AcquisitionHomePage extends GlobalFooterWebElements {
         actions.click().build().perform();
         if(driver.getTitle().equalsIgnoreCase("Learn About Medicare | AARP® Medicare Plans from UnitedHealthcare®")){
             return new LearnAboutMedicarePage(driver);
+            }
+
+		return null;
+	}
+
+	public Boolean enterInvalidUserNamePassword() {
+		validate(usernameField);
+		usernameField.click();
+		usernameField.sendKeys("abc");
+		//usernameField.sendKeys(givenAttributesRow.get(0).getCells().get(0));
+		String user = usernameField.getAttribute("value");
+		validate(passwordField);
+		passwordField.click();
+		passwordField.sendKeys("pas");
+		//passwordField.sendKeys(givenAttributesRow.get(0).getCells().get(1));
+		String pass = passwordField.getAttribute("value");
+		if(user.equalsIgnoreCase("abc") && pass.equalsIgnoreCase("pas")){
+			return true;
+		}
+		return false;
+	}
+
+	public Boolean checkErrorMessage() {
+		validate(signInButton);
+		signInButton.click();
+		validate(signInButton);
+		return validate(alreadyMemberInvalidCredsErrorMessage);
+	}
+
+	public Boolean enterValidUserNamePassword() {
+		validate(usernameField);
+		usernameField.click();
+		usernameField.sendKeys("q3ulayer_090");
+		//usernameField.sendKeys(givenAttributesRow.get(0).getCells().get(0));
+		String user = usernameField.getAttribute("value");
+		validate(passwordField);
+		passwordField.click();
+		passwordField.sendKeys("Password@1");
+		//passwordField.sendKeys(givenAttributesRow.get(0).getCells().get(1));
+		String pass = passwordField.getAttribute("value");
+		if(user.equalsIgnoreCase("q3ulayer_090") && pass.equalsIgnoreCase("Password@1")){
+			return true;
+		}
+		return false;
+	}
+
+	public AccountHomePage signInValid() {
+		validate(signInButton);
+		signInButton.click();
+		//validate(signInButton);
+		Alert alert = driver.switchTo().alert();
+		alert.dismiss();
+		ArrayList<String> tabs = new ArrayList<String> (driver.getWindowHandles());
+	    driver.switchTo().window(tabs.get(1));
+		if(driver.getTitle().equalsIgnoreCase("AARP Medicare Plans | My Account Home")){
+            return new AccountHomePage(driver);
             }
 
 		return null;
