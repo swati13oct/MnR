@@ -13,17 +13,22 @@
 "identifier":"id",
 "elementName":"top-pass"
 },
+"signinButton":{
+"identifier":"className",
+"elementName":"sign-in-button"
+},
 "forgotUsernameLink":{
 "identifier":"xpath",
 "elementName":"//div[@class='menu-dropdown active']/div[2]/div/a"
 },
-"registerHereLink":{
-"identifier":"xpath",
-"elementName":"//div[@class='menu-dropdown active']/div[2]/div/span[2]/a"
-},
 "notRegisteredText":{
 "identifier":"className",
 "elementName":"not-registered-text"
+},
+"registerHereLink":{
+"identifier":"xpath",
+"elementName":"//div[@class='menu-dropdown active']/div[2]/div/span[2]/a"
 }
+
 }
 }

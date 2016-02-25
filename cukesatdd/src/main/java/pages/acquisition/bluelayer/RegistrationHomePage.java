@@ -1,5 +1,7 @@
 package pages.acquisition.bluelayer;
 
+import java.util.ArrayList;
+
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -14,8 +16,13 @@ import atdd.framework.UhcDriver;
  */
 public class RegistrationHomePage extends UhcDriver {
 
+
+
 	@FindBy(id = "memberid1")
 	private WebElement memberid1;
+	
+	@FindBy(xpath = "//div[@class='menu-dropdown active']/div[2]/div/span[2]/a")
+	private WebElement registerHereLink;
 
 	@FindBy(name = "memberIdNumber2")
 	private WebElement memberIdNumber2;
@@ -70,7 +77,25 @@ public class RegistrationHomePage extends UhcDriver {
 		validate(memberIdNumber2);
 		validate(monthToEnter);
 		validate(dayToEnter);
-		validate(yearToEnter);
+		validate(yearToEnter); {
 
+	}
+
+
+	
+	
+		
+	}
+
+	public AcquisitionHomePage switchBack() {
+			ArrayList<String> tabs = new ArrayList<String> (driver.getWindowHandles());
+			driver.switchTo().window(tabs.get(0));
+			validate(registerHereLink);
+			if(driver.getTitle().equalsIgnoreCase("Medicare Plans for Different Needs | UnitedHealthcare®"))
+			{
+				return new AcquisitionHomePage(driver);
+			}
+			return null;
+		
 	}
 }
