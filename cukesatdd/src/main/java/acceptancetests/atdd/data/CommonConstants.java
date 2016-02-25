@@ -45,7 +45,7 @@ public class CommonConstants {
 
 	public static final String PLAN_SUMMARY_PAGE_DATA = "plansummarypdp.json";
 
-	public static final String PLAN_SUMMARY_DIRECTORY = "/jsonresponse/Member/ulayer/planSummary/";
+	public static final String PLAN_SUMMARY_DIRECTORY = "/jsonresponse/member/ulayer/planSummary/";
 
 	public static final String REGISTRATION_COMMON_BLUELAYER_DIRECTORY = "/jsonresponse/member/bluelayer/registration/registrationcommon/";
 
@@ -73,6 +73,8 @@ public class CommonConstants {
 			new Page(CommonConstants.COMMON, CommonConstants.COMMON_DIRECTORY),
 			new Page(CommonConstants.PLAN_SUMMARY,
 					CommonConstants.PLAN_SUMMARY_DIRECTORY),
+			new Page(CommonConstants.HEALTH_AND_WELLNESS,
+					CommonConstants.HEALTH_AND_WELLNESS_DIRECTORY),
 			new Page(CommonConstants.PAYMENT_HISTORY,
 					CommonConstants.PAYMENT_HISTORY_DIRECTORY),
 			new Page(CommonConstants.ONE_TIME_PAYMENT_SUCCESS,
@@ -620,4 +622,12 @@ public class CommonConstants {
 	public static final String AGENT_CONFIRMATION_PAGE_DATA = "agentappointmentconfirmation.json";
 
 	public static final String MA_VPP_PAGE_DATA = "maVpp.json";
+	
+	public static final String HEALTH_AND_WELLNESS_PAGE_DATA = "healthandwellness.json";
+
+	public static final String HEALTH_AND_WELLNESS = "healthandwellness";
+
+	private static final String HEALTH_AND_WELLNESS_DIRECTORY = "/jsonresponse/member/ulayer/healthandwellness/";
+
+	
 	}
