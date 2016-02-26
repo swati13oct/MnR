@@ -183,16 +183,16 @@ public class GlobalFooterWebElements extends UhcDriver {
 	@FindBy(xpath="//div[@id='subnav_2']/div/div/div[1]/div[1]/div[2]/p[2]/a")
 	public static WebElement prescriptiondrugPlansRequestMoreHelpLink;
 	
-	@FindBy(xpath="//div[@id='subnav_2']/div/div/div[1]/div[2]/div[1]/p[2]/a[2]")
+	@FindBy(xpath="//div[@id='subnav_2']/div/div/div[1]/div[2]/div[1]/p[2]/a[1]")
 	public static WebElement medicareSelectHosipitalDirectoryLink;
 	
-	@FindBy(xpath="//div[@id='subnav_2']/div/div/div[1]/div[2]/div[1]/p[2]/a[3]")
+	@FindBy(xpath="//div[@id='subnav_2']/div/div/div[1]/div[2]/div[1]/p[2]/a[2]")
 	public static WebElement resumeYourSavedApplicationLink;
 	
 	@FindBy(xpath="//div[@id='subnav_2']/div/div/div[1]/div[2]/div[2]/p/a")
 	public static WebElement specialNeedPlansGetEnrollmentInformationLink;
 	
-	@FindBy(xpath="//div[@id='subnav_2']/div/div/div[2]/a[2]")
+	@FindBy(xpath="//div[@id='subnav_2']/div/div/div[2]/a")
 	public static WebElement takeQuizButton;
 	
 	@FindBy(id="nav-zipcode")
