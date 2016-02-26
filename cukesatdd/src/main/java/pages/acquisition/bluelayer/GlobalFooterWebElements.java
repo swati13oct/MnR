@@ -202,7 +202,13 @@ public class GlobalFooterWebElements extends UhcDriver {
 	public static WebElement findPlansButton;
 	
 	@FindBy(xpath="//div[@id='subnav_2']/div/div/div[2]/form/span/span")
-	public static WebElement errorMsg;
+	public static WebElement errorMsg;  
+	
+	@FindBy(xpath="//div[@id='subnav_2']/div/div/div[2]/div/a")
+	public static WebElement lookupZipcodeLink;
+	
+	@FindBy(xpath="//div[@id='findazip_box']")
+	public static WebElement findaZipBox;
 
 
 	@Override

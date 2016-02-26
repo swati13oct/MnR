@@ -15,6 +15,7 @@ And user clicks on medicare special needs plan from UHC Medicare Solutions home 
 And user clicks on get enrollment information link from medicare special needs plan page of bluelayer
 And user clicks on Take the quiz button from our plans drop down of blue layer
 And user clicks the zipcode text field of ourplan drop down blue layer
+And user clicks on lookup zipcode link of our plan drop down blue layer
 
 
 

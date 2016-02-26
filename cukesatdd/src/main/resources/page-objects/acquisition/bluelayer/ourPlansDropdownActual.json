@@ -7,7 +7,7 @@
 },
 "medicareAdvantagePlansRequestMoreHelpLink":{
 "identifier":"xpath",
-"elementName":"/html/body/div[3]/div[3]/div[3]/div/div/div/div/div/div[1]/div[1]/div[1]/p[2]/a"
+"elementName":"//div[@id='subnav_2']/div/div/div[1]/div[1]/div[1]/p[2]/a"
 },
 "headerMedicarePrescriptionDrugPlansLink":{
 "identifier":"xpath",
@@ -27,11 +27,11 @@
 },
 "medicareSelectHosipitalDirectoryLink":{
 "identifier":"xpath",
-"elementName":"//div[@id='subnav_2']/div/div/div[1]/div[2]/div[1]/p[2]/a[2]"
+"elementName":"//div[@id='subnav_2']/div/div/div[1]/div[2]/div/p[2]/a[1]"
 },
 "resumeYourSavedApplicationLink":{
 "identifier":"xpath",
-"elementName":"//div[@id='subnav_2']/div/div/div[1]/div[2]/div[1]/p[2]/a[3]"
+"elementName":"//div[@id='subnav_2']/div/div/div[1]/div[2]/div[1]/p[2]/a[2]"
 },
 "specialNeedPlansGetEnrollmentInformationLink":{
 "identifier":"xpath",
@@ -55,7 +55,7 @@
 },
 "needHelpContent":{
 "identifier":"xpath",
-"elementName":"//div[@id='subnav_2']/div/div/div[2]/p[2]"
+"elementName":"//div[@id='subnav_2']/div/div/div[2]/div/p"
 },
 "findRightPlanContent":{
 "identifier":"xpath",
@@ -63,7 +63,7 @@
 },
 "lookupZipcodeLink":{
 "identifier":"xpath",
-"elementName":"//div[@id='subnav_2']/div/div/div[2]/a[1]"
+"elementName":"//div[@id='subnav_2']/div/div/div[2]/div/a"
 },
 "errorMsg":{
 "identifier":"xpath",

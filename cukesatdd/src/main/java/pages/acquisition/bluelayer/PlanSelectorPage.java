@@ -33,5 +33,16 @@ public class PlanSelectorPage extends GlobalFooterWebElements{
 		
 	}
 
+	public Boolean lookupzipLinkClick() {
+		validate(lookupZipcodeLink);
+		lookupZipcodeLink.click();
+		validate(lookupZipcodeLink); 
+		return validate(findaZipBox);
+			
+		}
+		
+		
+	
+
 		
 }

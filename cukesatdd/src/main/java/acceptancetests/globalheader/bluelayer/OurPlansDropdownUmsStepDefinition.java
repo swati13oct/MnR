@@ -291,6 +291,22 @@ public class OurPlansDropdownUmsStepDefinition {
 		}
 		
 	}
+	
+	@And("^user clicks on lookup zipcode link of our plan drop down blue layer$")
+	public void click_lookupzipLink(){
+		PlanSelectorPage planSelectorPage   = (PlanSelectorPage) getLoginScenario()
+				.getBean(PageConstants.PLAN_SELECTOR_PAGE);
+		
+		Boolean isPopupOpened=planSelectorPage.lookupzipLinkClick();
+		
+		if(isPopupOpened!=null && isPopupOpened==true ){
+			Assert.assertTrue(true);
+		} else {
+			Assert.fail("failed");
+		}
+		
+	}
+	
 	@And("^user enter the below zipcode from home page in blue layer$")
 	public void enter_zipcode(DataTable givenAttributes)
 	{
