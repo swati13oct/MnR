@@ -556,7 +556,7 @@ public class AcquisitionHomePage extends GlobalFooterWebElements {
 	public Boolean enterInvalidUserNamePassword() {
 		validate(usernameField);
 		usernameField.click();
-		usernameField.sendKeys("abc");
+		usernameField.sendKeys("");
 		//usernameField.sendKeys(givenAttributesRow.get(0).getCells().get(0));
 		String user = usernameField.getAttribute("value");
 		validate(passwordField);
@@ -564,7 +564,7 @@ public class AcquisitionHomePage extends GlobalFooterWebElements {
 		passwordField.sendKeys("pas");
 		//passwordField.sendKeys(givenAttributesRow.get(0).getCells().get(1));
 		String pass = passwordField.getAttribute("value");
-		if(user.equalsIgnoreCase("abc") && pass.equalsIgnoreCase("pas")){
+		if(user.equalsIgnoreCase("") && pass.equalsIgnoreCase("pas")){
 			return true;
 		}
 		return false;

@@ -209,6 +209,12 @@ public class GlobalFooterWebElements extends UhcDriver {
 	
 	@FindBy(xpath="//div[@id='findazip_box']")
 	public static WebElement findaZipBox;
+	
+	@FindBy(xpath = "//div[@class='top-menu']/div/div[2]/div/form/button")
+	 public static WebElement signInButton;
+	
+	@FindBy(xpath = "//div[@class='top-menu']/div/div[2]/div/form/span/p")
+	 public static WebElement alreadyMemberInvalidCredsErrorMessage;
 
 
 	@Override

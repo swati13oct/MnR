@@ -14,8 +14,6 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.FindBys;
 import org.openqa.selenium.support.PageFactory;
 
-import pages.acquisition.bluelayer.GlobalFooterWebElements;
-import pages.acquisition.ulayer.LearnAboutMedicarePage;
 import pages.member.bluelayer.AccountHomePage;
 import acceptancetests.atdd.data.CommonConstants;
 import acceptancetests.atdd.data.MRConstants;
@@ -579,6 +577,66 @@ public SiteMapUMSPage siteMapFooterClick() {
 
 	public AccountHomePage signinClick() {
 		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+	public Boolean enterInvalidUserNamePassword() {
+		validate(usernameField);
+		usernameField.click();
+		usernameField.sendKeys("");
+		//usernameField.sendKeys(givenAttributesRow.get(0).getCells().get(0));
+		String user = usernameField.getAttribute("value");
+		validate(passwordField);
+		passwordField.click();
+		passwordField.sendKeys("pas");
+		//passwordField.sendKeys(givenAttributesRow.get(0).getCells().get(1));
+		String pass = passwordField.getAttribute("value");
+		if(user.equalsIgnoreCase("") && pass.equalsIgnoreCase("pas")){
+			return true;
+		}
+		return false;
+		
+	}
+
+
+	public Boolean checkErrorMessage() {
+		validate(signInButton);
+		signInButton.click();
+		validate(signInButton);
+		return validate(alreadyMemberInvalidCredsErrorMessage);
+	}
+
+
+	public Boolean enterValidUserNamePassword() {
+		validate(usernameField);
+		usernameField.click();
+		usernameField.sendKeys("q1blayer_001");
+		//usernameField.sendKeys(givenAttributesRow.get(0).getCells().get(0));
+		String user = usernameField.getAttribute("value");
+		validate(passwordField);
+		passwordField.click();
+		passwordField.sendKeys("Password@1");
+		//passwordField.sendKeys(givenAttributesRow.get(0).getCells().get(1));
+		String pass = passwordField.getAttribute("value");
+		if(user.equalsIgnoreCase("q1blayer_001") && pass.equalsIgnoreCase("Password@1")){
+			return true;
+		}
+		return false;
+	}
+
+
+	public AccountHomePage signInValid() {
+		validate(signInButton);
+		signInButton.click();
+		//validate(signInButton);
+		
+		ArrayList<String> tabs = new ArrayList<String> (driver.getWindowHandles());
+	    driver.switchTo().window(tabs.get(1));
+		if(driver.getTitle().equalsIgnoreCase("UnitedHealthcare Medicare Solutions | My Account Home")){
+            return new AccountHomePage(driver);
+            }
+
 		return null;
 	}      
 

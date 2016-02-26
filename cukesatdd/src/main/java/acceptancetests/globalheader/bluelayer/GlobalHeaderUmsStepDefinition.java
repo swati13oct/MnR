@@ -15,8 +15,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import pages.acquisition.bluelayer.AcquisitionHomePage;
 import pages.acquisition.bluelayer.DisclaimersPage;
 import pages.acquisition.bluelayer.LoginAssistancePage;
-import pages.acquisition.bluelayer.OurPlansPage;
 import pages.acquisition.bluelayer.RegistrationHomePage;
+import pages.member.bluelayer.AccountHomePage;
 import acceptancetests.atdd.data.CommonConstants;
 import acceptancetests.atdd.data.acquisition.PageConstants;
 import acceptancetests.globalfooter.data.AcquistionCommonConstants;
@@ -310,6 +310,77 @@ public class GlobalHeaderUmsStepDefinition {
 			e.printStackTrace();
 		}
 		
+	}
+	@When("^the user clicks on Already a member button on the Brand section of UMS site$")
+	public void click_alreadyMember()
+	{
+		AcquisitionHomePage aquisitionhomepage  = (AcquisitionHomePage) getLoginScenario()
+				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+		Boolean alreadyMemberFlag=aquisitionhomepage.validate_alreadyPlanMemberButton_active();
+		if(alreadyMemberFlag!= null && alreadyMemberFlag){
+			Assert.assertTrue(true);
+		} else {
+			Assert.fail("Already member dropdown not displayed");
+		}
+		
+	}
+	
+	@And("^user enters invalid user name, password text field in the Already a plan member drop down of UMS site$")
+	public void entersInvalidCredentials() {
+		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
+				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+		/*List<DataTableRow> givenAttributesRow = givenAttributes
+				.getGherkinRows();*/
+		Boolean value = aquisitionhomepage.enterInvalidUserNamePassword();
+		if (value != null && value == true) {
+			Assert.assertTrue(true);
+		} else {
+			Assert.fail("failed");
+		}
+
+	}
+	
+	@Then("^user clicks on sign in button and validate the error message in Already a plan member drop down of UMS site$")
+	public void clickSignInForInvalidCreds() {
+		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
+				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+		Boolean value = aquisitionhomepage.checkErrorMessage();
+		if (value != null && value == true) {
+			Assert.assertTrue(true);
+		} else {
+			Assert.fail("failed");
+		}
+
+	}
+	
+	@And("^user enters valid user name, password text field in the Already a plan member drop down of UMS site$")
+	public void entersValidCredentials() {
+		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
+				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+		/*List<DataTableRow> givenAttributesRow = givenAttributes
+				.getGherkinRows();*/
+		Boolean value = aquisitionhomepage.enterValidUserNamePassword();
+		if (value != null && value == true) {
+			Assert.assertTrue(true);
+		} else {
+			Assert.fail("failed");
+		}
+
+	}
+	
+	@Then("^user clicks on sign in button and validates if it is landed on member my account home page of UMS site$")
+	public void clickSignInForValidCreds() {
+		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
+				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+		AccountHomePage accountHomePage = aquisitionhomepage.signInValid();
+		if (accountHomePage != null) {
+			getLoginScenario().saveBean(acceptancetests.atdd.data.member.PageConstants.ACCOUNT_HOME_PAGE,
+					accountHomePage);
+			Assert.assertTrue(true);
+		} else {
+			Assert.fail("failed");
+		}
+
 	}
 
 }
