@@ -1,0 +1,34 @@
+{
+"url":null,
+"expectedData":{
+"FindAllPlanslink":{
+"identifier":"xpath",
+"elementName":"//*[@id='subnav_2']/div/div/div[2]/span[1]" 
+},
+"EnterZIPField":{
+ "identifier":"id",
+ "elementName":"nav-zipcode"
+},
+"FindPlansButton":{
+ "identifier":"xpath",
+ "elementName":"//*[@id='subnav_2']/div/div/div[2]/form/span/button"
+},
+"NeedHelpContent":{
+"identifier":"xpath",
+"elementName":"//*[@id='subnav_2']/div/div/div[2]/div/p"
+},
+"NeedHelpLink":{
+ "identifier":"xpath",
+ "elementName":"//*[@id='subnav_2']/div/div/div[2]/div/a"
+
+},
+"FindRightPlanHeader":{
+ "identifier":"xpath",
+ "elementName" : "//*[@id='subnav_2']/div/div/div[2]/span[2]"
+},
+"takeQuizButton":{
+ "identifier":"xpath",
+ "elementName":"//*[@id='subnav_2']/div/div/div[2]/a"
+}
+}
+}

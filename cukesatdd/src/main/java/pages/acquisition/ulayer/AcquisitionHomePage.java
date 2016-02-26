@@ -33,6 +33,37 @@ public class AcquisitionHomePage extends GlobalFooterWebElements {
 
 	@FindBy(linkText = "prescriptions")
 	private WebElement prescriptionsLink;
+	
+	@FindBy(className = "zip-button")
+	private WebElement FindPlansButton1;
+	
+	@FindBy(xpath = "//*[@id='ghn_lnk_2']")
+	private WebElement OurPlansLink1;
+	
+	@FindBy(xpath= "//a[text()='Look up ZIP code']")
+	private WebElement LookUpZipCode1;
+	
+	@FindBy(xpath = "//*[@id='zipLookup']/p/a")
+	private WebElement LookUpZipCode21;
+	
+	@FindBy(xpath = "//*[@id='subnav_2']/div/div/div[2]/form/span/span")
+	private WebElement errormessage1;
+	
+	@FindBy(className = "zip-button")
+	private WebElement FindPlansButton;
+	
+	@FindBy(xpath = "//*[@id='ghn_lnk_2']")
+	private WebElement OurPlansLink;
+	
+	@FindBy(xpath= "//a[text()='Look up ZIP code']")
+	private WebElement LookUpZipCode;
+	
+	@FindBy(xpath = "//*[@id='zipLookup']/p/a")
+	private WebElement LookUpZipCode2;
+	
+	@FindBy(xpath = "//*[@id='subnav_2']/div/div/div[2]/form/span/span")
+	private WebElement errormessage;
+
 
 	@FindBy(className = "viewplansbtn")
 	private WebElement viewPlansButton;
@@ -90,6 +121,9 @@ public class AcquisitionHomePage extends GlobalFooterWebElements {
 
     public JSONObject globalHeaderJson;
 
+    public JSONObject ourplansdropdownJson;
+    
+    private PageData ourplansdropdown;
 	public AcquisitionHomePage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
@@ -218,6 +252,42 @@ public class AcquisitionHomePage extends GlobalFooterWebElements {
 		return globalFooterJson;
 	}
 
+	 public JSONObject accessingOurPlanslink() {
+		 
+		 hoverourplanslink();
+		 return getOurPlanDropDownJson();
+		}
+		 
+		 public JSONObject getOurPlanDropDownJson(){
+			 
+		 
+	        String fileName = CommonConstants.OUR_PLANS_DROPDOWN_DATA;
+	        ourplansdropdown = CommonUtility.readPageData(fileName,
+	                     CommonConstants.PAGE_OBJECT_DIRECTORY_ULAYER_ACQ);
+	        
+	        JSONObject jsonObject = new JSONObject();
+	        for (String key : ourplansdropdown.getExpectedData().keySet()) {
+	        WebElement element = findElement(ourplansdropdown.getExpectedData()
+	        .get(key));
+	        if (element != null) {
+	        if(validate(element)){
+	        try {
+	        jsonObject.put(key, element.getText());
+	        } catch (JSONException e) {
+	        // TODO Auto-generated catch block
+	        e.printStackTrace();
+	        }
+	        }
+	        }
+	        }
+	        ourplansdropdownJson = jsonObject;
+	        
+	        
+	        return ourplansdropdownJson;
+	        
+	 }
+	
+	 
 	public JSONObject accessViewAllDisclaimerInformation() {
 		validate(disclaimerViewLink);
 		disclaimerViewLink.click();
@@ -608,6 +678,68 @@ public class AcquisitionHomePage extends GlobalFooterWebElements {
 
 		return null;
 	}
+	public void hoverourplanslink() {
+		validate(OurPlansLink1);
+			//Hover over text
+			Actions action = new Actions(driver);
+			action.moveToElement(OurPlansLink1).build().perform();
+			
+		// to click
+		//	action.click().build().perform();
+			
+			validate(OurPlansLink1);
+			
+			// TODO Auto-generated method stub
+		
+		}
+			
+
+
+		
+		
+		public AcquisitionHomePage findplansbuttonclick() {
+			validate(FindPlansButton1);
+			FindPlansButton1.click();
+			validate(FindPlansButton1);
+			if(driver.getTitle().equalsIgnoreCase("Medicare Plans | AARP® Medicare Plans from UnitedHealthcare®")){
+		          return new AcquisitionHomePage(driver);
+		          }
+
+		          return null;
+		}
+
+		
+		
+
+
+
+
+		
+		
+
+		public OurPlansPage lookupzipcodeclick() {
+			
+			hoverourplanslink();
+				validate(LookUpZipCode1);
+				LookUpZipCode1.click();
+				validate(LookUpZipCode1);
+				if(driver.getTitle().equalsIgnoreCase("Our Medicare Plan Types | AARP® Medicare Plans from UnitedHealthcare®")){
+			          return new OurPlansPage(driver);
+			          }
+
+			          return null;
+			
+		}		
+				
+				// TODO Auto-generated method stub
+				
+	
+			
+			// TODO Auto-generated method stub
+			
+		
+			
+		
 
 	
 	
