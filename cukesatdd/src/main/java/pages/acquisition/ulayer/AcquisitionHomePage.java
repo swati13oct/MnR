@@ -623,6 +623,7 @@ public class AcquisitionHomePage extends GlobalFooterWebElements {
 		return null;
 	}
 
+	
 	public Boolean enterInvalidUserNamePassword() {
 		validate(usernameField);
 		usernameField.click();
@@ -731,16 +732,60 @@ public class AcquisitionHomePage extends GlobalFooterWebElements {
 			
 		}		
 				
-				// TODO Auto-generated method stub
+				
 				
 	
-			
-			// TODO Auto-generated method stub
-			
-		
-			
-		
+
 
 	
+	private PageData ourPlansNav;
+	public JSONObject ourPlansNavJson;
+
+
+	public JSONObject accessingOurPlansNav() {
+		ourPlansHover();
+		return getOurPlanDropDownJson();
+	}
+
+
+
 	
-}
+	public JSONObject getOurPlanDropDownJson(){
+		String fileName = CommonConstants.OUR_PLANS_NAV_PAGE_DATA;
+        ourPlansNav = CommonUtility.readPageData(fileName,
+                     CommonConstants.PAGE_OBJECT_DIRECTORY_BLUELAYER_ACQ);
+        
+        JSONObject jsonObject = new JSONObject();
+        for (String key : ourPlansNav.getExpectedData().keySet()) {
+        WebElement element = findElement(ourPlansNav.getExpectedData()
+        .get(key));
+        if (element != null) {
+        if(validate(element)){
+        try {
+        jsonObject.put(key, element.getText());
+        } catch (JSONException e) {
+        // TODO Auto-generated catch block
+        e.printStackTrace();
+        }
+        }
+        }
+        }
+        ourPlansNavJson = jsonObject;
+        
+        
+        return ourPlansNavJson;
+	}
+	
+	@FindBy(id="ghn_lnk_2")
+	public static WebElement ourPlansHoverLink;
+	
+	@FindBy(id="subnav_2")
+	public static WebElement ourPlansDropdownText;
+	
+	public void ourPlansHover() {
+		Actions actions = new Actions(driver);
+		actions.moveToElement(ourPlansHoverLink);
+		actions.moveToElement(ourPlansDropdownText);
+		actions.click();
+		actions.perform();}
+	}

@@ -3,6 +3,8 @@ package pages.acquisition.ulayer;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.PageFactory;
 
+import pages.acquisition.ulayer.MedicareAdvantageRequestMoreHelpPage;
+
 public class MedicareAdvantagePlansPage extends GlobalFooterWebElements {
 	
 
@@ -28,9 +30,21 @@ public class MedicareAdvantagePlansPage extends GlobalFooterWebElements {
 		}else{
 		
 			return null;
-			
-		}
+			 }
 		
 	}
+
 	
+	public MedicareAdvantageRequestMoreHelpPage requestPersonalhelpInformationClick() {
+		ourPlansHover();
+		validate(medicareAdvantagePlansRequestMoreHelpLink);
+		medicareAdvantagePlansRequestMoreHelpLink.click();
+		validate(medicareAdvantagePlansRequestMoreHelpLink);
+		if(driver.getTitle().equalsIgnoreCase("Request AARP® MA Plan Information | AARP® Medicare Plans from UnitedHealthcare®")){
+			return new MedicareAdvantageRequestMoreHelpPage(driver);
+		}
+	
+		return null;
+	}
 }
+

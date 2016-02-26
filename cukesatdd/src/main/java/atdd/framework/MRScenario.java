@@ -721,17 +721,11 @@ public class MRScenario {
 	}
 
 public WebDriver getWebDriver() {
-        
-        File pathToBinary = new File("C:/Users/naggarw2/Desktop/Mozilla/firefox.exe");
-        FirefoxBinary ffBinary = new FirefoxBinary(pathToBinary);
-        FirefoxProfile firefoxProfile = new FirefoxProfile();       
-        webDriver = new FirefoxDriver(ffBinary,firefoxProfile);
-        webDriver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
-
-/*            
+ 
+         
         
         webDriver = new FirefoxDriver();
-        webDriver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);*/
+        webDriver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
         return webDriver;
 }
 	
