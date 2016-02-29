@@ -622,6 +622,8 @@ public class CommonConstants {
 	public static final String AGENT_CONFIRMATION_PAGE_DATA = "agentappointmentconfirmation.json";
 
 	public static final String MA_VPP_PAGE_DATA = "maVpp.json";
+
+	public static final String ENQUIRY_KIT_CONFIRMATION_PAGE_DATA = "enquirykitconfirm.json";
 	
 	public static final String HEALTH_AND_WELLNESS_PAGE_DATA = "healthandwellness.json";
 
