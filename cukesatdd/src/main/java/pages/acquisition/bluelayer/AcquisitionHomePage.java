@@ -472,14 +472,7 @@ public SiteMapUMSPage siteMapFooterClick() {
         return ourPlansNavJson;
 	}
 	
-	public JSONObject enterZipCode(String zipCode) {
-		ourPlansHover();
-		validate(zipcodeField);
-		zipcodeField.sendKeys(zipCode);
-		findPlansButton.click();		
-		return getOurPlanDropDownJson();
-		
-	}
+	
 
 
 	public JSONObject accessMedicareEducationDropDown() {
@@ -514,49 +507,7 @@ public SiteMapUMSPage siteMapFooterClick() {
 	return medicareEducationDropDownJson;
 	}
 
-
-	public LearnAboutMedicareuhcPage learnAboutMedicareClick() {
-		validate(navigationSectionMedicareEducationLink);
-		Actions actions = new Actions(driver);
-        actions.moveToElement(navigationSectionMedicareEducationLink);
-        actions.moveToElement(learnAboutMedicareMedicareEducationLink);
-        actions.click().build().perform();
-        if(driver.getTitle().equalsIgnoreCase("Learn About Medicare | UnitedHealthcare®")){
-            return new LearnAboutMedicareuhcPage(driver);
-            }
-
-		return null;
-	}
-	public JSONObject accessingOurPlansNav() {
-		ourPlansHover();
-		return getOurPlanDropDownJson();
-	}
 	
-	public JSONObject getOurPlanDropDownJson(){
-		String fileName = CommonConstants.OUR_PLANS_NAV_PAGE_DATA;
-        ourPlansNav = CommonUtility.readPageData(fileName,
-                     CommonConstants.PAGE_OBJECT_DIRECTORY_BLUELAYER_ACQ);
-        
-        JSONObject jsonObject = new JSONObject();
-        for (String key : ourPlansNav.getExpectedData().keySet()) {
-        WebElement element = findElement(ourPlansNav.getExpectedData()
-        .get(key));
-        if (element != null) {
-        if(validate(element)){
-        try {
-        jsonObject.put(key, element.getText());
-        } catch (JSONException e) {
-        // TODO Auto-generated catch block
-        e.printStackTrace();
-        }
-        }
-        }
-        }
-        ourPlansNavJson = jsonObject;
-        
-        
-        return ourPlansNavJson;
-	}
 	
 	public JSONObject enterZipCode(String zipCode) {
 		ourPlansHover();
@@ -568,37 +519,7 @@ public SiteMapUMSPage siteMapFooterClick() {
 	}
 
 
-	public JSONObject accessMedicareEducationDropDown() {
-		
-		validate(navigationSectionMedicareEducationLink);
-		
-		Actions actions = new Actions(driver);
-        actions.moveToElement(navigationSectionMedicareEducationLink);
-        actions.moveToElement(learnAboutMedicareMedicareEducationLink);
-        actions.perform();
-		String fileName = CommonConstants.MEDICARE_EDUCATION_SECTION_DATA;
-		medicareEducationDropDown = CommonUtility.readPageData(fileName,
-			CommonConstants.PAGE_OBJECT_DIRECTORY_BLUELAYER_ACQ);
-
-	JSONObject jsonObject = new JSONObject();
-	for (String key : medicareEducationDropDown.getExpectedData().keySet()) {
-		WebElement element = findElement(medicareEducationDropDown.getExpectedData()
-				.get(key));
-		if (element != null) {
-			if (validate(element)) {
-				try {
-					jsonObject.put(key, element.getText());
-				} catch (JSONException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-			}
-		}
-	}
-	medicareEducationDropDownJson = jsonObject;
-
-	return medicareEducationDropDownJson;
-	}
+	
 
 
 	public LearnAboutMedicareuhcPage learnAboutMedicareClick() {

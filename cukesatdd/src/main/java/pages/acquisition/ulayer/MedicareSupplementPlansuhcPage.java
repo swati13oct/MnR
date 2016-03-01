@@ -27,12 +27,12 @@ public class MedicareSupplementPlansuhcPage extends GlobalFooterWebElements{
 		
 	}
 
-	public MedicarePrescriptionDrugPlansuhcPage medicarePrescriptionDrugPlansClick() {
+	public MedicarePrescriptionDrugPlansPage medicarePrescriptionDrugPlansClick() {
 		validate(medicarePrescriptionDrug_PlansLink);
 		medicarePrescriptionDrug_PlansLink.click();
 		validate(medicarePrescriptionDrug_PlansLink);
 		if(driver.getTitle().equalsIgnoreCase("Medicare Prescription Drug Plans | UnitedHealthcare®")){
-			return new MedicarePrescriptionDrugPlansuhcPage(driver);
+			return new MedicarePrescriptionDrugPlansPage(driver);
 		}
 		return null;
 	}
