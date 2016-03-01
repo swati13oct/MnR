@@ -19,15 +19,19 @@
 },
 "previousLink":{
 "identifier":"linkText",
-"elementName":"Previous results"
+"elementName":"Previous 10 results"
 },
 "nextLink":{
 "identifier":"linkText",
-"elementName":"Next results"
+"elementName":"Next 10 results"
 },
 "pharmacies":{
 "identifier":"className",
 "elementName":"rowBorder"
+},
+"selectButton":{
+"identifier":"xpath",
+"elementName":"//div[@id='dcemodal']/div/div/form/div[6]/a/span"
 }
 }
 }

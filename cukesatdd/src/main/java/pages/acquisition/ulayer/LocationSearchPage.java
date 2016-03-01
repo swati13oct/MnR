@@ -2,8 +2,6 @@ package pages.acquisition.ulayer;
 
 /*@author pagarwa5*/
 
-import java.util.List;
-
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -29,7 +27,7 @@ public class LocationSearchPage extends UhcDriver{
 	       openAndValidate();
 	}
 
-	public ManageDrugPage enterLocation(String zipCode, String county, String planYear) {
+	public AddDrugPage enterLocation(String zipCode, String county, String planYear) {
 		sendkeys(zipCodeField, zipCode);
 		if(null!=planYear)
 		{
@@ -39,15 +37,15 @@ public class LocationSearchPage extends UhcDriver{
 		}
 		continueButton.click();
 		
-		if(currentUrl().contains("manageDrugList"))
+		if(currentUrl().contains("drugSearch"))
 		{
-			return new ManageDrugPage(driver);
+			return new AddDrugPage(driver);
 		}
 		else if(currentUrl().contains("enterZipCode"))
 		{
 			CountySelectionPage countySelectionPage = new CountySelectionPage(driver);
-			ManageDrugPage manageDrugPage = countySelectionPage.selectCounty(county);
-			return manageDrugPage;
+			AddDrugPage addDrugPage = countySelectionPage.selectCounty(county);
+			return addDrugPage;
 		}
 		
 		return null;
@@ -58,6 +56,40 @@ public class LocationSearchPage extends UhcDriver{
 	public void openAndValidate() {
 		validate(zipCodeField);
 		validate(continueButton);
+		
+	}
+	
+	
+	/*
+	 * TODO: CodeMonkeys Team: Please check if this is required. Because a similar method is written above that does the same.
+	 * 
+	 * The method is using selenium operation for which we consume the wrapper methods written in UhcDriver
+	 * 
+	 * 
+	 * */
+	
+	public AddDrugPage enterLoc(String zipCode, String county, String planYear) {
+		sendkeys(zipCodeField, zipCode);
+		if(null!=planYear)
+		{
+			String planYearXpath = "//div[@class='marginBottom25']//span[.='"+planYear+"']";
+			driver.findElement(By.xpath(planYearXpath)).click();
+			System.out.println("year");
+		}
+		continueButton.click();
+		
+		if(currentUrl().contains("drugSearch"))
+		{
+			return new AddDrugPage(driver);
+		}
+		else if(currentUrl().contains("enterZipCode"))
+		{
+			CountySelectionPage countySelectionPage = new CountySelectionPage(driver);
+			AddDrugPage addDrugPage = countySelectionPage.chooseCounty(county);
+			return addDrugPage;
+		}
+		
+		return null;
 		
 	}
 

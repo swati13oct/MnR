@@ -1,4 +1,4 @@
-@paymen
+@payments
 Feature: To test the payment flow on UMS site 
 Scenario Outline: Verify recurring payment for a member in UMS site 
 Given registered UMS with a planType member for recurring payment in UMS site

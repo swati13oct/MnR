@@ -40,7 +40,7 @@ public class AcquisitionHomePage extends GlobalFooterWebElements {
        @FindBy(id = "homefooter")
        private WebElement homefooter;
 
-       @FindBys(value = { @FindBy(xpath = "//table[@id='selectcountytable']/tbody/tr/td") })
+		@FindBys(value = { @FindBy(xpath = "//table[@id='selectcountytable']/tbody/tr/td") })
        List<WebElement> countyRows;
        
        @FindBy(linkText = "View all disclaimer information")
@@ -51,6 +51,9 @@ public class AcquisitionHomePage extends GlobalFooterWebElements {
        
        @FindBy(id = "medicareTitle")
    	   private WebElement medicareTitleText;
+
+		@FindBy(linkText = "pharmacy")
+		private WebElement pharmacyLink;
        
        private PageData homePageDisclaimer;
        public JSONObject homePageDisclaimerJson;
@@ -63,7 +66,6 @@ public class AcquisitionHomePage extends GlobalFooterWebElements {
        public JSONObject globalFooterJson;
        
        private PageData globalHeader;
-
        public JSONObject globalHeaderJson;
        
        private PageData alreadyPlanMember;
@@ -314,7 +316,7 @@ public SiteMapUMSPage siteMapFooterClick() {
 		}
 		return null;
 	}
-	
+
 	public DisclaimersPage importantDisclaimersClick() {
 	    validate(importantDisclosuresLink);
 	    importantDisclosuresLink.click();
@@ -322,9 +324,9 @@ public SiteMapUMSPage siteMapFooterClick() {
           if(driver.getTitle().equalsIgnoreCase("Disclaimers | UnitedHealthcare®")){
           return new DisclaimersPage(driver);
           }
-
           return null;
-          }
+    }
+	
 	
 	public AcquisitionHomePage navigationSectionHomeLinkClick() {
 	    validate(navigationSectionHomeLink);
@@ -415,6 +417,12 @@ public SiteMapUMSPage siteMapFooterClick() {
 		return null;
 	
 	}
+	
+	public VPPPlanSummaryPage enterZipcode(String zipCode, String county, String planYear){
+		sendkeys(zipCodeField, zipCode);		
+		viewPlansButton.click();
+		return new VPPPlanSummaryPage(driver);	
+	}
 
 	public RegistrationHomePage registerHereLinkClick() {
 		ArrayList<String> tabs = new ArrayList<String> (driver.getWindowHandles());
@@ -432,7 +440,7 @@ public SiteMapUMSPage siteMapFooterClick() {
 		}
 		return null;
 	}
-	
+      
 	public JSONObject accessingOurPlansNav() {
 		ourPlansHover();
 		return getOurPlanDropDownJson();
@@ -518,8 +526,93 @@ public SiteMapUMSPage siteMapFooterClick() {
             }
 
 		return null;
-	}      
+	}
+	public JSONObject accessingOurPlansNav() {
+		ourPlansHover();
+		return getOurPlanDropDownJson();
+	}
 	
+	public JSONObject getOurPlanDropDownJson(){
+		String fileName = CommonConstants.OUR_PLANS_NAV_PAGE_DATA;
+        ourPlansNav = CommonUtility.readPageData(fileName,
+                     CommonConstants.PAGE_OBJECT_DIRECTORY_BLUELAYER_ACQ);
+        
+        JSONObject jsonObject = new JSONObject();
+        for (String key : ourPlansNav.getExpectedData().keySet()) {
+        WebElement element = findElement(ourPlansNav.getExpectedData()
+        .get(key));
+        if (element != null) {
+        if(validate(element)){
+        try {
+        jsonObject.put(key, element.getText());
+        } catch (JSONException e) {
+        // TODO Auto-generated catch block
+        e.printStackTrace();
+        }
+        }
+        }
+        }
+        ourPlansNavJson = jsonObject;
+        
+        
+        return ourPlansNavJson;
+	}
+	
+	public JSONObject enterZipCode(String zipCode) {
+		ourPlansHover();
+		validate(zipcodeField);
+		zipcodeField.sendKeys(zipCode);
+		findPlansButton.click();		
+		return getOurPlanDropDownJson();
+		
+	}
+
+
+	public JSONObject accessMedicareEducationDropDown() {
+		
+		validate(navigationSectionMedicareEducationLink);
+		
+		Actions actions = new Actions(driver);
+        actions.moveToElement(navigationSectionMedicareEducationLink);
+        actions.moveToElement(learnAboutMedicareMedicareEducationLink);
+        actions.perform();
+		String fileName = CommonConstants.MEDICARE_EDUCATION_SECTION_DATA;
+		medicareEducationDropDown = CommonUtility.readPageData(fileName,
+			CommonConstants.PAGE_OBJECT_DIRECTORY_BLUELAYER_ACQ);
+
+	JSONObject jsonObject = new JSONObject();
+	for (String key : medicareEducationDropDown.getExpectedData().keySet()) {
+		WebElement element = findElement(medicareEducationDropDown.getExpectedData()
+				.get(key));
+		if (element != null) {
+			if (validate(element)) {
+				try {
+					jsonObject.put(key, element.getText());
+				} catch (JSONException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		}
+	}
+	medicareEducationDropDownJson = jsonObject;
+
+	return medicareEducationDropDownJson;
+	}
+
+
+	public LearnAboutMedicareuhcPage learnAboutMedicareClick() {
+		validate(navigationSectionMedicareEducationLink);
+		Actions actions = new Actions(driver);
+        actions.moveToElement(navigationSectionMedicareEducationLink);
+        actions.moveToElement(learnAboutMedicareMedicareEducationLink);
+        actions.click().build().perform();
+        if(driver.getTitle().equalsIgnoreCase("Learn About Medicare | UnitedHealthcare®")){
+            return new LearnAboutMedicareuhcPage(driver);
+            }
+
+		return null;
+	}	
 	public MedicareAdvantagePlansuhcPage headerMedicareAdvantageClick() {
 		ourPlansHover();
 		validate(headerMedicareAdvantagePlansLink);
@@ -528,11 +621,18 @@ public SiteMapUMSPage siteMapFooterClick() {
         if(driver.getTitle().equalsIgnoreCase("Medicare Advantage Plans | UnitedHealthcare®")){
         return new MedicareAdvantagePlansuhcPage(driver);
         }
-
-        return null;
+	return null;
 	}
 
-
+	public PharmacySearchPage navigateToPharmacyLocator() {
+		pharmacyLink.click();
+		if(driver.getTitle().equalsIgnoreCase("Locate a Pharmacy | UnitedHealthcare®"))
+		{
+			return new PharmacySearchPage(driver); 
+		}
+		return null;
+		
+	}
 	public MedicareSpecialNeedsPlansuhcPage medicareSpecialNeedPlansLinkClick() {
 		ourPlansHover();
 		validate(headerMedicareSpecialNeedPlansLink);
@@ -638,8 +738,6 @@ public SiteMapUMSPage siteMapFooterClick() {
             }
 
 		return null;
-	}      
-
-
+	}
 }
 

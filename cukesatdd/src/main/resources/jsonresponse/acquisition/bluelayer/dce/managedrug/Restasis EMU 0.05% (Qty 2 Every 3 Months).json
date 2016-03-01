@@ -1,0 +1,17 @@
+{
+    "slectPharmacy": "Pick a pharmacy",
+    "drugs": [
+        {
+            "selectedDrug": "Restasis EMU 0.05%\nQty 2 Every 3 Months",
+            "switchGenericLink": "",
+            "deleteLink": "Delete",
+            "editLink": "Edit"
+        }
+    ],
+    "addDrugHeading": "You added Restasis to your Drug List.",
+    "currentPharmacy": [
+        {
+            "bottomPharmacyName": "Current Pharmacy: None Selected"
+        }
+    ]
+}

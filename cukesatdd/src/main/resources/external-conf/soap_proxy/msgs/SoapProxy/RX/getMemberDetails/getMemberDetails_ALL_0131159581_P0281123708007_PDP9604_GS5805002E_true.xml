@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <memberDetailResponse xmlns="http://www.uhc.com/2009/12/29/com/uhg/ovations/portal/rxconnection/membersearch/service" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+         <memberDetail>
+            <accountDescription><![CDATA[HEWLETT-PACKARD]]></accountDescription>
+            <accountId>P0281123708007</accountId>
+            <accumulatedDeductible>0.00</accumulatedDeductible>
+            <address><![CDATA[IW QWH 1533]]></address>
+            <address2/>
+            <benefitStepLevel/>
+            <birthDate>1936-07-08T05:00:00Z</birthDate>
+            <carrierDescription>SLFFNDPRTD4</carrierDescription>
+            <carrierId>PDP9604</carrierId>
+            <city>FTC UWGA</city>
+            <firstName>RVEA</firstName>
+            <gender>Male</gender>
+            <groupDescription>UNITEDHEALTHCARE MEDICARE</groupDescription>
+            <groupFromDate>1899-11-30T06:00:00Z</groupFromDate>
+            <groupId>GS5805002E</groupId>
+            <groupThroughDate>1899-11-30T06:00:00Z</groupThroughDate>
+            <lastName>BTT</lastName>
+            <medicareId>037242344A</medicareId>
+            <memberId>0131159581</memberId>
+            <memberStatus>Active</memberStatus>
+            <originalFromDate>2013-02-01T06:00:00Z</originalFromDate>
+            <phoneNumber>9999999999</phoneNumber>
+            <relationshipCode>CARDHOLDER</relationshipCode>
+            <rxClaimDescription/>
+            <rxClaimFromDate>1899-11-30T06:00:00Z</rxClaimFromDate>
+            <rxClaimPlanId/>
+            <rxClaimThroughDate>1899-11-30T06:00:00Z</rxClaimThroughDate>
+            <rxSpend>0.00</rxSpend>
+            <state>NY</state>
+            <troop>0.00</troop>
+            <zipCode>10276</zipCode>
+            <rxSpendPreviousYear>0.00</rxSpendPreviousYear>
+            <troopPreviousYear>0.00</troopPreviousYear>
+            <deductiblePreviousYear>320.00</deductiblePreviousYear>
+            <copayCategory>0</copayCategory>
+         </memberDetail>
+      </memberDetailResponse>
+   </soapenv:Body>
+</soapenv:Envelope>

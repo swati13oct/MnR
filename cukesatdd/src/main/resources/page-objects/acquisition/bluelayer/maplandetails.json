@@ -225,6 +225,30 @@
 "identifier":"linkText",
 "elementName":"Enter drug information"
 },
+"selectedDrugName":{
+"identifier":"xpath",
+"elementName":"//div[@id='yourDruglist']/div[2]/table/tbody/tr[2]/td[1]"
+},
+"selectedDrugCoverageDetails":{
+"identifier":"xpath",
+"elementName":"//div[@id='yourDruglist']/div[2]/table/tbody/tr[2]/td[2]"
+},
+"ics_copay_or_coinsurance":{
+"identifier":"xpath",
+"elementName":"//div[@id='yourDruglist']/div[2]/table/tbody/tr[2]/td[3]"
+},
+"estimateAnnualCostViewDetailsLink":{
+"identifier":"id",
+"elementName":"loadDrugCostModelDetails"
+},
+"estimateTotalAnnualCost":{
+"identifier":"className",
+"elementName":"totalCopay"
+},
+"currentPharmacy":{
+"identifier":"className",
+"elementName":"currentpharmacy"
+},
 "providerSearchLink":{
 "identifier":"linkText",
 "elementName":"Look up Provider"

@@ -23,7 +23,7 @@ import atdd.framework.UhcDriver;
  */
 public class PlanConfirmationPage extends UhcDriver {
 
-	@FindBy(name = "continue")
+	@FindBy(name = "Continue")
 	private WebElement continueButton;
 
 	private PageData planConfirmation;

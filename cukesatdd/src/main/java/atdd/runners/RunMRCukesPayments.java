@@ -15,7 +15,7 @@ import cucumber.junit.Cucumber;
 @Cucumber.Options(glue = { "atdd.framework","acceptancetests.payments" }, 
 		features = { "feature/payments" }, 
 		format = {
-		"pretty", "html:reports/test-report" }, tags ={"@paymen"})
+		"pretty", "html:reports/test-report" }, tags ={"@payments"})
 public class RunMRCukesPayments {
 
 }

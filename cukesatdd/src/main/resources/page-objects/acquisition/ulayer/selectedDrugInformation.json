@@ -6,8 +6,12 @@
 "elementName":"branded"
 },
 "switchGenericLink":{
-"identifier":"className",
-"elementName":"generic"
+"identifier":"linkText",
+"elementName":"Switch to generic"
+},
+"reduceCostsLink":{
+"identifier":"linkText",
+"elementName":"Reduce Costs"
 },
 "editLink":{
 "identifier":"linkText",
@@ -16,6 +20,18 @@
 "deleteLink":{
 "identifier":"linkText",
 "elementName":"Delete"
+},
+"cancelAndCloseLink":{
+"identifier":"className",
+"elementName":"closeImg closeDrug"
+},
+"savings":{
+"identifier":"className",
+"elementName":"genericDrugCost"
+},
+"genericDrugDetails":{
+"identifier":"className",
+"elementName":"genericDrugDetails"
 }
 }
 }

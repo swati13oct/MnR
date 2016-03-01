@@ -9,7 +9,7 @@ package acceptancetests.login.data;
  */
 public class LoginCommonConstants {
 
-	public static final String USERNAME = "userName";
+	public static final String USERNAME = "username";
 
 	public static final String PASSWORD ="password";
 	

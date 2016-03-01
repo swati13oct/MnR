@@ -1,11 +1,15 @@
 package pages.acquisition.ulayer;
 
+import org.openqa.selenium.NoSuchElementException;
+import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
+import acceptancetests.atdd.data.CommonConstants;
 import acceptancetests.atdd.data.MRConstants;
+import acceptancetests.atdd.util.CommonUtility;
 import atdd.framework.UhcDriver;
 
 /**
@@ -57,6 +61,19 @@ public class RegistrationHomePage extends UhcDriver{
 		sendkeys(yearToEnter, year);
 
 		continueButton.click();
+
+		try {
+			if (memberid1.isDisplayed()) {
+				CommonUtility.waitForElementToDisappear(driver, memberid1,
+						CommonConstants.TIMEOUT_30);
+			}
+		} catch (NoSuchElementException e) {
+			System.out.println("memberid1 not found");
+		} catch (TimeoutException ex) {
+			System.out.println("memberid1 not found");
+		} catch (Exception e) {
+			System.out.println("memberid1 not found");
+		}
 
 		if (driver.getTitle().equalsIgnoreCase(
 				"AARP Medicare Plans | Registration"))

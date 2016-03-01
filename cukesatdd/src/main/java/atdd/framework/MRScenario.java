@@ -35,9 +35,7 @@ import javax.naming.directory.InitialDirContext;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.firefox.FirefoxBinary;
 import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.firefox.FirefoxProfile;
 import org.springframework.ldap.core.DistinguishedName;
 import org.springframework.stereotype.Component;
 
@@ -60,12 +58,14 @@ public class MRScenario {
 
 	private static Map<String, List<String>> registrationDataMap = new LinkedHashMap<String, List<String>>();
 
+	private static Map<String, List<String>> ampRegistrationDataMap = new LinkedHashMap<String, List<String>>();
+
 	private static Map<String, Map<String, JSONObject>> expectedDataMapUlayer = new LinkedHashMap<String, Map<String, JSONObject>>();
 
 	private static Map<String, Map<String, JSONObject>> expectedDataMapBluelayer = new LinkedHashMap<String, Map<String, JSONObject>>();
-	
-	private static Map<String, String> props = new HashMap<String,String>();
-	
+
+	private static Map<String, String> props = new HashMap<String, String>();
+
 	public static String environment;
 
 	private static final String DIRECTORY = "/src/main/resources/";
@@ -92,8 +92,8 @@ public class MRScenario {
 	static {
 
 		props = getProperties();
-		
-		/*Set acqusisition and member urls*/
+
+		/* Set acqusisition and member urls */
 		environment = props.get("Environment");
 
 		/* Set up DB */
@@ -205,8 +205,22 @@ public class MRScenario {
 						.subList(1, memberAttributes.length);
 				String userName = memberAttributes[0];
 				registrationDataMap.put(userName, attrList);
+
 			}
 
+			InputStream ampMemberTypeStream = ClassLoader.class
+					.getResourceAsStream("/database/AMP-Registration-data.csv");
+			BufferedReader registermemberReader = new BufferedReader(
+					new InputStreamReader(ampMemberTypeStream));
+			while ((line = registermemberReader.readLine()) != null) {
+				// use comma as separator
+				String[] memberAttributes = line.split(cvsSplitBy);
+				List<String> attrList = Arrays.asList(memberAttributes)
+						.subList(1, memberAttributes.length);
+				String userName = memberAttributes[0];
+				ampRegistrationDataMap.put(userName, attrList);
+
+			}
 		}
 
 		catch (IOException e) {
@@ -407,6 +421,73 @@ public class MRScenario {
 
 		}
 
+		for (String userName : ampRegistrationDataMap.keySet()) {
+			try {
+				stmt = con.createStatement();
+				String query = "select * from " + defaultSchema
+						+ ".PORTAL_USER where USER_NAME='" + userName + "'";
+				System.out.println("query--->" + query);
+				rs = stmt.executeQuery(query);
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+
+			try {
+
+				Object user = null;
+				try {
+					user = ctx.lookup(buildUserDistinguishedName(userName));
+				} catch (NamingException e) {
+					System.out.println("member not found in ldap");
+				}
+
+				/* Checking in LDAP */
+				if (user != null) {
+					ctx.unbind(buildUserDistinguishedName(userName));
+					System.out.println("USERNAME " + userName
+							+ " removed from LDAP");
+
+				} else {
+					System.out.println("member not found in ldap :: USERNAME "
+							+ userName + " NOT REGISTERED");
+				}
+
+				/* Checking in DataBase */
+				if (rs.next()) {
+					stmt = con.createStatement();
+
+					String query = "DELETE FROM "
+							+ defaultSchema
+							+ ".PORTAL_USER_ACCOUNT where PORTAL_USER_ID in (select PORTAL_USER_ID from "
+							+ defaultSchema + ".PORTAL_USER where USER_NAME='"
+							+ userName + "')";
+					String query1 = "DELETE FROM " + defaultSchema
+							+ ".PORTAL_USER where USER_NAME='" + userName + "'";
+					System.out.println("query--->" + query);
+					rs = stmt.executeQuery(query);
+					System.out.println("query--->" + query1);
+					rs = stmt.executeQuery(query1);
+
+					System.out.println("USERNAME " + userName
+							+ " :: deleted from PORTAL_USER table");
+
+				} else {
+
+					System.out.println("USERNAME " + userName
+							+ " :: member not found in database");
+				}
+
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (NamingException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+
+		}
+
 		try {
 			/* Closing database connection */
 			con.close();
@@ -527,7 +608,7 @@ public class MRScenario {
 		}
 
 		// setting expectedDataMap for ulayer and blue layer for registration
-		Set<String> keySetAmp = registrationDataMap.keySet();
+		Set<String> keySetAmp = ampRegistrationDataMap.keySet();
 		for (String ampKey : keySetAmp) {
 			Map<String, JSONObject> ampObjectMap = new HashMap<String, JSONObject>();
 			for (int i = 0; i < CommonConstants.PAGES.length; i++) {
@@ -580,25 +661,53 @@ public class MRScenario {
 
 		}
 
-		Set<String> registrationAmpKeySet = registrationDataMap.keySet();
+		Set<String> registrationAmpKeySet = ampRegistrationDataMap.keySet();
 		for (String registrationKey : registrationAmpKeySet) {
+			if (ampRegistrationDataMap.get(registrationKey).size() > 2) {
+				List<String> value = ampRegistrationDataMap.get(registrationKey);
+				List<String> subValue = value.subList(1, 3);
+				if (!subValue.isEmpty()) {
+					String[] key = { value.get(0) + "_" + value.get(1),
+							subValue.get(1) + "_" + subValue.get(0) };
+					for (int j = 0; j < key.length; j++) {
+						Map<String, JSONObject> pageObjectMap = new HashMap<String, JSONObject>();
+						for (int i = 0; i < CommonConstants.PAGES_REGISTRATION_ULAYER.length; i++) {
+							JSONObject jsonObject = readExpectedJson(
+									key[j],
+									CommonConstants.PAGES_REGISTRATION_ULAYER[i]
+											.getDirectory());
+							if (jsonObject != null) {
+								pageObjectMap
+										.put(CommonConstants.PAGES_REGISTRATION_ULAYER[i]
+												.getPageName(), jsonObject);
+							}
 
-			String key = registrationDataMap.get(registrationKey).get(0) + "_"
-					+ registrationDataMap.get(registrationKey).get(1);
-			Map<String, JSONObject> pageObjectMap = new HashMap<String, JSONObject>();
-			for (int i = 0; i < CommonConstants.PAGES_REGISTRATION_ULAYER.length; i++) {
-				JSONObject jsonObject = readExpectedJson(key,
-						CommonConstants.PAGES_REGISTRATION_ULAYER[i]
-								.getDirectory());
-				if (jsonObject != null) {
-					pageObjectMap.put(
-							CommonConstants.PAGES_REGISTRATION_ULAYER[i]
-									.getPageName(), jsonObject);
+						}
+						if (!pageObjectMap.isEmpty())
+							expectedDataMapUlayer.put(key[j], pageObjectMap);
+					}
 				}
-
 			}
-			if (!pageObjectMap.isEmpty())
-				expectedDataMapUlayer.put(key, pageObjectMap);
+			else {
+				String key = ampRegistrationDataMap.get(registrationKey).get(0)
+						+ "_" + ampRegistrationDataMap.get(registrationKey).get(1);
+				Map<String, JSONObject> pageObjectMap = new HashMap<String, JSONObject>();
+				for (int i = 0; i < CommonConstants.PAGES_REGISTRATION_ULAYER.length; i++) {
+					JSONObject jsonObject = readExpectedJson(key,
+							CommonConstants.PAGES_REGISTRATION_ULAYER[i]
+									.getDirectory());
+					if (jsonObject != null) {
+						pageObjectMap.put(
+								CommonConstants.PAGES_REGISTRATION_ULAYER[i]
+										.getPageName(), jsonObject);
+					}
+
+				}
+				if (!pageObjectMap.isEmpty())
+					expectedDataMapUlayer.put(key, pageObjectMap);
+			}
+			
+			
 		}
 
 		Set<String> registrationUmsKeySet = registrationDataMap.keySet();
@@ -622,10 +731,11 @@ public class MRScenario {
 												.getPageName(), jsonObject);
 							}
 
-					}
+						}
 						if (!pageObjectMap.isEmpty())
 							expectedDataMapBluelayer.put(key[j], pageObjectMap);
-					}				}
+					}
+				}
 			} else {
 				String key = registrationDataMap.get(registrationKey).get(0)
 						+ "_" + registrationDataMap.get(registrationKey).get(1);
@@ -649,6 +759,9 @@ public class MRScenario {
 
 	public static JSONObject readExpectedJson(String fileName, String directory) {
 
+		if (fileName.contains("/")) {
+			fileName = fileName.replaceAll("/", "_");
+		}
 		fileName = fileName + ".json";
 		JSONObject jsonObject = null;
 		String parentDirectory = null;
@@ -720,14 +833,11 @@ public class MRScenario {
 		}
 	}
 
-public WebDriver getWebDriver() {
- 
-         
-        
-        webDriver = new FirefoxDriver();
-        webDriver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
-        return webDriver;
-}
+	public WebDriver getWebDriver() {
+		webDriver = new FirefoxDriver();
+		webDriver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
+		return webDriver;
+	}
 	
 
 }

@@ -1,0 +1,343 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:security="http://www.springframework.org/schema/security"
+	xmlns:ehcache="http://ehcache-spring-annotations.googlecode.com/svn/schema/ehcache-spring"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+
+		
+	<!--<bean id="trustStorePath" class="java.lang.String">
+		<constructor-arg
+			value="/portal/conf/soap_proxy/msgs/SoapProxy/jssecacerts" />
+	</bean>
+	
+	<bean id="trustStorePassword" class="java.lang.String">
+
+              <constructor-arg value="changeit" />
+
+       </bean>-->
+
+
+	<bean id="baseMessagePath" class="java.lang.String">
+		<constructor-arg value="/portal/conf/soap_proxy/msgs/SoapProxy" />
+	</bean>
+	
+	<bean id="dcebaseMessagePath" class="java.lang.String">
+		<constructor-arg value="/portal/conf/soap_proxy/msgs/RESTProxy" />
+	</bean>
+	
+	<!-- Service end points-->
+	
+	<bean id="wesbEndpointPrefix" class="java.lang.String">
+
+              <constructor-arg value="https://soe-wesb-tst.uhc.com" />
+
+       </bean>
+       
+       <bean id="dceEndpointPrefix" class="java.lang.String">
+
+             <!-- <constructor-arg value="https://dcetest-w7.uhc.com:443" /> -->
+           <constructor-arg value="https://dcetest-w7.uhc.com:443" /> 
+
+       </bean>
+       
+        <bean id="upm3EndpointPrefix" class="java.lang.String">      
+
+       <!--UPM UAT Bravo/EDSS Stage-->
+
+       <constructor-arg value="https://aesystestproxy-vm.uhc.com:33443"/>
+
+       <!--UPM UAT Alpha/EDSS Test-->
+
+       <!-- <constructor-arg value="https://aesystestproxy-vm.uhc.com:33443"/>  -->    
+
+       </bean>
+
+      
+
+       <bean id="upmMemberEndpointPrefix" class="java.lang.String"> 
+
+         <constructor-arg value="http://upmuatb.uhc.com"/>   
+
+       </bean>
+
+			<bean id="dceRestEndpointPrefix" class="java.lang.String">
+
+              <constructor-arg value="http://apsrt0245.uhc.com:9083/DCERestWAR/dcerest" />
+
+       </bean>
+       
+       <bean id="rxEndpointPrefix" class="java.lang.String">
+
+              <constructor-arg value="https://apsrt0247.uhc.com:9449" />
+
+       </bean>
+       
+        <bean id="gpsEndpointPrefix" class="java.lang.String">
+
+              <!-- <constructor-arg value="https://stage-gpsws.uhc.com" /> -->
+<constructor-arg value="https://uat-gpsws.uhc.com" />
+			  
+       </bean>
+       
+       <bean id="mapsEndpointPrefix" class="java.lang.String">
+
+              <constructor-arg value="http://mapsservices-stage.uhc.com/service.svc" />
+
+       </bean>
+       
+         <bean id="niceEndpointPrefix" class="java.lang.String">
+
+              <constructor-arg value="https://nicedev.phs.com:8443" />
+
+       </bean>
+
+  <bean id="googleMapsHost" class="java.lang.String">
+    	 <constructor-arg value="http://maps.googleapis.com"/>
+        	
+    </bean>
+
+<bean id="secureMessagingEndpointPrefix" class="java.lang.String">
+       <constructor-arg value="https://secure-messaging.optum.com/v2" />
+	 </bean>
+	 
+	
+	
+
+       
+       <!-- cached responses -->
+       
+       <bean id="wesbMessagePath" class="java.lang.String">
+
+              <constructor-arg value="#{baseMessagePath}/WESB" />
+
+       </bean>
+       
+        <bean id="dceMessagePath" class="java.lang.String">
+
+              <constructor-arg value="#{baseMessagePath}/DCE" />
+
+       </bean>
+       
+         <bean id="upm3MessagePath" class="java.lang.String">
+
+              <constructor-arg value="#{baseMessagePath}/UPM3" />
+
+       </bean>
+       
+       <bean id="dceRestMessagePath" class="java.lang.String">
+
+              <constructor-arg value="#{dcebaseMessagePath}/DCE" />
+
+       </bean>
+       
+       <bean id="rxMessagePath" class="java.lang.String">
+
+              <constructor-arg value="#{baseMessagePath}/RX" />
+
+       </bean>
+       
+       <bean id="gpsMessagePath" class="java.lang.String">
+
+              <constructor-arg value="#{baseMessagePath}/GPS" />
+
+       </bean>
+       
+       <bean id="mapsMessagePath" class="java.lang.String">
+
+              <constructor-arg value="#{baseMessagePath}/MAPS" />
+
+       </bean>
+       
+       <bean id="niceMessagePath" class="java.lang.String">
+
+              <constructor-arg value="#{baseMessagePath}/NICE" />
+
+       </bean>
+
+<bean id="secureMessagingRestMessagePath" class="java.lang.String">
+		<constructor-arg value="#{dcebaseMessagePath}\\secureMessaging" />
+	</bean>
+	
+	<bean id="googleMapsMessagePath" class="java.lang.String">
+		<constructor-arg value="#{dcebaseMessagePath}\\googleMaps" />
+	</bean>
+       
+
+	<bean id="genericRestServlet" class="com.uhg.restproxy.services.RestProxyServlet">
+
+              <property name="requestHandler" ref="genericRestRequestHandler" />
+
+       </bean>
+
+ 
+
+       <bean id="genericRestResponseHandler" class="com.uhg.restproxy.proxy.impl.ResponseHandlerImpl">
+
+              <property name="responseNameGenerator" ref="genericResponseNameGenerator" />
+
+              <property name="dceMessagePath" value="#{dceRestMessagePath}" />
+
+       </bean>
+
+ 
+
+       <bean id="genericResponseNameGenerator"
+
+              class="com.uhg.restproxy.proxy.impl.responsenamegenerator.dce.DefaultResponseNameGenerator" />
+
+ 
+
+ 
+
+       <bean id="genericRestRequestHandler" class="com.uhg.restproxy.proxy.impl.RestProxyImpl">
+
+              <property name="restBaseUrl" value="#{dceRestEndpointPrefix}" />
+
+              <property name="responseHandler" ref="genericRestResponseHandler" />
+
+              <property name="soapProxyPassThroughOnSwitch" value="#{soapProxyPassThroughOnSwitch}" />
+
+       </bean>
+             
+             
+             
+       <bean id="cchKeyStorePath" class="java.lang.String" >
+	    <constructor-arg
+	    	value= "/portal/conf/partd_external/wsskeystore/test/createContactHistory.jks" />
+	</bean>
+	
+	<bean id="cfrKeyStorePath" class="java.lang.String" >
+	    <constructor-arg
+	    	value= "/portal/conf/partd_external/wsskeystore/test/createFulfillmentRequestKeyStore.jks" />
+	</bean>
+	
+	<bean id="cpKeyStorePath" class="java.lang.String" >
+	    <constructor-arg
+	    	value= "/portal/conf/partd_external/wsskeystore/test/createPaymentKeyStore.jks" />
+	</bean>
+	
+	<bean id="fcKeyStorePath" class="java.lang.String" >
+	    <constructor-arg
+	    	value= "/portal/conf/partd_external/wsskeystore/test/findConsumerKeyStore.jks" />
+	</bean>
+	
+	<bean id="gbpKeyStorePath" class="java.lang.String" >
+	    <constructor-arg
+	    	value= "/portal/conf/partd_external/wsskeystore/test/getBenefitProfileKeyStore.jks" />
+	</bean>
+	
+	<bean id="gbdKeyStorePath" class="java.lang.String" >
+	    <constructor-arg
+	    	value= "/portal/conf/partd_external/wsskeystore/test/getBillingDetailsKeyStore.jks" />
+	</bean>
+	
+	<bean id="gbsKeyStorePath" class="java.lang.String" >
+	    <constructor-arg
+	    	value= "/portal/conf/partd_external/wsskeystore/test/getBillingSummaryKeyStore.jks" />
+	</bean>
+	
+	<bean id="gcdKeyStorePath" class="java.lang.String" >
+	    <constructor-arg
+	    	value= "/portal/conf/partd_external/wsskeystore/test/getClaimDetailsKeyStore.jks" />
+	</bean>
+	
+	
+	<bean id="gcsKeyStorePath" class="java.lang.String" >
+	    <constructor-arg
+	    	value= "/portal/conf/partd_external/wsskeystore/test/getClaimSummaryKeyStore.jks" />
+	</bean>
+	
+	<bean id="gccKeyStorePath" class="java.lang.String" >
+	    <constructor-arg
+	    	value= "/portal/conf/partd_external/wsskeystore/test/getCommunicationCategoryKeyStore.jks" />
+	</bean>
+	
+	<bean id="gcaKeyStorePath" class="java.lang.String" >
+	    <constructor-arg
+	    	value= "/portal/conf/partd_external/wsskeystore/test/getCustomerAccountKeyStore.jks" />
+	</bean>
+	
+	<bean id="gdpKeyStorePath" class="java.lang.String" >
+	    <constructor-arg
+	    	value= "/portal/conf/partd_external/wsskeystore/test/getDeliveryPreferencesKeyStore.jks" />
+	</bean>
+	
+	<bean id="gdKeyStorePath" class="java.lang.String" >
+	    <constructor-arg
+	    	value= "/portal/conf/partd_external/wsskeystore/test/getDemographicsKeyStore.jks" />
+	</bean>
+	
+	<bean id="gdmKeyStorePath" class="java.lang.String" >
+	    <constructor-arg
+	    	value= "/portal/conf/partd_external/wsskeystore/test/getDocumentMaterialsKeyStore.jks" />
+	</bean>
+	
+	<bean id="gfdKeyStorePath" class="java.lang.String" >
+	    <constructor-arg
+	    	value= "/portal/conf/partd_external/wsskeystore/test/getFulfillmentDocumentKeyStore.jks" />
+	</bean>
+
+	<bean id="gfKeyStorePath" class="java.lang.String" >
+	    <constructor-arg
+	    	value= "/portal/conf/partd_external/wsskeystore/test/getFulfillmentKeysKeyStore.jks" />
+	</bean>
+	
+	<bean id="glpKeyStorePath" class="java.lang.String" >
+	    <constructor-arg
+	    	value= "/portal/conf/partd_external/wsskeystore/test/getListPolicyKeyStore.jks" />
+	</bean>
+	
+	<bean id="gpdKeyStorePath" class="java.lang.String" >
+	    <constructor-arg
+	    	value= "/portal/conf/partd_external/wsskeystore/test/getPremiumDetailKeyStore.jks" />
+	</bean>
+	
+	<bean id="mcaKeyStorePath" class="java.lang.String" >
+	    <constructor-arg
+	    	value= "/portal/conf/partd_external/wsskeystore/test/maintainCustomerAccountKeyStore.jks" />
+	</bean>
+	
+	<bean id="mdpKeyStorePath" class="java.lang.String" >
+	    <constructor-arg
+	    	value= "/portal/conf/partd_external/wsskeystore/test/maintainDeliveryPreferencesKeyStore.jks" />
+	</bean>
+	
+	<bean id="mdKeyStorePath" class="java.lang.String" >
+	    <constructor-arg
+	    	value= "/portal/conf/partd_external/wsskeystore/test/maintainDemographicsKeyStore.jks" />
+	</bean>
+       
+       <bean id="soapProxyPassThroughOnSwitch" class="java.lang.Boolean">
+
+                <constructor-arg value="false" />
+
+			</bean>
+
+<bean id="recepientEmailAddress" class="java.lang.String">
+    	<constructor-arg value="praveen_perugu@optum.com"/> 
+
+    </bean> 
+
+ <bean id="senderAddress" class="java.lang.String">
+    	<constructor-arg value="praveen_perugu@optum.com"/> 
+    </bean>
+       
+
+<bean id="hostAddress" class="java.lang.String">
+    	<constructor-arg value="mailo2.uhc.com"/> 
+    </bean>
+ 
+ 
+	<bean id ="ccAddresses" class="java.util.ArrayList">
+				<constructor-arg>
+					<list>
+						<value>praveen_perugu@optum.com</value>
+
+					</list>
+				</constructor-arg>
+			</bean>   
+       
+       
+		
+</beans>

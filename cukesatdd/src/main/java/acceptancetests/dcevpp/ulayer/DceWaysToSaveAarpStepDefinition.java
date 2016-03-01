@@ -26,6 +26,7 @@ import pages.acquisition.ulayer.SelectGenericPage;
 import pages.acquisition.ulayer.SelectPharmacyPage;
 import pages.acquisition.ulayer.VPPPlanSummaryPage;
 import acceptancetests.atdd.data.acquisition.PageConstants;
+import acceptancetests.dce.data.DceCommonConstants;
 import atdd.framework.MRScenario;
 import cucumber.annotation.After;
 import cucumber.annotation.en.And;
@@ -65,11 +66,11 @@ public class DceWaysToSaveAarpStepDefinition {
 		AcquisitionHomePage acqusitionHomePage = new AcquisitionHomePage(wd);
 		GetStartedPage estimateDrugCost = acqusitionHomePage.navigateToPrescriptionDrug();
 		LocationSearchPage enterZipCode = estimateDrugCost.getStarted();
-		ManageDrugPage manageDrugPage = enterZipCode.enterLocation(zipCode, county,planYear);
-		if (manageDrugPage != null) {
+		AddDrugPage addDrugPage = enterZipCode.enterLocation(zipCode, county,planYear);
+		if (addDrugPage != null) {
 			getLoginScenario().saveBean("webDriver", wd);
-			getLoginScenario().saveBean(PageConstants.MANAGE_DRUG_PAGE,
-					manageDrugPage);
+			getLoginScenario().saveBean(PageConstants.ADD_DRUG_PAGE,
+					addDrugPage);
 			Assert.assertTrue(true);
 		} else {
 			Assert.fail("unsuccessfull navigation to add drug page");
@@ -212,8 +213,9 @@ public class DceWaysToSaveAarpStepDefinition {
 				.getBean(PageConstants.PHARMACY_SEARCH_PAGE);
 		String pharmacyName = pharmacyAttributes.getGherkinRows().get(0)
 				.getCells().get(0);
+		String pharmacyType = (String) getLoginScenario().getBean(DceCommonConstants.PHARMACY_TYPE);
 		ManageDrugPage manageDrugPage = pharmacySearchPage
-				.selectPharmacy(pharmacyName);
+				.selectPharmacy(pharmacyName, pharmacyType);
 		if (manageDrugPage != null) {
 			getLoginScenario().saveBean(PageConstants.MANAGE_DRUG_PAGE,
 					manageDrugPage);
@@ -287,7 +289,7 @@ public class DceWaysToSaveAarpStepDefinition {
 	@And("^the user selects reduce costs on the selected drug in WTS$")
 	public void user_selects_reduceCost() {
 		ManageDrugPage manageDrugPage = (ManageDrugPage) getLoginScenario().getBean(PageConstants.MANAGE_DRUG_PAGE);
-		manageDrugPage.reduceCost();
+		//manageDrugPage.reduceCost();
 	}
 	
 	@And("^the user switches to generic drug in WTS$")

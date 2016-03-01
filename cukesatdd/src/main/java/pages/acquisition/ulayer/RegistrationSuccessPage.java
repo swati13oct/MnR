@@ -1,5 +1,7 @@
 package pages.acquisition.ulayer;
 
+import java.util.Map;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.openqa.selenium.WebDriver;
@@ -84,5 +86,43 @@ public class RegistrationSuccessPage extends UhcDriver {
 
 		}
 		registrationSuccessJson = jsonObject;
+	}
+
+	public JSONObject getExpectedData(Map<String, JSONObject> expectedDataMap, JSONObject registrationCommonExpected) {
+		
+		JSONObject registrationSuccessExpectedJson = expectedDataMap
+				.get(CommonConstants.REGISTRATION_SUCCESS);
+		String dateOfBirth = null;
+		String name = null;
+		
+		try {
+			JSONObject jsonObject = registrationCommonExpected.getJSONArray("dateOfBirth").getJSONObject(0);
+			dateOfBirth = jsonObject.getString("dob");
+			
+			JSONObject jsonObject2 = registrationCommonExpected.getJSONArray("memberName").getJSONObject(0);
+			name = jsonObject2.getString("name");
+			
+			if(null!=dateOfBirth)
+			{
+				registrationSuccessExpectedJson.put("dateOfBirth", dateOfBirth);
+			}
+			
+			if(null!=name)
+			{
+				String[] fullName = name.split(" ");
+				String firstName = fullName[0];
+				String lastName = fullName[1];
+				registrationSuccessExpectedJson.put("firstName", firstName);
+				registrationSuccessExpectedJson.put("lastName", lastName);
+				
+			}
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		System.out.println("registrationSuccessExpectedJson---->"+registrationSuccessExpectedJson);
+		
+		return registrationSuccessExpectedJson;
 	}
 }

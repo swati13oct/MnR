@@ -1,6 +1,6 @@
 /**
  * 
- */
+ *//*
 package acceptancetests.tollfreenumber.ulayer;
 
 import gherkin.formatter.model.DataTableRow;
@@ -14,8 +14,8 @@ import org.openqa.selenium.WebDriver;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import pages.acquisition.ulayer.AcquisitionHomePage;
-import pages.acquisition.ulayer.SearchEnginePage;
-import pages.acquisition.ulayer.SearchResultsPage;
+import pages.acquisition.ulayer.GoogleSearchEnginePage;
+import pages.acquisition.ulayer.GoogleSearchResultsPage;
 import acceptancetests.atdd.util.CampaignPSC;
 import acceptancetests.atdd.util.TFNCommonConstants;
 import atdd.framework.MRScenario;
@@ -25,10 +25,10 @@ import cucumber.annotation.en.Then;
 import cucumber.annotation.en.When;
 import cucumber.table.DataTable;
 
-/**
+*//**
  * @author pperugu
  *
- */
+ *//*
 public class TFNHomePageFooterAarpStepDefinition {
 	
 	@Autowired
@@ -56,9 +56,9 @@ public class TFNHomePageFooterAarpStepDefinition {
 		
 		WebDriver wd = getLoginScenario().getWebDriver();
 		getLoginScenario().saveBean("webDriver", wd);
-		SearchEnginePage searchEnginePage = new SearchEnginePage(wd,referer);
+		GoogleSearchEnginePage searchEnginePage = new GoogleSearchEnginePage(wd,referer);
 		
-		SearchResultsPage searchResultsPage = searchEnginePage.searchParameter("aarp medicare plans",searchEngine);
+		GoogleSearchResultsPage searchResultsPage = searchEnginePage.searchParameter("aarp medicare plans",searchEngine);
 		if (searchResultsPage != null) {
 			Assert.assertTrue(true);
 		} else {
@@ -99,3 +99,4 @@ public class TFNHomePageFooterAarpStepDefinition {
 	}
 
 }
+*/

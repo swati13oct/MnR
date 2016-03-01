@@ -1,0 +1,292 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
+   <soap:Body>
+      <ns1:invokeServiceResponse xmlns:ns1="http://upm3.uhc.com/ovationsmember/readbillingandtransactiondetail/v1">
+         <return xmlns:ns2="http://upm3.uhc.com/ovationsmember/readbillingandtransactiondetail/v1">
+            <responseHeader>
+               <serviceCallStatus>SUCCESS</serviceCallStatus>
+               <externalId xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true"/>
+               <serviceName>ReadBillingAndTransactionDetail</serviceName>
+               <serviceVersion>1</serviceVersion>
+               <logLevel>DEFAULT</logLevel>
+               <upmEnvironment>u3c-ts2</upmEnvironment>
+               <internalUse>
+                  <uid>[[EWP||179300385]UPM3-BRAVO-FRONTEND]</uid>
+                  <serviceName>ReadBillingAndTransactionDetail</serviceName>
+                  <serviceVersion>1</serviceVersion>
+                  <originalConsumer>EWP</originalConsumer>
+                  <originalServiceName>ReadBillingAndTransactionDetail</originalServiceName>
+                  <originalServiceVersion>1</originalServiceVersion>
+                  <logSequence>8</logSequence>
+                  <uidGeneratedBy>DP</uidGeneratedBy>
+               </internalUse>
+            </responseHeader>
+            <billingAndTransactionDetail>
+               <accountReceivableDetail>
+                  <adjustment>
+                     <adjustmentAmount>100.00</adjustmentAmount>
+                     <adjustmentAmountUnit>%</adjustmentAmountUnit>
+                     <adjustmentType>EMPLOYER SUBSIDY</adjustmentType>
+                     <calculatedAgainstAmount>9.43</calculatedAgainstAmount>
+                  </adjustment>
+                  <billCreateDate>2015-10-08</billCreateDate>
+                  <billDueDate>2015-11-01</billDueDate>
+                  <coverageDate>2015-11-01</coverageDate>
+                  <monetaryTransactionReasonType>INITIAL</monetaryTransactionReasonType>
+                  <monetaryTransactionType>INVOICE</monetaryTransactionType>
+                  <paymentMethodGroupType>Direct Bill</paymentMethodGroupType>
+                  <productType>ADMIN FEE</productType>
+                  <receivableNumber>21</receivableNumber>
+                  <transactionAmount>-9.43</transactionAmount>
+               </accountReceivableDetail>
+               <accountReceivableDetail>
+                  <billCreateDate>2015-10-08</billCreateDate>
+                  <billDueDate>2015-11-01</billDueDate>
+                  <coverageDate>2015-11-01</coverageDate>
+                  <monetaryTransactionReasonType>INITIAL</monetaryTransactionReasonType>
+                  <monetaryTransactionType>INVOICE</monetaryTransactionType>
+                  <paymentMethodGroupType>Direct Bill</paymentMethodGroupType>
+                  <productType>ADMIN FEE</productType>
+                  <receivableNumber>21</receivableNumber>
+                  <transactionAmount>9.43</transactionAmount>
+               </accountReceivableDetail>
+               <accountReceivableDetail>
+                  <adjustment>
+                     <adjustmentAmount>100.00</adjustmentAmount>
+                     <adjustmentAmountUnit>%</adjustmentAmountUnit>
+                     <adjustmentType>EMPLOYER SUBSIDY</adjustmentType>
+                     <calculatedAgainstAmount>231.98</calculatedAgainstAmount>
+                  </adjustment>
+                  <billCreateDate>2015-10-08</billCreateDate>
+                  <billDueDate>2015-11-01</billDueDate>
+                  <coverageDate>2015-11-01</coverageDate>
+                  <monetaryTransactionReasonType>INITIAL</monetaryTransactionReasonType>
+                  <monetaryTransactionType>INVOICE</monetaryTransactionType>
+                  <paymentMethodGroupType>Direct Bill</paymentMethodGroupType>
+                  <productType>ADMIN FEE PREMIUM</productType>
+                  <receivableNumber>22</receivableNumber>
+                  <transactionAmount>-231.98</transactionAmount>
+               </accountReceivableDetail>
+               <accountReceivableDetail>
+                  <billCreateDate>2015-10-08</billCreateDate>
+                  <billDueDate>2015-11-01</billDueDate>
+                  <coverageDate>2015-11-01</coverageDate>
+                  <monetaryTransactionReasonType>INITIAL</monetaryTransactionReasonType>
+                  <monetaryTransactionType>INVOICE</monetaryTransactionType>
+                  <paymentMethodGroupType>Direct Bill</paymentMethodGroupType>
+                  <productType>ADMIN FEE PREMIUM</productType>
+                  <receivableNumber>22</receivableNumber>
+                  <transactionAmount>231.98</transactionAmount>
+               </accountReceivableDetail>
+               <accountReceivableDetail>
+                  <adjustment>
+                     <adjustmentAmount>100.00</adjustmentAmount>
+                     <adjustmentAmountUnit>%</adjustmentAmountUnit>
+                     <adjustmentType>EMPLOYER SUBSIDY</adjustmentType>
+                     <calculatedAgainstAmount>9.43</calculatedAgainstAmount>
+                  </adjustment>
+                  <billCreateDate>2015-11-08</billCreateDate>
+                  <billDueDate>2015-12-01</billDueDate>
+                  <coverageDate>2015-12-01</coverageDate>
+                  <monetaryTransactionReasonType>INITIAL</monetaryTransactionReasonType>
+                  <monetaryTransactionType>INVOICE</monetaryTransactionType>
+                  <paymentMethodGroupType>Direct Bill</paymentMethodGroupType>
+                  <productType>ADMIN FEE</productType>
+                  <receivableNumber>23</receivableNumber>
+                  <transactionAmount>-9.43</transactionAmount>
+               </accountReceivableDetail>
+               <accountReceivableDetail>
+                  <billCreateDate>2015-11-08</billCreateDate>
+                  <billDueDate>2015-12-01</billDueDate>
+                  <coverageDate>2015-12-01</coverageDate>
+                  <monetaryTransactionReasonType>INITIAL</monetaryTransactionReasonType>
+                  <monetaryTransactionType>INVOICE</monetaryTransactionType>
+                  <paymentMethodGroupType>Direct Bill</paymentMethodGroupType>
+                  <productType>ADMIN FEE</productType>
+                  <receivableNumber>23</receivableNumber>
+                  <transactionAmount>9.43</transactionAmount>
+               </accountReceivableDetail>
+               <accountReceivableDetail>
+                  <adjustment>
+                     <adjustmentAmount>100.00</adjustmentAmount>
+                     <adjustmentAmountUnit>%</adjustmentAmountUnit>
+                     <adjustmentType>EMPLOYER SUBSIDY</adjustmentType>
+                     <calculatedAgainstAmount>231.98</calculatedAgainstAmount>
+                  </adjustment>
+                  <billCreateDate>2015-11-08</billCreateDate>
+                  <billDueDate>2015-12-01</billDueDate>
+                  <coverageDate>2015-12-01</coverageDate>
+                  <monetaryTransactionReasonType>INITIAL</monetaryTransactionReasonType>
+                  <monetaryTransactionType>INVOICE</monetaryTransactionType>
+                  <paymentMethodGroupType>Direct Bill</paymentMethodGroupType>
+                  <productType>ADMIN FEE PREMIUM</productType>
+                  <receivableNumber>24</receivableNumber>
+                  <transactionAmount>-231.98</transactionAmount>
+               </accountReceivableDetail>
+               <accountReceivableDetail>
+                  <billCreateDate>2015-11-08</billCreateDate>
+                  <billDueDate>2015-12-01</billDueDate>
+                  <coverageDate>2015-12-01</coverageDate>
+                  <monetaryTransactionReasonType>INITIAL</monetaryTransactionReasonType>
+                  <monetaryTransactionType>INVOICE</monetaryTransactionType>
+                  <paymentMethodGroupType>Direct Bill</paymentMethodGroupType>
+                  <productType>ADMIN FEE PREMIUM</productType>
+                  <receivableNumber>24</receivableNumber>
+                  <transactionAmount>231.98</transactionAmount>
+               </accountReceivableDetail>
+               <accountReceivableDetail>
+                  <adjustment>
+                     <adjustmentAmount>100.00</adjustmentAmount>
+                     <adjustmentAmountUnit>%</adjustmentAmountUnit>
+                     <adjustmentType>EMPLOYER SUBSIDY</adjustmentType>
+                     <calculatedAgainstAmount>9.43</calculatedAgainstAmount>
+                  </adjustment>
+                  <billCreateDate>2015-12-08</billCreateDate>
+                  <billDueDate>2016-01-01</billDueDate>
+                  <coverageDate>2016-01-01</coverageDate>
+                  <monetaryTransactionReasonType>INITIAL</monetaryTransactionReasonType>
+                  <monetaryTransactionType>INVOICE</monetaryTransactionType>
+                  <paymentMethodGroupType>Direct Bill</paymentMethodGroupType>
+                  <productType>ADMIN FEE</productType>
+                  <receivableNumber>25</receivableNumber>
+                  <transactionAmount>-9.43</transactionAmount>
+               </accountReceivableDetail>
+               <accountReceivableDetail>
+                  <billCreateDate>2015-12-08</billCreateDate>
+                  <billDueDate>2016-01-01</billDueDate>
+                  <coverageDate>2016-01-01</coverageDate>
+                  <monetaryTransactionReasonType>INITIAL</monetaryTransactionReasonType>
+                  <monetaryTransactionType>INVOICE</monetaryTransactionType>
+                  <paymentMethodGroupType>Direct Bill</paymentMethodGroupType>
+                  <productType>ADMIN FEE</productType>
+                  <receivableNumber>25</receivableNumber>
+                  <transactionAmount>9.43</transactionAmount>
+               </accountReceivableDetail>
+               <accountReceivableDetail>
+                  <adjustment>
+                     <adjustmentAmount>100.00</adjustmentAmount>
+                     <adjustmentAmountUnit>%</adjustmentAmountUnit>
+                     <adjustmentType>EMPLOYER SUBSIDY</adjustmentType>
+                     <calculatedAgainstAmount>241.90</calculatedAgainstAmount>
+                  </adjustment>
+                  <billCreateDate>2015-12-08</billCreateDate>
+                  <billDueDate>2016-01-01</billDueDate>
+                  <coverageDate>2016-01-01</coverageDate>
+                  <monetaryTransactionReasonType>INITIAL</monetaryTransactionReasonType>
+                  <monetaryTransactionType>INVOICE</monetaryTransactionType>
+                  <paymentMethodGroupType>Direct Bill</paymentMethodGroupType>
+                  <productType>ADMIN FEE PREMIUM</productType>
+                  <receivableNumber>26</receivableNumber>
+                  <transactionAmount>-241.90</transactionAmount>
+               </accountReceivableDetail>
+               <accountReceivableDetail>
+                  <billCreateDate>2015-12-08</billCreateDate>
+                  <billDueDate>2016-01-01</billDueDate>
+                  <coverageDate>2016-01-01</coverageDate>
+                  <monetaryTransactionReasonType>INITIAL</monetaryTransactionReasonType>
+                  <monetaryTransactionType>INVOICE</monetaryTransactionType>
+                  <paymentMethodGroupType>Direct Bill</paymentMethodGroupType>
+                  <productType>ADMIN FEE PREMIUM</productType>
+                  <receivableNumber>26</receivableNumber>
+                  <transactionAmount>241.90</transactionAmount>
+               </accountReceivableDetail>
+               <businessType>GOVT</businessType>
+               <coveragePeriodBillingSummary>
+                  <adjustment>
+                     <adjustmentAmount>100.00</adjustmentAmount>
+                     <adjustmentAmountUnit>%</adjustmentAmountUnit>
+                     <adjustmentType>EMPLOYER SUBSIDY</adjustmentType>
+                     <calculatedAgainstAmount>9.43</calculatedAgainstAmount>
+                  </adjustment>
+                  <coveragePeriodDates>
+                     <startDate>2015-01-01</startDate>
+                     <stopDate>2016-01-01</stopDate>
+                  </coveragePeriodDates>
+                  <paymentMethodGroupType>Direct Bill</paymentMethodGroupType>
+                  <productType>ADMIN FEE</productType>
+                  <transactionAmount>-9.43</transactionAmount>
+               </coveragePeriodBillingSummary>
+               <coveragePeriodBillingSummary>
+                  <adjustment>
+                     <adjustmentAmount>0.00</adjustmentAmount>
+                     <adjustmentType/>
+                     <calculatedAgainstAmount>231.98</calculatedAgainstAmount>
+                  </adjustment>
+                  <coveragePeriodDates>
+                     <startDate>2015-01-01</startDate>
+                     <stopDate>2015-12-01</stopDate>
+                  </coveragePeriodDates>
+                  <paymentMethodGroupType>Direct Bill</paymentMethodGroupType>
+                  <productType>ADMIN FEE PREMIUM</productType>
+                  <transactionAmount>231.98</transactionAmount>
+               </coveragePeriodBillingSummary>
+               <coveragePeriodBillingSummary>
+                  <adjustment>
+                     <adjustmentAmount>100.00</adjustmentAmount>
+                     <adjustmentAmountUnit>%</adjustmentAmountUnit>
+                     <adjustmentType>EMPLOYER SUBSIDY</adjustmentType>
+                     <calculatedAgainstAmount>231.98</calculatedAgainstAmount>
+                  </adjustment>
+                  <coveragePeriodDates>
+                     <startDate>2015-01-01</startDate>
+                     <stopDate>2015-12-01</stopDate>
+                  </coveragePeriodDates>
+                  <paymentMethodGroupType>Direct Bill</paymentMethodGroupType>
+                  <productType>ADMIN FEE PREMIUM</productType>
+                  <transactionAmount>-231.98</transactionAmount>
+               </coveragePeriodBillingSummary>
+               <coveragePeriodBillingSummary>
+                  <adjustment>
+                     <adjustmentAmount>0.00</adjustmentAmount>
+                     <adjustmentType/>
+                     <calculatedAgainstAmount>9.43</calculatedAgainstAmount>
+                  </adjustment>
+                  <coveragePeriodDates>
+                     <startDate>2015-01-01</startDate>
+                     <stopDate>2016-01-01</stopDate>
+                  </coveragePeriodDates>
+                  <paymentMethodGroupType>Direct Bill</paymentMethodGroupType>
+                  <productType>ADMIN FEE</productType>
+                  <transactionAmount>9.43</transactionAmount>
+               </coveragePeriodBillingSummary>
+               <coveragePeriodBillingSummary>
+                  <adjustment>
+                     <adjustmentAmount>0.00</adjustmentAmount>
+                     <adjustmentType/>
+                     <calculatedAgainstAmount>241.90</calculatedAgainstAmount>
+                  </adjustment>
+                  <coveragePeriodDates>
+                     <startDate>2016-01-01</startDate>
+                     <stopDate>2016-01-01</stopDate>
+                  </coveragePeriodDates>
+                  <paymentMethodGroupType>Direct Bill</paymentMethodGroupType>
+                  <productType>ADMIN FEE PREMIUM</productType>
+                  <transactionAmount>241.90</transactionAmount>
+               </coveragePeriodBillingSummary>
+               <coveragePeriodBillingSummary>
+                  <adjustment>
+                     <adjustmentAmount>100.00</adjustmentAmount>
+                     <adjustmentAmountUnit>%</adjustmentAmountUnit>
+                     <adjustmentType>EMPLOYER SUBSIDY</adjustmentType>
+                     <calculatedAgainstAmount>241.90</calculatedAgainstAmount>
+                  </adjustment>
+                  <coveragePeriodDates>
+                     <startDate>2016-01-01</startDate>
+                     <stopDate>2016-01-01</stopDate>
+                  </coveragePeriodDates>
+                  <paymentMethodGroupType>Direct Bill</paymentMethodGroupType>
+                  <productType>ADMIN FEE PREMIUM</productType>
+                  <transactionAmount>-241.90</transactionAmount>
+               </coveragePeriodBillingSummary>
+               <currentMonthBillingSummary>
+                  <billCycleDate>2016-02-08</billCycleDate>
+                  <estimatedAnnualPremium>0.00</estimatedAnnualPremium>
+                  <outstandingDirectBillBalance>0.00</outstandingDirectBillBalance>
+                  <outstandingSsaBalance>0.00</outstandingSsaBalance>
+                  <paymentMethodAccount>Direct Pay</paymentMethodAccount>
+               </currentMonthBillingSummary>
+            </billingAndTransactionDetail>
+         </return>
+      </ns1:invokeServiceResponse>
+   </soap:Body>
+</soap:Envelope>

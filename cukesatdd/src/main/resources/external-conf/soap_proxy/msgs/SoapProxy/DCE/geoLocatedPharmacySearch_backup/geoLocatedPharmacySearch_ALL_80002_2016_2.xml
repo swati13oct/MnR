@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/">
+   <soapenv:Body>
+      <geoLocatedPharmacySearchResponse xmlns="http://www.uhc.com/dcewebservice/2014/05/21/service/geoLocatedPharmacySearch/">
+         <geoLocatedPharmacySearchResultList>
+            <geoLocatedPharmacySearchResult>
+               <geoLocatedPharmacySearchCriteria>
+                  <pharmacyAddress>
+                     <addressLine1/>
+                     <addressLine2/>
+                     <city/>
+                     <zipCode>80002</zipCode>
+                  </pharmacyAddress>
+                  <radius>2</radius>
+                  <yearFilter>2016</yearFilter>
+                  <inclusiveAllFilters>
+                     <twentyFourHourTypeFilter>Y</twentyFourHourTypeFilter>
+                     <ninetyDayTypeFilter/>
+                     <longTermCareTypeFilter>Y</longTermCareTypeFilter>
+                     <specialtyTypeFilter/>
+                     <retailTypeFilter>Y</retailTypeFilter>
+                     <indianTribalUnionFilter/>
+                     <mailOrderTypeFilter/>
+                     <pharmacySaverFilter>Y</pharmacySaverFilter>
+                     <preferredNetworkFilter/>
+                  </inclusiveAllFilters>
+                  <paginationIndex>1</paginationIndex>
+                  <maxRecordPerPage>10</maxRecordPerPage>
+               </geoLocatedPharmacySearchCriteria>
+               <maxRecordCountReached>true</maxRecordCountReached>
+               <geoLocatedPharmacyList/>
+            </geoLocatedPharmacySearchResult>
+         </geoLocatedPharmacySearchResultList>
+      </geoLocatedPharmacySearchResponse>
+   </soapenv:Body>
+</soapenv:Envelope>

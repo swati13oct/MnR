@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<s:Envelope xmlns:s="http://schemas.xmlsoap.org/soap/envelope/">
+   <s:Body>
+      <GetCountiesByZipcodeResponse xmlns="http://mapsservices.uhc.com/">
+         <GetCountiesByZipcodeResult xmlns:a="http://schemas.datacontract.org/2004/07/UHG.MAPS.Core.Dto" xmlns:i="http://www.w3.org/2001/XMLSchema-instance">
+            <a:County>
+               <a:CmsCode>201</a:CmsCode>
+               <a:CmsName>Los Angeles (Partial)</a:CmsName>
+               <a:FipsCode>037</a:FipsCode>
+               <a:FipsName>Los Angeles County</a:FipsName>
+               <a:State>
+                  <a:CmsCode>05</a:CmsCode>
+                  <a:Code>CA</a:Code>
+                  <a:FipsStateID>06</a:FipsStateID>
+                  <a:Name>California</a:Name>
+               </a:State>
+            </a:County>
+            <a:County>
+               <a:CmsCode>200</a:CmsCode>
+               <a:CmsName>Los Angeles</a:CmsName>
+               <a:FipsCode>037</a:FipsCode>
+               <a:FipsName>Los Angeles County</a:FipsName>
+               <a:State>
+                  <a:CmsCode>05</a:CmsCode>
+                  <a:Code>CA</a:Code>
+                  <a:FipsStateID>06</a:FipsStateID>
+                  <a:Name>California</a:Name>
+               </a:State>
+            </a:County>
+            <a:County>
+               <a:CmsCode>210</a:CmsCode>
+               <a:CmsName>Los Angeles</a:CmsName>
+               <a:FipsCode>037</a:FipsCode>
+               <a:FipsName>Los Angeles County</a:FipsName>
+               <a:State>
+                  <a:CmsCode>05</a:CmsCode>
+                  <a:Code>CA</a:Code>
+                  <a:FipsStateID>06</a:FipsStateID>
+                  <a:Name>California</a:Name>
+               </a:State>
+            </a:County>
+         </GetCountiesByZipcodeResult>
+      </GetCountiesByZipcodeResponse>
+   </s:Body>
+</s:Envelope>

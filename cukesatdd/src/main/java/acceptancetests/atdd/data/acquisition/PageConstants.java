@@ -39,7 +39,35 @@ public class PageConstants {
 
 	public static final String MANAGE_DRUG_PAGE = "manageDrugPage";
 
-	public static final String AFTER_DOSAGE_SELECTION = "afterDosageSelection";
+	public static final String AFTER_DOSAGE_SELECTION = "afterDosageSelection";	public static final String PLAN_INFORMATION = "planInformationPage";
+
+	public static final String BENEFICIARY_INFORMATION_PAGE = "beneficiaryInformationPage";
+
+	public static final String ADDITIONAL_INFORMATION_PAGE = "additionalInformation";
+
+	public static final String REVIEW_APPLICATION_PAGE = "reviewApplication";
+
+	public static final String SUBMIT_APPLICATION_PAGE = "submitApplicationPage";
+
+	public static final String ENROLLMENT_CONFIRMATION_PAGE = "enrollmentConfirmationPage";
+	
+	public static final String LOGIN_ASSISTANCE_PAGE = "loginAssistancePage";
+
+	public static final String PERSONAL_IDENTIFICATION_PAGE = "personalIdentificationPage";
+
+	public static final String LOGIN_ASSISTANCE_MESSAGE_PAGE = "loginAssitanceMessagePage";
+
+	public static final String PHARMACY_RESULTS_PAGE = "pharmacyResultPage";
+	
+	public static final String REQUEST_MORE_HELP_INFORMATION_PAGE = "requestHelpAndInformationPage";
+
+	public static final String REQUEST_AGENT_APPOINTMENT_PAGE = "requestAgentAppointmentPage";
+
+	public static final String MA_VPP_PAGE = "maViewPlansAndPricingPage";
+
+	public static final String PDP_VPP_PAGE = "pdpViewPlansAndPricingPage";
+
+	public static final String MS_VPP_PAGE = "msViewPlansAndPricingPage";
 
 	public static final String SITE_MAP_PAGE = "siteMapPage";
 	
@@ -114,12 +142,4 @@ public class PageConstants {
 	public static final String SPECIAL_NEEDS_GET_ENROLMENT_INFO_PAGE = "specialNeedGetEnrollmentInformationPage";
 
 	public static final String PLAN_SELECTOR_PAGE = "planSelectorPage";
-	
-	
-	 
-	
-	
-	
-
-
 }

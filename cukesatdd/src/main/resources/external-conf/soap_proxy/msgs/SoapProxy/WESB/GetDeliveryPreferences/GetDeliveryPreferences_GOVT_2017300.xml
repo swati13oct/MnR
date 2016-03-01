@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<soapenv:Envelope xmlns:soapenv="http://www.w3.org/2003/05/soap-envelope">
+   <soapenv:Header xmlns:wsa="http://www.w3.org/2005/08/addressing">
+      <s:Security xmlns:s="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd" xmlns:u="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd">
+         <u:Timestamp>
+            <u:Created>2016-02-02T14:10:55.938Z</u:Created>
+         </u:Timestamp>
+      </s:Security>
+      <v100:LookupKey xmlns:v100="http://eaf4esb.wesb.uhc.com/schema/framework/EAF4ESBLookupKey/v1_00">
+         <v100:environment>test_sys1</v100:environment>
+      </v100:LookupKey>
+      <wsa:Action>http://GetDeliveryPreferencesMediation/GetDeliveryPreferences/GetDeliveryPreferences/getDeliveryPreferencesInfoResponse</wsa:Action>
+      <wsa:RelatesTo>urn:uuid:2e6ece37-e1ac-42c4-83d8-72c649739441</wsa:RelatesTo>
+   </soapenv:Header>
+   <soapenv:Body>
+      <pr:getDeliveryPreferencesInfoResponse xmlns:pr="http://GetDeliveryPreferencesMediation/GetDeliveryPreferences" xmlns:v210="http://eaf4esb.wesb.uhc.com/schema/contract/consumer/getdeliverypreferences/v2_10" xmlns:v230="http://ovations.unitedhealthgroup.com/schema/ovations/document/v2_30" xmlns:v405="http://enterprise.unitedhealthgroup.com/schema/canoncial/base/demographic/v4_05">
+         <v210:GetDeliveryPreferencesResponse UID="A25264BF-0152-4000-E000-782D0A72EC72">
+            <v210:MemberDeliveryPreference BusinessType="GOVT">
+               <v210:DeliveryPreference>
+                  <v230:MemberDocumentPreference>
+                     <v405:DocumentTypeCode>33</v405:DocumentTypeCode>
+                     <v405:DocumentName>PDP EXPLANATION OF BENEFITS</v405:DocumentName>
+                     <v405:SendPreference>MAIL</v405:SendPreference>
+                  </v230:MemberDocumentPreference>
+                  <v230:MemberDocumentPreference>
+                     <v405:DocumentTypeCode>35</v405:DocumentTypeCode>
+                     <v405:DocumentName>PDP MEMBER NEWSLETTER</v405:DocumentName>
+                     <v405:SendPreference>MAIL</v405:SendPreference>
+                  </v230:MemberDocumentPreference>
+                  <v230:MemberDocumentPreference>
+                     <v405:DocumentTypeCode>187</v405:DocumentTypeCode>
+                     <v405:DocumentName>PDP ANNUAL DIRECTORY</v405:DocumentName>
+                     <v405:SendPreference>EMAIL</v405:SendPreference>
+                  </v230:MemberDocumentPreference>
+               </v210:DeliveryPreference>
+            </v210:MemberDeliveryPreference>
+         </v210:GetDeliveryPreferencesResponse>
+      </pr:getDeliveryPreferencesInfoResponse>
+   </soapenv:Body>
+</soapenv:Envelope>

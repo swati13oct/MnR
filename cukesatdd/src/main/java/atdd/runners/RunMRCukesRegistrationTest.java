@@ -15,7 +15,7 @@ import cucumber.junit.Cucumber;
 @Cucumber.Options(glue = { "atdd.framework","acceptancetests.registration" }, 
 		features = { "feature/registration" }, 
 		format = {
-		"pretty", "html:reports/test-report" }, tags ={"@registrationUms"})
+		"pretty", "html:reports/test-report" }, tags ={"@registrationAARP"})
 public class RunMRCukesRegistrationTest {
 
 }

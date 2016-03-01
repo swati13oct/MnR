@@ -19,8 +19,10 @@ import pages.acquisition.bluelayer.AcquisitionHomePage;
 import pages.acquisition.bluelayer.AddDrugPage;
 import pages.acquisition.bluelayer.EnterZipCodePage;
 import pages.acquisition.bluelayer.EstimateDrugCostPage;
-import pages.acquisition.bluelayer.PharmacySearchPage;
+import pages.acquisition.bluelayer.ManageDrugPage;
+import pages.acquisition.bluelayer.PharmacySelectorPage;
 import pages.acquisition.bluelayer.PlanDetailsPage;
+import pages.acquisition.bluelayer.SelectPharmacyPage;
 import pages.acquisition.bluelayer.VPPPlanSummaryPage;
 import pages.acquisition.bluelayer.SelectDosagePage;
 import pages.acquisition.bluelayer.SelectGenericPage;
@@ -130,7 +132,7 @@ public class DceWaysToSaveUmsStepDefinition {
 		String drugQuantity = dosageAttributesMap.get("Drug Quantity");
 		String drugFrequency = dosageAttributesMap.get("Drug Frequency");
 		String packages = dosageAttributesMap.get("Packages");
-		SelectGenericPage selectGenericPage = selectDosagePage.selectDosage(
+		SelectGenericPage selectGenericPage = (SelectGenericPage) selectDosagePage.selectDosage(
 				drugDosage, drugQuantity, drugFrequency,packages);
 		if (selectGenericPage != null) {
 			getLoginScenario().saveBean(PageConstants.SELECT_GENERIC_PAGE,
@@ -148,10 +150,10 @@ public class DceWaysToSaveUmsStepDefinition {
 				.get(0);
 		SelectGenericPage selectGenericPage = (SelectGenericPage) getLoginScenario()
 				.getBean(PageConstants.SELECT_GENERIC_PAGE);
-		AddDrugPage addDrugPage = selectGenericPage.selectGeneric(drugName);
-		if (addDrugPage != null) {
-			getLoginScenario().saveBean(PageConstants.ADD_DRUG_PAGE,
-					addDrugPage);
+		ManageDrugPage manageDrugPage = selectGenericPage.selectGeneric(drugName);
+		if (manageDrugPage != null) {
+			getLoginScenario().saveBean(PageConstants.MANAGE_DRUG_PAGE,
+					manageDrugPage);
 			Assert.assertTrue(true);
 		} else {
 			Assert.fail("generic drug selection unsuccessful");
@@ -161,18 +163,16 @@ public class DceWaysToSaveUmsStepDefinition {
 
 	@And("^the user views all the added drugs for WTS in the UMS site$")
 	public void user_views_drugs_added() {
-		AddDrugPage addDrugPage = (AddDrugPage) getLoginScenario().getBean(
-				PageConstants.ADD_DRUG_PAGE);
-		String drugsAdded = addDrugPage.validateDrugsAdded();
-		System.out.println("drugsAdded" + drugsAdded);
+		ManageDrugPage manageDrugPage = (ManageDrugPage) getLoginScenario().getBean(
+				PageConstants.MANAGE_DRUG_PAGE);
+		
 	}
 
 	@And("^the user performs pharmacy search for WTS  in the UMS site$")
 	public void user_performs_paharmacySearch() {
-		AddDrugPage addDrugPage = (AddDrugPage) getLoginScenario().getBean(
-				PageConstants.ADD_DRUG_PAGE);
-		PharmacySearchPage pharmacySearchPage = addDrugPage
-				.navigateToPharmacyPage();
+		ManageDrugPage manageDrugPage = (ManageDrugPage) getLoginScenario().getBean(
+				PageConstants.MANAGE_DRUG_PAGE);
+		SelectPharmacyPage pharmacySearchPage = manageDrugPage.navigateToPharmacyPage();
 		if (pharmacySearchPage != null) {
 			getLoginScenario()
 					.saveBean(PageConstants.PHARMACY_SEARCH_PAGE,
@@ -196,14 +196,14 @@ public class DceWaysToSaveUmsStepDefinition {
 		}
 		String pharmacyType = pharmacyAttributesMap.get("Pharmacy Type");
 		String distance = pharmacyAttributesMap.get("Distance");
-		PharmacySearchPage pharmacySearchPage = (PharmacySearchPage) getLoginScenario()
+		PharmacySelectorPage pharmacySearchPage = (PharmacySelectorPage) getLoginScenario()
 				.getBean(PageConstants.PHARMACY_SEARCH_PAGE);
 		pharmacySearchPage.selectPharmacyType(pharmacyType, distance);
 	}
 
 	@And("^the user views list of pharmacies available for WTS in the UMS site$")
 	public void user_views_pharmacyList() {
-		PharmacySearchPage pharmacySearchPage = (PharmacySearchPage) getLoginScenario()
+		PharmacySelectorPage pharmacySearchPage = (PharmacySelectorPage) getLoginScenario()
 				.getBean(PageConstants.PHARMACY_SEARCH_PAGE);
 		String pharmacyList = pharmacySearchPage.getPharmacyList();
 		System.out.println("pharmacyList====>" + pharmacyList);
@@ -211,7 +211,7 @@ public class DceWaysToSaveUmsStepDefinition {
 
 	@And("^the user selects from the list of pharmacies for WTS in the UMS site$")
 	public void user_selects_pharmacy(DataTable pharmacyAttributes) {
-		PharmacySearchPage pharmacySearchPage = (PharmacySearchPage) getLoginScenario()
+		PharmacySelectorPage pharmacySearchPage = (PharmacySelectorPage) getLoginScenario()
 				.getBean(PageConstants.PHARMACY_SEARCH_PAGE);
 		String pharmacyName = pharmacyAttributes.getGherkinRows().get(0)
 				.getCells().get(0);
@@ -229,10 +229,9 @@ public class DceWaysToSaveUmsStepDefinition {
 
 	@And("^the user views the plan results for WTS in the UMS site$")
 	public void user_views_plan_results() {
-		AddDrugPage addDrugPage = (AddDrugPage) getLoginScenario().getBean(
-				PageConstants.ADD_DRUG_PAGE);
-		VPPPlanSummaryPage healthPlansPage = addDrugPage
-				.navigateToHealthPlansPage();
+		ManageDrugPage manageDrugPage = (ManageDrugPage) getLoginScenario().getBean(
+				PageConstants.MANAGE_DRUG_PAGE);
+		VPPPlanSummaryPage healthPlansPage = manageDrugPage.navigateToPlanSummaryPage();
 		if (healthPlansPage != null) {
 			getLoginScenario().saveBean(PageConstants.HEALTH_PLANS_PAGE,
 					healthPlansPage);
@@ -282,26 +281,19 @@ public class DceWaysToSaveUmsStepDefinition {
 	@And("^the user selects reduce costs on the selected drug in WTS in UMS site$")
 	public void user_selects_reduceCost() {
 		AddDrugPage addDrugPage = (AddDrugPage) getLoginScenario().getBean(PageConstants.ADD_DRUG_PAGE);
-		addDrugPage.reduceCost();
+		//addDrugPage.reduceCost();
 	}
 	
 	@And("^the user switches to generic drug in WTS in UMS site$")
 	public void user_switches_to_genericDrug() {
 		AddDrugPage addDrugPage = (AddDrugPage) getLoginScenario().getBean(PageConstants.ADD_DRUG_PAGE);
-		addDrugPage.switchToGeneric();
+		//addDrugPage.switchToGeneric();
 	}
 	
 	@And("^the user performs apply changes in WTS in UMS site$")
 	public void user_performs_apply_changes_in_WTS() {
 		AddDrugPage addDrugPage = (AddDrugPage) getLoginScenario().getBean(PageConstants.ADD_DRUG_PAGE);
-		addDrugPage.applyChanges();
+		//addDrugPage.applyChanges();
 	}
 
-
-
-	@After
-	public void tearDown() {
-		WebDriver wd = (WebDriver) getLoginScenario().getBean("webDriver");
-		wd.quit();
-	}
 }

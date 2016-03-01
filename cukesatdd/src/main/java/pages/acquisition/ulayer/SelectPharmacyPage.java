@@ -33,7 +33,13 @@ public class SelectPharmacyPage extends UhcDriver {
 	@FindBy(className = "pharmacyName")
 	WebElement pharmacyName;
 
-	@FindBy(className = "select_link")
+	@FindBy(className = "pharmacyDropDown")
+	WebElement pharmacyDropDown;
+
+	@FindBy(xpath = "//div[@id='dcemodal']/div/div/form/div[6]/a/span")
+	WebElement selectButton;
+
+	@FindBy(className = "dceBlueBtn")
 	WebElement selectLink;
 
 	private PageData pharmacies;
@@ -79,19 +85,28 @@ public class SelectPharmacyPage extends UhcDriver {
 		return pharmacyTable.getText();
 	}
 
-	public ManageDrugPage selectPharmacy(String pharmacyName) {
-		for (WebElement element : pharmacyRows) {
-			if (element.getText().contains(pharmacyName)) {
-				ElementData elementData = new ElementData("className",
-						"selectLink");
-				WebElement selectLink = findChildElement(elementData, element);
-				selectLink.click();
-				break;
-			}
 
+	public ManageDrugPage selectPharmacy(String pharmacyName,
+			String pharmacyType) {
+		if (!pharmacyType.equalsIgnoreCase("Preferred Mail Service Pharmacy")) {
+			for (WebElement element : pharmacyRows) {
+				if (element.getText().contains(pharmacyName)) {
+					ElementData elementData = new ElementData("className",
+							"dceBlueBtn");
+					WebElement selectLink = findChildElement(elementData,
+							element);
+					selectLink.click();
+					break;
+				}
+
+			}
+		}
+		else
+		{
+			selectButton.click();
 		}
 		try {
-			if (pharmacyTable.isDisplayed()) {
+			if (pharmacyDropDown.isDisplayed()) {
 				CommonUtility.waitForElementToDisappear(driver, pharmacyTable,
 						CommonConstants.TIMEOUT_30);
 			}
@@ -107,6 +122,7 @@ public class SelectPharmacyPage extends UhcDriver {
 		} else {
 			return null;
 		}
+	
 	}
 
 	@Override

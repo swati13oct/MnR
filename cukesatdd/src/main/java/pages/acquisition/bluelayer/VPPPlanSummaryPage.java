@@ -12,7 +12,6 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-
 import acceptancetests.atdd.data.CommonConstants;
 import acceptancetests.atdd.data.ElementData;
 import acceptancetests.atdd.data.PageData;
@@ -57,6 +56,19 @@ public class VPPPlanSummaryPage extends UhcDriver {
 
 	@FindBy(className = "planinf")
 	private WebElement vppplansummarypage;
+	
+/*	@FindBy(xpath = "//div[@class='pdpplans_planbutton']/div[2]/div[2]/div")
+	private WebElement showPdpPlans;
+
+	@FindBy(xpath = "//div[@class='enabled ng-scope']")
+	List<WebElement> maPlanElement;
+
+	@FindBy(xpath = "//div[@class='disabledprint ng-scope']")
+	List<WebElement> pdpPlanElement;*/
+	
+	@FindBy(id = "editDrugMA")
+	private WebElement editDrugListLink;
+
 
 	private PageData vppPlanSummary;
 
@@ -268,6 +280,69 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	public String viewplans(String planName) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+	
+	public EstimateDrugCostPage navigateToSummaryPage(String planType) {
+		if (planType.equalsIgnoreCase("PDP")) {
+			showPdpPlans.click();
+		} 
+		return new EstimateDrugCostPage(driver);
+	}
+
+	public ManageDrugPage navigateToEditDrugList(String planName) {
+		
+		if (planName.contains("HMO")) {
+			ElementData elementData = new ElementData("id", "editDrugMA");
+			WebElement element = getViewPlanDetailsElement(maPlanElement,
+					elementData, planName);
+			if (element != null) {
+				element.click();
+
+			}
+
+		} else if (planName.contains("PDP")) {
+			ElementData elementData = new ElementData("id", "editDrugMA");
+			WebElement element = getViewPlanDetailsElement(pdpPlanElement,
+					elementData, planName);
+			if (element != null) {
+				element.click();
+
+			}
+
+		}
+		CommonUtility.checkPageIsReady(driver);
+		if (currentUrl().contains("manageDrugList")) {
+			return new ManageDrugPage(driver);
+		}
+
+		return null;
+	}
+
+	public GetStartedPage clicksOnEnterDrugInformationLink(String planName) {
+		if (planName.contains("HMO")) {
+			for (WebElement plan : maPlanElement) {
+				if (plan.getText().contains(planName)) {
+					ElementData elementData = new ElementData("id",
+							"enterDrugMA");
+					findChildElement(elementData, plan).click();
+				}
+			}
+		}
+		if (planName.contains("PDP")) {
+			for (WebElement plan : pdpPlanElement) {
+				if (plan.getText().contains(planName)) {
+					ElementData elementData = new ElementData("id",
+							"enterDrugPDP"); // TODO Re-check
+					findChildElement(elementData, plan).click();
+				}
+			}
+		}
+		if (driver.getTitle().equalsIgnoreCase(
+				"Our Medicare Plan Types | UnitedHealthcare®")) {
+			return new GetStartedPage(driver);
+		}
+		return null;
+
 	}
 
 }

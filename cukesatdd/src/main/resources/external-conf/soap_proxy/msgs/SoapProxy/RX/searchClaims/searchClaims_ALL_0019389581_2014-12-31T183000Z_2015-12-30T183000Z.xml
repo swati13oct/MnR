@@ -1,0 +1,1333 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <searchClaimsResponse xmlns="http://www.uhc.com/2009/12/29/com/uhg/ovations/portal/rxconnection/claimhistory/service" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+         <claims>
+            <claim>
+               <additionalMessage><![CDATA[Provide Exception Process Printed NoticeBILL W/MFG NDC OR CONTACT YOUR CORP OFFIPat Pay Sch Criteria Sequence not foundConsider Formulary Generic]]></additionalMessage>
+               <claimNumber>152440309357129</claimNumber>
+               <claimType>PHARMACY</claimType>
+               <daw>NO PRODUCT SELECTION INDICATED</daw>
+               <daysSupply>1</daysSupply>
+               <drugName>LIPITOR      TAB 10MG</drugName>
+               <fillDate>2015-09-01T05:00:00Z</fillDate>
+               <memberPaidAmount>0.00</memberPaidAmount>
+               <message><![CDATA[84Claim Not Paid/Captured569CMS Appeal Rights Notice]]></message>
+               <ndc>00071015523</ndc>
+               <otherCoverageCode>0</otherCoverageCode>
+               <overrideAllowed>false</overrideAllowed>
+               <pharmacyId>2400074</pharmacyId>
+               <planPaidAmount>0.00</planPaidAmount>
+               <priorAuthType/>
+               <quantityDispensed>1.000</quantityDispensed>
+               <rxNumber>786876787777</rxNumber>
+               <sequenceNumber>996</sequenceNumber>
+               <status>REJECTED</status>
+               <transactionCount>4</transactionCount>
+               <trialClaimType>RETAIL</trialClaimType>
+               <accountId>P0101100000000</accountId>
+               <groupId>IS5820001A</groupId>
+               <pharmacyName>WALGREENS #13877</pharmacyName>
+               <copayCategory>0</copayCategory>
+            </claim>
+            <claim>
+               <additionalMessage><![CDATA[Provide Exception Process Printed NoticeBILL W/MFG NDC OR CONTACT YOUR CORP OFFIPRICING ERROR - Client Pricing problemPRICING ERROR - Pricing problemConsider Formulary Generic]]></additionalMessage>
+               <claimNumber>152440402790103</claimNumber>
+               <claimType>PHARMACY</claimType>
+               <daw>NO PRODUCT SELECTION INDICATED</daw>
+               <daysSupply>1</daysSupply>
+               <drugName>LIPITOR      TAB 10MG</drugName>
+               <fillDate>2015-09-01T05:00:00Z</fillDate>
+               <memberPaidAmount>0.00</memberPaidAmount>
+               <message><![CDATA[84Claim Not Paid/Captured569CMS Appeal Rights Notice]]></message>
+               <ndc>00071015523</ndc>
+               <otherCoverageCode>0</otherCoverageCode>
+               <overrideAllowed>false</overrideAllowed>
+               <pharmacyId>2400074</pharmacyId>
+               <planPaidAmount>0.00</planPaidAmount>
+               <priorAuthType/>
+               <quantityDispensed>1.000</quantityDispensed>
+               <rxNumber>122226787777</rxNumber>
+               <sequenceNumber>999</sequenceNumber>
+               <status>REJECTED</status>
+               <transactionCount>1</transactionCount>
+               <trialClaimType>RETAIL</trialClaimType>
+               <accountId>P0101100000000</accountId>
+               <groupId>IS5820001A</groupId>
+               <pharmacyName>WALGREENS #13877</pharmacyName>
+               <copayCategory>0</copayCategory>
+            </claim>
+            <claim>
+               <additionalMessage><![CDATA[Provide Exception Process Printed NoticePRICING ERROR - Client Pricing problemPRICING ERROR - Pricing problem]]></additionalMessage>
+               <claimNumber>152441304410111</claimNumber>
+               <claimType>PHARMACY</claimType>
+               <daw>NO PRODUCT SELECTION INDICATED</daw>
+               <daysSupply>1</daysSupply>
+               <drugName>ABSORICA     CAP 10MG</drugName>
+               <fillDate>2015-09-01T05:00:00Z</fillDate>
+               <memberPaidAmount>0.00</memberPaidAmount>
+               <message><![CDATA[84Claim Not Paid/Captured569CMS Appeal Rights Notice]]></message>
+               <ndc>10631011531</ndc>
+               <otherCoverageCode>0</otherCoverageCode>
+               <overrideAllowed>false</overrideAllowed>
+               <pharmacyId>2400074</pharmacyId>
+               <planPaidAmount>0.00</planPaidAmount>
+               <priorAuthType/>
+               <quantityDispensed>1.000</quantityDispensed>
+               <rxNumber>122222946923</rxNumber>
+               <sequenceNumber>998</sequenceNumber>
+               <status>REJECTED</status>
+               <transactionCount>2</transactionCount>
+               <trialClaimType>RETAIL</trialClaimType>
+               <accountId>P0101100000000</accountId>
+               <groupId>IS5820001A</groupId>
+               <pharmacyName>WALGREENS #13877</pharmacyName>
+               <copayCategory>0</copayCategory>
+            </claim>
+            <claim>
+               <additionalMessage><![CDATA[Provide Exception Process Printed NoticePRICING ERROR - Client Pricing problemPRICING ERROR - Pricing problem]]></additionalMessage>
+               <claimNumber>152472197224000</claimNumber>
+               <claimType>PHARMACY</claimType>
+               <daw>NO PRODUCT SELECTION INDICATED</daw>
+               <daysSupply>1</daysSupply>
+               <drugName>FAMCICLOVIR  TAB 125MG</drugName>
+               <fillDate>2015-08-04T05:00:00Z</fillDate>
+               <memberPaidAmount>0.00</memberPaidAmount>
+               <message><![CDATA[84Claim Not Paid/Captured569CMS Appeal Rights Notice]]></message>
+               <ndc>00093811756</ndc>
+               <otherCoverageCode>0</otherCoverageCode>
+               <overrideAllowed>false</overrideAllowed>
+               <pharmacyId>2400074</pharmacyId>
+               <planPaidAmount>0.00</planPaidAmount>
+               <priorAuthType/>
+               <quantityDispensed>10.000</quantityDispensed>
+               <rxNumber>877876565467</rxNumber>
+               <sequenceNumber>999</sequenceNumber>
+               <status>REJECTED</status>
+               <transactionCount>1</transactionCount>
+               <trialClaimType>RETAIL</trialClaimType>
+               <accountId>P0101100000000</accountId>
+               <groupId>IS5820001A</groupId>
+               <pharmacyName>WALGREENS #13877</pharmacyName>
+               <copayCategory>0</copayCategory>
+            </claim>
+            <claim>
+               <additionalMessage><![CDATA[Provide Exception Process Printed NoticePRICING ERROR - Client Pricing problemPRICING ERROR - Pricing problem]]></additionalMessage>
+               <claimNumber>152472199731000</claimNumber>
+               <claimType>PHARMACY</claimType>
+               <daw>NO PRODUCT SELECTION INDICATED</daw>
+               <daysSupply>1</daysSupply>
+               <drugName>FAMCICLOVIR  TAB 125MG</drugName>
+               <fillDate>2015-08-04T05:00:00Z</fillDate>
+               <memberPaidAmount>0.00</memberPaidAmount>
+               <message><![CDATA[84Claim Not Paid/Captured569CMS Appeal Rights Notice]]></message>
+               <ndc>00093811756</ndc>
+               <otherCoverageCode>0</otherCoverageCode>
+               <overrideAllowed>false</overrideAllowed>
+               <pharmacyId>1006899</pharmacyId>
+               <planPaidAmount>0.00</planPaidAmount>
+               <priorAuthType/>
+               <quantityDispensed>10.000</quantityDispensed>
+               <rxNumber>812376565467</rxNumber>
+               <sequenceNumber>999</sequenceNumber>
+               <status>REJECTED</status>
+               <transactionCount>1</transactionCount>
+               <trialClaimType>MAIL</trialClaimType>
+               <accountId>P0101100000000</accountId>
+               <groupId>IS5820001A</groupId>
+               <pharmacyName>WALGREENS #2445</pharmacyName>
+               <copayCategory>0</copayCategory>
+            </claim>
+            <claim>
+               <additionalMessage><![CDATA[Provide Exception Process Printed NoticeBILL W/MFG NDC OR CONTACT YOUR CORP OFFIPRICING ERROR - Client Pricing problemPRICING ERROR - Pricing problemConsider Formulary Generic]]></additionalMessage>
+               <claimNumber>152472204164000</claimNumber>
+               <claimType>PHARMACY</claimType>
+               <daw>NO PRODUCT SELECTION INDICATED</daw>
+               <daysSupply>1</daysSupply>
+               <drugName>LIPITOR      TAB 10MG</drugName>
+               <fillDate>2015-08-04T05:00:00Z</fillDate>
+               <memberPaidAmount>0.00</memberPaidAmount>
+               <message><![CDATA[84Claim Not Paid/Captured569CMS Appeal Rights Notice]]></message>
+               <ndc>00071015523</ndc>
+               <otherCoverageCode>0</otherCoverageCode>
+               <overrideAllowed>false</overrideAllowed>
+               <pharmacyId>1006899</pharmacyId>
+               <planPaidAmount>0.00</planPaidAmount>
+               <priorAuthType/>
+               <quantityDispensed>10.000</quantityDispensed>
+               <rxNumber>811312465467</rxNumber>
+               <sequenceNumber>999</sequenceNumber>
+               <status>REJECTED</status>
+               <transactionCount>1</transactionCount>
+               <trialClaimType>MAIL</trialClaimType>
+               <accountId>P0101100000000</accountId>
+               <groupId>IS5820001A</groupId>
+               <pharmacyName>WALGREENS #2445</pharmacyName>
+               <copayCategory>0</copayCategory>
+            </claim>
+            <claim>
+               <additionalMessage><![CDATA[Provide Exception Process Printed NoticePRICING ERROR - Client Pricing problemPRICING ERROR - Pricing problem]]></additionalMessage>
+               <claimNumber>152520392104000</claimNumber>
+               <claimType>PHARMACY</claimType>
+               <daw>PRESCRIBER REQUESTED BRAND</daw>
+               <daysSupply>1</daysSupply>
+               <drugName>FAMCICLOVIR  TAB 125MG</drugName>
+               <fillDate>2015-08-09T05:00:00Z</fillDate>
+               <memberPaidAmount>0.00</memberPaidAmount>
+               <message><![CDATA[84Claim Not Paid/Captured569CMS Appeal Rights Notice]]></message>
+               <ndc>00054019613</ndc>
+               <otherCoverageCode>0</otherCoverageCode>
+               <overrideAllowed>false</overrideAllowed>
+               <pharmacyId>2400074</pharmacyId>
+               <planPaidAmount>0.00</planPaidAmount>
+               <priorAuthType/>
+               <quantityDispensed>10.000</quantityDispensed>
+               <rxNumber>989786777657</rxNumber>
+               <sequenceNumber>999</sequenceNumber>
+               <status>REJECTED</status>
+               <transactionCount>1</transactionCount>
+               <trialClaimType>RETAIL</trialClaimType>
+               <accountId>P0101100000000</accountId>
+               <groupId>IS5820001A</groupId>
+               <pharmacyName>WALGREENS #13877</pharmacyName>
+               <copayCategory>0</copayCategory>
+            </claim>
+            <claim>
+               <additionalMessage><![CDATA[Provide Exception Process Printed NoticePRICING ERROR - Client Pricing problemPRICING ERROR - Pricing problem]]></additionalMessage>
+               <claimNumber>152520394352000</claimNumber>
+               <claimType>PHARMACY</claimType>
+               <daw>PRESCRIBER REQUESTED BRAND</daw>
+               <daysSupply>1</daysSupply>
+               <drugName>FAMCICLOVIR  TAB 125MG</drugName>
+               <fillDate>2015-08-09T05:00:00Z</fillDate>
+               <memberPaidAmount>0.00</memberPaidAmount>
+               <message><![CDATA[84Claim Not Paid/Captured569CMS Appeal Rights Notice]]></message>
+               <ndc>00054019613</ndc>
+               <otherCoverageCode>0</otherCoverageCode>
+               <overrideAllowed>false</overrideAllowed>
+               <pharmacyId>1006899</pharmacyId>
+               <planPaidAmount>0.00</planPaidAmount>
+               <priorAuthType/>
+               <quantityDispensed>10.000</quantityDispensed>
+               <rxNumber>912386777657</rxNumber>
+               <sequenceNumber>999</sequenceNumber>
+               <status>REJECTED</status>
+               <transactionCount>1</transactionCount>
+               <trialClaimType>MAIL</trialClaimType>
+               <accountId>P0101100000000</accountId>
+               <groupId>IS5820001A</groupId>
+               <pharmacyName>WALGREENS #2445</pharmacyName>
+               <copayCategory>0</copayCategory>
+            </claim>
+            <claim>
+               <additionalMessage><![CDATA[Provide Exception Process Printed NoticePRICING ERROR - Client Pricing problemPRICING ERROR - Pricing problem]]></additionalMessage>
+               <claimNumber>152520412089000</claimNumber>
+               <claimType>PHARMACY</claimType>
+               <daw>PRESCRIBER REQUESTED BRAND</daw>
+               <daysSupply>1</daysSupply>
+               <drugName>FAMCICLOVIR  TAB 125MG</drugName>
+               <fillDate>2015-08-09T05:00:00Z</fillDate>
+               <memberPaidAmount>0.00</memberPaidAmount>
+               <message><![CDATA[84Claim Not Paid/Captured569CMS Appeal Rights Notice]]></message>
+               <ndc>00054019613</ndc>
+               <otherCoverageCode>0</otherCoverageCode>
+               <overrideAllowed>false</overrideAllowed>
+               <pharmacyId>1718634</pharmacyId>
+               <planPaidAmount>0.00</planPaidAmount>
+               <priorAuthType/>
+               <quantityDispensed>10.000</quantityDispensed>
+               <rxNumber>912386776567</rxNumber>
+               <sequenceNumber>999</sequenceNumber>
+               <status>REJECTED</status>
+               <transactionCount>1</transactionCount>
+               <trialClaimType>RETAIL</trialClaimType>
+               <accountId>P0101100000000</accountId>
+               <groupId>IS5820001A</groupId>
+               <pharmacyName>OPTUMRX</pharmacyName>
+               <copayCategory>0</copayCategory>
+            </claim>
+            <claim>
+               <additionalMessage><![CDATA[Provide Exception Process Printed NoticeBILL W/MFG NDC OR CONTACT YOUR CORP OFFIPRICING ERROR - Client Pricing problemPRICING ERROR - Pricing problemConsider Formulary Generic]]></additionalMessage>
+               <claimNumber>152520415691000</claimNumber>
+               <claimType>PHARMACY</claimType>
+               <daw>PRESCRIBER REQUESTED BRAND</daw>
+               <daysSupply>1</daysSupply>
+               <drugName>LIPITOR      TAB 10MG</drugName>
+               <fillDate>2015-08-09T05:00:00Z</fillDate>
+               <memberPaidAmount>0.00</memberPaidAmount>
+               <message><![CDATA[84Claim Not Paid/Captured569CMS Appeal Rights Notice]]></message>
+               <ndc>00071015523</ndc>
+               <otherCoverageCode>0</otherCoverageCode>
+               <overrideAllowed>false</overrideAllowed>
+               <pharmacyId>2400074</pharmacyId>
+               <planPaidAmount>0.00</planPaidAmount>
+               <priorAuthType/>
+               <quantityDispensed>10.000</quantityDispensed>
+               <rxNumber>912386776567</rxNumber>
+               <sequenceNumber>999</sequenceNumber>
+               <status>REJECTED</status>
+               <transactionCount>1</transactionCount>
+               <trialClaimType>RETAIL</trialClaimType>
+               <accountId>P0101100000000</accountId>
+               <groupId>IS5820001A</groupId>
+               <pharmacyName>WALGREENS #13877</pharmacyName>
+               <copayCategory>0</copayCategory>
+            </claim>
+            <claim>
+               <additionalMessage><![CDATA[Provide Exception Process Printed NoticeBILL W/MFG NDC OR CONTACT YOUR CORP OFFIPRICING ERROR - Pricing problemConsider Formulary Generic]]></additionalMessage>
+               <claimNumber>152520550261000</claimNumber>
+               <claimType>PHARMACY</claimType>
+               <daw>PRESCRIBER REQUESTED BRAND</daw>
+               <daysSupply>1</daysSupply>
+               <drugName>LIPITOR      TAB 10MG</drugName>
+               <fillDate>2015-08-09T05:00:00Z</fillDate>
+               <memberPaidAmount>0.00</memberPaidAmount>
+               <message><![CDATA[84Claim Not Paid/Captured569CMS Appeal Rights Notice]]></message>
+               <ndc>00071015523</ndc>
+               <otherCoverageCode>0</otherCoverageCode>
+               <overrideAllowed>false</overrideAllowed>
+               <pharmacyId>2400074</pharmacyId>
+               <planPaidAmount>20.00</planPaidAmount>
+               <priorAuthType/>
+               <quantityDispensed>10.000</quantityDispensed>
+               <rxNumber>912386756657</rxNumber>
+               <sequenceNumber>998</sequenceNumber>
+               <status>REJECTED</status>
+               <transactionCount>2</transactionCount>
+               <trialClaimType>RETAIL</trialClaimType>
+               <accountId>P0101100000000</accountId>
+               <groupId>IS5820001A</groupId>
+               <pharmacyName>WALGREENS #13877</pharmacyName>
+               <copayCategory>0</copayCategory>
+            </claim>
+            <claim>
+               <additionalMessage><![CDATA[BILL W/MFG NDC OR CONTACT YOUR CORP OFFIConsider Formulary Generic]]></additionalMessage>
+               <claimNumber>152520565039000</claimNumber>
+               <claimType>PHARMACY</claimType>
+               <daw>PRESCRIBER REQUESTED BRAND</daw>
+               <daysSupply>1</daysSupply>
+               <drugName>LIPITOR      TAB 10MG</drugName>
+               <fillDate>2015-08-09T05:00:00Z</fillDate>
+               <memberPaidAmount>0.12</memberPaidAmount>
+               <message/>
+               <ndc>00071015523</ndc>
+               <otherCoverageCode>0</otherCoverageCode>
+               <overrideAllowed>false</overrideAllowed>
+               <pharmacyId>1006899</pharmacyId>
+               <planPaidAmount>19.88</planPaidAmount>
+               <priorAuthType/>
+               <quantityDispensed>10.000</quantityDispensed>
+               <rxNumber>917666756657</rxNumber>
+               <sequenceNumber>999</sequenceNumber>
+               <status>PAID</status>
+               <transactionCount>1</transactionCount>
+               <trialClaimType>MAIL</trialClaimType>
+               <accountId>P0101100000000</accountId>
+               <groupId>IS5820001A</groupId>
+               <pharmacyName>WALGREENS #2445</pharmacyName>
+               <copayCategory>0</copayCategory>
+            </claim>
+            <claim>
+               <additionalMessage><![CDATA[BILL W/MFG NDC OR CONTACT YOUR CORP OFFIRefill Payable on or after 08/10/15Consider Formulary Generic]]></additionalMessage>
+               <claimNumber>152520570858000</claimNumber>
+               <claimType>PHARMACY</claimType>
+               <daw>PRESCRIBER REQUESTED BRAND</daw>
+               <daysSupply>1</daysSupply>
+               <drugName>LIPITOR      TAB 10MG</drugName>
+               <fillDate>2015-08-09T05:00:00Z</fillDate>
+               <memberPaidAmount>20.00</memberPaidAmount>
+               <message><![CDATA[88DUR Reject Error]]></message>
+               <ndc>00071015523</ndc>
+               <otherCoverageCode>0</otherCoverageCode>
+               <overrideAllowed>true</overrideAllowed>
+               <pharmacyId>2400074</pharmacyId>
+               <planPaidAmount>0.00</planPaidAmount>
+               <priorAuthType/>
+               <quantityDispensed>10.000</quantityDispensed>
+               <rxNumber>998766756657</rxNumber>
+               <sequenceNumber>999</sequenceNumber>
+               <status>REJECTED</status>
+               <transactionCount>1</transactionCount>
+               <trialClaimType>RETAIL</trialClaimType>
+               <accountId>P0101100000000</accountId>
+               <groupId>IS5820001A</groupId>
+               <pharmacyName>WALGREENS #13877</pharmacyName>
+               <copayCategory>0</copayCategory>
+            </claim>
+            <claim>
+               <additionalMessage><![CDATA[BILL W/MFG NDC OR CONTACT YOUR CORP OFFIConsider Formulary Generic]]></additionalMessage>
+               <claimNumber>152520571640000</claimNumber>
+               <claimType>PHARMACY</claimType>
+               <daw>PRESCRIBER REQUESTED BRAND</daw>
+               <daysSupply>1</daysSupply>
+               <drugName>LIPITOR      TAB 10MG</drugName>
+               <fillDate>2015-07-09T05:00:00Z</fillDate>
+               <memberPaidAmount>20.00</memberPaidAmount>
+               <message/>
+               <ndc>00071015523</ndc>
+               <otherCoverageCode>0</otherCoverageCode>
+               <overrideAllowed>false</overrideAllowed>
+               <pharmacyId>2400074</pharmacyId>
+               <planPaidAmount>0.00</planPaidAmount>
+               <priorAuthType/>
+               <quantityDispensed>10.000</quantityDispensed>
+               <rxNumber>998766756657</rxNumber>
+               <sequenceNumber>999</sequenceNumber>
+               <status>REVERSAL</status>
+               <transactionCount>1</transactionCount>
+               <trialClaimType>RETAIL</trialClaimType>
+               <accountId>P0101100000000</accountId>
+               <groupId>IS5820001A</groupId>
+               <pharmacyName>WALGREENS #13877</pharmacyName>
+               <copayCategory>0</copayCategory>
+            </claim>
+            <claim>
+               <additionalMessage/>
+               <claimNumber>152520585619000</claimNumber>
+               <claimType>PHARMACY</claimType>
+               <daw>PRESCRIBER REQUESTED BRAND</daw>
+               <daysSupply>1</daysSupply>
+               <drugName>AFEDITAB     TAB 30MG CR</drugName>
+               <fillDate>2015-07-09T05:00:00Z</fillDate>
+               <memberPaidAmount>0.50</memberPaidAmount>
+               <message/>
+               <ndc>00591319301</ndc>
+               <otherCoverageCode>0</otherCoverageCode>
+               <overrideAllowed>false</overrideAllowed>
+               <pharmacyId>2400074</pharmacyId>
+               <planPaidAmount>10.23</planPaidAmount>
+               <priorAuthType/>
+               <quantityDispensed>10.000</quantityDispensed>
+               <rxNumber>997656756657</rxNumber>
+               <sequenceNumber>999</sequenceNumber>
+               <status>REVERSAL</status>
+               <transactionCount>1</transactionCount>
+               <trialClaimType>RETAIL</trialClaimType>
+               <accountId>P0101100000000</accountId>
+               <groupId>IS5820001A</groupId>
+               <pharmacyName>WALGREENS #13877</pharmacyName>
+               <copayCategory>0</copayCategory>
+            </claim>
+            <claim>
+               <additionalMessage><![CDATA[Consider Formulary Generic]]></additionalMessage>
+               <claimNumber>152520876505000</claimNumber>
+               <claimType>PHARMACY</claimType>
+               <daw>PRESCRIBER REQUESTED BRAND</daw>
+               <daysSupply>1</daysSupply>
+               <drugName>COZAAR       TAB 100MG</drugName>
+               <fillDate>2015-07-09T05:00:00Z</fillDate>
+               <memberPaidAmount>20.00</memberPaidAmount>
+               <message/>
+               <ndc>00006096031</ndc>
+               <otherCoverageCode>0</otherCoverageCode>
+               <overrideAllowed>false</overrideAllowed>
+               <pharmacyId>2400074</pharmacyId>
+               <planPaidAmount>0.00</planPaidAmount>
+               <priorAuthType/>
+               <quantityDispensed>10.000</quantityDispensed>
+               <rxNumber>997131236657</rxNumber>
+               <sequenceNumber>999</sequenceNumber>
+               <status>REVERSAL</status>
+               <transactionCount>1</transactionCount>
+               <trialClaimType>RETAIL</trialClaimType>
+               <accountId>P0101100000000</accountId>
+               <groupId>IS5820001A</groupId>
+               <pharmacyName>WALGREENS #13877</pharmacyName>
+               <copayCategory>0</copayCategory>
+            </claim>
+            <claim>
+               <additionalMessage><![CDATA[Refill Payable on or after 07/10/15Consider Formulary Generic]]></additionalMessage>
+               <claimNumber>152520947975000</claimNumber>
+               <claimType>PHARMACY</claimType>
+               <daw>PRESCRIBER REQUESTED BRAND</daw>
+               <daysSupply>10</daysSupply>
+               <drugName>COZAAR       TAB 100MG</drugName>
+               <fillDate>2015-07-09T05:00:00Z</fillDate>
+               <memberPaidAmount>48.87</memberPaidAmount>
+               <message><![CDATA[88DUR Reject Error]]></message>
+               <ndc>00006096031</ndc>
+               <otherCoverageCode>0</otherCoverageCode>
+               <overrideAllowed>true</overrideAllowed>
+               <pharmacyId>2400074</pharmacyId>
+               <planPaidAmount>0.00</planPaidAmount>
+               <priorAuthType/>
+               <quantityDispensed>10.000</quantityDispensed>
+               <rxNumber>997876766657</rxNumber>
+               <sequenceNumber>999</sequenceNumber>
+               <status>REJECTED</status>
+               <transactionCount>1</transactionCount>
+               <trialClaimType>RETAIL</trialClaimType>
+               <accountId>P0101100000000</accountId>
+               <groupId>IS5820001A</groupId>
+               <pharmacyName>WALGREENS #13877</pharmacyName>
+               <copayCategory>0</copayCategory>
+            </claim>
+            <claim>
+               <additionalMessage><![CDATA[Consider Formulary Generic]]></additionalMessage>
+               <claimNumber>152520949232000</claimNumber>
+               <claimType>PHARMACY</claimType>
+               <daw>PRESCRIBER REQUESTED BRAND</daw>
+               <daysSupply>10</daysSupply>
+               <drugName>COZAAR       TAB 100MG</drugName>
+               <fillDate>2015-07-10T05:00:00Z</fillDate>
+               <memberPaidAmount>48.87</memberPaidAmount>
+               <message/>
+               <ndc>00006096031</ndc>
+               <otherCoverageCode>0</otherCoverageCode>
+               <overrideAllowed>false</overrideAllowed>
+               <pharmacyId>2400074</pharmacyId>
+               <planPaidAmount>0.00</planPaidAmount>
+               <priorAuthType/>
+               <quantityDispensed>10.000</quantityDispensed>
+               <rxNumber>997876766657</rxNumber>
+               <sequenceNumber>999</sequenceNumber>
+               <status>PAID</status>
+               <transactionCount>2</transactionCount>
+               <trialClaimType>RETAIL</trialClaimType>
+               <accountId>P0101100000000</accountId>
+               <groupId>IS5820001A</groupId>
+               <pharmacyName>WALGREENS #13877</pharmacyName>
+               <copayCategory>0</copayCategory>
+            </claim>
+            <claim>
+               <additionalMessage><![CDATA[Mfc not Part D Elig Use Elig Drug or NDCPlan ExclusionConsider Formulary Generic]]></additionalMessage>
+               <claimNumber>152520975897000</claimNumber>
+               <claimType>PHARMACY</claimType>
+               <daw>PRESCRIBER REQUESTED BRAND</daw>
+               <daysSupply>10</daysSupply>
+               <drugName>LIPITOR      TAB 10MG</drugName>
+               <fillDate>2015-06-10T05:00:00Z</fillDate>
+               <memberPaidAmount>0.00</memberPaidAmount>
+               <message><![CDATA[70Prod/Service Not Covered]]></message>
+               <ndc>55289087030</ndc>
+               <otherCoverageCode>0</otherCoverageCode>
+               <overrideAllowed>false</overrideAllowed>
+               <pharmacyId>2400074</pharmacyId>
+               <planPaidAmount>52.12</planPaidAmount>
+               <priorAuthType/>
+               <quantityDispensed>10.000</quantityDispensed>
+               <rxNumber>997876766657</rxNumber>
+               <sequenceNumber>999</sequenceNumber>
+               <status>REJECTED</status>
+               <transactionCount>1</transactionCount>
+               <trialClaimType>RETAIL</trialClaimType>
+               <accountId>P0101100000000</accountId>
+               <groupId>IS5820001A</groupId>
+               <pharmacyName>WALGREENS #13877</pharmacyName>
+               <copayCategory>0</copayCategory>
+            </claim>
+            <claim>
+               <additionalMessage><![CDATA[Mfc not Part D Elig Use Elig Drug or NDCPlan ExclusionConsider Formulary Generic]]></additionalMessage>
+               <claimNumber>152520978250000</claimNumber>
+               <claimType>PHARMACY</claimType>
+               <daw>PRESCRIBER REQUESTED BRAND</daw>
+               <daysSupply>10</daysSupply>
+               <drugName>LIPITOR      TAB 10MG</drugName>
+               <fillDate>2015-09-01T05:00:00Z</fillDate>
+               <memberPaidAmount>0.00</memberPaidAmount>
+               <message><![CDATA[70Prod/Service Not Covered]]></message>
+               <ndc>58864060830</ndc>
+               <otherCoverageCode>0</otherCoverageCode>
+               <overrideAllowed>false</overrideAllowed>
+               <pharmacyId>2400074</pharmacyId>
+               <planPaidAmount>36.84</planPaidAmount>
+               <priorAuthType/>
+               <quantityDispensed>10.000</quantityDispensed>
+               <rxNumber>966446766657</rxNumber>
+               <sequenceNumber>998</sequenceNumber>
+               <status>REJECTED</status>
+               <transactionCount>2</transactionCount>
+               <trialClaimType>RETAIL</trialClaimType>
+               <accountId>P0101100000000</accountId>
+               <groupId>IS5820001A</groupId>
+               <pharmacyName>WALGREENS #13877</pharmacyName>
+               <copayCategory>0</copayCategory>
+            </claim>
+            <claim>
+               <additionalMessage><![CDATA[Consider Formulary Generic]]></additionalMessage>
+               <claimNumber>152521045717000</claimNumber>
+               <claimType>PHARMACY</claimType>
+               <daw>PRESCRIBER REQUESTED BRAND</daw>
+               <daysSupply>10</daysSupply>
+               <drugName>COZAAR       TAB 100MG</drugName>
+               <fillDate>2015-09-01T05:00:00Z</fillDate>
+               <memberPaidAmount>48.87</memberPaidAmount>
+               <message/>
+               <ndc>00006096031</ndc>
+               <otherCoverageCode>0</otherCoverageCode>
+               <overrideAllowed>false</overrideAllowed>
+               <pharmacyId>2400074</pharmacyId>
+               <planPaidAmount>0.00</planPaidAmount>
+               <priorAuthType/>
+               <quantityDispensed>10.000</quantityDispensed>
+               <rxNumber>966486776657</rxNumber>
+               <sequenceNumber>999</sequenceNumber>
+               <status>PAID</status>
+               <transactionCount>1</transactionCount>
+               <trialClaimType>RETAIL</trialClaimType>
+               <accountId>P0101100000000</accountId>
+               <groupId>IS5820001A</groupId>
+               <pharmacyName>WALGREENS #13877</pharmacyName>
+               <copayCategory>0</copayCategory>
+            </claim>
+            <claim>
+               <additionalMessage><![CDATA[Consider Formulary Generic]]></additionalMessage>
+               <claimNumber>152521331977000</claimNumber>
+               <claimType>PHARMACY</claimType>
+               <daw>PRESCRIBER REQUESTED BRAND</daw>
+               <daysSupply>1</daysSupply>
+               <drugName>COZAAR       TAB 100MG</drugName>
+               <fillDate>2015-08-02T05:00:00Z</fillDate>
+               <memberPaidAmount>10.00</memberPaidAmount>
+               <message/>
+               <ndc>00006096031</ndc>
+               <otherCoverageCode>0</otherCoverageCode>
+               <overrideAllowed>false</overrideAllowed>
+               <pharmacyId>2400074</pharmacyId>
+               <planPaidAmount>0.00</planPaidAmount>
+               <priorAuthType/>
+               <quantityDispensed>10.000</quantityDispensed>
+               <rxNumber>981312376557</rxNumber>
+               <sequenceNumber>999</sequenceNumber>
+               <status>PAID</status>
+               <transactionCount>1</transactionCount>
+               <trialClaimType>RETAIL</trialClaimType>
+               <accountId>P0101100000000</accountId>
+               <groupId>IS5820001A</groupId>
+               <pharmacyName>WALGREENS #13877</pharmacyName>
+               <copayCategory>0</copayCategory>
+            </claim>
+            <claim>
+               <additionalMessage><![CDATA[Refill Payable on or after 08/03/15Consider Formulary Generic]]></additionalMessage>
+               <claimNumber>152521405352000</claimNumber>
+               <claimType>PHARMACY</claimType>
+               <daw>PRESCRIBER REQUESTED BRAND</daw>
+               <daysSupply>1</daysSupply>
+               <drugName>COZAAR       TAB 100MG</drugName>
+               <fillDate>2015-08-02T05:00:00Z</fillDate>
+               <memberPaidAmount>10.00</memberPaidAmount>
+               <message><![CDATA[88DUR Reject Error]]></message>
+               <ndc>00006096031</ndc>
+               <otherCoverageCode>0</otherCoverageCode>
+               <overrideAllowed>true</overrideAllowed>
+               <pharmacyId>2400074</pharmacyId>
+               <planPaidAmount>0.00</planPaidAmount>
+               <priorAuthType/>
+               <quantityDispensed>10.000</quantityDispensed>
+               <rxNumber>981876786557</rxNumber>
+               <sequenceNumber>998</sequenceNumber>
+               <status>REJECTED</status>
+               <transactionCount>2</transactionCount>
+               <trialClaimType>RETAIL</trialClaimType>
+               <accountId>P0101100000000</accountId>
+               <groupId>IS5820001A</groupId>
+               <pharmacyName>WALGREENS #13877</pharmacyName>
+               <copayCategory>0</copayCategory>
+            </claim>
+            <claim>
+               <additionalMessage><![CDATA[NDC Excluded, CHECK FOR POSSIBLE ALT NDCPlan ExclusionConsider Formulary Generic]]></additionalMessage>
+               <claimNumber>152521407134000</claimNumber>
+               <claimType>PHARMACY</claimType>
+               <daw>PRESCRIBER REQUESTED BRAND</daw>
+               <daysSupply>1</daysSupply>
+               <drugName>ADDERALL     TAB 10MG</drugName>
+               <fillDate>2015-08-02T05:00:00Z</fillDate>
+               <memberPaidAmount>0.00</memberPaidAmount>
+               <message><![CDATA[70Prod/Service Not Covered]]></message>
+               <ndc>00555076402</ndc>
+               <otherCoverageCode>0</otherCoverageCode>
+               <overrideAllowed>false</overrideAllowed>
+               <pharmacyId>1006899</pharmacyId>
+               <planPaidAmount>10.00</planPaidAmount>
+               <priorAuthType/>
+               <quantityDispensed>10.000</quantityDispensed>
+               <rxNumber>981876786557</rxNumber>
+               <sequenceNumber>999</sequenceNumber>
+               <status>REJECTED</status>
+               <transactionCount>1</transactionCount>
+               <trialClaimType>MAIL</trialClaimType>
+               <accountId>P0101100000000</accountId>
+               <groupId>IS5820001A</groupId>
+               <pharmacyName>WALGREENS #2445</pharmacyName>
+               <copayCategory>0</copayCategory>
+            </claim>
+            <claim>
+               <additionalMessage><![CDATA[Mfc not Part D Elig Use Elig Drug or NDCPlan ExclusionConsider Formulary Generic]]></additionalMessage>
+               <claimNumber>152521432149000</claimNumber>
+               <claimType>PHARMACY</claimType>
+               <daw>PRESCRIBER REQUESTED BRAND</daw>
+               <daysSupply>1</daysSupply>
+               <drugName>COZAAR       TAB 100MG</drugName>
+               <fillDate>2015-08-02T05:00:00Z</fillDate>
+               <memberPaidAmount>0.00</memberPaidAmount>
+               <message><![CDATA[70Prod/Service Not Covered]]></message>
+               <ndc>43353045945</ndc>
+               <otherCoverageCode>0</otherCoverageCode>
+               <overrideAllowed>false</overrideAllowed>
+               <pharmacyId>1006899</pharmacyId>
+               <planPaidAmount>10.00</planPaidAmount>
+               <priorAuthType/>
+               <quantityDispensed>10.000</quantityDispensed>
+               <rxNumber>981765786557</rxNumber>
+               <sequenceNumber>999</sequenceNumber>
+               <status>REJECTED</status>
+               <transactionCount>1</transactionCount>
+               <trialClaimType>MAIL</trialClaimType>
+               <accountId>P0101100000000</accountId>
+               <groupId>IS5820001A</groupId>
+               <pharmacyName>WALGREENS #2445</pharmacyName>
+               <copayCategory>0</copayCategory>
+            </claim>
+            <claim>
+               <additionalMessage><![CDATA[Mfc not Part D Elig Use Elig Drug or NDCPlan ExclusionConsider Formulary Generic]]></additionalMessage>
+               <claimNumber>152521433655000</claimNumber>
+               <claimType>PHARMACY</claimType>
+               <daw>PRESCRIBER REQUESTED BRAND</daw>
+               <daysSupply>1</daysSupply>
+               <drugName>COZAAR       TAB 100MG</drugName>
+               <fillDate>2015-08-02T05:00:00Z</fillDate>
+               <memberPaidAmount>0.00</memberPaidAmount>
+               <message><![CDATA[70Prod/Service Not Covered]]></message>
+               <ndc>43353045945</ndc>
+               <otherCoverageCode>0</otherCoverageCode>
+               <overrideAllowed>false</overrideAllowed>
+               <pharmacyId>2400074</pharmacyId>
+               <planPaidAmount>10.00</planPaidAmount>
+               <priorAuthType/>
+               <quantityDispensed>10.000</quantityDispensed>
+               <rxNumber>981765786557</rxNumber>
+               <sequenceNumber>999</sequenceNumber>
+               <status>REJECTED</status>
+               <transactionCount>1</transactionCount>
+               <trialClaimType>RETAIL</trialClaimType>
+               <accountId>P0101100000000</accountId>
+               <groupId>IS5820001A</groupId>
+               <pharmacyName>WALGREENS #13877</pharmacyName>
+               <copayCategory>0</copayCategory>
+            </claim>
+            <claim>
+               <additionalMessage><![CDATA[Consider Formulary Generic]]></additionalMessage>
+               <claimNumber>152521440501000</claimNumber>
+               <claimType>PHARMACY</claimType>
+               <daw>PRESCRIBER REQUESTED BRAND</daw>
+               <daysSupply>1</daysSupply>
+               <drugName>COZAAR       TAB 100MG</drugName>
+               <fillDate>2015-08-03T05:00:00Z</fillDate>
+               <memberPaidAmount>10.00</memberPaidAmount>
+               <message/>
+               <ndc>00006096031</ndc>
+               <otherCoverageCode>0</otherCoverageCode>
+               <overrideAllowed>false</overrideAllowed>
+               <pharmacyId>2400074</pharmacyId>
+               <planPaidAmount>0.00</planPaidAmount>
+               <priorAuthType/>
+               <quantityDispensed>10.000</quantityDispensed>
+               <rxNumber>981876786557</rxNumber>
+               <sequenceNumber>999</sequenceNumber>
+               <status>PAID</status>
+               <transactionCount>1</transactionCount>
+               <trialClaimType>RETAIL</trialClaimType>
+               <accountId>P0101100000000</accountId>
+               <groupId>IS5820001A</groupId>
+               <pharmacyName>WALGREENS #13877</pharmacyName>
+               <copayCategory>0</copayCategory>
+            </claim>
+            <claim>
+               <additionalMessage><![CDATA[Mfc not Part D Elig Use Elig Drug or NDCPlan ExclusionConsider Formulary Generic]]></additionalMessage>
+               <claimNumber>152527860094000</claimNumber>
+               <claimType>PHARMACY</claimType>
+               <daw>PRESCRIBER REQUESTED BRAND</daw>
+               <daysSupply>1</daysSupply>
+               <drugName>COZAAR       TAB 100MG</drugName>
+               <fillDate>2015-09-09T05:00:00Z</fillDate>
+               <memberPaidAmount>0.00</memberPaidAmount>
+               <message><![CDATA[70Prod/Service Not Covered]]></message>
+               <ndc>43353045945</ndc>
+               <otherCoverageCode>0</otherCoverageCode>
+               <overrideAllowed>false</overrideAllowed>
+               <pharmacyId>2400074</pharmacyId>
+               <planPaidAmount>20.00</planPaidAmount>
+               <priorAuthType/>
+               <quantityDispensed>10.000</quantityDispensed>
+               <rxNumber>978678756778</rxNumber>
+               <sequenceNumber>999</sequenceNumber>
+               <status>REJECTED</status>
+               <transactionCount>1</transactionCount>
+               <trialClaimType>RETAIL</trialClaimType>
+               <accountId>P0101100000000</accountId>
+               <groupId>IS5820001A</groupId>
+               <pharmacyName>WALGREENS #13877</pharmacyName>
+               <copayCategory>0</copayCategory>
+            </claim>
+            <claim>
+               <additionalMessage><![CDATA[BILL W/MFG NDC OR CONTACT YOUR CORP OFFIConsider Formulary Generic]]></additionalMessage>
+               <claimNumber>152527901631000</claimNumber>
+               <claimType>PHARMACY</claimType>
+               <daw>PRESCRIBER REQUESTED BRAND</daw>
+               <daysSupply>1</daysSupply>
+               <drugName>COZAAR       TAB 100MG</drugName>
+               <fillDate>2015-09-09T05:00:00Z</fillDate>
+               <memberPaidAmount>20.00</memberPaidAmount>
+               <message/>
+               <ndc>43353045945</ndc>
+               <otherCoverageCode>0</otherCoverageCode>
+               <overrideAllowed>false</overrideAllowed>
+               <pharmacyId>2400074</pharmacyId>
+               <planPaidAmount>0.00</planPaidAmount>
+               <priorAuthType/>
+               <quantityDispensed>10.000</quantityDispensed>
+               <rxNumber>978876766778</rxNumber>
+               <sequenceNumber>999</sequenceNumber>
+               <status>PAID</status>
+               <transactionCount>1</transactionCount>
+               <trialClaimType>RETAIL</trialClaimType>
+               <accountId>P0101100000000</accountId>
+               <groupId>IS5820001A</groupId>
+               <pharmacyName>WALGREENS #13877</pharmacyName>
+               <copayCategory>0</copayCategory>
+            </claim>
+            <claim>
+               <additionalMessage><![CDATA[Refill Payable on or after 07/18/15Consider Formulary Generic]]></additionalMessage>
+               <claimNumber>152530882862000</claimNumber>
+               <claimType>PHARMACY</claimType>
+               <daw>PRESCRIBER REQUESTED BRAND</daw>
+               <daysSupply>10</daysSupply>
+               <drugName>COZAAR       TAB 100MG</drugName>
+               <fillDate>2015-07-10T05:00:00Z</fillDate>
+               <memberPaidAmount>3.60</memberPaidAmount>
+               <message><![CDATA[88DUR Reject Error]]></message>
+               <ndc>00006096031</ndc>
+               <otherCoverageCode>0</otherCoverageCode>
+               <overrideAllowed>true</overrideAllowed>
+               <pharmacyId>2400074</pharmacyId>
+               <planPaidAmount>42.06</planPaidAmount>
+               <priorAuthType/>
+               <quantityDispensed>10.000</quantityDispensed>
+               <rxNumber>986776766757</rxNumber>
+               <sequenceNumber>999</sequenceNumber>
+               <status>REJECTED</status>
+               <transactionCount>1</transactionCount>
+               <trialClaimType>RETAIL</trialClaimType>
+               <accountId>P0101100000000</accountId>
+               <groupId>IS5820001A</groupId>
+               <pharmacyName>WALGREENS #13877</pharmacyName>
+               <copayCategory>0</copayCategory>
+            </claim>
+            <claim>
+               <additionalMessage><![CDATA[Consider Formulary Generic]]></additionalMessage>
+               <claimNumber>152530886084000</claimNumber>
+               <claimType>PHARMACY</claimType>
+               <daw>PRESCRIBER REQUESTED BRAND</daw>
+               <daysSupply>10</daysSupply>
+               <drugName>COZAAR       TAB 100MG</drugName>
+               <fillDate>2015-07-18T05:00:00Z</fillDate>
+               <memberPaidAmount>3.60</memberPaidAmount>
+               <message/>
+               <ndc>00006096031</ndc>
+               <otherCoverageCode>0</otherCoverageCode>
+               <overrideAllowed>false</overrideAllowed>
+               <pharmacyId>2400074</pharmacyId>
+               <planPaidAmount>42.06</planPaidAmount>
+               <priorAuthType/>
+               <quantityDispensed>10.000</quantityDispensed>
+               <rxNumber>986776766757</rxNumber>
+               <sequenceNumber>999</sequenceNumber>
+               <status>PAID</status>
+               <transactionCount>1</transactionCount>
+               <trialClaimType>RETAIL</trialClaimType>
+               <accountId>P0101100000000</accountId>
+               <groupId>IS5820001A</groupId>
+               <pharmacyName>WALGREENS #13877</pharmacyName>
+               <copayCategory>0</copayCategory>
+            </claim>
+            <claim>
+               <additionalMessage><![CDATA[Consider Formulary Generic]]></additionalMessage>
+               <claimNumber>152530938144000</claimNumber>
+               <claimType>PHARMACY</claimType>
+               <daw>PRESCRIBER REQUESTED BRAND</daw>
+               <daysSupply>10</daysSupply>
+               <drugName>COZAAR       TAB 100MG</drugName>
+               <fillDate>2015-07-28T05:00:00Z</fillDate>
+               <memberPaidAmount>3.60</memberPaidAmount>
+               <message/>
+               <ndc>00006096031</ndc>
+               <otherCoverageCode>0</otherCoverageCode>
+               <overrideAllowed>false</overrideAllowed>
+               <pharmacyId>2400074</pharmacyId>
+               <planPaidAmount>42.06</planPaidAmount>
+               <priorAuthType/>
+               <quantityDispensed>10.000</quantityDispensed>
+               <rxNumber>986765754647</rxNumber>
+               <sequenceNumber>999</sequenceNumber>
+               <status>PAID</status>
+               <transactionCount>1</transactionCount>
+               <trialClaimType>RETAIL</trialClaimType>
+               <accountId>P0101100000000</accountId>
+               <groupId>IS5820001A</groupId>
+               <pharmacyName>WALGREENS #13877</pharmacyName>
+               <copayCategory>0</copayCategory>
+            </claim>
+            <claim>
+               <additionalMessage><![CDATA[Refill Payable on or after 09/09/15Consider Formulary Generic]]></additionalMessage>
+               <claimNumber>152530965429000</claimNumber>
+               <claimType>PHARMACY</claimType>
+               <daw>PRESCRIBER REQUESTED BRAND</daw>
+               <daysSupply>10</daysSupply>
+               <drugName>COZAAR       TAB 100MG</drugName>
+               <fillDate>2015-08-28T05:00:00Z</fillDate>
+               <memberPaidAmount>3.60</memberPaidAmount>
+               <message><![CDATA[88DUR Reject Error]]></message>
+               <ndc>00006096031</ndc>
+               <otherCoverageCode>0</otherCoverageCode>
+               <overrideAllowed>true</overrideAllowed>
+               <pharmacyId>2400074</pharmacyId>
+               <planPaidAmount>42.06</planPaidAmount>
+               <priorAuthType/>
+               <quantityDispensed>10.000</quantityDispensed>
+               <rxNumber>986787687647</rxNumber>
+               <sequenceNumber>999</sequenceNumber>
+               <status>REJECTED</status>
+               <transactionCount>1</transactionCount>
+               <trialClaimType>RETAIL</trialClaimType>
+               <accountId>P0101100000000</accountId>
+               <groupId>IS5820001A</groupId>
+               <pharmacyName>WALGREENS #13877</pharmacyName>
+               <copayCategory>0</copayCategory>
+            </claim>
+            <claim>
+               <additionalMessage><![CDATA[Refill Payable on or after 09/10/15Consider Formulary Generic]]></additionalMessage>
+               <claimNumber>152530968382000</claimNumber>
+               <claimType>PHARMACY</claimType>
+               <daw>PRESCRIBER REQUESTED BRAND</daw>
+               <daysSupply>10</daysSupply>
+               <drugName>COZAAR       TAB 100MG</drugName>
+               <fillDate>2015-09-09T05:00:00Z</fillDate>
+               <memberPaidAmount>3.60</memberPaidAmount>
+               <message><![CDATA[88DUR Reject Error]]></message>
+               <ndc>00006096031</ndc>
+               <otherCoverageCode>0</otherCoverageCode>
+               <overrideAllowed>true</overrideAllowed>
+               <pharmacyId>2400074</pharmacyId>
+               <planPaidAmount>42.06</planPaidAmount>
+               <priorAuthType/>
+               <quantityDispensed>10.000</quantityDispensed>
+               <rxNumber>986787687647</rxNumber>
+               <sequenceNumber>999</sequenceNumber>
+               <status>REJECTED</status>
+               <transactionCount>1</transactionCount>
+               <trialClaimType>RETAIL</trialClaimType>
+               <accountId>P0101100000000</accountId>
+               <groupId>IS5820001A</groupId>
+               <pharmacyName>WALGREENS #13877</pharmacyName>
+               <copayCategory>0</copayCategory>
+            </claim>
+            <claim>
+               <additionalMessage><![CDATA[Consider Formulary Generic]]></additionalMessage>
+               <claimNumber>152530969802000</claimNumber>
+               <claimType>PHARMACY</claimType>
+               <daw>PRESCRIBER REQUESTED BRAND</daw>
+               <daysSupply>10</daysSupply>
+               <drugName>COZAAR       TAB 100MG</drugName>
+               <fillDate>2015-01-09T06:00:00Z</fillDate>
+               <memberPaidAmount>3.60</memberPaidAmount>
+               <message/>
+               <ndc>00006096031</ndc>
+               <otherCoverageCode>0</otherCoverageCode>
+               <overrideAllowed>false</overrideAllowed>
+               <pharmacyId>2400074</pharmacyId>
+               <planPaidAmount>38.37</planPaidAmount>
+               <priorAuthType/>
+               <quantityDispensed>10.000</quantityDispensed>
+               <rxNumber>986787687647</rxNumber>
+               <sequenceNumber>999</sequenceNumber>
+               <status>PAID</status>
+               <transactionCount>1</transactionCount>
+               <trialClaimType>RETAIL</trialClaimType>
+               <accountId>P0101100000000</accountId>
+               <groupId>IS5820001A</groupId>
+               <pharmacyName>WALGREENS #13877</pharmacyName>
+               <copayCategory>0</copayCategory>
+            </claim>
+            <claim>
+               <additionalMessage/>
+               <claimNumber>152540067536127</claimNumber>
+               <claimType>PHARMACY</claimType>
+               <daw>NO PRODUCT SELECTION INDICATED</daw>
+               <daysSupply>1</daysSupply>
+               <drugName>TRECATOR     TAB 250MG</drugName>
+               <fillDate>2015-09-11T05:00:00Z</fillDate>
+               <memberPaidAmount>1.00</memberPaidAmount>
+               <message/>
+               <ndc>00008411701</ndc>
+               <otherCoverageCode>0</otherCoverageCode>
+               <overrideAllowed>false</overrideAllowed>
+               <pharmacyId>2400074</pharmacyId>
+               <planPaidAmount>0.00</planPaidAmount>
+               <priorAuthType/>
+               <quantityDispensed>15.000</quantityDispensed>
+               <rxNumber>227877888347</rxNumber>
+               <sequenceNumber>995</sequenceNumber>
+               <status>PAID</status>
+               <transactionCount>5</transactionCount>
+               <trialClaimType>RETAIL</trialClaimType>
+               <accountId>P0101100000000</accountId>
+               <groupId>IS5820001A</groupId>
+               <pharmacyName>WALGREENS #13877</pharmacyName>
+               <copayCategory>0</copayCategory>
+            </claim>
+            <claim>
+               <additionalMessage/>
+               <claimNumber>152540113769101</claimNumber>
+               <claimType>PHARMACY</claimType>
+               <daw>NO PRODUCT SELECTION INDICATED</daw>
+               <daysSupply>1</daysSupply>
+               <drugName>TRECATOR     TAB 250MG</drugName>
+               <fillDate>2015-09-09T05:00:00Z</fillDate>
+               <memberPaidAmount>1.00</memberPaidAmount>
+               <message/>
+               <ndc>00008411701</ndc>
+               <otherCoverageCode>0</otherCoverageCode>
+               <overrideAllowed>false</overrideAllowed>
+               <pharmacyId>2400074</pharmacyId>
+               <planPaidAmount>0.00</planPaidAmount>
+               <priorAuthType/>
+               <quantityDispensed>15.000</quantityDispensed>
+               <rxNumber>227877888347</rxNumber>
+               <sequenceNumber>999</sequenceNumber>
+               <status>PAID</status>
+               <transactionCount>1</transactionCount>
+               <trialClaimType>RETAIL</trialClaimType>
+               <accountId>P0101100000000</accountId>
+               <groupId>IS5820001A</groupId>
+               <pharmacyName>WALGREENS #13877</pharmacyName>
+               <copayCategory>0</copayCategory>
+            </claim>
+            <claim>
+               <additionalMessage/>
+               <claimNumber>152540115679125</claimNumber>
+               <claimType>PHARMACY</claimType>
+               <daw>NO PRODUCT SELECTION INDICATED</daw>
+               <daysSupply>1</daysSupply>
+               <drugName>TRECATOR     TAB 250MG</drugName>
+               <fillDate>2015-09-10T05:00:00Z</fillDate>
+               <memberPaidAmount>1.00</memberPaidAmount>
+               <message/>
+               <ndc>00008411701</ndc>
+               <otherCoverageCode>0</otherCoverageCode>
+               <overrideAllowed>false</overrideAllowed>
+               <pharmacyId>2400074</pharmacyId>
+               <planPaidAmount>0.00</planPaidAmount>
+               <priorAuthType/>
+               <quantityDispensed>15.000</quantityDispensed>
+               <rxNumber>765765668347</rxNumber>
+               <sequenceNumber>999</sequenceNumber>
+               <status>PAID</status>
+               <transactionCount>1</transactionCount>
+               <trialClaimType>RETAIL</trialClaimType>
+               <accountId>P0101100000000</accountId>
+               <groupId>IS5820001A</groupId>
+               <pharmacyName>WALGREENS #13877</pharmacyName>
+               <copayCategory>0</copayCategory>
+            </claim>
+            <claim>
+               <additionalMessage/>
+               <claimNumber>153021603836000</claimNumber>
+               <claimType>PHARMACY</claimType>
+               <daw>NO PRODUCT SELECTION INDICATED</daw>
+               <daysSupply>1</daysSupply>
+               <drugName>AFEDITAB     TAB 30MG CR</drugName>
+               <fillDate>2015-03-12T05:00:00Z</fillDate>
+               <memberPaidAmount>1.20</memberPaidAmount>
+               <message/>
+               <ndc>00591319301</ndc>
+               <otherCoverageCode>0</otherCoverageCode>
+               <overrideAllowed>false</overrideAllowed>
+               <pharmacyId>2400074</pharmacyId>
+               <planPaidAmount>1055.30</planPaidAmount>
+               <priorAuthType/>
+               <quantityDispensed>2,500.000</quantityDispensed>
+               <rxNumber>230911377866</rxNumber>
+               <sequenceNumber>999</sequenceNumber>
+               <status>PAID</status>
+               <transactionCount>1</transactionCount>
+               <trialClaimType>RETAIL</trialClaimType>
+               <accountId>P0101100000000</accountId>
+               <groupId>IS5820001A</groupId>
+               <pharmacyName>WALGREENS #13877</pharmacyName>
+               <copayCategory>0</copayCategory>
+            </claim>
+            <claim>
+               <additionalMessage><![CDATA[Refill Payable on or after 03/13/15]]></additionalMessage>
+               <claimNumber>153021606084109</claimNumber>
+               <claimType>PHARMACY</claimType>
+               <daw>NO PRODUCT SELECTION INDICATED</daw>
+               <daysSupply>1</daysSupply>
+               <drugName>AFEDITAB     TAB 30MG CR</drugName>
+               <fillDate>2015-03-12T05:00:00Z</fillDate>
+               <memberPaidAmount>1.20</memberPaidAmount>
+               <message><![CDATA[88DUR Reject Error]]></message>
+               <ndc>00591319301</ndc>
+               <otherCoverageCode>0</otherCoverageCode>
+               <overrideAllowed>true</overrideAllowed>
+               <pharmacyId>2400074</pharmacyId>
+               <planPaidAmount>1055.30</planPaidAmount>
+               <priorAuthType/>
+               <quantityDispensed>2,500.000</quantityDispensed>
+               <rxNumber>237676567866</rxNumber>
+               <sequenceNumber>999</sequenceNumber>
+               <status>REJECTED</status>
+               <transactionCount>1</transactionCount>
+               <trialClaimType>RETAIL</trialClaimType>
+               <accountId>P0101100000000</accountId>
+               <groupId>IS5820001A</groupId>
+               <pharmacyName>WALGREENS #13877</pharmacyName>
+               <copayCategory>0</copayCategory>
+            </claim>
+            <claim>
+               <additionalMessage/>
+               <claimNumber>153021608572130</claimNumber>
+               <claimType>PHARMACY</claimType>
+               <daw>NO PRODUCT SELECTION INDICATED</daw>
+               <daysSupply>1</daysSupply>
+               <drugName>AFEDITAB     TAB 30MG CR</drugName>
+               <fillDate>2015-03-13T05:00:00Z</fillDate>
+               <memberPaidAmount>1.20</memberPaidAmount>
+               <message/>
+               <ndc>00591319301</ndc>
+               <otherCoverageCode>0</otherCoverageCode>
+               <overrideAllowed>false</overrideAllowed>
+               <pharmacyId>2400074</pharmacyId>
+               <planPaidAmount>1055.30</planPaidAmount>
+               <priorAuthType/>
+               <quantityDispensed>2,500.000</quantityDispensed>
+               <rxNumber>237676567866</rxNumber>
+               <sequenceNumber>999</sequenceNumber>
+               <status>PAID</status>
+               <transactionCount>1</transactionCount>
+               <trialClaimType>RETAIL</trialClaimType>
+               <accountId>P0101100000000</accountId>
+               <groupId>IS5820001A</groupId>
+               <pharmacyName>WALGREENS #13877</pharmacyName>
+               <copayCategory>0</copayCategory>
+            </claim>
+            <claim>
+               <additionalMessage/>
+               <claimNumber>153021611864105</claimNumber>
+               <claimType>PHARMACY</claimType>
+               <daw>NO PRODUCT SELECTION INDICATED</daw>
+               <daysSupply>1</daysSupply>
+               <drugName>AFEDITAB     TAB 30MG CR</drugName>
+               <fillDate>2015-03-14T05:00:00Z</fillDate>
+               <memberPaidAmount>1.20</memberPaidAmount>
+               <message/>
+               <ndc>00591319301</ndc>
+               <otherCoverageCode>0</otherCoverageCode>
+               <overrideAllowed>false</overrideAllowed>
+               <pharmacyId>2400074</pharmacyId>
+               <planPaidAmount>1055.30</planPaidAmount>
+               <priorAuthType/>
+               <quantityDispensed>2,500.000</quantityDispensed>
+               <rxNumber>237609787866</rxNumber>
+               <sequenceNumber>999</sequenceNumber>
+               <status>PAID</status>
+               <transactionCount>1</transactionCount>
+               <trialClaimType>RETAIL</trialClaimType>
+               <accountId>P0101100000000</accountId>
+               <groupId>IS5820001A</groupId>
+               <pharmacyName>WALGREENS #13877</pharmacyName>
+               <copayCategory>0</copayCategory>
+            </claim>
+            <claim>
+               <additionalMessage/>
+               <claimNumber>153021615997122</claimNumber>
+               <claimType>PHARMACY</claimType>
+               <daw>NO PRODUCT SELECTION INDICATED</daw>
+               <daysSupply>1</daysSupply>
+               <drugName>AFEDITAB     TAB 30MG CR</drugName>
+               <fillDate>2015-03-15T05:00:00Z</fillDate>
+               <memberPaidAmount>0.92</memberPaidAmount>
+               <message/>
+               <ndc>00591319301</ndc>
+               <otherCoverageCode>0</otherCoverageCode>
+               <overrideAllowed>false</overrideAllowed>
+               <pharmacyId>2400074</pharmacyId>
+               <planPaidAmount>0.00</planPaidAmount>
+               <priorAuthType/>
+               <quantityDispensed>1.000</quantityDispensed>
+               <rxNumber>237601237866</rxNumber>
+               <sequenceNumber>999</sequenceNumber>
+               <status>PAID</status>
+               <transactionCount>1</transactionCount>
+               <trialClaimType>RETAIL</trialClaimType>
+               <accountId>P0101100000000</accountId>
+               <groupId>IS5820001A</groupId>
+               <pharmacyName>WALGREENS #13877</pharmacyName>
+               <copayCategory>0</copayCategory>
+            </claim>
+            <claim>
+               <additionalMessage><![CDATA[Remaining CMS Transition days supply is17.Refill Payable on or after 03/16/15]]></additionalMessage>
+               <claimNumber>153021624555125</claimNumber>
+               <claimType>PHARMACY</claimType>
+               <daw>NO PRODUCT SELECTION INDICATED</daw>
+               <daysSupply>1</daysSupply>
+               <drugName>AFEDITAB     TAB 30MG CR</drugName>
+               <fillDate>2015-03-15T05:00:00Z</fillDate>
+               <memberPaidAmount>0.92</memberPaidAmount>
+               <message><![CDATA[88DUR Reject Error]]></message>
+               <ndc>00591319301</ndc>
+               <otherCoverageCode>0</otherCoverageCode>
+               <overrideAllowed>true</overrideAllowed>
+               <pharmacyId>2400074</pharmacyId>
+               <planPaidAmount>0.00</planPaidAmount>
+               <priorAuthType/>
+               <quantityDispensed>1.000</quantityDispensed>
+               <rxNumber>237123234866</rxNumber>
+               <sequenceNumber>999</sequenceNumber>
+               <status>REJECTED</status>
+               <transactionCount>1</transactionCount>
+               <trialClaimType>RETAIL</trialClaimType>
+               <accountId>P0101100000000</accountId>
+               <groupId>IS5820001A</groupId>
+               <pharmacyName>WALGREENS #13877</pharmacyName>
+               <copayCategory>0</copayCategory>
+            </claim>
+            <claim>
+               <additionalMessage/>
+               <claimNumber>153021626404116</claimNumber>
+               <claimType>PHARMACY</claimType>
+               <daw>NO PRODUCT SELECTION INDICATED</daw>
+               <daysSupply>1</daysSupply>
+               <drugName>AFEDITAB     TAB 30MG CR</drugName>
+               <fillDate>2015-04-15T05:00:00Z</fillDate>
+               <memberPaidAmount>0.92</memberPaidAmount>
+               <message/>
+               <ndc>00591319301</ndc>
+               <otherCoverageCode>0</otherCoverageCode>
+               <overrideAllowed>false</overrideAllowed>
+               <pharmacyId>2400074</pharmacyId>
+               <planPaidAmount>0.00</planPaidAmount>
+               <priorAuthType/>
+               <quantityDispensed>1.000</quantityDispensed>
+               <rxNumber>237123234866</rxNumber>
+               <sequenceNumber>999</sequenceNumber>
+               <status>PAID</status>
+               <transactionCount>1</transactionCount>
+               <trialClaimType>RETAIL</trialClaimType>
+               <accountId>P0101100000000</accountId>
+               <groupId>IS5820001A</groupId>
+               <pharmacyName>WALGREENS #13877</pharmacyName>
+               <copayCategory>0</copayCategory>
+            </claim>
+            <claim>
+               <additionalMessage/>
+               <claimNumber>153021630582123</claimNumber>
+               <claimType>PHARMACY</claimType>
+               <daw>NO PRODUCT SELECTION INDICATED</daw>
+               <daysSupply>1</daysSupply>
+               <drugName>AFEDITAB     TAB 30MG CR</drugName>
+               <fillDate>2015-05-15T05:00:00Z</fillDate>
+               <memberPaidAmount>0.90</memberPaidAmount>
+               <message/>
+               <ndc>00591319301</ndc>
+               <otherCoverageCode>0</otherCoverageCode>
+               <overrideAllowed>false</overrideAllowed>
+               <pharmacyId>2400074</pharmacyId>
+               <planPaidAmount>0.00</planPaidAmount>
+               <priorAuthType/>
+               <quantityDispensed>1.000</quantityDispensed>
+               <rxNumber>237667804866</rxNumber>
+               <sequenceNumber>999</sequenceNumber>
+               <status>PAID</status>
+               <transactionCount>1</transactionCount>
+               <trialClaimType>RETAIL</trialClaimType>
+               <accountId>P0101100000000</accountId>
+               <groupId>IS5820001A</groupId>
+               <pharmacyName>WALGREENS #13877</pharmacyName>
+               <copayCategory>0</copayCategory>
+            </claim>
+            <claim>
+               <additionalMessage><![CDATA[Provide Exception Process Printed NoticeBILL W/MFG NDC OR CONTACT YOUR CORP OFFIFamily ID is requiredConsider Formulary Generic]]></additionalMessage>
+               <claimNumber>153137764587108</claimNumber>
+               <claimType>PHARMACY</claimType>
+               <daw>PRESCRIBER REQUESTED BRAND</daw>
+               <daysSupply>1</daysSupply>
+               <drugName>COZAAR       TAB 100MG</drugName>
+               <fillDate>2015-10-02T05:00:00Z</fillDate>
+               <memberPaidAmount>0.00</memberPaidAmount>
+               <message><![CDATA[84Claim Not Paid/Captured569CMS Appeal Rights Notice]]></message>
+               <ndc>43353045945</ndc>
+               <otherCoverageCode>0</otherCoverageCode>
+               <overrideAllowed>false</overrideAllowed>
+               <pharmacyId>2400074</pharmacyId>
+               <planPaidAmount>0.00</planPaidAmount>
+               <priorAuthType/>
+               <quantityDispensed>10.000</quantityDispensed>
+               <rxNumber>978123234778</rxNumber>
+               <sequenceNumber>998</sequenceNumber>
+               <status>REJECTED</status>
+               <transactionCount>2</transactionCount>
+               <trialClaimType>RETAIL</trialClaimType>
+               <accountId>P0101100000000</accountId>
+               <groupId>IS5820001A</groupId>
+               <pharmacyName>WALGREENS #13877</pharmacyName>
+               <copayCategory>0</copayCategory>
+            </claim>
+            <claim>
+               <additionalMessage><![CDATA[Provide Exception Process Printed NoticeFamily ID is requiredConsider Formulary Generic]]></additionalMessage>
+               <claimNumber>153137768283112</claimNumber>
+               <claimType>PHARMACY</claimType>
+               <daw>PRESCRIBER REQUESTED BRAND</daw>
+               <daysSupply>1</daysSupply>
+               <drugName>SYNTHROID    TAB 25MCG</drugName>
+               <fillDate>2015-10-02T05:00:00Z</fillDate>
+               <memberPaidAmount>0.00</memberPaidAmount>
+               <message><![CDATA[84Claim Not Paid/Captured569CMS Appeal Rights Notice]]></message>
+               <ndc>00074434119</ndc>
+               <otherCoverageCode>0</otherCoverageCode>
+               <overrideAllowed>false</overrideAllowed>
+               <pharmacyId>1006899</pharmacyId>
+               <planPaidAmount>0.00</planPaidAmount>
+               <priorAuthType/>
+               <quantityDispensed>10.000</quantityDispensed>
+               <rxNumber>978123234778</rxNumber>
+               <sequenceNumber>999</sequenceNumber>
+               <status>REJECTED</status>
+               <transactionCount>1</transactionCount>
+               <trialClaimType>MAIL</trialClaimType>
+               <accountId>P0101100000000</accountId>
+               <groupId>IS5820001A</groupId>
+               <pharmacyName>WALGREENS #2445</pharmacyName>
+               <copayCategory>0</copayCategory>
+            </claim>
+            <claim>
+               <additionalMessage/>
+               <claimNumber>153278233001108</claimNumber>
+               <claimType>PHARMACY</claimType>
+               <daw>NO PRODUCT SELECTION INDICATED</daw>
+               <daysSupply>10</daysSupply>
+               <drugName>ADVAIR DISKU AER 100/50</drugName>
+               <fillDate>2015-12-23T06:00:00Z</fillDate>
+               <memberPaidAmount>22.32</memberPaidAmount>
+               <message/>
+               <ndc>00173069500</ndc>
+               <otherCoverageCode>0</otherCoverageCode>
+               <overrideAllowed>false</overrideAllowed>
+               <pharmacyId>1006899</pharmacyId>
+               <planPaidAmount>0.00</planPaidAmount>
+               <priorAuthType/>
+               <quantityDispensed>10.000</quantityDispensed>
+               <rxNumber>980877655649</rxNumber>
+               <sequenceNumber>998</sequenceNumber>
+               <status>PAID</status>
+               <transactionCount>3</transactionCount>
+               <trialClaimType>MAIL</trialClaimType>
+               <accountId>P0101100000000</accountId>
+               <groupId>IS5820001A</groupId>
+               <pharmacyName>WALGREENS #2445</pharmacyName>
+               <copayCategory>0</copayCategory>
+            </claim>
+         </claims>
+      </searchClaimsResponse>
+   </soapenv:Body>
+</soapenv:Envelope>

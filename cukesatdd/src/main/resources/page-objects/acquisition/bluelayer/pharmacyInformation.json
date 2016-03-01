@@ -1,0 +1,17 @@
+{
+"url":null,
+"expectedData":{
+"pharmacyName":{
+"identifier":"className",
+"elementName":"blueBoldUL"
+},
+"pharmacyDistance":{
+"identifier":"className",
+"elementName":"pharmacyDistance"
+},
+"selectLink":{
+"identifier":"className",
+"elementName":"select_link"
+}
+}
+}

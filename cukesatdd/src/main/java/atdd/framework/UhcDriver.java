@@ -3,6 +3,7 @@
  */
 package atdd.framework;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
@@ -38,6 +39,12 @@ public abstract class UhcDriver {
 		wait.until(ExpectedConditions.visibilityOf(element));
 
 	}
+	
+	public void switchToNewTab() {
+		 ArrayList<String> tabs = new ArrayList<String> (driver.getWindowHandles());
+         driver.switchTo().window(tabs.get(1));
+	}
+
 
 	public boolean elementFound(WebElement element) {
 		try {
@@ -231,6 +238,13 @@ public abstract class UhcDriver {
 				if(identifierArr[1].equalsIgnoreCase("className"))
 				{
 					WebElement selectElement = driver.findElement(By.className(elementData
+							.getElementName()));
+					Select select = new Select(selectElement);
+					element = select.getOptions();
+				}
+				else if(identifierArr[1].equalsIgnoreCase("id"))
+				{
+					WebElement selectElement = driver.findElement(By.id(elementData
 							.getElementName()));
 					Select select = new Select(selectElement);
 					element = select.getOptions();

@@ -17,10 +17,15 @@ import atdd.framework.UhcDriver;
 public class PlanDetailsPage extends UhcDriver{
 	
 	@FindBy(id = "planDetailsPage")
-	WebElement planDetailsContent;
+	private WebElement planDetailsContent;
 	
 	@FindBy(id = "learnmorebtnDetails")
-	WebElement learnMoreButton;
+	private WebElement learnMoreButton;
+	
+	@FindBy(id = "yourDceInitial")
+	private WebElement enterDrugInfoLink;
+	
+	
 	
 	private PageData vppPlanDetails;
 
@@ -74,17 +79,28 @@ public class PlanDetailsPage extends UhcDriver{
 			WebElement element = findElement(vppPlanDetails.getExpectedData()
 					.get(key));
 			if (element != null) {
-				validate(element);
+				if(validate(element)){
 				try {
 					jsonObject.put(key, element.getText());
 				} catch (JSONException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
+				}
 			}
 		}
 		vppPlanDetailsJson = jsonObject;
 		
+	}
+
+	public GetStartedPage clicksOnEnterDrugInformationLink() {
+		
+		enterDrugInfoLink.click();
+		
+		if (currentUrl().contains("/estimate-drug-costs")) {
+			return new GetStartedPage(driver);
+		}
+		return null;
 	}
 
 }

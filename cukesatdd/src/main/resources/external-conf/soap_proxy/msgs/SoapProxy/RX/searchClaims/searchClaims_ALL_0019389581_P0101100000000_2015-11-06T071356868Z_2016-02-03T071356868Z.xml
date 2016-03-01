@@ -1,0 +1,496 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <searchClaimsResponse xmlns="http://www.uhc.com/2009/12/29/com/uhg/ovations/portal/rxconnection/claimhistory/service" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+         <claims>
+            <claim>
+               <additionalMessage/>
+               <claimNumber>153028441458123</claimNumber>
+               <claimType>PHARMACY</claimType>
+               <daw>NO PRODUCT SELECTION INDICATED</daw>
+               <daysSupply>1</daysSupply>
+               <drugName>AFEDITAB     TAB 30MG CR</drugName>
+               <fillDate>2016-01-02T06:00:00Z</fillDate>
+               <memberPaidAmount>0.90</memberPaidAmount>
+               <message/>
+               <ndc>00591319301</ndc>
+               <otherCoverageCode>0</otherCoverageCode>
+               <overrideAllowed>false</overrideAllowed>
+               <pharmacyId>2400074</pharmacyId>
+               <planPaidAmount>0.00</planPaidAmount>
+               <priorAuthType/>
+               <quantityDispensed>1.000</quantityDispensed>
+               <rxNumber>223234233366</rxNumber>
+               <sequenceNumber>997</sequenceNumber>
+               <status>PAID</status>
+               <transactionCount>4</transactionCount>
+               <trialClaimType>RETAIL</trialClaimType>
+               <accountId>P0101100000000</accountId>
+               <groupId>IS5820001A</groupId>
+               <pharmacyName>WALGREENS #13877</pharmacyName>
+               <copayCategory>0</copayCategory>
+            </claim>
+            <claim>
+               <additionalMessage/>
+               <claimNumber>153028570930104</claimNumber>
+               <claimType>PHARMACY</claimType>
+               <daw>NO PRODUCT SELECTION INDICATED</daw>
+               <daysSupply>30</daysSupply>
+               <drugName>AFEDITAB     TAB 30MG CR</drugName>
+               <fillDate>2016-01-02T06:00:00Z</fillDate>
+               <memberPaidAmount>1.20</memberPaidAmount>
+               <message/>
+               <ndc>00591319301</ndc>
+               <otherCoverageCode>0</otherCoverageCode>
+               <overrideAllowed>false</overrideAllowed>
+               <pharmacyId>2400074</pharmacyId>
+               <planPaidAmount>1007.75</planPaidAmount>
+               <priorAuthType/>
+               <quantityDispensed>2,500.000</quantityDispensed>
+               <rxNumber>229878233366</rxNumber>
+               <sequenceNumber>999</sequenceNumber>
+               <status>PAID</status>
+               <transactionCount>1</transactionCount>
+               <trialClaimType>RETAIL</trialClaimType>
+               <accountId>P0101100000000</accountId>
+               <groupId>IS5820001A</groupId>
+               <pharmacyName>WALGREENS #13877</pharmacyName>
+               <copayCategory>0</copayCategory>
+            </claim>
+            <claim>
+               <additionalMessage><![CDATA[Refill Payable ]]><![CDATA[on or after 01/25/16]]></additionalMessage>
+               <claimNumber>153028573320117</claimNumber>
+               <claimType>PHARMACY</claimType>
+               <daw>NO PRODUCT SELECTION INDICATED</daw>
+               <daysSupply>30</daysSupply>
+               <drugName>AFEDITAB     TAB 30MG CR</drugName>
+               <fillDate>2016-01-03T06:00:00Z</fillDate>
+               <memberPaidAmount>1.20</memberPaidAmount>
+               <message><![CDATA[88DUR Reject Error]]></message>
+               <ndc>00591319301</ndc>
+               <otherCoverageCode>0</otherCoverageCode>
+               <overrideAllowed>true</overrideAllowed>
+               <pharmacyId>2400074</pharmacyId>
+               <planPaidAmount>1007.75</planPaidAmount>
+               <priorAuthType/>
+               <quantityDispensed>2,500.000</quantityDispensed>
+               <rxNumber>229128233366</rxNumber>
+               <sequenceNumber>999</sequenceNumber>
+               <status>REJECTED</status>
+               <transactionCount>1</transactionCount>
+               <trialClaimType>RETAIL</trialClaimType>
+               <accountId>P0101100000000</accountId>
+               <groupId>IS5820001A</groupId>
+               <pharmacyName>WALGREENS #13877</pharmacyName>
+               <copayCategory>0</copayCategory>
+            </claim>
+            <claim>
+               <additionalMessage/>
+               <claimNumber>153028575206111</claimNumber>
+               <claimType>PHARMACY</claimType>
+               <daw>NO PRODUCT SELECTION INDICATED</daw>
+               <daysSupply>1</daysSupply>
+               <drugName>AFEDITAB     TAB 30MG CR</drugName>
+               <fillDate>2016-01-25T06:00:00Z</fillDate>
+               <memberPaidAmount>1.20</memberPaidAmount>
+               <message/>
+               <ndc>00591319301</ndc>
+               <otherCoverageCode>0</otherCoverageCode>
+               <overrideAllowed>false</overrideAllowed>
+               <pharmacyId>2400074</pharmacyId>
+               <planPaidAmount>1007.75</planPaidAmount>
+               <priorAuthType/>
+               <quantityDispensed>2,500.000</quantityDispensed>
+               <rxNumber>229128233366</rxNumber>
+               <sequenceNumber>999</sequenceNumber>
+               <status>PAID</status>
+               <transactionCount>1</transactionCount>
+               <trialClaimType>RETAIL</trialClaimType>
+               <accountId>P0101100000000</accountId>
+               <groupId>IS5820001A</groupId>
+               <pharmacyName>WALGREENS #13877</pharmacyName>
+               <copayCategory>0</copayCategory>
+            </claim>
+            <claim>
+               <additionalMessage/>
+               <claimNumber>153028577320114</claimNumber>
+               <claimType>PHARMACY</claimType>
+               <daw>NO PRODUCT SELECTION INDICATED</daw>
+               <daysSupply>1</daysSupply>
+               <drugName>AFEDITAB     TAB 30MG CR</drugName>
+               <fillDate>2016-01-26T06:00:00Z</fillDate>
+               <memberPaidAmount>1.20</memberPaidAmount>
+               <message/>
+               <ndc>00591319301</ndc>
+               <otherCoverageCode>0</otherCoverageCode>
+               <overrideAllowed>false</overrideAllowed>
+               <pharmacyId>2400074</pharmacyId>
+               <planPaidAmount>1007.75</planPaidAmount>
+               <priorAuthType/>
+               <quantityDispensed>2,500.000</quantityDispensed>
+               <rxNumber>229112333366</rxNumber>
+               <sequenceNumber>999</sequenceNumber>
+               <status>PAID</status>
+               <transactionCount>1</transactionCount>
+               <trialClaimType>RETAIL</trialClaimType>
+               <accountId>P0101100000000</accountId>
+               <groupId>IS5820001A</groupId>
+               <pharmacyName>WALGREENS #13877</pharmacyName>
+               <copayCategory>0</copayCategory>
+            </claim>
+            <claim>
+               <additionalMessage/>
+               <claimNumber>153028581594121</claimNumber>
+               <claimType>PHARMACY</claimType>
+               <daw>NO PRODUCT SELECTION INDICATED</daw>
+               <daysSupply>1</daysSupply>
+               <drugName>AFEDITAB     TAB 30MG CR</drugName>
+               <fillDate>2016-01-27T06:00:00Z</fillDate>
+               <memberPaidAmount>0.90</memberPaidAmount>
+               <message/>
+               <ndc>00591319301</ndc>
+               <otherCoverageCode>0</otherCoverageCode>
+               <overrideAllowed>false</overrideAllowed>
+               <pharmacyId>2400074</pharmacyId>
+               <planPaidAmount>0.00</planPaidAmount>
+               <priorAuthType/>
+               <quantityDispensed>1.000</quantityDispensed>
+               <rxNumber>229187663366</rxNumber>
+               <sequenceNumber>999</sequenceNumber>
+               <status>PAID</status>
+               <transactionCount>1</transactionCount>
+               <trialClaimType>RETAIL</trialClaimType>
+               <accountId>P0101100000000</accountId>
+               <groupId>IS5820001A</groupId>
+               <pharmacyName>WALGREENS #13877</pharmacyName>
+               <copayCategory>0</copayCategory>
+            </claim>
+            <claim>
+               <additionalMessage/>
+               <claimNumber>153028585768120</claimNumber>
+               <claimType>PHARMACY</claimType>
+               <daw>NO PRODUCT SELECTION INDICATED</daw>
+               <daysSupply>1</daysSupply>
+               <drugName>AFEDITAB     TAB 30MG CR</drugName>
+               <fillDate>2016-01-28T06:00:00Z</fillDate>
+               <memberPaidAmount>0.90</memberPaidAmount>
+               <message/>
+               <ndc>00591319301</ndc>
+               <otherCoverageCode>0</otherCoverageCode>
+               <overrideAllowed>false</overrideAllowed>
+               <pharmacyId>2400074</pharmacyId>
+               <planPaidAmount>0.00</planPaidAmount>
+               <priorAuthType/>
+               <quantityDispensed>1.000</quantityDispensed>
+               <rxNumber>229112363366</rxNumber>
+               <sequenceNumber>999</sequenceNumber>
+               <status>PAID</status>
+               <transactionCount>1</transactionCount>
+               <trialClaimType>RETAIL</trialClaimType>
+               <accountId>P0101100000000</accountId>
+               <groupId>IS5820001A</groupId>
+               <pharmacyName>WALGREENS #13877</pharmacyName>
+               <copayCategory>0</copayCategory>
+            </claim>
+            <claim>
+               <additionalMessage/>
+               <claimNumber>153028588182103</claimNumber>
+               <claimType>PHARMACY</claimType>
+               <daw>NO PRODUCT SELECTION INDICATED</daw>
+               <daysSupply>1</daysSupply>
+               <drugName>AFEDITAB     TAB 30MG CR</drugName>
+               <fillDate>2016-01-29T06:00:00Z</fillDate>
+               <memberPaidAmount>0.90</memberPaidAmount>
+               <message/>
+               <ndc>00591319301</ndc>
+               <otherCoverageCode>0</otherCoverageCode>
+               <overrideAllowed>false</overrideAllowed>
+               <pharmacyId>2400074</pharmacyId>
+               <planPaidAmount>0.00</planPaidAmount>
+               <priorAuthType/>
+               <quantityDispensed>1.000</quantityDispensed>
+               <rxNumber>221232363366</rxNumber>
+               <sequenceNumber>999</sequenceNumber>
+               <status>PAID</status>
+               <transactionCount>1</transactionCount>
+               <trialClaimType>RETAIL</trialClaimType>
+               <accountId>P0101100000000</accountId>
+               <groupId>IS5820001A</groupId>
+               <pharmacyName>WALGREENS #13877</pharmacyName>
+               <copayCategory>0</copayCategory>
+            </claim>
+            <claim>
+               <additionalMessage/>
+               <claimNumber>153170296202125</claimNumber>
+               <claimType>PHARMACY</claimType>
+               <daw>NO PRODUCT SELECTION INDICATED</daw>
+               <daysSupply>30</daysSupply>
+               <drugName>AFEDITAB     TAB 30MG CR</drugName>
+               <fillDate>2016-01-31T06:00:00Z</fillDate>
+               <memberPaidAmount>2.63</memberPaidAmount>
+               <message/>
+               <ndc>00591319301</ndc>
+               <otherCoverageCode>0</otherCoverageCode>
+               <overrideAllowed>false</overrideAllowed>
+               <pharmacyId>2400074</pharmacyId>
+               <planPaidAmount>1.90</planPaidAmount>
+               <priorAuthType/>
+               <quantityDispensed>10.000</quantityDispensed>
+               <rxNumber>987765565778</rxNumber>
+               <sequenceNumber>997</sequenceNumber>
+               <status>REVERSAL</status>
+               <transactionCount>3</transactionCount>
+               <trialClaimType>RETAIL</trialClaimType>
+               <accountId>P0101100000000</accountId>
+               <groupId>IS5820001A</groupId>
+               <pharmacyName>WALGREENS #13877</pharmacyName>
+               <copayCategory>0</copayCategory>
+            </claim>
+            <claim>
+               <additionalMessage/>
+               <claimNumber>153170310057000</claimNumber>
+               <claimType>PHARMACY</claimType>
+               <daw/>
+               <daysSupply>30</daysSupply>
+               <drugName>AFEDITAB     TAB 30MG CR</drugName>
+               <fillDate>2016-02-01T06:00:00Z</fillDate>
+               <memberPaidAmount>0.00</memberPaidAmount>
+               <message><![CDATA[22M/I DispAsWrtn/PrdSelCde]]></message>
+               <ndc>00591319301</ndc>
+               <otherCoverageCode>0</otherCoverageCode>
+               <overrideAllowed>false</overrideAllowed>
+               <pharmacyId>2400074</pharmacyId>
+               <planPaidAmount>0.00</planPaidAmount>
+               <priorAuthType/>
+               <quantityDispensed>100.000</quantityDispensed>
+               <rxNumber>987768776778</rxNumber>
+               <sequenceNumber>999</sequenceNumber>
+               <status>REJECTED</status>
+               <transactionCount>1</transactionCount>
+               <trialClaimType>RETAIL</trialClaimType>
+               <accountId>P0101100000000</accountId>
+               <groupId>IS5820001A</groupId>
+               <pharmacyName>WALGREENS #13877</pharmacyName>
+               <copayCategory>0</copayCategory>
+            </claim>
+            <claim>
+               <additionalMessage><![CDATA[Refill Payable on or after 02/02/16]]></additionalMessage>
+               <claimNumber>153170314378129</claimNumber>
+               <claimType>PHARMACY</claimType>
+               <daw>NO PRODUCT SELECTION INDICATED</daw>
+               <daysSupply>30</daysSupply>
+               <drugName>AFEDITAB     TAB 30MG CR</drugName>
+               <fillDate>2016-02-01T06:00:00Z</fillDate>
+               <memberPaidAmount>23.69</memberPaidAmount>
+               <message><![CDATA[88DUR Reject Error]]></message>
+               <ndc>00591319301</ndc>
+               <otherCoverageCode>0</otherCoverageCode>
+               <overrideAllowed>true</overrideAllowed>
+               <pharmacyId>2400074</pharmacyId>
+               <planPaidAmount>17.15</planPaidAmount>
+               <priorAuthType/>
+               <quantityDispensed>100.000</quantityDispensed>
+               <rxNumber>987768136778</rxNumber>
+               <sequenceNumber>999</sequenceNumber>
+               <status>REJECTED</status>
+               <transactionCount>1</transactionCount>
+               <trialClaimType>RETAIL</trialClaimType>
+               <accountId>P0101100000000</accountId>
+               <groupId>IS5820001A</groupId>
+               <pharmacyName>WALGREENS #13877</pharmacyName>
+               <copayCategory>0</copayCategory>
+            </claim>
+            <claim>
+               <additionalMessage/>
+               <claimNumber>153170319482101</claimNumber>
+               <claimType>PHARMACY</claimType>
+               <daw>NO PRODUCT SELECTION INDICATED</daw>
+               <daysSupply>30</daysSupply>
+               <drugName>DOXIL        INJ 2MG/ML</drugName>
+               <fillDate>2016-01-22T06:00:00Z</fillDate>
+               <memberPaidAmount>50.00</memberPaidAmount>
+               <message/>
+               <ndc>59676096001</ndc>
+               <otherCoverageCode>0</otherCoverageCode>
+               <overrideAllowed>false</overrideAllowed>
+               <pharmacyId>2400074</pharmacyId>
+               <planPaidAmount>1900.50</planPaidAmount>
+               <priorAuthType/>
+               <quantityDispensed>100.000</quantityDispensed>
+               <rxNumber>987768136778</rxNumber>
+               <sequenceNumber>998</sequenceNumber>
+               <status>REVERSAL</status>
+               <transactionCount>2</transactionCount>
+               <trialClaimType>RETAIL</trialClaimType>
+               <accountId>P0101100000000</accountId>
+               <groupId>IS5820001A</groupId>
+               <pharmacyName>WALGREENS #13877</pharmacyName>
+               <copayCategory>0</copayCategory>
+            </claim>
+            <claim>
+               <additionalMessage/>
+               <claimNumber>153170346195116</claimNumber>
+               <claimType>PHARMACY</claimType>
+               <daw>NO PRODUCT SELECTION INDICATED</daw>
+               <daysSupply>30</daysSupply>
+               <drugName>DOXIL        INJ 2MG/ML</drugName>
+               <fillDate>2016-01-22T06:00:00Z</fillDate>
+               <memberPaidAmount>50.00</memberPaidAmount>
+               <message/>
+               <ndc>59676096001</ndc>
+               <otherCoverageCode>0</otherCoverageCode>
+               <overrideAllowed>false</overrideAllowed>
+               <pharmacyId>2400074</pharmacyId>
+               <planPaidAmount>1900.50</planPaidAmount>
+               <priorAuthType/>
+               <quantityDispensed>50.000</quantityDispensed>
+               <rxNumber>987877136778</rxNumber>
+               <sequenceNumber>999</sequenceNumber>
+               <status>REVERSAL</status>
+               <transactionCount>1</transactionCount>
+               <trialClaimType>RETAIL</trialClaimType>
+               <accountId>P0101100000000</accountId>
+               <groupId>IS5820001A</groupId>
+               <pharmacyName>WALGREENS #13877</pharmacyName>
+               <copayCategory>0</copayCategory>
+            </claim>
+            <claim>
+               <additionalMessage/>
+               <claimNumber>153170353982125</claimNumber>
+               <claimType>PHARMACY</claimType>
+               <daw>NO PRODUCT SELECTION INDICATED</daw>
+               <daysSupply>30</daysSupply>
+               <drugName>DOXIL        INJ 2MG/ML</drugName>
+               <fillDate>2016-01-22T06:00:00Z</fillDate>
+               <memberPaidAmount>50.02</memberPaidAmount>
+               <message/>
+               <ndc>59676096001</ndc>
+               <otherCoverageCode>0</otherCoverageCode>
+               <overrideAllowed>false</overrideAllowed>
+               <pharmacyId>2400074</pharmacyId>
+               <planPaidAmount>900.00</planPaidAmount>
+               <priorAuthType/>
+               <quantityDispensed>30.000</quantityDispensed>
+               <rxNumber>987878676778</rxNumber>
+               <sequenceNumber>999</sequenceNumber>
+               <status>REVERSAL</status>
+               <transactionCount>1</transactionCount>
+               <trialClaimType>RETAIL</trialClaimType>
+               <accountId>P0101100000000</accountId>
+               <groupId>IS5820001A</groupId>
+               <pharmacyName>WALGREENS #13877</pharmacyName>
+               <copayCategory>0</copayCategory>
+            </claim>
+            <claim>
+               <additionalMessage/>
+               <claimNumber>153212494285104</claimNumber>
+               <claimType>PHARMACY</claimType>
+               <daw>NO PRODUCT SELECTION INDICATED</daw>
+               <daysSupply>1</daysSupply>
+               <drugName>DOXIL        INJ 2MG/ML</drugName>
+               <fillDate>2016-01-07T06:00:00Z</fillDate>
+               <memberPaidAmount>50.12</memberPaidAmount>
+               <message/>
+               <ndc>59676096001</ndc>
+               <otherCoverageCode>0</otherCoverageCode>
+               <overrideAllowed>false</overrideAllowed>
+               <pharmacyId>2400074</pharmacyId>
+               <planPaidAmount>100.00</planPaidAmount>
+               <priorAuthType/>
+               <quantityDispensed>200.000</quantityDispensed>
+               <rxNumber>909897876769</rxNumber>
+               <sequenceNumber>999</sequenceNumber>
+               <status>PAID</status>
+               <transactionCount>1</transactionCount>
+               <trialClaimType>RETAIL</trialClaimType>
+               <accountId>P0101100000000</accountId>
+               <groupId>IS5820001A</groupId>
+               <pharmacyName>WALGREENS #13877</pharmacyName>
+               <copayCategory>0</copayCategory>
+            </claim>
+            <claim>
+               <additionalMessage><![CDATA[M/I Pharmacy Service Type]]></additionalMessage>
+               <claimNumber>153218154008115</claimNumber>
+               <claimType>PHARMACY</claimType>
+               <daw>NO PRODUCT SELECTION INDICATED</daw>
+               <daysSupply>1</daysSupply>
+               <drugName>DOXIL        INJ 2MG/ML</drugName>
+               <fillDate>2016-01-17T06:00:00Z</fillDate>
+               <memberPaidAmount>0.00</memberPaidAmount>
+               <message><![CDATA[U7M/I Pharmacy Service]]><![CDATA[ Type]]></message>
+               <ndc>59676096001</ndc>
+               <otherCoverageCode>0</otherCoverageCode>
+               <overrideAllowed>false</overrideAllowed>
+               <pharmacyId>2400074</pharmacyId>
+               <planPaidAmount>0.00</planPaidAmount>
+               <priorAuthType/>
+               <quantityDispensed>500.000</quantityDispensed>
+               <rxNumber>987978786564</rxNumber>
+               <sequenceNumber>999</sequenceNumber>
+               <status>REJECTED</status>
+               <transactionCount>1</transactionCount>
+               <trialClaimType>RETAIL</trialClaimType>
+               <accountId>P0101100000000</accountId>
+               <groupId>IS5820001A</groupId>
+               <pharmacyName>WALGREENS #13877</pharmacyName>
+               <copayCategory>0</copayCategory>
+            </claim>
+            <claim>
+               <additionalMessage/>
+               <claimNumber>153218161584103</claimNumber>
+               <claimType>PHARMACY</claimType>
+               <daw>NO PRODUCT SELECTION INDICATED</daw>
+               <daysSupply>1</daysSupply>
+               <drugName>DOXIL        INJ 2MG/ML</drugName>
+               <fillDate>2016-01-17T06:00:00Z</fillDate>
+               <memberPaidAmount>50.05</memberPaidAmount>
+               <message/>
+               <ndc>59676096001</ndc>
+               <otherCoverageCode>0</otherCoverageCode>
+               <overrideAllowed>false</overrideAllowed>
+               <pharmacyId>2400074</pharmacyId>
+               <planPaidAmount>400.00</planPaidAmount>
+               <priorAuthType/>
+               <quantityDispensed>500.000</quantityDispensed>
+               <rxNumber>987923386564</rxNumber>
+               <sequenceNumber>999</sequenceNumber>
+               <status>REVERSAL</status>
+               <transactionCount>1</transactionCount>
+               <trialClaimType>RETAIL</trialClaimType>
+               <accountId>P0101100000000</accountId>
+               <groupId>IS5820001A</groupId>
+               <pharmacyName>WALGREENS #13877</pharmacyName>
+               <copayCategory>0</copayCategory>
+            </claim>
+            <claim>
+               <additionalMessage/>
+               <claimNumber>153278233001108</claimNumber>
+               <claimType>PHARMACY</claimType>
+               <daw>NO PRODUCT SELECTION INDICATED</daw>
+               <daysSupply>10</daysSupply>
+               <drugName>ADVAIR DISKU AER 100/50</drugName>
+               <fillDate>2015-12-23T06:00:00Z</fillDate>
+               <memberPaidAmount>22.32</memberPaidAmount>
+               <message/>
+               <ndc>00173069500</ndc>
+               <otherCoverageCode>0</otherCoverageCode>
+               <overrideAllowed>false</overrideAllowed>
+               <pharmacyId>1006899</pharmacyId>
+               <planPaidAmount>0.00</planPaidAmount>
+               <priorAuthType/>
+               <quantityDispensed>10.000</quantityDispensed>
+               <rxNumber>980877655649</rxNumber>
+               <sequenceNumber>998</sequenceNumber>
+               <status>PAID</status>
+               <transactionCount>3</transactionCount>
+               <trialClaimType>MAIL</trialClaimType>
+               <accountId>P0101100000000</accountId>
+               <groupId>IS5820001A</groupId>
+               <pharmacyName>WALGREENS #2445</pharmacyName>
+               <copayCategory>0</copayCategory>
+            </claim>
+         </claims>
+      </searchClaimsResponse>
+   </soapenv:Body>
+</soapenv:Envelope>
