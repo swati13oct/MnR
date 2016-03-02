@@ -48,7 +48,7 @@ public class LoginPage extends UhcDriver {
 		openAndValidate();
 	}
 
-	public void loginWith(String username, String password) throws UnhandledAlertException {
+	public void loginWith(String username, String password) {
 		loginIn.click();	
 		sendkeys(userNameField,username);
 		sendkeys(passwordField,password);

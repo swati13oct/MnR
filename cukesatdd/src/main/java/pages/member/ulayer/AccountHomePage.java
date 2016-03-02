@@ -82,6 +82,9 @@ public class AccountHomePage extends UhcDriver {
 	@FindBy(id = "gogreenmeter")
 	private WebElement goGreenMeterIndicator;
 	
+	@FindBy(className = "fd_myHealthWellness")
+	private WebElement hwTab;
+	
 	private PageData myAccountHome;
 
 	public JSONObject accountHomeJson;
@@ -337,6 +340,15 @@ public class AccountHomePage extends UhcDriver {
 		if(currentUrl().contains("my-preferences"))
 		{
 			return new MyPreferencesPage(driver);
+		}
+		return null;
+	}
+	
+	public HealthAndWellnessPage navigateToHWPage() {
+		hwTab.click();
+		if(currentUrl().contains("my-health-and-wellness.html"))
+		{
+			return new HealthAndWellnessPage(driver);
 		}
 		return null;
 	}

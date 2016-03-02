@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.apache.regexp.recompile;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
@@ -77,6 +78,9 @@ public class AcquisitionHomePage extends GlobalFooterWebElements {
 
 	@FindBy(xpath = "//div[@id='insuranceplan_nav']/div/div[3]/ul/li/a/span")
 	private WebElement pdpVppLink;
+	
+	@FindBy(xpath = "//div[@id='insuranceplan_nav']/div/div[3]/ul/li[4]/a/span")
+	private WebElement pdp_moreHelpInfoLink;
 
 	@FindBy(linkText = "Request More Help and Information")
 	private WebElement ma_moreHelpInfoLink;
@@ -609,5 +613,19 @@ public class AcquisitionHomePage extends GlobalFooterWebElements {
 		return null;
 	}
 
-
+	public PDPRequestHelpAndInformationPage navigateToPDPMoreHelpAndInfo() {
+		
+		
+		Actions actions = new Actions(driver);
+		actions.moveToElement(ourPlans);
+		actions.moveToElement(pdp_moreHelpInfoLink);
+		actions.click().build().perform();
+		
+		if(currentUrl().contains("prescription-drug-plans/request-information.html")){
+			return new PDPRequestHelpAndInformationPage(driver);
+		}
+				
+		return null;
+				
+	}
 }
