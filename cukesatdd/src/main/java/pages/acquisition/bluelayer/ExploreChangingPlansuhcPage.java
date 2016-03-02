@@ -4,9 +4,11 @@
 package pages.acquisition.bluelayer;
 
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.PageFactory;
 
 import pages.acquisition.bluelayer.GlobalFooterWebElements;
+import pages.acquisition.ulayer.PrepareforInitialEnrollmentPage;
 
 /**
  * @author rkodumur
@@ -35,6 +37,22 @@ public class ExploreChangingPlansuhcPage extends GlobalFooterWebElements{
 			return new DiscoverMoreResourcesuhcPage(driver);
 		}
 		return null;
+	}
+
+	public PrepareForInitialEnrollmentuhcPage prepareForInitialEnrollmentClick() {
+		validate(prepareForInitialEnrollmentMedicareEducationLink);
+		Actions actions = new Actions(driver);
+	    actions.moveToElement(navigationSectionMedicareEducationLink);
+	    actions.moveToElement(prepareForInitialEnrollmentMedicareEducationLink);
+	    actions.click().build().perform();
+	    validate(navigationSectionMedicareEducationLink);
+		if (driver.getTitle().equalsIgnoreCase("Prepare for Your Medicare Initial Enrollment Period | UnitedHealthcare®")) {
+			return new PrepareForInitialEnrollmentuhcPage(driver);
+		}else{
+		
+			return null;
+			
+		}
 	}
 
 }

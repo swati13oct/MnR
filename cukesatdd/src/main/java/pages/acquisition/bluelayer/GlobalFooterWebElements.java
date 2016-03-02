@@ -5,6 +5,7 @@ package pages.acquisition.bluelayer;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.FindBys;
 import org.openqa.selenium.support.PageFactory;
@@ -128,6 +129,9 @@ public class GlobalFooterWebElements extends UhcDriver {
 	@FindBy(id = "top-user")
 	 public static WebElement usernameField;
 	
+	@FindBy(xpath = "//*[@id='site-wrapper']/header/div/div/div[2]/div/div/div[2]/div/form/span[1]/p")
+	 public static WebElement errormessage;
+	
 	@FindBy(id = "top-pass")
 	 public static WebElement passwordField;
 	
@@ -139,10 +143,92 @@ public class GlobalFooterWebElements extends UhcDriver {
 	
 	@FindBy(className = "not-registered-text")
 	 public static WebElement notRegisteredText;
+	
+	@FindBy(id = "ghn_lnk_3")
+	 public static WebElement navigationSectionMedicareEducationLink;
+	
+	@FindBy(xpath = "//div[@id='subnav_3']/div/div/div/div/div/h3/a/span")
+	 public static WebElement learnAboutMedicareMedicareEducationLink;
+	
+	@FindBy(xpath = "//div[@id='subnav_3']/div/div/div/div[2]/div/h3/a/span")
+	 public static WebElement exploreChangingPlansMedicareEducationLink;
+	
+	@FindBy(xpath = "//div[@id='subnav_3']/div/div/div/div/div[2]/h3/a/span")
+	 public static WebElement prepareForInitialEnrollmentMedicareEducationLink;
+	
+	@FindBy(xpath = "//div[@id='subnav_3']/div/div/div/div[2]/div[2]/h3/a/span")
+	 public static WebElement discoverMoreResourcesMedicareEducationLink;
+	
+	@FindBy(id="ghn_lnk_2")
+	public static WebElement ourPlansHoverLink;
+	
+	@FindBy(id="subnav_2")
+	public static WebElement ourPlansDropdownText;
+	
+	@FindBy(xpath="//div[@id='subnav_2']/div/div/div[1]/div[1]/div[1]/h3/a")
+	public static WebElement headerMedicareAdvantagePlansLink;
+	
+	@FindBy(xpath="//div[@id='subnav_2']/div/div/div[1]/div[1]/div[2]/h3/a")
+	public static WebElement headerMedicarePrescriptionDrugPlansLink;
+	
+	@FindBy(xpath="//div[@id='subnav_2']/div/div/div[1]/div[2]/div[1]/h3/a")
+	public static WebElement headerMedicareSupplementPlansLink;
+	
+	@FindBy(xpath="//div[@id='subnav_2']/div/div/div[1]/div[2]/div[2]/h3/a")
+	public static WebElement headerMedicareSpecialNeedPlansLink;
+	
+	@FindBy(xpath="//div[@id='subnav_2']/div/div/div[1]/div[1]/div[1]/p[2]/a")
+	public static WebElement medicareAdvantagePlansRequestMoreHelpLink;
+	
+	@FindBy(xpath="//div[@id='subnav_2']/div/div/div[1]/div[1]/div[2]/p[2]/a")
+	public static WebElement prescriptiondrugPlansRequestMoreHelpLink;
+	
+	@FindBy(xpath="//div[@id='subnav_2']/div/div/div[1]/div[2]/div[1]/p[2]/a[1]")
+	public static WebElement medicareSelectHosipitalDirectoryLink;
+	
+	@FindBy(xpath="//div[@id='subnav_2']/div/div/div[1]/div[2]/div[1]/p[2]/a[2]")
+	public static WebElement resumeYourSavedApplicationLink;
+	
+	@FindBy(xpath="//div[@id='subnav_2']/div/div/div[1]/div[2]/div[2]/p/a")
+	public static WebElement specialNeedPlansGetEnrollmentInformationLink;
+	
+	@FindBy(xpath="//div[@id='subnav_2']/div/div/div[2]/a")
+	public static WebElement takeQuizButton;
+	
+	@FindBy(id="nav-zipcode")
+	public static WebElement zipcodeField;
+	
+	@FindBy(className="zip-button")
+	public static WebElement findPlansButton;
+	
+	@FindBy(xpath="//div[@id='subnav_2']/div/div/div[2]/form/span/span")
+	public static WebElement errorMsg;  
+	
+	@FindBy(xpath="//div[@id='subnav_2']/div/div/div[2]/div/a")
+	public static WebElement lookupZipcodeLink;
+	
+	@FindBy(xpath="//div[@id='findazip_box']")
+	public static WebElement findaZipBox;
+	
+	@FindBy(xpath = "//div[@class='top-menu']/div/div[2]/div/form/button")
+	 public static WebElement signInButton;
+	
+	@FindBy(xpath = "//div[@class='top-menu']/div/div[2]/div/form/span/p")
+	 public static WebElement alreadyMemberInvalidCredsErrorMessage;
+
 
 	@Override
 	public void openAndValidate() {
 		// TODO Auto-generated method stub
+		
+	}
+	
+	public void ourPlansHover() {
+		Actions actions = new Actions(driver);
+		actions.moveToElement(ourPlansHoverLink);
+		actions.moveToElement(ourPlansDropdownText);
+		actions.click();
+		actions.perform();
 		
 	}
 

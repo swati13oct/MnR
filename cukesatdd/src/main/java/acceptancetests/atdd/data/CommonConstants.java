@@ -617,9 +617,20 @@ public class CommonConstants {
 
 	public static final String ENQUIRY_KIT_CONFIRMATION_PAGE_DATA = "enquirykitconfirm.json";
 	
+
 	public static final String HEALTH_AND_WELLNESS_PAGE_DATA = "healthandwellness.json";
 
 	public static final String HEALTH_AND_WELLNESS = "healthandwellness";
+
+	public static final String MEDICARE_EDUCATION_SECTION_DATA = "medicareEducationSectionActual.json";
+	
+	public static final String OUR_PLANS_NAV_PAGE_DATA = "ourPlansDropdownActual.json";
+	
+	public static final String OUR_PLANS_DROPDOWN_DATA= "ourplansdropdownactual.json";
+	
+	
+	
+
 
 	private static final String HEALTH_AND_WELLNESS_DIRECTORY = "/jsonresponse/member/ulayer/healthandwellness/";
 

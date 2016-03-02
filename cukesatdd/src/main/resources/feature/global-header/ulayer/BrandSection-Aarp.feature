@@ -19,3 +19,17 @@ And user clicks on register here link of AARP site
 Then user validates all the elements in the Already a plan member drop down of AARP site
 
 
+Scenario:To verify error message of sign in button under Already a plan member dropdown displayed on the Brand section of AARP site
+Given user is on acquisition home page of AARP Site
+When the user clicks on Already a member button on the Brand section of AARP site
+And user enters invalid user name, password text field in the Already a plan member drop down of AARP site
+Then user clicks on sign in button and validate the error message in Already a plan member drop down of AARP site
+
+		 
+
+Scenario:To verify sign in button functionality under Already a plan member dropdown displayed on the Brand section of AARP site
+Given user is on acquisition home page of AARP Site
+When the user clicks on Already a member button on the Brand section of AARP site
+And user enters valid user name, password text field in the Already a plan member drop down of AARP site
+Then user clicks on sign in button and validates if it is landed on member my account home page of AARP site
+

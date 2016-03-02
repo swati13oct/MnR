@@ -838,7 +838,6 @@ public class MRScenario {
 		webDriver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
 		return webDriver;
 	}
-
 	
 
 }

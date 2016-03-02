@@ -38,5 +38,16 @@ public class MedicarePrescriptionDrugPlansuhcPage extends GlobalFooterWebElement
 		}
 		return null;
 	}
+	
+	public PrescriptionDrugRequestMoreHelpPage requestPersonalhelpInformationClick() {
+		ourPlansHover();
+		validate(prescriptiondrugPlansRequestMoreHelpLink);
+		prescriptiondrugPlansRequestMoreHelpLink.click();
+		validate(prescriptiondrugPlansRequestMoreHelpLink);
+		if(driver.getTitle().equalsIgnoreCase("Medicare Prescription Drug Plan Help & Info | UnitedHealthcare®")){
+			return new PrescriptionDrugRequestMoreHelpPage(driver);
+		}
+		return null;
+	}
 
 }

@@ -29,5 +29,17 @@ public class MedicareSpecialNeedsPlansuhcPage extends GlobalFooterWebElements{
 		}
 		return null;
 		}
+	
+	public SpecialNeedGetEnrollmentInformationPage getEnrollmentInformationLinkClick() {
+		ourPlansHover();
+		validate(specialNeedPlansGetEnrollmentInformationLink);
+		specialNeedPlansGetEnrollmentInformationLink.click();
+		validate(specialNeedPlansGetEnrollmentInformationLink);
+		if(driver.getTitle().equalsIgnoreCase("Medicare Special Needs Plans Enrollment | UnitedHealthcare®"))
+		{
+		return new SpecialNeedGetEnrollmentInformationPage(driver);
+		}
+		return null;
+		}
 
 }

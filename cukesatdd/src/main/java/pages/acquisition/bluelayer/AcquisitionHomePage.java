@@ -9,11 +9,12 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.FindBys;
 import org.openqa.selenium.support.PageFactory;
 
-import pages.acquisition.bluelayer.GlobalFooterWebElements;
+import pages.member.bluelayer.AccountHomePage;
 import acceptancetests.atdd.data.CommonConstants;
 import acceptancetests.atdd.data.MRConstants;
 import acceptancetests.atdd.data.PageData;
@@ -69,6 +70,12 @@ public class AcquisitionHomePage extends GlobalFooterWebElements {
        
        private PageData alreadyPlanMember;
    	   public JSONObject alreadyPlanMemberJson;
+   	   
+	   	private PageData medicareEducationDropDown;
+		public JSONObject medicareEducationDropDownJson;
+		
+		private PageData ourPlansNav;
+		public JSONObject ourPlansNavJson;
        
        
        private static String UMS_ACQISITION_PAGE_URL = MRConstants.UHC_URL;
@@ -237,13 +244,13 @@ public SiteMapUMSPage siteMapFooterClick() {
               validate(navigationSectionmedicareEducationLink);
               validate(navigationSectionEnterSearch);
               
-              validate(prescriptionsLink);
-              validate(zipCodeField);
-              validate(viewPlansButton);
-              validate(footerHomeLink);
-              validate(footnotesContent);
+             	validate(prescriptionsLink);
+            	validate(zipCodeField);
+              	validate(viewPlansButton);
+              	validate(footerHomeLink);
+              	validate(footnotesContent);
               
-              //validate(footerHealthAndWellnessLink);
+              	//validate(footerHealthAndWellnessLink);
               validate(footerAboutUsLink);
               validate(footerContactUsLink);
               validate(footerSiteMapLink);
@@ -432,7 +439,111 @@ public SiteMapUMSPage siteMapFooterClick() {
 			return new RegistrationHomePage(driver);
 		}
 		return null;
-	}     
+	}
+      
+	public JSONObject accessingOurPlansNav() {
+		ourPlansHover();
+		return getOurPlanDropDownJson();
+	}
+	
+	public JSONObject getOurPlanDropDownJson(){
+		String fileName = CommonConstants.OUR_PLANS_NAV_PAGE_DATA;
+        ourPlansNav = CommonUtility.readPageData(fileName,
+                     CommonConstants.PAGE_OBJECT_DIRECTORY_BLUELAYER_ACQ);
+        
+        JSONObject jsonObject = new JSONObject();
+        for (String key : ourPlansNav.getExpectedData().keySet()) {
+        WebElement element = findElement(ourPlansNav.getExpectedData()
+        .get(key));
+        if (element != null) {
+        if(validate(element)){
+        try {
+        jsonObject.put(key, element.getText());
+        } catch (JSONException e) {
+        // TODO Auto-generated catch block
+        e.printStackTrace();
+        }
+        }
+        }
+        }
+        ourPlansNavJson = jsonObject;
+        
+        
+        return ourPlansNavJson;
+	}
+	
+	
+
+
+	public JSONObject accessMedicareEducationDropDown() {
+		
+		validate(navigationSectionMedicareEducationLink);
+		
+		Actions actions = new Actions(driver);
+        actions.moveToElement(navigationSectionMedicareEducationLink);
+        actions.moveToElement(learnAboutMedicareMedicareEducationLink);
+        actions.perform();
+		String fileName = CommonConstants.MEDICARE_EDUCATION_SECTION_DATA;
+		medicareEducationDropDown = CommonUtility.readPageData(fileName,
+			CommonConstants.PAGE_OBJECT_DIRECTORY_BLUELAYER_ACQ);
+
+	JSONObject jsonObject = new JSONObject();
+	for (String key : medicareEducationDropDown.getExpectedData().keySet()) {
+		WebElement element = findElement(medicareEducationDropDown.getExpectedData()
+				.get(key));
+		if (element != null) {
+			if (validate(element)) {
+				try {
+					jsonObject.put(key, element.getText());
+				} catch (JSONException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		}
+	}
+	medicareEducationDropDownJson = jsonObject;
+
+	return medicareEducationDropDownJson;
+	}
+
+	
+	
+	public JSONObject enterZipCode(String zipCode) {
+		ourPlansHover();
+		validate(zipcodeField);
+		zipcodeField.sendKeys(zipCode);
+		findPlansButton.click();		
+		return getOurPlanDropDownJson();
+		
+	}
+
+
+	
+
+
+	public LearnAboutMedicareuhcPage learnAboutMedicareClick() {
+		validate(navigationSectionMedicareEducationLink);
+		Actions actions = new Actions(driver);
+        actions.moveToElement(navigationSectionMedicareEducationLink);
+        actions.moveToElement(learnAboutMedicareMedicareEducationLink);
+        actions.click().build().perform();
+        if(driver.getTitle().equalsIgnoreCase("Learn About Medicare | UnitedHealthcare®")){
+            return new LearnAboutMedicareuhcPage(driver);
+            }
+
+		return null;
+	}	
+	public MedicareAdvantagePlansuhcPage headerMedicareAdvantageClick() {
+		ourPlansHover();
+		validate(headerMedicareAdvantagePlansLink);
+		headerMedicareAdvantagePlansLink.click();
+        validate(headerMedicareAdvantagePlansLink);
+        if(driver.getTitle().equalsIgnoreCase("Medicare Advantage Plans | UnitedHealthcare®")){
+        return new MedicareAdvantagePlansuhcPage(driver);
+        }
+	return null;
+	}
 
 	public PharmacySearchPage navigateToPharmacyLocator() {
 		pharmacyLink.click();
@@ -442,7 +553,112 @@ public SiteMapUMSPage siteMapFooterClick() {
 		}
 		return null;
 		
-	} 
+	}
+	public MedicareSpecialNeedsPlansuhcPage medicareSpecialNeedPlansLinkClick() {
+		ourPlansHover();
+		validate(headerMedicareSpecialNeedPlansLink);
+		headerMedicareSpecialNeedPlansLink.click();
+		validate(headerMedicareSpecialNeedPlansLink);
+		if(driver.getTitle().equalsIgnoreCase("Medicare Special Needs Plans | UnitedHealthcare®")){
+			return new MedicareSpecialNeedsPlansuhcPage(driver);
+		}
+		return null;
+	}
 
+
+	public OurPlansPage findPlanButtonClick(String zipCode) {
+		ourPlansHover();
+		validate(zipcodeField);
+		zipcodeField.sendKeys(zipCode);
+		findPlansButton.click();
+		if(driver.getTitle().equalsIgnoreCase("Our Medicare Plan Types | UnitedHealthcare®")){
+			return new OurPlansPage(driver);
+		}
+		return null;
+	}
+
+
+	public Boolean signin_error() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+	public Boolean signinErrorValidation() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+	public Boolean signin_successful() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+	public AccountHomePage signinClick() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+	public Boolean enterInvalidUserNamePassword() {
+		validate(usernameField);
+		usernameField.click();
+		usernameField.sendKeys("");
+		//usernameField.sendKeys(givenAttributesRow.get(0).getCells().get(0));
+		String user = usernameField.getAttribute("value");
+		validate(passwordField);
+		passwordField.click();
+		passwordField.sendKeys("pas");
+		//passwordField.sendKeys(givenAttributesRow.get(0).getCells().get(1));
+		String pass = passwordField.getAttribute("value");
+		if(user.equalsIgnoreCase("") && pass.equalsIgnoreCase("pas")){
+			return true;
+		}
+		return false;
+		
+	}
+
+
+	public Boolean checkErrorMessage() {
+		validate(signInButton);
+		signInButton.click();
+		validate(signInButton);
+		return validate(alreadyMemberInvalidCredsErrorMessage);
+	}
+
+
+	public Boolean enterValidUserNamePassword() {
+		validate(usernameField);
+		usernameField.click();
+		usernameField.sendKeys("q1blayer_001");
+		//usernameField.sendKeys(givenAttributesRow.get(0).getCells().get(0));
+		String user = usernameField.getAttribute("value");
+		validate(passwordField);
+		passwordField.click();
+		passwordField.sendKeys("Password@1");
+		//passwordField.sendKeys(givenAttributesRow.get(0).getCells().get(1));
+		String pass = passwordField.getAttribute("value");
+		if(user.equalsIgnoreCase("q1blayer_001") && pass.equalsIgnoreCase("Password@1")){
+			return true;
+		}
+		return false;
+	}
+
+
+	public AccountHomePage signInValid() {
+		validate(signInButton);
+		signInButton.click();
+		//validate(signInButton);
+		
+		ArrayList<String> tabs = new ArrayList<String> (driver.getWindowHandles());
+	    driver.switchTo().window(tabs.get(1));
+		if(driver.getTitle().equalsIgnoreCase("UnitedHealthcare Medicare Solutions | My Account Home")){
+            return new AccountHomePage(driver);
+            }
+
+		return null;
+	}
 }
 

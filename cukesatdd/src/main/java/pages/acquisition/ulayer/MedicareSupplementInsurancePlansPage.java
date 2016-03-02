@@ -3,6 +3,8 @@ package pages.acquisition.ulayer;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.PageFactory;
 
+import pages.acquisition.ulayer.MedicareSelectHospitalDirectoryPage;
+
 public class MedicareSupplementInsurancePlansPage extends GlobalFooterWebElements {
 
 	public MedicareSupplementInsurancePlansPage(WebDriver driver) {
@@ -32,5 +34,16 @@ public MedicarePrescriptionDrugPlansPage medicarePrescriptionFooterClick() {
 		
 	}
 	
+public MedicareSelectHospitalDirectoryPage medicareSelectHosipitalDirectoryClick() {
+	ourPlansHover();
+	validate(medicareSelectHosipitalDirectoryLink);
+	medicareSelectHosipitalDirectoryLink.click();
+	validate(medicareSelectHosipitalDirectoryLink);
+	if(driver.getTitle().equalsIgnoreCase("Medicare Select Hospital Directory")){
+		return new MedicareSelectHospitalDirectoryPage(driver);
+	}
+	return null;
 	
+}
+
 }

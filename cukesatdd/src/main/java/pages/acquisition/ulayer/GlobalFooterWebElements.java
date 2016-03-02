@@ -2,6 +2,7 @@ package pages.acquisition.ulayer;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.FindBys;
 import org.openqa.selenium.support.PageFactory;
@@ -46,25 +47,25 @@ public class GlobalFooterWebElements  extends UhcDriver{
 	public static WebElement footnotesContent;
 	
 			
-	@FindBy(id = "gfn_lnk_row2_2")
+	@FindBy(id = "gfn_lnk_row2_1")
 	 public static WebElement medicareAdvantagePlansLink;
 	
-	@FindBy(id = "gfn_lnk_row2_3")
+	@FindBy(id = "gfn_lnk_row2_2")
 	 public static WebElement medicareSupplementInsurancePlansLink;
 	
-	@FindBy(id = "gfn_lnk_row2_4")
+	@FindBy(id = "gfn_lnk_row2_3")
 	 public static WebElement medicarePrescriptionDrug_PlansLink;
 	
-	@FindBy(id = "gfn_lnk_row3_2")
+	@FindBy(id = "gfn_lnk_row3_1")
 	 public static WebElement learnAboutMedicareLink;
 	
-	@FindBy(id = "gfn_lnk_row3_3")
+	@FindBy(id = "gfn_lnk_row3_2")
 	 public static WebElement prepareForInitialEnrollment;
 	
-	@FindBy(id = "gfn_lnk_row3_4")
+	@FindBy(id = "gfn_lnk_row3_3")
 	 public static WebElement exploreChangingPlansLink;
 	
-	@FindBy(id = "gfn_lnk_row3_5")
+	@FindBy(id = "gfn_lnk_row3_4")
 	 public static WebElement discoverMoreResourcesLink;
 	
 	@FindBy(linkText = "Back to Top")
@@ -140,13 +141,72 @@ public class GlobalFooterWebElements  extends UhcDriver{
 	 public static WebElement navigationSectionOurPlansLink;
 	
 	
+	@FindBy(id = "ghn_lnk_3")
+	 public static WebElement navigationSectionMedicareEducationLink;
+	
+	
+	@FindBy(xpath = "//div[@id='subnav_3']/div/div/div/div/div/h3/a/span")
+	 public static WebElement learnAboutMedicareMedicareEducationLink;
+	
+	@FindBy(xpath = "//div[@id='subnav_3']/div/div/div/div[2]/div/h3/a/span")
+	 public static WebElement exploreChangingPlansMedicareEducationLink;
+	
+	@FindBy(xpath = "//div[@id='subnav_3']/div/div/div/div/div[2]/h3/a/span")
+	 public static WebElement prepareForInitialEnrollmentMedicareEducationLink;
+	
+	@FindBy(xpath = "//div[@id='subnav_3']/div/div/div/div[2]/div[2]/h3/a/span")
+	 public static WebElement discoverMoreResourcesMedicareEducationLink;
+	
+	@FindBy(xpath = "//div[@class='top-menu']/div/div[2]/div/form/span/p")
+	 public static WebElement alreadyMemberInvalidCredsErrorMessage;
+	
+	@FindBy(xpath = "//div[@class='top-menu']/div/div[2]/div/form/button")
+	 public static WebElement signInButton;
+	
+	
 
-	@Override
+	@FindBy(xpath="//div[@id='subnav_2']/div/div/div[1]/div[1]/div[2]/p[2]/a")
+	public static WebElement prescriptiondrugPlansRequestMoreHelpLink;
+	
+	@FindBy(xpath="//div[@id='subnav_2']/div/div/div[1]/div[2]/div/p[2]/a[3]")
+	public static WebElement resumeYourSavedApplicationLink;
+	
+	@FindBy(xpath="//div[@id='subnav_2']/div/div/div[1]/div[2]/div/h3/a/span")
+	public static WebElement headerMedicareSupplementPlansLink;
+	
+	@FindBy(xpath="//div[@id='subnav_2']/div/div/div[1]/div[1]/div[1]/p[2]/a")
+		public static WebElement medicareAdvantagePlansRequestMoreHelpLink;
+	
+	@FindBy(xpath="//div[@id='subnav_2']/div/div/div[1]/div[2]/div/p[2]/a[2]")
+	public static WebElement medicareSelectHosipitalDirectoryLink;
+		@Override
 	public void openAndValidate() {
 		// TODO Auto-generated method stub
 		
 	}
 	
-	 
+	@FindBy(xpath="//div[@id='subnav_2']/div/div/div[2]/a")
+	public static WebElement takeQuizButton;
+	
+	@FindBy(id="nav-zipcode")
+	public static WebElement zipcodeField;
+	
+	@FindBy(className="zip-button")
+	public static WebElement findPlansButton;
+	
+	@FindBy(id="ghn_lnk_2")
+	public static WebElement ourPlansHoverLink;
+	
+	@FindBy(id="subnav_2")
+	public static WebElement ourPlansDropdownText;
+	
+	public void ourPlansHover() {
+		Actions actions = new Actions(driver);
+		actions.moveToElement(ourPlansHoverLink);
+		actions.moveToElement(ourPlansDropdownText);
+		actions.click();
+		actions.perform();
+		
+	}
 
 }

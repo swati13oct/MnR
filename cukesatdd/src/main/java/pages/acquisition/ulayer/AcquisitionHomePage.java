@@ -8,6 +8,7 @@ import org.json.JSONObject;
 import org.apache.regexp.recompile;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.TimeoutException;
+import org.openqa.selenium.Alert;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
@@ -16,6 +17,7 @@ import org.openqa.selenium.support.FindBys;
 import org.openqa.selenium.support.PageFactory;
 
 import acceptancetests.atdd.data.CommonConstants;
+import pages.member.ulayer.AccountHomePage;
 import acceptancetests.atdd.data.MRConstants;
 import acceptancetests.atdd.data.PageData;
 import acceptancetests.atdd.util.CommonUtility;
@@ -32,6 +34,37 @@ public class AcquisitionHomePage extends GlobalFooterWebElements {
 
 	@FindBy(linkText = "prescriptions")
 	private WebElement prescriptionsLink;
+	
+	@FindBy(className = "zip-button")
+	private WebElement FindPlansButton1;
+	
+	@FindBy(xpath = "//*[@id='ghn_lnk_2']")
+	private WebElement OurPlansLink1;
+	
+	@FindBy(xpath= "//a[text()='Look up ZIP code']")
+	private WebElement LookUpZipCode1;
+	
+	@FindBy(xpath = "//*[@id='zipLookup']/p/a")
+	private WebElement LookUpZipCode21;
+	
+	@FindBy(xpath = "//*[@id='subnav_2']/div/div/div[2]/form/span/span")
+	private WebElement errormessage1;
+	
+	@FindBy(className = "zip-button")
+	private WebElement FindPlansButton;
+	
+	@FindBy(xpath = "//*[@id='ghn_lnk_2']")
+	private WebElement OurPlansLink;
+	
+	@FindBy(xpath= "//a[text()='Look up ZIP code']")
+	private WebElement LookUpZipCode;
+	
+	@FindBy(xpath = "//*[@id='zipLookup']/p/a")
+	private WebElement LookUpZipCode2;
+	
+	@FindBy(xpath = "//*[@id='subnav_2']/div/div/div[2]/form/span/span")
+	private WebElement errormessage;
+
 
 	@FindBy(className = "viewplansbtn")
 	private WebElement viewPlansButton;
@@ -56,7 +89,6 @@ public class AcquisitionHomePage extends GlobalFooterWebElements {
 	
 	@FindBy(xpath = "/html/body/div[3]/div/table/tbody/tr[3]/td/table/tbody/tr[2]/td/div/div[2]/div/div/div[2]/div/ul/li[2]/a")
 	WebElement zipCodebtn;
-
 
 	@FindBy(className = "disclaimer hideLink")
 	private WebElement disclaimerHideLink;
@@ -94,6 +126,12 @@ public class AcquisitionHomePage extends GlobalFooterWebElements {
 	@FindBy(id = "ghn_lnk_1")
 	public static WebElement navigationSectionHomeLink;
 
+	@FindBy(id="ghn_lnk_2")
+	public static WebElement ourPlansHoverLink;
+	
+	@FindBy(id="subnav_2")
+	public static WebElement ourPlansDropdownText;
+
 	private static String AARP_ACQISITION_PAGE_URL = MRConstants.AARP_URL;
 	
 	private PageData globalFooter;
@@ -109,6 +147,9 @@ public class AcquisitionHomePage extends GlobalFooterWebElements {
 	private PageData alreadyPlanMember;
 	public JSONObject alreadyPlanMemberJson;
 	
+	private PageData medicareEducationDropDown;
+	public JSONObject medicareEducationDropDownJson;
+	
 	private PageData header;
 	public JSONObject headerJson;
 	
@@ -116,6 +157,9 @@ public class AcquisitionHomePage extends GlobalFooterWebElements {
 
     public JSONObject globalHeaderJson;
 
+    public JSONObject ourplansdropdownJson;
+    
+    private PageData ourplansdropdown;
 	public AcquisitionHomePage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
@@ -253,6 +297,42 @@ public class AcquisitionHomePage extends GlobalFooterWebElements {
 		return globalFooterJson;
 	}
 
+	 public JSONObject accessingOurPlanslink() {
+		 
+		 hoverourplanslink();
+		 return getOurPlanDropDownJson();
+		}
+		 
+		 public JSONObject getOurPlanDropDownJson(){
+			 
+		 
+	        String fileName = CommonConstants.OUR_PLANS_DROPDOWN_DATA;
+	        ourplansdropdown = CommonUtility.readPageData(fileName,
+	                     CommonConstants.PAGE_OBJECT_DIRECTORY_ULAYER_ACQ);
+	        
+	        JSONObject jsonObject = new JSONObject();
+	        for (String key : ourplansdropdown.getExpectedData().keySet()) {
+	        WebElement element = findElement(ourplansdropdown.getExpectedData()
+	        .get(key));
+	        if (element != null) {
+	        if(validate(element)){
+	        try {
+	        jsonObject.put(key, element.getText());
+	        } catch (JSONException e) {
+	        // TODO Auto-generated catch block
+	        e.printStackTrace();
+	        }
+	        }
+	        }
+	        }
+	        ourplansdropdownJson = jsonObject;
+	        
+	        
+	        return ourplansdropdownJson;
+	        
+	 }
+	
+	 
 	public JSONObject accessViewAllDisclaimerInformation() {
 		validate(disclaimerViewLink);
 		disclaimerViewLink.click();
@@ -464,6 +544,38 @@ public class AcquisitionHomePage extends GlobalFooterWebElements {
 
 		return alreadyPlanMemberJson;
 	}
+	
+	public JSONObject accessMedicareEducationDropDown() {
+
+		validate(navigationSectionMedicareEducationLink);
+		
+		Actions actions = new Actions(driver);
+        actions.moveToElement(navigationSectionMedicareEducationLink);
+        actions.moveToElement(learnAboutMedicareMedicareEducationLink);
+        actions.perform();
+		String fileName = CommonConstants.MEDICARE_EDUCATION_SECTION_DATA;
+		medicareEducationDropDown = CommonUtility.readPageData(fileName,
+			CommonConstants.PAGE_OBJECT_DIRECTORY_ULAYER_ACQ);
+
+	JSONObject jsonObject = new JSONObject();
+	for (String key : medicareEducationDropDown.getExpectedData().keySet()) {
+		WebElement element = findElement(medicareEducationDropDown.getExpectedData()
+				.get(key));
+		if (element != null) {
+			if (validate(element)) {
+				try {
+					jsonObject.put(key, element.getText());
+				} catch (JSONException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		}
+	}
+	medicareEducationDropDownJson = jsonObject;
+
+	return medicareEducationDropDownJson;
+	}
 
 	public Boolean validate_textField() {
 		
@@ -555,6 +667,20 @@ public class AcquisitionHomePage extends GlobalFooterWebElements {
 
           return false;
           }
+
+	public LearnAboutMedicarePage learnAboutMedicareClick() {
+		validate(navigationSectionMedicareEducationLink);
+		Actions actions = new Actions(driver);
+        actions.moveToElement(navigationSectionMedicareEducationLink);
+        actions.moveToElement(learnAboutMedicareMedicareEducationLink);
+        actions.click().build().perform();
+        if(driver.getTitle().equalsIgnoreCase("Learn About Medicare | AARP® Medicare Plans from UnitedHealthcare®")){
+            return new LearnAboutMedicarePage(driver);
+            }
+
+		return null;
+	}
+
 	
 
 	public RequestHelpAndInformationPage navigateToMaMoreHelpAndInfo() {
@@ -582,7 +708,6 @@ public class AcquisitionHomePage extends GlobalFooterWebElements {
 
 		return null;
 	}
-
 	public Object navigatesToVppSection(String planType) {
 
 		if (validate(feedBackPopUp)) {
@@ -613,6 +738,7 @@ public class AcquisitionHomePage extends GlobalFooterWebElements {
 		return null;
 	}
 
+
 	public PDPRequestHelpAndInformationPage navigateToPDPMoreHelpAndInfo() {
 		
 		
@@ -628,4 +754,137 @@ public class AcquisitionHomePage extends GlobalFooterWebElements {
 		return null;
 				
 	}
+
+
+
+	public Boolean enterInvalidUserNamePassword() {
+		validate(usernameField);
+		usernameField.click();
+		usernameField.sendKeys("");
+		//usernameField.sendKeys(givenAttributesRow.get(0).getCells().get(0));
+		String user = usernameField.getAttribute("value");
+		validate(passwordField);
+		passwordField.click();
+		passwordField.sendKeys("pas");
+		//passwordField.sendKeys(givenAttributesRow.get(0).getCells().get(1));
+		String pass = passwordField.getAttribute("value");
+		if(user.equalsIgnoreCase("") && pass.equalsIgnoreCase("pas")){
+			return true;
+		}
+		return false;
+	}
+	public Boolean checkErrorMessage() {
+		validate(signInButton);
+		signInButton.click();
+		validate(signInButton);
+		return validate(alreadyMemberInvalidCredsErrorMessage);
+	}
+	public Boolean enterValidUserNamePassword() {
+		validate(usernameField);
+		usernameField.click();
+		usernameField.sendKeys("q3ulayer_090");
+		//usernameField.sendKeys(givenAttributesRow.get(0).getCells().get(0));
+		String user = usernameField.getAttribute("value");
+		validate(passwordField);
+		passwordField.click();
+		passwordField.sendKeys("Password@1");
+		//passwordField.sendKeys(givenAttributesRow.get(0).getCells().get(1));
+		String pass = passwordField.getAttribute("value");
+		if(user.equalsIgnoreCase("q3ulayer_090") && pass.equalsIgnoreCase("Password@1")){
+			return true;
+		}
+		return false;
+	}
+	public AccountHomePage signInValid() {
+		validate(signInButton);
+		signInButton.click();
+		//validate(signInButton);
+		Alert alert = driver.switchTo().alert();
+		alert.dismiss();
+		ArrayList<String> tabs = new ArrayList<String> (driver.getWindowHandles());
+	    driver.switchTo().window(tabs.get(1));
+		if(driver.getTitle().equalsIgnoreCase("AARP Medicare Plans | My Account Home")){
+            return new AccountHomePage(driver);
+            }
+
+		return null;
+	}
+	public void hoverourplanslink() {
+		validate(OurPlansLink1);
+			//Hover over text
+			Actions action = new Actions(driver);
+			action.moveToElement(OurPlansLink1).build().perform();
+			
+		// to click
+		//	action.click().build().perform();
+			
+			validate(OurPlansLink1);
+			
+			// TODO Auto-generated method stub
+		
+		}
+			
+
+
+		
+		
+		public AcquisitionHomePage findplansbuttonclick() {
+			validate(FindPlansButton1);
+			FindPlansButton1.click();
+			validate(FindPlansButton1);
+			if(driver.getTitle().equalsIgnoreCase("Medicare Plans | AARP® Medicare Plans from UnitedHealthcare®")){
+		          return new AcquisitionHomePage(driver);
+		          }
+
+		          return null;
+		}
+
+		
+		
+
+
+
+
+		
+		
+
+		public OurPlansPage lookupzipcodeclick() {
+			
+			hoverourplanslink();
+				validate(LookUpZipCode1);
+				LookUpZipCode1.click();
+				validate(LookUpZipCode1);
+				if(driver.getTitle().equalsIgnoreCase("Our Medicare Plan Types | AARP® Medicare Plans from UnitedHealthcare®")){
+			          return new OurPlansPage(driver);
+			          }
+
+			          return null;
+			
+		}		
+				
+				
+				
+	
+
+
+	
+	private PageData ourPlansNav;
+	public JSONObject ourPlansNavJson;
+
+
+	public JSONObject accessingOurPlansNav() {
+		ourPlansHover();
+		return getOurPlanDropDownJson();
+	}
+
+
+	
+	public void ourPlansHover() {
+		Actions actions = new Actions(driver);
+		actions.moveToElement(ourPlansHoverLink);
+		actions.moveToElement(ourPlansDropdownText);
+		actions.click();
+		actions.perform();
+
 }
+	}

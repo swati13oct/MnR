@@ -19,3 +19,16 @@ And user switches back to acquisition home page of UMS Site
 And user clicks on register here link of UMS site
 Then user validates all the elements in the Already a plan member drop down of UMS site
 
+Scenario:To verify error message of sign in button under Already a plan member dropdown displayed on the Brand section of UMS site
+Given the user is on the UHC Medicaresolutions Site
+When the user clicks on Already a member button on the Brand section of UMS site
+And user enters invalid user name, password text field in the Already a plan member drop down of UMS site
+Then user clicks on sign in button and validate the error message in Already a plan member drop down of UMS site
+
+		 
+
+Scenario:To verify sign in button functionality under Already a plan member dropdown displayed on the Brand section of UMS site
+Given the user is on the UHC Medicaresolutions Site
+When the user clicks on Already a member button on the Brand section of UMS site
+And user enters valid user name, password text field in the Already a plan member drop down of UMS site
+Then user clicks on sign in button and validates if it is landed on member my account home page of UMS site

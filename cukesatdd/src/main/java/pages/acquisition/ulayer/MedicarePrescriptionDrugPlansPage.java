@@ -3,6 +3,8 @@ package pages.acquisition.ulayer;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.PageFactory;
 
+
+
 public class MedicarePrescriptionDrugPlansPage extends GlobalFooterWebElements {
 
 	public MedicarePrescriptionDrugPlansPage(WebDriver driver) {
@@ -31,6 +33,16 @@ public LearnAboutMedicarePage learnAboutMedicareFooterClick() {
 		
 	}
 
+public PrescriptionDrugRequestMoreHelpPage requestPersonalhelpInformationClick() {
+	ourPlansHover();
+	validate(prescriptiondrugPlansRequestMoreHelpLink);
+	prescriptiondrugPlansRequestMoreHelpLink.click();
+	validate(prescriptiondrugPlansRequestMoreHelpLink);
+	if(driver.getTitle().equalsIgnoreCase("More Help & Information - Medicare Part D Plans | AARP® Medicare Plans from UnitedHealthcare®")){
+		return new PrescriptionDrugRequestMoreHelpPage(driver);
+	}
+	return null;
+}
 	
 	
 }

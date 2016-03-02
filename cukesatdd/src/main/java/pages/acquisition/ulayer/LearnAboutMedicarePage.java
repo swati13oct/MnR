@@ -1,6 +1,7 @@
 package pages.acquisition.ulayer;
 
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.PageFactory;
 
 import com.thoughtworks.selenium.webdriven.commands.WaitForPageToLoad;
@@ -32,6 +33,23 @@ public PrepareforInitialEnrollmentPage prepareforInitialEnrollmentFooterClick() 
 		}
 		
 	}
+
+public ExploreChangingPlansPage exploreChangingPlansClick() {
+	validate(exploreChangingPlansMedicareEducationLink);
+	Actions actions = new Actions(driver);
+    actions.moveToElement(navigationSectionMedicareEducationLink);
+    actions.moveToElement(exploreChangingPlansMedicareEducationLink);
+    actions.click().build().perform();
+    validate(navigationSectionMedicareEducationLink);
+	if (driver.getTitle().equalsIgnoreCase("Change Medicare Plans | AARP® Medicare Plans from UnitedHealthcare®")) {
+		return new ExploreChangingPlansPage(driver);
+	}else{
+	
+		return null;
+		
+	}
+	
+}
 	
 	
 	
