@@ -162,17 +162,6 @@ public class DceVppPlanSummaryEditDrugUmsStepDefinition {
 	public void user_selects_lowCostOptions(DataTable drugAttributes) {
 		String drugName = drugAttributes.getGherkinRows().get(0).getCells().get(0);
 		SelectGenericPage selectGenericPage = (SelectGenericPage) getLoginScenario().getBean(PageConstants.SELECT_GENERIC_PAGE);
-		/*
-		 * TODO: CodeMonkeys Team: Please refer the Ulayer code to develop bluelayer code. As per the bluelayer flow Manage drug page is returned after selecting generic drug
-		 * 
-		 * As of now passing making temporary changes to remove errors so that Ulayer code can be tested
-		 * 
-		 * 
-		 * */
-		/*
-		 * Start of code comment
-		 * 
-		 */
 		ManageDrugPage manageDrugPage = (ManageDrugPage)selectGenericPage.selectGeneric(drugName);
 		if (manageDrugPage != null) {
 			getLoginScenario().saveBean(PageConstants.MANAGE_DRUG_PAGE,
@@ -353,18 +342,6 @@ public class DceVppPlanSummaryEditDrugUmsStepDefinition {
 	@And("^user view the plan results in UMS site$")
 	public void user_views_plan_results(){
 		
-		/*
-		 * TODO: CodeMonkeys Team: Please refer the Ulayer code to develop bluelayer code. As per the bluelayer flow we should be on Manage drug page to navigate to search plans
-		 * 
-		 * As of now passing making temporary changes to remove errors so that Ulayer code can be tested
-		 * 
-		 * 
-		 * */
-		
-		/*
-		 * START of code comment
-		 * 
-		 */ 
 		ManageDrugPage manageDrugPage = (ManageDrugPage) getLoginScenario().getBean(PageConstants.MANAGE_DRUG_PAGE);
 		VPPPlanSummaryPage healthPlansPage  = manageDrugPage.navigateToPlanSummaryPage();
 		if (healthPlansPage != null) {
