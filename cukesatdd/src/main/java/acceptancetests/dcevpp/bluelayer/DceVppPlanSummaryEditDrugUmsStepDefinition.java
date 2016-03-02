@@ -22,8 +22,8 @@ import pages.acquisition.bluelayer.ManageDrugPage;
 import pages.acquisition.bluelayer.PharmacySearchPage;
 import pages.acquisition.bluelayer.SelectDosagePage;
 import pages.acquisition.bluelayer.SelectGenericPage;
+import pages.acquisition.bluelayer.SelectPharmacyPage;
 import pages.acquisition.bluelayer.VPPPlanSummaryPage;
-import pages.acquisition.ulayer.SelectPharmacyPage;
 import acceptancetests.atdd.data.CommonConstants;
 import acceptancetests.atdd.data.acquisition.PageConstants;
 import acceptancetests.dce.data.DceCommonConstants;
@@ -146,13 +146,6 @@ public class DceVppPlanSummaryEditDrugUmsStepDefinition {
 		String drugFrequency = dosageAttributesMap.get("Drug Frequency");
 		String packages = dosageAttributesMap.get("Packages");
 		
-		/*
-		 * 
-		 * TODO: CodeMonkeys Team: Please refer the Ulayer code to develop bluelayer code.
-		 * 
-		 * As of now passing making temporary changes, added cast to SelectGenericPage
-		 * 
-		 * */
 		SelectGenericPage selectGenericPage = (SelectGenericPage) selectDosagePage.selectDosage(
 				drugDosage, drugQuantity, drugFrequency,packages);
 		if (selectGenericPage != null) {
@@ -169,32 +162,24 @@ public class DceVppPlanSummaryEditDrugUmsStepDefinition {
 	public void user_selects_lowCostOptions(DataTable drugAttributes) {
 		String drugName = drugAttributes.getGherkinRows().get(0).getCells().get(0);
 		SelectGenericPage selectGenericPage = (SelectGenericPage) getLoginScenario().getBean(PageConstants.SELECT_GENERIC_PAGE);
-		/*
-		 * TODO: CodeMonkeys Team: Please refer the Ulayer code to develop bluelayer code. As per the bluelayer flow Manage drug page is returned after selecting generic drug
-		 * 
-		 * As of now passing making temporary changes to remove errors so that Ulayer code can be tested
-		 * 
-		 * 
-		 * */
-		/*
-		 * Start of code comment
-		 * 
-		 * AddDrugPage addDrugPage = selectGenericPage.selectGeneric(drugName);
-		if (addDrugPage != null) {
-			getLoginScenario().saveBean(PageConstants.ADD_DRUG_PAGE,
-					addDrugPage);
+		ManageDrugPage manageDrugPage = (ManageDrugPage)selectGenericPage.selectGeneric(drugName);
+		if (manageDrugPage != null) {
+			getLoginScenario().saveBean(PageConstants.MANAGE_DRUG_PAGE,
+					manageDrugPage);
 			Assert.assertTrue(true);
 		} else {
 			Assert.fail("generic drug selection unsuccessful");
 		}
 		
-		*End of code comment
+		/*End of code comment
 		*/
 		
 	}
 	@And("^user views all the drugs got added in UMS site$")
 	public void user_views_drugs_added() {
 		AddDrugPage addDrugPage = (AddDrugPage) getLoginScenario().getBean(PageConstants.ADD_DRUG_PAGE);
+		ManageDrugPage manageDrugPage = (ManageDrugPage) getLoginScenario().getBean(PageConstants.MANAGE_DRUG_PAGE);
+		
 		String drugsAdded  = addDrugPage.validateDrugsAdded();
 		System.out.println("drugsAdded"+ drugsAdded);
 		getLoginScenario().saveBean(PageConstants.ADD_DRUG_PAGE,
@@ -203,18 +188,8 @@ public class DceVppPlanSummaryEditDrugUmsStepDefinition {
 	
 	@And("^user perform the pharmacy search in UMS site$")
 	public void user_performs_paharmacySearch() {
-		AddDrugPage addDrugPage = (AddDrugPage) getLoginScenario().getBean(PageConstants.ADD_DRUG_PAGE);
-		
-		/*
-		 * TODO: CodeMonkeys Team: Please refer the Ulayer code to develop bluelayer code, As per bluelayer flow the above returned manage drug page is used to navigate to Pharmacy search page
-		 * 
-		 * As of now passing making temporary changes to remove errors so that Ulayer code can be tested
-		 * 
-		 * 
-		 * */
-		
-		/*START of  code comment
-		PharmacySearchPage pharmacySearchPage = addDrugPage.navigateToPharmacyPage();
+		ManageDrugPage manageDrugPage = (ManageDrugPage) getLoginScenario().getBean(PageConstants.MANAGE_DRUG_PAGE);
+		SelectPharmacyPage pharmacySearchPage = manageDrugPage.navigateToPharmacyPage();
 		if (pharmacySearchPage != null) {
 			getLoginScenario().saveBean(PageConstants.PHARMACY_SEARCH_PAGE,
 					pharmacySearchPage);
@@ -222,8 +197,7 @@ public class DceVppPlanSummaryEditDrugUmsStepDefinition {
 		} else {
 			Assert.fail("navigated unsuccessfully to pharmacy page");
 		}
-		END of code comment
-		*/
+		
 	}
 	
 	@And("^user selects pharmacy type and distance in UMS site$")
@@ -241,8 +215,8 @@ public class DceVppPlanSummaryEditDrugUmsStepDefinition {
 				pharmacyType);
 		String distance = pharmacyAttributesMap.get("Distance");
 		getLoginScenario().saveBean(DceCommonConstants.DISTANCE, distance);
-		PharmacySearchPage pharmacySearchPage = (PharmacySearchPage) getLoginScenario().getBean(PageConstants.PHARMACY_SEARCH_PAGE);
-		PharmacySearchPage updatedPharmacyPage = pharmacySearchPage.searchPharmacies(pharmacyType, distance);
+		SelectPharmacyPage selectPharmacyPage = (SelectPharmacyPage) getLoginScenario().getBean(PageConstants.PHARMACY_SEARCH_PAGE);
+		SelectPharmacyPage updatedPharmacyPage = selectPharmacyPage.searchPharmacies(pharmacyType, distance);
 		
 		if (updatedPharmacyPage != null) {
 			getLoginScenario().saveBean(PageConstants.PHARMACY_SEARCH_PAGE,
@@ -295,7 +269,7 @@ public class DceVppPlanSummaryEditDrugUmsStepDefinition {
 	}
 	@And("^user views list of pharmacies available in UMS site$")
 	public void user_views_pharmacyList() {
-		PharmacySearchPage pharmacySearchPage = (PharmacySearchPage) getLoginScenario().getBean(PageConstants.PHARMACY_SEARCH_PAGE);	
+		SelectPharmacyPage pharmacySearchPage = (SelectPharmacyPage) getLoginScenario().getBean(PageConstants.PHARMACY_SEARCH_PAGE);	
 		String pharmacyList = pharmacySearchPage.getPharmacyList();
 		System.out.println("pharmacyList====>"+pharmacyList);
 	}
@@ -303,15 +277,17 @@ public class DceVppPlanSummaryEditDrugUmsStepDefinition {
 	
 	@And("^user selects the pharmacy from the list of pharmacies in UMS site$")
 	public void user_selects_pharmacy(DataTable pharmacyAttributes){
-		PharmacySearchPage pharmacySearchPage = (PharmacySearchPage) getLoginScenario().getBean(PageConstants.PHARMACY_SEARCH_PAGE);
+		SelectPharmacyPage pharmacySearchPage = (SelectPharmacyPage) getLoginScenario().getBean(PageConstants.PHARMACY_SEARCH_PAGE);
 		String pharmacyName = pharmacyAttributes.getGherkinRows().get(0).getCells().get(0);
 		getLoginScenario().saveBean(DceCommonConstants.PHARMACY_NAME,
 				pharmacyName);
-		 AddDrugPage addDrugPage = pharmacySearchPage.selectPharmacy(pharmacyName);
+		String pharmacyType = (String) getLoginScenario().getBean(
+				DceCommonConstants.PHARMACY_TYPE);
+		 ManageDrugPage manageDrugPage = pharmacySearchPage.selectPharmacy(pharmacyName, pharmacyType);
 		 
-		if (addDrugPage != null) {
-				getLoginScenario().saveBean(PageConstants.ADD_DRUG_PAGE,
-						addDrugPage);
+		if (manageDrugPage != null) {
+				getLoginScenario().saveBean(PageConstants.MANAGE_DRUG_PAGE,
+						manageDrugPage);
 				Assert.assertTrue(true);
 			} else {
 				Assert.fail("pharmacy selection fails");
@@ -322,22 +298,10 @@ public class DceVppPlanSummaryEditDrugUmsStepDefinition {
 	@When("^user switches to pharmacy page again in UMS site$")
 	public void user_switches_to_pharmacy(){
 	
-		/*
-		 * TODO: CodeMonkeys Team: Please refer the Ulayer code to develop bluelayer code. As per the bluelayer flow we should be on Manage drug page to navigate to search pharmacy
-		 * 
-		 * As of now passing making temporary changes to remove errors so that Ulayer code can be tested
-		 * 
-		 * 
-		 * */
-		/*
-		 * START of code comment
-		 * 
-		 * AddDrugPage addDrugPage = (AddDrugPage) getLoginScenario().getBean(PageConstants.ADD_DRUG_PAGE);
-		addDrugPage.swithedToSelectPharmacyTab();
+		 ManageDrugPage manageDrugPage = (ManageDrugPage) getLoginScenario().getBean(PageConstants.MANAGE_DRUG_PAGE);
+		 manageDrugPage.swithedToSelectPharmacyTab();
 		 
-		 PharmacySearchPage pharmacySearch = addDrugPage.navigateToUpdatedPharmacyPage();
-		 
-		 
+		 SelectPharmacyPage pharmacySearch = manageDrugPage.navigateToUpdatedPharmacyPage();
 			
 		 JSONObject availablePharmaciesActualJson = pharmacySearch.availablePharmaciesJson;
 		 getLoginScenario().saveBean(DceCommonConstants.AVAILABLE_PHARMACIES_ACTUAL, availablePharmaciesActualJson);
@@ -353,7 +317,7 @@ public class DceVppPlanSummaryEditDrugUmsStepDefinition {
 			System.out.println("======availablePharmaciesExpectedJson======"+availablePharmaciesExpectedJson);
 			
 			
-			*END of code comment
+			/*END of code comment
 			*
 			*/
 	}
@@ -378,19 +342,8 @@ public class DceVppPlanSummaryEditDrugUmsStepDefinition {
 	@And("^user view the plan results in UMS site$")
 	public void user_views_plan_results(){
 		
-		/*
-		 * TODO: CodeMonkeys Team: Please refer the Ulayer code to develop bluelayer code. As per the bluelayer flow we should be on Manage drug page to navigate to search plans
-		 * 
-		 * As of now passing making temporary changes to remove errors so that Ulayer code can be tested
-		 * 
-		 * 
-		 * */
-		
-		/*
-		 * START of code comment
-		 * 
-		 * AddDrugPage addDrugPage = (AddDrugPage) getLoginScenario().getBean(PageConstants.ADD_DRUG_PAGE);
-		VPPPlanSummaryPage healthPlansPage  = addDrugPage.navigateToHealthPlansPage();
+		ManageDrugPage manageDrugPage = (ManageDrugPage) getLoginScenario().getBean(PageConstants.MANAGE_DRUG_PAGE);
+		VPPPlanSummaryPage healthPlansPage  = manageDrugPage.navigateToPlanSummaryPage();
 		if (healthPlansPage != null) {
 			getLoginScenario().saveBean(PageConstants.HEALTH_PLANS_PAGE,
 					healthPlansPage);
@@ -399,7 +352,7 @@ public class DceVppPlanSummaryEditDrugUmsStepDefinition {
 			Assert.fail("plans result page does not accesssed successfully");
 		}
 		
-		*
+		/*
 		*END of code comment
 		*/
 	

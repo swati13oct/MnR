@@ -14,6 +14,7 @@ import pages.acquisition.bluelayer.AcquisitionHomePage;
 import pages.acquisition.bluelayer.AddDrugPage;
 import pages.acquisition.bluelayer.EnterZipCodePage;
 import pages.acquisition.bluelayer.EstimateDrugCostPage;
+import pages.acquisition.bluelayer.ManageDrugPage;
 import pages.acquisition.bluelayer.SelectDosagePage;
 import pages.acquisition.bluelayer.SelectGenericPage;
 import acceptancetests.atdd.data.acquisition.PageConstants;
@@ -152,7 +153,8 @@ public class DceVppAddDrugFowUmsStepDefinition {
 		/*
 		 * START of code comment
 		 * 
-		 * AddDrugPage addDrugPage = selectGenericPage.selectGeneric(drugName);
+		 * 
+		 *AddDrugPage addDrugPage = selectGenericPage.selectGeneric(drugName);
 		if (addDrugPage != null) {
 			getLoginScenario().saveBean(PageConstants.ADD_DRUG_PAGE,
 					addDrugPage);
@@ -166,6 +168,17 @@ public class DceVppAddDrugFowUmsStepDefinition {
 		*END of code comment
 		*
 		*/
+		ManageDrugPage manageDrugPage = (ManageDrugPage)selectGenericPage.selectGeneric(drugName);
+		if (manageDrugPage != null) {
+			getLoginScenario().saveBean(PageConstants.MANAGE_DRUG_PAGE,
+					manageDrugPage);
+			Assert.assertTrue(true);
+		} else {
+			Assert.fail("generic drug selection unsuccessful");
+		}
+		
+		manageDrugPage.addDrugFlowCheck();
+		manageDrugPage.validateAddDrugFlow();
 	}
 	 @After
 	    public void tearDown() {
@@ -214,34 +227,16 @@ public class DceVppAddDrugFowUmsStepDefinition {
 			public void user_selects_lowCost(DataTable drugAttributes) {
 				String drugName = drugAttributes.getGherkinRows().get(0).getCells().get(0);
 				SelectGenericPage selectGenericPage = (SelectGenericPage) getLoginScenario().getBean(PageConstants.SELECT_GENERIC_PAGE);
-				
-				/*
-				 * TODO: CodeMonkeys Team: Please refer the Ulayer code to develop bluelayer code.
-				 * 
-				 * As of now passing making temporary changes to remove errors so that Ulayer code can be tested
-				 * 
-				 * 
-				 * */
-				
-				
-				
-				/*
-				 * START of code comment
-				 * 
-				 * 
-				 * AddDrugPage addDrugPage = selectGenericPage.selectGeneric(drugName);
-				if (addDrugPage != null) {
-					getLoginScenario().saveBean(PageConstants.ADD_DRUG_PAGE,
-							addDrugPage);
+				ManageDrugPage manageDrugPage = (ManageDrugPage)selectGenericPage.selectGeneric(drugName);
+				if (manageDrugPage != null) {
+					getLoginScenario().saveBean(PageConstants.MANAGE_DRUG_PAGE,
+							manageDrugPage);
 					Assert.assertTrue(true);
 				} else {
 					Assert.fail("generic drug selection unsuccessful");
 				}
-				
-				*END of code comment
-				*/
 			}
-			@And("^the user wants to add some more drug$")
+	        @And("^the user wants to add some more drug$")
 			public void user_select_anotherdrug(){
 				AddDrugPage addDrugPage = (AddDrugPage) getLoginScenario().getBean(
 						PageConstants.ADD_DRUG_PAGE);

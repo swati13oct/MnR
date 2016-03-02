@@ -11,6 +11,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+
 import acceptancetests.atdd.data.CommonConstants;
 import acceptancetests.atdd.data.ElementData;
 import acceptancetests.atdd.data.PageData;
@@ -109,6 +110,12 @@ public class AddDrugPage extends UhcDriver {
 	public SelectDosagePage selectDrug(String drugName) {
 		ElementData drugElement = new ElementData("xpath",
 				"//div[contains(text(), '" + drugName + "')]");
+		try {
+			Thread.sleep(5000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		WebElement element = findElement(drugElement);
 		element.click();
 
