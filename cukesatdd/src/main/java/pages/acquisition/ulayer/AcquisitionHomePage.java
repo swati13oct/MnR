@@ -30,6 +30,9 @@ public class AcquisitionHomePage extends GlobalFooterWebElements {
 
 	@FindBy(id = "zipcodevalue")
 	private WebElement zipCodeField;
+	
+	@FindBy(className = "fd_myPlans")
+	private WebElement myPlansTab;
 
 	@FindBy(linkText = "prescriptions")
 	private WebElement prescriptionsLink;
@@ -865,4 +868,30 @@ public class AcquisitionHomePage extends GlobalFooterWebElements {
 		actions.click();
 		actions.perform();
 }
+
+	public AcquisitionHomePage cookieValid() {
+		validate(signInButton);
+		signInButton.click();
+		//validate(signInButton);
+		Alert alert = driver.switchTo().alert();
+		alert.dismiss();
+		ArrayList<String> tabs = new ArrayList<String> (driver.getWindowHandles());
+	    driver.switchTo().window(tabs.get(1));
+		validate(myPlansTab);
+		if (getCookieName("membervisited") != null) {
+			driver.switchTo().window(tabs.get(0));
+			if (getCookieName("membervisited") != null) {
+				return new AcquisitionHomePage(driver);
+			}
+		}
+
+		return null;
+	}
+
+	public Boolean alreadyMemberActiveValid() {
+		driver.navigate().refresh();
+		validate(signInButton);
+		return validate(signInButton);
+	}
+	
 	}

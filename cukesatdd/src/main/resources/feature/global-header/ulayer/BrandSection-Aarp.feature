@@ -33,3 +33,11 @@ When the user clicks on Already a member button on the Brand section of AARP sit
 And user enters valid user name, password text field in the Already a plan member drop down of AARP site
 Then user clicks on sign in button and validates if it is landed on member my account home page of AARP site
 
+Scenario:To verify cookie created on clicking sign in button under Already a plan member dropdown displayed on the Brand section of AARP site
+Given user is on acquisition home page of AARP Site
+When the user clicks on Already a member button on the Brand section of AARP site
+And user enters valid user name, password text field in the Already a plan member drop down of AARP site
+Then user clicks on sign in button and validates if the cookie is created in Acquisition AARP site
+And user reloads the AARP site page and accesses Already a member dropdown
+Then user validates all the elements in the Already a plan member drop down of AARP site
+
