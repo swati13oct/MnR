@@ -578,30 +578,6 @@ public SiteMapUMSPage siteMapFooterClick() {
 	}
 
 
-	public Boolean signin_error() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-
-	public Boolean signinErrorValidation() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-
-	public Boolean signin_successful() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-
-	public AccountHomePage signinClick() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-
 	public Boolean enterInvalidUserNamePassword() {
 		validate(usernameField);
 		usernameField.click();
