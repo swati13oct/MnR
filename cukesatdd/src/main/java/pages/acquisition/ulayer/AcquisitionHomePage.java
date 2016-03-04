@@ -869,7 +869,7 @@ public class AcquisitionHomePage extends GlobalFooterWebElements {
 		actions.perform();
 }
 
-	public AcquisitionHomePage cookieValid() {
+	public Boolean cookieValid() {
 		validate(signInButton);
 		signInButton.click();
 		//validate(signInButton);
@@ -881,16 +881,57 @@ public class AcquisitionHomePage extends GlobalFooterWebElements {
 		if (getCookieName("membervisited") != null) {
 			driver.switchTo().window(tabs.get(0));
 			if (getCookieName("membervisited") != null) {
-				return new AcquisitionHomePage(driver);
+				return true;
 			}
 		}
 
-		return null;
+		return false;
 	}
 
 	public Boolean alreadyMemberActiveValid() {
+		
+		
+		validate(signInButton);
+		String timerId = alreadyPlanMemberButtonInactive.getAttribute("id");
+		if(timerId.contains("cookie")){
+			if(cookieValid()){
+			driver.navigate().refresh();
+			String[] parts = timerId.split("-");
+			String timerString = parts[1];
+			int timer = Integer.parseInt(timerString);
+			if(timer > 0){
+			return validate(signInButton);
+			}
+			}
+		}else if(timerId.contains("visitor")){
+			String[] parts = timerId.split("-");
+			String timerString = parts[1];
+			int timer = Integer.parseInt(timerString);
+			if(timer > 0){
+			return validate(signInButton);
+			}
+
+		}
+		return false;
+	}
+
+	public Boolean cookieTimerValid() {
 		driver.navigate().refresh();
 		validate(signInButton);
+		String timerId = alreadyPlanMemberButtonInactive.getAttribute("id");
+		if(timerId.contains("cookie") || timerId.contains("visitor")){
+			
+			String[] parts = timerId.split("-");
+			String timerString = parts[1];
+			int timer = Integer.parseInt(timerString);
+			timer = timer*1000;
+			System.out.println("timer in milli secs "+timer);
+			try {
+				Thread.sleep(timer);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+		}
 		return validate(signInButton);
 	}
 	
