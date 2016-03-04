@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.Cookie;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -280,6 +281,11 @@ public abstract class UhcDriver {
 	public String getTitle(){
 		return driver.getTitle();
 	}
+	
+	public Cookie getCookieName(String cookieName){
+		return driver.manage().getCookieNamed(cookieName);
+	}
+	
 
 	public abstract void openAndValidate();
 
