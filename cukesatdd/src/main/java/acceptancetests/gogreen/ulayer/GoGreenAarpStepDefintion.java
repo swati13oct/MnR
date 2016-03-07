@@ -1,9 +1,6 @@
 package acceptancetests.gogreen.ulayer;
 
-import gherkin.formatter.model.DataTableRow;
-
 import java.util.ArrayList;
-import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -34,7 +31,6 @@ import cucumber.table.DataTable;
  *
  */
 public class GoGreenAarpStepDefintion {
-	
 
 	@Autowired
 	MRScenario loginScenario;
@@ -42,7 +38,7 @@ public class GoGreenAarpStepDefintion {
 	public MRScenario getLoginScenario() {
 		return loginScenario;
 	}
-	
+
 	@Given("^registered member for go green in AARP site$")
 	public void login_with_member_aarp(DataTable memberAttributes) {
 
@@ -110,18 +106,23 @@ public class GoGreenAarpStepDefintion {
 	public void views_benefits_and_Coverage() {
 		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario()
 				.getBean(PageConstants.ACCOUNT_HOME_PAGE);
-		
-		MyPreferencesPage myPreferencesPage = accountHomePage.clicksOnGoGreenIcon();
+
+		MyPreferencesPage myPreferencesPage = accountHomePage
+				.clicksOnGoGreenIcon();
 
 		/* Get expected data */
 		@SuppressWarnings("unchecked")
 		Map<String, JSONObject> expectedDataMap = (Map<String, JSONObject>) getLoginScenario()
 		.getBean(CommonConstants.EXPECTED_DATA_MAP);
+		String key = ProfnPrefCommonConstants.BEFORE_UPDATE;
 		JSONObject myPreferencesExpectedJson = myPreferencesPage
-				.getExpectedData(expectedDataMap);
+				.getExpectedData(expectedDataMap, key);
 		getLoginScenario().saveBean(
 				ProfnPrefCommonConstants.MY_PREFERENCES_EXPECTED,
 				myPreferencesExpectedJson);
+		getLoginScenario().saveBean(
+				ProfnPrefCommonConstants.MY_PREFERENCES_BEFORE_UPDATE_EXPECTED,
+				myPreferencesExpectedJson); // used while resetting preferences
 
 		JSONObject myPreferencesActualJson = null;
 		if (myPreferencesPage != null) {
@@ -133,7 +134,7 @@ public class GoGreenAarpStepDefintion {
 		getLoginScenario().saveBean(
 				ProfnPrefCommonConstants.MY_PREFERENCES_ACTUAL,
 				myPreferencesActualJson);
-		
+
 		/* Validations */
 		try {
 			JSONAssert.assertEquals(myPreferencesExpectedJson,
@@ -143,30 +144,26 @@ public class GoGreenAarpStepDefintion {
 		}
 
 	}
-	
-	@And("^the user updates delivery preference with the following details in AARP site$")
-	public void updates_delivery_preference_details_aarp(DataTable prefAttributes)
-	{
-		/* Reading the given attribute from feature file */
-		List<DataTableRow> prefAttributesRow = prefAttributes
-				.getGherkinRows();
-		Map<String, String> prefAttributesMap = new LinkedHashMap<String, String>();
-		for (int i = 0; i < prefAttributesRow.size(); i++) {
-			prefAttributesMap.put(prefAttributesRow.get(i).getCells()
-					.get(0), prefAttributesRow.get(i).getCells().get(1));
-		}
-		
+
+	@And("^the user updates preferences by changing delivery preferences for corresponding document name in AARP Site$")
+	public void user_edits_doc_name_and_delivery_pref(
+			DataTable profileAttributes) {
+
+		String preferences = profileAttributes.getGherkinRows().get(0)
+				.getCells().get(0);
+
 		MyPreferencesPage myPreferencesPage = (MyPreferencesPage) getLoginScenario()
 				.getBean(PageConstants.MY_PREFERENCES_PAGE);
-		
-		myPreferencesPage = myPreferencesPage.updatesDeliveryPreference(prefAttributesMap);
-		
+		myPreferencesPage.editDocDetails(preferences);
+		myPreferencesPage = myPreferencesPage.updatesDeliveryPreference();
+
 		/* Get expected data */
 		@SuppressWarnings("unchecked")
 		Map<String, JSONObject> expectedDataMap = (Map<String, JSONObject>) getLoginScenario()
 		.getBean(CommonConstants.EXPECTED_DATA_MAP);
+		String key = ProfnPrefCommonConstants.AFTER_UPDATE;
 		JSONObject myPreferencesExpectedJson = myPreferencesPage
-				.getExpectedData(expectedDataMap);
+				.getExpectedData(expectedDataMap, key);
 		getLoginScenario().saveBean(
 				ProfnPrefCommonConstants.MY_PREFERENCES_EXPECTED,
 				myPreferencesExpectedJson);
@@ -181,13 +178,12 @@ public class GoGreenAarpStepDefintion {
 		getLoginScenario().saveBean(
 				ProfnPrefCommonConstants.MY_PREFERENCES_ACTUAL,
 				myPreferencesActualJson);
-		
+
 	}
 
-	
-	@Then("^the user validates the updated delivery preferences in AARP site$")
-	public void validates_updated_delivery_preferences_aarp()
-	{
+	@Then("^the user validates the updated preferences in AARP site$")
+	public void user_validates_updated_preferences_aarp() {
+
 		MyPreferencesPage myPreferencesPage = (MyPreferencesPage) getLoginScenario()
 				.getBean(PageConstants.MY_PREFERENCES_PAGE);
 		JSONObject myPreferencesActualJson = (JSONObject) getLoginScenario()
@@ -195,6 +191,11 @@ public class GoGreenAarpStepDefintion {
 		JSONObject myPreferencesExpectedJson = (JSONObject) getLoginScenario()
 				.getBean(ProfnPrefCommonConstants.MY_PREFERENCES_EXPECTED);
 
+		System.out.println("myPreferencesActualJson-->"
+				+ myPreferencesActualJson.toString());
+		System.out.println("myPreferencesExpectedJson-->"
+				+ myPreferencesExpectedJson.toString());
+
 		/* Validations */
 		try {
 			JSONAssert.assertEquals(myPreferencesExpectedJson,
@@ -203,9 +204,23 @@ public class GoGreenAarpStepDefintion {
 			e.printStackTrace();
 		}
 
+		JSONObject myPreferencesJson = (JSONObject) getLoginScenario().getBean(
+				ProfnPrefCommonConstants.MY_PREFERENCES_BEFORE_UPDATE_EXPECTED);
+
+		myPreferencesPage = myPreferencesPage
+				.resetPreferences(myPreferencesJson);
+
+		if (myPreferencesPage != null) {
+			getLoginScenario().saveBean(PageConstants.MY_PREFERENCES_PAGE,
+					myPreferencesPage);
+			Assert.assertTrue(true);
+		} else {
+			Assert.fail("Reset failed");
+		}
 		myPreferencesPage.logOut();
+
 	}
-	
+
 	@After
 	public void tearDown() {
 

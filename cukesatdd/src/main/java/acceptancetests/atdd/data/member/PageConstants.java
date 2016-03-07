@@ -105,6 +105,8 @@ public class PageConstants {
 	public static final String LOGIN_PAGE = "loginPage";
 
 	public static final String HEALTH_AND_WELLNESS_PAGE = "healthAndWellnessPage";
+
+	public static final String CONTACT_US_PAGE = "contactUsPage";
 	
 
 }

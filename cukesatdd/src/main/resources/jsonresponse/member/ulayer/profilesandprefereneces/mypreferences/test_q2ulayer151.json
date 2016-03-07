@@ -1,9 +1,5 @@
 {
  "beforeUpdate":{
-				   "planStatus1":"ACTIVE",
-				   "planName1":"AARP MedicareRx Preferred (PDP)",
-				   "memberName":"Welcome EGJR TIJRQGAD",
-				   "memberId1":"0019389581",
 				   "preferences":[
 								      {
 								         "deliveryPreference":"U.S. Mail",
@@ -24,10 +20,6 @@
 				   				]
 				},
 "afterUpdate":{
-				   "planStatus1":"ACTIVE",
-				   "planName1":"AARP MedicareRx Preferred (PDP)",
-				   "memberName":"Welcome EGJR TIJRQGAD",
-				   "memberId1":"0019389581",
 				   "preferences":[
 								      {
 								         "deliveryPreference":"Online",
