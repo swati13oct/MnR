@@ -1,4 +1,4 @@
-@headerUlayer
+@global
 Feature:To test Brand section of AARP site header
 Scenario:To verify links displayed in the Brand section of AARP site
 Given user is on acquisition home page of AARP Site

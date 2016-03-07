@@ -15,7 +15,7 @@ import cucumber.junit.Cucumber;
 @Cucumber.Options(glue = { "atdd.framework","acceptancetests.ourplansdropdown.ulayer" }, 
 		features = { "feature/ourplans-dropdown" }, 
 		format = {
-		"pretty", "html:reports/test-report" }, tags ={"@ourplansULayerTest"})
+		"pretty", "html:reports/test-report" }, tags ={"@ourplans"})
 public class RunMRCukesOurPlansDropdown {
 
 }

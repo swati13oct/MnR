@@ -1,4 +1,4 @@
-@pharmacylocatorums1
+@pharmacylocator
 Feature:To test Locate a Pharmacy tool in UMS site
 Scenario Outline:To verify available pharmacies for default zipcode in UMS site
 Given registered member to verify locate a pharmacy in UMS Site

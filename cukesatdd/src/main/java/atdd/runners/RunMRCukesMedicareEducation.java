@@ -15,7 +15,7 @@ import cucumber.junit.Cucumber;
 @Cucumber.Options(glue = { "atdd.framework","acceptancetests.headernavigation.bluelayer" }, 
 		features = { "feature/medicare-education" }, 
 		format = {
-		"pretty", "html:reports/test-report" }, tags ={"@medicareEducationBluelayer"})
-public class RunMRCukesNavigationMedicareEducationBlueLayer {
+		"pretty", "html:reports/test-report" }, tags ={"@medicareEducation"})
+public class RunMRCukesMedicareEducation {
 
 }

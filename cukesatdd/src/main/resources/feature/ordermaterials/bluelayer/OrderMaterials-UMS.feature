@@ -1,4 +1,4 @@
-@ordermaterialsums
+@ordermaterials
 Feature:To test order plan materials flow in UHC site
 Scenario Outline:Verify order plan materials in UHC site for federal members
 Given registered UHC member for order plan materials with following attributes 

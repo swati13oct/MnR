@@ -1,4 +1,4 @@
-@TFN
+@tfn
 Feature: To test TFN in Home Page footer for  AARP site
 Scenario Outline: Verify TFN in Home page footer
 Given the user navigates to the AARP Home page from any search engine

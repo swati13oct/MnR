@@ -1,4 +1,5 @@
-@claims1Feature:To test the medical claims summary and details flow in UMS site
+@claims
+Feature:To test the medical claims summary and details flow in UMS site
 Scenario Outline:Verify the medical claim summary  and details for selected time period in UMS site
 Given the registered UHC with following attributes in UMS site for medical claims
 	| Plan Type   | <planType>   |

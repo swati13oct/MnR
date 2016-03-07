@@ -1,4 +1,4 @@
-@estimateCost
+@druglookup
 Feature: To test estimate drug cost flow in UMS site
 Scenario Outline: Verify drug cost information in UMS site
 Given registered UHC member with following details for estimate drug cost

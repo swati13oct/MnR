@@ -14,7 +14,7 @@ import cucumber.junit.Cucumber;
 @Cucumber.Options(glue = { "atdd.framework","acceptancetests.ordermaterials" }, 
 		features = { "feature/ordermaterials" }, 
 		format = {
-		"pretty", "html:reports/test-report" }, tags ={"@ordermaterialsums"})
+		"pretty", "html:reports/test-report" }, tags ={"@ordermaterials"})
 
 public class RunMRCukesOrderPlanMaterials {
 	

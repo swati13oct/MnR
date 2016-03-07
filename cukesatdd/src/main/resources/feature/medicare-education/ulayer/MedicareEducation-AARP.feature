@@ -1,4 +1,4 @@
-@medicareEducationUlayer
+@medicareEducation
 Feature:To test Our Plans Drop Down links in AARP site
 Scenario:To verify links displayed in Our Plans Drop Down in AARP site
 Given user is on the AARP Medicare Plans home page

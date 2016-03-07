@@ -1,4 +1,4 @@
-@prescriptionDrugcostandSummaryums
+@prescriptionDrugcostandSummary
 Feature: To test Drug Costs & Benefits Summary on UMS site
 Scenario Outline: Verify Drug Costs & Benefits Summary in UMS site
 Given registered UHC with following details for Drug Costs & Benefits Summary flow

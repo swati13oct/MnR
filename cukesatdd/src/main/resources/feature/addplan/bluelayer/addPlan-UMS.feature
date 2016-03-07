@@ -1,4 +1,4 @@
-@addPlanTestums
+@addPlan
 Feature: To test the addPlan flow in UMS site
 Scenario Outline: Verify plans added with existing plans in UMS site
 Given the details of user to be registered in UMS site

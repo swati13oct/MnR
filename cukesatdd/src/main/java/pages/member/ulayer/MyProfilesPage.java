@@ -366,6 +366,8 @@ public class MyProfilesPage extends UhcDriver{
 		}
 		myProfilesJson = jsonObject;
 		
+		System.out.println("myProfilesJson----->"+myProfilesJson);
+		
 	}
 
 

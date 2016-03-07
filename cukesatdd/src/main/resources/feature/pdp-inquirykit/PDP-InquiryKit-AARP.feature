@@ -1,6 +1,6 @@
-@pdpEnquiryKitTest
-Feature:To test PDP enquiry flow in AARP site
-Scenario Outline:To verify PDP enquiry flow in AARP site
+@pdpInquiryKit
+Feature:To test PDP inquiry flow in AARP site
+Scenario Outline:To verify PDP inquiry flow in AARP site
 Given the user is on the AARP Medicare Site landing page
 When the user navigates to Request More Help and Information page under pdp section in AARP Site
 And the user accesses the Request Plan Information and Enrollment Materials in AARP site
@@ -20,7 +20,7 @@ And the user submits by entering following details in Order Enrollment Informati
 	| State			| <state>		|
 	| Zip Code		| <zipCode>		|
 	| Daytime phone number	| <dayTimePhNumber>	|
-Then the user validates the enquiry kit confirmation page in AARP site
+Then the user validates the inquiry kit confirmation page in AARP site
 
 Examples:
 	| firstName	| lastName | dob	| relationShip				| emailAddress | confirmEmailAddress	| emailUpdates	| gender | medicare	| addressLine1  | addressLine2	| city		| state		| zipCode | dayTimePhNumber	|

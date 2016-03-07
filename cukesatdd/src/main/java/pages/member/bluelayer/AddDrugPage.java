@@ -96,7 +96,7 @@ String drugXpath = "//*[contains(text(),'" + drugName + "')]";
 			}
 		}
 		addDrugJson = jsonObject;
-		
+		System.out.println("addDrugJson----->"+addDrugJson);
 	}
 
 	public JSONObject getExpectedData(Map<String, JSONObject> expectedDataMap, String drugInitials) {

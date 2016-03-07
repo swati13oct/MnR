@@ -1,4 +1,4 @@
-@TFN
+@tfn
 Feature: To test TFN in Home Page footer for  UMS site
 Scenario Outline: Verify TFN in Home page footer
 Given the user navigates to the UMS Home page from any search engine

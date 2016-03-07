@@ -1,4 +1,4 @@
-@claims1
+@claims
 Feature:To test the drug claims summary and details flow in AARP site
 Scenario Outline:Verify the drug claim summary and details for selected time period
 Given the registered AMP with following attributes in AARP site for drug claims

@@ -1,4 +1,4 @@
-@profAndPrefTest
+@profileandpreferences
 Feature:To test My Profile & Preferences flow in UMS site
 Scenario Outline:To verify My Profiles in UMS site
 Given registered member for My Profile & Preferences in UMS site

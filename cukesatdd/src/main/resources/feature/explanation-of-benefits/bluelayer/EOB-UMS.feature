@@ -1,4 +1,4 @@
-@eob1
+@eob
 Feature:To test EOB in UMS site
 Scenario Outline:To verify Medical EOB in UMS site
 Given registered UHC with following details for EOB flow

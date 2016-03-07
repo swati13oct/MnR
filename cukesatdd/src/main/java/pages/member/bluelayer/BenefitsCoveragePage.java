@@ -74,6 +74,8 @@ public class BenefitsCoveragePage extends UhcDriver {
 
 		}
 		benefitsAndCoverageJson = jsonObject;
+		
+		System.out.println("benefitsAndCoverageJson----->"+benefitsAndCoverageJson);
 
 	}
 

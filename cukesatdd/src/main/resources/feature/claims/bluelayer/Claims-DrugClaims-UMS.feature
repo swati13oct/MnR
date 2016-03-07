@@ -1,4 +1,4 @@
-@drugClaimsUms
+@claims
 Feature:To test the drug claims summary and details flow in UMS site
 Scenario Outline:Verify the drug claim summary and details for selected time period
 Given the registered UMS with following attributes in UMS site for drug claims

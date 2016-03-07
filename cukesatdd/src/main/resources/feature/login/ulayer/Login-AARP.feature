@@ -1,4 +1,4 @@
-@loginTestAARP
+@login
 Feature: To test Login on AARP site 
 Scenario Outline: Verify login in AARP site for MA or MAPD combo member having three plans  
 Given registered AMP with following attributes

@@ -1,4 +1,4 @@
-@goGreenTest
+@goGreen
 Feature: To test go green on AARP site 
 Scenario Outline: Verify go green in AARP site for federal plan type member  
 Given registered member for go green in AARP site

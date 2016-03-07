@@ -1,4 +1,4 @@
-@headerOurPlansNavULayer
+@global
 Feature:To test Our Plans drop down navigation in AARP site
 Scenario:To verify links displayed in Our Plans drop down of AARP site
 Given user is on the home page of AARP Site

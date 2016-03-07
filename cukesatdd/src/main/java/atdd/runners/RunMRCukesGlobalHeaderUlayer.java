@@ -15,7 +15,7 @@ import cucumber.junit.Cucumber;
 @Cucumber.Options(glue = { "atdd.framework","acceptancetests.globalheader.ulayer" }, 
 		features = { "feature/global-header" }, 
 		format = {
-		"pretty", "html:reports/test-report" }, tags ={"@headerULayerTest"})
+		"pretty", "html:reports/test-report" }, tags ={"@global"})
 public class RunMRCukesGlobalHeaderUlayer {
 
 }

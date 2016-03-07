@@ -1,4 +1,4 @@
-@registrationUms
+@registration
 Feature:To test registration flow in UMS site
 Scenario Outline: To verify registration for two plan combo member with out perks in UMS site
 Given the following details with which the member registers in UMS site

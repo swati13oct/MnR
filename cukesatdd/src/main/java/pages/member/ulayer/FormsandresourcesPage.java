@@ -123,6 +123,8 @@ public class FormsandresourcesPage extends UhcDriver {
 			}
 		}
 		formsAndResourcesJson = jsonObject;
+		
+		System.out.println("formsAndResourcesJson----->"+formsAndResourcesJson);
 
 	}
 

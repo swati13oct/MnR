@@ -110,6 +110,8 @@ public class ViewDrugCostPage extends UhcDriver {
 
 		}
 		viewDrugCostJson = jsonObject;
+		
+		System.out.println("viewDrugCostJson----->"+viewDrugCostJson);
 
 	}
 

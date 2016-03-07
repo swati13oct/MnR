@@ -16,7 +16,6 @@ import pages.acquisition.bluelayer.EnterZipCodePage;
 import pages.acquisition.bluelayer.EstimateDrugCostPage;
 import pages.acquisition.bluelayer.ManageDrugPage;
 import pages.acquisition.bluelayer.PharmacySelectorPage;
-import pages.acquisition.bluelayer.PlanDetailsPage;
 import pages.acquisition.bluelayer.SelectPharmacyPage;
 import pages.acquisition.bluelayer.VPPPlanSummaryPage;
 import pages.acquisition.bluelayer.SelectDosagePage;
@@ -34,7 +33,7 @@ import cucumber.table.DataTable;
  *
  */
 
-public class DceVppPlanDetailsUmsStepDefinition {
+public class DceVppUmsStepDefinition {
 
 	@Autowired
 	MRScenario loginScenario;
@@ -43,7 +42,7 @@ public class DceVppPlanDetailsUmsStepDefinition {
 		return loginScenario;
 	}
 
-	@Given("^the zipcode county name for drug search in the UMS site$")
+	@Given("^the zipcode and county information DCE to Vpp Plan summary flow in UMS site$")
 	public void zipcode_and_planyear_details(DataTable givenAttributes) {
 		List<DataTableRow> givenAttributesRow = givenAttributes
 				.getGherkinRows();
@@ -53,7 +52,6 @@ public class DceVppPlanDetailsUmsStepDefinition {
 			givenAttributesMap.put(givenAttributesRow.get(i).getCells().get(0),
 					givenAttributesRow.get(i).getCells().get(1));
 		}
-
 		String planYear = null;
 		if(givenAttributesMap.containsKey("Plan Year"))
 		{
@@ -67,10 +65,7 @@ public class DceVppPlanDetailsUmsStepDefinition {
 				.switchToPrescriptionDrug();
 		EnterZipCodePage enterZipCode = estimateDrugCost.getStarted();
 		AddDrugPage addDrugPage = enterZipCode.getZipCodeCounty(zipCode,county,planYear);
-		/*PlansummaryPage pg = new PlansummaryPage(wd);
-		PlanDetailsPage planDetailsPage = pg.navigateToPlanDetails("UMS MedicareComplete SecureHorizons Plan 2 (HMO)");
-		String planDetails = planDetailsPage.getPlanDetails();
-		System.out.println("planDetails===========>"+planDetails);*/
+
 		if (addDrugPage != null) {
 			getLoginScenario().saveBean("webDriver", wd);
 			getLoginScenario().saveBean(PageConstants.ADD_DRUG_PAGE,
@@ -81,7 +76,7 @@ public class DceVppPlanDetailsUmsStepDefinition {
 		}
 	}
 
-	@When("^the user search the drug with drug initials in the UMS site$")
+	@When("^user search the drug using drug initials in UMS site$")
 	public void user_validated_drugInformation(DataTable givenAttributes) {
 		String drugInitials = givenAttributes.getGherkinRows().get(0)
 				.getCells().get(0);
@@ -90,7 +85,7 @@ public class DceVppPlanDetailsUmsStepDefinition {
 		addDrugPage.enterDrugInitials(drugInitials);
 	}
 
-	@And("^a drug list appears with 5 drugs in the UMS site$")
+	@And("^user access the drug list having 5 drugs in UMS site$")
 	public void drug_list_with_drugs() {
 		AddDrugPage addDrugPage = (AddDrugPage) getLoginScenario().getBean(
 				PageConstants.ADD_DRUG_PAGE);
@@ -99,7 +94,7 @@ public class DceVppPlanDetailsUmsStepDefinition {
 
 	}
 
-	@And("^the user selects drug name in the drug list in the UMS site$")
+	@And("^the user selects following drug in UMS site$")
 	public void user_selects_drugname_druglist(DataTable drugNameAttributes) {
 
 		String drugName = drugNameAttributes.getGherkinRows().get(0).getCells()
@@ -118,7 +113,7 @@ public class DceVppPlanDetailsUmsStepDefinition {
 
 	}
 
-	@And("^the user selects the following dosage information in the UMS site$")
+	@And("^user selects the following dosage information in UMS site$")
 	public void user_selects_dosage_information(DataTable dosagesAttributes) {
 		SelectDosagePage selectDosagePage = (SelectDosagePage) getLoginScenario()
 				.getBean(PageConstants.SELECT_DOSAGE_PAGE);
@@ -146,11 +141,11 @@ public class DceVppPlanDetailsUmsStepDefinition {
 
 	}
 	
-	@And("^the user selects low cost options information in the UMS site$")
+	@And("^the user selects the low cost options in UMS site$")
 	public void user_selects_lowCostOptions(DataTable drugAttributes) {
 		String drugName = drugAttributes.getGherkinRows().get(0).getCells().get(0);
 		SelectGenericPage selectGenericPage = (SelectGenericPage) getLoginScenario().getBean(PageConstants.SELECT_GENERIC_PAGE);
-		ManageDrugPage manageDrugPage =selectGenericPage.selectGeneric(drugName);
+		ManageDrugPage manageDrugPage = selectGenericPage.selectGeneric(drugName);
 		if (manageDrugPage != null) {
 			getLoginScenario().saveBean(PageConstants.MANAGE_DRUG_PAGE,
 					manageDrugPage);
@@ -160,18 +155,18 @@ public class DceVppPlanDetailsUmsStepDefinition {
 		}
 		
 	}
-	@And("^the user views all the added drugs in the UMS site$")
+	@And("^user views all the drugs added in UMS site$")
 	public void user_views_drugs_added() {
 		ManageDrugPage manageDrugPage = (ManageDrugPage) getLoginScenario().getBean(
 				PageConstants.MANAGE_DRUG_PAGE);
-		/*String drugsAdded  = addDrugPage.validateDrugsAdded();
-		System.out.println("drugsAdded"+ drugsAdded);*/
+	
 	}
 	
-	@And("^the user performs pharmacy search in the UMS site$")
+	@And("^user performs the pharmacy search in UMS site$")
 	public void user_performs_paharmacySearch() {
 		ManageDrugPage manageDrugPage = (ManageDrugPage) getLoginScenario().getBean(
 				PageConstants.MANAGE_DRUG_PAGE);
+		
 		SelectPharmacyPage pharmacySearchPage = manageDrugPage.navigateToPharmacyPage();
 		if (pharmacySearchPage != null) {
 			getLoginScenario().saveBean(PageConstants.PHARMACY_SEARCH_PAGE,
@@ -182,7 +177,7 @@ public class DceVppPlanDetailsUmsStepDefinition {
 		}
 	}
 	
-	@And("^the user selects the pharmacy type and distance in the UMS site$")
+	@And("^user selects the pharmacy type and distance in UMS site$")
 	public void user_selects_pharmacyType_and_distance(DataTable pharmacyAttributes) {
 		List<DataTableRow> pharmacyAttributesRow = pharmacyAttributes
 				.getGherkinRows();
@@ -198,7 +193,7 @@ public class DceVppPlanDetailsUmsStepDefinition {
 		pharmacySearchPage.selectPharmacyType(pharmacyType, distance);
 	}
 	
-	@And("^the user views list of pharmacies available in the UMS site$")
+	@And("^user views the list of pharmacies available in UMS site$")
 	public void user_views_pharmacyList() {
 		PharmacySelectorPage pharmacySearchPage = (PharmacySelectorPage) getLoginScenario().getBean(PageConstants.PHARMACY_SEARCH_PAGE);	
 		String pharmacyList = pharmacySearchPage.getPharmacyList();
@@ -206,7 +201,7 @@ public class DceVppPlanDetailsUmsStepDefinition {
 	}
 	
 	
-	@And("^the user selects from the list of pharmacies in the UMS site$")
+	@And("^user selects a pharmacy from the list of pharmacies in UMS site$")
 	public void user_selects_pharmacy(DataTable pharmacyAttributes){
 		PharmacySelectorPage pharmacySearchPage = (PharmacySelectorPage) getLoginScenario().getBean(PageConstants.PHARMACY_SEARCH_PAGE);
 		String pharmacyName = pharmacyAttributes.getGherkinRows().get(0).getCells().get(0);
@@ -221,7 +216,7 @@ public class DceVppPlanDetailsUmsStepDefinition {
 		
 	}
 	
-	@And("^the user views the plan results in the UMS site$")
+	@And("^user views the plan results in UMS site$")
 	public void user_views_plan_results(){
 		ManageDrugPage manageDrugPage = (ManageDrugPage) getLoginScenario().getBean(
 				PageConstants.MANAGE_DRUG_PAGE);
@@ -236,13 +231,12 @@ public class DceVppPlanDetailsUmsStepDefinition {
 	
 	}
 	
-	@And("^user views the plan details for the following plan in UMS site$")
-	public void user_views_plan_details(DataTable planAttributes){
+	@And("^user views the plan summary for the following plan in UMS site$")
+	public void user_views_plan_summary(DataTable planAttributes){
 		String planName  = planAttributes.getGherkinRows().get(0).getCells().get(0);
 		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario().getBean(PageConstants.HEALTH_PLANS_PAGE);
-		PlanDetailsPage planDetailsPage = plansummaryPage.navigateToPlanDetails(planName);
-		String planDetailsContent  = planDetailsPage.getPlanDetails();
-		System.out.println("planDetailsContent============>"+planDetailsContent);
+		String planSummaryContent  = plansummaryPage.viewplans(planName);
+		System.out.println("planSummaryContent=======>"+planSummaryContent);		
 	}
 	
 	 @After

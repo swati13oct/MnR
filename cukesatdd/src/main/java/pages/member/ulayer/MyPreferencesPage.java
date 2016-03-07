@@ -175,6 +175,8 @@ public class MyPreferencesPage extends UhcDriver {
 
 		}
 		myPreferencesJson = jsonObject;
+		
+		System.out.println("myPreferencesJson----->"+myPreferencesJson);
 
 	}
 

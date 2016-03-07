@@ -15,7 +15,7 @@ import cucumber.junit.Cucumber;
 @Cucumber.Options(glue = { "atdd.framework","acceptancetests.prescriptiondrugcostbenefitsummary" }, 
 		features = { "feature/prescription-drugCost-BenefitsSummary" }, 
 		format = {
-		"pretty", "html:reports/test-report" }, tags ={"@prescriptionDrugcostandSummaryums"})
+		"pretty", "html:reports/test-report" }, tags ={"@prescriptionDrugcostandSummary"})
 public class RunMRCukesPrescriptionDrugCostBenefitSummaryTest {
 
 }

@@ -1,4 +1,4 @@
-@ourplansULayerTest
+@ourplans
 Feature:To test Our Plans drop down in AARP site
 Scenario:To verify menu under drop down of Our Plans link  in AARP site
 Given I am a user who has navigated to a page on the ULAYER acquistion site

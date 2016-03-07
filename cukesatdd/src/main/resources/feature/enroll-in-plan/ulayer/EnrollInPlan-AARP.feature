@@ -1,4 +1,4 @@
-@enrollInPlanTestAarp
+@enrollInPlan
 Feature: To test enroll in plan on AARP site 
 Scenario Outline: Verify enroll in plan in AARP site for federal plan type member  
 Given the user is on AARP medicare site landing page

@@ -15,7 +15,7 @@ import cucumber.junit.Cucumber;
 @Cucumber.Options(glue = { "atdd.framework","acceptancetests.gogreen" }, 
 		features = { "feature/go-green" }, 
 		format = {
-		"pretty", "html:reports/test-report" }, tags ={"@goGreenTest"})
+		"pretty", "html:reports/test-report" }, tags ={"@goGreen"})
 public class RunMRCukesGoGreenTest {
 
 }
