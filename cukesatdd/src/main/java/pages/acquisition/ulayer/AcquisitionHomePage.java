@@ -158,6 +158,8 @@ public class AcquisitionHomePage extends GlobalFooterWebElements {
 
     public JSONObject ourplansdropdownJson;
     
+    
+    
     private PageData ourplansdropdown;
 	public AcquisitionHomePage(WebDriver driver) {
 		super(driver);
@@ -920,12 +922,10 @@ public class AcquisitionHomePage extends GlobalFooterWebElements {
 		validate(signInButton);
 		String timerId = alreadyPlanMemberButtonInactive.getAttribute("id");
 		if(timerId.contains("cookie") || timerId.contains("visitor")){
-			
 			String[] parts = timerId.split("-");
 			String timerString = parts[1];
 			int timer = Integer.parseInt(timerString);
 			timer = timer*1000;
-			System.out.println("timer in milli secs "+timer);
 			try {
 				Thread.sleep(timer);
 			} catch (InterruptedException e) {
@@ -934,5 +934,40 @@ public class AcquisitionHomePage extends GlobalFooterWebElements {
 		}
 		return validate(signInButton);
 	}
+
+	public Boolean stopTimerValid() {
+		validate(signInButton);
+		String timerId = alreadyPlanMemberButtonInactive.getAttribute("id");
+		if(timerId.contains("cookie")){
+			if(cookieValid()){
+			driver.navigate().refresh();
+			String[] parts = timerId.split("-");
+			String timerString = parts[1];
+			int timer = Integer.parseInt(timerString);
+			timer = timer*1000;
+			usernameField.click();
+			try {
+				Thread.sleep(timer);
+				return validate(signInButton);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+			
+			}
+		}else if(timerId.contains("visitor")){
+			String[] parts = timerId.split("-");
+			String timerString = parts[1];
+			int timer = Integer.parseInt(timerString);
+			try {
+				Thread.sleep(timer);
+				return validate(signInButton);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+		
+	}
+		return null;
 	
 	}
+	
+}

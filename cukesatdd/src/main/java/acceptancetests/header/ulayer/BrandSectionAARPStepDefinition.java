@@ -373,4 +373,17 @@ public class BrandSectionAARPStepDefinition {
 		}
 
 	}
+	
+	@Then("^user clicks on the page and validates if the timer has stopped in browser of AARP site$")
+	public void timerStopValidation() {
+		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
+				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+		Boolean value = aquisitionhomepage.stopTimerValid();
+		if (value != null && value) {
+			Assert.assertTrue(true);
+		} else {
+			Assert.fail("failed");
+		}
+
+	}
 }
