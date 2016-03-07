@@ -347,14 +347,13 @@ public class BrandSectionAARPStepDefinition {
 
 	}
 	
-	@Then("^user clicks on sign in button and validates if the cookie is created in Acquisition AARP site$")
-	public void clickSignInForCookieValidation() {
+	
+	@And("^user reloads the AARP site page and accesses, validates  active state of Already a member dropdown and checks for cookie timer and cookie in browser of AARP site$")
+	public void alreadyMemberActiveStateValidation() {
 		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
 				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
-		aquisitionhomepage = aquisitionhomepage.cookieValid();
-		if (aquisitionhomepage != null) {
-			getLoginScenario().saveBean(PageConstants.ACQUISITION_HOME_PAGE,
-					aquisitionhomepage);
+		Boolean value = aquisitionhomepage.alreadyMemberActiveValid();
+		if (value != null && value) {
 			Assert.assertTrue(true);
 		} else {
 			Assert.fail("failed");
@@ -362,31 +361,12 @@ public class BrandSectionAARPStepDefinition {
 
 	}
 	
-	@And("^user reloads the AARP site page and accesses Already a member dropdown$")
-	public void alreadyMemberActiveStateValidation() {
+	@Then("^user waits for the time mentioned in the cookie timer and validates if the already member dropdown is inactive in AARP site$")
+	public void cookietimerValidation() {
 		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
 				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
-		Boolean value = aquisitionhomepage.alreadyMemberActiveValid();
-		
-		JSONObject alreadyPlanMemberActualJson = aquisitionhomepage.getAlreadyPlanMemberJSON();
-		/* Get expected data */
-		String fileName = "alreadyPlanMemberExpected";
-		String directory = CommonConstants.ACQUISITION_EXPECTED_DIRECTORY
-				+ File.separator + CommonConstants.SITE_ULAYER
-				+ File.separator
-				+ AcquistionCommonConstants.HEADER_FLOW_NAME
-				+ File.separator;
-		JSONObject alreadyPlanMemberExpectedJson = MRScenario.readExpectedJson(
-				fileName, directory);
-
-		getLoginScenario().saveBean(
-				AcquistionCommonConstants.ALREADY_PLAN_MEMBER_ACTUAL,
-				alreadyPlanMemberActualJson);
-		getLoginScenario().saveBean(
-				AcquistionCommonConstants.ALREADY_PLAN_MEMBER_EXPECTED,
-				alreadyPlanMemberExpectedJson);
-		
-		if (value != null && value) {
+		Boolean value = aquisitionhomepage.cookieTimerValid();
+		if (value != null && !value) {
 			Assert.assertTrue(true);
 		} else {
 			Assert.fail("failed");
