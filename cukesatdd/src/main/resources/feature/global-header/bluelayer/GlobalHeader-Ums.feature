@@ -32,3 +32,16 @@ Given the user is on the UHC Medicaresolutions Site
 When the user clicks on Already a member button on the Brand section of UMS site
 And user enters valid user name, password text field in the Already a plan member drop down of UMS site
 Then user clicks on sign in button and validates if it is landed on member my account home page of UMS site
+
+Scenario:To verify timer/visitor cookie scenarios under Already a plan member dropdown displayed on the Brand section of UMS site
+Given the user is on the UHC Medicaresolutions Site
+When the user clicks on Already a member button on the Brand section of UMS site
+And user enters valid user name, password text field in the Already a plan member drop down of UMS site
+And user reloads the UMS site page and accesses, validates  active state of Already a member dropdown and checks for cookie timer and cookie in browser of UMS site
+Then user waits for the time mentioned in the cookie timer and validates if the already member dropdown is inactive in UMS site
+
+Scenario:To verify timer/visitor cookie scenarios under Already a plan member dropdown displayed on the Brand section of UMS site
+Given the user is on the UHC Medicaresolutions Site
+When the user clicks on Already a member button on the Brand section of UMS site
+And user enters valid user name, password text field in the Already a plan member drop down of UMS site
+Then user clicks on the page and validates if the timer has stopped in browser of UMS site
