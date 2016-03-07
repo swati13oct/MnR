@@ -27,7 +27,7 @@ public class ZipcodeLookupPage extends UhcDriver {
 	@FindBy(id = "state_select")
 	private WebElement stateDropDown;
 
-	@FindBy(linkText = "Search Zip")
+	@FindBy(id = "searchzip")
 	private WebElement lookupZipcodeButton;
 
 	@FindBy(id = "selectzip_box")
