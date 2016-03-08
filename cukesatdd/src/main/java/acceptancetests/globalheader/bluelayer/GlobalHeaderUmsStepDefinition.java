@@ -382,5 +382,44 @@ public class GlobalHeaderUmsStepDefinition {
 		}
 
 	}
+	
+	@And("^user reloads the UMS site page and accesses, validates  active state of Already a member dropdown and checks for cookie timer and cookie in browser of UMS site$")
+	public void alreadyMemberActiveStateValidation() {
+		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
+				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+		Boolean value = aquisitionhomepage.alreadyMemberActiveValid();
+		if (value != null && value) {
+			Assert.assertTrue(true);
+		} else {
+			Assert.fail("failed");
+		}
+
+	}
+	
+	@Then("^user waits for the time mentioned in the cookie timer and validates if the already member dropdown is inactive in UMS site$")
+	public void cookietimerValidation() {
+		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
+				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+		Boolean value = aquisitionhomepage.cookieTimerValid();
+		if (value != null && !value) {
+			Assert.assertTrue(true);
+		} else {
+			Assert.fail("failed");
+		}
+
+	}
+	
+	@Then("^user clicks on the page and validates if the timer has stopped in browser of UMS site$")
+	public void timerStopValidation() {
+		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
+				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+		Boolean value = aquisitionhomepage.stopTimerValid();
+		if (value != null && value) {
+			Assert.assertTrue(true);
+		} else {
+			Assert.fail("failed");
+		}
+
+	}
 
 }

@@ -51,6 +51,9 @@ public class AcquisitionHomePage extends GlobalFooterWebElements {
        
        @FindBy(id = "medicareTitle")
    	   private WebElement medicareTitleText;
+       
+       @FindBy(className = "fd_myPlans")
+   		private WebElement myPlansTab;
 
 		@FindBy(linkText = "pharmacy")
 		private WebElement pharmacyLink;
@@ -634,6 +637,104 @@ public SiteMapUMSPage siteMapFooterClick() {
             return new AccountHomePage(driver);
             }
 
+		return null;
+	}
+	
+	public Boolean cookieValid() {
+		validate(signInButton);
+		signInButton.click();
+		//validate(signInButton);
+		ArrayList<String> tabs = new ArrayList<String> (driver.getWindowHandles());
+	    driver.switchTo().window(tabs.get(1));
+		validate(myPlansTab);
+		if (getCookieName("membervisited") != null) {
+			driver.switchTo().window(tabs.get(0));
+			if (getCookieName("membervisited") != null) {
+				return true;
+			}
+		}
+
+		return false;
+	}
+
+
+	public Boolean alreadyMemberActiveValid() {
+		validate(signInButton);
+		String timerId = alreadyPlanMemberButtonInactive.getAttribute("id");
+		if(timerId.contains("cookie")){
+			if(cookieValid()){
+			driver.navigate().refresh();
+			String[] parts = timerId.split("-");
+			String timerString = parts[1];
+			int timer = Integer.parseInt(timerString);
+			if(timer > 0){
+			return validate(signInButton);
+			}
+			}
+		}else if(timerId.contains("visitor")){
+			String[] parts = timerId.split("-");
+			String timerString = parts[1];
+			int timer = Integer.parseInt(timerString);
+			if(timer > 0){
+			return validate(signInButton);
+			}
+
+		}
+		return false;
+	
+	}
+
+
+	public Boolean cookieTimerValid() {
+		driver.navigate().refresh();
+		validate(signInButton);
+		String timerId = alreadyPlanMemberButtonInactive.getAttribute("id");
+		if(timerId.contains("cookie") || timerId.contains("visitor")){
+			String[] parts = timerId.split("-");
+			String timerString = parts[1];
+			int timer = Integer.parseInt(timerString);
+			timer = timer*1000;
+			try {
+				Thread.sleep(timer);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+		}
+		return validate(signInButton);
+	}
+
+
+	public Boolean stopTimerValid() {
+		validate(signInButton);
+		String timerId = alreadyPlanMemberButtonInactive.getAttribute("id");
+		if(timerId.contains("cookie")){
+			if(cookieValid()){
+			driver.navigate().refresh();
+			String[] parts = timerId.split("-");
+			String timerString = parts[1];
+			int timer = Integer.parseInt(timerString);
+			timer = timer*1000;
+			usernameField.click();
+			try {
+				Thread.sleep(timer);
+				return validate(signInButton);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+			
+			}
+		}else if(timerId.contains("visitor")){
+			String[] parts = timerId.split("-");
+			String timerString = parts[1];
+			int timer = Integer.parseInt(timerString);
+			try {
+				Thread.sleep(timer);
+				return validate(signInButton);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+		
+	}
 		return null;
 	}
 }
