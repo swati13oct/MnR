@@ -908,7 +908,6 @@ public class AcquisitionHomePage extends GlobalFooterWebElements {
 		}		
 				
 				
-				
 	
 
 
@@ -1029,6 +1028,7 @@ public class AcquisitionHomePage extends GlobalFooterWebElements {
 		
 	}
 		return null;
+	}
 	
 	public JSONObject pickatopic(String picktopic) {
 		JSONObject jsonObject = new JSONObject();
@@ -1140,6 +1140,6 @@ public class AcquisitionHomePage extends GlobalFooterWebElements {
 
 	}
 
-	}
-	
 }
+	
+
