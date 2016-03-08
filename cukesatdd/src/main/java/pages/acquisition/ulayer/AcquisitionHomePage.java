@@ -29,7 +29,7 @@ import acceptancetests.atdd.util.CommonUtility;
  */
 public class AcquisitionHomePage extends GlobalFooterWebElements {
 
-	@FindBy(id = "zipcodevalue")
+	@FindBy(id = "cta-zipcode")
 	private WebElement zipCodeField;
 	
 	@FindBy(className = "fd_myPlans")
@@ -48,13 +48,47 @@ public class AcquisitionHomePage extends GlobalFooterWebElements {
 	private WebElement LookUpZipCode1;
 	
 	@FindBy(xpath = "//*[@id='zipLookup']/p/a")
-	private WebElement LookUpZipCode21;
+	private WebElement lookupZipcode21;
 	
 	@FindBy(xpath = "//*[@id='subnav_2']/div/div/div[2]/form/span/span")
 	private WebElement errormessage1;
 	
 	@FindBy(className = "zip-button")
 	private WebElement FindPlansButton;
+	
+	@FindBy(id = "zipcodebtn")
+	private WebElement findPlansButton;
+
+	@FindBy(id = "takequizbtn")
+	private WebElement takequizbtn;
+
+	@FindBy(id = "picktopicbtn")
+	private WebElement picktopicbtn;
+
+	@FindBy(id = "learn-zipcode")
+	private WebElement learnzipCodeField;
+
+	@FindBy(id = "learnfindplanBtn")
+	private WebElement learnfindPlansButton;
+
+	@FindBy(id = "chooseUhcBtn")
+	private WebElement chooseUhcButton;
+	
+	@FindBy(id = "state_select")
+	private WebElement stateDropDown;
+
+	@FindBy(id = "topic-selectSelectBoxIt")
+	private WebElement topicselect;
+	
+	@FindBys(value = { @FindBy(xpath = "span//[@id='topic-selectSelectBoxIt']/ul/li") })
+	private List<WebElement> topicDropDownValues;
+	
+
+	@FindBy(id = "lookzip")
+	private WebElement lookzip;
+
+	@FindBy(id = "findazip_box")
+	private WebElement zipCodeSearchPopup;
 	
 	@FindBy(xpath = "//*[@id='ghn_lnk_2']")
 	private WebElement OurPlansLink;
@@ -89,6 +123,9 @@ public class AcquisitionHomePage extends GlobalFooterWebElements {
 
 	@FindBys(value = { @FindBy(xpath = "//table[@id='selectcountytable']/tbody/tr/td") })
 	List<WebElement> countyRows;
+	
+	@FindBy(xpath = "//div[@id='findazip_box']/div/div/div/h4")
+	private WebElement zipCodeSearchPopupHeading;
 	
 	@FindBy(xpath = "/html/body/div[3]/div/table/tbody/tr[3]/td/table/tbody/tr[2]/td/div/div[2]/div/div/div[2]/div/ul/li[2]/a")
 	WebElement zipCodebtn;
@@ -163,6 +200,9 @@ public class AcquisitionHomePage extends GlobalFooterWebElements {
     public JSONObject ourplansdropdownJson;
     
     private PageData ourplansdropdown;
+    
+    public JSONObject homeJson;
+    
 	public AcquisitionHomePage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
@@ -957,4 +997,114 @@ public class AcquisitionHomePage extends GlobalFooterWebElements {
 		return validate(signInButton);
 	}
 	
+	public JSONObject pickatopic(String picktopic) {
+		JSONObject jsonObject = new JSONObject();
+
+		for (WebElement element : topicDropDownValues) {
+			System.out.println(element.getTagName());
+			if (element.getAttribute("data-val").toString().contains(picktopic)) {
+				System.out.println("data-val=="+element.getAttribute("data-val").toString());
+			element.click();
+				break;
+			}
+		}
+
+		//selectFromDropDown(topicDropDownValues, picktopic);
+//		for (WebElement element : elementList) {
+//			if (element.getText().contains(value)) {
+//				element.click();
+//				break;
+//			}
+//		}
+		
+
+		picktopicbtn.click();
+
+		if (driver.getTitle() != null) {
+			try {
+				jsonObject.put("topicselectTitle", driver.getTitle());
+			} catch (JSONException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+
+		}
+		return homeJson = jsonObject;
+
+	}
+
+	public JSONObject takequiz() {
+		JSONObject jsonObject = new JSONObject();
+		takequizbtn.click();
+
+		if (driver.getTitle() != null) {
+			try {
+				jsonObject.put("takequizTitle", driver.getTitle());
+			} catch (JSONException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+
+		}
+		homeJson = jsonObject;
+
+		return homeJson;
+	}
+	
+	public JSONObject chooseuhc() {
+		JSONObject jsonObject = new JSONObject();
+		chooseUhcButton.click();
+
+		if (driver.getTitle() != null) {
+			try {
+				jsonObject.put("whychooseuhcTitle", driver.getTitle());
+				System.out.println("driver.getTitle()=="+driver.getTitle());
+			} catch (JSONException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+
+		}
+		homeJson = jsonObject;
+
+		return homeJson;
+	}
+
+	public JSONObject findplanfield(String zipcode,String findplanSection) {
+		JSONObject jsonObject = new JSONObject();
+		
+		if(findplanSection.equalsIgnoreCase("findplans")){
+			sendkeys(zipCodeField, zipcode);
+			findPlansButton.click();
+		}else if(findplanSection.equalsIgnoreCase("learnfindplans")){
+			sendkeys(learnzipCodeField, zipcode);
+			learnfindPlansButton.click();
+		}
+		
+		
+		if (driver.getTitle() != null){
+			try {
+				jsonObject.put("findplanTitle", driver.getTitle());
+			} catch (JSONException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+		}	
+		return homeJson = jsonObject;
+	
+	}
+	
+	public ZipcodeLookupPage lookupmodal() {
+		lookzip.click();
+		CommonUtility.waitForPageLoad(driver, zipCodeSearchPopup, CommonConstants.TIMEOUT_30);
+		if (zipCodeSearchPopupHeading.getText().equalsIgnoreCase("Find a ZIP code")) {
+			System.out.println("zipCodeSearchPopupHeading");
+			return new ZipcodeLookupPage(driver);
+		}
+		return null;
+
+
+	}
+
 	}
