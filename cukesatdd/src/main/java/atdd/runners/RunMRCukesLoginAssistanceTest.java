@@ -15,7 +15,7 @@ import cucumber.junit.Cucumber;
 @Cucumber.Options(glue = { "atdd.framework","acceptancetests.loginassistance" }, 
 		features = { "feature/login-assistance" }, 
 		format = {
-		"pretty", "html:reports/test-report" }, tags ={"@loginAssistanceTest"})
+		"pretty", "html:reports/test-report" }, tags ={"@loginAssistance"})
 public class RunMRCukesLoginAssistanceTest {
 
 }

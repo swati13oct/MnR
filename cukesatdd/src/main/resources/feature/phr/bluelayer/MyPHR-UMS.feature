@@ -1,4 +1,4 @@
-@phrTest
+@phr
 Feature:To test personal health record in UHC site
 Scenario Outline:Verify personal health record in UHC site for following type of plan member
 Given registered UHC member with following attributes

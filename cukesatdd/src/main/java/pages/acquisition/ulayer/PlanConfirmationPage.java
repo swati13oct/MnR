@@ -1,7 +1,6 @@
 package pages.acquisition.ulayer;
 
 import java.util.List;
-import java.util.Map;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -99,6 +98,5 @@ public class PlanConfirmationPage extends UhcDriver {
 		}
 		planConfirmationJson = jsonObject;
 	}
-
 
 }

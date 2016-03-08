@@ -1,4 +1,4 @@
-@headerBlueLayerTest
+@global
 Feature:To test Global Header links in UMS site
 Scenario:To verify links displayed in Global Header section in UMS site
 Given the user is on the UHC Medicaresolutions Site

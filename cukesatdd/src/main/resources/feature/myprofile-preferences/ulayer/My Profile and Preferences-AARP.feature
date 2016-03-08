@@ -10,7 +10,7 @@ Then the user validates displayed document name and delivery preferences for a p
 
 Examples:
 	| planType | 
-	| PDP      |
+##	| PDP      |
 #	| MAPD     |
 #	| MA       |
 #	| MS       |
@@ -79,19 +79,23 @@ Examples:
 
 Scenario Outline:To verify My Preferences and edit preferences in AARP site
 Given registered member for My Profile & Preferences in AARP Site
-	| Plan Type | <plantype> |
+	| <planType> |
 When the user view My Profile & Preferences in AARP Site
+Then the user validates my profile and preferences in AARP Site
 And the user navigates to My Preferences in AARP Site
-And the user changes delivery preferences for document name in AARP Site
-       | Document Name	      | <documentname>        |
-       | Delivery Preferences | <deliverypreferences> |
-Then the user clicks update preferences in AARP site
+And the user updates preferences by changing delivery preferences for corresponding document name in AARP Site
+	| <documentname:preferences> |
+Then the user validates the updated preferences in AARP site
 
 
 Examples:
-	| plantype | documentname                                    | deliverypreferences |
-#	| PDP      | Annual Notice Of Changes Documents              | Online              |
-#	| MAPD     | Prescription Drug Explanation of Benefits (EOB) | U.S.Mail            |
-#	| MA       | Claims                                          | Online              |
-#       | MS       | Claims                                          | Online              |
-#       | HIP      | Claims                                          | Online              | 
+	| planType | documentname:preferences								|
+	| PDP      | Annual Notice Of Changes Documents:Online,Annual Pharmacy Directory:U.S. Mail	|
+#	| MAPD     | Prescription Drug Explanation of Benefits (EOB):Online				|
+#	| MA       | Claims-Online									|
+#       | MS       | Claims-Online									|
+#       | HIP      | Claims-Online									|
+
+
+
+##- working examples

@@ -1,4 +1,4 @@
-@goGreenTestUms
+@goGreen
 Feature: To test go green on UHC site 
 Scenario Outline: Verify go green in UHC site for INDIVIDUAL plan and GROUP plan type member  
 Given registered UHC member with following attributes

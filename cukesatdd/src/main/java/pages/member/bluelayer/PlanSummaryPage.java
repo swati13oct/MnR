@@ -95,6 +95,7 @@ public class PlanSummaryPage extends UhcDriver {
 		}
 		planSummaryJson = jsonObject;
 
+		System.out.println("planSummaryJson----->"+planSummaryJson);
 	}
 
 	public JSONObject getExpectedData(Map<String, JSONObject> expectedDataMap) {

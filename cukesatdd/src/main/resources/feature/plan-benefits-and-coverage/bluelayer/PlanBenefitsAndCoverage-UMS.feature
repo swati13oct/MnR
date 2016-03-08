@@ -1,4 +1,4 @@
-@BnCTestUms
+@bnc
 Feature: To test plan benefits and Coverage on UMS site
 Scenario Outline: Verify benefits and coverage for mapd individual nonlis in UMS site
 Given registered UHC with following details for benefits and coverage flow

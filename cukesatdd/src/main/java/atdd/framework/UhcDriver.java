@@ -166,6 +166,12 @@ public abstract class UhcDriver {
 						.getElementName()));
 
 			}
+			else if (elementData.getIdentifier().equalsIgnoreCase("tagName")) {
+				driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+				element = parentElement.findElement(By.tagName(elementData
+						.getElementName()));
+
+			}
 			return element;
 		} catch (Exception e) {
 			return element;

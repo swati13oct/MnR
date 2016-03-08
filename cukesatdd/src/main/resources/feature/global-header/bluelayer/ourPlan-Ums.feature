@@ -1,4 +1,4 @@
-@headerOurPlansNavBlueLayer
+@global
 Feature:To test Our Plans drop down navigation in UMS site
 Scenario:To verify links displayed in Our Plans drop down of UMS site
 Given user is on the home page of UMS Site

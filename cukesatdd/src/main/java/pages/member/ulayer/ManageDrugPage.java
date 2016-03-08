@@ -195,6 +195,8 @@ public class ManageDrugPage extends UhcDriver {
 
 		}
 		manageDrugJson = jsonObject;
+		
+		System.out.println("manageDrugJson----->"+manageDrugJson);
 
 	}
 

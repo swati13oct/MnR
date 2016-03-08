@@ -1,4 +1,4 @@
-@loginTest
+@login
 Feature: To test Login on UMS site 
 Scenario Outline: Verify login in UMS site for Individual plan member  
 Given registered UHC member with following attributes

@@ -15,7 +15,7 @@ import cucumber.junit.Cucumber;
 @Cucumber.Options(glue = { "atdd.framework","acceptancetests.dcevpp" }, 
 		features = { "feature/dcevpp" }, 
 		format = {
-		"pretty", "html:reports/test-report" }, tags ={"@dceVppTestAARP"})
+		"pretty", "html:reports/test-report" }, tags ={"@dceVpp"})
 public class RunMRCukesDce {
 
 }

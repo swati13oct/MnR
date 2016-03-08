@@ -1,4 +1,4 @@
-@addPlanTest
+@addPlan
 Feature: To test the addPlan flow in AARP site
 Scenario Outline: Verify plans added with existing plans in AARP site
 Given the details of user to be registered in AARP site

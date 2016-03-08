@@ -61,6 +61,8 @@ public class DrugCostandBenefitSummaryPage extends UhcDriver{
 			}
 		}
 		drugCostBenefitSummaryJson = jsonObject;
+		
+		System.out.println("drugCostBenefitSummaryJson----->"+drugCostBenefitSummaryJson);
 	}
 	
 	public JSONObject getExpectedData(Map<String, JSONObject> expectedDataMap) {

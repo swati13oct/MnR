@@ -1,4 +1,4 @@
-@headerULayerTest
+@global
 Feature:To test Global Header links in AARP site
 Scenario:To verify links displayed in Global Header section in AARP site
 Given the user is on the AARP

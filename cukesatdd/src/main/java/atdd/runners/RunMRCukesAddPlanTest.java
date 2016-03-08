@@ -15,7 +15,7 @@ import cucumber.junit.Cucumber;
 @Cucumber.Options(glue = { "atdd.framework","acceptancetests.addplan" }, 
 		features = { "feature/addplan" }, 
 		format = {
-		"pretty", "html:reports/test-report" }, tags ={"@addPlanTestums"})
+		"pretty", "html:reports/test-report" }, tags ={"@addPlan"})
 public class RunMRCukesAddPlanTest {
 
 }
