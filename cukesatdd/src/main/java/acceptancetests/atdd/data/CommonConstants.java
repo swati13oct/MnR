@@ -32,6 +32,10 @@ public class CommonConstants {
 	public static final String LDAP_URL = "ldapUrl";
 
 	public static final String WEBDRIVER = "webDriver";
+	
+	public static final String DEVICE_NAME = "DeviceName";
+	
+	public static final String CHROME_DRIVER = "ChromeDriver";
 
 	public static final String PLAN_BENEFITS_AND_COVERAGE = "planBenefitsAndCoverage";
 
@@ -138,9 +142,15 @@ public class CommonConstants {
 			new Page(CommonConstants.MY_PREFERENCES_AFTER_UPDATE,
 					CommonConstants.MY_PREF_AFTER_UPDATE_ULAYER_DIRECTORY),
 			new Page(CommonConstants.CONTACT_US,
-					CommonConstants.CONTACT_US_ULAYER_DIRECTORY)
+					CommonConstants.CONTACT_US_ULAYER_DIRECTORY),
+			new Page(CommonConstants.BENEFITS_SUMMARY,
+					CommonConstants.BENEFITS_SUMMARY_DIRECTORY)
 			
 	};
+	
+	public static final String BENEFITS_SUMMARY_DIRECTORY = "/jsonresponse/mobile/member/ulayer/benefits-summary/";
+
+	public static final String BENEFITS_SUMMARY = "benefitssummary";
 
 	public static final String GLOBAL_DIRECTORY = "/jsonresponse/member/ulayer/global/";
 

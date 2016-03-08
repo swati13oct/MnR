@@ -28,7 +28,6 @@ public abstract class UhcDriver {
 
 	public void start(String url) {
 		driver.get(url);
-		driver.manage().window().maximize();
 	}
 
 	public UhcDriver(WebDriver driver) {
