@@ -109,10 +109,8 @@ public class EobAarpStepDefinition {
 		JSONObject accountHomeActualJson = null;
 		LoginPage loginPage = new LoginPage(wd);
 
-		loginPage.loginWith(userName, pwd);
+		AccountHomePage accountHomePage = (AccountHomePage)loginPage.loginWith(userName, pwd);
 
-		AccountHomePage accountHomePage = (AccountHomePage) loginPage
-				.checkLoginSuccessful();
 		/* Get expected data */
 		Map<String, JSONObject> expectedDataMap = loginScenario
 				.getExpectedJson(userName);

@@ -3,7 +3,7 @@ Feature: To test the payment flow on UMS site
 Scenario Outline: Verify recurring payment for a member in UMS site 
 Given registered UMS with a planType member for recurring payment in UMS site
  | Plan Type 	  | <planType> |
- | Category	      | <category> |
+ | Member Type	  | <memberType> |
 When the user views payment history for recurring payment in UMS site
 And the user setups automatic payment by entering the following bank account information in UMS site
     | Routing number             | <routingNo>         |
@@ -17,7 +17,7 @@ And the user confirms to setup recurring payment in UMS site
 Then the user validates the confirmation success page for recurring payment in UMS site
 	
 Examples:
-        | planType | category   | routingNo | confirmRoutingNo | accountNo   | confirmAccountNo | firstName | middleName | lastName |
+        | planType | memberType   | routingNo | confirmRoutingNo | accountNo   | confirmAccountNo | firstName | middleName | lastName |
 #	    | MA       | Individual | 123000000 |  123000000       | 1234567890  | 1234567890       | first     | second     | third    |
 	    | MAPD     | Individual | 123000000 |  123000000       | 1234567890  | 1234567890       | first     | second     | third    |
 #       | MAPD     | Group      | 123000000 |  123000000       | 1234567890  | 1234567890       | first     | second     | third    |

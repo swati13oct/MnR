@@ -78,7 +78,9 @@ public class MRScenario {
 	}
 
 	public void flushBeans() {
-		scenarioObjectMap.clear();
+		if (!scenarioObjectMap.isEmpty()) {
+			scenarioObjectMap.clear();
+		}
 	}
 
 	WebDriver webDriver;
@@ -667,7 +669,8 @@ public class MRScenario {
 		Set<String> registrationAmpKeySet = ampRegistrationDataMap.keySet();
 		for (String registrationKey : registrationAmpKeySet) {
 			if (ampRegistrationDataMap.get(registrationKey).size() > 2) {
-				List<String> value = ampRegistrationDataMap.get(registrationKey);
+				List<String> value = ampRegistrationDataMap
+						.get(registrationKey);
 				List<String> subValue = value.subList(1, 3);
 				if (!subValue.isEmpty()) {
 					String[] key = { value.get(0) + "_" + value.get(1),
@@ -690,10 +693,10 @@ public class MRScenario {
 							expectedDataMapUlayer.put(key[j], pageObjectMap);
 					}
 				}
-			}
-			else {
+			} else {
 				String key = ampRegistrationDataMap.get(registrationKey).get(0)
-						+ "_" + ampRegistrationDataMap.get(registrationKey).get(1);
+						+ "_"
+						+ ampRegistrationDataMap.get(registrationKey).get(1);
 				Map<String, JSONObject> pageObjectMap = new HashMap<String, JSONObject>();
 				for (int i = 0; i < CommonConstants.PAGES_REGISTRATION_ULAYER.length; i++) {
 					JSONObject jsonObject = readExpectedJson(key,
@@ -709,8 +712,7 @@ public class MRScenario {
 				if (!pageObjectMap.isEmpty())
 					expectedDataMapUlayer.put(key, pageObjectMap);
 			}
-			
-			
+
 		}
 
 		Set<String> registrationUmsKeySet = registrationDataMap.keySet();
@@ -842,16 +844,19 @@ public class MRScenario {
 		webDriver.manage().window().maximize();
 		return webDriver;
 	}
-	
+
 	public WebDriver getMobileWebDriver() {
 		Map<String, String> mobileEmulation = new HashMap<String, String>();
-		mobileEmulation.put("deviceName", props.get(CommonConstants.DEVICE_NAME));
+		mobileEmulation.put("deviceName",
+				props.get(CommonConstants.DEVICE_NAME));
 		Map<String, Object> chromeOptions = new HashMap<String, Object>();
 		chromeOptions.put("mobileEmulation", mobileEmulation);
 		DesiredCapabilities capabilities = DesiredCapabilities.chrome();
-		capabilities.setCapability("chrome.switches", Arrays.asList("--start-maximized"));
+		capabilities.setCapability("chrome.switches",
+				Arrays.asList("--start-maximized"));
 		capabilities.setCapability(ChromeOptions.CAPABILITY, chromeOptions);
-		System.setProperty("webdriver.chrome.driver", props.get(CommonConstants.CHROME_DRIVER));
+		System.setProperty("webdriver.chrome.driver",
+				props.get(CommonConstants.CHROME_DRIVER));
 		webDriver = new ChromeDriver(capabilities);
 		return webDriver;
 	}

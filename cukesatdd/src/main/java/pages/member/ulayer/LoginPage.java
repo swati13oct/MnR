@@ -48,19 +48,16 @@ public class LoginPage extends UhcDriver {
 		openAndValidate();
 	}
 
-	public void loginWith(String username, String password) {
+	public Object loginWith(String username, String password) {
 		loginIn.click();	
 		sendkeys(userNameField,username);
 		sendkeys(passwordField,password);
 		signInButton.click();
-	}
-
-	
-	public Object checkLoginSuccessful(){
-		if (getTitle().equalsIgnoreCase(
-				"AARP Medicare Plans | My Account Home")) {
+		if(currentUrl().contains("home/my-account-home.html"))
+		{
 			return new AccountHomePage(driver);
-		} else if (currentUrl().contains("terminated-plan.html")) {
+		}
+		else if (currentUrl().contains("terminated-plan.html")) {
 			return new TerminatedHomePage(driver);
 		}
 		return null;
