@@ -253,18 +253,7 @@ System.out.println("findplanfield=="+findplanPage.toString());
 					+ File.separator + CommonConstants.SITE_ULAYER
 					+ File.separator + HomeCommonConstants.ACQ_HOME_DIRECTORY;
 
-			JSONObject homeExpectedJson = MRScenario.readExpectedJson(CommonConstants.ACQ_HOME_PAGE_DATA, directory);
-			getLoginScenario().saveBean(HomeCommonConstants.HOME_EXPECTED,homeExpectedJson);
-
-			getLoginScenario().saveBean(HomeCommonConstants.HOME_ACTUAL,objPickTopicJson);
-			
-			System.out.println("homeActualJson=="+objPickTopicJson.toString());
-			try {
-				System.out.println("homeexpectedJson=="+homeExpectedJson.getString("topicselectTitle").toString());
-			} catch (JSONException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+		
 			
 			Assert.assertTrue(true);
 		} else {
