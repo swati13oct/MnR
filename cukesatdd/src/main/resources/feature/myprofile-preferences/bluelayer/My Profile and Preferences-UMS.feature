@@ -3,7 +3,7 @@ Feature:To test My Profile & Preferences flow in UMS site
 Scenario Outline:To verify My Profiles in UMS site
 Given registered member for My Profile & Preferences in UMS site
 	| Plan Type      | <planType>  |
-	| MemberType     | <memberType>|
+	| Member Type     | <memberType>|
 When the user navigates to My Profiles in UMS site
 Then the user validates the complete profile in UMS site
 Examples:
@@ -19,7 +19,7 @@ Examples:
 Scenario Outline:To verify My Profile and edit profile in UMS site
 Given registered member for My Profile & Preferences in UMS site
 	| Plan Type   | <planType> |
-	| MemberType  | <memberType>|
+	| Member Type  | <memberType>|
 When the user navigates to My Profiles in UMS site
 And the user edits account profile in UMS site
 	 | Current password      | <currentPassword>     |
@@ -66,7 +66,7 @@ Examples:
 Scenario Outline:To verify My Preferences in UMS site
 Given registered member for My Profile & Preferences in UMS site
 	| Plan Type   | <planType>  |
-	| MemberType  | <memberType>|
+	| Member Type  | <memberType>|
 When the user navigates to My Profiles in UMS site
 And the user selects my preferences tab in UMS site
 Then the user validates the document name and delivery preferences for a plan in UMS site
@@ -85,7 +85,7 @@ Examples:
 Scenario Outline:To verify My Preferences and edit preferences in UMS site
 Given registered member for My Profile & Preferences in UMS site
 	| Plan Type   | <planType> |
-	| MemberType  | <memberType>|
+	| Member Type  | <memberType>|
 When the user navigates to My Profiles in UMS site
 And the user selects my preferences tab in UMS site
 And the user changes delivery preferences for document name in UMS Site

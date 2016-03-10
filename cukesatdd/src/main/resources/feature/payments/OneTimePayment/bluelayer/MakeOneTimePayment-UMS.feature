@@ -2,8 +2,8 @@
 Feature: To test the payment flow on UMS site 
 Scenario Outline: Verify one time payment for total ammount due in UMS site 
 Given registered UMS with a planType member in UMS site
-| Plan Type 	  | <planType> |
-| Category	      | <category> |
+| Plan Type 	  | <planType>   |
+| Member Type	  | <memberType> |
 When the user views payment history page in UMS site
 And the user makes one time payment in UMS site
 	| Amount to be paid	         | <Amount>		  |
@@ -18,7 +18,7 @@ And the user confirms the payment in UMS site
 Then the user validates the payment successful page in UMS page
 	
 Examples:
-         |planType | category   | routingNo | confirmRoutingNo | accountNo  | confirmAccountNo | firstName | middleName | lastName | Amount |
+         |planType | memberType   | routingNo | confirmRoutingNo | accountNo  | confirmAccountNo | firstName | middleName | lastName | Amount |
   #      | MA      | Individual | 123000000 |  123000000       |1234567890  | 1234567890       | first     | second     | third    | 2.00   |
          | MAPD    | Individual | 123000000 |  123000000       |1234567890  | 1234567890       | first     | second     | third    | 2.00   |
   #      | MAPD    | Group      | 123000000 |  123000000       |1234567890  | 1234567890       | first     | second     | third    | 2.00	 | 

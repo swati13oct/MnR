@@ -46,48 +46,24 @@ public class LoginPage extends UhcDriver {
 		openAndValidate();
 	}
 
-	public void loginWith(String username, String password) {
+	public Object loginWith(String username, String password, String category) {
 		loginIn.click();
 		sendkeys(userNameField, username);
 		sendkeys(passwordField, password);
 		signInButton.click();
-	}
-
-	public Object checkIfLoginSuccessful() {
-		/*
-		 * if (this.driver.getTitle().equalsIgnoreCase(
-		 * "UnitedHealthcare Medicare Solutions | My Account Home")) { return
-		 * new AccountHomePage(driver); } else if
-		 * (this.driver.getCurrentUrl().contains("terminated-plan.html")) {
-		 * return new TerminatedHomePage(driver); }
-		 */
-		return null;
-	}
-
-	public Object checkLoginSuccessful() {
-		if (getTitle().equalsIgnoreCase(
-				"UnitedHealthcare Medicare Solutions | My Account Home")) {
-			return new AccountHomePage(driver);
-		} else if (currentUrl().contains("terminated-plan.html")) {
-			return new TerminatedHomePage(driver);
-		}
-		return null;
-	}
-	
-	public Object checkLoginSuccessful(String category) {
-		if (getTitle().equalsIgnoreCase(
-				"UnitedHealthcare Medicare Solutions | My Account Home")  && category.equalsIgnoreCase("Group")) {
+		if(currentUrl().contains("home/my-account-home.html") && category.equalsIgnoreCase("Group"))
+		{
 			return new AccountHomePage(driver,category);
-		} 
-		else if(getTitle().equalsIgnoreCase(
-				"UnitedHealthcare Medicare Solutions | My Account Home")) {
-			return new AccountHomePage(driver);
+		}
+		else if(currentUrl().contains("home/my-account-home.html") && category.equalsIgnoreCase("Individual") ) {
+			return new AccountHomePage(driver, category);
 		}
 		else if (currentUrl().contains("terminated-plan.html")) {
 			return new TerminatedHomePage(driver);
 		}
 		return null;
 	}
+
 
 	@Override
 	public void openAndValidate() {
