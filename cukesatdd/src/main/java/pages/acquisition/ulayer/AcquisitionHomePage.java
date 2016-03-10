@@ -83,10 +83,6 @@ public class AcquisitionHomePage extends GlobalFooterWebElements {
 	@FindBys(value = { @FindBy(xpath = "span//[@id='topic-selectSelectBoxIt']/ul/li") })
 	private List<WebElement> topicDropDownValues;
 	
-
-	@FindBy(id = "lookzip")
-	private WebElement lookzip;
-
 	@FindBy(id = "findazip_box")
 	private WebElement zipCodeSearchPopup;
 	
@@ -112,7 +108,7 @@ public class AcquisitionHomePage extends GlobalFooterWebElements {
 	@FindBy(id = "homefooter")
 	private WebElement homefooter;
 
-	@FindBy(linkText = "Look up ZIP code")
+	@FindBy(id = "lookzip")
 	private WebElement lookupZipcode;
 	
 	@FindBy(id = "medicareTitle")
@@ -1101,7 +1097,7 @@ public class AcquisitionHomePage extends GlobalFooterWebElements {
 	}
 	
 	public ZipcodeLookupPage lookupmodal() {
-		lookzip.click();
+		lookupZipcode.click();
 		CommonUtility.waitForPageLoad(driver, zipCodeSearchPopup, CommonConstants.TIMEOUT_30);
 		if (zipCodeSearchPopupHeading.getText().equalsIgnoreCase("Find a ZIP code")) {
 			System.out.println("zipCodeSearchPopupHeading");

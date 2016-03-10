@@ -22,7 +22,7 @@ import acceptancetests.atdd.util.CommonUtility;
 
 public class AcquisitionHomePage extends GlobalFooterWebElements {
 
-       @FindBy(linkText = "Look up ZIP code")
+       @FindBy(id = "lookzip")
        private WebElement lookupZipcode;
 
        @FindBy(id = "zipcodevalue")
