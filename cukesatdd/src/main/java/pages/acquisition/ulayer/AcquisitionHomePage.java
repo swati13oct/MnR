@@ -5,9 +5,9 @@ import java.util.List;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.openqa.selenium.Alert;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.TimeoutException;
-import org.openqa.selenium.Alert;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
@@ -15,8 +15,8 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.FindBys;
 import org.openqa.selenium.support.PageFactory;
 
-import acceptancetests.atdd.data.CommonConstants;
 import pages.member.ulayer.AccountHomePage;
+import acceptancetests.atdd.data.CommonConstants;
 import acceptancetests.atdd.data.MRConstants;
 import acceptancetests.atdd.data.PageData;
 import acceptancetests.atdd.util.CommonUtility;
@@ -438,6 +438,9 @@ public class AcquisitionHomePage extends GlobalFooterWebElements {
 		validate(GlobalFooterWebElements.disclaimerBackToTopLink);
 		GlobalFooterWebElements.disclaimerBackToTopLink.click();
 		
+		validate(GlobalFooterWebElements.viewAllDisclaimerInformationLink);
+		GlobalFooterWebElements.viewAllDisclaimerInformationLink.click();
+		
 		validate(GlobalFooterWebElements.hideDiscliamerInformation);
 		GlobalFooterWebElements.hideDiscliamerInformation.click();
 				
@@ -612,8 +615,8 @@ public class AcquisitionHomePage extends GlobalFooterWebElements {
 	public RegistrationHomePage registerHereLinkClick() {
 		ArrayList<String> tabs = new ArrayList<String> (driver.getWindowHandles());
 	    driver.switchTo().window(tabs.get(0));
-	    validate(alreadyPlanMemberButton);
-		alreadyPlanMemberButton.click();
+	    //validate(alreadyPlanMemberButton);
+		//alreadyPlanMemberButton.click();
 	    validate(registerHereLink);
 		registerHereLink.click();
 		ArrayList<String> tabs1= new ArrayList<String> (driver.getWindowHandles());

@@ -14,6 +14,12 @@ public class GlobalFooterWebElements  extends UhcDriver{
 		super(driver);
 		PageFactory.initElements(driver, this);
 	}
+	
+	@Override
+	public void openAndValidate() {
+		// TODO Auto-generated method stub
+		
+	}
 
 	@FindBy(id = "gf_lnk_1")
 	public static WebElement footerHomeLink;
@@ -74,7 +80,7 @@ public class GlobalFooterWebElements  extends UhcDriver{
 	@FindBy(linkText = "View all disclaimer information")
 	 public static WebElement viewAllDisclaimerInformationLink;
 	
-	@FindBy(linkText = "Hide discliamer information")
+	@FindBy(linkText = "Hide disclaimer information")
 	 public static WebElement hideDiscliamerInformation;
 	
 	@FindBy(css = "a.backtotop1.hideLink")
@@ -148,13 +154,13 @@ public class GlobalFooterWebElements  extends UhcDriver{
 	@FindBy(xpath = "//div[@id='subnav_3']/div/div/div/div/div/h3/a/span")
 	 public static WebElement learnAboutMedicareMedicareEducationLink;
 	
-	@FindBy(xpath = "//div[@id='subnav_3']/div/div/div/div[2]/div/h3/a/span")
+	@FindBy(xpath = "//div[@id='subnav_3']/div/div/div/div/div/h3[3]/a/span")
 	 public static WebElement exploreChangingPlansMedicareEducationLink;
 	
-	@FindBy(xpath = "//div[@id='subnav_3']/div/div/div/div/div[2]/h3/a/span")
+	@FindBy(xpath = "//div[@id='subnav_3']/div/div/div/div[2]/div/h3/a/span")
 	 public static WebElement prepareForInitialEnrollmentMedicareEducationLink;
 	
-	@FindBy(xpath = "//div[@id='subnav_3']/div/div/div/div[2]/div[2]/h3/a/span")
+	@FindBy(xpath = "//div[@id='subnav_3']/div/div/div/div[2]/div/h3[2]/a/span")
 	 public static WebElement discoverMoreResourcesMedicareEducationLink;
 	
 	@FindBy(xpath = "//div[@class='top-menu']/div/div[2]/div/form/span/p")
@@ -177,13 +183,10 @@ public class GlobalFooterWebElements  extends UhcDriver{
 	@FindBy(xpath="//div[@id='subnav_2']/div/div/div[1]/div[1]/div[1]/p[2]/a")
 		public static WebElement medicareAdvantagePlansRequestMoreHelpLink;
 	
-	@FindBy(xpath="//div[@id='subnav_2']/div/div/div[1]/div[2]/div/p[2]/a[2]")
+	@FindBy(xpath="//div[@id='subnav_2']/div/div/div/div[2]/div/p[2]/a[2]/span")
 	public static WebElement medicareSelectHosipitalDirectoryLink;
-		@Override
-	public void openAndValidate() {
-		// TODO Auto-generated method stub
+	
 		
-	}
 	
 	@FindBy(xpath="//div[@id='subnav_2']/div/div/div[2]/a")
 	public static WebElement takeQuizButton;

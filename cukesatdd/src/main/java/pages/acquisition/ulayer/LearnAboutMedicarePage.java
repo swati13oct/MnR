@@ -35,7 +35,7 @@ public PrepareforInitialEnrollmentPage prepareforInitialEnrollmentFooterClick() 
 	}
 
 public ExploreChangingPlansPage exploreChangingPlansClick() {
-	validate(exploreChangingPlansMedicareEducationLink);
+	validate(navigationSectionMedicareEducationLink);
 	Actions actions = new Actions(driver);
     actions.moveToElement(navigationSectionMedicareEducationLink);
     actions.moveToElement(exploreChangingPlansMedicareEducationLink);
