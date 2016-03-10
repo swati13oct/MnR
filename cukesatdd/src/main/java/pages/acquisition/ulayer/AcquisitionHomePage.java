@@ -35,8 +35,8 @@ public class AcquisitionHomePage extends GlobalFooterWebElements {
 	@FindBy(className = "fd_myPlans")
 	private WebElement myPlansTab;
 
-	@FindBy(linkText = "prescriptions")
-	private WebElement prescriptionsLink;
+	@FindBys(value = {@FindBy(xpath = "//table[@id='colhowdoesthiswork']/tbody/tr/td/span/span/a") })
+	private List<WebElement> howdoesthiswork;
 	
 	@FindBy(className = "zip-button")
 	private WebElement FindPlansButton1;
@@ -103,7 +103,7 @@ public class AcquisitionHomePage extends GlobalFooterWebElements {
 	private WebElement errormessage;
 
 
-	@FindBy(className = "viewplansbtn")
+	@FindBy(id = "zipcodebtn")
 	private WebElement viewPlansButton;
 
 	@FindBy(id = "vpp_selectcounty_box")
@@ -210,7 +210,12 @@ public class AcquisitionHomePage extends GlobalFooterWebElements {
 	}
 
 	public GetStartedPage navigateToPrescriptionDrug() {
-		prescriptionsLink.click();
+		for (WebElement element : howdoesthiswork) {
+   			if(element.getText().equalsIgnoreCase("Enter your drug list")){
+   				element.click();
+   			}
+    	   }
+		
 		if (driver
 				.getTitle()
 				.equalsIgnoreCase(
@@ -271,7 +276,7 @@ public class AcquisitionHomePage extends GlobalFooterWebElements {
 		if (!(currentUrl().contains("aarpmedicareplans"))) {
 			start(AARP_ACQISITION_PAGE_URL);
 		}
-		validate(prescriptionsLink);
+		
 		validate(zipCodeField);
 		validate(viewPlansButton);
 		validate(footnotesContent);
