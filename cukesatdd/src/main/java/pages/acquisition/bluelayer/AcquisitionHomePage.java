@@ -25,16 +25,16 @@ public class AcquisitionHomePage extends GlobalFooterWebElements {
        @FindBy(linkText = "Look up ZIP code")
        private WebElement lookupZipcode;
 
-       @FindBy(id = "zipcodevalue")
+       @FindBy(id = "cta-zipcode")
        private WebElement zipCodeField;
 
-       @FindBy(className = "viewplansbtn")
+       @FindBy(id = "zipcodebtn")
        private WebElement viewPlansButton;
 
        @FindBy(id = "vpp_selectcounty_box")
        private WebElement countyModal;
 
-       @FindBy(linkText = "prescriptions")
+       @FindBy(linkText = "Enter your drug list")
        private WebElement prescriptionsLink;
 
        @FindBy(id = "homefooter")
@@ -312,6 +312,9 @@ public SiteMapUMSPage siteMapFooterClick() {
 		validate(GlobalFooterWebElements.disclaimerBackToTopLink);
 		GlobalFooterWebElements.disclaimerBackToTopLink.click();
 		
+		validate(GlobalFooterWebElements.viewAllDisclaimerInformationLink);
+		GlobalFooterWebElements.viewAllDisclaimerInformationLink.click();
+		
 		validate(GlobalFooterWebElements.hideDiscliamerInformation);
 		GlobalFooterWebElements.hideDiscliamerInformation.click();
 		if(driver.getTitle().equalsIgnoreCase("Medicare Plans for Different Needs | UnitedHealthcare®")){
@@ -430,8 +433,8 @@ public SiteMapUMSPage siteMapFooterClick() {
 	public RegistrationHomePage registerHereLinkClick() {
 		ArrayList<String> tabs = new ArrayList<String> (driver.getWindowHandles());
 	    driver.switchTo().window(tabs.get(0));
-	    validate(alreadyPlanMemberButton);
-		alreadyPlanMemberButton.click();
+	    /*validate(alreadyPlanMemberButton);
+		alreadyPlanMemberButton.click();*/
 	    validate(registerHereLink);
 		registerHereLink.click();
 		ArrayList<String> tabs1= new ArrayList<String> (driver.getWindowHandles());

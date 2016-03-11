@@ -119,7 +119,7 @@ public class GlobalFooterWebElements  extends UhcDriver{
 	@FindBy(xpath="//div[@class='menu-dropdown active']")
 	 public static WebElement alreadyPlanMemberButtonActive;
 	
-	@FindBy(xpath="//div[@class='menu-dropdown']/div[1]/span")
+	@FindBy(id="already-a-member-dropdown")
 	 public static WebElement alreadyPlanMemberButton;
 	
 	@FindBy(className="sign-in-text")

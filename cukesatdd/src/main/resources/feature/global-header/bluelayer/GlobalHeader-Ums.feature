@@ -49,8 +49,8 @@ When the user clicks on Already a member button on the Brand section of UMS site
 And user enters invalid user name, password text field in the Already a plan member drop down of UMS site
 Then user clicks on sign in button and validate the error message in Already a plan member drop down of UMS site
 
-Scenario:To verify links displayed in Our Plans drop down of UMS site
-Given user is on the home page of UMS Site
+Scenario:To verify all the links displayed in Our Plans drop down of UMS site
+Given the user is on the UHC Medicaresolutions Site
 When user hovers on Our Plans section of the UHC Medicare Solutions home page
 Then user validates all the content and links in the Our Plans drop down
 And user clicks on medicare advantage plans link of our plans drop down from home page of blue layer
@@ -67,7 +67,7 @@ And user clicks the zipcode text field of ourplan drop down blue layer
 And user clicks on lookup zipcode link of our plan drop down blue layer
 
 Scenario:To verify links displayed in Our Plans Drop Down in UMS site
-Given user is on the home page of UMS Site
+Given the user is on the UHC Medicaresolutions Site
 When user accesses Medicare Education section UHC Medicare Solutions Site
 And user clicks on LearnAboutMedicare link by hovering on Medicare Education of the UHC Medicare Solutions home page
 And user clicks on ExploreChangingPlans link by hovering on Medicare Education of the UHC Medicare Solutions home page
@@ -78,7 +78,7 @@ Then the user validates all links in the medicare education drop down of UMS sit
 
 
 Scenario Outline:To verify if Error message is displayed when invalid zipcode is entered
-Given user is on the home page of UMS Site
+Given the user is on the UHC Medicaresolutions Site
 And user enter the below zipcode from home page in blue layer
 	| <zipCode> |
 Then the user validates the error message displayed
@@ -103,7 +103,7 @@ And user enters valid user name, password text field in the Already a plan membe
 And user reloads the UMS site page and accesses, validates  active state of Already a member dropdown and checks for cookie timer and cookie in browser of UMS site
 Then user waits for the time mentioned in the cookie timer and validates if the already member dropdown is inactive in UMS site
 
-Scenario:To verify timer/visitor cookie scenarios under Already a plan member dropdown displayed on the Brand section of UMS site
+Scenario:To verify timer/visitor cookie timer stop scenarios under Already a plan member dropdown displayed on the Brand section of UMS site
 Given the user is on the UHC Medicaresolutions Site
 When the user clicks on Already a member button on the Brand section of UMS site
 And user enters valid user name, password text field in the Already a plan member drop down of UMS site

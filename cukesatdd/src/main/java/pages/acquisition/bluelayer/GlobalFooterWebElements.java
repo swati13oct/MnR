@@ -51,25 +51,25 @@ public class GlobalFooterWebElements extends UhcDriver {
 	public static WebElement footnotesContent;
 	
 	
-	@FindBy(id = "gfn_lnk_row2_2")
+	@FindBy(id = "gfn_lnk_row2_1")
 	 public static WebElement medicareAdvantagePlansLink;
 	
-	@FindBy(id = "gfn_lnk_row2_3")
+	@FindBy(id = "gfn_lnk_row2_2")
 	 public static WebElement medicareSupplementInsurancePlansLink;
 	
-	@FindBy(id = "gfn_lnk_row2_4")
+	@FindBy(id = "gfn_lnk_row2_3")
 	 public static WebElement medicarePrescriptionDrug_PlansLink;
 	
-	@FindBy(id = "gfn_lnk_row3_2")
+	@FindBy(id = "gfn_lnk_row3_1")
 	 public static WebElement learnAboutMedicareLink;
 	
-	@FindBy(id = "gfn_lnk_row3_3")
+	@FindBy(id = "gfn_lnk_row3_2")
 	 public static WebElement prepareForInitialEnrollment;
 	
-	@FindBy(id = "gfn_lnk_row3_4")
+	@FindBy(id = "gfn_lnk_row3_3")
 	 public static WebElement exploreChangingPlansLink;
 	
-	@FindBy(id = "gfn_lnk_row3_5")
+	@FindBy(id = "gfn_lnk_row3_4")
 	 public static WebElement discoverMoreResourcesLink;
 	
 	@FindBy(linkText = "Back to Top")
@@ -93,10 +93,10 @@ public class GlobalFooterWebElements extends UhcDriver {
 	@FindBy(id = "gf_lnk_8")
 	public static WebElement footerAgentsAndBrokersLink;
 	
-	@FindBy(id = "gfn_lnk_row3_3")
+	@FindBy(id = "gfn_lnk_row3_2")
 	 public static WebElement prepareForInitialEnrollmentLink;
 	
-	@FindBy(id = "gfn_lnk_row2_5")
+	@FindBy(id = "gfn_lnk_row2_4")
 	 public static WebElement medicareSpecialNeedPlansLink;
 	
 	@FindBy(xpath = "//ul[@class='menu-links']/li/a")
@@ -120,7 +120,7 @@ public class GlobalFooterWebElements extends UhcDriver {
 	@FindBy(xpath="//div[@class='menu-dropdown active']")
 	 public static WebElement alreadyPlanMemberButtonActive;
 	
-	@FindBy(xpath="//div[@class='menu-dropdown']/div[1]/span")
+	@FindBy(id="already-a-member-dropdown")
 	 public static WebElement alreadyPlanMemberButton;
 	
 	@FindBy(className="sign-in-text")
@@ -150,13 +150,13 @@ public class GlobalFooterWebElements extends UhcDriver {
 	@FindBy(xpath = "//div[@id='subnav_3']/div/div/div/div/div/h3/a/span")
 	 public static WebElement learnAboutMedicareMedicareEducationLink;
 	
-	@FindBy(xpath = "//div[@id='subnav_3']/div/div/div/div[2]/div/h3/a/span")
+	@FindBy(xpath = "//div[@id='subnav_3']/div/div/div/div/div/h3[3]/a/span")
 	 public static WebElement exploreChangingPlansMedicareEducationLink;
 	
-	@FindBy(xpath = "//div[@id='subnav_3']/div/div/div/div/div[2]/h3/a/span")
+	@FindBy(xpath = "//div[@id='subnav_3']/div/div/div/div[2]/div/h3/a/span")
 	 public static WebElement prepareForInitialEnrollmentMedicareEducationLink;
 	
-	@FindBy(xpath = "//div[@id='subnav_3']/div/div/div/div[2]/div[2]/h3/a/span")
+	@FindBy(xpath = "//div[@id='subnav_3']/div/div/div/div[2]/div/h3[2]/a/span")
 	 public static WebElement discoverMoreResourcesMedicareEducationLink;
 	
 	@FindBy(id="ghn_lnk_2")
@@ -183,13 +183,13 @@ public class GlobalFooterWebElements extends UhcDriver {
 	@FindBy(xpath="//div[@id='subnav_2']/div/div/div[1]/div[1]/div[2]/p[2]/a")
 	public static WebElement prescriptiondrugPlansRequestMoreHelpLink;
 	
-	@FindBy(xpath="//div[@id='subnav_2']/div/div/div[1]/div[2]/div[1]/p[2]/a[1]")
+	@FindBy(xpath="//div[@id='subnav_2']/div/div/div[1]/div[2]/div[1]/p[2]/a[1]/span")
 	public static WebElement medicareSelectHosipitalDirectoryLink;
 	
 	@FindBy(xpath="//div[@id='subnav_2']/div/div/div[1]/div[2]/div[1]/p[2]/a[2]")
 	public static WebElement resumeYourSavedApplicationLink;
 	
-	@FindBy(xpath="//div[@id='subnav_2']/div/div/div[1]/div[2]/div[2]/p/a")
+	@FindBy(xpath="//div[@id='subnav_2']/div/div/div/div[2]/div[2]/h3/a/span")
 	public static WebElement specialNeedPlansGetEnrollmentInformationLink;
 	
 	@FindBy(xpath="//div[@id='subnav_2']/div/div/div[2]/a")

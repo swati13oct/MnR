@@ -28,13 +28,13 @@ import acceptancetests.atdd.util.CommonUtility;
  */
 public class AcquisitionHomePage extends GlobalFooterWebElements {
 
-	@FindBy(id = "zipcodevalue")
+	@FindBy(id = "cta-zipcode")
 	private WebElement zipCodeField;
 	
 	@FindBy(className = "fd_myPlans")
 	private WebElement myPlansTab;
 
-	@FindBy(linkText = "prescriptions")
+	@FindBy(linkText = "Enter your drug list")
 	private WebElement prescriptionsLink;
 	
 	@FindBy(className = "zip-button")
@@ -68,7 +68,7 @@ public class AcquisitionHomePage extends GlobalFooterWebElements {
 	private WebElement errormessage;
 
 
-	@FindBy(className = "viewplansbtn")
+	@FindBy(id = "zipcodebtn")
 	private WebElement viewPlansButton;
 
 	@FindBy(id = "vpp_selectcounty_box")
