@@ -1,4 +1,4 @@
-@headerUlayer
+@headerFooterTest
 Feature:To test Brand section of AARP site header
 
 Scenario:To verify links displayed in the global footer of AARP site

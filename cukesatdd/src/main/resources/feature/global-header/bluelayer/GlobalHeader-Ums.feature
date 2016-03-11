@@ -1,4 +1,4 @@
-@headerBlueLayerTest
+@headerFooterTest
 Feature:To test Global Header links in UMS site
 
 Scenario:To verify links displayed in Global footer section in UMS site
