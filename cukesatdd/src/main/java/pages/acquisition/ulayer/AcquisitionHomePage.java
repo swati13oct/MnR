@@ -56,9 +56,6 @@ public class AcquisitionHomePage extends GlobalFooterWebElements {
 	@FindBy(className = "zip-button")
 	private WebElement FindPlansButton;
 	
-	@FindBy(id = "zipcodebtn")
-	private WebElement findPlansButton;
-	
 	@FindBy(id = "findazip_box")
 	private WebElement zipCodeSearchPopup;
 	
