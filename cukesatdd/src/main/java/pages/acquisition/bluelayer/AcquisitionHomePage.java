@@ -22,20 +22,21 @@ import acceptancetests.atdd.util.CommonUtility;
 
 public class AcquisitionHomePage extends GlobalFooterWebElements {
 
-       @FindBy(linkText = "Look up ZIP code")
+       @FindBy(id = "lookzip")
        private WebElement lookupZipcode;
 
        @FindBy(id = "zipcodevalue")
        private WebElement zipCodeField;
 
-       @FindBy(className = "viewplansbtn")
+       @FindBy(id = "zipcodebtn")
        private WebElement viewPlansButton;
 
        @FindBy(id = "vpp_selectcounty_box")
        private WebElement countyModal;
 
-       @FindBy(linkText = "prescriptions")
-       private WebElement prescriptionsLink;
+       @FindBys(value = {@FindBy(xpath = "//table[@id='colhowdoesthiswork']/tbody/tr/td/span/span/a") })
+			 private List<WebElement> howdoesthiswork;
+
 
        @FindBy(id = "homefooter")
        private WebElement homefooter;
@@ -91,7 +92,11 @@ public class AcquisitionHomePage extends GlobalFooterWebElements {
        
 
        public EstimateDrugCostPage switchToPrescriptionDrug() {
-              prescriptionsLink.click();
+                for (WebElement element : howdoesthiswork) {
+				   			if(element.getText().equalsIgnoreCase("Enter your drug list")){
+				   				element.click();
+				   			}
+				    	   }
               driver.getTitle();
               if (driver.getTitle().equalsIgnoreCase(
                            "Our Medicare Plan Types | UnitedHealthcare®")) {
@@ -247,7 +252,7 @@ public SiteMapUMSPage siteMapFooterClick() {
               validate(navigationSectionmedicareEducationLink);
               validate(navigationSectionEnterSearch);
               
-             	validate(prescriptionsLink);
+             	
             	validate(zipCodeField);
               	validate(viewPlansButton);
               	validate(footerHomeLink);
