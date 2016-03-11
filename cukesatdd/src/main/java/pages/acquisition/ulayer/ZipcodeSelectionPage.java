@@ -20,7 +20,7 @@ import atdd.framework.UhcDriver;
  */
 public class ZipcodeSelectionPage extends UhcDriver {
 
-	@FindBy(id = "selectcountytable")
+	@FindBy(id = "confirmZipCodeTable")
 	private WebElement ZipcodeTable;
 
 	private PageData zipSelection;
