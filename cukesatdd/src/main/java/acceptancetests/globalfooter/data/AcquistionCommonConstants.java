@@ -52,6 +52,8 @@ public class AcquistionCommonConstants {
 	public static final String OUR_PLANS_DROPDOWN_ACTUAL = "ourplansdropdownactual";
 	public static final String OUR_PLANS_DROPDOWN_EXPECTED = "ourplansdropdownexpectedJson";
 	
+	public static final String HEALTH_AND_WELLNESS_DROPDOWN_ACTUAL = "healthandwellnessdropdownactual";
+	public static final String HEALTH_AND_WELLNESS_DROPDOWN_EXPECTED = "healthandwellnessdropdownexpectedJson";
 	
 	
 

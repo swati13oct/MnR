@@ -140,4 +140,16 @@ public class PageConstants {
 	public static final String SPECIAL_NEEDS_GET_ENROLMENT_INFO_PAGE = "specialNeedGetEnrollmentInformationPage";
 
 	public static final String PLAN_SELECTOR_PAGE = "planSelectorPage";
+
+	public static final String HEALTH_CENTERS_PAGE = "healthcenterspage";
+
+	public static final String HEALTH_MANAGEMENT_PROGRAM_PAGE = "healthmanagementprogram";
+
+	public static final String HEALTH_LIVING_PAGE = "healthlivingpage";
+
+	public static final String HEALTH_TOOLS_PAGE = "healthtoolspage";
+
+	public static final String PRESCRIPTION_DRUG_TOOLS_PAGE = "presecriptiondrugtoolspage";
+	
+	
 }

@@ -620,6 +620,8 @@ public class CommonConstants {
 	public static final String OUR_PLANS_NAV_PAGE_DATA = "ourPlansDropdownActual.json";
 	
 	public static final String OUR_PLANS_DROPDOWN_DATA= "ourplansdropdownactual.json";
+
+	public static final String HEALTH_AND_WELLNESS_DROPDOWN_DATA= "healthandwellnessdropdownactual.json";
 	
 	
 	

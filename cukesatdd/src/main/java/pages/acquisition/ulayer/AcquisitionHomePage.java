@@ -82,6 +82,12 @@ public class AcquisitionHomePage extends GlobalFooterWebElements {
 	
 	@FindBy(id = "medicareTitle")
 	private WebElement medicareTitleText;
+	
+	@FindBy(xpath= "//*[@id='medicareTitle']/h1")
+	private WebElement usernameassistancetext;
+	
+	@FindBy(xpath = "//*[@id='ghn_lnk_4']")
+	private WebElement hoverhealthandwellnesslink;
 
 	@FindBy(linkText = "pharmacy")
 	private WebElement pharmacyLink;
@@ -98,6 +104,9 @@ public class AcquisitionHomePage extends GlobalFooterWebElements {
 	@FindBy(linkText = "View all disclaimer information")
 	private WebElement disclaimerViewLink;
 
+	@FindBy(xpath = "//*[@id='subnav_4']/div/div/div[1]/div[1]/div[1]/h3/a/span")
+	private WebElement healthcenterslink;
+	
 	@FindBy(className = "disclaimerCon")
 	private WebElement disclaimerCon;
 
@@ -130,6 +139,13 @@ public class AcquisitionHomePage extends GlobalFooterWebElements {
 	
 	@FindBy(id="subnav_2")
 	public static WebElement ourPlansDropdownText;
+	
+	
+	@FindBy(xpath = "//*[@id='subnav_4']/div/div/div[2]/div/a")
+	public static WebElement forgotusernamepasswordlink;
+	
+	@FindBy(xpath= "//*[@id='subnav_4']/div/div/div[2]/div/span[2]/a")
+	public static WebElement registerherelink;
 
 	private static String AARP_ACQISITION_PAGE_URL = MRConstants.AARP_URL;
 	
@@ -149,6 +165,8 @@ public class AcquisitionHomePage extends GlobalFooterWebElements {
 	private PageData medicareEducationDropDown;
 	public JSONObject medicareEducationDropDownJson;
 	
+	
+	
 	private PageData header;
 	public JSONObject headerJson;
 	
@@ -157,6 +175,10 @@ public class AcquisitionHomePage extends GlobalFooterWebElements {
     public JSONObject globalHeaderJson;
 
     public JSONObject ourplansdropdownJson;
+    
+    private PageData healthandwellnessdropdown;
+    
+    public JSONObject healthandwellnessdropdownJson;
     
     
     
@@ -972,5 +994,118 @@ public class AcquisitionHomePage extends GlobalFooterWebElements {
 		return null;
 	
 	}
+
+public void hoverhealthandwellnesslink() {
+	
+		
+		validate(hoverhealthandwellnesslink);
+			//Hover over text
+			Actions action = new Actions(driver);
+			action.moveToElement(hoverhealthandwellnesslink).build().perform();
+		
+			
+			// TODO Auto-generated method stub
+		
+		}
+
+public JSONObject accessinghealthandwellnesslink() {
+	 
+	 hoverhealthandwellnesslink();
+	 return getHealthandWellnessDropdownJson();
+	}
+public JSONObject getHealthandWellnessDropdownJson(){
+	 
+	 
+       String fileName = CommonConstants.HEALTH_AND_WELLNESS_DROPDOWN_DATA;
+       healthandwellnessdropdown = CommonUtility.readPageData(fileName,
+                    CommonConstants.PAGE_OBJECT_DIRECTORY_ULAYER_ACQ);
+       
+       JSONObject jsonObject = new JSONObject();
+       for (String key : healthandwellnessdropdown.getExpectedData().keySet()) {
+       WebElement element = findElement(healthandwellnessdropdown.getExpectedData()
+       .get(key));
+       if (element != null) {
+       if(validate(element)){
+       try {
+       jsonObject.put(key, element.getText());
+       } catch (JSONException e) {
+       // TODO Auto-generated catch block
+       e.printStackTrace();
+       }
+       }
+       }
+       }
+       healthandwellnessdropdownJson = jsonObject;
+       
+       
+       return healthandwellnessdropdownJson;
+       
+}
+
+public LoginAssistancePage forgotusernameandpasswordclick() {
+	
+	
+	
+	hoverhealthandwellnesslink();
+	validate(forgotusernamepasswordlink);
+	Actions actions = new Actions(driver);
+	 actions.moveToElement(forgotusernamepasswordlink);
+        actions.click().build().perform();
+        
+        ArrayList<String> tabs = new ArrayList<String> (driver.getWindowHandles());
+	    driver.switchTo().window(tabs.get(1));
+       validate(usernameassistancetext);
+	
+	if(driver.getTitle().equalsIgnoreCase("AARP Medicare Plans |Username and Password Assistance")){
+          return new LoginAssistancePage(driver);
+          }
+
+        return null;
+
+}
+
+public RegistrationHomePage registerHereClick() {
+	
+	ArrayList<String> tabs = new ArrayList<String> (driver.getWindowHandles());
+    driver.switchTo().window(tabs.get(0));
+
+	hoverhealthandwellnesslink();
+	validate(registerherelink);
+	Actions actions = new Actions(driver);
+	 actions.moveToElement(registerherelink);
+       actions.click().build().perform();
+       
+       ArrayList<String> tabs1 = new ArrayList<String> (driver.getWindowHandles());
+	    driver.switchTo().window(tabs1.get(2));
+	   
+	    if(driver.getTitle().equalsIgnoreCase("AARP Medicare Plans | Registration")){
+	    	return new RegistrationHomePage(driver);
+      }
+
+		return null;
+
+}
+
+public HealthCentersPage healthcentersclick() {
+	
+	
+	hoverhealthandwellnesslink();
+	validate(healthcenterslink);
+	
+	
+	Actions actions = new Actions(driver);
+	 actions.moveToElement(healthcenterslink);
+      actions.click().build().perform();
+	
+	
+      if(driver.getTitle().equalsIgnoreCase("Error Page")){
+    	return new HealthCentersPage(driver);
+    }
+
+	
+	// TODO Auto-generated method stub
+	return null;
+}
+
 	
 }
