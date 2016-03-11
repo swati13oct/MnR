@@ -25,7 +25,7 @@ public class AcquisitionHomePage extends GlobalFooterWebElements {
        @FindBy(id = "lookzip")
        private WebElement lookupZipcode;
 
-       @FindBy(id = "zipcodevalue")
+       @FindBy(id = "cta-zipcode")
        private WebElement zipCodeField;
 
        @FindBy(id = "zipcodebtn")
