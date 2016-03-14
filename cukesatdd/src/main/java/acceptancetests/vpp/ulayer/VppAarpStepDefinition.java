@@ -228,6 +228,54 @@ public class VppAarpStepDefinition {
 		}
 
 	}
+	
+	@When("^the user performs plan search on learnfindplans using following information in AARP site$")
+	public void zipcode_details_learnfindplans_in_aarp_site(DataTable givenAttributes) {
+
+		List<DataTableRow> memberAttributesRow = givenAttributes
+				.getGherkinRows();
+		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells()
+					.get(0), memberAttributesRow.get(i).getCells().get(1));
+		}
+
+		String zipcode = memberAttributesMap.get("Zip Code");
+		String county = memberAttributesMap.get("County Name");
+		getLoginScenario().saveBean(VPPCommonConstants.ZIPCODE, zipcode);
+		getLoginScenario().saveBean(VPPCommonConstants.COUNTY, county);
+
+		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
+				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+		VPPPlanSummaryPage plansummaryPage = aquisitionhomepage.searchPlansForLearnFindPlans(
+				zipcode, county);
+
+		if (plansummaryPage != null) {
+			getLoginScenario().saveBean(PageConstants.VPP_PLAN_SUMMARY_PAGE,
+					plansummaryPage);
+			/* Get expected data */
+			String fileName = "vppPlanSummary";
+			String directory = CommonConstants.ACQUISITION_EXPECTED_DIRECTORY
+					+ File.separator + CommonConstants.SITE_ULAYER
+					+ File.separator + VPPCommonConstants.VPP_PLAN_FLOW_NAME
+					+ File.separator + zipcode + File.separator + county
+					+ File.separator;
+			JSONObject planSummaryExpectedJson = MRScenario.readExpectedJson(
+					fileName, directory);
+			getLoginScenario().saveBean(
+					VPPCommonConstants.VPP_PLAN_SUMMARY_EXPECTED,
+					planSummaryExpectedJson);
+
+			/* Get actual data */
+			JSONObject planSummaryActualJson = plansummaryPage.vppPlanSummaryJson;
+			getLoginScenario().saveBean(
+					VPPCommonConstants.VPP_PLAN_SUMMARY_ACTUAL,
+					planSummaryActualJson);
+		}
+	}
+	
+	
 
 	@After
 	public void tearDown() {

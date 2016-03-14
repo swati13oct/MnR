@@ -37,7 +37,12 @@ public class AcquisitionHomePage extends GlobalFooterWebElements {
 
        @FindBys(value = {@FindBy(xpath = "//table[@id='colhowdoesthiswork']/tbody/tr/td/span/span/a") })
 			 private List<WebElement> howdoesthiswork;
+      
+       @FindBy(id = "learn-zipcode")
+			 private WebElement learnzipCodeField;
 
+	     @FindBy(id = "learnfindplanBtn")
+	     private WebElement learnfindPlansButton;
 
        @FindBy(id = "homefooter")
        private WebElement homefooter;
@@ -291,6 +296,31 @@ public SiteMapUMSPage siteMapFooterClick() {
               }
               return null;
        }
+       
+       public VPPPlanSummaryPage searchPlansForLearnFindPlans(String zipcode, String countyName) {
+           sendkeys(learnzipCodeField, zipcode);
+           learnfindPlansButton.click();
+           try {
+                  if (countyModal.isDisplayed()) {
+                        for (WebElement county : countyRows) {
+                               if (county.getText().equalsIgnoreCase(countyName)) {
+                                      county.click();
+                                      break;
+                               }
+
+                        }
+                  }
+           } catch (Exception e) {
+                  System.out.println("county box not found");
+           }
+           if (getTitle()
+                        .equalsIgnoreCase(
+                                      "Our Medicare Plan Types | UnitedHealthcare®")) {
+                  return new VPPPlanSummaryPage(driver);
+           }
+           return null;
+    }
+       
 
        public String selectsHomeFooter() {
               // TODO Auto-generated method stub
