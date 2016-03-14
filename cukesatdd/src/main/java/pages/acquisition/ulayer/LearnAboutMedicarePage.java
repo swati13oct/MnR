@@ -6,7 +6,7 @@ import org.openqa.selenium.support.PageFactory;
 
 import com.thoughtworks.selenium.webdriven.commands.WaitForPageToLoad;
 
-public class LearnAboutMedicarePage extends GlobalFooterWebElements {
+public class LearnAboutMedicarePage extends GlobalWebElements {
 
 	public LearnAboutMedicarePage(WebDriver driver) {
 		super(driver);

@@ -10,7 +10,7 @@ import org.openqa.selenium.support.PageFactory;
  * @author rkodumur
  *
  */
-public class PrescriptionDrugRequestMoreHelpPage extends GlobalFooterWebElements {
+public class PrescriptionDrugRequestMoreHelpPage extends GlobalWebElements {
 
 	public PrescriptionDrugRequestMoreHelpPage(WebDriver driver) {
 		super(driver);

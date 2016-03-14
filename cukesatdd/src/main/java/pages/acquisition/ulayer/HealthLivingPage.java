@@ -15,7 +15,7 @@ import acceptancetests.login.data.LoginCommonConstants;
  * @author naggarw2
  *
  */
-public class HealthLivingPage extends GlobalFooterWebElements{
+public class HealthLivingPage extends GlobalWebElements{
 		
 
 	public HealthLivingPage(WebDriver driver) {

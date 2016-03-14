@@ -7,14 +7,14 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.PageFactory;
 
-import pages.acquisition.bluelayer.GlobalFooterWebElements;
+import pages.acquisition.bluelayer.GlobalWebElements;
 import pages.acquisition.ulayer.DiscoverMoreResourcesPage;
 
 /**
  * @author rkodumur
  *
  */
-public class PrepareForInitialEnrollmentuhcPage extends GlobalFooterWebElements{
+public class PrepareForInitialEnrollmentuhcPage extends GlobalWebElements{
 	
 	
 

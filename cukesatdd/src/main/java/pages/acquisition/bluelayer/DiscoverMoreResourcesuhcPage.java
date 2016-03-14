@@ -6,13 +6,13 @@ package pages.acquisition.bluelayer;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.PageFactory;
 
-import pages.acquisition.bluelayer.GlobalFooterWebElements;
+import pages.acquisition.bluelayer.GlobalWebElements;
 
 /**
  * @author rkodumur
  *
  */
-public class DiscoverMoreResourcesuhcPage extends GlobalFooterWebElements{
+public class DiscoverMoreResourcesuhcPage extends GlobalWebElements{
 
 	public DiscoverMoreResourcesuhcPage(WebDriver driver) {
 		super(driver);

@@ -5,7 +5,7 @@ import org.openqa.selenium.support.PageFactory;
 
 
 
-public class MedicarePrescriptionDrugPlansPage extends GlobalFooterWebElements {
+public class MedicarePrescriptionDrugPlansPage extends GlobalWebElements {
 
 	public MedicarePrescriptionDrugPlansPage(WebDriver driver) {
 		super(driver);

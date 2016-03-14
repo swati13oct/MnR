@@ -11,7 +11,7 @@ import pages.acquisition.ulayer.PlanSelectorPage;
  * @author snagpa4
  *
  */
-public class ResumeYourSavedApplicationPage extends GlobalFooterWebElements{
+public class ResumeYourSavedApplicationPage extends GlobalWebElements{
 
 	public ResumeYourSavedApplicationPage(WebDriver driver) {
 		super(driver);

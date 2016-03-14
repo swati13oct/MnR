@@ -9,14 +9,14 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-import pages.acquisition.ulayer.GlobalFooterWebElements;
+import pages.acquisition.ulayer.GlobalWebElements;
 import acceptancetests.login.data.LoginCommonConstants;
 
 /**
  * @author naggarw2
  *
  */
-public class HealthCentersPage extends GlobalFooterWebElements{
+public class HealthCentersPage extends GlobalWebElements{
 	
 	
 	

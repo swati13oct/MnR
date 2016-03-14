@@ -4,7 +4,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.PageFactory;
 
-public class PrepareforInitialEnrollmentPage extends GlobalFooterWebElements {
+public class PrepareforInitialEnrollmentPage extends GlobalWebElements {
 
 	public PrepareforInitialEnrollmentPage(WebDriver driver) {
 		super(driver);

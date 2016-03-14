@@ -15,7 +15,7 @@ import acceptancetests.login.data.LoginCommonConstants;
  * @author naggarw2
  *
  */
-public class PrescriptionDrugPage extends GlobalFooterWebElements{
+public class PrescriptionDrugPage extends GlobalWebElements{
 
 	public PrescriptionDrugPage(WebDriver driver) {
 		super(driver);

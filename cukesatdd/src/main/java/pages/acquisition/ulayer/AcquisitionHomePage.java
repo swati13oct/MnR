@@ -26,7 +26,7 @@ import acceptancetests.atdd.util.CommonUtility;
  * @author pperugu
  *
  */
-public class AcquisitionHomePage extends GlobalFooterWebElements {
+public class AcquisitionHomePage extends GlobalWebElements {
 
 	@FindBy(id = "cta-zipcode")
 	private WebElement zipCodeField;
@@ -413,9 +413,9 @@ public class AcquisitionHomePage extends GlobalFooterWebElements {
 	}
 
 	public AboutUsAARPPage aboutUsFooterClick() {
-		validate(GlobalFooterWebElements.footerAboutUsLink);
-		GlobalFooterWebElements.footerAboutUsLink.click();
-		validate(GlobalFooterWebElements.footerAboutUsLink);
+		validate(GlobalWebElements.footerAboutUsLink);
+		GlobalWebElements.footerAboutUsLink.click();
+		validate(GlobalWebElements.footerAboutUsLink);
 
 		if (driver
 				.getTitle()
@@ -440,9 +440,9 @@ public class AcquisitionHomePage extends GlobalFooterWebElements {
 
 
 	public MedicareAdvantagePlansPage medicareAdvantagePlansClick() {
-		validate(GlobalFooterWebElements.medicareAdvantagePlansLink);
-		GlobalFooterWebElements.medicareAdvantagePlansLink.click();
-		validate(GlobalFooterWebElements.medicareAdvantagePlansLink);
+		validate(GlobalWebElements.medicareAdvantagePlansLink);
+		GlobalWebElements.medicareAdvantagePlansLink.click();
+		validate(GlobalWebElements.medicareAdvantagePlansLink);
 		if (driver
 				.getTitle()
 				.equalsIgnoreCase(
@@ -454,17 +454,17 @@ public class AcquisitionHomePage extends GlobalFooterWebElements {
 
 	
 	public AcquisitionHomePage veiwAllDisclaimerLinkSectionLinksClick() {
-		validate(GlobalFooterWebElements.viewAllDisclaimerInformationLink);
-		GlobalFooterWebElements.viewAllDisclaimerInformationLink.click();
+		validate(GlobalWebElements.viewAllDisclaimerInformationLink);
+		GlobalWebElements.viewAllDisclaimerInformationLink.click();
 		
-		validate(GlobalFooterWebElements.disclaimerBackToTopLink);
-		GlobalFooterWebElements.disclaimerBackToTopLink.click();
+		validate(GlobalWebElements.disclaimerBackToTopLink);
+		GlobalWebElements.disclaimerBackToTopLink.click();
 		
-		validate(GlobalFooterWebElements.viewAllDisclaimerInformationLink);
-		GlobalFooterWebElements.viewAllDisclaimerInformationLink.click();
+		validate(GlobalWebElements.viewAllDisclaimerInformationLink);
+		GlobalWebElements.viewAllDisclaimerInformationLink.click();
 		
-		validate(GlobalFooterWebElements.hideDiscliamerInformation);
-		GlobalFooterWebElements.hideDiscliamerInformation.click();
+		validate(GlobalWebElements.hideDiscliamerInformation);
+		GlobalWebElements.hideDiscliamerInformation.click();
 				
 		if (driver
 				.getTitle()
@@ -502,9 +502,9 @@ public class AcquisitionHomePage extends GlobalFooterWebElements {
 	}
 
 	public DisclaimersAARPPage importantDisclosuresClick() {
-		validate(GlobalFooterWebElements.importantDisclosuresLink);
-		GlobalFooterWebElements.importantDisclosuresLink.click();
-		validate(GlobalFooterWebElements.importantDisclosuresLink);
+		validate(GlobalWebElements.importantDisclosuresLink);
+		GlobalWebElements.importantDisclosuresLink.click();
+		validate(GlobalWebElements.importantDisclosuresLink);
 		if (driver
 				.getTitle()
 				.equalsIgnoreCase(
@@ -516,16 +516,16 @@ public class AcquisitionHomePage extends GlobalFooterWebElements {
 	}
 
 	public Boolean visitAARPOrgClick() {
-		validate(GlobalFooterWebElements.visitAARPLink);
-		GlobalFooterWebElements.visitAARPLink.click();
-		validate(GlobalFooterWebElements.visitAARPLink);
+		validate(GlobalWebElements.visitAARPLink);
+		GlobalWebElements.visitAARPLink.click();
+		validate(GlobalWebElements.visitAARPLink);
 		  ArrayList<String> tabs = new ArrayList<String> (driver.getWindowHandles());
 		    driver.switchTo().window(tabs.get(1));
 		if (driver
 				.getTitle()
 				.equalsIgnoreCase(
 						"You are now leaving AARPMedicarerx.com")) {
-			GlobalFooterWebElements.proceedLink.click();
+			GlobalWebElements.proceedLink.click();
 			if(driver.getCurrentUrl().equals("http://www.aarp.org/")){
 				return true;
 				

@@ -14,7 +14,7 @@ import acceptancetests.login.data.LoginCommonConstants;
  * @author pperugu
  *
  */
-public class LoginAssistancePage extends GlobalFooterWebElements{
+public class LoginAssistancePage extends GlobalWebElements{
 	
 	@FindBy(id = "usercheckbox")
 	private WebElement userNameCheckBox;

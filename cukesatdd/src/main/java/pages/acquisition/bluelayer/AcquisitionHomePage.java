@@ -20,7 +20,7 @@ import acceptancetests.atdd.data.MRConstants;
 import acceptancetests.atdd.data.PageData;
 import acceptancetests.atdd.util.CommonUtility;
 
-public class AcquisitionHomePage extends GlobalFooterWebElements {
+public class AcquisitionHomePage extends GlobalWebElements {
 
        @FindBy(linkText = "Look up ZIP code")
        private WebElement lookupZipcode;
@@ -306,17 +306,17 @@ public SiteMapUMSPage siteMapFooterClick() {
               }
 
 	public AcquisitionHomePage veiwAllDisclaimerLinkSectionLinksClick() {
-		validate(GlobalFooterWebElements.viewAllDisclaimerInformationLink);
-		GlobalFooterWebElements.viewAllDisclaimerInformationLink.click();
+		validate(GlobalWebElements.viewAllDisclaimerInformationLink);
+		GlobalWebElements.viewAllDisclaimerInformationLink.click();
 		
-		validate(GlobalFooterWebElements.disclaimerBackToTopLink);
-		GlobalFooterWebElements.disclaimerBackToTopLink.click();
+		validate(GlobalWebElements.disclaimerBackToTopLink);
+		GlobalWebElements.disclaimerBackToTopLink.click();
 		
-		validate(GlobalFooterWebElements.viewAllDisclaimerInformationLink);
-		GlobalFooterWebElements.viewAllDisclaimerInformationLink.click();
+		validate(GlobalWebElements.viewAllDisclaimerInformationLink);
+		GlobalWebElements.viewAllDisclaimerInformationLink.click();
 		
-		validate(GlobalFooterWebElements.hideDiscliamerInformation);
-		GlobalFooterWebElements.hideDiscliamerInformation.click();
+		validate(GlobalWebElements.hideDiscliamerInformation);
+		GlobalWebElements.hideDiscliamerInformation.click();
 		if(driver.getTitle().equalsIgnoreCase("Medicare Plans for Different Needs | UnitedHealthcare®")){
 			return new AcquisitionHomePage(driver);
 		}

@@ -16,9 +16,9 @@ import atdd.framework.UhcDriver;
  * @author saduri
  *
  */
-public class GlobalFooterWebElements extends UhcDriver {
+public class GlobalWebElements extends UhcDriver {
 	
-	public GlobalFooterWebElements(WebDriver driver) {
+	public GlobalWebElements(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
 	}

@@ -3,7 +3,7 @@ package pages.acquisition.ulayer;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.PageFactory;
 
-public class DiscoverMoreResourcesPage extends GlobalFooterWebElements {
+public class DiscoverMoreResourcesPage extends GlobalWebElements {
 
 	public DiscoverMoreResourcesPage(WebDriver driver) {
 		super(driver);

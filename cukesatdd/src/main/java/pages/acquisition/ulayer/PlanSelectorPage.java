@@ -12,7 +12,7 @@ import acceptancetests.atdd.data.PageData;
  * @author rkodumur
  *
  */
-public class PlanSelectorPage extends GlobalFooterWebElements{
+public class PlanSelectorPage extends GlobalWebElements{
 	
 	
 	public PlanSelectorPage(WebDriver driver) {

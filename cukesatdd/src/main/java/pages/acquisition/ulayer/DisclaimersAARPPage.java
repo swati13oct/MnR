@@ -16,7 +16,7 @@ import atdd.framework.UhcDriver;
  * @author rkodumur
  *
  */
-public class DisclaimersAARPPage extends GlobalFooterWebElements{
+public class DisclaimersAARPPage extends GlobalWebElements{
 	
 	@FindBy(xpath = "//*[@id='site-wrapper']/div[3]/div[1]/header/div[2]/h1/a/p/img")
 	private WebElement aarpunitedHealthCareLogo;
