@@ -224,7 +224,7 @@ public class AcquisitionHomePage extends GlobalFooterWebElements {
 	        
 	 }
 
-	public ZipcodeLookupPage looksupforZipcodes() {
+	public ZipcodeLookupHomePage looksupforZipcodes() {
 
 		lookupZipcode.click();
 
@@ -234,7 +234,7 @@ public class AcquisitionHomePage extends GlobalFooterWebElements {
 						"Medicare Plans | AARP?? Medicare Plans from UnitedHealthcare??")
 						|| driver.getTitle().equalsIgnoreCase(
 								"Our Medicare Plan Types | UnitedHealthcare®")) {
-			return new ZipcodeLookupPage(driver);
+			return new ZipcodeLookupHomePage(driver);
 		}
 		return null;
 	}
@@ -969,6 +969,4 @@ public class AcquisitionHomePage extends GlobalFooterWebElements {
 		}
 		return validate(signInButton);
 	}
-	
-
-	}
+}

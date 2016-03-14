@@ -104,7 +104,7 @@ public class AcquisitionHomePage extends GlobalFooterWebElements {
 
        }
 
-       public ZipcodeLookupPage looksupforZipcodes() {
+       public ZipcodeLookupHomePage looksupforZipcodes() {
               
               lookupZipcode.click();
 
@@ -112,7 +112,7 @@ public class AcquisitionHomePage extends GlobalFooterWebElements {
                            "Forbidden Page | UnitedHealthcare®")
                            || driver.getTitle().equalsIgnoreCase(
                                          "Our Medicare Plan Types | UnitedHealthcare®")) {
-                     return new ZipcodeLookupPage(driver);
+                     return new ZipcodeLookupHomePage(driver);
               }
               return null;
 
