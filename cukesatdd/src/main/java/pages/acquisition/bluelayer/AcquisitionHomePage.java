@@ -98,6 +98,7 @@ public class AcquisitionHomePage extends GlobalFooterWebElements {
                 for (WebElement element : howdoesthiswork) {
 				   			if(element.getText().equalsIgnoreCase("Enter your drug list")){
 				   				element.click();
+				   				break;
 				   			}
 				    	   }
               driver.getTitle();
