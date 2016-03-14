@@ -42,15 +42,15 @@ And user clicks on medicare advantage Request Personal Help & Information link o
 And user clicks on Medicare Prescription Drug Plans link of our plans dropdown from medicare advantage Request More Information page of U layer
 And user clicks on Prescription Drug Request Personal Help & Information link of our plans drop down from Medicare Prescription Drug Plans page U layer
 And user clicks on Medicare Supplement Plans link of our plans drop down from Prescription Drug Request more information page Ulayer
-And user clicks on Medicare Select Hospital Directory link under Medicare Supplement Plans section of our plans drop down from Medicare Supplement Plans page
-And user clicks on Resume Your Saved Application link under Medicare Supplement Plans section of our plans drop down from Medicare Select Hospital Directory page
+And user clicks on Medicare Select Hospital Directory link under Medicare Supplement Plans section of our plans drop down from Medicare Supplement Plans page in AARP site
+And user clicks on Resume Your Saved Application link under Medicare Supplement Plans section of our plans drop down from Medicare Select Hospital Directory page in AARP site
 And user clicks on Take the quiz button from our plans drop down of U layer
 
 Scenario:To verify menu under drop down of Our Plans link  in AARP site
 Given user is on acquisition home page of AARP Site
 When I hover over the Our Plans button
 Then drop down column 1 should appear with the following in order - Find all plans in your area header, Enter ZIP field, Find Plans button, Need Help content, Need Help Link, Find right plan header, take quiz button
-Then user validates all the content and links in the Our Plans drop down
+Then user validates all the content and links in the Our Plans drop down on home page of AARP site
 And content appears in column 1 per copy deck
 When I click find ZIP link
 When I DON'T enter a ZIP and I click Find Plans button
