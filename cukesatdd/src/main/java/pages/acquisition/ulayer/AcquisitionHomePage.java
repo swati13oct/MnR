@@ -15,7 +15,7 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.FindBys;
 import org.openqa.selenium.support.PageFactory;
-
+import pages.acquisition.ulayer.ZipcodeLookupHomePage;
 import acceptancetests.atdd.data.CommonConstants;
 import pages.member.ulayer.AccountHomePage;
 import acceptancetests.atdd.data.MRConstants;
@@ -228,12 +228,10 @@ public class AcquisitionHomePage extends GlobalFooterWebElements {
 
 		lookupZipcode.click();
 
-		if (driver
-				.getTitle()
+		if (getTitle()
 				.equalsIgnoreCase(
-						"Medicare Plans | AARP?? Medicare Plans from UnitedHealthcare??")
-						|| driver.getTitle().equalsIgnoreCase(
-								"Our Medicare Plan Types | UnitedHealthcare®")) {
+						"Medicare Plans | AARP® Medicare Plans from UnitedHealthcare®")
+						) {
 			return new ZipcodeLookupHomePage(driver);
 		}
 		return null;
