@@ -59,33 +59,6 @@ public class AcquisitionHomePage extends GlobalFooterWebElements {
 	@FindBy(className = "zip-button")
 	private WebElement FindPlansButton;
 	
-	@FindBy(id = "zipcodebtn")
-	private WebElement findPlansButton;
-
-	@FindBy(id = "takequizbtn")
-	private WebElement takequizbtn;
-
-	@FindBy(id = "picktopicbtn")
-	private WebElement picktopicbtn;
-
-	@FindBy(id = "learn-zipcode")
-	private WebElement learnzipCodeField;
-
-	@FindBy(id = "learnfindplanBtn")
-	private WebElement learnfindPlansButton;
-
-	@FindBy(id = "chooseUhcBtn")
-	private WebElement chooseUhcButton;
-	
-	@FindBy(id = "state_select")
-	private WebElement stateDropDown;
-
-	@FindBy(id = "topic-selectSelectBoxIt")
-	private WebElement topicselect;
-	
-	@FindBys(value = { @FindBy(xpath = "span//[@id='topic-selectSelectBoxIt']/ul/li") })
-	private List<WebElement> topicDropDownValues;
-	
 	@FindBy(id = "findazip_box")
 	private WebElement zipCodeSearchPopup;
 	
@@ -202,7 +175,6 @@ public class AcquisitionHomePage extends GlobalFooterWebElements {
     
     private PageData ourplansdropdown;
     
-    public JSONObject homeJson;
     
 	public AcquisitionHomePage(WebDriver driver) {
 		super(driver);
@@ -1037,115 +1009,6 @@ public class AcquisitionHomePage extends GlobalFooterWebElements {
 		return null;
 	}
 	
-	public JSONObject pickatopic(String picktopic) {
-		JSONObject jsonObject = new JSONObject();
-
-		for (WebElement element : topicDropDownValues) {
-			System.out.println(element.getTagName());
-			if (element.getAttribute("data-val").toString().contains(picktopic)) {
-				System.out.println("data-val=="+element.getAttribute("data-val").toString());
-			element.click();
-				break;
-			}
-		}
-
-		//selectFromDropDown(topicDropDownValues, picktopic);
-//		for (WebElement element : elementList) {
-//			if (element.getText().contains(value)) {
-//				element.click();
-//				break;
-//			}
-//		}
-		
-
-		picktopicbtn.click();
-
-		if (driver.getTitle() != null) {
-			try {
-				jsonObject.put("topicselectTitle", driver.getTitle());
-			} catch (JSONException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-
-		}
-		return homeJson = jsonObject;
-
-	}
-
-	public JSONObject takequiz() {
-		JSONObject jsonObject = new JSONObject();
-		takequizbtn.click();
-
-		if (driver.getTitle() != null) {
-			try {
-				jsonObject.put("takequizTitle", driver.getTitle());
-			} catch (JSONException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-
-		}
-		homeJson = jsonObject;
-
-		return homeJson;
-	}
-	
-	public JSONObject chooseuhc() {
-		JSONObject jsonObject = new JSONObject();
-		chooseUhcButton.click();
-
-		if (driver.getTitle() != null) {
-			try {
-				jsonObject.put("whychooseuhcTitle", driver.getTitle());
-				System.out.println("driver.getTitle()=="+driver.getTitle());
-			} catch (JSONException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-
-		}
-		homeJson = jsonObject;
-
-		return homeJson;
-	}
-
-	public JSONObject findplanfield(String zipcode,String findplanSection) {
-		JSONObject jsonObject = new JSONObject();
-		
-		if(findplanSection.equalsIgnoreCase("findplans")){
-			sendkeys(zipCodeField, zipcode);
-			findPlansButton.click();
-		}else if(findplanSection.equalsIgnoreCase("learnfindplans")){
-			sendkeys(learnzipCodeField, zipcode);
-			learnfindPlansButton.click();
-		}
-		
-		
-		if (driver.getTitle() != null){
-			try {
-				jsonObject.put("findplanTitle", driver.getTitle());
-			} catch (JSONException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			
-		}	
-		return homeJson = jsonObject;
-	
-	}
-	
-	public ZipcodeLookupPage lookupmodal() {
-		lookupZipcode.click();
-		CommonUtility.waitForPageLoad(driver, zipCodeSearchPopup, CommonConstants.TIMEOUT_30);
-		if (zipCodeSearchPopupHeading.getText().equalsIgnoreCase("Find a ZIP code")) {
-			System.out.println("zipCodeSearchPopupHeading");
-			return new ZipcodeLookupPage(driver);
-		}
-		return null;
-
-
-	}
 
 }
 	

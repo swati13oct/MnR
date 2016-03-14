@@ -33,7 +33,7 @@ public class ZipcodeLookupPage extends UhcDriver {
 	@FindBys(value = { @FindBy(xpath = "//select[@id='state_select']/option") })
 	private List<WebElement> stateDropDownValues;
 
-	@FindBy(id = "searchzip")
+	@FindBy(linkText = "Search Zip")
 	private WebElement lookupZipcodeButton;
 
 	@FindBy(xpath = "//div[@id='selectzip_box']/div/div/div/h4")
