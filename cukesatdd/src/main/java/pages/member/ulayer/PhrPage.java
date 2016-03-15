@@ -82,6 +82,8 @@ public class PhrPage extends UhcDriver {
 
 		}
 		phrJson = jsonObject;
+		
+		System.out.println("phrJson----->"+phrJson);
 
 	}
 

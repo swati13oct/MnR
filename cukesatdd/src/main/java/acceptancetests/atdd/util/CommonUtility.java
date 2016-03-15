@@ -107,11 +107,18 @@ public class CommonUtility {
 					waitForPageLoad(driver, element, timeout);
 				}
 			}
+
 		} catch (Exception e) {
-			System.out.println("Not able to locate this " + element
-					+ " on page");
-			return;
+			timeout = timeout - 5;
+			if (timeout > 0) {
+				waitForPageLoad(driver, element, timeout);
+			} else {
+				System.out.println("Not able to locate this " + element
+						+ " on page");
+				return;
+			}
 		}
+
 	}
 
 	public static void waitForElementToDisappear(WebDriver driver,

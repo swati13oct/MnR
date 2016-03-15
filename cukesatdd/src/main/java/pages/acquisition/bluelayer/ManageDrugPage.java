@@ -15,7 +15,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-
+import pages.acquisition.bluelayer.SelectPharmacyPage;
 import acceptancetests.atdd.data.CommonConstants;
 import acceptancetests.atdd.data.ElementData;
 import acceptancetests.atdd.data.PageData;
@@ -67,7 +67,12 @@ public class ManageDrugPage extends UhcDriver {
 	
 	@FindBy(xpath="//div[@class='tabsHead']/div[2]")
 	WebElement selectPharmacyTab;
-
+	
+	@FindBy(xpath="//div[@class='tabsHead']/div")
+	WebElement manageDrugTab;
+	
+	@FindBy(className = "drugSearchBox")
+	WebElement drugSearchBox;
 	
 	@FindBy(xpath = "/html/body/div[3]/div/table/tbody/tr[3]/td/div/div/div/div/div[7]/form/div[2]/span[3]/p/span")
 	private WebElement expectedTooltip;
@@ -470,6 +475,23 @@ public class ManageDrugPage extends UhcDriver {
 		System.out.println("Tool tips validated");
 	}
 
+	
+	public SelectPharmacyPage navigateToUpdatedPharmacyPage() {
+		if (currentUrl().contains("selectPharmacy")) {
+			return new SelectPharmacyPage(driver);
+		} else {
+			return null;
+		}
+
+	}
+	
+	public void validateAddDrugFlow(){
+		validate(drugSearchBox);
+		selectPharmacyTab.click();
+		manageDrugTab.click();
+		validate(drugSearchBox);
+		
+	}
 
 
 }

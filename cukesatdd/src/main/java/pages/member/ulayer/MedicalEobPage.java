@@ -89,6 +89,8 @@ public class MedicalEobPage extends UhcDriver{
 			}
 		}
 		medicalEobJson = jsonObject;
+		
+		System.out.println("medicalEobJson----->"+medicalEobJson);
 	}
 
 }

@@ -1,4 +1,4 @@
-@footerUlayer
+@global
 Feature:To test global footer links in AARP site
 Scenario:To verify links displayed in the global footer of AARP site
 Given user is on the AARP Medicare Plans home page

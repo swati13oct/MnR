@@ -58,6 +58,7 @@ public class DrugClaimsUmsStepDefintion {
 					.get(0), memberAttributesRow.get(i).getCells().get(1));
 		}
 
+		String category = memberAttributesMap.get("Member Type");
 		Set<String> memberAttributesKeySet = memberAttributesMap.keySet();
 		List<String> desiredAttributes = new ArrayList<String>();
 		for (Iterator<String> iterator = memberAttributesKeySet.iterator(); iterator
@@ -93,16 +94,9 @@ public class DrugClaimsUmsStepDefintion {
 		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
 
 		LoginPage loginPage = new LoginPage(wd);
-		loginPage.loginWith(userName, pwd);
+		AccountHomePage accountHomePage = (AccountHomePage)loginPage.loginWith(userName, pwd, category);
 		JSONObject accountHomeActualJson = null;
-		AccountHomePage accountHomePage = null;
-		if (memberAttributesMap.get("Category").equalsIgnoreCase("Individual")) {
-			accountHomePage = (AccountHomePage) loginPage
-					.checkLoginSuccessful(memberAttributesMap.get("Category"));
-		} else {
-			accountHomePage = (AccountHomePage) loginPage
-					.checkLoginSuccessful();
-		}
+		
 		/* Get expected data */
 		Map<String, JSONObject> expectedDataMap = loginScenario
 				.getExpectedJson(userName);
@@ -241,12 +235,8 @@ public class DrugClaimsUmsStepDefintion {
 					.get(0), memberAttributesRow.get(i).getCells().get(1));
 		}
 
-		String category = null;
-		if (memberAttributesMap.get("Category").equalsIgnoreCase("Group")) {
-			category = "Group";
-		} else {
-			category = "Individual";
-		}
+		String category = memberAttributesMap.get("Member Type");
+		
 		getLoginScenario().saveBean("Category", category);
 
 		String planType = memberAttributesMap.get("Plan Type");
@@ -282,9 +272,7 @@ public class DrugClaimsUmsStepDefintion {
 		WebDriver wd = getLoginScenario().getWebDriver();
 
 		LoginPage loginPage = new LoginPage(wd);
-		loginPage.loginWith(user, pwd);
-		TerminatedHomePage terminatedHomePage = (TerminatedHomePage) loginPage
-				.checkIfLoginSuccessful();
+		TerminatedHomePage terminatedHomePage = (TerminatedHomePage) loginPage.loginWith(user, pwd, category);
 		if (terminatedHomePage != null) {
 			getLoginScenario().saveBean("webDriver", wd);
 			getLoginScenario().saveBean(PageConstants.TERMINATED_HOME_PAGE,

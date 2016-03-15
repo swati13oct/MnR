@@ -1,4 +1,4 @@
-@drugLookupTest
+@druglookup
 Feature: To test drug search on AARP site
 Scenario Outline: Verify drug search in AARP site for a member
 Given registered AMP with following attributes for drug search

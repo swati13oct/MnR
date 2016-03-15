@@ -87,6 +87,8 @@ public class DrugListPage extends UhcDriver {
 			}
 		}
 		drugListJson = jsonObject;
+		
+		System.out.println("drugListJson----->"+drugListJson);
 
 	}
 

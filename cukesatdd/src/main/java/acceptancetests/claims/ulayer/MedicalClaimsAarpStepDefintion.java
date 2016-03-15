@@ -106,10 +106,9 @@ public class MedicalClaimsAarpStepDefintion {
 		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
 
 		LoginPage loginPage = new LoginPage(wd);
-		loginPage.loginWith(userName, pwd);
+		AccountHomePage accountHomePage = (AccountHomePage) loginPage.loginWith(userName, pwd);
 		JSONObject accountHomeActualJson = null;
-		AccountHomePage accountHomePage = (AccountHomePage) loginPage
-				.checkLoginSuccessful();
+	
 		/* Get expected data */
 		Map<String, JSONObject> expectedDataMap = loginScenario
 				.getExpectedJson(userName);
@@ -400,10 +399,9 @@ public class MedicalClaimsAarpStepDefintion {
 		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
 
 		LoginPage loginPage = new LoginPage(wd);
-		loginPage.loginWith(userName, pwd);
+		TerminatedHomePage TerminatedHomePage = (TerminatedHomePage)loginPage.loginWith(userName, pwd);
 
-		TerminatedHomePage TerminatedHomePage = (TerminatedHomePage) loginPage
-				.checkLoginSuccessful();
+		
 		if (TerminatedHomePage != null) {
 			getLoginScenario().saveBean(PageConstants.TERMINATED_HOME_PAGE,
 					TerminatedHomePage);

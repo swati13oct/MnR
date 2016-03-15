@@ -124,6 +124,10 @@ public class PageConstants {
 	public static final String MEDICARE_EXPLORE_CHANGING_PLANS_UHC_PAGE = "exploreChangingPlansuhcPage";
 
 	public static final String MEDICARE_DISCOVER_MORE_RESOURCES_UHC_PAGE = "discoverMoreResourcesuhcPage";
+
+	public static final String PDP_REQUEST_MORE_HELP_INFORMATION_PAGE = "pdpRequestHelpAndInformationPage";
+
+	public static final String PDP_ENROLLMENT_GUIDE_PAGE = "pdpEnrollementGuidePage";
 	
 	public static final String LOGIN_ASSISTANCE_PAGE = "loginAssistancePage";
 

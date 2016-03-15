@@ -1,18 +1,19 @@
-@loginTest
+@login
 Feature: To test Login on UMS site 
-Scenario Outline: Verify login in UMS site for Individual plan member  
-Given registered UHC member with following attributes
-	| <individualPlanType> |
-When the user logs in successfully in UMS site
-Then the user validates following plan detail
-    |  Plan Name     |
-    |  Member Number | 
-    |  Plan Status   |
+Scenario Outline:To verify login in UHC site
+Given the user is on the UHC medicare site login page
+When the user logs in with a registered UMP with following details in UHC site
+	| Plan Type   | <planType>   |
+	| Member Type | <memberType> |
+Then the user validates plan and member details after login in UHC site
 
 Examples:
-     | individualPlanType |
- #   | MA                 |
- #   | MAPD               |
+	| planType | memberType |
+#	| MA       | Individual |
+#	| MA       | Group      |
+	| MAPD     | Individual |
+	| MAPD     | Group      |
+	| PDP      | Group      |
 
 Scenario Outline: Verify login in UHC site for group plan member 
 Given registered UHC member with following attributes
@@ -28,7 +29,7 @@ Examples:
      | planType |
  #   | MA       |
  #   | MAPD     |
-     | PDP      |
+ #    | PDP      |
  #   | SSUP     |
  #   | SSRD     |
 

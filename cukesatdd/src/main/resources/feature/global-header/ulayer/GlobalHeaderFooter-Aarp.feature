@@ -1,5 +1,4 @@
-@headerFooterTest
-Feature:To test Brand section of AARP site header
+@headerFooterTestFeature:To test Brand section of AARP site header
 
 Scenario:To verify links displayed in the global footer of AARP site
 Given user is on acquisition home page of AARP Site

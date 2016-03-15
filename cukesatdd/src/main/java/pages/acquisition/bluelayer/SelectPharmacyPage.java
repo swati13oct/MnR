@@ -91,7 +91,7 @@ public class SelectPharmacyPage extends UhcDriver {
 			for (WebElement element : pharmacyRows) {
 				if (element.getText().contains(pharmacyName)) {
 					ElementData elementData = new ElementData("className",
-							"selectLink");
+							"dceBlueBtn");
 					WebElement selectLink = findChildElement(elementData,
 							element);
 					selectLink.click();

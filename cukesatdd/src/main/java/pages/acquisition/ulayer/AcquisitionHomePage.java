@@ -5,7 +5,11 @@ import java.util.List;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import org.apache.regexp.recompile;
+
 import org.openqa.selenium.Alert;
+
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
@@ -36,7 +40,8 @@ public class AcquisitionHomePage extends GlobalWebElements {
 
 	@FindBy(linkText = "Enter your drug list")
 	private WebElement prescriptionsLink;
-	
+	@FindBys(value = {@FindBy(xpath = "//table[@id='colhowdoesthiswork']/tbody/tr/td/span/span/a") })
+	private List<WebElement> howdoesthiswork;	
 	@FindBy(className = "zip-button")
 	private WebElement FindPlansButton1;
 	
@@ -47,13 +52,16 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	private WebElement LookUpZipCode1;
 	
 	@FindBy(xpath = "//*[@id='zipLookup']/p/a")
-	private WebElement LookUpZipCode21;
+	private WebElement lookupZipcode21;
 	
 	@FindBy(xpath = "//*[@id='subnav_2']/div/div/div[2]/form/span/span")
 	private WebElement errormessage1;
 	
 	@FindBy(className = "zip-button")
 	private WebElement FindPlansButton;
+	
+	@FindBy(id = "findazip_box")
+	private WebElement zipCodeSearchPopup;
 	
 	@FindBy(xpath = "//*[@id='ghn_lnk_2']")
 	private WebElement OurPlansLink;
@@ -77,7 +85,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	@FindBy(id = "homefooter")
 	private WebElement homefooter;
 
-	@FindBy(linkText = "Look up ZIP code")
+	@FindBy(id = "lookzip")
 	private WebElement lookupZipcode;
 	
 	@FindBy(id = "medicareTitle")
@@ -94,6 +102,9 @@ public class AcquisitionHomePage extends GlobalWebElements {
 
 	@FindBys(value = { @FindBy(xpath = "//table[@id='selectcountytable']/tbody/tr/td") })
 	List<WebElement> countyRows;
+	
+	@FindBy(xpath = "//div[@id='findazip_box']/div/div/div/h4")
+	private WebElement zipCodeSearchPopupHeading;
 	
 	@FindBy(xpath = "/html/body/div[3]/div/table/tbody/tr[3]/td/table/tbody/tr[2]/td/div/div[2]/div/div/div[2]/div/ul/li[2]/a")
 	WebElement zipCodebtn;
@@ -121,6 +132,9 @@ public class AcquisitionHomePage extends GlobalWebElements {
 
 	@FindBy(xpath = "//div[@id='insuranceplan_nav']/div/div[3]/ul/li/a/span")
 	private WebElement pdpVppLink;
+	
+	@FindBy(xpath = "//div[@id='insuranceplan_nav']/div/div[3]/ul/li[4]/a/span")
+	private WebElement pdp_moreHelpInfoLink;
 
 	@FindBy(linkText = "Request More Help and Information")
 	private WebElement ma_moreHelpInfoLink;
@@ -183,6 +197,8 @@ public class AcquisitionHomePage extends GlobalWebElements {
     
     
     private PageData ourplansdropdown;
+    
+    
 	public AcquisitionHomePage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
@@ -190,7 +206,12 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	}
 
 	public GetStartedPage navigateToPrescriptionDrug() {
-		prescriptionsLink.click();
+		for (WebElement element : howdoesthiswork) {
+   			if(element.getText().equalsIgnoreCase("Enter your drug list")){
+   				element.click();
+   			}
+    	   }
+		
 		if (driver
 				.getTitle()
 				.equalsIgnoreCase(
@@ -251,7 +272,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		if (!(currentUrl().contains("aarpmedicareplans"))) {
 			start(AARP_ACQISITION_PAGE_URL);
 		}
-		validate(prescriptionsLink);
+		
 		validate(zipCodeField);
 		validate(viewPlansButton);
 		validate(footnotesContent);
@@ -765,6 +786,23 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	}
 
 
+	public PDPRequestHelpAndInformationPage navigateToPDPMoreHelpAndInfo() {
+		
+		
+		Actions actions = new Actions(driver);
+		actions.moveToElement(ourPlans);
+		actions.moveToElement(pdp_moreHelpInfoLink);
+		actions.click().build().perform();
+		
+		if(currentUrl().contains("prescription-drug-plans/request-information.html")){
+			return new PDPRequestHelpAndInformationPage(driver);
+		}
+				
+		return null;
+				
+	}
+
+
 
 	public Boolean enterInvalidUserNamePassword() {
 		validate(usernameField);
@@ -872,7 +910,6 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		}		
 				
 				
-				
 	
 
 
@@ -894,6 +931,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		actions.moveToElement(ourPlansDropdownText);
 		actions.click();
 		actions.perform();
+
 }
 
 	public Boolean cookieValid() {
@@ -992,7 +1030,6 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		
 	}
 		return null;
-	
 	}
 
 public void hoverhealthandwellnesslink() {

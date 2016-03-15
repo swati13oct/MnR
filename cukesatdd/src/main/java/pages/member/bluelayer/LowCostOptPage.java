@@ -92,6 +92,8 @@ public class LowCostOptPage extends UhcDriver {
 			}
 		}
 		lowCostOptionsJson = jsonObject;
+		
+		System.out.println("lowCostOptionsJson----->"+lowCostOptionsJson);
 
 	}
 
