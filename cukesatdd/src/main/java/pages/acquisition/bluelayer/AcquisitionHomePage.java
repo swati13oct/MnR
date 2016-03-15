@@ -35,8 +35,8 @@ public class AcquisitionHomePage extends GlobalFooterWebElements {
        @FindBy(id = "vpp_selectcounty_box")
        private WebElement countyModal;
 
-       @FindBys(value = {@FindBy(xpath = "//table[@id='colhowdoesthiswork']/tbody/tr/td/span/span/a") })
-			 private List<WebElement> howdoesthiswork;
+       @FindBy(id = "dce")
+			 private WebElement dce;
       
        @FindBy(id = "learn-zipcode")
 			 private WebElement learnzipCodeField;
@@ -104,12 +104,7 @@ public class AcquisitionHomePage extends GlobalFooterWebElements {
        
 
        public EstimateDrugCostPage switchToPrescriptionDrug() {
-                for (WebElement element : howdoesthiswork) {
-				   			if(element.getText().equalsIgnoreCase("Enter your drug list")){
-				   				element.click();
-				   				break;
-				   			}
-				    	   }
+                	dce.click();
               driver.getTitle();
               if (driver.getTitle().equalsIgnoreCase(
                            "Our Medicare Plan Types | UnitedHealthcare®")) {

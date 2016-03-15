@@ -35,8 +35,8 @@ public class AcquisitionHomePage extends GlobalFooterWebElements {
 	@FindBy(className = "fd_myPlans")
 	private WebElement myPlansTab;
 
-	@FindBys(value = {@FindBy(xpath = "//table[@id='colhowdoesthiswork']/tbody/tr/td/span/span/a") })
-	private List<WebElement> howdoesthiswork;
+	@FindBy(id = "dce")
+	private WebElement dce;
 	
 	@FindBy(id = "learn-zipcode")
   private WebElement learnzipCodeField;
@@ -193,13 +193,7 @@ public class AcquisitionHomePage extends GlobalFooterWebElements {
 	}
 
 	public GetStartedPage navigateToPrescriptionDrug() {
-		for (WebElement element : howdoesthiswork) {
-   			if(element.getText().equalsIgnoreCase("Enter your drug list")){
-   				element.click();
-   				break;
-   			}
-    	   }
-		
+			dce.click();		
 		if (driver
 				.getTitle()
 				.equalsIgnoreCase(
