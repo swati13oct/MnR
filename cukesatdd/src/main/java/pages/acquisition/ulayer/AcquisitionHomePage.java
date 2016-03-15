@@ -38,6 +38,9 @@ public class AcquisitionHomePage extends GlobalFooterWebElements {
 	@FindBy(id = "dce")
 	private WebElement dce;
 	
+	@FindBy(id = "takequizbtn")
+	private WebElement takequizbtn;
+	
 	@FindBy(id = "learn-zipcode")
   private WebElement learnzipCodeField;
 
@@ -1026,4 +1029,11 @@ public class AcquisitionHomePage extends GlobalFooterWebElements {
 
 		} 
 
+	public PlanSelectorPage  planselector() {
+		takequizbtn.click();
+		if (getTitle().equalsIgnoreCase("Plan Selector")) {
+			return new PlanSelectorPage(driver);
+		}		 
+		 return null;
+	}
 }

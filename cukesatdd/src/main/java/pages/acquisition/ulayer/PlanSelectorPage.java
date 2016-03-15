@@ -3,10 +3,16 @@
  */
 package pages.acquisition.ulayer;
 
-
+import org.json.JSONException;
 import org.json.JSONObject;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
+
+import acceptancetests.atdd.data.CommonConstants;
 import acceptancetests.atdd.data.PageData;
+import acceptancetests.atdd.util.CommonUtility;
 
 /**
  * @author rkodumur
@@ -14,10 +20,27 @@ import acceptancetests.atdd.data.PageData;
  */
 public class PlanSelectorPage extends GlobalFooterWebElements{
 	
+	@FindBy(xpath = "//article[@id='criteria']/header/div[1]/h2")
+	private WebElement planselectorpage;
+	
+	public  JSONObject planselectorJson;
+	
+	private PageData planselector;
 	
 	public PlanSelectorPage(WebDriver driver) {
 		super(driver);
-		// TODO Auto-generated constructor stub
+		PageFactory.initElements(driver, this);
+		try {
+			Thread.sleep(8000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		switchToNewIframe("baseFrame");
+		String fileName = CommonConstants.PLAN_SELECTOR_PAGE_DATA;
+		planselector = CommonUtility.readPageData(fileName,
+				CommonConstants.PAGE_OBJECT_DIRECTORY_ULAYER_ACQ);
+		openAndValidate();
 	}
 
 	public Boolean validate_textField() {
@@ -33,5 +56,27 @@ public class PlanSelectorPage extends GlobalFooterWebElements{
 		
 	}
 
+
+	
+	@Override
+	public void openAndValidate() {
+		validate(planselectorpage);
+		JSONObject jsonObject = new JSONObject();
+		for (String key : planselector.getExpectedData().keySet()) {
+			WebElement element = findElement(planselector.getExpectedData().get(key));
+			if (null != element) {
+				if (validate(element)) {
+					try {
+						jsonObject.put(key, element.getText());
+					} catch (JSONException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				}
+			}
+		}
+		planselectorJson = jsonObject;
+	}
+		
 		
 }

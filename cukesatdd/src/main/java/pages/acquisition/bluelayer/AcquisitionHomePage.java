@@ -22,7 +22,10 @@ import acceptancetests.atdd.util.CommonUtility;
 import pages.acquisition.bluelayer.ZipcodeLookupHomePage;
 
 public class AcquisitionHomePage extends GlobalFooterWebElements {
-
+	
+			 @FindBy(id = "takequizbtn")
+	     private WebElement takequizbtn;
+		
        @FindBy(id = "lookzip")
        private WebElement lookupZipcode;
 
@@ -700,6 +703,14 @@ public SiteMapUMSPage siteMapFooterClick() {
         }
 		
 		return null;
+	}
+	
+	public PlanSelectorPage  planselector() {
+		takequizbtn.click();
+		if (getTitle().equalsIgnoreCase("Plan Selector")) {
+			return new PlanSelectorPage(driver);
+		}		 
+		 return null;
 	}
 
 }
