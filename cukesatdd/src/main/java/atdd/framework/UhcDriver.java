@@ -286,6 +286,15 @@ public abstract class UhcDriver {
 		return driver.manage().getCookieNamed(cookieName);
 	}
 	
+		public WebDriver switchToNewIframe(String iframeName) {
+		return driver.switchTo().frame(iframeName);
+		
+	}
+	public WebDriver switchToNewIframe(WebElement iframeElement) {
+		return driver.switchTo().frame(iframeElement);
+		
+	}
+
 
 	public abstract void openAndValidate();
 

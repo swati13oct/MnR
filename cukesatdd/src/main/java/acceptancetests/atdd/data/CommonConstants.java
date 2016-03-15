@@ -561,6 +561,8 @@ public class CommonConstants {
 	
 	public static final String ZIPCODE_SELECTION_HOME_PAGE_DATA = "zipselectionhome.json";
 	
+	public static final String PLAN_SELECTOR_PAGE_DATA = "planselector.json";
+	
 	public static final long TIMEOUT_30 = 30;
 	
 	public static final long TIMEOUT_40 = 40;
