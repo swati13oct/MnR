@@ -43,6 +43,15 @@ public class AcquisitionHomePage extends GlobalFooterWebElements {
 
 	     @FindBy(id = "learnfindplanBtn")
 	     private WebElement learnfindPlansButton;
+	     
+	     @FindBys(value = {@FindBy(xpath = "//ul[@id='topic-selectSelectBoxItOptions']/li")})
+	   	 private List<WebElement> topicDropDownValues;
+	   		   	
+	   	 @FindBy(id = "topic-selectSelectBoxIt")
+	   	 private WebElement selectSelectBoxIt;
+	   	 
+	   	 @FindBy(id = "picktopicbtn")
+	   	 private WebElement picktopicbtn;
 
        @FindBy(id = "homefooter")
        private WebElement homefooter;
@@ -118,7 +127,7 @@ public class AcquisitionHomePage extends GlobalFooterWebElements {
               if (driver.getTitle().equalsIgnoreCase(
                            "Forbidden Page | UnitedHealthcare®")
                            || driver.getTitle().equalsIgnoreCase(
-                                         "Our Medicare Plan Types | UnitedHealthcare®")) {
+                                         "Medicare Plans for Different Needs | UnitedHealthcare®")) {
                      return new ZipcodeLookupHomePage(driver);
               }
               return null;
@@ -673,5 +682,30 @@ public SiteMapUMSPage siteMapFooterClick() {
 
 		return null;
 	}
+	
+	public Object pickatopic(String picktopic) {
+		
+        selectSelectBoxIt.click();
+        for (WebElement element : topicDropDownValues) {
+			if(element.getText().equalsIgnoreCase(picktopic)){
+			element.click();
+			picktopicbtn.click();
+				break;
+			}
+		}
+        
+        if (currentUrl().contains("/medicare-education/about")) {
+        	if(getTitle().equals("Learn About Medicare | UnitedHealthcare®")){
+        		return new LearnAboutMedicareuhcPage(driver);
+        	}
+        } else if(currentUrl().contains("medicare-education/enroll")){
+        	if(getTitle().equals("Prepare for Your Medicare Initial Enrollment Period | UnitedHealthcare®")){
+        	return new PrepareForInitialEnrollmentuhcPage(driver);
+        	}
+        }
+		
+		return null;
+	}
+
 }
 

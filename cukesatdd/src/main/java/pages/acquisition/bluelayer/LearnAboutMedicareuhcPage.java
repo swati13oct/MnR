@@ -16,16 +16,42 @@ import pages.acquisition.ulayer.ExploreChangingPlansPage;
  */
 public class LearnAboutMedicareuhcPage extends GlobalFooterWebElements{
 	
-
+	@FindBy(className = "bullet_list")
+	private WebElement learnaboutMedicareuhc;
+	
+	public  JSONObject learnaboutMedicareuhcJson;
+	
+	private PageData learnaboutMedicareuhcPage;
+	
 	public LearnAboutMedicareuhcPage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
+		String fileName = CommonConstants.LEARN_ABOUT_PLAN_PAGE_DATA;
+		learnaboutMedicareuhcPage = CommonUtility.readPageData(fileName,
+				CommonConstants.PAGE_OBJECT_DIRECTORY_BLUELAYER_ACQ);
 		openAndValidate();
 	}
 
 	@Override
 	public void openAndValidate() {
 		validate(prepareForInitialEnrollmentLink);
+		validate(learnaboutMedicareuhc);
+		JSONObject jsonObject = new JSONObject();
+		for (String key : learnaboutMedicareuhcPage.getExpectedData().keySet()) {
+			WebElement element = findElement(learnaboutMedicareuhcPage.getExpectedData().get(key));
+			if (null != element) {
+				if (validate(element)) {
+					try {
+						jsonObject.put(key, element.getText());
+					} catch (JSONException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				}
+			}
+		}
+		learnaboutMedicareuhcJson = jsonObject;
+		
 		
 	}
 
