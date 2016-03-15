@@ -19,6 +19,7 @@ import acceptancetests.atdd.data.CommonConstants;
 import acceptancetests.atdd.data.MRConstants;
 import acceptancetests.atdd.data.PageData;
 import acceptancetests.atdd.util.CommonUtility;
+import pages.acquisition.bluelayer.ZipcodeLookupHomePage;
 
 public class AcquisitionHomePage extends GlobalWebElements {
 
@@ -36,11 +37,18 @@ public class AcquisitionHomePage extends GlobalWebElements {
 
        @FindBy(linkText = "Enter your drug list")
        private WebElement prescriptionsLink;
+
 		@FindBys(value = {@FindBy(xpath = "//table[@id='colhowdoesthiswork']/tbody/tr/td/span/span/a") })
 		private List<WebElement> howdoesthiswork;
+      
+       @FindBy(id = "learn-zipcode")
+	   private WebElement learnzipCodeField;
 
-       @FindBy(id = "homefooter")
-       private WebElement homefooter;
+		@FindBy(id = "learnfindplanBtn")
+	    private WebElement learnfindPlansButton;       
+
+		@FindBy(id = "homefooter")
+        private WebElement homefooter;
 
 		@FindBys(value = { @FindBy(xpath = "//table[@id='selectcountytable']/tbody/tr/td") })
        List<WebElement> countyRows;
@@ -96,6 +104,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
                 for (WebElement element : howdoesthiswork) {
 				   			if(element.getText().equalsIgnoreCase("Enter your drug list")){
 				   				element.click();
+				   				break;
 				   			}
 				    	   }
               driver.getTitle();
@@ -108,7 +117,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 
        }
 
-       public ZipcodeLookupPage looksupforZipcodes() {
+       public ZipcodeLookupHomePage looksupforZipcodes() {
               
               lookupZipcode.click();
 
@@ -116,7 +125,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
                            "Forbidden Page | UnitedHealthcare®")
                            || driver.getTitle().equalsIgnoreCase(
                                          "Our Medicare Plan Types | UnitedHealthcare®")) {
-                     return new ZipcodeLookupPage(driver);
+                     return new ZipcodeLookupHomePage(driver);
               }
               return null;
 
@@ -294,6 +303,31 @@ public SiteMapUMSPage siteMapFooterClick() {
               }
               return null;
        }
+       
+       public VPPPlanSummaryPage searchPlansForLearnFindPlans(String zipcode, String countyName) {
+           sendkeys(learnzipCodeField, zipcode);
+           learnfindPlansButton.click();
+           try {
+                  if (countyModal.isDisplayed()) {
+                        for (WebElement county : countyRows) {
+                               if (county.getText().equalsIgnoreCase(countyName)) {
+                                      county.click();
+                                      break;
+                               }
+
+                        }
+                  }
+           } catch (Exception e) {
+                  System.out.println("county box not found");
+           }
+           if (getTitle()
+                        .equalsIgnoreCase(
+                                      "Our Medicare Plan Types | UnitedHealthcare®")) {
+                  return new VPPPlanSummaryPage(driver);
+           }
+           return null;
+    }
+       
 
        public String selectsHomeFooter() {
               // TODO Auto-generated method stub

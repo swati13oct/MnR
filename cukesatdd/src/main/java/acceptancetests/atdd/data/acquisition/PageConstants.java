@@ -35,6 +35,10 @@ public class PageConstants {
 
 	public static final String ZIP_SELECTION_PAGE = "zipcodeSelectionPage";
 
+	public static final String ZIP_LOOK_UP_HOME_PAGE = "zipcodeLookuphomePage";
+
+	public static final String ZIP_SELECTION_HOME_PAGE = "zipcodeSelectionhomePage";
+	
 	public static final String OUR_PLANS_PAGE = "ourPlansPage";
 
 	public static final String MANAGE_DRUG_PAGE = "manageDrugPage";

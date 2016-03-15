@@ -16,6 +16,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import pages.acquisition.ulayer.AcquisitionHomePage;
 import pages.acquisition.ulayer.OurPlansPage;
+import pages.acquisition.ulayer.ZipcodeLookupHomePage;
+import pages.acquisition.ulayer.ZipcodeSelectionHomePage;
 import pages.acquisition.ulayer.ZipcodeLookupPage;
 import pages.acquisition.ulayer.ZipcodeSelectionPage;
 import acceptancetests.atdd.data.CommonConstants;
@@ -51,11 +53,11 @@ public class LookupZipcodeAarpStepDefinition {
 
 		getLoginScenario().saveBean(PageConstants.ACQUISITION_HOME_PAGE,
 				acquisitionHomePage);
-		ZipcodeLookupPage zipcodeLookupPage = acquisitionHomePage
+		ZipcodeLookupHomePage zipcodeLookupPage = acquisitionHomePage
 				.looksupforZipcodes();
 
 		if (zipcodeLookupPage != null) {
-			getLoginScenario().saveBean(PageConstants.ZIP_LOOK_UP_PAGE,
+			getLoginScenario().saveBean(PageConstants.ZIP_LOOK_UP_HOME_PAGE,
 					zipcodeLookupPage);
 			Assert.assertTrue(true);
 		} else {
@@ -67,7 +69,7 @@ public class LookupZipcodeAarpStepDefinition {
 	@And("^the user searches for zipcodes by entering the following Address and city and State details for AARP site$")
 	public void enters_addres_city_state_details_aarp(
 			DataTable addressAttributes) {
-		List<DataTableRow> addressAttributesRow = addressAttributes
+	List<DataTableRow> addressAttributesRow = addressAttributes
 				.getGherkinRows();
 		Map<String, String> addressAttributesMap = new LinkedHashMap<String, String>();
 		for (int i = 0; i < addressAttributesRow.size(); i++) {
@@ -79,13 +81,13 @@ public class LookupZipcodeAarpStepDefinition {
 		String city = addressAttributesMap.get("City");
 		String state = addressAttributesMap.get("State");
 
-		ZipcodeLookupPage zipcodeLookupAarpPage = (ZipcodeLookupPage) getLoginScenario()
-				.getBean(PageConstants.ZIP_LOOK_UP_PAGE);
-		ZipcodeSelectionPage zipcodeSelectionPage = zipcodeLookupAarpPage
+		ZipcodeLookupHomePage zipcodeLookupAarpPage = (ZipcodeLookupHomePage) getLoginScenario()
+				.getBean(PageConstants.ZIP_LOOK_UP_HOME_PAGE);
+		ZipcodeSelectionHomePage zipcodeSelectionPage = zipcodeLookupAarpPage
 				.enterAddressDetails(address, city, state);
 
 		if (zipcodeSelectionPage != null) {
-			getLoginScenario().saveBean(PageConstants.ZIP_SELECTION_PAGE,
+			getLoginScenario().saveBean(PageConstants.ZIP_SELECTION_HOME_PAGE,
 					zipcodeSelectionPage);
 			/* Get expected data */
 			String fileName = address;
@@ -101,7 +103,7 @@ public class LookupZipcodeAarpStepDefinition {
 					ZipLookupCommonConstants.ZIP_SELECTION_EXPECTED,
 					zipcodeSelectionExpectedJson);
 
-			JSONObject zipcodeSelectionActualJson = zipcodeSelectionPage.zipSelectionJson;
+			JSONObject zipcodeSelectionActualJson = zipcodeSelectionPage.zipSelectionhomeJson;
 			getLoginScenario().saveBean(
 					ZipLookupCommonConstants.ZIP_SELECTION_ACTUAL,
 					zipcodeSelectionActualJson);

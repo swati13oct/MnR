@@ -48,6 +48,8 @@ public class CommonConstants {
 	public static final String PAGE_OBJECT_DIRECTORY_ULAYER_MEMBER = "/page-objects/member/ulayer/";
 
 	public static final String PLAN_SUMMARY_PAGE_DATA = "plansummarypdp.json";
+	
+	
 
 	public static final String PLAN_SUMMARY_DIRECTORY = "/jsonresponse/Member/ulayer/planSummary/";
 
@@ -581,6 +583,8 @@ public class CommonConstants {
 
 	public static final String ZIPCODE_SELECTION_PAGE_DATA = "zipselection.json";
 
+	public static final String ZIPCODE_SELECTION_HOME_PAGE_DATA = "zipselectionhome.json";
+	
 	public static final long TIMEOUT_30 = 30;
 
 	public static final long TIMEOUT_40 = 40;

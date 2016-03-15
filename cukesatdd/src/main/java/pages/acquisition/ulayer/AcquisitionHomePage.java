@@ -14,7 +14,7 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.FindBys;
 import org.openqa.selenium.support.PageFactory;
-
+import pages.acquisition.ulayer.ZipcodeLookupHomePage;
 import pages.member.ulayer.AccountHomePage;
 import acceptancetests.atdd.data.CommonConstants;
 import acceptancetests.atdd.data.MRConstants;
@@ -36,6 +36,12 @@ public class AcquisitionHomePage extends GlobalFooterWebElements {
 	@FindBy(linkText = "prescriptions")
 	private WebElement prescriptionsLink;
 
+	@FindBy(id = "learn-zipcode")
+  private WebElement learnzipCodeField;
+
+  @FindBy(id = "learnfindplanBtn")
+  private WebElement learnfindPlansButton;
+	
 	@FindBy(className = "zip-button")
 	private WebElement FindPlansButton1;
 
@@ -216,8 +222,7 @@ public class AcquisitionHomePage extends GlobalFooterWebElements {
 	}
 
 	public GetStartedPage navigateToPrescriptionDrug() {
-		prescriptionsLink.click();
-		if (driver
+		prescriptionsLink.click();		if (driver
 				.getTitle()
 				.equalsIgnoreCase(
 						"Our Medicare Plan Types | AARP® Medicare Plans from UnitedHealthcare®")) {
@@ -254,19 +259,15 @@ public class AcquisitionHomePage extends GlobalFooterWebElements {
 		return globalHeaderJson;
 
 	}
-
-	public ZipcodeLookupPage looksupforZipcodes() {
-
+	public ZipcodeLookupHomePage looksupforZipcodes() {
 		lookupZipcode.click();
 
-		if (driver
-				.getTitle()
+		if (getTitle()
 				.equalsIgnoreCase(
-						"Medicare Plans | AARP?? Medicare Plans from UnitedHealthcare??")
+"Medicare Plans | AARP?? Medicare Plans from UnitedHealthcare??")
 				|| driver.getTitle().equalsIgnoreCase(
 						"Our Medicare Plan Types | UnitedHealthcare®")) {
-			return new ZipcodeLookupPage(driver);
-		}
+			return new ZipcodeLookupPage(driver);		}
 		return null;
 	}
 
@@ -306,6 +307,29 @@ public class AcquisitionHomePage extends GlobalFooterWebElements {
 		return null;
 	}
 
+		public VPPPlanSummaryPage searchPlansForLearnFindPlans(String zipcode, String countyName) {
+        sendkeys(learnzipCodeField, zipcode);
+        learnfindPlansButton.click();
+        try {
+               if (countyModal.isDisplayed()) {
+                     for (WebElement county : countyRows) {
+                            if (county.getText().equalsIgnoreCase(countyName)) {
+                                   county.click();
+                                   break;
+                            }
+
+                     }
+               }
+        } catch (Exception e) {
+               System.out.println("county box not found");
+        }
+        if (getTitle()
+                     .equalsIgnoreCase(
+                                   "Our Medicare Plan Types | AARP® Medicare Plans from UnitedHealthcare®")) {
+               return new VPPPlanSummaryPage(driver);
+        }
+        return null;
+ }
 	public String selectsHomeFooter() {
 
 		return homefooter.getText();

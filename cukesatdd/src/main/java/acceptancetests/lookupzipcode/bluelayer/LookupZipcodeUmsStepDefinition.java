@@ -18,6 +18,8 @@ import pages.acquisition.bluelayer.AcquisitionHomePage;
 import pages.acquisition.bluelayer.OurPlansPage;
 import pages.acquisition.bluelayer.ZipcodeLookupPage;
 import pages.acquisition.bluelayer.ZipcodeSelectionPage;
+import pages.acquisition.bluelayer.ZipcodeLookupHomePage;
+import pages.acquisition.bluelayer.ZipcodeSelectionHomePage;
 import acceptancetests.atdd.data.CommonConstants;
 import acceptancetests.atdd.data.acquisition.PageConstants;
 import acceptancetests.lookupzipcode.data.ZipLookupCommonConstants;
@@ -43,18 +45,18 @@ public class LookupZipcodeUmsStepDefinition {
 	@When("^the user clicks on lookup zipcode link from UMS home page$")
 	public void clicks_lookup_Zipcode_ums() {
 
-		WebDriver wd = getLoginScenario().getWebDriver();
+			WebDriver wd = getLoginScenario().getWebDriver();
 		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
 
 		AcquisitionHomePage umsAcquisitionHomePage = new AcquisitionHomePage(wd);
 
 		getLoginScenario().saveBean(PageConstants.UHC_ACQUISITION_HOME_PAGE,
 				umsAcquisitionHomePage);
-		ZipcodeLookupPage zipcodeLookupPage = umsAcquisitionHomePage
+		ZipcodeLookupHomePage zipcodeLookupPage = umsAcquisitionHomePage
 				.looksupforZipcodes();
 
 		if (zipcodeLookupPage != null) {
-			getLoginScenario().saveBean(PageConstants.ZIP_LOOK_UP_PAGE,
+			getLoginScenario().saveBean(PageConstants.ZIP_LOOK_UP_HOME_PAGE,
 					zipcodeLookupPage);
 			Assert.assertTrue(true);
 		} else {
