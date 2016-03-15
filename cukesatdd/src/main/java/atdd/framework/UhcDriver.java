@@ -45,6 +45,14 @@ public abstract class UhcDriver {
          driver.switchTo().window(tabs.get(1));
 	}
 
+	public WebDriver switchToNewIframe(String iframeName) {
+		return driver.switchTo().frame(iframeName);
+		
+	}
+	public WebDriver switchToNewIframe(WebElement iframeElement) {
+		return driver.switchTo().frame(iframeElement);
+		
+	}
 
 	public boolean elementFound(WebElement element) {
 		try {
@@ -124,6 +132,11 @@ public abstract class UhcDriver {
 			else if (elementData.getIdentifier().equalsIgnoreCase("name")) {
 				driver.manage().timeouts().implicitlyWait(1, TimeUnit.SECONDS);
 				element = driver.findElement(By.name(elementData
+						.getElementName()));
+			}
+			else if (elementData.getIdentifier().equalsIgnoreCase("tagName")) {
+				driver.manage().timeouts().implicitlyWait(1, TimeUnit.SECONDS);
+				element = driver.findElement(By.tagName(elementData
 						.getElementName()));
 			}
 			

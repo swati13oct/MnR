@@ -16,6 +16,7 @@ import org.skyscreamer.jsonassert.JSONAssert;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import pages.acquisition.ulayer.AcquisitionHomePage;
+import pages.acquisition.ulayer.ProviderSearchPage;
 import pages.acquisition.ulayer.VPPPlanSummaryPage;
 import acceptancetests.atdd.data.CommonConstants;
 import acceptancetests.atdd.data.acquisition.PageConstants;
@@ -212,13 +213,77 @@ public class VppAarpStepDefinition {
 				+ zipcode + File.separator + county + File.separator;
 		JSONObject planSummaryExpectedJson = MRScenario.readExpectedJson(
 				fileName, directory);
-		
+
 		System.out
-		.println("planSummaryActualJson---->" + planSummaryActualJson);
+				.println("planSummaryActualJson---->" + planSummaryActualJson);
+		System.out.println("planSummaryExpectedJson---->"
+				+ planSummaryExpectedJson);
+
+		try {
+			JSONAssert.assertEquals(planSummaryExpectedJson,
+					planSummaryActualJson, true);
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}
+
+	}
+
+	@And("^the user clicks on Enter Provider information link in AARP site$")
+	public void enters_provider_information_aarp(DataTable physicianAttributes) {
+
+		String planName = (String) getLoginScenario().getBean(
+				VPPCommonConstants.PLAN_NAME);
+
+		String physicianSearchCriteria = physicianAttributes.getGherkinRows()
+				.get(0).getCells().get(0);
+		String physicianName = physicianAttributes.getGherkinRows().get(1)
+				.getCells().get(0);
+		VPPPlanSummaryPage planSummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		ProviderSearchPage providerSearchPage = planSummaryPage
+				.clicksOnIsProviderCovered(planName);
+
+		planSummaryPage = providerSearchPage.selectsProvider(
+				physicianSearchCriteria, physicianName);
+
+		/* get actual data for a particular plan */
+		JSONObject planSummaryActualJson = planSummaryPage
+				.getPlanSummaryActualData(planName);
+		getLoginScenario().saveBean(VPPCommonConstants.VPP_PLAN_SUMMARY_ACTUAL,
+				planSummaryActualJson);
+
+		/* Get expected data */
+		String fileName = planName;
+		String zipcode = (String) getLoginScenario().getBean(
+				VPPCommonConstants.ZIPCODE);
+		String county = (String) getLoginScenario().getBean(
+				VPPCommonConstants.COUNTY);
+		String directory = CommonConstants.ACQUISITION_EXPECTED_DIRECTORY
+				+ File.separator + CommonConstants.SITE_ULAYER + File.separator
+				+ VPPCommonConstants.VPP_PLAN_FLOW_NAME + File.separator
+				+ zipcode + File.separator + county + File.separator
+				+ physicianName + File.separator;
+		JSONObject planSummaryExpectedJson = MRScenario.readExpectedJson(
+				fileName, directory);
+
+		getLoginScenario().saveBean(
+				VPPCommonConstants.VPP_PLAN_SUMMARY_EXPECTED,
+				planSummaryExpectedJson);
+
+	}
+
+	@Then("^the user validates the plan summary after provider information is added in AARP site$")
+	public void validates_plansummary_after_provider_information_aarp() {
+		JSONObject planSummaryActualJson = (JSONObject) getLoginScenario()
+				.getBean(VPPCommonConstants.VPP_PLAN_SUMMARY_ACTUAL);
+		JSONObject planSummaryExpectedJson = (JSONObject) getLoginScenario()
+				.getBean(VPPCommonConstants.VPP_PLAN_SUMMARY_EXPECTED);
+
 		System.out
-		.println("planSummaryExpectedJson---->" + planSummaryExpectedJson);
-		
-		
+				.println("planSummaryActualJson---->" + planSummaryActualJson);
+		System.out.println("planSummaryExpectedJson---->"
+				+ planSummaryExpectedJson);
+
 		try {
 			JSONAssert.assertEquals(planSummaryExpectedJson,
 					planSummaryActualJson, true);

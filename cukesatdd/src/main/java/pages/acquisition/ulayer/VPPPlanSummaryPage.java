@@ -8,9 +8,11 @@ import java.util.List;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.FindBys;
 import org.openqa.selenium.support.PageFactory;
 
 import acceptancetests.atdd.data.CommonConstants;
@@ -48,6 +50,29 @@ public class VPPPlanSummaryPage extends UhcDriver {
 
 	@FindBy(id = "editDrugMA")
 	private WebElement editDrugListLink;
+	
+	@FindBy(linkText = "All Primary Care Physicians")
+	private WebElement allPrimaryCarePhysicians;
+	
+	@FindBy(linkText = "Complete my list")
+	private WebElement completeMyList;
+	
+	@FindBys(value = { @FindBy(className = "firstTierFilterItem") })
+	private List<WebElement> physcianSearchTypes;
+	
+	
+	@FindBys(value = { @FindBy(xpath = "//div[@id='providerResultsContainer']/div") })
+	private List<WebElement> providerNameList;
+	
+	
+	@FindBy(id = "pageHeader")
+	private WebElement pageHeader;
+	
+	@FindBy(id = "providerSearchFrame")
+	private WebElement providerSearchIframe;
+	
+	
+	
 
 	private PageData vppPlanSummary;
 
@@ -226,12 +251,14 @@ public class VPPPlanSummaryPage extends UhcDriver {
 				for (String key : vppPlanSummary.getExpectedData().keySet()) {
 					WebElement element = findChildElement(
 							vppPlanSummary.getExpectedData().get(key), plan);
-					validate(element);
+					if(validate(element))
+					{
 					try {
 						jsonObject.put(key, element.getText());
 					} catch (JSONException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
+					}
 					}
 					
 				}
@@ -288,7 +315,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 			}
 
 		} else if (planName.contains("PDP")) {
-			ElementData elementData = new ElementData("id", "editDrugMA");
+			ElementData elementData = new ElementData("id", "editDrugPDP");
 			WebElement element = getViewPlanDetailsElement(pdpPlanElement,
 					elementData, planName);
 			if (element != null) {
@@ -304,6 +331,64 @@ public class VPPPlanSummaryPage extends UhcDriver {
 
 		return null;
 	}
+
+	public ProviderSearchPage clicksOnIsProviderCovered(String planName) {
+		
+		ElementData elementData = new ElementData("id", "doctorCoverMA");
+		for (WebElement plan : maPlanElement) {
+			if (plan.getText().contains(planName)) {
+				findChildElement(elementData,plan).click();
+				break;
+			}
+		}
+
+		try {
+			Thread.sleep(8000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		switchToNewIframe("providerSearchFrame");
+		if (pageHeader.getText().equalsIgnoreCase("Find a Physician, Medical Group, Clinic or Facility"))
+		{
+			return new ProviderSearchPage(driver);
+		}
+		return null;
+		/*for (WebElement physcianSearchType : physcianSearchTypes) {
+			if (physcianSearchType.getText().contains(physicianSearchCriteria)) {
+				ElementData physcianElementdata = new ElementData("tagName", "a");
+				findChildElement(physcianElementdata,physcianSearchType).click();
+			}
+		}
+
+		
+		for(WebElement element : providerNameList){
+			ElementData providerElementData = new ElementData("className", "providerName");
+			if(findChildElement(providerElementData,element).getText().equalsIgnoreCase(physicianName))
+			{ 
+				ElementData addToListElementData = new ElementData("linkText", "Add to List");
+				findChildElement(addToListElementData,element).click();
+			}
+		}
+		
+		completeMyList.click();
+
+		if (getTitle()
+				.equalsIgnoreCase(
+						"Our Medicare Plan Types | AARP® Medicare Plans from UnitedHealthcare®")) {
+			return new VPPPlanSummaryPage(driver);
+		}
+		*/
+		
+		
+		
+		
+		
+
+		
+	}
+
+
 	
 }
 

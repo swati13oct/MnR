@@ -88,6 +88,12 @@ public class AccountHomePage extends UhcDriver {
 
 	@FindBy(className = "fd_myHealthWellness")
 	private WebElement hwTab;
+	
+	@FindBy(linkText = "Compare 2016 Plans")
+	private WebElement planCompareLink;	
+	
+	@FindBy(xpath = "//div[@class='prefermain_mid mapd_div']/div/h3")
+	private WebElement planCompareHeader;	
 
 	@FindBy(xpath = "//div[@class='myProfileMid']/div/div/div[2]/h2")
 	private WebElement myProfilePageHeading;
@@ -378,6 +384,18 @@ public class AccountHomePage extends UhcDriver {
 		}
 		return null;
 				
+	}
+
+	public PlanComparePage navigateToPlanCompare() {
+		//Compare 2016 Plans
+		planCompareLink.click();
+		CommonUtility.waitForPageLoad(driver, planCompareHeader, 20);
+		if(getTitle().equalsIgnoreCase("Compare 2016 Plans"))
+		{
+			return new PlanComparePage(driver);
+		}
+		return null;
+		
 	}
 
 }

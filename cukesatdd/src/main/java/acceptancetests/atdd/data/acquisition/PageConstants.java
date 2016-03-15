@@ -144,4 +144,6 @@ public class PageConstants {
 	public static final String SPECIAL_NEEDS_GET_ENROLMENT_INFO_PAGE = "specialNeedGetEnrollmentInformationPage";
 
 	public static final String PLAN_SELECTOR_PAGE = "planSelectorPage";
+
+	public static final String PROVIDER_SEARCH_PAGE = "providerSearchPage";
 }
