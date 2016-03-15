@@ -21,11 +21,8 @@ import acceptancetests.atdd.data.PageData;
 import acceptancetests.atdd.util.CommonUtility;
 import pages.acquisition.bluelayer.ZipcodeLookupHomePage;
 
-public class AcquisitionHomePage extends GlobalFooterWebElements {
-	
-			 @FindBy(id = "takequizbtn")
-	     private WebElement takequizbtn;
-		
+public class AcquisitionHomePage extends GlobalWebElements {
+
        @FindBy(id = "lookzip")
        private WebElement lookupZipcode;
 
@@ -38,26 +35,20 @@ public class AcquisitionHomePage extends GlobalFooterWebElements {
        @FindBy(id = "vpp_selectcounty_box")
        private WebElement countyModal;
 
-       @FindBy(id = "dce")
-			 private WebElement dce;
+       @FindBy(linkText = "Enter your drug list")
+       private WebElement prescriptionsLink;
+
+		@FindBys(value = {@FindBy(xpath = "//table[@id='colhowdoesthiswork']/tbody/tr/td/span/span/a") })
+		private List<WebElement> howdoesthiswork;
       
        @FindBy(id = "learn-zipcode")
-			 private WebElement learnzipCodeField;
+	   private WebElement learnzipCodeField;
 
-	     @FindBy(id = "learnfindplanBtn")
-	     private WebElement learnfindPlansButton;
-	     
-	     @FindBys(value = {@FindBy(xpath = "//ul[@id='topic-selectSelectBoxItOptions']/li")})
-	   	 private List<WebElement> topicDropDownValues;
-	   		   	
-	   	 @FindBy(id = "topic-selectSelectBoxIt")
-	   	 private WebElement selectSelectBoxIt;
-	   	 
-	   	 @FindBy(id = "picktopicbtn")
-	   	 private WebElement picktopicbtn;
+		@FindBy(id = "learnfindplanBtn")
+	    private WebElement learnfindPlansButton;       
 
-       @FindBy(id = "homefooter")
-       private WebElement homefooter;
+		@FindBy(id = "homefooter")
+        private WebElement homefooter;
 
 		@FindBys(value = { @FindBy(xpath = "//table[@id='selectcountytable']/tbody/tr/td") })
        List<WebElement> countyRows;
@@ -70,6 +61,9 @@ public class AcquisitionHomePage extends GlobalFooterWebElements {
        
        @FindBy(id = "medicareTitle")
    	   private WebElement medicareTitleText;
+       
+       @FindBy(className = "fd_myPlans")
+   		private WebElement myPlansTab;
 
 		@FindBy(linkText = "pharmacy")
 		private WebElement pharmacyLink;
@@ -107,7 +101,12 @@ public class AcquisitionHomePage extends GlobalFooterWebElements {
        
 
        public EstimateDrugCostPage switchToPrescriptionDrug() {
-                	dce.click();
+                for (WebElement element : howdoesthiswork) {
+				   			if(element.getText().equalsIgnoreCase("Enter your drug list")){
+				   				element.click();
+				   				break;
+				   			}
+				    	   }
               driver.getTitle();
               if (driver.getTitle().equalsIgnoreCase(
                            "Our Medicare Plan Types | UnitedHealthcare®")) {
@@ -125,7 +124,7 @@ public class AcquisitionHomePage extends GlobalFooterWebElements {
               if (driver.getTitle().equalsIgnoreCase(
                            "Forbidden Page | UnitedHealthcare®")
                            || driver.getTitle().equalsIgnoreCase(
-                                         "Medicare Plans for Different Needs | UnitedHealthcare®")) {
+                                         "Our Medicare Plan Types | UnitedHealthcare®")) {
                      return new ZipcodeLookupHomePage(driver);
               }
               return null;
@@ -347,14 +346,17 @@ public SiteMapUMSPage siteMapFooterClick() {
               }
 
 	public AcquisitionHomePage veiwAllDisclaimerLinkSectionLinksClick() {
-		validate(GlobalFooterWebElements.viewAllDisclaimerInformationLink);
-		GlobalFooterWebElements.viewAllDisclaimerInformationLink.click();
+		validate(GlobalWebElements.viewAllDisclaimerInformationLink);
+		GlobalWebElements.viewAllDisclaimerInformationLink.click();
 		
-		validate(GlobalFooterWebElements.disclaimerBackToTopLink);
-		GlobalFooterWebElements.disclaimerBackToTopLink.click();
+		validate(GlobalWebElements.disclaimerBackToTopLink);
+		GlobalWebElements.disclaimerBackToTopLink.click();
 		
-		validate(GlobalFooterWebElements.hideDiscliamerInformation);
-		GlobalFooterWebElements.hideDiscliamerInformation.click();
+		validate(GlobalWebElements.viewAllDisclaimerInformationLink);
+		GlobalWebElements.viewAllDisclaimerInformationLink.click();
+		
+		validate(GlobalWebElements.hideDiscliamerInformation);
+		GlobalWebElements.hideDiscliamerInformation.click();
 		if(driver.getTitle().equalsIgnoreCase("Medicare Plans for Different Needs | UnitedHealthcare®")){
 			return new AcquisitionHomePage(driver);
 		}
@@ -471,8 +473,8 @@ public SiteMapUMSPage siteMapFooterClick() {
 	public RegistrationHomePage registerHereLinkClick() {
 		ArrayList<String> tabs = new ArrayList<String> (driver.getWindowHandles());
 	    driver.switchTo().window(tabs.get(0));
-	    validate(alreadyPlanMemberButton);
-		alreadyPlanMemberButton.click();
+	    /*validate(alreadyPlanMemberButton);
+		alreadyPlanMemberButton.click();*/
 	    validate(registerHereLink);
 		registerHereLink.click();
 		ArrayList<String> tabs1= new ArrayList<String> (driver.getWindowHandles());
@@ -681,37 +683,102 @@ public SiteMapUMSPage siteMapFooterClick() {
 		return null;
 	}
 	
-	public Object pickatopic(String picktopic) {
-		
-        selectSelectBoxIt.click();
-        for (WebElement element : topicDropDownValues) {
-			if(element.getText().equalsIgnoreCase(picktopic)){
-			element.click();
-			picktopicbtn.click();
-				break;
+	public Boolean cookieValid() {
+		validate(signInButton);
+		signInButton.click();
+		//validate(signInButton);
+		ArrayList<String> tabs = new ArrayList<String> (driver.getWindowHandles());
+	    driver.switchTo().window(tabs.get(1));
+		validate(myPlansTab);
+		if (getCookieName("membervisited") != null) {
+			driver.switchTo().window(tabs.get(0));
+			if (getCookieName("membervisited") != null) {
+				return true;
 			}
 		}
-        
-        if (currentUrl().contains("/medicare-education/about")) {
-        	if(getTitle().equals("Learn About Medicare | UnitedHealthcare®")){
-        		return new LearnAboutMedicareuhcPage(driver);
-        	}
-        } else if(currentUrl().contains("medicare-education/enroll")){
-        	if(getTitle().equals("Prepare for Your Medicare Initial Enrollment Period | UnitedHealthcare®")){
-        	return new PrepareForInitialEnrollmentuhcPage(driver);
-        	}
-        }
-		
-		return null;
-	}
-	
-	public PlanSelectorPage  planselector() {
-		takequizbtn.click();
-		if (getTitle().equalsIgnoreCase("Plan Selector")) {
-			return new PlanSelectorPage(driver);
-		}		 
-		 return null;
+
+		return false;
 	}
 
+
+	public Boolean alreadyMemberActiveValid() {
+		validate(signInButton);
+		String timerId = alreadyPlanMemberButtonInactive.getAttribute("id");
+		if(timerId.contains("cookie")){
+			if(cookieValid()){
+			driver.navigate().refresh();
+			String[] parts = timerId.split("-");
+			String timerString = parts[1];
+			int timer = Integer.parseInt(timerString);
+			if(timer > 0){
+			return validate(signInButton);
+			}
+			}
+		}else if(timerId.contains("visitor")){
+			String[] parts = timerId.split("-");
+			String timerString = parts[1];
+			int timer = Integer.parseInt(timerString);
+			if(timer > 0){
+			return validate(signInButton);
+			}
+
+		}
+		return false;
+	
+	}
+
+
+	public Boolean cookieTimerValid() {
+		driver.navigate().refresh();
+		validate(signInButton);
+		String timerId = alreadyPlanMemberButtonInactive.getAttribute("id");
+		if(timerId.contains("cookie") || timerId.contains("visitor")){
+			String[] parts = timerId.split("-");
+			String timerString = parts[1];
+			int timer = Integer.parseInt(timerString);
+			timer = timer*1000;
+			try {
+				Thread.sleep(timer);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+		}
+		return validate(signInButton);
+	}
+
+
+	public Boolean stopTimerValid() {
+		validate(signInButton);
+		String timerId = alreadyPlanMemberButtonInactive.getAttribute("id");
+		if(timerId.contains("cookie")){
+			if(cookieValid()){
+			driver.navigate().refresh();
+			String[] parts = timerId.split("-");
+			String timerString = parts[1];
+			int timer = Integer.parseInt(timerString);
+			timer = timer*1000;
+			usernameField.click();
+			try {
+				Thread.sleep(timer);
+				return validate(signInButton);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+			
+			}
+		}else if(timerId.contains("visitor")){
+			String[] parts = timerId.split("-");
+			String timerString = parts[1];
+			int timer = Integer.parseInt(timerString);
+			try {
+				Thread.sleep(timer);
+				return validate(signInButton);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+		
+	}
+		return null;
+	}
 }
 
