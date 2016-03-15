@@ -16,7 +16,7 @@ import cucumber.junit.Cucumber;
 		format = {
 		"pretty", "html:reports/test-report" }, tags ={"@planCompareTest"})
 
-public class RunMRCukesPlanCompare {
+public class RunMRAtddTestPlanCompare {
 	
 	
 }

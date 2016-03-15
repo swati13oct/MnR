@@ -16,7 +16,7 @@ import cucumber.junit.Cucumber;
 		format = {
 		"pretty", "html:reports/test-report" }, tags ={"@po7Test"})
 
-public class RunMRCukesPo7Test {
+public class RunMRAtddTestPo7 {
 	
 	
 }
