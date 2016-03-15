@@ -45,7 +45,9 @@ public class CommonConstants {
 
 	public static final String PLAN_SUMMARY_PAGE_DATA = "plansummarypdp.json";
 	
+	public static final String LEARN_ABOUT_PLAN_PAGE_DATA = "learnaboutmedicare.json";
 	
+	public static final String INITIAL_ENROLL_PAGE_DATA = "initialenroll.json";
 
 	public static final String PLAN_SUMMARY_DIRECTORY = "/jsonresponse/Member/ulayer/planSummary/";
 

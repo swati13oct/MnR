@@ -43,6 +43,15 @@ public class AcquisitionHomePage extends GlobalFooterWebElements {
 
   @FindBy(id = "learnfindplanBtn")
   private WebElement learnfindPlansButton;
+  
+  @FindBys(value = {@FindBy(xpath = "//ul[@id='topic-selectSelectBoxItOptions']/li")})
+	private List<WebElement> topicDropDownValues;
+		
+	@FindBy(id = "picktopicbtn")
+	private WebElement picktopicbtn;
+
+	@FindBy(id = "topic-selectSelectBoxIt")
+	private WebElement selectSelectBoxIt;
 	
 	@FindBy(className = "zip-button")
 	private WebElement FindPlansButton1;
@@ -997,4 +1006,30 @@ public class AcquisitionHomePage extends GlobalFooterWebElements {
 		}
 		return validate(signInButton);
 	}
+	
+	public Object pickatopic(String picktopic) {
+		
+        selectSelectBoxIt.click();
+        for (WebElement element : topicDropDownValues) {
+			if(element.getText().equalsIgnoreCase(picktopic)){
+			element.click();
+			picktopicbtn.click();
+				break;
+			}
+		}
+        
+        if (currentUrl().contains("/medicare-education/about")) {
+        	if(getTitle().equals("Learn About Medicare | AARP® Medicare Plans from UnitedHealthcare®")){
+        		return new LearnAboutMedicarePage(driver);
+        	}
+        } else if(currentUrl().contains("medicare-education/enroll")){
+        	if(getTitle().equals("Medicare Initial Enrollment Period | AARP® Medicare Plans from UnitedHealthcare®")){
+        	return new PrepareforInitialEnrollmentPage(driver);
+        	}
+        }
+		
+		return null;
+
+		} 
+
 }
