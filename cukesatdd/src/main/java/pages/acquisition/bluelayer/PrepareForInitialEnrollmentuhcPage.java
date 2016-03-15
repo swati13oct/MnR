@@ -16,17 +16,41 @@ import pages.acquisition.ulayer.DiscoverMoreResourcesPage;
  */
 public class PrepareForInitialEnrollmentuhcPage extends GlobalWebElements{
 	
+	@FindBy(className = "bullet_list")
+	private WebElement initalenrolluhclist;
 	
-
+	public  JSONObject initalenrolluhcJson;
+	
+	private PageData initalenrolluhcPage;
+	
 	public PrepareForInitialEnrollmentuhcPage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
+		String fileName = CommonConstants.INITIAL_ENROLL_PAGE_DATA;
+		initalenrolluhcPage = CommonUtility.readPageData(fileName,
+				CommonConstants.PAGE_OBJECT_DIRECTORY_BLUELAYER_ACQ);
 		openAndValidate();
 	}
 
 	@Override
 	public void openAndValidate() {
 		validate(exploreChangingPlansLink);
+		validate(initalenrolluhclist);
+		JSONObject jsonObject = new JSONObject();
+		for (String key : initalenrolluhcPage.getExpectedData().keySet()) {
+			WebElement element = findElement(initalenrolluhcPage.getExpectedData().get(key));
+			if (null != element) {
+				if (validate(element)) {
+					try {
+						jsonObject.put(key, element.getText());
+					} catch (JSONException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				}
+			}
+		}
+		initalenrolluhcJson = jsonObject;
 		
 	}
 

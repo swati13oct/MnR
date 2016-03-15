@@ -23,29 +23,38 @@ import pages.acquisition.bluelayer.ZipcodeLookupHomePage;
 
 public class AcquisitionHomePage extends GlobalWebElements {
 
+
        @FindBy(id = "lookzip")
        private WebElement lookupZipcode;
 
        @FindBy(id = "cta-zipcode")
        private WebElement zipCodeField;
 
+			@FindBy(id = "takequizbtn")
+	   	private WebElement takequizbtn;
        @FindBy(id = "zipcodebtn")
        private WebElement viewPlansButton;
 
        @FindBy(id = "vpp_selectcounty_box")
        private WebElement countyModal;
 
-       @FindBy(linkText = "Enter your drug list")
-       private WebElement prescriptionsLink;
-
-		@FindBys(value = {@FindBy(xpath = "//table[@id='colhowdoesthiswork']/tbody/tr/td/span/span/a") })
-		private List<WebElement> howdoesthiswork;
+       @FindBy(id = "dce")
+       private WebElement dce;
+       
+       @FindBy(id = "picktopicbtn")
+	   	 private WebElement picktopicbtn;
+				
+			 @FindBys(value = {@FindBy(xpath = "//ul[@id='topic-selectSelectBoxItOptions']/li")})
+	   	 private List<WebElement> topicDropDownValues;	   	
+	   	
+	     @FindBy(id = "topic-selectSelectBoxIt")
+	   	 private WebElement selectSelectBoxIt;
       
        @FindBy(id = "learn-zipcode")
-	   private WebElement learnzipCodeField;
+	     private WebElement learnzipCodeField;
 
-		@FindBy(id = "learnfindplanBtn")
-	    private WebElement learnfindPlansButton;       
+		   @FindBy(id = "learnfindplanBtn")
+	     private WebElement learnfindPlansButton;       
 
 		@FindBy(id = "homefooter")
         private WebElement homefooter;
@@ -101,12 +110,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
        
 
        public EstimateDrugCostPage switchToPrescriptionDrug() {
-                for (WebElement element : howdoesthiswork) {
-				   			if(element.getText().equalsIgnoreCase("Enter your drug list")){
-				   				element.click();
-				   				break;
-				   			}
-				    	   }
+							dce.click();               
               driver.getTitle();
               if (driver.getTitle().equalsIgnoreCase(
                            "Our Medicare Plan Types | UnitedHealthcare®")) {
@@ -780,5 +784,38 @@ public SiteMapUMSPage siteMapFooterClick() {
 	}
 		return null;
 	}
+	
+		public Object pickatopic(String picktopic) {
+		
+        selectSelectBoxIt.click();
+        for (WebElement element : topicDropDownValues) {
+			if(element.getText().equalsIgnoreCase(picktopic)){
+			element.click();
+			picktopicbtn.click();
+				break;
+			}
+		}
+        
+        if (currentUrl().contains("/medicare-education/about")) {
+        	if(getTitle().equals("Learn About Medicare | UnitedHealthcare®")){
+        		return new LearnAboutMedicareuhcPage(driver);
+        	}
+        } else if(currentUrl().contains("medicare-education/enroll")){
+        	if(getTitle().equals("Prepare for Your Medicare Initial Enrollment Period | UnitedHealthcare®")){
+        	return new PrepareForInitialEnrollmentuhcPage(driver);
+        	}
+        }
+		
+		return null;
+	}
+	
+	public PlanSelectorPage  planselector() {
+		takequizbtn.click();
+		if (getTitle().equalsIgnoreCase("Plan Selector")) {
+			return new PlanSelectorPage(driver);
+		}		 
+		 return null;
+	}
+
 }
 

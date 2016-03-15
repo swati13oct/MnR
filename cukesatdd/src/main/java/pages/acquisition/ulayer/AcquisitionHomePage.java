@@ -33,8 +33,8 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	@FindBy(className = "fd_myPlans")
 	private WebElement myPlansTab;
 
-	@FindBy(linkText = "prescriptions")
-	private WebElement prescriptionsLink;
+	@FindBy(id = "dce")
+	private WebElement dce;
 
 	@FindBy(id = "learnfindplanBtn")
 	private WebElement learnfindPlansButton;
@@ -111,7 +111,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	@FindBy(id = "homefooter")
 	private WebElement homefooter;
 
-	@FindBy(linkText = "Look up ZIP code")
+	@FindBy(id = "lookzip")
 	private WebElement lookupZipcode;
 
 	@FindBy(id = "medicareTitle")
@@ -221,8 +221,6 @@ public class AcquisitionHomePage extends GlobalWebElements {
 
 	private PageData ourplansdropdown;
 
-	public JSONObject homeJson;
-	
 	private PageData healthandwellnessdropdown;
     
     public JSONObject healthandwellnessdropdownJson;
@@ -234,7 +232,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	}
 
 	public GetStartedPage navigateToPrescriptionDrug() {
-		prescriptionsLink.click();
+		dce.click();
 		if (driver
 				.getTitle()
 				.equalsIgnoreCase(
@@ -278,7 +276,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 
 		if (getTitle()
 				.equalsIgnoreCase(
-						"Medicare Plans | AARP?? Medicare Plans from UnitedHealthcare??")
+						"Medicare Plans | AARP® Medicare Plans from UnitedHealthcare®")
 				|| driver.getTitle().equalsIgnoreCase(
 						"Our Medicare Plan Types | UnitedHealthcare®")) {
 			return new ZipcodeLookupHomePage(driver);
@@ -1292,6 +1290,41 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		healthandwellnessdropdownJson = jsonObject;
 
 		return healthandwellnessdropdownJson;
+
+	}
+	
+		public PlanSelectorPage  planselector() {
+		takequizbtn.click();
+		if (getTitle().equalsIgnoreCase("Plan Selector")) {
+			return new PlanSelectorPage(driver);
+		}		 
+		 return null;
+	}
+	
+	public Object pickatopic(String picktopic) {
+		
+        selectSelectBoxIt.click();
+        for (WebElement element : topicDropDownValues) {
+			if(element.getText().equalsIgnoreCase(picktopic)){
+			element.click();
+			picktopicbtn.click();
+				break;
+			}
+		}
+        
+        if (currentUrl().contains("/medicare-education/about")) {
+        	if(getTitle().equals("Learn About Medicare | AARP® Medicare Plans from UnitedHealthcare®")){
+        		return new LearnAboutMedicarePage(driver);
+        	}
+        } else if(currentUrl().contains("medicare-education/enroll")){
+        	if(getTitle().equals("Medicare Initial Enrollment Period | AARP® Medicare Plans from UnitedHealthcare®")){
+        	return new PrepareforInitialEnrollmentPage(driver);
+        	}
+        }
+		
+		return null;
+
+		} 
 
 	}
 
