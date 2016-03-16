@@ -128,7 +128,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
               if (driver.getTitle().equalsIgnoreCase(
                            "Forbidden Page | UnitedHealthcare®")
                            || driver.getTitle().equalsIgnoreCase(
-                                         "Our Medicare Plan Types | UnitedHealthcare®")) {
+                                         "Medicare Plans for Different Needs | UnitedHealthcare®")) {
                      return new ZipcodeLookupHomePage(driver);
               }
               return null;

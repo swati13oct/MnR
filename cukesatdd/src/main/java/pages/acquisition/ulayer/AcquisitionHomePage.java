@@ -84,8 +84,8 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	@FindBy(id = "pageHeader")
 	private WebElement pageHeader;
 
-	@FindBys(value = { @FindBy(xpath = "span//[@id='topic-selectSelectBoxIt']/ul/li") })
-	private List<WebElement> topicDropDownValues;
+	 @FindBys(value = {@FindBy(xpath = "//ul[@id='topic-selectSelectBoxItOptions']/li")})
+   	 private List<WebElement> topicDropDownValues;	
 
 	@FindBy(id = "lookzip")
 	private WebElement lookzip;
