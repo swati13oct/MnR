@@ -18,6 +18,6 @@ import cucumber.junit.Cucumber;
 		features = { "feature/global-header" }, 
 		format = {
 		"pretty", "html:reports/test-report" }, tags ={"@headerFooterTest"})
-public class RunMRCukesHeaderFooter {
+public class RunMRAtddHeaderFooter {
 
 }
