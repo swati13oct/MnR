@@ -33,6 +33,10 @@ public class CommonConstants {
 
 	public static final String WEBDRIVER = "webDriver";
 
+	public static final String DEVICE_NAME = "DeviceName";
+	
+	public static final String CHROME_DRIVER = "ChromeDriver";
+	
 	public static final String PLAN_BENEFITS_AND_COVERAGE = "planBenefitsAndCoverage";
 
 	public static final String BENEFITS_AND_COVERAGE_PDP_NONLIS_NONUS_PAGE_DATA = "planbenefitsandcoveragenonlisnotusother.json";
@@ -640,6 +644,7 @@ public class CommonConstants {
 	
 
 
+	public static final String HEALTH_AND_WELLNESS_DROPDOWN_DATA= "healthandwellnessdropdownactual.json";
 	private static final String HEALTH_AND_WELLNESS_DIRECTORY = "/jsonresponse/member/ulayer/healthandwellness/";
 
 	

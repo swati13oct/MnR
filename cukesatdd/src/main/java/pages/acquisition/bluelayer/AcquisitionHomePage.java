@@ -785,7 +785,7 @@ public SiteMapUMSPage siteMapFooterClick() {
 		return null;
 	}
 	
-		public Object pickatopic(String picktopic) {
+		public Object learnmoreaboutplan(String picktopic) {
 		
         selectSelectBoxIt.click();
         for (WebElement element : topicDropDownValues) {

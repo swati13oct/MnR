@@ -68,7 +68,7 @@ public class LearnAboutPlansUMSStepDefinition {
 		
 		String picktopic = addressAttributesMap.get("picktopic");
 		System.out.println("picktopic=="+picktopic);
-		Object objPickTopicJson = homepage.pickatopic(picktopic);
+		Object objPickTopicJson = homepage.learnmoreaboutplan(picktopic);
 		String fileName = null;
 		if(objPickTopicJson !=null){
 			String directory = CommonConstants.ACQUISITION_EXPECTED_DIRECTORY

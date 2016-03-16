@@ -70,7 +70,7 @@ public class LearnAboutPlansAarpStepDefinition {
 		
 		String picktopic = addressAttributesMap.get("picktopic");
 		System.out.println("picktopic=="+picktopic);
-		Object objPickTopicJson = homepage.pickatopic(picktopic);
+		Object objPickTopicJson = homepage.learnmoreaboutplan(picktopic);
 		String fileName = null;
 		String directory = CommonConstants.ACQUISITION_EXPECTED_DIRECTORY
 				+ File.separator + CommonConstants.SITE_ULAYER
