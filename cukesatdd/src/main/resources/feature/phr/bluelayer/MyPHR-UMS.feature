@@ -1,9 +1,9 @@
-@phr
+@phrTest
 Feature:To test personal health record in UHC site
 Scenario Outline:Verify personal health record in UHC site for following type of plan member
 Given registered UHC member with following attributes
-    | Plan Type    | <plantype>   |
-	| Member Type  | <memberType> |	    	    	    
+		| <planType>       |
+	    | <memberType>     |	    	    	    
 When the user navigates to personal health record in UHC site
 Then the user validates the personal health records details in UHC site
 #Then the user validates care messages information in UHC site 
@@ -27,9 +27,8 @@ Examples:
 
 Scenario Outline:Verify personal health record in UHC site for combo type of plan member
 Given registered UHC member with following attributes
-		| Plan Type 1  | <planType1>   |
-		| Plan Type 2  | <planType2>   |
-	    | Member Type  | <memberType> |	 
+		| <planType1> |
+        | <planType2> |
 When the user navigates to personal health record in UHC site
 Then the user validates care messages information    
 And the user validates doctors information   
@@ -41,6 +40,6 @@ And the user validates products information
 And the user validates quizzes & assessments information
  
 Examples:
-     | planType1          | planType2         | memberType |
- #    | PDP               | SSUP              | Group      |
+     | planType1          | planType2         |
+ #    | PDP                | SSUP              |
  

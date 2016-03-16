@@ -13,7 +13,7 @@ import atdd.framework.UhcDriver;
  * @author rkodumur
  *
  */
-public class SiteMapAARPPage extends GlobalWebElements {
+public class SiteMapAARPPage extends GlobalFooterWebElements {
 	 
 	public SiteMapAARPPage(WebDriver driver) {
 		super(driver);

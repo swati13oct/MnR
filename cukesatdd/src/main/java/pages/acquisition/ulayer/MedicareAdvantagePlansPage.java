@@ -5,7 +5,7 @@ import org.openqa.selenium.support.PageFactory;
 
 import pages.acquisition.ulayer.MedicareAdvantageRequestMoreHelpPage;
 
-public class MedicareAdvantagePlansPage extends GlobalWebElements {
+public class MedicareAdvantagePlansPage extends GlobalFooterWebElements {
 	
 
 	public MedicareAdvantagePlansPage(WebDriver driver) {

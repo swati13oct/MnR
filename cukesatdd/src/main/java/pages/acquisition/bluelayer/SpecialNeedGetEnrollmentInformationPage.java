@@ -10,7 +10,7 @@ import org.openqa.selenium.WebDriver;
  * @author rkodumur
  *
  */
-public class SpecialNeedGetEnrollmentInformationPage extends GlobalWebElements {
+public class SpecialNeedGetEnrollmentInformationPage extends GlobalFooterWebElements {
 
 	public SpecialNeedGetEnrollmentInformationPage(WebDriver driver) {
 		super(driver);

@@ -357,8 +357,6 @@ public class ClaimSummaryPage extends UhcDriver {
 
 		}
 		claimSummaryJson = jsonObject;
-		
-		System.out.println("claimSummaryJson----->"+claimSummaryJson);
 
 	}
 

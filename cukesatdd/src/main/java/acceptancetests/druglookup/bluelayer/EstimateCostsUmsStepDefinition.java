@@ -63,7 +63,6 @@ public class EstimateCostsUmsStepDefinition {
 					.get(0), memberAttributesRow.get(i).getCells().get(1));
 		}
 
-		String category = memberAttributesMap.get("Member Type");
 		Set<String> memberAttributesKeySet = memberAttributesMap.keySet();
 		List<String> desiredAttributes = new ArrayList<String>();
 		for (Iterator<String> iterator = memberAttributesKeySet.iterator(); iterator
@@ -99,9 +98,14 @@ public class EstimateCostsUmsStepDefinition {
 		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
 
 		LoginPage loginPage = new LoginPage(wd);
-		AccountHomePage accountHomePage = (AccountHomePage)loginPage.loginWith(userName, pwd, category);
+		loginPage.loginWith(userName, pwd);
 		JSONObject accountHomeActualJson = null;
+		AccountHomePage accountHomePage = null;
+		String category = memberAttributesMap.get("Category");
 		getLoginScenario().saveBean(DceCommonConstants.CATEGORY, category);
+		accountHomePage = (AccountHomePage) loginPage
+				.checkLoginSuccessful(category);
+
 		/* Get expected data */
 		Map<String, JSONObject> expectedDataMap = loginScenario
 				.getExpectedJson(userName);

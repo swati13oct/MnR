@@ -7,7 +7,7 @@ import org.openqa.selenium.support.PageFactory;
 
 import atdd.framework.UhcDriver;
 
-public class ContactUsAARPPage extends GlobalWebElements{
+public class ContactUsAARPPage extends GlobalFooterWebElements{
 	 
 	public ContactUsAARPPage(WebDriver driver) {
 		super(driver);

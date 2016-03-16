@@ -109,7 +109,6 @@ public class PharmacyResultPage extends UhcDriver {
 		}
 		pharmacyResultJson = jsonObject;
 
-		System.out.println("pharmacyResultJson----->"+pharmacyResultJson);
 	}
 
 }

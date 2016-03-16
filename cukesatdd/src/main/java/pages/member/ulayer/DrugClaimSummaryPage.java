@@ -428,8 +428,6 @@ public class DrugClaimSummaryPage extends UhcDriver {
 			}
 		}
 		drugClaimsSummaryJson = jsonObject;
-		
-		System.out.println("drugClaimsSummaryJson----->"+drugClaimsSummaryJson);
 
 	}
 

@@ -33,8 +33,8 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	@FindBy(className = "fd_myPlans")
 	private WebElement myPlansTab;
 
-	@FindBy(linkText = "prescriptions")
-	private WebElement prescriptionsLink;
+	@FindBy(id = "dce")
+	private WebElement dce;
 
 	@FindBy(id = "learnfindplanBtn")
 	private WebElement learnfindPlansButton;
@@ -65,6 +65,9 @@ public class AcquisitionHomePage extends GlobalWebElements {
 
 	@FindBy(id = "picktopicbtn")
 	private WebElement picktopicbtn;
+	
+	@FindBy(id = "topic-selectSelectBoxIt")
+	private WebElement selectSelectBoxIt;
 
 	@FindBy(id = "learn-zipcode")
 	private WebElement learnzipCodeField;
@@ -111,7 +114,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	@FindBy(id = "homefooter")
 	private WebElement homefooter;
 
-	@FindBy(linkText = "Look up ZIP code")
+	@FindBy(id = "lookzip")
 	private WebElement lookupZipcode;
 
 	@FindBy(id = "medicareTitle")
@@ -221,8 +224,6 @@ public class AcquisitionHomePage extends GlobalWebElements {
 
 	private PageData ourplansdropdown;
 
-	public JSONObject homeJson;
-	
 	private PageData healthandwellnessdropdown;
     
     public JSONObject healthandwellnessdropdownJson;
@@ -234,7 +235,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	}
 
 	public GetStartedPage navigateToPrescriptionDrug() {
-		prescriptionsLink.click();
+		dce.click();
 		if (driver
 				.getTitle()
 				.equalsIgnoreCase(
@@ -278,7 +279,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 
 		if (getTitle()
 				.equalsIgnoreCase(
-						"Medicare Plans | AARP?? Medicare Plans from UnitedHealthcare??")
+						"Medicare Plans | AARP® Medicare Plans from UnitedHealthcare®")
 				|| driver.getTitle().equalsIgnoreCase(
 						"Our Medicare Plan Types | UnitedHealthcare®")) {
 			return new ZipcodeLookupHomePage(driver);
@@ -1060,115 +1061,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		return null;
 	}
 
-	public JSONObject pickatopic(String picktopic) {
-		JSONObject jsonObject = new JSONObject();
-
-		for (WebElement element : topicDropDownValues) {
-			System.out.println(element.getTagName());
-			if (element.getAttribute("data-val").toString().contains(picktopic)) {
-				System.out.println("data-val=="
-						+ element.getAttribute("data-val").toString());
-				element.click();
-				break;
-			}
-		}
-
-		// selectFromDropDown(topicDropDownValues, picktopic);
-		// for (WebElement element : elementList) {
-		// if (element.getText().contains(value)) {
-		// element.click();
-		// break;
-		// }
-		// }
-
-		picktopicbtn.click();
-
-		if (driver.getTitle() != null) {
-			try {
-				jsonObject.put("topicselectTitle", driver.getTitle());
-			} catch (JSONException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-
-		}
-		return homeJson = jsonObject;
-
-	}
-
-	public JSONObject takequiz() {
-		JSONObject jsonObject = new JSONObject();
-		takequizbtn.click();
-
-		if (driver.getTitle() != null) {
-			try {
-				jsonObject.put("takequizTitle", driver.getTitle());
-			} catch (JSONException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-
-		}
-		homeJson = jsonObject;
-
-		return homeJson;
-	}
-
-	public JSONObject chooseuhc() {
-		JSONObject jsonObject = new JSONObject();
-		chooseUhcButton.click();
-
-		if (driver.getTitle() != null) {
-			try {
-				jsonObject.put("whychooseuhcTitle", driver.getTitle());
-				System.out.println("driver.getTitle()==" + driver.getTitle());
-			} catch (JSONException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-
-		}
-		homeJson = jsonObject;
-
-		return homeJson;
-	}
-
-	public JSONObject findplanfield(String zipcode, String findplanSection) {
-		JSONObject jsonObject = new JSONObject();
-
-		if (findplanSection.equalsIgnoreCase("findplans")) {
-			sendkeys(zipCodeField, zipcode);
-			findPlansButton.click();
-		} else if (findplanSection.equalsIgnoreCase("learnfindplans")) {
-			sendkeys(learnzipCodeField, zipcode);
-			learnfindPlansButton.click();
-		}
-
-		if (driver.getTitle() != null) {
-			try {
-				jsonObject.put("findplanTitle", driver.getTitle());
-			} catch (JSONException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-
-		}
-		return homeJson = jsonObject;
-
-	}
-
-	public ZipcodeLookupPage lookupmodal() {
-		lookzip.click();
-		CommonUtility.waitForPageLoad(driver, zipCodeSearchPopup,
-				CommonConstants.TIMEOUT_30);
-		if (zipCodeSearchPopupHeading.getText().equalsIgnoreCase(
-				"Find a ZIP code")) {
-			System.out.println("zipCodeSearchPopupHeading");
-			return new ZipcodeLookupPage(driver);
-		}
-		return null;
-
-	}
+	
 
 	public ProviderSearchPage launchesPo7() {
 		po7Link.click();
@@ -1294,5 +1187,39 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		return healthandwellnessdropdownJson;
 
 	}
+	
+		public PlanSelectorPage  planselector() {
+		takequizbtn.click();
+		if (getTitle().equalsIgnoreCase("Plan Selector")) {
+			return new PlanSelectorPage(driver);
+		}		 
+		 return null;
+	}
+	
+	public Object learnmoreaboutplan(String picktopic) {
+		
+        selectSelectBoxIt.click();
+        for (WebElement element : topicDropDownValues) {
+			if(element.getText().equalsIgnoreCase(picktopic)){
+			element.click();
+			picktopicbtn.click();
+				break;
+			}
+		}
+        
+        if (currentUrl().contains("/medicare-education/about")) {
+        	if(getTitle().equals("Learn About Medicare | AARP® Medicare Plans from UnitedHealthcare®")){
+        		return new LearnAboutMedicarePage(driver);
+        	}
+        } else if(currentUrl().contains("medicare-education/enroll")){
+        	if(getTitle().equals("Medicare Initial Enrollment Period | AARP® Medicare Plans from UnitedHealthcare®")){
+        	return new PrepareforInitialEnrollmentPage(driver);
+        	}
+        }
+		
+		return null;
 
-}
+		} 
+
+	}
+

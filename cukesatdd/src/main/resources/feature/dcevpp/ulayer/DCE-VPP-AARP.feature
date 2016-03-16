@@ -1,4 +1,4 @@
-@dceVpp
+@dceVppTestAARP
 Feature: To test DCE to VPP plan Summary flow  in AARP site
 Scenario Outline: To Verify the drugs and plan summary for non AEP period 
 Given the user is on the AARP medicare site landing page

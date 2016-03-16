@@ -28,6 +28,7 @@ public abstract class UhcDriver {
 
 	public void start(String url) {
 		driver.get(url);
+		driver.manage().window().maximize();
 	}
 
 	public UhcDriver(WebDriver driver) {
@@ -45,14 +46,6 @@ public abstract class UhcDriver {
          driver.switchTo().window(tabs.get(1));
 	}
 
-	public WebDriver switchToNewIframe(String iframeName) {
-		return driver.switchTo().frame(iframeName);
-		
-	}
-	public WebDriver switchToNewIframe(WebElement iframeElement) {
-		return driver.switchTo().frame(iframeElement);
-		
-	}
 
 	public boolean elementFound(WebElement element) {
 		try {
@@ -134,11 +127,6 @@ public abstract class UhcDriver {
 				element = driver.findElement(By.name(elementData
 						.getElementName()));
 			}
-			else if (elementData.getIdentifier().equalsIgnoreCase("tagName")) {
-				driver.manage().timeouts().implicitlyWait(1, TimeUnit.SECONDS);
-				element = driver.findElement(By.tagName(elementData
-						.getElementName()));
-			}
 			
 			
 			return element;
@@ -175,12 +163,6 @@ public abstract class UhcDriver {
 			else if (elementData.getIdentifier().equalsIgnoreCase("name")) {
 				driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
 				element = parentElement.findElement(By.name(elementData
-						.getElementName()));
-
-			}
-			else if (elementData.getIdentifier().equalsIgnoreCase("tagName")) {
-				driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
-				element = parentElement.findElement(By.tagName(elementData
 						.getElementName()));
 
 			}
@@ -304,6 +286,15 @@ public abstract class UhcDriver {
 		return driver.manage().getCookieNamed(cookieName);
 	}
 	
+		public WebDriver switchToNewIframe(String iframeName) {
+		return driver.switchTo().frame(iframeName);
+		
+	}
+	public WebDriver switchToNewIframe(WebElement iframeElement) {
+		return driver.switchTo().frame(iframeElement);
+		
+	}
+
 
 	public abstract void openAndValidate();
 

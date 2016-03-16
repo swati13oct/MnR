@@ -16,7 +16,7 @@ import acceptancetests.login.data.LoginCommonConstants;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
-public class LoginAssistancePage extends GlobalWebElements {
+public class LoginAssistancePage extends GlobalFooterWebElements {
 	
 	@FindBy(id = "usercheckbox")
 	private WebElement userNameCheckBox;

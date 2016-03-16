@@ -152,9 +152,6 @@ public class MyProfilesPage extends UhcDriver{
 	@FindBy(id = "mailingAddress.stopDate.year")
 	private WebElement mailingAddStopDateYear;
 	
-	@FindBy(xpath = "//div[@class='myProfileMid']/div/form/div/div/div/div[2]/div/div[2]/h3")
-	private WebElement preferencesPageHeading;
-	
 	@FindBy(id = "disclosure_link")
 	private WebElement logOut;
 	
@@ -173,7 +170,6 @@ public class MyProfilesPage extends UhcDriver{
 
 	public MyPreferencesPage navigateToMyPrefTab() {
 		myPrefTab.click();
-		CommonUtility.waitForPageLoad(driver, preferencesPageHeading, 10);
 		if(currentUrl().contains("my-preferences"))
 		{
 			return new MyPreferencesPage(driver);
@@ -365,8 +361,6 @@ public class MyProfilesPage extends UhcDriver{
 			}
 		}
 		myProfilesJson = jsonObject;
-		
-		System.out.println("myProfilesJson----->"+myProfilesJson);
 		
 	}
 

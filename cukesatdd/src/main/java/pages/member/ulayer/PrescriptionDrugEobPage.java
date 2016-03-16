@@ -148,8 +148,6 @@ public class PrescriptionDrugEobPage extends UhcDriver{
 			}
 		}
 		prescriptionDrugEobJson = jsonObject;
-		
-		System.out.println("prescriptionDrugEobJson----->"+prescriptionDrugEobJson);
 	}
 
 

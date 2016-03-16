@@ -63,8 +63,6 @@ public class PlanMaterialConfirmationPage extends UhcDriver {
 
 		}
 		planMaterialsConfirmationJson = jsonObject;
-		
-		System.out.println("planMaterialsConfirmationJson----->"+planMaterialsConfirmationJson);
 
 	}
 

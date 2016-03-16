@@ -74,8 +74,6 @@ public class DrugClaimDetailsPage extends UhcDriver{
 			}
 		}
 		drugClaimDetailJson = jsonObject;
-		
-		System.out.println("drugClaimDetailJson----->"+drugClaimDetailJson);
 	}
 
 	public JSONObject getExpectedData(Map<String, JSONObject> expectedDataMap,String firstRxNumber) {

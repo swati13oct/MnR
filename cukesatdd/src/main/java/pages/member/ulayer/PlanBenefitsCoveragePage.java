@@ -93,8 +93,6 @@ public class PlanBenefitsCoveragePage extends UhcDriver {
 			
 		}
 		planBenefitsCoverageJson = jsonObject;
-		
-		System.out.println("planBenefitsCoverageJson----->"+planBenefitsCoverageJson);
 	
 		
 	}

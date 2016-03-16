@@ -3,14 +3,9 @@
  */
 package acceptancetests.login.ulayer;
 
-import gherkin.formatter.model.DataTableRow;
-
 import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -45,64 +40,58 @@ public class LoginAarpStepDefinition {
 		return loginScenario;
 	}
 
-	@Given("^the user is on the AARP medicare site login page$")
-	public void user_login_page()
-	{
-		WebDriver wd = getLoginScenario().getWebDriver();
-		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
-
-		LoginPage loginPage = new LoginPage(wd);
-		getLoginScenario().saveBean(PageConstants.LOGIN_PAGE, loginPage);
-	}
-	
-	@When("^the user logs in with a registered AMP with following details in AARP site$")
-	public void user_logs_in(DataTable memberAttributes)
-	{
+	@Given("^registered AMP with following attributes$")
+	public void login_with_member(DataTable memberAttributes) {
 		/* Reading the given attribute from feature file */
-		List<DataTableRow> memberAttributesRow = memberAttributes
-				.getGherkinRows();
-		Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
-		for (int i = 0; i < memberAttributesRow.size(); i++) {
-
-			memberAttributesMap.put(memberAttributesRow.get(i).getCells()
-					.get(0), memberAttributesRow.get(i).getCells().get(1));
-		}
-
-		Set<String> memberAttributesKeySet = memberAttributesMap.keySet();
+		List<List<String>> dataTable = memberAttributes.raw();
 		List<String> desiredAttributes = new ArrayList<String>();
-		for (Iterator<String> iterator = memberAttributesKeySet.iterator(); iterator
-				.hasNext();) {
-			{
-				String key = iterator.next();
-				desiredAttributes.add(memberAttributesMap.get(key));
-			}
 
+		for (List<String> data : dataTable) {
+			desiredAttributes.add(data.get(0));
 		}
 		System.out.println("desiredAttributes.." + desiredAttributes);
-
-		Map<String,String> loginCreds = loginScenario
+		Map<String, String> loginCreds = loginScenario
 				.getAMPMemberWithDesiredAttributes(desiredAttributes);
-		
+
 		String userName = null;
 		String pwd = null;
 		if (loginCreds == null) {
 			// no match found
 			System.out.println("Member Type data could not be setup !!!");
-			Assert.fail("unable to find a "+ desiredAttributes + " member");
+			Assert.fail("unable to find a " + desiredAttributes + " member");
 		} else {
 			userName = loginCreds.get("user");
 			pwd = loginCreds.get("pwd");
 			System.out.println("User is..." + userName);
-			System.out.println("Password is..." + pwd );
-			getLoginScenario().saveBean(LoginCommonConstants.USERNAME, userName);
+			System.out.println("Password is..." + pwd);
+			getLoginScenario()
+					.saveBean(LoginCommonConstants.USERNAME, userName);
 			getLoginScenario().saveBean(LoginCommonConstants.PASSWORD, pwd);
 		}
-		
-		LoginPage loginPage = (LoginPage)getLoginScenario().getBean(PageConstants.LOGIN_PAGE);
-		AccountHomePage accountHomePage = (AccountHomePage) loginPage.loginWith(userName, pwd);
-		
-		
+	}
+
+	@When("^the user logs in successfully in AARP site$")
+	public void login_successful() {
+		WebDriver wd = getLoginScenario().getWebDriver();
+
+		String userName = (String) getLoginScenario().getBean(
+				LoginCommonConstants.USERNAME);
+		String password = (String) getLoginScenario().getBean(
+				LoginCommonConstants.PASSWORD);
+		LoginPage loginPage = new LoginPage(wd);
+		loginPage.loginWith(userName, password);
+		AccountHomePage accountHomePage = (AccountHomePage) loginPage
+				.checkLoginSuccessful();
+
+		/* Get expected data */
+		Map<String, JSONObject> expectedDataMap = loginScenario
+				.getExpectedJson(userName);
+		JSONObject accountHomeExpectedJson = accountHomePage
+				.getExpectedData(expectedDataMap);
+		getLoginScenario().saveBean(LoginCommonConstants.ACCOUNT_HOME_EXPECTED,
+				accountHomeExpectedJson);
 		if (accountHomePage != null) {
+			getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
 			getLoginScenario().saveBean(PageConstants.ACCOUNT_HOME_PAGE,
 					accountHomePage);
 			Assert.assertTrue(true);
@@ -110,65 +99,22 @@ public class LoginAarpStepDefinition {
 			getLoginScenario().saveBean(
 					LoginCommonConstants.ACCOUNT_HOME_ACTUAL,
 					accountHomeActualJson);
-			
-			/* Get expected data */
-			Map<String, JSONObject> expectedDataMap = loginScenario
-					.getExpectedJson(userName);
-			JSONObject accountHomeExpectedJson = accountHomePage
-					.getExpectedData(expectedDataMap);
-			getLoginScenario().saveBean(LoginCommonConstants.ACCOUNT_HOME_EXPECTED,
-					accountHomeExpectedJson);
-	
-	
-	}
+		}
 
 	}
 
-	@When("^the terminated user logs in with a registered AMP with following details in AARP site$")
-	public void login_terminateduser_successful(DataTable memberAttributes) {
-		/* Reading the given attribute from feature file */
-		List<DataTableRow> memberAttributesRow = memberAttributes
-				.getGherkinRows();
-		Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
-		for (int i = 0; i < memberAttributesRow.size(); i++) {
+	@When("^the terminated member logs in successfully in AARP site$")
+	public void login_terminateduser_successful() {
+		WebDriver wd = getLoginScenario().getWebDriver();
+		String userName = (String) getLoginScenario().getBean(
+				LoginCommonConstants.USERNAME);
+		String password = (String) getLoginScenario().getBean(
+				LoginCommonConstants.PASSWORD);
+		LoginPage loginPage = new LoginPage(wd);
+		loginPage.loginWith(userName, password);
+		TerminatedHomePage terminatedHomePage = (TerminatedHomePage) loginPage
+				.checkLoginSuccessful();
 
-			memberAttributesMap.put(memberAttributesRow.get(i).getCells()
-					.get(0), memberAttributesRow.get(i).getCells().get(1));
-		}
-
-		Set<String> memberAttributesKeySet = memberAttributesMap.keySet();
-		List<String> desiredAttributes = new ArrayList<String>();
-		for (Iterator<String> iterator = memberAttributesKeySet.iterator(); iterator
-				.hasNext();) {
-			{
-				String key = iterator.next();
-				desiredAttributes.add(memberAttributesMap.get(key));
-			}
-
-		}
-		System.out.println("desiredAttributes.." + desiredAttributes);
-
-		Map<String,String> loginCreds = loginScenario
-				.getAMPMemberWithDesiredAttributes(desiredAttributes);
-		
-		String userName = null;
-		String pwd = null;
-		if (loginCreds == null) {
-			// no match found
-			System.out.println("Member Type data could not be setup !!!");
-			Assert.fail("unable to find a "+ desiredAttributes + " member");
-		} else {
-			userName = loginCreds.get("user");
-			pwd = loginCreds.get("pwd");
-			System.out.println("User is..." + userName);
-			System.out.println("Password is..." + pwd );
-			getLoginScenario().saveBean(LoginCommonConstants.USERNAME, userName);
-			getLoginScenario().saveBean(LoginCommonConstants.PASSWORD, pwd);
-		}
-		
-		LoginPage loginPage = (LoginPage)getLoginScenario().getBean(PageConstants.LOGIN_PAGE);
-		TerminatedHomePage terminatedHomePage = (TerminatedHomePage) loginPage.loginWith(userName, pwd);
-		
 		/* Get expected data */
 		Map<String, JSONObject> expectedDataMap = loginScenario
 				.getExpectedJson(userName);
@@ -180,6 +126,7 @@ public class LoginAarpStepDefinition {
 
 		// get actual data
 		if (terminatedHomePage != null) {
+			getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
 			getLoginScenario().saveBean(PageConstants.TERMINATED_HOME_PAGE,
 					terminatedHomePage);
 			Assert.assertTrue(true);
@@ -191,8 +138,8 @@ public class LoginAarpStepDefinition {
 
 	}
 
-	@Then("^the user validates plan and member details after login in AARP site$")
-	public void login_validation() {
+	@Then("^the user validates following plan details$")
+	public void login_validation(DataTable memberAttributes) {
 
 		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario()
 				.getBean(PageConstants.ACCOUNT_HOME_PAGE);
@@ -211,8 +158,8 @@ public class LoginAarpStepDefinition {
 
 	}
 
-	@Then("^the user validates terminated plan details$")
-	public void login_terminate_validation() {
+	@Then("^the user validates following terminated plan details$")
+	public void login_terminate_validation(DataTable memberAttributes) {
 
 		AccountHomePage terminatedAccountPage = (AccountHomePage) getLoginScenario()
 				.getBean(PageConstants.TERMINATED_HOME_PAGE);
@@ -237,13 +184,12 @@ public class LoginAarpStepDefinition {
 
 	@After
 	public void tearDown() {
-		
+
 		WebDriver wd = (WebDriver) getLoginScenario().getBean(
 				CommonConstants.WEBDRIVER);
 		// wd.close();
 		wd.quit();
 		getLoginScenario().flushBeans();
-		
 	}
 
 }

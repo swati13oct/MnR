@@ -5,7 +5,6 @@ package acceptancetests.profandpref.bluelayer;
 
 import gherkin.formatter.model.DataTableRow;
 
-
 /*@author pagarwa5*/
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -51,7 +50,6 @@ public class ProfAndPrefUmsStepDefinition {
 
 	@Given("^registered member for My Profile & Preferences in UMS site$")
 	public void login_with_member(DataTable memberAttributes) {
-		/* Reading the given attribute from feature file */
 		List<DataTableRow> memberAttributesRow = memberAttributes
 				.getGherkinRows();
 		Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
@@ -60,8 +58,6 @@ public class ProfAndPrefUmsStepDefinition {
 			memberAttributesMap.put(memberAttributesRow.get(i).getCells()
 					.get(0), memberAttributesRow.get(i).getCells().get(1));
 		}
-		
-		String category = memberAttributesMap.get("Member Type");
 
 		Set<String> memberAttributesKeySet = memberAttributesMap.keySet();
 		List<String> desiredAttributes = new ArrayList<String>();
@@ -77,7 +73,6 @@ public class ProfAndPrefUmsStepDefinition {
 
 		Map<String, String> loginCreds = loginScenario
 				.getUMSMemberWithDesiredAttributes(desiredAttributes);
-
 		String userName = null;
 		String pwd = null;
 		if (loginCreds == null) {
@@ -94,13 +89,13 @@ public class ProfAndPrefUmsStepDefinition {
 			getLoginScenario().saveBean(LoginCommonConstants.PASSWORD, pwd);
 		}
 
-		getLoginScenario().saveBean(CommonConstants.CATEGORY, category);
-
 		WebDriver wd = getLoginScenario().getWebDriver();
 
 		LoginPage loginPage = new LoginPage(wd);
-		AccountHomePage accountHomePage = (AccountHomePage) loginPage.loginWith(userName, pwd,category);
+		loginPage.loginWith(userName, pwd);
 		JSONObject accountHomeActualJson = null;
+		AccountHomePage accountHomePage = (AccountHomePage) loginPage
+				.checkLoginSuccessful();
 		/* Get expected data */
 		Map<String, JSONObject> expectedDataMap = loginScenario
 				.getExpectedJson(userName);

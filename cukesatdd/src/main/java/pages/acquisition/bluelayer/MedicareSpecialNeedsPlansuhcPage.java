@@ -2,9 +2,9 @@ package pages.acquisition.bluelayer;
 
 import org.openqa.selenium.WebDriver;
 
-import pages.acquisition.bluelayer.GlobalWebElements;
+import pages.acquisition.bluelayer.GlobalFooterWebElements;
 
-public class MedicareSpecialNeedsPlansuhcPage extends GlobalWebElements{
+public class MedicareSpecialNeedsPlansuhcPage extends GlobalFooterWebElements{
 	
 	
 

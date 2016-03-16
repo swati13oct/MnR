@@ -34,9 +34,9 @@ public class CommonConstants {
 	public static final String WEBDRIVER = "webDriver";
 
 	public static final String DEVICE_NAME = "DeviceName";
-
+	
 	public static final String CHROME_DRIVER = "ChromeDriver";
-
+	
 	public static final String PLAN_BENEFITS_AND_COVERAGE = "planBenefitsAndCoverage";
 
 	public static final String BENEFITS_AND_COVERAGE_PDP_NONLIS_NONUS_PAGE_DATA = "planbenefitsandcoveragenonlisnotusother.json";
@@ -49,7 +49,9 @@ public class CommonConstants {
 
 	public static final String PLAN_SUMMARY_PAGE_DATA = "plansummarypdp.json";
 	
+	public static final String LEARN_ABOUT_PLAN_PAGE_DATA = "learnaboutmedicare.json";
 	
+	public static final String INITIAL_ENROLL_PAGE_DATA = "initialenroll.json";
 
 	public static final String PLAN_SUMMARY_DIRECTORY = "/jsonresponse/Member/ulayer/planSummary/";
 
@@ -68,10 +70,6 @@ public class CommonConstants {
 	private static final String LOW_COST_OPTIONS_ULAYER_DIRECTORY = "/jsonresponse/member/ulayer/druglookup/lowcostoptions/";
 
 	private static final String SELECT_PHARMACY_ULAYER_DIRECTORY = "/jsonresponse/member/ulayer/druglookup/selectpharmacy/";
-
-	public static final String CONTACT_US = "contactus";
-
-	private static final String CONTACT_US_ULAYER_DIRECTORY = "/jsonresponse/member/ulayer/contactus/";
 
 	public static final Page[] PAGES = {
 			new Page(CommonConstants.GLOBAL, CommonConstants.GLOBAL_DIRECTORY),
@@ -137,24 +135,9 @@ public class CommonConstants {
 					CommonConstants.SELECT_PHARMACY_ULAYER_DIRECTORY),
 			new Page(CommonConstants.TERMINATED_ACCOUNT,
 					CommonConstants.TERMINATED_ACCOUNT_DIRECTORY),
-			new Page(CommonConstants.REGISTRATION_SUCCESS,
-					CommonConstants.REGISTRATION_SUCCESS_DIRECTORY),
-			new Page(CommonConstants.MY_PREFERENCES_BEFORE_UPDATE,
-					CommonConstants.MY_PREF_BEFORE_UPDATE_ULAYER_DIRECTORY),
-			new Page(CommonConstants.MY_PREFERENCES_AFTER_UPDATE,
-					CommonConstants.MY_PREF_AFTER_UPDATE_ULAYER_DIRECTORY),
-			new Page(CommonConstants.CONTACT_US,
-					CommonConstants.CONTACT_US_ULAYER_DIRECTORY),
-			new Page(CommonConstants.BENEFITS_SUMMARY,
-					CommonConstants.BENEFITS_SUMMARY_DIRECTORY),
-			new Page(CommonConstants.PLAN_COMPARE,
-					CommonConstants.PLAN_COMPARE_ULAYER_DIRECTORY)
-
+					new Page(CommonConstants.REGISTRATION_SUCCESS,
+							CommonConstants.REGISTRATION_SUCCESS_DIRECTORY)		
 	};
-
-	public static final String BENEFITS_SUMMARY_DIRECTORY = "/jsonresponse/mobile/member/ulayer/benefits-summary/";
-
-	public static final String BENEFITS_SUMMARY = "benefitssummary";
 
 	public static final String GLOBAL_DIRECTORY = "/jsonresponse/member/ulayer/global/";
 
@@ -223,10 +206,6 @@ public class CommonConstants {
 	private static final String MY_PREF_BEFORE_UPDATE_BLUELAYER_DIRECTORY = "/jsonresponse/member/bluelayer/profilesandpref/mypreferences/beforeupdate/";
 
 	private static final String MY_PREF_AFTER_UPDATE_BLUELAYER_DIRECTORY = "/jsonresponse/member/bluelayer/profilesandpref/mypreferences/afterupdate/";
-
-	private static final String MY_PREF_BEFORE_UPDATE_ULAYER_DIRECTORY = "/jsonresponse/member/ulayer/profilesandpref/mypreferences/beforeupdate/";
-
-	private static final String MY_PREF_AFTER_UPDATE_ULAYER_DIRECTORY = "/jsonresponse/member/ulayer/profilesandpref/mypreferences/afterupdate/";
 
 	private static final String DRUG_COST_BENEFIT_SUMMARY_BLUELAYER_DIRECTORY = "/jsonresponse/Member/bluelayer/drugcostbenefitsummary/";
 
@@ -312,9 +291,9 @@ public class CommonConstants {
 	public static final String PAGE_OBJECT_DIRECTORY_BLUELAYER_MEMBER = "/page-objects/member/bluelayer/";
 
 	public static final String REGISTRATION = "registrationsuccess";
-
+	
 	public static final String REGISTRATION_SUCCESS = "registrationsuccess";
-
+	
 	public static final String REGISTRATION_SUCCESS_DIRECTORY = "/jsonresponse/member/ulayer/registration/registrationsuccess/";
 
 	public static final String REGISTRATION_DIRECTORY = "/jsonresponse/member/ulayer/registration/registrationsuccess/";
@@ -424,15 +403,15 @@ public class CommonConstants {
 	public static final String MEDICAL_CLAIMS_DETAILS_PAGE_DATA = "medicalclaimdetails.json";
 
 	public static final String PLAN_CATEGORY = "planCategory";
-
+	
 	public static final String CLAIM_SUMMARY_INDIVIDUAL_PAGE_DATA = "claimsummaryindividual.json";
-
+	
 	public static final String DRUG_CLAIM_DETAILS_INDIVIDUAL_PAGE_DATA = "drugclaimdetailsindividual.json";
-
+	
 	public static final String DRUG_CLAIM_DETAILS_PAGE_DATA = "drugClaimDetails.json";
-
+	
 	public static final String PLAN_TYPE = "planType";
-
+	
 	public static final String MY_PROFILES = "myprofiles";
 
 	public static final String MY_PROFILES_DIRECTORY = "/jsonresponse/Member/ulayer/profilesandprefereneces/myprofiles/";
@@ -471,6 +450,7 @@ public class CommonConstants {
 
 	public static final String DRUG_LIST_DIRECTORY = "/jsonresponse/member/ulayer/druglookup/druglist/";
 
+	
 	public static final String SELECT_GENERIC_PAGE_DATA = "selectgeneric.json";
 
 	public static final String DRUG_DOSAGE = "drugdosage";
@@ -497,7 +477,7 @@ public class CommonConstants {
 			new Page(CommonConstants.REGISTRATION,
 					CommonConstants.REGISTRATION_BLUELAYER_DIRECTORY),
 			new Page(CommonConstants.ADD_PLAN_CONFIRMATION,
-					CommonConstants.ADD_PLAN_CONFIRMATION_BLUELAYER_DIRECTORY),
+					CommonConstants.ADD_PLAN_CONFIRMATION_BLUELAYER_DIRECTORY),					
 			new Page(CommonConstants.REGISTRATION_COMMON,
 					CommonConstants.REGISTRATION_COMMON_BLUELAYER_DIRECTORY), };
 
@@ -505,7 +485,7 @@ public class CommonConstants {
 			new Page(CommonConstants.PLAN_CONFIRMATION,
 					CommonConstants.PLAN_CONFIRMATION_DIRECTORY),
 			new Page(CommonConstants.REGISTRATION_COMMON,
-					CommonConstants.REGISTRATION_COMMON_ULAYER_DIRECTORY) };
+					CommonConstants.REGISTRATION_COMMON_ULAYER_DIRECTORY)};
 
 	public static final String PRESCRIPTION_DRUG_EOB_PAGE_DATA = "prescriptiondrugeob.json";
 
@@ -565,32 +545,34 @@ public class CommonConstants {
 
 	public static final String GROUP = "Group";
 
-	public static final String MANAGE_DRUG_ULAYER_PAGE_DATA = "manageDrug.json";
+	public static final String MANAGE_DRUG_ULAYER_PAGE_DATA = "manageDrug.json";	
 
-	public static final String ADD_DRUG_ULAYER_PAGE_DATA = "adddrug.json";
+	public static final String ADD_DRUG_ULAYER_PAGE_DATA = "adddrug.json";	
 
 	public static final String SELECT_PHARMACY_ULAYER_PAGE_DATA = "selectpharmacy.json";
-
-	public static final String CATEGORY = "category";
+	
+	public static final String CATEGORY = "category";	
 
 	public static final String INDIVIDUAL = "Individual";
-
+	
 	public static final String ADD_PLAN_CONFIRMATION = "addplanconfirmation";
-
+	
 	private static final String ADD_PLAN_CONFIRMATION_BLUELAYER_DIRECTORY = "/jsonresponse/member/bluelayer/registration/addplanconfirmation/";
 
 	public static final String ADD_PLAN_CONFIRMATION_PAGE_DATA = "addplanconfirmation.json";
 
 	public static final String ZIPCODE_SELECTION_PAGE_DATA = "zipselection.json";
-
+	
 	public static final String ZIPCODE_SELECTION_HOME_PAGE_DATA = "zipselectionhome.json";
 	
+	public static final String PLAN_SELECTOR_PAGE_DATA = "planselector.json";
+	
 	public static final long TIMEOUT_30 = 30;
-
+	
 	public static final long TIMEOUT_40 = 40;
 
 	public static final String SELECTED_DRUG_INFORMATION_PAGE_DATA = "selectedDrugInformation.json";
-
+	
 	public static final String MANAGE_DRUG_PAGE_DATA = "managedrug.json";
 
 	public static final String DRUG_LIST_PAGE_DATA = "druglist.json";
@@ -602,19 +584,19 @@ public class CommonConstants {
 	public static final String GLOBAL_FOOTER_PAGE_DATA = "globalfooteractual.json";
 
 	public static final String SITE_MAP_PAGE_DATA = "sitemap.json";
-
+	
 	public static final String ABOUT_US_PAGE_DATA = "aboutus.json";
-
+	
 	public static final String CONTACT_US_PAGE_DATA = "contactus.json";
-
+	
 	public static final String AGENTS_AND_BROKERS_PAGE_DATA = "agentsandbrokers.json";
-
+	
 	public static final String HOME_PAGE_DISCLAIMER_DATA = "viewalldisclaimer.json";
-
+	
 	public static final String GLOBAL_HEADER_PAGE_DATA = "globalheaderactual.json";
-
+	
 	public static final String ALREADY_PLAN_MEMBER_PAGE_DATA = "alreadyPlanMemberActual.json";
-
+	
 	public static final String HEADER_PAGE_DATA = "headeractual.json";
 
 	public static final String ENROLL_PLAN_INFO_PAGE_DATA = "enrollinplan.json";
@@ -624,13 +606,13 @@ public class CommonConstants {
 	public static final String PDP_PLAN_INFORMATION_PAGE_DATA = "pdpplaninformation.json";
 
 	public static final String BENEFICIARY_INFORMATION_PAGE_DATA = "beneficiaryinformation.json";
-
+	
 	public static final String MA_ADDITIONAL_INFORMATION_PAGE_DATA = "maadditionalinformation.json";
-
+	
 	public static final String PDP_ADDITIONAL_INFORMATION_PAGE_DATA = "pdpadditionalinformation.json";
 
 	public static final String MA_REVIEW_APPLICATION_PAGE_DATA = "mareviewapplication.json";
-
+	
 	public static final String PDP_REVIEW_APPLICATION_PAGE_DATA = "pdpreviewapplication.json";
 
 	public static final String SUBMIT_APPLICATION_PAGE_DATA = "submitapplication.json";
@@ -638,32 +620,34 @@ public class CommonConstants {
 	public static final String ENROLLMENT_CONFIRMATION_PAGE_DATA = "enrollmentconfirmation.json";
 
 	public static final String LOGIN_ASSISTANCE_MESSAGE_PAGE_DATA = "loginassistancemessage.json";
-
+	
 	public static final String AGENT_CONFIRMATION_PAGE_DATA = "agentappointmentconfirmation.json";
 
 	public static final String MA_VPP_PAGE_DATA = "maVpp.json";
 
+
+
 	public static final String ENQUIRY_KIT_CONFIRMATION_PAGE_DATA = "enquirykitconfirm.json";
+	
 
 	public static final String HEALTH_AND_WELLNESS_PAGE_DATA = "healthandwellness.json";
 
 	public static final String HEALTH_AND_WELLNESS = "healthandwellness";
 
 	public static final String MEDICARE_EDUCATION_SECTION_DATA = "medicareEducationSectionActual.json";
-
+	
 	public static final String OUR_PLANS_NAV_PAGE_DATA = "ourPlansDropdownActual.json";
+	
+	public static final String OUR_PLANS_DROPDOWN_DATA= "ourplansdropdownactual.json";
+	
+	
+	
+
 
 	public static final String HEALTH_AND_WELLNESS_DROPDOWN_DATA= "healthandwellnessdropdownactual.json";
-	public static final String OUR_PLANS_DROPDOWN_DATA = "ourplansdropdownactual.json";
-
 	private static final String HEALTH_AND_WELLNESS_DIRECTORY = "/jsonresponse/member/ulayer/healthandwellness/";
 
-	public static final String PLAN_COMPARE_PAGE_DATA = "plancompare.json";
+	
+	}
 
-	public static final String PLAN_COMPARE = "plancompare";
 
-	private static final String PLAN_COMPARE_ULAYER_DIRECTORY = "/jsonresponse/member/ulayer/plancompare/";
-
-	public static final String PROVIDER_SEARCH_PAGE_DATA = "providersearch.json";
-
-}

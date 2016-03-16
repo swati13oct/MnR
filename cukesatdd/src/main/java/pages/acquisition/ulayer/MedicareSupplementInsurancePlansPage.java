@@ -5,7 +5,7 @@ import org.openqa.selenium.support.PageFactory;
 
 import pages.acquisition.ulayer.MedicareSelectHospitalDirectoryPage;
 
-public class MedicareSupplementInsurancePlansPage extends GlobalWebElements {
+public class MedicareSupplementInsurancePlansPage extends GlobalFooterWebElements {
 
 	public MedicareSupplementInsurancePlansPage(WebDriver driver) {
 		super(driver);

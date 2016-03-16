@@ -130,8 +130,6 @@ public class ClaimDetailsPage extends UhcDriver {
 
 		}
 		claimsDetailsJson = jsonObject;
-		
-		System.out.println("claimsDetailsJson----->"+claimsDetailsJson);
 
 	}
 

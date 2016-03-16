@@ -1,9 +1,9 @@
-@pharmacylocator
+@pharmacylocatorums1
 Feature:To test Locate a Pharmacy tool in UMS site
 Scenario Outline:To verify available pharmacies for default zipcode in UMS site
 Given registered member to verify locate a pharmacy in UMS Site
-	| Plan Type    | <plantype>   |
-	| Member Type  | <memberType> |
+	| <plantype> |
+	| <category> |
 When the user navigates to pharmacy search page in UMS site
 And the user search pharmacies using the below information in UMS site
 	| Distance    | <distance>  |
@@ -11,7 +11,7 @@ And the user searches for pharmacies available in UMS site
 Then the user validates the pharmacies available in UMS site
 
 Examples:
-	| plantype | memberType   | distance  |
+	| plantype | category   | distance  |
 	| PDP      |  Group     |   25      |
 #	| MAPD	   | Individual |   25      |
 #	| MAPD     |  Group     |    2      |
@@ -19,8 +19,8 @@ Examples:
 
 Scenario Outline:To verify available pharmacies for particular zipcode in UMS site
 Given registered member to verify locate a pharmacy in UMS Site
-	| Plan Type    | <plantype>   |
-	| Member Type  | <memberType> |
+	| <plantype> |
+	| <category> |
 When the user navigates to pharmacy search page in UMS site
 And the user search pharmacies using the below information in UMS site
     | Zip Code    | <zipCode>   |
@@ -32,7 +32,7 @@ And the user searches for pharmacies available in UMS site
 Then the user validates the pharmacies available in UMS site
 
 Examples:
-  | plantype | memberType  | zipCode     | distance | countyName        | planName 		           	           | 
+  | plantype | category  | zipCode     | distance | countyName        | planName 		           	           | 
 # | MA       | 		 | 80002       | 2        | Adams County      | AARP MedicareComplete SecureHorizons Plan 1 (HMO)  | 
 # | MAPD     | 		 | 78006       | 2        | Bexar County      | AARP MedicareRx Preferred (PDP)                    | 
 # | MAPD     | Group     | 80002       | 2        | Adams County      | AARP MedicareComplete SecureHorizons Plan 2 (HMO)  | 
@@ -40,8 +40,8 @@ Examples:
 
 Scenario Outline:To verify pharmacies displayed for default zipcode in Locate a Pharmacy in UMS site
 Given registered member to verify locate a pharmacy in UMS Site
-	| Plan Type    | <plantype>   |
-	| Member Type  | <memberType> |
+	| <plantype> |
+	| <category> |
 When the user navigates to pharmacy search page in UMS site
 And the user search pharmacies using the below information in UMS site
 	| Distance    | <distance>  |
@@ -51,7 +51,7 @@ And the user searches for pharmacies available in UMS site
 Then the user validates the pharmacies available in UMS site
 
 Examples:
-	| plantype | distance | memberType   |pharmacytype               |
+	| plantype | distance | category   |pharmacytype               |
 	| PDP      | 25       |  Group     | Standard Network Pharmacy | 
 #	| MAPD	   | 2        |  Individual| Open 24 hours             |
 #	| MAPD     | 2        |  Group     | Pharmacy Saver™ Program   |
@@ -59,8 +59,8 @@ Examples:
 	       
 Scenario Outline:To verify pharmacies displayed for particular zipcode in Locate a Pharmacy in UMS site
 Given registered member to verify locate a pharmacy in UMS Site
-	| Plan Type    | <plantype>   |
-	| Member Type  | <memberType> |
+	| <plantype> |
+	| <category> |
 When the user navigates to pharmacy search page in UMS site
 And the user search pharmacies using the below information in UMS site
 	| Zip Code    | <zipCode>   |
@@ -75,7 +75,7 @@ Then the user validates the pharmacies available in UMS site
 
 
 Examples:
-  | plantype | memberType  | zipCode     | distance | countyName        | planName 			               	  | pharmacytype               |
+  | plantype | category  | zipCode     | distance | countyName        | planName 			               	  | pharmacytype               |
 # | MA       | 		 | 80002       | 2        | Adams County      | AARP MedicareComplete SecureHorizons Plan 1 (HMO)  |  Standard Network Pharmacy |
 # | MAPD     | 		 | 78006       | 2        | Bexar County      | AARP MedicareRx Preferred (PDP)                    |  Open 24 hours             |
 # | MAPD     | Group     | 80002       | 2        | Adams County      | AARP MedicareComplete SecureHorizons Plan 2 (HMO)  |  Pharmacy Saver™ Program   |

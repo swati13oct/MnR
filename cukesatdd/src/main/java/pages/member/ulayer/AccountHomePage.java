@@ -7,7 +7,6 @@ import java.util.Map;
 
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.openqa.selenium.Cookie;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -28,10 +27,7 @@ public class AccountHomePage extends UhcDriver {
 
 	@FindBy(linkText = "My Profile & Preferences")
 	private WebElement profAndPrefLink;
-	
-	@FindBy(linkText = "Contact Us")
-	private WebElement contactUsLink;
-	
+
 	@FindBy(className = "fd_myPersonalHealthRecord")
 	private WebElement phrTab;
 
@@ -82,25 +78,13 @@ public class AccountHomePage extends UhcDriver {
 
 	@FindBy(linkText = "Order plan materials")
 	private WebElement orderPlanMaterials;
-
+	
 	@FindBy(id = "gogreenmeter")
 	private WebElement goGreenMeterIndicator;
-
+	
 	@FindBy(className = "fd_myHealthWellness")
 	private WebElement hwTab;
 	
-	@FindBy(linkText = "Compare 2016 Plans")
-	private WebElement planCompareLink;	
-	
-	@FindBy(xpath = "//div[@class='prefermain_mid mapd_div']/div/h3")
-	private WebElement planCompareHeader;	
-
-	@FindBy(xpath = "//div[@class='myProfileMid']/div/div/div[2]/h2")
-	private WebElement myProfilePageHeading;
-	
-	@FindBy(xpath = "//div[@class='myProfileMid']/div/form/div/div/div/div[2]/div/div[2]/h3")
-	private WebElement preferencesPageHeading;
-
 	private PageData myAccountHome;
 
 	public JSONObject accountHomeJson;
@@ -174,16 +158,12 @@ public class AccountHomePage extends UhcDriver {
 	}
 
 	public MyProfilesPage navigateToProfAndPref() {
-
+		
 		profAndPrefLink.click();
-		CommonUtility.waitForPageLoad(driver, myProfilePageHeading, 25);
-		Cookie ck = driver.manage().getCookieNamed("green");
-		System.out.println("Cooke Name ::: " + ck.getName());
-		System.out.println("Cooke value ::: " + ck.getValue());
 		if (driver.getTitle().equalsIgnoreCase(
 				"AARP Medicare Plans | My Personal Profile")) {
 			return new MyProfilesPage(driver);
-		}
+		} 
 		return null;
 
 	}
@@ -290,7 +270,7 @@ public class AccountHomePage extends UhcDriver {
 	public void openAndValidate() {
 		validate(benefitsLink);
 		validate(phrTab);
-		// validate(formsAndResourcesLink);
+		validate(formsAndResourcesLink);
 		validate(benefitsLink);
 		validate(logOut);
 
@@ -299,19 +279,16 @@ public class AccountHomePage extends UhcDriver {
 			WebElement element = findElement(myAccountHome.getExpectedData()
 					.get(key));
 			if (element != null) {
-				if(validate(element)){
+				validate(element);
 				try {
 					jsonObject.put(key, element.getText());
 				} catch (JSONException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-				}
 			}
 		}
 		accountHomeJson = jsonObject;
-		
-		System.out.println("accountHomeJson----->"+accountHomeJson);
 
 	}
 
@@ -360,42 +337,20 @@ public class AccountHomePage extends UhcDriver {
 
 	public MyPreferencesPage clicksOnGoGreenIcon() {
 		goGreenMeterIndicator.click();
-		CommonUtility.waitForPageLoad(driver, preferencesPageHeading, 20);
-		if (currentUrl().contains("my-preferences")) {
+		if(currentUrl().contains("my-preferences"))
+		{
 			return new MyPreferencesPage(driver);
 		}
 		return null;
 	}
-
+	
 	public HealthAndWellnessPage navigateToHWPage() {
 		hwTab.click();
-		if (currentUrl().contains("my-health-and-wellness.html")) {
+		if(currentUrl().contains("my-health-and-wellness.html"))
+		{
 			return new HealthAndWellnessPage(driver);
 		}
 		return null;
-	}
-
-	public ContactUsPage navigatesToContactUsPage() {
-		
-		contactUsLink.click();
-		if(getTitle().equalsIgnoreCase("AARP Medicare Plans | Contact Us"))
-		{
-			return new ContactUsPage(driver);
-		}
-		return null;
-				
-	}
-
-	public PlanComparePage navigateToPlanCompare() {
-		//Compare 2016 Plans
-		planCompareLink.click();
-		CommonUtility.waitForPageLoad(driver, planCompareHeader, 20);
-		if(getTitle().equalsIgnoreCase("Compare 2016 Plans"))
-		{
-			return new PlanComparePage(driver);
-		}
-		return null;
-		
 	}
 
 }

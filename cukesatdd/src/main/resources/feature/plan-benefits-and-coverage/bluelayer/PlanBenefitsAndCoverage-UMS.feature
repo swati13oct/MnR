@@ -1,10 +1,10 @@
-@bnc
+@BnCTestUms
 Feature: To test plan benefits and Coverage on UMS site
 Scenario Outline: Verify benefits and coverage for mapd individual nonlis in UMS site
 Given registered UHC with following details for benefits and coverage flow
  | Plan Type      | MAPD  |
- | Member Type     | Individual|
- | Copay Category | NON LIS               |  
+ | MemberType     | Individual|
+  | Copay Category | NON LIS               |  
  | Riders         | <riderAvailableCheck> |
 
 When the user navigates to benefits and Coverage
@@ -59,7 +59,7 @@ Examples:
 Scenario Outline: Verify benefits and coverage for mapd individual lis in UMS site
 Given registered UHC with following details for benefits and coverage flow
  | Plan Type      | MAPD  |
- | Member Type     | Individual|
+ | MemberType     | Individual|
   | Copay Category | LIS               |  
  | Riders         | <riderAvailableCheck> |
 
@@ -110,7 +110,7 @@ Examples:
 Scenario Outline: Verify benefits and coverage for mapd group lis in UMS site
 Given registered UHC with following details for benefits and coverage flow
  | Plan Type      | MAPD  |
- | Member Type     | Group |
+ | MemberType     | Group |
   | Copay Category | LIS               |  
  | Riders         | <riderAvailableCheck> |
 When the user navigates to benefits and Coverage
@@ -152,7 +152,7 @@ Examples:
 Scenario Outline: Verify benefits and coverage for mapd group nonlis in UMS site
 Given registered UHC with following details for benefits and coverage flow
  | Plan Type      | MAPD  |
- | Member Type     | Group |
+ | MemberType     | Group |
   | Copay Category | NON LIS               |  
  | Riders         | <riderAvailableCheck> |
 When the user navigates to benefits and Coverage
@@ -200,7 +200,7 @@ Examples:
 Scenario Outline: Verify plan benefits and coverage for pdp group nonlis in UMS site
 Given registered UHC with following details for plan benefits and coverage flow in UMS site
  	| Plan Type      			| PDP     					|
- 	| Member Type     			| Group 					|
+ 	| MemberType     			| Group 					|
  	| Copay Category            | NON LIS               	|  
  	| Is Us Other Territories  | <isUsOtherTerritories>  	|
 When the user navigates to plan benefits and Coverage in UMS site
@@ -240,7 +240,7 @@ Examples:
 Scenario Outline: Verify benefits and coverage for pdp group lis in UMS site
 Given registered UHC with following details for benefits and coverage flow
  | Plan Type      | PDP  |
- | Member Type     | Group |
+ | MemberType     | Group |
   | Copay Category | LIS               |  
  | Riders         | <riderAvailableCheck> |
 When the user navigates to benefits and Coverage
@@ -280,7 +280,7 @@ Examples:
 Scenario Outline: Verify benefits and coverage for ma group lis in UMS site
 Given registered UHC with following details for benefits and coverage flow
   | Plan Type      | MA  |
- | Member Type     | Group |
+ | MemberType     | Group |
   | Copay Category | LIS               |  
  | Riders         | <riderAvailableCheck> |
 When the user navigates to benefits and Coverage
@@ -315,7 +315,7 @@ Examples:
 Scenario Outline: Verify benefits and coverage for ma individual nonlis in UMS site
 Given registered UHC with following details for benefits and coverage flow
   | Plan Type      | MA                    |
-  | Member Type     | Individual            |
+  | MemberType     | Individual            |
   | Copay Category | NON LIS               |  
   | Riders         | <riderAvailableCheck> |
 When the user navigates to benefits and Coverage 
@@ -352,7 +352,7 @@ Examples:
 Scenario Outline: Verify benefits and coverage for ma individual lis in UMS site
 Given registered UHC with following details for benefits and coverage flow
   | Plan Type      | MA        |
- | Member Type     | Individual |
+ | MemberType     | Individual |
   | Copay Category | LIS       |  
  | Riders         | <riderAvailableCheck> |
 When the user navigates to benefits and Coverage
@@ -392,7 +392,7 @@ Examples:
 Scenario Outline: Verify benefits and coverage for ssup group nonlis in UMS site
 Given registered UHC with following details for benefits and coverage flow
  | Plan Type      | SSUP  |
- | Member Type     | Group |
+ | MemberType     | Group |
   | Copay Category | NON LIS               |  
  | Riders         | <riderAvailableCheck> |
 When the user navigates to benefits and Coverage

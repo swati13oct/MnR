@@ -1,4 +1,4 @@
-@pharmacylocator
+@pharmacylocatorTest
 Feature:To test Locate a Pharmacy in acqusition flow AARP site
 Scenario Outline:To verify available pharmacies in AARP site
 Given the user is on the AARP Medicare Site landing page

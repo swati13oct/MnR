@@ -116,8 +116,6 @@ public class PrescriptionDrugEobPage extends UhcDriver {
 			}
 		}
 		prescriptionDrugEobJson = jsonObject;
-		
-		System.out.println("prescriptionDrugEobJson----->"+prescriptionDrugEobJson);
 	}
 
 	public JSONObject getExpectedData(Map<String, JSONObject> expectedDataMap) {

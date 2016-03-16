@@ -56,7 +56,6 @@ public class BenefitsAndCoverageUmsStepDefinition {
 					.get(0), memberAttributesRow.get(i).getCells().get(1));
 		}
 
-		String category = memberAttributesMap.get("Member Type");
 		Set<String> memberAttributesKeySet = memberAttributesMap.keySet();
 		List<String> desiredAttributes = new ArrayList<String>();
 		for (Iterator<String> iterator = memberAttributesKeySet.iterator(); iterator
@@ -90,9 +89,10 @@ public class BenefitsAndCoverageUmsStepDefinition {
 		WebDriver wd = getLoginScenario().getWebDriver();
 
 		LoginPage loginPage = new LoginPage(wd);
-		AccountHomePage accountHomePage = (AccountHomePage)loginPage.loginWith(userName, pwd, category);
+		loginPage.loginWith(userName, pwd);
 		JSONObject accountHomeActualJson = null;
-		
+		AccountHomePage accountHomePage = (AccountHomePage) loginPage
+				.checkLoginSuccessful();
 		/* Get expected data */
 		Map<String, JSONObject> expectedDataMap = loginScenario
 				.getExpectedJson(userName);

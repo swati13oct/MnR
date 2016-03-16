@@ -438,8 +438,6 @@ public class ClaimSummaryPage extends UhcDriver {
 
 		}
 		claimsSummaryJson = jsonObject;
-		
-		System.out.println("claimsSummaryJson----->"+claimsSummaryJson);
 
 	}
 	public JSONObject getExpectedData(Map<String,JSONObject> expectedDataMap,String claimPeriod) {

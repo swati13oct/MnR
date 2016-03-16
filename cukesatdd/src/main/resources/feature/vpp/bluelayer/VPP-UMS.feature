@@ -1,4 +1,4 @@
-@vpp
+@vppTest
 Feature: To test plan summary in UMS site
 Scenario Outline: Verify plan summary in UMS site
 Given the user is on the uhcmedicaresolutions site landing page

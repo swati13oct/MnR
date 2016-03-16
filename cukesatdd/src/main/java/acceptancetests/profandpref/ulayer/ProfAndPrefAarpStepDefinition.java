@@ -81,9 +81,10 @@ public class ProfAndPrefAarpStepDefinition {
 
 		LoginPage loginPage = new LoginPage(wd);
 
-		AccountHomePage accountHomePage = (AccountHomePage)loginPage.loginWith(userName, pwd);
+		loginPage.loginWith(userName, pwd);
 		JSONObject accountHomeActualJson = null;
-		 
+		AccountHomePage accountHomePage = (AccountHomePage) loginPage
+				.checkLoginSuccessful();
 		/* Get expected data */
 		Map<String, JSONObject> expectedDataMap = loginScenario
 				.getExpectedJson(userName);
@@ -167,9 +168,8 @@ public class ProfAndPrefAarpStepDefinition {
 		@SuppressWarnings("unchecked")
 		Map<String, JSONObject> expectedDataMap = (Map<String, JSONObject>) getLoginScenario()
 				.getBean(CommonConstants.EXPECTED_DATA_MAP);
-		String key = ProfnPrefCommonConstants.BEFORE_UPDATE;
 		JSONObject myPreferencesExpectedJson = myPreferencesPage
-				.getExpectedData(expectedDataMap, key);
+				.getExpectedData(expectedDataMap);
 		getLoginScenario().saveBean(
 				ProfnPrefCommonConstants.MY_PREFERENCES_EXPECTED,
 				myPreferencesExpectedJson);
@@ -184,54 +184,6 @@ public class ProfAndPrefAarpStepDefinition {
 		getLoginScenario().saveBean(
 				ProfnPrefCommonConstants.MY_PREFERENCES_ACTUAL,
 				myPreferencesActualJson);
-	}
-
-	@And("^the user navigates to My Preferences in AARP Site$")
-	public void user_navigates_my_preferences_aarp() {
-		MyProfilesPage myProfilesPage = (MyProfilesPage) getLoginScenario()
-				.getBean(PageConstants.MY_PROFILES_PAGE);
-
-		MyPreferencesPage myPreferencesPage = myProfilesPage
-				.navigateToMyPrefTab();
-
-		/* Get expected data */
-		@SuppressWarnings("unchecked")
-		Map<String, JSONObject> expectedDataMap = (Map<String, JSONObject>) getLoginScenario()
-				.getBean(CommonConstants.EXPECTED_DATA_MAP);
-		String Key = ProfnPrefCommonConstants.BEFORE_UPDATE;
-		JSONObject myPreferencesExpectedJson = myPreferencesPage
-				.getExpectedData(expectedDataMap, Key);
-		getLoginScenario().saveBean(
-				ProfnPrefCommonConstants.MY_PREFERENCES_EXPECTED,
-				myPreferencesExpectedJson);
-		getLoginScenario().saveBean(
-				ProfnPrefCommonConstants.MY_PREFERENCES_BEFORE_UPDATE_EXPECTED,
-				myPreferencesExpectedJson); // used while resetting preferences
-
-		JSONObject myPreferencesActualJson = null;
-		if (myPreferencesPage != null) {
-			getLoginScenario().saveBean(PageConstants.MY_PREFERENCES_PAGE,
-					myPreferencesPage);
-			Assert.assertTrue(true);
-			myPreferencesActualJson = myPreferencesPage.myPreferencesJson;
-		}
-		getLoginScenario().saveBean(
-				ProfnPrefCommonConstants.MY_PREFERENCES_ACTUAL,
-				myPreferencesActualJson);
-
-		System.out.println("myPreferencesActualJson-->"
-				+ myPreferencesActualJson.toString());
-		System.out.println("myPreferencesExpectedJson-->"
-				+ myPreferencesExpectedJson.toString());
-
-		/* Validations */
-		try {
-			JSONAssert.assertEquals(myPreferencesExpectedJson,
-					myPreferencesActualJson, true);
-		} catch (JSONException e) {
-			e.printStackTrace();
-		}
-
 	}
 
 	@Then("^the user validates displayed document name and delivery preferences for a plan in AARP site$")
@@ -252,82 +204,6 @@ public class ProfAndPrefAarpStepDefinition {
 			e.printStackTrace();
 		}
 
-		myPreferencesPage.logOut();
-
-	}
-
-	@And("^the user updates preferences by changing delivery preferences for corresponding document name in AARP Site$")
-	public void user_edits_doc_name_and_delivery_pref(
-			DataTable profileAttributes) {
-
-		String preferences = profileAttributes.getGherkinRows().get(0)
-				.getCells().get(0);
-
-		MyPreferencesPage myPreferencesPage = (MyPreferencesPage) getLoginScenario()
-				.getBean(PageConstants.MY_PREFERENCES_PAGE);
-		myPreferencesPage.editDocDetails(preferences);
-		myPreferencesPage = myPreferencesPage.updatesDeliveryPreference();
-
-		/* Get expected data */
-		@SuppressWarnings("unchecked")
-		Map<String, JSONObject> expectedDataMap = (Map<String, JSONObject>) getLoginScenario()
-				.getBean(CommonConstants.EXPECTED_DATA_MAP);
-		String key = ProfnPrefCommonConstants.AFTER_UPDATE;
-		JSONObject myPreferencesExpectedJson = myPreferencesPage
-				.getExpectedData(expectedDataMap, key);
-		getLoginScenario().saveBean(
-				ProfnPrefCommonConstants.MY_PREFERENCES_EXPECTED,
-				myPreferencesExpectedJson);
-
-		JSONObject myPreferencesActualJson = null;
-		if (myPreferencesPage != null) {
-			getLoginScenario().saveBean(PageConstants.MY_PREFERENCES_PAGE,
-					myPreferencesPage);
-			Assert.assertTrue(true);
-			myPreferencesActualJson = myPreferencesPage.myPreferencesJson;
-		}
-		getLoginScenario().saveBean(
-				ProfnPrefCommonConstants.MY_PREFERENCES_ACTUAL,
-				myPreferencesActualJson);
-
-	}
-
-	@Then("^the user validates the updated preferences in AARP site$")
-	public void user_validates_updated_preferences_aarp() {
-
-		MyPreferencesPage myPreferencesPage = (MyPreferencesPage) getLoginScenario()
-				.getBean(PageConstants.MY_PREFERENCES_PAGE);
-		JSONObject myPreferencesActualJson = (JSONObject) getLoginScenario()
-				.getBean(ProfnPrefCommonConstants.MY_PREFERENCES_ACTUAL);
-		JSONObject myPreferencesExpectedJson = (JSONObject) getLoginScenario()
-				.getBean(ProfnPrefCommonConstants.MY_PREFERENCES_EXPECTED);
-
-		System.out.println("myPreferencesActualJson-->"
-				+ myPreferencesActualJson.toString());
-		System.out.println("myPreferencesExpectedJson-->"
-				+ myPreferencesExpectedJson.toString());
-
-		/* Validations */
-		try {
-			JSONAssert.assertEquals(myPreferencesExpectedJson,
-					myPreferencesActualJson, true);
-		} catch (JSONException e) {
-			e.printStackTrace();
-		}
-
-		JSONObject myPreferencesJson = (JSONObject) getLoginScenario().getBean(
-				ProfnPrefCommonConstants.MY_PREFERENCES_BEFORE_UPDATE_EXPECTED);
-
-		myPreferencesPage = myPreferencesPage
-				.resetPreferences(myPreferencesJson);
-
-		if (myPreferencesPage != null) {
-			getLoginScenario().saveBean(PageConstants.MY_PREFERENCES_PAGE,
-					myPreferencesPage);
-			Assert.assertTrue(true);
-		} else {
-			Assert.fail("Reset failed");
-		}
 		myPreferencesPage.logOut();
 
 	}
@@ -414,6 +290,24 @@ public class ProfAndPrefAarpStepDefinition {
 				.getBean(PageConstants.PROF_AND_PREF_PAGE);
 		profAndPrefPage.editMailingAddress(profileAttributesMap);
 		System.out.println("mailing address edited");
+
+	}
+
+	@And("^the user changes delivery preferences for document name in AARP Site$")
+	public void user_edits_doc_name_and_delivery_pref(
+			DataTable profileAttributes) {
+		List<DataTableRow> profileAttributesRow = profileAttributes
+				.getGherkinRows();
+		Map<String, String> profileAttributesMap = new LinkedHashMap<String, String>();
+		for (int i = 0; i < profileAttributesRow.size(); i++) {
+
+			profileAttributesMap.put(profileAttributesRow.get(i).getCells()
+					.get(0), profileAttributesRow.get(i).getCells().get(1));
+		}
+		MyPreferencesPage myPrefPage = (MyPreferencesPage) getLoginScenario()
+				.getBean(PageConstants.MY_PREF_PAGE);
+		myPrefPage.editDocDetails(profileAttributesMap);
+		System.out.println("docDetails edited");
 
 	}
 

@@ -1,4 +1,4 @@
-@pharmacylocator
+@pharmacylocatorTest
 Feature:To test Locate a Pharmacy in acqusition flow UMS site
 Scenario Outline:To verify available pharmacies in UMS site
 Given the user is on the UMS Medicare Site landing page

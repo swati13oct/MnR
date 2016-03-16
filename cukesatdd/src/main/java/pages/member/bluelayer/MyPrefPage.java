@@ -156,8 +156,6 @@ public class MyPrefPage extends UhcDriver {
 
 		}
 		myPreferencesJson = jsonObject;
-		
-		System.out.println("myPreferencesJson----->"+myPreferencesJson);
 
 	}
 

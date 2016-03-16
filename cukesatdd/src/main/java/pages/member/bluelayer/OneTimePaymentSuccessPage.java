@@ -65,8 +65,6 @@ public class OneTimePaymentSuccessPage extends UhcDriver {
 
 		}
 		oneTimePaymentSuccessJson = jsonObject;
-		
-		System.out.println("oneTimePaymentSuccessJson----->"+oneTimePaymentSuccessJson);
 
 	}
 

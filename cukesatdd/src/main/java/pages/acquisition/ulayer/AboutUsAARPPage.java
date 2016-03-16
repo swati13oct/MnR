@@ -12,7 +12,7 @@ import atdd.framework.UhcDriver;
  * @author rkodumur
  *
  */
-public class AboutUsAARPPage extends GlobalWebElements{
+public class AboutUsAARPPage extends GlobalFooterWebElements{
 	
 	public AboutUsAARPPage(WebDriver driver) {
 		super(driver);

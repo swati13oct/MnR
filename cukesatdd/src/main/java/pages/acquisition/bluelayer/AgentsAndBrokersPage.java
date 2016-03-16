@@ -10,7 +10,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-import pages.acquisition.bluelayer.GlobalWebElements;
+import pages.acquisition.bluelayer.GlobalFooterWebElements;
 import acceptancetests.atdd.data.CommonConstants;
 import acceptancetests.atdd.data.PageData;
 import acceptancetests.atdd.util.CommonUtility;
@@ -19,7 +19,7 @@ import acceptancetests.atdd.util.CommonUtility;
  * @author saduri
  *
  */
-public class AgentsAndBrokersPage extends GlobalWebElements{
+public class AgentsAndBrokersPage extends GlobalFooterWebElements{
 	
 	@FindBy(className = "med_cont")
 	private WebElement agentsAndBrokersTable;

@@ -30,7 +30,7 @@ public class OurPlansPage extends UhcDriver {
 	@FindBy(xpath = "//*[@id='zipLookup']/p/a")
     private WebElement LookUpZipCode;
 	
-	@FindBy(xpath = "//div[@id='subnav_2']/div/div/div[2]/form/span/span")
+	@FindBy(xpath = "//*[@id='subnav_2']/div/div/div[2]/form/span/span")
 	private WebElement errormessage;
 	
 	@FindBy(id= "ghn_lnk_2")
@@ -39,7 +39,7 @@ public class OurPlansPage extends UhcDriver {
 	@FindBy(id="subnav_2")
 	public static WebElement ourPlansDropdown;
 	
-	@FindBy(xpath = "//div[@id='subnav_2']/div/div/div[2]/form/span/button")
+	@FindBy(xpath = "//*[@id='subnav_2']/div/div/div[2]/form/span/button")
 	public WebElement FindPlansButton;
 
 	private static String PAGE_URL = MRConstants.AARP_OUR_PLANS_URL;
@@ -123,7 +123,6 @@ public Boolean clicktextfield() {
 	validate(zipfield);
 	zipfield.click();
 	zipfield.sendKeys("9001");
-	validate(FindPlansButton);
 //	String zip= zipfield.getAttribute("value");
 	FindPlansButton.click();
 	return validate(errormessage);

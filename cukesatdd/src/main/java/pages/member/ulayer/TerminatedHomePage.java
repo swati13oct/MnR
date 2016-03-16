@@ -100,8 +100,6 @@ public class TerminatedHomePage extends UhcDriver {
 			}
 		}
 		terminatedAccountJson = jsonObject;
-		
-		System.out.println("terminatedAccountJson----->"+terminatedAccountJson);
 
 	}
 

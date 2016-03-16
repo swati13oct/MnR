@@ -220,8 +220,6 @@ public class PaymentHistoryPage extends UhcDriver{
 		}
 		paymentHistoryJson = jsonObject;
 		
-		System.out.println("paymentHistoryJson----->"+paymentHistoryJson);
-		
 	}
 
 	public JSONObject getExpectedData(Map<String, JSONObject> expectedDataMap) {

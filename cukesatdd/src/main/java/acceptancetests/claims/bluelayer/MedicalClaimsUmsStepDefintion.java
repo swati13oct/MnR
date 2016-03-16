@@ -57,7 +57,6 @@ public class MedicalClaimsUmsStepDefintion {
 					.get(0), memberAttributesRow.get(i).getCells().get(1));
 		}
 
-		String category = memberAttributesMap.get("Member Type");
 		Set<String> memberAttributesKeySet = memberAttributesMap.keySet();
 		List<String> desiredAttributes = new ArrayList<String>();
 		for (Iterator<String> iterator = memberAttributesKeySet.iterator(); iterator
@@ -93,9 +92,16 @@ public class MedicalClaimsUmsStepDefintion {
 		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
 
 		LoginPage loginPage = new LoginPage(wd);
-		AccountHomePage accountHomePage = (AccountHomePage)loginPage.loginWith(userName, pwd,category);
+		loginPage.loginWith(userName, pwd);
 		JSONObject accountHomeActualJson = null;
-		
+		AccountHomePage accountHomePage = null;
+		if (memberAttributesMap.get("Category").equalsIgnoreCase("Individual")) {
+			accountHomePage = (AccountHomePage) loginPage
+					.checkLoginSuccessful(memberAttributesMap.get("Category"));
+		} else {
+			accountHomePage = (AccountHomePage) loginPage
+					.checkLoginSuccessful();
+		}
 		/* Get expected data */
 		Map<String, JSONObject> expectedDataMap = loginScenario
 				.getExpectedJson(userName);
@@ -154,8 +160,12 @@ public class MedicalClaimsUmsStepDefintion {
 					.get(0), memberAttributesRow.get(i).getCells().get(1));
 		}
 
-		String category = memberAttributesMap.get("Member Type");
-		
+		String category = null;
+		if (memberAttributesMap.get("Category").equalsIgnoreCase("Group")) {
+			category = "Group";
+		} else {
+			category = "Individual";
+		}
 		getLoginScenario().saveBean("Category", category);
 		getLoginScenario().saveBean("Plan Type",
 				memberAttributesMap.get("Plan Type"));
@@ -191,7 +201,9 @@ public class MedicalClaimsUmsStepDefintion {
 		getLoginScenario().saveBean("webDriver", wd);
 
 		LoginPage loginPage = new LoginPage(wd);
-		TerminatedHomePage terminatedHomePage = (TerminatedHomePage) 	loginPage.loginWith(user, pwd, category);
+		loginPage.loginWith(user, pwd);
+		TerminatedHomePage terminatedHomePage = (TerminatedHomePage) loginPage
+				.checkIfLoginSuccessful();
 		if (terminatedHomePage != null) {
 			getLoginScenario().saveBean(PageConstants.TERMINATED_HOME_PAGE,
 					terminatedHomePage);

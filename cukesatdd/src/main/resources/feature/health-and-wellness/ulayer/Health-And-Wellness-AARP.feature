@@ -1,4 +1,4 @@
-@H&W
+@HWaarp
 Feature:To test health and wellness in AARP site
 Scenario Outline:To verify health and wellness widgets in AARP site
 Given the user is on the AARP medicare site login page

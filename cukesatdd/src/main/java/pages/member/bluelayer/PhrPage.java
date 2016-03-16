@@ -81,7 +81,6 @@ public class PhrPage extends UhcDriver {
 		}
 		phrJson = jsonObject;
 
-		System.out.println("phrJson----->"+phrJson);
 	}
 
 	public JSONObject getExpectedData(Map<String, JSONObject> expectedDataMap) {

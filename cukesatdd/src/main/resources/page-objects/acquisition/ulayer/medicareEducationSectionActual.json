@@ -11,11 +11,11 @@
 },
 "prepareForInitialEnrollmentMedicareEducationLink":{
 "identifier":"xpath",
-"elementName":"//div[@id='subnav_3']/div/div/div/div[2]/div/h3/a/span"
+"elementName":"//div[@id='subnav_3']/div/div/div/div/div[2]/h3/a/span"
 },
 "discoverMoreResourcesMedicareEducationLink":{
 "identifier":"xpath",
-"elementName":"//div[@id='subnav_3']/div/div/div/div[2]/div/h3[2]/a/span"
+"elementName":"//div[@id='subnav_3']/div/div/div/div[2]/div[2]/h3/a/span"
 }
 }
 }

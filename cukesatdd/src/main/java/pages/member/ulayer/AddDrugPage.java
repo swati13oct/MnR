@@ -82,8 +82,6 @@ public class AddDrugPage extends UhcDriver {
 			}
 		}
 		addDrugJson = jsonObject;
-		
-		System.out.println("addDrugJson----->"+addDrugJson);
 
 	}
 

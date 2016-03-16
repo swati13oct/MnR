@@ -1,7 +1,5 @@
 package pages.acquisition.ulayer;
 
-import java.util.ArrayList;
-
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
@@ -94,15 +92,4 @@ public class RegistrationHomePage extends UhcDriver{
 		validate(yearToEnter);
 		
 	}
-
-	public void switchBack() {
-		
-
-		
-		ArrayList<String> tabs = new ArrayList<String> (driver.getWindowHandles());
-	    driver.switchTo().window(tabs.get(0));
-		// TODO Auto-generated method stub
-		
-	}
-	// TODO Auto-generated method stub
 }

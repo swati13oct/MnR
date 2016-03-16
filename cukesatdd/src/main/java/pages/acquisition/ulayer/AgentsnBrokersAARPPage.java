@@ -14,7 +14,7 @@ import atdd.framework.UhcDriver;
  * @author rkodumur
  *
  */
-public class AgentsnBrokersAARPPage extends GlobalWebElements{
+public class AgentsnBrokersAARPPage extends GlobalFooterWebElements{
 	 
 	public AgentsnBrokersAARPPage(WebDriver driver) {
 		super(driver);

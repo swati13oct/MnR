@@ -1,4 +1,4 @@
-@phr
+@phrTestAARP
 Feature:To test personal health record in AARP site
 Scenario Outline:Verify personal health record in AARP site for member enrolled in federal and ship plans
 Given registered AMP with following details for phr flow in AARP site

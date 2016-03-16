@@ -1,4 +1,4 @@
-@bnc
+@BnCTest1
 Feature: To test plan benefits and Coverage on AARP site for Federal members
 Scenario Outline: Verify benefits and coverage in AARP site for MAPD NON LIS member
 Given registered AMP with following details for benefits and coverage flow in AARP site

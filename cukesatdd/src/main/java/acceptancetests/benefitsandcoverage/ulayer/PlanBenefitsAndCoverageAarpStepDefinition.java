@@ -95,8 +95,9 @@ public class PlanBenefitsAndCoverageAarpStepDefinition {
 		WebDriver wd = getLoginScenario().getWebDriver();
 
 		LoginPage loginPage = new LoginPage(wd);
-		AccountHomePage accountHomePage = (AccountHomePage) loginPage.loginWith(userName, pwd);
+		loginPage.loginWith(userName, pwd);
 		JSONObject accountHomeActualJson = null;
+		AccountHomePage accountHomePage = (AccountHomePage) loginPage.checkLoginSuccessful();
 		
 		/*Get expected data*/
 		Map<String,JSONObject> expectedDataMap = loginScenario.getExpectedJson(userName);

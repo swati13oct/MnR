@@ -66,8 +66,6 @@ public class SetupAutoPaymentSuccessPage extends UhcDriver{
 			}
 		}
 		setupRecPaymentSuccessJson = jsonObject;
-		
-		System.out.println("setupRecPaymentSuccessJson----->"+setupRecPaymentSuccessJson);
 
 	}
 

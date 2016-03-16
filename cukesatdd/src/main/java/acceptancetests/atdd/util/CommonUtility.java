@@ -5,9 +5,7 @@ package acceptancetests.atdd.util;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.Calendar;
 import java.util.Iterator;
-import java.util.TimeZone;
 
 import org.codehaus.jackson.JsonParseException;
 import org.codehaus.jackson.map.JsonMappingException;
@@ -21,19 +19,13 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import acceptancetests.atdd.data.MRConstants;
 import acceptancetests.atdd.data.PageData;
-import atdd.framework.MRScenario;
 
 /**
  * @author pjaising
  *
  */
 public class CommonUtility {
-
-	private static String MRREST_TIME_ADMIN_URL = MRConstants.MRREST_TIME_ADMIN_URL;
-
-	private static String PARTD_TIME_ADMIN_URL = MRConstants.PARTD_TIME_ADMIN_URL;
 
 	public static boolean checkPageIsReady(WebDriver driver) {
 
@@ -115,31 +107,23 @@ public class CommonUtility {
 					waitForPageLoad(driver, element, timeout);
 				}
 			}
-
 		} catch (Exception e) {
-			timeout = timeout - 5;
-			if (timeout > 0) {
-				waitForPageLoad(driver, element, timeout);
-			} else {
-				System.out.println("Not able to locate this " + element
-						+ " on page");
-				return;
-			}
+			System.out.println("Not able to locate this " + element
+					+ " on page");
+			return;
 		}
-
 	}
 
 	public static void waitForElementToDisappear(WebDriver driver,
 			WebElement element, long timeout) {
 		WebDriverWait wait = new WebDriverWait(driver, timeout);
-
-		Boolean elementExpected = wait.until(ExpectedConditions
-				.not(ExpectedConditions.visibilityOf(element)));
-		if (!elementExpected) {
+		
+		Boolean elementExpected = wait.until(ExpectedConditions.not(ExpectedConditions.visibilityOf(element)));
+		if(!elementExpected){
 			timeout = timeout - 5;
-			if (timeout > 0) {
-				waitForElementToDisappear(driver, element, timeout);
-			}
+		if (timeout > 0) {
+			waitForElementToDisappear(driver, element, timeout);
+		}
 		}
 	}
 
@@ -149,14 +133,11 @@ public class CommonUtility {
 		Iterator<?> itr = secondPlanInformationExpected.keys();
 		while (itr.hasNext()) {
 			String key = (String) itr.next();
-
+			
 			try {
-				int lengthOfArray = secondPlanInformationExpected.getJSONArray(
-						key).length();
-				for (int i = 0; i < lengthOfArray; i++) {
-					firstPlanInformationExpected = firstPlanInformationExpected
-							.append(key, secondPlanInformationExpected
-									.getJSONArray(key).get(i));
+				int lengthOfArray = secondPlanInformationExpected.getJSONArray(key).length();
+				for(int i=0;i<lengthOfArray; i++){
+				firstPlanInformationExpected = firstPlanInformationExpected.append(key, secondPlanInformationExpected.getJSONArray(key).get(i));
 				}
 			} catch (JSONException e) {
 				// TODO Auto-generated catch block
@@ -164,88 +145,9 @@ public class CommonUtility {
 			}
 		}
 		return firstPlanInformationExpected;
-
+		
 	}
 
-	public static void changeMRRestTime(MRScenario mrScenario, String date) {
 
-		int calendarMonth, month, day, year;
-		String[] dateComponents = date.split("-");
-		month = Integer.parseInt(dateComponents[0]);
-		calendarMonth = month - 1; // We take month-1 because the Calendar API
-		// uses 0-11 for Jan-Dec
-		day = Integer.parseInt(dateComponents[1]);
-		year = Integer.parseInt(dateComponents[2]);
-
-		// Create a calendar object for the date in order to retrieve Millis
-		Calendar calendar = Calendar.getInstance();
-		calendar.clear();
-		calendar.set(year, calendarMonth, day, 00, 00, 00);
-
-		// Set time zone to EST (Eastern Time) as this is the time zone used by
-		// MRRestWAR
-		calendar.setTimeZone(TimeZone.getTimeZone("EST"));
-
-		// Calculate milliseconds for call to MRRestWAR
-		long millis = calendar.getTimeInMillis();
-
-		String dateURL = "joda?millis=" + millis + "&month=" + month + "&day="
-				+ day + "&year=" + year + "&hour=00&min=00&sec=00&server=1";
-
-		String completeDateUrl = MRREST_TIME_ADMIN_URL + dateURL;
-
-		WebDriver wd = mrScenario.getWebDriver();
-		wd.get(completeDateUrl);
-		wd.quit();
-	}
-
-	public static void changePartDTime(MRScenario mrScenario, String date) {
-
-		int calendarMonth, month, day, year;
-		String[] dateComponents = date.split("-");
-		month = Integer.parseInt(dateComponents[0]);
-		calendarMonth = month - 1; // We take month-1 because the Calendar API
-		// uses 0-11 for Jan-Dec
-		day = Integer.parseInt(dateComponents[1]);
-		year = Integer.parseInt(dateComponents[2]);
-
-		// Create a calendar object for the date in order to retrieve Millis
-		Calendar calendar = Calendar.getInstance();
-		calendar.clear();
-		calendar.set(year, calendarMonth, day, 00, 00, 00);
-
-		// Set time zone to EST (Eastern Time) as this is the time zone used by
-		// PARTD
-		calendar.setTimeZone(TimeZone.getTimeZone("EST"));
-
-		// Calculate milliseconds for call to PARTD
-		long millis = calendar.getTimeInMillis();
-
-		String dateURL = "joda?millis=" + millis + "&month=" + month + "&day="
-				+ day + "&year=" + year + "&hour=00&min=00&sec=00&server=1";
-
-		String completeDateUrl = PARTD_TIME_ADMIN_URL + dateURL;
-
-		WebDriver wd = mrScenario.getWebDriver();
-		wd.get(completeDateUrl);
-		wd.quit();
-	}
-
-	public static void resetMRRestTime(MRScenario mrScenario) {
-		String dateURL = "jvm?server=1";
-		String completeDateUrl = MRREST_TIME_ADMIN_URL + dateURL;
-		WebDriver wd = mrScenario.getWebDriver();
-		wd.get(completeDateUrl);
-		wd.quit();
-	}
-
-	public static void resetPartDTime(MRScenario mrScenario) {
-		String dateURL = "jvm?server=1";
-		String completeDateUrl = PARTD_TIME_ADMIN_URL + dateURL;
-		WebDriver wd = mrScenario.getWebDriver();
-		wd.get(completeDateUrl);
-		wd.quit();
-
-	}
 
 }

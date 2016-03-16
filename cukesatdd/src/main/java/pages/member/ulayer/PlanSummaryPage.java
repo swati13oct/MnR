@@ -83,8 +83,6 @@ public class PlanSummaryPage extends UhcDriver {
 			}
 		}
 		planSummaryJson = jsonObject;
-		
-		System.out.println("planSummaryJson----->"+planSummaryJson);
 
 	}
 
