@@ -27,6 +27,9 @@ public class AccountHomePage extends UhcDriver {
 
 	@FindBy(linkText = "My Profile & Preferences")
 	private WebElement profAndPrefLink;
+	
+	@FindBy(linkText = "Contact Us")
+	private WebElement contactUsLink;
 
 	@FindBy(className = "fd_myPersonalHealthRecord")
 	private WebElement phrTab;
@@ -84,6 +87,19 @@ public class AccountHomePage extends UhcDriver {
 	
 	@FindBy(className = "fd_myHealthWellness")
 	private WebElement hwTab;
+	
+	@FindBy(linkText = "Compare 2016 Plans")
+	private WebElement planCompareLink;	
+	
+	@FindBy(xpath = "//div[@class='prefermain_mid mapd_div']/div/h3")
+	private WebElement planCompareHeader;	
+	
+	@FindBy(xpath = "//div[@class='myProfileMid']/div/div/div[2]/h2")
+	private WebElement myProfilePageHeading;
+	
+	@FindBy(xpath = "//div[@class='myProfileMid']/div/form/div/div/div/div[2]/div/div[2]/h3")
+	private WebElement preferencesPageHeading;
+
 	
 	private PageData myAccountHome;
 
@@ -352,5 +368,27 @@ public class AccountHomePage extends UhcDriver {
 		}
 		return null;
 	}
+	
+	public ContactUsPage navigatesToContactUsPage() {
+		
+		contactUsLink.click();
+		if(getTitle().equalsIgnoreCase("AARP Medicare Plans | Contact Us"))
+		{
+			return new ContactUsPage(driver);
+		}
+		return null;
+				
+	}
 
+	public PlanComparePage navigateToPlanCompare() {
+		//Compare 2016 Plans
+		planCompareLink.click();
+		CommonUtility.waitForPageLoad(driver, planCompareHeader, 20);
+		if(getTitle().equalsIgnoreCase("Compare 2016 Plans"))
+		{
+			return new PlanComparePage(driver);
+		}
+		return null;
+		
+	}
 }
