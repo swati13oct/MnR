@@ -25,10 +25,8 @@ public class PrescriptionDrugRequestMoreHelpPage extends GlobalWebElements {
 	}
 
 	public MedicareSupplementPlansuhcPage medicareSupplementPlansLinkClick() {
-		ourPlansHover();
-		validate(headerMedicareSupplementPlansLink);
-		headerMedicareSupplementPlansLink.click();
-		validate(headerMedicareSupplementPlansLink);
+		ourPlansHover(headerMedicareSupplementPlansLink);
+		validate(ourPlansDropdownText);
 		if(driver.getTitle().equalsIgnoreCase("UnitedHealthcare Medicare Solutions | AARP Medicare Supplement Plans")){
 			return new MedicareSupplementPlansuhcPage(driver);
 		}

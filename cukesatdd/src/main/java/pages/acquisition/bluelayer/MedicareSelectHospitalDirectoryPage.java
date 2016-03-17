@@ -25,10 +25,8 @@ public class MedicareSelectHospitalDirectoryPage extends GlobalWebElements {
 		}
 
 	public ResumeYourSavedApplicationPage resumeYourSavedApplicationClick() {
-		ourPlansHover();
-		validate(resumeYourSavedApplicationLink);
-		resumeYourSavedApplicationLink.click();
-		validate(resumeYourSavedApplicationLink);
+		ourPlansHover(resumeYourSavedApplicationLink);
+		validate(ourPlansDropdownText);
 		if(driver.getTitle().equalsIgnoreCase("Medicare Supplement Insurance Plans")){
 			return new ResumeYourSavedApplicationPage(driver);
 		}
