@@ -6,7 +6,11 @@ package pages.acquisition.ulayer;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.PageFactory;
 
+
 import pages.acquisition.bluelayer.GlobalFooterWebElements;
+
+import pages.acquisition.ulayer.GlobalWebElements;
+
 
 /**
  * @author rkodumur

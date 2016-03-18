@@ -492,7 +492,7 @@ public SiteMapUMSPage siteMapFooterClick() {
 	}
       
 	public JSONObject accessingOurPlansNav() {
-		ourPlansHover();
+		ourPlansHover(ourPlansDropdownText);
 		return getOurPlanDropDownJson();
 	}
 	
@@ -560,7 +560,7 @@ public SiteMapUMSPage siteMapFooterClick() {
 	
 	
 	public JSONObject enterZipCode(String zipCode) {
-		ourPlansHover();
+		ourPlansHover(zipcodeField);
 		validate(zipcodeField);
 		zipcodeField.sendKeys(zipCode);
 		findPlansButton.click();		
@@ -585,10 +585,8 @@ public SiteMapUMSPage siteMapFooterClick() {
 		return null;
 	}	
 	public MedicareAdvantagePlansuhcPage headerMedicareAdvantageClick() {
-		ourPlansHover();
-		validate(headerMedicareAdvantagePlansLink);
-		headerMedicareAdvantagePlansLink.click();
-        validate(headerMedicareAdvantagePlansLink);
+		ourPlansHover(headerMedicareAdvantagePlansLink);
+        validate(ourPlansDropdownText);
         if(driver.getTitle().equalsIgnoreCase("Medicare Advantage Plans | UnitedHealthcare®")){
         return new MedicareAdvantagePlansuhcPage(driver);
         }
@@ -605,10 +603,8 @@ public SiteMapUMSPage siteMapFooterClick() {
 		
 	}
 	public MedicareSpecialNeedsPlansuhcPage medicareSpecialNeedPlansLinkClick() {
-		ourPlansHover();
-		validate(headerMedicareSpecialNeedPlansLink);
-		headerMedicareSpecialNeedPlansLink.click();
-		validate(headerMedicareSpecialNeedPlansLink);
+		ourPlansHover(headerMedicareSpecialNeedPlansLink);
+		validate(ourPlansDropdownText);
 		if(driver.getTitle().equalsIgnoreCase("Medicare Special Needs Plans | UnitedHealthcare®")){
 			return new MedicareSpecialNeedsPlansuhcPage(driver);
 		}
@@ -617,7 +613,7 @@ public SiteMapUMSPage siteMapFooterClick() {
 
 
 	public OurPlansPage findPlanButtonClick(String zipCode) {
-		ourPlansHover();
+		ourPlansHover(zipcodeField);
 		validate(zipcodeField);
 		zipcodeField.sendKeys(zipCode);
 		findPlansButton.click();

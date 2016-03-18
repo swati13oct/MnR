@@ -25,10 +25,8 @@ public class MedicareAdvantageRequestMoreHelpPage extends GlobalFooterWebElement
 	}
 
 	public MedicarePrescriptionDrugPlansuhcPage prescriptionDrugPlansLinkClick() {
-		ourPlansHover();
-		validate(headerMedicarePrescriptionDrugPlansLink);
-		headerMedicarePrescriptionDrugPlansLink.click();
-		validate(headerMedicarePrescriptionDrugPlansLink);
+		ourPlansHover(headerMedicarePrescriptionDrugPlansLink);
+		validate(ourPlansDropdownText);
 		if(driver.getTitle().equalsIgnoreCase("Medicare Prescription Drug Plans | UnitedHealthcare®")){
 			return new MedicarePrescriptionDrugPlansuhcPage(driver);
 		}

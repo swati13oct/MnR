@@ -46,9 +46,7 @@ public class PlanSelectorPage extends GlobalFooterWebElements{
 	}
 
 	public Boolean validate_textField() {
-		ourPlansHover();
-		validate(zipcodeField);
-		zipcodeField.click();
+		ourPlansHover(zipcodeField);
 		zipcodeField.sendKeys("90210");
 		String zip = zipcodeField.getAttribute("value");
 		if(zip.equalsIgnoreCase("90210")){

@@ -18,10 +18,8 @@ public class SpecialNeedGetEnrollmentInformationPage extends GlobalFooterWebElem
 	}
 
 	public PlanSelectorPage takeQuizButtonClick() {
-		ourPlansHover();
-		validate(takeQuizButton);
-		takeQuizButton.click();
-		validate(takeQuizButton);
+		ourPlansHover(takeQuizButton);
+		validate(ourPlansDropdownText);
 		if(driver.getTitle().equalsIgnoreCase("Plan Selector")){
 			return new PlanSelectorPage(driver);
 		}
