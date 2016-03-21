@@ -19,7 +19,7 @@ import acceptancetests.atdd.util.CommonUtility;
  * @author rkodumur
  *
  */
-public class PlanSelectorPage extends GlobalFooterWebElements{
+public class PlanSelectorPage extends GlobalWebElements{
 	
 	 @FindBy(xpath = "//article[@id='criteria']/header/div[1]/h2")
 		private WebElement planselectoruhcpage;

@@ -5,10 +5,6 @@ package pages.acquisition.ulayer;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.PageFactory;
-
-
-import pages.acquisition.bluelayer.GlobalFooterWebElements;
-
 import pages.acquisition.ulayer.GlobalWebElements;
 
 
@@ -16,7 +12,7 @@ import pages.acquisition.ulayer.GlobalWebElements;
  * @author rkodumur
  *
  */
-public class MedicareSupplementPlansuhcPage extends GlobalFooterWebElements{
+public class MedicareSupplementPlansuhcPage extends GlobalWebElements{
 	
 
 	public MedicareSupplementPlansuhcPage(WebDriver driver) {

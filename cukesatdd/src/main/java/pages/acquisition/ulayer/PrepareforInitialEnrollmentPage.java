@@ -12,7 +12,7 @@ import acceptancetests.atdd.data.CommonConstants;
 import acceptancetests.atdd.data.PageData;
 import acceptancetests.atdd.util.CommonUtility;
 
-public class PrepareforInitialEnrollmentPage extends GlobalFooterWebElements {
+public class PrepareforInitialEnrollmentPage extends GlobalWebElements {
 	@FindBy(className = "bullet_list")
 	private WebElement initalenrolllist;
 	

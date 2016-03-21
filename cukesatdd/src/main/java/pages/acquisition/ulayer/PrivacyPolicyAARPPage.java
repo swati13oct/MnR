@@ -13,7 +13,7 @@ import atdd.framework.UhcDriver;
  * @author rkodumur
  *
  */
-public class PrivacyPolicyAARPPage extends GlobalFooterWebElements{
+public class PrivacyPolicyAARPPage extends GlobalWebElements{
  
 	public PrivacyPolicyAARPPage(WebDriver driver) {
 		super(driver);

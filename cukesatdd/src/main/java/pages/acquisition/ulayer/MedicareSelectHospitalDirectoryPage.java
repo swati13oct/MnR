@@ -11,7 +11,7 @@ import org.openqa.selenium.support.PageFactory;
  * @author snagpa4
  *
  */
-public class MedicareSelectHospitalDirectoryPage extends GlobalFooterWebElements {
+public class MedicareSelectHospitalDirectoryPage extends GlobalWebElements {
 
 	public MedicareSelectHospitalDirectoryPage(WebDriver driver) {
 		super(driver);

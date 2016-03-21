@@ -10,7 +10,7 @@ import org.openqa.selenium.support.PageFactory;
  * @author sdatt11
  *
  */
-public class AARPOrgPage extends GlobalFooterWebElements{
+public class AARPOrgPage extends GlobalWebElements{
 		
 	
 	public AARPOrgPage(WebDriver driver) {

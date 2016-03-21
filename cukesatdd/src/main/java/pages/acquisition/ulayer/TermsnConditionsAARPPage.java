@@ -13,7 +13,7 @@ import atdd.framework.UhcDriver;
  * @author rkodumur
  *
  */
-public class TermsnConditionsAARPPage extends GlobalFooterWebElements{
+public class TermsnConditionsAARPPage extends GlobalWebElements{
 		
 	public TermsnConditionsAARPPage(WebDriver driver) {
 		super(driver);

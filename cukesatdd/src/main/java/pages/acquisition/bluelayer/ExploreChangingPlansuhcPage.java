@@ -7,14 +7,14 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.PageFactory;
 
-import pages.acquisition.bluelayer.GlobalFooterWebElements;
+import pages.acquisition.bluelayer.GlobalWebElements;
 import pages.acquisition.ulayer.PrepareforInitialEnrollmentPage;
 
 /**
  * @author rkodumur
  *
  */
-public class ExploreChangingPlansuhcPage extends GlobalFooterWebElements{
+public class ExploreChangingPlansuhcPage extends GlobalWebElements{
 	
 
 	public ExploreChangingPlansuhcPage(WebDriver driver) {

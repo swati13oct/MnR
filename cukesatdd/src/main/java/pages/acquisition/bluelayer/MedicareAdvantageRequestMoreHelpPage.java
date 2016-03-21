@@ -10,7 +10,7 @@ import org.openqa.selenium.support.PageFactory;
  * @author rkodumur
  *
  */
-public class MedicareAdvantageRequestMoreHelpPage extends GlobalFooterWebElements {
+public class MedicareAdvantageRequestMoreHelpPage extends GlobalWebElements {
 
 	public MedicareAdvantageRequestMoreHelpPage(WebDriver driver) {
 		super(driver);
