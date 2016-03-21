@@ -203,10 +203,31 @@ public class ManageDrugPage extends UhcDriver {
 		System.out.println();
 	}
 
-	public void applyChanges() {
+	public Object applieschanges(String planType) {
 		applyChangesButton.click();
-		System.out.println("changes");
+		try {
+			if (applyChangesButton.isDisplayed()) {
+				CommonUtility.waitForElementToDisappear(driver, applyChangesButton,
+						CommonConstants.TIMEOUT_30);
+			}
+		} catch (NoSuchElementException e) {
+			System.out.println("applyChangesButton not found");
+		} catch (TimeoutException ex) {
+			System.out.println("applyChangesButton not found");
+		} catch (Exception e) {
+			System.out.println("applyChangesButton not found");
+		}
+		if (currentUrl().contains("health-plans.html")) {
+			return new VPPPlanSummaryPage(driver);
+		}
+		if (currentUrl().contains("plan-detail.html")) {
+			return new PlanDetailsPage(driver,planType);
+		}
+		
+		
+		return null;
 
+	
 	}
 
 	public JSONObject getExpectedData(String fileName, String directory) {

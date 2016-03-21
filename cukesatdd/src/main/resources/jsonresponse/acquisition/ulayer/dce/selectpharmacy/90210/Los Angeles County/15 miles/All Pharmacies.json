@@ -13,8 +13,8 @@
             "pharmacyDropDown": "Preferred Mail Service Pharmacy"
         }
     ], 
-    "nextLink": "Next 10 results",
-    "previousLink": "Previous 10 results",   
+    "nextLink": "Next results",
+    "previousLink": "Previous results",   
     "pharmacies": [
         {
             "pharmacyDistance": "1.32",

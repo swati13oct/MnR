@@ -17,9 +17,6 @@ public class LocationSearchPage extends UhcDriver{
 
 	@FindBy(linkText = "Continue")
 	WebElement continueButton;
-	
-	/*@FindBy(xpath = "//div[@id='counties']//span[.='Continue']")
-	WebElement countyContinueButton;*/
 
 	public LocationSearchPage(WebDriver driver) {
 		 super(driver);

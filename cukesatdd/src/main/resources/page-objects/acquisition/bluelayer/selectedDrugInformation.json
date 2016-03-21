@@ -6,8 +6,8 @@
 "elementName":"branded"
 },
 "switchGenericLink":{
-"identifier":"className",
-"elementName":"generic"
+"identifier":"linkText",
+"elementName":"Switch to generic"
 },
 "editLink":{
 "identifier":"linkText",

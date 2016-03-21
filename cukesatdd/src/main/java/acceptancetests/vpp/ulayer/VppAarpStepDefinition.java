@@ -16,6 +16,7 @@ import org.skyscreamer.jsonassert.JSONAssert;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import pages.acquisition.ulayer.AcquisitionHomePage;
+import pages.acquisition.ulayer.PlanDetailsPage;
 import pages.acquisition.ulayer.ProviderSearchPage;
 import pages.acquisition.ulayer.VPPPlanSummaryPage;
 import acceptancetests.atdd.data.CommonConstants;
@@ -337,6 +338,68 @@ public class VppAarpStepDefinition {
 			getLoginScenario().saveBean(
 					VPPCommonConstants.VPP_PLAN_SUMMARY_ACTUAL,
 					planSummaryActualJson);
+		}
+	}
+	
+	@When("^the user view plan details of the above selected plan in AARP site$")
+	public void user_views_plandetails_selected_plan_aarp() {
+		String planName = (String) getLoginScenario().getBean(
+				VPPCommonConstants.PLAN_NAME);
+		String zipcode = (String) getLoginScenario().getBean(
+				VPPCommonConstants.ZIPCODE);
+		String county = (String) getLoginScenario().getBean(
+				VPPCommonConstants.COUNTY);
+		VPPPlanSummaryPage vppPlanSummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+
+		String planType = (String)getLoginScenario().getBean(VPPCommonConstants.PLAN_TYPE);
+		PlanDetailsPage vppPlanDetailsPage = vppPlanSummaryPage
+				.navigateToPlanDetails(planName, planType);
+		if (vppPlanDetailsPage != null) {
+			getLoginScenario().saveBean(PageConstants.VPP_PLAN_DETAILS_PAGE,
+					vppPlanDetailsPage);
+			/* Get actual data */
+			JSONObject planDetailsActualJson = vppPlanDetailsPage.vppPlanDetailsJson;
+			System.out.println("planDetailsActualJson---->"
+					+ planDetailsActualJson);
+			getLoginScenario().saveBean(
+					VPPCommonConstants.VPP_PLAN_DETAIL_ACTUAL,
+					planDetailsActualJson);
+
+			/* Get expected data */
+			String fileName = planName;
+			String directory = CommonConstants.ACQUISITION_EXPECTED_DIRECTORY
+					+ File.separator + CommonConstants.SITE_ULAYER
+					+ File.separator
+					+ VPPCommonConstants.VPP_PLAN_DETAILS_FLOW_NAME
+					+ File.separator + zipcode + File.separator + county
+					+ File.separator;
+			JSONObject planDetailsExpectedJson = MRScenario.readExpectedJson(
+					fileName, directory);
+			getLoginScenario().saveBean(
+					VPPCommonConstants.VPP_PLAN_DETAIL_EXPECTED,
+					planDetailsExpectedJson);
+
+		}
+	}
+	
+	@Then("^the user validates the details of the selected plan in AARP site$")
+	public void user_validates_details_selected_plan_aarp() {
+		JSONObject planDetailsActualJson = (JSONObject) getLoginScenario()
+				.getBean(VPPCommonConstants.VPP_PLAN_DETAIL_ACTUAL);
+		JSONObject planDetailsExpectedJson = (JSONObject) getLoginScenario()
+				.getBean(VPPCommonConstants.VPP_PLAN_DETAIL_EXPECTED);
+		
+		System.out
+		.println("planDetailsActualJson---->" + planDetailsActualJson);
+		System.out
+		.println("planDetailsExpectedJson---->" + planDetailsExpectedJson);
+		try {
+			JSONAssert.assertEquals(planDetailsExpectedJson,
+					planDetailsActualJson, true);
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 	}
 	

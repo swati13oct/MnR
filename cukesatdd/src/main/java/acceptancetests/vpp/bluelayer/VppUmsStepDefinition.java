@@ -303,10 +303,10 @@ public class VppUmsStepDefinition {
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 		GetStartedPage getStartedPage = planSummaryPage
 				.clicksOnEnterDrugInformationLink(planName);
-		ManageDrugPage manageDrugPage = getStartedPage.clicksOnGetStarted();
-		if (manageDrugPage != null) {
-			getLoginScenario().saveBean(PageConstants.MANAGE_DRUG_PAGE,
-					manageDrugPage);
+		AddDrugPage addDrugPage = getStartedPage.clicksOnGetStarted();
+		if (addDrugPage != null) {
+			getLoginScenario().saveBean(PageConstants.ADD_DRUG_PAGE,
+					addDrugPage);
 		}
 	}
 
@@ -315,9 +315,8 @@ public class VppUmsStepDefinition {
 			DataTable givenAttributes) {
 		String drugInitials = givenAttributes.getGherkinRows().get(0)
 				.getCells().get(0);
-		ManageDrugPage manageDrugPage = (ManageDrugPage) getLoginScenario()
-				.getBean(PageConstants.MANAGE_DRUG_PAGE);
-		AddDrugPage addDrugPage = manageDrugPage.navigateToAddDrug();
+		AddDrugPage addDrugPage = (AddDrugPage) getLoginScenario()
+				.getBean(PageConstants.ADD_DRUG_PAGE);
 		addDrugPage.enterDrugInitials(drugInitials);
 
 		/* Get actual Json */
@@ -895,10 +894,10 @@ public class VppUmsStepDefinition {
 				.getBean(PageConstants.VPP_PLAN_DETAILS_PAGE);
 		GetStartedPage getStartedPage = planDetailsPage
 				.clicksOnEnterDrugInformationLink();
-		ManageDrugPage manageDrugPage = getStartedPage.clicksOnGetStarted();
-		if (manageDrugPage != null) {
-			getLoginScenario().saveBean(PageConstants.MANAGE_DRUG_PAGE,
-					manageDrugPage);
+		AddDrugPage addDrugPage = getStartedPage.clicksOnGetStarted();
+		if (addDrugPage != null) {
+			getLoginScenario().saveBean(PageConstants.ADD_DRUG_PAGE,
+					addDrugPage);
 		}
 	}
 
