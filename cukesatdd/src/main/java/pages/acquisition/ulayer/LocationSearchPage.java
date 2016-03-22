@@ -32,7 +32,12 @@ public class LocationSearchPage extends UhcDriver{
 			findElement(elementData).click();
 		}
 		continueButton.click();
-		
+		try {
+			Thread.sleep(2000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		if(currentUrl().contains("drugSearch"))
 		{
 			return new AddDrugPage(driver);

@@ -18,12 +18,12 @@
 "elementName":"Edit ZIP code"
 },
 "previousLink":{
-"identifier":"linkText",
-"elementName":"Previous results"
+"identifier":"className",
+"elementName":"previousLink"
 },
 "nextLink":{
-"identifier":"linkText",
-"elementName":"Next results"
+"identifier":"className",
+"elementName":"nextLink"
 },
 "pharmacies":{
 "identifier":"className",

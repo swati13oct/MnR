@@ -35,7 +35,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	@FindBy(id = "vpp_selectcounty_box")
 	private WebElement countyModal;
 
-	@FindBy(linkText = "Enter your drug list")
+	@FindBy(id = "dce")
 	private WebElement prescriptionsLink;
 
 	@FindBys(value = { @FindBy(xpath = "//table[@id='colhowdoesthiswork']/tbody/tr/td/span/span/a") })
@@ -98,20 +98,13 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		openAndValidate();
 	}
 
-	public EstimateDrugCostPage switchToPrescriptionDrug() {
-		for (WebElement element : howdoesthiswork) {
-			if (element.getText().equalsIgnoreCase("Enter your drug list")) {
-				element.click();
-				break;
-			}
-		}
-		driver.getTitle();
+	public GetStartedPage navigateToPrescriptionDrug() {
+		prescriptionsLink.click();
 		if (driver.getTitle().equalsIgnoreCase(
 				"Our Medicare Plan Types | UnitedHealthcare®")) {
-			return new EstimateDrugCostPage(driver);
-		} else {
-			return null;
+			return new GetStartedPage(driver);
 		}
+		return null;
 
 	}
 
