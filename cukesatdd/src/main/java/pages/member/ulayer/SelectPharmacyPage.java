@@ -204,6 +204,8 @@ public class SelectPharmacyPage extends UhcDriver {
 			}
 		}
 		selectPharmacyJson = jsonObject;
+		
+		System.out.println("selectPharmacyJson----->"+selectPharmacyJson);
 
 	}
 

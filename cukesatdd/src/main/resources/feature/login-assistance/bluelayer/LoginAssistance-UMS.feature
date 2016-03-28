@@ -1,4 +1,4 @@
-@loginAssistanceTest
+@loginAssistance
 Feature: To test Login Assistance flow on UMS site 
 Scenario Outline: Verify Login Assistance flow in UMS site when forgot username
 Given user navigates to login assistance page from member UMS site

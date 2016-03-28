@@ -26,8 +26,12 @@
 "elementName":"drugs_info"
 },
 "providerSearchLink":{
-"identifier":"id",
-"elementName":"doctorCoverMA"
+"identifier":"xpath",
+"elementName":"//div[@id='physicians_info']/div[1]/p"
+},
+"providersInfo":{
+"identifier":"xpath",
+"elementName":"//div[@id='physicians_info']/div[2]/p"
 },
 "planDetailsLink":{
 "identifier":"id",

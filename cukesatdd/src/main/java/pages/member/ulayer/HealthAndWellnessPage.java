@@ -82,6 +82,8 @@ public class HealthAndWellnessPage extends UhcDriver {
 
 		}
 		healthAndWellessJson = jsonObject;
+		
+		System.out.println("healthAndWellessJson----->"+healthAndWellessJson);
 
 	}
 	

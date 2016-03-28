@@ -38,8 +38,10 @@ public class MedicareSupplementPlansuhcPage extends GlobalWebElements{
 	}
 	
 	public MedicareSelectHospitalDirectoryPage medicareSelectHosipitalDirectoryClick() {
-		ourPlansHover(medicareSelectHosipitalDirectoryLink);
-		validate(ourPlansDropdownText);
+		ourPlansHover();
+		validate(medicareSelectHosipitalDirectoryLink);
+		medicareSelectHosipitalDirectoryLink.click();
+		validate(medicareSelectHosipitalDirectoryLink);
 		if(driver.getTitle().equalsIgnoreCase("UnitedHealthcare Medicare Solutions | Medicare Select Hospital Directory")){
 			return new MedicareSelectHospitalDirectoryPage(driver);
 		}

@@ -1,4 +1,4 @@
-@plansummaryAARP
+@plansummary
 Feature:To test Plan Sumamry flow in AARP site
 Scenario Outline:To verify plan summary page in AARP site
 Given registered member to verify plan summary page in AARP site

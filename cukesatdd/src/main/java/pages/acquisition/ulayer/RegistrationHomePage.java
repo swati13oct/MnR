@@ -94,8 +94,8 @@ public class RegistrationHomePage extends UhcDriver{
 		validate(yearToEnter);
 		
 	}
-	
-public void switchBack() {
+
+	public void switchBack() {
 		
 
 		
@@ -104,4 +104,5 @@ public void switchBack() {
 		// TODO Auto-generated method stub
 		
 	}
+	// TODO Auto-generated method stub
 }

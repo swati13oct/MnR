@@ -23,38 +23,29 @@ import pages.acquisition.bluelayer.ZipcodeLookupHomePage;
 
 public class AcquisitionHomePage extends GlobalWebElements {
 
-
        @FindBy(id = "lookzip")
        private WebElement lookupZipcode;
 
        @FindBy(id = "cta-zipcode")
        private WebElement zipCodeField;
 
-			@FindBy(id = "takequizbtn")
-	   	private WebElement takequizbtn;
        @FindBy(id = "zipcodebtn")
        private WebElement viewPlansButton;
 
        @FindBy(id = "vpp_selectcounty_box")
        private WebElement countyModal;
 
-       @FindBy(id = "dce")
-       private WebElement dce;
-       
-       @FindBy(id = "picktopicbtn")
-	   	 private WebElement picktopicbtn;
-				
-			 @FindBys(value = {@FindBy(xpath = "//ul[@id='topic-selectSelectBoxItOptions']/li")})
-	   	 private List<WebElement> topicDropDownValues;	   	
-	   	
-	     @FindBy(id = "topic-selectSelectBoxIt")
-	   	 private WebElement selectSelectBoxIt;
+       @FindBy(linkText = "Enter your drug list")
+       private WebElement prescriptionsLink;
+
+		@FindBys(value = {@FindBy(xpath = "//table[@id='colhowdoesthiswork']/tbody/tr/td/span/span/a") })
+		private List<WebElement> howdoesthiswork;
       
        @FindBy(id = "learn-zipcode")
-	     private WebElement learnzipCodeField;
+	   private WebElement learnzipCodeField;
 
-		   @FindBy(id = "learnfindplanBtn")
-	     private WebElement learnfindPlansButton;       
+		@FindBy(id = "learnfindplanBtn")
+	    private WebElement learnfindPlansButton;       
 
 		@FindBy(id = "homefooter")
         private WebElement homefooter;
@@ -110,7 +101,12 @@ public class AcquisitionHomePage extends GlobalWebElements {
        
 
        public EstimateDrugCostPage switchToPrescriptionDrug() {
-							dce.click();               
+                for (WebElement element : howdoesthiswork) {
+				   			if(element.getText().equalsIgnoreCase("Enter your drug list")){
+				   				element.click();
+				   				break;
+				   			}
+				    	   }
               driver.getTitle();
               if (driver.getTitle().equalsIgnoreCase(
                            "Our Medicare Plan Types | UnitedHealthcare®")) {
@@ -128,7 +124,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
               if (driver.getTitle().equalsIgnoreCase(
                            "Forbidden Page | UnitedHealthcare®")
                            || driver.getTitle().equalsIgnoreCase(
-                                         "Medicare Plans for Different Needs | UnitedHealthcare®")) {
+                                         "Our Medicare Plan Types | UnitedHealthcare®")) {
                      return new ZipcodeLookupHomePage(driver);
               }
               return null;
@@ -492,7 +488,7 @@ public SiteMapUMSPage siteMapFooterClick() {
 	}
       
 	public JSONObject accessingOurPlansNav() {
-		ourPlansHover(ourPlansDropdownText);
+		ourPlansHover();
 		return getOurPlanDropDownJson();
 	}
 	
@@ -560,7 +556,7 @@ public SiteMapUMSPage siteMapFooterClick() {
 	
 	
 	public JSONObject enterZipCode(String zipCode) {
-		ourPlansHover(zipcodeField);
+		ourPlansHover();
 		validate(zipcodeField);
 		zipcodeField.sendKeys(zipCode);
 		findPlansButton.click();		
@@ -585,8 +581,10 @@ public SiteMapUMSPage siteMapFooterClick() {
 		return null;
 	}	
 	public MedicareAdvantagePlansuhcPage headerMedicareAdvantageClick() {
-		ourPlansHover(headerMedicareAdvantagePlansLink);
-        validate(ourPlansDropdownText);
+		ourPlansHover();
+		validate(headerMedicareAdvantagePlansLink);
+		headerMedicareAdvantagePlansLink.click();
+        validate(headerMedicareAdvantagePlansLink);
         if(driver.getTitle().equalsIgnoreCase("Medicare Advantage Plans | UnitedHealthcare®")){
         return new MedicareAdvantagePlansuhcPage(driver);
         }
@@ -603,8 +601,10 @@ public SiteMapUMSPage siteMapFooterClick() {
 		
 	}
 	public MedicareSpecialNeedsPlansuhcPage medicareSpecialNeedPlansLinkClick() {
-		ourPlansHover(headerMedicareSpecialNeedPlansLink);
-		validate(ourPlansDropdownText);
+		ourPlansHover();
+		validate(headerMedicareSpecialNeedPlansLink);
+		headerMedicareSpecialNeedPlansLink.click();
+		validate(headerMedicareSpecialNeedPlansLink);
 		if(driver.getTitle().equalsIgnoreCase("Medicare Special Needs Plans | UnitedHealthcare®")){
 			return new MedicareSpecialNeedsPlansuhcPage(driver);
 		}
@@ -613,7 +613,7 @@ public SiteMapUMSPage siteMapFooterClick() {
 
 
 	public OurPlansPage findPlanButtonClick(String zipCode) {
-		ourPlansHover(zipcodeField);
+		ourPlansHover();
 		validate(zipcodeField);
 		zipcodeField.sendKeys(zipCode);
 		findPlansButton.click();
@@ -780,38 +780,5 @@ public SiteMapUMSPage siteMapFooterClick() {
 	}
 		return null;
 	}
-	
-		public Object learnmoreaboutplan(String picktopic) {
-		
-        selectSelectBoxIt.click();
-        for (WebElement element : topicDropDownValues) {
-			if(element.getText().equalsIgnoreCase(picktopic)){
-			element.click();
-			picktopicbtn.click();
-				break;
-			}
-		}
-        
-        if (currentUrl().contains("/medicare-education/about")) {
-        	if(getTitle().equals("Learn About Medicare | UnitedHealthcare®")){
-        		return new LearnAboutMedicareuhcPage(driver);
-        	}
-        } else if(currentUrl().contains("medicare-education/enroll")){
-        	if(getTitle().equals("Prepare for Your Medicare Initial Enrollment Period | UnitedHealthcare®")){
-        	return new PrepareForInitialEnrollmentuhcPage(driver);
-        	}
-        }
-		
-		return null;
-	}
-	
-	public PlanSelectorPage  planselector() {
-		takequizbtn.click();
-		if (getTitle().equalsIgnoreCase("Plan Selector")) {
-			return new PlanSelectorPage(driver);
-		}		 
-		 return null;
-	}
-
 }
 

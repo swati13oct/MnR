@@ -40,8 +40,10 @@ public class MedicarePrescriptionDrugPlansuhcPage extends GlobalWebElements {
 	}
 	
 	public PrescriptionDrugRequestMoreHelpPage requestPersonalhelpInformationClick() {
-		ourPlansHover(prescriptiondrugPlansRequestMoreHelpLink);
-		validate(ourPlansDropdownText);
+		ourPlansHover();
+		validate(prescriptiondrugPlansRequestMoreHelpLink);
+		prescriptiondrugPlansRequestMoreHelpLink.click();
+		validate(prescriptiondrugPlansRequestMoreHelpLink);
 		if(driver.getTitle().equalsIgnoreCase("Medicare Prescription Drug Plan Help & Info | UnitedHealthcare®")){
 			return new PrescriptionDrugRequestMoreHelpPage(driver);
 		}

@@ -79,13 +79,13 @@ public class LookupZipcodeUmsStepDefinition {
 		String city = addressAttributesMap.get("City");
 		String state = addressAttributesMap.get("State");
 
-		ZipcodeLookupHomePage zipcodeLookupPage = (ZipcodeLookupHomePage) getLoginScenario()
-				.getBean(PageConstants.ZIP_LOOK_UP_HOME_PAGE);
-		ZipcodeSelectionHomePage zipcodeSelectionPage = zipcodeLookupPage
+		ZipcodeLookupPage zipcodeLookupPage = (ZipcodeLookupPage) getLoginScenario()
+				.getBean(PageConstants.ZIP_LOOK_UP_PAGE);
+		ZipcodeSelectionPage zipcodeSelectionPage = zipcodeLookupPage
 				.enterAddressDetails(address, city, state);
 
 		if (zipcodeSelectionPage != null) {
-			getLoginScenario().saveBean(PageConstants.ZIP_SELECTION_HOME_PAGE,
+			getLoginScenario().saveBean(PageConstants.ZIP_SELECTION_PAGE,
 					zipcodeSelectionPage);
 			/* Get expected data */
 			String fileName = address;
@@ -101,7 +101,7 @@ public class LookupZipcodeUmsStepDefinition {
 					ZipLookupCommonConstants.ZIP_SELECTION_EXPECTED,
 					zipcodeSelectionExpectedJson);
 
-			JSONObject zipcodeSelectionActualJson = zipcodeSelectionPage.zipSelectionhomeJson;
+			JSONObject zipcodeSelectionActualJson = zipcodeSelectionPage.zipSelectionJson;
 			getLoginScenario().saveBean(
 					ZipLookupCommonConstants.ZIP_SELECTION_ACTUAL,
 					zipcodeSelectionActualJson);

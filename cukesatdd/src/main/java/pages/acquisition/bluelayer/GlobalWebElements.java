@@ -189,7 +189,7 @@ public class GlobalWebElements extends UhcDriver {
 	@FindBy(xpath="//div[@id='subnav_2']/div/div/div/div[2]/div/p[2]/a[2]/span")
 	public static WebElement resumeYourSavedApplicationLink;
 	
-	@FindBy(xpath="//div[@id='subnav_2']/div/div/div/div[2]/div[2]/p[2]/a/span")
+	@FindBy(xpath="//div[@id='subnav_2']/div/div/div/div[2]/div[2]/p[2]/a")
 	public static WebElement specialNeedPlansGetEnrollmentInformationLink;
 	
 	@FindBy(xpath="//div[@id='subnav_2']/div/div/div[2]/a")
@@ -223,10 +223,10 @@ public class GlobalWebElements extends UhcDriver {
 		
 	}
 	
-	public void ourPlansHover(WebElement element) {
+	public void ourPlansHover() {
 		Actions actions = new Actions(driver);
 		actions.moveToElement(ourPlansHoverLink);
-		actions.moveToElement(element);
+		actions.moveToElement(ourPlansDropdownText);
 		actions.click();
 		actions.perform();
 		

@@ -102,9 +102,8 @@ public class HealthAndWellnessAarpStepDefinition {
 		
 		LoginPage loginPage = (LoginPage)getLoginScenario().getBean(PageConstants.LOGIN_PAGE);
 		
-		loginPage.loginWith(userName, pwd);
+		AccountHomePage accountHomePage = (AccountHomePage) loginPage.loginWith(userName, pwd);
 		JSONObject accountHomeActualJson = null;
-		AccountHomePage accountHomePage = (AccountHomePage) loginPage.checkLoginSuccessful();
 		
 		/*Get expected data*/
 		Map<String,JSONObject> expectedDataMap = loginScenario.getExpectedJson(userName);

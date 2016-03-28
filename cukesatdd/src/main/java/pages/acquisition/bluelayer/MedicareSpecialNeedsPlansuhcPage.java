@@ -31,8 +31,10 @@ public class MedicareSpecialNeedsPlansuhcPage extends GlobalWebElements{
 		}
 	
 	public SpecialNeedGetEnrollmentInformationPage getEnrollmentInformationLinkClick() {
-		ourPlansHover(specialNeedPlansGetEnrollmentInformationLink);
-		validate(ourPlansDropdownText);
+		ourPlansHover();
+		validate(specialNeedPlansGetEnrollmentInformationLink);
+		specialNeedPlansGetEnrollmentInformationLink.click();
+		validate(specialNeedPlansGetEnrollmentInformationLink);
 		if(driver.getTitle().equalsIgnoreCase("Medicare Special Needs Plans Enrollment | UnitedHealthcare®"))
 		{
 		return new SpecialNeedGetEnrollmentInformationPage(driver);

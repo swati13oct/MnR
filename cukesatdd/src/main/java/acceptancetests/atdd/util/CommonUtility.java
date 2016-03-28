@@ -30,7 +30,7 @@ import atdd.framework.MRScenario;
  *
  */
 public class CommonUtility {
-	
+
 	private static String MRREST_TIME_ADMIN_URL = MRConstants.MRREST_TIME_ADMIN_URL;
 
 	private static String PARTD_TIME_ADMIN_URL = MRConstants.PARTD_TIME_ADMIN_URL;
@@ -115,23 +115,31 @@ public class CommonUtility {
 					waitForPageLoad(driver, element, timeout);
 				}
 			}
+
 		} catch (Exception e) {
-			System.out.println("Not able to locate this " + element
-					+ " on page");
-			return;
+			timeout = timeout - 5;
+			if (timeout > 0) {
+				waitForPageLoad(driver, element, timeout);
+			} else {
+				System.out.println("Not able to locate this " + element
+						+ " on page");
+				return;
+			}
 		}
+
 	}
 
 	public static void waitForElementToDisappear(WebDriver driver,
 			WebElement element, long timeout) {
 		WebDriverWait wait = new WebDriverWait(driver, timeout);
-		
-		Boolean elementExpected = wait.until(ExpectedConditions.not(ExpectedConditions.visibilityOf(element)));
-		if(!elementExpected){
+
+		Boolean elementExpected = wait.until(ExpectedConditions
+				.not(ExpectedConditions.visibilityOf(element)));
+		if (!elementExpected) {
 			timeout = timeout - 5;
-		if (timeout > 0) {
-			waitForElementToDisappear(driver, element, timeout);
-		}
+			if (timeout > 0) {
+				waitForElementToDisappear(driver, element, timeout);
+			}
 		}
 	}
 
@@ -141,11 +149,14 @@ public class CommonUtility {
 		Iterator<?> itr = secondPlanInformationExpected.keys();
 		while (itr.hasNext()) {
 			String key = (String) itr.next();
-			
+
 			try {
-				int lengthOfArray = secondPlanInformationExpected.getJSONArray(key).length();
-				for(int i=0;i<lengthOfArray; i++){
-				firstPlanInformationExpected = firstPlanInformationExpected.append(key, secondPlanInformationExpected.getJSONArray(key).get(i));
+				int lengthOfArray = secondPlanInformationExpected.getJSONArray(
+						key).length();
+				for (int i = 0; i < lengthOfArray; i++) {
+					firstPlanInformationExpected = firstPlanInformationExpected
+							.append(key, secondPlanInformationExpected
+									.getJSONArray(key).get(i));
 				}
 			} catch (JSONException e) {
 				// TODO Auto-generated catch block
@@ -153,7 +164,7 @@ public class CommonUtility {
 			}
 		}
 		return firstPlanInformationExpected;
-		
+
 	}
 
 	public static void changeMRRestTime(MRScenario mrScenario, String date) {

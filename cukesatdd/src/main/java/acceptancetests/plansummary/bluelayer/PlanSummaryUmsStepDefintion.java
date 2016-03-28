@@ -3,9 +3,14 @@
  */
 package acceptancetests.plansummary.bluelayer;
 
+import gherkin.formatter.model.DataTableRow;
+
 import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -44,15 +49,32 @@ public class PlanSummaryUmsStepDefintion {
 	@Given("^registered member to verify plan summary page in UMS site$")
 	public void registered_member_plansummary_ums(DataTable memberAttributes) {
 		/* Reading the given attribute from feature file */
-		List<List<String>> dataTable = memberAttributes.raw();
-		List<String> desiredAttributes = new ArrayList<String>();
+		List<DataTableRow> memberAttributesRow = memberAttributes
+				.getGherkinRows();
+		Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
 
-		for (List<String> data : dataTable) {
-			desiredAttributes.add(data.get(0));
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells()
+					.get(0), memberAttributesRow.get(i).getCells().get(1));
+		}
+		
+		String category = memberAttributesMap.get("Member Type");
+
+		Set<String> memberAttributesKeySet = memberAttributesMap.keySet();
+		List<String> desiredAttributes = new ArrayList<String>();
+		for (Iterator<String> iterator = memberAttributesKeySet.iterator(); iterator
+				.hasNext();) {
+			{
+				String key = iterator.next();
+				desiredAttributes.add(memberAttributesMap.get(key));
+			}
+
 		}
 		System.out.println("desiredAttributes.." + desiredAttributes);
+
 		Map<String, String> loginCreds = loginScenario
 				.getUMSMemberWithDesiredAttributes(desiredAttributes);
+
 		String userName = null;
 		String pwd = null;
 		if (loginCreds == null) {
@@ -69,13 +91,13 @@ public class PlanSummaryUmsStepDefintion {
 			getLoginScenario().saveBean(LoginCommonConstants.PASSWORD, pwd);
 		}
 
+		getLoginScenario().saveBean(CommonConstants.CATEGORY, category);
+
 		WebDriver wd = getLoginScenario().getWebDriver();
 
 		LoginPage loginPage = new LoginPage(wd);
-		loginPage.loginWith(userName, pwd);
+		AccountHomePage accountHomePage = (AccountHomePage) loginPage.loginWith(userName, pwd,category);
 		JSONObject accountHomeActualJson = null;
-		AccountHomePage accountHomePage = (AccountHomePage) loginPage
-				.checkLoginSuccessful();
 		/* Get expected data */
 		Map<String, JSONObject> expectedDataMap = loginScenario
 				.getExpectedJson(userName);

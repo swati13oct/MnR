@@ -1,6 +1,0 @@
-{
-"url":null,
-"expectedData":{
-					"planselectorinformation":{"identifier":"xpath","elementName":"//article[@id='criteria']/header/div[1]/h2"}
-	}
-}

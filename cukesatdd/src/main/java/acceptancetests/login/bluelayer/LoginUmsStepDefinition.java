@@ -5,9 +5,14 @@ package acceptancetests.login.bluelayer;
  *
  */
 
+import gherkin.formatter.model.DataTableRow;
+
 import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -37,98 +42,88 @@ public class LoginUmsStepDefinition {
 		return loginScenario;
 	}
 
-	@Given("^registered UHC member with following attributes$")
+	@Given("^the user is on the UHC medicare site login page$")
+	public void uhc_login_page(){
+		WebDriver wd = getLoginScenario().getWebDriver();
+		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
+
+		LoginPage loginPage = new LoginPage(wd);
+		getLoginScenario().saveBean(PageConstants.LOGIN_PAGE, loginPage);
+		
+	}
+	
+	@When("^the user logs in with a registered UMP with following details in UHC site$")
 	public void login_with_member(DataTable memberAttributes) {
 
 		/* Reading the given attribute from feature file */
-		List<List<String>> dataTable = memberAttributes.raw();
-		List<String> desiredAttributes = new ArrayList<String>();
+		List<DataTableRow> memberAttributesRow = memberAttributes
+				.getGherkinRows();
+		Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
 
-		for (List<String> data : dataTable) {
-			desiredAttributes.add(data.get(0));
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells()
+					.get(0), memberAttributesRow.get(i).getCells().get(1));
+		}
+
+		String category = memberAttributesMap.get("Member Type");
+		Set<String> memberAttributesKeySet = memberAttributesMap.keySet();
+		List<String> desiredAttributes = new ArrayList<String>();
+		for (Iterator<String> iterator = memberAttributesKeySet.iterator(); iterator
+				.hasNext();) {
+			{
+				String key = iterator.next();
+				desiredAttributes.add(memberAttributesMap.get(key));
+			}
+
 		}
 		System.out.println("desiredAttributes.." + desiredAttributes);
-		Map<String, String> loginCreds = loginScenario
+
+		Map<String,String> loginCreds = loginScenario
 				.getUMSMemberWithDesiredAttributes(desiredAttributes);
+		
+		
 		String userName = null;
 		String pwd = null;
 		if (loginCreds == null) {
 			// no match found
 			System.out.println("Member Type data could not be setup !!!");
-			Assert.fail("unable to find a " + desiredAttributes + " member");
+			Assert.fail("unable to find a "+ desiredAttributes + " member");
 		} else {
 			userName = loginCreds.get("user");
 			pwd = loginCreds.get("pwd");
 			System.out.println("User is..." + userName);
-			System.out.println("Password is..." + pwd);
-			getLoginScenario()
-					.saveBean(LoginCommonConstants.USERNAME, userName);
+			System.out.println("Password is..." + pwd );
+			getLoginScenario().saveBean(LoginCommonConstants.USERNAME, userName);
 			getLoginScenario().saveBean(LoginCommonConstants.PASSWORD, pwd);
 		}
-
-	}
-
-	@When("^the user logs in successfully in UMS site$")
-	public void login_successful() {
-		WebDriver wd = getLoginScenario().getWebDriver();
-
-		String userName = (String) getLoginScenario().getBean(
-				LoginCommonConstants.USERNAME);
-		String password = (String) getLoginScenario().getBean(
-				LoginCommonConstants.PASSWORD);
-		LoginPage loginPage = new LoginPage(wd);
-		loginPage.loginWith(userName, password);
-		AccountHomePage accountHomePage = (AccountHomePage) loginPage
-				.checkLoginSuccessful();
-
-		/* Get expected data */
-		Map<String, JSONObject> expectedDataMap = loginScenario
-				.getExpectedJson(userName);
-		JSONObject accountHomeExpectedJson = accountHomePage
-				.getExpectedData(expectedDataMap);
-		getLoginScenario().saveBean(LoginCommonConstants.ACCOUNT_HOME_EXPECTED,
-				accountHomeExpectedJson);
+		
+		LoginPage loginPage = (LoginPage)getLoginScenario().getBean(PageConstants.LOGIN_PAGE);
+		
+		AccountHomePage accountHomePage = (AccountHomePage)loginPage.loginWith(userName, pwd, category);
+		
+		
+		
+		JSONObject accountHomeActualJson =  null;
 		if (accountHomePage != null) {
-			getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
-			getLoginScenario().saveBean(PageConstants.ACCOUNT_HOME_PAGE,
-					accountHomePage);
-			Assert.assertTrue(true);
-
-			/* Get Actual Data */
-			JSONObject accountHomeActualJson = accountHomePage.accountHomeJson;
-			getLoginScenario().saveBean(
-					LoginCommonConstants.ACCOUNT_HOME_ACTUAL,
-					accountHomeActualJson);
+			getLoginScenario().saveBean(PageConstants.ACCOUNT_HOME_PAGE, accountHomePage);
+			accountHomeActualJson = accountHomePage.accountHomeJson;
+			getLoginScenario().saveBean(LoginCommonConstants.ACCOUNT_HOME_ACTUAL, accountHomeActualJson);
+			
+			/*Get expected data*/
+			Map<String,JSONObject> expectedDataMap = loginScenario.getExpectedJson(userName);
+			JSONObject accountHomeExpectedJson = accountHomePage.getExpectedData(expectedDataMap);
+			getLoginScenario().saveBean(LoginCommonConstants.ACCOUNT_HOME_EXPECTED, accountHomeExpectedJson);
+			getLoginScenario().saveBean(CommonConstants.EXPECTED_DATA_MAP, expectedDataMap);
 		}
+		
+		
+
+		
 
 	}
-
-	@When("^the user logs in successfully for terminated member in UHC site$")
-	public void login_successful_for_terminate() {
-		WebDriver wd = getLoginScenario().getWebDriver();
-
-		String userName = (String) getLoginScenario().getBean(
-				LoginCommonConstants.USERNAME);
-		String password = (String) getLoginScenario().getBean(
-				LoginCommonConstants.PASSWORD);
-		LoginPage loginPage = new LoginPage(wd);
-		loginPage.loginWith(userName, password);
-		Object terminatedHomePage = loginPage.checkLoginSuccessful();
-		if (terminatedHomePage != null) {
-			getLoginScenario().saveBean("webDriver", wd);
-			getLoginScenario().saveBean(PageConstants.TERMINATED_HOME_PAGE,
-					terminatedHomePage);
-			Assert.assertTrue(true);
-		}
-
-		else {
-			Assert.fail("Login was not successful");
-		}
-
-	}
-
-	@Then("^the user validates following plan details in UMS site$")
-	public void login_validation(DataTable memberAttributes) {
+	
+	@Then("^the user validates plan and member details after login in UHC site$")
+	public void login_validation() {
 		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario()
 				.getBean(PageConstants.ACCOUNT_HOME_PAGE);
 		JSONObject accountHomeActual = (JSONObject) getLoginScenario().getBean(

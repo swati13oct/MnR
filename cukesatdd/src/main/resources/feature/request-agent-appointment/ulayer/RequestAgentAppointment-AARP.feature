@@ -1,4 +1,4 @@
-@agentAppointmentTest
+@agentAppointment
 Feature: To test request an appointment with an agent flow in AARP site
 Scenario Outline: Verify request an appointment with an agent flow in AARP site
 Given the user is on the AARP medicare site landing page

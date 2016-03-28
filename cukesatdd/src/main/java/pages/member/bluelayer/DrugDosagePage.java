@@ -132,6 +132,8 @@ public class DrugDosagePage extends UhcDriver {
 			}
 		}
 		drugDosageJson = jsonObject;
+		
+		System.out.println("drugDosageJson----->"+drugDosageJson);
 	}
 
 	public JSONObject getExpectedData(Map<String, JSONObject> expectedDataMap,

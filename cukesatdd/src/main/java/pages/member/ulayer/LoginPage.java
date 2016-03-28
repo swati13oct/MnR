@@ -63,17 +63,6 @@ public class LoginPage extends UhcDriver {
 		return null;
 	}
 	
-	
-	public Object checkLoginSuccessful(){
-		if (getTitle().equalsIgnoreCase(
-				"AARP Medicare Plans | My Account Home")) {
-			return new AccountHomePage(driver);
-		} else if (currentUrl().contains("terminated-plan.html")) {
-			return new TerminatedHomePage(driver);
-		}
-		return null;
-	}
-	
 	public LoginAssistancePage navigateToLoginAssistance() {
 		loginIn.click();
 		forgotUsernamePasswordLink.click();

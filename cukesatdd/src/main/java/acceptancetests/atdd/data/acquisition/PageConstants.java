@@ -150,7 +150,6 @@ public class PageConstants {
 	public static final String PLAN_SELECTOR_PAGE = "planSelectorPage";
 	
 	public static final String PROVIDER_SEARCH_PAGE = "providerSearchPage";
-	
 	public static final String HEALTH_CENTERS_PAGE = "healthcenterspage";
 
 	public static final String HEALTH_MANAGEMENT_PROGRAM_PAGE = "healthmanagementprogram";

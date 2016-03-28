@@ -504,6 +504,7 @@ public class MedicalClaimSummaryPage extends UhcDriver {
 
 		}
 		medicalClaimsSummaryJson = jsonObject;
+		System.out.println("medicalClaimsSummaryJson----->"+medicalClaimsSummaryJson);
 
 	}
 
