@@ -14,7 +14,7 @@ import atdd.framework.UhcDriver;
  */
 public class OurPlansPage extends UhcDriver {
 
-	@FindBy(linkText = "Look up a ZIP code")
+	@FindBy(id = "zipLookup")
 	private WebElement lookupZipcodeLink;
 
 	@FindBy(className = "zipcode_text")

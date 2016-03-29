@@ -11,6 +11,7 @@ import java.util.Map;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.skyscreamer.jsonassert.JSONAssert;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -68,8 +69,14 @@ public class RequestAgentAppointmentAarpStepDefinition {
 	{
 		RequestHelpAndInformationPage requestHelpAndInformationPage = (RequestHelpAndInformationPage) getLoginScenario().getBean(PageConstants.REQUEST_MORE_HELP_INFORMATION_PAGE);
 		RequestAgentAppointmentPage requestAgentAppointmentPage = requestHelpAndInformationPage.nagiateToAgentAppointmentRequest();
+		if(requestAgentAppointmentPage!=null){
+			getLoginScenario().saveBean(PageConstants.REQUEST_AGENT_APPOINTMENT_PAGE, requestAgentAppointmentPage);
+			Assert.assertTrue(true);
+		}
+		else{
+			Assert.fail("Error in loading requestAgentAppointmentPage");
+		}
 		
-		getLoginScenario().saveBean(PageConstants.REQUEST_AGENT_APPOINTMENT_PAGE, requestAgentAppointmentPage);
 	}
 	
 	@And("^the user provides below personal details to request an appointment with an agent in AARP site$")

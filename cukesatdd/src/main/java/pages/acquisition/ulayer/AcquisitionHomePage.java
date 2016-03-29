@@ -150,10 +150,10 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	@FindBy(xpath = "//div[@id='insuranceplan_nav']/div/div[3]/ul/li/a/span")
 	private WebElement pdpVppLink;
 
-	@FindBy(xpath = "//div[@id='insuranceplan_nav']/div/div[3]/ul/li[4]/a/span")
+	@FindBy(xpath = "//div[@id='subnav_2']/div/div/div/div/div[2]/p[2]/a/span")
 	private WebElement pdp_moreHelpInfoLink;
 
-	@FindBy(linkText = "Request More Help and Information")
+	@FindBy(xpath = "//div[@id='subnav_2']/div/div/div/div/div[1]/p[2]/a/span")
 	private WebElement ma_moreHelpInfoLink;
 
 	@FindBy(id = "ipeL")
@@ -272,13 +272,12 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	}
 
 	public ZipcodeLookupHomePage looksupforZipcodes() {
-		lookupZipcode.click();
-
-		if (getTitle()
-				.equalsIgnoreCase(
-						"Medicare Plans | AARP?? Medicare Plans from UnitedHealthcare??")
-				|| getTitle().equalsIgnoreCase(
-						"Our Medicare Plan Types | UnitedHealthcare®")) {
+		lookzip.click();
+		CommonUtility.waitForPageLoad(driver, zipCodeSearchPopup,
+				CommonConstants.TIMEOUT_30);
+		if (zipCodeSearchPopupHeading.getText().equalsIgnoreCase(
+				"Find a ZIP code")) {
+			System.out.println("zipCodeSearchPopupHeading");
 			return new ZipcodeLookupHomePage(driver);
 		}
 		return null;
@@ -737,9 +736,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	}
 
 	public OurPlansPage navigationSectionOurPlansLinkClick() {
-		validate(navigationSectionOurPlansLink);
 		navigationSectionOurPlansLink.click();
-		validate(navigationSectionOurPlansLink);
 		if (getTitle()
 				.equalsIgnoreCase(
 						"Our Medicare Plan Types | AARP® Medicare Plans from UnitedHealthcare®")) {
@@ -777,8 +774,9 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	}
 
 	public RequestHelpAndInformationPage navigateToMaMoreHelpAndInfo() {
+
 		Actions actions = new Actions(driver);
-		actions.moveToElement(ourPlans);
+		actions.moveToElement(ourPlansHoverLink);
 		actions.moveToElement(ma_moreHelpInfoLink);
 		actions.click().build().perform();
 
@@ -835,7 +833,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	public PDPRequestHelpAndInformationPage navigateToPDPMoreHelpAndInfo() {
 
 		Actions actions = new Actions(driver);
-		actions.moveToElement(ourPlans);
+		actions.moveToElement(ourPlansHoverLink);
 		actions.moveToElement(pdp_moreHelpInfoLink);
 		actions.click().build().perform();
 
@@ -1162,18 +1160,6 @@ public class AcquisitionHomePage extends GlobalWebElements {
 
 	}
 
-	public ZipcodeLookupPage lookupmodal() {
-		lookzip.click();
-		CommonUtility.waitForPageLoad(driver, zipCodeSearchPopup,
-				CommonConstants.TIMEOUT_30);
-		if (zipCodeSearchPopupHeading.getText().equalsIgnoreCase(
-				"Find a ZIP code")) {
-			System.out.println("zipCodeSearchPopupHeading");
-			return new ZipcodeLookupPage(driver);
-		}
-		return null;
-
-	}
 
 	public ProviderSearchPage launchesPo7() {
 		po7Link.click();

@@ -1,7 +1,8 @@
 @lookupZipcode
 Feature: To look up a zipcode in AARP site
 Scenario Outline: Verify Look up zipcode flow from home page in AARP site
-When the user clicks on lookup zipcode link from AARP home page
+Given the user is on the AARP medicare site landing page
+When the user clicks on lookup zipcode link in AARP home page
 And the user searches for zipcodes by entering the following Address and city and State details for AARP site
     | Address    | <Address>   |
     | City       | <city>      |
@@ -13,7 +14,8 @@ Examples:
   | 1234    | california    | California |   
 
 Scenario Outline: Verify Look up zipcode flow from our plans page in AARP site
-When the user clicks on lookup zipcode link in our plans page in AARP
+Given the user is on the AARP medicare site landing page
+When the user clicks on lookup zipcode link by navigating to our plans page in AARP
 And the user searches for zipcodes by entering the following Address and city and State details through our plans page for AARP site
     | Address    | <Address>   |
     | City       | <city>      |

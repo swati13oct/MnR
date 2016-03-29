@@ -7,7 +7,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindBy;
 
 import acceptancetests.atdd.data.CommonConstants;
 import acceptancetests.atdd.data.PageData;
@@ -19,9 +18,6 @@ import atdd.framework.UhcDriver;
  *
  */
 public class ZipcodeSelectionHomePage extends UhcDriver {
-
-	@FindBy(id = "selectcountytable")
-	private WebElement ZipcodeTable;
 
 	private PageData zipSelectionhome;
 

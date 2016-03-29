@@ -30,7 +30,6 @@ import acceptancetests.atdd.data.acquisition.PageConstants;
 import acceptancetests.dce.data.DceCommonConstants;
 import acceptancetests.vpp.data.VPPCommonConstants;
 import atdd.framework.MRScenario;
-import cucumber.annotation.After;
 import cucumber.annotation.en.And;
 import cucumber.annotation.en.Given;
 import cucumber.annotation.en.Then;

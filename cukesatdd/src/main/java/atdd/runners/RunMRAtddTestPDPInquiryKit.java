@@ -13,7 +13,7 @@ import cucumber.junit.Cucumber;
  */
 @RunWith(Cucumber.class)
 @Cucumber.Options(glue = { "atdd.framework","acceptancetests.pdpenquirykit" }, 
-		features = { "feature/pdp-enquirykit" }, 
+		features = { "feature/pdp-inquirykit" }, 
 		format = {
 		"pretty", "html:reports/test-report" }, tags ={"@pdpInquiryKit"})
 public class RunMRAtddTestPDPInquiryKit {

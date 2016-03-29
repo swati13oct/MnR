@@ -50,7 +50,6 @@ public class DceVppUmsStepDefinition {
 		return loginScenario;
 	}
 
-	
 	@Given("^the user is on the UHC medicare solutions site landing page$")
 	public void landing_page_umssite() {
 		WebDriver wd = getLoginScenario().getWebDriver();
@@ -91,8 +90,8 @@ public class DceVppUmsStepDefinition {
 		GetStartedPage getStartedPage = acqusitionHomePage
 				.navigateToPrescriptionDrug();
 		LocationSearchPage enterZipCode = getStartedPage.getStarted();
-		AddDrugPage addDrugPage = enterZipCode.enterLocation(zipCode,
-				county, planYear);
+		AddDrugPage addDrugPage = enterZipCode.enterLocation(zipCode, county,
+				planYear);
 
 		if (addDrugPage != null) {
 			getLoginScenario().saveBean(PageConstants.ADD_DRUG_PAGE,
@@ -105,8 +104,8 @@ public class DceVppUmsStepDefinition {
 	public void user_validated_drugInformation_ums(DataTable givenAttributes) {
 		String drugInitials = givenAttributes.getGherkinRows().get(0)
 				.getCells().get(0);
-		AddDrugPage addDrugPage = (AddDrugPage) getLoginScenario()
-				.getBean(PageConstants.ADD_DRUG_PAGE);
+		AddDrugPage addDrugPage = (AddDrugPage) getLoginScenario().getBean(
+				PageConstants.ADD_DRUG_PAGE);
 		addDrugPage.enterDrugInitials(drugInitials);
 
 		/* Get actual Json */
@@ -117,8 +116,9 @@ public class DceVppUmsStepDefinition {
 		/* Get Expected Json */
 		String fileName = drugInitials;
 		String directory = CommonConstants.ACQUISITION_EXPECTED_DIRECTORY
-				+ File.separator + CommonConstants.SITE_BLUELAYER + File.separator
-				+ DceCommonConstants.ADD_DRUG_FLOW + File.separator;
+				+ File.separator + CommonConstants.SITE_BLUELAYER
+				+ File.separator + DceCommonConstants.ADD_DRUG_FLOW
+				+ File.separator;
 		JSONObject drugListExpectedJson = addDrugPage.getExpectedData(fileName,
 				directory);
 		getLoginScenario().saveBean(DceCommonConstants.DRUG_LIST_EXPECTED,
@@ -139,8 +139,8 @@ public class DceVppUmsStepDefinition {
 					true);
 		} catch (JSONException e) {
 			System.out
-					.println("Exception ocurred comparing actual and expected drug list : "
-							+ e);
+			.println("Exception ocurred comparing actual and expected drug list : "
+					+ e);
 		}
 
 	}
@@ -298,7 +298,7 @@ public class DceVppUmsStepDefinition {
 				/* Get Expected data */
 				@SuppressWarnings("unchecked")
 				Map<String, String> dosageAttributesMap = (Map<String, String>) getLoginScenario()
-						.getBean(DceCommonConstants.DOSAGE_MAP);
+				.getBean(DceCommonConstants.DOSAGE_MAP);
 				String drugDosage = dosageAttributesMap.get("Drug Dosage");
 				String quantity = dosageAttributesMap.get("Quantity");
 				String drugFrequency = dosageAttributesMap
@@ -390,7 +390,7 @@ public class DceVppUmsStepDefinition {
 				.getBean(DceCommonConstants.AVAILABLE_PHARMACIES_ACTUAL);
 		System.out.println("availablePharmaciesActualJson ---->"
 				+ availablePharmaciesActualJson);
-		
+
 		JSONObject availablePharmaciesExpectedJson = (JSONObject) getLoginScenario()
 				.getBean(DceCommonConstants.AVAILABLE_PHARMACIES_EXPECTED);
 		System.out.println("availablePharmaciesExpectedJson ---->"
@@ -440,10 +440,10 @@ public class DceVppUmsStepDefinition {
 				DceCommonConstants.COUNTY_NAME);
 		String fileName = pharmacyType;
 		String directory = CommonConstants.ACQUISITION_EXPECTED_DIRECTORY
-				+ File.separator + CommonConstants.SITE_BLUELAYER + File.separator
-				+ DceCommonConstants.SELECT_PHARMACY_FLOW + File.separator
-				+ zipcode + File.separator + county + File.separator + distance
-				+ File.separator;
+				+ File.separator + CommonConstants.SITE_BLUELAYER
+				+ File.separator + DceCommonConstants.SELECT_PHARMACY_FLOW
+				+ File.separator + zipcode + File.separator + county
+				+ File.separator + distance + File.separator;
 		JSONObject availablePharmaciesExpectedJson = updatedPharmacyPage
 				.getExpectedData(fileName, directory);
 		getLoginScenario().saveBean(
@@ -522,13 +522,13 @@ public class DceVppUmsStepDefinition {
 		JSONObject manageDrugActualJson = (JSONObject) getLoginScenario()
 				.getBean(DceCommonConstants.MANAGE_DRUG_ACTUAL);
 		System.out
-				.println("manageDrugActualJson after selecting drug and pharmacy--->"
-						+ manageDrugActualJson);
+		.println("manageDrugActualJson after selecting drug and pharmacy--->"
+				+ manageDrugActualJson);
 		JSONObject manageDrugExpectedJson = (JSONObject) getLoginScenario()
 				.getBean(DceCommonConstants.MANAGE_DRUG_EXPECTED);
 		System.out
-				.println("manageDrugExpectedJson after selecting drug and pharmacy--->"
-						+ manageDrugExpectedJson);
+		.println("manageDrugExpectedJson after selecting drug and pharmacy--->"
+				+ manageDrugExpectedJson);
 
 		try {
 			JSONAssert.assertEquals(manageDrugExpectedJson,
@@ -581,12 +581,14 @@ public class DceVppUmsStepDefinition {
 	public void user_validates_following_benefits_ui_ums() {
 		JSONObject planSummaryActualJson = (JSONObject) getLoginScenario()
 				.getBean(VPPCommonConstants.VPP_PLAN_SUMMARY_ACTUAL);
-		
-		System.out.println("planSummaryActualJson plan count----->"+planSummaryActualJson);
+
+		System.out.println("planSummaryActualJson plan count----->"
+				+ planSummaryActualJson);
 		JSONObject planSummaryExpectedJson = (JSONObject) getLoginScenario()
 				.getBean(VPPCommonConstants.VPP_PLAN_SUMMARY_EXPECTED);
-		
-		System.out.println("planSummaryExpectedJson plan count----->"+planSummaryExpectedJson);
+
+		System.out.println("planSummaryExpectedJson plan count----->"
+				+ planSummaryExpectedJson);
 		try {
 			JSONAssert.assertEquals(planSummaryExpectedJson,
 					planSummaryActualJson, true);
@@ -620,8 +622,8 @@ public class DceVppUmsStepDefinition {
 			/* Get actual data */
 			JSONObject planSummaryActualJson = plansummaryPage.vppPlanSummaryJson;
 			System.out
-					.println("planSummaryActualJson for selected plan type---->"
-							+ planSummaryActualJson);
+			.println("planSummaryActualJson for selected plan type---->"
+					+ planSummaryActualJson);
 			getLoginScenario().saveBean(
 					VPPCommonConstants.VPP_PLAN_SUMMARY_ACTUAL,
 					planSummaryActualJson);
@@ -646,8 +648,8 @@ public class DceVppUmsStepDefinition {
 			JSONObject planSummaryExpectedJson = MRScenario.readExpectedJson(
 					fileName, directory);
 			System.out
-					.println("planSummaryExpectedJson for selected plan type---->"
-							+ planSummaryExpectedJson);
+			.println("planSummaryExpectedJson for selected plan type---->"
+					+ planSummaryExpectedJson);
 			getLoginScenario().saveBean(
 					VPPCommonConstants.VPP_PLAN_SUMMARY_EXPECTED,
 					planSummaryExpectedJson);
@@ -688,7 +690,7 @@ public class DceVppUmsStepDefinition {
 		JSONObject planSummaryActualJson = planSummaryPage
 				.getPlanSummaryActualData(planName);
 		System.out
-				.println("planSummaryActualJson---->" + planSummaryActualJson);
+		.println("planSummaryActualJson---->" + planSummaryActualJson);
 		/* Get expected data */
 		String fileName = planName;
 		String zipcode = (String) getLoginScenario().getBean(
@@ -703,23 +705,22 @@ public class DceVppUmsStepDefinition {
 		String pharmacyName = null;
 		String pharmacyType = (String) getLoginScenario().getBean(
 				DceCommonConstants.PHARMACY_TYPE);
-		if (!pharmacyType
-				.equalsIgnoreCase("Preferred Mail Service Pharmacy")) {
+		if (!pharmacyType.equalsIgnoreCase("Preferred Mail Service Pharmacy")) {
 			pharmacyName = (String) getLoginScenario().getBean(
 					DceCommonConstants.PHARMACY_NAME);
 		} else {
 			pharmacyName = pharmacyType;
 		}
 		String directory = CommonConstants.ACQUISITION_EXPECTED_DIRECTORY
-				+ File.separator + CommonConstants.SITE_BLUELAYER + File.separator
-				+ VPPCommonConstants.VPP_PLAN_FLOW_NAME + File.separator
-				+ zipcode + File.separator + county + File.separator
-				+ drugWithDosage + File.separator + pharmacyName
-				+ File.separator;
+				+ File.separator + CommonConstants.SITE_BLUELAYER
+				+ File.separator + VPPCommonConstants.VPP_PLAN_FLOW_NAME
+				+ File.separator + zipcode + File.separator + county
+				+ File.separator + drugWithDosage + File.separator
+				+ pharmacyName + File.separator;
 		JSONObject planSummaryExpectedJson = MRScenario.readExpectedJson(
 				fileName, directory);
-		System.out
-		.println("planSummaryExpectedJson---->" + planSummaryExpectedJson);
+		System.out.println("planSummaryExpectedJson---->"
+				+ planSummaryExpectedJson);
 		try {
 			JSONAssert.assertEquals(planSummaryExpectedJson,
 					planSummaryActualJson, true);
@@ -795,7 +796,7 @@ public class DceVppUmsStepDefinition {
 				.getBean(VPPCommonConstants.VPP_PLAN_DETAIL_EXPECTED);
 
 		System.out
-				.println("planDetailsActualJson---->" + planDetailsActualJson);
+		.println("planDetailsActualJson---->" + planDetailsActualJson);
 		System.out.println("planDetailsExpectedJson---->"
 				+ planDetailsExpectedJson);
 		try {
@@ -807,240 +808,11 @@ public class DceVppUmsStepDefinition {
 		}
 	}
 
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	//###########################################
-	
-	
-	/*
-	
-	
-	
-	
-	@Given("^the zipcode and county information DCE to Vpp Plan summary flow in UMS site$")
-	public void zipcode_and_planyear_details(DataTable givenAttributes) {
-		List<DataTableRow> givenAttributesRow = givenAttributes
-				.getGherkinRows();
-		Map<String, String> givenAttributesMap = new HashMap<String, String>();
-		for (int i = 0; i < givenAttributesRow.size(); i++) {
-
-			givenAttributesMap.put(givenAttributesRow.get(i).getCells().get(0),
-					givenAttributesRow.get(i).getCells().get(1));
-		}
-		String planYear = null;
-		if(givenAttributesMap.containsKey("Plan Year"))
-		{
-			planYear = givenAttributesMap.get("Plan Year");
-		}
-		String zipCode = givenAttributesMap.get("Zip Code");
-		String county = givenAttributesMap.get("County");
-		WebDriver wd = getLoginScenario().getWebDriver();
-		AcquisitionHomePage acqusitionHomePage = new AcquisitionHomePage(wd);
-		EstimateDrugCostPage estimateDrugCost = acqusitionHomePage
-				.switchToPrescriptionDrug();
-		EnterZipCodePage enterZipCode = estimateDrugCost.getStarted();
-		AddDrugPage addDrugPage = enterZipCode.getZipCodeCounty(zipCode,county,planYear);
-
-		if (addDrugPage != null) {
-			getLoginScenario().saveBean("webDriver", wd);
-			getLoginScenario().saveBean(PageConstants.ADD_DRUG_PAGE,
-					addDrugPage);
-			Assert.assertTrue(true);
-		} else {
-			Assert.fail("unsuccessfull navigation to add drug page");
-		}
+	@After
+	public void tearDown() {
+		WebDriver wd = (WebDriver) getLoginScenario().getBean(
+				CommonConstants.WEBDRIVER);
+		wd.quit();
+		getLoginScenario().flushBeans();
 	}
-
-	@When("^user search the drug using drug initials in UMS site$")
-	public void user_validated_drugInformation(DataTable givenAttributes) {
-		String drugInitials = givenAttributes.getGherkinRows().get(0)
-				.getCells().get(0);
-		AddDrugPage addDrugPage = (AddDrugPage) getLoginScenario().getBean(
-				PageConstants.ADD_DRUG_PAGE);
-		addDrugPage.enterDrugInitials(drugInitials);
-	}
-
-	@And("^user access the drug list having 5 drugs in UMS site$")
-	public void drug_list_with_drugs() {
-		AddDrugPage addDrugPage = (AddDrugPage) getLoginScenario().getBean(
-				PageConstants.ADD_DRUG_PAGE);
-		String drugDropDownList = addDrugPage.getDrugList();
-		System.out.println("drugList=======>" + drugDropDownList);
-
-	}
-
-	@And("^the user selects following drug in UMS site$")
-	public void user_selects_drugname_druglist(DataTable drugNameAttributes) {
-
-		String drugName = drugNameAttributes.getGherkinRows().get(0).getCells()
-				.get(0);
-		AddDrugPage addDrugPage = (AddDrugPage) getLoginScenario().getBean(
-				PageConstants.ADD_DRUG_PAGE);
-		SelectDosagePage selectDosagePage = addDrugPage.selectDrug(drugName);
-		if (selectDosagePage != null) {
-
-			getLoginScenario().saveBean(PageConstants.SELECT_DOSAGE_PAGE,
-					selectDosagePage);
-			Assert.assertTrue(true);
-		} else {
-			Assert.fail("unsuccessful selection of drug");
-		}
-
-	}
-
-	@And("^user selects the following dosage information in UMS site$")
-	public void user_selects_dosage_information(DataTable dosagesAttributes) {
-		SelectDosagePage selectDosagePage = (SelectDosagePage) getLoginScenario()
-				.getBean(PageConstants.SELECT_DOSAGE_PAGE);
-		List<DataTableRow> dosageAttributesRow = dosagesAttributes
-				.getGherkinRows();
-		Map<String, String> dosageAttributesMap = new HashMap<String, String>();
-		for (int i = 0; i < dosageAttributesRow.size(); i++) {
-
-			dosageAttributesMap.put(dosageAttributesRow.get(i).getCells()
-					.get(0), dosageAttributesRow.get(i).getCells().get(1));
-		}
-		String drugDosage = dosageAttributesMap.get("Drug Dosage");
-		String drugQuantity = dosageAttributesMap.get("Drug Quantity");
-		String drugFrequency = dosageAttributesMap.get("Drug Frequency");
-		String packages = dosageAttributesMap.get("Packages");
-		SelectGenericPage selectGenericPage = (SelectGenericPage) selectDosagePage.selectDosage(
-				drugDosage, drugQuantity, drugFrequency,packages);
-		if (selectGenericPage != null) {
-			getLoginScenario().saveBean(PageConstants.SELECT_GENERIC_PAGE,
-					selectGenericPage);
-			Assert.assertTrue(true);
-		} else {
-			Assert.fail("dosage selection unsuccessful");
-		}
-
-	}
-	
-	@And("^the user selects the low cost options in UMS site$")
-	public void user_selects_lowCostOptions(DataTable drugAttributes) {
-		String drugName = drugAttributes.getGherkinRows().get(0).getCells().get(0);
-		SelectGenericPage selectGenericPage = (SelectGenericPage) getLoginScenario().getBean(PageConstants.SELECT_GENERIC_PAGE);
-		ManageDrugPage manageDrugPage = selectGenericPage.selectGeneric(drugName);
-		if (manageDrugPage != null) {
-			getLoginScenario().saveBean(PageConstants.MANAGE_DRUG_PAGE,
-					manageDrugPage);
-			Assert.assertTrue(true);
-		} else {
-			Assert.fail("generic drug selection unsuccessful");
-		}
-		
-	}
-	@And("^user views all the drugs added in UMS site$")
-	public void user_views_drugs_added() {
-		ManageDrugPage manageDrugPage = (ManageDrugPage) getLoginScenario().getBean(
-				PageConstants.MANAGE_DRUG_PAGE);
-	
-	}
-	
-	@And("^user performs the pharmacy search in UMS site$")
-	public void user_performs_paharmacySearch() {
-		ManageDrugPage manageDrugPage = (ManageDrugPage) getLoginScenario().getBean(
-				PageConstants.MANAGE_DRUG_PAGE);
-		
-		SelectPharmacyPage pharmacySearchPage = manageDrugPage.navigateToPharmacyPage();
-		if (pharmacySearchPage != null) {
-			getLoginScenario().saveBean(PageConstants.PHARMACY_SEARCH_PAGE,
-					pharmacySearchPage);
-			Assert.assertTrue(true);
-		} else {
-			Assert.fail("navigated unsuccessfully to pharmacy page");
-		}
-	}
-	
-	@And("^user selects the pharmacy type and distance in UMS site$")
-	public void user_selects_pharmacyType_and_distance(DataTable pharmacyAttributes) {
-		List<DataTableRow> pharmacyAttributesRow = pharmacyAttributes
-				.getGherkinRows();
-		Map<String, String> pharmacyAttributesMap = new HashMap<String, String>();
-		for (int i = 0; i < pharmacyAttributesRow.size(); i++) {
-
-			pharmacyAttributesMap.put(pharmacyAttributesRow.get(i).getCells()
-					.get(0), pharmacyAttributesRow.get(i).getCells().get(1));
-		}
-		String pharmacyType = pharmacyAttributesMap.get("Pharmacy Type");
-		String distance = pharmacyAttributesMap.get("Distance");
-		SelectPharmacyPage pharmacySearchPage = (SelectPharmacyPage) getLoginScenario().getBean(PageConstants.PHARMACY_SEARCH_PAGE);
-		pharmacySearchPage.selectPharmacyType(pharmacyType, distance);
-	}
-	
-	@And("^user views the list of pharmacies available in UMS site$")
-	public void user_views_pharmacyList() {
-		PharmacySelectorPage pharmacySearchPage = (PharmacySelectorPage) getLoginScenario().getBean(PageConstants.PHARMACY_SEARCH_PAGE);	
-		String pharmacyList = pharmacySearchPage.getPharmacyList();
-		System.out.println("pharmacyList====>"+pharmacyList);
-	}
-	
-	
-	@And("^user selects a pharmacy from the list of pharmacies in UMS site$")
-	public void user_selects_pharmacy(DataTable pharmacyAttributes){
-		PharmacySelectorPage pharmacySearchPage = (PharmacySelectorPage) getLoginScenario().getBean(PageConstants.PHARMACY_SEARCH_PAGE);
-		String pharmacyName = pharmacyAttributes.getGherkinRows().get(0).getCells().get(0);
-		 AddDrugPage addDrugPage = pharmacySearchPage.selectPharmacy(pharmacyName);
-		 if (addDrugPage != null) {
-				getLoginScenario().saveBean(PageConstants.ADD_DRUG_PAGE,
-						addDrugPage);
-				Assert.assertTrue(true);
-			} else {
-				Assert.fail("pharmacy selection fails");
-			}
-		
-	}
-	
-	@And("^user views the plan results in UMS site$")
-	public void user_views_plan_results(){
-		ManageDrugPage manageDrugPage = (ManageDrugPage) getLoginScenario().getBean(
-				PageConstants.MANAGE_DRUG_PAGE);
-		VPPPlanSummaryPage healthPlansPage = manageDrugPage.navigateToPlanSummaryPage();
-		if (healthPlansPage != null) {
-			getLoginScenario().saveBean(PageConstants.HEALTH_PLANS_PAGE,
-					healthPlansPage);
-			Assert.assertTrue(true);
-		} else {
-			Assert.fail("plans result page does not accesssed successfully");
-		}
-	
-	}
-	
-	@And("^user views the plan summary for the following plan in UMS site$")
-	public void user_views_plan_summary(DataTable planAttributes){
-		String planName  = planAttributes.getGherkinRows().get(0).getCells().get(0);
-		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario().getBean(PageConstants.HEALTH_PLANS_PAGE);
-		String planSummaryContent  = plansummaryPage.viewplans(planName);
-		System.out.println("planSummaryContent=======>"+planSummaryContent);		
-	}
-	
-	
-	
-	*/
-	
-	 @After
-	    public void tearDown() {
-		 WebDriver wd = (WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
-		 wd.quit();
-		 getLoginScenario().flushBeans();
-	    }
 }

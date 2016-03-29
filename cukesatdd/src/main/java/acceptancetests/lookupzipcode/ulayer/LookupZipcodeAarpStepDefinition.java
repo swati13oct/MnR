@@ -26,6 +26,7 @@ import acceptancetests.lookupzipcode.data.ZipLookupCommonConstants;
 import atdd.framework.MRScenario;
 import cucumber.annotation.After;
 import cucumber.annotation.en.And;
+import cucumber.annotation.en.Given;
 import cucumber.annotation.en.Then;
 import cucumber.annotation.en.When;
 import cucumber.table.DataTable;
@@ -42,17 +43,23 @@ public class LookupZipcodeAarpStepDefinition {
 	public MRScenario getLoginScenario() {
 		return loginScenario;
 	}
-
-	@When("^the user clicks on lookup zipcode link from AARP home page$")
-	public void clicks_lookup_Zipcode_aarp() {
+	
+	@Given("^the user is on the AARP medicare site landing page$")
+	public void user_on_aarp_medicare_site(){
 
 		WebDriver wd = getLoginScenario().getWebDriver();
-		getLoginScenario().saveBean("webDriver", wd);
+		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
 
 		AcquisitionHomePage acquisitionHomePage = new AcquisitionHomePage(wd);
 
 		getLoginScenario().saveBean(PageConstants.ACQUISITION_HOME_PAGE,
 				acquisitionHomePage);
+	}
+
+	@When("^the user clicks on lookup zipcode link in AARP home page$")
+	public void clicks_lookup_Zipcode_aarp() {
+
+		AcquisitionHomePage acquisitionHomePage = (AcquisitionHomePage) getLoginScenario().getBean(PageConstants.ACQUISITION_HOME_PAGE);
 		ZipcodeLookupHomePage zipcodeLookupPage = acquisitionHomePage
 				.looksupforZipcodes();
 
@@ -110,15 +117,13 @@ public class LookupZipcodeAarpStepDefinition {
 		}
 	}
 
-	@When("^the user clicks on lookup zipcode link in our plans page in AARP$")
+	@When("^the user clicks on lookup zipcode link by navigating to our plans page in AARP$")
 	public void clicks_lookup_Zipcode_ourplan_aarp() {
 
-		WebDriver wd = getLoginScenario().getWebDriver();
-		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
-
-		OurPlansPage ourPlansPage = new OurPlansPage(wd);
-
+		AcquisitionHomePage acquisitionHomePage = (AcquisitionHomePage) getLoginScenario().getBean(PageConstants.ACQUISITION_HOME_PAGE);
+		OurPlansPage ourPlansPage = acquisitionHomePage.navigationSectionOurPlansLinkClick();
 		getLoginScenario().saveBean(PageConstants.OUR_PLANS_PAGE, ourPlansPage);
+		
 		ZipcodeLookupPage zipcodeLookupPage = ourPlansPage.looksupforZipcodes();
 
 		if (zipcodeLookupPage != null) {

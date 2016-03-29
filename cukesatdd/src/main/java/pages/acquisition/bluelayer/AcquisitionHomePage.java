@@ -67,6 +67,12 @@ public class AcquisitionHomePage extends GlobalWebElements {
 
 	@FindBy(linkText = "pharmacy")
 	private WebElement pharmacyLink;
+	
+	@FindBy(id = "findazip_box")
+	private WebElement zipCodeSearchPopup;
+	
+	@FindBy(xpath = "//div[@id='findazip_box']/div/div/div/h4")
+	private WebElement zipCodeSearchPopupHeading;
 
 	private PageData homePageDisclaimer;
 	public JSONObject homePageDisclaimerJson;
@@ -112,10 +118,11 @@ public class AcquisitionHomePage extends GlobalWebElements {
 
 		lookupZipcode.click();
 
-		if (driver.getTitle().equalsIgnoreCase(
-				"Forbidden Page | UnitedHealthcare®")
-				|| driver.getTitle().equalsIgnoreCase(
-						"Our Medicare Plan Types | UnitedHealthcare®")) {
+		CommonUtility.waitForPageLoad(driver, zipCodeSearchPopup,
+				CommonConstants.TIMEOUT_30);
+		if (zipCodeSearchPopupHeading.getText().equalsIgnoreCase(
+				"Find a ZIP code")) {
+			System.out.println("zipCodeSearchPopupHeading");
 			return new ZipcodeLookupHomePage(driver);
 		}
 		return null;
@@ -757,6 +764,17 @@ public class AcquisitionHomePage extends GlobalWebElements {
 			}
 
 		}
+		return null;
+	}
+
+	public OurPlansPage navigationSectionOurPlansLinkClick() {
+		navigationSectionOurPlansLink.click();
+		if (getTitle()
+				.equalsIgnoreCase(
+						"Our Medicare Plan Types | UnitedHealthcare®")) {
+			return new OurPlansPage(driver);
+		}
+
 		return null;
 	}
 }

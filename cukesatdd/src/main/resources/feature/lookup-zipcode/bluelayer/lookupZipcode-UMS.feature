@@ -1,6 +1,7 @@
 @lookupZipcode
 Feature: To look up a zipcode in UMS site
 Scenario Outline: Verify Look up zipcode flow from home page in UMS site
+Given the user is on the UHC medicare solutions landing page
 When the user clicks on lookup zipcode link from UMS home page
 And the user searches for zipcodes by entering the following Address and city and State details for UMS site
     | Address    | <Address>   |
@@ -13,6 +14,7 @@ Examples:
   | 1234    | california    | California |   
 
 Scenario Outline: Verify Look up zipcode flow from our plans page in UMS site
+Given the user is on the UHC medicare solutions landing page
 When the user clicks on lookup zipcode link in our plans page in UMS
 And the user searches for zipcodes by entering the following Address and city and State details through our plans page for UMS site
     | Address    | <Address>   |
