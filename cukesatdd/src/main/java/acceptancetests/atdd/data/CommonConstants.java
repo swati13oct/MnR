@@ -398,6 +398,8 @@ public class CommonConstants {
 	public static final String SITE_BLUELAYER = "bluelayer";
 
 	public static final String ACQUISITION_EXPECTED_DIRECTORY = "/jsonresponse/acquisition";
+	
+	public static final String DRX_EXPECTED_DIRECTORY = "/jsonresponse/drx";
 
 	public static final String DRUG_CLAIMS_SUMMARY = "drugclaimsummary";
 
@@ -484,6 +486,8 @@ public class CommonConstants {
 	public static final String ADD_DRUG_DIRECTORY = "/jsonresponse/member/ulayer/druglookup/adddrug/";
 
 	public static final String ADD_DRUG_PAGE_DATA = "adddrug.json";
+	
+	public static final String DRUG_SEARCH_PAGE_DATA = "searchdrug.json";
 
 	public static final String LOW_COST_OPTIONS = "lowcostoptions";
 
@@ -516,6 +520,8 @@ public class CommonConstants {
 	public static final String TERMINATED_ACCOUNT = "terminatedAccount";
 
 	public static final String PAGE_OBJECT_DIRECTORY_BLUELAYER_ACQ = "/page-objects/acquisition/bluelayer/";
+	
+	public static final String PAGE_OBJECT_DIRECTORY_DRX = "/page-objects/drx/";
 
 	public static final String PHR_SHIP_PAGE_DATA = "phrship.json";
 
