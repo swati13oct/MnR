@@ -58,4 +58,6 @@ public class DceCommonConstants {
 
 	public static final String DOSAGE_MAP = "dosageAttributesMap";
 
+	public static final String GENERIC_DRUG_WITH_DOSAGE = "genericDrugWithDosage";
+
 }

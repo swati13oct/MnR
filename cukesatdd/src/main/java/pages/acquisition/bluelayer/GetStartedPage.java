@@ -32,14 +32,24 @@ public class GetStartedPage extends UhcDriver {
 		
 	}
 	
-	public ManageDrugPage clicksOnGetStarted() {
+	public AddDrugPage clicksOnGetStarted() {
 		getStartedLink.click();
-		if(currentUrl().contains("#/manageDrugList"))
+		
+		
+	
+		 if (currentUrl().contains("drugSearch")) {
+			return new AddDrugPage(driver);
+		}
+		return null;
+		  
+
+		
+		/*if(currentUrl().contains("#/manageDrugList"))
 		{
 			return new ManageDrugPage(driver);
 		}
 		else
-			return null;
+			return null;*/
 		
 	}
 

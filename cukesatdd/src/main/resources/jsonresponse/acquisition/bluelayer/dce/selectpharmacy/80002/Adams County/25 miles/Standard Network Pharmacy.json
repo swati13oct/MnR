@@ -10,7 +10,7 @@
          "pharmacyDropDown":"Preferred Mail Service Pharmacy"
       }
    ],
-   "previousLink":"Previous 10 results",
+   "previousLink":"Previous results",
    "pharmacies":[
       {
          "pharmacyDistance":"0.14",
@@ -85,5 +85,5 @@
          "milesDropDown":"25 miles"
       }
    ],
-   "nextLink":"Next 10 results"
+   "nextLink":"Next results"
 }

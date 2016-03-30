@@ -25,16 +25,12 @@ public class EnterZipCodePage  extends UhcDriver{
 	
 	@FindBy(xpath = "//div[@id='counties']//span[.='Continue']")
 	WebElement countyContinueButton;
-	
-	/*@FindBy(className = "//div[@class='marginTop5 ng-binding ng-scope']")
-	List<WebElement> counties;*/
-	
-	
+
 	
 	public EnterZipCodePage(WebDriver driver) {
 		super(driver);
-		   //Initialise Elements
-	       PageFactory.initElements(driver, this);
+	    PageFactory.initElements(driver, this);
+	    openAndValidate();
 	}
 
 	public AddDrugPage getZipCodeCounty(String zipCode, String county, String planYear) {
@@ -64,7 +60,7 @@ public class EnterZipCodePage  extends UhcDriver{
 			}	
 			
 			countyContinueButton.click();
-			/*driver.findElement(By.xpath("//div[@id='counties']//span[.='Continue']")).click();*/
+			
 		}
 		
 		if(driver.getTitle().equalsIgnoreCase("Our Medicare Plan Types | UnitedHealthcare®"))

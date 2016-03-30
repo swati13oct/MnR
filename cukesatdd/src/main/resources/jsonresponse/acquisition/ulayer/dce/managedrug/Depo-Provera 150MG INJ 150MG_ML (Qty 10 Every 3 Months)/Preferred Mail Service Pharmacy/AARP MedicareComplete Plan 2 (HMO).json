@@ -1,4 +1,5 @@
 {
+	"applyChangesLink":"Close and apply changes",
     "drugs": [
         {
             "selectedDrug": "Depo-Provera 150MG INJ 150MG/ML\nQty 10 Every 3 Months",
@@ -7,7 +8,7 @@
             "editLink": "Edit"
         }
     ],
-    "annualDrugCost": "Estimated annual drug costs:   \n$21,666.40    ",
+    "annualDrugCost": "Estimated annual drug costs: $21,666.40     ",
     "addDrugHeading": "You may be able to save by switching to a generic drug. Select \"Reduce costs\" to view savings available.",
     "currentPharmacy": [
         {

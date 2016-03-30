@@ -31,4 +31,6 @@ public class VPPCommonConstants {
 
 	public static final String ENROLL_IN_PLAN_FLOW_NAME = "enrollinplan";
 
+	public static final String SWITCHED_TO_GENEIC = "swictedtogeneric";
+
 }

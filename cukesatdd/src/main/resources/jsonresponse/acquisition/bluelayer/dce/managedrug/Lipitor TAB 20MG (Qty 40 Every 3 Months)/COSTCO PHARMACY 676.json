@@ -2,12 +2,13 @@
    "drugs":[
       {
          "selectedDrug":"Lipitor TAB 20MG\nQty 40 Every 3 Months",
+         "switchGenericLink":"Switch to generic",
          "deleteLink":"Delete",
          "editLink":"Edit"
       }
    ],
-   "annualDrugCost":"Estimated annual drug costs:   \n$1,861.40    ",
-   "addDrugHeading":"You may be able to save by switching to a generic drug. Select \"Reduce costs\" to view savings available.",
+   "planResultsLink":"View plan results",
+   "addDrugHeading":"",
    "currentPharmacy":[
       {
          "bottomPharmacyName":"Current Pharmacy: COSTCO PHARMACY 676\nType: Standard Network Pharmacy Edit Pharmacy"

@@ -23,7 +23,7 @@
 },
 "changeLocationLink":{
 "identifier":"xpath",
-"elementName":"//div[@class='planinf']/p[2]/a"
+"elementName":"//div[@id='n_enterzip_plansplash']/p[2]/a"
 }
 }
 }

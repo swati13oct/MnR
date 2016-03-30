@@ -116,8 +116,8 @@ When the user view plan details of the above selected plan in AARP site
 Then the user validates the details of the selected plan in AARP site
 
 Examples:
-	| zipcode | county             | drugInitials | drugName      |  drugDosage	        | packages                                          | quantity | drugFrequency  | genericAvailable | brand/generic    | pharmacyType	 	 		| distance   |  pharmacyName                   | plantype | planName 					    |
-	| 80002   | Adams County       | rest	      |  Restasis     |  Restasis EMU 0.05% | Plastic Container of 1.0(sold in a package of 60) | 2        | Every 3 months | no               | null             | Cost Savings Pharmacies     | 15 miles   |  SAMS PHARMACY 10-6630 106630   | PDP      | AARP MedicareRx Preferred (PDP) | 
+	| zipcode | county             | drugInitials | drugName      |  drugDosage	        | packages                                          | quantity | drugFrequency  | genericAvailable | brand/generic    | pharmacyType	 	 		| distance   |  pharmacyName                   | plantype | planName 				|
+	| 80002   | Adams County       | rest	      |  Restasis     |  Restasis EMU 0.05%	| Plastic Container of 1.0(sold in a package of 60) | 2        | Every 3 months | no               | null             | Cost Savings Pharmacies			| 15 miles   |  SAMS PHARMACY 10-6630 106630   | PDP      | AARP MedicareRx Preferred (PDP)	| 
 
 
 Scenario Outline: To Verify the drugs and ways to save options for non AEP period 
@@ -163,14 +163,15 @@ Then the user validates the available options to save on drug in AARP site
 When the user views reduce costs on the selected drug in AARP site
 Then the user validates the savings available for generic drug of the selected drug in AARP site
 When the user switches to generic drug in AARP site
-Then the user validated the updated costs
-When the user apply changes made in AARP site
+	| <genericDrugName> |
+Then the user validates the updated costs in manage drug page in AARP site
+When the user applies changes made in AARP site
 Then the user validates the plan details of the above selected plan after switching to generic drug in AARP site
   
 
 Examples:
-	| zipcode | county             | drugInitials | drugName           |  drugDosage	                  | packages                                          | quantity | drugFrequency  | genericAvailable | brand/generic                                           | pharmacyType	 	 	          | distance   |  pharmacyName          | plantype | planName 					          |
-	| 30002   | DeKalb County      | depo	      | Depo-Provera 150MG |  Depo-Provera 150MG INJ 150MG/ML | 1.0ML Syringe(sold in a package of 1)             | 10       | Every 3 months | yes              | Depo-Provera 150MG INJ 150MG/ML (Qty 10 Every 3 Months) | Preferred Mail Service Pharmacy  | 15 miles   |  null                  | MAPD     | AARP MedicareComplete Plan 2 (HMO)   |
+	| zipcode | county             | drugInitials | drugName           |  drugDosage	                  | packages                            | quantity | drugFrequency  | genericAvailable | brand/generic                                           | pharmacyType	 	 	        | distance   |  pharmacyName          | plantype | planName 				| genericDrugName							 |
+	| 30002   | DeKalb County      | depo	      | Depo-Provera 150MG |  Depo-Provera 150MG INJ 150MG/ML | 1.0ML Syringe(sold in a package of 1)	| 10       | Every 3 months | yes              | Depo-Provera 150MG INJ 150MG/ML (Qty 10 Every 3 Months) | Preferred Mail Service Pharmacy	| 15 miles   |  null                  | MAPD     | AARP MedicareComplete Plan 2 (HMO)   | medroxyprogesterone acetate IM INJ 150MG_ML (Qty 10 Every 3 Months)	 |
 	
 	
 Scenario Outline: To Verify the manage drug page and verify tooltips for AARP Site 

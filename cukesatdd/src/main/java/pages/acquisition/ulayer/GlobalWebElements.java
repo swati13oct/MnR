@@ -17,7 +17,7 @@ public class GlobalWebElements  extends UhcDriver{
 	
 	@Override
 	public void openAndValidate() {
-		// TODO Auto-generated method stub
+		
 		
 	}
 
