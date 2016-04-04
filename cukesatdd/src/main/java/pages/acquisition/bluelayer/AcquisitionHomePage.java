@@ -25,6 +25,18 @@ public class AcquisitionHomePage extends GlobalWebElements {
 
        @FindBy(id = "lookzip")
        private WebElement lookupZipcode;
+       
+       @FindBy(id = "takequizbtn")
+       private WebElement takequizbtn;
+       
+       @FindBys(value = {@FindBy(xpath = "//ul[@id='topic-selectSelectBoxItOptions']/li")})
+       private List<WebElement> topicDropDownValues;
+
+         @FindBy(id = "topic-selectSelectBoxIt")
+       private WebElement selectSelectBoxIt; 
+    @FindBy(id = "picktopicbtn")
+       private WebElement picktopicbtn; 
+
 
        @FindBy(id = "cta-zipcode")
        private WebElement zipCodeField;
@@ -35,7 +47,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
        @FindBy(id = "vpp_selectcounty_box")
        private WebElement countyModal;
 
-       @FindBy(linkText = "Enter your drug list")
+       @FindBy(id = "dce")
        private WebElement prescriptionsLink;
 
 		@FindBys(value = {@FindBy(xpath = "//table[@id='colhowdoesthiswork']/tbody/tr/td/span/span/a") })
@@ -101,12 +113,8 @@ public class AcquisitionHomePage extends GlobalWebElements {
        
 
        public EstimateDrugCostPage switchToPrescriptionDrug() {
-                for (WebElement element : howdoesthiswork) {
-				   			if(element.getText().equalsIgnoreCase("Enter your drug list")){
-				   				element.click();
-				   				break;
-				   			}
-				    	   }
+				
+			prescriptionsLink.click();
               driver.getTitle();
               if (driver.getTitle().equalsIgnoreCase(
                            "Our Medicare Plan Types | UnitedHealthcare®")) {
@@ -124,7 +132,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
               if (driver.getTitle().equalsIgnoreCase(
                            "Forbidden Page | UnitedHealthcare®")
                            || driver.getTitle().equalsIgnoreCase(
-                                         "Our Medicare Plan Types | UnitedHealthcare®")) {
+                                         "Medicare Plans for Different Needs | UnitedHealthcare®")) {
                      return new ZipcodeLookupHomePage(driver);
               }
               return null;
@@ -745,6 +753,7 @@ public SiteMapUMSPage siteMapFooterClick() {
 		}
 		return validate(signInButton);
 	}
+	
 
 
 	public Boolean stopTimerValid() {
@@ -780,5 +789,36 @@ public SiteMapUMSPage siteMapFooterClick() {
 	}
 		return null;
 	}
-}
+	public Object pickatopic(String picktopic) {
 
+        selectSelectBoxIt.click();
+        for (WebElement element : topicDropDownValues) {
+				if(element.getText().equalsIgnoreCase(picktopic)){
+				element.click();
+				picktopicbtn.click();
+				break;
+				}
+				}
+				        
+				        if (currentUrl().contains("/medicare-education/about")) {
+				         if(getTitle().equals("Learn About Medicare | UnitedHealthcare®")){
+				         return new LearnAboutMedicareuhcPage(driver);
+				         }
+				        } else if(currentUrl().contains("medicare-education/enroll")){
+				         if(getTitle().equals("Prepare for Your Medicare Initial Enrollment Period | UnitedHealthcare®")){
+				         return new PrepareForInitialEnrollmentuhcPage(driver);
+				         }
+				        }
+				
+				return null;
+				}
+				
+				public PlanSelectorPage  planselector() {
+				takequizbtn.click();
+				if (getTitle().equalsIgnoreCase("Plan Selector")) {
+				return new PlanSelectorPage(driver);
+				} 
+				return null;
+				}
+				}
+				

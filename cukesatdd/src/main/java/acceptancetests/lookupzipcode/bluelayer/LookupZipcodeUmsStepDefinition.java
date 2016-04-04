@@ -16,10 +16,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import pages.acquisition.bluelayer.AcquisitionHomePage;
 import pages.acquisition.bluelayer.OurPlansPage;
-import pages.acquisition.bluelayer.ZipcodeLookupPage;
-import pages.acquisition.bluelayer.ZipcodeSelectionPage;
 import pages.acquisition.bluelayer.ZipcodeLookupHomePage;
+import pages.acquisition.bluelayer.ZipcodeLookupPage;
 import pages.acquisition.bluelayer.ZipcodeSelectionHomePage;
+import pages.acquisition.bluelayer.ZipcodeSelectionPage;
 import acceptancetests.atdd.data.CommonConstants;
 import acceptancetests.atdd.data.acquisition.PageConstants;
 import acceptancetests.lookupzipcode.data.ZipLookupCommonConstants;
@@ -79,9 +79,9 @@ public class LookupZipcodeUmsStepDefinition {
 		String city = addressAttributesMap.get("City");
 		String state = addressAttributesMap.get("State");
 
-		ZipcodeLookupPage zipcodeLookupPage = (ZipcodeLookupPage) getLoginScenario()
-				.getBean(PageConstants.ZIP_LOOK_UP_PAGE);
-		ZipcodeSelectionPage zipcodeSelectionPage = zipcodeLookupPage
+		ZipcodeLookupHomePage zipcodeLookupPage = (ZipcodeLookupHomePage) getLoginScenario()
+				.getBean(PageConstants.ZIP_LOOK_UP_HOME_PAGE);
+		ZipcodeSelectionHomePage zipcodeSelectionPage = zipcodeLookupPage
 				.enterAddressDetails(address, city, state);
 
 		if (zipcodeSelectionPage != null) {
@@ -101,7 +101,7 @@ public class LookupZipcodeUmsStepDefinition {
 					ZipLookupCommonConstants.ZIP_SELECTION_EXPECTED,
 					zipcodeSelectionExpectedJson);
 
-			JSONObject zipcodeSelectionActualJson = zipcodeSelectionPage.zipSelectionJson;
+			JSONObject zipcodeSelectionActualJson = zipcodeSelectionPage.zipSelectionhomeJson;
 			getLoginScenario().saveBean(
 					ZipLookupCommonConstants.ZIP_SELECTION_ACTUAL,
 					zipcodeSelectionActualJson);

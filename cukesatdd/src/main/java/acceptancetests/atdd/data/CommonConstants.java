@@ -560,11 +560,17 @@ public class CommonConstants {
 	private static final String VIEW_DRUG_COST_BLUELAYER_DIRECTORY = "/jsonresponse/member/bluelayer/estimatedrugcosts/viewdrugcost/";
 
 	public static final String VIEW_DRUG_COST_BLUE_LAYER_PAGE_DATA = "viewdrugcost.json";
+	
+	public static final String PLAN_SELECTOR_PAGE_DATA = "planselector.json";
 
 	public static final String VIEW_DRUG_COST_INDIVIDUAL_BLUE_LAYER_PAGE_DATA = "viewdrugcostindividual.json";
 
 	public static final String GROUP = "Group";
 
+	public static final String LEARN_ABOUT_PLAN_PAGE_DATA = "learnaboutmedicare.json";
+
+	public static final String INITIAL_ENROLL_PAGE_DATA = "initialenroll.json";
+	
 	public static final String MANAGE_DRUG_ULAYER_PAGE_DATA = "manageDrug.json";
 
 	public static final String ADD_DRUG_ULAYER_PAGE_DATA = "adddrug.json";
