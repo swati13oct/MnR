@@ -1,4 +1,4 @@
-@drxDrugSearch
+@drx
 Feature: To test DRX flow for Generic Portlet
 Scenario Outline: To Verify the  drug search results in DRX flow for Generic Portlet
 Given the user is on the Generic Portlet home page

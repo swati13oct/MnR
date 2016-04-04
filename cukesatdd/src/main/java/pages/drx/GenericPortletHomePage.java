@@ -83,7 +83,7 @@ public class GenericPortletHomePage extends GlobalWebElements {
 
 	}
 
-	public DrugSearchPage enterPlanInfo(Map<String, String> memberAttributesMap) {
+	public DrugSearchPage enterPlanInfo(Map<String, String> memberAttributesMap, boolean autoDrugSearch) {
 
 		if (memberAttributesMap != null && !memberAttributesMap.isEmpty()) {
 
@@ -137,7 +137,7 @@ public class GenericPortletHomePage extends GlobalWebElements {
 
 			if (drugSearchTitle.getText().contains(
 					"Add Drugs to Estimate Annual Prescription Drug Costs")) {
-				return new DrugSearchPage(driver);
+				return new DrugSearchPage(driver,autoDrugSearch);
 			}
 
 		}

@@ -672,4 +672,6 @@ public class CommonConstants {
 
 	public static final String PROVIDER_SEARCH_PAGE_DATA = "providersearch.json";
 
+	public static final String AUTO_DRUG_SEARCH_PAGE_DATA = "autocompletedrugsearch.json";
+
 }

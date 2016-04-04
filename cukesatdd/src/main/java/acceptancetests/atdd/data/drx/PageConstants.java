@@ -13,4 +13,6 @@ public class PageConstants {
 	
 	public static final String DRUG_SEARCH_PAGE = "drugSearchPage";
 
+	public static final String SELECT_DOSAGE_PAGE = null;
+
 }
