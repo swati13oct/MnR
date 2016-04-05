@@ -36,10 +36,12 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.chrome.ChromeOptions;import org.openqa.selenium.firefox.FirefoxBinary;
+import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.firefox.FirefoxBinary;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxProfile;
-import org.openqa.selenium.remote.DesiredCapabilities;import org.springframework.ldap.core.DistinguishedName;
+import org.openqa.selenium.remote.DesiredCapabilities;
+import org.springframework.ldap.core.DistinguishedName;
 import org.springframework.stereotype.Component;
 
 import acceptancetests.atdd.data.CommonConstants;
@@ -838,19 +840,23 @@ public class MRScenario {
 		}
 	}
 
-public WebDriver getWebDriver() {
-		/*webDriver = new FirefoxDriver();
+	public WebDriver getWebDriver() {
+		webDriver = new FirefoxDriver();
 		webDriver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
-		return webDriver;*/
-	
-    File pathToBinary = new File("C:/Users/pagarwa5/AppData/Local/Mozilla Firefox/firefox.exe");
-    FirefoxBinary ffBinary = new FirefoxBinary(pathToBinary);
-    FirefoxProfile firefoxProfile = new FirefoxProfile();       
-    webDriver = new FirefoxDriver(ffBinary,firefoxProfile);
-    webDriver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
-	return webDriver;
+		return webDriver;
+
+		/*
+		 * File pathToBinary = new
+		 * File("C:/Users/pagarwa5/AppData/Local/Mozilla Firefox/firefox.exe");
+		 * FirefoxBinary ffBinary = new FirefoxBinary(pathToBinary);
+		 * FirefoxProfile firefoxProfile = new FirefoxProfile(); webDriver = new
+		 * FirefoxDriver(ffBinary,firefoxProfile);
+		 * webDriver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
+		 * return webDriver;
+		 */
 
 	}
+
 	public WebDriver getMobileWebDriver() {
 		Map<String, String> mobileEmulation = new HashMap<String, String>();
 		mobileEmulation.put("deviceName",

@@ -8,7 +8,7 @@
 	<name>cukesatdd</name>
 	<build>
 		<sourceDirectory>${project.basedir}/src/main</sourceDirectory>
-		<!--   <testSourceDirectory>${project.basedir}/src/main</testSourceDirectory> -->
+		<testSourceDirectory>${project.basedir}/src/main</testSourceDirectory>
 		<resources>
 			<resource>
 				<directory>${project.basedir}/src/main/resources</directory>
