@@ -29,15 +29,16 @@ public class AcquisitionHomePage extends GlobalWebElements {
 
 	@FindBy(id = "cta-zipcode")
 	private WebElement zipCodeField;
-	
-	 @FindBy(id = "topic-selectSelectBoxIt")
+
+	@FindBy(id = "topic-selectSelectBoxIt")
 	private WebElement selectSelectBoxIt;
 
-	 @FindBy(className = "fd_myPlans")
+	@FindBy(className = "fd_myPlans")
 	private WebElement myPlansTab;
 
 	@FindBy(id = "dce")
-	private WebElement prescriptionsLink;
+	private WebElement enterYourDrugListButton;
+
 	@FindBy(id = "learnfindplanBtn")
 	private WebElement learnfindPlansButton;
 
@@ -83,9 +84,8 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	@FindBy(id = "pageHeader")
 	private WebElement pageHeader;
 
-	@FindBys(value = {@FindBy(xpath = "//ul[@id='topic-selectSelectBoxItOptions']/li")})
+	@FindBys(value = { @FindBy(xpath = "//ul[@id='topic-selectSelectBoxItOptions']/li") })
 	private List<WebElement> topicDropDownValues;
-
 
 	@FindBy(id = "lookzip")
 	private WebElement lookzip;
@@ -238,7 +238,8 @@ public class AcquisitionHomePage extends GlobalWebElements {
 
 	public GetStartedPage navigateToPrescriptionDrug() {
 		enterYourDrugListButton.click();
-		if (getTitle().equalsIgnoreCase(
+		if (getTitle()
+				.equalsIgnoreCase(
 						"Our Medicare Plan Types | AARP® Medicare Plans from UnitedHealthcare®")) {
 			return new GetStartedPage(driver);
 		} else {
@@ -707,8 +708,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 				driver.getWindowHandles());
 		driver.switchTo().window(tabs1.get(2));
 		validate(medicareTitleText);
-		if (getTitle().equalsIgnoreCase(
-				"AARP Medicare Plans | Registration")) {
+		if (getTitle().equalsIgnoreCase("AARP Medicare Plans | Registration")) {
 			return new RegistrationHomePage(driver);
 		}
 		return null;
@@ -900,8 +900,8 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		ArrayList<String> tabs = new ArrayList<String>(
 				driver.getWindowHandles());
 		driver.switchTo().window(tabs.get(1));
-		if (getTitle().equalsIgnoreCase(
-				"AARP Medicare Plans | My Account Home")) {
+		if (getTitle()
+				.equalsIgnoreCase("AARP Medicare Plans | My Account Home")) {
 			return new AccountHomePage(driver);
 		}
 
@@ -1066,8 +1066,6 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		return null;
 	}
 
-
-
 	public ProviderSearchPage launchesPo7() {
 		po7Link.click();
 		try {
@@ -1140,8 +1138,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 				driver.getWindowHandles());
 		driver.switchTo().window(tabs1.get(2));
 
-		if (getTitle().equalsIgnoreCase(
-				"AARP Medicare Plans | Registration")) {
+		if (getTitle().equalsIgnoreCase("AARP Medicare Plans | Registration")) {
 			return new RegistrationHomePage(driver);
 		}
 
@@ -1192,36 +1189,39 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		return healthandwellnessdropdownJson;
 
 	}
+
 	public Object pickatopic(String picktopic) {
 
-        selectSelectBoxIt.click();
-        for (WebElement element : topicDropDownValues) {
-if(element.getText().equalsIgnoreCase(picktopic)){
-element.click();
-picktopicbtn.click();
-break;
-}
-}
-        
-        if (currentUrl().contains("/medicare-education/about")) {
-         if(getTitle().equals("Learn About Medicare | AARP® Medicare Plans from UnitedHealthcare®")){
-         return new LearnAboutMedicareuhcPage(driver);
-         }
-        } else if(currentUrl().contains("medicare-education/enroll")){
-         if(getTitle().equals("Prepare for Your Medicare Initial Enrollment Period | UnitedHealthcare®")){
-         return new PrepareForInitialEnrollmentuhcPage(driver);
-         }
-        }
+		selectSelectBoxIt.click();
+		for (WebElement element : topicDropDownValues) {
+			if (element.getText().equalsIgnoreCase(picktopic)) {
+				element.click();
+				picktopicbtn.click();
+				break;
+			}
+		}
 
-return null;
-}
+		if (currentUrl().contains("/medicare-education/about")) {
+			if (getTitle()
+					.equals("Learn About Medicare | AARP® Medicare Plans from UnitedHealthcare®")) {
+				return new LearnAboutMedicarePage(driver);
+			}
+		} else if (currentUrl().contains("medicare-education/enroll")) {
+			if (getTitle()
+					.equals("Prepare for Your Medicare Initial Enrollment Period | UnitedHealthcare®")) {
+				return new PrepareforInitialEnrollmentPage(driver);
+			}
+		}
 
-public PlanSelectorPage  planselector() {
-takequizbtn.click();
-if (getTitle().equalsIgnoreCase("Plan Selector")) {
-return new PlanSelectorPage(driver);
-} 
-return null;
-}
+		return null;
+	}
+
+	public PlanSelectorPage planselector() {
+		takequizbtn.click();
+		if (getTitle().equalsIgnoreCase("Plan Selector")) {
+			return new PlanSelectorPage(driver);
+		}
+		return null;
+	}
 
 }
