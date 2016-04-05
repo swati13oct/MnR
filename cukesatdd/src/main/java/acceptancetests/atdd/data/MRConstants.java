@@ -38,4 +38,8 @@ public class MRConstants {
 	public static final String MRREST_TIME_ADMIN_URL = "https://awe-"+MRScenario.environment+"-generic.uhc.com/MRRestWAR/rest/zadmin/time/";
 	
 	public static final String PARTD_TIME_ADMIN_URL = "https://awe-"+MRScenario.environment+"-generic.uhc.com/PartDPortalWeb/rest/zadmin/time/";
+	
+	public static final String GENERIC_PORTLET_URL = "https://portal.uhc.com/bConnectedDCE/home.html";
+	
+	
 }

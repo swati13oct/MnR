@@ -1,0 +1,19 @@
+{
+    "drugOptionsAvailable": [
+        {
+            "drugName": "Lipichol 540"
+        },
+        {
+            "drugName": "Lipidshield Plus"
+        },
+        {
+            "drugName": "Lipistart"
+        },
+        {
+            "drugName": "Lipitor"
+        },
+        {
+            "drugName": "Microlipid"
+        }
+    ]
+}
