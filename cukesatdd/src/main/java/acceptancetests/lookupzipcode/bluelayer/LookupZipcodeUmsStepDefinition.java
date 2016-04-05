@@ -16,10 +16,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import pages.acquisition.bluelayer.AcquisitionHomePage;
 import pages.acquisition.bluelayer.OurPlansPage;
-import pages.acquisition.bluelayer.ZipcodeLookupPage;
-import pages.acquisition.bluelayer.ZipcodeSelectionPage;
 import pages.acquisition.bluelayer.ZipcodeLookupHomePage;
+import pages.acquisition.bluelayer.ZipcodeLookupPage;
 import pages.acquisition.bluelayer.ZipcodeSelectionHomePage;
+import pages.acquisition.bluelayer.ZipcodeSelectionPage;
 import acceptancetests.atdd.data.CommonConstants;
 import acceptancetests.atdd.data.acquisition.PageConstants;
 import acceptancetests.lookupzipcode.data.ZipLookupCommonConstants;
@@ -110,8 +110,7 @@ public class LookupZipcodeUmsStepDefinition {
 					ZipLookupCommonConstants.ZIP_SELECTION_EXPECTED,
 					zipcodeSelectionExpectedJson);
 
-			JSONObject zipcodeSelectionActualJson = zipcodeSelectionHomePage.zipSelectionhomeJson;
-			getLoginScenario().saveBean(
+			JSONObject zipcodeSelectionActualJson = zipcodeSelectionHomePage.zipSelectionhomeJson;			getLoginScenario().saveBean(
 					ZipLookupCommonConstants.ZIP_SELECTION_ACTUAL,
 					zipcodeSelectionActualJson);
 		}
