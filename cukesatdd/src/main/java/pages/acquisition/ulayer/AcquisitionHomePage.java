@@ -1208,7 +1208,8 @@ public class AcquisitionHomePage extends GlobalWebElements {
 			}
 		} else if (currentUrl().contains("medicare-education/enroll")) {
 			if (getTitle()
-					.equals("Prepare for Your Medicare Initial Enrollment Period | UnitedHealthcare®")) {
+					.equals("Medicare Initial Enrollment Period | AARP® Medicare Plans from UnitedHealthcare®")) {
+			
 				return new PrepareforInitialEnrollmentPage(driver);
 			}
 		}
