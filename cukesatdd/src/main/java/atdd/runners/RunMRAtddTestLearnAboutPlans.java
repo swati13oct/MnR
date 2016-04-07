@@ -12,8 +12,8 @@ import cucumber.junit.Cucumber;
  *
  */
 @RunWith(Cucumber.class)
-@Cucumber.Options(glue = { "atdd.framework","acceptancetests.learnaboutplans.ulayer" }, 
-		features = { "feature/learnaboutplans/ulayer" }, 
+@Cucumber.Options(glue = { "atdd.framework","acceptancetests.learnaboutplans" }, 
+		features = { "feature/learnaboutplans" }, 
 		format = {
 		"pretty", "html:reports/test-report" }, tags ={"@learnaboutplans"})
 public class RunMRAtddTestLearnAboutPlans {
