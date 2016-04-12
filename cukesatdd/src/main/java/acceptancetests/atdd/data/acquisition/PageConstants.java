@@ -24,6 +24,12 @@ public class PageConstants {
 	public static final String PLAN_DETAILS_PAGE = "planDetailsPage";
 	
 	public static final String ACQUISITION_HOME_PAGE = "acquisitionHomePage";
+
+	public static final String UHCRETIREE_ACQ_HOME_PAGE = "uhcRetireeAcqHomePage";
+
+	public static final String UHCRETIREE_ACQ_Formulary_PAGE = "uhcRetireeAcqFormularyPage";
+
+	public static final String UHCRETIREE_ACQ_ENTER_DRUG_PAGE = "uhcRetireeAcqEnterDrugPage";
 	
 	public static final String VPP_PLAN_SUMMARY_PAGE = "vppPlanSummaryPage";
 

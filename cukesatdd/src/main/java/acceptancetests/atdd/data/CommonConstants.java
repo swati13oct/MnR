@@ -311,6 +311,8 @@ public class CommonConstants {
 
 	public static final String PAGE_OBJECT_DIRECTORY_BLUELAYER_MEMBER = "/page-objects/member/bluelayer/";
 
+	public static final String RETIREE_PAGE_OBJECT_DIRECTORY = "/page-objects/uhcretiree/acquisition/";
+
 	public static final String REGISTRATION = "registrationsuccess";
 
 	public static final String REGISTRATION_SUCCESS = "registrationsuccess";
@@ -396,6 +398,8 @@ public class CommonConstants {
 	public static final String SITE_ULAYER = "ulayer";
 
 	public static final String SITE_BLUELAYER = "bluelayer";
+
+	public static final String SITE_UHCRETIREE = "uhcretiree";
 
 	public static final String ACQUISITION_EXPECTED_DIRECTORY = "/jsonresponse/acquisition";
 
@@ -665,5 +669,9 @@ public class CommonConstants {
 	private static final String PLAN_COMPARE_ULAYER_DIRECTORY = "/jsonresponse/member/ulayer/plancompare/";
 
 	public static final String PROVIDER_SEARCH_PAGE_DATA = "providersearch.json";
+	
+	public static final String SELECT_FORMULARY_PAGE_DATA = "selectformulary.json";
+
+	public static final String RETIREE_EXPECTED_DIRECTORY = "/jsonresponse/uhcretiree/acquisition/";
 
 }
