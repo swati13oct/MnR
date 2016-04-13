@@ -148,7 +148,10 @@ public class CommonConstants {
 			new Page(CommonConstants.BENEFITS_SUMMARY,
 					CommonConstants.BENEFITS_SUMMARY_DIRECTORY),
 			new Page(CommonConstants.PLAN_COMPARE,
-					CommonConstants.PLAN_COMPARE_ULAYER_DIRECTORY)
+					CommonConstants.PLAN_COMPARE_ULAYER_DIRECTORY),
+			new Page(CommonConstants.ADD_PLAN_CONFIRMATION,
+					CommonConstants.ADD_PLAN_CONFIRMATION_ULAYER_DIRECTORY)
+					
 
 	};
 
@@ -307,7 +310,12 @@ public class CommonConstants {
 			new Page(CommonConstants.LOW_COST_OPTIONS,
 					CommonConstants.LOW_COST_OPTIONS_BLUE_LAYER_DIRECTORY),
 			new Page(CommonConstants.SELECT_PHARMACY,
-					CommonConstants.SELECT_PHARMACY_BLUE_LAYER_DIRECTORY) };
+					CommonConstants.SELECT_PHARMACY_BLUE_LAYER_DIRECTORY),
+			new Page(CommonConstants.REGISTRATION_SUCCESS,
+					CommonConstants.REGISTRATION_SUCCESS_BLUELAYER_DIRECTORY),
+			new Page(CommonConstants.ADD_PLAN_CONFIRMATION,
+					CommonConstants.ADD_PLAN_CONFIRMATION_BLUELAYER_DIRECTORY)
+			};
 
 	public static final String PAGE_OBJECT_DIRECTORY_BLUELAYER_MEMBER = "/page-objects/member/bluelayer/";
 
@@ -323,7 +331,7 @@ public class CommonConstants {
 
 	public static final String PLAN_CONFIRMATION = "planconfirmation";
 
-	public static final String PLAN_CONFIRMATION_DIRECTORY = "/jsonresponse/Member/ulayer/registration/planconfirmation/";
+	public static final String PLAN_CONFIRMATION_DIRECTORY = "/jsonresponse/member/ulayer/registration/planconfirmation/";
 
 	public static final String PLAN_CONFIRMATION_PAGE_DATA = "planconfirmation.json";
 
@@ -492,14 +500,10 @@ public class CommonConstants {
 	public static final String LOW_COST_OPTIONS_PAGE_DATA = "lowcostoptions.json";
 
 	public static final Page[] PAGES_REGISTRATION_BLUELAYER = {
-			new Page(CommonConstants.PLAN_CONFIRMATION,
-					CommonConstants.PLAN_CONFIRMATION_BLUELAYER_DIRECTORY),
-			new Page(CommonConstants.REGISTRATION,
-					CommonConstants.REGISTRATION_BLUELAYER_DIRECTORY),
-			new Page(CommonConstants.ADD_PLAN_CONFIRMATION,
-					CommonConstants.ADD_PLAN_CONFIRMATION_BLUELAYER_DIRECTORY),
-			new Page(CommonConstants.REGISTRATION_COMMON,
-					CommonConstants.REGISTRATION_COMMON_BLUELAYER_DIRECTORY), };
+		new Page(CommonConstants.PLAN_CONFIRMATION,
+				CommonConstants.PLAN_CONFIRMATION_BLUELAYER_DIRECTORY),
+		new Page(CommonConstants.REGISTRATION_COMMON,
+				CommonConstants.REGISTRATION_COMMON_BLUELAYER_DIRECTORY) };
 
 	public static final Page[] PAGES_REGISTRATION_ULAYER = {
 			new Page(CommonConstants.PLAN_CONFIRMATION,
@@ -654,6 +658,7 @@ public class CommonConstants {
 	public static final String OUR_PLANS_NAV_PAGE_DATA = "ourPlansDropdownActual.json";
 
 	public static final String HEALTH_AND_WELLNESS_DROPDOWN_DATA= "healthandwellnessdropdownactual.json";
+	
 	public static final String OUR_PLANS_DROPDOWN_DATA = "ourplansdropdownactual.json";
 
 	private static final String HEALTH_AND_WELLNESS_DIRECTORY = "/jsonresponse/member/ulayer/healthandwellness/";
@@ -665,5 +670,11 @@ public class CommonConstants {
 	private static final String PLAN_COMPARE_ULAYER_DIRECTORY = "/jsonresponse/member/ulayer/plancompare/";
 
 	public static final String PROVIDER_SEARCH_PAGE_DATA = "providersearch.json";
+	
+	private static final String ADD_PLAN_CONFIRMATION_ULAYER_DIRECTORY = "/jsonresponse/member/ulayer/registration/addplanconfirmation/";
+	
+	private static final String REGISTRATION_SUCCESS_BLUELAYER_DIRECTORY = "/jsonresponse/member/bluelayer/registration/registrationsuccess/";
 
+	public static final String SECOND_PLAN_INFO_BLUELAYER_PAGE_DATA = "secondplaninfo.json";	
+	
 }

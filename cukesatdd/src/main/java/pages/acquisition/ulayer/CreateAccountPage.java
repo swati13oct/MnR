@@ -73,7 +73,7 @@ public class CreateAccountPage extends UhcDriver{
 			System.out.println("userNameField not found");
 		}
 
-		if (driver.getTitle().equalsIgnoreCase("Online Account Confirmation")) {
+		if (currentUrl().contains("/home/register-success.html")) {
 			return new RegistrationSuccessPage(driver);
 		}
 		return null;

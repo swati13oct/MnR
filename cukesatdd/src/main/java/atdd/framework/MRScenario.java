@@ -57,13 +57,13 @@ public class MRScenario {
 
 	private static Map<String, List<String>> umsMemberAttributesMap = new LinkedHashMap<String, List<String>>();
 
-	private static Map<String, List<String>> registrationDataMap = new LinkedHashMap<String, List<String>>();
-
 	private static Map<String, List<String>> ampRegistrationDataMap = new LinkedHashMap<String, List<String>>();
 
 	private static Map<String, Map<String, JSONObject>> expectedDataMapUlayer = new LinkedHashMap<String, Map<String, JSONObject>>();
 
 	private static Map<String, Map<String, JSONObject>> expectedDataMapBluelayer = new LinkedHashMap<String, Map<String, JSONObject>>();
+	
+	private static Map<String, List<String>> umsRegistrationDataMap = new LinkedHashMap<String, List<String>>();
 
 	private static Map<String, String> props = new HashMap<String, String>();
 
@@ -197,20 +197,6 @@ public class MRScenario {
 
 			}
 
-			InputStream memberTypeStream2 = ClassLoader.class
-					.getResourceAsStream("/database/Registration-data.csv");
-			BufferedReader deregistermemberReader = new BufferedReader(
-					new InputStreamReader(memberTypeStream2));
-			while ((line = deregistermemberReader.readLine()) != null) {
-				// use comma as separator
-				String[] memberAttributes = line.split(cvsSplitBy);
-				List<String> attrList = Arrays.asList(memberAttributes)
-						.subList(1, memberAttributes.length);
-				String userName = memberAttributes[0];
-				registrationDataMap.put(userName, attrList);
-
-			}
-
 			InputStream ampMemberTypeStream = ClassLoader.class
 					.getResourceAsStream("/database/AMP-Registration-data.csv");
 			BufferedReader registermemberReader = new BufferedReader(
@@ -224,8 +210,21 @@ public class MRScenario {
 				ampRegistrationDataMap.put(userName, attrList);
 
 			}
-		}
+			
+			InputStream umsMemberTypeStream = ClassLoader.class
+					.getResourceAsStream("/database/UMS-Registration-data.csv");
+			BufferedReader umsRegistermemberReader = new BufferedReader(
+					new InputStreamReader(umsMemberTypeStream));
+			while ((line = umsRegistermemberReader.readLine()) != null) {
+				// use comma as separator
+				String[] memberAttributes = line.split(cvsSplitBy);
+				List<String> attrList = Arrays.asList(memberAttributes)
+						.subList(1, memberAttributes.length);
+				String userName = memberAttributes[0];
+				umsRegistrationDataMap.put(userName, attrList);
 
+			}
+		}
 		catch (IOException e) {
 			// TODO Auto-generated catch block
 			// schak38: when member-types csv is not found
@@ -356,7 +355,7 @@ public class MRScenario {
 		Statement stmt;
 		ResultSet rs = null;
 
-		for (String userName : registrationDataMap.keySet()) {
+		for (String userName : umsRegistrationDataMap.keySet()) {
 
 			try {
 				stmt = con.createStatement();
@@ -626,7 +625,7 @@ public class MRScenario {
 				expectedDataMapUlayer.put(ampKey, ampObjectMap);
 		}
 
-		Set<String> keySetUms = registrationDataMap.keySet();
+		Set<String> keySetUms = umsRegistrationDataMap.keySet();
 		for (String umsKey : keySetUms) {
 			Map<String, JSONObject> umsObjectMap = new HashMap<String, JSONObject>();
 			for (int i = 0; i < CommonConstants.PAGES_BLUELAYER.length; i++) {
@@ -713,10 +712,10 @@ public class MRScenario {
 
 		}
 
-		Set<String> registrationUmsKeySet = registrationDataMap.keySet();
+		Set<String> registrationUmsKeySet = umsRegistrationDataMap.keySet();
 		for (String registrationKey : registrationUmsKeySet) {
-			if (registrationDataMap.get(registrationKey).size() > 2) {
-				List<String> value = registrationDataMap.get(registrationKey);
+			if (umsRegistrationDataMap.get(registrationKey).size() > 2) {
+				List<String> value = umsRegistrationDataMap.get(registrationKey);
 				List<String> subValue = value.subList(1, 3);
 				if (!subValue.isEmpty()) {
 					String[] key = { value.get(0) + "_" + value.get(1),
@@ -740,8 +739,8 @@ public class MRScenario {
 					}
 				}
 			} else {
-				String key = registrationDataMap.get(registrationKey).get(0)
-						+ "_" + registrationDataMap.get(registrationKey).get(1);
+				String key = umsRegistrationDataMap.get(registrationKey).get(0)
+						+ "_" + umsRegistrationDataMap.get(registrationKey).get(1);
 				Map<String, JSONObject> pageObjectMap = new HashMap<String, JSONObject>();
 				for (int i = 0; i < CommonConstants.PAGES_REGISTRATION_BLUELAYER.length; i++) {
 					JSONObject jsonObject = readExpectedJson(key,
@@ -836,7 +835,8 @@ public class MRScenario {
 		}
 	}
 
-public WebDriver getWebDriver() {
+	public WebDriver getWebDriver() 
+	{
 		webDriver = new FirefoxDriver();
 		webDriver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
 		return webDriver;
