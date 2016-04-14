@@ -14,7 +14,7 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.FindBys;
 import org.openqa.selenium.support.PageFactory;
-
+import pages.acquisition.ulayer.ZipcodeLookupHomePage;
 import pages.member.ulayer.AccountHomePage;
 import acceptancetests.atdd.data.CommonConstants;
 import acceptancetests.atdd.data.MRConstants;
@@ -29,6 +29,9 @@ public class AcquisitionHomePage extends GlobalWebElements {
 
 	@FindBy(id = "cta-zipcode")
 	private WebElement zipCodeField;
+
+	@FindBy(id = "topic-selectSelectBoxIt")
+	private WebElement selectSelectBoxIt;
 
 	@FindBy(className = "fd_myPlans")
 	private WebElement myPlansTab;
@@ -81,7 +84,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	@FindBy(id = "pageHeader")
 	private WebElement pageHeader;
 
-	@FindBys(value = { @FindBy(xpath = "span//[@id='topic-selectSelectBoxIt']/ul/li") })
+	@FindBys(value = { @FindBy(xpath = "//ul[@id='topic-selectSelectBoxItOptions']/li") })
 	private List<WebElement> topicDropDownValues;
 
 	@FindBy(id = "lookzip")
@@ -111,7 +114,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	@FindBy(id = "homefooter")
 	private WebElement homefooter;
 
-	@FindBy(linkText = "Look up ZIP code")
+	@FindBy(id = "lookzip")
 	private WebElement lookupZipcode;
 
 	@FindBy(id = "medicareTitle")
@@ -235,7 +238,8 @@ public class AcquisitionHomePage extends GlobalWebElements {
 
 	public GetStartedPage navigateToPrescriptionDrug() {
 		enterYourDrugListButton.click();
-		if (getTitle().equalsIgnoreCase(
+		if (getTitle()
+				.equalsIgnoreCase(
 						"Our Medicare Plan Types | AARP® Medicare Plans from UnitedHealthcare®")) {
 			return new GetStartedPage(driver);
 		} else {
@@ -704,8 +708,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 				driver.getWindowHandles());
 		driver.switchTo().window(tabs1.get(2));
 		validate(medicareTitleText);
-		if (getTitle().equalsIgnoreCase(
-				"AARP Medicare Plans | Registration")) {
+		if (getTitle().equalsIgnoreCase("AARP Medicare Plans | Registration")) {
 			return new RegistrationHomePage(driver);
 		}
 		return null;
@@ -897,8 +900,8 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		ArrayList<String> tabs = new ArrayList<String>(
 				driver.getWindowHandles());
 		driver.switchTo().window(tabs.get(1));
-		if (getTitle().equalsIgnoreCase(
-				"AARP Medicare Plans | My Account Home")) {
+		if (getTitle()
+				.equalsIgnoreCase("AARP Medicare Plans | My Account Home")) {
 			return new AccountHomePage(driver);
 		}
 
@@ -1063,104 +1066,6 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		return null;
 	}
 
-	public JSONObject pickatopic(String picktopic) {
-		JSONObject jsonObject = new JSONObject();
-
-		for (WebElement element : topicDropDownValues) {
-			System.out.println(element.getTagName());
-			if (element.getAttribute("data-val").toString().contains(picktopic)) {
-				System.out.println("data-val=="
-						+ element.getAttribute("data-val").toString());
-				element.click();
-				break;
-			}
-		}
-
-		// selectFromDropDown(topicDropDownValues, picktopic);
-		// for (WebElement element : elementList) {
-		// if (element.getText().contains(value)) {
-		// element.click();
-		// break;
-		// }
-		// }
-
-		picktopicbtn.click();
-
-		if (getTitle() != null) {
-			try {
-				jsonObject.put("topicselectTitle", getTitle());
-			} catch (JSONException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-
-		}
-		return homeJson = jsonObject;
-
-	}
-
-	public JSONObject takequiz() {
-		JSONObject jsonObject = new JSONObject();
-		takequizbtn.click();
-
-		if (getTitle() != null) {
-			try {
-				jsonObject.put("takequizTitle", getTitle());
-			} catch (JSONException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-
-		}
-		homeJson = jsonObject;
-
-		return homeJson;
-	}
-
-	public JSONObject chooseuhc() {
-		JSONObject jsonObject = new JSONObject();
-		chooseUhcButton.click();
-
-		if (getTitle() != null) {
-			try {
-				jsonObject.put("whychooseuhcTitle", getTitle());
-				System.out.println("driver.getTitle()==" + getTitle());
-			} catch (JSONException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-
-		}
-		homeJson = jsonObject;
-
-		return homeJson;
-	}
-
-	public JSONObject findplanfield(String zipcode, String findplanSection) {
-		JSONObject jsonObject = new JSONObject();
-
-		if (findplanSection.equalsIgnoreCase("findplans")) {
-			sendkeys(zipCodeField, zipcode);
-			findPlansButton.click();
-		} else if (findplanSection.equalsIgnoreCase("learnfindplans")) {
-			sendkeys(learnzipCodeField, zipcode);
-			learnfindPlansButton.click();
-		}
-
-		if (getTitle() != null) {
-			try {
-				jsonObject.put("findplanTitle", getTitle());
-			} catch (JSONException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-
-		}
-		return homeJson = jsonObject;
-
-	}
-
-
 	public ProviderSearchPage launchesPo7() {
 		po7Link.click();
 		try {
@@ -1233,8 +1138,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 				driver.getWindowHandles());
 		driver.switchTo().window(tabs1.get(2));
 
-		if (getTitle().equalsIgnoreCase(
-				"AARP Medicare Plans | Registration")) {
+		if (getTitle().equalsIgnoreCase("AARP Medicare Plans | Registration")) {
 			return new RegistrationHomePage(driver);
 		}
 
@@ -1284,6 +1188,41 @@ public class AcquisitionHomePage extends GlobalWebElements {
 
 		return healthandwellnessdropdownJson;
 
+	}
+
+	public Object pickatopic(String picktopic) {
+
+		selectSelectBoxIt.click();
+		for (WebElement element : topicDropDownValues) {
+			if (element.getText().equalsIgnoreCase(picktopic)) {
+				element.click();
+				picktopicbtn.click();
+				break;
+			}
+		}
+
+		if (currentUrl().contains("/medicare-education/about")) {
+			if (getTitle()
+					.equals("Learn About Medicare | AARP® Medicare Plans from UnitedHealthcare®")) {
+				return new LearnAboutMedicarePage(driver);
+			}
+		} else if (currentUrl().contains("medicare-education/enroll")) {
+			if (getTitle()
+					.equals("Medicare Initial Enrollment Period | AARP® Medicare Plans from UnitedHealthcare®")) {
+			
+				return new PrepareforInitialEnrollmentPage(driver);
+			}
+		}
+
+		return null;
+	}
+
+	public PlanSelectorPage planselector() {
+		takequizbtn.click();
+		if (getTitle().equalsIgnoreCase("Plan Selector")) {
+			return new PlanSelectorPage(driver);
+		}
+		return null;
 	}
 
 }

@@ -319,6 +319,8 @@ public class CommonConstants {
 
 	public static final String PAGE_OBJECT_DIRECTORY_BLUELAYER_MEMBER = "/page-objects/member/bluelayer/";
 
+	public static final String RETIREE_PAGE_OBJECT_DIRECTORY = "/page-objects/uhcretiree/acquisition/";
+
 	public static final String REGISTRATION = "registrationsuccess";
 
 	public static final String REGISTRATION_SUCCESS = "registrationsuccess";
@@ -405,7 +407,11 @@ public class CommonConstants {
 
 	public static final String SITE_BLUELAYER = "bluelayer";
 
+	public static final String SITE_UHCRETIREE = "uhcretiree";
+
 	public static final String ACQUISITION_EXPECTED_DIRECTORY = "/jsonresponse/acquisition";
+	
+	public static final String DRX_EXPECTED_DIRECTORY = "/jsonresponse/drx";
 
 	public static final String DRUG_CLAIMS_SUMMARY = "drugclaimsummary";
 
@@ -492,6 +498,8 @@ public class CommonConstants {
 	public static final String ADD_DRUG_DIRECTORY = "/jsonresponse/member/ulayer/druglookup/adddrug/";
 
 	public static final String ADD_DRUG_PAGE_DATA = "adddrug.json";
+	
+	public static final String DRUG_SEARCH_PAGE_DATA = "searchdrug.json";
 
 	public static final String LOW_COST_OPTIONS = "lowcostoptions";
 
@@ -520,6 +528,8 @@ public class CommonConstants {
 	public static final String TERMINATED_ACCOUNT = "terminatedAccount";
 
 	public static final String PAGE_OBJECT_DIRECTORY_BLUELAYER_ACQ = "/page-objects/acquisition/bluelayer/";
+	
+	public static final String PAGE_OBJECT_DIRECTORY_DRX = "/page-objects/drx/";
 
 	public static final String PHR_SHIP_PAGE_DATA = "phrship.json";
 
@@ -564,11 +574,17 @@ public class CommonConstants {
 	private static final String VIEW_DRUG_COST_BLUELAYER_DIRECTORY = "/jsonresponse/member/bluelayer/estimatedrugcosts/viewdrugcost/";
 
 	public static final String VIEW_DRUG_COST_BLUE_LAYER_PAGE_DATA = "viewdrugcost.json";
+	
+	public static final String PLAN_SELECTOR_PAGE_DATA = "planselector.json";
 
 	public static final String VIEW_DRUG_COST_INDIVIDUAL_BLUE_LAYER_PAGE_DATA = "viewdrugcostindividual.json";
 
 	public static final String GROUP = "Group";
 
+	public static final String LEARN_ABOUT_PLAN_PAGE_DATA = "learnaboutmedicare.json";
+
+	public static final String INITIAL_ENROLL_PAGE_DATA = "initialenroll.json";
+	
 	public static final String MANAGE_DRUG_ULAYER_PAGE_DATA = "manageDrug.json";
 
 	public static final String ADD_DRUG_ULAYER_PAGE_DATA = "adddrug.json";
@@ -671,9 +687,17 @@ public class CommonConstants {
 
 	public static final String PROVIDER_SEARCH_PAGE_DATA = "providersearch.json";
 	
+
+	public static final String SELECT_FORMULARY_PAGE_DATA = "selectformulary.json";
+
+	public static final String RETIREE_EXPECTED_DIRECTORY = "/jsonresponse/uhcretiree/acquisition/";
+
+	public static final String AUTO_DRUG_SEARCH_PAGE_DATA = "autocompletedrugsearch.json";
+
 	private static final String ADD_PLAN_CONFIRMATION_ULAYER_DIRECTORY = "/jsonresponse/member/ulayer/registration/addplanconfirmation/";
 	
 	private static final String REGISTRATION_SUCCESS_BLUELAYER_DIRECTORY = "/jsonresponse/member/bluelayer/registration/registrationsuccess/";
+
 
 	public static final String SECOND_PLAN_INFO_BLUELAYER_PAGE_DATA = "secondplaninfo.json";	
 	

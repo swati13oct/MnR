@@ -25,6 +25,18 @@ public class AcquisitionHomePage extends GlobalWebElements {
 
 	@FindBy(id = "lookzip")
 	private WebElement lookupZipcode;
+       
+	@FindBy(id = "takequizbtn")
+	private WebElement takequizbtn;
+       
+	@FindBys(value = {@FindBy(xpath = "//ul[@id='topic-selectSelectBoxItOptions']/li")})
+	private List<WebElement> topicDropDownValues;
+
+	@FindBy(id = "topic-selectSelectBoxIt")
+	private WebElement selectSelectBoxIt; 
+
+	@FindBy(id = "picktopicbtn")
+	private WebElement picktopicbtn; 
 
 	@FindBy(id = "cta-zipcode")
 	private WebElement zipCodeField;
@@ -37,7 +49,6 @@ public class AcquisitionHomePage extends GlobalWebElements {
 
 	@FindBy(id = "dce")
 	private WebElement prescriptionsLink;
-
 	@FindBys(value = { @FindBy(xpath = "//table[@id='colhowdoesthiswork']/tbody/tr/td/span/span/a") })
 	private List<WebElement> howdoesthiswork;
 
@@ -61,7 +72,6 @@ public class AcquisitionHomePage extends GlobalWebElements {
 
 	@FindBy(id = "medicareTitle")
 	private WebElement medicareTitleText;
-
 	@FindBy(className = "fd_myPlans")
 	private WebElement myPlansTab;
 
@@ -76,7 +86,6 @@ public class AcquisitionHomePage extends GlobalWebElements {
 
 	private PageData homePageDisclaimer;
 	public JSONObject homePageDisclaimerJson;
-
 	private PageData homePageDisclaimerHide;
 	public JSONObject homePageDisclaimerHideJson;
 
@@ -733,6 +742,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		return validate(signInButton);
 	}
 
+
 	public Boolean stopTimerValid() {
 		validate(signInButton);
 		String timerId = alreadyPlanMemberButtonInactive.getAttribute("id");
@@ -777,4 +787,36 @@ public class AcquisitionHomePage extends GlobalWebElements {
 
 		return null;
 	}
+	public Object pickatopic(String picktopic) {
+
+        selectSelectBoxIt.click();
+        for (WebElement element : topicDropDownValues) {
+				if(element.getText().equalsIgnoreCase(picktopic)){
+				element.click();
+				picktopicbtn.click();
+				break;
+				}
+				}
+				        
+				        if (currentUrl().contains("/medicare-education/about")) {
+				         if(getTitle().equals("Learn About Medicare | UnitedHealthcare®")){
+				         return new LearnAboutMedicareuhcPage(driver);
+				         }
+				        } else if(currentUrl().contains("medicare-education/enroll")){
+				         if(getTitle().equals("Prepare for Your Medicare Initial Enrollment Period | UnitedHealthcare®")){
+				         return new PrepareForInitialEnrollmentuhcPage(driver);
+				         }
+				        }
+				
+				return null;
+				}
+				
+				public PlanSelectorPage  planselector() {
+				takequizbtn.click();
+				if (getTitle().equalsIgnoreCase("Plan Selector")) {
+				return new PlanSelectorPage(driver);
+				} 
+				return null;
+			}
 }
+		

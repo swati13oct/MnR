@@ -39,19 +39,21 @@ public abstract class UhcDriver {
 		wait.until(ExpectedConditions.visibilityOf(element));
 
 	}
-	
+
 	public void switchToNewTab() {
-		 ArrayList<String> tabs = new ArrayList<String> (driver.getWindowHandles());
-         driver.switchTo().window(tabs.get(1));
+		ArrayList<String> tabs = new ArrayList<String>(
+				driver.getWindowHandles());
+		driver.switchTo().window(tabs.get(1));
 	}
 
 	public WebDriver switchToNewIframe(String iframeName) {
 		return driver.switchTo().frame(iframeName);
-		
+
 	}
+
 	public WebDriver switchToNewIframe(WebElement iframeElement) {
 		return driver.switchTo().frame(iframeElement);
-		
+
 	}
 
 	public boolean elementFound(WebElement element) {
@@ -75,13 +77,14 @@ public abstract class UhcDriver {
 		element.click();
 		element.clear();
 		element.sendKeys(message);
+
 	}
 
 	public void select(WebElement element, String message) {
 		element.click();
 		element.sendKeys(message);
 	}
-	
+
 	public void selectFromDropDown(List<WebElement> elementList, String value) {
 		for (WebElement element : elementList) {
 			if (element.getText().contains(value)) {
@@ -91,7 +94,6 @@ public abstract class UhcDriver {
 		}
 
 	}
-	
 
 	public boolean validate(WebElement element) {
 		try {
@@ -128,19 +130,16 @@ public abstract class UhcDriver {
 				driver.manage().timeouts().implicitlyWait(1, TimeUnit.SECONDS);
 				element = driver.findElement(By.linkText(elementData
 						.getElementName()));
-			}
-			else if (elementData.getIdentifier().equalsIgnoreCase("name")) {
+			} else if (elementData.getIdentifier().equalsIgnoreCase("name")) {
 				driver.manage().timeouts().implicitlyWait(1, TimeUnit.SECONDS);
 				element = driver.findElement(By.name(elementData
 						.getElementName()));
-			}
-			else if (elementData.getIdentifier().equalsIgnoreCase("tagName")) {
+			} else if (elementData.getIdentifier().equalsIgnoreCase("tagName")) {
 				driver.manage().timeouts().implicitlyWait(1, TimeUnit.SECONDS);
 				element = driver.findElement(By.tagName(elementData
 						.getElementName()));
 			}
-			
-			
+
 			return element;
 		} catch (Exception e) {
 			return null;
@@ -166,19 +165,17 @@ public abstract class UhcDriver {
 				driver.manage().timeouts().implicitlyWait(1, TimeUnit.SECONDS);
 				element = parentElement.findElement(By.xpath(elementData
 						.getElementName()));
-			}  else if (elementData.getIdentifier().equalsIgnoreCase("linkText")) {
+			} else if (elementData.getIdentifier().equalsIgnoreCase("linkText")) {
 				driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
 				element = parentElement.findElement(By.linkText(elementData
 						.getElementName()));
 
-			}
-			else if (elementData.getIdentifier().equalsIgnoreCase("name")) {
+			} else if (elementData.getIdentifier().equalsIgnoreCase("name")) {
 				driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
 				element = parentElement.findElement(By.name(elementData
 						.getElementName()));
 
-			}
-			else if (elementData.getIdentifier().equalsIgnoreCase("tagName")) {
+			} else if (elementData.getIdentifier().equalsIgnoreCase("tagName")) {
 				driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
 				element = parentElement.findElement(By.tagName(elementData
 						.getElementName()));
@@ -189,7 +186,7 @@ public abstract class UhcDriver {
 			return element;
 		}
 	}
-	
+
 	public List<WebElement> findChildElements(ElementData elementData,
 			WebElement parentElement) {
 		List<WebElement> element = null;
@@ -208,11 +205,11 @@ public abstract class UhcDriver {
 				driver.manage().timeouts().implicitlyWait(1, TimeUnit.SECONDS);
 				element = parentElement.findElements(By.xpath(elementData
 						.getElementName()));
-			}  else if (elementData.getIdentifier().equalsIgnoreCase("linkText")) {
+			} else if (elementData.getIdentifier().equalsIgnoreCase("linkText")) {
 				driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
 				element = parentElement.findElements(By.linkText(elementData
 						.getElementName()));
-			}			else if (elementData.getIdentifier().equalsIgnoreCase("name")) {
+			} else if (elementData.getIdentifier().equalsIgnoreCase("name")) {
 				driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
 				element = parentElement.findElements(By.name(elementData
 						.getElementName()));
@@ -244,27 +241,21 @@ public abstract class UhcDriver {
 				driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
 				element = driver.findElements(By.linkText(elementData
 						.getElementName()));
-			}
-			else if (elementData.getIdentifier().equalsIgnoreCase("name")) {
+			} else if (elementData.getIdentifier().equalsIgnoreCase("name")) {
 				driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
 				element = driver.findElements(By.name(elementData
 						.getElementName()));
-			}
- 			else if(elementData.getIdentifier().contains("select:"))
-			{
+			} else if (elementData.getIdentifier().contains("select:")) {
 				driver.manage().timeouts().implicitlyWait(1, TimeUnit.SECONDS);
 				String[] identifierArr = elementData.getIdentifier().split(":");
-				if(identifierArr[1].equalsIgnoreCase("className"))
-				{
-					WebElement selectElement = driver.findElement(By.className(elementData
-							.getElementName()));
+				if (identifierArr[1].equalsIgnoreCase("className")) {
+					WebElement selectElement = driver.findElement(By
+							.className(elementData.getElementName()));
 					Select select = new Select(selectElement);
 					element = select.getOptions();
-				}
-				else if(identifierArr[1].equalsIgnoreCase("id"))
-				{
-					WebElement selectElement = driver.findElement(By.id(elementData
-							.getElementName()));
+				} else if (identifierArr[1].equalsIgnoreCase("id")) {
+					WebElement selectElement = driver.findElement(By
+							.id(elementData.getElementName()));
 					Select select = new Select(selectElement);
 					element = select.getOptions();
 				}
@@ -295,15 +286,14 @@ public abstract class UhcDriver {
 	public String currentUrl() {
 		return driver.getCurrentUrl();
 	}
-	
-	public String getTitle(){
+
+	public String getTitle() {
 		return driver.getTitle();
 	}
-	
-	public Cookie getCookieName(String cookieName){
+
+	public Cookie getCookieName(String cookieName) {
 		return driver.manage().getCookieNamed(cookieName);
 	}
-	
 
 	public abstract void openAndValidate();
 

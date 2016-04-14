@@ -17,6 +17,8 @@ public class MRConstants {
 
 	public static final String AARP_URL = "https://www.awe-"+MRScenario.environment+"-aarpmedicareplans.uhc.com/";
 
+	public static final String UHCRETIREE_URL = "https://www.awe-"+MRScenario.environment+"-uhcretiree.uhc.com/";
+
 	public static final String UHC_URL = "https://www.awe-"+MRScenario.environment+"-uhcmedicaresolutions.uhc.com/";
 	
 	public static final String AARPM_REGISTRATION_URL = "https://member.awe-"+MRScenario.environment+"-aarpmedicareplans.uhc.com/guest/registration.html";
@@ -38,4 +40,8 @@ public class MRConstants {
 	public static final String MRREST_TIME_ADMIN_URL = "https://awe-"+MRScenario.environment+"-generic.uhc.com/MRRestWAR/rest/zadmin/time/";
 	
 	public static final String PARTD_TIME_ADMIN_URL = "https://awe-"+MRScenario.environment+"-generic.uhc.com/PartDPortalWeb/rest/zadmin/time/";
+	
+	public static final String GENERIC_PORTLET_URL = "https://portal.uhc.com/bConnectedDCE/home.html";
+	
+	
 }

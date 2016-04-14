@@ -4,9 +4,16 @@
 package pages.acquisition.bluelayer;
 
 
+import org.json.JSONException;
 import org.json.JSONObject;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
+
+import acceptancetests.atdd.data.CommonConstants;
 import acceptancetests.atdd.data.PageData;
+import acceptancetests.atdd.util.CommonUtility;
 
 /**
  * @author rkodumur
@@ -15,9 +22,29 @@ import acceptancetests.atdd.data.PageData;
 public class PlanSelectorPage extends GlobalWebElements{
 	
 	
+	@FindBy(xpath = "//article[@id='criteria']/header/div[1]/h2")
+	private WebElement planselectoruhcpage;
+
+	public  JSONObject planselectoruhcJson;
+
+	private PageData planselectoruhc;
+
+
 	public PlanSelectorPage(WebDriver driver) {
-		super(driver);
-		// TODO Auto-generated constructor stub
+	super(driver);
+	PageFactory.initElements(driver, this);
+	try {
+	Thread.sleep(8000);
+	} catch (InterruptedException e) {
+	// TODO Auto-generated catch block
+	e.printStackTrace();
+	}
+	switchToNewIframe("baseFrame");
+	String fileName = CommonConstants.PLAN_SELECTOR_PAGE_DATA;
+	System.out.println("file name"+fileName);
+	planselectoruhc = CommonUtility.readPageData(fileName,
+	CommonConstants.PAGE_OBJECT_DIRECTORY_ULAYER_ACQ);
+	openAndValidate();
 	}
 
 	public Boolean validate_textField() {
@@ -41,7 +68,26 @@ public class PlanSelectorPage extends GlobalWebElements{
 			
 		}
 		
-		
+	@Override
+    public void openAndValidate() {
+           validate(planselectoruhcpage);
+           JSONObject jsonObject = new JSONObject();
+           for (String key : planselectoruhc.getExpectedData().keySet()) {
+                  WebElement element = findElement(planselectoruhc.getExpectedData().get(key));
+                  if (null != element) {
+                        if (validate(element)) {
+                               try {
+                                      jsonObject.put(key, element.getText());
+                               } catch (JSONException e) {
+                                      // TODO Auto-generated catch block
+                                      e.printStackTrace();
+                               }
+                        }
+                  }
+           }
+           planselectoruhcJson = jsonObject;
+    }
+
 	
 
 		
