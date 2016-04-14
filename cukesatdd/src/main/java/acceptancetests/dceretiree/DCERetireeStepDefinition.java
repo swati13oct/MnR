@@ -10,16 +10,21 @@ import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import pages.acquisition.bluelayer.OurPlansPage;
 import pages.acquisition.uhcretiree.AcquisitionHomePage;
+import pages.acquisition.uhcretiree.DrugDetailsPage;
 import pages.acquisition.uhcretiree.EnterDrugPage;
+import pages.acquisition.uhcretiree.SelectDosagePage;
 import pages.acquisition.uhcretiree.SelectFormularyPage;
 import acceptancetests.atdd.data.CommonConstants;
 import acceptancetests.atdd.data.acquisition.PageConstants;
 import acceptancetests.dceretiree.data.DCERetireeCommonConstants;
 import acceptancetests.globalfooter.data.AcquistionCommonConstants;
+import acceptancetests.lookupzipcode.data.ZipLookupCommonConstants;
 import atdd.framework.MRScenario;
 import cucumber.annotation.en.And;
 import cucumber.annotation.en.Given;
+import cucumber.annotation.en.Then;
 import cucumber.annotation.en_au.When;
 import cucumber.table.DataTable;
 
@@ -71,7 +76,7 @@ public class DCERetireeStepDefinition {
 		JSONObject selectFormularyExpectedJSON = MRScenario.readExpectedJson(
 				fileName, directory);
 
-		Assert.assertEquals(selectFormularyExpectedJSON, selectFormularyActualJSON);
+		Assert.assertEquals(selectFormularyExpectedJSON.toString(), selectFormularyActualJSON.toString());
 
 
 	}
@@ -82,39 +87,62 @@ public class DCERetireeStepDefinition {
 				.getBean(PageConstants.UHCRETIREE_ACQ_Formulary_PAGE);
 
 		EnterDrugPage enterDrugPage = selectFormularyPage.specificDrugFLowLink(); 
+		//added below
+		if (enterDrugPage != null) {
+			getLoginScenario().saveBean(PageConstants.UHCRETIREE_ACQ_ENTER_DRUG_PAGE,
+					enterDrugPage);
+			Assert.assertTrue(true);
+		} else {
+			Assert.fail("Error");
+		}
+	//	JSONObject selectEnterDrugPage = enterDrugPage.
 	} 
 
-	//	@And("^the user search the drug with drugInitials in UHCRetiree site$")
-	//	public void enterDrugName(DataTable givenAttributes)
-	//	{
-	//		String drugName = givenAttributes
-	//				.getGherkinRows().get(0).getCells().get(0);
-	//		EnterDrugPage enterDrugPage = (EnterDrugPage) getLoginScenario()
-	//				.getBean(PageConstants.UHCRETIREE_ACQ_ENTER_DRUG_PAGE);
-	//		if(enterDrugPage != null){
-	////			JSONObject ourPlansDropdownActualJson = enterDrugPage.enterDrugName(drugName);
-	//
-	//			/* Get expected data */
-	//			String fileName = "ourPlansDropdownErrorExpected";
-	//			String directory = CommonConstants.ACQUISITION_EXPECTED_DIRECTORY
-	//					+ File.separator + CommonConstants.SITE_BLUELAYER
-	//					+ File.separator
-	//					+ AcquistionCommonConstants.HEADER_FLOW_NAME
-	//					+ File.separator;
-	//			JSONObject ourPlansDropdownExpectedJson = MRScenario.readExpectedJson(
-	//					fileName, directory);
-	// 
-	//			getLoginScenario().saveBean(
-	//					AcquistionCommonConstants.OUR_PLANS_ACTUAL,
-	//					ourPlansDropdownActualJson);
-	//			getLoginScenario().saveBean(
-	//					AcquistionCommonConstants.OUR_PLANS_EXPECTED,
-	//					ourPlansDropdownExpectedJson);
-	//			Assert.assertTrue(true);
-	//			}
-	//			else{
-	//				Assert.fail("Error in Home page");
-	//			}
+	@And("^the user search the drug with drugInitials in UHCRetiree site$")
+	public void the_user_search_the_drug_with_drugInitials_in_UHCRetiree_site(DataTable givenAttributes)
+		{
+		System.out.println("drugInitials");
+			String drugName = givenAttributes
+					.getGherkinRows().get(0).getCells().get(0);
+			EnterDrugPage enterDrugPage = (EnterDrugPage) getLoginScenario()
+					.getBean(PageConstants.UHCRETIREE_ACQ_ENTER_DRUG_PAGE);
+			if(enterDrugPage != null){
+				EnterDrugPage actualFormularyDrugs = enterDrugPage.enterDrugName(drugName);				
+				getLoginScenario().saveBean(PageConstants.UHCRETIREE_ACQ_SEARCH_RESULTS_PAGE,
+						actualFormularyDrugs);
+				/* Get expected data */
+				String fileName = drugName.toLowerCase() + "searchresults";
+				String directory = CommonConstants.RETIREE_EXPECTED_DIRECTORY
+						+ File.separator
+						+ DCERetireeCommonConstants.FORMULARY_DRUG_SEARCH_FLOW_NAME
+						+ File.separator;
 
+				JSONObject selectFormularyExpectedJSON = MRScenario.readExpectedJson(
+						fileName, directory);
 
+				Assert.assertEquals(selectFormularyExpectedJSON.toString(), actualFormularyDrugs.formularyListJson.toString());
+			}
+		}
+	@And("^the user selects drugName in the drug list in UHCRetiree site")
+	public void select_drugName(DataTable givenAttributes)
+	{			
+		String drugName = givenAttributes
+				.getGherkinRows().get(0).getCells().get(0);
+		EnterDrugPage formularyDrug = (EnterDrugPage) getLoginScenario()
+				.getBean(PageConstants.UHCRETIREE_ACQ_SEARCH_RESULTS_PAGE);
+		
+		if(formularyDrug != null){
+			SelectDosagePage drugDetailsPage = formularyDrug.clickDrugName(drugName);
+			getLoginScenario().saveBean(PageConstants.UHCRETIREE_ACQ_DRUG_DETAILS_PAGE, drugDetailsPage);
+				Assert.assertTrue(true);
+			} else {
+				Assert.fail("Error");
+			}
+	}
+	
+	@Then("^the user validates drug name in UHCRetiree site")
+	public void validate_drugName()
+	{
+		System.out.println("VALIDATE");
+	}
 }

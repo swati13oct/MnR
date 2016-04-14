@@ -31,6 +31,10 @@ public class PageConstants {
 
 	public static final String UHCRETIREE_ACQ_ENTER_DRUG_PAGE = "uhcRetireeAcqEnterDrugPage";
 	
+	public static final String UHCRETIREE_ACQ_SEARCH_RESULTS_PAGE = "uhcRetireeAcqSearchResultsPage";
+
+	public static final String UHCRETIREE_ACQ_DRUG_DETAILS_PAGE = "uhcRetireeAcqDrugDetailsPage";
+	
 	public static final String VPP_PLAN_SUMMARY_PAGE = "vppPlanSummaryPage";
 
 	public static final String VPP_PLAN_DETAILS_PAGE = "vppPlanDetailsPage";
