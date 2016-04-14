@@ -44,13 +44,12 @@ public class RegistrationSuccessPage extends UhcDriver {
 	}
 
 	public String getContent() {
-		CommonUtility.checkPageIsReady(driver);
 		return registrationSuccessContent.getText(); // get page id
 	}
 
 	public AccountHomePage navigateToHomePage() {
 		homePageLink.click();
-		if (driver.getTitle().equalsIgnoreCase(
+		if (getTitle().equalsIgnoreCase(
 				"AARP Medicare Plans | My Account Home"))
 			return new AccountHomePage(driver);
 		else
@@ -86,6 +85,8 @@ public class RegistrationSuccessPage extends UhcDriver {
 
 		}
 		registrationSuccessJson = jsonObject;
+		
+		System.out.println("registrationSuccessJson---->"+registrationSuccessJson);
 	}
 
 	public JSONObject getExpectedData(Map<String, JSONObject> expectedDataMap, JSONObject registrationCommonExpected) {

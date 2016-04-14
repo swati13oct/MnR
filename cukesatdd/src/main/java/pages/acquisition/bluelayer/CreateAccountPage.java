@@ -30,7 +30,7 @@ public class CreateAccountPage extends UhcDriver {
 	@FindBy(id = "confirm_email")
 	private WebElement confirmEmailAdrField;
 
-	@FindBy(name = "Continue")
+	@FindBy(name = "continue")
 	private WebElement continueButton;
 
 	public CreateAccountPage(WebDriver driver) {
@@ -54,7 +54,7 @@ public class CreateAccountPage extends UhcDriver {
 		sendkeys(emailAdrField, emailId);
 		sendkeys(confirmEmailAdrField, confirmEmailId);
 		continueButton.click();
-		if (this.driver.getTitle().equalsIgnoreCase("Register Success")) {
+		if (currentUrl().contains("/home/register-success.html")) {
 			return new RegistrationSuccessPage(driver);
 		}
 		return null;
