@@ -689,9 +689,11 @@ public class CommonConstants {
 	
 
 	public static final String SELECT_FORMULARY_PAGE_DATA = "selectformulary.json";
+	
+	public static final String ENTER_DRUG_PAGE_DATA = "enterdrug.json";
 
-	public static final String RETIREE_EXPECTED_DIRECTORY = "/jsonresponse/uhcretiree/acquisition/";
-
+	public static final String RETIREE_EXPECTED_DIRECTORY = "/jsonresponse/uhcretiree/acquisition/";	
+	
 	public static final String AUTO_DRUG_SEARCH_PAGE_DATA = "autocompletedrugsearch.json";
 
 	private static final String ADD_PLAN_CONFIRMATION_ULAYER_DIRECTORY = "/jsonresponse/member/ulayer/registration/addplanconfirmation/";
