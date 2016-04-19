@@ -35,7 +35,7 @@ public class SelectDosagePage extends UhcDriver {
 	@FindBy(name = "Quantity")
 	WebElement quantityField;
 
-	@FindBy(className = "hdrWrap")
+	@FindBy(id = "content")
 	WebElement drugDetails;
 	
 	@FindBy(linkText = "Continue")
@@ -54,8 +54,8 @@ public class SelectDosagePage extends UhcDriver {
 	public SelectDosagePage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
-	/*	CommonUtility.waitForPageLoad(driver, drugDetails,
-				CommonConstants.TIMEOUT_30);*/
+		CommonUtility.waitForPageLoad(driver, drugDetails,
+				5);
 		String fileName = CommonConstants.DRUG_DOSAGE_PAGE_DATA;
 		drugDosageInfo = CommonUtility.readPageData(fileName,
 				CommonConstants.RETIREE_PAGE_OBJECT_DIRECTORY);
