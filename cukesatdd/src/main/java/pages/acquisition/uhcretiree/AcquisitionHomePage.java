@@ -20,6 +20,8 @@ public class AcquisitionHomePage extends UhcDriver {
 	public void openAndValidate() {
 
 		start(UHCRETIREE_ACQISITION_PAGE_URL);
+		
+		
 
 		validate(prescriptionsLink);
 	}
@@ -28,6 +30,8 @@ public class AcquisitionHomePage extends UhcDriver {
 	private WebElement prescriptionsLink;	
 
 	private static String UHCRETIREE_ACQISITION_PAGE_URL = MRConstants.UHCRETIREE_URL;
+	
+	private static String UHCRETIREE_SITE_MAP_URL =  MRConstants.UHCRETIREE_SITE_MAP_URL;
 
 	public AcquisitionHomePage(WebDriver driver) {
 		super(driver);

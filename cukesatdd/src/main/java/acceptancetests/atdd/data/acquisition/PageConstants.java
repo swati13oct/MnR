@@ -26,6 +26,8 @@ public class PageConstants {
 	public static final String ACQUISITION_HOME_PAGE = "acquisitionHomePage";
 
 	public static final String UHCRETIREE_ACQ_HOME_PAGE = "uhcRetireeAcqHomePage";
+	
+	public static final String UHCRETIREE_ACQ_SITE_MAP_PAGE = "uhcRetireeSiteMapPage";
 
 	public static final String UHCRETIREE_ACQ_Formulary_PAGE = "uhcRetireeAcqFormularyPage";
 
