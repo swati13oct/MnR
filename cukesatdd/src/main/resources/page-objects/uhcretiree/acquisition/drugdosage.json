@@ -1,9 +1,21 @@
 {
 "url":null,
 "expectedData":{
-"selectedDrugInfo":{
-"identifier":"xpath",
-"elementName":"/html/body/div[1]/div/div[1]/div/div[3]/div/div[11]/div/div/div/div[1]/h1"
+"selectedDrug":{
+"identifier":"id",
+"elementName":"selected"
+}, 
+"brandTable":{
+"identifier":"id",
+"elementName":"brandtable"
+},
+"genericTable":{
+"identifier":"id",
+"elementName": "generictable"
+},
+"bonustable":{
+"identifier":"id",
+"elementName":"bonustable"
 }
 }
 }

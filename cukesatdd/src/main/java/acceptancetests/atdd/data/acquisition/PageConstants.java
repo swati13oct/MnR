@@ -169,4 +169,12 @@ public class PageConstants {
 	public static final String HEALTH_TOOLS_PAGE = "healthtoolspage";
 
 	public static final String PRESCRIPTION_DRUG_TOOLS_PAGE = "presecriptiondrugtoolspage";
+
+	public static final String UHCRETIREE_ACQ_DRUG_NAME = "drugName";
+
+	public static final String UHCRETIREE_ACQ_DRUG_DOSAGE_ACTUAL = "drugDosageActualResponse";
+
+	public static final String UHCRETIREE_ACQ_DRUG_DOSAGE_EXPECTED = "drugDosageExpectedResponse";
+
+	public static final String UHCRETIREE_ACQ_DRUGLINK = "drugLink";
 }

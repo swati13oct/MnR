@@ -2,6 +2,8 @@ package pages.acquisition.uhcretiree;
 
 /*@author eb*/
 
+import java.util.concurrent.TimeUnit;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.openqa.selenium.By;
@@ -26,17 +28,32 @@ public class EnterDrugPage extends UhcDriver {
 	@FindBy(name = "drugInitials")
 	CharSequence[] drugInitials;
 	
-
+	@FindBy(id = "detailsPage")
+	private WebElement detailsPage;
+	
 	private PageData formularyList;
 	public JSONObject formularyListJson;
 	
-	public EnterDrugPage(WebDriver driver) {
+	public EnterDrugPage(WebDriver driver, boolean skipClick, String drugName) {
 		super(driver);
 		PageFactory.initElements(driver, this);
 		String fileName = CommonConstants.ENTER_DRUG_PAGE_DATA;
 		formularyList = CommonUtility.readPageData(fileName,
 				CommonConstants.RETIREE_PAGE_OBJECT_DIRECTORY);
-		openAndValidate();
+		if (skipClick != true){
+			openAndValidate();
+		} else {
+			//If it is already on the drug details page (skipClick == true) then send page a json object that contains "key":"skip"
+			validate(drugInputField);
+			JSONObject jsonObject = new JSONObject();
+			try {
+				jsonObject.put("DrugName", drugName);
+			} catch (JSONException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			formularyListJson = jsonObject;
+		}
 		//enterDrugName();
 	}
 
@@ -93,11 +110,15 @@ public class EnterDrugPage extends UhcDriver {
 		drugInputField.sendKeys(drugName);
 		findDrugBtn.click();	
 		System.out.println(getTitle());
-		//System.out.println(getDrugNameJson());
-		//return getDrugNameJson();
-		if (driver.getTitle().equalsIgnoreCase(
-				"Drug Search - G16 MAPD")) {
-			return new EnterDrugPage(driver);
+		String xpath = "/html/body/div[1]/div/div[1]/div/div[3]/div/div[11]/div/div/div/div[1]/h1";
+		String text = driver.findElement(By.xpath(xpath)).getText().toUpperCase();
+		
+		/*Wait for the page to load. For some drugs, it finds it right away and goes directly to the drug details page. 
+		* If this happens and the page is already on the Drug Details page. If it is, send true*/
+		CommonUtility.waitForPageLoad(driver, detailsPage, 5);
+		if (driver.getTitle().contains(
+				"Drug Search")){
+			return new EnterDrugPage(driver, driver.findElement(By.xpath(xpath)).getText().equalsIgnoreCase("DRUG DETAILS"), drugName);
 		}
 		//return getOurPlanDropDownJson();
 		return null;
@@ -105,8 +126,10 @@ public class EnterDrugPage extends UhcDriver {
 	}
 
 
-	public SelectDosagePage clickDrugName(String drugName) {
-		driver.findElement(By.className(drugName)).click();
+	public SelectDosagePage clickDrugName(String drugName, boolean skipClick) {
+		if (skipClick != true){
+			driver.findElement(By.className(drugName.toLowerCase())).click();
+		}
 		//System.out.println(getTitle());
 		return new SelectDosagePage(driver);
 	}

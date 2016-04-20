@@ -4,6 +4,7 @@ package pages.acquisition.uhcretiree;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -57,14 +58,12 @@ public class SelectFormularyPage extends UhcDriver {
 		formularyListJson = jsonObject;
 	}
 	
-	public EnterDrugPage specificDrugFLowLink() {
-		validate(specificDrugLink);
-		specificDrugLink.click();
-		if (driver
-				.getTitle()
+	public EnterDrugPage specificDrugFLowLink(String drugName) {
+		driver.findElement(By.linkText(drugName)).click();
+		if (driver.findElement(By.className("newsearch_h2")).getText()
 				.equalsIgnoreCase(
-						"Drug Search - G16 MAPD")) {
-			return new EnterDrugPage(driver);
+						"Enter drug name")) {
+			return new EnterDrugPage(driver, false, drugName);
 		}
 		return null;
 	}
