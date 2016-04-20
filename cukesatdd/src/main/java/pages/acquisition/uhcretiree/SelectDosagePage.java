@@ -55,7 +55,7 @@ public class SelectDosagePage extends UhcDriver {
 		super(driver);
 		PageFactory.initElements(driver, this);
 		CommonUtility.waitForPageLoad(driver, drugDetails,
-				5);
+				6);
 		String fileName = CommonConstants.DRUG_DOSAGE_PAGE_DATA;
 		drugDosageInfo = CommonUtility.readPageData(fileName,
 				CommonConstants.RETIREE_PAGE_OBJECT_DIRECTORY);

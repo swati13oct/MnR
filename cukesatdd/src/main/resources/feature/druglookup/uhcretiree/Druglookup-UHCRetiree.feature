@@ -26,3 +26,9 @@ Examples:
 		| CalPERS                           | Potiga       | Potiga       |
 		| CalPERS                           | Etodolac ER  | Etodolac ER  |
 		| CalPERS                           | Cialis       | Cialis       |
+		| ASRS and PSPRS (PDP)              | Ibuprofen    | Ibuprofen    |
+		| ASRS and PSPRS (PDP)              | Diflunisal   | Diflunisal   |
+		| ASRS and PSPRS (PDP)              | Anaprox DS   | Anaprox DS   |
+		| ASRS and PSPRS (PDP)              | Naprelan     | Naprelan     |
+		| ASRS and PSPRS (PDP)              | Etodolac ER  | Etodolac ER  |
+		| ASRS and PSPRS (PDP)              | Cialis       | Cialis       |
