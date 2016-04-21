@@ -179,4 +179,8 @@ public class PageConstants {
 	public static final String UHCRETIREE_ACQ_DRUG_DOSAGE_EXPECTED = "drugDosageExpectedResponse";
 
 	public static final String UHCRETIREE_ACQ_DRUGLINK = "drugLink";
+
+	public static final String UHCRETIREE_ACQ_RETIREES_OF_SELECTED_PLANS_HOME_PAGE = "retireesOfSelectedPlansHomePage";
+
+	public static final String UHCRETIREE_ACQ_DRUG_COVERAGE_OPTIONS_PAGE = "drugCoverageOptionsPage";
 }

@@ -1,1 +1,5 @@
-{"selectedDrug":"Your selected drug: Potiga","genericTable":"Generic Equivalent & Dosage Form Status\nAsk your doctor Not Covered - Benefit Exclusion","brandTable":"Medication Name & Dosage Form Status\nPotiga TAB 50MG Tier 4\nnull\nPotiga TAB 200MG Tier 4\nnull\nPotiga TAB 300MG Tier 4\nnull\nPotiga TAB 400MG Tier 4\nnull"}
+{
+    "selectedDrug": "Your selected drug: Potiga",
+    "genericTable": "Generic Equivalent & Dosage Form Status\nAsk your doctor Not Covered - Benefit Exclusion",
+    "brandTable": "Medication Name & Dosage Form Status\nPotiga TAB 50MG Tier 4\nPotiga TAB 200MG Tier 4\nPotiga TAB 300MG Tier 4\nPotiga TAB 400MG Tier 4"
+}

@@ -58,6 +58,11 @@ public class EnterDrugPage extends UhcDriver {
 	}
 
 
+	public EnterDrugPage(WebDriver driver) {
+		super(driver);
+	}
+
+
 	@Override
 	public void openAndValidate() {
 		validate(drugInputField);

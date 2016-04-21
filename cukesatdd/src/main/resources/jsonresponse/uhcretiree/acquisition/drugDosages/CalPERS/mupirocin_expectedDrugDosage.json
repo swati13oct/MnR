@@ -1,1 +1,5 @@
-{"selectedDrug":"Your selected drug: mupirocin","genericTable":"Generic Equivalent & Dosage Form Status\nAsk your doctor Not Covered - Benefit Exclusion","brandTable":"Medication Name & Dosage Form Status\nmupirocin OIN 2% Tier 1\nnull"}
+{
+    "selectedDrug": "Your selected drug: mupirocin",
+    "genericTable": "Generic Equivalent & Dosage Form Status\nAsk your doctor Not Covered - Benefit Exclusion",
+    "brandTable": "Medication Name & Dosage Form Status\nmupirocin OIN 2% Tier 1"
+}

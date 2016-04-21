@@ -1,1 +1,5 @@
-{"selectedDrug":"Your selected drug: Ponstel","genericTable":"Generic Equivalent & Dosage Form Status\nAsk your doctor Not Covered - Benefit Exclusion","brandTable":"Medication Name & Dosage Form Status\nPonstel","bonustable":"Bonus Drug & Dosage Form Status\nPonstel CAP 250MG Tier 2\nmefenamic acid CAP 250MG Tier 0"}
+{
+    "selectedDrug": "Your selected drug: Ponstel",
+    "genericTable": "Generic Equivalent & Dosage Form Status\nAsk your doctor Not Covered - Benefit Exclusion",
+    "bonustable": "Bonus Drug & Dosage Form Status\nPonstel CAP 250MG Tier 2\nmefenamic acid CAP 250MG Not Covered - Benefit Exclusion"
+}
