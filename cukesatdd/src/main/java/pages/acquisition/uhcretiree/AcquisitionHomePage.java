@@ -53,7 +53,7 @@ public class AcquisitionHomePage extends UhcDriver {
 	public RetireesOfSelectedPlans openDropDown(String groupName) {
 		 validate(dropDownMenu);
 		 Select dropdown = new Select(driver.findElement(By.id("new_form_GroupSelector")));
-		 dropdown.selectByVisibleText("San Francisco");
+		 dropdown.selectByVisibleText(groupName);
 		 System.out.println(getTitle());
 		 return new RetireesOfSelectedPlans(driver);
 //		return null;

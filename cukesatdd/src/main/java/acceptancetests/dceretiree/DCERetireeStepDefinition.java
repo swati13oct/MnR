@@ -82,6 +82,7 @@ public class DCERetireeStepDefinition {
 	public void the_user_selects_on_the_group_from_the_Retirees_of_selected_group_plans_drop_down(DataTable givenAttributes) {
 		String groupName = givenAttributes
 				.getGherkinRows().get(0).getCells().get(0);
+		getLoginScenario().saveBean(PageConstants.UHCRETIREE_ACQ_DRUGLINK, groupName);
 		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
 				.getBean(PageConstants.UHCRETIREE_ACQ_HOME_PAGE);
 		RetireesOfSelectedPlans retireesOfSelectedPlans = aquisitionhomepage.openDropDown(groupName);
@@ -113,7 +114,21 @@ public class DCERetireeStepDefinition {
 		}
 	} 
 
-	@And("^the user clicks on the Understand prescription drug coverage options links")
+	@And("^the user clicks on the Understand prescription drug coverage options tab")
+	public void click_seeIfMyMedicationIsCoveredTab()
+	{
+		RetireesOfSelectedPlans retireesOfSelectedPlans = (RetireesOfSelectedPlans) getLoginScenario()
+				.getBean(PageConstants.UHCRETIREE_ACQ_RETIREES_OF_SELECTED_PLANS_HOME_PAGE);
+		DrugCoverageOptionsPage drugCoverageOptionsPage = retireesOfSelectedPlans.clickDrugCoverageOptionsTab();
+		if (drugCoverageOptionsPage != null) {
+			getLoginScenario().saveBean(PageConstants.UHCRETIREE_ACQ_DRUG_COVERAGE_OPTIONS_PAGE, drugCoverageOptionsPage);
+			Assert.assertTrue(true);
+		} else {
+			Assert.fail("Error");
+		}
+	}
+	
+	@And("^the user clicks on the Understand prescription drug coverage options link")
 	public void click_understandPrescriptionLink() 
 	{
 		RetireesOfSelectedPlans retireesOfSelectedPlans = (RetireesOfSelectedPlans) getLoginScenario()
@@ -127,8 +142,10 @@ public class DCERetireeStepDefinition {
 		}	
 		
 	}
+	
+
 	@And("^the user clicks on the See if my medication is covered link")
-	public void click_seeIfMyMedicationIsCovered()
+	public void click_seeIfMyMedicationIsCoveredLink()
 	{
 		DrugCoverageOptionsPage drugCoverageOptionsPage = (DrugCoverageOptionsPage) getLoginScenario()
 				.getBean(PageConstants.UHCRETIREE_ACQ_DRUG_COVERAGE_OPTIONS_PAGE);
@@ -156,7 +173,7 @@ public class DCERetireeStepDefinition {
 				String fileName = drugName.toLowerCase() + "searchresults";
 				String directory = CommonConstants.RETIREE_EXPECTED_DIRECTORY
 						+ File.separator
-						+ DCERetireeCommonConstants.FORMULARY_DRUG_SEARCH_FLOW_NAME
+						+ DCERetireeCommonConstants.FORMULARY_DRUG_SEARCH_FLOW_NAME						
 						+ File.separator;
 
 				JSONObject selectFormularyExpectedJSON = MRScenario.readExpectedJson(
@@ -218,22 +235,7 @@ public class DCERetireeStepDefinition {
 		JSONObject drugDosageActualJson = (JSONObject) getLoginScenario()
 				.getBean(PageConstants.UHCRETIREE_ACQ_DRUG_DOSAGE_ACTUAL);
 		
-		try {
-			Assert.assertEquals(drugDosageExpectedJson.get("selectedDrug").toString(), drugDosageActualJson.get("selectedDrug").toString());
-			Assert.assertEquals(drugDosageExpectedJson.get("genericTable").toString(), drugDosageActualJson.get("genericTable").toString());
-			if (drugDosageExpectedJson.has("bonustable") || drugDosageActualJson.has("bonustable")){
-				Assert.assertEquals(drugDosageExpectedJson.get("bonustable").toString(), drugDosageActualJson.get("bonustable").toString());
-			}
-			if (drugDosageExpectedJson.has("brandTable") || drugDosageActualJson.has("brandTable")){
-				Assert.assertEquals(drugDosageExpectedJson.get("brandTable").toString(), drugDosageActualJson.get("brandTable").toString());
-			}
-		//	JSONAssert.assertEquals(drugDosageExpectedJson, drugDosageActualJson, true);
-		} catch (JSONException e){
-			System.out
-			.println("error comparing drug dosages actual and expected response"
-					+ e);
-			
-		}
+		Assert.assertEquals(drugDosageExpectedJson.toString(), drugDosageActualJson.toString());
 	}
 	
 	@After
