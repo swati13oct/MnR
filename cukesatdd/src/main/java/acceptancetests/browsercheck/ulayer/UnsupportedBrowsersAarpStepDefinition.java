@@ -16,6 +16,7 @@ import acceptancetests.atdd.data.CommonConstants;
 import acceptancetests.atdd.data.acquisition.PageConstants;
 import acceptancetests.globalfooter.data.AcquistionCommonConstants;
 import atdd.framework.MRScenario;
+import cucumber.annotation.After;
 import cucumber.annotation.en.Given;
 import cucumber.annotation.en.Then;
 import cucumber.annotation.en.When;
@@ -80,5 +81,13 @@ public class UnsupportedBrowsersAarpStepDefinition {
 			e.printStackTrace();
 		}
 	}	
+	
+	@After
+	public void tearDown() {
+		WebDriver wd = (WebDriver) getLoginScenario().getBean(
+				CommonConstants.WEBDRIVER);
+		wd.quit();
+		getLoginScenario().flushBeans();
+	}
 	
 }
