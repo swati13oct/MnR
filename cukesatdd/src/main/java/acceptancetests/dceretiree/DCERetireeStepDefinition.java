@@ -12,7 +12,9 @@ import org.openqa.selenium.WebDriver;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import pages.acquisition.uhcretiree.AcquisitionHomePage;
+import pages.acquisition.uhcretiree.DrugCoverageOptionsPage;
 import pages.acquisition.uhcretiree.EnterDrugPage;
+import pages.acquisition.uhcretiree.RetireesOfSelectedPlans;
 import pages.acquisition.uhcretiree.SelectDosagePage;
 import pages.acquisition.uhcretiree.SelectFormularyPage;
 import acceptancetests.atdd.data.CommonConstants;
@@ -74,12 +76,26 @@ public class DCERetireeStepDefinition {
 				fileName, directory);
 
 		Assert.assertEquals(selectFormularyExpectedJSON.toString(), selectFormularyActualJSON.toString());
-
-
+	}
+	
+	@When("^the user selects on the group from the Retirees of selected group plans drop down$")
+	public void the_user_selects_on_the_group_from_the_Retirees_of_selected_group_plans_drop_down(DataTable givenAttributes) {
+		String groupName = givenAttributes
+				.getGherkinRows().get(0).getCells().get(0);
+		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
+				.getBean(PageConstants.UHCRETIREE_ACQ_HOME_PAGE);
+		RetireesOfSelectedPlans retireesOfSelectedPlans = aquisitionhomepage.openDropDown(groupName);
+		if (retireesOfSelectedPlans != null) {
+			getLoginScenario().saveBean(PageConstants.UHCRETIREE_ACQ_RETIREES_OF_SELECTED_PLANS_HOME_PAGE, retireesOfSelectedPlans);
+			Assert.assertTrue(true);
+		} else {
+			Assert.fail("Error");
+		}		
 	}
 
 	@And("^the user clicks on drugLinks available on the links page in UHCRetiree site$")
-	public void click_specificDrugFLowLink(DataTable givenAttributes) {
+	public void click_specificDrugFLowLink(DataTable givenAttributes) 
+	{
 		String drugName = givenAttributes
 				.getGherkinRows().get(0).getCells().get(0);
 		SelectFormularyPage selectFormularyPage = (SelectFormularyPage) getLoginScenario()
@@ -97,6 +113,34 @@ public class DCERetireeStepDefinition {
 		}
 	} 
 
+	@And("^the user clicks on the Understand prescription drug coverage options links")
+	public void click_understandPrescriptionLink() 
+	{
+		RetireesOfSelectedPlans retireesOfSelectedPlans = (RetireesOfSelectedPlans) getLoginScenario()
+				.getBean(PageConstants.UHCRETIREE_ACQ_RETIREES_OF_SELECTED_PLANS_HOME_PAGE);
+		DrugCoverageOptionsPage drugCoverageOptionsPage = retireesOfSelectedPlans.clickDrugCoverageOptionsLink();
+		if (drugCoverageOptionsPage != null) {
+			getLoginScenario().saveBean(PageConstants.UHCRETIREE_ACQ_DRUG_COVERAGE_OPTIONS_PAGE, drugCoverageOptionsPage);
+			Assert.assertTrue(true);
+		} else {
+			Assert.fail("Error");
+		}	
+		
+	}
+	@And("^the user clicks on the See if my medication is covered link")
+	public void click_seeIfMyMedicationIsCovered()
+	{
+		DrugCoverageOptionsPage drugCoverageOptionsPage = (DrugCoverageOptionsPage) getLoginScenario()
+				.getBean(PageConstants.UHCRETIREE_ACQ_DRUG_COVERAGE_OPTIONS_PAGE);
+		EnterDrugPage enterDrugPage = drugCoverageOptionsPage.clickSeeIfMyMedicationLink();
+		if (enterDrugPage != null) {
+			getLoginScenario().saveBean(PageConstants.UHCRETIREE_ACQ_ENTER_DRUG_PAGE,
+					enterDrugPage);
+			Assert.assertTrue(true);
+		} else {
+			Assert.fail("Error");
+		}
+	}
 	@And("^the user search the drug with drugInitials in UHCRetiree site$")
 	public void the_user_search_the_drug_with_drugInitials_in_UHCRetiree_site(DataTable givenAttributes)
 		{
@@ -121,6 +165,8 @@ public class DCERetireeStepDefinition {
 				Assert.assertEquals(selectFormularyExpectedJSON.toString(), actualFormularyDrugs.formularyListJson.toString());
 			}
 		}
+	
+	
 	@And("^the user selects drugName in the drug list in UHCRetiree site")
 	public void select_drugName(DataTable drugNameAttributes)
 	{			
