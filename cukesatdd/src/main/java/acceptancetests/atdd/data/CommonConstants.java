@@ -701,6 +701,10 @@ public class CommonConstants {
 	private static final String REGISTRATION_SUCCESS_BLUELAYER_DIRECTORY = "/jsonresponse/member/bluelayer/registration/registrationsuccess/";
 
 
-	public static final String SECOND_PLAN_INFO_BLUELAYER_PAGE_DATA = "secondplaninfo.json";	
+	public static final String SECOND_PLAN_INFO_BLUELAYER_PAGE_DATA = "secondplaninfo.json";
+	
+	public static final String AARP_BROWSER_CHECK_DATA = "aarpbrowsercheck.json";
+	
+	public static final String UHC_BROWSER_CHECK_DATA = "uhcbrowsercheck.json";
 	
 }
