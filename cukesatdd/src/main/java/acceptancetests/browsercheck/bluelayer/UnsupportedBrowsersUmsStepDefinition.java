@@ -70,11 +70,14 @@ public class UnsupportedBrowsersUmsStepDefinition {
 		String browserName = caps.getBrowserName();
 		String browserVersion = caps.getVersion();		
 		Assert.assertEquals("firefox", browserName);
-		Assert.assertEquals("38.0.1", browserVersion);		
+		Assert.assertEquals("28.0", browserVersion);
+		System.out.println("Blue layer failure");
 		JSONObject browserCheckActual = (JSONObject) getLoginScenario()
 				.getBean(AcquistionCommonConstants.BROWSER_CHECK_ACTUAL);
 		JSONObject browserCheckExpectedJson = (JSONObject) getLoginScenario()
-				.getBean(AcquistionCommonConstants.BROWSER_CHECK_EXPECTED);		
+				.getBean(AcquistionCommonConstants.BROWSER_CHECK_EXPECTED);	
+		System.out.println(browserCheckActual);
+		System.out.println(browserCheckExpectedJson);
 		try {
 			JSONAssert.assertEquals(browserCheckActual,
 					browserCheckExpectedJson, true);
@@ -89,7 +92,7 @@ public class UnsupportedBrowsersUmsStepDefinition {
 		WebDriver wd = (WebDriver) getLoginScenario().getBean(
 				CommonConstants.WEBDRIVER);
 		wd.quit();
-		getLoginScenario().flushBeans();
+		//getLoginScenario().flushBeans();
 	}
 	
 }

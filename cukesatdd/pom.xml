@@ -62,7 +62,7 @@
 							<daemon>true</daemon>
 
 							<includes>
-								<include>**/RunMRAtddTestLogin.class</include>
+								<include>**/UnsupportedBrowsersAarpStepDefinition.class</include>
 							</includes>
 							<testFailureIgnore>false</testFailureIgnore>
 
