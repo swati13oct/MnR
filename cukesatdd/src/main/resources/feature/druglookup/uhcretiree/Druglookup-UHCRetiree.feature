@@ -47,7 +47,6 @@ And the user selects drugName in the drug list in UHCRetiree site
 Then the user validates drug dosages in UHCRetiree site
 Examples:
 		| group                             | drugInitials | drugName  |
-	 	| North Carolina State Health Plan  | Duragesic    | Duragesic    |
 	 	| San Francisco                     | lipi         | Lipitor   |		
 	 	| North Carolina State Health Plan  | lipi         | Lipitor   |	
 	 	| Georgia SHBP                      | lipi         | Lipitor   |
