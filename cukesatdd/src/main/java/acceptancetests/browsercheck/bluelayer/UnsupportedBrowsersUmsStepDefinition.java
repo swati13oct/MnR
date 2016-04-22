@@ -1,12 +1,22 @@
 package acceptancetests.browsercheck.bluelayer;
 
+import java.io.File;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+import org.junit.Assert;
+import org.openqa.selenium.Capabilities;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.remote.RemoteWebDriver;
+import org.skyscreamer.jsonassert.JSONAssert;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import pages.acquisition.bluelayer.AcquisitionHomePage;
 import acceptancetests.atdd.data.CommonConstants;
 import acceptancetests.atdd.data.acquisition.PageConstants;
+import acceptancetests.globalfooter.data.AcquistionCommonConstants;
 import atdd.framework.MRScenario;
+import cucumber.annotation.After;
 import cucumber.annotation.en.Given;
 import cucumber.annotation.en.Then;
 import cucumber.annotation.en.When;
@@ -33,13 +43,53 @@ public class UnsupportedBrowsersUmsStepDefinition {
 	
 	@When("^the user is on the home page$")
 	public void ums_home_page() {
-		//TO:DO
+		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
+				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+		JSONObject browserCheckActual = aquisitionhomepage.getBrowserCheck();
+		// Get expected data 
+		String fileName = "browsercheckexpected";
+		String directory = CommonConstants.ACQUISITION_EXPECTED_DIRECTORY
+				+ File.separator + CommonConstants.SITE_BLUELAYER
+				+ File.separator
+				+ AcquistionCommonConstants.BROWSER_CHECK_FLOW_NAME
+				+ File.separator;
+		JSONObject browserCheckExpectedJson = MRScenario.readExpectedJson(
+				fileName, directory);
+
+		getLoginScenario().saveBean(
+				AcquistionCommonConstants.BROWSER_CHECK_ACTUAL,
+				browserCheckActual);
+		getLoginScenario().saveBean(
+				AcquistionCommonConstants.BROWSER_CHECK_EXPECTED,
+				browserCheckExpectedJson);
 	}
 	
 	@Then("^the user validates error message on the browser$")
 	public void ums_browser_check() {
-		//TO:DO
-		
+		Capabilities caps = ((RemoteWebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER)).getCapabilities();
+		String browserName = caps.getBrowserName();
+		String browserVersion = caps.getVersion();		
+		Assert.assertEquals("firefox", browserName);
+		Assert.assertEquals("38.0.1", browserVersion);		
+		JSONObject browserCheckActual = (JSONObject) getLoginScenario()
+				.getBean(AcquistionCommonConstants.BROWSER_CHECK_ACTUAL);
+		JSONObject browserCheckExpectedJson = (JSONObject) getLoginScenario()
+				.getBean(AcquistionCommonConstants.BROWSER_CHECK_EXPECTED);		
+		try {
+			JSONAssert.assertEquals(browserCheckActual,
+					browserCheckExpectedJson, true);
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	@After
+	public void tearDown() {
+		WebDriver wd = (WebDriver) getLoginScenario().getBean(
+				CommonConstants.WEBDRIVER);
+		wd.quit();
+		getLoginScenario().flushBeans();
 	}
 	
 }

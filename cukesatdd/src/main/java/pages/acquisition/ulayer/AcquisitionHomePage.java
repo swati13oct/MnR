@@ -198,8 +198,10 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	private static String AARP_ACQISITION_PAGE_URL = MRConstants.AARP_URL;
 
 	private PageData globalFooter;
+	private PageData browserCheckData;
 
 	public JSONObject globalFooterJson;
+	public JSONObject browserCheckJson;
 
 	private PageData homePageDisclaimer;
 	public JSONObject homePageDisclaimerJson;
@@ -396,6 +398,31 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		globalFooterJson = jsonObject;
 
 		return globalFooterJson;
+	}
+	
+	public JSONObject getBrowserCheck() {
+		String fileName = CommonConstants.AARP_BROWSER_CHECK_DATA;
+		browserCheckData = CommonUtility.readPageData(fileName,
+				CommonConstants.PAGE_OBJECT_DIRECTORY_ULAYER_ACQ);
+
+		JSONObject jsonObject = new JSONObject();
+		for (String key : browserCheckData.getExpectedData().keySet()) {
+			WebElement element = findElement(browserCheckData.getExpectedData()
+					.get(key));
+			if (element != null) {
+				if (validate(element)) {
+					try {
+						jsonObject.put(key, element.getText());
+					} catch (JSONException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				}
+			}
+		}
+		browserCheckJson = jsonObject;
+
+		return browserCheckJson;
 	}
 
 	public JSONObject accessingOurPlanslink() {

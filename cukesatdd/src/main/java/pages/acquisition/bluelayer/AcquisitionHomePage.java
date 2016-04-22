@@ -83,6 +83,8 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	
 	@FindBy(xpath = "//div[@id='findazip_box']/div/div/div/h4")
 	private WebElement zipCodeSearchPopupHeading;
+	
+	
 
 	private PageData homePageDisclaimer;
 	public JSONObject homePageDisclaimerJson;
@@ -104,6 +106,10 @@ public class AcquisitionHomePage extends GlobalWebElements {
 
 	private PageData ourPlansNav;
 	public JSONObject ourPlansNavJson;
+	
+	private PageData browserCheckData;
+	public JSONObject browserCheckJson;
+	
 
 	private static String UMS_ACQISITION_PAGE_URL = MRConstants.UHC_URL;
 
@@ -190,6 +196,31 @@ public class AcquisitionHomePage extends GlobalWebElements {
 
 		return globalHeaderJson;
 
+	}
+	
+	public JSONObject getBrowserCheck() {
+		String fileName = CommonConstants.UHC_BROWSER_CHECK_DATA;
+		browserCheckData = CommonUtility.readPageData(fileName,
+				CommonConstants.PAGE_OBJECT_DIRECTORY_BLUELAYER_ACQ);
+
+		JSONObject jsonObject = new JSONObject();
+		for (String key : browserCheckData.getExpectedData().keySet()) {
+			WebElement element = findElement(browserCheckData.getExpectedData()
+					.get(key));
+			if (element != null) {
+				if (validate(element)) {
+					try {
+						jsonObject.put(key, element.getText());
+					} catch (JSONException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				}
+			}
+		}
+		browserCheckJson = jsonObject;
+
+		return browserCheckJson;
 	}
 
 	public JSONObject accessViewAllDisclaimerInformation() {

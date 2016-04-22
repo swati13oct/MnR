@@ -54,6 +54,9 @@ public class AcquistionCommonConstants {
 	
 	public static final String HEALTH_AND_WELLNESS_DROPDOWN_ACTUAL = "healthandwellnessdropdownactual";
 	public static final String HEALTH_AND_WELLNESS_DROPDOWN_EXPECTED = "healthandwellnessdropdownexpectedJson";
+	public static final String BROWSER_CHECK_FLOW_NAME = "browsercheck";
+	public static final String BROWSER_CHECK_ACTUAL = "browserCheckActual";
+	public static final String BROWSER_CHECK_EXPECTED = "browserCheckExpected";
 	
 	
 
