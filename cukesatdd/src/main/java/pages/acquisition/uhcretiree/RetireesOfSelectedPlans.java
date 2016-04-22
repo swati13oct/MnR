@@ -32,8 +32,21 @@ public class RetireesOfSelectedPlans extends UhcDriver {
 		CommonUtility.waitForPageLoad(driver, coverageOptionsLink, 3);
 		driver.findElement(By.linkText("Understand prescription drug coverage options")).click();
 //		coverageOptionsLink.click();
-		if (getTitle().contains(
-				"Prescription Drug Coverage")) {
+		String title = getTitle().toLowerCase();
+		if (title.contains(
+				"drug coverage")) {
+			return new DrugCoverageOptionsPage(driver);
+		}
+		return null;
+	}
+
+	public DrugCoverageOptionsPage clickDrugCoverageOptionsTab() {
+		CommonUtility.waitForPageLoad(driver, coverageOptionsLink, 3);
+		driver.findElement(By.xpath("/html/body/div[1]/div/div[1]/div/div[2]/div/div/div/div/div[1]/div[4]/div/div")).click();
+//		coverageOptionsLink.click();
+		String title = getTitle().toLowerCase();
+		if (title.contains(
+				"drug coverage")) {
 			return new DrugCoverageOptionsPage(driver);
 		}
 		return null;

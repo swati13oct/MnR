@@ -31,11 +31,7 @@ public class DrugCoverageOptionsPage extends UhcDriver {
 	public EnterDrugPage clickSeeIfMyMedicationLink() {
 		driver.findElement(By.linkText("See if my medication is covered")).click();
 		CommonUtility.waitForPageLoad(driver, inputFilter, 3);
-		if (getTitle().contains(
-				"Drug Search")) {
-			return new EnterDrugPage(driver);
-		}
-		return null;
+		return new EnterDrugPage(driver);
 	}
 
 }

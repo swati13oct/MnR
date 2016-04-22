@@ -2,8 +2,6 @@ package pages.acquisition.uhcretiree;
 
 /*@author eb*/
 
-import java.util.concurrent.TimeUnit;
-
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.openqa.selenium.By;
@@ -54,7 +52,6 @@ public class EnterDrugPage extends UhcDriver {
 			}
 			formularyListJson = jsonObject;
 		}
-		//enterDrugName();
 	}
 
 
@@ -85,47 +82,27 @@ public class EnterDrugPage extends UhcDriver {
 		formularyListJson = jsonObject;
 	}
 
-
-	/*public JSONObject getDrugNameJson(){
-		/*String fileName = CommonConstants.ENTER_DRUG_PAGE_DATA;
-		PageData ourPlansNav = CommonUtility.readPageData(fileName,
-				CommonConstants.RETIREE_PAGE_OBJECT_DIRECTORY);*/
-
-	/*	JSONObject jsonObject = new JSONObject();
-		for (String key : ourPlansNav.getExpectedData().keySet()) {
-			WebElement element = findElement(ourPlansNav.getExpectedData()
-					.get(key));
-			if (element != null) {
-				if(validate(element)){
-					try {
-						jsonObject.put(key, element.getText());
-					} catch (JSONException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
-				}
-			}
-		}
-		JSONObject ourPlansNavJson = jsonObject;
-		return ourPlansNavJson;
-	}*/
-
 	public EnterDrugPage enterDrugName(String drugName) {
-		validate(drugInputField);
-		drugInputField.sendKeys(drugName);
-		findDrugBtn.click();	
-		System.out.println(getTitle());
-		String xpath = "/html/body/div[1]/div/div[1]/div/div[3]/div/div[11]/div/div/div/div[1]/h1";
-		String text = driver.findElement(By.xpath(xpath)).getText().toUpperCase();
+		
+		driver.findElement(By.id("drugNameFilter")).sendKeys(drugName);
+		driver.findElement(By.id("findDrugsButton")).click();
 		
 		/*Wait for the page to load. For some drugs, it finds it right away and goes directly to the drug details page. 
-		* If this happens and the page is already on the Drug Details page. If it is, send true*/
+		* If this happens and the page is already on the Drug Details page, send true*/
 		CommonUtility.waitForPageLoad(driver, detailsPage, 5);
-		if (driver.getTitle().contains(
-				"Drug Search")){
-			return new EnterDrugPage(driver, driver.findElement(By.xpath(xpath)).getText().equalsIgnoreCase("DRUG DETAILS"), drugName);
+		
+		boolean skipClick;
+		String bodyText = driver.findElement(By.tagName("body")).getText().toUpperCase();
+		if (bodyText.contains("DRUG DETAILS")){
+			skipClick = true;
+		} else {
+			skipClick = false;
 		}
-		//return getOurPlanDropDownJson();
+		String title = getTitle().toLowerCase();
+		if (title.contains(
+				"search")){
+			return new EnterDrugPage(driver, skipClick, drugName);
+		}
 		return null;
 
 	}
@@ -135,7 +112,6 @@ public class EnterDrugPage extends UhcDriver {
 		if (skipClick != true){
 			driver.findElement(By.className(drugName.toLowerCase())).click();
 		}
-		//System.out.println(getTitle());
 		return new SelectDosagePage(driver);
 	}
 
