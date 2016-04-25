@@ -28,6 +28,13 @@ public class PageConstants {
 	public static final String UHCRETIREE_ACQ_HOME_PAGE = "uhcRetireeAcqHomePage";
 	
 	public static final String UHCRETIREE_ACQ_SITE_MAP_PAGE = "uhcRetireeSiteMapPage";
+	
+	public static final String RALLY_TOOL_PAGE = "rallytool";
+	
+	public static final String CALPER_FIND_A_PROVIDER = "calperfindaprovider";
+	
+	
+	
 
 	public static final String UHCRETIREE_ACQ_Formulary_PAGE = "uhcRetireeAcqFormularyPage";
 
@@ -171,4 +178,16 @@ public class PageConstants {
 	public static final String HEALTH_TOOLS_PAGE = "healthtoolspage";
 
 	public static final String PRESCRIPTION_DRUG_TOOLS_PAGE = "presecriptiondrugtoolspage";
+
+	public static final String VERIZON_PROVIDER_PAGE_URL = "verizonproviderpage";
+
+	public static final String RALLY_VERIZON_FIND_A_PHYSICIAN = "physicianlink";
+	
+	public static final String VERIZON_HOME_PAGE_URL = "verizonhomepages";
+	
+	public static final String CALPERS_HOME_PAGE = "calpers";
+	
+	public static final String CALPERS_SITE_MAP = "calpersitemap";
+
+	public static final String VERIZON_SITE_MAP_URL = "versitemaprally";
 }

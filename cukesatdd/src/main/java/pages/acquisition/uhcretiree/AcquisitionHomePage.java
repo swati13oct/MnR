@@ -1,5 +1,7 @@
 package pages.acquisition.uhcretiree;
 
+import java.util.ArrayList;
+
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -28,6 +30,10 @@ public class AcquisitionHomePage extends UhcDriver {
 
 	@FindBy(linkText = "Look up prescription drugs")
 	private WebElement prescriptionsLink;	
+	
+
+	@FindBy(xpath= ".//*[@id='main']/div/div[1]/div/div[4]/div[1]/div/div[1]/div[2]/div/div/div/p[2]/a")
+	private WebElement lookupproviderLink;
 
 	private static String UHCRETIREE_ACQISITION_PAGE_URL = MRConstants.UHCRETIREE_URL;
 	
@@ -46,6 +52,21 @@ public class AcquisitionHomePage extends UhcDriver {
 						"UnitedHealthcare Group Retiree – Search for a Drug")) {
 			return new SelectFormularyPage(driver);
 		}
+		return null;
+	}
+
+	public Rallytool_Page lookupproviderclick() {
+		validate(lookupproviderLink);
+		lookupproviderLink.click();
+		ArrayList<String> tabs = new ArrayList<String>(
+				driver.getWindowHandles());
+				driver.switchTo().window(tabs.get(1));
+		if (getTitle().equalsIgnoreCase(
+						"Find Care")) {
+			return new Rallytool_Page(driver);
+		}
+		
+		// TODO Auto-generated method stub
 		return null;
 	} 
 
