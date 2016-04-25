@@ -62,9 +62,12 @@ public class AcquisitionHomePage extends GlobalWebElements {
 
 	@FindBy(id = "zipcodebtn")
 	private WebElement findPlansButton;
-
-	@FindBy(id = "takequizbtn")
+	
+	@FindBy(id="takequizbtn")
 	private WebElement takequizbtn;
+
+	@FindBy(id = "compareplans")
+	private WebElement compareplans;
 
 	@FindBy(id = "picktopicbtn")
 	private WebElement picktopicbtn;
@@ -1248,6 +1251,24 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		takequizbtn.click();
 		if (getTitle().equalsIgnoreCase("Plan Selector")) {
 			return new PlanSelectorPage(driver);
+		}
+		return null;
+	}
+	
+	public PlanSelectorPage planselector_click() {
+		compareplans.click();
+		if (getTitle().equalsIgnoreCase("Plan Selector")) {
+			return new PlanSelectorPage(driver);
+		}
+		return null;
+	}
+	
+	public ContactUsAARPPage contactUsFooterClick() {
+		validate(footerContactUsLink);
+		footerContactUsLink.click();
+		validate(footerContactUsLink);
+		if (driver.getTitle().equalsIgnoreCase("Contact UnitedHealthcare® | AARP® Medicare Plans from UnitedHealthcare")) {
+			return new ContactUsAARPPage(driver);
 		}
 		return null;
 	}

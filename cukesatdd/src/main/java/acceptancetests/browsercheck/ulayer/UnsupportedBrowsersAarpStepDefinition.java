@@ -11,15 +11,20 @@ import org.openqa.selenium.remote.RemoteWebDriver;
 import org.skyscreamer.jsonassert.JSONAssert;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import pages.acquisition.ulayer.AcquisitionHomePage;
 import acceptancetests.atdd.data.CommonConstants;
 import acceptancetests.atdd.data.acquisition.PageConstants;
+import acceptancetests.atdd.data.ulayer.Page;
 import acceptancetests.globalfooter.data.AcquistionCommonConstants;
+import acceptancetests.planselector.data.PlanSelectorCommonConstants;
 import atdd.framework.MRScenario;
 import cucumber.annotation.After;
+import cucumber.annotation.en.And;
 import cucumber.annotation.en.Given;
 import cucumber.annotation.en.Then;
 import cucumber.annotation.en.When;
+import pages.acquisition.ulayer.AcquisitionHomePage;
+import pages.acquisition.ulayer.ContactUsAARPPage;
+import pages.acquisition.ulayer.PlanSelectorPage;
 
 public class UnsupportedBrowsersAarpStepDefinition {
 	
@@ -68,11 +73,14 @@ public class UnsupportedBrowsersAarpStepDefinition {
 		String browserName = caps.getBrowserName();
 		String browserVersion = caps.getVersion();		
 		Assert.assertEquals("firefox", browserName);
-		Assert.assertEquals("38.0.1", browserVersion);		
+		Assert.assertEquals("28.0", browserVersion);
+		System.out.println("Failure");
 		JSONObject browserCheckActual = (JSONObject) getLoginScenario()
 				.getBean(AcquistionCommonConstants.BROWSER_CHECK_ACTUAL);
 		JSONObject browserCheckExpectedJson = (JSONObject) getLoginScenario()
 				.getBean(AcquistionCommonConstants.BROWSER_CHECK_EXPECTED);		
+		System.out.println(browserCheckActual);
+		System.out.println(browserCheckExpectedJson);
 		try {
 			JSONAssert.assertEquals(browserCheckActual,
 					browserCheckExpectedJson, true);
@@ -82,12 +90,47 @@ public class UnsupportedBrowsersAarpStepDefinition {
 		}
 	}	
 	
+	@And("^the user clicks on contact us link$")
+	public void user_clicks_on_contact_us_link()
+	{
+		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
+				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+		ContactUsAARPPage contactUsAARPPage= aquisitionhomepage.contactUsFooterClick();
+		if(contactUsAARPPage!= null){
+			getLoginScenario().saveBean(PageConstants.AARP_Contact_US_PAGE,
+					contactUsAARPPage);
+			
+			Assert.assertTrue(true);
+		} else {
+			Assert.fail("contactus page not found");
+		}
+	}
+	
+	@And("^the user clicks on Planselector link$")
+	public void user_clicks_on_Planselector_link()
+	{
+		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
+				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+		PlanSelectorPage planselectorAARP= aquisitionhomepage.planselector_click();
+		if (planselectorAARP != null)
+		{
+			getLoginScenario().saveBean(PlanSelectorCommonConstants.PLAN_SELECTOR_PLAN,planselectorAARP);
+			Assert.assertTrue(true);
+				
+		}
+		else
+		{
+			Assert.fail("Plan selector page not found");
+		}
+	}
+	
+
 	@After
 	public void tearDown() {
 		WebDriver wd = (WebDriver) getLoginScenario().getBean(
 				CommonConstants.WEBDRIVER);
 		wd.quit();
-		getLoginScenario().flushBeans();
-	}
+		//getLoginScenario().flushBeans();
+	} 
 	
 }

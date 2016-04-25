@@ -12,6 +12,14 @@ import org.openqa.selenium.WebDriver;
 import org.skyscreamer.jsonassert.JSONAssert;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import acceptancetests.atdd.data.CommonConstants;
+import acceptancetests.atdd.data.acquisition.PageConstants;
+import acceptancetests.globalfooter.data.AcquistionCommonConstants;
+import atdd.framework.MRScenario;
+import cucumber.annotation.en.And;
+import cucumber.annotation.en.Given;
+import cucumber.annotation.en.Then;
+import cucumber.annotation.en.When;
 import pages.acquisition.ulayer.AboutUsAARPPage;
 import pages.acquisition.ulayer.AcquisitionHomePage;
 import pages.acquisition.ulayer.AgentsnBrokersAARPPage;
@@ -36,14 +44,6 @@ import pages.acquisition.ulayer.ResumeYourSavedApplicationPage;
 import pages.acquisition.ulayer.SiteMapAARPPage;
 import pages.acquisition.ulayer.TermsnConditionsAARPPage;
 import pages.member.ulayer.AccountHomePage;
-import acceptancetests.atdd.data.CommonConstants;
-import acceptancetests.atdd.data.acquisition.PageConstants;
-import acceptancetests.globalfooter.data.AcquistionCommonConstants;
-import atdd.framework.MRScenario;
-import cucumber.annotation.en.And;
-import cucumber.annotation.en.Given;
-import cucumber.annotation.en.Then;
-import cucumber.annotation.en.When;
 
 /**
  * @author saduri
@@ -1267,6 +1267,12 @@ public class GlobalHeaderFooterAarpStepDefinition {
 			Assert.fail("failed");
 		}
 
+	}
+	
+	@Then ("^the user validates cobrowsing model window$")
+	public void user_validates_cobrowsing_model_window()
+	{
+		System.out.println("hello, i am in cobrowsing function");
 	}
 
 }
