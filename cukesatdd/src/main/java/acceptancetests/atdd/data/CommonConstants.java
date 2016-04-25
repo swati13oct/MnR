@@ -714,8 +714,6 @@ public class CommonConstants {
 	public static final String UHC_BROWSER_CHECK_DATA = "uhcbrowsercheck.json";
 	
 	public static final String UHCM_BROWSER_CHECK_DATA = "uhcmbrowsercheck.json";
-	
 	public static final String AARPM_BROWSER_CHECK_DATA="aarpmbrowsercheck.json";
-	
-	
+	public static final String GR_BROWSER_CHECK_DATA = "uhcretireebrowsercheck.json";
 }
