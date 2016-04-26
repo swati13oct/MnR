@@ -207,4 +207,10 @@ public class PageConstants {
 	public static final String JOHNSONANDJOHNSON_PROVIDER_PAGE = "johnsonandjohnsonprovider";
 	
 	public static final String JOHNSONANDJOHNSON_SITE_MAP_PAGE = "johnsonandjohnsonsitemap";
+
+	public static final String METLIFE_HOME_PAGE = "metlife";
+
+	public static final String METLIFE_SITE_MAP = "metlifesitemap";
+
+	public static final String METLIFE_FIND_A_PROVIDER = "metlifefindaprovider";
 }

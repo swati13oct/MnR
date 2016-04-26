@@ -69,5 +69,31 @@ public class Rallytool_Page extends UhcDriver {
 			}
 			return null;
 		}
-	
+
+	    public MetlifeHomePage metlifeswitchBack() {
+			
+			ArrayList<String> tabs = new ArrayList<String> (driver.getWindowHandles());
+			driver.switchTo().window(tabs.get(0));
+			
+			if(driver.getTitle().equalsIgnoreCase("Metlife Group Retiree – Home"))
+			{
+				return new MetlifeHomePage(driver);
+			}
+			// TODO Auto-generated method stub
+			return null;
+		}
+		
+		public MetlifeFindaProviderPage switchBackToMetlifeFindaProvider() {
+			ArrayList<String> tabs = new ArrayList<String> (driver.getWindowHandles());
+			driver.switchTo().window(tabs.get(0));
+			
+			if(driver.getTitle().equalsIgnoreCase("Metlife Group Retiree – Find a provider"))
+			{
+				return new MetlifeFindaProviderPage(driver);
+			}
+			
+			
+			// TODO Auto-generated method stub
+			return null;
+		}
 }

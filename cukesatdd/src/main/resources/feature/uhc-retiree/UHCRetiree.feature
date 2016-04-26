@@ -56,3 +56,14 @@ And user switches back to the Johnson & Johnson Home Page and clicks on the Find
 Then user clicks on the Find a Physician Medical Group Clinic or Facility link on Johnson & Johnson Provider Page and Rally tool opens in UHC Retiree
 And user switches back to Johnson & Johnson Provider Page and clicks on site map on Johnson & Johnson Home page in UHC Retiree
 Then user clicks on find a provider link on Johnson & Johnson Site Map Page and rally provider tool opens in UHC Retiree
+
+
+Scenario:To launch rally tool page from Uhcretiree MetLife Pages
+Given user navigates to UHC Retiree MetLife Home Page
+And user clicks on the Find a Provider link on Metlife Home Page and rally tool opens in new tab
+Then user switches back to the MetLife Home Page
+And user clicks on the metlife Find a Provider tab
+Then user clicks on the Find a Physician Medical Group Clinic or Facility link on MetLife Provider Page and Rally tool opens
+Then user again switches back to MetLife Home page
+And user clicks on site map on MetLife Home page
+Then user clicks on find a provider link on MetLife Site Map Page and rally provider tool opens

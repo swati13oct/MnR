@@ -17,6 +17,9 @@ import pages.acquisition.uhcretiree.CalpersSiteMapPage;
 import pages.acquisition.uhcretiree.JohnsonAndJohnsonHomePage;
 import pages.acquisition.uhcretiree.JohnsonAndJohnsonProviderPage;
 import pages.acquisition.uhcretiree.JohnsonAndJohnsonSiteMapPage;
+import pages.acquisition.uhcretiree.MetlifeFindaProviderPage;
+import pages.acquisition.uhcretiree.MetlifeHomePage;
+import pages.acquisition.uhcretiree.MetlifeSiteMapPage;
 import pages.acquisition.uhcretiree.OehwfSiteMap;
 import pages.acquisition.uhcretiree.Rallytool_Page;
 import pages.acquisition.uhcretiree.TravelersSiteMap;
@@ -604,6 +607,129 @@ public void jnJSiteMapProviderLink(){
 		Assert.fail(" Page not found");
 	}
 }
+
+@Given("^user navigates to UHC Retiree MetLife Home Page$")
+public void Metlifehomepage() {
+	WebDriver wd = getLoginScenario().getWebDriver();
+	MetlifeHomePage metlife = new MetlifeHomePage(wd);
+	getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
+
+
+	getLoginScenario().saveBean(PageConstants.METLIFE_HOME_PAGE, metlife);
+	
+
+}
+
+
+@And("^user clicks on the Find a Provider link on Metlife Home Page and rally tool opens in new tab$")
+public void metlifeproviderlinkclick() 
+{
+	MetlifeHomePage metlifeproviderlink= (MetlifeHomePage)getLoginScenario().getBean(PageConstants.METLIFE_HOME_PAGE);
+	
+	Rallytool_Page rallytool = metlifeproviderlink.metlifehomepageproviderclick();
+	if(rallytool!= null){
+		getLoginScenario().saveBean(PageConstants.RALLY_TOOL_PAGE,
+				rallytool);
+		Assert.assertTrue(true);
+	} else {
+		Assert.fail(" Page not found");
+	}
+	
+	
+}
+
+@Then("^user switches back to the MetLife Home Page$")
+public void backToMetlifeHomePage()
+{
+	Rallytool_Page rally  = (Rallytool_Page) getLoginScenario()
+			.getBean(PageConstants.RALLY_TOOL_PAGE);
+	MetlifeHomePage metlife = rally.metlifeswitchBack();
+	if(metlife!= null){
+		getLoginScenario().saveBean(PageConstants.METLIFE_HOME_PAGE, metlife);
+		Assert.assertTrue(true);
+		
+	} else {
+		Assert.fail("Home page not found");
+	} 
+           
+}
+
+@And("^user clicks on the metlife Find a Provider tab$")
+public void metlifeprovidertabclick () 
+{
+	MetlifeHomePage metlifeprovidertab= (MetlifeHomePage)getLoginScenario().getBean(PageConstants.METLIFE_HOME_PAGE);
+	
+	MetlifeFindaProviderPage metlifefindaprovider = metlifeprovidertab.metlifeprovidertabclick();
+	if(metlifefindaprovider!= null){
+		getLoginScenario().saveBean(PageConstants.METLIFE_FIND_A_PROVIDER,
+				metlifefindaprovider);
+		Assert.assertTrue(true);
+	} else {
+		Assert.fail(" Page not found");
+	}
+	
+	
+}
+
+@Then("^user clicks on the Find a Physician Medical Group Clinic or Facility link on MetLife Provider Page and Rally tool opens$")
+public void metlifefindphysician(){
+	
+	MetlifeFindaProviderPage metlifefindaproviderpage = (MetlifeFindaProviderPage)getLoginScenario().getBean(PageConstants.METLIFE_FIND_A_PROVIDER);
+	
+	Rallytool_Page rallytool = metlifefindaproviderpage.findaphysicianmetlifeclick();
+	if(rallytool!= null){
+		getLoginScenario().saveBean(PageConstants.RALLY_TOOL_PAGE,
+				rallytool);
+		Assert.assertTrue(true);
+	} else {
+		Assert.fail(" Page not found");
+	}
+}
+
+@Then("^user again switches back to MetLife Home page$")
+public void backToMetlifeProviderPage()
+{
+	Rallytool_Page rally  = (Rallytool_Page) getLoginScenario()
+			.getBean(PageConstants.RALLY_TOOL_PAGE);
+	MetlifeFindaProviderPage metlife = rally.switchBackToMetlifeFindaProvider();
+	if(metlife!= null){
+		getLoginScenario().saveBean(PageConstants.METLIFE_HOME_PAGE, metlife);
+		Assert.assertTrue(true);
+		
+	} else {
+		Assert.fail("Home page not found");
+	} 
+           
+}
+
+@And("^user clicks on site map on MetLife Home page$")
+public void metlifesitemapclick() {
+	MetlifeFindaProviderPage metlifeproviderpage= (MetlifeFindaProviderPage)getLoginScenario().getBean(PageConstants.METLIFE_HOME_PAGE);
+	
+	MetlifeSiteMapPage metlifesitemap = metlifeproviderpage.metlifeitemapclick();
+	if(metlifesitemap!= null){
+		getLoginScenario().saveBean(PageConstants.METLIFE_SITE_MAP,
+				metlifesitemap);
+		Assert.assertTrue(true);
+	} else {
+		Assert.fail(" Page not found");
+	}
+}
+
+@Then("^user clicks on find a provider link on MetLife Site Map Page and rally provider tool opens$")
+public void metlifesitemapproviderclick(){
+	
+	MetlifeSiteMapPage metlifesitemaprally= (MetlifeSiteMapPage)getLoginScenario().getBean(PageConstants.METLIFE_SITE_MAP);
+	Rallytool_Page rallytool = metlifesitemaprally.findaprovidermetlifesitemapclick();
+	if(rallytool!= null){
+		getLoginScenario().saveBean(PageConstants.RALLY_TOOL_PAGE,
+				rallytool);
+		Assert.assertTrue(true);
+	} else {
+		Assert.fail(" Page not found");
+	}
+}
+
 
 }
 
