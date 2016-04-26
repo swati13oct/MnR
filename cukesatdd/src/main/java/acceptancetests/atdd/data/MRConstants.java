@@ -18,6 +18,17 @@ public class MRConstants {
 	public static final String AARP_URL = "https://www.awe-"+MRScenario.environment+"-aarpmedicareplans.uhc.com/";
 
 	public static final String UHCRETIREE_URL = "https://www.awe-"+MRScenario.environment+"-uhcretiree.uhc.com/";
+	
+	public static final String VERIZON_PROVIDER_PAGE_URL = "https://www.awe-"+MRScenario.environment+"-uhcretiree.uhc.com/verizon/find_a_provider.html";
+	
+	public static final String VERIZON_SITE_MAP_URL = "https://www.awe-"+MRScenario.environment+"-uhcretiree.uhc.com/verizon/site_map.html";
+	
+	public static final String VERIZON_HOME_PAGE_URL = "https://www.awe-"+MRScenario.environment+"-uhcretiree.uhc.com/verizon/home.html";
+	
+	public static final String CALPERS_HOME_PAGE_URL = "https://www.awe-"+MRScenario.environment+"-uhcretiree.uhc.com/calpers/home.html";
+	
+
+	
 
 	public static final String UHCRETIREE_SITE_MAP_URL = "https://www.awe-"+MRScenario.environment+"-uhcretiree.uhc.com/site_map.html";
 	

@@ -14,7 +14,7 @@ import cucumber.junit.Cucumber;
 @Cucumber.Options(glue = { "atdd.framework","acceptancetests.UHCRetiree" }, 
 		features = { "feature/uhc-retiree" }, 
 		format = {
-		"pretty", "html:reports/test-report" }, tags ={"@PO7toolUHCRetiree"})
+		"pretty", "html:reports/test-report" }, tags ={"@RallytoolUHCRetiree"})
 
 public class RunMRAtddUHCRetiree {
 	

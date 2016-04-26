@@ -28,6 +28,13 @@ public class PageConstants {
 	public static final String UHCRETIREE_ACQ_HOME_PAGE = "uhcRetireeAcqHomePage";
 	
 	public static final String UHCRETIREE_ACQ_SITE_MAP_PAGE = "uhcRetireeSiteMapPage";
+	
+	public static final String RALLY_TOOL_PAGE = "rallytool";
+	
+	public static final String CALPER_FIND_A_PROVIDER = "calperfindaprovider";
+	
+	
+	
 
 	public static final String UHCRETIREE_ACQ_Formulary_PAGE = "uhcRetireeAcqFormularyPage";
 
@@ -172,6 +179,7 @@ public class PageConstants {
 
 	public static final String PRESCRIPTION_DRUG_TOOLS_PAGE = "presecriptiondrugtoolspage";
 
+
 	public static final String UHCRETIREE_ACQ_DRUG_NAME = "drugName";
 
 	public static final String UHCRETIREE_ACQ_DRUG_DOSAGE_ACTUAL = "drugDosageActualResponse";
@@ -183,4 +191,17 @@ public class PageConstants {
 	public static final String UHCRETIREE_ACQ_RETIREES_OF_SELECTED_PLANS_HOME_PAGE = "retireesOfSelectedPlansHomePage";
 
 	public static final String UHCRETIREE_ACQ_DRUG_COVERAGE_OPTIONS_PAGE = "drugCoverageOptionsPage";
+
+	public static final String VERIZON_PROVIDER_PAGE_URL = "verizonproviderpage";
+
+	public static final String RALLY_VERIZON_FIND_A_PHYSICIAN = "physicianlink";
+	
+	public static final String VERIZON_HOME_PAGE_URL = "verizonhomepages";
+	
+	public static final String CALPERS_HOME_PAGE = "calpers";
+	
+	public static final String CALPERS_SITE_MAP = "calpersitemap";
+
+	public static final String VERIZON_SITE_MAP_URL = "versitemaprally";
+
 }
