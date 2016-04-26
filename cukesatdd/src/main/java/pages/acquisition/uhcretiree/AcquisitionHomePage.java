@@ -6,6 +6,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.Select;
 
 import acceptancetests.atdd.data.MRConstants;
 import atdd.framework.UhcDriver;
@@ -34,6 +35,9 @@ public class AcquisitionHomePage extends UhcDriver {
 
 	@FindBy(xpath= ".//*[@id='main']/div/div[1]/div/div[4]/div[1]/div/div[1]/div[2]/div/div/div/p[2]/a")
 	private WebElement lookupproviderLink;
+	
+	@FindBy(id = "new_form_GroupSelector")
+	private WebElement alcatelLucentSelect;	
 
 	private static String UHCRETIREE_ACQISITION_PAGE_URL = MRConstants.UHCRETIREE_URL;
 	
@@ -67,6 +71,17 @@ public class AcquisitionHomePage extends UhcDriver {
 		}
 		
 		// TODO Auto-generated method stub
+		return null;
+	} 
+	
+	public AlcatelLucentHomePage selectAlcatelLucent_dropdown() {
+		validate(alcatelLucentSelect);
+		Select dropdown = new Select(alcatelLucentSelect);
+		dropdown.selectByIndex(1);
+		if(getTitle().equalsIgnoreCase("Alcatel-Lucent Group Retiree - Home")){
+			return new AlcatelLucentHomePage(driver);
+		}
+			
 		return null;
 	} 
 

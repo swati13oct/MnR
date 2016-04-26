@@ -37,3 +37,14 @@ Given user navigates to the UHCRetiree Travelers Home Page
 And click on the Find a provider link on the UHCRetiree Travelers Home Page and site opens new provider search Rally tool in a new window
 And user navigates to the UHCRetiree Travelers - Site Map Page
 Then user clicks on the Find a provider link on the UHCRetiree Travelers - Site Map Page and site opens new provider search Rally Connect tool in a new window.
+
+Scenario: To validate rally tool launch from Alcatel-lucent group retiree pages
+Given user navigates to the UHCRetiree Home Page
+And user selects Alcatel-lucent group from select group dropdown
+And user clicks on find a provider link from Alcatel-lucent home page
+And user switches back to Alcatel-lucent home page
+And user clicks on Find a provider tab from the header of Alcatel-lucent home page
+And user clicks on Find a Physician Medical Group Clinic or Facility link from Alcatel-lucent find_a_provider page
+And user switches back to Alcatel-lucent Find Provider page
+And user clicks on site map link from the footer of Alcatel-lucent Find Provider page
+And user clicks on Find a provider link from Alcatel-lucent site map page

@@ -49,5 +49,25 @@ public class Rallytool_Page extends UhcDriver {
 			// TODO Auto-generated method stub
 			return null;
 		}
+		
+		public AlcatelLucentHomePage switchBackToAlcatelLucentHomePage() {
+			ArrayList<String> tabs = new ArrayList<String> (driver.getWindowHandles());
+			driver.switchTo().window(tabs.get(0));
+			if(driver.getTitle().equalsIgnoreCase("Alcatel-Lucent Group Retiree - Home"))
+			{
+				return new AlcatelLucentHomePage(driver);
+			}
+			return null;
+		}
+		
+		public AlcatelLucentFindProviderPage switchBackToAlcatelLucentFindProviderPage() {
+			ArrayList<String> tabs = new ArrayList<String> (driver.getWindowHandles());
+			driver.switchTo().window(tabs.get(0));
+			if(driver.getTitle().equalsIgnoreCase("Alcatel-Lucent Group Retiree - Find a Provider"))
+			{
+				return new AlcatelLucentFindProviderPage(driver);
+			}
+			return null;
+		}
 	
 }

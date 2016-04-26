@@ -8,6 +8,9 @@ import org.openqa.selenium.WebDriver;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import pages.acquisition.uhcretiree.AcquisitionHomePage;
+import pages.acquisition.uhcretiree.AlcatelLucentFindProviderPage;
+import pages.acquisition.uhcretiree.AlcatelLucentHomePage;
+import pages.acquisition.uhcretiree.AlcatelLucentSiteMapPage;
 import pages.acquisition.uhcretiree.CalperFindaProviderPage;
 import pages.acquisition.uhcretiree.CalpersHomePage;
 import pages.acquisition.uhcretiree.CalpersSiteMapPage;
@@ -393,6 +396,125 @@ if(rallytool!= null){
 	Assert.fail(" Page not found");
 }
 }
+
+@And("^user selects Alcatel-lucent group from select group dropdown$")
+
+public void selectAlcatelgroup(){
+	
+	AcquisitionHomePage uhcRetireeAcqHomePage = (AcquisitionHomePage)getLoginScenario().getBean(PageConstants.UHCRETIREE_ACQ_HOME_PAGE);
+	AlcatelLucentHomePage alcatelLucentHomePage = uhcRetireeAcqHomePage.selectAlcatelLucent_dropdown();
+	if(alcatelLucentHomePage!=null){
+		
+		getLoginScenario().saveBean(PageConstants.ALCATEL_LUCENT_HOME_PAGE,
+				alcatelLucentHomePage);
+		Assert.assertTrue(true);
+	} else {
+		Assert.fail(" Alcatel Home Page not found");
+	}
+	
+}
+@And("^user clicks on find a provider link from Alcatel-lucent home page$")
+public void clickFindProviderLink(){
+	
+	AlcatelLucentHomePage alcatelLucentHomePage = (AlcatelLucentHomePage)getLoginScenario().getBean(PageConstants.ALCATEL_LUCENT_HOME_PAGE);
+	Rallytool_Page rallytool = alcatelLucentHomePage.findProviderLinkClick();
+	if(rallytool!=null){
+		getLoginScenario().saveBean(PageConstants.RALLY_TOOL_PAGE,
+				rallytool);
+			Assert.assertTrue(true);
+		} else {
+			Assert.fail(" Rally tool Page not found");
+		}	
+}
+
+@And("^user switches back to Alcatel-lucent home page$")
+
+public void switchBackToPreviousPage(){
+	
+	Rallytool_Page rallytool = (Rallytool_Page)getLoginScenario().getBean(PageConstants.RALLY_TOOL_PAGE);
+	AlcatelLucentHomePage alcatelLucentHomePage = rallytool.switchBackToAlcatelLucentHomePage();
+	if(alcatelLucentHomePage!=null){
+		getLoginScenario().saveBean(PageConstants.ALCATEL_LUCENT_HOME_PAGE,
+				alcatelLucentHomePage);
+			Assert.assertTrue(true);
+		} else {
+			Assert.fail("Alcatel Home Page not found");
+		}	
+}
+
+@And("^user clicks on Find a provider tab from the header of Alcatel-lucent home page$")
+
+public void clickFindProviderTab(){
+	AlcatelLucentHomePage alcatelLucentHomePage = (AlcatelLucentHomePage)getLoginScenario().getBean(PageConstants.ALCATEL_LUCENT_HOME_PAGE);
+	AlcatelLucentFindProviderPage alcatelLucentFindProviderPage= alcatelLucentHomePage.findProviderTabClick();
+	if(alcatelLucentFindProviderPage!=null){
+		getLoginScenario().saveBean(PageConstants.ALCATEL_LUCENT_FIND_PROVIDER_PAGE,
+				alcatelLucentFindProviderPage);
+			Assert.assertTrue(true);
+		} else {
+			Assert.fail(" Find Provider Page not found");
+		}		
+}
+
+@And("^user clicks on Find a Physician Medical Group Clinic or Facility link from Alcatel-lucent find_a_provider page$")
+
+public void clickFindPhysicianLink(){
+	AlcatelLucentFindProviderPage alcatelLucentFindProviderPage = (AlcatelLucentFindProviderPage)getLoginScenario().getBean(PageConstants.ALCATEL_LUCENT_FIND_PROVIDER_PAGE);
+	Rallytool_Page rallytool= alcatelLucentFindProviderPage.findPhysicianLinkClick();
+	if(rallytool!=null){
+		getLoginScenario().saveBean(PageConstants.RALLY_TOOL_PAGE,
+				rallytool);
+			Assert.assertTrue(true);
+		} else {
+			Assert.fail("Rally tool Page not found");
+		}	
+	
+}
+
+@And("^user switches back to Alcatel-lucent Find Provider page$")
+
+public void switchBackToFindProviderPage(){
+	
+	Rallytool_Page rallytool = (Rallytool_Page)getLoginScenario().getBean(PageConstants.RALLY_TOOL_PAGE);
+	AlcatelLucentFindProviderPage alcatelLucentFindProviderPage = rallytool.switchBackToAlcatelLucentFindProviderPage();
+	if(alcatelLucentFindProviderPage!=null){
+		getLoginScenario().saveBean(PageConstants.ALCATEL_LUCENT_FIND_PROVIDER_PAGE,
+				alcatelLucentFindProviderPage);
+			Assert.assertTrue(true);
+		} else {
+			Assert.fail("Alcatel Find provider Page not found");
+		}	
+}
+
+@And("^user clicks on site map link from the footer of Alcatel-lucent Find Provider page$")
+
+public void clickSiteMapLink(){
+	AlcatelLucentFindProviderPage alcatelLucentFindProviderPage = (AlcatelLucentFindProviderPage)getLoginScenario().getBean(PageConstants.ALCATEL_LUCENT_FIND_PROVIDER_PAGE);
+	AlcatelLucentSiteMapPage alcatelLucentSiteMapPage= alcatelLucentFindProviderPage.siteMapLinkClick();
+	if(alcatelLucentSiteMapPage!=null){
+		getLoginScenario().saveBean(PageConstants.ALCATEL_LUCENT_SITE_MAP_PAGE,
+				alcatelLucentSiteMapPage);
+			Assert.assertTrue(true);
+		} else {
+			Assert.fail(" Page not found");
+		}	
+	
+}
+
+@And("^user clicks on Find a provider link from Alcatel-lucent site map page$")
+
+public void clickSiteMapFindProviderLink(){
+	AlcatelLucentSiteMapPage alcatelLucentSiteMapPage = (AlcatelLucentSiteMapPage)getLoginScenario().getBean(PageConstants.ALCATEL_LUCENT_SITE_MAP_PAGE);
+	Rallytool_Page rallytool= alcatelLucentSiteMapPage.siteMapFindProviderLinkClick();
+	if(rallytool!=null){
+		getLoginScenario().saveBean(PageConstants.RALLY_TOOL_PAGE,
+				rallytool);
+			Assert.assertTrue(true);
+		} else {
+			Assert.fail(" Page not found");
+		}	
+}
+
 }
 
 

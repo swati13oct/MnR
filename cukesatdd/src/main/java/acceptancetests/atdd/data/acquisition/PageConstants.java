@@ -195,4 +195,10 @@ public class PageConstants {
     public static final String UHCRETIREE_TRAVELERS_ACQ_HOME_PAGE = "uhcRetireeAcqTravelersHomePage";
 	
 	public static final String UHCRETIREE_TRAVELERS_SITE_MAP_PAGE = "TravelerssiteMapPage";
+	
+	public static final String ALCATEL_LUCENT_HOME_PAGE = "alcatelLucentHomePage";
+
+	public static final String ALCATEL_LUCENT_FIND_PROVIDER_PAGE = "alcatelLucentFindProviderPage";
+
+	public static final String ALCATEL_LUCENT_SITE_MAP_PAGE = "alcatelLucentSiteMapPage";
 }
