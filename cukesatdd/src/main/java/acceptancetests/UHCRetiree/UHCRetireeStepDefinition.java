@@ -11,7 +11,11 @@ import pages.acquisition.uhcretiree.AcquisitionHomePage;
 import pages.acquisition.uhcretiree.CalperFindaProviderPage;
 import pages.acquisition.uhcretiree.CalpersHomePage;
 import pages.acquisition.uhcretiree.CalpersSiteMapPage;
+import pages.acquisition.uhcretiree.OehwfSiteMap;
 import pages.acquisition.uhcretiree.Rallytool_Page;
+import pages.acquisition.uhcretiree.TravelersSiteMap;
+import pages.acquisition.uhcretiree.UHCRetireeOehwfHomePage;
+import pages.acquisition.uhcretiree.UHCRetireeTravelersHomePage;
 import pages.acquisition.uhcretiree.VerizonHomePage;
 import pages.acquisition.uhcretiree.VerizonSiteMap;
 import pages.acquisition.uhcretiree.VerizonUhcretireePage;
@@ -25,7 +29,7 @@ import cucumber.annotation.en.Then;
 
 
 /**
- * @author naggarw2
+ * @author F&F
  *
  */
 
@@ -278,8 +282,128 @@ public void calpersitemapproviderclick(){
 		Assert.fail(" Page not found");
 	}
 }
-	
+
+@Given("^user navigates to the UHCRetiree oehwf Home Page$")
+
+public void click_oehwfdrugsearch() {
+	WebDriver wd = getLoginScenario().getWebDriver();
+	getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
+	UHCRetireeOehwfHomePage uhcRetireeAcqOehwfHomePage = new UHCRetireeOehwfHomePage(wd);
+
+	getLoginScenario().saveBean(PageConstants.UHCRETIREE_ACQ_OEHWF_HOME_PAGE, uhcRetireeAcqOehwfHomePage);
 }
+
+@And("^click on the Find a provider link on the UHCRetiree oehwf Home Page and site opens new provider search Rally tool in a new window$")
+
+public void click_travelersFindaprovider() {
+	UHCRetireeOehwfHomePage uhcRetireeAcqHomePage = (UHCRetireeOehwfHomePage)getLoginScenario().getBean(PageConstants.UHCRETIREE_ACQ_OEHWF_HOME_PAGE);
+
+
+	Rallytool_Page rallytool = uhcRetireeAcqHomePage.Findaproviderclick();
+	if(rallytool!= null){
+		getLoginScenario().saveBean(PageConstants.RALLY_TOOL_PAGE,
+				rallytool);
+		Assert.assertTrue(true);
+	} else {
+		Assert.fail(" Page not found");
+	}
+}
+
+
+	
+@Given("^user navigates to the UHCRetiree oehwf - Site Map Page$")
+
+public void oehwf_sitemappage() {
+	WebDriver wd = getLoginScenario().getWebDriver();
+	getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
+	OehwfSiteMap OehwfsiteMapPage = new OehwfSiteMap(wd);
+
+	getLoginScenario().saveBean(PageConstants.OEHWF_SITE_MAP_URL, OehwfsiteMapPage);
+}
+
+
+
+@And("^user clicks on the Find a provider link on the UHCRetiree oehwf - Site Map Page and site opens new provider search Rally Connect tool in a new window.$")
+
+public void click_SitemapFindaprovider() {
+OehwfSiteMap uhcRetireeAcqHomePage = (OehwfSiteMap)getLoginScenario().getBean(PageConstants.OEHWF_SITE_MAP_URL);
+
+
+Rallytool_Page rallytool = uhcRetireeAcqHomePage.oehwfsitemapproviderclick();
+if(rallytool!= null){
+	getLoginScenario().saveBean(PageConstants.RALLY_TOOL_PAGE,
+			rallytool);
+	Assert.assertTrue(true);
+} else {
+	Assert.fail(" Page not found");
+}
+}
+
+@Given("^user navigates to the UHCRetiree Travelers Home Page$")
+
+public void click_drugsearch() {
+	WebDriver wd = getLoginScenario().getWebDriver();
+	getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
+	UHCRetireeTravelersHomePage uhcRetireeAcqTravelersHomePage = new UHCRetireeTravelersHomePage(wd);
+
+	getLoginScenario().saveBean(PageConstants.UHCRETIREE_TRAVELERS_ACQ_HOME_PAGE, uhcRetireeAcqTravelersHomePage);
+}
+
+@And("^click on the Find a provider link on the UHCRetiree Travelers Home Page and site opens new provider search Rally tool in a new window$")
+
+public void click_Findaprovider() {
+	UHCRetireeTravelersHomePage uhcRetireeAcqHomePage = (UHCRetireeTravelersHomePage)getLoginScenario().getBean(PageConstants.UHCRETIREE_TRAVELERS_ACQ_HOME_PAGE);
+
+
+	Rallytool_Page rallytool = uhcRetireeAcqHomePage.Findaproviderclick();
+	if(rallytool!= null){
+		getLoginScenario().saveBean(PageConstants.RALLY_TOOL_PAGE,
+				rallytool);
+		Assert.assertTrue(true);
+	} else {
+		Assert.fail(" Page not found");
+	}
+}
+
+
+	
+@And("^user navigates to the UHCRetiree Travelers - Site Map Page$")
+
+public void travelers_sitemappage() {
+	WebDriver wd = getLoginScenario().getWebDriver();
+	getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
+	TravelersSiteMap TravelerssiteMapPage = new TravelersSiteMap(wd);
+
+	getLoginScenario().saveBean(PageConstants.UHCRETIREE_TRAVELERS_SITE_MAP_PAGE, TravelerssiteMapPage);
+}
+
+
+@Then("^user clicks on the Find a provider link on the UHCRetiree Travelers - Site Map Page and site opens new provider search Rally Connect tool in a new window.$")
+
+public void click_SitemaptravelersFindaprovider() {
+TravelersSiteMap uhcRetireeAcqHomePage = (TravelersSiteMap)getLoginScenario().getBean(PageConstants.UHCRETIREE_TRAVELERS_SITE_MAP_PAGE);
+
+
+Rallytool_Page rallytool = uhcRetireeAcqHomePage.travelerssitemapproviderclick();
+if(rallytool!= null){
+	getLoginScenario().saveBean(PageConstants.RALLY_TOOL_PAGE,
+			rallytool);
+	Assert.assertTrue(true);
+} else {
+	Assert.fail(" Page not found");
+}
+}
+}
+
+
+
+
+
+
+
+
+	
+
 
 
 

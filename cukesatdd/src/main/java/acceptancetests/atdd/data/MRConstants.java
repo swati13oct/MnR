@@ -56,5 +56,15 @@ public class MRConstants {
 	
 	public static final String GENERIC_PORTLET_URL = "https://portal.uhc.com/bConnectedDCE/home.html";
 	
+	public static final String UHCRETIREE_OEHWF_URL = "https://www.awe-"+MRScenario.environment+"-uhcretiree.uhc.com/oehwf/home.html";
+
+	public static final String OEHWF_SITE_MAP_URL = "https://www.awe-"+MRScenario.environment+"-uhcretiree.uhc.com/oehwf/site_map.html";
+
+	public static final String UHCRETIREE_TRAVELERS_URL = "https://www.awe-"+MRScenario.environment+"-uhcretiree.uhc.com/travelers/home.html";
+
+	public static final String TRAVELERS_SITE_MAP_URL = "https://www.awe-"+MRScenario.environment+"-uhcretiree.uhc.com/travelers/site_map.html";
+	
+	public static final String UHCRETIREE_SITE_MAP_TRAVELERS_URL = "https://www.awe-"+MRScenario.environment+"-uhcretiree.uhc.com/travelers/site_map.html";
+	
 	
 }

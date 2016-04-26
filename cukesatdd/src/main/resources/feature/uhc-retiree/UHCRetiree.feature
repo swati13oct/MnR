@@ -25,3 +25,15 @@ Then user clicks on the Find a Physician Medical Group Clinic or Facility link o
 Then user again switches back to Calpers Home page
 And user clicks on site map on Calpers Home page
 Then user clicks on find a provider link on Calpers Site Map Page and rally provider tool opens
+
+Scenario: Verify Rally Connect tool link from UHC Retiree oehwf Home Page
+Given user navigates to the UHCRetiree oehwf Home Page
+And click on the Find a provider link on the UHCRetiree oehwf Home Page and site opens new provider search Rally tool in a new window
+Given user navigates to the UHCRetiree oehwf - Site Map Page
+And user clicks on the Find a provider link on the UHCRetiree oehwf - Site Map Page and site opens new provider search Rally Connect tool in a new window.
+
+Scenario: Verify Rally Connect tool link from UHC Retiree Travelers Home Page
+Given user navigates to the UHCRetiree Travelers Home Page
+And click on the Find a provider link on the UHCRetiree Travelers Home Page and site opens new provider search Rally tool in a new window
+And user navigates to the UHCRetiree Travelers - Site Map Page
+Then user clicks on the Find a provider link on the UHCRetiree Travelers - Site Map Page and site opens new provider search Rally Connect tool in a new window.
