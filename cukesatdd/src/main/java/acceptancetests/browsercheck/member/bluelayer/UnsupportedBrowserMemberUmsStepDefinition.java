@@ -1,7 +1,7 @@
 /**
  * 
  */
-package acceptancetests.browsercheckmember.bluelayer;
+package acceptancetests.browsercheck.member.bluelayer;
 
 import gherkin.formatter.model.DataTableRow;
 

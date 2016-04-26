@@ -1,7 +1,7 @@
 /**
  * 
  */
-package acceptancetests.browsercheckmember.ulayer;
+package acceptancetests.browsercheck.member.ulayer;
 
 import gherkin.formatter.model.DataTableRow;
 
@@ -36,7 +36,7 @@ import cucumber.table.DataTable;
 
 /**
  * @author pnampall
- *
+ * 
  */
 public class UnsupportedBrowserMemberAarpStepDefinition {
 	
@@ -201,6 +201,6 @@ public class UnsupportedBrowserMemberAarpStepDefinition {
 		WebDriver wd = (WebDriver) getLoginScenario().getBean(
 				CommonConstants.WEBDRIVER);
 		wd.quit();
-		getLoginScenario().flushBeans();
+		//getLoginScenario().flushBeans();
 	}
 }
