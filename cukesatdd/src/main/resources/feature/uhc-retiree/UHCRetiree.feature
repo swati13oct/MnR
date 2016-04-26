@@ -48,3 +48,11 @@ And user clicks on Find a Physician Medical Group Clinic or Facility link from A
 And user switches back to Alcatel-lucent Find Provider page
 And user clicks on site map link from the footer of Alcatel-lucent Find Provider page
 And user clicks on Find a provider link from Alcatel-lucent site map page
+
+Scenario: To launch rally tool page from Uhcretiree Johnson & Johnson Pages
+Given user navigates to Johnson & Johnson Home Page in UHC Retiree
+And user clicks on the Find a Provider link on Johnson & Johnson Home Page and rally tool opens in new tab in UHC Retiree
+And user switches back to the Johnson & Johnson Home Page and clicks on the Find a Provider tab on Johnson & Johnson in UHC Retiree
+Then user clicks on the Find a Physician Medical Group Clinic or Facility link on Johnson & Johnson Provider Page and Rally tool opens in UHC Retiree
+And user switches back to Johnson & Johnson Provider Page and clicks on site map on Johnson & Johnson Home page in UHC Retiree
+Then user clicks on find a provider link on Johnson & Johnson Site Map Page and rally provider tool opens in UHC Retiree

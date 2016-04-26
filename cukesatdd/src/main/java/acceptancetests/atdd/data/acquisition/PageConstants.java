@@ -201,4 +201,10 @@ public class PageConstants {
 	public static final String ALCATEL_LUCENT_FIND_PROVIDER_PAGE = "alcatelLucentFindProviderPage";
 
 	public static final String ALCATEL_LUCENT_SITE_MAP_PAGE = "alcatelLucentSiteMapPage";
+	
+	public static final String JOHNSONANDJOHNSON_HOME_PAGE = "johnsonandjohnson";
+	
+	public static final String JOHNSONANDJOHNSON_PROVIDER_PAGE = "johnsonandjohnsonprovider";
+	
+	public static final String JOHNSONANDJOHNSON_SITE_MAP_PAGE = "johnsonandjohnsonsitemap";
 }

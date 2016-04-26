@@ -14,6 +14,9 @@ import pages.acquisition.uhcretiree.AlcatelLucentSiteMapPage;
 import pages.acquisition.uhcretiree.CalperFindaProviderPage;
 import pages.acquisition.uhcretiree.CalpersHomePage;
 import pages.acquisition.uhcretiree.CalpersSiteMapPage;
+import pages.acquisition.uhcretiree.JohnsonAndJohnsonHomePage;
+import pages.acquisition.uhcretiree.JohnsonAndJohnsonProviderPage;
+import pages.acquisition.uhcretiree.JohnsonAndJohnsonSiteMapPage;
 import pages.acquisition.uhcretiree.OehwfSiteMap;
 import pages.acquisition.uhcretiree.Rallytool_Page;
 import pages.acquisition.uhcretiree.TravelersSiteMap;
@@ -515,40 +518,93 @@ public void clickSiteMapFindProviderLink(){
 		}	
 }
 
+
+@Given("^user navigates to Johnson & Johnson Home Page in UHC Retiree$")
+public void johnsonAndJohnsonHomePage() {
+	WebDriver wd = getLoginScenario().getWebDriver();
+	JohnsonAndJohnsonHomePage johnsonAndJohnsonHomePage = new JohnsonAndJohnsonHomePage(wd);
+	getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
+
+
+	getLoginScenario().saveBean(PageConstants.JOHNSONANDJOHNSON_HOME_PAGE, johnsonAndJohnsonHomePage);
+
 }
 
-
-
-
-
-
-
-
+@And("^user clicks on the Find a Provider link on Johnson & Johnson Home Page and rally tool opens in new tab in UHC Retiree$")
+public void johnsonAndJohnsonProviderLinkClick () {
+	JohnsonAndJohnsonHomePage johnsonAndJohnsonHomePage= (JohnsonAndJohnsonHomePage)getLoginScenario().getBean(PageConstants.JOHNSONANDJOHNSON_HOME_PAGE);
 	
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+	Rallytool_Page rallytool = johnsonAndJohnsonHomePage.johnsonAndJohnsonProviderClick();
+	if(rallytool!= null){
+		getLoginScenario().saveBean(PageConstants.RALLY_TOOL_PAGE,
+				rallytool);
+		Assert.assertTrue(true);
+	} else {
+		Assert.fail(" Page not found");
+	}
 	
+	
+}
 
+@And("^user switches back to the Johnson & Johnson Home Page and clicks on the Find a Provider tab on Johnson & Johnson in UHC Retiree$")
+public void backToJnJHomePage()
+{
+	JohnsonAndJohnsonHomePage johnsonAndJohnsonHomePage  = (JohnsonAndJohnsonHomePage) getLoginScenario()
+			.getBean(PageConstants.JOHNSONANDJOHNSON_HOME_PAGE);
+	JohnsonAndJohnsonProviderPage johnsonAndJohnsonProviderPage = johnsonAndJohnsonHomePage.switchAndClickProvider();
+	if(johnsonAndJohnsonProviderPage!= null){
+		getLoginScenario().saveBean(PageConstants.JOHNSONANDJOHNSON_PROVIDER_PAGE, johnsonAndJohnsonProviderPage);
+		Assert.assertTrue(true);
+		
+	} else {
+		Assert.fail("JnJ Provider page not found");
+	} 
+           
+}
 
+@Then("^user clicks on the Find a Physician Medical Group Clinic or Facility link on Johnson & Johnson Provider Page and Rally tool opens in UHC Retiree$")
+public void jnJFindPhyscian(){
+	JohnsonAndJohnsonProviderPage johnsonAndJohnsonProviderPage = (JohnsonAndJohnsonProviderPage)getLoginScenario()
+			.getBean(PageConstants.JOHNSONANDJOHNSON_PROVIDER_PAGE);
+	Rallytool_Page rallytool = johnsonAndJohnsonProviderPage.jnJFindPhyscianClick();
+	if(rallytool!= null){
+		getLoginScenario().saveBean(PageConstants.RALLY_TOOL_PAGE,
+				rallytool);
+		Assert.assertTrue(true);
+	} else {
+		Assert.fail(" Page not found");
+	}
+}
 
+@And("^user switches back to Johnson & Johnson Provider Page and clicks on site map on Johnson & Johnson Home page in UHC Retiree$")
+public void jnJSiteMapPage(){
+	JohnsonAndJohnsonProviderPage johnsonAndJohnsonProviderPage = (JohnsonAndJohnsonProviderPage)getLoginScenario()
+			.getBean(PageConstants.JOHNSONANDJOHNSON_PROVIDER_PAGE);
+	JohnsonAndJohnsonSiteMapPage johnsonAndJohnsonSiteMapPage = johnsonAndJohnsonProviderPage.jnJSiteMapClick();
+	if(johnsonAndJohnsonSiteMapPage!= null){
+		getLoginScenario().saveBean(PageConstants.JOHNSONANDJOHNSON_SITE_MAP_PAGE,
+				johnsonAndJohnsonSiteMapPage);
+		Assert.assertTrue(true);
+	} else {
+		Assert.fail(" Page not found");
+	}
+	
+}
 
+@Then("^user clicks on find a provider link on Johnson & Johnson Site Map Page and rally provider tool opens in UHC Retiree$")
+public void jnJSiteMapProviderLink(){
+	JohnsonAndJohnsonSiteMapPage johnsonAndJohnsonSiteMapPage = (JohnsonAndJohnsonSiteMapPage)getLoginScenario()
+			.getBean(PageConstants.JOHNSONANDJOHNSON_SITE_MAP_PAGE);
+	Rallytool_Page rallytool = johnsonAndJohnsonSiteMapPage.jnJSiteMapProviderLinkClick();
+	if(rallytool!= null){
+		getLoginScenario().saveBean(PageConstants.RALLY_TOOL_PAGE,
+				rallytool);
+		Assert.assertTrue(true);
+	} else {
+		Assert.fail(" Page not found");
+	}
+}
 
-
-
+}
 
 

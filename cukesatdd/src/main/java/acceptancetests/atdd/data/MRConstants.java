@@ -27,6 +27,8 @@ public class MRConstants {
 	
 	public static final String CALPERS_HOME_PAGE_URL = "https://www.awe-"+MRScenario.environment+"-uhcretiree.uhc.com/calpers/home.html";
 	
+	public static final String JOHNSONANDJOHNSON_HOME_PAGE_URL = "https://www.awe-"+MRScenario.environment+"-uhcretiree.uhc.com/jnj/home.html";
+	
 
 	
 
