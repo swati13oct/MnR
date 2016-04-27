@@ -150,4 +150,31 @@ public class Rallytool_Page extends UhcDriver {
 			// TODO Auto-generated method stub
 			return null;
 		}
+
+				public KTRSHomePage ktrsswitchBack() {
+			
+			ArrayList<String> tabs = new ArrayList<String> (driver.getWindowHandles());
+			driver.switchTo().window(tabs.get(0));
+			
+			if(driver.getTitle().equalsIgnoreCase("KTRS Group Retiree - Home"))
+			{
+				return new KTRSHomePage(driver);
+			}
+			// TODO Auto-generated method stub
+			return null;
+		}
+		
+		public KTRSFindaProviderPage switchBackToktrsFindaProvider() {
+			ArrayList<String> tabs = new ArrayList<String> (driver.getWindowHandles());
+			driver.switchTo().window(tabs.get(0));
+			
+			if(driver.getTitle().equalsIgnoreCase("KTRS Group Retiree - Find a Provider"))
+			{
+				return new KTRSFindaProviderPage(driver);
+			}
+			
+			
+			// TODO Auto-generated method stub
+			return null;
+		}
 }
