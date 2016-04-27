@@ -67,3 +67,14 @@ Then user clicks on the Find a Physician Medical Group Clinic or Facility link o
 Then user again switches back to MetLife Home page
 And user clicks on site map on MetLife Home page
 Then user clicks on find a provider link on MetLife Site Map Page and rally provider tool opens
+
+
+Scenario: To launch rally tool page from Uhcretiree San Francisco Pages
+Given user navigates to UHC Retiree San Francisco Home Page
+And user clicks on the Find a Provider link on San Francisco Home Page and rally tool opens in new tab
+Then user switches back to the San Francisco Home Page
+And user clicks on the Find a Provider tab on San francisco Home page
+Then user clicks on the Find a Physician Medical Group Clinic or Facility link on San Francisco Provider Page and Rally tool opens
+Then user switches back to the San Francisco Provider Page
+And user clicks on site map on San Francisco Provider Page
+Then user clicks on find a provider link on San Francisco Site Map Page and rally provider tool opens

@@ -213,4 +213,10 @@ public class PageConstants {
 	public static final String METLIFE_SITE_MAP = "metlifesitemap";
 
 	public static final String METLIFE_FIND_A_PROVIDER = "metlifefindaprovider";
+	
+	public static final String SAN_FRANCISCO_HOME_PAGE = "sanfranciscohomepage";
+	
+	public static final String SAN_FRANCISCO_FIND_A_PROVIDER = "sanfrancisofindaprovider";
+	
+	public static final String SAN_FRANCISCO_SITE_MAP = "sanfranciscositemap";
 }

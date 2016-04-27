@@ -96,4 +96,31 @@ public class Rallytool_Page extends UhcDriver {
 			// TODO Auto-generated method stub
 			return null;
 		}
+		public SanFranciscoHomePage switchBackToSanFranciscoHome() {
+		
+			ArrayList<String> tabs = new ArrayList<String> (driver.getWindowHandles());
+			driver.switchTo().window(tabs.get(0));
+			
+			if(driver.getTitle().equalsIgnoreCase("San Francisco HSS Group Retiree – Home"))
+			{
+				return new SanFranciscoHomePage(driver);
+			}
+			// TODO Auto-generated method stub
+			return null;
+		}
+
+
+		public SanfranciscoFindaProviderPage switchBackToSanFrancisoFindaProvider() {
+			ArrayList<String> tabs = new ArrayList<String> (driver.getWindowHandles());
+			driver.switchTo().window(tabs.get(0));
+			
+			if(driver.getTitle().equalsIgnoreCase("City and County of San Francisco Group Retiree – Find a Provider"))
+			{
+				return new SanfranciscoFindaProviderPage(driver);
+			}
+			
+			
+			// TODO Auto-generated method stub
+			return null;
+		}
 }

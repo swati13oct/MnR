@@ -28,6 +28,9 @@ import pages.acquisition.uhcretiree.UHCRetireeTravelersHomePage;
 import pages.acquisition.uhcretiree.VerizonHomePage;
 import pages.acquisition.uhcretiree.VerizonSiteMap;
 import pages.acquisition.uhcretiree.VerizonUhcretireePage;
+import pages.acquisition.uhcretiree.SanFranciscoHomePage;
+import pages.acquisition.uhcretiree.SanfranciscoFindaProviderPage;
+import pages.acquisition.uhcretiree.SannFranciscoSiteMapPage;
 import pages.acquisition.ulayer.LoginAssistancePage;
 import acceptancetests.atdd.data.CommonConstants;
 import acceptancetests.atdd.data.acquisition.PageConstants;
@@ -729,7 +732,128 @@ public void metlifesitemapproviderclick(){
 		Assert.fail(" Page not found");
 	}
 }
+@Given("^user navigates to UHC Retiree San Francisco Home Page$")	
 
+	public void sanfranciscohomepage(){
+		WebDriver wd = getLoginScenario().getWebDriver();
+		SanFranciscoHomePage sanfrancisco = new SanFranciscoHomePage(wd);
+		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
+
+
+		getLoginScenario().saveBean(PageConstants.SAN_FRANCISCO_HOME_PAGE, sanfrancisco);
+	}
+
+
+
+@And("^user clicks on the Find a Provider link on San Francisco Home Page and rally tool opens in new tab$")
+
+public void sanfranciscoproviderlinkclick () {
+	SanFranciscoHomePage sanfranciscoproviderlink= (SanFranciscoHomePage)getLoginScenario().getBean(PageConstants.SAN_FRANCISCO_HOME_PAGE);
+	
+	Rallytool_Page rallytool = sanfranciscoproviderlink.sanfranciscohomepageproviderclick();
+	if(rallytool!= null){
+		getLoginScenario().saveBean(PageConstants.RALLY_TOOL_PAGE,rallytool);
+		Assert.assertTrue(true);
+	} else {
+		Assert.fail(" Page not found");
+	}
+	
+	
+}
+
+@Then("^user switches back to the San Francisco Home Page$")
+
+public void backToSanFranciscoPage()
+{
+	Rallytool_Page rally = (Rallytool_Page) getLoginScenario().getBean(PageConstants.RALLY_TOOL_PAGE);
+	SanFranciscoHomePage sanfrancisco = rally.switchBackToSanFranciscoHome();
+	if(sanfrancisco!= null){
+		getLoginScenario().saveBean(PageConstants.SAN_FRANCISCO_HOME_PAGE, sanfrancisco);
+		Assert.assertTrue(true);
+		
+	} else {
+		Assert.fail("Home page not found");
+	} 
+           
+}
+
+@And("^user clicks on the Find a Provider tab on San francisco Home page$")
+
+public void sanfranciscoprovidertabclick () {
+	SanFranciscoHomePage sanfranciscoprovidertab= (SanFranciscoHomePage) getLoginScenario().getBean(PageConstants.SAN_FRANCISCO_HOME_PAGE);
+	
+	SanfranciscoFindaProviderPage sanfranciscofindaprovider = sanfranciscoprovidertab.sanfranciscoprovidertabclick();
+	if(sanfranciscofindaprovider!= null){
+		getLoginScenario().saveBean(PageConstants.SAN_FRANCISCO_FIND_A_PROVIDER,
+				sanfranciscofindaprovider);
+		Assert.assertTrue(true);
+	} else {
+		Assert.fail(" Page not found");
+	}
+	
+	
+}
+
+@Then("^user clicks on the Find a Physician Medical Group Clinic or Facility link on San Francisco Provider Page and Rally tool opens$")
+
+public void sanfranciscofindphysician(){
+	
+	SanfranciscoFindaProviderPage sanfranciscofindaproviderpage = (SanfranciscoFindaProviderPage)getLoginScenario().getBean(PageConstants.SAN_FRANCISCO_FIND_A_PROVIDER);
+	
+	Rallytool_Page rallytool = sanfranciscofindaproviderpage.findaphysiciansanfranciscoclick();
+	if(rallytool!= null){
+		getLoginScenario().saveBean(PageConstants.RALLY_TOOL_PAGE,
+				rallytool);
+		Assert.assertTrue(true);
+	} else {
+		Assert.fail(" Page not found");
+	}
+}
+@Then("^user switches back to the San Francisco Provider Page$")
+
+public void backToSanFranciscoProviderPage()
+{
+	Rallytool_Page rally  = (Rallytool_Page)getLoginScenario().getBean(PageConstants.RALLY_TOOL_PAGE);
+	SanfranciscoFindaProviderPage sanfranciscoproviderpage= rally.switchBackToSanFrancisoFindaProvider();
+	if(sanfranciscoproviderpage!= null){
+		getLoginScenario().saveBean(PageConstants.SAN_FRANCISCO_FIND_A_PROVIDER, sanfranciscoproviderpage);
+		Assert.assertTrue(true);
+		
+	} else {
+		Assert.fail("Home page not found");
+	} 
+           
+}
+
+@And("^user clicks on site map on San Francisco Provider Page$")
+
+public void sanfranciscositemapclick() {
+	SanfranciscoFindaProviderPage sanfranciscoproviderpage= (SanfranciscoFindaProviderPage)getLoginScenario().getBean(PageConstants.SAN_FRANCISCO_FIND_A_PROVIDER);
+	
+	SannFranciscoSiteMapPage sanfranciscositemap = sanfranciscoproviderpage.sanfranciscositemapclick();
+	if(sanfranciscositemap!= null){
+		getLoginScenario().saveBean(PageConstants.SAN_FRANCISCO_SITE_MAP,
+				sanfranciscositemap);
+		Assert.assertTrue(true);
+	} else {
+		Assert.fail(" Page not found");
+	}
+}
+
+@Then("^user clicks on find a provider link on San Francisco Site Map Page and rally provider tool opens$")
+
+public void sanfranciscositemapproviderclick(){
+	
+	SannFranciscoSiteMapPage sanfranciscositemap= (SannFranciscoSiteMapPage)getLoginScenario().getBean(PageConstants.SAN_FRANCISCO_SITE_MAP);
+	Rallytool_Page rallytool = sanfranciscositemap.findaprovidersanfranciscositemapclick();
+	if(rallytool!= null){
+		getLoginScenario().saveBean(PageConstants.RALLY_TOOL_PAGE,
+				rallytool);
+		Assert.assertTrue(true);
+	} else {
+		Assert.fail(" Page not found");
+	}
+}
 
 }
 
