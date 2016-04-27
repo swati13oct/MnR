@@ -29,6 +29,9 @@ import pages.acquisition.uhcretiree.KTRSSiteMapPage;
 import pages.acquisition.uhcretiree.PfizerFindaProviderPage;
 import pages.acquisition.uhcretiree.PfizerHomePage;
 import pages.acquisition.uhcretiree.PfizerSiteMapPage;
+import pages.acquisition.uhcretiree.NcshpFindaProviderPage;
+import pages.acquisition.uhcretiree.NcshpHomePage;
+import pages.acquisition.uhcretiree.NcshpSiteMapPage;
 import pages.acquisition.uhcretiree.OehwfSiteMap;
 import pages.acquisition.uhcretiree.RallyToolPage;
 import pages.acquisition.uhcretiree.Rallytool_Page;
@@ -1720,6 +1723,128 @@ public void pfizersitemapproviderclick(){
 	
 	PfizerSiteMapPage pfizersitemaprally= (PfizerSiteMapPage)getLoginScenario().getBean(PageConstants.PFIZER_SITE_MAP);
 	Rallytool_Page rallytool = pfizersitemaprally.findaproviderpfizersitemapclick();
+	if(rallytool!= null){
+		getLoginScenario().saveBean(PageConstants.RALLY_TOOL_PAGE,
+				rallytool);
+		Assert.assertTrue(true);
+	} else {
+		Assert.fail(" Page not found");
+	}
+}
+
+@Given("^user navigates to UHC North Carolina Home Page$")
+
+public void ncshphomepage() {
+	WebDriver wd = getLoginScenario().getWebDriver();
+	NcshpHomePage ncshp = new NcshpHomePage(wd);
+	getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
+
+
+	getLoginScenario().saveBean(PageConstants.NCSHP_HOME_PAGE, ncshp);
+
+}
+
+@And("^user clicks on Find a Provider link on North Carolina Home Page and rally tool opens in new tab$")
+
+public void ncshpproviderlinkclick () {
+	NcshpHomePage ncshpproviderlink= (NcshpHomePage)getLoginScenario().getBean(PageConstants.NCSHP_HOME_PAGE);
+	
+	Rallytool_Page rallytool = ncshpproviderlink.ncshphomepageproviderclick();
+	if(rallytool!= null){
+		getLoginScenario().saveBean(PageConstants.RALLY_TOOL_PAGE,
+				rallytool);
+		Assert.assertTrue(true);
+	} else {
+		Assert.fail(" Page not found");
+	}
+	
+	
+}
+
+@Then("^user switches back to North Carolina Home Page$")
+
+public void backToNcshpHomePage()
+{
+	Rallytool_Page rally  = (Rallytool_Page) getLoginScenario()
+			.getBean(PageConstants.RALLY_TOOL_PAGE);
+	NcshpHomePage ncshp = rally.switchBackToNcshpHomePage();
+	if(ncshp!= null){
+		getLoginScenario().saveBean(PageConstants.NCSHP_HOME_PAGE, ncshp);
+		Assert.assertTrue(true);
+		
+	} else {
+		Assert.fail("Home page not found");
+	} 
+           
+}
+
+@And("^user clicks on Find a Provider tab on North Carolina Home Page$")
+
+public void ncshpprovidertabclick () {
+	NcshpHomePage ncshpprovidertab= (NcshpHomePage)getLoginScenario().getBean(PageConstants.NCSHP_HOME_PAGE);
+	
+	NcshpFindaProviderPage ncshpfindaprovider = ncshpprovidertab.ncshpprovidertabclick();
+	if(ncshpfindaprovider!= null){
+		getLoginScenario().saveBean(PageConstants.NCSHP_FIND_A_PROVIDER,
+				ncshpfindaprovider);
+		Assert.assertTrue(true);
+	} else {
+		Assert.fail(" Page not found");
+	}
+	
+
+}
+
+@Then("^user clicks on Find a Physician Medical Group Clinic or Facility link on North Carolina Provider Page and Rally tool opens$")
+public void ncshpfindphysician(){
+	
+	NcshpFindaProviderPage ncshpfindaprovider = (NcshpFindaProviderPage)getLoginScenario().getBean(PageConstants.NCSHP_FIND_A_PROVIDER);
+	
+	Rallytool_Page rallytool = ncshpfindaprovider.findaphysicianncshpclick();
+	if(rallytool!= null){
+		getLoginScenario().saveBean(PageConstants.RALLY_TOOL_PAGE,
+				rallytool);
+		Assert.assertTrue(true);
+	} else {
+		Assert.fail(" Page not found");
+	}
+}
+
+@Then("^user again switches back to North Carolina Home Page$")
+public void backToNcshpProviderPage()
+{
+	Rallytool_Page rally  = (Rallytool_Page) getLoginScenario()
+			.getBean(PageConstants.RALLY_TOOL_PAGE);
+	NcshpFindaProviderPage ncshp = rally.switchBackToNcshpFindaProvider();
+	if(ncshp!= null){
+		getLoginScenario().saveBean(PageConstants.NCSHP_HOME_PAGE, ncshp);
+		Assert.assertTrue(true);
+		
+	} else {
+		Assert.fail(" Provider page not found");
+	} 
+           
+}
+
+@And("^user clicks on site map on North Carolina Home Page$")
+public void ncshpsitemapclick() {
+	NcshpFindaProviderPage ncshpproviderpage= (NcshpFindaProviderPage)getLoginScenario().getBean(PageConstants.NCSHP_HOME_PAGE);
+	
+	NcshpSiteMapPage ncshpsitemap = ncshpproviderpage.ncshpsitemapclick();
+	if(ncshpsitemap!= null){
+		getLoginScenario().saveBean(PageConstants.NCSHP_SITE_MAP,
+				ncshpsitemap);
+		Assert.assertTrue(true);
+	} else {
+		Assert.fail(" Page not found");
+	}
+}
+
+@Then("^user clicks on find a provider link on North Carolina Site Map Page and rally provider tool opens$")
+public void ncshpsitemapproviderclick(){
+	
+	NcshpSiteMapPage ncshpsitemaprally= (NcshpSiteMapPage)getLoginScenario().getBean(PageConstants.NCSHP_SITE_MAP);
+	Rallytool_Page rallytool = ncshpsitemaprally.findaproviderncshpsitemapclick();
 	if(rallytool!= null){
 		getLoginScenario().saveBean(PageConstants.RALLY_TOOL_PAGE,
 				rallytool);

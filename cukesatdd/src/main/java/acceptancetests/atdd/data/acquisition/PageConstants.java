@@ -257,5 +257,11 @@ public class PageConstants {
 	public static final String PFIZER_FIND_A_PROVIDER = "pfizerfindaprovider";
 
 	public static final String PFIZER_SITE_MAP = "pfizersitemap";
+
+	public static final String NCSHP_HOME_PAGE = "ncshp";
+
+	public static final String NCSHP_FIND_A_PROVIDER = "ncshpfindaprovider";
+
+	public static final String NCSHP_SITE_MAP = "ncshpsitemap";
 	
 }
