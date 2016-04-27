@@ -1273,4 +1273,19 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		return null;
 	}
 
+	public void multiple_county(String zipcode)
+	{
+		System.out.println("Hi");
+		sendkeys(zipCodeField, zipcode);
+		System.out.println("Hi");
+		viewPlansButton.click();
+		if (countyModal.isDisplayed())
+		{
+			System.out.println("County model window appeared");
+		}
+		else
+		{
+			System.out.println("County model window not found");
+		}
+	}
 }

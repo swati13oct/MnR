@@ -408,8 +408,14 @@ public class CommonConstants {
 	public static final String SITE_BLUELAYER = "bluelayer";
 
 	public static final String SITE_UHCRETIREE = "uhcretiree";
+	
+	public static final String SITE_BLUELAYER_MEMBER="bluelayer";
+	
+	public static final String SITE_ULAYER_MEMBER="ulayer";
 
 	public static final String ACQUISITION_EXPECTED_DIRECTORY = "/jsonresponse/acquisition";
+	
+	public static final String MEMBER_EXPECTED_DIRECTORY = "/jsonresponse/member";
 	
 	public static final String DRX_EXPECTED_DIRECTORY = "/jsonresponse/drx";
 
@@ -707,4 +713,7 @@ public class CommonConstants {
 	
 	public static final String UHC_BROWSER_CHECK_DATA = "uhcbrowsercheck.json";
 	
+	public static final String UHCM_BROWSER_CHECK_DATA = "uhcmbrowsercheck.json";
+	public static final String AARPM_BROWSER_CHECK_DATA="aarpmbrowsercheck.json";
+	public static final String GR_BROWSER_CHECK_DATA = "uhcretireebrowsercheck.json";
 }

@@ -22,6 +22,9 @@ public class SelectFormularyPage extends UhcDriver {
 
 	public JSONObject formularyListJson;
 	
+	public JSONObject browserCheckJson;
+	private PageData browserCheckData;
+	
 
 	@FindBy(xpath = "//*[@id='main']/div/div[1]/div/div[3]/div[1]/div[1]/ul/li[1]/a")
 	private WebElement specificDrugLink;
@@ -68,6 +71,28 @@ public class SelectFormularyPage extends UhcDriver {
 		return null;
 	}
 	
-	
+	public JSONObject getBrowserCheck() {
+		String fileName = CommonConstants.GR_BROWSER_CHECK_DATA;
+		browserCheckData = CommonUtility.readPageData(fileName,
+				CommonConstants.RETIREE_PAGE_OBJECT_DIRECTORY);
+		JSONObject jsonObject = new JSONObject();
+		for (String key : browserCheckData.getExpectedData().keySet()) {
+			WebElement element = findElement(browserCheckData.getExpectedData()
+					.get(key));
+			if (element != null) {
+				if (validate(element)) {
+					try {
+						jsonObject.put(key, element.getText());
+					} catch (JSONException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				}
+			}
+		}
+		browserCheckJson = jsonObject;
+
+		return browserCheckJson;
+	}
 
 }
