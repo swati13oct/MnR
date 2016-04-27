@@ -245,5 +245,11 @@ public class PageConstants {
 	public static final String SDCERA_HOME_PAGE = "sdcera";
 	
 	public static final String SDCERA_SITE_MAP = "sdcerasitemap";
+
+	public static final String KTRS_HOME_PAGE = "ktrs";	
+
+	public static final String KTRS_SITE_MAP = "ktrssitemap";
+
+	public static final String KTRS_FIND_A_PROVIDER = "ktrsfindaprovider";
 	
 }
