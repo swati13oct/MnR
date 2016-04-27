@@ -219,4 +219,25 @@ public class PageConstants {
 	public static final String SAN_FRANCISCO_FIND_A_PROVIDER = "sanfrancisofindaprovider";
 	
 	public static final String SAN_FRANCISCO_SITE_MAP = "sanfranciscositemap";
+	
+	public static final String UHCRETIREE_ACQ_ASRS_PAGE = "uhcRetireeAcqASRSPage";
+	
+	public static final String UHCRETIREE_ACQ_SHBP_PAGE = "uhcRetireeAcqSHBPPage";
+	
+	public static final String UHCRETIREE_ACQ_ASRS_PROVIDER_PAGE = "uhcRetireeAcqASRSProviderPage";
+	
+	public static final String UHCRETIREE_ACQ_SHBP_PROVIDER_PAGE = "uhcretireeshbpproviderpage";
+	
+	public static final String SITE_MAP_PAGE_ASRS = "sitemappage";
+	
+	public static final String SITE_MAP_PAGE_SHBP = "sitemapshbppage";
+	
+	public static final String UHCRETIREE_ACQ_EDISON_PAGE ="uhcRetireeedisonPage";
+	
+	public static final String UHCRETIREE_ACQ_EDISON_PROVIDER_PAGE ="uhcedisonproviderpage";
+	
+	public static final String UHCRETIREE_ACQ_EDISON_SITEMAP_PAGE ="uhcretireeedisonsitemap";
+
+	public static final String UHCRETIREE_EDISON_PAGE ="uhcretireeedisonprovider";
+	
 }

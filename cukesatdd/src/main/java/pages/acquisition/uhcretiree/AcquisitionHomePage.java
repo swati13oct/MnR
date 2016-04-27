@@ -38,6 +38,9 @@ public class AcquisitionHomePage extends UhcDriver {
 	
 	@FindBy(id = "new_form_GroupSelector")
 	private WebElement alcatelLucentSelect;	
+	
+	@FindBy(xpath="//*[@id='main']/div/div[1]/div/div[8]/div/div/div/div[1]/ul/li[6]/a")
+	private WebElement sitemaplink;
 
 	private static String UHCRETIREE_ACQISITION_PAGE_URL = MRConstants.UHCRETIREE_URL;
 	
@@ -84,5 +87,20 @@ public class AcquisitionHomePage extends UhcDriver {
 			
 		return null;
 	} 
+	
+public UHCRetireeSiteMapPage clicksitemap() {
+		
+		validate(sitemaplink);
+		sitemaplink.click();
+		if (getTitle().equalsIgnoreCase(
+				"UnitedHealthcare Group Retiree – Site Map")) {
+	return new UHCRetireeSiteMapPage(driver);
+}
+		
+		
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 
 }

@@ -21,9 +21,20 @@ import pages.acquisition.uhcretiree.MetlifeFindaProviderPage;
 import pages.acquisition.uhcretiree.MetlifeHomePage;
 import pages.acquisition.uhcretiree.MetlifeSiteMapPage;
 import pages.acquisition.uhcretiree.OehwfSiteMap;
+import pages.acquisition.uhcretiree.RallyToolPage;
 import pages.acquisition.uhcretiree.Rallytool_Page;
+import pages.acquisition.uhcretiree.SiteMapASRSPage;
+import pages.acquisition.uhcretiree.SiteMapSHBPPage;
 import pages.acquisition.uhcretiree.TravelersSiteMap;
+import pages.acquisition.uhcretiree.UHCRetireeASRSPage;
+import pages.acquisition.uhcretiree.UHCRetireeASRSProviderPage;
+import pages.acquisition.uhcretiree.UHCRetireeEdisionProviderPage;
+import pages.acquisition.uhcretiree.UHCRetireeEdisonPage;
+import pages.acquisition.uhcretiree.UHCRetireeEdisonSiteMap;
 import pages.acquisition.uhcretiree.UHCRetireeOehwfHomePage;
+import pages.acquisition.uhcretiree.UHCRetireeSHBPPage;
+import pages.acquisition.uhcretiree.UHCRetireeSHBPProviderPage;
+import pages.acquisition.uhcretiree.UHCRetireeSiteMapPage;
 import pages.acquisition.uhcretiree.UHCRetireeTravelersHomePage;
 import pages.acquisition.uhcretiree.VerizonHomePage;
 import pages.acquisition.uhcretiree.VerizonSiteMap;
@@ -854,6 +865,505 @@ public void sanfranciscositemapproviderclick(){
 		Assert.fail(" Page not found");
 	}
 }
+
+@Given("^user navigates to the UHCRetiree Home Page$")
+
+public void user_navigates_home_page() {
+	WebDriver wd = getLoginScenario().getWebDriver();
+	getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
+	AcquisitionHomePage uhcRetireeAcqHomePage = new AcquisitionHomePage(wd);
+
+	getLoginScenario().saveBean(PageConstants.UHCRETIREE_ACQ_HOME_PAGE, uhcRetireeAcqHomePage);
+}
+
+@And("^user clicks on site map to navigate on site map page$")
+
+public void user_clicks_site_map() {
+	
+	AcquisitionHomePage uhcRetireeAcqHomePage = (AcquisitionHomePage) getLoginScenario()
+			.getBean(PageConstants.UHCRETIREE_ACQ_HOME_PAGE);	
+	
+	UHCRetireeSiteMapPage uhcretireesitemappage = uhcRetireeAcqHomePage.clicksitemap();
+	
+	if(uhcretireesitemappage!= null){
+		getLoginScenario().saveBean(PageConstants.UHCRETIREE_ACQ_SITE_MAP_PAGE,
+				uhcretireesitemappage);
+		Assert.assertTrue(true);
+	} else {
+		Assert.fail("UHCRetiree Site Map page not found");
+	}
+	
+}	
+	
+@Then("^user clicks on the find a provider link and rally tool opens in a new window$")	
+
+public void user_clicks_find_a_provider() {
+	
+	UHCRetireeSiteMapPage uhcretireesitemappage = (UHCRetireeSiteMapPage) getLoginScenario()
+			.getBean(PageConstants.UHCRETIREE_ACQ_SITE_MAP_PAGE);	
+	
+	RallyToolPage rallytool = uhcretireesitemappage.clickfindaprovider();
+	
+	if(rallytool!= null){
+		getLoginScenario().saveBean(PageConstants.RALLY_TOOL_PAGE,
+				rallytool);
+		Assert.assertTrue(true);
+		} else {
+		Assert.fail("UHCRetiree Site Map page not found");
+		}
+	
+}
+
+		
+@Given("^user navigates to UHC Retiree ASRS Page$")	
+
+public void user_navigates_to_ASRS_Page() {
+	WebDriver wd = getLoginScenario().getWebDriver();
+	getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
+	
+	UHCRetireeASRSPage uhcRetireeAcqASRSPage = new UHCRetireeASRSPage(wd);
+
+	getLoginScenario().saveBean(PageConstants.UHCRETIREE_ACQ_ASRS_PAGE, uhcRetireeAcqASRSPage);
+}
+
+@And("^user clicks on the Find a Provider link and rally tool opens in new tab$")
+
+public void user_clicks_Find_a_Provider() {
+	
+	UHCRetireeASRSPage uhcRetireeAcqASRSPage = (UHCRetireeASRSPage) getLoginScenario()
+			.getBean(PageConstants.UHCRETIREE_ACQ_ASRS_PAGE);	
+	
+	RallyToolPage rallytool = uhcRetireeAcqASRSPage.clickfindaprovider();
+	
+	if(rallytool!= null){
+		getLoginScenario().saveBean(PageConstants.RALLY_TOOL_PAGE,
+				rallytool);
+		Assert.assertTrue(true);
+		} else {
+		Assert.fail("Rally Page not found");
+		}
+	
+}
+
+@Then("^user switches back to the Home Page$")
+
+public void user_switch_back() {
+	
+	RallyToolPage rallytool = (RallyToolPage) getLoginScenario()
+			.getBean(PageConstants.RALLY_TOOL_PAGE);	
+	
+	UHCRetireeASRSPage uhcRetireeAcqASRSPage = rallytool.userswitchback();
+	
+	if(uhcRetireeAcqASRSPage!= null){
+		getLoginScenario().saveBean(PageConstants.UHCRETIREE_ACQ_ASRS_PAGE,
+				uhcRetireeAcqASRSPage);
+		Assert.assertTrue(true);
+		
+	} else {
+		Assert.fail("Page not found");
+	}
+		
+}
+
+@And("^user clicks on the Find a Provider link$")
+
+public void user_clicks_Provider() {
+	
+	UHCRetireeASRSPage uhcRetireeAcqASRSPage = (UHCRetireeASRSPage) getLoginScenario()
+			.getBean(PageConstants.UHCRETIREE_ACQ_ASRS_PAGE);	
+	
+	UHCRetireeASRSProviderPage uhcretireeasrsproviderpage = uhcRetireeAcqASRSPage.clickfindaphysician();	
+	
+	if(uhcretireeasrsproviderpage!= null){
+		getLoginScenario().saveBean(PageConstants.UHCRETIREE_ACQ_ASRS_PROVIDER_PAGE,
+				uhcretireeasrsproviderpage);
+		Assert.assertTrue(true);
+		
+	} else {
+		Assert.fail("Page is not found");
+	}
+	
+}
+
+
+
+@Then("^user clicks on the Find a Physician Medical Group Clinic or Facility link and Rally tool opens$")
+
+public void user_clicks_find_a_Physician_link() {
+
+	UHCRetireeASRSProviderPage uhcretireeasrsproviderpage = (UHCRetireeASRSProviderPage) getLoginScenario()
+			.getBean(PageConstants.UHCRETIREE_ACQ_ASRS_PROVIDER_PAGE);
+	
+	RallyToolPage rallytool = uhcretireeasrsproviderpage.clickfindaphysician();	
+	if(rallytool!= null){
+		getLoginScenario().saveBean(PageConstants.RALLY_TOOL_PAGE,
+				rallytool);
+		Assert.assertTrue(true);
+		} else {
+		Assert.fail("UHCRetiree Site Map page not found");
+		}
+	
+	
+}
+	
+@Then("^user again switches back to previous page$")
+
+public void user_navigates_back_again() {
+	
+	RallyToolPage rallytool = (RallyToolPage) getLoginScenario()
+			.getBean(PageConstants.RALLY_TOOL_PAGE);	
+	
+	UHCRetireeASRSProviderPage uhcretireeasrsproviderpage = rallytool.userswitchesback();
+	
+	if(uhcretireeasrsproviderpage != null){
+		getLoginScenario().saveBean(PageConstants.UHCRETIREE_ACQ_ASRS_PROVIDER_PAGE,
+				uhcretireeasrsproviderpage );
+		Assert.assertTrue(true);
+		
+	} else {
+		Assert.fail("Page not found");
+	}
+	
+}
+
+@And("^user clicks on site map on ASRS page$")
+
+public void user_clicks_sitemap() {
+	
+	UHCRetireeASRSProviderPage uhcretireeasrsproviderpage = (UHCRetireeASRSProviderPage) getLoginScenario()
+			.getBean(PageConstants.UHCRETIREE_ACQ_ASRS_PROVIDER_PAGE);
+	
+	SiteMapASRSPage sitemappage = uhcretireeasrsproviderpage.sitemapclick();
+	
+	if(sitemappage != null){
+		getLoginScenario().saveBean(PageConstants.SITE_MAP_PAGE_ASRS,
+				sitemappage );
+		Assert.assertTrue(true);
+		
+	} else {
+		Assert.fail("Site Map Page not found");
+	}
+		
+}
+
+@Then("^user clicks on find a provider link and rally provider tool opens$")
+
+public void user_clicks_findprovider() {
+	
+	SiteMapASRSPage sitemappage  = (SiteMapASRSPage) getLoginScenario()
+			.getBean(PageConstants.SITE_MAP_PAGE_ASRS);
+	
+	RallyToolPage rallytool = sitemappage.clickfindproviderlink();	
+	if(rallytool!= null){
+		getLoginScenario().saveBean(PageConstants.RALLY_TOOL_PAGE,
+				rallytool);
+		Assert.assertTrue(true);
+		} else {
+		Assert.fail("UHCRetiree Site Map page not found");
+		}
+	
+}
+
+@Given("^user navigates to UHC Retiree EDISON page$")
+
+public void user_navigates_UHCRetireePage() {
+	
+	WebDriver wd = getLoginScenario().getWebDriver();
+	getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
+	
+	UHCRetireeEdisonPage uhcRetireeedisonPage = new UHCRetireeEdisonPage(wd);
+
+	getLoginScenario().saveBean(PageConstants.UHCRETIREE_ACQ_EDISON_PAGE, uhcRetireeedisonPage);
+}
+
+@And("^user clicks on the Find a Provider Link and Rally TOOL Opens up$")
+
+public void user_navigates_on_find_a_provider() {
+	
+	UHCRetireeEdisonPage uhcRetireeedisonPage  = (UHCRetireeEdisonPage) getLoginScenario()
+			.getBean(PageConstants.UHCRETIREE_ACQ_EDISON_PAGE);
+	
+	RallyToolPage rallytool = uhcRetireeedisonPage.clickfindprovider();
+	
+	if(rallytool!= null){
+		getLoginScenario().saveBean(PageConstants.RALLY_TOOL_PAGE,
+				rallytool);
+		Assert.assertTrue(true);
+		} else {
+		Assert.fail("UHCRetiree Site Map page not found");
+		}	
+}
+
+@Then("^user navigates back to the previous page$")
+
+public void user_navigates_on_back_page() {
+	
+	RallyToolPage rallytool = (RallyToolPage) getLoginScenario()
+			.getBean(PageConstants.RALLY_TOOL_PAGE);	
+	
+	UHCRetireeEdisonPage uhcRetireeedisonPage = rallytool.usersnavigatesback();
+	
+	if(uhcRetireeedisonPage!= null){
+		getLoginScenario().saveBean(PageConstants.UHCRETIREE_ACQ_EDISON_PAGE,
+				uhcRetireeedisonPage);
+		Assert.assertTrue(true);
+		
+	} else {
+		Assert.fail("Page not found");
+	}		
+}
+
+@And("^user clicks on Find a Provider link$")
+
+public void user_clicks_findprovider_link() {
+	
+	UHCRetireeEdisonPage uhcRetireeedisonPage  = (UHCRetireeEdisonPage) getLoginScenario()
+			.getBean(PageConstants.UHCRETIREE_ACQ_EDISON_PAGE);
+	
+	UHCRetireeEdisionProviderPage uhcedisonproviderpage = uhcRetireeedisonPage.clickfindaprovider();
+	
+	if(uhcedisonproviderpage!= null){
+		getLoginScenario().saveBean(PageConstants.UHCRETIREE_ACQ_EDISON_PROVIDER_PAGE,
+				uhcedisonproviderpage);
+		Assert.assertTrue(true);
+		
+	} else {
+		Assert.fail("Page not found");
+	}			
+}
+
+@And("^user clicks on find a physician link and RALLY TOOL opens up in new tab$")
+
+public void user_clicks_findphysician_link() {
+	
+	UHCRetireeEdisionProviderPage uhcedisonproviderpage  = (UHCRetireeEdisionProviderPage) getLoginScenario()
+			.getBean(PageConstants.UHCRETIREE_ACQ_EDISON_PROVIDER_PAGE);
+	
+
+	RallyToolPage rallytool = uhcedisonproviderpage.clickfindaphysician();
+	
+	if(rallytool!= null){
+		getLoginScenario().saveBean(PageConstants.RALLY_TOOL_PAGE,
+				rallytool);
+		Assert.assertTrue(true);
+		} else {
+		Assert.fail("Rally page not found");
+		}			
+}
+
+@Then("^user navigates back to previous page$")
+
+public void user_naviagtes_back_again() {
+	
+	RallyToolPage rallytool = (RallyToolPage) getLoginScenario()
+			.getBean(PageConstants.RALLY_TOOL_PAGE);	
+	
+	UHCRetireeEdisionProviderPage uhcedisonproviderpage = rallytool.usernavigatesbackagain();
+	
+	if(uhcedisonproviderpage != null){
+		getLoginScenario().saveBean(PageConstants.UHCRETIREE_ACQ_EDISON_PROVIDER_PAGE,
+				uhcedisonproviderpage );
+		Assert.assertTrue(true);
+		
+	} else {
+		Assert.fail("Page not found");
+	}
+	
+	
+}
+
+@And("^user clicks on site map on UHC Retiree Provider page$")
+
+public void user_clicks_on_sitemap() {
+	
+	UHCRetireeEdisionProviderPage uhcedisonproviderpage  = (UHCRetireeEdisionProviderPage) getLoginScenario()
+			.getBean(PageConstants.UHCRETIREE_ACQ_EDISON_PROVIDER_PAGE);
+	
+	UHCRetireeEdisonSiteMap uhcretireeedisonsitemap = uhcedisonproviderpage.clicksitemap();
+	
+	if(uhcretireeedisonsitemap != null){
+		getLoginScenario().saveBean(PageConstants.UHCRETIREE_ACQ_EDISON_SITEMAP_PAGE,
+				uhcretireeedisonsitemap );
+		Assert.assertTrue(true);
+		
+	} else {
+		Assert.fail("Page not found");
+	}
+	
+}
+
+@Then("^user clicks on find a provider and RALLY TOOL Opens up$")
+
+public void user_clicks_find_a_Physician() {
+	
+	UHCRetireeEdisonSiteMap uhcretireeedisonsitemap = (UHCRetireeEdisonSiteMap) getLoginScenario()
+			.getBean(PageConstants.UHCRETIREE_ACQ_EDISON_SITEMAP_PAGE);
+	
+	RallyToolPage rallytool = uhcretireeedisonsitemap.findaproviderLink();	
+	if(rallytool!= null){
+		getLoginScenario().saveBean(PageConstants.RALLY_TOOL_PAGE,
+				rallytool);
+		Assert.assertTrue(true);
+		} else {
+		Assert.fail("Page not found");
+		}
+
+
+}
+
+@Given("^user navigates to UHC Retiree SHBP page$")	
+
+public void user_navigates_to_SHBP_Page() {
+	WebDriver wd = getLoginScenario().getWebDriver();
+	getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
+	
+	UHCRetireeSHBPPage uhcRetireeAcqSHBPPage = new UHCRetireeSHBPPage(wd);
+
+	getLoginScenario().saveBean(PageConstants.UHCRETIREE_ACQ_SHBP_PAGE, uhcRetireeAcqSHBPPage);
+}
+
+@And("^user navigates to the Find a Provider Link and Rally TOOL Opens up$")
+
+public void user_clicks_Find_Provider() {
+	
+	UHCRetireeSHBPPage uhcRetireeAcqSHBPPage = (UHCRetireeSHBPPage) getLoginScenario()
+			.getBean(PageConstants.UHCRETIREE_ACQ_SHBP_PAGE);	
+	
+	RallyToolPage rallytool = uhcRetireeAcqSHBPPage.clickfindaprovider();
+	
+	if(rallytool!= null){
+		getLoginScenario().saveBean(PageConstants.RALLY_TOOL_PAGE,
+				rallytool);
+		Assert.assertTrue(true);
+		} else {
+		Assert.fail("Rally Page not found");
+		}
+	
+}
+
+
+@Then("^user navigates back to UHC Retiree SHBP page$")
+
+public void user_switchback() {
+	
+	RallyToolPage rallytool = (RallyToolPage) getLoginScenario()
+			.getBean(PageConstants.RALLY_TOOL_PAGE);	
+	
+	UHCRetireeSHBPPage uhcRetireeAcqSHBPPage = rallytool.usernavigateback();
+	
+	if(uhcRetireeAcqSHBPPage!= null){
+		getLoginScenario().saveBean(PageConstants.UHCRETIREE_ACQ_SHBP_PAGE,
+				uhcRetireeAcqSHBPPage);
+		Assert.assertTrue(true);
+		
+	} else {
+		Assert.fail("Page not found");
+	}
+		
+}
+
+@And("^user clicks on Find a Provider link on UHC Retiree SHBP page$")
+
+public void user_clicksProvider() {
+	
+	UHCRetireeSHBPPage uhcRetireeAcqSHBPPage = (UHCRetireeSHBPPage) getLoginScenario()
+			.getBean(PageConstants.UHCRETIREE_ACQ_SHBP_PAGE);	
+	
+	UHCRetireeSHBPProviderPage uhcretireeshbpproviderpage = uhcRetireeAcqSHBPPage.clickfindaphysician();	
+	
+	if(uhcretireeshbpproviderpage!= null){
+		getLoginScenario().saveBean(PageConstants.UHCRETIREE_ACQ_SHBP_PROVIDER_PAGE,
+				uhcretireeshbpproviderpage);
+		Assert.assertTrue(true);
+		
+	} else {
+		Assert.fail("Page is not found");
+	}
+	
+}
+
+
+
+@Then("^user clicks on find a physician link UHC Retiree SHBP provider page and RALLY TOOL opens up in new tab$")
+
+public void user_clicks_find_aPhysician_link() {
+
+	UHCRetireeSHBPProviderPage uhcretireeshbpproviderpage = (UHCRetireeSHBPProviderPage) getLoginScenario()
+			.getBean(PageConstants.UHCRETIREE_ACQ_SHBP_PROVIDER_PAGE);
+	
+	RallyToolPage rallytool = uhcretireeshbpproviderpage.clickfindphysician();	
+	if(rallytool!= null){
+		getLoginScenario().saveBean(PageConstants.RALLY_TOOL_PAGE,
+				rallytool);
+		Assert.assertTrue(true);
+		} else {
+		Assert.fail("UHCRetiree Site Map page not found");
+		}
+	
+	
+}
+	
+@Then("^user navigates back to UHC Retiree SHBP provider page$")
+
+public void user_navigatesback_again() {
+	
+	RallyToolPage rallytool = (RallyToolPage) getLoginScenario()
+			.getBean(PageConstants.RALLY_TOOL_PAGE);	
+	
+	UHCRetireeSHBPProviderPage uhcretireeshbpproviderpage = rallytool.userswitchesbackagain();
+	
+	if(uhcretireeshbpproviderpage != null){
+		getLoginScenario().saveBean(PageConstants.UHCRETIREE_ACQ_SHBP_PROVIDER_PAGE,
+				uhcretireeshbpproviderpage );
+		Assert.assertTrue(true);
+		
+	} else {
+		Assert.fail("Page not found");
+	}
+	
+}
+
+@And("^user clicks on site map on UHC Retiree SHBP provider page$")
+
+public void user_clickssitemap() {
+	
+	UHCRetireeSHBPProviderPage uhcretireeshbpproviderpage = (UHCRetireeSHBPProviderPage) getLoginScenario()
+			.getBean(PageConstants.UHCRETIREE_ACQ_SHBP_PROVIDER_PAGE);
+	
+	SiteMapSHBPPage sitemapshbppage = uhcretireeshbpproviderpage.sitemaplinkclick();
+	
+	if(sitemapshbppage != null){
+		getLoginScenario().saveBean(PageConstants.SITE_MAP_PAGE_SHBP,
+				sitemapshbppage );
+		Assert.assertTrue(true);
+		
+	} else {
+		Assert.fail("Site Map Page not found");
+	}
+		
+}
+
+@Then("^user clicks on find a provider UHC Retiree SHBP site map page and RALLY TOOL Opens up$")
+
+public void user_clicksfindprovider() {
+	
+	SiteMapSHBPPage sitemapshbppage  = (SiteMapSHBPPage) getLoginScenario()
+			.getBean(PageConstants.SITE_MAP_PAGE_SHBP);
+	
+	RallyToolPage rallytool = sitemapshbppage.clickfindaproviderlink();	
+	if(rallytool!= null){
+		getLoginScenario().saveBean(PageConstants.RALLY_TOOL_PAGE,
+				rallytool);
+		Assert.assertTrue(true);
+		} else {
+		Assert.fail("UHCRetiree Site Map page not found");
+		}
+	
+}
+
+
+
+
 
 }
 
