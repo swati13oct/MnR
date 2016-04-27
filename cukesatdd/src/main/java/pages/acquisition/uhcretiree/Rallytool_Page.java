@@ -201,4 +201,27 @@ public class Rallytool_Page extends UhcDriver {
 			// TODO Auto-generated method stub
 			return null;
 		}
+		public NcshpHomePage switchBackToNcshpHomePage() {
+			ArrayList<String> tabs = new ArrayList<String> (driver.getWindowHandles());
+			driver.switchTo().window(tabs.get(0));
+			
+			if(driver.getTitle().equalsIgnoreCase("North Carolina State Health Plan Group Retiree – Home"))
+			{
+				return new NcshpHomePage(driver);
+			}
+			// TODO Auto-generated method stub
+			return null;
+		}
+		
+		public NcshpFindaProviderPage switchBackToNcshpFindaProvider() {
+			ArrayList<String> tabs = new ArrayList<String> (driver.getWindowHandles());
+			driver.switchTo().window(tabs.get(0));
+			
+			if(driver.getTitle().equalsIgnoreCase("North Carolina State Health Plan Group Retiree – Find a provider"))
+			{
+				return new NcshpFindaProviderPage(driver);
+			}
+			// TODO Auto-generated method stub
+			return null;
+		}
 }
