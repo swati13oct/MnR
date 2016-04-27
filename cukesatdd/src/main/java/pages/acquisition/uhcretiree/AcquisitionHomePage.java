@@ -94,7 +94,7 @@ public class AcquisitionHomePage extends UhcDriver {
 			}
 		}
 		
-		String url = groupName.toLowerCase()+"/home.html";
+		String url ="/home.html";
 		if (currentUrl().contains(url)) {
 			return new GroupHomePage(driver);
 		} else {
