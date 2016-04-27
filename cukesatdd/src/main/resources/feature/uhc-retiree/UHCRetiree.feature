@@ -108,3 +108,13 @@ Then user again switches back to Pfizer Home Page
 And user clicks on site map on Pfizer Home Page
 Then user clicks on find a provider link on Pfizer Site Map Page and rally provider tool opens
 
+Scenario: To launch rally tool from Uhcretiree North Carolina Pages
+Given user navigates to UHC North Carolina Home Page
+And user clicks on Find a Provider link on North Carolina Home Page and rally tool opens in new tab
+Then user switches back to North Carolina Home Page
+And user clicks on Find a Provider tab on North Carolina Home Page
+Then user clicks on Find a Physician Medical Group Clinic or Facility link on North Carolina Provider Page and Rally tool opens
+Then user again switches back to North Carolina Home Page
+And user clicks on site map on North Carolina Home Page
+Then user clicks on find a provider link on North Carolina Site Map Page and rally provider tool opens
+
