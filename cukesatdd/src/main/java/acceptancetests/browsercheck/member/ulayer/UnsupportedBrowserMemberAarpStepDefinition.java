@@ -24,11 +24,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import pages.member.ulayer.AccountHomePage;
 import pages.member.ulayer.LoginPage;
+import pages.member.ulayer.ManageDrugPage;
+import pages.member.ulayer.PlanSummaryPage;
 import acceptancetests.atdd.data.CommonConstants;
 import acceptancetests.atdd.data.member.PageConstants;
 import acceptancetests.login.data.LoginCommonConstants;
+import acceptancetests.plansummary.data.PlanSummaryCommonConstants;
 import atdd.framework.MRScenario;
 import cucumber.annotation.After;
+import cucumber.annotation.en.And;
 import cucumber.annotation.en.Given;
 import cucumber.annotation.en.Then;
 import cucumber.annotation.en.When;
@@ -160,7 +164,7 @@ public class UnsupportedBrowserMemberAarpStepDefinition {
 		String browserName = caps.getBrowserName();
 		String browserVersion = caps.getVersion();		
 		Assert.assertEquals("firefox", browserName);
-		Assert.assertEquals("22.0", browserVersion);		
+		Assert.assertEquals("28.0", browserVersion);		
 		JSONObject browserCheckActual = (JSONObject) getLoginScenario()
 				.getBean(LoginCommonConstants.MEMBER_BROWSER_CHECK_ACTUAL);
 		JSONObject browserCheckExpectedJson = (JSONObject) getLoginScenario()
@@ -182,7 +186,7 @@ public class UnsupportedBrowserMemberAarpStepDefinition {
 		String browserName = caps.getBrowserName();
 		String browserVersion = caps.getVersion();		
 		Assert.assertEquals("firefox", browserName);
-		Assert.assertEquals("22.0", browserVersion);		
+		Assert.assertEquals("28.0", browserVersion);		
 		JSONObject browserCheckActual = (JSONObject) getLoginScenario()
 				.getBean(LoginCommonConstants.MEMBER_BROWSER_CHECK_ACTUAL);
 		JSONObject browserCheckExpectedJson = (JSONObject) getLoginScenario()
@@ -194,6 +198,44 @@ public class UnsupportedBrowserMemberAarpStepDefinition {
 		
 			e.printStackTrace();
 		}
+	}
+	
+	@When("^the user navigates to plan summary page in AARP site$")
+	public void user_views_plan_summary_aarp() {
+		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario()
+				.getBean(PageConstants.ACCOUNT_HOME_PAGE);
+		PlanSummaryPage planSummaryPage = accountHomePage
+				.navigateToPlanSummary();
+		/* Get expected data */
+	/*	@SuppressWarnings("unchecked")
+		Map<String, JSONObject> expectedDataMap = (Map<String, JSONObject>) getLoginScenario().getBean(CommonConstants.EXPECTED_DATA_MAP);
+		JSONObject planSummaryExpectedJson = planSummaryPage
+				.getExpectedData(expectedDataMap);
+		getLoginScenario().saveBean(
+				PlanSummaryCommonConstants.PLAN_SUMMARY_EXPECTED,
+				planSummaryExpectedJson);
+		
+		JSONObject planSummaryActualJson = null;
+		if (planSummaryPage != null) {
+			getLoginScenario().saveBean(PageConstants.PLAN_SUMMARY_PAGE,
+					planSummaryPage);
+			Assert.assertTrue(true);
+			planSummaryActualJson = planSummaryPage.planSummaryJson;
+		}
+		
+		getLoginScenario().saveBean(
+				PlanSummaryCommonConstants.PLAN_SUMMARY_ACTUAL,
+				planSummaryActualJson);
+		getLoginScenario().saveBean(PageConstants.PLAN_SUMMARY_PAGE,
+				planSummaryPage); */
+	}
+	
+	@And("^the user navigates to drug search in AARP site$")
+	public void user_navigates_to_drug_search_in_AARP_site()
+	{
+		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario()
+				.getBean(PageConstants.ACCOUNT_HOME_PAGE);
+		ManageDrugPage manageDrugPage = accountHomePage.navigateToDrugLookup();
 	}
 
 	@After
