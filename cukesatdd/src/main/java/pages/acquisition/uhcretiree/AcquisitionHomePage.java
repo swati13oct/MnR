@@ -58,6 +58,9 @@ public class AcquisitionHomePage extends UhcDriver {
 
 	@FindBy(xpath= ".//*[@id='main']/div/div[1]/div/div[4]/div[1]/div/div[1]/div[2]/div/div/div/p[2]/a")
 	private WebElement lookupproviderLink;
+	
+	@FindBy(id = "new_form_GroupSelector")
+	private WebElement alcatelLucentSelect;	
 
 
 	public JSONObject browserCheckJson;
@@ -109,6 +112,7 @@ public class AcquisitionHomePage extends UhcDriver {
 
 	} 
 	
+
 	public JSONObject getBrowserCheck() {
 		String fileName = CommonConstants.GR_BROWSER_CHECK_DATA;
 		browserCheckData = CommonUtility.readPageData(fileName,
@@ -132,6 +136,18 @@ public class AcquisitionHomePage extends UhcDriver {
 
 		return browserCheckJson;
 	}
+
+	public AlcatelLucentHomePage selectAlcatelLucent_dropdown() {
+		validate(alcatelLucentSelect);
+		Select dropdown = new Select(alcatelLucentSelect);
+		dropdown.selectByIndex(1);
+		if(getTitle().equalsIgnoreCase("Alcatel-Lucent Group Retiree - Home")){
+			return new AlcatelLucentHomePage(driver);
+		}
+			
+		return null;
+	} 
+
 
 	public GroupHomePage selectGroupFromList(String groupName) {
 	

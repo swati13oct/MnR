@@ -33,9 +33,10 @@ public class PageConstants {
 	
 	public static final String CALPER_FIND_A_PROVIDER = "calperfindaprovider";
 	
+    public static final String UHCRETIREE_ACQ_OEHWF_HOME_PAGE = "UHCRetireeOehwfHomePage";
 	
+	public static final String OEHWF_SITE_MAP_URL = "uhcRetireeOehwfSiteMapPage";
 	
-
 	public static final String UHCRETIREE_ACQ_Formulary_PAGE = "uhcRetireeAcqFormularyPage";
 
 	public static final String UHCRETIREE_ACQ_ENTER_DRUG_PAGE = "uhcRetireeAcqEnterDrugPage";
@@ -203,5 +204,34 @@ public class PageConstants {
 	public static final String CALPERS_SITE_MAP = "calpersitemap";
 
 	public static final String VERIZON_SITE_MAP_URL = "versitemaprally";
+
+	
+    public static final String UHCRETIREE_TRAVELERS_ACQ_HOME_PAGE = "uhcRetireeAcqTravelersHomePage";
+	
+	public static final String UHCRETIREE_TRAVELERS_SITE_MAP_PAGE = "TravelerssiteMapPage";
+	
+	public static final String ALCATEL_LUCENT_HOME_PAGE = "alcatelLucentHomePage";
+
+	public static final String ALCATEL_LUCENT_FIND_PROVIDER_PAGE = "alcatelLucentFindProviderPage";
+
+	public static final String ALCATEL_LUCENT_SITE_MAP_PAGE = "alcatelLucentSiteMapPage";
+	
+	public static final String JOHNSONANDJOHNSON_HOME_PAGE = "johnsonandjohnson";
+	
+	public static final String JOHNSONANDJOHNSON_PROVIDER_PAGE = "johnsonandjohnsonprovider";
+	
+	public static final String JOHNSONANDJOHNSON_SITE_MAP_PAGE = "johnsonandjohnsonsitemap";
+
+	public static final String METLIFE_HOME_PAGE = "metlife";
+
+	public static final String METLIFE_SITE_MAP = "metlifesitemap";
+
+	public static final String METLIFE_FIND_A_PROVIDER = "metlifefindaprovider";
+	
+	public static final String SAN_FRANCISCO_HOME_PAGE = "sanfranciscohomepage";
+	
+	public static final String SAN_FRANCISCO_FIND_A_PROVIDER = "sanfrancisofindaprovider";
+	
+	public static final String SAN_FRANCISCO_SITE_MAP = "sanfranciscositemap";
 
 }
