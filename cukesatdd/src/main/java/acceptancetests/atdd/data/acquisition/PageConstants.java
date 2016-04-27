@@ -240,4 +240,10 @@ public class PageConstants {
 
 	public static final String UHCRETIREE_EDISON_PAGE ="uhcretireeedisonprovider";
 	
+	public static final String SDCERA_FIND_A_PROVIDER = "sdcerafindaprovider";
+	
+	public static final String SDCERA_HOME_PAGE = "sdcera";
+	
+	public static final String SDCERA_SITE_MAP = "sdcerasitemap";
+	
 }

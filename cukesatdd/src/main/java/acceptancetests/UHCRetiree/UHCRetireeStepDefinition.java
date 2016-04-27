@@ -17,6 +17,9 @@ import pages.acquisition.uhcretiree.CalpersSiteMapPage;
 import pages.acquisition.uhcretiree.JohnsonAndJohnsonHomePage;
 import pages.acquisition.uhcretiree.JohnsonAndJohnsonProviderPage;
 import pages.acquisition.uhcretiree.JohnsonAndJohnsonSiteMapPage;
+import pages.acquisition.uhcretiree.SdceraFindaProviderPage;
+import pages.acquisition.uhcretiree.SdceraHomePage;
+import pages.acquisition.uhcretiree.SdceraSiteMapPage;
 import pages.acquisition.uhcretiree.MetlifeFindaProviderPage;
 import pages.acquisition.uhcretiree.MetlifeHomePage;
 import pages.acquisition.uhcretiree.MetlifeSiteMapPage;
@@ -866,15 +869,6 @@ public void sanfranciscositemapproviderclick(){
 	}
 }
 
-@Given("^user navigates to the UHCRetiree Home Page$")
-
-public void user_navigates_home_page() {
-	WebDriver wd = getLoginScenario().getWebDriver();
-	getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
-	AcquisitionHomePage uhcRetireeAcqHomePage = new AcquisitionHomePage(wd);
-
-	getLoginScenario().saveBean(PageConstants.UHCRETIREE_ACQ_HOME_PAGE, uhcRetireeAcqHomePage);
-}
 
 @And("^user clicks on site map to navigate on site map page$")
 
@@ -1362,9 +1356,133 @@ public void user_clicksfindprovider() {
 }
 
 
+@Given("^user navigates to UHC Retiree Sdcera Home Page$")
+
+public void sdcerahomepage() {
+	WebDriver wd = getLoginScenario().getWebDriver();
+	SdceraHomePage sdcera = new SdceraHomePage(wd);
+	getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
 
 
+	getLoginScenario().saveBean(PageConstants.SDCERA_HOME_PAGE, sdcera);
 
 }
+
+@And("^user clicks on the Find a Provider link on Sdcera Home Page and rally tool opens in new tab$")
+
+public void sdceraproviderlinkclick () {
+	SdceraHomePage sdceraproviderlink= (SdceraHomePage)getLoginScenario().getBean(PageConstants.SDCERA_HOME_PAGE);
+	
+	Rallytool_Page rallytool = sdceraproviderlink.sdcerahomepageproviderclick();
+	if(rallytool!= null){
+		getLoginScenario().saveBean(PageConstants.RALLY_TOOL_PAGE,
+				rallytool);
+		Assert.assertTrue(true);
+	} else {
+		Assert.fail(" Page not found");
+	}
+	
+	
+}
+
+@Then("^user switches back to the Sdcera Home Page$")
+
+public void backToHomesdceraPage()
+{
+	Rallytool_Page rally  = (Rallytool_Page) getLoginScenario()
+			.getBean(PageConstants.RALLY_TOOL_PAGE);
+	SdceraHomePage sdcera = rally.switchsdceraBack();
+	if(sdcera!= null){
+		getLoginScenario().saveBean(PageConstants.SDCERA_HOME_PAGE, sdcera);
+		Assert.assertTrue(true);
+		
+	} else {
+		Assert.fail("Home page not found");
+	} 
+           
+}
+
+@And("^user clicks on the Find a Provider tab on sdcera home page$")
+
+public void sdceraprovidertabclick () {
+	SdceraHomePage sdceraprovidertab= (SdceraHomePage)getLoginScenario().getBean(PageConstants.SDCERA_HOME_PAGE);
+	
+	SdceraFindaProviderPage sdcerafindaprovider = sdceraprovidertab.sdceraprovidertabclick();
+	if(sdcerafindaprovider!= null){
+		getLoginScenario().saveBean(PageConstants.SDCERA_FIND_A_PROVIDER,
+				sdcerafindaprovider);
+		Assert.assertTrue(true);
+	} else {
+		Assert.fail(" Page not found");
+	}
+	
+	
+}
+
+@Then("^user clicks on the Find a Physician Medical Group Clinic or Facility link on Sdcera Provider Page and Rally tool opens$")
+
+public void sdcerafindphysician(){
+	
+	SdceraFindaProviderPage sdcerafindaproviderpage = (SdceraFindaProviderPage)getLoginScenario().getBean(PageConstants.SDCERA_FIND_A_PROVIDER);
+	
+	Rallytool_Page rallytool = sdcerafindaproviderpage.findaphysiciansdceraclick();
+	if(rallytool!= null){
+		getLoginScenario().saveBean(PageConstants.RALLY_TOOL_PAGE,
+				rallytool);
+		Assert.assertTrue(true);
+	} else {
+		Assert.fail(" Page not found");
+	}
+}
+@Then("^user again switches back to Sdcera Home page$")
+
+public void backToSdceraProviderPage()
+{
+	Rallytool_Page rally  = (Rallytool_Page) getLoginScenario()
+			.getBean(PageConstants.RALLY_TOOL_PAGE);
+	SdceraFindaProviderPage sdcera = rally.switchBackToSdceraFindaProvider();
+	if(sdcera!= null){
+		getLoginScenario().saveBean(PageConstants.SDCERA_HOME_PAGE, sdcera);
+		Assert.assertTrue(true);
+		
+	} else {
+		Assert.fail("Home page not found");
+	} 
+           
+}
+
+@And("^user clicks on site map on Sdcera Home page$")
+
+public void sdcerasitemapclick() {
+	SdceraFindaProviderPage sdceraproviderpage= (SdceraFindaProviderPage)getLoginScenario().getBean(PageConstants.SDCERA_HOME_PAGE);
+	
+	SdceraSiteMapPage sdcerasitemap = sdceraproviderpage.sdcerasitemapclick();
+	if(sdcerasitemap!= null){
+		getLoginScenario().saveBean(PageConstants.SDCERA_SITE_MAP,
+				sdcerasitemap);
+		Assert.assertTrue(true);
+	} else {
+		Assert.fail(" Page not found");
+	}
+}
+
+@Then("^user clicks on find a provider link on Sdcera Site Map Page and rally provider tool opens$")
+
+public void sdcerasitemapproviderclick(){
+	
+	SdceraSiteMapPage sdcerasitemaprally= (SdceraSiteMapPage)getLoginScenario().getBean(PageConstants.SDCERA_SITE_MAP);
+	Rallytool_Page rallytool = sdcerasitemaprally.findaprovidersdcerasitemapclick();
+	if(rallytool!= null){
+		getLoginScenario().saveBean(PageConstants.RALLY_TOOL_PAGE,
+				rallytool);
+		Assert.assertTrue(true);
+	} else {
+		Assert.fail(" Page not found");
+	}
+}
+}
+
+
+
 
 

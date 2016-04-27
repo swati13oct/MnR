@@ -35,6 +35,18 @@ public class Rallytool_Page extends UhcDriver {
 			return null;
 		}
 
+	public SdceraHomePage switchsdceraBack() {
+			
+			ArrayList<String> tabs = new ArrayList<String> (driver.getWindowHandles());
+			driver.switchTo().window(tabs.get(0));
+			
+			if(driver.getTitle().equalsIgnoreCase("SDCERA Group Retiree – Home"))
+			{
+				return new SdceraHomePage(driver);
+			}
+			// TODO Auto-generated method stub
+			return null;
+		}
 
 		public CalperFindaProviderPage switchBackToCalperFindaProvider() {
 			ArrayList<String> tabs = new ArrayList<String> (driver.getWindowHandles());
@@ -43,6 +55,21 @@ public class Rallytool_Page extends UhcDriver {
 			if(driver.getTitle().equalsIgnoreCase("CalPERS Group Retiree – Find a provider"))
 			{
 				return new CalperFindaProviderPage(driver);
+			}
+			
+			
+			
+			// TODO Auto-generated method stub
+			return null;
+		}
+		
+		public SdceraFindaProviderPage switchBackToSdceraFindaProvider() {
+			ArrayList<String> tabs = new ArrayList<String> (driver.getWindowHandles());
+			driver.switchTo().window(tabs.get(0));
+			
+			if(driver.getTitle().equalsIgnoreCase("SDCERA Group Retiree – Find a provider"))
+			{
+				return new SdceraFindaProviderPage(driver);
 			}
 			
 			
