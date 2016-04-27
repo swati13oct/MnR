@@ -98,3 +98,13 @@ Then user again switches back to KTRS Home page
 And user clicks on site map on KTRS Home page
 Then user clicks on find a provider link on KTRS Site Map Page and rally provider tool opens
 
+Scenario: To launch rally tool from Uhcretiree Pfizer Pages
+Given user navigates to UHC Pfizer Home Page
+And user clicks on Find a Provider link on Pfizer Home Page and rally tool opens in new tab
+Then user switches back to Pfizer Home Page
+And user clicks on Find a Provider tab on Pfizer Home Page
+Then user clicks on Find a Physician Medical Group Clinic or Facility link on Pfizer Provider Page and Rally tool opens
+Then user again switches back to Pfizer Home Page
+And user clicks on site map on Pfizer Home Page
+Then user clicks on find a provider link on Pfizer Site Map Page and rally provider tool opens
+

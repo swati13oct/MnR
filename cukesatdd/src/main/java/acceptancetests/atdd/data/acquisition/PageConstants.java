@@ -251,5 +251,11 @@ public class PageConstants {
 	public static final String KTRS_SITE_MAP = "ktrssitemap";
 
 	public static final String KTRS_FIND_A_PROVIDER = "ktrsfindaprovider";
+
+	public static final String PFIZER_HOME_PAGE = "pfizer";
+
+	public static final String PFIZER_FIND_A_PROVIDER = "pfizerfindaprovider";
+
+	public static final String PFIZER_SITE_MAP = "pfizersitemap";
 	
 }

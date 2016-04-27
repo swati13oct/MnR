@@ -177,4 +177,28 @@ public class Rallytool_Page extends UhcDriver {
 			// TODO Auto-generated method stub
 			return null;
 		}
+				public PfizerHomePage switchBackToHomePage() {
+			ArrayList<String> tabs = new ArrayList<String> (driver.getWindowHandles());
+			driver.switchTo().window(tabs.get(0));
+			
+			if(driver.getTitle().equalsIgnoreCase("Pfizer Group Retiree - Home"))
+			{
+				return new PfizerHomePage(driver);
+			}
+			// TODO Auto-generated method stub
+			return null;
+		}
+
+
+		public PfizerFindaProviderPage switchBackToPfizerFindaProvider() {
+			ArrayList<String> tabs = new ArrayList<String> (driver.getWindowHandles());
+			driver.switchTo().window(tabs.get(0));
+			
+			if(driver.getTitle().equalsIgnoreCase("Pfizer Group Retiree - Find a Provider"))
+			{
+				return new PfizerFindaProviderPage(driver);
+			}
+			// TODO Auto-generated method stub
+			return null;
+		}
 }

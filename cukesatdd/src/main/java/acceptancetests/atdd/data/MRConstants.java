@@ -34,6 +34,8 @@ public class MRConstants {
 	public static final String San_Francisco_HOME_PAGE_URL = "https://www.awe-"+MRScenario.environment+"-uhcretiree.uhc.com/sfhss/home.html";
 
 	public static final String KTRS_HOME_PAGE_URL = "https://www.awe-"+MRScenario.environment+"-uhcretiree.uhc.com/ktrs/home.html";
+
+	public static final String PFIZER_HOME_PAGE_URL = "https://www.awe-"+MRScenario.environment+"-uhcretiree.uhc.com/pfizer/home.html";
 	
 
 	public static final String SDCERA_HOME_PAGE_URL = "https://www.awe-"+MRScenario.environment+"-uhcretiree.uhc.com/content/gr/en/sdcera/home.html";	

@@ -26,6 +26,9 @@ import pages.acquisition.uhcretiree.MetlifeSiteMapPage;
 import pages.acquisition.uhcretiree.KTRSFindaProviderPage;
 import pages.acquisition.uhcretiree.KTRSHomePage;
 import pages.acquisition.uhcretiree.KTRSSiteMapPage;
+import pages.acquisition.uhcretiree.PfizerFindaProviderPage;
+import pages.acquisition.uhcretiree.PfizerHomePage;
+import pages.acquisition.uhcretiree.PfizerSiteMapPage;
 import pages.acquisition.uhcretiree.OehwfSiteMap;
 import pages.acquisition.uhcretiree.RallyToolPage;
 import pages.acquisition.uhcretiree.Rallytool_Page;
@@ -52,6 +55,7 @@ import pages.acquisition.ulayer.LoginAssistancePage;
 import acceptancetests.atdd.data.CommonConstants;
 import acceptancetests.atdd.data.acquisition.PageConstants;
 import atdd.framework.MRScenario;
+import cucumber.annotation.After;
 import cucumber.annotation.en.And;
 import cucumber.annotation.en.Given;
 import cucumber.annotation.en.Then;
@@ -1604,6 +1608,134 @@ public void ktrssitemapproviderclick(){
 		Assert.fail(" Page not found");
 	}
  }
+ @Given("^user navigates to UHC Pfizer Home Page$")
+
+public void Pfizerhomepage() {
+	WebDriver wd = getLoginScenario().getWebDriver();
+	PfizerHomePage pfizer = new PfizerHomePage(wd);
+	getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
+
+
+	getLoginScenario().saveBean(PageConstants.PFIZER_HOME_PAGE, pfizer);
+
+}
+
+@And("^user clicks on Find a Provider link on Pfizer Home Page and rally tool opens in new tab$")
+
+public void pfizerproviderlinkclick () {
+	PfizerHomePage pfizerproviderlink= (PfizerHomePage)getLoginScenario().getBean(PageConstants.PFIZER_HOME_PAGE);
+	
+	Rallytool_Page rallytool = pfizerproviderlink.pfizerhomepageproviderclick();
+	if(rallytool!= null){
+		getLoginScenario().saveBean(PageConstants.RALLY_TOOL_PAGE,
+				rallytool);
+		Assert.assertTrue(true);
+	} else {
+		Assert.fail(" Page not found");
+	}
+	
+	
+}
+@Then("^user switches back to Pfizer Home Page$")
+
+public void backToPfizerHomePage()
+{
+	Rallytool_Page rally  = (Rallytool_Page) getLoginScenario()
+			.getBean(PageConstants.RALLY_TOOL_PAGE);
+	PfizerHomePage pfizer = rally.switchBackToHomePage();
+	if(pfizer!= null){
+		getLoginScenario().saveBean(PageConstants.PFIZER_HOME_PAGE, pfizer);
+		Assert.assertTrue(true);
+		
+	} else {
+		Assert.fail("Home page not found");
+	} 
+           
+}
+
+@And("^user clicks on Find a Provider tab on Pfizer Home Page$")
+
+public void pfizerprovidertabclick () {
+	PfizerHomePage pfizerprovidertab= (PfizerHomePage)getLoginScenario().getBean(PageConstants.PFIZER_HOME_PAGE);
+	
+	PfizerFindaProviderPage pfizerfindaprovider = pfizerprovidertab.pfizerprovidertabclick();
+	if(pfizerfindaprovider!= null){
+		getLoginScenario().saveBean(PageConstants.PFIZER_FIND_A_PROVIDER,
+				pfizerfindaprovider);
+		Assert.assertTrue(true);
+	} else {
+		Assert.fail(" Page not found");
+	}
+	
+
+}
+
+@Then("^user clicks on Find a Physician Medical Group Clinic or Facility link on Pfizer Provider Page and Rally tool opens$")
+public void pfizerfindphysician(){
+	
+	PfizerFindaProviderPage pfizerfindaprovider = (PfizerFindaProviderPage)getLoginScenario().getBean(PageConstants.PFIZER_FIND_A_PROVIDER);
+	
+	Rallytool_Page rallytool = pfizerfindaprovider.findaphysicianpfizerclick();
+	if(rallytool!= null){
+		getLoginScenario().saveBean(PageConstants.RALLY_TOOL_PAGE,
+				rallytool);
+		Assert.assertTrue(true);
+	} else {
+		Assert.fail(" Page not found");
+	}
+}
+
+@Then("^user again switches back to Pfizer Home Page$")
+public void backToPfizerProviderPage()
+{
+	Rallytool_Page rally  = (Rallytool_Page) getLoginScenario()
+			.getBean(PageConstants.RALLY_TOOL_PAGE);
+	PfizerFindaProviderPage pfizer = rally.switchBackToPfizerFindaProvider();
+	if(pfizer!= null){
+		getLoginScenario().saveBean(PageConstants.PFIZER_HOME_PAGE, pfizer);
+		Assert.assertTrue(true);
+		
+	} else {
+		Assert.fail(" Provider page not found");
+	} 
+           
+}
+
+@And("^user clicks on site map on Pfizer Home Page$")
+public void pfizersitemapclick() {
+	PfizerFindaProviderPage pfizerproviderpage= (PfizerFindaProviderPage)getLoginScenario().getBean(PageConstants.PFIZER_HOME_PAGE);
+	
+	PfizerSiteMapPage pfizersitemap = pfizerproviderpage.pfizersitemapclick();
+	if(pfizersitemap!= null){
+		getLoginScenario().saveBean(PageConstants.PFIZER_SITE_MAP,
+				pfizersitemap);
+		Assert.assertTrue(true);
+	} else {
+		Assert.fail(" Page not found");
+	}
+}
+
+@Then("^user clicks on find a provider link on Pfizer Site Map Page and rally provider tool opens$")
+public void pfizersitemapproviderclick(){
+	
+	PfizerSiteMapPage pfizersitemaprally= (PfizerSiteMapPage)getLoginScenario().getBean(PageConstants.PFIZER_SITE_MAP);
+	Rallytool_Page rallytool = pfizersitemaprally.findaproviderpfizersitemapclick();
+	if(rallytool!= null){
+		getLoginScenario().saveBean(PageConstants.RALLY_TOOL_PAGE,
+				rallytool);
+		Assert.assertTrue(true);
+	} else {
+		Assert.fail(" Page not found");
+	}
+}
+
+@After
+public void tearDown() {
+       WebDriver wd = (WebDriver) getLoginScenario().getBean(
+                    CommonConstants.WEBDRIVER);
+       wd.quit();
+       getLoginScenario().flushBeans();
+}
 }
 
 
