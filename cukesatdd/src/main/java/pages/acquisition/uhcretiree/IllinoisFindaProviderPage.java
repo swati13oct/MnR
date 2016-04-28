@@ -55,7 +55,7 @@ public class IllinoisFindaProviderPage extends UhcDriver {
 			illinoissitemaplink.click();
 					
 					
-		     if (getTitle().equalsIgnoreCase("Retirees and Survivors of an Illinois State-Sponsored Plan – Home")) {
+		     if (getTitle().equalsIgnoreCase("Retirees and Survivors of an Illinois State-Sponsored Plan – Site map")) {
 				return new IllinoisSiteMapPage(driver);
 				}
 			// TODO Auto-generated method stub

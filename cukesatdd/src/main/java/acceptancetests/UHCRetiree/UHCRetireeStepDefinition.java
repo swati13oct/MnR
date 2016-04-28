@@ -1869,6 +1869,8 @@ public void tearDown() {
 }
 
 
+
+
 @Given("^user navigates to UHC Retiree UAW Trust Home Page$")
 
 public void uawtrusthome() {
@@ -2061,7 +2063,7 @@ public void illinoisproviderlinkclick () {
 	
 }
 
-@Then("^user switches back to the illinois Home Page$")
+@Then("^user switches back to the Illinois Home Page$")
 
 public void backToHomeillinoisPage()
 {
