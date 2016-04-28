@@ -10,9 +10,9 @@ import cucumber.junit.Cucumber;
  */
 @RunWith(Cucumber.class)
 @Cucumber.Options(glue = { "atdd.framework","acceptancetests.browsercheck" }, 
-		features = { "feature/browsercheck/UhcRetiree" }, 
+		features = { "feature/browsercheck/member/blayer" }, 
 		format = {
-		"pretty", "html:reports/test-report" }, tags ={"@browsercheckGR"})
+		"pretty", "html:reports/test-report" }, tags ={"@memberBrowserCheck"})
 public class RunMRAtddTestUnsupportedBrowsers {
 
 }

@@ -22,12 +22,15 @@ import org.openqa.selenium.remote.RemoteWebDriver;
 import org.skyscreamer.jsonassert.JSONAssert;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import pages.acquisition.ulayer.LoginAssistancePage;
 import pages.member.ulayer.AccountHomePage;
+import pages.member.ulayer.ContactUsPage;
 import pages.member.ulayer.LoginPage;
 import pages.member.ulayer.ManageDrugPage;
 import pages.member.ulayer.PlanSummaryPage;
 import acceptancetests.atdd.data.CommonConstants;
 import acceptancetests.atdd.data.member.PageConstants;
+import acceptancetests.contactus.data.ContactUsCommonConstants;
 import acceptancetests.login.data.LoginCommonConstants;
 import acceptancetests.plansummary.data.PlanSummaryCommonConstants;
 import atdd.framework.MRScenario;
@@ -198,14 +201,17 @@ public class UnsupportedBrowserMemberAarpStepDefinition {
 		
 			e.printStackTrace();
 		}
+		AccountHomePage accountHomePage= (AccountHomePage)getLoginScenario().getBean(PageConstants.ACCOUNT_HOME_PAGE);
+		accountHomePage.logOut();
+		
+		
 	}
 	
 	@When("^the user navigates to plan summary page in AARP site$")
 	public void user_views_plan_summary_aarp() {
 		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario()
 				.getBean(PageConstants.ACCOUNT_HOME_PAGE);
-		PlanSummaryPage planSummaryPage = accountHomePage
-				.navigateToPlanSummary();
+		 accountHomePage.navigateToPlanSummary();
 		/* Get expected data */
 	/*	@SuppressWarnings("unchecked")
 		Map<String, JSONObject> expectedDataMap = (Map<String, JSONObject>) getLoginScenario().getBean(CommonConstants.EXPECTED_DATA_MAP);
@@ -237,7 +243,65 @@ public class UnsupportedBrowserMemberAarpStepDefinition {
 				.getBean(PageConstants.ACCOUNT_HOME_PAGE);
 		ManageDrugPage manageDrugPage = accountHomePage.navigateToDrugLookup();
 	}
+	
+	@When("^the user navigates to contact us page in AARP site$")
+	public void views_order_materials_in_Ums_site() {
+		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario()
+				.getBean(PageConstants.ACCOUNT_HOME_PAGE);
+		ContactUsPage contactUsPage = accountHomePage
+				.navigatesToContactUsPage();
+		if (contactUsPage != null) {
 
+			/* Get expected data */
+			/*@SuppressWarnings("unchecked")
+			Map<String, JSONObject> expectedDataMap = (Map<String, JSONObject>) getLoginScenario()
+			.getBean(CommonConstants.EXPECTED_DATA_MAP);
+			JSONObject contactUsExpectedJson = contactUsPage
+					.getExpectedData(expectedDataMap);
+			getLoginScenario().saveBean(
+					ContactUsCommonConstants.CONTACT_US_EXPECTED_JSON,
+					contactUsExpectedJson);
+
+			JSONObject contactUsActualJson = contactUsPage.contactUsJson;
+			getLoginScenario().saveBean(
+					ContactUsCommonConstants.CONTACT_US_ACTUAL_JSON,
+					contactUsActualJson);
+
+			getLoginScenario().saveBean(PageConstants.CONTACT_US_PAGE,
+					contactUsPage); */
+			System.out.println("Contact Us page found !!!");
+		 }
+		else
+		{
+			System.out.println("Contact Us page Not found !!!");
+		}
+		accountHomePage.logOut();
+		}
+	
+	@And("^user is on error page$")
+	public void user_is_on_error_page()
+	{
+		LoginPage memberLoginHomepage = (LoginPage) getLoginScenario().getBean(PageConstants.LOGIN_PAGE);
+		memberLoginHomepage.start("https://member.awe-dev-a-aarpmedicareplans.uhc.com/500.html");
+	}
+	
+	@Given("^user navigates to login assistance page from member AARP site$")
+	public void user_navigates_login_assistance_member_aarp() {
+
+		
+		getLoginScenario().getBean(CommonConstants.WEBDRIVER);
+		LoginPage memberLoginHomepage = (LoginPage) getLoginScenario().getBean(PageConstants.LOGIN_PAGE);
+		LoginAssistancePage loginAssistancePage = memberLoginHomepage
+				.navigateToLoginAssistance();
+		if (loginAssistancePage != null) {
+			
+			Assert.assertTrue(true);
+		} else {
+			Assert.fail("Error loading LoginAssistance page");
+		}
+
+	}
+	
 	@After
 	public void tearDown() {
 		WebDriver wd = (WebDriver) getLoginScenario().getBean(
