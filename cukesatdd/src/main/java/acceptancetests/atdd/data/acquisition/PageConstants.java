@@ -234,4 +234,50 @@ public class PageConstants {
 	
 	public static final String SAN_FRANCISCO_SITE_MAP = "sanfranciscositemap";
 
+	
+	public static final String UHCRETIREE_ACQ_ASRS_PAGE = "uhcRetireeAcqASRSPage";
+	
+	public static final String UHCRETIREE_ACQ_SHBP_PAGE = "uhcRetireeAcqSHBPPage";
+	
+	public static final String UHCRETIREE_ACQ_ASRS_PROVIDER_PAGE = "uhcRetireeAcqASRSProviderPage";
+	
+	public static final String UHCRETIREE_ACQ_SHBP_PROVIDER_PAGE = "uhcretireeshbpproviderpage";
+	
+	public static final String SITE_MAP_PAGE_ASRS = "sitemappage";
+	
+	public static final String SITE_MAP_PAGE_SHBP = "sitemapshbppage";
+	
+	public static final String UHCRETIREE_ACQ_EDISON_PAGE ="uhcRetireeedisonPage";
+	
+	public static final String UHCRETIREE_ACQ_EDISON_PROVIDER_PAGE ="uhcedisonproviderpage";
+	
+	public static final String UHCRETIREE_ACQ_EDISON_SITEMAP_PAGE ="uhcretireeedisonsitemap";
+
+	public static final String UHCRETIREE_EDISON_PAGE ="uhcretireeedisonprovider";
+	
+	public static final String SDCERA_FIND_A_PROVIDER = "sdcerafindaprovider";
+	
+	public static final String SDCERA_HOME_PAGE = "sdcera";
+	
+	public static final String SDCERA_SITE_MAP = "sdcerasitemap";
+
+	public static final String KTRS_HOME_PAGE = "ktrs";	
+
+	public static final String KTRS_SITE_MAP = "ktrssitemap";
+
+	public static final String KTRS_FIND_A_PROVIDER = "ktrsfindaprovider";
+
+	public static final String PFIZER_HOME_PAGE = "pfizer";
+
+	public static final String PFIZER_FIND_A_PROVIDER = "pfizerfindaprovider";
+
+	public static final String PFIZER_SITE_MAP = "pfizersitemap";
+
+	public static final String NCSHP_HOME_PAGE = "ncshp";
+
+	public static final String NCSHP_FIND_A_PROVIDER = "ncshpfindaprovider";
+
+	public static final String NCSHP_SITE_MAP = "ncshpsitemap";
+	
+
 }

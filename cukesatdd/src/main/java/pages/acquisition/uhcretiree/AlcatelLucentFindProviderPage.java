@@ -51,7 +51,6 @@ public class AlcatelLucentFindProviderPage extends UhcDriver{
 	public AlcatelLucentSiteMapPage siteMapLinkClick() {
 		validate(siteMapLink);
 		siteMapLink.click();
-		validate(siteMapLink);
 		if(getTitle().equalsIgnoreCase("Alcatel-Lucent Group Retiree - Site Map")){
 			return new AlcatelLucentSiteMapPage(driver);
 		}

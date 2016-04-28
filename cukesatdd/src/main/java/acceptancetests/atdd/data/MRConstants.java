@@ -32,9 +32,15 @@ public class MRConstants {
 	public static final String METLIFE_HOME_PAGE_URL = "https://www.awe-"+MRScenario.environment+"-uhcretiree.uhc.com/metlife/home.html";
 	
 	public static final String San_Francisco_HOME_PAGE_URL = "https://www.awe-"+MRScenario.environment+"-uhcretiree.uhc.com/sfhss/home.html";
+
+	public static final String KTRS_HOME_PAGE_URL = "https://www.awe-"+MRScenario.environment+"-uhcretiree.uhc.com/ktrs/home.html";
+
+	public static final String PFIZER_HOME_PAGE_URL = "https://www.awe-"+MRScenario.environment+"-uhcretiree.uhc.com/pfizer/home.html";
+
+	public static final String NCSHP_HOME_PAGE_URL = "https://www.awe-"+MRScenario.environment+"-uhcretiree.uhc.com/ncshp/home.html";
 	
 
-	
+	public static final String SDCERA_HOME_PAGE_URL = "https://www.awe-"+MRScenario.environment+"-uhcretiree.uhc.com/content/gr/en/sdcera/home.html";	
 
 	public static final String UHCRETIREE_SITE_MAP_URL = "https://www.awe-"+MRScenario.environment+"-uhcretiree.uhc.com/site_map.html";
 	
@@ -72,5 +78,10 @@ public class MRConstants {
 	
 	public static final String UHCRETIREE_SITE_MAP_TRAVELERS_URL = "https://www.awe-"+MRScenario.environment+"-uhcretiree.uhc.com/travelers/site_map.html";
 	
+	public static final String UHCRETIREE_EDISON_URL ="https://www.awe-"+MRScenario.environment+"-uhcretiree.uhc.com/edison/home.html";
+
+	public static final String UHCRETIREE_ASRS_PAGE = "https://www.awe-"+MRScenario.environment+"-uhcretiree.uhc.com/asrs/home.html";
+
+	public static final String UHCRETIREE_SHBP_PAGE = "https://www.awe-"+MRScenario.environment+"-uhcretiree.uhc.com/shbp/home.html";
 	
 }

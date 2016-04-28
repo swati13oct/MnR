@@ -78,3 +78,43 @@ Then user clicks on the Find a Physician Medical Group Clinic or Facility link o
 Then user switches back to the San Francisco Provider Page
 And user clicks on site map on San Francisco Provider Page
 Then user clicks on find a provider link on San Francisco Site Map Page and rally provider tool opens
+Scenario: To launch rally tool page from Uhcretiree Sdcera Pages
+Given user navigates to UHC Retiree Sdcera Home Page
+And user clicks on the Find a Provider link on Sdcera Home Page and rally tool opens in new tab
+Then user switches back to the Sdcera Home Page
+And user clicks on the Find a Provider tab on sdcera home page
+Then user clicks on the Find a Physician Medical Group Clinic or Facility link on Sdcera Provider Page and Rally tool opens
+Then user again switches back to Sdcera Home page
+And user clicks on site map on Sdcera Home page
+Then user clicks on find a provider link on Sdcera Site Map Page and rally provider tool opens
+
+Scenario:To launch rally tool page from Uhcretiree KTRS Pages
+Given user navigates to UHC Retiree KTRS Home Page
+And user clicks on the Find a Provider link on KTRS Home Page and rally tool opens in new tab
+Then user switches back to the KTRS Home Page
+And user clicks on the KTRS Find a Provider tab
+Then user clicks on the Find a Physician Medical Group Clinic or Facility link on KTRS Provider Page and Rally tool opens
+Then user again switches back to KTRS Home page
+And user clicks on site map on KTRS Home page
+Then user clicks on find a provider link on KTRS Site Map Page and rally provider tool opens
+
+Scenario: To launch rally tool from Uhcretiree Pfizer Pages
+Given user navigates to UHC Pfizer Home Page
+And user clicks on Find a Provider link on Pfizer Home Page and rally tool opens in new tab
+Then user switches back to Pfizer Home Page
+And user clicks on Find a Provider tab on Pfizer Home Page
+Then user clicks on Find a Physician Medical Group Clinic or Facility link on Pfizer Provider Page and Rally tool opens
+Then user again switches back to Pfizer Home Page
+And user clicks on site map on Pfizer Home Page
+Then user clicks on find a provider link on Pfizer Site Map Page and rally provider tool opens
+
+Scenario: To launch rally tool from Uhcretiree North Carolina Pages
+Given user navigates to UHC North Carolina Home Page
+And user clicks on Find a Provider link on North Carolina Home Page and rally tool opens in new tab
+Then user switches back to North Carolina Home Page
+And user clicks on Find a Provider tab on North Carolina Home Page
+Then user clicks on Find a Physician Medical Group Clinic or Facility link on North Carolina Provider Page and Rally tool opens
+Then user again switches back to North Carolina Home Page
+And user clicks on site map on North Carolina Home Page
+Then user clicks on find a provider link on North Carolina Site Map Page and rally provider tool opens
+

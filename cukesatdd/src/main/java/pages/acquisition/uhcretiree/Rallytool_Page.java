@@ -35,6 +35,18 @@ public class Rallytool_Page extends UhcDriver {
 			return null;
 		}
 
+	public SdceraHomePage switchsdceraBack() {
+			
+			ArrayList<String> tabs = new ArrayList<String> (driver.getWindowHandles());
+			driver.switchTo().window(tabs.get(0));
+			
+			if(driver.getTitle().equalsIgnoreCase("SDCERA Group Retiree – Home"))
+			{
+				return new SdceraHomePage(driver);
+			}
+			// TODO Auto-generated method stub
+			return null;
+		}
 
 		public CalperFindaProviderPage switchBackToCalperFindaProvider() {
 			ArrayList<String> tabs = new ArrayList<String> (driver.getWindowHandles());
@@ -43,6 +55,21 @@ public class Rallytool_Page extends UhcDriver {
 			if(driver.getTitle().equalsIgnoreCase("CalPERS Group Retiree – Find a provider"))
 			{
 				return new CalperFindaProviderPage(driver);
+			}
+			
+			
+			
+			// TODO Auto-generated method stub
+			return null;
+		}
+		
+		public SdceraFindaProviderPage switchBackToSdceraFindaProvider() {
+			ArrayList<String> tabs = new ArrayList<String> (driver.getWindowHandles());
+			driver.switchTo().window(tabs.get(0));
+			
+			if(driver.getTitle().equalsIgnoreCase("SDCERA Group Retiree – Find a provider"))
+			{
+				return new SdceraFindaProviderPage(driver);
 			}
 			
 			
@@ -120,6 +147,80 @@ public class Rallytool_Page extends UhcDriver {
 			}
 			
 			
+			// TODO Auto-generated method stub
+			return null;
+		}
+
+				public KTRSHomePage ktrsswitchBack() {
+			
+			ArrayList<String> tabs = new ArrayList<String> (driver.getWindowHandles());
+			driver.switchTo().window(tabs.get(0));
+			
+			if(driver.getTitle().equalsIgnoreCase("KTRS Group Retiree - Home"))
+			{
+				return new KTRSHomePage(driver);
+			}
+			// TODO Auto-generated method stub
+			return null;
+		}
+		
+		public KTRSFindaProviderPage switchBackToktrsFindaProvider() {
+			ArrayList<String> tabs = new ArrayList<String> (driver.getWindowHandles());
+			driver.switchTo().window(tabs.get(0));
+			
+			if(driver.getTitle().equalsIgnoreCase("KTRS Group Retiree - Find a Provider"))
+			{
+				return new KTRSFindaProviderPage(driver);
+			}
+			
+			
+			// TODO Auto-generated method stub
+			return null;
+		}
+				public PfizerHomePage switchBackToHomePage() {
+			ArrayList<String> tabs = new ArrayList<String> (driver.getWindowHandles());
+			driver.switchTo().window(tabs.get(0));
+			
+			if(driver.getTitle().equalsIgnoreCase("Pfizer Group Retiree - Home"))
+			{
+				return new PfizerHomePage(driver);
+			}
+			// TODO Auto-generated method stub
+			return null;
+		}
+
+
+		public PfizerFindaProviderPage switchBackToPfizerFindaProvider() {
+			ArrayList<String> tabs = new ArrayList<String> (driver.getWindowHandles());
+			driver.switchTo().window(tabs.get(0));
+			
+			if(driver.getTitle().equalsIgnoreCase("Pfizer Group Retiree - Find a Provider"))
+			{
+				return new PfizerFindaProviderPage(driver);
+			}
+			// TODO Auto-generated method stub
+			return null;
+		}
+		public NcshpHomePage switchBackToNcshpHomePage() {
+			ArrayList<String> tabs = new ArrayList<String> (driver.getWindowHandles());
+			driver.switchTo().window(tabs.get(0));
+			
+			if(driver.getTitle().equalsIgnoreCase("North Carolina State Health Plan Group Retiree – Home"))
+			{
+				return new NcshpHomePage(driver);
+			}
+			// TODO Auto-generated method stub
+			return null;
+		}
+		
+		public NcshpFindaProviderPage switchBackToNcshpFindaProvider() {
+			ArrayList<String> tabs = new ArrayList<String> (driver.getWindowHandles());
+			driver.switchTo().window(tabs.get(0));
+			
+			if(driver.getTitle().equalsIgnoreCase("North Carolina State Health Plan Group Retiree – Find a provider"))
+			{
+				return new NcshpFindaProviderPage(driver);
+			}
 			// TODO Auto-generated method stub
 			return null;
 		}
