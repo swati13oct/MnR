@@ -48,6 +48,9 @@ import pages.acquisition.uhcretiree.UHCRetireeSHBPPage;
 import pages.acquisition.uhcretiree.UHCRetireeSHBPProviderPage;
 import pages.acquisition.uhcretiree.UHCRetireeSiteMapPage;
 import pages.acquisition.uhcretiree.UHCRetireeTravelersHomePage;
+import pages.acquisition.uhcretiree.UawHomePage;
+import pages.acquisition.uhcretiree.UawProviderPage;
+import pages.acquisition.uhcretiree.UawSiteMapPage;
 import pages.acquisition.uhcretiree.VerizonHomePage;
 import pages.acquisition.uhcretiree.VerizonSiteMap;
 import pages.acquisition.uhcretiree.VerizonUhcretireePage;
@@ -1861,7 +1864,181 @@ public void tearDown() {
        wd.quit();
        getLoginScenario().flushBeans();
 }
+
+
+@Given("^user navigates to UHC Retiree UAW Trust Home Page$")
+
+public void uawtrusthome() {
+	WebDriver wd = getLoginScenario().getWebDriver();
+	UawHomePage uawhomepage = new UawHomePage(wd);
+	getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
+
+
+	getLoginScenario().saveBean(PageConstants.UAW_HOME_PAGE, uawhomepage);
+
+} 
+
+@And("^user clicks on the Find a Provider link on UAW Trust Home Page Home Page and rally tool opens in new tab")
+
+public void uawfindaproviderclick() {
+	
+	UawHomePage uawhomepage = (UawHomePage)getLoginScenario().getBean(PageConstants.UAW_HOME_PAGE);
+	Rallytool_Page rallytool= uawhomepage.uawfindaproviderclick();
+	if (rallytool!= null)
+	{
+		getLoginScenario().saveBean(PageConstants.RALLY_TOOL_PAGE,
+				rallytool);
+		Assert.assertTrue(true);
+		
+	}
+	
+	else {
+		Assert.fail("Page not found");
+	}
+	
+	
+	
+	
+	
 }
+
+@Then("^user switches back to the UAW Trust Home Page$")
+
+public void switchbacktouawhomepage(){
+	
+	Rallytool_Page rallytool= (Rallytool_Page)getLoginScenario().getBean(PageConstants.RALLY_TOOL_PAGE);
+	
+	UawHomePage uawhomepage = rallytool.switchbackToUawHomePage();
+	
+	
+	if(uawhomepage!= null){
+		getLoginScenario().saveBean(PageConstants.UAW_HOME_PAGE, uawhomepage);
+		Assert.assertTrue(true);
+		
+	} else {
+		Assert.fail("Home page not found");
+	} 
+	
+	
+	
+}
+
+@And("^user clicks on the Find a Provider tab on UAW Trust Home Page$")
+
+public void uawfindaprovidertab()
+{
+	UawHomePage uawhomepage = (UawHomePage)getLoginScenario().getBean(PageConstants.UAW_HOME_PAGE);
+	
+	UawProviderPage uawproviderpage = uawhomepage.uawfindaprovidertabclick();
+	
+	if(uawproviderpage!=null){
+		
+		getLoginScenario().saveBean(PageConstants.UAW_PROVIDER_PAGE,
+				uawproviderpage);
+		Assert.assertTrue(true);
+		
+	}
+	
+	else {
+		Assert.fail("Page not found");
+	}
+		
+	}
+
+@Then("^user clicks on the Find a Physician Medical Group Clinic or Facility link on UAW Trust Provider Page and Rally tool opens$")
+
+public void uawfindaphysicianlink()
+{
+	UawProviderPage uawproviderpage =(UawProviderPage)getLoginScenario().getBean(PageConstants.UAW_PROVIDER_PAGE);
+	
+	
+	
+	Rallytool_Page rallytool= uawproviderpage.uawfindaphysicianclick();
+	if (rallytool!= null)
+	{
+		getLoginScenario().saveBean(PageConstants.RALLY_TOOL_PAGE,
+				rallytool);
+		Assert.assertTrue(true);
+		
+	}
+	
+	else {
+		Assert.fail("Page not found");
+	}
+	
+}
+
+@Then("^user again switches back to UAW Trust Provider Page$")
+
+public void backtouawproviderpage()
+{
+	Rallytool_Page rallytool= (Rallytool_Page)getLoginScenario().getBean(PageConstants.RALLY_TOOL_PAGE);
+	
+	UawProviderPage uawproviderpage = rallytool.switchbacktouawproviderpage();
+	
+	if(uawproviderpage!= null){
+		getLoginScenario().saveBean(PageConstants.UAW_PROVIDER_PAGE, uawproviderpage);
+		Assert.assertTrue(true);
+		
+	} else {
+		Assert.fail("Home page not found");
+	} 
+	
+	
+}
+
+@And("^user clicks on site map on UAW Trust Provider Page")
+
+public void uawsitemaplink(){
+
+UawProviderPage uawproviderpage =(UawProviderPage)getLoginScenario().getBean(PageConstants.UAW_PROVIDER_PAGE);
+
+UawSiteMapPage uawsitemappage= uawproviderpage.uawsitemaplinkclick(); 
+
+if (uawsitemappage!= null)
+{
+	getLoginScenario().saveBean(PageConstants.UAW_SITE_MAP_PAGE,
+			uawsitemappage);
+	Assert.assertTrue(true);
+	
+}
+
+else {
+	Assert.fail("Page not found");
+}
+}
+
+@Then("^user clicks on find a provider link on UAW Trust Site Map Page and rally provider tool opens$")
+
+public void uawsitemapfindaprovider()
+{
+	UawSiteMapPage uawsitemappage = (UawSiteMapPage)getLoginScenario().getBean(PageConstants.UAW_SITE_MAP_PAGE);
+	Rallytool_Page rallytool = uawsitemappage.uawsitemapfindaproviderclick();
+	
+	if (rallytool!= null)
+	{
+		getLoginScenario().saveBean(PageConstants.RALLY_TOOL_PAGE,
+				rallytool);
+		Assert.assertTrue(true);
+		
+	}
+	
+	else {
+		Assert.fail("Page not found");
+	}
+	
+}
+	
+	
+}
+
+
+
+
+
+
+
+
 
 
 

@@ -118,3 +118,14 @@ Then user again switches back to North Carolina Home Page
 And user clicks on site map on North Carolina Home Page
 Then user clicks on find a provider link on North Carolina Site Map Page and rally provider tool opens
 
+Scenario: To launch rally tool page from Uhcretiree UAW Trust Pages
+Given user navigates to UHC Retiree UAW Trust Home Page
+And user clicks on the Find a Provider link on UAW Trust Home Page Home Page and rally tool opens in new tab
+Then user switches back to the UAW Trust Home Page
+And user clicks on the Find a Provider tab on UAW Trust Home Page
+Then user clicks on the Find a Physician Medical Group Clinic or Facility link on UAW Trust Provider Page and Rally tool opens
+Then user again switches back to UAW Trust Provider Page
+And user clicks on site map on UAW Trust Provider Page
+Then user clicks on find a provider link on UAW Trust Site Map Page and rally provider tool opens
+
+
