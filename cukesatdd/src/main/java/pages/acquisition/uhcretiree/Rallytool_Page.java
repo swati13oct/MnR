@@ -253,8 +253,32 @@ public UawProviderPage switchbacktouawproviderpage() {
 	return null;
 }
 
-
+public IllinoisHomePage switchillinoisBack() {
 	
+	ArrayList<String> tabs = new ArrayList<String> (driver.getWindowHandles());
+	driver.switchTo().window(tabs.get(0));
+	
+	if(driver.getTitle().equalsIgnoreCase("Retirees and Survivors of an Illinois State-Sponsored Plan – Home"))
+	{
+		return new IllinoisHomePage(driver);
+	}
+	// TODO Auto-generated method stub
+	return null;
+}
+
+public IllinoisFindaProviderPage switchBackToIllinoisFindaProvider() {
+	ArrayList<String> tabs = new ArrayList<String> (driver.getWindowHandles());
+	driver.switchTo().window(tabs.get(0));
+	
+	if(driver.getTitle().equalsIgnoreCase("Retirees and Survivors of an Illinois State-Sponsored Plan – Find a provider"))
+	{
+		return new IllinoisFindaProviderPage(driver);
+	}
+	
+	
+	// TODO Auto-generated method stub
+	return null;
+}	
 
 
 }
