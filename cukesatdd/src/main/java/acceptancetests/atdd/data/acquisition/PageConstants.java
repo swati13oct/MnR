@@ -280,4 +280,17 @@ public class PageConstants {
 	public static final String NCSHP_SITE_MAP = "ncshpsitemap";
 	
 
+	public static final String UAW_HOME_PAGE = "uawhomepage";
+	
+	public static final String UAW_PROVIDER_PAGE = "uawproviderpage";
+	
+	public static final String UAW_SITE_MAP_PAGE = "uawsitemappage";
+	
+	public static final String ILLINOIS_FIND_A_PROVIDER = "illinoisfindaprovider";
+	
+	public static final String ILLINOIS_HOME_PAGE = "illinois";
+	
+	public static final String ILLINOIS_SITE_MAP = "illinoissitemap";
+	
+
 }

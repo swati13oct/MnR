@@ -48,9 +48,15 @@ import pages.acquisition.uhcretiree.UHCRetireeSHBPPage;
 import pages.acquisition.uhcretiree.UHCRetireeSHBPProviderPage;
 import pages.acquisition.uhcretiree.UHCRetireeSiteMapPage;
 import pages.acquisition.uhcretiree.UHCRetireeTravelersHomePage;
+import pages.acquisition.uhcretiree.UawHomePage;
+import pages.acquisition.uhcretiree.UawProviderPage;
+import pages.acquisition.uhcretiree.UawSiteMapPage;
 import pages.acquisition.uhcretiree.VerizonHomePage;
 import pages.acquisition.uhcretiree.VerizonSiteMap;
 import pages.acquisition.uhcretiree.VerizonUhcretireePage;
+import pages.acquisition.uhcretiree.IllinoisFindaProviderPage;
+import pages.acquisition.uhcretiree.IllinoisHomePage;
+import pages.acquisition.uhcretiree.IllinoisSiteMapPage;
 import pages.acquisition.uhcretiree.SanFranciscoHomePage;
 import pages.acquisition.uhcretiree.SanfranciscoFindaProviderPage;
 import pages.acquisition.uhcretiree.SannFranciscoSiteMapPage;
@@ -1861,7 +1867,313 @@ public void tearDown() {
        wd.quit();
        getLoginScenario().flushBeans();
 }
+
+
+
+
+@Given("^user navigates to UHC Retiree UAW Trust Home Page$")
+
+public void uawtrusthome() {
+	WebDriver wd = getLoginScenario().getWebDriver();
+	UawHomePage uawhomepage = new UawHomePage(wd);
+	getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
+
+
+	getLoginScenario().saveBean(PageConstants.UAW_HOME_PAGE, uawhomepage);
+
+} 
+
+@And("^user clicks on the Find a Provider link on UAW Trust Home Page Home Page and rally tool opens in new tab")
+
+public void uawfindaproviderclick() {
+	
+	UawHomePage uawhomepage = (UawHomePage)getLoginScenario().getBean(PageConstants.UAW_HOME_PAGE);
+	Rallytool_Page rallytool= uawhomepage.uawfindaproviderclick();
+	if (rallytool!= null)
+	{
+		getLoginScenario().saveBean(PageConstants.RALLY_TOOL_PAGE,
+				rallytool);
+		Assert.assertTrue(true);
+		
+	}
+	
+	else {
+		Assert.fail("Page not found");
+	}
+	
+	
+	
+	
+	
 }
+
+@Then("^user switches back to the UAW Trust Home Page$")
+
+public void switchbacktouawhomepage(){
+	
+	Rallytool_Page rallytool= (Rallytool_Page)getLoginScenario().getBean(PageConstants.RALLY_TOOL_PAGE);
+	
+	UawHomePage uawhomepage = rallytool.switchbackToUawHomePage();
+	
+	
+	if(uawhomepage!= null){
+		getLoginScenario().saveBean(PageConstants.UAW_HOME_PAGE, uawhomepage);
+		Assert.assertTrue(true);
+		
+	} else {
+		Assert.fail("Home page not found");
+	} 
+	
+	
+	
+}
+
+@And("^user clicks on the Find a Provider tab on UAW Trust Home Page$")
+
+public void uawfindaprovidertab()
+{
+	UawHomePage uawhomepage = (UawHomePage)getLoginScenario().getBean(PageConstants.UAW_HOME_PAGE);
+	
+	UawProviderPage uawproviderpage = uawhomepage.uawfindaprovidertabclick();
+	
+	if(uawproviderpage!=null){
+		
+		getLoginScenario().saveBean(PageConstants.UAW_PROVIDER_PAGE,
+				uawproviderpage);
+		Assert.assertTrue(true);
+		
+	}
+	
+	else {
+		Assert.fail("Page not found");
+	}
+		
+	}
+
+@Then("^user clicks on the Find a Physician Medical Group Clinic or Facility link on UAW Trust Provider Page and Rally tool opens$")
+
+public void uawfindaphysicianlink()
+{
+	UawProviderPage uawproviderpage =(UawProviderPage)getLoginScenario().getBean(PageConstants.UAW_PROVIDER_PAGE);
+	
+	
+	
+	Rallytool_Page rallytool= uawproviderpage.uawfindaphysicianclick();
+	if (rallytool!= null)
+	{
+		getLoginScenario().saveBean(PageConstants.RALLY_TOOL_PAGE,
+				rallytool);
+		Assert.assertTrue(true);
+		
+	}
+	
+	else {
+		Assert.fail("Page not found");
+	}
+	
+}
+
+@Then("^user again switches back to UAW Trust Provider Page$")
+
+public void backtouawproviderpage()
+{
+	Rallytool_Page rallytool= (Rallytool_Page)getLoginScenario().getBean(PageConstants.RALLY_TOOL_PAGE);
+	
+	UawProviderPage uawproviderpage = rallytool.switchbacktouawproviderpage();
+	
+	if(uawproviderpage!= null){
+		getLoginScenario().saveBean(PageConstants.UAW_PROVIDER_PAGE, uawproviderpage);
+		Assert.assertTrue(true);
+		
+	} else {
+		Assert.fail("Home page not found");
+	} 
+	
+	
+}
+
+@And("^user clicks on site map on UAW Trust Provider Page")
+
+public void uawsitemaplink(){
+
+UawProviderPage uawproviderpage =(UawProviderPage)getLoginScenario().getBean(PageConstants.UAW_PROVIDER_PAGE);
+
+UawSiteMapPage uawsitemappage= uawproviderpage.uawsitemaplinkclick(); 
+
+if (uawsitemappage!= null)
+{
+	getLoginScenario().saveBean(PageConstants.UAW_SITE_MAP_PAGE,
+			uawsitemappage);
+	Assert.assertTrue(true);
+	
+}
+
+else {
+	Assert.fail("Page not found");
+}
+}
+
+@Then("^user clicks on find a provider link on UAW Trust Site Map Page and rally provider tool opens$")
+
+public void uawsitemapfindaprovider()
+{
+	UawSiteMapPage uawsitemappage = (UawSiteMapPage)getLoginScenario().getBean(PageConstants.UAW_SITE_MAP_PAGE);
+	Rallytool_Page rallytool = uawsitemappage.uawsitemapfindaproviderclick();
+	
+	if (rallytool!= null)
+	{
+		getLoginScenario().saveBean(PageConstants.RALLY_TOOL_PAGE,
+				rallytool);
+		Assert.assertTrue(true);
+		
+	}
+	
+	else {
+		Assert.fail("Page not found");
+	}
+	
+}
+	
+@Given("^user navigates to UHC Retiree Illinois Home Page$")
+
+public void illinoishomepage() {
+	WebDriver wd = getLoginScenario().getWebDriver();
+	IllinoisHomePage illinois = new IllinoisHomePage(wd);
+	getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
+
+
+	getLoginScenario().saveBean(PageConstants.ILLINOIS_HOME_PAGE, illinois);
+
+}
+
+@And("^user clicks on the Find a Provider link on Illinois Home Page and rally tool opens in new tab$")
+
+public void illinoisproviderlinkclick () {
+	IllinoisHomePage illinoisproviderlink= (IllinoisHomePage)getLoginScenario().getBean(PageConstants.ILLINOIS_HOME_PAGE);
+	
+	Rallytool_Page rallytool = illinoisproviderlink.illinoishomepageproviderclick();
+	if(rallytool!= null){
+		getLoginScenario().saveBean(PageConstants.RALLY_TOOL_PAGE,
+				rallytool);
+		Assert.assertTrue(true);
+	} else {
+		Assert.fail(" Page not found");
+	}
+	
+	
+}
+
+@Then("^user switches back to the Illinois Home Page$")
+
+public void backToHomeillinoisPage()
+{
+	Rallytool_Page rally  = (Rallytool_Page) getLoginScenario()
+			.getBean(PageConstants.RALLY_TOOL_PAGE);
+	IllinoisHomePage illinois = rally.switchillinoisBack();
+	if(illinois!= null){
+		getLoginScenario().saveBean(PageConstants.ILLINOIS_HOME_PAGE, illinois);
+		Assert.assertTrue(true);
+		
+	} else {
+		Assert.fail("Home page not found");
+	} 
+           
+}
+
+@And("^user clicks on the Find a Provider tab on illinois home page$")
+
+public void illinoisprovidertabclick () {
+	IllinoisHomePage illinoisprovidertab= (IllinoisHomePage)getLoginScenario().getBean(PageConstants.ILLINOIS_HOME_PAGE);
+	
+	IllinoisFindaProviderPage illinoisfindaprovider = illinoisprovidertab.illinoisprovidertabclick();
+	if(illinoisfindaprovider!= null){
+		getLoginScenario().saveBean(PageConstants.ILLINOIS_FIND_A_PROVIDER,
+				illinoisfindaprovider);
+		Assert.assertTrue(true);
+	} else {
+		Assert.fail(" Page not found");
+	}
+	
+	
+}
+
+@Then("^user clicks on the Find a Physician Medical Group Clinic or Facility link on Illinois Provider Page and Rally tool opens$")
+
+public void illinoisfindphysician(){
+	
+	IllinoisFindaProviderPage illinoisfindaproviderpage = (IllinoisFindaProviderPage)getLoginScenario().getBean(PageConstants.ILLINOIS_FIND_A_PROVIDER);
+	
+	Rallytool_Page rallytool = illinoisfindaproviderpage.findaphysicianillinoisclick();
+	if(rallytool!= null){
+		getLoginScenario().saveBean(PageConstants.RALLY_TOOL_PAGE,
+				rallytool);
+		Assert.assertTrue(true);
+	} else {
+		Assert.fail(" Page not found");
+	}
+}
+@Then("^user again switches back to Illinois Home page$")
+
+public void backToIllinoisProviderPage()
+{
+	Rallytool_Page rally  = (Rallytool_Page) getLoginScenario()
+			.getBean(PageConstants.RALLY_TOOL_PAGE);
+	IllinoisFindaProviderPage illinois = rally.switchBackToIllinoisFindaProvider();
+	if(illinois!= null){
+		getLoginScenario().saveBean(PageConstants.ILLINOIS_HOME_PAGE, illinois);
+		Assert.assertTrue(true);
+		
+	} else {
+		Assert.fail("Home page not found");
+	} 
+           
+}
+
+@And("^user clicks on site map on Illinois Home page$")
+
+public void illinoissitemapclick() {
+	IllinoisFindaProviderPage illinoisproviderpage= (IllinoisFindaProviderPage)getLoginScenario().getBean(PageConstants.ILLINOIS_HOME_PAGE);
+	
+	IllinoisSiteMapPage illinoissitemap = illinoisproviderpage.illinoissitemapclick();
+	if(illinoissitemap!= null){
+		getLoginScenario().saveBean(PageConstants.ILLINOIS_SITE_MAP,
+				illinoissitemap);
+		Assert.assertTrue(true);
+	} else {
+		Assert.fail(" Page not found");
+	}
+}
+
+@Then("^user clicks on find a provider link on Illinois Site Map Page and rally provider tool opens$")
+
+public void illinoissitemapproviderclick(){
+	
+	IllinoisSiteMapPage illinoissitemaprally= (IllinoisSiteMapPage)getLoginScenario().getBean(PageConstants.ILLINOIS_SITE_MAP);
+	Rallytool_Page rallytool = illinoissitemaprally.findaproviderillinoissitemapclick();
+	if(rallytool!= null){
+		getLoginScenario().saveBean(PageConstants.RALLY_TOOL_PAGE,
+				rallytool);
+		Assert.assertTrue(true);
+	} else {
+		Assert.fail(" Page not found");
+	}
+}
+}
+
+
+
+
+
+	
+
+
+
+
+
+
+
+
+
 
 
 

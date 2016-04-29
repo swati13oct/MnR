@@ -224,4 +224,62 @@ public class Rallytool_Page extends UhcDriver {
 			// TODO Auto-generated method stub
 			return null;
 		}
+
+
+public UawHomePage switchbackToUawHomePage() {
+	
+	ArrayList<String> tabs = new ArrayList<String> (driver.getWindowHandles());
+	driver.switchTo().window(tabs.get(0));
+	
+	if(driver.getTitle().equalsIgnoreCase("UAW Trust Group Retiree – Home"))
+	{
+		return new UawHomePage(driver);
+	}
+	// TODO Auto-generated method stub
+	return null;
 }
+
+
+public UawProviderPage switchbacktouawproviderpage() {
+	
+	ArrayList<String> tabs = new ArrayList<String> (driver.getWindowHandles());
+	driver.switchTo().window(tabs.get(0));
+	
+	if(driver.getTitle().equalsIgnoreCase("UAW Trust Group Retiree – Find a provider"))
+	{
+		return new UawProviderPage(driver);
+	}
+	// TODO Auto-generated method stub
+	return null;
+}
+
+public IllinoisHomePage switchillinoisBack() {
+	
+	ArrayList<String> tabs = new ArrayList<String> (driver.getWindowHandles());
+	driver.switchTo().window(tabs.get(0));
+	
+	if(driver.getTitle().equalsIgnoreCase("Retirees and Survivors of an Illinois State-Sponsored Plan – Home"))
+	{
+		return new IllinoisHomePage(driver);
+	}
+	// TODO Auto-generated method stub
+	return null;
+}
+
+public IllinoisFindaProviderPage switchBackToIllinoisFindaProvider() {
+	ArrayList<String> tabs = new ArrayList<String> (driver.getWindowHandles());
+	driver.switchTo().window(tabs.get(0));
+	
+	if(driver.getTitle().equalsIgnoreCase("Retirees and Survivors of an Illinois State-Sponsored Plan – Find a provider"))
+	{
+		return new IllinoisFindaProviderPage(driver);
+	}
+	
+	
+	// TODO Auto-generated method stub
+	return null;
+}	
+
+
+}
+
