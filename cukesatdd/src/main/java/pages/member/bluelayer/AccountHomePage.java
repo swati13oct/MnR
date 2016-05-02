@@ -13,6 +13,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
 import pages.member.bluelayer.OrderplanmaterialsPage;
+import pages.member.bluelayer.ContactUsPage;
 import acceptancetests.atdd.data.CommonConstants;
 import acceptancetests.atdd.data.PageData;
 import acceptancetests.atdd.util.CommonUtility;
@@ -38,7 +39,10 @@ public class AccountHomePage extends UhcDriver {
 
 	@FindBy(linkText = "estimate costs")
 	private WebElement estimateCostLink;
-
+	
+	@FindBy(linkText = "Contact Us")
+	private WebElement contactUsLink;
+	
 	@FindBy(linkText = "Plan Benefits")
 	private WebElement benefitsLink;
 
@@ -84,6 +88,9 @@ public class AccountHomePage extends UhcDriver {
 	@FindBy(xpath = "//div[@id='medicareTitle']/h1")
 	private WebElement pharmacyLocatorHeading;
 
+	
+	
+	
 	private PageData myAccountHome;
 
 	public JSONObject accountHomeJson;
@@ -253,7 +260,16 @@ public class AccountHomePage extends UhcDriver {
 
 		return null;
 	}
-
+public ContactUsPage navigatesToContactUsPage() {
+		
+		contactUsLink.click();
+		if(getTitle().equalsIgnoreCase("AARP Medicare Plans | Contact Us"))
+		{
+			return new ContactUsPage(driver);
+		}
+		return null;
+				
+	}
 	public MedicalEobPage navigateToMedicalEob() {
 
 		/*
