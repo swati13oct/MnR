@@ -74,7 +74,7 @@ public class EnrollPlanInfoPage extends UhcDriver{
 	public IntroductionInformationPage continuesEnrollment(String planName) {
 		
 		continueEnrollmentButton.click();
-		if(getTitle().equalsIgnoreCase("AARP Medicare Complete Online Application")){
+		if(getTitle().equalsIgnoreCase("AARP Medicare Complete Online Application") || getTitle().equalsIgnoreCase("AARP Medicarerx Online Application")){
 			return new IntroductionInformationPage(driver);
 		}
 		return null;
