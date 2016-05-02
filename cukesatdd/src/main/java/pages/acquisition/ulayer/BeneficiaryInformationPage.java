@@ -160,8 +160,10 @@ public class BeneficiaryInformationPage extends UhcDriver{
 		String sameMailingAdress = personalAttributesMap.get("Same Mailing Address");
 		sendkeys(emailAddressField,emailAddress);
 		sendkeys(primaryPhoneNumberField, mainPhoneNumber);
+		if(getTitle().equalsIgnoreCase("AARP Medicare Complete Online Application")){
 		alternatePhoneNumberlink.click();
 		sendkeys(alternatePhoneNumberField,otherPhoneNumber);
+		}
 		sendkeys(dateOfBirthField, dob);
 		
 		selectSelectBoxIt.click();

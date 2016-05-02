@@ -121,7 +121,7 @@ public class IntroductionInformationPage extends UhcDriver{
 		viewEnrollDisclaimer.click();
 		
 		
-		if(getTitle().equalsIgnoreCase("AARP Medicare Complete Online Application")){
+		if(getTitle().equalsIgnoreCase("AARP Medicare Complete Online Application")||getTitle().equalsIgnoreCase("AARP Medicarerx Online Application")){
 			disclaimeragreebtn.click();
 		}
 	}
