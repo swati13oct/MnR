@@ -37,6 +37,8 @@ public class MRConstants {
 	
 	public static final String AARPM_MOBILE_URL = "https://member.awe-"+MRScenario.environment+"-aarpmedicareplans.uhc.com/mobile/guest/login.html";
 	
+	public static final String UHCM_MOBILE_URL = "https://member.awe-"+MRScenario.environment+"-uhcmedicaresolutions.uhc.com/mobile/guest/login.html";
+	
 	public static final String MRREST_TIME_ADMIN_URL = "https://awe-"+MRScenario.environment+"-generic.uhc.com/MRRestWAR/rest/zadmin/time/";
 	
 	public static final String PARTD_TIME_ADMIN_URL = "https://awe-"+MRScenario.environment+"-generic.uhc.com/PartDPortalWeb/rest/zadmin/time/";
