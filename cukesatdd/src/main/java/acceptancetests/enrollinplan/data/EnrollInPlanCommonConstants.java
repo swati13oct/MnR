@@ -12,6 +12,7 @@ public class EnrollInPlanCommonConstants {
 	public static final String ENROLL_PLAN_INFO = "enrollplaninfo";
 	public static final String ENROLL_IN_PLAN_FLOW_NAME = "enrollinplan";
 	public static final String PLAN_INFORMATION = "planinformation";
+	public static final String INTRODUCTION_INFORMATION = "introductioninformation";
 	public static final String BENEFICIARY_INFORMATION = "beneficiaryinformation";
 	public static final String COMMON_DATA = "common";
 	public static final String PLAN_NAME = "planName";

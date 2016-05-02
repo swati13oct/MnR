@@ -650,6 +650,8 @@ public class CommonConstants {
 	public static final String PDP_PLAN_INFORMATION_PAGE_DATA = "pdpplaninformation.json";
 
 	public static final String BENEFICIARY_INFORMATION_PAGE_DATA = "beneficiaryinformation.json";
+	
+	public static final String INTRODUCTION_INFORMATION_PAGE_DATA = "introductioninformation.json";
 
 	public static final String MA_ADDITIONAL_INFORMATION_PAGE_DATA = "maadditionalinformation.json";
 
