@@ -1,7 +1,7 @@
 /**
  * 
  */
-package pages.mobile.member.ulayer;
+package pages.mobile.member.blayer;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -11,6 +11,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
+import pages.mobile.member.blayer.BenefitsSummaryPage;
 import acceptancetests.atdd.data.MRConstants;
 import acceptancetests.atdd.data.PageData;
 import acceptancetests.atdd.mobile.data.CommonConstants;
@@ -19,12 +20,12 @@ import atdd.framework.MRScenario;
 import atdd.framework.UhcDriver;
 
 /**
- * @author pjaising
+ * @author pnampall
  *
  */
 public class LoginPage extends UhcDriver{
 	
-	private static String PAGE_URL = MRConstants.AARPM_MOBILE_URL;
+private static String PAGE_URL = MRConstants.UHCM_MOBILE_URL;
 	
 	@FindBy(id="loginSTANDuser")
 	private WebElement userNameField;
@@ -77,30 +78,31 @@ public class LoginPage extends UhcDriver{
 	}
 
 	public JSONObject getBrowserCheck() {
-			String fileName = CommonConstants.MOBILE_BROWSER_CHECK_DATA;
-			browserCheckData = CommonUtility.readPageData(fileName,
-					CommonConstants.PAGE_OBJECT_DIRECTORY_MOBILE_ULAYER_MEMBER);
+	
+		String fileName = CommonConstants.MOBILE_BROWSER_CHECK_DATA_BLUELAYER;
+		browserCheckData = CommonUtility.readPageData(fileName,
+				CommonConstants.PAGE_OBJECT_DIRECTORY_MOBILE_BLUELAYER_MEMBER);
 
-			JSONObject jsonObject = new JSONObject();
-			for (String key : browserCheckData.getExpectedData().keySet()) {
-				WebElement element = findElement(browserCheckData.getExpectedData()
-						.get(key));
-				if (element != null) {
-					if (validate(element)) {
-						try {
-							jsonObject.put(key, element.getText());
-						} catch (JSONException e) {
-							// TODO Auto-generated catch block
-							e.printStackTrace();
-						}
+		JSONObject jsonObject = new JSONObject();
+		for (String key : browserCheckData.getExpectedData().keySet()) {
+			WebElement element = findElement(browserCheckData.getExpectedData()
+					.get(key));
+			if (element != null) {
+				if (validate(element)) {
+					try {
+						jsonObject.put(key, element.getText());
+					} catch (JSONException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
 					}
 				}
 			}
-			browserCheckJson = jsonObject;
+		}
+		browserCheckJson = jsonObject;
 
-			return browserCheckJson;
+		return browserCheckJson;
 
-		
 	}
+
 
 }

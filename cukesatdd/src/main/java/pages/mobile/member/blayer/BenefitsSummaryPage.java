@@ -1,7 +1,7 @@
 /**
  * 
  */
-package pages.mobile.member.ulayer;
+package pages.mobile.member.blayer;
 
 import java.util.List;
 import java.util.Map;
@@ -20,10 +20,10 @@ import acceptancetests.atdd.util.CommonUtility;
 import atdd.framework.UhcDriver;
 
 /**
- * @author pjaising
+ * @author pnampall
  *
  */
-public class BenefitsSummaryPage extends UhcDriver{
+public class BenefitsSummaryPage extends UhcDriver {
 	
 	@FindBy(xpath="//div[@class='site-header']/a")
 	private WebElement menuButton;
@@ -118,9 +118,10 @@ public class BenefitsSummaryPage extends UhcDriver{
 	}
 
 	public JSONObject getBrowserCheck() {
-		String fileName = CommonConstants.MOBILE_BROWSER_CHECK_DATA;
+	
+		String fileName = CommonConstants.MOBILE_BROWSER_CHECK_DATA_BLUELAYER;
 		browserCheckData = CommonUtility.readPageData(fileName,
-				CommonConstants.PAGE_OBJECT_DIRECTORY_MOBILE_ULAYER_MEMBER);
+				CommonConstants.PAGE_OBJECT_DIRECTORY_MOBILE_BLUELAYER_MEMBER);
 
 		JSONObject jsonObject = new JSONObject();
 		for (String key : browserCheckData.getExpectedData().keySet()) {
@@ -142,4 +143,6 @@ public class BenefitsSummaryPage extends UhcDriver{
 		return browserCheckJson;
 	}
 
+
+	
 }

@@ -3,8 +3,6 @@
  */
 package acceptancetests.browsercheck.member.bluelayer;
 
-import gherkin.formatter.model.DataTableRow;
-
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -22,17 +20,23 @@ import org.openqa.selenium.remote.RemoteWebDriver;
 import org.skyscreamer.jsonassert.JSONAssert;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import pages.member.bluelayer.AccountHomePage;
-import pages.member.bluelayer.LoginPage;
-import cucumber.annotation.After;
-import cucumber.annotation.en.Given;
-import cucumber.annotation.en.Then;
-import cucumber.annotation.en.When;
-import cucumber.table.DataTable;
 import acceptancetests.atdd.data.CommonConstants;
 import acceptancetests.atdd.data.member.PageConstants;
 import acceptancetests.login.data.LoginCommonConstants;
 import atdd.framework.MRScenario;
+import cucumber.annotation.After;
+import cucumber.annotation.en.And;
+import cucumber.annotation.en.Given;
+import cucumber.annotation.en.Then;
+import cucumber.annotation.en.When;
+import cucumber.table.DataTable;
+import gherkin.formatter.model.DataTableRow;
+import pages.acquisition.bluelayer.LoginAssistancePage;
+import pages.member.bluelayer.*;
+import pages.member.bluelayer.AccountHomePage;
+import pages.member.bluelayer.LoginPage;
+import pages.member.bluelayer.ContactUsPage;
+import pages.member.bluelayer.*;
 
 /**
  * @author pnampall
@@ -165,7 +169,7 @@ public class UnsupportedBrowserMemberUmsStepDefinition<loginScenario> {
 		String browserName = caps.getBrowserName();
 		String browserVersion = caps.getVersion();		
 		Assert.assertEquals("firefox", browserName);
-		Assert.assertEquals("22.0", browserVersion);		
+		Assert.assertEquals("28.0", browserVersion);		
 		JSONObject browserCheckActual = (JSONObject) getLoginScenario()
 				.getBean(LoginCommonConstants.MEMBER_BROWSER_CHECK_ACTUAL);
 		JSONObject browserCheckExpectedJson = (JSONObject) getLoginScenario()
@@ -187,7 +191,7 @@ public class UnsupportedBrowserMemberUmsStepDefinition<loginScenario> {
 			String browserName = caps.getBrowserName();
 			String browserVersion = caps.getVersion();		
 			Assert.assertEquals("firefox", browserName);
-			Assert.assertEquals("22.0", browserVersion);		
+			Assert.assertEquals("28.0", browserVersion);		
 			JSONObject browserCheckActual = (JSONObject) getLoginScenario()
 					.getBean(LoginCommonConstants.MEMBER_BROWSER_CHECK_ACTUAL);
 			JSONObject browserCheckExpectedJson = (JSONObject) getLoginScenario()
@@ -201,6 +205,72 @@ public class UnsupportedBrowserMemberUmsStepDefinition<loginScenario> {
 			}
 		 
 		
+	}
+	
+	@And("^the user navigates to plan summary page in UHC site$")
+	public void user_navigates_to_plan_summary()
+	{
+		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario()
+				.getBean(PageConstants.ACCOUNT_HOME_PAGE);
+		 accountHomePage.navigateToPlanSummary();	
+	}
+	
+	@And("^the user navigates to drug search in UHC site$")
+	public void user_navigates_to_drug_search_in_UHC_site()
+	{
+		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario()
+				.getBean(PageConstants.ACCOUNT_HOME_PAGE);
+		ManageDrugPage managedrugpage= accountHomePage.navigateToEstimateCost("MAPD");
+		if (managedrugpage!=null)
+		{
+			System.out.println("dce");
+	
+		}
+		else
+		{
+			System.out.println("dce page not found");
+		}
+	}
+	@When("^the user navigates to contact us page in UHC site$")
+	public void views_order_materials_in_Ums_site() {
+		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario()
+				.getBean(PageConstants.ACCOUNT_HOME_PAGE);
+		ContactUsPage contactusPage = accountHomePage.navigatesToContactUsPage();
+		if (contactusPage != null) {
+
+				System.out.println("Contact Us page found !!!");
+		 }
+		else
+			{
+				System.out.println("Contact Us page Not found !!!");
+			}
+		accountHomePage.logOut();
+		}
+	
+	@And("^user is on UMS error page$")
+	public void user_is_on_UMS_error_page()
+	{
+		LoginPage loginPage = (LoginPage) getLoginScenario()
+				.getBean(PageConstants.LOGIN_PAGE);
+		loginPage.start("https://member.awe-dev-a-uhcmedicaresolutions.uhc.com/500.html");
+	}
+	
+	@And("^user navigates to login assistance page from member UHC site$")
+	public void user_navigates_to_login_assistance_page_UHC()
+	{
+		getLoginScenario().getBean(CommonConstants.WEBDRIVER);
+		LoginPage loginPage = (LoginPage) getLoginScenario()
+				.getBean(PageConstants.LOGIN_PAGE);
+		LoginAssistancePage loginassistance= loginPage.navigateToLoginAssistance();
+		
+		if (loginassistance!=null)
+		{
+			Assert.assertTrue(true);
+		}
+		else
+		{
+			Assert.fail("Errorin loading UHC login assistance page");
+		}
 	}
 	
 	@After

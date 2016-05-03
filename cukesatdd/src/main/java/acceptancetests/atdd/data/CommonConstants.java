@@ -46,10 +46,12 @@ public class CommonConstants {
 	public static final String ACCOUNT_HOME_PAGE_DATA = "myaccounthome.json"; // Group
 
 	public static final String PAGE_OBJECT_DIRECTORY_ULAYER_MEMBER = "/page-objects/member/ulayer/";
+	
+
 
 	public static final String PLAN_SUMMARY_PAGE_DATA = "plansummarypdp.json";
 	
-	
+
 
 	public static final String PLAN_SUMMARY_DIRECTORY = "/jsonresponse/Member/ulayer/planSummary/";
 
@@ -714,6 +716,14 @@ public class CommonConstants {
 	public static final String UHC_BROWSER_CHECK_DATA = "uhcbrowsercheck.json";
 	
 	public static final String UHCM_BROWSER_CHECK_DATA = "uhcmbrowsercheck.json";
+	
 	public static final String AARPM_BROWSER_CHECK_DATA="aarpmbrowsercheck.json";
+	
 	public static final String GR_BROWSER_CHECK_DATA = "uhcretireebrowsercheck.json";
+	
+	public static final String UHCM_MOBILE_BROWSER_CHECK_DATA = "browsercheck_uhcm.json";
+	
+	
+
+	
 }
