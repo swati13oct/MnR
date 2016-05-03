@@ -25,73 +25,67 @@ import atdd.framework.UhcDriver;
  */
 public class BeneficiaryInformationPage extends UhcDriver{
 	
-	@FindBy(id = "enrollment.medicareBeneficiary.person.firstName")
-	private WebElement firstNameField;
-	
-	@FindBy(id = "enrollment.medicareBeneficiary.person.middleInitial")
-	private WebElement middleInitialField;
-	
-	@FindBy(id = "enrollment.medicareBeneficiary.person.lastName")
-	private WebElement lastNameField;
-	
-	@FindBy(id = "enrollment.medicareBeneficiary.person.dob.strDate")
-	private WebElement dateOfBirthField;
-	
-	@FindBy(id = "enrollment.medicareBeneficiary.person.gender1")
-	private WebElement maleRadioButton;
-	
-	@FindBy(id = "enrollment.medicareBeneficiary.person.gender2")
-	private WebElement femaleRadioButton;
-	
-	@FindBy(id = "enrollment.medicareBeneficiary.medicareClaimNumber")
-	private WebElement claimNumberField;
-	
-	@FindBy(id = "enrollment.medicareBeneficiary.partAEffectiveDate.strDate")
-	private WebElement partAStartDateField;
-	
-	@FindBy(id = "enrollment.medicareBeneficiary.partBEffectiveDate.strDate")
-	private WebElement partBStartDateField;
-	
-	@FindBy(id = "enrollment.contactInfo.permanentAddress.address1")
-	private WebElement address1Field;
-	
-	@FindBy(id = "enrollment.contactInfo.permanentAddress.address2")
-	private WebElement address2Field;
-	
-	@FindBy(id = "enrollment.contactInfo.permanentAddress.city")
-	private WebElement cityField;
-	
-	@FindBy(id = "enrollment.contactInfo.permanentAddress.state")
-	private WebElement stateField;
-	
-	@FindBy(id = "enrollment.contactInfo.permanentAddress.zipCode")
-	private WebElement zipcodeField;
-	
-	@FindBy(id = "enrollment.contactInfo.sameMailingAddress1")
-	private WebElement mailingAddressYesButton;
-	
-	@FindBy(id = "enrollment.contactInfo.sameMailingAddress2")
-	private WebElement mailingAddressNoButton;
-	
-	@FindBy(id = "enrollment.contactInfo.primaryPhoneNumber.strNumber")
-	private WebElement primaryPhoneNumberField;
-	
-	@FindBy(id = "enrollment.contactInfo.alternatePhoneNumber.strNumber")
-	private WebElement alternatePhoneNumberField;
-	
-	@FindBy(id = "enrollment.contactInfo.emailAddress")
+	@FindBy(id = "emailtext")
 	private WebElement emailAddressField;
 	
-	@FindBy(id = "enrollment.contactInfo.confirmEmailAddress")
-	private WebElement confirmEmailAddressField;
+	@FindBy(id = "field-phone-1")
+	private WebElement primaryPhoneNumberField;
 	
-	@FindBys(value = { @FindBy(xpath = "//select[@id='enrollment.contactInfo.languagePreference']/option") })
+	@FindBy(id = "field-phone-2")
+	private WebElement alternatePhoneNumberField;
+	
+	@FindBy(id="add-more-link")
+	private WebElement alternatePhoneNumberlink;
+	
+	@FindBy(id = "birthdate")
+	private WebElement dateOfBirthField;
+	
+	@FindBy(id = "language-selectSelectBoxIt")
+	private WebElement selectSelectBoxIt;
+	
+	@FindBys(value = { @FindBy(xpath = "//ul[@id='language-selectSelectBoxItOptions']/li") })
 	private List<WebElement> languagePreferenceDropDown;
+		
+	@FindBy(id = "sex-male")
+	private WebElement maleRadioButton;
 	
-	@FindBy(id = "enrollment.contactInfo.languagePreference")
-	private WebElement languagePreferenceField;
+	@FindBy(id = "sex-female")
+	private WebElement femaleRadioButton;
 	
-	@FindBy(id = "enrollmentNext")
+	@FindBy(id = "field-address-1")
+	private WebElement address1Field;
+	
+	@FindBy(id = "field-address-2")
+	private WebElement address2Field;
+	
+	@FindBy(id = "field-city")
+	private WebElement cityField;
+	
+	@FindBy(id = "field-mail-state")
+	private WebElement stateField;
+	
+	@FindBy(id = "field-zip")
+	private WebElement zipcodeField;
+	
+	@FindBy(id = "same-address-yes")
+	private WebElement mailingAddressYesButton;
+	
+	@FindBy(id = "same-address-no")
+	private WebElement mailingAddressNoButton;
+	
+	@FindBy(id = "field-mail-address-1")
+	private WebElement mailaddress1Field;
+	
+	@FindBy(id = "field-mail-address-2")
+	private WebElement mailaddress2Field;
+	
+	@FindBy(id = "field-mail-state")
+	private WebElement mailcityField;
+	
+	@FindBy(id = "field-mail-zip")
+	private WebElement mailstateField;	
+
+	@FindBy(id = "part1save")
 	private WebElement enrollmentNext;
 	
 	@FindBy(xpath = "//div[@class='enrollment_content']/div[2]/form/h2")
@@ -114,18 +108,12 @@ public class BeneficiaryInformationPage extends UhcDriver{
 
 	@Override
 	public void openAndValidate() {
-		
-		validate(firstNameField);
-		validate(middleInitialField);
-		validate(lastNameField);
 		validate(dateOfBirthField);
 		validate(maleRadioButton);
 		validate(femaleRadioButton);
-		validate(claimNumberField);
-		validate(partAStartDateField);
-		validate(partBStartDateField);
 		validate(address1Field);
 		validate(address2Field);
+		validate(alternatePhoneNumberlink);
 		validate(cityField);
 		validate(stateField);
 		validate(zipcodeField);
@@ -134,8 +122,6 @@ public class BeneficiaryInformationPage extends UhcDriver{
 		validate(primaryPhoneNumberField);
 		validate(alternatePhoneNumberField);
 		validate(emailAddressField);
-		validate(confirmEmailAddressField);
-		validate(languagePreferenceField);
 		validate(enrollmentNext);
 
 		
@@ -162,30 +148,33 @@ public class BeneficiaryInformationPage extends UhcDriver{
 
 	public void entersPersonalInformation(
 			Map<String, String> personalAttributesMap) {
-		
-		String firstName = personalAttributesMap.get("First Name");
-		String middleName = personalAttributesMap.get("Middle Initial");
-		String lastName = personalAttributesMap.get("Last Name");
+		String emailAddress = personalAttributesMap.get("Email Address");
+		String mainPhoneNumber = personalAttributesMap.get("Main Phone Number").replaceAll("-", "");
+		String otherPhoneNumber = personalAttributesMap.get("Other Phone Number").replaceAll("-", "");
 		String dob = personalAttributesMap.get("Birth Date").replaceAll("[/-]", "");
 		String gender = personalAttributesMap.get("Gender");
-		String medicareClaimNumber = personalAttributesMap.get("Medicare Claim Number").replaceAll("-", "");
-		String partAStartDate = personalAttributesMap.get("Hospital (Part A) Effective Date").replaceAll("[/-]", "");
-		String partBStartDate = personalAttributesMap.get("Medical (Part B) Effective Date").replaceAll("[/-]", "");
+		String languagePreference = personalAttributesMap.get("Language Preference");
 		String address = personalAttributesMap.get("Address");
 		String Apartment = personalAttributesMap.get("Apartment");
 		String city = personalAttributesMap.get("City");
 		String sameMailingAdress = personalAttributesMap.get("Same Mailing Address");
-		String mainPhoneNumber = personalAttributesMap.get("Main Phone Number").replaceAll("-", "");
-		String otherPhoneNumber = personalAttributesMap.get("Other Phone Number").replaceAll("-", "");
-		String emailAddress = personalAttributesMap.get("Email Address");
-		String confirmEmailAddress = personalAttributesMap.get("Confirm Email Address");
-		String languagePreference = personalAttributesMap.get("Language Preference");
-
-		
-		sendkeys(firstNameField, firstName);
-		sendkeys(middleInitialField, middleName);
-		sendkeys(lastNameField, lastName);
+		sendkeys(emailAddressField,emailAddress);
+		sendkeys(primaryPhoneNumberField, mainPhoneNumber);
+		if(getTitle().equalsIgnoreCase("AARP Medicare Complete Online Application")){
+		alternatePhoneNumberlink.click();
+		sendkeys(alternatePhoneNumberField,otherPhoneNumber);
+		}
 		sendkeys(dateOfBirthField, dob);
+		
+		selectSelectBoxIt.click();
+		for (WebElement element : languagePreferenceDropDown) {
+			if (element.getText().equalsIgnoreCase(languagePreference)) {
+				element.click();
+				
+				break;
+			}
+		}
+		
 		if(gender.equalsIgnoreCase("Male"))
 		{
 			maleRadioButton.click();
@@ -194,9 +183,6 @@ public class BeneficiaryInformationPage extends UhcDriver{
 		{
 			femaleRadioButton.click();
 		}
-		sendkeys(claimNumberField, medicareClaimNumber);
-		sendkeys(partAStartDateField,partAStartDate);
-		sendkeys(partBStartDateField,partBStartDate);
 		sendkeys(address1Field,address);
 		sendkeys(address2Field,Apartment);
 		sendkeys(cityField,city);
@@ -206,15 +192,8 @@ public class BeneficiaryInformationPage extends UhcDriver{
 		else
 		{
 			mailingAddressNoButton.click();
-		}
-
-		sendkeys(primaryPhoneNumberField, mainPhoneNumber);
-		if(validate(alternatePhoneNumberField)){
-			sendkeys(alternatePhoneNumberField,otherPhoneNumber);
-		}
-		sendkeys(emailAddressField,emailAddress);
-		sendkeys(confirmEmailAddressField,confirmEmailAddress);
-		selectFromDropDown(languagePreferenceDropDown, languagePreference);		
+		}		
+				
 		
 	}
 

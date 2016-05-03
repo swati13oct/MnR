@@ -66,6 +66,8 @@ public class PageConstants {
 	public static final String AFTER_DOSAGE_SELECTION = "afterDosageSelection";	public static final String PLAN_INFORMATION = "planInformationPage";
 
 	public static final String BENEFICIARY_INFORMATION_PAGE = "beneficiaryInformationPage";
+	
+	public static final String INTRODUCTION_INFORMATION_PAGE = "introductionInformationPage";
 
 	public static final String ADDITIONAL_INFORMATION_PAGE = "additionalInformation";
 

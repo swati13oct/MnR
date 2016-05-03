@@ -21,6 +21,7 @@ import pages.acquisition.ulayer.AdditionalInformationPage;
 import pages.acquisition.ulayer.BeneficiaryInformationPage;
 import pages.acquisition.ulayer.EnrollPlanInfoPage;
 import pages.acquisition.ulayer.EnrollmentConfirmationPage;
+import pages.acquisition.ulayer.IntroductionInformationPage;
 import pages.acquisition.ulayer.PlanInformationPage;
 import pages.acquisition.ulayer.ReviewApplicationPage;
 import pages.acquisition.ulayer.SubmitApplicationPage;
@@ -219,72 +220,89 @@ public class EnrollInPlanAarpStepDefinition {
 				e.printStackTrace();
 			}
 
-			PlanInformationPage planInformationPage = enrollPlanInfoPage
-					.continuesEnrollment(planName);
-			getLoginScenario().saveBean(PageConstants.PLAN_INFORMATION,
-					planInformationPage);
-			if (planInformationPage != null) {
-
-				/* Get actual data */
-				JSONObject planInformationActual = planInformationPage.planInformationJson;
-
-				/* Get expected data */
-				String planInfoDirectory = CommonConstants.ACQUISITION_EXPECTED_DIRECTORY
-						+ File.separator
-						+ CommonConstants.SITE_ULAYER
-						+ File.separator
-						+ VPPCommonConstants.ENROLL_IN_PLAN_FLOW_NAME
-						+ File.separator
-						+ EnrollInPlanCommonConstants.PLAN_INFORMATION
-						+ File.separator
-						+ zipcode
-						+ File.separator
-						+ county
-						+ File.separator;
-				JSONObject planInformationExpected = MRScenario
-						.readExpectedJson(fileName, planInfoDirectory);
-
-				planInformationExpected = mergeWithCommonExpectedData(fileName,
-						planInformationExpected);
-
-				System.out.println("planInformationExpected:::"
-						+ planInformationExpected);
-				System.out.println("planInformationActual:::"
-						+ planInformationActual);
-
-				try {
-					JSONAssert.assertEquals(planInformationExpected,
-							planInformationActual, true);
-				} catch (JSONException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-			}
-		} else {
-			Assert.fail("ERROR loading PlanInformationPage");
+			IntroductionInformationPage introInformationPage = enrollPlanInfoPage.continuesEnrollment(planName);
+			getLoginScenario().saveBean(PageConstants.INTRODUCTION_INFORMATION_PAGE,introInformationPage);
 		}
 
 	}
 
-	@And("^the user select the answer of this question Do you have End-Stage Renal Disease in AARP site$")
-	public void user_selects_answer_esrd_question(DataTable attributes) {
-		String answer = attributes.getGherkinRows().get(0).getCells().get(0);
-		PlanInformationPage planInformationPage = (PlanInformationPage) getLoginScenario()
-				.getBean(PageConstants.PLAN_INFORMATION);
-		planInformationPage.asnwersESRDQuestion(answer);
-		getLoginScenario().saveBean(PageConstants.PLAN_INFORMATION,
-				planInformationPage);
+	@And("^the user navigates to introduction information step in AARP site$")
+	public void the_user_navigates_into_information_step_aarp() {
+		IntroductionInformationPage introInformationPage = (IntroductionInformationPage) getLoginScenario()
+				.getBean(PageConstants.INTRODUCTION_INFORMATION_PAGE);
+	
+		if (introInformationPage != null) {
+			/* Get actual data */
+			JSONObject introInformationActual = introInformationPage.introductionInformationJson;
+
+			/* Get expected data */
+			String planName = (String) getLoginScenario().getBean(
+					EnrollInPlanCommonConstants.PLAN_NAME);
+
+			String fileName = planName;
+			String zipcode = (String) getLoginScenario().getBean(
+					VPPCommonConstants.ZIPCODE);
+			String county = (String) getLoginScenario().getBean(
+					VPPCommonConstants.COUNTY);
+
+			String directory = CommonConstants.ACQUISITION_EXPECTED_DIRECTORY
+					+ File.separator + CommonConstants.SITE_ULAYER
+					+ File.separator
+					+ VPPCommonConstants.ENROLL_IN_PLAN_FLOW_NAME
+					+ File.separator
+					+ EnrollInPlanCommonConstants.INTRODUCTION_INFORMATION
+					+ File.separator + zipcode + File.separator + county
+					+ File.separator;
+			JSONObject introInformationExpected = MRScenario.readExpectedJson(fileName, directory);
+
+			introInformationExpected = mergeWithCommonExpectedData(fileName, introInformationExpected);
+
+			System.out.println("introInformationExpected:::"
+					+ introInformationExpected);
+			System.out.println("introInformationActual:::"
+					+ introInformationActual);
+
+			try {
+				JSONAssert.assertEquals(introInformationExpected,
+						introInformationActual, true);
+			} catch (JSONException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		} else {
+			Assert.fail("ERROR loading IntroInformationPage");
+		}
+
 	}
 
-	@And("^the user navigates to Benefit information step in AARP site$")
-	public void the_user_navigates_benefit_information_step_aarp() {
 
-		PlanInformationPage planInformationPage = (PlanInformationPage) getLoginScenario()
-				.getBean(PageConstants.PLAN_INFORMATION);
-		BeneficiaryInformationPage beneficiaryInformationPage = planInformationPage
-				.navigateToNextStep();
-		getLoginScenario().saveBean(PageConstants.BENEFICIARY_INFORMATION_PAGE,
-				beneficiaryInformationPage);
+	@And("^the user fill following information in introduction information step in AARP site$")
+	public void user_fill_information_introduction_information_aarp(
+			DataTable personalAttributes) {
+
+		List<DataTableRow> personalAttributesRow = personalAttributes
+				.getGherkinRows();
+		Map<String, String> personalAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < personalAttributesRow.size(); i++) {
+
+			personalAttributesMap.put(personalAttributesRow.get(i).getCells().get(0), personalAttributesRow.get(i).getCells().get(1));
+		}
+		IntroductionInformationPage introInformationPage = (IntroductionInformationPage) getLoginScenario()
+				.getBean(PageConstants.INTRODUCTION_INFORMATION_PAGE);
+		introInformationPage.entersmedicareinsuranceInformation(personalAttributesMap);
+	//	introInformationPage.navigatesToNextStep();
+		getLoginScenario().saveBean(PageConstants.INTRODUCTION_INFORMATION_PAGE,introInformationPage);
+
+	}
+	
+	@And("^the user navigates to beneficiary information step in AARP site$")
+	public void the_user_navigates_beneficiary_information_step_aarp() {
+		IntroductionInformationPage introInformationPage = (IntroductionInformationPage) getLoginScenario()
+				.getBean(PageConstants.INTRODUCTION_INFORMATION_PAGE);
+	
+		BeneficiaryInformationPage beneficiaryInformationPage = introInformationPage.navigatesToNextStep();
+		 getLoginScenario().saveBean(PageConstants.BENEFICIARY_INFORMATION_PAGE,beneficiaryInformationPage);
+	
 		if (beneficiaryInformationPage != null) {
 			/* Get actual data */
 			JSONObject beneficiaryInformationActual = beneficiaryInformationPage.beneficiaryInformationJson;
@@ -307,19 +325,17 @@ public class EnrollInPlanAarpStepDefinition {
 					+ EnrollInPlanCommonConstants.BENEFICIARY_INFORMATION
 					+ File.separator + zipcode + File.separator + county
 					+ File.separator;
-			JSONObject beneficiaryInformationExpected = MRScenario
-					.readExpectedJson(fileName, directory);
+			JSONObject beneInformationExpected = MRScenario.readExpectedJson(fileName, directory);
 
-			beneficiaryInformationExpected = mergeWithCommonExpectedData(
-					fileName, beneficiaryInformationExpected);
+		//	beneInformationExpected = mergeWithCommonExpectedData(fileName, beneInformationExpected);
 
-			System.out.println("beneficiaryInformationExpected:::"
-					+ beneficiaryInformationExpected);
-			System.out.println("beneficiaryInformationActual:::"
+			System.out.println("introInformationExpected:::"
+					+ beneInformationExpected);
+			System.out.println("introInformationActual:::"
 					+ beneficiaryInformationActual);
 
 			try {
-				JSONAssert.assertEquals(beneficiaryInformationExpected,
+				JSONAssert.assertEquals(beneInformationExpected,
 						beneficiaryInformationActual, true);
 			} catch (JSONException e) {
 				// TODO Auto-generated catch block
@@ -331,6 +347,7 @@ public class EnrollInPlanAarpStepDefinition {
 
 	}
 
+	
 	@And("^the user fill following information in beneficiary information step in AARP site$")
 	public void user_fill_information_beneficiary_information_aarp(
 			DataTable personalAttributes) {
@@ -345,11 +362,20 @@ public class EnrollInPlanAarpStepDefinition {
 		}
 		BeneficiaryInformationPage beneficiaryInformationPage = (BeneficiaryInformationPage) getLoginScenario()
 				.getBean(PageConstants.BENEFICIARY_INFORMATION_PAGE);
-		beneficiaryInformationPage
-		.entersPersonalInformation(personalAttributesMap);
-		getLoginScenario().saveBean(PageConstants.BENEFICIARY_INFORMATION_PAGE,
-				beneficiaryInformationPage);
+		beneficiaryInformationPage.entersPersonalInformation(personalAttributesMap);
+		
+		getLoginScenario().saveBean(PageConstants.BENEFICIARY_INFORMATION_PAGE,	beneficiaryInformationPage);
 
+	}
+	
+	@And("^the user select the answer of this question Do you have End-Stage Renal Disease in AARP site$")
+	public void user_selects_answer_esrd_question(DataTable attributes) {
+		String answer = attributes.getGherkinRows().get(0).getCells().get(0);
+		PlanInformationPage planInformationPage = (PlanInformationPage) getLoginScenario()
+				.getBean(PageConstants.PLAN_INFORMATION);
+		planInformationPage.asnwersESRDQuestion(answer);
+		getLoginScenario().saveBean(PageConstants.PLAN_INFORMATION,
+				planInformationPage);
 	}
 
 	@And("^the user navigates to Additional Information step in AARP site$")
