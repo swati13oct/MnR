@@ -6,6 +6,7 @@ package acceptancetests.atdd.util;
 import java.io.File;
 import java.io.IOException;
 import java.util.Calendar;
+import java.util.Collection;
 import java.util.Iterator;
 import java.util.TimeZone;
 
@@ -245,6 +246,27 @@ public class CommonUtility {
 		WebDriver wd = mrScenario.getWebDriver();
 		wd.get(completeDateUrl);
 		wd.quit();
+
+	}
+
+	public static JSONObject checkForVariable(WebDriver driver) {
+
+		JavascriptExecutor js = (JavascriptExecutor) driver;
+		String pageName = js.executeScript(
+				"return " + "DTMData.content.pageName").toString();
+		String error = js.executeScript("return " + "DTMData.content.error")
+				.toString();
+
+		JSONObject dtmObject = new JSONObject();
+		try {
+			dtmObject.put("pageName", pageName);
+			dtmObject.put("error", error);
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		return dtmObject;
 
 	}
 

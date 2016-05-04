@@ -234,6 +234,8 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	private PageData healthandwellnessdropdown;
 
 	public JSONObject healthandwellnessdropdownJson;
+	
+	public JSONObject globalFooterDTMJson;
 
 	public AcquisitionHomePage(WebDriver driver) {
 		super(driver);
@@ -1273,6 +1275,64 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		return null;
 	}
 
+	public JSONObject validatesDTMTags() {
+		
+
+		String fileName = CommonConstants.GLOBAL_FOOTER_PAGE_DATA;
+		globalFooter = CommonUtility.readPageData(fileName,
+				CommonConstants.PAGE_OBJECT_DIRECTORY_ULAYER_ACQ);
+
+		JSONObject jsonObject = new JSONObject();
+		for (String key : globalFooter.getExpectedData().keySet()) {
+			WebElement element = findElement(globalFooter.getExpectedData()
+					.get(key));
+			if (element != null) {
+				if (validate(element)) {
+
+					JSONObject dtmObject = new JSONObject();
+					if (element.getAttribute("dtmname") != null
+							&& element.getAttribute("dtmid") != null) {
+						try {
+							dtmObject.put("dtmid", element.getAttribute("dtmid"));
+							dtmObject.put("dtmname",
+									element.getAttribute("dtmname"));
+						} catch (JSONException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+
+					
+					try {
+						jsonObject.put(key, dtmObject);
+					} catch (JSONException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					}
+					else{
+						System.out.println("DTM id or DTM name was not found for Element:"+key);
+					}
+				
+				}
+				else{
+					System.out.println("Validation failed for element::"+key);
+				}
+			}
+		}
+		
+		try {
+			jsonObject.put("dtmPageData", CommonUtility.checkForVariable(driver));
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		globalFooterDTMJson = jsonObject;
+
+		return globalFooterDTMJson;
+	
+		
+	}
+
 	public void multiple_county(String zipcode)
 	{
 		System.out.println("Hi");
@@ -1288,4 +1348,6 @@ public class AcquisitionHomePage extends GlobalWebElements {
 			System.out.println("County model window not found");
 		}
 	}
+
+
 }
