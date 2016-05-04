@@ -7,6 +7,8 @@ import java.util.List;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.openqa.selenium.NoSuchElementException;
+import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
@@ -20,6 +22,8 @@ import acceptancetests.atdd.data.MRConstants;
 import acceptancetests.atdd.data.PageData;
 import acceptancetests.atdd.util.CommonUtility;
 import pages.acquisition.bluelayer.ZipcodeLookupHomePage;
+import pages.acquisition.bluelayer.PlanSelectorPage;
+import pages.acquisition.bluelayer.RequestHelpAndInformationPage;
 
 public class AcquisitionHomePage extends GlobalWebElements {
 
@@ -28,7 +32,10 @@ public class AcquisitionHomePage extends GlobalWebElements {
        
 	@FindBy(id = "takequizbtn")
 	private WebElement takequizbtn;
-       
+    
+	@FindBy(id = "compareplans")
+	private WebElement compareplans;
+	
 	@FindBys(value = {@FindBy(xpath = "//ul[@id='topic-selectSelectBoxItOptions']/li")})
 	private List<WebElement> topicDropDownValues;
 
@@ -60,6 +67,9 @@ public class AcquisitionHomePage extends GlobalWebElements {
 
 	@FindBy(id = "homefooter")
 	private WebElement homefooter;
+	
+	@FindBy(xpath = "//div[@id='subnav_2']/div/div/div/div/div[1]/p[2]/a/span")
+	private WebElement ma_moreHelpInfoLink;
 
 	@FindBys(value = { @FindBy(xpath = "//table[@id='selectcountytable']/tbody/tr/td") })
 	List<WebElement> countyRows;
@@ -849,5 +859,70 @@ public class AcquisitionHomePage extends GlobalWebElements {
 				} 
 				return null;
 			}
+				public ContactUsUmsPage contactUsFooterClick()
+				{
+					validate(footerContactUsLink);
+					footerContactUsLink.click();
+					validate(footerContactUsLink);
+					if (driver.getCurrentUrl().contains("/contact-us.html"))
+							{
+								return new ContactUsUmsPage(driver);
+							}
+					else
+					{
+						System.out.println("Contact us page not found");
+						return null;
+					}
+				}
+				public PlanSelectorPage planselector_click() {
+					compareplans.click();
+					if (getTitle().equalsIgnoreCase("Plan Selector")) {
+						return new PlanSelectorPage(driver);
+					}
+					return null;
+				}
+				public RequestHelpAndInformationPage navigateToMaMoreHelpAndInfo() {
+
+					Actions actions = new Actions(driver);
+					actions.moveToElement(ourPlansHoverLink);
+					actions.moveToElement(ma_moreHelpInfoLink);
+					actions.click().build().perform();
+
+					try {
+						if (zipCodeField.isDisplayed()) {
+							CommonUtility.waitForElementToDisappear(driver, zipCodeField,
+									CommonConstants.TIMEOUT_30);
+						}
+					} catch (NoSuchElementException e) {
+						System.out.println("zipCodeField not found");
+					} catch (TimeoutException ex) {
+						System.out.println("zipCodeField not found");
+					} catch (Exception e) {
+						System.out.println("zipCodeField not found");
+					}
+					if (currentUrl().contains(
+							"medicare-advantage-plans/request-information.html")) {
+						return new RequestHelpAndInformationPage(driver);
+					}
+
+					return null;
+				}
+
+				public void multiple_county(String zipcode)
+				{
+					System.out.println("Hi");
+					sendkeys(zipCodeField, zipcode);
+					System.out.println("Hi");
+					viewPlansButton.click();
+					if (countyModal.isDisplayed())
+					{
+						System.out.println("County model window appeared");
+					}
+					else
+					{
+						System.out.println("County model window not found");
+					}
+				}
 }
+
 		

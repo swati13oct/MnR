@@ -54,18 +54,3 @@ Feature: To test Browser check on AARP site
 #And the user enters multi county zipcode
 #Then the user validates error message on the browser of AARP site
 
-Scenario Outline: To Verify the Pages of vppenrollmentmodel template in the browser
-Given the user is on the AARP site landing page
-When the user is on the AARP home page
-When user performs plan search using following information in AARP site
-	| Zip Code    | <zipcode> |
-	| County Name | <countyName>  |
-And the user views plans of the below plan type in AARP site
-	| Plan Type | <planType> |
-And the user enrolls for the below plan in AARP site
-	| <planName> |
-Then the user validates error message on the browser of AARP site
-  
-  Examples :
-  |zipcode |countyName   | planType   | planName                                           |
-  |80002   |Adams County | MA         |AARP MedicareComplete SecureHorizons Essential (HMO)|
