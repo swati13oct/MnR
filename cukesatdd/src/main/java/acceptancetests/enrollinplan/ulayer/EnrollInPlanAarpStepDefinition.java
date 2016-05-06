@@ -698,7 +698,7 @@ public class EnrollInPlanAarpStepDefinition {
 		}
 	}
 	
-	@And("^the user click on enroll link on plan details for the below plan in AARP site$")
+	@And("^the user click on enroll button on plan details for the below plan in AARP site$")
 	public void user_click_enroll_plan_detals()
 	{
 		PlanDetailsPage vppPlanDetailsPage= (PlanDetailsPage)getLoginScenario().getBean(PageConstants.VPP_PLAN_DETAILS_PAGE);

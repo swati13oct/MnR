@@ -1,6 +1,6 @@
 @enrollInPlanAARP
-Feature: To test enroll in plan on AARP site 
-Scenario Outline: Verify enroll in plan in AARP site for federal plan type member  
+Feature: To test interstitial model window is not displayed on enrollment  in plan on AARP site 
+Scenario Outline: Verify interstitial model window is not displayed on enroll link in plan summary of  in AARP site for federal plan type member  
 Given the user is on AARP medicare site landing page
 When user performs plan search using following information in AARP site
 	| Zip Code    | <zipcode> |
@@ -17,7 +17,7 @@ And the user click on enroll link  for the below plan in AARP site
     |80002   |Adams County | PDP        |AARP MedicareRx Preferred (PDP)                     |No    | miller  |  j          |desh    |11/12/1989 |  Male		| 222-22-2222-C      |07/01/1989                   |07/01/1989                  |Ggn City   | Bang  | a-12    |  No                |B3             | DEL           | C3             |TEXAS               |73301          |8800340917      |9414710604      |c@uhg.com   |c@uhg.com          |  English         |  Yes                  | 11/12/1999      | 11/12/1999  | Yes         |  11/12/1999      |   Yes           |11/12/1999 |   Yes                    | LIC                |  1213       | 123458       |       Yes                        | I     |J       | K     | L               | TEXAS        |73301    | 8800340917   | 11/12/1999    |     Yes                   |3333          |   Yes                    |   ZEX                      |456    | 3333   |  Yes              | Yes                     |1114    |  yes                          |Abc          |kumar           |saini        | brother                   | b-12      | agra     | banglow2    | TEXAS        |73301   |9414710604     |  Agree          |
   	
   	 
-Scenario Outline: Verify enroll in plan in AARP site for federal plan type member  
+Scenario Outline: Verify interstitial model window is not displayed on enroll link in plan details in AARP site for federal plan type member  
 Given the user is on AARP medicare site landing page
 When user performs plan search using following information in AARP site
 	| Zip Code    | <zipcode> |
@@ -27,7 +27,7 @@ And the user views plans of the below plan type in AARP site
 And the user validates the plan summary for the below plan in AARP site
 	| Plan Name | <planName> |
 And the user view plan details of the above selected plan in AARP site
-And the user click on enroll link on plan details for the below plan in AARP site
+And the user click on enroll button on plan details for the below plan in AARP site
 
 	
 	Examples:
