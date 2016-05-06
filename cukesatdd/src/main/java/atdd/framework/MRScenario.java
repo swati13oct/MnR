@@ -40,6 +40,7 @@ import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxBinary;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxProfile;
+import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.springframework.ldap.core.DistinguishedName;
 import org.springframework.stereotype.Component;
@@ -856,6 +857,17 @@ public class MRScenario {
 		  webDriver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
 		  return webDriver; */
 		 
+
+	}
+	
+	public WebDriver getIEDriver()
+	{
+		System.setProperty("webdriver.ie.driver", "C:/Users/pgupta15/Downloads/IEDriverServer_x64_2.27.0/IEDriverServer.exe");
+        DesiredCapabilities ieCaps = DesiredCapabilities.internetExplorer();
+        ieCaps.setCapability(InternetExplorerDriver.INTRODUCE_FLAKINESS_BY_IGNORING_SECURITY_DOMAINS, true);
+        webDriver = new InternetExplorerDriver(ieCaps);
+        webDriver.manage().window().maximize();
+        return webDriver;
 
 	}
 

@@ -22,6 +22,7 @@ import pages.acquisition.ulayer.BeneficiaryInformationPage;
 import pages.acquisition.ulayer.EnrollPlanInfoPage;
 import pages.acquisition.ulayer.EnrollmentConfirmationPage;
 import pages.acquisition.ulayer.IntroductionInformationPage;
+import pages.acquisition.ulayer.PlanDetailsPage;
 import pages.acquisition.ulayer.PlanInformationPage;
 import pages.acquisition.ulayer.ReviewApplicationPage;
 import pages.acquisition.ulayer.SubmitApplicationPage;
@@ -628,7 +629,138 @@ public class EnrollInPlanAarpStepDefinition {
 		return toJson;
 
 	}
+	
+	@And("^the user click on enroll link  for the below plan in AARP site$")
+	public void user_clicks_on_enroll_link(DataTable planAttributes)
+	{
+		String planName = planAttributes.getGherkinRows().get(0).getCells()
+				.get(0);
+		getLoginScenario().saveBean(EnrollInPlanCommonConstants.PLAN_NAME,
+				planName);
+		
+		VPPPlanSummaryPage planSummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		PlanInformationPage planInfoPage = planSummaryPage.navigatetoEnrollInplanLink(planName);
+		if (planInfoPage!=null)
+		{
+			Assert.assertTrue(true);
+		}
+		else
+		{
+			Assert.fail("Error in loading Step 1");
+		}
+	}
+	
+	@When("^the user view plan details of the above selected plan in AARP site$")
+	public void user_views_plandetails_selected_plan_aarp() {
+		String planName = (String) getLoginScenario().getBean(
+				VPPCommonConstants.PLAN_NAME);
+		String zipcode = (String) getLoginScenario().getBean(
+				VPPCommonConstants.ZIPCODE);
+		String county = (String) getLoginScenario().getBean(
+				VPPCommonConstants.COUNTY);
+		VPPPlanSummaryPage vppPlanSummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 
+		String planType = (String)getLoginScenario().getBean(VPPCommonConstants.PLAN_TYPE);
+		PlanDetailsPage vppPlanDetailsPage = vppPlanSummaryPage
+				.navigateToPlanDetails(planName, planType);
+		if (vppPlanDetailsPage != null) {
+			System.out.println("Hello");
+			getLoginScenario().saveBean(PageConstants.VPP_PLAN_DETAILS_PAGE,
+					vppPlanDetailsPage);
+			/* Get actual data */
+			JSONObject planDetailsActualJson = vppPlanDetailsPage.vppPlanDetailsJson;
+			System.out.println("planDetailsActualJson---->"
+					+ planDetailsActualJson);
+			getLoginScenario().saveBean(
+					VPPCommonConstants.VPP_PLAN_DETAIL_ACTUAL,
+					planDetailsActualJson);
+
+			/* Get expected data */
+			String fileName = planName;
+			String directory = CommonConstants.ACQUISITION_EXPECTED_DIRECTORY
+					+ File.separator + CommonConstants.SITE_ULAYER
+					+ File.separator
+					+ VPPCommonConstants.VPP_PLAN_DETAILS_FLOW_NAME
+					+ File.separator + zipcode + File.separator + county
+					+ File.separator;
+			JSONObject planDetailsExpectedJson = MRScenario.readExpectedJson(
+					fileName, directory);
+			getLoginScenario().saveBean(
+					VPPCommonConstants.VPP_PLAN_DETAIL_EXPECTED,
+					planDetailsExpectedJson);
+
+		}
+		else
+		{
+			Assert.fail("Issue in plan details page");
+		}
+	}
+	
+	@And("^the user click on enroll link on plan details for the below plan in AARP site$")
+	public void user_click_enroll_plan_detals()
+	{
+		PlanDetailsPage vppPlanDetailsPage= (PlanDetailsPage)getLoginScenario().getBean(PageConstants.VPP_PLAN_DETAILS_PAGE);
+		String planName = (String) getLoginScenario().getBean(
+				VPPCommonConstants.PLAN_NAME);
+		
+		PlanInformationPage planinfo= vppPlanDetailsPage.navigatetoenrollinplanlink(planName);
+		if (planinfo!=null)
+		{
+			Assert.assertTrue(true);
+		}
+		else
+		{
+			Assert.fail("Error in loading Step 1 from vpp plan details");
+		}
+		
+	}
+	
+	@And("^the user validates the plan summary for the below plan in AARP site$")
+	public void user_validates_plan_summary(DataTable planAttributes) {
+		List<DataTableRow> givenAttributesRow = planAttributes.getGherkinRows();
+		Map<String, String> givenAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < givenAttributesRow.size(); i++) {
+
+			givenAttributesMap.put(givenAttributesRow.get(i).getCells().get(0),
+					givenAttributesRow.get(i).getCells().get(1));
+		}
+
+		String planName = givenAttributesMap.get("Plan Name");
+		getLoginScenario().saveBean(VPPCommonConstants.PLAN_NAME, planName);
+		VPPPlanSummaryPage planSummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		/* get actual data for a particular plan */
+		JSONObject planSummaryActualJson = planSummaryPage
+				.getPlanSummaryActualData(planName);
+
+		/* Get expected data */
+		String fileName = planName;
+		String zipcode = (String) getLoginScenario().getBean(
+				VPPCommonConstants.ZIPCODE);
+		String county = (String) getLoginScenario().getBean(
+				VPPCommonConstants.COUNTY);
+		String directory = CommonConstants.ACQUISITION_EXPECTED_DIRECTORY
+				+ File.separator + CommonConstants.SITE_ULAYER + File.separator
+				+ VPPCommonConstants.VPP_PLAN_FLOW_NAME + File.separator
+				+ zipcode + File.separator + county + File.separator;
+		JSONObject planSummaryExpectedJson = MRScenario.readExpectedJson(
+				fileName, directory);
+
+		System.out
+				.println("planSummaryActualJson---->" + planSummaryActualJson);
+		System.out.println("planSummaryExpectedJson---->"
+				+ planSummaryExpectedJson);
+
+		/*try {
+			JSONAssert.assertEquals(planSummaryExpectedJson,
+					planSummaryActualJson, true);
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}*/
+
+	}
 	@After
 	public void tearDown() {
 		WebDriver wd = (WebDriver) getLoginScenario().getBean(

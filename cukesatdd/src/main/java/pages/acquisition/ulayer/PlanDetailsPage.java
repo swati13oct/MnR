@@ -3,7 +3,10 @@
  */
 package pages.acquisition.ulayer;
 
+
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -14,11 +17,18 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.skyscreamer.jsonassert.JSONAssert;
 
 import acceptancetests.atdd.data.CommonConstants;
 import acceptancetests.atdd.data.PageData;
+import acceptancetests.atdd.data.acquisition.PageConstants;
 import acceptancetests.atdd.util.CommonUtility;
+import acceptancetests.vpp.data.VPPCommonConstants;
+import atdd.framework.MRScenario;
 import atdd.framework.UhcDriver;
+import cucumber.annotation.en.And;
+import cucumber.table.DataTable;
+import gherkin.formatter.model.DataTableRow;
 
 /**
  * @author gumeshna
@@ -31,6 +41,9 @@ public class PlanDetailsPage extends UhcDriver {
 	
 	@FindBy(id = "learnmorebtnDetails")
 	private WebElement waysToSaveLink;
+	
+	@FindBy(xpath="//*[@id='enrollDetails']/span")
+	private WebElement enrollinaPlan;
 	
 	private PageData vppPlanDetails;
 
@@ -138,5 +151,20 @@ public class PlanDetailsPage extends UhcDriver {
 		
 		
 	}
-
+	
+	public PlanInformationPage navigatetoenrollinplanlink(String planName)
+	{
+		enrollinaPlan.click();
+		System.out.println(driver.getTitle());
+		if (driver.getTitle().equalsIgnoreCase("AARP Medicare Complete Online Application") || driver.getTitle().equalsIgnoreCase("AARP Medicarerx Online Application")|| driver.getTitle().equalsIgnoreCase("Enrollment Information"))
+		{
+			System.out.println("in if");
+			return new PlanInformationPage(driver, planName);
+		}
+			
+		return null;
+	}
+	
+	
+	
 }

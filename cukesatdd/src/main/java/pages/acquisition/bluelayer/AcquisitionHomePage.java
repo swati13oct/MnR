@@ -94,7 +94,8 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	@FindBy(xpath = "//div[@id='findazip_box']/div/div/div/h4")
 	private WebElement zipCodeSearchPopupHeading;
 	
-	
+	@FindBy(id = "cobrowse-disclaimer")
+	private WebElement cobrowsemodelwindow;
 
 	private PageData homePageDisclaimer;
 	public JSONObject homePageDisclaimerJson;
@@ -120,7 +121,8 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	private PageData browserCheckData;
 	public JSONObject browserCheckJson;
 	
-
+	private PageData cobrowseData;
+	public JSONObject cobrowseJson;
 	private static String UMS_ACQISITION_PAGE_URL = MRConstants.UHC_URL;
 
 	public AcquisitionHomePage(WebDriver driver) {
@@ -923,6 +925,46 @@ public class AcquisitionHomePage extends GlobalWebElements {
 						System.out.println("County model window not found");
 					}
 				}
+				
+				public RequestForAssistanceUMSPage requestforassistanceclick()
+				{
+					validate(footerRequestforAssistanceLink);
+					footerRequestforAssistanceLink.click();
+					if (cobrowsemodelwindow.isDisplayed())
+					{
+					return new RequestForAssistanceUMSPage(driver);
+					}
+					else
+					{
+						return null;
+					}
+				}
+				
+				public JSONObject validatecobrowsemodelwindow()
+				{
+					String fileName=CommonConstants.COBROWSE_MODEL_WINDOW;
+					cobrowseData=CommonUtility.readPageData(fileName, CommonConstants.PAGE_OBJECT_DIRECTORY_BLUELAYER_ACQ);
+					
+					JSONObject jsonObject= new JSONObject();
+					for (String key : cobrowseData.getExpectedData().keySet()) {
+						WebElement element = findElement(cobrowseData.getExpectedData()
+								.get(key));
+						if (element != null) {
+							if (validate(element)) {
+								try {
+									jsonObject.put(key, element.getText());
+								} catch (JSONException e) {
+									// TODO Auto-generated catch block
+									e.printStackTrace();
+								}
+							}
+						}
+					}
+					cobrowseJson= jsonObject;
+					return cobrowseJson;
+				}
+
+
 }
 
 		
