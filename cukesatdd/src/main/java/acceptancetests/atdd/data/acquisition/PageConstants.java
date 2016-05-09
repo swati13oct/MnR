@@ -294,5 +294,6 @@ public class PageConstants {
 	
 	public static final String ILLINOIS_SITE_MAP = "illinoissitemap";
 	
+	public static final String REQUEST_FOR_ASSISTANCE_PAGE="requestdorassistance";
 
 }

@@ -16,6 +16,8 @@ public class AcquistionCommonConstants {
 	public static final String SITE_MAP_ACTUAL = "siteMapActual";
 	public static final String SITE_MAP_EXPECTED = "siteMapExpectedJson";
 	
+	
+	
 	public static final String ABOUT_US_FLOW_NAME = "aboutus";
 	public static final String ABOUT_US_ACTUAL = "aboutUsActualJson";
 	public static final String ABOUT_US_EXPECTED = "aboutUsExpectedJson";
@@ -58,6 +60,8 @@ public class AcquistionCommonConstants {
 	public static final String BROWSER_CHECK_ACTUAL = "browserCheckActual";
 	public static final String BROWSER_CHECK_EXPECTED = "browserCheckExpected";
 	
-	
+	public static final String COBROWSE_FLOW_NAME = "cobrowse";
+	public static final String COBROWSE_ACTUAL = "cobrowseActual";
+	public static final String COBROWSE_EXPECTED = "cobrowseExpected";
 
 }

@@ -15,7 +15,7 @@ import cucumber.junit.Cucumber;
 @Cucumber.Options(glue = { "atdd.framework","acceptancetests.enrollinplan" }, 
 		features = { "feature/enroll-in-plan" }, 
 		format = {
-		"pretty", "html:reports/test-report" }, tags ={"@enrollInPlan"})
+		"pretty", "html:reports/test-report" }, tags ={"@enrollInPlanAARP"})
 public class RunMRAtddTestEnrollInPlan {
 
 }
