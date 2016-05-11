@@ -1,5 +1,5 @@
 {
     "selectedDrug": "Your selected drug: ibuprofen",
     "genericTable": "Generic Equivalent & Dosage Form Status\nAsk your doctor Not Covered - Benefit Exclusion",
-    "brandTable": "Medication Name & Dosage Form Status\nibuprofen SUS 100/5ML Tier 1\nPreferred Generic/Brand\nibuprofen TAB 400MG Tier 1\nPreferred Generic/Brand\nibuprofen TAB 600MG Tier 1\nPreferred Generic/Brand\nibuprofen TAB 800MG Tier 1\nPreferred Generic/Brand"
+    "brandTable": "Medication Name & Dosage Form Status\nibuprofen POW Not Covered - Benefit Exclusion\nibuprofen SUS 100/5ML Not Covered - Benefit Exclusion\nibuprofen TAB 400MG Not Covered - Benefit Exclusion\nibuprofen TAB 600MG Not Covered - Benefit Exclusion\nibuprofen TAB 800MG Not Covered - Benefit Exclusion"
 }

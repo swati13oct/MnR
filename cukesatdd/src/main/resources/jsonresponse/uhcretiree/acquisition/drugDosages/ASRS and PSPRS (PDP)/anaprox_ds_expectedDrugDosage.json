@@ -1,5 +1,5 @@
 {
     "selectedDrug": "Your selected drug: Anaprox DS",
-    "genericTable": "Generic Equivalent & Dosage Form Status\nnaproxen sodium TAB 275MG Tier 1\nPreferred Generic/Brand\nnaproxen sodium TAB 550MG Tier 1\nPreferred Generic/Brand",
-    "brandTable": "Medication Name & Dosage Form Status\nAnaprox DS TAB 550MG Tier 3\nGeneric/Non-Preferred Brand"
+    "genericTable": "Generic Equivalent & Dosage Form Status\nnaproxen sodium POW SODIUM Not Covered - Benefit Exclusion\nnaproxen sodium TAB 220MG Not Covered - Benefit Exclusion\nnaproxen sodium TAB 275MG Not Covered - Benefit Exclusion\nnaproxen sodium TAB 550MG Not Covered - Benefit Exclusion\nnaproxen sodium TAB 500MG CR Not Covered - Benefit Exclusion",
+    "brandTable": "Medication Name & Dosage Form Status\nAnaprox DS TAB 550MG Not Covered - Benefit Exclusion"
 }
