@@ -15,7 +15,7 @@ import cucumber.junit.Cucumber;
 @Cucumber.Options(glue = { "atdd.framework","acceptancetests.dtmtests" }, 
 		features = { "feature/dtm" }, 
 		format = {
-		"pretty", "html:reports/test-report" }, tags ={"@dtm"})
+		"pretty", "html:reports/test-report" }, tags ={"@enrollDTM"})
 public class RunAtddTestDtm {
 	
 }
