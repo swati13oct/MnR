@@ -321,6 +321,32 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		
 		return null;
 	}
+	public IntroductionInformationPage navigatetoEnrollInplanLinkpage(String planName)
+	{
+		if (planName.contains("HMO")) {
+			for (WebElement plan : maPlanElement) {
+				if (plan.getText().contains(planName)) {
+					ElementData elementData = new ElementData("id", "enrollMA");
+					findChildElement(elementData, plan).click();
+				}
+			}
+		}
+		if (planName.contains("PDP")) {
+			for (WebElement plan : pdpPlanElement) {
+				if (plan.getText().contains(planName)) {
+					ElementData elementData = new ElementData("id", "enrollPDP"); // TODO:
+																					// Re-check
+					findChildElement(elementData, plan).click();
+				}
+			}
+		}
+		if (driver.getTitle().equalsIgnoreCase(
+				"AARP Medicare Complete Online Application") || driver.getTitle().equalsIgnoreCase("AARP Medicarerx Online Application")) {
+			return new IntroductionInformationPage(driver);
+		}
+		
+		return null;
+	}
 
 	
 	public GetStartedPage navigateToSummaryPage(String planType) {

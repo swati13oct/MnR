@@ -10,6 +10,7 @@ package acceptancetests.globalfooter.data;
 public class AcquistionCommonConstants {
 
 	public static final String GLOBAL_FOOTER_FLOW_NAME = "globalfooter";
+	public static final String OLE_DTM_FLOW_NAME = "oledtm";
 	public static final String GLOBAL_FOOTER_ACTUAL = "globalFooterActual";
 	public static final String GLOBAL_FOOTER_EXPECTED = "globalFooterExpectedJson";
 	public static final String SITE_MAP_FLOW_NAME = "sitemap";

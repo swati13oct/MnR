@@ -628,6 +628,8 @@ public class CommonConstants {
 	public static final String PHARMACY_INFORMATION_PAGE_DATA = "pharmacyInformation.json";
 
 	public static final String GLOBAL_FOOTER_PAGE_DATA = "globalfooteractual.json";
+	
+	public static final String OLE_DTMOBJECT_PAGE_DATA = "oledtmObject.json";
 
 	public static final String SITE_MAP_PAGE_DATA = "sitemap.json";
 
