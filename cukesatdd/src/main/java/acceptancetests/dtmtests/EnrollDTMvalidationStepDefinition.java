@@ -17,6 +17,7 @@ import org.skyscreamer.jsonassert.JSONAssert;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import pages.acquisition.ulayer.AcquisitionHomePage;
+import pages.acquisition.ulayer.AdditionalInformationPage;
 import pages.acquisition.ulayer.BeneficiaryInformationPage;
 import pages.acquisition.ulayer.IntroductionInformationPage;
 import pages.acquisition.ulayer.PlanInformationPage;
@@ -41,9 +42,9 @@ import cucumber.table.DataTable;
  */
 
 public class EnrollDTMvalidationStepDefinition {
-
+ 
 	@Autowired
-	MRScenario loginScenario;
+	MRScenario loginScenario; 
 	private Object beneficiaryInformationPage;
 
 	public MRScenario getLoginScenario() {
@@ -56,9 +57,10 @@ public class EnrollDTMvalidationStepDefinition {
 		
 		AcquisitionHomePage aquisitionhomepage = new AcquisitionHomePage(wd);
 
-		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
+		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd); 
 		getLoginScenario().saveBean(PageConstants.ACQUISITION_HOME_PAGE,
 				aquisitionhomepage);
+		
 	}
 	
 	@When("^user performs plan search using following information on AARP site$")
@@ -387,7 +389,22 @@ public class EnrollDTMvalidationStepDefinition {
 		getLoginScenario().saveBean(PageConstants.BENEFICIARY_INFORMATION_PAGE,	beneficiaryInformationPage);
 
 	}
+	@And("^the user is on the special election period page$")
+	public void user_is_on_() {
+		BeneficiaryInformationPage beneficiaryInformationPage = (BeneficiaryInformationPage) getLoginScenario()
+				.getBean(PageConstants.BENEFICIARY_INFORMATION_PAGE);
+		String planName = (String) getLoginScenario().getBean(
+				EnrollInPlanCommonConstants.PLAN_NAME);
+		
+		AdditionalInformationPage additionalInformation = beneficiaryInformationPage
+				.navigatesToNextStep(planName);
+		getLoginScenario().saveBean(PageConstants.ADDITIONAL_INFORMATION_PAGE,
+				additionalInformation);
+		
 
+	}
+
+	
 	
 	public static boolean isAlertPresent(FirefoxDriver wd) {
 		try {
@@ -395,7 +412,7 @@ public class EnrollDTMvalidationStepDefinition {
 			return true;
 		} catch (NoAlertPresentException e) {
 			return false;
-		}
+		}  
 	}
 
 }

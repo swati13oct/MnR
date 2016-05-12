@@ -29,7 +29,8 @@ And the user fill following information in beneficiary information step on AARP 
      | Apartment                 | <apartment>		    |
      | City                      | <city>		    	|
      | Same Mailing Address		 | Yes			   		|
-	
+And the user is on the special election period page
+
 	Examples:
   	|zipcode |countyName   | planType   | planName                                           |firstName|middleInitial|lastName| medicareClaimNumber|hospitalEffectiveDate |  medicalEffectiveDate  | emailAddress |mainPhoneNumber | otherPhoneNumber |birthDate 	  |selectedGender |languagePreference |address    |  city	  | apartment | 
 	|80002   |Adams County | MA         |AARP MedicareComplete SecureHorizons Essential (HMO)| First   |  m          |  last  | 111-11-1111-A      |07/01/1988            |      07/01/1988        | test@uhc.com | 999-991-1111   | 999-991-1111  | 12-20-1950|Male	  |Spanish			  |1234		  | Colorado  | UHG		  |

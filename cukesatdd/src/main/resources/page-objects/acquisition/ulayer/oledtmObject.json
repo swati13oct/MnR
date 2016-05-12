@@ -10,12 +10,12 @@
 "elementName":"part1save"
 		},
 "part1Cancel":{
-"identifier":"id",
-"elementName":"part1save"
+"identifier":"class",
+"elementName":"cancel-link"
 		},
 "part1Previous":{
-"identifier":"id",
-"elementName":"part1save"
+"identifier":"class",
+"elementName":"cta-button"
 		}
 	
 	
