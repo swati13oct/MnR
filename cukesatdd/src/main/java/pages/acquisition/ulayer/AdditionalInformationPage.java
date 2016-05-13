@@ -30,6 +30,10 @@ public class AdditionalInformationPage extends UhcDriver{
 	private PageData additionalInformation;
 
 	public JSONObject additionalInformationJson;
+
+	private JSONObject oleDTMJsonPart2;
+
+	private PageData oleDtmObject;
 	
 	public AdditionalInformationPage(WebDriver driver, String planName) {
 		super(driver);
@@ -82,6 +86,64 @@ public class AdditionalInformationPage extends UhcDriver{
 		}
 		return null;
 		
+	}
+
+
+	public JSONObject validatesDTMobjPart2() {
+		String fileName = CommonConstants.OLE_DTMOBJECT_PART2_PAGE_DATA;
+		oleDtmObject = CommonUtility.readPageData(fileName,
+				CommonConstants.PAGE_OBJECT_DIRECTORY_ULAYER_ACQ);
+
+		JSONObject jsonObject = new JSONObject();
+		for (String key : oleDtmObject.getExpectedData().keySet()) {
+			WebElement element = findElement(oleDtmObject.getExpectedData()
+					.get(key));
+			if (element != null) {
+				if (validate(element)) {
+
+					JSONObject dtmObject = new JSONObject();
+					if (element.getAttribute("dtmname") != null
+							&& element.getAttribute("dtmid") != null) {
+						try {
+							dtmObject.put("dtmid", element.getAttribute("dtmid"));
+							dtmObject.put("dtmname",
+									element.getAttribute("dtmname"));
+						} catch (JSONException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+
+					
+					try {
+						jsonObject.put(key, dtmObject);
+					} catch (JSONException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					}
+					else{
+						System.out.println("DTM id or DTM name was not found for Element:"+key);
+					}
+				
+				}
+				else{
+					System.out.println("Validation failed for element::"+key);
+				}
+			}
+		}
+		
+		try {
+			jsonObject.put("dtmPageData", CommonUtility.checkForVariable(driver));
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		oleDTMJsonPart2 = jsonObject;
+
+		return oleDTMJsonPart2;
+	
+		
+
 	}
 
 }
