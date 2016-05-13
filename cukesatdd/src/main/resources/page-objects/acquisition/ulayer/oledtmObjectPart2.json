@@ -2,19 +2,21 @@
 "url":null,
 "expectedData":{
 
+
 "part2Continue":{
-"identifier":"id",
-"elementName":"partSave"
-		},	
+"identifier":"xpath",
+"elementName":"//*[@id='partSave']"
+		},
 "part2Cancel":{
 "identifier":"xpath",
 "elementName":"//*[@id='enrollment-step-1-part-1']/div[2]/a[3]"
-		},		
-"part2Continue":{
+		},
+"part2Previous":{
 "identifier":"xpath",
 "elementName":"//*[@id='enrollment-step-1-part-1']/div[2]/a[2]"
-		},
-
+		}
+	
+	
 	}
 	
 	
