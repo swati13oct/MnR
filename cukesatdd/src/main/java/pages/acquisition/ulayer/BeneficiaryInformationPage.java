@@ -88,8 +88,14 @@ public class BeneficiaryInformationPage extends UhcDriver{
 	@FindBy(id = "part1save")
 	private WebElement enrollmentNext;
 	
+	@FindBy(id="partSave")
+	private WebElement continueButton;
+	
 	@FindBy(xpath = "//div[@class='enrollment_content']/div[2]/form/h2")
 	private WebElement pageHeading;
+	
+	@FindBy(xpath = "//*[@id='enrollment-step-1-part-1']/div[1]/div/div[1]/h2")
+	private WebElement step2Part2PageHeading;
 	
 	private PageData beneficiaryInformation;
 
@@ -265,6 +271,17 @@ public class BeneficiaryInformationPage extends UhcDriver{
 		return oleDTMJson;
 	
 		
+
+	}
+
+	public AdditionalInformationPage navigatesToStep2Part2(String planName) {
+		enrollmentNext.click();
+		System.out.println("step2Part2PageHeading::"+step2Part2PageHeading);
+		if (step2Part2PageHeading.getText().equalsIgnoreCase(
+				"Special Election Period")) {
+			return new AdditionalInformationPage(driver,planName);
+		}
+		return null;
 
 	}
 

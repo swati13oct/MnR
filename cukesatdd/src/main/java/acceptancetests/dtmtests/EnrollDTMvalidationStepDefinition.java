@@ -387,6 +387,8 @@ public class EnrollDTMvalidationStepDefinition {
 		beneficiaryInformationPage.entersPersonalInformation(personalAttributesMap);
 		
 		getLoginScenario().saveBean(PageConstants.BENEFICIARY_INFORMATION_PAGE,	beneficiaryInformationPage);
+		
+		
 
 	}
 	@And("^the user is on the special election period page$")
@@ -396,11 +398,33 @@ public class EnrollDTMvalidationStepDefinition {
 		String planName = (String) getLoginScenario().getBean(
 				EnrollInPlanCommonConstants.PLAN_NAME);
 		
-		AdditionalInformationPage additionalInformation = beneficiaryInformationPage
-				.navigatesToNextStep(planName);
+		
+		
+		AdditionalInformationPage additionalInformation = beneficiaryInformationPage.navigatesToStep2Part2(planName);
 		getLoginScenario().saveBean(PageConstants.ADDITIONAL_INFORMATION_PAGE,
 				additionalInformation);
 		
+		JSONObject actualOleDTMjsonPart2 = additionalInformation.validatesDTMobjPart2();
+		
+		
+		/* Get expected data */
+		String fileName = "dtm_ole_part2";
+		String directory = CommonConstants.ACQUISITION_EXPECTED_DIRECTORY
+				+ File.separator +CommonConstants.SITE_ULAYER
+				+ File.separator
+				+ AcquistionCommonConstants.OLE_DTM_FLOW_NAME
+				+ File.separator;
+		JSONObject expectedOleDTMjson = MRScenario.readExpectedJson(
+				fileName, directory);
+		System.out.println("expectedOleDTMjson::"+expectedOleDTMjson);
+		System.out.println("actualOleDTMjsonPart2::"+actualOleDTMjsonPart2);
+		try {
+			JSONAssert.assertEquals(expectedOleDTMjson, actualOleDTMjsonPart2,
+					true);
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
 	}
 

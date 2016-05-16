@@ -1,6 +1,6 @@
 {
-   "phoneNumber":{
-      "dtmname":"OLE:Add Another Phone Number#cm",
+   "part2Previous":{
+      "dtmname":"OLE:Previous#cm",
       "dtmid":"ole_body#cm"
    },
    
@@ -9,12 +9,15 @@
       "error":""
    },
    
-   "part1Continue":{ 
+   "part2Continue":{ 
       "dtmname":"OLE:Save and Continue#cm",
       "dtmid":"ole_body#cm"
    },
    
-   
+   "part2Cancel":{ 
+      "dtmname":"OLE:Cancel Registration#cm",
+      "dtmid":"ole_body#cm"
+   },
    
    }
 
