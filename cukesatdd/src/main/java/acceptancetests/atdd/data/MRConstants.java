@@ -86,6 +86,8 @@ public class MRConstants {
 	
 	public static final String UAW_HOME_PAGE_URL = "https://www.awe-"+MRScenario.environment+"-uhcretiree.uhc.com/uawtrust/home.html";
 	
-	public static final String ILLINOIS_HOME_PAGE_URL = "https://www.awe-"+MRScenario.environment+"-uhcretiree.uhc.com/soi/home.html";	
+	public static final String ILLINOIS_HOME_PAGE_URL = "https://www.awe-"+MRScenario.environment+"-uhcretiree.uhc.com/soi/home.html";
+
+	public static final String AARP_SITE_MAP_PAGE_URL = "https://www.awe-"+MRScenario.environment+"-aarpmedicareplans.uhc.com/sitemap.html";	
 	
 }
