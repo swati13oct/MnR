@@ -12,7 +12,7 @@ import cucumber.junit.Cucumber;
  */
 @RunWith(Cucumber.class)
 @Cucumber.Options(glue = { "atdd.framework","acceptancetests.rallytool.bluelayer.acquisition" }, 
-		features = { "feature/uhc-retiree" }, 
+		features = { "feature/rallytoolacquisition/blayer" }, 
 		format = {
 		"pretty", "html:reports/test-report" }, tags ={"@RallytoolUHCSAcquisition"})
 

@@ -843,19 +843,19 @@ public class MRScenario {
 	public WebDriver getWebDriver() 
 	{
 
-		webDriver = new FirefoxDriver();
-		webDriver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
-		return webDriver;
+		//webDriver = new FirefoxDriver();
+		//webDriver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
+		//return webDriver;
 
-		/*
-		 * File pathToBinary = new
-		 * File("C:/Users/pagarwa5/AppData/Local/Mozilla Firefox/firefox.exe");
-		 * FirefoxBinary ffBinary = new FirefoxBinary(pathToBinary);
-		 * FirefoxProfile firefoxProfile = new FirefoxProfile(); webDriver = new
-		 * FirefoxDriver(ffBinary,firefoxProfile);
-		 * webDriver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
-		 * return webDriver;
-		 */
+		
+		  File pathToBinary = new
+		  File("C:/Users/naggarw2/Desktop/Mozilla/firefox.exe");
+		  FirefoxBinary ffBinary = new FirefoxBinary(pathToBinary);
+		  FirefoxProfile firefoxProfile = new FirefoxProfile(); webDriver = new
+		  FirefoxDriver(ffBinary,firefoxProfile);
+		  webDriver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
+		 return webDriver;
+		 
 
 	}
 
