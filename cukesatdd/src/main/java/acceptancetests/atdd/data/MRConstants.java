@@ -88,8 +88,12 @@ public class MRConstants {
 	
 	public static final String ILLINOIS_HOME_PAGE_URL = "https://www.awe-"+MRScenario.environment+"-uhcretiree.uhc.com/soi/home.html";
 
+<<<<<<< HEAD
 	public static final String MA_ENROLLMENT_PAGE_URL = "https://www.awe-"+MRScenario.environment+"-uhcmedicaresolutions.uhc.com/health-plans/medicare-advantage-plans/medicare-enrollment.html";
 
 	public static final String MA_PLAN_INFORMATION_AND_PLANS_PAGE_URL = "https://www.awe-"+MRScenario.environment+"-uhcmedicaresolutions.uhc.com/health-plans/medicare-advantage-plans/resources-plan-material/ma-medicare-forms.html";	
+=======
+	public static final String AARP_SITE_MAP_PAGE_URL = "https://www.awe-"+MRScenario.environment+"-aarpmedicareplans.uhc.com/sitemap.html";	
+>>>>>>> 71f0097ab40f96b6619b4ddf10f4406feb44a2b7
 	
 }
