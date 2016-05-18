@@ -4,9 +4,11 @@ import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import pages.acquisition.bluelayer.AcquisitionHomePage;
 import pages.acquisition.bluelayer.MAEnrollmentPage;
 import pages.acquisition.bluelayer.MAPlanInformationAndForms;
 import pages.acquisition.bluelayer.RegistrationHomePage;
+import pages.acquisition.bluelayer.SiteMapUMSPage;
 import pages.acquisition.uhcretiree.Rallytool_Page;
 import acceptancetests.atdd.data.CommonConstants;
 import acceptancetests.atdd.data.member.PageConstants;
@@ -14,6 +16,8 @@ import atdd.framework.MRScenario;
 import cucumber.annotation.After;
 import cucumber.annotation.en.And;
 import cucumber.annotation.en.Given;
+import cucumber.annotation.en.Then;
+import cucumber.annotation.en.When;
 
 /**
  * @author naggarw2
@@ -101,6 +105,49 @@ public class RallytoolUhcsStepDefinition {
 	
 	}	
 	
+	@Given("^the user is on the UHC Medicaresolutions Home page$")
+	public void the_user_on_UHC_Medicaresolutions_Site() {
+		WebDriver wd = getLoginScenario().getWebDriver();
+
+		AcquisitionHomePage aquisitionhomepage = new AcquisitionHomePage(wd);
+
+		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
+		getLoginScenario().saveBean(PageConstants.ACQUISITION_HOME_PAGE,
+				aquisitionhomepage);
+	}
+
+
+@When("^user clicks on Sitemap link from home page footer UHC Medicaresolutions Site$")
+public void user_clicks_Sitemap_links_ums() {
+	
+	AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
+			.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+	SiteMapUMSPage siteMapUMSPage = aquisitionhomepage.siteMapFooterClick();
+	if(siteMapUMSPage != null){
+	getLoginScenario().saveBean(PageConstants.SITE_MAP_PAGE,
+			siteMapUMSPage);
+	Assert.assertTrue(true);
+	}else{
+		Assert.fail("Error in Site map page");
+		
+	}
+}
+@Then("^user clicks on the Search for Provider/Facility link and site opens new provider search tool in a new window$")
+
+public void click_lookupprovider() {
+	SiteMapUMSPage siteMapAcqUMSPage = (SiteMapUMSPage)getLoginScenario().getBean(PageConstants.SITE_MAP_PAGE);
+
+
+	Rallytool_Page rallytool = siteMapAcqUMSPage.lookupproviderclick();
+	if(rallytool!= null){
+		getLoginScenario().saveBean(PageConstants.RALLY_TOOL_PAGE,
+				rallytool);
+		Assert.assertTrue(true);
+	} else {
+		Assert.fail(" Page not found");
+	}
+}
+	
 	@After
 	public void tearDown() {
 	       WebDriver wd = (WebDriver) getLoginScenario().getBean(
@@ -110,7 +157,6 @@ public class RallytoolUhcsStepDefinition {
 	}
 	
 	
-	
-	
+		
 	
 }	

@@ -115,6 +115,13 @@ public class PageConstants {
 	public static final String MA_PLAN_INFORMATION_AND_PLANS_PAGE ="informationandforms";
 
 	public static final String RALLY_TOOL_PAGE = "rallytool";
+
+	public static final String ACQUISITION_HOME_PAGE = "acquisitionhomepage";
+
+	public static final String SITE_MAP_PAGE = "siteMapUMSPage";
+
+	
+
 	
 
 }
