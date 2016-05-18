@@ -120,6 +120,8 @@ public class PageConstants {
 
 	public static final String SITE_MAP_PAGE = "siteMapUMSPage";
 
+	public static final String VPP_PLAN_SUMMARY_PAGE = "plansummaryPage";
+
 	
 
 	
