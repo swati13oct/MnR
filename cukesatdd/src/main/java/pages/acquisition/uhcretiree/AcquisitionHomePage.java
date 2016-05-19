@@ -41,6 +41,12 @@ public class AcquisitionHomePage extends UhcDriver {
 	}
 
 	public SelectFormularyPage prescriptionsDrugLink() {
+		try {
+			Thread.sleep(5000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		validate(prescriptionsLink);
 		prescriptionsLink.click();
 		if (getTitle().equalsIgnoreCase(
