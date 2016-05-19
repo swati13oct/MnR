@@ -129,7 +129,7 @@ public class UHCRetireeStepDefinition {
 
 		}
 		
-		@Then("^user clicks on the Find a physician link and site opens new provider search tool in a new window$")
+@Then("^user clicks on the Find a physician link and site opens new provider search tool in a new window$")
 		
 		public void clickverizonfindapysician(){
 			VerizonUhcretireePage verizonproviderpage = (VerizonUhcretireePage)getLoginScenario().getBean(PageConstants.VERIZON_PROVIDER_PAGE_URL);

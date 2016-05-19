@@ -18,7 +18,7 @@ public class VerizonSiteMap extends UhcDriver {
 	}
 	
 	@FindBy(xpath=".//*[@id='main']/div/div[1]/div/div[4]/div[1]/div/div[1]/div[1]/ul/li[3]/a")
-	private WebElement versitemapfindaproviderlink;
+	public WebElement versitemapfindaproviderlink;
 	
 	private static String VERIZON_SITE_MAP_URL = MRConstants.VERIZON_SITE_MAP_URL;
 	
@@ -35,8 +35,8 @@ public class VerizonSiteMap extends UhcDriver {
 	public Rallytool_Page verizonsitemapproviderclick() {
 		
 		validate(versitemapfindaproviderlink);
-		
 		versitemapfindaproviderlink.click();
+		
 		ArrayList<String> tabs = new ArrayList<String> (driver.getWindowHandles());
 		driver.switchTo().window(tabs.get(1));
 		
