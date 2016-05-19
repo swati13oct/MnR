@@ -42,17 +42,18 @@ public class AcquisitionHomePage extends UhcDriver {
 
 	public SelectFormularyPage prescriptionsDrugLink() {
 		try {
-			Thread.sleep(5000);
+			Thread.sleep(7000);
+			validate(prescriptionsLink);
+			prescriptionsLink.click();
+			if (getTitle().equalsIgnoreCase(
+							"UnitedHealthcare Group Retiree – Search for a Drug")) {
+				return new SelectFormularyPage(driver);
+			}
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		validate(prescriptionsLink);
-		prescriptionsLink.click();
-		if (getTitle().equalsIgnoreCase(
-						"UnitedHealthcare Group Retiree – Search for a Drug")) {
-			return new SelectFormularyPage(driver);
-		}
+		
 		return null;
 	}
 
