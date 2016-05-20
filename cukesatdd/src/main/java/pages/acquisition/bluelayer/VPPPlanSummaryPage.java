@@ -13,7 +13,11 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
+
 import pages.acquisition.ulayer.EnrollPlanInfoPage;
+
+import pages.acquisition.uhcretiree.Rallytool_Page;
+
 import acceptancetests.atdd.data.CommonConstants;
 import acceptancetests.atdd.data.ElementData;
 import acceptancetests.atdd.data.PageData;
@@ -56,7 +60,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	@FindBy(xpath ="//div[@id='maplans_container']/div[2]/div/div/div/div[@class='ng-scope']")
 	List<WebElement> pdpPlanElement;
 	
-	@FindBy(xpath ="//div[@id='maplans_container']/div[2]/div/div/div/div[@class='ng-scope']")
+	@FindBy(xpath ="//div[@id='snpplans_container']/div[2]/div/div/div/div[@class='ng-scope']")
 	List<WebElement> snpPlanElement;
 
 	@FindBy(className = "planinf")
@@ -365,5 +369,70 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		return null;
 
 	}
+	
+	public Rallytool_Page clicksOnIsProviderCovered(String planName) {
+		
+		ElementData elementData = new ElementData("id", "doctorCoverMA");
+		for (WebElement plan : snpPlanElement) {
+			if (plan.getText().contains(planName)) {
+				findChildElement(elementData,plan).click();
+				break;
+			}
+		}
+		
 
-}
+		try {
+			Thread.sleep(8000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		switchToNewTab();
+		
+		
+
+		if (getTitle().equalsIgnoreCase(
+				"Find Care"))
+		{
+			return new Rallytool_Page(driver);
+		}
+		return null;
+	}
+	}
+
+	/*public Rallytool_Page clicksOnIsProviderCovered(String planName) {
+		
+		ElementData elementData = new ElementData("id", "doctorCoverMA");
+		for (WebElement plan : maPlanElement) {
+			if (plan.getText().contains(planName)) {
+				findChildElement(elementData,plan).click();
+				break;
+			}
+		}
+		
+
+		try {
+			Thread.sleep(8000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		switchToNewTab();
+		
+		
+
+		if (getTitle().equalsIgnoreCase(
+				"Find Care"))
+		{
+			return new Rallytool_Page(driver);
+		}
+		return null;
+	}
+	}
+	*/
+
+
+
+
