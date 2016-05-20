@@ -21,6 +21,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import pages.acquisition.bluelayer.AcquisitionHomePage;
 import pages.acquisition.bluelayer.MAEnrollmentPage;
 import pages.acquisition.bluelayer.MAPlanInformationAndForms;
+import pages.acquisition.bluelayer.PlanDetailsPage;
 import pages.acquisition.bluelayer.RegistrationHomePage;
 import pages.acquisition.bluelayer.SiteMapUMSPage;
 import pages.acquisition.uhcretiree.Rallytool_Page;
@@ -391,7 +392,69 @@ public void enters_provider_information_aarp() {
 	}
 }
 
+
+@When("^the user view plan details of the above selected plan in UMS site$")
+public void user_views_plandetails_selected_plan_ums() {
+	String planName = (String) getLoginScenario().getBean(
+			VPPCommonConstants.PLAN_NAME);
+	String zipcode = (String) getLoginScenario().getBean(
+			VPPCommonConstants.ZIPCODE);
+	String county = (String) getLoginScenario().getBean(
+			VPPCommonConstants.COUNTY);
+	VPPPlanSummaryPage vppPlanSummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+			.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+
+	PlanDetailsPage vppPlanDetailsPage = vppPlanSummaryPage
+			.navigateToPlanDetails(planName);
+	if (vppPlanDetailsPage != null) {
+		getLoginScenario().saveBean(PageConstants.VPP_PLAN_DETAILS_PAGE,
+				vppPlanDetailsPage);
+		/* Get actual data */
+		JSONObject planDetailsActualJson = vppPlanDetailsPage.vppPlanDetailsJson;
+		System.out.println("planDetailsActualJson---->"
+				+ planDetailsActualJson);
+		getLoginScenario().saveBean(
+				VPPCommonConstants.VPP_PLAN_DETAIL_ACTUAL,
+				planDetailsActualJson);
+
+		/* Get expected data */
+		String fileName = planName;
+		String directory = CommonConstants.ACQUISITION_EXPECTED_DIRECTORY
+				+ File.separator + CommonConstants.SITE_BLUELAYER
+				+ File.separator
+				+ VPPCommonConstants.VPP_PLAN_DETAILS_FLOW_NAME
+				+ File.separator + zipcode + File.separator + county
+				+ File.separator;
+		JSONObject planDetailsExpectedJson = MRScenario.readExpectedJson(
+				fileName, directory);
+		getLoginScenario().saveBean(
+				VPPCommonConstants.VPP_PLAN_DETAIL_EXPECTED,
+				planDetailsExpectedJson);
+
+	}
 }
+
+
+@And("^the user clicks on Is my doctors covered link on Plan Details page in UHC site and site opens Rally Connect in a new window$")
+public void click_plandetailssearchprovider() {
+	PlanDetailsPage planDetailsPage = (PlanDetailsPage)getLoginScenario().getBean(PageConstants.VPP_PLAN_DETAILS_PAGE);
+
+
+	Rallytool_Page rallytool = planDetailsPage.lookupproviderclick();
+	if(rallytool!= null){
+		getLoginScenario().saveBean(PageConstants.RALLY_TOOL_PAGE,
+				rallytool);
+		Assert.assertTrue(true);
+	} else {
+		Assert.fail(" Page not found");
+	}
+
+}
+
+}
+
+
+
 
 
 	

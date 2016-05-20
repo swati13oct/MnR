@@ -2,6 +2,8 @@ package pages.acquisition.bluelayer;
 
 /*@author pagarwa5*/
 
+import java.util.ArrayList;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.openqa.selenium.WebDriver;
@@ -9,6 +11,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
+import pages.acquisition.uhcretiree.Rallytool_Page;
 import acceptancetests.atdd.data.CommonConstants;
 import acceptancetests.atdd.data.PageData;
 import acceptancetests.atdd.util.CommonUtility;
@@ -25,7 +28,8 @@ public class PlanDetailsPage extends UhcDriver{
 	@FindBy(id = "yourDceInitial")
 	private WebElement enterDrugInfoLink;
 	
-	
+	@FindBy(xpath ="/html/body/div[4]/div/table/tbody/tr[2]/td/div/table/tbody/tr[2]/td/div/div/div[2]/div/div/div/div[2]/div[2]/div[1]/div/div[2]/div/div/table/tbody/tr[4]/td[2]/a")
+	private WebElement plandetailsProviderlink;
 	
 	private PageData vppPlanDetails;
 
@@ -103,4 +107,19 @@ public class PlanDetailsPage extends UhcDriver{
 		return null;
 	}
 
+	public Rallytool_Page lookupproviderclick() {
+		validate(plandetailsProviderlink);
+		plandetailsProviderlink.click();
+		ArrayList<String> tabs = new ArrayList<String>(
+				driver.getWindowHandles());
+				driver.switchTo().window(tabs.get(1));
+		if (getTitle().equalsIgnoreCase(
+						"Find Care")) {
+			return new Rallytool_Page(driver);
+		}
+		
+		// TODO Auto-generated method stub
+		return null;
+	} 
+	
 }
