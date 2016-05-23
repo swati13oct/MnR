@@ -31,6 +31,9 @@ public class PlanDetailsPage extends UhcDriver{
 	@FindBy(xpath ="/html/body/div[4]/div/table/tbody/tr[2]/td/div/table/tbody/tr[2]/td/div/div/div[2]/div/div/div/div[2]/div[2]/div[1]/div/div[2]/div/div/table/tbody/tr[4]/td[2]/a")
 	private WebElement plandetailsProviderlink;
 	
+	@FindBy(xpath ="//*[@id='myDoctorDetails']")
+	private WebElement plandetailProviderlink;
+	
 	private PageData vppPlanDetails;
 
 	public JSONObject vppPlanDetailsJson;
@@ -117,6 +120,24 @@ public class PlanDetailsPage extends UhcDriver{
 						"Find Care")) {
 			return new Rallytool_Page(driver);
 		}
+		
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public Rallytool_Page lookupaproviderclick() {
+		validate(plandetailProviderlink);
+		plandetailProviderlink.click();
+		ArrayList<String> tabs = new ArrayList<String>(
+				driver.getWindowHandles());
+				driver.switchTo().window(tabs.get(1));
+		if (getTitle().equalsIgnoreCase(
+						"Find Care")) {
+			return new Rallytool_Page(driver);
+		}
+		
+		
+		
 		
 		// TODO Auto-generated method stub
 		return null;

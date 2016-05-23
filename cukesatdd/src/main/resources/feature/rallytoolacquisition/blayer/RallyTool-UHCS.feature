@@ -34,7 +34,25 @@ Feature:To launch Rally tool from UHC Acquisition Pages
 #|80002  | Jefferson County    | SNP       | UnitedHealthcare Assisted Living Plan (PPO SNP)        |
 #|90210  | Los Angeles County  | MA        | AARP MedicareComplete SecureHorizons Plan 3 (HMO)      |
 
-Scenario Outline:Verify Rally link from VPP: MA - Plan Details page
+#Scenario Outline:Verify Rally link from VPP: MA - Plan Details page
+#Given user navigates to the UHC Home Page
+#And user performs plan search using following information in UHC site
+#	| Zip Code    | <zipcode>|
+#	| County Name	  |<county>|
+#When user views plans of the below plan type in UMS site
+#| Plan Type | <plantype> |
+#Then user validates plan count for all plan types on plan summary page in UMS site
+#Then the user validates the available plans for selected plan types in UMS site
+#And the user validates the plan summary for the below plan in UMS site
+| Plan Name | <planName> |
+#When the user view plan details of the above selected plan in UMS site
+#And the user clicks on Is my doctors covered link on Plan Details page in UHC site and site opens Rally Connect in a new window
+#Examples:
+# |zipcode|  county             | plantype  | planName                                               |
+# |90210  | Los Angeles County  | MA        | AARP MedicareComplete SecureHorizons Plan 3 (HMO)      |
+ 
+ 
+Scenario Outline:Verify Rally link from VPP: SNP - Plan Details page
 Given user navigates to the UHC Home Page
 And user performs plan search using following information in UHC site
 	| Zip Code    | <zipcode>|
@@ -46,7 +64,11 @@ Then the user validates the available plans for selected plan types in UMS site
 And the user validates the plan summary for the below plan in UMS site
 | Plan Name | <planName> |
 When the user view plan details of the above selected plan in UMS site
-And the user clicks on Is my doctors covered link on Plan Details page in UHC site and site opens Rally Connect in a new window
+And the user clicks on IS MY DOCTORS covered link on Plan Details page in UHC site and site opens Rally Connect in a new window
 Examples:
  |zipcode|  county             | plantype  | planName                                               |
- |90210  | Los Angeles County  | MA        | AARP MedicareComplete SecureHorizons Plan 3 (HMO)      |
+ |33012  | Miami-Dade County   | SNP       | Care Improvement Plus Gold Rx (Regional PPO SNP)       |
+ 
+ 
+ 
+ 
