@@ -337,70 +337,36 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		return null;
 
 	}
-	
+
 	public Rallytool_Page clicksOnIsProviderCovered(String planName) {
-		
-		ElementData elementData = new ElementData("id", "doctorCoverMA");
-		for (WebElement plan : snpPlanElement) {
-			if (plan.getText().contains(planName)) {
-				findChildElement(elementData,plan).click();
-				break;
+		if (planName.contains("HMO")) {
+			for (WebElement plan : maPlanElement) {
+				if (plan.getText().contains(planName)) {
+					ElementData elementData = new ElementData("id",
+							"doctorCoverMA");
+					findChildElement(elementData, plan).click();
+				}
 			}
 		}
-		
-
-		try {
-			Thread.sleep(8000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-		switchToNewTab();
-		
-		
-
-		if (getTitle().equalsIgnoreCase(
-				"Find Care"))
-		{
-			return new Rallytool_Page(driver);
-		}
-		return null;
-	}
-	}
-
-	/*public Rallytool_Page clicksOnIsProviderCovered(String planName) {
-		
-		ElementData elementData = new ElementData("id", "doctorCoverMA");
-		for (WebElement plan : maPlanElement) {
-			if (plan.getText().contains(planName)) {
-				findChildElement(elementData,plan).click();
-				break;
+		if (planName.contains("SNP")) {
+			for (WebElement plan : snpPlanElement) {
+				if (plan.getText().contains(planName)) {
+					ElementData elementData = new ElementData("id",
+							"doctorCoverMA"); // TODO Re-check
+					findChildElement(elementData, plan).click();
+				}
 			}
 		}
-		
-
-		try {
-			Thread.sleep(8000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-		switchToNewTab();
-		
-		
-
-		if (getTitle().equalsIgnoreCase(
-				"Find Care"))
-		{
+		if (driver.getTitle().equalsIgnoreCase(
+				"Find Care")) { 
 			return new Rallytool_Page(driver);
-		}
+	}
+		// TODO Auto-generated method stub
 		return null;
 	}
-	}
-	*/
-
+}
+	
+	
 
 
 

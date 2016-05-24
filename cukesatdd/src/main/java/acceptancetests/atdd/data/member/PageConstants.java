@@ -110,23 +110,18 @@ public class PageConstants {
 
 	public static final String PLAN_COMPARE_PAGE = "planComparePage";
 
-	public static final String MA_ENROLLMENT_PAGE = "enrollmentpage";
 	
-	public static final String MA_PLAN_INFORMATION_AND_PLANS_PAGE ="informationandforms";
 
 	public static final String RALLY_TOOL_PAGE = "rallytool";
 
 	public static final String ACQUISITION_HOME_PAGE = "acquisitionhomepage";
 
-	public static final String SITE_MAP_PAGE = "siteMapUMSPage";
+	
 
 	public static final String VPP_PLAN_SUMMARY_PAGE = "plansummaryPage";
 
 	public static final String VPP_PLAN_DETAILS_PAGE = "vppPlanDetailsPage";	
 
-	public static final String MA_PRESDRUGS_TRANSITION_PAGE ="mapresdrugstransitionpage";
-
-	public static final String MA_HOW_TO_APPOINT_REPR_PAGE ="mahowtoappointrepresentativepage";
 	
 	
 

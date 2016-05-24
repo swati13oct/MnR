@@ -77,6 +77,18 @@ Then click on the Look up my provider link on MA PrescriptionDrug Transition Pro
 Scenario: Verify Rally link from MA How To Appoint a Representative page
 Given user navigates to MA How To Appoint Representative page of Blue Layer Acquisition site
 Then click on the Look up my provider link on MA How To Appoint Representative page and rally tool opens up
+
+Scenario:Verify Rally link from OUR PLANS: MA HOW TO PAY YOUR PREMIUM Page
+Given user navigates to the OUR PLANS: MA HOW TO PAY YOUR PREMIUM
+And user clicks on Look up provider link on OUR PLANS: MA HOW TO PAY YOUR PREMIUM then site open rally tool in new window
+
+Scenario:Verify Rally link from OUR PLANS: MA REQUEST MORE HELP AND INFORMATION
+Given user navigates to the OUR PLANS: MA REQUEST MORE HELP AND INFORMATION
+And user clicks on Look up provider link on OUR PLANS: MA REQUEST MORE HELP AND INFORMATION then site open rally tool in new window  
+
+Scenario:Verify Rally link from OUR PLANS: MA RESOURCES AND PLAN MATERIALS TAB
+Given user navigates to the OUR PLANS: MA RESOURCES AND PLAN MATERIALS TAB
+And user clicks on Look up provider link on OUR PLANS: MA RESOURCES AND PLAN MATERIALS TAB then site open rally tool in new window 
  
  
  
