@@ -17,6 +17,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import pages.acquisition.bluelayer.AcquisitionHomePage;
 import pages.acquisition.bluelayer.MAEnrollmentPage;
 import pages.acquisition.bluelayer.MAPlanInformationAndForms;
+import pages.acquisition.bluelayer.MAPrescriptionDrugTransitionProcess;
+import pages.acquisition.bluelayer.OurPlansMAHowToAppointARepresentativePage;
 import pages.acquisition.bluelayer.PlanDetailsPage;
 import pages.acquisition.bluelayer.SiteMapUMSPage;
 import pages.acquisition.bluelayer.VPPPlanSummaryPage;
@@ -458,6 +460,76 @@ public void click_plandetailsearchprovider() {
 	} else {
 		Assert.fail(" Page not found");
 	}
+
+}
+
+@Given("^user navigates to MA PrescriptionDrug Transition Process page of Blue Layer Acquisition site$")
+
+public void user_navigates_MAPrescriptionDrugTransitionProcess () {
+	
+	WebDriver wd = getLoginScenario().getWebDriver();
+	MAPrescriptionDrugTransitionProcess mapresdrugstransitionpage = new MAPrescriptionDrugTransitionProcess(wd);
+	getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
+
+
+	getLoginScenario().saveBean(PageConstants.MA_PRESDRUGS_TRANSITION_PAGE, mapresdrugstransitionpage);
+
+
+}	
+
+
+
+@Then("^click on the Look up my provider link on MA PrescriptionDrug Transition Process page and rally tool opens up$")
+
+public void user_clicks_providerlink_MAHowToAppointRepresentativePage () {
+
+	MAPrescriptionDrugTransitionProcess informationandforms= (MAPrescriptionDrugTransitionProcess)getLoginScenario().getBean(PageConstants.MA_PRESDRUGS_TRANSITION_PAGE);
+
+Rallytool_Page rallytool = informationandforms.MAPlanInformationproviderclick();
+if(rallytool!= null){
+	getLoginScenario().saveBean(PageConstants.RALLY_TOOL_PAGE,
+			rallytool);
+	Assert.assertTrue(true);
+} else {
+	Assert.fail(" Page not found");
+}
+
+
+
+}
+
+
+@Given("^user navigates to MA How To Appoint Representative page of Blue Layer Acquisition site$")
+
+public void user_navigates_MAHowToAppointRepresentativePage () {
+	
+	WebDriver wd = getLoginScenario().getWebDriver();
+	OurPlansMAHowToAppointARepresentativePage mahowtoappointrepresentativepage = new OurPlansMAHowToAppointARepresentativePage(wd);
+	getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
+
+
+	getLoginScenario().saveBean(PageConstants.MA_HOW_TO_APPOINT_REPR_PAGE, mahowtoappointrepresentativepage);
+
+
+}	
+
+
+
+@Then("^click on the Look up my provider link on MA How To Appoint Representative page and rally tool opens up$")
+
+public void user_clicks_providerlink_MAPrescriptionDrugTransitionProcess () {
+
+	OurPlansMAHowToAppointARepresentativePage informationandforms= (OurPlansMAHowToAppointARepresentativePage)getLoginScenario().getBean(PageConstants.MA_HOW_TO_APPOINT_REPR_PAGE);
+
+Rallytool_Page rallytool = informationandforms.MAPlanInformationproviderclick();
+if(rallytool!= null){
+	getLoginScenario().saveBean(PageConstants.RALLY_TOOL_PAGE,
+			rallytool);
+	Assert.assertTrue(true);
+} else {
+	Assert.fail(" Page not found");
+}
+
 
 }
 

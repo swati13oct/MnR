@@ -124,6 +124,10 @@ public class PageConstants {
 
 	public static final String VPP_PLAN_DETAILS_PAGE = "vppPlanDetailsPage";	
 
+	public static final String MA_PRESDRUGS_TRANSITION_PAGE ="mapresdrugstransitionpage";
+
+	public static final String MA_HOW_TO_APPOINT_REPR_PAGE ="mahowtoappointrepresentativepage";
+	
 	
 
 }
