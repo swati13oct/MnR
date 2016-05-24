@@ -10,27 +10,21 @@ import java.util.Map;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.junit.Assert;
-import org.openqa.selenium.NoAlertPresentException;
 import org.openqa.selenium.WebDriver;
 import org.skyscreamer.jsonassert.JSONAssert;
-
-
-
 import org.springframework.beans.factory.annotation.Autowired;
 
 import pages.acquisition.bluelayer.AcquisitionHomePage;
 import pages.acquisition.bluelayer.MAEnrollmentPage;
 import pages.acquisition.bluelayer.MAPlanInformationAndForms;
 import pages.acquisition.bluelayer.PlanDetailsPage;
-import pages.acquisition.bluelayer.RegistrationHomePage;
 import pages.acquisition.bluelayer.SiteMapUMSPage;
-import pages.acquisition.uhcretiree.Rallytool_Page;
 import pages.acquisition.bluelayer.VPPPlanSummaryPage;
+import pages.acquisition.uhcretiree.Rallytool_Page;
 import acceptancetests.atdd.data.CommonConstants;
 import acceptancetests.atdd.data.member.PageConstants;
 import acceptancetests.vpp.data.VPPCommonConstants;
 import atdd.framework.MRScenario;
-import cucumber.annotation.After;
 import cucumber.annotation.en.And;
 import cucumber.annotation.en.Given;
 import cucumber.annotation.en.Then;
@@ -441,6 +435,22 @@ public void click_plandetailssearchprovider() {
 
 
 	Rallytool_Page rallytool = planDetailsPage.lookupproviderclick();
+	if(rallytool!= null){
+		getLoginScenario().saveBean(PageConstants.RALLY_TOOL_PAGE,
+				rallytool);
+		Assert.assertTrue(true);
+	} else {
+		Assert.fail(" Page not found");
+	}
+
+}
+
+@And("^the user clicks on IS MY DOCTORS covered link on Plan Details page in UHC site and site opens Rally Connect in a new window$")
+public void click_plandetailsearchprovider() {
+	PlanDetailsPage planDetailsPage = (PlanDetailsPage)getLoginScenario().getBean(PageConstants.VPP_PLAN_DETAILS_PAGE);
+
+
+	Rallytool_Page rallytool = planDetailsPage.lookupaproviderclick();
 	if(rallytool!= null){
 		getLoginScenario().saveBean(PageConstants.RALLY_TOOL_PAGE,
 				rallytool);
