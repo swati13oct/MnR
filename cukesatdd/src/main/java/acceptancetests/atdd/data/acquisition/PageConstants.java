@@ -3,6 +3,8 @@
  */
 package acceptancetests.atdd.data.acquisition;
 
+import pages.acquisition.bluelayer.MARightsAndResponsibilitiesPage;
+
 /**
  * @author pjaising
  *
@@ -277,6 +279,8 @@ public class PageConstants {
 	public static final String ILLINOIS_SITE_MAP = "illinoissitemap";
 
 	public static final String MA_ENROLLMENT_PAGE = "enrollmentpage";
+	
+	public static final String MA_RIGHTS_AND_RESPONSIBILITIES_PAGE ="rightsandresponsibilities" ;
 
 	public static final String MA_PLAN_INFORMATION_AND_PLANS_PAGE = "informationandforms";
 

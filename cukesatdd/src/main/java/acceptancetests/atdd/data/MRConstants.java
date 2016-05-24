@@ -92,7 +92,9 @@ public class MRConstants {
 	public static final String MA_ENROLLMENT_PAGE_URL = "https://www.awe-"+MRScenario.environment+"-uhcmedicaresolutions.uhc.com/health-plans/medicare-advantage-plans/medicare-enrollment.html";
 
 	public static final String MA_PLAN_INFORMATION_AND_PLANS_PAGE_URL = "https://www.awe-"+MRScenario.environment+"-uhcmedicaresolutions.uhc.com/health-plans/medicare-advantage-plans/resources-plan-material/ma-medicare-forms.html";	
-
+	
+	public static final String MA_RIGHTS_AND_RESPONSIBILITIES_PAGE_URL = "https://www.awe-"+MRScenario.environment+"-uhcmedicaresolutions.uhc.com/health-plans/medicare-advantage-plans/resources-plan-material/ma-medicare-forms/medicare-rights-center.html" ;
+	
 	public static final String AARP_SITE_MAP_PAGE_URL = "https://www.awe-"+MRScenario.environment+"-aarpmedicareplans.uhc.com/sitemap.html";	
 
 	public static final String MA_PLAN_PRES_DRUGS_TRANSITION_PLANS_PAGE_URL = "https://www.awe-"+MRScenario.environment+"-uhcmedicaresolutions.uhc.com/health-plans/medicare-advantage-plans/resources-plan-material/ma-medicare-forms/ma-drug-transition.html";

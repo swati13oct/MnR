@@ -20,6 +20,7 @@ import pages.acquisition.bluelayer.MAPlanInformationAndForms;
 import pages.acquisition.bluelayer.MAPrescriptionDrugTransitionProcess;
 import pages.acquisition.bluelayer.MARequestMoreHelpAndInformationPage;
 import pages.acquisition.bluelayer.MAResourcesAndPlanMaterialsTabpage;
+import pages.acquisition.bluelayer.MARightsAndResponsibilitiesPage;
 import pages.acquisition.bluelayer.OurPlansMAHowToAppointARepresentativePage;
 import pages.acquisition.bluelayer.OurPlansMAHowToPayYourPremiumPage;
 import pages.acquisition.bluelayer.PlanDetailsPage;
@@ -648,6 +649,41 @@ public void user_clicks_providerlink_MA_Resources_And_PlanMaterials () {
 	
 	
 }
+
+@Given("^user navigates to MA MEMBER RIGHTS AND RESPONSIBILITIES of Blue Layer Acquisition site$")
+
+public void user_navigates_MA_MEMBER_RIGHTS_AND_RESPONSIBILITIES () {
+	
+	WebDriver wd = getLoginScenario().getWebDriver();
+	MARightsAndResponsibilitiesPage rightsandresponsibilities = new MARightsAndResponsibilitiesPage(wd);
+	getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
+
+
+	getLoginScenario().saveBean(PageConstants.MA_RIGHTS_AND_RESPONSIBILITIES_PAGE, rightsandresponsibilities);
+	
+	
+
+
+}
+
+@And("^click on the Look up my provider link on MA Enrollment Information Page and rally tool opens up$")
+
+public void user_clicks_providerlink_MARightandresponsibilitiepage () {
+	
+	MARightsAndResponsibilitiesPage rightsandresponsibilities= (MARightsAndResponsibilitiesPage)getLoginScenario().getBean(PageConstants.MA_RIGHTS_AND_RESPONSIBILITIES_PAGE);
+	
+	Rallytool_Page rallytool = rightsandresponsibilities.MAEnrollmentproviderclick();
+	if(rallytool!= null){
+		getLoginScenario().saveBean(PageConstants.RALLY_TOOL_PAGE,
+				rallytool);
+		Assert.assertTrue(true);
+	} else {
+		Assert.fail(" Page not found");
+	}
+	
+	
+}
+
 }
 
 

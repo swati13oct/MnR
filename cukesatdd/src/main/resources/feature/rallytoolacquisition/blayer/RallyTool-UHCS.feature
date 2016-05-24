@@ -89,7 +89,10 @@ And user clicks on Look up provider link on OUR PLANS: MA REQUEST MORE HELP AND 
 Scenario:Verify Rally link from OUR PLANS: MA RESOURCES AND PLAN MATERIALS TAB
 Given user navigates to the OUR PLANS: MA RESOURCES AND PLAN MATERIALS TAB
 And user clicks on Look up provider link on OUR PLANS: MA RESOURCES AND PLAN MATERIALS TAB then site open rally tool in new window 
- 
+
+Scenario:Verify Rally link from OUR PLANS: MA MEMBER RIGHTS AND RESPONSIBILITIES
+Given user navigates to MA MEMBER RIGHTS AND RESPONSIBILITIES of Blue Layer Acquisition site
+And click on the Look up my provider link on MA Rights and responsibilities and rally tool opens up
  
  
  
