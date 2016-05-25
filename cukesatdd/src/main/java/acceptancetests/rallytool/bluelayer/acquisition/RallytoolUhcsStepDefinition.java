@@ -17,13 +17,19 @@ import org.springframework.beans.factory.annotation.Autowired;
 import pages.acquisition.bluelayer.AcquisitionHomePage;
 import pages.acquisition.bluelayer.MAEnrollmentPage;
 import pages.acquisition.bluelayer.MAPlanInformationAndForms;
+import pages.acquisition.bluelayer.MAPrescriptionDrugTransitionProcess;
+import pages.acquisition.bluelayer.MARequestMoreHelpAndInformationPage;
+import pages.acquisition.bluelayer.MAResourcesAndPlanMaterialsTabpage;
+import pages.acquisition.bluelayer.MARightsAndResponsibilitiesPage;
+import pages.acquisition.bluelayer.OurPlansMAHowToAppointARepresentativePage;
+import pages.acquisition.bluelayer.OurPlansMAHowToPayYourPremiumPage;
 import pages.acquisition.bluelayer.PlanDetailsPage;
 import pages.acquisition.bluelayer.SiteMapUMSPage;
 import pages.acquisition.bluelayer.VPPPlanSummaryPage;
 import pages.acquisition.uhcretiree.Rallytool_Page;
 import acceptancetests.atdd.data.CommonConstants;
-import acceptancetests.atdd.data.member.PageConstants;
 import acceptancetests.vpp.data.VPPCommonConstants;
+import acceptancetests.atdd.data.acquisition.PageConstants;
 import atdd.framework.MRScenario;
 import cucumber.annotation.en.And;
 import cucumber.annotation.en.Given;
@@ -461,7 +467,77 @@ public void click_plandetailsearchprovider() {
 
 }
 
+@Given("^user navigates to MA PrescriptionDrug Transition Process page of Blue Layer Acquisition site$")
+
+public void user_navigates_MAPrescriptionDrugTransitionProcess () {
+	
+	WebDriver wd = getLoginScenario().getWebDriver();
+	MAPrescriptionDrugTransitionProcess mapresdrugstransitionpage = new MAPrescriptionDrugTransitionProcess(wd);
+	getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
+
+
+	getLoginScenario().saveBean(PageConstants.MA_PRESDRUGS_TRANSITION_PAGE, mapresdrugstransitionpage);
+
+
+}	
+
+
+
+@Then("^click on the Look up my provider link on MA PrescriptionDrug Transition Process page and rally tool opens up$")
+
+public void user_clicks_providerlink_MAHowToAppointRepresentativePage () {
+
+	MAPrescriptionDrugTransitionProcess informationandforms= (MAPrescriptionDrugTransitionProcess)getLoginScenario().getBean(PageConstants.MA_PRESDRUGS_TRANSITION_PAGE);
+
+Rallytool_Page rallytool = informationandforms.MAPlanInformationproviderclick();
+if(rallytool!= null){
+	getLoginScenario().saveBean(PageConstants.RALLY_TOOL_PAGE,
+			rallytool);
+	Assert.assertTrue(true);
+} else {
+	Assert.fail(" Page not found");
 }
+
+
+
+}
+
+
+@Given("^user navigates to MA How To Appoint Representative page of Blue Layer Acquisition site$")
+
+public void user_navigates_MAHowToAppointRepresentativePage () {
+	
+	WebDriver wd = getLoginScenario().getWebDriver();
+	OurPlansMAHowToAppointARepresentativePage mahowtoappointrepresentativepage = new OurPlansMAHowToAppointARepresentativePage(wd);
+	getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
+
+
+	getLoginScenario().saveBean(PageConstants.MA_HOW_TO_APPOINT_REPR_PAGE, mahowtoappointrepresentativepage);
+
+
+}	
+
+
+
+@Then("^click on the Look up my provider link on MA How To Appoint Representative page and rally tool opens up$")
+
+public void user_clicks_providerlink_MAPrescriptionDrugTransitionProcess () {
+
+	OurPlansMAHowToAppointARepresentativePage informationandforms= (OurPlansMAHowToAppointARepresentativePage)getLoginScenario().getBean(PageConstants.MA_HOW_TO_APPOINT_REPR_PAGE);
+
+Rallytool_Page rallytool = informationandforms.MAPlanInformationproviderclick();
+if(rallytool!= null){
+	getLoginScenario().saveBean(PageConstants.RALLY_TOOL_PAGE,
+			rallytool);
+	Assert.assertTrue(true);
+} else {
+	Assert.fail(" Page not found");
+}
+
+
+}
+
+
 
 
 
@@ -469,41 +545,148 @@ public void click_plandetailsearchprovider() {
 
 	
 
-	/* get actual data for a particular plan 
-	JSONObject planSummaryActualJson = planSummaryPage
-			.getPlanSummaryActualData(planName);
-	System.out
-	.println("planSummaryActualJson---->" + planSummaryActualJson);
+
+
+@Given("^user navigates to the OUR PLANS: MA HOW TO PAY YOUR PREMIUM$")
+
+public void user_navigates_OUR_PLANS_MA_HOW_TO_PAY_YOUR_PREMIUM () {
+		
+		WebDriver wd = getLoginScenario().getWebDriver();
+		OurPlansMAHowToPayYourPremiumPage ourplansmahowtopayyourpremium = new OurPlansMAHowToPayYourPremiumPage(wd);
+		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
+
+
+		getLoginScenario().saveBean(PageConstants.OUR_PLANS_MA_HOW_TO_PAY_YOUR_PREMIUM, ourplansmahowtopayyourpremium);
+		
+		
+	
+	
+}
+	
+	@And("^user clicks on Look up provider link on OUR PLANS: MA HOW TO PAY YOUR PREMIUM then site open rally tool in new window$")
+	
+	public void user_clicks_providerlink_OUR_PLANS_MA_HOW_TO_PAY_YOUR_PREMIUM () {
+		
+		OurPlansMAHowToPayYourPremiumPage ourplansmahowtopayyourpremium= (OurPlansMAHowToPayYourPremiumPage)getLoginScenario().getBean(PageConstants.OUR_PLANS_MA_HOW_TO_PAY_YOUR_PREMIUM);
+		
+		Rallytool_Page rallytool = ourplansmahowtopayyourpremium.ourplansmahowtopayyourpremiumproviderclick();
+		if(rallytool!= null){
+			getLoginScenario().saveBean(PageConstants.RALLY_TOOL_PAGE,
+					rallytool);
+			Assert.assertTrue(true);
+		} else {
+			Assert.fail(" Page not found");
+		}
+	}
+
 	
 
-	getLoginScenario().saveBean(VPPCommonConstants.VPP_PLAN_SUMMARY_ACTUAL,
-			planSummaryActualJson);
+@Given("^user navigates to the OUR PLANS: MA REQUEST MORE HELP AND INFORMATION$")
 
-	 Get expected data 
-	String fileName = planName;
-	String zipcode = (String) getLoginScenario().getBean(
-			VPPCommonConstants.ZIPCODE);
-	String county = (String) getLoginScenario().getBean(
-			VPPCommonConstants.COUNTY);
-	String directory = CommonConstants.ACQUISITION_EXPECTED_DIRECTORY
-			+ File.separator + CommonConstants.SITE_ULAYER + File.separator
-			+ VPPCommonConstants.VPP_PLAN_FLOW_NAME + File.separator
-			+ zipcode + File.separator + county + File.separator;
-			
-	JSONObject planSummaryExpectedJson = MRScenario.readExpectedJson(
-			fileName, directory);
+public void user_navigates_OurPlans_MA_Request_More_Help_and_Information () {
+	
+	WebDriver wd = getLoginScenario().getWebDriver();
+	MARequestMoreHelpAndInformationPage marequestmorehelpandinformationpage = new MARequestMoreHelpAndInformationPage(wd);
+	getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
 
-	getLoginScenario().saveBean(
-			VPPCommonConstants.VPP_PLAN_SUMMARY_EXPECTED,
-			planSummaryExpectedJson);
+
+	getLoginScenario().saveBean(PageConstants.MA_REQUEST_MORE_HELP_AND_INFORMATION, marequestmorehelpandinformationpage);
+	
+	
+
+
+}
+
+@And("^user clicks on Look up provider link on OUR PLANS: MA REQUEST MORE HELP AND INFORMATION then site open rally tool in new window$")
+public void user_clicks_providerlink_MA_REQUEST_MORE_HELP_AND_INFORMATION () {
+	
+	MARequestMoreHelpAndInformationPage marequestmorehelpandinformationpage= (MARequestMoreHelpAndInformationPage)getLoginScenario().getBean(PageConstants.MA_REQUEST_MORE_HELP_AND_INFORMATION);
+	
+	Rallytool_Page rallytool = marequestmorehelpandinformationpage.MArequestmorehelpandinformationpageproviderclick();
+	if(rallytool!= null){
+		getLoginScenario().saveBean(PageConstants.RALLY_TOOL_PAGE,
+				rallytool);
+		Assert.assertTrue(true);
+	} else {
+		Assert.fail(" Page not found");
+	}
+	
+	
+}
+
+
+
+@Given("^user navigates to the OUR PLANS: MA RESOURCES AND PLAN MATERIALS TAB$")
+
+public void user_navigates_OurPlans_MA_Resources_And_PlanMaterials () {
+	
+	WebDriver wd = getLoginScenario().getWebDriver();
+	MAResourcesAndPlanMaterialsTabpage maresourcesandplanmaterialstabpage = new MAResourcesAndPlanMaterialsTabpage(wd);
+	getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
+
+
+	getLoginScenario().saveBean(PageConstants.MA_RESOURCES_AND_PLAN_TAB, maresourcesandplanmaterialstabpage);
+	
+	
+
+
+}
+
+@And("^user clicks on Look up provider link on OUR PLANS: MA RESOURCES AND PLAN MATERIALS TAB then site open rally tool in new window$") 
+
+public void user_clicks_providerlink_MA_Resources_And_PlanMaterials () {
+	
+	MAResourcesAndPlanMaterialsTabpage maresourcesandplanmaterialstabpage= (MAResourcesAndPlanMaterialsTabpage)getLoginScenario().getBean(PageConstants.MA_RESOURCES_AND_PLAN_TAB);
+	
+	Rallytool_Page rallytool = maresourcesandplanmaterialstabpage.marequestmorehelpandinformationpageclick();
+	if(rallytool!= null){
+		getLoginScenario().saveBean(PageConstants.RALLY_TOOL_PAGE,
+				rallytool);
+		Assert.assertTrue(true);
+	} else {
+		Assert.fail(" Page not found");
+	}
+	
+	
+}
+
+@Given("^user navigates to MA MEMBER RIGHTS AND RESPONSIBILITIES of Blue Layer Acquisition site$")
+
+public void user_navigates_MA_MEMBER_RIGHTS_AND_RESPONSIBILITIES () {
+	
+	WebDriver wd = getLoginScenario().getWebDriver();
+	MARightsAndResponsibilitiesPage rightsandresponsibilities = new MARightsAndResponsibilitiesPage(wd);
+	getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
+
+
+	getLoginScenario().saveBean(PageConstants.MA_RIGHTS_AND_RESPONSIBILITIES_PAGE, rightsandresponsibilities);
+	
+	
+
+
+}
+
+@And("^click on the Look up my provider link on MA Enrollment Information Page and rally tool opens up$")
+
+public void user_clicks_providerlink_MARightandresponsibilitiepage () {
+	
+	MARightsAndResponsibilitiesPage rightsandresponsibilities= (MARightsAndResponsibilitiesPage)getLoginScenario().getBean(PageConstants.MA_RIGHTS_AND_RESPONSIBILITIES_PAGE);
+	
+	Rallytool_Page rallytool = rightsandresponsibilities.MAEnrollmentproviderclick();
+	if(rallytool!= null){
+		getLoginScenario().saveBean(PageConstants.RALLY_TOOL_PAGE,
+				rallytool);
+		Assert.assertTrue(true);
+	} else {
+		Assert.fail(" Page not found");
+	}
+	
+	
+}
 
 }
 
 
-}
-*/
-
-  
 	
 	
 		

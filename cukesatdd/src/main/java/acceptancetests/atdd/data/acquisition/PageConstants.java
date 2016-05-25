@@ -3,6 +3,8 @@
  */
 package acceptancetests.atdd.data.acquisition;
 
+import pages.acquisition.bluelayer.MARightsAndResponsibilitiesPage;
+
 /**
  * @author pjaising
  *
@@ -93,7 +95,7 @@ public class PageConstants {
 
 	public static final String MS_VPP_PAGE = "msViewPlansAndPricingPage";
 
-	public static final String SITE_MAP_PAGE = "siteMapPage";
+	public static final String SITE_MAP_PAGE = "siteMapUMSPage";
 	
 	public static final String ABOUT_US_PAGE = "aboutUsPage";
 	
@@ -293,6 +295,22 @@ public class PageConstants {
 	public static final String ILLINOIS_HOME_PAGE = "illinois";
 	
 	public static final String ILLINOIS_SITE_MAP = "illinoissitemap";
+
+	public static final String MA_ENROLLMENT_PAGE = "enrollmentpage";
+	
+	public static final String MA_RIGHTS_AND_RESPONSIBILITIES_PAGE ="rightsandresponsibilities" ;
+
+	public static final String MA_PLAN_INFORMATION_AND_PLANS_PAGE = "informationandforms";
+
+	public static final String MA_PRESDRUGS_TRANSITION_PAGE = "mapresdrugstransitionpage";
+
+	public static final String MA_HOW_TO_APPOINT_REPR_PAGE = "mahowtoappointrepresentativepage";
+
+	public static final String OUR_PLANS_MA_HOW_TO_PAY_YOUR_PREMIUM = "ourplansmahowtopayyourpremium";
+
+	public static final String MA_REQUEST_MORE_HELP_AND_INFORMATION = "marequestmorehelpandinformationpage";
+
+	public static final String MA_RESOURCES_AND_PLAN_TAB = "maresourcesandplanmaterialstabpage";
 	
 	public static final String REQUEST_FOR_ASSISTANCE_PAGE="requestdorassistance";
 

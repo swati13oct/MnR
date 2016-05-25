@@ -44,7 +44,7 @@ Feature:To launch Rally tool from UHC Acquisition Pages
 #Then user validates plan count for all plan types on plan summary page in UMS site
 #Then the user validates the available plans for selected plan types in UMS site
 #And the user validates the plan summary for the below plan in UMS site
-| Plan Name | <planName> |
+#| Plan Name | <planName> |
 #When the user view plan details of the above selected plan in UMS site
 #And the user clicks on Is my doctors covered link on Plan Details page in UHC site and site opens Rally Connect in a new window
 #Examples:
@@ -52,23 +52,47 @@ Feature:To launch Rally tool from UHC Acquisition Pages
 # |90210  | Los Angeles County  | MA        | AARP MedicareComplete SecureHorizons Plan 3 (HMO)      |
  
  
-Scenario Outline:Verify Rally link from VPP: SNP - Plan Details page
-Given user navigates to the UHC Home Page
-And user performs plan search using following information in UHC site
-	| Zip Code    | <zipcode>|
-	| County Name	  |<county>|
-When user views plans of the below plan type in UMS site
-| Plan Type | <plantype> |
-Then user validates plan count for all plan types on plan summary page in UMS site
-Then the user validates the available plans for selected plan types in UMS site
-And the user validates the plan summary for the below plan in UMS site
-| Plan Name | <planName> |
-When the user view plan details of the above selected plan in UMS site
-And the user clicks on IS MY DOCTORS covered link on Plan Details page in UHC site and site opens Rally Connect in a new window
-Examples:
- |zipcode|  county             | plantype  | planName                                               |
- |33012  | Miami-Dade County   | SNP       | Care Improvement Plus Gold Rx (Regional PPO SNP)       |
- 
+#Scenario Outline:Verify Rally link from VPP: SNP - Plan Details page
+#Given user navigates to the UHC Home Page
+#And user performs plan search using following information in UHC site
+#	| Zip Code    | <zipcode>|
+#	| County Name	  |<county>|
+#When user views plans of the below plan type in UMS site
+#| Plan Type | <plantype> |
+#Then user validates plan count for all plan types on plan summary page in UMS site
+#Then the user validates the available plans for selected plan types in UMS site
+#And the user validates the plan summary for the below plan in UMS site
+#| Plan Name | <planName> |
+#When the user view plan details of the above selected plan in UMS site
+#And the user clicks on IS MY DOCTORS covered link on Plan Details page in UHC site and site opens Rally Connect in a new window
+#Examples:
+# |zipcode|  county             | plantype  | planName                                               |
+# |33012  | Miami-Dade County   | SNP       | Care Improvement Plus Gold Rx (Regional PPO SNP)       |
+
+
+Scenario: Verify Rally link from MA PrescriptionDrug Transition Process page
+Given user navigates to MA PrescriptionDrug Transition Process page of Blue Layer Acquisition site
+Then click on the Look up my provider link on MA PrescriptionDrug Transition Process page and rally tool opens up
+
+Scenario: Verify Rally link from MA How To Appoint a Representative page
+Given user navigates to MA How To Appoint Representative page of Blue Layer Acquisition site
+Then click on the Look up my provider link on MA How To Appoint Representative page and rally tool opens up
+
+Scenario:Verify Rally link from OUR PLANS: MA HOW TO PAY YOUR PREMIUM Page
+Given user navigates to the OUR PLANS: MA HOW TO PAY YOUR PREMIUM
+And user clicks on Look up provider link on OUR PLANS: MA HOW TO PAY YOUR PREMIUM then site open rally tool in new window
+
+Scenario:Verify Rally link from OUR PLANS: MA REQUEST MORE HELP AND INFORMATION
+Given user navigates to the OUR PLANS: MA REQUEST MORE HELP AND INFORMATION
+And user clicks on Look up provider link on OUR PLANS: MA REQUEST MORE HELP AND INFORMATION then site open rally tool in new window  
+
+Scenario:Verify Rally link from OUR PLANS: MA RESOURCES AND PLAN MATERIALS TAB
+Given user navigates to the OUR PLANS: MA RESOURCES AND PLAN MATERIALS TAB
+And user clicks on Look up provider link on OUR PLANS: MA RESOURCES AND PLAN MATERIALS TAB then site open rally tool in new window 
+
+Scenario:Verify Rally link from OUR PLANS: MA MEMBER RIGHTS AND RESPONSIBILITIES
+Given user navigates to MA MEMBER RIGHTS AND RESPONSIBILITIES of Blue Layer Acquisition site
+And click on the Look up my provider link on MA Rights and responsibilities and rally tool opens up
  
  
  
