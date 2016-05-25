@@ -296,4 +296,8 @@ public class PageConstants {
 	
 	public static final String REQUEST_FOR_ASSISTANCE_PAGE="requestdorassistance";
 
+	public static final String SPECIAL_ELECTION_PERIOD_PAGE = "specialElectionPeriodPage";
+
+	
+
 }

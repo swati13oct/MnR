@@ -25,6 +25,7 @@ import pages.acquisition.ulayer.IntroductionInformationPage;
 import pages.acquisition.ulayer.PlanDetailsPage;
 import pages.acquisition.ulayer.PlanInformationPage;
 import pages.acquisition.ulayer.ReviewApplicationPage;
+import pages.acquisition.ulayer.SpecialElectionPeriodPage;
 import pages.acquisition.ulayer.SubmitApplicationPage;
 import pages.acquisition.ulayer.VPPPlanSummaryPage;
 import acceptancetests.atdd.data.CommonConstants;
@@ -189,14 +190,15 @@ public class EnrollInPlanAarpStepDefinition {
 
 		VPPPlanSummaryPage planSummaryPage = (VPPPlanSummaryPage) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
-		EnrollPlanInfoPage enrollPlanInfoPage = planSummaryPage
-				.clicksOnEnrollInplanLink(planName);
-		if (enrollPlanInfoPage != null) {
+		/*IntroductionInformationPage enrollPlanInfoPage = planSummaryPage
+				.clicksOnEnrollInplanLink(planName);*/
+		/*if (enrollPlanInfoPage != null) {
 
-			/* Get actual data */
+			 Get actual data 
 			JSONObject enrollPlanInfoActual = enrollPlanInfoPage.enrollPlanInfoJson;
+			System.out.println("enrollPlanInfoActual::"+enrollPlanInfoActual);
 
-			/* Get expected data */
+			 Get expected data 
 			String fileName = planName;
 			String zipcode = (String) getLoginScenario().getBean(
 					VPPCommonConstants.ZIPCODE);
@@ -219,11 +221,13 @@ public class EnrollInPlanAarpStepDefinition {
 			} catch (JSONException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
-			}
+			}*/
 
-			IntroductionInformationPage introInformationPage = enrollPlanInfoPage.continuesEnrollment(planName);
-			getLoginScenario().saveBean(PageConstants.INTRODUCTION_INFORMATION_PAGE,introInformationPage);
-		}
+			//IntroductionInformationPage introInformationPage = enrollPlanInfoPage.continuesEnrollment(planName);
+		IntroductionInformationPage introInfoPage = planSummaryPage
+				.clicksOnEnrollInplanLink(planName);
+			getLoginScenario().saveBean(PageConstants.INTRODUCTION_INFORMATION_PAGE,introInfoPage);
+		//}
 
 	}
 
@@ -231,7 +235,7 @@ public class EnrollInPlanAarpStepDefinition {
 	public void the_user_navigates_into_information_step_aarp() {
 		IntroductionInformationPage introInformationPage = (IntroductionInformationPage) getLoginScenario()
 				.getBean(PageConstants.INTRODUCTION_INFORMATION_PAGE);
-	
+
 		if (introInformationPage != null) {
 			/* Get actual data */
 			JSONObject introInformationActual = introInformationPage.introductionInformationJson;
@@ -239,6 +243,8 @@ public class EnrollInPlanAarpStepDefinition {
 			/* Get expected data */
 			String planName = (String) getLoginScenario().getBean(
 					EnrollInPlanCommonConstants.PLAN_NAME);
+			
+			System.out.println("introInformationActual :::::::::"+introInformationActual);
 
 			String fileName = planName;
 			String zipcode = (String) getLoginScenario().getBean(
@@ -291,19 +297,19 @@ public class EnrollInPlanAarpStepDefinition {
 		IntroductionInformationPage introInformationPage = (IntroductionInformationPage) getLoginScenario()
 				.getBean(PageConstants.INTRODUCTION_INFORMATION_PAGE);
 		introInformationPage.entersmedicareinsuranceInformation(personalAttributesMap);
-	//	introInformationPage.navigatesToNextStep();
+		//introInformationPage.navigatesToNextStep();
 		getLoginScenario().saveBean(PageConstants.INTRODUCTION_INFORMATION_PAGE,introInformationPage);
 
 	}
-	
+
 	@And("^the user navigates to beneficiary information step in AARP site$")
 	public void the_user_navigates_beneficiary_information_step_aarp() {
 		IntroductionInformationPage introInformationPage = (IntroductionInformationPage) getLoginScenario()
 				.getBean(PageConstants.INTRODUCTION_INFORMATION_PAGE);
-	
+
 		BeneficiaryInformationPage beneficiaryInformationPage = introInformationPage.navigatesToNextStep();
-		 getLoginScenario().saveBean(PageConstants.BENEFICIARY_INFORMATION_PAGE,beneficiaryInformationPage);
-	
+		getLoginScenario().saveBean(PageConstants.BENEFICIARY_INFORMATION_PAGE,beneficiaryInformationPage);
+
 		if (beneficiaryInformationPage != null) {
 			/* Get actual data */
 			JSONObject beneficiaryInformationActual = beneficiaryInformationPage.beneficiaryInformationJson;
@@ -328,7 +334,7 @@ public class EnrollInPlanAarpStepDefinition {
 					+ File.separator;
 			JSONObject beneInformationExpected = MRScenario.readExpectedJson(fileName, directory);
 
-		//	beneInformationExpected = mergeWithCommonExpectedData(fileName, beneInformationExpected);
+			//	beneInformationExpected = mergeWithCommonExpectedData(fileName, beneInformationExpected);
 
 			System.out.println("introInformationExpected:::"
 					+ beneInformationExpected);
@@ -348,7 +354,7 @@ public class EnrollInPlanAarpStepDefinition {
 
 	}
 
-	
+
 	@And("^the user fill following information in beneficiary information step in AARP site$")
 	public void user_fill_information_beneficiary_information_aarp(
 			DataTable personalAttributes) {
@@ -364,10 +370,108 @@ public class EnrollInPlanAarpStepDefinition {
 		BeneficiaryInformationPage beneficiaryInformationPage = (BeneficiaryInformationPage) getLoginScenario()
 				.getBean(PageConstants.BENEFICIARY_INFORMATION_PAGE);
 		beneficiaryInformationPage.entersPersonalInformation(personalAttributesMap);
-		
+
 		getLoginScenario().saveBean(PageConstants.BENEFICIARY_INFORMATION_PAGE,	beneficiaryInformationPage);
 
 	}
+	
+	@And("^the user navigates to sep step in AARP site$")
+	public void user_navigates_to_sep_step(){
+		BeneficiaryInformationPage beneficiaryInformationPage = (BeneficiaryInformationPage) getLoginScenario()
+				.getBean(PageConstants.BENEFICIARY_INFORMATION_PAGE);
+		
+		SpecialElectionPeriodPage specialElectionPeriodPage = beneficiaryInformationPage.navigatesToStep2Part2();
+		
+		
+		
+		getLoginScenario().saveBean(PageConstants.SPECIAL_ELECTION_PERIOD_PAGE,	specialElectionPeriodPage);	
+		
+		if(specialElectionPeriodPage != null){
+			/* Get actual data */
+			JSONObject sepInformationActual = specialElectionPeriodPage.sepInformationJson;
+
+			/* Get expected data */
+			String planName = (String) getLoginScenario().getBean(
+					EnrollInPlanCommonConstants.PLAN_NAME);
+
+			String fileName = planName;
+			String zipcode = (String) getLoginScenario().getBean(
+					VPPCommonConstants.ZIPCODE);
+			String county = (String) getLoginScenario().getBean(
+					VPPCommonConstants.COUNTY);
+
+			String directory = CommonConstants.ACQUISITION_EXPECTED_DIRECTORY
+					+ File.separator + CommonConstants.SITE_ULAYER
+					+ File.separator
+					+ VPPCommonConstants.ENROLL_IN_PLAN_FLOW_NAME
+					+ File.separator
+					+ EnrollInPlanCommonConstants.SEP_INFORMATION
+					+ File.separator + zipcode + File.separator + county
+					+ File.separator;
+			JSONObject sepInformationExpected = MRScenario.readExpectedJson(fileName, directory);
+
+			//	beneInformationExpected = mergeWithCommonExpectedData(fileName, beneInformationExpected);
+
+			System.out.println("sepInformationExpected:::"
+					+ sepInformationExpected);
+			System.out.println("sepInformationActual:::"
+					+ sepInformationActual);
+
+			try {
+				JSONAssert.assertEquals(sepInformationExpected,
+						sepInformationActual, true);
+			} catch (JSONException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		} else {
+			Assert.fail("ERROR loading SEPInformationPage");
+		}
+		
+	}
+
+	@And("^the user select no for Special Election Period$")
+	public void user_selects_no_for_SEPQuestion(DataTable SEPAttributes){
+
+		SpecialElectionPeriodPage specialElectionPeriodPage = (SpecialElectionPeriodPage) getLoginScenario()
+				.getBean(PageConstants.SPECIAL_ELECTION_PERIOD_PAGE);
+
+		specialElectionPeriodPage.noForSEPQuestion();
+		//specialElectionPeriodPage.clickOnSaveAndContinue();		
+
+		getLoginScenario().saveBean(PageConstants.SPECIAL_ELECTION_PERIOD_PAGE,	specialElectionPeriodPage);			
+	}
+
+	@And("^the user select yes for Special Election Period$")
+	public void user_selects_yes_for_SEPQuestion(DataTable SEPAttributes){
+		
+		
+		List<DataTableRow> SEPAttributesRow = SEPAttributes
+				.getGherkinRows();
+		Map<String, String> SEPAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < SEPAttributesRow.size(); i++) {
+
+			SEPAttributesMap.put(SEPAttributesRow.get(i).getCells()
+					.get(0), SEPAttributesRow.get(i).getCells().get(1));
+		}
+
+		SpecialElectionPeriodPage specialElectionPeriodPage = (SpecialElectionPeriodPage) getLoginScenario()
+				.getBean(PageConstants.SPECIAL_ELECTION_PERIOD_PAGE);
+
+		/*if(SEPAttributesMap.get("yes").equalsIgnoreCase("yes"))
+			specialElectionPeriodPage.yesForSEPQuestion();
+		else if(SEPAttributesMap.get("no").equalsIgnoreCase("no"))
+		specialElectionPeriodPage.noForSEPQuestion();*/
+		
+		specialElectionPeriodPage.yesForSEPQuestion(SEPAttributesMap);
+		
+		
+		//specialElectionPeriodPage.clickOnPrevious();
+
+		getLoginScenario().saveBean(PageConstants.SPECIAL_ELECTION_PERIOD_PAGE,	specialElectionPeriodPage);		
+	}
+	
+	
 	
 	@And("^the user select the answer of this question Do you have End-Stage Renal Disease in AARP site$")
 	public void user_selects_answer_esrd_question(DataTable attributes) {
@@ -386,7 +490,7 @@ public class EnrollInPlanAarpStepDefinition {
 				.getBean(PageConstants.BENEFICIARY_INFORMATION_PAGE);
 		String planName = (String) getLoginScenario().getBean(
 				EnrollInPlanCommonConstants.PLAN_NAME);
-		
+
 		AdditionalInformationPage additionalInformation = beneficiaryInformationPage
 				.navigatesToNextStep(planName);
 		getLoginScenario().saveBean(PageConstants.ADDITIONAL_INFORMATION_PAGE,
@@ -440,7 +544,7 @@ public class EnrollInPlanAarpStepDefinition {
 				.getBean(PageConstants.ADDITIONAL_INFORMATION_PAGE);
 		String planName = (String) getLoginScenario().getBean(
 				EnrollInPlanCommonConstants.PLAN_NAME);
-		
+
 		ReviewApplicationPage reviewApplication = additionalInformationPage
 				.navigatesToNextStep(planName);
 		getLoginScenario().saveBean(PageConstants.REVIEW_APPLICATION_PAGE,
@@ -629,7 +733,7 @@ public class EnrollInPlanAarpStepDefinition {
 		return toJson;
 
 	}
-	
+
 	@And("^the user click on enroll link  for the below plan in AARP site$")
 	public void user_clicks_on_enroll_link(DataTable planAttributes)
 	{
@@ -637,7 +741,7 @@ public class EnrollInPlanAarpStepDefinition {
 				.get(0);
 		getLoginScenario().saveBean(EnrollInPlanCommonConstants.PLAN_NAME,
 				planName);
-		
+
 		VPPPlanSummaryPage planSummaryPage = (VPPPlanSummaryPage) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 		PlanInformationPage planInfoPage = planSummaryPage.navigatetoEnrollInplanLink(planName);
@@ -650,7 +754,7 @@ public class EnrollInPlanAarpStepDefinition {
 			Assert.fail("Error in loading Step 1");
 		}
 	}
-	
+
 	@When("^the user view plan details of the above selected plan in AARP site$")
 	public void user_views_plandetails_selected_plan_aarp() {
 		String planName = (String) getLoginScenario().getBean(
@@ -697,14 +801,14 @@ public class EnrollInPlanAarpStepDefinition {
 			Assert.fail("Issue in plan details page");
 		}
 	}
-	
+
 	@And("^the user click on enroll button on plan details for the below plan in AARP site$")
 	public void user_click_enroll_plan_detals()
 	{
 		PlanDetailsPage vppPlanDetailsPage= (PlanDetailsPage)getLoginScenario().getBean(PageConstants.VPP_PLAN_DETAILS_PAGE);
 		String planName = (String) getLoginScenario().getBean(
 				VPPCommonConstants.PLAN_NAME);
-		
+
 		PlanInformationPage planinfo= vppPlanDetailsPage.navigatetoenrollinplanlink(planName);
 		if (planinfo!=null)
 		{
@@ -714,9 +818,9 @@ public class EnrollInPlanAarpStepDefinition {
 		{
 			Assert.fail("Error in loading Step 1 from vpp plan details");
 		}
-		
+
 	}
-	
+
 	@And("^the user validates the plan summary for the below plan in AARP site$")
 	public void user_validates_plan_summary(DataTable planAttributes) {
 		List<DataTableRow> givenAttributesRow = planAttributes.getGherkinRows();
@@ -749,7 +853,7 @@ public class EnrollInPlanAarpStepDefinition {
 				fileName, directory);
 
 		System.out
-				.println("planSummaryActualJson---->" + planSummaryActualJson);
+		.println("planSummaryActualJson---->" + planSummaryActualJson);
 		System.out.println("planSummaryExpectedJson---->"
 				+ planSummaryExpectedJson);
 
