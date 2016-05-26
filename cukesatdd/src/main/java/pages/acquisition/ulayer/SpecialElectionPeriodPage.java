@@ -1,5 +1,6 @@
 package pages.acquisition.ulayer;
 
+
 import java.util.Map;
 
 import org.json.JSONException;
@@ -23,10 +24,10 @@ import org.openqa.selenium.support.PageFactory;
 
 
 
+
 import acceptancetests.atdd.data.CommonConstants;
 import acceptancetests.atdd.data.PageData;
 import acceptancetests.atdd.util.CommonUtility;
-import acceptancetests.enrollinplan.ulayer.ProposedEffectiveDatePage;
 import atdd.framework.UhcDriver;
 
 public class SpecialElectionPeriodPage extends UhcDriver {
@@ -39,6 +40,9 @@ public class SpecialElectionPeriodPage extends UhcDriver {
 	@FindBy(xpath = "//*[@id='partSave']")
 	private WebElement saveAndContinue;
 
+	@FindBy(id = "esrdinfo")
+	private WebElement pageHeadingESRD;
+	
 	@FindBy(xpath = "//*[@id='enrollment-step-1-part-1']/div[2]/a[2]")
 	private WebElement previous;
 
@@ -254,61 +258,18 @@ public class SpecialElectionPeriodPage extends UhcDriver {
 		enterReason.sendKeys(reason);
 	}
 
-	public ProposedEffectiveDatePage clickOnSaveAndContinue() {
-		
-		if(driver.findElement(By.xpath("//*[@id='enrollment-step-1-part-1']/div[1]/div/div[1]/h2")).getText().contains("Special Election Period"))
-		{
-		saveAndContinue.click();
-		
-		try {
-			Thread.sleep(10000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-		//part 3
-		if(driver.findElement(By.xpath("//*[@id='enrollment-step-1-part-3']/div[1]/div/div[1]")).getText().contains("Prescription")){
-			driver.findElement(By.xpath("//*[@id='enrollment-step-1-part-3']/div[2]/a[1]")).click();
-		}
-		
-		try {
-			Thread.sleep(10000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		//part 4
-		if(driver.findElement(By.xpath("//*[@id='enrollment-step-1-part-4']/div[1]/div/div[1]")).getText().contains("Long-Term Care")){
-			driver.findElement(By.xpath("//*[@id='enrollment-step-1-part-4']/div[2]/a[1]")).click();
-		}
-		
-		try {
-			Thread.sleep(10000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		//part 5
-		if(driver.findElement(By.xpath("//*[@id='enrollment-step-1-part-8']/div[1]/div/div[1]")).getText().contains("Plan Payment Options")){
-			driver.findElement(By.xpath("//*[@id='planpaymentLink']")).click();
-			driver.findElement(By.xpath("//*[@id='disclaimerAgreeBtn']")).click();
-			try {
-				Thread.sleep(1000);
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			driver.findElement(By.xpath("//*[@id='planPaymentOptionSaveBtnId']")).click();
-		}
-		return new ProposedEffectiveDatePage(driver);
-		}
-		return null;
-	}
+	
+	
 
 	public void clickOnPrevious() {
 		previous.click();
 	}
-
+	public ESRDPage navigatesToNextStep() {
+		saveAndContinue.click();
+		if (pageHeadingESRD.getText().equalsIgnoreCase("End Stage Renal Disease")) {
+		return new ESRDPage(driver);
+		}
+		return null;
+		}
 
 }

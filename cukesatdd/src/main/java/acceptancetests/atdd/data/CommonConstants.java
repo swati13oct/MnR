@@ -38,6 +38,7 @@ public class CommonConstants {
 	public static final String CHROME_DRIVER = "ChromeDriver";
 
 	public static final String PLAN_BENEFITS_AND_COVERAGE = "planBenefitsAndCoverage";
+	
 
 	public static final String BENEFITS_AND_COVERAGE_PDP_NONLIS_NONUS_PAGE_DATA = "planbenefitsandcoveragenonlisnotusother.json";
 
@@ -654,13 +655,29 @@ public class CommonConstants {
 	public static final String MA_PLAN_INFORMATION_PAGE_DATA = "maplaninformation.json";
 
 	public static final String PDP_PLAN_INFORMATION_PAGE_DATA = "pdpplaninformation.json";
+	
+	public static final String INTRODUCTION_INFORMATION_PAGE_DATA = "introductioninformation.json";
 
 	public static final String BENEFICIARY_INFORMATION_PAGE_DATA = "beneficiaryinformation.json";
 	
 	public static final String SEP_INFORMATION_PAGE_DATA = "sepinformation.json";
 	
-	public static final String INTRODUCTION_INFORMATION_PAGE_DATA = "introductioninformation.json";
+	public static final String ESRD_PAGE_DATA = "esrd.json";
 
+	public static final String PRESCRIPTION_DRUG_COVERAGE_PAGE_DATA = "prescriptiondrugcoverage.json";
+
+	public static final String LONG_TERM_CARE_PAGE_DATA = "longtermcare.json";
+
+	public static final String MEDICAID_PAGE_DATA = "medicaid.json";
+
+	public static final String OTHER_HEALTH_INSURANCE_PAGE_DATA = "otherhealthins.jsone";
+
+	public static final String PRIMARY_CARE_PROVIDER_PAGE_DATA = "primarycareprovider.json";
+
+	public static final String PLAN_PAYMENT_OPTION_PAGE_DATA = "planpaymentoption.json";
+
+	public static final String OPTIONAL_RIDERS_PAGE_DATA = "optionalriders.json";
+	
 	public static final String MA_ADDITIONAL_INFORMATION_PAGE_DATA = "maadditionalinformation.json";
 
 	public static final String PDP_ADDITIONAL_INFORMATION_PAGE_DATA = "pdpadditionalinformation.json";
