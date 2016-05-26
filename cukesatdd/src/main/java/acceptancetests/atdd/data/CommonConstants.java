@@ -657,6 +657,8 @@ public class CommonConstants {
 
 	public static final String BENEFICIARY_INFORMATION_PAGE_DATA = "beneficiaryinformation.json";
 	
+	public static final String SEP_INFORMATION_PAGE_DATA = "sepinformation.json";
+	
 	public static final String INTRODUCTION_INFORMATION_PAGE_DATA = "introductioninformation.json";
 
 	public static final String MA_ADDITIONAL_INFORMATION_PAGE_DATA = "maadditionalinformation.json";

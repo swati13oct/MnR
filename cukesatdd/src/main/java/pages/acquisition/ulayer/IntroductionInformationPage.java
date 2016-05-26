@@ -23,7 +23,7 @@ import atdd.framework.UhcDriver;
  */
 public class IntroductionInformationPage extends UhcDriver{
 	
-	@FindBy(id = "firstnametextbox")
+	@FindBy(xpath = "//input[@id='firstnametextbox']")
 	private WebElement firstNameField;
 	
 	@FindBy(id = "middlenametextbox")
@@ -47,7 +47,7 @@ public class IntroductionInformationPage extends UhcDriver{
 	@FindBy(id="disclaimerAgreeBtn")
 	private WebElement disclaimeragreebtn;
 	
-	@FindBy(id = "beginOnlineEnrollmentbtn")
+	@FindBy(xpath = "//*[@id='beginOnlineEnrollmentbtn']")
 	private WebElement enrollmentNext;
 	
 	@FindBy(xpath = "//div[@id='step2Heading']/h2")
@@ -59,6 +59,8 @@ public class IntroductionInformationPage extends UhcDriver{
 	private PageData introductionInformation;
 
 	public JSONObject  introductionInformationJson;
+
+	public JSONObject enrollPlanInfoJson;
 
 	public IntroductionInformationPage(WebDriver driver) {
 		super(driver);
@@ -119,10 +121,22 @@ public class IntroductionInformationPage extends UhcDriver{
 		sendkeys(partAStartDateField,partAStartDate);
 		sendkeys(partBStartDateField,partBStartDate);
 		viewEnrollDisclaimer.click();
+		try {
+			Thread.sleep(1000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 		
 		if(getTitle().equalsIgnoreCase("AARP Medicare Complete Online Application")||getTitle().equalsIgnoreCase("AARP Medicarerx Online Application")){
 			disclaimeragreebtn.click();
+			try {
+				Thread.sleep(10000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 	}
 

@@ -46,10 +46,12 @@ public class BeneficiaryInformationPage extends UhcDriver{
 	@FindBys(value = { @FindBy(xpath = "//ul[@id='language-selectSelectBoxItOptions']/li") })
 	private List<WebElement> languagePreferenceDropDown;
 		
-	@FindBy(id = "sex-male")
+	//@FindBy(id = "sex-male")
+	@FindBy(xpath = "//*[@id='enrollment-step-1-part-0']/div[1]/div/div[2]/fieldset/span[9]/label")
 	private WebElement maleRadioButton;
 	
-	@FindBy(id = "sex-female")
+	//@FindBy(id = "sex-female")
+	@FindBy(xpath = "//*[@id='enrollment-step-1-part-0']/div[1]/div/div[2]/fieldset/span[10]/label")
 	private WebElement femaleRadioButton;
 	
 	@FindBy(id = "field-address-1")
@@ -67,10 +69,12 @@ public class BeneficiaryInformationPage extends UhcDriver{
 	@FindBy(id = "field-zip")
 	private WebElement zipcodeField;
 	
-	@FindBy(id = "same-address-yes")
+	//@FindBy(id = "same-address-yes")
+	@FindBy(xpath = "//*[@id='enrollment-step-1-part-0']/div[1]/div/div[2]/fieldset/span[17]/label")
 	private WebElement mailingAddressYesButton;
 	
-	@FindBy(id = "same-address-no")
+	//@FindBy(id = "same-address-no")
+	@FindBy(xpath = "//*[@id='enrollment-step-1-part-0']/div[1]/div/div[2]/fieldset/span[18]/label")
 	private WebElement mailingAddressNoButton;
 	
 	@FindBy(id = "field-mail-address-1")
@@ -123,14 +127,14 @@ public class BeneficiaryInformationPage extends UhcDriver{
 		validate(femaleRadioButton);
 		validate(address1Field);
 		validate(address2Field);
-		validate(alternatePhoneNumberlink);
+		//validate(alternatePhoneNumberlink);
 		validate(cityField);
 		validate(stateField);
 		validate(zipcodeField);
 		validate(mailingAddressYesButton);
 		validate(mailingAddressNoButton);
 		validate(primaryPhoneNumberField);
-		validate(alternatePhoneNumberField);
+		//validate(alternatePhoneNumberField);
 		validate(emailAddressField);
 		validate(enrollmentNext);
 
@@ -274,15 +278,24 @@ public class BeneficiaryInformationPage extends UhcDriver{
 
 	}
 
+	public SpecialElectionPeriodPage navigatesToStep2Part2() {
+		enrollmentNext.click();
+		System.out.println("step2Part2PageHeading::"+step2Part2PageHeading);
+		if (step2Part2PageHeading.getText().equalsIgnoreCase(
+				"Special Election Period")) {
+			return new SpecialElectionPeriodPage(driver);
+		}
+		return null;
+	}
+	
 	public AdditionalInformationPage navigatesToStep2Part2(String planName) {
 		enrollmentNext.click();
 		System.out.println("step2Part2PageHeading::"+step2Part2PageHeading);
 		if (step2Part2PageHeading.getText().equalsIgnoreCase(
 				"Special Election Period")) {
-			return new AdditionalInformationPage(driver,planName);
+			return new AdditionalInformationPage(driver, planName);
 		}
 		return null;
-
 	}
 
 }
