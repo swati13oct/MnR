@@ -299,6 +299,8 @@ public class PageConstants {
 	public static final String MA_ENROLLMENT_PAGE = "enrollmentpage";
 	
 	public static final String MA_RIGHTS_AND_RESPONSIBILITIES_PAGE ="rightsandresponsibilities" ;
+	
+	public static final String MA_PLANS_AND_GRIEVANCES_PAGE ="plansandgrievances";
 
 	public static final String MA_PLAN_INFORMATION_AND_PLANS_PAGE = "informationandforms";
 

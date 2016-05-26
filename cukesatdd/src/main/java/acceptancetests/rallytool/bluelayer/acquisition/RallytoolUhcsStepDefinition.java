@@ -17,6 +17,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import pages.acquisition.bluelayer.AcquisitionHomePage;
 import pages.acquisition.bluelayer.MAEnrollmentPage;
 import pages.acquisition.bluelayer.MAPlanInformationAndForms;
+import pages.acquisition.bluelayer.MAPlansAndGrievances;
 import pages.acquisition.bluelayer.MAPrescriptionDrugTransitionProcess;
 import pages.acquisition.bluelayer.MARequestMoreHelpAndInformationPage;
 import pages.acquisition.bluelayer.MAResourcesAndPlanMaterialsTabpage;
@@ -666,7 +667,7 @@ public void user_navigates_MA_MEMBER_RIGHTS_AND_RESPONSIBILITIES () {
 
 }
 
-@And("^click on the Look up my provider link on MA Enrollment Information Page and rally tool opens up$")
+@And("^click on the Look up my provider link on MA Rights and responsibilities and rally tool opens up$")
 
 public void user_clicks_providerlink_MARightandresponsibilitiepage () {
 	
@@ -684,10 +685,42 @@ public void user_clicks_providerlink_MARightandresponsibilitiepage () {
 	
 }
 
+
+@Given("^user navigates to MA APPEALS AND GRIEVANCES of Blue Layer Acquisition site$")
+
+public void user_navigates_MA_APPEALS_AND_GRIEVANCES () {
+	
+	WebDriver wd = getLoginScenario().getWebDriver();
+	MAPlansAndGrievances plansandgrievances = new MAPlansAndGrievances(wd);
+	getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
+
+
+	getLoginScenario().saveBean(PageConstants.MA_PLANS_AND_GRIEVANCES_PAGE, plansandgrievances);
+	
+	
+
+
+}
+
+@And("^click on the Look up my provider link on MA Appelas and grievances and rally tool opens up$")
+
+public void user_clicks_providerlink_MAPlansandGrievancespage () {
+	
+	MAPlansAndGrievances plansandgrievances= (MAPlansAndGrievances)getLoginScenario().getBean(PageConstants.MA_PLANS_AND_GRIEVANCES_PAGE);
+	
+	Rallytool_Page rallytool = plansandgrievances.MAproviderclick();
+	if(rallytool!= null){
+		getLoginScenario().saveBean(PageConstants.RALLY_TOOL_PAGE,
+				rallytool);
+		Assert.assertTrue(true);
+	} else {
+		Assert.fail(" Page not found");
+	}
+
 }
 
 
-	
+}	
 	
 		
 	
