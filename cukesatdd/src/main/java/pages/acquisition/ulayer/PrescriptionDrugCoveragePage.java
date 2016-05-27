@@ -1,0 +1,108 @@
+/**
+ * 
+ */
+package pages.acquisition.ulayer;
+
+import java.util.Map;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
+
+import acceptancetests.atdd.data.CommonConstants;
+import acceptancetests.atdd.data.PageData;
+import acceptancetests.atdd.util.CommonUtility;
+import atdd.framework.UhcDriver;
+
+/**
+ * @author pperugu
+ *c */
+public class PrescriptionDrugCoveragePage extends UhcDriver{
+	
+	
+	
+	@FindBy(id = "PrescriptionDrugCoveragequestionnotext")
+	private WebElement pdcno;
+	
+	@FindBy(id = "PrescriptionDrugCoveragequestionyestext")
+	private WebElement pdcyes;
+	
+	@FindBy(id = "insurance-name")
+	private WebElement pdcnameofinsur;
+	
+	@FindBy(id = "group-id")
+	private WebElement pdcgroupid;
+	
+	@FindBy(id = "member-id")
+	private WebElement pdcmemberid;
+	
+	@FindBy(id = "pageHeadingLongTermCare")
+	private WebElement pageHeadingLongTermCare;	
+	
+	@FindBy(id = "pdcprevious")
+	private WebElement pdcprevious;
+	
+	@FindBy(id = "pdcsaveandcont")
+	private WebElement pdcsaveandcont;
+	
+	@FindBy(id = "pdccancel")
+	private WebElement pdccancel;
+	
+	private PageData prescriptiondrugcoverageInformation;
+
+	public JSONObject prescriptionDrugCoverageInformationJson;
+
+	public PrescriptionDrugCoveragePage(WebDriver driver) {
+		super(driver);
+		PageFactory.initElements(driver, this);
+		String fileName = CommonConstants.PRESCRIPTION_DRUG_COVERAGE_PAGE_DATA;
+		prescriptiondrugcoverageInformation = CommonUtility.readPageData(fileName,
+				CommonConstants.PAGE_OBJECT_DIRECTORY_ULAYER_ACQ);
+		
+
+		openAndValidate();
+	}
+
+	@Override
+	public void openAndValidate() {
+		validate(pdcno);
+		validate(pdcyes);
+
+		
+	
+		
+	}
+
+	public void enterspdcInformation(
+			Map<String, String> personalAttributesMap) {
+		String pdcradiooption = personalAttributesMap.get("pdcradiooption");
+		String pdchealthinsurname = personalAttributesMap.get("pdchealthinsurname");
+		String pdcgroupidnumber = personalAttributesMap.get("pdcgroupidnumber");
+		String pdcmemberidnumber = personalAttributesMap.get("pdcmemberidnumber");
+		if(pdcradiooption.equalsIgnoreCase("No")){
+				pdcno.click();
+		}else{
+			pdcyes.click();
+			sendkeys(pdcnameofinsur,pdchealthinsurname);
+			sendkeys(pdcnameofinsur,pdcgroupidnumber);
+			sendkeys(pdcmemberid,pdcmemberidnumber);
+			
+		}
+				
+	}
+		
+		public LongTermCarePage navigatesToNextStep() {
+			pdcsaveandcont.click();
+			if (pageHeadingLongTermCare.getText().equalsIgnoreCase("Prescription Drug Coverage")) {
+				return new LongTermCarePage(driver);
+			}
+			return null;
+		}
+		
+	}
+		
+	
+
