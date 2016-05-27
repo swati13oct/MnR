@@ -3,7 +3,7 @@
 "expectedData":{
 "medicaidInfo":{
 "identifier":"id",
-"elementName":"medicaidheading"
+"elementName":"medicaidInfo"
 },
 "medicaidquestion":{
 "identifier":"id",

@@ -3,11 +3,11 @@
 "expectedData":{
 "prescrptiondrugcoverageInfo":{
 "identifier":"id",
-"elementName":"prescrptiondrugcoverageheading"
+"elementName":"pdcInfo"
 },
 "prescrptiondrugcoveragequestion":{
 "identifier":"id",
-"elementName":"prescrptiondrugcoveragequestion"
+"elementName":"pdcquestion"
 }
 }
 }

@@ -3,11 +3,11 @@
 "expectedData":{
 "otherhealthinsuranceInfo":{
 "identifier":"id",
-"elementName":"otherhealthinsuranceheading"
+"elementName":"othInfo"
 },
 "otherhealthinsurancequestion":{
 "identifier":"id",
-"elementName":"otherhealthinsurancequestion"
+"elementName":"othquestion"
 }
 }
 }

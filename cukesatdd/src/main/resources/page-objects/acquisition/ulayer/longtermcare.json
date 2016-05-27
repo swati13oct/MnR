@@ -3,11 +3,11 @@
 "expectedData":{
 "longtercareInfo":{
 "identifier":"id",
-"elementName":"longtercareheading"
+"elementName":"ltcInfo"
 },
 "longtercarequestion":{
 "identifier":"id",
-"elementName":"longtermcarequestion"
+"elementName":"ltcquestion"
 }
 }
 }

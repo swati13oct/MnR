@@ -3,11 +3,11 @@
 "expectedData":{
 "primarycareproviderInfo":{
 "identifier":"id",
-"elementName":"primarycareproviderheading"
+"elementName":"pcpInfo"
 },
 "primarycareproviderquestion":{
 "identifier":"id",
-"elementName":"primarycareproviderquestion"
+"elementName":"pcpquestion"
 }
 }
 }

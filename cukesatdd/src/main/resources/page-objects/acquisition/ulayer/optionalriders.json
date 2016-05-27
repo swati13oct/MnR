@@ -3,11 +3,11 @@
 "expectedData":{
 "optionalridersInfo":{
 "identifier":"id",
-"elementName":"optionalridersheading"
+"elementName":"optriderInfo"
 },
 "optioanlridersquestion":{
 "identifier":"id",
-"elementName":"optionalridersquestion"
+"elementName":"optriderquestion"
 }
 }
 }
