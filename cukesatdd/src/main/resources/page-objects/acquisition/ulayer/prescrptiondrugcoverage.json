@@ -1,0 +1,13 @@
+{
+"url":null,
+"expectedData":{
+"prescrptiondrugcoverageInfo":{
+"identifier":"id",
+"elementName":"prescrptiondrugcoverageheading"
+},
+"prescrptiondrugcoveragequestion":{
+"identifier":"id",
+"elementName":"prescrptiondrugcoveragequestion"
+}
+}
+}
