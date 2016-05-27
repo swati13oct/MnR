@@ -79,7 +79,7 @@ public class DTMvalidationStepDefinition {
 	}
 	
 	@Then("^the user validates the DTM tags for links in footer section of the AARP Medicare Plans home page$")
-	public void validates_dtm_tags_in_footer_section()
+	public void validates_dtm_tags_in_footer_section() throws Exception
 	{
 		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
 				.getBean(PageConstants.ACQUISITION_HOME_PAGE);

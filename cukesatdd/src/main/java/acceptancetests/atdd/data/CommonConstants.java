@@ -11,8 +11,8 @@ import acceptancetests.atdd.data.ulayer.Page;
  */
 public class CommonConstants {
 
+	
 	public static final String PROPERTY_FILE_LOCATION = "C:/portal/conf/mratdd/config.properties";
-
 	public static final String UID = "uid";
 
 	public static final String DB_URL = "DBUrl";
@@ -72,6 +72,10 @@ public class CommonConstants {
 	public static final String CONTACT_US = "contactus";
 
 	private static final String CONTACT_US_ULAYER_DIRECTORY = "/jsonresponse/member/ulayer/contactus/";
+	
+	public static final String DTM_TAG_MEMBER_FILENAME = "member";
+	public static final String DTM_TAG_ACQ_FILENAME = "acquisition";
+	public static final String PAGE_OBJECT_DTM_TAG_DIR = "/page-objects/dtm-common-data/";
 
 	public static final Page[] PAGES = {
 			new Page(CommonConstants.GLOBAL, CommonConstants.GLOBAL_DIRECTORY),
