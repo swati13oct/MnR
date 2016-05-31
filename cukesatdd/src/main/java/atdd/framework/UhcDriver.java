@@ -7,6 +7,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Cookie;
 import org.openqa.selenium.WebDriver;
@@ -17,6 +19,8 @@ import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import acceptancetests.atdd.data.ElementData;
+import acceptancetests.atdd.data.PageData;
+import acceptancetests.atdd.util.CommonUtility;
 
 /**
  * @author pjaising
@@ -296,5 +300,64 @@ public abstract class UhcDriver {
 	}
 
 	public abstract void openAndValidate();
+	
+	/*
+	 * Generic method to capture the dtm data both static and dynamic. The variable dtm files are kept under page-objects/dtm-common-data/
+	 * Currently only member and aquisition files are there. More foles can be added if required.
+	 * Input params are
+	 * fileName: Json file name containing the web elements names and id, so that they can be read from current page.
+	 * filePath: Path to the folder containing fileName
+	 * dtmFilePath: Json file name containing the dynamic dtm tags variable and their path 
+	 * dtmDir: Path to the dtmFilePath
+	 */
+	public  JSONObject getDTMPageJson(String fileName, String filePath, String dtmFilePath, String dtmDir){
+		PageData pageData = CommonUtility.readPageData(fileName,filePath);
+		JSONObject jsonObject = new JSONObject();
+		for (String key : pageData.getExpectedData().keySet()) {
+			WebElement element = findElement(pageData.getExpectedData()
+					.get(key));
+			if (element != null) {
+				if (validate(element)) {
 
+					JSONObject dtmObject = new JSONObject();
+					if (element.getAttribute("dtmname") != null
+							&& element.getAttribute("dtmid") != null) {
+						try {
+							dtmObject.put("dtmid", element.getAttribute("dtmid"));
+							dtmObject.put("dtmname",
+									element.getAttribute("dtmname"));
+						} catch (JSONException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+
+					
+					try {
+						jsonObject.put(key, dtmObject);
+					} catch (JSONException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					}
+					else{
+						System.out.println("DTM id or DTM name was not found for Element:"+key);
+					}
+				
+				}
+				else{
+					System.out.println("Validation failed for element::"+key);
+				}
+			}
+		}
+		
+		try {
+			jsonObject.put("dtmPageData", CommonUtility.checkForVariable(driver,dtmFilePath,dtmDir));
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+
+		return jsonObject;
+	}
 }
