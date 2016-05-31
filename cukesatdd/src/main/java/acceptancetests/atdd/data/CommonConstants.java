@@ -744,6 +744,8 @@ public class CommonConstants {
 	
 	public static final String AARPM_BROWSER_CHECK_DATA="aarpmbrowsercheck.json";
 	
+	public static final String AARPM_SECURE_EMAIL_DATA="aarpmsecureemailwidget.json";
+	
 	public static final String GR_BROWSER_CHECK_DATA = "uhcretireebrowsercheck.json";
 	
 	public static final String UHCM_MOBILE_BROWSER_CHECK_DATA = "browsercheck_uhcm.json";
