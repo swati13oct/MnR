@@ -21,19 +21,25 @@ public class PlanPaymentOptions extends UhcDriver{
 	
 	
 	
+	@FindBy(xpath = "//label[@for='payment-no']")
+	private WebElement planpaymentLicnkno;
+	
+	@FindBy(xpath = "//label[@for='payment-yes']")
+	private WebElement planpaymentLinkyes;
+	
 	@FindBy(id = "planpaymentLink")
 	private WebElement planpaymentLink;
+
+	@FindBy(xpath = "//a[@id='disclaimerAgreeBtn']")
+	private WebElement ppodisclaimerAgreeBtn;
 	
-	@FindBy(id = "disclaimerAgreeBtn")
-	private WebElement disclaimerAgreeBtn;
-	
-	@FindBy(id = "pcpprevious")
+	@FindBy(id = "planPaymentOptionprevious")
 	private WebElement pcpprevious;
 	
-	@FindBy(id = "pcpsaveandcont")
+	@FindBy(id = "planPaymentOptionSaveBtnId")
 	private WebElement pcpsaveandcont;
 	
-	@FindBy(id = "ppcpcancel")
+	@FindBy(id = "planPaymentOptioncancel")
 	private WebElement pcpcancel;
 	
 	private PageData planpaymentInformation;
@@ -47,6 +53,7 @@ public class PlanPaymentOptions extends UhcDriver{
 		String fileName = CommonConstants.PLAN_PAYMENT_OPTION_PAGE_DATA;
 		planpaymentInformation = CommonUtility.readPageData(fileName,
 				CommonConstants.PAGE_OBJECT_DIRECTORY_ULAYER_ACQ);
+		openAndValidate();
 		
 	}
 
@@ -72,17 +79,45 @@ public class PlanPaymentOptions extends UhcDriver{
 		planpaymentInformationJson = jsonObject;	
 	}
 
-	public void clickplanproviderInformation() {
+	public void clickplanproviderInformation(	Map<String, String> personalAttributesMap) {
+		String planpaymentoption = personalAttributesMap.get("planpaymentoption");
+		if(planpaymentoption.equalsIgnoreCase("No")) {
+			planpaymentLicnkno.click();
+		
+		}else if(planpaymentoption.equalsIgnoreCase("Yes")){
+			planpaymentLinkyes.click();
+		}
 	
-		planpaymentLink.click();		
-		disclaimerAgreeBtn.click();
+		planpaymentLink.click();	
+	/*	try {
+			Thread.sleep(1000);
+			} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			}
+		if(getTitle().equalsIgnoreCase("AARP Medicare Complete Online Application")||getTitle().equalsIgnoreCase("AARP Medicarerx Online Application")){
+			ppodisclaimerAgreeBtn.click();
+			try {
+				Thread.sleep(10000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		*/
 		}
 		
-	public OptionalRidersPage navigatesToNextStep() {
+	public OptionalRidersPage navigatesToNextStepMAPDMA() {
 			pcpsaveandcont.click();
 				return new OptionalRidersPage(driver);
 	
 		}
+	
+	public ProposedEffectiveDatePage navigatesToNextStepPDP() {
+		pcpsaveandcont.click();
+			return new ProposedEffectiveDatePage(driver);
+
+	}
 	
 		
 	

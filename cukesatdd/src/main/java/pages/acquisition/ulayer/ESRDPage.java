@@ -82,7 +82,7 @@ public class ESRDPage extends UhcDriver{
 		{
 			esrdno.click();
 		}
-		else
+		else if(esrdradiooption.equalsIgnoreCase("Yes"))
 		{
 			esrdyes.click();
 		}

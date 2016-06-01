@@ -100,7 +100,7 @@ public class PrescriptionDrugCoveragePage extends UhcDriver{
 		String pdcmemberidnumber = personalAttributesMap.get("pdcmemberidnumber");
 		if(pdcradiooption.equalsIgnoreCase("No")){
 				pdcno.click();
-		}else{
+		}else if(pdcradiooption.equalsIgnoreCase("Yes")){
 			pdcyes.click();
 			sendkeys(pdcnameofinsur,pdchealthinsurname);
 			sendkeys(pdcgroupid,pdcgroupidnumber);

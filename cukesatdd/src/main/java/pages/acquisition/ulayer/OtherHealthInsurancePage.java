@@ -101,7 +101,7 @@ public class OtherHealthInsurancePage extends UhcDriver{
 		String othmemberid = personalAttributesMap.get("othmemberid");
 		if(othradiooption.equalsIgnoreCase("No")){
 				otherhealthinsuranceno.click();
-		}else{
+		}else if(othradiooption.equalsIgnoreCase("Yes")){
 			otherhealthinsuranceyes.click();
 			sendkeys(otherhealthinsurancename,othnameofhealthinsur);
 			sendkeys(otherhealthinsurancegroup,othgroupid);
