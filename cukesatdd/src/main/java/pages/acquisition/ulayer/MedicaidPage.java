@@ -21,14 +21,12 @@ import atdd.framework.UhcDriver;
  * @author pperugu
  *
  */
-public class MedicaidPage extends UhcDriver{
+public class MedicaidPage extends UhcDriver{	
 	
-	
-	
-	@FindBy(id = "medicaidquestionnotext")
+	@FindBy(xpath = "//label[@for='medicaid-no']")
 	private WebElement medicaiddno;
 	
-	@FindBy(id = "medicaiddquestionyestext")
+	@FindBy(xpath = "//label[@for='medicaid-yes']")
 	private WebElement medicaiddyes;
 		
 	@FindBy(id = "medicaid-number")
@@ -37,18 +35,14 @@ public class MedicaidPage extends UhcDriver{
 	@FindBy(id = "medicaidprevious")
 	private WebElement medicaidprevious;
 	
-	@FindBy(id = "medicaiddquestionyestext")
+	@FindBy(id = "medicaidsaveandcont")
 	private WebElement medicaidsaveandcontinue;
 	
-	@FindBy(id = "medicaiddquestionyestext")
+	@FindBy(id = "medicaidcancel")
 	private WebElement medicaidcancleregistration;
+			
 	
-	@FindBy(id = "pageHeadingOtherHealthInsur")
-	private WebElement pageHeadingOtherHealthInsur;
-	
-	
-	
-	private PageData medicaiddInformation;
+	private PageData medicaidInformation;
 
 	public JSONObject medicaidInformationJson;
 
@@ -56,7 +50,7 @@ public class MedicaidPage extends UhcDriver{
 		super(driver);
 		PageFactory.initElements(driver, this);
 		String fileName = CommonConstants.MEDICAID_PAGE_DATA;
-		PageData medicaidinformation = CommonUtility.readPageData(fileName,
+		medicaidInformation = CommonUtility.readPageData(fileName,
 				CommonConstants.PAGE_OBJECT_DIRECTORY_ULAYER_ACQ);
 		
 
@@ -67,6 +61,26 @@ public class MedicaidPage extends UhcDriver{
 		public void openAndValidate() {
 		validate(medicaiddno);
 		validate(medicaiddyes);		
+		JSONObject jsonObject = new JSONObject();
+		for (String key : medicaidInformation.getExpectedData().keySet()) {
+			WebElement element = findElement(medicaidInformation.getExpectedData()
+					.get(key));
+			if (element != null) {
+				if (validate(element)) {
+					try {
+						jsonObject.put(key, element.getText());
+					} catch (JSONException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				}
+			}
+
+		}
+		medicaidInformationJson = jsonObject;
+
+	
+
 	}
 
 	public void entersmedicaidInformation(
@@ -81,11 +95,15 @@ public class MedicaidPage extends UhcDriver{
 		}				
 	}
 		
-	public OtherHealthInsurancePage navigatesToNextStep() {
+	public OtherHealthInsurancePage navigatesToNextStepMAorMAPD() {
 			medicaidsaveandcontinue.click();
-			if (pageHeadingOtherHealthInsur.getText().equalsIgnoreCase("Prescription Drug Coverage")) {
 				return new OtherHealthInsurancePage(driver);
-			}
-			return null;
+			
 		}
+	
+	public PlanPaymentOptions navigatesToNextStepPDP() {
+		medicaidsaveandcontinue.click();
+			return new PlanPaymentOptions(driver);
+		
+	}
    }

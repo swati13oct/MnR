@@ -19,10 +19,10 @@ import atdd.framework.UhcDriver;
 
 public class LongTermCarePage extends UhcDriver{
 	
-	@FindBy(id = "longtermcarequestionnotext")
+	@FindBy(xpath = "//label[@for='ltc-no']")
 	private WebElement longtermcareno;
 	
-	@FindBy(id = "longterncarequestionyestext")
+	@FindBy(xpath = "//label[@for='ltc-yes']")
 	private WebElement longtermcaredyes;
 	
 	@FindBy(id = "ltc-name")
@@ -43,10 +43,6 @@ public class LongTermCarePage extends UhcDriver{
 	@FindBy(id = "ltc-date")
 	private WebElement longtermcaredate;
 	
-	
-	@FindBy(id = "pageHeadingmedicaid")
-	private WebElement pageHeadingmedicaid;
-	
 	@FindBy(id = "longtermcareprevious")
 	private WebElement longtermcareprevious;
 	
@@ -54,8 +50,7 @@ public class LongTermCarePage extends UhcDriver{
 	private WebElement longtermcaredsaveandcontinue;
 	
 	@FindBy(id = "longtermcarecancel")
-	private WebElement longtermcaredcancelregistration;
-	
+	private WebElement longtermcaredcancelregistration;	
 	
 	private PageData longtermcareInformation;
 
@@ -76,6 +71,27 @@ public class LongTermCarePage extends UhcDriver{
 
 	@Override
 	public void openAndValidate() {
+		validate(longtermcareno);
+		validate(longtermcaredyes);
+		
+		JSONObject jsonObject = new JSONObject();
+		for (String key : longtermcareInformation.getExpectedData().keySet()) {
+			WebElement element = findElement(longtermcareInformation.getExpectedData()
+					.get(key));
+			if (element != null) {
+				if (validate(element)) {
+					try {
+						jsonObject.put(key, element.getText());
+					} catch (JSONException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				}
+			}
+
+		}
+		longtermcareInformationJson = jsonObject;
+
 	
 
 		
@@ -105,13 +121,16 @@ public class LongTermCarePage extends UhcDriver{
 		}		
 	}
 
-	public MedicaidPage navigatesToNextStep() {
+	public MedicaidPage navigatesToNextStepMAorMAPD() {
 			longtermcaredsaveandcontinue.click();
-			if (pageHeadingmedicaid.getText().equalsIgnoreCase("Prescription Drug Coverage")) {
 				return new MedicaidPage(driver);
-			}
-			return null;
 		}
+	
+	public PlanPaymentOptions navigatesToNextStepPDP() {
+		longtermcaredsaveandcontinue.click();
+			return new PlanPaymentOptions(driver);
+		
+	}
 		
 	}
 

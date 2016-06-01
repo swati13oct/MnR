@@ -26,9 +26,6 @@ public class ESRDPage extends UhcDriver{
 	@FindBy(xpath = "//label[@for='esrd-yes']")
 	private WebElement esrdyes;
 	
-	@FindBy(id = "esrdquestionyestext")
-	private WebElement pageHeadingPrescriptionDrugCoverage;
-	
 	@FindBy(id = "esrdprevious")
 	private WebElement esrdprevious;
 	
@@ -93,10 +90,7 @@ public class ESRDPage extends UhcDriver{
 	}
 	public PrescriptionDrugCoveragePage navigatesToNextStep() {
 			esrdsaveandcontinue.click();
-			if (pageHeadingPrescriptionDrugCoverage.getText().equalsIgnoreCase("Prescription Drug Coverage")) {
 				return new PrescriptionDrugCoveragePage(driver);
-			}
-			return null;
 		}
 		
 }

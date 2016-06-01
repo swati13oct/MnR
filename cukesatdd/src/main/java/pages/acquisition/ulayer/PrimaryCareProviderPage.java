@@ -44,30 +44,24 @@ public class PrimaryCareProviderPage extends UhcDriver{
  public PrimaryCareProviderPage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
-		String fileName = CommonConstants.PRIMARY_CARE_PROVIDER_PAGE_DATA;
-		primarycareproviderInformation = CommonUtility.readPageData(fileName,
-				CommonConstants.PAGE_OBJECT_DIRECTORY_ULAYER_ACQ);
-		
-
-		openAndValidate();
+	
 	}
 
 	@Override
 	public void openAndValidate() {
 	
-
-		
-	
 		
 	}
 
 		
-	public PlanPaymentOptions navigatesToNextStep() {
+	public Object navigatesToNextStep(String premium) {
 			pcpsaveandcont.click();
-			if (pageHeadingPlanPaymentopt.getText().equalsIgnoreCase("Prescription Drug Coverage")) {
+			if(premium.equalsIgnoreCase("$0.00 a month")){
+				return new OptionalRidersPage(driver);
+			}else{
 				return new PlanPaymentOptions(driver);
+				
 			}
-			return null;
 		}
 	
 		

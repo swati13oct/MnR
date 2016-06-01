@@ -19,14 +19,7 @@ import atdd.framework.UhcDriver;
 
 public class PlanPaymentOptions extends UhcDriver{
 	
-	@FindBy(id = "primarycareproviderquestionnotext")
-	private WebElement ppono;
 	
-	@FindBy(id = "primarycareproviderquestionyestext")
-	private WebElement ppoyes;
-	
-	@FindBy(id = "pageHeadingOptRider")
-	private WebElement pageHeadingOptRider;
 	
 	@FindBy(id = "planpaymentLink")
 	private WebElement planpaymentLink;
@@ -52,40 +45,43 @@ public class PlanPaymentOptions extends UhcDriver{
 		
 		PageFactory.initElements(driver, this);
 		String fileName = CommonConstants.PLAN_PAYMENT_OPTION_PAGE_DATA;
-		PageData otherhealthinsuranceInformation = CommonUtility.readPageData(fileName,
+		planpaymentInformation = CommonUtility.readPageData(fileName,
 				CommonConstants.PAGE_OBJECT_DIRECTORY_ULAYER_ACQ);
 		
 	}
 
 	@Override
 	public void openAndValidate() {
-	
+		
+		JSONObject jsonObject = new JSONObject();
+		for (String key : planpaymentInformation.getExpectedData().keySet()) {
+			WebElement element = findElement(planpaymentInformation.getExpectedData()
+					.get(key));
+			if (element != null) {
+				if (validate(element)) {
+					try {
+						jsonObject.put(key, element.getText());
+					} catch (JSONException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				}
+			}
 
-		
-	
-		
+		}
+		planpaymentInformationJson = jsonObject;	
 	}
 
-	public void entersplanproviderInformation(
-			Map<String, String> personalAttributesMap) {
-		String pporadiooption = personalAttributesMap.get("pporadiooption");
-			
-		if(pporadiooption.equalsIgnoreCase("No")){
-				ppono.click();
-		}else{
-			ppoyes.click();
-			
-		}	
+	public void clickplanproviderInformation() {
+	
 		planpaymentLink.click();		
 		disclaimerAgreeBtn.click();
 		}
 		
 	public OptionalRidersPage navigatesToNextStep() {
 			pcpsaveandcont.click();
-			if (pageHeadingOptRider.getText().equalsIgnoreCase("Prescription Drug Coverage")) {
 				return new OptionalRidersPage(driver);
-			}
-			return null;
+	
 		}
 	
 		

@@ -264,12 +264,20 @@ public class SpecialElectionPeriodPage extends UhcDriver {
 	public void clickOnPrevious() {
 		previous.click();
 	}
-	public ESRDPage navigatesToNextStep() {
+	public void clicksOnSaveAndContinue(){
 		saveAndContinue.click();
-		if (pageHeadingESRD.getText().equalsIgnoreCase("End Stage Renal Disease")) {
-		return new ESRDPage(driver);
-		}
-		return null;
-		}
-
+	}
+	
+	public ESRDPage navigatesToNextStepMAorMAPD() {
+		saveAndContinue.click();
+		
+			return new ESRDPage(driver);
+		
+	}
+	
+	public PrescriptionDrugCoveragePage navigatesToNextStepPDP() {
+		saveAndContinue.click();
+	
+			return new PrescriptionDrugCoveragePage(driver);
+	}
 }
