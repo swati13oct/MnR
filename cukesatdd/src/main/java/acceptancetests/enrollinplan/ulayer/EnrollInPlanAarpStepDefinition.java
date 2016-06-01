@@ -885,46 +885,40 @@ public class EnrollInPlanAarpStepDefinition {
     }
 
     @And("^the user fill following information in plan payment options step in AARP site$")
-    public void user_fill_information_plan_payment_options_aarp_step_aarp(DataTable dataAttributes) {
-    	List<DataTableRow> dataAttributesRow = dataAttributes
-				.getGherkinRows();
-		Map<String, String> dataAttributesMap = new HashMap<String, String>();
-		for (int i = 0; i < dataAttributesRow.size(); i++) {
+    public void user_fill_information_plan_payment_options_aarp_step_aarp(DataTable personalAttributes) {
 
-			dataAttributesMap.put(dataAttributesRow.get(i).getCells()
-					.get(0), dataAttributesRow.get(i).getCells().get(1));
-		}
-          IntroductionInformationPage introPage = (IntroductionInformationPage) getLoginScenario().getBean(PageConstants.INTRODUCTION_INFORMATION_PAGE);
+    List<DataTableRow> personalAttributesRow = personalAttributes.getGherkinRows();
+    Map<String, String> personalAttributesMap = new HashMap<String, String>();
+    for (int i = 0; i < personalAttributesRow.size(); i++) {
+    personalAttributesMap.put(personalAttributesRow.get(i).getCells()
+    .get(0), personalAttributesRow.get(i).getCells().get(1));
+    }
+    IntroductionInformationPage introPage = (IntroductionInformationPage) getLoginScenario().getBean(PageConstants.INTRODUCTION_INFORMATION_PAGE);
+    PlanPaymentOptions ppoPage = (PlanPaymentOptions) getLoginScenario().getBean(PageConstants.PLAN_PAYMENT_OPTION_PAGE);
 
-          String premium="";
-          try {
-                 premium = introPage.introductionInformationJson.get("premium").toString();
-                 if(!premium.equalsIgnoreCase("$0.00 a month")){
-                        
-                        PlanPaymentOptions ppoPage = (PlanPaymentOptions) getLoginScenario().getBean(PageConstants.PLAN_PAYMENT_OPTION_PAGE);
-                    //    ppoPage.clickplanproviderInformation(dataAttributesMap);
-          
-                        getLoginScenario().saveBean(PageConstants.PLAN_PAYMENT_OPTION_PAGE,ppoPage);
-                        
-                        String plantype = dataAttributesMap.get("Plan Type");          
-                        if(plantype.equalsIgnoreCase("MA")||plantype.equalsIgnoreCase("MAPD")){
-                            OptionalRidersPage optPage = ppoPage.navigatesToNextStepMAPDMA();
-                            getLoginScenario().saveBean(PageConstants.OPTIONAL_RIDERS_PAGE,optPage);
-                        
-                        }else{
-                        
-                        ProposedEffectiveDatePage pedPage = ppoPage.navigatesToNextStepPDP();
-                        getLoginScenario().saveBean(PageConstants.PROPOSED_EFFECTIVE_DATE_PAGE,pedPage);
-                        }
-          
-                 }
-          }catch(JSONException e) {
-                 // TODO Auto-generated catch block
-                 e.printStackTrace();
-          }
+    String premium="";
+    try {
+    premium = introPage.introductionInformationJson.get("premium").toString();
+    if(!premium.equalsIgnoreCase("$0.00 a month")){
+
+    String plantype = personalAttributesMap.get("Plan Type");
+    ppoPage.clickplanproviderInformation(personalAttributesMap);
+    if(plantype.equalsIgnoreCase("MA")||plantype.equalsIgnoreCase("MAPD")){
+    OptionalRidersPage optriders=ppoPage.navigatesToNextStepMAPDorMA();
+
+    getLoginScenario().saveBean(PageConstants.OPTIONAL_RIDERS_PAGE,optriders);
+    }else{
+    ProposedEffectiveDatePage pedobj=ppoPage.navigatesToNextStepPDP();
+    getLoginScenario().saveBean(PageConstants.PROPOSED_EFFECTIVE_DATE_PAGE,pedobj);
 
     }
-    
+    }
+    }catch(JSONException e) {
+    // TODO Auto-generated catch block
+    e.printStackTrace();
+    }
+
+    }
     
     
     @And("^the user navigates to optional Riders step in AARP site$")
