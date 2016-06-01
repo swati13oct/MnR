@@ -885,7 +885,15 @@ public class EnrollInPlanAarpStepDefinition {
     }
 
     @And("^the user fill following information in plan payment options step in AARP site$")
-    public void user_fill_information_plan_payment_options_aarp_step_aarp() {
+    public void user_fill_information_plan_payment_options_aarp_step_aarp(DataTable dataAttributes) {
+    	List<DataTableRow> dataAttributesRow = dataAttributes
+				.getGherkinRows();
+		Map<String, String> dataAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < dataAttributesRow.size(); i++) {
+
+			dataAttributesMap.put(dataAttributesRow.get(i).getCells()
+					.get(0), dataAttributesRow.get(i).getCells().get(1));
+		}
           IntroductionInformationPage introPage = (IntroductionInformationPage) getLoginScenario().getBean(PageConstants.INTRODUCTION_INFORMATION_PAGE);
 
           String premium="";
@@ -894,9 +902,20 @@ public class EnrollInPlanAarpStepDefinition {
                  if(!premium.equalsIgnoreCase("$0.00 a month")){
                         
                         PlanPaymentOptions ppoPage = (PlanPaymentOptions) getLoginScenario().getBean(PageConstants.PLAN_PAYMENT_OPTION_PAGE);
-                        ppoPage.clickplanproviderInformation();
+                    //    ppoPage.clickplanproviderInformation(dataAttributesMap);
           
                         getLoginScenario().saveBean(PageConstants.PLAN_PAYMENT_OPTION_PAGE,ppoPage);
+                        
+                        String plantype = dataAttributesMap.get("Plan Type");          
+                        if(plantype.equalsIgnoreCase("MA")||plantype.equalsIgnoreCase("MAPD")){
+                            OptionalRidersPage optPage = ppoPage.navigatesToNextStepMAPDMA();
+                            getLoginScenario().saveBean(PageConstants.OPTIONAL_RIDERS_PAGE,optPage);
+                        
+                        }else{
+                        
+                        ProposedEffectiveDatePage pedPage = ppoPage.navigatesToNextStepPDP();
+                        getLoginScenario().saveBean(PageConstants.PROPOSED_EFFECTIVE_DATE_PAGE,pedPage);
+                        }
           
                  }
           }catch(JSONException e) {
@@ -911,7 +930,7 @@ public class EnrollInPlanAarpStepDefinition {
     @And("^the user navigates to optional Riders step in AARP site$")
     public void the_user_navigates_to_optional_riders_aarp_information_step_aarp() {
           OptionalRidersPage optPage = (OptionalRidersPage) getLoginScenario().getBean(PageConstants.OPTIONAL_RIDERS_PAGE);
-;
+
 
           if (optPage != null) {
                  /* Get actual data */
