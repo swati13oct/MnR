@@ -501,6 +501,46 @@ public class EnrollInPlanAarpStepDefinition {
 		getLoginScenario().saveBean(PageConstants.SPECIAL_ELECTION_PERIOD_PAGE,	specialElectionPeriodPage);		
 	}
 	
+	@And("^the user navigates to esrd step in AARP site$")	
+	public void the_user_navigates_esrd_information_step_aarp() {
+		ESRDPage esrdPage = (ESRDPage) getLoginScenario().getBean(PageConstants.ESRD_PAGE);		
+
+		if (esrdPage != null) {
+			/* Get actobj=ual data */
+			JSONObject esrdActual = esrdPage.esrdInformationJson;
+
+			/* Get expected data */
+			String planName = (String) getLoginScenario().getBean(EnrollInPlanCommonConstants.PLAN_NAME);
+
+			String fileName = planName;
+			String zipcode = (String) getLoginScenario().getBean(VPPCommonConstants.ZIPCODE);
+			String county = (String) getLoginScenario().getBean(VPPCommonConstants.COUNTY);
+
+			String directory = CommonConstants.ACQUISITION_EXPECTED_DIRECTORY
+					+ File.separator + CommonConstants.SITE_ULAYER
+					+ File.separator
+					+ VPPCommonConstants.ENROLL_IN_PLAN_FLOW_NAME
+					+ File.separator
+					+ EnrollInPlanCommonConstants.ESRD_INFORMATION
+					+ File.separator + zipcode + File.separator + county
+					+ File.separator;
+			JSONObject esrdExpected = MRScenario.readExpectedJson(fileName, directory);
+
+				System.out.println("esrdInformationExpected:::"+ esrdExpected);
+			System.out.println("esrdInformationActual:::"	+ esrdActual);
+
+			try {
+				JSONAssert.assertEquals(esrdExpected,	esrdActual, true);
+			} catch (JSONException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		} else {
+			Assert.fail("ERROR loading esrdInformationActual");
+		}
+
+	}
+
 	@And("^the user fill following information in esrd information step in AARP site$")
     public void user_fill_information_esrd_information_aarp(DataTable personalAttributes) {
 
