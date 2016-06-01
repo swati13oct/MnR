@@ -44,7 +44,7 @@ public class IntroductionInformationPage extends UhcDriver{
 	@FindBy(id = "enrollmentdisclaimerstep1btn")
 	private WebElement viewEnrollDisclaimer;
 	
-	@FindBy(id="disclaimerAgreeBtn")
+	@FindBy(id="disclaimerAgreeBtndisclaimer")
 	private WebElement disclaimeragreebtn;
 	
 	@FindBy(xpath = "//*[@id='beginOnlineEnrollmentbtn']")
