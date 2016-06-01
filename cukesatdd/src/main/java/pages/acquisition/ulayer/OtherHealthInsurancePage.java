@@ -23,10 +23,10 @@ import atdd.framework.UhcDriver;
  */
 public class OtherHealthInsurancePage extends UhcDriver{
 	
-	@FindBy(id = "esrdquestionnotext")
+	@FindBy(xpath = "//label[@for='other-insurance-no']")
 	private WebElement otherhealthinsuranceno;
 	
-	@FindBy(id = "otherhealthinsurancequestionyestext")
+	@FindBy(xpath = "//label[@for='other-insurance-yes']")
 	private WebElement otherhealthinsuranceyes;
 	
 	@FindBy(id = "other-insurance-name")
@@ -47,10 +47,7 @@ public class OtherHealthInsurancePage extends UhcDriver{
 	@FindBy(id = "othcancel")
 	private WebElement otherhelathinsurancecancelregristration;
 	
-	@FindBy(id = "pageHeadingPrimaryCareProvider")
-	private WebElement pageHeadingPrimaryCareProvider;	
-	
-	private PageData otherheslthinsuranceInformation;
+	private PageData otherhealthinsuranceInformation;
 
 	public JSONObject otherhealthinsuranceInformationJson;
 
@@ -59,7 +56,7 @@ public class OtherHealthInsurancePage extends UhcDriver{
 		
 		PageFactory.initElements(driver, this);
 		String fileName = CommonConstants.OTHER_HEALTH_INSURANCE_PAGE_DATA;
-		PageData otherhealthinsuranceInformation = CommonUtility.readPageData(fileName,
+		 otherhealthinsuranceInformation = CommonUtility.readPageData(fileName,
 				CommonConstants.PAGE_OBJECT_DIRECTORY_ULAYER_ACQ);
 		
 
@@ -71,6 +68,26 @@ public class OtherHealthInsurancePage extends UhcDriver{
 	 validate(otherhealthinsuranceno);
 	  validate(otherhealthinsuranceyes);
 
+		JSONObject jsonObject = new JSONObject();
+		for (String key : otherhealthinsuranceInformation.getExpectedData().keySet()) {
+			WebElement element = findElement(otherhealthinsuranceInformation.getExpectedData()
+					.get(key));
+			if (element != null) {
+				if (validate(element)) {
+					try {
+						jsonObject.put(key, element.getText());
+					} catch (JSONException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				}
+			}
+
+		}
+		otherhealthinsuranceInformationJson = jsonObject;
+
+		
+	
 		
 	
 		
@@ -96,10 +113,8 @@ public class OtherHealthInsurancePage extends UhcDriver{
 		
 			public PrimaryCareProviderPage navigatesToNextStep() {
 			otherhelathinsurancesaveandcontinue.click();
-			if (pageHeadingPrimaryCareProvider.getText().equalsIgnoreCase("Prescription Drug Coverage")) {
+		
 				return new PrimaryCareProviderPage(driver);
-			}
-			return null;
 		}
 	}
 

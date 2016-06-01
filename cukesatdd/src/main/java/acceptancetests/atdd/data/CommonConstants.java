@@ -668,13 +668,13 @@ public class CommonConstants {
 	
 	public static final String ESRD_PAGE_DATA = "esrd.json";
 
-	public static final String PRESCRIPTION_DRUG_COVERAGE_PAGE_DATA = "prescriptiondrugcoverage.json";
+	public static final String PRESCRIPTION_DRUG_COVERAGE__PAGE_DATA = "prescriptiondrugcoverage.json";
 
 	public static final String LONG_TERM_CARE_PAGE_DATA = "longtermcare.json";
 
 	public static final String MEDICAID_PAGE_DATA = "medicaid.json";
 
-	public static final String OTHER_HEALTH_INSURANCE_PAGE_DATA = "otherhealthins.jsone";
+	public static final String OTHER_HEALTH_INSURANCE_PAGE_DATA = "otherhealthinsurance.json";
 
 	public static final String PRIMARY_CARE_PROVIDER_PAGE_DATA = "primarycareprovider.json";
 

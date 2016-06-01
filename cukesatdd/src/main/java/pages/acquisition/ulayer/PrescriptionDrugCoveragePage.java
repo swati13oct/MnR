@@ -24,10 +24,10 @@ public class PrescriptionDrugCoveragePage extends UhcDriver{
 	
 	
 	
-	@FindBy(id = "PrescriptionDrugCoveragequestionnotext")
+	@FindBy(xpath = "//label[@for='drug-coverage-no']")
 	private WebElement pdcno;
 	
-	@FindBy(id = "PrescriptionDrugCoveragequestionyestext")
+	@FindBy(xpath = "//label[@for='drug-coverage-yes']")
 	private WebElement pdcyes;
 	
 	@FindBy(id = "insurance-name")
@@ -38,9 +38,6 @@ public class PrescriptionDrugCoveragePage extends UhcDriver{
 	
 	@FindBy(id = "member-id")
 	private WebElement pdcmemberid;
-	
-	@FindBy(id = "pageHeadingLongTermCare")
-	private WebElement pageHeadingLongTermCare;	
 	
 	@FindBy(id = "pdcprevious")
 	private WebElement pdcprevious;
@@ -56,9 +53,10 @@ public class PrescriptionDrugCoveragePage extends UhcDriver{
 	public JSONObject prescriptionDrugCoverageInformationJson;
 
 	public PrescriptionDrugCoveragePage(WebDriver driver) {
+			
 		super(driver);
 		PageFactory.initElements(driver, this);
-		String fileName = CommonConstants.PRESCRIPTION_DRUG_COVERAGE_PAGE_DATA;
+		String fileName = CommonConstants.PRESCRIPTION_DRUG_COVERAGE__PAGE_DATA;
 		prescriptiondrugcoverageInformation = CommonUtility.readPageData(fileName,
 				CommonConstants.PAGE_OBJECT_DIRECTORY_ULAYER_ACQ);
 		
@@ -70,6 +68,24 @@ public class PrescriptionDrugCoveragePage extends UhcDriver{
 	public void openAndValidate() {
 		validate(pdcno);
 		validate(pdcyes);
+		
+		JSONObject jsonObject = new JSONObject();
+		for (String key : prescriptiondrugcoverageInformation.getExpectedData().keySet()) {
+			WebElement element = findElement(prescriptiondrugcoverageInformation.getExpectedData()
+					.get(key));
+			if (element != null) {
+				if (validate(element)) {
+					try {
+						jsonObject.put(key, element.getText());
+					} catch (JSONException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				}
+			}
+
+		}
+		prescriptionDrugCoverageInformationJson = jsonObject;
 
 		
 	
@@ -87,7 +103,7 @@ public class PrescriptionDrugCoveragePage extends UhcDriver{
 		}else{
 			pdcyes.click();
 			sendkeys(pdcnameofinsur,pdchealthinsurname);
-			sendkeys(pdcnameofinsur,pdcgroupidnumber);
+			sendkeys(pdcgroupid,pdcgroupidnumber);
 			sendkeys(pdcmemberid,pdcmemberidnumber);
 			
 		}
@@ -96,10 +112,7 @@ public class PrescriptionDrugCoveragePage extends UhcDriver{
 		
 		public LongTermCarePage navigatesToNextStep() {
 			pdcsaveandcont.click();
-			if (pageHeadingLongTermCare.getText().equalsIgnoreCase("Prescription Drug Coverage")) {
 				return new LongTermCarePage(driver);
-			}
-			return null;
 		}
 		
 	}

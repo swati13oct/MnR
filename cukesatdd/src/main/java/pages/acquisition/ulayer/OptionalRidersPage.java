@@ -23,17 +23,25 @@ import atdd.framework.UhcDriver;
  */
 public class OptionalRidersPage extends UhcDriver{
 	
-	
-	
-	@FindBy(id = "optionalridersquestionnotext")
-	private WebElement esrdno;
+
+	@FindBy(xpath = "//label[@for='dental-no']")
+	private WebElement optno;
 	
 	@FindBy(id = "optionalridersquestionyestext")
-	private WebElement esrdyes;
+	private WebElement optyes;
+	
+	@FindBy(id = "optRiderprevious")
+	private WebElement optionalridersprevious;
+	
+	@FindBy(id = "optRidersaveandcont")
+	private WebElement optionalriderssaveandcontinue;
+	
+	@FindBy(id = "optRidercancel")
+	private WebElement optionalriderscancelregristration;
 	
 	private PageData optionalridersInformation;
 
-	public JSONObject optiionalridersInformationJson;
+	public JSONObject optionalridersInformationJson;
 
 	public OptionalRidersPage(WebDriver driver) {
 		super(driver);
@@ -49,6 +57,23 @@ public class OptionalRidersPage extends UhcDriver{
 	@Override
 	public void openAndValidate() {
 	
+		JSONObject jsonObject = new JSONObject();
+		for (String key : optionalridersInformation.getExpectedData().keySet()) {
+			WebElement element = findElement(optionalridersInformation.getExpectedData()
+					.get(key));
+			if (element != null) {
+				if (validate(element)) {
+					try {
+						jsonObject.put(key, element.getText());
+					} catch (JSONException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				}
+			}
+
+		}
+		optionalridersInformationJson = jsonObject;
 
 		
 	
@@ -57,10 +82,18 @@ public class OptionalRidersPage extends UhcDriver{
 
 	public void entersOptionalRiderInformation(
 			Map<String, String> personalAttributesMap) {
-		String answer = personalAttributesMap.get("Answer");
-		
+		String optradiooption = personalAttributesMap.get("optradiooption");
+		if(optradiooption.equalsIgnoreCase("No")){
+			optno.click();
+		}
+			
+		}
+	
+
+		public ProposedEffectiveDatePage navigatesToNextStep() {
+			optionalriderssaveandcontinue.click();
+				return new ProposedEffectiveDatePage(driver);
 			
 		}
 
-	}
-
+}
