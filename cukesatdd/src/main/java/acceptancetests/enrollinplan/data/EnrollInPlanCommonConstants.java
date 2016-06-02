@@ -26,7 +26,7 @@ public class EnrollInPlanCommonConstants {
 	public static final String OPT_INFORMATION = "optionalridersinformation";
 	public static final String PPO_INFORMATION = "planpaymentinformation";
 	public static final String PED = "proposedEffectiveDate";
-	public static final String REVIEW_APPLICATION = "reviewapplication";
+	public static final String REVIEW_APPLICATION = "reviewandsubmit";
 	public static final String SUBMIT_APPLICATION = "submitapplication";
 	public static final String ENROLLMENT_CONFIRMATION = "enrollmentconfirmation";
 	public static final String ENROLLMENT_CONFIRMATION_ACTUAL = "enrollmentConfirmationActual";
