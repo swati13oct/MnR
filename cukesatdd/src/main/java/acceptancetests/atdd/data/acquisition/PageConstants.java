@@ -86,8 +86,8 @@ public class PageConstants {
 	public static final String PLAN_PAYMENT_OPTION_PAGE = "planpaymentoptionPage";
 
 	public static final String OPTIONAL_RIDERS_PAGE = "optionalridersPage";
-
-	public static final String PROPOSED_EFFECTIVE_DATE_PAGE = "proposedEffDatePage";
+	
+	public static final String PROPOSED_EFFECTIVE_DATE_PAGE = "pedPage";
 
 	public static final String ADDITIONAL_INFORMATION_PAGE = "additionalInformation";
 

@@ -50,7 +50,7 @@ public class IntroductionInformationPage extends UhcDriver{
 	@FindBy(xpath = "//*[@id='beginOnlineEnrollmentbtn']")
 	private WebElement enrollmentNext;
 	
-	@FindBy(xpath = "//div[@id='step2Heading']/h2")
+	@FindBy(xpath = "//*[@id='step2Heading']/h2")
 	private WebElement pageHeading;
 	
 	@FindBy(xpath = "//div[@id='disclaimer']/div/p")

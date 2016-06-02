@@ -678,6 +678,8 @@ public class CommonConstants {
 
 	public static final String OPTIONAL_RIDERS_PAGE_DATA = "optionalriders.json";
 	
+	public static final String PED_PAGE_DATA = "proposedEffectiveDate.json";
+	
 	public static final String MA_ADDITIONAL_INFORMATION_PAGE_DATA = "maadditionalinformation.json";
 
 	public static final String PDP_ADDITIONAL_INFORMATION_PAGE_DATA = "pdpadditionalinformation.json";

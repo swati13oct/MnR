@@ -31,6 +31,7 @@ public class EnrollInPlanCommonConstants {
 	public static final String ENROLLMENT_CONFIRMATION_ACTUAL = "enrollmentConfirmationActual";
 	public static final String ENROLLMENT_CONFIRMATION_EXPECTED = "enrollmentConfirmationExpected";
 	public static final String SEP_INFORMATION = "sepinformation";
+	public static final String PED = "proposedEffectiveDate";
 	
 
 }

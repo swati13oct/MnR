@@ -388,9 +388,7 @@ public class EnrollInPlanAarpStepDefinition {
 		BeneficiaryInformationPage beneficiaryInformationPage = (BeneficiaryInformationPage) getLoginScenario()
 				.getBean(PageConstants.BENEFICIARY_INFORMATION_PAGE);
 		
-		SpecialElectionPeriodPage specialElectionPeriodPage = beneficiaryInformationPage.navigatesToStep2Part2();
-		
-		
+		SpecialElectionPeriodPage specialElectionPeriodPage = beneficiaryInformationPage.navigatesToStep2Part2();		
 		
 		getLoginScenario().saveBean(PageConstants.SPECIAL_ELECTION_PERIOD_PAGE,	specialElectionPeriodPage);	
 		
@@ -465,16 +463,11 @@ public class EnrollInPlanAarpStepDefinition {
 			PrescriptionDrugCoveragePage pdcPage = specialElectionPeriodPage.navigatesToNextStepPDP();
 			getLoginScenario().saveBean(PageConstants.PRESCRIPTION_DRUG_COVERAGE_PAGE,pdcPage);			
 			
-		}
-
-				
-		
-		
+		}		
 	}
 
 	@And("^the user select yes for Special Election Period$")
-	public void user_selects_yes_for_SEPQuestion(DataTable SEPAttributes){
-		
+	public void user_selects_yes_for_SEPQuestion(DataTable SEPAttributes){		
 		
 		List<DataTableRow> SEPAttributesRow = SEPAttributes
 				.getGherkinRows();
@@ -484,21 +477,26 @@ public class EnrollInPlanAarpStepDefinition {
 			SEPAttributesMap.put(SEPAttributesRow.get(i).getCells()
 					.get(0), SEPAttributesRow.get(i).getCells().get(1));
 		}
-
 		SpecialElectionPeriodPage specialElectionPeriodPage = (SpecialElectionPeriodPage) getLoginScenario()
 				.getBean(PageConstants.SPECIAL_ELECTION_PERIOD_PAGE);
 
-		/*if(SEPAttributesMap.get("yes").equalsIgnoreCase("yes"))
-			specialElectionPeriodPage.yesForSEPQuestion();
-		else if(SEPAttributesMap.get("no").equalsIgnoreCase("no"))
-		specialElectionPeriodPage.noForSEPQuestion();*/
-		
 		specialElectionPeriodPage.yesForSEPQuestion(SEPAttributesMap);
 		
+        getLoginScenario().saveBean(PageConstants.SPECIAL_ELECTION_PERIOD_PAGE,	specialElectionPeriodPage);	
 		
-		//specialElectionPeriodPage.clickOnPrevious();
+		String plantype = SEPAttributesMap.get("Plan Type");
+		if(plantype.equalsIgnoreCase("MA")||plantype.equalsIgnoreCase("MAPD")){
+			ESRDPage esrdpage= specialElectionPeriodPage.navigatesToNextStepMAorMAPD();
+			getLoginScenario().saveBean(PageConstants.ESRD_PAGE,esrdpage);
+			} else{
+			PrescriptionDrugCoveragePage pdcPage = specialElectionPeriodPage.navigatesToNextStepPDP();
+			getLoginScenario().saveBean(PageConstants.PRESCRIPTION_DRUG_COVERAGE_PAGE,pdcPage);			
+			
+		}
 
-		getLoginScenario().saveBean(PageConstants.SPECIAL_ELECTION_PERIOD_PAGE,	specialElectionPeriodPage);		
+		
+
+		
 	}
 	
 	@And("^the user navigates to esrd step in AARP site$")	
@@ -978,6 +976,91 @@ public class EnrollInPlanAarpStepDefinition {
            getLoginScenario().saveBean(PageConstants.PROPOSED_EFFECTIVE_DATE_PAGE,pedPage);
 
     }
+    
+    @And("^the user navigates to proposed effective date page$")
+	public void user_navigates_to_proposed_effective_date_page(){
+		
+    	/*OptionalRidersPage optPage = (OptionalRidersPage) getLoginScenario().getBean(PageConstants.OPTIONAL_RIDERS_PAGE);
+		
+		ProposedEffectiveDatePage pedPage = optPage.navigatesToNextStep();*/
+		
+    	ProposedEffectiveDatePage pedPage = (ProposedEffectiveDatePage) getLoginScenario().getBean(PageConstants.PROPOSED_EFFECTIVE_DATE_PAGE);
+		
+		if(pedPage != null){
+			/* Get actual data */
+			JSONObject pedActual = pedPage.pedJson;
+
+			/* Get expected data */
+			String planName = (String) getLoginScenario().getBean(
+					EnrollInPlanCommonConstants.PLAN_NAME);
+
+			String fileName = planName;
+			String zipcode = (String) getLoginScenario().getBean(
+					VPPCommonConstants.ZIPCODE);
+			String county = (String) getLoginScenario().getBean(
+					VPPCommonConstants.COUNTY);
+
+			String directory = CommonConstants.ACQUISITION_EXPECTED_DIRECTORY
+					+ File.separator + CommonConstants.SITE_ULAYER
+					+ File.separator
+					+ VPPCommonConstants.ENROLL_IN_PLAN_FLOW_NAME
+					+ File.separator
+					+ EnrollInPlanCommonConstants.PED
+					+ File.separator + zipcode + File.separator + county
+					+ File.separator;
+			JSONObject pedExpected = MRScenario.readExpectedJson(fileName, directory);
+
+			System.out.println("PEDExpected:::"
+					+ pedExpected);
+			System.out.println("PEDActual:::"
+					+ pedActual);
+
+			try {
+				JSONAssert.assertEquals(pedExpected,
+						pedActual, true);
+			} catch (JSONException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		} else {
+			Assert.fail("ERROR loading PED Page");
+		}
+		
+		
+		
+	}
+
+	@And("^the user selects proposed effective date$")
+	public void user_selects_proposed_effective_date(DataTable pedAttributes){
+		
+		List<DataTableRow> pedAttributesRow = pedAttributes
+				.getGherkinRows();
+		Map<String, String> pedAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < pedAttributesRow.size(); i++) {
+
+			pedAttributesMap.put(pedAttributesRow.get(i).getCells()
+					.get(0), pedAttributesRow.get(i).getCells().get(1));
+		}
+
+		ProposedEffectiveDatePage proposedEffectiveDatePage = (ProposedEffectiveDatePage) getLoginScenario()
+				.getBean(PageConstants.PROPOSED_EFFECTIVE_DATE_PAGE);
+		
+		proposedEffectiveDatePage.selectTheDate(pedAttributesMap);
+		
+		proposedEffectiveDatePage.clickOnSaveAndContinue();
+		
+		try {
+			Thread.sleep(10000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		getLoginScenario().saveBean(PageConstants.PROPOSED_EFFECTIVE_DATE_PAGE,	proposedEffectiveDatePage);
+		
+		
+		
+	}
 
 	@And("^the user navigates to Additional Information step in AARP site$")
 	public void user_navigates_additional_information_aarp() {
