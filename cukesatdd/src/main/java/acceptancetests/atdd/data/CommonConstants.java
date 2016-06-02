@@ -680,6 +680,10 @@ public class CommonConstants {
 	
 	public static final String PED_PAGE_DATA = "proposedEffectiveDate.json";
 	
+	public static final String MA_REVIEW_AND_SUMMIT_PAGE_DATA = "mareviewandsubmit.json";
+
+	public static final String PDP_REVIEW_AND_SUMMIT_PAGE_DATA = "pdpreviewandsubmit.json";
+	
 	public static final String MA_ADDITIONAL_INFORMATION_PAGE_DATA = "maadditionalinformation.json";
 
 	public static final String PDP_ADDITIONAL_INFORMATION_PAGE_DATA = "pdpadditionalinformation.json";
