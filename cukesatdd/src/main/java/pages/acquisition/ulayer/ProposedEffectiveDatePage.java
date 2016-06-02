@@ -71,11 +71,12 @@ public class ProposedEffectiveDatePage extends UhcDriver{
 		driver.findElement(By.xpath("//label[text() = '" + newDate + "']")).click();
 	}
 	
-	public void clickOnSaveAndContinue(){
+	public ReviewAndSubmitPage clickOnSaveAndContinue(String plantype){
 		if(segmentHeading.getText().contains("Proposed Effective Date")){
 			saveAndContinue.click();
-			
+			return new ReviewAndSubmitPage(driver,plantype);	
 		}
+		return null;
 	}
 
 	
