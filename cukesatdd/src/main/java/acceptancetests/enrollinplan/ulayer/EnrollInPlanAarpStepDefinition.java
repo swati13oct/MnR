@@ -1120,7 +1120,8 @@ public class EnrollInPlanAarpStepDefinition {
           String premium = introPage.introductionInformationJson.get("premium").toString();
           String plantype = personalAttributesMap.get("Plan Type");
             reviewandSubmitPage.editReviewAndSubmitIntroduction(reviewandSubmitPage,premium,plantype);
-                 
+            reviewandSubmitPage.selectauthRepresentative(personalAttributesMap);
+          reviewandSubmitPage.stmtofunderstanding(personalAttributesMap);
      reviewandSubmitPage.navigatesToNextStep();
      getLoginScenario().saveBean(PageConstants.REVIEW_APPLICATION_PAGE,reviewandSubmitPage);
      }catch(JSONException e){
