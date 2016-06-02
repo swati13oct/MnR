@@ -20,9 +20,7 @@ import atdd.framework.UhcDriver;
 /**
  * @author pperugu
  *c */
-public class PrescriptionDrugCoveragePage extends UhcDriver{
-	
-	
+public class PrescriptionDrugCoveragePage extends UhcDriver{	
 	
 	@FindBy(xpath = "//label[@for='drug-coverage-no']")
 	private WebElement pdcno;
@@ -56,7 +54,7 @@ public class PrescriptionDrugCoveragePage extends UhcDriver{
 			
 		super(driver);
 		PageFactory.initElements(driver, this);
-		String fileName = CommonConstants.PRESCRIPTION_DRUG_COVERAGE__PAGE_DATA;
+		String fileName = CommonConstants.PRESCRIPTION_DRUG_COVERAGE_PAGE_DATA;
 		prescriptiondrugcoverageInformation = CommonUtility.readPageData(fileName,
 				CommonConstants.PAGE_OBJECT_DIRECTORY_ULAYER_ACQ);
 		
