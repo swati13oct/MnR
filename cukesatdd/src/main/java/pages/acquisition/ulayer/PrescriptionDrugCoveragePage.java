@@ -84,10 +84,6 @@ public class PrescriptionDrugCoveragePage extends UhcDriver{
 
 		}
 		prescriptionDrugCoverageInformationJson = jsonObject;
-
-		
-	
-		
 	}
 
 	public void enterspdcInformation(
