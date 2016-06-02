@@ -89,7 +89,10 @@ And the user fill following information in optional Riders step in AARP site
 And the user navigates to proposed effective date page
 And the user selects proposed effective date
      |EffectiveDate     | <effectiveDate>   |
-
+| Plan Type | <planType> |
+And the user navigates to review and submit application step in AARP site
+And the user reviews the information on review and submit application step in AARP site
+| Plan Type | <planType> |
 Examples:
 #|zipcode |countyName          | planType  | planName                       |firstName|middleInitial|lastName| medicareClaimNumber|hospitalEffectiveDate |  medicalEffectiveDate  | emailAddress |mainPhoneNumber | otherPhoneNumber |birthDate 	  |selectedGender |languagePreference |address    |  city	  | apartment |sep1|sep2|sep4|sep5|sep6|sep7|sep8|sep9|sepOther| sepDate1 | sepDate2   | sepDate5   | sepDate6    |sepOtherReason|esrdradiooption |pdcradiooption |pdchealthinsurname|pdcgroupidnumber|pdcmemberidnumber|ltcradiooption |ltcname|ltcstreetaddr|ltcapt|ltccity|ltcphonenum|ltcdatemoved|medicaidradiooption|medicaidnum|othradiooption |othnameofhealthinsur|othgroupid|othmemberid|planpaymentoption|optradiooption|effectiveDate|
 #|zipcode |countyName          | planType  | planName                       |firstName|middleInitial|lastName| medicareClaimNumber|hospitalEffectiveDate |  medicalEffectiveDate  | emailAddress |mainPhoneNumber | otherPhoneNumber |birthDate         |selectedGender |languagePreference |address    |  city                 | apartment |esrdradiooption |pdcradiooption |pdchealthinsurname|pdcgroupidnumber|pdcmemberidnumber|ltcradiooption |ltcname|ltcstreetaddr|ltcapt|ltccity|ltcphonenum|ltcdatemoved|medicaidradiooption|medicaidnum|othradiooption |othnameofhealthinsur|othgroupid|othmemberid|planpaymentoption|optradiooption|
@@ -169,7 +172,10 @@ And the user fill following information in plan payment options step in AARP sit
 And the user navigates to proposed effective date page
 And the user selects proposed effective date
      |EffectiveDate     | <effectiveDate>   |
-  
+| Plan Type | <planType> |
+And the user navigates to review and submit application step in AARP site
+And the user reviews the information on review and submit application step in AARP site
+| Plan Type | <planType> |  
 Examples:
 |zipcode |countyName          | planType  | planName                       |firstName|middleInitial|lastName| medicareClaimNumber|hospitalEffectiveDate |  medicalEffectiveDate  | emailAddress |mainPhoneNumber | otherPhoneNumber |birthDate    |selectedGender |languagePreference |address |  city    | apartment |sep1|sep2|sep4|sep5|sep6|sep7|sep8|sep9|sepOther| sepDate1 | sepDate2    | sepDate5  | sepDate6    |sepOtherReason |esrdradiooption |pdcradiooption |pdchealthinsurname|pdcgroupidnumber|pdcmemberidnumber|ltcradiooption |ltcname|ltcstreetaddr|ltcapt|ltccity|ltcphonenum |ltcdatemoved|planpaymentoption|effectiveDate|
 |90210   |Los Angeles County  | PDP       |AARP MedicareRx Preferred (PDP) | First   |  m          |  last  | 111-11-1111-A      |07/01/1988            |      07/01/1988        | test@uhc.com | 999-991-1111   | 999-991-1111     | 12-20-1950  |Male           |Spanish            |1234    | Colorado | UHG       |No  |Yes |No  |No  |No  |No  |No  |No  |No      | 02/15/2016| 02/15/2016 |02/15/2016 | 02/15/2016  |Test           |No              |Yes            | abc              |abc             |123              |Yes            |first  |123          |1     |abc    |666-666-6666|12-20-1982   |  No            |07-01-2016   |
