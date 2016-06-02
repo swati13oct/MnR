@@ -32,6 +32,7 @@ import pages.acquisition.ulayer.PlanPaymentOptions;
 import pages.acquisition.ulayer.PrescriptionDrugCoveragePage;
 import pages.acquisition.ulayer.PrimaryCareProviderPage;
 import pages.acquisition.ulayer.ProposedEffectiveDatePage;
+import pages.acquisition.ulayer.ReviewAndSubmitPage;
 import pages.acquisition.ulayer.ReviewApplicationPage;
 import pages.acquisition.ulayer.SpecialElectionPeriodPage;
 import pages.acquisition.ulayer.SubmitApplicationPage;
@@ -1046,9 +1047,9 @@ public class EnrollInPlanAarpStepDefinition {
 				.getBean(PageConstants.PROPOSED_EFFECTIVE_DATE_PAGE);
 		
 		proposedEffectiveDatePage.selectTheDate(pedAttributesMap);
-		
-		proposedEffectiveDatePage.clickOnSaveAndContinue();
-		
+		 String plantype = pedAttributesMap.get("Plan Type");
+		proposedEffectiveDatePage.clickOnSaveAndContinue(plantype);
+		getLoginScenario().saveBean(PageConstants.PROPOSED_EFFECTIVE_DATE_PAGE,	proposedEffectiveDatePage);
 		try {
 			Thread.sleep(10000);
 		} catch (InterruptedException e) {
@@ -1056,11 +1057,79 @@ public class EnrollInPlanAarpStepDefinition {
 			e.printStackTrace();
 		}
 		
-		getLoginScenario().saveBean(PageConstants.PROPOSED_EFFECTIVE_DATE_PAGE,	proposedEffectiveDatePage);
 		
 		
+		ReviewAndSubmitPage revSubmitPage = proposedEffectiveDatePage.clickOnSaveAndContinue(plantype);
+		getLoginScenario().saveBean(PageConstants.REVIEW_APPLICATION_PAGE, revSubmitPage);
 		
 	}
+    @And("^the user navigates to review and submit application step in AARP site$")
+    public void user_navigates_review_and_submit_application_aarp() {
+          ReviewAndSubmitPage revSubmitPage = (ReviewAndSubmitPage) getLoginScenario()
+                        .getBean(PageConstants.REVIEW_APPLICATION_PAGE);
+          
+          if(revSubmitPage != null){
+                 /* Get actual data */
+                 JSONObject reviewSubmitActual = revSubmitPage.reviewApplicationJson;
+
+                 /* Get expected data */
+                 String planName = (String) getLoginScenario().getBean(EnrollInPlanCommonConstants.PLAN_NAME);
+
+                 String fileName = planName;
+                 String zipcode = (String) getLoginScenario().getBean(VPPCommonConstants.ZIPCODE);
+                 String county = (String) getLoginScenario().getBean(VPPCommonConstants.COUNTY);
+
+                 String directory = CommonConstants.ACQUISITION_EXPECTED_DIRECTORY
+                              + File.separator + CommonConstants.SITE_ULAYER
+                              + File.separator
+                              + VPPCommonConstants.ENROLL_IN_PLAN_FLOW_NAME
+                              + File.separator
+                              + EnrollInPlanCommonConstants.REVIEW_APPLICATION
+                              + File.separator + zipcode + File.separator + county
+                              + File.separator;
+                 JSONObject reviewSubmitExpected = MRScenario.readExpectedJson(fileName, directory);
+
+                 System.out.println("reviewSubmitExpected:::"+ reviewSubmitExpected);
+                 System.out.println("reviewSubmitActual:::"+ reviewSubmitActual);
+
+                 try {
+                        JSONAssert.assertEquals(reviewSubmitExpected,reviewSubmitActual, true);
+                 } catch (JSONException e) {
+                        // TODO Auto-generated catch block
+                        e.printStackTrace();
+                 }
+          } else {
+                 Assert.fail("ERROR loading PED Page");
+          }
+    
+    }
+    
+    @And("^the user reviews the information on review and submit application step in AARP site$")
+    public void user_reviews_the_information_review_and_submit_applcation_aarp(DataTable personalAttributes) {
+    IntroductionInformationPage introPage = (IntroductionInformationPage) getLoginScenario().getBean(PageConstants.INTRODUCTION_INFORMATION_PAGE);
+     ReviewAndSubmitPage reviewandSubmitPage = (ReviewAndSubmitPage) getLoginScenario().getBean(PageConstants.REVIEW_APPLICATION_PAGE);
+
+     List<DataTableRow> personalAttributesRow = personalAttributes.getGherkinRows();
+     Map<String, String> personalAttributesMap = new HashMap<String, String>();
+     for (int i = 0; i < personalAttributesRow.size(); i++) {
+            personalAttributesMap.put(personalAttributesRow.get(i).getCells()
+                         .get(0), personalAttributesRow.get(i).getCells().get(1));
+     }
+     
+     try {
+          String premium = introPage.introductionInformationJson.get("premium").toString();
+          String plantype = personalAttributesMap.get("Plan Type");
+            reviewandSubmitPage.editReviewAndSubmitIntroduction(reviewandSubmitPage,premium,plantype);
+                 
+     reviewandSubmitPage.navigatesToNextStep();
+     getLoginScenario().saveBean(PageConstants.REVIEW_APPLICATION_PAGE,reviewandSubmitPage);
+     }catch(JSONException e){
+          
+     }
+     
+    }
+
+
 
 	@And("^the user navigates to Additional Information step in AARP site$")
 	public void user_navigates_additional_information_aarp() {
