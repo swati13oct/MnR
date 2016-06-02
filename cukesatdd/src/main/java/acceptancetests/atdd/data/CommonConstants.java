@@ -664,7 +664,7 @@ public class CommonConstants {
 	
 	public static final String ESRD_PAGE_DATA = "esrd.json";
 
-	public static final String PRESCRIPTION_DRUG_COVERAGE__PAGE_DATA = "prescriptiondrugcoverage.json";
+	public static final String PRESCRIPTION_DRUG_COVERAGE_PAGE_DATA = "prescriptiondrugcoverage.json";
 
 	public static final String LONG_TERM_CARE_PAGE_DATA = "longtermcare.json";
 
