@@ -1,9 +1,9 @@
 {
-"step3headinginfo":"Step 3: Review & Submit Application ",
+"step3headinginfo":"Step 3: Review & Submit Application",
 "step3Text":"Before submitting your application, please review the information you entered to ensure that it is complete and accurate. If you need to make changes, click the \"Edit\" button within any section.",
 "medicareinsuranceinfo": "Medicare Insurance Information",
 "medicareclaimNo": "Medicare Claim Number",
-"medclaimnumval":"111-11-1111-A",
+"medclaimnumval":"122-11-1111-A",
 "partAlabel": "Hospital (Part A) Effective Date",
 "partAvalue": "07-01-1988",
 "partBlabel": "Medical (Part B) Effective Date",
