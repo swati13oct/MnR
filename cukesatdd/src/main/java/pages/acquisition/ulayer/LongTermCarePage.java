@@ -110,7 +110,7 @@ public class LongTermCarePage extends UhcDriver{
 		String ltcdatemoved = personalAttributesMap.get("ltcdatemoved");
 		if(ltcradiooption.equalsIgnoreCase("No")){
 				longtermcareno.click();
-		}else{
+		}else if(ltcradiooption.equalsIgnoreCase("Yes")){
 			longtermcaredyes.click();
 			sendkeys(longtermcarename,ltcname);
 			sendkeys(longtermcarestreet,ltcstreetaddr);

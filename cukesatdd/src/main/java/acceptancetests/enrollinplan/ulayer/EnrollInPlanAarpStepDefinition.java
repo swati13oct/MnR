@@ -32,6 +32,7 @@ import pages.acquisition.ulayer.PlanPaymentOptions;
 import pages.acquisition.ulayer.PrescriptionDrugCoveragePage;
 import pages.acquisition.ulayer.PrimaryCareProviderPage;
 import pages.acquisition.ulayer.ProposedEffectiveDatePage;
+import pages.acquisition.ulayer.ReviewAndSubmitPage;
 import pages.acquisition.ulayer.ReviewApplicationPage;
 import pages.acquisition.ulayer.SpecialElectionPeriodPage;
 import pages.acquisition.ulayer.SubmitApplicationPage;
@@ -388,9 +389,7 @@ public class EnrollInPlanAarpStepDefinition {
 		BeneficiaryInformationPage beneficiaryInformationPage = (BeneficiaryInformationPage) getLoginScenario()
 				.getBean(PageConstants.BENEFICIARY_INFORMATION_PAGE);
 		
-		SpecialElectionPeriodPage specialElectionPeriodPage = beneficiaryInformationPage.navigatesToStep2Part2();
-		
-		
+		SpecialElectionPeriodPage specialElectionPeriodPage = beneficiaryInformationPage.navigatesToStep2Part2();		
 		
 		getLoginScenario().saveBean(PageConstants.SPECIAL_ELECTION_PERIOD_PAGE,	specialElectionPeriodPage);	
 		
@@ -465,16 +464,11 @@ public class EnrollInPlanAarpStepDefinition {
 			PrescriptionDrugCoveragePage pdcPage = specialElectionPeriodPage.navigatesToNextStepPDP();
 			getLoginScenario().saveBean(PageConstants.PRESCRIPTION_DRUG_COVERAGE_PAGE,pdcPage);			
 			
-		}
-
-				
-		
-		
+		}		
 	}
 
 	@And("^the user select yes for Special Election Period$")
-	public void user_selects_yes_for_SEPQuestion(DataTable SEPAttributes){
-		
+	public void user_selects_yes_for_SEPQuestion(DataTable SEPAttributes){		
 		
 		List<DataTableRow> SEPAttributesRow = SEPAttributes
 				.getGherkinRows();
@@ -484,21 +478,26 @@ public class EnrollInPlanAarpStepDefinition {
 			SEPAttributesMap.put(SEPAttributesRow.get(i).getCells()
 					.get(0), SEPAttributesRow.get(i).getCells().get(1));
 		}
-
 		SpecialElectionPeriodPage specialElectionPeriodPage = (SpecialElectionPeriodPage) getLoginScenario()
 				.getBean(PageConstants.SPECIAL_ELECTION_PERIOD_PAGE);
 
-		/*if(SEPAttributesMap.get("yes").equalsIgnoreCase("yes"))
-			specialElectionPeriodPage.yesForSEPQuestion();
-		else if(SEPAttributesMap.get("no").equalsIgnoreCase("no"))
-		specialElectionPeriodPage.noForSEPQuestion();*/
-		
 		specialElectionPeriodPage.yesForSEPQuestion(SEPAttributesMap);
 		
+        getLoginScenario().saveBean(PageConstants.SPECIAL_ELECTION_PERIOD_PAGE,	specialElectionPeriodPage);	
 		
-		//specialElectionPeriodPage.clickOnPrevious();
+		String plantype = SEPAttributesMap.get("Plan Type");
+		if(plantype.equalsIgnoreCase("MA")||plantype.equalsIgnoreCase("MAPD")){
+			ESRDPage esrdpage= specialElectionPeriodPage.navigatesToNextStepMAorMAPD();
+			getLoginScenario().saveBean(PageConstants.ESRD_PAGE,esrdpage);
+			} else{
+			PrescriptionDrugCoveragePage pdcPage = specialElectionPeriodPage.navigatesToNextStepPDP();
+			getLoginScenario().saveBean(PageConstants.PRESCRIPTION_DRUG_COVERAGE_PAGE,pdcPage);			
+			
+		}
 
-		getLoginScenario().saveBean(PageConstants.SPECIAL_ELECTION_PERIOD_PAGE,	specialElectionPeriodPage);		
+		
+
+		
 	}
 	
 	@And("^the user navigates to esrd step in AARP site$")	
@@ -885,33 +884,46 @@ public class EnrollInPlanAarpStepDefinition {
     }
 
     @And("^the user fill following information in plan payment options step in AARP site$")
-    public void user_fill_information_plan_payment_options_aarp_step_aarp() {
-          IntroductionInformationPage introPage = (IntroductionInformationPage) getLoginScenario().getBean(PageConstants.INTRODUCTION_INFORMATION_PAGE);
+    public void user_fill_information_plan_payment_options_aarp_step_aarp(DataTable personalAttributes) {
 
-          String premium="";
-          try {
-                 premium = introPage.introductionInformationJson.get("premium").toString();
-                 if(!premium.equalsIgnoreCase("$0.00 a month")){
-                        
-                        PlanPaymentOptions ppoPage = (PlanPaymentOptions) getLoginScenario().getBean(PageConstants.PLAN_PAYMENT_OPTION_PAGE);
-                        ppoPage.clickplanproviderInformation();
-          
-                        getLoginScenario().saveBean(PageConstants.PLAN_PAYMENT_OPTION_PAGE,ppoPage);
-          
-                 }
-          }catch(JSONException e) {
-                 // TODO Auto-generated catch block
-                 e.printStackTrace();
-          }
+    List<DataTableRow> personalAttributesRow = personalAttributes.getGherkinRows();
+    Map<String, String> personalAttributesMap = new HashMap<String, String>();
+    for (int i = 0; i < personalAttributesRow.size(); i++) {
+    personalAttributesMap.put(personalAttributesRow.get(i).getCells()
+    .get(0), personalAttributesRow.get(i).getCells().get(1));
+    }
+    IntroductionInformationPage introPage = (IntroductionInformationPage) getLoginScenario().getBean(PageConstants.INTRODUCTION_INFORMATION_PAGE);
+    PlanPaymentOptions ppoPage = (PlanPaymentOptions) getLoginScenario().getBean(PageConstants.PLAN_PAYMENT_OPTION_PAGE);
+
+    String premium="";
+    try {
+    premium = introPage.introductionInformationJson.get("premium").toString();
+    if(!premium.equalsIgnoreCase("$0.00 a month")){
+
+    String plantype = personalAttributesMap.get("Plan Type");
+    ppoPage.clickplanproviderInformation(personalAttributesMap);
+    if(plantype.equalsIgnoreCase("MA")||plantype.equalsIgnoreCase("MAPD")){
+    OptionalRidersPage optriders=ppoPage.navigatesToNextStepMAPDorMA();
+
+    getLoginScenario().saveBean(PageConstants.OPTIONAL_RIDERS_PAGE,optriders);
+    }else{
+    ProposedEffectiveDatePage pedobj=ppoPage.navigatesToNextStepPDP();
+    getLoginScenario().saveBean(PageConstants.PROPOSED_EFFECTIVE_DATE_PAGE,pedobj);
 
     }
-    
+    }
+    }catch(JSONException e) {
+    // TODO Auto-generated catch block
+    e.printStackTrace();
+    }
+
+    }
     
     
     @And("^the user navigates to optional Riders step in AARP site$")
     public void the_user_navigates_to_optional_riders_aarp_information_step_aarp() {
           OptionalRidersPage optPage = (OptionalRidersPage) getLoginScenario().getBean(PageConstants.OPTIONAL_RIDERS_PAGE);
-;
+
 
           if (optPage != null) {
                  /* Get actual data */
@@ -965,6 +977,160 @@ public class EnrollInPlanAarpStepDefinition {
            getLoginScenario().saveBean(PageConstants.PROPOSED_EFFECTIVE_DATE_PAGE,pedPage);
 
     }
+    
+    @And("^the user navigates to proposed effective date page$")
+	public void user_navigates_to_proposed_effective_date_page(){
+		
+    	/*OptionalRidersPage optPage = (OptionalRidersPage) getLoginScenario().getBean(PageConstants.OPTIONAL_RIDERS_PAGE);
+		
+		ProposedEffectiveDatePage pedPage = optPage.navigatesToNextStep();*/
+		
+    	ProposedEffectiveDatePage pedPage = (ProposedEffectiveDatePage) getLoginScenario().getBean(PageConstants.PROPOSED_EFFECTIVE_DATE_PAGE);
+		
+		if(pedPage != null){
+			/* Get actual data */
+			JSONObject pedActual = pedPage.pedJson;
+
+			/* Get expected data */
+			String planName = (String) getLoginScenario().getBean(
+					EnrollInPlanCommonConstants.PLAN_NAME);
+
+			String fileName = planName;
+			String zipcode = (String) getLoginScenario().getBean(
+					VPPCommonConstants.ZIPCODE);
+			String county = (String) getLoginScenario().getBean(
+					VPPCommonConstants.COUNTY);
+
+			String directory = CommonConstants.ACQUISITION_EXPECTED_DIRECTORY
+					+ File.separator + CommonConstants.SITE_ULAYER
+					+ File.separator
+					+ VPPCommonConstants.ENROLL_IN_PLAN_FLOW_NAME
+					+ File.separator
+					+ EnrollInPlanCommonConstants.PED
+					+ File.separator + zipcode + File.separator + county
+					+ File.separator;
+			JSONObject pedExpected = MRScenario.readExpectedJson(fileName, directory);
+
+			System.out.println("PEDExpected:::"
+					+ pedExpected);
+			System.out.println("PEDActual:::"
+					+ pedActual);
+
+			try {
+				JSONAssert.assertEquals(pedExpected,
+						pedActual, true);
+			} catch (JSONException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		} else {
+			Assert.fail("ERROR loading PED Page");
+		}
+		
+		
+		
+	}
+
+	@And("^the user selects proposed effective date$")
+	public void user_selects_proposed_effective_date(DataTable pedAttributes){
+		
+		List<DataTableRow> pedAttributesRow = pedAttributes
+				.getGherkinRows();
+		Map<String, String> pedAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < pedAttributesRow.size(); i++) {
+
+			pedAttributesMap.put(pedAttributesRow.get(i).getCells()
+					.get(0), pedAttributesRow.get(i).getCells().get(1));
+		}
+
+		ProposedEffectiveDatePage proposedEffectiveDatePage = (ProposedEffectiveDatePage) getLoginScenario()
+				.getBean(PageConstants.PROPOSED_EFFECTIVE_DATE_PAGE);
+		
+		proposedEffectiveDatePage.selectTheDate(pedAttributesMap);
+		 String plantype = pedAttributesMap.get("Plan Type");
+		proposedEffectiveDatePage.clickOnSaveAndContinue(plantype);
+		getLoginScenario().saveBean(PageConstants.PROPOSED_EFFECTIVE_DATE_PAGE,	proposedEffectiveDatePage);
+		try {
+			Thread.sleep(10000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
+		
+		ReviewAndSubmitPage revSubmitPage = proposedEffectiveDatePage.clickOnSaveAndContinue(plantype);
+		getLoginScenario().saveBean(PageConstants.REVIEW_APPLICATION_PAGE, revSubmitPage);
+		
+	}
+    @And("^the user navigates to review and submit application step in AARP site$")
+    public void user_navigates_review_and_submit_application_aarp() {
+          ReviewAndSubmitPage revSubmitPage = (ReviewAndSubmitPage) getLoginScenario()
+                        .getBean(PageConstants.REVIEW_APPLICATION_PAGE);
+          
+          if(revSubmitPage != null){
+                 /* Get actual data */
+                 JSONObject reviewSubmitActual = revSubmitPage.reviewApplicationJson;
+
+                 /* Get expected data */
+                 String planName = (String) getLoginScenario().getBean(EnrollInPlanCommonConstants.PLAN_NAME);
+
+                 String fileName = planName;
+                 String zipcode = (String) getLoginScenario().getBean(VPPCommonConstants.ZIPCODE);
+                 String county = (String) getLoginScenario().getBean(VPPCommonConstants.COUNTY);
+
+                 String directory = CommonConstants.ACQUISITION_EXPECTED_DIRECTORY
+                              + File.separator + CommonConstants.SITE_ULAYER
+                              + File.separator
+                              + VPPCommonConstants.ENROLL_IN_PLAN_FLOW_NAME
+                              + File.separator
+                              + EnrollInPlanCommonConstants.REVIEW_APPLICATION
+                              + File.separator + zipcode + File.separator + county
+                              + File.separator;
+                 JSONObject reviewSubmitExpected = MRScenario.readExpectedJson(fileName, directory);
+
+                 System.out.println("reviewSubmitExpected:::"+ reviewSubmitExpected);
+                 System.out.println("reviewSubmitActual:::"+ reviewSubmitActual);
+
+                 try {
+                        JSONAssert.assertEquals(reviewSubmitExpected,reviewSubmitActual, true);
+                 } catch (JSONException e) {
+                        // TODO Auto-generated catch block
+                        e.printStackTrace();
+                 }
+          } else {
+                 Assert.fail("ERROR loading PED Page");
+          }
+    
+    }
+    
+    @And("^the user reviews the information on review and submit application step in AARP site$")
+    public void user_reviews_the_information_review_and_submit_applcation_aarp(DataTable personalAttributes) {
+    IntroductionInformationPage introPage = (IntroductionInformationPage) getLoginScenario().getBean(PageConstants.INTRODUCTION_INFORMATION_PAGE);
+     ReviewAndSubmitPage reviewandSubmitPage = (ReviewAndSubmitPage) getLoginScenario().getBean(PageConstants.REVIEW_APPLICATION_PAGE);
+
+     List<DataTableRow> personalAttributesRow = personalAttributes.getGherkinRows();
+     Map<String, String> personalAttributesMap = new HashMap<String, String>();
+     for (int i = 0; i < personalAttributesRow.size(); i++) {
+            personalAttributesMap.put(personalAttributesRow.get(i).getCells()
+                         .get(0), personalAttributesRow.get(i).getCells().get(1));
+     }
+     
+     try {
+          String premium = introPage.introductionInformationJson.get("premium").toString();
+          String plantype = personalAttributesMap.get("Plan Type");
+            reviewandSubmitPage.editReviewAndSubmitIntroduction(reviewandSubmitPage,premium,plantype);
+            reviewandSubmitPage.selectauthRepresentative(personalAttributesMap);
+          reviewandSubmitPage.stmtofunderstanding(personalAttributesMap);
+     reviewandSubmitPage.navigatesToNextStep();
+     getLoginScenario().saveBean(PageConstants.REVIEW_APPLICATION_PAGE,reviewandSubmitPage);
+     }catch(JSONException e){
+          
+     }
+     
+    }
+
+
 
 	@And("^the user navigates to Additional Information step in AARP site$")
 	public void user_navigates_additional_information_aarp() {

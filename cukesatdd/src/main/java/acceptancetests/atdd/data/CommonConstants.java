@@ -668,7 +668,7 @@ public class CommonConstants {
 	
 	public static final String ESRD_PAGE_DATA = "esrd.json";
 
-	public static final String PRESCRIPTION_DRUG_COVERAGE__PAGE_DATA = "prescriptiondrugcoverage.json";
+	public static final String PRESCRIPTION_DRUG_COVERAGE_PAGE_DATA = "prescriptiondrugcoverage.json";
 
 	public static final String LONG_TERM_CARE_PAGE_DATA = "longtermcare.json";
 
@@ -681,6 +681,12 @@ public class CommonConstants {
 	public static final String PLAN_PAYMENT_OPTION_PAGE_DATA = "planpaymentoption.json";
 
 	public static final String OPTIONAL_RIDERS_PAGE_DATA = "optionalriders.json";
+	
+	public static final String PED_PAGE_DATA = "proposedEffectiveDate.json";
+	
+	public static final String MA_REVIEW_AND_SUMMIT_PAGE_DATA = "mareviewandsubmit.json";
+
+	public static final String PDP_REVIEW_AND_SUMMIT_PAGE_DATA = "pdpreviewandsubmit.json";
 	
 	public static final String MA_ADDITIONAL_INFORMATION_PAGE_DATA = "maadditionalinformation.json";
 

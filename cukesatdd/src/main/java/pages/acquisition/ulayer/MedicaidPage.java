@@ -89,7 +89,7 @@ public class MedicaidPage extends UhcDriver{
 		String medicaidnumber = personalAttributesMap.get("medicaidnum");
 		if(medicaidradiooption.equalsIgnoreCase("No")){
 				medicaiddno.click();
-		}else{
+		}else if(medicaidradiooption.equalsIgnoreCase("Yes")){
 			medicaiddyes.click();
 			sendkeys(medicaidnum,medicaidnumber);
 		}				

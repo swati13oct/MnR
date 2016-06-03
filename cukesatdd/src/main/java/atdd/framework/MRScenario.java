@@ -859,7 +859,7 @@ public class MRScenario {
 		  FirefoxDriver(ffBinary,firefoxProfile);
 		  webDriver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
 
-		  return webDriver; */
+		  return webDriver; 
 		 
 
 	}
@@ -873,7 +873,7 @@ public class MRScenario {
         webDriver.manage().window().maximize();
         return webDriver;
 
-		 return webDriver;
+		
 		 
 
 
