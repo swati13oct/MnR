@@ -27,10 +27,6 @@ public class ReviewAndSubmitPage extends UhcDriver{
 	@FindBy(id = "editIntro")
 	private WebElement 	editIntroBtn;
 	
-	@FindBy(xpath = "//*[@id='enrollment-step-1-part-10']/div[1]/div/div[1]")
-	private WebElement segmentHeading;
-	
-	
 	@FindBy(xpath = "//label[@for='authorized-0']")
 	private WebElement authRepresentOptionAgreeBtn;
 	
