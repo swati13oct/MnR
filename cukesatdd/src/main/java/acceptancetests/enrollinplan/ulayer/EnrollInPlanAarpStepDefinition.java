@@ -1048,7 +1048,7 @@ public class EnrollInPlanAarpStepDefinition {
 		
 		proposedEffectiveDatePage.selectTheDate(pedAttributesMap);
 		 String plantype = pedAttributesMap.get("Plan Type");
-		proposedEffectiveDatePage.clickOnSaveAndContinue(plantype);
+		 ReviewAndSubmitPage revSubmitPage = proposedEffectiveDatePage.clickOnSaveAndContinue(plantype);
 		getLoginScenario().saveBean(PageConstants.PROPOSED_EFFECTIVE_DATE_PAGE,	proposedEffectiveDatePage);
 		try {
 			Thread.sleep(10000);
@@ -1059,7 +1059,7 @@ public class EnrollInPlanAarpStepDefinition {
 		
 		
 		
-		ReviewAndSubmitPage revSubmitPage = proposedEffectiveDatePage.clickOnSaveAndContinue(plantype);
+		
 		getLoginScenario().saveBean(PageConstants.REVIEW_APPLICATION_PAGE, revSubmitPage);
 		
 	}
@@ -1119,7 +1119,7 @@ public class EnrollInPlanAarpStepDefinition {
      try {
           String premium = introPage.introductionInformationJson.get("premium").toString();
           String plantype = personalAttributesMap.get("Plan Type");
-            reviewandSubmitPage.editReviewAndSubmitIntroduction(reviewandSubmitPage,premium,plantype);
+          // reviewandSubmitPage.editReviewAndSubmitIntroduction(reviewandSubmitPage,premium,plantype);
             reviewandSubmitPage.selectauthRepresentative(personalAttributesMap);
           reviewandSubmitPage.stmtofunderstanding(personalAttributesMap);
      reviewandSubmitPage.navigatesToNextStep();

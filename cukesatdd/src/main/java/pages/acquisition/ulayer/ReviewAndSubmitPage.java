@@ -197,6 +197,14 @@ public class ReviewAndSubmitPage extends UhcDriver{
 	}	
 
 	public void navigatesToNextStep(){
+		
+		reviewandsubmitapplication.click();
+		try {
+			  Thread.sleep(5000);
+			} catch (InterruptedException ie) {
+			    //Handle exception
+			}
+		
 	
 	}
 	

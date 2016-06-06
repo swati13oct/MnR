@@ -3,7 +3,7 @@
 "expectedData":{
 "step3headinginfo":{
 "identifier":"id",
-"elementNamt":"step3Heading"
+"elementName":"step3Heading"
 },
 "step3Text":{
 "identifier":"id",

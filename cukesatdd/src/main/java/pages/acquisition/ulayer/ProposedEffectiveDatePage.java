@@ -17,7 +17,7 @@ import atdd.framework.UhcDriver;
 
 public class ProposedEffectiveDatePage extends UhcDriver{
 	
-	@FindBy(xpath = "//*[@id='enrollment-step-1-part-10']/div[2]/a[1]")
+	@FindBy(id = "proposedsavncnt")
 	private WebElement saveAndContinue;
 	
 	@FindBy(xpath = "//*[@id='enrollment-step-1-part-10']/div[1]/div/div[1]")
@@ -72,11 +72,17 @@ public class ProposedEffectiveDatePage extends UhcDriver{
 	}
 	
 	public ReviewAndSubmitPage clickOnSaveAndContinue(String plantype){
-		if(segmentHeading.getText().contains("Proposed Effective Date")){
+		//if(segmentHeading.getText().contains("Proposed Effective Date")){
 			saveAndContinue.click();
+			try {
+				  Thread.sleep(10000);
+				} catch (InterruptedException ie) {
+				    //Handle exception
+				}
+			
 			return new ReviewAndSubmitPage(driver,plantype);	
-		}
-		return null;
+		//}
+		//return null;
 	}
 
 	
