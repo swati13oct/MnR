@@ -37,6 +37,7 @@ import pages.acquisition.ulayer.ReviewApplicationPage;
 import pages.acquisition.ulayer.SpecialElectionPeriodPage;
 import pages.acquisition.ulayer.SubmitApplicationPage;
 import pages.acquisition.ulayer.VPPPlanSummaryPage;
+import pages.acquisition.ulayer.ConfirmationPage;
 import acceptancetests.atdd.data.CommonConstants;
 import acceptancetests.atdd.data.acquisition.PageConstants;
 import acceptancetests.atdd.util.CommonUtility;
@@ -1129,6 +1130,65 @@ public class EnrollInPlanAarpStepDefinition {
      }
      
     }
+	
+	@Then("^the user navigates to Confirmation Page$")
+	public void user_navigates_to_Confirmation_Page(){
+
+		ConfirmationPage confirmationPage = (ConfirmationPage) getLoginScenario().getBean(PageConstants.CONFIRMATION_PAGE);
+
+		if(confirmationPage != null){
+			/* Get actual data */
+			JSONObject confirmationActual = confirmationPage.confirmationJson;
+
+			/* Get expected data */
+			String planName = (String) getLoginScenario().getBean(
+					EnrollInPlanCommonConstants.PLAN_NAME);
+
+			String fileName = planName;
+			String zipcode = (String) getLoginScenario().getBean(
+					VPPCommonConstants.ZIPCODE);
+			String county = (String) getLoginScenario().getBean(
+					VPPCommonConstants.COUNTY);
+
+			String directory = CommonConstants.ACQUISITION_EXPECTED_DIRECTORY
+					+ File.separator + CommonConstants.SITE_ULAYER
+					+ File.separator
+					+ VPPCommonConstants.ENROLL_IN_PLAN_FLOW_NAME
+					+ File.separator
+					+ EnrollInPlanCommonConstants.CONFIRMATION
+					+ File.separator + zipcode + File.separator + county
+					+ File.separator;
+			JSONObject confirmationExpected = MRScenario.readExpectedJson(fileName, directory);
+
+			System.out.println("ConfirmationExpected:::"
+					+ confirmationExpected);
+			System.out.println("ConfirmationActual:::"
+					+ confirmationActual);
+
+			try {
+				JSONAssert.assertEquals(confirmationExpected,
+						confirmationActual, true);
+			} catch (JSONException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		} else {
+			Assert.fail("ERROR loading Confirmation Page");
+		}		
+	}
+
+	@And("^the user clicks on print this page button$")
+	public void user_clicks_on_print_this_page_button(){
+
+		ConfirmationPage confirmationPage = (ConfirmationPage) getLoginScenario()
+				.getBean(PageConstants.CONFIRMATION_PAGE);
+
+		confirmationPage.clickOnPrintThisPage();
+
+		getLoginScenario().saveBean(PageConstants.CONFIRMATION_PAGE,confirmationPage);
+
+
+	}
 
 
 
