@@ -45,7 +45,8 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	@FindBy(xpath = "//div[@class='disabledprint ng-scope']")
 	List<WebElement> pdpPlanElement;
 	
-	@FindBy(xpath = "//div[@id='chooseplan']/div/div/h3")
+	//@FindBy(xpath = "//div[@id='chooseplan']/div/div/h3")
+	@FindBy(id = "medicalinsursectionheading")
 	private WebElement pageHeading;
 
 	@FindBy(id = "editDrugMA")
@@ -270,7 +271,43 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	}
 
 
-	public EnrollPlanInfoPage clicksOnEnrollInplanLink(String planName) {
+	public IntroductionInformationPage clicksOnEnrollInplanLink(String planName) { //return type is EnrollPlanInfoPage
+		if (planName.contains("HMO")) {
+			for (WebElement plan : maPlanElement) {
+				if (plan.getText().contains(planName)) {
+					ElementData elementData = new ElementData("id", "enrollMA");
+					findChildElement(elementData, plan).click();
+					
+				}
+				break;
+			}
+		}
+		if (planName.contains("PDP")) {
+			for (WebElement plan : pdpPlanElement) {
+				if (plan.getText().contains(planName)) {
+					ElementData elementData = new ElementData("id", "enrollPDP"); // TODO:
+																					// Re-check
+					findChildElement(elementData, plan).click();
+					
+				}
+				break;
+			}
+		}
+		/*if (pageHeading.getText().equalsIgnoreCase(
+				"You Have Chosen to Enroll in the Following Plan")) {
+			return new EnrollPlanInfoPage(driver);
+		}*/
+		
+		if(pageHeading.getText().equalsIgnoreCase("Medicare Insurance Information")){
+			return new IntroductionInformationPage(driver);
+		}
+			
+		
+		return null;
+	}	
+	
+	public PlanInformationPage navigatetoEnrollInplanLink(String planName)
+	{
 		if (planName.contains("HMO")) {
 			for (WebElement plan : maPlanElement) {
 				if (plan.getText().contains(planName)) {
@@ -288,12 +325,39 @@ public class VPPPlanSummaryPage extends UhcDriver {
 				}
 			}
 		}
-		if (pageHeading.getText().equalsIgnoreCase(
-				"You Have Chosen to Enroll in the Following Plan")) {
-			return new EnrollPlanInfoPage(driver);
+		if (driver.getTitle().equalsIgnoreCase(
+				"AARP Medicare Complete Online Application") || driver.getTitle().equalsIgnoreCase("AARP Medicarerx Online Application")) {
+			return new PlanInformationPage(driver,planName);
 		}
+		
 		return null;
-	}	
+	}
+	public IntroductionInformationPage navigatetoEnrollInplanLinkpage(String planName)
+	{
+		if (planName.contains("HMO")) {
+			for (WebElement plan : maPlanElement) {
+				if (plan.getText().contains(planName)) {
+					ElementData elementData = new ElementData("id", "enrollMA");
+					findChildElement(elementData, plan).click();
+				}
+			}
+		}
+		if (planName.contains("PDP")) {
+			for (WebElement plan : pdpPlanElement) {
+				if (plan.getText().contains(planName)) {
+					ElementData elementData = new ElementData("id", "enrollPDP"); // TODO:
+																					// Re-check
+					findChildElement(elementData, plan).click();
+				}
+			}
+		}
+		if (driver.getTitle().equalsIgnoreCase(
+				"AARP Medicare Complete Online Application") || driver.getTitle().equalsIgnoreCase("AARP Medicarerx Online Application")) {
+			return new IntroductionInformationPage(driver);
+		}
+		
+		return null;
+	}
 
 	
 	public GetStartedPage navigateToSummaryPage(String planType) {

@@ -71,11 +71,11 @@ public class EnrollPlanInfoPage extends UhcDriver{
 		
 	}
 
-	public PlanInformationPage continuesEnrollment(String planName) {
+	public IntroductionInformationPage continuesEnrollment(String planName) {
 		
 		continueEnrollmentButton.click();
-		if(driver.getTitle().equalsIgnoreCase("Medicare Advantage Plan Enrollment Information | AARP® Medicare Plans from UnitedHealthcare®") || driver.getTitle().equalsIgnoreCase("Medicare Prescription Drug Plan Enrollment | AARP® Medicare Plans from UnitedHealthcare®")){
-			return new PlanInformationPage(driver,planName);
+		if(getTitle().equalsIgnoreCase("AARP Medicare Complete Online Application") || getTitle().equalsIgnoreCase("AARP Medicarerx Online Application")){
+			return new IntroductionInformationPage(driver);
 		}
 		return null;
 		

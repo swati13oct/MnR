@@ -8,7 +8,6 @@ import java.io.IOException;
 import java.util.Calendar;
 import java.util.Iterator;
 import java.util.TimeZone;
-
 import org.codehaus.jackson.JsonParseException;
 import org.codehaus.jackson.map.JsonMappingException;
 import org.codehaus.jackson.map.ObjectMapper;
@@ -20,7 +19,6 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-
 import acceptancetests.atdd.data.MRConstants;
 import acceptancetests.atdd.data.PageData;
 import atdd.framework.MRScenario;
@@ -39,8 +37,7 @@ public class CommonUtility {
 
 		JavascriptExecutor js = (JavascriptExecutor) driver;
 
-		if (js.executeScript("return document.readyState").toString()
-				.equals("complete")) {
+		if (js.executeScript("return document.readyState").toString().equals("complete")) {
 			System.out.println("Page Is loaded.");
 			return true;
 		} else {
@@ -49,38 +46,27 @@ public class CommonUtility {
 		return false;
 	}
 
-	public static WebElement getWebElementByXpathNoTimeout(String xpath,
-			WebDriver driver) {
+	public static WebElement getWebElementByXpathNoTimeout(String xpath, WebDriver driver) {
 		return driver.findElement(By.xpath(xpath));
 	}
 
-	public static PageData readPageData(String fileName,
-			String pageObjectDirectoryMember) {
+	public static PageData readPageData(String fileName, String pageObjectDirectoryMember) {
 		File headerFile = null;
 		try {
-			headerFile = ExpectedDataUtility.getExpectedResponse(fileName,
-					pageObjectDirectoryMember);
+			headerFile = ExpectedDataUtility.getExpectedResponse(fileName, pageObjectDirectoryMember);
 		} catch (IOException e) {
-			System.out.println("Error reading  " + pageObjectDirectoryMember
-					+ fileName + "  Exception: " + e);
+			System.out.println("Error reading  " + pageObjectDirectoryMember + fileName + "  Exception: " + e);
 		}
 		PageData pageData = new PageData();
 		ObjectMapper mapper = new ObjectMapper();
 		try {
-			pageData = mapper.readValue(new File(headerFile.getPath()),
-					PageData.class);
+			pageData = mapper.readValue(new File(headerFile.getPath()), PageData.class);
 		} catch (JsonParseException e) {
-			System.out.println("Error parsing the json  "
-					+ pageObjectDirectoryMember + fileName + "  Exception: "
-					+ e);
+			System.out.println("Error parsing the json  " + pageObjectDirectoryMember + fileName + "  Exception: " + e);
 		} catch (JsonMappingException e) {
-			System.out.println("Error mapping the json  "
-					+ pageObjectDirectoryMember + fileName + "  Exception: "
-					+ e);
+			System.out.println("Error mapping the json  " + pageObjectDirectoryMember + fileName + "  Exception: " + e);
 		} catch (IOException e) {
-			System.out.println("Exception occurred for  "
-					+ pageObjectDirectoryMember + fileName + "  Exception: "
-					+ e);
+			System.out.println("Exception occurred for  " + pageObjectDirectoryMember + fileName + "  Exception: " + e);
 		}
 		return pageData;
 	}
@@ -101,15 +87,12 @@ public class CommonUtility {
 		return toJson;
 	}
 
-	public static void waitForPageLoad(WebDriver driver, WebElement element,
-			long timeout) {
+	public static void waitForPageLoad(WebDriver driver, WebElement element, long timeout) {
 
 		WebDriverWait wait = new WebDriverWait(driver, timeout);
 		try {
-			WebElement elementExpected = wait.until(ExpectedConditions
-					.visibilityOf(element));
-			if ((elementExpected.getText().isEmpty() || elementExpected
-					.getText() == null)) {
+			WebElement elementExpected = wait.until(ExpectedConditions.visibilityOf(element));
+			if ((elementExpected.getText().isEmpty() || elementExpected.getText() == null)) {
 				timeout = timeout - 5;
 				if (timeout > 0) {
 					waitForPageLoad(driver, element, timeout);
@@ -121,20 +104,17 @@ public class CommonUtility {
 			if (timeout > 0) {
 				waitForPageLoad(driver, element, timeout);
 			} else {
-				System.out.println("Not able to locate this " + element
-						+ " on page");
+				System.out.println("Not able to locate this " + element + " on page");
 				return;
 			}
 		}
 
 	}
 
-	public static void waitForElementToDisappear(WebDriver driver,
-			WebElement element, long timeout) {
+	public static void waitForElementToDisappear(WebDriver driver, WebElement element, long timeout) {
 		WebDriverWait wait = new WebDriverWait(driver, timeout);
 
-		Boolean elementExpected = wait.until(ExpectedConditions
-				.not(ExpectedConditions.visibilityOf(element)));
+		Boolean elementExpected = wait.until(ExpectedConditions.not(ExpectedConditions.visibilityOf(element)));
 		if (!elementExpected) {
 			timeout = timeout - 5;
 			if (timeout > 0) {
@@ -143,20 +123,17 @@ public class CommonUtility {
 		}
 	}
 
-	public static JSONObject concatenateJsons(
-			JSONObject firstPlanInformationExpected,
+	public static JSONObject concatenateJsons(JSONObject firstPlanInformationExpected,
 			JSONObject secondPlanInformationExpected) {
 		Iterator<?> itr = secondPlanInformationExpected.keys();
 		while (itr.hasNext()) {
 			String key = (String) itr.next();
 
 			try {
-				int lengthOfArray = secondPlanInformationExpected.getJSONArray(
-						key).length();
+				int lengthOfArray = secondPlanInformationExpected.getJSONArray(key).length();
 				for (int i = 0; i < lengthOfArray; i++) {
-					firstPlanInformationExpected = firstPlanInformationExpected
-							.append(key, secondPlanInformationExpected
-									.getJSONArray(key).get(i));
+					firstPlanInformationExpected = firstPlanInformationExpected.append(key,
+							secondPlanInformationExpected.getJSONArray(key).get(i));
 				}
 			} catch (JSONException e) {
 				// TODO Auto-generated catch block
@@ -189,8 +166,8 @@ public class CommonUtility {
 		// Calculate milliseconds for call to MRRestWAR
 		long millis = calendar.getTimeInMillis();
 
-		String dateURL = "joda?millis=" + millis + "&month=" + month + "&day="
-				+ day + "&year=" + year + "&hour=00&min=00&sec=00&server=1";
+		String dateURL = "joda?millis=" + millis + "&month=" + month + "&day=" + day + "&year=" + year
+				+ "&hour=00&min=00&sec=00&server=1";
 
 		String completeDateUrl = MRREST_TIME_ADMIN_URL + dateURL;
 
@@ -221,8 +198,8 @@ public class CommonUtility {
 		// Calculate milliseconds for call to PARTD
 		long millis = calendar.getTimeInMillis();
 
-		String dateURL = "joda?millis=" + millis + "&month=" + month + "&day="
-				+ day + "&year=" + year + "&hour=00&min=00&sec=00&server=1";
+		String dateURL = "joda?millis=" + millis + "&month=" + month + "&day=" + day + "&year=" + year
+				+ "&hour=00&min=00&sec=00&server=1";
 
 		String completeDateUrl = PARTD_TIME_ADMIN_URL + dateURL;
 
@@ -248,4 +225,46 @@ public class CommonUtility {
 
 	}
 
+	public static JSONObject checkForVariable(WebDriver driver) {
+
+		JavascriptExecutor js = (JavascriptExecutor) driver;
+		String pageName = js.executeScript("return " + "DTMData.content.pageName").toString();
+		String error = js.executeScript("return " + "DTMData.content.error").toString();
+
+		JSONObject dtmObject = new JSONObject();
+		try {
+			dtmObject.put("pageName", pageName);
+			dtmObject.put("error", error);
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		return dtmObject;
+
+	}
+
+	public static JSONObject checkForVariable(WebDriver driver, String filePath, String dtmDir) {
+		 //Read the file containing dtm script variables
+		JSONObject getTags = MRScenario.readExpectedJson(filePath, dtmDir);
+		JavascriptExecutor js = (JavascriptExecutor) driver;
+		JSONObject dtmObject = new JSONObject();
+
+		// iterate over json
+		Iterator<?> keys = getTags.keys();
+		while (keys.hasNext()) {
+			String key = (String) keys.next();
+			String value;
+			try {
+				value = (String) getTags.get(key);
+				String val = js.executeScript("return " + value).toString();
+				dtmObject.put(key, val);
+			} catch (JSONException e) {
+               System.out.println("Something wrong with the JSON key "+ key);
+				e.printStackTrace();
+			}
+		}
+
+		return dtmObject;
+	}
 }

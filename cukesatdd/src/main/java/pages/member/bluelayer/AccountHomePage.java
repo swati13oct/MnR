@@ -13,6 +13,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
 import pages.member.bluelayer.OrderplanmaterialsPage;
+import pages.member.bluelayer.ContactUsPage;
 import acceptancetests.atdd.data.CommonConstants;
 import acceptancetests.atdd.data.PageData;
 import acceptancetests.atdd.util.CommonUtility;
@@ -38,7 +39,10 @@ public class AccountHomePage extends UhcDriver {
 
 	@FindBy(linkText = "estimate costs")
 	private WebElement estimateCostLink;
-
+	
+	@FindBy(linkText = "Contact Us")
+	private WebElement contactUsLink;
+	
 	@FindBy(linkText = "Plan Benefits")
 	private WebElement benefitsLink;
 
@@ -84,6 +88,9 @@ public class AccountHomePage extends UhcDriver {
 	@FindBy(xpath = "//div[@id='medicareTitle']/h1")
 	private WebElement pharmacyLocatorHeading;
 
+	
+	
+	
 	private PageData myAccountHome;
 
 	public JSONObject accountHomeJson;
@@ -121,9 +128,7 @@ public class AccountHomePage extends UhcDriver {
 	public BenefitsCoveragePage navigateToBnC() {
 
 		benefitsLink.click();
-		if (this.driver
-				.getTitle()
-				.equalsIgnoreCase(
+		if (getTitle().equalsIgnoreCase(
 						"UnitedHealthcare Medicare Solutions | Plan Benefits and Coverage")) {
 			return new BenefitsCoveragePage(driver);
 		}
@@ -134,10 +139,10 @@ public class AccountHomePage extends UhcDriver {
 	public ManageDrugPage navigateToEstimateCost(String category) {
 
 		estimateCostLink.click();
-		if (driver.getTitle().equalsIgnoreCase("Drug Cost Estimator") && category.equalsIgnoreCase(CommonConstants.GROUP)) {
+		if (getTitle().equalsIgnoreCase("Drug Cost Estimator") && category.equalsIgnoreCase(CommonConstants.GROUP)) {
 			return new ManageDrugPage(driver,category);
 		}
-		else if((driver.getTitle().equalsIgnoreCase("Drug Cost Estimator"))){
+		else if((getTitle().equalsIgnoreCase("Drug Cost Estimator"))){
 			return new ManageDrugPage(driver);
 		}
 
@@ -147,9 +152,7 @@ public class AccountHomePage extends UhcDriver {
 	public PhrPage navigateToPhr() {
 
 		phrTab.click();
-		if (this.driver
-				.getTitle()
-				.equalsIgnoreCase(
+		if (getTitle().equalsIgnoreCase(
 						"UnitedHealthcare Medicare Solutions | My Personal Health Record")) {
 			return new PhrPage(driver);
 		}
@@ -162,9 +165,8 @@ public class AccountHomePage extends UhcDriver {
 
 		paymentsLink.click();
 
-		CommonUtility.checkPageIsReady(driver); // Wait Function
 
-		if (driver.getTitle().equalsIgnoreCase("Premium Payment History"))
+		if (getTitle().equalsIgnoreCase("Premium Payment History"))
 			return new PaymentHistoryPage(driver);
 
 		else
@@ -175,8 +177,7 @@ public class AccountHomePage extends UhcDriver {
 
 		formsAndResourcesLink.click();
 
-		CommonUtility.checkPageIsReady(driver);
-		if (this.driver.getTitle().equalsIgnoreCase(
+		if (getTitle().equalsIgnoreCase(
 				"UnitedHealthcare Medicare Solutions | Forms and Resources")) {
 			return new FormsandresourcesPage(driver);
 		} else
@@ -190,7 +191,7 @@ public class AccountHomePage extends UhcDriver {
 		myPlansTab.click();
 
 		CommonUtility.checkPageIsReady(driver);
-		if (this.driver.getTitle().equalsIgnoreCase(
+		if (getTitle().equalsIgnoreCase(
 				"UnitedHealthcare Medicare Solutions | Plan Summary")) {
 			return new PlanSummaryPage(driver);
 		}
@@ -202,7 +203,7 @@ public class AccountHomePage extends UhcDriver {
 
 		pharmacyLocator.click();
 		CommonUtility.waitForPageLoad(driver, pharmacyLocatorHeading, CommonConstants.TIMEOUT_30);
-		if (this.driver.getTitle().equalsIgnoreCase(
+		if (getTitle().equalsIgnoreCase(
 				"UnitedHealthcare Medicare Solutions | Pharmacy Directory")) {
 			return new PharmacySearchPage(driver);
 		}
@@ -214,9 +215,7 @@ public class AccountHomePage extends UhcDriver {
 		myMenuNavigator.click();
 		prescriptionDrugCostBenefitSummaryLink.click();
 
-		if (driver
-				.getTitle()
-				.equalsIgnoreCase(
+		if (getTitle().equalsIgnoreCase(
 						"UnitedHealthcare Medicare Solutions | Drug Cost and Benefits Summary")) {
 			return new DrugCostandBenefitSummaryPage(driver);
 		}
@@ -228,7 +227,7 @@ public class AccountHomePage extends UhcDriver {
 
 		profAndPrefLink.click();
 		CommonUtility.waitForPageLoad(driver, myProfilesHeading, CommonConstants.TIMEOUT_30);
-		if (this.driver.getTitle().equalsIgnoreCase(
+		if (getTitle().equalsIgnoreCase(
 				"UnitedHealthcare Medicare Solutions | My Personal Profile")) {
 			return new MyProfilesPage(driver);
 		}
@@ -239,7 +238,7 @@ public class AccountHomePage extends UhcDriver {
 	public ClaimSummaryPage navigateToMedicalClaimsSummary() {
 
 		searchMedicalClaims.click();
-		if (this.driver.getTitle().equalsIgnoreCase(
+		if (getTitle().equalsIgnoreCase(
 				"UnitedHealthcare Medicare Solutions | Claims")) {
 			return new ClaimSummaryPage(driver);
 		}
@@ -250,7 +249,7 @@ public class AccountHomePage extends UhcDriver {
 	public ClaimSummaryPage navigateToDrugClaimsSummary(String planCategory) {
 
 		searchDrugClaims.click();
-		if (driver.getTitle().equalsIgnoreCase(
+		if (getTitle().equalsIgnoreCase(
 				"UnitedHealthcare Medicare Solutions | Claims")) {
 			if (planCategory.equalsIgnoreCase("Individual")) {
 				return new ClaimSummaryPage(driver, planCategory);
@@ -261,7 +260,16 @@ public class AccountHomePage extends UhcDriver {
 
 		return null;
 	}
-
+public ContactUsPage navigatesToContactUsPage() {
+		
+		contactUsLink.click();
+		if(getTitle().equalsIgnoreCase("AARP Medicare Plans | Contact Us"))
+		{
+			return new ContactUsPage(driver);
+		}
+		return null;
+				
+	}
 	public MedicalEobPage navigateToMedicalEob() {
 
 		/*
@@ -279,7 +287,6 @@ public class AccountHomePage extends UhcDriver {
 
 		myMenuNavigator.click();
 		prescriptionDrugEobLink.click();
-		CommonUtility.checkPageIsReady(driver);// Wait until complete page
 		if (currentUrl().contains("part-d-eob-search.html")) {
 			return new PrescriptionDrugEobPage(driver);
 		}
@@ -292,7 +299,7 @@ public class AccountHomePage extends UhcDriver {
 		myMenuNavigator.click();
 		orderPlanMaterials.click();
 		CommonUtility.checkPageIsReady(driver);
-		if (driver.getTitle().equalsIgnoreCase(
+		if (getTitle().equalsIgnoreCase(
 				"UnitedHealthcare Medicare Solutions | Order Plan Materials")) {
 			return new OrderplanmaterialsPage(driver);
 		}
@@ -358,12 +365,11 @@ public class AccountHomePage extends UhcDriver {
 
 	public PlanSummaryPage navigateToPlanSummary(String category) {
 		myPlansTab.click();
-		CommonUtility.checkPageIsReady(driver);
-		if (this.driver.getTitle().equalsIgnoreCase(
+		if (getTitle().equalsIgnoreCase(
 				"UnitedHealthcare Medicare Solutions | Plan Summary")
 				&& category.equalsIgnoreCase(CommonConstants.GROUP)) {
 			return new PlanSummaryPage(driver, category);
-		} else if (this.driver.getTitle().equalsIgnoreCase(
+		} else if (getTitle().equalsIgnoreCase(
 				"UnitedHealthcare Medicare Solutions | Plan Summary")) {
 			return new PlanSummaryPage(driver);
 		}

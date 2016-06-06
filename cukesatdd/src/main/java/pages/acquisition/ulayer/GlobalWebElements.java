@@ -45,6 +45,10 @@ public class GlobalWebElements  extends UhcDriver{
 	@FindBy(id = "gf_lnk_8")
 	public static WebElement footerAgentsnBrokersLink;
 	
+	/** Request for assistance link **/
+	@FindBy(id="gf_lnk_9")
+	public static WebElement footerRequestforAssistancelink;
+	
 	
 	@FindBys(value = { @FindBy(xpath = "(//a[contains(text(),'Visit AARP.org')])[2]") })
 	public static WebElement aarpOrgLink;
@@ -202,6 +206,12 @@ public class GlobalWebElements  extends UhcDriver{
 	
 	@FindBy(id="subnav_2")
 	public static WebElement ourPlansDropdownText;
+	
+	/** Request for assistance model window**/
+	@FindBy(id="cover")
+	public static WebElement RequestforAssistancepopup;
+	
+	
 	
 	public void ourPlansHover() {
 		Actions actions = new Actions(driver);

@@ -4,6 +4,7 @@
 package pages.acquisition.ulayer;
 
 
+import org.json.JSONException;
 import org.json.JSONObject;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -55,6 +56,25 @@ public class PlanSelectorPage extends GlobalWebElements{
 		return false;
 		
 	}
+    @Override
+    public void openAndValidate() {
+           validate(planselectorpage);
+           JSONObject jsonObject = new JSONObject();
+           for (String key : planselector.getExpectedData().keySet()) {
+                  WebElement element = findElement(planselector.getExpectedData().get(key));
+                  if (null != element) {
+                        if (validate(element)) {
+                               try {
+                                      jsonObject.put(key, element.getText());
+                               } catch (JSONException e) {
+                                      // TODO Auto-generated catch block
+                                      e.printStackTrace();
+                               }
+                        }
+                  }
+           }
+           planselectorJson = jsonObject;
+    }
 
 		
 }

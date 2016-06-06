@@ -12,6 +12,12 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+
+
+import pages.acquisition.ulayer.EnrollPlanInfoPage;
+
+import pages.acquisition.uhcretiree.Rallytool_Page;
+
 import acceptancetests.atdd.data.CommonConstants;
 import acceptancetests.atdd.data.ElementData;
 import acceptancetests.atdd.data.PageData;
@@ -35,6 +41,9 @@ public class VPPPlanSummaryPage extends UhcDriver {
 
 	@FindBy(xpath = "//div[@class='medsupplans_planbutton']/div[2]/div[1]/a")
 	private WebElement showMsPlans;
+	
+	@FindBy(xpath = "//div[@id='chooseplan']/div/div/h3")
+	private WebElement pageHeading;
 
 	@FindBy(xpath = "//div[@id='maplans_container']")
 	WebElement maPlanConatiner;
@@ -51,7 +60,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	@FindBy(xpath ="//div[@id='maplans_container']/div[2]/div/div/div/div[@class='ng-scope']")
 	List<WebElement> pdpPlanElement;
 	
-	@FindBy(xpath ="//div[@id='maplans_container']/div[2]/div/div/div/div[@class='ng-scope']")
+	@FindBy(xpath ="//div[@id='snpplans_container']/div[2]/div/div/div/div[@class='ng-scope']")
 	List<WebElement> snpPlanElement;
 
 	@FindBy(className = "planinf")
@@ -309,6 +318,31 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		return null;
 	}
 
+	public EnrollPlanInfoPage clicksOnEnrollInplanLink(String planName) {
+		if (planName.contains("HMO")) {
+			for (WebElement plan : maPlanElement) {
+				if (plan.getText().contains(planName)) {
+					ElementData elementData = new ElementData("id", "enrollMA");
+					findChildElement(elementData, plan).click();
+				}
+			}
+		}
+		if (planName.contains("PDP")) {
+			for (WebElement plan : pdpPlanElement) {
+				if (plan.getText().contains(planName)) {
+					ElementData elementData = new ElementData("id", "enrollPDP"); // TODO:
+																					// Re-check
+					findChildElement(elementData, plan).click();
+				}
+			}
+		}
+		if (pageHeading.getText().equalsIgnoreCase(
+				"You Have Chosen to Enroll in the Following Plan")) {
+			return new EnrollPlanInfoPage(driver);
+		}
+		return null;
+	}	
+	
 	public GetStartedPage clicksOnEnterDrugInformationLink(String planName) {
 		if (planName.contains("HMO")) {
 			for (WebElement plan : maPlanElement) {
@@ -336,4 +370,35 @@ public class VPPPlanSummaryPage extends UhcDriver {
 
 	}
 
+	public Rallytool_Page clicksOnIsProviderCovered(String planName) {
+		if (planName.contains("HMO")) {
+			for (WebElement plan : maPlanElement) {
+				if (plan.getText().contains(planName)) {
+					ElementData elementData = new ElementData("id",
+							"doctorCoverMA");
+					findChildElement(elementData, plan).click();
+				}
+			}
+		}
+		if (planName.contains("SNP")) {
+			for (WebElement plan : snpPlanElement) {
+				if (plan.getText().contains(planName)) {
+					ElementData elementData = new ElementData("id",
+							"doctorCoverMA"); // TODO Re-check
+					findChildElement(elementData, plan).click();
+				}
+			}
+		}
+		if (driver.getTitle().equalsIgnoreCase(
+				"Find Care")) { 
+			return new Rallytool_Page(driver);
+	}
+		// TODO Auto-generated method stub
+		return null;
+	}
 }
+	
+	
+
+
+

@@ -7,15 +7,18 @@ package pages.member.bluelayer;
  */
 
 import java.util.Map;
+import java.util.NoSuchElementException;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
 import acceptancetests.atdd.data.CommonConstants;
+import acceptancetests.atdd.data.ElementData;
 import acceptancetests.atdd.data.PageData;
 import acceptancetests.atdd.util.CommonUtility;
 import atdd.framework.UhcDriver;
@@ -25,9 +28,6 @@ public class ConfirmPlanDetailsPage extends UhcDriver {
 	@FindBy(linkText = "add new plan(s)")
 	private WebElement addNewPlanButton;
 
-	@FindBy(linkText = "Go to my account home")
-	private WebElement homePageLink;
-	
 	@FindBy(xpath = "//tr[@id='contentRow']/td/table/tbody/tr/td/div/div[2]/div[3]/div[3]/div/div/div")
 	private WebElement myPlansSection;
 	
@@ -36,6 +36,9 @@ public class ConfirmPlanDetailsPage extends UhcDriver {
 	
 	@FindBy(id = "my-account-home-page")
 	private WebElement accountHomePage;
+	
+	@FindBy(linkText = "Go to my account home")
+	private WebElement homePageLink;
 	
 	private PageData addPlanConfirmation;
 
@@ -50,14 +53,29 @@ public class ConfirmPlanDetailsPage extends UhcDriver {
 		openAndValidate();
 	}
 
-	public AccountHomePage confirm() {
+	public SecondPlanInfoPage confirm() {
 		addNewPlanButton.click();
-		homePageLink.click();
-
-		/*CommonUtility.waitForPageLoad(driver, accountHomePage);*/
-		if (this.driver.getTitle().equalsIgnoreCase(
-				"UnitedHealthcare Medicare Solutions | My Account Home")) {
-			return new AccountHomePage(driver);
+		ElementData elementData = new ElementData("id","progress");
+		WebElement element = findElement(elementData);
+		if(validate(element))
+		{
+			try
+			{
+			CommonUtility.waitForElementToDisappear(driver, element, 10);
+			}
+			catch (NoSuchElementException e) {
+				System.out.println("progress not found");
+			} catch (TimeoutException ex) {
+				System.out.println("progress not found");
+			} catch (Exception e) {
+				System.out.println("progress not found");
+			}
+		}
+		ElementData accountHomeElementData = new ElementData("className", "gotomyaccounthome_btn");
+		WebElement accountHomeElement = findElement(accountHomeElementData);
+		if(validate(accountHomeElement))
+		{
+			return new SecondPlanInfoPage(driver);
 		}
 		return null;
 
@@ -71,7 +89,7 @@ public class ConfirmPlanDetailsPage extends UhcDriver {
 		for (String key : addPlanConfirmation.getExpectedData().keySet()) {
 			WebElement element = findElement(addPlanConfirmation.getExpectedData()
 					.get(key));
-			if (element != null) {
+		
 				if(validate(element)){
 				try {
 					jsonObject.put(key, element.getText());
@@ -80,7 +98,7 @@ public class ConfirmPlanDetailsPage extends UhcDriver {
 					e.printStackTrace();
 				}
 				}
-			}
+			
 
 		}
 		addPlanConfirmationJson = jsonObject;
@@ -90,26 +108,47 @@ public class ConfirmPlanDetailsPage extends UhcDriver {
 
 	public JSONObject getExpectedData(Map<String, JSONObject> expectedDataMap) {
 
-		JSONObject planConfirmationExpectedJson = expectedDataMap
-				.get(CommonConstants.ADD_PLAN_CONFIRMATION);
+		Map<String, JSONObject> expectedDataMap1 = expectedDataMap;
+		JSONObject planConfirmationExpectedJson = expectedDataMap1
+				.get(CommonConstants.ADD_PLAN);
+		JSONObject globalExpectedJson = expectedDataMap1
+				.get(CommonConstants.GLOBAL);
+		planConfirmationExpectedJson = CommonUtility.mergeJson(planConfirmationExpectedJson, globalExpectedJson);
+		
+		try {
+			String memberName = (String) planConfirmationExpectedJson.get("memberName");
+			memberName = memberName.replace("Welcome ", "");
+			planConfirmationExpectedJson.put("memberName", memberName);
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
 		return planConfirmationExpectedJson;
 	}
-
-	public AccountHomePage confirm(String category) {
+	
+	public SecondPlanInfoPage confirm(String category) {
 		addNewPlanButton.click();
-		homePageLink.click();
-		CommonUtility.waitForPageLoad(driver, myPlansSection, CommonConstants.TIMEOUT_30);
-		CommonUtility.waitForPageLoad(driver, myResourcesSection, CommonConstants.TIMEOUT_30);
-		if (this.driver.getTitle().equalsIgnoreCase(
-				"UnitedHealthcare Medicare Solutions | My Account Home") && category.equalsIgnoreCase(CommonConstants.GROUP)) {
-			return new AccountHomePage(driver,category);
+		ElementData elementData = new ElementData("id", "progress");
+		WebElement element = findElement(elementData);
+		
+		if(validate(element))
+		{
+			try
+			{
+			CommonUtility.waitForElementToDisappear(driver, element, 10);
+			
+		} catch (NoSuchElementException e) {
+			System.out.println("progress not found");
+		} catch (TimeoutException ex) {
+			System.out.println("progress not found");
+		} catch (Exception e) {
+			System.out.println("progress not found");
 		}
-		else if(this.driver.getTitle().equalsIgnoreCase(
-				"UnitedHealthcare Medicare Solutions | My Account Home")){
-			return new AccountHomePage(driver);
 		}
-		return null;
+		
+		return new SecondPlanInfoPage(driver);
+		
 
 	}
 }

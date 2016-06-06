@@ -109,6 +109,20 @@ public class PageConstants {
 	public static final String CONTACT_US_PAGE = "contactUsPage";
 
 	public static final String PLAN_COMPARE_PAGE = "planComparePage";
+
+	
+
+	public static final String RALLY_TOOL_PAGE = "rallytool";
+
+	public static final String ACQUISITION_HOME_PAGE = "acquisitionhomepage";
+
+	
+
+	public static final String VPP_PLAN_SUMMARY_PAGE = "plansummaryPage";
+
+	public static final String VPP_PLAN_DETAILS_PAGE = "vppPlanDetailsPage";	
+
+	
 	
 
 }

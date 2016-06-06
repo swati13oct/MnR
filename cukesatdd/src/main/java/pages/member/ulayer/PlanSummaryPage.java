@@ -13,6 +13,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
 import acceptancetests.atdd.data.CommonConstants;
+import acceptancetests.atdd.data.ElementData;
 import acceptancetests.atdd.data.PageData;
 import acceptancetests.atdd.util.CommonUtility;
 import atdd.framework.UhcDriver;
@@ -47,8 +48,11 @@ public class PlanSummaryPage extends UhcDriver {
 
 	public AddPlanPopUpPage clickAddPlan() {
 		addAnotherPlanLink.click();
-		CommonUtility.checkPageIsReady(driver);
+		ElementData elementData = new ElementData("className", "editInfoHead");
+		WebElement element = findElement(elementData);
+		if(validate(element) && element.getText().equalsIgnoreCase("Add Another Plan to Your Online Account"))
 		return new AddPlanPopUpPage(driver);
+		else return null;
 
 	}
 
@@ -64,7 +68,6 @@ public class PlanSummaryPage extends UhcDriver {
 	@Override
 	public void openAndValidate() {
 		validate(addAnotherPlanLink);
-		validate(planSummarySuccess);
 		validate(logOut);
 
 		JSONObject jsonObject = new JSONObject();

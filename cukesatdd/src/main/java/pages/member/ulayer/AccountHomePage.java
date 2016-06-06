@@ -105,6 +105,10 @@ public class AccountHomePage extends UhcDriver {
 
 	public JSONObject accountHomeJson;
 
+	private PageData browserCheckData;
+
+	private JSONObject browserCheckJson;
+
 	public AccountHomePage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
@@ -396,6 +400,31 @@ public class AccountHomePage extends UhcDriver {
 		}
 		return null;
 		
+	}
+
+	public JSONObject getBrowserCheck() {
+		String fileName = CommonConstants.AARPM_BROWSER_CHECK_DATA;
+		browserCheckData = CommonUtility.readPageData(fileName,
+				CommonConstants.PAGE_OBJECT_DIRECTORY_ULAYER_MEMBER);
+
+		JSONObject jsonObject = new JSONObject();
+		for (String key : browserCheckData.getExpectedData().keySet()) {
+			WebElement element = findElement(browserCheckData.getExpectedData()
+					.get(key));
+			if (element != null) {
+				if (validate(element)) {
+					try {
+						jsonObject.put(key, element.getText());
+					} catch (JSONException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				}
+			}
+		}
+		browserCheckJson = jsonObject;
+
+		return browserCheckJson;
 	}
 
 }

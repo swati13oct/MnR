@@ -6,12 +6,14 @@ package pages.member.bluelayer;
  * 
  */
 
+import org.openqa.selenium.NoSuchElementException;
+import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-import acceptancetests.atdd.data.CommonConstants;
+import acceptancetests.atdd.data.ElementData;
 import acceptancetests.atdd.util.CommonUtility;
 import atdd.framework.UhcDriver;
 
@@ -47,14 +49,25 @@ public class AddPlanPopUpPage extends UhcDriver {
 		}
 
 		continueButton.click();
-		CommonUtility.waitForPageLoad(driver, addNewPlansHeading, CommonConstants.TIMEOUT_30);
-		CommonUtility.waitForPageLoad(driver, addNewPlansHeadingMessage, CommonConstants.TIMEOUT_30);
-		if (this.driver.getTitle().equalsIgnoreCase(
-				"UnitedHealthcare Medicare Solutions | Plan Summary")) {
-			return new ConfirmPlanDetailsPage(driver);
+		ElementData elementData = new ElementData("id", "progress");
+		WebElement element = findElement(elementData);
+		
+		if(validate(element))
+		{
+			try
+			{
+			CommonUtility.waitForElementToDisappear(driver, element, 10);
+			
+		} catch (NoSuchElementException e) {
+			System.out.println("progress not found");
+		} catch (TimeoutException ex) {
+			System.out.println("progress not found");
+		} catch (Exception e) {
+			System.out.println("progress not found");
 		}
-
-		return null;
+		}
+		
+			return new ConfirmPlanDetailsPage(driver);
 
 	}
 

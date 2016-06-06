@@ -31,4 +31,13 @@ public class LoginCommonConstants {
 	
 	public static final String TERMINATED_ACCOUNT_ACTUAL = "terminatedAccountActual";
 	
+	public static final String MEMBER_BROWSER_CHECK_FLOW_NAME = "browsercheck";
+	
+	public static final String MEMBER_SECURE_EMAIL_FLOW_NAME = "securemail";
+	
+	public static final String MEMBER_BROWSER_CHECK_ACTUAL = "browserCheckActual";
+	
+	public static final String MEMBER_BROWSER_CHECK_EXPECTED = "browserCheckExpected";
+	
+	
 }
