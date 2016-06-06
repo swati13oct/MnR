@@ -763,6 +763,9 @@ public class CommonConstants {
 	public static final String COBROWSE_MODEL_WINDOW="cobrowse.json";
 
 	public static final String Request_For_Assistance_PAGE_DATA = "requestforassistance.json";
+	
+	public static final String CONFIRMATION_PAGE_DATA = "confirmation.json";
+	
 
 	
 }

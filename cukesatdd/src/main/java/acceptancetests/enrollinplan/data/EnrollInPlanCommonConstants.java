@@ -33,4 +33,5 @@ public class EnrollInPlanCommonConstants {
 	public static final String ENROLLMENT_CONFIRMATION_EXPECTED = "enrollmentConfirmationExpected";
 
 	public static final String ADDITIONAL_INFORMATION = "additionalinformation";
+	public static final String CONFIRMATION = "confirmation";
 }

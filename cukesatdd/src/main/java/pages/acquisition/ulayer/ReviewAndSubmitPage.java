@@ -196,7 +196,7 @@ public class ReviewAndSubmitPage extends UhcDriver{
 		return new ProposedEffectiveDatePage(driver);	
 	}	
 
-	public void navigatesToNextStep(){
+	public ConfirmationPage navigatesToNextStep(){
 		
 		reviewandsubmitapplication.click();
 		try {
@@ -204,6 +204,7 @@ public class ReviewAndSubmitPage extends UhcDriver{
 			} catch (InterruptedException ie) {
 			    //Handle exception
 			}
+		return new ConfirmationPage(driver);
 		
 	
 	}
