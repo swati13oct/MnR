@@ -106,6 +106,8 @@ public class PageConstants {
 	public static final String PHARMACY_RESULTS_PAGE = "pharmacyResultPage";
 
 	public static final String REQUEST_MORE_HELP_INFORMATION_PAGE = "requestHelpAndInformationPage";
+	
+	public static final String MEET_WITH_AN_AGENT = "meetWithAnAgentPage";
 
 	public static final String REQUEST_AGENT_APPOINTMENT_PAGE = "requestAgentAppointmentPage";
 
@@ -333,9 +335,6 @@ public class PageConstants {
 	public static final String MA_RESOURCES_AND_PLAN_TAB = "maresourcesandplanmaterialstabpage";
 	
 	public static final String REQUEST_FOR_ASSISTANCE_PAGE="requestdorassistance";
-
-
-	public static final String REQUEST_FOR_ASSISTANCE_PAGE = "requestdorassistance";
 
 	public static final String SPECIAL_ELECTION_PERIOD_PAGE = "specialElectionPeriodPage";
 	
