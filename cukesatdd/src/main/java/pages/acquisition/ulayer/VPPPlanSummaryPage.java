@@ -72,7 +72,8 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	@FindBy(id = "providerSearchFrame")
 	private WebElement providerSearchIframe;
 	
-	
+	@FindBy(className = "toggleYear")
+	private WebElement toggleplanYear;
 	
 
 	private PageData vppPlanSummary;
@@ -451,7 +452,17 @@ public class VPPPlanSummaryPage extends UhcDriver {
 
 		
 	}
+	
+	public String togglePlan() {
+		String currentYearFlag = "false";
+		validate(toggleplanYear);
+		if (toggleplanYear != null) {
+			toggleplanYear.click();
+			currentYearFlag = "true";
+		}
+		return currentYearFlag;
 
+	}
 
 	
 }
