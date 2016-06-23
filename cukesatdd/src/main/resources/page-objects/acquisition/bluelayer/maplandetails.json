@@ -5,6 +5,10 @@
 "identifier":"className",
 "elementName":"detailplanNameBg"
 },
+"marketingBullets":{
+"identifier":"id",
+"elementName":"marketingDesc"
+},
 "monthlyPremiumLink":{
 "identifier":"id",
 "elementName":"drugcopayInclude"

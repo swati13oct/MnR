@@ -14,10 +14,9 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
 
+
 import pages.acquisition.ulayer.EnrollPlanInfoPage;
-
 import pages.acquisition.uhcretiree.Rallytool_Page;
-
 import acceptancetests.atdd.data.CommonConstants;
 import acceptancetests.atdd.data.ElementData;
 import acceptancetests.atdd.data.PageData;
@@ -68,6 +67,9 @@ public class VPPPlanSummaryPage extends UhcDriver {
 
 	@FindBy(id = "editDrugMA")
 	private WebElement editDrugListLink;
+	
+	@FindBy(className = "toggleYear")
+	private WebElement toggleplanYear;
 
 
 	private PageData vppPlanSummary;
@@ -395,6 +397,17 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	}
 		// TODO Auto-generated method stub
 		return null;
+	}
+	
+	public String togglePlan() {
+		String currentYearFlag = "false";
+		validate(toggleplanYear);
+		if (toggleplanYear != null) {
+			toggleplanYear.click();
+			currentYearFlag = "true";
+		}
+		return currentYearFlag;
+
 	}
 }
 	
