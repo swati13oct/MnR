@@ -60,3 +60,28 @@ Then the user validates the plan summary after provider information is added in 
 Examples:
 	| zipcode | county             | plantype | planName                                             | physicianSearch		| physicianName		|
 	| 80002   | Adams County       | MAPD     | AARP MedicareComplete SecureHorizons Plan 2 (HMO)    | All Primary Care Physicians  | Linda S Blust, MD	|
+
+	
+Scenario Outline: Verify plan details in AARP site for AEP only
+Given the user is on the AARP medicare site landing page
+When the user performs plan search using following information in AARP site during AEP period
+	| Zip Code    | <zipcode> |
+	| County Name | <county>  |
+Then user validates plan count for all plan types on plan summary page in AARP site
+When the user views plans of the below plan type in AARP site during AEP
+	| Plan Type | <plantype> |
+Then the user validates the available plans for selected plan types in AARP site
+And the user validates the plan summary for the below plan in AARP site during AEP
+	| Plan Name | <planName> |
+When the user view plan details of the above selected plan in AARP site during AEP 
+Then the user validates the details of the selected plan in AARP site
+When user comes backs to plan summary page and view current year plan
+And the user validates the plan summary for the below plan in AARP site during AEP
+	| Plan Name | <planName> |
+When the user view plan details of the above selected plan in AARP site during AEP 
+Then the user validates the details of the selected plan in AARP site
+Examples:
+	| zipcode | county             | plantype |  planName                                             |  		 
+	| 90210   | Los Angeles County | MA       |  AARP MedicareComplete SecureHorizons Plan 2 (HMO)    |
+	
+	

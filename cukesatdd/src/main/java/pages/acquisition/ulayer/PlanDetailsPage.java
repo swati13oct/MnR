@@ -45,6 +45,9 @@ public class PlanDetailsPage extends UhcDriver {
 	@FindBy(xpath="//*[@id='enrollDetails']/span")
 	private WebElement enrollinaPlan;
 	
+	@FindBy(id = "backToplans")
+	private WebElement backToAllPlans;
+	
 	private PageData vppPlanDetails;
 
 	public JSONObject vppPlanDetailsJson;
@@ -165,6 +168,16 @@ public class PlanDetailsPage extends UhcDriver {
 		return null;
 	}
 	
-	
+
+	public VPPPlanSummaryPage backtoPlanSummary(String planType) {
+		validate(backToAllPlans);
+		if(backToAllPlans != null){
+		backToAllPlans.click();		
+		return new VPPPlanSummaryPage(driver, planType);
+		}
+		
+	return null;
+		
+	}
 	
 }
