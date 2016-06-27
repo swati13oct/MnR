@@ -70,8 +70,14 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	@FindBy(id = "editDrugMA")
 	private WebElement editDrugListLink;
 	
+
 	@FindBy(linkText ="Make an appointment with an agent")
 	private WebElement make_an_appointment_agent;
+
+	@FindBy(className = "toggleYear")
+	private WebElement toggleplanYear;
+
+
 
 	private PageData vppPlanSummary;
 
@@ -400,6 +406,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		return null;
 	}
 	
+
 	public RequestAgentAppointmentPage nagiateToRequetAnAppointmentPage()
 	{
 		make_an_appointment_agent.click();
@@ -422,6 +429,17 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		}
 		
 		return null;
+
+	public String togglePlan() {
+		String currentYearFlag = "false";
+		validate(toggleplanYear);
+		if (toggleplanYear != null) {
+			toggleplanYear.click();
+			currentYearFlag = "true";
+		}
+		return currentYearFlag;
+
+
 	}
 }
 	

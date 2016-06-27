@@ -12,6 +12,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
 import pages.acquisition.uhcretiree.Rallytool_Page;
+import pages.acquisition.bluelayer.VPPPlanSummaryPage;
 import acceptancetests.atdd.data.CommonConstants;
 import acceptancetests.atdd.data.PageData;
 import acceptancetests.atdd.util.CommonUtility;
@@ -33,6 +34,9 @@ public class PlanDetailsPage extends UhcDriver{
 	
 	@FindBy(xpath ="//*[@id='myDoctorDetails']")
 	private WebElement plandetailProviderlink;
+	
+	@FindBy(id = "backToplans")
+	private WebElement backToAllPlans;
 	
 	private PageData vppPlanDetails;
 
@@ -142,5 +146,14 @@ public class PlanDetailsPage extends UhcDriver{
 		// TODO Auto-generated method stub
 		return null;
 	} 
-	
+	public VPPPlanSummaryPage backtoPlanSummaryPage(String planType) {
+		validate(backToAllPlans);
+		if(backToAllPlans != null){
+		backToAllPlans.click();		
+		return new VPPPlanSummaryPage(driver, planType);
+		}
+		
+	return null;
+		
+	}
 }

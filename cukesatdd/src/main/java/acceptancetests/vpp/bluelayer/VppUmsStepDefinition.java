@@ -3,6 +3,7 @@ package acceptancetests.vpp.bluelayer;
 import gherkin.formatter.model.DataTableRow;
 
 import java.io.File;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -980,6 +981,218 @@ public class VppUmsStepDefinition {
 
 		}
 	}
+	@When("^the user performs plan search using following information in UMS site during AEP period$")
+	public void zipcode_details_in_ums_site_aep(DataTable givenAttributes) {
+
+		List<DataTableRow> memberAttributesRow = givenAttributes
+				.getGherkinRows();
+		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells()
+					.get(0), memberAttributesRow.get(i).getCells().get(1));
+		}
+
+		String zipcode = memberAttributesMap.get("Zip Code");
+		String county = memberAttributesMap.get("County Name");
+		Calendar now = Calendar.getInstance(); 
+		int currentYear = now.get(Calendar.YEAR);
+		int nextYear = currentYear + 1;
+		String year= Integer.toString(nextYear);
+		getLoginScenario().saveBean(VPPCommonConstants.ZIPCODE, zipcode);
+		getLoginScenario().saveBean(VPPCommonConstants.COUNTY, county);
+		getLoginScenario().saveBean(VPPCommonConstants.YEAR, year);
+
+		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
+				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+		VPPPlanSummaryPage plansummaryPage = aquisitionhomepage.searchPlans(
+				zipcode, county);
+
+		if (plansummaryPage != null) {
+			getLoginScenario().saveBean(PageConstants.VPP_PLAN_SUMMARY_PAGE,
+					plansummaryPage);
+			/* Get expected data */
+			String fileName = "vppPlanSummary";
+			String directory = CommonConstants.ACQUISITION_EXPECTED_DIRECTORY
+					+ File.separator + CommonConstants.SITE_BLUELAYER
+					+ File.separator + VPPCommonConstants.VPP_PLAN_FLOW_NAME
+					+ File.separator + zipcode + File.separator + county
+					+ File.separator + year+ File.separator;
+			JSONObject planSummaryExpectedJson = MRScenario.readExpectedJson(
+					fileName, directory);
+			getLoginScenario().saveBean(
+					VPPCommonConstants.VPP_PLAN_SUMMARY_EXPECTED,
+					planSummaryExpectedJson);
+
+			/* Get actual data */
+			JSONObject planSummaryActualJson = plansummaryPage.vppPlanSummaryJson;
+			getLoginScenario().saveBean(
+					VPPCommonConstants.VPP_PLAN_SUMMARY_ACTUAL,
+					planSummaryActualJson);
+		}
+	}
+	
+    @When("^the user views plans of the below plan type in UMS site during AEP$")
+	public void user_performs_planSearch_in_ums_site_aep(DataTable givenAttributes) {
+		List<DataTableRow> givenAttributesRow = givenAttributes
+				.getGherkinRows();
+		Map<String, String> givenAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < givenAttributesRow.size(); i++) {
+
+			givenAttributesMap.put(givenAttributesRow.get(i).getCells().get(0),
+					givenAttributesRow.get(i).getCells().get(1));
+		}
+
+		String plantype = givenAttributesMap.get("Plan Type");
+		getLoginScenario().saveBean(VPPCommonConstants.PLAN_TYPE, plantype);
+		String year = (String) getLoginScenario().getBean(VPPCommonConstants.YEAR);
+		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		
+		plansummaryPage = plansummaryPage.viewPlanSummary(plantype);
+
+		if (plansummaryPage != null) {
+			getLoginScenario().saveBean(PageConstants.VPP_PLAN_SUMMARY_PAGE,
+					plansummaryPage);
+			/* Get actual data */
+			JSONObject planSummaryActualJson = plansummaryPage.vppPlanSummaryJson;
+			getLoginScenario().saveBean(
+					VPPCommonConstants.VPP_PLAN_SUMMARY_ACTUAL,
+					planSummaryActualJson);
+
+			/* Get expected data */
+			String fileName = null;
+			if (plantype.equalsIgnoreCase("MA")
+					|| plantype.equalsIgnoreCase("MAPD")) {
+				fileName = "maplans";
+			} else {
+				fileName = plantype.toLowerCase() + "plans";
+			}
+			String zipcode = (String) getLoginScenario().getBean(
+					VPPCommonConstants.ZIPCODE);
+			String county = (String) getLoginScenario().getBean(
+					VPPCommonConstants.COUNTY);
+			String directory = CommonConstants.ACQUISITION_EXPECTED_DIRECTORY
+					+ File.separator + CommonConstants.SITE_BLUELAYER
+					+ File.separator + VPPCommonConstants.VPP_PLAN_FLOW_NAME
+					+ File.separator + zipcode + File.separator + county
+					+ File.separator + year + File.separator;
+			JSONObject planSummaryExpectedJson = MRScenario.readExpectedJson(
+					fileName, directory);
+			getLoginScenario().saveBean(
+					VPPCommonConstants.VPP_PLAN_SUMMARY_EXPECTED,
+					planSummaryExpectedJson);
+		}
+
+	}
+    
+    @And("^the user validates the plan summary for the below plan in UMS site during AEP$")
+	public void user_validates_ums_plan_summary_aep(DataTable planAttributes) {
+		List<DataTableRow> givenAttributesRow = planAttributes.getGherkinRows();
+		Map<String, String> givenAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < givenAttributesRow.size(); i++) {
+
+			givenAttributesMap.put(givenAttributesRow.get(i).getCells().get(0),
+					givenAttributesRow.get(i).getCells().get(1));
+		}
+
+		String planName = givenAttributesMap.get("Plan Name");
+		getLoginScenario().saveBean(VPPCommonConstants.PLAN_NAME, planName);
+		VPPPlanSummaryPage planSummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		/* get actual data for a particular plan */
+		JSONObject planSummaryActualJson = planSummaryPage
+				.getPlanSummaryActualData(planName);
+
+		/* Get expected data */
+		String fileName = planName;
+		String zipcode = (String) getLoginScenario().getBean(
+				VPPCommonConstants.ZIPCODE);
+		String county = (String) getLoginScenario().getBean(
+				VPPCommonConstants.COUNTY);
+		String year = (String) getLoginScenario().getBean(
+				VPPCommonConstants.YEAR);
+		String directory = CommonConstants.ACQUISITION_EXPECTED_DIRECTORY
+				+ File.separator + CommonConstants.SITE_BLUELAYER + File.separator
+				+ VPPCommonConstants.VPP_PLAN_FLOW_NAME + File.separator
+				+ zipcode + File.separator + county + File.separator + year + File.separator;
+		JSONObject planSummaryExpectedJson = MRScenario.readExpectedJson(
+				fileName, directory);
+
+		System.out
+				.println("planSummaryActualJson---->" + planSummaryActualJson);
+		System.out.println("planSummaryExpectedJson---->"
+				+ planSummaryExpectedJson);
+
+		try {
+			JSONAssert.assertEquals(planSummaryExpectedJson,
+					planSummaryActualJson, true);
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}
+
+	}
+    
+    @When("^the user views plan details of the above selected plan in UMS site during AEP$")
+	public void user_views_plandetails_selected_plan_ums_aep() {
+		String planName = (String) getLoginScenario().getBean(
+				VPPCommonConstants.PLAN_NAME);
+		String zipcode = (String) getLoginScenario().getBean(
+				VPPCommonConstants.ZIPCODE);
+		String county = (String) getLoginScenario().getBean(
+				VPPCommonConstants.COUNTY);
+		VPPPlanSummaryPage vppPlanSummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+
+		;
+		String year = (String)getLoginScenario().getBean(VPPCommonConstants.YEAR);
+		PlanDetailsPage vppPlanDetailsPage = vppPlanSummaryPage
+				.navigateToPlanDetails(planName);
+		if (vppPlanDetailsPage != null) {
+			getLoginScenario().saveBean(PageConstants.VPP_PLAN_DETAILS_PAGE,
+					vppPlanDetailsPage);
+			/* Get actual data */
+			JSONObject planDetailsActualJson = vppPlanDetailsPage.vppPlanDetailsJson;
+			System.out.println("planDetailsActualJson---->"
+					+ planDetailsActualJson);
+			getLoginScenario().saveBean(
+					VPPCommonConstants.VPP_PLAN_DETAIL_ACTUAL,
+					planDetailsActualJson);
+
+			/* Get expected data */
+			String fileName = planName;
+			String directory = CommonConstants.ACQUISITION_EXPECTED_DIRECTORY
+					+ File.separator + CommonConstants.SITE_BLUELAYER
+					+ File.separator
+					+ VPPCommonConstants.VPP_PLAN_DETAILS_FLOW_NAME
+					+ File.separator + zipcode + File.separator + county
+					+ File.separator + year + File.separator;
+			JSONObject planDetailsExpectedJson = MRScenario.readExpectedJson(
+					fileName, directory);
+			getLoginScenario().saveBean(
+					VPPCommonConstants.VPP_PLAN_DETAIL_EXPECTED,
+					planDetailsExpectedJson);
+
+		}
+	}
+    
+    @When("^user comes back to UMS plan summary page and view current year plan$")
+	public void bacK_to_planSummaryPage() {
+		String planType = (String) getLoginScenario().getBean(
+				VPPCommonConstants.PLAN_TYPE);
+		PlanDetailsPage vppPlanDetailsPage = (PlanDetailsPage) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_DETAILS_PAGE);
+		VPPPlanSummaryPage vPPlanSummaryPage = vppPlanDetailsPage
+				.backtoPlanSummaryPage(planType);
+		String togglePlanFlag = vPPlanSummaryPage.togglePlan();
+		getLoginScenario().saveBean(VPPCommonConstants.TOGGLEPLANFLAG,
+				togglePlanFlag);
+		Calendar now = Calendar.getInstance();
+		int currentYear = now.get(Calendar.YEAR);
+		getLoginScenario().saveBean(VPPCommonConstants.YEAR,
+				Integer.toString(currentYear));
+	}
+
 
 	public static boolean isAlertPresent(FirefoxDriver wd) {
 		try {
