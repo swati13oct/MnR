@@ -8,16 +8,17 @@ import java.util.List;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.openqa.selenium.NoSuchElementException;
+import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
 
+
 import pages.acquisition.ulayer.EnrollPlanInfoPage;
-
 import pages.acquisition.uhcretiree.Rallytool_Page;
-
 import acceptancetests.atdd.data.CommonConstants;
 import acceptancetests.atdd.data.ElementData;
 import acceptancetests.atdd.data.PageData;
@@ -68,7 +69,9 @@ public class VPPPlanSummaryPage extends UhcDriver {
 
 	@FindBy(id = "editDrugMA")
 	private WebElement editDrugListLink;
-
+	
+	@FindBy(linkText ="Make an appointment with an agent")
+	private WebElement make_an_appointment_agent;
 
 	private PageData vppPlanSummary;
 
@@ -394,6 +397,30 @@ public class VPPPlanSummaryPage extends UhcDriver {
 			return new Rallytool_Page(driver);
 	}
 		// TODO Auto-generated method stub
+		return null;
+	}
+	
+	public RequestAgentAppointmentPage nagiateToRequetAnAppointmentPage()
+	{
+		make_an_appointment_agent.click();
+		
+		try {
+			if (make_an_appointment_agent.isDisplayed()) {
+				CommonUtility.waitForElementToDisappear(driver, make_an_appointment_agent,
+						CommonConstants.TIMEOUT_30);
+			}
+		} catch (NoSuchElementException e) {
+			System.out.println("make_an_appointment_agent not found");
+		} catch (TimeoutException ex) {
+			System.out.println("make_an_appointment_agent not found");
+		} catch (Exception e) {
+			System.out.println("make_an_appointment_agent not found");
+		}
+		if(currentUrl().contains("medicare-advantage-plans/request-information/agentebrc.html"))
+		{
+			return new RequestAgentAppointmentPage(driver);
+		}
+		
 		return null;
 	}
 }
