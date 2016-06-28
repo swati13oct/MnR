@@ -176,6 +176,10 @@ public class VppAarpStepDefinition {
 				.getBean(VPPCommonConstants.VPP_PLAN_SUMMARY_ACTUAL);
 		JSONObject planSummaryExpectedJson = (JSONObject) getLoginScenario()
 				.getBean(VPPCommonConstants.VPP_PLAN_SUMMARY_EXPECTED);
+		System.out
+		.println("planSummaryActualJson---->" + planSummaryActualJson);
+System.out.println("planSummaryExpectedJson---->"
+		+ planSummaryExpectedJson);
 		try {
 			JSONAssert.assertEquals(planSummaryExpectedJson,
 					planSummaryActualJson, true);
