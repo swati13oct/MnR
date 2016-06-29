@@ -250,5 +250,5 @@ Then the user validates the selected drug and selected pharmacy on manage drug l
 
 Examples:
 	| zipcode | county             | drugInitials | drugName      |  drugDosage	        | packages | quantity | drugFrequency  | genericAvailable | brand/generic                            | pharmacyType	 	 		   | distance   |  pharmacyName          |
-	| 90210   | Los Angeles County | lipi	      |  Lipitor      |  Lipitor TAB 20MG   | null     | 40       | Every 3 months | yes              | Lipitor TAB 20MG (Qty 40 Every 3 Months) | All Pharmacies   | 25 miles   |  CVS PHARMACY 09652    | 
+	| 90210   | Los Angeles County | lipi	      |  Lipitor      |  Lipitor TAB 20MG   | null     | 40       | Every 3 months | yes              | Lipitor TAB 20MG (Qty 40 Every 3 Months) |  Standard Network Pharmacy  | 25 miles   |  CVS PHARMACY 09652    | 
 	 		 
