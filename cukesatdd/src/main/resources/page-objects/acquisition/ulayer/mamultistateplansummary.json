@@ -1,0 +1,9 @@
+{
+"url":null,
+"expectedData":{
+"planDetailsLink":{
+"identifier":"id",
+"elementName": "viewDetailsMA"
+}
+}
+}

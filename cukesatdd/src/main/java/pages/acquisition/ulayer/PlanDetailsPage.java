@@ -51,6 +51,9 @@ public class PlanDetailsPage extends UhcDriver {
 	private PageData vppPlanDetails;
 
 	public JSONObject vppPlanDetailsJson;
+	
+	@FindBy(xpath="//*[@id='bf3dfe9a-aba6-449b-865c-b5628cb03a60']/a[6]")
+	private WebElement pdfLink;
 
 	public PlanDetailsPage(WebDriver driver, String planType) {
 		super(driver);
@@ -177,6 +180,15 @@ public class PlanDetailsPage extends UhcDriver {
 		}
 		
 	return null;
+		
+	}
+
+	public void validatePDFLinks() {
+		// TODO Auto-generated method stub
+		if(pdfLink!=null)
+		{
+			pdfLink.click();
+		}
 		
 	}
 	

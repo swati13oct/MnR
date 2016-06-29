@@ -237,7 +237,13 @@ public class VPPPlanSummaryPage extends UhcDriver {
 			JSONObject jsonObject = getActualJsonObject(fileName, planName,pdpPlanElement);
 			return jsonObject;
 		}
-		
+		if(planName.contains("Regional PPO"))
+		{
+		fileName = "mamultistateplansummary.json";
+		JSONObject jsonObject = getActualJsonObject(fileName, planName,maPlanElement);
+		return jsonObject;
+
+		}
 		
 		return null;
 	}
