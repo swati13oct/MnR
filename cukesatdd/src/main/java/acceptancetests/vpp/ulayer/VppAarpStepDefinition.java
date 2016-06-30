@@ -31,10 +31,10 @@ import cucumber.annotation.en.Then;
 import cucumber.annotation.en.When;
 import cucumber.table.DataTable;
 
-/**
+/** 
  * @author gumeshna
- *
- */
+ * 
+ */     
 
 public class VppAarpStepDefinition {
 
@@ -618,6 +618,12 @@ System.out.println("planSummaryExpectedJson---->"
 		int currentYear = now.get(Calendar.YEAR);
 		getLoginScenario().saveBean(VPPCommonConstants.YEAR,
 				Integer.toString(currentYear));
+	}
+	@And("^the user validate pdf links$")
+	public void validate_Pdf_Links(){
+		PlanDetailsPage planDetailsPage = (PlanDetailsPage) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_DETAILS_PAGE);
+		planDetailsPage.validatePDFLinks();
 	}
 
 	@After
