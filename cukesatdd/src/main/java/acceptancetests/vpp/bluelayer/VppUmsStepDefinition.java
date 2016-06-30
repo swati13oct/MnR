@@ -191,8 +191,11 @@ public class VppUmsStepDefinition {
 				fileName = "pdpplans";
 			} else if (plantype.equalsIgnoreCase("SNP")) {
 				fileName = "snpplans";
-			} else {
+			} else if(plantype.equalsIgnoreCase("Regional PPO")) {
+				fileName = "maplans";
+			}else {
 				fileName = "msplans";
+				
 			}
 
 			String zipcode = (String) getLoginScenario().getBean(
@@ -1192,7 +1195,37 @@ public class VppUmsStepDefinition {
 		getLoginScenario().saveBean(VPPCommonConstants.YEAR,
 				Integer.toString(currentYear));
 	}
-
+	@And("^the user validate pdf links on UMS site$")
+	public void validate_Pdf_Links(){
+		PlanDetailsPage planDetailsPage = (PlanDetailsPage) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_DETAILS_PAGE);
+		JSONObject planDocsPDFActualJson = planDetailsPage.getActualPdfLinksData();
+		
+		/* Get expected data */
+		String fileName = "plandocumentspdf";
+		String zipcode = (String) getLoginScenario().getBean(
+				VPPCommonConstants.ZIPCODE);
+		String county = (String) getLoginScenario().getBean(
+				VPPCommonConstants.COUNTY);
+		String year = (String) getLoginScenario().getBean(VPPCommonConstants.YEAR);
+		
+		String directory = CommonConstants.ACQUISITION_EXPECTED_DIRECTORY
+				+ File.separator + CommonConstants.SITE_BLUELAYER
+				+ File.separator
+				+ VPPCommonConstants.VPP_PLAN_DETAILS_FLOW_NAME
+				+ File.separator + zipcode + File.separator + county
+				+ File.separator;
+		JSONObject planDocsPDFExpectedJson = MRScenario.readExpectedJson(
+				fileName, directory);
+		
+		try {
+			JSONAssert.assertEquals(planDocsPDFExpectedJson,
+					planDocsPDFActualJson, true);
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}
+		
+	}
 
 	public static boolean isAlertPresent(FirefoxDriver wd) {
 		try {
