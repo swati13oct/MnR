@@ -42,6 +42,18 @@ public class PlanPaymentOptions extends UhcDriver{
 	@FindBy(id = "ppcpcancel")
 	private WebElement pcpcancel;
 	
+	@FindBy(xpath = "//*[@id='disclaimerAgreeBtnplanpayment']")
+	private WebElement disclaimerppoagreebutton;
+	
+	@FindBy(xpath = "//*[@id='planPaymentOptionSaveBtnId']")
+	private WebElement saveandcontinuebutton;
+	
+	@FindBy(xpath = "//*[@id='pcpsaveandcont']")
+	private WebElement saveandcontinuepcp;
+	
+	@FindBy(xpath = "//*[@id='planpaymentLink']")
+	private WebElement disclaimerppo ;
+	
 	private PageData planpaymentInformation;
 
 	public JSONObject planpaymentInformationJson;
@@ -89,7 +101,7 @@ public class PlanPaymentOptions extends UhcDriver{
 		}
 		
 		
-		if(getTitle().equalsIgnoreCase("AARP Medicare Complete Online Application")||getTitle().equalsIgnoreCase("AARP Medicarerx Online Application")){
+	//	if(getTitle().equalsIgnoreCase("AARP Medicare Complete Online Application")||getTitle().equalsIgnoreCase("AARP Medicarerx Online Application")){
 			ppodisclaimerAgreeBtn.click();
 			try {
 				Thread.sleep(1000);
@@ -99,7 +111,7 @@ public class PlanPaymentOptions extends UhcDriver{
 			}
 		}
 		
-		}
+		
 		
 	public OptionalRidersPage navigatesToNextStepMAPDorMA() {
 			pcpsaveandcont.click();
@@ -111,6 +123,25 @@ public class PlanPaymentOptions extends UhcDriver{
 		pcpsaveandcont.click();
 			return new ProposedEffectiveDatePage(driver);
 
+	}
+
+	public OptionalRidersPage clickdisclaimerbutton() {
+		
+		validate(disclaimerppo);
+		disclaimerppo.click();
+		
+		validate(disclaimerppoagreebutton);
+		disclaimerppoagreebutton.click();
+		
+		validate(saveandcontinuebutton);
+		saveandcontinuebutton.click();
+		
+		if (driver.getTitle().equalsIgnoreCase("Medicare Advantage Enrollment | AARP® Medicare Plans from UnitedHealthcare®")) {
+			return new OptionalRidersPage(driver);
+		}
+		return null;
+		
+		
 	}
 
 		

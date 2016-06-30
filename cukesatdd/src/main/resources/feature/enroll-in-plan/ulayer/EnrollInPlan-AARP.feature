@@ -80,9 +80,9 @@ And the user fill following information in other health insurance step in AARP s
     | othmemberid                | <othmemberid>                        |
 And the user navigates to primary care provider step in AARP site
 And the user navigates to plan payment options step in AARP site
-And the user fill following information in plan payment options step in AARP site
-  | Plan Type | <planType> |
-  | planpaymentoption |<planpaymentoption>|
+#And the user fill following information in plan payment options step in AARP site
+#  | Plan Type | <planType> |
+#  | planpaymentoption |<planpaymentoption>|
 And the user navigates to optional Riders step in AARP site
 And the user fill following information in optional Riders step in AARP site
                | optradiooption                                            | <optradiooption>                                                                       |
@@ -98,8 +98,8 @@ And the user reviews the information on review and submit application step in AA
 Then the user navigates to Confirmation Page
 And the user clicks on print this page button
 Examples:
-|zipcode |countyName          | planType | planName                                         |firstName|middleInitial|lastName| medicareClaimNumber|hospitalEffectiveDate |  medicalEffectiveDate  | emailAddress |mainPhoneNumber | otherPhoneNumber |birthDate         |selectedGender |languagePreference |address |  city    | apartment |sep1|sep2|sep4|sep5|sep6|sep7|sep8|sep9|sepOther| sepDate1 | sepDate2    | sepDate5  | sepDate6    |sepOtherReason|esrdradiooption |pdcradiooption |pdchealthinsurname|pdcgroupidnumber|pdcmemberidnumber|ltcradiooption |ltcname|ltcstreetaddr|ltcapt|ltccity|ltcphonenum |ltcdatemoved|medicaidradiooption|medicaidnum|othradiooption |othnameofhealthinsur|othgroupid|othmemberid|planpaymentoption|optradiooption|effectiveDate|agreeStmtUnderstanding|authRepresent|
-|90210   |Los Angeles County  | MA       |AARP MedicareComplete SecureHorizons Plan 2 (HMO) | First   |  m          |  last  | 112-11-1117-A      |07/01/1988            |      07/01/1988        | test@uhc.com | 999-991-1111   | 999-991-1111     | 12-20-1950       |Male           |Spanish            |1234    | Colorado | UHG       |No  |Yes |No  |No  |No  |No  |No  |No  |No      | 02/15/2016| 02/15/2016 |02/15/2016 | 02/15/2016  |Test          |No              |Yes            | abc               |abc            |123              |Yes            |first  |123          |1     |abc    |666-666-6666|12-20-1982  |Yes                |12         |Yes            |insurname           |12        |13246      |No               |No            |07-01-2016   |Agree|Agree|
+|zipcode |countyName          | planType | planName                                                     |firstName|middleInitial|lastName| medicareClaimNumber|hospitalEffectiveDate |  medicalEffectiveDate  | emailAddress |mainPhoneNumber | otherPhoneNumber |birthDate         |selectedGender |languagePreference |address |  city    | apartment |sep1|sep2|sep4|sep5|sep6|sep7|sep8|sep9|sepOther| sepDate1 | sepDate2    | sepDate5  | sepDate6    |sepOtherReason|esrdradiooption |pdcradiooption |pdchealthinsurname|pdcgroupidnumber|pdcmemberidnumber|ltcradiooption |ltcname|ltcstreetaddr|ltcapt|ltccity|ltcphonenum |ltcdatemoved|medicaidradiooption|medicaidnum|othradiooption |othnameofhealthinsur|othgroupid|othmemberid|planpaymentoption|optradiooption|effectiveDate|agreeStmtUnderstanding|authRepresent|
+|90210   |Los Angeles County  | MA       |AARP MedicareComplete SecureHorizons Plan 1 (HMO)| First   |  m          |  last  | 112-11-1117-A      |07/01/1988            |      07/01/1988        | test@uhc.com | 999-991-1111   | 999-991-1111     | 12-20-1950       |Male           |Spanish            |1234    | Colorado | UHG       |No  |Yes |No  |No  |No  |No  |No  |No  |No      | 02/15/2016| 02/15/2016 |02/15/2016 | 02/15/2016  |Test          |No              |Yes            | abc               |abc            |123              |Yes            |first  |123          |1     |abc    |666-666-6666|12-20-1982  |Yes                |12         |Yes            |insurname           |12        |13246      |Yes               |Yes            |07-01-2016   |Agree|Agree|
 
 Scenario Outline: Verify enroll in plan in AARP site for federal plan type member  PDP member
 Given the user is on AARP medicare site landing page
@@ -165,7 +165,7 @@ And the user fill following information in long term care step in AARP site
     | ltccity                       | <ltccity>                                                |  
     | ltcphonenum                                                            | <ltcphonenum>                                             |
     | ltcdatemoved                             | <ltcdatemoved>                                         |
-And the user navigates to plan payment options step in AARP site
+#And the user navigates to plan payment options step in AARP site
 And the user fill following information in plan payment options step in AARP site
   | Plan Type | <planType> |
   | planpaymentoption |<planpaymentoption>|
