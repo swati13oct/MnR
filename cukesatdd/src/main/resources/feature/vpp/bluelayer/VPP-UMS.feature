@@ -201,7 +201,7 @@ Examples:
 #	| 80001   |                    | PDP      |  AARP MedicareRx Preferred (PDP)                      |
 #	| 78006   | Comal County       | PDP      |  AARP MedicareRx Saver Plus (PDP)                     |
 #	| 78006   | Bexar County       | SNP      |  UnitedHealthcare Dual Complete (HMO SNP)             |
-	| 01002   | Hampshire County   | MA       |  AARP MedicareComplete Choice (Regional PPO)    |
-#	| 01008   | Hampden County   | MA       |  AARP MedicareComplete Plan 2 (HMO)    |
+#	| 01002   | Hampshire County   | MA       |  AARP MedicareComplete Choice (Regional PPO)    |
+	| 01008   | Hampden County   | MA       |  AARP MedicareComplete Plan 2 (HMO)    |
 	
 	
