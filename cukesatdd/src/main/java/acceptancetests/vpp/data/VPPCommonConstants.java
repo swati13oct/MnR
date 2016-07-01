@@ -36,5 +36,7 @@ public class VPPCommonConstants {
 	public static final String YEAR = "year";
 
 	public static final String TOGGLEPLANFLAG = "togglePlanFlag";
+	
+	public static final String VPP_PLAN_DOC_PDF_EXPECTED = "planDocsPDFExpectedJson";
 
 }

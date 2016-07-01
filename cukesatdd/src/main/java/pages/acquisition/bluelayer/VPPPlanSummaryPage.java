@@ -55,7 +55,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	@FindBy(xpath = "//div[@id='snpplans_container']")
 	WebElement snpPlanConatiner;
 	
-	@FindBy(xpath ="//div[@id='maplans_container']/div[2]/div/div/div/div[@class='ng-scope']")
+	@FindBy(xpath ="//div[@class='enabled ng-scope']")
 	List<WebElement> maPlanElement;
 	
 	@FindBy(xpath ="//div[@id='maplans_container']/div[2]/div/div/div/div[@class='ng-scope']")
@@ -140,6 +140,14 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		if (element != null) {
 			element.click();
 		}
+		}else if (planName.contains("Regional PPO")) {
+			ElementData elementData = new ElementData("id", "viewDetailsMA");
+			WebElement element = getViewPlanDetailsElement(maPlanElement,
+					elementData, planName);
+			if (element != null) {
+				element.click();
+			}
+
 		}
 		CommonUtility.checkPageIsReady(driver);
 		if (driver.getTitle().equalsIgnoreCase("Medicare Advantage Plan Details | | UnitedHealthcare®")
@@ -249,7 +257,13 @@ public class VPPPlanSummaryPage extends UhcDriver {
 			fileName = "pdpplansummary.json";
 			JSONObject jsonObject = getActualJsonObject(fileName, planName,pdpPlanConatiner);
 			return jsonObject;
-		}
+		}else if(planName.contains("Regional PPO"))
+		{
+			fileName = "mamultistateplansummary.json";
+			JSONObject jsonObject = getActualJsonObject(fileName, planName,maPlanConatiner);
+			return jsonObject;
+
+			}
 		
 
 		return null;
@@ -430,6 +444,8 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		
 		return null;
 
+	}
+	
 	public String togglePlan() {
 		String currentYearFlag = "false";
 		validate(toggleplanYear);
@@ -438,8 +454,6 @@ public class VPPPlanSummaryPage extends UhcDriver {
 			currentYearFlag = "true";
 		}
 		return currentYearFlag;
-
-
 	}
 }
 	

@@ -409,6 +409,7 @@ public class CommonConstants {
 	public static final String VPP_PLAN_SUMMARY_PAGE_DATA = "vppplansummary.json";
 
 	public static final String PAGE_OBJECT_DIRECTORY_ULAYER_ACQ = "/page-objects/acquisition/ulayer/";
+		
 
 	public static final String SITE_ULAYER = "ulayer";
 
@@ -765,6 +766,8 @@ public class CommonConstants {
 	public static final String Request_For_Assistance_PAGE_DATA = "requestforassistance.json";
 	
 	public static final String CONFIRMATION_PAGE_DATA = "confirmation.json";
+	
+	public static final String PLAN_DOC_PDF_ACQ_PAGE_DATA = "plandocumentspdf.json";
 	
 
 	

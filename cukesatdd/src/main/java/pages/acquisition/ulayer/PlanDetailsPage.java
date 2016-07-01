@@ -54,6 +54,10 @@ public class PlanDetailsPage extends UhcDriver {
 	
 	@FindBy(xpath="//*[@id='bf3dfe9a-aba6-449b-865c-b5628cb03a60']/a[6]")
 	private WebElement pdfLink;
+	
+	private PageData planDocsPDF;
+	
+	public JSONObject planDocPDFAcqJson;
 
 	public PlanDetailsPage(WebDriver driver, String planType) {
 		super(driver);
@@ -190,6 +194,42 @@ public class PlanDetailsPage extends UhcDriver {
 			pdfLink.click();
 		}
 		
+	}
+	
+	public JSONObject getActualPdfLinksData() {
+		// TODO Auto-generated method stub
+		String fileName = CommonConstants.PLAN_DOC_PDF_ACQ_PAGE_DATA;
+		planDocsPDF = CommonUtility.readPageData(fileName, CommonConstants.PAGE_OBJECT_DIRECTORY_ULAYER_ACQ);
+		
+		JSONObject jsonObject = new JSONObject();
+		for (String key : planDocsPDF.getExpectedData().keySet()) {
+			List<WebElement> elements = findElements(planDocsPDF.getExpectedData()
+					.get(key));
+			JSONArray jsonArray = new JSONArray();
+			for (WebElement element : elements) {
+				
+				element.click();
+				try {
+					JSONObject jsonObjectForArray = new JSONObject();
+					jsonObjectForArray.put(element.getText(), element.getAttribute("href"));
+					jsonArray.put(jsonObjectForArray);
+				} catch (JSONException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+			try {
+				jsonObject.put(key, jsonArray);
+			} catch (JSONException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+					
+		}
+		planDocPDFAcqJson = jsonObject;
+		return planDocPDFAcqJson;
+
 	}
 	
 }
