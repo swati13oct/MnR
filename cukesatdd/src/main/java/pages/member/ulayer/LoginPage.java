@@ -67,13 +67,13 @@ public class LoginPage extends UhcDriver {
  		signInButton.click();
 		
 		
- 		if (MRScenario.environment.equals("dev-a")) {
+ 		if (MRScenario.environment.equals("dev-b")) {
 		Alert alert = driver.switchTo().alert();
         alert.accept();
         Alert alert1 = driver.switchTo().alert();
         alert1.accept();
-        Alert alert2 = driver.switchTo().alert();
-        alert2.accept();
+    //    Alert alert2 = driver.switchTo().alert();
+   //     alert2.accept();
  		}
         
         if(currentUrl().contains("home/my-account-home.html"))

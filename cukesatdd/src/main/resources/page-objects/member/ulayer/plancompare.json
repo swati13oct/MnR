@@ -14,8 +14,8 @@
 "elementName":"memberID"
 },
 "planStatus1":{
-"identifier":"id",
-"elementName":"status"
+"identifier":"xpath",
+"elementName":"/html/body/div[7]/div/div/table/tbody/tr[6]/td/div/div[2]/div/div/div[1]/ul/li[1]/div[1]/div/div[2]/div[3]/span[2]"
 },
 "planName":{
 "identifier":"xpath",
