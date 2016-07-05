@@ -72,7 +72,7 @@ public class PlanComparePage extends UhcDriver {
 				}
 			} else if (elements.size() > 1) {
 
-				try {
+				try { 
 					if (elements.get(1).getText() != null
 							&& !(elements.get(1).getText().equalsIgnoreCase(""))) {
 						currentYearPlan.put(key, elements.get(1).getText());
@@ -145,7 +145,7 @@ public class PlanComparePage extends UhcDriver {
 
 		}
 
-		if (getTitle().equalsIgnoreCase("Compare 2016 Plans")) {
+		if (getTitle().equalsIgnoreCase("Compare 2017 Plans")) {
 			return new PlanComparePage(driver);
 		}
 		return null;

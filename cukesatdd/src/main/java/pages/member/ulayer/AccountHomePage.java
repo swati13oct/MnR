@@ -10,6 +10,7 @@ import org.json.JSONObject;
 import org.openqa.selenium.Cookie;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
@@ -89,7 +90,7 @@ public class AccountHomePage extends UhcDriver {
 	@FindBy(className = "fd_myHealthWellness")
 	private WebElement hwTab;
 	
-	@FindBy(linkText = "Compare 2016 Plans")
+	@FindBy(linkText = "Compare 2017 Plans")
 	private WebElement planCompareLink;	
 	
 	@FindBy(xpath = "//div[@class='prefermain_mid mapd_div']/div/h3")
@@ -100,6 +101,9 @@ public class AccountHomePage extends UhcDriver {
 	
 	@FindBy(xpath = "//div[@class='myProfileMid']/div/form/div/div/div/div[2]/div/div[2]/h3")
 	private WebElement preferencesPageHeading;
+	
+
+	
 
 	private PageData myAccountHome;
 
@@ -391,15 +395,19 @@ public class AccountHomePage extends UhcDriver {
 	}
 
 	public PlanComparePage navigateToPlanCompare() {
-		//Compare 2016 Plans
+		//Compare 2017 Plans
 		planCompareLink.click();
+		
 		CommonUtility.waitForPageLoad(driver, planCompareHeader, 20);
-		if(getTitle().equalsIgnoreCase("Compare 2016 Plans"))
+		
+		if(getTitle().equalsIgnoreCase("Compare 2017 Plans"))
 		{
 			return new PlanComparePage(driver);
-		}
+			
+					}
 		return null;
 		
+	
 	}
 
 	public JSONObject getBrowserCheck() {
