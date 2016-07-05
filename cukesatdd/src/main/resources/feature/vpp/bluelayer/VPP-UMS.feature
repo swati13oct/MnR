@@ -1,4 +1,4 @@
-@vpppdf
+@vpp
 Feature: To test plan summary in UMS site
 Scenario Outline: Verify plan summary in UMS site
 Given the user is on the uhcmedicaresolutions site landing page
@@ -39,7 +39,7 @@ Then the user validates the details of the selected plan in UMS site
 Examples:
 	| zipcode | county             | plantype |  planName                                             |
 #	| 80002   | Adams County       | MAPD     |  AARP MedicareComplete SecureHorizons Plan 2 (HMO)    |
-#	| 80002   | Jefferson County   | MA	  |  AARP MedicareComplete SecureHorizons Plan 1 (HMO)    |
+	| 80002   | Jefferson County   | MA	  |  AARP MedicareComplete SecureHorizons Plan 1 (HMO)    |
 #	| 90210   |                    | MA       |  AARP MedicareComplete SecureHorizons Plan 2 (HMO)    |
 #	| 80001   |                    | PDP      |  AARP MedicareRx Preferred (PDP)                      |
 #	| 78006   | Comal County       | PDP      |  AARP MedicareRx Saver Plus (PDP)                     |
@@ -203,5 +203,5 @@ Examples:
 #	| 78006   | Bexar County       | SNP      |  UnitedHealthcare Dual Complete (HMO SNP)             |
 #	| 01002   | Hampshire County   | MA       |  AARP MedicareComplete Choice (Regional PPO)    |
 	| 01008   | Hampden County   | MA       |  AARP MedicareComplete Plan 2 (HMO)    |
-	
-	
+	| 11001   | Queens County     | MAPD    |  AARP MedicareComplete Plan 2 (HMO)    |
+	| 01008   | Hampden County   | PDP       |  AARP MedicareRx Preferred (PDP)    			|

@@ -1200,6 +1200,7 @@ public class VppUmsStepDefinition {
 		PlanDetailsPage planDetailsPage = (PlanDetailsPage) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_DETAILS_PAGE);
 		JSONObject planDocsPDFActualJson = planDetailsPage.getActualPdfLinksData();
+		System.out.println("planDocsPDFActualJson---->"+planDocsPDFActualJson);
 		
 		/* Get expected data */
 		String fileName = "plandocumentspdf";
@@ -1217,6 +1218,7 @@ public class VppUmsStepDefinition {
 				+ File.separator;
 		JSONObject planDocsPDFExpectedJson = MRScenario.readExpectedJson(
 				fileName, directory);
+		System.out.println("planDocsPDFExpectedJson::--->"+planDocsPDFExpectedJson);
 		
 		try {
 			JSONAssert.assertEquals(planDocsPDFExpectedJson,

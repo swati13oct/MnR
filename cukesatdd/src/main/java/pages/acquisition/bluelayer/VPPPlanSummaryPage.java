@@ -58,7 +58,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	@FindBy(xpath ="//div[@class='enabled ng-scope']")
 	List<WebElement> maPlanElement;
 	
-	@FindBy(xpath ="//div[@id='maplans_container']/div[2]/div/div/div/div[@class='ng-scope']")
+	@FindBy(xpath = "//div[@class='disabledprint ng-scope']")
 	List<WebElement> pdpPlanElement;
 	
 	@FindBy(xpath ="//div[@id='snpplans_container']/div[2]/div/div/div/div[@class='ng-scope']")
@@ -151,7 +151,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		}
 		CommonUtility.checkPageIsReady(driver);
 		if (driver.getTitle().equalsIgnoreCase("Medicare Advantage Plan Details | | UnitedHealthcare®")
-				|| driver.getTitle().equalsIgnoreCase("Plan Detail")) {
+				|| driver.getTitle().equalsIgnoreCase("Plan Detail") || driver.getTitle().equalsIgnoreCase("Medicare Prescription Drug Plan Details | UnitedHealthcare®") ) {
 			return new PlanDetailsPage(driver,planName);
 		}
 		return null;
