@@ -5,10 +5,6 @@
 "identifier":"id",
 "elementName":"step3Heading"
 },
-"step3Text":{
-"identifier":"id",
-"elementName":"step3desc"
-},
 "medicareinsuranceinfo":{
 "identifier":"id",
 "elementName":"medicalinsurheading"
