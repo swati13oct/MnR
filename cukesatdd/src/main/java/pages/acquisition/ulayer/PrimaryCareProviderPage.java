@@ -59,12 +59,12 @@ public class PrimaryCareProviderPage extends UhcDriver{
 		
 	public Object navigatesToNextStep(String premium) {
 			pcpsaveandcont.click();
-			if(premium.equalsIgnoreCase("$0.00 a month")){
-				return new OptionalRidersPage(driver);
-			}else{
+//			if(premium.equalsIgnoreCase("$0.00 a month")){
+//				return new OptionalRidersPage(driver);
+//			}else{
 				return new PlanPaymentOptions(driver);
 				
-			}
+//			}
 		}
 
 	public PlanPaymentOptions clickdisclaimer() {

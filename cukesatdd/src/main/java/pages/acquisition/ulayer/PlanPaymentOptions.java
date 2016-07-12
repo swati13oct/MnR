@@ -101,7 +101,7 @@ public class PlanPaymentOptions extends UhcDriver{
 		}
 		
 		
-	//	if(getTitle().equalsIgnoreCase("AARP Medicare Complete Online Application")||getTitle().equalsIgnoreCase("AARP Medicarerx Online Application")){
+
 			ppodisclaimerAgreeBtn.click();
 			try {
 				Thread.sleep(1000);
@@ -109,7 +109,7 @@ public class PlanPaymentOptions extends UhcDriver{
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-		}
+		//}
 		
 		
 		
