@@ -989,4 +989,16 @@ public class VppUmsStepDefinition {
 			return false;
 		}
 	}
+	
+	/*@Then("^user should see the inactive/grey plan compare button$")
+	public void verifyCompare3PlansButton(){
+		try {
+			
+			VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+					.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);			
+			plansummaryPage.verifyInactiveCompare3PlansButton();
+		} catch (Exception e) {
+		}
+	}*/
+
 }

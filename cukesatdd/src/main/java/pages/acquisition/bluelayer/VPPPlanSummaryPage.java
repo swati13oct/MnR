@@ -8,10 +8,12 @@ import java.util.List;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+
 import acceptancetests.atdd.data.CommonConstants;
 import acceptancetests.atdd.data.ElementData;
 import acceptancetests.atdd.data.PageData;
@@ -59,7 +61,15 @@ public class VPPPlanSummaryPage extends UhcDriver {
 
 	@FindBy(id = "editDrugMA")
 	private WebElement editDrugListLink;
+	
+	@FindBy(css="#pdpplans_container .planCompareBtn")
+	private WebElement comparePDPPlanChkBox;
+	
+	@FindBy(css="#maplans_container .compareHeading>p")
+	private WebElement compareUpto3PlansPopup;
 
+	@FindBy(xpath="//div[@data-ng-repeat='plan in maplans'][1]//span[@class='cpcheckbox']")
+	private WebElement compareChkBox;
 
 	private PageData vppPlanSummary;
 
@@ -335,5 +345,22 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		return null;
 
 	}
-
+	/**
+	 * This method verifies whether the Compare 3 Plans button is Inactive or NOt
+	 */
+	public void verifyInactiveCompare3PlansButton(){
+		
+		Assert.assertTrue("FAIL - Compare 3 plans button is not displayed", elementFound(comparePDPPlanChkBox));
+		Assert.assertEquals("readonly", comparePDPPlanChkBox.getAttribute("readonly"));
+	}
+	
+	public void clickAndVerifyCompareUpto3PlansPopup(){
+		comparePDPPlanChkBox.click();
+		Assert.assertEquals("Compare up to 3 plans Select 2-3 plans that you'd like to compare.",compareUpto3PlansPopup.getText().trim());
+	}
+	
+	public void verifyCompareCheckBoxesAreUnchecked(){
+		
+		Assert.assertEquals("compare_checkbox ng-scope ng-pristine ng-valid", compareChkBox.getAttribute("class"));
+	}
 }

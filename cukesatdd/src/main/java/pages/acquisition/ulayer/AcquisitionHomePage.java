@@ -327,7 +327,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		}
 		if (getTitle()
 				.equalsIgnoreCase(
-						"Our Medicare Plan Types | AARP® Medicare Plans from UnitedHealthcare®")) {
+						"Our Medicare Plan Types | UnitedHealthcare®")) {
 			return new VPPPlanSummaryPage(driver);
 		}
 		return null;

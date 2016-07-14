@@ -35,10 +35,10 @@ Then the user validates the details of the selected plan in AARP site
 Examples:
 	| zipcode | county             | plantype |  planName                                             |
 	| 80002   | Adams County       | MAPD     |  AARP MedicareComplete SecureHorizons Plan 2 (HMO)    |
-#	| 80002   | Jefferson County   | MA       |  AARP MedicareComplete SecureHorizons Plan 1 (HMO)    |
-#	| 90210   |                    | MA       |  AARP MedicareComplete SecureHorizons Plan 2 (HMO)    |
-#	| 80001   |                    | PDP      |  AARP MedicareRx Preferred (PDP)                      |
-#	| 78006   | Comal County       | PDP      |  AARP MedicareRx Saver Plus (PDP)                     |
+	| 80002   | Jefferson County   | MA       |  AARP MedicareComplete SecureHorizons Plan 1 (HMO)    |
+	| 90210   |                    | MA       |  AARP MedicareComplete SecureHorizons Plan 2 (HMO)    |
+	| 80001   |                    | PDP      |  AARP MedicareRx Preferred (PDP)                      |
+	| 78006   | Comal County       | PDP      |  AARP MedicareRx Saver Plus (PDP)                     |
 
 
 Scenario Outline: Verify plan summary after updating provider info in AARP site
@@ -60,3 +60,18 @@ Then the user validates the plan summary after provider information is added in 
 Examples:
 	| zipcode | county             | plantype | planName                                             | physicianSearch		| physicianName		|
 	| 80002   | Adams County       | MAPD     | AARP MedicareComplete SecureHorizons Plan 2 (HMO)    | All Primary Care Physicians  | Linda S Blust, MD	|
+
+Scenario Outline: Plan Compare Launch on VPP Pages
+Given the user is on the AARP medicare site landing page
+When the user performs plan search using following information in AARP site
+	| Zip Code    | <zipcode> |
+	| County Name | <county>  |
+Then the user navigates to the following plan type
+	| Plan Type | <plantype> |
+Then user should see the inactive/grey plan compare button
+And the user should see blank compare check box
+When user click any of the check boxes or compare content
+Then check in checkbox should appear and disappear
+Examples:
+	| zipcode | county             | plantype | planName                                             |
+	| 78006   | Bexar County       | PDP      | AARP MedicareRx Saver Plus (PDP)                     |

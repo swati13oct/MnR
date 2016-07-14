@@ -1,7 +1,5 @@
 package acceptancetests.vpp.ulayer;
 
-import gherkin.formatter.model.DataTableRow;
-
 import java.io.File;
 import java.util.HashMap;
 import java.util.List;
@@ -15,10 +13,6 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.skyscreamer.jsonassert.JSONAssert;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import pages.acquisition.ulayer.AcquisitionHomePage;
-import pages.acquisition.ulayer.PlanDetailsPage;
-import pages.acquisition.ulayer.ProviderSearchPage;
-import pages.acquisition.ulayer.VPPPlanSummaryPage;
 import acceptancetests.atdd.data.CommonConstants;
 import acceptancetests.atdd.data.acquisition.PageConstants;
 import acceptancetests.vpp.data.VPPCommonConstants;
@@ -29,6 +23,11 @@ import cucumber.annotation.en.Given;
 import cucumber.annotation.en.Then;
 import cucumber.annotation.en.When;
 import cucumber.table.DataTable;
+import gherkin.formatter.model.DataTableRow;
+import pages.acquisition.ulayer.AcquisitionHomePage;
+import pages.acquisition.ulayer.PlanDetailsPage;
+import pages.acquisition.ulayer.ProviderSearchPage;
+import pages.acquisition.ulayer.VPPPlanSummaryPage;
 
 /**
  * @author gumeshna
@@ -422,4 +421,57 @@ public class VppAarpStepDefinition {
 		}
 	}
 
+	@Then("^user should see the inactive/grey plan compare button$")
+	public void verifyCompare3PlansButton(){
+		try {
+			
+			VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+					.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);			
+			plansummaryPage.verifyInactiveCompare3PlansButton();
+		} catch (Exception e) {
+		}
+	}
+	
+	@And("^the user should see blank compare check box")
+	public void verifyCompareCheckBoxesAreUnchecked(){
+		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		plansummaryPage.verifyCompareCheckBoxesAreUnchecked();
+	}
+	
+	@When("^user click any of the check boxes or compare content")
+	public void clickOnCompareChkBox(){
+		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		plansummaryPage.clickCompareChkBox();
+	}
+	
+	@Then("^check in checkbox should appear and disappear")
+	public void verifyComparePopUpText(){
+		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		plansummaryPage.VerifyComparePopUpText();
+		plansummaryPage.UncheckAndVerifyCompareChkBox();
+	}
+	
+	@When("^the user navigates to the following plan type$")
+	public void planType_details_in_aarp_site(DataTable givenAttributes) {
+
+		List<DataTableRow> memberAttributesRow = givenAttributes
+				.getGherkinRows();
+		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells()
+					.get(0), memberAttributesRow.get(i).getCells().get(1));
+		}
+
+		String planType = memberAttributesMap.get("Plan Type");
+		getLoginScenario().saveBean(VPPCommonConstants.PLAN_TYPE, planType);
+
+		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);	
+		
+		plansummaryPage.viewPlanSummary(planType);
+	}
 }
