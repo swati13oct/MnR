@@ -13,7 +13,7 @@ import cucumber.junit.Cucumber;
  */
 @RunWith(Cucumber.class)
 @Cucumber.Options(glue = { "atdd.framework","acceptancetests.tollfreenumber" }, 
-		features = { "feature/toll-free-number" }, 
+		features = { "feature/toll-free-number/bluelayer" }, 
 		format = {
 		"pretty", "html:reports/test-report" }, tags ={"@tfn"})
 public class RunMRAtddTestTFN {

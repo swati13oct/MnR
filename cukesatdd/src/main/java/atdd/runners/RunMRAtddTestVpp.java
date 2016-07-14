@@ -7,14 +7,14 @@ import cucumber.junit.Cucumber;
 
 /**
  * 
- * @author schak38
+ * @author pgrover1
  *
  */
 @RunWith(Cucumber.class)
 @Cucumber.Options(glue = { "atdd.framework","acceptancetests.vpp" }, 
-		features = { "feature/vpp" }, 
+		features = { "feature/vpp/ulayer" }, 
 		format = {
-		"pretty", "html:reports/test-report" }, tags ={"@vppaarp"})
+		"pretty", "html:reports/test-report" }, tags ={"@planpaarp"})
 
 public class RunMRAtddTestVpp {
 	
