@@ -13,5 +13,5 @@ Examples:
 	| searchEngine   |
 #	| notApplicable  |
 	| google         |
-	| yahoo          |
+#	| yahoo          |
 	| bing           |
