@@ -100,7 +100,7 @@ public class TFNVPPsectionAarpStepDefinition {
 
 			BingSearchEnginePage searchEnginePage = new BingSearchEnginePage(wd);
 			BingSearchResultsPage searchResultsPage = searchEnginePage
-					.searchParameter("aarp medicare plans");
+					.searchParameter("aarp medicare plans from unitedhealthcare");
 			if (searchResultsPage != null) {
 				Assert.assertTrue(true);
 			} else {
