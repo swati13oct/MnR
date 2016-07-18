@@ -11,10 +11,10 @@ import cucumber.junit.Cucumber;
  *
  */
 @RunWith(Cucumber.class)
-@Cucumber.Options(glue = { "acceptancetests.Planpreview.ulayer" }, 
-		features = { "feature/PlanPreview" }, 
+@Cucumber.Options(glue = { "acceptancetests.Planpreview.bluelayer" }, 
+		features = { "feature/PlanPreview/bluelayer" }, 
 		format = {
-		"pretty", "html:reports/test-report" }, tags ={"@planpaarp"})
+		"pretty", "html:reports/test-report" }, tags ={"@planpuhc"})
 
 public class RunMRAtddPlanpreview {
 	
