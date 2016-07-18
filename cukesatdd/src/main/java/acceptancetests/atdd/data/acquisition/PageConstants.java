@@ -3,7 +3,7 @@
  */
 package acceptancetests.atdd.data.acquisition;
 
-import pages.acquisition.bluelayer.MARightsAndResponsibilitiesPage;
+//import pages.acquisition.bluelayer.MARightsAndResponsibilitiesPage;
 
 /**
  * @author pjaising
