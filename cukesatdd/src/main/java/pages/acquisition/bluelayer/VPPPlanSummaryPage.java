@@ -4,6 +4,7 @@
 package pages.acquisition.bluelayer;
 
 import java.util.List;
+import java.util.ArrayList;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -76,7 +77,9 @@ public class VPPPlanSummaryPage extends UhcDriver {
 
 	@FindBy(className = "toggleYear")
 	private WebElement toggleplanYear;
-
+	
+	@FindBy(xpath = "//div[@id='maplans_container']/div[3]/div/div[2]/div[1]/div/div[1]/div[1]/div/div[1]/div[2]/table/tbody/tr/td[3]/div/div[2]/div[3]/div[1]/p/a")
+	private WebElement MaProviderLink;
 
 
 	private PageData vppPlanSummary;
@@ -454,6 +457,13 @@ public class VPPPlanSummaryPage extends UhcDriver {
 			currentYearFlag = "true";
 		}
 		return currentYearFlag;
+	}
+	
+	public  void clicksOnMAProviderCoveredLink()
+	{
+		MaProviderLink.click();
+		ArrayList<String> tabs = new ArrayList<String>(driver.getWindowHandles());
+		driver.switchTo().window(tabs.get(0));
 	}
 }
 	

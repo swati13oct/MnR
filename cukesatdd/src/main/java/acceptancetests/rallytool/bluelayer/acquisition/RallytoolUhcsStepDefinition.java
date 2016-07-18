@@ -3,6 +3,7 @@ package acceptancetests.rallytool.bluelayer.acquisition;
 import gherkin.formatter.model.DataTableRow;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -720,6 +721,60 @@ public void user_clicks_providerlink_MAPlansandGrievancespage () {
 }
 
 
+
+@Given("^user navigates to PLAN SUMMARY Page$")
+public void user_navigates_to_PLAN_SUMMARY_Page(DataTable givenAttributes)
+{
+	WebDriver wd = getLoginScenario().getWebDriver();
+	
+	AcquisitionHomePage HomePage = new AcquisitionHomePage(wd);
+	
+	getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
+	getLoginScenario().saveBean(PageConstants.UHC_ACQUISITION_HOME_PAGE,HomePage);	
+	List<DataTableRow> memberAttributesRow = givenAttributes
+			.getGherkinRows();
+	Map<String, String> memberAttributesMap = new HashMap<String, String>();
+	for (int i = 0; i < memberAttributesRow.size(); i++) {
+
+		memberAttributesMap.put(memberAttributesRow.get(i).getCells()
+				.get(0), memberAttributesRow.get(i).getCells().get(1));
+	}
+
+	String zipcode = memberAttributesMap.get("Zip Code");
+	String county = memberAttributesMap.get("County Name");
+	getLoginScenario().saveBean(VPPCommonConstants.ZIPCODE, zipcode);
+	getLoginScenario().saveBean(VPPCommonConstants.COUNTY, county);
+	VPPPlanSummaryPage plansummaryPage = HomePage.searchPlans(zipcode, county);
+	getLoginScenario().saveBean(PageConstants.VPP_PLAN_SUMMARY_PAGE,plansummaryPage);
+
+}
+	
+@And("^click on Is my Provider Covered link of MA/MAPD plans for next year plan and switch back$")
+public void clicks_on_Provider_link_next_year(DataTable givenAttributes)
+{	
+	
+	List<DataTableRow> memberAttributesRow = givenAttributes
+			.getGherkinRows();
+	Map<String, String> memberAttributesMap = new HashMap<String, String>();
+	for (int i = 0; i < memberAttributesRow.size(); i++) {
+
+		memberAttributesMap.put(memberAttributesRow.get(i).getCells()
+				.get(0), memberAttributesRow.get(i).getCells().get(1));
+	}
+	String plantype = memberAttributesMap.get("Plan Type");
+	
+	VPPPlanSummaryPage plansummary= (VPPPlanSummaryPage)getLoginScenario().getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+	plansummary.viewPlanSummary(plantype);
+	plansummary.clicksOnMAProviderCoveredLink();
+}
+
+@Then("^click on previous year Is my Provider Covered link of MA/MAPD plans$")
+public void clicks_on_Provider_link_current_year()
+{ 	
+	VPPPlanSummaryPage plansummary= (VPPPlanSummaryPage)getLoginScenario().getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+	plansummary.togglePlan();
+	plansummary.clicksOnMAProviderCoveredLink();	
+}
 }	
 	
 		
