@@ -62,7 +62,7 @@ public class PlanPreviewAarpStepDefinition {
 	@Given("^the user is on the Plan Preview Page of AARP medicare site landing page$")
 	public void the_user_on_aarp_medicaresolutions_Site() {
 		WebDriver wd = getLoginScenario().getWebDriver();
-		System.out.println("reached");
+		//System.out.println("reached");
 		PlanPreviewPage planPreviewpage= new PlanPreviewPage(wd);
 		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
 		getLoginScenario().saveBean(PageConstants.ACQUISITION_PLANPREVIW_PAGE,planPreviewpage);
