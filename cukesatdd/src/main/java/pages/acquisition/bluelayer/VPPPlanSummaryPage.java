@@ -71,6 +71,12 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	@FindBy(xpath="//div[@data-ng-repeat='plan in maplans'][1]//span[@class='cpcheckbox']")
 	private WebElement compareChkBox;
 
+	@FindBy(xpath="//div[@data-ng-repeat='plan in maplans'][1]//div[contains(@id,'showcompare')][1]/div[@class='compareHeading']/p[1]/b")
+	private WebElement comparePopUpTxt1;
+	
+	@FindBy(xpath="//div[@data-ng-repeat='plan in maplans'][1]//div[contains(@id,'showcompare')][1]/div[@class='compareHeading']/p[2]")
+	private WebElement comparePopUpTxt2;
+	
 	private PageData vppPlanSummary;
 
 	public JSONObject vppPlanSummaryJson;
@@ -349,9 +355,9 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	 * This method verifies whether the Compare 3 Plans button is Inactive or NOt
 	 */
 	public void verifyInactiveCompare3PlansButton(){
-		
+		waitforElement(comparePDPPlanChkBox);
 		Assert.assertTrue("FAIL - Compare 3 plans button is not displayed", elementFound(comparePDPPlanChkBox));
-		Assert.assertEquals("readonly", comparePDPPlanChkBox.getAttribute("readonly"));
+		Assert.assertEquals("true", comparePDPPlanChkBox.getAttribute("readonly"));
 	}
 	
 	public void clickAndVerifyCompareUpto3PlansPopup(){
@@ -362,5 +368,23 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	public void verifyCompareCheckBoxesAreUnchecked(){
 		
 		Assert.assertEquals("compare_checkbox ng-scope ng-pristine ng-valid", compareChkBox.getAttribute("class"));
+		
 	}
+	
+	public void UncheckAndVerifyCompareChkBox(){
+		compareChkBox.click();
+		Assert.assertEquals("compare_checkbox ng-scope ng-valid ng-dirty", compareChkBox.getAttribute("class"));
+	}
+	
+	public void VerifyComparePopUpText(){
+		
+		Assert.assertEquals("Select 1 more plan to compare",comparePopUpTxt1.getText().trim());
+		Assert.assertEquals("Select 2-3 plans that you'd like to compare",comparePopUpTxt2.getText().trim());
+	}
+	
+	public void clickCompareChkBox(){
+		waitforElement(compareChkBox);
+		compareChkBox.click();
+	}
+	
 }
