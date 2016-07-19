@@ -148,3 +148,17 @@ Examples:
 #	| 78006   | Comal County       | PDP      |  AARP MedicareRx Saver Plus (PDP)                     |
 #	| 78006   | Bexar County       | SNP      |  UnitedHealthcare Dual Complete (HMO SNP)             |
 
+Scenario Outline: Plan Compare Launch on VPP Pages
+Given the user is on the uhcmedicaresolutions site landing page
+When the user performs plan search using following information in UMS site
+	| Zip Code    | <zipcode> |
+	| County Name | <county>  |
+Then the user navigates to the following plan type
+	| Plan Type | <plantype> |
+Then user should see the inactive/grey plan compare button
+And the user should see blank compare check box
+When user click any of the check boxes or compare content
+Then check in checkbox should appear and disappear
+Examples:
+	| zipcode | county             | plantype | planName                                             |
+	| 78006   | Bexar County       | PDP      | AARP MedicareRx Saver Plus (PDP)                     |
