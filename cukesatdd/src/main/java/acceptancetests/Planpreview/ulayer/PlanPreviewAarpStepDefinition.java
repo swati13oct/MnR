@@ -34,6 +34,7 @@ import pages.acquisition.ulayer.PrescriptionDrugPage;
 import pages.acquisition.ulayer.ProviderSearchPage;
 import pages.acquisition.ulayer.RegistrationHomePage;
 import pages.acquisition.ulayer.VPPPlanSummaryPage;
+import pages.acquisition.ulayer.ZipcodeLookupHomePage;
 import acceptancetests.atdd.data.CommonConstants;
 import acceptancetests.atdd.data.acquisition.PageConstants;
 import acceptancetests.globalfooter.data.AcquistionCommonConstants;
@@ -70,7 +71,7 @@ public class PlanPreviewAarpStepDefinition {
 	}
 
 	@When("^the user validates the multicounty popup on ulayer$")
-	public void zipcode_details_in_aarp_site(DataTable givenAttributes) {
+	public void zipcode_details_in_aarp_site(DataTable givenAttributes) throws InterruptedException {
 
 		List<DataTableRow> memberAttributesRow = givenAttributes
 				.getGherkinRows();
@@ -91,7 +92,9 @@ public class PlanPreviewAarpStepDefinition {
 		VPPPlanSummaryPage plansummaryPage = planpreviewPage.searchPlans(
 				zipcode, county);
 
-//		if (plansummaryPage != null) {
+		if (plansummaryPage != null) {
+			
+		Assert.assertTrue(true);
 //			getLoginScenario().saveBean(PageConstants.VPP_PLAN_SUMMARY_PAGE,
 //					plansummaryPage);
 //			/* Get expected data */
@@ -114,8 +117,34 @@ public class PlanPreviewAarpStepDefinition {
 //					planSummaryActualJson);
 		}
 	}
-
 	
+	@When("^the user clicks on lookup zipcode link in Planpreview  page$")
+	public void clicks_lookup_Zipcode_aarp() {
+
+		PlanPreviewPage planpreviewPage = (PlanPreviewPage) getLoginScenario().getBean(PageConstants.ACQUISITION_PLANPREVIW_PAGE);
+//		AcquisitionHomePage acquisitionHomePage = (AcquisitionHomePage) getLoginScenario().getBean(PageConstants.ACQUISITION_HOME_PAGE);
+		ZipcodeLookupHomePage zipcodeLookupPage = planpreviewPage
+				.looksupforZipcodes();
+
+		if (zipcodeLookupPage != null) {
+			getLoginScenario().saveBean(PageConstants.ZIP_LOOK_UP_HOME_PAGE,
+					zipcodeLookupPage);
+			Assert.assertTrue(true);
+		} else {
+			Assert.fail("Error accessing lookupzipcode link ");
+		}
+
+	}
+	
+	@After
+	public void tearDown() {
+		WebDriver wd = (WebDriver) getLoginScenario().getBean(
+				CommonConstants.WEBDRIVER);
+		wd.quit();
+		getLoginScenario().flushBeans();
+	}
+
+}
 	
 			
 
