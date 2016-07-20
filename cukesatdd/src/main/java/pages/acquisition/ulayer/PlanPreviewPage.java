@@ -37,13 +37,23 @@ public class PlanPreviewPage extends GlobalWebElements {
 	@FindBy(linkText="Look up a ZIP code")
 	private WebElement lookuplink;
 	
-	@FindBy(id = "vpp_selectcounty_box")
+	@FindBy(id="selectcounty_box")
 	private WebElement countyModal;
+
+	@FindBy(linkText="Look up a ZIP code")
+	private WebElement lookzip;
+	
+	@FindBy(id="findazip_box")
+	private WebElement zipCodeSearchPopup;
+	
+	@FindBy(xpath = "//div[@id='findazip_box']/div/div/div/h4")
+	private WebElement zipCodeSearchPopupHeading;
 	
 	@FindBys(value = { @FindBy(xpath = "//table[@id='selectcountytable']/tbody/tr/td") })
 	List<WebElement> countyRows;
 	
-	private static String AARP_PLANPREVIEW_PAGE_URL = MRConstants.AARP_PLANPREVIEW_URL;
+//	private static String AARP_PLANPREVIEW_PAGE_URL = MRConstants.AARP_PLANPREVIEW_URL;
+	
 	
 
 	public PlanPreviewPage(WebDriver driver) {
@@ -67,7 +77,7 @@ public class PlanPreviewPage extends GlobalWebElements {
 	@Override
 	public void openAndValidate() {
 		if (!(currentUrl().contains("aarpmedicareplans"))) {
-			start(AARP_PLANPREVIEW_PAGE_URL);
+			start("http:www.awe-stage-aarpmedicareplans.uhc.com/plan-preview.html");
 			validate(zipcodetxtbox);
 			validate(lookuplink);
 			validate(continuebtn);
@@ -76,13 +86,15 @@ public class PlanPreviewPage extends GlobalWebElements {
 
 	}
 	
-	public VPPPlanSummaryPage searchPlans(String zipcode, String countyName) {
+	public VPPPlanSummaryPage searchPlans(String zipcode, String countyName) throws InterruptedException
+{
 		sendkeys(zipcodetxtbox, zipcode);
 		continuebtn.click();
+		Thread.sleep(5000L);
 		try {
 			if (countyModal.isDisplayed()) {
 				for (WebElement county : countyRows) {
-					if (county.getText().equalsIgnoreCase(countyName)) {
+					if (county.getText().contains(countyName)) {
 						county.click();
 						break;
 					}
@@ -90,9 +102,12 @@ public class PlanPreviewPage extends GlobalWebElements {
 				}
 			}
 		} catch (Exception e) {
-			System.out.println("county box not found");
+			System.out.println(e.getMessage());
 		}
-		if (getTitle().equalsIgnoreCase("Our Medicare Plan Types | AARP® Medicare Plans from UnitedHealthcare®")) {
+		
+		
+		if (getTitle().equalsIgnoreCase("Plan Preview information")) {
+			System.out.println("Reached in if");
 			return new VPPPlanSummaryPage(driver);
 		}
 		return null;
@@ -100,4 +115,14 @@ public class PlanPreviewPage extends GlobalWebElements {
 	
 	}
 
+	
+	public ZipcodeLookupHomePage looksupforZipcodes() {
+		lookzip.click();
+		CommonUtility.waitForPageLoad(driver, zipCodeSearchPopup, CommonConstants.TIMEOUT_30);
+		if (zipCodeSearchPopupHeading.getText().equalsIgnoreCase("Find a ZIP code")) {
+			System.out.println("zipCodeSearchPopupHeading");
+			return new ZipcodeLookupHomePage(driver);
+		}
+		return null;
+	}
 }

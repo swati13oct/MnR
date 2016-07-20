@@ -16,3 +16,10 @@ Examples:
 #| 78006   | Comal County       |
 #| 78006   | Bexar County       |
 
+Scenario Outline: Verify Look up zipcode flow from home page in AARP site
+Given the user is on the Plan Preview Page of AARP medicare site landing page
+When the user clicks on lookup zipcode link in Planpreview  page
+And the user searches for zipcodes by entering the following Address and city and State details for AARP site
+    | Address    | <Address>   |
+    | City       | <city>      |
+    | State      | <state>     | 
