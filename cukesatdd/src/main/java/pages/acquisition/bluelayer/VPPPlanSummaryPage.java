@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.junit.Assert;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
@@ -16,15 +17,13 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-
-
-import pages.acquisition.ulayer.EnrollPlanInfoPage;
-import pages.acquisition.uhcretiree.Rallytool_Page;
 import acceptancetests.atdd.data.CommonConstants;
 import acceptancetests.atdd.data.ElementData;
 import acceptancetests.atdd.data.PageData;
 import acceptancetests.atdd.util.CommonUtility;
 import atdd.framework.UhcDriver;
+import pages.acquisition.uhcretiree.Rallytool_Page;
+import pages.acquisition.ulayer.EnrollPlanInfoPage;
 
 /**
  * @author pagarwa5
@@ -74,6 +73,21 @@ public class VPPPlanSummaryPage extends UhcDriver {
 
 	@FindBy(linkText ="Make an appointment with an agent")
 	private WebElement make_an_appointment_agent;
+	
+	@FindBy(css="#pdpplans_container .planCompareBtn")
+	private WebElement comparePDPPlanChkBox;
+	
+	@FindBy(css="#maplans_container .compareHeading>p")
+	private WebElement compareUpto3PlansPopup;
+
+	@FindBy(xpath="//div[@data-ng-repeat='plan in maplans'][1]//span[@class='cpcheckbox']")
+	private WebElement compareChkBox;
+
+	@FindBy(xpath="//div[@data-ng-repeat='plan in maplans'][1]//div[contains(@id,'showcompare')][1]/div[@class='compareHeading']/p[1]/b")
+	private WebElement comparePopUpTxt1;
+	
+	@FindBy(xpath="//div[@data-ng-repeat='plan in maplans'][1]//div[contains(@id,'showcompare')][1]/div[@class='compareHeading']/p[2]")
+	private WebElement comparePopUpTxt2;
 
 	@FindBy(className = "toggleYear")
 	private WebElement toggleplanYear;
@@ -464,6 +478,42 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		MaProviderLink.click();
 		ArrayList<String> tabs = new ArrayList<String>(driver.getWindowHandles());
 		driver.switchTo().window(tabs.get(0));
+	}
+	
+	/**
+	 * This method verifies whether the Compare 3 Plans button is Inactive or NOt
+	 */
+	public void verifyInactiveCompare3PlansButton(){
+		waitforElement(comparePDPPlanChkBox);
+		Assert.assertTrue("FAIL - Compare 3 plans button is not displayed", elementFound(comparePDPPlanChkBox));
+		Assert.assertEquals("true", comparePDPPlanChkBox.getAttribute("readonly"));
+	}
+	
+	public void clickAndVerifyCompareUpto3PlansPopup(){
+		comparePDPPlanChkBox.click();
+		Assert.assertEquals("Compare up to 3 plans Select 2-3 plans that you'd like to compare.",compareUpto3PlansPopup.getText().trim());
+	}
+	
+	public void verifyCompareCheckBoxesAreUnchecked(){
+		
+		Assert.assertEquals("compare_checkbox ng-scope ng-pristine ng-valid", compareChkBox.getAttribute("class"));
+		
+	}
+	
+	public void UncheckAndVerifyCompareChkBox(){
+		compareChkBox.click();
+		Assert.assertEquals("compare_checkbox ng-scope ng-valid ng-dirty", compareChkBox.getAttribute("class"));
+	}
+	
+	public void VerifyComparePopUpText(){
+		
+		Assert.assertEquals("Select 1 more plan to compare",comparePopUpTxt1.getText().trim());
+		Assert.assertEquals("Select 2-3 plans that you'd like to compare",comparePopUpTxt2.getText().trim());
+	}
+	
+	public void clickCompareChkBox(){
+		waitforElement(compareChkBox);
+		compareChkBox.click();
 	}
 }
 	

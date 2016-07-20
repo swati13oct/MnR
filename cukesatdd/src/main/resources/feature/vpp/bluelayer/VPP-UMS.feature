@@ -153,6 +153,7 @@ Examples:
 
 
 
+
 Scenario Outline: Verify plan details in UMS site for AEP only
 Given the user is on the uhcmedicaresolutions site landing page
 When the user performs plan search using following information in UMS site during AEP period
@@ -205,3 +206,19 @@ Examples:
 	| 01008   | Hampden County   | MA       |  AARP MedicareComplete Plan 2 (HMO)    |
 	| 11001   | Queens County     | MAPD    |  AARP MedicareComplete Plan 2 (HMO)    |
 	| 01008   | Hampden County   | PDP       |  AARP MedicareRx Preferred (PDP)    			|
+
+Scenario Outline: Plan Compare Launch on VPP Pages
+Given the user is on the uhcmedicaresolutions site landing page
+When the user performs plan search using following information in UMS site
+	| Zip Code    | <zipcode> |
+	| County Name | <county>  |
+Then the user navigates to the following plan type
+	| Plan Type | <plantype> |
+Then user should see the inactive/grey plan compare button
+And the user should see blank compare check box
+When user click any of the check boxes or compare content
+Then check in checkbox should appear and disappear
+Examples:
+	| zipcode | county             | plantype | planName                                             |
+	| 78006   | Bexar County       | PDP      | AARP MedicareRx Saver Plus (PDP)                     |
+
