@@ -1,25 +1,18 @@
 package pages.acquisition.ulayer;
 
-import java.util.ArrayList;
 import java.util.List;
 
-import org.json.JSONException;
-import org.json.JSONObject;
-import org.openqa.selenium.Alert;
-import org.openqa.selenium.NoSuchElementException;
-import org.openqa.selenium.TimeoutException;
+import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.FindBys;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.Select;
+import org.springframework.test.AssertThrows;
 
-import pages.acquisition.ulayer.ZipcodeLookupHomePage;
-import pages.member.ulayer.AccountHomePage;
 import acceptancetests.atdd.data.CommonConstants;
 import acceptancetests.atdd.data.MRConstants;
-import acceptancetests.atdd.data.PageData;
 import acceptancetests.atdd.util.CommonUtility;
 
 /**
@@ -46,13 +39,19 @@ public class PlanPreviewPage extends GlobalWebElements {
 	@FindBy(id="findazip_box")
 	private WebElement zipCodeSearchPopup;
 	
-	@FindBy(xpath = "//div[@id='findazip_box']/div/div/div/h4")
+	@FindBy(xpath = "//div[@id='findazip_box']/div[2]/div/h4/b")
 	private WebElement zipCodeSearchPopupHeading;
+	
+	@FindBy(xpath="//*[@id='pipAcq']/div/div[3]/select")
+	private WebElement selectplandropdwn;
+	
+	@FindBy(xpath="//*[@id='pipAcq']/div/div[3]/a/span")
+	private WebElement searchBtn;
 	
 	@FindBys(value = { @FindBy(xpath = "//table[@id='selectcountytable']/tbody/tr/td") })
 	List<WebElement> countyRows;
 	
-//	private static String AARP_PLANPREVIEW_PAGE_URL = MRConstants.AARP_PLANPREVIEW_URL;
+	private static String AARP_PLANPREVIEW_PAGE_URL = MRConstants.AARP_PLANPREVIEW_URL;
 	
 	
 
@@ -63,21 +62,11 @@ public class PlanPreviewPage extends GlobalWebElements {
 	}
 
 	
-			
-//	public ZipcodeLookupHomePage looksupforZipcodes() {
-//		lookzip.click();
-//		CommonUtility.waitForPageLoad(driver, zipCodeSearchPopup, CommonConstants.TIMEOUT_30);
-//		if (zipCodeSearchPopupHeading.getText().equalsIgnoreCase("Find a ZIP code")) {
-//			System.out.println("zipCodeSearchPopupHeading");
-//			return new ZipcodeLookupHomePage(driver);
-//		}
-//		return null;
-//	}
 
 	@Override
 	public void openAndValidate() {
 		if (!(currentUrl().contains("aarpmedicareplans"))) {
-			start("http:www.awe-stage-aarpmedicareplans.uhc.com/plan-preview.html");
+			start(AARP_PLANPREVIEW_PAGE_URL);
 			validate(zipcodetxtbox);
 			validate(lookuplink);
 			validate(continuebtn);
@@ -86,7 +75,7 @@ public class PlanPreviewPage extends GlobalWebElements {
 
 	}
 	
-	public VPPPlanSummaryPage searchPlans(String zipcode, String countyName) throws InterruptedException
+	public void searchPlans(String zipcode, String countyName) throws InterruptedException
 {
 		sendkeys(zipcodetxtbox, zipcode);
 		continuebtn.click();
@@ -107,10 +96,13 @@ public class PlanPreviewPage extends GlobalWebElements {
 		
 		
 		if (getTitle().equalsIgnoreCase("Plan Preview information")) {
-			System.out.println("Reached in if");
-			return new VPPPlanSummaryPage(driver);
+			Assert.assertTrue(true);
 		}
-		return null;
+		else
+		{
+			Assert.assertTrue(false);
+		}
+		
 
 	
 	}
@@ -119,10 +111,27 @@ public class PlanPreviewPage extends GlobalWebElements {
 	public ZipcodeLookupHomePage looksupforZipcodes() {
 		lookzip.click();
 		CommonUtility.waitForPageLoad(driver, zipCodeSearchPopup, CommonConstants.TIMEOUT_30);
+		System.out.println(zipCodeSearchPopupHeading.getText());
 		if (zipCodeSearchPopupHeading.getText().equalsIgnoreCase("Find a ZIP code")) {
 			System.out.println("zipCodeSearchPopupHeading");
 			return new ZipcodeLookupHomePage(driver);
 		}
 		return null;
 	}
+	
+	public void validatesplandropdown(String planname)
+	{
+		Select dropdown= new Select(selectplandropdwn);
+		dropdown.selectByVisibleText(planname);
+		searchBtn.click();
+		if (currentUrl().contains("/plan-documents.html"))
+		{
+			System.out.println("Plan documents page loaded");
+			Assert.assertTrue(true);
+		}
+		
+		
+	}
+	
+	
 }
