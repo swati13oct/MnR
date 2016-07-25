@@ -52,7 +52,7 @@ public class EnrollInPlanUhcStepDefinition {
                 return loginScenario;
         }
 
-        @Given("^the user is on AARP medicare site landing page$")
+        @Given("^the user is on the UHC medicare solutions landing page$")
         public void the_user_on_UHC_Medicaresolutions_Site() {
                 WebDriver wd = getLoginScenario().getWebDriver();
 
@@ -64,7 +64,7 @@ public class EnrollInPlanUhcStepDefinition {
         }
 
         @When("^user performs plan search using following information in AARP site$")
-        public void zipcode_details_in_aarp_site(DataTable givenAttributes) {
+        public void zipcode_details_in_uhc_site(DataTable givenAttributes) {
 
                 List<DataTableRow> memberAttributesRow = givenAttributes
                                 .getGherkinRows();

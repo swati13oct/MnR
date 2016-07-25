@@ -1,18 +1,18 @@
 @enrollInPlanUHC
-Feature: To test enroll in plan on AARP site 
-Scenario Outline: Verify enroll in plan in AARP site for federal plan type member  
-Given the user is on AARP medicare site landing page
-When user performs plan search using following information in AARP site
+Feature: To test enroll in plan on UHC site 
+Scenario Outline: Verify enroll in plan in UHC site for federal plan type member  
+Given the user is on the UHC medicare solutions landing page
+When user performs plan search using following information in UHC site
         | Zip Code    | <zipcode> |
         | County Name | <countyName>  |
-And the user views plans of the below plan type in AARP site
+And the user views plans of the below plan type in UHC site
         | Plan Type | <planType> |
-And the user enrolls for the below plan in AARP site
+And the user enrolls for the below plan in UHC site
         | <planName> |
-And the user select the answer of this question Do you have End-Stage Renal Disease in AARP site
+And the user select the answer of this question Do you have End-Stage Renal Disease in UHC site
         |<answer>|
-And the user navigates to Benefit information step in AARP site
-And the user fill following information in beneficiary information step in AARP site
+And the user navigates to Benefit information step in UHC site
+And the user fill following information in beneficiary information step in UHC site
      | First Name                        | <firstName>                    |
      | Middle Initial                    | <middleInitial>            |
      | Last Name                         | <lastName>                    |
@@ -30,12 +30,12 @@ And the user fill following information in beneficiary information step in AARP 
      | Email Address                         | <emailAddress>            |
      | Confirm Email Address                 | <confirmEmailAddress>    |
      | Language Preference                 | <languagePreference>     |
-And the user navigates to Additional Information step in AARP site
-And the user reviews the personal and plan data by naviagting to Review application step in AARP site
-And the user navigates to submit application step in AARP site
-And the user selects "I am the applicant listed on this enrollment application" for the question "What is your relationship to the applicant listed on this enrollment application" in AARP site
-And the user submits application by selecting agree to the Statement of Understanding in AARP site
-Then the user validates the enrollment application confimation in AARP site
+And the user navigates to Additional Information step in UHC site
+And the user reviews the personal and plan data by naviagting to Review application step in UHC site
+And the user navigates to submit application step in UHC site
+And the user selects "I am the applicant listed on this enrollment application" for the question "What is your relationship to the applicant listed on this enrollment application" in UHC site
+And the user submits application by selecting agree to the Statement of Understanding in UHC site
+Then the user validates the enrollment application confimation in UHC site
     
   Examples:
   |zipcode |countyName   | planType   | planName                                           |answer|firstName|middleInitial|lastName|birthDate  |selectedGender        | medicareClaimNumber|hospitalEffectiveDate        |medicalEffectiveDate        |address    |  city          | apartment |mainPhoneNumber |otherPhoneNumber| emailAddress   | confirmEmailAddress | languagePreference |
@@ -44,17 +44,17 @@ Then the user validates the enrollment application confimation in AARP site
 ## |80002  |Adams County | PDP        |AARP MedicareRx Preferred (PDP)                     |No    | miller  |  j          |desh    |11/12/1989 |  Male                | 222-22-2222-C      |07/01/1989                   |07/01/1989                  |Ggn City   | Bang  | a-12    |  No                |B3             | DEL           | C3             |TEXAS               |73301          |8800340917      |9414710604      |c@uhg.com   |c@uhg.com          |  English         |  Yes                  | 11/12/1999      | 11/12/1999  | Yes         |  11/12/1999      |   Yes           |11/12/1999 |   Yes                    | LIC                |  1213       | 123458       |       Yes                        | I     |J       | K     | L               | TEXAS        |73301    | 8800340917   | 11/12/1999    |     Yes                   |3333          |   Yes                    |   ZEX                      |456    | 3333   |  Yes              | Yes                     |1114    |  yes                          |Abc          |kumar           |saini        | brother                   | b-12      | agra     | banglow2    | TEXAS        |73301   |9414710604     |  Agree          | 
     
 
-Scenario Outline: Verify enroll in plan in AARP site for federal plan type member  
-Given the user is on AARP medicare site landing page
-When user performs plan search using following information in AARP site
+Scenario Outline: Verify enroll in plan in UHC site for federal plan type member  
+Given the user is on UHC medicare site landing page
+When user performs plan search using following information in UHC site
         | Zip Code    | <zipcode> |
         | County Name | <countyName>  |
-And the user views plans of the below plan type in AARP site
+And the user views plans of the below plan type in UHC site
         | Plan Type | <planType> |
-And the user enrolls for the below plan in AARP site
+And the user enrolls for the below plan in UHC site
         | <planName> |
-And the user navigates to Benefit information step in AARP site
-And the user fill following information in beneficiary information step in AARP site
+And the user navigates to Benefit information step in UHC site
+And the user fill following information in beneficiary information step in UHC site
      | First Name                        | <firstName>                    |
      | Middle Initial                    | <middleInitial>            |
      | Last Name                         | <lastName>                    |
@@ -72,12 +72,12 @@ And the user fill following information in beneficiary information step in AARP 
      | Email Address                         | <emailAddress>            |
      | Confirm Email Address                 | <confirmEmailAddress>    |
      | Language Preference                 | <languagePreference>     |
-And the user navigates to Additional Information step in AARP site
-And the user reviews the personal and plan data by naviagting to Review application step in AARP site
-And the user navigates to submit application step in AARP site
-And the user selects "I am the applicant listed on this enrollment application" for the question "What is your relationship to the applicant listed on this enrollment application" in AARP site
-And the user submits application by selecting agree to the Statement of Understanding in AARP site
-Then the user validates the enrollment application confimation in AARP site
+And the user navigates to Additional Information step in UHC site
+And the user reviews the personal and plan data by naviagting to Review application step in UHC site
+And the user navigates to submit application step in UHC site
+And the user selects "I am the applicant listed on this enrollment application" for the question "What is your relationship to the applicant listed on this enrollment application" in UHC site
+And the user submits application by selecting agree to the Statement of Understanding in UHC site
+Then the user validates the enrollment application confimation in UHC site
 
     
   Examples:
@@ -88,19 +88,19 @@ Then the user validates the enrollment application confimation in AARP site
     
     
    
-Scenario Outline: Verify enroll in plan  in AARP site for federal plan type member  
-Given the following zipcode for AARP site 
+Scenario Outline: Verify enroll in plan  in UHC site for federal plan type member  
+Given the following zipcode for UHC site 
                  | Zip Code    | <zipcode>    |
                  | County Name | <countyName> |
-When the user performs a plan search in VPP flow for AARP site
+When the user performs a plan search in VPP flow for UHC site
          | Plan Type | <plantype> |
-And the user views enroll in plan in AARP site
+And the user views enroll in plan in UHC site
          | Plan Name  | <planName>  |         
 ##Then the user validate following plan information
 ##    | Plan     |
 ##    | ZIP      |
 ##    | Premium  |
-And the user click enroll in a plan in AARP site
+And the user click enroll in a plan in UHC site
 And the user performs to continue to online enrollment                                                                                                                                                                                                                                                        
 ##And the user select plan information after enrollment
 ##Then the user validate enrollment disclaimer information in plan information
