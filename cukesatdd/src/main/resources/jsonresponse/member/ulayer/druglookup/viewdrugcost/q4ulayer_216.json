@@ -1,0 +1,12 @@
+{
+"totalEstimatedAnnualDrugCost": "$2,680.08",
+"annualDeductibleTier1_2": "$0.00",
+"annualDeductibleTier1_2_3":"$200.00",
+"moneySaveWithGenericDrug": "$2,656.08",
+"moneySaveWithPharmacies": "$2.44",
+"DrugList": "Lipitor TAB 10MG\nQty 30 Every 1 month",
+"drugTier": "NC",
+"initialCoverageStage": "$223.34",
+"coverageGapStage": "$223.34",
+"catastrophicCoverageStage": "$223.34"
+}
