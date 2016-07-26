@@ -34,4 +34,5 @@ public class EnrollInPlanCommonConstants {
 
 	public static final String ADDITIONAL_INFORMATION = "additionalinformation";
 	public static final String CONFIRMATION = "confirmation";
+	   public static final String REVIEW_APPLICATION_BLUE_LAYER = "reviewapplication";
 }

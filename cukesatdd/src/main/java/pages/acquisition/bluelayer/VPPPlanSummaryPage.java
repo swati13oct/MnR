@@ -17,6 +17,14 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
+
+
+
+import pages.acquisition.bluelayer.EnrollPlanInfoPage;
+
+import pages.acquisition.uhcretiree.Rallytool_Page;
+
+
 import acceptancetests.atdd.data.CommonConstants;
 import acceptancetests.atdd.data.ElementData;
 import acceptancetests.atdd.data.PageData;
@@ -379,8 +387,9 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		if (pageHeading.getText().equalsIgnoreCase(
 				"You Have Chosen to Enroll in the Following Plan")) {
 			return new EnrollPlanInfoPage(driver);
-		}
+		}else{
 		return null;
+	}
 	}	
 	
 	public GetStartedPage clicksOnEnterDrugInformationLink(String planName) {
