@@ -8,6 +8,7 @@ import gherkin.formatter.model.DataTableRow;
 import java.io.File;
 import java.util.Calendar;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -35,9 +36,11 @@ import pages.acquisition.ulayer.ProviderSearchPage;
 import pages.acquisition.ulayer.RegistrationHomePage;
 import pages.acquisition.ulayer.VPPPlanSummaryPage;
 import pages.acquisition.ulayer.ZipcodeLookupHomePage;
+import pages.acquisition.ulayer.ZipcodeSelectionHomePage;
 import acceptancetests.atdd.data.CommonConstants;
 import acceptancetests.atdd.data.acquisition.PageConstants;
 import acceptancetests.globalfooter.data.AcquistionCommonConstants;
+import acceptancetests.lookupzipcode.data.ZipLookupCommonConstants;
 import acceptancetests.vpp.data.VPPCommonConstants;
 import atdd.framework.MRScenario;
 import cucumber.annotation.After;
@@ -89,33 +92,9 @@ public class PlanPreviewAarpStepDefinition {
 
 		PlanPreviewPage planpreviewPage= (PlanPreviewPage)getLoginScenario()
 				.getBean(PageConstants.ACQUISITION_PLANPREVIW_PAGE);
-		VPPPlanSummaryPage plansummaryPage = planpreviewPage.searchPlans(
-				zipcode, county);
+		 planpreviewPage.searchPlans(zipcode, county);
 
-		if (plansummaryPage != null) {
-			
-		Assert.assertTrue(true);
-//			getLoginScenario().saveBean(PageConstants.VPP_PLAN_SUMMARY_PAGE,
-//					plansummaryPage);
-//			/* Get expected data */
-//			String fileName = "vppPlanSummary";
-//			String directory = CommonConstants.ACQUISITION_EXPECTED_DIRECTORY
-//					+ File.separator + CommonConstants.SITE_ULAYER
-//					+ File.separator + VPPCommonConstants.VPP_PLAN_FLOW_NAME
-//					+ File.separator + zipcode + File.separator + county
-//					+ File.separator;
-//			JSONObject planSummaryExpectedJson = MRScenario.readExpectedJson(
-//					fileName, directory);
-//			getLoginScenario().saveBean(
-//					VPPCommonConstants.VPP_PLAN_SUMMARY_EXPECTED,
-//					planSummaryExpectedJson);
-//
-//			/* Get actual data */
-//			JSONObject planSummaryActualJson = plansummaryPage.vppPlanSummaryJson;
-//			getLoginScenario().saveBean(
-//					VPPCommonConstants.VPP_PLAN_SUMMARY_ACTUAL,
-//					planSummaryActualJson);
-		}
+		
 	}
 	
 	@When("^the user clicks on lookup zipcode link in Planpreview  page$")
@@ -134,6 +113,70 @@ public class PlanPreviewAarpStepDefinition {
 			Assert.fail("Error accessing lookupzipcode link ");
 		}
 
+	}
+	
+	/*@And("^the user searches for zipcodes by entering the following Address and city and State details for AARP site$")
+	public void enters_addres_city_state_details_aarp(
+			DataTable addressAttributes) {
+	List<DataTableRow> addressAttributesRow = addressAttributes
+				.getGherkinRows();
+		Map<String, String> addressAttributesMap = new LinkedHashMap<String, String>();
+		for (int i = 0; i < addressAttributesRow.size(); i++) {
+			addressAttributesMap.put(addressAttributesRow.get(i).getCells()
+					.get(0), addressAttributesRow.get(i).getCells().get(1));
+		}
+
+		String address = addressAttributesMap.get("Address");
+		String city = addressAttributesMap.get("City");
+		String state = addressAttributesMap.get("State");
+
+		ZipcodeLookupHomePage zipcodeLookupAarpPage = (ZipcodeLookupHomePage) getLoginScenario()
+				.getBean(PageConstants.ZIP_LOOK_UP_HOME_PAGE);
+		ZipcodeSelectionHomePage zipcodeSelectionPage = zipcodeLookupAarpPage
+				.enterAddressDetails(address, city, state);
+
+		if (zipcodeSelectionPage != null) {
+			getLoginScenario().saveBean(PageConstants.ZIP_SELECTION_HOME_PAGE,
+					zipcodeSelectionPage);
+			/ Get expected data 
+			String fileName = address;
+			String directory = CommonConstants.ACQUISITION_EXPECTED_DIRECTORY
+					+ File.separator + CommonConstants.SITE_ULAYER
+					+ File.separator + ZipLookupCommonConstants.LOOK_UP_ZIPCODE
+					+ File.separator + state + File.separator + city
+					+ File.separator;
+
+			JSONObject zipcodeSelectionExpectedJson = MRScenario
+					.readExpectedJson(fileName, directory);
+			getLoginScenario().saveBean(
+					ZipLookupCommonConstants.ZIP_SELECTION_EXPECTED,
+					zipcodeSelectionExpectedJson);
+
+			JSONObject zipcodeSelectionActualJson = zipcodeSelectionPage.zipSelectionhomeJson;
+			getLoginScenario().saveBean(
+					ZipLookupCommonConstants.ZIP_SELECTION_ACTUAL,
+					zipcodeSelectionActualJson);
+		}
+	}*/
+	
+	@When("^user select the below  plan$")
+	public void user_validates_plan_selector_dropdown(DataTable givenAttributes)
+	{
+		List<DataTableRow> memberAttributesRow = givenAttributes
+				.getGherkinRows();
+		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells()
+					.get(0), memberAttributesRow.get(i).getCells().get(1));
+		}
+		
+		String planName = memberAttributesMap.get("PlanName");
+		PlanPreviewPage planpreviewPage = (PlanPreviewPage) getLoginScenario()
+				.getBean(PageConstants.ACQUISITION_PLANPREVIW_PAGE);
+			
+		
+		planpreviewPage.validatesplandropdown(planName);
 	}
 	
 	@After
