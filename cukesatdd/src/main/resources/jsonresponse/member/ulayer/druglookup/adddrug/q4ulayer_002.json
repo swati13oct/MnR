@@ -1,0 +1,11 @@
+{
+"NoDrug":{
+"searchLink": "search",
+"cancelLink":"Cancel and go back to drug list"
+},
+"lipi":{
+"searchLink": "search",
+"cancelLink":"Cancel and go back to drug list",
+"drugDropDownList":"Lipichol 540\nLipidshield Plus\nLipistart\nLipitor\nMicrolipid"
+}
+}
