@@ -85,3 +85,18 @@ Examples:
 	| 80210   | Denver County      | MA       |  AARP MedicareComplete SecureHorizons Plan 1 (HMO)    |
 	
 	
+Scenario Outline: Verify Enroll now link on plan summary page in AARP site for AEP only from 15th October till 30th November
+Given the user is on the aquisition AARP medicare site home page 
+When the user performs plan search using following information in aquisition AARP site during AEP period
+	| Zip Code    | <zipcode> |
+	| County Name | <county>  |
+Then user select MA/MAPD/PDP plans on plan summary page using following information during AEP period
+	| Plan Type | <plantype> |
+	| Plan Name | <planName> |
+And user verify enroll now link for next year MA/MAPD/PDP plans during AEP period
+
+Examples:
+	| zipcode | county             | plantype |  planName                                             |  		 
+  	| 90210   | Los Angeles County | MA       |  AARP MedicareComplete SecureHorizons Plan 1 (HMO)    |
+#	| 90210   | Los Angeles County | PDP      |  AARP MedicareRx Preferred (PDP)					  |
+	
