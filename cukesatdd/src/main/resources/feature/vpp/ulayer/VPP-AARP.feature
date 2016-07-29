@@ -120,6 +120,7 @@ When the user view plan details of the above selected plan in AARP site
 #Then the user validates the details of the selected plan in AARP site
 And the user validate pdf links
 Examples:
+
 	| zipcode | county             | plantype | planName                                             |
 	#| 80210   | Denver County       | MAPD     | AARP MedicareComplete SecureHorizons Plan 1 (HMO)    |
 	| 01002   | Hampshire County   | MA       |  AARP MedicareComplete Choice (Regional PPO)    |
@@ -144,4 +145,26 @@ Then check in checkbox should appear and disappear
 Examples:
 	| zipcode | county             | plantype | planName                                             |
 	| 78006   | Bexar County       | PDP      | AARP MedicareRx Saver Plus (PDP)                     |
+
+
+	| zipcode | county             | plantype |  planName                                             |  		 
+   #| 90210   | Los Angeles County | MA       |  AARP MedicareComplete SecureHorizons Plan 2 (HMO)    |
+	| 80210   | Denver County      | MA       |  AARP MedicareComplete SecureHorizons Plan 1 (HMO)    |
+	
+	
+Scenario Outline: Verify Enroll now link on plan summary page in AARP site for AEP only from 15th October till 30th November
+Given the user is on the aquisition AARP medicare site home page 
+When the user performs plan search using following information in aquisition AARP site during AEP period
+	| Zip Code    | <zipcode> |
+	| County Name | <county>  |
+Then user select MA/MAPD/PDP plans on plan summary page using following information during AEP period
+	| Plan Type | <plantype> |
+	| Plan Name | <planName> |
+And user verify enroll now link for next year MA/MAPD/PDP plans during AEP period
+
+Examples:
+	| zipcode | county             | plantype |  planName                                             |  		 
+  	| 90210   | Los Angeles County | MA       |  AARP MedicareComplete SecureHorizons Plan 1 (HMO)    |
+#	| 90210   | Los Angeles County | PDP      |  AARP MedicareRx Preferred (PDP)					  |
+	
 

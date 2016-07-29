@@ -651,7 +651,7 @@ System.out.println("planSummaryExpectedJson---->"
 		
 	}
 
-	@After
+	/*@After
 	public void tearDown() {
 		WebDriver wd = (WebDriver) getLoginScenario().getBean(
 				CommonConstants.WEBDRIVER);
@@ -666,6 +666,66 @@ System.out.println("planSummaryExpectedJson---->"
 		} catch (NoAlertPresentException e) {
 			return false;
 		}
+	}*/
+	
+	@Given("^the user is on the aquisition AARP medicare site home page$")
+	public void user_on_acquisition_aarp_homepage()
+	{	WebDriver wd = getLoginScenario().getWebDriver();
+		AcquisitionHomePage home= new AcquisitionHomePage(wd);
+		getLoginScenario().saveBean(PageConstants.ACQUISITION_HOME_PAGE,
+				home);
+	}
+
+	@When ("^the user performs plan search using following information in aquisition AARP site during AEP period$")
+	public void user_navigate_to_plansummary(DataTable givenAttributes) {
+		AcquisitionHomePage home = (AcquisitionHomePage) getLoginScenario()
+				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+		List<DataTableRow> memberAttributesRow = givenAttributes
+				.getGherkinRows();
+		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells()
+					.get(0), memberAttributesRow.get(i).getCells().get(1));
+		}
+
+		String zipcode = memberAttributesMap.get("Zip Code");
+		String county = memberAttributesMap.get("County Name");
+		getLoginScenario().saveBean(VPPCommonConstants.ZIPCODE, zipcode);
+		getLoginScenario().saveBean(VPPCommonConstants.COUNTY, county);
+		VPPPlanSummaryPage plansummary = home.searchPlans(zipcode, county);
+		getLoginScenario().saveBean(PageConstants.VPP_PLAN_SUMMARY_PAGE,
+				plansummary);
+	}
+
+	@Then ("^user select MA/MAPD/PDP plans on plan summary page using following information during AEP period$")
+	public void click_on_showplans(DataTable givenAttributes) {
+		VPPPlanSummaryPage plansummary = (VPPPlanSummaryPage) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		List<DataTableRow> memberAttributesRow = givenAttributes
+				.getGherkinRows();
+		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells()
+					.get(0), memberAttributesRow.get(i).getCells().get(1));
+		}
+		String plantype = memberAttributesMap.get("Plan Type");
+		plansummary.viewPlanSummary(plantype);
+		String planname = memberAttributesMap.get("Plan Name");
+		plansummary.plantitlematch(planname,plantype.toString());
+		getLoginScenario().saveBean(VPPCommonConstants.PLAN_TYPE, plantype);
+		getLoginScenario().saveBean(PageConstants.VPP_PLAN_SUMMARY_PAGE,
+				plansummary);
+	}
+	
+	@And("^user verify enroll now link for next year MA/MAPD/PDP plans during AEP period$")
+	public void verify_nextyear_enrolllink() {
+		Object plantype = getLoginScenario().getBean(
+				VPPCommonConstants.PLAN_TYPE);
+		VPPPlanSummaryPage plansummary = (VPPPlanSummaryPage) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		plansummary.verifyandclickenrolllink(plantype.toString());
 	}
 	
 	@Then("^user should see the inactive/grey plan compare button$")
