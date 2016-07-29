@@ -1,0 +1,12 @@
+{
+"totalEstimatedAnnualDrugCost": "$24.00",
+"annualDeductibleTier1&2": "$0.00",
+"annualDeductibleTier3&4&5": "$130.00",
+"moneySaveWithPharmacies": "$24.00",
+"DrugList": "atorvastatin calcium TAB 10MG\nQty 30 Every 1 month",
+"drugTier": "Tier 1",
+"drugLimits": "QL",	
+"initialCoverageStage": "$2.00",
+"coverageGapStage": "$4.66",
+"catastrophicCoverageStage": "$2.95"
+}

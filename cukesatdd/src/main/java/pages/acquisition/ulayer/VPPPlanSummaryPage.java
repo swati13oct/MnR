@@ -3,6 +3,7 @@
  */
 package pages.acquisition.ulayer;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.json.JSONArray;
@@ -72,6 +73,17 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	@FindBy(id = "providerSearchFrame")
 	private WebElement providerSearchIframe;
 	
+
+	@FindBy(className = "toggleYear")
+	private WebElement toggleplanYear;
+	
+	@FindBy(xpath = "//div[@id='maplans_container']/div[3]/div/div[2]/div[1]/div/div[1]/div[1]/div/div[1]/div[2]/table/tbody/tr/td[3]/div/div[2]/div[3]/div[1]/p/a")
+	private WebElement MaProviderLink;
+	
+	@FindBy(xpath="//div[@id='mainWrapper']/div/table/tbody/tr[2]/td/div/table/tbody/tr[2]/td/div/div/div/div[3]/div/div[3]/div[3]/div/div[1]/a")
+	private WebElement previousYearLink;
+
+
 	@FindBy(css="#pdpplans_container .planCompareBtn")
 	private WebElement comparePDPPlanChkBox;
 	
@@ -89,7 +101,15 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	
 	@FindBy(xpath="//div[@data-ng-repeat='plan in maplans'][1]//div[contains(@id,'showcompare')][1]/div[@class='compareHeading']/p[2]")
 	private WebElement comparePopUpTxt2;
+
+
+		
+	@FindBy(xpath=".//div[@id='pdpplans_container']/div[3]/div[1]/div/div/div[2]/div/div[1]/div[3]/div/div/span[2]/a")
+	private WebElement PDPEnrolllink;
+
 	
+	@FindBy (xpath=".//div[@id='maplans_container']/div[3]/div[1]/div/div[1]/div[1]/div/div[1]/div[3]/div/div/span[2]/a")
+	private WebElement MAEnrolllink;
 
 	private PageData vppPlanSummary;
 
@@ -252,7 +272,13 @@ public class VPPPlanSummaryPage extends UhcDriver {
 			JSONObject jsonObject = getActualJsonObject(fileName, planName,pdpPlanElement);
 			return jsonObject;
 		}
-		
+		if(planName.contains("Regional PPO"))
+		{
+		fileName = "mamultistateplansummary.json";
+		JSONObject jsonObject = getActualJsonObject(fileName, planName,maPlanElement);
+		return jsonObject;
+
+		}
 		
 		return null;
 	}
@@ -467,6 +493,29 @@ public class VPPPlanSummaryPage extends UhcDriver {
 
 		
 	}
+	
+	public String togglePlan() {
+		String currentYearFlag = "false";
+		validate(toggleplanYear);
+		if (toggleplanYear != null) {
+			toggleplanYear.click();
+			currentYearFlag = "true";
+		}
+		return currentYearFlag;
+
+	}
+
+
+	public boolean clicksOnMAProviderCoveredLink() {
+		previousYearLink.click();
+		validate(MaProviderLink);
+		MaProviderLink.click();
+		ArrayList<String> tabs = new ArrayList<String>(driver.getWindowHandles());
+		driver.switchTo().window(tabs.get(1));
+		if (getTitle().equalsIgnoreCase("Welcome")) {
+			return true;
+		}
+		return false;
 
 	/**
 	 * This method verifies whether the Compare 3 Plans button is Inactive or NOt
@@ -502,8 +551,41 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	public void clickCompareChkBox(){
 		waitforElement(compareChkBox);
 		compareChkBox.click();
-	}
 
+	}
+		
+	public boolean plantitlematch(String planname, String plantype) {
+		if ((plantype.equalsIgnoreCase("MA") && planname.contains("HMO"))||(plantype.equalsIgnoreCase("PDP") && planname.contains("PDP"))) {
+			return true;
+		} else 
+		return false;
+	}
+	
+	public void verifyandclickenrolllink(String plantype)
+	{
+		if(plantype.equals("PDP"))
+		{
+			if(validate(PDPEnrolllink))
+			{
+			PDPEnrolllink.click();
+			driver.navigate().back();
+			togglePlan();
+			PDPEnrolllink.click();
+			driver.navigate().back();
+			}
+		}
+		else if(plantype.equals("MA"))
+		{
+			if(validate(MAEnrolllink))
+			{
+			MAEnrolllink.click();
+			driver.navigate().back();
+			togglePlan();
+			MAEnrolllink.click();
+			driver.navigate().back();
+			}
+		}
+	}
 	
 }
 

@@ -1,0 +1,74 @@
+{"10003_25_UnitedHealthcare MedicareRx for Groups (PDP)":
+{
+"oddPharmacyRow":[
+{
+            "odd": "1\nAVALON CHEMISTS\n7 2ND AVE\nNEW YORK, NY 10003\n212-260-3131 (TTY 711)\nPreferred Retail Pharmacy Network\nStandard Network Pharmacy\nStandard Network Pharmacy (90-day)\n0 Miles\nView Map"
+        },
+        {
+            "odd": "3\nDUANE READE #14387\n46 THIRD AVE\nNEW YORK, NY 10003\n212-475-3563 (TTY 711)\nPreferred Retail Pharmacy Network\nPreferred Retail Pharmacy Network\nPharmacy Saver\u2122 Program\nStandard Network Pharmacy\nStandard Network Pharmacy (90-day)\n0.2 Miles\nView Map"
+        },
+        {
+            "odd": "5\nWALGREENS #6159 6159\n145 FOURTH AVE\nMANHATTAN, NY 10003\n212-677-0214 (TTY 711)\nPreferred Retail Pharmacy Network\nPreferred Retail Pharmacy Network\nPharmacy Saver\u2122 Program\nStandard Network Pharmacy\nOpen 24 hours\nStandard Network Pharmacy (90-day)\n0.2 Miles\nView Map"
+        },
+        {
+            "odd": "7\nCVS PHARMACY #10828 10828\n51 ASTOR PL\nNEW YORK, NY 10003\n401-765-1500 (TTY 711)\nPreferred Retail Pharmacy Network\nStandard Network Pharmacy\nStandard Network Pharmacy (90-day)\n0.2 Miles\nView Map"
+        },
+        {
+            "odd": "9\nCVS PHARMACY 02557\n253 FIRST AVENUE\nNEW YORK, NY 10003\n212-254-1454 (TTY 711)\nPreferred Retail Pharmacy Network\nStandard Network Pharmacy\nStandard Network Pharmacy (90-day)\n0.2 Miles\nView Map"
+        }
+],
+"evenPharmacyRow":[
+		{"even":"2\nDUANE READE #14265\n125-133 THIRD AVE\nNEW YORK, NY 10003\n212-529-7140 (TTY 711)\nPreferred Retail Pharmacy Network\nPreferred Retail Pharmacy Network\nPharmacy Saver\u2122 Program\nStandard Network Pharmacy\nStandard Network Pharmacy (90-day)\n0.1 Miles\nView Map"},
+		{"even":"4\nABACUS PHARMACY\n168 2ND AVE\nNEW YORK, NY 10003\n212-477-6400 (TTY 711)\nPreferred Retail Pharmacy Network\nStandard Network Pharmacy\nStandard Network Pharmacy (90-day)\n0.2 Miles\nView Map"},
+		{"even":"6\nDUANE READE #14407\n10 UNION SQUARE EAST\nNEW YORK, NY 10003\n646-602-2491 (TTY 711)\nPreferred Retail Pharmacy Network\nPreferred Retail Pharmacy Network\nPharmacy Saver\u2122 Program\nStandard Network Pharmacy\nStandard Network Pharmacy (90-day)\n0.2 Miles\nView Map"},
+		{"even":"8\nKMART PHARMACY7777 7777\n770 BROADWAY\nNEW YORK, NY 10003\n212-253-9661 (TTY 711)\nPreferred Retail Pharmacy Network\nStandard Network Pharmacy\nStandard Network Pharmacy (90-day)\n0.2 Miles\nView Map"},
+		{"even":"10\nDUANE READE 14494\n245 1ST AVE\nNEW YORK, NY 10003\n212-529-0091 (TTY 711)\nPreferred Retail Pharmacy Network\nPreferred Retail Pharmacy Network\nPharmacy Saver\u2122 Program\nStandard Network Pharmacy\nStandard Network Pharmacy (90-day)\n0.2 Miles\nView Map"}
+],
+"pharmacyTitleText":"Pharmacies close to 10003 for UnitedHealthcare MedicareRx for Groups (PDP)"
+},
+"78006_25_UnitedHealthcare MedicareRx for Groups (PDP)":
+{
+"oddPharmacyRow":[
+		{"odd":"1\nROCK PHARMACY 01\n1201 SOUTH MAIN STREET\nBOERNE, TX 78006\n830-357-5052 (TTY 711)\nPreferred Retail Pharmacy Network\nStandard Network Pharmacy\nLong-term care\nStandard Network Pharmacy (90-day)\n9.4 Miles\nView Map"},
+		{"odd":"3\nHEB PHARMACY 621\n420 WEST BANDERA\nBOERNE, TX 78006\n830-816-9769 (TTY 711)\nPreferred Retail Pharmacy Network\nPreferred Retail Pharmacy Network\nPharmacy Saver™ Program\nStandard Network Pharmacy\nStandard Network Pharmacy (90-day)\n9.6 Miles\nView Map"},
+		{"odd":"5\nTHE DRUG SHOP\n404 HIGHWAY 27\nCOMFORT, TX 78013\n830-995-3300 (TTY 711)\nPreferred Retail Pharmacy Network\nStandard Network Pharmacy\nStandard Network Pharmacy (90-day)\n13 Miles\nView Map"},
+		{"odd":"7\nHEB PHARMACY 566\n24165 I 10 W STE 300\nSAN ANTONIO, TX 78256\n210-687-1072 (TTY 711)\nPreferred Retail Pharmacy Network\nPreferred Retail Pharmacy Network\nPharmacy Saver™ Program\nStandard Network Pharmacy\nStandard Network Pharmacy (90-day)\n17.9 Miles\nView Map"},
+		{"odd":"9\nWALMART PHARMACY 10-3056 103056\n305 SINGING OAKS\nSPRING BRANCH, TX 78070\n506-855-2148 (TTY 711)\nPreferred Retail Pharmacy Network\nPreferred Retail Pharmacy Network\nPharmacy Saver™ Program\nStandard Network Pharmacy\nStandard Network Pharmacy (90-day)\n18.4 Miles\nView Map"}
+],
+"evenPharmacyRow":[
+		{"even":"2\nWALGREENS #5765 5765\n1223 S MAIN ST\nBOERNE, TX 78006\n830-249-9565 (TTY 711)\nPreferred Retail Pharmacy Network\nPreferred Retail Pharmacy Network\nPharmacy Saver™ Program\nStandard Network Pharmacy\nOpen 24 hours\nStandard Network Pharmacy (90-day)\n9.5 Miles\nView Map"},
+		{"even":"4\nWAL-MART PHARMACY 101126\n1381 S MAIN STREET\nBOERNE, TX 78006\n830-816-3587 (TTY 711)\nPreferred Retail Pharmacy Network\nPreferred Retail Pharmacy Network\nPharmacy Saver™ Program\nStandard Network Pharmacy\nStandard Network Pharmacy (90-day)\n9.6 Miles\nView Map"},
+		{"even":"6\nCVS PHARMACY # 10540\n9089 FAIR OAKS PKWY\nFAIR OAKS RANCH, TX 78015\n210-698-9538 (TTY 711)\nPreferred Retail Pharmacy Network\nStandard Network Pharmacy\nStandard Network Pharmacy (90-day)\n13.8 Miles\nView Map"},
+		{"even":"8\nWALGREENS 15904\n20744 STATE HWY 46\nBULVERDE, TX 78070\n830-438-1123 (TTY 711)\nPreferred Retail Pharmacy Network\nPreferred Retail Pharmacy Network\nPharmacy Saver™ Program\nStandard Network Pharmacy\nStandard Network Pharmacy (90-day)\n18.3 Miles\nView Map"},
+		{"even":"10\nHEB PHARMACY 622\n20725 HWY 46 WEST\nSPRING BRANCH, TX 78070\n830-438-4010 (TTY 711)\nPreferred Retail Pharmacy Network\nPreferred Retail Pharmacy Network\nPharmacy Saver™ Program\nStandard Network Pharmacy\nStandard Network Pharmacy (90-day)\n18.4 Miles\nView Map"}
+],
+"pharmacyTitleText":"Pharmacies close to 78006 for UnitedHealthcare MedicareRx for Groups (PDP)"
+},
+"10003_25_UnitedHealthcare MedicareRx for Groups (PDP)_Standard Network Pharmacy":
+{
+"oddPharmacyRow":[
+		{"odd":"1\nAVALON CHEMISTS\n7 2ND AVE\nNEW YORK, NY 10003\n212-260-3131 (TTY 711)\nPreferred Retail Pharmacy Network\nStandard Network Pharmacy\nStandard Network Pharmacy (90-day)\n0 Miles\nView Map"},
+		{"odd":"3\nDUANE READE #14387\n46 THIRD AVE\nNEW YORK, NY 10003\n212-475-3563 (TTY 711)\nPreferred Retail Pharmacy Network\nPreferred Retail Pharmacy Network\nPharmacy Saver™ Program\nStandard Network Pharmacy\nStandard Network Pharmacy (90-day)\n0.2 Miles\nView Map"},
+		{"odd":"5\nWALGREENS #6159 6159\n145 FOURTH AVE\nMANHATTAN, NY 10003\n212-677-0214 (TTY 711)\nPreferred Retail Pharmacy Network\nPreferred Retail Pharmacy Network\nPharmacy Saver™ Program\nStandard Network Pharmacy\nOpen 24 hours\nStandard Network Pharmacy (90-day)\n0.2 Miles\nView Map"},
+		{"odd":"7\nCVS PHARMACY #10828 10828\n51 ASTOR PL\nNEW YORK, NY 10003\n401-765-1500 (TTY 711)\nPreferred Retail Pharmacy Network\nStandard Network Pharmacy\nStandard Network Pharmacy (90-day)\n0.2 Miles\nView Map"},
+		{"odd":"9\nCVS PHARMACY 02557\n253 FIRST AVENUE\nNEW YORK, NY 10003\n212-254-1454 (TTY 711)\nPreferred Retail Pharmacy Network\nStandard Network Pharmacy\nStandard Network Pharmacy (90-day)\n0.2 Miles\nView Map"}
+],
+"evenPharmacyRow":[
+		{"even":"2\nDUANE READE #14265\n125-133 THIRD AVE\nNEW YORK, NY 10003\n212-529-7140 (TTY 711)\nPreferred Retail Pharmacy Network\nPreferred Retail Pharmacy Network\nPharmacy Saver™ Program\nStandard Network Pharmacy\nStandard Network Pharmacy (90-day)\n0.1 Miles\nView Map"},
+		{"even":"4\nABACUS PHARMACY\n168 2ND AVE\nNEW YORK, NY 10003\n212-477-6400 (TTY 711)\nPreferred Retail Pharmacy Network\nStandard Network Pharmacy\nStandard Network Pharmacy (90-day)\n0.2 Miles\nView Map"},
+		{"even":"6\nDUANE READE #14407\n10 UNION SQUARE EAST\nNEW YORK, NY 10003\n646-602-2491 (TTY 711)\nPreferred Retail Pharmacy Network\nPreferred Retail Pharmacy Network\nPharmacy Saver™ Program\nStandard Network Pharmacy\nStandard Network Pharmacy (90-day)\n0.2 Miles\nView Map"},
+		{"even":"8\nKMART PHARMACY7777 7777\n770 BROADWAY\nNEW YORK, NY 10003\n212-253-9661 (TTY 711)\nPreferred Retail Pharmacy Network\nStandard Network Pharmacy\nStandard Network Pharmacy (90-day)\n0.2 Miles\nView Map"},
+		{"even":"10\nDUANE READE 14494\n245 1ST AVE\nNEW YORK, NY 10003\n212-529-0091 (TTY 711)\nPreferred Retail Pharmacy Network\nPreferred Retail Pharmacy Network\nPharmacy Saver™ Program\nStandard Network Pharmacy\nStandard Network Pharmacy (90-day)\n0.2 Miles\nView Map"}
+],
+"pharmacyTitleText":"Pharmacies close to 10003 for UnitedHealthcare MedicareRx for Groups (PDP)"
+},
+"78006_25_UnitedHealthcare MedicareRx for Groups (PDP)_Open 24 hours_Standard Network Pharmacy":
+{
+"oddPharmacyRow":"1\nWALGREENS #5765 5765\n1223 S MAIN ST\nBOERNE, TX 78006\n830-249-9565 (TTY 711)\nPreferred Retail Pharmacy Network\nPreferred Retail Pharmacy Network\nPharmacy Saver™ Program\nStandard Network Pharmacy\nOpen 24 hours\nStandard Network Pharmacy (90-day)\n9.5 Miles\nView Map",
+"evenPharmacyRow":"2\nWALGREENS #4838 4838\n19203 STONE OAK PKWY\nSAN ANTONIO, TX 78258\n210-403-0002 (TTY 711)\nPreferred Retail Pharmacy Network\nPreferred Retail Pharmacy Network\nPharmacy Saver™ Program\nStandard Network Pharmacy\nOpen 24 hours\nStandard Network Pharmacy (90-day)\n23.6 Miles\nView Map",
+"pharmacyTitleText":"Pharmacies close to 78006 for UnitedHealthcare MedicareRx for Groups (PDP)"
+}
+}
+
+
+

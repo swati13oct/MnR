@@ -129,7 +129,7 @@ public class IntroductionInformationPage extends UhcDriver{
 		}
 		
 		
-		if(getTitle().equalsIgnoreCase("AARP Medicare Complete Online Application")||getTitle().equalsIgnoreCase("AARP Medicarerx Online Application")){
+
 			disclaimeragreebtn.click();
 			try {
 				Thread.sleep(10000);
@@ -137,8 +137,9 @@ public class IntroductionInformationPage extends UhcDriver{
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-		}
+
 	}
+
 
 	public BeneficiaryInformationPage navigatesToNextStep() {
 		enrollmentNext.click();

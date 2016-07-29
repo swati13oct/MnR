@@ -11,6 +11,9 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.FindBy;
 import org.skyscreamer.jsonassert.JSONAssert;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -44,13 +47,15 @@ public class PlanCompareAarpStepDefinition {
 		return loginScenario;
 	}
 	
+	
+	
 	@Before
 	public void setup(){
 		/*
 		 * Format(MM-DD-YYYY) As plancompare page comes up in AEP period only,
 		 * so hardcoded the below date
 		 */
-		String date = "10-10-2015";
+		String date = "10-15-2016";
 		CommonUtility.changeMRRestTime(getLoginScenario(), date);
 		CommonUtility.changePartDTime(getLoginScenario(), date);
 	}
@@ -91,7 +96,7 @@ public class PlanCompareAarpStepDefinition {
 		LoginPage loginPage = new LoginPage(wd);
 
 		AccountHomePage accountHomePage = (AccountHomePage) loginPage.loginWith(userName, pwd);
-		JSONObject accountHomeActualJson = null;
+	JSONObject accountHomeActualJson = null;
 		
 		/* Get expected data */
 		Map<String, JSONObject> expectedDataMap = loginScenario
@@ -103,7 +108,7 @@ public class PlanCompareAarpStepDefinition {
 			getLoginScenario().saveBean(PageConstants.ACCOUNT_HOME_PAGE,
 					accountHomePage);
 			Assert.assertTrue(true);
-			accountHomeActualJson = accountHomePage.accountHomeJson;
+		accountHomeActualJson = accountHomePage.accountHomeJson;
 		}
 
 		try {
@@ -134,7 +139,11 @@ public class PlanCompareAarpStepDefinition {
 			Assert.fail("ERROR: loading planComparePage");
 		}
 
+	
+
 	}
+
+
 
 	@Then("^the user validates plan benefits for the same plan in current year and next year in AARP site$")
 	public void validates_plan_benefits_for_same_plan_current_and_next_year_aarp() {

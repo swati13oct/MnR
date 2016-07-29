@@ -1,7 +1,5 @@
 package acceptancetests.enrollinplan.ulayer;
 
-import gherkin.formatter.model.DataTableRow;
-
 import java.io.File;
 import java.util.HashMap;
 import java.util.List;
@@ -16,9 +14,23 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.skyscreamer.jsonassert.JSONAssert;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import acceptancetests.atdd.data.CommonConstants;
+import acceptancetests.atdd.data.acquisition.PageConstants;
+import acceptancetests.atdd.util.CommonUtility;
+import acceptancetests.enrollinplan.data.EnrollInPlanCommonConstants;
+import acceptancetests.vpp.data.VPPCommonConstants;
+import atdd.framework.MRScenario;
+import cucumber.annotation.After;
+import cucumber.annotation.en.And;
+import cucumber.annotation.en.Given;
+import cucumber.annotation.en.Then;
+import cucumber.annotation.en.When;
+import cucumber.table.DataTable;
+import gherkin.formatter.model.DataTableRow;
 import pages.acquisition.ulayer.AcquisitionHomePage;
 import pages.acquisition.ulayer.AdditionalInformationPage;
 import pages.acquisition.ulayer.BeneficiaryInformationPage;
+import pages.acquisition.ulayer.ConfirmationPage;
 import pages.acquisition.ulayer.ESRDPage;
 import pages.acquisition.ulayer.EnrollmentConfirmationPage;
 import pages.acquisition.ulayer.IntroductionInformationPage;
@@ -37,7 +49,6 @@ import pages.acquisition.ulayer.ReviewApplicationPage;
 import pages.acquisition.ulayer.SpecialElectionPeriodPage;
 import pages.acquisition.ulayer.SubmitApplicationPage;
 import pages.acquisition.ulayer.VPPPlanSummaryPage;
-import pages.acquisition.ulayer.ConfirmationPage;
 import acceptancetests.atdd.data.CommonConstants;
 import acceptancetests.atdd.data.acquisition.PageConstants;
 import acceptancetests.atdd.util.CommonUtility;
@@ -50,6 +61,7 @@ import cucumber.annotation.en.Given;
 import cucumber.annotation.en.Then;
 import cucumber.annotation.en.When;
 import cucumber.table.DataTable;
+
 
 /**
  * @author pperugu
@@ -344,7 +356,7 @@ public class EnrollInPlanAarpStepDefinition {
 					+ File.separator;
 			JSONObject beneInformationExpected = MRScenario.readExpectedJson(fileName, directory);
 
-			//	beneInformationExpected = mergeWithCommonExpectedData(fileName, beneInformationExpected);
+		//	beneInformationExpected = mergeWithCommonExpectedData(fileName, beneInformationExpected);
 
 			System.out.println("introInformationExpected:::"
 					+ beneInformationExpected);
@@ -810,45 +822,60 @@ public class EnrollInPlanAarpStepDefinition {
     @And("^the user navigates to primary care provider step in AARP site$")
     public void the_user_navigates_to_primary_care_provider_aarp_information_step_aarp() {
           PrimaryCareProviderPage pcpPage = (PrimaryCareProviderPage) getLoginScenario().getBean(PageConstants.PRIMARY_CARE_PROVIDER_PAGE);
-          IntroductionInformationPage introPage = (IntroductionInformationPage) getLoginScenario().getBean(PageConstants.INTRODUCTION_INFORMATION_PAGE);
+   //       IntroductionInformationPage introPage = (IntroductionInformationPage) getLoginScenario().getBean(PageConstants.INTRODUCTION_INFORMATION_PAGE);
 
-          String premium="";
+      /*    String premium="";
           try {
                  premium = introPage.introductionInformationJson.get("premium").toString();
-                 if(premium.equalsIgnoreCase("$0.00 a month")){
-                        OptionalRidersPage optPage= (OptionalRidersPage) pcpPage.navigatesToNextStep(premium);
-                               getLoginScenario().saveBean(PageConstants.OPTIONAL_RIDERS_PAGE,optPage);
-                 }else{
+//                 if(premium.equalsIgnoreCase("$0.00 a month")){
+//                        OptionalRidersPage optPage= (OptionalRidersPage) pcpPage.navigatesToNextStep(premium);
+//                               getLoginScenario().saveBean(PageConstants.OPTIONAL_RIDERS_PAGE,optPage);
+//                 }else{
                         PlanPaymentOptions ppoPage= (PlanPaymentOptions) pcpPage.navigatesToNextStep(premium);
                         getLoginScenario().saveBean(PageConstants.PLAN_PAYMENT_OPTION_PAGE,ppoPage);
-                 }
+//                 }
           } catch (JSONException e) {
                  // TODO Auto-generated catch block
                  e.printStackTrace();
           }
+*/               
           
-    
+          
+          PlanPaymentOptions ppoPage = pcpPage.clickdisclaimer();
+          
+          if(ppoPage!= null){
+  			getLoginScenario().saveBean(PageConstants.PLAN_PAYMENT_OPTION_PAGE,
+  					ppoPage);
+  			
+  			Assert.assertTrue(true);
+  		} else {
+  			Assert.fail("Payment Page not found");
+  		}
     }
 
 
     
-    @And("^the user navigates to plan payment options step in AARP site$")
-    public void the_user_navigates_to_plan_payment_options_aarp_information_step_aarp() {
+   @And("^the user navigates to plan payment options step in AARP site$")
+   public void the_user_navigates_to_plan_payment_options_aarp_information_step_aarp() {
+	   
+	   /*
           IntroductionInformationPage introPage = (IntroductionInformationPage) getLoginScenario().getBean(PageConstants.INTRODUCTION_INFORMATION_PAGE);
 
+          
           String premium="";
           try {
                  premium = introPage.introductionInformationJson.get("premium").toString();
-                 if(!premium.equalsIgnoreCase("$0.00 a month")){
+ //               if(!premium.equalsIgnoreCase("$0.00 a month")){
           PlanPaymentOptions ppoPage = (PlanPaymentOptions) getLoginScenario().getBean(PageConstants.PLAN_PAYMENT_OPTION_PAGE);
 
     
                                      if (ppoPage != null) {
                                             /* Get actual data */
-                                            JSONObject ppoActual = ppoPage.planpaymentInformationJson;
+                            //               JSONObject ppoActual = ppoPage.planpaymentInformationJson;
                         
                                             /* Get expected data */
-                                            String planName = (String) getLoginScenario().getBean(EnrollInPlanCommonConstants.PLAN_NAME);
+          /*                 
+          String planName = (String) getLoginScenario().getBean(EnrollInPlanCommonConstants.PLAN_NAME);
                         
                                             String fileName = planName;
                                             String zipcode = (String) getLoginScenario().getBean(VPPCommonConstants.ZIPCODE);
@@ -873,16 +900,33 @@ public class EnrollInPlanAarpStepDefinition {
                                                   // TODO Auto-generated catch block
                                                   e.printStackTrace();
                                             }
-                                     } else {
-                                            Assert.fail("ERROR loading ppoActual");
-                                     }
+//                                     } else {
+//                                            Assert.fail("ERROR loading ppoActual");
+//                                     }
                  
                  }
                  }catch(JSONException e) {
                         // TODO Auto-generated catch block
                         e.printStackTrace();
-                 }
-    }
+                 } 
+                 */
+	   
+	   PlanPaymentOptions ppoPage = (PlanPaymentOptions) getLoginScenario().getBean(PageConstants.PLAN_PAYMENT_OPTION_PAGE);
+	   
+	   
+	   OptionalRidersPage optriders = ppoPage.clickdisclaimerbutton();
+	   
+	   if(optriders!= null){
+ 			getLoginScenario().saveBean(PageConstants.OPTIONAL_RIDERS_PAGE,
+ 					optriders);
+ 			
+ 			Assert.assertTrue(true);
+ 		} else {
+ 			Assert.fail("Rider Page not found");
+ 		}
+	   
+                 
+   }
 
     @And("^the user fill following information in plan payment options step in AARP site$")
     public void user_fill_information_plan_payment_options_aarp_step_aarp(DataTable personalAttributes) {
@@ -899,20 +943,20 @@ public class EnrollInPlanAarpStepDefinition {
     String premium="";
     try {
     premium = introPage.introductionInformationJson.get("premium").toString();
-    if(!premium.equalsIgnoreCase("$0.00 a month")){
+//    if(!premium.equalsIgnoreCase("$0.00 a month")){
 
     String plantype = personalAttributesMap.get("Plan Type");
     ppoPage.clickplanproviderInformation(personalAttributesMap);
     if(plantype.equalsIgnoreCase("MA")||plantype.equalsIgnoreCase("MAPD")){
     OptionalRidersPage optriders=ppoPage.navigatesToNextStepMAPDorMA();
-
     getLoginScenario().saveBean(PageConstants.OPTIONAL_RIDERS_PAGE,optriders);
-    }else{
+   }else{
+
     ProposedEffectiveDatePage pedobj=ppoPage.navigatesToNextStepPDP();
     getLoginScenario().saveBean(PageConstants.PROPOSED_EFFECTIVE_DATE_PAGE,pedobj);
 
     }
-    }
+    
     }catch(JSONException e) {
     // TODO Auto-generated catch block
     e.printStackTrace();
@@ -1123,7 +1167,8 @@ public class EnrollInPlanAarpStepDefinition {
           // reviewandSubmitPage.editReviewAndSubmitIntroduction(reviewandSubmitPage,premium,plantype);
             reviewandSubmitPage.selectauthRepresentative(personalAttributesMap);
           reviewandSubmitPage.stmtofunderstanding(personalAttributesMap);
-     reviewandSubmitPage.navigatesToNextStep();
+          ConfirmationPage confirmationPage = reviewandSubmitPage.navigatesToNextStep();
+          getLoginScenario().saveBean(PageConstants.CONFIRMATION_PAGE,confirmationPage);
      getLoginScenario().saveBean(PageConstants.REVIEW_APPLICATION_PAGE,reviewandSubmitPage);
      }catch(JSONException e){
           
@@ -1578,8 +1623,8 @@ public class EnrollInPlanAarpStepDefinition {
 	public void tearDown() {
 		WebDriver wd = (WebDriver) getLoginScenario().getBean(
 				CommonConstants.WEBDRIVER);
-		wd.quit();
-		getLoginScenario().flushBeans();
+	//	wd.quit();
+	//	getLoginScenario().flushBeans();
 	}
 
 	public static boolean isAlertPresent(FirefoxDriver wd) {

@@ -1,13 +1,7 @@
 {
     "pharmacyTypes": [
         {
-            "pharmacyDropDown": "All Pharmacies"
-        },
-        {
-            "pharmacyDropDown": "Cost Savings Pharmacies"
-        },
-        {
-            "pharmacyDropDown": "Standard Network Pharmacy"
+            "pharmacyDropDown": "Available Pharmacies"
         },
         {
             "pharmacyDropDown": "Preferred Mail Service Pharmacy"

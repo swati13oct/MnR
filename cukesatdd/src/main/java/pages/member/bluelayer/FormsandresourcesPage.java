@@ -3,10 +3,12 @@
  */
 package pages.member.bluelayer;
 
+import java.util.List;
 import java.util.Map;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -37,6 +39,9 @@ public class FormsandresourcesPage extends UhcDriver {
 
 	@FindBy(id = "disclosure_link")
 	private WebElement logOut;
+
+	@FindBy(xpath = "//*[@id='SummaryofBenefits_-1609990126']/p/a")
+	private WebElement PDF1;
 
 	private PageData formsAndResources;
 
@@ -101,18 +106,60 @@ public class FormsandresourcesPage extends UhcDriver {
 		for (String key : formsAndResources.getExpectedData().keySet()) {
 			WebElement element = findElement(formsAndResources
 					.getExpectedData().get(key));
-			validate(element);
-			try {
-				jsonObject.put(key, element.getText());
-			} catch (JSONException e) {
-				e.printStackTrace();
+			if(validate(element)){
+				try {
+					jsonObject.put(key, element.getText());
+				} catch (JSONException e) {
+					e.printStackTrace();
+				}
 			}
-
 		}
 		formsAndResourcesJson = jsonObject;
-		
+
+
 		System.out.println("formsAndResourcesJson----->"+formsAndResourcesJson);
 
 	}
 
+	public void clickOnPDF() {
+		// TODO Auto-generated method stub
+		//PDF1.click();
+		//input[starts-with(@id,'reportcombo')
+		//List<WebElement> links = driver.findElements(By.xpath("//div[@id='_content_campaigns_uhcm_formsresources-plandocs-main_group_jcr_content_par_borderedtitledescrip_subContent_teaser']"));
+		
+		WebElement links1 = driver.findElement(By.xpath("//*[contains(text(),'Plan Materials')]"));
+		if(links1.isDisplayed()){
+		//List<WebElement> links = links1.findElements(By.xpath("//div/p/a"));
+		List<WebElement> links = links1.findElements(By.xpath("//div[@class = 'parbase section formsresources']//p/a"));
+		//List<WebElement> links = driver.findElements(By.xpath("//div[starts-with(@id,'pdflinks')]"));
+		int linkcount = links.size(); 
+		System.out.println(links.size()); 
+		for(WebElement myElement :  links){
+			//WebElement myElement =  links.get(i);
+			//WebElement myElement1 = myElement.findElement(By.xpath("//div/p/a"));
+			//String a = myElement1.toString();
+			String link = myElement.getText(); 
+			System.out.println(link);
+			System.out.println(myElement);   
+			if (link !=""){
+				myElement.click();
+				try {
+					Thread.sleep(20000);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				
+				driver.findElement(By.xpath("//*[@id='proceed']")).click();
+				driver.switchTo().defaultContent();
+				
+				System.out.println("Opened the PDF");
+			}
+		}
+		}
+		else{
+			System.out.println("Plan Materials section is not displayed");
+		}
+
+	}
 }

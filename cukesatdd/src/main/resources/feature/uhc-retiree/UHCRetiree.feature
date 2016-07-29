@@ -4,18 +4,7 @@ Scenario:Verify Rally link from UHC Retiree Home Page
 Given user navigates to the UHCRetiree Home Page
 Then user clicks on the Look up my provider link and site opens new provider search tool in a new window
 
-<<<<<<< HEAD
-#Scenario:To launch Rally Rally tool from Verizon Find Physician Page
-#And user navigates to the Verizon find a Provider Page
-#Then user clicks on the Find a physician link and site opens new provider search tool in a new window
 
-#Scenario: To launch Rally Rally tool from Verizon Home Page
-#Then user clicks on the Find a provider link and site opens new provider search tool in a new window
-
-#Scenario:To launch Rally Rally tool from Verizon Site Map Page
-#And user navigates to the Verizon Site Map Page
-#Then user clicks on the Find a provider link on verizon site map page and site opens new provider search tool in a new window 
-=======
 Scenario:To launch Rally Rally tool from Verizon Find Physician Page
 And user navigates to the Verizon find a Provider Page
 Then user clicks on the Find a physician link and site opens new provider search tool in a new window
@@ -26,7 +15,7 @@ Then user clicks on the Find a provider link and site opens new provider search 
 Scenario:To launch Rally Rally tool from Verizon Site Map Page
 And user navigates to the Verizon Site Map Page
 Then user clicks on the Find a provider link on verizon site map page and site opens new provider search tool in a new window 
->>>>>>> 71f0097ab40f96b6619b4ddf10f4406feb44a2b7
+
 
 Scenario: To launch rally tool page from Uhcretiree Calpers Pages
 Given user navigates to UHC Retiree Calpers Home Page
@@ -38,19 +27,7 @@ Then user again switches back to Calpers Home page
 And user clicks on site map on Calpers Home page
 Then user clicks on find a provider link on Calpers Site Map Page and rally provider tool opens
 
-<<<<<<< HEAD
-#Scenario: Verify Rally Connect tool link from UHC Retiree oehwf Home Page
-#Given user navigates to the UHCRetiree oehwf Home Page
-#And click on the Find a provider link on the UHCRetiree oehwf Home Page and site opens new provider search Rally tool in a new window
-#Given user navigates to the UHCRetiree oehwf - Site Map Page
-#And user clicks on the Find a provider link on the UHCRetiree oehwf - Site Map Page and site opens new provider search Rally Connect tool in a new window.
 
-#Scenario: Verify Rally Connect tool link from UHC Retiree Travelers Home Page
-#Given user navigates to the UHCRetiree Travelers Home Page
-#And click on the Find a provider link on the UHCRetiree Travelers Home Page and site opens new provider search Rally tool in a new window
-#And user navigates to the UHCRetiree Travelers - Site Map Page
-#Then user clicks on the Find a provider link on the UHCRetiree Travelers - Site Map Page and site opens new provider search Rally Connect tool in a new window.
-=======
 Scenario: Verify Rally Connect tool link from UHC Retiree oehwf Home Page
 Given user navigates to the UHCRetiree oehwf Home Page
 And click on the Find a provider link on the UHCRetiree oehwf Home Page and site opens new provider search Rally tool in a new window
@@ -62,7 +39,7 @@ Given user navigates to the UHCRetiree Travelers Home Page
 And click on the Find a provider link on the UHCRetiree Travelers Home Page and site opens new provider search Rally tool in a new window
 And user navigates to the UHCRetiree Travelers - Site Map Page
 Then user clicks on the Find a provider link on the UHCRetiree Travelers - Site Map Page and site opens new provider search Rally Connect tool in a new window.
->>>>>>> 71f0097ab40f96b6619b4ddf10f4406feb44a2b7
+
 
 Scenario: To validate rally tool launch from Alcatel-lucent group retiree pages
 Given user navigates to the UHCRetiree Home Page
@@ -104,10 +81,7 @@ Then user clicks on the Find a Physician Medical Group Clinic or Facility link o
 Then user switches back to the San Francisco Provider Page
 And user clicks on site map on San Francisco Provider Page
 Then user clicks on find a provider link on San Francisco Site Map Page and rally provider tool opens
-<<<<<<< HEAD
 
-=======
->>>>>>> 71f0097ab40f96b6619b4ddf10f4406feb44a2b7
 Scenario: To launch rally tool page from Uhcretiree Sdcera Pages
 Given user navigates to UHC Retiree Sdcera Home Page
 And user clicks on the Find a Provider link on Sdcera Home Page and rally tool opens in new tab

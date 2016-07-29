@@ -1,0 +1,10 @@
+{
+"govtDeliveryPrefTable":
+[
+ 		{
+            "documentName": "Prescription Drug Explanation of Benefits (EOB)",
+            "selectedPreference": "Online"
+        }
+   
+]
+}

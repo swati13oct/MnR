@@ -3,6 +3,7 @@ package acceptancetests.vpp.ulayer;
 import gherkin.formatter.model.DataTableRow;
 
 import java.io.File;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -30,10 +31,10 @@ import cucumber.annotation.en.Then;
 import cucumber.annotation.en.When;
 import cucumber.table.DataTable;
 
-/**
+/** 
  * @author gumeshna
- *
- */
+ * 
+ */     
 
 public class VppAarpStepDefinition {
 
@@ -175,6 +176,10 @@ public class VppAarpStepDefinition {
 				.getBean(VPPCommonConstants.VPP_PLAN_SUMMARY_ACTUAL);
 		JSONObject planSummaryExpectedJson = (JSONObject) getLoginScenario()
 				.getBean(VPPCommonConstants.VPP_PLAN_SUMMARY_EXPECTED);
+		System.out
+		.println("planSummaryActualJson---->" + planSummaryActualJson);
+System.out.println("planSummaryExpectedJson---->"
+		+ planSummaryExpectedJson);
 		try {
 			JSONAssert.assertEquals(planSummaryExpectedJson,
 					planSummaryActualJson, true);
@@ -403,9 +408,250 @@ public class VppAarpStepDefinition {
 		}
 	}
 	
-	
+	@When("^the user performs plan search using following information in AARP site during AEP period$")
+	public void zipcode_details_in_aarp_site_aep(DataTable givenAttributes) {
 
-	@After
+		List<DataTableRow> memberAttributesRow = givenAttributes
+				.getGherkinRows();
+		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells()
+					.get(0), memberAttributesRow.get(i).getCells().get(1));
+		}
+
+		String zipcode = memberAttributesMap.get("Zip Code");
+		String county = memberAttributesMap.get("County Name");
+		Calendar now = Calendar.getInstance(); 
+		int currentYear = now.get(Calendar.YEAR);
+		int nextYear = currentYear + 1;
+		String year= Integer.toString(nextYear);
+		getLoginScenario().saveBean(VPPCommonConstants.ZIPCODE, zipcode);
+		getLoginScenario().saveBean(VPPCommonConstants.COUNTY, county);
+		getLoginScenario().saveBean(VPPCommonConstants.YEAR, year);
+
+		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
+				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+		VPPPlanSummaryPage plansummaryPage = aquisitionhomepage.searchPlans(
+				zipcode, county);
+
+		if (plansummaryPage != null) {
+			getLoginScenario().saveBean(PageConstants.VPP_PLAN_SUMMARY_PAGE,
+					plansummaryPage);
+			/* Get expected data */
+			String fileName = "vppPlanSummary";
+			String directory = CommonConstants.ACQUISITION_EXPECTED_DIRECTORY
+					+ File.separator + CommonConstants.SITE_ULAYER
+					+ File.separator + VPPCommonConstants.VPP_PLAN_FLOW_NAME
+					+ File.separator + zipcode + File.separator + county
+					+ File.separator + year+ File.separator;
+			JSONObject planSummaryExpectedJson = MRScenario.readExpectedJson(
+					fileName, directory);
+			getLoginScenario().saveBean(
+					VPPCommonConstants.VPP_PLAN_SUMMARY_EXPECTED,
+					planSummaryExpectedJson);
+
+			/* Get actual data */
+			JSONObject planSummaryActualJson = plansummaryPage.vppPlanSummaryJson;
+			getLoginScenario().saveBean(
+					VPPCommonConstants.VPP_PLAN_SUMMARY_ACTUAL,
+					planSummaryActualJson);
+		}
+	}
+	
+	@When("^the user views plans of the below plan type in AARP site during AEP$")
+	public void user_performs_planSearch_in_aarp_site_aep(DataTable givenAttributes) {
+		List<DataTableRow> givenAttributesRow = givenAttributes
+				.getGherkinRows();
+		Map<String, String> givenAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < givenAttributesRow.size(); i++) {
+
+			givenAttributesMap.put(givenAttributesRow.get(i).getCells().get(0),
+					givenAttributesRow.get(i).getCells().get(1));
+		}
+
+		String plantype = givenAttributesMap.get("Plan Type");
+		getLoginScenario().saveBean(VPPCommonConstants.PLAN_TYPE, plantype);
+		String year = (String) getLoginScenario().getBean(VPPCommonConstants.YEAR);
+		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		
+		plansummaryPage = plansummaryPage.viewPlanSummary(plantype);
+
+		if (plansummaryPage != null) {
+			getLoginScenario().saveBean(PageConstants.VPP_PLAN_SUMMARY_PAGE,
+					plansummaryPage);
+			/* Get actual data */
+			JSONObject planSummaryActualJson = plansummaryPage.vppPlanSummaryJson;
+			getLoginScenario().saveBean(
+					VPPCommonConstants.VPP_PLAN_SUMMARY_ACTUAL,
+					planSummaryActualJson);
+
+			/* Get expected data */
+			String fileName = null;
+			if (plantype.equalsIgnoreCase("MA")
+					|| plantype.equalsIgnoreCase("MAPD")) {
+				fileName = "maplans";
+			} else {
+				fileName = plantype.toLowerCase() + "plans";
+			}
+			String zipcode = (String) getLoginScenario().getBean(
+					VPPCommonConstants.ZIPCODE);
+			String county = (String) getLoginScenario().getBean(
+					VPPCommonConstants.COUNTY);
+			String directory = CommonConstants.ACQUISITION_EXPECTED_DIRECTORY
+					+ File.separator + CommonConstants.SITE_ULAYER
+					+ File.separator + VPPCommonConstants.VPP_PLAN_FLOW_NAME
+					+ File.separator + zipcode + File.separator + county
+					+ File.separator + year + File.separator;
+			JSONObject planSummaryExpectedJson = MRScenario.readExpectedJson(
+					fileName, directory);
+			getLoginScenario().saveBean(
+					VPPCommonConstants.VPP_PLAN_SUMMARY_EXPECTED,
+					planSummaryExpectedJson);
+		}
+
+	}
+
+	@And("^the user validates the plan summary for the below plan in AARP site during AEP$")
+	public void user_validates_plan_summary_aep(DataTable planAttributes) {
+		List<DataTableRow> givenAttributesRow = planAttributes.getGherkinRows();
+		Map<String, String> givenAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < givenAttributesRow.size(); i++) {
+
+			givenAttributesMap.put(givenAttributesRow.get(i).getCells().get(0),
+					givenAttributesRow.get(i).getCells().get(1));
+		}
+
+		String planName = givenAttributesMap.get("Plan Name");
+		getLoginScenario().saveBean(VPPCommonConstants.PLAN_NAME, planName);
+		VPPPlanSummaryPage planSummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		/* get actual data for a particular plan */
+		JSONObject planSummaryActualJson = planSummaryPage
+				.getPlanSummaryActualData(planName);
+
+		/* Get expected data */
+		String fileName = planName;
+		String zipcode = (String) getLoginScenario().getBean(
+				VPPCommonConstants.ZIPCODE);
+		String county = (String) getLoginScenario().getBean(
+				VPPCommonConstants.COUNTY);
+		String year = (String) getLoginScenario().getBean(
+				VPPCommonConstants.YEAR);
+		String directory = CommonConstants.ACQUISITION_EXPECTED_DIRECTORY
+				+ File.separator + CommonConstants.SITE_ULAYER + File.separator
+				+ VPPCommonConstants.VPP_PLAN_FLOW_NAME + File.separator
+				+ zipcode + File.separator + county + File.separator + year + File.separator;
+		JSONObject planSummaryExpectedJson = MRScenario.readExpectedJson(
+				fileName, directory);
+
+		System.out
+				.println("planSummaryActualJson---->" + planSummaryActualJson);
+		System.out.println("planSummaryExpectedJson---->"
+				+ planSummaryExpectedJson);
+
+		try {
+			JSONAssert.assertEquals(planSummaryExpectedJson,
+					planSummaryActualJson, true);
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}
+
+	}
+
+	@When("^the user view plan details of the above selected plan in AARP site during AEP$")
+	public void user_views_plandetails_selected_plan_aarp_aep() {
+		String planName = (String) getLoginScenario().getBean(
+				VPPCommonConstants.PLAN_NAME);
+		String zipcode = (String) getLoginScenario().getBean(
+				VPPCommonConstants.ZIPCODE);
+		String county = (String) getLoginScenario().getBean(
+				VPPCommonConstants.COUNTY);
+		VPPPlanSummaryPage vppPlanSummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+
+		String planType = (String)getLoginScenario().getBean(VPPCommonConstants.PLAN_TYPE);
+		String year = (String)getLoginScenario().getBean(VPPCommonConstants.YEAR);
+		PlanDetailsPage vppPlanDetailsPage = vppPlanSummaryPage
+				.navigateToPlanDetails(planName, planType);
+		if (vppPlanDetailsPage != null) {
+			getLoginScenario().saveBean(PageConstants.VPP_PLAN_DETAILS_PAGE,
+					vppPlanDetailsPage);
+			/* Get actual data */
+			JSONObject planDetailsActualJson = vppPlanDetailsPage.vppPlanDetailsJson;
+			System.out.println("planDetailsActualJson---->"
+					+ planDetailsActualJson);
+			getLoginScenario().saveBean(
+					VPPCommonConstants.VPP_PLAN_DETAIL_ACTUAL,
+					planDetailsActualJson);
+
+			/* Get expected data */
+			String fileName = planName;
+			String directory = CommonConstants.ACQUISITION_EXPECTED_DIRECTORY
+					+ File.separator + CommonConstants.SITE_ULAYER
+					+ File.separator
+					+ VPPCommonConstants.VPP_PLAN_DETAILS_FLOW_NAME
+					+ File.separator + zipcode + File.separator + county
+					+ File.separator + year + File.separator;
+			JSONObject planDetailsExpectedJson = MRScenario.readExpectedJson(
+					fileName, directory);
+			getLoginScenario().saveBean(
+					VPPCommonConstants.VPP_PLAN_DETAIL_EXPECTED,
+					planDetailsExpectedJson);
+
+		}
+	}
+	
+	@When("^user comes backs to plan summary page and view current year plan$")
+	public void bacK_to_planSummary() {
+		String planType = (String) getLoginScenario().getBean(
+				VPPCommonConstants.PLAN_TYPE);
+		PlanDetailsPage vppPlanDetailsPage = (PlanDetailsPage) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_DETAILS_PAGE);
+		VPPPlanSummaryPage vPPlanSummaryPage = vppPlanDetailsPage
+				.backtoPlanSummary(planType);
+		String togglePlanFlag = vPPlanSummaryPage.togglePlan();
+		getLoginScenario().saveBean(VPPCommonConstants.TOGGLEPLANFLAG,
+				togglePlanFlag);
+		Calendar now = Calendar.getInstance();
+		int currentYear = now.get(Calendar.YEAR);
+		getLoginScenario().saveBean(VPPCommonConstants.YEAR,
+				Integer.toString(currentYear));
+	}
+	@And("^the user validate pdf links$")
+	public void validate_Pdf_Links(){
+		PlanDetailsPage planDetailsPage = (PlanDetailsPage) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_DETAILS_PAGE);
+		JSONObject planDocsPDFActualJson = planDetailsPage.getActualPdfLinksData();
+		
+		/* Get expected data */
+		String fileName = "plandocumentspdf";
+		String zipcode = (String) getLoginScenario().getBean(
+				VPPCommonConstants.ZIPCODE);
+		String county = (String) getLoginScenario().getBean(
+				VPPCommonConstants.COUNTY);
+		String year = (String) getLoginScenario().getBean(VPPCommonConstants.YEAR);
+		
+		String directory = CommonConstants.ACQUISITION_EXPECTED_DIRECTORY
+				+ File.separator + CommonConstants.SITE_ULAYER
+				+ File.separator
+				+ VPPCommonConstants.VPP_PLAN_DETAILS_FLOW_NAME
+				+ File.separator + zipcode + File.separator + county
+				+ File.separator;
+		JSONObject planDocsPDFExpectedJson = MRScenario.readExpectedJson(
+				fileName, directory);
+		
+		try {
+			JSONAssert.assertEquals(planDocsPDFExpectedJson,
+					planDocsPDFActualJson, true);
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}
+		
+	}
+
+	/*@After
 	public void tearDown() {
 		WebDriver wd = (WebDriver) getLoginScenario().getBean(
 				CommonConstants.WEBDRIVER);
@@ -420,6 +666,66 @@ public class VppAarpStepDefinition {
 		} catch (NoAlertPresentException e) {
 			return false;
 		}
+	}*/
+	
+	@Given("^the user is on the aquisition AARP medicare site home page$")
+	public void user_on_acquisition_aarp_homepage()
+	{	WebDriver wd = getLoginScenario().getWebDriver();
+		AcquisitionHomePage home= new AcquisitionHomePage(wd);
+		getLoginScenario().saveBean(PageConstants.ACQUISITION_HOME_PAGE,
+				home);
+	}
+
+	@When ("^the user performs plan search using following information in aquisition AARP site during AEP period$")
+	public void user_navigate_to_plansummary(DataTable givenAttributes) {
+		AcquisitionHomePage home = (AcquisitionHomePage) getLoginScenario()
+				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+		List<DataTableRow> memberAttributesRow = givenAttributes
+				.getGherkinRows();
+		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells()
+					.get(0), memberAttributesRow.get(i).getCells().get(1));
+		}
+
+		String zipcode = memberAttributesMap.get("Zip Code");
+		String county = memberAttributesMap.get("County Name");
+		getLoginScenario().saveBean(VPPCommonConstants.ZIPCODE, zipcode);
+		getLoginScenario().saveBean(VPPCommonConstants.COUNTY, county);
+		VPPPlanSummaryPage plansummary = home.searchPlans(zipcode, county);
+		getLoginScenario().saveBean(PageConstants.VPP_PLAN_SUMMARY_PAGE,
+				plansummary);
+	}
+
+	@Then ("^user select MA/MAPD/PDP plans on plan summary page using following information during AEP period$")
+	public void click_on_showplans(DataTable givenAttributes) {
+		VPPPlanSummaryPage plansummary = (VPPPlanSummaryPage) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		List<DataTableRow> memberAttributesRow = givenAttributes
+				.getGherkinRows();
+		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells()
+					.get(0), memberAttributesRow.get(i).getCells().get(1));
+		}
+		String plantype = memberAttributesMap.get("Plan Type");
+		plansummary.viewPlanSummary(plantype);
+		String planname = memberAttributesMap.get("Plan Name");
+		plansummary.plantitlematch(planname,plantype.toString());
+		getLoginScenario().saveBean(VPPCommonConstants.PLAN_TYPE, plantype);
+		getLoginScenario().saveBean(PageConstants.VPP_PLAN_SUMMARY_PAGE,
+				plansummary);
+	}
+	
+	@And("^user verify enroll now link for next year MA/MAPD/PDP plans during AEP period$")
+	public void verify_nextyear_enrolllink() {
+		Object plantype = getLoginScenario().getBean(
+				VPPCommonConstants.PLAN_TYPE);
+		VPPPlanSummaryPage plansummary = (VPPPlanSummaryPage) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		plansummary.verifyandclickenrolllink(plantype.toString());
 	}
 	
 	@Then("^user should see the inactive/grey plan compare button$")

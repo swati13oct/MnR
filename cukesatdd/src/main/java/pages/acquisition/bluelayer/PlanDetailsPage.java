@@ -3,7 +3,9 @@ package pages.acquisition.bluelayer;
 /*@author pagarwa5*/
 
 import java.util.ArrayList;
+import java.util.List;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.openqa.selenium.WebDriver;
@@ -12,6 +14,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
 import pages.acquisition.uhcretiree.Rallytool_Page;
+import pages.acquisition.bluelayer.VPPPlanSummaryPage;
 import acceptancetests.atdd.data.CommonConstants;
 import acceptancetests.atdd.data.PageData;
 import acceptancetests.atdd.util.CommonUtility;
@@ -34,9 +37,17 @@ public class PlanDetailsPage extends UhcDriver{
 	@FindBy(xpath ="//*[@id='myDoctorDetails']")
 	private WebElement plandetailProviderlink;
 	
+	@FindBy(id = "backToplans")
+	private WebElement backToAllPlans;
+	
 	private PageData vppPlanDetails;
 
 	public JSONObject vppPlanDetailsJson;
+	
+	private PageData planDocsPDF;
+	
+	public JSONObject planDocPDFAcqJson;
+	
 
 	public PlanDetailsPage(WebDriver driver,String planName) {
 		super(driver);
@@ -142,5 +153,45 @@ public class PlanDetailsPage extends UhcDriver{
 		// TODO Auto-generated method stub
 		return null;
 	} 
+	public VPPPlanSummaryPage backtoPlanSummaryPage(String planType) {
+		validate(backToAllPlans);
+		if(backToAllPlans != null){
+		backToAllPlans.click();		
+		return new VPPPlanSummaryPage(driver, planType);
+		}
+		
+	return null;
+		
+	}
 	
+	public JSONObject getActualPdfLinksData() {
+		// TODO Auto-generated method stub
+		String fileName = CommonConstants.PLAN_DOC_PDF_ACQ_PAGE_DATA;
+		planDocsPDF = CommonUtility.readPageData(fileName, CommonConstants.PAGE_OBJECT_DIRECTORY_BLUELAYER_ACQ);		
+		JSONObject jsonObject = new JSONObject();
+		for (String key : planDocsPDF.getExpectedData().keySet()) {
+			List<WebElement> elements = findElements(planDocsPDF.getExpectedData()
+					.get(key));
+			JSONArray jsonArray = new JSONArray();
+			for (WebElement element : elements) {				
+				element.click();
+				try {
+					JSONObject jsonObjectForArray = new JSONObject();
+					jsonObjectForArray.put(element.getText(), element.getAttribute("href"));
+					jsonArray.put(jsonObjectForArray);
+				} catch (JSONException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+			try {
+				jsonObject.put(key, jsonArray);
+			} catch (JSONException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}					
+		}
+		planDocPDFAcqJson = jsonObject;
+		return planDocPDFAcqJson;
+	}
 }

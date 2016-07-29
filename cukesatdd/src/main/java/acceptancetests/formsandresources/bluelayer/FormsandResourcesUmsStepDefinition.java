@@ -6,6 +6,7 @@ package acceptancetests.formsandresources.bluelayer;
 import gherkin.formatter.model.DataTableRow;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -95,8 +96,8 @@ public class FormsandResourcesUmsStepDefinition {
 		LoginPage loginPage = new LoginPage(wd);
 		AccountHomePage accountHomePage = (AccountHomePage)loginPage.loginWith(userName, pwd, category);
 		JSONObject accountHomeActualJson = null;
-		
-		/* Get expected data */
+
+		// Get expected data 
 		Map<String, JSONObject> expectedDataMap = loginScenario
 				.getExpectedJson(userName);
 		JSONObject accountHomeExpectedJson = accountHomePage
@@ -139,12 +140,12 @@ public class FormsandResourcesUmsStepDefinition {
 		getLoginScenario().saveBean(
 				FnRCommonConstants.FORMS_AND_RESOURCES_EXPECTED,
 				formsAndResourcesExpectedJson);
-
+		
 		/* Actual data */
 		if (formsAndResourcesPage != null) {
 			getLoginScenario().saveBean(PageConstants.FORMS_AND_RESOURCES_PAGE,
 					formsAndResourcesPage);
-			Assert.assertTrue(true);
+		Assert.assertTrue(true);
 			formsAndResourcesActualJson = formsAndResourcesPage.formsAndResourcesJson;
 		}
 		getLoginScenario().saveBean(
@@ -152,6 +153,7 @@ public class FormsandResourcesUmsStepDefinition {
 				formsAndResourcesActualJson);
 	}
 
+	
 	@Then("^the user validates pdfs in plan materials and forms and resources section in UMS site$")
 	public void validates_plan_materials_plan_document_section_ums() {
 		FormsandresourcesPage formsandresourcesAarpPage = (FormsandresourcesPage) getLoginScenario()
@@ -165,7 +167,7 @@ public class FormsandResourcesUmsStepDefinition {
 				+ formsAndResourcesActualJson.toString());
 		System.out.println("formsAndResourcesExpectedJson===>"
 				+ formsAndResourcesExpectedJson.toString());
-		/* Validations */
+		//Validations 
 		try {
 			JSONAssert.assertEquals(formsAndResourcesExpectedJson,
 					formsAndResourcesActualJson, true);
@@ -177,4 +179,87 @@ public class FormsandResourcesUmsStepDefinition {
 
 	}
 
+	@Given("^registered member for plan materials in forms and resources in UMS Site$")
+	public void registered_member_planmaterials_formsandresources_ums(
+			DataTable memberAttributes) {
+		List<DataTableRow> memberAttributesRow = memberAttributes
+				.getGherkinRows();
+		Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells()
+					.get(0), memberAttributesRow.get(i).getCells().get(1));
+		}
+
+		String category = memberAttributesMap.get("Member Type");
+		Set<String> memberAttributesKeySet = memberAttributesMap.keySet();
+		List<String> desiredAttributes = new ArrayList<String>();
+		for (Iterator<String> iterator = memberAttributesKeySet.iterator(); iterator
+				.hasNext();) {
+			{
+				String key = iterator.next();
+				desiredAttributes.add(memberAttributesMap.get(key));
+			}
+
+		}
+		System.out.println("desiredAttributes.." + desiredAttributes);
+
+		Map<String, String> loginCreds = loginScenario
+				.getUMSMemberWithDesiredAttributes(desiredAttributes);
+
+		String userName = null;
+		String pwd = null;
+		if (loginCreds == null) {
+			// no match found
+			System.out.println("Member Type data could not be setup !!!");
+			Assert.fail("unable to find a " + desiredAttributes + " member");
+		} else {
+			userName = loginCreds.get("user");
+			pwd = loginCreds.get("pwd");
+			System.out.println("User is..." + userName);
+			System.out.println("Password is..." + pwd);
+			getLoginScenario()
+			.saveBean(LoginCommonConstants.USERNAME, userName);
+			getLoginScenario().saveBean(LoginCommonConstants.PASSWORD, pwd);
+		}
+
+
+		WebDriver wd = getLoginScenario().getWebDriver();
+
+		LoginPage loginPage = new LoginPage(wd);
+		AccountHomePage accountHomePage = (AccountHomePage)loginPage.loginWith(userName, pwd, category);
+		
+		if (accountHomePage != null) {
+			getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
+			getLoginScenario().saveBean(PageConstants.ACCOUNT_HOME_PAGE,
+					accountHomePage);
+		}
+	}
+
+
+	@When("^the user navigates to plan materials in forms and resources page in UMS site$")
+	public void views_planmaterials_forms_resources_Ums_site() {
+		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario()
+				.getBean(PageConstants.ACCOUNT_HOME_PAGE);
+		FormsandresourcesPage formsAndResourcesPage = accountHomePage
+				.navigateToFormsandResourcePage();
+
+		if (formsAndResourcesPage != null) {
+			getLoginScenario().saveBean(PageConstants.FORMS_AND_RESOURCES_PAGE,
+					formsAndResourcesPage);
+		}
+	}
+
+	@Then("^the user validates pdfs in plan materials section in UMS site$")
+	public void validates_pdfs_in_plan_materials_section_ums() {
+
+		FormsandresourcesPage formsAndResourcesPage = (FormsandresourcesPage) getLoginScenario()
+				.getBean(PageConstants.FORMS_AND_RESOURCES_PAGE);
+
+
+		formsAndResourcesPage.clickOnPDF();
+		formsAndResourcesPage.logOut();
+
+
+	}
 }

@@ -1,0 +1,50 @@
+{
+ "beforeUpdate":{
+				   "planStatus1":"ACTIVE",
+				   "planName1":"AARP MedicareRx Preferred (PDP)",
+				   "memberName":"Welcome EGJR TIJRQGAD",
+				   "memberId1":"0019389581",
+				   "preferences":[
+								      {
+								         "deliveryPreference":"U.S. Mail",
+								         "documentName":"Annual Notice Of Changes Documents"
+								      },
+								      {
+								         "deliveryPreference":"Online",
+								         "documentName":"Annual Pharmacy Directory"
+								      },
+								      {
+								         "deliveryPreference":"U.S. Mail",
+								         "documentName":"Prescription Drug Explanation of Benefits (EOB)"
+								      },
+								      {
+								         "deliveryPreference":"U.S. Mail",
+								         "documentName":"Renew Magazine"
+								      }
+				   				]
+				},
+"afterUpdate":{
+				   "planStatus1":"ACTIVE",
+				   "planName1":"AARP MedicareRx Preferred (PDP)",
+				   "memberName":"Welcome EGJR TIJRQGAD",
+				   "memberId1":"0019389581",
+				   "preferences":[
+								      {
+								         "deliveryPreference":"Online",
+								         "documentName":"Annual Notice Of Changes Documents"
+								      },
+								      {
+								         "deliveryPreference":"U.S. Mail",
+								         "documentName":"Annual Pharmacy Directory"
+								      },
+								      {
+								         "deliveryPreference":"U.S. Mail",
+								         "documentName":"Prescription Drug Explanation of Benefits (EOB)"
+								      },
+								      {
+								         "deliveryPreference":"U.S. Mail",
+								         "documentName":"Renew Magazine"
+								      }
+				   				]
+				}
+}

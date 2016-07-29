@@ -4,10 +4,6 @@
 "medicaidInfo":{
 "identifier":"id",
 "elementName":"medicaidInfo"
-},
-"medicaidquestion":{
-"identifier":"id",
-"elementName":"medicaidquestion"
 }
 }
 }

@@ -4,6 +4,7 @@
 package pages.acquisition.bluelayer;
 
 import java.util.List;
+import java.util.ArrayList;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -15,6 +16,14 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+
+
+
+
+import pages.acquisition.bluelayer.EnrollPlanInfoPage;
+
+import pages.acquisition.uhcretiree.Rallytool_Page;
+
 
 import acceptancetests.atdd.data.CommonConstants;
 import acceptancetests.atdd.data.ElementData;
@@ -54,10 +63,10 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	@FindBy(xpath = "//div[@id='snpplans_container']")
 	WebElement snpPlanConatiner;
 	
-	@FindBy(xpath ="//div[@id='maplans_container']/div[2]/div/div/div/div[@class='ng-scope']")
+	@FindBy(xpath ="//div[@class='enabled ng-scope']")
 	List<WebElement> maPlanElement;
 	
-	@FindBy(xpath ="//div[@id='maplans_container']/div[2]/div/div/div/div[@class='ng-scope']")
+	@FindBy(xpath = "//div[@class='disabledprint ng-scope']")
 	List<WebElement> pdpPlanElement;
 	
 	@FindBy(xpath ="//div[@id='snpplans_container']/div[2]/div/div/div/div[@class='ng-scope']")
@@ -69,6 +78,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	@FindBy(id = "editDrugMA")
 	private WebElement editDrugListLink;
 	
+
 	@FindBy(linkText ="Make an appointment with an agent")
 	private WebElement make_an_appointment_agent;
 	
@@ -86,6 +96,13 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	
 	@FindBy(xpath="//div[@data-ng-repeat='plan in maplans'][1]//div[contains(@id,'showcompare')][1]/div[@class='compareHeading']/p[2]")
 	private WebElement comparePopUpTxt2;
+
+	@FindBy(className = "toggleYear")
+	private WebElement toggleplanYear;
+	
+	@FindBy(xpath = "//div[@id='maplans_container']/div[3]/div/div[2]/div[1]/div/div[1]/div[1]/div/div[1]/div[2]/table/tbody/tr/td[3]/div/div[2]/div[3]/div[1]/p/a")
+	private WebElement MaProviderLink;
+
 
 	private PageData vppPlanSummary;
 
@@ -148,10 +165,18 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		if (element != null) {
 			element.click();
 		}
+		}else if (planName.contains("Regional PPO")) {
+			ElementData elementData = new ElementData("id", "viewDetailsMA");
+			WebElement element = getViewPlanDetailsElement(maPlanElement,
+					elementData, planName);
+			if (element != null) {
+				element.click();
+			}
+
 		}
 		CommonUtility.checkPageIsReady(driver);
 		if (driver.getTitle().equalsIgnoreCase("Medicare Advantage Plan Details | | UnitedHealthcare®")
-				|| driver.getTitle().equalsIgnoreCase("Plan Detail")) {
+				|| driver.getTitle().equalsIgnoreCase("Plan Detail") || driver.getTitle().equalsIgnoreCase("Medicare Prescription Drug Plan Details | UnitedHealthcare®") ) {
 			return new PlanDetailsPage(driver,planName);
 		}
 		return null;
@@ -257,7 +282,13 @@ public class VPPPlanSummaryPage extends UhcDriver {
 			fileName = "pdpplansummary.json";
 			JSONObject jsonObject = getActualJsonObject(fileName, planName,pdpPlanConatiner);
 			return jsonObject;
-		}
+		}else if(planName.contains("Regional PPO"))
+		{
+			fileName = "mamultistateplansummary.json";
+			JSONObject jsonObject = getActualJsonObject(fileName, planName,maPlanConatiner);
+			return jsonObject;
+
+			}
 		
 
 		return null;
@@ -356,8 +387,9 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		if (pageHeading.getText().equalsIgnoreCase(
 				"You Have Chosen to Enroll in the Following Plan")) {
 			return new EnrollPlanInfoPage(driver);
-		}
+		}else{
 		return null;
+	}
 	}	
 	
 	public GetStartedPage clicksOnEnterDrugInformationLink(String planName) {
@@ -414,6 +446,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		return null;
 	}
 	
+
 	public RequestAgentAppointmentPage nagiateToRequetAnAppointmentPage()
 	{
 		make_an_appointment_agent.click();
@@ -436,6 +469,24 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		}
 		
 		return null;
+
+	}
+	
+	public String togglePlan() {
+		String currentYearFlag = "false";
+		validate(toggleplanYear);
+		if (toggleplanYear != null) {
+			toggleplanYear.click();
+			currentYearFlag = "true";
+		}
+		return currentYearFlag;
+	}
+	
+	public  void clicksOnMAProviderCoveredLink()
+	{
+		MaProviderLink.click();
+		ArrayList<String> tabs = new ArrayList<String>(driver.getWindowHandles());
+		driver.switchTo().window(tabs.get(0));
 	}
 	
 	/**

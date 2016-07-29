@@ -17,3 +17,20 @@ Examples:
 #| MA	    | Group    |
  | PDP      | Group    |
 #| SSUP     | Group    |
+ 
+Scenario Outline:To verify pdfs displayed in plan materials in UMS site
+Given registered member for plan materials in forms and resources in UMS Site
+| Plan Type   | <planType>   |
+| Member Type | <memberType> | 
+When the user navigates to plan materials in forms and resources page in UMS site
+Then the user validates pdfs in plan materials section in UMS site
+
+Examples:
+
+	 | planType | memberType  |
+	 |  MA      | Group       |
+	 |  PDP     | Group       |
+	 |  SSRD    | Group       |
+	 |  SSUP    | Group       |
+
+
