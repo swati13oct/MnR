@@ -24,6 +24,7 @@ import pages.acquisition.ulayer.HealthLivingPage;
 import pages.acquisition.ulayer.HealthManagementProgramPage;
 import pages.acquisition.ulayer.HealthToolsPage;
 import pages.acquisition.ulayer.LoginAssistancePage;
+import pages.acquisition.uhcretiree.Rallytool_Page;
 import pages.acquisition.ulayer.AcquisitionHomePage;
 import pages.acquisition.ulayer.DiscoverMoreResourcesPage;
 import pages.acquisition.ulayer.ExploreChangingPlansPage;
@@ -64,7 +65,7 @@ public class PlanPreviewAarpStepDefinition {
 	}
 	
 	@Given("^the user is on the Plan Preview Page of AARP medicare site landing page$")
-	public void the_user_on_aarp_medicaresolutions_Site() {
+	public void the_user_on_aarp_medicare_Site() {
 		WebDriver wd = getLoginScenario().getWebDriver();
 		//System.out.println("reached");
 		PlanPreviewPage planPreviewpage= new PlanPreviewPage(wd);
@@ -221,6 +222,29 @@ public class PlanPreviewAarpStepDefinition {
 		}
 	}
 	
+	@Then("^user validates the plan year dropdown$")
+	public void user_validates_planyear_dropdown()
+	{
+		PlanPreviewPage planpreviewPage = (PlanPreviewPage) getLoginScenario()
+				.getBean(PageConstants.ACQUISITION_PLANPREVIW_PAGE);
+		
+		planpreviewPage.validate_planyeardropdown();
+	}
+	
+	@And("^user click on provider link$")
+	public void user_click_provider_link()
+	{
+		PlanPreviewPage planpreviewPage= (PlanPreviewPage) getLoginScenario()
+				.getBean(PageConstants.ACQUISITION_PLANPREVIW_PAGE);
+		Rallytool_Page rallyPage= planpreviewPage.navigatetoRally();
+		if (rallyPage==null)
+		{
+			Assert.fail("Issue in launching Rally tool");
+			
+		}
+			
+		
+	}
 	@After
 	public void tearDown() {
 		WebDriver wd = (WebDriver) getLoginScenario().getBean(
