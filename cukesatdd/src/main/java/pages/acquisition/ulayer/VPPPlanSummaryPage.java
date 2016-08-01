@@ -516,6 +516,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 			return true;
 		}
 		return false;
+	}
 
 	/**
 	 * This method verifies whether the Compare 3 Plans button is Inactive or NOt
