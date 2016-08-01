@@ -1,0 +1,48 @@
+{
+"defaultComparision":{
+					   "nextYearPlan":{
+									      "nonPrefNwPharmcyT4":"50%",
+									      "planName":"AARP MedicareRx Preferred (PDP)",
+									      "nonPrefNwPharmcyT3":"$105.00",
+									      "coverageGapEnd":"$4850.00 out-of-pocket costs    ",
+									      "mailOrderTier5":"25%",
+									      "nonPrefNwPharmcyT5":"33%",
+									      "mailOrderTier3":"$84.00",
+									      "mailOrderTier4":"40%",
+									      "mailOrderTier1":"$0.00",
+									      "mailOrderTier2":"$0.00",
+									      "annualDeductible":"$0.00",
+									      "monthlyPremium":"$60.90",
+									      "coverageGapStart":"$3310.00 total drug costs    ",
+									      "nonPrefNwPharmcyT1":"$6.00",
+									      "prefNwPharmcyT1":"$3.00",
+									      "nonPrefNwPharmcyT2":"$12.00",
+									      "prefNwPharmcyT4":"40%",
+									      "prefNwPharmcyT5":"33%",
+									      "prefNwPharmcyT2":"$7.00",
+									      "prefNwPharmcyT3":"$33.00"
+									   },
+					   "currentYearPlan":{
+									      "nonPrefNwPharmcyT4":"$95.00",
+									      "planName":"AARP MedicareRx Preferred (PDP)",
+									      "nonPrefNwPharmcyT3":"$45.00",
+									      "coverageGapEnd":"$4700.00 out-of-pocket costs    ",
+									      "mailOrderTier5":"33%",
+									      "nonPrefNwPharmcyT5":"33%",
+									      "mailOrderTier3":"$109.00",
+									      "mailOrderTier4":"$250.00",
+									      "mailOrderTier1":"$0.00",
+									      "mailOrderTier2":"$3.00",
+									      "annualDeductible":"$0.00",
+									      "monthlyPremium":"$49.20",
+									      "coverageGapStart":"$2960.00 total drug costs    ",
+									      "nonPrefNwPharmcyT1":"$5.00",
+									      "prefNwPharmcyT1":"$1.00",
+									      "nonPrefNwPharmcyT2":"$7.00",
+									      "prefNwPharmcyT4":"$85.00",
+									      "prefNwPharmcyT5":"33%",
+									      "prefNwPharmcyT2":"$3.00",
+									      "prefNwPharmcyT3":"$38.00"
+									   }
+					},
+}

@@ -3,7 +3,9 @@ package pages.acquisition.ulayer;
 import java.util.List;
 
 import org.junit.Assert;
+
 import org.openqa.selenium.By;
+
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -52,12 +54,14 @@ public class PlanPreviewPage extends GlobalWebElements {
 	@FindBys(value = { @FindBy(xpath = "//table[@id='selectcountytable']/tbody/tr/td") })
 	List<WebElement> countyRows;
 	
+
 	@FindBy(linkText="Find a pharmacy")
 	private WebElement pharmacyLink;
 	
 	@FindBy(linkText="Search for a provider")
 	private WebElement providerLink;
 	
+
 	private static String AARP_PLANPREVIEW_PAGE_URL = MRConstants.AARP_PLANPREVIEW_URL;
 	
 	
@@ -136,6 +140,7 @@ public class PlanPreviewPage extends GlobalWebElements {
 			System.out.println("Plan documents page loaded");
 			Assert.assertTrue(true);
 		}
+
 		else
 		{
 			Assert.fail("Plan document page not found");
@@ -199,4 +204,11 @@ public class PlanPreviewPage extends GlobalWebElements {
 		
 		
 	}
+
+		
+		
+	}
+	
+	
+
 }

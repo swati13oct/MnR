@@ -39,7 +39,10 @@ public class PlanComparePage extends UhcDriver {
 
 	@FindBy(id = "disclosure_link")
 	private WebElement logOut;
-
+	
+	@FindBy(xpath="/html/body/div[7]/div/div/table/tbody/tr[5]/td/div[2]/div/div[2]/div[2]/div[2]/div/div[283]/div[2]/table/tbody/tr[41]/td[3]/a")
+	private WebElement nextYearButton;
+	
 	public PlanComparePage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
@@ -138,7 +141,7 @@ public class PlanComparePage extends UhcDriver {
 		for (WebElement element : planSelectionOptions) {
 
 			if (element.getText().contains(planName)) {
-				ElementData elementData = new ElementData("tagName", "a");
+				ElementData elementData = new ElementData("tagName", "c");
 				builder.click(findChildElement(elementData, element)).perform();
 				break;
 			}
@@ -155,6 +158,17 @@ public class PlanComparePage extends UhcDriver {
 	public void logOut() {
 		logOut.click();
 
+	}
+
+	public PlanCompareDetails selectNextYearPlan() {
+		nextYearButton.click();
+		
+		if(getTitle().equalsIgnoreCase("Compare 2017 Plans"))
+		{
+			return new PlanCompareDetails(driver);
+			
+					}
+		return null;
 	}
 
 }

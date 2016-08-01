@@ -162,7 +162,9 @@ public class PlanPreviewAarpStepDefinition {
 	@When("^user select the below  plan$")
 	public void user_validates_plan_selector_dropdown(DataTable givenAttributes)
 	{
-			List<DataTableRow> memberAttributesRow = givenAttributes
+
+		List<DataTableRow> memberAttributesRow = givenAttributes
+
 				.getGherkinRows();
 		Map<String, String> memberAttributesMap = new HashMap<String, String>();
 		for (int i = 0; i < memberAttributesRow.size(); i++) {
@@ -172,9 +174,11 @@ public class PlanPreviewAarpStepDefinition {
 		}
 		
 		String planName = memberAttributesMap.get("PlanName");
+
 		String planType = memberAttributesMap.get("PlanType");
 		getLoginScenario().saveBean(VPPCommonConstants.PLAN_NAME, planName);
 		getLoginScenario().saveBean(VPPCommonConstants.PLAN_TYPE, planType);
+
 		PlanPreviewPage planpreviewPage = (PlanPreviewPage) getLoginScenario()
 				.getBean(PageConstants.ACQUISITION_PLANPREVIW_PAGE);
 			
@@ -182,6 +186,7 @@ public class PlanPreviewAarpStepDefinition {
 		planpreviewPage.validatesplandropdown(planName);
 	}
 	
+
 	@Then("^user validates the provider search and locate pharmacy link$")
 	public void user_validates_provider_and_pharmacy_locator()
 	{
@@ -221,6 +226,7 @@ public class PlanPreviewAarpStepDefinition {
 		}
 	}
 	
+
 	@After
 	public void tearDown() {
 		WebDriver wd = (WebDriver) getLoginScenario().getBean(

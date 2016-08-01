@@ -724,6 +724,8 @@ public class CommonConstants {
 	private static final String HEALTH_AND_WELLNESS_DIRECTORY = "/jsonresponse/member/ulayer/healthandwellness/";
 
 	public static final String PLAN_COMPARE_PAGE_DATA = "plancompare.json";
+	
+	public static final String PLAN_COMPARE_DETAILS = "plancomparedetails.json";
 
 	public static final String PLAN_COMPARE = "plancompare";
 
