@@ -162,7 +162,7 @@ public class PlanPreviewAarpStepDefinition {
 	@When("^user select the below  plan$")
 	public void user_validates_plan_selector_dropdown(DataTable givenAttributes)
 	{
-		List<DataTableRow> memberAttributesRow = givenAttributes
+			List<DataTableRow> memberAttributesRow = givenAttributes
 				.getGherkinRows();
 		Map<String, String> memberAttributesMap = new HashMap<String, String>();
 		for (int i = 0; i < memberAttributesRow.size(); i++) {
@@ -172,11 +172,53 @@ public class PlanPreviewAarpStepDefinition {
 		}
 		
 		String planName = memberAttributesMap.get("PlanName");
+		String planType = memberAttributesMap.get("PlanType");
+		getLoginScenario().saveBean(VPPCommonConstants.PLAN_NAME, planName);
+		getLoginScenario().saveBean(VPPCommonConstants.PLAN_TYPE, planType);
 		PlanPreviewPage planpreviewPage = (PlanPreviewPage) getLoginScenario()
 				.getBean(PageConstants.ACQUISITION_PLANPREVIW_PAGE);
 			
 		
 		planpreviewPage.validatesplandropdown(planName);
+	}
+	
+	@Then("^user validates the provider search and locate pharmacy link$")
+	public void user_validates_provider_and_pharmacy_locator()
+	{
+//		List<DataTableRow> memberAttributesRow = givenAttributes
+//				.getGherkinRows();
+//		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+//		for (int i = 0; i < memberAttributesRow.size(); i++) {
+//
+//			memberAttributesMap.put(memberAttributesRow.get(i).getCells()
+//					.get(0), memberAttributesRow.get(i).getCells().get(1));
+//		}
+		
+//		String plantype= memberAttributesMap.get("PlanType");
+		String plantype=(String) getLoginScenario().getBean(VPPCommonConstants.PLAN_TYPE);
+		System.out.println(plantype);
+		PlanPreviewPage planpreviewPage = (PlanPreviewPage) getLoginScenario()
+				.getBean(PageConstants.ACQUISITION_PLANPREVIW_PAGE);
+		
+		planpreviewPage.validateprovider_pharmacylink(plantype);
+	}
+	
+	@Then("^user clicks on locate pharmacy$")
+	public void user_click_to_locate_pharmacy()
+	{
+		
+		
+		String plantype = (String) getLoginScenario().getBean(VPPCommonConstants.PLAN_TYPE);
+		PlanPreviewPage planpreviewPage = (PlanPreviewPage) getLoginScenario()
+				.getBean(PageConstants.ACQUISITION_PLANPREVIW_PAGE);
+		if (plantype.equalsIgnoreCase("MA"))
+		{
+			Assert.assertTrue(true);
+		}
+		else
+		{
+			planpreviewPage.navigatetopharmacylink(plantype);
+		}
 	}
 	
 	@After
