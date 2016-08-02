@@ -18,22 +18,40 @@ import acceptancetests.atdd.util.CommonUtility;
 import atdd.framework.UhcDriver;
 
 public class PlanDetailsPage extends UhcDriver{
-	
+
 	@FindBy(id = "planDetailsPage")
 	private WebElement planDetailsContent;
-	
+
 	@FindBy(id = "learnmorebtnDetails")
 	private WebElement learnMoreButton;
-	
+
 	@FindBy(id = "yourDceInitial")
 	private WebElement enterDrugInfoLink;
-	
+
 	@FindBy(xpath ="/html/body/div[4]/div/table/tbody/tr[2]/td/div/table/tbody/tr[2]/td/div/div/div[2]/div/div/div/div[2]/div[2]/div[1]/div/div[2]/div/div/table/tbody/tr[4]/td[2]/a")
 	private WebElement plandetailsProviderlink;
-	
+
 	@FindBy(xpath ="//*[@id='myDoctorDetails']")
 	private WebElement plandetailProviderlink;
+
+	@FindBy(xpath = "//*[@id='yourDruglist']/div[1]/p[4]")
+	private WebElement errorMessage;
+
+	@FindBy(xpath = "//*[@id='planCost']/table/tbody/tr[2]/td[3]/span[1]")
+	private WebElement planCost1;
+
+	@FindBy(xpath = "//*[@id='planCost']/table/tbody/tr[2]/td[4]/span[1]")
+	private WebElement planCost2;
+
+	@FindBy(xpath = "//*[@id='planCost']/table/tbody/tr[3]/td[4]/div/div/span[1]")
+	private WebElement planCost3;
+
+	@FindBy(xpath = "//*[@id='planCost']/table/tbody/tr[4]/td/div[3]/span[1]")
+	private WebElement planCost4;
 	
+	@FindBy(xpath = "//*[@id='detailplanNameBox']/div/div/div/span/h3")
+	private WebElement planName;
+
 	private PageData vppPlanDetails;
 
 	public JSONObject vppPlanDetailsJson;
@@ -54,7 +72,7 @@ public class PlanDetailsPage extends UhcDriver{
 		{
 			fileName = "snpplandetails.json";
 		}
-		
+
 		vppPlanDetails = CommonUtility.readPageData(fileName,
 				CommonConstants.PAGE_OBJECT_DIRECTORY_BLUELAYER_ACQ);
 		openAndValidate();
@@ -75,7 +93,7 @@ public class PlanDetailsPage extends UhcDriver{
 		{
 			return null;
 		}
-		
+
 	}
 
 	@Override
@@ -87,23 +105,23 @@ public class PlanDetailsPage extends UhcDriver{
 					.get(key));
 			if (element != null) {
 				if(validate(element)){
-				try {
-					jsonObject.put(key, element.getText());
-				} catch (JSONException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
+					try {
+						jsonObject.put(key, element.getText());
+					} catch (JSONException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
 				}
 			}
 		}
 		vppPlanDetailsJson = jsonObject;
-		
+
 	}
 
 	public GetStartedPage clicksOnEnterDrugInformationLink() {
-		
+
 		enterDrugInfoLink.click();
-		
+
 		if (currentUrl().contains("/estimate-drug-costs")) {
 			return new GetStartedPage(driver);
 		}
@@ -115,12 +133,12 @@ public class PlanDetailsPage extends UhcDriver{
 		plandetailsProviderlink.click();
 		ArrayList<String> tabs = new ArrayList<String>(
 				driver.getWindowHandles());
-				driver.switchTo().window(tabs.get(1));
+		driver.switchTo().window(tabs.get(1));
 		if (getTitle().equalsIgnoreCase(
-						"Find Care")) {
+				"Find Care")) {
 			return new Rallytool_Page(driver);
 		}
-		
+
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -130,17 +148,63 @@ public class PlanDetailsPage extends UhcDriver{
 		plandetailProviderlink.click();
 		ArrayList<String> tabs = new ArrayList<String>(
 				driver.getWindowHandles());
-				driver.switchTo().window(tabs.get(1));
+		driver.switchTo().window(tabs.get(1));
 		if (getTitle().equalsIgnoreCase(
-						"Find Care")) {
+				"Find Care")) {
 			return new Rallytool_Page(driver);
 		}
-		
-		
-		
-		
+
+
+
+
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	public void validateDrugList(String nameOfPlan, String expectedErrorMessage) {
+		driver.navigate().refresh();
+		String pName = planName.getText().toString();
+		if(pName.contains(nameOfPlan)){
+			//String expectedErrorMessage = "The pharmacy selected is not part of this plan's pharmacy network. Please edit your current pharmacy to estimate your drug costs for this plan.";
+			String actualErrorMessage = errorMessage.getText().toString();
+			if(actualErrorMessage.equals(expectedErrorMessage))
+			{
+				System.out.println("Validated the error message");
+			}
+			else{
+				System.out.println("Expected Error Message is --------"+expectedErrorMessage);
+				System.out.println("But got ---------"+actualErrorMessage);
+			}
+
+		}
+		else{
+			System.out.println("The user is not on the correct page");
+		}
+
 	} 
-	
+
+	public void validatePlanCost(String planName){
+		String pName = planName.toString();
+		String pCost1 = planCost1.getText();
+		String pCost2 = planCost2.getText();
+		String pCost3 = planCost3.getText();
+		String pCost4 = planCost4.getText();
+		if(pName.contains(planName)){
+			if(pCost1.equals("--")&&pCost2.equals("--")&&pCost3.equals("--")&&pCost4.equals("--")){
+				System.out.println("Verified Plan Costs");
+			}
+			else{
+				System.out.println("Plan costs contains data");
+			}
+
+
+		}
+		else{
+			System.out.println("The user is not on the correct page");
+		}
+
+	}
+
 }
+
+
