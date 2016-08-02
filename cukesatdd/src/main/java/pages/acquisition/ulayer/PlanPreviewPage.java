@@ -1,10 +1,13 @@
 package pages.acquisition.ulayer;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.Assert;
 
+
 import org.openqa.selenium.By;
+
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -12,11 +15,11 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.FindBys;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
-import org.springframework.test.AssertThrows;
 
 import acceptancetests.atdd.data.CommonConstants;
 import acceptancetests.atdd.data.MRConstants;
 import acceptancetests.atdd.util.CommonUtility;
+import pages.acquisition.uhcretiree.Rallytool_Page;
 
 /**
  * @author pgrover1
@@ -62,6 +65,10 @@ public class PlanPreviewPage extends GlobalWebElements {
 	private WebElement providerLink;
 	
 
+	@FindBy(id="planyear")
+	private WebElement planyeardropdwn;
+	
+
 	private static String AARP_PLANPREVIEW_PAGE_URL = MRConstants.AARP_PLANPREVIEW_URL;
 	
 	
@@ -78,6 +85,7 @@ public class PlanPreviewPage extends GlobalWebElements {
 	public void openAndValidate() {
 		if (!(currentUrl().contains("aarpmedicareplans"))) {
 			start(AARP_PLANPREVIEW_PAGE_URL);
+//			start("www.awe-stage-aarpmedicareplans.uhc.com/plan-preview.html");
 			validate(zipcodetxtbox);
 			validate(lookuplink);
 			validate(continuebtn);
@@ -205,10 +213,43 @@ public class PlanPreviewPage extends GlobalWebElements {
 		
 	}
 
+
 		
 		
 	}
 	
 	
+
+
+	
+	public void validate_planyeardropdown()
+	{
+		if (planyeardropdwn.isDisplayed() )
+		{
+			Select planyeardropdown = new Select(planyeardropdwn);
+			if (planyeardropdown.getFirstSelectedOption().getText().equals("2017"))
+			{
+				Assert.assertTrue(true);
+			}
+			else
+				Assert.fail("Issue in 2017 selection");
+		}
+		else
+			Assert.fail("Plan year dropdown not displayed");
+	}
+	
+	public Rallytool_Page navigatetoRally()
+	{
+		providerLink.click();
+		ArrayList<String> tabs2 = new ArrayList<String> (driver.getWindowHandles());
+	    driver.switchTo().window(tabs2.get(1));
+	    if (getTitle().contains("Rally"))
+	    {
+	    	return new Rallytool_Page(driver);
+	    }
+	    else
+	    	return null;
+		
+	}
 
 }
