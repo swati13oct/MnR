@@ -71,3 +71,21 @@ Examples:
 	| PDP      | 80002   | Adams County  |	25      |  AARP MedicareRx Preferred (PDP) | Open 24 hours,Long-term care,Standard Network Pharmacy (90-day) |
 	| PDP      | 80001   |		     |	25      |  AARP MedicareRx Preferred (PDP) | Open 24 hours,Long-term care,Standard Network Pharmacy (90-day) |
 #	| MAPD	   | 80002   |		     |	25      |  AARP MedicareRx Preferred (PDP) | Open 24 hours,Long-term care,Standard Network Pharmacy (90-day) |
+
+@pharmacylocator
+Feature:To test Locate a Pharmacy tool in AARP site
+Scenario Outline:To verify pharmacies displayed based on contract and PBP in AARP site
+Given registered member to verify locate a pharmacy in AARP Site
+	| <plantype> |
+When the user navigates to pharmacy search page in AARP site
+And the user chooses the year and a plan from dropdown in AARP site
+    |  Year     | <year> |
+	| Plan Name | <planName>  |
+And the user hovers over the tooltip in AARP Site
+	| <pharmacyType> |
+And the user searches for pharmacies available in AARP site
+Then the user validates the pharmacies available in AARP site
+
+Examples:
+	| plantype | year |  planName			                | pharmacyType						     |
+	| PDP      | 2016 |  AARP MedicareRx Saver Plus (PDP)   | Preferred Retail Pharmacy Network      | 
