@@ -54,6 +54,9 @@ public class SelectPharmacyPage extends UhcDriver {
 
 	@FindBy(linkText = "select")
 	private WebElement selectPharmacyButton;
+	
+	@FindBy(xpath = "/html/body/div[7]/div/div/table/tbody/tr[5]/td/div[4]/div/div[6]/div[1]/div[3]/div/div/div/div[7]/div/div/div/div/div[1]/div[3]/div[2]/span[6]/span[2]/strong/span[2]")
+	private WebElement planYear2017;
 
 	private PageData selectPharmacy;
 
@@ -109,10 +112,16 @@ public class SelectPharmacyPage extends UhcDriver {
 					pharmacyColumns.get(4).findElement(By.linkText("select"))
 							.click();
 					viewDrugCostTab1.click();
+					if(validate(planYear2017)){
+						planYear2017.click();
+					}
 					return new ViewDrugCostPage(driver,planType);
 
 				} else {
 					viewDrugCostTab2.click();
+					if(validate(planYear2017)){
+						planYear2017.click();
+					}
 					return new ViewDrugCostPage(driver,planType);
 				}
 

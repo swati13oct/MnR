@@ -2,6 +2,7 @@ package acceptancetests.druglookup.ulayer;
 
 import gherkin.formatter.model.DataTableRow;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -17,6 +18,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import pages.member.ulayer.AccountHomePage;
 import pages.member.ulayer.AddDrugPage;
 import pages.member.ulayer.DrugDosagePage;
+import pages.member.ulayer.EstimateYourDrugCostPage;
 import pages.member.ulayer.LoginPage;
 import pages.member.ulayer.LowCostOptPage;
 import pages.member.ulayer.ManageDrugPage;
@@ -24,9 +26,8 @@ import pages.member.ulayer.SelectPharmacyPage;
 import pages.member.ulayer.ViewDrugCostPage;
 import acceptancetests.atdd.data.CommonConstants;
 import acceptancetests.atdd.data.member.PageConstants;
-
+import acceptancetests.dceretiree.data.DCERetireeCommonConstants;
 import acceptancetests.druglookup.data.DceCommonConstants;
-
 import acceptancetests.login.data.LoginCommonConstants;
 import atdd.framework.MRScenario;
 import cucumber.annotation.After;
@@ -44,6 +45,7 @@ public class DrugLookupAarpStepDefinition {
 
 	@Autowired
 	MRScenario loginScenario;
+	private LowCostOptPage lowCostOptPage;
 
 	public MRScenario getLoginScenario() {
 		return loginScenario;
@@ -101,15 +103,18 @@ public class DrugLookupAarpStepDefinition {
 		}
 		System.out.println("accountHomeExpectedJson===>"
 				+ accountHomeExpectedJson.toString());
-		System.out.println("accountHomeActualJson===>"
+		System.out.println("accountHomeActualJson=====>"
 				+ accountHomeActualJson.toString());
-		/*
-		 * try { JSONAssert.assertEquals(accountHomeExpectedJson,
-		 * accountHomeActualJson, true); } catch (JSONException e) {
-		 * e.printStackTrace(); }
-		 */
+		
+		  try { 
+			  JSONAssert.assertEquals(accountHomeExpectedJson,
+					  accountHomeActualJson, true); 
+			  } catch (JSONException e) {
+				  e.printStackTrace(); 
+		}
+		 
 		getLoginScenario().saveBean(CommonConstants.EXPECTED_DATA_MAP,
-				expectedDataMap);
+				accountHomeActualJson);
 		getLoginScenario().saveBean(CommonConstants.PLAN_TYPE,
 				desiredAttributes.get(0));
 
@@ -119,36 +124,34 @@ public class DrugLookupAarpStepDefinition {
 	public void attemp_to_view_drug_details() {
 		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario()
 				.getBean(PageConstants.ACCOUNT_HOME_PAGE);
-		ManageDrugPage manageDrugPage = accountHomePage.navigateToDrugLookup();
+		EstimateYourDrugCostPage estimateYourDrugCostPage = accountHomePage.navigateToDrugLookup();
 
-		/* Get expected data */
-		@SuppressWarnings("unchecked")
-		Map<String, JSONObject> expectedDataMap = (Map<String, JSONObject>) getLoginScenario()
-				.getBean(CommonConstants.EXPECTED_DATA_MAP);
-		JSONObject manageDrugPageExpectedJson = manageDrugPage
-				.getExpectedData(expectedDataMap);
+		if (estimateYourDrugCostPage != null) {
+			getLoginScenario().saveBean(PageConstants.ESTIMATE_YOUR_DRUG_COST_PAGE,
+					estimateYourDrugCostPage);
+			Assert.assertTrue(true);
+		}
+	}
+	
+	@And("^the user selects plan year and plan name")
+	public void the_user_selects_plan_year_and_plan_name(DataTable givenAttributes){
+		String planYear = givenAttributes.getGherkinRows().get(0)
+				.getCells().get(1);
+		String planName = givenAttributes.getGherkinRows().get(1)
+				.getCells().get(1);
 
-		JSONObject manageDrugPageActualJson = null;
-		if (manageDrugPage != null) {
+		EstimateYourDrugCostPage estimateYourDrugCostPage = (EstimateYourDrugCostPage) getLoginScenario()
+				.getBean(PageConstants.ESTIMATE_YOUR_DRUG_COST_PAGE);
+		ManageDrugPage manageDrugPage = estimateYourDrugCostPage.continueToSearchDrug(planYear, planName);
+		if (estimateYourDrugCostPage != null) {
 			getLoginScenario().saveBean(PageConstants.MANAGE_DRUG_PAGE,
 					manageDrugPage);
 			Assert.assertTrue(true);
-			manageDrugPageActualJson = manageDrugPage.manageDrugJson;
-		}
-		System.out.println("manageDrugPageExpectedJson===>"
-				+ manageDrugPageExpectedJson.toString());
-		System.out.println("manageDrugPageActualJson===>"
-				+ manageDrugPageActualJson.toString());
-		try {
-			JSONAssert.assertEquals(manageDrugPageExpectedJson,
-					manageDrugPageActualJson, true);
-		} catch (JSONException e) {
-			e.printStackTrace();
 		}
 	}
 
 	@When("^the user search the drug with drugInitials in AARP site$")
-	public void user_validated_drugInformation(DataTable givenAttributes) {
+	public void user_validated_drugInformation(DataTable givenAttributes) throws JSONException {
 		String drugInitials = givenAttributes.getGherkinRows().get(0)
 				.getCells().get(0);
 		ManageDrugPage manageDrugPage = (ManageDrugPage) getLoginScenario()
@@ -156,30 +159,28 @@ public class DrugLookupAarpStepDefinition {
 		AddDrugPage addDrugPage = manageDrugPage.searchDrug(drugInitials);
 
 		/* Get expected data */
-		@SuppressWarnings("unchecked")
-		Map<String, JSONObject> expectedDataMap = (Map<String, JSONObject>) getLoginScenario()
-				.getBean(CommonConstants.EXPECTED_DATA_MAP);
-		JSONObject addDrugPageExpectedJson = addDrugPage.getExpectedData(
-				expectedDataMap, drugInitials);
+		String fileName = drugInitials.toLowerCase();
+		String directory = CommonConstants.ADD_DRUG_ULAYER_DIRECTORY + File.separator;
 
+		JSONObject addDrugPageExpectedJson = MRScenario.readExpectedJson(
+				fileName, directory);
+		
 		JSONObject addDrugPageActualJson = null;
 		if (addDrugPage != null) {
 			getLoginScenario().saveBean(PageConstants.ADD_DRUG_PAGE,
 					addDrugPage);
 			Assert.assertTrue(true);
-			addDrugPageActualJson = addDrugPage.addDrugJson;
+			addDrugPageActualJson =  addDrugPage.addDrugJson;
 		}
 
-		System.out.println("addDrugPageExpectedJson===>"
-				+ addDrugPageExpectedJson.toString());
 		System.out.println("addDrugPageActualJson===>"
-				+ addDrugPageActualJson.toString());
-		try {
-			JSONAssert.assertEquals(addDrugPageExpectedJson,
-					addDrugPageActualJson, true);
-		} catch (JSONException e) {
-			e.printStackTrace();
-		}
+				+ addDrugPageActualJson.get("drugDropDownList").toString());
+		System.out.println("addDrugPageExpectedJson===>"
+				+ addDrugPageExpectedJson.getString("drugDropDownList").toString());
+		
+
+		Assert.assertEquals(addDrugPageExpectedJson.getString("drugDropDownList").toString(), addDrugPageActualJson.get("drugDropDownList").toString());
+
 	}
 
 	@And("^the user selects drugName in the drug list in AARP site$")
@@ -190,13 +191,15 @@ public class DrugLookupAarpStepDefinition {
 		AddDrugPage addDrugPage = (AddDrugPage) getLoginScenario().getBean(
 				PageConstants.ADD_DRUG_PAGE);
 		DrugDosagePage drugDosagePage = addDrugPage.selectDrug(drugName);
-
+		
+		
 		/* Get expected data */
-		@SuppressWarnings("unchecked")
-		Map<String, JSONObject> expectedDataMap = (Map<String, JSONObject>) getLoginScenario()
-				.getBean(CommonConstants.EXPECTED_DATA_MAP);
-		JSONObject drugDosagePageExpectedJson = drugDosagePage.getExpectedData(
-				expectedDataMap, drugName);
+		String fileName = drugName.toLowerCase() + " " + getLoginScenario().getBean(CommonConstants.PLAN_TYPE);
+		String directory = CommonConstants.DRUG_DOSAGE_ULAYER_DIRECTORY
+				+ File.separator;
+
+		JSONObject drugDosagePageExpectedJson = MRScenario.readExpectedJson(
+				fileName, directory);
 
 		JSONObject drugDosagePageActualJson = null;
 		if (addDrugPage != null) {
@@ -240,11 +243,12 @@ public class DrugLookupAarpStepDefinition {
 
 			/* Get expected data */
 			JSONObject lowCostOptionsActualJson = null;
-			@SuppressWarnings("unchecked")
-			Map<String, JSONObject> expectedDataMap = (Map<String, JSONObject>) getLoginScenario()
-					.getBean(CommonConstants.EXPECTED_DATA_MAP);
-			JSONObject lowCostOptionsExpectedJson = lowCostOptionsPage
-					.getExpectedData(expectedDataMap, dosageAttributesMap);
+			String fileName = "lowcostoptions " + getLoginScenario().getBean(CommonConstants.PLAN_TYPE);
+			String directory = CommonConstants.LOW_COST_OPTIONS_ULAYER_DIRECTORY
+					+ File.separator;
+
+			JSONObject lowCostOptionsExpectedJson = MRScenario.readExpectedJson(
+					fileName, directory);
 
 			/* Actual data */
 			if (lowCostOptionsPage != null) {
@@ -271,12 +275,14 @@ public class DrugLookupAarpStepDefinition {
 			ManageDrugPage manageDrugPage = (ManageDrugPage) pageObject;
 
 			/* Get expected data */
-			@SuppressWarnings("unchecked")
-			Map<String, JSONObject> expectedDataMap = (Map<String, JSONObject>) getLoginScenario()
-					.getBean(CommonConstants.EXPECTED_DATA_MAP);
-			JSONObject manageDrugPageExpectedJson = manageDrugPage
-					.getExpectedData(expectedDataMap, dosageAttributesMap);
+			//JSONObject manageDrugPageExpectedJson = null;
+			String fileName = "managedrug " + getLoginScenario().getBean(CommonConstants.PLAN_TYPE);
+			String directory = CommonConstants.LOW_COST_OPTIONS_ULAYER_DIRECTORY
+					+ File.separator;
 
+			JSONObject manageDrugPageExpectedJson = MRScenario.readExpectedJson(
+					fileName, directory);
+			
 			JSONObject manageDrugPageActualJson = null;
 			if (manageDrugPage != null) {
 				getLoginScenario().saveBean(PageConstants.MANAGE_DRUG_PAGE,
@@ -307,43 +313,54 @@ public class DrugLookupAarpStepDefinition {
 		Map<String, String> dosageAttributesMap = (Map<String, String>) getLoginScenario()
 				.getBean(DceCommonConstants.DOSAGE_ATTRIBUTES_MAP);
 
+		ManageDrugPage manageDrugPage = null;
 		if (!drugType.equalsIgnoreCase("null") && null != drugType) {
-			LowCostOptPage lowCostOptpage = (LowCostOptPage) getLoginScenario()
-					.getBean(PageConstants.LOW_COST_OPT_PAGE);
-			ManageDrugPage manageDrugPage = lowCostOptpage
-					.selectDrugType(drugType);
+			if (getLoginScenario().getBean(PageConstants.LOW_COST_OPT_PAGE) != null){
+				LowCostOptPage lowCostOptPage = (LowCostOptPage) getLoginScenario()
+					.getBean(PageConstants.LOW_COST_OPT_PAGE);		
 
-			/* Get expected data */
-			@SuppressWarnings("unchecked")
-			Map<String, JSONObject> expectedDataMap = (Map<String, JSONObject>) getLoginScenario()
-					.getBean(CommonConstants.EXPECTED_DATA_MAP);
-			JSONObject manageDrugPageExpectedJson = manageDrugPage
-					.getExpectedData(expectedDataMap, dosageAttributesMap,
-							drugType);
+				manageDrugPage= lowCostOptPage
+						.selectDrugType(drugType);
+				/* Get expected data */
+				String fileName = drugType.toLowerCase() + " "+ getLoginScenario().getBean(CommonConstants.PLAN_TYPE);
+				String directory = CommonConstants.ADD_DRUG_ULAYER_DIRECTORY
+						+ File.separator + CommonConstants.ADD_DRUG_ULAYER_DRUG_TYPE + File.separator;
 
-			JSONObject manageDrugPageActualJson = null;
-			if (manageDrugPage != null) {
-				getLoginScenario().saveBean(PageConstants.MANAGE_DRUG_PAGE,
-						manageDrugPage);
+				JSONObject manageDrugPageExpectedJson = MRScenario.readExpectedJson(
+						fileName, directory);
+
+				JSONObject manageDrugPageActualJson = null;
+				if (manageDrugPage != null) {
+					getLoginScenario().saveBean(PageConstants.MANAGE_DRUG_PAGE,
+							manageDrugPage);
+					Assert.assertTrue(true);
+					manageDrugPageActualJson = manageDrugPage.manageDrugJson;
+				}
+				System.out.println("manageDrugPageExpectedJson==>"
+						+ manageDrugPageExpectedJson.toString());
+				System.out.println("manageDrugPageActualJson==>"
+						+ manageDrugPageActualJson.toString());
+				try {
+					JSONAssert.assertEquals(manageDrugPageExpectedJson,
+							manageDrugPageActualJson, true);
+				} catch (JSONException e) {
+					e.printStackTrace();
+				}
+			} else {
+				ManageDrugPage manageDrug = (ManageDrugPage) getLoginScenario().getBean(PageConstants.MANAGE_DRUG_PAGE);
+				manageDrug = manageDrug.selectDrugType(drugType);
+				 getLoginScenario()
+					.saveBean(PageConstants.MANAGE_DRUG_PAGE, manageDrug);
 				Assert.assertTrue(true);
-				manageDrugPageActualJson = manageDrugPage.manageDrugJson;
 			}
-			System.out.println("manageDrugPageExpectedJson==>"
-					+ manageDrugPageExpectedJson.toString());
-			System.out.println("manageDrugPageActualJson==>"
-					+ manageDrugPageActualJson.toString());
-			try {
-				JSONAssert.assertEquals(manageDrugPageExpectedJson,
-						manageDrugPageActualJson, true);
-			} catch (JSONException e) {
-				e.printStackTrace();
-			}
+
+
 
 		}
 	}
 
 	@And("^the user search for pharmacies using the following information in AARP site$")
-	public void user_selects_pharmacy_type_distance(DataTable pharmacyAttributes) {
+	public void user_selects_pharmacy_type_distance(DataTable pharmacyAttributes) throws JSONException {
 		List<DataTableRow> pharmacyAttributesRow = pharmacyAttributes
 				.getGherkinRows();
 		Map<String, String> pharmacyAttributesMap = new HashMap<String, String>();
@@ -357,14 +374,7 @@ public class DrugLookupAarpStepDefinition {
 		ManageDrugPage manageDrugPage = (ManageDrugPage) getLoginScenario()
 				.getBean(PageConstants.MANAGE_DRUG_PAGE);
 		SelectPharmacyPage selectPharmacyPage = manageDrugPage
-				.navigateToPharmacyPage();
-
-		/* Get expected data */
-		@SuppressWarnings("unchecked")
-		Map<String, JSONObject> expectedDataMap = (Map<String, JSONObject>) getLoginScenario()
-				.getBean(CommonConstants.EXPECTED_DATA_MAP);
-		JSONObject selectPharmacyPageExpectedJson = selectPharmacyPage
-				.getExpectedData(expectedDataMap);
+				.navigateToPharmacyPage();		
 
 		JSONObject selectPharmacyPageActualJson = null;
 		if (selectPharmacyPage != null) {
@@ -373,25 +383,38 @@ public class DrugLookupAarpStepDefinition {
 			Assert.assertTrue(true);
 			selectPharmacyPageActualJson = selectPharmacyPage.selectPharmacyJson;
 		}
+		
+		/* Get expected data */
+		String fileName = "initial " + getLoginScenario().getBean(LoginCommonConstants.USERNAME);
+		String directory = CommonConstants.ADD_DRUG_ULAYER_DIRECTORY
+				+ File.separator + CommonConstants.ADD_DRUG_ULAYER_PHARMACIES + File.separator;
 
-		System.out.println("selectPharmacyPageActualJson=====>"
-				+ selectPharmacyPageActualJson.toString());
-		System.out.println("selectPharmacyPageExpectedJson===>"
-				+ selectPharmacyPageExpectedJson.toString());
+		JSONObject selectPharmacyPageExpectedJson = MRScenario.readExpectedJson(
+				fileName, directory);
 
-		try {
-			JSONAssert.assertEquals(selectPharmacyPageExpectedJson,
-					selectPharmacyPageActualJson, true);
-		} catch (JSONException e) {
-			e.printStackTrace();
-		}
-
+		System.out.println("selectPharmacyPageActualJson pharmacylist=====>"
+				+ selectPharmacyPageActualJson.getString("pharmacyList").toString());
+		System.out.println("selectPharmacyPageExpectedJson pharmacylist===>"
+				+ selectPharmacyPageExpectedJson.getString("pharmacyList").toString());
+		try{
+			JSONAssert.assertEquals(selectPharmacyPageExpectedJson.getString("pharmacyList"),
+						selectPharmacyPageActualJson.getString("pharmacyList"), true);	
+			} catch (JSONException e) {
+				e.printStackTrace();
+			}
+		
 		/* Selecting pharmacyType and distance */
 		selectPharmacyPage = selectPharmacyPage.selectTypeDistance(
 				pharmacyType, distance);
 
-		JSONObject updatedPharmacyPageExpectedJson = selectPharmacyPage
-				.getExpectedData(expectedDataMap, pharmacyType, distance);
+		/*JSONObject updatedPharmacyPageExpectedJson = selectPharmacyPage
+				.getExpectedData(expectedDataMap, pharmacyType, distance);*/
+		
+		/* Get expected data */
+		String fileName2 = pharmacyType + " " + getLoginScenario().getBean(LoginCommonConstants.USERNAME);
+
+		JSONObject updatedPharmacyPageExpectedJson = MRScenario.readExpectedJson(
+				fileName2, directory);
 
 		JSONObject updatedPharmacyPageActualJson = null;
 		if (selectPharmacyPage != null) {
@@ -406,7 +429,7 @@ public class DrugLookupAarpStepDefinition {
 		System.out.println("updatedPharmacyPageExpectedJson===>"
 				+ updatedPharmacyPageExpectedJson.toString());
 
-		try {
+		try{
 			JSONAssert.assertEquals(updatedPharmacyPageExpectedJson,
 					updatedPharmacyPageActualJson, true);
 		} catch (JSONException e) {
@@ -425,19 +448,10 @@ public class DrugLookupAarpStepDefinition {
 		SelectPharmacyPage selectPharmacyPage = (SelectPharmacyPage) getLoginScenario()
 				.getBean(PageConstants.SELECT_PHARMACY_PAGE);
 		ViewDrugCostPage viewDrugCostPage = selectPharmacyPage.selectPharmacy(
-				pharmacyName, planType);
-
-		/* Get expected data */
-		JSONObject viewDrugCostActualJson = null;
-		@SuppressWarnings("unchecked")
-		Map<String, JSONObject> expectedDataMap = (Map<String, JSONObject>) getLoginScenario()
-				.getBean(CommonConstants.EXPECTED_DATA_MAP);
-		JSONObject viewDrugCostExpectedJson = viewDrugCostPage
-				.getExpectedData(expectedDataMap);
-		getLoginScenario().saveBean(DceCommonConstants.VIEW_DRUG_COST_EXPECTED,
-				viewDrugCostExpectedJson);
+				pharmacyName, planType);		
 
 		/* Actual data */
+		JSONObject viewDrugCostActualJson = null;
 		if (viewDrugCostPage != null) {
 			getLoginScenario().saveBean(PageConstants.VIEW_DRUG_COST_PAGE,
 					viewDrugCostPage);
@@ -447,6 +461,14 @@ public class DrugLookupAarpStepDefinition {
 					DceCommonConstants.VIEW_DRUG_COST_ACTUAL,
 					viewDrugCostActualJson);
 		}
+		/* Get expected data */
+		String fileName = pharmacyName;
+		String directory = CommonConstants.VIEW_DRUG_COST_ULAYER_DIRECTORY + File.separator;
+
+		JSONObject viewDrugCostExpectedJson = MRScenario.readExpectedJson(
+				fileName, directory);
+		getLoginScenario().saveBean(DceCommonConstants.VIEW_DRUG_COST_EXPECTED,
+				viewDrugCostExpectedJson);
 	}
 
 	@And("^the user validates drug cost page in AARP site$")
@@ -480,7 +502,6 @@ public class DrugLookupAarpStepDefinition {
 
 		WebDriver wd = (WebDriver) getLoginScenario().getBean(
 				CommonConstants.WEBDRIVER);
-		wd.quit();
 		getLoginScenario().flushBeans();
 	}
 

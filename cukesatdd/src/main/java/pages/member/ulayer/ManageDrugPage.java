@@ -59,6 +59,12 @@ public class ManageDrugPage extends UhcDriver {
 	@FindBy(id = "disclosure_link")
 	private WebElement logOut;
 	
+	@FindBys(value = { @FindBy(name = "typeofdrug") })
+	private List<WebElement> genericDrugs;
+	
+
+	@FindBy(linkText = "select a pharmacy")
+	private WebElement continueButton;
 	
 	private PageData manageDrug;
 
@@ -141,8 +147,15 @@ public class ManageDrugPage extends UhcDriver {
 	}
 
 	public SelectPharmacyPage navigateToPharmacyPage() {
-
-		pharmacyTab.click();
+		if(!pharmacyPageHeading.getText().contains("select a pharmacy")){
+			pharmacyTab.click();
+			try {
+				Thread.sleep(5000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
 		if (pharmacyPageHeading.getText().contains("select a pharmacy")) {
 			return new SelectPharmacyPage(driver);
 		}
@@ -200,21 +213,21 @@ public class ManageDrugPage extends UhcDriver {
 
 	}
 
-	public JSONObject getExpectedData(Map<String, JSONObject> expectedDataMap) {
+	public JSONObject getExpectedData(JSONObject expectedDataMap) {
 	
 		String key = "NoDrug";
-		JSONObject globalExpectedJson = expectedDataMap
-				.get(CommonConstants.GLOBAL);
+		/*JSONObject globalExpectedJson = expectedDataMap
+				.get(CommonConstants.GLOBAL);*/
 		JSONObject manageDrugExpectedJson = null;
 		try {
-			manageDrugExpectedJson = (JSONObject) expectedDataMap
-					.get(CommonConstants.MANAGE_DRUG).get(key);
+			manageDrugExpectedJson = (JSONObject) ((JSONObject) expectedDataMap
+					.get(CommonConstants.MANAGE_DRUG)).get(key);
 		} catch (JSONException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		manageDrugExpectedJson = CommonUtility.mergeJson(
-				manageDrugExpectedJson, globalExpectedJson);
+		/*manageDrugExpectedJson = CommonUtility.mergeJson(
+				manageDrugExpectedJson, globalExpectedJson);*/
 		return manageDrugExpectedJson;
 	}
 
@@ -282,5 +295,22 @@ public class ManageDrugPage extends UhcDriver {
 				manageDrugExpectedJson, globalExpectedJson);
 		return manageDrugExpectedJson;
 	}
+
+	public ManageDrugPage selectDrugType(String drugType) {
+
+		if (!drugType.equalsIgnoreCase("Brand")) {
+			for (WebElement dosage : genericDrugs) {
+				dosage.click();
+				break;
+			}
+		}
+		continueButton.click();
+		if (driver.getTitle().equalsIgnoreCase("Drug Lookup")) {
+			return new ManageDrugPage(driver);
+		}
+		return null;
+	}
+
+
 
 }

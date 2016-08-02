@@ -120,10 +120,11 @@ public class PageConstants {
 
 	public static final String VPP_PLAN_SUMMARY_PAGE = "plansummaryPage";
 
-	public static final String VPP_PLAN_DETAILS_PAGE = "vppPlanDetailsPage";
+	public static final String VPP_PLAN_DETAILS_PAGE = "vppPlanDetailsPage";	
+
+	public static final String ESTIMATE_YOUR_DRUG_COST_PAGE = "estimateYourDrugCostPage";	
 
 	public static final String PLAN_COMPARE_DETAILS = "planCompareDetails";	
-
 	
 	
 

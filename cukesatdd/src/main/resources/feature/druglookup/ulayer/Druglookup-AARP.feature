@@ -3,7 +3,10 @@ Feature: To test drug search on AARP site
 Scenario Outline: Verify drug search in AARP site for a member
 Given registered AMP with following attributes for drug search
       | <planType> |              		
-When the navigates to drug search in AARP site		
+When the navigates to drug search in AARP site	
+And the user selects plan year and plan name
+	  | Plan Year | <planYear> |
+	  | Plane Name | <planName> |
 And the user search the drug with drugInitials in AARP site
       | <drugInitials> |
 And the user selects drugName in the drug list in AARP site
@@ -24,8 +27,8 @@ Then the user validates drug cost page in AARP site
 		
 		
 Examples:
-		| planType | drugInitials | drugName     | drugDosage          | drugQuantity | drugFrequency  | packages       | brand/generic    | pharmacyType                | distance | pharmacyName               |
-		| MAPD     | lipi         | Lipitor      | Lipitor TAB 10MG    | 30           | Every 1 month  | null           | Brand            | Standard Network Pharmacy   | 15 miles | BARRON PHARMACY         |
-	    | PDP      |  lipi       | Lipitor       | Lipitor TAB 10MG	   | 30           | Every 1 month  | null           | Brand	           | Standard Network Pharmacy   | 15 miles | CVS PHARMACY 07863  	     |
-		
+		| planType | planYear | planName 								| drugInitials | drugName     | drugDosage          | drugQuantity | drugFrequency  | packages       | brand/generic    | pharmacyType                | distance | pharmacyName        |
+		| PDP      | 2017 	  | AARP MedicareRx Saver Plus (PDP)		|  lipi       | Lipitor       | Lipitor TAB 10MG	| 30           | Every 1 month  | null           | Brand	        | Standard Network Pharmacy   | 15 miles | Pebblebrook Pharmacy 	     |
+		| MAPD     | 2017	  | AARP MedicareComplete Plan 2 (HMO)	 	|  lipi        | Lipitor      | Lipitor TAB 10MG    | 30           | Every 1 month  | null           | Brand            | Standard Network Pharmacy   | 15 miles | Mickey M.Y. Tseng M.D. M.P.H Inc    |
+	    
 
