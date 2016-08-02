@@ -1,4 +1,4 @@
-@druglookupUhcRetiree
+@druglookupUhcRetiree @Q2
 Feature: To test drug search on UHCRetiree site
 Scenario Outline:Verify drug search in UHCRetiree site for a member
 Given user navigates to the UHCRetiree site
