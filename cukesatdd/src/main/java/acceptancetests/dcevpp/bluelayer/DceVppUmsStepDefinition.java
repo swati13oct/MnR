@@ -128,6 +128,18 @@ public class DceVppUmsStepDefinition {
 
 	}
 
+	@And("^the user search for the drug in UMS site$")
+	public void search_drug_ums(DataTable givenAttributes){
+
+		String drugInitials = givenAttributes.getGherkinRows().get(0)
+				.getCells().get(0);
+		AddDrugPage addDrugPage = (AddDrugPage) getLoginScenario().getBean(
+				PageConstants.ADD_DRUG_PAGE);
+		addDrugPage.enterDrugInitials(drugInitials);
+		getLoginScenario().saveBean(PageConstants.ADD_DRUG_PAGE, addDrugPage);
+
+	}
+
 	@Then("^the user validates the drug list that has above mentioned drug initials in UMS site$")
 	public void validate_drugList_ums() {
 		JSONObject drugListExpectedJson = (JSONObject) getLoginScenario()
@@ -176,6 +188,24 @@ public class DceVppUmsStepDefinition {
 			getLoginScenario().saveBean(
 					DceCommonConstants.DRUG_DOSAGE_EXPECTED,
 					drugDosageExpectedJson);
+
+		}
+	}
+
+	@And("^the user selects the drug from the dropdown in UMS site$")
+	public void select_drug_ums(DataTable drugNameAttributes){
+
+		String drugName = drugNameAttributes.getGherkinRows().get(0).getCells()
+				.get(0);
+
+		getLoginScenario().saveBean(DceCommonConstants.DRUG_NAME, drugName);
+		AddDrugPage addDrugPage = (AddDrugPage) getLoginScenario().getBean(
+				PageConstants.ADD_DRUG_PAGE);
+		SelectDosagePage selectDosagePage = addDrugPage.selectDrug(drugName);
+		if (selectDosagePage != null) {
+
+			getLoginScenario().saveBean(PageConstants.SELECT_DOSAGE_PAGE,
+					selectDosagePage);
 
 		}
 	}
@@ -325,6 +355,50 @@ public class DceVppUmsStepDefinition {
 
 	}
 
+	@And("^the user selects low cost options for the selected drug in UMS site$")
+	public void low_cost_ums(DataTable drugAttributes){
+
+		List<DataTableRow> drugAttributesRow = drugAttributes.getGherkinRows();
+		Map<String, String> drugAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < drugAttributesRow.size(); i++) {
+
+			drugAttributesMap.put(drugAttributesRow.get(i).getCells().get(0),
+					drugAttributesRow.get(i).getCells().get(1));
+		}
+		String isGenericAvailable = drugAttributesMap.get("Generic Available");
+		if (isGenericAvailable.equalsIgnoreCase("yes")) {
+			String drugDosage = drugAttributesMap.get("Brand or Generic");
+			getLoginScenario().saveBean(DceCommonConstants.DRUG_WITH_DOSAGE,
+					drugDosage);
+			String drugName = (String) getLoginScenario().getBean(
+					DceCommonConstants.DRUG_NAME);
+			System.out.println("drugName with dosage--->" + drugDosage);
+
+			SelectGenericPage selectGenericPage = (SelectGenericPage) getLoginScenario()
+					.getBean(PageConstants.AFTER_DOSAGE_SELECTION);
+
+			ManageDrugPage manageDrugPage = selectGenericPage
+					.selectGeneric(drugDosage);
+			if (manageDrugPage != null) {
+				getLoginScenario().saveBean(PageConstants.MANAGE_DRUG_PAGE,
+						manageDrugPage);
+
+			}
+		}
+
+		else {
+			ManageDrugPage manageDrugPage = (ManageDrugPage) getLoginScenario()
+					.getBean(PageConstants.AFTER_DOSAGE_SELECTION);
+			if (manageDrugPage != null) {
+				getLoginScenario().saveBean(PageConstants.MANAGE_DRUG_PAGE,
+						manageDrugPage);
+
+			}
+
+		}
+
+	}
+
 	@Then("^the user validates all the drugs added in dce flow in UMS site$")
 	public void user_views_drugs_added_ums() {
 		JSONObject manageDrugActualJson = (JSONObject) getLoginScenario()
@@ -383,6 +457,20 @@ public class DceVppUmsStepDefinition {
 
 		}
 	}
+
+	@And("^the user search for pharmacies in UMS site$")
+	public void search_pharmacy_ums(){
+		ManageDrugPage manageDrugPage = (ManageDrugPage) getLoginScenario()
+				.getBean(PageConstants.MANAGE_DRUG_PAGE);
+		SelectPharmacyPage selectPharmacyPage = manageDrugPage
+				.navigateToPharmacyPage();
+		if (selectPharmacyPage != null) {
+			getLoginScenario().saveBean(PageConstants.PHARMACY_SEARCH_PAGE,
+					selectPharmacyPage);
+		}
+
+	}
+
 
 	@Then("^the user validates the available pharmacies in the selected zipcode in UMS site$")
 	public void validate_available_pharmacies_ums() {
@@ -452,6 +540,32 @@ public class DceVppUmsStepDefinition {
 
 	}
 
+	@And("^the user selects the type of pharmacy and distance in UMS site$")
+	public void select_pharmacy_distance_ums(DataTable pharmacyAttributes){
+
+		List<DataTableRow> pharmacyAttributesRow = pharmacyAttributes
+				.getGherkinRows();
+		Map<String, String> pharmacyAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < pharmacyAttributesRow.size(); i++) {
+
+			pharmacyAttributesMap.put(pharmacyAttributesRow.get(i).getCells()
+					.get(0), pharmacyAttributesRow.get(i).getCells().get(1));
+		}
+		String pharmacyType = pharmacyAttributesMap.get("Pharmacy Type");
+		getLoginScenario().saveBean(DceCommonConstants.PHARMACY_TYPE,
+				pharmacyType);
+		String distance = pharmacyAttributesMap.get("Distance");
+		getLoginScenario().saveBean(DceCommonConstants.DISTANCE, distance);
+
+		SelectPharmacyPage pharmacySearchPage = (SelectPharmacyPage) getLoginScenario()
+				.getBean(PageConstants.PHARMACY_SEARCH_PAGE);
+		pharmacySearchPage.searchPharmacies(pharmacyType, distance);
+
+		getLoginScenario().saveBean(PageConstants.PHARMACY_SEARCH_PAGE,pharmacySearchPage);
+
+
+	}
+
 	@Then("^the user validates the available pharmacies based on selection made above in UMS site$")
 	public void user_views_pharmacyList_ums() {
 		JSONObject availablePharmaciesActualJson = (JSONObject) getLoginScenario()
@@ -517,6 +631,25 @@ public class DceVppUmsStepDefinition {
 
 	}
 
+	@And("^the user selects a pharmacy in UMS site$")
+	public void select_pharmacy_ums(DataTable pharmacyAttributes){
+		SelectPharmacyPage pharmacySearchPage = (SelectPharmacyPage) getLoginScenario()
+				.getBean(PageConstants.PHARMACY_SEARCH_PAGE);
+		String pharmacyName = pharmacyAttributes.getGherkinRows().get(0)
+				.getCells().get(0);
+		getLoginScenario().saveBean(DceCommonConstants.PHARMACY_NAME,
+				pharmacyName);
+		String pharmacyType = (String) getLoginScenario().getBean(
+				DceCommonConstants.PHARMACY_TYPE);
+		ManageDrugPage manageDrugPage = pharmacySearchPage.selectPharmacy(
+				pharmacyName, pharmacyType);
+		if (manageDrugPage != null) {
+			getLoginScenario().saveBean(PageConstants.MANAGE_DRUG_PAGE,
+					manageDrugPage);
+		}
+
+	}
+
 	@Then("^the user validates the selected drug and selected pharmacy on manage drug list page in UMS site$")
 	public void validate_selected_drug_pharmacy_ums() {
 		JSONObject manageDrugActualJson = (JSONObject) getLoginScenario()
@@ -573,6 +706,20 @@ public class DceVppUmsStepDefinition {
 			getLoginScenario().saveBean(
 					VPPCommonConstants.VPP_PLAN_SUMMARY_ACTUAL,
 					planSummaryActualJson);
+		}
+
+	}
+
+	@And("^the user navigates to VPP page in UMS site$")
+	public void user_navigates_VPP_ums(){
+
+		ManageDrugPage manageDrugPage = (ManageDrugPage) getLoginScenario()
+				.getBean(PageConstants.MANAGE_DRUG_PAGE);
+		VPPPlanSummaryPage planSummaryPage = manageDrugPage
+				.navigateToPlanSummaryPage();
+		if (planSummaryPage != null) {
+			getLoginScenario().saveBean(PageConstants.VPP_PLAN_SUMMARY_PAGE,
+					planSummaryPage);
 		}
 
 	}
@@ -657,6 +804,57 @@ public class DceVppUmsStepDefinition {
 
 	}
 
+	@And("^the user selects the plan in UMS site$")
+	public void user_selects_plan_ums(DataTable givenAttributes){
+		List<DataTableRow> givenAttributesRow = givenAttributes
+				.getGherkinRows();
+		Map<String, String> givenAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < givenAttributesRow.size(); i++) {
+
+			givenAttributesMap.put(givenAttributesRow.get(i).getCells().get(0),
+					givenAttributesRow.get(i).getCells().get(1));
+		}
+
+		String plantype = givenAttributesMap.get("Plan Type");
+		getLoginScenario().saveBean(VPPCommonConstants.PLAN_TYPE, plantype);
+		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		plansummaryPage = plansummaryPage.viewPlanSummary(plantype);
+
+		if (plansummaryPage != null) {
+			getLoginScenario().saveBean(PageConstants.VPP_PLAN_SUMMARY_PAGE,
+					plansummaryPage);
+		}
+
+	}
+
+/*	@And("^the user selects the plan year in UMS site$")
+	public void user_selects_plan_year_ums(DataTable givenAttributes) {
+		List<DataTableRow> givenAttributesRow = givenAttributes
+				.getGherkinRows();
+		Map<String, String> givenAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < givenAttributesRow.size(); i++) {
+
+			givenAttributesMap.put(givenAttributesRow.get(i).getCells().get(0),
+					givenAttributesRow.get(i).getCells().get(1));
+		}
+		String planType = (String) getLoginScenario().getBean(
+				VPPCommonConstants.PLAN_TYPE);
+		String planYear = givenAttributesMap.get("Plan Year");
+		getLoginScenario().saveBean(VPPCommonConstants.PLAN_YEAR, planYear);
+		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		if(planYear.equals("2016")){
+			plansummaryPage = plansummaryPage.view2016Plan(planType);
+		}
+		if (plansummaryPage != null) {
+			getLoginScenario().saveBean(PageConstants.VPP_PLAN_SUMMARY_PAGE,
+					plansummaryPage);
+
+		}
+
+	}*/
+
 	@Then("^the user validates the available plans for selected plan types in UMS site$")
 	public void user_validates_available_plans_ums() {
 		JSONObject planSummaryActualJson = (JSONObject) getLoginScenario()
@@ -735,6 +933,8 @@ public class DceVppUmsStepDefinition {
 	public void user_views_plandetails_selected_plan_ums() {
 		String planName = (String) getLoginScenario().getBean(
 				VPPCommonConstants.PLAN_NAME);
+		String planType = (String) getLoginScenario().getBean(
+				VPPCommonConstants.PLAN_TYPE);
 		String zipcode = (String) getLoginScenario().getBean(
 				DceCommonConstants.ZIPCODE);
 		String county = (String) getLoginScenario().getBean(
@@ -788,6 +988,37 @@ public class DceVppUmsStepDefinition {
 		}
 	}
 
+	@Then("^the user view plan details of the selected plan in UMS site$")
+	public void view_plan_details_ums(DataTable planAttributes){
+		List<DataTableRow> givenAttributesRow = planAttributes.getGherkinRows();
+		Map<String, String> givenAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < givenAttributesRow.size(); i++) {
+
+			givenAttributesMap.put(givenAttributesRow.get(i).getCells().get(0),
+					givenAttributesRow.get(i).getCells().get(1));
+		}
+		String planName = givenAttributesMap.get("Plan Name");
+		getLoginScenario().saveBean(VPPCommonConstants.PLAN_NAME, planName);		
+		String planType = (String) getLoginScenario().getBean(
+				VPPCommonConstants.PLAN_TYPE);
+		String errorMessage = givenAttributesMap.get("Error Message");
+
+		VPPPlanSummaryPage vppPlanSummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+
+		PlanDetailsPage vppPlanDetailsPage = vppPlanSummaryPage
+				.navigateToPlanDetails(planName);
+		vppPlanDetailsPage.validateDrugList(planName, errorMessage);
+		vppPlanDetailsPage.validatePlanCost(planName);
+
+		if (vppPlanDetailsPage != null) {
+			getLoginScenario().saveBean(PageConstants.VPP_PLAN_DETAILS_PAGE,
+					vppPlanDetailsPage);
+		}
+
+	}
+
+
 	@Then("^the user validates the details of the selected plan in UMS site$")
 	public void user_validates_details_selected_plan_ums() {
 		JSONObject planDetailsActualJson = (JSONObject) getLoginScenario()
@@ -807,6 +1038,7 @@ public class DceVppUmsStepDefinition {
 			e.printStackTrace();
 		}
 	}
+
 
 	@After
 	public void tearDown() {

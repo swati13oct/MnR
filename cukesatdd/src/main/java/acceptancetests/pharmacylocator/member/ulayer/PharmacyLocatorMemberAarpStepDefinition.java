@@ -245,9 +245,48 @@ public class PharmacyLocatorMemberAarpStepDefinition {
 		} else {
 			Assert.fail("Failed to load Pharmacy search page");
 		}
-		getLoginScenario().saveBean("pharmacySearchAarpPage",
+		getLoginScenario().saveBean(PageConstants.PHARMACY_SEARCH_PAGE,
 				pharmacySearchAarpPage);
+	}
+	
+	@And("^the user chooses the year and a plan from dropdown in AARP site$")
+	public void chooses_year_chooses_plan(DataTable planAttributes){
+		List<DataTableRow> planAttributesRow = planAttributes.getGherkinRows();
+		Map<String, String> planAttributesMap = new LinkedHashMap<String, String>();
+		for (int i = 0; i < planAttributesRow.size(); i++) {
 
+			planAttributesMap.put(planAttributesRow.get(i).getCells().get(0),
+					planAttributesRow.get(i).getCells().get(1));
+		}
+		
+		String year = planAttributesMap.get("Year");
+		String planName = planAttributesMap.get("Plan Name");
+		
+
+		PharmacySearchPage pharmacySearchAarpPage = (PharmacySearchPage) getLoginScenario()
+				.getBean(PageConstants.PHARMACY_SEARCH_PAGE);
+		pharmacySearchAarpPage = pharmacySearchAarpPage.selectYear(year);
+		pharmacySearchAarpPage = pharmacySearchAarpPage.selectsPlanName(planName);
+
+		if (pharmacySearchAarpPage != null) {
+			getLoginScenario().saveBean("pharmacySearchAarpPage",
+					pharmacySearchAarpPage);
+			Assert.assertTrue(true);
+		} else {
+			Assert.fail("Failed to load Pharmacy search page");
+		}
+		getLoginScenario().saveBean(PageConstants.PHARMACY_SEARCH_PAGE,
+				pharmacySearchAarpPage);
+	}
+	
+	@And("^the user hovers over the tooltip in AARP Site$")
+	public void hovers_over_tooltip(DataTable pharmacyAttributes){
+		List<DataTableRow> pharmacyAttributesRow = pharmacyAttributes.getGherkinRows();
+		String pharmacyType = pharmacyAttributesRow.get(0).getCells().get(0);
+		
+		PharmacySearchPage pharmacySearchAarpPage = (PharmacySearchPage) getLoginScenario()
+				.getBean(PageConstants.PHARMACY_SEARCH_PAGE);
+		pharmacySearchAarpPage = pharmacySearchAarpPage.hoverOverToolTip(pharmacyType);
 	}
 
 }
