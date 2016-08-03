@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -11,12 +12,14 @@ import acceptancetests.atdd.data.CommonConstants;
 import acceptancetests.atdd.data.acquisition.PageConstants;
 import acceptancetests.vpp.data.VPPCommonConstants;
 import atdd.framework.MRScenario;
+import cucumber.annotation.en.And;
 import cucumber.annotation.en.Given;
 import cucumber.annotation.en.Then;
 import cucumber.annotation.en.When;
 import cucumber.table.DataTable;
 import gherkin.formatter.model.DataTableRow;
 import pages.acquisition.bluelayer.PlanPreviewPage;
+import pages.acquisition.uhcretiree.Rallytool_Page;
 
 /**
  * @author pgupta15
@@ -65,6 +68,88 @@ public class PlanPreviewUMSStepDefinition {
 		 planpreviewPage.searchPlans(zipcode, county);
 	}
 	
+	@When("^user select the below  plan$")
+	public void user_validates_plan_selector_dropdown(DataTable givenAttributes)
+	{
+			List<DataTableRow> memberAttributesRow = givenAttributes
+				.getGherkinRows();
+		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells()
+					.get(0), memberAttributesRow.get(i).getCells().get(1));
+		}
+		
+		String planName = memberAttributesMap.get("PlanName");
+		String planType = memberAttributesMap.get("PlanType");
+		getLoginScenario().saveBean(VPPCommonConstants.PLAN_NAME, planName);
+		getLoginScenario().saveBean(VPPCommonConstants.PLAN_TYPE, planType);
+		PlanPreviewPage planpreviewPage = (PlanPreviewPage) getLoginScenario()
+				.getBean(PageConstants.ACQUISITION_PLANPREVIW_PAGE);
+			
+		
+		planpreviewPage.validatesplandropdown(planName);
+	}
+	@Then("^user validates the provider search and locate pharmacy link$")
+	public void user_validates_provider_and_pharmacy_locator()
+	{
+//		List<DataTableRow> memberAttributesRow = givenAttributes
+//				.getGherkinRows();
+//		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+//		for (int i = 0; i < memberAttributesRow.size(); i++) {
+//
+//			memberAttributesMap.put(memberAttributesRow.get(i).getCells()
+//					.get(0), memberAttributesRow.get(i).getCells().get(1));
+//		}
+		
+//		String plantype= memberAttributesMap.get("PlanType");
+		String plantype=(String) getLoginScenario().getBean(VPPCommonConstants.PLAN_TYPE);
+		System.out.println(plantype);
+		PlanPreviewPage planpreviewPage = (PlanPreviewPage) getLoginScenario()
+				.getBean(PageConstants.ACQUISITION_PLANPREVIW_PAGE);
+		
+		planpreviewPage.validateprovider_pharmacylink(plantype);
+	}
 	
+	@Then("^user clicks on locate pharmacy$")
+	public void user_click_to_locate_pharmacy()
+	{
+		
+		
+		String plantype = (String) getLoginScenario().getBean(VPPCommonConstants.PLAN_TYPE);
+		PlanPreviewPage planpreviewPage = (PlanPreviewPage) getLoginScenario()
+				.getBean(PageConstants.ACQUISITION_PLANPREVIW_PAGE);
+		if (plantype.equalsIgnoreCase("MA"))
+		{
+			Assert.assertTrue(true);
+		}
+		else
+		{
+			planpreviewPage.navigatetopharmacylink(plantype);
+		}
+	}
 	
+	@Then("^user validates the plan year dropdown$")
+	public void user_validates_planyear_dropdown()
+	{
+		PlanPreviewPage planpreviewPage = (PlanPreviewPage) getLoginScenario()
+				.getBean(PageConstants.ACQUISITION_PLANPREVIW_PAGE);
+		
+		planpreviewPage.validate_planyeardropdown();
+	}
+	
+	@And("^user click on provider link$")
+	public void user_click_provider_link()
+	{
+		PlanPreviewPage planpreviewPage= (PlanPreviewPage) getLoginScenario()
+				.getBean(PageConstants.ACQUISITION_PLANPREVIW_PAGE);
+		Rallytool_Page rallyPage= planpreviewPage.navigatetoRally();
+		if (rallyPage==null)
+		{
+			Assert.fail("Issue in launching Rally tool");
+			
+		}
+			
+		
+	}
 }

@@ -113,7 +113,9 @@ public class MRConstants {
 
 	public static final String MA_REQUEST_MORE_HELP_AND_INFORMATION_URL = "https://www.awe-"+MRScenario.environment+"-uhcmedicaresolutions.uhc.com/health-plans/medicare-advantage-plans/resources-plan-material.html";
 
-	public static final String MA_RESOURCES_AND_PLAN_TAB_URL = "https://www.awe-"+MRScenario.environment+"-uhcmedicaresolutions.uhc.com/health-plans/medicare-advantage-plans/resources-plan-material.html";	
+	public static final String MA_RESOURCES_AND_PLAN_TAB_URL = "https://www.awe-"+MRScenario.environment+"-uhcmedicaresolutions.uhc.com/health-plans/medicare-advantage-plans/resources-plan-material.html";
+
+	private static final String UMS_PLANPREVIEW_URL = null;	
 	
 	
 }

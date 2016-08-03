@@ -52,10 +52,10 @@ public class PlanPreviewPage extends GlobalWebElements {
 	@FindBys(value = { @FindBy(xpath = "//table[@id='selectcountytable']/tbody/tr/td") })
 	List<WebElement> countyRows;
 	
-	@FindBy(linkText="Find a pharmacy")
+	@FindBy(linkText="Pharmacy Locator")
 	private WebElement pharmacyLink;
 	
-	@FindBy(linkText="Search for a provider")
+	@FindBy(linkText="Provider Search Directory")
 	private WebElement providerLink;
 	
 	@FindBy(id="planyear")

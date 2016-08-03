@@ -845,26 +845,24 @@ public class MRScenario {
 	{
 
 
-	webDriver = new FirefoxDriver();
-	webDriver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
-	webDriver.manage().window().maximize();
-	return webDriver;
+	//webDriver = new FirefoxDriver();
+	//webDriver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
+	//return webDriver;
 
 
-	  /*File pathToBinary = new
+	  File pathToBinary = new
 
-	  File("C:/Users/pgrover1/AppData/Local/Mozilla Firefox/firefox.exe");
+	  File("C:/Program Files (x86)/Mozilla Firefox/firefox.exe");
 
 	  FirefoxBinary ffBinary = new FirefoxBinary(pathToBinary);
 	  FirefoxProfile firefoxProfile = new FirefoxProfile(); webDriver = new
 	  FirefoxDriver(ffBinary,firefoxProfile);
 	  webDriver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
 
-	  return webDriver; */
+	  return webDriver; 
 
 
 	}
-	
 	
 	private void File(String string) {
 		// TODO Auto-generated method stub
