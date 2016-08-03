@@ -87,22 +87,23 @@ public class AddDrugPage extends UhcDriver {
 
 	}
 
-	public JSONObject getExpectedData(Map<String, JSONObject> expectedDataMap,
-			String drugInitials) {
 
-		JSONObject globalExpectedJson = expectedDataMap
-				.get(CommonConstants.GLOBAL);
-		JSONObject addDrugExpectedJson = null;
-		try {
-			addDrugExpectedJson = (JSONObject) expectedDataMap.get(
-					CommonConstants.ADD_DRUG).get(drugInitials);
-		} catch (JSONException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		addDrugExpectedJson = CommonUtility.mergeJson(addDrugExpectedJson,
-				globalExpectedJson);
-		return addDrugExpectedJson;
-	}
+    public JSONObject getExpectedData(Map<String, JSONObject> expectedDataMap,
+                    String drugInitials) {
+
+            JSONObject globalExpectedJson = expectedDataMap
+                            .get(CommonConstants.GLOBAL);
+            JSONObject addDrugExpectedJson = null;
+            try {
+                    addDrugExpectedJson = (JSONObject) expectedDataMap.get(
+                                    CommonConstants.ADD_DRUG).get(drugInitials);
+            } catch (JSONException e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+            }
+            addDrugExpectedJson = CommonUtility.mergeJson(addDrugExpectedJson,
+                            globalExpectedJson);
+            return addDrugExpectedJson;
+    }
 
 }

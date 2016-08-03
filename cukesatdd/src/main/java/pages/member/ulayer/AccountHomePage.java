@@ -3,6 +3,7 @@
  */
 package pages.member.ulayer;
 
+import java.util.Iterator;
 import java.util.Map;
 
 import org.json.JSONException;
@@ -102,9 +103,6 @@ public class AccountHomePage extends UhcDriver {
 	@FindBy(xpath = "//div[@class='myProfileMid']/div/form/div/div/div/div[2]/div/div[2]/h3")
 	private WebElement preferencesPageHeading;
 	
-
-	
-
 	private PageData myAccountHome;
 
 	public JSONObject accountHomeJson;
@@ -131,11 +129,10 @@ public class AccountHomePage extends UhcDriver {
 			return null;
 	}
 
-	public ManageDrugPage navigateToDrugLookup() {
-
+	public EstimateYourDrugCostPage navigateToDrugLookup() {		
 		drugLookupLink.click();
 		if (driver.getTitle().equalsIgnoreCase("Drug Lookup")) {
-			return new ManageDrugPage(driver);
+			return new EstimateYourDrugCostPage(driver);
 		} else
 
 			return null;
@@ -324,13 +321,20 @@ public class AccountHomePage extends UhcDriver {
 	}
 
 	public JSONObject getExpectedData(Map<String, JSONObject> expectedDataMap) {
-
-		JSONObject globalExpectedJson = expectedDataMap
-				.get(CommonConstants.GLOBAL);
+		String expectedJsonString = "";
 		JSONObject accountHomeExpectedJson = expectedDataMap
 				.get(CommonConstants.MY_ACCOUNT_HOME);
-		accountHomeExpectedJson = CommonUtility.mergeJson(
-				accountHomeExpectedJson, globalExpectedJson);
+		@SuppressWarnings("unchecked")
+		Iterator<String> keys = accountHomeExpectedJson.keys();
+		String key = keys.next();
+		try {
+			expectedJsonString = accountHomeExpectedJson.getJSONObject(key).getString("myaccounthome");
+			accountHomeExpectedJson = new JSONObject(expectedJsonString);
+			
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		return accountHomeExpectedJson;
 	}
 

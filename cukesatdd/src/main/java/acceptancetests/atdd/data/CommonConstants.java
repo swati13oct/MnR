@@ -64,11 +64,11 @@ public class CommonConstants {
 
 	private static final String MANAGE_DRUG_ULAYER_DIRECTORY = "/jsonresponse/member/ulayer/druglookup/managedrug/";
 
-	private static final String ADD_DRUG_ULAYER_DIRECTORY = "/jsonresponse/member/ulayer/druglookup/adddrug/";
+	public static final String ADD_DRUG_ULAYER_DIRECTORY = "/jsonresponse/member/ulayer/druglookup/adddrug/";
 
-	private static final String DRUG_DOSAGE_ULAYER_DIRECTORY = "/jsonresponse/member/ulayer/druglookup/drugdosage/";
+	public static final String DRUG_DOSAGE_ULAYER_DIRECTORY = "/jsonresponse/member/ulayer/druglookup/drugdosage/";
 
-	private static final String LOW_COST_OPTIONS_ULAYER_DIRECTORY = "/jsonresponse/member/ulayer/druglookup/lowcostoptions/";
+	public static final String LOW_COST_OPTIONS_ULAYER_DIRECTORY = "/jsonresponse/member/ulayer/druglookup/lowcostoptions/";
 
 	private static final String SELECT_PHARMACY_ULAYER_DIRECTORY = "/jsonresponse/member/ulayer/druglookup/selectpharmacy/";
 
@@ -739,7 +739,7 @@ public class CommonConstants {
 	public static final String ENTER_DRUG_PAGE_DATA = "enterdrug.json";
 
 	public static final String RETIREE_EXPECTED_DIRECTORY = "/jsonresponse/uhcretiree/acquisition/";	
-	
+
 	public static final String AUTO_DRUG_SEARCH_PAGE_DATA = "autocompletedrugsearch.json";
 
 	private static final String ADD_PLAN_CONFIRMATION_ULAYER_DIRECTORY = "/jsonresponse/member/ulayer/registration/addplanconfirmation/";
@@ -768,6 +768,11 @@ public class CommonConstants {
 	public static final String Request_For_Assistance_PAGE_DATA = "requestforassistance.json";
 	
 	public static final String CONFIRMATION_PAGE_DATA = "confirmation.json";
+	public static final String ULAYER_DRUGDOSAGEPAGE_EXPECTED_DIRECTORY = "drugdosage";
+	public static final String ULAYER_ADDADRUG_DROPDOWN_DIRECTORY = "dropdown";
+	public static final String ULAYER_LOWCOSTOPTIONS_EXPECTED_DIRECTORY = "lowcostoptions";
+	public static final String ADD_DRUG_ULAYER_DRUG_TYPE = "drugtype";
+	public static final String ADD_DRUG_ULAYER_PHARMACIES = "pharmacies";
 	
 	public static final String PLAN_DOC_PDF_ACQ_PAGE_DATA = "plandocumentspdf.json";
 	

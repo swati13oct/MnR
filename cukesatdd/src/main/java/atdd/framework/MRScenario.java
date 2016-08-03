@@ -851,7 +851,7 @@ public class MRScenario {
 	//return webDriver;
 
 
-	  File pathToBinary = new File("C:/Users/gphilli3/AppData/Local/Mozilla Firefox/firefox.exe");
+	  File pathToBinary = new File("C:/Program Files (x86)/Mozilla Firefox/firefox.exe");
 
 	  FirefoxBinary ffBinary = new FirefoxBinary(pathToBinary);
 	  FirefoxProfile firefoxProfile = new FirefoxProfile(); 
