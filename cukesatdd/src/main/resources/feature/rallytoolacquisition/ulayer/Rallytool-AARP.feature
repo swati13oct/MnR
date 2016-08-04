@@ -1,4 +1,4 @@
-@RallytoolAARPAcquisition
+@RallytoolAARPAcquisition @Q2
 Feature:To launch Rally tool from AARP Acquisition Pages
 Scenario:Verify Rally link from AARP Site Map Page
 Given user navigates to the AARP Site Map Page

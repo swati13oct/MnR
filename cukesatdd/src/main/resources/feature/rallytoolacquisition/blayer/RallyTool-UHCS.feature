@@ -1,4 +1,4 @@
-@RallytoolUHCSAcquisition
+@RallytoolUHCSAcquisition @Q2
 Feature:To launch Rally tool from UHC Acquisition Pages
 #Scenario:Rally Connect Tool should be launched from MA Enrollment Information Tab
 #Given user navigates to MA Enrollment Information Tab of Blue Layer Acquisition site
