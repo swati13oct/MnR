@@ -12,6 +12,6 @@ Then user validates the below data in Aarp Home page footer
 Examples:
 	| searchEngine   |
 #	| notApplicable  |
-	| google         |
-	| yahoo          |
+#	| google         |
+#	| yahoo          |
 	| bing           |
