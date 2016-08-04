@@ -8,10 +8,6 @@
 "planNames":{
 "identifier":"className",
 "elementName":"vppplanheading"
-},
-"planhighlights":{
-"identifier":"xpath",
-"elementName":"//*[@id='maplans_container']/div[3]/div[1]/div/div[1]/div[1]/div/div[1]/div[2]/table/tbody/tr/td[1]"
 }
 
 }

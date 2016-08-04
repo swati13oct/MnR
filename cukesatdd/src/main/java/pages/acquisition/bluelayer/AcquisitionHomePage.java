@@ -24,6 +24,9 @@ import acceptancetests.atdd.util.CommonUtility;
 import pages.acquisition.bluelayer.ZipcodeLookupHomePage;
 import pages.acquisition.bluelayer.PlanSelectorPage;
 import pages.acquisition.bluelayer.RequestHelpAndInformationPage;
+import pages.acquisition.ulayer.MaViewPlansAndPricingPage;
+import pages.acquisition.ulayer.MsViewPlansAndPricingPage;
+import pages.acquisition.ulayer.PdpViewPlansAndPricingPage;
 
 public class AcquisitionHomePage extends GlobalWebElements {
 
@@ -50,10 +53,16 @@ public class AcquisitionHomePage extends GlobalWebElements {
 
 	@FindBy(id = "zipcodebtn")
 	private WebElement viewPlansButton;
-
+	
+	@FindBy(xpath = "//div[@id='ipeL']/div[2]/map/area[3]")
+	private WebElement popUpcloseLink;
+	
 	@FindBy(id = "vpp_selectcounty_box")
 	private WebElement countyModal;
-
+	
+	@FindBy(id = "ipeL")
+	private WebElement feedBackPopUp;
+	
 	@FindBy(id = "dce")
 	private WebElement prescriptionsLink;
 	@FindBys(value = { @FindBy(xpath = "//table[@id='colhowdoesthiswork']/tbody/tr/td/span/span/a") })
@@ -61,6 +70,9 @@ public class AcquisitionHomePage extends GlobalWebElements {
 
 	@FindBy(id = "learn-zipcode")
 	private WebElement learnzipCodeField;
+	
+	@FindBy(xpath = "//*[@id='subnav_2']/div/div/div[1]/div[1]/div[2]/h3/a/span")
+	private WebElement pdpVppLink;
 
 	@FindBy(id = "learnfindplanBtn")
 	private WebElement learnfindPlansButton;
@@ -87,6 +99,12 @@ public class AcquisitionHomePage extends GlobalWebElements {
 
 	@FindBy(linkText = "pharmacy")
 	private WebElement pharmacyLink;
+	
+	@FindBy(id = "ghn_lnk_2")
+	private WebElement ourPlans;
+	
+	@FindBy(xpath = "//*[@id='subnav_2']/div/div/div[1]/div[1]/div[2]/h3/a/span")
+	private WebElement maVppLink;
 	
 	@FindBy(id = "findazip_box")
 	private WebElement zipCodeSearchPopup;
@@ -681,6 +699,36 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		return false;
 
 	}
+	public Object navigatesToVppSection(String planType) {
+
+		if (validate(feedBackPopUp)) {
+			popUpcloseLink.click();
+		}
+
+		Actions actions = new Actions(driver);
+		actions.moveToElement(ourPlans);
+
+		if (planType.equalsIgnoreCase("MA")) {
+			actions.moveToElement(maVppLink);
+			actions.click().build().perform();
+		}
+		if (planType.equalsIgnoreCase("PDP")) {
+			actions.moveToElement(pdpVppLink);
+			actions.click().build().perform();
+		}
+
+		if (currentUrl().contains("medicare-advantage-plans.html")) {
+			return new MaViewPlansAndPricingPage(driver);
+		}
+		if (currentUrl().contains("prescription-drug-plans.html")) {
+			return new PdpViewPlansAndPricingPage(driver);
+		}
+		if (currentUrl().contains("medicare-supplement-plans.html")) {
+			return new MsViewPlansAndPricingPage(driver);
+		}
+		return null;
+	}
+
 
 	public Boolean checkErrorMessage() {
 		validate(signInButton);
