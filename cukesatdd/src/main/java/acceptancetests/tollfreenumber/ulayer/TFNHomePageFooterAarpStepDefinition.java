@@ -1,7 +1,4 @@
-/**
- * 
- *//*
-package acceptancetests.tollfreenumber.ulayer;
+/*package acceptancetests.tollfreenumber.ulayer;
 
 import gherkin.formatter.model.DataTableRow;
 
@@ -25,10 +22,10 @@ import cucumber.annotation.en.Then;
 import cucumber.annotation.en.When;
 import cucumber.table.DataTable;
 
-*//**
+/*
  * @author pperugu
  *
- *//*
+ 
 public class TFNHomePageFooterAarpStepDefinition {
 	
 	@Autowired
@@ -91,7 +88,8 @@ public class TFNHomePageFooterAarpStepDefinition {
 	}
 	
 	@After
-	public void tearDown() {
+	public void tearDown()
+	{
 
 		WebDriver wd = (WebDriver) getLoginScenario().getBean("webDriver");
 		wd.close();

@@ -10,6 +10,6 @@ Then user validates the TFN displayed
 Examples:
 	| searchEngine   |   planType	|
 #	| notApplicable  |	MA	|
-	| google         |	MA	|	
-	| yahoo          |	MA	|
+#	| google         |	MA	|	
+#	| yahoo          |	MA	|
 	| bing           |	MA	|

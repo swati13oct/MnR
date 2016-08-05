@@ -174,6 +174,7 @@ public class VppAarpStepDefinition {
 	public void user_validates_available_plans_aarp() {
 		JSONObject planSummaryActualJson = (JSONObject) getLoginScenario()
 				.getBean(VPPCommonConstants.VPP_PLAN_SUMMARY_ACTUAL);
+		System.out.println(planSummaryActualJson);
 		JSONObject planSummaryExpectedJson = (JSONObject) getLoginScenario()
 				.getBean(VPPCommonConstants.VPP_PLAN_SUMMARY_EXPECTED);
 		System.out
