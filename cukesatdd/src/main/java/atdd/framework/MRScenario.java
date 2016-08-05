@@ -847,6 +847,7 @@ public class MRScenario {
 
 
 
+
 	  File pathToBinary = new File("C:/Program Files (x86)/Mozilla Firefox/firefox.exe");
 
 
@@ -857,6 +858,8 @@ public class MRScenario {
 	  webDriver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
 
 	  return webDriver; 
+
+
 
 
 
