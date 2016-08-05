@@ -1,8 +1,12 @@
 package pages.acquisition.ulayer;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -10,10 +14,16 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.FindBys;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
+import org.skyscreamer.jsonassert.JSONAssert;
 
+import cucumber.annotation.en.And;
 import acceptancetests.atdd.data.CommonConstants;
 import acceptancetests.atdd.data.MRConstants;
+import acceptancetests.atdd.data.PageData;
+import acceptancetests.atdd.data.acquisition.PageConstants;
 import acceptancetests.atdd.util.CommonUtility;
+import acceptancetests.vpp.data.VPPCommonConstants;
+import atdd.framework.MRScenario;
 import pages.acquisition.uhcretiree.Rallytool_Page;
 
 /**
@@ -36,6 +46,8 @@ public class PlanPreviewPage extends GlobalWebElements {
 
 	@FindBy(linkText="Look up a ZIP code")
 	private WebElement lookzip;
+	
+	private PageData planDocsPDF;
 	
 	@FindBy(id="findazip_box")
 	private WebElement zipCodeSearchPopup;
@@ -233,4 +245,45 @@ public class PlanPreviewPage extends GlobalWebElements {
 	    	return null;
 		
 	}
-}
+	
+	public JSONObject getActualPdfLinksData() {
+		// TODO Auto-generated method stub
+		String fileName = CommonConstants.PLAN_DOC_PDF_ACQ_PAGE_DATA;
+		planDocsPDF = CommonUtility.readPageData(fileName, CommonConstants.PAGE_OBJECT_DIRECTORY_ULAYER_ACQ);
+		
+		JSONObject jsonObject = new JSONObject();
+		for (String key : planDocsPDF.getExpectedData().keySet()) {
+			List<WebElement> elements = findElements(planDocsPDF.getExpectedData()
+					.get(key));
+			JSONArray jsonArray = new JSONArray();
+			for (WebElement element : elements) {
+				
+				element.click();
+				try {
+					JSONObject jsonObjectForArray = new JSONObject();
+					jsonObjectForArray.put(element.getText(), element.getAttribute("href"));
+					jsonArray.put(jsonObjectForArray);
+				} catch (JSONException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+			try {
+				jsonObject.put(key, jsonArray);
+			} catch (JSONException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+					
+		}
+		planDocPDFAcqJson = jsonObject;
+		return planDocPDFAcqJson;
+
+	}
+	public JSONObject planDocPDFAcqJson;
+
+	
+	}
+	
+	

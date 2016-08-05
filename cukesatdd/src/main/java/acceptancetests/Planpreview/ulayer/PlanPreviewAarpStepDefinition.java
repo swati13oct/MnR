@@ -245,6 +245,37 @@ public class PlanPreviewAarpStepDefinition {
 			
 		
 	}
+	@And("^the user validate pdf links$")
+	public void validate_Pdf_Links(){
+		PlanPreviewPage planpreviewPage  = (PlanPreviewPage) getLoginScenario()
+				.getBean(PageConstants.ACQUISITION_PLANPREVIW_PAGE);
+		JSONObject planDocsPDFActualJson = planpreviewPage.getActualPdfLinksData();
+		
+		/* Get expected data */
+		String fileName = "plandocumentspdf";
+		String zipcode = (String) getLoginScenario().getBean(
+				VPPCommonConstants.ZIPCODE);
+		String county = (String) getLoginScenario().getBean(
+				VPPCommonConstants.COUNTY);
+		String year = (String) getLoginScenario().getBean(VPPCommonConstants.YEAR);
+		
+		String directory = CommonConstants.ACQUISITION_EXPECTED_DIRECTORY
+				+ File.separator + CommonConstants.SITE_ULAYER
+				+ File.separator
+				+ VPPCommonConstants.VPP_PLAN_DETAILS_FLOW_NAME
+				+ File.separator + zipcode + File.separator + county
+				+ File.separator;
+		JSONObject planDocsPDFExpectedJson = MRScenario.readExpectedJson(
+				fileName, directory);
+		
+		try {
+			JSONAssert.assertEquals(planDocsPDFExpectedJson,
+					planDocsPDFActualJson, true);
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}
+		
+	}
 	@After
 	public void tearDown() {
 		WebDriver wd = (WebDriver) getLoginScenario().getBean(
