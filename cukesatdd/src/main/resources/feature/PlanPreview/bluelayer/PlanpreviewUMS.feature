@@ -69,7 +69,26 @@ Feature: To test Plan Preview Page in UMS site
 #|90002|                        |AARP MedicareRx Walgreens (PDP)|			PDP		|
 #|90210|                        |AARP MedicareComplete SecureHorizons Plan 2 (HMO)| MAPD| 
 
-Scenario Outline: Verify Rally connect  on Plan Preview Page in UMS site
+##Scenario Outline: Verify Rally connect  on Plan Preview Page in UMS site
+##Given the user is on the Plan Preview Page of UMS medicare site landing page
+##When the user validates the multicounty popup on bluelayer
+##| Zip Code    | <zipcode> |
+##| County Name | <county>  |
+##And  user select the below  plan 
+#|PlanName| <planName>|
+#|PlanType|  <plantype>|
+#Then user validates the provider search and locate pharmacy link
+#And user click on provider link
+
+
+#Examples:
+#| zipcode | county             | planName|                                          plantype |
+
+#| 80002   | Jefferson County   |AARP MedicareComplete SecureHorizons Plan 1 (HMO)| 	MAPD  |
+
+#|90210|                        |AARP MedicareRx Preferred (PDP)| 						         PDP | 
+ 
+Scenario Outline: Verify PDFs on Plan Preview Page in AARP site
 Given the user is on the Plan Preview Page of UMS medicare site landing page
 When the user validates the multicounty popup on bluelayer
 | Zip Code    | <zipcode> |
@@ -77,17 +96,13 @@ When the user validates the multicounty popup on bluelayer
 And  user select the below  plan 
 |PlanName| <planName>|
 |PlanType|  <plantype>|
-Then user validates the provider search and locate pharmacy link
-And user click on provider link
-
+And the user validate pdf links
 
 Examples:
 | zipcode | county             | planName|                                          plantype |
 
-| 80002   | Jefferson County   |AARP MedicareComplete SecureHorizons Plan 1 (HMO)| 	MAPD  |
+| 80002   | Adams County   |AARP MedicareComplete SecureHorizons Plan 1 (HMO)| 	MAPD  |
 
-#|90210|                        |AARP MedicareRx Preferred (PDP)| 						         PDP | 
- 
- 
+#|90210|                        |AARP MedicareComplete SecureHorizons Plan 2 (HMO)| MAPD| 
 
 
