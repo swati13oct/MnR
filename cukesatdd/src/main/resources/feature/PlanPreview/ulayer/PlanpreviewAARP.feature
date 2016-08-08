@@ -90,22 +90,22 @@ Examples:
 #|90002|                        |AARP MedicareRx Walgreens (PDP)|			PDP		|
 #|90210|                        |AARP MedicareComplete SecureHorizons Plan 2 (HMO)| MAPD|
  
- Scenario Outline: Verify plan year drop down in   pharmacy locator on Plan Preview Page in AARP site
-Given the user is on the Plan Preview Page of AARP medicare site landing page
-When the user validates the multicounty popup on ulayer
-| Zip Code    | <zipcode> |
-| County Name | <county>  |
-And  user select the below  plan 
-|PlanName| <planName>|
-|PlanType|  <plantype>|
-Then user validates the provider search and locate pharmacy link
-And user clicks on locate pharmacy
-Then user validates the plan year dropdown
+## Scenario Outline: Verify plan year drop down in   pharmacy locator on Plan Preview Page in AARP site
+##Given the user is on the Plan Preview Page of AARP medicare site landing page
+##When the user validates the multicounty popup on ulayer
+##| Zip Code    | <zipcode> |
+##| County Name | <county>  |
+##And  user select the below  plan 
+##|PlanName| <planName>|
+#|PlanType|  <plantype>|
+##Then user validates the provider search and locate pharmacy link
+##And user clicks on locate pharmacy
+##Then user validates the plan year dropdown
 
-Examples:
-| zipcode | county             | planName|                                          plantype |
+##Examples:
+#| zipcode | county             | planName|                                          plantype |
 #| 90210   | Los Angeles County | AARP MedicareRx Preferred (PDP)| 						PDP  |
-| 80002   | Jefferson County   |AARP MedicareComplete SecureHorizons Plan 2 (HMO)| 	MAPD  |
+#| 80002   | Jefferson County   |AARP MedicareComplete SecureHorizons Plan 2 (HMO)| 	MAPD  |
 #|90002|                        |AARP MedicareRx Walgreens (PDP)|			PDP		|
 
 #|90210|                        |AARP MedicareComplete SecureHorizons Plan 2 (HMO)| MAPD| 
@@ -129,3 +129,22 @@ Examples:
 
 #|90210|                        |AARP MedicareComplete SecureHorizons Plan 2 (HMO)| MAPD| 
 
+<<<<<<< HEAD
+=======
+Scenario Outline: Verify PDFs on Plan Preview Page in AARP site
+Given the user is on the Plan Preview Page of AARP medicare site landing page
+When the user validates the multicounty popup on ulayer
+| Zip Code    | <zipcode> |
+| County Name | <county>  |
+And  user select the below  plan 
+|PlanName| <planName>|
+|PlanType|  <plantype>|
+And the user validate pdf links
+
+Examples:
+| zipcode | county             | planName|                                          plantype |
+
+| 80002   | Jefferson County   |AARP MedicareComplete SecureHorizons Plan 1 (HMO)| 	MAPD  |
+
+#|90210|                        |AARP MedicareComplete SecureHorizons Plan 2 (HMO)| MAPD| 
+>>>>>>> remotes/origin/codeMonkeys
