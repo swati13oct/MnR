@@ -54,10 +54,10 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	@FindBy(xpath = "//div[@id='snpplans_container']")
 	WebElement snpPlanConatiner;
 	
-	@FindBy(xpath ="//div[@id='maplans_container']/div[2]/div/div/div/div[@class='ng-scope']")
+	@FindBy(xpath ="//div[@id='maplans_container']/div[3]/div/div/div/div[@class='ng-scope']")
 	List<WebElement> maPlanElement;
 	
-	@FindBy(xpath ="//div[@id='maplans_container']/div[2]/div/div/div/div[@class='ng-scope']")
+	@FindBy(xpath ="//div[@id='pdpplans_container']/div[3]/div/div/div/div[@class='ng-scope']")
 	List<WebElement> pdpPlanElement;
 	
 	@FindBy(xpath ="//div[@id='snpplans_container']/div[2]/div/div/div/div[@class='ng-scope']")
@@ -358,7 +358,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 			for (WebElement plan : pdpPlanElement) {
 				if (plan.getText().contains(planName)) {
 					ElementData elementData = new ElementData("id",
-							"enterDrugPDP"); // TODO Re-check
+							"enterDrugMA"); // TODO Re-check
 					findChildElement(elementData, plan).click();
 				}
 			}
