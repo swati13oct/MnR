@@ -250,9 +250,9 @@ public class PlanPreviewAarpStepDefinition {
 		PlanPreviewPage planpreviewPage  = (PlanPreviewPage) getLoginScenario()
 				.getBean(PageConstants.ACQUISITION_PLANPREVIW_PAGE);
 		JSONObject planDocsPDFActualJson = planpreviewPage.getActualPdfLinksData();
-		
+		System.out.println(planDocsPDFActualJson);
 		/* Get expected data */
-		String fileName = "plandocumentspdf";
+		String fileName = "planpreviewpdf";
 		String zipcode = (String) getLoginScenario().getBean(
 				VPPCommonConstants.ZIPCODE);
 		String county = (String) getLoginScenario().getBean(
@@ -265,8 +265,10 @@ public class PlanPreviewAarpStepDefinition {
 				+ VPPCommonConstants.VPP_PLAN_DETAILS_FLOW_NAME
 				+ File.separator + zipcode + File.separator + county
 				+ File.separator;
+		System.out.println(directory);
 		JSONObject planDocsPDFExpectedJson = MRScenario.readExpectedJson(
 				fileName, directory);
+		System.out.println(planDocsPDFExpectedJson);
 		
 		try {
 			JSONAssert.assertEquals(planDocsPDFExpectedJson,
