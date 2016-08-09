@@ -154,6 +154,7 @@ Examples:
 
 
 
+
 Scenario Outline: Verify plan details in UMS site for AEP only
 Given the user is on the uhcmedicaresolutions site landing page
 When the user performs plan search using following information in UMS site during AEP period
@@ -180,10 +181,15 @@ Examples:
 
 
 Scenario Outline: Verify plan details in UMS site
+
+@Q3
+Scenario Outline: Verify the pharmacies after selecting a plan UMS site
+
 Given the user is on the uhcmedicaresolutions site landing page
 When the user performs plan search using following information in UMS site
 	| Zip Code    | <zipcode>|
 	| County Name |<county> |
+
 Then user validates plan count for all plan types on plan summary page in UMS site
 When user views plans of the below plan type in UMS site
 	| Plan Type | <plantype> |
@@ -221,4 +227,31 @@ Then check in checkbox should appear and disappear
 Examples:
 	| zipcode | county             | plantype | planName                                             |
 	| 78006   | Bexar County       | PDP      | AARP MedicareRx Saver Plus (PDP)                     |
+
+
+And the user selects the plan in UMS site
+	| Plan Type | <plantype> |
+And the user selects the enter drug information link for the selected plan in UMS site
+    | Plan Name | <planName> |
+And the user search for the drug in UMS site
+	| <drugInitials> |
+And the user selects the drug from the dropdown in UMS site
+	| <drugName> |
+When the user selects the following dosage information in UMS site
+	| Drug Dosage    | <drugDosage>    |
+	| Quantity       | <quantity>      |
+	| Drug Frequency | <drugFrequency> |
+	| Packages       | <packages>      |
+And the user selects low cost options for the selected drug in UMS site
+	| Generic Available | <genericAvailable> |
+	| Brand or Generic  | <brand/generic>    |
+When the user search for pharmacies in UMS site
+And the user selects the pharmacy type and distance in UMS site
+	| Pharmacy Type | <pharmacyType> |
+	| Distance      | <distance>     |
+Then the user validates the available pharmacies based on selection made above in UMS site
+
+Examples:
+	| zipcode | county             | plantype | planName 					    |drugInitials | drugName      |  drugDosage	        | packages                                          | quantity | drugFrequency  | genericAvailable | brand/generic                            | pharmacyType	 	 		     | distance   | 
+	| 90210   | Los Angeles County | PDP      |AARP MedicareRx Preferred (PDP)  |lipi	      |   Lipitor     |  Lipitor TAB 10MG   | null                                              | 30       | Every 1 month  | yes              | Lipitor TAB 20MG (Qty 40 Every 3 Months) | Standard Network Pharmacy        | 15 miles   | 
 

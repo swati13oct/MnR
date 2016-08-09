@@ -155,7 +155,7 @@ public class VppUmsStepDefinition {
 					planSummaryActualJson);
 		}
 	}
-	
+
 	@When("user views plans of the below plan type in UMS site$")
 	public void user_performs_planSearch_in_UMS_site(DataTable givenAttributes) {
 		List<DataTableRow> givenAttributesRow = givenAttributes
@@ -212,6 +212,30 @@ public class VppUmsStepDefinition {
 			getLoginScenario().saveBean(
 					VPPCommonConstants.VPP_PLAN_SUMMARY_EXPECTED,
 					planSummaryExpectedJson);
+		}
+
+	}
+
+	@And("^the user selects the plan in UMS site$")
+	public void user_selects_plan(DataTable givenAttributes){
+		List<DataTableRow> givenAttributesRow = givenAttributes
+				.getGherkinRows();
+		Map<String, String> givenAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < givenAttributesRow.size(); i++) {
+
+			givenAttributesMap.put(givenAttributesRow.get(i).getCells().get(0),
+					givenAttributesRow.get(i).getCells().get(1));
+		}
+
+		String plantype = givenAttributesMap.get("Plan Type");
+
+		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		plansummaryPage = plansummaryPage.viewPlanSummary(plantype);
+
+		if (plansummaryPage != null) {
+			getLoginScenario().saveBean(PageConstants.VPP_PLAN_SUMMARY_PAGE,
+					plansummaryPage);
 		}
 
 	}
@@ -273,7 +297,7 @@ public class VppUmsStepDefinition {
 		JSONObject planSummaryActualJson = planSummaryPage
 				.getPlanSummaryActualData(planName);
 		System.out
-				.println("planSummaryActualJson---->" + planSummaryActualJson);
+		.println("planSummaryActualJson---->" + planSummaryActualJson);
 		// Get expected data
 		String fileName = planName;
 		String zipcode = (String) getLoginScenario().getBean(
@@ -314,6 +338,30 @@ public class VppUmsStepDefinition {
 		}
 	}
 
+	@And("^the user selects the enter drug information link for the selected plan in UMS site$")
+	public void user_selects_enter_drug_info_link(DataTable planAttributes){
+		List<DataTableRow> givenAttributesRow = planAttributes.getGherkinRows();
+		Map<String, String> givenAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < givenAttributesRow.size(); i++) {
+
+			givenAttributesMap.put(givenAttributesRow.get(i).getCells().get(0),
+					givenAttributesRow.get(i).getCells().get(1));
+		}
+
+		String planName = givenAttributesMap.get("Plan Name");
+		getLoginScenario().saveBean(VPPCommonConstants.PLAN_NAME, planName);
+		VPPPlanSummaryPage planSummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		GetStartedPage getStartedPage = planSummaryPage
+				.clicksOnEnterDrugInformationLink(planName);
+		AddDrugPage addDrugPage = getStartedPage.clicksOnGetStarted();
+		if (addDrugPage != null) {
+			getLoginScenario().saveBean(PageConstants.ADD_DRUG_PAGE,
+					addDrugPage);
+		}
+
+	}
+
 	@And("^the user search the drug using drug initials in UMS site$")
 	public void user_searches_drug_using_drug_initials_ums(
 			DataTable givenAttributes) {
@@ -342,6 +390,18 @@ public class VppUmsStepDefinition {
 		getLoginScenario().saveBean(PageConstants.ADD_DRUG_PAGE, addDrugPage);
 	}
 
+	@And("^the user search for the drug in UMS site$")
+	public void user_searches_drug(DataTable givenAttributes){
+		String drugInitials = givenAttributes.getGherkinRows().get(0)
+				.getCells().get(0);
+		AddDrugPage addDrugPage = (AddDrugPage) getLoginScenario()
+				.getBean(PageConstants.ADD_DRUG_PAGE);
+		addDrugPage.enterDrugInitials(drugInitials);
+		getLoginScenario().saveBean(PageConstants.ADD_DRUG_PAGE, addDrugPage);
+
+	}
+
+
 	@Then("^the user validates the drug list that has above mentioned drug initials in UMS site$")
 	public void validate_drugList_ums() {
 		JSONObject drugListExpectedJson = (JSONObject) getLoginScenario()
@@ -353,8 +413,8 @@ public class VppUmsStepDefinition {
 					true);
 		} catch (JSONException e) {
 			System.out
-					.println("Exception ocurred comparing actual and expected drug list : "
-							+ e);
+			.println("Exception ocurred comparing actual and expected drug list : "
+					+ e);
 		}
 
 	}
@@ -391,6 +451,23 @@ public class VppUmsStepDefinition {
 					DceCommonConstants.DRUG_DOSAGE_EXPECTED,
 					drugDosageExpectedJson);
 
+		}
+
+	}
+
+	@And("^the user selects the drug from the dropdown in UMS site$")
+	public void user_selects_drug_dropdown(DataTable drugNameAttributes){
+		String drugName = drugNameAttributes.getGherkinRows().get(0).getCells()
+				.get(0);
+
+		getLoginScenario().saveBean(DceCommonConstants.DRUG_NAME, drugName);
+		AddDrugPage addDrugPage = (AddDrugPage) getLoginScenario().getBean(
+				PageConstants.ADD_DRUG_PAGE);
+		SelectDosagePage selectDosagePage = addDrugPage.selectDrug(drugName);
+		if (selectDosagePage != null) {
+
+			getLoginScenario().saveBean(PageConstants.SELECT_DOSAGE_PAGE,
+					selectDosagePage);
 		}
 
 	}
@@ -517,7 +594,7 @@ public class VppUmsStepDefinition {
 				/* Get Expected data */
 				@SuppressWarnings("unchecked")
 				Map<String, String> dosageAttributesMap = (Map<String, String>) getLoginScenario()
-						.getBean(DceCommonConstants.DOSAGE_MAP);
+				.getBean(DceCommonConstants.DOSAGE_MAP);
 				String drugDosage = dosageAttributesMap.get("Drug Dosage");
 				String quantity = dosageAttributesMap.get("Quantity");
 				String drugFrequency = dosageAttributesMap
@@ -538,6 +615,47 @@ public class VppUmsStepDefinition {
 				getLoginScenario().saveBean(
 						DceCommonConstants.MANAGE_DRUG_EXPECTED,
 						manageDrugExpectedJson);
+			}
+
+		}
+
+	}
+
+	@And("^the user selects low cost options for the selected drug in UMS site$")
+	public void user_low_cost_option(DataTable drugAttributes){
+		List<DataTableRow> drugAttributesRow = drugAttributes.getGherkinRows();
+		Map<String, String> drugAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < drugAttributesRow.size(); i++) {
+
+			drugAttributesMap.put(drugAttributesRow.get(i).getCells().get(0),
+					drugAttributesRow.get(i).getCells().get(1));
+		}
+		String isGenericAvailable = drugAttributesMap.get("Generic Available");
+		if (isGenericAvailable.equalsIgnoreCase("yes")) {
+			String drugDosage = drugAttributesMap.get("Brand or Generic");
+			getLoginScenario().saveBean(DceCommonConstants.DRUG_WITH_DOSAGE,
+					drugDosage);
+			String drugName = (String) getLoginScenario().getBean(
+					DceCommonConstants.DRUG_NAME);
+			System.out.println("drugName with dosage--->" + drugDosage);
+
+			SelectGenericPage selectGenericPage = (SelectGenericPage) getLoginScenario()
+					.getBean(PageConstants.AFTER_DOSAGE_SELECTION);
+
+			ManageDrugPage manageDrugPage = selectGenericPage
+					.selectGeneric(drugDosage);
+			if (manageDrugPage != null) {
+				getLoginScenario().saveBean(PageConstants.MANAGE_DRUG_PAGE,
+						manageDrugPage);
+			}
+		}
+
+		else {
+			ManageDrugPage manageDrugPage = (ManageDrugPage) getLoginScenario()
+					.getBean(PageConstants.AFTER_DOSAGE_SELECTION);
+			if (manageDrugPage != null) {
+				getLoginScenario().saveBean(PageConstants.MANAGE_DRUG_PAGE,
+						manageDrugPage);
 			}
 
 		}
@@ -613,6 +731,18 @@ public class VppUmsStepDefinition {
 		}
 	}
 
+	@And("^the user search for pharmacies in UMS site$")
+	public void user_search_pharmacies(){
+		ManageDrugPage manageDrugPage = (ManageDrugPage) getLoginScenario()
+				.getBean(PageConstants.MANAGE_DRUG_PAGE);
+		SelectPharmacyPage selectPharmacyPage = manageDrugPage
+				.navigateToPharmacyPage();
+		if (selectPharmacyPage != null) {
+			getLoginScenario().saveBean(PageConstants.PHARMACY_SEARCH_PAGE,
+					selectPharmacyPage);
+		}		
+	}
+
 	@Then("^the user validates the available pharmacies in the selected zipcode in UMS site$")
 	public void validate_available_pharmacies_ums() {
 		JSONObject availablePharmaciesActualJson = (JSONObject) getLoginScenario()
@@ -630,8 +760,7 @@ public class VppUmsStepDefinition {
 	}
 
 	@And("^the user selects the pharmacy type and distance in UMS site$")
-	public void user_selects_pharmacyType_and_distance_ums(
-			DataTable pharmacyAttributes) {
+	public void user_selects_pharmacyType_and_distance_ums(DataTable pharmacyAttributes) {
 		List<DataTableRow> pharmacyAttributesRow = pharmacyAttributes
 				.getGherkinRows();
 		Map<String, String> pharmacyAttributesMap = new HashMap<String, String>();
@@ -674,6 +803,26 @@ public class VppUmsStepDefinition {
 				DceCommonConstants.AVAILABLE_PHARMACIES_EXPECTED,
 				availablePharmaciesExpectedJson);
 
+	}
+
+	@And("^the user selects the type of pharmacy and distance in UMS site$")
+	public void user_selects_type_pharmacy(DataTable pharmacyAttributes){
+		List<DataTableRow> pharmacyAttributesRow = pharmacyAttributes
+				.getGherkinRows();
+		Map<String, String> pharmacyAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < pharmacyAttributesRow.size(); i++) {
+
+			pharmacyAttributesMap.put(pharmacyAttributesRow.get(i).getCells()
+					.get(0), pharmacyAttributesRow.get(i).getCells().get(1));
+		}
+		String pharmacyType = pharmacyAttributesMap.get("Pharmacy Type");
+		getLoginScenario().saveBean(DceCommonConstants.PHARMACY_TYPE,
+				pharmacyType);
+		String distance = pharmacyAttributesMap.get("Distance");
+		getLoginScenario().saveBean(DceCommonConstants.DISTANCE, distance);
+
+		SelectPharmacyPage pharmacySearchPage = (SelectPharmacyPage) getLoginScenario()
+				.getBean(PageConstants.PHARMACY_SEARCH_PAGE);
 	}
 
 	@Then("^the user validates the available pharmacies based on selection made above in UMS site$")
@@ -747,13 +896,13 @@ public class VppUmsStepDefinition {
 		JSONObject manageDrugActualJson = (JSONObject) getLoginScenario()
 				.getBean(DceCommonConstants.MANAGE_DRUG_ACTUAL);
 		System.out
-				.println("manageDrugActualJson after selecting drug and pharmacy--->"
-						+ manageDrugActualJson);
+		.println("manageDrugActualJson after selecting drug and pharmacy--->"
+				+ manageDrugActualJson);
 		JSONObject manageDrugExpectedJson = (JSONObject) getLoginScenario()
 				.getBean(DceCommonConstants.MANAGE_DRUG_EXPECTED);
 		System.out
-				.println("manageDrugExpectedJson after selecting drug and pharmacy--->"
-						+ manageDrugExpectedJson);
+		.println("manageDrugExpectedJson after selecting drug and pharmacy--->"
+				+ manageDrugExpectedJson);
 
 		try {
 			JSONAssert.assertEquals(manageDrugExpectedJson,
@@ -791,7 +940,7 @@ public class VppUmsStepDefinition {
 		JSONObject planSummaryActualJson = planSummaryPage
 				.getPlanSummaryActualData(planName);
 		System.out
-				.println("planSummaryActualJson---->" + planSummaryActualJson);
+		.println("planSummaryActualJson---->" + planSummaryActualJson);
 
 		/* Get expected data */
 
@@ -880,7 +1029,7 @@ public class VppUmsStepDefinition {
 				.getBean(VPPCommonConstants.VPP_PLAN_DETAIL_EXPECTED);
 
 		System.out
-				.println("planDetailsActualJson---->" + planDetailsActualJson);
+		.println("planDetailsActualJson---->" + planDetailsActualJson);
 		System.out.println("planDetailsExpectedJson---->"
 				+ planDetailsExpectedJson);
 		try {

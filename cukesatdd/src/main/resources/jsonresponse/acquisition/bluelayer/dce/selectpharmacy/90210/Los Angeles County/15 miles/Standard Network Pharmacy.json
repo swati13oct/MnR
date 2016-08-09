@@ -1,7 +1,7 @@
 {
    "pharmacyTypes":[
       {
-         "pharmacyDropDown":"Available Pharmacies"
+         "pharmacyDropDown":"Standard Network Pharmacy"
       },
       {
          "pharmacyDropDown":"Preferred Mail Service Pharmacy"
@@ -10,54 +10,54 @@
    "previousLink":"Previous results",
    "pharmacies":[
       {
-         "pharmacyDistance":"1.32",
+         "pharmacyDistance":"0.18",
          "selectLink":"Select",
-         "pharmacyName":"HORTON AND CONVERSE PHARMACY 33"
+         "pharmacyName":"Equal Care Pharmacy Inc"
       },
       {
-         "pharmacyDistance":"1.92",
+         "pharmacyDistance":"0.21",
          "selectLink":"Select",
-         "pharmacyName":"VONS PHARMACY #2739 2739"
+         "pharmacyName":"Loisaida Drugs And Surgical"
       },
       {
-         "pharmacyDistance":"1.92",
+         "pharmacyDistance":"0.22",
          "selectLink":"Select",
-         "pharmacyName":"GREAT EARTH COMPOUNDS"
+         "pharmacyName":"Avenue C Pharmacy"
       },
       {
-         "pharmacyDistance":"2.06",
+         "pharmacyDistance":"0.23",
          "selectLink":"Select",
-         "pharmacyName":"CARE PLUS CVS/PHARMACY # 02801"
+         "pharmacyName":"Faith Pharmacy"
       },
       {
-         "pharmacyDistance":"2.09",
+         "pharmacyDistance":"0.23",
          "selectLink":"Select",
-         "pharmacyName":"CAPITOL DRUGS"
+         "pharmacyName":"Rite Aid Pharmacy 03771"
       },
       {
-         "pharmacyDistance":"2.12",
+         "pharmacyDistance":"0.23",
          "selectLink":"Select",
-         "pharmacyName":"WEST KNOLL PHARMACY"
+         "pharmacyName":"East Drive Pharmacy Inc"
       },
       {
-         "pharmacyDistance":"2.17",
+         "pharmacyDistance":"0.25",
          "selectLink":"Select",
-         "pharmacyName":"CVS PHARMACY 09652"
+         "pharmacyName":"Duane Reade"
       },
       {
-         "pharmacyDistance":"2.18",
+         "pharmacyDistance":"0.26",
          "selectLink":"Select",
-         "pharmacyName":"COMMUNITY, A WALGREENS PHARMACY"
+         "pharmacyName":"Erins Pharmacy"
       },
       {
-         "pharmacyDistance":"2.32",
+         "pharmacyDistance":"0.27",
          "selectLink":"Select",
-         "pharmacyName":"GARFIELD PHARMACY"
+         "pharmacyName":"East Village Prescription Center"
       },
       {
-         "pharmacyDistance":"2.36",
+         "pharmacyDistance":"0.31",
          "selectLink":"Select",
-         "pharmacyName":"RITE AID PHARMACY 05462 05462"
+         "pharmacyName":"Medilane Drugs"
       }
    ],
    "zipcode":"90210",
