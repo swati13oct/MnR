@@ -61,9 +61,14 @@ public class PlanDetailsPage extends UhcDriver {
 	private WebElement planCost3;
 	
 	@FindBy(xpath = "//*[@id='planCost']/table/tbody/tr[4]/td/div[3]/span[1]")
+      
 	
 	//*[@id='planCost']/table/tbody/tr[4]/td/div[3]/span[1]
 	private WebElement planCost4;
+
+       @FindBy(id = "yourDceInitial")
+	private WebElement enterDrugInfoLink;
+	
 	
 	private PageData vppPlanDetails;
 
@@ -227,4 +232,17 @@ public class PlanDetailsPage extends UhcDriver {
 		}
 		
 	}	
+
+          public GetStartedPage clicksOnEnterDrugInformationLink() 
+	{
+		enterDrugInfoLink.click();
+		
+		if (currentUrl().contains("/estimate-drug-costs")) {
+			return new GetStartedPage(driver);
+		}
+		return null;
+		// TODO Auto-generated method stub
+		
+	}
+	
 }
