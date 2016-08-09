@@ -1,11 +1,15 @@
 package acceptancetests.Planpreview.bluelayer;
 
+import java.io.File;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
+import org.skyscreamer.jsonassert.JSONAssert;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import acceptancetests.atdd.data.CommonConstants;
@@ -150,6 +154,39 @@ public class PlanPreviewUMSStepDefinition {
 			
 		}
 			
+		
+	}
+	@And("^the user validate pdf links$")
+	public void validate_Pdf_Links(){
+		PlanPreviewPage planpreviewPage  = (PlanPreviewPage) getLoginScenario()
+				.getBean(PageConstants.ACQUISITION_PLANPREVIW_PAGE);
+		JSONObject planDocsPDFActualJson = planpreviewPage.getActualPdfLinksData();
+		System.out.println(planDocsPDFActualJson);
+		/* Get expected data */
+		String fileName = "planpreviewpdf";
+		String zipcode = (String) getLoginScenario().getBean(
+				VPPCommonConstants.ZIPCODE);
+		String county = (String) getLoginScenario().getBean(
+				VPPCommonConstants.COUNTY);
+		String year = (String) getLoginScenario().getBean(VPPCommonConstants.YEAR);
+		
+		String directory = CommonConstants.ACQUISITION_EXPECTED_DIRECTORY
+				+ File.separator + CommonConstants.SITE_ULAYER
+				+ File.separator
+				+ VPPCommonConstants.VPP_PLAN_DETAILS_FLOW_NAME
+				+ File.separator + zipcode + File.separator + county
+				+ File.separator;
+		System.out.println(directory);
+		JSONObject planDocsPDFExpectedJson = MRScenario.readExpectedJson(
+				fileName, directory);
+		System.out.println(planDocsPDFExpectedJson);
+		
+		try {
+			JSONAssert.assertEquals(planDocsPDFExpectedJson,
+					planDocsPDFActualJson, true);
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}
 		
 	}
 }

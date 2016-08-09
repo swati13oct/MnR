@@ -4,6 +4,7 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.junit.Assert;
@@ -18,6 +19,7 @@ import org.skyscreamer.jsonassert.JSONAssert;
 import cucumber.annotation.en.And;
 import acceptancetests.atdd.data.CommonConstants;
 import acceptancetests.atdd.data.MRConstants;
+import acceptancetests.atdd.data.PageData;
 import acceptancetests.atdd.data.acquisition.PageConstants;
 import acceptancetests.atdd.util.CommonUtility;
 import acceptancetests.vpp.data.VPPCommonConstants;
@@ -42,7 +44,9 @@ public class PlanPreviewPage extends GlobalWebElements {
 	
 	@FindBy(id="selectcounty_box")
 	private WebElement countyModal;
-
+	
+	private PageData planDocsPDF;
+	
 	@FindBy(linkText="Look up a ZIP code")
 	private WebElement lookzip;
 	
@@ -242,5 +246,44 @@ public class PlanPreviewPage extends GlobalWebElements {
 		
 	}
 	
+	public JSONObject getActualPdfLinksData() {
+		// TODO Auto-generated method stub
+		String fileName = CommonConstants.PLAN_DOC_PDF_ACQ_PAGE_DATA;
+		planDocsPDF = CommonUtility.readPageData(fileName, CommonConstants.PAGE_OBJECT_DIRECTORY_BLUELAYER_ACQ);
+		
+		JSONObject jsonObject = new JSONObject();
+		for (String key : planDocsPDF.getExpectedData().keySet()) {
+			List<WebElement> elements = findElements(planDocsPDF.getExpectedData()
+					.get(key));
+			JSONArray jsonArray = new JSONArray();
+			for (WebElement element : elements) {
+				
+				element.click();
+				try {
+					JSONObject jsonObjectForArray = new JSONObject();
+					jsonObjectForArray.put(element.getText(), element.getAttribute("href"));
+					jsonArray.put(jsonObjectForArray);
+				} catch (JSONException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+			try {
+				jsonObject.put(key, jsonArray);
+			} catch (JSONException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+					
+		}
+		planDocPDFAcqJson = jsonObject;
+		return planDocPDFAcqJson;
+
+	}
+	public JSONObject planDocPDFAcqJson;
+
 	
-}
+	}
+	
+	

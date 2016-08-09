@@ -144,7 +144,7 @@ And the user validate pdf links
 Examples:
 | zipcode | county             | planName|                                          plantype |
 
-| 80002   | Jefferson County   |AARP MedicareComplete SecureHorizons Plan 1 (HMO)| 	MAPD  |
+| 80002   | Adams County   |AARP MedicareComplete SecureHorizons Plan 1 (HMO)| 	MAPD  |
 
 #|90210|                        |AARP MedicareComplete SecureHorizons Plan 2 (HMO)| MAPD| 
 >>>>>>> remotes/origin/codeMonkeys

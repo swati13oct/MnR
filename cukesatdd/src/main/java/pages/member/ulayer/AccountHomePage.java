@@ -46,7 +46,10 @@ public class AccountHomePage extends UhcDriver {
 	@FindBy(linkText = "View recent premium payments")
 	private WebElement paymentsLink;
 
-	@FindBy(linkText = "get forms & resources")
+//	@FindBy(partialLinkText = "get forms & resources")
+//	private WebElement formsAndResourcesLink;
+	
+	@FindBy(xpath="//*[@id='footer']/ul/li[1]/div[2]/div[2]/a/span")
 	private WebElement formsAndResourcesLink;
 
 	@FindBy(linkText = "locate a pharmacy")

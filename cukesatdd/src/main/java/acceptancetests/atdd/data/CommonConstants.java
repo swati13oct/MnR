@@ -776,6 +776,8 @@ public class CommonConstants {
 	
 	public static final String PLAN_DOC_PDF_ACQ_PAGE_DATA = "plandocumentspdf.json";
 	
+	public static final String PLAN_PREV_PDF_PAGE_DATA = "planpreviewpdf.json";
+	
 
 	
 }
