@@ -171,7 +171,7 @@ public class PlanPreviewUMSStepDefinition {
 		String year = (String) getLoginScenario().getBean(VPPCommonConstants.YEAR);
 		
 		String directory = CommonConstants.ACQUISITION_EXPECTED_DIRECTORY
-				+ File.separator + CommonConstants.SITE_ULAYER
+				+ File.separator + CommonConstants.SITE_BLUELAYER
 				+ File.separator
 				+ VPPCommonConstants.VPP_PLAN_DETAILS_FLOW_NAME
 				+ File.separator + zipcode + File.separator + county
