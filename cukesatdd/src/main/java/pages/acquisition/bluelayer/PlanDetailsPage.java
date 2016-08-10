@@ -52,7 +52,7 @@ public class PlanDetailsPage extends UhcDriver{
 	@FindBy(xpath = "//*[@id='planCost']/table/tbody/tr[4]/td/div[3]/span[1]")
 	private WebElement planCost4;
 	
-<<<<<<< HEAD
+
 	@FindBy(id = "backToplans")
 	private WebElement backToAllPlans;
 	
