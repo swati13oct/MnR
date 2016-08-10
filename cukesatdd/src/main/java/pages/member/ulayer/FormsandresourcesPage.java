@@ -3,8 +3,11 @@
  */
 package pages.member.ulayer;
 
+import java.io.File;
+import java.util.List;
 import java.util.Map;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.openqa.selenium.WebDriver;
@@ -38,9 +41,11 @@ public class FormsandresourcesPage extends UhcDriver {
 	@FindBy(id = "disclosure_link")
 	private WebElement logOut;
 
+	private PageData planDocsPDF;
 	private PageData formsAndResources;
 
 	public JSONObject formsAndResourcesJson;
+	
 
 	public FormsandresourcesPage(WebDriver driver) {
 		super(driver);
@@ -127,5 +132,48 @@ public class FormsandresourcesPage extends UhcDriver {
 		System.out.println("formsAndResourcesJson----->"+formsAndResourcesJson);
 
 	}
+	
+	public JSONObject getActualPdfLinksData() {
+		// TODO Auto-generated method stub
+		String fileName = CommonConstants.AARPM_FR_PDF_PAGE_DATA;
+		String directory= CommonConstants.PAGE_OBJECT_DIRECTORY_ULAYER_MEMBER;
+		planDocsPDF = CommonUtility.readPageData(fileName, directory);
+		System.out.println(planDocsPDF);
+		JSONObject jsonObject = new JSONObject();
+		for (String key : planDocsPDF.getExpectedData().keySet()) {
+			List<WebElement> elements = findElements(planDocsPDF.getExpectedData()
+					.get(key));
+			JSONArray jsonArray = new JSONArray();
+			for (WebElement element : elements) {
+				
+				element.click();
+				try {
+					JSONObject jsonObjectForArray = new JSONObject();
+					jsonObjectForArray.put(element.getText(), element.getAttribute("href"));
+					jsonArray.put(jsonObjectForArray);
+				} catch (JSONException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+			try {
+				jsonObject.put(key, jsonArray);
+			} catch (JSONException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+					
+		}
 
-}
+		formsAndResourcesJson = jsonObject;
+		return formsAndResourcesJson;
+
+	}
+
+
+	
+	}
+	
+
+

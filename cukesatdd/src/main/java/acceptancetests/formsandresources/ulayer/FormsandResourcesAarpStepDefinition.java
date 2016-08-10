@@ -3,6 +3,7 @@
  */
 package acceptancetests.formsandresources.ulayer;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -14,6 +15,7 @@ import org.openqa.selenium.WebDriver;
 import org.skyscreamer.jsonassert.JSONAssert;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import pages.acquisition.ulayer.PlanPreviewPage;
 import pages.member.ulayer.AccountHomePage;
 import pages.member.ulayer.FormsandresourcesPage;
 import pages.member.ulayer.LoginPage;
@@ -21,6 +23,7 @@ import acceptancetests.atdd.data.CommonConstants;
 import acceptancetests.atdd.data.member.PageConstants;
 import acceptancetests.formsandresources.data.FnRCommonConstants;
 import acceptancetests.login.data.LoginCommonConstants;
+import acceptancetests.vpp.data.VPPCommonConstants;
 import atdd.framework.MRScenario;
 import cucumber.annotation.After;
 import cucumber.annotation.en.Given;
@@ -157,7 +160,31 @@ public class FormsandResourcesAarpStepDefinition {
 		formsandresourcesAarpPage.logOut();
 
 	}
-
+	
+	@Then("^the user validates next year ANOC and Annual directory section$")
+	public void user_validates_ANOC_Annual_directory()
+	{
+		FormsandresourcesPage formsandresourcesAarpPage = (FormsandresourcesPage) getLoginScenario()
+				.getBean(PageConstants.FORMS_AND_RESOURCES_PAGE);
+		JSONObject planDocsPDFActualJson = formsandresourcesAarpPage.getActualPdfLinksData();
+		
+		String username= (String) getLoginScenario().getBean(LoginCommonConstants.USERNAME);
+		
+		/* Get expected data */
+		String directory = CommonConstants.FR_NEXTYEAR_DIRECTORY;
+		System.out.println(directory);
+		JSONObject planDocsPDFExpectedJson = MRScenario.readExpectedJson(
+				username, directory);
+		System.out.println(planDocsPDFExpectedJson);
+		
+		try {
+			JSONAssert.assertEquals(planDocsPDFExpectedJson,
+					planDocsPDFActualJson, true);
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}
+		
+	}
 	@After
 	public void tearDown() {
 
