@@ -163,8 +163,47 @@ Then user select MA/MAPD/PDP plans on plan summary page using following informat
 And user verify enroll now link for next year MA/MAPD/PDP plans during AEP period
 
 Examples:
+
 	| zipcode | county             | plantype |  planName                                             |  		 
   	| 90210   | Los Angeles County | MA       |  AARP MedicareComplete SecureHorizons Plan 1 (HMO)    |
 #	| 90210   | Los Angeles County | PDP      |  AARP MedicareRx Preferred (PDP)					  |
+	
+
+
+	| zipcode | county             | plantype | planName                                             | physicianSearch		| physicianName		|
+	| 80002   | Adams County       | MAPD     | AARP MedicareComplete SecureHorizons Plan 2 (HMO)    | All Primary Care Physicians  | Linda S Blust, MD	|
+@Q3
+Scenario Outline: Verify plan summary after entering drug information in AARP site
+Given the user is on the AARP medicare site landing page
+When the user performs plan search using following information in AARP site
+	| Zip Code    | <zipcode>|
+	| County Name |<county> |
+And the user selects the plan in AARP site
+	| Plan Type | <plantype> |
+And the user selects the enter drug information link for the selected plan in AARP site
+    | Plan Name | <planName> |
+And the user search the drug using drug initials in AARP site
+	| <drugInitials> |
+And the user selects the drug from the dropdown in AARP site
+	| <drugName> |
+When the user selects the following dosage information in AARP site
+	| Drug Dosage   | <drugDosage>    |
+	| Quantity       | <quantity>      |
+	| Drug Frequency | <drugFrequency> |
+	| Packages       | <packages>      |
+And the user selects low cost options for the selected drug in AARP site
+	| Generic Available | <genericAvailable> |
+	| Brand or Generic  | <brand/generic>    |
+When the user search for pharmacies in AARP site
+And the user selects the pharmacy type and distance in AARP site
+	| Pharmacy Type | <pharmacyType> |
+	| Distance      | <distance>     |
+Then the user validates the available pharmacies based on selection made above in AARP site
+
+Examples:
+	| zipcode | county             | plantype | planName 					    |drugInitials | drugName      |  drugDosage	        | packages                                          | quantity | drugFrequency  | genericAvailable | brand/generic                            | pharmacyType	 	 		| distance   | 
+	| 90210   | Los Angeles County | PDP      |AARP MedicareRx Preferred (PDP)  |lipi	      |  Lipitor      |  Lipitor TAB 10MG   | null                                              | 30       | Every 1 month  | yes              | Lipitor TAB 10MG (Qty 30 Every 1 Month)  | Standard Network Pharmacy        | 15 miles   | 
+
+
 	
 

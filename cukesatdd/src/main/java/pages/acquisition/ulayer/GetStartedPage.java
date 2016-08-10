@@ -7,6 +7,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
+import pages.acquisition.ulayer.AddDrugPage;
 import atdd.framework.UhcDriver;
 
 
@@ -46,6 +47,26 @@ public class GetStartedPage extends UhcDriver {
 		getStartedLink.click();
 		return new AddDrugPage(driver);
 		
+	}
+
+	public AddDrugPage clicksOnGetStarted() {
+		getStartedLink.click();
+		
+		
+		
+		 if (currentUrl().contains("drugSearch")) {
+			return new AddDrugPage(driver);
+		}
+		return null;
+		  
+
+		
+		/*if(currentUrl().contains("#/manageDrugList"))
+		{
+			return new ManageDrugPage(driver);
+		}
+		else
+			return null;*/
 	}
 
 }
