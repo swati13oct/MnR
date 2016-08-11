@@ -199,7 +199,7 @@ public class PlanDetailsPage extends UhcDriver {
 
 		return null;
 	}
-<<<<<<< HEAD
+
 	
 
 	public VPPPlanSummaryPage backtoPlanSummary(String planType) {
@@ -304,17 +304,7 @@ public class PlanDetailsPage extends UhcDriver {
 	}	
 
 
-          public GetStartedPage clicksOnEnterDrugInformationLink() 
-	{
-		enterDrugInfoLink.click();
-		
-		if (currentUrl().contains("/estimate-drug-costs")) {
-			return new GetStartedPage(driver);
-		}
-		return null;
-		// TODO Auto-generated method stub
-		
-	}
+
 	
 
 }

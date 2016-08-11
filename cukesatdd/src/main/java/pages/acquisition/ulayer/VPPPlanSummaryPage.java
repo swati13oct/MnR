@@ -588,6 +588,36 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		}
 	}
 	
+	public GetStartedPage clicksOnEnterDrugInformationLink(String planName) {
+		if (planName.contains("HMO")) {
+			for (WebElement plan : maPlanElement) {
+			if (plan.getText().contains(planName)) {
+			ElementData elementData = new ElementData("id",
+			"enterDrugMA");
+			findChildElement(elementData, plan).click();
+			}
+			}
+			}
+			if (planName.contains("PDP")) {
+			for (WebElement plan : pdpPlanElement) {
+			if (plan.getText().contains(planName)) {
+			ElementData elementData = new ElementData("id",
+			"enterDrugPDP"); // TODO Re-check
+			findChildElement(elementData, plan).click();
+			}
+			}
+			}
+			
+			if (driver.getTitle().equalsIgnoreCase(
+			"Our Medicare Plan Types | AARP® Medicare Plans from UnitedHealthcare®")) {
+			return new GetStartedPage(driver);
+			}
+		
+	
+		return null;
+	}
+
+	
 }
 
 	
