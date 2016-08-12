@@ -359,6 +359,8 @@ public class CommonConstants {
 	public static final String FORMS_AND_RESOURCES = "formsandresources";
 
 	public static final String FORMS_AND_RESOURCES_DIRECTORY = "/jsonresponse/Member/ulayer/formsandresources/";
+	
+	public static final String FR_NEXTYEAR_DIRECTORY = "/jsonresponse/Member/ulayer/Nextyearpdf/";
 
 	public static final String FORMS_AND_RESOURCES_PAGE_DATA = "formsandresources.json";
 
@@ -777,6 +779,8 @@ public class CommonConstants {
 	public static final String PLAN_DOC_PDF_ACQ_PAGE_DATA = "plandocumentspdf.json";
 	
 	public static final String PLAN_PREV_PDF_PAGE_DATA = "planpreviewpdf.json";
+	
+	public static final String AARPM_FR_PDF_PAGE_DATA = "nextyearpdfs.json";
 	
 
 	

@@ -267,7 +267,7 @@ public class PlanPreviewPage extends GlobalWebElements {
 	
 	public JSONObject getActualPdfLinksData() {
 		// TODO Auto-generated method stub
-		String fileName = CommonConstants.PLAN_DOC_PDF_ACQ_PAGE_DATA;
+		String fileName = CommonConstants.PLAN_PREV_PDF_PAGE_DATA;
 		planDocsPDF = CommonUtility.readPageData(fileName, CommonConstants.PAGE_OBJECT_DIRECTORY_ULAYER_ACQ);
 		
 		JSONObject jsonObject = new JSONObject();
