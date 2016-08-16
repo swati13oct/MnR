@@ -3,11 +3,13 @@
  */
 package pages.member.ulayer;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Map;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.junit.Assert;
 import org.openqa.selenium.Cookie;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -105,6 +107,9 @@ public class AccountHomePage extends UhcDriver {
 	
 	@FindBy(xpath = "//div[@class='myProfileMid']/div/form/div/div/div/div[2]/div/div[2]/h3")
 	private WebElement preferencesPageHeading;
+	
+	@FindBy(xpath=".//*[contains(text(),'search for providers')]")
+	private WebElement searchForProviders;
 	
 	private PageData myAccountHome;
 
@@ -441,5 +446,19 @@ public class AccountHomePage extends UhcDriver {
 
 		return browserCheckJson;
 	}
+	public Rallytool_Page navigateToRallyPage() { 
+		driver.manage().window().maximize(); 
+		searchForProviders.click();
+		//switch to Rally Page
+		ArrayList<String> tabs = new ArrayList<String> (driver.getWindowHandles());
+		driver.switchTo().window(tabs.get(1));
+		if (driver.getTitle().equalsIgnoreCase("Find Care")) {
+		return new Rallytool_Page(driver);
+		} else{
+		Assert.fail();
+		} 
+
+		return null;
+		}
 
 }

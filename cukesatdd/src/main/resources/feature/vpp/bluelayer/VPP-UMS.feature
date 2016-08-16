@@ -253,5 +253,25 @@ Then the user validates the available pharmacies based on selection made above i
 
 Examples:
 	| zipcode | county             | plantype | planName 					    |drugInitials | drugName      |  drugDosage	        | packages                                          | quantity | drugFrequency  | genericAvailable | brand/generic                            | pharmacyType	 	 		     | distance   | 
-	| 90210   | Los Angeles County | PDP      |AARP MedicareRx Preferred (PDP)  |lipi	      |   Lipitor     |  Lipitor TAB 10MG   | null                                              | 30       | Every 1 month  | yes              | Lipitor TAB 20MG (Qty 40 Every 3 Months) | Standard Network Pharmacy        | 15 miles   | 
+	| 90210   | Los Angeles County | PDP      |AARP MedicareRx Preferred (PDP)  |lipi	      |   Lipitor     |  Lipitor TAB 10MG   | null                                              | 30       | Every 1 month  | yes              | Lipitor TAB 20MG (Qty 40 Every 3 Months) | Standard Network Pharmacy        | 15 miles   |
+	
+@Q3	
+Scenario Outline: Verify Marketing Bullets for symphonix and walgreen plans in UMS site for AEP only
+Given the user is on the uhcmedicaresolutions site landing page
+When the user performs plan search using following information in UMS site during AEP period
+	| Zip Code    | <zipcode> |
+	| County Name | <county>  |
+Then user validates plan count for all plan types on plan summary page in UMS site
+When the user views plans of the below plan type in UMS site during AEP
+	| Plan Type | <plantype> |
+Then the user validates the available plans for selected plan types in UMS site
+And the user validates the plan summary for the below plan in UMS site during AEP
+	| Plan Name | <planName> |
+When the user views plan details of the above selected plan in UMS site during AEP 
+Then the user validates the details of the selected plan in UMS site
+Examples:
+| zipcode | county             | plantype |  planName                                             |  		 
+| 60646   | Cook County | PDP       |  AARP MedicareRx Walgreens (PDP)  |
+| 60646   | Cook County | PDP       |  Symphonix Value Rx (PDP)  |
+		 
 

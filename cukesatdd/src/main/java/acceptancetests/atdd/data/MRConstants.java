@@ -118,5 +118,9 @@ public class MRConstants {
 
 	private static final String UMS_PLANPREVIEW_URL = null;	
 	
+	public static final String SERVER_DATE_PARTD_PORTAL_WEB = "https://awe-"+MRScenario.environment+"-generic.uhc.com/PartDPortalWeb/jsp/zadmin/timeAdmin.jsp?server=1";
+
+  public static final String SERVER_DATE_MR_REST_WAR = "https://awe-"+MRScenario.environment+"-generic.uhc.com/MRRestWAR/jsp/zadmin/timeAdmin.jsp?server=1";
+	
 	
 }
