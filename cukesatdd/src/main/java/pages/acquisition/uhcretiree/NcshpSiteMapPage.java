@@ -38,7 +38,7 @@ public class NcshpSiteMapPage extends UhcDriver {
 				driver.getWindowHandles());
 		driver.switchTo().window(tabs.get(1));
 
-		if (getTitle().equalsIgnoreCase("Find Care")) {
+		if (getTitle().equalsIgnoreCase("Enter Zip")) {
 			return new Rallytool_Page(driver);
 		}
 		// TODO Auto-generated method stub

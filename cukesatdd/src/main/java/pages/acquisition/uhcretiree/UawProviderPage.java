@@ -17,7 +17,8 @@ public class UawProviderPage extends UhcDriver {
 	}
 	
 	//@FindBy(xpath=".//*[@id='main']/div/div[1]/div/div[4]/div[1]/div/div[1]/div[1]/p[5]/a")
-	@FindBy(linkText="Find a Physician, Medical Group, Clinic or Facility")
+	@FindBy(xpath=".//*[@id='main']/div/div[1]/div/div[4]/div[1]/div/div[1]/div[1]/p[2]/a")
+	//@FindBy(linkText="Find a Physician, Medical Group, Clinic or Facility")
 	
 	public WebElement uawfindaphysicianlink;
 	
@@ -44,7 +45,7 @@ public class UawProviderPage extends UhcDriver {
 		driver.switchTo().window(tabs.get(1));
 		
 		if (getTitle().equalsIgnoreCase(
-				"Find Care")) {
+				"Enter Zip")) {
 	return new Rallytool_Page(driver);
 	}
 		

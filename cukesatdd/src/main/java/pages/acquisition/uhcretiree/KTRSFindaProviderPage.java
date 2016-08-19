@@ -25,7 +25,7 @@ public class KTRSFindaProviderPage extends UhcDriver {
 	public void openAndValidate(){
 	}
 	
-	@FindBy(xpath="//div[@id='main']/div/div[1]/div/div[4]/div[1]/div/div[1]/div[1]/p[7]/a")
+	@FindBy(xpath=".//*[@id='main']/div/div[1]/div/div[4]/div[1]/div/div[1]/div[1]/ul/li[2]/a")
 	private WebElement findaphysicianktrslink;
 	
 	@FindBy(xpath=".//*[@id='main']/div/div[1]/div/div[6]/div/div/div/div[1]/ul/li[3]/a")
@@ -45,7 +45,7 @@ public class KTRSFindaProviderPage extends UhcDriver {
 		driver.switchTo().window(tabs.get(1));
 		
 		if (getTitle().equalsIgnoreCase(
-				"Find Care")) {
+				"Enter Zip")) {
 	return new Rallytool_Page(driver);
 		}
 		// TODO Auto-generated method stub
@@ -59,7 +59,7 @@ public class KTRSFindaProviderPage extends UhcDriver {
 				
 				
 	     if (getTitle().equalsIgnoreCase(
-						"KTRS Group Retiree - Site Map")) {
+						"KTRS Retirees - Site Map")) {
 			return new KTRSSiteMapPage(driver);
 			}
 		// TODO Auto-generated method stub

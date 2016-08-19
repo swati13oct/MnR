@@ -26,10 +26,10 @@ public class UHCRetireeSHBPPage extends UhcDriver {
 
 	}
 	
-	@FindBy(xpath="//*[@id='cq-events-jsp-/content/gr/en/shbp/home/jcr:content/parsys/events']/div/div[1]/div[3]/div/div[1]/div[1]/p[3]/a")
+	@FindBy(xpath=".//*[@id='cq-events-jsp-/content/gr/en/shbp/home/jcr:content/parsys/events']/div/div[1]/div[3]/div/div[1]/div[1]/p[3]/a")
 	private WebElement findaproviderlink;
 	
-	@FindBy(xpath="//*[@id='cq-imagebutton-jsp-/content/gr/en/shbp/header/jcr:content/parsys/textbgimage/parsys/imagebutton_1']")
+	@FindBy(xpath=".//*[@id='cq-imagebutton-jsp-/content/gr/en/shbp/header/jcr:content/parsys/textbgimage/parsys/imagebutton_1']")
 	private WebElement clickproviderslink;
 	
 	private static String UHCRETIREE_ACQISITION_SHBP_PAGE_URL = MRConstants.UHCRETIREE_SHBP_PAGE;
@@ -52,7 +52,7 @@ public class UHCRetireeSHBPPage extends UhcDriver {
 				driver.getWindowHandles());
 		driver.switchTo().window(tabs.get(1));
 		if (getTitle().equalsIgnoreCase(
-				"Find Care")) {
+				"Enter Zip")) {
 	return new RallyToolPage(driver);
 	
 		}
@@ -67,7 +67,7 @@ public class UHCRetireeSHBPPage extends UhcDriver {
 		clickproviderslink.click();
 		
 		if (getTitle().equalsIgnoreCase(
-				"Georgia SHBP Group Retiree – Find a provider")) {
+				"Georgia SHBP Retirees – Find a provider")) {
 	return new UHCRetireeSHBPProviderPage(driver);
 	
 		}

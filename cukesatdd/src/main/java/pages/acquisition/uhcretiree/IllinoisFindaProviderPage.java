@@ -16,11 +16,11 @@ public class IllinoisFindaProviderPage extends UhcDriver {
 	public void openAndValidate(){
 	}
 	
-	@FindBy(xpath="/html/body/div[2]/div/div[1]/div/div[4]/div[1]/div/div[1]/div[1]/p[5]/a")
+	@FindBy(xpath=".//*[@id='main']/div/div[1]/div/div[4]/div[1]/div/div[1]/div[1]/p[5]/a")
 	
 	private WebElement findaphysicianillinoislink;
 	
-	@FindBy(xpath="/html/body/div[2]/div/div[1]/div/div[6]/div/div/div/div[1]/ul/li[3]/a")
+	@FindBy(xpath=".//*[@id='main']/div/div[1]/div/div[6]/div/div/div/div[1]/ul/li[3]/a")
 	
 	private WebElement illinoissitemaplink;
 		
@@ -40,7 +40,7 @@ public class IllinoisFindaProviderPage extends UhcDriver {
 			driver.switchTo().window(tabs.get(1));
 			
 			if (getTitle().equalsIgnoreCase(
-					"Find Care")) {
+					"Enter Zip")) {
 		return new Rallytool_Page(driver);
 			}
 			// TODO Auto-generated method stub

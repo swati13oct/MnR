@@ -19,10 +19,10 @@ import atdd.framework.UhcDriver;
  */
 public class JohnsonAndJohnsonProviderPage extends UhcDriver {
 	
-	@FindBy(xpath="//div[@id='main']/div/div/div/div[4]/div/div/div/div/p[5]/a")
+	@FindBy(xpath=".//*[@id='main']/div/div[1]/div/div[4]/div[1]/div/div[1]/div[1]/ul/li[2]/a")
 	private WebElement johnsonAndJohnsonPhysicianLink;
 	
-	@FindBy(xpath="//div[@id='main']/div/div/div/div[6]/div/div/div/div/ul/li[3]/a")
+	@FindBy(xpath=".//*[@id='main']/div/div[1]/div/div[6]/div/div/div/div[1]/ul/li[3]/a")
 	private WebElement johnsonAndJohnsonSiteMapLink;
 
 	public JohnsonAndJohnsonProviderPage(WebDriver driver) {
@@ -45,7 +45,7 @@ public class JohnsonAndJohnsonProviderPage extends UhcDriver {
 			driver.switchTo().window(tabs.get(1));
 			
 			if (getTitle().equalsIgnoreCase(
-					"Find Care")) {
+					"Enter Zip")) {
 		return new Rallytool_Page(driver);
 		}
 		return null;
@@ -59,7 +59,7 @@ public class JohnsonAndJohnsonProviderPage extends UhcDriver {
 		johnsonAndJohnsonSiteMapLink.click();
 			
 			if (getTitle().equalsIgnoreCase(
-					"Johnson & Johnson Group Retiree – Site map")) {
+					"Johnson & Johnson Retirees – Site map")) {
 		return new JohnsonAndJohnsonSiteMapPage(driver);
 		}
 		return null;

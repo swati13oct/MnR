@@ -36,7 +36,7 @@ public class SannFranciscoSiteMapPage extends UhcDriver{
 			driver.switchTo().window(tabs.get(1));
 			
 			if (getTitle().equalsIgnoreCase(
-					"Find Care")) {
+					"Enter Zip")) {
 		return new Rallytool_Page(driver);
 		}
 		// TODO Auto-generated method stub

@@ -27,7 +27,7 @@ public class Rallytool_Page extends UhcDriver {
 			ArrayList<String> tabs = new ArrayList<String> (driver.getWindowHandles());
 			driver.switchTo().window(tabs.get(0));
 			
-			if(driver.getTitle().equalsIgnoreCase("CalPERS Group Retiree – Home"))
+			if(driver.getTitle().equalsIgnoreCase("CalPERS Retirees – Home"))
 			{
 				return new CalpersHomePage(driver);
 			}
@@ -52,7 +52,7 @@ public class Rallytool_Page extends UhcDriver {
 			ArrayList<String> tabs = new ArrayList<String> (driver.getWindowHandles());
 			driver.switchTo().window(tabs.get(0));
 			
-			if(driver.getTitle().equalsIgnoreCase("CalPERS Group Retiree – Find a provider"))
+			if(driver.getTitle().equalsIgnoreCase("CalPERS Retirees – Find a provider"))
 			{
 				return new CalperFindaProviderPage(driver);
 			}
@@ -102,7 +102,7 @@ public class Rallytool_Page extends UhcDriver {
 			ArrayList<String> tabs = new ArrayList<String> (driver.getWindowHandles());
 			driver.switchTo().window(tabs.get(0));
 			
-			if(driver.getTitle().equalsIgnoreCase("Metlife Group Retiree – Home"))
+			if(driver.getTitle().equalsIgnoreCase("MetLife Retirees – Home"))
 			{
 				return new MetlifeHomePage(driver);
 			}
@@ -114,7 +114,7 @@ public class Rallytool_Page extends UhcDriver {
 			ArrayList<String> tabs = new ArrayList<String> (driver.getWindowHandles());
 			driver.switchTo().window(tabs.get(0));
 			
-			if(driver.getTitle().equalsIgnoreCase("Metlife Group Retiree – Find a provider"))
+			if(driver.getTitle().equalsIgnoreCase("MetLife Retirees – Find a provider"))
 			{
 				return new MetlifeFindaProviderPage(driver);
 			}
@@ -156,7 +156,7 @@ public class Rallytool_Page extends UhcDriver {
 			ArrayList<String> tabs = new ArrayList<String> (driver.getWindowHandles());
 			driver.switchTo().window(tabs.get(0));
 			
-			if(driver.getTitle().equalsIgnoreCase("KTRS Group Retiree - Home"))
+			if(driver.getTitle().equalsIgnoreCase("KTRS Retirees – Home"))
 			{
 				return new KTRSHomePage(driver);
 			}
@@ -168,7 +168,7 @@ public class Rallytool_Page extends UhcDriver {
 			ArrayList<String> tabs = new ArrayList<String> (driver.getWindowHandles());
 			driver.switchTo().window(tabs.get(0));
 			
-			if(driver.getTitle().equalsIgnoreCase("KTRS Group Retiree - Find a Provider"))
+			if(driver.getTitle().equalsIgnoreCase("KTRS Retirees - Find a Provider"))
 			{
 				return new KTRSFindaProviderPage(driver);
 			}
@@ -181,7 +181,7 @@ public class Rallytool_Page extends UhcDriver {
 			ArrayList<String> tabs = new ArrayList<String> (driver.getWindowHandles());
 			driver.switchTo().window(tabs.get(0));
 			
-			if(driver.getTitle().equalsIgnoreCase("Pfizer Group Retiree - Home"))
+			if(driver.getTitle().equalsIgnoreCase("Pfizer Retirees - Home"))
 			{
 				return new PfizerHomePage(driver);
 			}
@@ -194,7 +194,7 @@ public class Rallytool_Page extends UhcDriver {
 			ArrayList<String> tabs = new ArrayList<String> (driver.getWindowHandles());
 			driver.switchTo().window(tabs.get(0));
 			
-			if(driver.getTitle().equalsIgnoreCase("Pfizer Group Retiree - Find a Provider"))
+			if(driver.getTitle().equalsIgnoreCase("Pfizer Retirees - Find a Provider"))
 			{
 				return new PfizerFindaProviderPage(driver);
 			}
@@ -205,7 +205,7 @@ public class Rallytool_Page extends UhcDriver {
 			ArrayList<String> tabs = new ArrayList<String> (driver.getWindowHandles());
 			driver.switchTo().window(tabs.get(0));
 			
-			if(driver.getTitle().equalsIgnoreCase("North Carolina State Health Plan Group Retiree – Home"))
+			if(driver.getTitle().equalsIgnoreCase("NCSHP Retirees – Home"))
 			{
 				return new NcshpHomePage(driver);
 			}
@@ -217,7 +217,7 @@ public class Rallytool_Page extends UhcDriver {
 			ArrayList<String> tabs = new ArrayList<String> (driver.getWindowHandles());
 			driver.switchTo().window(tabs.get(0));
 			
-			if(driver.getTitle().equalsIgnoreCase("North Carolina State Health Plan Group Retiree – Find a provider"))
+			if(driver.getTitle().equalsIgnoreCase("NCSHP Retirees – Find a provider"))
 			{
 				return new NcshpFindaProviderPage(driver);
 			}

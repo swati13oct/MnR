@@ -22,7 +22,7 @@ public class PfizerFindaProviderPage extends UhcDriver{
 	public void openAndValidate(){
 	}
 	
-	@FindBy(xpath=".//*[@id='main']/div/div[1]/div/div[4]/div[1]/div/div[1]/div[1]/p[4]/a")
+	@FindBy(xpath=".//*[@id='main']/div/div[1]/div/div[4]/div[1]/div/div[1]/div[1]/p[2]/a")
 	
 	private WebElement findaphysicianpfizerlink;
 	
@@ -44,7 +44,7 @@ public Rallytool_Page findaphysicianpfizerclick() {
 			driver.switchTo().window(tabs.get(1));
 			
 			if (getTitle().equalsIgnoreCase(
-					"Find Care")) {
+					"Enter Zip")) {
 		return new Rallytool_Page(driver);
 			}
 			// TODO Auto-generated method stub
@@ -56,7 +56,7 @@ public PfizerSiteMapPage pfizersitemapclick() {
 	pfizersitemaplink.click();
 			
 			
-     if (getTitle().equalsIgnoreCase("Pfizer Group Retiree - Site Map")) {
+     if (getTitle().equalsIgnoreCase("Pfizer Retirees - Site Map")) {
 		return new PfizerSiteMapPage(driver);
 		}
 	// TODO Auto-generated method stub

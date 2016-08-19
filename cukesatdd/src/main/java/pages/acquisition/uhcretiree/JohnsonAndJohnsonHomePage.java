@@ -51,7 +51,7 @@ public class JohnsonAndJohnsonHomePage extends UhcDriver{
 			driver.switchTo().window(tabs.get(1));
 			validate(rallyPageElement);
 			if (getTitle().equalsIgnoreCase(
-					"Find Care")) {
+					"Enter Zip")) {
 		return new Rallytool_Page(driver);
 		}
 		return null;
@@ -63,7 +63,7 @@ public class JohnsonAndJohnsonHomePage extends UhcDriver{
 		validate(johnsonAndJohnsonFindAProviderTab);
 		johnsonAndJohnsonFindAProviderTab.click();
 		if (getTitle().equalsIgnoreCase(
-				"Johnson & Johnson Group Retiree – Find a provider")) {
+				"Johnson & Johnson Retirees – Find a provider")) {
 		return new JohnsonAndJohnsonProviderPage(driver);
 	}
 		return null;

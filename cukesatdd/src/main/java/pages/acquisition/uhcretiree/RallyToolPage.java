@@ -71,7 +71,7 @@ public class RallyToolPage extends UhcDriver {
 		ArrayList<String> tabs = new ArrayList<String> (driver.getWindowHandles());
 		driver.switchTo().window(tabs.get(0));
 		
-		if(driver.getTitle().equalsIgnoreCase("Edison International Group Retiree – Home"))
+		if(driver.getTitle().equalsIgnoreCase("Edison Retirees – Home"))
 		{
 			return new UHCRetireeEdisonPage(driver);
 		}
@@ -87,7 +87,7 @@ public class RallyToolPage extends UhcDriver {
 		ArrayList<String> tabs = new ArrayList<String> (driver.getWindowHandles());
 		driver.switchTo().window(tabs.get(0));
 		
-		if(driver.getTitle().equalsIgnoreCase("Edison International Group Retiree – Find a provider"))
+		if(driver.getTitle().equalsIgnoreCase("Edison Retirees – Find a Provider"))
 		{
 			return new UHCRetireeEdisionProviderPage(driver);
 		}
@@ -104,7 +104,7 @@ public class RallyToolPage extends UhcDriver {
 		ArrayList<String> tabs = new ArrayList<String> (driver.getWindowHandles());
 		driver.switchTo().window(tabs.get(0));
 		
-		if(driver.getTitle().equalsIgnoreCase("Georgia SHBP Group Retiree – Home"))
+		if(driver.getTitle().equalsIgnoreCase("Georgia SHBP Retirees – Home"))
 		{
 			return new UHCRetireeSHBPPage(driver);
 		}
@@ -119,7 +119,7 @@ public class RallyToolPage extends UhcDriver {
 		ArrayList<String> tabs = new ArrayList<String> (driver.getWindowHandles());
 		driver.switchTo().window(tabs.get(0));
 		
-		if(driver.getTitle().equalsIgnoreCase("Georgia SHBP Group Retiree – Find a provider"))
+		if(driver.getTitle().equalsIgnoreCase("Georgia SHBP Retirees – Find a provider"))
 		{
 			return new UHCRetireeSHBPProviderPage(driver);
 		}

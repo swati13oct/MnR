@@ -23,10 +23,10 @@ public class UHCRetireeSHBPProviderPage extends UhcDriver {
 	public void openAndValidate() {
 	}
 	
-	@FindBy(xpath="//*[@id='main']/div/div[1]/div/div[4]/div[1]/div/div[1]/div[1]/p[6]/a")
+	@FindBy(xpath=".//*[@id='main']/div/div[1]/div/div[4]/div[1]/div/div[1]/div[1]/p[2]/a[1]")
 	private WebElement findproviderlink;
 	
-	@FindBy(xpath="//*[@id='main']/div/div[1]/div/div[6]/div/div/div/div[1]/ul/li[3]/a")
+	@FindBy(xpath=".//*[@id='main']/div/div[1]/div/div[6]/div/div/div/div[1]/ul/li[3]/a")
 	private WebElement clicksitemaplink;
 	
 	public UHCRetireeSHBPProviderPage(WebDriver driver) {
@@ -50,7 +50,7 @@ public class UHCRetireeSHBPProviderPage extends UhcDriver {
 				driver.getWindowHandles());
 		driver.switchTo().window(tabs.get(1));
 		if (getTitle().equalsIgnoreCase(
-				"Find Care")) {
+				"Enter Zip")) {
 	return new RallyToolPage(driver);
 	
 		}
@@ -67,7 +67,7 @@ public class UHCRetireeSHBPProviderPage extends UhcDriver {
 		clicksitemaplink.click();
 		
 		if (getTitle().equalsIgnoreCase(
-				"Georgia SHBP Group Retiree – Site map")) {
+				"Georgia SHBP Retirees – Site map")) {
 	return new SiteMapSHBPPage(driver);
 	
 		}
