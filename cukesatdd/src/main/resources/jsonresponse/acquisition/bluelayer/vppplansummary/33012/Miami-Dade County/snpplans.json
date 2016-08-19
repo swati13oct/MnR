@@ -2,25 +2,22 @@
    "summaryHeading":"2016 Medicare Special Needs Plans",
    "planNames":[  
       {  
-         "vppplanheading":"Preferred Medicare Assist (HMO SNP)   "
+         "vppplanheading":"Preferred Special Care Miami-Dade (HMO SNP)   "
       },
       {  
-         "vppplanheading":"Preferred Special Care Miami-Dade (HMO SNP)   "
+         "vppplanheading":"Preferred Medicare Assist (HMO SNP)   "
       },
       {  
          "vppplanheading":"Medica HealthCare Plans MedicareMax Plus (HMO SNP)   "
       },
       {  
-         "vppplanheading":"UnitedHealthcare Nursing Home Plan (PPO SNP)    "
+         "vppplanheading":"UnitedHealthcare Nursing Home Plan (HMO SNP)   "
       },
       {  
          "vppplanheading":"UnitedHealthcare Assisted Living Plan (PPO SNP)    "
       },
       {  
-         "vppplanheading":"UnitedHealthcare Nursing Home Plan (HMO SNP)   "
-      },
-      {  
-         "vppplanheading":"UnitedHealthcare Dual Complete RP (Regional PPO SNP)    "
+         "vppplanheading":"UnitedHealthcare Nursing Home Plan (PPO SNP)    "
       }
    ]
 }
