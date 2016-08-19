@@ -47,7 +47,7 @@ public class MAPlanInformationAndForms extends GlobalWebElements {
 			driver.switchTo().window(tabs.get(1));
 			
 			if (getTitle().equalsIgnoreCase(
-					"Find Care")) {
+					"Enter Zip")) {
 		return new Rallytool_Page(driver);
 		}
 	

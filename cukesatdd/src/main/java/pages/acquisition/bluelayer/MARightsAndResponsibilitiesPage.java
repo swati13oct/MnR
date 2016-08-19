@@ -25,7 +25,7 @@ public class MARightsAndResponsibilitiesPage extends GlobalWebElements {
 	private static String MA_RIGHTS_AND_RESPONSIBILITIES_PAGE = MRConstants.MA_RIGHTS_AND_RESPONSIBILITIES_PAGE_URL;
 	
 	
-	@FindBy(xpath="//*[@id='PO7link']")
+	@FindBy(xpath=".//*[@id='PO7link']")
 	private WebElement providerlink;
 
 	public MARightsAndResponsibilitiesPage(WebDriver driver) {
@@ -40,7 +40,7 @@ public class MARightsAndResponsibilitiesPage extends GlobalWebElements {
 		validate(providerlink);
 		providerlink.click();
 		if (getTitle().equalsIgnoreCase(
-				"Find Care")) {
+				"Enter Zip")) {
 	return new Rallytool_Page(driver);
 	}
 		

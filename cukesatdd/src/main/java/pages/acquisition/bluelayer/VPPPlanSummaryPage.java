@@ -439,7 +439,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 			}
 		}
 		if (driver.getTitle().equalsIgnoreCase(
-				"Find Care")) { 
+				"Welcome")) { 
 			return new Rallytool_Page(driver);
 	}
 		// TODO Auto-generated method stub
