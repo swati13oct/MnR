@@ -34,7 +34,7 @@ public class PlanDetailsPage extends UhcDriver{
 	@FindBy(xpath ="/html/body/div[4]/div/table/tbody/tr[2]/td/div/table/tbody/tr[2]/td/div/div/div[2]/div/div/div/div[2]/div[2]/div[1]/div/div[2]/div/div/table/tbody/tr[4]/td[2]/a")
 	private WebElement plandetailsProviderlink;
 
-	@FindBy(xpath ="//*[@id='myDoctorDetails']")
+	@FindBy(xpath =".//*[@id='myDoctorDetails']")
 	private WebElement plandetailProviderlink;
 
 	@FindBy(xpath = "//*[@id='yourDruglist']/div[1]/p[4]")
@@ -148,7 +148,7 @@ public class PlanDetailsPage extends UhcDriver{
 				driver.getWindowHandles());
 		driver.switchTo().window(tabs.get(1));
 		if (getTitle().equalsIgnoreCase(
-				"Enter Zip")) {
+				"Welcome")) {
 			return new Rallytool_Page(driver);
 		}
 
@@ -163,7 +163,7 @@ public class PlanDetailsPage extends UhcDriver{
 				driver.getWindowHandles());
 		driver.switchTo().window(tabs.get(1));
 		if (getTitle().equalsIgnoreCase(
-				"Find Care")) {
+				"Welcome")) {
 			return new Rallytool_Page(driver);
 		}
 

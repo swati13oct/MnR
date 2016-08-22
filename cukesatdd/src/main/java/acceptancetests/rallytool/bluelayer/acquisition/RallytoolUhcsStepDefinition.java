@@ -429,6 +429,8 @@ public void user_views_plandetails_selected_plan_ums() {
 				+ File.separator;
 		JSONObject planDetailsExpectedJson = MRScenario.readExpectedJson(
 				fileName, directory);
+		System.out.println("planDetailsExpectedJson---->"
+				+ planDetailsExpectedJson);
 		getLoginScenario().saveBean(
 				VPPCommonConstants.VPP_PLAN_DETAIL_EXPECTED,
 				planDetailsExpectedJson);

@@ -32,11 +32,11 @@ public class MetlifeHomePage extends UhcDriver{
 		
 	}
 	
-	@FindBy(xpath=".//*[@id='main']/div/div[1]/div/div[3]/div[1]/div[3]/div/div/div[1]/div[2]/div/div[1]/div[1]/p[3]/a")
+	@FindBy(xpath=".//*[@id='cq-events-jsp-/content/gr/en/metlife/home/jcr:content/parsys/events']/div/div[1]/div[2]/div/div[1]/div[1]/p[3]/a")
 	
 	private WebElement metlifefindaproviderlink;
 	
-	@FindBy(xpath=".//*[@id='main']/div/div[1]/div/div[2]/div/div/div/div/div[1]/div[4]/div/div")
+	@FindBy(xpath=".//*[@id='cq-imagebutton-jsp-/content/gr/en/metlife/header/jcr:content/parsys/textbgimage/parsys/imagebutton_0']")
 	
 	private WebElement metlifefindaprovidertab;
 	
@@ -48,7 +48,7 @@ public class MetlifeHomePage extends UhcDriver{
 		ArrayList<String> tabs = new ArrayList<String> (driver.getWindowHandles());
 		driver.switchTo().window(tabs.get(1));
 		if (getTitle().equalsIgnoreCase( 
-				"Find Care")) {
+				"Enter Zip")) {
 	     return new Rallytool_Page(driver);
 	    }
 		
@@ -63,7 +63,7 @@ public class MetlifeHomePage extends UhcDriver{
 				driver.switchTo().window(tabs.get(1));*/
 				
 				if (getTitle().equalsIgnoreCase(
-						"Metlife Group Retiree – Find a provider")) {
+						"MetLife Retirees – Find a provider")) {
 			return new MetlifeFindaProviderPage(driver);
 			}
 		   
