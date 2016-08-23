@@ -233,6 +233,27 @@ public class ManageDrugPage extends UhcDriver {
 
        
        }
+	   
+	   public VPPPlanSummaryPage closeAndApplychanges() {
+    applyChangesButton.click();
+    try {
+        if (applyChangesButton.isDisplayed()) {
+            CommonUtility.waitForElementToDisappear(driver, applyChangesButton,
+                    CommonConstants.TIMEOUT_30);
+        }
+    } catch (NoSuchElementException e) {
+        System.out.println("applyChangesButton not found");
+    } catch (TimeoutException ex) {
+        System.out.println("applyChangesButton not found");
+    } catch (Exception e) {
+        System.out.println("applyChangesButton not found");
+    }
+    if (driver.getTitle().contains("Our Medicare Plan Types | AARP® Medicare Plans from UnitedHealthcare®")) {
+        return new VPPPlanSummaryPage(driver);
+    }
+        
+        return null;
+    }
 
        public JSONObject getExpectedData(String fileName, String directory) {
               JSONObject drugsAddedExpectedJson = MRScenario.readExpectedJson(

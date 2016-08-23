@@ -69,6 +69,12 @@ public class PlanDetailsPage extends UhcDriver {
        @FindBy(id = "yourDceInitial")
 	private WebElement enterDrugInfoLink;
 	
+	    @FindBy(xpath = "//*[@id='yourDruglist']/div[2]/table/tbody/tr[3]/td/span[2]")
+    private WebElement drugListCost;
+    
+    @FindBy(xpath = "//*[@id='yourDruglist']/div[2]/table/tbody/tr[4]/td/div[1]/p[1]")
+    private WebElement drugListPharmacyName;
+	
 	
 	@FindBy(id = "backToplans")
 	private WebElement backToAllPlans;
@@ -301,7 +307,21 @@ public class PlanDetailsPage extends UhcDriver {
 			System.out.println("The user is not on the correct page");
 		}
 		
-	}	
+	}
+
+    public void validatePharmacyNameAndDrugCost(String drugCost,
+            String pharmacyName) {
+        String drugCostActual = drugListCost.getText();
+        System.out.println(drugCostActual);
+        String pharmacyNameActual = drugListPharmacyName.getText();
+        System.out.println(pharmacyNameActual);
+        if(drugCost.equals(drugCostActual) && pharmacyName.equals(pharmacyNameActual))
+            System.out.println("The results is as expected");
+        else
+            System.out.println("Fail");
+        
+        
+    }   	
 
 
 

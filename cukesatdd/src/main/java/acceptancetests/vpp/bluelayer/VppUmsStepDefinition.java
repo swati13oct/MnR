@@ -890,6 +890,25 @@ public class VppUmsStepDefinition {
 		}
 
 	}
+	
+	@And("^the user selects the below pharmacy from the list of pharmacies in UMS site$")
+	public void user_selects_the_pharmacy_ums(DataTable pharmacyAttributes) {
+		SelectPharmacyPage pharmacySearchPage = (SelectPharmacyPage) getLoginScenario()
+				.getBean(PageConstants.PHARMACY_SEARCH_PAGE);
+		String pharmacyName = pharmacyAttributes.getGherkinRows().get(0)
+				.getCells().get(0);
+		getLoginScenario().saveBean(DceCommonConstants.PHARMACY_NAME,
+				pharmacyName);
+		String pharmacyType = (String) getLoginScenario().getBean(
+				DceCommonConstants.PHARMACY_TYPE);
+		ManageDrugPage manageDrugPage = pharmacySearchPage.selectPharmacy(
+				pharmacyName, pharmacyType);
+		if (manageDrugPage != null) {
+			getLoginScenario().saveBean(PageConstants.MANAGE_DRUG_PAGE,
+					manageDrugPage);
+		}
+
+	}
 
 	@Then("^the user validates the selected drug and selected pharmacy on manage drug list page in UMS site$")
 	public void validate_selected_drug_pharmacy_ums() {
@@ -1020,6 +1039,36 @@ public class VppUmsStepDefinition {
 
 		}
 	}
+	 @Then("^the user views plan details for the selected plan in UMS site$")
+	public void user_views_plandetails_of_selected_plan_ums(DataTable drugListAttributes) {
+		String drugCost = drugListAttributes.getGherkinRows().get(0)
+				.getCells().get(0);
+		String planName = (String) getLoginScenario().getBean(
+				VPPCommonConstants.PLAN_NAME);
+		String zipcode = (String) getLoginScenario().getBean(
+				VPPCommonConstants.ZIPCODE);
+		String county = (String) getLoginScenario().getBean(
+				VPPCommonConstants.COUNTY);
+		String pharmacyName = (String) getLoginScenario().getBean(
+				DceCommonConstants.PHARMACY_NAME);
+		VPPPlanSummaryPage vppPlanSummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+
+		PlanDetailsPage vppPlanDetailsPage = vppPlanSummaryPage
+				.navigateToPlanDetails(planName);
+		try {
+			Thread.sleep(50000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		vppPlanDetailsPage.validatePharmacyNameAndDrugCost(drugCost,pharmacyName);
+		if (vppPlanDetailsPage != null) {
+			getLoginScenario().saveBean(PageConstants.VPP_PLAN_DETAILS_PAGE,
+					vppPlanDetailsPage);
+		}
+	}
+	
 
 	@Then("^the user validates the details of the selected plan in UMS site$")
 	public void user_validates_details_selected_plan_ums() {
@@ -1060,17 +1109,26 @@ public class VppUmsStepDefinition {
 				.getBean(PageConstants.MANAGE_DRUG_PAGE);
 		String planName = (String) getLoginScenario().getBean(
 				VPPCommonConstants.PLAN_NAME);
-		PlanDetailsPage planDetailsPage = manageDrugPage
+		/*PlanDetailsPage planDetailsPage = manageDrugPage
 				.applieschanges(planName);
 		if (planDetailsPage != null) {
 			getLoginScenario().saveBean(PageConstants.VPP_PLAN_DETAILS_PAGE,
 					planDetailsPage);
 		} else {
 			Assert.fail("Error: loading planDetailsPage");
+		}*/
+		
+		VPPPlanSummaryPage planSummaryPage = manageDrugPage.applieschanges();
+		if (planSummaryPage != null) {
+			getLoginScenario().saveBean(PageConstants.VPP_PLAN_SUMMARY_PAGE,
+					planSummaryPage);
+		} else {
+			Assert.fail("Error: loading planSummaryPage");
 		}
 
 	}
-
+	
+	
 	@Then("^the user validates the plan details for the above plan name in UMS site$")
 	public void user_views_plandetails_for_above_selected_plan_ums() {
 		String planName = (String) getLoginScenario().getBean(
@@ -1327,6 +1385,8 @@ public class VppUmsStepDefinition {
 
 		}
 	}
+    
+   
     
     @When("^user comes back to UMS plan summary page and view current year plan$")
 	public void bacK_to_planSummaryPage() {

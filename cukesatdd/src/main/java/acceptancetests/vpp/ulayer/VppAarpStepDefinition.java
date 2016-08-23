@@ -175,7 +175,7 @@ public class VppAarpStepDefinition {
 		}
 
 		String plantype = givenAttributesMap.get("Plan Type");
-
+		getLoginScenario().saveBean(VPPCommonConstants.PLAN_TYPE, plantype);
 		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 		plansummaryPage = plansummaryPage.viewPlanSummary(plantype);
@@ -784,6 +784,25 @@ System.out.println("planSummaryExpectedJson---->"
 				availablePharmaciesExpectedJson);
 
 	}
+	
+	    @And("^the user selects the below pharmacy from the list of pharmacies in AARP site$")
+    public void user_selects_pharmacy_aarp(DataTable pharmacyAttributes){
+        SelectPharmacyPage pharmacySearchPage = (SelectPharmacyPage) getLoginScenario()
+                .getBean(PageConstants.PHARMACY_SEARCH_PAGE);
+        String pharmacyName = pharmacyAttributes.getGherkinRows().get(0)
+                .getCells().get(0);
+        getLoginScenario().saveBean(DceCommonConstants.PHARMACY_NAME,
+                pharmacyName);
+        String pharmacyType = (String) getLoginScenario().getBean(
+                DceCommonConstants.PHARMACY_TYPE);
+        ManageDrugPage manageDrugPage = pharmacySearchPage.selectPharmacy(
+                pharmacyName, pharmacyType);
+        if (manageDrugPage != null) {
+            getLoginScenario().saveBean(PageConstants.MANAGE_DRUG_PAGE,
+                    manageDrugPage);
+        }
+    }
+	
 
 	@Then("^the user validates the available pharmacies based on selection made above in AARP site$")
 	public void user_views_pharmacyList_ums() {
@@ -887,6 +906,39 @@ System.out.println("planSummaryExpectedJson---->"
 		}
 
 	}
+	
+	    @And("^the user views plan details for the selected plan in AARP site$")
+    public void user_views_plan_details_aarp(DataTable drugListAttributes){
+        String drugCost = drugListAttributes.getGherkinRows().get(0)
+                .getCells().get(0);
+        String planName = (String) getLoginScenario().getBean(
+                VPPCommonConstants.PLAN_NAME);
+        String zipcode = (String) getLoginScenario().getBean(
+                VPPCommonConstants.ZIPCODE);
+        String county = (String) getLoginScenario().getBean(
+                VPPCommonConstants.COUNTY);
+        String pharmacyName = (String) getLoginScenario().getBean(
+                DceCommonConstants.PHARMACY_NAME);
+        String planType = (String) getLoginScenario().getBean(
+                VPPCommonConstants.PLAN_TYPE);
+        VPPPlanSummaryPage vppPlanSummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+                .getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+        PlanDetailsPage vppPlanDetailsPage = vppPlanSummaryPage
+                .navigateToPlanDetails(planName,planType);
+        try {
+            Thread.sleep(50000);
+        } catch (InterruptedException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        vppPlanDetailsPage.validatePharmacyNameAndDrugCost(drugCost,pharmacyName);
+        if (vppPlanDetailsPage != null) {
+            getLoginScenario().saveBean(PageConstants.VPP_PLAN_DETAILS_PAGE,
+                    vppPlanDetailsPage);
+        }
+        
+    }
+	
 
 	 
 	 //--------------------------

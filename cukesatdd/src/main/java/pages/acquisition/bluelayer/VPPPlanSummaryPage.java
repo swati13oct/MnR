@@ -406,7 +406,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 			for (WebElement plan : pdpPlanElement) {
 				if (plan.getText().contains(planName)) {
 					ElementData elementData = new ElementData("id",
-							"enterDrugMA"); // TODO Re-check
+							"enterDrugPDP"); // TODO Re-check
 					findChildElement(elementData, plan).click();
 				}
 			}
