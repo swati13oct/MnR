@@ -47,7 +47,7 @@ public class UawHomePage extends UhcDriver {
 	
 		
 		if (getTitle().equalsIgnoreCase(
-				"Find Care")) {
+				"Enter Zip")) {
 	return new Rallytool_Page(driver);
 	}
 		

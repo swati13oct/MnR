@@ -23,11 +23,11 @@ public class NcshpHomePage extends UhcDriver{
 		start(NCSHP_HOME_PAGE_URL);
 	}
 	
-	@FindBy(xpath=".//*[@id='main']/div/div[1]/div/div[3]/div[1]/div[3]/div/div/div[1]/div[3]/div/div[1]/div[1]/p[3]/a")
+	@FindBy(xpath=".//*[@id='cq-events-jsp-/content/gr/en/ncshp/home/jcr:content/parsys/events']/div/div[1]/div[3]/div/div[1]/div[1]/p[3]/a")
 	
 	private WebElement ncshpfindaproviderlink;
 	
-	@FindBy(xpath=".//*[@id='main']/div/div[1]/div/div[2]/div/div/div/div/div[1]/div[5]/div/div")
+	@FindBy(xpath=".//*[@id='cq-imagebutton-jsp-/content/gr/en/ncshp/header/jcr:content/parsys/textbgimage/parsys/imagebutton_1']")
 	
 	private WebElement ncshpfindaprovidertab;
 	
@@ -47,7 +47,7 @@ public class NcshpHomePage extends UhcDriver{
 			ArrayList<String> tabs = new ArrayList<String> (driver.getWindowHandles());
 			driver.switchTo().window(tabs.get(1));
 			
-			if (getTitle().equalsIgnoreCase("Find Care")) {
+			if (getTitle().equalsIgnoreCase("Enter Zip")) {
 		return new Rallytool_Page(driver);
 		}
 			// TODO Auto-generated method stub
@@ -63,7 +63,7 @@ public class NcshpHomePage extends UhcDriver{
 			/*ArrayList<String> tabs = new ArrayList<String> (driver.getWindowHandles());
 			driver.switchTo().window(tabs.get(1));*/
 			
-			if (getTitle().equalsIgnoreCase("North Carolina State Health Plan Group Retiree – Find a provider")) {
+			if (getTitle().equalsIgnoreCase("NCSHP Retirees – Find a provider")) {
 		return new NcshpFindaProviderPage(driver);
 		}
 		

@@ -61,7 +61,7 @@ public class UHCRetireeSiteMapPage extends UhcDriver {
 		
 		
 		if (getTitle().equalsIgnoreCase(
-				"Find Care")) {
+				"Enter Zip")) {
 	return new RallyToolPage(driver);
 }
 		// TODO Auto-generated method stub

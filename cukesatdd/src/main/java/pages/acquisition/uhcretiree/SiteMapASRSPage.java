@@ -25,7 +25,7 @@ public class SiteMapASRSPage extends UhcDriver {
 
 	}
 	
-	@FindBy(xpath="//*[@id='main']/div/div[1]/div/div[4]/div[1]/div/div[1]/div[1]/ul/li[4]/a")
+	@FindBy(xpath=".//*[@id='main']/div/div[1]/div/div[4]/div[1]/div/div[1]/div[1]/ul/li[4]/a")
 	private WebElement findproviderlink;
 	
 	
@@ -45,7 +45,7 @@ public class SiteMapASRSPage extends UhcDriver {
 				driver.getWindowHandles());
 		driver.switchTo().window(tabs.get(1));
 		if (getTitle().equalsIgnoreCase(
-				"Find Care")) {
+				"Enter Zip")) {
 	return new RallyToolPage(driver);
 	
 		}

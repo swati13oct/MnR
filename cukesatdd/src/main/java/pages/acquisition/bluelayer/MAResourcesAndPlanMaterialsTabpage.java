@@ -40,7 +40,7 @@ public class MAResourcesAndPlanMaterialsTabpage extends UhcDriver {
 	switchToNewTab();
 		
 		if (getTitle().equalsIgnoreCase(
-				"Find Care")) {
+				"Enter Zip")) {
 	return new Rallytool_Page(driver);
 	}
 		

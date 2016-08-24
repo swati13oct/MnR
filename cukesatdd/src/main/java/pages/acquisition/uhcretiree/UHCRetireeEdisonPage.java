@@ -27,10 +27,10 @@ public class UHCRetireeEdisonPage extends UhcDriver {
 			
 	}
 	
-	@FindBy(xpath ="//*[@id='cq-events-jsp-/content/gr/en/edison/home/jcr:content/parsys/events']/div/div[1]/div[3]/div/div[1]/div[1]/p[3]/a")
+	@FindBy(xpath =".//*[@id='cq-events-jsp-/content/gr/en/edison/home/jcr:content/parsys/events']/div/div[1]/div[3]/div/div[1]/div[1]/p[3]/a")
 	private WebElement findprovideredison;	
 	
-	@FindBy(xpath ="//*[@id='cq-imagebutton-jsp-/content/gr/en/edison/header/jcr:content/parsys/textbgimage/parsys/imagebutton_1']")
+	@FindBy(xpath =".//*[@id='cq-imagebutton-jsp-/content/gr/en/edison/header/jcr:content/parsys/textbgimage/parsys/imagebutton_1']")
 	private WebElement findprovideredisonlink;
 	
 	private static String UHCRETIREE_ACQISITION_EDISON_PAGE_URL = MRConstants.UHCRETIREE_EDISON_URL;
@@ -51,7 +51,7 @@ public class UHCRetireeEdisonPage extends UhcDriver {
 				driver.getWindowHandles());
 		driver.switchTo().window(tabs.get(1));
 		if (getTitle().equalsIgnoreCase(
-				"Find Care")) {
+				"Enter Zip")) {
 	return new RallyToolPage(driver);
 	
 		}
@@ -66,7 +66,7 @@ public class UHCRetireeEdisonPage extends UhcDriver {
 		findprovideredisonlink.click();
 		
 		if (getTitle().equalsIgnoreCase(
-				"Edison International Group Retiree – Find a provider")) {
+				"Edison Retirees – Find a Provider")) {
 	return new UHCRetireeEdisionProviderPage(driver);
 }
 		// TODO Auto-generated method stub

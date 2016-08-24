@@ -23,11 +23,11 @@ public class PfizerHomePage extends UhcDriver{
 		start(PFIZER_HOME_PAGE_URL);
 	}
 	
-	@FindBy(xpath=".//*[@id='main']/div/div[1]/div/div[3]/div[1]/div[3]/div/div/div[1]/div[3]/div/div[1]/div[1]/p[3]/a")
+	@FindBy(xpath=".//*[@id='cq-events-jsp-/content/gr/en/pfizer/home/jcr:content/parsys/events']/div/div[1]/div[3]/div/div[1]/div[1]/p[3]/a")
 	
 	private WebElement pfizerfindaproviderlink;
 	
-	@FindBy(xpath=".//*[@id='main']/div/div[1]/div/div[2]/div/div/div/div/div[1]/div[5]/div/div")
+	@FindBy(xpath=".//*[@id='cq-imagebutton-jsp-/content/gr/en/pfizer/header/jcr:content/parsys/textbgimage/parsys/imagebutton_1']")
 	
 	private WebElement pfizerfindaprovidertab;
 	
@@ -48,7 +48,7 @@ public class PfizerHomePage extends UhcDriver{
 		ArrayList<String> tabs = new ArrayList<String> (driver.getWindowHandles());
 		driver.switchTo().window(tabs.get(1));
 		
-		if (getTitle().equalsIgnoreCase("Find Care")) {
+		if (getTitle().equalsIgnoreCase("Enter Zip")) {
 	return new Rallytool_Page(driver);
 	}
 		// TODO Auto-generated method stub
@@ -64,7 +64,7 @@ public class PfizerHomePage extends UhcDriver{
 			/*ArrayList<String> tabs = new ArrayList<String> (driver.getWindowHandles());
 			driver.switchTo().window(tabs.get(1));*/
 			
-			if (getTitle().equalsIgnoreCase("Pfizer Group Retiree - Find a Provider")) {
+			if (getTitle().equalsIgnoreCase("Pfizer Retirees - Find a Provider")) {
 		return new PfizerFindaProviderPage(driver);
 		}
 		

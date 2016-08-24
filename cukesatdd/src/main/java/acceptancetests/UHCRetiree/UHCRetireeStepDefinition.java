@@ -4,8 +4,13 @@
 package acceptancetests.UHCRetiree;
 
 import org.junit.Assert;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.springframework.beans.factory.annotation.Autowired;
+
+import com.thoughtworks.selenium.Wait.WaitTimedOutException;
+import com.thoughtworks.selenium.webdriven.commands.WaitForPageToLoad;
 
 import pages.acquisition.uhcretiree.AcquisitionHomePage;
 import pages.acquisition.uhcretiree.AlcatelLucentFindProviderPage;
@@ -63,6 +68,7 @@ import pages.acquisition.uhcretiree.SannFranciscoSiteMapPage;
 import pages.acquisition.ulayer.LoginAssistancePage;
 import acceptancetests.atdd.data.CommonConstants;
 import acceptancetests.atdd.data.acquisition.PageConstants;
+import acceptancetests.atdd.util.CommonUtility;
 import atdd.framework.MRScenario;
 import cucumber.annotation.After;
 import cucumber.annotation.en.And;
@@ -214,13 +220,17 @@ public void calpershomepage() {
 
 @And("^user clicks on the Find a Provider link on Calpers Home Page and rally tool opens in new tab$")
 
-public void calpersproviderlinkclick () {
+public void calpersproviderlinkclick () throws InterruptedException {
 	CalpersHomePage calpersproviderlink= (CalpersHomePage)getLoginScenario().getBean(PageConstants.CALPERS_HOME_PAGE);
 	
 	Rallytool_Page rallytool = calpersproviderlink.calpershomepageproviderclick();
+	Thread.sleep(6000);
+	 
 	if(rallytool!= null){
+	 
 		getLoginScenario().saveBean(PageConstants.RALLY_TOOL_PAGE,
 				rallytool);
+	 
 		Assert.assertTrue(true);
 	} else {
 		Assert.fail(" Page not found");
@@ -278,15 +288,19 @@ public void calpersfindphysician(){
 		Assert.fail(" Page not found");
 	}
 }
-@Then("^user again switches back to Calpers Home page$")
+@Then("^user again switches back to Calpers Provider page$")
 
-public void backToCalperProviderPage()
+public void backToCalperProviderPage() throws InterruptedException
 {
 	Rallytool_Page rally  = (Rallytool_Page) getLoginScenario()
 			.getBean(PageConstants.RALLY_TOOL_PAGE);
-	CalperFindaProviderPage calpers = rally.switchBackToCalperFindaProvider();
-	if(calpers!= null){
-		getLoginScenario().saveBean(PageConstants.CALPERS_HOME_PAGE, calpers);
+	CalperFindaProviderPage calperfindaprovider = rally.switchBackToCalperFindaProvider();
+	
+	//CommonUtility.waitForPageLoad(driver, element, timeout);
+	Thread.sleep(5000);
+	System.out.println("Checked");
+	if(calperfindaprovider!= null){
+		getLoginScenario().saveBean(PageConstants.CALPER_FIND_A_PROVIDER, calperfindaprovider);
 		Assert.assertTrue(true);
 		
 	} else {
@@ -295,12 +309,18 @@ public void backToCalperProviderPage()
            
 }
 
-@And("^user clicks on site map on Calpers Home page$")
+@And("^user clicks on site map on Calpers Provider page$")
 
-public void calperssitemapclick() {
-	CalperFindaProviderPage calpersproviderpage= (CalperFindaProviderPage)getLoginScenario().getBean(PageConstants.CALPERS_HOME_PAGE);
+public void calperssitemapclick() throws InterruptedException {
+	
+	WebDriver wd = getLoginScenario().getWebDriver();
+			
+	CalperFindaProviderPage calpersproviderpage= (CalperFindaProviderPage)getLoginScenario().getBean(PageConstants.CALPER_FIND_A_PROVIDER);
 	
 	CalpersSiteMapPage calpersitemap = calpersproviderpage.calpersitemapclick();
+	Thread.sleep(5000);
+	
+	System.out.println("Element Found");
 	if(calpersitemap!= null){
 		getLoginScenario().saveBean(PageConstants.CALPERS_SITE_MAP,
 				calpersitemap);
@@ -719,14 +739,14 @@ public void metlifefindphysician(){
 	}
 }
 
-@Then("^user again switches back to MetLife Home page$")
+@Then("^user again switches back to MetLife Provider page$")
 public void backToMetlifeProviderPage()
 {
 	Rallytool_Page rally  = (Rallytool_Page) getLoginScenario()
 			.getBean(PageConstants.RALLY_TOOL_PAGE);
-	MetlifeFindaProviderPage metlife = rally.switchBackToMetlifeFindaProvider();
-	if(metlife!= null){
-		getLoginScenario().saveBean(PageConstants.METLIFE_HOME_PAGE, metlife);
+	MetlifeFindaProviderPage metlifefindaprovider = rally.switchBackToMetlifeFindaProvider();
+	if(metlifefindaprovider!= null){
+		getLoginScenario().saveBean(PageConstants.METLIFE_FIND_A_PROVIDER, metlifefindaprovider);
 		Assert.assertTrue(true);
 		
 	} else {
@@ -735,9 +755,9 @@ public void backToMetlifeProviderPage()
            
 }
 
-@And("^user clicks on site map on MetLife Home page$")
+@And("^user clicks on site map on MetLife Provider page$")
 public void metlifesitemapclick() {
-	MetlifeFindaProviderPage metlifeproviderpage= (MetlifeFindaProviderPage)getLoginScenario().getBean(PageConstants.METLIFE_HOME_PAGE);
+	MetlifeFindaProviderPage metlifeproviderpage= (MetlifeFindaProviderPage)getLoginScenario().getBean(PageConstants.METLIFE_FIND_A_PROVIDER);
 	
 	MetlifeSiteMapPage metlifesitemap = metlifeproviderpage.metlifeitemapclick();
 	if(metlifesitemap!= null){
@@ -1450,15 +1470,15 @@ public void sdcerafindphysician(){
 		Assert.fail(" Page not found");
 	}
 }
-@Then("^user again switches back to Sdcera Home page$")
+@Then("^user again switches back to Sdcera Provider page$")
 
 public void backToSdceraProviderPage()
 {
 	Rallytool_Page rally  = (Rallytool_Page) getLoginScenario()
 			.getBean(PageConstants.RALLY_TOOL_PAGE);
-	SdceraFindaProviderPage sdcera = rally.switchBackToSdceraFindaProvider();
-	if(sdcera!= null){
-		getLoginScenario().saveBean(PageConstants.SDCERA_HOME_PAGE, sdcera);
+	SdceraFindaProviderPage sdcerafindaprovider = rally.switchBackToSdceraFindaProvider();
+	if(sdcerafindaprovider!= null){
+		getLoginScenario().saveBean(PageConstants.SDCERA_FIND_A_PROVIDER, sdcerafindaprovider);
 		Assert.assertTrue(true);
 		
 	} else {
@@ -1467,10 +1487,10 @@ public void backToSdceraProviderPage()
            
 }
 
-@And("^user clicks on site map on Sdcera Home page$")
+@And("^user clicks on site map on Sdcera Provider page$")
 
 public void sdcerasitemapclick() {
-	SdceraFindaProviderPage sdceraproviderpage= (SdceraFindaProviderPage)getLoginScenario().getBean(PageConstants.SDCERA_HOME_PAGE);
+	SdceraFindaProviderPage sdceraproviderpage= (SdceraFindaProviderPage)getLoginScenario().getBean(PageConstants.SDCERA_FIND_A_PROVIDER);
 	
 	SdceraSiteMapPage sdcerasitemap = sdceraproviderpage.sdcerasitemapclick();
 	if(sdcerasitemap!= null){
@@ -1574,14 +1594,14 @@ public void ktrsfindphysician(){
 	}
 }
 
-@Then("^user again switches back to KTRS Home page$")
+@Then("^user again switches back to KTRS Provider page$")
 public void backToKtrsProviderPage()
 {
 	Rallytool_Page rally  = (Rallytool_Page) getLoginScenario()
 			.getBean(PageConstants.RALLY_TOOL_PAGE);
-	KTRSFindaProviderPage ktrs = rally.switchBackToktrsFindaProvider();
-	if(ktrs!= null){
-		getLoginScenario().saveBean(PageConstants.KTRS_HOME_PAGE, ktrs);
+	KTRSFindaProviderPage ktrsfindaprovider = rally.switchBackToktrsFindaProvider();
+	if(ktrsfindaprovider!= null){
+		getLoginScenario().saveBean(PageConstants.KTRS_FIND_A_PROVIDER, ktrsfindaprovider);
 		Assert.assertTrue(true);
 		
 	} else {
@@ -1590,9 +1610,9 @@ public void backToKtrsProviderPage()
            
 }
 
-@And("^user clicks on site map on KTRS Home page$")
+@And("^user clicks on site map on KTRS Provider page$")
 public void ktrssitemapclick() {
-	KTRSFindaProviderPage ktrsproviderpage= (KTRSFindaProviderPage)getLoginScenario().getBean(PageConstants.KTRS_HOME_PAGE);
+	KTRSFindaProviderPage ktrsproviderpage= (KTRSFindaProviderPage)getLoginScenario().getBean(PageConstants.KTRS_FIND_A_PROVIDER);
 	
 	KTRSSiteMapPage ktrssitemap = ktrsproviderpage.ktrssitemapclick();
 	if(ktrssitemap!= null){
@@ -1694,14 +1714,14 @@ public void pfizerfindphysician(){
 	}
 }
 
-@Then("^user again switches back to Pfizer Home Page$")
+@Then("^user again switches back to Pfizer Provider Page$")
 public void backToPfizerProviderPage()
 {
 	Rallytool_Page rally  = (Rallytool_Page) getLoginScenario()
 			.getBean(PageConstants.RALLY_TOOL_PAGE);
-	PfizerFindaProviderPage pfizer = rally.switchBackToPfizerFindaProvider();
-	if(pfizer!= null){
-		getLoginScenario().saveBean(PageConstants.PFIZER_HOME_PAGE, pfizer);
+	PfizerFindaProviderPage pfizerfindaprovider = rally.switchBackToPfizerFindaProvider();
+	if(pfizerfindaprovider!= null){
+		getLoginScenario().saveBean(PageConstants.PFIZER_FIND_A_PROVIDER, pfizerfindaprovider);
 		Assert.assertTrue(true);
 		
 	} else {
@@ -1710,9 +1730,9 @@ public void backToPfizerProviderPage()
            
 }
 
-@And("^user clicks on site map on Pfizer Home Page$")
+@And("^user clicks on site map on Pfizer Provider Page$")
 public void pfizersitemapclick() {
-	PfizerFindaProviderPage pfizerproviderpage= (PfizerFindaProviderPage)getLoginScenario().getBean(PageConstants.PFIZER_HOME_PAGE);
+	PfizerFindaProviderPage pfizerproviderpage= (PfizerFindaProviderPage)getLoginScenario().getBean(PageConstants.PFIZER_FIND_A_PROVIDER);
 	
 	PfizerSiteMapPage pfizersitemap = pfizerproviderpage.pfizersitemapclick();
 	if(pfizersitemap!= null){
@@ -1816,14 +1836,14 @@ public void ncshpfindphysician(){
 	}
 }
 
-@Then("^user again switches back to North Carolina Home Page$")
+@Then("^user again switches back to North Carolina Provider Page$")
 public void backToNcshpProviderPage()
 {
 	Rallytool_Page rally  = (Rallytool_Page) getLoginScenario()
 			.getBean(PageConstants.RALLY_TOOL_PAGE);
-	NcshpFindaProviderPage ncshp = rally.switchBackToNcshpFindaProvider();
-	if(ncshp!= null){
-		getLoginScenario().saveBean(PageConstants.NCSHP_HOME_PAGE, ncshp);
+	NcshpFindaProviderPage ncshpfindaprovider = rally.switchBackToNcshpFindaProvider();
+	if(ncshpfindaprovider!= null){
+		getLoginScenario().saveBean(PageConstants.NCSHP_FIND_A_PROVIDER, ncshpfindaprovider);
 		Assert.assertTrue(true);
 		
 	} else {
@@ -1832,9 +1852,9 @@ public void backToNcshpProviderPage()
            
 }
 
-@And("^user clicks on site map on North Carolina Home Page$")
+@And("^user clicks on site map on North Carolina Provider Page$")
 public void ncshpsitemapclick() {
-	NcshpFindaProviderPage ncshpproviderpage= (NcshpFindaProviderPage)getLoginScenario().getBean(PageConstants.NCSHP_HOME_PAGE);
+	NcshpFindaProviderPage ncshpproviderpage= (NcshpFindaProviderPage)getLoginScenario().getBean(PageConstants.NCSHP_FIND_A_PROVIDER);
 	
 	NcshpSiteMapPage ncshpsitemap = ncshpproviderpage.ncshpsitemapclick();
 	if(ncshpsitemap!= null){
@@ -1860,13 +1880,6 @@ public void ncshpsitemapproviderclick(){
 	}
 }
 
-@After
-public void tearDown() {
-       WebDriver wd = (WebDriver) getLoginScenario().getBean(
-                    CommonConstants.WEBDRIVER);
-       wd.quit();
-       getLoginScenario().flushBeans();
-}
 
 
 
@@ -2112,15 +2125,15 @@ public void illinoisfindphysician(){
 		Assert.fail(" Page not found");
 	}
 }
-@Then("^user again switches back to Illinois Home page$")
+@Then("^user again switches back to Illinois Provider page$")
 
 public void backToIllinoisProviderPage()
 {
 	Rallytool_Page rally  = (Rallytool_Page) getLoginScenario()
 			.getBean(PageConstants.RALLY_TOOL_PAGE);
-	IllinoisFindaProviderPage illinois = rally.switchBackToIllinoisFindaProvider();
-	if(illinois!= null){
-		getLoginScenario().saveBean(PageConstants.ILLINOIS_HOME_PAGE, illinois);
+	IllinoisFindaProviderPage illinoisfindaprovider = rally.switchBackToIllinoisFindaProvider();
+	if(illinoisfindaprovider!= null){
+		getLoginScenario().saveBean(PageConstants.ILLINOIS_FIND_A_PROVIDER, illinoisfindaprovider);
 		Assert.assertTrue(true);
 		
 	} else {
@@ -2129,10 +2142,10 @@ public void backToIllinoisProviderPage()
            
 }
 
-@And("^user clicks on site map on Illinois Home page$")
+@And("^user clicks on site map on Illinois Provider page$")
 
 public void illinoissitemapclick() {
-	IllinoisFindaProviderPage illinoisproviderpage= (IllinoisFindaProviderPage)getLoginScenario().getBean(PageConstants.ILLINOIS_HOME_PAGE);
+	IllinoisFindaProviderPage illinoisproviderpage= (IllinoisFindaProviderPage)getLoginScenario().getBean(PageConstants.ILLINOIS_FIND_A_PROVIDER);
 	
 	IllinoisSiteMapPage illinoissitemap = illinoisproviderpage.illinoissitemapclick();
 	if(illinoissitemap!= null){

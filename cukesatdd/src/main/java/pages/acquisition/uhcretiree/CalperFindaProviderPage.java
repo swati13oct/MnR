@@ -16,7 +16,7 @@ public class CalperFindaProviderPage extends UhcDriver {
 	public void openAndValidate(){
 	}
 	
-	@FindBy(xpath=".//*[@id='main']/div/div[1]/div/div[4]/div[1]/div/div[1]/div[1]/ol[1]/li[1]/a")
+	@FindBy(xpath=".//*[@id='main']/div/div[1]/div/div[4]/div[1]/div/div[1]/div[1]/ul/li[2]/a")
 	
 	private WebElement findaphysiciancaliperslink;
 	
@@ -40,7 +40,7 @@ public class CalperFindaProviderPage extends UhcDriver {
 			driver.switchTo().window(tabs.get(1));
 			
 			if (getTitle().equalsIgnoreCase(
-					"Find Care")) {
+					"Enter Zip")) {
 		return new Rallytool_Page(driver);
 			}
 			// TODO Auto-generated method stub
@@ -56,7 +56,7 @@ public class CalperFindaProviderPage extends UhcDriver {
 					
 					
 		     if (getTitle().equalsIgnoreCase(
-							"CalPERS Group Retiree – Site map")) {
+							"CalPERS Retirees – Site map")) {
 				return new CalpersSiteMapPage(driver);
 				}
 			// TODO Auto-generated method stub

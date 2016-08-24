@@ -96,7 +96,7 @@ public class AcquisitionHomePage extends UhcDriver {
 		ArrayList<String> tabs = new ArrayList<String>(
 				driver.getWindowHandles());
 		driver.switchTo().window(tabs.get(1));
-		if (getTitle().equalsIgnoreCase("Find Care")) {
+		if (getTitle().equalsIgnoreCase("Enter Zip")) {
 			return new Rallytool_Page(driver);
 		}
 		return null;

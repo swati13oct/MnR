@@ -31,7 +31,7 @@ public class UHCRetireeOehwfHomePage extends UhcDriver {
 		validate(FindaProviderlink);
 	}
 
-	@FindBy(xpath = "/html/body/div[2]/div/div[1]/div/div[3]/div[1]/div[3]/div/div/div[1]/div[3]/div/div[1]/div[1]/p[3]/a")
+	@FindBy(xpath = ".//*[@id='cq-events-jsp-/content/gr/en/oehwf/home/jcr:content/parsys/events']/div/div[1]/div[3]/div/div[1]/div[1]/p[3]/a")
 	private WebElement FindaProviderlink;
 
 	private static String UHCRETIREE_ACQISITION_OEHWF_PAGE_URL = MRConstants.UHCRETIREE_OEHWF_URL;
@@ -62,7 +62,7 @@ public class UHCRetireeOehwfHomePage extends UhcDriver {
 		driver.switchTo().window(tabs.get(1));
 		
 			if (getTitle().equalsIgnoreCase(
-		"Find Care")) {
+		"Enter Zip")) {
 		return new Rallytool_Page(driver);
 		}
 			return null;

@@ -17,7 +17,7 @@ public class TravelersSiteMap extends UhcDriver {
               start(TRAVELERS_SITE_MAP_URL);
        }
        
-       @FindBy(xpath="/html/body/div[2]/div/div[1]/div/div[4]/div[1]/div/div[1]/div[1]/ul/li[3]/a")
+       @FindBy(xpath=".//*[@id='main']/div/div[1]/div/div[4]/div[1]/div/div[1]/div[1]/ul/li[3]/a")
        private WebElement travelerssitemapfindaproviderlink;
        
        private static String TRAVELERS_SITE_MAP_URL = MRConstants.TRAVELERS_SITE_MAP_URL;
@@ -41,7 +41,7 @@ public class TravelersSiteMap extends UhcDriver {
               driver.switchTo().window(tabs.get(1));
               
               if (getTitle().equalsIgnoreCase(
-                           "Find Care")) {
+                           "Enter Zip")) {
        return new Rallytool_Page(driver);
               }
        

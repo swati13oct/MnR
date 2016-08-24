@@ -42,7 +42,7 @@ public class CalpersHomePage extends UhcDriver {
 		driver.switchTo().window(tabs.get(1));
 		
 		if (getTitle().equalsIgnoreCase(
-				"Find Care")) {
+				"Enter Zip")) {
 	return new Rallytool_Page(driver);
 	}
 		// TODO Auto-generated method stub
@@ -58,7 +58,7 @@ public class CalpersHomePage extends UhcDriver {
 			driver.switchTo().window(tabs.get(1));*/
 			
 			if (getTitle().equalsIgnoreCase(
-					"CalPERS Group Retiree – Find a provider")) {
+					"CalPERS Retirees – Find a provider")) {
 		return new CalperFindaProviderPage(driver);
 		}
 		

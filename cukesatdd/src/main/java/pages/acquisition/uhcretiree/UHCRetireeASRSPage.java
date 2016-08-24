@@ -26,13 +26,13 @@ public class UHCRetireeASRSPage extends UhcDriver {
 
 	}
 	
-	@FindBy(xpath="//*[@id='cq-events-jsp-/content/gr/en/asrs/home/jcr:content/parsys/events']/div/div[1]/div[3]/div/div[1]/div[1]/p[3]/a")
+	@FindBy(xpath=".//*[@id='cq-events-jsp-/content/gr/en/asrs/home/jcr:content/parsys/events']/div/div[1]/div[3]/div/div[1]/div[1]/p[3]/a")
 	private WebElement FIND_A_PROVIDER_LINK;
 	
 	@FindBy(xpath="//*[@id='cq-events-jsp-/content/gr/en/asrs/home/jcr:content/parsys/events']/div/div[1]/div[3]/div/div[1]/div[1]/p[3]/a")
 	private WebElement findAPhysician;
 	
-	@FindBy(xpath="//*[@id='cq-imagebutton-jsp-/content/gr/en/asrs/header/jcr:content/parsys/textbgimage/parsys/imagebutton_1']")
+	@FindBy(xpath=".//*[@id='cq-imagebutton-jsp-/content/gr/en/asrs/header/jcr:content/parsys/textbgimage/parsys/imagebutton_1']")
 	private WebElement providers_link;
 
 	
@@ -77,7 +77,7 @@ public class UHCRetireeASRSPage extends UhcDriver {
 					driver.getWindowHandles());
 			driver.switchTo().window(tabs.get(1));
 			if (getTitle().equalsIgnoreCase(
-					"Find Care")) {
+					"Enter Zip")) {
 		return new RallyToolPage(driver);
 		
 			}

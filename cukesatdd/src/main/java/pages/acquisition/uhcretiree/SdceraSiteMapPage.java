@@ -16,7 +16,7 @@ public class SdceraSiteMapPage extends UhcDriver {
 	public void openAndValidate(){
 	}
 	
-	@FindBy(xpath="/html/body/div[2]/div/div[1]/div/div[4]/div[1]/div/div[1]/div[1]/ul/li[4]/a")
+	@FindBy(xpath=".//*[@id='main']/div/div[1]/div/div[4]/div[1]/div/div[1]/div[1]/ul/li[4]/a")
 	
 	private WebElement sdcerasitemappagefindaproviderlink;
 	
@@ -37,7 +37,7 @@ public class SdceraSiteMapPage extends UhcDriver {
 			driver.switchTo().window(tabs.get(1));
 			
 			if (getTitle().equalsIgnoreCase(
-					"Find Care")) {
+					"Enter Zip")) {
 		return new Rallytool_Page(driver);
 		}
 		// TODO Auto-generated method stub

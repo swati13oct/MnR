@@ -28,11 +28,11 @@ public class KTRSHomePage extends UhcDriver{
 		// TODO Auto-generated constructor stub
 	}
 	
-    @FindBy(xpath=".//*[@id='main']/div/div[1]/div/div[3]/div[1]/div[3]/div/div/div[1]/div[2]/div/div[1]/div[1]/p[3]/a")
+    @FindBy(xpath=".//*[@id='cq-events-jsp-/content/gr/en/trs/home/jcr:content/parsys/events']/div/div[1]/div[2]/div/div[1]/div[1]/p[3]/a")
     
 	private WebElement ktrsfindaproviderlink;
 	
-	@FindBy(xpath=".//*[@id='main']/div/div[1]/div/div[2]/div/div/div/div/div[1]/div[4]/div/div")
+	@FindBy(xpath=".//*[@id='cq-imagebutton-jsp-/content/gr/en/trs/header/jcr:content/parsys/textbgimage/parsys/imagebutton_0']")
 	
 	private WebElement ktrsfindaprovidertab;
 	
@@ -50,7 +50,7 @@ public class KTRSHomePage extends UhcDriver{
 		ArrayList<String> tabs = new ArrayList<String> (driver.getWindowHandles());
 		driver.switchTo().window(tabs.get(1));
 		if (getTitle().equalsIgnoreCase( 
-				"Find Care")) {
+				"Enter Zip")) {
 	     return new Rallytool_Page(driver);
 	    }
 		
@@ -65,7 +65,7 @@ public class KTRSHomePage extends UhcDriver{
 				driver.switchTo().window(tabs.get(1));*/
 				
 				if (getTitle().equalsIgnoreCase(
-						"KTRS Group Retiree - Find a Provider")) {
+						"KTRS Retirees - Find a Provider")) {
 			return new KTRSFindaProviderPage(driver);
 			}
 		   

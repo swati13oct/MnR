@@ -24,7 +24,7 @@ public class MetlifeSiteMapPage extends UhcDriver {
 	public void openAndValidate(){
 	}
 	
-	@FindBy(xpath=".//*[@id='main']/div/div[1]/div/div[4]/div[1]/div/div[1]/div[1]/ul/li[4]/a")
+	@FindBy(xpath=".//*[@id='main']/div/div[1]/div/div[4]/div[1]/div/div[1]/div[1]/ul/li[3]/a")
 	
 	private WebElement metlifesitemappagefindaproviderlink;
 	
@@ -43,7 +43,7 @@ public class MetlifeSiteMapPage extends UhcDriver {
 			driver.switchTo().window(tabs.get(1));
 			
 			if (getTitle().equalsIgnoreCase(
-					"Find Care")) {
+					"Enter Zip")) {
 		return new Rallytool_Page(driver);
 		}
 		// TODO Auto-generated method stub

@@ -22,7 +22,7 @@ public class NcshpFindaProviderPage extends UhcDriver {
 	public void openAndValidate() {
 	}
 
-	@FindBy(xpath = ".//*[@id='main']/div/div[1]/div/div[4]/div[1]/div/div[1]/div[1]/p[5]/a")
+	@FindBy(xpath = ".//*[@id='main']/div/div[1]/div/div[4]/div[1]/div/div[1]/div[1]/p[2]/a")
 	private WebElement findaphysicianncshplink;
 
 	@FindBy(xpath = ".//*[@id='main']/div/div[1]/div/div[6]/div/div/div/div[1]/ul/li[3]/a")
@@ -43,7 +43,7 @@ public class NcshpFindaProviderPage extends UhcDriver {
 				driver.getWindowHandles());
 		driver.switchTo().window(tabs.get(1));
 
-		if (getTitle().equalsIgnoreCase("Find Care")) {
+		if (getTitle().equalsIgnoreCase("Enter Zip")) {
 			return new Rallytool_Page(driver);
 		}
 		// TODO Auto-generated method stub
@@ -56,7 +56,7 @@ public class NcshpFindaProviderPage extends UhcDriver {
 		ncshpsitemaplink.click();
 
 		if (getTitle().equalsIgnoreCase(
-				"North Carolina State Health Plan Group Retiree – Site map")) {
+				"NCSHP Retirees – Site map")) {
 			return new NcshpSiteMapPage(driver);
 		}
 		// TODO Auto-generated method stub

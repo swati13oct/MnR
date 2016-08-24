@@ -38,7 +38,7 @@ public class MRConstants {
 	
 	public static final String San_Francisco_HOME_PAGE_URL = "https://www.awe-"+MRScenario.environment+"-uhcretiree.uhc.com/sfhss/home.html";
 
-	public static final String KTRS_HOME_PAGE_URL = "https://www.awe-"+MRScenario.environment+"-uhcretiree.uhc.com/ktrs/home.html";
+	public static final String KTRS_HOME_PAGE_URL = "https://www.awe-"+MRScenario.environment+"-uhcretiree.uhc.com/trs/home.html";
 
 	public static final String PFIZER_HOME_PAGE_URL = "https://www.awe-"+MRScenario.environment+"-uhcretiree.uhc.com/pfizer/home.html";
 
@@ -49,8 +49,8 @@ public class MRConstants {
 
 	public static final String UHCRETIREE_SITE_MAP_URL = "https://www.awe-"+MRScenario.environment+"-uhcretiree.uhc.com/site_map.html";
 	
-	//public static final String UHC_URL = "https://www.awe-"+MRScenario.environment+"-uhcmedicaresolutions.uhc.com/";
-	public static final String UHC_URL = "https://www."+MRScenario.environment+"-uhcmedicaresolutions.uhc.com/";
+public static final String UHC_URL = "https://www.awe-"+MRScenario.environment+"-uhcmedicaresolutions.uhc.com/";
+	//public static final String UHC_URL = "https://www."+MRScenario.environment+"-uhcmedicaresolutions.uhc.com/";
 	
 	public static final String AARPM_REGISTRATION_URL = "https://member.awe-"+MRScenario.environment+"-aarpmedicareplans.uhc.com/guest/registration.html";
 	
