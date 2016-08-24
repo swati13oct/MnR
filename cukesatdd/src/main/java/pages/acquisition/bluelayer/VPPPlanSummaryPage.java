@@ -62,7 +62,8 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	WebElement snpPlanConatiner;
 	
 
-	@FindBy(xpath ="//div[@id='maplans_container']/div[3]/div/div/div/div[@class='ng-scope']")
+	//@FindBy(xpath ="//div[@id='maplans_container']/div[3]/div/div/div/div[@class='ng-scope']")
+	@FindBy(xpath ="//div[@id='maplans_container']")
 	List<WebElement> maPlanElement;
 	
 	@FindBy(xpath =".//*[@id='pdpplans_container']")
