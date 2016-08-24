@@ -180,9 +180,9 @@ Examples:
 #	| 01008   | Hampden County   | MA       |  AARP MedicareComplete Plan 2 (HMO)    |
 
 
-Scenario Outline: Verify plan details in UMS site
 
 @Q3
+
 Scenario Outline: Verify the pharmacies after selecting a plan UMS site
 
 Given the user is on the uhcmedicaresolutions site landing page
@@ -228,7 +228,7 @@ Examples:
 	| zipcode | county             | plantype | planName                                             |
 	| 78006   | Bexar County       | PDP      | AARP MedicareRx Saver Plus (PDP)                     |
 
-
+Scenario Outline: Verify plan details in UMS site
 And the user selects the plan in UMS site
 	| Plan Type | <plantype> |
 And the user selects the enter drug information link for the selected plan in UMS site
@@ -273,5 +273,46 @@ Examples:
 | zipcode | county             | plantype |  planName                                             |  		 
 | 60646   | Cook County | PDP       |  AARP MedicareRx Walgreens (PDP)  |
 | 60646   | Cook County | PDP       |  Symphonix Value Rx (PDP)  |
+
+ 
+@Q3
+Scenario Outline: Verify the cost and pharmacy name in Drug List in UMS site 
+Given the user is on the uhcmedicaresolutions site landing page
+When the user performs plan search using following information in UMS site
+    | Zip Code    | <zipcode>|
+    | County Name |<county> |
+And the user selects the plan in UMS site
+ 
+    | Plan Type | <plantype> |
+And the user selects the enter drug information link for the selected plan in UMS site
+ 
+    | Plan Name | <planName> |
+And the user search for the drug in UMS site
+    | <drugInitials> |
+And the user selects the drug from the dropdown in UMS site
+    | <drugName> |
+When the user selects the following dosage information in UMS site
+    | Drug Dosage    | <drugDosage>    |
+    | Quantity       | <quantity>      |
+    | Drug Frequency | <drugFrequency> |
+    | Packages       | <packages>      |
+And the user selects low cost options for the selected drug in UMS site
+    | Generic Available | <genericAvailable> |
+    | Brand or Generic  | <brand/generic>    |
+When the user search for pharmacies in UMS site
+And the user selects the pharmacy type and distance in UMS site
+    | Pharmacy Type | <pharmacyType> |
+    | Distance      | <distance>     |    
+And the user selects the below pharmacy from the list of pharmacies in UMS site
+    | <pharmacyName> |
+When the user applies changes after selecting drug and pharmacy for plan details in UMS site
+Then the user views plan details for the selected plan in UMS site
+    |<drugCost>|
+ 
+    
+ 
+Examples:
+    | zipcode | county             | plantype | planName                        |drugInitials | drugName      |  drugDosage         | packages                                          | quantity | drugFrequency  | genericAvailable | brand/generic                            | pharmacyType                     | distance   | pharmacyName             |drugCost|
+    | 90210   | Los Angeles County | PDP      |AARP MedicareRx Preferred (PDP)  |lipi         |   Lipitor     |  Lipitor TAB 10MG   | null                                              | 30       | Every 1 month  | yes              | Lipitor TAB 20MG (Qty 40 Every 3 Months) | Preferred Retail Pharmacy        | 15 miles   | Faith Pharmacy           |$3,117.84|
 		 
 
