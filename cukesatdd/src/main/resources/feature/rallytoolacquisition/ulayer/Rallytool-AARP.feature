@@ -4,6 +4,7 @@ Scenario:Verify Rally link from AARP Site Map Page
 Given user navigates to the AARP Site Map Page
 Then user clicks on the Search For a Provider link on AARP Site Map Page and site opens Rally Connect in a new window 
 
+@Q3
 Scenario Outline:Verify Rally link from VPP: MA - Plan Details page
 Given the user is on the AARP Medicareplans Home page
 And user performs plan search using following information in AARP site
