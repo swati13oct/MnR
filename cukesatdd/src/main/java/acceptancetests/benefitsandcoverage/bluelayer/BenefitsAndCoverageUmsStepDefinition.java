@@ -1,10 +1,8 @@
-/**
- * 
- */
 package acceptancetests.benefitsandcoverage.bluelayer;
 
 import gherkin.formatter.model.DataTableRow;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
@@ -15,7 +13,9 @@ import java.util.Set;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.junit.Assert;
+import org.openqa.selenium.Capabilities;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.remote.RemoteWebDriver;
 import org.skyscreamer.jsonassert.JSONAssert;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -142,6 +142,7 @@ public class BenefitsAndCoverageUmsStepDefinition {
 				PlanBenefitsAndCoverageCommonConstants.PLAN_BENEFITS_EXPECTED,
 				benefitsAndCoverageExpectedJson);
 
+
 		/* Actual data */
 		if (benefitsCoveragePage != null) {
 			getLoginScenario().saveBean(
@@ -178,9 +179,89 @@ public class BenefitsAndCoverageUmsStepDefinition {
 		} catch (JSONException e) {
 			e.printStackTrace();
 		}
-
 		benefitsCoveragePage.logOut();
+	}
+	
+	@Given("^the user is on the UHC medicare site login page$")
+	public void uhc_login_page() {
+		WebDriver wd = getLoginScenario().getWebDriver();
+		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
+
+		LoginPage loginPage = new LoginPage(wd);
+		getLoginScenario().saveBean(PageConstants.LOGIN_PAGE, loginPage);
 
 	}
+	
+	@Then("^the user validates plan and member details after login in UHC site$")
+	public void login_validation() {
+		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario()
+				.getBean(PageConstants.ACCOUNT_HOME_PAGE);
+		JSONObject accountHomeActual = (JSONObject) getLoginScenario().getBean(
+				LoginCommonConstants.ACCOUNT_HOME_ACTUAL);
+		JSONObject accountHomeExpected = (JSONObject) getLoginScenario()
+				.getBean(LoginCommonConstants.ACCOUNT_HOME_EXPECTED);
+		System.out.println("accountHomeActual=====>"
+				+ accountHomeActual.toString());
+		System.out.println(accountHomeActual.toString());
+		System.out.println("accountHomeExpected======>"
+				+ accountHomeExpected.toString());		
+		try {
+			JSONAssert.assertEquals(accountHomeExpected, accountHomeActual,
+					true);
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 
+	
+	
+	@Then("^the user validatespdf links after login in UHC site$")
+	public void validate_Pdf_Links() {
+		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario()
+				.getBean(PageConstants.ACCOUNT_HOME_PAGE);
+		BenefitsCoveragePage benefitsCoveragePage = accountHomePage
+				.navigateToBnC();
+
+		JSONObject planDocsPDFActualJson = benefitsCoveragePage
+				.getActualPdfLinksData();
+
+		String fileName = "benefitsandcoverage";
+		String directory = CommonConstants.MEMBER_EXPECTED_DIRECTORY
+				+ File.separator + CommonConstants.SITE_BLUELAYER_MEMBER
+				+ File.separator
+				+ LoginCommonConstants.MEMBER_BENEFITS_AND_COVERAGE
+				+ File.separator;
+		JSONObject benefitsAndCoverageExpextedJson = MRScenario
+				.readExpectedJson(fileName, directory);
+
+		System.out
+				.println("planDocsPDFActualJson---->" + planDocsPDFActualJson);
+
+		System.out.println("planDocsPDFExpectedJson---->"
+				+ benefitsAndCoverageExpextedJson);
+
+		getLoginScenario().saveBean(
+				PageConstants.MEMBER_BENEFITS_AND_COVERAGE_ACTUAL,
+				planDocsPDFActualJson);
+		getLoginScenario().saveBean(
+				PageConstants.MEMBER_BENEFITS_AND_COVERAGE_EXPECTED,
+				benefitsAndCoverageExpextedJson);
+
+	}
+	
+	
+	@Then("^valiadte the actual and expected data of bluelayer benefets and coverage pdfs$")
+	public void member_uhcm_login_validation() {
+		JSONObject planDocsPDFActual = (JSONObject) getLoginScenario().getBean(
+				PageConstants.MEMBER_BENEFITS_AND_COVERAGE_ACTUAL);
+		JSONObject planDocsPDFExpected = (JSONObject) getLoginScenario()
+				.getBean(PageConstants.MEMBER_BENEFITS_AND_COVERAGE_EXPECTED);
+		try {
+			JSONAssert.assertEquals(planDocsPDFActual, planDocsPDFExpected,
+					true);
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}
+	}
 }

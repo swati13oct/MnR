@@ -38,6 +38,8 @@ public class LoginCommonConstants {
 	public static final String MEMBER_BROWSER_CHECK_ACTUAL = "browserCheckActual";
 	
 	public static final String MEMBER_BROWSER_CHECK_EXPECTED = "browserCheckExpected";
+
+	public static final String MEMBER_BENEFITS_AND_COVERAGE = "benefitsandcoverage";
 	
 	
 }

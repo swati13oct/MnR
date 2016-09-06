@@ -124,8 +124,12 @@ public class PageConstants {
 
 	public static final String ESTIMATE_YOUR_DRUG_COST_PAGE = "estimateYourDrugCostPage";	
 
-	public static final String PLAN_COMPARE_DETAILS = "planCompareDetails";	
+	public static final String PLAN_COMPARE_DETAILS = "planCompareDetails";
 	
-	
+	public static final String BENEFITS_AND_COVERAGE = "benefitsAndCoverage";
+
+	public static final String MEMBER_BENEFITS_AND_COVERAGE_ACTUAL = "planDocsPDFActualJson";
+
+	public static final String MEMBER_BENEFITS_AND_COVERAGE_EXPECTED = "planDocsPDFExpectedJson";	
 
 }

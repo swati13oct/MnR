@@ -777,6 +777,7 @@ public class CommonConstants {
 	public static final String ADD_DRUG_ULAYER_PHARMACIES = "pharmacies";
 	
 	public static final String PLAN_DOC_PDF_ACQ_PAGE_DATA = "plandocumentspdf.json";
+	public static final String B_AND_C_PDF_MEMBER_PAGE_DATA = "benefitsandcoveragepdfs.json";
 	
 	public static final String PLAN_PREV_PDF_PAGE_DATA = "planpreviewpdf.json";
 	
