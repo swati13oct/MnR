@@ -218,6 +218,10 @@ public abstract class UhcDriver {
 				element = parentElement.findElements(By.name(elementData
 						.getElementName()));
 
+			} else if (elementData.getIdentifier().equalsIgnoreCase("tagName")) {
+				driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+				element = parentElement.findElements(By.tagName(elementData
+						.getElementName()));
 			}
 			return element;
 		} catch (Exception e) {

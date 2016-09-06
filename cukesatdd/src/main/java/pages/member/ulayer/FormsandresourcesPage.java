@@ -16,6 +16,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
 import acceptancetests.atdd.data.CommonConstants;
+import acceptancetests.atdd.data.ElementData;
 import acceptancetests.atdd.data.PageData;
 import acceptancetests.atdd.util.CommonUtility;
 import atdd.framework.UhcDriver;
@@ -45,6 +46,8 @@ public class FormsandresourcesPage extends UhcDriver {
 	private PageData formsAndResources;
 
 	public JSONObject formsAndResourcesJson;
+
+	private JSONObject planDocPDFsJson;
 	
 
 	public FormsandresourcesPage(WebDriver driver) {
@@ -171,8 +174,45 @@ public class FormsandresourcesPage extends UhcDriver {
 
 	}
 
-
-	
+	public JSONObject clickOnPDF() {
+		String fileName = CommonConstants.FORMS_AND_RESOURCES_PLANMATERIAL_SECTION_PDFS_AARP;
+		planDocsPDF = CommonUtility.readPageData(fileName, CommonConstants.PAGE_OBJECT_DIRECTORY_ULAYER_MEMBER);
+		JSONObject jsonObject = new JSONObject();
+		for (String key : planDocsPDF.getExpectedData().keySet()) {
+			List<WebElement> elements = findElements(planDocsPDF.getExpectedData().get(key));// list of divs
+			JSONArray jsonArray = new JSONArray();
+			for (WebElement element : elements) {
+				ElementData elementData = new ElementData("tagName","p");
+				List<WebElement> pdfSectionList = findChildElements(elementData, element);// list of paragraphs
+				if(pdfSectionList != null) {
+					for (WebElement anchorElement : pdfSectionList) {// iterating paragraphs					
+						if(anchorElement != null) {
+							ElementData anchorElementData = new ElementData("tagName","a");
+							if(findChildElement(anchorElementData, anchorElement) != null) {
+								findChildElement(anchorElementData, anchorElement).click();// final anchorTag
+								try {
+									JSONObject jsonObjectForArray = new JSONObject();
+									jsonObjectForArray.put("pdfName",findChildElement(anchorElementData,anchorElement).getText());
+									jsonArray.put(jsonObjectForArray);
+									} catch (JSONException e) {
+										// TODO Auto-generated catch block
+											e.printStackTrace();
+											}
+								}
+							}
+						}
+					}
+				try {
+					jsonObject.put(key, jsonArray);
+					} catch (JSONException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+					}
+				}
+			}
+		planDocPDFsJson = jsonObject;
+		return planDocPDFsJson;
+		}
 	}
 	
 
