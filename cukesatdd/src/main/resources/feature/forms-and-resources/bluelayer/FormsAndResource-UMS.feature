@@ -28,6 +28,7 @@ Then the user validates pdfs in plan materials section in UMS site
 Examples:
 
 	 | planType | memberType  |
+	 | MA   	|Individual |
 	 |  MA      | Group       |
 	 |  PDP     | Group       |
 	 |  SSRD    | Group       |
