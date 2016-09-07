@@ -15,6 +15,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
 import acceptancetests.atdd.data.CommonConstants;
+import acceptancetests.atdd.data.ElementData;
 import acceptancetests.atdd.data.PageData;
 import acceptancetests.atdd.util.CommonUtility;
 import atdd.framework.UhcDriver;
@@ -35,6 +36,9 @@ public class PlanBenefitsCoveragePage extends UhcDriver {
 	
 	public JSONObject planBenefitsCoverageJson;
 	
+	private PageData planDocsPDF;
+	
+	public JSONObject planDocPDFAcqJson;
 	
 
     public PlanBenefitsCoveragePage(WebDriver driver) {
@@ -111,5 +115,32 @@ public class PlanBenefitsCoveragePage extends UhcDriver {
 			return benefitsExpectedJson;
 			
 	}
-	
+	public JSONObject getActualPdfLinksData() {
+		String fileName = CommonConstants.B_AND_C_PDF_MEMBER_PAGE_DATA;
+		planDocsPDF = CommonUtility.readPageData(fileName, CommonConstants.PAGE_OBJECT_DIRECTORY_ULAYER_MEMBER);		
+		JSONObject jsonObject = new JSONObject();
+		for (String key : planDocsPDF.getExpectedData().keySet()) {
+			List<WebElement> elements = findElements(planDocsPDF.getExpectedData()
+					.get(key));
+			JSONArray jsonArray = new JSONArray();
+			for (WebElement element : elements) {
+				ElementData elementData = new ElementData("tagName", "a");
+				findChildElement(elementData, element).click();
+					try {
+						JSONObject jsonObjectForArray = new JSONObject();
+						jsonObjectForArray.put("pdfName", element.getText());
+						jsonArray.put(jsonObjectForArray);
+					} catch (JSONException e) {
+						e.printStackTrace();
+					}
+			}
+			try {
+				jsonObject.put(key, jsonArray);
+			} catch (JSONException e) {
+				e.printStackTrace();
+			}
+		}
+		planDocPDFAcqJson = jsonObject;
+		return planDocPDFAcqJson;
+	}
 }

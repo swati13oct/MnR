@@ -6,6 +6,7 @@ package acceptancetests.benefitsandcoverage.ulayer;
 
 import gherkin.formatter.model.DataTableRow;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
@@ -20,6 +21,7 @@ import org.openqa.selenium.WebDriver;
 import org.skyscreamer.jsonassert.JSONAssert;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import pages.member.bluelayer.BenefitsCoveragePage;
 import pages.member.ulayer.AccountHomePage;
 import pages.member.ulayer.LoginPage;
 import pages.member.ulayer.PlanBenefitsCoveragePage;
@@ -150,7 +152,91 @@ public class PlanBenefitsAndCoverageAarpStepDefinition {
 		}
 		bncPage.logOut();
 	}
+	
+	
+	
+	@Given("^the user is on the AARP medicare site login page$")
+	public void uhc_login_page() {
+		WebDriver wd = getLoginScenario().getWebDriver();
+		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
 
+		LoginPage loginPage = new LoginPage(wd);
+		getLoginScenario().saveBean(PageConstants.LOGIN_PAGE, loginPage);
+
+	}
+	
+	@Then("^the user validates plan and member details after login in AARP site$")
+	public void login_validation() {
+		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario()
+				.getBean(PageConstants.ACCOUNT_HOME_PAGE);
+		JSONObject accountHomeActual = (JSONObject) getLoginScenario().getBean(
+				LoginCommonConstants.ACCOUNT_HOME_ACTUAL);
+		JSONObject accountHomeExpected = (JSONObject) getLoginScenario()
+				.getBean(LoginCommonConstants.ACCOUNT_HOME_EXPECTED);
+		System.out.println("accountHomeActual=====>"
+				+ accountHomeActual.toString());
+		System.out.println(accountHomeActual.toString());
+		System.out.println("accountHomeExpected======>"
+				+ accountHomeExpected.toString());		
+		try {
+			JSONAssert.assertEquals(accountHomeExpected, accountHomeActual,
+					true);
+		} catch (JSONException e) {			
+			e.printStackTrace();
+		}
+	}
+
+	
+	
+	@Then("^the user validatespdf links after login in AARP site$")
+	public void validate_Pdf_Links() {
+		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario()
+				.getBean(PageConstants.ACCOUNT_HOME_PAGE);
+		PlanBenefitsCoveragePage benefitsCoveragePage = accountHomePage
+				.navigateToBnC();
+
+		JSONObject planDocsPDFActualJson = benefitsCoveragePage
+				.getActualPdfLinksData();
+
+		String fileName = "benefitsandcoverage";
+		String directory = CommonConstants.MEMBER_EXPECTED_DIRECTORY
+				+ File.separator + CommonConstants.SITE_ULAYER
+				+ File.separator
+				+ LoginCommonConstants.MEMBER_BENEFITS_AND_COVERAGE
+				+ File.separator;
+		JSONObject benefitsAndCoverageExpextedJson = MRScenario
+				.readExpectedJson(fileName, directory);
+
+		System.out
+				.println("planDocsPDFActualJson---->" + planDocsPDFActualJson);
+
+		System.out.println("planDocsPDFExpectedJson---->"
+				+ benefitsAndCoverageExpextedJson);
+
+		getLoginScenario().saveBean(
+				PageConstants.MEMBER_BENEFITS_AND_COVERAGE_ACTUAL,
+				planDocsPDFActualJson);
+		getLoginScenario().saveBean(
+				PageConstants.MEMBER_BENEFITS_AND_COVERAGE_EXPECTED,
+				benefitsAndCoverageExpextedJson);
+
+	}
+	
+	
+	@Then("^valiadte the actual and expected data of ulayer benefets and coverage pdfs$")
+	public void member_uhcm_login_validation() {
+		JSONObject planDocsPDFActual = (JSONObject) getLoginScenario().getBean(
+				PageConstants.MEMBER_BENEFITS_AND_COVERAGE_ACTUAL);
+		JSONObject planDocsPDFExpected = (JSONObject) getLoginScenario()
+				.getBean(PageConstants.MEMBER_BENEFITS_AND_COVERAGE_EXPECTED);
+		try {
+			JSONAssert.assertEquals(planDocsPDFActual, planDocsPDFExpected,
+					true);
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}
+	}
+	
 	@After
 	public void tearDown() {
 
