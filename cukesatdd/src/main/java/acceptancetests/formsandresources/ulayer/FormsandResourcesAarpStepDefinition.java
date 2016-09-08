@@ -26,6 +26,7 @@ import acceptancetests.login.data.LoginCommonConstants;
 import acceptancetests.vpp.data.VPPCommonConstants;
 import atdd.framework.MRScenario;
 import cucumber.annotation.After;
+import cucumber.annotation.en.And;
 import cucumber.annotation.en.Given;
 import cucumber.annotation.en.Then;
 import cucumber.annotation.en.When;
@@ -157,7 +158,7 @@ public class FormsandResourcesAarpStepDefinition {
 			e.printStackTrace();
 		}
 
-		formsandresourcesAarpPage.logOut();
+		//formsandresourcesAarpPage.logOut();
 
 	}
 	
@@ -184,6 +185,13 @@ public class FormsandResourcesAarpStepDefinition {
 			e.printStackTrace();
 		}
 		
+	}
+	
+	@And("^the user click on pdf links$")
+	public void user_click_on_pdf_links() {
+		FormsandresourcesPage formsandresourcesAarpPage = (FormsandresourcesPage) getLoginScenario().getBean(PageConstants.FORMS_AND_RESOURCES_PAGE);
+		formsandresourcesAarpPage.clickOnPDF();
+		formsandresourcesAarpPage.logOut();
 	}
 	@After
 	public void tearDown() {

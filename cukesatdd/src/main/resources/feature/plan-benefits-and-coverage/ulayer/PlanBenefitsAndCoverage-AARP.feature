@@ -301,3 +301,20 @@ Examples:
 #		| MA      |  riderAvailable       |
 		
 		
+		
+		 # The below scenario to cover validate pdfs links section after in member area  
+  Scenario Outline: To verify login in AARP site
+    Given the user is on the AARP medicare site login page
+    When registered AARP with following details for plan benefits and coverage flow in AARP site
+      | Plan Type   | <planType>   |
+      | Member Type | <memberType> |    
+    Then the user validatespdf links after login in AARP site
+    
+    Then valiadte the actual and expected data of ulayer benefets and coverage pdfs
+    Examples: 
+      | planType | memberType |
+      #| MA       | Individual |
+      #	| MA       | Group      |
+      #| MAPD     | Individual |
+      | PDP     | Individual |
+		

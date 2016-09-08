@@ -6,6 +6,7 @@ package pages.member.bluelayer;
 import java.util.List;
 import java.util.Map;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.openqa.selenium.By;
@@ -15,6 +16,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
 import acceptancetests.atdd.data.CommonConstants;
+import acceptancetests.atdd.data.ElementData;
 import acceptancetests.atdd.data.PageData;
 import acceptancetests.atdd.util.CommonUtility;
 import atdd.framework.UhcDriver;
@@ -46,6 +48,10 @@ public class FormsandresourcesPage extends UhcDriver {
 	private PageData formsAndResources;
 
 	public JSONObject formsAndResourcesJson;
+
+	private PageData planDocsPDF;
+
+	private JSONObject planDocPDFsJson;
 
 	public FormsandresourcesPage(WebDriver driver) {
 		super(driver);
@@ -121,45 +127,53 @@ public class FormsandresourcesPage extends UhcDriver {
 
 	}
 
-	public void clickOnPDF() {
+	public JSONObject clickOnPlanMaterialPdfs() {
 		// TODO Auto-generated method stub
-		//PDF1.click();
-		//input[starts-with(@id,'reportcombo')
-		//List<WebElement> links = driver.findElements(By.xpath("//div[@id='_content_campaigns_uhcm_formsresources-plandocs-main_group_jcr_content_par_borderedtitledescrip_subContent_teaser']"));
-		
-		WebElement links1 = driver.findElement(By.xpath("//*[contains(text(),'Plan Materials')]"));
-		if(links1.isDisplayed()){
-		//List<WebElement> links = links1.findElements(By.xpath("//div/p/a"));
-		List<WebElement> links = links1.findElements(By.xpath("//div[@class = 'parbase section formsresources']//p/a"));
-		//List<WebElement> links = driver.findElements(By.xpath("//div[starts-with(@id,'pdflinks')]"));
-		int linkcount = links.size(); 
-		System.out.println(links.size()); 
-		for(WebElement myElement :  links){
-			//WebElement myElement =  links.get(i);
-			//WebElement myElement1 = myElement.findElement(By.xpath("//div/p/a"));
-			//String a = myElement1.toString();
-			String link = myElement.getText(); 
-			System.out.println(link);
-			System.out.println(myElement);   
-			if (link !=""){
-				myElement.click();
-				try {
-					Thread.sleep(20000);
-				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
+				String fileName = CommonConstants.FORMS_AND_RESOURCES_PLANMATERIAL_SECTION_PDFS;
+				planDocsPDF = CommonUtility.readPageData(fileName, CommonConstants.PAGE_OBJECT_DIRECTORY_BLUELAYER_MEMBER);		
+				JSONObject jsonObject = new JSONObject();
 				
-				driver.findElement(By.xpath("//*[@id='proceed']")).click();
-				driver.switchTo().defaultContent();
-				
-				System.out.println("Opened the PDF");
-			}
-		}
-		}
-		else{
-			System.out.println("Plan Materials section is not displayed");
-		}
+				for (String key : planDocsPDF.getExpectedData().keySet()) {
+					 /* planmaterial section list of dives*/
+					List<WebElement> elements = findElements(planDocsPDF.getExpectedData().get(key));
+					JSONArray jsonArray = new JSONArray();
+					for (WebElement element : elements) {
+						ElementData elementData = new ElementData("tagName","p");
+						System.out.println("elementData::"+elementData);
+							/* list of paragraphs*/
+						List<WebElement> pdfSectionList = findChildElements(
+								elementData, element);
+						if(pdfSectionList != null) {
+								/*iterating paragraphs*/
+							for (WebElement anchorElement : pdfSectionList) {					
+								if(anchorElement != null  ) {				
+									ElementData anchorElementData = new ElementData("tagName","a");
+										if(findChildElement(anchorElementData, anchorElement) != null){
+												/*final anchorTag*/
+											findChildElement(anchorElementData, anchorElement).click();
+										
+												try {
+													JSONObject jsonObjectForArray = new JSONObject();
+													jsonObjectForArray.put("pdfName",findChildElement(anchorElementData,anchorElement).getText());
+													jsonArray.put(jsonObjectForArray);
+													} catch (JSONException e) {
+												// TODO Auto-generated catch block
+													e.printStackTrace();
+													}
+												}
+										}
+								}
+							}
+						try {
+							jsonObject.put(key, jsonArray);
+							} catch (JSONException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+							}
+						}
+					}
+				planDocPDFsJson = jsonObject;
+				return planDocPDFsJson;
 
 	}
 }

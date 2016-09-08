@@ -257,7 +257,7 @@ public class FormsandResourcesUmsStepDefinition {
 				.getBean(PageConstants.FORMS_AND_RESOURCES_PAGE);
 
 
-		formsAndResourcesPage.clickOnPDF();
+		formsAndResourcesPage.clickOnPlanMaterialPdfs();
 		formsAndResourcesPage.logOut();
 
 

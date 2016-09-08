@@ -232,7 +232,7 @@ Then the user validates plan benefits and coverage details in UMS site
 Examples:
 		   | isUsOtherTerritories   |
   #        | usOtherTerrirtories    |
-           | nonUsOtherTerrirtories |
+  #         | nonUsOtherTerrirtories |
 
 
 
@@ -420,3 +420,20 @@ Examples:
 		   | riderAvailableCheck |
    #                | riderAvailable       |
     #               | riderNotAvailable    |
+    
+     
+    
+  # The below scenario to cover validate pdfs links section after in member area  
+  Scenario Outline: To verify login in UHC site
+    Given the user is on the UHC medicare site login page
+    When registered UHC with following details for plan benefits and coverage flow in UMS site
+      | Plan Type   | <planType>   |
+      | Member Type | <memberType> |    
+    Then the user validatespdf links after login in UHC site
+    
+    Then valiadte the actual and expected data of bluelayer benefets and coverage pdfs
+    Examples: 
+      | planType | memberType |
+      | MA       | Individual |
+      #	| MA       | Group      |
+      #| MAPD     | Individual |
