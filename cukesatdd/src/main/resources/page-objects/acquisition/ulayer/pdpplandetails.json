@@ -5,6 +5,10 @@
 "identifier":"className",
 "elementName":"detailplanNameBg"
 },
+"marketingBullets":{
+"identifier":"id",
+"elementName":"marketingDescPDP"
+},
 "monthlyPremiumLink":{
 "identifier":"id",
 "elementName":"premiumInclude"

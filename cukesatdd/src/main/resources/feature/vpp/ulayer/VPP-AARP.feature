@@ -236,11 +236,25 @@ When the user applies changes after selecting drug and pharmacy in AARP site
 Then the user views plan details for the selected plan in AARP site
     |<drugCost>|
 
-	
-
 Examples:
 	| zipcode | county             | plantype | planName 					    |drugInitials | drugName      |  drugDosage	        | packages                                          | quantity | drugFrequency  | genericAvailable | brand/generic                            | pharmacyType	 	 		     | distance   | pharmacyName             |drugCost|
 	| 90210   | Los Angeles County | PDP      |AARP MedicareRx Preferred (PDP)  |lipi	      |   Lipitor     |  Lipitor TAB 10MG   | null                                              | 30       | Every 1 month  | yes              | Lipitor TAB 20MG (Qty 40 Every 3 Months) | Preferred Retail Pharmacy        | 15 miles   | Faith Pharmacy           |$3,117.84|
-	
-	
+
+Scenario Outline: Verify pdp marketing bullets for new plans added under pdp for AEP
+Given the user is on the AARP medicare site landing page
+When the user performs plan search using following information in AARP site during AEP period
+	| Zip Code    | <zipcode> |
+	| County Name | <county>  |
+Then user validates plan count for all plan types on plan summary page in AARP site
+When the user views plans of the below plan type in AARP site during AEP
+	| Plan Type | <plantype> |
+Then the user validates the available plans for selected plan types in AARP site
+And the user validates the plan summary for the below plan in AARP site during AEP
+	| Plan Name | <planName> |
+When the user view plan details of the above selected plan in AARP site during AEP 
+Then the user validates the details of the selected plan in AARP site
+Examples:
+	| zipcode |county     |plantype|planName|
+	| 60646   |Cook County|PDP		 |AARP MedicareRx Walgreens (PDP)|
+
 
