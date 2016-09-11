@@ -87,6 +87,15 @@ public class AccountHomePage extends UhcDriver {
 	
 	@FindBy(xpath = "//div[@id='medicareTitle']/h1")
 	private WebElement pharmacyLocatorHeading;
+	
+	@FindBy(xpath = "//*[@id='medicareTitle']/a[1]")
+	private WebElement espanolLink;
+	
+	@FindBy(xpath = "//*[@id='medicareTitle']/a[2]")   //Story 261070
+	private WebElement chineseLink;
+	
+	@FindBy(xpath = "//*[@id='subPageLeft']/div[2]/div[2]/div[2]/div/h3[2]/a")
+	private WebElement createPdfLink;
 
 	
 	
@@ -209,6 +218,19 @@ public class AccountHomePage extends UhcDriver {
 		}
 		return null;
 	}
+	
+	public PharmacySearchPage navigateNonEnglishContent() {   //STORY 261070
+
+		espanolLink.click();
+		chineseLink.click();
+		createPdfLink.click();
+		if (driver.getTitle().equalsIgnoreCase(
+				"AARP Medicare Plans | Pharmacy Directory")) {
+			return new PharmacySearchPage(driver);
+		}
+		return null;
+	}
+
 
 	public DrugCostandBenefitSummaryPage navigateToPrescriptionDrugCostPage() {
 

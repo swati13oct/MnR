@@ -60,6 +60,15 @@ public class PharmacySearchPage extends UhcDriver{
 
 	@FindBy(xpath = "//ul[@id='pharm_services']/li/span")
 	private WebElement toolTip;
+	
+	@FindBy(xpath = "//*[@id='medicareTitle']/a[1]")
+	private WebElement espanolLink;
+	
+	@FindBy(xpath = "//*[@id='medicareTitle']/a[2]")   //Story 261070
+	private WebElement chineseLink;
+	
+	@FindBy(xpath = "//*[@id='subPageLeft']/div[2]/div[2]/div[2]/div/h3[2]/a")
+	private WebElement createPdfLink;
 
 	public PharmacySearchPage(WebDriver driver){
 		super(driver);
@@ -166,6 +175,9 @@ public class PharmacySearchPage extends UhcDriver{
 		validate(continueField);
 		validate(planNameDropDown);
 		validate(searchPharmaciesButton);	
+		validate(espanolLink);
+		validate(chineseLink);
+		validate(createPdfLink); 
 	}
 
 	public PharmacySearchPage enterZipDistanceDetails(
@@ -243,6 +255,23 @@ public class PharmacySearchPage extends UhcDriver{
 		//else{
 			//System.out.println("Pharmacy type mismatch. Expected----->"+pharmacyType+"----But got----->"+pharmacyTypeText);
 		//}
+		return new PharmacySearchPage(driver);
+	}
+	public PharmacySearchPage clickEspanol(){
+		espanolLink.click();
+		System.out.println("Espanol language selected:");
+		return new PharmacySearchPage(driver);
+	}
+	
+	public PharmacySearchPage clickChinese(){
+		chineseLink.click();
+		System.out.println("Chinese language selected");   //Story 261070
+		return new PharmacySearchPage(driver);
+	}
+	
+	public PharmacySearchPage clickCreatePdf(){
+		createPdfLink.click();
+		System.out.println("CreatePdf clicked");
 		return new PharmacySearchPage(driver);
 	}
 

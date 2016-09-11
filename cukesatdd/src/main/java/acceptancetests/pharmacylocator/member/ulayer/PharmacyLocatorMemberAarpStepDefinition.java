@@ -205,7 +205,7 @@ public class PharmacyLocatorMemberAarpStepDefinition {
 
 	@And("^the user enters zipcode and distance details for AARP Site$")
 	public void user_enters_zipcode_distance_details_aarp(
-			DataTable zipAttributes) {
+			DataTable zipAttributes) {			
 		List<DataTableRow> zipAttributesRow = zipAttributes.getGherkinRows();
 		Map<String, String> zipAttributesMap = new LinkedHashMap<String, String>();
 		for (int i = 0; i < zipAttributesRow.size(); i++) {
@@ -227,17 +227,45 @@ public class PharmacyLocatorMemberAarpStepDefinition {
 		}
 
 	}
+	
+	@And("^the user clicks chineseLink in AARP Site$")
+	public void click_chinese() {
+		PharmacySearchPage pharmacySearchAarpPage = (PharmacySearchPage) getLoginScenario()
+				.getBean(PageConstants.PHARMACY_SEARCH_PAGE);
+		pharmacySearchAarpPage = pharmacySearchAarpPage.clickChinese();
+		if (pharmacySearchAarpPage != null) {
+			getLoginScenario().saveBean(PageConstants.PHARMACY_SEARCH_PAGE, pharmacySearchAarpPage);
+			Assert.assertTrue(true);
+		} else {
+			Assert.fail("Failed to load Pharmacy search page");
+		}
+	}
+	
+	@And("^the user clicks espanolLink in AARP Site$")
+	public void click_espanol() {
+		PharmacySearchPage pharmacySearchAarpPage = (PharmacySearchPage) getLoginScenario()
+				.getBean(PageConstants.PHARMACY_SEARCH_PAGE);
+		pharmacySearchAarpPage = pharmacySearchAarpPage.clickEspanol();
+		if (pharmacySearchAarpPage != null) {
+			getLoginScenario().saveBean(PageConstants.PHARMACY_SEARCH_PAGE, pharmacySearchAarpPage);
+			Assert.assertTrue(true);
+		} else {
+			Assert.fail("Failed to load Pharmacy search page");
+		}
+	}
 
 	@And("^the user chooses a plan from dropdown in AARP site$")
 	public void user_chooses_plan_dropdown_aarp(DataTable planAttributes) {
 		List<DataTableRow> planAttributesRow = planAttributes.getGherkinRows();
-		String planName = planAttributesRow.get(0).getCells().get(0);
+		String planName = planAttributesRow.get(0).getCells().get(1);
 
 		PharmacySearchPage pharmacySearchAarpPage = (PharmacySearchPage) getLoginScenario()
 				.getBean("pharmacySearchAarpPage");
 		pharmacySearchAarpPage = pharmacySearchAarpPage
 				.selectsPlanName(planName);
-
+		
+		PharmacyResultPage pharmacyResultPage = pharmacySearchAarpPage.searchesPharmacy();
+		
 		if (pharmacySearchAarpPage != null) {
 			getLoginScenario().saveBean("pharmacySearchAarpPage",
 					pharmacySearchAarpPage);
@@ -247,6 +275,15 @@ public class PharmacyLocatorMemberAarpStepDefinition {
 		}
 		getLoginScenario().saveBean(PageConstants.PHARMACY_SEARCH_PAGE,
 				pharmacySearchAarpPage);
+	}
+	
+	@And("^the user clicks create pdf in AARP Site$")
+	public void click_create_pdf() {
+		PharmacySearchPage pharmacySearchAarpPage = (PharmacySearchPage) getLoginScenario()
+				.getBean(PageConstants.PHARMACY_SEARCH_PAGE);
+		//PharmacyResultPage pharmacyResultPage = pharmacySearchAarpPage.searchesPharmacy();
+		pharmacySearchAarpPage.clickCreatePdf();
+		System.out.println("Create Pdf clicked");
 	}
 	
 	@And("^the user chooses the year and a plan from dropdown in AARP site$")
