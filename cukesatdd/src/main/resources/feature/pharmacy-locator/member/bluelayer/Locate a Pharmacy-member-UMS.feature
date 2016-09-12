@@ -22,12 +22,37 @@ Given registered member to verify locate a pharmacy in UMS Site
 	| Plan Type    | <plantype>   |
 	| Member Type  | <memberType> |
 When the user navigates to pharmacy search page in UMS site
+And the user clicks chineseLink in UMS Site 
 And the user search pharmacies using the below information in UMS site
-    | Zip Code    | <zipCode>   |
-	| Distance    | <distance>  |
-	| County      | <countyName>|
+    | Zip Code    | 90201   |
+	| Distance    | 25 |
+	| County      | |
 And the user chooses a plan from dropdown in UMS site
-	| <planName>  |	
+	| planName | AARP MedicareRx Walgreens (PDP)|
+     
+And the user clicks create pdf in AARP Site
+And the user searches for pharmacies available in UMS site
+Then the user validates the pharmacies available in UMS site
+Examples:
+  | plantype | memberType  | zipCode     | distance | countyName        | planName 		           	           | 
+# | MA       | 		 | 80002       | 2        | Adams County      | AARP MedicareComplete SecureHorizons Plan 1 (HMO)  | 
+# | MAPD     | 		 | 78006       | 2        | Bexar County      | AARP MedicareRx Preferred (PDP)                    | 
+# | MAPD     | Group     | 80002       | 2        | Adams County      | AARP MedicareComplete SecureHorizons Plan 2 (HMO)  | | 
+  | PDP      | Group	 | 78006       | 25       | Bexar County      | UnitedHealthcare MedicareRx for Groups (PDP)       | 
+  
+Scenario Outline:To verify espanol contents and create pdf links
+Given registered member to verify locate a pharmacy in UMS Site
+	| Plan Type    | <plantype>   |
+	| Member Type  | <memberType> |
+When the user navigates to pharmacy search page in UMS site
+And the user clicks espanolLink in UMS Site
+And the user search pharmacies using the below information in UMS site
+    | Zip Code    | 90201   |
+	| Distance    | 25 |
+	| County      | |
+And the user chooses a plan from dropdown in UMS site
+	| planName  | AARP MedicareRx Walgreens (PDP)|
+And the user clicks create pdf in AARP Site
 And the user searches for pharmacies available in UMS site
 Then the user validates the pharmacies available in UMS site
 
@@ -35,7 +60,7 @@ Examples:
   | plantype | memberType  | zipCode     | distance | countyName        | planName 		           	           | 
 # | MA       | 		 | 80002       | 2        | Adams County      | AARP MedicareComplete SecureHorizons Plan 1 (HMO)  | 
 # | MAPD     | 		 | 78006       | 2        | Bexar County      | AARP MedicareRx Preferred (PDP)                    | 
-# | MAPD     | Group     | 80002       | 2        | Adams County      | AARP MedicareComplete SecureHorizons Plan 2 (HMO)  | 
+# | MAPD     | Group     | 80002       | 2        | Adams County      | AARP MedicareComplete SecureHorizons Plan 2 (HMO)  | | 
   | PDP      | Group	 | 78006       | 25       | Bexar County      | UnitedHealthcare MedicareRx for Groups (PDP)       | 
 
 Scenario Outline:To verify pharmacies displayed for default zipcode in Locate a Pharmacy in UMS site

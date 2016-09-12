@@ -67,6 +67,14 @@ public class PharmacySearchPage extends UhcDriver {
 
 	@FindBy(id = "services")
 	private WebElement pharmacyTypeSelectionRadioButton;
+	@FindBy(xpath = "//*[@id='medicareTitle']/a[1]")
+	private WebElement espanolLink;
+	
+	@FindBy(xpath = "//*[@id='medicareTitle']/a[2]")       //Story 261070
+	private WebElement chineseLink;
+	
+	@FindBy(xpath = "//*[@id='subPageLeft']/div[2]/div[2]/div[2]/div/h3[2]/a")
+	private WebElement createPdfLink;
 	
 	public String county = null;
 
@@ -157,11 +165,30 @@ public class PharmacySearchPage extends UhcDriver {
 		return null;
 
 	}
+	public PharmacySearchPage clickEspanol(){
+		espanolLink.click();
+		return new PharmacySearchPage(driver);
+	}
+	
+	public PharmacySearchPage clickChinese(){
+		chineseLink.click();
+		   //Story 261070
+		return new PharmacySearchPage(driver);
+	}
+	
+	public PharmacySearchPage clickCreatePdf(){
+		createPdfLink.click();
+		System.out.println("CreatePdf clicked");
+		return new PharmacySearchPage(driver);
+	}
 
 	@Override
 	public void openAndValidate() {
 		validate(continueField);
 		validate(searchPharmaciesButton);
+		validate(espanolLink);
+		validate(chineseLink);
+		validate(createPdfLink); 
 	}
 
 	public String getExpectedKey(String[] pharmacyTypeArray) {

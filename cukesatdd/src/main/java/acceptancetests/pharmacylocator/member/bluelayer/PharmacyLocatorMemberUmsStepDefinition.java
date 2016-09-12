@@ -167,18 +167,11 @@ public class PharmacyLocatorMemberUmsStepDefinition {
 		}
 
 	}
-	
-	@And("the user chooses a plan from dropdown in UMS site")
-	public void user_chooses_plan_dropdown_ums_site(DataTable planAttributes)
-	{
-		List<DataTableRow> planAttributesRow = planAttributes.getGherkinRows();
-		String planName = planAttributesRow.get(0).getCells().get(0);
-
+	@And("^the user clicks espanolLink in UMS Site$")
+	public void click_espanol() {
 		PharmacySearchPage pharmacySearchPage = (PharmacySearchPage) getLoginScenario()
 				.getBean(PageConstants.PHARMACY_SEARCH_PAGE);
-		
-		pharmacySearchPage = pharmacySearchPage
-				.selectsPlanName(planName);
+		pharmacySearchPage = pharmacySearchPage.clickEspanol();   //story 261070
 		if (pharmacySearchPage != null) {
 			getLoginScenario().saveBean(PageConstants.PHARMACY_SEARCH_PAGE,
 					pharmacySearchPage);
@@ -187,6 +180,52 @@ public class PharmacyLocatorMemberUmsStepDefinition {
 			Assert.fail("Failed to load Pharmacy search page");
 		}
 	}
+	
+	@And("^the user clicks chineseLink in UMS Site$")
+	public void click_chinese() {
+
+		PharmacySearchPage pharmacySearchPage = (PharmacySearchPage) getLoginScenario()
+				.getBean(PageConstants.PHARMACY_SEARCH_PAGE);
+		pharmacySearchPage = pharmacySearchPage.clickChinese();
+		if (pharmacySearchPage != null) {
+			getLoginScenario().saveBean(PageConstants.PHARMACY_SEARCH_PAGE,
+					pharmacySearchPage);
+			Assert.assertTrue(true);
+		} else {
+			Assert.fail("Failed to load Pharmacy search page");
+		}
+		
+	}
+
+	@And("the user chooses a plan from dropdown in UMS site")
+	public void user_chooses_plan_dropdown_ums_site(DataTable planAttributes)
+	{
+		List<DataTableRow> planAttributesRow = planAttributes.getGherkinRows();
+		String planName = planAttributesRow.get(0).getCells().get(3);
+
+		PharmacySearchPage pharmacySearchPage = (PharmacySearchPage) getLoginScenario()
+				.getBean(PageConstants.PHARMACY_SEARCH_PAGE);
+		
+		pharmacySearchPage = pharmacySearchPage
+				.selectsPlanName(planName);
+		PharmacyResultPage pharmacyResultPage = pharmacySearchPage
+				.searchesPharmacy();
+		if (pharmacySearchPage != null) {
+			getLoginScenario().saveBean(PageConstants.PHARMACY_SEARCH_PAGE,
+					pharmacySearchPage);
+			Assert.assertTrue(true);
+		} else {
+			Assert.fail("Failed to load Pharmacy search page");
+		}
+	}
+	
+	@And("^the user clicks create pdf  in UMS Site$")
+	public void click_create_pdf() {
+		PharmacySearchPage pharmacySearchPage = (PharmacySearchPage) getLoginScenario()
+				.getBean(PageConstants.PHARMACY_SEARCH_PAGE);
+		pharmacySearchPage = pharmacySearchPage.clickCreatePdf();
+	}
+	
 
 	@And("^the user searches for pharmacies available in UMS site$")
 	public void user_pharmacy_available_aarp() {
