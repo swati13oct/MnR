@@ -1,7 +1,7 @@
 /**
  * 
  */
-package atdd.mobile.runners;
+package atdd.mobile.runners.ulayer;
 
 import org.junit.runner.RunWith;
 

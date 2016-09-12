@@ -47,7 +47,7 @@ public class BenefitsSummaryPage extends UhcDriver {
 		PageFactory.initElements(driver, this);
 		String fileName = CommonConstants.BENEFITS_SUMMARY_PAGE_DATA;
 		benefitsSummary = CommonUtility.readPageData(fileName,
-				CommonConstants.PAGE_OBJECT_DIRECTORY_MOBILE_ULAYER_MEMBER);
+				CommonConstants.PAGE_OBJECT_DIRECTORY_MOBILE_BLUELAYER_MEMBER);
 		openAndValidate();
 	}
 
@@ -99,7 +99,7 @@ public class BenefitsSummaryPage extends UhcDriver {
 
 	public JSONObject getExpectedData(Map<String, JSONObject> expectedDataMap) {
 		JSONObject benefitsSummaryExpectedJson = expectedDataMap
-				.get(acceptancetests.atdd.data.CommonConstants.BENEFITS_SUMMARY);
+				.get(acceptancetests.atdd.data.CommonConstants.BENEFITS_SUMMARY_BLAYER);
 		
 		return benefitsSummaryExpectedJson;
 	}

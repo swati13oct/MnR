@@ -165,7 +165,12 @@ public class CommonConstants {
 	public static final String BENEFITS_SUMMARY_DIRECTORY = "/jsonresponse/mobile/member/ulayer/benefits-summary/";
 
 	public static final String BENEFITS_SUMMARY = "benefitssummary";
-
+	
+	public static final String BENEFITS_SUMMARY_BLAYER="benefitssummary";
+	
+	public static final String BENEFITS_SUMMARY_DIRECTORY_BLAYER = "/jsonresponse/mobile/member/bluelayer/benefits-summary/";
+	
+	
 	public static final String GLOBAL_DIRECTORY = "/jsonresponse/member/ulayer/global/";
 
 	public static final String GLOBAL = "global";
@@ -321,7 +326,9 @@ public class CommonConstants {
 			new Page(CommonConstants.REGISTRATION_SUCCESS,
 					CommonConstants.REGISTRATION_SUCCESS_BLUELAYER_DIRECTORY),
 			new Page(CommonConstants.ADD_PLAN_CONFIRMATION,
-					CommonConstants.ADD_PLAN_CONFIRMATION_BLUELAYER_DIRECTORY)
+					CommonConstants.ADD_PLAN_CONFIRMATION_BLUELAYER_DIRECTORY),
+			new Page(CommonConstants.BENEFITS_SUMMARY_BLAYER,
+					CommonConstants.BENEFITS_SUMMARY_DIRECTORY_BLAYER),
 			};
 
 	public static final String PAGE_OBJECT_DIRECTORY_BLUELAYER_MEMBER = "/page-objects/member/bluelayer/";
@@ -775,6 +782,7 @@ public class CommonConstants {
 	public static final String ADD_DRUG_ULAYER_PHARMACIES = "pharmacies";
 	
 	public static final String PLAN_DOC_PDF_ACQ_PAGE_DATA = "plandocumentspdf.json";
+
 	
 
 	
