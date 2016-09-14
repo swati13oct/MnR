@@ -31,7 +31,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	@FindBy(xpath = "//div[@class='maplans_planbutton']/div[2]/div[2]/div")
 	private WebElement showMaPlans;
 
-	@FindBy(className = "planinf")
+	@FindBy(xpath = "//div[@class='planValues']")
 	private WebElement vppplansummarypage;
 
 	@FindBy(xpath = "//div[@class='medsupplans_planbutton']/div[2]/div/a")
@@ -46,7 +46,6 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	@FindBy(xpath = "//div[@class='disabledprint ng-scope']")
 	List<WebElement> pdpPlanElement;
 	
-	//@FindBy(xpath = "//div[@id='chooseplan']/div/div/h3")
 	@FindBy(id = "medicalinsursectionheading")
 	private WebElement pageHeading;
 
@@ -117,8 +116,11 @@ public class VPPPlanSummaryPage extends UhcDriver {
 
 	public VPPPlanSummaryPage(WebDriver driver) {
 		super(driver);
+		
 		PageFactory.initElements(driver, this);
+		
 		CommonUtility.waitForPageLoad(driver, vppplansummarypage, CommonConstants.TIMEOUT_30);
+		
 		String fileName = CommonConstants.VPP_PLAN_SUMMARY_PAGE_DATA;
 		vppPlanSummary = CommonUtility.readPageData(fileName,
 				CommonConstants.PAGE_OBJECT_DIRECTORY_ULAYER_ACQ);
@@ -209,7 +211,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 			if (elements.size() == 1) {
 				if (validate(elements.get(0))) {
 					try {
-						jsonObject.put(key, elements.get(0).getText());
+						jsonObject.put(key, elements.get(0).getText().trim());
 					} catch (JSONException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
@@ -224,7 +226,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 							JSONObject jsonObjectForArray = new JSONObject();
 							jsonObjectForArray.put(vppPlanSummary
 									.getExpectedData().get(key)
-									.getElementName(), element.getText());
+									.getElementName(), element.getText().trim());
 							jsonArray.put(jsonObjectForArray);
 						} catch (JSONException e) {
 							// TODO Auto-generated catch block

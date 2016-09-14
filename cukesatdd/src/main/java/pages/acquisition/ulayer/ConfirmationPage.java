@@ -63,18 +63,29 @@ public class ConfirmationPage extends UhcDriver{
 	public void clickOnPrintThisPage() {
 		// Store the current window handle
 		String winHandleBefore = driver.getWindowHandle();
+		
 
 		// Perform the click operation that opens new window
 		printThisPage.click();
 
 		// Switch to new window opened
 		for(String winHandle : driver.getWindowHandles()){
-			driver.switchTo().window(winHandle);
+			if(winHandle.equalsIgnoreCase(winHandleBefore))
+				continue;
+			else
+			{
+				driver.switchTo().window(winHandle);
+				break;
+			}
 		}
-
+		
 		// Perform the actions on new window
 		if(driver.getTitle().equalsIgnoreCase("AARP Medicare Plans - Print"))
-		print.isEnabled();		
+		{
+			
+			print.isEnabled();
+		
+		}
 
 		// Close the new window, if that window no more required
 		driver.close();

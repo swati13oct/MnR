@@ -44,7 +44,7 @@ public class LoginUhcStepDefinition {
 		return loginScenario;
 	}
 	
-	@Given("^the user is on the UHC medicare site login page$")
+	@Given("^the user is on the UHC medicare site mobile login page$")
 	public void user_login_page()
 	{
 		WebDriver wd = getLoginScenario().getMobileWebDriver();

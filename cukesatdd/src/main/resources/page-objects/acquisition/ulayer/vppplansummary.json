@@ -16,11 +16,6 @@
 "vppSummary":{
 "identifier":"xpath",
 "elementName":"//div[@class='planinf']/h3"
-},
-"changeLocationLink":{
-"identifier":"xpath",
-"elementName":"//div[@id='n_enterzip_plansplash']/p[2]/a"
 }
-
 }
 }

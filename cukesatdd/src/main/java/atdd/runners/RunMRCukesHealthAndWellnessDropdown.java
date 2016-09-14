@@ -16,6 +16,6 @@ import cucumber.junit.Cucumber;
 		features = { "feature/HealthAndWellness-DropDown" }, 
 		format = {
 		"pretty", "html:reports/test-report" }, tags ={"@healthandwellnessULayerTest"})
-public class RunMRCukesHealthAndWellnessDropdownTest {
+public class RunMRCukesHealthAndWellnessDropdown {
 
 }

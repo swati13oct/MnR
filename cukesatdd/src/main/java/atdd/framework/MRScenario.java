@@ -1,7 +1,6 @@
 package atdd.framework;
 
 import java.io.BufferedReader;
-import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -37,13 +36,14 @@ import org.json.JSONObject;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
-import org.openqa.selenium.firefox.FirefoxBinary;
-import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.firefox.FirefoxProfile;
+import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.springframework.ldap.core.DistinguishedName;
 import org.springframework.stereotype.Component;
+
+import com.gargoylesoftware.htmlunit.BrowserVersion;
+import com.gargoylesoftware.htmlunit.WebClient;
 
 import acceptancetests.atdd.data.CommonConstants;
 
@@ -517,26 +517,18 @@ public class MRScenario {
 
 		Map<String, String> props = new HashMap<String, String>();
 		Properties prop = new Properties();
-		InputStream input = null;
-		File propertyFile = new File(CommonConstants.PROPERTY_FILE_LOCATION);
-		try {
-			input = new FileInputStream(propertyFile);
-		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		try {
-			prop.load(input);
+		//Read properties from classpath		
+		InputStream is = ClassLoader.class.getResourceAsStream(CommonConstants.PROPERTY_FILE_LOCATION);
+        try {
+			prop.load(is);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
 		for (String key : prop.stringPropertyNames()) {
 			String value = prop.getProperty(key);
 			props.put(key, value);
 		}
-
 		return props;
 	}
 
@@ -841,39 +833,22 @@ public class MRScenario {
 	}
 
 
-	public WebDriver getWebDriver() 
-	{
-
-
-
-	//webDriver = new FirefoxDriver();
-	//webDriver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
-	//webDriver.manage().window().maximize();
-	//return webDriver;
-
-
-	  File pathToBinary = new
-
-  File("C:/Program Files (x86)/Mozilla Firefox/firefox.exe");
-
-  FirefoxBinary ffBinary = new FirefoxBinary(pathToBinary);
-	  FirefoxProfile firefoxProfile = new FirefoxProfile(); webDriver = new
-	  FirefoxDriver(ffBinary,firefoxProfile);
-	  webDriver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
-
-  return webDriver; 
-
-
-
-
-
-
-	}
-	
-	private void File(String string) {
-		// TODO Auto-generated method stub
+	public WebDriver getWebDriver() {
+		HtmlUnitDriver htmlUnitDriver = new HtmlUnitDriver(BrowserVersion.FIREFOX_24) {
+			@Override
+			protected WebClient modifyWebClient(WebClient client) {
+				client.getOptions().setThrowExceptionOnScriptError(false);
+				return client;
+			}
+		};
+		htmlUnitDriver.setJavascriptEnabled(true);
 		
+		webDriver = htmlUnitDriver;
+		webDriver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
+		webDriver.manage().window().maximize();
+		return webDriver;
 	}
+
 
 	public WebDriver getIEDriver()
 	{

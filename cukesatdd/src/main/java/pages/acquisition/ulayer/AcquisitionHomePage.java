@@ -314,7 +314,9 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	}
 
 	public VPPPlanSummaryPage searchPlans(String zipcode, String countyName) {
+		
 		sendkeys(zipCodeField, zipcode);
+		
 		viewPlansButton.click();
 		try {
 			if (countyModal.isDisplayed()) {
@@ -329,7 +331,8 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		} catch (Exception e) {
 			System.out.println("county box not found");
 		}
-		if (getTitle().equalsIgnoreCase("Our Medicare Plan Types | AARP® Medicare Plans from UnitedHealthcare®")) {
+		
+		if (driver.getTitle().equalsIgnoreCase(PageTitleConstants.ULAYER_HOME_PAGE_TITLE)) {
 			return new VPPPlanSummaryPage(driver);
 		}
 		return null;
@@ -351,7 +354,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		} catch (Exception e) {
 			System.out.println("county box not found");
 		}
-		if (getTitle().equalsIgnoreCase("Our Medicare Plan Types | AARP® Medicare Plans from UnitedHealthcare®")) {
+		if (getTitle().equalsIgnoreCase(PageTitleConstants.ULAYER_HOME_PAGE_TITLE)) {
 			return new VPPPlanSummaryPage(driver);
 		}
 		return null;

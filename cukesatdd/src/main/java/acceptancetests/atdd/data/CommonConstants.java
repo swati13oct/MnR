@@ -12,7 +12,7 @@ import acceptancetests.atdd.data.ulayer.Page;
 public class CommonConstants {
 
 	
-	public static final String PROPERTY_FILE_LOCATION = "C:/portal/conf/mratdd/config.properties";
+	public static final String PROPERTY_FILE_LOCATION = "/external-conf/mratdd/config.properties";
 	public static final String UID = "uid";
 
 	public static final String DB_URL = "DBUrl";
@@ -158,8 +158,6 @@ public class CommonConstants {
 					CommonConstants.PLAN_COMPARE_ULAYER_DIRECTORY),
 			new Page(CommonConstants.ADD_PLAN_CONFIRMATION,
 					CommonConstants.ADD_PLAN_CONFIRMATION_ULAYER_DIRECTORY)
-					
-
 	};
 
 	public static final String BENEFITS_SUMMARY_DIRECTORY = "/jsonresponse/mobile/member/ulayer/benefits-summary/";
