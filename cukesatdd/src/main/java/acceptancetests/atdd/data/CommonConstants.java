@@ -12,7 +12,12 @@ import acceptancetests.atdd.data.ulayer.Page;
 public class CommonConstants {
 
 	
-	public static final String PROPERTY_FILE_LOCATION = "/external-conf/mratdd/config.properties";
+	public static final String PROPERTY_FILE_FOLDER = "/config";
+	
+	public static final String PROPERTY_FILE_NAME = "config.properties";
+	
+	public static final String DEFAULT_ENVIRONMENT_CI = "ci";
+	
 	public static final String UID = "uid";
 
 	public static final String DB_URL = "DBUrl";

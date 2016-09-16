@@ -31,6 +31,7 @@ import javax.naming.NamingException;
 import javax.naming.directory.DirContext;
 import javax.naming.directory.InitialDirContext;
 
+import org.apache.commons.lang3.StringUtils;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.openqa.selenium.WebDriver;
@@ -67,7 +68,7 @@ public class MRScenario {
 	private static Map<String, Map<String, JSONObject>> expectedDataMapUlayer = new LinkedHashMap<String, Map<String, JSONObject>>();
 
 	private static Map<String, Map<String, JSONObject>> expectedDataMapBluelayer = new LinkedHashMap<String, Map<String, JSONObject>>();
-	
+
 	private static Map<String, List<String>> umsRegistrationDataMap = new LinkedHashMap<String, List<String>>();
 
 	private static Map<String, String> props = new HashMap<String, String>();
@@ -118,15 +119,12 @@ public class MRScenario {
 		String defaultSchema = props.get(CommonConstants.DB_SCHEMA);
 
 		try {
-			InputStream memberTypeStream = ClassLoader.class
-					.getResourceAsStream("/database/AMP-Member-Type.csv");
-			memberAmpTypeReader = new BufferedReader(new InputStreamReader(
-					memberTypeStream));
+			InputStream memberTypeStream = ClassLoader.class.getResourceAsStream("/database/AMP-Member-Type.csv");
+			memberAmpTypeReader = new BufferedReader(new InputStreamReader(memberTypeStream));
 			while ((line = memberAmpTypeReader.readLine()) != null) {
 				// use comma as separator
 				String[] memberAttributes = line.split(cvsSplitBy);
-				List<String> attrList = Arrays.asList(memberAttributes)
-						.subList(1, memberAttributes.length);
+				List<String> attrList = Arrays.asList(memberAttributes).subList(1, memberAttributes.length);
 				String userName = null;
 				if (memberAttributes[0].contains("/")) {
 					String[] memberAttributArr = memberAttributes[0].split("/");
@@ -146,12 +144,10 @@ public class MRScenario {
 						}
 					}
 					if (!memberExists) {
-						memberFound = checkMemberFound(userName, con, ctx,
-								defaultSchema);
+						memberFound = checkMemberFound(userName, con, ctx, defaultSchema);
 					}
 				} else {
-					memberFound = checkMemberFound(userName, con, ctx,
-							defaultSchema);
+					memberFound = checkMemberFound(userName, con, ctx, defaultSchema);
 				}
 
 				if (memberFound) {
@@ -160,15 +156,12 @@ public class MRScenario {
 
 			}
 
-			InputStream memberTypeStream1 = ClassLoader.class
-					.getResourceAsStream("/database/UMS-Member-Type.csv");
-			memberUmsTypeReader = new BufferedReader(new InputStreamReader(
-					memberTypeStream1));
+			InputStream memberTypeStream1 = ClassLoader.class.getResourceAsStream("/database/UMS-Member-Type.csv");
+			memberUmsTypeReader = new BufferedReader(new InputStreamReader(memberTypeStream1));
 			while ((line = memberUmsTypeReader.readLine()) != null) {
 				// use comma as separator
 				String[] memberAttributes = line.split(cvsSplitBy);
-				List<String> attrList = Arrays.asList(memberAttributes)
-						.subList(1, memberAttributes.length);
+				List<String> attrList = Arrays.asList(memberAttributes).subList(1, memberAttributes.length);
 				String userName = null;
 				if (memberAttributes[0].contains("/")) {
 					String[] memberAttributArr = memberAttributes[0].split("/");
@@ -188,12 +181,10 @@ public class MRScenario {
 						}
 					}
 					if (!memberExists) {
-						memberFound = checkMemberFound(userName, con, ctx,
-								defaultSchema);
+						memberFound = checkMemberFound(userName, con, ctx, defaultSchema);
 					}
 				} else {
-					memberFound = checkMemberFound(userName, con, ctx,
-							defaultSchema);
+					memberFound = checkMemberFound(userName, con, ctx, defaultSchema);
 				}
 
 				if (memberFound) {
@@ -204,33 +195,28 @@ public class MRScenario {
 
 			InputStream ampMemberTypeStream = ClassLoader.class
 					.getResourceAsStream("/database/AMP-Registration-data.csv");
-			BufferedReader registermemberReader = new BufferedReader(
-					new InputStreamReader(ampMemberTypeStream));
+			BufferedReader registermemberReader = new BufferedReader(new InputStreamReader(ampMemberTypeStream));
 			while ((line = registermemberReader.readLine()) != null) {
 				// use comma as separator
 				String[] memberAttributes = line.split(cvsSplitBy);
-				List<String> attrList = Arrays.asList(memberAttributes)
-						.subList(1, memberAttributes.length);
+				List<String> attrList = Arrays.asList(memberAttributes).subList(1, memberAttributes.length);
 				String userName = memberAttributes[0];
 				ampRegistrationDataMap.put(userName, attrList);
 
 			}
-			
+
 			InputStream umsMemberTypeStream = ClassLoader.class
 					.getResourceAsStream("/database/UMS-Registration-data.csv");
-			BufferedReader umsRegistermemberReader = new BufferedReader(
-					new InputStreamReader(umsMemberTypeStream));
+			BufferedReader umsRegistermemberReader = new BufferedReader(new InputStreamReader(umsMemberTypeStream));
 			while ((line = umsRegistermemberReader.readLine()) != null) {
 				// use comma as separator
 				String[] memberAttributes = line.split(cvsSplitBy);
-				List<String> attrList = Arrays.asList(memberAttributes)
-						.subList(1, memberAttributes.length);
+				List<String> attrList = Arrays.asList(memberAttributes).subList(1, memberAttributes.length);
 				String userName = memberAttributes[0];
 				umsRegistrationDataMap.put(userName, attrList);
 
 			}
-		}
-		catch (IOException e) {
+		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			// schak38: when member-types csv is not found
 			e.printStackTrace();
@@ -261,14 +247,12 @@ public class MRScenario {
 
 	}
 
-	private static boolean checkMemberFound(String userName, Connection con,
-			DirContext ctx, String defaultSchema) {
+	private static boolean checkMemberFound(String userName, Connection con, DirContext ctx, String defaultSchema) {
 		Statement stmt;
 		ResultSet rs = null;
 		try {
 			stmt = con.createStatement();
-			String query = "select * from " + defaultSchema
-					+ ".PORTAL_USER where USER_NAME='" + userName + "'";
+			String query = "select * from " + defaultSchema + ".PORTAL_USER where USER_NAME='" + userName + "'";
 			System.out.println("query--->" + query);
 			rs = stmt.executeQuery(query);
 		} catch (SQLException e) {
@@ -304,14 +288,10 @@ public class MRScenario {
 
 	private static DirContext getLdapContext(Map<String, String> props) {
 		Hashtable<String, String> env = new Hashtable<String, String>();
-		env.put(Context.INITIAL_CONTEXT_FACTORY,
-				"com.sun.jndi.ldap.LdapCtxFactory");
-		env.put(Context.PROVIDER_URL, props.get(CommonConstants.LDAP_URL)
-				+ props.get(CommonConstants.LDAP_BASE));
-		env.put(Context.SECURITY_PRINCIPAL,
-				props.get(CommonConstants.LDAP_USER));
-		env.put(Context.SECURITY_CREDENTIALS,
-				props.get(CommonConstants.LDAP_PASSWORD));
+		env.put(Context.INITIAL_CONTEXT_FACTORY, "com.sun.jndi.ldap.LdapCtxFactory");
+		env.put(Context.PROVIDER_URL, props.get(CommonConstants.LDAP_URL) + props.get(CommonConstants.LDAP_BASE));
+		env.put(Context.SECURITY_PRINCIPAL, props.get(CommonConstants.LDAP_USER));
+		env.put(Context.SECURITY_CREDENTIALS, props.get(CommonConstants.LDAP_PASSWORD));
 		DirContext ctx = null;
 		try {
 			ctx = new InitialDirContext(env);
@@ -332,10 +312,8 @@ public class MRScenario {
 		}
 		Connection connection = null;
 		try {
-			connection = DriverManager.getConnection(
-					props.get(CommonConstants.DB_URL),
-					props.get(CommonConstants.DB_USERNAME),
-					props.get(CommonConstants.DB_PASSWORD));
+			connection = DriverManager.getConnection(props.get(CommonConstants.DB_URL),
+					props.get(CommonConstants.DB_USERNAME), props.get(CommonConstants.DB_PASSWORD));
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -364,8 +342,7 @@ public class MRScenario {
 
 			try {
 				stmt = con.createStatement();
-				String query = "select * from " + defaultSchema
-						+ ".PORTAL_USER where USER_NAME='" + userName + "'";
+				String query = "select * from " + defaultSchema + ".PORTAL_USER where USER_NAME='" + userName + "'";
 				System.out.println("query--->" + query);
 				rs = stmt.executeQuery(query);
 			} catch (SQLException e) {
@@ -385,37 +362,30 @@ public class MRScenario {
 				/* Checking in LDAP */
 				if (user != null) {
 					ctx.unbind(buildUserDistinguishedName(userName));
-					System.out.println("USERNAME " + userName
-							+ " removed from LDAP");
+					System.out.println("USERNAME " + userName + " removed from LDAP");
 
 				} else {
-					System.out.println("member not found in ldap :: USERNAME "
-							+ userName + " NOT REGISTERED");
+					System.out.println("member not found in ldap :: USERNAME " + userName + " NOT REGISTERED");
 				}
 
 				/* Checking in DataBase */
 				if (rs.next()) {
 					stmt = con.createStatement();
 
-					String query = "DELETE FROM "
-							+ defaultSchema
+					String query = "DELETE FROM " + defaultSchema
 							+ ".PORTAL_USER_ACCOUNT where PORTAL_USER_ID in (select PORTAL_USER_ID from "
-							+ defaultSchema + ".PORTAL_USER where USER_NAME='"
-							+ userName + "')";
-					String query1 = "DELETE FROM " + defaultSchema
-							+ ".PORTAL_USER where USER_NAME='" + userName + "'";
+							+ defaultSchema + ".PORTAL_USER where USER_NAME='" + userName + "')";
+					String query1 = "DELETE FROM " + defaultSchema + ".PORTAL_USER where USER_NAME='" + userName + "'";
 					System.out.println("query--->" + query);
 					rs = stmt.executeQuery(query);
 					System.out.println("query--->" + query1);
 					rs = stmt.executeQuery(query1);
 
-					System.out.println("USERNAME " + userName
-							+ " :: deleted from PORTAL_USER table");
+					System.out.println("USERNAME " + userName + " :: deleted from PORTAL_USER table");
 
 				} else {
 
-					System.out.println("USERNAME " + userName
-							+ " :: member not found in database");
+					System.out.println("USERNAME " + userName + " :: member not found in database");
 				}
 
 			} catch (SQLException e) {
@@ -431,8 +401,7 @@ public class MRScenario {
 		for (String userName : ampRegistrationDataMap.keySet()) {
 			try {
 				stmt = con.createStatement();
-				String query = "select * from " + defaultSchema
-						+ ".PORTAL_USER where USER_NAME='" + userName + "'";
+				String query = "select * from " + defaultSchema + ".PORTAL_USER where USER_NAME='" + userName + "'";
 				System.out.println("query--->" + query);
 				rs = stmt.executeQuery(query);
 			} catch (SQLException e) {
@@ -452,37 +421,30 @@ public class MRScenario {
 				/* Checking in LDAP */
 				if (user != null) {
 					ctx.unbind(buildUserDistinguishedName(userName));
-					System.out.println("USERNAME " + userName
-							+ " removed from LDAP");
+					System.out.println("USERNAME " + userName + " removed from LDAP");
 
 				} else {
-					System.out.println("member not found in ldap :: USERNAME "
-							+ userName + " NOT REGISTERED");
+					System.out.println("member not found in ldap :: USERNAME " + userName + " NOT REGISTERED");
 				}
 
 				/* Checking in DataBase */
 				if (rs.next()) {
 					stmt = con.createStatement();
 
-					String query = "DELETE FROM "
-							+ defaultSchema
+					String query = "DELETE FROM " + defaultSchema
 							+ ".PORTAL_USER_ACCOUNT where PORTAL_USER_ID in (select PORTAL_USER_ID from "
-							+ defaultSchema + ".PORTAL_USER where USER_NAME='"
-							+ userName + "')";
-					String query1 = "DELETE FROM " + defaultSchema
-							+ ".PORTAL_USER where USER_NAME='" + userName + "'";
+							+ defaultSchema + ".PORTAL_USER where USER_NAME='" + userName + "')";
+					String query1 = "DELETE FROM " + defaultSchema + ".PORTAL_USER where USER_NAME='" + userName + "'";
 					System.out.println("query--->" + query);
 					rs = stmt.executeQuery(query);
 					System.out.println("query--->" + query1);
 					rs = stmt.executeQuery(query1);
 
-					System.out.println("USERNAME " + userName
-							+ " :: deleted from PORTAL_USER table");
+					System.out.println("USERNAME " + userName + " :: deleted from PORTAL_USER table");
 
 				} else {
 
-					System.out.println("USERNAME " + userName
-							+ " :: member not found in database");
+					System.out.println("USERNAME " + userName + " :: member not found in database");
 				}
 
 			} catch (SQLException e) {
@@ -510,19 +472,24 @@ public class MRScenario {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
 	}
 
 	private static Map<String, String> getProperties() {
-
 		Map<String, String> props = new HashMap<String, String>();
 		Properties prop = new Properties();
-		//Read properties from classpath		
-		InputStream is = ClassLoader.class.getResourceAsStream(CommonConstants.PROPERTY_FILE_LOCATION);
-        try {
+		String propertiesFileToPick = System.getProperty("environment");
+		System.out.println("Using properties for environment ...." + propertiesFileToPick);
+		if (StringUtils.isBlank(propertiesFileToPick)) {
+			System.out.println("Using CI as default since environment was not passed in !!!");
+			propertiesFileToPick = CommonConstants.DEFAULT_ENVIRONMENT_CI;
+		}
+		// Read properties from classpath
+		StringBuffer propertyFilePath = new StringBuffer(CommonConstants.PROPERTY_FILE_FOLDER);
+		propertyFilePath.append("/").append(propertiesFileToPick).append("/").append(CommonConstants.PROPERTY_FILE_NAME);
+		InputStream is = ClassLoader.class.getResourceAsStream(propertyFilePath.toString());
+		try {
 			prop.load(is);
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		for (String key : prop.stringPropertyNames()) {
@@ -538,11 +505,9 @@ public class MRScenario {
 		return dn;
 	}
 
-	public Map<String, String> getAMPMemberWithDesiredAttributes(
-			List<String> desiredAttributes) {
+	public Map<String, String> getAMPMemberWithDesiredAttributes(List<String> desiredAttributes) {
 		Map<String, String> loginCreds = new HashMap<String, String>();
-		for (Entry<String, List<String>> currEntry : ampMemberAttributesMap
-				.entrySet()) {
+		for (Entry<String, List<String>> currEntry : ampMemberAttributesMap.entrySet()) {
 			if (currEntry.getValue().equals(desiredAttributes)) {
 				if (currEntry.getKey().contains("/")) {
 					String[] keyArr = currEntry.getKey().split("/");
@@ -561,11 +526,9 @@ public class MRScenario {
 		return null;
 	}
 
-	public Map<String, String> getUMSMemberWithDesiredAttributes(
-			List<String> desiredAttributes) {
+	public Map<String, String> getUMSMemberWithDesiredAttributes(List<String> desiredAttributes) {
 		Map<String, String> loginCreds = new HashMap<String, String>();
-		for (Entry<String, List<String>> currEntry : umsMemberAttributesMap
-				.entrySet()) {
+		for (Entry<String, List<String>> currEntry : umsMemberAttributesMap.entrySet()) {
 			if (currEntry.getValue().equals(desiredAttributes)) {
 				if (currEntry.getKey().contains("/")) {
 					String[] keyArr = currEntry.getKey().split("/");
@@ -594,11 +557,9 @@ public class MRScenario {
 			}
 			Map<String, JSONObject> ampObjectMap = new HashMap<String, JSONObject>();
 			for (int i = 0; i < CommonConstants.PAGES.length; i++) {
-				JSONObject jsonObject = readExpectedJson(ampKey,
-						CommonConstants.PAGES[i].getDirectory());
+				JSONObject jsonObject = readExpectedJson(ampKey, CommonConstants.PAGES[i].getDirectory());
 				if (jsonObject != null) {
-					ampObjectMap.put(CommonConstants.PAGES[i].getPageName(),
-							jsonObject);
+					ampObjectMap.put(CommonConstants.PAGES[i].getPageName(), jsonObject);
 				}
 			}
 			if (!ampObjectMap.isEmpty())
@@ -611,11 +572,9 @@ public class MRScenario {
 		for (String ampKey : keySetAmp) {
 			Map<String, JSONObject> ampObjectMap = new HashMap<String, JSONObject>();
 			for (int i = 0; i < CommonConstants.PAGES.length; i++) {
-				JSONObject jsonObject = readExpectedJson(ampKey,
-						CommonConstants.PAGES[i].getDirectory());
+				JSONObject jsonObject = readExpectedJson(ampKey, CommonConstants.PAGES[i].getDirectory());
 				if (jsonObject != null) {
-					ampObjectMap.put(CommonConstants.PAGES[i].getPageName(),
-							jsonObject);
+					ampObjectMap.put(CommonConstants.PAGES[i].getPageName(), jsonObject);
 				}
 			}
 			if (!ampObjectMap.isEmpty())
@@ -626,12 +585,9 @@ public class MRScenario {
 		for (String umsKey : keySetUms) {
 			Map<String, JSONObject> umsObjectMap = new HashMap<String, JSONObject>();
 			for (int i = 0; i < CommonConstants.PAGES_BLUELAYER.length; i++) {
-				JSONObject jsonObject = readExpectedJson(umsKey,
-						CommonConstants.PAGES_BLUELAYER[i].getDirectory());
+				JSONObject jsonObject = readExpectedJson(umsKey, CommonConstants.PAGES_BLUELAYER[i].getDirectory());
 				if (jsonObject != null) {
-					umsObjectMap.put(
-							CommonConstants.PAGES_BLUELAYER[i].getPageName(),
-							jsonObject);
+					umsObjectMap.put(CommonConstants.PAGES_BLUELAYER[i].getPageName(), jsonObject);
 				}
 			}
 			if (!umsObjectMap.isEmpty())
@@ -647,12 +603,9 @@ public class MRScenario {
 			}
 			Map<String, JSONObject> umsObjectMap = new HashMap<String, JSONObject>();
 			for (int i = 0; i < CommonConstants.PAGES_BLUELAYER.length; i++) {
-				JSONObject jsonObject = readExpectedJson(umsKey,
-						CommonConstants.PAGES_BLUELAYER[i].getDirectory());
+				JSONObject jsonObject = readExpectedJson(umsKey, CommonConstants.PAGES_BLUELAYER[i].getDirectory());
 				if (jsonObject != null) {
-					umsObjectMap.put(
-							CommonConstants.PAGES_BLUELAYER[i].getPageName(),
-							jsonObject);
+					umsObjectMap.put(CommonConstants.PAGES_BLUELAYER[i].getPageName(), jsonObject);
 				}
 			}
 			if (!umsObjectMap.isEmpty())
@@ -663,23 +616,18 @@ public class MRScenario {
 		Set<String> registrationAmpKeySet = ampRegistrationDataMap.keySet();
 		for (String registrationKey : registrationAmpKeySet) {
 			if (ampRegistrationDataMap.get(registrationKey).size() > 2) {
-				List<String> value = ampRegistrationDataMap
-						.get(registrationKey);
+				List<String> value = ampRegistrationDataMap.get(registrationKey);
 				List<String> subValue = value.subList(1, 3);
 				if (!subValue.isEmpty()) {
-					String[] key = { value.get(0) + "_" + value.get(1),
-							subValue.get(1) + "_" + subValue.get(0) };
+					String[] key = { value.get(0) + "_" + value.get(1), subValue.get(1) + "_" + subValue.get(0) };
 					for (int j = 0; j < key.length; j++) {
 						Map<String, JSONObject> pageObjectMap = new HashMap<String, JSONObject>();
 						for (int i = 0; i < CommonConstants.PAGES_REGISTRATION_ULAYER.length; i++) {
-							JSONObject jsonObject = readExpectedJson(
-									key[j],
-									CommonConstants.PAGES_REGISTRATION_ULAYER[i]
-											.getDirectory());
+							JSONObject jsonObject = readExpectedJson(key[j],
+									CommonConstants.PAGES_REGISTRATION_ULAYER[i].getDirectory());
 							if (jsonObject != null) {
-								pageObjectMap
-										.put(CommonConstants.PAGES_REGISTRATION_ULAYER[i]
-												.getPageName(), jsonObject);
+								pageObjectMap.put(CommonConstants.PAGES_REGISTRATION_ULAYER[i].getPageName(),
+										jsonObject);
 							}
 
 						}
@@ -688,18 +636,14 @@ public class MRScenario {
 					}
 				}
 			} else {
-				String key = ampRegistrationDataMap.get(registrationKey).get(0)
-						+ "_"
+				String key = ampRegistrationDataMap.get(registrationKey).get(0) + "_"
 						+ ampRegistrationDataMap.get(registrationKey).get(1);
 				Map<String, JSONObject> pageObjectMap = new HashMap<String, JSONObject>();
 				for (int i = 0; i < CommonConstants.PAGES_REGISTRATION_ULAYER.length; i++) {
 					JSONObject jsonObject = readExpectedJson(key,
-							CommonConstants.PAGES_REGISTRATION_ULAYER[i]
-									.getDirectory());
+							CommonConstants.PAGES_REGISTRATION_ULAYER[i].getDirectory());
 					if (jsonObject != null) {
-						pageObjectMap.put(
-								CommonConstants.PAGES_REGISTRATION_ULAYER[i]
-										.getPageName(), jsonObject);
+						pageObjectMap.put(CommonConstants.PAGES_REGISTRATION_ULAYER[i].getPageName(), jsonObject);
 					}
 
 				}
@@ -715,19 +659,15 @@ public class MRScenario {
 				List<String> value = umsRegistrationDataMap.get(registrationKey);
 				List<String> subValue = value.subList(1, 3);
 				if (!subValue.isEmpty()) {
-					String[] key = { value.get(0) + "_" + value.get(1),
-							subValue.get(1) + "_" + subValue.get(0) };
+					String[] key = { value.get(0) + "_" + value.get(1), subValue.get(1) + "_" + subValue.get(0) };
 					for (int j = 0; j < key.length; j++) {
 						Map<String, JSONObject> pageObjectMap = new HashMap<String, JSONObject>();
 						for (int i = 0; i < CommonConstants.PAGES_REGISTRATION_BLUELAYER.length; i++) {
-							JSONObject jsonObject = readExpectedJson(
-									key[j],
-									CommonConstants.PAGES_REGISTRATION_BLUELAYER[i]
-											.getDirectory());
+							JSONObject jsonObject = readExpectedJson(key[j],
+									CommonConstants.PAGES_REGISTRATION_BLUELAYER[i].getDirectory());
 							if (jsonObject != null) {
-								pageObjectMap
-										.put(CommonConstants.PAGES_REGISTRATION_BLUELAYER[i]
-												.getPageName(), jsonObject);
+								pageObjectMap.put(CommonConstants.PAGES_REGISTRATION_BLUELAYER[i].getPageName(),
+										jsonObject);
 							}
 
 						}
@@ -736,17 +676,14 @@ public class MRScenario {
 					}
 				}
 			} else {
-				String key = umsRegistrationDataMap.get(registrationKey).get(0)
-						+ "_" + umsRegistrationDataMap.get(registrationKey).get(1);
+				String key = umsRegistrationDataMap.get(registrationKey).get(0) + "_"
+						+ umsRegistrationDataMap.get(registrationKey).get(1);
 				Map<String, JSONObject> pageObjectMap = new HashMap<String, JSONObject>();
 				for (int i = 0; i < CommonConstants.PAGES_REGISTRATION_BLUELAYER.length; i++) {
 					JSONObject jsonObject = readExpectedJson(key,
-							CommonConstants.PAGES_REGISTRATION_BLUELAYER[i]
-									.getDirectory());
+							CommonConstants.PAGES_REGISTRATION_BLUELAYER[i].getDirectory());
 					if (jsonObject != null) {
-						pageObjectMap.put(
-								CommonConstants.PAGES_REGISTRATION_BLUELAYER[i]
-										.getPageName(), jsonObject);
+						pageObjectMap.put(CommonConstants.PAGES_REGISTRATION_BLUELAYER[i].getPageName(), jsonObject);
 					}
 
 				}
@@ -772,8 +709,7 @@ public class MRScenario {
 		}
 		FileInputStream stream = null;
 		try {
-			stream = new FileInputStream(parentDirectory + DIRECTORY
-					+ directory + fileName);
+			stream = new FileInputStream(parentDirectory + DIRECTORY + directory + fileName);
 		} catch (FileNotFoundException e) {
 			return jsonObject;
 		}
@@ -832,7 +768,6 @@ public class MRScenario {
 		}
 	}
 
-
 	public WebDriver getWebDriver() {
 		HtmlUnitDriver htmlUnitDriver = new HtmlUnitDriver(BrowserVersion.FIREFOX_24) {
 			@Override
@@ -842,38 +777,33 @@ public class MRScenario {
 			}
 		};
 		htmlUnitDriver.setJavascriptEnabled(true);
-		
+
 		webDriver = htmlUnitDriver;
 		webDriver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
 		webDriver.manage().window().maximize();
 		return webDriver;
 	}
 
-
-	public WebDriver getIEDriver()
-	{
-		System.setProperty("webdriver.ie.driver", "C:/Users/pgupta15/Downloads/IEDriverServer_x64_2.27.0/IEDriverServer.exe");
-        DesiredCapabilities ieCaps = DesiredCapabilities.internetExplorer();
-        ieCaps.setCapability(InternetExplorerDriver.INTRODUCE_FLAKINESS_BY_IGNORING_SECURITY_DOMAINS, true);
-        webDriver = new InternetExplorerDriver(ieCaps);
-        webDriver.manage().window().maximize();
-        return webDriver;
-
+	public WebDriver getIEDriver() {
+		System.setProperty("webdriver.ie.driver",
+				"C:/Users/pgupta15/Downloads/IEDriverServer_x64_2.27.0/IEDriverServer.exe");
+		DesiredCapabilities ieCaps = DesiredCapabilities.internetExplorer();
+		ieCaps.setCapability(InternetExplorerDriver.INTRODUCE_FLAKINESS_BY_IGNORING_SECURITY_DOMAINS, true);
+		webDriver = new InternetExplorerDriver(ieCaps);
+		webDriver.manage().window().maximize();
+		return webDriver;
 
 	}
 
 	public WebDriver getMobileWebDriver() {
 		Map<String, String> mobileEmulation = new HashMap<String, String>();
-		mobileEmulation.put("deviceName",
-				props.get(CommonConstants.DEVICE_NAME));
+		mobileEmulation.put("deviceName", props.get(CommonConstants.DEVICE_NAME));
 		Map<String, Object> chromeOptions = new HashMap<String, Object>();
 		chromeOptions.put("mobileEmulation", mobileEmulation);
 		DesiredCapabilities capabilities = DesiredCapabilities.chrome();
-		capabilities.setCapability("chrome.switches",
-				Arrays.asList("--start-maximized"));
+		capabilities.setCapability("chrome.switches", Arrays.asList("--start-maximized"));
 		capabilities.setCapability(ChromeOptions.CAPABILITY, chromeOptions);
-		System.setProperty("webdriver.chrome.driver",
-				props.get(CommonConstants.CHROME_DRIVER));
+		System.setProperty("webdriver.chrome.driver", props.get(CommonConstants.CHROME_DRIVER));
 		webDriver = new ChromeDriver(capabilities);
 		return webDriver;
 	}
