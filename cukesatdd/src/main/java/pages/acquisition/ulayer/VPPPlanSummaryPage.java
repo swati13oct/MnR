@@ -76,7 +76,8 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	@FindBy(className = "toggleYear")
 	private WebElement toggleplanYear;
 	
-	@FindBy(xpath = "//div[@id='maplans_container']/div[3]/div/div[2]/div[1]/div/div[1]/div[1]/div/div[1]/div[2]/table/tbody/tr/td[3]/div/div[2]/div[3]/div[1]/p/a")
+	//@FindBy(xpath = "//div[@id='maplans_container']/div[3]/div/div[2]/div[1]/div/div[1]/div[1]/div/div[1]/div[2]/table/tbody/tr/td[3]/div/div[2]/div[3]/div[1]/p/a")
+	@FindBy(xpath=".//*[@id='doctorCoverMA']")
 	private WebElement MaProviderLink;
 	
 	@FindBy(xpath="//div[@id='mainWrapper']/div/table/tbody/tr[2]/td/div/table/tbody/tr[2]/td/div/div/div/div[3]/div/div[3]/div[3]/div/div[1]/a")

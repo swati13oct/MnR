@@ -39,6 +39,7 @@ public class MARightsAndResponsibilitiesPage extends GlobalWebElements {
 		
 		validate(providerlink);
 		providerlink.click();
+		switchToNewTab();
 		if (getTitle().equalsIgnoreCase(
 				"Enter Zip")) {
 	return new Rallytool_Page(driver);

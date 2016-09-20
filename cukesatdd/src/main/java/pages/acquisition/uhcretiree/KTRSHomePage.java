@@ -28,12 +28,12 @@ public class KTRSHomePage extends UhcDriver{
 		// TODO Auto-generated constructor stub
 	}
 	
-    @FindBy(xpath=".//*[@id='cq-events-jsp-/content/gr/en/trs/home/jcr:content/parsys/events']/div/div[1]/div[2]/div/div[1]/div[1]/p[3]/a")
-    
+    //@FindBy(xpath=".//*[@id='cq-events-jsp-/content/gr/en/trs/home/jcr:content/parsys/events']/div/div[1]/div[2]/div/div[1]/div[1]/p[3]/a")
+	 @FindBy(xpath=".//*[@id='cq-events-jsp-/content/gr/en/ktrs/home/jcr:content/parsys/events']/div/div[1]/div[2]/div/div[1]/div[1]/p[3]/a") 
 	private WebElement ktrsfindaproviderlink;
 	
-	@FindBy(xpath=".//*[@id='cq-imagebutton-jsp-/content/gr/en/trs/header/jcr:content/parsys/textbgimage/parsys/imagebutton_0']")
-	
+	//@FindBy(xpath=".//*[@id='cq-imagebutton-jsp-/content/gr/en/trs/header/jcr:content/parsys/textbgimage/parsys/imagebutton_0']")
+	@FindBy(xpath=".//*[@id='cq-imagebutton-jsp-/content/gr/en/ktrs/header/jcr:content/parsys/textbgimage/parsys/imagebutton_0']")
 	private WebElement ktrsfindaprovidertab;
 	
 	public void openAndValidate() {
