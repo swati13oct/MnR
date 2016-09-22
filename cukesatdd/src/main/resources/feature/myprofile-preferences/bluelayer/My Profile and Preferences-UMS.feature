@@ -14,6 +14,7 @@ Examples:
 	#	| MAPD     | Group      |
 	##	| PDP      | Group      |
 	#	| SSUP     | Group      |
+        | MAPD     |  Group     |
 
 
 Scenario Outline:To verify My Profile and edit profile in UMS site
@@ -76,7 +77,7 @@ Examples:
 #			| MAPD     | Individual |
 #			| MA       | Group      |   
 #			| MAPD     | Group      |
-			| PDP      | Group      |
+#			| PDP      | Group      |
 #			| SSUP     | Group      |
 
 
