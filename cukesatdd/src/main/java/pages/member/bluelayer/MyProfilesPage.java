@@ -283,6 +283,8 @@ public class MyProfilesPage extends UhcDriver {
 			validate(element);
 			try {
 				jsonObject.put(key, element.getText());
+				
+				
 			} catch (JSONException e) {
 				e.printStackTrace();
 			}
