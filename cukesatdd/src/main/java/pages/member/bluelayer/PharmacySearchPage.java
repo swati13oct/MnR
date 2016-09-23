@@ -67,13 +67,13 @@ public class PharmacySearchPage extends UhcDriver {
 
 	@FindBy(id = "services")
 	private WebElement pharmacyTypeSelectionRadioButton;
-	@FindBy(xpath = "//*[@id='medicareTitle']/a[1]")
+	@FindBy(xpath = "//*[@id='medicareTitle']/p/a[1]")
 	private WebElement espanolLink;
 	
-	@FindBy(xpath = "//*[@id='medicareTitle']/a[2]")       //Story 261070
+	@FindBy(xpath = "//*[@id='medicareTitle']/p/a[2]")   //Story 261070
 	private WebElement chineseLink;
 	
-	@FindBy(xpath = "//*[@id='subPageLeft']/div[2]/div[2]/div[2]/div/h3[2]/a")
+	@FindBy(xpath = "////*[@id='subPageLeft']/div[2]/div[2]/h3[2]/a")
 	private WebElement createPdfLink;
 	
 	public String county = null;
