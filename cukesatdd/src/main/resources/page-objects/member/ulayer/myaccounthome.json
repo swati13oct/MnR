@@ -72,6 +72,10 @@
 "payPremiumOnlineLink":{
 "identifier":"linkText",
 "elementName":"make a payment"
+},
+"myPersonalHealth":{
+"identifier":"xpath",
+"elementName":"//*[@id='_content_aarpm_home_jcr_content_chunkyfooterpar_chunkyfootercontaine_cftitlenlink1_teaser_0']/div/div/div[2]/h2"
 }
 }
 }
