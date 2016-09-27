@@ -1,43 +1,8 @@
-{
-    "planName": "UNITEDHEALTHCARE GROUP MEDICARE ADVANTAGE (HMO)",
-    "memberDetails": [
-        {
-            "memberDetails": "Member ID\n007098869-01"
-        },
-        {
-            "memberDetails":"Group ID"
-        },
-        {
-            "memberDetails": "Plan Effective Date\n01/01/2016"
-        },
-        {
-            "memberDetails": "Primary Care Provider\nLEVSTIK, MARK A"
-        }
-    ],
-    "drugBenefits": [
-        {
-            "drugBenefits": "Tier 1\nnull%"
-        },
-        {
-            "drugBenefits": "Tier 2\nnull%"
-        },
-        {
-            "drugBenefits": "Tier 3\nnull%"
-        },
-        {
-            "drugBenefits": "Tier 4\nnull%"
-        },
-      
-    ],
-    "medicalBenefitsDetailsLink": "VIEW DETAILS",
-    "medicalBenefits": [
-        {
-            "medicalBenefits": "Office Visits\nPrimary Care Provider:\nSpecialist:"
-        },
-        {
-            "medicalBenefits": "Inpatient Hospital Visits"
-        }
-    ],
-    "drugBenefitsDetailsLink": "VIEW DETAILS",
-    "planStatus": "Active"
-}
+{"planName":"UNITEDHEALTHCARE GROUP MEDICARE ADVANTAGE (HMO)",
+"memberDetails":[{"memberDetails":"Member ID\n007098869-01"},
+{"memberDetails":"Group ID"},
+{"memberDetails":"Plan Effective Date\n01/01/2016"}]
+,"medicalBenefitsDetailsLink":"VIEW DETAILS",
+"medicalBenefits":[{"medicalBenefits":"Office Visits\nPrimary Care Provider:\nSpecialist:"},
+{"medicalBenefits":"Inpatient Hospital Visits"}],
+"drugBenefitsDetailsLink":"VIEW DETAILS","planStatus":"Active"}
