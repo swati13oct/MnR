@@ -80,6 +80,10 @@ public class MRConstants {
 //public static final String UHC_URL = "https://www.awe-"+MRScenario.environment+"-uhcmedicaresolutions.uhc.com/";
 	public static final String UHC_URL = "https://www."+MRScenario.environment+"-uhcmedicaresolutions.uhc.com/";
 	
+	public static final String PCP_PAGE_URL = "https://www.awe-"+MRScenario.environment+"-mypcpmedicare.uhc.com/";
+	
+	public static final String MEDICA_PAGE_URL = "https://www.awe-"+MRScenario.environment+"-mymedicamedicare.uhc.com/";
+	
 	public static final String AARPM_REGISTRATION_URL = "https://member.awe-"+MRScenario.environment+"-aarpmedicareplans.uhc.com/guest/registration.html";
 	
 	public static final String UHCM_REGISTRATION_URL = "https://member.awe-"+MRScenario.environment+"-uhcmedicaresolutions.uhc.com/guest/registration.html";
