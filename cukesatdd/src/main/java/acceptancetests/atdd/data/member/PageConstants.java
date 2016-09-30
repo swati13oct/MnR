@@ -130,6 +130,18 @@ public class PageConstants {
 
 	public static final String MEMBER_BENEFITS_AND_COVERAGE_ACTUAL = "planDocsPDFActualJson";
 
-	public static final String MEMBER_BENEFITS_AND_COVERAGE_EXPECTED = "planDocsPDFExpectedJson";	
+	public static final String MEMBER_BENEFITS_AND_COVERAGE_EXPECTED = "planDocsPDFExpectedJson";
+	
+	public static final String MYPCP_SIGN_IN_PAGE = "pcpSignInPage";
+	
+	public static final String MYPCP_ABOUT_US_PAGE = "pcpAboutUsPage";
+	
+	public static final String MYPCP_CONTACT_US_PAGE = "pcpContactUsPage";
+	
+	public static final String MYMEDICA_SIGN_IN_PAGE = "medicaSignInPage";
+	
+	public static final String MYMEDICA_ABOUT_US_PAGE = "medicaAboutUsPage";
+	
+	public static final String MYMEDICA_CONTACT_US_PAGE = "medicaContactUsPage";	
 
 }
