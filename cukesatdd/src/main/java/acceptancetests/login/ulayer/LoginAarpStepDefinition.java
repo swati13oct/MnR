@@ -234,7 +234,30 @@ public class LoginAarpStepDefinition {
 		terminatedAccountPage.logOut();
 
 	}
+	
+	@Then("^the user validates the preferred Mail service link in menu details$")
+	public void user_validates_preferred_mail_service_link() {
 
+		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario()
+				.getBean(PageConstants.ACCOUNT_HOME_PAGE);
+		
+		accountHomePage.validatePreferredMailOderLink();
+		accountHomePage.logOut();
+
+	}
+
+	@Then("^the user validates the order drugs from your preferred Mail Service pharmacy link in AARP site$")
+	public void user_validates_order_drugs_from_your_preferred_Mail_Service_pharmacy_link() {
+
+		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario()
+				.getBean(PageConstants.ACCOUNT_HOME_PAGE);
+		
+		accountHomePage.validateDrugsPreferredMailOderLink();
+		accountHomePage.logOut();
+
+	}
+
+	
 	@After
 	public void tearDown() {
 		
