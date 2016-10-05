@@ -134,7 +134,7 @@ public class PlanSummaryAarpStepDefintion {
 				planSummaryPage);
 	}
 
-	@Then("^the user the validates different resources in AARP site$")
+	@Then("^the user the validates plan summary page in AARP site$")
 	public void user_validates_plan_summary_aarp() {
 		PlanSummaryPage planSummaryPage = (PlanSummaryPage) getLoginScenario()
 				.getBean(PageConstants.PLAN_SUMMARY_PAGE);
@@ -144,6 +144,9 @@ public class PlanSummaryAarpStepDefintion {
 
 		JSONObject planSummaryActualJson = (JSONObject) getLoginScenario()
 				.getBean(PlanSummaryCommonConstants.PLAN_SUMMARY_ACTUAL);
+		
+		System.out.println("planSummaryExpectedJson====>"+planSummaryExpectedJson);
+		System.out.println("planSummaryActualJson====>"+planSummaryActualJson);
 
 		try {
 			JSONAssert.assertEquals(planSummaryExpectedJson,
