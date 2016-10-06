@@ -1,4 +1,4 @@
-@claims
+@claims1
 Feature:To test the drug claims summary and details flow in UMS site
 Scenario Outline:Verify the drug claim summary and details for selected time period
 Given the registered UMS with following attributes in UMS site for drug claims
@@ -78,3 +78,18 @@ Examples:
 #	| MAPD     | Group      | 01-01-2015    | 12-01-2015  |
 #	| PDP      |	        | 01-01-2015    | 12-01-2015  |
 #	| PDP      | Group      | 01-01-2015    | 12-01-2015  |
+
+Scenario Outline: To display the link to the My Drug Costs and Benefits page for Non-LIS and LIS 1, 2 & 4 members 
+Given the registered UMS with following attributes in UMS site for drug claims
+| Plan Type    | <planType>    |
+| Member Type  | <memberType>  |
+When I want to display the link to the My Drug Costs and Benefits page
+Then We should be able to reach My Drug Costs and Benefits page
+
+Examples:
+	| planType | memberType | 
+	| PDP      | Group      | 
+	| MAPD     | Group      |
+
+
+
