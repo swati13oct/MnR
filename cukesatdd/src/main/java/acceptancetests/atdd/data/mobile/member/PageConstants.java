@@ -13,4 +13,8 @@ public class PageConstants {
 	
 	public static final String BENEFITS_SUMMARY_PAGE = "benefitsSummaryPage";
 
+	public static final String BENEFITS_DETAIL_PAGE = "benefitsDetailPage";
+
+
+
 }

@@ -17,6 +17,10 @@ public class LoginCommonConstants {
 
 	public static final String BENEFITS_SUMMARY_EXPECTED = "benefitsSummaryExpectedJson";
 	
+	public static final String BENEFITS_DETAIL_ACTUAL = "benefitsDetailActualJson";
+
+	public static final String BENEFITS_DETAIL_EXPECTED = "benefitsDetailExpectedJson";
+	
 	public static final String MOBILE_BROWSER_CHECK_FLOW_NAME = "benefits-summary";
 	
 	public static final String MOBILE_BROWSER_CHECK_ACTUAL = "browserCheckActual";
