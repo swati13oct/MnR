@@ -1,4 +1,4 @@
-@plansummary
+@plansummarymail
 Feature:To test Plan Sumamry flow in AARP site
 Scenario Outline:To verify plan summary page in AARP site
 Given registered member to verify plan summary page in AARP site
@@ -14,3 +14,14 @@ Examples:
 #	| MS       |
 #	| HIP	   |
 #	| RIDER    |
+
+Scenario Outline:To verify plan summary page for members having mailOrder benefits in AARP site
+Given registered member to verify plan summary page in AARP site
+	| <plantype> |
+	| <mailOrderLink>|
+When the user navigates to plan summary page in AARP site
+Then the user the validates plan summary page in AARP site
+
+Examples:
+	| plantype | mailOrderLink |
+	| PDP      | Preferred Mail Service Link|

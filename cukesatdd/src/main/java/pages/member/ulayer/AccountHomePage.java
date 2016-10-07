@@ -10,6 +10,7 @@ import org.json.JSONObject;
 import org.openqa.selenium.Cookie;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
@@ -82,6 +83,12 @@ public class AccountHomePage extends UhcDriver {
 
 	@FindBy(linkText = "Order plan materials")
 	private WebElement orderPlanMaterials;
+	
+	@FindBy(linkText = "Preferred Mail Service Pharmacy")
+	private WebElement preferredMailServicePharmacyLink;
+	
+	@FindBy(linkText = "Order drugs from your Preferred Mail Service Pharmacy")
+	private WebElement drugPreferredMailServicePharmacyLink;
 
 	@FindBy(id = "gogreenmeter")
 	private WebElement goGreenMeterIndicator;
@@ -290,6 +297,8 @@ public class AccountHomePage extends UhcDriver {
 	public void openAndValidate() {
 		validate(benefitsLink);
 		validate(phrTab);
+		validate(preferredMailServicePharmacyLink);
+		validate(drugPreferredMailServicePharmacyLink);
 		// validate(formsAndResourcesLink);
 		validate(benefitsLink);
 		validate(logOut);
@@ -396,6 +405,33 @@ public class AccountHomePage extends UhcDriver {
 		}
 		return null;
 		
+	}
+
+	public void validatePreferredMailOderLink() {
+		Actions actions = new Actions(driver);
+		actions.moveToElement(myMenuLinkAarp);
+		actions.perform();
+		if(validate(preferredMailServicePharmacyLink))
+		{
+			System.out.println("Preferred Mail Service Link is displaying ");	
+		}
+		else
+		{
+			System.out.println("Preferred Mail Service Link is not displaying ");
+		}
+		
+	}
+
+	public void validateDrugsPreferredMailOderLink() {
+		
+		if(validate(drugPreferredMailServicePharmacyLink))
+		{
+			System.out.println("Drug Preferred Mail Service Link is displaying in footer");	
+		}
+		else
+		{
+			System.out.println("Drug Preferred Mail Service Link is not displaying in footer");
+		}
 	}
 
 }

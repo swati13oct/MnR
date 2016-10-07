@@ -3,6 +3,7 @@
  */
 package pages.member.ulayer;
 
+import org.openqa.selenium.Alert;
 import org.openqa.selenium.UnhandledAlertException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -12,6 +13,7 @@ import org.openqa.selenium.support.PageFactory;
 import pages.acquisition.ulayer.LoginAssistancePage;
 import acceptancetests.atdd.data.MRConstants;
 import acceptancetests.atdd.util.CommonUtility;
+import atdd.framework.MRScenario;
 import atdd.framework.UhcDriver;
 
 /**
@@ -53,6 +55,17 @@ public class LoginPage extends UhcDriver {
 		sendkeys(userNameField,username);
 		sendkeys(passwordField,password);
 		signInButton.click();
+		if (MRScenario.environment.equals("dev-c")) {
+
+			Alert alert = driver.switchTo().alert();
+			        alert.accept();
+			        Alert alert1 = driver.switchTo().alert();
+			        alert1.accept();
+			   /*     Alert alert2 = driver.switchTo().alert();
+			        alert2.accept();
+			        Alert alert3 = driver.switchTo().alert();
+			        alert3.accept();*/
+			        }
 		if(currentUrl().contains("home/my-account-home.html"))
 		{
 			return new AccountHomePage(driver);
