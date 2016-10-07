@@ -158,6 +158,26 @@ public class FormsandResourcesAarpStepDefinition {
 
 	}
 
+	@Then("^i should see the mail order pdf link$")
+	public void validates_mail_order_pdf_present() {
+		FormsandresourcesPage formsandresourcesAarpPage = (FormsandresourcesPage) getLoginScenario()
+				.getBean(PageConstants.FORMS_AND_RESOURCES_PAGE);
+		JSONObject formsAndResourcesActualJson = (JSONObject) getLoginScenario()
+				.getBean(FnRCommonConstants.FORMS_AND_RESOURCES_ACTUAL);
+		JSONObject formsAndResourcesExpectedJson = (JSONObject) getLoginScenario()
+				.getBean(FnRCommonConstants.FORMS_AND_RESOURCES_EXPECTED);
+		/* Validations */
+		try {
+			JSONAssert.assertEquals(formsAndResourcesExpectedJson,
+					formsAndResourcesActualJson, true);
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}
+
+		formsandresourcesAarpPage.logOut();
+
+	}
+
 	@After
 	public void tearDown() {
 
