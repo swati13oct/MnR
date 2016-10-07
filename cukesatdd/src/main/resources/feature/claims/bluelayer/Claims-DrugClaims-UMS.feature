@@ -13,7 +13,7 @@ When user views drug claim details for individual claim in UMS site
 Then user validates the drug claim details for a claim in UMS site
 Examples:
 	| planType | memberType | claimPeriod    |claimSystem|
-	| MAPD     | Individual | Last 90 days   | Cosmos    |
+#	| MAPD     | Individual | Last 90 days   | Drug      |
 #	| PDP      | Individual	| Last 24 Months |           |
 #	| MAPD     | Group      | Last 90 days   |           |
 #	| PDP      | Group      | Last 90 days   |	         |
@@ -33,10 +33,10 @@ Then user validates the following drug claim details for a claim in UMS site
 	
 Examples:
 	| planType | memberType   | claimFromDate | claimToDate |
-#	| MAPD     |	        | 01-01-2015    | 12-01-2015  |
-#	| MAPD     | Group      | 01-01-2015    | 12-01-2015  |
-#	| PDP      |	        | 01-01-2015    | 12-01-2015  |
-#	| PDP      | Group      | 01-01-2015    | 12-01-2015  |
+#	| MAPD     | Individual	  | 07-11-2016    | 07-11-2016  |
+#	| MAPD     | Group        | 01-01-2015    | 12-01-2015  |
+#	| PDP      |	          | 01-01-2015    | 12-01-2015  |
+#	| PDP      | Group        | 01-01-2015    | 12-01-2015  |
 
 
 Scenario Outline:Verify the drug claim summary and details for selected time period for terminated members
@@ -78,3 +78,17 @@ Examples:
 #	| MAPD     | Group      | 01-01-2015    | 12-01-2015  |
 #	| PDP      |	        | 01-01-2015    | 12-01-2015  |
 #	| PDP      | Group      | 01-01-2015    | 12-01-2015  |
+
+
+
+Scenario Outline:Verify the drug claim summary and details for selected time period
+Given the registered UMS with following attributes in UMS site for drug claims
+	| Plan Type    | <planType>    |
+	| Member Type  | <memberType>  |
+When the user navigates to claim summary page in UMS site for drug claims
+Examples:
+	| planType | memberType | 
+#	| MA       | Individual |  
+	| MAPD     | Individual |  
+#	| MAPD     | Group      |   
+#	| MA       | Group      | 

@@ -26,38 +26,35 @@ public class ContactUsPage extends UhcDriver{
 	@FindBy(id = "disclosure_link")
 	private WebElement logOut;
 	
+	@FindBy(xpath="//*[@id='secureWidget']/div[1]")
+	private WebElement securewidget;
+	
+	@FindBy(xpath="//*[@id='addAnotherPlanLink']")	
+	private WebElement addPlan;
+	
+	
+	
 	private PageData contactUs;
 
 	public JSONObject contactUsJson;
 	
+	private JSONObject secureemailwidgetDataJson;
+	
+	private PageData secureemailwidgetData;
+	
 	public ContactUsPage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
-		String fileName = CommonConstants.CONTACT_US_PAGE_DATA;
-		contactUs = CommonUtility.readPageData(fileName,
-				CommonConstants.PAGE_OBJECT_DIRECTORY_BLUELAYER_MEMBER);
+		CommonUtility.waitForPageLoad(driver, addPlan, CommonConstants.TIMEOUT_30);
 		openAndValidate();
 		
 	}
 
 	@Override
 	public void openAndValidate() {
-		JSONObject jsonObject = new JSONObject();
-		for (String key : contactUs.getExpectedData().keySet()) {
-			WebElement element = findElement(contactUs.getExpectedData()
-					.get(key));
-			if (element != null) {
-				if(validate(element)){
-				try {
-					jsonObject.put(key, element.getText());
-				} catch (JSONException e) {
-					e.printStackTrace();
-				}
-				}
-			}
-		}
-		contactUsJson = jsonObject;
-		
+
+		validate(addPlan);
+		validate(logOut);
 	}
 
 	public JSONObject getExpectedData(Map<String, JSONObject> expectedDataMap) {
@@ -71,6 +68,46 @@ public class ContactUsPage extends UhcDriver{
 		return contactUsExpectedJson;
 	}
 
+	
+	public void validatesecureemail()
+	{
+		if (securewidget.isDisplayed())
+		{
+			System.out.println("Secure widget is displayed");
+		}
+		else
+		{
+			System.out.println("Secure widget is not  displayed");
+		}
+	}
+
+	public JSONObject getsecurewidget() {
+		String fileName = CommonConstants.AARPM_SECURE_EMAIL_DATA;
+		secureemailwidgetData = CommonUtility.readPageData(fileName,
+				CommonConstants.PAGE_OBJECT_DIRECTORY_BLUELAYER_MEMBER);
+
+		JSONObject jsonObject = new JSONObject();
+		for (String key : secureemailwidgetData.getExpectedData().keySet()) {
+			WebElement element = findElement(secureemailwidgetData.getExpectedData()
+					.get(key));
+			if (element != null) {
+				if (validate(element)) {
+					try {
+						jsonObject.put(key, element.getText());
+					} catch (JSONException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				}
+			}
+		}
+		secureemailwidgetDataJson = jsonObject;
+
+		return secureemailwidgetDataJson;
+	}
+
+	
+	
 
 	public void logOut() {
 		logOut.click();

@@ -12,10 +12,10 @@ Examples:
 
  | planType | memberType  |
 #| MA   	|Individual |
-#| MAPD     |Individual |
+ | MAPD     |Individual |
 #| MAPD	    | Group    |
 #| MA	    | Group    |
- | PDP      | Group    |
+#| PDP      | Group    |
 #| SSUP     | Group    |
  
 Scenario Outline:To verify pdfs displayed in plan materials in UMS site
@@ -28,10 +28,10 @@ Then the user validates pdfs in plan materials section in UMS site
 Examples:
 
 	 | planType | memberType  |
-	 | MA   	|Individual |
-	 |  MA      | Group       |
-	 |  PDP     | Group       |
-	 |  SSRD    | Group       |
-	 |  SSUP    | Group       |
+	 #| MA   	|Individual |
+	 #|  MA      | Group       |
+	 #|  PDP     | Group       |
+	 #|  SSRD    | Group       |
+	 #|  SSUP    | Group       |
 
 

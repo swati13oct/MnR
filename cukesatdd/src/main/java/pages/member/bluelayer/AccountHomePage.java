@@ -69,10 +69,6 @@ public class AccountHomePage extends UhcDriver {
 
 	@FindBy(linkText = "Prescription drug cost and benefits summary")
 	private WebElement prescriptionDrugCostBenefitSummaryLink;
-	
-	
-	@FindBy(linkText = "My plan benefits")
-	private WebElement myPlanBenefitsLink;
 
 	@FindBy(linkText = "Search drug claims")
 	private WebElement searchDrugClaims;
@@ -239,9 +235,8 @@ public class AccountHomePage extends UhcDriver {
 	public DrugCostandBenefitSummaryPage navigateToPrescriptionDrugCostPage() {
 
 		myMenuNavigator.click();
-		//prescriptionDrugCostBenefitSummaryLink.click();
+		prescriptionDrugCostBenefitSummaryLink.click();
 
-		myPlanBenefitsLink.click();
 		if (getTitle().equalsIgnoreCase(
 						"UnitedHealthcare Medicare Solutions | Drug Cost and Benefits Summary")) {
 			return new DrugCostandBenefitSummaryPage(driver);
@@ -278,11 +273,11 @@ public class AccountHomePage extends UhcDriver {
 		searchDrugClaims.click();
 		if (getTitle().equalsIgnoreCase(
 				"UnitedHealthcare Medicare Solutions | Claims")) {
-			if (planCategory.equalsIgnoreCase("Individual")) {
+			/*if (planCategory.equalsIgnoreCase("Individual")) {
 				return new ClaimSummaryPage(driver, planCategory);
-			} else {
+			} else { */
 				return new ClaimSummaryPage(driver);
-			}
+			/*}*/
 		}
 
 		return null;
@@ -290,7 +285,7 @@ public class AccountHomePage extends UhcDriver {
 public ContactUsPage navigatesToContactUsPage() {
 		
 		contactUsLink.click();
-		if(getTitle().equalsIgnoreCase("AARP Medicare Plans | Contact Us"))
+		if(getTitle().equalsIgnoreCase("UnitedHealthcare Medicare Solutions | Contact Us"))
 		{
 			return new ContactUsPage(driver);
 		}

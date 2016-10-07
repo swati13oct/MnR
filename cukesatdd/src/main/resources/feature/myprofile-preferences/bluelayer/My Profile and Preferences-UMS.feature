@@ -9,10 +9,10 @@ Then the user validates the complete profile in UMS site
 Examples:
 	    | planType | memberType |
 	#	| MA       | Individual |
-	#	| MAPD     | Individual |
+		| MAPD     | Individual |
 	#	| MA       | Group      |   
 	#	| MAPD     | Group      |
-	##	| PDP      | Group      |
+	#	| PDP      | Group      |
 	#	| SSUP     | Group      |
 
 
@@ -76,7 +76,7 @@ Examples:
 #			| MAPD     | Individual |
 #			| MA       | Group      |   
 #			| MAPD     | Group      |
-			| PDP      | Group      |
+#			| PDP      | Group      |
 #			| SSUP     | Group      |
 
 

@@ -12,8 +12,8 @@ Examples:
 #	| MA       | Individual |
 #	| MA       | Group      |
 	| MAPD     | Individual |
-	| MAPD     | Group      |
-	| PDP      | Group      |
+#	| MAPD     | Group      |
+#	| PDP      | Group      |
 
 Scenario Outline: Verify login in UHC site for group plan member 
 Given registered UHC member with following attributes
