@@ -68,7 +68,8 @@ public class LoginPage extends UhcDriver {
 		
 		
 
-if (MRScenario.environment.equals("dev-b") || MRScenario.environment.equals("dev-a") || MRScenario.environment.equals("dev-c")) {
+if (MRScenario.environment.equals("dev-b") || MRScenario.environment.equals("dev-a") || MRScenario.environment.equals("dev-c")
+		|| MRScenario.environment.equals("team-a")) {
 		Alert alert = driver.switchTo().alert();
         alert.accept();
         Alert alert1 = driver.switchTo().alert();

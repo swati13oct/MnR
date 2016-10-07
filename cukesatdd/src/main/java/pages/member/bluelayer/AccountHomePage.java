@@ -69,6 +69,10 @@ public class AccountHomePage extends UhcDriver {
 
 	@FindBy(linkText = "Prescription drug cost and benefits summary")
 	private WebElement prescriptionDrugCostBenefitSummaryLink;
+	
+	
+	@FindBy(linkText = "My plan benefits")
+	private WebElement myPlanBenefitsLink;
 
 	@FindBy(linkText = "Search drug claims")
 	private WebElement searchDrugClaims;
@@ -235,8 +239,9 @@ public class AccountHomePage extends UhcDriver {
 	public DrugCostandBenefitSummaryPage navigateToPrescriptionDrugCostPage() {
 
 		myMenuNavigator.click();
-		prescriptionDrugCostBenefitSummaryLink.click();
+		//prescriptionDrugCostBenefitSummaryLink.click();
 
+		myPlanBenefitsLink.click();
 		if (getTitle().equalsIgnoreCase(
 						"UnitedHealthcare Medicare Solutions | Drug Cost and Benefits Summary")) {
 			return new DrugCostandBenefitSummaryPage(driver);

@@ -174,6 +174,16 @@ public class PlanSummaryUmsStepDefintion {
 		}
 		planSummaryPage.logOut();
 	}
+	
+	@Then("^the user click on the view detail button in UMS site$")
+	public void user_click_on_view_details_button() {
+		PlanSummaryPage planSummaryPage = (PlanSummaryPage) getLoginScenario()
+				.getBean(PageConstants.PLAN_SUMMARY_PAGE);
+		 planSummaryPage.navigateToViewDetails();
+		
+		// planSummaryPage.logOut();     
+		 
+		}
 
 
 }

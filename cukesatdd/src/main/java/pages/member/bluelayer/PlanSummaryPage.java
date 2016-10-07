@@ -32,6 +32,9 @@ public class PlanSummaryPage extends UhcDriver {
 	
 	@FindBy(xpath = "//div[@id='main_content']/div[2]/div/div[2]/div/div[3]/div/div[2]/div/h3")
 	private WebElement claimSectionHeading;
+	
+	@FindBy(xpath = "/html/body/div[6]/div/div/table/tbody/tr[5]/td/div[2]/div/div[2]/div[2]/div[2]/div/div[160]/div[2]/div[1]/div[2]/div/div[3]/div[2]/div[2]/div/div/p/a")
+	private WebElement viewdetailbutton;
 
 	@FindBy(id = "disclosure_link")
 	private WebElement logOut;
@@ -109,5 +112,14 @@ public class PlanSummaryPage extends UhcDriver {
 
 		return planSummaryExpectedJson;
 	}
+
+	public DrugCostandBenefitSummaryPage navigateToViewDetails() {
+		viewdetailbutton.click();
+		if (getTitle().equalsIgnoreCase(
+						"UnitedHealthcare Medicare Solutions | Drug Cost and Benefits Summary")) {
+			return new DrugCostandBenefitSummaryPage(driver);
+		}
+		return null;
+		}
 
 }
