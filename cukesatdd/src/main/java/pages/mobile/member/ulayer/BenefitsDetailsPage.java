@@ -14,7 +14,6 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-import pages.acquisition.ulayer.AboutUsAARPPage;
 import acceptancetests.atdd.data.PageData;
 import acceptancetests.atdd.mobile.data.CommonConstants;
 import acceptancetests.atdd.util.CommonUtility;
@@ -24,43 +23,35 @@ import atdd.framework.UhcDriver;
  * @author pjaising
  *
  */
-public class BenefitsSummaryPage extends UhcDriver{
+public class BenefitsDetailsPage extends UhcDriver{
 	
 	@FindBy(xpath="//div[@class='site-header']/a")
 	private WebElement menuButton;
 	
-	@FindBy(xpath = "//div[@class='menu-container']/a")
-	private WebElement logout;
-	
-	@FindBy(className = "menu-container")
-	private WebElement menuContainer;
-	
-	@FindBy(xpath = "//*[@id='wrapper']/div[1]/div[2]/div/div/div[1]/div[5]/div/div[2]/div/a/span")
-	public WebElement viewdetailsbutton;
-	
-	private PageData benefitsSummary;
+	private PageData benefitsDetail;
 
-	public JSONObject benefitsSummaryJson;
-
+	public JSONObject benefitsDetailJson;
+	
 	private PageData browserCheckData;
 
 	private JSONObject browserCheckJson;
-
-	public BenefitsSummaryPage(WebDriver driver) {
+	
+	public BenefitsDetailsPage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
-		String fileName = CommonConstants.BENEFITS_SUMMARY_PAGE_DATA;
-		benefitsSummary = CommonUtility.readPageData(fileName,
+		String fileName = CommonConstants.BENEFITS_DETAIL_PAGE_DATA;
+		benefitsDetail = CommonUtility.readPageData(fileName,
 				CommonConstants.PAGE_OBJECT_DIRECTORY_MOBILE_ULAYER_MEMBER);
 		openAndValidate();
 	}
 
+	
 	@Override
 	public void openAndValidate() {
 		validate(menuButton);
 		JSONObject jsonObject = new JSONObject();
-		for (String key : benefitsSummary.getExpectedData().keySet()) {
-			List<WebElement> elements = findElements(benefitsSummary
+		for (String key : benefitsDetail.getExpectedData().keySet()) {
+			List<WebElement> elements = findElements(benefitsDetail
 					.getExpectedData().get(key));
 			if (elements.size() == 1) {
 				if (validate(elements.get(0))) {
@@ -96,30 +87,19 @@ public class BenefitsSummaryPage extends UhcDriver{
 			}
 
 		}
-		benefitsSummaryJson = jsonObject;
+		benefitsDetailJson = jsonObject;
 		
-		System.out.println("benefitsSummaryJson----->"+benefitsSummaryJson);
+		System.out.println("benefitsdetailJson----->"+benefitsDetailJson);
 	}
 
 	public JSONObject getExpectedData(Map<String, JSONObject> expectedDataMap) {
-		JSONObject benefitsSummaryExpectedJson = expectedDataMap
-				.get(acceptancetests.atdd.data.CommonConstants.BENEFITS_SUMMARY);
+		JSONObject benefitsDetailExpectedJson = expectedDataMap
+				.get(acceptancetests.atdd.data.CommonConstants.BENEFITS_DETAIL);
 		
-		return benefitsSummaryExpectedJson;
+		return benefitsDetailExpectedJson;
 	}
 
-	public void logout()
-	{
-		menuButton.click();
-		if(validate(menuContainer))
-		{
-			logout.click();
-		}
-		else
-		{
-			System.out.println("logout button not found on page");
-		}
-	}
+
 
 	public JSONObject getBrowserCheck() {
 		String fileName = CommonConstants.MOBILE_BROWSER_CHECK_DATA;
@@ -145,21 +125,11 @@ public class BenefitsSummaryPage extends UhcDriver{
 
 		return browserCheckJson;
 	}
-
-
-	public BenefitsDetailsPage clickviewdrugdetails() {
-		
-		validate(viewdetailsbutton);
-		viewdetailsbutton.click();
-		validate(viewdetailsbutton);
-		
-		if (getTitle().equalsIgnoreCase("Visualize Plans")) {
-			return new BenefitsDetailsPage(driver);
-		}
 	
-		
-		// TODO Auto-generated method stub
-		return null;
-	}
-
+	
+	
+	
+	
+	
+	
 }

@@ -13,6 +13,8 @@ public class CommonConstants {
 	
 	public static final String BENEFITS_SUMMARY_PAGE_DATA = "benefitssummary.json"; 
 	
+	public static final String BENEFITS_DETAIL_PAGE_DATA = "benefitsDetail.json";
+	
 	public static final String BENEFITS_SUMMARY_PAGE_DATA_BLUE_LAYER = "benefitssummary.json"; 
 
 	public static final String PAGE_OBJECT_DIRECTORY_MOBILE_ULAYER_MEMBER = "/page-objects/mobile/member/ulayer/";

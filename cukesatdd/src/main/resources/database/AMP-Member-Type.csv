@@ -1,4 +1,5 @@
 q3ulgladiators_02/Password@1,PDP,,
+pdpul_1012/Password@1,PDP,,
 q3ulgladiators_01/Password@1,MAPD,,
 apr_ulayer148/Password@1,PDP,,
 test_q2ulayer151/Password@1,PDP,,
@@ -19,6 +20,7 @@ q4ulayer_013/Password@1,PDP,term less than 12 months,
 q2combo_026_a/Password@1,PDP,MS,Rider
 q1_ulayer_novu_001/Password@1,MA,novu,
 q1ulayer_267/Password@1,MAPD,non-novu,
-q1ship_019/Password@1,MAPD,mobile,
+q1ship_019/Password@1,SHIP,mobile,
 jul_ulayer_b_130/Password@1,PDP,
-mapd_ulayer001/Password@1,MAPD
+jul_ulayer123/Password@1,MAPD,mobile,
+mapd_ulayer001/Password@1,MAPD,
