@@ -13,7 +13,7 @@ import cucumber.junit.Cucumber;
  */
 @RunWith(Cucumber.class)
 @Cucumber.Options(glue = { "atdd.framework","acceptancetests.registration" }, 
-		features = { "feature/registration" }, 
+		features = { "feature/registration/bluelayer" }, 
 		format = {
 		"pretty", "html:reports/test-report" }, tags ={"@registration"})
 public class RunMRAtddTestRegistration {

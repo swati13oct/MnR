@@ -10,7 +10,8 @@ import acceptancetests.atdd.data.ulayer.Page;
  *
  */
 public class CommonConstants {
-
+	
+	public static final String FLOW_NAME = "registration/planconfirmation";
 	
 	public static final String PROPERTY_FILE_FOLDER = "/config";
 	
@@ -338,7 +339,7 @@ public class CommonConstants {
 
 	public static final String RETIREE_PAGE_OBJECT_DIRECTORY = "/page-objects/uhcretiree/acquisition/";
 
-	public static final String REGISTRATION = "registrationsuccess";
+	public static final String REGISTRATION = "registration";
 
 	public static final String REGISTRATION_SUCCESS = "registrationsuccess";
 

@@ -1,6 +1,7 @@
 package atdd.framework;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -37,6 +38,9 @@ import org.json.JSONObject;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.firefox.FirefoxBinary;
+import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.firefox.FirefoxProfile;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
@@ -485,7 +489,8 @@ public class MRScenario {
 		}
 		// Read properties from classpath
 		StringBuffer propertyFilePath = new StringBuffer(CommonConstants.PROPERTY_FILE_FOLDER);
-		propertyFilePath.append("/").append(propertiesFileToPick).append("/").append(CommonConstants.PROPERTY_FILE_NAME);
+		propertyFilePath.append("/").append(propertiesFileToPick).append("/")
+				.append(CommonConstants.PROPERTY_FILE_NAME);
 		InputStream is = ClassLoader.class.getResourceAsStream(propertyFilePath.toString());
 		try {
 			prop.load(is);
@@ -769,19 +774,20 @@ public class MRScenario {
 	}
 
 	public WebDriver getWebDriver() {
-		HtmlUnitDriver htmlUnitDriver = new HtmlUnitDriver(BrowserVersion.FIREFOX_24) {
-			@Override
-			protected WebClient modifyWebClient(WebClient client) {
-				client.getOptions().setThrowExceptionOnScriptError(false);
-				return client;
-			}
-		};
-		htmlUnitDriver.setJavascriptEnabled(true);
 
-		webDriver = htmlUnitDriver;
+		// webDriver = new FirefoxDriver();
+		// webDriver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
+		// return webDriver;
+
+		File pathToBinary = new File("C:/Users/kchaudh3/Firefox/firefox.exe");
+
+		FirefoxBinary ffBinary = new FirefoxBinary(pathToBinary);
+		FirefoxProfile firefoxProfile = new FirefoxProfile();
+		webDriver = new FirefoxDriver(ffBinary, firefoxProfile);
 		webDriver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
-		webDriver.manage().window().maximize();
+
 		return webDriver;
+
 	}
 
 	public WebDriver getIEDriver() {
