@@ -60,6 +60,9 @@ public class ClaimSummaryPage extends UhcDriver {
 
 	@FindBy(id = "radioDrug")
 	private WebElement radioDrug;
+	
+	@FindBy(xpath = "//p[@id='linktodrugcostbenefit']/p/a")
+	private WebElement linkexistense;
 
 	private PageData claimsSummary;
 
@@ -361,5 +364,33 @@ public class ClaimSummaryPage extends UhcDriver {
 		System.out.println("claimSummaryJson----->"+claimSummaryJson);
 
 	}
+	
+	public String searchlinkexistense() {
+		try {
+			Thread.sleep(3000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		
+		if(linkexistense.isDisplayed())
+		{
+			return linkexistense.getText();
+		}
+			return null;
+	}
+	
+	public DrugCostandBenefitSummaryPage navigateToPrescriptionDrugCostPage() {
 
+		linkexistense.click();
+	
+		if (getTitle().equalsIgnoreCase(
+						"UnitedHealthcare Medicare Solutions | Drug Cost and Benefits Summary")) {
+			
+			return new DrugCostandBenefitSummaryPage(driver);
+		}
+
+		return null;
+	}
+	
+	
 }

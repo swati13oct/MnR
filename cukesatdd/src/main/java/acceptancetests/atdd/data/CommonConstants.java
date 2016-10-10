@@ -160,6 +160,8 @@ public class CommonConstants {
 					CommonConstants.CONTACT_US_ULAYER_DIRECTORY),
 			new Page(CommonConstants.BENEFITS_SUMMARY,
 					CommonConstants.BENEFITS_SUMMARY_DIRECTORY),
+			new Page(CommonConstants.BENEFITS_DETAIL,
+					CommonConstants.BENEFITS_DETAIL_DIRECTORY),
 			new Page(CommonConstants.PLAN_COMPARE,
 					CommonConstants.PLAN_COMPARE_ULAYER_DIRECTORY),
 			new Page(CommonConstants.ADD_PLAN_CONFIRMATION,
@@ -169,6 +171,10 @@ public class CommonConstants {
 	public static final String BENEFITS_SUMMARY_DIRECTORY = "/jsonresponse/mobile/member/ulayer/benefits-summary/";
 
 	public static final String BENEFITS_SUMMARY = "benefitssummary";
+	
+	public static final String BENEFITS_DETAIL = "benefitsdetail" ;
+	
+	public static final String BENEFITS_DETAIL_DIRECTORY = "/jsonresponse/mobile/member/ulayer/benefits-detail/";
 	
 	public static final String BENEFITS_SUMMARY_BLAYER="benefitssummary";
 	

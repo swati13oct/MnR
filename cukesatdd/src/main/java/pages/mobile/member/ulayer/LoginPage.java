@@ -24,7 +24,7 @@ import atdd.framework.UhcDriver;
  */
 public class LoginPage extends UhcDriver{
 	
-	private static String PAGE_URL = MRConstants.UHCM_MOBILE_URL;
+	private static String PAGE_URL = MRConstants.AARPM_MOBILE_URL;
 	
 	@FindBy(id="loginSTANDuser")
 	private WebElement userNameField;
