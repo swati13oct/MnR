@@ -39,7 +39,7 @@ public class RegistrationHomePage extends UhcDriver {
 	@FindBy(className = "shipcontinue_btn")
 	private WebElement continueButton;
 
-	private static String PAGE_URL = MRConstants.UHCM_REGISTRATION_URL;
+	private static String PAGE_URL = MRConstants.MEDICA_REGISTRATION_URL;
 
 	public RegistrationHomePage(WebDriver driver) {
 		super(driver);

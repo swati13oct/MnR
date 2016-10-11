@@ -20,7 +20,7 @@ And the user registers with the following details in UMS site
 Then the user registers successfully in UMS site	
 Examples:
 	| planMemberId | dateOfBirth | secondMemberId | userName       | password   | confirmPassword | email                   | confirmEmail            |
-#	| 0177005451   | 11-18-1948  | 901846789      | apr_blgroup268 | Password@1 | Password@1      | UHCMNRPORTALS@GMAIL.COM | UHCMNRPORTALS@GMAIL.COM |
+	| 0177005451   | 11-18-1948  | 901846789      | apr_blgroup268 | Password@1 | Password@1      | UHCMNRPORTALS@GMAIL.COM | UHCMNRPORTALS@GMAIL.COM |
 	
 Scenario Outline: Verify registration for individual or group members in UMS site
 Given the user is on registration page of UMS site 
@@ -39,4 +39,4 @@ Then the user registers successfully in UMS site
 
 Examples:
 	 | planMemberId | dateOfBirth | userName           | password   | confirmPassword | email                   | confirmEmail            |
-#	 | 006916255    | 08-13-1931  | apr_blayer069      | Password@1 | Password@1      | UHCMNRPORTALS@GMAIL.COM | UHCMNRPORTALS@GMAIL.COM |
+	 | 006916255    | 08-13-1931  | apr_blayer069      | Password@1 | Password@1      | UHCMNRPORTALS@GMAIL.COM | UHCMNRPORTALS@GMAIL.COM |

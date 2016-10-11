@@ -21,6 +21,9 @@ public class SignInPage extends GlobalWebElements {
 	
 	@FindBy(xpath = "//*[@id='accessURAccountBTN']/span")
 	private WebElement signInButton;
+	
+	@FindBy(xpath = "//span[contains(.,'register now')]")
+	private WebElement registerNow;
 
 	public SignInPage(WebDriver driver) {
 		super(driver);
@@ -33,6 +36,7 @@ public class SignInPage extends GlobalWebElements {
 		start(MY_MEDICA_PAGE_URL);
 		validate(accessYourAccount);
 		validate(signInButton);
+		validate(registerNow);
 	}
 	
 	public AboutUsPage navigateToAboutUs() {
@@ -45,6 +49,13 @@ public class SignInPage extends GlobalWebElements {
 
 	}
 
-
+	public RegistrationHomePage navigateToRegistrationHomePage() {
+		registerNow.click();
+		if (driver.getTitle().equalsIgnoreCase(
+				"UnitedHealthcare Medicare Solutions | Registration")) {
+			return new RegistrationHomePage(driver);
+		}
+		return null;
+	}
 
 }

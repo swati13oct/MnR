@@ -55,6 +55,8 @@ public class RegistrationUmsStepDefinition {
 		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
 		getLoginScenario().saveBean(PageConstants.REGISTRATION_HOME_PAGE,
 				registrationHomePage);
+		getLoginScenario().saveBean(PageConstants.REGISTRATION_HOME_PAGE,
+				registrationHomePage);
 	}
 	
 	@When("^the user registers with below details in UMS site$")
