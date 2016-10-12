@@ -1,7 +1,7 @@
 /**
  * 
  */
-package acceptancetests.mobile.login.ulayer;
+package acceptancetests.mobile.login.blayer;
 
 import gherkin.formatter.model.DataTableRow;
 
@@ -19,10 +19,10 @@ import org.openqa.selenium.WebDriver;
 import org.skyscreamer.jsonassert.JSONAssert;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import pages.acquisition.ulayer.AcquisitionHomePage;
+import pages.mobile.member.blayer.BenefitsDetailPage;
+import pages.mobile.member.blayer.BenefitsSummaryPage;
+import pages.mobile.member.blayer.LoginPage;
 import pages.mobile.member.ulayer.BenefitsDetailsPage;
-import pages.mobile.member.ulayer.BenefitsSummaryPage;
-import pages.mobile.member.ulayer.LoginPage;
 import acceptancetests.atdd.data.mobile.member.PageConstants;
 import acceptancetests.atdd.mobile.data.CommonConstants;
 import acceptancetests.mobile.login.data.LoginCommonConstants;
@@ -38,7 +38,7 @@ import cucumber.table.DataTable;
  * @author pjaising
  *
  */
-public class LoginAarpStepDefinition {
+public class PlanDetailStepDefinition {
 	
 	@Autowired
 	MRScenario loginScenario;
@@ -47,7 +47,7 @@ public class LoginAarpStepDefinition {
 		return loginScenario;
 	}
 	
-	@Given("^the user is on the AARP medicare site login page$")
+	@Given("^the user is on the UHC medicare site mobile login page$")
 	public void user_login_page()
 	{
 		WebDriver wd = getLoginScenario().getMobileWebDriver();
@@ -57,7 +57,7 @@ public class LoginAarpStepDefinition {
 		getLoginScenario().saveBean(PageConstants.LOGIN_PAGE, loginPage);
 	}
 	
-	@When("^the user logs in with a registered AMP with following details in AARP site$")
+	@When("^the user logs in with a registered UMS with following details in UHC site$")
 	public void user_logs_in(DataTable memberAttributes)
 	{
 		/* Reading the given attribute from feature file */
@@ -84,7 +84,7 @@ public class LoginAarpStepDefinition {
 		System.out.println("desiredAttributes.." + desiredAttributes);
 
 		Map<String,String> loginCreds = loginScenario
-				.getAMPMemberWithDesiredAttributes(desiredAttributes);
+				.getUMSMemberWithDesiredAttributes(desiredAttributes);
 		
 		String userName = null;
 		String pwd = null;
@@ -118,43 +118,56 @@ public class LoginAarpStepDefinition {
 		}
 
 		getLoginScenario().saveBean(CommonConstants.EXPECTED_DATA_MAP, expectedDataMap);
+	}
 	
-	}	
-
-	@Then("^the user validates plan and member details on benefits summary page in AARP site$")
-	public void log_in_successful()
+@And("^the user navigates to benefits and coverage details page$")
+	
+	public void user_navigates_to_details_page()
+	
 	{
-		JSONObject benefitsSummaryActualJson = (JSONObject)getLoginScenario().getBean(LoginCommonConstants.BENEFITS_SUMMARY_ACTUAL);
-		System.out.println("benefitsSummaryActualJson----->"+benefitsSummaryActualJson);
-		
-		JSONObject benefitsSummaryExpectedJson = (JSONObject)getLoginScenario().getBean(LoginCommonConstants.BENEFITS_SUMMARY_EXPECTED);
-		System.out.println("benefitsSummaryExpectedJson----->"+benefitsSummaryExpectedJson);
-		
-		try {
-			JSONAssert.assertEquals(benefitsSummaryExpectedJson, benefitsSummaryActualJson, true);
-		} catch (JSONException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-		BenefitsSummaryPage benefitsSummaryPage = (BenefitsSummaryPage)getLoginScenario().getBean(PageConstants.BENEFITS_SUMMARY_PAGE);
-		benefitsSummaryPage.logout();
-		
+	
+		String userName = "jul_ulayer123";
+	BenefitsSummaryPage benefitsSummaryPage = (BenefitsSummaryPage) getLoginScenario()
+	.getBean(PageConstants.BENEFITS_SUMMARY_PAGE);
+	
+	BenefitsDetailPage benefitsDetailPage = benefitsSummaryPage.clickviewdrugdetails();
+	
+	Map<String,JSONObject> expectedDataMap = loginScenario.getExpectedJson(userName);
+	JSONObject benefitsDetailExpectedJson = benefitsDetailPage.getExpectedData(expectedDataMap);
+	getLoginScenario().saveBean(LoginCommonConstants.BENEFITS_DETAIL_EXPECTED, benefitsDetailExpectedJson);
+	
+	JSONObject benefitsDetailActualJson =  null;
+	if (benefitsDetailPage != null) {
+		getLoginScenario().saveBean(PageConstants.BENEFITS_DETAIL_PAGE, benefitsDetailPage);
+		benefitsDetailActualJson = benefitsDetailPage.benefitsDetailJson;
+		getLoginScenario().saveBean(LoginCommonConstants.BENEFITS_DETAIL_ACTUAL, benefitsDetailActualJson);
+	}
+
+	getLoginScenario().saveBean(CommonConstants.EXPECTED_DATA_MAP, expectedDataMap);
 	
 	}
 
+@Then("^the user validates plan and member details on benefits details page in UHCM site$")
+public void log_successful()
+{
+
+
+	JSONObject benefitsDetailActualJson = (JSONObject)getLoginScenario().getBean(LoginCommonConstants.BENEFITS_DETAIL_ACTUAL);
+	System.out.println("benefitsDeatilActualJson----->"+benefitsDetailActualJson);
 	
-
-	@After
-	public void tearDown() {
-
-		WebDriver wd = (WebDriver) getLoginScenario().getBean(
-				CommonConstants.WEBDRIVER);
-		// wd.close();
-		wd.quit();
-		getLoginScenario().flushBeans();
+	JSONObject benefitsDetailExpectedJson = (JSONObject)getLoginScenario().getBean(LoginCommonConstants.BENEFITS_DETAIL_EXPECTED);
+	System.out.println("benefitsDetailExpectedJson----->"+benefitsDetailExpectedJson);
+	
+	try {
+		JSONAssert.assertEquals(benefitsDetailExpectedJson, benefitsDetailActualJson, true);
+	} catch (JSONException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
 	}
-	
-	
 
 }
+
+
+	
+	
+}	
