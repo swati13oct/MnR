@@ -12,7 +12,7 @@ import cucumber.junit.Cucumber;
  *
  */
 @RunWith(Cucumber.class)
-@Cucumber.Options(glue = { "atdd.framework","acceptancetests.mobile.login" }, 
+@Cucumber.Options(glue = { "atdd.framework","acceptancetests.mobile.plandetail.blayer" }, 
 features = { "feature/mobile/ulayer" }, 
 format = {
 "pretty", "html:reports/test-report" }, tags ={"@plandetail"})

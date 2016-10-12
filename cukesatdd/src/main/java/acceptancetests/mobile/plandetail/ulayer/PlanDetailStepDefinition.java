@@ -1,7 +1,7 @@
 /**
  * 
  */
-package acceptancetests.mobile.login.ulayer;
+package acceptancetests.mobile.plandetail.ulayer;
 
 import gherkin.formatter.model.DataTableRow;
 

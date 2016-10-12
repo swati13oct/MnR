@@ -45,7 +45,7 @@ public class LoginUhcStepDefinition {
 	}
 	
 	@Given("^the user is on the UHC medicare site mobile login page$")
-	public void user_login_page()
+	public void UHC_user_login_page()
 	{
 		WebDriver wd = getLoginScenario().getMobileWebDriver();
 		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
@@ -55,7 +55,7 @@ public class LoginUhcStepDefinition {
 	}
 	
 	@When("^the user logs in with a registered UMS with following details in UHC site$")
-	public void user_logs_in(DataTable memberAttributes)
+	public void UHC_user_logs_in(DataTable memberAttributes)
 	{
 		/* Reading the given attribute from feature file */
 		List<DataTableRow> memberAttributesRow = memberAttributes
@@ -118,7 +118,7 @@ public class LoginUhcStepDefinition {
 	}
 	
 	@And("^the user validates plan and member details on benefits summary page in UHC site$")
-	public void log_in_successful()
+	public void UHC_log_in_successful()
 	{
 		JSONObject benefitsSummaryActualJson = (JSONObject)getLoginScenario().getBean(LoginCommonConstants.BENEFITS_SUMMARY_ACTUAL);
 		System.out.println("benefitsSummaryActualJson----->"+benefitsSummaryActualJson);

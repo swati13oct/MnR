@@ -1,7 +1,7 @@
 /**
  * 
  */
-package acceptancetests.mobile.login.blayer;
+package acceptancetests.mobile.plandetail.blayer;
 
 import gherkin.formatter.model.DataTableRow;
 
@@ -38,7 +38,7 @@ import cucumber.table.DataTable;
  * @author pjaising
  *
  */
-public class PlanDetailStepDefinition {
+public class PlanDetailUhcStepDefinition {
 	
 	@Autowired
 	MRScenario loginScenario;
@@ -48,7 +48,7 @@ public class PlanDetailStepDefinition {
 	}
 	
 	@Given("^the user is on the UHC medicare site mobile login page$")
-	public void user_login_page()
+	public void user_login_page_UHC()
 	{
 		WebDriver wd = getLoginScenario().getMobileWebDriver();
 		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
@@ -58,7 +58,7 @@ public class PlanDetailStepDefinition {
 	}
 	
 	@When("^the user logs in with a registered UMS with following details in UHC site$")
-	public void user_logs_in(DataTable memberAttributes)
+	public void UHC_user_logs_in(DataTable memberAttributes)
 	{
 		/* Reading the given attribute from feature file */
 		List<DataTableRow> memberAttributesRow = memberAttributes
@@ -122,7 +122,7 @@ public class PlanDetailStepDefinition {
 	
 @And("^the user navigates to benefits and coverage details page$")
 	
-	public void user_navigates_to_details_page()
+	public void UHC_user_navigates_to_details_page()
 	
 	{
 	
@@ -148,7 +148,7 @@ public class PlanDetailStepDefinition {
 	}
 
 @Then("^the user validates plan and member details on benefits details page in UHCM site$")
-public void log_successful()
+public void UHC_log_successful()
 {
 
 
@@ -166,6 +166,10 @@ public void log_successful()
 	}
 
 }
+
+
+
+
 
 
 	
