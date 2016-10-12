@@ -332,7 +332,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 			System.out.println("county box not found");
 		}
 		
-		if (driver.getTitle().equalsIgnoreCase(PageTitleConstants.ULAYER_HOME_PAGE_TITLE)) {
+		if (driver.getTitle().equalsIgnoreCase(PageTitleConstants.ULAYER_PLAN_SUMMARY_PAGE_TITLE)) {
 			return new VPPPlanSummaryPage(driver);
 		}
 		return null;
@@ -354,7 +354,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		} catch (Exception e) {
 			System.out.println("county box not found");
 		}
-		if (getTitle().equalsIgnoreCase(PageTitleConstants.ULAYER_HOME_PAGE_TITLE)) {
+		if (getTitle().equalsIgnoreCase(PageTitleConstants.ULAYER_PLAN_SUMMARY_PAGE_TITLE)) {
 			return new VPPPlanSummaryPage(driver);
 		}
 		return null;

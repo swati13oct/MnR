@@ -330,7 +330,6 @@ public class EnrollInPlanAarpStepDefinition {
 		IntroductionInformationPage introInformationPage = (IntroductionInformationPage) getLoginScenario()
 				.getBean(PageConstants.INTRODUCTION_INFORMATION_PAGE);
 		introInformationPage.entersmedicareinsuranceInformation(personalAttributesMap);
-		//introInformationPage.navigatesToNextStep();
 		getLoginScenario().saveBean(PageConstants.INTRODUCTION_INFORMATION_PAGE,introInformationPage);
 
 	}

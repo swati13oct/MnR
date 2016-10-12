@@ -50,9 +50,6 @@ public class IntroductionInformationPage extends UhcDriver{
 	@FindBy(xpath = "//*[@id='beginOnlineEnrollmentbtn']")
 	private WebElement enrollmentNext;
 	
-	@FindBy(xpath = "//*[@id='step2Heading']/h2")
-	private WebElement pageHeading;
-	
 	@FindBy(xpath = "//div[@id='disclaimer']/div/p")
 	private WebElement disclaimerHeading;
 	
@@ -127,9 +124,6 @@ public class IntroductionInformationPage extends UhcDriver{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
-		
-
 			disclaimeragreebtn.click();
 			try {
 				Thread.sleep(10000);
@@ -140,12 +134,14 @@ public class IntroductionInformationPage extends UhcDriver{
 
 	}
 
-
 	public BeneficiaryInformationPage navigatesToNextStep() {
 		enrollmentNext.click();
-		if (pageHeading.getText().equalsIgnoreCase("Step 2: Personal Information")) {
-			return new BeneficiaryInformationPage(driver);
+		try {
+			Thread.sleep(10000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
-		return null;
+        return new BeneficiaryInformationPage(driver);
 	}
 }
