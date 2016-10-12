@@ -773,20 +773,20 @@ public class MRScenario {
 		}
 	}
 
-	public WebDriver getWebDriver() {
+		public WebDriver getWebDriver() {
+			HtmlUnitDriver htmlUnitDriver = new HtmlUnitDriver(BrowserVersion.FIREFOX_24) {
+				@Override
+				protected WebClient modifyWebClient(WebClient client) {
+					client.getOptions().setThrowExceptionOnScriptError(false);
+					return client;
+				}
+			};
+			htmlUnitDriver.setJavascriptEnabled(true);
 
-		// webDriver = new FirefoxDriver();
-		// webDriver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
-		// return webDriver;
-
-		File pathToBinary = new File("C:/Users/kchaudh3/Firefox/firefox.exe");
-
-		FirefoxBinary ffBinary = new FirefoxBinary(pathToBinary);
-		FirefoxProfile firefoxProfile = new FirefoxProfile();
-		webDriver = new FirefoxDriver(ffBinary, firefoxProfile);
-		webDriver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
-
-		return webDriver;
+			webDriver = htmlUnitDriver;
+			webDriver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
+			webDriver.manage().window().maximize();
+			return webDriver;
 
 	}
 

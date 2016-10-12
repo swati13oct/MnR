@@ -21,6 +21,7 @@ import acceptancetests.enrollinplan.data.EnrollInPlanCommonConstants;
 import acceptancetests.vpp.data.VPPCommonConstants;
 import atdd.framework.MRScenario;
 import cucumber.annotation.After;
+import cucumber.annotation.Before;
 import cucumber.annotation.en.And;
 import cucumber.annotation.en.Given;
 import cucumber.annotation.en.Then;
@@ -77,6 +78,16 @@ public class EnrollInPlanAarpStepDefinition {
 		return loginScenario;
 	}
 
+	@Before
+	public void setup(){
+		/*
+		 * Format(MM-DD-YYYY) Pre-AEP Test
+		 */
+		String date = "09-30-2016";
+		CommonUtility.changeMRRestTime(getLoginScenario(), date);
+		CommonUtility.changePartDTime(getLoginScenario(), date);
+	}
+	
 	@Given("^the user is on AARP medicare site landing page$")
 	public void the_user_on_UHC_Medicaresolutions_Site() {
 		WebDriver wd = getLoginScenario().getWebDriver();
@@ -1623,8 +1634,10 @@ public class EnrollInPlanAarpStepDefinition {
 	public void tearDown() {
 		WebDriver wd = (WebDriver) getLoginScenario().getBean(
 				CommonConstants.WEBDRIVER);
-	//	wd.quit();
-	//	getLoginScenario().flushBeans();
+		wd.quit();
+		CommonUtility.resetMRRestTime(getLoginScenario());
+		CommonUtility.resetPartDTime(getLoginScenario());
+		getLoginScenario().flushBeans();
 	}
 
 	public static boolean isAlertPresent(FirefoxDriver wd) {
@@ -1635,5 +1648,6 @@ public class EnrollInPlanAarpStepDefinition {
 			return false;
 		}
 	}
+	
 
 }

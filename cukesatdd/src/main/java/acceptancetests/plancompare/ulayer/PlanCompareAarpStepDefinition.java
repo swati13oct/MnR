@@ -55,7 +55,7 @@ public class PlanCompareAarpStepDefinition {
 		 * Format(MM-DD-YYYY) As plancompare page comes up in AEP period only,
 		 * so hardcoded the below date
 		 */
-		String date = "10-15-2016";
+		String date = "09-29-2016";
 		CommonUtility.changeMRRestTime(getLoginScenario(), date);
 		CommonUtility.changePartDTime(getLoginScenario(), date);
 	}
