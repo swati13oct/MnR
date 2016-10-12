@@ -15,7 +15,7 @@
 },
 "planStatus1":{
 "identifier":"xpath",
-"elementName":"//div[@id='planinformation']/div[2]/div[5]/span[2]"
+"elementName":"//div[@id='planinformation']/div[2]/div[3]/span[2]"
 },
 "planMaterialsSection":{
 "identifier":"xpath",

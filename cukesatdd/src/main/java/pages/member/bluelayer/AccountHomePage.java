@@ -273,11 +273,11 @@ public class AccountHomePage extends UhcDriver {
 		searchDrugClaims.click();
 		if (getTitle().equalsIgnoreCase(
 				"UnitedHealthcare Medicare Solutions | Claims")) {
-			if (planCategory.equalsIgnoreCase("Individual")) {
+			/*if (planCategory.equalsIgnoreCase("Individual")) {
 				return new ClaimSummaryPage(driver, planCategory);
-			} else {
+			} else { */
 				return new ClaimSummaryPage(driver);
-			}
+			/*}*/
 		}
 
 		return null;
@@ -285,7 +285,7 @@ public class AccountHomePage extends UhcDriver {
 public ContactUsPage navigatesToContactUsPage() {
 		
 		contactUsLink.click();
-		if(getTitle().equalsIgnoreCase("AARP Medicare Plans | Contact Us"))
+		if(getTitle().equalsIgnoreCase("UnitedHealthcare Medicare Solutions | Contact Us"))
 		{
 			return new ContactUsPage(driver);
 		}

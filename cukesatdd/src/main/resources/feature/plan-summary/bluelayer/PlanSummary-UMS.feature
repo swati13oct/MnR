@@ -10,8 +10,8 @@ Then the user validates different resources in UMS site
 Examples:
  | plantype | memberType   |
 #| MA       | Individual |
-#| MAPD     | Individual |
+| MAPD     | Individual |
 #| MAPD     | Group    |
-| PDP       | Group    |
+#| PDP       | Group    |
 #| MA       | Group    |
 #| SSUP     | Group    |

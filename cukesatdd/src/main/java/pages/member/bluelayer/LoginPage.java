@@ -25,7 +25,7 @@ import atdd.framework.UhcDriver;
  */
 public class LoginPage extends UhcDriver {
 
-	private static String PAGE_URL = MRConstants.UHCM_URL;
+	private static String PAGE_URL = MRConstants.UHCM_URL;//use UHCM_MEMBER_URL for team-a env
 	
 	@FindBy(id = "fd_memberSignInButton")
 	private WebElement loginIn;
@@ -62,7 +62,7 @@ public class LoginPage extends UhcDriver {
 		sendkeys(passwordField, password);
 		signInButton.click();
 		
-		if (MRScenario.environment.equals("dev-a")) {
+		if (MRScenario.environment.equals("dev-a") || MRScenario.environment.equals("team-a")) {
 			
 		Alert alert = driver.switchTo().alert();
         alert.accept();
