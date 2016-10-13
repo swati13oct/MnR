@@ -299,5 +299,27 @@ Then the user validates remove rider in AARP site
 Examples:
 		| planType | riderAvailableCheck  |
 #		| MA      |  riderAvailable       |
-		
-		
+
+
+Scenario Outline:To validate the pharmacy saver widget in benefits and coverage page in AARP site
+Given registered member to login in AARP site
+	|  <plantype>  |
+When the user navigates to benefits and coverage page under my plans in AARP site
+Then the user validates pharmacy saver widget in AARP site
+
+Examples:
+	| plantype |
+	| MAPD     |
+	
+@Q4	
+Scenario Outline:To validate the preferred and standard drug costs table in benefits and coverage page in AARP site
+Given registered member to login in AARP site
+	|  <plantype>  |
+When the user navigates to benefits and coverage page under my plans in AARP site
+Then the user validates drug cost table in AARP site
+	 
+Examples:
+	| plantype | 
+	| MAPD     |
+	| PDP      |
+			

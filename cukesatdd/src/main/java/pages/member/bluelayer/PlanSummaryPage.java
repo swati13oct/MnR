@@ -7,6 +7,8 @@ import java.util.Map;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.openqa.selenium.By;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -26,10 +28,10 @@ public class PlanSummaryPage extends UhcDriver {
 
 	@FindBy(id = "addAnotherPlanLink")
 	private WebElement addAnotherPlanLink;
-	
+
 	@FindBy(xpath = "//div[@id='main_content']/div[2]/div/div[2]/div/div[2]/div/div[2]/div/h3")
 	private WebElement planInformationHeading;
-	
+
 	@FindBy(xpath = "//div[@id='main_content']/div[2]/div/div[2]/div/div[3]/div/div[2]/div/h3")
 	private WebElement claimSectionHeading;
 
@@ -83,12 +85,12 @@ public class PlanSummaryPage extends UhcDriver {
 					key));
 			if (element != null) {
 				if(validate(element)){
-				try {
-					jsonObject.put(key, element.getText());
-				} catch (JSONException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
+					try {
+						jsonObject.put(key, element.getText());
+					} catch (JSONException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
 				}
 			}
 
@@ -108,6 +110,29 @@ public class PlanSummaryPage extends UhcDriver {
 				planSummaryExpectedJson, globalExpectedJson);
 
 		return planSummaryExpectedJson;
+	}
+
+	public void validatePharmacySaver() {
+		driver.navigate().refresh();
+		try {
+			Thread.sleep(10000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		boolean present;
+		try {
+			driver.findElement(By.id("Atdd_Pharmacy_Saver_Widget"));
+			present = true;
+		} catch (NoSuchElementException e) {
+			present = false;
+		}
+
+		if(present)
+			System.out.println("@@@@@@@@@ Able to find Pharmacy Saver widget @@@@@@@@@");
+		else
+			System.out.println("@@@@@@@@@ No Pharmacy Saver widget @@@@@@@@@");
+
 	}
 
 }

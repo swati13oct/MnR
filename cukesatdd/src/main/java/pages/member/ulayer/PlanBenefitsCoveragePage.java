@@ -9,6 +9,8 @@ import java.util.Map;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.openqa.selenium.By;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -24,20 +26,23 @@ import atdd.framework.UhcDriver;
  *
  */
 public class PlanBenefitsCoveragePage extends UhcDriver {
-	
+
 	@FindBy(id = "planBenefitsApp")
 	private WebElement planBenefitsContent;
-	
+
 	@FindBy(id ="disclosure_link")
 	private WebElement logOut;
-	
-	private PageData planBenefitsCoverage;
-	
-	public JSONObject planBenefitsCoverageJson;
-	
-	
 
-    public PlanBenefitsCoveragePage(WebDriver driver) {
+	@FindBy(id = "standardNetwork")
+	private WebElement standardNetwork;
+
+	private PageData planBenefitsCoverage;
+
+	public JSONObject planBenefitsCoverageJson;
+
+
+
+	public PlanBenefitsCoveragePage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
 		CommonUtility.waitForPageLoad(driver, planBenefitsContent, CommonConstants.TIMEOUT_30);
@@ -49,7 +54,7 @@ public class PlanBenefitsCoveragePage extends UhcDriver {
 
 	public void logOut() {
 		logOut.click();
-		
+
 	}
 
 	@Override
@@ -90,26 +95,88 @@ public class PlanBenefitsCoveragePage extends UhcDriver {
 				}
 
 			}
-			
+
 		}
 		planBenefitsCoverageJson = jsonObject;
-		
+
 		System.out.println("planBenefitsCoverageJson----->"+planBenefitsCoverageJson);
-	
-		
+
+
 	}
 
 	public JSONObject getExpectedData(Map<String, JSONObject> expectedDataMap) {
-		
-			/*get PHR expected data*/
-			JSONObject benefitsExpectedJson = expectedDataMap.get(CommonConstants.BENEFITS_AND_COVERAGE_PDP_NONLIS_NONUS_PAGE_DATA);
-			JSONObject commonExpectedJson = expectedDataMap.get(CommonConstants.COMMON);
-			JSONObject globalExpectedJson = expectedDataMap.get(CommonConstants.GLOBAL);
-			benefitsExpectedJson = CommonUtility.mergeJson(benefitsExpectedJson, globalExpectedJson);
-			benefitsExpectedJson = CommonUtility.mergeJson(benefitsExpectedJson, commonExpectedJson);
-			
-			return benefitsExpectedJson;
-			
+
+		/*get PHR expected data*/
+		JSONObject benefitsExpectedJson = expectedDataMap.get(CommonConstants.BENEFITS_AND_COVERAGE_PDP_NONLIS_NONUS_PAGE_DATA);
+		JSONObject commonExpectedJson = expectedDataMap.get(CommonConstants.COMMON);
+		JSONObject globalExpectedJson = expectedDataMap.get(CommonConstants.GLOBAL);
+		benefitsExpectedJson = CommonUtility.mergeJson(benefitsExpectedJson, globalExpectedJson);
+		benefitsExpectedJson = CommonUtility.mergeJson(benefitsExpectedJson, commonExpectedJson);
+
+		return benefitsExpectedJson;
+
 	}
-	
+
+	public void validatePharmacySaverWidget() {
+		driver.navigate().refresh();
+		try {
+			Thread.sleep(10000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		boolean present;
+		try {
+			driver.findElement(By.id("Atdd_Pharmacy_Saver_Widget"));
+			present = true;
+		} catch (NoSuchElementException e) {
+			present = false;
+		}
+
+		if(present)
+			System.out.println("@@@@@@@@@ Able to find Pharmacy Saver widget @@@@@@@@@");
+		else
+			System.out.println("@@@@@@@@@ No Pharmacy Saver widget @@@@@@@@@");
+
+
+	}
+
+	public void validatePrefferedRetailDrugCostTable() {
+		/*driver.navigate().refresh();
+		try {
+			Thread.sleep(10000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}*/
+
+		boolean preferredRetailPresent;
+		try{
+			driver.findElement(By.id("preferredRetailBenefit"));
+			preferredRetailPresent = true;			
+		}catch(NoSuchElementException e){
+			preferredRetailPresent = false;
+		}
+		if(preferredRetailPresent)
+			System.out.println("@@@@@@@@@ Able to find Preffered Retail Drug Cost Table @@@@@@@@@");
+		else
+			System.out.println("@@@@@@@@@ No Preffered Drug Cost Table @@@@@@@@@");
+
+	}
+
+	public void validateStandardDrugCostTable() {
+		boolean standardPresent;
+		try {
+			driver.findElement(By.id("standardNetwork"));
+			standardPresent = true;
+		} catch (NoSuchElementException e) {
+			standardPresent = false;
+		}
+		if(standardPresent)
+			System.out.println("@@@@@@@@@ Able to find Standard Drug Cost Table @@@@@@@@@");
+		else
+			System.out.println("@@@@@@@@@ No Standard Drug Cost Table @@@@@@@@@");
+
+
+	}
 }

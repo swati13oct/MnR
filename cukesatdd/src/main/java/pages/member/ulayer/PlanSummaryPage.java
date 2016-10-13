@@ -7,6 +7,8 @@ import java.util.Map;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.openqa.selenium.By;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -101,6 +103,29 @@ public class PlanSummaryPage extends UhcDriver {
 				planSummaryExpectedJson, globalExpectedJson);
 		return planSummaryExpectedJson;
 
+	}
+
+	public void validatePharmacySaver() {
+		driver.navigate().refresh();
+		try {
+			Thread.sleep(10000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		boolean present;
+		try {
+			driver.findElement(By.id("Atdd_Pharmacy_Saver_Widget"));
+			present = true;
+		} catch (NoSuchElementException e) {
+			present = false;
+		}
+
+		if(present)
+			System.out.println("@@@@@@@@@ Able to find Pharmacy Saver widget @@@@@@@@@");
+		else
+			System.out.println("@@@@@@@@@ No Pharmacy Saver widget @@@@@@@@@");
+		
 	}
 
 }
