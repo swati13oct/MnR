@@ -1,7 +1,7 @@
 /**
  * 
  */
-package acceptancetests.mobile.login.blayer;
+package acceptancetests.mobile.plandetail.blayer;
 
 import gherkin.formatter.model.DataTableRow;
 
@@ -19,8 +19,10 @@ import org.openqa.selenium.WebDriver;
 import org.skyscreamer.jsonassert.JSONAssert;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import pages.mobile.member.blayer.BenefitsDetailPage;
 import pages.mobile.member.blayer.BenefitsSummaryPage;
 import pages.mobile.member.blayer.LoginPage;
+import pages.mobile.member.ulayer.BenefitsDetailsPage;
 import acceptancetests.atdd.data.mobile.member.PageConstants;
 import acceptancetests.atdd.mobile.data.CommonConstants;
 import acceptancetests.mobile.login.data.LoginCommonConstants;
@@ -28,6 +30,7 @@ import atdd.framework.MRScenario;
 import cucumber.annotation.After;
 import cucumber.annotation.en.And;
 import cucumber.annotation.en.Given;
+import cucumber.annotation.en.Then;
 import cucumber.annotation.en.When;
 import cucumber.table.DataTable;
 
@@ -35,7 +38,7 @@ import cucumber.table.DataTable;
  * @author pjaising
  *
  */
-public class LoginUhcStepDefinition {
+public class PlanDetailUhcStepDefinition {
 	
 	@Autowired
 	MRScenario loginScenario;
@@ -45,7 +48,7 @@ public class LoginUhcStepDefinition {
 	}
 	
 	@Given("^the user is on the UHC medicare site mobile login page$")
-	public void UHC_user_login_page()
+	public void user_login_page_UHC()
 	{
 		WebDriver wd = getLoginScenario().getMobileWebDriver();
 		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
@@ -117,35 +120,58 @@ public class LoginUhcStepDefinition {
 		getLoginScenario().saveBean(CommonConstants.EXPECTED_DATA_MAP, expectedDataMap);
 	}
 	
-	@And("^the user validates plan and member details on benefits summary page in UHC site$")
-	public void UHC_log_in_successful()
-	{
-		JSONObject benefitsSummaryActualJson = (JSONObject)getLoginScenario().getBean(LoginCommonConstants.BENEFITS_SUMMARY_ACTUAL);
-		System.out.println("benefitsSummaryActualJson----->"+benefitsSummaryActualJson);
-		
-		JSONObject benefitsSummaryExpectedJson = (JSONObject)getLoginScenario().getBean(LoginCommonConstants.BENEFITS_SUMMARY_EXPECTED);
-		System.out.println("benefitsSummaryExpectedJson----->"+benefitsSummaryExpectedJson);
-		
-		try {
-			JSONAssert.assertEquals(benefitsSummaryExpectedJson, benefitsSummaryActualJson, true);
-		} catch (JSONException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-		BenefitsSummaryPage benefitsSummaryPage = (BenefitsSummaryPage)getLoginScenario().getBean(PageConstants.BENEFITS_SUMMARY_PAGE);
-		benefitsSummaryPage.logout();
-		
-	}
+@And("^the user navigates to benefits and coverage details page$")
 	
-	@After
-	public void tearDown() {
+	public void UHC_user_navigates_to_details_page()
+	
+	{
+	
+		String userName = "jul_ulayer123";
+	BenefitsSummaryPage benefitsSummaryPage = (BenefitsSummaryPage) getLoginScenario()
+	.getBean(PageConstants.BENEFITS_SUMMARY_PAGE);
+	
+	BenefitsDetailPage benefitsDetailPage = benefitsSummaryPage.clickviewdrugdetails();
+	
+	Map<String,JSONObject> expectedDataMap = loginScenario.getExpectedJson(userName);
+	JSONObject benefitsDetailExpectedJson = benefitsDetailPage.getExpectedData(expectedDataMap);
+	getLoginScenario().saveBean(LoginCommonConstants.BENEFITS_DETAIL_EXPECTED, benefitsDetailExpectedJson);
+	
+	JSONObject benefitsDetailActualJson =  null;
+	if (benefitsDetailPage != null) {
+		getLoginScenario().saveBean(PageConstants.BENEFITS_DETAIL_PAGE, benefitsDetailPage);
+		benefitsDetailActualJson = benefitsDetailPage.benefitsDetailJson;
+		getLoginScenario().saveBean(LoginCommonConstants.BENEFITS_DETAIL_ACTUAL, benefitsDetailActualJson);
+	}
 
-		WebDriver wd = (WebDriver) getLoginScenario().getBean(
-				CommonConstants.WEBDRIVER);
-		// wd.close();
-		wd.quit();
-		getLoginScenario().flushBeans();
+	getLoginScenario().saveBean(CommonConstants.EXPECTED_DATA_MAP, expectedDataMap);
+	
+	}
+
+@Then("^the user validates plan and member details on benefits details page in UHCM site$")
+public void UHC_log_successful()
+{
+
+
+	JSONObject benefitsDetailActualJson = (JSONObject)getLoginScenario().getBean(LoginCommonConstants.BENEFITS_DETAIL_ACTUAL);
+	System.out.println("benefitsDeatilActualJson----->"+benefitsDetailActualJson);
+	
+	JSONObject benefitsDetailExpectedJson = (JSONObject)getLoginScenario().getBean(LoginCommonConstants.BENEFITS_DETAIL_EXPECTED);
+	System.out.println("benefitsDetailExpectedJson----->"+benefitsDetailExpectedJson);
+	
+	try {
+		JSONAssert.assertEquals(benefitsDetailExpectedJson, benefitsDetailActualJson, true);
+	} catch (JSONException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
 	}
 
 }
+
+
+
+
+
+
+	
+	
+}	

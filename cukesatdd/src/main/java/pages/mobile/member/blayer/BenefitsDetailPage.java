@@ -14,53 +14,44 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-import pages.mobile.member.ulayer.BenefitsDetailsPage;
 import acceptancetests.atdd.data.PageData;
 import acceptancetests.atdd.mobile.data.CommonConstants;
 import acceptancetests.atdd.util.CommonUtility;
 import atdd.framework.UhcDriver;
 
 /**
- * @author pnampall
+ * @author pjaising
  *
  */
-public class BenefitsSummaryPage extends UhcDriver {
+public class BenefitsDetailPage extends UhcDriver{
 	
 	@FindBy(xpath="//div[@class='site-header']/a")
 	private WebElement menuButton;
 	
-	@FindBy(xpath = "//div[@class='menu-container']/a")
-	private WebElement logout;
-	
-	@FindBy(xpath = "//*[@id='wrapper']/div[1]/div[2]/div/div/div[1]/div[5]/div/div[2]/div/a/span")
-	public WebElement viewdetailsbutton;
-	
-	@FindBy(className = "menu-container")
-	private WebElement menuContainer;
-	
-	private PageData benefitsSummary;
+	private PageData benefitsDetail;
 
-	public JSONObject benefitsSummaryJson;
-
+	public JSONObject benefitsDetailJson;
+	
 	private PageData browserCheckData;
 
 	private JSONObject browserCheckJson;
-
-	public BenefitsSummaryPage(WebDriver driver) {
+	
+	public BenefitsDetailPage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
-		String fileName = CommonConstants.BENEFITS_SUMMARY_PAGE_DATA;
-		benefitsSummary = CommonUtility.readPageData(fileName,
-				CommonConstants.PAGE_OBJECT_DIRECTORY_MOBILE_BLUELAYER_MEMBER);
+		String fileName = CommonConstants.BENEFITS_DETAIL_PAGE_DATA;
+		benefitsDetail = CommonUtility.readPageData(fileName,
+				CommonConstants.PAGE_OBJECT_DIRECTORY_MOBILE_ULAYER_MEMBER);
 		openAndValidate();
 	}
 
+	
 	@Override
 	public void openAndValidate() {
 		validate(menuButton);
 		JSONObject jsonObject = new JSONObject();
-		for (String key : benefitsSummary.getExpectedData().keySet()) {
-			List<WebElement> elements = findElements(benefitsSummary
+		for (String key : benefitsDetail.getExpectedData().keySet()) {
+			List<WebElement> elements = findElements(benefitsDetail
 					.getExpectedData().get(key));
 			if (elements.size() == 1) {
 				if (validate(elements.get(0))) {
@@ -96,36 +87,24 @@ public class BenefitsSummaryPage extends UhcDriver {
 			}
 
 		}
-		benefitsSummaryJson = jsonObject;
+		benefitsDetailJson = jsonObject;
 		
-		System.out.println("benefitsSummaryJson----->"+benefitsSummaryJson);
+		System.out.println("benefitsdetailJson----->"+benefitsDetailJson);
 	}
 
 	public JSONObject getExpectedData(Map<String, JSONObject> expectedDataMap) {
-		JSONObject benefitsSummaryExpectedJson = expectedDataMap
-				.get(acceptancetests.atdd.data.CommonConstants.BENEFITS_SUMMARY_BLAYER);
+		JSONObject benefitsDetailExpectedJson = expectedDataMap
+				.get(acceptancetests.atdd.data.CommonConstants.BENEFITS_DETAIL);
 		
-		return benefitsSummaryExpectedJson;
+		return benefitsDetailExpectedJson;
 	}
 
-	public void logout()
-	{
-		menuButton.click();
-		if(validate(menuContainer))
-		{
-			logout.click();
-		}
-		else
-		{
-			System.out.println("logout button not found on page");
-		}
-	}
+
 
 	public JSONObject getBrowserCheck() {
-	
-		String fileName = CommonConstants.MOBILE_BROWSER_CHECK_DATA_BLUELAYER;
+		String fileName = CommonConstants.MOBILE_BROWSER_CHECK_DATA;
 		browserCheckData = CommonUtility.readPageData(fileName,
-				CommonConstants.PAGE_OBJECT_DIRECTORY_MOBILE_BLUELAYER_MEMBER);
+				CommonConstants.PAGE_OBJECT_DIRECTORY_MOBILE_ULAYER_MEMBER);
 
 		JSONObject jsonObject = new JSONObject();
 		for (String key : browserCheckData.getExpectedData().keySet()) {
@@ -146,21 +125,11 @@ public class BenefitsSummaryPage extends UhcDriver {
 
 		return browserCheckJson;
 	}
-
-	public BenefitsDetailPage clickviewdrugdetails() {
-		
-		validate(viewdetailsbutton);
-		viewdetailsbutton.click();
-		validate(viewdetailsbutton);
-		
-		if (getTitle().equalsIgnoreCase("Visualize Plans")) {
-			return new BenefitsDetailPage(driver);
-		}
-		// TODO Auto-generated method stub
-		return null;
-	}
-
 	
-
+	
+	
+	
+	
+	
 	
 }
