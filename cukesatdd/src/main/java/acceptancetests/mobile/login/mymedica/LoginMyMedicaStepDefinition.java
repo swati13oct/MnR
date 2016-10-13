@@ -59,11 +59,24 @@ public class LoginMyMedicaStepDefinition {
 
 	}
 	
+	@And("^the user navigate to my medica mobile site Access your account Page$")
+	public void access_your_account_page() {
+
+	ContactUsPage myMedicaContactUsPage = (ContactUsPage) getLoginScenario()
+	.getBean(PageConstants.MYMEDICA_CONTACT_US_PAGE);
+
+	SignInPage myMedicaSignInPage = myMedicaContactUsPage.navigateToSignIn();
+
+	getLoginScenario().saveBean(PageConstants.MYMEDICA_SIGN_IN_PAGE,
+	myMedicaSignInPage);
+	}
+	
+	
 	@After
 	public void tearDown() {
 		WebDriver wd = (WebDriver) getLoginScenario().getBean(
 				CommonConstants.WEBDRIVER);
-		wd.quit();
+		//wd.quit();
 		getLoginScenario().flushBeans();
 	}
 }
