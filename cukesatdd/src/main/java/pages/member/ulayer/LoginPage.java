@@ -104,7 +104,7 @@ if (MRScenario.environment.equals("dev-b") || MRScenario.environment.equals("dev
 		}
 		else if (currentUrl().contains("terminated-plan.html")) {
 			return new TerminatedHomePage(driver); */
-		}
+		//}
 		return null;
 	}
 
