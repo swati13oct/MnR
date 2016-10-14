@@ -61,7 +61,7 @@ public class LoginPage extends UhcDriver {
 	}
 
 	public Object loginWith(String username, String password) {
-		loginIn.click();	
+		/*loginIn.click();	
 		sendkeys(userNameField,username);
 		sendkeys(passwordField,password);
 		signInButton.click();
@@ -70,7 +70,8 @@ public class LoginPage extends UhcDriver {
 			Alert alert = driver.switchTo().alert();
 			alert.accept();
 			Alert alert1 = driver.switchTo().alert();
-			alert1.accept();        
+			alert1.accept();
+			}			
 			if (!(MRScenario.environment.equals("dev-c") || MRScenario.environment.equals("team-b"))){
 				Alert alert2 = driver.switchTo().alert();
 				alert2.accept();
@@ -78,7 +79,7 @@ public class LoginPage extends UhcDriver {
 
 		}
 
-<<<<<<< HEAD
+
 if (MRScenario.environment.equals("dev-b") || MRScenario.environment.equals("dev-a") || MRScenario.environment.equals("dev-c")
 		|| MRScenario.environment.equals("team-a")) {
 		Alert alert = driver.switchTo().alert();
@@ -102,7 +103,7 @@ if (MRScenario.environment.equals("dev-b") || MRScenario.environment.equals("dev
 			return new AccountHomePage(driver);
 		}
 		else if (currentUrl().contains("terminated-plan.html")) {
-			return new TerminatedHomePage(driver);
+			return new TerminatedHomePage(driver); */
 		}
 		return null;
 	}
