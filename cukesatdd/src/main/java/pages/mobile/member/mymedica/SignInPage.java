@@ -16,11 +16,9 @@ public class SignInPage extends GlobalWebElements {
 	@FindBy(linkText = "About Us")
 	private WebElement aboutUsLink;
 	
-	@FindBy(xpath = "//*[@id='memberSignInStandalone']/div[1]/div[3]/div/div/h1")
-	private WebElement accessYourAccount;
-	
 	@FindBy(xpath = "//*[@id='accessURAccountBTN']/span")
 	private WebElement signInButton;
+	
 
 	public SignInPage(WebDriver driver) {
 		super(driver);
@@ -31,7 +29,6 @@ public class SignInPage extends GlobalWebElements {
 	@Override
 	public void openAndValidate() {
 		start(MY_MEDICA_PAGE_URL);
-		validate(accessYourAccount);
 		validate(signInButton);
 	}
 	
@@ -42,8 +39,8 @@ public class SignInPage extends GlobalWebElements {
 			return new AboutUsPage(driver);
 		}
 		return null;
-
 	}
+		
 
 
 
