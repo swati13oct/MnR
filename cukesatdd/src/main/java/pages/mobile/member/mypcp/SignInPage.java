@@ -15,8 +15,8 @@ public class SignInPage extends GlobalWebElements {
 	@FindBy(linkText = "About Us")
 	private WebElement aboutUsLink;
 	
-	@FindBy(xpath = "//*[@id='memberSignInStandalone']/div[1]/div[3]/div/div/h1")
-	private WebElement accessYourAccount;
+	@FindBy(xpath = "//a[contains(.,'Access Your Account')]")
+	private WebElement accessYourAccountLink;
 	
 	@FindBy(xpath = "//*[@id='accessURAccountBTN']/span")
 	private WebElement signInButton;
@@ -30,7 +30,7 @@ public class SignInPage extends GlobalWebElements {
 	@Override
 	public void openAndValidate() {
 		start(MY_PCP_PAGE_URL);
-		validate(accessYourAccount);
+		validate(accessYourAccountLink);
 		validate(signInButton);
 	}
 	
@@ -43,5 +43,5 @@ public class SignInPage extends GlobalWebElements {
 		return null;
 
 	}
-
+	
 }
