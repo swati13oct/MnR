@@ -13,6 +13,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.FindBys;
 import org.openqa.selenium.support.PageFactory;
+import org.junit.Assert;
 
 import acceptancetests.atdd.data.CommonConstants;
 import acceptancetests.atdd.data.PageData;
@@ -41,6 +42,15 @@ public class DrugDosagePage extends UhcDriver {
 
 	@FindBy(linkText = "continue")
 	WebElement continueButton;
+		
+	@FindBy(linkText="select pharmacy")
+	WebElement selectPharmacy;
+		 	 	
+	@FindBy(xpath="//div[2]/div[5]/div/input")
+	WebElement preferredMailServiceRadioButton;
+	
+	@FindBy(xpath="//div[2]/div[5]/div/p[contains(text(),'Preferred Mail Service Pharmacy')]")
+	WebElement preferredMailServiceText;
 	
 	private PageData drugDosage;
 
@@ -108,7 +118,19 @@ public class DrugDosagePage extends UhcDriver {
 		}
 	}
 
-	
+	public void navigateAndValidate(){
+		selectPharmacy.click();
+		System.out.println("select pharmay clicked");
+		if(preferredMailServiceRadioButton.isDisplayed()){
+			System.out.println("================Failed due to presence of preferred mail service radio button======================");
+			Assert.fail();
+		}
+		System.out.println("Radio button passed");
+		if(preferredMailServiceText.isDisplayed()){
+			System.out.println("================Failed due to presence of preferred mail service radio text======================");
+			Assert.fail();
+		}		
+}
 
 	@Override
 	public void openAndValidate() {

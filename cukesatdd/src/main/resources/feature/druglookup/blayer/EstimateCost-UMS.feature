@@ -1,4 +1,4 @@
-#@druglookup
+@druglookup
 Feature: To test estimate drug cost flow in UMS site
 Scenario Outline: Verify drug cost information in UMS site
 Given registered UHC member with following details for estimate drug cost
@@ -26,12 +26,25 @@ Then user will validate the view Drug cost page in UMS site
 Examples:
 		 | planType  |  memberType    | drugInitials | drugName     | drugDosage             | drugQuantity | drugFrequency  | packages       | lowCostOpt    | pharmacyType                | distance       | pharmacyName                     | planYear |
 		| MAPD      | Individual   |   lipi       | Lipitor      | Lipitor TAB 10MG       | 30           | Every 1 month  | null           | Generic	       | Standard Network Pharmacy   | 15 miles       | CVS PHARMACY 00918	 | 2015     |
-		#| MAPD      |  Group       |   lipi       | Lipitor      | Lipitor TAB 10MG       | 30           | Every 1 month  | null           | Generic	           | Standard Network Pharmacy   | 15 miles       |  	CVS PHARMACY 00918  | 2015     |
-	     | PDP       |  Group       |   lipi       | Lipitor      | Lipitor TAB 10MG       | 30           | Every 1 month  | null           | Brand	           | Standard Network Pharmacy   | 15 miles       | AVALON CHEMISTS  			     | 2015     |
+#		| MAPD      |  Group       |   lipi       | Lipitor      | Lipitor TAB 10MG       | 30           | Every 1 month  | null           | Generic	           | Standard Network Pharmacy   | 15 miles       |  	CVS PHARMACY 00918  | 2015     |
+	   | PDP       |  Group       |   lipi       | Lipitor      | Lipitor TAB 10MG       | 30           | Every 1 month  | null           | Brand	           | Standard Network Pharmacy   | 15 miles       | AVALON CHEMISTS  			     | 2015     |
 
 
-
-
-
-
+Scenario Outline: AL PEEHIP -DRUG COST ESTIMATOR: SELECT PHARMACY
+Given I am a MA or MAPD member user on the AL PEEHIP site
+	| Plan Type   | <planType> |
+	| Member Type | <memberType> |
+When I view the Drug Cost Estimator Select a Pharmacy search page
+		| <drugInitials> |
+And It is on or after January 1, 2017
+		| <drugName> |
+Then I should not see the Preferred Mail Service Pharmacy radio button
+		| Drug Dosage    | <drugDosage>    |
+		| Drug Quantity  | <drugQuantity>  |
+		| Drug Frequency | <drugFrequency> |
+		| Packages       | <packages>      |
+						
+Examples:
+		| planType  |  memberType    | drugInitials | drugName     | drugDosage             | drugQuantity | drugFrequency  | packages       | lowCostOpt    | pharmacyType                | distance       | pharmacyName                     | planYear |		
+		| MAPD      |  Group       |   lipi       | Lipitor      | Lipitor TAB 10MG       | 30           | Every 1 month  | null           | Generic	           | Standard Network Pharmacy   | 15 miles       |  	CVS PHARMACY 00918  | 2015     |
 
