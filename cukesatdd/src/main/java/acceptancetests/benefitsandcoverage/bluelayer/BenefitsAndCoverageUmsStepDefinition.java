@@ -83,7 +83,7 @@ public class BenefitsAndCoverageUmsStepDefinition {
 			System.out.println("User is..." + userName);
 			System.out.println("Password is..." + pwd);
 			getLoginScenario()
-					.saveBean(LoginCommonConstants.USERNAME, userName);
+			.saveBean(LoginCommonConstants.USERNAME, userName);
 			getLoginScenario().saveBean(LoginCommonConstants.PASSWORD, pwd);
 		}
 
@@ -92,7 +92,7 @@ public class BenefitsAndCoverageUmsStepDefinition {
 		LoginPage loginPage = new LoginPage(wd);
 		AccountHomePage accountHomePage = (AccountHomePage)loginPage.loginWith(userName, pwd, category);
 		JSONObject accountHomeActualJson = null;
-		
+
 		/* Get expected data */
 		Map<String, JSONObject> expectedDataMap = loginScenario
 				.getExpectedJson(userName);
@@ -124,6 +124,64 @@ public class BenefitsAndCoverageUmsStepDefinition {
 
 	}
 
+	@Given("^registered member to login in UMS site$")
+	public void login_with_member_UMS(DataTable memberAttributes) {
+		List<DataTableRow> memberAttributesRow = memberAttributes
+				.getGherkinRows();
+		Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells()
+					.get(0), memberAttributesRow.get(i).getCells().get(1));
+		}
+
+		String category = memberAttributesMap.get("Member Type");
+		Set<String> memberAttributesKeySet = memberAttributesMap.keySet();
+		List<String> desiredAttributes = new ArrayList<String>();
+		for (Iterator<String> iterator = memberAttributesKeySet.iterator(); iterator
+				.hasNext();) {
+			{
+				String key = iterator.next();
+				desiredAttributes.add(memberAttributesMap.get(key));
+			}
+
+		}
+		System.out.println("desiredAttributes.." + desiredAttributes);
+
+		Map<String, String> loginCreds = loginScenario
+				.getUMSMemberWithDesiredAttributes(desiredAttributes);
+		String userName = null;
+		String pwd = null;
+		if (loginCreds == null) {
+			// no match found
+			System.out.println("Member Type data could not be setup !!!");
+			Assert.fail("unable to find a " + desiredAttributes + " member");
+		} else {
+			userName = loginCreds.get("user");
+			pwd = loginCreds.get("pwd");
+			System.out.println("User is..." + userName);
+			System.out.println("Password is..." + pwd);
+			getLoginScenario()
+			.saveBean(LoginCommonConstants.USERNAME, userName);
+			getLoginScenario().saveBean(LoginCommonConstants.PASSWORD, pwd);
+		}
+
+		WebDriver wd = getLoginScenario().getWebDriver();
+
+		LoginPage loginPage = new LoginPage(wd);
+		AccountHomePage accountHomePage = (AccountHomePage)loginPage.loginWith(userName, pwd, category);
+
+		if (accountHomePage != null) {
+			getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
+			getLoginScenario().saveBean(PageConstants.ACCOUNT_HOME_PAGE,
+					accountHomePage);
+		}
+
+
+	}
+
+
+
 	@When("^the user navigates to plan benefits and Coverage in UMS site$")
 	public void navigates_benefits_and_Coverage() {
 		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario()
@@ -135,7 +193,7 @@ public class BenefitsAndCoverageUmsStepDefinition {
 		JSONObject benefitsAndCoverageActualJson = null;
 		@SuppressWarnings("unchecked")
 		Map<String, JSONObject> expectedDataMap = (Map<String, JSONObject>) getLoginScenario()
-				.getBean(CommonConstants.EXPECTED_DATA_MAP);
+		.getBean(CommonConstants.EXPECTED_DATA_MAP);
 		JSONObject benefitsAndCoverageExpectedJson = benefitsCoveragePage
 				.getExpectedData(expectedDataMap);
 		getLoginScenario().saveBean(
@@ -154,8 +212,22 @@ public class BenefitsAndCoverageUmsStepDefinition {
 		getLoginScenario().saveBean(
 				PlanBenefitsAndCoverageCommonConstants.PLAN_BENEFITS_ACTUAL,
 				benefitsAndCoverageActualJson);
-
 	}
+
+	@When("^the user navigates to benefits and coverage page under my plans in UMS site$")
+	public void navigates_benefits_and_Coverage_UMS() {
+		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario()
+				.getBean(PageConstants.ACCOUNT_HOME_PAGE);
+		BenefitsCoveragePage benefitsCoveragePage = accountHomePage
+				.navigateToBnC();
+
+		if (benefitsCoveragePage != null) {
+			getLoginScenario().saveBean(
+					PageConstants.BENEFITS_AND_COVERAGE_PAGE,
+					benefitsCoveragePage);
+		}
+	}
+
 
 	@Then("^the user validates plan benefits and coverage details in UMS site$")
 	public void details_validation(DataTable attributes) {
@@ -192,6 +264,7 @@ public class BenefitsAndCoverageUmsStepDefinition {
 
 	}
 	
+
 	@Then("^the user validates plan and member details after login in UHC site$")
 	public void login_validation() {
 		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario()
@@ -212,6 +285,16 @@ public class BenefitsAndCoverageUmsStepDefinition {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+
+	@Then("^the user validates pharmacy saver widget in UMS site$")
+	public void user_validates_pharmacySaver_UMS(){
+		BenefitsCoveragePage benefitsCoveragePage = (BenefitsCoveragePage) getLoginScenario()
+				.getBean(PageConstants.BENEFITS_AND_COVERAGE_PAGE);
+		benefitsCoveragePage.validatesPharmacySaver();
+		benefitsCoveragePage.logOut();
+		
+		
+
 	}
 
 	

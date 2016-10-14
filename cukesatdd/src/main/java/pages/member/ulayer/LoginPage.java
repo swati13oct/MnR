@@ -43,7 +43,7 @@ public class LoginPage extends UhcDriver {
 
 	@FindBy(linkText = "Forgot your username or password?")
 	private WebElement forgotUsernamePasswordLink;
-	
+
 	@FindBy(id = "usercheckbox")
 	private WebElement userNameCheckBox;
 
@@ -52,7 +52,7 @@ public class LoginPage extends UhcDriver {
 	private JSONObject browserCheckJson;
 
 
-		 
+
 
 	public LoginPage(WebDriver driver) {
 		super(driver);
@@ -64,10 +64,21 @@ public class LoginPage extends UhcDriver {
 		loginIn.click();	
 		sendkeys(userNameField,username);
 		sendkeys(passwordField,password);
- 		signInButton.click();
+		signInButton.click();
 		
-		
+		if (MRScenario.environment.equals("dev-b") || MRScenario.environment.equals("dev-a") || MRScenario.environment.equals("dev-c") || MRScenario.environment.equals("team-b")) {
+			Alert alert = driver.switchTo().alert();
+			alert.accept();
+			Alert alert1 = driver.switchTo().alert();
+			alert1.accept();        
+			if (!(MRScenario.environment.equals("dev-c") || MRScenario.environment.equals("team-b"))){
+				Alert alert2 = driver.switchTo().alert();
+				alert2.accept();
+			}
 
+		}
+
+<<<<<<< HEAD
 if (MRScenario.environment.equals("dev-b") || MRScenario.environment.equals("dev-a") || MRScenario.environment.equals("dev-c")
 		|| MRScenario.environment.equals("team-a")) {
 		Alert alert = driver.switchTo().alert();
@@ -82,6 +93,11 @@ if (MRScenario.environment.equals("dev-b") || MRScenario.environment.equals("dev
  		}
         
         if(currentUrl().contains("home/my-account-home.html"))
+
+		//if(currentUrl().contains("home/my-account-home.html"))
+		String title = driver.getTitle();
+		if(title.contains("AARP Medicare Plans | My Account Home"))
+
 		{
 			return new AccountHomePage(driver);
 		}
@@ -90,7 +106,7 @@ if (MRScenario.environment.equals("dev-b") || MRScenario.environment.equals("dev
 		}
 		return null;
 	}
-	
+
 	public LoginAssistancePage navigateToLoginAssistance() {
 		loginIn.click();
 		forgotUsernamePasswordLink.click();
@@ -99,9 +115,9 @@ if (MRScenario.environment.equals("dev-b") || MRScenario.environment.equals("dev
 		{
 			return new LoginAssistancePage(driver);
 		}
-		
+
 		return null;
-	
+
 	}
 
 
@@ -109,7 +125,7 @@ if (MRScenario.environment.equals("dev-b") || MRScenario.environment.equals("dev
 	public void openAndValidate() {
 		start(PAGE_URL);
 		validate(loginIn);
-		
+
 	}
 
 	public JSONObject getBrowserCheck() {

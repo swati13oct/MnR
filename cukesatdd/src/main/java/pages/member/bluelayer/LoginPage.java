@@ -25,8 +25,10 @@ import atdd.framework.UhcDriver;
  */
 public class LoginPage extends UhcDriver {
 
+
 	private static String PAGE_URL = MRConstants.UHCM_URL;//use UHCM_MEMBER_URL for team-a env
 	
+
 	@FindBy(id = "fd_memberSignInButton")
 	private WebElement loginIn;
 
@@ -38,17 +40,17 @@ public class LoginPage extends UhcDriver {
 
 	@FindBy(xpath = "//div[@class='fd_userPassSection']/button")
 	private WebElement signInButton;
-	
+
 	@FindBy(linkText = "Forgot your username or password?")
 	private WebElement forgotUsernamePasswordLink;
-	
+
 	@FindBy(id = "usercheckbox")
 	private WebElement userNameCheckBox;
 
 	private PageData browserCheckData;
 
 	private JSONObject browserCheckJson;
-		 
+
 
 	public LoginPage(WebDriver driver) {
 		super(driver);
@@ -61,6 +63,7 @@ public class LoginPage extends UhcDriver {
 		sendkeys(userNameField, username);
 		sendkeys(passwordField, password);
 		signInButton.click();
+
 		
 		if (MRScenario.environment.equals("dev-a") || MRScenario.environment.equals("team-a")) {
 			
@@ -71,6 +74,21 @@ public class LoginPage extends UhcDriver {
         Alert alert2 = driver.switchTo().alert();
         alert2.accept();
         }
+
+
+		if (MRScenario.environment.equals("dev-a") || MRScenario.environment.equals("team-b")) {
+
+			Alert alert = driver.switchTo().alert();
+			alert.accept();
+			Alert alert1 = driver.switchTo().alert();
+			alert1.accept();
+			if(!(MRScenario.environment.equals("team-b")))
+			{
+				Alert alert2 = driver.switchTo().alert();
+				alert2.accept();
+			}
+		}
+
 		if(currentUrl().contains("home/my-account-home.html") && category.equalsIgnoreCase("Group"))
 		{
 			return new AccountHomePage(driver,category);
@@ -100,9 +118,9 @@ public class LoginPage extends UhcDriver {
 		{
 			return new LoginAssistancePage(driver);
 		}
-		
+
 		return null;
-	
+
 	}
 
 	public JSONObject getBrowserCheck() {
@@ -129,7 +147,7 @@ public class LoginPage extends UhcDriver {
 
 		return browserCheckJson;
 
-	
+
 	}
 
 }

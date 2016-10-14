@@ -122,7 +122,65 @@ public class PlanSummaryUmsStepDefintion {
 
 		getLoginScenario().saveBean(CommonConstants.EXPECTED_DATA_MAP,
 				expectedDataMap);
+	}
+	
+	@Given("^registered member to login in UMS site$")
+	public void registered_member_UMS(DataTable memberAttributes){
+		/* Reading the given attribute from feature file */
+		List<DataTableRow> memberAttributesRow = memberAttributes
+				.getGherkinRows();
+		Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
 
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells()
+					.get(0), memberAttributesRow.get(i).getCells().get(1));
+		}
+		
+		String category = memberAttributesMap.get("Member Type");
+
+		Set<String> memberAttributesKeySet = memberAttributesMap.keySet();
+		List<String> desiredAttributes = new ArrayList<String>();
+		for (Iterator<String> iterator = memberAttributesKeySet.iterator(); iterator
+				.hasNext();) {
+			{
+				String key = iterator.next();
+				desiredAttributes.add(memberAttributesMap.get(key));
+			}
+
+		}
+		System.out.println("desiredAttributes.." + desiredAttributes);
+
+		Map<String, String> loginCreds = loginScenario
+				.getUMSMemberWithDesiredAttributes(desiredAttributes);
+
+		String userName = null;
+		String pwd = null;
+		if (loginCreds == null) {
+			// no match found
+			System.out.println("Member Type data could not be setup !!!");
+			Assert.fail("unable to find a " + desiredAttributes + " member");
+		} else {
+			userName = loginCreds.get("user");
+			pwd = loginCreds.get("pwd");
+			System.out.println("User is..." + userName);
+			System.out.println("Password is..." + pwd);
+			getLoginScenario()
+					.saveBean(LoginCommonConstants.USERNAME, userName);
+			getLoginScenario().saveBean(LoginCommonConstants.PASSWORD, pwd);
+		}
+
+		getLoginScenario().saveBean(CommonConstants.CATEGORY, category);
+
+		WebDriver wd = getLoginScenario().getWebDriver();
+
+		LoginPage loginPage = new LoginPage(wd);
+		AccountHomePage accountHomePage = (AccountHomePage) loginPage.loginWith(userName, pwd,category);
+		if (accountHomePage != null) {
+			getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
+			getLoginScenario().saveBean(PageConstants.ACCOUNT_HOME_PAGE,
+					accountHomePage);
+		}
+		
 	}
 
 	@When("^the user navigates to plan summary page in UMS site$")
@@ -150,6 +208,16 @@ public class PlanSummaryUmsStepDefintion {
 				planSummaryPage);
 
 	}
+	
+	@When("^the user navigates to plan summary page under my plans in UMS site$")
+	public void navigates_plansummary_myPlan_UMS(){
+		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario()
+				.getBean(PageConstants.ACCOUNT_HOME_PAGE);
+		PlanSummaryPage planSummaryPage = accountHomePage
+				.navigateToPlanSummary();
+		getLoginScenario().saveBean(PageConstants.PLAN_SUMMARY_PAGE,
+				planSummaryPage);
+	}
 
 	@Then("^the user validates different resources in UMS site$")
 	public void user_validates_plan_summary_ums() {
@@ -175,6 +243,7 @@ public class PlanSummaryUmsStepDefintion {
 		planSummaryPage.logOut();
 	}
 	
+
 	@Then("^the user click on the view detail button in UMS site$")
 	public void user_click_on_view_details_button() {
 		PlanSummaryPage planSummaryPage = (PlanSummaryPage) getLoginScenario()
@@ -184,6 +253,15 @@ public class PlanSummaryUmsStepDefintion {
 		// planSummaryPage.logOut();     
 		 
 		}
+
+	@Then("^the user validates pharmacy saver widget in UMS site$")
+	public void validates_pharmacySaver_UMS(){
+		PlanSummaryPage planSummaryPage = (PlanSummaryPage) getLoginScenario()
+				.getBean(PageConstants.PLAN_SUMMARY_PAGE);
+		planSummaryPage.validatePharmacySaver();
+		planSummaryPage.logOut();
+	}
+
 
 
 }

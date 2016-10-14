@@ -137,11 +137,17 @@ public class AccountHomePage extends UhcDriver {
 	public BenefitsCoveragePage navigateToBnC() {
 
 		benefitsLink.click();
-		if (getTitle().equalsIgnoreCase(
-						"UnitedHealthcare Medicare Solutions | Plan Benefits and Coverage")) {
+		try {
+			Thread.sleep(90000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		String title = driver.getTitle().toString();
+		if (title.equalsIgnoreCase("UnitedHealthcare Medicare Solutions | Plan Benefits and Coverage")) {
 			return new BenefitsCoveragePage(driver);
 		}
-
+		else
 		return null;
 	}
 

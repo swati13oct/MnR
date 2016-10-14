@@ -4,6 +4,10 @@
 "memberId1":{
 "identifier":"xpath",
 "elementName":"//*[@id='memberID']"
+"memberName":{
+"identifier":"id",
+"elementName":"welcomeText"
+>>>>>>> remotes/origin/theIncredibles
 }
 }
 }
