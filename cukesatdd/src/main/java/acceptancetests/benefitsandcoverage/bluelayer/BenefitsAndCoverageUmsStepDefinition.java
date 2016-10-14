@@ -44,7 +44,7 @@ public class BenefitsAndCoverageUmsStepDefinition {
 	public MRScenario getLoginScenario() {
 		return loginScenario;
 	}
-
+/*
 	@Given("^registered UHC with following details for plan benefits and coverage flow in UMS site$")
 	public void login_with_member(DataTable memberAttributes) {
 		List<DataTableRow> memberAttributesRow = memberAttributes
@@ -94,13 +94,13 @@ public class BenefitsAndCoverageUmsStepDefinition {
 		JSONObject accountHomeActualJson = null;
 
 		/* Get expected data */
-		Map<String, JSONObject> expectedDataMap = loginScenario
+		/*Map<String, JSONObject> expectedDataMap = loginScenario
 				.getExpectedJson(userName);
 		JSONObject accountHomeExpectedJson = accountHomePage
 				.getExpectedData(expectedDataMap);
 
 		/* get actual data */
-		if (accountHomePage != null) {
+		/*if (accountHomePage != null) {
 			getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
 			getLoginScenario().saveBean(PageConstants.ACCOUNT_HOME_PAGE,
 					accountHomePage);
@@ -190,7 +190,7 @@ public class BenefitsAndCoverageUmsStepDefinition {
 				.navigateToBnC();
 
 		/* Get expected data */
-		JSONObject benefitsAndCoverageActualJson = null;
+		/*JSONObject benefitsAndCoverageActualJson = null;
 		@SuppressWarnings("unchecked")
 		Map<String, JSONObject> expectedDataMap = (Map<String, JSONObject>) getLoginScenario()
 		.getBean(CommonConstants.EXPECTED_DATA_MAP);
@@ -202,7 +202,7 @@ public class BenefitsAndCoverageUmsStepDefinition {
 
 
 		/* Actual data */
-		if (benefitsCoveragePage != null) {
+		/*if (benefitsCoveragePage != null) {
 			getLoginScenario().saveBean(
 					PageConstants.BENEFITS_AND_COVERAGE_PAGE,
 					benefitsCoveragePage);
@@ -245,7 +245,7 @@ public class BenefitsAndCoverageUmsStepDefinition {
 		System.out.println("benefitsAndCoverageExpectedJson===>"
 				+ benefitsAndCoverageExpectedJson.toString());
 		/* Validations */
-		try {
+		/*try {
 			JSONAssert.assertEquals(benefitsAndCoverageExpectedJson,
 					benefitsAndCoverageActualJson, true);
 		} catch (JSONException e) {
@@ -346,5 +346,5 @@ public class BenefitsAndCoverageUmsStepDefinition {
 		} catch (JSONException e) {
 			e.printStackTrace();
 		}
-	}
+	}*/
 }
