@@ -41,6 +41,7 @@ public class PlanSummaryUmsStepDefintion {
 
 	@Autowired
 	MRScenario loginScenario;
+	boolean flagValue;
 
 	public MRScenario getLoginScenario() {
 		return loginScenario;
@@ -262,6 +263,21 @@ public class PlanSummaryUmsStepDefintion {
 		planSummaryPage.logOut();
 	}
 
+	 @Then("^user validate view details button is not displayed for  group LIS 3$")
+	  
+	 public void user_validates_view_button()
+	    {PlanSummaryPage planSummaryPage = (PlanSummaryPage) getLoginScenario().getBean(PageConstants.PLAN_SUMMARY_PAGE);
 
-
+			
+			boolean flagValue=planSummaryPage.validateViewDetailsButton();
+			if(!flagValue){
+				Assert.assertTrue(true);
+			}else{
+				Assert.assertTrue(false);
+ }
 }
+}
+
+
+
+

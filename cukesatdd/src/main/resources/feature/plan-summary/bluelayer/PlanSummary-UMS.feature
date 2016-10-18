@@ -29,3 +29,14 @@ Examples:
 	| MAPD     | Individual   |
 	| PDP      | Group        |
 	| MAPD     | Group        |
+
+@Q5
+Scenario Outline: To validate Prescription drug cost summary widget on plan summary page for LIS 3
+Given registered member to login in UMS site
+	| Plan Type    | <plantype>   |
+	| Member Type  | <memberType> |
+When the user navigates to plan summary page under my plans in UMS site
+Then user validate view details button is not displayed for  group LIS 3
+Examples:
+ | plantype | memberType   |
+ | MAPD       | Group |

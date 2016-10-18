@@ -28,6 +28,9 @@ public class PlanSummaryPage extends UhcDriver {
 
 	@FindBy(id = "addAnotherPlanLink")
 	private WebElement addAnotherPlanLink;
+	
+	@FindBy(xpath = "//a[@id='btn_viewdetails']")
+   private WebElement viewDetailsButtons;
 
 	@FindBy(xpath = "//div[@id='main_content']/div[2]/div/div[2]/div/div[2]/div/div[2]/div/h3")
 	private WebElement planInformationHeading;
@@ -83,9 +86,11 @@ public class PlanSummaryPage extends UhcDriver {
 
 		JSONObject jsonObject = new JSONObject();
 		for (String key : planSummary.getExpectedData().keySet()) {
+			
 
 			WebElement element = findElement(planSummary.getExpectedData().get(
 					key));
+			System.out.println(element.getText());
 			if (element != null) {
 				if(validate(element)){
 					try {
@@ -150,4 +155,24 @@ public class PlanSummaryPage extends UhcDriver {
 	}
 
 
+	public boolean validateViewDetailsButton() {
+		boolean presentLink =false;
+		
+		try {
+			if(viewDetailsButtons.isDisplayed()){
+				
+				presentLink = true;
+			}			  
+			 
+		} catch (NoSuchElementException e) {
+			presentLink = false;
+		}
+		return presentLink;
+		
+		
+		// TODO Auto-generated method stub
+		
+	}
+
 }
+
