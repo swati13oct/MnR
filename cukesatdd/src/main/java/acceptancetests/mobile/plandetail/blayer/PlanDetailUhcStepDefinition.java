@@ -120,13 +120,13 @@ public class PlanDetailUhcStepDefinition {
 		getLoginScenario().saveBean(CommonConstants.EXPECTED_DATA_MAP, expectedDataMap);
 	}
 	
-@And("^the user navigates to benefits and coverage details page$")
+@And("^the user navigates to benefits and coverage details of Annual Deductible UHC page$")
 	
 	public void UHC_user_navigates_to_details_page()
 	
 	{
 	
-		String userName = "jul_ulayer123";
+		String userName = "mapd_grp_blayer_001";
 	BenefitsSummaryPage benefitsSummaryPage = (BenefitsSummaryPage) getLoginScenario()
 	.getBean(PageConstants.BENEFITS_SUMMARY_PAGE);
 	
@@ -147,13 +147,98 @@ public class PlanDetailUhcStepDefinition {
 	
 	}
 
+@And("^the user navigates to benefits and coverage details of UHC page with the initial coverage stage$")
+
+public void user_navigates_to_details_UHC_page_initial_coverage_stage()
+
+{
+
+	String userName = "mapd_grp_blayer_001";
+	BenefitsDetailPage benefitsDetailPage = (BenefitsDetailPage) getLoginScenario()
+.getBean(PageConstants.BENEFITS_DETAIL_PAGE);
+
+ benefitsDetailPage.click2ndstagearrow();
+
+Map<String,JSONObject> expectedDataMap = loginScenario.getExpectedJson(userName);
+JSONObject benefitsDetailExpectedJson = benefitsDetailPage.getExpectedData(expectedDataMap);
+getLoginScenario().saveBean(LoginCommonConstants.BENEFITS_DETAIL_EXPECTED, benefitsDetailExpectedJson);
+
+JSONObject benefitsDetailActualJson =  null;
+if (benefitsDetailPage != null) {
+	getLoginScenario().saveBean(PageConstants.BENEFITS_DETAIL_PAGE, benefitsDetailPage);
+	benefitsDetailActualJson = benefitsDetailPage.benefitsDetailJson;
+	getLoginScenario().saveBean(LoginCommonConstants.BENEFITS_DETAIL_ACTUAL, benefitsDetailActualJson);
+}
+
+getLoginScenario().saveBean(CommonConstants.EXPECTED_DATA_MAP, expectedDataMap);
+
+
+}
+
+@And("^the user navigates to benefits and coverage details of UHC page with the coverage gap stage$")
+
+public void user_navigates_to_details_UHC_page_coverage_gap_stage()
+
+{
+
+String userName = "mapd_grp_blayer_001";
+BenefitsDetailPage benefitsDetailPage = (BenefitsDetailPage) getLoginScenario()
+.getBean(PageConstants.BENEFITS_DETAIL_PAGE);
+
+benefitsDetailPage.click2ndstagearrow();
+
+Map<String,JSONObject> expectedDataMap = loginScenario.getExpectedJson(userName);
+JSONObject benefitsDetailExpectedJson = benefitsDetailPage.getExpectedData(expectedDataMap);
+getLoginScenario().saveBean(LoginCommonConstants.BENEFITS_DETAIL_EXPECTED, benefitsDetailExpectedJson);
+
+JSONObject benefitsDetailActualJson =  null;
+if (benefitsDetailPage != null) {
+getLoginScenario().saveBean(PageConstants.BENEFITS_DETAIL_PAGE, benefitsDetailPage);
+benefitsDetailActualJson = benefitsDetailPage.benefitsDetailJson;
+getLoginScenario().saveBean(LoginCommonConstants.BENEFITS_DETAIL_ACTUAL, benefitsDetailActualJson);
+}
+
+getLoginScenario().saveBean(CommonConstants.EXPECTED_DATA_MAP, expectedDataMap);
+
+
+}
+
+@And("^the user navigates to benefits and coverage details of UHC page with the catastrophic coverage stage$")
+
+public void user_navigates_to_details_UHC_page_catastrophic_coverage_stage()
+
+{
+
+String userName = "mapd_grp_blayer_001";
+BenefitsDetailPage benefitsDetailPage = (BenefitsDetailPage) getLoginScenario()
+.getBean(PageConstants.BENEFITS_DETAIL_PAGE);
+
+benefitsDetailPage.click2ndstagearrow();
+
+Map<String,JSONObject> expectedDataMap = loginScenario.getExpectedJson(userName);
+JSONObject benefitsDetailExpectedJson = benefitsDetailPage.getExpectedData(expectedDataMap);
+getLoginScenario().saveBean(LoginCommonConstants.BENEFITS_DETAIL_EXPECTED, benefitsDetailExpectedJson);
+
+JSONObject benefitsDetailActualJson =  null;
+if (benefitsDetailPage != null) {
+getLoginScenario().saveBean(PageConstants.BENEFITS_DETAIL_PAGE, benefitsDetailPage);
+benefitsDetailActualJson = benefitsDetailPage.benefitsDetailJson;
+getLoginScenario().saveBean(LoginCommonConstants.BENEFITS_DETAIL_ACTUAL, benefitsDetailActualJson);
+}
+
+getLoginScenario().saveBean(CommonConstants.EXPECTED_DATA_MAP, expectedDataMap);
+
+
+}	
+
+
 @Then("^the user validates plan and member details on benefits details page in UHCM site$")
 public void UHC_log_successful()
 {
 
 
 	JSONObject benefitsDetailActualJson = (JSONObject)getLoginScenario().getBean(LoginCommonConstants.BENEFITS_DETAIL_ACTUAL);
-	System.out.println("benefitsDeatilActualJson----->"+benefitsDetailActualJson);
+	System.out.println("benefitsDetailActualJson----->"+benefitsDetailActualJson);
 	
 	JSONObject benefitsDetailExpectedJson = (JSONObject)getLoginScenario().getBean(LoginCommonConstants.BENEFITS_DETAIL_EXPECTED);
 	System.out.println("benefitsDetailExpectedJson----->"+benefitsDetailExpectedJson);

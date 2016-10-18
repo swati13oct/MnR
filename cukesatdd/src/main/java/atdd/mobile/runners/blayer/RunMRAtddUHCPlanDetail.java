@@ -13,9 +13,9 @@ import cucumber.junit.Cucumber;
  */
 @RunWith(Cucumber.class)
 @Cucumber.Options(glue = { "atdd.framework","acceptancetests.mobile.plandetail.blayer" }, 
-features = { "feature/mobile/ulayer" }, 
+features = { "feature/mobile/bluelayer" }, 
 format = {
-"pretty", "html:reports/test-report" }, tags ={"@plandetail"})
-public class RunMRAtddPlanDetail {
+"pretty", "html:reports/test-report" }, tags ={"@bplandetail"})
+public class RunMRAtddUHCPlanDetail {
 
 }
