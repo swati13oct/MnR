@@ -59,6 +59,19 @@ public class MyPcpLoginStepDefinition {
 		
 	}
 	
+	@And("^the user navigate to My PCP site Access Your Account Page$")
+	public void access_your_account_page() {
+		
+		ContactUsPage pcpContactUsPage = (ContactUsPage) getLoginScenario()
+				.getBean(PageConstants.MYPCP_CONTACT_US_PAGE);
+		
+		SignInPage pcpSignInPage = pcpContactUsPage.navigateToSignIn();
+		
+		getLoginScenario().saveBean(PageConstants.MYPCP_SIGN_IN_PAGE,
+				pcpSignInPage);
+		
+	}
+	
 	@After
 	public void tearDown() {
 		WebDriver wd = (WebDriver) getLoginScenario().getBean(

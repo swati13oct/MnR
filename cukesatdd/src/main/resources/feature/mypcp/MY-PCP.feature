@@ -5,8 +5,9 @@ Feature: Test case for My PCP site
     Given the user is on the My PCP site landing page
     When the user navigate to About Us Page
     And the user navigate to Contact Us Page
+    And the user navigate to My PCP site Access Your Account Page
 
-  @mypcpregistration
+@mypcpregistration
   Scenario Outline: Verify registration for members in My PCP site
     Given the user is on registration page of My PCP site
     When the user registers with below details in My PCP site
