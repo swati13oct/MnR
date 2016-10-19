@@ -1,4 +1,4 @@
-package acceptancetests.enrollinplan.ulayer;
+package acceptancetests.fixedtestcases;
 
 import gherkin.formatter.model.DataTableRow;
 
