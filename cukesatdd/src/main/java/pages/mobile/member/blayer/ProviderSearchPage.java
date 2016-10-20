@@ -1,6 +1,3 @@
-/**
- * 
- */
 package pages.mobile.member.blayer;
 
 import org.json.JSONException;
@@ -11,7 +8,6 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-import pages.mobile.member.blayer.BenefitsSummaryPage;
 import acceptancetests.atdd.data.MRConstants;
 import acceptancetests.atdd.data.PageData;
 import acceptancetests.atdd.mobile.data.CommonConstants;
@@ -20,27 +16,25 @@ import atdd.framework.MRScenario;
 import atdd.framework.UhcDriver;
 
 /**
- * @author pnampall
+ * @author Bhaji Shaik
  *
  */
-public class LoginPage extends UhcDriver{
+public class ProviderSearchPage extends UhcDriver {
 	
-private static String PAGE_URL = MRConstants.UHCM_MOBILE_URL;
+	@FindBy(id = "menuopen")
+	private WebElement menuButton;
+
+	@FindBy(xpath = "//*[@id='sitemenu']/div[2]/a[5]")
+	private WebElement logout;
 	
-	@FindBy(id="loginSTANDuser")
-	private WebElement userNameField;
-
-	@FindBy(id = "loginSTANDpass")
-	private WebElement passwordField;
-
-	@FindBy(id = "accessURAccountBTN")
-	private WebElement signInButton;
+	@FindBy(xpath = "//*[@id='wrapper']/div[1]/div[3]/div/div/div[1]/h1")
+	private WebElement pharmacyLocatorText;
 
 	private PageData browserCheckData;
 
 	private JSONObject browserCheckJson;
 
-	public LoginPage(WebDriver driver) {
+	public ProviderSearchPage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
 		openAndValidate();
@@ -48,37 +42,26 @@ private static String PAGE_URL = MRConstants.UHCM_MOBILE_URL;
 
 	@Override
 	public void openAndValidate() {
-		start(PAGE_URL);
-		validate(userNameField);
-		validate(passwordField);
-		validate(signInButton);
-		
-	}
+		// start(PAGE_URL);
+		validate(pharmacyLocatorText);
 
-	public BenefitsSummaryPage loginWith(String userName, String pwd) {
-		sendkeys(userNameField, userName);
-		sendkeys(passwordField, pwd);
-		signInButton.click();
-		
-		if (MRScenario.environment.equals("dev-a") || MRScenario.environment.equals("team-a")) {
-			
-			Alert alert = driver.switchTo().alert();
-	        alert.accept();
-	        Alert alert1 = driver.switchTo().alert();
-	        alert1.accept();
-	        Alert alert2 = driver.switchTo().alert();
-	        alert2.accept();
-	        }
-		
-		if(currentUrl().contains("mobile/home/my-benefit-summary.html"))
+	}
+	
+	public void logout()
+	{
+		menuButton.click();
+		if(validate(logout))
 		{
-			return new BenefitsSummaryPage(driver);
+			logout.click();
 		}
-		return null;
+		else
+		{
+			System.out.println("logout button not found on page");
+		}
 	}
 
 	public JSONObject getBrowserCheck() {
-	
+
 		String fileName = CommonConstants.MOBILE_BROWSER_CHECK_DATA_BLUELAYER;
 		browserCheckData = CommonUtility.readPageData(fileName,
 				CommonConstants.PAGE_OBJECT_DIRECTORY_MOBILE_BLUELAYER_MEMBER);
@@ -103,6 +86,5 @@ private static String PAGE_URL = MRConstants.UHCM_MOBILE_URL;
 		return browserCheckJson;
 
 	}
-
 
 }
