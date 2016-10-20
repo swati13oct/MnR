@@ -59,6 +59,18 @@ public class MyMedicaLoginStepDefinition {
 
 	}
 	
+	@And("^the user navigate to my medica Sign In Page$")
+	public void AccessYourAccount_page() {
+
+		ContactUsPage medicaContactUsPage = (ContactUsPage) getLoginScenario()
+				.getBean(PageConstants.MYMEDICA_CONTACT_US_PAGE);
+
+		SignInPage medicaSignInPage = medicaContactUsPage.navigateToSignInPage();
+
+		getLoginScenario().saveBean(PageConstants.MYMEDICA_SIGN_IN_PAGE, medicaSignInPage);
+
+	}
+	
 	@After
 	public void tearDown() {
 		WebDriver wd = (WebDriver) getLoginScenario().getBean(
