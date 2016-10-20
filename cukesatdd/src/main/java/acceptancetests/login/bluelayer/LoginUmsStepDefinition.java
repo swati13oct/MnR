@@ -157,5 +157,17 @@ public class LoginUmsStepDefinition {
 		terminatedHomePage.logOut();
 
 	}
+	
+	@Then("^the user validates temp id card pop up after login in UHC site$")
+	public void tempId_validation() {
+		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario()
+				.getBean(PageConstants.ACCOUNT_HOME_PAGE);
+		boolean tempIdValid = accountHomePage.tempIdValidation();
+		if(tempIdValid){
+			Assert.assertTrue(true);
+		} else {
+			Assert.fail("Aboutus page not found");
+		}
+	}
 
 }

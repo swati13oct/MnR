@@ -96,6 +96,13 @@ public class AccountHomePage extends UhcDriver {
 	
 	@FindBy(xpath = "////*[@id='subPageLeft']/div[2]/div[2]/h3[2]/a")
 	private WebElement createPdfLink;
+	
+
+	@FindBy(xpath = "//span[contains(.,'Print temporary ID card')]")
+	private WebElement viewIDCard;
+	
+	@FindBy(id = "pcpLogoPrint1left")
+	private WebElement validateLogo;
 
 	
 	
@@ -397,5 +404,15 @@ public ContactUsPage navigatesToContactUsPage() {
 		}
 
 		return null;
+	}
+
+	public Boolean tempIdValidation() {
+		validate(viewIDCard);
+		viewIDCard.click();
+		if(validate(validateLogo)){
+			return true;
+		}
+		return false;
+		
 	}
 }
