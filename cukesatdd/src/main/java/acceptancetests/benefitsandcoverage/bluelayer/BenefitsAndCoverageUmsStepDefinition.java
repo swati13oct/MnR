@@ -368,4 +368,34 @@ public class BenefitsAndCoverageUmsStepDefinition {
 		benefitsCoveragePage.logOut();
 
 	}
+	
+	@Then("^the user validates riders after login in UHC site$")
+	public void validate_Riders__Available_Not() {
+
+
+	BenefitsCoveragePage benefitsCoveragePage = (BenefitsCoveragePage) getLoginScenario()
+	.getBean(PageConstants.BENEFITS_AND_COVERAGE_PAGE);
+	JSONObject benefitsAndCoverageActualJson = (JSONObject) getLoginScenario()
+	.getBean(
+	PlanBenefitsAndCoverageCommonConstants.PLAN_BENEFITS_ACTUAL);
+	JSONObject benefitsAndCoverageExpectedJson = (JSONObject) getLoginScenario()
+	.getBean(
+	PlanBenefitsAndCoverageCommonConstants.PLAN_BENEFITS_EXPECTED);
+
+	System.out.println("benefitsAndCoverageActualJson=====>"
+	+ benefitsAndCoverageActualJson.toString());
+	System.out.println("benefitsAndCoverageExpectedJson===>"
+	+ benefitsAndCoverageExpectedJson.toString());
+	/* Validations */
+	try {
+	JSONAssert.assertEquals(benefitsAndCoverageExpectedJson,
+	benefitsAndCoverageActualJson, true);
+	} catch (JSONException e) {
+	e.printStackTrace();
+	}
+	benefitsCoveragePage.logOut();
+
+	}
 }
+	
+

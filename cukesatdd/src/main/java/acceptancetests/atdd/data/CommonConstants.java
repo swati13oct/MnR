@@ -50,6 +50,8 @@ public class CommonConstants {
 
 	public static final String BENEFITS_AND_COVERAGE_MAPD_NONLIS_RIDERS_PAGE_DATA = "bncWithRidersAndSplitTier.json";
 	
+	public static final String BENEFITS_AND_COVERAGE_MAPD_LIS_NONUS_PAGE_DATA = "planbenefitsandcoveragelisnotusother.json";
+	
 	public static final String BENEFITS_AND_COVERAGE_MAPD_NONLIS_NO_RIDERS_PAGE_DATA = "bncWithoutRidersAndSplitTier.json";
 
 	public static final String BENEFITS_AND_COVERAGE_DIRECTORY = "/jsonresponse/member/ulayer/planbenefitsandcoverage/";
