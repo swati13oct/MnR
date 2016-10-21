@@ -284,6 +284,7 @@ public class BenefitsAndCoverageUmsStepDefinition {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	}
 
 	@Then("^the user validates pharmacy saver widget in UMS site$")
 	public void user_validates_pharmacySaver_UMS(){
