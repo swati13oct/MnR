@@ -7,6 +7,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.openqa.selenium.By;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -28,6 +29,9 @@ public class SelectPharmacyPage extends UhcDriver {
 	@FindBy(xpath = "//div[@class='inputRadioButtons']")
 	private WebElement pharmacyOptions;
 
+	@FindBy(xpath = "//div[@id='dce.member']/div/div[4]/div/div/div[1]/div[1]/div[2]")
+	WebElement  selectPharmacyTab;
+	
 	@FindBy(xpath = "//div[@id='dce.member']/div/div[4]/div/div/div[1]/div[1]/div[3]")
 	WebElement viewDrugCostTab1;
 
@@ -54,7 +58,10 @@ public class SelectPharmacyPage extends UhcDriver {
 
 	@FindBy(linkText = "select")
 	private WebElement selectPharmacyButton;
-
+	
+	@FindBy(xpath = "//*[@id='dceMemberUlayer']/div/div[1]/div[3]/div[2]/table/tbody/tr[2]/td[3]/div")
+	private WebElement drugCostsValue;
+	
 	private PageData selectPharmacy;
 
 	public JSONObject selectPharmacyJson;
@@ -111,14 +118,14 @@ public class SelectPharmacyPage extends UhcDriver {
 		for (WebElement pharmacyRow : pharmacyRows) {
 			List<WebElement> pharmacyColumns = pharmacyRow.findElements(By
 					.tagName("td"));
-			
+
 			// Pharmacy name is available at third column
 			WebElement pharmacyNameElement = pharmacyColumns.get(2);
 
 			if (pharmacyNameElement.getText().equalsIgnoreCase(pharmacyName)) {
 				if (pharmacyColumns.get(4).getText().equalsIgnoreCase("select")) {
 					pharmacyColumns.get(4).findElement(By.linkText("select"))
-							.click();
+					.click();
 					viewDrugCostTab1.click();
 					try {
 						Thread.sleep(5000);
@@ -136,7 +143,7 @@ public class SelectPharmacyPage extends UhcDriver {
 						e.printStackTrace();
 					}
 				}
-				
+
 				if(category.equalsIgnoreCase(CommonConstants.GROUP)){
 					return new ViewDrugCostPage(driver,category);
 				}
@@ -147,6 +154,73 @@ public class SelectPharmacyPage extends UhcDriver {
 			}
 		}
 		return null;
+	}
+
+	public ViewDrugCostPage selectPharmacyandvalidate(String pharmacyName,
+			String category, String pharmacyType) {
+		CommonUtility.waitForPageLoad(driver, pharmacyTable,CommonConstants.TIMEOUT_30);
+		List<WebElement> pharmacyRows = pharmacyTable.findElements(By
+				.tagName("tr"));
+
+		for (WebElement pharmacyRow : pharmacyRows) {
+			List<WebElement> pharmacyColumns = pharmacyRow.findElements(By
+					.tagName("td"));
+
+			// Pharmacy name is available at third column
+			WebElement pharmacyNameElement = pharmacyColumns.get(2);
+
+			if (pharmacyNameElement.getText().equalsIgnoreCase(pharmacyName)) {
+				if (pharmacyColumns.get(4).getText().equalsIgnoreCase("select")) {
+					pharmacyColumns.get(4).findElement(By.linkText("select")).click();
+				}
+			}
+		}
+		validateWidgets();
+		selectPharmacyTab.click();
+		validateWidgets();
+		viewDrugCostTab2.click();
+		boolean present;
+		try {
+			driver.findElement(By.id("ATDD_CurrentPharmacy"));
+			present = true;
+		} catch (NoSuchElementException e) {
+			present = false;
+		}
+
+		if(present)
+			System.out.println("@@@@@@@@@ Able to find Current Pharmacy widget @@@@@@@@@");
+		else
+			System.out.println("@@@@@@@@@ No Current Pharmacy widget @@@@@@@@@");
+		if(drugCostsValue.getText().contains("$"))
+			System.out.println("Drug Costs table has a value");
+		else
+			System.out.println("Drug Costs table shows null value ");
+		
+
+		if(category.equalsIgnoreCase(CommonConstants.GROUP)){
+			return new ViewDrugCostPage(driver,category);
+		}
+		else{
+			return new ViewDrugCostPage(driver);
+		}
+	}
+
+	public void validateWidgets() {
+		boolean present;
+		try {
+			driver.findElement(By.id("ATDD_CurrentPharmacy"));
+			driver.findElement(By.id("ATDD_DrugCostSavings"));
+			present = true;
+		} catch (NoSuchElementException e) {
+			present = false;
+		}
+
+		if(present)
+			System.out.println("@@@@@@@@@ Able to find Current Pharmacy and Drug Cost Savings widget @@@@@@@@@");
+		else
+			System.out.println("@@@@@@@@@ No Current Pharmacy and Drug Cost Savings widget @@@@@@@@@");
+
+
 	}
 
 	@Override
@@ -194,7 +268,7 @@ public class SelectPharmacyPage extends UhcDriver {
 			}
 		}
 		selectPharmacyJson = jsonObject;
-		
+
 		System.out.println("selectPharmacyJson----->"+selectPharmacyJson);
 
 		// Need a review for below commented code
@@ -256,5 +330,9 @@ public class SelectPharmacyPage extends UhcDriver {
 				updatedPharmacyPageExpectedJson, globalExpectedJson);
 		return updatedPharmacyPageExpectedJson;
 	}
+
+
+
+
 
 }

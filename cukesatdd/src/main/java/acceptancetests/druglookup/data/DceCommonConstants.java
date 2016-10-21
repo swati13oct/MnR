@@ -21,5 +21,6 @@ public class DceCommonConstants {
 	public static final String VIEW_DRUG_COST_ACTUAL = "viewDrugCostActualJson";
 	public static final String DOSAGE_ATTRIBUTES_MAP = "dosageAttributesMap";
 	public static final String CATEGORY = "category";
+	public static final String PHARMACYTYPE = "pharmacyType";
 
 }
