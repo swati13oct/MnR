@@ -435,12 +435,10 @@ Examples:
     Then valiadte the actual and expected data of bluelayer benefets and coverage pdfs
     Examples: 
       | planType | memberType |
-      | MA       | Individual |
+     # | MA       | Individual |
       #	| MA       | Group      |
       #| MAPD     | Individual |
-
-	
-	
+      #| MAPD     | Individual |
 @Q4
 Scenario Outline:To validate the pharmacy saver widget in benefits and coverage page in UMS site
 Given registered member to login in UMS site
@@ -453,3 +451,17 @@ Examples:
 	| plantype | memberType   |
 	| MAPD     | Individual   |
 
+@benefitAndCoverage
+Scenario Outline: Verify My Medical Costs & Benefits Summary in UMS site
+Given registered UHC with following details for plan benefits and coverage flow in UMS site
+| Plan Type      | MAPD  |
+| Member Type     | Individual|
+| Copay Category | NON LIS               |  
+| Riders         | <riderAvailableCheck> |
+When the user navigates to plan benefits and Coverage in UMS site
+Then the user validates riders,benefit tiering and split tier deductibles 3,4,5 after login in UHC site
+Examples:
+
+| riderAvailableCheck |
+#| riderAvailable       |
+| riderNotAvailable    |

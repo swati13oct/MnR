@@ -48,6 +48,10 @@ public class CommonConstants {
 
 	public static final String BENEFITS_AND_COVERAGE_PDP_NONLIS_NONUS_PAGE_DATA = "planbenefitsandcoveragenonlisnotusother.json";
 
+	public static final String BENEFITS_AND_COVERAGE_MAPD_NONLIS_RIDERS_PAGE_DATA = "bncWithRidersAndSplitTier.json";
+	
+	public static final String BENEFITS_AND_COVERAGE_MAPD_NONLIS_NO_RIDERS_PAGE_DATA = "bncWithoutRidersAndSplitTier.json";
+
 	public static final String BENEFITS_AND_COVERAGE_DIRECTORY = "/jsonresponse/member/ulayer/planbenefitsandcoverage/";
 
 	public static final String ACCOUNT_HOME_PAGE_DATA = "myaccounthome.json"; // Group
