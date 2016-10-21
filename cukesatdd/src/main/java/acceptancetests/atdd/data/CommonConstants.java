@@ -808,7 +808,10 @@ public class CommonConstants {
 	public static final String AARPM_FR_PDF_PAGE_DATA = "nextyearpdfs.json";
 	public static final String FORMS_AND_RESOURCES_PLANMATERIAL_SECTION_PDFS = "planmaterialpdfs.json";
 	public static final String FORMS_AND_RESOURCES_PLANMATERIAL_SECTION_PDFS_AARP = "plandocpdfs.json";
-
+	public static final String B_AND_C_MA_MEMBER_RIDER = "benefitsandcoveragemalisrider.json";
+	public static final String B_AND_C_MA_MEMBER_NON_RIDER = "benefitsandcoveragemalisnonrider.json";
+	public static final String B_AND_C_MAPD_NON_LIS_RIDER ="bncmapdnonlisdeductible.json";
+	public static final String B_AND_C_MAPD_NON_LIS_NON_RIDER= "bncmapdnonlisdeductiblenonrider.json";
 	
 
 	
