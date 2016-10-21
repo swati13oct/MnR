@@ -67,18 +67,29 @@ public class EnrollInPlanAarpStepDefinition {
 		return loginScenario;
 	}
 
-	@Before
+	/*	@Before
 	public void setup(){
-		/*
+		
 		 * Format(MM-DD-YYYY) Pre-AEP Test
-		 */
+		 
 		String date = "09-30-2016";
 		CommonUtility.changeMRRestTime(getLoginScenario(), date);
 		CommonUtility.changePartDTime(getLoginScenario(), date);
 	}
+	*/
 	
 	@Given("^the user is on AARP medicare site landing page$")
 	public void the_user_on_UHC_Medicaresolutions_Site() {
+		
+		/*Changing date to AEP period*/
+		
+		/* Format(MM-DD-YYYY) Pre-AEP Test */
+		String date = "09-30-2016";
+		CommonUtility.changeMRRestTime(getLoginScenario(), date);
+		CommonUtility.changePartDTime(getLoginScenario(), date);
+		
+		/*Date change logic ends*/
+		
 		WebDriver wd = getLoginScenario().getWebDriver();
 
 		AcquisitionHomePage aquisitionhomepage = new AcquisitionHomePage(wd);
