@@ -147,4 +147,26 @@ public class BenefitsCoveragePage extends UhcDriver {
 		
 	}
 
+	public void validatesDrugCostTable() {
+		driver.navigate().refresh();
+		try {
+			Thread.sleep(10000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		boolean present;
+		try {
+			driver.findElement(By.id("preferred_retail_drugCosts"));
+			present = true;
+		} catch (NoSuchElementException e) {
+			present = false;
+		}
+
+		if(present)
+			System.out.println("@@@@@@@@@ Able to find Preferred Retail Drug Cost Table @@@@@@@@@");
+		else
+			System.out.println("@@@@@@@@@ No Preferred Retail Drug Cost Table @@@@@@@@@");
+	}
+
 }

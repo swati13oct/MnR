@@ -44,7 +44,7 @@ public class BenefitsAndCoverageUmsStepDefinition {
 	public MRScenario getLoginScenario() {
 		return loginScenario;
 	}
-/*
+
 	@Given("^registered UHC with following details for plan benefits and coverage flow in UMS site$")
 	public void login_with_member(DataTable memberAttributes) {
 		List<DataTableRow> memberAttributesRow = memberAttributes
@@ -100,14 +100,14 @@ public class BenefitsAndCoverageUmsStepDefinition {
 				.getExpectedData(expectedDataMap);
 
 		/* get actual data */
-		/*if (accountHomePage != null) {
+		if (accountHomePage != null) {
 			getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
 			getLoginScenario().saveBean(PageConstants.ACCOUNT_HOME_PAGE,
 					accountHomePage);
-			Assert.assertTrue(true);
-			accountHomeActualJson = accountHomePage.accountHomeJson;
+			/*Assert.assertTrue(true);
+			accountHomeActualJson = accountHomePage.accountHomeJson;*/
 		}
-		System.out.println("accountHomeActualJson====>"
+		/*System.out.println("accountHomeActualJson====>"
 				+ accountHomeActualJson.toString());
 		System.out.println("accountHomeExpectedJson====>"
 				+ accountHomeExpectedJson.toString());
@@ -121,7 +121,7 @@ public class BenefitsAndCoverageUmsStepDefinition {
 
 		getLoginScenario().saveBean(CommonConstants.EXPECTED_DATA_MAP,
 				expectedDataMap);
-
+*/
 	}
 
 	@Given("^registered member to login in UMS site$")
@@ -198,20 +198,20 @@ public class BenefitsAndCoverageUmsStepDefinition {
 				.getExpectedData(expectedDataMap);
 		getLoginScenario().saveBean(
 				PlanBenefitsAndCoverageCommonConstants.PLAN_BENEFITS_EXPECTED,
-				benefitsAndCoverageExpectedJson);
+				benefitsAndCoverageExpectedJson);*/
 
 
 		/* Actual data */
-		/*if (benefitsCoveragePage != null) {
+		if (benefitsCoveragePage != null) {
 			getLoginScenario().saveBean(
 					PageConstants.BENEFITS_AND_COVERAGE_PAGE,
 					benefitsCoveragePage);
-			Assert.assertTrue(true);
-			benefitsAndCoverageActualJson = benefitsCoveragePage.benefitsAndCoverageJson;
+			/*Assert.assertTrue(true);
+			benefitsAndCoverageActualJson = benefitsCoveragePage.benefitsAndCoverageJson;*/
 		}
-		getLoginScenario().saveBean(
+		/*getLoginScenario().saveBean(
 				PlanBenefitsAndCoverageCommonConstants.PLAN_BENEFITS_ACTUAL,
-				benefitsAndCoverageActualJson);
+				benefitsAndCoverageActualJson);*/
 	}
 
 	@When("^the user navigates to benefits and coverage page under my plans in UMS site$")
@@ -245,7 +245,7 @@ public class BenefitsAndCoverageUmsStepDefinition {
 		System.out.println("benefitsAndCoverageExpectedJson===>"
 				+ benefitsAndCoverageExpectedJson.toString());
 		/* Validations */
-		/*try {
+		try {
 			JSONAssert.assertEquals(benefitsAndCoverageExpectedJson,
 					benefitsAndCoverageActualJson, true);
 		} catch (JSONException e) {
@@ -285,6 +285,7 @@ public class BenefitsAndCoverageUmsStepDefinition {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	}
 
 	@Then("^the user validates pharmacy saver widget in UMS site$")
 	public void user_validates_pharmacySaver_UMS(){
@@ -292,9 +293,14 @@ public class BenefitsAndCoverageUmsStepDefinition {
 				.getBean(PageConstants.BENEFITS_AND_COVERAGE_PAGE);
 		benefitsCoveragePage.validatesPharmacySaver();
 		benefitsCoveragePage.logOut();
-		
-		
-
+	}
+	
+	@Then("^the user validates drug cost table in UMS site$")
+	public void user_validates_drug_cost_table_UMS(){
+		BenefitsCoveragePage benefitsCoveragePage = (BenefitsCoveragePage) getLoginScenario()
+				.getBean(PageConstants.BENEFITS_AND_COVERAGE_PAGE);
+		benefitsCoveragePage.validatesDrugCostTable();
+		benefitsCoveragePage.logOut();
 	}
 
 	
@@ -346,5 +352,5 @@ public class BenefitsAndCoverageUmsStepDefinition {
 		} catch (JSONException e) {
 			e.printStackTrace();
 		}
-	}*/
+	}
 }
