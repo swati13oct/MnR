@@ -12,6 +12,7 @@ mapd_grp_blayer_001/Password@1,MAPD,mobile,
 apr_blayer009_1/Password@1,MA,Group,,
 jul_group295/Password@1,MAPD,Group,
 Dec_blayer072/Password@1,MAPD,Individual
+Dec_blayer072/Password@1,MAPD,mobile
 Sep_blayer002,MAPD,Individual
 teamb_sep_group141,PDP,Group
 team_sep_group029,MAPD,Group
