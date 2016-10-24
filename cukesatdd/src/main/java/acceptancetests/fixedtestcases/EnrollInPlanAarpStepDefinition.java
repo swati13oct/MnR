@@ -1242,7 +1242,9 @@ public class EnrollInPlanAarpStepDefinition {
 
 		getLoginScenario().saveBean(PageConstants.CONFIRMATION_PAGE,confirmationPage);
 
-
+		CommonUtility.resetMRRestTime(getLoginScenario());
+		CommonUtility.resetPartDTime(getLoginScenario());
+		
 	}
 
 
@@ -1634,8 +1636,6 @@ public class EnrollInPlanAarpStepDefinition {
 		WebDriver wd = (WebDriver) getLoginScenario().getBean(
 				CommonConstants.WEBDRIVER);
 		wd.quit();
-		CommonUtility.resetMRRestTime(getLoginScenario());
-		CommonUtility.resetPartDTime(getLoginScenario());
 		getLoginScenario().flushBeans();
 	}
 
