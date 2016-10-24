@@ -13,9 +13,7 @@ import java.util.Set;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.junit.Assert;
-import org.openqa.selenium.Capabilities;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.remote.RemoteWebDriver;
 import org.skyscreamer.jsonassert.JSONAssert;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -197,7 +195,7 @@ public class BenefitsAndCoverageUmsStepDefinition {
 				.getExpectedData(expectedDataMap);
 		getLoginScenario().saveBean(
 				PlanBenefitsAndCoverageCommonConstants.PLAN_BENEFITS_EXPECTED,
-				benefitsAndCoverageExpectedJson);*/
+				benefitsAndCoverageExpectedJson);
 
 
 		/* Actual data */
