@@ -598,43 +598,8 @@ public class EstimateCostsUmsStepDefinition {
 				DceCommonConstants.CATEGORY);
 		ManageDrugPage manageDrugPage = accountHomePage
 				.navigateToEstimateCost(category);
-
-				AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario()
-						.getBean(PageConstants.ACCOUNT_HOME_PAGE);
-				String category = (String) getLoginScenario().getBean(
-						DceCommonConstants.CATEGORY);
-				ManageDrugPage manageDrugPage = accountHomePage
-						.navigateToEstimateCost(category);
-				manageDrugPage.checkForDrugPresentAndDelete();
-				/* Get expected data */
-				@SuppressWarnings("unchecked")
-				JSONObject manageDrugPageActualJson = null;
-				if (manageDrugPage != null) {
-					getLoginScenario().saveBean(PageConstants.MANAGE_DRUG_PAGE,
-							manageDrugPage);
-					Assert.assertTrue(true);
-					manageDrugPageActualJson = manageDrugPage.manageDrugJson;
-				}
- 				String drugInitials = givenAttributes.getGherkinRows().get(0)
-						.getCells().get(0);
-				String categoryNew = (String) getLoginScenario().getBean(
-						DceCommonConstants.CATEGORY);
-				ManageDrugPage manageDrugPageNew = (ManageDrugPage) getLoginScenario()
-						.getBean(PageConstants.MANAGE_DRUG_PAGE);
-				AddDrugPage addDrugPage = manageDrugPage.searchDrug(drugInitials,
-						category);
-
-				/* Get expected data */
-				@SuppressWarnings("unchecked")	
-				JSONObject addDrugPageActualJson = null;
-				if (addDrugPage != null) {
-					getLoginScenario().saveBean(PageConstants.ADD_DRUG_PAGE,
-							addDrugPage);
-					Assert.assertTrue(true);
-					addDrugPageActualJson = addDrugPage.addDrugJson;
-				}
-
-
+		manageDrugPage.checkForDrugPresentAndDelete();
+				
 		/* Get expected data */
 		@SuppressWarnings("unchecked")
 		JSONObject manageDrugPageActualJson = null;
@@ -717,49 +682,6 @@ public class EstimateCostsUmsStepDefinition {
 
 	}
 
-
-				String drugName = drugNameAttributes.getGherkinRows().get(0).getCells()
-						.get(0);
-				String category = (String) getLoginScenario().getBean(
-						DceCommonConstants.CATEGORY);
-				AddDrugPage addDrugPage = (AddDrugPage) getLoginScenario().getBean(
-						PageConstants.ADD_DRUG_PAGE);
-				DrugDosagePage drugDosagePage = addDrugPage.selectDrug(drugName,
-						category);
-				/* Get expected data */
-				@SuppressWarnings("unchecked")				 
-				JSONObject drugDosagePageActualJson = null;
-				if (addDrugPage != null) {
-					getLoginScenario().saveBean(PageConstants.DRUG_DOSAGE_PAGE,
-							drugDosagePage);
-					Assert.assertTrue(true);
-					drugDosagePageActualJson = drugDosagePage.drugDosageJson;
-				}
-				 
-			}
-	@Then("^I should not see the Preferred Mail Service Pharmacy radio button$")
-	public void user_select_dosage_information(DataTable dosageAttributes){
-
-				DrugDosagePage drugDosagePage = (DrugDosagePage) getLoginScenario()
-						.getBean(PageConstants.DRUG_DOSAGE_PAGE);
-				String category = (String) getLoginScenario().getBean(
-						DceCommonConstants.CATEGORY);
-				List<DataTableRow> dosageAttributesRow = dosageAttributes
-						.getGherkinRows();
-				Map<String, String> dosageAttributesMap = new HashMap<String, String>();
-				for (int i = 0; i < dosageAttributesRow.size(); i++) {
-
-					dosageAttributesMap.put(dosageAttributesRow.get(i).getCells()
-							.get(0), dosageAttributesRow.get(i).getCells().get(1));
-				}
-				
-			 	Object pageObject = drugDosagePage.selectDosage(dosageAttributesMap,
-				 		category);
-			getLoginScenario().saveBean(DceCommonConstants.DOSAGE_ATTRIBUTES_MAP,
-						dosageAttributesMap);
-				drugDosagePage.navigateAndValidate();
-							 
-				}
 	 @Then("^the user adds the drug$")
 	 public void add_Drug(DataTable dosageAttributes){
 		 DrugDosagePage drugDosagePage = (DrugDosagePage) getLoginScenario()
