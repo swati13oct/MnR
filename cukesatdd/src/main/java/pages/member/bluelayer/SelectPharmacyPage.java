@@ -148,7 +148,19 @@ public class SelectPharmacyPage extends UhcDriver {
 		}
 		return null;
 	}
-
+	public ManageDrugPage selectDesiredPharmacyAndNavigate(String pharmacyName){
+		List<WebElement> pharmacyNames = driver.findElements(By.xpath("//*[@class='pharmacyName ng-binding']"));
+		List <WebElement> respectivepharmacySelect = driver.findElements(By.xpath("//*[@class='pharmacySelectBtn height15']"));
+		for(int i=0; i<pharmacyNames.size();i++){
+			if(pharmacyNames.get(i).getText().equalsIgnoreCase(pharmacyName)){
+				System.out.println(pharmacyName+"--selected");
+				respectivepharmacySelect.get(i).click();
+			}
+			return new ManageDrugPage(driver);
+		}
+		
+		return null;
+	}
 	@Override
 	public void openAndValidate() {
 

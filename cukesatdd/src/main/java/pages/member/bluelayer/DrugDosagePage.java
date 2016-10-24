@@ -52,6 +52,11 @@ public class DrugDosagePage extends UhcDriver {
 	@FindBy(xpath="//div[2]/div[5]/div/p[contains(text(),'Preferred Mail Service Pharmacy')]")
 	WebElement preferredMailServiceText;
 	
+	@FindBy(xpath="//div[3]/div/div/div/div[3]/div/div/div[1]/div[2]/a/span")
+	WebElement clickContinue;
+	
+	@FindBy(xpath=("//div/div/div[1]/div[2]/div[2]/div[4]/input"))
+	WebElement standardRatioButton;
 	private PageData drugDosage;
 
 	public JSONObject drugDosageJson;
@@ -117,7 +122,10 @@ public class DrugDosagePage extends UhcDriver {
 			}
 		}
 	}
-
+	public void selectDrugAndValidate(){
+		waitforElement(clickContinue);
+		clickContinue.click();
+	}
 	public void navigateAndValidate(){
 		selectPharmacy.click();
 		System.out.println("select pharmay clicked");
@@ -132,6 +140,15 @@ public class DrugDosagePage extends UhcDriver {
 		}		
 }
 
+	public SelectPharmacyPage navigateToWaysToSave(){
+		waitforElement(selectPharmacy);
+		selectPharmacy.click();
+		standardRatioButton.click();
+		if (standardRatioButton.isDisplayed()) {
+			return new SelectPharmacyPage(driver);
+		} 
+			return null;			
+	}
 	@Override
 	public void openAndValidate() {
 		
