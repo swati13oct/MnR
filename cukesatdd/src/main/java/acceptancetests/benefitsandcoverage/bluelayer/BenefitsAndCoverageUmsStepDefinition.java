@@ -94,8 +94,7 @@ public class BenefitsAndCoverageUmsStepDefinition {
 		JSONObject accountHomeActualJson = null;
 
 		/* Get expected data */
-		/*Map<String, JSONObject> expectedDataMap = loginScenario
-				.getExpectedJson(userName);
+		Map<String, JSONObject> expectedDataMap = loginScenario.getExpectedJson(userName);
 		JSONObject accountHomeExpectedJson = accountHomePage
 				.getExpectedData(expectedDataMap);
 
@@ -190,7 +189,7 @@ public class BenefitsAndCoverageUmsStepDefinition {
 				.navigateToBnC();
 
 		/* Get expected data */
-		/*JSONObject benefitsAndCoverageActualJson = null;
+		JSONObject benefitsAndCoverageActualJson = null;
 		@SuppressWarnings("unchecked")
 		Map<String, JSONObject> expectedDataMap = (Map<String, JSONObject>) getLoginScenario()
 		.getBean(CommonConstants.EXPECTED_DATA_MAP);
@@ -353,4 +352,57 @@ public class BenefitsAndCoverageUmsStepDefinition {
 			e.printStackTrace();
 		}
 	}
+
+
+	@Then("^the user validates riders,benefit tiering and split tier deductibles 3,4,5 after login in UHC site$")
+	public void validate_Riders() {
+		BenefitsCoveragePage benefitsCoveragePage = (BenefitsCoveragePage) getLoginScenario()
+				.getBean(PageConstants.BENEFITS_AND_COVERAGE_PAGE);
+		JSONObject benefitsAndCoverageActualJson = (JSONObject) getLoginScenario()
+				.getBean(PlanBenefitsAndCoverageCommonConstants.PLAN_BENEFITS_ACTUAL);
+		JSONObject benefitsAndCoverageExpectedJson = (JSONObject) getLoginScenario()
+				.getBean(PlanBenefitsAndCoverageCommonConstants.PLAN_BENEFITS_EXPECTED);
+
+		System.out.println("benefitsAndCoverageActualJson=====>" + benefitsAndCoverageActualJson.toString());
+		System.out.println("benefitsAndCoverageExpectedJson===>" + benefitsAndCoverageExpectedJson.toString());
+		/* Validations */
+		try {
+			JSONAssert.assertEquals(benefitsAndCoverageExpectedJson, benefitsAndCoverageActualJson, true);
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}
+		benefitsCoveragePage.logOut();
+
+	}
+	
+	@Then("^the user validates riders after login in UHC site$")
+	public void validate_Riders__Available_Not() {
+
+
+	BenefitsCoveragePage benefitsCoveragePage = (BenefitsCoveragePage) getLoginScenario()
+	.getBean(PageConstants.BENEFITS_AND_COVERAGE_PAGE);
+	JSONObject benefitsAndCoverageActualJson = (JSONObject) getLoginScenario()
+	.getBean(
+	PlanBenefitsAndCoverageCommonConstants.PLAN_BENEFITS_ACTUAL);
+	JSONObject benefitsAndCoverageExpectedJson = (JSONObject) getLoginScenario()
+	.getBean(
+	PlanBenefitsAndCoverageCommonConstants.PLAN_BENEFITS_EXPECTED);
+
+	System.out.println("benefitsAndCoverageActualJson=====>"
+	+ benefitsAndCoverageActualJson.toString());
+	System.out.println("benefitsAndCoverageExpectedJson===>"
+	+ benefitsAndCoverageExpectedJson.toString());
+	/* Validations */
+	try {
+	JSONAssert.assertEquals(benefitsAndCoverageExpectedJson,
+	benefitsAndCoverageActualJson, true);
+	} catch (JSONException e) {
+	e.printStackTrace();
+	}
+	benefitsCoveragePage.logOut();
+
+	}
+
 }
+	
+

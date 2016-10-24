@@ -435,12 +435,10 @@ Examples:
     Then valiadte the actual and expected data of bluelayer benefets and coverage pdfs
     Examples: 
       | planType | memberType |
-      | MA       | Individual |
+     # | MA       | Individual |
       #	| MA       | Group      |
       #| MAPD     | Individual |
-
-	
-	
+      #| MAPD     | Individual |
 @Q4
 Scenario Outline:To validate the pharmacy saver widget in benefits and coverage page in UMS site
 Given registered member to login in UMS site
@@ -468,3 +466,82 @@ Examples:
 	| MAPD     | Individual   |
 
 
+@benefitAndCoverage
+Scenario Outline: Verify My Medical Costs & Benefits Summary in UMS site
+Given registered UHC with following details for plan benefits and coverage flow in UMS site
+| Plan Type      | MAPD  |
+| Member Type     | Individual|
+| Copay Category | NON LIS               |  
+| Riders         | <riderAvailableCheck> |
+When the user navigates to plan benefits and Coverage in UMS site
+Then the user validates riders,benefit tiering and split tier deductibles 3,4,5 after login in UHC site
+Examples:
+
+| riderAvailableCheck |
+#| riderAvailable       |
+| riderNotAvailable    |
+
+@mapdnonlisnonrider
+Feature: To test plan benefits and Coverage on UMS site
+Scenario Outline:To validate the coverage and benefit amounts in benefits and coverage page in UMS site
+Given registered UHC with following details for plan benefits and coverage flow in UMS site
+       | Plan Type    |MAPD|
+       | Member Type  |Individual|
+       | Copay Category |NON LIS|  
+       | Riders         | <riderAvailableCheck> |      
+When the user navigates to plan benefits and Coverage in UMS site
+Then the user validates riders after login in UHC site
+
+Examples:
+        | riderAvailableCheck |
+	   |riderAvailable|
+		#|riderNotAvailable|
+		
+
+@mapdnonlisrider
+Feature: To test plan benefits and Coverage on UMS site
+Scenario Outline:To validate the coverage and benefit amounts in benefits and coverage page in UMS site
+Given registered UHC with following details for plan benefits and coverage flow in UMS site
+       | Plan Type    |MAPD|
+       | Member Type  |Individual|
+       | Copay Category |NON LIS|  
+       | Riders         | <riderAvailableCheck> |      
+When the user navigates to plan benefits and Coverage in UMS site
+Then the user validates riders after login in UHC site
+
+Examples:
+        | riderAvailableCheck |
+	   #|riderAvailable|
+		|riderNotAvailable|
+		
+@marider
+Feature: To test plan benefits and Coverage on UMS site
+Scenario Outline: Verify My Medical Costs & Benefits Summary in UMS site
+Given registered UHC with following details for plan benefits and coverage flow in UMS site
+| Plan Type      | MA  |
+| Member Type     | Individual|
+| Copay Category |  LIS               |  
+| Riders         | <riderAvailableCheck> |
+When the user navigates to plan benefits and Coverage in UMS site
+And the user validates riders after login in UHC site
+Examples:
+
+| riderAvailableCheck |
+| riderAvailable       |
+#| riderNotAvailable    |
+		
+@manonrider
+Feature: To test plan benefits and Coverage on UMS site
+Scenario Outline: Verify My Medical Costs & Benefits Summary in UMS site
+Given registered UHC with following details for plan benefits and coverage flow in UMS site
+| Plan Type      | MA  |
+| Member Type     | Individual|
+| Copay Category |  LIS               |  
+| Riders         | <riderAvailableCheck> |
+When the user navigates to plan benefits and Coverage in UMS site
+And the user validates riders after login in UHC site
+Examples:
+
+| riderAvailableCheck |
+#| riderAvailable       |
+| riderNotAvailable    |
