@@ -20,6 +20,10 @@ import atdd.framework.UhcDriver;
 
 public class MyProfilesPage extends UhcDriver {
 
+
+	@FindBy(xpath = "//a[contains(text(),'UnitedHealthcare MedicareComplete Choice (PPO)')]")
+	private WebElement uhcMedicareCompleteChoicePPO;
+
 	@FindBy(className = "shipmyprefers_tab")
 	private WebElement myPrefTab;
 
@@ -283,15 +287,15 @@ public class MyProfilesPage extends UhcDriver {
 			validate(element);
 			try {
 				jsonObject.put(key, element.getText());
-				
-				
+
+
 			} catch (JSONException e) {
 				e.printStackTrace();
 			}
 
 		}
 		myProfilesJson = jsonObject;
-		
+
 		System.out.println("myProfilesJson----->"+myProfilesJson);
 
 	}
@@ -299,5 +303,21 @@ public class MyProfilesPage extends UhcDriver {
 	public void logOut() {
 		logOut.click();
 	}
-
+	/**
+	 * Below method will validate plan name: 'uhcMedicareCompleteChoicePPO'
+	 * Added as part of commandos team
+	 * @return
+	 */
+	public boolean isUHCMedicareCompleteChoicePPOPresent(){
+		try{
+			if(uhcMedicareCompleteChoicePPO.getText() == "UnitedHealthcare MedicareComplete Choice (PPO)"){
+				System.out.println("uhcMedicareCompleteChoicePPO is displayed ");
+			}else{
+				System.out.println("uhcMedicareCompleteChoicePPO.getText() >>>>>>   "+uhcMedicareCompleteChoicePPO.getText());
+			}
+		}catch(Exception e){
+			return false;
+		}
+		return true;
+	}
 }
