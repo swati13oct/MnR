@@ -7,6 +7,7 @@ import java.util.Map;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -24,7 +25,13 @@ import atdd.framework.UhcDriver;
  *
  */
 public class AccountHomePage extends UhcDriver {
-
+	
+	@FindBy(xpath = "//a[contains(text(),'UnitedHealthcare MedicareComplete Choice (PPO)')]")
+	private WebElement uhcMedicareCompleteChoicePPO;
+	
+	@FindBy(xpath = "//div[@id='IPEinvL']/map/area[@alt='close']")
+	private WebElement popupFeedback;
+	
 	@FindBy(css = "a.fd_myPersonalHealthRecord")
 	private WebElement phrTab;
 
@@ -39,10 +46,10 @@ public class AccountHomePage extends UhcDriver {
 
 	@FindBy(linkText = "estimate costs")
 	private WebElement estimateCostLink;
-	
+
 	@FindBy(linkText = "Contact Us")
 	private WebElement contactUsLink;
-	
+
 	@FindBy(linkText = "Plan Benefits")
 	private WebElement benefitsLink;
 
@@ -84,16 +91,16 @@ public class AccountHomePage extends UhcDriver {
 
 	@FindBy(linkText = "Prescription Drug Explanation of Benefits (EOB)")
 	private WebElement prescriptionDrugEobLink;
-	
+
 	@FindBy(xpath = "//div[@id='medicareTitle']/h1")
 	private WebElement pharmacyLocatorHeading;
-	
+
 	@FindBy(xpath = "//*[@id='medicareTitle']/p/a[1]")
 	private WebElement espanolLink;
-	
+
 	@FindBy(xpath = "//*[@id='medicareTitle']/p/a[2]")   //Story 261070
 	private WebElement chineseLink;
-	
+
 	@FindBy(xpath = "////*[@id='subPageLeft']/div[2]/div[2]/h3[2]/a")
 	private WebElement createPdfLink;
 	
@@ -104,9 +111,9 @@ public class AccountHomePage extends UhcDriver {
 	@FindBy(id = "pcpLogoPrint1left")
 	private WebElement validateLogo;
 
-	
-	
-	
+
+
+
 	private PageData myAccountHome;
 
 	public JSONObject accountHomeJson;
@@ -126,14 +133,14 @@ public class AccountHomePage extends UhcDriver {
 			myAccountHome = CommonUtility.readPageData(fileName,
 					CommonConstants.PAGE_OBJECT_DIRECTORY_BLUELAYER_MEMBER);
 		}
-		
+
 		openAndValidate();
 	}
 
 	public AccountHomePage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
-		
+
 		openAndValidate();
 	}
 
@@ -155,7 +162,7 @@ public class AccountHomePage extends UhcDriver {
 			return new BenefitsCoveragePage(driver);
 		}
 		else
-		return null;
+			return null;
 	}
 
 	public ManageDrugPage navigateToEstimateCost(String category) {
@@ -175,7 +182,7 @@ public class AccountHomePage extends UhcDriver {
 
 		phrTab.click();
 		if (getTitle().equalsIgnoreCase(
-						"UnitedHealthcare Medicare Solutions | My Personal Health Record")) {
+				"UnitedHealthcare Medicare Solutions | My Personal Health Record")) {
 			return new PhrPage(driver);
 		}
 
@@ -231,7 +238,7 @@ public class AccountHomePage extends UhcDriver {
 		}
 		return null;
 	}
-	
+
 	public PharmacySearchPage navigateNonEnglishContent() {   //STORY 261070
 
 		espanolLink.click();
@@ -251,7 +258,7 @@ public class AccountHomePage extends UhcDriver {
 		prescriptionDrugCostBenefitSummaryLink.click();
 
 		if (getTitle().equalsIgnoreCase(
-						"UnitedHealthcare Medicare Solutions | Drug Cost and Benefits Summary")) {
+				"UnitedHealthcare Medicare Solutions | Drug Cost and Benefits Summary")) {
 			return new DrugCostandBenefitSummaryPage(driver);
 		}
 
@@ -289,21 +296,21 @@ public class AccountHomePage extends UhcDriver {
 			/*if (planCategory.equalsIgnoreCase("Individual")) {
 				return new ClaimSummaryPage(driver, planCategory);
 			} else { */
-				return new ClaimSummaryPage(driver);
+			return new ClaimSummaryPage(driver);
 			/*}*/
 		}
 
 		return null;
 	}
-public ContactUsPage navigatesToContactUsPage() {
-		
+	public ContactUsPage navigatesToContactUsPage() {
+
 		contactUsLink.click();
 		if(getTitle().equalsIgnoreCase("UnitedHealthcare Medicare Solutions | Contact Us"))
 		{
 			return new ContactUsPage(driver);
 		}
 		return null;
-				
+
 	}
 	public MedicalEobPage navigateToMedicalEob() {
 
@@ -412,6 +419,7 @@ public ContactUsPage navigatesToContactUsPage() {
 		return null;
 	}
 
+
 	public Boolean tempIdValidation() {
 		validate(viewIDCard);
 		viewIDCard.click();
@@ -419,6 +427,34 @@ public ContactUsPage navigatesToContactUsPage() {
 			return true;
 		}
 		return false;
+
+	/**
+	 * Below method will validate plan name: 'uhcMedicareCompleteChoicePPO'
+	 * Added as part of commandos team
+	 * @return
+	 */
+	public boolean isUHCMedicareCompleteChoicePPOPresent(){
+		try{
+			if(uhcMedicareCompleteChoicePPO.getText() != null){
+				System.out.println("uhcMedicareCompleteChoicePPO is displayed in Home Page::");
+				
+				System.out.println("uhcMedicareCompleteChoicePPO.getText() >>>>>>   "+uhcMedicareCompleteChoicePPO.getText());
+			}
+		}catch(Exception e){
+			return false;
+		}
+		return true;
+	}
+	/**
+	 * Its click on 'We Value your feedback' Pop-up. Its an optional Click.
+	 */
+	public void avoidPopup(){
+		try{
+			popupFeedback.click();
+		}catch(NoSuchElementException e){
+			//popup not presents
+		}
+
 		
 	}
 }

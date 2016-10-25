@@ -1,7 +1,6 @@
 package atdd.framework;
 
 import java.io.BufferedReader;
-import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -15,6 +14,7 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Hashtable;
@@ -38,17 +38,13 @@ import org.json.JSONObject;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
-import org.openqa.selenium.firefox.FirefoxBinary;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxProfile;
-import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.springframework.ldap.core.DistinguishedName;
 import org.springframework.stereotype.Component;
 
-import com.gargoylesoftware.htmlunit.BrowserVersion;
-import com.gargoylesoftware.htmlunit.WebClient;
 
 import acceptancetests.atdd.data.CommonConstants;
 
@@ -77,7 +73,7 @@ public class MRScenario {
 
 	private static Map<String, String> props = new HashMap<String, String>();
 
-	public static String environment;
+	public static String environment,browser;
 
 	private static final String DIRECTORY = "/src/main/resources/";
 
@@ -105,7 +101,7 @@ public class MRScenario {
 	static {
 
 		props = getProperties();
-
+		browser = props.get("browser");
 		/* Set acqusisition and member urls */
 		environment = props.get("Environment");
 
@@ -166,6 +162,7 @@ public class MRScenario {
 				// use comma as separator
 				String[] memberAttributes = line.split(cvsSplitBy);
 				List<String> attrList = Arrays.asList(memberAttributes).subList(1, memberAttributes.length);
+				System.out.println("attrList is :: "+attrList);
 				String userName = null;
 				if (memberAttributes[0].contains("/")) {
 					String[] memberAttributArr = memberAttributes[0].split("/");
@@ -195,8 +192,8 @@ public class MRScenario {
 					umsMemberAttributesMap.put(memberAttributes[0], attrList);
 				}
 
-			}
 
+			}
 			InputStream ampMemberTypeStream = ClassLoader.class
 					.getResourceAsStream("/database/AMP-Registration-data.csv");
 			BufferedReader registermemberReader = new BufferedReader(new InputStreamReader(ampMemberTypeStream));
@@ -220,6 +217,10 @@ public class MRScenario {
 				umsRegistrationDataMap.put(userName, attrList);
 
 			}
+			List<String> tempList = new ArrayList<String>();
+			tempList.add("MAPD_TestOnly");
+			tempList.add("Individual");
+			umsMemberAttributesMap.put("Dec_Sierra_001", tempList);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			// schak38: when member-types csv is not found
@@ -490,7 +491,7 @@ public class MRScenario {
 		// Read properties from classpath
 		StringBuffer propertyFilePath = new StringBuffer(CommonConstants.PROPERTY_FILE_FOLDER);
 		propertyFilePath.append("/").append(propertiesFileToPick).append("/")
-				.append(CommonConstants.PROPERTY_FILE_NAME);
+		.append(CommonConstants.PROPERTY_FILE_NAME);
 		InputStream is = ClassLoader.class.getResourceAsStream(propertyFilePath.toString());
 		try {
 			prop.load(is);
@@ -773,20 +774,22 @@ public class MRScenario {
 		}
 	}
 
-		public WebDriver getWebDriver() {
-			HtmlUnitDriver htmlUnitDriver = new HtmlUnitDriver(BrowserVersion.FIREFOX_24) {
-				@Override
-				protected WebClient modifyWebClient(WebClient client) {
-					client.getOptions().setThrowExceptionOnScriptError(false);
-					return client;
-				}
-			};
-			htmlUnitDriver.setJavascriptEnabled(true);
+	public WebDriver getWebDriver() {
 
-			webDriver = htmlUnitDriver;
-			webDriver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
+		if(webDriver == null){
+			if(browser.equalsIgnoreCase("htmlunitdriver")){
+
+			}else{
+				FirefoxProfile profile = new FirefoxProfile();	
+				DesiredCapabilities capab = DesiredCapabilities.firefox();
+				capab.setBrowserName("firefox");
+				webDriver = new FirefoxDriver(capab);
+			}
+
+			webDriver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 			webDriver.manage().window().maximize();
-			return webDriver;
+		}
+		return webDriver;
 
 	}
 
