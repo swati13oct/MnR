@@ -103,6 +103,9 @@ public class AccountHomePage extends UhcDriver {
 
 	@FindBy(xpath = "////*[@id='subPageLeft']/div[2]/div[2]/h3[2]/a")
 	private WebElement createPdfLink;
+	
+	@FindBy(xpath = "//*[@id='goGreenMemberBar']/a[1]/img")
+	private WebElement goGreenLink;
 
 
 
@@ -183,6 +186,17 @@ public class AccountHomePage extends UhcDriver {
 
 	}
 
+	public GoGreenPage navigateToGoGreenPage() {
+
+		goGreenLink.click();
+		if (getTitle().equalsIgnoreCase(
+				"UnitedHealthcare Medicare Solutions | My Personal Health Record")) {
+			return new GoGreenPage(driver);
+		}
+
+		return null;
+
+	}
 	public PaymentHistoryPage navigateToPayments() {
 
 		paymentsLink.click();
@@ -305,6 +319,7 @@ public class AccountHomePage extends UhcDriver {
 		return null;
 
 	}
+	
 	public MedicalEobPage navigateToMedicalEob() {
 
 		/*
@@ -412,21 +427,21 @@ public class AccountHomePage extends UhcDriver {
 		return null;
 	}
 	/**
-	 * Below method will validate plan name: 'uhcMedicareCompleteChoicePPO'
-	 * Added as part of commandos team
-	 * @return
-	 */
+	* Below method will validate plan name: 'uhcMedicareCompleteChoicePPO'
+	* Added as part of commandos team
+	* @return
+	*/
 	public boolean isUHCMedicareCompleteChoicePPOPresent(){
-		try{
-			if(uhcMedicareCompleteChoicePPO.getText() != null){
-				System.out.println("uhcMedicareCompleteChoicePPO is displayed in Home Page::");
-				
-				System.out.println("uhcMedicareCompleteChoicePPO.getText() >>>>>>   "+uhcMedicareCompleteChoicePPO.getText());
-			}
-		}catch(Exception e){
-			return false;
-		}
-		return true;
+	try{
+	if(uhcMedicareCompleteChoicePPO.getText() == CommonConstants.SIERRA_PLAN_NAME){
+	System.out.println("uhcMedicareCompleteChoicePPO is displayed ");
+	}else{
+	System.out.println("uhcMedicareCompleteChoicePPO.getText() >>>>>>   "+uhcMedicareCompleteChoicePPO.getText());
+	}
+	}catch(Exception e){
+	return false;
+	}
+	return true;
 	}
 	/**
 	 * Its click on 'We Value your feedback' Pop-up. Its an optional Click.
