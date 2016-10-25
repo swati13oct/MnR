@@ -39,7 +39,6 @@ public class TestOnlySierraStepDefinition {
 		return testonlyScenario;
 	}
 
-
 	@Given("^I am an authenticated Sierra Spectrum Plan Member who has registered on UHCMedicareSolutions.com$")
 	public void uhc_login_page(){
 		WebDriver wd = getTestonlyScenario().getWebDriver();
@@ -525,79 +524,10 @@ public class TestOnlySierraStepDefinition {
 		}
 
 	}
+
+
 	
-	
-	@When("^I am using the My Health & Wellness page$")
-	public void  I_am_using_the_My_Health_And_Wellness_page(DataTable memberAttributes) {
 
-
-		/* Reading the given attribute from feature file */
-		List<DataTableRow> memberAttributesRow = memberAttributes
-				.getGherkinRows();
-		Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
-		for (int i = 0; i < memberAttributesRow.size(); i++) {
-
-			memberAttributesMap.put(memberAttributesRow.get(i).getCells()
-					.get(0), memberAttributesRow.get(i).getCells().get(1));
-		}
-
-		String category = memberAttributesMap.get("Member Type");
-		Set<String> memberAttributesKeySet = memberAttributesMap.keySet();
-		List<String> desiredAttributes = new ArrayList<String>();
-		for (Iterator<String> iterator = memberAttributesKeySet.iterator(); iterator
-				.hasNext();) {
-			{
-				String key = iterator.next();
-				desiredAttributes.add(memberAttributesMap.get(key));
-			}
-
-		}
-		System.out.println("desiredAttributes.." + desiredAttributes);
-
-		Map<String,String> loginCreds = testonlyScenario
-				.getUMSMemberWithDesiredAttributes(desiredAttributes);
-
-
-		String userName = null;
-		String pwd = null;
-		if (loginCreds == null) {
-			// no match found
-			System.out.println("Member Type data could not be setup !!!");
-			Assert.fail("unable to find a "+ desiredAttributes + " member");
-		} else {
-			userName = loginCreds.get("user");
-			pwd = loginCreds.get("pwd");
-			System.out.println("User is..." + userName);
-			System.out.println("Password is..." + pwd );
-			getTestonlyScenario().saveBean(LoginCommonConstants.USERNAME, userName);
-			getTestonlyScenario().saveBean(LoginCommonConstants.PASSWORD, pwd);
-		}
-
-		LoginPage loginPage = (LoginPage)getTestonlyScenario().getBean(PageConstants.LOGIN_PAGE);
-
-		AccountHomePage accountHomePage = (AccountHomePage)loginPage.loginWith(userName, pwd, category);
-
-
-		getTestonlyScenario().saveBean(PageConstants.ACCOUNT_HOME_PAGE, accountHomePage);
-
-
-
-		accountHomePage = (AccountHomePage) getTestonlyScenario()
-				.getBean(PageConstants.ACCOUNT_HOME_PAGE);
-		PharmacySearchPage pharmacySearchPage = accountHomePage
-				.navigateToPharmacyLocator();
-		if (pharmacySearchPage != null) {
-
-			getTestonlyScenario().saveBean(
-					PageConstants.PLAN_SUMMARY_PAGE,
-					pharmacySearchPage);
-			Assert.assertTrue(true);
-		} else {
-			Assert.fail("Error in loading  Forms and resources Page");
-		}
-
-	}
-	
 	@When("^I am using the Go Green page$")
 	public void i_am_using_the_go_green_page(DataTable memberAttributes) {
 
@@ -661,6 +591,291 @@ public class TestOnlySierraStepDefinition {
 
 
 	}
+
+	@When("^I am using the My Payments page$")
+	public void  I_am_using_the_My_Payments_page(DataTable memberAttributes) {
+
+
+		/* Reading the given attribute from feature file */
+		List<DataTableRow> memberAttributesRow = memberAttributes
+				.getGherkinRows();
+		Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells()
+					.get(0), memberAttributesRow.get(i).getCells().get(1));
+		}
+
+		String category = memberAttributesMap.get("Member Type");
+		Set<String> memberAttributesKeySet = memberAttributesMap.keySet();
+		List<String> desiredAttributes = new ArrayList<String>();
+		for (Iterator<String> iterator = memberAttributesKeySet.iterator(); iterator
+				.hasNext();) {
+			{
+				String key = iterator.next();
+				desiredAttributes.add(memberAttributesMap.get(key));
+			}
+
+		}
+		System.out.println("desiredAttributes.." + desiredAttributes);
+
+		Map<String,String> loginCreds = testonlyScenario
+				.getUMSMemberWithDesiredAttributes(desiredAttributes);
+
+
+		String userName = null;
+		String pwd = null;
+		if (loginCreds == null) {
+			// no match found
+			System.out.println("Member Type data could not be setup !!!");
+			Assert.fail("unable to find a "+ desiredAttributes + " member");
+		} else {
+			userName = loginCreds.get("user");
+			pwd = loginCreds.get("pwd");
+			System.out.println("User is..." + userName);
+			System.out.println("Password is..." + pwd );
+			getTestonlyScenario().saveBean(LoginCommonConstants.USERNAME, userName);
+			getTestonlyScenario().saveBean(LoginCommonConstants.PASSWORD, pwd);
+		}
+
+		LoginPage loginPage = (LoginPage)getTestonlyScenario().getBean(PageConstants.LOGIN_PAGE);
+
+		AccountHomePage accountHomePage = (AccountHomePage)loginPage.loginWith(userName, pwd, category);
+
+
+		getTestonlyScenario().saveBean(PageConstants.ACCOUNT_HOME_PAGE, accountHomePage);
+
+
+
+		accountHomePage = (AccountHomePage) getTestonlyScenario()
+				.getBean(PageConstants.ACCOUNT_HOME_PAGE);
+		PaymentHistoryPage aymentHistoryPage = accountHomePage
+				.navigateToPayments();
+		if (aymentHistoryPage != null) {
+
+			getTestonlyScenario().saveBean(
+					PageConstants.PLAN_SUMMARY_PAGE,
+					aymentHistoryPage);
+			Assert.assertTrue(true);
+		} else {
+			Assert.fail("Error in loading  My Payments page");
+		}
+
+	}
+
+	@When("^I am using the My Personal Health Record page$")
+	public void  I_am_using_the_My_Personal_Health_Record(DataTable memberAttributes) {
+
+
+		/* Reading the given attribute from feature file */
+		List<DataTableRow> memberAttributesRow = memberAttributes
+				.getGherkinRows();
+		Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells()
+					.get(0), memberAttributesRow.get(i).getCells().get(1));
+		}
+
+		String category = memberAttributesMap.get("Member Type");
+		Set<String> memberAttributesKeySet = memberAttributesMap.keySet();
+		List<String> desiredAttributes = new ArrayList<String>();
+		for (Iterator<String> iterator = memberAttributesKeySet.iterator(); iterator
+				.hasNext();) {
+			{
+				String key = iterator.next();
+				desiredAttributes.add(memberAttributesMap.get(key));
+			}
+
+		}
+		System.out.println("desiredAttributes.." + desiredAttributes);
+
+		Map<String,String> loginCreds = testonlyScenario
+				.getUMSMemberWithDesiredAttributes(desiredAttributes);
+
+
+		String userName = null;
+		String pwd = null;
+		if (loginCreds == null) {
+			// no match found
+			System.out.println("Member Type data could not be setup !!!");
+			Assert.fail("unable to find a "+ desiredAttributes + " member");
+		} else {
+			userName = loginCreds.get("user");
+			pwd = loginCreds.get("pwd");
+			System.out.println("User is..." + userName);
+			System.out.println("Password is..." + pwd );
+			getTestonlyScenario().saveBean(LoginCommonConstants.USERNAME, userName);
+			getTestonlyScenario().saveBean(LoginCommonConstants.PASSWORD, pwd);
+		}
+
+		LoginPage loginPage = (LoginPage)getTestonlyScenario().getBean(PageConstants.LOGIN_PAGE);
+
+		AccountHomePage accountHomePage = (AccountHomePage)loginPage.loginWith(userName, pwd, category);
+
+
+		getTestonlyScenario().saveBean(PageConstants.ACCOUNT_HOME_PAGE, accountHomePage);
+
+
+
+		accountHomePage = (AccountHomePage) getTestonlyScenario()
+				.getBean(PageConstants.ACCOUNT_HOME_PAGE);
+		PhrPage phrPage = accountHomePage
+				.navigateToPhr();
+		if (phrPage != null) {
+
+			getTestonlyScenario().saveBean(
+					PageConstants.PLAN_SUMMARY_PAGE,
+					phrPage);
+			Assert.assertTrue(true);
+		} else {
+			Assert.fail("Error in loading  Forms and resources Page");
+		}
+
+	}
+
+	@When("^I am using the My Benefits and Coverage page$")
+	public void  I_am_using_the_My_Benefits_and_Coverage_page(DataTable memberAttributes) {
+
+		/* Reading the given attribute from feature file */
+		List<DataTableRow> memberAttributesRow = memberAttributes
+				.getGherkinRows();
+		Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells()
+					.get(0), memberAttributesRow.get(i).getCells().get(1));
+		}
+
+		String category = memberAttributesMap.get("Member Type");
+		Set<String> memberAttributesKeySet = memberAttributesMap.keySet();
+		List<String> desiredAttributes = new ArrayList<String>();
+		for (Iterator<String> iterator = memberAttributesKeySet.iterator(); iterator
+				.hasNext();) {
+			{
+				String key = iterator.next();
+				desiredAttributes.add(memberAttributesMap.get(key));
+			}
+
+		}
+		System.out.println("desiredAttributes.." + desiredAttributes);
+
+		Map<String,String> loginCreds = testonlyScenario
+				.getUMSMemberWithDesiredAttributes(desiredAttributes);
+
+
+		String userName = null;
+		String pwd = null;
+		if (loginCreds == null) {
+			// no match found
+			System.out.println("Member Type data could not be setup !!!");
+			Assert.fail("unable to find a "+ desiredAttributes + " member");
+		} else {
+			userName = loginCreds.get("user");
+			pwd = loginCreds.get("pwd");
+			System.out.println("User is..." + userName);
+			System.out.println("Password is..." + pwd );
+			getTestonlyScenario().saveBean(LoginCommonConstants.USERNAME, userName);
+			getTestonlyScenario().saveBean(LoginCommonConstants.PASSWORD, pwd);
+		}
+
+		LoginPage loginPage = (LoginPage)getTestonlyScenario().getBean(PageConstants.LOGIN_PAGE);
+
+		AccountHomePage accountHomePage = (AccountHomePage)loginPage.loginWith(userName, pwd, category);
+
+
+		getTestonlyScenario().saveBean(PageConstants.ACCOUNT_HOME_PAGE, accountHomePage);
+
+
+
+		accountHomePage = (AccountHomePage) getTestonlyScenario()
+				.getBean(PageConstants.ACCOUNT_HOME_PAGE);
+		BenefitsCoveragePage benefitsCoveragePage = accountHomePage
+				.navigateToBnC();
+		if (benefitsCoveragePage != null) {
+
+			getTestonlyScenario().saveBean(
+					PageConstants.BENEFITS_AND_COVERAGE,
+					benefitsCoveragePage);
+			Assert.assertTrue(true);
+		} else {
+			Assert.fail("Error in loading  Forms and resources Page");
+		}
+
+
+	}
+	
+	@When("^I am using the My Health & Wellness page$")
+	public void  I_am_using_the_My_Health_And_Wellness_page(DataTable memberAttributes) {
+
+
+		/* Reading the given attribute from feature file */
+		List<DataTableRow> memberAttributesRow = memberAttributes
+				.getGherkinRows();
+		Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells()
+					.get(0), memberAttributesRow.get(i).getCells().get(1));
+		}
+
+		String category = memberAttributesMap.get("Member Type");
+		Set<String> memberAttributesKeySet = memberAttributesMap.keySet();
+		List<String> desiredAttributes = new ArrayList<String>();
+		for (Iterator<String> iterator = memberAttributesKeySet.iterator(); iterator
+				.hasNext();) {
+			{
+				String key = iterator.next();
+				desiredAttributes.add(memberAttributesMap.get(key));
+			}
+
+		}
+		System.out.println("desiredAttributes.." + desiredAttributes);
+
+		Map<String,String> loginCreds = testonlyScenario
+				.getUMSMemberWithDesiredAttributes(desiredAttributes);
+
+
+		String userName = null;
+		String pwd = null;
+		if (loginCreds == null) {
+			// no match found
+			System.out.println("Member Type data could not be setup !!!");
+			Assert.fail("unable to find a "+ desiredAttributes + " member");
+		} else {
+			userName = loginCreds.get("user");
+			pwd = loginCreds.get("pwd");
+			System.out.println("User is..." + userName);
+			System.out.println("Password is..." + pwd );
+			getTestonlyScenario().saveBean(LoginCommonConstants.USERNAME, userName);
+			getTestonlyScenario().saveBean(LoginCommonConstants.PASSWORD, pwd);
+		}
+
+		LoginPage loginPage = (LoginPage)getTestonlyScenario().getBean(PageConstants.LOGIN_PAGE);
+
+		AccountHomePage accountHomePage = (AccountHomePage)loginPage.loginWith(userName, pwd, category);
+
+
+		getTestonlyScenario().saveBean(PageConstants.ACCOUNT_HOME_PAGE, accountHomePage);
+
+
+
+		accountHomePage = (AccountHomePage) getTestonlyScenario()
+				.getBean(PageConstants.ACCOUNT_HOME_PAGE);
+		HealthAndWellnessPage healthAndWellnessPage = accountHomePage
+				.navigateToHealthAndWellnessPage();
+		if (healthAndWellnessPage != null) {
+
+//			getTestonlyScenario().saveBean(
+//					PageConstants.PLAN_SUMMARY_PAGE,
+//					healthAndWellnessPage);
+			Assert.assertTrue(true);
+		} else {
+			Assert.fail("Error in loading  Forms and resources Page");
+		}
+
+	}
+
 	@Then("^I should see the Sierra plan in My Home Page$")
 	public void I_should_see_the_Sierra_plan() {
 
