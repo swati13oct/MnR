@@ -106,6 +106,9 @@ public class AccountHomePage extends UhcDriver {
 	
 	@FindBy(xpath = "//*[@id='goGreenMemberBar']/a[1]/img")
 	private WebElement goGreenLink;
+	
+	@FindBy(xpath ="//*[@id='healthwellness']/a")
+	private WebElement healthAndWellnessTab;
 
 
 
@@ -190,13 +193,28 @@ public class AccountHomePage extends UhcDriver {
 
 		goGreenLink.click();
 		if (getTitle().equalsIgnoreCase(
-				"UnitedHealthcare Medicare Solutions | My Personal Health Record")) {
+				"UnitedHealthcare Medicare Solutions | Go Green")) {
 			return new GoGreenPage(driver);
 		}
 
 		return null;
 
 	}
+	
+	
+	
+	public HealthAndWellnessPage navigateToHealthAndWellnessPage() {
+
+		healthAndWellnessTab.click();
+		if (getTitle().equalsIgnoreCase(
+				"UnitedHealthcare Medicare Solutions | My Health and Wellness")) {
+			return new HealthAndWellnessPage(driver);
+		}
+
+		return null;
+
+	}
+	
 	public PaymentHistoryPage navigateToPayments() {
 
 		paymentsLink.click();
