@@ -1,7 +1,6 @@
 @testonly-seirra
 Feature: Sierra HP (Utah) Migration  
-Scenario Outline: 	As an authenticated Sierra Spectrum Plan member who has registered on UHCMedicareSolutions.com I am able to view and interact with the My 
-Account Home Page the same as any other MAPD authenticated member 
+Scenario Outline: 	As an authenticated Sierra Spectrum Plan member who has registered on UHCMedicareSolutions.com I am able to view and interact with the My Account Home Page the same as any other MAPD authenticated member 
 Given I am an authenticated Sierra Spectrum Plan Member who has registered on UHCMedicareSolutions.com
 When I am using the My Account Home page
 	| Plan Type   | <planType>   |
@@ -11,7 +10,7 @@ Then I should see the Sierra plan in My Home Page
 Examples:
 	| planType | memberType |
 	| MAPD_TestOnly     | Individual |
-
+	
 Scenario Outline: 	As an authenticated Sierra Spectrum Plan member who has registered on UHCMedicareSolutions.com I am able to view and interact with the My Profile Page the same as any other MAPD authenticated member 
 Given I am an authenticated Sierra Spectrum Plan Member who has registered on UHCMedicareSolutions.com
 When I am using the MyProfile page
@@ -33,7 +32,7 @@ When I am using the My Forms and Resource page
 Then I should see the Sierra plan on the page
 Examples:
 	| planType | memberType |
-	| MAPD_TestOnly     | Individual 
+	| MAPD_TestOnly     | Individual |
 
 Scenario Outline: 	As an authenticated Sierra Spectrum Plan member who has registered on UHCMedicareSolutions.com I am able to view and interact with the MyOrder My Materials page the same as any other MAPD authenticated member 
 Given I am an authenticated Sierra Spectrum Plan Member who has registered on UHCMedicareSolutions.com
@@ -45,7 +44,7 @@ Then I should see the Sierra plan on the page
 Examples:
 	| planType | memberType |
 	| MAPD_TestOnly     | Individual |
-	
+
 Scenario Outline: 	As an authenticated Sierra Spectrum Plan member who has registered on UHCMedicareSolutions.com I am able to view and interact with the My Summary page  the same as any other MAPD authenticated member 
 Given I am an authenticated Sierra Spectrum Plan Member who has registered on UHCMedicareSolutions.com
 When I am using the Pharmacy Locator page
@@ -56,4 +55,48 @@ Then I should see the Sierra plan on the page
 Examples:
 	| planType | memberType |
 	| MAPD_TestOnly     | Individual |
+
+
+
+Scenario Outline: 	As an authenticated Sierra Spectrum Plan member who has registered on UHCMedicareSolutions.com I am able to view and interact with the My 
+Paymets Page the same as any other MAPD authenticated member 
+Given I am an authenticated Sierra Spectrum Plan Member who has registered on UHCMedicareSolutions.com
+When I am using the My Payments page
+	| Plan Type   | <planType>   |
+	| Member Type | <memberType> |
+
+Then I should see the Sierra plan in My Home Page
+Examples:
+	| planType | memberType |
+	| MAPD_TestOnly     | Individual |
+
+
+	  
+Scenario Outline: 	As an authenticated Sierra Spectrum Plan member who has registered on UHCMedicareSolutions.com I am able to view and interact with the My 
+Personal Health Record Page  the same as any other MAPD authenticated member 
+Given I am an authenticated Sierra Spectrum Plan Member who has registered on UHCMedicareSolutions.com
+When I am using the My Personal Health Record page
+	| Plan Type   | <planType>   |
+	| Member Type | <memberType> |
+
+Then I should see the Sierra plan on the page 
+Examples:
+	| planType | memberType |
+	| MAPD_TestOnly     | Individual |
+
+
+Scenario Outline: 	As an authenticated Sierra Spectrum Plan member who has registered on UHCMedicareSolutions.com I am able to view and interact with the My 
+Benefits and Coverage page  the same as any other MAPD authenticated member 
+Given I am an authenticated Sierra Spectrum Plan Member who has registered on UHCMedicareSolutions.com
+When I am using the My Benefits and Coverage page
+	| Plan Type   | <planType>   |
+	| Member Type | <memberType> |
+
+Then I should see the Sierra plan on the page 
+Examples:
+	| planType | memberType |
+	| MAPD_TestOnly     | Individual |
+
+
+	
 	
