@@ -8,6 +8,5 @@ When I am using the Go Green page
 
 Then I should see the Sierra plan on the Page
 Examples:
-	| planType | memberType |
-	| MAPD_TestOnly     | Individual |
-	
+	|planType|memberType|
+	|MAPD_TestOnly|Individual|
