@@ -91,6 +91,7 @@ public class CommonConstants {
 	public static final String DTM_TAG_MEMBER_FILENAME = "member";
 	public static final String DTM_TAG_ACQ_FILENAME = "acquisition";
 	public static final String PAGE_OBJECT_DTM_TAG_DIR = "/page-objects/dtm-common-data/";
+	public static final String SIERRA_PLAN_NAME = "UnitedHealthcare MedicareComplete Choice (PPO)";
 
 	public static final Page[] PAGES = {
 			new Page(CommonConstants.GLOBAL, CommonConstants.GLOBAL_DIRECTORY),

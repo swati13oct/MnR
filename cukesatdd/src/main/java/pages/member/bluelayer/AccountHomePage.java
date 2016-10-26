@@ -105,11 +105,19 @@ public class AccountHomePage extends UhcDriver {
 	private WebElement createPdfLink;
 	
 
+
 	@FindBy(xpath = "//span[contains(.,'Print temporary ID card')]")
 	private WebElement viewIDCard;
 	
 	@FindBy(id = "pcpLogoPrint1left")
 	private WebElement validateLogo;
+
+	@FindBy(xpath = "//*[@id='goGreenMemberBar']/a[1]/img")
+	private WebElement goGreenLink;
+	
+	@FindBy(xpath ="//*[@id='healthwellness']/a")
+	private WebElement healthAndWellnessTab;
+
 
 
 
@@ -190,6 +198,32 @@ public class AccountHomePage extends UhcDriver {
 
 	}
 
+	public GoGreenPage navigateToGoGreenPage() {
+
+		goGreenLink.click();
+		if (getTitle().equalsIgnoreCase(
+				"UnitedHealthcare Medicare Solutions | Go Green")) {
+			return new GoGreenPage(driver);
+		}
+
+		return null;
+
+	}
+	
+	
+	
+	public HealthAndWellnessPage navigateToHealthAndWellnessPage() {
+
+		healthAndWellnessTab.click();
+		if (getTitle().equalsIgnoreCase(
+				"UnitedHealthcare Medicare Solutions | My Health and Wellness")) {
+			return new HealthAndWellnessPage(driver);
+		}
+
+		return null;
+
+	}
+	
 	public PaymentHistoryPage navigateToPayments() {
 
 		paymentsLink.click();
@@ -312,6 +346,7 @@ public class AccountHomePage extends UhcDriver {
 		return null;
 
 	}
+	
 	public MedicalEobPage navigateToMedicalEob() {
 
 		/*
@@ -429,21 +464,21 @@ public class AccountHomePage extends UhcDriver {
 		return false;
 
 	/**
-	 * Below method will validate plan name: 'uhcMedicareCompleteChoicePPO'
-	 * Added as part of commandos team
-	 * @return
-	 */
+	* Below method will validate plan name: 'uhcMedicareCompleteChoicePPO'
+	* Added as part of commandos team
+	* @return
+	*/
 	public boolean isUHCMedicareCompleteChoicePPOPresent(){
-		try{
-			if(uhcMedicareCompleteChoicePPO.getText() != null){
-				System.out.println("uhcMedicareCompleteChoicePPO is displayed in Home Page::");
-				
-				System.out.println("uhcMedicareCompleteChoicePPO.getText() >>>>>>   "+uhcMedicareCompleteChoicePPO.getText());
-			}
-		}catch(Exception e){
-			return false;
-		}
-		return true;
+	try{
+	if(uhcMedicareCompleteChoicePPO.getText() == CommonConstants.SIERRA_PLAN_NAME){
+	System.out.println("uhcMedicareCompleteChoicePPO is displayed ");
+	}else{
+	System.out.println("uhcMedicareCompleteChoicePPO.getText() >>>>>>   "+uhcMedicareCompleteChoicePPO.getText());
+	}
+	}catch(Exception e){
+	return false;
+	}
+	return true;
 	}
 	/**
 	 * Its click on 'We Value your feedback' Pop-up. Its an optional Click.
