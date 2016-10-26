@@ -18,18 +18,28 @@ import acceptancetests.atdd.data.PageData;
 import acceptancetests.atdd.mobile.data.CommonConstants;
 import acceptancetests.atdd.util.CommonUtility;
 import atdd.framework.UhcDriver;
+import junit.framework.Assert;
 
 /**
  * @author pjaising
  *
  */
-public class BenefitsDetailsPage extends UhcDriver{
+public class PreferredDrugBenefitsDetailPage extends UhcDriver{
 	
 	@FindBy(xpath="//div[@class='site-header']/a")
 	private WebElement menuButton;
 	
-	@FindBy(xpath = "//*[@id='wrapper']/div[1]/div[2]/div/div/div/div/div/div/div[4]/div[2]/div[3]")
+	@FindBy(xpath = "//div[@id='preferred']//div[@class='carousel-next clickable']")
 	private WebElement nextarrow;
+	
+	@FindBy(xpath="//div[@id='preferred']//div[@class='drug__benefits__mobile constrain-mobile mobile-only']//div[2]//th")
+	private WebElement txtInitialCoverage;
+	
+	@FindBy(xpath="//div[@id='preferred']//div[@class='drug__benefits__mobile constrain-mobile mobile-only']//div[3]//th")
+	private WebElement txtCoverageGapStage;
+
+	@FindBy(xpath="//div[@id='preferred']//div[@class='drug__benefits__mobile constrain-mobile mobile-only']//div[4]//th")
+	private WebElement txtCatastrophicCoverageStage;
 	
 	private PageData benefitsDetail;
 
@@ -39,7 +49,13 @@ public class BenefitsDetailsPage extends UhcDriver{
 
 	private JSONObject browserCheckJson;
 	
-	public BenefitsDetailsPage(WebDriver driver) {
+	public static final String INTIAL_COVERAGE_STAGE ="INITIAL COVERAGE STAGE";
+	
+	public static final String COVERAGE_GAP_STAGE ="COVERAGE GAP STAGE";
+	
+	public static final String CATASTROPHIC_COVERAGE_STAGE ="CATASTROPHIC COVERAGE STAGE";
+	
+	public PreferredDrugBenefitsDetailPage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
 		String fileName = CommonConstants.BENEFITS_DETAIL_PAGE_DATA;
@@ -144,4 +160,27 @@ public class BenefitsDetailsPage extends UhcDriver{
 		// TODO Auto-generated method stub
 
 		}
+	
+	@SuppressWarnings("deprecation")
+	public void validateInitialCoverageStage(){
+		
+		validate (txtInitialCoverage);
+		Assert.assertEquals(INTIAL_COVERAGE_STAGE, txtInitialCoverage.getText());
+		System.out.println("Validated "+txtInitialCoverage.getText());
+		
+	}
+	@SuppressWarnings("deprecation")
+	public void validateCoverageStageGap(){
+		
+		validate (txtCoverageGapStage);
+		Assert.assertEquals(COVERAGE_GAP_STAGE, txtCoverageGapStage.getText());
+		System.out.println("Validated "+txtCoverageGapStage.getText());
+	}
+	@SuppressWarnings("deprecation")
+	public void validateCatastrophicCoverageStage(){
+		
+		validate (txtCatastrophicCoverageStage);
+		Assert.assertEquals(CATASTROPHIC_COVERAGE_STAGE, txtCatastrophicCoverageStage.getText());
+		System.out.println("Validated "+txtCatastrophicCoverageStage.getText());
+	}
 }
