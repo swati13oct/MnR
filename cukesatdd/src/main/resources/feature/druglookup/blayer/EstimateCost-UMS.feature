@@ -64,3 +64,16 @@ Examples:
 	| planType  |  memberType  | pharmacyType                 | distance       | pharmacyName                 |
 	| MAPD      |  Group       | Preferred Retail Pharmacies  | 25 miles       | Walgreens #3766              |
 	| PDP       |  Group       | Pharmacy Saver™ Pharmacy     | 25 miles       | Jay C Food Stores            |
+	
+	
+Scenario Outline: Validate Preferred Retail service is displayed for MAPD 
+Given MAPD member logins on Blue layer
+    | Plan Type   | <planType> |
+	| MemberType  | <memberType> |
+When the user navigates to estimate drug costs Page
+And the user selects the pharmacy type and distance in UMS site and validate Preferred Retail Service is displayed for MAPD
+	| Pharmacy Type | <pharmacyType> |
+	| Distance      | <distance>     |
+Examples:
+	| planType  |  memberType    | drugInitials | drugName     | drugDosage             | drugQuantity | drugFrequency  | packages       | lowCostOpt    | pharmacyType                | distance       | pharmacyName                     | planYear |		
+		| MAPD      |  Individual       |   lipi       | Lipitor      | Lipitor TAB 10MG       | 30           | Every 1 month  | null           | Generic	           | Preferred Retail Pharmacies    | 25 miles       |  	Men's Health Foundation  | 2016     |
