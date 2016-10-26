@@ -313,4 +313,145 @@ public class PharmacyLocatorMemberUmsStepDefinition {
 		getLoginScenario().flushBeans();
 	}
 
+
+
+/* Scenario for MAPD should show Preferred Retail Pharmacies */
+
+
+@Given("^login with MAPD member on Blue layer$")
+public void mapd_member_UMS(DataTable memberAttributes){
+	/* Reading the given attribute from feature file */
+	List<DataTableRow> memberAttributesRow = memberAttributes
+			.getGherkinRows();
+	Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
+	for (int i = 0; i < memberAttributesRow.size(); i++) {
+
+		memberAttributesMap.put(memberAttributesRow.get(i).getCells()
+				.get(0), memberAttributesRow.get(i).getCells().get(1));
+	}
+	
+	String category = memberAttributesMap.get("MemberType");
+
+	Set<String> memberAttributesKeySet = memberAttributesMap.keySet();
+	List<String> desiredAttributes = new ArrayList<String>();
+	for (Iterator<String> iterator = memberAttributesKeySet.iterator(); iterator
+			.hasNext();) {
+		{
+			String key = iterator.next();
+			desiredAttributes.add(memberAttributesMap.get(key));
+		}
+
+	}
+	System.out.println("desiredAttributes.." + desiredAttributes);
+
+	Map<String, String> loginCreds = loginScenario
+			.getUMSMemberWithDesiredAttributes(desiredAttributes);
+
+	String userName = null;
+	String pwd = null;
+	if (loginCreds == null) {
+		// no match found
+		System.out.println("Member Type data could not be setup !!!");
+		Assert.fail("unable to find a " + desiredAttributes + " member");
+	} else {
+		userName = loginCreds.get("user");
+		pwd = loginCreds.get("pwd");
+		System.out.println("User is..." + userName);
+		System.out.println("Password is..." + pwd);
+		getLoginScenario()
+				.saveBean(LoginCommonConstants.USERNAME, userName);
+		getLoginScenario().saveBean(LoginCommonConstants.PASSWORD, pwd);
+	}
+
+	getLoginScenario().saveBean(CommonConstants.CATEGORY, category);
+
+	WebDriver wd = getLoginScenario().getWebDriver();
+
+	LoginPage loginPage = new LoginPage(wd);
+	AccountHomePage accountHomePage = (AccountHomePage) loginPage.loginWith(userName, pwd,category);
+	if (accountHomePage != null) {
+		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
+		getLoginScenario().saveBean(PageConstants.ACCOUNT_HOME_PAGE,
+				accountHomePage);
+	}
+	
 }
+
+@And("^the user search pharmacies using the below information in Blue layer site$")
+public void user_enter_zipcode_distance_details(DataTable zipAttributes) {
+	List<DataTableRow> zipAttributesRow = zipAttributes.getGherkinRows();
+	Map<String, String> zipAttributesMap = new LinkedHashMap<String, String>();
+	for (int i = 0; i < zipAttributesRow.size(); i++) {
+
+		zipAttributesMap.put(zipAttributesRow.get(i).getCells().get(0),
+				zipAttributesRow.get(i).getCells().get(1));
+	}
+
+	PharmacySearchPage pharmacySearchPage = (PharmacySearchPage) getLoginScenario()
+			.getBean(PageConstants.PHARMACY_SEARCH_PAGE);
+	pharmacySearchPage = pharmacySearchPage
+			.enterZipDistanceDetails(zipAttributesMap);
+
+	if (pharmacySearchPage != null) {
+		getLoginScenario().saveBean(PageConstants.PHARMACY_SEARCH_PAGE,
+				pharmacySearchPage);
+		Assert.assertTrue(true);
+	} else {
+		Assert.fail("Failed to load Pharmacy search page");
+	}
+
+}
+
+@When("^the user navigates to pharmacy search page in Blue layer site$")
+public void user_view_pharmacy_locator() {
+
+	AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario()
+			.getBean(PageConstants.ACCOUNT_HOME_PAGE);
+	PharmacySearchPage pharmacySearchPage = accountHomePage
+			.navigateToPharmacyLocator();
+	if (pharmacySearchPage != null) {
+		getLoginScenario().saveBean(PageConstants.PHARMACY_SEARCH_PAGE,
+				pharmacySearchPage);
+		Assert.assertTrue(true);
+	} else {
+		Assert.fail("Failed to load Pharmacy search page");
+	}
+
+}
+
+@And("^the user searches for pharmacies available in Blue layer site$")
+public void user_search_pharmacy_available_aarp() {
+	PharmacySearchPage pharmacySearchPage = (PharmacySearchPage) getLoginScenario()
+			.getBean(PageConstants.PHARMACY_SEARCH_PAGE);
+	String[] pharmacyTypeArray = (String[]) getLoginScenario().getBean(
+			PageConstants.PHARMACY_TYPES);
+	String expectedObjectkey = pharmacySearchPage
+			.getExpectedKey(pharmacyTypeArray);
+
+	PharmacyResultPage pharmacyResultPage = pharmacySearchPage
+			.searchesPharmacy();
+	
+	/* Get expected data */
+	/*JSONObject pharmacyResultActualJson = null;
+	@SuppressWarnings("unchecked")
+	Map<String, JSONObject> expectedDataMap = (Map<String, JSONObject>) getLoginScenario()
+			.getBean(CommonConstants.EXPECTED_DATA_MAP);
+	JSONObject pharmacyResultExpectedJson = pharmacyResultPage
+			.getExpectedData(expectedDataMap, expectedObjectkey);
+	getLoginScenario().saveBean(
+			PharmacySearchCommonConstants.PHARMACY_RESULT_EXPECTED,
+			pharmacyResultExpectedJson);*/
+
+	/* Actual data */
+	if (pharmacyResultPage != null) {
+		getLoginScenario().saveBean(PageConstants.PHARMACY_RESULT_PAGE,
+				pharmacyResultPage);
+		Assert.assertTrue(true);
+		//pharmacyResultActualJson = pharmacyResultPage.pharmacyResultJson;
+	}
+	/*getLoginScenario().saveBean(
+			PharmacySearchCommonConstants.PHARMACY_RESULT_ACTUAL,
+			pharmacyResultActualJson);*/
+}
+}
+
