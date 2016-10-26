@@ -3,8 +3,6 @@
  */
 package acceptancetests.mobile.plandetail.ulayer;
 
-import gherkin.formatter.model.DataTableRow;
-
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
@@ -19,20 +17,20 @@ import org.openqa.selenium.WebDriver;
 import org.skyscreamer.jsonassert.JSONAssert;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import pages.acquisition.ulayer.AcquisitionHomePage;
-import pages.mobile.member.ulayer.BenefitsDetailsPage;
-import pages.mobile.member.ulayer.BenefitsSummaryPage;
-import pages.mobile.member.ulayer.LoginPage;
 import acceptancetests.atdd.data.mobile.member.PageConstants;
 import acceptancetests.atdd.mobile.data.CommonConstants;
 import acceptancetests.mobile.login.data.LoginCommonConstants;
 import atdd.framework.MRScenario;
-import cucumber.annotation.After;
 import cucumber.annotation.en.And;
 import cucumber.annotation.en.Given;
 import cucumber.annotation.en.Then;
 import cucumber.annotation.en.When;
 import cucumber.table.DataTable;
+import gherkin.formatter.model.DataTableRow;
+import pages.mobile.member.ulayer.BenefitDetailsPage;
+import pages.mobile.member.ulayer.BenefitsSummaryPage;
+import pages.mobile.member.ulayer.LoginPage;
+import pages.mobile.member.ulayer.PreferredDrugBenefitsDetailPage;
 
 /**
  * @author pjaising
@@ -123,16 +121,13 @@ public class PlanDetailStepDefinition {
 	@And("^the user navigates to benefits and coverage details page on annual deductible stage$")
 	
 	public void user_navigates_to_details_page()
-	
 	{
-	
-		String userName = "jul_ulayer123";
 	BenefitsSummaryPage benefitsSummaryPage = (BenefitsSummaryPage) getLoginScenario()
 	.getBean(PageConstants.BENEFITS_SUMMARY_PAGE);
 	
-	BenefitsDetailsPage benefitsDetailPage = benefitsSummaryPage.clickviewdrugdetails();
+	BenefitDetailsPage benefitsDetailPage = benefitsSummaryPage.clickviewdrugdetails();
 	
-	Map<String,JSONObject> expectedDataMap = loginScenario.getExpectedJson(userName);
+	Map<String,JSONObject> expectedDataMap = loginScenario.getExpectedJson(getLoginScenario().getBean(LoginCommonConstants.USERNAME).toString());
 	JSONObject benefitsDetailExpectedJson = benefitsDetailPage.getExpectedData(expectedDataMap);
 	getLoginScenario().saveBean(LoginCommonConstants.BENEFITS_DETAIL_EXPECTED, benefitsDetailExpectedJson);
 	
@@ -155,13 +150,14 @@ public class PlanDetailStepDefinition {
 	
 	{
 	
-		String userName = "jul_ulayer123";
-		BenefitsDetailsPage benefitsDetailPage = (BenefitsDetailsPage) getLoginScenario()
+		BenefitDetailsPage benefitsDetailPage = (BenefitDetailsPage) getLoginScenario()
 	.getBean(PageConstants.BENEFITS_DETAIL_PAGE);
 	
 	 benefitsDetailPage.click2ndstagearrow();
+	 
+	 benefitsDetailPage.validateInitialCoverageStage();
 	
-	Map<String,JSONObject> expectedDataMap = loginScenario.getExpectedJson(userName);
+	Map<String,JSONObject> expectedDataMap = loginScenario.getExpectedJson(getLoginScenario().getBean(LoginCommonConstants.USERNAME).toString());
 	JSONObject benefitsDetailExpectedJson = benefitsDetailPage.getExpectedData(expectedDataMap);
 	getLoginScenario().saveBean(LoginCommonConstants.BENEFITS_DETAIL_EXPECTED, benefitsDetailExpectedJson);
 	
@@ -183,13 +179,14 @@ public void user_navigates_to_details_page_coverage_gap_stage()
 
 {
 
-	String userName = "jul_ulayer123";
-	BenefitsDetailsPage benefitsDetailPage = (BenefitsDetailsPage) getLoginScenario()
+	BenefitDetailsPage benefitsDetailPage = (BenefitDetailsPage) getLoginScenario()
 .getBean(PageConstants.BENEFITS_DETAIL_PAGE);
 
  benefitsDetailPage.click2ndstagearrow();
+ 
+ benefitsDetailPage.validateCoverageStageGap();
 
-Map<String,JSONObject> expectedDataMap = loginScenario.getExpectedJson(userName);
+Map<String,JSONObject> expectedDataMap = loginScenario.getExpectedJson(getLoginScenario().getBean(LoginCommonConstants.USERNAME).toString());
 JSONObject benefitsDetailExpectedJson = benefitsDetailPage.getExpectedData(expectedDataMap);
 getLoginScenario().saveBean(LoginCommonConstants.BENEFITS_DETAIL_EXPECTED, benefitsDetailExpectedJson);
 
@@ -211,13 +208,14 @@ public void user_navigates_to_details_page_catastrophic_coverage_stage()
 
 {
 
-	String userName = "jul_ulayer123";
-	BenefitsDetailsPage benefitsDetailPage = (BenefitsDetailsPage) getLoginScenario()
+	BenefitDetailsPage benefitsDetailPage = (BenefitDetailsPage) getLoginScenario()
 .getBean(PageConstants.BENEFITS_DETAIL_PAGE);
 
  benefitsDetailPage.click2ndstagearrow();
+ 
+ benefitsDetailPage.validateCatastrophicCoverageStage();
 
-Map<String,JSONObject> expectedDataMap = loginScenario.getExpectedJson(userName);
+Map<String,JSONObject> expectedDataMap = loginScenario.getExpectedJson(getLoginScenario().getBean(LoginCommonConstants.USERNAME).toString());
 JSONObject benefitsDetailExpectedJson = benefitsDetailPage.getExpectedData(expectedDataMap);
 getLoginScenario().saveBean(LoginCommonConstants.BENEFITS_DETAIL_EXPECTED, benefitsDetailExpectedJson);
 
@@ -228,32 +226,130 @@ if (benefitsDetailPage != null) {
 	getLoginScenario().saveBean(LoginCommonConstants.BENEFITS_DETAIL_ACTUAL, benefitsDetailActualJson);
 }
 
+//benefitsDetailPage.clickCoverageAmountTooltip();
+
 getLoginScenario().saveBean(CommonConstants.EXPECTED_DATA_MAP, expectedDataMap);
 
 
 }	
 
-@Then("^the user validates plan and member details on benefits details page in AARP site$")
-public void log_successful()
-{
-
-
-	JSONObject benefitsDetailActualJson = (JSONObject)getLoginScenario().getBean(LoginCommonConstants.BENEFITS_DETAIL_ACTUAL);
-	System.out.println("benefitsDeatilActualJson----->"+benefitsDetailActualJson);
-	
-	JSONObject benefitsDetailExpectedJson = (JSONObject)getLoginScenario().getBean(LoginCommonConstants.BENEFITS_DETAIL_EXPECTED);
-	System.out.println("benefitsDetailExpectedJson----->"+benefitsDetailExpectedJson);
-	
-	try {
-		JSONAssert.assertEquals(benefitsDetailExpectedJson, benefitsDetailActualJson, true);
-	} catch (JSONException e) {
-		// TODO Auto-generated catch block
-		e.printStackTrace();
+	@Then("^the user validates plan and member details on benefits details page in AARP site$")
+	public void log_successful()
+	{
+		JSONObject benefitsDetailActualJson = (JSONObject)getLoginScenario().getBean(LoginCommonConstants.BENEFITS_DETAIL_ACTUAL);
+		System.out.println("benefitsDeatilActualJson----->"+benefitsDetailActualJson);
+		
+		JSONObject benefitsDetailExpectedJson = (JSONObject)getLoginScenario().getBean(LoginCommonConstants.BENEFITS_DETAIL_EXPECTED);
+		System.out.println("benefitsDetailExpectedJson----->"+benefitsDetailExpectedJson);
+		
+		try {
+			JSONAssert.assertEquals(benefitsDetailExpectedJson, benefitsDetailActualJson, true);
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
-}
+	@And("^the user navigates to preferred drug details page on annual deductible stage$")
+	
+	public void user_navigates_to_details_Preferred_Details_Page()
+	{
+	BenefitsSummaryPage benefitsSummaryPage = (BenefitsSummaryPage) getLoginScenario()
+	.getBean(PageConstants.BENEFITS_SUMMARY_PAGE);
+	
+	PreferredDrugBenefitsDetailPage preferredDrugBenefitsPage = benefitsSummaryPage.clickPreferredDrugViewDetails();
+	
+	Map<String,JSONObject> expectedDataMap = loginScenario.getExpectedJson(getLoginScenario().getBean(LoginCommonConstants.USERNAME).toString());
+	JSONObject benefitsDetailExpectedJson = preferredDrugBenefitsPage.getExpectedData(expectedDataMap);
+	getLoginScenario().saveBean(LoginCommonConstants.BENEFITS_DETAIL_EXPECTED, benefitsDetailExpectedJson);
+	
+	JSONObject benefitsDetailActualJson =  null;
+	if (preferredDrugBenefitsPage != null) {
+		getLoginScenario().saveBean(PageConstants.BENEFITS_DETAIL_PAGE, preferredDrugBenefitsPage);
+		benefitsDetailActualJson = preferredDrugBenefitsPage.benefitsDetailJson;
+		getLoginScenario().saveBean(LoginCommonConstants.BENEFITS_DETAIL_ACTUAL, benefitsDetailActualJson);
+	}
+	
+	getLoginScenario().saveBean(CommonConstants.EXPECTED_DATA_MAP, expectedDataMap);
+	
+	
+	}
 
+	@And("^the user navigates to preferred drug details page with the initial coverage stage$")
+	public void user_navigates_to_details_Preferred_Details_Page_initial_coverage_stage()
+	{
+		PreferredDrugBenefitsDetailPage preferredDrugBenefitsPage = (PreferredDrugBenefitsDetailPage) getLoginScenario()
+	.getBean(PageConstants.BENEFITS_DETAIL_PAGE);
+	
+	preferredDrugBenefitsPage.click2ndstagearrow();
+	
+	preferredDrugBenefitsPage.validateInitialCoverageStage();
+	
+	Map<String,JSONObject> expectedDataMap = loginScenario.getExpectedJson(getLoginScenario().getBean(LoginCommonConstants.USERNAME).toString());
+	JSONObject benefitsDetailExpectedJson = preferredDrugBenefitsPage.getExpectedData(expectedDataMap);
+	getLoginScenario().saveBean(LoginCommonConstants.BENEFITS_DETAIL_EXPECTED, benefitsDetailExpectedJson);
+	
+	JSONObject benefitsDetailActualJson =  null;
+	if (preferredDrugBenefitsPage != null) {
+		getLoginScenario().saveBean(PageConstants.BENEFITS_DETAIL_PAGE, preferredDrugBenefitsPage);
+		benefitsDetailActualJson = preferredDrugBenefitsPage.benefitsDetailJson;
+		getLoginScenario().saveBean(LoginCommonConstants.BENEFITS_DETAIL_ACTUAL, benefitsDetailActualJson);
+	}
+	
+	getLoginScenario().saveBean(CommonConstants.EXPECTED_DATA_MAP, expectedDataMap);
 	
 	
+	}
 	
+	@And("^the user navigates to preferred drug details page with the coverage gap stage$")
+	
+	public void user_navigates_to_details_Preferred_Details_Page_coverage_gap_stage()
+	
+	{
+	
+	PreferredDrugBenefitsDetailPage preferredDrugBenefitsPage = (PreferredDrugBenefitsDetailPage) getLoginScenario()
+	.getBean(PageConstants.BENEFITS_DETAIL_PAGE);
+	
+	preferredDrugBenefitsPage.click2ndstagearrow();
+	
+	preferredDrugBenefitsPage.validateCoverageStageGap();
+	
+	Map<String,JSONObject> expectedDataMap = loginScenario.getExpectedJson(getLoginScenario().getBean(LoginCommonConstants.USERNAME).toString());
+	JSONObject benefitsDetailExpectedJson = preferredDrugBenefitsPage.getExpectedData(expectedDataMap);
+	getLoginScenario().saveBean(LoginCommonConstants.BENEFITS_DETAIL_EXPECTED, benefitsDetailExpectedJson);
+	
+	JSONObject benefitsDetailActualJson =  null;
+	if (preferredDrugBenefitsPage != null) {
+	getLoginScenario().saveBean(PageConstants.BENEFITS_DETAIL_PAGE, preferredDrugBenefitsPage);
+	benefitsDetailActualJson = preferredDrugBenefitsPage.benefitsDetailJson;
+	getLoginScenario().saveBean(LoginCommonConstants.BENEFITS_DETAIL_ACTUAL, benefitsDetailActualJson);
+	}
+	
+	getLoginScenario().saveBean(CommonConstants.EXPECTED_DATA_MAP, expectedDataMap);
+	
+	
+	}
+	
+	@And("^the user navigates to preferred drug details page with the catastrophic coverage stage$")
+	public void user_navigates_to_details_Preferred_Details_Page_catastrophic_coverage_stage()
+	{
+		PreferredDrugBenefitsDetailPage preferredDrugBenefitsPage = (PreferredDrugBenefitsDetailPage) getLoginScenario()
+		.getBean(PageConstants.BENEFITS_DETAIL_PAGE);
+		
+		preferredDrugBenefitsPage.click2ndstagearrow();
+		
+		preferredDrugBenefitsPage.validateCatastrophicCoverageStage();
+		
+		Map<String,JSONObject> expectedDataMap = loginScenario.getExpectedJson(getLoginScenario().getBean(LoginCommonConstants.USERNAME).toString());
+		JSONObject benefitsDetailExpectedJson = preferredDrugBenefitsPage.getExpectedData(expectedDataMap);
+		getLoginScenario().saveBean(LoginCommonConstants.BENEFITS_DETAIL_EXPECTED, benefitsDetailExpectedJson);
+		
+		JSONObject benefitsDetailActualJson =  null;
+		if (preferredDrugBenefitsPage != null) {
+		getLoginScenario().saveBean(PageConstants.BENEFITS_DETAIL_PAGE, preferredDrugBenefitsPage);
+		benefitsDetailActualJson = preferredDrugBenefitsPage.benefitsDetailJson;
+		getLoginScenario().saveBean(LoginCommonConstants.BENEFITS_DETAIL_ACTUAL, benefitsDetailActualJson);
+		}
+		getLoginScenario().saveBean(CommonConstants.EXPECTED_DATA_MAP, expectedDataMap);
+	}
 }

@@ -1,7 +1,7 @@
 /**
  * 
  */
-package pages.mobile.member.blayer;
+package pages.mobile.member.ulayer;
 
 import java.util.List;
 import java.util.Map;
@@ -9,6 +9,7 @@ import java.util.Map;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -23,13 +24,25 @@ import atdd.framework.UhcDriver;
  * @author pjaising
  *
  */
-public class BenefitsDetailPage extends UhcDriver{
+public class BenefitDetailsPage extends UhcDriver{
 	
 	@FindBy(xpath="//div[@class='site-header']/a")
 	private WebElement menuButton;
 	
-	@FindBy(xpath = "//*[@id='wrapper']/div[1]/div[3]/div/div/div/div/div/div/div[4]/div[2]/div[3]")
+	@FindBy(xpath = "//div[@id='standard']//div[@class='carousel-next clickable']")
 	private WebElement nextarrow;
+	
+	@FindBy(xpath="//div[@id='standard']//span[text()='COVERAGE AMOUNTS']/preceding-sibling::div")
+	private WebElement coverageAmountTooltip;
+	
+	@FindBy(xpath="//div[@id='standard']//div[@class='drug__benefits__mobile constrain-mobile mobile-only']//div[2]//th")
+	private WebElement txtInitialCoverage;
+	
+	@FindBy(xpath="//div[@id='standard']//div[@class='drug__benefits__mobile constrain-mobile mobile-only']//div[3]//th")
+	private WebElement txtCoverageGapStage;
+
+	@FindBy(xpath="//div[@id='standard']//div[@class='drug__benefits__mobile constrain-mobile mobile-only']//div[4]//th")
+	private WebElement txtCatastrophicCoverageStage;
 	
 	private PageData benefitsDetail;
 
@@ -39,7 +52,13 @@ public class BenefitsDetailPage extends UhcDriver{
 
 	private JSONObject browserCheckJson;
 	
-	public BenefitsDetailPage(WebDriver driver) {
+	public static final String INTIAL_COVERAGE_STAGE ="INITIAL COVERAGE STAGE";
+	
+	public static final String COVERAGE_GAP_STAGE ="COVERAGE GAP STAGE";
+	
+	public static final String CATASTROPHIC_COVERAGE_STAGE ="CATASTROPHIC COVERAGE STAGE";
+	
+	public BenefitDetailsPage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
 		String fileName = CommonConstants.BENEFITS_DETAIL_PAGE_DATA;
@@ -139,7 +158,44 @@ public class BenefitsDetailPage extends UhcDriver{
 		// TODO Auto-generated catch block
 		e.printStackTrace();
 		}
+
+
 		// TODO Auto-generated method stub
 
 		}
+	public void clickCoverageAmountTooltip() {
+
+		validate (coverageAmountTooltip);
+		coverageAmountTooltip.click();
+		try {
+		Thread.sleep(5000L);
+		} catch (InterruptedException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+		}
+
+
+		// TODO Auto-generated method stub
+
+		}
+	
+	public void validateInitialCoverageStage(){
+		
+		validate (txtInitialCoverage);
+		Assert.assertEquals(INTIAL_COVERAGE_STAGE, txtInitialCoverage.getText());
+		System.out.println("Validated "+txtInitialCoverage.getText());
+		
+	}
+	public void validateCoverageStageGap(){
+		
+		validate (txtCoverageGapStage);
+		Assert.assertEquals(COVERAGE_GAP_STAGE, txtCoverageGapStage.getText());
+		System.out.println("Validated "+txtCoverageGapStage.getText());
+	}
+	public void validateCatastrophicCoverageStage(){
+		
+		validate (txtCatastrophicCoverageStage);
+		Assert.assertEquals(CATASTROPHIC_COVERAGE_STAGE, txtCatastrophicCoverageStage.getText());
+		System.out.println("Validated "+txtCatastrophicCoverageStage.getText());
+	}
 }

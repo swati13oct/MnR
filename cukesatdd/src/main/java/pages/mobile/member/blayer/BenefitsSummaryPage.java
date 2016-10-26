@@ -9,27 +9,22 @@ import java.util.Map;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import org.junit.Assert;
-
 import org.openqa.selenium.Alert;
-
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-import pages.mobile.member.ulayer.BenefitsDetailsPage;
 import acceptancetests.atdd.data.PageData;
 import acceptancetests.atdd.mobile.data.CommonConstants;
 import acceptancetests.atdd.util.CommonUtility;
-import atdd.framework.UhcDriver;
 
 /**
  * @author pnampall
  *
  */
-public class BenefitsSummaryPage extends PharmacyLocator {
+public class BenefitsSummaryPage extends PharmacyLocator{
 	
 	@FindBy(xpath="//div[@class='site-header']/a")
 	private WebElement menuButton;
@@ -37,8 +32,11 @@ public class BenefitsSummaryPage extends PharmacyLocator {
 	@FindBy(xpath = "//div[@class='menu-container']/a")
 	private WebElement logout;
 	
-	@FindBy(xpath = "//*[@id='wrapper']/div[1]/div[2]/div/div/div[1]/div[5]/div/div[2]/div/a/span")
+	@FindBy(xpath = "//h3[text()='My Drug Benefits']/following::span[text()='VIEW DETAILS']")
 	public WebElement viewdetailsbutton;
+	
+	@FindBy(xpath = "//h3[text()='My Preferred Drug Benefits']/following::a[1]")
+	public WebElement lnk_viewdetails_PreferredDrugs;
 	
 	@FindBy(xpath = "//*[@id='sitemenu']/div[2]/div[1]/a")
 	private WebElement benefitDetails;
@@ -261,20 +259,30 @@ public class BenefitsSummaryPage extends PharmacyLocator {
 		return browserCheckJson;
 	}
 
-	public BenefitsDetailPage clickviewdrugdetails() {
+	public BenefitDetailsPage clickviewdrugdetails() {
 		
 		validate(viewdetailsbutton);
 		viewdetailsbutton.click();
 		validate(viewdetailsbutton);
 		
 		if (getTitle().equalsIgnoreCase("Visualize Plans")) {
-			return new BenefitsDetailPage(driver);
+			return new BenefitDetailsPage(driver);
 		}
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	
-
+	public PreferredDrugBenefitsDetailPage clickPreferredDrugViewDetails() {
+		
+		validate(lnk_viewdetails_PreferredDrugs);
+		lnk_viewdetails_PreferredDrugs.click();
+		validate(lnk_viewdetails_PreferredDrugs);
+		
+		if (getTitle().equalsIgnoreCase("Visualize Plans")) {
+			return new PreferredDrugBenefitsDetailPage(driver);
+		}
+		// TODO Auto-generated method stub
+		return null;
+	}
 	
 }

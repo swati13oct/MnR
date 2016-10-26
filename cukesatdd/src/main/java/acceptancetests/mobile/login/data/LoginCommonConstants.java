@@ -27,5 +27,9 @@ public class LoginCommonConstants {
 	
 	public static final String MOBILE_BROWSER_CHECK_EXPECTED = "browserCheckExpected";
 	
+	public static final String PREFERRED_DRUG_BENEFITS_DETAIL_ACTUAL = "preferredBenefitsDetailActualJson";
+
+	public static final String PREFERRED_DRUG_BENEFITS_DETAIL_EXPECTED = "preferredBenefitsDetailExpectedJson";
+	
 
 }
