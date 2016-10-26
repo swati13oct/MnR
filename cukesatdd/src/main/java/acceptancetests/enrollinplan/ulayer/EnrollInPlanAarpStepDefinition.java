@@ -1,5 +1,7 @@
 package acceptancetests.enrollinplan.ulayer;
 
+import gherkin.formatter.model.DataTableRow;
+
 import java.io.File;
 import java.util.HashMap;
 import java.util.List;
@@ -14,20 +16,6 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.skyscreamer.jsonassert.JSONAssert;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import acceptancetests.atdd.data.CommonConstants;
-import acceptancetests.atdd.data.acquisition.PageConstants;
-import acceptancetests.atdd.util.CommonUtility;
-import acceptancetests.enrollinplan.data.EnrollInPlanCommonConstants;
-import acceptancetests.vpp.data.VPPCommonConstants;
-import atdd.framework.MRScenario;
-import cucumber.annotation.After;
-import cucumber.annotation.Before;
-import cucumber.annotation.en.And;
-import cucumber.annotation.en.Given;
-import cucumber.annotation.en.Then;
-import cucumber.annotation.en.When;
-import cucumber.table.DataTable;
-import gherkin.formatter.model.DataTableRow;
 import pages.acquisition.ulayer.AcquisitionHomePage;
 import pages.acquisition.ulayer.AdditionalInformationPage;
 import pages.acquisition.ulayer.BeneficiaryInformationPage;
@@ -57,6 +45,7 @@ import acceptancetests.enrollinplan.data.EnrollInPlanCommonConstants;
 import acceptancetests.vpp.data.VPPCommonConstants;
 import atdd.framework.MRScenario;
 import cucumber.annotation.After;
+import cucumber.annotation.Before;
 import cucumber.annotation.en.And;
 import cucumber.annotation.en.Given;
 import cucumber.annotation.en.Then;

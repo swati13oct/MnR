@@ -1,6 +1,8 @@
 dec_blayer192/Password@1,MAPD,Individualapr_blgroup183/Password@1,PDP,Group,,
 q4blgroup_110/Password@1,PDP,Group,NON LIS,nonUsOtherTerrirtories
 bug57_001/Password@1,MAPD,Individual,,
+mapd_grp_blayer_001/Password@1,MAPD,mobile,
+mapd_grp_blayer_002/Password@1,MAPD,mobile,
 apr_blgroup005/Password@1,MAPD,Group,,
 q4blgroup_043/Password@1,MAPD,Group,Nice,
 q4blayer_006/Password@1,MAPD,Individual,Cosmos,
@@ -8,11 +10,16 @@ apr_blayer001/Password@1,MAPD,,,
 jul_blayer015/Password@1,MA,Individual,,
 q3blgladiators_02/Password@1,MAPD,Individual,,
 apr_blayer009_1/Password@1,MA,Group,
-mapd_grp_blayer_001/Password@1,MAPD,mobile,
 apr_blayer009_1/Password@1,MA,Group,,
 jul_group295/Password@1,MAPD,Group,
 Dec_blayer072/Password@1,MAPD,Individual
+Dec_blayer072/Password@1,MAPD,mobile
 Sep_blayer002,MAPD,Individual
 teamb_sep_group141,PDP,Group
 team_sep_group029,MAPD,Group
 sep_group147/Password@1,MAPD,Group
+group_ppo2/Password@1,MAPD,Group,
+team_sep_group029,MAPD,GroupOct_blayer002/Password@1,MAPD,Individual,NON LIS,riderNotAvailable
+Sep_blayer008/Password@1,MA,Individual,LIS,riderAvailable
+Oct_blayer160/Password@1,MA,Individual,LIS,riderNotAvailable
+Oct_blayer002/Password@1,MAPD,Individual,NON LIS,riderNotAvailable

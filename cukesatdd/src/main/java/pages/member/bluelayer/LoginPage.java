@@ -26,7 +26,7 @@ import atdd.framework.UhcDriver;
 public class LoginPage extends UhcDriver {
 
 
-	private static String PAGE_URL = MRConstants.UHCM_URL;//use UHCM_MEMBER_URL for team-a env
+	private static String PAGE_URL = MRConstants.UHCM_URL;
 	
 
 	@FindBy(id = "fd_memberSignInButton")

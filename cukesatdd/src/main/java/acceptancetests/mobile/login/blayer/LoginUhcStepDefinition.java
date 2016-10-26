@@ -19,8 +19,13 @@ import org.openqa.selenium.WebDriver;
 import org.skyscreamer.jsonassert.JSONAssert;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import pages.mobile.member.blayer.BenefitDetailsPage;
 import pages.mobile.member.blayer.BenefitsSummaryPage;
+import pages.mobile.member.blayer.CustomerServicePage;
 import pages.mobile.member.blayer.LoginPage;
+import pages.mobile.member.blayer.MyDrugBenefitDetailsPage;
+import pages.mobile.member.blayer.MyPlanBenefitDetailsPage;
+import pages.mobile.member.blayer.PharmacyLocatorPage;
 import acceptancetests.atdd.data.mobile.member.PageConstants;
 import acceptancetests.atdd.mobile.data.CommonConstants;
 import acceptancetests.mobile.login.data.LoginCommonConstants;
@@ -135,6 +140,60 @@ public class LoginUhcStepDefinition {
 		
 		BenefitsSummaryPage benefitsSummaryPage = (BenefitsSummaryPage)getLoginScenario().getBean(PageConstants.BENEFITS_SUMMARY_PAGE);
 		benefitsSummaryPage.logout();
+		
+	}
+	
+	@And("^the user validates View My Plan Benefits page in UHC site$")
+	public void validateVisualizeMyPlanbenefitDetails()
+	{
+		BenefitsSummaryPage benefitsSummaryPage = (BenefitsSummaryPage)getLoginScenario().getBean(PageConstants.BENEFITS_SUMMARY_PAGE);
+		MyPlanBenefitDetailsPage planBenefitsDetailsPage=benefitsSummaryPage.getMyPlanBenefitsPage();
+		planBenefitsDetailsPage.logout();
+		
+	}
+	
+	@And("^the user validates View Drug Benefits page in UHC site$")
+	public void validateVisualizeMyDrugbenefitDetails()
+	{
+		BenefitsSummaryPage benefitsSummaryPage = (BenefitsSummaryPage)getLoginScenario().getBean(PageConstants.BENEFITS_SUMMARY_PAGE);
+		MyDrugBenefitDetailsPage drugBenefitsDetailsPage=benefitsSummaryPage.getMyDrugBenefitDetails();
+		drugBenefitsDetailsPage.logout();
+		
+	}
+	
+	@And("^the user validates Pharmacy Locator page in UHC site$")
+	public void validatePharmacyLocator()
+	{		
+		BenefitsSummaryPage benefitsSummaryPage = (BenefitsSummaryPage)getLoginScenario().getBean(PageConstants.BENEFITS_SUMMARY_PAGE);
+		PharmacyLocatorPage pharmacyLocatorPage=benefitsSummaryPage.getPharmacyLocator();
+		pharmacyLocatorPage.logout();
+		
+	}
+	
+	@And("^the user validates Provider Search page in UHC site$")
+	public void validateProviderSearch()
+	{		
+		BenefitsSummaryPage benefitsSummaryPage = (BenefitsSummaryPage)getLoginScenario().getBean(PageConstants.BENEFITS_SUMMARY_PAGE);
+		benefitsSummaryPage.getProviderSearch();
+		benefitsSummaryPage.logout();
+		
+	}
+	
+	@And("^the user validates Customer Service page in UHC site$")
+	public void validateCustomerService()
+	{		
+		BenefitsSummaryPage benefitsSummaryPage = (BenefitsSummaryPage)getLoginScenario().getBean(PageConstants.BENEFITS_SUMMARY_PAGE);
+		CustomerServicePage customerServicePage=benefitsSummaryPage.getCustomerService();
+		customerServicePage.logout();
+		
+	}
+	
+	@And("^the user validates My benefit details page in UHC site$")
+	public void validateMybenefitDetails()
+	{
+		BenefitsSummaryPage benefitsSummaryPage = (BenefitsSummaryPage)getLoginScenario().getBean(PageConstants.BENEFITS_SUMMARY_PAGE);
+		BenefitDetailsPage benefitsDetailsPage=benefitsSummaryPage.getMyBenefitDetails();
+		benefitsDetailsPage.logout();
 		
 	}
 	

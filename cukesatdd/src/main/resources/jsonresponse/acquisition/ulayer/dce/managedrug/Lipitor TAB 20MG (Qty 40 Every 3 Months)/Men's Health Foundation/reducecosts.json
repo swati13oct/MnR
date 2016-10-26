@@ -1,0 +1,20 @@
+{
+   "applyChangesLink":"Close and apply changes",
+   "drugs":[
+      {
+         "selectedDrug":"Lipitor TAB 20MG\nQty 40 Every 3 Months",
+         "genericDrugDetails":"The following generic drug is available for the drug you entered:\natorvastatin calcium TAB 20MG(Qty 40 Every 3 Months)",
+         "switchGenericLink":"Switch to generic",
+         "savings":"You could save\n$6,099.72 each year.",
+         "deleteLink":"Delete",
+         "editLink":"Edit"
+      }
+   ],
+   "annualDrugCost":"Estimated annual drug costs: $6,099.72   ",
+   "addDrugHeading":"You may be able to save by switching to a generic drug. Select \"Reduce costs\" to view savings available.",
+   "currentPharmacy":[
+      {
+         "bottomPharmacyName":"Current Pharmacy: Men's Health Foundation\nType: Standard Network Pharmacy Edit Pharmacy"
+      }
+   ]
+}

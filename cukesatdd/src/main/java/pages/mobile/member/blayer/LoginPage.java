@@ -60,7 +60,7 @@ private static String PAGE_URL = MRConstants.UHCM_MOBILE_URL;
 		sendkeys(passwordField, pwd);
 		signInButton.click();
 		
-		if (MRScenario.environment.equals("dev-a")) {
+		if (MRScenario.environment.equals("dev-a") || MRScenario.environment.equals("team-a")) {
 			
 			Alert alert = driver.switchTo().alert();
 	        alert.accept();

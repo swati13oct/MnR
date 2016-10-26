@@ -20,7 +20,7 @@ import org.skyscreamer.jsonassert.JSONAssert;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import pages.acquisition.ulayer.AcquisitionHomePage;
-import pages.mobile.member.ulayer.BenefitsDetailsPage;
+import pages.mobile.member.ulayer.BenefitDetailsPage;
 import pages.mobile.member.ulayer.BenefitsSummaryPage;
 import pages.mobile.member.ulayer.LoginPage;
 import acceptancetests.atdd.data.mobile.member.PageConstants;

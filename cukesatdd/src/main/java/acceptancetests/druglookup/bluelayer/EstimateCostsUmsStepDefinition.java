@@ -591,13 +591,15 @@ public class EstimateCostsUmsStepDefinition {
 
 	@When("^I view the Drug Cost Estimator Select a Pharmacy search page$")
 	public void user_navigates_to_drug_search(DataTable givenAttributes) {
+
 		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario()
 				.getBean(PageConstants.ACCOUNT_HOME_PAGE);
 		String category = (String) getLoginScenario().getBean(
 				DceCommonConstants.CATEGORY);
 		ManageDrugPage manageDrugPage = accountHomePage
 				.navigateToEstimateCost(category);
-
+		manageDrugPage.checkForDrugPresentAndDelete();
+				
 		/* Get expected data */
 		@SuppressWarnings("unchecked")
 		JSONObject manageDrugPageActualJson = null;
@@ -632,6 +634,7 @@ public class EstimateCostsUmsStepDefinition {
 	}
 	@And ("^It is on or after January 1, 2017$")
 	public void user_selected_Drugs(DataTable drugNameAttributes) {
+
 
 		String drugName = drugNameAttributes.getGherkinRows().get(0).getCells()
 				.get(0);
@@ -678,6 +681,88 @@ public class EstimateCostsUmsStepDefinition {
 		drugDosagePage.navigateAndValidate();
 
 	}
+
+	 @Then("^the user adds the drug$")
+	 public void add_Drug(DataTable dosageAttributes){
+		 DrugDosagePage drugDosagePage = (DrugDosagePage) getLoginScenario()
+					.getBean(PageConstants.DRUG_DOSAGE_PAGE);
+			String category = (String) getLoginScenario().getBean(
+					DceCommonConstants.CATEGORY);
+			List<DataTableRow> dosageAttributesRow = dosageAttributes
+					.getGherkinRows();
+			Map<String, String> dosageAttributesMap = new HashMap<String, String>();
+			for (int i = 0; i < dosageAttributesRow.size(); i++) {
+
+				dosageAttributesMap.put(dosageAttributesRow.get(i).getCells()
+						.get(0), dosageAttributesRow.get(i).getCells().get(1));
+			}
+	    drugDosagePage.selectDosage(dosageAttributesMap,category);
+		getLoginScenario().saveBean(DceCommonConstants.DOSAGE_ATTRIBUTES_MAP,
+					dosageAttributesMap);
+			drugDosagePage.selectDrugAndValidate();
+			}
+	 @Then("^user adds second drug$")
+	 public void select_drug_navigate_to_pharmacy(DataTable dosageAttributes){
+		DrugDosagePage drugDosage=(DrugDosagePage) getLoginScenario().getBean(PageConstants.DRUG_DOSAGE_PAGE);
+		 String category = (String) getLoginScenario().getBean(
+					DceCommonConstants.CATEGORY);
+			List<DataTableRow> dosageAttributesRow = dosageAttributes
+					.getGherkinRows();
+			Map<String, String> dosageAttributesMap = new HashMap<String, String>();
+			for (int i = 0; i < dosageAttributesRow.size(); i++) {
+
+				dosageAttributesMap.put(dosageAttributesRow.get(i).getCells()
+						.get(0), dosageAttributesRow.get(i).getCells().get(1));
+			}
+ 		drugDosage.selectDosage(dosageAttributesMap,
+			 		category);
+		getLoginScenario().saveBean(DceCommonConstants.DOSAGE_ATTRIBUTES_MAP,
+					dosageAttributesMap);
+	 }
+	 @Then("^validates the ways to save$")
+	 public void validate_ways_to_save(DataTable pharmacyAttributes){		
+		 DrugDosagePage drugDosagePage = (DrugDosagePage) getLoginScenario().getBean(PageConstants.DRUG_DOSAGE_PAGE);
+		 SelectPharmacyPage selectPharamcyPage = drugDosagePage.navigateToWaysToSave();
+ 		 List<DataTableRow> memberAttributesRow = pharmacyAttributes
+					.getGherkinRows();
+			Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
+			for (int i = 0; i < memberAttributesRow.size(); i++) {
+
+				memberAttributesMap.put(memberAttributesRow.get(i).getCells()
+						.get(0), memberAttributesRow.get(i).getCells().get(1));
+			}
+			String pharmacyName = memberAttributesMap.get("Pharamcy Name");
+			System.out.println(pharmacyName);
+			ManageDrugPage manageDrugPage = selectPharamcyPage.selectDesiredPharmacyAndNavigate(pharmacyName);
+			System.out.println("desired pharamcy selected");
+			ViewDrugCostPage viewDrugCost= manageDrugPage.navigateToViewDrugCostPage();
+			//validate drug cost page with JSON
+			/* Get expected data */
+			@SuppressWarnings("unchecked")
+			Map<String, JSONObject> expectedDataMap = (Map<String, JSONObject>) getLoginScenario()
+			.getBean(CommonConstants.VIEW_DRUG_COST_PAGE_DATA);
+			JSONObject viewDrugCostPageExpectedJSON = viewDrugCost.getExpectedData(expectedDataMap);
+			JSONObject viewDrugCostPageActualJSON = viewDrugCost.viewDrugCostJson;
+			try{
+				JSONAssert.assertEquals(viewDrugCostPageActualJSON, viewDrugCostPageExpectedJSON, true);
+				System.out.println("--scenario passed---JSON Validated----");
+			}
+			catch(JSONException e){
+				e.printStackTrace();
+			}
+			
+	 }
+	 @When("^user adds one more drug$")
+	 public void add_one_more_drug(DataTable givenAttributes){
+			String drugInitials = givenAttributes.getGherkinRows().get(0)
+					.getCells().get(0);
+
+			String categoryNew = (String) getLoginScenario().getBean(
+					DceCommonConstants.CATEGORY);
+			ManageDrugPage manageDrugPageNew = (ManageDrugPage) getLoginScenario()
+					.getBean(PageConstants.MANAGE_DRUG_PAGE);
+			manageDrugPageNew.searchDrug(drugInitials, categoryNew);	
+}
 
 
 	@After

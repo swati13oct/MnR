@@ -135,12 +135,17 @@ public class ManageDrugPage extends UhcDriver {
 			System.out.println("link is disabled");
 		}
 	}
-
+	public void checkForDrugPresentAndDelete(){
+		List<WebElement> lst = driver.findElements(By.xpath("//div[@class='delete']"));
+		for(int i=0;i<lst.size();i++){
+			System.out.println("number of drugs present = "+lst.size());
+			lst.get(i).click();
+		}
+	}
 	public void logOut() {
 		logOut.click();
 
 	}
-
 	@Override
 	public void openAndValidate() {
 	

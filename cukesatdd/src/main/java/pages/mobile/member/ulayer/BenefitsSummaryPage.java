@@ -14,7 +14,6 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-import pages.acquisition.ulayer.AboutUsAARPPage;
 import acceptancetests.atdd.data.PageData;
 import acceptancetests.atdd.mobile.data.CommonConstants;
 import acceptancetests.atdd.util.CommonUtility;
@@ -37,6 +36,9 @@ public class BenefitsSummaryPage extends UhcDriver{
 	
 	@FindBy(xpath = "//*[@id='wrapper']/div[1]/div[2]/div/div/div[1]/div[5]/div/div[2]/div/a/span")
 	public WebElement viewdetailsbutton;
+	
+	@FindBy(xpath = "//h3[contains(text(),'Preferred')]/following::a[1]")
+	public WebElement lnk_viewdetails_PreferredDrugs;
 	
 	private PageData benefitsSummary;
 
@@ -147,17 +149,30 @@ public class BenefitsSummaryPage extends UhcDriver{
 	}
 
 
-	public BenefitsDetailsPage clickviewdrugdetails() {
+	public BenefitDetailsPage clickviewdrugdetails() {
 		
 		validate(viewdetailsbutton);
 		viewdetailsbutton.click();
 		validate(viewdetailsbutton);
 		
 		if (getTitle().equalsIgnoreCase("Visualize Plans")) {
-			return new BenefitsDetailsPage(driver);
+			return new BenefitDetailsPage(driver);
 		}
 	
 		
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
+	public PreferredDrugBenefitsDetailPage clickPreferredDrugViewDetails() {
+		
+		validate(lnk_viewdetails_PreferredDrugs);
+		lnk_viewdetails_PreferredDrugs.click();
+		validate(lnk_viewdetails_PreferredDrugs);
+		
+		if (getTitle().equalsIgnoreCase("Visualize Plans")) {
+			return new PreferredDrugBenefitsDetailPage(driver);
+		}
 		// TODO Auto-generated method stub
 		return null;
 	}
