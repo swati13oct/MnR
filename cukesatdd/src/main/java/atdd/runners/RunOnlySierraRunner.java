@@ -16,6 +16,6 @@ import cucumber.junit.Cucumber;
 		features = { "feature/testonly/blayer" }, 
 		format = {
 		"pretty", "html:reports/test-report" }, tags ={"@testonly-seirra003"})
-public class TestOnlySierraRunner {
+public class RunOnlySierraRunner {
 	
 }
