@@ -18,14 +18,12 @@ import org.openqa.selenium.WebDriver;
 import org.skyscreamer.jsonassert.JSONAssert;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import pages.mymedica.AccountHomePage;
+import pages.mymedica.CreateAccountPage;
+import pages.mymedica.PlanConfirmationPage;
+import pages.mymedica.RegistrationHomePage;
+import pages.mymedica.RegistrationSuccessPage;
 import pages.acquisition.bluelayer.AdditionalPlanPage;
-import pages.acquisition.bluelayer.CreateAccountPage;
-import pages.acquisition.bluelayer.PlanConfirmationPage;
-import pages.acquisition.bluelayer.RegistrationHomePage;
-import pages.acquisition.bluelayer.RegistrationSuccessPage;
-import pages.member.bluelayer.AccountHomePage;
-import pages.member.bluelayer.LoginPage;
-import pages.member.bluelayer.PlanSummaryPage;
 import pages.mymedica.SignInPage;
 import acceptancetests.atdd.data.CommonConstants;
 import acceptancetests.atdd.data.member.PageConstants;
@@ -55,9 +53,11 @@ public class MyMedicaRegistrationStepDefinition {
 		return loginScenario;
 	}
 
+	WebDriver wd;
+
 	@Given("^the user is on registration page of My Medica site$")
 	public void registration_landing_page() {
-		WebDriver wd = getLoginScenario().getWebDriver();
+		wd = getLoginScenario().getWebDriver();
 		wd.manage().window().maximize();
 
 		SignInPage myMedicaSignInPage = new SignInPage(wd);
@@ -92,7 +92,7 @@ public class MyMedicaRegistrationStepDefinition {
 		getLoginScenario().saveBean(RegistrationConstants.PLAN_CONFIRMATION_ACTUAL, planConfirmationActualJson);
 
 		/* Get Expected response */
-		String fileName = "911342487_12-07-1941";
+		String fileName = "968993858_11-11-1945";
 		String directory = CommonConstants.MEMBER_EXPECTED_DIRECTORY + File.separator + CommonConstants.SITE_BLUELAYER
 				+ File.separator + CommonConstants.FLOW_NAME + File.separator;
 		JSONObject registrationJson = MRScenario.readExpectedJson(fileName, directory);
@@ -149,7 +149,7 @@ public class MyMedicaRegistrationStepDefinition {
 		getLoginScenario().saveBean(RegistrationConstants.REGISTRATION_SUCCESS_ACTUAL, registrationSuccessActualJson);
 
 		/* Get expected response */
-		String fileName = "mmc_blayer001";
+		String fileName = "mmc_blayer003";
 		String directory = CommonConstants.MEMBER_EXPECTED_DIRECTORY + File.separator + CommonConstants.SITE_BLUELAYER
 				+ File.separator + CommonConstants.REGISTRATION + File.separator + CommonConstants.REGISTRATION_SUCCESS
 				+ File.separator;
@@ -176,6 +176,15 @@ public class MyMedicaRegistrationStepDefinition {
 			e.printStackTrace();
 		}
 
+	}
+
+	@Then("^the user navigates to My Account home page in My Medica site$")
+	public void navigateToAccountHome() {
+
+		RegistrationSuccessPage regSuccessPage = (RegistrationSuccessPage) getLoginScenario()
+				.getBean(PageConstants.REGISTRATION_SUCCESS_PAGE);
+		AccountHomePage accountHomePage = regSuccessPage.navigateToHomePage();
+		wd.quit();
 	}
 
 }
