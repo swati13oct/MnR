@@ -61,7 +61,7 @@ public class LoginPage extends UhcDriver {
 	}
 
 	public Object loginWith(String username, String password) {
-		/*loginIn.click();	
+		loginIn.click();	
 		sendkeys(userNameField,username);
 		sendkeys(passwordField,password);
 		signInButton.click();
@@ -77,7 +77,7 @@ public class LoginPage extends UhcDriver {
 				alert2.accept();
 			}
 
-		}
+		
 
 
 if (MRScenario.environment.equals("dev-b") || MRScenario.environment.equals("dev-a") || MRScenario.environment.equals("dev-c")
@@ -95,16 +95,12 @@ if (MRScenario.environment.equals("dev-b") || MRScenario.environment.equals("dev
         
         if(currentUrl().contains("home/my-account-home.html"))
 
-		//if(currentUrl().contains("home/my-account-home.html"))
-		String title = driver.getTitle();
-		if(title.contains("AARP Medicare Plans | My Account Home"))
-
 		{
 			return new AccountHomePage(driver);
 		}
 		else if (currentUrl().contains("terminated-plan.html")) {
-			return new TerminatedHomePage(driver); */
-		//}
+			return new TerminatedHomePage(driver); 
+		}
 		return null;
 	}
 

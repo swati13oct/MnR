@@ -62,45 +62,6 @@ Then the user selects a pharmacy and validates the widgets in manage drug list, 
 				
 Examples:
 	| planType  |  memberType  | pharmacyType                 | distance       | pharmacyName                 |
-	| MAPD      |  Group       | Preferred Retail Pharmacies  | 25 miles       | Walgreens #3766              |
-	| PDP       |  Group       | Pharmacy Saver™ Pharmacy     | 25 miles       | Jay C Food Stores            |
-Scenario Outline: Validate Preferred Retail service is displayed for MAPD 
-Given MAPD member logins on Blue layer
-    | Plan Type   | <planType> |
-	| MemberType  | <memberType> |
-When the user navigates to estimate drug costs Page
-And the user selects the pharmacy type and distance in UMS site and validate Preferred Retail Service is displayed for MAPD
-	| Pharmacy Type | <pharmacyType> |
-	| Distance      | <distance>     |
-Examples:
-	| planType  |  memberType    | drugInitials | drugName     | drugDosage             | drugQuantity | drugFrequency  | packages       | lowCostOpt    | pharmacyType                | distance       | pharmacyName                     | planYear |		
-		| MAPD      |  Individual       |   lipi       | Lipitor      | Lipitor TAB 10MG       | 30           | Every 1 month  | null           | Generic	           | Preferred Retail Pharmacies    | 25 miles       |  	Men's Health Foundation  | 2016     |
-
-Scenario Outline: AL PEEHIP DRUG COST ESTIMATOR DRUG COST DETAILS ways to save
-Given I am a MA or MAPD member user on the AL PEEHIP site
-	| Plan Type   | <planType> |
-	| Member Type | <memberType> |
-When I view the Drug Cost Estimator Select a Pharmacy search page
-		| <drugInitials> |
-And It is on or after January 1, 2017
-		| <drugName> |
-Then the user adds the drug
-		| Drug Dosage    | <drugDosage>    |
-		| Drug Quantity  | <drugQuantity>  |
-		| Drug Frequency | <drugFrequency> |
-		| Packages       | <packages>      |
-When user adds one more drug
-		| <drugInitials1> |
-And It is on or after January 1, 2017
-		| <drugName1> |
-Then user adds second drug
-		| Drug Dosage    | <drugDosage1>    |
-		| Drug Quantity  | <drugQuantity1>  |
-		| Drug Frequency | <drugFrequency1> |
-		| Packages       | <packages1>      |
-Then validates the ways to save	
-		|Pharamcy Name   |	<pharmacyName>  |							
-Examples:
-		| planType  |  memberType    | drugInitials | drugName     | drugDosage             | drugQuantity | drugFrequency  | packages       | lowCostOpt    | pharmacyType                | distance       | pharmacyName                     | planYear |	drugInitials1 | drugName1             | drugDosage1             | drugQuantity1 | drugFrequency1  | packages1 |	
-		| MAPD      |  Group       |   lipi       | Lipitor      | Lipitor TAB 10MG       | 30           | Every 1 month  | null           | Generic	           | Standard Network Pharmacy   | 15 miles       |  	Ym Drugs Inc  | 2015            | simv         |simvastatin           |simvastatin TAB 20MG    | 30           |Every 1 month   | null                 |
-
+	| MAPD      |  Individual  | Standard Network Pharmacies  | 25 miles       | CVS Pharmacy                 |
+#	| MAPD      |  Group       | Preferred Retail Pharmacies  | 25 miles       | Walgreens #3766              |
+#	| PDP       |  Group       | Pharmacy Saver™ Pharmacy     | 25 miles       | Jay C Food Stores            |

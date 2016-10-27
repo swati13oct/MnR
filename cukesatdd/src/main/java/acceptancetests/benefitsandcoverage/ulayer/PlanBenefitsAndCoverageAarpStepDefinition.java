@@ -205,10 +205,11 @@ public class PlanBenefitsAndCoverageAarpStepDefinition {
 
 	}
 	
-	@Then("^the user validates pharmacy saver widget in AARP site$")
+	@Then("^the user validates right rail widget in AARP site$")
 	public void pharmacy_saver_widget_AARP(){
 		PlanBenefitsCoveragePage bncPage = (PlanBenefitsCoveragePage)getLoginScenario().getBean(PageConstants.BENEFITS_AND_COVERAGE_PAGE);
-		bncPage.validatePharmacySaverWidget();
+		bncPage.validateRightRailWidget();
+		
 		bncPage.logOut();
 	}
 	
