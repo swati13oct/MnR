@@ -13,7 +13,7 @@ import cucumber.junit.Cucumber;
  */
 @RunWith(Cucumber.class)
 @Cucumber.Options(glue = { "atdd.framework","acceptancetests.mobile.pharmacylocator.blayer" }, 
-features = { "feature/mobile/pharmacylocator" }, 
+features = { "feature/mobile/bluelayer" }, 
 format = {
 "pretty", "html:reports/test-report" }, tags ={"@pharmacy"})
 public class RunMRAtddUHCPharmacyLocator {
