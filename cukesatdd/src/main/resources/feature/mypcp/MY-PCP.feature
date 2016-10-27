@@ -22,7 +22,8 @@ Feature: Test case for My PCP site
       | Email address         | <email>           |
       | Confirm email address | <confirmEmail>    |
     Then the user registers successfully in My PCP site
-
+		Then the user navigates to My Account home page in My PCP site
+		
     Examples: 
       | memberid1 | dateOfBirth | userName  | password   | confirmPassword | email                   | confirmEmail            |
-      | 930857169 | 06-28-1950  | blpcp_011 | Password@1 | Password@1      | UHCMNRPORTALS@GMAIL.COM | UHCMNRPORTALS@GMAIL.COM |
+      | 950592474 | 12-12-1946  | blpcp_012 | Password@1 | Password@1      | UHCMNRPORTALS@GMAIL.COM | UHCMNRPORTALS@GMAIL.COM |
