@@ -774,4 +774,203 @@ public class EstimateCostsUmsStepDefinition {
 		getLoginScenario().flushBeans();
 	}
 
+
+
+@Given("^MAPD member logins on Blue layer$")
+
+public void registered_member_UMS(DataTable memberAttributes){
+	/* Reading the given attribute from feature file */
+	List<DataTableRow> memberAttributesRow = memberAttributes
+			.getGherkinRows();
+	Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
+	for (int i = 0; i < memberAttributesRow.size(); i++) {
+
+		memberAttributesMap.put(memberAttributesRow.get(i).getCells()
+				.get(0), memberAttributesRow.get(i).getCells().get(1));
+	}
+	
+	String category = memberAttributesMap.get("MemberType");
+
+	Set<String> memberAttributesKeySet = memberAttributesMap.keySet();
+	List<String> desiredAttributes = new ArrayList<String>();
+	for (Iterator<String> iterator = memberAttributesKeySet.iterator(); iterator
+			.hasNext();) {
+		{
+			String key = iterator.next();
+			desiredAttributes.add(memberAttributesMap.get(key));
+		}
+
+	}
+	System.out.println("desiredAttributes.." + desiredAttributes);
+
+	Map<String, String> loginCreds = loginScenario
+			.getUMSMemberWithDesiredAttributes(desiredAttributes);
+
+	String userName = null;
+	String pwd = null;
+	if (loginCreds == null) {
+		// no match found
+		System.out.println("Member Type data could not be setup !!!");
+		Assert.fail("unable to find a " + desiredAttributes + " member");
+	} else {
+		userName = loginCreds.get("user");
+		pwd = loginCreds.get("pwd");
+		System.out.println("User is..." + userName);
+		System.out.println("Password is..." + pwd);
+		getLoginScenario()
+				.saveBean(LoginCommonConstants.USERNAME, userName);
+		getLoginScenario().saveBean(LoginCommonConstants.PASSWORD, pwd);
+	}
+
+	getLoginScenario().saveBean(CommonConstants.CATEGORY, category);
+
+	WebDriver wd = getLoginScenario().getWebDriver();
+
+	LoginPage loginPage = new LoginPage(wd);
+	AccountHomePage accountHomePage = (AccountHomePage) loginPage.loginWith(userName, pwd,category);
+	
+	Map<String, JSONObject> expectedDataMap = loginScenario
+			.getExpectedJson(userName);
+	System.out.println();
+	if (accountHomePage != null) {
+		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
+		getLoginScenario().saveBean(PageConstants.ACCOUNT_HOME_PAGE,
+				accountHomePage);
+		
+		
+	}
+	
+	getLoginScenario().saveBean(CommonConstants.EXPECTED_DATA_MAP,
+			expectedDataMap);
+	
 }
+
+@When("^the user navigates to estimate drug costs Page$")
+public void mapd_to_view_drug_details() {
+	AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario()
+			.getBean(PageConstants.ACCOUNT_HOME_PAGE);
+	String category = (String) getLoginScenario().getBean(
+			DceCommonConstants.CATEGORY);
+	ManageDrugPage manageDrugPage = accountHomePage
+			.navigateToEstimateCost(category);
+
+	/* Get expected data 
+	@SuppressWarnings("unchecked")
+	Map<String, JSONObject> expectedDataMap = (Map<String, JSONObject>) getLoginScenario()
+	.getBean(CommonConstants.EXPECTED_DATA_MAP);
+	/*JSONObject manageDrugPageExpectedJson = manageDrugPage
+			.getExpectedData(expectedDataMap);*/
+
+	//JSONObject manageDrugPageActualJson = null;
+	if (manageDrugPage != null) {
+		getLoginScenario().saveBean(PageConstants.MANAGE_DRUG_PAGE,
+				manageDrugPage);
+		Assert.assertTrue(true);
+		//manageDrugPageActualJson = manageDrugPage.manageDrugJson;
+	}
+}
+
+	/*try {
+		JSONAssert.assertEquals(manageDrugPageExpectedJson,
+				manageDrugPageActualJson, true);
+	} catch (JSONException e) {
+		e.printStackTrace();
+	}
+	*/
+
+@And("^the user selects the pharmacy type and distance in UMS site and validate Preferred Retail Service is displayed for MAPD$")
+public void uservalidate_selects_pharmacy_type_distance(DataTable pharmacyAttributes) throws InterruptedException {
+
+	List<DataTableRow> pharmacyAttributesRow = pharmacyAttributes
+			.getGherkinRows();
+	Map<String, String> pharmacyAttributesMap = new HashMap<String, String>();
+	for (int i = 0; i < pharmacyAttributesRow.size(); i++) {
+
+		pharmacyAttributesMap.put(pharmacyAttributesRow.get(i).getCells()
+				.get(0), pharmacyAttributesRow.get(i).getCells().get(1));
+	}
+	String pharmacyType = pharmacyAttributesMap.get("Pharmacy Type");
+	getLoginScenario().saveBean(DceCommonConstants.PHARMACYTYPE, pharmacyType);
+	String distance = pharmacyAttributesMap.get("Distance");
+
+	String category = (String) getLoginScenario().getBean(
+			DceCommonConstants.CATEGORY);
+	ManageDrugPage manageDrugPage = (ManageDrugPage) getLoginScenario()
+			.getBean(PageConstants.MANAGE_DRUG_PAGE);
+	SelectPharmacyPage selectPharmacyPage = manageDrugPage
+			.navigateToPharmacyPage(category);
+	
+	
+	selectPharmacyPage = selectPharmacyPage.selectTypeDistance(
+			pharmacyType, distance, category);
+	
+
+	/* Get expected data */
+		@SuppressWarnings("unchecked")
+	Map<String, JSONObject> expectedDataMap = (Map<String, JSONObject>) getLoginScenario()
+	.getBean(CommonConstants.EXPECTED_DATA_MAP);
+	JSONObject selectPharmacyPageExpectedJson = selectPharmacyPage
+			.getExpectedData(expectedDataMap);
+
+	JSONObject selectPharmacyPageActualJson = null;
+	if (selectPharmacyPage != null) {
+		getLoginScenario().saveBean(PageConstants.SELECT_PHARMACY_PAGE,
+				selectPharmacyPage);
+		Assert.assertTrue(true);
+		selectPharmacyPageActualJson = selectPharmacyPage.selectPharmacyJson;
+	}
+
+	System.out.println("selectPharmacyPageActualJson=====>"
+			+ selectPharmacyPageActualJson.toString());
+	System.out.println("selectPharmacyPageExpectedJson===>"
+			+ selectPharmacyPageExpectedJson.toString());
+
+	try {
+		JSONAssert.assertEquals(selectPharmacyPageExpectedJson,
+				selectPharmacyPageActualJson, true);
+	} catch (JSONException e) {
+		e.printStackTrace();
+	}
+}
+}
+	//Selecting pharmacyType and distance 
+	
+/*
+	JSONObject updatedPharmacyPageExpectedJson = selectPharmacyPage
+			.getExpectedData(expectedDataMap, pharmacyType, distance);
+
+	JSONObject updatedPharmacyPageActualJson = null;
+	if (selectPharmacyPage != null) {
+		getLoginScenario().saveBean(PageConstants.SELECT_PHARMACY_PAGE,
+				selectPharmacyPage);
+		Assert.assertTrue(true);
+		//updatedPharmacyPageActualJson = selectPharmacyPage.selectPharmacyJson;
+	}
+
+	System.out.println("updatedPharmacyPageActualJson=====>"
+			+ updatedPharmacyPageActualJson.toString());
+	System.out.println("updatedPharmacyPageExpectedJson===>"
+			+ updatedPharmacyPageExpectedJson.toString());
+
+	try {
+		JSONAssert.assertEquals(updatedPharmacyPageExpectedJson,
+				updatedPharmacyPageActualJson, true);
+	} catch (JSONException e) {
+		e.printStackTrace();
+	}
+} */
+
+
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+

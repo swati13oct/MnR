@@ -105,3 +105,16 @@ Examples:
 # | MAPD     | 		 | 78006       | 2        | Bexar County      | AARP MedicareRx Preferred (PDP)                    |  Open 24 hours             |
 # | MAPD     | Group     | 80002       | 2        | Adams County      | AARP MedicareComplete SecureHorizons Plan 2 (HMO)  |  Pharmacy Saver™ Program   |
   | PDP      | Group	 | 78006       | 25       | Bexar County      | UnitedHealthcare MedicareRx for Groups (PDP)       |  Open 24 hours,Standard Network Pharmacy  |
+  
+  
+  Scenario Outline:To test Locate a Pharmacy tool in UMS site for MAPD Group
+Given login with MAPD member on Blue layer
+| Plan Type    | <plantype>   |
+| MemberType  | <memberType> |
+When the user navigates to pharmacy search page in Blue layer site
+And the user search pharmacies using the below information in Blue layer site
+| Distance    | <distance>  |
+And the user searches for pharmacies available in Blue layer site
+Examples:
+| plantype | memberType   | distance  |
+| MAPD     | Individual       |   25      |
