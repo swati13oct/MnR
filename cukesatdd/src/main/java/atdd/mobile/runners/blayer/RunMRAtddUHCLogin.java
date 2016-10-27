@@ -13,9 +13,9 @@ import cucumber.junit.Cucumber;
  */
 @RunWith(Cucumber.class)
 @Cucumber.Options(glue = { "atdd.framework","acceptancetests.mobile.login.blayer" }, 
-features = { "feature/mobile/login" }, 
+features = { "feature/mobile/bluelayer" }, 
 format = {
-"pretty", "html:reports/test-report" }, tags ={"@blogin"})
+"pretty", "html:reports/test-report" }, tags ={"@plandetails"})
 public class RunMRAtddUHCLogin {
 
 }

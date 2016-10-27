@@ -118,66 +118,9 @@ public class LoginAarpStepDefinition {
 		}
 
 		getLoginScenario().saveBean(CommonConstants.EXPECTED_DATA_MAP, expectedDataMap);
-	}
 	
-	@And("^the user navigates to benefits and coverage details page$")
-	
-	public void user_navigates_to_details_page()
-	
-	{
-	
-		String userName = "jul_ulayer123";
-	BenefitsSummaryPage benefitsSummaryPage = (BenefitsSummaryPage) getLoginScenario()
-	.getBean(PageConstants.BENEFITS_SUMMARY_PAGE);
-	
-	BenefitsDetailsPage benefitsDetailPage = benefitsSummaryPage.clickviewdrugdetails();
-	
-	Map<String,JSONObject> expectedDataMap = loginScenario.getExpectedJson(userName);
-	JSONObject benefitsDetailExpectedJson = benefitsDetailPage.getExpectedData(expectedDataMap);
-	getLoginScenario().saveBean(LoginCommonConstants.BENEFITS_DETAIL_EXPECTED, benefitsDetailExpectedJson);
-	
-	JSONObject benefitsDetailActualJson =  null;
-	if (benefitsDetailPage != null) {
-		getLoginScenario().saveBean(PageConstants.BENEFITS_DETAIL_PAGE, benefitsDetailPage);
-		benefitsDetailActualJson = benefitsDetailPage.benefitsDetailJson;
-		getLoginScenario().saveBean(LoginCommonConstants.BENEFITS_DETAIL_ACTUAL, benefitsDetailActualJson);
-	}
+	}	
 
-	getLoginScenario().saveBean(CommonConstants.EXPECTED_DATA_MAP, expectedDataMap);
-
-	/*
-	if(benefitsDetailPage!= null){
-		getLoginScenario().saveBean(PageConstants.BENEFITS_DETAIL_PAGE,
-				benefitsDetailPage);
-		
-		Assert.assertTrue(true);
-	} else {
-		Assert.fail("benefitsdetails page not found");
-	}
-	
-	*/
-}
-
-	@Then("^the user validates plan and member details on benefits details page in AARP site$")
-	public void log_successful()
-	{
-	
-
-		JSONObject benefitsDetailActualJson = (JSONObject)getLoginScenario().getBean(LoginCommonConstants.BENEFITS_DETAIL_ACTUAL);
-		System.out.println("benefitsDeatilActualJson----->"+benefitsDetailActualJson);
-		
-		JSONObject benefitsDetailExpectedJson = (JSONObject)getLoginScenario().getBean(LoginCommonConstants.BENEFITS_DETAIL_EXPECTED);
-		System.out.println("benefitsDetailExpectedJson----->"+benefitsDetailExpectedJson);
-		
-		try {
-			JSONAssert.assertEquals(benefitsDetailExpectedJson, benefitsDetailActualJson, true);
-		} catch (JSONException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
-	}
-/*
 	@Then("^the user validates plan and member details on benefits summary page in AARP site$")
 	public void log_in_successful()
 	{
@@ -194,11 +137,11 @@ public class LoginAarpStepDefinition {
 			e.printStackTrace();
 		}
 		
-	//	BenefitsSummaryPage benefitsSummaryPage = (BenefitsSummaryPage)getLoginScenario().getBean(PageConstants.BENEFITS_SUMMARY_PAGE);
-	//	benefitsSummaryPage.logout();
+		BenefitsSummaryPage benefitsSummaryPage = (BenefitsSummaryPage)getLoginScenario().getBean(PageConstants.BENEFITS_SUMMARY_PAGE);
+		benefitsSummaryPage.logout();
 		
-	}
 	
+	}
 
 	
 
@@ -212,6 +155,6 @@ public class LoginAarpStepDefinition {
 		getLoginScenario().flushBeans();
 	}
 	
-	*/
+	
 
 }

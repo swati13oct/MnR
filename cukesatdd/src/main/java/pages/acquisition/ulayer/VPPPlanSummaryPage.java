@@ -316,39 +316,29 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	}
 
 
-	public IntroductionInformationPage clicksOnEnrollInplanLink(String planName) { //return type is EnrollPlanInfoPage
+	public IntroductionInformationPage clicksOnEnrollInplanLink(String planName) { 
 		if (planName.contains("HMO")) {
 			for (WebElement plan : maPlanElement) {
 				if (plan.getText().contains(planName)) {
 					ElementData elementData = new ElementData("id", "enrollMA");
 					findChildElement(elementData, plan).click();
-					
+
 				}
 				break;
 			}
 		}
-		if (planName.contains("PDP")) {
+		else if (planName.contains("PDP")) {
 			for (WebElement plan : pdpPlanElement) {
 				if (plan.getText().contains(planName)) {
 					ElementData elementData = new ElementData("id", "enrollPDP"); // TODO:
 																					// Re-check
 					findChildElement(elementData, plan).click();
-					
+
 				}
 				break;
 			}
 		}
-		/*if (pageHeading.getText().equalsIgnoreCase(
-				"You Have Chosen to Enroll in the Following Plan")) {
-			return new EnrollPlanInfoPage(driver);
-		}*/
-		
-		if(pageHeading.getText().equalsIgnoreCase("Medicare Insurance Information")){
 			return new IntroductionInformationPage(driver);
-		}
-			
-		
-		return null;
 	}	
 	
 	public PlanInformationPage navigatetoEnrollInplanLink(String planName)

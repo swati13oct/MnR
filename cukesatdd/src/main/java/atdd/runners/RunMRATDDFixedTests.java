@@ -11,8 +11,8 @@ import cucumber.junit.Cucumber;
  */
 
 @RunWith(Cucumber.class)
-@Cucumber.Options(glue = { "atdd.framework","acceptancetests.enrollinplan.ulayer" }, 
-		features = { "feature/enroll-in-plan" }, 
+@Cucumber.Options(glue = { "atdd.framework","acceptancetests.fixedtestcases" }, 
+		features = { "feature/fixedtestcases" }, 
 		format = {
 		"pretty", "html:reports/test-report","json:target/cucumber.json"}, tags ={"@fixedTestCase"})
 public class RunMRATDDFixedTests {

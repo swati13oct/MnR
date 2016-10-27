@@ -28,6 +28,9 @@ public class BenefitsDetailsPage extends UhcDriver{
 	@FindBy(xpath="//div[@class='site-header']/a")
 	private WebElement menuButton;
 	
+	@FindBy(xpath = "//*[@id='wrapper']/div[1]/div[2]/div/div/div/div/div/div/div[4]/div[2]/div[3]")
+	private WebElement nextarrow;
+	
 	private PageData benefitsDetail;
 
 	public JSONObject benefitsDetailJson;
@@ -126,10 +129,19 @@ public class BenefitsDetailsPage extends UhcDriver{
 		return browserCheckJson;
 	}
 	
-	
-	
-	
-	
-	
-	
+	public void click2ndstagearrow() {
+
+		validate (nextarrow);
+		nextarrow.click();
+		try {
+		Thread.sleep(5000L);
+		} catch (InterruptedException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+		}
+
+
+		// TODO Auto-generated method stub
+
+		}
 }

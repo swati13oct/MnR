@@ -456,13 +456,4 @@ public class MedicalClaimsAarpStepDefintion {
 			e.printStackTrace();
 		}
 	}
-
-	@After
-	public void tearDown() {
-
-		WebDriver wd = (WebDriver) getLoginScenario().getBean(
-				CommonConstants.WEBDRIVER);
-		wd.quit();
-		getLoginScenario().flushBeans();
-	}
 }

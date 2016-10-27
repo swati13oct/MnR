@@ -44,3 +44,12 @@ Examples:
      | planType1          | planType2         | memberType |
  #    | PDP               | SSUP              | Group      |
  
+Scenario Outline: Verify preferred pharmacies on my pharmacies widget
+Given registered UHC member with following attributes
+    | Plan Type    | <planType>   |
+	  | Member Type  | <memberType> |	    	    	    
+And user navigates to personal health record in UHC site
+Then the user validates the my pharamcies on phr page
+Examples:
+     | planType           | memberType         |
+     | MAPD               | Group              |

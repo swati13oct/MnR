@@ -96,6 +96,13 @@ public class AccountHomePage extends UhcDriver {
 	
 	@FindBy(xpath = "////*[@id='subPageLeft']/div[2]/div[2]/h3[2]/a")
 	private WebElement createPdfLink;
+	
+
+	@FindBy(xpath = "//span[contains(.,'Print temporary ID card')]")
+	private WebElement viewIDCard;
+	
+	@FindBy(id = "pcpLogoPrint1left")
+	private WebElement validateLogo;
 
 	
 	
@@ -137,11 +144,17 @@ public class AccountHomePage extends UhcDriver {
 	public BenefitsCoveragePage navigateToBnC() {
 
 		benefitsLink.click();
-		if (getTitle().equalsIgnoreCase(
-						"UnitedHealthcare Medicare Solutions | Plan Benefits and Coverage")) {
+		try {
+			Thread.sleep(90000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		String title = driver.getTitle().toString();
+		if (title.equalsIgnoreCase("UnitedHealthcare Medicare Solutions | Plan Benefits and Coverage")) {
 			return new BenefitsCoveragePage(driver);
 		}
-
+		else
 		return null;
 	}
 
@@ -273,11 +286,11 @@ public class AccountHomePage extends UhcDriver {
 		searchDrugClaims.click();
 		if (getTitle().equalsIgnoreCase(
 				"UnitedHealthcare Medicare Solutions | Claims")) {
-			if (planCategory.equalsIgnoreCase("Individual")) {
+			/*if (planCategory.equalsIgnoreCase("Individual")) {
 				return new ClaimSummaryPage(driver, planCategory);
-			} else {
+			} else { */
 				return new ClaimSummaryPage(driver);
-			}
+			/*}*/
 		}
 
 		return null;
@@ -285,7 +298,7 @@ public class AccountHomePage extends UhcDriver {
 public ContactUsPage navigatesToContactUsPage() {
 		
 		contactUsLink.click();
-		if(getTitle().equalsIgnoreCase("AARP Medicare Plans | Contact Us"))
+		if(getTitle().equalsIgnoreCase("UnitedHealthcare Medicare Solutions | Contact Us"))
 		{
 			return new ContactUsPage(driver);
 		}
@@ -397,5 +410,15 @@ public ContactUsPage navigatesToContactUsPage() {
 		}
 
 		return null;
+	}
+
+	public Boolean tempIdValidation() {
+		validate(viewIDCard);
+		viewIDCard.click();
+		if(validate(validateLogo)){
+			return true;
+		}
+		return false;
+		
 	}
 }

@@ -1,63 +1,63 @@
 {
    "pharmacyTypes":[
       {
-         "pharmacyDropDown":"Standard Network Pharmacy"
+         "pharmacyDropDown":"Available Pharmacies"
       },
       {
-         "pharmacyDropDown":"Preferred Mail Service Pharmacy"
+         "pharmacyDropDown":"Mail Service Pharmacy"
       }
    ],
    "previousLink":"Previous results",
    "pharmacies":[
       {
-         "pharmacyDistance":"0.18",
+         "pharmacyDistance":"1.2",
          "selectLink":"Select",
-         "pharmacyName":"Equal Care Pharmacy Inc"
+         "pharmacyName":"Men's Health Foundation"
       },
       {
-         "pharmacyDistance":"0.21",
+         "pharmacyDistance":"1.22",
          "selectLink":"Select",
-         "pharmacyName":"Loisaida Drugs And Surgical"
+         "pharmacyName":"Horton And Converse Pharmacy"
       },
       {
-         "pharmacyDistance":"0.22",
+         "pharmacyDistance":"1.72",
          "selectLink":"Select",
-         "pharmacyName":"Avenue C Pharmacy"
+         "pharmacyName":"Vons Pharmacy #2739"
       },
       {
-         "pharmacyDistance":"0.23",
+         "pharmacyDistance":"1.77",
          "selectLink":"Select",
-         "pharmacyName":"Faith Pharmacy"
+         "pharmacyName":"Great Earth Compounds"
       },
       {
-         "pharmacyDistance":"0.23",
+         "pharmacyDistance":"1.92",
          "selectLink":"Select",
-         "pharmacyName":"Rite Aid Pharmacy 03771"
+         "pharmacyName":"Garfield Pharmacy"
       },
       {
-         "pharmacyDistance":"0.23",
+         "pharmacyDistance":"1.96",
          "selectLink":"Select",
-         "pharmacyName":"East Drive Pharmacy Inc"
+         "pharmacyName":"Rite Aid Pharmacy 05461"
       },
       {
-         "pharmacyDistance":"0.25",
+         "pharmacyDistance":"1.98",
          "selectLink":"Select",
-         "pharmacyName":"Duane Reade"
+         "pharmacyName":"Uzzi Reiss MD"
       },
       {
-         "pharmacyDistance":"0.26",
+         "pharmacyDistance":"1.98",
          "selectLink":"Select",
-         "pharmacyName":"Erins Pharmacy"
+         "pharmacyName":"Camden Pharmacy And Gift Emporium"
       },
       {
-         "pharmacyDistance":"0.27",
+         "pharmacyDistance":"1.98",
          "selectLink":"Select",
-         "pharmacyName":"East Village Prescription Center"
+         "pharmacyName":"Beverly Hills Apothecary"
       },
       {
-         "pharmacyDistance":"0.31",
+         "pharmacyDistance":"1.98",
          "selectLink":"Select",
-         "pharmacyName":"Medilane Drugs"
+         "pharmacyName":"Foot & Ankle Specialty Group"
       }
    ],
    "zipcode":"90210",

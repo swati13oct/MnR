@@ -27,6 +27,7 @@ import acceptancetests.atdd.data.member.PageConstants;
 import acceptancetests.login.data.LoginCommonConstants;
 import acceptancetests.phr.data.PhrCommonConstants;
 import atdd.framework.MRScenario;
+import cucumber.annotation.en.And;
 import cucumber.annotation.en.Given;
 import cucumber.annotation.en.Then;
 import cucumber.annotation.en.When;
@@ -165,5 +166,21 @@ public class PhrUmsStepDefinition {
 		}
 		phrPage.logOut();
 	}
-
+	
+	@And("^user navigates to personal health record in UHC site$")
+	public void navigate_to_phr(){
+		@SuppressWarnings("unchecked")
+		Map<String, JSONObject> expectedDataMap = (Map<String, JSONObject>) getLoginScenario()
+				.getBean(CommonConstants.EXPECTED_DATA_MAP); 
+		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario()
+				.getBean(PageConstants.ACCOUNT_HOME_PAGE);
+		PhrPage phrPage = accountHomePage.navigateToPhr();
+		getLoginScenario().saveBean(PageConstants.PHR_PAGE, phrPage);
+	}
+	@Then("^the user validates the my pharamcies on phr page$")
+	public void validate_my_pharamcies(){
+		PhrPage phrPage = (PhrPage) getLoginScenario().getBean(
+				PageConstants.PHR_PAGE);
+		phrPage.validateMyPharmacies();
+	}
 }

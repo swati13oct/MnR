@@ -15,7 +15,7 @@ Examples:
    # | MA         | Group          | Replacement ID card |   
    # | MAPD       | Group          | Member Materials    |
    # | SSUP       | Group          | Replacement ID card |
-     | PDP        | Group          | Member Materials    |
+   # | PDP        | Group          | Member Materials    |
 
  
  
@@ -33,3 +33,18 @@ Then the user validate confirmation message for selected order in order plan mat
 Examples:
     | planType1   | planType2      | memberType |         option   |
  #   | PDP         | SSUP          |            | Member Materials |  
+
+ 
+Scenario Outline:Verify order plan materials in UHC site for federal members
+Given registered UHC member for order plan materials with following attributes 
+	| Plan Type    | <planType>   |
+	| Member Type  | <memberType> | 
+When the user navigates to order plan materials through mymenu tab in UHC site
+Examples:
+  	 | planType   | memberType     | option              |
+   # | MA         |  Individual    | Member Materials    | 
+     | MAPD       |  Individual    | Replacement ID card |
+   # | MA         | Group          | Replacement ID card |   
+   # | MAPD       | Group          | Member Materials    |
+   # | SSUP       | Group          | Replacement ID card |
+   # | PDP        | Group          | Member Materials    |

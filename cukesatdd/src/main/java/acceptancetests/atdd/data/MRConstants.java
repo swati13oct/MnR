@@ -11,16 +11,14 @@ import atdd.framework.MRScenario;
  */
 public class MRConstants {
 
-	public static final String AARPM_URL = "https://member.awe-"+MRScenario.environment+"-aarpmedicareplans.uhc.com";
-
-	public static final String UHCM_URL = "https://member.awe-"+MRScenario.environment+"-uhcmedicaresolutions.uhc.com/guest/home.html";
-
+	public static final String AARPM_URL = "https://member."+MRScenario.environment+"-aarpmedicareplans.uhc.com";
+	public static final String UHCM_URL = "https://member."+MRScenario.environment+"-uhcmedicaresolutions.uhc.com/guest/home.html";
 	//public static final String AARP_URL = "https://www.awe-"+MRScenario.environment+"-aarpmedicareplans.uhc.com/";
 	public static final String AARP_URL = "https://www."+MRScenario.environment+"-aarpmedicareplans.uhc.com/";
 
-	public static final String AARP_PLANPREVIEW_URL= "https://www.awe-"+MRScenario.environment+"-aarpmedicareplans.uhc.com/plan-preview.html";
+	public static final String AARP_PLANPREVIEW_URL= "https://www."+MRScenario.environment+"-aarpmedicareplans.uhc.com/plan-preview.html";
 	
-	public static final String UHC_PLANPREVIEW_URL= "https://www.awe-"+MRScenario.environment+"-uhcmedicaresolutions.uhc.com/plan-preview.html";
+	public static final String UHC_PLANPREVIEW_URL= "https://www."+MRScenario.environment+"-uhcmedicaresolutions.uhc.com/plan-preview.html";
 
 	public static final String UHCRETIREE_URL = "https://www."+MRScenario.environment+"-uhcretiree.uhc.com/";
 	
@@ -81,20 +79,22 @@ public class MRConstants {
 	public static final String UHC_URL = "https://www."+MRScenario.environment+"-uhcmedicaresolutions.uhc.com/";
 	
 	public static final String MEDICA_REGISTRATION_URL = "https://www.awe-"+MRScenario.environment+"-mymedicamedicare.uhc.com/guest/registration.html";
+
+	public static final String AARPM_REGISTRATION_URL = "https://member."+MRScenario.environment+"-aarpmedicareplans.uhc.com/guest/registration.html";
+
 	
 	public static final String PCP_REGISTRATION_URL = "https://www.awe-"+MRScenario.environment+"-mypcpmedicare.uhc.com/guest/registration.html";
 	
+
 	public static final String PCP_PAGE_URL = "https://www.awe-"+MRScenario.environment+"-mypcpmedicare.uhc.com/";
 	
 	public static final String MEDICA_PAGE_URL = "https://www.awe-"+MRScenario.environment+"-mymedicamedicare.uhc.com/";
 	
-	public static final String AARPM_REGISTRATION_URL = "https://member.awe-"+MRScenario.environment+"-aarpmedicareplans.uhc.com/guest/registration.html";
-	
-	public static final String UHCM_REGISTRATION_URL = "https://member.awe-"+MRScenario.environment+"-uhcmedicaresolutions.uhc.com/guest/registration.html";
+	public static final String UHCM_REGISTRATION_URL = "https://member."+MRScenario.environment+"-uhcmedicaresolutions.uhc.com/guest/registration.html";
 
-	public static final String AARP_OUR_PLANS_URL = "https://www.awe-"+MRScenario.environment+"-aarpmedicareplans.uhc.com/health-plans.html";
+	public static final String AARP_OUR_PLANS_URL = "https://www."+MRScenario.environment+"-aarpmedicareplans.uhc.com/health-plans.html";
 
-	public static final String UHC_OUR_PLANS_URL = "https://www.awe-"+MRScenario.environment+"-uhcmedicaresolutions.uhc.com/health-plans.html";
+	public static final String UHC_OUR_PLANS_URL = "https://www."+MRScenario.environment+"-uhcmedicaresolutions.uhc.com/health-plans.html";
 	
 	public static final String GOOGLE_SEARCH_ENGINE_URL = "https://www.google.com"; 
 	
@@ -102,13 +102,13 @@ public class MRConstants {
 	
 	public static final String BING_SEARCH_ENGINE_URL = "https://www.bing.com";
 	
-	public static final String AARPM_MOBILE_URL = "https://member.awe-"+MRScenario.environment+"-aarpmedicareplans.uhc.com/mobile/guest/login.html";
+	public static final String AARPM_MOBILE_URL = "https://member."+MRScenario.environment+"-aarpmedicareplans.uhc.com/mobile/guest/login.html";
 	
-	public static final String UHCM_MOBILE_URL = "https://member.awe-"+MRScenario.environment+"-uhcmedicaresolutions.uhc.com/mobile/guest/login.html";
+	public static final String UHCM_MOBILE_URL = "https://member."+MRScenario.environment+"-uhcmedicaresolutions.uhc.com/mobile/guest/login.html";
 	
-	public static final String MRREST_TIME_ADMIN_URL = "https://awe-"+MRScenario.environment+"-generic.uhc.com/MRRestWAR/rest/zadmin/time/";
+	public static final String MRREST_TIME_ADMIN_URL = "https://"+MRScenario.environment+"-generic.uhc.com/MRRestWAR/rest/zadmin/time/";
 	
-	public static final String PARTD_TIME_ADMIN_URL = "https://awe-"+MRScenario.environment+"-generic.uhc.com/PartDPortalWeb/rest/zadmin/time/";
+	public static final String PARTD_TIME_ADMIN_URL = "https://"+MRScenario.environment+"-generic.uhc.com/PartDPortalWeb/rest/zadmin/time/";
 	
 	public static final String GENERIC_PORTLET_URL = "https://portal.uhc.com/bConnectedDCE/home.html";
 	
@@ -197,9 +197,11 @@ public class MRConstants {
 
 	private static final String UMS_PLANPREVIEW_URL = null;	
 	
-	public static final String SERVER_DATE_PARTD_PORTAL_WEB = "https://awe-"+MRScenario.environment+"-generic.uhc.com/PartDPortalWeb/jsp/zadmin/timeAdmin.jsp?server=1";
+	public static final String SERVER_DATE_PARTD_PORTAL_WEB = "https://"+MRScenario.environment+"-generic.uhc.com/PartDPortalWeb/jsp/zadmin/timeAdmin.jsp?server=1";
 
-  public static final String SERVER_DATE_MR_REST_WAR = "https://awe-"+MRScenario.environment+"-generic.uhc.com/MRRestWAR/jsp/zadmin/timeAdmin.jsp?server=1";
+  public static final String SERVER_DATE_MR_REST_WAR = "https://"+MRScenario.environment+"-generic.uhc.com/MRRestWAR/jsp/zadmin/timeAdmin.jsp?server=1";
+
+  public static final String UHCM_MEMBER_URL = "https://member."+MRScenario.environment+"-uhcmedicaresolutions.uhc.com/guest/home.html";
 	
 	
 }

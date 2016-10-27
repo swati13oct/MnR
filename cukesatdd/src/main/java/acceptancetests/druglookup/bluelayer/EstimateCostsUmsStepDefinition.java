@@ -368,6 +368,7 @@ public class EstimateCostsUmsStepDefinition {
 					.get(0), pharmacyAttributesRow.get(i).getCells().get(1));
 		}
 		String pharmacyType = pharmacyAttributesMap.get("Pharmacy Type");
+		getLoginScenario().saveBean(DceCommonConstants.PHARMACYTYPE, pharmacyType);
 		String distance = pharmacyAttributesMap.get("Distance");
 
 		String category = (String) getLoginScenario().getBean(
@@ -378,7 +379,7 @@ public class EstimateCostsUmsStepDefinition {
 				.navigateToPharmacyPage(category);
 
 		/* Get expected data */
-		@SuppressWarnings("unchecked")
+			@SuppressWarnings("unchecked")
 		Map<String, JSONObject> expectedDataMap = (Map<String, JSONObject>) getLoginScenario()
 		.getBean(CommonConstants.EXPECTED_DATA_MAP);
 		JSONObject selectPharmacyPageExpectedJson = selectPharmacyPage
@@ -443,6 +444,10 @@ public class EstimateCostsUmsStepDefinition {
 				.getBean(PageConstants.SELECT_PHARMACY_PAGE);
 		ViewDrugCostPage viewDrugCostPage = selectPharmacyPage.selectPharmacy(
 				pharmacyName, category);
+		if (selectPharmacyPage != null) {
+		getLoginScenario().saveBean(PageConstants.SELECT_PHARMACY_PAGE,
+				selectPharmacyPage);
+		}
 
 		/* Get expected data */
 		JSONObject viewDrugCostActualJson = null;
@@ -465,6 +470,25 @@ public class EstimateCostsUmsStepDefinition {
 					viewDrugCostActualJson);
 		}
 
+	}
+	
+	@Then("^the user selects a pharmacy and validates the widgets in manage drug list, select pharmacy and view drug costs page in UMS site$")
+	public void user_validates_widgets_select_pharmacy_UMS(DataTable pharmacyNameAttribute){
+		String pharmacyName = pharmacyNameAttribute.getGherkinRows().get(0)
+				.getCells().get(0);
+		String category = (String) getLoginScenario().getBean(
+				DceCommonConstants.CATEGORY);
+		SelectPharmacyPage selectPharmacyPage = (SelectPharmacyPage) getLoginScenario()
+				.getBean(PageConstants.SELECT_PHARMACY_PAGE);
+		String pharmacyType = (String) getLoginScenario().getBean(
+				DceCommonConstants.PHARMACYTYPE);
+		ViewDrugCostPage viewDrugCostPage = selectPharmacyPage.selectPharmacyandvalidate(pharmacyName, category, pharmacyType);
+		if (viewDrugCostPage != null) {
+			getLoginScenario().saveBean(PageConstants.VIEW_DRUG_COST_PAGE,
+					viewDrugCostPage);
+		}
+		
+		
 	}
 
 	@Then("^user will validate the view Drug cost page in UMS site$")
@@ -494,6 +518,252 @@ public class EstimateCostsUmsStepDefinition {
 		manageDrugPage.logOut();
 
 	}
+	@Given("^I am a MA or MAPD member user on the AL PEEHIP site$")
+
+	public void alPEEHIPLogin(DataTable memberAttributes) {
+
+		List<DataTableRow> memberAttributesRow = memberAttributes
+				.getGherkinRows();
+		Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells()
+					.get(0), memberAttributesRow.get(i).getCells().get(1));
+		}
+
+		String category = memberAttributesMap.get("Member Type");
+		Set<String> memberAttributesKeySet = memberAttributesMap.keySet();
+		List<String> desiredAttributes = new ArrayList<String>();
+		for (Iterator<String> iterator = memberAttributesKeySet.iterator(); iterator
+				.hasNext();) {
+			{
+				String key = iterator.next();
+				desiredAttributes.add(memberAttributesMap.get(key));
+			}
+
+		}
+		System.out.println("desiredAttributes.." + desiredAttributes);
+
+		Map<String, String> loginCreds = loginScenario
+				.getUMSMemberWithDesiredAttributes(desiredAttributes);
+
+		String userName = null;
+		System.out.println(userName);
+		String pwd = null;
+		System.out.println(pwd);
+		if (loginCreds == null) {
+			// no match found
+			System.out.println("Member Type data could not be setup !!!");
+			Assert.fail("unable to find a " + desiredAttributes + " member");
+		} else {
+			userName = loginCreds.get("user");
+			pwd = loginCreds.get("pwd");
+			System.out.println("User is..." + userName);
+			System.out.println("Password is..." + pwd);
+			getLoginScenario()
+			.saveBean(LoginCommonConstants.USERNAME, userName);
+			getLoginScenario().saveBean(LoginCommonConstants.PASSWORD, pwd);
+		}
+
+		WebDriver wd = getLoginScenario().getWebDriver();
+		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
+
+		LoginPage loginPage = new LoginPage(wd);
+		AccountHomePage accountHomePage = (AccountHomePage)loginPage.loginWith(userName, pwd, category);
+		JSONObject accountHomeActualJson = null;
+		getLoginScenario().saveBean(DceCommonConstants.CATEGORY, category);
+		/* Get expected data */
+		Map<String, JSONObject> expectedDataMap = loginScenario
+				.getExpectedJson(userName);
+		if (accountHomePage != null) {
+			getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
+			getLoginScenario().saveBean(PageConstants.ACCOUNT_HOME_PAGE,
+					accountHomePage);
+			Assert.assertTrue(true);
+			accountHomeActualJson = accountHomePage.accountHomeJson;
+		}
+
+		System.out.println("accountHomeActualJson=====>"
+				+ accountHomeActualJson.toString());
+		getLoginScenario().saveBean(CommonConstants.EXPECTED_DATA_MAP,
+				expectedDataMap);
+	}
+
+	@When("^I view the Drug Cost Estimator Select a Pharmacy search page$")
+	public void user_navigates_to_drug_search(DataTable givenAttributes) {
+
+		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario()
+				.getBean(PageConstants.ACCOUNT_HOME_PAGE);
+		String category = (String) getLoginScenario().getBean(
+				DceCommonConstants.CATEGORY);
+		ManageDrugPage manageDrugPage = accountHomePage
+				.navigateToEstimateCost(category);
+		manageDrugPage.checkForDrugPresentAndDelete();
+				
+		/* Get expected data */
+		@SuppressWarnings("unchecked")
+		JSONObject manageDrugPageActualJson = null;
+		if (manageDrugPage != null) {
+			getLoginScenario().saveBean(PageConstants.MANAGE_DRUG_PAGE,
+					manageDrugPage);
+			Assert.assertTrue(true);
+			manageDrugPageActualJson = manageDrugPage.manageDrugJson;
+		}
+
+
+		String drugInitials = givenAttributes.getGherkinRows().get(0)
+				.getCells().get(0);
+
+		String categoryNew = (String) getLoginScenario().getBean(
+				DceCommonConstants.CATEGORY);
+		ManageDrugPage manageDrugPageNew = (ManageDrugPage) getLoginScenario()
+				.getBean(PageConstants.MANAGE_DRUG_PAGE);
+		AddDrugPage addDrugPage = manageDrugPage.searchDrug(drugInitials,
+				category);
+
+		/* Get expected data */
+		@SuppressWarnings("unchecked")	
+		JSONObject addDrugPageActualJson = null;
+		if (addDrugPage != null) {
+			getLoginScenario().saveBean(PageConstants.ADD_DRUG_PAGE,
+					addDrugPage);
+			Assert.assertTrue(true);
+			addDrugPageActualJson = addDrugPage.addDrugJson;
+		}
+
+	}
+	@And ("^It is on or after January 1, 2017$")
+	public void user_selected_Drugs(DataTable drugNameAttributes) {
+
+
+		String drugName = drugNameAttributes.getGherkinRows().get(0).getCells()
+				.get(0);
+		String category = (String) getLoginScenario().getBean(
+				DceCommonConstants.CATEGORY);
+
+		AddDrugPage addDrugPage = (AddDrugPage) getLoginScenario().getBean(
+				PageConstants.ADD_DRUG_PAGE);
+		DrugDosagePage drugDosagePage = addDrugPage.selectDrug(drugName,
+				category);
+
+		/* Get expected data */
+		@SuppressWarnings("unchecked")
+
+		JSONObject drugDosagePageActualJson = null;
+		if (addDrugPage != null) {
+			getLoginScenario().saveBean(PageConstants.DRUG_DOSAGE_PAGE,
+					drugDosagePage);
+			Assert.assertTrue(true);
+			drugDosagePageActualJson = drugDosagePage.drugDosageJson;
+		}
+
+	}
+	@Then("^I should not see the Preferred Mail Service Pharmacy radio button$")
+	public void user_select_dosage_information(DataTable dosageAttributes){
+
+		DrugDosagePage drugDosagePage = (DrugDosagePage) getLoginScenario()
+				.getBean(PageConstants.DRUG_DOSAGE_PAGE);
+		String category = (String) getLoginScenario().getBean(
+				DceCommonConstants.CATEGORY);
+		List<DataTableRow> dosageAttributesRow = dosageAttributes
+				.getGherkinRows();
+		Map<String, String> dosageAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < dosageAttributesRow.size(); i++) {
+
+			dosageAttributesMap.put(dosageAttributesRow.get(i).getCells()
+					.get(0), dosageAttributesRow.get(i).getCells().get(1));
+		}
+
+		Object pageObject = drugDosagePage.selectDosage(dosageAttributesMap,
+				category);
+		getLoginScenario().saveBean(DceCommonConstants.DOSAGE_ATTRIBUTES_MAP,
+				dosageAttributesMap);
+		drugDosagePage.navigateAndValidate();
+
+	}
+
+	 @Then("^the user adds the drug$")
+	 public void add_Drug(DataTable dosageAttributes){
+		 DrugDosagePage drugDosagePage = (DrugDosagePage) getLoginScenario()
+					.getBean(PageConstants.DRUG_DOSAGE_PAGE);
+			String category = (String) getLoginScenario().getBean(
+					DceCommonConstants.CATEGORY);
+			List<DataTableRow> dosageAttributesRow = dosageAttributes
+					.getGherkinRows();
+			Map<String, String> dosageAttributesMap = new HashMap<String, String>();
+			for (int i = 0; i < dosageAttributesRow.size(); i++) {
+
+				dosageAttributesMap.put(dosageAttributesRow.get(i).getCells()
+						.get(0), dosageAttributesRow.get(i).getCells().get(1));
+			}
+	    drugDosagePage.selectDosage(dosageAttributesMap,category);
+		getLoginScenario().saveBean(DceCommonConstants.DOSAGE_ATTRIBUTES_MAP,
+					dosageAttributesMap);
+			drugDosagePage.selectDrugAndValidate();
+			}
+	 @Then("^user adds second drug$")
+	 public void select_drug_navigate_to_pharmacy(DataTable dosageAttributes){
+		DrugDosagePage drugDosage=(DrugDosagePage) getLoginScenario().getBean(PageConstants.DRUG_DOSAGE_PAGE);
+		 String category = (String) getLoginScenario().getBean(
+					DceCommonConstants.CATEGORY);
+			List<DataTableRow> dosageAttributesRow = dosageAttributes
+					.getGherkinRows();
+			Map<String, String> dosageAttributesMap = new HashMap<String, String>();
+			for (int i = 0; i < dosageAttributesRow.size(); i++) {
+
+				dosageAttributesMap.put(dosageAttributesRow.get(i).getCells()
+						.get(0), dosageAttributesRow.get(i).getCells().get(1));
+			}
+ 		drugDosage.selectDosage(dosageAttributesMap,
+			 		category);
+		getLoginScenario().saveBean(DceCommonConstants.DOSAGE_ATTRIBUTES_MAP,
+					dosageAttributesMap);
+	 }
+	 @Then("^validates the ways to save$")
+	 public void validate_ways_to_save(DataTable pharmacyAttributes){		
+		 DrugDosagePage drugDosagePage = (DrugDosagePage) getLoginScenario().getBean(PageConstants.DRUG_DOSAGE_PAGE);
+		 SelectPharmacyPage selectPharamcyPage = drugDosagePage.navigateToWaysToSave();
+ 		 List<DataTableRow> memberAttributesRow = pharmacyAttributes
+					.getGherkinRows();
+			Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
+			for (int i = 0; i < memberAttributesRow.size(); i++) {
+
+				memberAttributesMap.put(memberAttributesRow.get(i).getCells()
+						.get(0), memberAttributesRow.get(i).getCells().get(1));
+			}
+			String pharmacyName = memberAttributesMap.get("Pharamcy Name");
+			System.out.println(pharmacyName);
+			ManageDrugPage manageDrugPage = selectPharamcyPage.selectDesiredPharmacyAndNavigate(pharmacyName);
+			System.out.println("desired pharamcy selected");
+			ViewDrugCostPage viewDrugCost= manageDrugPage.navigateToViewDrugCostPage();
+			//validate drug cost page with JSON
+			/* Get expected data */
+			@SuppressWarnings("unchecked")
+			Map<String, JSONObject> expectedDataMap = (Map<String, JSONObject>) getLoginScenario()
+			.getBean(CommonConstants.VIEW_DRUG_COST_PAGE_DATA);
+			JSONObject viewDrugCostPageExpectedJSON = viewDrugCost.getExpectedData(expectedDataMap);
+			JSONObject viewDrugCostPageActualJSON = viewDrugCost.viewDrugCostJson;
+			try{
+				JSONAssert.assertEquals(viewDrugCostPageActualJSON, viewDrugCostPageExpectedJSON, true);
+				System.out.println("--scenario passed---JSON Validated----");
+			}
+			catch(JSONException e){
+				e.printStackTrace();
+			}
+			
+	 }
+	 @When("^user adds one more drug$")
+	 public void add_one_more_drug(DataTable givenAttributes){
+			String drugInitials = givenAttributes.getGherkinRows().get(0)
+					.getCells().get(0);
+
+			String categoryNew = (String) getLoginScenario().getBean(
+					DceCommonConstants.CATEGORY);
+			ManageDrugPage manageDrugPageNew = (ManageDrugPage) getLoginScenario()
+					.getBean(PageConstants.MANAGE_DRUG_PAGE);
+			manageDrugPageNew.searchDrug(drugInitials, categoryNew);	
+}
+
 
 	@After
 	public void tearDown() {

@@ -39,8 +39,8 @@ And the user validates the plan summary for the below plan in UMS site
 
 Examples:
 	| zipcode | county              | drugInitials	| drugName      |  drugDosage	      | quantity	| drugFrequency  | packages | genericAvailable	| brand/generic					| pharmacyType				| distance	| pharmacyName			| plantype	| planName						|
-	| 90210   |  Los Angeles County	| lipi		|  Lipitor      |  Lipitor TAB 20MG   |   40		| Every 3 months | null     |	yes		| Lipitor TAB 20MG (Qty 40 Every 3 Months)	| Standard Network Pharmacy 		| 15 miles	|  CVS PHARMACY 09652		| MAPD		| AARP MedicareComplete SecureHorizons Plan 2 (HMO)	|
-	| 80002   |  Adams County       | lipi		|  Lipitor      |  Lipitor TAB 20MG   |   40		| Every 3 months | null     |	yes		| Lipitor TAB 20MG (Qty 40 Every 3 Months)	| Standard Network Pharmacy 		| 15 miles	|  COSTCO PHARMACY 676		| MAPD		| AARP MedicareComplete SecureHorizons Plan 2 (HMO)	| 
+	| 90210   |  Los Angeles County	| lipi		|  Lipitor      |  Lipitor TAB 20MG   |   40		| Every 3 months | null     |	yes		| Lipitor TAB 20MG (Qty 40 Every 3 Months)	| Standard Network Pharmacy 		| 15 miles	|  Horton And Converse Pharmacy	| MAPD		| AARP MedicareComplete SecureHorizons Plan 2 (HMO)	|
+	| 80002   |  Adams County       | lipi		|  Lipitor      |  Lipitor TAB 20MG   |   40		| Every 3 months | null     |	yes		| Lipitor TAB 20MG (Qty 40 Every 3 Months)	| Standard Network Pharmacy 		| 15 miles	|  Costco Pharmacy		| MAPD		| AARP MedicareComplete SecureHorizons Plan 2 (HMO)	| 
 
  
 Scenario Outline: To Verify the drugs and plan summary for AEP period 
@@ -128,7 +128,7 @@ Then the user validates the details of the selected plan in UMS site
 
 Examples:
 	| zipcode | county              | drugInitials	| drugName      |  drugDosage	      | quantity	| drugFrequency		| packages | genericAvailable	| brand/generic					| pharmacyType				| distance	| pharmacyName			| plantype	| planName						|
-	| 80002   |  Adams County       | lipi		|  Lipitor      |  Lipitor TAB 20MG   |   40		| Every 3 months	| null     |	yes		| Lipitor TAB 20MG (Qty 40 Every 3 Months)	| Standard Network Pharmacy 		| 15 miles	|  COSTCO PHARMACY 676		| MAPD		| AARP MedicareComplete SecureHorizons Plan 2 (HMO)	| 
+	| 80002   |  Adams County       | lipi		|  Lipitor      |  Lipitor TAB 20MG   |   40		| Every 3 months	| null     |	yes		| Lipitor TAB 20MG (Qty 40 Every 3 Months)	| Standard Network Pharmacy 		| 15 miles	| Costco Pharmacy		| MAPD		| AARP MedicareComplete SecureHorizons Plan 2 (HMO)	| 
 	
 Scenario Outline: To Verify the drugs and pharmacy model for new generic flow
 Given the user is on the UHC medicare solutions site landing page
@@ -163,7 +163,7 @@ When the user views plan results after selecting drug and pharmacy in UMS site
 Then user validates plan count for all plan types on plan summary page in UMS site
 Examples:
 	| zipcode | county              | drugInitials	| drugName      |  drugDosage	      | quantity	| drugFrequency  | packages | genericAvailable	| brand/generic					| pharmacyType				| distance	| pharmacyName			| 
-	| 80002   | Adams County       | lipi		|  Lipitor      |  Lipitor TAB 20MG   |   40		| Every 3 months | null     |	yes		| Lipitor TAB 20MG (Qty 40 Every 3 Months)	| Standard Network Pharmacy 		| 15 miles	|  COSTCO PHARMACY 676		| 
+	| 80002   | Adams County       | lipi		|  Lipitor      |  Lipitor TAB 20MG   |   40		| Every 3 months | null     |	yes		| Lipitor TAB 20MG (Qty 40 Every 3 Months)	| Standard Network Pharmacy 		| 15 miles	|  Costco Pharmacy		| 
 	
 Scenario Outline: To Verify the drug list and plan cost sections in View Plan Details page 
 Given the user is on the UHC medicare solutions site landing page
@@ -193,10 +193,10 @@ And the user selects the plan in UMS site
 	| Plan Type | <plantype> |
 Then the user view plan details of the selected plan in UMS site
 	| Plan Name    | <planName> |
-    |Error Message | <errorMessage> |
+	|Error Message | <errorMessage> |
 
 
 
 Examples:
-	| zipcode | county             | drugInitials | drugName      |  drugDosage	        | packages                                          | quantity | drugFrequency  | genericAvailable | brand/generic                            | pharmacyType	 	 		| distance   |  pharmacyName               | plantype |planYear| planName 					                       |errorMessage                                                                                                                                   |
-	| 76270   | Montague County    | lipi	      |  Lipitor      |  Lipitor TAB 20MG   | null                                              | 40       | Every 3 months | yes              | Lipitor TAB 20MG (Qty 40 Every 3 Months) | Available Pharmacies        | 25 miles   |  CVS Pharmacy               | PDP      | 2016   |AARP MedicareRx Preferred (PDP)                    |The pharmacy selected is not part of this plan's pharmacy network. Please edit your current pharmacy to estimate your drug costs for this plan.|
+	| zipcode | county             | drugInitials | drugName      |  drugDosage	    | packages | quantity | drugFrequency  | genericAvailable | brand/generic                            | pharmacyType	 	 | distance   |  pharmacyName               | plantype |planYear| planName 					                       |errorMessage                                                                                                                                   |
+	| 76270   | Montague County    | lipi	      |  Lipitor      |  Lipitor TAB 20MG   | null     | 40       | Every 3 months | yes              | Lipitor TAB 20MG (Qty 40 Every 3 Months) | Available Pharmacies  | 25 miles   |  CVS Pharmacy               | PDP      | 2016   |AARP MedicareRx Preferred (PDP)                    |The pharmacy selected is not part of this plan's pharmacy network. Please edit your current pharmacy to estimate your drug costs for this plan.|

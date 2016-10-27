@@ -12,8 +12,8 @@ Examples:
 #	| MA       | Individual |
 #	| MA       | Group      |
 	| MAPD     | Individual |
-	| MAPD     | Group      |
-	| PDP      | Group      |
+#	| MAPD     | Group      |
+#	| PDP      | Group      |
 
 Scenario Outline: Verify login in UHC site for group plan member 
 Given registered UHC member with following attributes
@@ -108,3 +108,15 @@ Examples:
 #    | PDP terminated | SSUP active  |  
 #    | SSUP terminated| PDP active   |
  
+ 
+ 
+Scenario Outline:To verify login in UHC site to validate temp print id card
+Given the user is on the UHC medicare site login page
+When the user logs in with a registered UMP with following details in UHC site
+	| Plan Type   | <planType>   |
+	| Member Type | <memberType> |
+Then the user validates temp id card pop up after login in UHC site
+
+Examples:
+	| planType | memberType |
+	| MAPD     | Individual |

@@ -9,6 +9,8 @@ import java.util.Map;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.openqa.selenium.By;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -89,6 +91,7 @@ public class BenefitsCoveragePage extends UhcDriver {
 		logOut.click();
 
 	}
+
 	
 	public JSONObject getActualPdfLinksData() {
 		String fileName = CommonConstants.B_AND_C_PDF_MEMBER_PAGE_DATA;
@@ -117,6 +120,53 @@ public class BenefitsCoveragePage extends UhcDriver {
 		}
 		planDocPDFAcqJson = jsonObject;
 		return planDocPDFAcqJson;
+	}
+
+
+
+	public void validatesPharmacySaver() {
+		driver.navigate().refresh();
+		try {
+			Thread.sleep(10000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		boolean present;
+		try {
+			driver.findElement(By.id("ATDD_Saver_Widget2016"));
+			present = true;
+		} catch (NoSuchElementException e) {
+			present = false;
+		}
+
+		if(present)
+			System.out.println("@@@@@@@@@ Able to find Pharmacy Saver widget @@@@@@@@@");
+		else
+			System.out.println("@@@@@@@@@ No Pharmacy Saver widget @@@@@@@@@");
+		
+	}
+
+	public void validatesDrugCostTable() {
+		driver.navigate().refresh();
+		try {
+			Thread.sleep(10000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		boolean present;
+		try {
+			driver.findElement(By.id("preferred_retail_drugCosts"));
+			present = true;
+		} catch (NoSuchElementException e) {
+			present = false;
+		}
+
+		if(present)
+			System.out.println("@@@@@@@@@ Able to find Preferred Retail Drug Cost Table @@@@@@@@@");
+		else
+			System.out.println("@@@@@@@@@ No Preferred Retail Drug Cost Table @@@@@@@@@");
 	}
 
 }

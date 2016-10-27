@@ -13,7 +13,7 @@ import cucumber.junit.Cucumber;
  */
 @RunWith(Cucumber.class)
 @Cucumber.Options(glue = { "atdd.framework","acceptancetests.contactus" }, 
-		features = { "feature/contactus/ulayer" }, 
+		features = { "feature/contactus/" }, 
 		format = {
 		"pretty", "html:reports/test-report" }, tags ={"@contactUsTest"})
 public class RunMRAtddTestContactUs {

@@ -23,7 +23,7 @@
 },
 "AnnualDeductibleStage":{
 "identifier":"xpath",
-"elementName":"//*[@id='wrapper']/div[1]/div[2]/div/div/div/div/div/div/div[4]/div[2]/div[1]/div[1]"
+"elementName":"(//th[text()='Annual Deductible Stage'])[2]"
 },
 "CoveredDrugs":{
 "identifier":"xpath",

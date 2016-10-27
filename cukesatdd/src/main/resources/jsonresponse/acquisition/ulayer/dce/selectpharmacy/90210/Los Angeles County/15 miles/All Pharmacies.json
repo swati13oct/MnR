@@ -1,86 +1,86 @@
 {
-    "pharmacyTypes": [
-        {
-            "pharmacyDropDown": "Available Pharmacies"
-        },
-        {
-            "pharmacyDropDown": "Preferred Mail Service Pharmacy"
-        }
-    ], 
-    "nextLink": "Next 10 results",
-    "previousLink": "Previous 10 results",   
-    "pharmacies": [
-        {
-            "pharmacyDistance": "1.32",
-            "selectLink": "Select",
-            "pharmacyName": "HORTON AND CONVERSE PHARMACY 33"
-        },
-        {
-            "pharmacyDistance": "1.92",
-            "selectLink": "Select",
-            "pharmacyName": "VONS PHARMACY #2739 2739"
-        },
-        {
-            "pharmacyDistance": "1.92",
-            "selectLink": "Select",
-            "pharmacyName": "GREAT EARTH COMPOUNDS"
-        },
-        {
-            "pharmacyDistance": "2.06",
-            "selectLink": "Select",
-            "pharmacyName": "CARE PLUS CVS/PHARMACY # 02801"
-        },
-        {
-            "pharmacyDistance": "2.09",
-            "selectLink": "Select",
-            "pharmacyName": "CAPITOL DRUGS"
-        },
-        {
-            "pharmacyDistance": "2.12",
-            "selectLink": "Select",
-            "pharmacyName": "WEST KNOLL PHARMACY"
-        },
-        {
-            "pharmacyDistance": "2.17",
-            "selectLink": "Select",
-            "pharmacyName": "CVS PHARMACY 09652"
-        },
-        {
-            "pharmacyDistance": "2.18",
-            "selectLink": "Select",
-            "pharmacyName": "COMMUNITY, A WALGREENS PHARMACY"
-        },
-        {
-            "pharmacyDistance": "2.32",
-            "selectLink": "Select",
-            "pharmacyName": "GARFIELD PHARMACY"
-        },
-        {
-            "pharmacyDistance": "2.36",
-            "selectLink": "Select",
-            "pharmacyName": "RITE AID PHARMACY 05462 05462"
-        }
-    ],
-    "zipcode": "90210",
-    "editZipCodeLink": "Edit ZIP code",
-    "miles": [
-        {
-            "milesDropDown": "1 mile"
-        },
-        {
-            "milesDropDown": "2 miles"
-        },
-        {
-            "milesDropDown": "5 miles"
-        },
-        {
-            "milesDropDown": "10 miles"
-        },
-        {
-            "milesDropDown": "15 miles"
-        },
-        {
-            "milesDropDown": "25 miles"
-        }
-    ]
+   "pharmacyTypes":[
+      {
+         "pharmacyDropDown":"Available Pharmacies"
+      },
+      {
+         "pharmacyDropDown":"Mail Service Pharmacy"
+      }
+   ],
+   "previousLink":"Previous 10 results",
+   "pharmacies":[
+      {
+         "pharmacyDistance":"1.2",
+         "selectLink":"Select",
+         "pharmacyName":"Men's Health Foundation"
+      },
+      {
+         "pharmacyDistance":"1.22",
+         "selectLink":"Select",
+         "pharmacyName":"Horton And Converse Pharmacy"
+      },
+      {
+         "pharmacyDistance":"1.72",
+         "selectLink":"Select",
+         "pharmacyName":"Vons Pharmacy #2739"
+      },
+      {
+         "pharmacyDistance":"1.77",
+         "selectLink":"Select",
+         "pharmacyName":"Great Earth Compounds"
+      },
+      {
+         "pharmacyDistance":"1.92",
+         "selectLink":"Select",
+         "pharmacyName":"Garfield Pharmacy"
+      },
+      {
+         "pharmacyDistance":"1.96",
+         "selectLink":"Select",
+         "pharmacyName":"Rite Aid Pharmacy 05461"
+      },
+      {
+         "pharmacyDistance":"1.98",
+         "selectLink":"Select",
+         "pharmacyName":"Uzzi Reiss MD"
+      },
+      {
+         "pharmacyDistance":"1.98",
+         "selectLink":"Select",
+         "pharmacyName":"Camden Pharmacy And Gift Emporium"
+      },
+      {
+         "pharmacyDistance":"1.98",
+         "selectLink":"Select",
+         "pharmacyName":"Beverly Hills Apothecary"
+      },
+      {
+         "pharmacyDistance":"1.98",
+         "selectLink":"Select",
+         "pharmacyName":"Foot & Ankle Specialty Group"
+      }
+   ],
+   "zipcode":"90210",
+   "editZipCodeLink":"Edit ZIP code",
+   "miles":[
+      {
+         "milesDropDown":"1 mile"
+      },
+      {
+         "milesDropDown":"2 miles"
+      },
+      {
+         "milesDropDown":"5 miles"
+      },
+      {
+         "milesDropDown":"10 miles"
+      },
+      {
+         "milesDropDown":"15 miles"
+      },
+      {
+         "milesDropDown":"25 miles"
+      }
+   ],
+   "nextLink":"Next 10 results"
 }

@@ -1,9 +1,12 @@
 package pages.member.bluelayer;
 
+import java.util.List;
 import java.util.Map;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.junit.Assert;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -83,7 +86,17 @@ public class PhrPage extends UhcDriver {
 
 		System.out.println("phrJson----->"+phrJson);
 	}
-
+	 public void validateMyPharmacies(){
+		  List<WebElement> lst = driver.findElements(By.xpath("//*[@class='phr_greybox_mid']"));
+		  for(int i=0;i<lst.size();i++){
+			  if(lst.get(i).getText().contains("Preferred Mail Service Pharmacy")){
+				  Assert.fail("------------Failed due to presence of Preferred Mail Service Pharmacy-------------------");
+			  }
+			  else{
+				   System.out.println("-----Passed--------------");
+			   }
+		  }
+	   }
 	public JSONObject getExpectedData(Map<String, JSONObject> expectedDataMap) {
 		/* get PHR expected data */
 		JSONObject phrExpectedJson = expectedDataMap.get(CommonConstants.PHR);
