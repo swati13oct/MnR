@@ -125,7 +125,7 @@ public class PlanBenefitsCoveragePage extends UhcDriver {
 
 	}
 
-	public void validatePharmacySaverWidget() {
+	public void validateRightRailWidget() {
 		driver.navigate().refresh();
 		try {
 			Thread.sleep(10000);
@@ -133,6 +133,12 @@ public class PlanBenefitsCoveragePage extends UhcDriver {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		validatePharmacySaverWidget();
+		validatePreferredPharmacyWidget();
+		validateWalgreensWidget();
+	}
+	
+	public void validatePharmacySaverWidget(){
 		boolean present;
 		try {
 			driver.findElement(By.id("Atdd_Pharmacy_Saver_Widget"));
@@ -145,8 +151,36 @@ public class PlanBenefitsCoveragePage extends UhcDriver {
 			System.out.println("@@@@@@@@@ Able to find Pharmacy Saver widget @@@@@@@@@");
 		else
 			System.out.println("@@@@@@@@@ No Pharmacy Saver widget @@@@@@@@@");
+	}
+	
+	public void validatePreferredPharmacyWidget(){
+		boolean present;
+		try {
+			driver.findElement(By.id("ATDD_preferredretail_widget"));
+			present = true;
+		} catch (NoSuchElementException e) {
+			present = false;
+		}
 
+		if(present)
+			System.out.println("@@@@@@@@@ Able to find Preferred Pharmacy widget @@@@@@@@@");
+		else
+			System.out.println("@@@@@@@@@ No Preferred Pharmacy widget @@@@@@@@@");
+	}
+	
+	public void validateWalgreensWidget(){
+		boolean present;
+		try {
+			driver.findElement(By.id("ATDD_walgreens_widget"));
+			present = true;
+		} catch (NoSuchElementException e) {
+			present = false;
+		}
 
+		if(present)
+			System.out.println("@@@@@@@@@ Able to find Walgreens widget @@@@@@@@@");
+		else
+			System.out.println("@@@@@@@@@ No Walgreens widget @@@@@@@@@");
 	}
 
 	public void validatePrefferedRetailDrugCostTable() {
