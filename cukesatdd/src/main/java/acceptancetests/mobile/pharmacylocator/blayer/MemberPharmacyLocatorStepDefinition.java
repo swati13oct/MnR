@@ -23,6 +23,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import pages.mobile.member.blayer.BenefitsSummaryPage;
 import pages.mobile.member.blayer.LoginPage;
 import pages.mobile.member.blayer.PharmacyLocator;
+import pages.mobile.member.blayer.PharmacyLocatorPage;
 import acceptancetests.atdd.data.mobile.member.PageConstants;
 import acceptancetests.atdd.mobile.data.CommonConstants;
 import acceptancetests.mobile.login.data.LoginCommonConstants;

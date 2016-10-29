@@ -212,10 +212,15 @@ public class BenefitsSummaryPage extends PharmacyLocator {
 		}
 	}
 
-	 public void navigateToPharamcyPage(){
-		menu.click();
-		pharamcyLocatorLink.click();
-		
+	public PharmacyLocatorPage navigateToPharmacyLocatorPage(){
+		 menu.click();
+		 pharamcyLocatorLink.click();
+		 if(getTitle().equalsIgnoreCase("Pharmacy Search")){
+			 return new PharmacyLocatorPage(driver);
+		 }
+		 else{
+			 return null;
+		 }
 	 }
 	 
 	 public void validatePharmacyPage(){
