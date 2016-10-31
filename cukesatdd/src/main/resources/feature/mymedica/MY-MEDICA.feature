@@ -26,3 +26,15 @@ Feature: Test case for My MEDICA site
     Examples: 
       | memberid1 | dateOfBirth | userName      | password   | confirmPassword | email          | confirmEmail   |
       | 968993858 | 11-11-1945  | mmc_blayer003 | Password@1 | Password@1      | TEST@OPTUM.COM | TEST@OPTUM.COM |
+
+ Scenario Outline: Verify negativescenarios in My Medica site
+    Given the user is on registration page of My Medica site
+    When the user registers with below details in My Medica site
+      | Plan Member ID | <memberid1>   |
+      | Date of birth  | <dateOfBirth> |
+    Then the user navigate to error page
+    Then the user validate error message
+
+Examples: 
+     | memberid1 | dateOfBirth |
+     | 967169097 | 04-10-1942  |

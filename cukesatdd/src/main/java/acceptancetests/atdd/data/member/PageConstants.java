@@ -12,6 +12,8 @@ public class PageConstants {
 	public static final String ACCOUNT_HOME_PAGE = "accountHomePage";
 
 	public static final String PLAN_CONFIRMATION_PAGE = "planConfirmationPage";
+	
+	public static final String REGISTRATION_ERROR_PAGE = "regErrorPage";
 
 	public static final String CREATE_ACCOUNT_PAGE = "createAccountPage";
 
