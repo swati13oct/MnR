@@ -1,7 +1,7 @@
 /**
  * 
  */
-package pages.mymedica;
+package pages.mypcp;
 
 import java.util.Map;
 

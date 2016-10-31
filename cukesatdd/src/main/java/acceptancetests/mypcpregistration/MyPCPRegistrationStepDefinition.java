@@ -56,7 +56,7 @@ public class MyPCPRegistrationStepDefinition {
 
 	@Given("^the user is on registration page of My PCP site$")
 	public void registration_landing_page() {
-		wd = getLoginScenario().getChromeDriver();
+		wd = getLoginScenario().getWebDriver();
 		wd.manage().window().maximize();
 
 		SignInPage myPcpSignInPage = new SignInPage(wd);
