@@ -118,3 +118,60 @@ And the user searches for pharmacies available in Blue layer site
 Examples:
 | plantype | memberType   | distance  |
 | MAPD     | Individual       |   25      |
+
+
+Scenario Outline:To test Locate a Pharmacy tool in UMS site for MAPD Group
+Given registered member to verify locate a pharmacy in UMS Site
+| Plan Type    | <plantype>   |
+| MemberType  | <memberType> |
+When the user navigates to pharmacy search page in UMS site
+And the user search pharmacies using the below information in UMS site
+| Distance    | <distance>  |
+And the user searches for pharmacies available in UMS site
+And user validates Ballon Mappers
+Then user validates the English pdf content
+Examples:
+| plantype | memberType   | distance  |
+| MAPD     | Individual   |   25      |
+
+
+Scenario Outline:To test Locate a Pharmacy tool in UMS site for MAPD Group
+Given registered member to verify locate a pharmacy in UMS Site
+| Plan Type    | <plantype>   |
+| MemberType  | <memberType> |
+When the user navigates to pharmacy search page in UMS site
+And the user search pharmacies using the below information in UMS site
+| Distance    | <distance>  |
+And the user opts for chinese content in pharmacy search page
+Then the user validates the chinese pdf content
+Examples:
+| plantype | memberType   | distance  |
+| MAPD     | Individual   |   25      |
+
+
+Scenario Outline:To test Locate a Pharmacy tool in UMS site for MAPD Group
+Given registered member to verify locate a pharmacy in UMS Site
+| Plan Type    | <plantype>   |
+| MemberType  | <memberType> |
+When the user navigates to pharmacy search page in UMS site
+And the user search pharmacies using the below information in UMS site
+| Distance    | <distance>  |
+And the user opts for spanish content in pharmacy search page
+Then the user validates the spanish pdf content
+Examples:
+| plantype | memberType   | distance  |
+| MAPD     | Individual   |   25      |
+
+Scenario Outline:To test Locate a Pharmacy tool in UMS site for MAPD Group
+Given registered member to verify locate a pharmacy in UMS Site
+| Plan Type    | <plantype>   |
+| MemberType  | <memberType> |
+When the user navigates to pharmacy search page in UMS site
+And the user search pharmacies using the below information in UMS site
+| Distance    | <distance>  |
+And the user searches for pharmacies available in UMS site
+Then the user validates the pharmacies available in UMS site
+Examples:
+| plantype | memberType   | distance  |
+| MAPD     | Individual   |   25      |
+    	

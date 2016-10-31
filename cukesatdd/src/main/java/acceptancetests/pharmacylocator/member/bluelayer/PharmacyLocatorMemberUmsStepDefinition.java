@@ -453,5 +453,214 @@ public void user_search_pharmacy_available_aarp() {
 			PharmacySearchCommonConstants.PHARMACY_RESULT_ACTUAL,
 			pharmacyResultActualJson);*/
 }
+@And("^the user opts for spanish content in pharmacy search page$")
+public void user_opts_spanish_page() {
+	PharmacySearchPage pharmacySearchPage = (PharmacySearchPage) getLoginScenario()
+			.getBean(PageConstants.PHARMACY_SEARCH_PAGE);
+	String[] pharmacyTypeArray = (String[]) getLoginScenario().getBean(
+			PageConstants.PHARMACY_TYPES);
+	String expectedObjectkey = pharmacySearchPage
+			.getExpectedKey(pharmacyTypeArray);
+
+	/*PharmacyResultPage pharmacyResultPage = pharmacySearchPage
+			.searchesPharmacy();
+	*/
+	PharmacyResultPage pharmacyResultPage = pharmacySearchPage
+			.navigateSpanishContent();
+	
+	/* Get expected data */
+	JSONObject pharmacyResultActualJson = null;
+	@SuppressWarnings("unchecked")
+	Map<String, JSONObject> expectedDataMap = (Map<String, JSONObject>) getLoginScenario()
+			.getBean(CommonConstants.EXPECTED_DATA_MAP);
+	JSONObject pharmacyResultExpectedJson = pharmacyResultPage
+			.getExpectedData(expectedDataMap,expectedObjectkey);
+	getLoginScenario().saveBean(
+			PharmacySearchCommonConstants.PHARMACY_RESULT_EXPECTED,
+			pharmacyResultExpectedJson);
+
+	/* Actual data */
+	if (pharmacyResultPage != null) {
+		getLoginScenario().saveBean(PageConstants.PHARMACY_RESULT_PAGE,
+				pharmacyResultPage);
+		Assert.assertTrue(true);
+		pharmacyResultActualJson = pharmacyResultPage.pharmacyResultJson;
+	}
+	getLoginScenario().saveBean(
+			PharmacySearchCommonConstants.PHARMACY_RESULT_ACTUAL,
+			pharmacyResultActualJson);
+}
+
+@And("^the user opts for chinese content in pharmacy search page$")
+public void user_opts_chinese_page() {
+	PharmacySearchPage pharmacySearchPage = (PharmacySearchPage) getLoginScenario()
+			.getBean(PageConstants.PHARMACY_SEARCH_PAGE);
+	String[] pharmacyTypeArray = (String[]) getLoginScenario().getBean(
+			PageConstants.PHARMACY_TYPES);
+	String expectedObjectkey = pharmacySearchPage
+			.getExpectedKey(pharmacyTypeArray);
+
+	/*PharmacyResultPage pharmacyResultPage = pharmacySearchPage
+			.searchesPharmacy();
+	*/
+	PharmacyResultPage pharmacyResultPage = pharmacySearchPage
+			.navigateChineseContent();
+	
+	/* Get expected data */
+	JSONObject pharmacyResultActualJson = null;
+	@SuppressWarnings("unchecked")
+	Map<String, JSONObject> expectedDataMap = (Map<String, JSONObject>) getLoginScenario()
+			.getBean(CommonConstants.EXPECTED_DATA_MAP);
+	JSONObject pharmacyResultExpectedJson = pharmacyResultPage
+			.getExpectedData(expectedDataMap,expectedObjectkey);
+	getLoginScenario().saveBean(
+			PharmacySearchCommonConstants.PHARMACY_RESULT_EXPECTED,
+			pharmacyResultExpectedJson);
+
+	/* Actual data */
+	if (pharmacyResultPage != null) {
+		getLoginScenario().saveBean(PageConstants.PHARMACY_RESULT_PAGE,
+				pharmacyResultPage);
+		Assert.assertTrue(true);
+		pharmacyResultActualJson = pharmacyResultPage.pharmacyResultJson;
+	}
+	getLoginScenario().saveBean(
+			PharmacySearchCommonConstants.PHARMACY_RESULT_ACTUAL,
+			pharmacyResultActualJson);
+}
+@And("^user validates Ballon Mappers$")
+public void user_validates_Ballon_Mappers() {
+	PharmacyResultPage pharmacyResultPage = (PharmacyResultPage) getLoginScenario()
+			.getBean(PageConstants.PHARMACY_RESULT_PAGE);
+	boolean balonflagvalue=pharmacyResultPage.validateBallonMappers();
+	if(balonflagvalue)
+		Assert.assertTrue(true);
+	else
+		Assert.assertTrue(false);
+	/*JSONObject pharmacyResultActualJson = (JSONObject) getLoginScenario()
+			.getBean(PharmacySearchCommonConstants.PHARMACY_RESULT_ACTUAL);
+	JSONObject pharmacyResultExpectedJson = (JSONObject) getLoginScenario()
+			.getBean(PharmacySearchCommonConstants.PHARMACY_RESULT_EXPECTED);
+
+	System.out.println("pharmacyResultActualJson=====>"
+			+ pharmacyResultActualJson.toString());
+	System.out.println("pharmacyResultExpectedJson===>"
+			+ pharmacyResultExpectedJson.toString());
+	 Validations 
+	try {
+		JSONAssert.assertEquals(pharmacyResultExpectedJson,
+				pharmacyResultActualJson, true);
+	} catch (JSONException e) {
+		e.printStackTrace();
+	}
+
+	pharmacyResultPage.logOut();*/
+
+}
+	
+
+@Then("^the user validates the spanish pdf content$")
+public void user_validates_spanish_pdf_content() {
+	PharmacyResultPage pharmacyResultPage = (PharmacyResultPage) getLoginScenario()
+			.getBean(PageConstants.PHARMACY_RESULT_PAGE);
+	String spanishurl=pharmacyResultPage.getSpanishPdfUrl();
+	if(spanishurl.contains("es"))
+	Assert.assertTrue(true);
+	else
+	Assert.assertTrue(false);
+	/*JSONObject pharmacyResultActualJson = (JSONObject) getLoginScenario()
+			.getBean(PharmacySearchCommonConstants.PHARMACY_RESULT_ACTUAL);
+	JSONObject pharmacyResultExpectedJson = (JSONObject) getLoginScenario()
+			.getBean(PharmacySearchCommonConstants.PHARMACY_RESULT_EXPECTED);
+
+	System.out.println("pharmacyResultActualJson=====>"
+			+ pharmacyResultActualJson.toString());
+	System.out.println("pharmacyResultExpectedJson===>"
+			+ pharmacyResultExpectedJson.toString());
+	 Validations 
+	try {
+		JSONAssert.assertEquals(pharmacyResultExpectedJson,
+				pharmacyResultActualJson, true);
+	} catch (JSONException e) {
+		e.printStackTrace();
+	}
+
+	pharmacyResultPage.logOut();
+*/
+}
+
+@Then("^the user validates the chinese pdf content$")
+public void user_validates_chinese_pdf_content() {
+	PharmacyResultPage pharmacyResultPage = (PharmacyResultPage) getLoginScenario()
+			.getBean(PageConstants.PHARMACY_RESULT_PAGE);
+	String chineseUrl=pharmacyResultPage.getChinesePdfUrl();
+	System.out.println("chineseUrl"+chineseUrl);
+	if(chineseUrl.contains("zh_cn"))
+	Assert.assertTrue(true);
+	else
+	Assert.assertTrue(false);	
+	/*JSONObject pharmacyResultActualJson = (JSONObject) getLoginScenario()
+			.getBean(PharmacySearchCommonConstants.PHARMACY_RESULT_ACTUAL);
+	JSONObject pharmacyResultExpectedJson = (JSONObject) getLoginScenario()
+			.getBean(PharmacySearchCommonConstants.PHARMACY_RESULT_EXPECTED);
+
+	System.out.println("pharmacyResultActualJson=====>"
+			+ pharmacyResultActualJson.toString());
+	System.out.println("pharmacyResultExpectedJson===>"
+			+ pharmacyResultExpectedJson.toString());
+	 Validations 
+	try {
+		JSONAssert.assertEquals(pharmacyResultExpectedJson,
+				pharmacyResultActualJson, true);
+	} catch (JSONException e) {
+		e.printStackTrace();
+	}
+*/
+	//pharmacyResultPage.logOut();
+
+
+}
+@Then("^user validates the English pdf content$")
+public void user_validates_English_pdf_content() {
+	PharmacyResultPage pharmacyResultPage = (PharmacyResultPage) getLoginScenario()
+			.getBean(PageConstants.PHARMACY_RESULT_PAGE);
+	String EnglishPdfUrl=pharmacyResultPage.getEnglishPdfUrl();
+	System.out.println("EnglishPdfUrl"+EnglishPdfUrl);
+	if(EnglishPdfUrl.contains("en_us"))
+	{
+	System.out.println("true");	
+	Assert.assertTrue(true);
+	}
+	else
+	{
+	System.out.println("false");
+	Assert.assertTrue(false);
+	}
+	/*JSONObject pharmacyResultActualJson = (JSONObject) getLoginScenario()
+			.getBean(PharmacySearchCommonConstants.PHARMACY_RESULT_ACTUAL);
+	JSONObject pharmacyResultExpectedJson = (JSONObject) getLoginScenario()
+			.getBean(PharmacySearchCommonConstants.PHARMACY_RESULT_EXPECTED);
+
+	System.out.println("pharmacyResultActualJson=====>"
+			+ pharmacyResultActualJson.toString());
+	System.out.println("pharmacyResultExpectedJson===>"
+			+ pharmacyResultExpectedJson.toString());*/
+	/* Validations */
+	/*try {
+		JSONAssert.assertEquals(pharmacyResultExpectedJson,
+				pharmacyResultActualJson, true);
+	} catch (JSONException e) {
+		e.printStackTrace();
+	}
+*/
+	try {
+		Thread.sleep(15000);
+	} catch (InterruptedException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
+	//pharmacyResultPage.logOut();
+}
+
 }
 
