@@ -95,14 +95,17 @@ public class RegistrationHomePage extends UhcDriver{
 		
 	}
 
-	public void switchBack() {
-		
-
-		
+	public void switchBack() {		
 		ArrayList<String> tabs = new ArrayList<String> (driver.getWindowHandles());
 	    driver.switchTo().window(tabs.get(0));
-		// TODO Auto-generated method stub
-		
 	}
-	// TODO Auto-generated method stub
+	
+	public RegistrationAARPErrorPage navigateToErrorPage() {		
+		if (driver.getTitle().equalsIgnoreCase(
+				"AARP Medicare Plans | Registration")) {
+			return new RegistrationAARPErrorPage(driver);
+		}
+		return null;
+	}
+	
 }
