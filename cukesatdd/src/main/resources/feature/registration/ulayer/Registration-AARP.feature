@@ -124,7 +124,7 @@ Examples:
 
 Scenario Outline: To verify registration negative scenarios in AARP site
 Given the user is on registration page of AARP site 
-When the user registers with below details in AARP site
+When the user registers with dob and memberId in AARP site
 	| Plan Member ID         | <planMemberId> |	
 	| Date of birth          | <dateOfBirth>  |
 Then the user navigate to registration error page of AARP site
