@@ -37,6 +37,26 @@
 {
 "identifier":"xpath",
 "elementName":"//div[@id='planinformation']/div[2]/div[1]/span[2]"
+},
+"Formulary Additions":
+{
+"identifier":"xpath",
+"elementName":"//a[text()='Formulary Additions']"
+},
+"Prior Autorization":
+{
+"identifier":"xpath",
+"elementName":"//a[text()='Prior Authorization']"
+},
+"Step Therapy":
+{
+"identifier":"xpath",
+"elementName":"//a[text()='Step Therapy']"
+},
+"Formulary Deletions":
+{
+"identifier":"xpath",
+"elementName":"//a[text()='Formulary Deletions']"
 }
 }
 }

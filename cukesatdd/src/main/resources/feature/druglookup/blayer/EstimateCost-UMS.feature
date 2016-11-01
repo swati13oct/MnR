@@ -66,3 +66,15 @@ Examples:
 	| MAPD      |  Individual  | Standard Network Pharmacies  | 25 miles       | CVS Pharmacy                 |
 #	| MAPD      |  Group       | Preferred Retail Pharmacies  | 25 miles       | Walgreens #3766              |
 #	| PDP       |  Group       | Pharmacy Saver™ Pharmacy     | 25 miles       | Jay C Food Stores            |
+
+Scenario Outline:To verify pdfs displayed in DCE in UMS site
+Given registered UHC member with following details for estimate drug cost
+| Plan Type   | <planType>   |
+| Member Type | <memberType> | 
+When the user navigates to estimate costs
+And the user selects the pharmacy type and distance in UMS site
+		| Pharmacy Type | <pharmacyType> |
+		| Distance      | <distance>     |
+And the user selects a pharmacy from the given list in UMS site
+ 		| <pharmacyName> |
+Then user will validate the Pdfs in view Drug cost page in UMS site
