@@ -121,3 +121,15 @@ Examples:
 	| planMemberId | dateOfBirth | additionalPlanMemberId | userName    | password   | confirmPassword | email                   | confirmEmail     |
 #	| 0117044081   | 05-07-1925  | 011704408-11           | q3combo_003 | Password@1 | Password@1      | TEST@OPTUM.COM          | TEST@OPTUM.COM   |
 #	| 950298748    | 10-21-1953  | 950298748-11           | q4combo_008 | Password@1 | Password@1      | TEST@OPTUM.COM          | TEST@OPTUM.COM   |
+
+Scenario Outline: To verify registration negative scenarios in AARP site
+Given the user is on registration page of AARP site 
+When the user registers with below details in AARP site
+	| Plan Member ID         | <planMemberId> |	
+	| Date of birth          | <dateOfBirth>  |
+Then the user navigate to registration error page of AARP site
+Then the user validate registration error message of AARP site
+
+Examples:
+	 | planMemberId | dateOfBirth |
+	 | 951498845    | 08-12-1945  |
