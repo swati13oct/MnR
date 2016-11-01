@@ -23,6 +23,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import pages.mobile.member.blayer.BenefitsSummaryPage;
 import pages.mobile.member.blayer.LoginPage;
 import pages.mobile.member.blayer.PharmacyLocator;
+import pages.mobile.member.blayer.PharmacyLocatorPage;
 import acceptancetests.atdd.data.mobile.member.PageConstants;
 import acceptancetests.atdd.mobile.data.CommonConstants;
 import acceptancetests.mobile.login.data.LoginCommonConstants;
@@ -151,16 +152,15 @@ public class MemberPharmacyLocatorStepDefinition {
 	@And("^user Clicks on Menu tab and click Pharmacy locator$")
 	public void memberNavigatesToPharmacyLocator(){
 		BenefitsSummaryPage benefitsSummaryPage = (BenefitsSummaryPage)getLoginScenario().getBean(PageConstants.BENEFITS_SUMMARY_PAGE);
- 		getLoginScenario().saveBean(PageConstants.BENEFITS_SUMMARY_PAGE, benefitsSummaryPage);
-		benefitsSummaryPage.navigateToPharamcyPage();
-		System.out.println("clicked");	
+		PharmacyLocatorPage pharmacyLocatorPage = benefitsSummaryPage.navigateToPharmacyLocatorPage();
+		getLoginScenario().saveBean(PageConstants.PHARMACY_LOCATOR_PAGE, pharmacyLocatorPage);	
  	}
 	
 	@Then("^user clicks on pharmacy locator link and validates the scenarios$")
 	public void memberValidatesRequirement(){
-		BenefitsSummaryPage pharmacyLocator = (BenefitsSummaryPage) getLoginScenario().getBean(PageConstants.BENEFITS_SUMMARY_PAGE);
- 	    pharmacyLocator.validatePharmacyPage();		 
-	}
+	 	PharmacyLocatorPage pharmacyLocatorPage = (PharmacyLocatorPage) getLoginScenario().getBean(PageConstants.PHARMACY_LOCATOR_PAGE);
+	 	pharmacyLocatorPage.narrowSearchValidation();
+ 	}
 	
 	@After
 	public void tearDown() {
