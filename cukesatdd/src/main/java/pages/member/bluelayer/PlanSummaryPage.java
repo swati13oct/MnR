@@ -43,6 +43,9 @@ public class PlanSummaryPage extends UhcDriver {
 
 	@FindBy(id = "disclosure_link")
 	private WebElement logOut;
+	
+	@FindBy(id="btn_viewdetails")
+	private WebElement viewDetailsButton;
 
 	private PageData planSummary;
 
@@ -173,6 +176,22 @@ public class PlanSummaryPage extends UhcDriver {
 		// TODO Auto-generated method stub
 		
 	}
+	public DrugCostandBenefitSummaryPage clickViewDetails() {
+		viewDetailsButton.click();
+		try {
+			Thread.sleep(10000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		if (getTitle().equalsIgnoreCase(
+						"UnitedHealthcare Medicare Solutions | Drug Cost and Benefits Summary")) {
+			System.out.println("entered this method");
+			return new DrugCostandBenefitSummaryPage(driver);
+		}
 
+		return null;
+		
+	}
 }
 

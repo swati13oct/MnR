@@ -27,7 +27,11 @@ public class DrugCostandBenefitSummaryPage extends UhcDriver {
 	private WebElement logOut;
 
 	@FindBy(xpath = "//div[@id='main_content']/div[2]/div/div[2]/div[2]/div/h2")
-	private WebElement drugCostHeading;;
+	private WebElement drugCostHeading;
+	
+	@FindBy(xpath = "//div[@class='totalDrugCostImgBlock']/div/img")
+	private WebElement TroopMeterPresent;
+	
 	
 	private PageData drugCostBenefitSummary;
 
@@ -79,5 +83,21 @@ public class DrugCostandBenefitSummaryPage extends UhcDriver {
 		drugCostBenefitSummaryExpectedJson = CommonUtility.mergeJson(
 				drugCostBenefitSummaryExpectedJson, globalExpectedJson);
 		return drugCostBenefitSummaryExpectedJson;
+	}
+	public boolean validateTroopMeterPresence() {
+		// TODO Auto-generated method stub
+		boolean TroopMeterPresence=false;
+		try
+		{
+		if(TroopMeterPresent.isDisplayed())
+		{
+			TroopMeterPresence=true;
+		}
+		}
+		catch(Exception e)
+		{
+			TroopMeterPresence=false;
+		}
+		return TroopMeterPresence;
 	}
 }

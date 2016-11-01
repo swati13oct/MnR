@@ -76,6 +76,18 @@ public class PharmacySearchPage extends UhcDriver {
 	@FindBy(xpath = "////*[@id='subPageLeft']/div[2]/div[2]/h3[2]/a")
 	private WebElement createPdfLink;
 	
+	@FindBy(xpath = "//a[text()='中文']")
+	private WebElement chineseContent;
+	
+	@FindBy(xpath = "//a[text()='search']")
+	private WebElement chineseSearch;
+	
+	@FindBy(xpath = "//a[text()='español']")
+	private WebElement spanishContent;
+	
+	@FindBy(xpath = "//a[text()='search']")
+	private WebElement spanishSearch;
+	
 	public String county = null;
 
 	public PharmacySearchPage(WebDriver driver) {
@@ -225,5 +237,35 @@ public class PharmacySearchPage extends UhcDriver {
 		}
 
 		return key;
+	}
+	public PharmacyResultPage navigateChineseContent() {
+
+		chineseContent.click();
+		try {
+			Thread.sleep(10000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		chineseSearch.click();
+		CommonUtility.waitForPageLoad(driver, pharmacySearchResultMsg, CommonConstants.TIMEOUT_30);
+		if (driver.getTitle().equalsIgnoreCase(
+				"UnitedHealthcare Medicare Solutions | Pharmacy Directory")) {
+			return new PharmacyResultPage(driver);
+		}
+		return null;
+
+	}
+	public PharmacyResultPage navigateSpanishContent() {
+
+		spanishContent.click();
+		spanishSearch.click();
+		CommonUtility.waitForPageLoad(driver, pharmacySearchResultMsg, CommonConstants.TIMEOUT_30);
+		if (driver.getTitle().equalsIgnoreCase(
+				"UnitedHealthcare Medicare Solutions | Pharmacy Directory")) {
+			return new PharmacyResultPage(driver);
+		}
+		return null;
+
 	}
 }
