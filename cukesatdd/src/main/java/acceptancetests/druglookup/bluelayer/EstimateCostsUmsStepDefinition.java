@@ -932,6 +932,57 @@ public void uservalidate_selects_pharmacy_type_distance(DataTable pharmacyAttrib
 		e.printStackTrace();
 	}
 }
+@Then("^user will validate the Pdfs in view Drug cost page in UMS site$")
+public void user_validate_pdf_ViewDrugCostPage() {
+	ViewDrugCostPage viewDrugCostPage = (ViewDrugCostPage) getLoginScenario()
+			.getBean(PageConstants.VIEW_DRUG_COST_PAGE);
+	JSONObject viewDrugCostExpectedJson = (JSONObject) getLoginScenario()
+			.getBean(DceCommonConstants.VIEW_DRUG_COST_EXPECTED);
+	JSONObject viewDrugCostActualJson = (JSONObject) getLoginScenario()
+			.getBean(DceCommonConstants.VIEW_DRUG_COST_ACTUAL);
+
+	System.out.println("viewDrugCostActualJson=====>"
+			+ viewDrugCostActualJson.toString());
+	System.out.println("viewDrugCostExpectedJson===>"
+			+ viewDrugCostExpectedJson.toString());
+	/* Validations */
+	try {
+		JSONAssert.assertEquals(viewDrugCostExpectedJson,
+				viewDrugCostActualJson, true);
+	} catch (JSONException e) {
+		e.printStackTrace();
+	}
+
+	/* Deleting added drug */
+	ManageDrugPage manageDrugPage = viewDrugCostPage.editDrugList();
+
+	manageDrugPage.logOut();
+
+}
+
+@Then("^user will validate the Pdf in view Drug cost page in UMS site$")
+public void user_will_validate_the_Drug_cost_informations() {
+	ViewDrugCostPage viewDrugCostPage = (ViewDrugCostPage) getLoginScenario()
+			.getBean(PageConstants.VIEW_DRUG_COST_PAGE);
+	JSONObject viewDrugCostExpectedJson = (JSONObject) getLoginScenario()
+			.getBean(DceCommonConstants.VIEW_DRUG_COST_EXPECTED);
+	JSONObject viewDrugCostActualJson = (JSONObject) getLoginScenario()
+			.getBean(DceCommonConstants.VIEW_DRUG_COST_ACTUAL);
+
+	System.out.println("viewDrugCostActualJson=====>"
+			+ viewDrugCostActualJson.toString());
+	System.out.println("viewDrugCostExpectedJson===>"
+			+ viewDrugCostExpectedJson.toString());
+	/* Validations */
+	try {
+		JSONAssert.assertEquals(viewDrugCostExpectedJson,
+				viewDrugCostActualJson, true);
+	} catch (JSONException e) {
+		e.printStackTrace();
+	}
+	
+
+}
 }
 	//Selecting pharmacyType and distance 
 	
