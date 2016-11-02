@@ -21,8 +21,10 @@ import cucumber.table.DataTable;
 import gherkin.formatter.model.DataTableRow;
 import pages.member.bluelayer.AccountHomePage;
 import pages.member.bluelayer.BenefitsCoveragePage;
+import pages.member.bluelayer.FormsandresourcesPage;
 import pages.member.bluelayer.LoginPage;
 import pages.member.bluelayer.PlanSummaryPage;
+import pages.member.bluelayer.Rallytool_Page;
 
 
 public class RallytoolUHCStepDefinition {
@@ -81,25 +83,29 @@ public class RallytoolUHCStepDefinition {
  			getLoginScenario().saveBean(PageConstants.ACCOUNT_HOME_PAGE, accountHomePage);
   		}
 	}
-	/*@Then("^user clicks on search provider link and rallytool launches in new tab$")
-	public void launchRallyTool() throws InterruptedException{
-	 AccountHomePage accountHomePage =(AccountHomePage) getLoginScenario().getBean(PageConstants.ACCOUNT_HOME_PAGE);
-	 Rallytool_Page rallyPage = accountHomePage.navigateToRallyPage();
-	}
 
 	@Then ("^the user navigates to plan and coverage page and validates RallyTool$")
 	public void launchRallyToo_from_BenefitAndCoverage(){
 		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstants.ACCOUNT_HOME_PAGE);
-		PlanSummaryPage planSummaryPage = accountHomePage.navigateToPlanSummary();
-		BenefitsCoveragePage benefitCoveragePage = planSummaryPage.navigateToBenefitCoverage();
-        benefitCoveragePage.validateRallyTool();
-	}
+		 BenefitsCoveragePage bNc = accountHomePage.navigateToBnC();
+		 Rallytool_Page rallyPage=bNc.clickAndValidateProviderSearch();
+		 rallyPage.navigateToRallyPageSSO();
+ 	}
 	
 	@Then("^the user navigates to forms and resources page and validates RallyTool$")
 	public void navigateToRallyPage(){
 		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstants.ACCOUNT_HOME_PAGE);
-        PlanSummaryPage planSummaryPage = accountHomePage.n
+        FormsandresourcesPage formsAndResources = accountHomePage.navigateToFormsandResourcePage();
+        Rallytool_Page rallyPage=formsAndResources.clickAndValidateProviderSearch();
+        rallyPage.navigateToRallyPageSSO();
 	}
-	*/
+		
+	@Then("^the user navigates to plan summary page and validates RallyTool$")
+	public void plan_summary_navigate_sso(){
+		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstants.ACCOUNT_HOME_PAGE);
+        PlanSummaryPage planSummary = accountHomePage.navigateToPlanSummary();
+        Rallytool_Page rallytool_Page = planSummary.clickAndValidateProviderSearch();
+        rallytool_Page.navigateToRallyPageSSO();
+	}
 	
 }

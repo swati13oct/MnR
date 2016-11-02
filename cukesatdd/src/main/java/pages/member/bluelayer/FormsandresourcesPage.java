@@ -47,6 +47,9 @@ public class FormsandresourcesPage extends UhcDriver {
 	@FindBy(xpath = "//*[@id='SummaryofBenefits_-1609990126']/p/a")
 	private WebElement PDF1;
 
+	@FindBy(xpath=".//*[contains(text(),'search providers')]")
+	private WebElement searchProvider;
+	
 	private PageData formsAndResources;
 
 	public JSONObject formsAndResourcesJson;
@@ -92,6 +95,20 @@ public class FormsandresourcesPage extends UhcDriver {
 		logOut.click();
 
 	}
+	 public Rallytool_Page clickAndValidateProviderSearch(){
+		  // waitforElement(searchProviderButton);
+		   searchProvider.click();
+		   switchToNewTab();
+		   if(currentUrl().contains("connect.werally.com")){
+			   System.out.println("Rally Tool Launched Sucessfully");
+			   System.out.println("--------------Page Title="+getTitle());
+			   return new Rallytool_Page(driver);
+		   }else{
+			   System.out.println("-------------Failed as rally did not launch in new tab-------------");
+			   Assert.fail();
+			   return null;
+		   }
+	   }
 	public void validatePlanName(){
     	String planName = LoginCommonConstants.PLAN_NAME;
     	System.out.println(planName);

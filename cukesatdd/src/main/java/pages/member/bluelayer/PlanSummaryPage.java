@@ -43,6 +43,9 @@ public class PlanSummaryPage extends UhcDriver {
 	
 	@FindBy(xpath = "/html/body/div[6]/div/div/table/tbody/tr[5]/td/div[2]/div/div[2]/div[2]/div[2]/div/div[160]/div[2]/div[1]/div[2]/div/div[3]/div[2]/div[2]/div/div/p/a")
 	private WebElement viewdetailbutton;
+	
+	@FindBy(xpath=".//*[contains(text(),'search providers')]")
+	private WebElement searchProvider;
 
 	@FindBy(id = "disclosure_link")
 	private WebElement logOut;
@@ -83,7 +86,20 @@ public class PlanSummaryPage extends UhcDriver {
 		logOut.click();
 
 	}
-
+	public Rallytool_Page clickAndValidateProviderSearch(){
+		  // waitforElement(searchProviderButton);
+		   searchProvider.click();
+		   switchToNewTab();
+		   if(currentUrl().contains("connect.werally.com")){
+			   System.out.println("Rally Tool Launched Sucessfully");
+			   System.out.println("--------------Page Title="+getTitle());
+			   return new Rallytool_Page(driver);
+		   }else{
+			   System.out.println("-------------Failed as rally did not launch in new tab-------------");
+			   Assert.fail();
+			   return null;
+		   }
+	   }
 	@Override
 	public void openAndValidate() {
 

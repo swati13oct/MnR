@@ -9,6 +9,7 @@ import java.util.Map;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
@@ -30,6 +31,9 @@ public class BenefitsCoveragePage extends UhcDriver {
 
 	@FindBy(id = "disclosure_link")
 	private WebElement logOut;
+	
+	@FindBy(xpath="//*[text()='search providers']")
+	private WebElement searchProviderButton;
 
 	private PageData benefitsAndCoverage;
 
@@ -91,7 +95,20 @@ public class BenefitsCoveragePage extends UhcDriver {
 		logOut.click();
 
 	}
-
+	public Rallytool_Page clickAndValidateProviderSearch(){
+		  // waitforElement(searchProviderButton);
+		   searchProviderButton.click();
+		   switchToNewTab();
+		   if(currentUrl().contains("systest3.myuhc")){
+			   System.out.println("SSO Launched");
+			   System.out.println("--------------Page Title="+getTitle());
+			   return new Rallytool_Page(driver);
+		   }else{
+			   System.out.println("-------------Failed as rally did launch in new tab-------------");
+			   Assert.fail();
+			   return null;
+		   }
+	   }
 	
 	public JSONObject getActualPdfLinksData() {
 		String fileName = CommonConstants.B_AND_C_PDF_MEMBER_PAGE_DATA;
