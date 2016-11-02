@@ -6,15 +6,18 @@ package pages.member.bluelayer;
 import java.util.List;
 import java.util.Map;
 
+import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.FindBys;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.Select;
 
 import acceptancetests.atdd.data.CommonConstants;
 import acceptancetests.atdd.util.CommonUtility;
+import acceptancetests.login.data.LoginCommonConstants;
 import atdd.framework.UhcDriver;
 
 /**
@@ -75,6 +78,9 @@ public class PharmacySearchPage extends UhcDriver {
 	
 	@FindBy(xpath = "////*[@id='subPageLeft']/div[2]/div[2]/h3[2]/a")
 	private WebElement createPdfLink;
+	
+	@FindBy(id="plan")
+	private WebElement planDropDown;
 	
 	public String county = null;
 
@@ -181,7 +187,22 @@ public class PharmacySearchPage extends UhcDriver {
 		System.out.println("CreatePdf clicked");
 		return new PharmacySearchPage(driver);
 	}
-
+	public void validatePlanName(){
+    	String planName = LoginCommonConstants.PLAN_NAME;
+    	Select dropDown = new Select(planDropDown);
+    	List<WebElement> dropDownValues = dropDown.getOptions();
+    	for(int i = 0; i<dropDownValues.size();i++){
+    		System.out.println(dropDownValues.get(i).getText());
+    		if(dropDownValues.get(i).getText().contains(planName)){
+    			System.out.println("-----------Scenario pass as planName="+planName);
+    		}
+    		else if(dropDownValues.get(i).getText().contains("UnitedHealthcare Medicare Rx"))
+    		{
+    			System.out.println("---------------Failed due to presence of UnitedHealthcare Medicare Rx");
+    			Assert.fail();
+    		}
+    	}   	 	
+ }
 	@Override
 	public void openAndValidate() {
 		validate(continueField);

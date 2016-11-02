@@ -41,5 +41,5 @@ public class LoginCommonConstants {
 
 	public static final String MEMBER_BENEFITS_AND_COVERAGE = "benefitsandcoverage";
 	
-	
+	public static String PLAN_NAME;
 }
