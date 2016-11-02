@@ -810,6 +810,10 @@ public class CommonConstants {
 	public static final String FORMS_AND_RESOURCES_PLANMATERIAL_SECTION_PDFS_AARP = "plandocpdfs.json";
 	public static final String REGISTRATION_ERROR_PAGE_DATA = "registrationerrorpage.json";
 
+	public static final String SIERRA_PLAN_NAME = "UnitedHealthcare MedicareComplete Choice (PPO)";
+
+	public static final String BENEFITS_AND_COVERAGE_MAPD_LIS_NONUS_PAGE_DATA = null;
+
 	
 
 	
