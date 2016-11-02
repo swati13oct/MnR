@@ -462,7 +462,8 @@ public class AccountHomePage extends UhcDriver {
 			return true;
 		}
 		return false;
-
+	}
+		
 	/**
 	* Below method will validate plan name: 'uhcMedicareCompleteChoicePPO'
 	* Added as part of commandos team

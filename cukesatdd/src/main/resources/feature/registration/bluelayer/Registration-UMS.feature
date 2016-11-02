@@ -40,3 +40,15 @@ Then the user registers successfully in UMS site
 Examples:
 	 | planMemberId | dateOfBirth | userName           | password   | confirmPassword | email                   | confirmEmail            |
 	 | 006916255    | 08-13-1931  | apr_blayer069      | Password@1 | Password@1      | UHCMNRPORTALS@GMAIL.COM | UHCMNRPORTALS@GMAIL.COM |
+
+Scenario Outline: To verify registration negative scenarios in UMS site
+Given the user is on registration page of UMS site 
+When the user registers with below details in UMS site
+	| Plan Member ID         | <planMemberId> |	
+	| Date of birth          | <dateOfBirth>  |
+Then the user navigate to error page
+Then the user validate error message
+
+Examples:
+	 | planMemberId | dateOfBirth |
+	 | 951498845    | 08-12-1945  |

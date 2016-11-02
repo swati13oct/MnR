@@ -13,6 +13,8 @@ public class CommonConstants {
 	
 	public static final String FLOW_NAME = "registration/planconfirmation";
 	
+	public static final String REG_FAILURE_FLOW_NAME = "registration/registrationfailure";
+	
 	public static final String PROPERTY_FILE_FOLDER = "/config";
 	
 	public static final String PROPERTY_FILE_NAME = "config.properties";
@@ -47,12 +49,6 @@ public class CommonConstants {
 	
 
 	public static final String BENEFITS_AND_COVERAGE_PDP_NONLIS_NONUS_PAGE_DATA = "planbenefitsandcoveragenonlisnotusother.json";
-
-	public static final String BENEFITS_AND_COVERAGE_MAPD_NONLIS_RIDERS_PAGE_DATA = "bncWithRidersAndSplitTier.json";
-	
-	public static final String BENEFITS_AND_COVERAGE_MAPD_LIS_NONUS_PAGE_DATA = "planbenefitsandcoveragelisnotusother.json";
-	
-	public static final String BENEFITS_AND_COVERAGE_MAPD_NONLIS_NO_RIDERS_PAGE_DATA = "bncWithoutRidersAndSplitTier.json";
 
 	public static final String BENEFITS_AND_COVERAGE_DIRECTORY = "/jsonresponse/member/ulayer/planbenefitsandcoverage/";
 
@@ -91,7 +87,6 @@ public class CommonConstants {
 	public static final String DTM_TAG_MEMBER_FILENAME = "member";
 	public static final String DTM_TAG_ACQ_FILENAME = "acquisition";
 	public static final String PAGE_OBJECT_DTM_TAG_DIR = "/page-objects/dtm-common-data/";
-	public static final String SIERRA_PLAN_NAME = "UnitedHealthcare MedicareComplete Choice (PPO)";
 
 	public static final Page[] PAGES = {
 			new Page(CommonConstants.GLOBAL, CommonConstants.GLOBAL_DIRECTORY),
@@ -349,6 +344,8 @@ public class CommonConstants {
 			};
 
 	public static final String PAGE_OBJECT_DIRECTORY_BLUELAYER_MEMBER = "/page-objects/member/bluelayer/";
+	
+	public static final String PAGE_OBJECT_DIRECTORY_MYMEDICA_MEMBER = "/page-objects/member/mymedica/";
 
 	public static final String RETIREE_PAGE_OBJECT_DIRECTORY = "/page-objects/uhcretiree/acquisition/";
 
@@ -440,6 +437,8 @@ public class CommonConstants {
 	public static final String SITE_ULAYER = "ulayer";
 
 	public static final String SITE_BLUELAYER = "bluelayer";
+	
+	public static final String SITE_MYMEDICA = "mymedica";
 
 	public static final String SITE_UHCRETIREE = "uhcretiree";
 	
@@ -809,10 +808,12 @@ public class CommonConstants {
 	public static final String AARPM_FR_PDF_PAGE_DATA = "nextyearpdfs.json";
 	public static final String FORMS_AND_RESOURCES_PLANMATERIAL_SECTION_PDFS = "planmaterialpdfs.json";
 	public static final String FORMS_AND_RESOURCES_PLANMATERIAL_SECTION_PDFS_AARP = "plandocpdfs.json";
-	public static final String B_AND_C_MA_MEMBER_RIDER = "benefitsandcoveragemalisrider.json";
-	public static final String B_AND_C_MA_MEMBER_NON_RIDER = "benefitsandcoveragemalisnonrider.json";
-	public static final String B_AND_C_MAPD_NON_LIS_RIDER ="bncmapdnonlisdeductible.json";
-	public static final String B_AND_C_MAPD_NON_LIS_NON_RIDER= "bncmapdnonlisdeductiblenonrider.json";
+	public static final String REGISTRATION_ERROR_PAGE_DATA = "registrationerrorpage.json";
+
+	public static final String SIERRA_PLAN_NAME = "UnitedHealthcare MedicareComplete Choice (PPO)";
+
+	public static final String BENEFITS_AND_COVERAGE_MAPD_LIS_NONUS_PAGE_DATA = null;
+
 	
 
 	

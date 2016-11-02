@@ -27,3 +27,16 @@ Feature: Test case for My PCP site
     Examples: 
       | memberid1 | dateOfBirth | userName  | password   | confirmPassword | email                   | confirmEmail            |
       | 950592474 | 12-12-1946  | blpcp_012 | Password@1 | Password@1      | UHCMNRPORTALS@GMAIL.COM | UHCMNRPORTALS@GMAIL.COM |
+      
+      
+ Scenario Outline: Verify negativescenarios in My PCP site
+    Given the user is on registration page of My PCP site
+    When the user registers with below details in My PCP site
+      | Plan Member ID | <memberid1>   |
+      | Date of birth  | <dateOfBirth> |
+    Then the user navigate to error page
+    Then the user validate error message
+
+Examples: 
+     | memberid1 | dateOfBirth |
+     | 967169097 | 04-10-1942  |
