@@ -4,9 +4,7 @@
 package pages.acquisition.ulayer;
 
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -17,18 +15,11 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-import org.skyscreamer.jsonassert.JSONAssert;
 
 import acceptancetests.atdd.data.CommonConstants;
 import acceptancetests.atdd.data.PageData;
-import acceptancetests.atdd.data.acquisition.PageConstants;
 import acceptancetests.atdd.util.CommonUtility;
-import acceptancetests.vpp.data.VPPCommonConstants;
-import atdd.framework.MRScenario;
 import atdd.framework.UhcDriver;
-import cucumber.annotation.en.And;
-import cucumber.table.DataTable;
-import gherkin.formatter.model.DataTableRow;
 
 /**
  * @author gumeshna
@@ -321,7 +312,16 @@ public class PlanDetailsPage extends UhcDriver {
             System.out.println("Fail");
         
         
-    }   	
+    }
+
+	public GetStartedPage clicksOnEnterDrugInformationLink() {
+		enterDrugInfoLink.click();
+
+		if (currentUrl().contains("/estimate-drug-costs")) {
+			return new GetStartedPage(driver);
+		}
+		return null;
+	}   	
 
 
 

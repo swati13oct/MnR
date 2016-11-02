@@ -485,6 +485,16 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		return currentYearFlag;
 	}
 	
+	
+	public VPPPlanSummaryPage togglePlanYear(String planType) {
+		
+		validate(toggleplanYear);
+		if (toggleplanYear != null) {
+			toggleplanYear.click();
+		}
+		return new VPPPlanSummaryPage(driver, planType);
+	}
+	
 	public  void clicksOnMAProviderCoveredLink()
 	{
 		MaProviderLink.click();

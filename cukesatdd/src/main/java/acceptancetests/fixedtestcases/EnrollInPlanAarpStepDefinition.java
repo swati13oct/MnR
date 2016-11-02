@@ -44,8 +44,6 @@ import acceptancetests.atdd.util.CommonUtility;
 import acceptancetests.enrollinplan.data.EnrollInPlanCommonConstants;
 import acceptancetests.vpp.data.VPPCommonConstants;
 import atdd.framework.MRScenario;
-import cucumber.annotation.After;
-import cucumber.annotation.Before;
 import cucumber.annotation.en.And;
 import cucumber.annotation.en.Given;
 import cucumber.annotation.en.Then;
@@ -66,11 +64,11 @@ public class EnrollInPlanAarpStepDefinition {
 	public MRScenario getLoginScenario() {
 		return loginScenario;
 	}
-
-	/*	@Before
+/*
+	@Before
 	public void setup(){
 		
-		 * Format(MM-DD-YYYY) Pre-AEP Test
+		  Format(MM-DD-YYYY) Pre-AEP Test 
 		 
 		String date = "09-30-2016";
 		CommonUtility.changeMRRestTime(getLoginScenario(), date);
@@ -1631,13 +1629,16 @@ public class EnrollInPlanAarpStepDefinition {
 		}*/
 
 	}
-	@After
+/*	@After
 	public void tearDown() {
 		WebDriver wd = (WebDriver) getLoginScenario().getBean(
 				CommonConstants.WEBDRIVER);
 		wd.quit();
 		getLoginScenario().flushBeans();
-	}
+		
+		CommonUtility.resetMRRestTime(getLoginScenario());
+		CommonUtility.resetPartDTime(getLoginScenario());
+	}*/
 
 	public static boolean isAlertPresent(FirefoxDriver wd) {
 		try {

@@ -1,0 +1,23 @@
+{
+   "planName":"2016 Prescription Drug Plan Details\nAARP MedicareRx Preferred (PDP)",
+   "prescriptionDrugCovrageLink":"Prescription Drug Coverage",
+   "planpdf_generalPlanInfo_otherlanguages":"Formulario de Inscripción (PDF)\n\nComprobante de Cobertura (PDF)\n\nResumen de Beneficios (PDF)\n\nClasificación de la Calidad del Plan (PDF)\n\nAviso Annual de Cambios (PDF)2",
+   "planCost_planPremium_monthlyCost":"$66",
+   "drugCopayTableRow":"Prescription Drugs Your Costs",
+   "annualPrescriptionDeductible":"$0",
+   "planCost_planPremium_annualCost":"$792",
+   "planCost_planPremium_description":"The monthly fee you pay to the plan for your health care. The amount shown does not include the Part B premium you already pay to the government. You must continue to pay your Medicare Part B premium if not otherwise paid for under Medicaid or by another third party.",
+   "backToplansLinkBottomSection":"Enroll in a plan",
+   "planpdf_generalPlanInfo_english":"Enrollment Form (PDF)\n\nEvidence of Coverage (PDF)\n\nSummary of Benefits (PDF)\n\nStar Ratings (PDF)\n\nAnnual Notice of Changes (ANOC) (PDF)2",
+   "planCost_drugCost_annualCost":"---",
+   "backToplansLinkTopSection":"Back to plans",
+   "planCost_drugCost_description":"Estimate Drug Costs",
+   "planpdf_prescriptionDrugCoverage_otherlanguages":"Formulario Completo (PDF)",
+   "annualDeductibleLink":"$0 Annual Deductible",
+   "planCost_drugCost_monthlyCost":"---",
+   "planCost_estimatedAnnualTotalCost":"Estimated Annual Total (total is based on dollar values above):\n$792",
+   "monthlyPremiumLink":"$66 Monthly Premium",
+   "enrollInPlanLinkTopSection":"Enroll in a plan",
+   "enrollInPlanLinkBottomSection":"Back to plans",
+   "planpdf_prescriptionDrugCoverage_english":"Comprehensive Formulary (PDF)\n\nPrior Authorization Criteria (PDF)\n\nStep Therapy Criteria (PDF)\n\nFormulary Additions (PDF)\n\nFormulary Deletions (PDF)"
+}

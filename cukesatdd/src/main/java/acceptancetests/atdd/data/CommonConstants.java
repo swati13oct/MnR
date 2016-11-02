@@ -50,6 +50,12 @@ public class CommonConstants {
 
 	public static final String BENEFITS_AND_COVERAGE_PDP_NONLIS_NONUS_PAGE_DATA = "planbenefitsandcoveragenonlisnotusother.json";
 
+	public static final String BENEFITS_AND_COVERAGE_MAPD_NONLIS_RIDERS_PAGE_DATA = "bncWithRidersAndSplitTier.json";
+	
+	public static final String BENEFITS_AND_COVERAGE_MAPD_LIS_NONUS_PAGE_DATA = "planbenefitsandcoveragelisnotusother.json";
+	
+	public static final String BENEFITS_AND_COVERAGE_MAPD_NONLIS_NO_RIDERS_PAGE_DATA = "bncWithoutRidersAndSplitTier.json";
+
 	public static final String BENEFITS_AND_COVERAGE_DIRECTORY = "/jsonresponse/member/ulayer/planbenefitsandcoverage/";
 
 	public static final String ACCOUNT_HOME_PAGE_DATA = "myaccounthome.json"; // Group
@@ -808,12 +814,18 @@ public class CommonConstants {
 	public static final String AARPM_FR_PDF_PAGE_DATA = "nextyearpdfs.json";
 	public static final String FORMS_AND_RESOURCES_PLANMATERIAL_SECTION_PDFS = "planmaterialpdfs.json";
 	public static final String FORMS_AND_RESOURCES_PLANMATERIAL_SECTION_PDFS_AARP = "plandocpdfs.json";
+	public static final String B_AND_C_MA_MEMBER_RIDER = "benefitsandcoveragemalisrider.json";
+	public static final String B_AND_C_MA_MEMBER_NON_RIDER = "benefitsandcoveragemalisnonrider.json";
+
+	public static final String B_AND_C_MAPD_NON_LIS_RIDER ="bncmapdnonlisdeductible.json";
+
+	public static final String B_AND_C_MAPD_NON_LIS_NON_RIDER= "bncmapdnonlisdeductiblenonrider.json";
 	public static final String REGISTRATION_ERROR_PAGE_DATA = "registrationerrorpage.json";
 
 	public static final String SIERRA_PLAN_NAME = "UnitedHealthcare MedicareComplete Choice (PPO)";
 
-	public static final String BENEFITS_AND_COVERAGE_MAPD_LIS_NONUS_PAGE_DATA = null;
 
+	public static final String NEXT_YEAR = "nextyear";
 	
 
 	
