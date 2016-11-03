@@ -285,4 +285,27 @@ public  boolean validateBallonMappers() {
 	    return ballonflagvalue;
 }*/
 }
+
+
+
+public JSONObject getExpectedDataWithOutPharmacyType(Map<String, JSONObject> expectedDataMap/*,String expectedObjectkey*/) {
+    System.out.println(expectedDataMap);
+	/* get PHARMACY RESULT expected data */
+	/*JSONObject globalExpectedJson = expectedDataMap
+			.get(CommonConstants.GLOBAL);*/
+	JSONObject pharmacyResultExpectedJson = null;
+	/*try {*/
+		pharmacyResultExpectedJson = (JSONObject) expectedDataMap
+				.get(CommonConstants.PHARMACY_RESULT)/*.get(expectedObjectkey)*/;
+	/*} catch (JSONException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}*/
+	/*pharmacyResultExpectedJson = CommonUtility.mergeJson(
+			pharmacyResultExpectedJson,globalExpectedJson);*/
+
+	return pharmacyResultExpectedJson;
+
 }
+}
+

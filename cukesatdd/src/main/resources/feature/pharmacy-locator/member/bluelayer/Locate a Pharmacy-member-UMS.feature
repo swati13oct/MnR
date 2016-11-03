@@ -174,4 +174,22 @@ Then the user validates the pharmacies available in UMS site
 Examples:
 | plantype | memberType   | distance  |
 | MAPD     | Individual   |   25      |
+
+
+Scenario Outline:To validate disclaimer on Pharmacy Result page
+Given registered member to verify locate a pharmacy page in UMS Site
+| Plan Type    | <plantype>   |
+| MemberType  | <memberType> |
+When the user navigates to pharmacy search page in UMS site
+And the user search pharmacies using the below information in UMS site
+| Distance    | <distance>  |
+And the user searches for pharmacy available in UMS site
+Then the user validates the pharmacies available in UMS site
+Examples:
+| plantype | memberType   | distance  |
+#| MAPD     | Individual   |   25      |
+#| MAPD     | Group        |   2      |
+#| MAPD     | Group        |   2      |
+#| PDP      | Group        |   2      |
+| MAPD     | Individual   |   2      |	
     	
