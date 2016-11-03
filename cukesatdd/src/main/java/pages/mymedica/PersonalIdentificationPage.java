@@ -120,7 +120,6 @@ public class PersonalIdentificationPage extends UhcDriver{
 		sendkeys(zipCodeField, zipcode);
 		
 		continueField.click();
-		System.out.println("sssssssssssssssssss"+pageHeading);
 		if(validate(pageHeading)){
 		if(pageHeading.getText().equalsIgnoreCase("Check your email.")){
 			return new LoginAssitanceMessagePage(driver);

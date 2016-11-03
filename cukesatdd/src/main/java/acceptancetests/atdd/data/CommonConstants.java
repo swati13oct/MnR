@@ -441,6 +441,8 @@ public class CommonConstants {
 	public static final String SITE_BLUELAYER = "bluelayer";
 	
 	public static final String SITE_MYMEDICA = "mymedica";
+	
+	public static final String SITE_MYPCP = "mypcp";
 
 	public static final String SITE_UHCRETIREE = "uhcretiree";
 	
