@@ -1,0 +1,47 @@
+{  
+   "Pharmacy Saver™ Program":"Pharmacy Saver™ Program",
+   "planStatus1":"ACTIVE",
+   "planName1":"UnitedHealthcare MedicareRx for Groups (PDP)",
+   "oddPharmacyRow":[  
+      {  
+         "odd":"1\nPicker Pharmacy\n18 Atlantic Ave\nLynbrook, NY 11563\n516--59-9-0079 (TTY 711)\nPharmacy Saver™ Program\n0.3 Miles\nView Map"
+      },
+      {  
+         "odd":"3\nCVS Pharmacy\n633 Merrick Rd\nLynbrook, NY 11563\n516--59-9-0490 (TTY 711)\nPharmacy Saver™ Program\n0.5 Miles\nView Map"
+      },
+      {  
+         "odd":"5\nNordon Drug CORP\n247 Hempstead Ave\nMalverne, NY 11565\n516--59-3-8663 (TTY 711)\nStandard Network Pharmacy\n1.1 Miles\nView Map"
+      },
+      {  
+         "odd":"7\nCVS Pharmacy\n1 East Merrick Rd\nValley Stream, NY 11580\n516--56-8-0595 (TTY 711)\nStandard Network Pharmacy\n1.2 Miles\nView Map"
+      },
+      {  
+         "odd":"9\nAffordable Scripts\n177 Rockaway Ave\nValley Stream, NY 11580\n516--56-1-6480 (TTY 711)\nStandard Network Pharmacy\n1.2 Miles\nView Map"
+      }
+   ],
+   "PharmacySaverDataLink":"Look up qualifying drugs, prices and participating pharmacies.",
+   "PharmacySaverBlueColor":"",
+   "PharmacySaverHeading":"Pharmacy SaverTM offers prescriptions as low as $1.50.",
+   "groupId1":"23685",
+   "pharmacyTitleText":"Pharmacies close to 11563 for UnitedHealthcare MedicareRx for Groups (PDP)",
+   "evenPharmacyRow":[  
+      {  
+         "even":"2\nRite Aid Pharmacy 10616\n400 Sunrise Highway\nLynbrook, NY 11563\n516--59-3-4180 (TTY 711)\nStandard Network Pharmacy\n0.4 Miles\nView Map"
+      },
+      {  
+         "even":"4\nLakeview Pharmacy\n133 Lakeview Ave\nLynbrook, NY 11563\n516--59-9-4646 (TTY 711)\nStandard Network Pharmacy\n0.7 Miles\nView Map"
+      },
+      {  
+         "even":"6\nCVS Pharmacy\n1740 Broadway\nHewlett, NY 11557\n516--88-7-3298 (TTY 711)\nStandard Network Pharmacy\n1.1 Miles\nView Map"
+      },
+      {  
+         "even":"8\nValley Stream Pharmacy Inc\n42 Rockaway Ave\nValley Stream, NY 11580\n516--44-2-0200 (TTY 711)\nStandard Network Pharmacy\n1.2 Miles\nView Map"
+      },
+      {  
+         "even":"10\nCVS Pharmacy\n594 Atlantic Ave\nEast Rockaway, NY 11518\n516--59-9-2627 (TTY 711)\nStandard Network Pharmacy\n1.3 Miles\nView Map"
+      }
+   ],
+   "Preferred Retail Pharmacy Network":"Pharmacy Saver™ Program",
+   "memberName":"Welcome OGDAWJWG YIUKLTTI",
+   "memberId1":"0151430641"
+}

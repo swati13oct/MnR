@@ -53,6 +53,14 @@
 "PreferredRetailPharmacyNetworkData":{
 "identifier":"xpath",
 "elementName":"//div[@id='subPageRight']/div[1]/div[1]/div[2]/p"
+},
+"Pharmacy Saver™ Program":{
+"identifier":"xpath",
+"elementName":".//div[@id='homefooter']/p[5]/strong"
+},
+"Preferred Retail Pharmacy Network":{
+"identifier":"xpath",
+"elementName":".//div[@id='homefooter']/p[5]/strong"
 }
 }
 }
