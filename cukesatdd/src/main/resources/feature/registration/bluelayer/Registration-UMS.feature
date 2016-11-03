@@ -43,7 +43,7 @@ Examples:
 
 Scenario Outline: To verify registration negative scenarios in UMS site
 Given the user is on registration page of UMS site 
-When the user registers with below details in UMS site
+When the user registers with dob and memberId in UMS site
 	| Plan Member ID         | <planMemberId> |	
 	| Date of birth          | <dateOfBirth>  |
 Then the user navigate to error page

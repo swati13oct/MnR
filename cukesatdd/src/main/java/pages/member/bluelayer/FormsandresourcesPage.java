@@ -9,6 +9,7 @@ import java.util.Map;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -19,6 +20,7 @@ import acceptancetests.atdd.data.CommonConstants;
 import acceptancetests.atdd.data.ElementData;
 import acceptancetests.atdd.data.PageData;
 import acceptancetests.atdd.util.CommonUtility;
+import acceptancetests.login.data.LoginCommonConstants;
 import atdd.framework.UhcDriver;
 
 /**
@@ -45,6 +47,9 @@ public class FormsandresourcesPage extends UhcDriver {
 	@FindBy(xpath = "//*[@id='SummaryofBenefits_-1609990126']/p/a")
 	private WebElement PDF1;
 
+	@FindBy(xpath=".//*[contains(text(),'search providers')]")
+	private WebElement searchProvider;
+	
 	private PageData formsAndResources;
 
 	public JSONObject formsAndResourcesJson;
@@ -90,7 +95,37 @@ public class FormsandresourcesPage extends UhcDriver {
 		logOut.click();
 
 	}
-
+	 public Rallytool_Page clickAndValidateProviderSearch(){
+		  // waitforElement(searchProviderButton);
+		   searchProvider.click();
+		   switchToNewTab();
+		   if(currentUrl().contains("connect.werally.com")){
+			   System.out.println("Rally Tool Launched Sucessfully");
+			   System.out.println("--------------Page Title="+getTitle());
+			   return new Rallytool_Page(driver);
+		   }else{
+			   System.out.println("-------------Failed as rally did not launch in new tab-------------");
+			   Assert.fail();
+			   return null;
+		   }
+	   }
+	public void validatePlanName(){
+    	String planName = LoginCommonConstants.PLAN_NAME;
+    	System.out.println(planName);
+    	List<WebElement> planWebElement = driver.findElements(By.xpath("//*[text()='"+LoginCommonConstants.PLAN_NAME+"']"));
+    	for(int i=0; i<planWebElement.size();i++){
+    		if(planWebElement.get(i).getText().contains("HealthSelect Medicare Rx ")){
+    			System.out.println("----------Failed due to presence of HealthSelect Medicare Rx ------------");
+    			Assert.fail();
+    		}
+    		else if(planWebElement.get(i).getText().equalsIgnoreCase(LoginCommonConstants.PLAN_NAME)){
+    			System.out.println("----------Plan name displayed as expected="+planName);
+    		} else{
+	    			System.out.println("----------Failed because Plan NAme not present");
+	    			Assert.fail();
+	    		} 	  		 
+    	}
+ }
 	public JSONObject getExpectedData(Map<String, JSONObject> expectedDataMap) {
 
 		/* get FORMS AND RESOURCES expected data */ 

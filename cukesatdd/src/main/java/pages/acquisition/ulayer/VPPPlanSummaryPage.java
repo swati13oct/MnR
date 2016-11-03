@@ -73,7 +73,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	private WebElement providerSearchIframe;
 	
 
-	@FindBy(className = "toggleYear")
+	@FindBy(className = "switchPlanYear")
 	private WebElement toggleplanYear;
 	
 	//@FindBy(xpath = "//div[@id='maplans_container']/div[3]/div/div[2]/div[1]/div/div[1]/div[1]/div/div[1]/div[2]/table/tbody/tr/td[3]/div/div[2]/div[3]/div[1]/p/a")
@@ -489,15 +489,34 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	
 	public String togglePlan() {
 		String currentYearFlag = "false";
+		try {
+			Thread.sleep(5000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
 		validate(toggleplanYear);
 		if (toggleplanYear != null) {
 			toggleplanYear.click();
+			try {
+				Thread.sleep(2000);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
 			currentYearFlag = "true";
 		}
 		return currentYearFlag;
 
 	}
 
+	
+	public VPPPlanSummaryPage togglePlanYear(String planType) {
+
+		validate(toggleplanYear);
+		if (toggleplanYear != null) {
+			toggleplanYear.click();
+		}
+		return new VPPPlanSummaryPage(driver, planType);
+	}
 
 	public boolean clicksOnMAProviderCoveredLink() {
 		previousYearLink.click();
@@ -555,7 +574,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		return false;
 	}
 	
-	public void verifyandclickenrolllink(String plantype)
+	public boolean verifyandclickenrolllink(String plantype)
 	{
 		if(plantype.equals("PDP"))
 		{
@@ -566,6 +585,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 			togglePlan();
 			PDPEnrolllink.click();
 			driver.navigate().back();
+			return true;
 			}
 		}
 		else if(plantype.equals("MA"))
@@ -577,8 +597,10 @@ public class VPPPlanSummaryPage extends UhcDriver {
 			togglePlan();
 			MAEnrolllink.click();
 			driver.navigate().back();
+			return true;
 			}
 		}
+		return false;
 	}
 	
 	public GetStartedPage clicksOnEnterDrugInformationLink(String planName) {

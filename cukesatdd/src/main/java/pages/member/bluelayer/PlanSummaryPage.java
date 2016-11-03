@@ -3,10 +3,12 @@
  */
 package pages.member.bluelayer;
 
+import java.util.List;
 import java.util.Map;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
@@ -18,6 +20,7 @@ import pages.member.bluelayer.AddPlanPopUpPage;
 import acceptancetests.atdd.data.CommonConstants;
 import acceptancetests.atdd.data.PageData;
 import acceptancetests.atdd.util.CommonUtility;
+import acceptancetests.login.data.LoginCommonConstants;
 import atdd.framework.UhcDriver;
 
 /**
@@ -40,6 +43,9 @@ public class PlanSummaryPage extends UhcDriver {
 	
 	@FindBy(xpath = "/html/body/div[6]/div/div/table/tbody/tr[5]/td/div[2]/div/div[2]/div[2]/div[2]/div/div[160]/div[2]/div[1]/div[2]/div/div[3]/div[2]/div[2]/div/div/p/a")
 	private WebElement viewdetailbutton;
+	
+	@FindBy(xpath=".//*[contains(text(),'search providers')]")
+	private WebElement searchProvider;
 
 	@FindBy(id = "disclosure_link")
 	private WebElement logOut;
@@ -83,7 +89,20 @@ public class PlanSummaryPage extends UhcDriver {
 		logOut.click();
 
 	}
-
+	public Rallytool_Page clickAndValidateProviderSearch(){
+		  // waitforElement(searchProviderButton);
+		   searchProvider.click();
+		   switchToNewTab();
+		   if(currentUrl().contains("connect.werally.com")){
+			   System.out.println("Rally Tool Launched Sucessfully");
+			   System.out.println("--------------Page Title="+getTitle());
+			   return new Rallytool_Page(driver);
+		   }else{
+			   System.out.println("-------------Failed as rally did not launch in new tab-------------");
+			   Assert.fail();
+			   return null;
+		   }
+	   }
 	@Override
 	public void openAndValidate() {
 
@@ -132,7 +151,23 @@ public class PlanSummaryPage extends UhcDriver {
 		}
 		return null;
 		}
-
+	public void validatePlanName(){
+    	String planName = LoginCommonConstants.PLAN_NAME;
+    	System.out.println(planName);
+	    	List<WebElement> planWebElement = driver.findElements(By.xpath("//*[text()='"+LoginCommonConstants.PLAN_NAME+"']"));
+    	for(int i=0; i<planWebElement.size();i++){
+    		if(planWebElement.get(i).getText().contains("UnitedHealthcare Medicare Rx")){
+    			System.out.println("----------Failed due to presence of UnitedHealthcare Medicare Rx  ------------");
+    			Assert.fail();
+    		}
+    		else if(planWebElement.get(i).getText().equalsIgnoreCase(LoginCommonConstants.PLAN_NAME)){
+    			System.out.println("----------Plan name displayed as expected="+planName);
+    		} else{
+	    			System.out.println("----------Failed because Plan NAme not present");
+	    			Assert.fail();
+	    		} 	  		 
+    	  }
+       }
 
 	public void validatePharmacySaver() {
 		driver.navigate().refresh();

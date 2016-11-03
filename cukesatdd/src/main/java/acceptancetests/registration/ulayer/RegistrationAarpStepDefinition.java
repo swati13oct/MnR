@@ -243,6 +243,27 @@ public class RegistrationAarpStepDefinition {
 
 	}
 	
+	@When("^the user registers with dob and memberId in AARP site$")
+	public void user_register(DataTable memberAttributes)
+	{
+		/* Reading the given attribute from feature file */
+		List<DataTableRow> memberAttributesRow = memberAttributes
+				.getGherkinRows();
+		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells()
+					.get(0), memberAttributesRow.get(i).getCells().get(1));
+		}
+		String memberId = memberAttributesMap.get("Plan Member ID");
+		String dateOfbirth = memberAttributesMap.get("Date of birth");
+		getLoginScenario().saveBean(RegistrationConstants.DATE_OF_BIRTH, dateOfbirth);
+		
+		RegistrationHomePage registrationHomePage = (RegistrationHomePage) getLoginScenario().getBean(PageConstants.REGISTRATION_HOME_PAGE);
+		PlanConfirmationPage planConfirmationPage = registrationHomePage
+				.registerWith(memberId, dateOfbirth);	
+	}
+	
 	@Then("^the user navigate to registration error page of AARP site$")
 	public void negativeScenario_aarp() {
 		RegistrationHomePage registrationHomePage = (RegistrationHomePage) getLoginScenario()

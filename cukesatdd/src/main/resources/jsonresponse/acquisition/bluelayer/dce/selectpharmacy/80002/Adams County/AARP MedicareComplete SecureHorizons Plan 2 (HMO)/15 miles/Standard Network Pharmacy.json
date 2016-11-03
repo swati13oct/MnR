@@ -1,0 +1,89 @@
+{
+   "pharmacyTypes":[
+      {
+         "pharmacyDropDown":"Pharmacy Saver™ Pharmacy"
+      },
+      {
+         "pharmacyDropDown":"Standard Network Pharmacy"
+      },
+      {
+         "pharmacyDropDown":"Mail Service Pharmacy"
+      }
+   ],
+   "previousLink":"Previous results",
+   "pharmacies":[
+      {
+         "pharmacyDistance":"0.8",
+         "selectLink":"Select",
+         "pharmacyName":"Costco Pharmacy"
+      },
+      {
+         "pharmacyDistance":"0.82",
+         "selectLink":"Select",
+         "pharmacyName":"Kmart Pharmacy4129"
+      },
+      {
+         "pharmacyDistance":"0.87",
+         "selectLink":"Select",
+         "pharmacyName":"Blue Spruce Pharmacy At Independence"
+      },
+      {
+         "pharmacyDistance":"1.06",
+         "selectLink":"Select",
+         "pharmacyName":"Sams Pharmacy 10-6630"
+      },
+      {
+         "pharmacyDistance":"1.52",
+         "selectLink":"Select",
+         "pharmacyName":"Medstuff Inc"
+      },
+      {
+         "pharmacyDistance":"1.91",
+         "selectLink":"Select",
+         "pharmacyName":"Pioneer Pharmacy LLC"
+      },
+      {
+         "pharmacyDistance":"2.19",
+         "selectLink":"Select",
+         "pharmacyName":"Wal-Mart Pharmacy 10-5957"
+      },
+      {
+         "pharmacyDistance":"2.24",
+         "selectLink":"Select",
+         "pharmacyName":"Wheat Ridge Professional Pharmacy"
+      },
+      {
+         "pharmacyDistance":"2.26",
+         "selectLink":"Select",
+         "pharmacyName":"Ward Road Pharmacy"
+      },
+      {
+         "pharmacyDistance":"3.16",
+         "selectLink":"Select",
+         "pharmacyName":"Wal-Mart Pharmacy 10-3824"
+      }
+   ],
+   "zipcode":"80002",
+   "editZipCodeLink":"Edit ZIP code",
+   "miles":[
+      {
+         "milesDropDown":"1 mile"
+      },
+      {
+         "milesDropDown":"2 miles"
+      },
+      {
+         "milesDropDown":"5 miles"
+      },
+      {
+         "milesDropDown":"10 miles"
+      },
+      {
+         "milesDropDown":"15 miles"
+      },
+      {
+         "milesDropDown":"25 miles"
+      }
+   ],
+   "nextLink":"Next results"
+}
