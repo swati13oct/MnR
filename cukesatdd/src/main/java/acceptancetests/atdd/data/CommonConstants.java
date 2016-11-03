@@ -15,6 +15,8 @@ public class CommonConstants {
 	
 	public static final String REG_FAILURE_FLOW_NAME = "registration/registrationfailure";
 	
+	public static final String LOGIN_ASSISTANCE_FAILURE_FLOW_NAME = "loginassistance/loginassistancefailure";
+	
 	public static final String PROPERTY_FILE_FOLDER = "/config";
 	
 	public static final String PROPERTY_FILE_NAME = "config.properties";
@@ -809,6 +811,8 @@ public class CommonConstants {
 	public static final String FORMS_AND_RESOURCES_PLANMATERIAL_SECTION_PDFS = "planmaterialpdfs.json";
 	public static final String FORMS_AND_RESOURCES_PLANMATERIAL_SECTION_PDFS_AARP = "plandocpdfs.json";
 	public static final String REGISTRATION_ERROR_PAGE_DATA = "registrationerrorpage.json";
+
+	public static final String LOGIN_ASSISTANCE_PERSONAL_IDENTIFICATION_ERROR_SCENARIO = "personalIdentificationErrorScenario.json";
 
 	
 
