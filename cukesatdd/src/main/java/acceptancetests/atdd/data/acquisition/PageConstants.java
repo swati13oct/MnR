@@ -342,4 +342,8 @@ public class PageConstants {
 	
 	public static final String CONFIRMATION_PAGE = "confirmationPage";
 
+	public static final String REGISTRATION_ERROR_PAGE = "regErrorPage";
+
+	public static final String LOGIN_ASSISTANCE_PERSONAL_IDENTIFICATION_ERROR_SCENARIO = "personalIdentificationErrorActualJson";
+
 }

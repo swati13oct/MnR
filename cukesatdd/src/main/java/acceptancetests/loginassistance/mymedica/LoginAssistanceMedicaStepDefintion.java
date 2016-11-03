@@ -4,21 +4,23 @@
 package acceptancetests.loginassistance.mymedica;
 
 import gherkin.formatter.model.DataTableRow;
-import pages.mymedica.LoginAssistancePage;
-import pages.mymedica.LoginAssitanceMessagePage;
-import pages.mymedica.LoginPage;
-import pages.mymedica.PersonalIdentificationPage;
 
 import java.io.File;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.skyscreamer.jsonassert.JSONAssert;
 import org.springframework.beans.factory.annotation.Autowired;
+
+import pages.mymedica.LoginAssistancePage;
+import pages.mymedica.LoginAssitanceMessagePage;
+import pages.mymedica.LoginPage;
+import pages.mymedica.PersonalIdentificationPage;
 import acceptancetests.atdd.data.CommonConstants;
 import acceptancetests.atdd.data.acquisition.PageConstants;
 import acceptancetests.loginassistance.data.LoginAssistanceCommonConstants;
@@ -86,13 +88,39 @@ public class LoginAssistanceMedicaStepDefintion {
 
 		PersonalIdentificationPage personalIdentificationPage = (PersonalIdentificationPage) getLoginScenario()
 				.getBean(PageConstants.PERSONAL_IDENTIFICATION_PAGE);
-		LoginAssitanceMessagePage loginAssitanceMessagePage = personalIdentificationPage
+		Object object = personalIdentificationPage
 				.enterPersonalDetails(personalAttributesMap);
-		if (loginAssitanceMessagePage != null) {
+		if(object.getClass().toString().contains("LoginAssitanceMessagePage")){
+			LoginAssitanceMessagePage loginAssitanceMessagePage=new LoginAssitanceMessagePage(getLoginScenario().getWebDriver());
 			getLoginScenario().saveBean(PageConstants.LOGIN_ASSISTANCE_MESSAGE_PAGE, loginAssitanceMessagePage);
 			Assert.assertTrue(true);
-		} else {
-			Assert.fail("Error loading loginAssitanceMessage page");
+		} else if(object.getClass().toString().contains("PersonalIdentificationPage")){	
+			JSONObject personalIdentificationErrorActualJson = personalIdentificationPage.getpersonalIdentificationErrorScenarioActualJson();
+			getLoginScenario().saveBean(PageConstants.LOGIN_ASSISTANCE_PERSONAL_IDENTIFICATION_ERROR_SCENARIO, personalIdentificationErrorActualJson);
+		}
+
+	}
+	
+	@Then("^the user validates the personal identification error message in My Medica site$")
+	public void user_validates_errormessage() {
+		
+		JSONObject personalIdentificationErrorActualJson = (JSONObject) getLoginScenario()
+				.getBean(PageConstants.LOGIN_ASSISTANCE_PERSONAL_IDENTIFICATION_ERROR_SCENARIO);
+
+		/* Get expected data */
+		String fileName = LoginAssistanceCommonConstants.LOGIN_ASSISTANCE_FLOW_PERSONAL_IDENTIFICATION_ERROR_SCENARIO;
+		String directory = CommonConstants. MEMBER_EXPECTED_DIRECTORY + File.separator
+				+ CommonConstants.SITE_MYMEDICA + File.separator + CommonConstants.LOGIN_ASSISTANCE_FAILURE_FLOW_NAME
+				+ File.separator;
+		JSONObject personalIdentificationErrorExpectedJson = MRScenario.readExpectedJson(fileName, directory);
+
+		System.out.println("personalIdentificationErrorActualJson=====>" + personalIdentificationErrorActualJson.toString());
+		System.out.println("personalIdentificationErrorExpectedJson======>" + personalIdentificationErrorExpectedJson.toString());
+		try {
+			JSONAssert.assertEquals(personalIdentificationErrorExpectedJson, personalIdentificationErrorActualJson, true);
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 
 	}
@@ -119,6 +147,5 @@ public class LoginAssistanceMedicaStepDefintion {
 			e.printStackTrace();
 		}
 
-	}
+	}}
 
-}

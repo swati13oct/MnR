@@ -5,11 +5,17 @@ package pages.mypcp;
 
 import java.util.Map;
 
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
+import pages.mymedica.LoginAssitanceMessagePage;
+import acceptancetests.atdd.data.CommonConstants;
+import acceptancetests.atdd.data.PageData;
+import acceptancetests.atdd.util.CommonUtility;
 import atdd.framework.UhcDriver;
 
 /**
@@ -46,6 +52,10 @@ public class PersonalIdentificationPage extends UhcDriver{
 	@FindBy(xpath = "//div[@id='passwordChangeInfoDiv']/div/h2/strong")
 	private WebElement pageHeading;
 	
+	public JSONObject personalIdentificationErrorScenarioActualJson;
+	
+	private PageData personalIdentificationErrorScenario;
+	
 	
 	
 	public PersonalIdentificationPage(WebDriver driver) {
@@ -67,7 +77,33 @@ public class PersonalIdentificationPage extends UhcDriver{
 		
 	}
 
-	public LoginAssitanceMessagePage enterPersonalDetails(Map<String, String> personalAttributesMap) {
+public JSONObject getpersonalIdentificationErrorScenarioActualJson(){
+		
+		String fileName = CommonConstants.LOGIN_ASSISTANCE_PERSONAL_IDENTIFICATION_ERROR_SCENARIO;
+		personalIdentificationErrorScenario = CommonUtility.readPageData(fileName,
+				CommonConstants.PAGE_OBJECT_DIRECTORY_MYMEDICA_MEMBER);
+		
+		JSONObject jsonObject = new JSONObject();
+		for (String key : personalIdentificationErrorScenario.getExpectedData().keySet()) {
+			WebElement element = findElement(personalIdentificationErrorScenario
+					.getExpectedData().get(key));
+			if (null != element) {
+				if (validate(element)) {
+					try {
+						jsonObject.put(key, element.getText());
+					} catch (JSONException e) {
+						e.printStackTrace();
+					}
+				}
+			}
+		}
+		return personalIdentificationErrorScenarioActualJson = jsonObject;
+		
+	}
+	
+	
+	
+	public Object enterPersonalDetails(Map<String, String> personalAttributesMap) {
 		
 		String[] memberId = personalAttributesMap.get("Member Id").split("-");
 		String[] dateOfBirth = personalAttributesMap.get("Date of Birth").split("-");
@@ -88,10 +124,17 @@ public class PersonalIdentificationPage extends UhcDriver{
 		sendkeys(zipCodeField, zipcode);
 		
 		continueField.click();
-		if(pageHeading.getText().equalsIgnoreCase("Check your email.")){
-			return new LoginAssitanceMessagePage(driver);
+		if(validate(pageHeading)){
+			if(pageHeading.getText().equalsIgnoreCase("Check your email.")){
+				return new LoginAssitanceMessagePage(driver);
+			}
+			} else{
+				return new PersonalIdentificationPage(driver);
+				
+			}
+			return null;
 		}
-		return null;
-	}
+
+	
 
 }
