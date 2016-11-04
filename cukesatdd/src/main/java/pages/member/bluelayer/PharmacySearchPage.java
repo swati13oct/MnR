@@ -37,6 +37,19 @@ public class PharmacySearchPage extends UhcDriver {
 	
 	@FindBy(id = "cancleBTN")
 	private WebElement continueButton;
+	
+	@FindBy(xpath = "//a[text()='??']")
+    private WebElement chineseContent;
+    
+    @FindBy(xpath = "//a[text()='search']")
+    private WebElement chineseSearch;
+    
+    @FindBy(xpath = "//a[text()='español']")
+    private WebElement spanishContent;
+    
+    @FindBy(xpath = "//a[text()='search']")
+    private WebElement spanishSearch;
+
 
 	@FindBy(xpath = "//div[@id='medicareTitle']/h1")
 	private WebElement pharmacySearchHeading;
@@ -247,4 +260,37 @@ public class PharmacySearchPage extends UhcDriver {
 
 		return key;
 	}
+	
+	public PharmacyResultPage navigateChineseContent() {
+
+        chineseContent.click();
+        try {
+               Thread.sleep(10000);
+        } catch (InterruptedException e) {
+               // TODO Auto-generated catch block
+               e.printStackTrace();
+        }
+        chineseSearch.click();
+       // CommonUtility.waitForPageLoad(driver, pharmacySearchResultMsg, CommonConstants.TIMEOUT_30);
+        if (driver.getTitle().equalsIgnoreCase(
+                     "UnitedHealthcare Medicare Solutions | Pharmacy Directory")) {
+               return new PharmacyResultPage(driver);
+        }
+        return null;
+
+ }
+
+	public PharmacyResultPage navigateSpanishContent() {
+
+        spanishContent.click();
+        spanishSearch.click();
+      //  CommonUtility.waitForPageLoad(driver, pharmacySearchResultMsg, CommonConstants.TIMEOUT_30);
+        if (driver.getTitle().equalsIgnoreCase(
+                     "UnitedHealthcare Medicare Solutions | Pharmacy Directory")) {
+               return new PharmacyResultPage(driver);
+        }
+        return null;
+
+ }
+
 }
