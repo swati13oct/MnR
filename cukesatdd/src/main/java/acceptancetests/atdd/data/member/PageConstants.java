@@ -12,8 +12,6 @@ public class PageConstants {
 	public static final String ACCOUNT_HOME_PAGE = "accountHomePage";
 
 	public static final String PLAN_CONFIRMATION_PAGE = "planConfirmationPage";
-	
-	public static final String REGISTRATION_ERROR_PAGE = "regErrorPage";
 
 	public static final String CREATE_ACCOUNT_PAGE = "createAccountPage";
 
@@ -145,7 +143,7 @@ public class PageConstants {
 	public static final String MYMEDICA_ABOUT_US_PAGE = "medicaAboutUsPage";
 	
 	public static final String MYMEDICA_CONTACT_US_PAGE = "medicaContactUsPage";
-	
-	public static final String GOGREEN_PAGE = "goGreenPage";
+
+	public static final String RALLY_SSO_ACTUAL = "rallySSOActualJson";	
 
 }
