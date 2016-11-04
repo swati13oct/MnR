@@ -67,6 +67,9 @@ public class AccountHomePage extends UhcDriver {
 
 	@FindBy(linkText = "locate a pharmacy")
 	private WebElement pharmacyLocator;
+	
+	@FindBy(linkText = "medical providers")
+	private WebElement medicalProviders ;
 
 	@FindBy(xpath = "//li[@id='fd_myMenu']/a")
 	private WebElement myMenuNavigator;
@@ -442,4 +445,9 @@ public ContactUsPage navigatesToContactUsPage() {
 	    		} 		 
 	    	}
 	 }
+
+	public void navigate_ProviderSearch() {
+		validate(medicalProviders);
+		medicalProviders.click();
+	}
 }

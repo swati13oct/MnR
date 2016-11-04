@@ -142,6 +142,8 @@ public class PageConstants {
 	
 	public static final String MYMEDICA_ABOUT_US_PAGE = "medicaAboutUsPage";
 	
-	public static final String MYMEDICA_CONTACT_US_PAGE = "medicaContactUsPage";	
+	public static final String MYMEDICA_CONTACT_US_PAGE = "medicaContactUsPage";
+
+	public static final String RALLY_SSO_ACTUAL = "rallySSOActualJson";	
 
 }
