@@ -1,9 +1,7 @@
 /**
  * 
  */
-package acceptancetests.mobile.pharmacylocator.blayer;
-
-import gherkin.formatter.model.DataTableRow;
+package acceptancetests.mobile.pharmacylocator.ulayer;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -19,13 +17,6 @@ import org.openqa.selenium.WebDriver;
 import org.skyscreamer.jsonassert.JSONAssert;
 import org.springframework.beans.factory.annotation.Autowired;
 
-
-import pages.mobile.member.blayer.BenefitsSummaryPage;
-import pages.mobile.member.blayer.LoginPage;
-import pages.mobile.member.blayer.PharmacyLocator;
-import pages.mobile.member.blayer.PharmacyLocatorPage;
-import pages.mobile.member.ulayer.PharmacyLocatorFilterPage;
-import pages.mobile.member.ulayer.PharmacyLocatorFilterPage.ToolTip;
 import acceptancetests.atdd.data.mobile.member.PageConstants;
 import acceptancetests.atdd.mobile.data.CommonConstants;
 import acceptancetests.mobile.login.data.LoginCommonConstants;
@@ -35,8 +26,13 @@ import cucumber.annotation.en.And;
 import cucumber.annotation.en.Given;
 import cucumber.annotation.en.Then;
 import cucumber.annotation.en.When;
-import cucumber.annotation.en_scouse.An;
 import cucumber.table.DataTable;
+import gherkin.formatter.model.DataTableRow;
+import pages.mobile.member.ulayer.BenefitsSummaryPage;
+import pages.mobile.member.ulayer.LoginPage;
+import pages.mobile.member.ulayer.PharmacyLocatorFilterPage;
+import pages.mobile.member.ulayer.PharmacyLocatorFilterPage.ToolTip;
+import pages.mobile.member.ulayer.PharmacyLocatorPage;
 
 /**
  * @author pjaising
@@ -160,12 +156,6 @@ public class MemberPharmacyLocatorStepDefinition {
 		System.out.println("clicked");	
  	}
 	
-	@Then("^user clicks on pharmacy locator link and validates the scenarios$")
-	public void memberValidatesRequirement(){
-		BenefitsSummaryPage pharmacyLocator = (BenefitsSummaryPage) getLoginScenario().getBean(PageConstants.BENEFITS_SUMMARY_PAGE);
- 	    pharmacyLocator.validatePharmacyPage();		 
-	}
-	
 	@After
 	public void tearDown() {
 
@@ -181,15 +171,6 @@ public class MemberPharmacyLocatorStepDefinition {
 		BenefitsSummaryPage benefitsSummaryPage = (BenefitsSummaryPage)getLoginScenario().getBean(PageConstants.BENEFITS_SUMMARY_PAGE);
  		getLoginScenario().saveBean(PageConstants.BENEFITS_SUMMARY_PAGE, benefitsSummaryPage);
 		PharmacyLocatorPage pharmacyLocatorPage = benefitsSummaryPage.getPharmacyLocator(view);
-		getLoginScenario().saveBean(PageConstants.PHARMACY_LOCATOR_PAGE, pharmacyLocatorPage);
-		
-	}
-	
-	@Then("^the user navigates to Pharmacy Locator Landing Page page$")
-	public void navigateToPharmacyLocatorPage(){
-		BenefitsSummaryPage benefitsSummaryPage = (BenefitsSummaryPage)getLoginScenario().getBean(PageConstants.BENEFITS_SUMMARY_PAGE);
- 		getLoginScenario().saveBean(PageConstants.BENEFITS_SUMMARY_PAGE, benefitsSummaryPage);
-		PharmacyLocatorPage pharmacyLocatorPage = benefitsSummaryPage.getPharmacyLocator();
 		getLoginScenario().saveBean(PageConstants.PHARMACY_LOCATOR_PAGE, pharmacyLocatorPage);
 		
 	}
@@ -214,6 +195,7 @@ public class MemberPharmacyLocatorStepDefinition {
 	public void validateFirstPharmacyResult(){
 		PharmacyLocatorPage pharmacyLocatorPage = (PharmacyLocatorPage) getLoginScenario().getBean(PageConstants.PHARMACY_LOCATOR_PAGE);
 		pharmacyLocatorPage.firstPharmacyResult();
+		getLoginScenario().saveBean(PageConstants.PHARMACY_LOCATOR_PAGE, pharmacyLocatorPage);
 	}
 	
 	@And("^the user clicks on filter button on the page$")

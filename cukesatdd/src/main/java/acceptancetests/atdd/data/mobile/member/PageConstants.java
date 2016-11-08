@@ -16,5 +16,9 @@ public class PageConstants {
 	public static final String BENEFITS_DETAIL_PAGE = "benefitsDetailPage";
 
 	public static final String PREFERRED_DRUG_BENEFITS_DETAIL_PAGE = "preferredDrugBenefitsDetailPage";
+	
+	public static final String PHARMACY_LOCATOR_PAGE = "pharmacylocatorPage";
+	
+	public static final String PHARMACY_LOCATOR_FILTER_PAGE = "pharmacylocatorfilterPage";
 
 }

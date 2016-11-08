@@ -1,4 +1,4 @@
-package pages.mobile.member.blayer;
+package pages.mobile.member.ulayer;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -13,7 +13,6 @@ import acceptancetests.atdd.data.PageData;
 import acceptancetests.atdd.mobile.data.CommonConstants;
 import acceptancetests.atdd.util.CommonUtility;
 import atdd.framework.UhcDriver;
-import pages.mobile.member.ulayer.PharmacyLocatorFilterPage;
 
 /**
  * @author Bhaji Shaik
@@ -137,6 +136,8 @@ public class PharmacyLocatorPage extends UhcDriver {
 		return browserCheckJson;
 
 	}
+	
+	
 	/**
 	 * This method gives the colour based on the rgb colour coding
 	 * @param colour
@@ -201,8 +202,10 @@ public class PharmacyLocatorPage extends UhcDriver {
 		Assert.assertEquals(expectedFirstPharmacyResultText, actualFirstPharmacyResultText);
 		back.click();
 		validateStandardNetworkPharmacy();
-		validatePharmacySaverPharmacy();
+		//validatePharmacySaverPharmacy();
+		validatePreferredPharmacyNetwork();
 	}
+	
 	public PharmacyLocatorFilterPage clickOnFilterButton(){
 		waitforElement(btnFilter);
 		btnFilter.click();

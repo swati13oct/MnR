@@ -138,7 +138,7 @@ public class MRScenario {
 					userName = memberAttributes[0];
 
 				}
-				boolean memberFound = false;
+				boolean memberFound = true;
 				if (!ampMemberAttributesMap.isEmpty()) {
 					boolean memberExists = false;
 					for (String key : ampMemberAttributesMap.keySet()) {
@@ -148,10 +148,10 @@ public class MRScenario {
 						}
 					}
 					if (!memberExists) {
-						memberFound = checkMemberFound(userName, con, ctx, defaultSchema);
+						//memberFound = checkMemberFound(userName, con, ctx, defaultSchema);
 					}
 				} else {
-					memberFound = checkMemberFound(userName, con, ctx, defaultSchema);
+					//memberFound = checkMemberFound(userName, con, ctx, defaultSchema);
 				}
 
 				if (memberFound) {
@@ -175,7 +175,7 @@ public class MRScenario {
 					userName = memberAttributes[0];
 
 				}
-				boolean memberFound = false;
+				boolean memberFound = true;
 				if (!umsMemberAttributesMap.isEmpty()) {
 					boolean memberExists = false;
 					for (String key : umsMemberAttributesMap.keySet()) {
@@ -185,10 +185,10 @@ public class MRScenario {
 						}
 					}
 					if (!memberExists) {
-						memberFound = checkMemberFound(userName, con, ctx, defaultSchema);
+						//memberFound = checkMemberFound(userName, con, ctx, defaultSchema);
 					}
 				} else {
-					memberFound = checkMemberFound(userName, con, ctx, defaultSchema);
+					//memberFound = checkMemberFound(userName, con, ctx, defaultSchema);
 				}
 
 				if (memberFound) {
