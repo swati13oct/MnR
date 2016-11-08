@@ -70,6 +70,7 @@ public class SelectPharmacyPage extends UhcDriver {
 		super(driver);
 		PageFactory.initElements(driver, this);
 		String fileName = CommonConstants.SELECT_PHARMACY_INDIVIDUAL_BLUE_LAYER_PAGE_DATA;
+		System.out.println("filename"+fileName);
 		selectPharmacy = CommonUtility.readPageData(fileName,
 				CommonConstants.PAGE_OBJECT_DIRECTORY_BLUELAYER_MEMBER);
 		openAndValidate();
@@ -79,6 +80,7 @@ public class SelectPharmacyPage extends UhcDriver {
 		super(driver);
 		PageFactory.initElements(driver, this);
 		String fileName = CommonConstants.SELECT_PHARMACY_BLUE_LAYER_PAGE_DATA;
+		 System.out.println("filenames"+fileName);
 		selectPharmacy = CommonUtility.readPageData(fileName,
 				CommonConstants.PAGE_OBJECT_DIRECTORY_BLUELAYER_MEMBER);
 		openAndValidate();
@@ -312,19 +314,22 @@ public class SelectPharmacyPage extends UhcDriver {
 	}
 
 	public JSONObject getExpectedData(Map<String, JSONObject> expectedDataMap) {
-		String key = "Default";
-		JSONObject globalExpectedJson = expectedDataMap
-				.get(CommonConstants.GLOBAL);
+		//String key = "Default";
+		/*JSONObject globalExpectedJson = expectedDataMap
+				.get(CommonConstants.GLOBAL);*/
 		JSONObject selectPharmacyPageExpectedJson = null;
-		try {
+		/*try {
 			selectPharmacyPageExpectedJson = (JSONObject) expectedDataMap.get(
 					CommonConstants.SELECT_PHARMACY).get(key);
 		} catch (JSONException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
-		selectPharmacyPageExpectedJson = CommonUtility.mergeJson(
-				selectPharmacyPageExpectedJson, globalExpectedJson);
+		}*/
+		
+		selectPharmacyPageExpectedJson = (JSONObject) expectedDataMap.get(
+				CommonConstants.SELECT_PHARMACY);
+		/*selectPharmacyPageExpectedJson = CommonUtility.mergeJson(
+				selectPharmacyPageExpectedJson, globalExpectedJson);*/
 		return selectPharmacyPageExpectedJson;
 	}
 

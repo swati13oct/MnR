@@ -11,4 +11,17 @@ Examples:
 	#	| MAPD     | Individual |
 	#	| MAPD     | Group      |
 		| PDP      | Group      |
+
+Scenario Outline: Verify Current Year plan summary page 
+Given  I am a registered member logged into BLAYER
+ | Plan Type    | <plantype>  |
+ | Member Type  | <memberType>|
+When I access the My Drug Costs and Benefits page
+And I will see the Troop meter
+Then  I will see the Current Year Plan Summary page
+
+Examples:
+		| plantype | memberType |
+		| MAPD     | Individual |
+	#	| MAPD     | Group      |
 		

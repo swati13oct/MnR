@@ -13,6 +13,10 @@ public class CommonConstants {
 	
 	public static final String FLOW_NAME = "registration/planconfirmation";
 	
+	public static final String REG_FAILURE_FLOW_NAME = "registration/registrationfailure";
+	
+	public static final String LOGIN_ASSISTANCE_FAILURE_FLOW_NAME = "loginassistance/loginassistancefailure";
+	
 	public static final String PROPERTY_FILE_FOLDER = "/config";
 	
 	public static final String PROPERTY_FILE_NAME = "config.properties";
@@ -342,6 +346,8 @@ public class CommonConstants {
 			};
 
 	public static final String PAGE_OBJECT_DIRECTORY_BLUELAYER_MEMBER = "/page-objects/member/bluelayer/";
+	
+	public static final String PAGE_OBJECT_DIRECTORY_MYMEDICA_MEMBER = "/page-objects/member/mymedica/";
 
 	public static final String RETIREE_PAGE_OBJECT_DIRECTORY = "/page-objects/uhcretiree/acquisition/";
 
@@ -433,6 +439,10 @@ public class CommonConstants {
 	public static final String SITE_ULAYER = "ulayer";
 
 	public static final String SITE_BLUELAYER = "bluelayer";
+	
+	public static final String SITE_MYMEDICA = "mymedica";
+	
+	public static final String SITE_MYPCP = "mypcp";
 
 	public static final String SITE_UHCRETIREE = "uhcretiree";
 	
@@ -802,6 +812,9 @@ public class CommonConstants {
 	public static final String AARPM_FR_PDF_PAGE_DATA = "nextyearpdfs.json";
 	public static final String FORMS_AND_RESOURCES_PLANMATERIAL_SECTION_PDFS = "planmaterialpdfs.json";
 	public static final String FORMS_AND_RESOURCES_PLANMATERIAL_SECTION_PDFS_AARP = "plandocpdfs.json";
+	public static final String REGISTRATION_ERROR_PAGE_DATA = "registrationerrorpage.json";
+
+	public static final String LOGIN_ASSISTANCE_PERSONAL_IDENTIFICATION_ERROR_SCENARIO = "personalIdentificationErrorScenario.json";
 
 	
 

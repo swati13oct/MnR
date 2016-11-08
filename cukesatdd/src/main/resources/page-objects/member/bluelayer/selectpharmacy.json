@@ -29,6 +29,16 @@
 "identifier":"xpath",
 "elementName":"//div[@class='inputRadioButtons']/div[2]/div/p"
 },
+
+"pharmacyName":{
+"identifier":"xpath",
+"elementName":"//span[contains(./text(),'Men')]"
+},
+
+"preferredRetailSavingMsg":{
+"identifier":"xpath",
+"elementName":"//div[@class='inputRadioButtons']/div[2]/div/span[3]/div"
+},
 "preferredMailServicePharmacyRadioButton":{
 "identifier":"xpath",
 "elementName":"//div[@class='inputRadioButtons']/div[4]/p"

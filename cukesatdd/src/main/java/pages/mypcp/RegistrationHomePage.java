@@ -7,6 +7,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
+import pages.mymedica.ErrorPage;
 import acceptancetests.atdd.data.MRConstants;
 import atdd.framework.UhcDriver;
 
@@ -79,15 +80,20 @@ public class RegistrationHomePage extends UhcDriver {
 		validate(memberIdNumber2);
 		validate(monthToEnter);
 		validate(dayToEnter);
-		validate(yearToEnter); {
-		validate(continueButton);
+		validate(yearToEnter);
+		{
+			validate(continueButton);
+
+		}
 
 	}
 
-
-	
-	
-		
+	public ErrorPage navigateToErrorPage() {
+		if (driver.getTitle().equalsIgnoreCase(
+				"UnitedHealthcare Medicare Solutions | Registration")) {
+			return new ErrorPage(driver);
+		}
+		return null;
 	}
 
 	/*TODO:sseetala Please check if this method is required. Unable to find references in the codebase*/

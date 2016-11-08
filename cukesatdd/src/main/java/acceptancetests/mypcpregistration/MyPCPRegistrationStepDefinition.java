@@ -1,6 +1,9 @@
 package acceptancetests.mypcpregistration;
 
 import gherkin.formatter.model.DataTableRow;
+import pages.member.ulayer.PaymentHistoryPage;
+import pages.mymedica.ErrorPage;
+import pages.mypcp.AccountHomePage;
 import pages.mypcp.CreateAccountPage;
 import pages.mypcp.PlanConfirmationPage;
 import pages.mypcp.RegistrationHomePage;
@@ -22,6 +25,7 @@ import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.skyscreamer.jsonassert.JSONAssert;
 import org.springframework.beans.factory.annotation.Autowired;
+
 import acceptancetests.atdd.data.CommonConstants;
 import acceptancetests.atdd.data.member.PageConstants;
 import acceptancetests.atdd.util.CommonUtility;
@@ -50,9 +54,11 @@ public class MyPCPRegistrationStepDefinition {
 		return loginScenario;
 	}
 
+	public WebDriver wd;
+
 	@Given("^the user is on registration page of My PCP site$")
 	public void registration_landing_page() {
-		WebDriver wd = getLoginScenario().getWebDriver();
+		wd = getLoginScenario().getWebDriver();
 		wd.manage().window().maximize();
 
 		SignInPage myPcpSignInPage = new SignInPage(wd);
@@ -87,7 +93,7 @@ public class MyPCPRegistrationStepDefinition {
 		getLoginScenario().saveBean(RegistrationConstants.PLAN_CONFIRMATION_ACTUAL, planConfirmationActualJson);
 
 		/* Get Expected response */
-		String fileName = "930857169_06-28-1950";
+		String fileName = "950592474_12-12-1946";
 		String directory = CommonConstants.MEMBER_EXPECTED_DIRECTORY + File.separator + CommonConstants.SITE_BLUELAYER
 				+ File.separator + CommonConstants.FLOW_NAME + File.separator;
 		JSONObject registrationJson = MRScenario.readExpectedJson(fileName, directory);
@@ -144,7 +150,7 @@ public class MyPCPRegistrationStepDefinition {
 		getLoginScenario().saveBean(RegistrationConstants.REGISTRATION_SUCCESS_ACTUAL, registrationSuccessActualJson);
 
 		/* Get expected response */
-		String fileName = "blpcp_011";
+		String fileName = "blpcp_012";
 		String directory = CommonConstants.MEMBER_EXPECTED_DIRECTORY + File.separator + CommonConstants.SITE_BLUELAYER
 				+ File.separator + CommonConstants.REGISTRATION + File.separator + CommonConstants.REGISTRATION_SUCCESS
 				+ File.separator;
@@ -171,6 +177,53 @@ public class MyPCPRegistrationStepDefinition {
 			e.printStackTrace();
 		}
 
+	}
+
+	@Then("^the user navigates to My Account home page in My PCP site$")
+	public void navigateToAccountHome() {
+
+		RegistrationSuccessPage regSuccessPage = (RegistrationSuccessPage) getLoginScenario()
+				.getBean(PageConstants.REGISTRATION_SUCCESS_PAGE);
+		AccountHomePage accountHomePage = regSuccessPage.navigateToHomePage(null);
+		wd.quit();
+	}
+	
+	@When("^the user navigate to error page$")
+	public void negativeScenario() {
+		RegistrationHomePage registrationHomePage = (RegistrationHomePage) getLoginScenario()
+				.getBean(PageConstants.REGISTRATION_HOME_PAGE);
+		ErrorPage errorPage = registrationHomePage.navigateToErrorPage();
+		
+		getLoginScenario().saveBean(PageConstants.REGISTRATION_ERROR_PAGE, errorPage);
+
+		/* Get Actual response */
+		JSONObject regErrorActualJson = errorPage.regErrorPageJson;
+		getLoginScenario().saveBean(RegistrationConstants.REG_ERROR_PAGE_ACTUAL, regErrorActualJson);
+		
+		/* Get Expected response */
+		String fileName = "registrationfailure";
+		String directory = CommonConstants.MEMBER_EXPECTED_DIRECTORY + File.separator + CommonConstants.SITE_MYMEDICA
+				+ File.separator + CommonConstants.REG_FAILURE_FLOW_NAME + File.separator;
+		JSONObject registrationFailureExpectedJson = MRScenario.readExpectedJson(fileName, directory);
+		getLoginScenario().saveBean(RegistrationConstants.REG_FAILURE_EXPECTED, registrationFailureExpectedJson);
+
+	}
+	@Then("^the user validate error message$")
+	public void validate_ErrorMessage() {
+		JSONObject regErrorActualJson = (JSONObject) getLoginScenario()
+				.getBean(RegistrationConstants.REG_ERROR_PAGE_ACTUAL);
+		System.out.println("regErrorActualJson ------------>" + regErrorActualJson);
+
+		JSONObject registrationFailureExpectedJson = (JSONObject) getLoginScenario()
+				.getBean(RegistrationConstants.REG_FAILURE_EXPECTED);
+		System.out.println("registrationFailureExpectedJson ----------->" + registrationFailureExpectedJson);
+
+		try {
+			JSONAssert.assertEquals(regErrorActualJson, registrationFailureExpectedJson, true);
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 }

@@ -2,13 +2,13 @@ package acceptancetests.registration.bluelayer;
 
 import gherkin.formatter.model.DataTableRow;
 
+import java.io.File;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.skyscreamer.jsonassert.JSONAssert;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,13 +18,12 @@ import pages.acquisition.bluelayer.CreateAccountPage;
 import pages.acquisition.bluelayer.PlanConfirmationPage;
 import pages.acquisition.bluelayer.RegistrationHomePage;
 import pages.acquisition.bluelayer.RegistrationSuccessPage;
-import acceptancetests.addplan.data.AddplanConstants;
+import pages.acquisition.bluelayer.RegistrationUMSErrorPage;
 import acceptancetests.atdd.data.CommonConstants;
 import acceptancetests.atdd.data.member.PageConstants;
 import acceptancetests.atdd.util.CommonUtility;
 import acceptancetests.registration.data.RegistrationConstants;
 import atdd.framework.MRScenario;
-import cucumber.annotation.After;
 import cucumber.annotation.en.And;
 import cucumber.annotation.en.Given;
 import cucumber.annotation.en.Then;
@@ -243,6 +242,66 @@ public class RegistrationUmsStepDefinition {
 		RegistrationSuccessPage registrationSuccessPage = (RegistrationSuccessPage)getLoginScenario().getBean(PageConstants.REGISTRATION_SUCCESS_PAGE);
 		registrationSuccessPage.logOut();
 		
+	}
+	
+	@When("^the user registers with dob and memberId in UMS site$")
+	public void user_register(DataTable memberAttributes)
+	{
+		/* Reading the given attribute from feature file */
+		List<DataTableRow> memberAttributesRow = memberAttributes
+				.getGherkinRows();
+		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells()
+					.get(0), memberAttributesRow.get(i).getCells().get(1));
+		}
+		String memberId = memberAttributesMap.get("Plan Member ID");
+		String dateOfbirth = memberAttributesMap.get("Date of birth");
+		getLoginScenario().saveBean(RegistrationConstants.DATE_OF_BIRTH, dateOfbirth);
+		
+		RegistrationHomePage registrationHomePage = (RegistrationHomePage) getLoginScenario().getBean(PageConstants.REGISTRATION_HOME_PAGE);
+		PlanConfirmationPage planConfirmationPage = registrationHomePage
+				.registerWith(memberId, dateOfbirth);		
+	}
+	
+	@Then("^the user navigate to error page$")
+	public void negativeScenario() {
+		RegistrationHomePage registrationHomePage = (RegistrationHomePage) getLoginScenario()
+				.getBean(PageConstants.REGISTRATION_HOME_PAGE);
+		RegistrationUMSErrorPage registrationUMSErrorPage = registrationHomePage.navigateToErrorPage();
+		
+		getLoginScenario().saveBean(PageConstants.REGISTRATION_ERROR_PAGE, registrationUMSErrorPage);
+
+		/* Get Actual response */
+		JSONObject regErrorActualJson = registrationUMSErrorPage.regErrorPageJson;
+		getLoginScenario().saveBean(RegistrationConstants.REG_ERROR_PAGE_ACTUAL, regErrorActualJson);
+		
+		/* Get Expected response */
+		String fileName = "registrationfailure";
+		String directory = CommonConstants.MEMBER_EXPECTED_DIRECTORY + File.separator + CommonConstants.SITE_BLUELAYER
+				+ File.separator + CommonConstants.REG_FAILURE_FLOW_NAME + File.separator;
+		JSONObject registrationFailureExpectedJson = MRScenario.readExpectedJson(fileName, directory);
+		getLoginScenario().saveBean(RegistrationConstants.REG_FAILURE_EXPECTED, registrationFailureExpectedJson);
+
+	}
+	
+	@Then("^the user validate error message$")
+	public void validate_ErrorMessage() {
+		JSONObject regErrorActualJson = (JSONObject) getLoginScenario()
+				.getBean(RegistrationConstants.REG_ERROR_PAGE_ACTUAL);
+		System.out.println("regErrorActualJson ------------>" + regErrorActualJson);
+
+		JSONObject registrationFailureExpectedJson = (JSONObject) getLoginScenario()
+				.getBean(RegistrationConstants.REG_FAILURE_EXPECTED);
+		System.out.println("registrationFailureExpectedJson ----------->" + registrationFailureExpectedJson);
+
+		try {
+			JSONAssert.assertEquals(regErrorActualJson, registrationFailureExpectedJson, true);
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 

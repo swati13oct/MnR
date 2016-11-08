@@ -105,3 +105,91 @@ Examples:
 # | MAPD     | 		 | 78006       | 2        | Bexar County      | AARP MedicareRx Preferred (PDP)                    |  Open 24 hours             |
 # | MAPD     | Group     | 80002       | 2        | Adams County      | AARP MedicareComplete SecureHorizons Plan 2 (HMO)  |  Pharmacy Saver™ Program   |
   | PDP      | Group	 | 78006       | 25       | Bexar County      | UnitedHealthcare MedicareRx for Groups (PDP)       |  Open 24 hours,Standard Network Pharmacy  |
+  
+  
+  Scenario Outline:To test Locate a Pharmacy tool in UMS site for MAPD Group
+Given login with MAPD member on Blue layer
+| Plan Type    | <plantype>   |
+| MemberType  | <memberType> |
+When the user navigates to pharmacy search page in Blue layer site
+And the user search pharmacies using the below information in Blue layer site
+| Distance    | <distance>  |
+And the user searches for pharmacies available in Blue layer site
+Examples:
+| plantype | memberType   | distance  |
+| MAPD     | Individual       |   25      |
+
+
+Scenario Outline:To test Locate a Pharmacy tool in UMS site for MAPD Group
+Given registered member to verify locate a pharmacy in UMS Site
+| Plan Type    | <plantype>   |
+| MemberType  | <memberType> |
+When the user navigates to pharmacy search page in UMS site
+And the user search pharmacies using the below information in UMS site
+| Distance    | <distance>  |
+And the user searches for pharmacies available in UMS site
+And user validates Ballon Mappers
+Then user validates the English pdf content
+Examples:
+| plantype | memberType   | distance  |
+| MAPD     | Individual   |   25      |
+
+
+Scenario Outline:To test Locate a Pharmacy tool in UMS site for MAPD Group
+Given registered member to verify locate a pharmacy in UMS Site
+| Plan Type    | <plantype>   |
+| MemberType  | <memberType> |
+When the user navigates to pharmacy search page in UMS site
+And the user search pharmacies using the below information in UMS site
+| Distance    | <distance>  |
+And the user opts for chinese content in pharmacy search page
+Then the user validates the chinese pdf content
+Examples:
+| plantype | memberType   | distance  |
+| MAPD     | Individual   |   25      |
+
+
+Scenario Outline:To test Locate a Pharmacy tool in UMS site for MAPD Group
+Given registered member to verify locate a pharmacy in UMS Site
+| Plan Type    | <plantype>   |
+| MemberType  | <memberType> |
+When the user navigates to pharmacy search page in UMS site
+And the user search pharmacies using the below information in UMS site
+| Distance    | <distance>  |
+And the user opts for spanish content in pharmacy search page
+Then the user validates the spanish pdf content
+Examples:
+| plantype | memberType   | distance  |
+| MAPD     | Individual   |   25      |
+
+Scenario Outline:To test Locate a Pharmacy tool in UMS site for MAPD Group
+Given registered member to verify locate a pharmacy in UMS Site
+| Plan Type    | <plantype>   |
+| MemberType  | <memberType> |
+When the user navigates to pharmacy search page in UMS site
+And the user search pharmacies using the below information in UMS site
+| Distance    | <distance>  |
+And the user searches for pharmacies available in UMS site
+Then the user validates the pharmacies available in UMS site
+Examples:
+| plantype | memberType   | distance  |
+| MAPD     | Individual   |   25      |
+
+
+Scenario Outline:To validate disclaimer on Pharmacy Result page
+Given registered member to verify locate a pharmacy page in UMS Site
+| Plan Type    | <plantype>   |
+| MemberType  | <memberType> |
+When the user navigates to pharmacy search page in UMS site
+And the user search pharmacies using the below information in UMS site
+| Distance    | <distance>  |
+And the user searches for pharmacy available in UMS site
+Then the user validates the pharmacies available in UMS site
+Examples:
+| plantype | memberType   | distance  |
+#| MAPD     | Individual   |   25      |
+#| MAPD     | Group        |   2      |
+#| MAPD     | Group        |   2      |
+#| PDP      | Group        |   2      |
+| MAPD     | Individual   |   2      |	
+    	

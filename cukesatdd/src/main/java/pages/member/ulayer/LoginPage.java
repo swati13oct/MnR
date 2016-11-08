@@ -61,26 +61,25 @@ public class LoginPage extends UhcDriver {
 	}
 
 	public Object loginWith(String username, String password) {
-		/*loginIn.click();	
+		loginIn.click();	
 		sendkeys(userNameField,username);
 		sendkeys(passwordField,password);
 		signInButton.click();
 		
-		if (MRScenario.environment.equals("dev-b") || MRScenario.environment.equals("dev-a") || MRScenario.environment.equals("dev-c") || MRScenario.environment.equals("team-b")) {
+		if (MRScenario.environment.equals("awe-dev-b") || MRScenario.environment.equals("dev-a") || MRScenario.environment.equals("dev-c") || MRScenario.environment.equals("team-b")) {
 			Alert alert = driver.switchTo().alert();
 			alert.accept();
 			Alert alert1 = driver.switchTo().alert();
 			alert1.accept();
-			}			
-			if (!(MRScenario.environment.equals("dev-c") || MRScenario.environment.equals("team-b"))){
+					
+			if (!(MRScenario.environment.equals("awe-dev-b") || MRScenario.environment.equals("dev-c") || MRScenario.environment.equals("team-b"))){
 				Alert alert2 = driver.switchTo().alert();
 				alert2.accept();
 			}
-
+			
 		}
 
-
-if (MRScenario.environment.equals("dev-b") || MRScenario.environment.equals("dev-a") || MRScenario.environment.equals("dev-c")
+		if ( MRScenario.environment.equals("dev-a") || MRScenario.environment.equals("dev-c")
 		|| MRScenario.environment.equals("team-a")) {
 		Alert alert = driver.switchTo().alert();
         alert.accept();
@@ -92,19 +91,16 @@ if (MRScenario.environment.equals("dev-b") || MRScenario.environment.equals("dev
  			}
 
  		}
-        
-        if(currentUrl().contains("home/my-account-home.html"))
-
-		//if(currentUrl().contains("home/my-account-home.html"))
-		String title = driver.getTitle();
-		if(title.contains("AARP Medicare Plans | My Account Home"))
+            
+		
+		if(currentUrl().contains("home/my-account-home.html"))
 
 		{
 			return new AccountHomePage(driver);
 		}
 		else if (currentUrl().contains("terminated-plan.html")) {
-			return new TerminatedHomePage(driver); */
-		//}
+			return new TerminatedHomePage(driver); 
+		}
 		return null;
 	}
 

@@ -39,7 +39,7 @@ public class RegistrationHomePage extends UhcDriver {
 	@FindBy(className = "shipcontinue_btn")
 	private WebElement continueButton;
 
-	private static String PAGE_URL = MRConstants.MEDICA_REGISTRATION_URL;
+	private static String PAGE_URL = MRConstants.UHCM_REGISTRATION_URL;
 
 	public RegistrationHomePage(WebDriver driver) {
 		super(driver);
@@ -88,6 +88,13 @@ public class RegistrationHomePage extends UhcDriver {
 		
 	}
 
+	public RegistrationUMSErrorPage navigateToErrorPage() {		
+		if (driver.getTitle().equalsIgnoreCase(
+				"UnitedHealthcare Medicare Solutions | Registration")) {
+			return new RegistrationUMSErrorPage(driver);
+		}
+		return null;
+	}
 	/*TODO:sseetala Please check if this method is required. Unable to find references in the codebase*/
 	public AcquisitionHomePage switchBack() {
 		

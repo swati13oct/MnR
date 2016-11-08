@@ -39,12 +39,20 @@ public class RegistrationHomePage extends UhcDriver {
 	@FindBy(className = "shipcontinue_btn")
 	private WebElement continueButton;
 
-	private static String MY_MEDICA_PAGE_URL = MRConstants.MEDICA_PAGE_URL;
+	private static String MY_MEDICA_PAGE_URL = MRConstants.MEDICA_REGISTRATION_URL;
 
 	public RegistrationHomePage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
 		openAndValidate();
+	}
+	
+	public ErrorPage navigateToErrorPage() {		
+		if (driver.getTitle().equalsIgnoreCase(
+				"UnitedHealthcare Medicare Solutions | Registration")) {
+			return new ErrorPage(driver);
+		}
+		return null;
 	}
 
 	public PlanConfirmationPage registerWith(String memberId, String dateOfbirth) {
