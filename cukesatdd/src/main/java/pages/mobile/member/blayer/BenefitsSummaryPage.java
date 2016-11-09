@@ -26,7 +26,7 @@ import acceptancetests.atdd.util.CommonUtility;
  */
 public class BenefitsSummaryPage extends PharmacyLocator{
 	
-	@FindBy(xpath="//div[@class='site-header']/a")
+	@FindBy(css="a.menu-open-button.add-class")
 	private WebElement menuButton;
 	
 	@FindBy(xpath = "//div[@class='menu-container']/a")
@@ -65,7 +65,12 @@ public class BenefitsSummaryPage extends PharmacyLocator{
 	
 	@FindBy(xpath = "//*[@id='wrapper']/div[1]/div[2]/div/div/div[1]/div[5]/div/div[2]/div/a")
 	private WebElement visualizeMyDrugBenefits;
-
+	
+	@FindBy(xpath="//div[text()='List View']")
+	private WebElement listView;
+	
+	@FindBy(xpath="//div[text()='Map View']")
+	private WebElement mapView;
 	
 	private PageData benefitsSummary;
 
@@ -74,7 +79,7 @@ public class BenefitsSummaryPage extends PharmacyLocator{
 	private PageData browserCheckData;
 
 	private JSONObject browserCheckJson;
-
+	
 	public BenefitsSummaryPage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
@@ -160,6 +165,29 @@ public class BenefitsSummaryPage extends PharmacyLocator{
 		}
 		return null;
 	}
+	/**
+	 * Get Pharmacy Locator page with required view
+	 * @param pharmacyLocatorView -> Map View\List View
+	 * @return
+	 */
+	public PharmacyLocatorPage getPharmacyLocator(String pharmacyLocatorView){
+		menuButton.click();
+		pharmacyLocator.click();
+		switch (pharmacyLocatorView) {
+		case "List View":
+			listView.click();
+			break;
+		case "Map View":
+			mapView.click();
+			break;
+		}
+		
+		if(currentUrl().contains("mobile/home/pharmacy-search.html"))
+		{
+			return new PharmacyLocatorPage(driver);
+		}
+		return null;
+	}
 	
 	public void getProviderSearch(){
 		menuButton.click();
@@ -210,6 +238,11 @@ public class BenefitsSummaryPage extends PharmacyLocator{
 		}
 	}
 
+<<<<<<< HEAD
+	 public void navigateToPharamcyPage(){
+		menu.click();
+		pharamcyLocatorLink.click();
+=======
 	public PharmacyLocatorPage navigateToPharmacyLocatorPage(){
 		 menu.click();
 		 pharamcyLocatorLink.click();
@@ -219,6 +252,7 @@ public class BenefitsSummaryPage extends PharmacyLocator{
 		 else{
 			 return null;
 		 }
+>>>>>>> remotes/origin/develop
 	 }
 	 
 	 public void validatePharmacyPage(){

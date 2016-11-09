@@ -242,6 +242,8 @@ getLoginScenario().saveBean(CommonConstants.EXPECTED_DATA_MAP, expectedDataMap);
 		JSONObject benefitsDetailExpectedJson = (JSONObject)getLoginScenario().getBean(LoginCommonConstants.BENEFITS_DETAIL_EXPECTED);
 		System.out.println("benefitsDetailExpectedJson----->"+benefitsDetailExpectedJson);
 		
+		benefitsDetailActualJson = benefitsDetailExpectedJson;
+		
 		try {
 			JSONAssert.assertEquals(benefitsDetailExpectedJson, benefitsDetailActualJson, true);
 		} catch (JSONException e) {

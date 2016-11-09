@@ -12,7 +12,7 @@ Feature:To test plan drug details page on UHCM site in mobile
 
 #Examples:
 #	| planType |
-#	| MAPD     |
+#	| PDP     |
 	
 Scenario Outline:Verify Plan Drug Details in UHCM site for members in mobile
 Given the user is on the UHC medicare site mobile login page
