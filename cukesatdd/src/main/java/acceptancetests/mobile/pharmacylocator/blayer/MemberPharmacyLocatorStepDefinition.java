@@ -3,8 +3,6 @@
  */
 package acceptancetests.mobile.pharmacylocator.blayer;
 
-import gherkin.formatter.model.DataTableRow;
-
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
@@ -19,16 +17,6 @@ import org.openqa.selenium.WebDriver;
 import org.skyscreamer.jsonassert.JSONAssert;
 import org.springframework.beans.factory.annotation.Autowired;
 
-
-import pages.mobile.member.blayer.BenefitsSummaryPage;
-import pages.mobile.member.blayer.LoginPage;
-import pages.mobile.member.blayer.PharmacyLocator;
-import pages.mobile.member.blayer.PharmacyLocatorPage;
-<<<<<<< HEAD
-import pages.mobile.member.ulayer.PharmacyLocatorFilterPage;
-import pages.mobile.member.ulayer.PharmacyLocatorFilterPage.ToolTip;
-=======
->>>>>>> remotes/origin/develop
 import acceptancetests.atdd.data.mobile.member.PageConstants;
 import acceptancetests.atdd.mobile.data.CommonConstants;
 import acceptancetests.mobile.login.data.LoginCommonConstants;
@@ -38,8 +26,13 @@ import cucumber.annotation.en.And;
 import cucumber.annotation.en.Given;
 import cucumber.annotation.en.Then;
 import cucumber.annotation.en.When;
-import cucumber.annotation.en_scouse.An;
 import cucumber.table.DataTable;
+import gherkin.formatter.model.DataTableRow;
+import pages.mobile.member.blayer.BenefitsSummaryPage;
+import pages.mobile.member.blayer.LoginPage;
+import pages.mobile.member.blayer.PharmacyLocatorPage;
+import pages.mobile.member.ulayer.PharmacyLocatorFilterPage;
+import pages.mobile.member.ulayer.PharmacyLocatorFilterPage.ToolTip;
 
 /**
  * @author pjaising

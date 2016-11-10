@@ -238,11 +238,10 @@ public class BenefitsSummaryPage extends PharmacyLocator{
 		}
 	}
 
-<<<<<<< HEAD
 	 public void navigateToPharamcyPage(){
 		menu.click();
 		pharamcyLocatorLink.click();
-=======
+	 }
 	public PharmacyLocatorPage navigateToPharmacyLocatorPage(){
 		 menu.click();
 		 pharamcyLocatorLink.click();
@@ -252,7 +251,6 @@ public class BenefitsSummaryPage extends PharmacyLocator{
 		 else{
 			 return null;
 		 }
->>>>>>> remotes/origin/develop
 	 }
 	 
 	 public void validatePharmacyPage(){
