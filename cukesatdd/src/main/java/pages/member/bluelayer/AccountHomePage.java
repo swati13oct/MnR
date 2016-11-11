@@ -110,8 +110,15 @@ public class AccountHomePage extends UhcDriver {
 	
 	@FindBy(id = "pcpLogoPrint1left")
 	private WebElement validateLogo;
-
 	
+	@FindBy(xpath = "//a[contains(text(),'UnitedHealthcare MedicareComplete Choice (PPO)')]")
+	private WebElement uhcMedicareCompleteChoicePPO;
+	
+	@FindBy(xpath ="//*[@id='healthwellness']/a")
+	private WebElement healthAndWellnessTab;
+		
+	@FindBy(xpath ="//*[@id='gogreenmeter']/a")
+	private WebElement goGreenLink;
 	
 	
 	private PageData myAccountHome;
@@ -445,6 +452,49 @@ public ContactUsPage navigatesToContactUsPage() {
 	    		} 		 
 	    	}
 	 }
+
+	
+	/**
+	* Below method will validate plan name: 'uhcMedicareCompleteChoicePPO'
+	* Added as part of commandos team
+	* @return
+	*/
+	public boolean isUHCMedicareCompleteChoicePPOPresent(){
+	try{
+	if(uhcMedicareCompleteChoicePPO.getText() == CommonConstants.SIERRA_PLAN_NAME){
+	System.out.println("uhcMedicareCompleteChoicePPO is displayed ");
+	}else{
+	System.out.println("uhcMedicareCompleteChoicePPO.getText() >>>>>>   "+uhcMedicareCompleteChoicePPO.getText());
+	}
+	}catch(Exception e){
+	return false;
+	}
+	return true;
+	}
+
+	public HealthAndWellnessPage navigateToHealthAndWellnessPage() {
+
+		healthAndWellnessTab.click();
+		if (getTitle().equalsIgnoreCase(
+				"UnitedHealthcare Medicare Solutions | My Health and Wellness")) {
+			return new HealthAndWellnessPage(driver);
+		}
+
+		return null;
+
+	}
+	
+	public GoGreenPage navigateToGoGreenPage() {
+
+		goGreenLink.click();
+		if (getTitle().equalsIgnoreCase(
+				"UnitedHealthcare Medicare Solutions | Go Green")) {
+			return new GoGreenPage(driver);
+		}
+
+		return null;
+
+	}
 
 	public void navigate_ProviderSearch() {
 		validate(medicalProviders);
