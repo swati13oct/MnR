@@ -92,6 +92,7 @@ public class PharmacySearchPage extends UhcDriver {
 
 	@FindBy(id = "services")
 	private WebElement pharmacyTypeSelectionRadioButton;
+	
 	@FindBy(xpath = "//*[@id='medicareTitle']/p/a[1]")
 	private WebElement espanolLink;
 	
