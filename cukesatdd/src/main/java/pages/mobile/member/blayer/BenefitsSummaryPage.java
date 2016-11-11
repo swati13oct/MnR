@@ -65,12 +65,26 @@ public class BenefitsSummaryPage extends PharmacyLocator{
 	
 	@FindBy(xpath = "//*[@id='wrapper']/div[1]/div[2]/div/div/div[1]/div[5]/div/div[2]/div/a")
 	private WebElement visualizeMyDrugBenefits;
+
 	
 	@FindBy(xpath="//div[text()='List View']")
 	private WebElement listView;
 	
 	@FindBy(xpath="//div[text()='Map View']")
 	private WebElement mapView;
+
+
+	@FindBy(linkText = "PHARMACY LOCATOR")
+	private WebElement pharmacylocator;
+	
+	@FindBy(linkText = "Map View")
+	private WebElement mapview;
+
+	@FindBy(linkText = "List View")
+	private WebElement listview;
+
+
+
 	
 	private PageData benefitsSummary;
 
@@ -252,6 +266,24 @@ public class BenefitsSummaryPage extends PharmacyLocator{
 			 return null;
 		 }
 	 }
+
+	public void Validate_pharmacy_locator() {
+		boolean present;
+		try {
+			mapview.isDisplayed();
+			listview.isDisplayed();
+		present = true;
+		} catch (NoSuchElementException e) {
+		present = false;
+		}
+
+		if(present)
+		System.out.println("@@@@@@@@@ Able to find mapview and listview @@@@@@@@@");
+		else
+		System.out.println("@@@@@@@@@ No option for views @@@@@@@@@");
+		
+	}
+
 	 
 	 public void validatePharmacyPage(){
 		 filterButton.click();

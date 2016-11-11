@@ -76,6 +76,8 @@ public class RallytoolAarpStepDefinition {
     	public void launchRallyTool() throws InterruptedException{
     	 AccountHomePage accountHomePage =(AccountHomePage) getLoginScenario().getBean(PageConstants.ACCOUNT_HOME_PAGE);
     	 Rallytool_Page rallyPage = accountHomePage.navigateToRallyPage();
+	 accountHomePage = rallyPage.switchBack();
+    	 accountHomePage.logOut();
     	}
     
 	 

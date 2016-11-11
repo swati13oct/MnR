@@ -372,6 +372,18 @@ public class BenefitsAndCoverageUmsStepDefinition {
 		benefitsCoveragePage.logOut();
 
 	}
+
+	@Then("^the user validates My Optional Service and PDF links$")
+	public void validates_My_OPtional_Services_PDF_UMS() {
+		BenefitsCoveragePage benefitsCoveragePage = (BenefitsCoveragePage) getLoginScenario()
+				.getBean(PageConstants.BENEFITS_AND_COVERAGE_PAGE);
+
+		benefitsCoveragePage.validateRidersWidgetandPDFLinks();
+		benefitsCoveragePage.clickOnMyDrugCostAndBenefitSummaryLink();
+
+		benefitsCoveragePage.logOut();
+
+	}
 	
 	@Then("^the user validates riders after login in UHC site$")
 	public void validate_Riders__Available_Not() {
