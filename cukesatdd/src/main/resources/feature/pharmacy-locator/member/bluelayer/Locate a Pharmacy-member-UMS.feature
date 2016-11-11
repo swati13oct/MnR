@@ -174,4 +174,21 @@ Then the user validates the pharmacies available in UMS site
 Examples:
 | plantype | memberType   | distance  |
 | MAPD     | Individual   |   25      |
+
+ @Q5
+Scenario Outline: Verify right rail widget and logo slider Pharmacy Locator Search page in UMS site
+Given registered member to verify locate a pharmacy in UMS Site
+|Username|<username>|
+| Plan Type    | <plantype>   |
+#| Member Type  | <memberType> |
+When the user navigates to myplan page in UMS site	
+When the user navigates to pharmacy search page in UMS site
+#Then the user validates the right rail widget and logo slider
+Then the user validates Pharmacy Locator tool plan dropdown menu for the Medica and PCP member plan
+#Then the user validates Search checkbox displayed dynamically related to the pharmacy network
+
+
+Examples:
+|username	     |plantype    |
+|blpcp_021     |PCP      |
     	

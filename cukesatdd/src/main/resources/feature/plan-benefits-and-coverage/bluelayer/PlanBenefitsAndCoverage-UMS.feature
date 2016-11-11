@@ -545,3 +545,20 @@ Examples:
 | riderAvailableCheck |
 #| riderAvailable       |
 | riderNotAvailable    |
+
+@Q4
+Scenario Outline: Verify My Medical Costs & Benefits Summary in UMS site
+Given registered UHC with following details for plan benefits and coverage flow in UMS site
+ | Plan Type      |MAPD  |
+ | Member Type    |Individual|
+ | Copay Category |NON LIS               |  
+ | Riders         |<riderAvailableCheck> |
+ When the user navigates to plan benefits and Coverage in UMS site
+ Then the user validates My Optional Service and PDF links
+ 
+  
+ Examples:
+
+| riderAvailableCheck |
+| riderAvailable       |
+#| riderNotAvailable    |

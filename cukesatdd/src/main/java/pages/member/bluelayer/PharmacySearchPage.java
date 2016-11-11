@@ -1,4 +1,4 @@
-/**
+﻿/**
  * 
  */
 package pages.member.bluelayer;
@@ -25,6 +25,9 @@ public class PharmacySearchPage extends UhcDriver {
 
 	@FindBy(id = "zipCode")
 	private WebElement zipcodeField;
+
+	@FindBy(id = "disclosure_link")
+	private WebElement logOut;
 
 	@FindBy(id = "showresults")
 	private WebElement distanceField;
@@ -87,6 +90,27 @@ public class PharmacySearchPage extends UhcDriver {
 	
 	@FindBy(xpath = "//a[text()='search']")
 	private WebElement spanishSearch;
+
+	@FindBy(xpath = "//*[@id='myInfoContent']/div[1]/h2")
+	private WebElement rightrailwidget1;
+	
+	@FindBy(xpath = "//*[@id='myInfoContent']/div[2]/div")
+	private WebElement rightrailwidget2;
+	
+	@FindBy(xpath = "//*[@id='searchCriteria']/div[5]")
+	private WebElement logoslider;
+	
+	@FindBy(xpath = "//*[@id='services']")
+	private WebElement services;
+	
+	@FindBy(linkText = "Preferred Retail Pharmacy Network")
+	private WebElement preferredretail;
+	
+	@FindBy(linkText = "Pharmacy Saver Program")
+	private WebElement pharmacysaver;
+	
+	@FindBy(xpath = "//*[@id='plan']")
+	private WebElement medicamember;
 	
 	public String county = null;
 
@@ -268,4 +292,66 @@ public class PharmacySearchPage extends UhcDriver {
 		return null;
 
 	}
+
+	public void validateRightRailWidgetandLogo() {
+		boolean present;
+		try {
+			rightrailwidget1.isDisplayed();
+			rightrailwidget2.isDisplayed();
+			logoslider.isDisplayed();
+		
+		present = true;
+		} catch (NoSuchElementException e) {
+		present = false;
+		}
+
+		if(present)
+		System.out.println("@@@@@@@@@ Able to find right rail widget and logo slider @@@@@@@@@");
+		else
+		System.out.println("@@@@@@@@@ No right rail widget and logo slider @@@@@@@@@");
+		//MyDrugCostAndBenefitSummaryLink.isDisplayed();
+		
+	}
+	
+	public void logOut() {
+		logOut.click();
+
+	}
+
+	public void clickOnShowPharmaciesForTheseServices() {
+		services.isDisplayed();
+		services.click();
+		boolean present=false;
+		try {
+			
+			if(preferredretail.isDisplayed()||pharmacysaver.isDisplayed())
+			present =true;
+			
+		} catch (NoSuchElementException e) {
+			present = false;
+		}
+
+		if(present)
+			System.out.println("@@@@@@@@@ Able to find Preferred Retail Pharmacy Network and Pharmacy Saver Program @@@@@@@@@");
+		else
+			System.out.println("@@@@@@@@@ No Option is there for pharmacy search provider @@@@@@@@@");
+
+	}
+
+	public void validateMedicaandPCPMemberplan() {
+		boolean present;
+		try {
+			medicamember.isDisplayed();		
+		present = true;
+		} catch (NoSuchElementException e) {
+		present = false;
+		}
+
+		if(present)
+		System.out.println("@@@@@@@@@ Able to find Medica and PCP members plan @@@@@@@@@");
+		else
+		System.out.println("@@@@@@@@@ No option for Medica and PCP member plan @@@@@@@@@");
+				
+	}
+
 }

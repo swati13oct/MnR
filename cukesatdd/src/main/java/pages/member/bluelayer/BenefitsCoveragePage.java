@@ -31,6 +31,15 @@ public class BenefitsCoveragePage extends UhcDriver {
 	@FindBy(id = "disclosure_link")
 	private WebElement logOut;
 
+	@FindBy(xpath = "//a[contains(.,'My prescription drug cost and benefits summary')]")
+	private WebElement MyDrugCostAndBenefitSummaryLink;
+
+	@FindBy(xpath="//*[@id='main_content']/div[2]/div/div[2]/div[2]/div")
+	private WebElement prescriptiondrugcost;
+
+	@FindBy(xpath="//*[@id='main_content']/div[2]/div/div[2]/div[2]/div/h2")
+	private WebElement prescriptiondrugcostandsummary;
+
 	private PageData benefitsAndCoverage;
 
 	public JSONObject benefitsAndCoverageJson;
@@ -169,5 +178,56 @@ public class BenefitsCoveragePage extends UhcDriver {
 		else
 			System.out.println("@@@@@@@@@ No Preferred Retail Drug Cost Table @@@@@@@@@");
 	}
+
+	public void validateRidersWidgetandPDFLinks() {
+		try {
+			Thread.sleep(70000);
+		} catch (InterruptedException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		boolean present;
+		try {
+			//optionalRiders.isDisplayed();
+			driver.findElement(By.xpath("//*[@id='accountdetails']/div/div[3]/div/div[2]/div"));
+			driver.findElement(By.xpath("//*[@id='optionalservice_box']/div[2]/div[2]/div/p[4]/a"));
+			driver.findElement(By.xpath("//*[@id='optionalservice_box']/div[2]/div[2]/div/p[5]/a"));
+			//PDFLinks1.isDisplayed();
+			//PDFLinks2.isDisplayed();
+			present = true;
+		} catch (NoSuchElementException e) {
+			present = false;
+		}
+
+		if(present)
+			System.out.println("@@@@@@@@@ Able to find Optional Riders widget and PDF links @@@@@@@@@");
+		else
+			System.out.println("@@@@@@@@@ No Optional Riders widget and PDF links @@@@@@@@@");
+		//MyDrugCostAndBenefitSummaryLink.isDisplayed();
+	}
+
+	public void clickOnMyDrugCostAndBenefitSummaryLink() {
+
+
+		MyDrugCostAndBenefitSummaryLink.isDisplayed();
+		MyDrugCostAndBenefitSummaryLink.click();
+		boolean present;
+		try {
+			prescriptiondrugcost.isDisplayed();
+			prescriptiondrugcostandsummary.isDisplayed();
+			present = true;
+		} catch (NoSuchElementException e) {
+			present = false;
+		}
+
+		if(present)
+			System.out.println("@@@@@@@@@ Able to find My 2017 Prescription Drug Cost and Benefit Summary @@@@@@@@@");
+		else
+			System.out.println("@@@@@@@@@ No Optional Riders widget and deductible 3,4,5 @@@@@@@@@");
+
+
+	}
+
+
 
 }

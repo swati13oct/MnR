@@ -465,19 +465,29 @@ public class AccountHomePage extends UhcDriver {
 
 		return browserCheckJson;
 	}
+
 	public Rallytool_Page navigateToRallyPage() { 
 		driver.manage().window().maximize(); 
+		try{
 		searchForProviders.click();
 		//switch to Rally Page
 		ArrayList<String> tabs = new ArrayList<String> (driver.getWindowHandles());
 		driver.switchTo().window(tabs.get(1));
 		if (driver.getTitle().equalsIgnoreCase("Find Care")) {
 		return new Rallytool_Page(driver);
-		} else{
-		Assert.fail();
+		}
+		else{
+			Assert.fail();
+		}
+		}
+		catch(Exception e){
+					
+		Assert.fail("Link is not Present");
 		} 
 
 		return null;
 		}
+	
+
 
 }
