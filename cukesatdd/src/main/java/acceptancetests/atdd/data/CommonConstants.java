@@ -816,6 +816,12 @@ public class CommonConstants {
 
 	public static final String LOGIN_ASSISTANCE_PERSONAL_IDENTIFICATION_ERROR_SCENARIO = "personalIdentificationErrorScenario.json";
 
+	public static final String NEXT_YEAR = "nextyear";
+
+	public static final String BENEFITS_AND_COVERAGE_MAPD_LIS_NONUS_PAGE_DATA = "planbenefitsandcoveragelisnotusother.json";
+	
+	public static final String SIERRA_PLAN_NAME = "UnitedHealthcare MedicareComplete Choice (PPO)";
+	
 	
 
 	
