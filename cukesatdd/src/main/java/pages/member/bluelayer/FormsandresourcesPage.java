@@ -50,6 +50,18 @@ public class FormsandresourcesPage extends UhcDriver {
 	@FindBy(xpath=".//*[contains(text(),'search providers')]")
 	private WebElement searchProvider;
 	
+	@FindBy(xpath="//*[@id='benefits']/a")
+	private WebElement benefitsAndCoverage;  
+	
+	@FindBy(xpath="//*[@id='planBenefitsApp']/div/div/div[1]/div/div/div/div/span[2]")
+	private WebElement planName;
+	
+	@FindBy(xpath="//*[@id='planBenefitsApp']/div/div/div[2]/div[1]/div[1]/div[1]/div[2]")  
+	private WebElement memberNameText;
+	
+	@FindBy(xpath="//*[@id='planBenefitsApp']/div/div/div[2]/div[3]/span[2]")
+	private WebElement monthlyPremiumText;
+	
 	private PageData formsAndResources;
 
 	public JSONObject formsAndResourcesJson;
@@ -94,6 +106,12 @@ public class FormsandresourcesPage extends UhcDriver {
 	public void logOut() {
 		logOut.click();
 
+	}
+	
+	public FormsandresourcesPage clickBenefitsAndCoverage(){
+		benefitsAndCoverage.click();
+		  
+		return new FormsandresourcesPage(driver);  
 	}
 	 public Rallytool_Page clickAndValidateProviderSearch(){
 		  // waitforElement(searchProviderButton);
