@@ -178,6 +178,32 @@ public class FormsandResourcesUmsStepDefinition {
 		formsandresourcesAarpPage.logOut();
 
 	}
+	
+	@Then("^the user validates Plan Benefits and Coverage details in UMS site$")
+	public void validates_plan_benefits_coverage() {
+		FormsandresourcesPage formsandresourcesAarpPage = (FormsandresourcesPage) getLoginScenario()
+				.getBean(PageConstants.FORMS_AND_RESOURCES_PAGE);
+		
+		formsandresourcesAarpPage = formsandresourcesAarpPage.clickBenefitsAndCoverage();
+		
+		JSONObject formsAndResourcesActualJson = (JSONObject) getLoginScenario()
+				.getBean(FnRCommonConstants.FORMS_AND_RESOURCES_ACTUAL);
+		JSONObject formsAndResourcesExpectedJson = (JSONObject) getLoginScenario()
+				.getBean(FnRCommonConstants.FORMS_AND_RESOURCES_EXPECTED);
+
+		System.out.println("formsAndResourcesActualJson=====>"
+				+ formsAndResourcesActualJson.toString());
+		System.out.println("formsAndResourcesExpectedJson===>"
+				+ formsAndResourcesExpectedJson.toString());
+		//Validations 
+		try {
+			JSONAssert.assertEquals(formsAndResourcesExpectedJson,
+					formsAndResourcesActualJson, true);
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}
+
+	}
 
 	@Given("^registered member for plan materials in forms and resources in UMS Site$")
 	public void registered_member_planmaterials_formsandresources_ums(
