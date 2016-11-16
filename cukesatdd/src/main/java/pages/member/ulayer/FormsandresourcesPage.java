@@ -3,7 +3,6 @@
  */
 package pages.member.ulayer;
 
-import java.io.File;
 import java.util.List;
 import java.util.Map;
 
@@ -41,6 +40,9 @@ public class FormsandresourcesPage extends UhcDriver {
 
 	@FindBy(id = "disclosure_link")
 	private WebElement logOut;
+	
+	@FindBy(xpath="//*[@id='benefits']/a")
+	private WebElement benefitsAndCoverageLink;
 
 	private PageData planDocsPDF;
 	private PageData formsAndResources;
@@ -213,6 +215,18 @@ public class FormsandresourcesPage extends UhcDriver {
 		planDocPDFsJson = jsonObject;
 		return planDocPDFsJson;
 		}
+	
+	
+	
+	public PlanBenefitsCoveragePage navigateToBenefitsAndCoverage() {
+		benefitsAndCoverageLink.click();
+		CommonUtility.checkPageIsReady(driver);
+		if (driver.getTitle().equalsIgnoreCase(
+				"My Benefits & Coverage")) {
+			return new PlanBenefitsCoveragePage(driver);
+		} else
+			return null;
+	}
 	}
 	
 

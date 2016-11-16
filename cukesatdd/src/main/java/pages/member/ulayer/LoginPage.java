@@ -72,13 +72,13 @@ public class LoginPage extends UhcDriver {
 			Alert alert1 = driver.switchTo().alert();
 			alert1.accept();
 					
-			if (!(MRScenario.environment.equals("awe-dev-b") || MRScenario.environment.equals("dev-c") || MRScenario.environment.equals("team-b"))){
+			/*if (!(MRScenario.environment.equals("awe-dev-b") || MRScenario.environment.equals("dev-c") || MRScenario.environment.equals("team-b"))){
 				Alert alert2 = driver.switchTo().alert();
 				alert2.accept();
-			}
+			}*/
 			
 		}
-
+/*
 		if ( MRScenario.environment.equals("dev-a") || MRScenario.environment.equals("dev-c")
 		|| MRScenario.environment.equals("team-a")) {
 		Alert alert = driver.switchTo().alert();
@@ -90,7 +90,7 @@ public class LoginPage extends UhcDriver {
         		alert2.accept();
  			}
 
- 		}
+ 		}*/
             
 		
 		if(currentUrl().contains("home/my-account-home.html"))

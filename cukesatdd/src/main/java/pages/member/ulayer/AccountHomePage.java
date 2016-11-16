@@ -53,6 +53,9 @@ public class AccountHomePage extends UhcDriver {
 	
 	@FindBy(xpath="//*[@id='footer']/ul/li[1]/div[2]/div[2]/a/span")
 	private WebElement formsAndResourcesLink;
+	
+	@FindBy(xpath="//[@id='benefits']/a")
+	private WebElement benefitsAndCoverageLink;
 
 	@FindBy(linkText = "locate a pharmacy")
 	private WebElement pharmacyLocator;
@@ -148,6 +151,17 @@ public class AccountHomePage extends UhcDriver {
 		} else
 			return null;
 	}
+	
+	
+	public PlanBenefitsCoveragePage navigateToBenefitsAndCoverage() {
+		benefitsAndCoverageLink.click();
+		if (driver.getTitle().equalsIgnoreCase(
+				"AARP Medicare Plans | Plan Benefits and Coverage")) {
+			return new PlanBenefitsCoveragePage(driver);
+		} else
+			return null;
+	}
+	
 
 	public EstimateYourDrugCostPage navigateToDrugLookup() {		
 		drugLookupLink.click();
@@ -351,20 +365,10 @@ public class AccountHomePage extends UhcDriver {
 	}
 
 	public JSONObject getExpectedData(Map<String, JSONObject> expectedDataMap) {
-		String expectedJsonString = "";
+		
 		JSONObject accountHomeExpectedJson = expectedDataMap
 				.get(CommonConstants.MY_ACCOUNT_HOME);
-		@SuppressWarnings("unchecked")
-		Iterator<String> keys = accountHomeExpectedJson.keys();
-		String key = keys.next();
-		try {
-			expectedJsonString = accountHomeExpectedJson.getJSONObject(key).getString("myaccounthome");
-			accountHomeExpectedJson = new JSONObject(expectedJsonString);
-			
-		} catch (JSONException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		
 		return accountHomeExpectedJson;
 	}
 

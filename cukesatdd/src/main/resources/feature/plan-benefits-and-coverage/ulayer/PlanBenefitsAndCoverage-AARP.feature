@@ -1,4 +1,5 @@
 @bnc
+
 Feature: To test plan benefits and Coverage on AARP site for Federal members
 Scenario Outline: Verify benefits and coverage in AARP site for MAPD NON LIS member
 Given registered AMP with following details for benefits and coverage flow in AARP site
@@ -345,3 +346,18 @@ Examples:
 	| PDP      |
 			
 
+Scenario Outline:To verify pdfs displayed in forms and resources for MA member in AARP site
+Given registered member for forms and resources in AARP Site
+	| <planType> |
+When the user view forms and resources in AARP site
+Then the user view benefits and coverage in AARP site
+And the user validates the content on benefits and coverage page
+
+Examples:
+
+| planType |
+#| MA	   |
+| MAPD	   |
+#| PDP      |
+#| MS       |
+#| HIP      |
