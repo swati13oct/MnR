@@ -16,6 +16,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
+import pages.member.bluelayer.PharmacySearchPage;
 import acceptancetests.atdd.data.CommonConstants;
 import acceptancetests.atdd.data.ElementData;
 import acceptancetests.atdd.data.PageData;
@@ -46,6 +47,15 @@ public class PlanBenefitsCoveragePage extends UhcDriver {
 	
 	public JSONObject planDocPDFAcqJson;
 	
+	@FindBy(xpath="//*[@id='planBenefitsApp']/div/div/div[2]/div[1]/div/div[2]/div[1]/span")
+	private WebElement memberId;
+	
+	@FindBy(xpath="//*[@id='planBenefitsApp']/div/div/div[2]/div[1]/div/div[1]/div[1]/span")
+	private WebElement memberName;
+	
+	@FindBy(xpath="//*[@id='planBenefitsApp']/div/div/div[2]/div[1]/div/div[4]/div[1]/span")
+	private WebElement effectiveDate;
+	
 
 
 
@@ -64,6 +74,22 @@ public class PlanBenefitsCoveragePage extends UhcDriver {
 		logOut.click();
 
 	}
+	
+	
+	public void validateFieldsOnBenefitsAndCoveragePage(){
+		
+		try {
+			validate(memberId);
+
+			validate(memberName);
+
+			validate(effectiveDate);
+
+		} catch (Exception e) {
+			System.out.println("Elements are not found ...");
+		}
+	}
+	
 
 	@Override
 	public void openAndValidate() {
@@ -250,5 +276,16 @@ public class PlanBenefitsCoveragePage extends UhcDriver {
 		planDocPDFAcqJson = jsonObject;
 		return planDocPDFAcqJson;
 	}
+	
+	/*public PharmacySearchPage navigateToPharmacyLocator() {
+
+		pharmacyLocator.click();
+		CommonUtility.waitForPageLoad(driver, pharmacyLocatorHeading, CommonConstants.TIMEOUT_30);
+		if (getTitle().equalsIgnoreCase(
+				"UnitedHealthcare Medicare Solutions | Pharmacy Directory")) {
+			return new PharmacySearchPage(driver);
+		}
+		return null;
+	}*/
 
 }
