@@ -173,14 +173,21 @@ public class BenefitsSummaryPage extends PharmacyLocator{
 	public PharmacyLocatorPage getPharmacyLocator(String pharmacyLocatorView){
 		menuButton.click();
 		pharmacyLocator.click();
-		switch (pharmacyLocatorView) {
+		
+		if(pharmacyLocatorView.equals("List View")){
+			listView.click();
+		}else{
+			mapView.click();
+		}
+		
+		/*switch (pharmacyLocatorView) {
 		case "List View":
 			listView.click();
 			break;
 		case "Map View":
 			mapView.click();
 			break;
-		}
+		}*/
 		
 		if(currentUrl().contains("mobile/home/pharmacy-search.html"))
 		{
