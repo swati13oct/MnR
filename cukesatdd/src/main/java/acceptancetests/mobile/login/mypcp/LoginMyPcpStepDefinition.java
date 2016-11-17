@@ -5,6 +5,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import pages.mobile.member.mypcp.AboutUsPage;
 import pages.mobile.member.mypcp.ContactUsPage;
+import pages.mobile.member.mypcp.PasswordAssistancePage;
+import pages.mobile.member.mypcp.RegistrationHomePage;
 import pages.mobile.member.mypcp.SignInPage;
 import acceptancetests.atdd.data.CommonConstants;
 import acceptancetests.atdd.data.member.PageConstants;
@@ -34,6 +36,53 @@ public class LoginMyPcpStepDefinition {
 		getLoginScenario().saveBean(PageConstants.MYPCP_SIGN_IN_PAGE,
 				myPcpSignInPage);
 	}
+	
+	@Given("^the user is on registration page of My PCP mobile site1$")
+	public void registration_landing_page() {
+		/*WebDriver wd = getLoginScenario().getMobileWebDriver();
+		wd.manage().window().maximize();*/
+
+		SignInPage myPcpSignInPage = (SignInPage) getLoginScenario()
+				.getBean(PageConstants.MYPCP_SIGN_IN_PAGE);
+		RegistrationHomePage registrationHomePage = myPcpSignInPage.navigateToRegistrationHomePage();
+
+		//getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
+		getLoginScenario().saveBean(PageConstants.REGISTRATION_HOME_PAGE, registrationHomePage);
+		getLoginScenario().saveBean(PageConstants.REGISTRATION_HOME_PAGE, registrationHomePage);
+	}
+	
+	@Given("^the user clicks on back button from  My PCP mobile site registration page$")
+	public void go_back_landing_page() {
+		/*WebDriver wd = getLoginScenario().getMobileWebDriver();
+		wd.manage().window().maximize();*/
+		SignInPage myPcpSignInPage = (SignInPage) getLoginScenario()
+				.getBean(PageConstants.MYPCP_SIGN_IN_PAGE);
+		SignInPage loginPage = myPcpSignInPage.navigateToLoginPage();
+		
+		getLoginScenario().saveBean(PageConstants.MYPCP_SIGN_IN_PAGE,
+				loginPage);
+		//PasswordAssistancePage passwordAssistancePage = myPcpSignInPage.navigateToPasswordAssistancePage();
+
+		//getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
+	//	getLoginScenario().saveBean(PageConstants.PASSWORD_ASSISTANCE_PAGE, passwordAssistancePage);
+	//	getLoginScenario().saveBean(PageConstants.PASSWORD_ASSISTANCE_PAGE, passwordAssistancePage);
+	}
+	
+	
+	
+	@Given("^the user is on password assistance page of My PCP mobile site1$")
+	public void password_assistance_landing_page() {
+		/*WebDriver wd = getLoginScenario().getMobileWebDriver();
+		wd.manage().window().maximize();*/
+		SignInPage myPcpSignInPage = (SignInPage) getLoginScenario()
+				.getBean(PageConstants.MYPCP_SIGN_IN_PAGE);
+		PasswordAssistancePage passwordAssistancePage = myPcpSignInPage.navigateToPasswordAssistancePage();
+
+		//getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
+		getLoginScenario().saveBean(PageConstants.PASSWORD_ASSISTANCE_PAGE, passwordAssistancePage);
+		getLoginScenario().saveBean(PageConstants.PASSWORD_ASSISTANCE_PAGE, passwordAssistancePage);
+	}
+	
 	
 	@When("^the user navigate to My PCP mobile site About Us Page$")
 	public void about_us_page() {		
@@ -73,13 +122,7 @@ public class LoginMyPcpStepDefinition {
 		
 	}
 	
-	@After
-	public void tearDown() {
-		WebDriver wd = (WebDriver) getLoginScenario().getBean(
-				CommonConstants.WEBDRIVER);
-		wd.quit();
-		getLoginScenario().flushBeans();
-	}
+
 
 
 
