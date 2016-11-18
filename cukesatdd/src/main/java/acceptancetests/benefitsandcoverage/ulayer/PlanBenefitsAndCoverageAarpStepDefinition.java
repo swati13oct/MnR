@@ -55,19 +55,16 @@ public class PlanBenefitsAndCoverageAarpStepDefinition {
 	public void login_with_member(DataTable memberAttributes) {
 
 		/* Reading the given attribute from feature file */
-		List<DataTableRow> memberAttributesRow = memberAttributes
-				.getGherkinRows();
+		List<DataTableRow> memberAttributesRow = memberAttributes.getGherkinRows();
 		Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
 		for (int i = 0; i < memberAttributesRow.size(); i++) {
 
-			memberAttributesMap.put(memberAttributesRow.get(i).getCells()
-					.get(0), memberAttributesRow.get(i).getCells().get(1));
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0), memberAttributesRow.get(i).getCells().get(1));
 		}
 
 		Set<String> memberAttributesKeySet = memberAttributesMap.keySet();
 		List<String> desiredAttributes = new ArrayList<String>();
-		for (Iterator<String> iterator = memberAttributesKeySet.iterator(); iterator
-				.hasNext();) {
+		for (Iterator<String> iterator = memberAttributesKeySet.iterator(); iterator.hasNext();) {
 			{
 				String key = iterator.next();
 				desiredAttributes.add(memberAttributesMap.get(key));
@@ -76,8 +73,7 @@ public class PlanBenefitsAndCoverageAarpStepDefinition {
 		}
 		System.out.println("desiredAttributes.." + desiredAttributes);
 
-		Map<String, String> loginCreds = loginScenario
-				.getAMPMemberWithDesiredAttributes(desiredAttributes);
+		Map<String, String> loginCreds = loginScenario.getAMPMemberWithDesiredAttributes(desiredAttributes);
 
 		String userName = null;
 		String pwd = null;
@@ -100,31 +96,30 @@ public class PlanBenefitsAndCoverageAarpStepDefinition {
 		AccountHomePage accountHomePage = (AccountHomePage) loginPage.loginWith(userName, pwd);
 		JSONObject accountHomeActualJson = null;
 
-		/*Get expected data*/
-		Map<String,JSONObject> expectedDataMap = loginScenario.getExpectedJson(userName);
+		/* Get expected data */
+		Map<String, JSONObject> expectedDataMap = loginScenario.getExpectedJson(userName);
 		JSONObject accountHomeExpectedJson = accountHomePage.getExpectedData(expectedDataMap);
 
 		if (accountHomePage != null) {
 			getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
-			getLoginScenario().saveBean(PageConstants.ACCOUNT_HOME_PAGE,accountHomePage);
+			getLoginScenario().saveBean(PageConstants.ACCOUNT_HOME_PAGE, accountHomePage);
 			Assert.assertTrue(true);
 			accountHomeActualJson = accountHomePage.accountHomeJson;
 		}
 
 		try {
-			JSONAssert.assertEquals(accountHomeExpectedJson,accountHomeActualJson, true);
+			JSONAssert.assertEquals(accountHomeExpectedJson, accountHomeActualJson, true);
 		} catch (JSONException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
-		getLoginScenario().saveBean(CommonConstants.EXPECTED_DATA_MAP,expectedDataMap);
+		getLoginScenario().saveBean(CommonConstants.EXPECTED_DATA_MAP, expectedDataMap);
 
 	}
 	
 	@Given("^registered member for forms and resources in AARP Site$")
-	public void registered_member_formsandresources_aarp(
-			DataTable memberAttributes) {
+	public void registered_member_formsandresources_aarp(DataTable memberAttributes) {
 
 		/* Reading the given attribute from feature file */
 		List<List<String>> dataTable = memberAttributes.raw();
@@ -134,8 +129,7 @@ public class PlanBenefitsAndCoverageAarpStepDefinition {
 			desiredAttributes.add(data.get(0));
 		}
 		System.out.println("desiredAttributes.." + desiredAttributes);
-		Map<String, String> loginCreds = loginScenario
-				.getAMPMemberWithDesiredAttributes(desiredAttributes);
+		Map<String, String> loginCreds = loginScenario.getAMPMemberWithDesiredAttributes(desiredAttributes);
 
 		String userName = null;
 		String pwd = null;
@@ -148,8 +142,7 @@ public class PlanBenefitsAndCoverageAarpStepDefinition {
 			pwd = loginCreds.get("pwd");
 			System.out.println("User is..." + userName);
 			System.out.println("Password is..." + pwd);
-			getLoginScenario()
-					.saveBean(LoginCommonConstants.USERNAME, userName);
+			getLoginScenario().saveBean(LoginCommonConstants.USERNAME, userName);
 			getLoginScenario().saveBean(LoginCommonConstants.PASSWORD, pwd);
 		}
 
@@ -157,68 +150,53 @@ public class PlanBenefitsAndCoverageAarpStepDefinition {
 		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
 
 		LoginPage loginPage = new LoginPage(wd);
-		AccountHomePage accountHomePage = (AccountHomePage)loginPage.loginWith(userName, pwd);
+		AccountHomePage accountHomePage = (AccountHomePage) loginPage.loginWith(userName, pwd);
 		JSONObject accountHomeActualJson = null;
-		
+
 		if (accountHomePage != null) {
-			getLoginScenario().saveBean(PageConstants.ACCOUNT_HOME_PAGE,
-					accountHomePage);
+			getLoginScenario().saveBean(PageConstants.ACCOUNT_HOME_PAGE, accountHomePage);
 			Assert.assertTrue(true);
 			accountHomeActualJson = accountHomePage.accountHomeJson;
 		}
 
-		System.out.println("accountHomeActualJson"+accountHomeActualJson);
-		 
-		/* Get expected data */
-		Map<String, JSONObject> expectedDataMap = loginScenario
-				.getExpectedJson(userName);
-		JSONObject accountHomeExpectedJson = accountHomePage
-				.getExpectedData(expectedDataMap);
+		System.out.println("accountHomeActualJson" + accountHomeActualJson);
 
-		
-		
-		System.out.println("accountHomeExpectedJson"+accountHomeExpectedJson);
+		/* Get expected data */
+		Map<String, JSONObject> expectedDataMap = loginScenario.getExpectedJson(userName);
+		JSONObject accountHomeExpectedJson = accountHomePage.getExpectedData(expectedDataMap);
+
+		System.out.println("accountHomeExpectedJson" + accountHomeExpectedJson);
 		try {
-			JSONAssert.assertEquals(accountHomeExpectedJson,
-					accountHomeActualJson, true);
+			JSONAssert.assertEquals(accountHomeExpectedJson, accountHomeActualJson, true);
 		} catch (JSONException e) {
 			e.printStackTrace();
 		}
 
-		getLoginScenario().saveBean(CommonConstants.EXPECTED_DATA_MAP,
-				expectedDataMap);
+		getLoginScenario().saveBean(CommonConstants.EXPECTED_DATA_MAP, expectedDataMap);
 
 	}
 
 	
 	@When("^the user view forms and resources in AARP site$")
 	public void views_forms_resources_aarp_site() {
-		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario()
-				.getBean(PageConstants.ACCOUNT_HOME_PAGE);
-		FormsandresourcesPage formsAndResourcesPage = accountHomePage
-				.navigateToFormsandResourceAarpPage();
+		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstants.ACCOUNT_HOME_PAGE);
+		FormsandresourcesPage formsAndResourcesPage = accountHomePage.navigateToFormsandResourceAarpPage();
 
 		/* Get expected data */
 		JSONObject formsAndResourcesActualJson = null;
 		@SuppressWarnings("unchecked")
-		Map<String, JSONObject> expectedDataMap = (Map<String, JSONObject>) getLoginScenario()
-				.getBean(CommonConstants.EXPECTED_DATA_MAP);
-		JSONObject formsAndResourcesExpectedJson = formsAndResourcesPage
-				.getExpectedData(expectedDataMap);
-		getLoginScenario().saveBean(
-				FnRCommonConstants.FORMS_AND_RESOURCES_EXPECTED,
-				formsAndResourcesExpectedJson);
+		Map<String, JSONObject> expectedDataMap = (Map<String, JSONObject>) getLoginScenario().getBean(
+				CommonConstants.EXPECTED_DATA_MAP);
+		JSONObject formsAndResourcesExpectedJson = formsAndResourcesPage.getExpectedData(expectedDataMap);
+		getLoginScenario().saveBean(FnRCommonConstants.FORMS_AND_RESOURCES_EXPECTED, formsAndResourcesExpectedJson);
 
 		/* Actual data */
 		if (formsAndResourcesPage != null) {
-			getLoginScenario().saveBean(PageConstants.FORMS_AND_RESOURCES_PAGE,
-					formsAndResourcesPage);
+			getLoginScenario().saveBean(PageConstants.FORMS_AND_RESOURCES_PAGE, formsAndResourcesPage);
 			Assert.assertTrue(true);
 			formsAndResourcesActualJson = formsAndResourcesPage.formsAndResourcesJson;
 		}
-		getLoginScenario().saveBean(
-				FnRCommonConstants.FORMS_AND_RESOURCES_ACTUAL,
-				formsAndResourcesActualJson);
+		getLoginScenario().saveBean(FnRCommonConstants.FORMS_AND_RESOURCES_ACTUAL, formsAndResourcesActualJson);
 	}
 
 	@Given("^registered member to login in AARP site$")
@@ -231,8 +209,7 @@ public class PlanBenefitsAndCoverageAarpStepDefinition {
 			desiredAttributes.add(data.get(0));
 		}
 		System.out.println("desiredAttributes.." + desiredAttributes);
-		Map<String, String> loginCreds = loginScenario
-				.getAMPMemberWithDesiredAttributes(desiredAttributes);
+		Map<String, String> loginCreds = loginScenario.getAMPMemberWithDesiredAttributes(desiredAttributes);
 
 		String userName = null;
 		String pwd = null;
@@ -245,8 +222,7 @@ public class PlanBenefitsAndCoverageAarpStepDefinition {
 			pwd = loginCreds.get("pwd");
 			System.out.println("User is..." + userName);
 			System.out.println("Password is..." + pwd);
-			getLoginScenario()
-					.saveBean(LoginCommonConstants.USERNAME, userName);
+			getLoginScenario().saveBean(LoginCommonConstants.USERNAME, userName);
 			getLoginScenario().saveBean(LoginCommonConstants.PASSWORD, pwd);
 		}
 
@@ -254,61 +230,49 @@ public class PlanBenefitsAndCoverageAarpStepDefinition {
 		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
 
 		LoginPage loginPage = new LoginPage(wd);
-		AccountHomePage accountHomePage = (AccountHomePage) loginPage
-				.loginWith(userName, pwd);
+		AccountHomePage accountHomePage = (AccountHomePage) loginPage.loginWith(userName, pwd);
 
 		if (accountHomePage != null) {
-			getLoginScenario().saveBean(PageConstants.ACCOUNT_HOME_PAGE,
-					accountHomePage);
+			getLoginScenario().saveBean(PageConstants.ACCOUNT_HOME_PAGE, accountHomePage);
 		}
 
 	}
 
 	@When("^the user navigates to plan benefits and coverage in AARP site$")
 	public void views_benefits_and_Coverage() {
-		Map<String, JSONObject> expectedDataMap = (Map<String, JSONObject>) getLoginScenario().getBean(CommonConstants.EXPECTED_DATA_MAP);
+		Map<String, JSONObject> expectedDataMap = (Map<String, JSONObject>) getLoginScenario().getBean(
+				CommonConstants.EXPECTED_DATA_MAP);
 		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstants.ACCOUNT_HOME_PAGE);
 		PlanBenefitsCoveragePage bncPage = accountHomePage.navigateToBnC();
 		JSONObject benefitsExpectedJson = bncPage.getExpectedData(expectedDataMap);
-		getLoginScenario().saveBean(
-				PlanBenefitsAndCoverageCommonConstants.PLAN_BENEFITS_EXPECTED,
-				benefitsExpectedJson);
+		getLoginScenario().saveBean(PlanBenefitsAndCoverageCommonConstants.PLAN_BENEFITS_EXPECTED, benefitsExpectedJson);
 		JSONObject benefitsActualJson = bncPage.planBenefitsCoverageJson;
 		System.out.println("benefitsExpectedJson---->" + benefitsExpectedJson);
 		System.out.println("benefitsActualJson---->" + benefitsActualJson);
-		getLoginScenario().saveBean(
-				PlanBenefitsAndCoverageCommonConstants.PLAN_BENEFITS_ACTUAL,
-				benefitsActualJson);
-		getLoginScenario().saveBean(PageConstants.BENEFITS_AND_COVERAGE_PAGE,
-				bncPage);
+		getLoginScenario().saveBean(PlanBenefitsAndCoverageCommonConstants.PLAN_BENEFITS_ACTUAL, benefitsActualJson);
+		getLoginScenario().saveBean(PageConstants.BENEFITS_AND_COVERAGE_PAGE, bncPage);
 
-		getLoginScenario().saveBean(PageConstants.BENEFITS_AND_COVERAGE_PAGE,
-				bncPage);
+		getLoginScenario().saveBean(PageConstants.BENEFITS_AND_COVERAGE_PAGE, bncPage);
 
 	}
 
 	@When("^the user navigates to benefits and coverage page under my plans in AARP site$")
 	public void benefits_and_coverage_AARP() {
-		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario()
-				.getBean(PageConstants.ACCOUNT_HOME_PAGE);
+		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstants.ACCOUNT_HOME_PAGE);
 		PlanBenefitsCoveragePage bncPage = accountHomePage.navigateToBnC();
-		getLoginScenario().saveBean(PageConstants.BENEFITS_AND_COVERAGE_PAGE,
-				bncPage);
+		getLoginScenario().saveBean(PageConstants.BENEFITS_AND_COVERAGE_PAGE, bncPage);
 	}
 
 	@Then("^the user validates benefits and coverage of the member in AARP site$")
 	public void details_validation() {
-		PlanBenefitsCoveragePage bncPage = (PlanBenefitsCoveragePage) getLoginScenario()
-			.getBean(PageConstants.BENEFITS_AND_COVERAGE_PAGE);
-		JSONObject benefitsActualJson = (JSONObject) getLoginScenario()
-				.getBean(
-						PlanBenefitsAndCoverageCommonConstants.PLAN_BENEFITS_ACTUAL);
-		JSONObject benefitsExpectedJson = (JSONObject) getLoginScenario()
-				.getBean(
-						PlanBenefitsAndCoverageCommonConstants.PLAN_BENEFITS_EXPECTED);
+		PlanBenefitsCoveragePage bncPage = (PlanBenefitsCoveragePage) getLoginScenario().getBean(
+				PageConstants.BENEFITS_AND_COVERAGE_PAGE);
+		JSONObject benefitsActualJson = (JSONObject) getLoginScenario().getBean(
+				PlanBenefitsAndCoverageCommonConstants.PLAN_BENEFITS_ACTUAL);
+		JSONObject benefitsExpectedJson = (JSONObject) getLoginScenario().getBean(
+				PlanBenefitsAndCoverageCommonConstants.PLAN_BENEFITS_EXPECTED);
 		try {
-			JSONAssert.assertEquals(benefitsExpectedJson, benefitsActualJson,
-					true);
+			JSONAssert.assertEquals(benefitsExpectedJson, benefitsActualJson, true);
 		} catch (JSONException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -319,8 +283,8 @@ public class PlanBenefitsAndCoverageAarpStepDefinition {
 
 	@Then("^the user validates right rail widget in AARP site$")
 	public void pharmacy_saver_widget_AARP() {
-		PlanBenefitsCoveragePage bncPage = (PlanBenefitsCoveragePage) getLoginScenario()
-				.getBean(PageConstants.BENEFITS_AND_COVERAGE_PAGE);
+		PlanBenefitsCoveragePage bncPage = (PlanBenefitsCoveragePage) getLoginScenario().getBean(
+				PageConstants.BENEFITS_AND_COVERAGE_PAGE);
 		bncPage.validateRightRailWidget();
 
 		bncPage.logOut();
@@ -329,18 +293,15 @@ public class PlanBenefitsAndCoverageAarpStepDefinition {
 	@Then("^the user validates drug cost table in AARP site$")
 	public void drug_cost_table_AARP() {
 		/*
-		 * List<DataTableRow> preferredRetailAttributesRow = preferredAttributes
-		 * .getGherkinRows(); Map<String, String> personalAttributesMap = new
-		 * HashMap<String, String>(); for (int i = 0; i <
-		 * preferredRetailAttributesRow.size(); i++) {
+		 * List<DataTableRow> preferredRetailAttributesRow = preferredAttributes .getGherkinRows(); Map<String, String> personalAttributesMap =
+		 * new HashMap<String, String>(); for (int i = 0; i < preferredRetailAttributesRow.size(); i++) {
 		 * 
-		 * personalAttributesMap.put(preferredRetailAttributesRow.get(i).getCells
-		 * () .get(0), preferredRetailAttributesRow.get(i).getCells().get(1)); }
+		 * personalAttributesMap.put(preferredRetailAttributesRow.get(i).getCells () .get(0),
+		 * preferredRetailAttributesRow.get(i).getCells().get(1)); }
 		 * 
 		 * String benefit = personalAttributesMap.get("Benefit");
 		 */
-		PlanBenefitsCoveragePage bncPage = (PlanBenefitsCoveragePage) getLoginScenario()
-				.getBean(PageConstants.BENEFITS_AND_COVERAGE_PAGE);
+		PlanBenefitsCoveragePage bncPage = (PlanBenefitsCoveragePage) getLoginScenario().getBean(PageConstants.BENEFITS_AND_COVERAGE_PAGE);
 		bncPage.validateStandardDrugCostTable();
 		bncPage.validatePrefferedRetailDrugCostTable();
 		bncPage.logOut();
@@ -359,20 +320,14 @@ public class PlanBenefitsAndCoverageAarpStepDefinition {
 
 	@Then("^the user validates plan and member details after login in AARP site$")
 	public void login_validation() {
-		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario()
-				.getBean(PageConstants.ACCOUNT_HOME_PAGE);
-		JSONObject accountHomeActual = (JSONObject) getLoginScenario().getBean(
-				LoginCommonConstants.ACCOUNT_HOME_ACTUAL);
-		JSONObject accountHomeExpected = (JSONObject) getLoginScenario()
-				.getBean(LoginCommonConstants.ACCOUNT_HOME_EXPECTED);
-		System.out.println("accountHomeActual=====>"
-				+ accountHomeActual.toString());
+		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstants.ACCOUNT_HOME_PAGE);
+		JSONObject accountHomeActual = (JSONObject) getLoginScenario().getBean(LoginCommonConstants.ACCOUNT_HOME_ACTUAL);
+		JSONObject accountHomeExpected = (JSONObject) getLoginScenario().getBean(LoginCommonConstants.ACCOUNT_HOME_EXPECTED);
+		System.out.println("accountHomeActual=====>" + accountHomeActual.toString());
 		System.out.println(accountHomeActual.toString());
-		System.out.println("accountHomeExpected======>"
-				+ accountHomeExpected.toString());
+		System.out.println("accountHomeExpected======>" + accountHomeExpected.toString());
 		try {
-			JSONAssert.assertEquals(accountHomeExpected, accountHomeActual,
-					true);
+			JSONAssert.assertEquals(accountHomeExpected, accountHomeActual, true);
 		} catch (JSONException e) {
 			e.printStackTrace();
 		}
@@ -380,46 +335,32 @@ public class PlanBenefitsAndCoverageAarpStepDefinition {
 
 	@Then("^the user validatespdf links after login in AARP site$")
 	public void validate_Pdf_Links() {
-		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario()
-				.getBean(PageConstants.ACCOUNT_HOME_PAGE);
-		PlanBenefitsCoveragePage benefitsCoveragePage = accountHomePage
-				.navigateToBnC();
+		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstants.ACCOUNT_HOME_PAGE);
+		PlanBenefitsCoveragePage benefitsCoveragePage = accountHomePage.navigateToBnC();
 
-		JSONObject planDocsPDFActualJson = benefitsCoveragePage
-				.getActualPdfLinksData();
+		JSONObject planDocsPDFActualJson = benefitsCoveragePage.getActualPdfLinksData();
 
 		String fileName = "benefitsandcoverage";
-		String directory = CommonConstants.MEMBER_EXPECTED_DIRECTORY
-				+ File.separator + CommonConstants.SITE_ULAYER + File.separator
-				+ LoginCommonConstants.MEMBER_BENEFITS_AND_COVERAGE
-				+ File.separator;
-		JSONObject benefitsAndCoverageExpextedJson = MRScenario
-				.readExpectedJson(fileName, directory);
+		String directory = CommonConstants.MEMBER_EXPECTED_DIRECTORY + File.separator + CommonConstants.SITE_ULAYER
+				+ File.separator + LoginCommonConstants.MEMBER_BENEFITS_AND_COVERAGE + File.separator;
+		JSONObject benefitsAndCoverageExpextedJson = MRScenario.readExpectedJson(fileName, directory);
 
-		System.out
-				.println("planDocsPDFActualJson---->" + planDocsPDFActualJson);
+		System.out.println("planDocsPDFActualJson---->" + planDocsPDFActualJson);
 
-		System.out.println("planDocsPDFExpectedJson---->"
-				+ benefitsAndCoverageExpextedJson);
+		System.out.println("planDocsPDFExpectedJson---->" + benefitsAndCoverageExpextedJson);
 
-		getLoginScenario().saveBean(
-				PageConstants.MEMBER_BENEFITS_AND_COVERAGE_ACTUAL,
-				planDocsPDFActualJson);
-		getLoginScenario().saveBean(
-				PageConstants.MEMBER_BENEFITS_AND_COVERAGE_EXPECTED,
-				benefitsAndCoverageExpextedJson);
+		getLoginScenario().saveBean(PageConstants.MEMBER_BENEFITS_AND_COVERAGE_ACTUAL, planDocsPDFActualJson);
+		getLoginScenario().saveBean(PageConstants.MEMBER_BENEFITS_AND_COVERAGE_EXPECTED, benefitsAndCoverageExpextedJson);
 
 	}
 
 	@Then("^valiadte the actual and expected data of ulayer benefets and coverage pdfs$")
 	public void member_uhcm_login_validation() {
-		JSONObject planDocsPDFActual = (JSONObject) getLoginScenario().getBean(
-				PageConstants.MEMBER_BENEFITS_AND_COVERAGE_ACTUAL);
-		JSONObject planDocsPDFExpected = (JSONObject) getLoginScenario()
-				.getBean(PageConstants.MEMBER_BENEFITS_AND_COVERAGE_EXPECTED);
+		JSONObject planDocsPDFActual = (JSONObject) getLoginScenario().getBean(PageConstants.MEMBER_BENEFITS_AND_COVERAGE_ACTUAL);
+		JSONObject planDocsPDFExpected = (JSONObject) getLoginScenario().getBean(
+				PageConstants.MEMBER_BENEFITS_AND_COVERAGE_EXPECTED);
 		try {
-			JSONAssert.assertEquals(planDocsPDFActual, planDocsPDFExpected,
-					true);
+			JSONAssert.assertEquals(planDocsPDFActual, planDocsPDFExpected, true);
 		} catch (JSONException e) {
 			e.printStackTrace();
 		}
@@ -428,11 +369,10 @@ public class PlanBenefitsAndCoverageAarpStepDefinition {
 	@Then("^the user view benefits and coverage in AARP site")
 	public void user_views_BenefitsAndCoverage() {
 
-		FormsandresourcesPage formsandresourcesPage = (FormsandresourcesPage) getLoginScenario()
-				.getBean(PageConstants.FORMS_AND_RESOURCES_PAGE);
+		FormsandresourcesPage formsandresourcesPage = (FormsandresourcesPage) getLoginScenario().getBean(
+				PageConstants.FORMS_AND_RESOURCES_PAGE);
 
-		PlanBenefitsCoveragePage planBenefitsCoveragePage = formsandresourcesPage
-				.navigateToBenefitsAndCoverage();
+		planBenefitsCoveragePage = formsandresourcesPage.navigateToBenefitsAndCoverage();
 
 	}
 
