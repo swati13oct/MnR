@@ -145,15 +145,22 @@ public class PharmacyLocatorPage extends UhcDriver {
 	 */
 	public String getColour(String colour){
 		
-		switch (colour.toLowerCase()) {
+		if(colour.toLowerCase().equals("rgb(229, 115, 115)")){
+			return "Red";
+		}
+		else if(colour.toLowerCase().equals("rgb(3, 169, 244)")){
+			return "Blue";
+		}else{
+			return "";
+		}
+		/*switch (colour.toLowerCase()) {
 		case "rgb(229, 115, 115)":
 			return "Red";
 		case "rgb(3, 169, 244)":
 			return "Blue";
 		default:
 			break;
-		}
-		return "";
+		}*/
 	}
 	
 	/**
