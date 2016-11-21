@@ -256,6 +256,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	{
 		boolean validatePopup=false;
 		try{
+			
 			Thread.sleep(600000);
 			validatePopup=validate(stayOnthisPopup);
 			stayOnthisPopup.click();
