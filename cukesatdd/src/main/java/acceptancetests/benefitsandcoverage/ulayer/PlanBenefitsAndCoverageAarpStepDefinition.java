@@ -21,6 +21,7 @@ import org.skyscreamer.jsonassert.JSONAssert;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import pages.member.ulayer.AccountHomePage;
+import pages.member.ulayer.BenefitsAndCoveragePage;
 import pages.member.ulayer.FormsandresourcesPage;
 import pages.member.ulayer.LoginPage;
 import pages.member.ulayer.PlanBenefitsCoveragePage;
@@ -44,6 +45,8 @@ public class PlanBenefitsAndCoverageAarpStepDefinition {
 
 	@Autowired
 	MRScenario loginScenario;
+	
+	private String userName=null;
 
 	private static PlanBenefitsCoveragePage planBenefitsCoveragePage = null;
 
@@ -82,8 +85,8 @@ public class PlanBenefitsAndCoverageAarpStepDefinition {
 			System.out.println("Member Type data could not be setup !!!");
 			Assert.fail("unable to find a " + desiredAttributes + " member");
 		} else {
-			userName = loginCreds.get("user");
-			pwd = loginCreds.get("pwd");
+			this.userName=userName = loginCreds.get("user");
+			pwd = loginCreds.get("pwd");			
 			System.out.println("User is..." + userName);
 			System.out.println("Password is..." + pwd);
 			getLoginScenario().saveBean(LoginCommonConstants.USERNAME, userName);
@@ -96,25 +99,25 @@ public class PlanBenefitsAndCoverageAarpStepDefinition {
 		AccountHomePage accountHomePage = (AccountHomePage) loginPage.loginWith(userName, pwd);
 		JSONObject accountHomeActualJson = null;
 
-		/* Get expected data */
-		Map<String, JSONObject> expectedDataMap = loginScenario.getExpectedJson(userName);
+		/*Get expected data*/
+		Map<String,JSONObject> expectedDataMap = loginScenario.getExpectedJson(userName);
 		JSONObject accountHomeExpectedJson = accountHomePage.getExpectedData(expectedDataMap);
 
 		if (accountHomePage != null) {
 			getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
-			getLoginScenario().saveBean(PageConstants.ACCOUNT_HOME_PAGE, accountHomePage);
+			getLoginScenario().saveBean(PageConstants.ACCOUNT_HOME_PAGE,accountHomePage);
 			Assert.assertTrue(true);
 			accountHomeActualJson = accountHomePage.accountHomeJson;
 		}
 
 		try {
-			JSONAssert.assertEquals(accountHomeExpectedJson, accountHomeActualJson, true);
+			JSONAssert.assertEquals(accountHomeExpectedJson,accountHomeActualJson, true);
 		} catch (JSONException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
-		getLoginScenario().saveBean(CommonConstants.EXPECTED_DATA_MAP, expectedDataMap);
+		getLoginScenario().saveBean(CommonConstants.EXPECTED_DATA_MAP,expectedDataMap);
 
 	}
 	
@@ -138,7 +141,7 @@ public class PlanBenefitsAndCoverageAarpStepDefinition {
 			System.out.println("Member Type data could not be setup !!!");
 			Assert.fail("unable to find a " + desiredAttributes + " member");
 		} else {
-			userName = loginCreds.get("user");
+			this.userName=userName = loginCreds.get("user");
 			pwd = loginCreds.get("pwd");
 			System.out.println("User is..." + userName);
 			System.out.println("Password is..." + pwd);
@@ -150,22 +153,22 @@ public class PlanBenefitsAndCoverageAarpStepDefinition {
 		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
 
 		LoginPage loginPage = new LoginPage(wd);
-		AccountHomePage accountHomePage = (AccountHomePage) loginPage.loginWith(userName, pwd);
+		AccountHomePage accountHomePage = (AccountHomePage)loginPage.loginWith(userName, pwd);
 		JSONObject accountHomeActualJson = null;
-
+		
 		if (accountHomePage != null) {
 			getLoginScenario().saveBean(PageConstants.ACCOUNT_HOME_PAGE, accountHomePage);
 			Assert.assertTrue(true);
 			accountHomeActualJson = accountHomePage.accountHomeJson;
 		}
 
-		System.out.println("accountHomeActualJson" + accountHomeActualJson);
-
+		System.out.println("accountHomeActualJson"+accountHomeActualJson);
+		 
 		/* Get expected data */
 		Map<String, JSONObject> expectedDataMap = loginScenario.getExpectedJson(userName);
 		JSONObject accountHomeExpectedJson = accountHomePage.getExpectedData(expectedDataMap);
 
-		System.out.println("accountHomeExpectedJson" + accountHomeExpectedJson);
+		System.out.println("accountHomeExpectedJson"+accountHomeExpectedJson);
 		try {
 			JSONAssert.assertEquals(accountHomeExpectedJson, accountHomeActualJson, true);
 		} catch (JSONException e) {
@@ -268,9 +271,9 @@ public class PlanBenefitsAndCoverageAarpStepDefinition {
 		PlanBenefitsCoveragePage bncPage = (PlanBenefitsCoveragePage) getLoginScenario().getBean(
 				PageConstants.BENEFITS_AND_COVERAGE_PAGE);
 		JSONObject benefitsActualJson = (JSONObject) getLoginScenario().getBean(
-				PlanBenefitsAndCoverageCommonConstants.PLAN_BENEFITS_ACTUAL);
+						PlanBenefitsAndCoverageCommonConstants.PLAN_BENEFITS_ACTUAL);
 		JSONObject benefitsExpectedJson = (JSONObject) getLoginScenario().getBean(
-				PlanBenefitsAndCoverageCommonConstants.PLAN_BENEFITS_EXPECTED);
+						PlanBenefitsAndCoverageCommonConstants.PLAN_BENEFITS_EXPECTED);
 		try {
 			JSONAssert.assertEquals(benefitsExpectedJson, benefitsActualJson, true);
 		} catch (JSONException e) {
@@ -372,16 +375,46 @@ public class PlanBenefitsAndCoverageAarpStepDefinition {
 		FormsandresourcesPage formsandresourcesPage = (FormsandresourcesPage) getLoginScenario().getBean(
 				PageConstants.FORMS_AND_RESOURCES_PAGE);
 
-		planBenefitsCoveragePage = formsandresourcesPage.navigateToBenefitsAndCoverage();
+		BenefitsAndCoveragePage benefitsCoveragePage = formsandresourcesPage
+				.navigateToBenefitsAndCoverage();
+		
+		if(benefitsCoveragePage!=null){
+			//Get actual data
+			JSONObject actualJsonObj=benefitsCoveragePage.benefitsandcoverageJson;
+			loginScenario.saveBean(PlanBenefitsAndCoverageCommonConstants.BENEFITS_AND_COVERAGE_ACTUAL, actualJsonObj);	
+			System.out.println("Benefits and coverage actual ==============>"+actualJsonObj.toString());
+			// Get expected data 
+			String fileName = this.userName;
+			String directory = CommonConstants.BENEFITS_AND_COVERAGE_PAGE_DIRECTORY;					
+			JSONObject benefitsandcoverageExectedJson = MRScenario.readExpectedJson(
+					fileName, directory);
+			loginScenario.saveBean(PlanBenefitsAndCoverageCommonConstants.BENEFITS_AND_COVERAGE_EXPECTED, benefitsandcoverageExectedJson);
+			System.out.println("Benefits and coverage expected ==============>"+benefitsandcoverageExectedJson.toString());
+			
+			
+			
+		}
+		
 
 	}
 
 	@Then("^the user validates the content on benefits and coverage page")
 	public void validateContentOnBenefitsAndCoveragePage() {
-
-		if (planBenefitsCoveragePage != null) {
-			planBenefitsCoveragePage.validateFieldsOnBenefitsAndCoveragePage();
+		try {
+			
+			JSONObject actual=(JSONObject) loginScenario.getBean(PlanBenefitsAndCoverageCommonConstants.BENEFITS_AND_COVERAGE_ACTUAL);
+			
+			JSONObject expected=(JSONObject) loginScenario.getBean(PlanBenefitsAndCoverageCommonConstants.BENEFITS_AND_COVERAGE_EXPECTED);
+			
+			if(actual!=null && expected !=null){
+				JSONAssert.assertEquals(expected, actual, true);
+			}			
+			
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
+		
+		
 	}
 
 	@After
