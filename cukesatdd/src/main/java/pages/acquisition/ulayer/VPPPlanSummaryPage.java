@@ -110,6 +110,9 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	
 	@FindBy (xpath=".//div[@id='maplans_container']/div[3]/div[1]/div/div[1]/div[1]/div/div[1]/div[3]/div/div/span[2]/a")
 	private WebElement MAEnrolllink;
+	
+	@FindBy (xpath=".//*[@id='next']")
+	private WebElement stayOnthisPopup;
 
 	private PageData vppPlanSummary;
 
@@ -248,6 +251,22 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		return jsonObject;
 
 	}
+	
+	public boolean validateTimeoutPopup()
+	{
+		boolean validatePopup=false;
+		try{
+			Thread.sleep(600000);
+			validatePopup=validate(stayOnthisPopup);
+			stayOnthisPopup.click();
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+	return validatePopup;
+}
+
 
 	public VPPPlanSummaryPage viewPlanSummary(String planType) {
 		if (planType.equalsIgnoreCase("PDP")) {
