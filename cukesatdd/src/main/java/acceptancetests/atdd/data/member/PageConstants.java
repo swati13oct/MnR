@@ -56,6 +56,8 @@ public class PageConstants {
 	public static final String FORMS_AND_RESOURCES_PAGE = "formsandresourcesAarpPage";
 
 	public static final String BENEFITS_AND_COVERAGE_PAGE = "planBenefitsCoveragePage";
+	
+	public static final String BENEFITS_COVERAGE_PAGE = "benefitsCoveragePage";
 
 	public static final String ORDER_PLAN_MATERIALS_PAGE = "orderplanmaterialsPage";
 
@@ -102,7 +104,7 @@ public class PageConstants {
 	public static final String PHARMACY_TYPES = "pharmacyTypeArray";
 
 	public static final String REGISTRATION_HOME_PAGE = "registrationHomePage";
-	
+
 	public static final String PASSWORD_ASSISTANCE_PAGE = "passwordAssistancePage";
 
 	public static final String LOGIN_PAGE = "loginPage";
@@ -129,7 +131,7 @@ public class PageConstants {
 
 	public static final String PLAN_COMPARE_DETAILS = "planCompareDetails";
 	
-	public static final String BENEFITS_AND_COVERAGE = "benefitsAndCoverage";
+	public static final String BENEFITS_AND_COVERAGE = "benefitsandcoverage";
 
 	public static final String MEMBER_BENEFITS_AND_COVERAGE_ACTUAL = "planDocsPDFActualJson";
 

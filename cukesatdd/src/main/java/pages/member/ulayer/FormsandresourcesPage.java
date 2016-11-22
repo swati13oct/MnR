@@ -218,12 +218,12 @@ public class FormsandresourcesPage extends UhcDriver {
 	
 	
 	
-	public PlanBenefitsCoveragePage navigateToBenefitsAndCoverage() {
+	public BenefitsAndCoveragePage navigateToBenefitsAndCoverage() {
 		benefitsAndCoverageLink.click();
 		CommonUtility.checkPageIsReady(driver);
 		if (driver.getTitle().equalsIgnoreCase(
 				"My Benefits & Coverage")) {
-			return new PlanBenefitsCoveragePage(driver);
+			return new BenefitsAndCoveragePage(driver);
 		} else
 			return null;
 	}
