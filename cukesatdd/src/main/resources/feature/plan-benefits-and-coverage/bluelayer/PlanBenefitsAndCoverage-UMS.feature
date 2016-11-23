@@ -482,7 +482,6 @@ Examples:
 | riderNotAvailable    |
 
 @mapdnonlisnonrider
-Feature: To test plan benefits and Coverage on UMS site
 Scenario Outline:To validate the coverage and benefit amounts in benefits and coverage page in UMS site
 Given registered UHC with following details for plan benefits and coverage flow in UMS site
        | Plan Type    |MAPD|
@@ -499,7 +498,6 @@ Examples:
 		
 
 @mapdnonlisrider
-Feature: To test plan benefits and Coverage on UMS site
 Scenario Outline:To validate the coverage and benefit amounts in benefits and coverage page in UMS site
 Given registered UHC with following details for plan benefits and coverage flow in UMS site
        | Plan Type    |MAPD|
@@ -515,7 +513,6 @@ Examples:
 		|riderNotAvailable|
 		
 @marider
-Feature: To test plan benefits and Coverage on UMS site
 Scenario Outline: Verify My Medical Costs & Benefits Summary in UMS site
 Given registered UHC with following details for plan benefits and coverage flow in UMS site
 | Plan Type      | MA  |
@@ -531,7 +528,6 @@ Examples:
 #| riderNotAvailable    |
 		
 @manonrider
-Feature: To test plan benefits and Coverage on UMS site
 Scenario Outline: Verify My Medical Costs & Benefits Summary in UMS site
 Given registered UHC with following details for plan benefits and coverage flow in UMS site
 | Plan Type      | MA  |
