@@ -183,7 +183,13 @@ public class PlanBenefitsAndCoverageAarpStepDefinition {
 	@When("^the user view forms and resources in AARP site$")
 	public void views_forms_resources_aarp_site() {
 		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstants.ACCOUNT_HOME_PAGE);
-		FormsandresourcesPage formsAndResourcesPage = accountHomePage.navigateToFormsandResourceAarpPage();
+		FormsandresourcesPage formsAndResourcesPage=null;
+		if(accountHomePage.validateGogreenPopup()){
+			accountHomePage.closeGogreenPopup();
+			formsAndResourcesPage = accountHomePage.navigateToFormsandResourceAarpPage();
+		}else{
+			formsAndResourcesPage = accountHomePage.navigateToFormsandResourceAarpPage();
+		}
 
 		/* Get expected data */
 		JSONObject formsAndResourcesActualJson = null;

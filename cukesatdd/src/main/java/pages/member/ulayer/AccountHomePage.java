@@ -126,6 +126,14 @@ public class AccountHomePage extends UhcDriver {
 	@FindBy(xpath = "//*[@id='subPageLeft']/div[2]/div[2]/div[2]/div/h3[2]/a")
 	private WebElement createPdfLink;
 	
+	@FindBy(xpath = "//*[@id='gogreenlogin_box']/div[4]/div")
+	private WebElement gogreenPopup;
+	
+	@FindBy(xpath = "//*[@id='gogreenlogin_box']/div[4]/div/a")
+	private WebElement gogreenPopupClose;
+	
+	
+	
 	private PageData myAccountHome;
 
 	public JSONObject accountHomeJson;
@@ -500,6 +508,19 @@ public class AccountHomePage extends UhcDriver {
 		validate(medicalProviders);
 		medicalProviders.click();
 			
+	}
+	
+	public boolean validateGogreenPopup(){
+		try {
+			validate(gogreenPopup);
+			return true;
+		} catch (Exception e) {
+			return false;
+		}		
+	}
+	
+	public void closeGogreenPopup(){
+		gogreenPopupClose.click();
 	}
 
 
