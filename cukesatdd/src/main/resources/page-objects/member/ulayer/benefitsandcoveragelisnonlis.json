@@ -20,7 +20,21 @@
 "monthlyPremium":{
 "identifier":"xpath",
 "elementName":"//*[@id='planBenefitsApp']/div/div/div[2]/div[2]/h1[2]"
+},
+"benefitHeaderSummary":{
+"identifier":"xpath",
+"elementName":"//*[@id='planBenefitsApp']/div/div/div[1]/div/h1/div"
+},
+"medicalCopayCoinsurance":{
+"identifier":"xpath",
+"elementName":"//*[@id='planBenefitsApp']/div/div/div[2]/div/h2/div"
+},
+"benefitHeaderText":{
+"identifier":"xpath",
+"elementName":"//*[@id='planBenefitsApp']/div/div/div[2]/div/p"
 }
+
+
 
 }
 }

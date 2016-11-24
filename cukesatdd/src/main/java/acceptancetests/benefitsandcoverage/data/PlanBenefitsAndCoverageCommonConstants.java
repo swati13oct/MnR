@@ -13,7 +13,7 @@ public class PlanBenefitsAndCoverageCommonConstants {
 	public static final String PLAN_BENEFITS_ACTUAL = "planBenefitsAndCoverageActual";
 	
 	public static final String BENEFITS_AND_COVERAGE_ACTUAL = "BenefitsAndCoverageActual";
-	public static final String BENEFITS_AND_COVERAGE_EXPECTED = "BenefitsAndCoverageActual";
+	public static final String BENEFITS_AND_COVERAGE_EXPECTED = "BenefitsAndCoverageExpected";
 
 
 }
