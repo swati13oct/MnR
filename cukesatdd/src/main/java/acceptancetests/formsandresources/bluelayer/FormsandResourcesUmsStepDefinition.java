@@ -21,6 +21,7 @@ import org.skyscreamer.jsonassert.JSONAssert;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import pages.member.bluelayer.AccountHomePage;
+import pages.member.bluelayer.BenefitsCoveragePage;
 import pages.member.bluelayer.FormsandresourcesPage;
 import pages.member.bluelayer.LoginPage;
 import acceptancetests.atdd.data.CommonConstants;
@@ -38,6 +39,8 @@ import cucumber.table.DataTable;
  *
  */
 public class FormsandResourcesUmsStepDefinition {
+	
+	private static BenefitsCoveragePage planBenefitsCoveragePage = null;
 
 	@Autowired
 	MRScenario loginScenario;
@@ -287,5 +290,51 @@ public class FormsandResourcesUmsStepDefinition {
 		formsAndResourcesPage.logOut();
 
 
+	}
+	
+	@When("^the user view forms and resources in UMS site$")
+	public void the_user_view_forms_and_resources_in_UMS_site() {
+		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario()
+				.getBean(PageConstants.ACCOUNT_HOME_PAGE);
+		FormsandresourcesPage formsAndResourcesPage = accountHomePage.navigateToFormsandResourcePage();
+
+		/* Get expected data */
+		JSONObject formsAndResourcesActualJson = null;
+		@SuppressWarnings("unchecked")
+		Map<String, JSONObject> expectedDataMap = (Map<String, JSONObject>) getLoginScenario()
+				.getBean(CommonConstants.EXPECTED_DATA_MAP);
+		JSONObject formsAndResourcesExpectedJson = formsAndResourcesPage
+				.getExpectedData(expectedDataMap);
+		getLoginScenario().saveBean(
+				FnRCommonConstants.FORMS_AND_RESOURCES_EXPECTED,
+				formsAndResourcesExpectedJson);
+
+		/* Actual data */
+		if (formsAndResourcesPage != null) {
+			getLoginScenario().saveBean(PageConstants.FORMS_AND_RESOURCES_PAGE,
+					formsAndResourcesPage);
+			Assert.assertTrue(true);
+			formsAndResourcesActualJson = formsAndResourcesPage.formsAndResourcesJson;
+		}
+		getLoginScenario().saveBean(
+				FnRCommonConstants.FORMS_AND_RESOURCES_ACTUAL,
+				formsAndResourcesActualJson);
+
+	}
+
+	@Then("^the user view benefits and coverage in UMS site$")
+	public void the_user_view_benefits_and_coverage_in_UMS_site() {
+		FormsandresourcesPage formsandresourcesPage = (FormsandresourcesPage) getLoginScenario()
+				.getBean(PageConstants.FORMS_AND_RESOURCES_PAGE);
+
+		formsandresourcesPage.navigateToBenefitsAndCoverage();
+			
+	}
+
+	@Then("^the user validates the content on benefits and coverage page$")
+	public void the_user_validates_the_content_on_benefits_and_coverage_page() {
+		if (planBenefitsCoveragePage != null) {
+			planBenefitsCoveragePage.validateFieldsOnBenefitsAndCoveragePage();
+		}
 	}
 }

@@ -229,4 +229,12 @@ public class FormsandresourcesPage extends UhcDriver {
 				return planDocPDFsJson;
 
 	}
+
+	/**
+	 * Click the benefits and Coverage link.
+	 */
+	public void navigateToBenefitsAndCoverage() {
+		benefitsAndCoverage.click();
+		
+	}
 }
