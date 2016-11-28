@@ -43,6 +43,16 @@ public class BenefitsCoveragePage extends UhcDriver {
 
 	@FindBy(xpath="//*[@id='main_content']/div[2]/div/div[2]/div[2]/div/h2")
 	private WebElement prescriptiondrugcostandsummary;
+	
+	@FindBy(xpath="//*[@id='planBenefitsApp']/div/div/div[2]/div[1]/div/div[2]/div[1]/span")
+	private WebElement memberId;
+	
+	@FindBy(xpath="//*[@id='planBenefitsApp']/div/div/div[2]/div[1]/div/div[1]/div[1]/span")
+	private WebElement memberName;
+	
+	@FindBy(xpath="//*[@id='planBenefitsApp']/div/div/div[2]/div[1]/div/div[4]/div[1]/span")
+	private WebElement effectiveDate;
+
 
 	private PageData benefitsAndCoverage;
 
@@ -243,6 +253,23 @@ public class BenefitsCoveragePage extends UhcDriver {
 			System.out.println("@@@@@@@@@ No Optional Riders widget and deductible 3,4,5 @@@@@@@@@");
 
 
+	}
+
+	/**
+	 * Validate memberid, membername and effective date.
+	 */
+	public void validateFieldsOnBenefitsAndCoveragePage() {
+		try {
+			validate(memberId);
+
+			validate(memberName);
+
+			validate(effectiveDate);
+
+		} catch (Exception e) {
+			System.out.println("Elements are not found ...");
+		}
+		
 	}
 
 
