@@ -511,11 +511,12 @@ public class AccountHomePage extends UhcDriver {
 	}
 	
 	public boolean validateGogreenPopup(){
+		boolean flag=false;
 		try {
-			validate(gogreenPopup);
-			return true;
+			flag= validate(gogreenPopup);
+			return flag;
 		} catch (Exception e) {
-			return false;
+			return flag;
 		}		
 	}
 	

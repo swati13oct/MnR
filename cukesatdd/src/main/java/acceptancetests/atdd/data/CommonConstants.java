@@ -56,13 +56,16 @@ public class CommonConstants {
 	
 	public static final String BENEFITS_AND_COVERAGE_PAGE_DIRECTORY = "/jsonresponse/member/ulayer/benefitsandcoverage/";
 	
+	public static final String BENEFITS_AND_COVERAGE_PAGE_BLAYER_DIRECTORY = "/jsonresponse/member/bluelayer/benefitsandcoverage/";
+	
 	public static final String BENEFITS_AND_COVERAGE_DIRECTORY = "/jsonresponse/member/ulayer/planbenefitsandcoverage/";
 
 	public static final String ACCOUNT_HOME_PAGE_DATA = "myaccounthome.json"; // Group
 
 	public static final String PAGE_OBJECT_DIRECTORY_ULAYER_MEMBER = "/page-objects/member/ulayer/";
 	
-
+	public static final String PAGE_OBJECT_DIRECTORY_BLAYER_MEMBER = "/page-objects/member/bluelayer/";
+	
 
 	public static final String PLAN_SUMMARY_PAGE_DATA = "plansummarypdp.json";
 	

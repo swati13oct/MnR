@@ -233,8 +233,15 @@ public class FormsandresourcesPage extends UhcDriver {
 	/**
 	 * Click the benefits and Coverage link.
 	 */
-	public void navigateToBenefitsAndCoverage() {
+	public BenefitsAndCoveragePage navigateToBenefitsAndCoverage() {
 		benefitsAndCoverage.click();
+		CommonUtility.checkPageIsReady(driver);
+		if (driver.getTitle().equalsIgnoreCase(
+				"My Benefits & Coverage")) {
+			return new BenefitsAndCoveragePage(driver);
+		} else {
+			return null;
+		}
 		
-	}
+	}	
 }
