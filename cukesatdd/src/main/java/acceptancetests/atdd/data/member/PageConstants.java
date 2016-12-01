@@ -15,6 +15,8 @@ public class PageConstants {
 
 	public static final String CREATE_ACCOUNT_PAGE = "createAccountPage";
 	
+	public static final String BENEFITS_SUMMARY_PAGE = "benefitsSummaryPage";
+	
 
 	public static final String REGISTRATION_SUCCESS_PAGE = "registrationSuccessPage";
 

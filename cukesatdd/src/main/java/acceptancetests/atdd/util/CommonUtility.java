@@ -72,6 +72,8 @@ public class CommonUtility {
 	}
 
 	public static JSONObject mergeJson(JSONObject toJson, JSONObject fromJson) {
+		System.out.println("toJson"+toJson);
+		System.out.println("fromJson"+fromJson);
 
 		Iterator<?> itr = fromJson.keys();
 		while (itr.hasNext()) {

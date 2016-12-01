@@ -1,6 +1,7 @@
 package atdd.framework;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -38,12 +39,15 @@ import org.json.JSONObject;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.firefox.FirefoxBinary;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxProfile;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.springframework.ldap.core.DistinguishedName;
 import org.springframework.stereotype.Component;
+
+
 
 
 import acceptancetests.atdd.data.CommonConstants;
@@ -109,7 +113,7 @@ public class MRScenario {
 		Connection con = getDBConnection(props);
 
 		/* Get LDAP Context */
-		DirContext ctx = getLdapContext(props);
+		DirContext ctx =  getLdapContext(props);
 
 		BufferedReader memberAmpTypeReader = null;
 		BufferedReader memberUmsTypeReader = null;
@@ -242,7 +246,7 @@ public class MRScenario {
 			}
 			try {
 				ctx.close();
-			} catch (NamingException e) {
+			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
@@ -774,7 +778,7 @@ public class MRScenario {
 		}
 	}
 
-	public WebDriver getWebDriver() {
+	/*public WebDriver getWebDriver() {
 
 		if(webDriver == null){
 			if(browser.equalsIgnoreCase("htmlunitdriver")){
@@ -791,7 +795,23 @@ public class MRScenario {
 		}
 		return webDriver;
 
-	}
+	}*/
+	
+	public WebDriver getWebDriver() {
+        
+        File pathToBinary = new File("C:/Program Files (x86)/Mozilla Firefox/firefox.exe");
+        FirefoxBinary ffBinary = new FirefoxBinary(pathToBinary);
+        FirefoxProfile firefoxProfile = new FirefoxProfile();       
+        webDriver = new FirefoxDriver(ffBinary,firefoxProfile);
+        webDriver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
+
+/*            
+        
+        webDriver = new FirefoxDriver();
+        webDriver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);*/
+        return webDriver;
+ }
+
 
 	public WebDriver getIEDriver() {
 		System.setProperty("webdriver.ie.driver",
