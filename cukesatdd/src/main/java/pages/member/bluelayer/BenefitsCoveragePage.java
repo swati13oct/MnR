@@ -52,6 +52,12 @@ public class BenefitsCoveragePage extends UhcDriver {
 	
 	@FindBy(xpath="//*[@id='planBenefitsApp']/div/div/div[2]/div[1]/div/div[4]/div[1]/span")
 	private WebElement effectiveDate;
+	
+	@FindBy(xpath="//*[@id='planBenefitsApp']/div/div/div[2]/div[4]/div/section/span/div")
+	private WebElement emerCoPayText;
+
+	@FindBy(xpath="//*[@id='planBenefitsApp']/div/div/div[2]/div[4]/div/section/div[1]/div/h1")
+	private WebElement emerCoPayAmtPct;
 
 
 	private PageData benefitsAndCoverage;
@@ -265,6 +271,10 @@ public class BenefitsCoveragePage extends UhcDriver {
 			validate(memberName);
 
 			validate(effectiveDate);
+			
+			validate(emerCoPayAmtPct);
+			
+			validate(emerCoPayText);
 
 		} catch (Exception e) {
 			System.out.println("Elements are not found ...");
