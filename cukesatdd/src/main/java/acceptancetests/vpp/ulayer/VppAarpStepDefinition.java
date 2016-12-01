@@ -269,6 +269,22 @@ System.out.println("planSummaryExpectedJson---->"
 	}
 	//----
 	
+	@And("^the user stays idle for 10minutes a popup will appear$")
+	public void user_popup_link_in_plansumamrypage()
+	{
+		VPPPlanSummaryPage planSummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		
+		boolean timeout_actual=planSummaryPage.validateTimeoutPopup();
+		try {
+			Assert.assertTrue(timeout_actual);
+		} catch (Exception e) {
+			System.out
+			.println("Exception ocurred comparing actual and expected drug list : "
+					+ e);
+		}	
+	}
+	
 	@And("^the user access the enter drug information link for above selected plan section in AARP site$")
 	public void user_access_the_enter_Drug_information_link_plan_name_ums() {
 		String planName = (String) getLoginScenario().getBean(

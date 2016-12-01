@@ -11,6 +11,7 @@ Feature: To test plan summary in AARP site
 ##Then the user validates the available plans for selected plan types in AARP site
 ##And the user validates the plan summary for the below plan in AARP site
 ##| Plan Name | <planName> |
+##And the user stays idle for 10minutes a popup will appear
 ##Examples:
 #| zipcode | county             | plantype | planName                                             |
 #| 90210   | Los Angeles County | MA    | AARP MedicareComplete SecureHorizons Plan 1 (HMO)    |
