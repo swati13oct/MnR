@@ -133,6 +133,8 @@ public class AccountHomePage extends UhcDriver {
 	private WebElement gogreenPopupClose;
 	
 	
+	@FindBy(id = "paymentsHeading")
+	private WebElement paymentsHeading;
 	
 	private PageData myAccountHome;
 
@@ -254,6 +256,22 @@ public class AccountHomePage extends UhcDriver {
 		}
 		return null;
 
+	}
+
+
+	public boolean changeUrlToNewPaymentHistoryPage() {
+	
+		
+		String NewPayHistoryUrl = "content/aarpm/home/my-plans/payments/PaymentsOverview-DashBoard.html";
+		String url = driver.getCurrentUrl();
+		url = url.replace("home/my-account-home.html", NewPayHistoryUrl);
+		driver.get(url);
+		
+	
+		if (paymentsHeading.getText().contains("Premium Payments Overview")) {
+			return true;
+		}
+		return false;
 	}
 
 	public PharmacySearchPage navigateToPharmacyLocator() {
