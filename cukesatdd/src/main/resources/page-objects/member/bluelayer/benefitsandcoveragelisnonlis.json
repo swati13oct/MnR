@@ -43,6 +43,10 @@
 "ambulanceCopay":{
 "identifier":"xpath",
 "elementName":"//*[@id='planBenefitsApp']/div/div/div[3]/div/div/section/div[1]/div/h1"
+},
+"ambulanceCoins":{
+"identifier":"xpath",
+"elementName":"//*[@id='planBenefitsApp']/div/div/div[3]/div/div/section/div/div/h1"
 }
 
 
