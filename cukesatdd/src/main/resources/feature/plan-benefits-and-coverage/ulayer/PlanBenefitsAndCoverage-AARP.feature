@@ -361,3 +361,39 @@ Examples:
 #| PDP      |
 #| MS       |
 #| HIP      |
+@MAPDProviderLIS1
+Scenario Outline: To validate the office and hospital visits in benefits and coverage page in AARP site for MAPD LIS1 member
+  					
+Given registered member to login in AARP site
+	| Plan Type      | <planType>  |
+ 	| LIS Level      |  <lisLevel>  |  
+ 	| Provider Tiering| <providerTiering>|
+ 	| PartD Deductible|<partDDeductible> |
+ 
+When the user navigates to benefits and coverage page under my plans in AARP site
+Then the user validates the office and hospital visit in AARP site
+
+Examples:
+| planType |lisLevel|providerTiering|partDDeductible|
+| MAPD	   | 1      |true           | AllTier     |
+#| MAPD	   | 1      |true           | SplitTier  |
+#| MAPD	   | 1      |true           | NoTier     |
+#| MAPD	   | 1      |false          | AllTier     |
+#| MAPD	   | 1      |false          | SplitTier   |
+#| MAPD	   | 1      |false           | NoTier     |
+
+@MAProviderT
+Scenario Outline:To validate the office and hospital visits in benefits and coverage page in AARP site for MA member 
+Given registered member to login in AARP site
+	| Plan Type       | <plantype>            |
+ | Provider Tiering | <tiering>             |  
+When the user navigates to benefits and coverage page under my plans in AARP site
+And the user navigates to benefits and coverage page under my plans in AARP site
+Then the user validates the office and hospital visit in AARP site
+
+Examples:
+	| plantype | tiering |
+	#| MAPD     |true   |
+	| MA       |true     |
+	#| MAPD     |false    |
+	#| MA       |false    |
