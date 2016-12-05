@@ -183,6 +183,21 @@ public class BenefitsSummaryPage extends UhcDriver{
 		return browserCheckJson;
 	}
 
+	public boolean changeUrlToNewPaymentHistoryPage() {
+	
+		
+		String NewPayHistoryUrl = "content/aarpm/home/my-plans/payments/PaymentsOverview-DashBoard.html";
+		String url = driver.getCurrentUrl();
+		url = url.replace("home/my-account-home.html", NewPayHistoryUrl);
+		driver.get(url);
+		
+	
+		if (currentUrl().contains("PaymentsOverview-DashBoard.html")) {
+			return true;
+		}
+		return false;
+	}
+
 
 	public BenefitDetailsPage clickviewdrugdetails() {
 		
