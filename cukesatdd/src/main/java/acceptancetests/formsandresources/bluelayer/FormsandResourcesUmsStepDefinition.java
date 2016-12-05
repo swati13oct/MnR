@@ -21,11 +21,13 @@ import org.skyscreamer.jsonassert.JSONAssert;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import pages.member.bluelayer.AccountHomePage;
+import pages.member.bluelayer.BenefitsAndCoveragePage;
 import pages.member.bluelayer.BenefitsCoveragePage;
 import pages.member.bluelayer.FormsandresourcesPage;
 import pages.member.bluelayer.LoginPage;
 import acceptancetests.atdd.data.CommonConstants;
 import acceptancetests.atdd.data.member.PageConstants;
+import acceptancetests.benefitsandcoverage.data.PlanBenefitsAndCoverageCommonConstants;
 import acceptancetests.formsandresources.data.FnRCommonConstants;
 import acceptancetests.login.data.LoginCommonConstants;
 import atdd.framework.MRScenario;
@@ -40,7 +42,9 @@ import cucumber.table.DataTable;
  */
 public class FormsandResourcesUmsStepDefinition {
 	
-	private static BenefitsCoveragePage planBenefitsCoveragePage = null;
+	private static BenefitsAndCoveragePage planBenefitsCoveragePage = null;
+	
+	public String userName=null;
 
 	@Autowired
 	MRScenario loginScenario;
@@ -84,7 +88,7 @@ public class FormsandResourcesUmsStepDefinition {
 			System.out.println("Member Type data could not be setup !!!");
 			Assert.fail("unable to find a " + desiredAttributes + " member");
 		} else {
-			userName = loginCreds.get("user");
+			this.userName=userName = loginCreds.get("user");
 			pwd = loginCreds.get("pwd");
 			System.out.println("User is..." + userName);
 			System.out.println("Password is..." + pwd);
@@ -327,14 +331,45 @@ public class FormsandResourcesUmsStepDefinition {
 		FormsandresourcesPage formsandresourcesPage = (FormsandresourcesPage) getLoginScenario()
 				.getBean(PageConstants.FORMS_AND_RESOURCES_PAGE);
 
-		formsandresourcesPage.navigateToBenefitsAndCoverage();
+		planBenefitsCoveragePage=formsandresourcesPage.navigateToBenefitsAndCoverage();
+		
+		if(planBenefitsCoveragePage!=null){
+			//Get actual data
+			JSONObject actualJsonObj=planBenefitsCoveragePage.benefitsandcoverageJson;
+			loginScenario.saveBean(PlanBenefitsAndCoverageCommonConstants.BENEFITS_AND_COVERAGE_ACTUAL, actualJsonObj);	
+			System.out.println("Benefits and coverage actual ==============>"+actualJsonObj.toString());
+			// Get expected data 
+			String fileName = this.userName;
+			String directory = CommonConstants.BENEFITS_AND_COVERAGE_PAGE_BLAYER_DIRECTORY;					
+			JSONObject benefitsandcoverageExectedJson = MRScenario.readExpectedJson(
+					fileName, directory);
+			loginScenario.saveBean(PlanBenefitsAndCoverageCommonConstants.BENEFITS_AND_COVERAGE_EXPECTED, benefitsandcoverageExectedJson);
+			System.out.println("Benefits and coverage expected ==============>"+benefitsandcoverageExectedJson.toString());
+			
+			
+			
+		}
 			
 	}
 
 	@Then("^the user validates the content on benefits and coverage page$")
 	public void the_user_validates_the_content_on_benefits_and_coverage_page() {
-		if (planBenefitsCoveragePage != null) {
+		/*if (planBenefitsCoveragePage != null) {
 			planBenefitsCoveragePage.validateFieldsOnBenefitsAndCoveragePage();
+		}*/
+		
+		try {
+			
+			JSONObject actual=(JSONObject) loginScenario.getBean(PlanBenefitsAndCoverageCommonConstants.BENEFITS_AND_COVERAGE_ACTUAL);
+			
+			JSONObject expected=(JSONObject) loginScenario.getBean(PlanBenefitsAndCoverageCommonConstants.BENEFITS_AND_COVERAGE_EXPECTED);
+			
+			if(actual!=null && expected !=null){
+				JSONAssert.assertEquals(expected, actual, true);
+			}			
+			
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
 	}
 }
