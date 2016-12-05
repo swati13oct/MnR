@@ -84,7 +84,7 @@ public class MRConstants {
 
 	public static final String AARPM_REGISTRATION_URL = "https://member."+MRScenario.environment+"-aarpmedicareplans.uhc.com/guest/registration.html";
 
-	
+	public static final String PCP_MOBILE_URL = "https://member.awe-"+MRScenario.environment+"-mypcpmedicare.uhc.com/mobile/guest/login.html";
 	public static final String PCP_REGISTRATION_URL = "https://www.awe-"+MRScenario.environment+"-mypcpmedicare.uhc.com/guest/registration.html";
 	
 	public static final String PCP_PASSWORD_ASSISTANCE_URL = "https://www.awe-"+MRScenario.environment+"-mypcpmedicare.uhc.com/guest/login/username-and-password-assistance.html";

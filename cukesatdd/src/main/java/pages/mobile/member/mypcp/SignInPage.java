@@ -1,16 +1,28 @@
 package pages.mobile.member.mypcp;
 
+import org.openqa.selenium.Alert;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
 import pages.acquisition.bluelayer.GlobalWebElements;
+import pages.mobile.member.blayer.BenefitsSummaryPage;
 import acceptancetests.atdd.data.MRConstants;
+import atdd.framework.MRScenario;
 
 public class SignInPage extends GlobalWebElements {
 	
 	private static String MY_PCP_PAGE_URL = MRConstants.PCP_PAGE_URL;	
+	
+	@FindBy(id="loginSTANDuser")
+	private WebElement userNameField;
+
+	@FindBy(id = "loginSTANDpass")
+	private WebElement passwordField;
+
+	@FindBy(id = "accessURAccountBTN")
+	private WebElement signInButton;
 	
 	@FindBy(linkText = "About Us")
 	private WebElement aboutUsLink;
@@ -28,8 +40,8 @@ public class SignInPage extends GlobalWebElements {
 	@FindBy(xpath = "//a[contains(.,'Access Your Account')]")
 	private WebElement accessYourAccountLink;
 	
-	@FindBy(xpath = "//*[@id='accessURAccountBTN']/span")
-	private WebElement signInButton;
+	/*@FindBy(xpath = "//*[@id='accessURAccountBTN']/span")
+	private WebElement signInButton;*/
 
 	public SignInPage(WebDriver driver) {
 		super(driver);
@@ -42,6 +54,28 @@ public class SignInPage extends GlobalWebElements {
 		start(MY_PCP_PAGE_URL);
 		validate(accessYourAccountLink);
 		validate(signInButton);
+	}
+	
+	public BenefitsSummaryPage loginWith(String userName, String pwd) {
+		sendkeys(userNameField, userName);
+		sendkeys(passwordField, pwd);
+		signInButton.click();
+		
+		if (MRScenario.environment.equals("dev-a") || MRScenario.environment.equals("team-a")) {
+			
+			Alert alert = driver.switchTo().alert();
+	        alert.accept();
+	        Alert alert1 = driver.switchTo().alert();
+	        alert1.accept();
+	       /* Alert alert2 = driver.switchTo().alert();
+	        alert2.accept();*/
+	        }
+		
+		if(currentUrl().contains("mobile/home/my-benefit-summary.html"))
+		{
+			return new BenefitsSummaryPage(driver);
+		}
+		return null;
 	}
 	
 	public AboutUsPage navigateToAboutUs() {
