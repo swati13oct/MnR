@@ -361,3 +361,311 @@ Examples:
 #| PDP      |
 #| MS       |
 #| HIP      |
+@MAPDProviderLIS1
+Scenario Outline: To validate the office and hospital visits in benefits and coverage page in AARP site for MAPD LIS1 member
+  					
+Given registered member to login in AARP site
+	| Plan Type      | <planType>  |
+ 	| LIS Level      |  <lisLevel>  |  
+ 	| Provider Tiering| <providerTiering>|
+ 	| PartD Deductible|<partDDeductible> |
+ 
+When the user navigates to benefits and coverage page under my plans in AARP site
+Then the user validates the office and hospital visit in AARP site
+
+Examples:
+| planType |lisLevel|providerTiering|partDDeductible|
+| MAPD	   | 1      |true           | AllTier     |
+#| MAPD	   | 1      |true           | SplitTier  |
+#| MAPD	   | 1      |true           | NoTier     |
+#| MAPD	   | 1      |false          | AllTier     |
+#| MAPD	   | 1      |false          | SplitTier   |
+#| MAPD	   | 1      |false           | NoTier     |
+
+@MAProviderT
+Scenario Outline:To validate the office and hospital visits in benefits and coverage page in AARP site for MA member 
+Given registered member to login in AARP site
+	| Plan Type       | <plantype>            |
+ | Provider Tiering | <tiering>             |  
+When the user navigates to benefits and coverage page under my plans in AARP site
+And the user navigates to benefits and coverage page under my plans in AARP site
+Then the user validates the office and hospital visit in AARP site
+
+Examples:
+	| plantype | tiering |
+	#| MAPD     |true   |
+	| MA       |true     |
+	#| MAPD     |false    |
+	#| MA       |false    |
+	
+	
+@bncUlayer
+
+Feature: To test plan benefits and Coverage on AARP site for Federal members
+Scenario Outline: Verify benefits and coverage in AARP site for mapd non lis non provider tiering with office visits and hospital visits no tier
+Given registered AMP with following details for plan benefits and coverage flow in AARP site
+| Plan Type          | <planType>                |
+| Copay Category     | <copayCategory>           | 
+When the user view forms and resources in AARP site
+Then the user view benefits and coverage in AARP site
+And the user validates the content on benefits and coverage page    	 
+Examples:
+        |planType  | copayCategory  |
+        | MAPD     | NON LIS        | 
+		
+Scenario Outline: Verify benefits and coverage in AARP site for mapd non lis non provider tiering with office visits and hospital visits all tier
+Given registered AMP with following details for plan benefits and coverage flow in AARP site
+| Plan Type          | <planType>                |
+| Copay Category     | <copayCategory>           | 
+When the user view forms and resources in AARP site
+Then the user view benefits and coverage in AARP site
+And the user validates the content on benefits and coverage page    	 
+Examples:
+        |planType  | copayCategory  |
+        | MAPD     | NON LIS        | 	
+
+Scenario Outline: Verify benefits and coverage in AARP site for mapd non lis non provider tiering with office visits and hospital visits split tier
+Given registered AMP with following details for plan benefits and coverage flow in AARP site
+| Plan Type          | <planType>                |
+| Copay Category     | <copayCategory>           | 
+When the user view forms and resources in AARP site
+Then the user view benefits and coverage in AARP site
+And the user validates the content on benefits and coverage page    	 
+Examples:
+        |planType  | copayCategory  |
+        | MAPD     | NON LIS        | 
+
+		Scenario Outline: Verify benefits and coverage in AARP site for mapd non lis provider tiering with office visits no tier
+Given registered AMP with following details for plan benefits and coverage flow in AARP site
+| Plan Type          | <planType>                |
+| Copay Category     | <copayCategory>           | 
+When the user view forms and resources in AARP site
+Then the user view benefits and coverage in AARP site
+And the user validates the content on benefits and coverage page    	 
+Examples:
+        |planType  | copayCategory  |
+        | MAPD     | NON LIS        | 
+		
+Scenario Outline: Verify benefits and coverage in AARP site for mapd non lis provider tiering with office visits all tier
+Given registered AMP with following details for plan benefits and coverage flow in AARP site
+| Plan Type          | <planType>                |
+| Copay Category     | <copayCategory>           | 
+When the user view forms and resources in AARP site
+Then the user view benefits and coverage in AARP site
+And the user validates the content on benefits and coverage page    	 
+Examples:
+        |planType  | copayCategory  |
+        | MAPD     | NON LIS        | 	
+
+Scenario Outline: Verify benefits and coverage in AARP site for mapd non lis provider tiering with office visits split tier
+Given registered AMP with following details for plan benefits and coverage flow in AARP site
+| Plan Type          | <planType>                |
+| Copay Category     | <copayCategory>           | 
+When the user view forms and resources in AARP site
+Then the user view benefits and coverage in AARP site
+And the user validates the content on benefits and coverage page    	 
+Examples:
+        |planType  | copayCategory  |
+        | MAPD     | NON LIS        | 
+
+
+Scenario Outline: Verify benefits and coverage in AARP site for mapd lis 2 non provider tiering with office visits and hospital visits no tier
+Given registered AMP with following details for plan benefits and coverage flow in AARP site
+| Plan Type          | <planType>                |
+| Copay Category     | <copayCategory>           | 
+When the user view forms and resources in AARP site
+Then the user view benefits and coverage in AARP site
+And the user validates the content on benefits and coverage page    	 
+Examples:
+        |planType  | copayCategory  |
+        | MAPD     | LIS 2        | 
+		
+Scenario Outline: Verify benefits and coverage in AARP site for mapd lis 2 non provider tiering with office visits and hospital visits all tier
+Given registered AMP with following details for plan benefits and coverage flow in AARP site
+| Plan Type          | <planType>                |
+| Copay Category     | <copayCategory>           | 
+When the user view forms and resources in AARP site
+Then the user view benefits and coverage in AARP site
+And the user validates the content on benefits and coverage page    	 
+Examples:
+        |planType  | copayCategory  |
+        | MAPD     | LIS 2        | 	
+
+Scenario Outline: Verify benefits and coverage in AARP site for mapd lis 2 non provider tiering with office visits and hospital visits split tier
+Given registered AMP with following details for plan benefits and coverage flow in AARP site
+| Plan Type          | <planType>                |
+| Copay Category     | <copayCategory>           | 
+When the user view forms and resources in AARP site
+Then the user view benefits and coverage in AARP site
+And the user validates the content on benefits and coverage page    	 
+Examples:
+        |planType  | copayCategory  |
+        | MAPD     | LIS 2        | 
+
+		Scenario Outline: Verify benefits and coverage in AARP site for mapd lis 2 provider tiering with office visits no tier
+Given registered AMP with following details for plan benefits and coverage flow in AARP site
+| Plan Type          | <planType>                |
+| Copay Category     | <copayCategory>           | 
+When the user view forms and resources in AARP site
+Then the user view benefits and coverage in AARP site
+And the user validates the content on benefits and coverage page    	 
+Examples:
+        |planType  | copayCategory  |
+        | MAPD     | LIS 2        | 
+		
+Scenario Outline: Verify benefits and coverage in AARP site for mapd lis 2 provider tiering with office visits all tier
+Given registered AMP with following details for plan benefits and coverage flow in AARP site
+| Plan Type          | <planType>                |
+| Copay Category     | <copayCategory>           | 
+When the user view forms and resources in AARP site
+Then the user view benefits and coverage in AARP site
+And the user validates the content on benefits and coverage page    	 
+Examples:
+        |planType  | copayCategory  |
+        | MAPD     | LIS 2        | 	
+
+Scenario Outline: Verify benefits and coverage in AARP site for mapd lis 2 provider tiering with office visits split tier
+Given registered AMP with following details for plan benefits and coverage flow in AARP site
+| Plan Type          | <planType>                |
+| Copay Category     | <copayCategory>           | 
+When the user view forms and resources in AARP site
+Then the user view benefits and coverage in AARP site
+And the user validates the content on benefits and coverage page    	 
+Examples:
+        |planType  | copayCategory  |
+        | MAPD     | LIS 2        | 
+
+		
+Scenario Outline: Verify benefits and coverage in AARP site for mapd lis 3 non provider tiering with office visits and hospital visits no tier
+Given registered AMP with following details for plan benefits and coverage flow in AARP site
+| Plan Type          | <planType>                |
+| Copay Category     | <copayCategory>           | 
+When the user view forms and resources in AARP site
+Then the user view benefits and coverage in AARP site
+And the user validates the content on benefits and coverage page    	 
+Examples:
+        |planType  | copayCategory  |
+        | MAPD     | LIS 3        | 
+		
+Scenario Outline: Verify benefits and coverage in AARP site for mapd lis 3 non provider tiering with office visits and hospital visits all tier
+Given registered AMP with following details for plan benefits and coverage flow in AARP site
+| Plan Type          | <planType>                |
+| Copay Category     | <copayCategory>           | 
+When the user view forms and resources in AARP site
+Then the user view benefits and coverage in AARP site
+And the user validates the content on benefits and coverage page    	 
+Examples:
+        |planType  | copayCategory  |
+        | MAPD     | LIS 3        | 	
+
+Scenario Outline: Verify benefits and coverage in AARP site for mapd lis 3 non provider tiering with office visits and hospital visits split tier
+Given registered AMP with following details for plan benefits and coverage flow in AARP site
+| Plan Type          | <planType>                |
+| Copay Category     | <copayCategory>           | 
+When the user view forms and resources in AARP site
+Then the user view benefits and coverage in AARP site
+And the user validates the content on benefits and coverage page    	 
+Examples:
+        |planType  | copayCategory  |
+        | MAPD     | LIS 3        | 
+
+		Scenario Outline: Verify benefits and coverage in AARP site for mapd lis 3 provider tiering with office visits no tier
+Given registered AMP with following details for plan benefits and coverage flow in AARP site
+| Plan Type          | <planType>                |
+| Copay Category     | <copayCategory>           | 
+When the user view forms and resources in AARP site
+Then the user view benefits and coverage in AARP site
+And the user validates the content on benefits and coverage page    	 
+Examples:
+        |planType  | copayCategory  |
+        | MAPD     | LIS 3        | 
+		
+Scenario Outline: Verify benefits and coverage in AARP site for mapd lis 3 provider tiering with office visits all tier
+Given registered AMP with following details for plan benefits and coverage flow in AARP site
+| Plan Type          | <planType>                |
+| Copay Category     | <copayCategory>           | 
+When the user view forms and resources in AARP site
+Then the user view benefits and coverage in AARP site
+And the user validates the content on benefits and coverage page    	 
+Examples:
+        |planType  | copayCategory  |
+        | MAPD     | LIS 3        | 	
+
+Scenario Outline: Verify benefits and coverage in AARP site for mapd lis 3 provider tiering with office visits split tier
+Given registered AMP with following details for plan benefits and coverage flow in AARP site
+| Plan Type          | <planType>                |
+| Copay Category     | <copayCategory>           | 
+When the user view forms and resources in AARP site
+Then the user view benefits and coverage in AARP site
+And the user validates the content on benefits and coverage page    	 
+Examples:
+        |planType  | copayCategory  |
+        | MAPD     | LIS 3        | 
+		
+
+Scenario Outline: Verify benefits and coverage in AARP site for mapd lis 4 non provider tiering with office visits and hospital visits no tier
+Given registered AMP with following details for plan benefits and coverage flow in AARP site
+| Plan Type          | <planType>                |
+| Copay Category     | <copayCategory>           | 
+When the user view forms and resources in AARP site
+Then the user view benefits and coverage in AARP site
+And the user validates the content on benefits and coverage page    	 
+Examples:
+        |planType  | copayCategory  |
+        | MAPD     | LIS 4        | 
+		
+Scenario Outline: Verify benefits and coverage in AARP site for mapd lis 4 non provider tiering with office visits and hospital visits all tier
+Given registered AMP with following details for plan benefits and coverage flow in AARP site
+| Plan Type          | <planType>                |
+| Copay Category     | <copayCategory>           | 
+When the user view forms and resources in AARP site
+Then the user view benefits and coverage in AARP site
+And the user validates the content on benefits and coverage page    	 
+Examples:
+        |planType  | copayCategory  |
+        | MAPD     | LIS 4        | 	
+
+Scenario Outline: Verify benefits and coverage in AARP site for mapd lis 4 non provider tiering with office visits and hospital visits split tier
+Given registered AMP with following details for plan benefits and coverage flow in AARP site
+| Plan Type          | <planType>                |
+| Copay Category     | <copayCategory>           | 
+When the user view forms and resources in AARP site
+Then the user view benefits and coverage in AARP site
+And the user validates the content on benefits and coverage page    	 
+Examples:
+        |planType  | copayCategory  |
+        | MAPD     | LIS 4        | 
+
+		Scenario Outline: Verify benefits and coverage in AARP site for mapd lis 4 provider tiering with office visits no tier
+Given registered AMP with following details for plan benefits and coverage flow in AARP site
+| Plan Type          | <planType>                |
+| Copay Category     | <copayCategory>           | 
+When the user view forms and resources in AARP site
+Then the user view benefits and coverage in AARP site
+And the user validates the content on benefits and coverage page    	 
+Examples:
+        |planType  | copayCategory  |
+        | MAPD     | LIS 4        | 
+		
+Scenario Outline: Verify benefits and coverage in AARP site for mapd lis 4 provider tiering with office visits all tier
+Given registered AMP with following details for plan benefits and coverage flow in AARP site
+| Plan Type          | <planType>                |
+| Copay Category     | <copayCategory>           | 
+When the user view forms and resources in AARP site
+Then the user view benefits and coverage in AARP site
+And the user validates the content on benefits and coverage page    	 
+Examples:
+        |planType  | copayCategory  |
+        | MAPD     | LIS 4        | 	
+
+Scenario Outline: Verify benefits and coverage in AARP site for mapd lis 4 provider tiering with office visits split tier
+Given registered AMP with following details for plan benefits and coverage flow in AARP site
+| Plan Type          | <planType>                |
+| Copay Category     | <copayCategory>           | 
+When the user view forms and resources in AARP site
+Then the user view benefits and coverage in AARP site
+And the user validates the content on benefits and coverage page    	 
+Examples:
+        |planType  | copayCategory  |
+        | MAPD     | LIS 4        | 
+		

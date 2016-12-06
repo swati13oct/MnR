@@ -17,14 +17,6 @@
 "identifier":"xpath",
 "elementName":"//*[@id='planBenefitsApp']/div/div/div[2]/div[1]/div/div[4]/div[2]"
 },
-"extraHelpLevel":{
-"identifier":"xpath",
-"elementName":"//*[@id='planBenefitsApp']/div/div/div[2]/div/div[2]/div[1]/div/div/div[2]"
-},
-"lateEnrollment":{
-"identifier":"xpath",
-"elementName":"//*[@id='planBenefitsApp']/div/div/div[2]/div/div[1]/div/div[5]/div[2]"
-},
 "monthlyPremium":{
 "identifier":"xpath",
 "elementName":"//*[@id='planBenefitsApp']/div/div/div[2]/div[2]/h1[2]"
@@ -33,14 +25,6 @@
 "identifier":"xpath",
 "elementName":"//*[@id='planBenefitsApp']/div/div/div[1]/div/h1/div"
 },
-"shipBenefitHeaderSummary":{
-"identifier":"xpath",
-"elementName":"//*[@id='planBenefitsApp']/div/div/div[1]/div[1]/div/h1/div/span"
-},
-"shipBenefitHeaderContent":{
-"identifier":"xpath",
-"elementName":"//*[@id='planBenefitsApp']/div/div/div[1]/div[2]/div/div/span/p"
-},
 "medicalCopayCoinsurance":{
 "identifier":"xpath",
 "elementName":"//*[@id='planBenefitsApp']/div/div/div[2]/div/h2/div"
@@ -48,6 +32,78 @@
 "benefitHeaderText":{
 "identifier":"xpath",
 "elementName":"//*[@id='planBenefitsApp']/div/div/div[2]/div/p"
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	"url" : null,
+	"expectedData" : {
+		"planName" : {
+			"identifier" : "xpath",
+			"elementName" : "//*[@id='planBenefitsApp']/div/div/div[1]/div/div/div/div/h1"
+		},
+		"memberId" : {
+			"identifier" : "xpath",
+			"elementName" : "//*[@id='planBenefitsApp']/div/div/div[2]/div[1]/div/div[2]/div[2]"
+		},
+		"memberName" : {
+			"identifier" : "xpath",
+			"elementName" : "//*[@id='planBenefitsApp']/div/div/div[2]/div[1]/div/div[1]/div[2]"
+		},
+		"effectiveDate" : {
+			"identifier" : "xpath",
+			"elementName" : "//*[@id='planBenefitsApp']/div/div/div[2]/div[1]/div/div[4]/div[2]"
+		},
+		"monthlyPremium" : {
+			"identifier" : "xpath",
+			"elementName" : "//*[@id='planBenefitsApp']/div/div/div[2]/div[2]/h1[2]"
+		},
+		"benefitHeaderSummary" : {
+			"identifier" : "xpath",
+			"elementName" : "//*[@id='planBenefitsApp']/div/div/div[1]/div/h1/div"
+		},
+		"medicalCopayCoinsurance" : {
+			"identifier" : "xpath",
+			"elementName" : "//*[@id='planBenefitsApp']/div/div/div[2]/div/h2/div"
+		},
+		"benefitHeaderText" : {
+			"identifier" : "xpath",
+			"elementName" : "//*[@id='planBenefitsApp']/div/div/div[2]/div/p"
+		},
+		"physicalCarePhysicianCost" : {
+			"identifier" : "xpath",
+			"elementName" : "//*[@id='planBenefitsApp']/div/div/div[3]/div[1]/div/section/div[1]/p/span[2]"
+		},
+		"specialistCost" : {
+			"identifier" : "xpath",
+			"elementName" : "//*[@id='planBenefitsApp']/div/div/div[3]/div[1]/div/section/p/span[2]"
+		},
+		"hospitalvisitCostAllDays" : {
+			"identifier" : "xpath",
+			"elementName" : "//*[@id='planBenefitsApp']/div/div/div[3]/div[2]/div/section/div[3]/div"
+		},
+		"officeVisitsPhysicalCarePhysicianTiers" : {
+			"identifier" : "xpath",
+			"elementName" : "//*[@id='planBenefitsApp']/div/div/div[3]/div[1]/div/section/div[1]/div"
+		},
+		"officeVisitsSpecialistTiers" : {
+			"identifier" : "xpath",
+			"elementName" : "//*[@id='planBenefitsApp']/div/div/div[3]/div[1]/div/section/div[2]"
+		}
+				
+	}
 }
 
 

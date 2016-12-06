@@ -61,3 +61,17 @@ Dec_ulayer219/Password@1,MAPD,,
 Dec_ulayer235/Password@1,MAPD,,
 sep_ulayerPDP116/Password@1,MAPD,,
 Dec_ulayer318/Password@1,MAPD,,
+ben_ulayer_036/Password@1,MAPD,1,true,AllTier,
+ben_ulayer_038/Password@1,MAPD,1,true,NoTier,
+ben_ulayer159/Password@1,MAPD,1,true,SplitTier,
+decq4_ulayer128/Password@1,MAPD,1,false,AllTier,
+decq4_ulayer078/Password@1,MAPD,1,false,NoTier,
+decq4_ulayer103/Password@1,MAPD,1,false,SplitTier,
+sep_ulayer001/Password@1,MA,true,
+ben_ulayer_032/Password@1,MA,false,
+q4dec_Combo_024/Password@1,MAPD,LIS 3
+ben_ulayer_028/Password@1,MAPD,LIS 3
+ben_ulayer_029/Password@1,MAPD,LIS 3
+decq4_ulayer124/Password@1,MAPD,LIS 3
+decq4_ulayer122/Password@1,MAPD,LIS 3
+apr_ulayer004/Password@1,MAPD,LIS 3

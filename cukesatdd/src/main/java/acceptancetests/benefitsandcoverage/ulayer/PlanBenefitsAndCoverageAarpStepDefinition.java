@@ -422,6 +422,42 @@ public class PlanBenefitsAndCoverageAarpStepDefinition {
 		
 		
 	}
+	
+	@Then("^the user validates the office and hospital visit in AARP site$")
+	public void the_user_validates_the_office_and_hospital_visit_in_AARP_site() {
+		try {
+
+			BenefitsAndCoveragePage  benefitsCoveragePage =(BenefitsAndCoveragePage) getLoginScenario()
+			.getBean(PageConstants.BENEFITS_AND_COVERAGE_PAGE);
+			JSONObject actualJsonObj = benefitsCoveragePage.benefitsandcoverageJson;
+			loginScenario
+					.saveBean(
+							PlanBenefitsAndCoverageCommonConstants.BENEFITS_AND_COVERAGE_ACTUAL,
+							actualJsonObj);
+			System.out.println("Benefits and coverage actual ==============>"
+					+ actualJsonObj.toString());
+			// Get expected data
+			String fileName = this.userName;
+			String directory = CommonConstants.BENEFITS_AND_COVERAGE_PAGE_DIRECTORY;
+			JSONObject benefitsandcoverageExectedJson = MRScenario
+					.readExpectedJson(fileName, directory);
+			loginScenario
+					.saveBean(
+							PlanBenefitsAndCoverageCommonConstants.BENEFITS_AND_COVERAGE_EXPECTED,
+							benefitsandcoverageExectedJson);
+			System.out.println("Benefits and coverage expected ==============>"
+					+ benefitsandcoverageExectedJson.toString());
+
+			if (actualJsonObj != null && benefitsandcoverageExectedJson != null) {
+				JSONAssert.assertEquals(benefitsandcoverageExectedJson,
+						actualJsonObj, true);
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+	}
 
 	@After
 	public void tearDown() {
