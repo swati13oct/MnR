@@ -44,8 +44,12 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 	@FindBy(xpath="//*[@id='planBenefitsApp']/div/div/div[2]/div[1]/div/div[4]/div[1]/span")
 	private WebElement effectiveDate;
 	
+	@FindBy(className="start-search-atdd")  
+	private WebElement startSerch;
 
-
+	@FindBy(className="changepcp-atdd")  
+	private WebElement changePcp;
+	
 	public BenefitsAndCoveragePage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
@@ -126,6 +130,33 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 		benefitsandcoverageJson = jsonObject;
 
 		System.out.println("BenefitsCoverageJson----->"+benefitsandcoverageJson);
+		
+	}
+
+	public void navigateToRallySearchWindow() {
+		// TODO Auto-generated method stub
+		validate(startSerch);
+		startSerch.click();
+		try {
+			Thread.sleep(10000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+	}
+
+	public void navigateToContactUsPage() {
+		// TODO Auto-generated method stub
+		validate(changePcp);
+		changePcp.click();
+		try { 
+			Thread.sleep(15000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 		
 	}
 	
