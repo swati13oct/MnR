@@ -48,9 +48,10 @@
 "benefitHeaderText":{
 "identifier":"xpath",
 "elementName":"//*[@id='planBenefitsApp']/div/div/div[2]/div/p"
+},
+"primaryCareProviderName":{
+"identifier":"className", 
+"elementName":"providername-atdd"
 }
-
-
-
 }
 }
