@@ -1,54 +1,4 @@
-{
-"url":null,
-"expectedData":{
-"planName":{
-"identifier":"xpath",
-"elementName":"//*[@id='planBenefitsApp']/div/div/div[1]/div/div/div/div/h1"
-},
-"memberId":{
-"identifier":"xpath",
-"elementName":"//*[@id='planBenefitsApp']/div/div/div[2]/div[1]/div/div[2]/div[2]"
-},
-"memberName":{
-"identifier":"xpath",
-"elementName":"//*[@id='planBenefitsApp']/div/div/div[2]/div[1]/div/div[1]/div[2]"
-},
-"effectiveDate":{
-"identifier":"xpath",
-"elementName":"//*[@id='planBenefitsApp']/div/div/div[2]/div[1]/div/div[4]/div[2]"
-},
-"monthlyPremium":{
-"identifier":"xpath",
-"elementName":"//*[@id='planBenefitsApp']/div/div/div[2]/div[2]/h1[2]"
-},
-"benefitHeaderSummary":{
-"identifier":"xpath",
-"elementName":"//*[@id='planBenefitsApp']/div/div/div[1]/div/h1/div"
-},
-"medicalCopayCoinsurance":{
-"identifier":"xpath",
-"elementName":"//*[@id='planBenefitsApp']/div/div/div[2]/div/h2/div"
-},
-"benefitHeaderText":{
-"identifier":"xpath",
-"elementName":"//*[@id='planBenefitsApp']/div/div/div[2]/div/p"
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-	"url" : null,
+"url" : null,
 	"expectedData" : {
 		"planName" : {
 			"identifier" : "xpath",
@@ -104,9 +54,10 @@
 		}
 				
 	}
+},
+"primaryCareProviderName":{
+"identifier":"className", 
+"elementName":"providername-atdd"
 }
-
-
-
 }
 }

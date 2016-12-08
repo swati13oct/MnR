@@ -361,6 +361,7 @@ Examples:
 #| PDP      |
 #| MS       |
 #| HIP      |
+
 @MAPDProviderLIS1
 Scenario Outline: To validate the office and hospital visits in benefits and coverage page in AARP site for MAPD LIS1 member
   					
@@ -669,3 +670,20 @@ Examples:
         |planType  | copayCategory  |
         | MAPD     | LIS 4        | 
 		
+
+
+Scenario Outline:To verify the benefits and coverage page for MA and MAPD member in AARP site
+Given registered member for forms and resources in AARP Site
+	| <planType> |
+When the user view forms and resources in AARP site
+Then the user view benefits and coverage in AARP site
+And the user validates the content on benefits and coverage page
+And the user clicks on the start search button on benefits and coverage page
+And the user clicks on the change your pcp button on benefits and coverage page
+
+Examples:
+
+| planType |
+| MA	   |
+| MAPD	   |
+

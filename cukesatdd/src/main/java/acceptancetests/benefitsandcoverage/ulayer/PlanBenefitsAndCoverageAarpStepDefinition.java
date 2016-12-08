@@ -32,6 +32,7 @@ import acceptancetests.formsandresources.data.FnRCommonConstants;
 import acceptancetests.login.data.LoginCommonConstants;
 import atdd.framework.MRScenario;
 import cucumber.annotation.After;
+import cucumber.annotation.en.And;
 import cucumber.annotation.en.Given;
 import cucumber.annotation.en.Then;
 import cucumber.annotation.en.When;
@@ -388,6 +389,7 @@ public class PlanBenefitsAndCoverageAarpStepDefinition {
 			//Get actual data
 			JSONObject actualJsonObj=benefitsCoveragePage.benefitsandcoverageJson;
 			loginScenario.saveBean(PlanBenefitsAndCoverageCommonConstants.BENEFITS_AND_COVERAGE_ACTUAL, actualJsonObj);	
+			getLoginScenario().saveBean(PageConstants.BENEFITS_COVERAGE_PAGE, benefitsCoveragePage);
 			System.out.println("Benefits and coverage actual ==============>"+actualJsonObj.toString());
 			// Get expected data 
 			String fileName = this.userName;
@@ -406,6 +408,7 @@ public class PlanBenefitsAndCoverageAarpStepDefinition {
 
 	@Then("^the user validates the content on benefits and coverage page")
 	public void validateContentOnBenefitsAndCoveragePage() {
+		
 		try {
 			
 			JSONObject actual=(JSONObject) loginScenario.getBean(PlanBenefitsAndCoverageCommonConstants.BENEFITS_AND_COVERAGE_ACTUAL);
@@ -422,6 +425,7 @@ public class PlanBenefitsAndCoverageAarpStepDefinition {
 		
 		
 	}
+
 	
 	@Then("^the user validates the office and hospital visit in AARP site$")
 	public void the_user_validates_the_office_and_hospital_visit_in_AARP_site() {
@@ -459,6 +463,24 @@ public class PlanBenefitsAndCoverageAarpStepDefinition {
 
 	}
 
+	@And("^the user clicks on the start search button on benefits and coverage page$")
+	public void user_clicks_on_start_search_button() {
+		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario().getBean(
+				PageConstants.BENEFITS_COVERAGE_PAGE);
+		benefitsCoveragePage.navigateToRallySearchWindow();
+
+
+		
+	}
+	
+	@And("^the user clicks on the change your pcp button on benefits and coverage page$")
+	public void user_clicks_on_change_your_pcp_button() {
+		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario().getBean(
+				PageConstants.BENEFITS_COVERAGE_PAGE);
+		benefitsCoveragePage.navigateToContactUsPage();
+
+		
+	}
 	@After
 	public void tearDown() {
 
