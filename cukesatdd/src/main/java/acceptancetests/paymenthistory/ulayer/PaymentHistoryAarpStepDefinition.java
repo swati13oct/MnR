@@ -19,12 +19,14 @@ import acceptancetests.atdd.data.member.PageConstants;
 import acceptancetests.login.data.LoginCommonConstants;
 import atdd.framework.MRScenario;
 import cucumber.annotation.After;
+import cucumber.annotation.en.And;
 import cucumber.annotation.en.Given;
 import cucumber.annotation.en.Then;
 import cucumber.annotation.en.When;
 import cucumber.table.DataTable;
 import gherkin.formatter.model.DataTableRow;
 import pages.member.ulayer.AccountHomePage;
+import pages.member.ulayer.DashboardPaymentOverview;
 import pages.member.ulayer.LoginPage;
 
 /**
@@ -102,13 +104,47 @@ public class PaymentHistoryAarpStepDefinition {
 	@Then("^I navigate to the new Payment History page$")
 	public void i_navigate_to_the_payment_history_page() {
 		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstants.ACCOUNT_HOME_PAGE);
-		Boolean newPaymentHistoryPageFlag = accountHomePage.changeUrlToNewPaymentHistoryPage();
+		DashboardPaymentOverview dashboardPaymentOverview = accountHomePage.changeUrlToNewPaymentHistoryPage();
 
-		if (newPaymentHistoryPageFlag) {
+		if (null != dashboardPaymentOverview) {
 			System.out.println("New Payment page got loaded");
 			Assert.assertTrue(true);
 		} else {
 			System.out.println("Error:Loading ion new payment page");
+		}
+
+	}
+	
+	
+	@And("^I navigate to the new Payment History page$")
+	public void i_navigate_to_the_payment_history_page1() {
+		
+		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstants.ACCOUNT_HOME_PAGE);
+		DashboardPaymentOverview dashboardPaymentOverview = accountHomePage.changeUrlToNewPaymentHistoryPage();
+		if (null != dashboardPaymentOverview) {
+			
+			System.out.println("New Payment history page got loaded");
+			getLoginScenario().saveBean(PageConstants.DASHBOARD_PAYMENT_HISTORY_PAGE,
+					dashboardPaymentOverview);
+		} else {
+			System.out.println("Error:Loading ion new payment page");
+		}
+	}
+	
+	
+	@Then("^I can view a Premium Payments Overview section with the Payment Method I have selected displayed on desktop$")
+	public void i_can_view_premium_payments_overview_payment_method() {	
+		DashboardPaymentOverview dashboardPaymentOverview = (DashboardPaymentOverview) getLoginScenario().getBean(PageConstants.DASHBOARD_PAYMENT_HISTORY_PAGE);
+
+		if (null !=dashboardPaymentOverview) {
+			
+			if(dashboardPaymentOverview.validatePaymentMethod()==true)
+			{
+			System.out.println("Payment method found");
+			Assert.assertTrue(true);
+		} else {
+			System.out.println("Error:Payment method test fail");
+		}
 		}
 
 	}

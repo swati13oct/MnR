@@ -26,6 +26,9 @@ public class DashboardPaymentOverview extends UhcDriver{
 	private PageData paymentOverviewData;
 	
 	public JSONObject paymentOverviewJson;
+	
+	@FindBy(xpath="//span[text()='Payment Method:']/../../div[2]")
+	private WebElement paymentMethod;
 
 	public DashboardPaymentOverview(WebDriver driver) {
 		super(driver);
@@ -65,6 +68,21 @@ public class DashboardPaymentOverview extends UhcDriver{
 		JSONObject paymentHistoryExpectedJson = expectedDataMap.get(CommonConstants.PAYMENT_HISTORY);
 		paymentHistoryExpectedJson = CommonUtility.mergeJson(paymentHistoryExpectedJson, globalExpectedJson);
 		return paymentHistoryExpectedJson;
+	}
+	
+	public boolean validatePaymentMethod()
+	{
+		try {
+			Thread.sleep(10000);			
+			if(paymentMethod.getText().equalsIgnoreCase("CMS-SSA/RRB"))
+			{
+				System.out.println("paymentMethod.getText() :: " +paymentMethod.getText());
+				return true;
+			}
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}		
+		return false;		
 	}
 
 }
