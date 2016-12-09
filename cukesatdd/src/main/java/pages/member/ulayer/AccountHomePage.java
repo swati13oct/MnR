@@ -569,11 +569,11 @@ public class AccountHomePage extends UhcDriver {
 		return null;
 	}
 
-	public RecurringPaymentsPage navigateToRecurringPaymentsPage() {
+	public AutomaticPaymentsPage navigateToRecurringPaymentsPage() {
 		driver.navigate().to("https://member."+MRScenario.environment+"-aarpmedicareplans.uhc.com/content/dashboard/home/automatic-payments.html");
 		System.out.println("title  "+driver.getTitle());
 		if(driver.getTitle().equalsIgnoreCase("Automatic Payments")){
-			return new RecurringPaymentsPage(driver);
+			return new AutomaticPaymentsPage(driver);
 		}
 		return null;
 	}
