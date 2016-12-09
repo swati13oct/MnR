@@ -4,8 +4,14 @@ import gherkin.formatter.model.DataTableRow;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+
+
+
+import java.util.Set;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -19,6 +25,7 @@ import pages.member.ulayer.ConfirmOneTimePaymentPage;
 import pages.member.ulayer.LoginPage;
 import pages.member.ulayer.OneTimePaymentPage;
 import pages.member.ulayer.OneTimePaymentSuccessPage;
+import pages.member.ulayer.OneTimePaymentsPage;
 import pages.member.ulayer.PaymentHistoryPage;
 import acceptancetests.atdd.data.CommonConstants;
 import acceptancetests.atdd.data.member.PageConstants;
@@ -255,5 +262,97 @@ public class OneTimePaymentAarpStepDefintion {
 		}
 
 		oneTimePaymentSuccessPage.logOut();
+	}
+	
+	@Given("^the user is on the AARP medicare site login page$")
+	public void user_login_page()
+	{
+		WebDriver wd = getLoginScenario().getWebDriver();
+		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
+
+		LoginPage loginPage = new LoginPage(wd);
+		getLoginScenario().saveBean(PageConstants.LOGIN_PAGE, loginPage);
+	}
+	
+	@When("^the user logs in with a registered AMP with following details in AARP site$")
+	public void user_logs_in(DataTable memberAttributes)
+	{
+		/* Reading the given attribute from feature file */
+		List<DataTableRow> memberAttributesRow = memberAttributes
+				.getGherkinRows();
+		Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells()
+					.get(0), memberAttributesRow.get(i).getCells().get(1));
+		}
+
+		Set<String> memberAttributesKeySet = memberAttributesMap.keySet();
+		List<String> desiredAttributes = new ArrayList<String>();
+		for (Iterator<String> iterator = memberAttributesKeySet.iterator(); iterator
+				.hasNext();) {
+			{
+				String key = iterator.next();
+				desiredAttributes.add(memberAttributesMap.get(key));
+			}
+
+		}
+		System.out.println("desiredAttributes.." + desiredAttributes);
+
+		Map<String,String> loginCreds = loginScenario
+				.getAMPMemberWithDesiredAttributes(desiredAttributes);
+		
+		String userName = null;
+		String pwd = null;
+		if (loginCreds == null) {
+			// no match found
+			System.out.println("Member Type data could not be setup !!!");
+			Assert.fail("unable to find a "+ desiredAttributes + " member");
+		} else {
+			userName = loginCreds.get("user");
+			pwd = loginCreds.get("pwd");
+			System.out.println("User is..." + userName);
+			System.out.println("Password is..." + pwd );
+			getLoginScenario().saveBean(LoginCommonConstants.USERNAME, userName);
+			getLoginScenario().saveBean(LoginCommonConstants.PASSWORD, pwd);
+		}
+		
+		LoginPage loginPage = (LoginPage)getLoginScenario().getBean(PageConstants.LOGIN_PAGE);
+		AccountHomePage accountHomePage = (AccountHomePage) loginPage.loginWith(userName, pwd);
+		
+		
+		if (accountHomePage != null) {
+			getLoginScenario().saveBean(PageConstants.ACCOUNT_HOME_PAGE,
+					accountHomePage);
+			Assert.assertTrue(true);
+			JSONObject accountHomeActualJson = accountHomePage.accountHomeJson;
+			getLoginScenario().saveBean(
+					LoginCommonConstants.ACCOUNT_HOME_ACTUAL,
+					accountHomeActualJson);
+			
+			/* Get expected data */
+			Map<String, JSONObject> expectedDataMap = loginScenario
+					.getExpectedJson(userName);
+			JSONObject accountHomeExpectedJson = accountHomePage
+					.getExpectedData(expectedDataMap);
+			getLoginScenario().saveBean(LoginCommonConstants.ACCOUNT_HOME_EXPECTED,
+					accountHomeExpectedJson);
+	
+	
+	}
+
+	}
+	
+	@And("^the user navigates to One Time Payments page$")
+	public void user_navigates_to_onw_time_payments()
+	{
+		AccountHomePage accountHomePage = (AccountHomePage)getLoginScenario().getBean(PageConstants.ACCOUNT_HOME_PAGE);
+		OneTimePaymentsPage oneTimePaymentsPage = accountHomePage.navigateToOneTimePaymentsPage();
+		if(oneTimePaymentsPage!= null){
+			Assert.assertTrue(true);
+		} else {
+			Assert.fail("one time payments dashboard page not found");
+		}
+		
 	}
 }
