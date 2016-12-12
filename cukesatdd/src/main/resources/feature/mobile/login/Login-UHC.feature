@@ -8,8 +8,7 @@ Then the user validates plan and member details on benefits summary page in UHC 
 
 Examples:
 	| planType |
-	| MAPD     |
-	
+	| MAPD     |	
 	
 	
 Scenario Outline:Verify Pharmacy Locator page in mobile
@@ -59,6 +58,18 @@ Given the user is on the UHC medicare site login page
 When the user logs in with a registered UMS with following details in UHC site
 	| Plan Type   | <planType>  |
 Then the user validates View My Plan Benefits page in UHC site
+
+Examples:
+	| planType |
+	| MAPD     |
+
+Scenario Outline:Verify login in UHCM site for MA or MAPD members in mobile
+Given the user is on the UHC medicare site mobile login page
+When the user logs in with a registered UMS with following details in UHC site
+	| Plan Type   | <planType>  |
+Then the user validates View ID Card displays with member information populated
+And the user validate view ID CardBack
+ 
 
 Examples:
 	| planType |

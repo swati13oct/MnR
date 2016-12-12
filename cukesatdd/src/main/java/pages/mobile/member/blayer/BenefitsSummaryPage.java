@@ -25,6 +25,7 @@ import acceptancetests.atdd.util.CommonUtility;
  * @author pnampall
  *
  */
+
 public class BenefitsSummaryPage extends PharmacyLocator{
 	
 	@FindBy(css="a.menu-open-button.add-class")
@@ -53,6 +54,12 @@ public class BenefitsSummaryPage extends PharmacyLocator{
 	
 	@FindBy(className = "menu-container")
 	private WebElement menuContainer;
+
+	@FindBy(xpath="//a[@ng-show='hasIDCard']")
+	private static WebElement viewIDCard;
+	
+	@FindBy(xpath="//span[contains(.,'View Card Back')]")
+	private static WebElement viewCardBack;
 	
 
 	@FindBy(xpath="/html/body/div[2]/a")
@@ -290,6 +297,15 @@ public class BenefitsSummaryPage extends PharmacyLocator{
 		else
 		System.out.println("@@@@@@@@@ No option for views @@@@@@@@@");
 		
+	}
+
+ 	public static void clickOnViewIDCard() {
+		viewIDCard.click();
+		
+	}
+	
+	public static void clickOnViewCardBack(){
+		viewCardBack.click();
 	}
 
 	 

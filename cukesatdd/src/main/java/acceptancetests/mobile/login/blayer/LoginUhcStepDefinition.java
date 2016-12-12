@@ -1,6 +1,7 @@
 /**
  * 
  */
+
 package acceptancetests.mobile.login.blayer;
 
 import gherkin.formatter.model.DataTableRow;
@@ -33,6 +34,7 @@ import atdd.framework.MRScenario;
 import cucumber.annotation.After;
 import cucumber.annotation.en.And;
 import cucumber.annotation.en.Given;
+import cucumber.annotation.en.Then;
 import cucumber.annotation.en.When;
 import cucumber.table.DataTable;
 
@@ -140,6 +142,22 @@ public class LoginUhcStepDefinition {
 		
 		BenefitsSummaryPage benefitsSummaryPage = (BenefitsSummaryPage)getLoginScenario().getBean(PageConstants.BENEFITS_SUMMARY_PAGE);
 		benefitsSummaryPage.logout();
+		
+	}
+
+ @Then("^the user validates View ID Card displays with member information populated$")
+	public void view_id_card(){
+		
+		BenefitsSummaryPage benefitsSummaryPage = (BenefitsSummaryPage)getLoginScenario().getBean(PageConstants.BENEFITS_SUMMARY_PAGE);
+		BenefitsSummaryPage.clickOnViewIDCard();
+		//loginPage.logout();
+	}
+	
+	@And("^the user validate view ID CardBack$")
+	public void view_id_Backcard(){
+		
+		BenefitsSummaryPage benefitsSummaryPage = (BenefitsSummaryPage)getLoginScenario().getBean(PageConstants.BENEFITS_SUMMARY_PAGE);
+		BenefitsSummaryPage.clickOnViewCardBack();
 		
 	}
 	

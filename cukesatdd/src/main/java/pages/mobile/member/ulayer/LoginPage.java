@@ -1,6 +1,7 @@
 /**
  * 
  */
+
 package pages.mobile.member.ulayer;
 
 import org.json.JSONException;
@@ -31,6 +32,15 @@ public class LoginPage extends UhcDriver{
 
 	@FindBy(id = "loginSTANDpass")
 	private WebElement passwordField;
+
+	@FindBy(xpath = ".//a[@dtmname='View ID Card']")
+	private static WebElement viewIDCard;
+	
+	@FindBy(xpath = ".//*[contains(@class,'card__plan-name')]")
+	private static WebElement aarpMedicareRxWalgreen;
+	
+	@FindBy(xpath = ".//*[contains(@class,'card__plan-name')]")
+	private static WebElement aarpMedicareRxSaverPlus;
 
 	@FindBy(id = "accessURAccountBTN")
 	private WebElement signInButton;
@@ -75,6 +85,40 @@ public class LoginPage extends UhcDriver{
 		}
 		return null;
 	}
+
+	public static void clickOnViewIDCard() {
+		viewIDCard.isDisplayed();
+		viewIDCard.click();
+		/*boolean present;
+		try {
+		prescriptiondrugcost.isDisplayed();
+		prescriptiondrugcostandsummary.isDisplayed();
+		present = true;
+		} catch (NoSuchElementException e) {
+		present = false;
+		}
+
+		if(present)
+		System.out.println("@@@@@@@@@ Able to find My 2017 Prescription Drug Cost and Benefit Summary @@@@@@@@@");
+		else
+		System.out.println("@@@@@@@@@ No Optional Riders widget and deductible 3,4,5 @@@@@@@@@");
+		*/
+
+		
+	}
+	
+	public static void verifyMedicareRxWalgreen(){
+		aarpMedicareRxWalgreen.isDisplayed();
+		
+	}
+	
+	public static void verifyMedicareRxSaverPlus(){
+		aarpMedicareRxSaverPlus.isDisplayed();
+		
+	}
+
+	
+
 
 	public JSONObject getBrowserCheck() {
 			String fileName = CommonConstants.MOBILE_BROWSER_CHECK_DATA;

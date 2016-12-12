@@ -26,6 +26,7 @@ import atdd.framework.UhcDriver;
 /**
  * @author pjaising
  */
+
 public class AccountHomePage extends UhcDriver {
 
 	@FindBy(className = "fd_myPlans")
@@ -67,6 +68,12 @@ public class AccountHomePage extends UhcDriver {
 	@FindBy(xpath = "//li[@id='fd_myMenu']/a")
 	private WebElement myMenuNavigator;
 
+	@FindBy(xpath = "//span[contains(.,'Print temporary ID card')]")
+	private WebElement viewIDCard;
+	
+	@FindBy(id = "pcpLogoPrint1left")
+	private WebElement validateLogo;
+	
 	@FindBy(linkText = "Prescription drug cost and benefits summary")
 	private WebElement prescriptionDrugCostBenefitSummaryLink;
 
@@ -567,6 +574,16 @@ public class AccountHomePage extends UhcDriver {
 			return new OneTimePaymentsPage(driver);
 		}
 		return null;
+	}
+
+	public Boolean tempIdValidation() {
+		validate(viewIDCard);
+		viewIDCard.click();
+		if(validate(validateLogo)){
+			return true;
+		}
+		return false;
+		
 	}
 
 	public AutomaticPaymentsPage navigateToAutomaticPaymentsPage() {
