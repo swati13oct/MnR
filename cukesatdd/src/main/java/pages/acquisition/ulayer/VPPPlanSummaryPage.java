@@ -28,6 +28,9 @@ import atdd.framework.UhcDriver;
  */
 public class VPPPlanSummaryPage extends UhcDriver {
 
+	@FindBy(xpath = "//a[text()='Passport Flyer (PDF)']")
+	private WebElement PassportFlyerPDF;
+	
 	@FindBy(xpath = "//div[@class='maplans_planbutton']/div[2]/div[2]/div")
 	private WebElement showMaPlans;
 
@@ -651,7 +654,58 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	
 		return null;
 	}
+	public boolean validatepassportData() {
+		try {
+			Thread.sleep(15000);
 
+			String expectedpassportdata = PassportFlyerPDF.getText();
+			System.out.println("expectedpassportdata"+expectedpassportdata);
+			String actualpassportdata = "Passport Flyer (PDF)";
+			if (expectedpassportdata.equalsIgnoreCase(actualpassportdata)) {
+				return true;
+			} else {
+				return false;
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		// TODO Auto-generated method stub
+		return true;
+
+	}
+	public PlanDetailsPage navigateToPlanDetails(String planName) {
+
+		if (planName.contains("HMO")) {
+			ElementData elementData = new ElementData("id", "viewDetailsMA");
+			WebElement element = getViewPlanDetailsElement(maPlanElement, elementData, planName);
+			if (element != null) {
+				element.click();
+			}
+
+		} else if (planName.contains("PDP")) {
+			ElementData elementData = new ElementData("id", "viewDetailsPDP");
+			WebElement element = getViewPlanDetailsElement(pdpPlanElement, elementData, planName);
+			if (element != null) {
+				element.click();
+			}
+		} 
+		else if (planName.contains("Regional PPO")) {
+			ElementData elementData = new ElementData("id", "viewDetailsMA");
+			WebElement element = getViewPlanDetailsElement(maPlanElement, elementData, planName);
+			if (element != null) {
+				element.click();
+			}
+
+		}
+		CommonUtility.checkPageIsReady(driver);
+		if (driver.getTitle().equalsIgnoreCase("Medicare Advantage Plan Details | | UnitedHealthcare®")
+				|| driver.getTitle().equalsIgnoreCase("Medicare Special Needs Plan Details | UnitedHealthcare®")
+				|| driver.getTitle().equalsIgnoreCase("Medicare Prescription Drug Plan Details | UnitedHealthcare®")) {
+			return new PlanDetailsPage(driver, planName);
+		}
+		return null;
+	}
 	
 }
 
