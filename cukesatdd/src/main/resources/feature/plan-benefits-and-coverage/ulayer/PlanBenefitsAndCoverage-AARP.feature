@@ -698,4 +698,37 @@ And the user validates the content on benefits and coverage page
 Examples:
         |planType  |
         | MAPD     |
+Scenario Outline: Verify benefits and coverage in AARP site for SHIP (HIP)
+Given registered AMP with following details for plan benefits and coverage flow in AARP site
+| Plan Type          | <planType>                | 
+When the user view forms and resources in AARP site
+Then the user view benefits and coverage in AARP site
+And the user validates the content on benefits and coverage page    	 
+Examples:
+        |planType  |
+        | MAPD     |
+        
+        
+Scenario Outline: Verify benefits and coverage in AARP site for SHIP (EPHIP)
+Given registered AMP with following details for plan benefits and coverage flow in AARP site
+| Plan Type          | <planType>                | 
+When the user view forms and resources in AARP site
+Then the user view benefits and coverage in AARP site
+And the user validates the content on benefits and coverage page    	 
+Examples:
+        |planType  |
+        | MAPD     |
+        
+
+Scenario Outline: Verify benefits and coverage in AARP site for SHIP (MAP)
+Given registered AMP with following details for plan benefits and coverage flow in AARP site
+| Plan Type          | <planType>                | 
+When the user view forms and resources in AARP site
+Then the user view benefits and coverage in AARP site
+And the user validates the content on benefits and coverage page    	 
+Examples:
+        |planType  |
+        | MAPD     |
+
+
 		
