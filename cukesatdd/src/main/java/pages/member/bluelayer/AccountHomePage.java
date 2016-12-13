@@ -504,14 +504,14 @@ public ContactUsPage navigatesToContactUsPage() {
 		medicalProviders.click();
 	}
 	
-	public pages.dashboard.member.PaymentHistoryPage navigateToNewPaymentHistoryPage() {
+	public pages.dashboard.member.blayer.PaymentHistoryPage navigateToNewPaymentHistoryPage() {
 		String NewPayHistoryUrl = "content/dashboard/home/payments.html";
 		String url = driver.getCurrentUrl();
 		url = url.replace("home/my-account-home.html", NewPayHistoryUrl);
 		driver.get(url);
 
 		if (paymentsHeading.getText().contains("Premium Payments Overview")) {
-			return new pages.dashboard.member.PaymentHistoryPage(driver);
+			return new pages.dashboard.member.blayer.PaymentHistoryPage(driver);
 		}
 		return null;
 	}

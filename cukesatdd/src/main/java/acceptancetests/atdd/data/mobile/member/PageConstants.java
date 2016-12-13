@@ -20,6 +20,8 @@ public class PageConstants {
 	public static final String PHARMACY_LOCATOR_PAGE = "pharmacylocatorPage";
 	
 	public static final String PHARMACY_LOCATOR_FILTER_PAGE = "pharmacylocatorfilterPage";
+	
+	public static final String PAYMENT_HISTORY_PAGE = "paymentHistoryPage";
 
 
 }

@@ -33,6 +33,7 @@ public class CommonConstants {
 	
 	public static final String SITE_BLUELAYER_MEMBER="bluelayer";
 	
+	public static final String NEW_PAYMENT_HISTORY_EXPECTED_JSON = "newPaymentHistoryexpectedJSON";
 	
 	
 

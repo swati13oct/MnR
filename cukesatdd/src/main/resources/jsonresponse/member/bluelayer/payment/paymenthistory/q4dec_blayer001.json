@@ -5,7 +5,7 @@
 "paymentHistoryDropdown":"Last 90 days\nLast 6 months\nLast 12 months\nLast 24 months\nCurrent Year\nCustom Search",
 "paymentHistoryTableHeader":"Due Date \n \n Amount Billed Paid Date Amount Paid \n \n Balance Due Monthly Bill",
 "paymentHistoryHeaderText":"You may search payment history for the previous 24 months. You can also search for future premium payment information for the current plan year.", 
-"customSearchText":"Total search results for premium payments from 01/01/2016 to 12/30/2016. If you have questions about your payments, please CONTACT UNITEDHEALTHCARE.",
+"customSearchText":"Total search results for premium payments from 01/01/2016 to 12/30/2016. If you have questions about your payments, please contact Unitedhealthcare.",
 "tableColumnDueDate":"11/01/2016",
 "amountBilled":"$99.00",
 "amountPaid":"$0.00",
