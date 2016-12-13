@@ -190,7 +190,7 @@ public class MobileVppAarpEmailStepDefinition {
 	}
 
 	
-	@And ("^the user enter information in email templatein AARP site$")
+	@And ("^the user enter information to Get Email Update widget and submit in AARP site$")
 	public void vpp_user_request_send_email(DataTable personalAttributes) {
 		List<DataTableRow> personalAttributesRow = personalAttributes.getGherkinRows();
 		Map<String, String> personalAttributesMap = new HashMap<String, String>();
