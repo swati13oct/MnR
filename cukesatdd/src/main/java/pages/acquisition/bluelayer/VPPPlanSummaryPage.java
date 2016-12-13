@@ -37,6 +37,9 @@ import atdd.framework.UhcDriver;
  */
 public class VPPPlanSummaryPage extends UhcDriver {
 
+	@FindBy(xpath = "//a[text()='Passport Flyer (PDF)']")
+	private WebElement PassportFlyerPDF;
+	
 	@FindBy(xpath = "//div[@class='maplans_planbutton']/div[2]/div[2]/div")
 	private WebElement showMaPlans;
 
@@ -536,6 +539,28 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	public void clickCompareChkBox(){
 		waitforElement(compareChkBox);
 		compareChkBox.click();
+	}
+	public boolean validatepassportData() {
+		try {
+			Thread.sleep(20000);
+		
+		String expectedpassportdata=PassportFlyerPDF.getText();
+		String actualpassportdata="Passport Flyer (PDF)";
+		if(expectedpassportdata.equalsIgnoreCase(actualpassportdata))
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		// TODO Auto-generated method stub
+		return true;
+		
 	}
 }
 	

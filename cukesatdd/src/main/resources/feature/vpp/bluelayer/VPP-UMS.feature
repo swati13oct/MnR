@@ -307,3 +307,17 @@ Then the user views plan details for the selected plan in UMS site
 Examples:
     | zipcode | county             | plantype | planName                        |drugInitials | drugName      |  drugDosage         | packages                                          | quantity | drugFrequency  | genericAvailable | brand/generic                            | pharmacyType                     | distance   | pharmacyName             |drugCost|
     | 90210   | Los Angeles County | PDP      |AARP MedicareRx Preferred (PDP)  |lipi         |   Lipitor     |  Lipitor TAB 10MG   | null                                              | 30       | Every 1 month  | yes              | Lipitor TAB 20MG (Qty 40 Every 3 Months) | Preferred Retail Pharmacy        | 15 miles   | Faith Pharmacy           |$3,117.84|
+
+Scenario Outline: Verify passport availability for plan summary in UMS site
+Given the user is on the uhcmedicaresolutions site landing page
+When the user performs plan search  in UMS site
+	| Zip Code    | <zipcode>|
+When user views plans of the below plan in UMS site
+	| Plan Type | <plantype> |
+When the user view plan details of the above selected plan in UMS site
+        | Plan Name | <planName> |
+And the user validates the passport availability
+	
+Examples:
+	| zipcode |  plantype | planName                                               |
+       	| 06001   |   MA      | UnitedHealthcare MedicareComplete Plan 3 (HMO)         |

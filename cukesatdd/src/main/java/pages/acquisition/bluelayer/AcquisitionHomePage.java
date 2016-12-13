@@ -1011,6 +1011,28 @@ public class AcquisitionHomePage extends GlobalWebElements {
 					cobrowseJson= jsonObject;
 					return cobrowseJson;
 				}
+				public VPPPlanSummaryPage searchPlansWithOutCounty(String zipcode) {
+					sendkeys(zipCodeField, zipcode);
+					viewPlansButton.click();
+					/*try {
+						if (countyModal.isDisplayed()) {
+							for (WebElement county : countyRows) {
+								if (county.getText().equalsIgnoreCase(countyName)) {
+									county.click();
+									break;
+								}
+
+							}
+						}
+					} catch (Exception e) {
+						System.out.println("county box not found");
+					}*/
+					if (driver.getTitle().equalsIgnoreCase(
+							"Our Medicare Plan Types | UnitedHealthcare®")) {
+						return new VPPPlanSummaryPage(driver);
+					}
+					return null;
+				}
 
 
 }

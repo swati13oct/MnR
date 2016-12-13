@@ -710,7 +710,7 @@ public class VppUmsStepDefinition {
 					VPPCommonConstants.PLAN_NAME);
 
 			if (planName.contains("HMO") || planName.contains("SNP")) {
-				pharmacyType = "Pharmacy Saver™ Pharmacy";
+				pharmacyType = "Pharmacy Saverâ„¢ Pharmacy";
 			}
 			if (planName.contains("PDP")) {
 				pharmacyType = "Preferred Retail Pharmacy";
@@ -1070,25 +1070,24 @@ public class VppUmsStepDefinition {
 	}
 	
 
-	@Then("^the user validates the details of the selected plan in UMS site$")
-	public void user_validates_details_selected_plan_ums() {
-		JSONObject planDetailsActualJson = (JSONObject) getLoginScenario()
-				.getBean(VPPCommonConstants.VPP_PLAN_DETAIL_ACTUAL);
-		JSONObject planDetailsExpectedJson = (JSONObject) getLoginScenario()
-				.getBean(VPPCommonConstants.VPP_PLAN_DETAIL_EXPECTED);
+	 @Then("^the user validates the details of the selected plan in UMS site$")
+		public void user_validates_details_selected_plan_ums() {
+			JSONObject planDetailsActualJson = (JSONObject) getLoginScenario()
+					.getBean(VPPCommonConstants.VPP_PLAN_DETAIL_ACTUAL);
+			JSONObject planDetailsExpectedJson = (JSONObject) getLoginScenario()
+					.getBean(VPPCommonConstants.VPP_PLAN_DETAIL_EXPECTED);
 
-		System.out
-		.println("planDetailsActualJson---->" + planDetailsActualJson);
-		System.out.println("planDetailsExpectedJson---->"
-				+ planDetailsExpectedJson);
-		try {
-			JSONAssert.assertEquals(planDetailsExpectedJson,
-					planDetailsActualJson, true);
-		} catch (JSONException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			System.out.println("planDetailsActualJson---->" + planDetailsActualJson);
+			System.out.println("planDetailsExpectedJson---->"
+					+ planDetailsExpectedJson);
+			try {
+				JSONAssert.assertEquals(planDetailsExpectedJson,
+						planDetailsActualJson, true);
+			} catch (JSONException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
-	}
 
 	@And("^the user access the enter drug information link in plan details page for above selected plan section in UMS site$")
 	public void user_access_the_enter_drug_information_link_in_plandetails_page_ums() {
@@ -1500,4 +1499,111 @@ public class VppUmsStepDefinition {
 		
 		plansummaryPage.viewPlanSummary(planType);
 	}
+	@When("^the user performs plan search  in UMS site$")
+	public void zipcode_details_in_UMS(DataTable givenAttributes) {
+
+		List<DataTableRow> memberAttributesRow = givenAttributes
+				.getGherkinRows();
+		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells()
+					.get(0), memberAttributesRow.get(i).getCells().get(1));
+		}
+
+		String zipcode = memberAttributesMap.get("Zip Code");
+	//	String county = memberAttributesMap.get("County Name");
+		getLoginScenario().saveBean(VPPCommonConstants.ZIPCODE, zipcode);
+		//getLoginScenario().saveBean(VPPCommonConstants.COUNTY, county);
+
+		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
+				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+		VPPPlanSummaryPage plansummaryPage = aquisitionhomepage.searchPlansWithOutCounty(
+				zipcode);
+
+		if (plansummaryPage != null) {
+			getLoginScenario().saveBean(PageConstants.VPP_PLAN_SUMMARY_PAGE,
+					plansummaryPage);
+		}
+	
+			
+	}
+
+	@When("user views plans of the below plan in UMS site$")
+	public void user_performs_planSearch_UMS_site(DataTable givenAttributes) {
+		List<DataTableRow> givenAttributesRow = givenAttributes
+				.getGherkinRows();
+		Map<String, String> givenAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < givenAttributesRow.size(); i++) {
+
+			givenAttributesMap.put(givenAttributesRow.get(i).getCells().get(0),
+					givenAttributesRow.get(i).getCells().get(1));
+		}
+
+		String plantype = givenAttributesMap.get("Plan Type");
+		System.out.println(plantype);
+
+		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		plansummaryPage = plansummaryPage.viewPlanSummary(plantype);
+
+		if (plansummaryPage != null) {
+			getLoginScenario().saveBean(PageConstants.VPP_PLAN_SUMMARY_PAGE,
+					plansummaryPage);
+		}
+	}
+			
+
+	@When("^the user view plan details of the above selected plan in UMS site$")
+	public void user_views_plandetails_selected_plan_ums(DataTable planAttributes) {
+		List<DataTableRow> givenAttributesRow = planAttributes.getGherkinRows();
+		Map<String, String> givenAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < givenAttributesRow.size(); i++) {
+
+			givenAttributesMap.put(givenAttributesRow.get(i).getCells().get(0),
+					givenAttributesRow.get(i).getCells().get(1));
+		}
+
+		String planName = givenAttributesMap.get("Plan Name");
+		getLoginScenario().saveBean(VPPCommonConstants.PLAN_NAME, planName);
+		System.out.println("plan name is"+planName);
+		
+		String zipcode = (String) getLoginScenario().getBean(
+				VPPCommonConstants.ZIPCODE);
+		 String county = (String) getLoginScenario().getBean(
+				VPPCommonConstants.COUNTY); 
+		VPPPlanSummaryPage vppPlanSummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+
+		PlanDetailsPage vppPlanDetailsPage = vppPlanSummaryPage
+				.navigateToPlanDetails(planName);
+		if (vppPlanDetailsPage != null) {
+			
+			getLoginScenario().saveBean(PageConstants.VPP_PLAN_DETAILS_PAGE,
+					vppPlanDetailsPage);
+			
+		}
+	}
+	@Then("^the user validates the passport availability$")
+	public void user_validates_passport_details() {
+		try
+		{
+			VPPPlanSummaryPage vppPlanSummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+					.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+			boolean flagvalue=vppPlanSummaryPage.validatepassportData();
+			if(flagvalue)
+				Assert.assertTrue(true);
+			else
+				Assert.assertFalse(false);
+		}
+		catch(NullPointerException ne)
+		{
+			ne.printStackTrace();
+		}
+		VPPPlanSummaryPage vppPlanSummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		boolean flagvalue=vppPlanSummaryPage.validatepassportData();
+	}
+
+		
 }

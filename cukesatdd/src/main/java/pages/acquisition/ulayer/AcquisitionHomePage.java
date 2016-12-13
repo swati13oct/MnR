@@ -1242,6 +1242,16 @@ public class AcquisitionHomePage extends GlobalWebElements {
 			System.out.println("County model window not found");
 		}
 	}
+	public VPPPlanSummaryPage searchPlansWithOutCounty(String zipcode) {
+		sendkeys(zipCodeField, zipcode);
+		viewPlansButton.click();
+		if (driver.getTitle().equalsIgnoreCase(
+				"Our Medicare Plan Types | AARP® Medicare Plans from UnitedHealthcare®")) {
+			return new VPPPlanSummaryPage(driver);
+		}
+		return null;
+	}
+
 
 
 

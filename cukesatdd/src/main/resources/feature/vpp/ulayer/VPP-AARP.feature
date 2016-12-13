@@ -258,4 +258,18 @@ Examples:
 	| zipcode |county     |plantype|planName|
 	| 60646   |Cook County|PDP		 |AARP MedicareRx Walgreens (PDP)|
 
+Scenario Outline: Verify plan summary in aarp site
+Given the user is on the AARP medicare site landing page
+When the user performs plan search  in aarp site
+	| Zip Code    | <zipcode>|
+When user views plans of the below plan in aarp site
+	| Plan Type | <plantype> |
+When the user view plan details of the above selected plan in aarp site
+        | Plan Name | <planName> |
+And the user validates the passport availability
+	
+Examples:
+	| zipcode |  plantype | planName                                               |
+        | 06001   |   MA      | AARP MedicareComplete Choice (Regional PPO)            |
+  
 
