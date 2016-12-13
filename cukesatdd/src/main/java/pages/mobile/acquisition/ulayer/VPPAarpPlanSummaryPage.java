@@ -1,7 +1,4 @@
-/**
- * 
- */
-package pages.acquisition.ulayer;
+package pages.mobile.acquisition.ulayer;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,22 +13,21 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.FindBys;
 import org.openqa.selenium.support.PageFactory;
 
-import pages.mobile.acquisition.ulayer.VPPRequestSendEmailPage;
+import pages.acquisition.ulayer.GetStartedPage;
+import pages.acquisition.ulayer.IntroductionInformationPage;
+import pages.acquisition.ulayer.ManageDrugPage;
+import pages.acquisition.ulayer.PlanDetailsPage;
+import pages.acquisition.ulayer.PlanInformationPage;
+import pages.acquisition.ulayer.ProviderSearchPage;
+import pages.acquisition.ulayer.VPPPlanSummaryPage;
 import acceptancetests.atdd.data.CommonConstants;
 import acceptancetests.atdd.data.ElementData;
 import acceptancetests.atdd.data.PageData;
 import acceptancetests.atdd.util.CommonUtility;
 import atdd.framework.UhcDriver;
 
-/**
- * @author pjaising
- *
- */
-public class VPPPlanSummaryPage extends UhcDriver {
+public class VPPAarpPlanSummaryPage extends UhcDriver {
 
-	@FindBy(xpath = "//a[text()='Passport Flyer (PDF)']")
-	private WebElement PassportFlyerPDF;
-	
 	@FindBy(xpath = "//div[@class='maplans_planbutton']/div[2]/div[2]/div")
 	private WebElement showMaPlans;
 
@@ -117,15 +113,12 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	
 	@FindBy (xpath=".//*[@id='next']")
 	private WebElement stayOnthisPopup;
-	
-	@FindBy(name = "emailWidgetForm")
-	private WebElement emailWidgetForm;
 
 	private PageData vppPlanSummary;
 
 	public JSONObject vppPlanSummaryJson;
 
-	public VPPPlanSummaryPage(WebDriver driver) {
+	public VPPAarpPlanSummaryPage(WebDriver driver) {
 		super(driver);
 		
 		PageFactory.initElements(driver, this);
@@ -138,7 +131,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		openAndValidate();
 	}
 
-	public VPPPlanSummaryPage(WebDriver driver, String planType) {
+	public VPPAarpPlanSummaryPage(WebDriver driver, String planType) {
 		super(driver);
 		PageFactory.initElements(driver, this);
 
@@ -659,65 +652,4 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		return null;
 	}
 
-	public boolean validatepassportData() {
-		try {
-			Thread.sleep(15000);
-
-			String expectedpassportdata = PassportFlyerPDF.getText();
-			System.out.println("expectedpassportdata"+expectedpassportdata);
-			String actualpassportdata = "Passport Flyer (PDF)";
-			if (expectedpassportdata.equalsIgnoreCase(actualpassportdata)) {
-				return true;
-			} else {
-				return false;
-			}
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		// TODO Auto-generated method stub
-		return true;
-
-	}
-	public PlanDetailsPage navigateToPlanDetails(String planName) {
-
-	
-	public VPPRequestSendEmailPage createVPPRequestSendEmailPage(){
-		return new VPPRequestSendEmailPage(driver);
-	}
-
-
-		if (planName.contains("HMO")) {
-			ElementData elementData = new ElementData("id", "viewDetailsMA");
-			WebElement element = getViewPlanDetailsElement(maPlanElement, elementData, planName);
-			if (element != null) {
-				element.click();
-			}
-
-		} else if (planName.contains("PDP")) {
-			ElementData elementData = new ElementData("id", "viewDetailsPDP");
-			WebElement element = getViewPlanDetailsElement(pdpPlanElement, elementData, planName);
-			if (element != null) {
-				element.click();
-			}
-		} 
-		else if (planName.contains("Regional PPO")) {
-			ElementData elementData = new ElementData("id", "viewDetailsMA");
-			WebElement element = getViewPlanDetailsElement(maPlanElement, elementData, planName);
-			if (element != null) {
-				element.click();
-			}
-
-		}
-		CommonUtility.checkPageIsReady(driver);
-		if (driver.getTitle().equalsIgnoreCase("Medicare Advantage Plan Details | | UnitedHealthcare®")
-				|| driver.getTitle().equalsIgnoreCase("Medicare Special Needs Plan Details | UnitedHealthcare®")
-				|| driver.getTitle().equalsIgnoreCase("Medicare Prescription Drug Plan Details | UnitedHealthcare®")) {
-			return new PlanDetailsPage(driver, planName);
-		}
-		return null;
-	}
-	
 }
-
-	

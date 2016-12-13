@@ -346,4 +346,6 @@ public class PageConstants {
 
 	public static final String LOGIN_ASSISTANCE_PERSONAL_IDENTIFICATION_ERROR_SCENARIO = "personalIdentificationErrorActualJson";
 
+	public static final String VPP_REQUEST_SEND_EMAIL_PAGE = "vppRequestSendEmailPage";
+
 }

@@ -235,6 +235,19 @@ public class LoginAarpStepDefinition {
 
 	}
 
+	@Then("^the user validates temp id card pop up after login in AARP site$")
+		public void tempId_validation() {
+			AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario()
+					.getBean(PageConstants.ACCOUNT_HOME_PAGE);
+			boolean tempIdValid = accountHomePage.tempIdValidation();
+			if(tempIdValid){
+				Assert.assertTrue(true);
+			} else {
+				Assert.fail("Aboutus page not found");
+			}
+	}
+		
+
 	@After
 	public void tearDown() {
 		

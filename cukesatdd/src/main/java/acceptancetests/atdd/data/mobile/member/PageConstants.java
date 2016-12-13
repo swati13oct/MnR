@@ -7,6 +7,7 @@ package acceptancetests.atdd.data.mobile.member;
  * @author pjaising
  *
  */
+
 public class PageConstants {
 
 	public static final String LOGIN_PAGE = "loginPage";
@@ -20,6 +21,8 @@ public class PageConstants {
 	public static final String PHARMACY_LOCATOR_PAGE = "pharmacylocatorPage";
 	
 	public static final String PHARMACY_LOCATOR_FILTER_PAGE = "pharmacylocatorfilterPage";
+
+        public static final String MY_MEDICAL_BENEFITS_PAGE = "myMedicalBenefits";
 
 
 }

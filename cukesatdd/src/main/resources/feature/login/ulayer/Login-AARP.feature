@@ -75,6 +75,19 @@ Examples:
 #   | PDP      |
 #   | MAPD     |
 
+
+
+Scenario Outline:To verify Print a temporary card IDCard in chunky footer in AARP site
+Given the user is on the AARP medicare site login page
+#When the user logs in with a registered AMP with following details in AARP site
+	|  Plan Type           | <planType>                    |
+#Then the user validates temp id card after login in AARP site
+
+Examples:
+   | planType |
+   | PDP      |
+
+
 Scenario Outline: Verify login in aarp site for a terminated combo member less than 12 months
 Given the user is on the AARP medicare site login page
 When the user logs in with a registered AMP with following details in AARP site
