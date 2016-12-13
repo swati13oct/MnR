@@ -96,6 +96,7 @@ public class CommonConstants {
 	public static final String DTM_TAG_MEMBER_FILENAME = "member";
 	public static final String DTM_TAG_ACQ_FILENAME = "acquisition";
 	public static final String PAGE_OBJECT_DTM_TAG_DIR = "/page-objects/dtm-common-data/";
+	public static final String NEW_PAYMENT_HISTORY_PAGE_DATA = "newpaymenthistory.json";
 
 	public static final Page[] PAGES = {
 			new Page(CommonConstants.GLOBAL, CommonConstants.GLOBAL_DIRECTORY),
@@ -829,6 +830,8 @@ public class CommonConstants {
 	
 	public static final String SIERRA_PLAN_NAME = "UnitedHealthcare MedicareComplete Choice (PPO)";
 	
+	public static final String NEW_PAYMENT_HISTORY_ACTUAL_JSON = "newPaymentHistoryActualJSON";
+	public static final String NEW_PAYMENT_HISTORY_EXPECTED_JSON = "newPaymentHistoryexpectedJSON";
 	
 
 	

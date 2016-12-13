@@ -88,6 +88,13 @@ public class LoginPage extends UhcDriver {
 				alert2.accept();
 			}
 		}
+		if ( MRScenario.environment.equals("team-c")) {
+			
+			Alert alert = driver.switchTo().alert();
+	        alert.accept();
+	        Alert alert1 = driver.switchTo().alert();
+	        alert1.accept();
+	        }
 
 		if(currentUrl().contains("home/my-account-home.html") && category.equalsIgnoreCase("Group"))
 		{
