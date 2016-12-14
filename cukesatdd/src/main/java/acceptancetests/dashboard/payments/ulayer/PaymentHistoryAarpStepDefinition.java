@@ -12,13 +12,16 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
+import org.skyscreamer.jsonassert.JSONAssert;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import pages.dashboard.member.ulayer.PaymentHistoryPage;
 import pages.member.ulayer.AccountHomePage;
+import pages.member.ulayer.DashboardPaymentOverview;
 import pages.member.ulayer.LoginPage;
 import acceptancetests.atdd.data.CommonConstants;
 import acceptancetests.atdd.data.member.PageConstants;
@@ -192,6 +195,21 @@ public class PaymentHistoryAarpStepDefinition {
 		WebDriver wd = (WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
 		wd.quit();
 		getLoginScenario().flushBeans();
+	}
+	
+	@Then("^validate Payment Method value$")
+	public void validatePaymentMethodValue(){
+	DashboardPaymentOverview dashboardPaymentOverview = (DashboardPaymentOverview) getLoginScenario().getBean(PageConstants.DASHBOARD_PAYMENT_HISTORY_PAGE);
+	JSONObject paymentHistoryActualJson = dashboardPaymentOverview.paymentOverviewJson;
+        /*Get expected response*/
+        String userName = (String) getLoginScenario().getBean(LoginCommonConstants.USERNAME);
+        Map<String, JSONObject> expectedDataMap = loginScenario.getExpectedJson(userName);
+        JSONObject paymentHistoryExpectedJson = expectedDataMap.get(CommonConstants.PAYMENT_HISTORY);
+        try {
+               JSONAssert.assertEquals(paymentHistoryExpectedJson, paymentHistoryActualJson, true);
+        } catch (JSONException e) {
+               e.printStackTrace();
+        }
 	}
 
 }
