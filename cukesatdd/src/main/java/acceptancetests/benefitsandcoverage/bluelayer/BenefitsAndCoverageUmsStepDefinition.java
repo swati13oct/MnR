@@ -411,6 +411,7 @@ public class BenefitsAndCoverageUmsStepDefinition {
 	} catch (JSONException e) {
 	e.printStackTrace();
 	}
+	}
 	
 	
 	@When("^the user navigates directly to plan benefits and Coverage in UMS site$")
