@@ -283,10 +283,10 @@ public class AccountHomePage extends UhcDriver {
 
 		}
 
-		return false;
-	}*/
+		return null;
+	}
 	
-	public DashboardPaymentOverview changeUrlToNewPaymentHistoryPage() {
+	public DashboardPaymentOverview changeUrlToDashboardPaymentOverview() {
 		
 		//String NewPayHistoryUrl = "content/aarpm/home/my-plans/payments/PaymentsOverview-DashBoard.html";
 		String NewPayHistoryUrl = "content/dashboard/home/payments.html";
