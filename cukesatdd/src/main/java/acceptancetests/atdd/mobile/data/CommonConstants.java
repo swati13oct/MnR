@@ -29,6 +29,7 @@ public class CommonConstants {
 
 	public static final String MOBILE_EXPECTED_DIRECTORY = "/jsonresponse/mobile/member";
 
+
 	public static final String SITE_ULAYER_MEMBER = "ulayer";
 
 	public static final String SITE_BLUELAYER_MEMBER = "bluelayer";
@@ -39,5 +40,11 @@ public class CommonConstants {
 	public static final String PAYMENT_HISTORY_MOBILE_DATA = "paymenthistory_mobile.json";
 
 	public static final String PAYMENT_HISTORY_BLUELAYER_DIRECTORY_MOBILE = "/jsonresponse/mobile/member/bluelayer/payment-history/";
+
+	
+	public static final String NEW_PAYMENT_HISTORY_EXPECTED_JSON = "newPaymentHistoryexpectedJSON";
+	
+	
+
 
 }

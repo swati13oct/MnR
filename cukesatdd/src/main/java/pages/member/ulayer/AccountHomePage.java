@@ -141,7 +141,7 @@ public class AccountHomePage extends UhcDriver {
 	private WebElement gogreenPopupClose;
 	
 	
-	@FindBy(id = "paymentsHeading")
+	@FindBy(xpath = "//*[@id='paymentOverviewApp']/div[1]/div/div/div/h1")
 	private WebElement paymentsHeading;
 	
 	private PageData myAccountHome;
@@ -267,18 +267,22 @@ public class AccountHomePage extends UhcDriver {
 	}
 
 
-	/*public boolean changeUrlToNewPaymentHistoryPage() {
-	
-		
-		String NewPayHistoryUrl = "content/aarpm/home/my-plans/payments/PaymentsOverview-DashBoard.html";
+
+	public pages.dashboard.member.ulayer.PaymentHistoryPage changeUrlToNewPaymentHistoryPage() {
+
+		String NewPayHistoryUrl = "content/dashboard/home/payments.html";
+
 		String url = driver.getCurrentUrl();
 		url = url.replace("home/my-account-home.html", NewPayHistoryUrl);
+
 		driver.get(url);
-		
-	
+		// System.out.println("testing2");
 		if (paymentsHeading.getText().contains("Premium Payments Overview")) {
-			return true;
+
+			return new pages.dashboard.member.ulayer.PaymentHistoryPage(driver);
+
 		}
+
 		return false;
 	}*/
 	
@@ -296,6 +300,7 @@ public class AccountHomePage extends UhcDriver {
 		return null;
 		
 		
+
 	}
 
 
@@ -567,6 +572,7 @@ public class AccountHomePage extends UhcDriver {
 		gogreenPopupClose.click();
 	}
 	
+
 	public OneTimePaymentsPage navigateToOneTimePaymentsPage() {
 		driver.navigate().to("https://member."+MRScenario.environment+"-aarpmedicareplans.uhc.com/content/dashboard/home/one-time-payments.html");
 		System.out.println("title  "+driver.getTitle());
@@ -594,6 +600,7 @@ public class AccountHomePage extends UhcDriver {
 		}
 		return null;
 	}
+
 
 
 }

@@ -23,6 +23,7 @@ import acceptancetests.atdd.util.CommonUtility;
 import acceptancetests.login.data.LoginCommonConstants;
 import atdd.framework.UhcDriver;
 
+
 /**
  * @author pagarwa5
  *
@@ -120,6 +121,8 @@ public class AccountHomePage extends UhcDriver {
 	@FindBy(xpath ="//*[@id='gogreenmeter']/a")
 	private WebElement goGreenLink;
 	
+	@FindBy(xpath = "/html/body/div[2]/div[2]/div/div[1]/div/div/div/h1")
+	private WebElement paymentsHeading;
 	
 	private PageData myAccountHome;
 
@@ -499,5 +502,17 @@ public ContactUsPage navigatesToContactUsPage() {
 	public void navigate_ProviderSearch() {
 		validate(medicalProviders);
 		medicalProviders.click();
+	}
+	
+	public pages.dashboard.member.blayer.PaymentHistoryPage navigateToNewPaymentHistoryPage() {
+		String NewPayHistoryUrl = "content/dashboard/home/payments.html";
+		String url = driver.getCurrentUrl();
+		url = url.replace("home/my-account-home.html", NewPayHistoryUrl);
+		driver.get(url);
+
+		if (paymentsHeading.getText().contains("Premium Payments Overview")) {
+			return new pages.dashboard.member.blayer.PaymentHistoryPage(driver);
+		}
+		return null;
 	}
 }
