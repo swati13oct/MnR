@@ -10,7 +10,7 @@ When the user performs plan search using following information in AARP site
 And the user selects the plan in AARP site
 | Plan Type | <plantype> |
 When the user moved to the email update widget in selected plan section in AARP site
-And the user enter information in email templatein AARP site
+And the user enter information to Get Email Update widget and submit in AARP site
 | First Name| <firstname> |
 | Last Name | <lastname>  |
 | Email Address | <emailaddress> |

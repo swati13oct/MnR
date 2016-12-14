@@ -80,6 +80,7 @@ public class MRScenario {
 	public static String environment,browser;
 
 	private static final String DIRECTORY = "/src/main/resources/";
+    public static int count=0;
 
 	public void saveBean(String id, Object object) {
 		scenarioObjectMap.put(id, object);
@@ -753,8 +754,10 @@ public class MRScenario {
 
 		// Need to update here a method to replace special characters with
 		// \special Characters
-		try {
-			jsonObject = new JSONObject(response);
+		try {			
+			if(!response.isEmpty()){
+				jsonObject = new JSONObject(response);
+			}
 		} catch (JSONException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
