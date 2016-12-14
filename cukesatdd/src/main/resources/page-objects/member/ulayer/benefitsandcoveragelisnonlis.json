@@ -2,42 +2,81 @@
 {
 "url":null,
 "expectedData":{
-"planName":{
-"identifier":"xpath",
-"elementName":"//*[@id='planBenefitsApp']/div/div/div[1]/div/div/div/div/h1"
-},
-"memberId":{
-"identifier":"xpath",
-"elementName":"//*[@id='planBenefitsApp']/div/div/div[2]/div[1]/div/div[2]/div[2]"
-},
-"memberName":{
-"identifier":"xpath",
-"elementName":"//*[@id='planBenefitsApp']/div/div/div[2]/div[1]/div/div[1]/div[2]"
-},
-"effectiveDate":{
-"identifier":"xpath",
-"elementName":"//*[@id='planBenefitsApp']/div/div/div[2]/div[1]/div/div[4]/div[2]"
-},
-"monthlyPremium":{
-"identifier":"xpath",
-"elementName":"//*[@id='planBenefitsApp']/div/div/div[2]/div[2]/h1[2]"
-},
-"benefitHeaderSummary":{
-"identifier":"xpath",
-"elementName":"//*[@id='planBenefitsApp']/div/div/div[1]/div/h1/div"
-},
-"medicalCopayCoinsurance":{
-"identifier":"xpath",
-"elementName":"//*[@id='planBenefitsApp']/div/div/div[2]/div/h2/div"
-},
-"benefitHeaderText":{
-"identifier":"xpath",
-"elementName":"//*[@id='planBenefitsApp']/div/div/div[2]/div/p"
-},
-"shipText":{
-"identifier":"xpath",
-"elementName":"//*[@id='benefitsMain']/div[2]/div/div/div[2]/div"
-
-}
+		"planName":{
+		"identifier":"xpath",
+		"elementName":"//*[@id='planBenefitsApp']/div/div/div[1]/div/div/div/div/h1"
+		},
+	"memberId":{
+		"identifier":"xpath",
+		"elementName":"//*[@id='planBenefitsApp']/div/div/div[2]/div[1]/div/div[2]/div[2]"
+		},
+	"memberName":{
+		"identifier":"xpath",
+		"elementName":"//*[@id='planBenefitsApp']/div/div/div[2]/div[1]/div/div[1]/div[2]"
+		},
+	"effectiveDate":{
+		"identifier":"xpath",
+		"elementName":"//*[@id='planBenefitsApp']/div/div/div[2]/div[1]/div/div[4]/div[2]"
+		},
+	"monthlyPremium":{
+		"identifier":"xpath",
+		"elementName":"//*[@id='planBenefitsApp']/div/div/div[2]/div[2]/h1[2]"
+		},
+	"benefitHeaderSummary":{
+		"identifier":"xpath",
+		"elementName":"//*[@id='planBenefitsApp']/div/div/div[1]/div/h1/div"
+		},
+	"medicalCopayCoinsurance":{
+		"identifier":"xpath",
+		"elementName":"//*[@id='planBenefitsApp']/div/div/div[2]/div/h2/div"
+		},
+	"benefitHeaderText":{
+		"identifier":"xpath",
+		"elementName":"//*[@id='planBenefitsApp']/div/div/div[2]/div/p"
+		},
+	"hospitalvisitHeading" : {
+		"identifier" : "xpath",
+		"elementName" : "//*[@id='planBenefitsApp']/div[3]/div[2]/div"
+		},
+	"hospitalvisitCostAllDays" : {
+		"identifier" : "xpath",
+		"elementName" : "//*[@id='planBenefitsApp']/div/div/div[3]/div[2]/div/section/div[3]/div"
+		},
+	"officeVisitsPhysicalCarePhysicianTiers" : {
+		"identifier" : "xpath",
+		"elementName" : "//*[@id='planBenefitsApp']/div/div/div[3]/div[1]/div/section/div[1]/div"
+		},
+	"officeVisitsSpecialistTiers" : {
+		"identifier" : "xpath",
+		"elementName" : "//*[@id='planBenefitsApp']/div/div/div[3]/div[1]/div/section/div[2]"
+		},
+	"oopMaxHeading" : {
+		"identifier" : "xpath",
+		"elementName" :"//*[@id='planBenefitsApp']/div[5]/div/div[1]/div/h2/div"
+		},
+	"oopMaxText" : {
+		"identifier" : "xpath",
+		"elementName" :"//*[@id='planBenefitsApp']/div[5]/div/div[1]/div/p[2]"
+		},
+	"inNtwrkHeading" : {
+		"identifier" : "xpath",
+		"elementName" :"//*[@id='planBenefitsApp']/div[5]/div/div[2]/div[1]/div/header/span"
+		},
+	"inNtwrkText" : {
+		"identifier" : "xpath",
+		"elementName" :"//*[@id='planBenefitsApp']/div[5]/div/div[2]/div[1]/div/section"
+		},
+	"outNtwrkHeading" : {
+		"identifier" : "xpath",
+		"elementName" :"//*[@id='planBenefitsApp']/div[5]/div/div[2]/div[2]/div/header/span"
+		},
+	"outNtwrkText" : {
+		"identifier" : "xpath",
+		"elementName" :"//*[@id='planBenefitsApp']/div[5]/div/div[2]/div[2]/div/section"
+		},
+	"shipText":{
+		"identifier":"xpath",
+		"elementName":"//*[@id='benefitsMain']/div[2]/div/div/div[2]/div"
+		}
 }
 }

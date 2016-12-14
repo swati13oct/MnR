@@ -668,6 +668,7 @@ Then the user view benefits and coverage in AARP site
 And the user validates the content on benefits and coverage page    	 
 Examples:
         |planType  | copayCategory  |
+<<<<<<< HEAD
 
         | MAPD     | LIS 4        | 
 		
@@ -751,7 +752,4 @@ And the user validates the content on benefits and coverage page
 Examples:
         |planType  |
         | MAPD     |
-
-
-		
-
+        | MAPD     | LIS 4        | 
