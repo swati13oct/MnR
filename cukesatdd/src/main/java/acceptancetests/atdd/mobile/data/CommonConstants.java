@@ -39,7 +39,14 @@ public class CommonConstants {
 
 	public static final String PAYMENT_HISTORY_MOBILE_DATA = "paymenthistory_mobile.json";
 
+	public static final String PAYMENT_HISTORY_MOBILE_ULAYER = "payment_history_mobile_ulayer";
+	public static final String PAYMENT_HISTORY_MOBILE_ULAYER_DIRECTORY = "/page-objects/mobile/member/ulayer/";
+
+	public static final String PAYMENT_HISTORY_MOBILE_DATA_BLAYER="paymenthistory_mobile.json";
+
 	public static final String PAYMENT_HISTORY_BLUELAYER_DIRECTORY_MOBILE = "/jsonresponse/mobile/member/bluelayer/payment-history/";
+	public static final String PAYMENT_HISTORY_ULAYER_DIRECTORY_MOBILE = "/jsonresponse/mobile/member/bluelayer/paymenthistory/";
+
 
 	
 	public static final String NEW_PAYMENT_HISTORY_EXPECTED_JSON = "newPaymentHistoryexpectedJSON";
