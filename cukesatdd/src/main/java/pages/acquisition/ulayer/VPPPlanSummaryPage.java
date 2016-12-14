@@ -682,11 +682,6 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	public PlanDetailsPage navigateToPlanDetails(String planName) {
 
 	
-	public VPPRequestSendEmailPage createVPPRequestSendEmailPage(){
-		return new VPPRequestSendEmailPage(driver);
-	}
-
-
 		if (planName.contains("HMO")) {
 			ElementData elementData = new ElementData("id", "viewDetailsMA");
 			WebElement element = getViewPlanDetailsElement(maPlanElement, elementData, planName);
@@ -718,6 +713,11 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		return null;
 	}
 	
+	public VPPRequestSendEmailPage createVPPRequestSendEmailPage(){
+		return new VPPRequestSendEmailPage(driver);
+	}
+
+
 }
 
 	
