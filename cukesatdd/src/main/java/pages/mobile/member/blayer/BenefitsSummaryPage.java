@@ -28,6 +28,13 @@ import acceptancetests.atdd.util.CommonUtility;
 
 public class BenefitsSummaryPage extends PharmacyLocator{
 	
+	@FindBy(xpath = "//a[text()='Set Up Automatic Payments']")
+	private WebElement setupAutomaticPayments;
+	
+	@FindBy(xpath= "//span[text()='Payment Method:']/../following-sibling::div[1]")
+	private WebElement validatePaymentMethod;
+	
+	
 	@FindBy(css="a.menu-open-button.add-class")
 	private WebElement menuButton;
 	
@@ -376,6 +383,49 @@ public class BenefitsSummaryPage extends PharmacyLocator{
 		}
 		// TODO Auto-generated method stub
 		return null;
+	}
+public PaymentHistoryPage changeUrlToNewPaymentHistoryPage() {
+	
+		
+		String NewPayHistoryUrl = "https://member.team-b-uhcmedicaresolutions.uhc.com/content/dashboard/home/payments.html";
+		String url = driver.getCurrentUrl();
+		//url = url.replace("mobile/home/my-benefit-summary.html", NewPayHistoryUrl);
+		driver.get(NewPayHistoryUrl);
+		try {
+			Thread.sleep(15000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return new PaymentHistoryPage(driver);
+		
+	
+		
+	}
+public boolean validateSetupAutomaticPayments() {
+	
+		
+		String NewPayHistoryUrl = "https://member.team-b-uhcmedicaresolutions.uhc.com/content/dashboard/home/payments.html";
+		String url = driver.getCurrentUrl();
+		//url = url.replace("mobile/home/my-benefit-summary.html", NewPayHistoryUrl);
+		driver.get(NewPayHistoryUrl);
+		
+		try
+		{
+		Thread.sleep(10000);
+		if(setupAutomaticPayments.getText().equalsIgnoreCase("Set Up Automatic Payments") && validatePaymentMethod.getText().equalsIgnoreCase("Monthly Bill"))
+		{
+		   System.out.println("setupAutomaticPayments and Payment methods exists"+setupAutomaticPayments+validatePaymentMethod);
+			return true;
+		}
+			else
+			return false;
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+			return false;
+		}
 	}
 	
 }
