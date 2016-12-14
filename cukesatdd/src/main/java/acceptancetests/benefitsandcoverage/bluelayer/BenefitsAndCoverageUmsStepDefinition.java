@@ -13,7 +13,9 @@ import java.util.Set;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.junit.Assert;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.skyscreamer.jsonassert.JSONAssert;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -409,9 +411,116 @@ public class BenefitsAndCoverageUmsStepDefinition {
 	} catch (JSONException e) {
 	e.printStackTrace();
 	}
-	benefitsCoveragePage.logOut();
-
+	
+	
+	@When("^the user navigates directly to plan benefits and Coverage in UMS site$")
+	public void the_user_navigates_directly_to_plan_benefits_and_Coverage_in_UMS_site() {
+		
+		WebDriver wd = loginScenario.getWebDriver();
+		String currentUrl = wd.getCurrentUrl().substring(0, wd.getCurrentUrl().indexOf(".com") + ".com".length());
+		
+		wd.navigate().to(currentUrl + "/home/my-plans/benefits-and-coverage-page.html");
+		//Assert.assertTrue(wd.getTitle().equalsIgnoreCase("UnitedHealthcare Medicare Solutions | Plan Benefits and Coverage"));
 	}
+
+	@Then("^the user validates PCP$")
+	public void the_user_validates_PCP() {
+		WebDriver wd = loginScenario.getWebDriver();
+		WebElement pcpHeader = wd.findElement(By.className("bs-primaryCareProviderGroupHeaderText"));
+		List<WebElement> pcpTextList = wd.findElements(By.className("bs-primaryCareProviderGroupText"));
+
+		Assert.assertTrue(pcpHeader.isDisplayed());
+
+		Iterator<WebElement> i = pcpTextList.iterator();
+		boolean isDisplayed = false;
+		while (i.hasNext()) {
+			WebElement we = i.next();
+			if (we.isDisplayed()) {
+				isDisplayed = true;
+				break;
+			}
+		}
+		Assert.assertTrue(isDisplayed);
+	}
+	
+	
+	@Given("^registered member in UMS Site$")
+	public void registered_member_in_UMS_Site(
+			DataTable memberAttributes) {
+		List<DataTableRow> memberAttributesRow = memberAttributes
+				.getGherkinRows();
+		Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells()
+					.get(0), memberAttributesRow.get(i).getCells().get(1));
+		}
+
+		String category = memberAttributesMap.get("Member Type");
+		Set<String> memberAttributesKeySet = memberAttributesMap.keySet();
+		List<String> desiredAttributes = new ArrayList<String>();
+		for (Iterator<String> iterator = memberAttributesKeySet.iterator(); iterator
+				.hasNext();) {
+			{
+				String key = iterator.next();
+				desiredAttributes.add(memberAttributesMap.get(key));
+			}
+
+		}
+		System.out.println("desiredAttributes.." + desiredAttributes);
+
+		Map<String, String> loginCreds = loginScenario
+				.getUMSMemberWithDesiredAttributes(desiredAttributes);
+
+		String userName = null;
+		String pwd = null;
+		if (loginCreds == null) {
+			// no match found
+			System.out.println("Member Type data could not be setup !!!");
+			Assert.fail("unable to find a " + desiredAttributes + " member");
+		} else {
+			userName = loginCreds.get("user");
+			pwd = loginCreds.get("pwd");
+			System.out.println("User is..." + userName);
+			System.out.println("Password is..." + pwd);
+			getLoginScenario()
+			.saveBean(LoginCommonConstants.USERNAME, userName);
+			getLoginScenario().saveBean(LoginCommonConstants.PASSWORD, pwd);
+		}
+
+
+		WebDriver wd = getLoginScenario().getWebDriver();
+
+		LoginPage loginPage = new LoginPage(wd);
+		AccountHomePage accountHomePage = (AccountHomePage)loginPage.loginWith(userName, pwd, category);
+		JSONObject accountHomeActualJson = null;
+
+		// Get expected data 
+		Map<String, JSONObject> expectedDataMap = loginScenario
+				.getExpectedJson(userName);
+		JSONObject accountHomeExpectedJson = accountHomePage
+				.getExpectedData(expectedDataMap);
+
+		/*get actual data*/
+		if (accountHomePage != null) {
+			getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
+			getLoginScenario().saveBean(PageConstants.ACCOUNT_HOME_PAGE,
+					accountHomePage);
+			Assert.assertTrue(true);
+			accountHomeActualJson = accountHomePage.accountHomeJson;
+		}
+
+		try {
+			JSONAssert.assertEquals(accountHomeExpectedJson,
+					accountHomeActualJson, true);
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}
+
+		getLoginScenario().saveBean(CommonConstants.EXPECTED_DATA_MAP,
+				expectedDataMap);
+	}
+	
 
 }
 	

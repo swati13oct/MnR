@@ -10,6 +10,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import pages.acquisition.bluelayer.LoginAssistancePage;
 import acceptancetests.atdd.data.CommonConstants;
@@ -66,27 +68,13 @@ public class LoginPage extends UhcDriver {
 
 		
 		if (MRScenario.environment.equals("dev-a") || MRScenario.environment.equals("team-a")) {
-			
-		Alert alert = driver.switchTo().alert();
-        alert.accept();
-        Alert alert1 = driver.switchTo().alert();
-        alert1.accept();
-        Alert alert2 = driver.switchTo().alert();
-        alert2.accept();
+			while (!isAlertPresent());
         }
 
 
 		if (MRScenario.environment.equals("dev-a") || MRScenario.environment.equals("team-b")) {
 
-			Alert alert = driver.switchTo().alert();
-			alert.accept();
-			Alert alert1 = driver.switchTo().alert();
-			alert1.accept();
-			if(!(MRScenario.environment.equals("team-b")))
-			{
-				Alert alert2 = driver.switchTo().alert();
-				alert2.accept();
-			}
+			while (!isAlertPresent());
 		}
 
 		if(currentUrl().contains("home/my-account-home.html") && category.equalsIgnoreCase("Group"))
@@ -149,5 +137,25 @@ public class LoginPage extends UhcDriver {
 
 
 	}
+	
+	public boolean isAlertPresent(){ 
+	    try{ 
+	        Alert a = new WebDriverWait(driver, 5).until(ExpectedConditions.alertIsPresent());
+	        if(a!=null){
+	            System.out.println("Alert is present = " + a.getText());
+	            driver.switchTo().alert().accept();
+	            return true;
+	        }else{
+	            //throw new Throwable();
+	        	System.out.println("alert is not present 1");
+	        	return false;
+	        }
+	    } 
+	    catch (Throwable e) {
+	        System.err.println("Alert isn't present!!");
+	        return false; 
+	    } 
+
+	} 
 
 }

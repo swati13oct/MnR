@@ -798,13 +798,13 @@ public class MRScenario {
 	}*/
 	
 	public WebDriver getWebDriver() {
-        
-        File pathToBinary = new File("C:/Program Files (x86)/Mozilla Firefox/firefox.exe");
-        FirefoxBinary ffBinary = new FirefoxBinary(pathToBinary);
-        FirefoxProfile firefoxProfile = new FirefoxProfile();       
-        webDriver = new FirefoxDriver(ffBinary,firefoxProfile);
-        webDriver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
-
+		if (null == webDriver) {
+			File pathToBinary = new File("C:/Program Files (x86)/Mozilla Firefox/firefox.exe");
+			FirefoxBinary ffBinary = new FirefoxBinary(pathToBinary);
+			FirefoxProfile firefoxProfile = new FirefoxProfile();
+			webDriver = new FirefoxDriver(ffBinary, firefoxProfile);
+			webDriver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
+		}
 /*            
         
         webDriver = new FirefoxDriver();
@@ -835,6 +835,14 @@ public class MRScenario {
 		System.setProperty("webdriver.chrome.driver", props.get(CommonConstants.CHROME_DRIVER));
 		webDriver = new ChromeDriver(capabilities);
 		return webDriver;
+	}
+
+	public void nullifyWebDriver() {
+		if (null != webDriver) {
+			webDriver.close();
+			webDriver = null;
+		}
+
 	}
 
 }
