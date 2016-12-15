@@ -36,6 +36,14 @@
 "memberName":{
 "identifier":"id",
 "elementName":"welcomeText"
+},
+"makeOneTimePaymentButton":{
+"identifier":"xpath",
+"elementName":"//a[contains(text(),'One-Time')]"
+},
+"setUpAutomaticPaymentsButton":{
+"identifier":"xpath",
+"elementName":"//a[text()='Set Up Automatic Payments']"
 }
 }
 }

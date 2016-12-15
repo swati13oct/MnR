@@ -28,7 +28,7 @@ Given I am an AARP Individual member on the Dashboard site
     | Plan Type | <plantype> |
 	| Member Type  | <memberType> |
 
-When the above plantype user logs in
+When the above plantype user logs in AARP Site
 Then I navigate to the new Payment History page
 Then validate Payment Method value
 
@@ -36,6 +36,50 @@ Examples:
 
 | plantype   | memberType   |
 |  MAPD | Individual |
+|  MA | Individual |
+|  PDP | Individual |
+
+
+ 
+@SetUpAutomaticPaymentButtonTest
+Scenario Outline: To verify Premium Payments Overview section and Set Up Automatic Payments button
+Given I am an AARP  Individual member on the Dashboard site who has NOT previously setup automatic payments
+  | Plan Type | <plantype> |
+	| Member Type  | <memberType> |
+When the above plantype user logs in AARP Site
+And I navigate to the Payment History page
+Then I can view a button Make a One-Time Payment
+And a button Set Up Automatic Payments
+
+Examples:
+
+| plantype   | memberType   |
+#|  MAPD | Individual |
+#|  MA | Individual |
+|  PDP | Individual |
+
+
+
+
+ 
+ @EditAutomaticPaymentButtonTest 
+Scenario Outline: To verify Premium Payments Overview section and Set Up Automatic Payments button
+Given I am an AARP  Individual member on the Dashboard site who has NOT previously setup automatic payments
+   | Plan Type | <plantype> |
+	| Member Type  | <memberType> |
+When the above plantype user logs in AARP Site
+And I navigate to the Payment History page
+Then I can view a button Make a One-Time Payment
+And a button Edit Automatic Payments
+
+Examples:
+
+| plantype   | memberType   |
+|  MAPD | Individual |
+|  MA | Individual |
+|  PDP | Individual |
+
+
  
  
  
