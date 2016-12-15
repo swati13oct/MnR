@@ -66,7 +66,7 @@ public class LoginPage extends UhcDriver {
 		sendkeys(passwordField,password);
 		signInButton.click();
 		
-		if (MRScenario.environment.equals("awe-dev-b") || MRScenario.environment.equals("dev-a") || MRScenario.environment.equals("dev-c") || MRScenario.environment.equals("team-b")) {
+		if (MRScenario.environment.equals("awe-dev-b") || MRScenario.environment.equals("dev-a") || MRScenario.environment.equals("dev-c") || MRScenario.environment.equals("team-b") || MRScenario.environment.equals("team-a")) {
 			Alert alert = driver.switchTo().alert();
 			alert.accept();
 			Alert alert1 = driver.switchTo().alert();
