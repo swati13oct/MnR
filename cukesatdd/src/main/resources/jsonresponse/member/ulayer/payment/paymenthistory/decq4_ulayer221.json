@@ -14,5 +14,5 @@
 "Balance Due" : "$28.10",
 "Monthly Bill" : "Not available",
 "makeOneTimePaymentButton":"MAKE A ONE-TIME PAYMENT",
-"setUpAutomaticPaymentsButton":"SET UP AUTOMATIC PAYMENTS"
+"automaticPaymentsButton":"SET UP AUTOMATIC PAYMENTS"
 }

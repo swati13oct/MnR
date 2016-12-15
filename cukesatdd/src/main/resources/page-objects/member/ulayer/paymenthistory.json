@@ -39,11 +39,11 @@
 },
 "makeOneTimePaymentButton":{
 "identifier":"xpath",
-"elementName":"//a[contains(text(),'One-Time')]"
+"elementName":"//a[@id='onetimepayment']"
 },
-"setUpAutomaticPaymentsButton":{
+"automaticPaymentsButton":{
 "identifier":"xpath",
-"elementName":"//a[text()='Set Up Automatic Payments']"
+"elementName":"//a[@id='autopayment']"
 }
 }
 }
