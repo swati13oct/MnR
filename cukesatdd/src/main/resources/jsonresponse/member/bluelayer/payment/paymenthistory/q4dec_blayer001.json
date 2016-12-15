@@ -10,5 +10,11 @@
 "amountBilled":"$99.00",
 "amountPaid":"$0.00",
 "paidDate":"",
-"balanceDue":"$99.00"
+"balanceDue":"$99.00",
+"premiumPaymentsOverview" : "Premium Payments Overview", 
+"totalAmountDue" : "$0.00",
+"creditBalance" : "$99.00",
+"makeaPaymentButton" : "MAKE A ONE-TIME PAYMENT",
+"automicPayments" : "EDIT AUTOMATIC PAYMENTS",
+"paymentMethod" : "EFT-Checking"
 }

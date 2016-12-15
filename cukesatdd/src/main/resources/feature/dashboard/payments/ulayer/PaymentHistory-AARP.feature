@@ -22,7 +22,20 @@ Examples:
 #| MA        |  01/01/2016 | 12/30/2016 |
  
  
+Scenario Outline:To verify New Payment History page
+Given I am an AARP Individual member on the Dashboard site
 
+    | Plan Type | <plantype> |
+	| Member Type  | <memberType> |
+
+When the above plantype user logs in
+Then I navigate to the new Payment History page
+Then validate Payment Method value
+
+Examples:
+
+| plantype   | memberType   |
+|  MAPD | Individual |
  
  
  

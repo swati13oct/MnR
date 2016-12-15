@@ -20,4 +20,46 @@ Examples:
  | planType  | memberType  | startDate | endDate |
  | PDP   | Group  | 01/01/2016 | 12/30/2016 |
  
+Scenario Outline:To verify New Payment History page
+Given I am an UHC Individual member on the Dashboard site
+    | Plan Type      | <planType>  |
+ 	| Member Type     | <memberType>|
+ 
+When the above plantype user logged in
+Then I navigate to new Payment History page 
+Then I can view the total amount due credit balance
+
+Examples:
+
+ | planType | | memberType |
+ | SSUP | | Group |
+ | MA | | Group |
+ | MAPD | | Group |
+ | PDP | | Group |
+ | MA | | Individual |
+ | MAPD | | Individual |
+
+Scenario Outline:To verify New Payment History page
+Given I am an Uhc Individual member on the Dashboard site
+    | Plan Type | <plantype> |
+	| Member Type  | <memberType> |
+When the above plantype user logs in
+Then I navigate to the new Payment History page 
+Then validate Payment Method value
+Examples:
+
+ | plantype   | memberType   |
+  |  SSUP | Group |
+  |  MA | Group |
+   |  MAPD | Group |
+   |  MA     | Individual |
+   |  MAPD | Individual |
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
  

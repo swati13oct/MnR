@@ -9,9 +9,11 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
+import org.skyscreamer.jsonassert.JSONAssert;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import pages.member.bluelayer.AccountHomePage;
@@ -178,6 +180,40 @@ public class PaymentHistoryUhcStepDefinition {
 		PaymentHistoryPage paymentHistoryPage = (PaymentHistoryPage) getLoginScenario().getBean(PageConstants.PAYMENT_HISTORY_PAGE);
 		JSONObject newPaymentHistoryExpectedJson = (JSONObject) getLoginScenario().getBean(CommonConstants.NEW_PAYMENT_HISTORY_EXPECTED_JSON); 
 		paymentHistoryPage.validatePaymentHistoryTableColumns(newPaymentHistoryExpectedJson);
+	}
+	
+	
+	@Then("^I can view the total amount due credit balance$")
+	public void viewTotalAmountDue(){
+		PaymentHistoryPage paymentHistoryPage = (PaymentHistoryPage) getLoginScenario().getBean(PageConstants.PAYMENT_HISTORY_PAGE);
+		paymentHistoryPage.validateTotalAmountDueAndText();
+		/*Get Actual response*/
+		JSONObject paymentHistoryActualJson = paymentHistoryPage.paymentHistoryJson;
+		/*Get expected response*/
+		String userName = (String) getLoginScenario().getBean(LoginCommonConstants.USERNAME);
+		Map<String, JSONObject> expectedDataMap = loginScenario.getExpectedJson(userName);
+		JSONObject paymentHistoryExpectedJson = expectedDataMap.get(CommonConstants.NEW_PAYMENT_HISTORY_EXPECTED_JSON);
+		try {
+			JSONAssert.assertEquals(paymentHistoryExpectedJson, paymentHistoryActualJson, true);
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	@Then("^validate Payment Method value$")
+	public void validatePaymentMethodValue(){
+	PaymentHistoryPage paymentHistoryPage = (PaymentHistoryPage) getLoginScenario().getBean(PageConstants.PAYMENT_HISTORY_PAGE);
+	JSONObject paymentHistoryActualJson = paymentHistoryPage.paymentHistoryJson;
+        /*Get expected response*/
+        String userName = (String) getLoginScenario().getBean(LoginCommonConstants.USERNAME);
+        Map<String, JSONObject> expectedDataMap = loginScenario.getExpectedJson(userName);
+        JSONObject paymentHistoryExpectedJson = expectedDataMap.get(CommonConstants.NEW_PAYMENT_HISTORY_EXPECTED_JSON);
+          try {
+               JSONAssert.assertEquals(paymentHistoryExpectedJson, paymentHistoryActualJson, true);
+        } catch (JSONException e) {
+               e.printStackTrace();
+        }
+
 	}
 	
 }
