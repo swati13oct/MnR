@@ -1,7 +1,7 @@
 /**
  * 
  */
-package atdd.runners;
+package atdd.runners.dashboard;
 
 import org.junit.runner.RunWith;
 
