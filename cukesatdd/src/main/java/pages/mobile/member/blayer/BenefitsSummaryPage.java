@@ -98,7 +98,8 @@ public class BenefitsSummaryPage extends PharmacyLocator{
 	@FindBy(linkText = "List View")
 	private WebElement listview;
 
-
+	@FindBy(xpath = "/html/body/div[2]/div[2]/div/div[1]/div/div/div/h1")
+	private WebElement paymentsHeading;
 
 	
 	private PageData benefitsSummary;
@@ -427,5 +428,17 @@ public boolean validateSetupAutomaticPayments() {
 			return false;
 		}
 	}
-	
+
+	public pages.dashboard.member.blayer.PaymentHistoryPage navigateToNewPaymentHistoryPage() {
+		String NewPayHistoryUrl = "content/dashboard/home/Payments.html";
+		String url = driver.getCurrentUrl();
+		url = url.replace("mobile/home/my-benefit-summary.html",
+				NewPayHistoryUrl);
+		driver.get(url);
+		if (paymentsHeading.getText().contains("Premium Payments Overview")) {
+			return new pages.dashboard.member.blayer.PaymentHistoryPage(driver);
+		}
+		return null;
+	}
+
 }

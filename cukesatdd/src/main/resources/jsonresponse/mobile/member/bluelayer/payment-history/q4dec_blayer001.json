@@ -5,5 +5,18 @@
 "MakePayment":"MAKE A ONE-TIME PAYMENT",
 "EditAutomaticPayments":"EDIT AUTOMATIC PAYMENTS",
 "CreditBalance":"$99.00",
-"TotalAmountDue":"$0.00"
+"TotalAmountDue":"$0.00",
+"paymentHistoryHeader":"Payment History",
+"paymentHistoryDropdownLabel":"View Payments For:",
+"paymentHistoryDropdownDefaultValue":"",
+"paymentHistoryDropdown":"                                            Last 90 days\n                                            Last 6 months\n                                            Last 12 months\n                                            Last 24 months\n                                            Current Year\n                                            Custom Search\n                                        ",
+"paymentHistoryTableHeader":"Due Date \n \n Amount Billed Paid Date Amount Paid \n \n Balance Due Monthly Bill",
+"paymentHistoryHeaderText":"You may search payment history for the previous 24 months. You can also search for future premium payment information for the current plan year.", 
+"customSearchText":"Total search results for premium payments from 01/01/2016 to 12/30/2016. If you have questions about your payments, please contact UnitedHealthcare.",
+"tableColumnDueDate":"11/01/2016",
+"amountBilled":"$99.00",
+"amountPaid":"$0.00",
+"paidDate":"",
+"balanceDue":"$99.00",
+"paymentTableData":"Due Date\n11/01/2016\nAmount Billed\n$99.00\nPaid Date\nAmount Paid\n$0.00\nBalance Due\n$99.00\nMonthly Bill\nNot available\nDue Date\n10/01/2016\nAmount Billed\n$99.00\nPaid Date\n10/02/2016\nAmount Paid\n$99.00\nBalance Due\n$0.00\nMonthly Bill\nNot available\nDue Date\n09/01/2016\nAmount Billed\n$99.00\nPaid Date\n09/02/2016\nAmount Paid\n$99.00\nBalance Due\n$0.00\nMonthly Bill\nNot available\nDue Date\n08/01/2016\nAmount Billed\n$99.00\nPaid Date\n08/02/2016\nAmount Paid\n$99.00\nBalance Due\n$0.00\nMonthly Bill\nNot available\nDue Date\n07/01/2016\nAmount Billed\n$99.00\nPaid Date\n07/02/2016\nAmount Paid\n$99.00\nBalance Due\n$0.00\nMonthly Bill\nNot available\nDue Date\n06/01/2016\nAmount Billed\n$99.00\nPaid Date\n06/02/2016\nAmount Paid\n$99.00\nBalance Due\n$0.00\nMonthly Bill\nNot available\nDue Date\n05/01/2016\nAmount Billed\n$99.00\nPaid Date\n05/02/2016\nAmount Paid\n$99.00\nBalance Due\n$0.00\nMonthly Bill\nNot available\nDue Date\n04/01/2016\nAmount Billed\n$99.00\nPaid Date\n04/02/2016\nAmount Paid\n$99.00\nBalance Due\n$0.00\nMonthly Bill\nNot available\nDue Date\n03/01/2016\nAmount Billed\n$99.00\nPaid Date\n03/02/2016\nAmount Paid\n$99.00\nBalance Due\n$0.00\nMonthly Bill\nNot available\nDue Date\n02/01/2016\nAmount Billed\n$99.00\nPaid Date\n02/02/2016\nAmount Paid\n$99.00\nBalance Due\n$0.00\nMonthly Bill\nNot available\nDue Date\n01/01/2016\nAmount Billed\n$99.00\nPaid Date\n01/02/2016\nAmount Paid\n$99.00\nBalance Due\n$0.00\nMonthly Bill\nNot available"
 }

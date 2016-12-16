@@ -42,6 +42,9 @@ public class PaymentHistoryPage extends UhcDriver {
 	@FindBy(id="customSearch")
 	public WebElement customSearchText;
 	
+	@FindBy(id="paymentTable")
+	public WebElement paymentTableData;
+	
 	public static final String PAYMENT_HISTORY_TABLE_XPATH ="/html/body/div[2]/div[3]/div/div/div/div/div/div[3]/div/table/tbody/tr";
 
 	public PaymentHistoryPage(WebDriver driver) {
@@ -191,6 +194,18 @@ public class PaymentHistoryPage extends UhcDriver {
 
 	}
 	
+	public void validatePaymentHistoryTableData(
+			JSONObject newPaymentHistoryExpectedJson) {
+		System.out.println(paymentTableData.getText());
+		try {
+			Assert.assertEquals(
+					newPaymentHistoryExpectedJson.get("paymentTableData"),
+					paymentTableData.getText());
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 	
 	@Override
 	public void openAndValidate() {
@@ -215,7 +230,7 @@ public class PaymentHistoryPage extends UhcDriver {
 	public JSONObject getExpectedData(Map<String, JSONObject> expectedDataMap) {
 
 		JSONObject newPaymentHistoryExpectedJson = expectedDataMap
-				.get(CommonConstants.PAYMENT_HISTORY);
+				.get(CommonConstants.PAYMENT_HISTORY_MOBILE);
 
 		return newPaymentHistoryExpectedJson;
 	}

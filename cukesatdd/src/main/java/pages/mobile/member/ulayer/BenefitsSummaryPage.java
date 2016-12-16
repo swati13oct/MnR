@@ -82,6 +82,9 @@ public class BenefitsSummaryPage extends UhcDriver{
 	private PageData browserCheckData;
 
 	private JSONObject browserCheckJson;
+	
+	@FindBy(xpath = "/html/body/div[2]/div[2]/div/div[1]/div/div/div/h1")
+	private WebElement paymentsHeading;
 
 	public BenefitsSummaryPage(WebDriver driver) {
 		super(driver);
@@ -182,8 +185,7 @@ public class BenefitsSummaryPage extends UhcDriver{
 
 		return browserCheckJson;
 	}
-
-	public boolean changeUrlToNewPaymentHistoryPage() {
+public boolean changeUrlToNewPaymentHistoryPage() {
 	
 		
 		String NewPayHistoryUrl = "content/aarpm/home/my-plans/payments/PaymentsOverview-DashBoard.html";
@@ -196,6 +198,18 @@ public class BenefitsSummaryPage extends UhcDriver{
 			return true;
 		}
 		return false;
+	}
+
+	public pages.dashboard.member.ulayer.PaymentHistoryPage navigateToNewPaymentHistoryPage() {
+		String NewPayHistoryUrl = "content/dashboard/home/Payments.html";
+		String url = driver.getCurrentUrl();
+		url = url.replace("mobile/home/my-benefit-summary.html",
+				NewPayHistoryUrl);
+		driver.get(url);
+		if (paymentsHeading.getText().contains("Premium Payments Overview")) {
+			return new pages.dashboard.member.ulayer.PaymentHistoryPage(driver);
+		}
+		return null;
 	}
 
 

@@ -48,6 +48,9 @@ private static String PAGE_URL = MRConstants.PCP_MOBILE_URL;
 
 	@Override
 	public void openAndValidate() {
+		if(MRScenario.environment.equals("team-c")){
+			PAGE_URL=MRConstants.UHCM_MOBILE_TEAM_C_URL;
+		}
 		start(PAGE_URL);
 		validate(userNameField);
 		validate(passwordField);
@@ -69,6 +72,13 @@ private static String PAGE_URL = MRConstants.PCP_MOBILE_URL;
 	        Alert alert2 = driver.switchTo().alert();
 	        alert2.accept();
 	        }
+		if(MRScenario.environment.equals("team-c")){
+			Alert alert = driver.switchTo().alert();
+	        alert.accept();
+	        Alert alert1 = driver.switchTo().alert();
+	        alert1.accept();
+	        
+		}
 		
 		if(currentUrl().contains("mobile/home/my-benefit-summary.html"))
 		{

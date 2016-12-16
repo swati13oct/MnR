@@ -102,6 +102,8 @@ public class CommonConstants {
 	
 	public static final String  PAYMENT_HISTORY_BLUELAYER_DIRECTORY_MOBILE ="/jsonresponse/mobile/member/bluelayer/payment-history/";
 	
+	public static final String  PAYMENT_HISTORY_ULAYER_DIRECTORY_MOBILE ="/jsonresponse/mobile/member/ulayer/payment-history/";
+	
 
 	
 	public static final Page[] PAGES = { new Page(CommonConstants.GLOBAL, CommonConstants.GLOBAL_DIRECTORY),
@@ -149,7 +151,7 @@ public class CommonConstants {
 			new Page(CommonConstants.PLAN_COMPARE, CommonConstants.PLAN_COMPARE_ULAYER_DIRECTORY),
 			new Page(CommonConstants.ADD_PLAN_CONFIRMATION, CommonConstants.ADD_PLAN_CONFIRMATION_ULAYER_DIRECTORY),
 			new Page(CommonConstants.PAYMENT_HISTORY_MOBILE,
-					CommonConstants.PAYMENT_HISTORY_BLUELAYER_DIRECTORY_MOBILE)
+					CommonConstants.PAYMENT_HISTORY_ULAYER_DIRECTORY_MOBILE)
 							
 	};
 
