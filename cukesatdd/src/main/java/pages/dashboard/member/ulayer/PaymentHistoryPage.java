@@ -36,6 +36,15 @@ public class PaymentHistoryPage extends UhcDriver {
 	@FindBy(id="custom-to")
 	public WebElement customSearchTo;
 	
+	@FindBy(xpath = "//a[@id='autopayment']")
+	private WebElement setupAutomaticPayments;
+	
+	@FindBy(xpath= "//span[text()='Payment Method:']/../following-sibling::div[1]")
+	private WebElement validatePaymentMethod;
+	
+	@FindBy(id = "onetimepayment")
+	private WebElement makeOneTimePayment;
+	
 	@FindBy(id = "payment-date")
 	public WebElement datafilter;
 	
@@ -307,5 +316,44 @@ public class PaymentHistoryPage extends UhcDriver {
 			return true;
 		}
 		return false;
+	}
+	public boolean validatePaymentDtmValues() {
+		// TODO Auto-generated method stub
+		try
+		{
+		Thread.sleep(10000);
+		if(makeOneTimePayment.getAttribute("dtmid").equalsIgnoreCase("cta_payments") && makeOneTimePayment.getAttribute("dtmname").equalsIgnoreCase("payments:fed:monthly billing:make one time payment"))
+		{
+		   System.out.println("Dtmid"+" "+makeOneTimePayment.getAttribute("dtmid")+"dtm value"+makeOneTimePayment.getAttribute("dtmname"));
+			return true;
+		}
+			else
+			return false;
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+			return false;
+		}
+	}
+	public boolean validateSetupPaymentDtmValues() {
+		// TODO Auto-generated method stub
+		try
+		{
+		Thread.sleep(10000);
+		if(setupAutomaticPayments.getAttribute("dtmid").equalsIgnoreCase("cta_payments") && setupAutomaticPayments.getAttribute("dtmname").equalsIgnoreCase("payments:fed:monthly billing:set up automatic payments"))
+		{
+			System.out.println("dtmid"+ " " + setupAutomaticPayments.getAttribute("dtmid")+"dtmname"+ " " + setupAutomaticPayments.getAttribute("dtmname"));
+		   //System.out.println("setupAutomaticPayments and Payment methods exists"+setupAutomaticPayments+validatePaymentMethod);
+			return true;
+		}
+			else
+			return false;
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+			return false;
+		}
 	}
 }

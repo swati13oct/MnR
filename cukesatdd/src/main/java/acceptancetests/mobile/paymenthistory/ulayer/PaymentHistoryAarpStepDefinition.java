@@ -10,8 +10,11 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
+import org.skyscreamer.jsonassert.JSONAssert;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import acceptancetests.atdd.data.CommonConstants;
@@ -99,13 +102,14 @@ public class PaymentHistoryAarpStepDefinition {
 		
 	}
 
-	@Then("^I navigate to the new Payment History page$")
+	@When("^navigate to the new Payment History page$")
 	public void i_navigate_to_the_payment_history_page() {
 		BenefitsSummaryPage benefitsSummaryPage = (BenefitsSummaryPage) getLoginScenario().getBean(PageConstants.BENEFITS_SUMMARY_PAGE);
 		
 		PaymentHistoryPage newPaymentHistoryPageFlag = benefitsSummaryPage.changeUrlToNewPaymentHistoryPage();
 
 		if (newPaymentHistoryPageFlag!=null) {
+			getLoginScenario().saveBean(PageConstants.PAYMENT_HISTORY_PAGE,newPaymentHistoryPageFlag);
 			System.out.println("New Payment page got loaded");
 			Assert.assertTrue(true);
 		} else {
@@ -113,6 +117,83 @@ public class PaymentHistoryAarpStepDefinition {
 		}
 
 	}
+	 @Then("^navigate to the new Payment History page and validate setup automatic payment$")
+		public void navigate_to_the_new_Payment_History_page() {
+
+			BenefitsSummaryPage benefitsSummaryPage = (BenefitsSummaryPage) getLoginScenario()
+					.getBean(PageConstants.BENEFITS_SUMMARY_PAGE);
+
+			boolean flagvalue = benefitsSummaryPage.validateSetupAutomaticPayments();
+			if(flagvalue)
+				Assert.assertTrue(true);
+			else
+				Assert.assertTrue(false);
+		
+		} 
+
+		@Then("^navigate to the new Payment History page and validate Non setup automatic payment$")
+		public void I_navigate_to_the_new_Payment_History_page() {
+			BenefitsSummaryPage benefitsSummaryPage = (BenefitsSummaryPage) getLoginScenario()
+					.getBean(PageConstants.BENEFITS_SUMMARY_PAGE);
+
+			PaymentHistoryPage page = benefitsSummaryPage.changeUrlToNewPaymentHistoryPage();
+			String userName = (String) getLoginScenario().getBean(LoginCommonConstants.USERNAME);
+			System.out.println(userName + "userName");
+			Map<String, JSONObject> expectedDataMap = loginScenario.getExpectedJson(userName);
+			JSONObject paymentHistoryExpectedJson = expectedDataMap.get(CommonConstants.PAYMENT_HISTORY_MOBILE_ULAYER);
+
+			JSONObject paymentHistoryActualJson = page.paymentHistoryPageJson;
+			try {
+				JSONAssert.assertEquals(paymentHistoryExpectedJson, paymentHistoryActualJson, true);
+			} catch (JSONException e) {
+				e.printStackTrace();
+			}
+		}
+		@Then("^navigate to the new Payment History page and validate Credit Balance when the balance is greater than zero$")
+		public void I_navigate_to_the_new_Payment_History_page_validate_credit_balance() {
+			BenefitsSummaryPage benefitsSummaryPage = (BenefitsSummaryPage) getLoginScenario()
+					.getBean(PageConstants.BENEFITS_SUMMARY_PAGE);
+
+			PaymentHistoryPage page = benefitsSummaryPage.changeUrlToNewPaymentHistoryPage();
+			String userName = (String) getLoginScenario().getBean(LoginCommonConstants.USERNAME);
+			System.out.println(userName + "userName");
+			Map<String, JSONObject> expectedDataMap = loginScenario.getExpectedJson(userName);
+			JSONObject paymentHistoryExpectedJson = expectedDataMap.get(CommonConstants.PAYMENT_HISTORY_MOBILE_ULAYER);
+
+			JSONObject paymentHistoryActualJson = page.paymentHistoryPageJson;
+			try {
+				JSONAssert.assertEquals(paymentHistoryExpectedJson, paymentHistoryActualJson, true);
+			} catch (JSONException e) {
+				e.printStackTrace();
+			}
+		}
+		 @Then("^navigate to the new Payment History page and validate DTM values for Make A One Time Payment$")
+			public void navigate_to_the_new_Payment_History_page_validate_DTM_values_One_Time_Payment() {
+
+			 PaymentHistoryPage planhistorypage = (PaymentHistoryPage) getLoginScenario()
+						.getBean(PageConstants.PAYMENT_HISTORY_PAGE);
+
+				//
+				boolean flagvalue = planhistorypage.validateOneTimePaymentDtmValues();
+				if(flagvalue)
+					Assert.assertTrue(true);
+				else
+					Assert.assertTrue(false);
+			
+			} 
+		 @Then("^navigate to the new Payment History page and validate DTM values for Set Up Automatic Payments$")
+			public void navigate_to_the_new_Payment_History_page_validate_DTM_values_Setup_Payment() {
+
+			 PaymentHistoryPage planhistorypage = (PaymentHistoryPage) getLoginScenario()
+						.getBean(PageConstants.PAYMENT_HISTORY_PAGE);
+
+				boolean flagvalue = planhistorypage.validateSetupPaymentDtmValues();
+				if(flagvalue)
+					Assert.assertTrue(true);
+				else
+					Assert.assertTrue(false);
+			
+			} 
 
 	@After
 	public void tearDown() {

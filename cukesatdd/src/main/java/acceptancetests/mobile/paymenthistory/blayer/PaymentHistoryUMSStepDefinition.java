@@ -31,7 +31,7 @@ import pages.mobile.member.blayer.BenefitsSummaryPage;
 import pages.mobile.member.blayer.LoginPage;
 import pages.mobile.member.blayer.PaymentHistoryPage;
 
-public class PaymentHistoryStepDefinition {
+public class PaymentHistoryUMSStepDefinition {
 
 	@Autowired
 	MRScenario loginScenario;
@@ -129,6 +129,25 @@ public class PaymentHistoryStepDefinition {
 			e.printStackTrace();
 		}
 	}
+	@Then("^navigate to the new Payment History page and validate Credit Balance when the balance is greater than zero$")
+	public void I_navigate_to_the_new_Payment_History_page_validate_credit_balance() {
+		BenefitsSummaryPage benefitsSummaryPage = (BenefitsSummaryPage) getLoginScenario()
+				.getBean(PageConstants.BENEFITS_SUMMARY_PAGE);
+
+		PaymentHistoryPage page = benefitsSummaryPage.changeUrlToNewPaymentHistoryPage();
+		String userName = (String) getLoginScenario().getBean(LoginCommonConstants.USERNAME);
+		System.out.println(userName + "userName");
+		Map<String, JSONObject> expectedDataMap = loginScenario.getExpectedJson(userName);
+		JSONObject paymentHistoryExpectedJson = expectedDataMap.get(CommonConstants.PAYMENT_HISTORY_MOBILE_ULAYER);
+
+		JSONObject paymentHistoryActualJson = page.paymentHistoryPageJson;
+		try {
+			JSONAssert.assertEquals(paymentHistoryExpectedJson, paymentHistoryActualJson, true);
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}
+	}
+	
 	@After
 	public void tearDown() {
 

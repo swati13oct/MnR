@@ -79,6 +79,19 @@ Examples:
 |  MA | Individual |
 |  PDP | Individual |
 
+Scenario Outline: To verify New Payment History page and validate for Dtm values for makeonepayment and setup automatic payments
+Given I am an AARP Individual member on the Dashboard site
+    | Plan Type   |  <planType>    |
+    | Member Type |  <membertype>  |
+When the above plantype user logs in AARP Site
+Then I navigate to the Payment History page in AARP Site
+Then navigate to the new Payment History page and validate DTM values for Make A One Time Payment
+Then navigate to the new Payment History page and validate DTM values for Set Up Automatic Payments
+
+Examples:
+         | planType | membertype  |
+         | MAPD     | Individual  | 
+        
 
  
  
