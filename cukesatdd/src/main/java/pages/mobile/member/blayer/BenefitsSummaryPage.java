@@ -385,12 +385,10 @@ public class BenefitsSummaryPage extends PharmacyLocator{
 		// TODO Auto-generated method stub
 		return null;
 	}
-public PaymentHistoryPage changeUrlToNewPaymentHistoryPage() {
-	
-		
+	public PaymentHistoryPage changeUrlToNewPaymentHistoryPage() {
+
 		String NewPayHistoryUrl = "https://member.team-b-uhcmedicaresolutions.uhc.com/content/dashboard/home/payments.html";
 		String url = driver.getCurrentUrl();
-		//url = url.replace("mobile/home/my-benefit-summary.html", NewPayHistoryUrl);
 		driver.get(NewPayHistoryUrl);
 		try {
 			Thread.sleep(15000);
@@ -399,31 +397,23 @@ public PaymentHistoryPage changeUrlToNewPaymentHistoryPage() {
 			e.printStackTrace();
 		}
 		return new PaymentHistoryPage(driver);
-		
-	
-		
-	}
-public boolean validateSetupAutomaticPayments() {
-	
-		
+		}
+
+	public boolean validateSetupAutomaticPayments() {
+
 		String NewPayHistoryUrl = "https://member.team-b-uhcmedicaresolutions.uhc.com/content/dashboard/home/payments.html";
 		String url = driver.getCurrentUrl();
-		//url = url.replace("mobile/home/my-benefit-summary.html", NewPayHistoryUrl);
 		driver.get(NewPayHistoryUrl);
-		
-		try
-		{
-		Thread.sleep(10000);
-		if(setupAutomaticPayments.getText().equalsIgnoreCase("Set Up Automatic Payments") && validatePaymentMethod.getText().equalsIgnoreCase("Monthly Bill"))
-		{
-		   System.out.println("setupAutomaticPayments and Payment methods exists"+setupAutomaticPayments+validatePaymentMethod);
-			return true;
-		}
-			else
-			return false;
-		}
-		catch(Exception e)
-		{
+		try {
+			Thread.sleep(10000);
+			if (setupAutomaticPayments.getText().equalsIgnoreCase("Set Up Automatic Payments")
+					&& validatePaymentMethod.getText().equalsIgnoreCase("Monthly Bill")) {
+				System.out.println("setupAutomaticPayments and Payment methods exists" + setupAutomaticPayments
+						+ validatePaymentMethod);
+				return true;
+			} else
+				return false;
+		} catch (Exception e) {
 			e.printStackTrace();
 			return false;
 		}

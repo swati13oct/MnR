@@ -1,7 +1,7 @@
 /**
  * 
  */
-package pages.mobile.member.blayer;
+package pages.mobile.member.ulayer;
 
 import java.util.List;
 import java.util.Map;
@@ -27,6 +27,14 @@ import atdd.framework.UhcDriver;
  */
 public class PaymentHistoryPage extends UhcDriver{
 	
+	@FindBy(xpath = "//a[@id='setupautopayment']")
+	private WebElement setupAutomaticPayments;
+	
+	@FindBy(xpath= "//span[text()='Payment Method:']/../following-sibling::div[1]")
+	private WebElement validatePaymentMethod;
+	
+	@FindBy(id = "onetimepayment")
+	private WebElement makeOneTimePayment;
 	
 	@FindBy(xpath = "//span[contains(text(),'Total Amount Due')]")
 	private WebElement labelTotalAmoutDue;
@@ -34,10 +42,6 @@ public class PaymentHistoryPage extends UhcDriver{
 	@FindBy(xpath ="//div[@id='paymentOverviewApp']//h1")
 	private WebElement header;
 	
-	@FindBy(xpath = "//a[text()='Set Up Automatic Payments']")
-	private WebElement setupAutomaticPayments;
-	
-
 	private PageData paymentHistoryPage;
 
 	public JSONObject paymentHistoryPageJson;
@@ -49,9 +53,9 @@ public class PaymentHistoryPage extends UhcDriver{
 	public PaymentHistoryPage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
-		String fileName = CommonConstants.PAYMENT_HISTORY_MOBILE_DATA_BLAYER;
+		String fileName = CommonConstants.PAYMENT_HISTORY_MOBILE_DATA;
 		paymentHistoryPage = CommonUtility.readPageData(fileName,
-				CommonConstants.PAYMENT_HISTORY_MOBILE_DIRECTORY);
+				CommonConstants.PAYMENT_HISTORY_MOBILE_ULAYER_DIRECTORY);
 		openAndValidate();
 	}
 
@@ -113,13 +117,80 @@ public class PaymentHistoryPage extends UhcDriver{
 		return PaymentPageExpectedJson;
 	}
 
-	public boolean validateSetupAutomaticPayments() {
-		// TODO Auto-generated method stub
-		if(setupAutomaticPayments.getText().equalsIgnoreCase("Set Up Automatic Payments"))
-	    return true;
+	
+public boolean validateSetupAutomaticPayments() {
+	
+		
+		try
+		{
+		Thread.sleep(10000);
+		if(setupAutomaticPayments.getText().equalsIgnoreCase("Set Up Automatic Payments") && validatePaymentMethod.getText().equalsIgnoreCase("Monthly Bill"))
+		{
+		   System.out.println("setupAutomaticPayments and Payment methods exists"+setupAutomaticPayments+validatePaymentMethod);
+			return true;
+		}
+			else
+			return false;
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+			return false;
+		}
+		/*if (paymentsHeading.getText().contains("Premium Payments Overview")) {
+			return true;
+		}
+		return false;*/
+	}
+
+public boolean validateOneTimePaymentDtmValues() {
+	// TODO Auto-generated method stub
+	try
+	{
+	Thread.sleep(10000);
+	if(makeOneTimePayment.getAttribute("dtmid").equalsIgnoreCase("cta_payments") && makeOneTimePayment.getAttribute("dtmname").equalsIgnoreCase("payments:fed:monthly billing:make one time payment"))
+	{
+	   System.out.println("Dtmid"+" "+makeOneTimePayment.getAttribute("dtmid")+"dtm value"+makeOneTimePayment.getAttribute("dtmname"));
+		return true;
+	}
 		else
 		return false;
 	}
+	catch(Exception e)
+	{
+		e.printStackTrace();
+		return false;
+	}
+	/*if (paymentsHeading.getText().contains("Premium Payments Overview")) {
+		return true;
+	}
+	return false;*/
+}
+public boolean validateSetupPaymentDtmValues() {
+	// TODO Auto-generated method stub
+	try
+	{
+	Thread.sleep(10000);
+	if(setupAutomaticPayments.getAttribute("dtmid").equalsIgnoreCase("cta_payments") && setupAutomaticPayments.getAttribute("dtmname").equalsIgnoreCase("payments:fed:monthly billing:set up automatic payments"))
+	{
+		System.out.println("dtmid"+ " " + setupAutomaticPayments.getAttribute("dtmid")+"dtmname"+ " " + setupAutomaticPayments.getAttribute("dtmname"));
+	   //System.out.println("setupAutomaticPayments and Payment methods exists"+setupAutomaticPayments+validatePaymentMethod);
+		return true;
+	}
+		else
+		return false;
+	}
+	catch(Exception e)
+	{
+		e.printStackTrace();
+		return false;
+	}
+	/*if (paymentsHeading.getText().contains("Premium Payments Overview")) {
+		return true;
+	}
+	return false;*/
+}
+
 
 		
 }

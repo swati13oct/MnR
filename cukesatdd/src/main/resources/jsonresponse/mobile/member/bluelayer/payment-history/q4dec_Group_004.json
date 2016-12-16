@@ -1,8 +1,8 @@
 {
 "header":"Premium Payments Overview",
 "labelTotalAmountDue":"Total Amount Due:",
-"PaymentMethod":"CMS-SSA/RRB",
+"PaymentMethod":"Monthly Bill",
 "MakePayment":"MAKE A ONE-TIME PAYMENT",
-"SetUpAutomaticPayments":"SET UP AUTOMATIC PAYMENTS",
-"TotalAmountDue":"$58.00"
+"CreditBalance":"$85.00",
+"TotalAmountDue":"$0.00"
 }

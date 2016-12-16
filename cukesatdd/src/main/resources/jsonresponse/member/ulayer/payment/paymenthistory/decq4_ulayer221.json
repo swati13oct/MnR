@@ -1,0 +1,18 @@
+{
+"paymentHistoryHeader" : "Payment History",
+"paymentHistoryDropdownLabel" : "View Payments For:",
+"paymentHistoryDropdownDefaultValue" : "Last 90 days",
+"paymentHistoryDropdown" : "Last 90 days\nLast 6 months\nLast 12 months\nLast 24 months\nCurrent Year\nCustom Search",
+"paymentHistoryTableHeader" : "Due Date \n \n Amount Billed Paid Date Amount Paid \n \n Balance Due Monthly Bill",
+"paymentHistorytext" : "You may search payment history for the previous 24 months. You can also search for future premium payment information for the current plan year.",
+"filtertext" : "Total search results for premium payments from the Last 90 days. If you have questions about your payments, please CONTACT UNITEDHEALTHCARE.",
+"filtertext2" : "Total search results for premium payments from 01/01/2016 to 12/31/2016 . If you have questions about your payments, please contact Unitedhealthcare.",
+"Due Date" : "10/01/2016",
+"Amount Billed" : "$28.10",
+"Paid Date" : "",
+"Amount Paid" : "$0.00",
+"Balance Due" : "$28.10",
+"Monthly Bill" : "Not available",
+"makeOneTimePaymentButton":"MAKE A ONE-TIME PAYMENT",
+"automaticPaymentsButton":"SET UP AUTOMATIC PAYMENTS"
+}

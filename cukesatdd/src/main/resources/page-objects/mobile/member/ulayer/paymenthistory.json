@@ -1,0 +1,31 @@
+{
+"url":null,
+"expectedData":{
+"header":{
+"identifier":"xpath",
+"elementName":"//div[@id='paymentOverviewApp']//h1"
+},
+"labelTotalAmountDue":{
+"identifier":"xpath",
+"elementName":"//span[contains(text(),'Total Amount Due')]"
+},
+"EditAutomaticPayments":{
+"identifier":"xpath",
+"elementName":"//a[contains(text(),'Edit Automatic Payments')]"
+},
+"MakePayment":{
+"identifier":"xpath",
+"elementName":"//a[contains(text(),'One-Time')]"
+},
+"PaymentMethod":{
+"identifier":"xpath",
+"elementName":"//span[text()='Payment Method:']/../following-sibling::div[1]"
+},
+"TotalAmountDue":{
+"identifier":"xpath",
+"elementName":"//span[text()='Total Amount Due:']/../following-sibling::h2[1]"
+}
+}
+}
+
+

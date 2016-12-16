@@ -12,9 +12,11 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
+import org.skyscreamer.jsonassert.JSONAssert;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import pages.dashboard.member.ulayer.PaymentHistoryPage;
@@ -192,6 +194,126 @@ public class PaymentHistoryAarpStepDefinition {
 		WebDriver wd = (WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
 		wd.quit();
 		getLoginScenario().flushBeans();
+	}
+	
+	@Then("^validate Payment Method value$")
+	public void validatePaymentMethodValue(){
+		PaymentHistoryPage paymentHistoryPage = (PaymentHistoryPage) getLoginScenario().getBean(PageConstants.PAYMENT_HISTORY_PAGE);
+		JSONObject paymentHistoryActualJson = paymentHistoryPage.paymentHistoryJson;
+        /*Get expected response*/
+        String userName = (String) getLoginScenario().getBean(LoginCommonConstants.USERNAME);
+        Map<String, JSONObject> expectedDataMap = loginScenario.getExpectedJson(userName);
+        JSONObject paymentHistoryExpectedJson = expectedDataMap.get(CommonConstants.PAYMENT_HISTORY);
+        try {
+               JSONAssert.assertEquals(paymentHistoryExpectedJson, paymentHistoryActualJson, true);
+        } catch (JSONException e) {
+               e.printStackTrace();
+        }
+	}
+	
+	@Given("^I am an AARP  Individual member on the Dashboard site who has NOT previously setup automatic payments$")
+	public void i_am_an_aarp_individual_member_on_the_dashboard_site_not_previuosly_setup_automatic_payment(DataTable memberAttributes) {
+		List<DataTableRow> memberAttributesRow = memberAttributes.getGherkinRows();
+
+		Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+					memberAttributesRow.get(i).getCells().get(1));
+		}
+
+		Set<String> memberAttributesKeySet = memberAttributesMap.keySet();
+		List<String> desiredAttributes = new ArrayList<String>();
+		for (Iterator<String> iterator = memberAttributesKeySet.iterator(); iterator.hasNext();) {
+			{
+				String key = iterator.next();
+				desiredAttributes.add(memberAttributesMap.get(key));
+			}
+
+		}
+
+		Map<String, String> loginCreds = loginScenario.getAMPMemberWithDesiredAttributes(desiredAttributes);
+
+		String userName = null;
+		String pwd = null;
+		if (loginCreds == null) {
+			Assert.fail("unable to find a " + desiredAttributes + " member");
+
+		} else {
+			userName = loginCreds.get("user");
+			pwd = loginCreds.get("pwd");
+			System.out.println("User is..." + userName);
+			System.out.println("Password is..." + pwd);
+			getLoginScenario().saveBean(LoginCommonConstants.USERNAME, userName);
+			getLoginScenario().saveBean(LoginCommonConstants.PASSWORD, pwd);
+		}
+
+	}
+	
+	
+	@And("^I navigate to the Payment History page$")
+	public void when_i_navigate_to_the_payment_history_page() {
+	//	plantype_user_logs_in();
+		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstants.ACCOUNT_HOME_PAGE);
+		PaymentHistoryPage paymentHistoryPage = accountHomePage.changeUrlToNewPaymentHistoryPage();
+		if (null != paymentHistoryPage) {
+			
+			System.out.println("New Payment history page got loaded");
+			getLoginScenario().saveBean(PageConstants.DASHBOARD_PAYMENT_HISTORY_PAGE,
+					paymentHistoryPage);
+		} else {
+			System.out.println("Error:Loading ion new payment page");
+		}
+	}
+	
+		
+	@Then("^I can view a button Make a One-Time Payment$")
+	public void i_can_view_button_make_one_time_payment() {	
+		PaymentHistoryPage paymentHistoryPage = (PaymentHistoryPage) getLoginScenario().getBean(PageConstants.DASHBOARD_PAYMENT_HISTORY_PAGE);
+
+		if (null !=paymentHistoryPage) {
+			
+			if(paymentHistoryPage.validateMakeOneTimePaymentButtonView()==true)
+			{
+			Assert.assertTrue(true);
+			} else {
+				Assert.assertFalse(true);;
+			}
+		}
+	
+	}
+
+	
+	@And("^a button Set Up Automatic Payments$")
+	public void a_button_setup_automatic_payment() {	
+		PaymentHistoryPage paymentHistoryPage = (PaymentHistoryPage) getLoginScenario().getBean(PageConstants.DASHBOARD_PAYMENT_HISTORY_PAGE);
+
+		if (null !=paymentHistoryPage) {
+			
+			if(paymentHistoryPage.validateMakeOneTimePaymentButtonView()==true)
+			{
+			Assert.assertTrue(true);
+			} else {
+			Assert.assertFalse(true);
+			}
+		}
+	
+	}
+	
+	@And("^a button Edit Automatic Payments$")
+	public void a_button_edit_automatic_payment() {	
+		PaymentHistoryPage paymentHistoryPage = (PaymentHistoryPage) getLoginScenario().getBean(PageConstants.DASHBOARD_PAYMENT_HISTORY_PAGE);
+
+		if (null !=paymentHistoryPage) {
+			
+			if(paymentHistoryPage.validateMakeOneTimePaymentButtonView()==true)
+			{
+			Assert.assertTrue(true);
+			} else {
+				Assert.assertFalse(true);
+			}
+		}
+	
 	}
 
 }

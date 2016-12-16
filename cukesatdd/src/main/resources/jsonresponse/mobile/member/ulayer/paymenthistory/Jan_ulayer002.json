@@ -3,6 +3,6 @@
 "labelTotalAmountDue":"Total Amount Due:",
 "PaymentMethod":"CMS-SSA/RRB",
 "MakePayment":"MAKE A ONE-TIME PAYMENT",
-"SetUpAutomaticPayments":"SET UP AUTOMATIC PAYMENTS",
+"EditAutomaticPayments":"EDIT AUTOMATIC PAYMENTS",
 "TotalAmountDue":"$58.00"
 }

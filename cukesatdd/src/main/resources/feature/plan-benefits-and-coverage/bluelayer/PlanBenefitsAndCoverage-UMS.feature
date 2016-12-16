@@ -558,3 +558,23 @@ Given registered UHC with following details for plan benefits and coverage flow 
 | riderAvailableCheck |
 | riderAvailable       |
 #| riderNotAvailable    |
+
+@US436849
+Scenario Outline:To verify PCP text on plan and benefits page for members in UMS site
+Given registered member to login in UMS site
+	| Plan Type   | <planType>   |
+	| Member Type | <memberType> |
+When the user navigates directly to plan benefits and Coverage in UMS site
+Then the user validates PCP
+
+Examples:
+
+| planType | memberType  |
+#| MA   |Individual |
+#| MAPD     |Individual |
+| MAPD     | Group    |
+| MA     | Group    |
+#| PDP      | Group    |
+| SSUP     | Group    |
+
+

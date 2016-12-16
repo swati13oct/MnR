@@ -75,6 +75,16 @@ public class BenefitsSummaryPage extends UhcDriver{
 	@FindBy(xpath = "//h3[contains(text(),'Preferred')]/following::a[1]")
 	public WebElement lnk_viewdetails_PreferredDrugs;
 	
+	@FindBy(xpath = "//a[text()='Set Up Automatic Payments']")
+	private WebElement setupAutomaticPayments;
+
+	@FindBy(xpath = "//span[text()='Payment Method:']/../following-sibling::div[1]")
+	private WebElement validatePaymentMethod;
+	
+	@FindBy(id = "makeOneTimePayment")
+	private WebElement makeOneTimePayment;
+
+	
 	private PageData benefitsSummary;
 
 	public JSONObject benefitsSummaryJson;
@@ -185,20 +195,22 @@ public class BenefitsSummaryPage extends UhcDriver{
 
 		return browserCheckJson;
 	}
-public boolean changeUrlToNewPaymentHistoryPage() {
-	
-		
+
+
+
+	/*public boolean changeUrlToNewPaymentHistoryPage() {
+
 		String NewPayHistoryUrl = "content/aarpm/home/my-plans/payments/PaymentsOverview-DashBoard.html";
 		String url = driver.getCurrentUrl();
 		url = url.replace("home/my-account-home.html", NewPayHistoryUrl);
 		driver.get(url);
-		
-	
+
 		if (currentUrl().contains("PaymentsOverview-DashBoard.html")) {
 			return true;
 		}
 		return false;
-	}
+	}*/
+
 
 	public pages.dashboard.member.ulayer.PaymentHistoryPage navigateToNewPaymentHistoryPage() {
 		String NewPayHistoryUrl = "content/dashboard/home/Payments.html";
@@ -211,6 +223,7 @@ public boolean changeUrlToNewPaymentHistoryPage() {
 		}
 		return null;
 	}
+
 
 
 	public BenefitDetailsPage clickviewdrugdetails() {
@@ -333,5 +346,75 @@ public boolean changeUrlToNewPaymentHistoryPage() {
 		menu.click();
 		pharamcyLocatorLink.click();
 	 }
-	
+	public PaymentHistoryPage changeUrlToNewPaymentHistoryPage() {
+
+		String NewPayHistoryUrl = "https://member.team-b-aarpmedicareplans.uhc.com/content/dashboard/home/payments.html";
+		String url = driver.getCurrentUrl();
+		driver.get(NewPayHistoryUrl);
+		try {
+			Thread.sleep(15000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return new PaymentHistoryPage(driver);
+	}
+	public boolean validateSetupAutomaticPayments() {
+		String NewPayHistoryUrl = "https://member.team-b-aarpmedicareplans.uhc.com/content/dashboard/home/payments.html";
+		String url = driver.getCurrentUrl();
+		driver.get(NewPayHistoryUrl);
+		try {
+			Thread.sleep(10000);
+			if (setupAutomaticPayments.getText().equalsIgnoreCase("Set Up Automatic Payments")
+					&& validatePaymentMethod.getText().equalsIgnoreCase("CMS-SSA/RRB")) {
+				System.out.println("setupAutomaticPayments and Payment methods exists" + setupAutomaticPayments
+						+ validatePaymentMethod);
+				return true;
+			} else
+				return false;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return false;
+		}
+	}
+
+	public boolean validateOneTimePaymentDtmValues() {
+		// TODO Auto-generated method stub
+		String NewPayHistoryUrl = "https://member.team-b-aarpmedicareplans.uhc.com/content/dashboard/home/payments.html";
+		String url = driver.getCurrentUrl();
+		driver.get(NewPayHistoryUrl);
+
+		try {
+			Thread.sleep(10000);
+			if (makeOneTimePayment.getAttribute("dtmid").equalsIgnoreCase("cta_payments") && makeOneTimePayment
+					.getAttribute("dtmname").equalsIgnoreCase("payments:fed:monthly billing:make one time payment")) {
+				return true;
+			} else
+				return false;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return false;
+		}
+		
+	}
+
+	public boolean validateSetupPaymentDtmValues() {
+		// TODO Auto-generated method stub
+		String NewPayHistoryUrl = "https://member.team-b-aarpmedicareplans.uhc.com/content/dashboard/home/payments.html";
+		String url = driver.getCurrentUrl();
+		driver.get(NewPayHistoryUrl);
+
+		try {
+			Thread.sleep(10000);
+			if (setupAutomaticPayments.getAttribute("dtmid").equalsIgnoreCase("cta_payments")
+					&& setupAutomaticPayments.getAttribute("dtmname")
+							.equalsIgnoreCase("payments:fed:monthly billing:set up automatic payments")) {
+				return true;
+			} else
+				return false;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return false;
+		}
+	}
 }

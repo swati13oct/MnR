@@ -26,6 +26,7 @@ import cucumber.table.DataTable;
 import gherkin.formatter.model.DataTableRow;
 import pages.mobile.member.ulayer.BenefitsSummaryPage;
 import pages.mobile.member.ulayer.LoginPage;
+import pages.mobile.member.ulayer.PaymentHistoryPage;
 
 /**
  * @author sunya
@@ -102,9 +103,9 @@ public class PaymentHistoryAarpStepDefinition {
 	public void i_navigate_to_the_payment_history_page() {
 		BenefitsSummaryPage benefitsSummaryPage = (BenefitsSummaryPage) getLoginScenario().getBean(PageConstants.BENEFITS_SUMMARY_PAGE);
 		
-		Boolean newPaymentHistoryPageFlag = benefitsSummaryPage.changeUrlToNewPaymentHistoryPage();
+		PaymentHistoryPage newPaymentHistoryPageFlag = benefitsSummaryPage.changeUrlToNewPaymentHistoryPage();
 
-		if (newPaymentHistoryPageFlag) {
+		if (newPaymentHistoryPageFlag!=null) {
 			System.out.println("New Payment page got loaded");
 			Assert.assertTrue(true);
 		} else {
