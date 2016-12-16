@@ -25,7 +25,7 @@ Given I am an UHC Individual member on the Dashboard site
     | Plan Type      | <planType>  |
  	| Member Type     | <memberType>|
  
-When the above plantype user logged in
+When the above plantype user logs in
 Then I navigate to new Payment History page 
 Then I can view the total amount due credit balance
 
