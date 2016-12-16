@@ -286,24 +286,6 @@ public class AccountHomePage extends UhcDriver {
 		return null;
 	}
 	
-	public DashboardPaymentOverview changeUrlToDashboardPaymentOverview() {
-		
-		//String NewPayHistoryUrl = "content/aarpm/home/my-plans/payments/PaymentsOverview-DashBoard.html";
-		String NewPayHistoryUrl = "content/dashboard/home/payments.html";
-		String url = driver.getCurrentUrl();
-		url = url.replace("home/my-account-home.html", NewPayHistoryUrl);
-		
-		driver.get(url);
-		if(driver.getTitle().contains("My Benefits")){
-			return new DashboardPaymentOverview(driver);
-		}
-		return null;
-		
-		
-
-	}
-
-
 	public PharmacySearchPage navigateToPharmacyLocator() {
 
 		pharmacyLocator.click();

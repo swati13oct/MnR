@@ -1,4 +1,8 @@
 {
-"totalAmountDue" : "$20.00   ",
-"paymentMethod" : "CMS-SSA/RRB"
+"header":"Premium Payments Overview",
+"labelTotalAmountDue":"Total Amount Due:",
+"PaymentMethod":"CMS-SSA/RRB",
+"MakePayment":"MAKE A ONE-TIME PAYMENT",
+"SetUpAutomaticPayments":"SET UP AUTOMATIC PAYMENTS",
+"TotalAmountDue":"$58.00"
 }

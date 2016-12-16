@@ -57,6 +57,11 @@ public class PaymentHistoryPage extends UhcDriver {
 	@FindBy(id="customSearch")
 	private WebElement customSearchtext;
 	
+	@FindBy(xpath="//a[@id='onetimepayment']")
+	private WebElement makeOneTimePaymentButton;
+	
+	@FindBy(xpath="//a[@id='autopayment']")
+	private WebElement automaticPaymentsButton;
 	
 	public PaymentHistoryPage(WebDriver driver) {
 		super(driver);
@@ -277,5 +282,30 @@ public class PaymentHistoryPage extends UhcDriver {
 				.get(CommonConstants.PAYMENT_HISTORY);
 
 		return newPaymentHistoryExpectedJson;
+	}
+	
+	
+	public boolean validateMakeOneTimePaymentButtonView() {
+		if(makeOneTimePaymentButton.getText().equalsIgnoreCase("Make a One-Time Payment"))
+		{
+			return true;
+		}
+		return false;
+	}
+
+	public boolean validateSetUpAutomaticPaymentsButtonView() {
+		if(automaticPaymentsButton.getText().equalsIgnoreCase("Set Up Automatic Payments"))
+		{
+			return true;
+		}
+		return false;
+	}
+	
+	public boolean validateEditAutomaticPaymentsButtonView() {
+		if(automaticPaymentsButton.getText().equalsIgnoreCase("Edit Automatic Payments"))
+		{
+			return true;
+		}
+		return false;
 	}
 }
