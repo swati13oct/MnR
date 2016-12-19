@@ -550,7 +550,7 @@ public class BenefitsAndCoverageUmsStepDefinition {
 			getLoginScenario().saveBean(PageConstants.FORMS_AND_RESOURCES_PAGE, formsAndResourcesPage);
 			/*Assert.assertTrue(true);
 			formsAndResourcesActualJson = formsAndResourcesPage.formsAndResourcesJson;*/
-		}
+		//}
 		//getLoginScenario().saveBean(FnRCommonConstants.FORMS_AND_RESOURCES_ACTUAL, formsAndResourcesActualJson);
 	}
 	
