@@ -315,5 +315,31 @@ public class PaymentHistoryAarpStepDefinition {
 		}
 	
 	}
+	 @Then("^validate DTM values for Make A One Time Payments button$")
+		public void navigate_to_the_new_Payment_History_page_validate_DTM_values_One_Time_Payment() {
+		 PaymentHistoryPage paymenthistorypage = (PaymentHistoryPage) getLoginScenario().getBean(PageConstants.PAYMENT_HISTORY_PAGE);
+		  
+
+			//
+			boolean flagvalue = paymenthistorypage.validatePaymentDtmValues();
+			if(flagvalue)
+				Assert.assertTrue(true);
+			else
+				Assert.assertTrue(false);
+		
+		}
+	 @Then("^validate DTM values for Set Up Automatic Payments button$")
+		public void navigate_to_the_new_Payment_History_page_validate_DTM_values_Setup_Payment() {
+
+		 PaymentHistoryPage planhistorypage = (PaymentHistoryPage) getLoginScenario()
+					.getBean(PageConstants.PAYMENT_HISTORY_PAGE);
+
+			boolean flagvalue = planhistorypage.validateSetupPaymentDtmValues();
+			if(flagvalue)
+				Assert.assertTrue(true);
+			else
+				Assert.assertTrue(false);
+		
+		} 
 
 }

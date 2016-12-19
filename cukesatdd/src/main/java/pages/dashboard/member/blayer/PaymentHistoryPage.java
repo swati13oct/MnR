@@ -42,9 +42,6 @@ public class PaymentHistoryPage extends UhcDriver {
 	@FindBy(id="customSearch")
 	public WebElement customSearchText;
 	
-	@FindBy(xpath = "/html/body/div[2]/div[2]/div/div/div/div/div/p[2]/span[2]")
-	private WebElement totalAmountDueLabel;
-	
 	public static final String PAYMENT_HISTORY_TABLE_XPATH ="/html/body/div[2]/div[3]/div/div/div/div/div/div[3]/div/table/tbody/tr";
 
 	public PaymentHistoryPage(WebDriver driver) {
@@ -223,10 +220,4 @@ public class PaymentHistoryPage extends UhcDriver {
 		return newPaymentHistoryExpectedJson;
 	}
 	
-	public void validateTotalAmountDueAndText(){
-		if(!totalAmountDueLabel.getText().contains("Total Amount Due")){
-			Assert.fail();
-		} 
-	}
-
 }

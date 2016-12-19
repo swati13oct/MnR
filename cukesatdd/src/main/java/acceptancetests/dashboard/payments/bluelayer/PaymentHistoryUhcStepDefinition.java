@@ -186,7 +186,6 @@ public class PaymentHistoryUhcStepDefinition {
 	@Then("^I can view the total amount due credit balance$")
 	public void viewTotalAmountDue(){
 		PaymentHistoryPage paymentHistoryPage = (PaymentHistoryPage) getLoginScenario().getBean(PageConstants.PAYMENT_HISTORY_PAGE);
-		paymentHistoryPage.validateTotalAmountDueAndText();
 		/*Get Actual response*/
 		JSONObject paymentHistoryActualJson = paymentHistoryPage.paymentHistoryJson;
 		/*Get expected response*/

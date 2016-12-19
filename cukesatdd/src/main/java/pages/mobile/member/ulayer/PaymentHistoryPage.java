@@ -25,23 +25,23 @@ import atdd.framework.UhcDriver;
 /**
  * ganilku1
  */
-public class PaymentHistoryPage extends UhcDriver{
-	
+public class PaymentHistoryPage extends UhcDriver {
+
 	@FindBy(xpath = "//a[@id='setupautopayment']")
 	private WebElement setupAutomaticPayments;
-	
-	@FindBy(xpath= "//span[text()='Payment Method:']/../following-sibling::div[1]")
+
+	@FindBy(xpath = "//span[text()='Payment Method:']/../following-sibling::div[1]")
 	private WebElement validatePaymentMethod;
-	
+
 	@FindBy(id = "onetimepayment")
 	private WebElement makeOneTimePayment;
-	
+
 	@FindBy(xpath = "//span[contains(text(),'Total Amount Due')]")
 	private WebElement labelTotalAmoutDue;
 
-	@FindBy(xpath ="//div[@id='paymentOverviewApp']//h1")
+	@FindBy(xpath = "//div[@id='paymentOverviewApp']//h1")
 	private WebElement header;
-	
+
 	private PageData paymentHistoryPage;
 
 	public JSONObject paymentHistoryPageJson;
@@ -49,7 +49,7 @@ public class PaymentHistoryPage extends UhcDriver{
 	private PageData browserCheckData;
 
 	private JSONObject browserCheckJson;
-	
+
 	public PaymentHistoryPage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
@@ -64,8 +64,7 @@ public class PaymentHistoryPage extends UhcDriver{
 		validate(header);
 		JSONObject jsonObject = new JSONObject();
 		for (String key : paymentHistoryPage.getExpectedData().keySet()) {
-			List<WebElement> elements = findElements(paymentHistoryPage
-					.getExpectedData().get(key));
+			List<WebElement> elements = findElements(paymentHistoryPage.getExpectedData().get(key));
 			System.out.println(elements);
 			if (elements.size() == 1) {
 				if (validate(elements.get(0))) {
@@ -102,95 +101,66 @@ public class PaymentHistoryPage extends UhcDriver{
 
 		}
 		paymentHistoryPageJson = jsonObject;
-		
-		System.out.println("paymentHistoryPageJson----->"+paymentHistoryPageJson);
+
+		System.out.println("paymentHistoryPageJson----->" + paymentHistoryPageJson);
 	}
-	
+
 	public JSONObject getExpectedData(Map<String, JSONObject> expectedDataMap) {
 
-		/*JSONObject globalExpectedJson = expectedDataMap
-				.get(CommonConstants.GLOBAL);*/
-		JSONObject PaymentPageExpectedJson = expectedDataMap
-				.get(CommonConstants.PAYMENT_HISTORY_MOBILE);
-		/*accountHomeExpectedJson = CommonUtility.mergeJson(
-				accountHomeExpectedJson, globalExpectedJson);*/
+		
+		JSONObject PaymentPageExpectedJson = expectedDataMap.get(CommonConstants.PAYMENT_HISTORY_MOBILE);
 		return PaymentPageExpectedJson;
 	}
 
-	
-public boolean validateSetupAutomaticPayments() {
-	
-		
-		try
-		{
-		Thread.sleep(10000);
-		if(setupAutomaticPayments.getText().equalsIgnoreCase("Set Up Automatic Payments") && validatePaymentMethod.getText().equalsIgnoreCase("Monthly Bill"))
-		{
-		   System.out.println("setupAutomaticPayments and Payment methods exists"+setupAutomaticPayments+validatePaymentMethod);
-			return true;
-		}
-			else
-			return false;
-		}
-		catch(Exception e)
-		{
+	public boolean validateSetupAutomaticPayments() {
+
+		try {
+			Thread.sleep(10000);
+			if (setupAutomaticPayments.getText().equalsIgnoreCase("Set Up Automatic Payments")
+					&& validatePaymentMethod.getText().equalsIgnoreCase("Monthly Bill")) {
+				System.out.println("setupAutomaticPayments and Payment methods exists" + setupAutomaticPayments
+						+ validatePaymentMethod);
+				return true;
+			} else
+				return false;
+		} catch (Exception e) {
 			e.printStackTrace();
 			return false;
 		}
-		/*if (paymentsHeading.getText().contains("Premium Payments Overview")) {
-			return true;
-		}
-		return false;*/
-	}
-
-public boolean validateOneTimePaymentDtmValues() {
-	// TODO Auto-generated method stub
-	try
-	{
-	Thread.sleep(10000);
-	if(makeOneTimePayment.getAttribute("dtmid").equalsIgnoreCase("cta_payments") && makeOneTimePayment.getAttribute("dtmname").equalsIgnoreCase("payments:fed:monthly billing:make one time payment"))
-	{
-	   System.out.println("Dtmid"+" "+makeOneTimePayment.getAttribute("dtmid")+"dtm value"+makeOneTimePayment.getAttribute("dtmname"));
-		return true;
-	}
-		else
-		return false;
-	}
-	catch(Exception e)
-	{
-		e.printStackTrace();
-		return false;
-	}
-	/*if (paymentsHeading.getText().contains("Premium Payments Overview")) {
-		return true;
-	}
-	return false;*/
-}
-public boolean validateSetupPaymentDtmValues() {
-	// TODO Auto-generated method stub
-	try
-	{
-	Thread.sleep(10000);
-	if(setupAutomaticPayments.getAttribute("dtmid").equalsIgnoreCase("cta_payments") && setupAutomaticPayments.getAttribute("dtmname").equalsIgnoreCase("payments:fed:monthly billing:set up automatic payments"))
-	{
-		System.out.println("dtmid"+ " " + setupAutomaticPayments.getAttribute("dtmid")+"dtmname"+ " " + setupAutomaticPayments.getAttribute("dtmname"));
-	   //System.out.println("setupAutomaticPayments and Payment methods exists"+setupAutomaticPayments+validatePaymentMethod);
-		return true;
-	}
-		else
-		return false;
-	}
-	catch(Exception e)
-	{
-		e.printStackTrace();
-		return false;
-	}
-	/*if (paymentsHeading.getText().contains("Premium Payments Overview")) {
-		return true;
-	}
-	return false;*/
-}
-
-
 		
+	}
+
+	public boolean validateOneTimePaymentDtmValues() {
+		// TODO Auto-generated method stub
+		try {
+			Thread.sleep(10000);
+			if (makeOneTimePayment.getAttribute("dtmid").equalsIgnoreCase("cta_payments") && makeOneTimePayment
+					.getAttribute("dtmname").equalsIgnoreCase("payments:fed:monthly billing:make one time payment")) {
+				System.out.println("Dtmid" + " " + makeOneTimePayment.getAttribute("dtmid") + "dtm value"
+						+ makeOneTimePayment.getAttribute("dtmname"));
+				return true;
+			} else
+				return false;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return false;
+		}
+	}
+	public boolean validateSetupPaymentDtmValues() {
+		// TODO Auto-generated method stub
+		try {
+			Thread.sleep(10000);
+			if (setupAutomaticPayments.getAttribute("dtmid").equalsIgnoreCase("cta_payments")
+					&& setupAutomaticPayments.getAttribute("dtmname")
+							.equalsIgnoreCase("payments:fed:monthly billing:set up automatic payments")) {
+				System.out.println("dtmid" + " " + setupAutomaticPayments.getAttribute("dtmid") + "dtmname" + " "
+						+ setupAutomaticPayments.getAttribute("dtmname"));
+				return true;
+			} else
+				return false;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return false;
+		}
+	}
 }
