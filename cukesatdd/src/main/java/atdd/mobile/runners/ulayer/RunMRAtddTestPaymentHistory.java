@@ -12,8 +12,8 @@ import cucumber.junit.Cucumber;
  *
  */
 @RunWith(Cucumber.class)
-@Cucumber.Options(glue = { "atdd.framework","acceptancetests.mobile.paymenthistory.ulayer" }, 
-		features = { "feature/mobile/ulayer" }, 
+@Cucumber.Options(glue = { "atdd.framework","acceptancetests.mobile.dashboard.payments" }, 
+		features = { "feature/mobile/dashboard" }, 
 		format = {
 		"pretty", "html:reports/test-report" }, tags ={"@payment_history_mobile"})
 public class RunMRAtddTestPaymentHistory {

@@ -66,6 +66,9 @@ public class PaymentHistoryPage extends UhcDriver {
 	@FindBy(id="customSearch")
 	private WebElement customSearchtext;
 	
+	@FindBy(id="paymentTable")
+	public WebElement paymentTableData;
+	
 	@FindBy(xpath="//a[@id='onetimepayment']")
 	private WebElement makeOneTimePaymentButton;
 	
@@ -186,7 +189,7 @@ public class PaymentHistoryPage extends UhcDriver {
 			if(CommonUtility.checkPageIsReady(driver)){
 				CommonUtility.waitForPageLoad(driver, customSearchtext, 10); 
 				Assert.assertEquals(
-						newPaymentHistoryExpectedJson.get("customSearchText"),
+						newPaymentHistoryExpectedJson.get("filtertext2"),
 						customSearchtext.getText());
 			}
 		} catch (Exception e) {
@@ -262,6 +265,19 @@ public class PaymentHistoryPage extends UhcDriver {
 
 			}
 	
+	public void validatePaymentHistoryTableData(
+			JSONObject newPaymentHistoryExpectedJson) {
+		System.out.println(paymentTableData.getText());
+		try {
+			Assert.assertEquals(
+					newPaymentHistoryExpectedJson.get("paymentTableData"),
+					paymentTableData.getText());
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
 	
 	
 	@Override
@@ -288,7 +304,7 @@ public class PaymentHistoryPage extends UhcDriver {
 	public JSONObject getExpectedData(Map<String, JSONObject> expectedDataMap) {
 
 		JSONObject newPaymentHistoryExpectedJson = expectedDataMap
-				.get(CommonConstants.PAYMENT_HISTORY);
+				.get(CommonConstants.PAYMENT_HISTORY_MOBILE);
 
 		return newPaymentHistoryExpectedJson;
 	}

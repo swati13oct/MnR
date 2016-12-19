@@ -97,9 +97,11 @@ public class CommonConstants {
 	public static final String PAYMENT_HISTORY_MOBILE = "payment_history_mobile";
 
 	public static final String PAYMENT_HISTORY_MOBILE_DATA = "paymenthistory_mobile.json";
-
-	public static final String PAYMENT_HISTORY_BLUELAYER_DIRECTORY_MOBILE = "/jsonresponse/mobile/member/bluelayer/payment-history/";
-
+	
+	public static final String  PAYMENT_HISTORY_BLUELAYER_DIRECTORY_MOBILE ="/jsonresponse/mobile/member/bluelayer/payment-history/";
+	
+	public static final String  DASHBOARD_PAYMENT_HISTORY_ULAYER_DIRECTORY_MOBILE ="/jsonresponse/mobile/member/ulayer/payment-history/";
+	
 	public static final Page[] PAGES = { new Page(CommonConstants.GLOBAL, CommonConstants.GLOBAL_DIRECTORY),
 			new Page(CommonConstants.MY_ACCOUNT_HOME, CommonConstants.MY_ACCOUNT_HOME_DIRECTORY),
 			new Page(CommonConstants.MY_ACCOUNT_HOME_COMBO, CommonConstants.MY_ACCOUNT_HOME_COMBO_DIRECTORY),
@@ -144,8 +146,8 @@ public class CommonConstants {
 			new Page(CommonConstants.BENEFITS_DETAIL, CommonConstants.BENEFITS_DETAIL_DIRECTORY),
 			new Page(CommonConstants.PLAN_COMPARE, CommonConstants.PLAN_COMPARE_ULAYER_DIRECTORY),
 			new Page(CommonConstants.ADD_PLAN_CONFIRMATION, CommonConstants.ADD_PLAN_CONFIRMATION_ULAYER_DIRECTORY),
-			new Page(CommonConstants.PAYMENT_HISTORY_MOBILE, CommonConstants.PAYMENT_HISTORY_BLUELAYER_DIRECTORY_MOBILE)
-
+			new Page(CommonConstants.PAYMENT_HISTORY_MOBILE,
+					CommonConstants.DASHBOARD_PAYMENT_HISTORY_ULAYER_DIRECTORY_MOBILE)
 	};
 
 	public static final String BENEFITS_SUMMARY_DIRECTORY = "/jsonresponse/mobile/member/ulayer/benefits-summary/";

@@ -57,6 +57,9 @@ public class LoginPage extends UhcDriver{
 
 	@Override
 	public void openAndValidate() {
+		if(MRScenario.environment.equals("team-c")){
+			PAGE_URL=MRConstants.AARP_MOBILE_TEAM_C_URL;
+		}
 		start(PAGE_URL);
 		validate(userNameField);
 		validate(passwordField);
@@ -78,7 +81,13 @@ public class LoginPage extends UhcDriver{
 	        Alert alert2 = driver.switchTo().alert();
 	        alert2.accept();
 	        }
-		
+		if (MRScenario.environment.equals("team-c")) {
+
+			Alert alert = driver.switchTo().alert();
+			alert.accept();
+			Alert alert1 = driver.switchTo().alert();
+			alert1.accept();
+		}
 		if(currentUrl().contains("mobile/home/my-benefit-summary.html"))
 		{
 			return new BenefitsSummaryPage(driver);
