@@ -40,6 +40,8 @@ public class BenefitsAndCoverageUmsStepDefinition {
 
 	@Autowired
 	MRScenario loginScenario;
+	
+	private String userName=null;
 
 	public MRScenario getLoginScenario() {
 		return loginScenario;
