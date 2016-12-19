@@ -541,7 +541,7 @@ public class BenefitsAndCoverageUmsStepDefinition {
 		JSONObject formsAndResourcesExpectedJson = formsAndResourcesPage.getExpectedData(expectedDataMap);
 		getLoginScenario().saveBean(FnRCommonConstants.FORMS_AND_RESOURCES_EXPECTED, formsAndResourcesExpectedJson);
 */
-		/* Actual data */
+		/* Actual data *
 		if (formsAndResourcesPage != null) {
 			getLoginScenario().saveBean(PageConstants.FORMS_AND_RESOURCES_PAGE, formsAndResourcesPage);
 			/*Assert.assertTrue(true);
