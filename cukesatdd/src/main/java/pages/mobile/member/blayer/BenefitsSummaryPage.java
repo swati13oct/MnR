@@ -20,6 +20,7 @@ import org.openqa.selenium.support.PageFactory;
 import acceptancetests.atdd.data.PageData;
 import acceptancetests.atdd.mobile.data.CommonConstants;
 import acceptancetests.atdd.util.CommonUtility;
+import pages.dashboard.member.blayer.PaymentHistoryPage;
 
 /**
  * @author pnampall
@@ -401,9 +402,6 @@ public class BenefitsSummaryPage extends PharmacyLocator{
 
 	public boolean validateSetupAutomaticPayments() {
 
-		String NewPayHistoryUrl = "https://member.team-b-uhcmedicaresolutions.uhc.com/content/dashboard/home/payments.html";
-		String url = driver.getCurrentUrl();
-		driver.get(NewPayHistoryUrl);
 		try {
 			Thread.sleep(10000);
 			if (setupAutomaticPayments.getText().equalsIgnoreCase("Set Up Automatic Payments")

@@ -18,6 +18,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import pages.member.bluelayer.AccountHomePage;
 import pages.member.bluelayer.LoginPage;
+import pages.mobile.member.blayer.BenefitsSummaryPage;
 import pages.dashboard.member.blayer.PaymentHistoryPage;
 import cucumber.annotation.en.And;
 import cucumber.annotation.en.Given;
@@ -214,5 +215,128 @@ public class PaymentHistoryUhcStepDefinition {
         }
 
 	}
+	@Given("^I am an UHC member on the Dashboard site in mobile site$")
+	public void I_am_an_AARP_Individual_member_on_the_Dashboard_site(DataTable memberAttributes) {
+		List<DataTableRow> memberAttributesRow = memberAttributes.getGherkinRows();
+		Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+					memberAttributesRow.get(i).getCells().get(1));
+		}
+
+		Set<String> memberAttributesKeySet = memberAttributesMap.keySet();
+		List<String> desiredAttributes = new ArrayList<String>();
+		for (Iterator<String> iterator = memberAttributesKeySet.iterator(); iterator.hasNext();) {
+			{
+				String key = iterator.next();
+				desiredAttributes.add(memberAttributesMap.get(key));
+			}
+
+		}
+		System.out.println("desiredAttributes.." + desiredAttributes);
+
+		Map<String, String> loginCreds = loginScenario.getUMSMemberWithDesiredAttributes(desiredAttributes);
+
+		String userName = null;
+		String pwd = null;
+		if (loginCreds == null) {
+			// no match found
+
+			System.out.println("Member Type data could not be setup !!!");
+			Assert.fail("unable to find a " + desiredAttributes + " member");
+
+		} else {
+			userName = loginCreds.get("user");
+			pwd = loginCreds.get("pwd");
+			System.out.println("User is..." + userName);
+			System.out.println("Password is..." + pwd);
+			getLoginScenario().saveBean(LoginCommonConstants.USERNAME, userName);
+			getLoginScenario().saveBean(LoginCommonConstants.PASSWORD, pwd);
+		}
+
+	}
+
+	@When("^plantype user logs in mobile in UHC Site$")
+	public void the_above_plantype_user_logs_in_mobile() {
+		String userName = (String) getLoginScenario().getBean(LoginCommonConstants.USERNAME);
+		String pwd = (String) getLoginScenario().getBean(LoginCommonConstants.PASSWORD);
+
+		WebDriver wd = getLoginScenario().getMobileWebDriver();
+		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
+		pages.mobile.member.blayer.LoginPage loginPage = new pages.mobile.member.blayer.LoginPage(wd);
+
+		BenefitsSummaryPage benefitsSummaryPage = loginPage.loginWith(userName, pwd);
+
+		getLoginScenario().saveBean(PageConstants.BENEFITS_SUMMARY_PAGE, benefitsSummaryPage);
+
+	}
+	@When("^navigate to the new Payment History page in mobile site$")
+	public void i_navigate_to_the_payment_history_page_mobile_site() {
+		BenefitsSummaryPage benefitsSummaryPage = (BenefitsSummaryPage) getLoginScenario()
+				.getBean(PageConstants.BENEFITS_SUMMARY_PAGE);
+
+		 PaymentHistoryPage newPaymentHistoryPageFlag = benefitsSummaryPage.changeUrlToNewPaymentHistoryPage();
+
+		if (newPaymentHistoryPageFlag != null) {
+			getLoginScenario().saveBean(PageConstants.PAYMENT_HISTORY_PAGE, newPaymentHistoryPageFlag);
+			System.out.println("New Payment page got loaded");
+			Assert.assertTrue(true);
+		} else {
+			System.out.println("Error:Loading ion new payment page");
+		}
+
+	}
+
+
+	 @Then("^validate setup automatic payment$")
+	public void validate_setup_automatic_payment() {
+		 
+		 PaymentHistoryPage newPaymentHistoryPage = (PaymentHistoryPage) getLoginScenario()
+					.getBean(PageConstants.PAYMENT_HISTORY_PAGE);
+		boolean flagvalue = newPaymentHistoryPage.validateSetupAutomaticPayments();
+		if(flagvalue)
+			Assert.assertTrue(true);
+		else
+			Assert.assertTrue(false);
+	
+	} 
+
+	@Then("^validate Non setup automatic payment$")
+	public void validate_non_setup_automatic_payment() {
+		 
+		 PaymentHistoryPage newPaymentHistoryPage = (PaymentHistoryPage) getLoginScenario()
+					.getBean(PageConstants.PAYMENT_HISTORY_PAGE);
+
+		String userName = (String) getLoginScenario().getBean(LoginCommonConstants.USERNAME);
+		System.out.println(userName + "userName");
+		Map<String, JSONObject> expectedDataMap = loginScenario.getExpectedJson(userName);
+		JSONObject paymentHistoryExpectedJson = expectedDataMap.get(CommonConstants.NEW_PAYMENT_HISTORY_EXPECTED_JSON);
+
+		JSONObject paymentHistoryActualJson = newPaymentHistoryPage.paymentHistoryJson;
+		try {
+			JSONAssert.assertEquals(paymentHistoryExpectedJson, paymentHistoryActualJson, true);
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}
+	}
+	@Then("^validate Credit Balance when the balance is greater than zero$")
+	public void validate_credit_balance() {
+		 
+		 PaymentHistoryPage newPaymentHistoryPage = (PaymentHistoryPage) getLoginScenario()
+					.getBean(PageConstants.PAYMENT_HISTORY_PAGE);
+		String userName = (String) getLoginScenario().getBean(LoginCommonConstants.USERNAME);
+		System.out.println(userName + "userName");
+		Map<String, JSONObject> expectedDataMap = loginScenario.getExpectedJson(userName);
+		JSONObject paymentHistoryExpectedJson = expectedDataMap.get(CommonConstants.NEW_PAYMENT_HISTORY_EXPECTED_JSON);
+
+		JSONObject paymentHistoryActualJson = newPaymentHistoryPage.paymentHistoryJson;
+		try {
+			JSONAssert.assertEquals(paymentHistoryExpectedJson, paymentHistoryActualJson, true);
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}
+	}
+	
 	
 }
