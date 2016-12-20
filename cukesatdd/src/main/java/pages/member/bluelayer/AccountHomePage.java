@@ -124,6 +124,13 @@ public class AccountHomePage extends UhcDriver {
 	@FindBy(xpath = "/html/body/div[2]/div[2]/div/div[1]/div/div/div/h1")
 	private WebElement paymentsHeading;
 	
+	@FindBy(xpath = "//*[@id='gogreenlogin_box']/div[4]/div/a")
+	private WebElement gogreenPopupClose;
+	
+
+	@FindBy(xpath = "//*[@id='gogreenlogin_box']/div[4]/div")
+	private WebElement gogreenPopup;
+	
 	private PageData myAccountHome;
 
 	public JSONObject accountHomeJson;
@@ -515,4 +522,32 @@ public ContactUsPage navigatesToContactUsPage() {
 		}
 		return null;
 	}
+	
+	public boolean validateGogreenPopup(){
+		boolean flag=false;
+		try {
+			flag= validate(gogreenPopup);
+			return flag;
+		} catch (Exception e) {
+			return flag;
+		}		
+	}
+	
+	public void closeGogreenPopup(){
+		gogreenPopupClose.click();
+	}
+	
+	public FormsandresourcesPage navigateToFormsandResourceUmsPage() {
+
+		formsAndResourcesLink.click();
+		CommonUtility.checkPageIsReady(driver);
+		if (driver.getTitle().equalsIgnoreCase(
+				"UnitedHealthcare Medicare Solutions | Forms and Resources")) {
+			return new FormsandresourcesPage(driver);
+		} else
+
+			return null;
+
+	}
+
 }

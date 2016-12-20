@@ -577,4 +577,44 @@ Examples:
 #| PDP      | Group    |
 | SSUP     | Group    |
 
+@hospital       
+Scenario Outline: Verify benefits and coverage in UMS site for mapd and ma non lis with hospital visits
+Given registered UHC with following details for plan benefits and coverage flow in UMS site
+| Plan Type          | <planType>                |
+| Copay Category     | <copayCategory>           | 
+| Member Type				 | <Member Type>						 |
+When the user view forms and resources in UMS site
+Then the user view benefits and coverage in UMS site
+And the user validates the content on benefits and coverage page    	 
+Examples:
+        |planType  | copayCategory  |Member Type     |
+        | SSRD     | NON LIS        | Group						| 
 
+@outofp       
+Scenario Outline: Verify benefits and coverage in UMS site for mapd and ma non lis with out of pocket
+Given registered UHC with following details for plan benefits and coverage flow in UMS site
+| Plan Type          | <planType>                |
+| Copay Category     | <copayCategory>           | 
+| Member Type				 | <Member Type>						 |
+When the user view forms and resources in UMS site
+Then the user view benefits and coverage in UMS site
+And the user validates the content on benefits and coverage page    	 
+Examples:
+        |planType  | copayCategory  |Member Type     |
+        | SSRD     |  NON LIS        | Group						| 
+        
+
+
+@officev      
+Scenario Outline: Verify benefits and coverage in UMS site for mapd and ma non lis with office visits
+Given registered UHC with following details for plan benefits and coverage flow in UMS site
+| Plan Type          | <planType>                |
+| Copay Category     | <copayCategory>           | 
+| Member Type				 | <Member Type>						 |
+| Plan Name					 | <plan Name>
+When the user view forms and resources in UMS site
+Then the user view benefits and coverage in UMS site
+And the user validates the content on benefits and coverage page    	 
+Examples:
+        |planType  | copayCategory  |Member Type     | plan Name |
+        | SSRD     | NON LIS        | Group					 | HMO       |

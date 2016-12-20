@@ -47,7 +47,25 @@
 "ambulanceCoins":{
 "identifier":"xpath",
 "elementName":"//*[@id='planBenefitsApp']/div/div/div[3]/div/div/section/div/div/h1"
+},
+"hospitalVisit":{
+"identifier":"xpath",
+"elementName":"//*[@id='planBenefitsApp']/div[3]/div[2]/div"
+},
+"officeVisit":{
+"identifier":"xpath",
+"elementName":"//*[@id='planBenefitsApp']/div[3]/div[1]/div"
+},
+"inNetwork":{
+"identifier":"xpath",
+"elementName":"//*[@id='planBenefitsApp']/div[5]/div/div[2]/div[1]/div"
+},
+"outOfNetwork":{
+"identifier":"xpath",
+"elementName":"//*[@id='planBenefitsApp']/div[5]/div/div[2]/div[2]/div"
 }
+
+
 
 
 }
