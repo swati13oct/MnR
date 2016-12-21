@@ -29,6 +29,17 @@ public class PaymentHistoryPage extends UhcDriver {
 	@FindBy(id="custom-to")
 	public WebElement customSearchTo;
 	
+	@FindBy(xpath = "//span[contains(text(),'Total Amount Due')]")
+	private WebElement labelTotalAmoutDue;
+
+	@FindBy(xpath = "//div[@id='paymentOverviewApp']//h1")
+	private WebElement header;
+
+	@FindBy(xpath = "//span[text()='Payment Method:']/../following-sibling::div[1]")
+	private WebElement validatePaymentMethod;
+
+	@FindBy(xpath = "//a[text()='Set Up Automatic Payments']")
+	private WebElement setupAutomaticPayments;
 	
 	@FindBy(xpath="/html/body/div[2]/div[3]/div/div/div/div/div/form/div/div/div[2]/div[2]/div[3]/button")
 	public WebElement customSearchButton;
@@ -239,5 +250,35 @@ public class PaymentHistoryPage extends UhcDriver {
 
 		return newPaymentHistoryExpectedJson;
 	}
-	
+	public PaymentHistoryPage changeUrlToNewPaymentHistoryPage() {
+
+		String NewPayHistoryUrl = "https://member.team-b-uhcmedicaresolutions.uhc.com/content/dashboard/home/payments.html";
+		driver.get(NewPayHistoryUrl);
+		try {
+			Thread.sleep(15000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return new PaymentHistoryPage(driver);
+		}
+
+	public boolean validateSetupAutomaticPayments() {
+
+		String NewPayHistoryUrl = "https://member.team-b-uhcmedicaresolutions.uhc.com/content/dashboard/home/payments.html";
+		driver.get(NewPayHistoryUrl);
+		try {
+			Thread.sleep(10000);
+			if (setupAutomaticPayments.getText().equalsIgnoreCase("Set Up Automatic Payments")
+					&& validatePaymentMethod.getText().equalsIgnoreCase("Monthly Bill")) {
+				System.out.println("setupAutomaticPayments and Payment methods exists" + setupAutomaticPayments
+						+ validatePaymentMethod);
+				return true;
+			} else
+				return false;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return false;
+		}
+	}
 }

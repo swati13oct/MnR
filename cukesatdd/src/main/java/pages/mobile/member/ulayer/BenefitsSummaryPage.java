@@ -19,6 +19,7 @@ import acceptancetests.atdd.data.PageData;
 import acceptancetests.atdd.mobile.data.CommonConstants;
 import acceptancetests.atdd.util.CommonUtility;
 import atdd.framework.UhcDriver;
+import pages.dashboard.member.ulayer.PaymentHistoryPage;
 import pages.mobile.member.blayer.CustomerServicePage;
 import pages.mobile.member.blayer.MyDrugBenefitDetailsPage;
 import pages.mobile.member.blayer.MyPlanBenefitDetailsPage;
