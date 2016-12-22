@@ -338,5 +338,17 @@ public class PaymentHistoryUhcStepDefinition {
 		}
 	}
 	
+	@And("I can view Making your payments header and text in UMS Site")
+	public void i_can_view_a_Making_your_payments_header_and_text_in_UMS_Site(){
+		PaymentHistoryPage paymentHistoryPage = (PaymentHistoryPage) getLoginScenario().getBean(PageConstants.PAYMENT_HISTORY_PAGE);
+		JSONObject newPaymentHistoryExpectedJson = (JSONObject) getLoginScenario().getBean(CommonConstants.NEW_PAYMENT_HISTORY_EXPECTED_JSON); 
+		paymentHistoryPage.validateMakeYourPaymentsHeaderAndText(newPaymentHistoryExpectedJson);
+	}
 	
+	@And("I can view LEARN MORE ABOUT WAYS TO PAY text that can expand in UMS Site")
+	public void i_can_view_a_Learn_More_about_ways_to_pay_text_that_can_expand(){
+		PaymentHistoryPage paymentHistoryPage = (PaymentHistoryPage) getLoginScenario().getBean(PageConstants.PAYMENT_HISTORY_PAGE);
+		JSONObject newPaymentHistoryExpectedJson = (JSONObject) getLoginScenario().getBean(CommonConstants.NEW_PAYMENT_HISTORY_EXPECTED_JSON); 
+		paymentHistoryPage.validateLearnMoreWaysAboutLinkAndContent(newPaymentHistoryExpectedJson);
+	}
 }

@@ -512,7 +512,7 @@ public ContactUsPage navigatesToContactUsPage() {
 	}
 	
 	public pages.dashboard.member.blayer.PaymentHistoryPage navigateToNewPaymentHistoryPage() {
-		String NewPayHistoryUrl = "content/dashboard/home/payments.html";
+		String NewPayHistoryUrl = "content/dashboard/home/Payments.html";
 		String url = driver.getCurrentUrl();
 		url = url.replace("home/my-account-home.html", NewPayHistoryUrl);
 		driver.get(url);
