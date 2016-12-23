@@ -13,6 +13,8 @@ And  I can view a View Payments For Custom Search when I have selected Custom Se
 | start date | <startDate> |
 | end date | <endDate> |
 And I can view a Payment table columns in UMS Site
+And I can view Making your payments header and text in UMS Site
+And I can view LEARN MORE ABOUT WAYS TO PAY text that can expand in UMS Site
 
 Examples:
 
