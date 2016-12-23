@@ -47,6 +47,18 @@
 "ambulanceCoins":{
 "identifier":"xpath",
 "elementName":"//*[@id='planBenefitsApp']/div/div/div[3]/div/div/section/div/div/h1"
+},
+"outPatientSurgery":{
+"identifier":"className", 
+"elementName":"outpatientsurgery-atdd"
+},
+"outPatientSurgeryTier1":{
+"identifier":"className", 
+"elementName":"outpatientsurgery-tier1-atdd"
+},
+"outPatientSurgeryTier2":{
+"identifier":"className", 
+"elementName":"outpatientsurgery-tier2-atdd"
 }
 
 
