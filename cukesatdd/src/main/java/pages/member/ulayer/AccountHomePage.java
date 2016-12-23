@@ -270,7 +270,7 @@ public class AccountHomePage extends UhcDriver {
 
 	public pages.dashboard.member.ulayer.PaymentHistoryPage changeUrlToNewPaymentHistoryPage() {
 
-		String NewPayHistoryUrl = "content/dashboard/home/payments.html";
+		String NewPayHistoryUrl = "content/dashboard/home/Payments.html";
 
 		String url = driver.getCurrentUrl();
 		url = url.replace("home/my-account-home.html", NewPayHistoryUrl);

@@ -27,7 +27,6 @@ import acceptancetests.atdd.data.CommonConstants;
 import acceptancetests.atdd.data.member.PageConstants;
 import acceptancetests.login.data.LoginCommonConstants;
 import atdd.framework.MRScenario;
-import cucumber.annotation.After;
 import cucumber.annotation.en.And;
 import cucumber.annotation.en.Given;
 import cucumber.annotation.en.Then;
@@ -184,7 +183,6 @@ public class PaymentHistoryAarpStepDefinition {
 				.getBean(CommonConstants.NEW_PAYMENT_HISTORY_EXPECTED_JSON);
 		paymentHistoryPage.validatePaymentHistoryTableHeader(newPaymentHistoryExpectedJson);
 		paymentHistoryPage.validatefiltertext(newPaymentHistoryExpectedJson);
-		// paymentHistoryPage.validateCustomSearchfiltertext(newPaymentHistoryExpectedJson);
 	}
 
 	@And("^I can view a Payment table columns in AARP Site$")
@@ -196,14 +194,22 @@ public class PaymentHistoryAarpStepDefinition {
 		paymentHistoryPage.validatePaymentHistoryTableColumns(newPaymentHistoryExpectedJson);
 	}
 
-	@After
-	public void tearDown() {
-
-		WebDriver wd = (WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
-		wd.quit();
-		getLoginScenario().flushBeans();
+	@And("^I can view a Making your payments header and text in AARP Site$")
+	public void I_can_see_makingyourpaymentsheaderntext()
+	{
+		PaymentHistoryPage paymentHistoryPage = (PaymentHistoryPage) getLoginScenario().getBean(PageConstants.PAYMENT_HISTORY_PAGE);
+		JSONObject newPaymentHistoryExpectedJson = (JSONObject) getLoginScenario().getBean(CommonConstants.NEW_PAYMENT_HISTORY_EXPECTED_JSON); 
+		paymentHistoryPage.makingyourpaymentsheaderntext(newPaymentHistoryExpectedJson);
 	}
-
+	
+	@And("^I can view a LEARN MORE ABOUT WAYS TO PAY text that can expand in AARP Site$")
+	public void I_can_See_learn_about_paylink()
+	{
+		PaymentHistoryPage paymentHistoryPage = (PaymentHistoryPage) getLoginScenario().getBean(PageConstants.PAYMENT_HISTORY_PAGE);
+		JSONObject newPaymentHistoryExpectedJson = (JSONObject) getLoginScenario().getBean(CommonConstants.NEW_PAYMENT_HISTORY_EXPECTED_JSON); 
+		paymentHistoryPage.learningpaymentslink(newPaymentHistoryExpectedJson);
+	}
+	
 	@Then("^validate Payment Method value$")
 	public void validatePaymentMethodValue() {
 		PaymentHistoryPage paymentHistoryPage = (PaymentHistoryPage) getLoginScenario()

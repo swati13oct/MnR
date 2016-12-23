@@ -124,7 +124,7 @@ public class PaymentHistoryAarpStepDefinition {
 			/* Get expected data */
 			Map<String, JSONObject> expectedDataMap = (Map<String, JSONObject>) getLoginScenario().getBean(CommonConstants.EXPECTED_DATA_MAP); 
 			JSONObject paymentHistoryExpectedJson = paymentHistoryPage
-					.getExpectedData(expectedDataMap);
+					.getExpectedDataMobile(expectedDataMap);
 			System.out.println("page loaded succesfully");
 			getLoginScenario().saveBean(PageConstants.PAYMENT_HISTORY_PAGE, paymentHistoryPage);
 			getLoginScenario().saveBean(CommonConstants.NEW_PAYMENT_HISTORY_EXPECTED_JSON, paymentHistoryExpectedJson);
@@ -181,12 +181,20 @@ public class PaymentHistoryAarpStepDefinition {
 	}
 	
 	
-	@After
-	public void tearDown() {
-
-		WebDriver wd = (WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
-		wd.quit();
-		getLoginScenario().flushBeans();
+	@And("^I can view a Making your payments header and text in AARP Site$")
+	public void I_can_see_makingyourpaymentsheaderntext()
+	{
+		PaymentHistoryPage paymentHistoryPage = (PaymentHistoryPage) getLoginScenario().getBean(PageConstants.PAYMENT_HISTORY_PAGE);
+		JSONObject newPaymentHistoryExpectedJson = (JSONObject) getLoginScenario().getBean(CommonConstants.NEW_PAYMENT_HISTORY_EXPECTED_JSON); 
+		paymentHistoryPage.makingyourpaymentsheaderntext(newPaymentHistoryExpectedJson);
+	}
+	
+	@And("^I can view a LEARN MORE ABOUT WAYS TO PAY text that can expand in AARP Site$")
+	public void I_can_See_learn_about_paylink()
+	{
+		PaymentHistoryPage paymentHistoryPage = (PaymentHistoryPage) getLoginScenario().getBean(PageConstants.PAYMENT_HISTORY_PAGE);
+		JSONObject newPaymentHistoryExpectedJson = (JSONObject) getLoginScenario().getBean(CommonConstants.NEW_PAYMENT_HISTORY_EXPECTED_JSON); 
+		paymentHistoryPage.learningpaymentslink(newPaymentHistoryExpectedJson);
 	}
 
 }
