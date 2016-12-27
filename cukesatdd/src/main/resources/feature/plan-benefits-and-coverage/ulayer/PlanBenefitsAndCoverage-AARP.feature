@@ -728,9 +728,35 @@ Feature: To test plan benefits and Coverage on AARP site for Federal members
 
     Examples: 
       | planType | copayCategory |
-#      | MAPD     | NON LIS       |
+      | MAPD     | NON LIS       |
       | MAPD     | LIS 1         |
-#      | MAPD     | LIS 2         |
-#      | MAPD     | LIS 3         |
-#      | MAPD     | LIS 4         |
-	
+      | MAPD     | LIS 2         |
+      | MAPD     | LIS 3         |
+      | MAPD     | LIS 4         |
+
+  @federalOptionalRiders
+  Scenario Outline: Verify riders on benefits and coverage in AARP site for MA member
+    Given registered AMP with following details for plan benefits and coverage flow in AARP site
+      | Plan Type      | <planType>      |
+      | Copay Category | <copayCategory> |
+    When the user view forms and resources in AARP site
+    Then the user view benefits and coverage in AARP site
+    And the user validates the content on benefits and coverage page
+
+    Examples: 
+      | planType | copayCategory |
+      | MA       | LIS 1         |
+      
+  @highOptionDental
+  Scenario Outline: Verify riders on benefits and coverage in AARP site for MAPD member
+    Given registered AMP with following details for plan benefits and coverage flow in AARP site
+      | Plan Type      | <planType>      |
+      | Copay Category | <copayCategory> |
+    When the user view forms and resources in AARP site
+    Then the user view benefits and coverage in AARP site
+    And the user validates the content on benefits and coverage page
+
+    Examples: 
+      | planType | copayCategory |
+#      | MAPD     | NONLIS        |
+      | MAPD     | LIS 1         |	
