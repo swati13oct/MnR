@@ -775,3 +775,18 @@ Feature: To test plan benefits and Coverage on AARP site for Federal members
       | MA     | NONLIS        |
       | MAPD     | NONLIS        |
       | MAPD     | LIS 1         |
+
+  @fitnessRider
+  Scenario Outline: Verify riders on benefits and coverage in AARP site for MAPD member
+    Given registered AMP with following details for plan benefits and coverage flow in AARP site
+      | Plan Type      | <planType>      |
+      | Copay Category | <copayCategory> |
+    When the user view forms and resources in AARP site
+    Then the user view benefits and coverage in AARP site
+    And the user validates the content on benefits and coverage page
+
+    Examples: 
+      | planType | copayCategory |
+#      | MAPD     | NONLIS        |
+			| MAPD     | LIS 3         |
+#      | MAPD     | LIS 4         |
