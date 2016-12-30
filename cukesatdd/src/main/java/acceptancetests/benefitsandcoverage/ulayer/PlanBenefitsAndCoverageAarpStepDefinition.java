@@ -478,7 +478,22 @@ public class PlanBenefitsAndCoverageAarpStepDefinition {
 		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario().getBean(
 				PageConstants.BENEFITS_COVERAGE_PAGE);
 		benefitsCoveragePage.navigateToContactUsPage();
-
+		@And("^the user navigates to plan benefits and coverage and validates summary left row for G01$")
+		public  void check_left_row_sequence_for_G01(DataTable sequenceAttribute){	
+			System.out.println("-----left row validation stated------");
+			AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstants.ACCOUNT_HOME_PAGE);
+			PlanBenefitsCoveragePage bncPage = accountHomePage.navigateToBnC();
+			bncPage.validateSequenceOfPlanBenefitsAndCoverageSummaryLeftRow(sequenceAttribute);
+			System.out.println("----left row validation completed-----");
+		}
+		@And("^the user navigates to plan benefits and coverage and validates summary right row for G01$")
+		public  void check_right_row_sequence_for_G01(DataTable sequenceAttribute){	
+			System.out.println("-----right row validation started-----");
+			AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstants.ACCOUNT_HOME_PAGE);
+			PlanBenefitsCoveragePage bncPage = accountHomePage.navigateToBnC();
+			bncPage.validateSequenceOfPlanBenefitsAndCoverageSummaryRightRow(sequenceAttribute);
+			System.out.println("----right row validation ended--------");
+		}
 		
 	}
 	@After
