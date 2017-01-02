@@ -1,8 +1,1 @@
-{
-"planStatus1":"ACTIVE",
-"planName1":"UnitedHealthcare MedicareComplete Plan 1 (HMO)",
-"memberName":"Welcome UGUJN CGTLUDWUI",
-"effectiveDate":"01/01/2017",
-"drugBenefits": "My Drug Benefits",
-"riderContent":"Customize your plans (riders). You can add or remove riders at any time throughout the plan year with an effective date on the first of the next month. Please note that you can only add one dental coverage rider to your plan at a time. If your plan offers a fitness rider, you may add this to your coverage, even if you have a dental rider. If you change your rider option, you can still update your selection for next month until the end of this month."
-}
+{"benefitHeaderSummary":"Benefits Summary","planName":"UnitedHealthcare MedicareComplete Plan 1 (HMO)","ambulanceCopay":"","medicalCopayCoinsurance":"Medical copays or coinsurances","memberId":"829072104-00","outPatientSurgeryTier1":"$10.00","ambulanceCoins":[{"//*[@id='planBenefitsApp']/div/div/div[3]/div/div/section/div/div/h1":""},{"//*[@id='planBenefitsApp']/div/div/div[3]/div/div/section/div/div/h1":""}],"benefitHeaderText":"Section heading tool tip copy goes here. Lorem ipsum medical copays are like a type of cost sharing lorem ipsum. Coinsurance is a percentage of cost sharing lorem ipsum...","outPatientSurgeryTier2":"20.00%"}

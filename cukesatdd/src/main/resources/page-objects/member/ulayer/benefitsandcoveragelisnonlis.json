@@ -1,8 +1,7 @@
-
 {
 "url":null,
 "expectedData":{
-		"planName":{
+	"planName":{
 		"identifier":"xpath",
 		"elementName":"//*[@id='planBenefitsApp']/div/div/div[1]/div/div/div/div/h1"
 		},
@@ -77,6 +76,26 @@
 	"shipText":{
 		"identifier":"xpath",
 		"elementName":"//*[@id='benefitsMain']/div[2]/div/div/div[2]/div"
+		},
+	"optionalServiceRiders":{
+		"identifier":"xpath",
+		"elementName":".//*[@id='planBenefitsApp']/div[7]/div[1]/div/h1"
+		},
+	"optionalServiceRidersText":{
+		"identifier":"xpath",
+		"elementName":".//*[@id='planBenefitsApp']/div[7]/div[1]/div/p[2]"
+		},
+	"myRiders":{
+		"identifier":"xpath",
+		"elementName":".//*[@id='planBenefitsApp']/div[7]/div[2]/div/div[1]/h2"
+		},
+	"myRidersText":{
+		"identifier":"xpath",
+		"elementName":".//*[@id='planBenefitsApp']/div[7]/div[2]/div/div[1]/p[2]"
+		},
+	"riderTypeDetails":{
+		"identifier":"xpath",
+		"elementName":".//*[@id='planBenefitsApp']/div[7]/div[2]/div/div[2]/div/div/div/div"
 		}
 }
 }
