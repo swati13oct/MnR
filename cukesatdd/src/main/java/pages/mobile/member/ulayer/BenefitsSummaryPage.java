@@ -19,6 +19,7 @@ import acceptancetests.atdd.data.PageData;
 import acceptancetests.atdd.mobile.data.CommonConstants;
 import acceptancetests.atdd.util.CommonUtility;
 import atdd.framework.UhcDriver;
+import pages.dashboard.member.ulayer.PaymentHistoryPage;
 import pages.mobile.member.blayer.CustomerServicePage;
 import pages.mobile.member.blayer.MyDrugBenefitDetailsPage;
 import pages.mobile.member.blayer.MyPlanBenefitDetailsPage;
@@ -83,7 +84,20 @@ public class BenefitsSummaryPage extends UhcDriver{
 	
 	@FindBy(id = "makeOneTimePayment")
 	private WebElement makeOneTimePayment;
+	
+	@FindBy(xpath=".//*[@id='wrapper']/div[1]/div[2]/div/div/div/div/div/div[2]/div/div[5]/div[1]/a/span")			
+	        private WebElement hospitalstay;
+	
+	@FindBy(xpath=".//*[@id='wrapper']/div[1]/div[2]/div/div/div/div/div/div[2]/div/div[6]/div[1]/a/span")			
+	    private WebElement medicalcarelink;
 
+	 //@FindBy(id="VIEW DETAILS")			
+	      @FindBy(xpath=".//*[@id='wrapper']/div[1]/div[2]/div/div/div[1]/div[5]/div/div/a/span")			
+	      private WebElement viewdetailsbuttonship;
+	      
+	      @FindBy(xpath=".//*[@id='wrapper']/div[1]/div[2]/div/div/div/div/div/div[2]/div/div[7]/div[1]/a/span")			
+	      	        			
+	      	        private WebElement skilledfacilitylink;
 	
 	private PageData benefitsSummary;
 
@@ -417,4 +431,115 @@ public class BenefitsSummaryPage extends UhcDriver{
 			return false;
 		}
 	}
+	
+	public BenefitDetailsPage viewdetailsclick() {
+		try {
+			Thread.sleep(25000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		System.out.println("enter method");
+			validate(viewdetailsbuttonship);
+			viewdetailsbuttonship.click();
+			try {
+				Thread.sleep(25000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			 hospitalstay.click();
+			 
+			 try {
+					Thread.sleep(25000);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			
+			if (getTitle().equalsIgnoreCase(
+					"Visualize Plans")) {
+			
+				System.out.println("Visualize Plans");
+				return new BenefitDetailsPage(driver);
+			}
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public BenefitDetailsPage viewdetailsmedicalcareclick() {
+		
+		try {
+			Thread.sleep(25000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		System.out.println("enter method");
+		validate(viewdetailsbuttonship);
+		viewdetailsbuttonship.click();
+			try {
+				Thread.sleep(25000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			medicalcarelink.click();
+			 
+			 try {
+					Thread.sleep(25000);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			
+			if (getTitle().equalsIgnoreCase(
+					"Visualize Plans")) {
+			
+				System.out.println("Visualize Plans");
+				return new BenefitDetailsPage(driver);
+			}
+	
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public BenefitDetailsPage viewdetailsskilledclick() {
+		
+		try {
+			Thread.sleep(25000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		System.out.println("enter method");
+		validate(viewdetailsbuttonship);
+		viewdetailsbuttonship.click();
+			try {
+				Thread.sleep(25000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			skilledfacilitylink.click();
+			 
+			 try {
+					Thread.sleep(25000);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			
+			if (getTitle().equalsIgnoreCase(
+					"Visualize Plans")) {
+			
+				System.out.println("Visualize Plans");
+				return new BenefitDetailsPage(driver);
+			}
+
+		// TODO Auto-generated method stub
+		return null;
+	}
 }
+
+

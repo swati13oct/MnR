@@ -64,6 +64,14 @@
 "Monthly Bill":{
 "identifier": "xpath",
 "elementName":"/html/body/div[2]/div[3]/div/div/div/div/div/div[3]/div/table/tbody/tr[1]/th[6]"
+},
+"Makingyourpaymentsheader":{
+"identifier":"id",
+"elementName":"makeYourPaymentsHeader"
+},
+"Makingyourpaymentstext": {
+"identifier":"id",
+"elementName":"makeYourPaymetsContent"
 }
 }
 }

@@ -12,6 +12,8 @@ And I can view a View Payments For Custom Search when I have selected Custom Sea
         | Start Date   | <startDate>  |
         | End Date     | <endDate>    |     
 And I can view a Payment table columns in AARP site
+And I can view a Making your payments header and text in AARP Site
+And I can view a LEARN MORE ABOUT WAYS TO PAY text that can expand in AARP Site
 
 Examples:
 

@@ -13,10 +13,13 @@ And  I can view a View Payments For Custom Search when I have selected Custom Se
 | start date | <startDate> |
 | end date | <endDate> |
 And I can view a Payment table columns in UMS Site
+And I can view Making your payments header and text in UMS Site
+And I can view LEARN MORE ABOUT WAYS TO PAY text that can expand in UMS Site
 
 Examples:
 
  | planType  | memberType  | startDate | endDate |
  | PDP   | Group  | 01/01/2016 | 12/30/2016 |
 #| MAPD  |  Group | 01/01/2016 | 12/30/2016 |
-#| MA    | Group  | 01/01/2016 | 12/30/2016 |     
+#| MA    | Group  | 01/01/2016 | 12/30/2016 |  
+ | SSUP   | Group  | 12/01/2016 | 12/30/2016 |   

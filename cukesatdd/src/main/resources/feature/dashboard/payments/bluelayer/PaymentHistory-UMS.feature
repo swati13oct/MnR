@@ -14,11 +14,16 @@ And  I can view a View Payments For Custom Search when I have selected Custom Se
 | end date | <endDate> |
 And I can view a Payment table header in UMS Site
 And I can view a Payment table columns in UMS Site
+And I can view Making your payments header and text in UMS Site
+And I can view LEARN MORE ABOUT WAYS TO PAY text that can expand in UMS Site
 
 Examples:
 
  | planType  | memberType  | startDate | endDate |
  | PDP   | Group  | 01/01/2016 | 12/30/2016 |
+ #| MAPD  |  Group | 01/01/2016 | 12/30/2016 |
+#| MA    | Group  | 01/01/2016 | 12/30/2016 |
+ | SSUP   | Group  | 12/01/2016 | 12/30/2016 |
  
 Scenario Outline:To verify New Payment History page
 Given I am an UHC Individual member on the Dashboard site
@@ -56,6 +61,45 @@ Examples:
    |  MAPD | Individual |
  
  
+Scenario Outline: To verify New Payment History page and validate for member who has Non setup automatic payment
+Given I am an UHC member on the Dashboard site in mobile site
+    | Plan Type   |  <planType>    |
+    | Member Type |  <membertype>  |
+When plantype user logs in mobile in UHC Site
+When navigate to the new Payment History page in mobile site 
+Then validate Non setup automatic payment
+
+Examples:
+         | planType | membertype |
+         | MA       | Group      |
+       # | MA       | Group      | 
+       # | MA       | Individual |
+
+Scenario Outline: To verify New Payment History page and validate for member who setup automatic payment
+Given I am an UHC member on the Dashboard site in mobile site
+    | Plan Type   |  <planType>    |
+    | Member Type |  <membertype>  |
+When plantype user logs in mobile in UHC Site
+When navigate to the new Payment History page in mobile site 
+Then validate setup automatic payment
+
+Examples:
+         | planType | membertype  |
+         | MA       | Group       |       
+      
+Scenario Outline: To verify New Payment History page and validate for member who has Non setup automatic payment
+Given I am an UHC member on the Dashboard site in mobile site
+    | Plan Type   |  <planType>    |
+    | Member Type |  <membertype>  |
+When plantype user logs in mobile in UHC Site
+When navigate to the new Payment History page in mobile site
+Then validate Credit Balance when the balance is greater than zero
+
+
+Examples:
+         | planType | membertype  |
+         | MA       | Group       |  
+
  
  
  

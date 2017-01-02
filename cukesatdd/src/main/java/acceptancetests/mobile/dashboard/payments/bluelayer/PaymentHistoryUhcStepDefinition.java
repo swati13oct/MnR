@@ -123,7 +123,7 @@ public class PaymentHistoryUhcStepDefinition {
 			/* Get expected data */
 			Map<String, JSONObject> expectedDataMap = (Map<String, JSONObject>) getLoginScenario().getBean(CommonConstants.EXPECTED_DATA_MAP); 
 			JSONObject newPaymentHistoryExpectedJson = newPaymentHistoryPage
-					.getExpectedData(expectedDataMap);
+					.getExpectedDataMobile(expectedDataMap);
 			System.out.println("page loaded succesfully");
 			getLoginScenario().saveBean(PageConstants.PAYMENT_HISTORY_PAGE, newPaymentHistoryPage);
 			getLoginScenario().saveBean(CommonConstants.NEW_PAYMENT_HISTORY_EXPECTED_JSON, newPaymentHistoryExpectedJson);
@@ -180,6 +180,19 @@ public class PaymentHistoryUhcStepDefinition {
 	}
 	
 	
+	@And("I can view Making your payments header and text in UMS Site")
+	public void i_can_view_a_Making_your_payments_header_and_text_in_UMS_Site(){
+		PaymentHistoryPage paymentHistoryPage = (PaymentHistoryPage) getLoginScenario().getBean(PageConstants.PAYMENT_HISTORY_PAGE);
+		JSONObject newPaymentHistoryExpectedJson = (JSONObject) getLoginScenario().getBean(CommonConstants.NEW_PAYMENT_HISTORY_EXPECTED_JSON); 
+		paymentHistoryPage.validateMakeYourPaymentsHeaderAndText(newPaymentHistoryExpectedJson);
+	}
+	
+	@And("I can view LEARN MORE ABOUT WAYS TO PAY text that can expand in UMS Site")
+	public void i_can_view_a_Learn_More_about_ways_to_pay_text_that_can_expand(){
+		PaymentHistoryPage paymentHistoryPage = (PaymentHistoryPage) getLoginScenario().getBean(PageConstants.PAYMENT_HISTORY_PAGE);
+		JSONObject newPaymentHistoryExpectedJson = (JSONObject) getLoginScenario().getBean(CommonConstants.NEW_PAYMENT_HISTORY_EXPECTED_JSON); 
+		paymentHistoryPage.validateLearnMoreWaysAboutLinkAndContent(newPaymentHistoryExpectedJson);
+	}
 	
 	
 }

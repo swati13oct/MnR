@@ -29,6 +29,17 @@ public class PaymentHistoryPage extends UhcDriver {
 	@FindBy(id="custom-to")
 	public WebElement customSearchTo;
 	
+	@FindBy(xpath = "//span[contains(text(),'Total Amount Due')]")
+	private WebElement labelTotalAmoutDue;
+
+	@FindBy(xpath = "//div[@id='paymentOverviewApp']//h1")
+	private WebElement header;
+
+	@FindBy(xpath = "//span[text()='Payment Method:']/../following-sibling::div[1]")
+	private WebElement validatePaymentMethod;
+
+	@FindBy(xpath = "//a[text()='Set Up Automatic Payments']")
+	private WebElement setupAutomaticPayments;
 	
 	@FindBy(xpath="/html/body/div[2]/div[3]/div/div/div/div/div/form/div/div/div[2]/div[2]/div[3]/button")
 	public WebElement customSearchButton;
@@ -49,6 +60,11 @@ public class PaymentHistoryPage extends UhcDriver {
 	@FindBy(xpath = "/html/body/div[2]/div[2]/div/div/div/div/div/p[2]/span[2]")
 	private WebElement totalAmountDueLabel;
 	
+	@FindBy(id="learnMoreAboutWaysLink")
+	private WebElement learnMoreAboutWaysLink;
+
+	@FindBy(id="collapseWaysToPay")
+	private WebElement learnMoreAboutWaysContent;
 
 	public static final String PAYMENT_HISTORY_TABLE_XPATH ="/html/body/div[2]/div[3]/div/div/div/div/div/div[3]/div/table/tbody/tr";
 
@@ -232,12 +248,85 @@ public class PaymentHistoryPage extends UhcDriver {
 		System.out.println("paymentHistoryJson----->" + paymentHistoryJson);
 	}
 
-	public JSONObject getExpectedData(Map<String, JSONObject> expectedDataMap) {
+	public JSONObject getExpectedDataMobile(Map<String, JSONObject> expectedDataMap) {
 
 		JSONObject newPaymentHistoryExpectedJson = expectedDataMap
 				.get(CommonConstants.PAYMENT_HISTORY_MOBILE);
 
 		return newPaymentHistoryExpectedJson;
 	}
+	public PaymentHistoryPage changeUrlToNewPaymentHistoryPage() {
+
+		String NewPayHistoryUrl = "https://member.team-b-uhcmedicaresolutions.uhc.com/content/dashboard/home/payments.html";
+		driver.get(NewPayHistoryUrl);
+		try {
+			Thread.sleep(15000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return new PaymentHistoryPage(driver);
+		}
+
+	public boolean validateSetupAutomaticPayments() {
+
+		String NewPayHistoryUrl = "https://member.team-b-uhcmedicaresolutions.uhc.com/content/dashboard/home/payments.html";
+		driver.get(NewPayHistoryUrl);
+		try {
+			Thread.sleep(10000);
+			if (setupAutomaticPayments.getText().equalsIgnoreCase("Set Up Automatic Payments")
+					&& validatePaymentMethod.getText().equalsIgnoreCase("Monthly Bill")) {
+				System.out.println("setupAutomaticPayments and Payment methods exists" + setupAutomaticPayments
+						+ validatePaymentMethod);
+				return true;
+			} else
+				return false;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return false;
+		}
+	}
 	
+	public JSONObject getExpectedData(Map<String, JSONObject> expectedDataMap) {
+
+		JSONObject newPaymentHistoryExpectedJson = expectedDataMap
+				.get(CommonConstants.PAYMENT_HISTORY);
+
+		return newPaymentHistoryExpectedJson;
+	}
+	
+	
+	public void validateMakeYourPaymentsHeaderAndText(
+			JSONObject newPaymentHistoryExpectedJson) {
+		try {
+			Assert.assertEquals(
+					newPaymentHistoryExpectedJson.get("makeYourPaymentsText"),
+					paymentHistoryJson.get("makeYourPaymentsText"));
+			Assert.assertEquals(
+					newPaymentHistoryExpectedJson.get("makeYourPaymentsHeader"),
+					paymentHistoryJson.get("makeYourPaymentsHeader"));
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public void validateLearnMoreWaysAboutLinkAndContent(
+			JSONObject newPaymentHistoryExpectedJson) {
+		try {
+			
+			learnMoreAboutWaysLink.click();
+			CommonUtility.waitForPageLoad(driver, learnMoreAboutWaysContent, 10);
+			System.out.println("******Learn More About "+learnMoreAboutWaysContent.getText());
+			System.out.println("******Learn More About link "+learnMoreAboutWaysLink.getText());
+			Assert.assertEquals(
+					newPaymentHistoryExpectedJson.get("learnMoreAboutWaysToPayHeading"),
+					learnMoreAboutWaysLink.getText());
+			Assert.assertEquals(
+					newPaymentHistoryExpectedJson.get("learnMoreAboutWaysToPaytext"),
+					learnMoreAboutWaysContent.getText());
+			System.out.println("Payment History Header is seen");
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}
+	}
 }

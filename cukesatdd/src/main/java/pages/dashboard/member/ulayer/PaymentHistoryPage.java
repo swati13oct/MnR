@@ -75,6 +75,12 @@ public class PaymentHistoryPage extends UhcDriver {
 	@FindBy(xpath="//a[@id='autopayment']")
 	private WebElement automaticPaymentsButton;
 	
+	@FindBy(id = "learnMoreAboutWaysLink")
+	public WebElement learnmoreaboutpaylink;
+	
+	@FindBy(id = "collapseWaysToPay")
+	public WebElement learnmoreaboutpaycontent;
+	
 	public PaymentHistoryPage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
@@ -304,7 +310,7 @@ public class PaymentHistoryPage extends UhcDriver {
 	public JSONObject getExpectedData(Map<String, JSONObject> expectedDataMap) {
 
 		JSONObject newPaymentHistoryExpectedJson = expectedDataMap
-				.get(CommonConstants.PAYMENT_HISTORY_MOBILE);
+				.get(CommonConstants.PAYMENT_HISTORY);
 
 		return newPaymentHistoryExpectedJson;
 	}
@@ -370,6 +376,79 @@ public class PaymentHistoryPage extends UhcDriver {
 		{
 			e.printStackTrace();
 			return false;
+		}
+	}
+	public boolean validateSetupAutomaticPayments() {
+
+		try {
+			Thread.sleep(10000);
+			if (setupAutomaticPayments.getText().equalsIgnoreCase("Set Up Automatic Payments")
+					&& validatePaymentMethod.getText().equalsIgnoreCase("Monthly Bill")) {
+				System.out.println("setupAutomaticPayments and Payment methods exists" + setupAutomaticPayments
+						+ validatePaymentMethod);
+				return true;
+			} else
+				return false;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return false;
+		}
+		
+	}
+
+	public boolean validateOneTimePaymentDtmValues() {
+		// TODO Auto-generated method stub
+		try {
+			Thread.sleep(10000);
+			if (makeOneTimePayment.getAttribute("dtmid").equalsIgnoreCase("cta_payments") && makeOneTimePayment
+					.getAttribute("dtmname").equalsIgnoreCase("payments:fed:monthly billing:make one time payment")) {
+				System.out.println("Dtmid" + " " + makeOneTimePayment.getAttribute("dtmid") + "dtm value"
+						+ makeOneTimePayment.getAttribute("dtmname"));
+				return true;
+			} else
+				return false;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return false;
+		}
+	}
+	
+	public JSONObject getExpectedDataMobile(Map<String, JSONObject> expectedDataMap) {
+
+		JSONObject newPaymentHistoryExpectedJson = expectedDataMap
+				.get(CommonConstants.PAYMENT_HISTORY_MOBILE);
+
+		return newPaymentHistoryExpectedJson;
+	}
+	
+	public void makingyourpaymentsheaderntext(JSONObject newPaymentHistoryExpectedJson) {
+		try {
+			Assert.assertEquals(newPaymentHistoryExpectedJson.get("Makingyourpaymentsheader"),
+					paymentHistoryJson.get("Makingyourpaymentsheader"));
+			Assert.assertEquals(newPaymentHistoryExpectedJson.get("Makingyourpaymentstext"),
+					paymentHistoryJson.get("Makingyourpaymentstext"));
+			
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	public void learningpaymentslink(JSONObject newPaymentHistoryExpectedJson)
+	{
+		try {
+			learnmoreaboutpaylink.click();	
+			CommonUtility.waitForPageLoad(driver, learnmoreaboutpaycontent, 10); 
+			System.out.println("<<<<<<Learn more about>>>>>>"+learnmoreaboutpaylink.getText());
+			System.out.println("<<<<<<Learn more about content>>>>>>"+learnmoreaboutpaycontent.getText());
+			Assert.assertEquals(newPaymentHistoryExpectedJson.get("Learnmoreaboutlink"),
+					learnmoreaboutpaylink.getText());
+			Assert.assertEquals(newPaymentHistoryExpectedJson.get("Learnmoreaboutlinkcontent"),
+					learnmoreaboutpaycontent.getText());
+			System.out.println("seeennn");
+		}catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 	}
 }
