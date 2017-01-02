@@ -21,4 +21,5 @@ Examples:
  | planType  | memberType  | startDate | endDate |
  | PDP   | Group  | 01/01/2016 | 12/30/2016 |
 #| MAPD  |  Group | 01/01/2016 | 12/30/2016 |
-#| MA    | Group  | 01/01/2016 | 12/30/2016 |     
+#| MA    | Group  | 01/01/2016 | 12/30/2016 |  
+ | SSUP   | Group  | 12/01/2016 | 12/30/2016 |   
