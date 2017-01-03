@@ -600,6 +600,42 @@ public class BenefitsAndCoverageUmsStepDefinition {
 		
 		
 	}
+	
+	
+	@Then("^the user view mydocument in UMS site$")
+	public void views_mydocument_ums_site() {
+		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstants.ACCOUNT_HOME_PAGE);
+		//FormsandresourcesPage formsAndResourcesPage=null;
+		FormsandresourcesPage formsAndResourcesPage = accountHomePage.navigateToMydocumentUmsPage();		
+	}
+	
+	
+	@Then("^the user validates the content on mydocument page$")
+	public void views_mydoument_validation_ums_site() {
+		try {
+			
+			JSONObject actual=(JSONObject) loginScenario.getBean(PlanBenefitsAndCoverageCommonConstants.MYDOCUMENT_ACTUAL);
+			
+			JSONObject expected=(JSONObject) loginScenario.getBean(PlanBenefitsAndCoverageCommonConstants.MYDOCUMENT_EXPECTED);
+			
+			if(actual!=null && expected !=null){
+				JSONAssert.assertEquals(expected, actual, true);
+			}			
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+
+	}
+	
+	@Then("^the user validates the backtopreviouspage link on mydocument page$")
+	public void view(){
+		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstants.ACCOUNT_HOME_PAGE);
+		//FormsandresourcesPage formsAndResourcesPage=null;
+		FormsandresourcesPage formsAndResourcesPage = accountHomePage.navigatebackToformsandresourcesUmsPage();
+	}
+
 
 	
 

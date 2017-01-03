@@ -610,11 +610,28 @@ Scenario Outline: Verify benefits and coverage in UMS site for mapd and ma non l
 Given registered UHC with following details for plan benefits and coverage flow in UMS site
 | Plan Type          | <planType>                |
 | Copay Category     | <copayCategory>           | 
-| Member Type				 | <Member Type>						 |
-| Plan Name					 | <plan Name>
+| Member Type				 | <Member Type>	 |
+| Plan Name					 | <plan Name>		 |
 When the user view forms and resources in UMS site
 Then the user view benefits and coverage in UMS site
 And the user validates the content on benefits and coverage page    	 
 Examples:
         |planType  | copayCategory  |Member Type     | plan Name |
         | SSRD     | NON LIS        | Group					 | HMO       |
+        
+@dashboardfr       
+Scenario Outline: Verify dashboard forms and resources for mapd and ma in UMS site
+Given registered UHC with following details for plan benefits and coverage flow in UMS site
+| Plan Type          | <planType>                |
+| Member Type				 | <Member Type>						 |
+When the user view forms and resources in UMS site
+Then the user view mydocument in UMS site
+Then the user validates the content on mydocument page
+Then the user validates the backtopreviouspage link on mydocument page
+
+
+Examples:
+        |planType  |Member Type     |
+        |MA        |Individual						| 
+
+

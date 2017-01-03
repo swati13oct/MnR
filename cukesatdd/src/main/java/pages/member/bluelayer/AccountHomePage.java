@@ -131,6 +131,13 @@ public class AccountHomePage extends UhcDriver {
 	@FindBy(xpath = "//*[@id='gogreenlogin_box']/div[4]/div")
 	private WebElement gogreenPopup;
 	
+	@FindBy(linkText = "My Documents")
+	private WebElement MyDocumentLink;
+	
+	@FindBy(linkText = "Back to previous page")
+	private WebElement backTopreviouspageLink;
+	
+	
 	private PageData myAccountHome;
 
 	public JSONObject accountHomeJson;
@@ -548,6 +555,20 @@ public ContactUsPage navigatesToContactUsPage() {
 
 			return null;
 
+	}
+	
+	
+public FormsandresourcesPage navigateToMydocumentUmsPage() {
+		
+		MyDocumentLink.click();
+		
+		return null;
+	}
+
+	public FormsandresourcesPage navigatebackToformsandresourcesUmsPage() {
+		
+		backTopreviouspageLink.click();
+		return null;
 	}
 
 }
