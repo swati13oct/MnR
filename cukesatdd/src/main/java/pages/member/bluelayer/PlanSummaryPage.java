@@ -32,6 +32,11 @@ public class PlanSummaryPage extends UhcDriver {
 	@FindBy(id = "addAnotherPlanLink")
 	private WebElement addAnotherPlanLink;
 	
+	
+	@FindBy(linkText = "addaplan")
+	private WebElement addaplanlink;
+	
+	
 	@FindBy(xpath = "//a[@id='btn_viewdetails']")
    private WebElement viewDetailsButtons;
 
@@ -228,5 +233,25 @@ public class PlanSummaryPage extends UhcDriver {
 		return null;
 		
 	}
+	
+	public boolean validateaddaplanlink() {
+		
+	boolean presentLink =false;
+		
+		try {
+			if(addaplanlink.isDisplayed()){
+				
+				presentLink = true;
+				return presentLink;
+			}			  
+			 
+		} catch (NoSuchElementException e) {
+			presentLink = false;
+		}
+		return presentLink;
+		// TODO Auto-generated method stub
+		
+	}
 }
+
 
