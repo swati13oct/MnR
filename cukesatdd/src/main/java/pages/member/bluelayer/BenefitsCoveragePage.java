@@ -59,6 +59,8 @@ public class BenefitsCoveragePage extends UhcDriver {
 	@FindBy(xpath="//*[@id='planBenefitsApp']/div/div/div[2]/div[4]/div/section/div[1]/div/h1")
 	private WebElement emerCoPayAmtPct;
 
+	@FindBy(id="addAnotherPlanLink")
+	private WebElement addPlansTab;
 
 	private PageData benefitsAndCoverage;
 
@@ -281,7 +283,25 @@ public class BenefitsCoveragePage extends UhcDriver {
 		}
 		
 	}
-
+	public boolean validateAddPlanLink(){
+        boolean flag = false;
+        try{
+               if(addPlansTab.isDisplayed()){
+               System.out.println(addPlansTab.getText()+" is displayed, hence scenario failed");
+               //Assert.assertTrue(flag);
+               flag=true;
+               return flag;
+        }else{
+               System.out.println("addPlansTab is not displayed");
+               //Assert.fail();!
+               return flag;
+        }
+        
+        }catch(Exception e){
+            System.out.println("element not displayed and exception handled");
+        }
+        return flag;
+ }
 
 
 }
