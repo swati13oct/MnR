@@ -2,6 +2,7 @@ package pages.member.bluelayer;
 
 import java.util.List;
 import java.util.Map;
+import java.util.NoSuchElementException;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -24,6 +25,9 @@ public class ClaimSummaryPage extends UhcDriver {
 
 	@FindBy(id = "fromMonth")
 	private WebElement fromMonth;
+	
+	@FindBy(linkText = "add plan")
+	private WebElement addaplanlink;
 
 	@FindBy(id = "fromDay")
 	private WebElement fromDay;
@@ -391,6 +395,29 @@ public class ClaimSummaryPage extends UhcDriver {
 
 		return null;
 	}
+
+	public boolean validateaddaplanlink() {
+		
+boolean presentLink =false;
+		
+		try {
+			if(addaplanlink.isDisplayed()){
+				
+				presentLink = true;
+				return presentLink;
+			}			  
+			 
+		} catch (NoSuchElementException e) {
+			presentLink = false;
+		}
+		return presentLink;
+		// TODO Auto-generated method stub
+		
+	}
+	
+	
+	
+	
 	
 	
 }
