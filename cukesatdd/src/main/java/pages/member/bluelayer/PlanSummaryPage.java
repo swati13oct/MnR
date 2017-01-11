@@ -110,6 +110,7 @@ public class PlanSummaryPage extends UhcDriver {
 	   }
 	@Override
 	public void openAndValidate() {
+		/*
 
 		JSONObject jsonObject = new JSONObject();
 		for (String key : planSummary.getExpectedData().keySet()) {
@@ -132,7 +133,7 @@ public class PlanSummaryPage extends UhcDriver {
 		}
 		planSummaryJson = jsonObject;
 
-		System.out.println("planSummaryJson----->"+planSummaryJson);
+		System.out.println("planSummaryJson----->"+planSummaryJson); */
 	}
 
 	public JSONObject getExpectedData(Map<String, JSONObject> expectedDataMap) {
