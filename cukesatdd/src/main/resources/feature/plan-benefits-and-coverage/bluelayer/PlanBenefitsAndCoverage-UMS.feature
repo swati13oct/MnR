@@ -577,6 +577,7 @@ Examples:
 #| PDP      | Group    |
 | SSUP     | Group    |
 
+
 @hospital       
 Scenario Outline: Verify benefits and coverage in UMS site for mapd and ma non lis with hospital visits
 Given registered UHC with following details for plan benefits and coverage flow in UMS site
@@ -633,5 +634,20 @@ Then the user validates the backtopreviouspage link on mydocument page
 Examples:
         |planType  |Member Type     |
         |MA        |Individual						| 
+
+Scenario Outline:To verify Add Plan link not available on plan and benefits page for members in UMS site
+Given registered member to login in UMS site
+	| Plan Type   | <planType>   |
+	| Member Type | <memberType> |
+	| Group Type   | <groupType>  |
+When the user navigates to benefits and coverage page under my plans in UMS site
+Then validates that add plans tab is not available
+
+Examples:
+
+| planType | memberType | groupType |
+| MAPD     | Group      | ALPEEHIP  |
+| MA			 | Group	  	| ALPEEHIP  |
+
 
 

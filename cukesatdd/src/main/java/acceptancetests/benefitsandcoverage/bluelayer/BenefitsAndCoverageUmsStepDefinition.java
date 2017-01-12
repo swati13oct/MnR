@@ -528,6 +528,7 @@ public class BenefitsAndCoverageUmsStepDefinition {
 				expectedDataMap);
 	}
 	
+
 	@When("^the user view forms and resources in UMS site$")
 	public void views_forms_resources_ums_site() {
 		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstants.ACCOUNT_HOME_PAGE);
@@ -638,6 +639,27 @@ public class BenefitsAndCoverageUmsStepDefinition {
 
 
 	
+
+	@Then("^validates that add plans tab is not available$")
+	public void validates_that_add_plans_tab_is_not_available() {
+	       System.out.println("-----add plans validation started--------");
+	       //BenefitsCoveragePage benefitsCoveragePage = (BenefitsCoveragePage) getLoginScenario().getBean(PageConstants.BENEFITS_AND_COVERAGE_PAGE);
+	       BenefitsCoveragePage benefitsCoveragePage = (BenefitsCoveragePage) getLoginScenario().getBean(PageConstants.BENEFITS_AND_COVERAGE_PAGE);
+	       boolean linkToValidate = benefitsCoveragePage.validateAddPlanLink();
+	        try{
+	       if(linkToValidate!=true){
+	              System.out.println("---------Scenario Passed successfully--------");
+	              Assert.assertTrue(true);
+	       }else{
+	              System.out.println("---------Sceanrio Failed due to presence of link-------");
+	              Assert.fail();
+	       }
+	       }catch(Exception e){
+	              Assert.fail();
+	       }
+	       System.out.println("-----add plans validation ended----------");
+	}
+
 
 }
 	
