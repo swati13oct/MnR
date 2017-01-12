@@ -372,4 +372,24 @@ public class FormsandResourcesUmsStepDefinition {
 			e.printStackTrace();
 		}
 	}
+	
+	@Then("^validates that add plans tab is not available$")
+	public void validates_that_add_plans_tab_is_not_available() {
+		System.out.println("-----add plans validation started--------");
+		FormsandresourcesPage formsAndResources = (FormsandresourcesPage) getLoginScenario().getBean(PageConstants.FORMS_AND_RESOURCES_PAGE);
+		boolean linkToValidate = formsAndResources.validateAddPlanLink();
+		System.out.println(PageConstants.FORMS_AND_RESOURCES_PAGE);
+		try{
+		if(linkToValidate!=true){
+			System.out.println("---------Scenario Passed successfully--------");
+			Assert.assertTrue(true);
+		}else{
+			System.out.println("---------Sceanrio Failed due to presence of link-------");
+			Assert.fail();
+		}
+		}catch(Exception e){
+			Assert.fail();
+		}
+		System.out.println("-----add plans validation ended----------");
+	}
 }

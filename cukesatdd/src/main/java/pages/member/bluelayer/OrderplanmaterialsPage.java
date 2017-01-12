@@ -40,6 +40,12 @@ public class OrderplanmaterialsPage extends UhcDriver {
 
 	@FindBy(id = "disclosure_link")
 	private WebElement logOut;
+	
+	@FindBy(id="addAnotherPlanLink")
+	private WebElement addPlansTab;
+	 
+	@FindBy(className="selected")
+	private WebElement orderMaterial;
 
 	public OrderplanmaterialsPage(WebDriver driver) {
 		super(driver);
@@ -84,6 +90,29 @@ public class OrderplanmaterialsPage extends UhcDriver {
 	public void logOut() {
 		logOut.click();
 
+	}
+	
+	public boolean validateAddPlanLink(){
+		boolean flag = false;
+		try{
+		waitforElement(orderMaterial);	
+		if(orderMaterial.getText().equals("Order Materials")){
+		if(addPlansTab.isDisplayed()){
+			System.out.println(addPlansTab.getText()+" is displayed, hence scenario failed");
+			//Assert.assertTrue(flag);
+			flag=true;
+			return flag;
+		}else{
+			System.out.println("addPlansTab is not displayed");
+			//Assert.fail();!
+			return flag;
+		}
+		}}
+		catch(Exception e){
+			System.out.println("Exception failing - element not visible");
+			//Assert.fail();
+		}
+		return flag;
 	}
 
 	@Override
