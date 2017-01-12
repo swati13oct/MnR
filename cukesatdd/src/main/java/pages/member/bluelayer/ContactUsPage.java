@@ -134,4 +134,13 @@ public class ContactUsPage extends UhcDriver{
 
 	}
 
+	public Boolean IsAddPlanLinkAvailable() {
+		boolean flag =true;
+		if(!validate(addPlan)){
+			flag =false;
+		}
+		
+		return flag;
+	}
+
 }
