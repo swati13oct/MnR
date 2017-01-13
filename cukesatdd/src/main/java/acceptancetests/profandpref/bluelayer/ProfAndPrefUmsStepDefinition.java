@@ -355,4 +355,11 @@ public class ProfAndPrefUmsStepDefinition {
 		myPrefPage.clickUpdatePref();
 
 	}
+	
+	@And("^the add plan link should be hidden in UMS site$")
+	public void add_Plan_Link_Should_Be_Hidden_In_UMS_Site() {
+		MyProfilesPage myPrefPage = (MyProfilesPage) getLoginScenario().getBean(
+				PageConstants.MY_PROFILES_PAGE);
+		myPrefPage.validateAddPlanLink();
+	}
 }

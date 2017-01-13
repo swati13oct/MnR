@@ -62,6 +62,12 @@ public class FormsandresourcesPage extends UhcDriver {
 	@FindBy(xpath="//*[@id='planBenefitsApp']/div/div/div[2]/div[3]/span[2]")
 	private WebElement monthlyPremiumText;
 	
+	@FindBy(id="addAnotherPlanLink")
+	private WebElement addPlansTab;
+	
+	@FindBy(className="fd_FormsResouceSelected")
+	private WebElement formsAndResourcesTab;
+	
 	private PageData formsAndResources;
 
 	public JSONObject formsAndResourcesJson;
@@ -244,6 +250,26 @@ public class FormsandresourcesPage extends UhcDriver {
 		}
 		
 	}	
-	
+
+	public boolean validateAddPlanLink(){
+		boolean flag = false;
+		try{
+		if(formsAndResourcesTab.getText().equals("Forms and Resources")){
+		if(addPlansTab.isDisplayed()){
+			System.out.println(addPlansTab.getText()+" is displayed, hence scenario failed");
+			//Assert.assertTrue(flag);
+			flag=true;
+			return flag;
+		}else{
+			System.out.println("addPlansTab is not displayed");
+			//Assert.fail();!
+			return flag;
+		}
+		}
+		}catch(Exception e){
+			Assert.fail();
+		}
+		return flag;
+	}
 
 }
