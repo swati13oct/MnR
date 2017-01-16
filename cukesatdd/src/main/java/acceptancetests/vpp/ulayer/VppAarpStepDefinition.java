@@ -37,6 +37,7 @@ import cucumber.annotation.en.And;
 import cucumber.annotation.en.Given;
 import cucumber.annotation.en.Then;
 import cucumber.annotation.en.When;
+import cucumber.runtime.PendingException;
 import cucumber.table.DataTable;
 
 /** 
@@ -54,7 +55,7 @@ public class VppAarpStepDefinition {
 	}
 
 	@Given("^the user is on the AARP medicare site landing page$")
-	public void the_user_on_aarp_medicaresolutions_Site() {
+	public void the_user_is_on_AARP_medicare_site_landing_page() {
 		WebDriver wd = getLoginScenario().getWebDriver();
 
 		AcquisitionHomePage aquisitionhomepage = new AcquisitionHomePage(wd);
@@ -1639,7 +1640,32 @@ System.out.println("planSummaryExpectedJson---->"
 		else
 			Assert.assertFalse(false);
 	}
-
 	
-
+	@When("^user clicks on yes button on proactive chat$")
+	public void user_clicks_on_yes_button_on_proactive_chat() {
+		VPPPlanSummaryPage vppPlanSummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		vppPlanSummaryPage.clickProactiveChat();
+	}
+	
+	@Then("^the proactive chat should display$")
+	public void the_proactive_chat_should_display() throws Exception {
+		VPPPlanSummaryPage vppPlanSummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		vppPlanSummaryPage.validateProactiveChat();
+	}
+	
+	@Then("^user clicks on Chat Now button$")
+	public void user_clicks_on_Chat_Now_button() {
+		VPPPlanSummaryPage vppPlanSummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		vppPlanSummaryPage.clickReactiveChat();
+	}
+	
+	@Then("^the reactive chat should display$")
+	public void the_reactive_chat_should_display() throws Exception {
+		VPPPlanSummaryPage vppPlanSummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		vppPlanSummaryPage.validateReactiveChat();
+	}
 }
