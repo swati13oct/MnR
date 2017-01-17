@@ -35,6 +35,7 @@ import cucumber.annotation.en.And;
 import cucumber.annotation.en.Given;
 import cucumber.annotation.en.Then;
 import cucumber.annotation.en.When;
+import cucumber.runtime.PendingException;
 import cucumber.table.DataTable;
 
 /**
@@ -1554,7 +1555,7 @@ public class VppUmsStepDefinition {
 	}
 			
 
-	@When("^the user view plan details of the above selected plan in UMS site$")
+	/*@When("^the user view plan details of the above selected plan in UMS site$")
 	public void user_views_plandetails_selected_plan_ums(DataTable planAttributes) {
 		List<DataTableRow> givenAttributesRow = planAttributes.getGherkinRows();
 		Map<String, String> givenAttributesMap = new HashMap<String, String>();
@@ -1583,7 +1584,7 @@ public class VppUmsStepDefinition {
 					vppPlanDetailsPage);
 			
 		}
-	}
+	}*/
 	@Then("^the user validates the passport availability$")
 	public void user_validates_passport_details() {
 		try
@@ -1604,6 +1605,32 @@ public class VppUmsStepDefinition {
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 		boolean flagvalue=vppPlanSummaryPage.validatepassportData();
 	}
+	
+	@When("^user clicks on yes button on proactive chat$")
+	public void user_clicks_on_yes_button_on_proactive_chat() {
+		VPPPlanSummaryPage vppPlanSummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		vppPlanSummaryPage.clickProactiveChat();
+	}
 
-		
+	@Then("^the proactive chat should display$")
+	public void the_proactive_chat_should_display() throws Exception {
+		VPPPlanSummaryPage vppPlanSummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		vppPlanSummaryPage.validateProactiveChat();
+	}
+	
+	@Then("^user clicks on Chat Now button$")
+	public void user_clicks_on_Chat_Now_button() {
+		VPPPlanSummaryPage vppPlanSummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		vppPlanSummaryPage.clickReactiveChat();
+	}
+	
+	@Then("^the reactive chat should display$")
+	public void the_reactive_chat_should_display() throws Exception {
+		VPPPlanSummaryPage vppPlanSummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		vppPlanSummaryPage.validateReactiveChat();
+	}
 }
