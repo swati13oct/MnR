@@ -36,6 +36,14 @@
 "paymentHistoryHeaderText":{
 "identifier": "xpath",
 "elementName": "/html/body/div[2]/div[3]/div/div/div/div/div/p"
+},
+"makeYourPaymentsHeader":{
+"identifier": "id",
+"elementName": "makeYourPaymentsHeader"
+},
+"makeYourPaymentsText":{
+"identifier": "id",
+"elementName": "makeYourPaymetsContent"
 }
 }
 }

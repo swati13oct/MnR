@@ -70,20 +70,27 @@ public class BenefitDetailsPage extends UhcDriver{
 	
 	@Override
 	public void openAndValidate() {
-		validate(menuButton);
+		try {
+			Thread.sleep(10000);
+		} catch (InterruptedException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		//validate(menuButton);
 		JSONObject jsonObject = new JSONObject();
 		for (String key : benefitsDetail.getExpectedData().keySet()) {
 			List<WebElement> elements = findElements(benefitsDetail
 					.getExpectedData().get(key));
 			if (elements.size() == 1) {
-				if (validate(elements.get(0))) {
+				//if (validate(elements.get(0))) {
 					try {
 						jsonObject.put(key, elements.get(0).getText());
+						System.out.println("elements"+elements.get(0).getText());
 					} catch (JSONException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
-				}
+				
 			} else if (elements.size() > 1) {
 				JSONArray jsonArray = new JSONArray();
 				for (WebElement element : elements) {
@@ -120,6 +127,14 @@ public class BenefitDetailsPage extends UhcDriver{
 		
 		return benefitsDetailExpectedJson;
 	}
+
+	public JSONObject getExpectedDataship(Map<String, JSONObject> expectedDataMap) {
+		JSONObject benefitsDetailExpectedJson = expectedDataMap
+				.get(acceptancetests.atdd.data.CommonConstants.BENEFITS_DETAIL);
+		
+		return benefitsDetailExpectedJson;
+	}
+
 
 
 

@@ -48,6 +48,7 @@
 "identifier":"xpath",
 "elementName":"//*[@id='planBenefitsApp']/div/div/div[3]/div/div/section/div/div/h1"
 },
+
 "hospitalVisit":{
 "identifier":"xpath",
 "elementName":"//*[@id='planBenefitsApp']/div[3]/div[2]/div"
@@ -63,6 +64,19 @@
 "outOfNetwork":{
 "identifier":"xpath",
 "elementName":"//*[@id='planBenefitsApp']/div[5]/div/div[2]/div[2]/div"
+
+"outPatientSurgery":{
+"identifier":"className", 
+"elementName":"outpatientsurgery-atdd"
+},
+"outPatientSurgeryTier1":{
+"identifier":"className", 
+"elementName":"outpatientsurgery-tier1-atdd"
+},
+"outPatientSurgeryTier2":{
+"identifier":"className", 
+"elementName":"outpatientsurgery-tier2-atdd"
+
 }
 
 

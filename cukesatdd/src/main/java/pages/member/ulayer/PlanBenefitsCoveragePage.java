@@ -3,12 +3,17 @@
  */
 package pages.member.ulayer;
 
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
@@ -22,6 +27,8 @@ import acceptancetests.atdd.data.ElementData;
 import acceptancetests.atdd.data.PageData;
 import acceptancetests.atdd.util.CommonUtility;
 import atdd.framework.UhcDriver;
+import cucumber.table.DataTable;
+import gherkin.formatter.model.DataTableRow;
 
 /**
  * @author pagarwa5
@@ -275,6 +282,71 @@ public class PlanBenefitsCoveragePage extends UhcDriver {
 		}
 		planDocPDFAcqJson = jsonObject;
 		return planDocPDFAcqJson;
+	}
+	public void validateSequenceOfPlanBenefitsAndCoverageSummaryRightRow(DataTable sequenceAttribute){
+		List<DataTableRow> sequenceAttributeRow = sequenceAttribute.getGherkinRows();
+		Map<String, String> sequenceAttributeMap = new LinkedHashMap<String, String>();
+		for (int i = 0; i < sequenceAttributeRow.size(); i++) {
+
+			sequenceAttributeMap.put(sequenceAttributeRow.get(i).getCells().get(0), sequenceAttributeRow.get(i).getCells().get(1));
+		}
+
+		Set<String> memberAttributesKeySet = sequenceAttributeMap.keySet();
+		List<String> desiredAttributes = new ArrayList<String>();
+		for (Iterator<String> iterator = memberAttributesKeySet.iterator(); iterator.hasNext();) {
+			{
+				String key = iterator.next();
+				desiredAttributes.add(sequenceAttributeMap.get(key));
+			}
+    	}
+		System.out.println("desiredAttributes.." + desiredAttributes);
+		
+		List<WebElement> rightRow = driver.findElements(By.xpath("//div[@ng-repeat='x in planBenefitMap[key]']"));
+		for(int i=0; i<=12;i++){
+			int j=i+1;
+			if(rightRow.get(i).getText().contains(desiredAttributes.get(i))){
+				 System.out.println("Sequence Number "+j+" is "+rightRow.get(i).getText());
+				 Assert.assertTrue("@@@@@@   "+desiredAttributes.get(i)+"   Displayed correctly", true);
+			}else{
+                Assert.fail(rightRow.get(i).getText()+"---not equals--"+desiredAttributes.get(i));
+			}
+		}
+	 
+		
+	}
+	public void validateSequenceOfPlanBenefitsAndCoverageSummaryLeftRow(DataTable sequenceAttribute){
+		List<DataTableRow> sequenceAttributeRow = sequenceAttribute.getGherkinRows();
+		Map<String, String> sequenceAttributeMap = new LinkedHashMap<String, String>();
+		for (int i = 0; i < sequenceAttributeRow.size(); i++) {
+
+			sequenceAttributeMap.put(sequenceAttributeRow.get(i).getCells().get(0), sequenceAttributeRow.get(i).getCells().get(1));
+		}
+
+		Set<String> memberAttributesKeySet = sequenceAttributeMap.keySet();
+		List<String> desiredAttributes = new ArrayList<String>();
+		for (Iterator<String> iterator = memberAttributesKeySet.iterator(); iterator.hasNext();) {
+			{
+				String key = iterator.next();
+				desiredAttributes.add(sequenceAttributeMap.get(key));
+			}
+
+		}
+		System.out.println("desiredAttributes.." + desiredAttributes);
+
+		List<WebElement> leftRow = driver.findElements(By.xpath("//*[@class='ship_row_left']"));
+ 	
+		for(int i=0;i<7;i++){
+			 if(leftRow.get(i).getText().contains(desiredAttributes.get(i))){
+				 int j=i+1;
+				 System.out.println("Sequence Number "+j+" is "+leftRow.get(i).getText());
+				 Assert.assertTrue("@@@@@@   "+desiredAttributes.get(i)+"   Displayed correctly", true);
+			 }else{
+				 Assert.fail(desiredAttributes.get(i)+"----not equals---"+leftRow.get(i).getText());
+			 }
+		}
+		
+		
+		
 	}
 	
 	/*public PharmacySearchPage navigateToPharmacyLocator() {

@@ -131,6 +131,13 @@ public class AccountHomePage extends UhcDriver {
 	@FindBy(xpath = "//*[@id='gogreenlogin_box']/div[4]/div")
 	private WebElement gogreenPopup;
 	
+	@FindBy(linkText = "My Documents")
+	private WebElement MyDocumentLink;
+	
+	@FindBy(linkText = "Back to previous page")
+	private WebElement backTopreviouspageLink;
+	
+	
 	private PageData myAccountHome;
 
 	public JSONObject accountHomeJson;
@@ -512,7 +519,7 @@ public ContactUsPage navigatesToContactUsPage() {
 	}
 	
 	public pages.dashboard.member.blayer.PaymentHistoryPage navigateToNewPaymentHistoryPage() {
-		String NewPayHistoryUrl = "content/dashboard/home/payments.html";
+		String NewPayHistoryUrl = "content/dashboard/home/Payments.html";
 		String url = driver.getCurrentUrl();
 		url = url.replace("home/my-account-home.html", NewPayHistoryUrl);
 		driver.get(url);
@@ -548,6 +555,20 @@ public ContactUsPage navigatesToContactUsPage() {
 
 			return null;
 
+	}
+	
+	
+public FormsandresourcesPage navigateToMydocumentUmsPage() {
+		
+		MyDocumentLink.click();
+		
+		return null;
+	}
+
+	public FormsandresourcesPage navigatebackToformsandresourcesUmsPage() {
+		
+		backTopreviouspageLink.click();
+		return null;
 	}
 
 }
