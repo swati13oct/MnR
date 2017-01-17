@@ -773,5 +773,16 @@ public class CommonConstants {
 
 	public static final String NEW_PAYMENT_HISTORY_ACTUAL_JSON = "newPaymentHistoryActualJSON";
 	public static final String NEW_PAYMENT_HISTORY_EXPECTED_JSON = "newPaymentHistoryexpectedJSON";
-
+	
+	public static final String SAVE_DRUG_PAGE_DATA="savedrugpagedata.json";
+	public static final String ADD_NEW_DRUG_PAGE_DATA = "addnewdrugpagedata.json";
+	public static final String DRUGCOSTESTIMATORDATAPAGE = "DrugCostEstimatorPage.json";
+	public static final String ADD_DRUG_DETAILS_PAGE_DATA = "adddrugdetailspagedata.json";
+	public static final String SWITCH_GENERIC_PAGE_DATA = "switchgenericpagedata.json";
+	
+	public static final String DCEstimator = "DCEstimator.json";
+	public static final String ADD_DRUG_DETAILS="adddrugdetails.json";
+	public static final String SWITCH_GENERIC="switchgeneric.json";
+	
+	
 }
