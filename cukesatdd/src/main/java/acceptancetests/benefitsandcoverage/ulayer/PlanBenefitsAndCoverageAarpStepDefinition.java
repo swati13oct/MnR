@@ -492,6 +492,19 @@ public class PlanBenefitsAndCoverageAarpStepDefinition {
 		bncPage.validateSequenceOfPlanBenefitsAndCoverageSummaryRightRow(sequenceAttribute);
 		System.out.println("----right row validation ended--------");
 	}
+
+
+        @Then("^I will be able access a PDF flyer in  English,Spanish or Chinese that explains passport benefits when a         plan has this feature$")
+	public void I_will_be_able_access_a_PDF_flyer() {
+		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario()
+				.getBean(PageConstants.ACCOUNT_HOME_PAGE);
+//		PlanBenefitsCoveragePage benefitsCoveragePage = accountHomePage
+//				.navigateToBnC();
+		WebDriver wd = getLoginScenario().getWebDriver();
+
+		PlanBenefitsCoveragePage benefitsCoveragePage = new PlanBenefitsCoveragePage(wd);
+		benefitsCoveragePage.verifyPassportFlyerPdf();
+}
 	
 	@After
 	public void tearDown() {

@@ -43,7 +43,13 @@ public class FormsandresourcesPage extends UhcDriver {
 	
 	@FindBy(xpath="//*[@id='benefits']/a")
 	private WebElement benefitsAndCoverageLink;
+    
+	@FindBy(linkText = "Passport Flyer")
+	private WebElement passport_Flyer;
 
+	@FindBy(linkText = "Passport Flyer Spanish")
+	private WebElement passport_Flyer_Spanish;
+	
 	private PageData planDocsPDF;
 	private PageData formsAndResources;
 
@@ -227,6 +233,13 @@ public class FormsandresourcesPage extends UhcDriver {
 		} else
 			return null;
 	}
+	
+	public boolean verifyPassportFlyer(){
+		return validate(passport_Flyer);
+		}
+		public boolean verifyPassportFlyerSpanish(){
+		return validate(passport_Flyer_Spanish);
+		} 
 	}
 	
 
