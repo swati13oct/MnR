@@ -634,4 +634,16 @@ Examples:
         |planType  |Member Type     |
         |MA        |Individual						| 
 
+@US463479
+Feature: To test plan benefits and Coverage on UMS site
+Scenario Outline:To verify pdfs displayed in forms and resources in UMS site
+Given registered member to login in UMS site
+	| Plan Type   | <planType>   |
+	| Member Type | <memberType> |
+When the user navigates to benefits and coverage page under my plans in UMS site
+Then I will be able access a PDF flyer in  English,Spanish or Chinese that explains passport benefits when a plan has this feature
+Examples:
 
+| planType | memberType  |
+| MA       |Individual |
+| MAPD       |Individual |

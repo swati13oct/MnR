@@ -637,7 +637,15 @@ public class BenefitsAndCoverageUmsStepDefinition {
 	}
 
 
-	
+	@Then("^I will be able access a PDF flyer in  English,Spanish or Chinese that explains passport benefits when a plan has this feature$")
+	public void I_will_be_able_access_a_PDF_flyer() {
+		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario()
+				.getBean(PageConstants.ACCOUNT_HOME_PAGE);
+		BenefitsCoveragePage benefitsCoveragePage = accountHomePage
+				.navigateToBnC();
+		benefitsCoveragePage.verifyPassportFlyerPdf();
+}
+
 
 }
 	

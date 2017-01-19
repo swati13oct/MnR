@@ -372,4 +372,15 @@ public class FormsandResourcesUmsStepDefinition {
 			e.printStackTrace();
 		}
 	}
+	
+
+	@Then("^I will be able access a PDF flyer in  English,Spanish or Chinese that explains passport benefits when a plan has this feature$")
+	public void I_will_be_able_access_a_PDF_flyer_spanish() {
+		WebDriver wd = getLoginScenario().getWebDriver();
+		FormsandresourcesPage formsandresourcesPage = new FormsandresourcesPage(wd);
+		formsandresourcesPage.verifyPassportFlyer();
+		formsandresourcesPage.verifyPassportFlyerSpanish();
+	}
+	
+	
 }

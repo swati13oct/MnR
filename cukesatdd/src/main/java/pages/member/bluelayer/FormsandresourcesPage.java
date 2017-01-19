@@ -62,6 +62,12 @@ public class FormsandresourcesPage extends UhcDriver {
 	@FindBy(xpath="//*[@id='planBenefitsApp']/div/div/div[2]/div[3]/span[2]")
 	private WebElement monthlyPremiumText;
 	
+	@FindBy(linkText = "Passport Flyer")
+	private WebElement passport_Flyer;
+	
+	@FindBy(linkText = "Passport Flyer Spanish")
+	private WebElement passport_Flyer_Spanish;
+	
 	private PageData formsAndResources;
 
 	public JSONObject formsAndResourcesJson;
@@ -244,6 +250,11 @@ public class FormsandresourcesPage extends UhcDriver {
 		}
 		
 	}	
-	
+	public boolean verifyPassportFlyer(){
+		return validate(passport_Flyer);
+	}
+	public boolean verifyPassportFlyerSpanish(){
+		return validate(passport_Flyer_Spanish);
+	}
 
 }

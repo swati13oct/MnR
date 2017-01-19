@@ -58,7 +58,9 @@ public class BenefitsCoveragePage extends UhcDriver {
 
 	@FindBy(xpath="//*[@id='planBenefitsApp']/div/div/div[2]/div[4]/div/section/div[1]/div/h1")
 	private WebElement emerCoPayAmtPct;
-
+	
+	@FindBy(xpath="//a[contains(text(),'Passport Flyer') and contains(text(),'PDF')]")
+	private WebElement passportFlyerPdf;
 
 	private PageData benefitsAndCoverage;
 
@@ -281,7 +283,14 @@ public class BenefitsCoveragePage extends UhcDriver {
 		}
 		
 	}
+	public void verifyPassportFlyerPdf(){
+		try {
+		validate(passportFlyerPdf);
 
+		} catch (Exception e) {
+			System.out.println("PASSPORT PDF NOT FOUND ...");
+		}
+	}
 
 
 }
