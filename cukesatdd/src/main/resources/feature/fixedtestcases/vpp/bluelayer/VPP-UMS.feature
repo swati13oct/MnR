@@ -1,4 +1,4 @@
-@fixedTestCase
+@fixedTestCaseVPP
 Feature: To test plan summary in UMS site
 
 @fixedTestCaseNonAEP
