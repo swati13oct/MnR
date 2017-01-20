@@ -193,6 +193,20 @@ public class FormsandResourcesAarpStepDefinition {
 		formsandresourcesAarpPage.clickOnPDF();
 		formsandresourcesAarpPage.logOut();
 	}
+
+        @Then("^I will be able access a PDF flyer in Englishthat explains passport benefits when a plan has this feature$")
+	public void I_will_be_able_access_a_PDF_flyer() {
+	FormsandresourcesPage formsandresourcesPage = (FormsandresourcesPage) getLoginScenario()
+	.getBean(PageConstants.FORMS_AND_RESOURCES_PAGE);
+	formsandresourcesPage.verifyPassportFlyer();
+	}
+
+	@Then("^I will be able access a PDF flyer in Spanish or Chinese that explains passport benefits when a plan has this feature$")
+	public void I_will_be_able_access_a_PDF_flyer_spanish() {
+	FormsandresourcesPage formsandresourcesPage = (FormsandresourcesPage) getLoginScenario()
+	.getBean(PageConstants.FORMS_AND_RESOURCES_PAGE);
+	formsandresourcesPage.verifyPassportFlyer();
+	}
 	@After
 	public void tearDown() {
 

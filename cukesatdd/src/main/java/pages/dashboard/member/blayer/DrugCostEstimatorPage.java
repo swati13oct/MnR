@@ -4,7 +4,9 @@ import java.util.Map;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.junit.Assert;
+import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
+import org.openqa.selenium.NoAlertPresentException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -86,8 +88,16 @@ public class DrugCostEstimatorPage extends UhcDriver{
 	}
 	public void changeUrlToNewDCEPage() {
 
-		String NewDCEUrl = "https://www.team-b-uhcmedicaresolutions.uhc.com/content/dashboard/home/drug-cost-estimator.html#/drugCostEstimator";
+		String NewDCEUrl = "https://member.team-b-uhcmedicaresolutions.uhc.com/content/dashboard/home/drug-cost-estimator.html#/drugCostEstimator";
 		driver.get(NewDCEUrl);
+		
+		try{
+			Alert alert = driver.switchTo().alert();
+			alert.accept();
+		}catch(NoAlertPresentException e){
+			
+		}
+        
 		driver.manage().window().maximize();
 		try {
 			//CommonUtility.waitForPageLoad(driver, SaveDrugPage, 10);
@@ -118,5 +128,6 @@ public class DrugCostEstimatorPage extends UhcDriver{
 		else 
 			return false;
 	}
+	
 }
 

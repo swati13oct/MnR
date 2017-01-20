@@ -373,6 +373,7 @@ public class FormsandResourcesUmsStepDefinition {
 		}
 	}
 	
+
 	@Then("^validates that add plans tab is not available$")
 	public void validates_that_add_plans_tab_is_not_available() {
 		System.out.println("-----add plans validation started--------");
@@ -392,4 +393,16 @@ public class FormsandResourcesUmsStepDefinition {
 		}
 		System.out.println("-----add plans validation ended----------");
 	}
+
+
+	@Then("^I will be able access a PDF flyer in  English,Spanish or Chinese that explains passport benefits when a plan has this feature$")
+	public void I_will_be_able_access_a_PDF_flyer_spanish() {
+		WebDriver wd = getLoginScenario().getWebDriver();
+		FormsandresourcesPage formsandresourcesPage = new FormsandresourcesPage(wd);
+		formsandresourcesPage.verifyPassportFlyer();
+		formsandresourcesPage.verifyPassportFlyerSpanish();
+	}
+	
+	
+
 }

@@ -34,6 +34,9 @@ public class AddNewDrugModal extends UhcDriver {
 	@FindBy(id = "drug-search-input")
 	public WebElement drugsearchinput;
 	
+	@FindBy(id="radio-0")
+	public WebElement firstdrug; //its liptor
+	
 	
 
 	@FindBy(id = "drug-alt-search-button")
@@ -47,7 +50,6 @@ public class AddNewDrugModal extends UhcDriver {
 		//addnewdrug = CommonUtility.readPageData(fileName, CommonConstants.PAGE_OBJECT_DIRECTORY_BLAYER_MEMBER);
 		//openAndValidate();
 	}
-
 	@Override
 	public void openAndValidate() {
 
@@ -64,7 +66,6 @@ public class AddNewDrugModal extends UhcDriver {
 
 		}
 		addnewdrugJson = jsonObject;
-
 		System.out.println("addnewdrugJson----->" + addnewdrugJson);
 	}
 
@@ -78,11 +79,18 @@ public class AddNewDrugModal extends UhcDriver {
 	public AddDrugDetails clickonSearchButton(String DrugName) {
 		drugsearchinput.sendKeys(DrugName);
 		searchButton.click();
-
 		if (driver.getTitle().equalsIgnoreCase("Our Add Drug Details®")) {
 			return new AddDrugDetails(driver);
 		}
 		return null;
+	}
+	public void selectDrug(String drugname){
+		String xpath = "//label[contains(text(),'Lip-EX')]/parent::div/input";
+		WebElement rdrug = driver.findElement(By.xpath(xpath));
+		if(!rdrug.isSelected()){
+			rdrug.click();
+		}
+		continueButton.click();
 	}
 }
 

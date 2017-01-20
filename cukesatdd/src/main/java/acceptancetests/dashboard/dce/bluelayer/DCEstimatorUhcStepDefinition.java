@@ -152,11 +152,11 @@ public class DCEstimatorUhcStepDefinition {
 		String pwd = (String) getLoginScenario().getBean(LoginCommonConstants.PASSWORD);
 		String category = (String) getLoginScenario().getBean(LoginCommonConstants.CATOGERY);
 		WebDriver wd = getLoginScenario().getWebDriver();
-
+		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
 		LoginPage loginPage = new LoginPage(wd);
 
-	/*	AccountHomePage accountHomePage = (AccountHomePage) loginPage.loginWith(userName, pwd,category);
-		if (accountHomePage != null) {
+		loginPage.loginWith(userName, pwd,category);
+	/*	if (accountHomePage != null) {
 			Map<String, JSONObject> expectedDataMap = loginScenario
 					.getExpectedJson(userName);
 			getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
@@ -168,19 +168,20 @@ public class DCEstimatorUhcStepDefinition {
 	@When("^I use the DCE tool to enter one or more drugs to my drug list$")
 	public void I_use_the_DCE_tool_to_enter_one_or_more_drugs_to_my_drug_list() {
 		
-		WebDriver wd = getLoginScenario().getWebDriver();
+		WebDriver wd = (WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
 
 		DrugCostEstimatorPage dce = new DrugCostEstimatorPage(wd);
 		dce.changeUrlToNewDCEPage();
 		AddNewDrugModal addNewDrugModal = dce.clickOnAddDrug();
-		addNewDrugModal.clickonSearchButton("lipitor");
+		addNewDrugModal.clickonSearchButton("lipi");
 		System.out.println(" PASSED : ");
 	}
 
 
 	@Then("^I should be able to edit that list by either adding drugs up to a total of 25 or subtracting drugs at any time while using the tool$")
 	public void i_navigate_edit_drugs() {
-		WebDriver wd = getLoginScenario().getWebDriver();
+		WebDriver wd = (WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
+
 
 		AddDrugDetails addDrugDetails = new AddDrugDetails(wd);
 		addDrugDetails.selectDosage("Lipitor TAB 10MG");
@@ -194,7 +195,30 @@ public class DCEstimatorUhcStepDefinition {
 		System.out.println(" PASSED : ");
 	}
 
-
-
+	@Then("^I should be see dosage, package and frequency options returned from the DCE web service$")
+	public void i_should_be_see_dosage_package_and_frequency_options_returned_from_the_DCE_web_service(){
+		WebDriver wd = (WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
+		AddNewDrugModal addNewDrugModal = new AddNewDrugModal(wd);
+		addNewDrugModal.selectDrug("Lip-EX");
+		System.out.println(" PASSED : ");
+	}
+	
+	@And("^I should be able to change those options at any time$")
+	public void i_should_be_able_to_change_those_options_at_any_time(){
+		
+		WebDriver wd = (WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
+		AddDrugDetails addDrugDetails = new AddDrugDetails(wd);
+		addDrugDetails.selectFrequency("Every 3 Months");
+		addDrugDetails.selectQnty("14");
+		System.out.println(" PASSED : ");
+	}
+	@And("^I should have the ability to advance to the next step in the flow$")
+	public void i_should_have_the_ability_to_advance_to_the_next_step_in_the_flow(){
+		System.out.println(" PASSED : ");
+		WebDriver wd = (WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
+		AddDrugDetails addDrugDetails = new AddDrugDetails(wd);
+		addDrugDetails.continueAddDrugDetails();
+		System.out.println(" PASSED : ");
+	}
 
 }

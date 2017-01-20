@@ -67,6 +67,7 @@ Examples:
 #| SSUP		| Group |
 | SSRD		| Group |
 
+
 Scenario Outline: Verify add plan tab on forms and resources page
 Given registered member for forms and resources in UMS Site
 	| Plan Type      |<planType>   |
@@ -79,3 +80,18 @@ Examples:
   | planType | memberType | groupType |
   | MAPD     | Group      | ALPEEHIP  |
   | MA			 | Group      | ALPEEHIP  |
+
+@US463479
+Scenario Outline:To verify pdfs displayed in forms and resources in UMS site
+Given registered member for plan materials in forms and resources in UMS Site
+| Plan Type   | <planType>   |
+| Member Type | <memberType> | 
+When the user view forms and resources in UMS site
+Then I will be able access a PDF flyer in  English, Spanish or Chinese that explains passport benefits when a plan has this feature
+
+Examples:
+
+| planType | memberType  |
+| MA       |Individual |
+
+
