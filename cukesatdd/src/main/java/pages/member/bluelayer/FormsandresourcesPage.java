@@ -62,6 +62,9 @@ public class FormsandresourcesPage extends UhcDriver {
 	@FindBy(xpath="//*[@id='planBenefitsApp']/div/div/div[2]/div[3]/span[2]")
 	private WebElement monthlyPremiumText;
 	
+	@FindBy(linkText = "Prescription Mail Order Form - Preferred Mail Service Pharmacy through OptumRx")
+	private WebElement preferredMailOrderLink;
+	
 	@FindBy(id="addAnotherPlanLink")
 	private WebElement addPlansTab;
 	
@@ -278,6 +281,7 @@ public class FormsandresourcesPage extends UhcDriver {
 			Assert.fail();
 		}
 		return flag;
+	}
 
 	public boolean verifyPassportFlyer(){
 		return validate(passport_Flyer);
@@ -285,6 +289,18 @@ public class FormsandresourcesPage extends UhcDriver {
 	public boolean verifyPassportFlyerSpanish(){
 		return validate(passport_Flyer_Spanish);
 
+	}
+	
+	public String validatePrescriptionmailorderBenefitPdfs() {
+		// TODO Auto-generated method stub
+		validate(preferredMailOrderLink);
+		preferredMailOrderLink.click();
+		if (currentUrl().contains("Prescription Mail Order Form - Preferred Mail Service Pharmacy through OptumRx")){
+			return "true";
+		}else{
+			
+		return "false";
+		}
 	}
 
 }

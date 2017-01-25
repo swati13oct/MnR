@@ -403,6 +403,18 @@ public class FormsandResourcesUmsStepDefinition {
 		formsandresourcesPage.verifyPassportFlyerSpanish();
 	}
 	
-	
+	@Then("^the user validates preferred mail order benefit pdfs in plan materials and formsandresources section in UMS site")
+	public void validates_plan_prescriptionmaterials_plan_document_section_ums() {
+		FormsandresourcesPage formsAndResourcesPage = (FormsandresourcesPage) getLoginScenario()
+				.getBean(PageConstants.FORMS_AND_RESOURCES_PAGE);
 
+		String preferredMailOrderFlag=formsAndResourcesPage.validatePrescriptionmailorderBenefitPdfs();
+	
+		//Validations 
+		try {
+			JSONAssert.assertEquals(preferredMailOrderFlag,"true", true);
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}	
+	}
 }

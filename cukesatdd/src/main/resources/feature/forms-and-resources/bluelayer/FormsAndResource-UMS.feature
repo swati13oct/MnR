@@ -94,4 +94,15 @@ Examples:
 | planType | memberType  |
 | MA       |Individual |
 
+@prefmailorderlink
+Scenario Outline:To verify preferred mail order benefit pdf link displayed on forms and resources in UMS Site
+Given registered member for forms and resources in UMS Site
+	| Plan Type   | <planType>   |
+	| Member Type | <memberType> | 
+When the user navigates to forms and resources in UMS site
+Then the user validates preferred mail order benefit pdfs in plan materials and formsandresources section in UMS site
+Examples:
+| planType | memberType  |
+| MAPD     |Individual |
+
 
