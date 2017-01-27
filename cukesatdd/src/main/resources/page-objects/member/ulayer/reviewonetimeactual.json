@@ -1,0 +1,13 @@
+{
+"url":null,
+"expectedData":{
+"paymentAmount":{
+"identifier": "xpath",
+"elementName": "//div[@id='atdd_reviewonetime_label']/div[3]/div[2]/span"
+},
+"routingNumber":{
+"identifier": "xpath",
+"elementName": "//div[@id='atdd_reviewonetime_label']/div[4]/div[2]/span"
+}
+}
+}

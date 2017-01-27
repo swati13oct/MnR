@@ -558,7 +558,7 @@ public class AccountHomePage extends UhcDriver {
 	public OneTimePaymentsPage navigateToOneTimePaymentsPage() {
 		driver.navigate().to("https://member."+MRScenario.environment+"-aarpmedicareplans.uhc.com/content/dashboard/home/one-time-payments.html");
 		System.out.println("title  "+driver.getTitle());
-		if(driver.getTitle().equalsIgnoreCase("one-time-payment")){
+		if(driver.getTitle().equalsIgnoreCase("one-time-payments")){
 			return new OneTimePaymentsPage(driver);
 		}
 		return null;
