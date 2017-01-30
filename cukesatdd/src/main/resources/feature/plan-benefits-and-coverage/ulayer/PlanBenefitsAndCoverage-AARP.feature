@@ -717,8 +717,7 @@ Feature: To test plan benefits and Coverage on AARP site for Federal members
       | planType |       |
       | MAPD     |       |
       | MAPD     | LIS 4 |
-	
-	@availableRiders
+
   Scenario Outline: Verify riders on benefits and coverage in AARP site for MAPD Non Lis member
     Given registered AMP with following details for plan benefits and coverage flow in AARP site
       | Plan Type      | <planType>      |
@@ -730,11 +729,11 @@ Feature: To test plan benefits and Coverage on AARP site for Federal members
     Examples: 
       | planType | copayCategory |
       | MAPD     | NON LIS       |
-#      | MAPD     | LIS 1         |
-#      | MAPD     | LIS 2         |
-#      | MAPD     | LIS 3         |
-#      | MAPD     | LIS 4         |
-
+			| MAPD     | LIS 1         |
+      | MAPD     | LIS 2         |
+      | MAPD     | LIS 3         |
+      | MAPD     | LIS 4         |
+  
   Scenario Outline: Verify Federal Active Riders Dental 260 on benefits and coverage in AARP site for MAPD Non Lis member
     Given registered AMP with following details for plan benefits and coverage flow in AARP site
       | Plan Type      | <planType>      |
@@ -746,8 +745,8 @@ Feature: To test plan benefits and Coverage on AARP site for Federal members
     Examples: 
       | planType | copayCategory |
       | MAPD     | NON LIS       |
-      
-   Scenario Outline: Verify Federal Dental Platinum on benefits and coverage in AARP site for MAPD Non Lis member
+
+  Scenario Outline: Verify Federal Active Riders Dental Platinum on benefits and coverage in AARP site for MAPD Non Lis member
     Given registered AMP with following details for plan benefits and coverage flow in AARP site
       | Plan Type      | <planType>      |
       | Copay Category | <copayCategory> |
@@ -758,8 +757,8 @@ Feature: To test plan benefits and Coverage on AARP site for Federal members
     Examples: 
       | planType | copayCategory |
       | MAPD     | NON LIS       |
-      
-    Scenario Outline: Verify Federal Optional Dental on benefits and coverage in AARP site for MAPD Non Lis member
+
+  Scenario Outline: Verify Federal Active Riders Optional Dental on benefits and coverage in AARP site for MAPD Non Lis member
     Given registered AMP with following details for plan benefits and coverage flow in AARP site
       | Plan Type      | <planType>      |
       | Copay Category | <copayCategory> |
@@ -770,6 +769,42 @@ Feature: To test plan benefits and Coverage on AARP site for Federal members
     Examples: 
       | planType | copayCategory |
       | MAPD     | NON LIS       |
-      
 	
+	@availableRiders	
+	Scenario Outline: Verify Federal Available Riders Optional Dental on benefits and coverage in AARP site for MAPD Non Lis member
+    Given registered AMP with following details for plan benefits and coverage flow in AARP site
+      | Plan Type      | <planType>      |
+      | Copay Category | <copayCategory> |
+    When the user view forms and resources in AARP site
+    Then the user view benefits and coverage in AARP site
+    And the user validates the content on benefits and coverage page
+
+    Examples: 
+      | planType | copayCategory |
+      | MAPD     | LIS 2         |
+
+  Scenario Outline: Verify Federal Available Riders Dental Platinum on benefits and coverage in AARP site for MAPD Lis 2 member
+    Given registered AMP with following details for plan benefits and coverage flow in AARP site
+      | Plan Type      | <planType>      |
+      | Copay Category | <copayCategory> |
+    When the user view forms and resources in AARP site
+    Then the user view benefits and coverage in AARP site
+    And the user validates the content on benefits and coverage page
+
+    Examples: 
+      | planType | copayCategory |
+      | MAPD     | LIS 2         | 
+      
+
+    Scenario Outline: Verify Federal Optional Dental on benefits and coverage in AARP site 
+    Given registered AMP with following details for plan benefits and coverage flow in AARP site
+      | Plan Type      | <planType>      |
+     
+    When the user view forms and resources in AARP site
+    Then the user view benefits and coverage in AARP site
+    And the user validates Available riders in AARP site
+
+    Examples: 
+      | planType | 
+      | MA     | 
 
