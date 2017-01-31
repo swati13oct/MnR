@@ -54,12 +54,6 @@ public class GlobalTearDown {
 	@After
 	public void tearDown(ScenarioResult scenario) {
 
-		WebDriver wd = getLoginScenario().getWebDriver();
-		final byte[] screenshot = ((TakesScreenshot) wd).getScreenshotAs(OutputType.BYTES);
-		scenario.embed(new ByteArrayInputStream(screenshot), "image/png"); // ... and
-																	// embed it
-																	// in the
-																	// report.
 		//Clean up the existing webdriver.
 		getLoginScenario().flushBeans();
 		getLoginScenario().nullifyWebDriver();
