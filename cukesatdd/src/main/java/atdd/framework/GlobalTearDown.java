@@ -51,13 +51,15 @@ public class GlobalTearDown {
 	 * 
 	 * @param scenario
 	 */
-	@After
+	/*@After
 	public void tearDown(ScenarioResult scenario) {
 
 		//Clean up the existing webdriver.
+		
+		getLoginScenario().webDriver.close();
+		getLoginScenario().webDriver.quit();
 		getLoginScenario().flushBeans();
-		getLoginScenario().nullifyWebDriver();
 
-	}
+	}*/
 
 }
