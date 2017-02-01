@@ -6,6 +6,8 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.nio.MappedByteBuffer;
 import java.nio.channels.FileChannel;
 import java.nio.charset.Charset;
@@ -24,7 +26,6 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Properties;
 import java.util.Set;
-import java.util.concurrent.TimeUnit;
 
 import javax.naming.Context;
 import javax.naming.Name;
@@ -38,16 +39,13 @@ import org.json.JSONObject;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
-import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
+import org.openqa.selenium.remote.RemoteWebDriver;
 import org.springframework.ldap.core.DistinguishedName;
 import org.springframework.stereotype.Component;
 
 import acceptancetests.atdd.data.CommonConstants;
-
-import com.gargoylesoftware.htmlunit.BrowserVersion;
-import com.gargoylesoftware.htmlunit.WebClient;
 
 /**
  * 
@@ -77,7 +75,14 @@ public class MRScenario {
 	public static String environment, browser;
 
 	private static final String DIRECTORY = "/src/main/resources/";
+	
 	public static int count = 0;
+	
+	public static final String USERNAME = "pperugu";
+
+	public static final String ACCESS_KEY = "06f50b57-693a-4cd1-aaf9-14046e63942e";
+
+	public static final String URL = "https://" + USERNAME + ":" + ACCESS_KEY+ "@ondemand.saucelabs.com:443/wd/hub";
 
 	public void saveBean(String id, Object object) {
 		scenarioObjectMap.put(id, object);
@@ -853,19 +858,19 @@ public class MRScenario {
 
 
 	public WebDriver getWebDriver() {
-		HtmlUnitDriver htmlUnitDriver = new HtmlUnitDriver(
-				BrowserVersion.FIREFOX_24) {
-			@Override
-			protected WebClient modifyWebClient(WebClient client) {
-				client.getOptions().setThrowExceptionOnScriptError(false);
-				return client;
-			}
-		};
-		htmlUnitDriver.setJavascriptEnabled(true);
+		DesiredCapabilities capabilities = DesiredCapabilities.firefox();
+		capabilities.setCapability("platform", "Windows XP");
+		capabilities.setCapability("version", "45.0");
+        capabilities.setCapability("parent-tunnel", "sauce_admin");
+        capabilities.setCapability("tunnelIdentifier", "OptumSharedTunnel-Prd");
+        capabilities.setCapability("name", "ATDD-TESTRUN");
+		try {
+			webDriver = new RemoteWebDriver(new URL(URL), capabilities);
+		} catch (MalformedURLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
-		webDriver = htmlUnitDriver;
-		webDriver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
-		webDriver.manage().window().maximize();
 		return webDriver;
 	}
 
