@@ -2,6 +2,8 @@ package pages.acquisition.ulayer;
 
 import java.util.List;
 
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
@@ -11,7 +13,10 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import acceptancetests.atdd.data.CommonConstants;
 import acceptancetests.atdd.data.MRConstants;
+import acceptancetests.atdd.data.PageData;
+import acceptancetests.atdd.util.CommonUtility;
 import atdd.framework.UhcDriver;
 
 /**
@@ -25,7 +30,23 @@ public class PortfolioPage extends UhcDriver {
 
 	@FindBy(className = "zipcode_text")
 	private WebElement zipCodeField;
+	//US504467
+	@FindBy(xpath = "//div[@class='tab'][1]")
+	private WebElement viewMaPlans;
+	
+	@FindBy(xpath = "//div[@class='tab'][2]")
+	private WebElement viewPdpPlans;
 
+	@FindBy(xpath = "//div[@class='tab'][3]")
+	private WebElement viewSnpPlans;
+	
+
+	@FindBy(xpath = " //div[@class='col-md-9']")
+	List<WebElement> maPlanElement;
+
+	
+	private PageData vppPlanSummary;
+	
 	@FindBy(id = "goBtn")
 	private WebElement goButton;
 
@@ -61,6 +82,8 @@ public class PortfolioPage extends UhcDriver {
     
     @FindBy(xpath="//select")
     private WebElement selectDropDown;
+    
+    
 
 
 	//private static String PAGE_URL = MRConstants.AARP_OUR_PLANS_URL;
@@ -91,6 +114,8 @@ public class PortfolioPage extends UhcDriver {
 		validate(zipCodeField);
 		validate(goButton);
 		validate(lookupZipcodeLink);
+		validate(viewMaPlans);
+		validate(viewPdpPlans);
 
 	}
 
@@ -200,6 +225,68 @@ public class PortfolioPage extends UhcDriver {
         
         
  }
+ 
+ public JSONObject getPlanSummaryActualData(String planName) {
+		String fileName = null;
+		if (planName.contains("HMO")) {
+			fileName = "maplansummary.json";
+			JSONObject jsonObject = getActualJsonObject(fileName, planName, maPlanElement);
+			return jsonObject;
+
+		}
+		if (planName.contains("PDP")) {
+			fileName = "pdpplansummary.json";
+			JSONObject jsonObject = getActualJsonObject(fileName, planName, maPlanElement);
+			return jsonObject;
+		}
+		if (planName.contains("Regional PPO")) {
+			fileName = "mamultistateplansummary.json";
+			JSONObject jsonObject = getActualJsonObject(fileName, planName, maPlanElement);
+			return jsonObject;
+
+		}
+
+		return null;
+	}
+ 
+	private JSONObject getActualJsonObject(String fileName, String planName, List<WebElement> planElement) {
+		vppPlanSummary = CommonUtility.readPageData(fileName, CommonConstants.PAGE_OBJECT_DIRECTORY_ULAYER_ACQ);
+		for (WebElement plan : planElement) {
+			if (plan.getText().contains(planName)) {
+
+				JSONObject jsonObject = new JSONObject();
+				for (String key : vppPlanSummary.getExpectedData().keySet()) {
+					WebElement element = findChildElement(vppPlanSummary.getExpectedData().get(key), plan);
+					if (validate(element)) {
+						try {
+							jsonObject.put(key, element.getText());
+						} catch (JSONException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+					}
+
+				}
+				return jsonObject;
+
+			}
+		}
+		return null;
+	}
 
 
+ public VPPPlanSummaryPage viewPlanSummary(String planType) {
+		if (planType.equalsIgnoreCase("PDP")) {
+			viewMaPlans.click();
+		} else if (planType.equalsIgnoreCase("MA") || planType.equalsIgnoreCase("MAPD")) {
+			viewPdpPlans.click();
+		} else if (planType.equalsIgnoreCase("MS")) {
+			viewSnpPlans.click();
+		}
+		return new VPPPlanSummaryPage(driver, planType);
+	}
 }
+
+
+
+
