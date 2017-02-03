@@ -526,6 +526,7 @@ public class MRScenario {
 		Map<String, String> props = new HashMap<String, String>();
 		Properties prop = new Properties();
 		String propertiesFileToPick = System.getProperty("environment");
+		System.out.println("SUACE LABS username"+System.getenv("SAUCE_USERNAME"));
 		System.out.println("Using properties for environment ...."
 				+ propertiesFileToPick);
 		if (StringUtils.isBlank(propertiesFileToPick)) {
