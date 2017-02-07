@@ -526,7 +526,6 @@ public class MRScenario {
 		Map<String, String> props = new HashMap<String, String>();
 		Properties prop = new Properties();
 		String propertiesFileToPick = System.getProperty("environment");
-		System.out.println("SUACE LABS username"+System.getenv("SAUCE_USERNAME"));
 		System.out.println("Using properties for environment ...."
 				+ propertiesFileToPick);
 		if (StringUtils.isBlank(propertiesFileToPick)) {
@@ -859,24 +858,47 @@ public class MRScenario {
 
 
 	public WebDriver getWebDriver() {
-		if (System.getProperty("webdriverhost").equalsIgnoreCase("saucelabs")) {
-			DesiredCapabilities capabilities = DesiredCapabilities.firefox();
-			capabilities.setCapability("platform", "Windows XP");
-			capabilities.setCapability("version", "45.0");
-			capabilities.setCapability("parent-tunnel", "sauce_admin");
-			capabilities.setCapability("tunnelIdentifier",
-					"OptumSharedTunnel-Prd");
-			capabilities.setCapability("name", "ATDD-TESTRUN");
-			try {
-				webDriver = new RemoteWebDriver(new URL(URL), capabilities);
-			} catch (MalformedURLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		} else {
-			// TODO: pperugu :: Need to update the headless browser code once POC is ready for the same,
-		}
 
+		/*
+		 * 
+		 * Below code excecutes if webdriver value is passed in build command ::
+		 * either saucelabs or headless
+		 */
+		if (!(System.getProperty("webdriverhost").equalsIgnoreCase(null))) {
+
+			if (System.getProperty("webdriverhost").equalsIgnoreCase(
+					"saucelabs")) {
+				DesiredCapabilities capabilities = DesiredCapabilities
+						.firefox();
+				capabilities.setCapability("platform", "Windows XP");
+				capabilities.setCapability("version", "45.0");
+				capabilities.setCapability("parent-tunnel", "sauce_admin");
+				capabilities.setCapability("tunnelIdentifier",
+						"OptumSharedTunnel-Prd");
+				capabilities.setCapability("name", "ATDD-TESTRUN");
+				try {
+					webDriver = new RemoteWebDriver(new URL(URL), capabilities);
+				} catch (MalformedURLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			} else {
+				/*
+				 * TODO: pperugu :: Need to update the headless browser code for
+				 * Jenkins
+				 */
+			}
+
+		} else {/*
+				 * Below code excecutes if webdriver value is not passed in
+				 * build command :: mostly running locally and triggering runner
+				 * class directly
+				 */
+			/*
+			 * TODO: pperugu :: Need to update the headless browser code for
+			 * local
+			 */
+		}
 		return webDriver;
 	}
 
