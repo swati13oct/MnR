@@ -99,19 +99,11 @@
 		},
 	"availableRider1":{
 		"identifier":"xpath",
-		"elementName":".//*[@id='planBenefitsApp']/div[7]/div[1]/div/div[2]/div[2]/div[2]/div/div"
+		"elementName":".//*[@id='planBenefitsApp']/div[7]/div[1]/div/div[2]/div[2]/div[2]/div/div[1]/div/div"
 		},
 	"availableRider2":{
 		"identifier":"xpath",
-		"elementName":".//*[@id='planBenefitsApp']/div[7]/div[1]/div/div[2]/div[2]/div[3]/div/div"
-		}, 
-		"availableRider1":{
-	"identifier":"xpath",
-	"elementName":".//*[@id='planBenefitsApp']/div[7]/div[1]/div/div[2]/div[2]/div[2]/div/div"
-	},
-	"availableRider2":{
-	"identifier":"xpath",
-	"elementName":".//*[@id='planBenefitsApp']/div[7]/div[1]/div/div[2]/div[2]/div[3]/div/div"
-	}
+		"elementName":".//*[@id='planBenefitsApp']/div[7]/div[1]/div/div[2]/div[2]/div[2]/div/div[2]/div/div"
+		}	
 }
 }
