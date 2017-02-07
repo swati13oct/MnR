@@ -1,4 +1,5 @@
 package pages.dashboard.member.blayer;
+import java.util.List;
 import java.util.Map;
 
 import org.json.JSONException;
@@ -34,6 +35,9 @@ public class DrugCostEstimatorPage extends UhcDriver{
 
 	@FindBy(id = "add-drug")
 	public WebElement addDrug;
+	
+	@FindBy(className = "edit-drug")
+	public WebElement editDrug;
 	
 	@FindBy(id = "drug-search-input")
 	public WebElement drugsearchinput;
@@ -128,6 +132,22 @@ public class DrugCostEstimatorPage extends UhcDriver{
 		else 
 			return false;
 	}
-	
+	public void navgateToEditDrug(String drug){
+		//editDrug.click();
+		WebElement editDrug = driver.findElement(By.xpath("//div[@class='drug-container']//p[contains(text(),'"+drug+"')]/parent::section//a[@class='edit-drug']"));
+		editDrug.click();
+	}
+
+	public void addDrugs(List<String> list){
+
+		for(String drug : list){
+			AddNewDrugModal addNewDrugModal = new AddNewDrugModal(driver);
+			addNewDrugModal.clickonSearchButton(drug);
+			AddDrugDetails addDrugDetails = addNewDrugModal.selectDrug(drug);
+			addDrugDetails.continueAddDrugDetails();
+			
+		}
+	}
+
 }
 
