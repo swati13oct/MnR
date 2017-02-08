@@ -2,6 +2,8 @@ package pages.acquisition.ulayer;
 
 import java.util.List;
 
+import junit.framework.Assert;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.openqa.selenium.WebDriver;
@@ -43,6 +45,10 @@ public class PortfolioPage extends UhcDriver {
 
 	@FindBy(xpath = " //div[@class='col-md-9']")
 	List<WebElement> maPlanElement;
+	
+	//@FindBy(id="submit")
+	@FindBy(xpath="html/body/div[4]/div[2]/div[1]/div/div/div/div/div[1]/div/div/div/div[2]/div/div/form/button")
+	private WebElement Findplansbuttonportfolio;
 
 	
 	private PageData vppPlanSummary;
@@ -87,7 +93,9 @@ public class PortfolioPage extends UhcDriver {
 
 
 	//private static String PAGE_URL = MRConstants.AARP_OUR_PLANS_URL;
-	private static String PAGE_URL = MRConstants.AARP_OUR_PLANS_URL;
+	//private static String PAGE_URL = MRConstants.AARP_OUR_PLANS_URL;
+	
+	private static String PAGE_URL = MRConstants.PORTFOLIO_PAGE_URL;
 
 	public PortfolioPage(WebDriver driver) {
 		super(driver);
@@ -178,7 +186,7 @@ public class PortfolioPage extends UhcDriver {
 		return null;
 	}
 	
-	public VPPPlanSummaryPage enterZipCodeNavigateVPP(String zipcode){
+	public ResponsivePlanSummary enterZipCodeNavigateVPP(String zipcode){
 		WebDriverWait wait = new WebDriverWait(driver, 20);
 		wait.until(ExpectedConditions.elementToBeClickable(zipCodeInput));
 		
@@ -197,7 +205,7 @@ public class PortfolioPage extends UhcDriver {
 		System.out.println(driver.getTitle());
 		if(driver.getTitle().equalsIgnoreCase("Our Medicare Plan Types | AARP® Medicare Plans from UnitedHealthcare®")){
 			System.out.println("PAss");
-			return new VPPPlanSummaryPage(driver);
+			return new ResponsivePlanSummary(driver);
  		}
 		System.out.println("Fail");
 		return null;
@@ -226,7 +234,7 @@ public class PortfolioPage extends UhcDriver {
         
  }
  
- public JSONObject getPlanSummaryActualData(String planName) {
+ /*public JSONObject getPlanSummaryActualData(String planName) {
 		String fileName = null;
 		if (planName.contains("HMO")) {
 			fileName = "maplansummary.json";
@@ -275,7 +283,7 @@ public class PortfolioPage extends UhcDriver {
 	}
 
 
- public VPPPlanSummaryPage viewPlanSummary(String planType) {
+ public ResponsivePlanSummary viewPlanSummary(String planType) {
 		if (planType.equalsIgnoreCase("PDP")) {
 			viewMaPlans.click();
 		} else if (planType.equalsIgnoreCase("MA") || planType.equalsIgnoreCase("MAPD")) {
@@ -283,8 +291,54 @@ public class PortfolioPage extends UhcDriver {
 		} else if (planType.equalsIgnoreCase("MS")) {
 			viewSnpPlans.click();
 		}
-		return new VPPPlanSummaryPage(driver, planType);
+		return new ResponsivePlanSummary(driver, planType);
 	}
+}
+*/
+
+public ResponsivePlanSummary searchPlans(String zipcode, String countyName) {
+	
+	sendkeys(zipCodeField, zipcode);
+	waitforElement(Findplansbuttonportfolio);
+	if(Findplansbuttonportfolio.isEnabled()){
+		System.out.println("enabled");
+	}else{
+		Assert.fail();
+	}
+	/*try {
+		Thread.sleep(9000);
+	} catch (InterruptedException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}*/
+	/*Actions act = new Actions(driver);
+	act.moveToElement(Findplansbuttonportfolio);*/
+	validate(Findplansbuttonportfolio);
+	Findplansbuttonportfolio.click();
+	System.out.println("Findplan is clicked");
+	/*try {
+		if (countyModal.isDisplayed()) {
+			for (WebElement county : countyRows) {
+				if (county.getText().equalsIgnoreCase(countyName)) {
+					county.click();
+					break;
+				}
+
+			}
+		}
+	} catch (Exception e) {
+		System.out.println("county box not found");
+	}
+	*/
+	System.out.println("Responsive plan summary"+driver.getTitle());
+	
+	if (driver.getTitle().equalsIgnoreCase(PageTitleConstants.PORTFOLIO_HOME_PAGE_TITLE_HEADLESS)) {
+		
+		return new ResponsivePlanSummary(driver);
+	}
+	return null;
+}
+
 }
 
 

@@ -8,6 +8,30 @@
 "routingNumber":{
 "identifier": "xpath",
 "elementName": "//div[@id='atdd_reviewonetime_label']/div[4]/div[2]/span"
+},
+"paymentType":{
+"identifier":"xpath",
+"elementName":"//div[@id='atdd_reviewonetime_label']/div[1]/div[2]/span"
+},
+"memberId":{
+"identifier":"xpath",
+"elementName":"//div[@id='atdd_reviewonetime_label']/div[7]/div[2]/span"
+},
+"memberName":{
+"identifier":"xpath",
+"elementName":"//div[@id='atdd_reviewonetime_label']/div[8]/div[2]/span"
+},
+"paymentDate":{
+"identifier":"xpath",
+"elementName":"//div[@id='atdd_reviewonetime_label']/div[2]/div[2]/span"
+},
+"accountNumber":{
+"identifier":"xpath",
+"elementName":"//div[@id='atdd_reviewonetime_label']/div[5]/div[2]/span"
+},
+"accountHolderName":{
+"identifier":"xpath",
+"elementName":"//div[@id='atdd_reviewonetime_label']/div[6]/div[2]/span"
 }
 }
 }
