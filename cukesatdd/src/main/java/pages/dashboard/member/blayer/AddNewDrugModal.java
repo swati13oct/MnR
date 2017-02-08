@@ -1,4 +1,5 @@
 package pages.dashboard.member.blayer;
+import java.util.List;
 import java.util.Map;
 
 import org.json.JSONException;
@@ -25,7 +26,8 @@ public class AddNewDrugModal extends UhcDriver {
 	@FindBy(id = "drug-search-button")
 	public WebElement searchButton;
 
-	@FindBy(xpath = "//span[text()='Add a New Drug']")
+
+	@FindBy(xpath = "//header[@class='add-drug-slide-header']/span[contains(text(),'ADD A NEW DRUG')]")
 	public WebElement addNewDrugHeading;
 
 	@FindBy(xpath = "//a[text()='Cancel']")
@@ -37,7 +39,8 @@ public class AddNewDrugModal extends UhcDriver {
 	@FindBy(id="radio-0")
 	public WebElement firstdrug; //its liptor
 	
-	
+	@FindBy(xpath = "//span[contains(text(),'Please enter at least 4 characters to continue search')]")
+	public WebElement errorMessage;
 
 	@FindBy(id = "drug-alt-search-button")
 	public WebElement continueButton;
@@ -52,21 +55,8 @@ public class AddNewDrugModal extends UhcDriver {
 	}
 	@Override
 	public void openAndValidate() {
-
-		JSONObject jsonObject = new JSONObject();
-		for (String key : addnewdrug.getExpectedData().keySet()) {
-			WebElement element = findElement(addnewdrug.getExpectedData().get(key));
-			validate(element);
-			try {
-				jsonObject.put(key, element.getText());
-			} catch (JSONException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-
-		}
-		addnewdrugJson = jsonObject;
-		System.out.println("addnewdrugJson----->" + addnewdrugJson);
+		addNewDrugHeading.isDisplayed();
+		
 	}
 
 	public JSONObject getExpectedData(Map<String, JSONObject> expectedDataMap) {
@@ -84,13 +74,30 @@ public class AddNewDrugModal extends UhcDriver {
 		}
 		return null;
 	}
-	public void selectDrug(String drugname){
-		String xpath = "//label[contains(text(),'Lip-EX')]/parent::div/input";
-		WebElement rdrug = driver.findElement(By.xpath(xpath));
-		if(!rdrug.isSelected()){
+	public void typeDrugName(String DrugName) {
+		drugsearchinput.sendKeys(DrugName);
+	}
+	public AddDrugDetails selectDrug(String drugname){
+		/*String xpath = "//label[contains(text(),'"+drugname+"')]/parent::div/input";
+		WebElement rdrug = driver.findElement(By.xpath(xpath));*/
+		/*if(!rdrug.isSelected()){
 			rdrug.click();
-		}
+		}*/
 		continueButton.click();
+		return new AddDrugDetails(driver);
+	}
+	public void verifyerror(){
+		errorMessage.isDisplayed();
+	}
+	public void selectAdrugFromAutoCompleteSuggestions(String drug){
+		List<WebElement> elements = driver.findElements(By.className("autocomplete-suggestions"));
+		for(WebElement element : elements){
+			
+			if(drug.equalsIgnoreCase(element.getText())){
+				element.click();
+				break;
+			}
+		}
 	}
 }
 

@@ -220,5 +220,95 @@ public class DCEstimatorUhcStepDefinition {
 		addDrugDetails.continueAddDrugDetails();
 		System.out.println(" PASSED : ");
 	}
+	
+	@Then("^I should see the Pharmacy search tab as a clickable element within the DCE tool$")
+	public void i_should_see_the_pharmacy_search(){
+		WebDriver wd = (WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
+		DrugCostEstimatorPage dce = new DrugCostEstimatorPage(wd);
+		dce.changeUrlToNewDCEPage();
+		AddNewDrugModal addNewDrugModal = dce.clickOnAddDrug();
+		addNewDrugModal.clickonSearchButton("lipi");
+	}
+	@And("^I should be able to move forward or backward in the tool flow$")
+	public void i_should_be_able_to_move_forward_backward(){
+		WebDriver wd = (WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
+		AddDrugDetails addDrugDetails = new AddDrugDetails(wd);
+		addDrugDetails.backToSeach();
+	}
+	@And("^I should see Drug List as an active tab in the DCE tool upon click$")
+	public void i_should_see_drug_list_as_active(){
+		WebDriver wd = (WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
+		DrugCostEstimatorPage dce = new DrugCostEstimatorPage(wd);
+		dce.changeUrlToNewDCEPage();
+	}
+	@And("^I should be able to click on Add a Drug$")
+	public void i_should_be_able_to_click_AddDrug(){
+		WebDriver wd = (WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
+		
+		DrugCostEstimatorPage dce = new DrugCostEstimatorPage(wd);
+		dce.clickOnAddDrug();
+	}
+	@And("^the Add a Drug search modal should launch$")
+	public void the_add_a_drug_search_modal_should_launch(){
+		WebDriver wd = (WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
+		AddNewDrugModal addNewDrugModal = new AddNewDrugModal(wd);
+		addNewDrugModal.openAndValidate();
+	}
+	@And("^I should be able to add up to 25 drugs to my drug list$")
+	public void i_should_be_able_to_add_upto25_drugs(){
+		WebDriver wd = (WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
+		DrugCostEstimatorPage dce = new DrugCostEstimatorPage(wd);
+		List<String> drugs = new ArrayList<String>();
+		drugs.add("Lipistart");
+		drugs.add("Lipitor");
+		dce.addDrugs(drugs);
+		
+	}
+	@And("^I should have the ability to advance to the next step in the DCE flow after successfully creating a drug list with at least one drug$")
+	public void i_should_be_able_to_advance_dceflows(){
+		WebDriver wd = (WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
+		System.out.println(" PASSED : ");
+	}
+	
+	@And("^I enter at least four characters of the drug name in the Enter Drug Name field but not the exact drug name$")
+	public void i_enter_at_least_four_chars_of_drugname(){
+		WebDriver wd = (WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
+		AddNewDrugModal addNewDrugModal = new AddNewDrugModal(wd);
+		addNewDrugModal.typeDrugName("lipi");
+	}
+	@Then("^I should see a list of approximate search results to choose from$")
+	public void i_should_see_a_list_of_search_results(){
+		WebDriver wd = (WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
+		AddNewDrugModal addNewDrugModal = new AddNewDrugModal(wd);
+	    addNewDrugModal.selectAdrugFromAutoCompleteSuggestions("Lipitor");
+	}
+	@Then("^I should be able to select a drug from the list$")
+	public void i_should__be_able_to_select_a_drug_from_list(){
+		WebDriver wd = (WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
+		AddDrugDetails addDrugDetails = new AddDrugDetails(wd);
+		addDrugDetails.validateThePage();
+	}
+	@Then("^the modal should refresh to the next step in the flow if I select one of the suggested results$")
+	public void the_modal_should_regresh(){
+		WebDriver wd = (WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
+		AddDrugDetails addDrugDetails = new AddDrugDetails(wd);
+		addDrugDetails.continueAddDrugDetails();
+		System.out.println(" PASSED : ");
+	}
+	
+	@And("^I fail to enter at least four characters of the drug name when attempting to advance in the flow$")
+	public void i_fail_to_enter_at_least_four_char(){
+		WebDriver wd = (WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
+		AddNewDrugModal addNewDrugModal = new AddNewDrugModal(wd);
+		addNewDrugModal.clickonSearchButton("lip");
+	}
+	
+	@And("^I should see a default system error message from the current state error messages in the portal database$")
+	public void i_should_see_a_default_system_error_message(){
+		WebDriver wd = (WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
+		AddNewDrugModal addNewDrugModal = new AddNewDrugModal(wd);
+		addNewDrugModal.verifyerror();
+		System.out.println(" PASSED : ");
+	}
 
 }
