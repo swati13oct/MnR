@@ -547,7 +547,6 @@ Feature: To test plan benefits and Coverage on AARP site for Federal members
     Then the user view benefits and coverage in AARP site
     And the user validates the content on benefits and coverage page
 
-
     Examples: 
       | planType | copayCategory |
       | MAPD     | LIS 3         |
@@ -729,11 +728,11 @@ Feature: To test plan benefits and Coverage on AARP site for Federal members
     Examples: 
       | planType | copayCategory |
       | MAPD     | NON LIS       |
-			| MAPD     | LIS 1         |
+      | MAPD     | LIS 1         |
       | MAPD     | LIS 2         |
       | MAPD     | LIS 3         |
       | MAPD     | LIS 4         |
-  
+
   Scenario Outline: Verify Federal Active Riders Dental 260 on benefits and coverage in AARP site for MAPD Non Lis member
     Given registered AMP with following details for plan benefits and coverage flow in AARP site
       | Plan Type      | <planType>      |
@@ -769,20 +768,22 @@ Feature: To test plan benefits and Coverage on AARP site for Federal members
     Examples: 
       | planType | copayCategory |
       | MAPD     | NON LIS       |
-	
-	@availableRiders	
-	Scenario Outline: Verify Federal Available Riders Optional Dental on benefits and coverage in AARP site for MAPD Non Lis member
+
+  Scenario Outline: Verify Federal Available Riders Optional Dental on benefits and coverage in AARP site for MAPD Non Lis member
     Given registered AMP with following details for plan benefits and coverage flow in AARP site
       | Plan Type      | <planType>      |
       | Copay Category | <copayCategory> |
     When the user view forms and resources in AARP site
     Then the user view benefits and coverage in AARP site
     And the user validates the content on benefits and coverage page
+    When user clicks on Add Rider button
+    Then Add rider popup appears and clicks Add Rider button
 
     Examples: 
       | planType | copayCategory |
       | MAPD     | LIS 2         |
 
+  @availableRiders
   Scenario Outline: Verify Federal Available Riders Dental Platinum on benefits and coverage in AARP site for MAPD Lis 2 member
     Given registered AMP with following details for plan benefits and coverage flow in AARP site
       | Plan Type      | <planType>      |
@@ -790,21 +791,80 @@ Feature: To test plan benefits and Coverage on AARP site for Federal members
     When the user view forms and resources in AARP site
     Then the user view benefits and coverage in AARP site
     And the user validates the content on benefits and coverage page
+    When user clicks on Add Rider button
+    Then Add rider popup appears and clicks Add Rider button
 
     Examples: 
       | planType | copayCategory |
-      | MAPD     | LIS 2         | 
-      
+      | MAPD     | LIS 2         |
 
-    Scenario Outline: Verify Federal Optional Dental on benefits and coverage in AARP site 
+  Scenario Outline: Verify Federal Optional Dental on benefits and coverage in AARP site
     Given registered AMP with following details for plan benefits and coverage flow in AARP site
-      | Plan Type      | <planType>      |
-     
+      | Plan Type | <planType> |
     When the user view forms and resources in AARP site
     Then the user view benefits and coverage in AARP site
     And the user validates Available riders in AARP site
 
     Examples: 
-      | planType | 
-      | MA     | 
+      | planType |
+      | MA       |
 
+  @activeRider
+  Scenario Outline: Verify Federal Active Riders Fitness on benefits and coverage in AARP site for MAPD Non Lis member
+    Given registered AMP with following details for plan benefits and coverage flow in AARP site
+      | Plan Type      | <planType>      |
+      | Copay Category | <copayCategory> |
+    When the user view forms and resources in AARP site
+    Then the user view benefits and coverage in AARP site
+    And the user validates the content on benefits and coverage page
+    When user clicks on Remove This Rider button
+    Then Add rider popup appears and clicks Remove This Rider button
+
+    Examples: 
+      | planType | copayCategory |
+      | MAPD     | NON LIS       |
+
+  @availableRiders
+  Scenario Outline: Verify Federal Available High Optional Dental riders on benefits and coverage in AARP site for MAPD Lis 2 member
+    Given registered AMP with following details for plan benefits and coverage flow in AARP site
+      | Plan Type      | <planType>      |
+      | Copay Category | <copayCategory> |
+    When the user view forms and resources in AARP site
+    Then the user view benefits and coverage in AARP site
+    And the user validates the content on benefits and coverage page
+    When user clicks on Add Rider button
+    Then Add rider popup appears and clicks Add Rider button
+
+    Examples: 
+      | planType | copayCategory |
+      | MAPD     | LIS 2         |
+
+  @availableRider
+  Scenario Outline: Verify Federal Available  Dental 260  riders on benefits and coverage in AARP site for  MAPD member
+    Given registered AMP with following details for plan benefits and coverage flow in AARP site
+      | Plan Type      | <planType>      |
+      | Copay Category | <copayCategory> |
+    When the user view forms and resources in AARP site
+    Then the user view benefits and coverage in AARP site
+    And the user validates the content on benefits and coverage page
+    When user clicks on Add Rider button
+    Then Add rider popup appears and clicks Add Rider button
+
+    Examples: 
+      | planType | copayCategory |
+      | MAPD     | LIS 2         |
+
+  @availableRider2
+  Scenario Outline: Verify Federal Available  Fitness riders on benefits and coverage in AARP site for  MAPD member
+    Given registered AMP with following details for plan benefits and coverage flow in AARP site
+      | Plan Type      | <planType>      |
+      | Copay Category | <copayCategory> |
+    When the user view forms and resources in AARP site
+    Then the user view benefits and coverage in AARP site
+    And the user validates the content on benefits and coverage page
+    When user clicks on Add Rider button
+    Then Add rider popup appears and clicks Add Rider button
+
+    Examples: 
+      | planType | copayCategory |
+      | MAPD     | NON LIS       |
