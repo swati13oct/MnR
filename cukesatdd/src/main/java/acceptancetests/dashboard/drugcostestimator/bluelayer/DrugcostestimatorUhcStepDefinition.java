@@ -22,9 +22,9 @@ import cucumber.annotation.en.Then;
 import cucumber.annotation.en.When;
 import cucumber.table.DataTable;
 import gherkin.formatter.model.DataTableRow;
-import pages.dashboard.member.blayer.AddDrugDetails;
-import pages.dashboard.member.blayer.AddNewDrugModal;
-import pages.dashboard.member.blayer.DrugCostEstimatorPage;
+import pages.dashboard.member.drugcostestimator.blayer.AddDrugDetails;
+import pages.dashboard.member.drugcostestimator.blayer.AddNewDrugModal;
+import pages.dashboard.member.drugcostestimator.blayer.DrugCostEstimatorPage;
 import pages.member.bluelayer.AccountHomePage;
 import pages.member.bluelayer.LoginPage;
 import pages.mobile.member.blayer.BenefitsSummaryPage;
@@ -156,13 +156,7 @@ public class DrugcostestimatorUhcStepDefinition {
 		LoginPage loginPage = new LoginPage(wd);
 
 		loginPage.loginWith(userName, pwd,category);
-	/*	if (accountHomePage != null) {
-			Map<String, JSONObject> expectedDataMap = loginScenario
-					.getExpectedJson(userName);
-			getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
-			getLoginScenario().saveBean(PageConstants.ACCOUNT_HOME_PAGE, accountHomePage);
-			getLoginScenario().saveBean(CommonConstants.EXPECTED_DATA_MAP, expectedDataMap);
-		}*/
+
 	}
 
 	@When("^I use the DCE tool to enter one or more drugs to my drug list$")
@@ -295,44 +289,42 @@ public class DrugcostestimatorUhcStepDefinition {
 		addDrugDetails.continueAddDrugDetails();
 		System.out.println(" PASSED : ");
 	}
-	/*@Then("^I should see the Pharmacy search tab as a clickable element within the DCE tool$")
-	public void i_should_see_the_pharmacy_search() throws InterruptedException{
+	
+	/*@And("^the user reached the drug cost estimator page$")
+	public void the_DCE_tool_to_enter_one_or_more_drugs_to_my_drug_list() {
+		here code will come for the link on homepage or the button to reach drugcostestimator
 		WebDriver wd = (WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
+
 		DrugCostEstimatorPage dce = new DrugCostEstimatorPage(wd);
 		dce.changeUrlToNewDCEPage();
-		AddNewDrugModal addNewDrugModal = dce.clickOnAddDrug();
-		addNewDrugModal.clickonSearchButton("lipistart");
-		addNewDrugModal.selectDrug("lipistart");
-		AddDrugDetails addDrugDetails = new AddDrugDetails(wd);
-		addDrugDetails.continueAddDrugDetails();
-		
-		
-	}
-	@And("^I should be able to move forward or backward in the tool flow$")
-	public void i_should_be_able_to_move_forward_backward(){
+		System.out.println(" hurray : ");
+	}*/
+	
+	@And("^the user selects the pharmacy tab information like miles, zipcode and pharmacy type$")
+	public void navigate_drugcostestimator_pharmacytab(DataTable memberAttributes) {
+		List<DataTableRow> memberAttributesRow = memberAttributes
+				.getGherkinRows();
+		Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells()
+					.get(0), memberAttributesRow.get(i).getCells().get(1));
+		}
+
+		String zipcode = memberAttributesMap.get("Zipcode");
+		String radius = memberAttributesMap.get("Radius");
 		WebDriver wd = (WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
+
 		DrugCostEstimatorPage dce = new DrugCostEstimatorPage(wd);
-		dce.navigateToStep2();
-		dce.validatePharmacyForm();
-		dce.backwardToStep1();
-		dce.navigateToStep2();
-		*/
-	
-
-	
-	/*@And("^I fail to enter at least four characters of the drug name when attempting to advance in the flow$")
-	public void i_fail_to_enter_at_least_four_char(){
-		WebDriver wd = (WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
-		AddNewDrugModal addNewDrugModal = new AddNewDrugModal(wd);
-		addNewDrugModal.clickonSearchButton("lip");
+		dce.changeUrlToNewDCEPage();
+		dce.pharmacyInformation(zipcode,radius);
 	}
 	
-	@And("^I should see a default system error message from the current state error messages in the portal database$")
-	public void i_should_see_a_default_system_error_message(){
-		WebDriver wd = (WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
-		AddNewDrugModal addNewDrugModal = new AddNewDrugModal(wd);
-		addNewDrugModal.verifyerror();
-		System.out.println(" PASSED : ");*/
+	
+	@Then("^the user should be able to validate the pharmacy information$")
+	public void validate_pharmacy_information(){
+		
+		System.out.println(" PASSED : ");
 	}
-
+}
 
