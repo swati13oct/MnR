@@ -1,4 +1,4 @@
-package acceptancetests.dashboard.dce.aarplayer;
+package acceptancetests.dashboard.drugcostestimator.aarplayer;
 
 import java.util.ArrayList;
 import java.util.Iterator;

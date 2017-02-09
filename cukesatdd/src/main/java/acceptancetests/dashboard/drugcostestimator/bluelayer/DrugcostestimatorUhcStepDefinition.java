@@ -1,4 +1,4 @@
-package acceptancetests.dashboard.dce.bluelayer;
+package acceptancetests.dashboard.drugcostestimator.bluelayer;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -29,7 +29,7 @@ import pages.member.bluelayer.AccountHomePage;
 import pages.member.bluelayer.LoginPage;
 import pages.mobile.member.blayer.BenefitsSummaryPage;
 
-public class DCEstimatorUhcStepDefinition {
+public class DrugcostestimatorUhcStepDefinition {
 
 
 	@Autowired
@@ -295,8 +295,32 @@ public class DCEstimatorUhcStepDefinition {
 		addDrugDetails.continueAddDrugDetails();
 		System.out.println(" PASSED : ");
 	}
+	/*@Then("^I should see the Pharmacy search tab as a clickable element within the DCE tool$")
+	public void i_should_see_the_pharmacy_search() throws InterruptedException{
+		WebDriver wd = (WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
+		DrugCostEstimatorPage dce = new DrugCostEstimatorPage(wd);
+		dce.changeUrlToNewDCEPage();
+		AddNewDrugModal addNewDrugModal = dce.clickOnAddDrug();
+		addNewDrugModal.clickonSearchButton("lipistart");
+		addNewDrugModal.selectDrug("lipistart");
+		AddDrugDetails addDrugDetails = new AddDrugDetails(wd);
+		addDrugDetails.continueAddDrugDetails();
+		
+		
+	}
+	@And("^I should be able to move forward or backward in the tool flow$")
+	public void i_should_be_able_to_move_forward_backward(){
+		WebDriver wd = (WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
+		DrugCostEstimatorPage dce = new DrugCostEstimatorPage(wd);
+		dce.navigateToStep2();
+		dce.validatePharmacyForm();
+		dce.backwardToStep1();
+		dce.navigateToStep2();
+		*/
 	
-	@And("^I fail to enter at least four characters of the drug name when attempting to advance in the flow$")
+
+	
+	/*@And("^I fail to enter at least four characters of the drug name when attempting to advance in the flow$")
 	public void i_fail_to_enter_at_least_four_char(){
 		WebDriver wd = (WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
 		AddNewDrugModal addNewDrugModal = new AddNewDrugModal(wd);
@@ -308,7 +332,7 @@ public class DCEstimatorUhcStepDefinition {
 		WebDriver wd = (WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
 		AddNewDrugModal addNewDrugModal = new AddNewDrugModal(wd);
 		addNewDrugModal.verifyerror();
-		System.out.println(" PASSED : ");
+		System.out.println(" PASSED : ");*/
 	}
 
-}
+
