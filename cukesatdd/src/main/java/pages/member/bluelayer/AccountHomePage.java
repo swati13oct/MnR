@@ -137,6 +137,9 @@ public class AccountHomePage extends UhcDriver {
 	@FindBy(linkText = "Back to previous page")
 	private WebElement backTopreviouspageLink;
 	
+	@FindBy(xpath = "//html/body/title")
+	private WebElement newClaimsPageHeading;
+	
 	
 	private PageData myAccountHome;
 
@@ -568,6 +571,24 @@ public FormsandresourcesPage navigateToMydocumentUmsPage() {
 	public FormsandresourcesPage navigatebackToformsandresourcesUmsPage() {
 		
 		backTopreviouspageLink.click();
+		return null;
+	}
+
+	public pages.dashboard.member.blayer.ClaimsSummary navigateToClaimsSummaryPage() {
+		// TODO Auto-generated method stub
+		String url = "https://member.team-b-aarpmedicareplans.uhc.com/guest/mirumclaims.html";
+		driver.get(url);
+		try {
+			Thread.sleep(10000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		
+		if (driver.getTitle().equals("My Benefits & Coverage")) {
+			return new  pages.dashboard.member.blayer.ClaimsSummary(driver);
+		}
 		return null;
 	}
 

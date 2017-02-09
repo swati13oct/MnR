@@ -785,6 +785,10 @@ public class CommonConstants {
 	public static final String DCEstimator = "DCEstimator.json";
 	public static final String ADD_DRUG_DETAILS="adddrugdetails.json";
 	public static final String SWITCH_GENERIC="switchgeneric.json";
+
+	public static final String NEW_CLAIM_DETAILS_PAGE_DATA = "newClaimDetailsPage.json";
+
+	public static final String NEW_CLAIM_SUMMARY_PAGE_DATA = "newClaimsSummaryPage.json";
 	
 	
 }

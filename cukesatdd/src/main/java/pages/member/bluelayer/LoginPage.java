@@ -31,7 +31,8 @@ public class LoginPage extends UhcDriver {
 	private static String PAGE_URL = MRConstants.UHCM_URL;
 	
 
-	@FindBy(xpath = "//button[@id='fd_memberSignInButton' or @id='accessURAccountBTN']")
+	//@FindBy(xpath = "//button[@id='fd_memberSignInButton' or @id='accessURAccountBTN']")
+	@FindBy(id="fd_memberSignInButton")
 	private WebElement loginIn;
 
 	@FindBy(id = "loginPOPUPuser")
@@ -72,19 +73,26 @@ public class LoginPage extends UhcDriver {
         }
 
 
-		if (MRScenario.environment.equals("dev-a") || MRScenario.environment.equals("team-b")) {
+		if (MRScenario.environment.equals("dev-a"))  {
 
 			while (!isAlertPresent());
 		}
-		if ( MRScenario.environment.equals("team-c")) {
+		if ( MRScenario.environment.equals("team-c") || MRScenario.environment.equals("team-b")) {
 			
 			Alert alert = driver.switchTo().alert();
 	        alert.accept();
 	        Alert alert1 = driver.switchTo().alert();
 	        alert1.accept();
 	        }
+		
+		try {
+			Thread.sleep(10000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
-		if(currentUrl().contains("home/my-account-home.html") && category.equalsIgnoreCase("Group"))
+		if(currentUrl().contains("home/my-account-home.html") && category.equalsIgnoreCase("Group") || currentUrl().contains("/guest/500.html"))
 		{
 			return new AccountHomePage(driver,category);
 		}
