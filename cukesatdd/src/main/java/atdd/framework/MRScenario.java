@@ -864,7 +864,7 @@ public class MRScenario {
 		 * Below code excecutes if webdriver value is passed in build command ::
 		 * either saucelabs or headless
 		 */
-		if (!(System.getProperty("webdriverhost").equalsIgnoreCase(null))) {
+		if (null != System.getProperty("webdriverhost")) {
 
 			if (System.getProperty("webdriverhost").equalsIgnoreCase(
 					"saucelabs")) {
@@ -895,9 +895,24 @@ public class MRScenario {
 				 * class directly
 				 */
 			/*
-			 * TODO: pperugu :: Need to update the headless browser code for
-			 * local
+			 * TODO: pperugu :: Need to update the headless browser code below for
+			 * local 
 			 */
+
+			DesiredCapabilities capabilities = DesiredCapabilities
+					.firefox();
+			capabilities.setCapability("platform", "Windows XP");
+			capabilities.setCapability("version", "45.0");
+			capabilities.setCapability("parent-tunnel", "sauce_admin");
+			capabilities.setCapability("tunnelIdentifier",
+					"OptumSharedTunnel-Prd");
+			capabilities.setCapability("name", "MRATDD-TestSuite");
+			try {
+				webDriver = new RemoteWebDriver(new URL(URL), capabilities);
+			} catch (MalformedURLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 		return webDriver;
 	}
