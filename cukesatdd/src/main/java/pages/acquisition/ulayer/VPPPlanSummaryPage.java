@@ -34,15 +34,22 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	
 	@FindBy(xpath = "//div[@class='maplans_planbutton']/div[2]/div[2]/div")
 	private WebElement showMaPlans;
+	
+	@FindBy(xpath = "//div[@class='maplans_planbutton']/div[2]/div[2]/div[2]")
+	private WebElement hideMaPlans;
 
 	@FindBy(xpath = "//div[@class='planValues']")
 	private WebElement vppplansummarypage;
 
 	@FindBy(xpath = "//div[@class='medsupplans_planbutton']/div[2]/div/a")
 	private WebElement showMsPlans;
+	
 
 	@FindBy(xpath = "//div[@class='pdpplans_planbutton']/div[2]/div[2]/div")
 	private WebElement showPdpPlans;
+	
+	@FindBy(xpath = "//div[@class='pdpplans_planbutton']/div[2]/div[2]/div[2]")
+	private WebElement hidePdpPlans;
 
 	@FindBy(xpath = "//div[@class='enabled ng-scope']")
 	List<WebElement> maPlanElement;
@@ -65,10 +72,21 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	@FindBys(value = { @FindBy(className = "firstTierFilterItem") })
 	private List<WebElement> physcianSearchTypes;
 	
-	
 	@FindBys(value = { @FindBy(xpath = "//div[@id='providerResultsContainer']/div") })
 	private List<WebElement> providerNameList;
 	
+	
+	@FindBy(id = "allplanssise")
+	private WebElement allPlansSize;
+
+	@FindBy(xpath = "//div[@class='maplans_planbutton']/div[1]/p")
+	private WebElement maPlansCount;
+	
+	@FindBy(xpath = "//div[@class='medsupplans_planbutton']/div[1]/p")
+	private WebElement msPlansCount;
+	
+	@FindBy(xpath = "//div[@class='pdpplans_planbutton']/div[1]/p")
+	private WebElement pdpPlansCount;
 	
 	@FindBy(id = "pageHeader")
 	private WebElement pageHeader;
@@ -130,19 +148,19 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		
 		PageFactory.initElements(driver, this);
 		
-		CommonUtility.waitForPageLoad(driver, vppplansummarypage, CommonConstants.TIMEOUT_30);
+	/*	CommonUtility.waitForPageLoad(driver, vppplansummarypage, CommonConstants.TIMEOUT_30);
 		
 		String fileName = CommonConstants.VPP_PLAN_SUMMARY_PAGE_DATA;
 		vppPlanSummary = CommonUtility.readPageData(fileName,
-				CommonConstants.PAGE_OBJECT_DIRECTORY_ULAYER_ACQ);
+				CommonConstants.PAGE_OBJECT_DIRECTORY_ULAYER_ACQ); */
 		openAndValidate();
 	}
 
 	public VPPPlanSummaryPage(WebDriver driver, String planType) {
 		super(driver);
 		PageFactory.initElements(driver, this);
-
-		String fileName = null;
+		openAndValidate();
+	/*	String fileName = null;
 		if (planType.equalsIgnoreCase("MA")
 				|| planType.equalsIgnoreCase("MAPD")) {
 			fileName = "maplans.json";
@@ -154,6 +172,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		vppPlanSummary = CommonUtility.readPageData(fileName,
 				CommonConstants.PAGE_OBJECT_DIRECTORY_ULAYER_ACQ);
 		vppPlanSummaryJson = formJsonObject(vppPlanSummary);
+		*/
 
 	}
 
@@ -205,13 +224,26 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		}
 		return null;
 	}
+	
+	private WebElement getSpecificPlanSummary(
+			List<WebElement> planElement,
+			String planName) {
+		for (WebElement plan : planElement) {
+			if (plan.getText().contains(planName)) {
+
+				return plan;
+
+			}
+		}
+		return null;
+	}
 
 	@Override
 	public void openAndValidate() {
 		validate(showMaPlans);
 		validate(showMsPlans);
 		validate(showPdpPlans);
-		vppPlanSummaryJson = formJsonObject(vppPlanSummary);
+		// vppPlanSummaryJson = formJsonObject(vppPlanSummary);
 	}
 
 	private JSONObject formJsonObject(PageData vppPlanSummary) {
@@ -279,13 +311,31 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	public VPPPlanSummaryPage viewPlanSummary(String planType) {
 		if (planType.equalsIgnoreCase("PDP")) {
 			showPdpPlans.click();
+			validate(hidePdpPlans);
 		} else if (planType.equalsIgnoreCase("MA")
 				|| planType.equalsIgnoreCase("MAPD")) {
 			showMaPlans.click();
+			validate(hideMaPlans);
 		} else if (planType.equalsIgnoreCase("MS")) {
 			showMsPlans.click();
 		}
 		return new VPPPlanSummaryPage(driver, planType);
+	}
+	
+	
+	public boolean selectPlanType(String planType) {
+		if (planType.equalsIgnoreCase("PDP")) {
+			showPdpPlans.click();
+			return validate(hidePdpPlans);
+		} else if (planType.equalsIgnoreCase("MA")
+				|| planType.equalsIgnoreCase("MAPD")) {
+			showMaPlans.click();
+			return  validate(hideMaPlans);
+		} else if (planType.equalsIgnoreCase("MS")) {
+			showMsPlans.click();
+		}
+		return false;
+		//return new VPPPlanSummaryPage(driver, planType);
 	}
 
 	public JSONObject getPlanSummaryActualData(String planName) {
@@ -715,6 +765,55 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	
 	public VPPRequestSendEmailPage createVPPRequestSendEmailPage(){
 		return new VPPRequestSendEmailPage(driver);
+	}
+
+	public boolean getSpecificPlanInfo(String planName) {
+		WebElement element = null;
+		if (planName.contains("HMO")) {
+			//ElementData elementData = new ElementData("id", "viewDetailsMA");
+			 element = getSpecificPlanSummary(maPlanElement, planName);
+
+		} else if (planName.contains("PDP")) {
+			//ElementData elementData = new ElementData("id", "viewDetailsPDP");
+			 element = getSpecificPlanSummary(pdpPlanElement, planName);
+		} 
+		else if (planName.contains("Regional PPO")) {
+			//ElementData elementData = new ElementData("id", "viewDetailsMA");
+			 element = getSpecificPlanSummary(maPlanElement, planName);
+		}
+		
+		return validate(element);
+	}
+
+	public boolean validatePlansNumber() {
+		
+		int allPlans = Integer.valueOf(allPlansSize.getText().replace(" ", ""));
+		int maPlans = Integer.valueOf(maPlansCount.getText().replace(" Plans", ""));
+		int msPlans = Integer.valueOf(msPlansCount.getText().replace(" Plans", ""));
+		int pdpPlans = Integer.valueOf(pdpPlansCount.getText().replace(" Plans", ""));
+
+			
+		if(allPlans == maPlans + msPlans + pdpPlans)
+		{
+			return true;
+		}
+		return false;
+	}
+
+	public boolean validatePlanNames(String planType) {
+
+		if (planType.equalsIgnoreCase("PDP")) {
+			int pdpPlans = Integer.valueOf(pdpPlansCount.getText().replace(
+					" Plans", ""));
+			return pdpPlans == pdpPlanElement.size();
+
+		} else if (planType.equalsIgnoreCase("MA")
+				|| planType.equalsIgnoreCase("MAPD")) {
+			int maPlans = Integer.valueOf(maPlansCount.getText().replace(
+					" Plans", ""));
+			return maPlans == maPlanElement.size();
+		}
+		return false;
 	}
 
 

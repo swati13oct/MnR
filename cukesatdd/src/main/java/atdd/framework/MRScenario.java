@@ -81,6 +81,10 @@ public class MRScenario {
 	public static final String USERNAME = "pperugu";
 
 	public static final String ACCESS_KEY = "06f50b57-693a-4cd1-aaf9-14046e63942e";
+	
+	//public static final String USERNAME = System.getenv("SAUCE_USERNAME");
+	
+	//public static final String ACCESS_KEY = System.getenv("SAUCE_ACCESS_KEY");
 
 	public static final String URL = "https://" + USERNAME + ":" + ACCESS_KEY+ "@ondemand.saucelabs.com:443/wd/hub";
 
@@ -875,7 +879,7 @@ public class MRScenario {
 				capabilities.setCapability("parent-tunnel", "sauce_admin");
 				capabilities.setCapability("tunnelIdentifier",
 						"OptumSharedTunnel-Prd");
-				capabilities.setCapability("name", "ATDD-TESTRUN");
+				capabilities.setCapability("name", "MRATDD-TestSuite");
 				try {
 					webDriver = new RemoteWebDriver(new URL(URL), capabilities);
 				} catch (MalformedURLException e) {
@@ -896,9 +900,9 @@ public class MRScenario {
 				 */
 			/*
 			 * TODO: pperugu :: Need to update the headless browser code below for
-			 * local 
+			 * local
 			 */
-
+			
 			DesiredCapabilities capabilities = DesiredCapabilities
 					.firefox();
 			capabilities.setCapability("platform", "Windows XP");

@@ -583,6 +583,44 @@ public class AccountHomePage extends UhcDriver {
 		return null;
 	}
 
+	public Object validateLoginPageElements() {
+		
+		validate(myPlansTab);
+		validate(profAndPrefLink);
+		validate(contactUsLink);
+		validate(phrTab);
+		validate(benefitsLink);
+		validate(logOut);
+		validate(paymentsLink);
+		validate(formsAndResourcesLink);
+		validate(benefitsAndCoverageLink);
+		validate(pharmacyLocator);
+		validate(medicalProviders);
+		validate(myMenuNavigator);
+		validate(viewIDCard);
+		validate(drugLookupLink);
+		validate(searchClaimsHistory);
+		validate(myPlansTab);
+		validate(myPlansTab);
+		validate(myPlansTab);
+		validate(myPlansTab);
+		validate(myPlansTab);
+		validate(myPlansTab);
+		validate(myPlansTab);
+		validate(myPlansTab);
+
+		if(currentUrl().contains("home/my-account-home.html"))
+
+		{
+			return new AccountHomePage(driver);
+		}
+		else if (currentUrl().contains("terminated-plan.html")) {
+			return new TerminatedHomePage(driver); 
+		}
+		return null;
+		
+	}
+
 
 
 }
