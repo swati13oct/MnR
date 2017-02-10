@@ -82,6 +82,7 @@ public class AddDrugDetails extends UhcDriver {
 	}
 
 	public void selectQnty(String qnty){
+		waitforElement(quantityField);
 		sendkeys(quantityField, qnty);
 	}
 
@@ -91,6 +92,7 @@ public class AddDrugDetails extends UhcDriver {
 	}
 
 	public void continueAddDrugDetails(){
+		waitforElement(continueButton);
 		continueButton.click();
 	}
 	public AddNewDrugModal backToSeach(){

@@ -33,8 +33,29 @@ public class DrugCostEstimatorPage extends UhcDriver{
 
 	public JSONObject savedrugpageJson;
 
-	@FindBy(id = "add-drug")
+	@FindBy(xpath = "//div[@id='drugs-tab']//div[@id='add-drug']")
 	public WebElement addDrug;
+	
+	@FindBy(xpath="//p[contains(text(),'STEP2:')]/following-sibling::span[p[contains(text(),'PHARMACY')]]")
+	public WebElement step2;
+	
+	@FindBy(xpath="//p[contains(text(),'STEP1:')]/following-sibling::span[p[contains(text(),'DRUGS')]]")
+	public WebElement step1;
+	
+	@FindBy(id="pharmacy-form")
+	public WebElement pharmacyform;
+	
+	@FindBy(id="standard")
+	public WebElement rbStandardNetwork;
+	
+	@FindBy(id="saver")
+	public WebElement rbPharmacySaver;
+	
+	@FindBy(id="mail-service")
+	public WebElement rbPreferredMailService;
+	
+	@FindBy(id="retail")
+	public WebElement rbPreferredRetail;
 	
 	@FindBy(className = "edit-drug")
 	public WebElement editDrug;
@@ -81,7 +102,9 @@ public class DrugCostEstimatorPage extends UhcDriver{
 
 		return dashoardExpectedJson;
 	}
-	public AddNewDrugModal clickOnAddDrug() {
+	public AddNewDrugModal clickOnAddDrug() throws InterruptedException {
+		Thread.sleep(5000);
+		waitforElement(addDrug);
 		addDrug.click();
 		System.out.println("Current Page title :: "+driver.getTitle());
 
@@ -138,15 +161,44 @@ public class DrugCostEstimatorPage extends UhcDriver{
 		editDrug.click();
 	}
 
-	public void addDrugs(List<String> list){
-
-		for(String drug : list){
-			AddNewDrugModal addNewDrugModal = new AddNewDrugModal(driver);
-			addNewDrugModal.clickonSearchButton(drug);
-			AddDrugDetails addDrugDetails = addNewDrugModal.selectDrug(drug);
+	public void addDrugs(int count,String drug) throws InterruptedException{
+		for(int i=1;i<=count;i++){
+			AddNewDrugModal addNewDrugModal = clickOnAddDrug();
+			if((getDrugsCount()) == 25 || i == 26){
+				System.out.println("Exceeded the limit");
+				break;
+			}
+			addNewDrugModal.typeDrugName(drug);
+			addNewDrugModal.submit();
+			addNewDrugModal.selectDrug(drug);
+			AddDrugDetails addDrugDetails = new AddDrugDetails(driver);
+			addDrugDetails.selectQnty(i+"");
 			addDrugDetails.continueAddDrugDetails();
-			
+			SavingsOppurtunity savingsOppurtunity  = new SavingsOppurtunity(driver);
+			savingsOppurtunity.savedrugbutton();
+			Thread.sleep(3000);
 		}
+	}
+	public int getDrugsCount(){
+		List<WebElement> drugs = driver.findElements(By.xpath("//div[@id='drugs-tab']//div[contains(@ng-repeat,'eachDrug')]"));
+		return drugs.size();
+	}
+	
+	public void navigateToStep2(){
+		waitforElement(step2);
+		step2.click();
+	}
+	
+	public void backwardToStep1(){
+		step1.click();
+	}
+	
+	public void validatePharmacyForm(){
+		Assert.assertTrue(pharmacyform.isDisplayed());
+		Assert.assertTrue(rbStandardNetwork.isDisplayed());
+		Assert.assertTrue(rbPharmacySaver.isDisplayed());
+		Assert.assertTrue(rbPreferredMailService.isDisplayed());
+		Assert.assertTrue(rbPreferredRetail.isDisplayed());
 	}
 
 }

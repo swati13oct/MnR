@@ -160,7 +160,7 @@ public class DrugcostestimatorUhcStepDefinition {
 	}
 
 	@When("^I use the DCE tool to enter one or more drugs to my drug list$")
-	public void I_use_the_DCE_tool_to_enter_one_or_more_drugs_to_my_drug_list() {
+	public void I_use_the_DCE_tool_to_enter_one_or_more_drugs_to_my_drug_list() throws InterruptedException {
 		
 		WebDriver wd = (WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
 
@@ -216,18 +216,24 @@ public class DrugcostestimatorUhcStepDefinition {
 	}
 	
 	@Then("^I should see the Pharmacy search tab as a clickable element within the DCE tool$")
-	public void i_should_see_the_pharmacy_search(){
+	public void i_should_see_the_pharmacy_search() throws InterruptedException{
 		WebDriver wd = (WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
 		DrugCostEstimatorPage dce = new DrugCostEstimatorPage(wd);
 		dce.changeUrlToNewDCEPage();
 		AddNewDrugModal addNewDrugModal = dce.clickOnAddDrug();
-		addNewDrugModal.clickonSearchButton("lipi");
+		addNewDrugModal.clickonSearchButton("lipistart");
+		addNewDrugModal.selectDrug("lipistart");
+		AddDrugDetails addDrugDetails = new AddDrugDetails(wd);
+		addDrugDetails.continueAddDrugDetails();
 	}
 	@And("^I should be able to move forward or backward in the tool flow$")
 	public void i_should_be_able_to_move_forward_backward(){
 		WebDriver wd = (WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
-		AddDrugDetails addDrugDetails = new AddDrugDetails(wd);
-		addDrugDetails.backToSeach();
+		DrugCostEstimatorPage dce = new DrugCostEstimatorPage(wd);
+		dce.navigateToStep2();
+		dce.validatePharmacyForm();
+		dce.backwardToStep1();
+		dce.navigateToStep2();
 	}
 	@And("^I should see Drug List as an active tab in the DCE tool upon click$")
 	public void i_should_see_drug_list_as_active(){
@@ -236,7 +242,7 @@ public class DrugcostestimatorUhcStepDefinition {
 		dce.changeUrlToNewDCEPage();
 	}
 	@And("^I should be able to click on Add a Drug$")
-	public void i_should_be_able_to_click_AddDrug(){
+	public void i_should_be_able_to_click_AddDrug() throws InterruptedException{
 		WebDriver wd = (WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
 		
 		DrugCostEstimatorPage dce = new DrugCostEstimatorPage(wd);
@@ -249,13 +255,12 @@ public class DrugcostestimatorUhcStepDefinition {
 		addNewDrugModal.openAndValidate();
 	}
 	@And("^I should be able to add up to 25 drugs to my drug list$")
-	public void i_should_be_able_to_add_upto25_drugs(){
+	public void i_should_be_able_to_add_upto25_drugs(DataTable data) throws InterruptedException{
+		List<DataTableRow> memberAttributesRow = data.getGherkinRows();
+		String drug = memberAttributesRow.get(1).getCells().get(0);
 		WebDriver wd = (WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
 		DrugCostEstimatorPage dce = new DrugCostEstimatorPage(wd);
-		List<String> drugs = new ArrayList<String>();
-		drugs.add("Lipistart");
-		drugs.add("Lipitor");
-		dce.addDrugs(drugs);
+		dce.addDrugs(26,drug);
 		
 	}
 	@And("^I should have the ability to advance to the next step in the DCE flow after successfully creating a drug list with at least one drug$")
