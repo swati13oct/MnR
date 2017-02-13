@@ -868,3 +868,60 @@ Feature: To test plan benefits and Coverage on AARP site for Federal members
     Examples: 
       | planType | copayCategory |
       | MAPD     | NON LIS       |
+
+      
+
+Scenario Outline: Verify Federal Dental 260 Riders on benefits and coverage in AARP site for MAPD 
+    Given registered AMP with following details for plan benefits and coverage flow in AARP site
+      | Plan Type      | <planType>      |
+    When the user view forms and resources in AARP site
+    Then the user view benefits and coverage in AARP site
+    And the user validates the content on benefits and coverage page
+
+    Examples: 
+      | planType |
+      | MAPD    |
+
+
+
+
+
+Scenario Outline: Verify Federal Active Dental Platinum Riders on benefits and coverage in AARP site for MAPD 
+    Given registered AMP with following details for plan benefits and coverage flow in AARP site
+      | Plan Type      | <planType>      |
+    When the user view forms and resources in AARP site
+    Then the user view benefits and coverage in AARP site
+    And the user validates the content on benefits and coverage page
+
+    Examples: 
+      | planType |
+      | MAPD    |
+
+
+
+
+Scenario Outline: Verify Federal Active Optional Dental Riders on benefits and coverage in AARP site for MAPD 
+    Given registered AMP with following details for plan benefits and coverage flow in AARP site
+      | Plan Type      | <planType>      |
+    When the user view forms and resources in AARP site
+    Then the user view benefits and coverage in AARP site
+    And the user validates the content on benefits and coverage page
+
+    Examples: 
+      | planType |
+
+
+
+
+Scenario Outline: Verify Federal Active High Option Dental Riders on benefits and coverage in AARP site for MAPD 
+    Given registered AMP with following details for plan benefits and coverage flow in AARP site
+      | Plan Type      | <planType>      |
+    When the user view forms and resources in AARP site
+    Then the user view benefits and coverage in AARP site
+    And the user validates the content on benefits and coverage page
+
+    Examples: 
+      | planType |
+      | MAPD    |
+      | MAPD    |
+      
