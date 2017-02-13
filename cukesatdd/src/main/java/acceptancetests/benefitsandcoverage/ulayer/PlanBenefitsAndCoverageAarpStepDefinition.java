@@ -493,6 +493,72 @@ public class PlanBenefitsAndCoverageAarpStepDefinition {
 		System.out.println("----right row validation ended--------");
 	}
 	
+	@Then("^the user view mydocument in AARP site$")
+	public void views_mydocument_aarp_site() {
+		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstants.ACCOUNT_HOME_PAGE);
+		
+		FormsandresourcesPage formsAndResourcesPage = accountHomePage.navigateToMydocumentAarpPage();
+	}
+	
+	@Then("^the user validates the content on mydocument page$")
+	public void views_mydoument_validation_aarp_site() {
+		try {
+			
+			JSONObject actual=(JSONObject) loginScenario.getBean(PlanBenefitsAndCoverageCommonConstants.MYDOCUMENT_ACTUAL);
+			
+			JSONObject expected=(JSONObject) loginScenario.getBean(PlanBenefitsAndCoverageCommonConstants.MYDOCUMENT_EXPECTED);
+			
+			if(actual!=null && expected !=null){
+				JSONAssert.assertEquals(expected, actual, true);
+			}			
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	@Then("^the user validates the backtopreviouspage link on mydocument page$")
+	public void view_back_to_previous_link_validation_aarp_site(){
+		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstants.ACCOUNT_HOME_PAGE);
+		 
+		FormsandresourcesPage formsAndResourcesPage = accountHomePage.navigatebackToformsandresourcesAarpPage();
+
+	}
+	
+	@Then("^the user validates the pagination link on mydocument page$")
+	public void view_pagination_link_validation_aarp_site(){
+		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstants.ACCOUNT_HOME_PAGE);
+		 
+		FormsandresourcesPage formsAndResourcesPage = accountHomePage.navigateTopaginationAarpPage();
+
+	}
+	
+	@Then("^the user validates the view/download link on mydocument page$")
+	public void view_download_link_validation_aarp_site(){
+		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstants.ACCOUNT_HOME_PAGE);
+		 
+		FormsandresourcesPage formsAndResourcesPage = accountHomePage.navigateToviewdowloadlinkAarpPage();
+
+	}
+	
+	@Then("^the user validates the custom search on mydocument page$")
+	public void view_custom_search_aarp_site(){
+		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstants.ACCOUNT_HOME_PAGE);
+		
+		FormsandresourcesPage formsAndResourcesPage = accountHomePage.navigateTocustomersearchlinkAarpPage();		
+		
+	}
+
+	@Then("^the user validates the sorting link on mydocument page$")
+	public void view_sorting_search_aarp_site(){
+		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstants.ACCOUNT_HOME_PAGE);
+		
+		FormsandresourcesPage formsAndResourcesPage = accountHomePage.navigateTosortingsearchlinkAarpPage();		
+		
+	}
+	
+
+	
 	@After
 	public void tearDown() {
 

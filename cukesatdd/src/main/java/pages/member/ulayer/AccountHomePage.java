@@ -144,6 +144,33 @@ public class AccountHomePage extends UhcDriver {
 	@FindBy(xpath = "//*[@id='paymentOverviewApp']/div[1]/div/div/div/h1")
 	private WebElement paymentsHeading;
 	
+	@FindBy(linkText = "My Documents")
+	private WebElement MyDocumentLink;
+	
+	@FindBy(linkText = "Back to previous page")
+	private WebElement backTopreviouspageLink;
+	
+	@FindBy(xpath = "//*[@id='myDocuments']/div/div[2]/div/p[2]/ul/li[4]/a")
+	private WebElement paginationLink;
+	
+	@FindBy(linkText = "View/Download")
+	private WebElement viewanddownloadLink;
+	
+	@FindBy(xpath = "//*[@id='myDocuments']/div/div[1]/div/form/div/div[2]/div[2]/div[2]/div[1]/div/input")
+	private WebElement fromdate;
+	
+	@FindBy(xpath = "//*[@id='myDocuments']/div/div[1]/div/form/div/div[2]/div[2]/div[2]/div[2]/div/input")
+	private WebElement todate;
+	
+	@FindBy(xpath = "//*[@id='myDocuments']/div/div[1]/div/form/div/div[2]/div[2]/div[2]/div[3]/button")
+	private WebElement searchLink;
+	
+	@FindBy(linkText = "Date")
+	private WebElement dateLink;
+	
+	
+	
+	
 	private PageData myAccountHome;
 
 	public JSONObject accountHomeJson;
@@ -582,6 +609,54 @@ public class AccountHomePage extends UhcDriver {
 		}
 		return null;
 	}
+
+    public FormsandresourcesPage navigateToMydocumentAarpPage() {
+		
+		MyDocumentLink.click();
+		
+		return null;
+	}
+
+	public FormsandresourcesPage navigatebackToformsandresourcesAarpPage() {
+		
+		backTopreviouspageLink.click();
+		
+		return null;
+	}
+
+	public FormsandresourcesPage navigateTopaginationAarpPage() {
+		
+		Select select = new  Select(driver.findElement(By.id("document-date")));
+		select.selectByVisibleText("Current Year");
+		
+		paginationLink.click();
+		
+		return null;
+	}
+
+	public FormsandresourcesPage navigateToviewdowloadlinkAarpPage() {
+		
+		viewanddownloadLink.click();
+		return null;
+	}
+
+	public FormsandresourcesPage navigateTocustomersearchlinkAarpPage() {
+		
+		Select select = new  Select(driver.findElement(By.id("document-date")));
+		select.selectByVisibleText("Custom Search");
+		fromdate.sendKeys("01/09/2017");
+		todate.sendKeys("01/13/2017");
+		searchLink.click();
+		return null;
+	}
+
+	public FormsandresourcesPage navigateTosortingsearchlinkAarpPage() {
+		Select select = new  Select(driver.findElement(By.id("document-date")));
+		select.selectByVisibleText("Current Year");
+		dateLink.click();
+		return null;
+	}
+	
 
 
 
