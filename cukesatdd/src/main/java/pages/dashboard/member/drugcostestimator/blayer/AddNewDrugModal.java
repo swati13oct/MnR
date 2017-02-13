@@ -44,6 +44,9 @@ public class AddNewDrugModal extends UhcDriver {
 
 	@FindBy(id = "drug-alt-search-button")
 	public WebElement continueButton;
+	
+	@FindBy(xpath = "//span[contains(text(),'Your Drug List can contain a maximum of 25 drugs.')]")
+	public WebElement exceededError;
 
 	public AddNewDrugModal(WebDriver driver) {
 		super(driver);
@@ -78,11 +81,12 @@ public class AddNewDrugModal extends UhcDriver {
 		drugsearchinput.sendKeys(DrugName);
 	}
 	public AddDrugDetails selectDrug(String drugname){
-		/*String xpath = "//label[contains(text(),'"+drugname+"')]/parent::div/input";
-		WebElement rdrug = driver.findElement(By.xpath(xpath));*/
-		/*if(!rdrug.isSelected()){
+		String xpath = "//label[contains(text(),'"+drugname+"')]/parent::div/input";
+		WebElement rdrug = driver.findElement(By.xpath(xpath));
+		if(!rdrug.isSelected()){
 			rdrug.click();
-		}*/
+		}
+		waitforElement(continueButton);
 		continueButton.click();
 		return new AddDrugDetails(driver);
 	}
@@ -98,6 +102,13 @@ public class AddNewDrugModal extends UhcDriver {
 				break;
 			}
 		}
+	}
+	public void submit(){
+		searchButton.click();
+	}
+	
+	public void verifyExceededError(){
+		exceededError.isDisplayed();
 	}
 }
 

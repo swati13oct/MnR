@@ -1,24 +1,10 @@
-@drug_cost_estimator
+@drug_cost_estimator_mobile
 Feature:Drug Cost Estimator- Pharmacy 
-Scenario Outline: To Verify MR portal members using DCE-Pharmacy on a desktop device 
-Given I am a registered member using the new M&R member portal on a desktop computer
-| Plan Type   | <planType>   |
-| Member Type	  | <memberType> |
-When the above plantype user logs in UMS Site Desktop
-And the user selects the pharmacy tab information like miles, zipcode and pharmacy type 
-| Zipcode	  | <zipcode> |
-| Radius  | <radius>   |
-Then the user should be able to validate the pharmacy information
-Examples:
-
- | planType  | memberType  | zipcode| radius|
- | MA       |Individual | | 90002 | 25miles |
-
 Scenario Outline: To Verify MR portal members using DCE on a desktop device will be able to edit their drug list to add drugs up to a total of 25, subtract drugs, change dosages, change packaging and change frequency at any time while using the tool
-Given I am a registered member using the new M&R member portal on a desktop computer
+Given I am an UHC Individual member on the Dashboard site SmartPhone
 | Plan Type   | <planType>   |
 | Member Type	  | <memberType> |
-When the above plantype user logs in UMS Site Desktop
+When plantype user logs in mobile in UHC Site
 And I should see Drug List as an active tab in the DCE tool upon click
 And I should be able to add up to 25 drugs to my drug list
 |drug|
@@ -30,10 +16,10 @@ Examples:
  | MA       |Individual |
  
 Scenario Outline: To Verify MR portal members using DCE enter at least four characters of the drug name
-Given I am a registered member using the new M&R member portal on a desktop computer
+Given I am an UHC Individual member on the Dashboard site SmartPhone
 | Plan Type   | <planType>   |
 | Member Type	  | <memberType> |
-When the above plantype user logs in UMS Site Desktop
+When plantype user logs in mobile in UHC Site
 And I should see Drug List as an active tab in the DCE tool upon click
 And I should be able to click on Add a Drug
 And the Add a Drug search modal should launch
@@ -47,10 +33,10 @@ Examples:
  | MA       |Individual |
  
 Scenario Outline: To Verify MR portal members using DCE see a default system error message
-Given I am a registered member using the new M&R member portal on a desktop computer
+Given I am an UHC Individual member on the Dashboard site SmartPhone
 | Plan Type   | <planType>   |
 | Member Type	  | <memberType> |
-When the above plantype user logs in UMS Site Desktop
+When plantype user logs in mobile in UHC Site
 And I should see Drug List as an active tab in the DCE tool upon click
 And I should be able to click on Add a Drug
 And the Add a Drug search modal should launch
@@ -60,26 +46,27 @@ Examples:
  | planType  | memberType  |
  | MA       |Individual |
  
-Scenario Outline: To Verify MR portal members using DCE on a desktop device will be able to edit drugs
-Given I am a registered member using the new M&R member portal on a desktop computer
+Scenario Outline: To Verify MR portal members using DCE on a Mobile device will be able to edit their drug list
+Given I am an UHC Individual member on the Dashboard site SmartPhone
 | Plan Type   | <planType>   |
 | Member Type	  | <memberType> |
-When the above plantype user logs in UMS Site Desktop
+When plantype user logs in mobile in UHC Site
 When I use the DCE tool to enter one or more drugs to my drug list
 When I should be see dosage, package and frequency options returned from the DCE web service
-And I should be able to change those options at any time
-And I should have the ability to advance to the next step in the flow
 Examples:
+
  | planType  | memberType  |
  | MA       |Individual |
-	
-Scenario Outline: To Verify MR portal members using DCE on a desktop device , Pharmacy search tab validation
-Given I am a registered member using the new M&R member portal on a desktop computer
+ 
+Scenario Outline: To Verify MR portal members using DCE on a Mobile device, Pharmacy search tab validation
+Given I am an UHC Individual member on the Dashboard site SmartPhone
 | Plan Type   | <planType>   |
 | Member Type	  | <memberType> |
-When the above plantype user logs in UMS Site Desktop
+When plantype user logs in mobile in UHC Site
+And I should see Drug List as an active tab in the DCE tool upon click
 Then I should see the Pharmacy search tab as a clickable element within the DCE tool
 And I should be able to move forward or backward in the tool flow 
 Examples:
  | planType  | memberType  |
  | MA       |Individual |
+ 
