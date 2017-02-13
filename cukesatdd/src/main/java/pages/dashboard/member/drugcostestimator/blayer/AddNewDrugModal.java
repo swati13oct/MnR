@@ -53,18 +53,36 @@ public class AddNewDrugModal extends UhcDriver {
 		PageFactory.initElements(driver, this);
 		CommonUtility.waitForPageLoad(driver, addNewDrugHeading, 10);
 		String fileName = CommonConstants.ADD_NEW_DRUG_PAGE_DATA;
-		//addnewdrug = CommonUtility.readPageData(fileName, CommonConstants.PAGE_OBJECT_DIRECTORY_BLAYER_MEMBER);
-		//openAndValidate();
+		addnewdrug = CommonUtility.readPageData(fileName, CommonConstants.PAGE_OBJECT_DIRECTORY_DCE_MEMBER);
+		openAndValidate();
 	}
 	@Override
 	public void openAndValidate() {
-		addNewDrugHeading.isDisplayed();
+
+		
+		JSONObject jsonObject = new JSONObject();
+		for (String key : addnewdrug.getExpectedData().keySet()) {
+			WebElement element = findElement(addnewdrug.getExpectedData()
+					.get(key));
+			if (null != element) {
+				validate(element);
+				try {
+					jsonObject.put(key, element.getText());
+				} catch (JSONException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		}
+		addnewdrugJson = jsonObject;
+		System.out.println("addDrugJson----->"+addnewdrugJson);
+	
 		
 	}
 
 	public JSONObject getExpectedData(Map<String, JSONObject> expectedDataMap) {
 
-		JSONObject addnewdrugExpectedJson = expectedDataMap.get(CommonConstants.ADD_NEW_DRUG_PAGE_DATA);
+		JSONObject addnewdrugExpectedJson = expectedDataMap.get(CommonConstants.ADD_NEW_DRUG_MODAL);
 
 		return addnewdrugExpectedJson;
 	}
@@ -81,7 +99,7 @@ public class AddNewDrugModal extends UhcDriver {
 		drugsearchinput.sendKeys(DrugName);
 	}
 	public AddDrugDetails selectDrug(String drugname){
-		String xpath = "//label[contains(text(),'"+drugname+"')]/parent::div/input";
+		String xpath = "//label[contains(text(),'"+drugname+"')]/parent::div/input[contains(@id,'drugs-')]";
 		WebElement rdrug = driver.findElement(By.xpath(xpath));
 		if(!rdrug.isSelected()){
 			rdrug.click();

@@ -1,4 +1,5 @@
 package pages.dashboard.member.drugcostestimator.blayer;
+import java.util.List;
 import java.util.Map;
 
 import org.json.JSONException;
@@ -88,7 +89,12 @@ public class AddDrugDetails extends UhcDriver {
 
 	public void selectFrequency(String frquency){
 		Select options = new Select(selectYourFrequencyDropdown);
-		options.selectByVisibleText(frquency);
+		if(frquency.equalsIgnoreCase("Every 1 month")){
+			options.selectByValue("1");
+		}
+		if(frquency.equalsIgnoreCase("Every 3 months")){
+			options.selectByValue("3");
+		}
 	}
 
 	public void continueAddDrugDetails(){

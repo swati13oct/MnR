@@ -64,6 +64,7 @@ public class CommonConstants {
 	public static final String PAGE_OBJECT_DIRECTORY_ULAYER_MEMBER = "/page-objects/member/ulayer/";
 
 	public static final String PAGE_OBJECT_DIRECTORY_BLAYER_MEMBER = "/page-objects/member/bluelayer/";
+	public static final String PAGE_OBJECT_DIRECTORY_DCE_MEMBER = "/page-objects/member/dashboard/drugcostestimator/";
 
 	public static final String PLAN_SUMMARY_PAGE_DATA = "plansummarypdp.json";
 
@@ -101,6 +102,8 @@ public class CommonConstants {
 	public static final String  PAYMENT_HISTORY_BLUELAYER_DIRECTORY_MOBILE ="/jsonresponse/mobile/member/bluelayer/payment-history/";
 	
 	public static final String  DASHBOARD_PAYMENT_HISTORY_ULAYER_DIRECTORY_MOBILE ="/jsonresponse/mobile/member/ulayer/payment-history/";
+	public static final String DASHBOARD_DRUG_COST_ESTIMATOR = "dashboard_drugcostestimator";
+	public static final String  DASHBOARD_DRUGCOSTESTIMATOR_DIRECTORY ="/jsonresponse/member/dashboard/drugcostestimator/";
 	
 	public static final Page[] PAGES = { new Page(CommonConstants.GLOBAL, CommonConstants.GLOBAL_DIRECTORY),
 			new Page(CommonConstants.MY_ACCOUNT_HOME, CommonConstants.MY_ACCOUNT_HOME_DIRECTORY),
@@ -147,7 +150,11 @@ public class CommonConstants {
 			new Page(CommonConstants.PLAN_COMPARE, CommonConstants.PLAN_COMPARE_ULAYER_DIRECTORY),
 			new Page(CommonConstants.ADD_PLAN_CONFIRMATION, CommonConstants.ADD_PLAN_CONFIRMATION_ULAYER_DIRECTORY),
 			new Page(CommonConstants.PAYMENT_HISTORY_MOBILE,
-					CommonConstants.DASHBOARD_PAYMENT_HISTORY_ULAYER_DIRECTORY_MOBILE)
+					CommonConstants.DASHBOARD_PAYMENT_HISTORY_ULAYER_DIRECTORY_MOBILE),
+			new Page(CommonConstants.DASHBOARD_DRUG_COST_ESTIMATOR,
+					CommonConstants.DASHBOARD_DRUGCOSTESTIMATOR_DIRECTORY),
+			new Page(CommonConstants.ADD_NEW_DRUG_MODAL,
+					CommonConstants.DASHBOARD_DRUGCOSTESTIMATOR_DIRECTORY)
 	};
 
 	public static final String BENEFITS_SUMMARY_DIRECTORY = "/jsonresponse/mobile/member/ulayer/benefits-summary/";
@@ -299,7 +306,13 @@ public class CommonConstants {
 			new Page(CommonConstants.ADD_PLAN_CONFIRMATION, CommonConstants.ADD_PLAN_CONFIRMATION_BLUELAYER_DIRECTORY),
 			new Page(CommonConstants.BENEFITS_SUMMARY_BLAYER, CommonConstants.BENEFITS_SUMMARY_DIRECTORY_BLAYER),
 			new Page(CommonConstants.PAYMENT_HISTORY_MOBILE,
-					CommonConstants.PAYMENT_HISTORY_BLUELAYER_DIRECTORY_MOBILE) };
+					CommonConstants.PAYMENT_HISTORY_BLUELAYER_DIRECTORY_MOBILE),
+			new Page(CommonConstants.DASHBOARD_DRUG_COST_ESTIMATOR,
+					CommonConstants.DASHBOARD_DRUGCOSTESTIMATOR_DIRECTORY),
+			new Page(CommonConstants.ADD_NEW_DRUG_MODAL,
+					CommonConstants.DASHBOARD_DRUGCOSTESTIMATOR_DIRECTORY)
+			
+	};
 
 	public static final String PAGE_OBJECT_DIRECTORY_BLUELAYER_MEMBER = "/page-objects/member/bluelayer/";
 
@@ -775,6 +788,7 @@ public class CommonConstants {
 	public static final String NEW_PAYMENT_HISTORY_EXPECTED_JSON = "newPaymentHistoryexpectedJSON";
 	
 	public static final String SAVE_DRUG_PAGE_DATA="savedrugpagedata.json";
+	public static final String ADD_NEW_DRUG_MODAL = "addnewdrugmodal";
 	public static final String ADD_NEW_DRUG_PAGE_DATA = "addnewdrugpagedata.json";
 	public static final String DRUGCOSTESTIMATORDATAPAGE = "DrugCostEstimatorPage.json";
 	public static final String ADD_DRUG_DETAILS_PAGE_DATA = "adddrugdetailspagedata.json";
