@@ -632,7 +632,7 @@ Then the user validates the backtopreviouspage link on mydocument page
 
 Examples:
         |planType  |Member Type     |
-        |MA        |Individual						| 
+        |MAPD        |Individual						| 
         
 @udocdownload       
 Scenario Outline: Verify dashboard forms and resources for mapd and ma in UMS site
