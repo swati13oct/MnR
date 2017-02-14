@@ -869,7 +869,7 @@ public class MRScenario {
 		 * Below code excecutes if webdriver value is passed in build command ::
 		 * either saucelabs or headless
 		 */
-		if (null != System.getProperty("webdriverhost")) {
+		if (null != System.getProperty("webdriverhost") && !(System.getProperty("webdriverhost").equalsIgnoreCase("")) ) {
 
 			if (System.getProperty("webdriverhost").equalsIgnoreCase(
 					"saucelabs")) {
