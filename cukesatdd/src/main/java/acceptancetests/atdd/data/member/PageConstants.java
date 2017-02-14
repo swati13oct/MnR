@@ -102,6 +102,9 @@ public class PageConstants {
 	public static final String MANAGE_DRUG_PAGE = "estimateCostPage";
 
 	public static final String ADD_DRUG_PAGE = "addDrugPage";
+	public static final String ADD_DRUG_DETAILS = "addDrugDetails";
+	public static final String SAVING_OPPORTUNITY = "savingopportunity";
+
 
 	public static final String PHARMACY_TYPES = "pharmacyTypeArray";
 

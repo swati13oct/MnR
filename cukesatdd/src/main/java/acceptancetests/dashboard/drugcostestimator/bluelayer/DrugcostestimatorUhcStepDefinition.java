@@ -24,10 +24,10 @@ import cucumber.annotation.en.Then;
 import cucumber.annotation.en.When;
 import cucumber.table.DataTable;
 import gherkin.formatter.model.DataTableRow;
-import pages.acquisition.bluelayer.RegistrationHomePage;
 import pages.dashboard.member.drugcostestimator.blayer.AddDrugDetails;
 import pages.dashboard.member.drugcostestimator.blayer.AddNewDrugModal;
 import pages.dashboard.member.drugcostestimator.blayer.DrugCostEstimatorPage;
+import pages.dashboard.member.drugcostestimator.blayer.SavingsOppurtunity;
 import pages.member.bluelayer.AccountHomePage;
 import pages.member.bluelayer.LoginPage;
 import pages.mobile.member.blayer.BenefitsSummaryPage;
@@ -91,7 +91,6 @@ public class DrugcostestimatorUhcStepDefinition {
 		DrugCostEstimatorPage dce = new DrugCostEstimatorPage(wd);
 		getLoginScenario().saveBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE, dce);
 
-		System.out.println(" PASSED : ");
 	}
 	@Given("^I am an UHC Individual member on the Dashboard site SmartPhone$")
 	public void i_am_an_uhc_individual_member_on_the_dashboard_site_smartphone(DataTable memberAttributes) {
@@ -132,7 +131,6 @@ public class DrugcostestimatorUhcStepDefinition {
 			getLoginScenario().saveBean(LoginCommonConstants.USERNAME, userName);
 			getLoginScenario().saveBean(LoginCommonConstants.PASSWORD, pwd);
 		}
-		System.out.println(" PASSED : ");
 	}
 	@When("^plantype user logs in mobile in UHC Site$")
 	public void the_above_plantype_user_logs_in_mobile() {
@@ -148,18 +146,12 @@ public class DrugcostestimatorUhcStepDefinition {
 		getLoginScenario().saveBean(PageConstants.BENEFITS_SUMMARY_PAGE, benefitsSummaryPage);
 
 	}
-	@Given("^I am an UHC Individual member on the Dashboard site Tablet$")
-	public void i_am_an_uhc_individual_member_on_the_dashboard_site_tablet(DataTable memberAttributes) {
-		System.out.println(" PASSED : ");
-	}
-
 	@When("^the above plantype user logs in UMS Site Desktop$")
 	public void plantype_user_logs_in() {
 		String userName = (String) getLoginScenario().getBean(LoginCommonConstants.USERNAME);
 		String pwd = (String) getLoginScenario().getBean(LoginCommonConstants.PASSWORD);
 		String category = (String) getLoginScenario().getBean(LoginCommonConstants.CATOGERY);
 		WebDriver wd = (WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
-		//getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
 		LoginPage loginPage = new LoginPage(wd);
 		getLoginScenario().saveBean(PageConstants.LOGIN_PAGE, loginPage);
 		AccountHomePage accountHomePage = (AccountHomePage) loginPage.loginWith(userName, pwd,category);
@@ -167,15 +159,16 @@ public class DrugcostestimatorUhcStepDefinition {
 	}
 
 	@When("^I use the DCE tool to enter one or more drugs to my drug list$")
-	public void I_use_the_DCE_tool_to_enter_one_or_more_drugs_to_my_drug_list() throws InterruptedException {
+	public void I_use_the_DCE_tool_to_enter_one_or_more_drugs_to_my_drug_list(DataTable data) throws InterruptedException {
+		List<DataTableRow> memberAttributesRow = data.getGherkinRows();
+		String drug = memberAttributesRow.get(1).getCells().get(0);
 		
 		WebDriver wd = (WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
 
 		DrugCostEstimatorPage dce = new DrugCostEstimatorPage(wd);
 		dce.changeUrlToNewDCEPage();
 		AddNewDrugModal addNewDrugModal = dce.clickOnAddDrug();
-		addNewDrugModal.clickonSearchButton("lipi");
-		System.out.println(" PASSED : ");
+		addNewDrugModal.clickonSearchButton(drug);
 	}
 
 
@@ -188,12 +181,10 @@ public class DrugcostestimatorUhcStepDefinition {
 		addDrugDetails.selectDosage("Lipitor TAB 10MG");
 		addDrugDetails.continueAddDrugDetails();
 		
-		System.out.println(" PASSED : ");
 	}
 
 	@And("^I should see my drug list appear responsively to my device$")
 	public void i_should_see_my_drug_lists(){
-		System.out.println(" PASSED : ");
 	}
 
 	@Then("^I should be see dosage, package and frequency options returned from the DCE web service$")
@@ -201,7 +192,6 @@ public class DrugcostestimatorUhcStepDefinition {
 		WebDriver wd = (WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
 		AddNewDrugModal addNewDrugModal = new AddNewDrugModal(wd);
 		addNewDrugModal.selectDrug("Lip-EX");
-		System.out.println(" PASSED : ");
 	}
 	
 	@And("^I should be able to change those options at any time$")
@@ -211,7 +201,6 @@ public class DrugcostestimatorUhcStepDefinition {
 		AddDrugDetails addDrugDetails = new AddDrugDetails(wd);
 		addDrugDetails.selectFrequency("Every 3 Months");
 		addDrugDetails.selectQnty("14");
-		System.out.println(" PASSED : ");
 	}
 	@And("^I should have the ability to advance to the next step in the flow$")
 	public void i_should_have_the_ability_to_advance_to_the_next_step_in_the_flow(){
@@ -219,21 +208,16 @@ public class DrugcostestimatorUhcStepDefinition {
 		WebDriver wd = (WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
 		AddDrugDetails addDrugDetails = new AddDrugDetails(wd);
 		addDrugDetails.continueAddDrugDetails();
-		System.out.println(" PASSED : ");
 	}
 	
 	@Then("^I should see the Pharmacy search tab as a clickable element within the DCE tool$")
 	public void i_should_see_the_pharmacy_search(DataTable data) throws InterruptedException{
-		
-		
 		List<DataTableRow> memberAttributesRow = data.getGherkinRows();
 		String drug = memberAttributesRow.get(1).getCells().get(0);
-		
 		
 		WebDriver wd = (WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
 		DrugCostEstimatorPage dce = (DrugCostEstimatorPage) getLoginScenario().getBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE);
 		dce.changeUrlToNewDCEPage();
-		
 		
 		AddNewDrugModal addNewDrugModal = dce.clickOnAddDrug();
 		String user = (String) getLoginScenario().getBean(LoginCommonConstants.USERNAME);
@@ -260,7 +244,6 @@ public class DrugcostestimatorUhcStepDefinition {
 	}
 	@And("^I should be able to move forward or backward in the tool flow$")
 	public void i_should_be_able_to_move_forward_backward(){
-		WebDriver wd = (WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
 		DrugCostEstimatorPage dce = (DrugCostEstimatorPage) getLoginScenario().getBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE);
 		dce.navigateToStep2();
 		dce.validatePharmacyForm();
@@ -269,21 +252,18 @@ public class DrugcostestimatorUhcStepDefinition {
 	}
 	@And("^I should see Drug List as an active tab in the DCE tool upon click$")
 	public void i_should_see_drug_list_as_active(){
-		WebDriver wd = (WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
-		DrugCostEstimatorPage dce = new DrugCostEstimatorPage(wd);
+		DrugCostEstimatorPage dce = (DrugCostEstimatorPage) getLoginScenario().getBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE);
 		dce.changeUrlToNewDCEPage();
 	}
 	@And("^I should be able to click on Add a Drug$")
 	public void i_should_be_able_to_click_AddDrug() throws InterruptedException{
-		WebDriver wd = (WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
-		
-		DrugCostEstimatorPage dce = new DrugCostEstimatorPage(wd);
-		dce.clickOnAddDrug();
+		DrugCostEstimatorPage dce = (DrugCostEstimatorPage) getLoginScenario().getBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE);
+		AddNewDrugModal addNewDrugModal = dce.clickOnAddDrug();
+		getLoginScenario().saveBean(PageConstants.ADD_DRUG_PAGE, addNewDrugModal);
 	}
 	@And("^the Add a Drug search modal should launch$")
 	public void the_add_a_drug_search_modal_should_launch(){
-		WebDriver wd = (WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
-		AddNewDrugModal addNewDrugModal = new AddNewDrugModal(wd);
+		AddNewDrugModal addNewDrugModal = (AddNewDrugModal) getLoginScenario().getBean(PageConstants.ADD_DRUG_PAGE);
 		addNewDrugModal.openAndValidate();
 	}
 	@And("^I should be able to add up to 25 drugs to my drug list$")
@@ -297,34 +277,37 @@ public class DrugcostestimatorUhcStepDefinition {
 	}
 	@And("^I should have the ability to advance to the next step in the DCE flow after successfully creating a drug list with at least one drug$")
 	public void i_should_be_able_to_advance_dceflows(){
-		WebDriver wd = (WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
-		System.out.println(" PASSED : ");
 	}
 	
 	@And("^I enter at least four characters of the drug name in the Enter Drug Name field but not the exact drug name$")
-	public void i_enter_at_least_four_chars_of_drugname(){
-		WebDriver wd = (WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
-		AddNewDrugModal addNewDrugModal = new AddNewDrugModal(wd);
-		addNewDrugModal.typeDrugName("lipi");
+	public void i_enter_at_least_four_chars_of_drugname(DataTable data){
+		List<DataTableRow> memberAttributesRow = data.getGherkinRows();
+		String drug = memberAttributesRow.get(1).getCells().get(0);
+		AddNewDrugModal addNewDrugModal = (AddNewDrugModal) getLoginScenario().getBean(PageConstants.ADD_DRUG_PAGE);
+		addNewDrugModal.typeDrugName(drug);
 	}
 	@Then("^I should see a list of approximate search results to choose from$")
-	public void i_should_see_a_list_of_search_results(){
-		WebDriver wd = (WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
-		AddNewDrugModal addNewDrugModal = new AddNewDrugModal(wd);
-	    addNewDrugModal.selectAdrugFromAutoCompleteSuggestions("Lipitor");
+	public void i_should_see_a_list_of_search_results(DataTable data){
+		List<DataTableRow> memberAttributesRow = data.getGherkinRows();
+		String drug = memberAttributesRow.get(1).getCells().get(0);
+		AddNewDrugModal addNewDrugModal = (AddNewDrugModal) getLoginScenario().getBean(PageConstants.ADD_DRUG_PAGE);
+	    addNewDrugModal.selectAdrugFromAutoCompleteSuggestions(drug);
+	    
 	}
 	@Then("^I should be able to select a drug from the list$")
-	public void i_should__be_able_to_select_a_drug_from_list(){
-		WebDriver wd = (WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
-		AddDrugDetails addDrugDetails = new AddDrugDetails(wd);
+	public void i_should__be_able_to_select_a_drug_from_list() throws InterruptedException{
+		AddNewDrugModal addNewDrugModal = (AddNewDrugModal) getLoginScenario().getBean(PageConstants.ADD_DRUG_PAGE);
+		AddDrugDetails addDrugDetails = addNewDrugModal.submit();
+		if(addDrugDetails !=null)
+		 getLoginScenario().saveBean(PageConstants.ADD_DRUG_DETAILS, addDrugDetails);
 		addDrugDetails.validateThePage();
 	}
 	@Then("^the modal should refresh to the next step in the flow if I select one of the suggested results$")
 	public void the_modal_should_regresh(){
-		WebDriver wd = (WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
-		AddDrugDetails addDrugDetails = new AddDrugDetails(wd);
-		addDrugDetails.continueAddDrugDetails();
-		System.out.println(" PASSED : ");
+		AddDrugDetails addDrugDetails = (AddDrugDetails) getLoginScenario().getBean(PageConstants.ADD_DRUG_DETAILS);
+		SavingsOppurtunity savingsOppurtunity = addDrugDetails.continueAddDrugDetails();
+		getLoginScenario().saveBean(PageConstants.SAVING_OPPORTUNITY, savingsOppurtunity);
+		
 	}
 	
 	/*@And("^the user reached the drug cost estimator page$")
@@ -361,7 +344,6 @@ public class DrugcostestimatorUhcStepDefinition {
 	@Then("^the user should be able to validate the pharmacy information$")
 	public void validate_pharmacy_information(){
 		
-		System.out.println(" PASSED : ");
 	}
 }
 
