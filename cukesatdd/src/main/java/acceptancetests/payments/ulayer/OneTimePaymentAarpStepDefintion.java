@@ -2,15 +2,13 @@ package acceptancetests.payments.ulayer;
 
 import gherkin.formatter.model.DataTableRow;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-
-
-
 import java.util.Set;
 
 import org.json.JSONException;
@@ -27,12 +25,12 @@ import pages.member.ulayer.OneTimePaymentPage;
 import pages.member.ulayer.OneTimePaymentSuccessPage;
 import pages.member.ulayer.OneTimePaymentsPage;
 import pages.member.ulayer.PaymentHistoryPage;
+import pages.member.ulayer.ReviewOneTimePaymentsPage;
 import acceptancetests.atdd.data.CommonConstants;
 import acceptancetests.atdd.data.member.PageConstants;
 import acceptancetests.login.data.LoginCommonConstants;
 import acceptancetests.payments.data.PaymentCommonConstants;
 import atdd.framework.MRScenario;
-import cucumber.annotation.After;
 import cucumber.annotation.en.And;
 import cucumber.annotation.en.Given;
 import cucumber.annotation.en.Then;
@@ -349,9 +347,62 @@ public class OneTimePaymentAarpStepDefintion {
 		AccountHomePage accountHomePage = (AccountHomePage)getLoginScenario().getBean(PageConstants.ACCOUNT_HOME_PAGE);
 		OneTimePaymentsPage oneTimePaymentsPage = accountHomePage.navigateToOneTimePaymentsPage();
 		if(oneTimePaymentsPage!= null){
+			getLoginScenario().saveBean(PageConstants.ONE_TIME_PAYMENTS_DASHBOARD,
+					oneTimePaymentsPage);
 			Assert.assertTrue(true);
 		} else {
 			Assert.fail("one time payments dashboard page not found");
+		}
+		
+	}
+	
+	@And("^the user enters details and click on continue button on One Time Payments Page for  Dashboard$")
+	public void user_clicks_otheramountradio()
+	{
+		OneTimePaymentsPage oneTimePaymentsPage = (OneTimePaymentsPage)getLoginScenario().getBean(PageConstants.ONE_TIME_PAYMENTS_DASHBOARD);
+		ReviewOneTimePaymentsPage reviewOneTimePaymentsPage = oneTimePaymentsPage.enterInfoAndContinue();
+		if(reviewOneTimePaymentsPage != null){
+			getLoginScenario().saveBean(PageConstants.REVIEW_ONE_TIME_PAYMENTS_DASHBOARD,
+					reviewOneTimePaymentsPage);
+			Assert.assertTrue(true);
+		}else {
+			Assert.fail("one time payments dashboard page not found");
+		}
+		
+		
+	}
+	
+	@Then("^user lands on Review One time Payments Page and validates the amount and routing number values$")
+	public void review_onetime_payments_validation()
+	{
+		ReviewOneTimePaymentsPage reviewOneTimePaymentsPage = (ReviewOneTimePaymentsPage)getLoginScenario().getBean(PageConstants.REVIEW_ONE_TIME_PAYMENTS_DASHBOARD);
+		JSONObject reviewOneTimeActual = reviewOneTimePaymentsPage.reviewOneTimeValues();
+		/* Get expected data */
+		String fileName = "reviewonetimeexpected";
+		String directory = CommonConstants.MEMBER_EXPECTED_DIRECTORY
+				+ File.separator + CommonConstants.SITE_ULAYER
+				+ File.separator
+				+ PaymentCommonConstants.ONE_TIME_PAYMENTS_FLOW_NAME
+				+ File.separator;
+		JSONObject reviewOneTimeExpectedJson = MRScenario.readExpectedJson(
+				fileName, directory);
+
+		getLoginScenario().saveBean(
+				PaymentCommonConstants.ONE_TIME_PAYMENTS_ACTUAL,
+				reviewOneTimeActual);
+		getLoginScenario().saveBean(
+				PaymentCommonConstants.ONE_TIME_PAYMENTS_EXPECTED,
+				reviewOneTimeExpectedJson);
+			
+		System.out.println("reviewOneTimeActual---->" + reviewOneTimeActual);
+		System.out.println("reviewOneTimeExpectedJson---->" + reviewOneTimeExpectedJson); 
+		
+		try {
+			JSONAssert.assertEquals(reviewOneTimeExpectedJson, reviewOneTimeActual,
+					true);
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 		
 	}

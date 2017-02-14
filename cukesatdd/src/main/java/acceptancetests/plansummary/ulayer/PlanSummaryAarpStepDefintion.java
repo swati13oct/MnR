@@ -176,6 +176,7 @@ public class PlanSummaryAarpStepDefintion {
 				planSummaryPage);
 	}
 
+
 	@When("^the user navigates to plan summary page under my plans in AARP site$")
 	public void user_views_plan_summary_my_plans_aarp() {
 		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario()
@@ -191,6 +192,7 @@ public class PlanSummaryAarpStepDefintion {
 
 
 	@Then("^the user the validates different resources in AARP site$")
+
 	public void user_validates_plan_summary_aarp() {
 		PlanSummaryPage planSummaryPage = (PlanSummaryPage) getLoginScenario()
 				.getBean(PageConstants.PLAN_SUMMARY_PAGE);
@@ -200,6 +202,9 @@ public class PlanSummaryAarpStepDefintion {
 
 		JSONObject planSummaryActualJson = (JSONObject) getLoginScenario()
 				.getBean(PlanSummaryCommonConstants.PLAN_SUMMARY_ACTUAL);
+		
+		System.out.println("planSummaryExpectedJson====>"+planSummaryExpectedJson);
+		System.out.println("planSummaryActualJson====>"+planSummaryActualJson);
 
 		try {
 			JSONAssert.assertEquals(planSummaryExpectedJson,

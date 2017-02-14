@@ -95,7 +95,7 @@ public class PlanBenefitsAndCoverageAarpStepDefinition {
 		}
 
 		WebDriver wd = getLoginScenario().getWebDriver();
-
+		wd.manage().window().maximize();
 		LoginPage loginPage = new LoginPage(wd);
 		AccountHomePage accountHomePage = (AccountHomePage) loginPage.loginWith(userName, pwd);
 		JSONObject accountHomeActualJson = null;
@@ -467,44 +467,109 @@ public class PlanBenefitsAndCoverageAarpStepDefinition {
 	public void user_clicks_on_start_search_button() {
 		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario().getBean(
 				PageConstants.BENEFITS_COVERAGE_PAGE);
-		benefitsCoveragePage.navigateToRallySearchWindow();		
+		benefitsCoveragePage.navigateToRallySearchWindow();	
 	}
 	
 	@And("^the user clicks on the change your pcp button on benefits and coverage page$")
 	public void user_clicks_on_change_your_pcp_button() {
 		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario().getBean(
 				PageConstants.BENEFITS_COVERAGE_PAGE);
-		benefitsCoveragePage.navigateToContactUsPage();		
+		benefitsCoveragePage.navigateToContactUsPage();
 	}
-	@And("^the user navigates to plan benefits and coverage and validates summary left row for G01$")
-	public  void check_left_row_sequence_for_G01(DataTable sequenceAttribute){	
-		System.out.println("-----left row validation stated------");
+	
+	@When("^user clicks on Add Rider button$")
+	public void user_clicks_on_Add_Rider_button() {
+		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario().getBean(
+				PageConstants.BENEFITS_COVERAGE_PAGE);
+		benefitsCoveragePage.clickOnAddRider();
+	}
+	
+	@Then("^Add rider popup appears and clicks Add Rider button$")
+	public void Add_rider_popup_appears_and_clicks_Add_Rider_button() throws Exception {
+		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario().getBean(
+				PageConstants.BENEFITS_COVERAGE_PAGE);
+		benefitsCoveragePage.validateAddRiderPopup();
+	}
+	
+	@When("^user clicks on Remove This Rider button$")
+	public void user_clicks_on_Remove_This_Rider_button() {
+		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario().getBean(
+				PageConstants.BENEFITS_COVERAGE_PAGE);
+		benefitsCoveragePage.clickOnRemoveRider();
+	}
+
+	@Then("^Add rider popup appears and clicks Remove This Rider button$")
+	public void Add_rider_popup_appears_and_clicks_Remove_This_Rider_button() throws Exception {
+		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario().getBean(
+				PageConstants.BENEFITS_COVERAGE_PAGE);
+		benefitsCoveragePage.validateRemoveRiderPopup();
+	}
+	
+	@Then("^the user view mydocument in AARP site$")
+	public void views_mydocument_aarp_site() {
 		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstants.ACCOUNT_HOME_PAGE);
-		PlanBenefitsCoveragePage bncPage = accountHomePage.navigateToBnC();
-		bncPage.validateSequenceOfPlanBenefitsAndCoverageSummaryLeftRow(sequenceAttribute);
-		System.out.println("----left row validation completed-----");
+		
+		FormsandresourcesPage formsAndResourcesPage = accountHomePage.navigateToMydocumentAarpPage();
 	}
-	@And("^the user navigates to plan benefits and coverage and validates summary right row for G01$")
-	public  void check_right_row_sequence_for_G01(DataTable sequenceAttribute){	
-		System.out.println("-----right row validation started-----");
+	
+	@Then("^the user validates the content on mydocument page$")
+	public void views_mydoument_validation_aarp_site() {
+		try {
+			
+			JSONObject actual=(JSONObject) loginScenario.getBean(PlanBenefitsAndCoverageCommonConstants.MYDOCUMENT_ACTUAL);
+			
+			JSONObject expected=(JSONObject) loginScenario.getBean(PlanBenefitsAndCoverageCommonConstants.MYDOCUMENT_EXPECTED);
+			
+			if(actual!=null && expected !=null){
+				JSONAssert.assertEquals(expected, actual, true);
+			}			
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	@Then("^the user validates the backtopreviouspage link on mydocument page$")
+	public void view_back_to_previous_link_validation_aarp_site(){
 		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstants.ACCOUNT_HOME_PAGE);
-		PlanBenefitsCoveragePage bncPage = accountHomePage.navigateToBnC();
-		bncPage.validateSequenceOfPlanBenefitsAndCoverageSummaryRightRow(sequenceAttribute);
-		System.out.println("----right row validation ended--------");
+		 
+		FormsandresourcesPage formsAndResourcesPage = accountHomePage.navigatebackToformsandresourcesAarpPage();
+
+	}
+	
+	@Then("^the user validates the pagination link on mydocument page$")
+	public void view_pagination_link_validation_aarp_site(){
+		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstants.ACCOUNT_HOME_PAGE);
+		 
+		FormsandresourcesPage formsAndResourcesPage = accountHomePage.navigateTopaginationAarpPage();
+
+	}
+	
+	@Then("^the user validates the view/download link on mydocument page$")
+	public void view_download_link_validation_aarp_site(){
+		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstants.ACCOUNT_HOME_PAGE);
+		 
+		FormsandresourcesPage formsAndResourcesPage = accountHomePage.navigateToviewdowloadlinkAarpPage();
+
+	}
+	
+	@Then("^the user validates the custom search on mydocument page$")
+	public void view_custom_search_aarp_site(){
+		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstants.ACCOUNT_HOME_PAGE);
+		
+		FormsandresourcesPage formsAndResourcesPage = accountHomePage.navigateTocustomersearchlinkAarpPage();		
+		
 	}
 
+	@Then("^the user validates the sorting link on mydocument page$")
+	public void view_sorting_search_aarp_site(){
+		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstants.ACCOUNT_HOME_PAGE);
+		
+		FormsandresourcesPage formsAndResourcesPage = accountHomePage.navigateTosortingsearchlinkAarpPage();		
+		
+	}
+	
 
-        @Then("^I will be able access a PDF flyer in  English,Spanish or Chinese that explains passport benefits when a         plan has this feature$")
-	public void I_will_be_able_access_a_PDF_flyer() {
-		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario()
-				.getBean(PageConstants.ACCOUNT_HOME_PAGE);
-//		PlanBenefitsCoveragePage benefitsCoveragePage = accountHomePage
-//				.navigateToBnC();
-		WebDriver wd = getLoginScenario().getWebDriver();
-
-		PlanBenefitsCoveragePage benefitsCoveragePage = new PlanBenefitsCoveragePage(wd);
-		benefitsCoveragePage.verifyPassportFlyerPdf();
-}
 	
 	@After
 	public void tearDown() {

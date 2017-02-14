@@ -3,8 +3,10 @@
  */
 package pages.member.ulayer;
 
+
 import org.json.JSONException;
 import org.json.JSONObject;
+
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.UnhandledAlertException;
 import org.openqa.selenium.WebDriver;
@@ -65,6 +67,7 @@ public class LoginPage extends UhcDriver {
 		sendkeys(userNameField,username);
 		sendkeys(passwordField,password);
 		signInButton.click();
+
 		
 
 		if (MRScenario.environment.equals("awe-dev-b") || MRScenario.environment.equals("dev-a") || MRScenario.environment.equals("dev-c") || MRScenario.environment.equals("team-b") || MRScenario.environment.equals("team-a") || MRScenario.environment.equals("team-c")) {
@@ -95,6 +98,19 @@ public class LoginPage extends UhcDriver {
  		}*/
             
 		
+
+		if (MRScenario.environment.equals("dev-c")) {
+
+			Alert alert = driver.switchTo().alert();
+			        alert.accept();
+			        Alert alert1 = driver.switchTo().alert();
+			        alert1.accept();
+			   /*     Alert alert2 = driver.switchTo().alert();
+			        alert2.accept();
+			        Alert alert3 = driver.switchTo().alert();
+			        alert3.accept();*/
+			        }
+
 		if(currentUrl().contains("home/my-account-home.html"))
 
 		{

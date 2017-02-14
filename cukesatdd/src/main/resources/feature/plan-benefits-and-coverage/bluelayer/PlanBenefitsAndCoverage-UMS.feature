@@ -634,6 +634,56 @@ Then the user validates the backtopreviouspage link on mydocument page
 Examples:
         |planType  |Member Type     |
         |MA        |Individual						| 
+        
+@udocdownload       
+Scenario Outline: Verify dashboard forms and resources for mapd and ma in UMS site
+Given registered UHC with following details for plan benefits and coverage flow in UMS site
+| Plan Type          | <planType>                |
+| Member Type				 | <Member Type>						 |
+When the user view forms and resources in UMS site
+Then the user view mydocument in UMS site
+Then the user validates the custom search on mydocument page
+Then the user validates the content on mydocument page
+Then the user validates the view/download link on mydocument page
+
+
+Examples:
+        |planType  |Member Type     |
+        |MAPD        |Individual				| 
+        
+
+
+@docpagination
+Scenario Outline: Verify dashboard forms and resources for mapd and ma in UMS site
+Given registered UHC with following details for plan benefits and coverage flow in UMS site
+| Plan Type          | <planType>                |
+| Member Type				 | <Member Type>						 |
+When the user view forms and resources in UMS site
+Then the user view mydocument in UMS site
+Then the user validates the pagination link on mydocument page
+Then the user validates the content on mydocument page
+
+Examples:
+        |planType  |Member Type     |
+        |MAPD        |Individual			| 
+
+        
+@docsorting
+Scenario Outline: Verify dashboard forms and resources for mapd and ma in UMS site
+Given registered UHC with following details for plan benefits and coverage flow in UMS site
+| Plan Type          | <planType>                |
+| Member Type				 | <Member Type>						 |
+When the user view forms and resources in UMS site
+Then the user view mydocument in UMS site
+Then the user validates the sorting link on mydocument page
+Then the user validates the content on mydocument page
+
+Examples:
+        |planType  |Member Type     |
+        |MAPD        |Individual    | 
+
+
+
 
 
 Scenario Outline:To verify Add Plan link not available on plan and benefits page for members in UMS site

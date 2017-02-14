@@ -120,6 +120,12 @@ public class PageConstants {
 	public static final String CONTACT_US_PAGE = "contactUsPage";
 
 	public static final String PLAN_COMPARE_PAGE = "planComparePage";
+	
+	
+	
+	public static final String ONE_TIME_PAYMENTS_DASHBOARD = "onetimePaymentsPageDashboard";
+	
+	public static final String REVIEW_ONE_TIME_PAYMENTS_DASHBOARD = "reviewOnetimePaymentsPageDashboard";
 
 	
 
