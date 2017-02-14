@@ -2,7 +2,8 @@ package atdd.framework;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
-import cucumber.annotation.Before;
+import cucumber.api.java.Before;
+
 
 
 /**

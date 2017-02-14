@@ -14,8 +14,6 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.FindBys;
 import org.openqa.selenium.support.PageFactory;
-import pages.acquisition.ulayer.ZipcodeLookupHomePage;
-import pages.member.ulayer.AccountHomePage;
 import acceptancetests.atdd.data.CommonConstants;
 import acceptancetests.atdd.data.MRConstants;
 import acceptancetests.atdd.data.PageData;
@@ -243,16 +241,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		openAndValidate();
 	}
 
-	public GetStartedPage navigateToPrescriptionDrug() {
-		enterYourDrugListButton.click();
-		if (getTitle().equalsIgnoreCase("Our Medicare Plan Types | AARP® Medicare Plans from UnitedHealthcare®")) {
-			return new GetStartedPage(driver);
-		} else {
-			return null;
-		}
-
-	}
-
+	
 	public JSONObject accessingGlobalHeader() {
 
 		String fileName = CommonConstants.GLOBAL_HEADER_PAGE_DATA;
@@ -278,15 +267,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 
 	}
 
-	public ZipcodeLookupHomePage looksupforZipcodes() {
-		lookzip.click();
-		CommonUtility.waitForPageLoad(driver, zipCodeSearchPopup, CommonConstants.TIMEOUT_30);
-		if (zipCodeSearchPopupHeading.getText().equalsIgnoreCase("Find a ZIP code")) {
-			System.out.println("zipCodeSearchPopupHeading");
-			return new ZipcodeLookupHomePage(driver);
-		}
-		return null;
-	}
+
 
 	@Override
 	public void openAndValidate() {
@@ -331,11 +312,8 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		} catch (Exception e) {
 			System.out.println("county box not found");
 		}
-
-		if (getTitle()
-				.equalsIgnoreCase(
-						"Our Medicare Plan Types | UnitedHealthcare®")) {
-
+		
+		if (driver.getTitle().equalsIgnoreCase(PageTitleConstants.ULAYER_PLAN_SUMMARY_PAGE_TITLE)) {
 			return new VPPPlanSummaryPage(driver);
 		}
 		return null;
@@ -505,35 +483,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		return homePageDisclaimerHideJson;
 	}
 
-	public AboutUsAARPPage aboutUsFooterClick() {
-		validate(GlobalWebElements.footerAboutUsLink);
-		GlobalWebElements.footerAboutUsLink.click();
-		validate(GlobalWebElements.footerAboutUsLink);
-
-		if (getTitle().equalsIgnoreCase("About UnitedHealthcare® | AARP® Medicare Plans from UnitedHealthcare")) {
-			return new AboutUsAARPPage(driver);
-		}
-		return null;
-	}
-
-	public PharmacySearchPage navigateToPharmacyLocator() {
-		pharmacyLink.click();
-		if (getTitle().equalsIgnoreCase("Find a Pharmacy | AARP® Medicare Plans from UnitedHealthcare®")) {
-			return new PharmacySearchPage(driver);
-
-		}
-		return null;
-	}
-
-	public MedicareAdvantagePlansPage medicareAdvantagePlansClick() {
-		validate(GlobalWebElements.medicareAdvantagePlansLink);
-		GlobalWebElements.medicareAdvantagePlansLink.click();
-		validate(GlobalWebElements.medicareAdvantagePlansLink);
-		if (getTitle().equalsIgnoreCase("Medicare Advantage Plans | AARP® Medicare Plans from UnitedHealthcare®")) {
-			return new MedicareAdvantagePlansPage(driver);
-		}
-		return null;
-	}
+	
 
 	public AcquisitionHomePage veiwAllDisclaimerLinkSectionLinksClick() {
 		validate(GlobalWebElements.viewAllDisclaimerInformationLink);
@@ -575,16 +525,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 
 	}
 
-	public DisclaimersAARPPage importantDisclosuresClick() {
-		validate(GlobalWebElements.importantDisclosuresLink);
-		GlobalWebElements.importantDisclosuresLink.click();
-		validate(GlobalWebElements.importantDisclosuresLink);
-		if (getTitle().equalsIgnoreCase("Disclaimers | AARP® Medicare Plans from UnitedHealthcare®")) {
-			return new DisclaimersAARPPage(driver);
-		}
-
-		return null;
-	}
+	
 
 	public Boolean visitAARPOrgClick() {
 		validate(GlobalWebElements.visitAARPLink);
@@ -684,45 +625,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		return false;
 	}
 
-	public LoginAssistancePage forgotUsernamePasswordClick() {
-
-		validate(forgotUsernameLink);
-		forgotUsernameLink.click();
-		ArrayList<String> tabs = new ArrayList<String>(driver.getWindowHandles());
-		driver.switchTo().window(tabs.get(1));
-		validate(medicareTitleText);
-		if (getTitle().equalsIgnoreCase("AARP Medicare Plans |Username and Password Assistance")) {
-			return new LoginAssistancePage(driver);
-		}
-		return null;
-	}
-
-	public RegistrationHomePage registerHereLinkClick() {
-		ArrayList<String> tabs = new ArrayList<String>(driver.getWindowHandles());
-		driver.switchTo().window(tabs.get(0));
-		validate(alreadyPlanMemberButton);
-		alreadyPlanMemberButton.click();
-		validate(registerHereLink);
-		registerHereLink.click();
-		ArrayList<String> tabs1 = new ArrayList<String>(driver.getWindowHandles());
-		driver.switchTo().window(tabs1.get(2));
-		validate(medicareTitleText);
-		if (getTitle().equalsIgnoreCase("AARP Medicare Plans | Registration")) {
-			return new RegistrationHomePage(driver);
-		}
-		return null;
-	}
-
-	public DisclaimersAARPPage importantDisclaimersClick() {
-		validate(importantDisclosuresLink);
-		importantDisclosuresLink.click();
-		validate(importantDisclosuresLink);
-		if (getTitle().equalsIgnoreCase("Disclaimers | AARP® Medicare Plans from UnitedHealthcare®")) {
-			return new DisclaimersAARPPage(driver);
-		}
-
-		return null;
-	}
+	
 
 	public AcquisitionHomePage navigationSectionHomeLinkClick() {
 		validate(navigationSectionHomeLink);
@@ -735,15 +638,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		return null;
 	}
 
-	public OurPlansPage navigationSectionOurPlansLinkClick() {
-		navigationSectionOurPlansLink.click();
-		if (getTitle().equalsIgnoreCase("Our Medicare Plan Types | AARP® Medicare Plans from UnitedHealthcare®")) {
-			return new OurPlansPage(driver);
-		}
-
-		return null;
-	}
-
+	
 	public Boolean navigationSectionEnterSearchClick() {
 		validate(navigationSectionEnterSearch);
 		navigationSectionEnterSearch.click();
@@ -756,88 +651,9 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		return false;
 	}
 
-	public LearnAboutMedicarePage learnAboutMedicareClick() {
-		validate(navigationSectionMedicareEducationLink);
-		Actions actions = new Actions(driver);
-		actions.moveToElement(navigationSectionMedicareEducationLink);
-		actions.moveToElement(learnAboutMedicareMedicareEducationLink);
-		actions.click().build().perform();
-		if (getTitle().equalsIgnoreCase("Learn About Medicare | AARP® Medicare Plans from UnitedHealthcare®")) {
-			return new LearnAboutMedicarePage(driver);
-		}
+	
 
-		return null;
-	}
-
-	public RequestHelpAndInformationPage navigateToMaMoreHelpAndInfo() {
-
-		Actions actions = new Actions(driver);
-		actions.moveToElement(ourPlansHoverLink);
-		actions.moveToElement(ma_moreHelpInfoLink);
-		actions.click().build().perform();
-
-		try {
-			if (zipCodeField.isDisplayed()) {
-				CommonUtility.waitForElementToDisappear(driver, zipCodeField, CommonConstants.TIMEOUT_30);
-			}
-		} catch (NoSuchElementException e) {
-			System.out.println("zipCodeField not found");
-		} catch (TimeoutException ex) {
-			System.out.println("zipCodeField not found");
-		} catch (Exception e) {
-			System.out.println("zipCodeField not found");
-		}
-		if (currentUrl().contains("medicare-advantage-plans/request-information.html")) {
-			return new RequestHelpAndInformationPage(driver);
-		}
-
-		return null;
-	}
-
-	public Object navigatesToVppSection(String planType) {
-
-		if (validate(feedBackPopUp)) {
-			popUpcloseLink.click();
-		}
-
-		Actions actions = new Actions(driver);
-		actions.moveToElement(ourPlans);
-
-		if (planType.equalsIgnoreCase("MA")) {
-			actions.moveToElement(maVppLink);
-			actions.click().build().perform();
-		}
-		if (planType.equalsIgnoreCase("PDP")) {
-			actions.moveToElement(pdpVppLink);
-			actions.click().build().perform();
-		}
-
-		if (currentUrl().contains("medicare-advantage-plans.html")) {
-			return new MaViewPlansAndPricingPage(driver);
-		}
-		if (currentUrl().contains("prescription-drug-plans.html")) {
-			return new PdpViewPlansAndPricingPage(driver);
-		}
-		if (currentUrl().contains("medicare-supplement-plans.html")) {
-			return new MsViewPlansAndPricingPage(driver);
-		}
-		return null;
-	}
-
-	public PDPRequestHelpAndInformationPage navigateToPDPMoreHelpAndInfo() {
-
-		Actions actions = new Actions(driver);
-		actions.moveToElement(ourPlansHoverLink);
-		actions.moveToElement(pdp_moreHelpInfoLink);
-		actions.click().build().perform();
-
-		if (currentUrl().contains("prescription-drug-plans/request-information.html")) {
-			return new PDPRequestHelpAndInformationPage(driver);
-		}
-
-		return null;
-
-	}
+	
 
 	public Boolean enterInvalidUserNamePassword() {
 		validate(usernameField);
@@ -880,20 +696,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		return false;
 	}
 
-	public AccountHomePage signInValid() {
-		validate(signInButton);
-		signInButton.click();
-		// validate(signInButton);
-		Alert alert = driver.switchTo().alert();
-		alert.dismiss();
-		ArrayList<String> tabs = new ArrayList<String>(driver.getWindowHandles());
-		driver.switchTo().window(tabs.get(1));
-		if (getTitle().equalsIgnoreCase("AARP Medicare Plans | My Account Home")) {
-			return new AccountHomePage(driver);
-		}
-
-		return null;
-	}
+	
 
 	public void hoverourplanslink() {
 		validate(OurPlansLink1);
@@ -921,19 +724,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		return null;
 	}
 
-	public OurPlansPage lookupzipcodeclick() {
-
-		hoverourplanslink();
-		validate(LookUpZipCode1);
-		LookUpZipCode1.click();
-		validate(LookUpZipCode1);
-		if (getTitle().equalsIgnoreCase("Our Medicare Plan Types | AARP® Medicare Plans from UnitedHealthcare®")) {
-			return new OurPlansPage(driver);
-		}
-
-		return null;
-
-	}
+	
 
 	// private PageData ourPlansNav;
 	public JSONObject ourPlansNavJson;
@@ -1049,22 +840,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		return null;
 	}
 
-	public ProviderSearchPage launchesPo7() {
-		po7Link.click();
-		try {
-			Thread.sleep(10000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		switchToNewIframe("providerSearchFrame");
-		if (pageHeader.getText().equalsIgnoreCase("Find a Physician, Medical Group, Clinic or Facility")) {
-			return new ProviderSearchPage(driver);
-		}
-		return null;
-
-	}
-
+	
 	public void hoverhealthandwellnesslink() {
 
 		validate(hoverhealthandwellnesslink);
@@ -1082,64 +858,11 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		return getHealthandWellnessDropdownJson();
 	}
 
-	public LoginAssistancePage forgotusernameandpasswordclick() {
+	
 
-		hoverhealthandwellnesslink();
-		validate(forgotusernamepasswordlink);
-		Actions actions = new Actions(driver);
-		actions.moveToElement(forgotusernamepasswordlink);
-		actions.click().build().perform();
+	
 
-		ArrayList<String> tabs = new ArrayList<String>(driver.getWindowHandles());
-		driver.switchTo().window(tabs.get(1));
-		validate(usernameassistancetext);
-
-		if (getTitle().equalsIgnoreCase("AARP Medicare Plans |Username and Password Assistance")) {
-			return new LoginAssistancePage(driver);
-		}
-
-		return null;
-
-	}
-
-	public RegistrationHomePage registerHereClick() {
-
-		ArrayList<String> tabs = new ArrayList<String>(driver.getWindowHandles());
-		driver.switchTo().window(tabs.get(0));
-
-		hoverhealthandwellnesslink();
-		validate(registerherelink);
-		Actions actions = new Actions(driver);
-		actions.moveToElement(registerherelink);
-		actions.click().build().perform();
-
-		ArrayList<String> tabs1 = new ArrayList<String>(driver.getWindowHandles());
-		driver.switchTo().window(tabs1.get(2));
-
-		if (getTitle().equalsIgnoreCase("AARP Medicare Plans | Registration")) {
-			return new RegistrationHomePage(driver);
-		}
-
-		return null;
-
-	}
-
-	public HealthCentersPage healthcentersclick() {
-
-		hoverhealthandwellnesslink();
-		validate(healthcenterslink);
-
-		Actions actions = new Actions(driver);
-		actions.moveToElement(healthcenterslink);
-		actions.click().build().perform();
-
-		if (getTitle().equalsIgnoreCase("Error Page")) {
-			return new HealthCentersPage(driver);
-		}
-
-		// TODO Auto-generated method stub
-		return null;
-	}
+	
 
 	public JSONObject getHealthandWellnessDropdownJson() {
 
@@ -1167,56 +890,9 @@ public class AcquisitionHomePage extends GlobalWebElements {
 
 	}
 
-	public Object pickatopic(String picktopic) {
 
-		selectSelectBoxIt.click();
-		for (WebElement element : topicDropDownValues) {
-			if (element.getText().equalsIgnoreCase(picktopic)) {
-				element.click();
-				picktopicbtn.click();
-				break;
-			}
-		}
 
-		if (currentUrl().contains("/medicare-education/about")) {
-			if (getTitle().equals("Learn About Medicare | AARP® Medicare Plans from UnitedHealthcare®")) {
-				return new LearnAboutMedicarePage(driver);
-			}
-		} else if (currentUrl().contains("medicare-education/enroll")) {
-			if (getTitle().equals("Medicare Initial Enrollment Period | AARP® Medicare Plans from UnitedHealthcare®")) {
-
-				return new PrepareforInitialEnrollmentPage(driver);
-			}
-		}
-
-		return null;
-	}
-
-	public PlanSelectorPage planselector() {
-		takequizbtn.click();
-		if (getTitle().equalsIgnoreCase("Plan Selector")) {
-			return new PlanSelectorPage(driver);
-		}
-		return null;
-	}
 	
-	public PlanSelectorPage planselector_click() {
-		compareplans.click();
-		if (getTitle().equalsIgnoreCase("Plan Selector")) {
-			return new PlanSelectorPage(driver);
-		}
-		return null;
-	}
-	
-	public ContactUsAARPPage contactUsFooterClick() {
-		validate(footerContactUsLink);
-		footerContactUsLink.click();
-		validate(footerContactUsLink);
-		if (driver.getTitle().equalsIgnoreCase("Contact UnitedHealthcare® | AARP® Medicare Plans from UnitedHealthcare")) {
-			return new ContactUsAARPPage(driver);
-		}
-		return null;
-	}
 
 
 	public JSONObject validatesDTMTags() {

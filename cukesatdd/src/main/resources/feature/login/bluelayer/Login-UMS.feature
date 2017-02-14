@@ -120,15 +120,3 @@ Then the user validates temp id card pop up after login in UHC site
 Examples:
 	| planType | memberType |
 	| MAPD     | Individual |
-	
-	
-@albama	
-Scenario Outline:To verify add a plan link is not displayed for albama member
-Given the user is on the UHC medicare site login page
-Given registered member to login in UMS site
- 	| Plan Type    | <plantype>   |
-	| Member Type  | <memberType> |
-Then the user validate add a plan link is not displayed for albama memeber
-Examples:
-	| plantype | memberType |
-	| MA       | Group |

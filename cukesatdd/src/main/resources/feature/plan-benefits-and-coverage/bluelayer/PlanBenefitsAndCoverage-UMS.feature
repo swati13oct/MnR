@@ -577,7 +577,6 @@ Examples:
 #| PDP      | Group    |
 | SSUP     | Group    |
 
-
 @hospital       
 Scenario Outline: Verify benefits and coverage in UMS site for mapd and ma non lis with hospital visits
 Given registered UHC with following details for plan benefits and coverage flow in UMS site
@@ -611,108 +610,11 @@ Scenario Outline: Verify benefits and coverage in UMS site for mapd and ma non l
 Given registered UHC with following details for plan benefits and coverage flow in UMS site
 | Plan Type          | <planType>                |
 | Copay Category     | <copayCategory>           | 
-| Member Type				 | <Member Type>	 |
-| Plan Name					 | <plan Name>		 |
+| Member Type				 | <Member Type>						 |
+| Plan Name					 | <plan Name>
 When the user view forms and resources in UMS site
 Then the user view benefits and coverage in UMS site
 And the user validates the content on benefits and coverage page    	 
 Examples:
         |planType  | copayCategory  |Member Type     | plan Name |
         | SSRD     | NON LIS        | Group					 | HMO       |
-        
-@dashboardfr       
-Scenario Outline: Verify dashboard forms and resources for mapd and ma in UMS site
-Given registered UHC with following details for plan benefits and coverage flow in UMS site
-| Plan Type          | <planType>                |
-| Member Type				 | <Member Type>						 |
-When the user view forms and resources in UMS site
-Then the user view mydocument in UMS site
-Then the user validates the content on mydocument page
-Then the user validates the backtopreviouspage link on mydocument page
-
-
-Examples:
-        |planType  |Member Type     |
-        |MA        |Individual						| 
-        
-@udocdownload       
-Scenario Outline: Verify dashboard forms and resources for mapd and ma in UMS site
-Given registered UHC with following details for plan benefits and coverage flow in UMS site
-| Plan Type          | <planType>                |
-| Member Type				 | <Member Type>						 |
-When the user view forms and resources in UMS site
-Then the user view mydocument in UMS site
-Then the user validates the custom search on mydocument page
-Then the user validates the content on mydocument page
-Then the user validates the view/download link on mydocument page
-
-
-Examples:
-        |planType  |Member Type     |
-        |MAPD        |Individual				| 
-        
-
-
-@docpagination
-Scenario Outline: Verify dashboard forms and resources for mapd and ma in UMS site
-Given registered UHC with following details for plan benefits and coverage flow in UMS site
-| Plan Type          | <planType>                |
-| Member Type				 | <Member Type>						 |
-When the user view forms and resources in UMS site
-Then the user view mydocument in UMS site
-Then the user validates the pagination link on mydocument page
-Then the user validates the content on mydocument page
-
-Examples:
-        |planType  |Member Type     |
-        |MAPD        |Individual			| 
-
-        
-@docsorting
-Scenario Outline: Verify dashboard forms and resources for mapd and ma in UMS site
-Given registered UHC with following details for plan benefits and coverage flow in UMS site
-| Plan Type          | <planType>                |
-| Member Type				 | <Member Type>						 |
-When the user view forms and resources in UMS site
-Then the user view mydocument in UMS site
-Then the user validates the sorting link on mydocument page
-Then the user validates the content on mydocument page
-
-Examples:
-        |planType  |Member Type     |
-        |MAPD        |Individual    | 
-
-
-
-
-
-Scenario Outline:To verify Add Plan link not available on plan and benefits page for members in UMS site
-Given registered member to login in UMS site
-	| Plan Type   | <planType>   |
-	| Member Type | <memberType> |
-	| Group Type   | <groupType>  |
-When the user navigates to benefits and coverage page under my plans in UMS site
-Then validates that add plans tab is not available
-
-Examples:
-
-| planType | memberType | groupType |
-| MAPD     | Group      | ALPEEHIP  |
-| MA			 | Group	  	| ALPEEHIP  |
-
-
-
-@US463479
-Feature: To test plan benefits and Coverage on UMS site
-Scenario Outline:To verify pdfs displayed in forms and resources in UMS site
-Given registered member to login in UMS site
-	| Plan Type   | <planType>   |
-	| Member Type | <memberType> |
-When the user navigates to benefits and coverage page under my plans in UMS site
-Then I will be able access a PDF flyer in  English,Spanish or Chinese that explains passport benefits when a plan has this feature
-Examples:
-
-
-| planType | memberType  |
-| MA       |Individual |
-| MAPD       |Individual |

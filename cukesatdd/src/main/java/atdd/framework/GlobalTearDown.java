@@ -1,16 +1,7 @@
 package atdd.framework;
 
 
-import java.io.ByteArrayInputStream;
-
-import org.openqa.selenium.OutputType;
-import org.openqa.selenium.TakesScreenshot;
-import org.openqa.selenium.WebDriver;
 import org.springframework.beans.factory.annotation.Autowired;
-
-import atdd.framework.MRScenario;
-import cucumber.annotation.After;
-import cucumber.runtime.ScenarioResult;
 /**
  * This class will take a screen shot of the last screen executed by
  * cucumber and embed it in the report generated.   It will take a screen shot
@@ -44,6 +35,7 @@ public class GlobalTearDown {
 	MRScenario loginScenario;
 
 	public MRScenario getLoginScenario() {
+		
 		return loginScenario;
 	}
 
@@ -51,19 +43,15 @@ public class GlobalTearDown {
 	 * 
 	 * @param scenario
 	 */
-	@After
+	/*@After
 	public void tearDown(ScenarioResult scenario) {
 
-		WebDriver wd = getLoginScenario().getWebDriver();
-		final byte[] screenshot = ((TakesScreenshot) wd).getScreenshotAs(OutputType.BYTES);
-		scenario.embed(new ByteArrayInputStream(screenshot), "image/png"); // ... and
-																	// embed it
-																	// in the
-																	// report.
 		//Clean up the existing webdriver.
+		
+		getLoginScenario().webDriver.close();
+		getLoginScenario().webDriver.quit();
 		getLoginScenario().flushBeans();
-		getLoginScenario().nullifyWebDriver();
 
-	}
+	}*/
 
 }

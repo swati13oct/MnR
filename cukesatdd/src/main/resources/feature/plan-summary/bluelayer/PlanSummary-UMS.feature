@@ -40,15 +40,3 @@ Then user validate view details button is not displayed for  group LIS 3
 Examples:
  | plantype | memberType   |
  | MAPD       | Group |
- 
-@albama
-Scenario Outline: To validate add a plan link is not displayed to albama members
-Given registered member to login in UMS site
- 	| Plan Type    | <plantype>   |
-	| Member Type  | <memberType> |
-When the user navigates to plan summary page under my plans in UMS site
-Then the user validate add a plan link is not displayed for albama memeber
-Examples:
- | plantype | memberType   |
-#| MAPD       | Group |
- |  MA         | Group |

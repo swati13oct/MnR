@@ -51,16 +51,3 @@ Examples:
 #| PDP      |
 #| MS       |
 #| HIP      |
-
-Scenario Outline:To verify passport pdfs displayed in forms and resources in AARP site
-Given registered member for forms and resources in AARP Site
-	| Plan Type      |<planType> |
-
-When the user view forms and resources in AARP site
-Then I will be able access a PDF flyer in Englishthat explains passport benefits when a plan has this feature
-And I will be able access a PDF flyer in Spanish or Chinese that explains passport benefits when a plan has this feature
-
-Examples:
-
-| planType |
-| MAPD	   |

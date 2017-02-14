@@ -1,5 +1,5 @@
 @fixedTestCase
-Feature: To test enroll in plan on AARP site 	
+Feature: To test enroll in plan on AARP site 
 Scenario Outline: Verify enroll in plan in AARP site for federal plan type member  PDP member
 Given the user is on AARP medicare site landing page
 When user performs plan search using following information in AARP site
