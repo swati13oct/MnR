@@ -44,9 +44,26 @@ public class CommonConstants {
 	public static final String WEBDRIVER = "webDriver";
 
 	public static final String DEVICE_NAME = "DeviceName";
-
+	
+	//Browser Drivers for WebDriver
 	public static final String CHROME_DRIVER = "ChromeDriver";
-
+	
+	/*
+	 * This parm is set in Jenkins and should evaluate to null when running 
+	 * in a desktop environment.
+	 */
+	public static final String JENKINS_BROWSER = "JENKINS_BROWSER"; 
+	
+	/*
+	 * Headless web browser for testing in Jenkins.
+	 */
+	public static final String JENKINS_BROWSER_PHANTOMJS = "PHANTOMJS";
+	public static final String HTMLUNIT_BROWSER = "HTMLUNIT";
+	public static final String FIREFOX_BROWSER = "FIREFOX";
+	public static final String CHROME_BROWSER = "CHROME";
+	public static final String IE_BROWSER = "IE";
+	public static final String MOBILE_BROWSER = "MOBILE";
+	
 	public static final String PLAN_BENEFITS_AND_COVERAGE = "planBenefitsAndCoverage";
 
 	public static final String BENEFITS_AND_COVERAGE_PDP_NONLIS_NONUS_PAGE_DATA = "planbenefitsandcoveragenonlisnotusother.json";

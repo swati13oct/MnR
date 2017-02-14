@@ -1,6 +1,7 @@
 package atdd.framework;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -38,16 +39,21 @@ import org.json.JSONObject;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.firefox.FirefoxBinary;
+import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.firefox.FirefoxProfile;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
+import org.openqa.selenium.phantomjs.PhantomJSDriver;
+import org.openqa.selenium.phantomjs.PhantomJSDriverService;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.springframework.ldap.core.DistinguishedName;
 import org.springframework.stereotype.Component;
 
-import acceptancetests.atdd.data.CommonConstants;
-
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.WebClient;
+
+import acceptancetests.atdd.data.CommonConstants;
 
 /**
  * 
@@ -77,6 +83,7 @@ public class MRScenario {
 	public static String environment, browser;
 
 	private static final String DIRECTORY = "/src/main/resources/";
+
 	public static int count = 0;
 
 	public void saveBean(String id, Object object) {
@@ -851,21 +858,90 @@ public class MRScenario {
 		}
 	}
 
-
+	/**
+	 * Figure out which web browser we're going to use. The JENKINS browser will
+	 * take precendence because it will only exist if this is running in
+	 * Jenkins. Otherwise, use the browser configured in the config.properties
+	 * file.
+	 * 
+	 */
 	public WebDriver getWebDriver() {
-		HtmlUnitDriver htmlUnitDriver = new HtmlUnitDriver(
-				BrowserVersion.FIREFOX_24) {
-			@Override
-			protected WebClient modifyWebClient(WebClient client) {
-				client.getOptions().setThrowExceptionOnScriptError(false);
-				return client;
-			}
-		};
-		htmlUnitDriver.setJavascriptEnabled(true);
 
-		webDriver = htmlUnitDriver;
-		webDriver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
-		webDriver.manage().window().maximize();
+		 
+		String browser = (null == System.getProperty(CommonConstants.JENKINS_BROWSER)
+				? props.get("WebDriver") : System.getProperty(CommonConstants.JENKINS_BROWSER));
+		
+		System.out.println("getWebDriver, returning driver " + browser);
+		
+		// if webDriver is null, create one, otherwise send the existing one
+		// back.
+		// This has to happen to preserve the state of webDriver so that we can
+		// take screenshots at the end.
+		if (null == webDriver) {
+			System.out.println("New WebDriver CREATED");
+			// Again, Jenkins takes precedent. 
+			String pathToBinary = (null == System.getProperty("phantomjs") ? props.get("BrowserPathToBinary")
+					: System.getProperty("phantomjs"));
+			
+			// Choose your browser based on name. The name is what is in
+			// CommonConstants.
+			// If the browser isn't configured (null) or it's set to HTMLUNIT,
+			// use HTMLUNIT.
+			// This is the default browser when I checked out the code, so it's
+			// the default
+			if (null == browser || browser.equalsIgnoreCase(CommonConstants.HTMLUNIT_BROWSER)) {
+				// use the HtmlUnit Driver
+				HtmlUnitDriver htmlUnitDriver = new HtmlUnitDriver(BrowserVersion.FIREFOX_24) {
+					@Override
+					protected WebClient modifyWebClient(WebClient client) {
+						client.getOptions().setThrowExceptionOnScriptError(false);
+						return client;
+					}
+				};
+				htmlUnitDriver.setJavascriptEnabled(true);
+
+				webDriver = htmlUnitDriver;
+				webDriver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
+				webDriver.manage().window().maximize();
+			} else if (browser.equalsIgnoreCase(CommonConstants.JENKINS_BROWSER_PHANTOMJS)) {
+				// otherwise if we have a Jenkins browser defined, we use it.
+				DesiredCapabilities caps = new DesiredCapabilities();
+				caps.setCapability(PhantomJSDriverService.PHANTOMJS_EXECUTABLE_PATH_PROPERTY, pathToBinary);
+				webDriver = new PhantomJSDriver(caps);
+			} else if (browser.equalsIgnoreCase(CommonConstants.FIREFOX_BROWSER)) {
+				FirefoxBinary ffBinary = new FirefoxBinary(new File(pathToBinary));
+				FirefoxProfile firefoxProfile = new FirefoxProfile();
+				webDriver = new FirefoxDriver(ffBinary, firefoxProfile);
+				webDriver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
+			} else if (browser.equalsIgnoreCase(CommonConstants.CHROME_BROWSER)) {
+				Map<String, Object> chromeOptions = new HashMap<String, Object>();
+				chromeOptions.put("binary", pathToBinary);
+				DesiredCapabilities capabilities = DesiredCapabilities.chrome();
+				capabilities.setCapability(ChromeOptions.CAPABILITY, chromeOptions);
+				webDriver = new ChromeDriver(capabilities);
+			} else if (browser.equalsIgnoreCase(CommonConstants.IE_BROWSER)) {
+				System.setProperty("webdriver.ie.driver",
+						pathToBinary);
+				DesiredCapabilities ieCaps = DesiredCapabilities.internetExplorer();
+				ieCaps.setCapability(InternetExplorerDriver.INTRODUCE_FLAKINESS_BY_IGNORING_SECURITY_DOMAINS, true);
+				webDriver = new InternetExplorerDriver(ieCaps);
+				webDriver.manage().window().maximize();
+				return webDriver;
+			} else if (browser.equalsIgnoreCase(CommonConstants.MOBILE_BROWSER)) {
+				Map<String, String> mobileEmulation = new HashMap<String, String>();
+				mobileEmulation.put("deviceName", props.get(CommonConstants.DEVICE_NAME));
+				Map<String, Object> chromeOptions = new HashMap<String, Object>();
+				chromeOptions.put("mobileEmulation", mobileEmulation);
+				DesiredCapabilities capabilities = DesiredCapabilities.chrome();
+				capabilities.setCapability("chrome.switches", Arrays.asList("--start-maximized"));
+				capabilities.setCapability(ChromeOptions.CAPABILITY, chromeOptions);
+				System.setProperty("webdriver.chrome.driver", props.get(CommonConstants.CHROME_DRIVER));
+				webDriver = new ChromeDriver(capabilities);
+				return webDriver;
+			}
+
+		}
+
 		return webDriver;
 	}
 
