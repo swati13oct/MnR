@@ -270,13 +270,14 @@ public class DrugcostestimatorUhcStepDefinition {
 	public void i_should_be_able_to_add_upto25_drugs(DataTable data) throws InterruptedException{
 		List<DataTableRow> memberAttributesRow = data.getGherkinRows();
 		String drug = memberAttributesRow.get(1).getCells().get(0);
-		WebDriver wd = (WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
-		DrugCostEstimatorPage dce = new DrugCostEstimatorPage(wd);
+		DrugCostEstimatorPage dce = (DrugCostEstimatorPage) getLoginScenario().getBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE);
 		dce.addDrugs(26,drug);
 		
 	}
 	@And("^I should have the ability to advance to the next step in the DCE flow after successfully creating a drug list with at least one drug$")
 	public void i_should_be_able_to_advance_dceflows(){
+		AddNewDrugModal addNewDrugModal = (AddNewDrugModal) getLoginScenario().getBean(PageConstants.ADD_DRUG_PAGE);
+		addNewDrugModal.cancel();
 	}
 	
 	@And("^I enter at least four characters of the drug name in the Enter Drug Name field but not the exact drug name$")

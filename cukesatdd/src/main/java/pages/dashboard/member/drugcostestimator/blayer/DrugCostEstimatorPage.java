@@ -199,6 +199,7 @@ public class DrugCostEstimatorPage extends UhcDriver{
 			AddNewDrugModal addNewDrugModal = clickOnAddDrug();
 			if((getDrugsCount()) == 25 || i == 26){
 				System.out.println("Exceeded the limit");
+				addNewDrugModal.verifyExceededError();
 				break;
 			}
 			addNewDrugModal.typeDrugName(drug);

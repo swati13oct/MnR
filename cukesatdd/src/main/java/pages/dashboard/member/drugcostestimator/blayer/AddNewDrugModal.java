@@ -132,5 +132,10 @@ public class AddNewDrugModal extends UhcDriver {
 	public void verifyExceededError(){
 		exceededError.isDisplayed();
 	}
+	public DrugCostEstimatorPage cancel(){
+		waitforElement(cancelButton);
+		cancelButton.click();
+		return new DrugCostEstimatorPage(driver);
+	}
 }
 
