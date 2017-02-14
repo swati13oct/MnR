@@ -106,6 +106,7 @@ public class PageConstants {
 	public static final String PHARMACY_TYPES = "pharmacyTypeArray";
 
 	public static final String REGISTRATION_HOME_PAGE = "registrationHomePage";
+	public static final String DRUG_COST_ESTIMATOR_PAGE = "drugcostestimatorPage";
 
 	public static final String PASSWORD_ASSISTANCE_PAGE = "passwordAssistancePage";
 

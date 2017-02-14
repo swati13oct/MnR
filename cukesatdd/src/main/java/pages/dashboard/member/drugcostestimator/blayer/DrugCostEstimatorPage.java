@@ -76,13 +76,13 @@ public class DrugCostEstimatorPage extends UhcDriver{
 	@FindBy(xpath="/html/body/div[2]/div[3]/div/div/div/div/div/div[3]/div/table/tbody/tr")
 	public WebElement SaveDrugPage;
 	
-	@FindBy (xpath = "//div[@id='dce.member']/div[2]/div/div/div/div/div/div[2]/div[1]/div[2]/div[1]/ul/li[2]/a/p[2]")
+	@FindBy(xpath="//p[contains(text(),'STEP2:')]/following-sibling::span[p[contains(text(),'PHARMACY')]]")
 	public WebElement step2PharmacyTab;
 	
-	@FindBy(className = "milesSelection")
+	@FindBy(id = "distance")
 	public WebElement milesSelection;
 	
-	@FindBy (xpath = "//div[@id='dce.member']/div/div[5]/div/div/form/div/div/div/div[2]/div[3]/span[1]")
+	@FindBy (id = "zipcode")
 	public WebElement zipcodeInput;
 	
 	@FindBy(xpath = "//div[@id='dce.member']/div/div[5]/div/div/form/div/div/div/div[2]/div[3]/a[1]")
@@ -147,8 +147,8 @@ public class DrugCostEstimatorPage extends UhcDriver{
 	}
 	public void changeUrlToNewDCEPage() {
 
-		//String NewDCEUrl = "https://member.team-b-uhcmedicaresolutions.uhc.com/content/dashboard/home/drug-cost-estimator.html#/drugCostEstimator";
-		String NewDCEUrl = "https://www.team-b-uhcmedicaresolutions.uhc.com/content/dashboard/home/drug-cost-estimator.html";
+		String NewDCEUrl = "https://member.team-b-uhcmedicaresolutions.uhc.com/content/dashboard/home/dce-commontool-integration.html#/drug-cost-estimator";
+		//String NewDCEUrl = "https://www.team-b-uhcmedicaresolutions.uhc.com/content/dashboard/home/drug-cost-estimator.html";
 		driver.get(NewDCEUrl);
 		
 		try{

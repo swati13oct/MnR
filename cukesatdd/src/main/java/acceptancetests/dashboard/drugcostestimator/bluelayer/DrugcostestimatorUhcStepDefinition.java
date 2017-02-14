@@ -7,9 +7,11 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
+import org.skyscreamer.jsonassert.JSONAssert;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import acceptancetests.atdd.data.CommonConstants;
@@ -22,6 +24,7 @@ import cucumber.annotation.en.Then;
 import cucumber.annotation.en.When;
 import cucumber.table.DataTable;
 import gherkin.formatter.model.DataTableRow;
+import pages.acquisition.bluelayer.RegistrationHomePage;
 import pages.dashboard.member.drugcostestimator.blayer.AddDrugDetails;
 import pages.dashboard.member.drugcostestimator.blayer.AddNewDrugModal;
 import pages.dashboard.member.drugcostestimator.blayer.DrugCostEstimatorPage;
@@ -41,6 +44,8 @@ public class DrugcostestimatorUhcStepDefinition {
 	
 	@Given("^I am a registered member using the new M&R member portal on a desktop computer$")
 	public void i_am_an_uhc_individual_member_on_the_dashboard_site(DataTable memberAttributes) {
+		WebDriver wd = getLoginScenario().getWebDriver();
+		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
 		List<DataTableRow> memberAttributesRow = memberAttributes
 				.getGherkinRows();
 		Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
@@ -83,6 +88,8 @@ public class DrugcostestimatorUhcStepDefinition {
 			getLoginScenario().saveBean(LoginCommonConstants.PASSWORD, pwd);
 			getLoginScenario().saveBean(LoginCommonConstants.CATOGERY, category);
 		}
+		DrugCostEstimatorPage dce = new DrugCostEstimatorPage(wd);
+		getLoginScenario().saveBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE, dce);
 
 		System.out.println(" PASSED : ");
 	}
@@ -151,12 +158,12 @@ public class DrugcostestimatorUhcStepDefinition {
 		String userName = (String) getLoginScenario().getBean(LoginCommonConstants.USERNAME);
 		String pwd = (String) getLoginScenario().getBean(LoginCommonConstants.PASSWORD);
 		String category = (String) getLoginScenario().getBean(LoginCommonConstants.CATOGERY);
-		WebDriver wd = getLoginScenario().getWebDriver();
-		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
+		WebDriver wd = (WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
+		//getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
 		LoginPage loginPage = new LoginPage(wd);
-
-		loginPage.loginWith(userName, pwd,category);
-
+		getLoginScenario().saveBean(PageConstants.LOGIN_PAGE, loginPage);
+		AccountHomePage accountHomePage = (AccountHomePage) loginPage.loginWith(userName, pwd,category);
+		getLoginScenario().saveBean(PageConstants.ACCOUNT_HOME_PAGE, accountHomePage);
 	}
 
 	@When("^I use the DCE tool to enter one or more drugs to my drug list$")
@@ -216,20 +223,45 @@ public class DrugcostestimatorUhcStepDefinition {
 	}
 	
 	@Then("^I should see the Pharmacy search tab as a clickable element within the DCE tool$")
-	public void i_should_see_the_pharmacy_search() throws InterruptedException{
+	public void i_should_see_the_pharmacy_search(DataTable data) throws InterruptedException{
+		
+		
+		List<DataTableRow> memberAttributesRow = data.getGherkinRows();
+		String drug = memberAttributesRow.get(1).getCells().get(0);
+		
+		
 		WebDriver wd = (WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
-		DrugCostEstimatorPage dce = new DrugCostEstimatorPage(wd);
+		DrugCostEstimatorPage dce = (DrugCostEstimatorPage) getLoginScenario().getBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE);
 		dce.changeUrlToNewDCEPage();
+		
+		
 		AddNewDrugModal addNewDrugModal = dce.clickOnAddDrug();
-		addNewDrugModal.clickonSearchButton("lipistart");
-		addNewDrugModal.selectDrug("lipistart");
+		String user = (String) getLoginScenario().getBean(LoginCommonConstants.USERNAME);
+		Map<String, JSONObject> expectedDataMap = loginScenario
+				.getExpectedJson(user);
+		
+		getLoginScenario().saveBean(CommonConstants.EXPECTED_DATA_MAP,
+				expectedDataMap);
+		JSONObject addDrugPageExpectedJson = addNewDrugModal.getExpectedData(
+				expectedDataMap);
+		
+		JSONObject addDrugPageActualJson = null;
+		addDrugPageActualJson = addNewDrugModal.addnewdrugJson;
+		try {
+			JSONAssert.assertEquals(addDrugPageExpectedJson,
+					addDrugPageActualJson, true);
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}
+		addNewDrugModal.clickonSearchButton(drug);
+		addNewDrugModal.selectDrug(drug);
 		AddDrugDetails addDrugDetails = new AddDrugDetails(wd);
 		addDrugDetails.continueAddDrugDetails();
 	}
 	@And("^I should be able to move forward or backward in the tool flow$")
 	public void i_should_be_able_to_move_forward_backward(){
 		WebDriver wd = (WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
-		DrugCostEstimatorPage dce = new DrugCostEstimatorPage(wd);
+		DrugCostEstimatorPage dce = (DrugCostEstimatorPage) getLoginScenario().getBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE);
 		dce.navigateToStep2();
 		dce.validatePharmacyForm();
 		dce.backwardToStep1();
