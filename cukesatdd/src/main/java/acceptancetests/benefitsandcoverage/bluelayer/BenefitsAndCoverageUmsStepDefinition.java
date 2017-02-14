@@ -638,6 +638,7 @@ public class BenefitsAndCoverageUmsStepDefinition {
 	}
 
 
+
 	@Then("^I will be able access a PDF flyer in  English,Spanish or Chinese that explains passport benefits when a plan has this feature$")
 	public void I_will_be_able_access_a_PDF_flyer() {
 		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario()
@@ -667,6 +668,41 @@ public class BenefitsAndCoverageUmsStepDefinition {
 	       }
 	       System.out.println("-----add plans validation ended----------");
 	}
+
+
+	@Then("^the user validates the view/download link on mydocument page$")
+	public void view_download_link_validation_ums_site(){
+		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstants.ACCOUNT_HOME_PAGE);
+		//FormsandresourcesPage formsAndResourcesPage=null;
+		FormsandresourcesPage formsAndResourcesPage = accountHomePage.navigateToviewdownloadlinkUmsPage();
+	}
+	
+	@Then("^the user validates the pagination link on mydocument page$")
+	public void view_pagination_link_validation_ums_site(){
+		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstants.ACCOUNT_HOME_PAGE);
+		//FormsandresourcesPage formsAndResourcesPage=null;
+		FormsandresourcesPage formsAndResourcesPage = accountHomePage.navigateTopaginationlinkUmsPage();
+	}
+	
+	@Then("^the user validates the custom search on mydocument page$")
+	public void view_custom_search_link_validation_ums_site(){
+		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstants.ACCOUNT_HOME_PAGE);
+		//FormsandresourcesPage formsAndResourcesPage=null;
+		FormsandresourcesPage formsAndResourcesPage = accountHomePage.navigateTocustomsearchlinkUmsPage();
+	}
+	
+
+
+@Then("^the user validates the sorting link on mydocument page$")
+	public void view_sorting_search_link_validation_ums_site(){
+		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstants.ACCOUNT_HOME_PAGE);
+		//FormsandresourcesPage formsAndResourcesPage=null;
+		FormsandresourcesPage formsAndResourcesPage = accountHomePage.navigateTosortingsearchlinkUmsPage();
+	}
+
+	
+
+	
 
 
 }
