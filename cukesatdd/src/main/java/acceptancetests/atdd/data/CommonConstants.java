@@ -171,7 +171,9 @@ public class CommonConstants {
 			new Page(CommonConstants.DASHBOARD_DRUG_COST_ESTIMATOR,
 					CommonConstants.DASHBOARD_DRUGCOSTESTIMATOR_DIRECTORY),
 			new Page(CommonConstants.ADD_NEW_DRUG_MODAL,
-					CommonConstants.DASHBOARD_DRUGCOSTESTIMATOR_DIRECTORY)
+					CommonConstants.DASHBOARD_DRUGCOSTESTIMATOR_DIRECTORY),
+			new Page(CommonConstants.ADD_DRUG_DETAILS,
+			CommonConstants.DASHBOARD_DRUGCOSTESTIMATOR_DIRECTORY)
 	};
 
 	public static final String BENEFITS_SUMMARY_DIRECTORY = "/jsonresponse/mobile/member/ulayer/benefits-summary/";
@@ -327,6 +329,8 @@ public class CommonConstants {
 			new Page(CommonConstants.DASHBOARD_DRUG_COST_ESTIMATOR,
 					CommonConstants.DASHBOARD_DRUGCOSTESTIMATOR_DIRECTORY),
 			new Page(CommonConstants.ADD_NEW_DRUG_MODAL,
+					CommonConstants.DASHBOARD_DRUGCOSTESTIMATOR_DIRECTORY),
+			new Page(CommonConstants.ADD_DRUG_DETAILS,
 					CommonConstants.DASHBOARD_DRUGCOSTESTIMATOR_DIRECTORY)
 			
 	};
@@ -808,13 +812,13 @@ public class CommonConstants {
 	
 	public static final String SAVE_DRUG_PAGE_DATA="savedrugpagedata.json";
 	public static final String ADD_NEW_DRUG_MODAL = "addnewdrugmodal";
+	public static final String ADD_DRUG_DETAILS = "adddrugdetails";
 	public static final String ADD_NEW_DRUG_PAGE_DATA = "addnewdrugpagedata.json";
 	public static final String DRUGCOSTESTIMATORDATAPAGE = "DrugCostEstimatorPage.json";
 	public static final String ADD_DRUG_DETAILS_PAGE_DATA = "adddrugdetailspagedata.json";
 	public static final String SWITCH_GENERIC_PAGE_DATA = "switchgenericpagedata.json";
 	
 	public static final String DCEstimator = "DCEstimator.json";
-	public static final String ADD_DRUG_DETAILS="adddrugdetails.json";
 	public static final String SWITCH_GENERIC="switchgeneric.json";
 
 	public static final String NEW_CLAIM_DETAILS_PAGE_DATA = "newClaimDetailsPage.json";

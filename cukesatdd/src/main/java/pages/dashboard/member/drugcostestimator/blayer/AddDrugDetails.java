@@ -24,7 +24,7 @@ public class AddDrugDetails extends UhcDriver {
 	public JSONObject adddrugdetailsJson;
 
 	@FindBy(xpath = "//span[contains(text(),'Add Drug Details')]")
-	public WebElement AddDrugDetailsPage;
+	public WebElement addDrugDetailsPage;
 
 	@FindBy(id = "drug-dosage-button")
 	public WebElement continueButton;
@@ -43,10 +43,10 @@ public class AddDrugDetails extends UhcDriver {
 	public AddDrugDetails(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
-		CommonUtility.waitForPageLoad(driver, AddDrugDetailsPage, 10);
+		//CommonUtility.waitForPageLoad(driver, addDrugDetailsPage, 10);
 		String fileName = CommonConstants.ADD_DRUG_DETAILS_PAGE_DATA;
-		//	adddrugdetails = CommonUtility.readPageData(fileName, CommonConstants.PAGE_OBJECT_DIRECTORY_BLAYER_MEMBER);
-		//openAndValidate();
+		adddrugdetails = CommonUtility.readPageData(fileName, CommonConstants.PAGE_OBJECT_DIRECTORY_DCE_MEMBER);
+		openAndValidate();
 	}
 
 	@Override
@@ -55,6 +55,7 @@ public class AddDrugDetails extends UhcDriver {
 		JSONObject jsonObject = new JSONObject();
 		for (String key : adddrugdetails.getExpectedData().keySet()) {
 			WebElement element = findElement(adddrugdetails.getExpectedData().get(key));
+			if (null != element) {
 			validate(element);
 			try {
 				jsonObject.put(key, element.getText());
@@ -64,6 +65,7 @@ public class AddDrugDetails extends UhcDriver {
 			}
 
 		}
+	}
 		adddrugdetailsJson = jsonObject;
 
 		System.out.println("addnewdrugJson----->" + adddrugdetailsJson);
@@ -71,9 +73,9 @@ public class AddDrugDetails extends UhcDriver {
 
 	public JSONObject getExpectedData(Map<String, JSONObject> expectedDataMap) {
 
-		JSONObject newPaymentHistoryExpectedJson = expectedDataMap.get(CommonConstants.ADD_DRUG_DETAILS);
+		JSONObject addDrugDetailsPageExpectedJson = expectedDataMap.get(CommonConstants.ADD_DRUG_DETAILS);
 
-		return newPaymentHistoryExpectedJson;
+		return addDrugDetailsPageExpectedJson;
 	}
 	public void selectDosage(String dosage){
 		WebElement element = driver.findElement(By.xpath("//input[@value='"+dosage+"']"));
@@ -97,16 +99,20 @@ public class AddDrugDetails extends UhcDriver {
 		}
 	}
 
-	public void continueAddDrugDetails(){
+	public SavingsOppurtunity continueAddDrugDetails(){
 		waitforElement(continueButton);
 		continueButton.click();
+		if (driver.getTitle().equalsIgnoreCase("SAVINGS OPPORTUNITY")) {
+			return new SavingsOppurtunity(driver);
+		}
+		return null;
 	}
 	public AddNewDrugModal backToSeach(){
 		backToSearchBtn.click();
 		return new AddNewDrugModal(driver);
 	}
 	public void validateThePage(){
-		Assert.assertTrue(AddDrugDetailsPage.isDisplayed());
+		Assert.assertTrue(addDrugDetailsPage.isDisplayed());
 	}
 
 }

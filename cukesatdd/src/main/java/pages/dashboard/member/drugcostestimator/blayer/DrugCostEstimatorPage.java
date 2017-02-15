@@ -147,7 +147,7 @@ public class DrugCostEstimatorPage extends UhcDriver{
 	}
 	public void changeUrlToNewDCEPage() {
 
-		String NewDCEUrl = "https://member.team-b-uhcmedicaresolutions.uhc.com/content/dashboard/home/dce-commontool-integration.html#/drug-cost-estimator";
+		String NewDCEUrl = "https://member.team-b-uhcmedicaresolutions.uhc.com/content/dashboard/home/drug-cost-estimator.html";
 		//String NewDCEUrl = "https://www.team-b-uhcmedicaresolutions.uhc.com/content/dashboard/home/drug-cost-estimator.html";
 		driver.get(NewDCEUrl);
 		
@@ -199,6 +199,7 @@ public class DrugCostEstimatorPage extends UhcDriver{
 			AddNewDrugModal addNewDrugModal = clickOnAddDrug();
 			if((getDrugsCount()) == 25 || i == 26){
 				System.out.println("Exceeded the limit");
+				addNewDrugModal.verifyExceededError();
 				break;
 			}
 			addNewDrugModal.typeDrugName(drug);

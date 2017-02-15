@@ -38,7 +38,11 @@ And I should see Drug List as an active tab in the DCE tool upon click
 And I should be able to click on Add a Drug
 And the Add a Drug search modal should launch
 And I enter at least four characters of the drug name in the Enter Drug Name field but not the exact drug name
+|drug|
+|Lipi|
 Then I should see a list of approximate search results to choose from
+|drug|
+|Lipitor|
 And I should be able to select a drug from the list
 And the modal should refresh to the next step in the flow if I select one of the suggested results
 
@@ -66,6 +70,8 @@ Given I am a registered member using the new M&R member portal on a desktop comp
 | Member Type	  | <memberType> |
 When the above plantype user logs in UMS Site Desktop
 When I use the DCE tool to enter one or more drugs to my drug list
+|drug|
+|Lipi|
 When I should be see dosage, package and frequency options returned from the DCE web service
 And I should be able to change those options at any time
 And I should have the ability to advance to the next step in the flow
@@ -79,6 +85,8 @@ Given I am a registered member using the new M&R member portal on a desktop comp
 | Member Type	  | <memberType> |
 When the above plantype user logs in UMS Site Desktop
 Then I should see the Pharmacy search tab as a clickable element within the DCE tool
+|drug|
+|Lipistart|
 And I should be able to move forward or backward in the tool flow 
 Examples:
  | planType  | memberType  |
