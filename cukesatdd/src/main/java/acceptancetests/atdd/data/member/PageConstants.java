@@ -72,10 +72,16 @@ public class PageConstants {
 	public static final String PAYMENT_HISTORY_PAGE = "paymentHistoryPage";
 
 	public static final String ONE_TIME_PAYMENT_PAGE = "oneTimePaymentPage";
+	
+	public static final String AUTOMATIC_PAYMENT_PAGE = "automaticPaymentPage";
 
 	public static final String CONFIRM_ONE_TIME_PAYMENT_PAGE = "confirmOneTimePaymentPage";
+	
+	public static final String CONFIRM_AUTOMATIC_PAYMENT_PAGE = "confirmAutomaticPaymentPage";
 
 	public static final String ONE_TIME_PAYMENT_SUCCESS_PAGE = "oneTimePaymentSuccessPage";
+	
+	public static final String AUTOMATIC_PAYMENT_SUCCESS_PAGE = "automaticPaymentSuccessPage";
 
 	public static final String SETUP_AUTO_PAYMENTS_PAGE = "setupAutoPaymentPage";
 
@@ -121,7 +127,11 @@ public class PageConstants {
 	
 	public static final String ONE_TIME_PAYMENTS_DASHBOARD = "onetimePaymentsPageDashboard";
 	
+	public static final String AUTOMATIC_PAYMENTS_DASHBOARD = "automaticPaymentsPageDashboard";
+	
 	public static final String REVIEW_ONE_TIME_PAYMENTS_DASHBOARD = "reviewOnetimePaymentsPageDashboard";
+	
+	public static final String REVIEW_AUTOMATIC_PAYMENTS_DASHBOARD = "reviewAutomaticPaymentsPageDashboard";
 
 	
 
