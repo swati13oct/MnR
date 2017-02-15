@@ -703,7 +703,6 @@ Examples:
 
 
 @US463479
-Feature: To test plan benefits and Coverage on UMS site
 Scenario Outline:To verify pdfs displayed in forms and resources in UMS site
 Given registered member to login in UMS site
 	| Plan Type   | <planType>   |

@@ -1,6 +1,4 @@
-/**
- * 
- */
+
 package acceptancetests.atdd.data;
 
 import atdd.framework.MRScenario;
@@ -11,10 +9,10 @@ import atdd.framework.MRScenario;
  */
 public class MRConstants {
 
-	public static final String AARPM_URL = "https://member."+MRScenario.environment+"-aarpmedicareplans.uhc.com";
-	public static final String UHCM_URL = "https://member."+MRScenario.environment+"-uhcmedicaresolutions.uhc.com/guest/home.html";
+	public static final String AARPM_URL = "https://member.awe-"+MRScenario.environment+"-aarpmedicareplans.uhc.com";
+	public static final String UHCM_URL = "https://member.awe-"+MRScenario.environment+"-uhcmedicaresolutions.uhc.com/guest/home.html";
 	//public static final String AARP_URL = "https://www.awe-"+MRScenario.environment+"-aarpmedicareplans.uhc.com/";
-	public static final String AARP_URL = "https://www."+MRScenario.environment+"-aarpmedicareplans.uhc.com/";
+	public static final String AARP_URL = "https://www.awe-"+MRScenario.environment+"-aarpmedicareplans.uhc.com/";
 
 	public static final String AARP_PLANPREVIEW_URL= "https://www."+MRScenario.environment+"-aarpmedicareplans.uhc.com/plan-preview.html";
 	
@@ -74,9 +72,9 @@ public class MRConstants {
 	
 	public static final String MEDICA_PASSWORD_ASSISTANCE_URL = "https://www.awe-"+MRScenario.environment+"-mymedicamedicare.uhc.com/guest/login/username-and-password-assistance.html";
 
-	public static final String AARPM_REGISTRATION_URL = "https://member."+MRScenario.environment+"-aarpmedicareplans.uhc.com/guest/registration.html";
+	public static final String AARPM_REGISTRATION_URL = "https://member.awe-"+MRScenario.environment+"-aarpmedicareplans.uhc.com/guest/registration.html";
 
-	public static final String PCP_MOBILE_URL = "https://member.awe-"+MRScenario.environment+"-mypcpmedicare.uhc.com/mobile/guest/login.html";
+	
 	public static final String PCP_REGISTRATION_URL = "https://www.awe-"+MRScenario.environment+"-mypcpmedicare.uhc.com/guest/registration.html";
 	
 	public static final String PCP_PASSWORD_ASSISTANCE_URL = "https://www.awe-"+MRScenario.environment+"-mypcpmedicare.uhc.com/guest/login/username-and-password-assistance.html";
@@ -137,7 +135,7 @@ public class MRConstants {
 	
 	public static final String MA_RIGHTS_AND_RESPONSIBILITIES_PAGE_URL = "https://www."+MRScenario.environment+"-uhcmedicaresolutions.uhc.com/health-plans/medicare-advantage-plans/resources-plan-material/ma-medicare-forms/medicare-rights-center.html" ;
 	
-	public static final String AARP_SITE_MAP_PAGE_URL = "https://www."+MRScenario.environment+"-aarpmedicareplans.uhc.com/sitemap.html";	
+	public static final String AARP_SITE_MAP_PAGE_URL = "https://www.awe-"+MRScenario.environment+"-aarpmedicareplans.uhc.com/sitemap.html";	
 
 	public static final String MA_PLAN_PRES_DRUGS_TRANSITION_PLANS_PAGE_URL = "https://www."+MRScenario.environment+"-uhcmedicaresolutions.uhc.com/health-plans/medicare-advantage-plans/resources-plan-material/ma-medicare-forms/ma-drug-transition.html";
 	
@@ -198,9 +196,8 @@ public class MRConstants {
   public static final String SERVER_DATE_MR_REST_WAR = "https://"+MRScenario.environment+"-generic.uhc.com/MRRestWAR/jsp/zadmin/timeAdmin.jsp?server=1";
 
   public static final String UHCM_MEMBER_URL = "https://member."+MRScenario.environment+"-uhcmedicaresolutions.uhc.com/guest/home.html";
-  
+	
   public static final String UHCM_MOBILE_TEAM_C_URL = "https://member."+MRScenario.environment+"-uhcmedicaresolutions.uhc.com/mobile/guest/login.html";
-  
   public static final String AARP_MOBILE_TEAM_C_URL = "https://member."+MRScenario.environment+"-aarpmedicareplans.uhc.com/mobile/guest/login.html";
   public static final String PORTFOLIO_PAGE_URL = "https://www.awe-"+MRScenario.environment+"-aarpmedicareplans.uhc.com/health-plans/plans.html";
 	

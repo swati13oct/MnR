@@ -406,7 +406,7 @@ public class PlanBenefitsAndCoverageAarpStepDefinition {
 
 	}
 
-	@Then("^the user validates the content on benefits and coverage page")
+	@Then("^the user validates the content on AARP benefits and coverage page")
 	public void validateContentOnBenefitsAndCoveragePage() {
 		
 		try {
