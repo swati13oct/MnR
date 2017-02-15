@@ -157,5 +157,10 @@ public void search_by_address() {
 	ourPlansPage.searchbyaddressclick();
 	ourPlansPage.validate();
 }
-
+@And ("^the user validates plan highlight and provider search$")
+public void user_validates_planHighlights_poviderLink(){
+	ResponsivePlanSummary planSummary = (ResponsivePlanSummary) getLoginScenario()
+			.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+	planSummary.validatePlanHighlights();
+	}
 }

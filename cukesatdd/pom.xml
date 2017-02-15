@@ -7,6 +7,7 @@
 	<version>1.0-SNAPSHOT</version>
 	<name>cukesatdd</name>
 
+
 	<properties>
 		<selenium.version>2.45.0</selenium.version>
 		<cucumber.version>1.0.2</cucumber.version>
@@ -15,7 +16,8 @@
 	</properties>
 
 	<build>
-		<resources>
+	    <sourceDirectory>${project.basedir}/src/main</sourceDirectory>
+		<resources>		    
 			<resource>
 				<directory>src/main/resources</directory>
 				<!-- schak38 : Read properties from classpath -->
@@ -25,10 +27,7 @@
 				</excludes>
 			</resource>
 		</resources>
-		
-		
 
-		
 		<plugins>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
@@ -118,11 +117,7 @@
 			<artifactId>junit</artifactId>
 			<version>4.11</version>
 		</dependency>
-		<dependency>
-			<groupId>com.codeborne</groupId>
-			<artifactId>phantomjsdriver</artifactId>
-			<version>1.2.1</version>
-		</dependency>
+
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>org.springframework.beans</artifactId>
@@ -254,8 +249,7 @@
 			<artifactId>selenium-chrome-driver</artifactId>
 			<version>${selenium.version}</version>
 		</dependency>
-		<!-- <dependency> <groupId>org.seleniumhq.selenium</groupId> <artifactId>selenium-java</artifactId> 
-			<version>${selenium.version}</version> </dependency> -->
+		
 		<dependency>
 			<groupId>org.seleniumhq.selenium</groupId>
 			<artifactId>selenium-firefox-driver</artifactId>
@@ -282,7 +276,14 @@
 			<artifactId>jsonassert</artifactId>
 			<version>1.2.3</version>
 		</dependency>
+		
+		
+		<dependency>
+   			<groupId>com.codeborne</groupId>
+  			<artifactId>phantomjsdriver</artifactId>
+   			<version>1.2.1</version>
+		</dependency>
 
 	</dependencies>
-
+	
 </project>
