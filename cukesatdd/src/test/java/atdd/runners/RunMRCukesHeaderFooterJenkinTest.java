@@ -18,6 +18,6 @@ import cucumber.junit.Cucumber;
 		features = { "feature/global-footer" }, 
 		format = {
 		"pretty", "html:reports/test-report" }, tags ={"@globalAARP"})
-public class RunMRCukesHeaderFooterTest {
+public class RunMRCukesHeaderFooterJenkinTest {
 
 }
