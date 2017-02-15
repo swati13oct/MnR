@@ -16,7 +16,8 @@
 	</properties>
 
 	<build>
-		<resources>
+	    <sourceDirectory>${project.basedir}/src/main</sourceDirectory>
+		<resources>		    
 			<resource>
 				<directory>src/main/resources</directory>
 				<!-- schak38 : Read properties from classpath -->
@@ -248,11 +249,7 @@
 			<artifactId>selenium-chrome-driver</artifactId>
 			<version>${selenium.version}</version>
 		</dependency>
-		<dependency>
-			<groupId>org.seleniumhq.selenium</groupId>
-			<artifactId>selenium-java</artifactId>
-			<version>${selenium.version}</version>
-		</dependency>
+		
 		<dependency>
 			<groupId>org.seleniumhq.selenium</groupId>
 			<artifactId>selenium-firefox-driver</artifactId>
@@ -279,11 +276,20 @@
 			<artifactId>jsonassert</artifactId>
 			<version>1.2.3</version>
 		</dependency>
+
 		<!-- https://mvnrepository.com/artifact/com.codeborne/phantomjsdriver -->
 		<dependency>
 			<groupId>com.codeborne</groupId>
 			<artifactId>phantomjsdriver</artifactId>
 			<version>1.2.1</version>
+
+		
+		
+		<dependency>
+   			<groupId>com.codeborne</groupId>
+  			<artifactId>phantomjsdriver</artifactId>
+   			<version>1.2.1</version>
+
 		</dependency>
 
 	</dependencies>
