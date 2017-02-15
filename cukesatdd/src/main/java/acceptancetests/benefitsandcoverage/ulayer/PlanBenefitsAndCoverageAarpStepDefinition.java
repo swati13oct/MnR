@@ -517,7 +517,7 @@ public class PlanBenefitsAndCoverageAarpStepDefinition {
 		}
 	}
 	
-	@Then("^the user validates the backtopreviouspage link on mydocument page$")
+	@Then("^the user validates the backtopreviouspage link on mydocument page in AARP site$")
 	public void view_back_to_previous_link_validation_aarp_site(){
 		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstants.ACCOUNT_HOME_PAGE);
 		 

@@ -627,7 +627,7 @@ Given registered UHC with following details for plan benefits and coverage flow 
 When the user view forms and resources in UMS site
 Then the user view mydocument in UMS site
 Then the user validates the content on mydocument page
-Then the user validates the backtopreviouspage link on mydocument page
+Then the user validates the backtopreviouspage link on mydocument page in UMS site
 
 
 Examples:

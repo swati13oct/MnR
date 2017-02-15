@@ -629,7 +629,7 @@ public class BenefitsAndCoverageUmsStepDefinition {
 
 	}
 	
-	@Then("^the user validates the backtopreviouspage link on mydocument page$")
+	@Then("^the user validates the backtopreviouspage link on mydocument page in UMS site$")
 	public void view(){
 		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstants.ACCOUNT_HOME_PAGE);
 		//FormsandresourcesPage formsAndResourcesPage=null;
