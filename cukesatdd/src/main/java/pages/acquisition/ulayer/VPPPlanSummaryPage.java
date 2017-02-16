@@ -146,10 +146,9 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		super(driver);
 		
 		PageFactory.initElements(driver, this);
+		CommonUtility.waitForPageLoad(driver, vppplansummarypage, CommonConstants.TIMEOUT_30);
 		
-	/*	CommonUtility.waitForPageLoad(driver, vppplansummarypage, CommonConstants.TIMEOUT_30);
-		
-		String fileName = CommonConstants.VPP_PLAN_SUMMARY_PAGE_DATA;
+	/*	String fileName = CommonConstants.VPP_PLAN_SUMMARY_PAGE_DATA;
 		vppPlanSummary = CommonUtility.readPageData(fileName,
 				CommonConstants.PAGE_OBJECT_DIRECTORY_ULAYER_ACQ); */
 		openAndValidate();
