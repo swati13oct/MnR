@@ -10,8 +10,7 @@ And the user views the plans of the below plan type in AARP site
 	| Plan Type | <plantype> |
 And the user validates the available plans for selected plan types in the AARP site
 Then the user validates plan summary for the below plan in the AARP site
-	
+	| Plan Name | <planName> |
 Examples:
-
 | zipcode | county             | plantype | planName                                         |
 | 90210   | Los Angeles County | MA	  | AARP MedicareComplete SecureHorizons Plan 1 (HMO)    |
