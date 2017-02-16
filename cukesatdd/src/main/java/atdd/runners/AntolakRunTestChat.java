@@ -9,7 +9,7 @@ import cucumber.junit.Cucumber;
 *
 */
 @RunWith(Cucumber.class)
-@Cucumber.Options(glue = { "atdd.framework","acceptancetests.vpp.bluelayer" }, 
+@Cucumber.Options(glue = { "atdd.framework","acceptancetests.vpp.ulayer" }, 
 		features = { "feature/chat/ulayer" }, 
 		format = {
 		"pretty", "html:reports/test-report" }, tags ={"@proactivechatOnVPPSummarypage"})
