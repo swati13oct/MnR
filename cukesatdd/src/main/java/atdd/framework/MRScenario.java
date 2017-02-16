@@ -878,7 +878,7 @@ public class MRScenario {
 		    String agent = "Mozilla/5.0 (Linux; U; Android 2.3.3; en-us; LG-LU3000 Build/GRI40) AppleWebKit/533.1 (KHTML, like Gecko) Version/4.0 Mobile Safari/533.1";
 		    DesiredCapabilities caps = new DesiredCapabilities();
 		    //caps.setCapability(PhantomJSDriverService.PHANTOMJS_EXECUTABLE_PATH_PROPERTY,"C:/dev/programs/phantomjs/bin/phantomjs.exe");
-		    System.out.print(System.getProperty("phantomjs")+"888888888888888888888888888888888888");
+		    System.out.print(System.getProperty("phantomjs"));
 		    if (StringUtils.isBlank(phantomjs)) {
 		    	caps.setCapability(PhantomJSDriverService.PHANTOMJS_EXECUTABLE_PATH_PROPERTY,props.get("HeadlessBrowserPath"));
 		    } else {
