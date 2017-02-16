@@ -17,6 +17,7 @@ import acceptancetests.atdd.data.acquisition.PageConstants;
 import acceptancetests.vpp.data.VPPCommonConstants;
 import atdd.framework.MRScenario;
 import cucumber.api.DataTable;
+import cucumber.api.java.After;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
@@ -39,7 +40,6 @@ public class VppAarpStepDefinitionUpdated {
 	@Given("^the user is on AARP medicare acquisition site landing page$")
 	public void the_user_on_aarp_medicaresolutions_Site() {
 		WebDriver wd = getLoginScenario().getWebDriver();
-
 		AcquisitionHomePage aquisitionhomepage = new AcquisitionHomePage(wd);
 
 		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
@@ -151,5 +151,12 @@ public class VppAarpStepDefinitionUpdated {
 			Assert.fail("Error loading specific plan summary in VPP plan summary page");
 		}
 
+	}
+	
+	@After("@fixedTestCaseTest")
+	public void tearDown() {
+		WebDriver wd = (WebDriver) getLoginScenario().getBean(
+				CommonConstants.WEBDRIVER);
+		wd.quit();
 	}
 }
