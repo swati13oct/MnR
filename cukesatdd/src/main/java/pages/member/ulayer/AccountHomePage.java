@@ -10,20 +10,21 @@ import java.util.Map;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.junit.Assert;
-import org.openqa.selenium.By;
 import org.openqa.selenium.Cookie;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.Select;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import acceptancetests.atdd.data.CommonConstants;
 import acceptancetests.atdd.data.PageData;
 import acceptancetests.atdd.util.CommonUtility;
+//import acceptancetests.dashboard.claims.aarplayer.ClaimSummarypage;
 import atdd.framework.MRScenario;
 import atdd.framework.UhcDriver;
+import pages.dashboard.member.ulayer.ClaimSummarypage;
 
 /**
  * @author pjaising
@@ -105,12 +106,6 @@ public class AccountHomePage extends UhcDriver {
 
 	@FindBy(linkText = "Order plan materials")
 	private WebElement orderPlanMaterials;
-	
-	@FindBy(linkText = "Preferred Mail Service Pharmacy")
-	private WebElement preferredMailServicePharmacyLink;
-	
-	@FindBy(linkText = "Order drugs from your Preferred Mail Service Pharmacy")
-	private WebElement drugPreferredMailServicePharmacyLink;
 
 	@FindBy(id = "gogreenmeter")
 	private WebElement goGreenMeterIndicator;
@@ -151,7 +146,7 @@ public class AccountHomePage extends UhcDriver {
 	
 	@FindBy(xpath = "//*[@id='paymentOverviewApp']/div[1]/div/div/div/h1")
 	private WebElement paymentsHeading;
-	
+		private PageData myAccountHome;
 	@FindBy(linkText = "My Documents")
 	private WebElement MyDocumentLink;
 	
@@ -175,15 +170,13 @@ public class AccountHomePage extends UhcDriver {
 	
 	@FindBy(linkText = "Date")
 	private WebElement dateLink;
-	
-	
-	
-	
-	private PageData myAccountHome;
 
 	public JSONObject accountHomeJson;
 
 	private PageData browserCheckData;
+	
+	
+	
 
 	private JSONObject browserCheckJson;
 
@@ -611,7 +604,6 @@ public class AccountHomePage extends UhcDriver {
 		
 	}
 
-
 	public AutomaticPaymentsPage navigateToAutomaticPaymentsPage() {
 		driver.navigate().to("https://member."+MRScenario.environment+"-aarpmedicareplans.uhc.com/content/dashboard/home/automatic-payments.html");
 		System.out.println("title  "+driver.getTitle());
@@ -621,7 +613,25 @@ public class AccountHomePage extends UhcDriver {
 		return null;
 	}
 
-    public FormsandresourcesPage navigateToMydocumentAarpPage() {
+
+	public pages.dashboard.member.ulayer.ClaimSummarypage navigateToClaimsSummaryPage(WebDriver driver) {
+		// TODO Auto-generated method stub
+				String url = "https://member.team-b-aarpmedicareplans.uhc.com/guest/mirumclaims.html";
+				driver.navigate().to(url);
+				/*try {
+					Thread.sleep(1000);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}*/
+				
+				if (driver.getTitle().equals("Member Claims")) {
+					return new pages.dashboard.member.ulayer.ClaimSummarypage(driver);		
+		
+	}
+		return null;
+	}
+public FormsandresourcesPage navigateToMydocumentAarpPage() {
 		
 		MyDocumentLink.click();
 		
@@ -698,5 +708,10 @@ public class AccountHomePage extends UhcDriver {
 		}
 	}
 
+	
 
+ 
 }
+
+
+
