@@ -349,7 +349,9 @@ public class PageConstants {
 	public static final String VPP_REQUEST_SEND_EMAIL_PAGE = "vppRequestSendEmailPage";
 
 	public static final String PORTFOLIO_PAGE = "portfoliopage";
-
-	public static final String RESPONSIVE_PLAN_SUMMARY = "responsiveplansummary";
+	
+    public static final String RESPONSIVE_PLAN_SUMMARY_PAGE = "responsivePlanSummaryPage";
+	
+	public static final String RESPONSIVE_DETAILS_PAGE = "responsiveDetailsPage";
 
 }
