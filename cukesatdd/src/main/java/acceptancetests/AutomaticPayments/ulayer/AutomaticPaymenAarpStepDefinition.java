@@ -154,7 +154,7 @@ public class AutomaticPaymenAarpStepDefinition {
 	public void user_clicks_continue()
 	{
 		AutomaticPaymentsPage automaticPaymentsPage = (AutomaticPaymentsPage)getLoginScenario().getBean(PageConstants.AUTOMATIC_PAYMENTS_DASHBOARD);
-		ReviewAutomaticPaymentsPage reviewAutomaticPaymentsPage = automaticPaymentsPage.enterInfoAndContinue();
+		ReviewOneTimePaymentsPage reviewAutomaticPaymentsPage = automaticPaymentsPage.enterInfoAndContinue();
 		if(reviewAutomaticPaymentsPage != null){
 			getLoginScenario().saveBean(PageConstants.REVIEW_AUTOMATIC_PAYMENTS_DASHBOARD,
 					reviewAutomaticPaymentsPage);
