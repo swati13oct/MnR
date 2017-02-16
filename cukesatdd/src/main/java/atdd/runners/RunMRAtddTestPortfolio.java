@@ -9,6 +9,6 @@ import cucumber.junit.Cucumber;
 		features = { "feature/PortfolioPage/Ulayer" }, 
 		format = {
 		"pretty", "html:reports/test-report","json:target/cucumber.json"}, tags ={"@vppportfoliopage"})
-public class RunMRAtddTestPortfolio {
+public class RunMRAtddTestPortfolio { 
 
 }
