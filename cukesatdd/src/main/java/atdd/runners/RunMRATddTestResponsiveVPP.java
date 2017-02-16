@@ -5,8 +5,8 @@ import org.junit.runner.RunWith;
 import cucumber.junit.Cucumber;
 
 @RunWith(Cucumber.class)
-@Cucumber.Options(glue = { "atdd.framework","acceptancetests.responsibe.ulayer" }, 
-		features = { "feature/mobileResponsive/Ulayer" }, 
+@Cucumber.Options(glue = { "atdd.framework","acceptancetests.responsive.ulayer" }, 
+		features = { "feature/responsive/Ulayer" }, 
 		format = {
 		"pretty", "html:reports/test-report" }, tags ={"@planSummaryPage"})
 public class RunMRATddTestResponsiveVPP {

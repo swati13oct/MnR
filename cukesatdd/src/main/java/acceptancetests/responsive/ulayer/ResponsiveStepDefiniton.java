@@ -19,10 +19,11 @@ import atdd.framework.MRScenario;
 import cucumber.annotation.en.And;
 import cucumber.annotation.en.Given;
 import cucumber.annotation.en.Then;
+import cucumber.annotation.en.When;
 import cucumber.table.DataTable;
 import gherkin.formatter.model.DataTableRow;
-import pages.acquisition.ulayer.AcquisitionHomePage;
 import pages.acquisition.ulayer.PortfolioPage;
+import pages.acquisition.ulayer.ResponsivePlanDetails;
 import pages.acquisition.ulayer.ResponsivePlanSummary;
 import pages.acquisition.ulayer.VPPPlanSummaryPage;
 
@@ -35,18 +36,79 @@ public class ResponsiveStepDefiniton {
 		return loginScenario;
 	}
 	
-//	@Given("^the user is on the AARP our plans page$")
 	@Given("^the user is on the vpp portfolio page$")
 	public void user_on_aarp_ourPlans_page(){
 		WebDriver wd = getLoginScenario().getWebDriver();
-		PortfolioPage portfoliopage = new PortfolioPage(wd);
+		PortfolioPage ourPlans = new PortfolioPage(wd);
 		
 		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
-		getLoginScenario().saveBean(PageConstants.PORTFOLIO_PAGE, portfoliopage);
+		getLoginScenario().saveBean(PageConstants. PORTFOLIO_PAGE, ourPlans);
 	}
 	
-	@Then("^the user performs plan serach using zipcode and validate plan count$")
-	public void zipcode_details_in_aarp_site(DataTable givenAttributes) {
+	@Then("^the user performs plan serach using zipcode$")
+	public void user_planSearch_with_zipcode(DataTable givenAttributes){
+		List<DataTableRow> memberAttributesRow = givenAttributes
+				.getGherkinRows();
+		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells()
+					.get(0), memberAttributesRow.get(i).getCells().get(1));
+		}
+
+		String zipcode = memberAttributesMap.get("Zip Code");
+		getLoginScenario().saveBean(VPPCommonConstants.ZIPCODE, zipcode);
+		String county = memberAttributesMap.get("County");
+		getLoginScenario().saveBean(VPPCommonConstants.COUNTY, county);
+		PortfolioPage portfolioPage = (PortfolioPage) getLoginScenario()
+				.getBean(PageConstants. PORTFOLIO_PAGE);
+		ResponsivePlanSummary vppPlan = portfolioPage.searchPlans(zipcode, county);
+		if(vppPlan!=null){
+			getLoginScenario().saveBean(PageConstants.RESPONSIVE_PLAN_SUMMARY_PAGE, vppPlan);
+		}else{
+			Assert.fail();
+		}
+	}
+	
+	@And("^verifies the zipcode on VPP page$")
+	public void user_validates_VPPPage(){
+		 VPPPlanSummaryPage vppPlan= (VPPPlanSummaryPage) getLoginScenario()
+				 .getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		 //validate with JSON
+		 System.out.println("JSON validation starts");
+		 /* Get expected data */
+			String fileName = "vppPlanSummary";
+			String directory = CommonConstants.ACQUISITION_EXPECTED_DIRECTORY
+					+ File.separator + CommonConstants.SITE_ULAYER
+					+ File.separator + VPPCommonConstants.VPP_PLAN_FLOW_NAME
+					+ File.separator + getLoginScenario().getBean(VPPCommonConstants.ZIPCODE) 
+					+ File.separator + getLoginScenario().getBean(VPPCommonConstants.COUNTY)
+					+ File.separator;
+			JSONObject planSummaryExpectedJson = MRScenario.readExpectedJson(
+					fileName, directory);
+			getLoginScenario().saveBean(
+					VPPCommonConstants.VPP_PLAN_SUMMARY_EXPECTED,
+					planSummaryExpectedJson);
+
+			/* Get actual data */
+			JSONObject planSummaryActualJson = vppPlan.vppPlanSummaryJson;
+			getLoginScenario().saveBean(
+					VPPCommonConstants.VPP_PLAN_SUMMARY_ACTUAL,
+					planSummaryActualJson);
+			System.out
+			.println("planSummaryActualJson---->" + planSummaryActualJson);
+	System.out.println("planSummaryExpectedJson---->"
+			+ planSummaryExpectedJson);
+
+	try {
+		JSONAssert.assertEquals(planSummaryExpectedJson,
+				planSummaryActualJson, true);
+	} catch (JSONException e) {
+		e.printStackTrace();
+	}
+		}
+	@Then("^the user navigates to the following plan type$")
+	public void planType_details_in_aarp_site(DataTable givenAttributes) {
 
 		List<DataTableRow> memberAttributesRow = givenAttributes
 				.getGherkinRows();
@@ -57,110 +119,52 @@ public class ResponsiveStepDefiniton {
 					.get(0), memberAttributesRow.get(i).getCells().get(1));
 		}
 
-		String zipcode = memberAttributesMap.get("ZipCode");
-		String county = memberAttributesMap.get("CountyName");
-		getLoginScenario().saveBean(VPPCommonConstants.ZIPCODE, zipcode);
-		getLoginScenario().saveBean(VPPCommonConstants.COUNTY, county);
+		String planType = memberAttributesMap.get("Plan Type");
+		System.out.println(planType);
+		getLoginScenario().saveBean(VPPCommonConstants.PLAN_TYPE, planType);
 
-		PortfolioPage portfoliopage  = (PortfolioPage) getLoginScenario()
-				.getBean(PageConstants.PORTFOLIO_PAGE);
-		ResponsivePlanSummary responsiveplansummary = portfoliopage.searchPlans(
-				zipcode, county);
-
-		if (responsiveplansummary != null) {
-			getLoginScenario().saveBean(PageConstants.RESPONSIVE_PLAN_SUMMARY,
-					responsiveplansummary);
-			/* Get expected data */
-			String fileName = "vppPlanSummary";
-			String directory = CommonConstants.ACQUISITION_EXPECTED_DIRECTORY
-					+ File.separator + CommonConstants.SITE_ULAYER
-					+ File.separator + VPPCommonConstants.VPP_PLAN_FLOW_NAME
-					+ File.separator + zipcode + File.separator + county
-					+ File.separator;
-			System.out.println("fileName expected"+fileName);
-			System.out.println("directory expected"+directory);
-			
-			JSONObject planSummaryExpectedJson = MRScenario.readExpectedJson(
-					fileName, directory);
-			getLoginScenario().saveBean(
-					VPPCommonConstants.VPP_PLAN_SUMMARY_EXPECTED,
-					planSummaryExpectedJson);
-
-			/* Get actual data */
-			JSONObject planSummaryActualJson = responsiveplansummary.vppPlanSummaryJson;
-			getLoginScenario().saveBean(
-					VPPCommonConstants.VPP_PLAN_SUMMARY_ACTUAL,
-					planSummaryActualJson);
-			System.out.println("plansummary actual json"+planSummaryActualJson);
-			System.out.println("plansummary expected json"+planSummaryExpectedJson);
+		ResponsivePlanSummary plansummaryPage = (ResponsivePlanSummary) getLoginScenario()
+				.getBean(PageConstants.RESPONSIVE_PLAN_SUMMARY_PAGE);	
+		
+		ResponsivePlanSummary vpp =	plansummaryPage.viewPlanSummary(planType);
+		if(vpp!=null){
+			getLoginScenario().saveBean(PageConstants.RESPONSIVE_PLAN_SUMMARY_PAGE, vpp);
+		}else{
+			Assert.fail();
 		}
 	}
-
-
-@Then("^user validates plan count for all plan types on plan summary page in AARP site$")
-public void user_validates_following_benefits_ui_aarp() {
-	JSONObject planSummaryActualJson = (JSONObject) getLoginScenario()
-			.getBean(VPPCommonConstants.VPP_PLAN_SUMMARY_ACTUAL);
-	JSONObject planSummaryExpectedJson = (JSONObject) getLoginScenario()
-			.getBean(VPPCommonConstants.VPP_PLAN_SUMMARY_EXPECTED);
-	try {
-		JSONAssert.assertEquals(planSummaryExpectedJson,
-				planSummaryActualJson, true);
-	} catch (JSONException e) {
-		// TODO Auto-generated catch block
-		e.printStackTrace();
+	//US501386 - Plan Highlights 
+	@And ("^the user validates plan highlight and provider search$")
+	public void user_validates_planHighlights_poviderLink(){
+		ResponsivePlanSummary planSummary = (ResponsivePlanSummary) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		planSummary.validatePlanHighlights();
+ 	}
+	@Then("^user clicks on search by address link$")
+	public void search_by_address() {
+		PortfolioPage portfolioPage = (PortfolioPage) getLoginScenario().getBean(PageConstants. PORTFOLIO_PAGE);
+		portfolioPage.searchbyaddressclick();
+		portfolioPage.validate();
 	}
+	@And("^the user navigates to plan details page$")
+	public void the_user_navigates_to_plan_details_page(DataTable givenAttributes) {
+		ResponsivePlanSummary plansummaryPage = (ResponsivePlanSummary) getLoginScenario()
+				.getBean(PageConstants.RESPONSIVE_PLAN_SUMMARY_PAGE);
+		List<DataTableRow> memberAttributesRow = givenAttributes 
+				.getGherkinRows();
+		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
 
-}
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells()
+					.get(0), memberAttributesRow.get(i).getCells().get(1));
+		}
 
-@And("^verifies the zipcode on VPP page$")
-public void user_validates_VPPPage(){
-	 VPPPlanSummaryPage vppPlan= (VPPPlanSummaryPage) getLoginScenario()
-			 .getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
-	 //validate with JSON
-	 System.out.println("JSON validation starts");
-	 /* Get expected data */
-		String fileName = "vppPlanSummary";
-		String directory = CommonConstants.ACQUISITION_EXPECTED_DIRECTORY
-				+ File.separator + CommonConstants.SITE_ULAYER
-				+ File.separator + VPPCommonConstants.VPP_PLAN_FLOW_NAME
-				+ File.separator + getLoginScenario().getBean(VPPCommonConstants.ZIPCODE) 
-				+ File.separator + getLoginScenario().getBean(VPPCommonConstants.COUNTY)
-				+ File.separator;
-		JSONObject planSummaryExpectedJson = MRScenario.readExpectedJson(
-				fileName, directory);
-		getLoginScenario().saveBean(
-				VPPCommonConstants.VPP_PLAN_SUMMARY_EXPECTED,
-				planSummaryExpectedJson);
-
-		/* Get actual data */
-		JSONObject planSummaryActualJson = vppPlan.vppPlanSummaryJson;
-		getLoginScenario().saveBean(
-				VPPCommonConstants.VPP_PLAN_SUMMARY_ACTUAL,
-				planSummaryActualJson);
-		System.out
-		.println("planSummaryActualJson---->" + planSummaryActualJson);
-System.out.println("planSummaryExpectedJson---->"
-		+ planSummaryExpectedJson);
-
-try {
-	JSONAssert.assertEquals(planSummaryExpectedJson,
-			planSummaryActualJson, true);
-} catch (JSONException e) {
-	e.printStackTrace();
-}
-	}
-
-@Then("user clicks on search by address link")
-public void search_by_address() {
-	PortfolioPage ourPlansPage = (PortfolioPage) getLoginScenario().getBean(PageConstants.OUR_PLANS_PAGE);
-	ourPlansPage.searchbyaddressclick();
-	ourPlansPage.validate();
-}
-@And ("^the user validates plan highlight and provider search$")
-public void user_validates_planHighlights_poviderLink(){
-	ResponsivePlanSummary planSummary = (ResponsivePlanSummary) getLoginScenario()
-			.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
-	planSummary.validatePlanHighlights();
-	}
+		String planName = memberAttributesMap.get("Plan Name");
+		System.out.println(planName);
+		getLoginScenario().saveBean(VPPCommonConstants.PLAN_NAME, planName);
+ 		ResponsivePlanDetails planDetails =  plansummaryPage.viewPlanDetails(planName);
+ 		getLoginScenario().saveBean(PageConstants.RESPONSIVE_DETAILS_PAGE, planDetails);
+ 	}
+	
+	
 }
