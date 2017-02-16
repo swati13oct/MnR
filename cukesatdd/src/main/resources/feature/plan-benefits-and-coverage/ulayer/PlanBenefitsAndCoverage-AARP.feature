@@ -651,7 +651,7 @@ Feature: To test plan benefits and Coverage on AARP site for Federal members
       | MAPD     |       |
       | MAPD     | LIS 4 |
 
-Feature: To test plan benefits and Coverage on AARP site for Federal members
+
 Scenario Outline: Verify benefits and coverage in AARP site for mapd non lis non provider tiering with office visits and hospital visits no tier
 Given registered AMP with following details for plan benefits and coverage flow in AARP site
 | Plan Type          | <planType>                |
@@ -917,8 +917,6 @@ Then the user view benefits and coverage in AARP site
 And the user validates the content on benefits and coverage page    	 
 Examples:
         |planType  | copayCategory  |
-
-
         | MAPD     | LIS 4        | 
 		
 
@@ -1034,7 +1032,7 @@ And the user navigates to plan benefits and coverage and validates summary left 
         |planType  |planGroup|sequenceRefNum1-4|sequenceRefNum5                              |sequenceRefNum6-8             |sequenceRefNum9 |sequenceRefNum10                             |sequenceRefNum11-12  |sequenceRefNum13                   |benefitText1    |benefitText2     |benefitText3           |benefitText4            |benefitText5                    |benefitText6                      |benefitText7      |benefitText8                |benefitText9                  |benefitText10                     |benefitText11                        |benefitText12         |benefitText13                |
         | SHIP     | G01     |Hospital stays   |Blood or packed red blood cells under Part A |Skilled nursing facility stays|Hospice care    |Blood or packed red blood cells under Part B |Medical care				 |Emergency care in foreign countries|For days 1 - 60 |For days 61 - 90 |For days 91 and beyond |For days 91 and greater | will pay Medicare Part A costs |Since Medicare covers days 1 - 20 |For days 21 - 100 |Must follow a hospital stay |Hospice Care and Respite Care |Medicare Part B costs not covered |20% of the Medicare-eligible expense |Part B Excess charge  | $250 emergency medical care |
         
-        @umydoc      
+@umydoc      
 Scenario Outline: Verify forms and rosources of mydocument in AARP site for MAPD and MA
 Given registered AMP with following details for plan benefits and coverage flow in AARP site
 | Plan Type          | <planType>                | 
@@ -1074,7 +1072,7 @@ When the user view forms and resources in AARP site
 Then the user view mydocument in AARP site
 Then the user validates the custom search on mydocument page
 Then the user validates the content on mydocument page
-Then the user validates the backtopreviouspage link on mydocument page
+Then the user validates the backtopreviouspage link on mydocument page in AARP site
 When the user view forms and resources in AARP site
 
 Examples:
