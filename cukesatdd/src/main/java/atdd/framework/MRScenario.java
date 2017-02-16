@@ -871,8 +871,8 @@ public class MRScenario {
 		
 		/*DesiredCapabilities ieCaps = new DesiredCapabilities();
 		ieCaps.setCapability(PhantomJSDriverService.PHANTOMJS_EXECUTABLE_PATH_PROPERTY, "C:/dev/programs/phantomjs/bin/phantomjs.exe");
-		webDriver = new PhantomJSDriver(ieCaps);
-		return webDriver;*/
+		webDriver = new PhantomJSDriver(ieCaps);*/
+	//	return webDriver;
 		
 		    String phantomjs = System.getProperty("phantomjs");
 		    String agent = "Mozilla/5.0 (Linux; U; Android 2.3.3; en-us; LG-LU3000 Build/GRI40) AppleWebKit/533.1 (KHTML, like Gecko) Version/4.0 Mobile Safari/533.1";
