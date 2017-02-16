@@ -1,0 +1,33 @@
+{
+"url":null,
+"expectedData":{
+"routingNumber":{
+"identifier": "xpath",
+"elementName": "(.//*[@class='bold ng-binding'])[2]"
+},
+"paymentType":{
+"identifier":"xpath",
+"elementName":".//*[@class='bold ng-scope']"
+},
+"paymentAmount":{
+"identifier":"xpath",
+"elementName":"(.//*[@class='bold ng-binding'])[1]"
+},
+"accountNumber":{
+"identifier":"xpath",
+"elementName":"(.//*[@class='bold ng-binding'])[3]"
+},
+"accountHolderName":{
+"identifier":"xpath",
+"elementName":"(.//*[@class='bold ng-binding'])[4]"
+}
+"memberid":{
+"identifier":"xpath",
+"elementName":"(.//*[@class='bold ng-binding'])[5]"
+},
+"membername":{
+"identifier":"xpath",
+"elementName":"(.//*[@class='bold ng-binding'])[6]"
+},
+}
+}
