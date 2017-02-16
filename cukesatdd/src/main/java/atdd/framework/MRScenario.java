@@ -855,7 +855,7 @@ public class MRScenario {
 
 
 	public WebDriver getWebDriver() {
-		/*HtmlUnitDriver htmlUnitDriver = new HtmlUnitDriver(
+	/*	HtmlUnitDriver htmlUnitDriver = new HtmlUnitDriver(
 				BrowserVersion.FIREFOX_24) {
 			@Override
 			protected WebClient modifyWebClient(WebClient client) {
@@ -874,7 +874,7 @@ public class MRScenario {
 		webDriver = new PhantomJSDriver(ieCaps);
 		return webDriver;*/
 		
-		 String phantomjs = System.getProperty("phantomjs");
+		    String phantomjs = System.getProperty("phantomjs");
 		    String agent = "Mozilla/5.0 (Linux; U; Android 2.3.3; en-us; LG-LU3000 Build/GRI40) AppleWebKit/533.1 (KHTML, like Gecko) Version/4.0 Mobile Safari/533.1";
 		    DesiredCapabilities caps = new DesiredCapabilities();
 		    //caps.setCapability(PhantomJSDriverService.PHANTOMJS_EXECUTABLE_PATH_PROPERTY,"C:/dev/programs/phantomjs/bin/phantomjs.exe");
@@ -890,7 +890,7 @@ public class MRScenario {
 		    caps.setCapability(PhantomJSDriverService.PHANTOMJS_CLI_ARGS, new String[] {"--web-security=no", "--ignore-ssl-errors=yes", "--ssl-protocol=tlsv1"});
 		    String userAgent = "Mozilla/5.0 (Windows NT 6.0) AppleWebKit/535.1 (KHTML, like Gecko) Chrome/13.0.782.41 Safari/535.1";
 		    System.setProperty("phantomjs.page.settings.userAgent", userAgent);
-		    WebDriver webDriver = new PhantomJSDriver(caps);
+		    WebDriver webDriver = new PhantomJSDriver(caps); 
 		    return webDriver;
 	}
 
