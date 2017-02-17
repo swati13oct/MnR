@@ -1,6 +1,7 @@
 package atdd.framework;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -38,6 +39,9 @@ import org.json.JSONObject;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.firefox.FirefoxBinary;
+import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.firefox.FirefoxProfile;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.phantomjs.PhantomJSDriver;
@@ -869,15 +873,15 @@ public class MRScenario {
 		webDriver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
 		webDriver.manage().window().maximize();*/
 		
-		/*DesiredCapabilities ieCaps = new DesiredCapabilities();
+	/*	DesiredCapabilities ieCaps = new DesiredCapabilities();
 		ieCaps.setCapability(PhantomJSDriverService.PHANTOMJS_EXECUTABLE_PATH_PROPERTY, "C:/dev/programs/phantomjs/bin/phantomjs.exe");
 		webDriver = new PhantomJSDriver(ieCaps);*/
-	//	return webDriver;
+		
 		
 		    String phantomjs = System.getProperty("phantomjs");
 		    String agent = "Mozilla/5.0 (Linux; U; Android 2.3.3; en-us; LG-LU3000 Build/GRI40) AppleWebKit/533.1 (KHTML, like Gecko) Version/4.0 Mobile Safari/533.1";
 		    DesiredCapabilities caps = new DesiredCapabilities();
-		    //caps.setCapability(PhantomJSDriverService.PHANTOMJS_EXECUTABLE_PATH_PROPERTY,"C:/dev/programs/phantomjs/bin/phantomjs.exe");
+		 // caps.setCapability(PhantomJSDriverService.PHANTOMJS_EXECUTABLE_PATH_PROPERTY,"C:/dev/programs/phantomjs/bin/phantomjs.exe");
 		    System.out.print(System.getProperty("phantomjs"));
 		    if (StringUtils.isBlank(phantomjs)) {
 		    	caps.setCapability(PhantomJSDriverService.PHANTOMJS_EXECUTABLE_PATH_PROPERTY,props.get("HeadlessBrowserPath"));
@@ -891,6 +895,15 @@ public class MRScenario {
 		    String userAgent = "Mozilla/5.0 (Windows NT 6.0) AppleWebKit/535.1 (KHTML, like Gecko) Chrome/13.0.782.41 Safari/535.1";
 		    System.setProperty("phantomjs.page.settings.userAgent", userAgent);
 		    WebDriver webDriver = new PhantomJSDriver(caps); 
+		
+		
+	/*	if (null == webDriver) {
+			File pathToBinary = new File("C:/Program Files (x86)/Mozilla Firefox/firefox.exe");
+			FirefoxBinary ffBinary = new FirefoxBinary(pathToBinary);
+			FirefoxProfile firefoxProfile = new FirefoxProfile();
+			webDriver = new FirefoxDriver(ffBinary, firefoxProfile);
+			webDriver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
+		}*/
 		    return webDriver; 
 	}
 
