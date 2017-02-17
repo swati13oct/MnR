@@ -1,3 +1,6 @@
+/**
+ * 
+ */
 package atdd.runners;
 
 import org.junit.runner.RunWith;
@@ -5,14 +8,14 @@ import org.junit.runner.RunWith;
 import cucumber.junit.Cucumber;
 
 /**
-* @author pjaising
-*
-*/
+ * @author jantolak
+ *
+ */
 @RunWith(Cucumber.class)
-@Cucumber.Options(glue = { "atdd.framework","acceptancetests.vpp.bluelayer" }, 
-		features = { "feature/chat/ulayer" }, 
+@Cucumber.Options(glue = { "atdd.framework","acceptancetests.benefitsandcoverage" }, 
+		features = { "feature/debug" }, 
 		format = {
-		"pretty", "html:reports/test-report" }, tags ={"@proactivechatOnVPPSummarypage"})
+		"pretty", "html:reports/test-report" }, tags ={"@jantolak"})
 public class AntolakRunTestChat {
 
 }

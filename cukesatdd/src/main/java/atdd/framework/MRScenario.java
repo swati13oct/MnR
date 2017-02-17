@@ -36,6 +36,7 @@ import javax.naming.directory.InitialDirContext;
 import org.apache.commons.lang3.StringUtils;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.openqa.selenium.Dimension;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -907,6 +908,8 @@ public class MRScenario {
 				DesiredCapabilities caps = new DesiredCapabilities();
 				caps.setCapability(PhantomJSDriverService.PHANTOMJS_EXECUTABLE_PATH_PROPERTY, pathToBinary);
 				webDriver = new PhantomJSDriver(caps);
+				webDriver.manage().window().setSize(new Dimension(1400,1000));
+				webDriver.manage().timeouts().pageLoadTimeout(30,TimeUnit.SECONDS);
 			} else if (browser.equalsIgnoreCase(CommonConstants.FIREFOX_BROWSER)) {
 				FirefoxBinary ffBinary = new FirefoxBinary(new File(pathToBinary));
 				FirefoxProfile firefoxProfile = new FirefoxProfile();
