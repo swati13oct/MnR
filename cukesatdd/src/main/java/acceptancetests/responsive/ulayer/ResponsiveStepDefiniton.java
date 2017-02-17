@@ -137,7 +137,7 @@ public class ResponsiveStepDefiniton {
 	@And ("^the user validates plan highlight and provider search$")
 	public void user_validates_planHighlights_poviderLink(){
 		ResponsivePlanSummary planSummary = (ResponsivePlanSummary) getLoginScenario()
-				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+				.getBean(PageConstants.RESPONSIVE_PLAN_SUMMARY_PAGE);
 		planSummary.validatePlanHighlights();
  	}
 	@Then("^user clicks on search by address link$")
@@ -147,22 +147,10 @@ public class ResponsiveStepDefiniton {
 		portfolioPage.validate();
 	}
 	@And("^the user navigates to plan details page$")
-	public void the_user_navigates_to_plan_details_page(DataTable givenAttributes) {
+	public void the_user_navigates_to_plan_details_page() {
 		ResponsivePlanSummary plansummaryPage = (ResponsivePlanSummary) getLoginScenario()
 				.getBean(PageConstants.RESPONSIVE_PLAN_SUMMARY_PAGE);
-		List<DataTableRow> memberAttributesRow = givenAttributes 
-				.getGherkinRows();
-		Map<String, String> memberAttributesMap = new HashMap<String, String>();
-		for (int i = 0; i < memberAttributesRow.size(); i++) {
-
-			memberAttributesMap.put(memberAttributesRow.get(i).getCells()
-					.get(0), memberAttributesRow.get(i).getCells().get(1));
-		}
-
-		String planName = memberAttributesMap.get("Plan Name");
-		System.out.println(planName);
-		getLoginScenario().saveBean(VPPCommonConstants.PLAN_NAME, planName);
- 		ResponsivePlanDetails planDetails =  plansummaryPage.viewPlanDetails(planName);
+ 		ResponsivePlanDetails planDetails =  plansummaryPage.viewPlanDetails("AARP MedicareComplete SecureHorizons Plan 2 (HMO)");
  		getLoginScenario().saveBean(PageConstants.RESPONSIVE_DETAILS_PAGE, planDetails);
  	}
 	
