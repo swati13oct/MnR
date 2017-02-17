@@ -2,10 +2,10 @@ package pages.acquisition.ulayer;
 
 import java.util.List;
 
-import junit.framework.Assert;
-
-import org.json.JSONException;
-import org.json.JSONObject;
+import org.junit.Assert;
+import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
@@ -15,10 +15,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import acceptancetests.atdd.data.CommonConstants;
 import acceptancetests.atdd.data.MRConstants;
-import acceptancetests.atdd.data.PageData;
-import acceptancetests.atdd.util.CommonUtility;
 import atdd.framework.UhcDriver;
 
 /**
@@ -30,29 +27,9 @@ public class PortfolioPage extends UhcDriver {
 	@FindBy(linkText = "Look up a ZIP code")
 	private WebElement lookupZipcodeLink;
 
-	@FindBy(className = "zipcode_text")
+	@FindBy(id = "zipcode")
 	private WebElement zipCodeField;
-	//US504467
-	@FindBy(xpath = "//div[@class='tab'][1]")
-	private WebElement viewMaPlans;
-	
-	@FindBy(xpath = "//div[@class='tab'][2]")
-	private WebElement viewPdpPlans;
 
-	@FindBy(xpath = "//div[@class='tab'][3]")
-	private WebElement viewSnpPlans;
-	
-
-	@FindBy(xpath = " //div[@class='col-md-9']")
-	List<WebElement> maPlanElement;
-	
-	//@FindBy(id="submit")
-	@FindBy(xpath="html/body/div[4]/div[2]/div[1]/div/div/div/div/div[1]/div/div/div/div[2]/div/div/form/button")
-	private WebElement Findplansbuttonportfolio;
-
-	
-	private PageData vppPlanSummary;
-	
 	@FindBy(id = "goBtn")
 	private WebElement goButton;
 
@@ -72,7 +49,7 @@ public class PortfolioPage extends UhcDriver {
 	public static WebElement ourPlansDropdown;
 
 	@FindBy(xpath = "//div[@id='subnav_2']/div/div/div[2]/form/span/button")
-	public WebElement FindPlansButton;
+	public WebElement findPlansButton;
 	
 	@FindBy(xpath="//*[@class='zipcode_text ng-pristine ng-valid ng-valid-maxlength']")
 	public WebElement zipCodeInput;
@@ -88,14 +65,13 @@ public class PortfolioPage extends UhcDriver {
     
     @FindBy(xpath="//select")
     private WebElement selectDropDown;
-    
-    
 
+   // @FindBy(xpath="html/body/div[4]/div[2]/div[1]/div/div/div/div/div[1]/div/div/div/div[2]/div/div/form/button")
+    @FindBy(className="zip-button")
+	private WebElement Findplansbuttonportfolio;
 
 	//private static String PAGE_URL = MRConstants.AARP_OUR_PLANS_URL;
-	//private static String PAGE_URL = MRConstants.AARP_OUR_PLANS_URL;
-	
-	private static String PAGE_URL = MRConstants.PORTFOLIO_PAGE_URL;
+	private static String PAGE_URL = MRConstants.AARP_PORTFOLIO_URL;
 
 	public PortfolioPage(WebDriver driver) {
 		super(driver);
@@ -119,12 +95,6 @@ public class PortfolioPage extends UhcDriver {
 	@Override
 	public void openAndValidate() {
 		start(PAGE_URL);
-		validate(zipCodeField);
-		validate(goButton);
-		validate(lookupZipcodeLink);
-		validate(viewMaPlans);
-		validate(viewPdpPlans);
-
 	}
 
 	public void hoverourplanslink() {
@@ -138,9 +108,9 @@ public class PortfolioPage extends UhcDriver {
 	public Boolean findplansbuttonclick2() {
 
 		hoverourplanslink();
-		validate(FindPlansButton);
-		FindPlansButton.click();
-		validate(FindPlansButton);
+		validate(findPlansButton);
+		findPlansButton.click();
+		validate(findPlansButton);
 
 		return validate(errormessage);
 
@@ -162,8 +132,8 @@ public class PortfolioPage extends UhcDriver {
 		validate(zipfield);
 		zipfield.click();
 		zipfield.sendKeys("9001");
-		validate(FindPlansButton);
-		FindPlansButton.click();
+		validate(findPlansButton);
+		findPlansButton.click();
 		return validate(errormessage);
 	}
 
@@ -186,30 +156,6 @@ public class PortfolioPage extends UhcDriver {
 		return null;
 	}
 	
-	public ResponsivePlanSummary enterZipCodeNavigateVPP(String zipcode){
-		WebDriverWait wait = new WebDriverWait(driver, 20);
-		wait.until(ExpectedConditions.elementToBeClickable(zipCodeInput));
-		
-		validate(zipCodeInput);
-		zipCodeInput.sendKeys(zipcode);
-		validate(goButton);
-		goButton.click();
-		Select sel = new Select(goButton);
-		sel.selectByValue("AL");
-		try {
-			Thread.sleep(10000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		System.out.println(driver.getTitle());
-		if(driver.getTitle().equalsIgnoreCase("Our Medicare Plan Types | AARP® Medicare Plans from UnitedHealthcare®")){
-			System.out.println("PAss");
-			return new ResponsivePlanSummary(driver);
- 		}
-		System.out.println("Fail");
-		return null;
-	}
 	public void searchbyaddressclick() {
         
         validate(searchbyaddresslink);
@@ -229,118 +175,23 @@ public class PortfolioPage extends UhcDriver {
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
-        
-        
+		}            
  }
- 
- /*public JSONObject getPlanSummaryActualData(String planName) {
-		String fileName = null;
-		if (planName.contains("HMO")) {
-			fileName = "maplansummary.json";
-			JSONObject jsonObject = getActualJsonObject(fileName, planName, maPlanElement);
-			return jsonObject;
-
+ public ResponsivePlanSummary searchPlans(String zipcode, String countyName) {
+	    sendkeys(zipCodeField, zipcode);
+	    zipCodeField.sendKeys(Keys.ENTER);
+	    //remove thread once page is stable
+	    try {
+			Thread.sleep(10000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
-		if (planName.contains("PDP")) {
-			fileName = "pdpplansummary.json";
-			JSONObject jsonObject = getActualJsonObject(fileName, planName, maPlanElement);
-			return jsonObject;
-		}
-		if (planName.contains("Regional PPO")) {
-			fileName = "mamultistateplansummary.json";
-			JSONObject jsonObject = getActualJsonObject(fileName, planName, maPlanElement);
-			return jsonObject;
-
-		}
-
-		return null;
-	}
- 
-	private JSONObject getActualJsonObject(String fileName, String planName, List<WebElement> planElement) {
-		vppPlanSummary = CommonUtility.readPageData(fileName, CommonConstants.PAGE_OBJECT_DIRECTORY_ULAYER_ACQ);
-		for (WebElement plan : planElement) {
-			if (plan.getText().contains(planName)) {
-
-				JSONObject jsonObject = new JSONObject();
-				for (String key : vppPlanSummary.getExpectedData().keySet()) {
-					WebElement element = findChildElement(vppPlanSummary.getExpectedData().get(key), plan);
-					if (validate(element)) {
-						try {
-							jsonObject.put(key, element.getText());
-						} catch (JSONException e) {
-							// TODO Auto-generated catch block
-							e.printStackTrace();
-						}
-					}
-
-				}
-				return jsonObject;
-
-			}
+		if (driver.getTitle().equalsIgnoreCase(PageTitleConstants.PORTFOLIO_HOME_PAGE_TITLE_HEADLESS)) {
+ 			return new ResponsivePlanSummary(driver);
 		}
 		return null;
 	}
 
 
- public ResponsivePlanSummary viewPlanSummary(String planType) {
-		if (planType.equalsIgnoreCase("PDP")) {
-			viewMaPlans.click();
-		} else if (planType.equalsIgnoreCase("MA") || planType.equalsIgnoreCase("MAPD")) {
-			viewPdpPlans.click();
-		} else if (planType.equalsIgnoreCase("MS")) {
-			viewSnpPlans.click();
-		}
-		return new ResponsivePlanSummary(driver, planType);
-	}
 }
-*/
-
-public ResponsivePlanSummary searchPlans(String zipcode, String countyName) {
-	
-	sendkeys(zipCodeField, zipcode);
-	waitforElement(Findplansbuttonportfolio);
-	if(Findplansbuttonportfolio.isEnabled()){
-		System.out.println("enabled");
-	}else{
-		Assert.fail();
-	}
-	/*try {
-		Thread.sleep(9000);
-	} catch (InterruptedException e) {
-		// TODO Auto-generated catch block
-		e.printStackTrace();
-	}*/
-	/*Actions act = new Actions(driver);
-	act.moveToElement(Findplansbuttonportfolio);*/
-	validate(Findplansbuttonportfolio);
-	Findplansbuttonportfolio.click();
-	System.out.println("Findplan is clicked");
-	/*try {
-		if (countyModal.isDisplayed()) {
-			for (WebElement county : countyRows) {
-				if (county.getText().equalsIgnoreCase(countyName)) {
-					county.click();
-					break;
-				}
-
-			}
-		}
-	} catch (Exception e) {
-		System.out.println("county box not found");
-	}
-	*/
-	System.out.println("Responsive plan summary"+driver.getTitle());
-	
-	if (driver.getTitle().equalsIgnoreCase(PageTitleConstants.PORTFOLIO_HOME_PAGE_TITLE_HEADLESS)) {
-		
-		return new ResponsivePlanSummary(driver);
-	}
-	return null;
-}
-
-}
-
-
-
-

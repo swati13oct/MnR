@@ -6,12 +6,15 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.junit.Assert;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.FindBys;
 import org.openqa.selenium.support.PageFactory;
 
 import acceptancetests.atdd.data.CommonConstants;
+import acceptancetests.atdd.data.ElementData;
 import acceptancetests.atdd.data.PageData;
 import acceptancetests.atdd.util.CommonUtility;
 import atdd.framework.UhcDriver;
@@ -28,17 +31,20 @@ public class ResponsivePlanSummary extends UhcDriver{
 		@FindBy(xpath = "//div[@class='tab'][3]")
 		private WebElement viewSnpPlans;
 		
+ 		@FindBy(xpath="//*[contains(text(),'HMO')]")
+ 		List<WebElement> maPlanElement;
+		
+		@FindBy(xpath = "//div[@class='disabledprint ng-scope']")
+		List<WebElement> pdpPlanElement;
+		
+		@FindBy(xpath = "//div[@class='overview-main']")
+		private WebElement responsivevpppage;
+		
 		@FindBy(className="change-location-link")
 		private WebElement changeLoationLink;
 		
 		@FindBy(id="zipcode")
 		private WebElement zipcodeBox;
-
-		@FindBy(xpath = " //div[@class='col-md-9']")
-		List<WebElement> maPlanElement;
-		
-		@FindBy(xpath = "//div[@class='overview-main']")
-		private WebElement responsivevpppage;
 		
 		@FindBy(xpath="//*[@class='content-cols']/div[1]/h3")
 		private WebElement planHighlightsHeader;
@@ -59,7 +65,7 @@ public class ResponsivePlanSummary extends UhcDriver{
 		@FindBy(className="plan-index")
 		private List<WebElement> planIndexList;
 		
-		@FindBy(xpath="//div/div/div[2]/div/div[2]/div[1]/div/span[2]")
+		@FindBy(xpath="html/body/div[4]/div[2]/div[1]/div/div/div/div/div[1]/div/div/div/div[2]/div/div[2]/div[1]/div/span[1]")
 		private WebElement showMaPlans;
 		
 		@FindBy(xpath="//div/div/div[2]/div/div[2]/div[2]/div/span[2]")
@@ -85,10 +91,10 @@ public class ResponsivePlanSummary extends UhcDriver{
 	@Override
 	public void openAndValidate() {
 		
-		validate(viewMaPlans);
-		validate(viewPdpPlans);
-		validate (viewSnpPlans);
-		vppPlanSummaryJson = formJsonObject(vppPlanSummary);
+	//	validate(viewMaPlans);
+	//	validate(viewPdpPlans);
+	//	validate (viewSnpPlans);
+	//	vppPlanSummaryJson = formJsonObject(vppPlanSummary);
 		// TODO Auto-generated method stub
 		// ADD elements that needed to validate
 	}
@@ -193,7 +199,7 @@ public ResponsivePlanSummary viewPlanSummary(String planType) {
 	}
 	return new ResponsivePlanSummary(driver);
 }
-//@US501235 - Sticky Zipcode
+ 
 	public void validateStickyZipcode(String actualZipcode){
 		validate(changeLoationLink);
 		changeLoationLink.click();
@@ -209,7 +215,7 @@ public ResponsivePlanSummary viewPlanSummary(String planType) {
 	}
 	
 	//US501386 - Plan Highlights 
-	public void validatePlanHighlights(){
+	public ResponsivePlanSummary validatePlanHighlights(){
 		validate(planHighlightsHeader);
 		validate(providerSearchLink);
 		if(planHighlightsHeader.isDisplayed()){
@@ -221,13 +227,9 @@ public ResponsivePlanSummary viewPlanSummary(String planType) {
 					Assert.fail();
 				}
 			}
-		}
+		}return new ResponsivePlanSummary(driver);
 	}
-	//US501386 - Benefits
-	 public void validatePlanBenefits(){
-		 validate(benefitsHeader);
-		 
-	 }
+	
 	 public void planCountOnPlanCard(){
 		   for(int i=0;i<=planCountList.size();i++){
 			   planCountList.get(i).click();
@@ -240,5 +242,26 @@ public ResponsivePlanSummary viewPlanSummary(String planType) {
 				   }
 			   }
 		   }
+	 }
+	 
+	 public ResponsivePlanDetails viewPlanDetails(String planName){
+		int i=0;
+		 List<WebElement> plans = driver.findElements(By.xpath("//h2[contains(text(),'AARP')]"));
+		 System.out.println("PLANS SIZE :: "+plans.size());
+		 String xpath="View more details";  
+		 List<WebElement> viewMoreLnks = driver.findElements(By.linkText(xpath));
+		 
+		 System.out.println("VIEW MORE LINKS SIZE"+viewMoreLnks.size());
+		 for(WebElement plan : plans){
+			 if(plan.getText().equalsIgnoreCase(planName)){			 
+				 viewMoreLnks.get(i).click();
+				 if(driver.getTitle().equalsIgnoreCase("plans")){
+					 return new ResponsivePlanDetails(driver);
+				 }
+				 break;
+			 }
+			 i++;
+		 }
+		 return null;
 	 }
 }

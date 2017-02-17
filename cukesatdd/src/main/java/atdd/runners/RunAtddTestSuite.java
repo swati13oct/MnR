@@ -30,7 +30,7 @@ import cucumber.junit.Cucumber;
  */
 @RunWith(Cucumber.class)
 @Cucumber.Options(glue = { "atdd.framework", "acceptancetests" }, features = { "feature" }, format = {
-		"pretty", "html:reports/test-report" ,"json:target/cucumber.json"}, tags = { "@globalAARP, @password-expired-error-messages-jarvis, @password-expiring-flow-jarvis, @password-expiring-error-messages-jarvis, @signin-jarvis, @signin-error-messages-jarvis, @registration-step-one-jarvis, @registration-step-two-jarvis, @registration-step-one-error-messages-jarvis, @registration-step-two-error-messages-jarvis, @password-reset-step-one-jarvis, @password-reset-step-two-jarvis, @password-reset-step-one-error-messages-jarvis, @password-reset-step-two-error-messages-jarvis, @browser-check-jarvis, @commission-search-messages-jarvis, @commission-search-error-messages-jarvis" })
+		"pretty", "html:reports/test-report" ,"json:target/cucumber.json"}, tags = { "@globalAARP, @loginAssistance" })
 public class RunAtddTestSuite {
 
 }
