@@ -71,7 +71,7 @@ public class PortfolioPage extends UhcDriver {
 	private WebElement Findplansbuttonportfolio;
 
 	//private static String PAGE_URL = MRConstants.AARP_OUR_PLANS_URL;
-	private static String PAGE_URL = MRConstants.AARP_PORTFOLIO_URL;
+	private static String PAGE_URL = MRConstants.PORTFOLIO_PAGE_URL;
 
 	public PortfolioPage(WebDriver driver) {
 		super(driver);
