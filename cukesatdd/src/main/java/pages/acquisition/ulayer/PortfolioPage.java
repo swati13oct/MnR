@@ -1,6 +1,7 @@
 package pages.acquisition.ulayer;
 
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import org.junit.Assert;
 import org.openqa.selenium.By;
@@ -54,7 +55,7 @@ public class PortfolioPage extends UhcDriver {
 	@FindBy(xpath="//*[@class='zipcode_text ng-pristine ng-valid ng-valid-maxlength']")
 	public WebElement zipCodeInput;
 	
-	@FindBy(linkText="Search By Address")
+	@FindBy(linkText="Search by Address")
     private WebElement searchbyaddresslink;
     
     @FindBy(id="address")
@@ -178,6 +179,7 @@ public class PortfolioPage extends UhcDriver {
 		}            
  }
  public ResponsivePlanSummary searchPlans(String zipcode, String countyName) {
+	    driver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
 	    sendkeys(zipCodeField, zipcode);
 	    zipCodeField.sendKeys(Keys.ENTER);
 	    //remove thread once page is stable
