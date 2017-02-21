@@ -281,14 +281,8 @@
 		<dependency>
 			<groupId>com.codeborne</groupId>
 			<artifactId>phantomjsdriver</artifactId>
-			<version>1.2.1</version>
-
+			<version>1.2.1</version>		
 		
-		
-		<dependency>
-   			<groupId>com.codeborne</groupId>
-  			<artifactId>phantomjsdriver</artifactId>
-   			<version>1.2.1</version>
 
 		</dependency>
 
