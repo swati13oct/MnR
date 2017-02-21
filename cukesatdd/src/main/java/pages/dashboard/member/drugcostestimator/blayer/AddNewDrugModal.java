@@ -137,5 +137,17 @@ public class AddNewDrugModal extends UhcDriver {
 		cancelButton.click();
 		return new DrugCostEstimatorPage(driver);
 	}
+	
+	public AddDrugDetails continueAddNewDrugModal(){
+		waitforElement(continueButton);
+//		try {
+//			Thread.sleep(20000);
+//		} catch (InterruptedException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+		continueButton.click();
+		return new AddDrugDetails(driver);
+	}
 }
 
