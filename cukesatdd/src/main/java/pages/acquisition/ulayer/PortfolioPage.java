@@ -187,9 +187,11 @@ public class PortfolioPage extends UhcDriver {
 		}            
  }
  public ResponsivePlanSummary searchPlans(String zipcode, String countyName) {
-	    driver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
-	    sendkeys(zipCodeField, zipcode);
-	    zipCodeField.sendKeys(Keys.ENTER);
+	    driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+	    WebDriverWait wait = new WebDriverWait(driver, 40);
+	    WebElement element = wait.until(ExpectedConditions.elementToBeClickable(By.id("zipcode")));
+	    sendkeys(element, zipcode);
+	    element.sendKeys(Keys.ENTER);
 	    //remove thread once page is stable
 	    try {
 			Thread.sleep(10000);
