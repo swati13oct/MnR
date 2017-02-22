@@ -8,7 +8,7 @@ import cucumber.junit.Cucumber;
 @Cucumber.Options(glue = { "atdd.framework","acceptancetests.responsive.ulayer" }, 
 		features = { "feature/portfolioPage/Ulayer" }, 
 		format = {
-		"pretty", "html:reports/test-report","json:target/cucumber.json"}, tags ={"@vppportfoliopage"})
+		"pretty", "html:reports/test-report"}, tags ={"@vppportfoliopage"})
 public class RunMRAtddTestPortfolio { 
 
 }
