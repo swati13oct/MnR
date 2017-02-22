@@ -40,6 +40,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.ie.InternetExplorerDriver;
+import org.openqa.selenium.phantomjs.PhantomJSDriver;
+import org.openqa.selenium.phantomjs.PhantomJSDriverService;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.springframework.ldap.core.DistinguishedName;
@@ -78,14 +80,13 @@ public class MRScenario {
 
 	public static int count = 0;
 
-	public static final String USERNAME = "pperugu";
+	//public static final String USERNAME = "ucpadmin";
 
-	public static final String ACCESS_KEY = "06f50b57-693a-4cd1-aaf9-14046e63942e";
+	//public static final String ACCESS_KEY = "2817affd-616e-4c96-819e-4583348d7b37";
 
-	// public static final String USERNAME = System.getenv("SAUCE_USERNAME");
+	public static final String USERNAME = System.getenv("SAUCE_USERNAME");
 
-	// public static final String ACCESS_KEY =
-	// System.getenv("SAUCE_ACCESS_KEY");
+	public static final String ACCESS_KEY = System.getenv("SAUCE_ACCESS_KEY");
 
 	public static final String URL = "https://" + USERNAME + ":" + ACCESS_KEY
 			+ "@ondemand.saucelabs.com:443/wd/hub";
@@ -888,10 +889,21 @@ public class MRScenario {
 					e.printStackTrace();
 				}
 			} else {
-				/*
-				 * TODO: pperugu :: Need to update the headless browser code for
-				 * Jenkins
-				 */
+				/*Below code snippet is for triggering HeadLess Browser (PhantomJS)*/
+				String phantomjs = System.getProperty("phantomjs");
+			    String agent = "Mozilla/5.0 (Linux; U; Android 2.3.3; en-us; LG-LU3000 Build/GRI40) AppleWebKit/533.1 (KHTML, like Gecko) Version/4.0 Mobile Safari/533.1";
+			    DesiredCapabilities caps = new DesiredCapabilities();
+			    if (StringUtils.isBlank(phantomjs)) {
+			    	caps.setCapability(PhantomJSDriverService.PHANTOMJS_EXECUTABLE_PATH_PROPERTY,props.get("HeadlessBrowserPath"));
+			    } else {
+			    	caps.setCapability(PhantomJSDriverService.PHANTOMJS_EXECUTABLE_PATH_PROPERTY,System.getProperty("phantomjs"));
+			    }
+			    caps.setCapability(PhantomJSDriverService.PHANTOMJS_PAGE_SETTINGS_PREFIX + "userAgent", agent);
+			    caps.setJavascriptEnabled(true);
+			    caps.setCapability(PhantomJSDriverService.PHANTOMJS_CLI_ARGS, new String[] {"--web-security=false", "--ignore-ssl-errors=true", "--ssl-protocol=any"});
+			    String userAgent = "Mozilla/5.0 (Windows NT 6.0) AppleWebKit/535.1 (KHTML, like Gecko) Chrome/13.0.782.41 Safari/535.1";
+			    System.setProperty("phantomjs.page.settings.userAgent", userAgent);
+			    webDriver = new PhantomJSDriver(caps);
 			}
 
 		} else {/*
@@ -904,19 +916,20 @@ public class MRScenario {
 			 * for local
 			 */
 
-			DesiredCapabilities capabilities = DesiredCapabilities.firefox();
-			capabilities.setCapability("platform", "Windows XP");
-			capabilities.setCapability("version", "45.0");
-			capabilities.setCapability("parent-tunnel", "sauce_admin");
-			capabilities.setCapability("tunnelIdentifier",
-					"OptumSharedTunnel-Prd");
-			capabilities.setCapability("name", "MRATDD-TestSuite");
-			try {
-				webDriver = new RemoteWebDriver(new URL(URL), capabilities);
-			} catch (MalformedURLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+			String phantomjs = System.getProperty("phantomjs");
+		    String agent = "Mozilla/5.0 (Linux; U; Android 2.3.3; en-us; LG-LU3000 Build/GRI40) AppleWebKit/533.1 (KHTML, like Gecko) Version/4.0 Mobile Safari/533.1";
+		    DesiredCapabilities caps = new DesiredCapabilities();
+		    if (StringUtils.isBlank(phantomjs)) {
+		    	caps.setCapability(PhantomJSDriverService.PHANTOMJS_EXECUTABLE_PATH_PROPERTY,props.get("HeadlessBrowserPath"));
+		    } else {
+		    	caps.setCapability(PhantomJSDriverService.PHANTOMJS_EXECUTABLE_PATH_PROPERTY,System.getProperty("phantomjs"));
+		    }
+		    caps.setCapability(PhantomJSDriverService.PHANTOMJS_PAGE_SETTINGS_PREFIX + "userAgent", agent);
+		    caps.setJavascriptEnabled(true);
+		    caps.setCapability(PhantomJSDriverService.PHANTOMJS_CLI_ARGS, new String[] {"--web-security=false", "--ignore-ssl-errors=true", "--ssl-protocol=any"});
+		    String userAgent = "Mozilla/5.0 (Windows NT 6.0) AppleWebKit/535.1 (KHTML, like Gecko) Chrome/13.0.782.41 Safari/535.1";
+		    System.setProperty("phantomjs.page.settings.userAgent", userAgent);
+		    webDriver = new PhantomJSDriver(caps);
 
 		}
 		return webDriver;
