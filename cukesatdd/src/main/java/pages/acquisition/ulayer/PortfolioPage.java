@@ -81,8 +81,16 @@ public class PortfolioPage extends UhcDriver {
 	}
 
 	public ZipcodeLookupPage looksupforZipcodes() {
+		
+        if (driver instanceof JavascriptExecutor) {
+            JavascriptExecutor js = (JavascriptExecutor)driver;
+            js.executeScript("arguments[0].click();", lookupZipcodeLink);
+        } 
+        else {
+        	lookupZipcodeLink.click();
+        }
 
-		lookupZipcodeLink.click();
+	//	lookupZipcodeLink.click();
 		if (driver
 				.getTitle()
 				.equalsIgnoreCase(
