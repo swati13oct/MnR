@@ -11,10 +11,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.junit.Assert;
-<<<<<<< HEAD
-=======
 import org.openqa.selenium.By;
->>>>>>> remotes/origin/velocityDashers
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -77,7 +74,6 @@ public class VPPPlanSummaryPage extends UhcDriver {
 
 	@FindBy(id = "providerSearchFrame")
 	private WebElement providerSearchIframe;
-<<<<<<< HEAD
 
 	@FindBy(className = "switchPlanYear")
 	private WebElement toggleplanYear;
@@ -137,7 +133,6 @@ public class VPPPlanSummaryPage extends UhcDriver {
 
 	@FindBy(xpath = ".//*[@id='CloseBtn']")
 	private WebElement proactiveCloseButton;
-=======
 	
 	@FindBy(css="#pdpplans_container .planCompareBtn")
 	private WebElement comparePDPPlanChkBox;
@@ -156,8 +151,6 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	
 	@FindBy(xpath="//div[@data-ng-repeat='plan in maplans'][1]//div[contains(@id,'showcompare')][1]/div[@class='compareHeading']/p[2]")
 	private WebElement comparePopUpTxt2;
->>>>>>> remotes/origin/velocityDashers
-
 	private PageData vppPlanSummary;
 
 	public JSONObject vppPlanSummaryJson;
@@ -638,7 +631,6 @@ public class VPPPlanSummaryPage extends UhcDriver {
 				}
 			}
 		}
-<<<<<<< HEAD
 
 		if (driver.getTitle()
 				.equalsIgnoreCase("Our Medicare Plan Types | AARP® Medicare Plans from UnitedHealthcare®")) {
@@ -765,8 +757,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		driver.switchTo().window(MainWindow);
 		return null;
 	}
-=======
-		*/
+*/
 	}
 	
 	/**
@@ -804,7 +795,4 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		waitforElement(compareChkBox);
 		compareChkBox.click();
 	}
-	
-	
->>>>>>> remotes/origin/velocityDashers
 }

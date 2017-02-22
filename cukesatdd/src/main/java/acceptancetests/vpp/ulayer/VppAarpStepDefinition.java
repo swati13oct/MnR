@@ -1,5 +1,7 @@
 package acceptancetests.vpp.ulayer;
 
+import gherkin.formatter.model.DataTableRow;
+
 import java.io.File;
 import java.util.Calendar;
 import java.util.HashMap;
@@ -15,7 +17,6 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.skyscreamer.jsonassert.JSONAssert;
 import org.springframework.beans.factory.annotation.Autowired;
 
-<<<<<<< HEAD
 import pages.acquisition.ulayer.AddDrugPage;
 import pages.acquisition.ulayer.GetStartedPage;
 import pages.acquisition.ulayer.ManageDrugPage;
@@ -26,8 +27,6 @@ import pages.acquisition.ulayer.SelectPharmacyPage;
 import pages.acquisition.ulayer.AcquisitionHomePage;
 import pages.acquisition.ulayer.ProviderSearchPage;
 import pages.acquisition.ulayer.VPPPlanSummaryPage;
-=======
->>>>>>> remotes/origin/velocityDashers
 import acceptancetests.atdd.data.CommonConstants;
 import acceptancetests.atdd.data.acquisition.PageConstants;
 import acceptancetests.dce.data.DceCommonConstants;
@@ -45,7 +44,6 @@ import pages.acquisition.ulayer.AcquisitionHomePage;
 import pages.acquisition.ulayer.PlanDetailsPage;
 import pages.acquisition.ulayer.ProviderSearchPage;
 import pages.acquisition.ulayer.VPPPlanSummaryPage;
-
 /** 
  * @author gumeshna
  * 
@@ -1501,7 +1499,6 @@ System.out.println("planSummaryExpectedJson---->"
 		Map<String, String> memberAttributesMap = new HashMap<String, String>();
 		for (int i = 0; i < memberAttributesRow.size(); i++) {
 
-<<<<<<< HEAD
 			memberAttributesMap.put(memberAttributesRow.get(i).getCells()
 					.get(0), memberAttributesRow.get(i).getCells().get(1));
 		}
@@ -1516,7 +1513,7 @@ System.out.println("planSummaryExpectedJson---->"
 	}
 	@When("^the user performs plan search  in aarp site$")
 	public void zipcode_details_in_UMS(DataTable givenAttributes) {
-=======
+	
 	@Then("^user should see the inactive/grey plan compare button$")
 	public void verifyCompare3PlansButton(){
 		try {
@@ -1551,9 +1548,7 @@ System.out.println("planSummaryExpectedJson---->"
 	}
 	
 	@When("^the user navigates to the following plan type$")
-	public void planType_details_in_aarp_site(DataTable givenAttributes) {
->>>>>>> remotes/origin/velocityDashers
-
+	public void planType_details_in_aarp_site(DataTable givenAttributes){
 		List<DataTableRow> memberAttributesRow = givenAttributes
 				.getGherkinRows();
 		Map<String, String> memberAttributesMap = new HashMap<String, String>();
@@ -1563,7 +1558,6 @@ System.out.println("planSummaryExpectedJson---->"
 					.get(0), memberAttributesRow.get(i).getCells().get(1));
 		}
 
-<<<<<<< HEAD
 		String zipcode = memberAttributesMap.get("Zip Code");
 	//	String county = memberAttributesMap.get("County Name");
 		getLoginScenario().saveBean(VPPCommonConstants.ZIPCODE, zipcode);
@@ -1712,7 +1706,7 @@ System.out.println("planSummaryExpectedJson---->"
 		VPPPlanSummaryPage vppPlanSummaryPage = (VPPPlanSummaryPage) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 		vppPlanSummaryPage.validateReactiveChat();
-=======
+
 		String planType = memberAttributesMap.get("Plan Type");
 		getLoginScenario().saveBean(VPPCommonConstants.PLAN_TYPE, planType);
 
@@ -1720,6 +1714,5 @@ System.out.println("planSummaryExpectedJson---->"
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);	
 		
 		plansummaryPage.viewPlanSummary(planType);
->>>>>>> remotes/origin/velocityDashers
 	}
 }
