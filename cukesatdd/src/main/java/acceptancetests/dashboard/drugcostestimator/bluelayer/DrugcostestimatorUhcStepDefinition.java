@@ -346,5 +346,227 @@ public class DrugcostestimatorUhcStepDefinition {
 	public void validate_pharmacy_information(){
 		
 	}
+	
+	
+	@Then("^I should see enter your drugs text$")
+	public void I_should_see_enter_your_drugs_text() {
+		WebDriver wd = (WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
+
+		DrugCostEstimatorPage dce = new DrugCostEstimatorPage(wd);
+		dce.validateenterdrugtext();
+	    
+	}
+
+
+@Then("^I should see at most 3 drugs under drugs heading$")
+	public void I_should_see_at_most_3_drugs_under_drugs_heading(DataTable memberAttributes) {
+		List<DataTableRow> memberAttributesRow = memberAttributes
+				.getGherkinRows();
+		Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells()
+					.get(0), memberAttributesRow.get(i).getCells().get(1));
+		}
+
+		String dosage1 = memberAttributesMap.get("Dosage1");
+		String dosage2 = memberAttributesMap.get("Dosage2");
+		String dosage3 = memberAttributesMap.get("Dosage3");
+		
+		WebDriver wd = (WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
+
+		DrugCostEstimatorPage dce = new DrugCostEstimatorPage(wd);
+		dce.validatedrugdosagetext(dosage1, dosage2, dosage3);
+	    
+	}
+
+
+@Then("^I should see some others text on the page$")
+	public void I_should_see_some_x_others_text_on_the_page(DataTable data) {
+		List<DataTableRow> memberAttributesRow = data.getGherkinRows();
+		String otherscount = memberAttributesRow.get(1).getCells().get(0);
+		
+		WebDriver wd = (WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
+
+		DrugCostEstimatorPage dce = new DrugCostEstimatorPage(wd);
+		dce.validatemesgmoredrugsothertext(otherscount);
+	    
+	}
+
+
+@Then("^I will see introductory text that will display the summary header$")
+	public void I_will_see_introductory_text_that_will_display_the_summary_header() {
+	    // Express the Regexp above with the code you wish you had
+		WebDriver wd = (WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
+
+		DrugCostEstimatorPage dce = new DrugCostEstimatorPage(wd);
+		dce.validatesummaryheading();
+	}
+
+
+@When("^I access the page containing the DCE tool$")
+	public void I_access_the_page_containing_the_DCE_tool() {
+		
+		WebDriver wd = (WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
+
+		DrugCostEstimatorPage dce = new DrugCostEstimatorPage(wd);
+		dce.changeUrlToNewDCEPage();
+	    
+	}
+
+
+@Then("^I should not see the drug with Dosage in the list$")
+	public void I_should_not_see_the_drug_with_Dosage_in_the_list(DataTable data) {
+		
+		List<DataTableRow> memberAttributesRow = data.getGherkinRows();
+		String dosage = memberAttributesRow.get(1).getCells().get(0);
+		DrugCostEstimatorPage dce = new DrugCostEstimatorPage((WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER));
+		dce.validateDrugsnotPresent (dosage);  
+	}
+
+
+@When("^I delete the drug with Dosage$")
+	public void I_delete_the_drug_with_Dosage(DataTable data) throws InterruptedException {
+		List<DataTableRow> memberAttributesRow = data.getGherkinRows();
+		String dosage = memberAttributesRow.get(1).getCells().get(0);
+		
+		DrugCostEstimatorPage dce = new DrugCostEstimatorPage((WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER));
+		dce.deleteDrugsByDosage(dosage);
+	    
+	}
+
+
+
+@When("^I edit the drug with Dosage and Quantity and frequency$")
+	public void I_edit_the_drug_as_with_Dosage_and_Quantity_and_frequency(DataTable memberAttributes) throws Exception {
+		
+		List<DataTableRow> memberAttributesRow = memberAttributes
+				.getGherkinRows();
+		Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells()
+					.get(0), memberAttributesRow.get(i).getCells().get(1));
+		}
+		
+		String drug = memberAttributesMap.get("Drug");
+		String dosage = memberAttributesMap.get("Dosage");
+		String quantity = memberAttributesMap.get("Quantity");
+		String frequency = memberAttributesMap.get("Frequency");
+		
+		WebDriver wd = (WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
+		DrugCostEstimatorPage dce = new DrugCostEstimatorPage(wd);
+		AddDrugDetails adddrugdetails = dce.navigateToEditDrug(drug);
+		adddrugdetails.selectDosage(dosage);
+		adddrugdetails.selectQnty(quantity);
+		adddrugdetails.selectFrequency(frequency);
+		adddrugdetails.continueAddDrugDetails();
+		
+		// Saving Opportunity Details
+				SavingsOppurtunity savingsOppurtunity = new SavingsOppurtunity(wd);
+				savingsOppurtunity.savedrugbutton();
+		
+	}
+
+
+
+@Then("^I should see drug with Dosage and Quantity and frequency added to the list$")
+	public void I_should_see_drug_with_Dosage_and_Quantity_and_frequency_added_to_the_list(DataTable memberAttributes) {
+	    // Express the Regexp above with the code you wish you had
+	//	WebDriver wd = (WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
+		List<DataTableRow> memberAttributesRow = memberAttributes
+				.getGherkinRows();
+		Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells()
+					.get(0), memberAttributesRow.get(i).getCells().get(1));
+		}
+		
+		String dosage = memberAttributesMap.get("Dosage");
+		String quantity = memberAttributesMap.get("Quantity");
+		String frequency = memberAttributesMap.get("Frequency");
+		
+		DrugCostEstimatorPage dce = new DrugCostEstimatorPage((WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER));
+		dce.validateAddedDrug(dosage,quantity,frequency);
+	}
+
+
+
+@When("^I add the drug which does not have its generic with Dosage and Quantity and frequency to the list$")
+	public void I_add_the_drug_which_doesnot_have_its_generic_with_Dosage_and_Quantity_and_frequency_to_the_list(DataTable memberAttributes) throws Exception {
+		List<DataTableRow> memberAttributesRow = memberAttributes
+				.getGherkinRows();
+		Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells()
+					.get(0), memberAttributesRow.get(i).getCells().get(1));
+		}
+		
+		String drug = memberAttributesMap.get("Drug");
+		String dosage = memberAttributesMap.get("Dosage");
+		String quantity = memberAttributesMap.get("Quantity");
+		String frequency = memberAttributesMap.get("Frequency");
+		
+		WebDriver wd = (WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
+
+		DrugCostEstimatorPage dce = new DrugCostEstimatorPage(wd);
+		//dce.changeUrlToNewDCEPage();
+		AddNewDrugModal addNewDrugModal = dce.clickOnAddDrug();
+		addNewDrugModal.clickonSearchButton(drug);
+		
+		//AddDrugDetails addDrugDetails = new AddDrugDetails(wd);
+		
+		AddDrugDetails adddrugdetails = addNewDrugModal.continueAddNewDrugModal();
+		adddrugdetails.selectDosage(dosage);
+		adddrugdetails.selectQnty(quantity);
+		adddrugdetails.selectFrequency(frequency);
+        adddrugdetails.continueAddDrugDetails();
+	    
+	}
+
+
+@When("^I add the drug with Dosage and Quantity and frequency to the list$")
+	public void I_add_the_drug_as_with_Dosage_and_Quantity_and_frequency_to_the_list(DataTable memberAttributes) throws Exception {
+		
+		List<DataTableRow> memberAttributesRow = memberAttributes
+				.getGherkinRows();
+		Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells()
+					.get(0), memberAttributesRow.get(i).getCells().get(1));
+		}
+		
+		String drug = memberAttributesMap.get("Drug");
+		String dosage = memberAttributesMap.get("Dosage");
+		String quantity = memberAttributesMap.get("Quantity");
+		String frequency = memberAttributesMap.get("Frequency");
+		
+		WebDriver wd = (WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
+
+		DrugCostEstimatorPage dce = new DrugCostEstimatorPage(wd);
+		//dce.changeUrlToNewDCEPage();
+		AddNewDrugModal addNewDrugModal = dce.clickOnAddDrug();
+		addNewDrugModal.clickonSearchButton(drug);
+		
+		//AddDrugDetails addDrugDetails = new AddDrugDetails(wd);
+		
+		AddDrugDetails adddrugdetails = addNewDrugModal.continueAddNewDrugModal();
+		adddrugdetails.selectDosage(dosage);
+		adddrugdetails.selectQnty(quantity);
+		adddrugdetails.selectFrequency(frequency);
+        adddrugdetails.continueAddDrugDetails();
+        
+		
+		// Saving Opportunity Details
+		SavingsOppurtunity savingsOppurtunity = new SavingsOppurtunity(wd);
+		savingsOppurtunity.savedrugbutton();
+	    
+	}
+
+
+
 }
 
