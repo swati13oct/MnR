@@ -14,6 +14,8 @@ node('docker-maven-slave') {
 	sh "env"
 	sh "ls -la"
 	currentBuild.result="SUCCESS"
+	String JOB_NAME="${env.JOB_NAME}"
+	String JOB_NAME_URL =  JOB_NAME.replace("/","/job/")
 	def GIT_BRANCH="${env.BRANCH_NAME}"
 	def MAVEN_VERSION="${env.MAVEN_VERSION}"
 	def MAVEN_PATH="/tools/maven/apache-maven-${MAVEN_VERSION}/bin/mvn"
@@ -45,7 +47,7 @@ node('docker-maven-slave') {
 	}
 	catch (err) {
 		currentBuild.result = "FAILURE"
-		println "BUILD FAILED"
+				println "BUILD FAILED"
 	}
 	finally {
 		try{
@@ -56,9 +58,9 @@ node('docker-maven-slave') {
 				step([$class: 'CucumberReportPublisher', buildStatus: 'FAILURE', failedFeaturesNumber: 1, failedScenariosNumber: 1, failedStepsNumber: 1, fileExcludePattern: '', fileIncludePattern: '**/*.json', jenkinsBasePath: '', jsonReportDirectory: '/atdd/ATDD-test-project/${BUILD_NUMBER}/artifact/cukesatdd/target/', parallelTesting: false, pendingStepsNumber: 1, skippedStepsNumber: 1, trendsLimit: 0, undefinedStepsNumber: 1])
 			}
 			if( currentBuild.result == "FAILURE"){
-			    
+
 				stage('Results'){
-					String connectionURL = "https://jenkins.optum.com/ucp/job/poc/job/ATDD-test-pipeline/${BUILD_NUMBER}/artifact/cukesatdd/target/cucumber.json";
+					String connectionURL = "https://jenkins.optum.com/ucp/job/"+JOB_NAME_URL+"/${BUILD_NUMBER}/artifact/cukesatdd/target/cucumber.json";
 					URL url = new URL(connectionURL);
 					InputStream urlStream = null;
 					urlStream = url.openStream();
@@ -105,21 +107,21 @@ node('docker-maven-slave') {
 				stage('Notify'){
 					emailext attachmentsPattern: '**/*cucumber*.pdf', 
 					body: '''<h2>ATDD Test-Suite Run completed with following results:</h2><br><b>Project Name: MRATDD_'''+PIPELINE_VERSION+'''</b>
-						'''+errorMsg+'''<p>
-					<b>Total Steps:</b> '''+totalCount+'''<br>
-					<b>Total Steps Passed:</b> '''+totalPassCount+'''<br>
-					<b>Total Steps Failed:</b> '''+totalfailedCount+'''<br>
-					<b>Total Steps Skipped:</b> '''+totalSkippedCount+'''<br>
-					<b>Total Steps Pending:</b> '''+totalPendingCount+'''<br>
-					<b>Total Steps undefined:</b> '''+totalUndefinedCount+'''<br>
-					</p>
+					'''+errorMsg+'''<p>
+				<b>Total Steps:</b> '''+totalCount+'''<br>
+				<b>Total Steps Passed:</b> '''+totalPassCount+'''<br>
+				<b>Total Steps Failed:</b> '''+totalfailedCount+'''<br>
+				<b>Total Steps Skipped:</b> '''+totalSkippedCount+'''<br>
+				<b>Total Steps Pending:</b> '''+totalPendingCount+'''<br>
+				<b>Total Steps undefined:</b> '''+totalUndefinedCount+'''<br>
+				</p>
 
-					<p><em><a href="https://jenkins.optum.com/ucp/job/poc/job/ATDD-test-pipeline/'''+buildNumber+'''/cucumber-html-reports/overview-features.html">Click here for the report for  further details</a>.</em></p>
+				<p><em><a href="https://jenkins.optum.com/ucp/job/'''+JOB_NAME_URL+'''/'''+buildNumber+'''/cucumber-html-reports/overview-features.html">Click here for the report for  further details</a>.</em></p>
 
-					<p><em>Please see attached reports for further details.</em></p>
+				<p><em>Please see attached reports for further details.</em></p>
 
-					''', subject: 'ATDD RUN Failed::'+PIPELINE_VERSION,
-						to: emailextrecipients([[$class: 'CulpritsRecipientProvider'], [$class: 'DevelopersRecipientProvider'], [$class: 'RequesterRecipientProvider'], [$class: 'UpstreamComitterRecipientProvider']])
+				''', subject: 'ATDD RUN Failed::'+PIPELINE_VERSION,
+					to: emailextrecipients([[$class: 'CulpritsRecipientProvider'], [$class: 'DevelopersRecipientProvider'], [$class: 'RequesterRecipientProvider'], [$class: 'UpstreamComitterRecipientProvider']])
 
 				}
 			}
