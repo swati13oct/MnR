@@ -11,16 +11,13 @@ import java.util.Map;
 import java.nio.file.Paths;
 node('docker-maven-slave') {
 
-	sh "env"
-	sh "ls -la"
+
 	currentBuild.result="SUCCESS"
-	String JOB_NAME="${env.JOB_NAME}"
-	String JOB_NAME_URL =  JOB_NAME.replace("/","/job/")
 	def GIT_BRANCH="${env.BRANCH_NAME}"
 	def MAVEN_VERSION="${env.MAVEN_VERSION}"
 	def MAVEN_PATH="/tools/maven/apache-maven-${MAVEN_VERSION}/bin/mvn"
-
 	def GIT_URL="https://codehub.optum.com/consumer-portals/mratdd.git"
+	String BUILD_URL= "${env.BUILD_URL}"
 	def PIPELINE_VERSION="1.0.${BUILD_NUMBER}-${GIT_BRANCH}"
 	currentBuild.displayName = "${PIPELINE_VERSION}"
 	int totalCount = 0;
@@ -30,7 +27,6 @@ node('docker-maven-slave') {
 	int totalPendingCount = 0;
 	int totalUndefinedCount = 0;
 	String errorMsg = "";
-	String buildNumber = "${BUILD_NUMBER}";
 
 	try {
 		stage('Checkout') {
@@ -60,7 +56,7 @@ node('docker-maven-slave') {
 			if( currentBuild.result == "FAILURE"){
 
 				stage('Results'){
-					String connectionURL = "https://jenkins.optum.com/ucp/job/"+JOB_NAME_URL+"/${BUILD_NUMBER}/artifact/cukesatdd/target/cucumber.json";
+					String connectionURL = BUILD_URL+"artifact/cukesatdd/target/cucumber.json";
 					URL url = new URL(connectionURL);
 					InputStream urlStream = null;
 					urlStream = url.openStream();
@@ -116,7 +112,7 @@ node('docker-maven-slave') {
 				<b>Total Steps undefined:</b> '''+totalUndefinedCount+'''<br>
 				</p>
 
-				<p><em><a href="https://jenkins.optum.com/ucp/job/'''+JOB_NAME_URL+'''/'''+buildNumber+'''/cucumber-html-reports/overview-features.html">Click here for the report for  further details</a>.</em></p>
+				<p><em><a href="'''+BUILD_URL+'''cucumber-html-reports/overview-features.html">Click here for the report for  further details</a>.</em></p>
 
 				<p><em>Please see attached reports for further details.</em></p>
 
