@@ -30,10 +30,10 @@ Examples:
 Scenario Outline: To validate plan count from portfolio page
 Given the user is on the vpp portfolio page
 Then the user performs plan serach using zipcode
-              | ZipCode |<zipcode>|
-              | CountyName   |<county> |
+              | Zip Code |<zipCode>|
+              | County   |<county> |
 #Then user validates plan count for all plan types on plan summary page in AARP site
 Then user validates county name on plan summary page
 Examples:
-|zipcode|county     |
+|zipCode|county     |
 |78006 |Bexar County|			
