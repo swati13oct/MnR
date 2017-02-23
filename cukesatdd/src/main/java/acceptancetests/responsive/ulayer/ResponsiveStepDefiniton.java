@@ -166,5 +166,18 @@ public class ResponsiveStepDefiniton {
  		getLoginScenario().saveBean(PageConstants.RESPONSIVE_DETAILS_PAGE, planDetails);
  	}
 	
+	@Then("^user validates county name on plan summary page$")	
+	public void user_validates_county_name(){
+		
+		ResponsivePlanSummary responsivePlanSummaryPage = (ResponsivePlanSummary) getLoginScenario()
+				.getBean(PageConstants.RESPONSIVE_PLAN_SUMMARY_PAGE);
+		System.out.println(getLoginScenario().getBean(VPPCommonConstants.COUNTY));
+		String name = (String) getLoginScenario().getBean(VPPCommonConstants.COUNTY);
+		System.out.println("name"+ name );
+		responsivePlanSummaryPage.validateCountyName(name);
+		
+	}
+	
+	
 	
 }

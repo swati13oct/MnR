@@ -70,6 +70,11 @@ public class ResponsivePlanSummary extends UhcDriver{
 		
 		@FindBy(xpath="//div/div/div[2]/div/div[2]/div[2]/div/span[2]")
 		private WebElement showPdpPlans;
+		
+		@FindBy(xpath="html/body/div[4]/div[2]/div/div/div/div/div/div[1]/div/div/div/div[2]/div/div[1]/h2")
+		private WebElement countyNameDetail;
+		
+		
 
 	private PageData vppPlanSummary;
 
@@ -264,4 +269,17 @@ public ResponsivePlanSummary viewPlanSummary(String planType) {
 		 }
 		 return null;
 	 }
+
+public void validateCountyName(String CountyName)  {
+	if(countyNameDetail.getText().contains(CountyName)){
+		System.out.println("CountyName"+CountyName);
+	
+		Assert.assertTrue("---content displayed---", true);		
+		}else{
+	  Assert.fail();
+	}
+	
+	// TODO Auto-generated method stub
+	
+}
 }

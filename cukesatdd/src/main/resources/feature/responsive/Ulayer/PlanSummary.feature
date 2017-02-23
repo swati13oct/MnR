@@ -24,4 +24,16 @@ And the user navigates to plan details page
     |Plan Name|<planName>|
 Examples:
 		|zipCode|county            |planType|planName 																					|
-		|90210  |Los Angeles County|MA      |AARP MedicareComplete SecureHorizons Plan 2 (HMO)  |		
+		|90210  |Los Angeles County|MA      |AARP MedicareComplete SecureHorizons Plan 2 (HMO)  |
+
+@portfolio
+Scenario Outline: To validate plan count from portfolio page
+Given the user is on the vpp portfolio page
+Then the user performs plan serach using zipcode
+              | ZipCode |<zipcode>|
+              | CountyName   |<county> |
+#Then user validates plan count for all plan types on plan summary page in AARP site
+Then user validates county name on plan summary page
+Examples:
+|zipcode|county     |
+|78006 |Bexar County|			

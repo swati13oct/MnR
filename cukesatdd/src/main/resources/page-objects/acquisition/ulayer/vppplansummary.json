@@ -3,23 +3,23 @@
 "expectedData":{
 "maPlanCount":{
 "identifier":"xpath",
-"elementName":"html/body/div[4]/div[2]/div[1]/div/div/div/div/div[1]/div/div/div/div[2]/div/div[2]/div[1]/div/span[1]/span"
+"elementName":"//*[@class='title' and contains(text(),'Medicare Advantage')]/span"
 },
 "msPlanCount":{
 "identifier":"xpath",
-"elementName":"html/body/div[4]/div[2]/div[1]/div/div/div/div/div[1]/div/div/div/div[2]/div/div[2]/div[2]/div/span[1]/span"
+"elementName":"//*[@class='title' and contains(text(),'Medicare Supplement Insurance')]/span"
 },
 "pdpPlanCount":{
 "identifier":"xpath",
-"elementName":"html/body/div[4]/div[2]/div[1]/div/div/div/div/div[1]/div/div/div/div[2]/div/div[2]/div[3]/div/span[1]/span"
+"elementName":"//*[@class='title' and contains(text(),'Medicare Prescription')]/span"
 },
 "vppSummary":{
 "identifier":"xpath",
-"elementName":"html/body/div[4]/div[2]/div[1]/div/div/div/div/div[1]/div/div/div/div[2]/div/div[1]/div[1]/h2"
+"elementName":"//h2[contains(text(),'We have')]"
 },
 "changeLocationLink":{
-"identifier":"xpath",
-"elementName":"html/body/div[4]/div[2]/div[1]/div/div/div/div/div[1]/div/div/div/div[2]/div/div[1]/div[2]/p/a"
+"identifier":"linkText",
+"elementName":"Change Location"
 }
 }
 }

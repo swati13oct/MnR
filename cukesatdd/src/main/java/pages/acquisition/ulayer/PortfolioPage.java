@@ -186,7 +186,7 @@ public class PortfolioPage extends UhcDriver {
 			e.printStackTrace();
 		}            
  }
- public ResponsivePlanSummary searchPlans(String zipcode, String countyName) {
+ public ResponsivePlanSummary searchPlans(String zipcode, String CountyName) {
 	    driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 	    WebDriverWait wait = new WebDriverWait(driver, 40);
 	    WebElement element = wait.until(ExpectedConditions.elementToBeClickable(By.id("zipcode")));
@@ -199,10 +199,28 @@ public class PortfolioPage extends UhcDriver {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	    
+	    List<WebElement> countyActuals = driver.findElements(By.xpath("//a[@class='ng-binding ng-pristine ng-valid']"));
+	    System.out.println(countyActuals.size());
+	    
+	    for(int i=0; i<=countyActuals.size()-1;i++){
+	    	System.out.println(CountyName);
+	    	if(countyActuals.get(i).getText().equals(CountyName)){
+	    		System.out.println(CountyName);
+	    		System.out.println(countyActuals.get(i).getText());
+	    		countyActuals.get(i).click();
+	    		break;
+	    	}
+	    }
 		if (driver.getTitle().equalsIgnoreCase(PageTitleConstants.PORTFOLIO_HOME_PAGE_TITLE_HEADLESS)) {
  			return new ResponsivePlanSummary(driver);
-		}
+		} 
 		return null;
+	
+
+
+		
+		
 	}
 
 
