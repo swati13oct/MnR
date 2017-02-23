@@ -10,18 +10,22 @@ import java.util.Map;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.junit.Assert;
+import org.openqa.selenium.By;
 import org.openqa.selenium.Cookie;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.openqa.selenium.support.ui.Select;
 
 import acceptancetests.atdd.data.CommonConstants;
 import acceptancetests.atdd.data.PageData;
 import acceptancetests.atdd.util.CommonUtility;
 import atdd.framework.MRScenario;
 import atdd.framework.UhcDriver;
+import pages.dashboard.member.ulayer.ClaimSummarypage;
 
 /**
  * @author pjaising
@@ -103,6 +107,12 @@ public class AccountHomePage extends UhcDriver {
 
 	@FindBy(linkText = "Order plan materials")
 	private WebElement orderPlanMaterials;
+	
+	@FindBy(linkText = "Preferred Mail Service Pharmacy")
+	private WebElement preferredMailServicePharmacyLink;
+	
+	@FindBy(linkText = "Order drugs from your Preferred Mail Service Pharmacy")
+	private WebElement drugPreferredMailServicePharmacyLink;
 
 	@FindBy(id = "gogreenmeter")
 	private WebElement goGreenMeterIndicator;
@@ -145,6 +155,30 @@ public class AccountHomePage extends UhcDriver {
 	private WebElement paymentsHeading;
 	
 	private PageData myAccountHome;
+
+	@FindBy(linkText = "My Documents")
+	private WebElement MyDocumentLink;
+	
+	@FindBy(linkText = "Back to previous page")
+	private WebElement backTopreviouspageLink;
+	
+	@FindBy(xpath = "//*[@id='myDocuments']/div/div[2]/div/p[2]/ul/li[4]/a")
+	private WebElement paginationLink;
+	
+	@FindBy(linkText = "View/Download")
+	private WebElement viewanddownloadLink;
+	
+	@FindBy(xpath = "//*[@id='myDocuments']/div/div[1]/div/form/div/div[2]/div[2]/div[2]/div[1]/div/input")
+	private WebElement fromdate;
+	
+	@FindBy(xpath = "//*[@id='myDocuments']/div/div[1]/div/form/div/div[2]/div[2]/div[2]/div[2]/div/input")
+	private WebElement todate;
+	
+	@FindBy(xpath = "//*[@id='myDocuments']/div/div[1]/div/form/div/div[2]/div[2]/div[2]/div[3]/button")
+	private WebElement searchLink;
+	
+	@FindBy(linkText = "Date")
+	private WebElement dateLink;
 
 	public JSONObject accountHomeJson;
 
@@ -377,6 +411,8 @@ public class AccountHomePage extends UhcDriver {
 	public void openAndValidate() {
 		validate(benefitsLink);
 		validate(phrTab);
+		validate(preferredMailServicePharmacyLink);
+		validate(drugPreferredMailServicePharmacyLink);
 		// validate(formsAndResourcesLink);
 		validate(benefitsLink);
 		validate(logOut);
@@ -558,7 +594,7 @@ public class AccountHomePage extends UhcDriver {
 	public OneTimePaymentsPage navigateToOneTimePaymentsPage() {
 		driver.navigate().to("https://member."+MRScenario.environment+"-aarpmedicareplans.uhc.com/content/dashboard/home/one-time-payments.html");
 		System.out.println("title  "+driver.getTitle());
-		if(driver.getTitle().equalsIgnoreCase("one-time-payment")){
+		if(driver.getTitle().equalsIgnoreCase("one-time-payments")){
 			return new OneTimePaymentsPage(driver);
 		}
 		return null;
@@ -582,7 +618,108 @@ public class AccountHomePage extends UhcDriver {
 		}
 		return null;
 	}
+public pages.dashboard.member.ulayer.ClaimSummarypage navigateToClaimsSummaryPage(WebDriver driver) {
+		// TODO Auto-generated method stub
+				String url = "https://member.team-b-aarpmedicareplans.uhc.com/guest/mirumclaims.html";
+				driver.navigate().to(url);
+				/*try {
+					Thread.sleep(1000);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}*/
+				
+				if (driver.getTitle().equals("Member Claims")) {
+					return new pages.dashboard.member.ulayer.ClaimSummarypage(driver);		
+		
+	}
+		return null;
+	}
+public FormsandresourcesPage navigateToMydocumentAarpPage() {
+		
+		MyDocumentLink.click();
+		
+		return null;
+	}
+
+	public FormsandresourcesPage navigatebackToformsandresourcesAarpPage() {
+		
+		backTopreviouspageLink.click();
+		
+		return null;
+	}
+
+	public FormsandresourcesPage navigateTopaginationAarpPage() {
+		
+		Select select = new  Select(driver.findElement(By.id("document-date")));
+		select.selectByVisibleText("Current Year");
+		
+		paginationLink.click();
+		
+		return null;
+	}
+
+	public FormsandresourcesPage navigateToviewdowloadlinkAarpPage() {
+		
+		viewanddownloadLink.click();
+		return null;
+	}
+
+	public FormsandresourcesPage navigateTocustomersearchlinkAarpPage() {
+		
+		Select select = new  Select(driver.findElement(By.id("document-date")));
+		select.selectByVisibleText("Custom Search");
+		fromdate.sendKeys("01/09/2017");
+		todate.sendKeys("01/13/2017");
+		searchLink.click();
+		return null;
+	}
+
+	public FormsandresourcesPage navigateTosortingsearchlinkAarpPage() {
+		Select select = new  Select(driver.findElement(By.id("document-date")));
+		select.selectByVisibleText("Current Year");
+		dateLink.click();
+		return null;
+	}
+	
 
 
 
+	public void validatePreferredMailOderLink() {
+		Actions actions = new Actions(driver);
+		actions.moveToElement(myMenuLinkAarp);
+		actions.perform();
+		if(validate(preferredMailServicePharmacyLink))
+		{
+			System.out.println("Preferred Mail Service Link is displaying ");	
+		}
+		else
+		{
+			System.out.println("Preferred Mail Service Link is not displaying ");
+		}
+		
+	}
+
+	public void validateDrugsPreferredMailOderLink() {
+		
+		if(validate(drugPreferredMailServicePharmacyLink))
+		{
+			System.out.println("Drug Preferred Mail Service Link is displaying in footer");	
+		}
+		else
+		{
+			System.out.println("Drug Preferred Mail Service Link is not displaying in footer");
+		}
+	}
+
+	
+
+ 
 }
+
+
+
+
+
+
+
