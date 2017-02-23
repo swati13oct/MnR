@@ -12,21 +12,17 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.junit.Assert;
-
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.TimeoutException;
-
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-
 import pages.acquisition.bluelayer.EnrollPlanInfoPage;
 
 import pages.acquisition.uhcretiree.Rallytool_Page;
 import pages.acquisition.ulayer.AcquisitionHomePage;
-
 import acceptancetests.atdd.data.CommonConstants;
 import acceptancetests.atdd.data.ElementData;
 import acceptancetests.atdd.data.PageData;
@@ -86,13 +82,6 @@ public class VPPPlanSummaryPage extends UhcDriver {
 
 	@FindBy(id = "editDrugMA")
 	private WebElement editDrugListLink;
-	
-	@FindBy(css="#pdpplans_container .planCompareBtn")
-	private WebElement comparePDPPlanChkBox;
-	
-	@FindBy(css="#maplans_container .compareHeading>p")
-	private WebElement compareUpto3PlansPopup;
-
 
 	@FindBy(linkText = "Make an appointment with an agent")
 	private WebElement make_an_appointment_agent;
@@ -136,16 +125,6 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	@FindBy(xpath = ".//*[@id='CloseBtn']")
 	private WebElement proactiveCloseButton;
 
-	@FindBy(xpath="//div[@data-ng-repeat='plan in maplans'][1]//span[@class='cpcheckbox']")
-	private WebElement compareChkBox;
-
-
-	@FindBy(xpath="//div[@data-ng-repeat='plan in maplans'][1]//div[contains(@id,'showcompare')][1]/div[@class='compareHeading']/p[1]/b")
-	private WebElement comparePopUpTxt1;
-	
-	@FindBy(xpath="//div[@data-ng-repeat='plan in maplans'][1]//div[contains(@id,'showcompare')][1]/div[@class='compareHeading']/p[2]")
-	private WebElement comparePopUpTxt2;
-	
 	private PageData vppPlanSummary;
 
 	public JSONObject vppPlanSummaryJson;
@@ -437,7 +416,6 @@ public class VPPPlanSummaryPage extends UhcDriver {
 
 	}
 
-
 	public Rallytool_Page clicksOnIsProviderCovered(String planName) {
 		if (planName.contains("HMO")) {
 			for (WebElement plan : maPlanElement) {
@@ -515,12 +493,10 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	 * NOt
 	 */
 	public void verifyInactiveCompare3PlansButton() {
-
 		waitforElement(comparePDPPlanChkBox);
 		Assert.assertTrue("FAIL - Compare 3 plans button is not displayed", elementFound(comparePDPPlanChkBox));
 		Assert.assertEquals("true", comparePDPPlanChkBox.getAttribute("readonly"));
 	}
-
 
 	public void clickAndVerifyCompareUpto3PlansPopup() {
 		comparePDPPlanChkBox.click();
@@ -630,7 +606,5 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		driver.switchTo().window(MainWindow);
 		return null;
 	}
-
-
 
 }
