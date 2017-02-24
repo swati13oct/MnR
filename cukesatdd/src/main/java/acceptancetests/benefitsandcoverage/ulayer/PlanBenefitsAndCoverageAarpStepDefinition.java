@@ -95,7 +95,7 @@ public class PlanBenefitsAndCoverageAarpStepDefinition {
 		}
 
 		WebDriver wd = getLoginScenario().getWebDriver();
-		wd.manage().window().maximize();
+		//wd.manage().window().maximize();
 		LoginPage loginPage = new LoginPage(wd);
 		AccountHomePage accountHomePage = (AccountHomePage) loginPage.loginWith(userName, pwd);
 		JSONObject accountHomeActualJson = null;
@@ -406,7 +406,7 @@ public class PlanBenefitsAndCoverageAarpStepDefinition {
 
 	}
 
-	@Then("^the user validates the content on AARP benefits and coverage page")
+	@Then("^the user validates the content on benefits and coverage page")
 	public void validateContentOnBenefitsAndCoveragePage() {
 		
 		try {
@@ -505,10 +505,24 @@ public class PlanBenefitsAndCoverageAarpStepDefinition {
 		benefitsCoveragePage.validateRemoveRiderPopup();
 	}
 	
-	@After
+	@Then("^Replace rider popup appears and clicks Replace Rider button$")
+	public void Replace_rider_popup_appears_and_clicks_Replace_Rider_button() throws Exception {
+		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario().getBean(
+				PageConstants.BENEFITS_COVERAGE_PAGE);
+		benefitsCoveragePage.validateReplaceRiderPopup();
+	}
+	
+	@Then("^the user clicks on Disclaimers link$")
+	public void the_user_clicks_on_Disclaimers_link() {
+		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario().getBean(
+				PageConstants.BENEFITS_COVERAGE_PAGE);
+		benefitsCoveragePage.clickOnDisclaimers();
+	}
+
+	/*@After
 	public void tearDown() {
 
 		WebDriver wd = (WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
 		wd.quit();
-	}
+	}*/
 }

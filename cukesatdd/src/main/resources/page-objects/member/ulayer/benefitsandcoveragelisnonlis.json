@@ -97,6 +97,14 @@
 		"identifier":"xpath",
 		"elementName":".//*[@id='planBenefitsApp']/div[7]/div[2]/div/div[2]/div/div[2]/div/div"
 		},
+	"activeRider1":{
+		"identifier":"xpath",
+		"elementName":".//*[@id='planBenefitsApp']/div[7]/div[1]/div/div[2]/div[1]/div[2]/div/div[1]/div/div"
+		},
+	"activeRider2":{
+		"identifier":"xpath",
+		"elementName":".//*[@id='planBenefitsApp']/div[7]/div[1]/div/div[2]/div[1]/div[2]/div/div[2]/div/div"
+		},	
 	"availableRider1":{
 		"identifier":"xpath",
 		"elementName":".//*[@id='planBenefitsApp']/div[7]/div[1]/div/div[2]/div[2]/div[2]/div/div[1]/div/div"
@@ -104,6 +112,14 @@
 	"availableRider2":{
 		"identifier":"xpath",
 		"elementName":".//*[@id='planBenefitsApp']/div[7]/div[1]/div/div[2]/div[2]/div[2]/div/div[2]/div/div"
+		},
+	"needHelpSection":{
+		"identifier":"xpath",
+		"elementName":"html/body/div[3]/div[3]/section"
+		},
+	"disclaimersSection":{
+		"identifier":"xpath",
+		"elementName":"html/body/div[3]/div[3]/div/div/div/div"
 		}	
 }
 }
