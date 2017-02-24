@@ -189,10 +189,27 @@ public class PortfolioPage extends UhcDriver {
 		}            
  }
  
+ public WebElement findDynamicElement(By locator) {
+		WebElement element = null;
+		FluentWait<WebDriver> wait = new WebDriverWait(driver,60).ignoring(NoSuchElementException.class)
+				.withTimeout(60, TimeUnit.SECONDS);
+		try {
+			element = wait.until(ExpectedConditions
+					.visibilityOfElementLocated(locator));
+		} catch (NoSuchElementException e) {
+			e.getStackTrace();
+			System.out.println("******************************** "+e.getCause().getMessage());
+			return element;
+		}
+		return element;
+	}
+ 
  public ResponsivePlanSummary searchPlans(String zipcode, String CountyName) {
 	    driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 //	    WebDriverWait wait = new WebDriverWait(driver, 40);
 //	    WebElement element = wait.until(ExpectedConditions.elementToBeClickable(By.id("zipcode")));
+	    
+	    
 	    
 	    WebElement element =this.findDynamicElement(By.id("zipcode"));
 	    
