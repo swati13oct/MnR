@@ -189,7 +189,7 @@ public class PortfolioPage extends UhcDriver {
 		}            
  }
  
- public WebElement findDynamicElement(By locator) {
+ public WebElement findNoSuchElement(By locator) {
 		WebElement element = null;
 		FluentWait<WebDriver> wait = new WebDriverWait(driver,60).ignoring(NoSuchElementException.class)
 				.withTimeout(60, TimeUnit.SECONDS);
@@ -211,7 +211,7 @@ public class PortfolioPage extends UhcDriver {
 	    
 	    
 	    
-	    WebElement element =this.findDynamicElement(By.id("zipcode"));
+	    WebElement element =findNoSuchElement(By.id("zipcode"));
 	    
 	    sendkeys(element, zipcode);
 	    element.sendKeys(Keys.ENTER);
