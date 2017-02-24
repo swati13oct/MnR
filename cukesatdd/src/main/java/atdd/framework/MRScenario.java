@@ -879,12 +879,13 @@ public class MRScenario {
 		
 		
 		    String phantomjs = System.getProperty("phantomjs");
-		    String agent = "Mozilla/5.0 (Linux; U; Android 2.3.3; en-us; LG-LU3000 Build/GRI40) AppleWebKit/533.1 (KHTML, like Gecko) Version/4.0 Mobile Safari/533.1";
+		    String agent = "Mozilla/5.0 (Linux; U; Android 2.3.3; en-us; LG-LU3000 Build/GRI40)";
 		    DesiredCapabilities caps = new DesiredCapabilities();
 		  //  caps.setCapability(PhantomJSDriverService.PHANTOMJS_EXECUTABLE_PATH_PROPERTY,"C:/dev/programs/phantomjs/bin/phantomjs.exe");
 		    System.out.print(System.getProperty("phantomjs"));
 		    if (StringUtils.isBlank(phantomjs)) {
 		    	caps.setCapability(PhantomJSDriverService.PHANTOMJS_EXECUTABLE_PATH_PROPERTY,props.get("HeadlessBrowserPath"));
+		    	
 		    } else {
 		    	caps.setCapability(PhantomJSDriverService.PHANTOMJS_EXECUTABLE_PATH_PROPERTY,System.getProperty("phantomjs"));
 		    }
@@ -893,7 +894,7 @@ public class MRScenario {
 		    
 		    caps.setJavascriptEnabled(true);
 		    caps.setCapability(PhantomJSDriverService.PHANTOMJS_CLI_ARGS, new String[] {"--web-security=no", "--ignore-ssl-errors=true", "--ssl-protocol=tlsv1"});
-		    String userAgent = "Mozilla/5.0 (Windows NT 6.0) AppleWebKit/535.1 (KHTML, like Gecko) Chrome/13.0.782.41 Safari/535.1";
+		    String userAgent = "Mozilla/5.0 (Windows NT 6.0)";
 		    System.setProperty("phantomjs.page.settings.userAgent", userAgent);
 		    WebDriver webDriver = new PhantomJSDriver(caps); 
 		    webDriver.manage().window().maximize();
