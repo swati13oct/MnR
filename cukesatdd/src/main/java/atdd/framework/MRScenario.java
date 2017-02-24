@@ -43,16 +43,12 @@ import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxBinary;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxProfile;
-import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.phantomjs.PhantomJSDriver;
 import org.openqa.selenium.phantomjs.PhantomJSDriverService;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.springframework.ldap.core.DistinguishedName;
 import org.springframework.stereotype.Component;
-
-import com.gargoylesoftware.htmlunit.BrowserVersion;
-import com.gargoylesoftware.htmlunit.WebClient;
 
 import acceptancetests.atdd.data.CommonConstants;
 
@@ -891,26 +887,26 @@ public class MRScenario {
 			// This is the default browser when I checked out the code, so it's
 			// the default
 			if (null == browser || browser.equalsIgnoreCase(CommonConstants.HTMLUNIT_BROWSER)) {
-				// use the HtmlUnit Driver
-				HtmlUnitDriver htmlUnitDriver = new HtmlUnitDriver(BrowserVersion.FIREFOX_24) {
-					@Override
-					protected WebClient modifyWebClient(WebClient client) {
-						client.getOptions().setThrowExceptionOnScriptError(false);
-						return client;
-					}
-				};
-				htmlUnitDriver.setJavascriptEnabled(true);
-
-				webDriver = htmlUnitDriver;
-				webDriver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
-				webDriver.manage().window().maximize();
+//				// use the HtmlUnit Driver
+//				HtmlUnitDriver htmlUnitDriver = new HtmlUnitDriver(BrowserVersion.FIREFOX_24) {
+//					@Override
+//					protected WebClient modifyWebClient(WebClient client) {
+//						client.getOptions().setThrowExceptionOnScriptError(false);
+//						return client;
+//					}
+//				};
+//				htmlUnitDriver.setJavascriptEnabled(true);
+//
+//				webDriver = htmlUnitDriver;
+//				webDriver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
+//				webDriver.manage().window().maximize();
 			} else if (browser.equalsIgnoreCase(CommonConstants.JENKINS_BROWSER_PHANTOMJS)) {
 				// otherwise if we have a Jenkins browser defined, we use it.
 				DesiredCapabilities caps = new DesiredCapabilities();
 				caps.setCapability(PhantomJSDriverService.PHANTOMJS_EXECUTABLE_PATH_PROPERTY, pathToBinary);
 				//from Jarvis
-				String agent = "Mozilla/5.0 (Linux; U; Android 2.3.3; en-us; LG-LU3000 Build/GRI40) AppleWebKit/533.1 (KHTML, like Gecko) Version/4.0 Mobile Safari/533.1";
-				//String agent = "Mozilla/5.0 (Windows NT 6.0) AppleWebKit/535.1 (KHTML, like Gecko) Chrome/13.0.782.41 Safari/535.1";
+				//String agent = "Mozilla/5.0 (Linux; U; Android 2.3.3; en-us; LG-LU3000 Build/GRI40) AppleWebKit/533.1 (KHTML, like Gecko) Version/4.0 Mobile Safari/533.1";
+				String agent = "Mozilla/5.0 (Windows NT 6.0) AppleWebKit/535.1 (KHTML, like Gecko) Chrome/13.0.782.41 Safari/535.1";
 				
 				caps.setCapability(PhantomJSDriverService.PHANTOMJS_PAGE_SETTINGS_PREFIX + "userAgent", agent);
 				caps.setJavascriptEnabled(true);

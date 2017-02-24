@@ -583,7 +583,7 @@ public class BenefitsAndCoverageUmsStepDefinition {
 
 	}
 	
-	@Then("^the user validates the content on benefits and coverage page")
+	//jma commented out duplicate step definition.  @Then("^the user validates the content on benefits and coverage page")
 	public void validateContentOnBenefitsAndCoveragePage() {
 		try {
 			

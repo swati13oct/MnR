@@ -6,6 +6,7 @@ package pages.member.ulayer;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.openqa.selenium.Alert;
+import org.openqa.selenium.NoAlertPresentException;
 import org.openqa.selenium.UnhandledAlertException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -69,10 +70,7 @@ public class LoginPage extends UhcDriver {
 
 		if (MRScenario.environment.equals("awe-dev-b") || MRScenario.environment.equals("dev-a") || MRScenario.environment.equals("dev-c") || MRScenario.environment.equals("team-b") || MRScenario.environment.equals("team-a") || MRScenario.environment.equals("team-c")) {
 
-			Alert alert = driver.switchTo().alert();
-			alert.accept();
-			Alert alert1 = driver.switchTo().alert();
-			alert1.accept();
+			isAlertPresent(driver);
 					
 			/*if (!(MRScenario.environment.equals("awe-dev-b") || MRScenario.environment.equals("dev-c") || MRScenario.environment.equals("team-b"))){
 				Alert alert2 = driver.switchTo().alert();
@@ -151,5 +149,17 @@ public class LoginPage extends UhcDriver {
 
 		return browserCheckJson;
 
+	}
+	
+	public static boolean isAlertPresent(WebDriver wd) {
+		try {
+			wd.switchTo().alert();
+			return true;
+		} catch (NoAlertPresentException e) {
+			return false;
+		} catch (Exception e) {
+			System.out.println("WebDriver doesn't support switchTo() method");
+			return false;
+		}
 	}
 }
