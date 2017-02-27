@@ -891,7 +891,7 @@ public class MRScenario {
 		    }
 		    caps.setCapability("browserType", "phantomjs");
 		    caps.setCapability(PhantomJSDriverService.PHANTOMJS_PAGE_SETTINGS_PREFIX + "userAgent", agent);
-		    caps.setCapability(PhantomJSDriverService.PHANTOMJS_PAGE_CUSTOMHEADERS_PREFIX+"Accept-Encoding","deflate");
+		    caps.phantomjs().setCapability(PhantomJSDriverService.PHANTOMJS_PAGE_CUSTOMHEADERS_PREFIX+"Accept-Encoding","deflate");
 		    caps.setJavascriptEnabled(true);
 		    caps.setCapability(PhantomJSDriverService.PHANTOMJS_CLI_ARGS, new String[] {"--web-security=no", "--ignore-ssl-errors=true", "--ssl-protocol=tlsv1"});
 		    String userAgent = "Mozilla/5.0 (Windows NT 6.0)";
