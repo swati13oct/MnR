@@ -36,7 +36,6 @@ import javax.naming.directory.InitialDirContext;
 import org.apache.commons.lang3.StringUtils;
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.openqa.selenium.Dimension;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -51,6 +50,10 @@ import org.springframework.ldap.core.DistinguishedName;
 import org.springframework.stereotype.Component;
 
 import acceptancetests.atdd.data.CommonConstants;
+
+
+import com.gargoylesoftware.htmlunit.BrowserVersion;
+import com.gargoylesoftware.htmlunit.WebClient;
 
 /**
  * 
@@ -80,7 +83,6 @@ public class MRScenario {
 	public static String environment, browser;
 
 	private static final String DIRECTORY = "/src/main/resources/";
-
 	public static int count = 0;
 
 	public void saveBean(String id, Object object) {
@@ -949,21 +951,19 @@ public class MRScenario {
 				webDriver = new ChromeDriver(capabilities);
 				return webDriver;
 
+
+	public WebDriver getWebDriver() {
 		/*HtmlUnitDriver htmlUnitDriver = new HtmlUnitDriver(
 
-				BrowserVersion.FIREFOX_24) {
+				BrowserVersion.FIREFOX_38) {
 
 			@Override
 			protected WebClient modifyWebClient(WebClient client) {
 				client.getOptions().setThrowExceptionOnScriptError(false);
 				return client;
-
 			}
-
-
-		}
-
-		return webDriver;
+		};
+		htmlUnitDriver.setJavascriptEnabled(true);
 
 		webDriver = htmlUnitDriver;
 		webDriver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
@@ -1003,7 +1003,6 @@ public class MRScenario {
 		}*/
 
 		    return webDriver; 
-
 	}
 
 	public WebDriver getIEDriver() {

@@ -11,10 +11,6 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.junit.Assert;
-<<<<<<< HEAD
-=======
-import org.openqa.selenium.By;
->>>>>>> remotes/origin/velocityDashers
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -77,7 +73,6 @@ public class VPPPlanSummaryPage extends UhcDriver {
 
 	@FindBy(id = "providerSearchFrame")
 	private WebElement providerSearchIframe;
-<<<<<<< HEAD
 
 	@FindBy(className = "switchPlanYear")
 	private WebElement toggleplanYear;
@@ -137,26 +132,6 @@ public class VPPPlanSummaryPage extends UhcDriver {
 
 	@FindBy(xpath = ".//*[@id='CloseBtn']")
 	private WebElement proactiveCloseButton;
-=======
-	
-	@FindBy(css="#pdpplans_container .planCompareBtn")
-	private WebElement comparePDPPlanChkBox;
-	
-	@FindBy(id="pdpplans")
-	private WebElement pdpShowPlansLnk;
-	
-	@FindBy(css="#maplans_container .compareHeading>p")
-	private WebElement compareUpto3PlansPopup;
-
-	@FindBy(xpath="//div[@data-ng-repeat='plan in maplans'][1]//span[@class='cpcheckbox']/input")
-	private WebElement compareChkBox;
-	
-	@FindBy(xpath="//div[@data-ng-repeat='plan in maplans'][1]//div[contains(@id,'showcompare')][1]/div[@class='compareHeading']/p[1]/b")
-	private WebElement comparePopUpTxt1;
-	
-	@FindBy(xpath="//div[@data-ng-repeat='plan in maplans'][1]//div[contains(@id,'showcompare')][1]/div[@class='compareHeading']/p[2]")
-	private WebElement comparePopUpTxt2;
->>>>>>> remotes/origin/velocityDashers
 
 	private PageData vppPlanSummary;
 
@@ -638,7 +613,6 @@ public class VPPPlanSummaryPage extends UhcDriver {
 				}
 			}
 		}
-<<<<<<< HEAD
 
 		if (driver.getTitle()
 				.equalsIgnoreCase("Our Medicare Plan Types | AARP® Medicare Plans from UnitedHealthcare®")) {
@@ -765,46 +739,4 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		driver.switchTo().window(MainWindow);
 		return null;
 	}
-=======
-		*/
-	}
-	
-	/**
-	 * This method verifies whether the Compare 3 Plans button is Inactive or NOt
-	 */
-	public void verifyInactiveCompare3PlansButton(){
-		
-		Assert.assertTrue("FAIL - Compare 3 plans button is not displayed", elementFound(comparePDPPlanChkBox));
-		Assert.assertEquals("true", comparePDPPlanChkBox.getAttribute("readonly"));
-	}
-	
-	public void clickAndVerifyCompareUpto3PlansPopup(){
-		comparePDPPlanChkBox.click();
-		Assert.assertEquals("Compare up to 3 plans Select 2-3 plans that you'd like to compare.",compareUpto3PlansPopup.getText().trim());
-	}
-	
-	public void verifyCompareCheckBoxesAreUnchecked(){
-		
-		Assert.assertEquals("compare_checkbox ng-scope ng-pristine ng-valid", compareChkBox.getAttribute("class"));
-		
-	}
-	
-	public void UncheckAndVerifyCompareChkBox(){
-		compareChkBox.click();
-		Assert.assertEquals("compare_checkbox ng-scope ng-valid ng-dirty", compareChkBox.getAttribute("class"));
-	}
-	
-	public void VerifyComparePopUpText(){
-		
-		Assert.assertEquals("Select 1 more plan to compare",comparePopUpTxt1.getText().trim());
-		Assert.assertEquals("Select 2-3 plans that you'd like to compare",comparePopUpTxt2.getText().trim());
-	}
-	
-	public void clickCompareChkBox(){
-		waitforElement(compareChkBox);
-		compareChkBox.click();
-	}
-	
-	
->>>>>>> remotes/origin/velocityDashers
 }
