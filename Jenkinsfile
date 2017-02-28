@@ -117,7 +117,7 @@ node('docker-maven-slave') {
 				<p><em>Please see attached reports for further details.</em></p>
 
 				''', subject: 'ATDD RUN Failed::'+PIPELINE_VERSION,
-					to: emailextrecipients([[$class: 'CulpritsRecipientProvider'], [$class: 'DevelopersRecipientProvider'], [$class: 'RequesterRecipientProvider'], [$class: 'UpstreamComitterRecipientProvider']])
+					to: emailextrecipients([[$class: 'CulpritsRecipientProvider'], [$class: 'DevelopersRecipientProvider'], [$class: 'RequesterRecipientProvider'], [$class: 'UpstreamComitterRecipientProvider']])+";UCP_TheATeam_DL@ds.uhc.com"
 
 				}
 			}
