@@ -1385,8 +1385,6 @@ Examples:
       | MAPD    |
       
 
- @jantolak
-    Scenario Outline: Verify Federal Optional Dental on benefits and coverage in AARP site for MAPD Non Lis member
 
   @disclaimers
   Scenario Outline: Verify Disclaimers section is in place on Benefits and Coverage page
