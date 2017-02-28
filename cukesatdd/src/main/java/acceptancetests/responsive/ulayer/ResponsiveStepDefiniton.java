@@ -26,6 +26,10 @@ import pages.acquisition.ulayer.PortfolioPage;
 import pages.acquisition.ulayer.ResponsivePlanDetails;
 import pages.acquisition.ulayer.ResponsivePlanSummary;
 import pages.acquisition.ulayer.VPPPlanSummaryPage;
+import pages.mobile.acquisition.ulayer.VPPAarpNeedAStepBackWidget;
+import pages.mobile.acquisition.ulayer.VPPAarpNeedHelpWidgetPage;
+import pages.mobile.acquisition.ulayer.VPPNeedMoreInformationWidget;
+import pages.mobile.acquisition.ulayer.VPPRequestSendEmailPage;
 
 public class ResponsiveStepDefiniton {
 
@@ -165,6 +169,67 @@ public class ResponsiveStepDefiniton {
  		ResponsivePlanDetails planDetails =  plansummaryPage.viewPlanDetails(planName);
  		getLoginScenario().saveBean(PageConstants.RESPONSIVE_DETAILS_PAGE, planDetails);
  	}
+	
+	@Then("^user validates county name on plan summary page$")	
+	public void user_validates_county_name(){
+		
+		ResponsivePlanSummary responsivePlanSummaryPage = (ResponsivePlanSummary) getLoginScenario()
+				.getBean(PageConstants.RESPONSIVE_PLAN_SUMMARY_PAGE);
+		System.out.println(getLoginScenario().getBean(VPPCommonConstants.COUNTY));
+		String name = (String) getLoginScenario().getBean(VPPCommonConstants.COUNTY);
+		System.out.println("name"+ name );
+		responsivePlanSummaryPage.validateCountyName(name);
+		
+	}
+	@And("^the user validates Need a step back in right rail widgets$")
+	public void the_user_validates_Need_step_back(){
+		ResponsivePlanSummary planSummary= (ResponsivePlanSummary) 
+				getLoginScenario().getBean(PageConstants.RESPONSIVE_PLAN_SUMMARY_PAGE);
+		VPPAarpNeedAStepBackWidget stepBackWidget =  planSummary.validateStepBackWidget();
+		stepBackWidget.validateStepBackWidget();
+	}
+	@And("^the user validates chat now widget in right rail widgets$")
+	 public void the_user_validates_help_widget_in_raight_rail(){
+		ResponsivePlanSummary planSummary= (ResponsivePlanSummary) 
+				getLoginScenario().getBean(PageConstants.RESPONSIVE_PLAN_SUMMARY_PAGE);
+		VPPAarpNeedHelpWidgetPage needHelpWidget = planSummary.validateNeedHelpWidget();
+	   needHelpWidget.chatWithUsWidget();			
+	}
+	@And("^the user validates need more information widget in right rail widgets$")
+	 public void the_user_validates_needInformation_widget_in_raight_rail(){
+		ResponsivePlanSummary planSummary= (ResponsivePlanSummary) 
+				getLoginScenario().getBean(PageConstants.RESPONSIVE_PLAN_SUMMARY_PAGE);
+		VPPNeedMoreInformationWidget needMoreInfo = planSummary.validateNeedMoreInformationWidget();
+		needMoreInfo.moreInformationWidget();
+	}
+	@When("^the user moved to the email update widget in selected plan section in AARP site$")
+	 public void the_user_validates_email_widget_in_raight_rail(){
+		ResponsivePlanSummary planSummary= (ResponsivePlanSummary) 
+				getLoginScenario().getBean(PageConstants.RESPONSIVE_PLAN_SUMMARY_PAGE);
+		VPPRequestSendEmailPage emailRequest = planSummary.validateEmailWidget();
+		if (emailRequest != null) {
+			getLoginScenario().saveBean(PageConstants.VPP_REQUEST_SEND_EMAIL_PAGE,emailRequest);
+		}	
+		
+	}
+	@And ("^the user enter information to Get Email Update widget and submit in AARP site$")
+	public void vpp_user_request_send_email(DataTable personalAttributes) {
+		List<DataTableRow> personalAttributesRow = personalAttributes.getGherkinRows();
+		Map<String, String> personalAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < personalAttributesRow.size(); i++) {
+			personalAttributesMap.put(personalAttributesRow.get(i).getCells()
+					.get(0), personalAttributesRow.get(i).getCells().get(1));
+		}
+		String firstName = personalAttributesMap.get("First Name");
+		String lastName = personalAttributesMap.get("Last Name");
+		String emailAddress =personalAttributesMap.get("Email Address");
+		getLoginScenario().saveBean(VPPCommonConstants.FIRST_NAME, firstName);
+		getLoginScenario().saveBean(VPPCommonConstants.LAST_NAME, lastName);
+		getLoginScenario().saveBean(VPPCommonConstants.EMAIL_ADDRESS, emailAddress);		
+		VPPRequestSendEmailPage requestSendEmailPage= (VPPRequestSendEmailPage)getLoginScenario()
+				.getBean(PageConstants.VPP_REQUEST_SEND_EMAIL_PAGE);
+		requestSendEmailPage.sendEmailByClickSummbitButtonOnEmailWidget(firstName, lastName, emailAddress);	
+	}
 	
 	
 }

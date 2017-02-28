@@ -18,6 +18,10 @@ import acceptancetests.atdd.data.ElementData;
 import acceptancetests.atdd.data.PageData;
 import acceptancetests.atdd.util.CommonUtility;
 import atdd.framework.UhcDriver;
+import pages.mobile.acquisition.ulayer.VPPAarpNeedAStepBackWidget;
+import pages.mobile.acquisition.ulayer.VPPAarpNeedHelpWidgetPage;
+import pages.mobile.acquisition.ulayer.VPPNeedMoreInformationWidget;
+import pages.mobile.acquisition.ulayer.VPPRequestSendEmailPage;
 
 public class ResponsivePlanSummary extends UhcDriver{
 	
@@ -70,6 +74,11 @@ public class ResponsivePlanSummary extends UhcDriver{
 		
 		@FindBy(xpath="//div/div/div[2]/div/div[2]/div[2]/div/span[2]")
 		private WebElement showPdpPlans;
+		
+		@FindBy(xpath="html/body/div[4]/div[2]/div/div/div/div/div/div[1]/div/div/div/div[2]/div/div[1]/h2")
+		private WebElement countyNameDetail;
+		
+		
 
 	private PageData vppPlanSummary;
 
@@ -264,4 +273,29 @@ public ResponsivePlanSummary viewPlanSummary(String planType) {
 		 }
 		 return null;
 	 }
+
+public void validateCountyName(String CountyName)  {
+	if(countyNameDetail.getText().contains(CountyName)){
+		System.out.println("CountyName"+CountyName);
+	
+		Assert.assertTrue("---content displayed---", true);		
+		}else{
+	  Assert.fail();
+	}
+	
+	// TODO Auto-generated method stub
+	
+}
+public VPPAarpNeedAStepBackWidget validateStepBackWidget(){
+	 return new VPPAarpNeedAStepBackWidget(driver);
+}
+public VPPAarpNeedHelpWidgetPage validateNeedHelpWidget(){
+	 return new VPPAarpNeedHelpWidgetPage(driver);
+}
+public VPPNeedMoreInformationWidget validateNeedMoreInformationWidget(){
+	 return new VPPNeedMoreInformationWidget(driver);
+}
+public VPPRequestSendEmailPage validateEmailWidget(){
+	 return new VPPRequestSendEmailPage(driver);
+}
 }
