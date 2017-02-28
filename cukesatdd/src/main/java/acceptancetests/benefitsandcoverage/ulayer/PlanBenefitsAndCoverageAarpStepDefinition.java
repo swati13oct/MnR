@@ -95,7 +95,7 @@ public class PlanBenefitsAndCoverageAarpStepDefinition {
 		}
 
 		WebDriver wd = getLoginScenario().getWebDriver();
-		wd.manage().window().maximize();
+		//wd.manage().window().maximize();
 		LoginPage loginPage = new LoginPage(wd);
 		AccountHomePage accountHomePage = (AccountHomePage) loginPage.loginWith(userName, pwd);
 		JSONObject accountHomeActualJson = null;
@@ -406,7 +406,7 @@ public class PlanBenefitsAndCoverageAarpStepDefinition {
 
 	}
 
-	@Then("^the user validates the content on AARP benefits and coverage page")
+	@Then("^the user validates the content on benefits and coverage page")
 	public void validateContentOnBenefitsAndCoveragePage() {
 		
 		try {
@@ -505,6 +505,7 @@ public class PlanBenefitsAndCoverageAarpStepDefinition {
 		benefitsCoveragePage.validateRemoveRiderPopup();
 	}
 	
+
 	@Then("^the user view mydocument in AARP site$")
 	public void views_mydocument_aarp_site() {
 		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstants.ACCOUNT_HOME_PAGE);
@@ -572,6 +573,7 @@ public class PlanBenefitsAndCoverageAarpStepDefinition {
 
 	
 	@After
+
 	public void tearDown() {
 
 		WebDriver wd = (WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);

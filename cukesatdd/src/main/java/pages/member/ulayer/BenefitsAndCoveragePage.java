@@ -52,10 +52,10 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 	@FindBy(className = "changepcp-atdd")
 	private WebElement changePcp;
 
-	@FindBy(xpath = "//button[@ng-click='loadAddRiderPopUp(rider)']")
+	@FindBy(xpath = ".//*[@id='planBenefitsApp']/div[7]/div[1]/div/div[2]/div[2]/div[2]/div/div[2]/div/div/button")
 	private WebElement addRiderButton;
 	
-	@FindBy(xpath = "//button[contains(.,'Add This Rider')]")
+	@FindBy(className = "btn_addRider_atdd")
 	private WebElement addRiderPopupButton;
 	
 	@FindBy(xpath = "//a[contains(.,'CANCEL')]")
@@ -64,8 +64,14 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 	@FindBy(xpath = "//button[@ng-click='loadRemoveRiderPopUp(rider)']")
 	private WebElement removeRiderButton;
 	
-	@FindBy(xpath = "//button[contains(.,'Remove This Rider')]")
+	@FindBy(className = "btn_removeRider_atdd")
 	private WebElement removeRiderPopupButton;
+	
+	@FindBy(className = "btn_repalceRider_atdd ")
+	private WebElement replacceRiderPopupButton;
+	
+	@FindBy(className = "disclaimers-atdd")
+	private WebElement disclaimersLink;
 	
 	public BenefitsAndCoveragePage(WebDriver driver) {
 		super(driver);
@@ -242,5 +248,40 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 			}
 		}
 		return null;
+	}
+	
+	public BenefitsAndCoveragePage validateReplaceRiderPopup() throws Exception {
+
+		String MainWindow = driver.getWindowHandle();
+
+		Set<String> s1 = driver.getWindowHandles();
+		Iterator<String> i1 = s1.iterator();
+
+		while (i1.hasNext()) {
+			String ChildWindow = i1.next();
+
+			if (!MainWindow.equalsIgnoreCase(ChildWindow)) {
+
+				driver.switchTo().window(ChildWindow);
+				
+				validate(replacceRiderPopupButton);
+				validate(cancelButton);
+				Thread.sleep(3000);
+				//addRiderPopupButton.click();
+			}
+		}
+		return null;
+	}
+	
+	public void clickOnDisclaimers() {
+		// TODO Auto-generated method stub
+		validate(disclaimersLink);
+		disclaimersLink.click();
+		try {
+			Thread.sleep(10000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 }
