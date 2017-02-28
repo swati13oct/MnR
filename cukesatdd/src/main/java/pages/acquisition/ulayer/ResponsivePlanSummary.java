@@ -18,6 +18,10 @@ import acceptancetests.atdd.data.ElementData;
 import acceptancetests.atdd.data.PageData;
 import acceptancetests.atdd.util.CommonUtility;
 import atdd.framework.UhcDriver;
+import pages.mobile.acquisition.ulayer.VPPAarpNeedAStepBackWidget;
+import pages.mobile.acquisition.ulayer.VPPAarpNeedHelpWidgetPage;
+import pages.mobile.acquisition.ulayer.VPPNeedMoreInformationWidget;
+import pages.mobile.acquisition.ulayer.VPPRequestSendEmailPage;
 
 public class ResponsivePlanSummary extends UhcDriver{
 	
@@ -281,5 +285,17 @@ public void validateCountyName(String CountyName)  {
 	
 	// TODO Auto-generated method stub
 	
+}
+public VPPAarpNeedAStepBackWidget validateStepBackWidget(){
+	 return new VPPAarpNeedAStepBackWidget(driver);
+}
+public VPPAarpNeedHelpWidgetPage validateNeedHelpWidget(){
+	 return new VPPAarpNeedHelpWidgetPage(driver);
+}
+public VPPNeedMoreInformationWidget validateNeedMoreInformationWidget(){
+	 return new VPPNeedMoreInformationWidget(driver);
+}
+public VPPRequestSendEmailPage validateEmailWidget(){
+	 return new VPPRequestSendEmailPage(driver);
 }
 }
