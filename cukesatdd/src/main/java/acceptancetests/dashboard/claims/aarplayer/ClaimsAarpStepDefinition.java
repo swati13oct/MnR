@@ -45,7 +45,7 @@ public class ClaimsAarpStepDefinition {
 				return loginScenario;
 	}
 	
-	@Given("^I am an AMS member on the redesigned member site$")
+	@Given("^I am an AARP member on the redesigned site$")
 	public void i_am_an_arrp_member_on_the_member_site(DataTable memberAttributes) {
 
 		/* Reading the given attribute from feature file */
@@ -126,22 +126,18 @@ public class ClaimsAarpStepDefinition {
 
 	}
 
-@When("^i navigate to the Claims Summary page in AMS site$")	
+@When("^I navigate to the Claims Summary page in AARP site$")	
 	 public void i_navigate_to_member_redesign_claims_page(){
 	AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstants.ACCOUNT_HOME_PAGE);
 	ClaimSummarypage newClaimsSummaryPage = accountHomePage.navigateToClaimsSummaryPage(loginScenario.getWebDriver());
 	getLoginScenario().saveBean(PageConstants.NEW_CLAIMS_SUMMARY_PAGE, newClaimsSummaryPage);
-	if(newClaimsSummaryPage == null){
-		System.out.println("Error:Loading on new claims detail page");
-		Assert.fail();
-	}
-	else{
-		System.out.println("Claims detail page loaded succesfully");
-		getLoginScenario().saveBean(PageConstants.NEW_CLAIMS_SUMMARY_PAGE, newClaimsSummaryPage);
-	}			
+	String planType = memberAttributesMap.get("Plan Type");
+	newClaimsSummaryPage.selectRequiredPlanType(planType);
+	
+	getLoginScenario().saveBean(PageConstants.NEW_CLAIMS_SUMMARY_PAGE, newClaimsSummaryPage);			
 	
   }
-@Then("^i can view a Page Header in Claims Sumamry page in AMS site$")
+@Then("^I can view a Page Header in Claims Sumamry page in AARP site$")
 public void validate_the_header()
   {
 	/*ClaimSummarypage newClaimsSummaryPage = (ClaimSummarypage) getLoginScenario().getBean(PageConstants.NEW_CLAIMS_SUMMARY_PAGE);
@@ -149,7 +145,7 @@ public void validate_the_header()
 	
 }
 
-@And("^a View Claims for dropdown menu that defaults to last 90 days in Claims Sumamry page in AMS site$")
+@And("^A View Claims from dropdown menu that defaults to last 90 days in Claims Sumamry page in AARP site$")
 public void validate_viewClaimsForm_dropdown(){
 	//String planType = memberAttributesMap.get("Plan Type");
 	ClaimSummarypage claimSummarypage = (ClaimSummarypage) getLoginScenario().getBean(PageConstants.NEW_CLAIMS_SUMMARY_PAGE);	
@@ -157,7 +153,7 @@ public void validate_viewClaimsForm_dropdown(){
 	
 }
 
-@And("^a Claim type dropdown in Claims Sumamry page in AMS site$")
+@And("^A Claim type dropdown in Claims Sumamry page in AARP site$")
 public void validate_claim_type_drop_down(){
 	
 	String planType = memberAttributesMap.get("Plan Type");
@@ -167,7 +163,7 @@ public void validate_claim_type_drop_down(){
 	
 }
 
-@And("^all Body Copy on the page in Claims Sumamry page in AMS site$")
+@And("^All Body Copy on the page in Claims Sumamry page in AARP site$")
 public void validate_body_copay(){
 	
 ClaimSummarypage claimSummarypage = (ClaimSummarypage) getLoginScenario().getBean(PageConstants.NEW_CLAIMS_SUMMARY_PAGE);
@@ -177,7 +173,7 @@ ClaimSummarypage claimSummarypage = (ClaimSummarypage) getLoginScenario().getBea
 	
 }
 
-@Then ("^I can view all Body Copy on the page in AMS site$")
+@Then ("^I can view all Body Copy on the page in AARP site$")
 public void validate_claims_table_body_copy_text(){
 	
 	ClaimSummarypage claimSummarypage = (ClaimSummarypage) getLoginScenario().getBean(PageConstants.NEW_CLAIMS_SUMMARY_PAGE);
@@ -186,7 +182,7 @@ public void validate_claims_table_body_copy_text(){
 }
 
 
-@And("^dynamic text with the number of claims and search criteria, or date range for custom search$")
+@And("^Dynamic text with the number of claims and search criteria, or date range for custom search$")
 public void validate_dynamic_nuber_of_claims_text(){
 	
 	ClaimSummarypage claimSummarypage = (ClaimSummarypage) getLoginScenario().getBean(PageConstants.NEW_CLAIMS_SUMMARY_PAGE);
@@ -194,7 +190,7 @@ public void validate_dynamic_nuber_of_claims_text(){
 }
 
 
-@And ("^a Claims Table with pagination in AMS site$")
+@And ("^A Claims Table with pagination in AARP site$")
 
 public void validate_claims_table_and_pagination(){
 	
@@ -225,6 +221,22 @@ ClaimSummarypage claimSummarypage = (ClaimSummarypage) getLoginScenario().getBea
 	
 }
 
+@Then("^I can view the Learn More About Your Cost Breakdown section$")
+public void validate_learn_more_about_section(){
+ClaimSummarypage claimSummarypage = (ClaimSummarypage) getLoginScenario().getBean(PageConstants.NEW_CLAIMS_SUMMARY_PAGE);
+	
+	Assert.assertTrue(claimSummarypage.validateLearnmoreaboutsection());
+	
+	
+}
+
+@Then("^I can view and validate the download my data button in calims summary page$")
+public void validate_bownload_my_data_button(){
+	
+	ClaimSummarypage claimSummarypage = (ClaimSummarypage) getLoginScenario().getBean(PageConstants.NEW_CLAIMS_SUMMARY_PAGE);
+	Assert.assertTrue(claimSummarypage.validateDownloadMyDataButton());
+	
+}
 
 
 
