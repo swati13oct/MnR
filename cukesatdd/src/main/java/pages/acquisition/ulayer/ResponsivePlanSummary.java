@@ -69,13 +69,13 @@ public class ResponsivePlanSummary extends UhcDriver{
 		@FindBy(className="plan-index")
 		private List<WebElement> planIndexList;
 		
-		@FindBy(xpath="html/body/div[4]/div[2]/div[1]/div/div/div/div/div[1]/div/div/div/div[2]/div/div[2]/div[1]/div/span[1]")
+		@FindBy(xpath="//*[@class='title' and contains(text(),'Medicare Advantage Plans')]")
 		private WebElement showMaPlans;
 		
-		@FindBy(xpath="//div/div/div[2]/div/div[2]/div[2]/div/span[2]")
+		@FindBy(xpath="//*[contains(text(),'Medicare Prescription')]/following-sibling::span[2]")
 		private WebElement showPdpPlans;
 		
-		@FindBy(xpath="html/body/div[4]/div[2]/div/div/div/div/div/div[1]/div/div/div/div[2]/div/div[1]/h2")
+		@FindBy(xpath="//h2[contains(text(),'We have')]")
 		private WebElement countyNameDetail;
 		
 		
