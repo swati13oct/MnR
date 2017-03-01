@@ -29,7 +29,6 @@ Examples:
  | planType  | memberType  |
  | MA       |Individual |
  
-mmm
 Scenario Outline: To Verify MR portal members using DCE enter at least four characters of the drug name
 Given I am a registered member using the new M&R member portal on a desktop computer
 | Plan Type   | <planType>   |
@@ -362,5 +361,102 @@ Examples:
  | planType  | memberType  |
  | MA       |Individual |
  
+ #----------------------------
+@drug_cost_estimatorstep2
+Scenario Outline: Pharmacy Results List 
+Given I am a registered member using the new M&R member portal on a desktop computer
+| Plan Type   | <planType>   |
+| Member Type	  | <memberType> |
+When the above plantype user logs in UMS Site Desktop
+And I access the page containing the DCE tool
+And I navigate to step2 page
+Then I should see default miles zipcode and pharmacy type
+| Zipcode| <zipcode> |
+| Radius | <radius>  |
+|Pharmacy Type|<pharmacytype>| 
+Then I should able to select all miles option from dropdown
+And I should able to select all the pharmacy type
+And we search the pharmacy within miles zipcode and pharmacy type
+| Zipcode| <zipcode1> |
+| Radius | <radius1>  |
+|Pharmacy Type|<pharmacytype1>| 
+Then I should see pharmacy results as per the filter 
  
+ Examples:
+| planType | memberType| zipcode| radius|pharmacytype|zipcode1|radius1|pharmacytype1|
+| MAPD     |Individual | 14826  | 15 miles|Pharmacy Saver|47834|25 miles|Standard Network|
+ 
+ 
+ 
+  #----------------------------
+@drug_cost_estimatorstep3
+Scenario Outline: Pharmacy cost saving
+Given I am a registered member using the new M&R member portal on a desktop computer
+| Plan Type   | <planType>   |
+| Member Type	  | <memberType> |
+When the above plantype user logs in UMS Site Desktop
+And I access the page containing the DCE tool
+And I navigate to step2 page
+#And I select the first pharmacy
+And I select the Pharmacy type
+|Pharmacy Type|<pharmacytype1>|
+Then I should not see cost saving message for this pharmacy
+When I select the Pharmacy type
+|Pharmacy Type|<pharmacytype2>|
+Then I should see cost saving message for this pharmacy
+|Pharmacy Type|<pharmacytype2>|
+When I select the Pharmacy type
+|Pharmacy Type|<pharmacytype3>|
+Then I should see cost saving message for this pharmacy
+|Pharmacy Type|<pharmacytype3>|
+When I select the Pharmacy type
+|Pharmacy Type|<pharmacytype4>|
+Then I should not see cost saving message for this pharmacy
+
+ 
+ Examples:
+| planType | memberType|pharmacytype1|pharmacytype2|pharmacytype3|pharmacytype4|
+| MAPD     |Individual |Standard Network|Pharmacy Saver|Preferred Mail Service|Preferred Retail|
+
+
+
+#----------------------------------
+
+@drug_cost_estimatorstep4
+Scenario Outline: Pharmacy saver results
+Given I am a registered member using the new M&R member portal on a desktop computer
+| Plan Type   | <planType>   |
+| Member Type	  | <memberType> |
+When the above plantype user logs in UMS Site Desktop
+And I access the page containing the DCE tool
+And I navigate to step2 page
+And we search the pharmacy within miles zipcode and pharmacy type
+| Zipcode| <zipcode> |
+| Radius | <radius>  |
+|Pharmacy Type|<pharmacytype>| 
+Then I should see pharmacy results as per the filter
+And I should see pharmacy saver pharmacies in results
+
+ Examples:
+| planType | memberType| zipcode| radius|pharmacytype|
+| MAPD     |Individual | 06450  | 25 miles|Pharmacy Saver|
+
+
+#----------------------------------
+#q1_feb_grp011  001620498-1 
+
+@drug_cost_estimatorstep5
+Scenario Outline: Pharmacy saver results
+Given I am a registered member using the new M&R member portal on a desktop computer
+| Plan Type   | <planType>   |
+| Member Type	  | <memberType> |
+When the above plantype user logs in UMS Site Desktop
+And I access the page containing the DCE tool
+And I navigate to step2 page
+Then I should not see pharmacy saver radio button under pharmacy type
+
+
+ Examples:
+| planType | memberType|
+| MA     |Individual_non_pharmacy_saver |
  
