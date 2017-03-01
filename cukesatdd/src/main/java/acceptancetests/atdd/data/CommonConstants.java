@@ -22,6 +22,18 @@ public class CommonConstants {
 	public static final String PROPERTY_FILE_NAME = "config.properties";
 
 	public static final String DEFAULT_ENVIRONMENT_CI = "ci";
+	
+	public static final String USER_PASSWORD = "userPassword";
+	
+	public static final String BUSINESS_CATEGORY = "businessCategory";
+	
+	public static final String ATTRIB_FIRST_NAME = "givenName";
+
+	public static final String ATTRIB_LAST_NAME = "sn";
+	
+	public static final String ATTRIB_COMMON_NAME = "cn";
+	
+	public static final String ATTRIB_OBJECT_CLASS = "objectClass";
 
 	public static final String UID = "uid";
 

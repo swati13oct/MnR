@@ -32,8 +32,7 @@ public class GlobalBeforeHook implements BeforeHook {
 			public void run() {
 				try {
 					
-					//globalScenario.removeMember();
-					//TODO:: add de-register logic here 
+					globalScenario.removeMember();
 				} catch (Exception e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
