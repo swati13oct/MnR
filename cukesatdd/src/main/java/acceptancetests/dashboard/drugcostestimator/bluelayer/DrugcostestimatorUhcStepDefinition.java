@@ -41,7 +41,7 @@ public class DrugcostestimatorUhcStepDefinition {
 	public MRScenario getLoginScenario() {
 		return loginScenario;
 	}
-	
+
 	@Given("^I am a registered member using the new M&R member portal on a desktop computer$")
 	public void i_am_an_uhc_individual_member_on_the_dashboard_site(DataTable memberAttributes) {
 		WebDriver wd = getLoginScenario().getWebDriver();
@@ -56,7 +56,7 @@ public class DrugcostestimatorUhcStepDefinition {
 		}
 
 		String category = memberAttributesMap.get("Member Type");
-		
+
 		Set<String> memberAttributesKeySet = memberAttributesMap.keySet();
 		List<String> desiredAttributes = new ArrayList<String>();
 		for (Iterator<String> iterator = memberAttributesKeySet.iterator(); iterator
@@ -84,7 +84,7 @@ public class DrugcostestimatorUhcStepDefinition {
 			System.out.println("User is..." + userName);
 			System.out.println("Password is..." + pwd);
 			getLoginScenario()
-					.saveBean(LoginCommonConstants.USERNAME, userName);
+			.saveBean(LoginCommonConstants.USERNAME, userName);
 			getLoginScenario().saveBean(LoginCommonConstants.PASSWORD, pwd);
 			getLoginScenario().saveBean(LoginCommonConstants.CATOGERY, category);
 		}
@@ -162,7 +162,7 @@ public class DrugcostestimatorUhcStepDefinition {
 	public void I_use_the_DCE_tool_to_enter_one_or_more_drugs_to_my_drug_list(DataTable data) throws InterruptedException {
 		List<DataTableRow> memberAttributesRow = data.getGherkinRows();
 		String drug = memberAttributesRow.get(1).getCells().get(0);
-		
+
 		WebDriver wd = (WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
 
 		DrugCostEstimatorPage dce = new DrugCostEstimatorPage(wd);
@@ -180,7 +180,7 @@ public class DrugcostestimatorUhcStepDefinition {
 		AddDrugDetails addDrugDetails = new AddDrugDetails(wd);
 		addDrugDetails.selectDosage("Lipitor TAB 10MG");
 		addDrugDetails.continueAddDrugDetails();
-		
+
 	}
 
 	@And("^I should see my drug list appear responsively to my device$")
@@ -193,10 +193,10 @@ public class DrugcostestimatorUhcStepDefinition {
 		AddNewDrugModal addNewDrugModal = new AddNewDrugModal(wd);
 		addNewDrugModal.selectDrug("Lip-EX");
 	}
-	
+
 	@And("^I should be able to change those options at any time$")
 	public void i_should_be_able_to_change_those_options_at_any_time(){
-		
+
 		WebDriver wd = (WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
 		AddDrugDetails addDrugDetails = new AddDrugDetails(wd);
 		addDrugDetails.selectFrequency("Every 3 Months");
@@ -209,26 +209,26 @@ public class DrugcostestimatorUhcStepDefinition {
 		AddDrugDetails addDrugDetails = new AddDrugDetails(wd);
 		addDrugDetails.continueAddDrugDetails();
 	}
-	
+
 	@Then("^I should see the Pharmacy search tab as a clickable element within the DCE tool$")
 	public void i_should_see_the_pharmacy_search(DataTable data) throws InterruptedException{
 		List<DataTableRow> memberAttributesRow = data.getGherkinRows();
 		String drug = memberAttributesRow.get(1).getCells().get(0);
-		
+
 		WebDriver wd = (WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
 		DrugCostEstimatorPage dce = (DrugCostEstimatorPage) getLoginScenario().getBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE);
 		dce.changeUrlToNewDCEPage();
-		
+
 		AddNewDrugModal addNewDrugModal = dce.clickOnAddDrug();
 		String user = (String) getLoginScenario().getBean(LoginCommonConstants.USERNAME);
 		Map<String, JSONObject> expectedDataMap = loginScenario
 				.getExpectedJson(user);
-		
+
 		getLoginScenario().saveBean(CommonConstants.EXPECTED_DATA_MAP,
 				expectedDataMap);
 		JSONObject addDrugPageExpectedJson = addNewDrugModal.getExpectedData(
 				expectedDataMap);
-		
+
 		JSONObject addDrugPageActualJson = null;
 		addDrugPageActualJson = addNewDrugModal.addnewdrugJson;
 		try {
@@ -272,14 +272,14 @@ public class DrugcostestimatorUhcStepDefinition {
 		String drug = memberAttributesRow.get(1).getCells().get(0);
 		DrugCostEstimatorPage dce = (DrugCostEstimatorPage) getLoginScenario().getBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE);
 		dce.addDrugs(26,drug);
-		
+
 	}
 	@And("^I should have the ability to advance to the next step in the DCE flow after successfully creating a drug list with at least one drug$")
 	public void i_should_be_able_to_advance_dceflows(){
 		AddNewDrugModal addNewDrugModal = (AddNewDrugModal) getLoginScenario().getBean(PageConstants.ADD_DRUG_PAGE);
 		addNewDrugModal.cancel();
 	}
-	
+
 	@And("^I enter at least four characters of the drug name in the Enter Drug Name field but not the exact drug name$")
 	public void i_enter_at_least_four_chars_of_drugname(DataTable data){
 		List<DataTableRow> memberAttributesRow = data.getGherkinRows();
@@ -292,15 +292,15 @@ public class DrugcostestimatorUhcStepDefinition {
 		List<DataTableRow> memberAttributesRow = data.getGherkinRows();
 		String drug = memberAttributesRow.get(1).getCells().get(0);
 		AddNewDrugModal addNewDrugModal = (AddNewDrugModal) getLoginScenario().getBean(PageConstants.ADD_DRUG_PAGE);
-	    addNewDrugModal.selectAdrugFromAutoCompleteSuggestions(drug);
-	    
+		addNewDrugModal.selectAdrugFromAutoCompleteSuggestions(drug);
+
 	}
 	@Then("^I should be able to select a drug from the list$")
 	public void i_should__be_able_to_select_a_drug_from_list() throws InterruptedException{
 		AddNewDrugModal addNewDrugModal = (AddNewDrugModal) getLoginScenario().getBean(PageConstants.ADD_DRUG_PAGE);
 		AddDrugDetails addDrugDetails = addNewDrugModal.submit();
 		if(addDrugDetails !=null)
-		 getLoginScenario().saveBean(PageConstants.ADD_DRUG_DETAILS, addDrugDetails);
+			getLoginScenario().saveBean(PageConstants.ADD_DRUG_DETAILS, addDrugDetails);
 		addDrugDetails.validateThePage();
 	}
 	@Then("^the modal should refresh to the next step in the flow if I select one of the suggested results$")
@@ -308,9 +308,9 @@ public class DrugcostestimatorUhcStepDefinition {
 		AddDrugDetails addDrugDetails = (AddDrugDetails) getLoginScenario().getBean(PageConstants.ADD_DRUG_DETAILS);
 		SavingsOppurtunity savingsOppurtunity = addDrugDetails.continueAddDrugDetails();
 		getLoginScenario().saveBean(PageConstants.SAVING_OPPORTUNITY, savingsOppurtunity);
-		
+
 	}
-	
+
 	/*@And("^the user reached the drug cost estimator page$")
 	public void the_DCE_tool_to_enter_one_or_more_drugs_to_my_drug_list() {
 		here code will come for the link on homepage or the button to reach drugcostestimator
@@ -320,7 +320,7 @@ public class DrugcostestimatorUhcStepDefinition {
 		dce.changeUrlToNewDCEPage();
 		System.out.println(" hurray : ");
 	}*/
-	
+
 	@And("^the user selects the pharmacy tab information like miles, zipcode and pharmacy type$")
 	public void navigate_drugcostestimator_pharmacytab(DataTable memberAttributes) {
 		List<DataTableRow> memberAttributesRow = memberAttributes
@@ -340,25 +340,25 @@ public class DrugcostestimatorUhcStepDefinition {
 		dce.changeUrlToNewDCEPage();
 		dce.pharmacyInformation(zipcode,radius);
 	}
-	
-	
+
+
 	@Then("^the user should be able to validate the pharmacy information$")
 	public void validate_pharmacy_information(){
-		
+
 	}
-	
-	
+
+
 	@Then("^I should see enter your drugs text$")
 	public void I_should_see_enter_your_drugs_text() {
 		WebDriver wd = (WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
 
 		DrugCostEstimatorPage dce = new DrugCostEstimatorPage(wd);
 		dce.validateenterdrugtext();
-	    
+
 	}
 
 
-@Then("^I should see at most 3 drugs under drugs heading$")
+	@Then("^I should see at most 3 drugs under drugs heading$")
 	public void I_should_see_at_most_3_drugs_under_drugs_heading(DataTable memberAttributes) {
 		List<DataTableRow> memberAttributesRow = memberAttributes
 				.getGherkinRows();
@@ -372,31 +372,31 @@ public class DrugcostestimatorUhcStepDefinition {
 		String dosage1 = memberAttributesMap.get("Dosage1");
 		String dosage2 = memberAttributesMap.get("Dosage2");
 		String dosage3 = memberAttributesMap.get("Dosage3");
-		
+
 		WebDriver wd = (WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
 
 		DrugCostEstimatorPage dce = new DrugCostEstimatorPage(wd);
 		dce.validatedrugdosagetext(dosage1, dosage2, dosage3);
-	    
+
 	}
 
 
-@Then("^I should see some others text on the page$")
+	@Then("^I should see some others text on the page$")
 	public void I_should_see_some_x_others_text_on_the_page(DataTable data) {
 		List<DataTableRow> memberAttributesRow = data.getGherkinRows();
 		String otherscount = memberAttributesRow.get(1).getCells().get(0);
-		
+
 		WebDriver wd = (WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
 
 		DrugCostEstimatorPage dce = new DrugCostEstimatorPage(wd);
 		dce.validatemesgmoredrugsothertext(otherscount);
-	    
+
 	}
 
 
-@Then("^I will see introductory text that will display the summary header$")
+	@Then("^I will see introductory text that will display the summary header$")
 	public void I_will_see_introductory_text_that_will_display_the_summary_header() {
-	    // Express the Regexp above with the code you wish you had
+		// Express the Regexp above with the code you wish you had
 		WebDriver wd = (WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
 
 		DrugCostEstimatorPage dce = new DrugCostEstimatorPage(wd);
@@ -404,20 +404,20 @@ public class DrugcostestimatorUhcStepDefinition {
 	}
 
 
-@When("^I access the page containing the DCE tool$")
+	@When("^I access the page containing the DCE tool$")
 	public void I_access_the_page_containing_the_DCE_tool() {
-		
+
 		WebDriver wd = (WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
 
 		DrugCostEstimatorPage dce = new DrugCostEstimatorPage(wd);
 		dce.changeUrlToNewDCEPage();
-	    
+
 	}
 
 
-@Then("^I should not see the drug with Dosage in the list$")
+	@Then("^I should not see the drug with Dosage in the list$")
 	public void I_should_not_see_the_drug_with_Dosage_in_the_list(DataTable data) {
-		
+
 		List<DataTableRow> memberAttributesRow = data.getGherkinRows();
 		String dosage = memberAttributesRow.get(1).getCells().get(0);
 		DrugCostEstimatorPage dce = new DrugCostEstimatorPage((WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER));
@@ -425,21 +425,21 @@ public class DrugcostestimatorUhcStepDefinition {
 	}
 
 
-@When("^I delete the drug with Dosage$")
+	@When("^I delete the drug with Dosage$")
 	public void I_delete_the_drug_with_Dosage(DataTable data) throws InterruptedException {
 		List<DataTableRow> memberAttributesRow = data.getGherkinRows();
 		String dosage = memberAttributesRow.get(1).getCells().get(0);
-		
+
 		DrugCostEstimatorPage dce = new DrugCostEstimatorPage((WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER));
 		dce.deleteDrugsByDosage(dosage);
-	    
+
 	}
 
 
 
-@When("^I edit the drug with Dosage and Quantity and frequency$")
+	@When("^I edit the drug with Dosage and Quantity and frequency$")
 	public void I_edit_the_drug_as_with_Dosage_and_Quantity_and_frequency(DataTable memberAttributes) throws Exception {
-		
+
 		List<DataTableRow> memberAttributesRow = memberAttributes
 				.getGherkinRows();
 		Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
@@ -448,12 +448,12 @@ public class DrugcostestimatorUhcStepDefinition {
 			memberAttributesMap.put(memberAttributesRow.get(i).getCells()
 					.get(0), memberAttributesRow.get(i).getCells().get(1));
 		}
-		
+
 		String drug = memberAttributesMap.get("Drug");
 		String dosage = memberAttributesMap.get("Dosage");
 		String quantity = memberAttributesMap.get("Quantity");
 		String frequency = memberAttributesMap.get("Frequency");
-		
+
 		WebDriver wd = (WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
 		DrugCostEstimatorPage dce = new DrugCostEstimatorPage(wd);
 		AddDrugDetails adddrugdetails = dce.navigateToEditDrug(drug);
@@ -461,19 +461,19 @@ public class DrugcostestimatorUhcStepDefinition {
 		adddrugdetails.selectQnty(quantity);
 		adddrugdetails.selectFrequency(frequency);
 		adddrugdetails.continueAddDrugDetails();
-		
+
 		// Saving Opportunity Details
-				SavingsOppurtunity savingsOppurtunity = new SavingsOppurtunity(wd);
-				savingsOppurtunity.savedrugbutton();
-		
+		SavingsOppurtunity savingsOppurtunity = new SavingsOppurtunity(wd);
+		savingsOppurtunity.savedrugbutton();
+
 	}
 
 
 
-@Then("^I should see drug with Dosage and Quantity and frequency added to the list$")
+	@Then("^I should see drug with Dosage and Quantity and frequency added to the list$")
 	public void I_should_see_drug_with_Dosage_and_Quantity_and_frequency_added_to_the_list(DataTable memberAttributes) {
-	    // Express the Regexp above with the code you wish you had
-	//	WebDriver wd = (WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
+		// Express the Regexp above with the code you wish you had
+		//	WebDriver wd = (WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
 		List<DataTableRow> memberAttributesRow = memberAttributes
 				.getGherkinRows();
 		Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
@@ -482,18 +482,18 @@ public class DrugcostestimatorUhcStepDefinition {
 			memberAttributesMap.put(memberAttributesRow.get(i).getCells()
 					.get(0), memberAttributesRow.get(i).getCells().get(1));
 		}
-		
+
 		String dosage = memberAttributesMap.get("Dosage");
 		String quantity = memberAttributesMap.get("Quantity");
 		String frequency = memberAttributesMap.get("Frequency");
-		
+
 		DrugCostEstimatorPage dce = new DrugCostEstimatorPage((WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER));
 		dce.validateAddedDrug(dosage,quantity,frequency);
 	}
 
 
 
-@When("^I add the drug which does not have its generic with Dosage and Quantity and frequency to the list$")
+	@When("^I add the drug which does not have its generic with Dosage and Quantity and frequency to the list$")
 	public void I_add_the_drug_which_doesnot_have_its_generic_with_Dosage_and_Quantity_and_frequency_to_the_list(DataTable memberAttributes) throws Exception {
 		List<DataTableRow> memberAttributesRow = memberAttributes
 				.getGherkinRows();
@@ -503,33 +503,33 @@ public class DrugcostestimatorUhcStepDefinition {
 			memberAttributesMap.put(memberAttributesRow.get(i).getCells()
 					.get(0), memberAttributesRow.get(i).getCells().get(1));
 		}
-		
+
 		String drug = memberAttributesMap.get("Drug");
 		String dosage = memberAttributesMap.get("Dosage");
 		String quantity = memberAttributesMap.get("Quantity");
 		String frequency = memberAttributesMap.get("Frequency");
-		
+
 		WebDriver wd = (WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
 
 		DrugCostEstimatorPage dce = new DrugCostEstimatorPage(wd);
 		//dce.changeUrlToNewDCEPage();
 		AddNewDrugModal addNewDrugModal = dce.clickOnAddDrug();
 		addNewDrugModal.clickonSearchButton(drug);
-		
+
 		//AddDrugDetails addDrugDetails = new AddDrugDetails(wd);
-		
+
 		AddDrugDetails adddrugdetails = addNewDrugModal.continueAddNewDrugModal();
 		adddrugdetails.selectDosage(dosage);
 		adddrugdetails.selectQnty(quantity);
 		adddrugdetails.selectFrequency(frequency);
-        adddrugdetails.continueAddDrugDetails();
-	    
+		adddrugdetails.continueAddDrugDetails();
+
 	}
 
 
-@When("^I add the drug with Dosage and Quantity and frequency to the list$")
+	@When("^I add the drug with Dosage and Quantity and frequency to the list$")
 	public void I_add_the_drug_as_with_Dosage_and_Quantity_and_frequency_to_the_list(DataTable memberAttributes) throws Exception {
-		
+
 		List<DataTableRow> memberAttributesRow = memberAttributes
 				.getGherkinRows();
 		Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
@@ -538,32 +538,173 @@ public class DrugcostestimatorUhcStepDefinition {
 			memberAttributesMap.put(memberAttributesRow.get(i).getCells()
 					.get(0), memberAttributesRow.get(i).getCells().get(1));
 		}
-		
+
 		String drug = memberAttributesMap.get("Drug");
 		String dosage = memberAttributesMap.get("Dosage");
 		String quantity = memberAttributesMap.get("Quantity");
 		String frequency = memberAttributesMap.get("Frequency");
-		
+
 		WebDriver wd = (WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
 
 		DrugCostEstimatorPage dce = new DrugCostEstimatorPage(wd);
 		//dce.changeUrlToNewDCEPage();
 		AddNewDrugModal addNewDrugModal = dce.clickOnAddDrug();
 		addNewDrugModal.clickonSearchButton(drug);
-		
+
 		//AddDrugDetails addDrugDetails = new AddDrugDetails(wd);
-		
+
 		AddDrugDetails adddrugdetails = addNewDrugModal.continueAddNewDrugModal();
 		adddrugdetails.selectDosage(dosage);
 		adddrugdetails.selectQnty(quantity);
 		adddrugdetails.selectFrequency(frequency);
-        adddrugdetails.continueAddDrugDetails();
-        
-		
+		adddrugdetails.continueAddDrugDetails();
+
+
 		// Saving Opportunity Details
 		SavingsOppurtunity savingsOppurtunity = new SavingsOppurtunity(wd);
 		savingsOppurtunity.savedrugbutton();
-	    
+
+	}
+
+	@Then("^the drug list tab will display drugs heading$")
+	public void the_drug_list_tab_will_display_drugs_heading(){
+		WebDriver wd = (WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
+
+		DrugCostEstimatorPage dce = new DrugCostEstimatorPage(wd);
+		dce.validatetabdrugheading();
+	}
+
+
+	@And("^I navigate to step2 page$")
+	public void I_navigate_to_step2_page () throws InterruptedException
+	{
+		DrugCostEstimatorPage dce = (DrugCostEstimatorPage) getLoginScenario().getBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE);
+		dce.navigateToStep2();
+
+	}
+
+	@When("^we search the pharmacy within miles zipcode and pharmacy type$")
+	public void we_search_the_pharmacy_within_miles_zipcode_and_pharmacy_type(DataTable memberAttributes) throws InterruptedException{
+		List<DataTableRow> memberAttributesRow = memberAttributes
+				.getGherkinRows();
+		Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells()
+					.get(0), memberAttributesRow.get(i).getCells().get(1));
+		}
+
+		String zipcode = memberAttributesMap.get("Zipcode");
+		String radius = memberAttributesMap.get("Radius");
+		String Pharmacy_type = memberAttributesMap.get("Pharmacy Type");
+		DrugCostEstimatorPage dce = (DrugCostEstimatorPage) getLoginScenario().getBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE);
+		//dce.validateZipcode(zipcode);
+		dce.selectRadius();
+		Thread.sleep(10000);
+		dce.selectZipcode(zipcode);
+		dce.selectPharmacyType(Pharmacy_type);
+		Thread.sleep(2000);
+		dce.clickstep2Search();
+		Thread.sleep(10000);
+
+	}
+
+	@Then("^I should see pharmacy results as per the filter$")
+	public void we_search_the_pharmacy_within_miles_zipcode_and_pharmacy_type()
+	{
+		DrugCostEstimatorPage dce = (DrugCostEstimatorPage) getLoginScenario().getBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE);
+		dce.validatePharmacylist();
+
+	}
+
+	@Then("^I should able to select all miles option from dropdown$")
+	public void I_should_able_to_select_all_miles_option_from_dropdown() throws InterruptedException {
+
+		DrugCostEstimatorPage dce = (DrugCostEstimatorPage) getLoginScenario().getBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE);
+		dce.validateselectRadius(); 
+	}
+
+	@Then("^I should able to select all the pharmacy type$")
+	public void I_should_able_to_select_all_the_pharmacy_type() throws InterruptedException {
+		DrugCostEstimatorPage dce = (DrugCostEstimatorPage) getLoginScenario().getBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE);  
+		dce.validateselectPharmacyType();
+
+	}
+	@Then("^I should see default miles zipcode and pharmacy type$")
+	public void I_should_see_default_miles_zipcode_and_pharmacy_type(DataTable memberAttributes) {
+
+		List<DataTableRow> memberAttributesRow = memberAttributes
+				.getGherkinRows();
+		Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells()
+					.get(0), memberAttributesRow.get(i).getCells().get(1));
+		}
+
+		System.out.println("========memberAttributesMap==========" +memberAttributesMap+ "-----------");
+
+		String zipcode = memberAttributesMap.get("Zipcode");
+		System.out.println("========zipcode==========" +zipcode+ "-----------");
+		String radius = memberAttributesMap.get("Radius");
+		System.out.println("========radius==========" +radius+ "-----------");
+		String Pharmacy_type = memberAttributesMap.get("Pharmacy Type");
+		System.out.println("========Pharmacy_type==========" +Pharmacy_type+ "-----------");
+		DrugCostEstimatorPage dce = (DrugCostEstimatorPage) getLoginScenario().getBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE);
+		dce.validateDefaultStep2(zipcode, radius, Pharmacy_type);
+	}
+
+	@When("^I select the first pharmacy$")
+	public void I_select_the_drug() throws InterruptedException {
+
+		DrugCostEstimatorPage dce = (DrugCostEstimatorPage) getLoginScenario().getBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE);
+		dce.select_first_pharmacy();
+
+	}
+
+	@When("^I select the Pharmacy type$")
+	public void I_select_the_Pharmacy_type(DataTable arg1) throws InterruptedException {
+		List<DataTableRow> memberAttributesRow = arg1.getGherkinRows();
+		DrugCostEstimatorPage dce = (DrugCostEstimatorPage) getLoginScenario().getBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE);
+		String phar_type = memberAttributesRow.get(0).getCells().get(1);
+		dce.selectPharmacyType(phar_type);
+	}
+
+	@Then("^I should not see cost saving message for this pharmacy$")
+	public void I_should_not_see_cost_saving_message_for_this_pharmacy() {
+
+		DrugCostEstimatorPage dce = (DrugCostEstimatorPage) getLoginScenario().getBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE);
+		dce.validate_cost_saving_not_present();
+
+	}
+
+
+	@Then("^I should see cost saving message for this pharmacy$")
+	public void I_should_see_cost_saving_message_for_this_pharmacy(DataTable arg1) {
+
+		List<DataTableRow> memberAttributesRow = arg1.getGherkinRows();
+		DrugCostEstimatorPage dce = (DrugCostEstimatorPage) getLoginScenario().getBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE);
+		String pharmacy_type = memberAttributesRow.get(0).getCells().get(1);
+		dce.validate_cost_saving_present(pharmacy_type);
+	}
+
+	@Then("^I should not see pharmacy saver radio button under pharmacy type$")
+	public void I_should_not_see_pharmacy_saver_radio_button_under_pharmacy_type() {
+
+		//List<DataTableRow> memberAttributesRow = arg1.getGherkinRows();
+		DrugCostEstimatorPage dce = (DrugCostEstimatorPage) getLoginScenario().getBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE);
+		//.dceString pharmacy_type = memberAttributesRow.get(0).getCells().get(1);
+		dce.validate_pharmacy_type_saver_not_present();
+
+	}
+
+	@Then("^I should see pharmacy saver pharmacies in results$")
+	public void I_should_see_pharmacy_saver_pharmacies_in_results() {
+
+		//List<DataTableRow> memberAttributesRow = arg1.getGherkinRows();
+		DrugCostEstimatorPage dce = (DrugCostEstimatorPage) getLoginScenario().getBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE);
+		//.dceString pharmacy_type = memberAttributesRow.get(0).getCells().get(1);
+		dce.validate_pharmacy_saver_result();
 	}
 
 
