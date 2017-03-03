@@ -788,6 +788,7 @@ public class MRScenario {
 		}
 		fileName = fileName + ".json";
 		System.out.println("Loading file: " + directory + fileName);
+		
 		JSONObject jsonObject = null;
 		String parentDirectory = null;
 		try {
@@ -840,6 +841,10 @@ public class MRScenario {
 		} catch (JSONException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		}
+		
+		if (fileName.equalsIgnoreCase("DentalPlatinumLis2.json")) {
+			System.out.println("Value => " + jsonObject);
 		}
 		return jsonObject;
 	}

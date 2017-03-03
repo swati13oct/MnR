@@ -117,7 +117,9 @@ public class FormsandresourcesPage extends UhcDriver {
 		
 		System.out.println(null == globalExpectedJson ? "globalExpectedJson is null" : "globalExpectedJson is not null" );
 		System.out.println(null == formsAndResourcesExpectedJson ? "formsAndResourcesExpectedJson is null" : "formsAndResourcesExpectedJson is not null" );
+		System.out.println("=========================================================");
 		System.out.println("globalExpectedJson"+globalExpectedJson);
+		System.out.println("---------------------------------------------------------");
 		System.out.println("formsAndResourcesExpectedJson"+formsAndResourcesExpectedJson);
 		System.out.println("=========================================================");
 		
