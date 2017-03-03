@@ -787,6 +787,7 @@ public class MRScenario {
 			fileName = fileName.replaceAll("/", "_");
 		}
 		fileName = fileName + ".json";
+		System.out.println("Loading file: " + directory + fileName);
 		JSONObject jsonObject = null;
 		String parentDirectory = null;
 		try {
