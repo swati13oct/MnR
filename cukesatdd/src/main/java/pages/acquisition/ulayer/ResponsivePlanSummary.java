@@ -79,6 +79,10 @@ public class ResponsivePlanSummary extends UhcDriver{
 		private WebElement countyNameDetail;
 		
 		
+		@FindBy(xpath = "//*[@class='tab med-supp']/div[1]/span[3]")
+		private WebElement showMsPlans;
+		
+		
 
 	private PageData vppPlanSummary;
 
@@ -99,6 +103,8 @@ public class ResponsivePlanSummary extends UhcDriver{
 
 	@Override
 	public void openAndValidate() {
+		
+		validate(showMsPlans);
 		
 	//	validate(viewMaPlans);
 	//	validate(viewPdpPlans);
@@ -206,7 +212,16 @@ public ResponsivePlanSummary viewPlanSummary(String planType) {
 		System.out.println("inside MA");
 		showMaPlans.click();
 	}
+	else if (planType.equalsIgnoreCase("MS")) {
+		showMsPlans.click();
+		if (driver
+				.getTitle()
+				.equalsIgnoreCase(
+						"AARP Medicare Supplement Insurance Plans")){
 	return new ResponsivePlanSummary(driver);
+}
+	}
+	return null;
 }
  
 	public void validateStickyZipcode(String actualZipcode){

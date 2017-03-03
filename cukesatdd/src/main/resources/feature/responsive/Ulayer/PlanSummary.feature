@@ -93,3 +93,16 @@ And the user enter information to Get Email Update widget and submit in AARP sit
 Examples:
 		|zipCode|county            |planType	|  firstname | lastname | emailaddress |
 		|90210  |Los Angeles County|PDP        |	 Eva        | Zhong     |weixin.zhong@optum.com|
+		
+
+@medsupp
+Scenario Outline: To view medsupp plan in VPP		
+Given the user is on the vpp portfolio page
+Then the user performs plan serach using zipcode
+		| Zip Code |<zipCode>|
+		| County   |<county> |
+Then the user navigates to the following plan type
+	| Plan Type | <planType> |
+Examples:
+		|zipCode|county            |planType	|
+		|90210  |Los Angeles County|MS        |	
