@@ -925,7 +925,7 @@ public class MRScenario {
 				caps.setCapability(PhantomJSDriverService.PHANTOMJS_PAGE_SETTINGS_PREFIX + "userAgent", agent);
 				caps.setJavascriptEnabled(true);
 				caps.setCapability(PhantomJSDriverService.PHANTOMJS_CLI_ARGS,
-						new String[] { "--web-security=no", "--ignore-ssl-errors=yes", "--ssl-protocol=tlsv1" });
+						new String[] { "--web-security=no", "--ignore-ssl-errors=yes", "--ssl-protocol=any" });
 				
 				//end from jarvis
 				webDriver = new PhantomJSDriver(caps);

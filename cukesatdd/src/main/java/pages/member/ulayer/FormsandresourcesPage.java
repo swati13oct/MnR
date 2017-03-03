@@ -114,6 +114,10 @@ public class FormsandresourcesPage extends UhcDriver {
 				.get(CommonConstants.GLOBAL);
 		JSONObject formsAndResourcesExpectedJson = expectedDataMap
 				.get(CommonConstants.FORMS_AND_RESOURCES);
+		
+		System.out.println(null == globalExpectedJson ? "globalExpectedJson is null" : "globalExpectedJson is not null" );
+		System.out.println(null == formsAndResourcesExpectedJson ? "formsAndResourcesExpectedJson is null" : "formsAndResourcesExpectedJson is not null" );
+		
 		formsAndResourcesExpectedJson = CommonUtility.mergeJson(
 				formsAndResourcesExpectedJson, globalExpectedJson);
 		return formsAndResourcesExpectedJson;

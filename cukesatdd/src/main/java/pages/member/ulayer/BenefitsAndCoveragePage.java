@@ -52,7 +52,8 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 	@FindBy(className = "changepcp-atdd")
 	private WebElement changePcp;
 
-	@FindBy(xpath = ".//*[@id='planBenefitsApp']/div[7]/div[1]/div/div[2]/div[2]/div[2]/div/div[2]/div/div/button")
+	//@FindBy(xpath = ".//*[@id='planBenefitsApp']/div[7]/div[1]/div/div[2]/div[2]/div[2]/div/div[2]/div/div/button")
+	@FindBy(id = "btnAddThisRider")
 	private WebElement addRiderButton;
 	
 	@FindBy(className = "btn_addRider_atdd")
