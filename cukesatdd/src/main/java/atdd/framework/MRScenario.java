@@ -846,7 +846,9 @@ public class MRScenario {
 
 	public Map<String, JSONObject> getExpectedJson(String user) {
 
+		System.out.println(">>>>>>>>>>>  Searching for Expected Data for " + user + "<<<<<<<<<<<<<<");
 		if (null != user && expectedDataMapUlayer.containsKey(user)) {
+			System.out.println(">>>>>>>>>>>  Expected Data Found for " + user + "<<<<<<<<<<<<<<");
 			return expectedDataMapUlayer.get(user);
 		}
 
