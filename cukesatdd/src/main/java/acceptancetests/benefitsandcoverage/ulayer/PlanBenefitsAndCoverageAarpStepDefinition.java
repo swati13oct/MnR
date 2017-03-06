@@ -406,7 +406,7 @@ public class PlanBenefitsAndCoverageAarpStepDefinition {
 
 	}
 
-	@Then("^the user validates the content on benefits and coverage page")
+//	@Then("^the user validates the content on benefits and coverage page")
 	public void validateContentOnBenefitsAndCoveragePage() {
 		
 		try {
@@ -510,6 +510,8 @@ public class PlanBenefitsAndCoverageAarpStepDefinition {
 	public void tearDown() {
 
 		WebDriver wd = (WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
-		wd.quit();
+		if(wd!=null){
+			wd.quit();
+		}
 	}
 }

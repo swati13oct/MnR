@@ -31,7 +31,8 @@ public class LoginPage extends UhcDriver {
 	private static String PAGE_URL = MRConstants.UHCM_URL;
 	
 
-	@FindBy(xpath = "//button[@id='fd_memberSignInButton' or @id='accessURAccountBTN']")
+	//@FindBy(xpath = "//button[@id='fd_memberSignInButton' or @id='accessURAccountBTN']")
+	@FindBy(id = "fd_memberSignInButton")
 	private WebElement loginIn;
 
 	@FindBy(id = "loginPOPUPuser")
