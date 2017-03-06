@@ -787,7 +787,6 @@ public class MRScenario {
 			fileName = fileName.replaceAll("/", "_");
 		}
 		fileName = fileName + ".json";
-		System.out.println("Loading file: " + directory + fileName);
 		
 		JSONObject jsonObject = null;
 		String parentDirectory = null;
@@ -844,7 +843,8 @@ public class MRScenario {
 		}
 		
 		if (fileName.equalsIgnoreCase("DentalPlatinumLis2.json")) {
-			System.out.println("Value => " + jsonObject);
+			System.out.println("***File:" + parentDirectory + DIRECTORY
+					+ directory + fileName + "Value => " + jsonObject);
 		}
 		return jsonObject;
 	}
