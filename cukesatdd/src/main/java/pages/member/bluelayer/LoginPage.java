@@ -32,7 +32,8 @@ public class LoginPage extends UhcDriver {
 	
 
 	//@FindBy(xpath = "//button[@id='fd_memberSignInButton' or @id='accessURAccountBTN']")
-	@FindBy(id="fd_memberSignInButton")
+	@FindBy(id = "fd_memberSignInButton")
+
 	private WebElement loginIn;
 
 	@FindBy(id = "loginPOPUPuser")

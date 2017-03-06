@@ -147,7 +147,7 @@ public class ContactUsUmsStepDefinition {
 
 	}
 	
-	@And("^user validates secure email sign in widget$")
+//	@And("^user validates secure email sign in widget$")
 	public void user_validates_secure_email_widget()
 	{
 		ContactUsPage contactus=(ContactUsPage)getLoginScenario().getBean(PageConstants.CONTACT_US_PAGE);

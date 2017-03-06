@@ -9,7 +9,7 @@ Then the user validates the complete profile in UMS site
 Examples:
 	    | planType | memberType |
 	#	| MA       | Individual |
-		| MAPD     | Individual |
+	#	| MAPD     | Individual |
 	#	| MA       | Group      |   
 	#	| MAPD     | Group      |
 	#	| PDP      | Group      |
@@ -112,7 +112,8 @@ When the user navigates to My Profiles in UMS site
 And the add plan link should be hidden in UMS site
 Examples:
 	        | plantype | memberType |
-		| MA       | GROUP |
+		#| MA       | GROUP |
 		#| MAPD     | INDIVIDUAL |
+		| MAPD       | GROUP |
 
 

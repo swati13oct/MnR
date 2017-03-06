@@ -699,7 +699,7 @@ Examples:
 
 
 
-
+@bncfnf
 Scenario Outline:To verify Add Plan link not available on plan and benefits page for members in UMS site
 Given registered member to login in UMS site
 	| Plan Type   | <planType>   |
@@ -711,21 +711,23 @@ Then validates that add plans tab is not available
 Examples:
 
 | planType | memberType | groupType |
-| MAPD     | Group      | ALPEEHIP  |
+#| MAPD     | Group      | ALPEEHIP  |
 | MA			 | Group	  	| ALPEEHIP  |
 
 
 
 @US463479
-Scenario Outline:To verify pdfs displayed in forms and resources in UMS site
+
+Scenario Outline: To verify pdfs displayed in forms and resources in UMS site
+
 Given registered member to login in UMS site
 	| Plan Type   | <planType>   |
 	| Member Type | <memberType> |
 When the user navigates to benefits and coverage page under my plans in UMS site
 Then I will be able access a PDF flyer in  English,Spanish or Chinese that explains passport benefits when a plan has this feature
-Examples:
 
+Examples:
 
 | planType | memberType  |
 | MA       |Individual |
-| MAPD       |Individual |
+| MAPD     |Individual |
