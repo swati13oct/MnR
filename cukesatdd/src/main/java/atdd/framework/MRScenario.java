@@ -787,6 +787,8 @@ public class MRScenario {
 			fileName = fileName.replaceAll("/", "_");
 		}
 		fileName = fileName + ".json";
+		System.out.println("Loading file: " + directory + fileName);
+		
 		JSONObject jsonObject = null;
 		String parentDirectory = null;
 		try {
@@ -840,12 +842,18 @@ public class MRScenario {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
+		if (fileName.equalsIgnoreCase("DentalPlatinumLis2.json")) {
+			System.out.println("Value => " + jsonObject);
+		}
 		return jsonObject;
 	}
 
 	public Map<String, JSONObject> getExpectedJson(String user) {
 
+		System.out.println(">>>>>>>>>>>  Searching for Expected Data for " + user + "<<<<<<<<<<<<<<");
 		if (null != user && expectedDataMapUlayer.containsKey(user)) {
+			System.out.println(">>>>>>>>>>>  Expected Data Found for " + user + "<<<<<<<<<<<<<<");
 			return expectedDataMapUlayer.get(user);
 		}
 
