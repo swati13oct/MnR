@@ -901,6 +901,7 @@ public class MRScenario {
 		    String userAgent = "Mozilla/5.0 (Windows NT 6.0) AppleWebKit/533.1 (KHTML, like Gecko) Version/4.0 Mobile Safari/533.1";
 		    System.setProperty("phantomjs.page.settings.userAgent", userAgent);
 		    WebDriver webDriver = new PhantomJSDriver(caps); 
+		    webDriver.manage().timeouts().pageLoadTimeout(120,TimeUnit.SECONDS);
 		    webDriver.manage().window().maximize();
 		
 		

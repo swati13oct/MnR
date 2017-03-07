@@ -205,16 +205,18 @@ public class PortfolioPage extends UhcDriver {
 	}
  
  public ResponsivePlanSummary searchPlans(String zipcode, String CountyName) {
-	    driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+//	    driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 //	    WebDriverWait wait = new WebDriverWait(driver, 40);
 //	    WebElement element = wait.until(ExpectedConditions.elementToBeClickable(By.id("zipcode")));
 	    
 	    
 	    
-	    WebElement element =findNoSuchElement(By.id("zipcode"));
+//	    WebElement element =findNoSuchElement(By.id("zipcode"));
 	    
-	    sendkeys(element, zipcode);
-	    element.sendKeys(Keys.ENTER);
+	//    sendkeys(element, zipcode);
+	//    element.sendKeys(Keys.ENTER);
+	    sendkeys(zipCodeField, zipcode);
+	    zipCodeField.sendKeys(Keys.ENTER);
 	    //remove thread once page is stable
 	    try {
 			Thread.sleep(10000);
