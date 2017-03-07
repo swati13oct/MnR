@@ -59,6 +59,8 @@ And I should see Drug List as an active tab in the DCE tool upon click
 And I should be able to click on Add a Drug
 And the Add a Drug search modal should launch
 And I fail to enter at least four characters of the drug name when attempting to advance in the flow
+|drug|
+|Lip|
 Then I should see a default system error message from the current state error messages in the portal database
 Examples:
  | planType  | memberType  |
@@ -332,6 +334,8 @@ And I should see Drug List as an active tab in the DCE tool upon click
 And I should be able to click on Add a Drug
 And the Add a Drug search modal should launch
 And I fail to enter at least four characters of the drug name when attempting to advance in the flow
+|drug|
+|Lip|
 Then I should see a default system error message from the current state error messages in the portal database
 Examples:
  | planType  | memberType  |
@@ -459,4 +463,51 @@ Then I should not see pharmacy saver radio button under pharmacy type
  Examples:
 | planType | memberType|
 | MA     |Individual_non_pharmacy_saver |
+ 
+ 
+ 
+ #----------------------------------
+#q1_feb_combo031  018378074-1
+@drug_cost_estimatorstep6
+Scenario Outline: Drug Cost Estimator verifies to see which pharmacies in the network associated with my plan are Preferred Retail Pharmacy 
+Given I am a registered member using the new M&R member portal on a desktop computer
+| Plan Type   | <planType>   |
+| Member Type	  | <memberType> |
+When the above plantype user logs in UMS Site Desktop
+And I access the page containing the DCE tool
+And I navigate to step2 page
+Then I should see pharmacy type radio button is selected
+|Pharmacy Type|<pharmacytype1>|
+And I should see preferred retail pharmacies as per the filter
+When I select the pharmacy type
+|Pharmacy Type|<pharmacytype2>|
+Then I should see pharmacy type radio button is selected
+|Pharmacy Type|<pharmacytype2>|
+When I select the pharmacy type
+|Pharmacy Type|<pharmacytype1>|
+Then I should see pharmacy type radio button is selected
+|Pharmacy Type|<pharmacytype1>|
+
+ Examples:
+| planType | memberType|pharmacytype1|pharmacytype2|
+| PDP     |Individual_pharmacy_retail |Preferred Retail|Standard Network|
+
+
+#----------------------------------
+#q1_feb_ulayer001 006745945-1
+
+@drug_cost_estimatorstep7
+Scenario Outline: Drug Cost Estimator verifies to see which pharmacies in the network associated with my plan are Preferred Retail Pharmacy - Negative test
+Given I am a registered member using the new M&R member portal on a desktop computer
+| Plan Type   | <planType>   |
+| Member Type	  | <memberType> |
+When the above plantype user logs in UMS Site Desktop
+And I access the page containing the DCE tool
+And I navigate to step2 page
+Then I should not see pharmacy button radio button under pharmacy type
+|Pharmacy Type|<pharmacytype1>|
+
+ Examples:
+| planType | memberType|pharmacytype|
+| MAPD     |Individual_pharmacy_saver |Preferred Retail|
  

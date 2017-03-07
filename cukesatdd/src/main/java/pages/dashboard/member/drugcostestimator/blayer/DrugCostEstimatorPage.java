@@ -156,6 +156,16 @@ public class DrugCostEstimatorPage extends UhcDriver{
 	@FindBy(xpath="//ul[@class='pharmacy-list']/li[1]/div//span[contains (text(), '  total annual drug cost')]")
 	public WebElement text_total_annual_drug_cost;
 
+	@FindBy(id="retail-type")
+	public WebElement pharmacy_retail_type;
+
+	@FindBy(id="standard-type")
+	public WebElement pharmacy_standard_type;
+	
+	@FindBy(xpath="//ul[@class='pharmacy-list']/li[1]")
+	public WebElement first_pharmacy_record;
+	
+
 	@Override
 	public void openAndValidate() {
 
@@ -195,8 +205,9 @@ public class DrugCostEstimatorPage extends UhcDriver{
 		return null;
 	}
 	public void changeUrlToNewDCEPage() {
-
-		String NewDCEUrl = "https://member.team-b-uhcmedicaresolutions.uhc.com/content/dashboard/home/drug-cost-estimator.html";
+      
+		//String NewDCEUrl = "https://member.team-b-uhcmedicaresolutions.uhc.com/content/dashboard/home/drug-cost-estimator.html";
+		String NewDCEUrl = "https://member.team-b-aarpmedicareplans.uhc.com/content/dashboard/home/drug-cost-estimator.html#/drug-cost-estimator";
 		//String NewDCEUrl = "https://www.team-b-uhcmedicaresolutions.uhc.com/content/dashboard/home/drug-cost-estimator.html";
 		driver.get(NewDCEUrl);
 
@@ -255,7 +266,7 @@ public class DrugCostEstimatorPage extends UhcDriver{
 			addNewDrugModal.submit();
 			addNewDrugModal.selectDrug(drug);
 			AddDrugDetails addDrugDetails = new AddDrugDetails(driver);
-			addDrugDetails.selectQnty(i+"");
+			addDrugDetails.selectQnty(i+""); 
 			addDrugDetails.continueAddDrugDetails();
 			SavingsOppurtunity savingsOppurtunity  = new SavingsOppurtunity(driver);
 			savingsOppurtunity.savedrugbutton();
@@ -267,9 +278,10 @@ public class DrugCostEstimatorPage extends UhcDriver{
 		return drugs.size();
 	}
 
-	public void navigateToStep2(){
+	public void navigateToStep2() throws InterruptedException{
 		waitforElement(step2);
 		step2.click();
+		Thread.sleep(10000);
 	}
 
 	public void backwardToStep1(){
@@ -538,5 +550,63 @@ public class DrugCostEstimatorPage extends UhcDriver{
 		Assert.assertTrue(text_total_annual_drug_cost.isDisplayed());	
 		//text_total_annual_drug_cost.getSize()	
 	}
+
+	public boolean validate_selected_pharmacy_type(String pharmacy_type)
+	{ 
+		if (pharmacy_type =="Preferred Retail")
+		{
+			Assert.assertTrue(pharmacy_type+"is not selected", pharmacy_retail_type.isSelected());
+			return true;
+		}
+		else if(pharmacy_type =="Pharmacy Saver")	
+		{
+			Assert.assertTrue(pharmacy_type+"is not selected", pharmacy_saver_type.isSelected());
+			return true;
+		}
+		else if(pharmacy_type =="Standard Network")	
+		{
+			Assert.assertTrue(pharmacy_type+"is not selected", pharmacy_standard_type.isSelected());
+			return true;
+		}
+		else  
+			return false;
+	}
+
+	public boolean validate_pharmacy_type_not_present(String pharmacy_type)
+	{ 
+		if (pharmacy_type =="Preferred Retail")
+		{ 
+			if(driver.findElements(By.id("pharmacy_retail_type")).size()<1)
+				return true;
+			else return false;
+		}
+		else if(pharmacy_type =="Pharmacy Saver")	
+		{
+			if(driver.findElements(By.id("pharmacy_saver_type")).size()<1)
+				return true;
+			else return false;
+		}
+		else if(pharmacy_type =="Standard Network")	
+		{
+			if(driver.findElements(By.id("pharmacy_standard_type")).size()<1)
+				return true;
+			else return false;
+		}
+		else  
+			return false;
+	}
+
+   public boolean verify_preferred_retail_pharmacy_result()
+   {
+	   String first_phar_result_record = first_pharmacy_record.getText();
+	   if(first_phar_result_record.contains("Walgreens")&& first_phar_result_record.contains("3320 Chino Hills Pkwy")&& first_phar_result_record.contains("2.81 mi."))
+	   {
+		   return true;
+	   }
+	   
+	   else
+		   return false;
+   }
+
 }
 
