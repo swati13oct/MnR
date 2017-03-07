@@ -22,24 +22,24 @@
 "elementName":"welcomeText"
 },
 "estimateCostLink":{
-"identifier":"linkText",
-"elementName":"estimate costs"
+"identifier":"xpath",
+"elementName":"//[@id='_content_campaigns_uhcm_home-myresources-main_home-myresources-main_jcr_content_par_teaser_2']/div/div[2]/a/span"
 },
 "pharmacyLocatorLink":{
-"identifier":"linkText",
-"elementName":"locate a pharmacy"
+"identifier":"xpath",
+"elementName":"//[@id='_content_campaigns_uhcm_home-myresources-main_home-myresources-main_jcr_content_par_teaser_1']/div/div[2]/a/span"
 },
 "healthWellNessQuesLink":{
 "identifier":"xpath",
-"elementName":"//div[@id='_content_uhcm_home_my-account-home_jcr_content_contentPar_teaser_3']/div/div/div[2]/div/div/a/span"
+"elementName":"//[@id='_content_uhcm_home_my-account-home_jcr_content_contentPar_teaser_3']/div/div/div[2]/div/div/a/span"
 },
 "playBrainGamesLink":{
 "identifier":"xpath",
-"elementName":"//div[@id='_content_uhcm_home_my-account-home_jcr_content_contentPar_teaser_1']/div/div/div[2]/div/div/a/span"
+"elementName":"//[@id='_content_uhcm_home_my-account-home_jcr_content_contentPar_teaser_1']/div/div/div[2]/div/div/a/span"
 },
 "personalHealthRecordLink":{
 "identifier":"xpath",
-"elementName":"//div[@id='_content_uhcm_home_my-account-home_jcr_content_contentPar_teaser_0']/div/div/div[2]/div/div/a/span"
+"elementName":"//[@id='_content_uhcm_home_my-account-home_jcr_content_contentPar_teaser_0']/div/div/div[2]/div/div/a/span"
 },
 "viewClaimsLink":{
 "identifier":"linkText",

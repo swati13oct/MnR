@@ -101,6 +101,7 @@ public abstract class UhcDriver {
 
 	public boolean validate(WebElement element) {
 		try {
+			this.waitforElement(element);
 			if (element.isDisplayed()) {
 				System.out.println("Element found!!!!");
 				return true;
@@ -118,7 +119,7 @@ public abstract class UhcDriver {
 		WebElement element = null;
 		try {
 			if (elementData.getIdentifier().equalsIgnoreCase("id")) {
-				driver.manage().timeouts().implicitlyWait(1, TimeUnit.SECONDS);
+				driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
 				element = driver
 						.findElement(By.id(elementData.getElementName()));
 			} else if (elementData.getIdentifier()

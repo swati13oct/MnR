@@ -119,4 +119,5 @@ Then the user navigates to the following plan type
 	  
 Examples:
 		|zipCode|county            |planType	|
-		|90210  |Los Angeles County|MA        |			
+		|90210  |Los Angeles County|MA        |	
+	#	|90210  |Los Angeles County|MS        |			
