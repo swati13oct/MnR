@@ -791,7 +791,6 @@ public class MRScenario {
 			fileName = fileName.replaceAll("/", "_");
 		}
 		fileName = fileName + ".json";
-		System.out.println("Loading file: " + directory + fileName);
 		
 		JSONObject jsonObject = null;
 		String parentDirectory = null;
@@ -806,6 +805,8 @@ public class MRScenario {
 			stream = new FileInputStream(parentDirectory + DIRECTORY
 					+ directory + fileName);
 		} catch (FileNotFoundException e) {
+			System.out.println("FILE NOT FOUND: " + parentDirectory + DIRECTORY
+					+ directory + fileName);
 			return jsonObject;
 		}
 
@@ -843,21 +844,22 @@ public class MRScenario {
 				jsonObject = new JSONObject(response);
 			}
 		} catch (JSONException e) {
-			// TODO Auto-generated catch block
+			System.out.println("EMPTY RESPONSE: " + parentDirectory + DIRECTORY
+					+ directory + fileName);
 			e.printStackTrace();
 		}
 		
-		if (fileName.equalsIgnoreCase("DentalPlatinumLis2.json")) {
-			System.out.println("Value => " + jsonObject);
-		}
+//		if (fileName.equalsIgnoreCase("DentalPlatinumLis2.json")) {
+//			System.out.println("===>File:" + parentDirectory + DIRECTORY
+//					+ directory + fileName + "Value => " + jsonObject);
+//		}
 		return jsonObject;
 	}
 
 	public Map<String, JSONObject> getExpectedJson(String user) {
 
-		System.out.println(">>>>>>>>>>>  Searching for Expected Data for " + user + "<<<<<<<<<<<<<<");
+		
 		if (null != user && expectedDataMapUlayer.containsKey(user)) {
-			System.out.println(">>>>>>>>>>>  Expected Data Found for " + user + "<<<<<<<<<<<<<<");
 			return expectedDataMapUlayer.get(user);
 		}
 
