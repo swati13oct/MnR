@@ -15,7 +15,7 @@ import cucumber.junit.Cucumber;
 @Cucumber.Options(glue = { "atdd.framework","acceptancetests.benefitsandcoverage" }, 
 		features = { "feature/debug" }, 
 		format = {
-		"pretty", "html:reports/test-report" }, tags ={"@jantolakTest, @replaceRider"})
+		"pretty", "html:reports/test-report" }, tags ={"@availableRiders"})
 public class AntolakRunTestChat {
 
 }
