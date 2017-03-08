@@ -218,7 +218,7 @@ public ResponsivePlanSummary viewPlanSummary(String planType) {
 				.getTitle()
 				.equalsIgnoreCase(
 						"AARP Medicare Supplement Insurance Plans")){
-	return new ResponsivePlanSummary(driver);
+//	return new ResponsivePlanSummary(driver);
 }
 	}
 	return null;
