@@ -1,5 +1,5 @@
 
-@exampleAllTest
+@exampleAll
 Feature: To run successful test using PhatonJS in Jenkins
 
   @Example1 @jantolakTest
