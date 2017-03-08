@@ -1,8 +1,8 @@
 
-@jantolak
+@exampleAllTest
 Feature: To run successful test using PhatonJS in Jenkins
 
-  @jantolakTest
+  @Example1 @jantolakTest
     Scenario Outline: A Successful Test
     Given registered AMP with following details for plan benefits and coverage flow in AARP site
       | Plan Type      | <planType>      |
@@ -13,7 +13,7 @@ Feature: To run successful test using PhatonJS in Jenkins
       | testName | planType | copayCategory |
       | jantolakTest | MA     | NON LIS       |      
       
- @availableRiders
+ @Example2 @availableRiders
   Scenario Outline: Verify Federal Available Riders Dental Platinum on benefits and coverage in AARP site for MAPD Lis 2 member
     Given registered AMP with following details for plan benefits and coverage flow in AARP site
       | Plan Type      | <planType>      |
@@ -29,7 +29,7 @@ Feature: To run successful test using PhatonJS in Jenkins
       | availableRiders | MAPD     | LIS 2         |
       
       
- @replaceRider
+ @Example3 @replaceRider
   Scenario Outline: Verify Replace Rider Pop Up for Federal Available Dental Platinum Riders
     Given registered AMP with following details for plan benefits and coverage flow in AARP site
       | Plan Type      | <planType>      |
