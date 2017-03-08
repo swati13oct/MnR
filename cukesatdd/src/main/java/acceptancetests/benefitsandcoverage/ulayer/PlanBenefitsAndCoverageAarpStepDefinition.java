@@ -577,6 +577,14 @@ public class PlanBenefitsAndCoverageAarpStepDefinition {
 
 	}
 	
+	@Then("^Replace rider popup appears and clicks Replace Rider button$")
+    public void Replace_rider_popup_appears_and_clicks_Replace_Rider_button() throws Exception {
+           BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario().getBean(
+                        PageConstants.BENEFITS_COVERAGE_PAGE);
+           benefitsCoveragePage.validateReplaceRiderPopup();
+    }
+
+	
 
 	
 //	@After
