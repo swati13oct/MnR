@@ -231,5 +231,26 @@ public class ResponsiveStepDefiniton {
 		requestSendEmailPage.sendEmailByClickSummbitButtonOnEmailWidget(firstName, lastName, emailAddress);	
 	}
 	
-	
+	@And("^the user validates navigates plan selector page and validates the contents$")
+	public void user_navigates_to_plan_selector_page(){
+ 		ResponsivePlanSummary planSummary = (ResponsivePlanSummary) getLoginScenario().getBean(PageConstants.RESPONSIVE_PLAN_SUMMARY_PAGE);
+        planSummary.navigateToPlanSelectorPage();
+	}
+	@And("^user navigates to provider search page$")
+	public void user_navigates_to_provider_search_page(DataTable givenAttributes){
+ 		ResponsivePlanSummary planSummary = (ResponsivePlanSummary) getLoginScenario().getBean(PageConstants.RESPONSIVE_PLAN_SUMMARY_PAGE);
+ 		List<DataTableRow> memberAttributesRow = givenAttributes
+				.getGherkinRows();
+		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells()
+					.get(0), memberAttributesRow.get(i).getCells().get(1));
+		}
+
+		String planName = memberAttributesMap.get("Plan Name");
+		System.out.println(planName);
+		getLoginScenario().saveBean(VPPCommonConstants.PLAN_TYPE, planName);
+ 		planSummary.navigateToRallyPage(planName);
+	}
 }
