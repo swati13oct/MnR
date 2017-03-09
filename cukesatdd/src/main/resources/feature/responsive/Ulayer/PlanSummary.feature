@@ -121,3 +121,16 @@ Examples:
 		|zipCode|county            |planType	|
 		|90210  |Los Angeles County|MA        |	
 	#	|90210  |Los Angeles County|MS        |			
+	Scenario Outline: To validate provider search
+Given the user is on the vpp portfolio page
+Then the user performs plan serach using zipcode
+		| Zip Code |<zipCode>|
+		| County   |<county> |
+Then the user navigates to the following plan type
+	  | Plan Type | <planType> |	
+And user navigates to provider search page
+    | Plan Name |<planName>  |
+
+Examples:
+		|zipCode|county						 |planType|planName																						|
+		|90210  |Los Angeles County|MA      |AARP MedicareComplete SecureHorizons Plan 1 (HMO)  |	

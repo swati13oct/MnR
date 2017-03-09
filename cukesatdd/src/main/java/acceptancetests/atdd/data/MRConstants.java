@@ -211,7 +211,9 @@ public class MRConstants {
   
   public static final String AARP_MOBILE_TEAM_C_URL = "https://member."+MRScenario.environment+"-aarpmedicareplans.uhc.com/mobile/guest/login.html";
 
+
   public static final String PORTFOLIO_PAGE_URL = "https://www.awe-"+MRScenario.environment+"-aarpmedicareplans.uhc.com/health-plans.html";
+
 
   
   public static final String AARP_PORTFOLIO_URL = "https://www."+MRScenario.environment+"-aarpmedicareplans.uhc.com/health-plans/plans.html";

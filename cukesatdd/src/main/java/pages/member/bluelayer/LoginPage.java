@@ -3,6 +3,8 @@
  */
 package pages.member.bluelayer;
 
+import java.util.concurrent.TimeUnit;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.openqa.selenium.Alert;
@@ -63,6 +65,8 @@ public class LoginPage extends UhcDriver {
 	}
 
 	public Object loginWith(String username, String password, String category) {
+		driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
+		this.waitforElement(loginIn);
 		loginIn.click();
 		sendkeys(userNameField, username);
 		sendkeys(passwordField, password);
