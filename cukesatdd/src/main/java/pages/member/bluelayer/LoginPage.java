@@ -8,6 +8,7 @@ import java.util.concurrent.TimeUnit;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.openqa.selenium.Alert;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -34,8 +35,8 @@ public class LoginPage extends UhcDriver {
 	
 
 	//@FindBy(xpath = "//button[@id='fd_memberSignInButton' or @id='accessURAccountBTN']")
-	//@FindBy(id = "fd_memberSignInButton")
-	@FindBy(xpath = "//div[@class='fd_SignIn floatLeft pos_rel']/a")
+	@FindBy(id = "fd_memberSignInButton")
+	//@FindBy(xpath = "//div[@class='fd_SignIn floatLeft pos_rel']/a")
 	private WebElement loginIn;
 
 	@FindBy(id = "loginPOPUPuser")
@@ -44,7 +45,7 @@ public class LoginPage extends UhcDriver {
 	@FindBy(id = "loginPOPUPpass")
 	private WebElement passwordField;
 
-	@FindBy(xpath = "//div[@class='fd_userPassSection fd_memberSignInButton']/button")
+	@FindBy(xpath = "//div[@class='fd_userPassSection']/button")
 	private WebElement signInButton;
 
 	@FindBy(linkText = "Forgot your username or password?")
@@ -58,15 +59,16 @@ public class LoginPage extends UhcDriver {
 	private JSONObject browserCheckJson;
 
 
-	public LoginPage(WebDriver driver) {
+	public LoginPage(WebDriver driver) {		
 		super(driver);
 		PageFactory.initElements(driver, this);
 		openAndValidate();
 	}
 
 	public Object loginWith(String username, String password, String category) {
-		driver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
-		loginIn.click();
+		//driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+		WebElement loginInEle= this.driver.findElement(By.id("fd_memberSignInButton"));
+		loginInEle.click();
 		sendkeys(userNameField, username);
 		sendkeys(passwordField, password);
 		signInButton.click();
@@ -88,8 +90,15 @@ public class LoginPage extends UhcDriver {
 	        Alert alert1 = driver.switchTo().alert();
 	        alert1.accept();
 	        }
+		
+		try {
+			Thread.sleep(10000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
-		if(currentUrl().contains("home/my-account-home.html") && category.equalsIgnoreCase("Group"))
+		if(currentUrl().contains("home/my-account-home.html") && category.equalsIgnoreCase("Group") || currentUrl().contains("/guest/home.html"))
 		{
 			return new AccountHomePage(driver,category);
 		}

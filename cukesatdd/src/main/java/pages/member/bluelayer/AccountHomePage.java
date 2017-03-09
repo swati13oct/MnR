@@ -327,7 +327,7 @@ public class AccountHomePage extends UhcDriver {
 		return null;
 	}
 public ContactUsPage navigatesToContactUsPage() {
-		this.waitforElement(contactUsLink);
+	//	this.waitforElement(contactUsLink);
 		contactUsLink.click();
 		if(getTitle().equalsIgnoreCase("UnitedHealthcare Medicare Solutions | Contact Us"))
 		{
