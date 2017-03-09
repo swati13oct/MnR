@@ -1,7 +1,7 @@
 /**
  * 
  */
-package atdd.runners;
+package atdd.runners.examples;
 
 import org.junit.runner.RunWith;
 
@@ -15,7 +15,7 @@ import cucumber.junit.Cucumber;
 @Cucumber.Options(glue = { "atdd.framework","acceptancetests.benefitsandcoverage" }, 
 		features = { "feature/debug" }, 
 		format = {
-		"pretty", "html:reports/test-report" }, tags ={"@jantolakTest"})
-public class AntolakRunTestChat {
+		"pretty", "html:reports/test-report" }, tags ={"@Example3"})
+public class Example3 {
 
 }
