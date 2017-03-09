@@ -34,7 +34,8 @@ public class LoginPage extends UhcDriver {
 	
 
 	//@FindBy(xpath = "//button[@id='fd_memberSignInButton' or @id='accessURAccountBTN']")
-	@FindBy(id = "fd_memberSignInButton")
+	//@FindBy(id = "fd_memberSignInButton")
+	@FindBy(xpath = "//div[@class='fd_SignIn floatLeft pos_rel']/a")
 	private WebElement loginIn;
 
 	@FindBy(id = "loginPOPUPuser")
@@ -43,7 +44,7 @@ public class LoginPage extends UhcDriver {
 	@FindBy(id = "loginPOPUPpass")
 	private WebElement passwordField;
 
-	@FindBy(xpath = "//div[@class='fd_userPassSection']/button")
+	@FindBy(xpath = "//div[@class='fd_userPassSection fd_memberSignInButton']/button")
 	private WebElement signInButton;
 
 	@FindBy(linkText = "Forgot your username or password?")
@@ -64,8 +65,7 @@ public class LoginPage extends UhcDriver {
 	}
 
 	public Object loginWith(String username, String password, String category) {
-		driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
-		this.waitforElement(loginIn);
+		driver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
 		loginIn.click();
 		sendkeys(userNameField, username);
 		sendkeys(passwordField, password);
