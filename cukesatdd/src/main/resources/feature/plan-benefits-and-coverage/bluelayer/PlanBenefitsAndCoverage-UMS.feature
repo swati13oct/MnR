@@ -647,8 +647,8 @@ Then validates that add plans tab is not available
 Examples:
 
 | planType | memberType | groupType |
-#| MAPD     | Group      | ALPEEHIP  |
-| MA			 | Group	  	| ALPEEHIP  |
+| MAPD     | Group      | ALPEEHIP  |
+#| MA			 | Group	  	| ALPEEHIP  |
 
 
 
