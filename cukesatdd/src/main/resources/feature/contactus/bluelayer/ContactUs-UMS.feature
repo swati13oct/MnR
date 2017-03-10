@@ -8,7 +8,8 @@ When the user navigates to contact us page in UHC site
 Examples:
 	  | planType   |  memberType   |
  #     | MAPD       |  Individual   |
-       | MAPD       |  Group   |
+      | MAPD       |  Group   |
+ #      | MA         |  Individual   |
 
 Scenario Outline: To Verify PEEHIP member doesn't have add plan link
 Given registered UMS member with following attributes
@@ -20,3 +21,4 @@ Examples:
 	  | planType   |  memberType   | 
   #    | MAPD       |  Individual   |
        | MAPD       |  Group   |
+  #      | MA         |  Individual   |

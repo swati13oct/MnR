@@ -16,7 +16,7 @@ import cucumber.junit.Cucumber;
 		features = { "feature/plan-benefits-and-coverage" }, 
 		format = {
 
-		"pretty", "html:reports/test-report" }, tags ={"@bncfnf"})
+		"pretty", "html:reports/test-report","json:target/cucumber.json"}, tags ={"@bncfnf"})
 
 public class RunMRAtddTestBnC {
 
