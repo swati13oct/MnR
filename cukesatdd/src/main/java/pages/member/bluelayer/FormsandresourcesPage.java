@@ -182,7 +182,7 @@ public class FormsandresourcesPage extends UhcDriver {
 		for (String key : formsAndResources.getExpectedData().keySet()) {
 			WebElement element = findElement(formsAndResources
 					.getExpectedData().get(key));
-			if(validate(element)){
+			if(element!=null && validate(element)){
 				try {
 					jsonObject.put(key, element.getText());
 				} catch (JSONException e) {
