@@ -114,6 +114,6 @@ Examples:
 	        | plantype | memberType |
 		#| MA       | GROUP |
 		#| MAPD     | INDIVIDUAL |
-		| MAPD       | GROUP |
+		| MAPD       | Group |
 
 
