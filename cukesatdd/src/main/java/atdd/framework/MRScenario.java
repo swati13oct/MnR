@@ -645,10 +645,7 @@ public class MRScenario {
 		}
 
 		Set<String> keySetUms = umsRegistrationDataMap.keySet();
-		for (String umsKey : keySetUms) {
-			if(umsKey.equalsIgnoreCase("q1_feb_grp043")){
-				System.out.println("stop at here 1...........................");
-			}
+		for (String umsKey : keySetUms) {			
 			Map<String, JSONObject> umsObjectMap = new HashMap<String, JSONObject>();
 			for (int i = 0; i < CommonConstants.PAGES_BLUELAYER.length; i++) {
 				JSONObject jsonObject = readExpectedJson(umsKey,
@@ -660,7 +657,6 @@ public class MRScenario {
 				}
 			}
 			if (!umsObjectMap.isEmpty())
-				System.out.println("stop at here 2...........................");
 				expectedDataMapBluelayer.put(umsKey, umsObjectMap);
 		}
 
@@ -907,7 +903,7 @@ public class MRScenario {
 		    webDriver.manage().window().setSize(new Dimension(1400, 1000)); 
 		
 		
-		/*   if (null == webDriver) {
+		 /*   if (null == webDriver) {
 			File pathToBinary = new File("C:/Program Files (x86)/Mozilla Firefox/firefox.exe");
 			FirefoxBinary ffBinary = new FirefoxBinary(pathToBinary);
 			FirefoxProfile firefoxProfile = new FirefoxProfile();
