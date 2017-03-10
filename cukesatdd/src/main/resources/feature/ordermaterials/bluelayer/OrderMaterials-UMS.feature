@@ -43,12 +43,13 @@ When the user navigates to order plan materials through mymenu tab in UHC site
 Examples:
   	 | planType   | memberType     | option              |
    # | MA         |  Individual    | Member Materials    | 
-     | MAPD       |  Individual    | Replacement ID card |
+   #  | MAPD       |  Individual    | Replacement ID card |
    # | MA         | Group          | Replacement ID card |   
    # | MAPD       | Group          | Member Materials    |
    # | SSUP       | Group          | Replacement ID card |
    # | PDP        | Group          | Member Materials    |
-   
+
+@ordermaterialsfnf  
 Scenario Outline:Verify order plan materials in UHC site for federal members
 Given registered UHC member for order plan materials with following attributes 
 	| Plan Type    | <planType>   |
@@ -60,4 +61,4 @@ Then the user validates add plan link on order and beneefits page
 Examples:
      | planType   | memberType     | groupType              |
      | MAPD       | Group          | ALPEEHIP               |
-     | MA				  | Group    			 | ALPEEHIP               |  
+ #    | MA				  | Group    			 | ALPEEHIP               |  
