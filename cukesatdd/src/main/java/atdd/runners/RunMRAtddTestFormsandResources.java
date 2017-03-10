@@ -15,7 +15,7 @@ import cucumber.junit.Cucumber;
 @Cucumber.Options(glue = { "atdd.framework","acceptancetests.formsandresources" }, 
 		features = { "feature/forms-and-resources" }, 
 		format = {
-		"pretty", "html:reports/test-report" }, tags ={"@formsandresourcesfnf"})
+		"pretty", "html:reports/test-report","json:target/cucumber.json" }, tags ={"@formsandresourcesfnf"})
 public class RunMRAtddTestFormsandResources {
 
 }

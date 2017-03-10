@@ -14,7 +14,7 @@ import cucumber.junit.Cucumber;
 @Cucumber.Options(glue = { "atdd.framework","acceptancetests.profandpref" }, 
 		features = { "feature/myprofile-preferences" }, 
 		format = {
-		"pretty", "html:reports/test-report" }, tags ={"@profileandpreferences"})
+		"pretty", "html:reports/test-report","json:target/cucumber.json" }, tags ={"@profileandpreferences"})
 
 public class RunMRAtddTestProfAndPref {
 	
