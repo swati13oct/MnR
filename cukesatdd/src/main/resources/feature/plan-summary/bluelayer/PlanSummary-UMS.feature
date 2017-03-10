@@ -1,4 +1,4 @@
-@plansummary
+@plansummaryfnf
 Feature:To test Plan Summary flow in UMS site
 Scenario Outline:To verify different resources in plan summary page in UMS site
 Given registered member to verify plan summary page in UMS site
@@ -50,5 +50,5 @@ When the user navigates to plan summary page under my plans in UMS site
 Then the user validate add a plan link is not displayed for albama memeber
 Examples:
  | planType | memberType   |
- | MAPD       | Group |
+# | MAPD       | Group |
 # |  MA         | Group |

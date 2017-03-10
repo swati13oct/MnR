@@ -12,7 +12,7 @@ Examples:
 #	| MA       | Individual |
 #	| MA       | Group      |
 #	| MAPD     | Individual |
-	| MAPD     | Group      |
+#	| MAPD     | Group      |
 #	| PDP      | Group      |
 
 Scenario Outline: Verify login in UHC site for group plan member 
@@ -68,7 +68,7 @@ Then the user validates the UHC plan inactive error
    | Plan Inactive Error |
 Examples:
   	 | planType  | memberType |
-	 | MAPD      | GROUP      |
+#	 | MAPD      | GROUP      |
 #    | MA        | GROUP      |
 #    | MA        | INDIVIDUAL | 
 #    | MAPD      | INDIVIDUAL |
@@ -119,10 +119,10 @@ Then the user validates temp id card pop up after login in UHC site
 
 Examples:
 	| planType | memberType |
-	| MAPD     | Individual |
+#	| MAPD     | Individual |
 	
 	
-@albama	
+@albamafnf
 Scenario Outline:To verify add a plan link is not displayed for albama member
 Given the user is on the UHC medicare site login page
 Given registered member to login in UMS site
@@ -131,4 +131,5 @@ Given registered member to login in UMS site
 Then the user validate add a plan link is not displayed for albama memeber
 Examples:
 	| plantype | memberType |
-	| MA       | Group |
+#	| MA       | Group |
+	| MAPD     | Group |
