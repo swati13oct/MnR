@@ -893,6 +893,9 @@ public class MRScenario {
 		String browser = (null == System.getProperty(CommonConstants.JENKINS_BROWSER)
 				? props.get("WebDriver") : System.getProperty(CommonConstants.JENKINS_BROWSER));
 		
+		String agentString = (null == System.getProperty(CommonConstants.JENKINS_BROWSER)
+				? props.get("AgentString") : System.getProperty(CommonConstants.JENKINS_BROWSER_AGENT_STRING));
+		
 		System.out.println("getWebDriver, returning driver " + browser);
 		
 		// if webDriver is null, create one, otherwise send the existing one
