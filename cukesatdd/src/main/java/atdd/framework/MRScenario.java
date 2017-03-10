@@ -898,9 +898,9 @@ public class MRScenario {
 		String browser = (null == System.getProperty(CommonConstants.JENKINS_BROWSER)
 				? props.get("WebDriver") : System.getProperty(CommonConstants.JENKINS_BROWSER));
 
-		webDriver = htmlUnitDriver;
+		//webDriver = htmlUnitDriver;
 		webDriver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
-		webDriver.manage().window().maximize();*/
+		webDriver.manage().window().maximize();
 		
 	/*	DesiredCapabilities ieCaps = new DesiredCapabilities();
 		ieCaps.setCapability(PhantomJSDriverService.PHANTOMJS_EXECUTABLE_PATH_PROPERTY, "C:/dev/programs/phantomjs/bin/phantomjs.exe");
@@ -970,10 +970,10 @@ public class MRScenario {
 				webDriver.manage().window().maximize();
 			} else if (browser.equalsIgnoreCase(CommonConstants.JENKINS_BROWSER_PHANTOMJS)) {
 				// otherwise if we have a Jenkins browser defined, we use it.
-				DesiredCapabilities caps = new DesiredCapabilities();
+				//DesiredCapabilities caps = new DesiredCapabilities();
 				caps.setCapability(PhantomJSDriverService.PHANTOMJS_EXECUTABLE_PATH_PROPERTY, pathToBinary);
 				//from Jarvis
-				String agent = "Mozilla/5.0 (Windows NT 6.0) AppleWebKit/535.1 (KHTML, like Gecko) Chrome/13.0.782.41 Safari/535.1";
+				//String agent = "Mozilla/5.0 (Windows NT 6.0) AppleWebKit/535.1 (KHTML, like Gecko) Chrome/13.0.782.41 Safari/535.1";
 				
 				caps.setCapability(PhantomJSDriverService.PHANTOMJS_PAGE_SETTINGS_PREFIX + "userAgent", agent);
 				caps.setJavascriptEnabled(true);
@@ -1018,16 +1018,18 @@ public class MRScenario {
 		}
 		return webDriver;
 
-		if (null == webDriver) {
+		/*if (null == webDriver) {
 
 
 			File pathToBinary = new File("C:/Program Files (x86)/Mozilla Firefox/firefox.exe");
 			FirefoxBinary ffBinary = new FirefoxBinary(pathToBinary);
 			FirefoxProfile firefoxProfile = new FirefoxProfile();
 			webDriver = new FirefoxDriver(ffBinary, firefoxProfile);
-			webDriver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS); 
-		} */
-		    return webDriver; 
+
+			webDriver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
+		} 
+		    return webDriver; */
+
 
 	}
 

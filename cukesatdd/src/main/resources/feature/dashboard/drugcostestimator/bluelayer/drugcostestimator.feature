@@ -510,4 +510,45 @@ Then I should not see pharmacy button radio button under pharmacy type
  Examples:
 | planType | memberType|pharmacytype|
 | MAPD     |Individual_pharmacy_saver |Preferred Retail|
+
+
+#-----------------------------------------
+#q1_feb_blayer016 926485538-1  US425354
+
+@drug_cost_estimator_with_mail_service
+Scenario Outline: To Verify MR portal members using DCE on a desktop device, will have preferred mail services option available depending on its member type.
+Given I am a registered member using the new M&R member portal on a desktop computer
+| Plan Type   | <planType>   |
+| Member Type	  | <memberType> |
+When the above plantype user logs in UMS Site Desktop
+And I access the page containing the DCE tool
+And I navigate to step2 page
+Then I should see preferred mail service radio button under pharmacy type 
+And I enter a US other territory zip code and click select
+| USOTZipcode | <USOTZipcode> |
+Then I should see preferred mail service radio button under pharmacy type
+And I should be able to select the preferred mail service radio button
+And I should be able to select the preferred mail service pharmacy
+
+Examples:
+ | planType  | memberType  | USOTZipcode |
+ | MA       |IndividualwithMailService|96923 |
+ 
+ #------------------------------------------
+ #q1_feb_grp043 957440822-1 US425354
+
+@drug_cost_estimator_without_mail_service
+Scenario Outline: To Verify MR portal members using DCE on a desktop device, if it is a PEEHIP member, then preferred mail service option will not be available.
+Given I am a registered member using the new M&R member portal on a desktop computer
+| Plan Type   | <planType>   |
+| Member Type	  | <memberType> |
+When the above plantype user logs in UMS Site Desktop
+And I access the page containing the DCE tool
+And I navigate to step2 page
+Then I should not see preferred mail service radio button under pharmacy type 
+
+Examples:
+ | planType  | memberType  |
+ | MAPD      |GroupPEEHIPwithoutMailService |
+ 
  

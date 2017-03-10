@@ -752,5 +752,57 @@ public class DrugcostestimatorUhcStepDefinition {
 		dce.validate_pharmacy_type_not_present(pharmacy_type);
 	}
 	
+
+	@And("^I enter a US other territory zip code and click select$")
+	public void I_enter_a_US_other_territory_zip_code_and_click_select(DataTable memberAttributes){
+		List<DataTableRow> memberAttributesRow = memberAttributes
+				.getGherkinRows();
+		Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells()
+					.get(0), memberAttributesRow.get(i).getCells().get(1));
+		}
+		
+		String zipcode = memberAttributesMap.get("USOTZipcode");
+		WebDriver wd = (WebDriver)getLoginScenario().getBean(CommonConstants.WEBDRIVER);
+		DrugCostEstimatorPage dce = new DrugCostEstimatorPage(wd);
+		dce.pharmacyInformation(zipcode);
+	}
+	
+	@Then("^I should not see preferred mail service radio button under pharmacy type$")
+	public void I_should_not_see_preferred_mail_service_radio_button_under_pharmacy_type(){
+		DrugCostEstimatorPage dce = (DrugCostEstimatorPage) getLoginScenario()
+				.getBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE);
+		dce.validatePreferredMailServiceNotPresent();
+	
+	}
+	
+	@And("^I should be able to select the preferred mail service pharmacy$")
+	public void I_should_be_able_to_select_the_preferred_mail_service_pharmacy(){
+		DrugCostEstimatorPage dce = (DrugCostEstimatorPage) getLoginScenario()
+				.getBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE);
+		dce.btnMailServiceSelect.click();
+		
+	}
+	
+	
+	@And("^I should be able to select the preferred mail service radio button$")
+	public void I_should_be_able_to_select_the_preferred_mail_service_radio_button() throws InterruptedException{
+		DrugCostEstimatorPage dce = (DrugCostEstimatorPage) getLoginScenario()
+				.getBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE);
+		dce.selectPharmacyType("Preferred Mail Service");
+		
+	}
+	
+	
+	@Then("^I should see preferred mail service radio button under pharmacy type$")
+	public void I_should_see_preferred_mail_service_radio_button_under_pharmacy_type() {
+		DrugCostEstimatorPage dce = (DrugCostEstimatorPage) getLoginScenario()
+				.getBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE);
+		dce.validatePreferredMailServiceRD();
+
+	}
+	
 }
 

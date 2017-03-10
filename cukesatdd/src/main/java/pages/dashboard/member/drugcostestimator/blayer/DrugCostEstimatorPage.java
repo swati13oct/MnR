@@ -165,6 +165,15 @@ public class DrugCostEstimatorPage extends UhcDriver{
 	@FindBy(xpath="//ul[@class='pharmacy-list']/li[1]")
 	public WebElement first_pharmacy_record;
 	
+	@FindBy(xpath = ".//*[@id='zipcode-button']")
+	public WebElement btnZipCodeSearch;
+	
+	@FindBy(xpath = ".//*[@id='mail-service-select']")
+	public WebElement btnMailServiceSelect;
+	
+	@FindBy(id="mail-service-type")
+	public WebElement lbPreferredMailService;
+	
 
 	@Override
 	public void openAndValidate() {
@@ -607,6 +616,29 @@ public class DrugCostEstimatorPage extends UhcDriver{
 	   else
 		   return false;
    }
+   
+   public void pharmacyInformation(String zipcode){
+		validate(zipcodeInput);
+		sendkeys(zipcodeInput,zipcode); 
+		btnZipCodeSearch.click();
+	}
+  
+  public void validatePreferredMailServiceNotPresent(){
+			List<WebElement> mailService = driver.findElements(By.id("mail-service-type"));
+			if(mailService.size()>0){
+				Assert.assertFalse(true);
+			}else{
+				Assert.assertFalse(false);
+			}
+	}
+  
+  public void validatePreferredMailServiceRD(){
+		try{
+			Assert.assertTrue(lbPreferredMailService.isDisplayed());
+		}catch(org.openqa.selenium.NoSuchElementException e){
+			Assert.assertFalse(false);
+		} 	
+	}
 
 }
 
