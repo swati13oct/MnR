@@ -50,7 +50,7 @@ public class OrderplanmaterialsPage extends UhcDriver {
 	public OrderplanmaterialsPage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
-		CommonUtility.waitForPageLoad(driver, planMaterialHeading, CommonConstants.TIMEOUT_30);
+		CommonUtility.waitForPageLoad(driver, planMaterialHeading, 10);
 		openAndValidate();
 	}
 
