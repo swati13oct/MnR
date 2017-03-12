@@ -874,7 +874,7 @@ public class MRScenario {
 		webDriver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
 		webDriver.manage().window().maximize();*/
 		
-	/*	DesiredCapabilities ieCaps = new DesiredCapabilities();
+		/*DesiredCapabilities ieCaps = new DesiredCapabilities();
 		ieCaps.setCapability(PhantomJSDriverService.PHANTOMJS_EXECUTABLE_PATH_PROPERTY, "C:/dev/programs/phantomjs/bin/phantomjs.exe");
 		webDriver = new PhantomJSDriver(ieCaps); */
 		
@@ -895,7 +895,7 @@ public class MRScenario {
 		    caps.setJavascriptEnabled(true);
 		    caps.setCapability(PhantomJSDriverService.PHANTOMJS_CLI_ARGS, new String[] {"--web-security=no", "--ignore-ssl-errors=yes", "--ssl-protocol=any"});
 		    String userAgent = "Mozilla/5.0 (Windows NT 6.0) AppleWebKit/535.1 (KHTML, like Gecko) Chrome/13.0.782.41 Safari/535.1";
-		                       // "Mozilla/5.0 (Linux; U; Android 2.3.3; en-us; LG-LU3000 Build/GRI40) AppleWebKit/533.1 (KHTML, like Gecko) Version/4.0 Mobile Safari/533.1";
+		                      //  "Mozilla/5.0 (Linux; U; Android 2.3.3; en-us; LG-LU3000 Build/GRI40) AppleWebKit/533.1 (KHTML, like Gecko) Version/4.0 Mobile Safari/533.1";
 		   
 		    caps.setCapability(PhantomJSDriverService.PHANTOMJS_PAGE_SETTINGS_PREFIX + "userAgent", userAgent);
 		    webDriver = new PhantomJSDriver(caps);
@@ -903,7 +903,7 @@ public class MRScenario {
 		    webDriver.manage().window().setSize(new Dimension(1400, 1000)); 
 		
 		
-		 /*   if (null == webDriver) {
+		/*    if (null == webDriver) {
 			File pathToBinary = new File("C:/Program Files (x86)/Mozilla Firefox/firefox.exe");
 			FirefoxBinary ffBinary = new FirefoxBinary(pathToBinary);
 			FirefoxProfile firefoxProfile = new FirefoxProfile();
@@ -938,6 +938,7 @@ public class MRScenario {
 		System.setProperty("webdriver.chrome.driver",
 				props.get(CommonConstants.CHROME_DRIVER));
 		webDriver = new ChromeDriver(capabilities);
+		//webDriver = new ChromeDriver();
 		return webDriver;
 	}
 

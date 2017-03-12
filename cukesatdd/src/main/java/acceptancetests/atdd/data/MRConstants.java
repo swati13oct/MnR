@@ -106,9 +106,9 @@ public class MRConstants {
 	
 	public static final String BING_SEARCH_ENGINE_URL = "https://www.bing.com";
 	
-	public static final String AARPM_MOBILE_URL = "https://member.awe-"+MRScenario.environment+"-aarpmedicareplans.uhc.com/mobile/guest/login.html";
+	public static final String AARPM_MOBILE_URL = "https://member."+MRScenario.environment+"-aarpmedicareplans.uhc.com/mobile/guest/login.html";
 	
-	public static final String UHCM_MOBILE_URL = "https://member.awe-"+MRScenario.environment+"-uhcmedicaresolutions.uhc.com/mobile/guest/login.html";
+	public static final String UHCM_MOBILE_URL = "https://member."+MRScenario.environment+"-uhcmedicaresolutions.uhc.com/mobile/guest/login.html";
 	
 	public static final String MRREST_TIME_ADMIN_URL = "https://"+MRScenario.environment+"-generic.uhc.com/MRRestWAR/rest/zadmin/time/";
 	

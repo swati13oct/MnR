@@ -72,7 +72,8 @@ public class AccountHomePage extends UhcDriver {
 	@FindBy(linkText = "medical providers")
 	private WebElement medicalProviders ;
 
-	@FindBy(xpath = "//li[@id='fd_myMenu']/a")
+	@FindBy(xpath = "//*[@id='fd_myMenu']/a")	
+	//@FindBy(id = "fd_myMenuDropdown")
 	private WebElement myMenuNavigator;
 
 	@FindBy(linkText = "Prescription drug cost and benefits summary")
@@ -360,8 +361,8 @@ public ContactUsPage navigatesToContactUsPage() {
 	}
 
 	public OrderplanmaterialsPage navigateToOrderPlanMaterialsPage() {
-
-	//	myMenuNavigator.click();
+System.out.println(this.driver.getCurrentUrl()+"****************************");
+		myMenuNavigator.click();
 		orderPlanMaterials.click();
 		CommonUtility.checkPageIsReady(driver);
 		if (getTitle().equalsIgnoreCase(
