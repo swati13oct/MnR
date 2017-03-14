@@ -6,6 +6,7 @@ package pages.member.ulayer;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
 import org.joda.time.DateTime;
 import org.json.JSONException;
@@ -684,7 +685,6 @@ public class AccountHomePage extends UhcDriver {
 		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 		select = new  Select(driver.findElement(By.id("plan-type")));
 		select.selectByVisibleText("AARP MedicareComplete Plan 1 (HMO)");
-		System.out.println("plan selected");
 		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 		filterLink.click();
 		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
