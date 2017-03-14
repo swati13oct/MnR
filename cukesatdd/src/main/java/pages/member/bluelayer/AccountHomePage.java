@@ -156,6 +156,16 @@ public class AccountHomePage extends UhcDriver {
 	@FindBy(linkText = "Date")
 	private WebElement dateLink;
 	
+	@FindBy(xpath = "//*[@id='saver-checkbox']/label")
+	private WebElement filterLink;
+	
+	@FindBy(xpath = "//form/fieldset[1]/ul/li[2]/label")
+	private WebElement pharmacyfilterLink;
+	
+	@FindBy(xpath = "//*[@id='_content_pharmacy_en_uhc_jcr_content_pharmacylocator_par_teaser']")
+	private WebElement widgetLink;
+	
+	
 
 	private PageData myAccountHome;
 
@@ -620,6 +630,46 @@ public FormsandresourcesPage navigateToMydocumentUmsPage() {
 		Select select = new  Select(driver.findElement(By.id("document-date")));
 		select.selectByVisibleText("Current Year");
 		dateLink.click();
+		return null;
+	}
+	
+
+	public PharmacySearchPage navigateToPharmacyLocatorSearchResults() {
+		filterLink.click();
+		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+		return null;
+	}
+
+	public PharmacySearchPage navigateTomultipleLanguageDropdownResultsearch() {
+		driver.manage().timeouts().implicitlyWait(50, TimeUnit.SECONDS);
+		Select select = new  Select(driver.findElement(By.id("lang-select")));
+		select.selectByVisibleText("español");
+		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+		return null;
+	}
+
+	public PharmacySearchPage navigateToPharmacySaverPharmaciesSearchResults() {
+		Select select = new  Select(driver.findElement(By.id("plan-year")));
+		select.selectByVisibleText("2016");
+		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+		select = new  Select(driver.findElement(By.id("plan-type")));
+		select.selectByVisibleText("UnitedHealthcare MedicareComplete Plan 1 (HMO)");
+		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+		pharmacyfilterLink.click();
+		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+		return null;
+	}
+
+	public PharmacySearchPage navigateToPreferedMailServiceWidgetResult() {
+		pharmacyfilterLink.click();
+		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+		widgetLink.isDisplayed();
+		return null;
+	}
+
+	public PharmacySearchPage navigateToPrpnSearchAndBallonMarkerResult() {
+		pharmacyfilterLink.click();
+		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 		return null;
 	}
 	

@@ -124,3 +124,107 @@ Then the user validates the pharmacies available in AARP site
 Examples:
 	| plantype | year |  planName			                | pharmacyType						     |
 	| PDP      | 2016 |  AARP MedicareRx Saver Plus (PDP)   | Preferred Retail Pharmacy Network      | 
+	
+	
+@pharmacysearch
+Scenario Outline:To verify pharmacies displayed based on MAPD and PDP in AARP site
+Given registered member to verify locate a pharmacy in AARP Site
+	| <plantype> |
+When the user navigates to pharmacy search page in AARP site
+And the user searches for pharmaciy search results available in AARP site
+Then the user validates the content on pharmacy search page
+
+Examples:
+	| plantype | 
+	| PDP     |  
+	
+@pharmacysearchresult
+Scenario Outline:To verify pharmacies displayed based on MAPD and PDP in AARP site
+Given registered member to verify locate a pharmacy in AARP Site
+	| <plantype> |
+When the user navigates to pharmacy search page in AARP site
+And the user searches for pharmaciy search results available in AARP site
+
+Examples:
+	| plantype | 
+	| PDP     |
+
+@pharmacyshowmap
+Scenario Outline:To verify pharmacies displayed based on MAPD and PDP in AARP site
+Given registered member to verify locate a pharmacy in AARP Site
+	| <plantype> |
+When the user navigates to pharmacy search page in AARP site
+And the user searches for show on map available in AARP site
+
+
+Examples:
+	| plantype | 
+	| PDP     |
+	
+@pharmacymultilang
+Scenario Outline:To verify pharmacies displayed based on MAPD and PDP in AARP site
+Given registered member to verify locate a pharmacy in AARP Site
+	| <plantype> |
+When the user navigates to pharmacy search page in AARP site
+And the user validate multiple language dropdown available in AARP site
+
+Examples:
+	| plantype | 
+	| PDP     |
+	
+@pharmacyresultpdf
+Scenario Outline:To verify pharmacies displayed based on MAPD and PDP in AARP site
+Given registered member to verify locate a pharmacy in AARP Site
+	| <plantype> |
+When the user navigates to pharmacy search page in AARP site
+And the user searches for view result as pdf available in AARP site
+
+Examples:
+	| plantype | 
+	| PDP     |
+
+	
+	
+@pharmacyprpnwidget
+Scenario Outline:To verify pharmacies displayed based on MAPD and PDP in AARP site
+Given registered member to verify locate a pharmacy in AARP Site
+	| <plantype> |
+When the user navigates to pharmacy search page in AARP site
+Then the user validates the PRPN widget available in AARP site
+
+Examples:
+	| plantype | 
+	| PDP     |
+	
+@pharmacynonaep
+Scenario Outline:To verify pharmacies displayed based on MAPD and PDP in AARP site
+Given registered member to verify locate a pharmacy in AARP Site
+	| <plantype> |
+When the user navigates to pharmacy search page in AARP site
+And the user validates Non AEP plan year and type in pharmaciy search results available in AARP site
+
+Examples:
+	| plantype | 
+	| PDP     |
+	
+@pharmacyaep
+Scenario Outline:To verify pharmacies displayed based on MAPD and PDP in AARP site
+Given registered member to verify locate a pharmacy in AARP Site
+	| <plantype> |
+When the user navigates to pharmacy search page in AARP site
+And the user validates AEP plan year and type in pharmaciy search results available in AARP site
+
+Examples:
+	| plantype | 
+	| PDP     |
+	
+@pharmacysearchandballon
+Scenario Outline:To verify pharmacies displayed based on MAPD and PDP in AARP site
+Given registered member to verify locate a pharmacy in AARP Site
+	| <plantype> |
+When the user navigates to pharmacy search page in AARP site
+And the user validates the PRPN search result and red balloon marker available in AARP site
+
+Examples:
+	| plantype | 
+	| PDP     |

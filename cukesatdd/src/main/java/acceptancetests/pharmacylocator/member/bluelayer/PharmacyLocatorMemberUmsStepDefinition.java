@@ -23,6 +23,7 @@ import pages.member.bluelayer.PharmacySearchPage;
 import acceptancetests.atdd.data.CommonConstants;
 import acceptancetests.atdd.data.member.PageConstants;
 import acceptancetests.login.data.LoginCommonConstants;
+import acceptancetests.benefitsandcoverage.data.PlanBenefitsAndCoverageCommonConstants;
 import acceptancetests.pharmacylocator.data.PharmacySearchCommonConstants;
 import atdd.framework.MRScenario;
 import cucumber.annotation.After;
@@ -142,6 +143,108 @@ public class PharmacyLocatorMemberUmsStepDefinition {
 		}
 
 	}
+	
+	@Then("^the user searches for pharmaciy search results available in UMS site$")
+	public void user_views_pharmacy_search_result_ums() {
+		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario()
+				.getBean(PageConstants.ACCOUNT_HOME_PAGE);
+		PharmacySearchPage pharmacySearchPage = accountHomePage
+				.navigateToPharmacyLocatorSearchResults();	
+	}
+	
+	@Then("^the user validate Pharmacy Saver pharmacies and red balloon marker available in UMS site$")
+	public void user_views_pharmacy_saver_pharmacies_ums() {
+		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario()
+				.getBean(PageConstants.ACCOUNT_HOME_PAGE);
+		PharmacySearchPage pharmacySearchPage = accountHomePage
+				.navigateToPharmacySaverPharmaciesSearchResults();	
+	}
+	
+	@Then("^the user validate multiple language dropdown menu in UMS site$")
+	public void user_views_multiple_language_dropdown_result_ums() {
+		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario()
+				.getBean(PageConstants.ACCOUNT_HOME_PAGE);
+		PharmacySearchPage pharmacySearchPage = accountHomePage
+				.navigateTomultipleLanguageDropdownResultsearch();		
+	}
+	
+	@Then("^the user validates the Preferred Mail service Pharmacy widget available in UMS site$")
+	public void user_views_prefered_mail_service_widget_available_ums() {
+		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario()
+				.getBean(PageConstants.ACCOUNT_HOME_PAGE);
+		PharmacySearchPage pharmacySearchPage = accountHomePage
+				.navigateToPreferedMailServiceWidgetResult();		
+	}
+	
+	@Then("^the user validates the PRPN search result and red balloon marker available in UMS site$")
+	public void user_views_prpn_search_result_ballon_marker_available_ums() {
+		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario()
+				.getBean(PageConstants.ACCOUNT_HOME_PAGE);
+		PharmacySearchPage pharmacySearchPage = accountHomePage
+				.navigateToPrpnSearchAndBallonMarkerResult();		
+	}
+	
+	@Then("^the user validate ninty days filter available in UMS site$")
+	public void user_views_ninty_days_available_result_ums() {
+try {
+			
+			JSONObject actual=(JSONObject) loginScenario.getBean(PlanBenefitsAndCoverageCommonConstants.PHARMACYSEARCH_ACTUAL);
+			
+			JSONObject expected=(JSONObject) loginScenario.getBean(PlanBenefitsAndCoverageCommonConstants.PHARMACYSEARCH_EXPECTED);
+			
+			if(actual!=null && expected !=null){
+				JSONAssert.assertEquals(expected, actual, true);
+			}			
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	@And("^the user validates Non AEP plan year and type in pharmaciy search results available in UMS site$")
+	public void user_views_non_aep_available_in_ums() {
+try {
+			
+			JSONObject actual=(JSONObject) loginScenario.getBean(PlanBenefitsAndCoverageCommonConstants.PHARMACYSEARCH_ACTUAL);
+			
+			JSONObject expected=(JSONObject) loginScenario.getBean(PlanBenefitsAndCoverageCommonConstants.PHARMACYSEARCH_EXPECTED);
+			
+			if(actual!=null && expected !=null){
+				JSONAssert.assertEquals(expected, actual, true);
+			}			
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	@And("^the user validates AEP plan year and type in pharmaciy search results available in UMS site$")
+	public void user_views_aep_available_in_ums() {
+try {
+			
+			JSONObject actual=(JSONObject) loginScenario.getBean(PlanBenefitsAndCoverageCommonConstants.PHARMACYSEARCH_ACTUAL);
+			
+			JSONObject expected=(JSONObject) loginScenario.getBean(PlanBenefitsAndCoverageCommonConstants.PHARMACYSEARCH_EXPECTED);
+			
+			if(actual!=null && expected !=null){
+				JSONAssert.assertEquals(expected, actual, true);
+			}			
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	@Then("^the user validates Search checkbox displayed dynamically related to the pharmacy network$")
+	public void validates_Pharmacy_Network_Displayed_Dynamically_UMS(){
+		PharmacySearchPage PharmacySearchPage = (PharmacySearchPage) getLoginScenario()
+				.getBean(PageConstants.PHARMACY_SEARCH_PAGE);
+		PharmacySearchPage.clickOnShowPharmaciesForTheseServices();		
+		
+		//PharmacySearchPage.logOut();
+		
+	}
+	
 
 	@And("^the user search pharmacies using the below information in UMS site$")
 	public void user_enters_zipcode_distance_details(DataTable zipAttributes) {

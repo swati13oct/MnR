@@ -24,6 +24,7 @@ import pages.member.ulayer.PharmacySearchPage;
 import acceptancetests.atdd.data.CommonConstants;
 import acceptancetests.atdd.data.member.PageConstants;
 import acceptancetests.login.data.LoginCommonConstants;
+import acceptancetests.benefitsandcoverage.data.PlanBenefitsAndCoverageCommonConstants;
 import acceptancetests.pharmacylocator.data.PharmacySearchCommonConstants;
 import atdd.framework.MRScenario;
 import cucumber.annotation.en.And;
@@ -324,6 +325,112 @@ public class PharmacyLocatorMemberAarpStepDefinition {
 		PharmacySearchPage pharmacySearchAarpPage = (PharmacySearchPage) getLoginScenario()
 				.getBean(PageConstants.PHARMACY_SEARCH_PAGE);
 		pharmacySearchAarpPage = pharmacySearchAarpPage.hoverOverToolTip(pharmacyType);
+	}
+	
+	@And("^the user searches for pharmaciy search results available in AARP site$")
+	public void user_views_pharmacy_search_result_aarp() {
+		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario()
+				.getBean(PageConstants.ACCOUNT_HOME_PAGE);
+		PharmacySearchPage pharmacySearchPage = accountHomePage
+				.navigateToPharmacySearchResult();		
+	}
+	
+	@Then("^the user validates the PRPN search result and red balloon marker available in AARP site$")
+	public void user_views_prpn_search_result_available_aarp() {
+		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario()
+				.getBean(PageConstants.ACCOUNT_HOME_PAGE);
+		PharmacySearchPage pharmacySearchPage = accountHomePage
+				.navigateToPrpnSearchAndBallonMarkerResult();		
+	}
+	@And("^the user searches for view result as pdf available in AARP site$")
+	public void user_view_result_as_pdf_aarp() {
+		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario()
+				.getBean(PageConstants.ACCOUNT_HOME_PAGE);
+		PharmacySearchPage pharmacySearchPage = accountHomePage
+				.navigateToviewResultPdf();		
+	}
+	
+	
+	@And("^the user searches for show on map available in AARP site$")
+	public void user_views_show_on_map_result_aarp() {
+		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario()
+				.getBean(PageConstants.ACCOUNT_HOME_PAGE);
+		PharmacySearchPage pharmacySearchPage = accountHomePage
+				.navigateToshowOnMapResult();		
+	}
+	
+	@And("^the user validate multiple language dropdown available in AARP site$")
+	public void user_views_multiple_language_dropdown_result_aarp() {
+		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario()
+				.getBean(PageConstants.ACCOUNT_HOME_PAGE);
+		PharmacySearchPage pharmacySearchPage = accountHomePage
+				.navigateTomultipleLanguageDropdownResult();		
+	}
+	
+	@And("^the user validates the PRPN widget available in AARP site$")
+	public void user_views_prpn_widget_available_aarp() {
+		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario()
+				.getBean(PageConstants.ACCOUNT_HOME_PAGE);
+		PharmacySearchPage pharmacySearchPage = accountHomePage
+				.navigateToPrpnWidgetResult();		
+	}
+	
+	@Then("^the user validates the content on pharmacy search page$")
+	public void views_pharmacy_search_page_aarp() {
+		try {
+			
+			JSONObject actual=(JSONObject) loginScenario.getBean(PlanBenefitsAndCoverageCommonConstants.PHARMACYSEARCH_ACTUAL);
+			
+			JSONObject expected=(JSONObject) loginScenario.getBean(PlanBenefitsAndCoverageCommonConstants.PHARMACYSEARCH_EXPECTED);
+			
+			if(actual!=null && expected !=null){
+				JSONAssert.assertEquals(expected, actual, true);
+			}			
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+
+	}
+
+	
+	@And("^the user validates Non AEP plan year and type in pharmaciy search results available in AARP site$")
+	public void views_pharmacy_search_page_nonaep_aarp() {
+		try {
+			
+			JSONObject actual=(JSONObject) loginScenario.getBean(PlanBenefitsAndCoverageCommonConstants.PHARMACYSEARCH_ACTUAL);
+			
+			JSONObject expected=(JSONObject) loginScenario.getBean(PlanBenefitsAndCoverageCommonConstants.PHARMACYSEARCH_EXPECTED);
+			
+			if(actual!=null && expected !=null){
+				JSONAssert.assertEquals(expected, actual, true);
+			}			
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+
+	}
+	
+	@And("^the user validates AEP plan year and type in pharmaciy search results available in AARP site$")
+	public void views_pharmacy_search_page_aep_aarp() {
+		try {
+			
+			JSONObject actual=(JSONObject) loginScenario.getBean(PlanBenefitsAndCoverageCommonConstants.PHARMACYSEARCH_ACTUAL);
+			
+			JSONObject expected=(JSONObject) loginScenario.getBean(PlanBenefitsAndCoverageCommonConstants.PHARMACYSEARCH_EXPECTED);
+			
+			if(actual!=null && expected !=null){
+				JSONAssert.assertEquals(expected, actual, true);
+			}			
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+
 	}
 
 }

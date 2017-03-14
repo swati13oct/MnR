@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Map;
 
+import org.joda.time.DateTime;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.junit.Assert;
@@ -17,7 +18,10 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
+import org.openqa.selenium.support.ui.WebDriverWait;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import acceptancetests.atdd.data.CommonConstants;
 import acceptancetests.atdd.data.PageData;
@@ -170,7 +174,21 @@ public class AccountHomePage extends UhcDriver {
 	@FindBy(linkText = "Date")
 	private WebElement dateLink;
 	
+	@FindBy(xpath = "//*[@id='saver-checkbox']/label")
+	private WebElement filterLink;
 	
+	@FindBy(xpath = "//a[contains(@href,'pharmacyDirectory')]")
+	private WebElement viewpdfLink;
+	
+	@FindBy(xpath = "//a[contains(text(),'Show on Map')]")
+	private WebElement showonmapLink;
+		
+	@FindBy(xpath = "//*[@id='_content_pharmacy_en_uhc_jcr_content_pharmacylocator_par_teaser']")
+	private WebElement widgetLink;
+	
+	@FindBy(xpath = "//form/fieldset[1]/ul/li[2]/label")
+	private WebElement pharmacyfilterLink;
+
 	
 	
 	private PageData myAccountHome;
@@ -656,6 +674,54 @@ public class AccountHomePage extends UhcDriver {
 		Select select = new  Select(driver.findElement(By.id("document-date")));
 		select.selectByVisibleText("Current Year");
 		dateLink.click();
+		return null;
+	}
+	
+
+	public PharmacySearchPage navigateToPharmacySearchResult() {
+		Select select = new  Select(driver.findElement(By.id("plan-year")));
+		select.selectByVisibleText("2016");
+		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+		select = new  Select(driver.findElement(By.id("plan-type")));
+		select.selectByVisibleText("AARP MedicareComplete Plan 1 (HMO)");
+		System.out.println("plan selected");
+		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+		filterLink.click();
+		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+		return null;
+	}
+
+	public PharmacySearchPage navigateToviewResultPdf() {
+		driver.manage().timeouts().implicitlyWait(50, TimeUnit.SECONDS);
+		driver.findElement(By.linkText("VIEW RESULTS AS PDF")).click();
+		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+		return null;
+	}
+
+	public PharmacySearchPage navigateToshowOnMapResult() {
+		driver.manage().timeouts().implicitlyWait(50, TimeUnit.SECONDS);
+		showonmapLink.click();
+		return null;
+	}
+
+	public PharmacySearchPage navigateTomultipleLanguageDropdownResult() {
+		driver.manage().timeouts().implicitlyWait(50, TimeUnit.SECONDS);
+		Select select = new  Select(driver.findElement(By.id("lang-select")));
+		select.selectByVisibleText("español");
+		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);		
+		return null;
+		
+	}
+
+	public PharmacySearchPage navigateToPrpnWidgetResult() {
+		driver.manage().timeouts().implicitlyWait(50, TimeUnit.SECONDS);
+		widgetLink.isDisplayed();
+		return null;
+	}
+
+	public PharmacySearchPage navigateToPrpnSearchAndBallonMarkerResult() {
+		pharmacyfilterLink.click();
+		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 		return null;
 	}
 	

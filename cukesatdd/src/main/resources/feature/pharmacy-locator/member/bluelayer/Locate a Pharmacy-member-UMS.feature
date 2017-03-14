@@ -211,4 +211,117 @@ Examples:
 |username	     |plantype    |
 |blpcp_021     |PCP      |
 
+
+@bluePharmacysearch
+Scenario Outline: Verify Pharmacy Locator Search page in UMS site
+Given registered member to verify locate a pharmacy in UMS Site
+| Plan Type    | <plantype>   |
+| Member Type  | <memberType> |
+When the user navigates to pharmacy search page in UMS site
+
+Examples:
+|plantype    |memberType    | 
+|PDP        |Group   |
+   	
+
+@bluePharmacysearchresult
+Scenario Outline: Verify Pharmacy Locator Search page in UMS site
+Given registered member to verify locate a pharmacy in UMS Site
+| Plan Type    | <plantype>   |
+| Member Type  | <memberType> |
+When the user navigates to pharmacy search page in UMS site
+Then the user searches for pharmaciy search results available in UMS site
+
+Examples:
+|plantype    |memberType    | 
+|PDP        |Group   |
+
+   	
+@bluePharmacysearchprpnandballon
+Scenario Outline: Verify Pharmacy Locator Search page in UMS site
+Given registered member to verify locate a pharmacy in UMS Site
+| Plan Type    | <plantype>   |
+| Member Type  | <memberType> |
+When the user navigates to pharmacy search page in UMS site
+Then the user validates the PRPN search result and red balloon marker available in UMS site
+
+Examples:
+|plantype    |memberType    | 
+|PDP        |Group   |
+
+@bluePharmacysearchnonaep
+Scenario Outline: Verify Pharmacy Locator Search page in UMS site
+Given registered member to verify locate a pharmacy in UMS Site
+| Plan Type    | <plantype>   |
+| Member Type  | <memberType> |
+When the user navigates to pharmacy search page in UMS site
+And the user validates Non AEP plan year and type in pharmaciy search results available in UMS site
+
+Examples:
+|plantype    |memberType    | 
+|PDP        |Group   |
+
+
+@bluePharmacysearchaep
+Scenario Outline: Verify Pharmacy Locator Search page in UMS site
+Given registered member to verify locate a pharmacy in UMS Site
+| Plan Type    | <plantype>   |
+| Member Type  | <memberType> |
+When the user navigates to pharmacy search page in UMS site
+And the user validates AEP plan year and type in pharmaciy search results available in UMS site
+
+Examples:
+|plantype    |memberType    | 
+|PDP        |Group   |
+
+@bluePharmacypreferedwidget
+Scenario Outline: Verify Pharmacy Locator Search page in UMS site
+Given registered member to verify locate a pharmacy in UMS Site
+| Plan Type    | <plantype>   |
+| Member Type  | <memberType> |
+When the user navigates to pharmacy search page in UMS site
+Then the user validates the Preferred Mail service Pharmacy widget available in UMS site
+
+Examples:
+|plantype    |memberType    | 
+|PDP        |Group   |
+
+@bluePharmacysaverandballon
+Scenario Outline: Verify Pharmacy Locator Search page in UMS site
+Given registered member to verify locate a pharmacy in UMS Site
+| Plan Type    | <plantype>   |
+| Member Type  | <memberType> |
+When the user navigates to pharmacy search page in UMS site
+Then the user validate Pharmacy Saver pharmacies and red balloon marker available in UMS site
+
+Examples:
+|plantype    |memberType    | 
+|PDP        |Group   |
+
+@bluePharmacynintydaysfilter
+Scenario Outline: Verify Pharmacy Locator Search page in UMS site
+Given registered member to verify locate a pharmacy in UMS Site
+| Plan Type    | <plantype>   |
+| Member Type  | <memberType> |
+When the user navigates to pharmacy search page in UMS site
+Then the user validate ninty days filter available in UMS site
+
+Examples:
+|plantype    |memberType    | 
+|PDP        |Group   |
+
+
+@bluePharmacymultilang
+Scenario Outline: Verify Pharmacy Locator Search page in UMS site
+Given registered member to verify locate a pharmacy in UMS Site
+| Plan Type    | <plantype>   |
+| Member Type  | <memberType> |
+When the user navigates to pharmacy search page in UMS site
+Then the user validate multiple language dropdown menu in UMS site
+
+Examples:
+|plantype    |memberType    | 
+|PDP        |Group   |
+
+
     	

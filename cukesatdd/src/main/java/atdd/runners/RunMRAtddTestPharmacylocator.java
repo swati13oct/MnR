@@ -12,10 +12,10 @@ import cucumber.junit.Cucumber;
  *
  */
 @RunWith(Cucumber.class)
-@Cucumber.Options(glue = { "atdd.framework","acceptancetests.pharmacylocator" }, 
-		features = { "feature/pharmacy-locator" }, 
+@Cucumber.Options(glue = { "atdd.framework","acceptancetests.pharmacylocator.member.ulayer" }, 
+		features = { "feature/pharmacy-locator/member/ulayer" }, 
 		format = {
-		"pretty", "html:reports/test-report" }, tags ={"@pharmacylocator"})
+		"pretty", "html:reports/test-report" }, tags ={"@pharmacysearch"})
 public class RunMRAtddTestPharmacylocator {
 
 }
