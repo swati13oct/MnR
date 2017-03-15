@@ -69,12 +69,12 @@ public class ContactUsPage extends UhcDriver{
 
 	public JSONObject getExpectedData(Map<String, JSONObject> expectedDataMap) {
 
-		JSONObject globalExpectedJson = expectedDataMap
-				.get(CommonConstants.GLOBAL);
+		/*JSONObject globalExpectedJson = expectedDataMap
+				.get(CommonConstants.GLOBAL);*/
 		JSONObject contactUsExpectedJson = expectedDataMap
 				.get(CommonConstants.CONTACT_US);
-		contactUsExpectedJson = CommonUtility.mergeJson(
-				contactUsExpectedJson, globalExpectedJson);
+		/*contactUsExpectedJson = CommonUtility.mergeJson(
+				contactUsExpectedJson, globalExpectedJson);*/
 		return contactUsExpectedJson;
 	}
 	
