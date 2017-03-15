@@ -883,7 +883,20 @@ public class MRScenario {
       * 
       * Of course your path to the binary will be different.
       * 
-      * By default, the Jenkins job can override these values, but will not change them.  If you 
+      * PhantomJS supports mimicking browsers.  By changing the agentString, one can spoof
+      * a browser type for example, this is a desktop string:
+      * 
+      * Mozilla/5.0 (Windows NT 6.0) AppleWebKit/535.1 (KHTML, like Gecko) Chrome/13.0.782.41 Safari/535.1
+      * 
+      * Using this string causes PhantomJS to act like a desktop browser and will access desktop versions of websites.
+      * This is a mobile string:
+      * 
+      * Mozilla/5.0 (Linux; U; Android 2.3.3; en-us; LG-LU3000 Build/GRI40) AppleWebKit/533.1 (KHTML, like Gecko) Version/4.0 Mobile Safari/533.1
+      * 
+      * Using this string makes PhantomJS identfy itself as a mobile browser (on a mobile device) and will allow you to use the mobile versions
+      * of websites.
+      * 
+      * By default, When a job is run in Jenkins, the values defines in Jenkins will override values in the config file, but will not change them.  If you 
       * look at the Jenkins job, it specifies a browser type and it should be PhantomJS.
       * Anything else may be a problem.
       */
@@ -891,12 +904,15 @@ public class MRScenario {
 
 
 		String browser = (null == System.getProperty(CommonConstants.JENKINS_BROWSER)
-				? props.get("WebDriver") : System.getProperty(CommonConstants.JENKINS_BROWSER));
+				? props.get(CommonConstants.DESKTOP_WEBDRIVER) : System.getProperty(CommonConstants.JENKINS_BROWSER));
 		
-		String agentString = (null == System.getProperty(CommonConstants.JENKINS_BROWSER)
-				? props.get("AgentString") : System.getProperty(CommonConstants.JENKINS_BROWSER_AGENT_STRING));
+		String agent = (null == System.getProperty(CommonConstants.JENKINS_BROWSER_AGENT_STRING)
+				? props.get(CommonConstants.DESKTOP_BROWSER_AGENT_STRING) : System.getProperty(CommonConstants.JENKINS_BROWSER_AGENT_STRING));
 		
-		System.out.println("getWebDriver, returning driver " + browser);
+		System.out.println("getWebDriver: returning driver for " + browser);
+		if (browser.equalsIgnoreCase(CommonConstants.JENKINS_BROWSER_PHANTOMJS)) {
+			System.out.println("PHANTOMJS Agent: " + agent);
+		}
 		
 		// if webDriver is null, create one, otherwise send the existing one
 		// back.
@@ -933,8 +949,6 @@ public class MRScenario {
 				DesiredCapabilities caps = new DesiredCapabilities();
 				caps.setCapability(PhantomJSDriverService.PHANTOMJS_EXECUTABLE_PATH_PROPERTY, pathToBinary);
 				//from Jarvis
-				String agent = "Mozilla/5.0 (Windows NT 6.0) AppleWebKit/535.1 (KHTML, like Gecko) Chrome/13.0.782.41 Safari/535.1";
-				
 				caps.setCapability(PhantomJSDriverService.PHANTOMJS_PAGE_SETTINGS_PREFIX + "userAgent", agent);
 				caps.setJavascriptEnabled(true);
 				caps.setCapability(PhantomJSDriverService.PHANTOMJS_CLI_ARGS,
