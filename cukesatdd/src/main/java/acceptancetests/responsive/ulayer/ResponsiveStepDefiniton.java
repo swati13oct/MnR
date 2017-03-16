@@ -173,5 +173,28 @@ public class ResponsiveStepDefiniton {
 		//portfolioPage.validate();
 	}
 	
+	@And("^the user click compare plans in AARP site")
+	public void the_user_click_compare_plans_to_compare(){
+		PortfolioPage portfolioPage = (PortfolioPage) getLoginScenario().getBean(PageConstants. PORTFOLIO_PAGE);
+		portfolioPage.comparePlanslnk();
+		//portfolioPage.validate();
+	}
+	
+	@And("^the user click plan view details link on compare in AARP site")
+	public void the_user_click_plan_viewdetails_link(){
+		PortfolioPage portfolioPage = (PortfolioPage) getLoginScenario().getBean(PageConstants. PORTFOLIO_PAGE);
+		portfolioPage.viewdetailslnk();
+		
+	}
+	
+	@And("^the user remove plan link on compare page in AARP site")
+	public void the_user_remove_plan_link(){
+		PortfolioPage portfolioPage = (PortfolioPage) getLoginScenario().getBean(PageConstants. PORTFOLIO_PAGE);
+		portfolioPage.removePlanlnk();
+		
+	}
+	
+	
+	
 	
 }

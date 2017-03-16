@@ -81,6 +81,14 @@ public class PortfolioPage extends UhcDriver {
     @FindBy(className="multiple-added-text show")
     private WebElement twoPlanAdded;
     
+    @FindBy(xpath=".//*[@id='plan-list-1']/div/div[2]/div/div[4]/div/div[3]/div/div/span[4]/a")
+    private WebElement comparePlans;
+    
+    @FindBy(xpath="(.//*[text()='View details'])[1]")
+    private WebElement viewDetails;
+    
+    @FindBy(xpath="(.//*[@class='remove-button'])[1]")
+    private WebElement removePlanlnk;
     
     
    
@@ -120,10 +128,10 @@ public class PortfolioPage extends UhcDriver {
 		validate(OurPlansLink);
 	}
 	
-	public void selectAddToCompareCheckboxes() {
+	public void selectAddToCompareCheckboxes() throws InterruptedException {
 		//driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 		//waitforElement(selectAddToCompareCheckbox);
-		System.out.println(chkBoxAddtoCompare1.isEnabled());
+		//System.out.println(chkBoxAddtoCompare1.isEnabled());
 		
 		try {
 			Thread.sleep(10000);
@@ -131,19 +139,34 @@ public class PortfolioPage extends UhcDriver {
 			e.printStackTrace();
 		}
 		JavascriptExecutor js = (JavascriptExecutor)driver;
+		Thread.sleep(10000);
 		js.executeScript("arguments[0].click();", chkBoxAddtoCompare1);
 		js.executeScript("arguments[0].click();", chkBoxAddtoCompare2);
 		js.executeScript("arguments[0].click();", chkBoxAddtoCompare3);
 		js.executeScript("arguments[0].click();", chkBoxAddtoCompare4);
 		
-		
-		
 		//selectAddToCompareCheckbox.click();
 		validate(onePlanAdded);
 		/*selectAddToCompareCheckbox2.click();
-		validate(twoPlanAdded);*/
+		validate(twoPlanAdded);*/		
 		
+	}
+	
+	public void comparePlanslnk(){
+		comparePlans.click();
+		validate(comparePlans);
 		
+	}
+	
+	public void viewdetailslnk(){
+		viewDetails.click();
+		validate(viewDetails);
+		
+	}
+	
+	public void removePlanlnk(){
+		removePlanlnk.click();
+		validate(removePlanlnk);
 	}
 
 	public Boolean findplansbuttonclick2() {
