@@ -1,22 +1,12 @@
 package pages.acquisition.ulayer;
 
-import java.util.List;
-import java.util.concurrent.TimeUnit;
-
-import org.junit.Assert;
-import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
-import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.FluentWait;
-import org.openqa.selenium.support.ui.Select;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
 import acceptancetests.atdd.data.MRConstants;
 import atdd.framework.UhcDriver;
@@ -57,7 +47,7 @@ public class PortfolioPage extends UhcDriver {
 	@FindBy(xpath="//*[@class='zipcode_text ng-pristine ng-valid ng-valid-maxlength']")
 	public WebElement zipCodeInput;
 	
-	@FindBy(linkText="Search by Address")
+	@FindBy(linkText="Search By Address")
     private WebElement searchbyaddresslink;
     
     @FindBy(id="address")
@@ -72,6 +62,28 @@ public class PortfolioPage extends UhcDriver {
    // @FindBy(xpath="html/body/div[4]/div[2]/div[1]/div/div/div/div/div[1]/div/div/div/div[2]/div/div/form/button")
     @FindBy(className="zip-button")
 	private WebElement Findplansbuttonportfolio;
+    
+    @FindBy(id="compare-plan-1")
+    private WebElement chkBoxAddtoCompare1;
+    
+    @FindBy(id="compare-plan-2")
+    private WebElement chkBoxAddtoCompare2;
+    
+    @FindBy(id="compare-plan-3")
+    private WebElement chkBoxAddtoCompare3;
+    
+    @FindBy(id="compare-plan-4")
+    private WebElement chkBoxAddtoCompare4;
+    
+    @FindBy(className="single-added-text show")
+    private WebElement onePlanAdded;
+    
+    @FindBy(className="multiple-added-text show")
+    private WebElement twoPlanAdded;
+    
+    
+    
+   
 
 	//private static String PAGE_URL = MRConstants.AARP_OUR_PLANS_URL;
 	private static String PAGE_URL = MRConstants.PORTFOLIO_PAGE_URL;
@@ -83,16 +95,8 @@ public class PortfolioPage extends UhcDriver {
 	}
 
 	public ZipcodeLookupPage looksupforZipcodes() {
-		
-        if (driver instanceof JavascriptExecutor) {
-            JavascriptExecutor js = (JavascriptExecutor)driver;
-            js.executeScript("arguments[0].click();", lookupZipcodeLink);
-        } 
-        else {
-        	lookupZipcodeLink.click();
-        }
 
-	//	lookupZipcodeLink.click();
+		lookupZipcodeLink.click();
 		if (driver
 				.getTitle()
 				.equalsIgnoreCase(
@@ -114,6 +118,32 @@ public class PortfolioPage extends UhcDriver {
 		Actions action = new Actions(driver);
 		action.moveToElement(OurPlansLink).build().perform();
 		validate(OurPlansLink);
+	}
+	
+	public void selectAddToCompareCheckboxes() {
+		//driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+		//waitforElement(selectAddToCompareCheckbox);
+		System.out.println(chkBoxAddtoCompare1.isEnabled());
+		
+		try {
+			Thread.sleep(10000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		JavascriptExecutor js = (JavascriptExecutor)driver;
+		js.executeScript("arguments[0].click();", chkBoxAddtoCompare1);
+		js.executeScript("arguments[0].click();", chkBoxAddtoCompare2);
+		js.executeScript("arguments[0].click();", chkBoxAddtoCompare3);
+		js.executeScript("arguments[0].click();", chkBoxAddtoCompare4);
+		
+		
+		
+		//selectAddToCompareCheckbox.click();
+		validate(onePlanAdded);
+		/*selectAddToCompareCheckbox2.click();
+		validate(twoPlanAdded);*/
+		
+		
 	}
 
 	public Boolean findplansbuttonclick2() {
@@ -188,33 +218,7 @@ public class PortfolioPage extends UhcDriver {
 			e.printStackTrace();
 		}            
  }
- 
- public WebElement findNoSuchElement(By locator) {
-		WebElement element = null;
-		FluentWait<WebDriver> wait = new WebDriverWait(driver,60).ignoring(NoSuchElementException.class)
-				.withTimeout(60, TimeUnit.SECONDS);
-		try {
-			element = wait.until(ExpectedConditions
-					.visibilityOfElementLocated(locator));
-		} catch (NoSuchElementException e) {
-			e.getStackTrace();
-			System.out.println("******************************** "+e.getCause().getMessage());
-			return element;
-		}
-		return element;
-	}
- 
- public ResponsivePlanSummary searchPlans(String zipcode, String CountyName) {
-	    driver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
-//	    WebDriverWait wait = new WebDriverWait(driver, 40);
-//	    WebElement element = wait.until(ExpectedConditions.elementToBeClickable(By.id("zipcode")));
-	    
-	    
-	    
-//	    WebElement element =findNoSuchElement(By.id("zipcode"));
-	    
-	//    sendkeys(element, zipcode);
-	//    element.sendKeys(Keys.ENTER);
+ public ResponsivePlanSummary searchPlans(String zipcode, String countyName) {
 	    sendkeys(zipCodeField, zipcode);
 	    zipCodeField.sendKeys(Keys.ENTER);
 	    //remove thread once page is stable
@@ -224,28 +228,10 @@ public class PortfolioPage extends UhcDriver {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-	    
-	    List<WebElement> countyActuals = driver.findElements(By.xpath("//a[@class='ng-binding ng-pristine ng-valid']"));
-	    System.out.println(countyActuals.size());
-	    
-	    for(int i=0; i<=countyActuals.size()-1;i++){
-	    	System.out.println(CountyName);
-	    	if(countyActuals.get(i).getText().equals(CountyName)){
-	    		System.out.println(CountyName);
-	    		System.out.println(countyActuals.get(i).getText());
-	    		countyActuals.get(i).click();
-	    		break;
-	    	}
-	    }
 		if (driver.getTitle().equalsIgnoreCase(PageTitleConstants.PORTFOLIO_HOME_PAGE_TITLE_HEADLESS)) {
  			return new ResponsivePlanSummary(driver);
-		} 
+		}
 		return null;
-	
-
-
-		
-		
 	}
 
 
