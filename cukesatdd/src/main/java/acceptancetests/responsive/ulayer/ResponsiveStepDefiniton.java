@@ -167,7 +167,7 @@ public class ResponsiveStepDefiniton {
  	}
 	
 	@And("^the user select plan to compare in AARP site")
-	public void the_user_select_plan_to_compare(){
+	public void the_user_select_plan_to_compare() throws InterruptedException{
 		PortfolioPage portfolioPage = (PortfolioPage) getLoginScenario().getBean(PageConstants. PORTFOLIO_PAGE);
 		portfolioPage.selectAddToCompareCheckboxes();
 		//portfolioPage.validate();

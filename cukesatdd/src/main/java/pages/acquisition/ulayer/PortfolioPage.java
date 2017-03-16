@@ -128,7 +128,7 @@ public class PortfolioPage extends UhcDriver {
 		validate(OurPlansLink);
 	}
 	
-	public void selectAddToCompareCheckboxes() throws InterruptedException {
+	public void selectAddToCompareCheckboxes()  {
 		//driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 		//waitforElement(selectAddToCompareCheckbox);
 		//System.out.println(chkBoxAddtoCompare1.isEnabled());
@@ -139,7 +139,11 @@ public class PortfolioPage extends UhcDriver {
 			e.printStackTrace();
 		}
 		JavascriptExecutor js = (JavascriptExecutor)driver;
-		Thread.sleep(10000);
+		try {
+			Thread.sleep(10000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
 		js.executeScript("arguments[0].click();", chkBoxAddtoCompare1);
 		js.executeScript("arguments[0].click();", chkBoxAddtoCompare2);
 		js.executeScript("arguments[0].click();", chkBoxAddtoCompare3);
