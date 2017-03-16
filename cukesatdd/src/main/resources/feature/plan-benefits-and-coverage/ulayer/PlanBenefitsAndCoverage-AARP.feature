@@ -912,6 +912,7 @@ Feature: To test plan benefits and Coverage on AARP site for Federal members
     Examples: 
       | planType | copayCategory |
       | MAPD     | NON LIS       |
+#Data Used: DentalPlatinumLis2
 
   @disclaimers
   Scenario Outline: Verify Disclaimers section is in place on Benefits and Coverage page

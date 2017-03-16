@@ -70,7 +70,7 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 	@FindBy(className = "btn_repalceRider_atdd ")
 	private WebElement replacceRiderPopupButton;
 
-	@FindBy(className = "disclaimers-atdd")
+	@FindBy(xpath = "//span[contains(.,'keyboard_arrow_down')]")
 	private WebElement disclaimersLink;
 
 	@FindBy(xpath = "//a[contains(.,'contact us')]")

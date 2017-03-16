@@ -115,11 +115,11 @@
 		},
 	"needHelpSection":{
 		"identifier":"xpath",
-		"elementName":"html/body/div[3]/div[3]/section"
+		"elementName":".//*[@id='_content_campaigns_medicaremember_contactus_macosmos_jcr_content_par_teaser']/div/section"
 		},
 	"disclaimersSection":{
 		"identifier":"xpath",
-		"elementName":"html/body/div[3]/div[3]/div/div/div/div"
+		"elementName":"html/body/div[3]/div/div[3]/div[2]/div/div/div"
 		}	
 }
 }
