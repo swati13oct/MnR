@@ -881,7 +881,6 @@ public class MRScenario {
 		
 		    String phantomjs = System.getProperty("phantomjs");
 		    DesiredCapabilities caps = new DesiredCapabilities();
-		//    caps.setCapability(PhantomJSDriverService.PHANTOMJS_EXECUTABLE_PATH_PROPERTY,"C:/dev/programs/phantomjs/bin/phantomjs.exe");
 		    System.out.print(System.getProperty("phantomjs"));
 		    if (StringUtils.isBlank(phantomjs)) {
 		    	caps.setCapability(PhantomJSDriverService.PHANTOMJS_EXECUTABLE_PATH_PROPERTY,props.get("HeadlessBrowserPath"));
@@ -889,9 +888,6 @@ public class MRScenario {
 		    } else {
 		    	caps.setCapability(PhantomJSDriverService.PHANTOMJS_EXECUTABLE_PATH_PROPERTY,System.getProperty("phantomjs"));
 		    }
-		  //  caps.setCapability("browserType", "phantomjs");
-		 //   caps.setCapability(PhantomJSDriverService.PHANTOMJS_PAGE_SETTINGS_PREFIX + "userAgent", agent);
-		  //  caps.setCapability("takesScreenshot", false);
 		    caps.setJavascriptEnabled(true);
 		    caps.setCapability(PhantomJSDriverService.PHANTOMJS_CLI_ARGS, new String[] {"--web-security=no", "--ignore-ssl-errors=yes", "--ssl-protocol=any"});
 		    String userAgent = "Mozilla/5.0 (Windows NT 6.0) AppleWebKit/535.1 (KHTML, like Gecko) Chrome/13.0.782.41 Safari/535.1";
