@@ -66,7 +66,7 @@ node('docker-maven-slave') {
 					
 					List<List<List<String>>> elementList =  null;
 					
-					if( null == results || null == result.elements)
+					if( null == result || null == result.elements)
 					{
 						println "results are not found" 
 					}
