@@ -20,6 +20,11 @@ node('docker-maven-slave') {
 	String BUILD_URL= "${env.BUILD_URL}"
 	def PIPELINE_VERSION="1.0.${BUILD_NUMBER}-${GIT_BRANCH}"
 	currentBuild.displayName = "${PIPELINE_VERSION}"
+	String teamDL =  "";
+	if(GIT_BRANCH=="upgradedATDD" || GIT_BRANCH=="theATeam")
+	{
+		teamDL = "UCP_TheATeam_DL@ds.uhc.com"
+	}
 	int totalCount = 0;
 	int totalPassCount = 0;
 	int totalfailedCount = 0;
@@ -127,7 +132,7 @@ node('docker-maven-slave') {
 				<p><em>Please see attached reports for further details.</em></p>
 
 				''', subject: 'ATDD RUN Failed::'+PIPELINE_VERSION,
-					to: emailextrecipients([[$class: 'CulpritsRecipientProvider'], [$class: 'DevelopersRecipientProvider'], [$class: 'RequesterRecipientProvider'], [$class: 'UpstreamComitterRecipientProvider']])+";UCP_TheATeam_DL@ds.uhc.com"
+					to: emailextrecipients([[$class: 'CulpritsRecipientProvider'], [$class: 'DevelopersRecipientProvider'], [$class: 'RequesterRecipientProvider'], [$class: 'UpstreamComitterRecipientProvider']])+";"+teamDL
 
 				}
 			}
