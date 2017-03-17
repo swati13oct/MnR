@@ -43,6 +43,8 @@ import org.openqa.selenium.firefox.FirefoxBinary;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxProfile;
 import org.openqa.selenium.ie.InternetExplorerDriver;
+import org.openqa.selenium.phantomjs.PhantomJSDriver;
+import org.openqa.selenium.phantomjs.PhantomJSDriverService;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.springframework.ldap.core.DistinguishedName;
 import org.springframework.stereotype.Component;
@@ -487,7 +489,8 @@ public class MRScenario {
 	private static Map<String, String> getProperties() {
 		Map<String, String> props = new HashMap<String, String>();
 		Properties prop = new Properties();
-		String propertiesFileToPick = System.getProperty("environment");
+		//String propertiesFileToPick = System.getProperty("environment");
+		String propertiesFileToPick ="team-a";
 		System.out.println("Using properties for environment ...." + propertiesFileToPick);
 		if (StringUtils.isBlank(propertiesFileToPick)) {
 			System.out.println("Using CI as default since environment was not passed in !!!");
@@ -801,17 +804,34 @@ public class MRScenario {
 	}*/
 	
 	public WebDriver getWebDriver() {
-		if (null == webDriver) {
+		/*if (null == webDriver) {
 			File pathToBinary = new File("C:/Program Files (x86)/Mozilla Firefox/firefox.exe");
 			FirefoxBinary ffBinary = new FirefoxBinary(pathToBinary);
 			FirefoxProfile firefoxProfile = new FirefoxProfile();
 			webDriver = new FirefoxDriver(ffBinary, firefoxProfile);
 			webDriver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
-		}
-/*            
-        
-        webDriver = new FirefoxDriver();
-        webDriver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);*/
+		}*/
+		
+		String phantomjs = System.getProperty("phantomjs");
+        String agent = "Mozilla/5.0 (Linux; U; Android 2.3.3; en-us; LG-LU3000 Build/GRI40) AppleWebKit/533.1 (KHTML, like Gecko) Version/4.0 Mobile Safari/533.1";
+	    DesiredCapabilities caps = new DesiredCapabilities();
+	    caps.setCapability(PhantomJSDriverService.PHANTOMJS_EXECUTABLE_PATH_PROPERTY,"C:/Dev/programs/phantomjs/bin/phantomjs.exe");
+	    System.out.print(System.getProperty("phantomjs"));
+	    /*if (StringUtils.isBlank(phantomjs)) {
+	     caps.setCapability(PhantomJSDriverService.PHANTOMJS_EXECUTABLE_PATH_PROPERTY,props.get("HeadlessBrowserPath"));
+	    } else {
+	     caps.setCapability(PhantomJSDriverService.PHANTOMJS_EXECUTABLE_PATH_PROPERTY,System.getProperty("phantomjs"));
+	    }*/
+	    caps.setCapability(PhantomJSDriverService.PHANTOMJS_PAGE_SETTINGS_PREFIX + "userAgent", agent);
+	    
+	    caps.setJavascriptEnabled(true);
+	    //caps.setCapability(PhantomJSDriverService.PHANTOMJS_CLI_ARGS, new String[] {"--web-security=false", "--ignore-ssl-errors=true", "--ssl-protocol=any"});
+	    caps.setCapability(PhantomJSDriverService.PHANTOMJS_CLI_ARGS, new String[] {"--ignore-ssl-errors=true", "--ssl-protocol=any"});
+	    String userAgent = "Mozilla/5.0 (Linux; U; Android 2.3.3; en-us; LG-LU3000 Build/GRI40) AppleWebKit/533.1 (KHTML, like Gecko) Version/4.0 Mobile Safari/533.1";
+	    //String userAgent = "Mozilla/5.0 (Windows NT 6.0) AppleWebKit/535.1 (KHTML, like Gecko) Chrome/13.0.782.41 Safari/535.1";
+	    System.setProperty("phantomjs.page.settings.userAgent", userAgent);
+	    webDriver = new PhantomJSDriver(caps);
+
         return webDriver;
  }
 
