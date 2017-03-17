@@ -361,7 +361,6 @@ public ContactUsPage navigatesToContactUsPage() {
 	}
 
 	public OrderplanmaterialsPage navigateToOrderPlanMaterialsPage() {
-System.out.println(this.driver.getCurrentUrl()+"****************************");
 		myMenuNavigator.click();
 		orderPlanMaterials.click();
 		CommonUtility.checkPageIsReady(driver);

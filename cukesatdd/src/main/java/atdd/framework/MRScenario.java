@@ -880,10 +880,9 @@ public class MRScenario {
 		
 		
 		    String phantomjs = System.getProperty("phantomjs");
-		    System.out.println("phantomjs path is "+ phantomjs +"*********************************************************88");
+		    System.out.println("phantomjs path is "+ phantomjs);
 		    if(phantomjs!=null){
 		    DesiredCapabilities caps = new DesiredCapabilities();
-		    System.out.print(System.getProperty("phantomjs"));
 		    if (StringUtils.isBlank(phantomjs)) {
 		    	caps.setCapability(PhantomJSDriverService.PHANTOMJS_EXECUTABLE_PATH_PROPERTY,props.get("HeadlessBrowserPath"));
 		    	

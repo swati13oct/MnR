@@ -111,8 +111,7 @@ public abstract class UhcDriver {
 		} catch (Exception e) {
 			System.out.println("Exception: Element not found/not visible");
 
-		}
-		System.out.println(driver.getCurrentUrl()+"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+		}		
 		return false;
 	}
 
