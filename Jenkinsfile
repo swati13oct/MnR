@@ -63,7 +63,17 @@ node('docker-maven-slave') {
 					BufferedReader reader = new BufferedReader(new InputStreamReader(urlStream));
 					JsonSlurper jsonSlurper = new JsonSlurper();
 					Object result = jsonSlurper.parse(reader);
-					List<List<List<String>>> elementList =  result.elements;
+					
+					List<List<List<String>>> elementList =  null;
+					
+					if( null == results || null == result.elements)
+					{
+						println "results are not found" 
+					}
+					else
+					{
+						elementList = result.elements;
+					}					
 
 					if(null == elementList  || null == elementList.get(0))
 					{
