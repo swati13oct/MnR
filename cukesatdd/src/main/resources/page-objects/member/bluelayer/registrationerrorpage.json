@@ -4,6 +4,10 @@
 "errorMessage":{
 "identifier": "xpath",
 "elementName": "//*[@id='contentRow']/td/div[2]/div[2]/div[1]/div/div/div/div[2]/div[2]/div/div/h3"
+},
+"errorMessagetext":{
+"identifier": "xpath",
+"elementName": "//*[@id='contentRow']/td/div[2]/div[2]/div[1]/div/div/div/div[2]/div[2]/div/div/p[2]"
 }
 }
 }
