@@ -72,10 +72,16 @@ public class PageConstants {
 	public static final String PAYMENT_HISTORY_PAGE = "paymentHistoryPage";
 
 	public static final String ONE_TIME_PAYMENT_PAGE = "oneTimePaymentPage";
+	
+	public static final String AUTOMATIC_PAYMENT_PAGE = "automaticPaymentPage";
 
 	public static final String CONFIRM_ONE_TIME_PAYMENT_PAGE = "confirmOneTimePaymentPage";
+	
+	public static final String CONFIRM_AUTOMATIC_PAYMENT_PAGE = "confirmAutomaticPaymentPage";
 
 	public static final String ONE_TIME_PAYMENT_SUCCESS_PAGE = "oneTimePaymentSuccessPage";
+	
+	public static final String AUTOMATIC_PAYMENT_SUCCESS_PAGE = "automaticPaymentSuccessPage";
 
 	public static final String SETUP_AUTO_PAYMENTS_PAGE = "setupAutoPaymentPage";
 
@@ -102,10 +108,14 @@ public class PageConstants {
 	public static final String MANAGE_DRUG_PAGE = "estimateCostPage";
 
 	public static final String ADD_DRUG_PAGE = "addDrugPage";
+	public static final String ADD_DRUG_DETAILS = "addDrugDetails";
+	public static final String SAVING_OPPORTUNITY = "savingopportunity";
+
 
 	public static final String PHARMACY_TYPES = "pharmacyTypeArray";
 
 	public static final String REGISTRATION_HOME_PAGE = "registrationHomePage";
+	public static final String DRUG_COST_ESTIMATOR_PAGE = "drugcostestimatorPage";
 
 	public static final String PASSWORD_ASSISTANCE_PAGE = "passwordAssistancePage";
 
@@ -121,7 +131,11 @@ public class PageConstants {
 	
 	public static final String ONE_TIME_PAYMENTS_DASHBOARD = "onetimePaymentsPageDashboard";
 	
+	public static final String AUTOMATIC_PAYMENTS_DASHBOARD = "automaticPaymentsPageDashboard";
+	
 	public static final String REVIEW_ONE_TIME_PAYMENTS_DASHBOARD = "reviewOnetimePaymentsPageDashboard";
+	
+	public static final String REVIEW_AUTOMATIC_PAYMENTS_DASHBOARD = "reviewAutomaticPaymentsPageDashboard";
 
 	
 

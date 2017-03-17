@@ -583,7 +583,7 @@ public class BenefitsAndCoverageUmsStepDefinition {
 
 	}
 	
-	//jma commented out duplicate step definition.  @Then("^the user validates the content on benefits and coverage page")
+	//jma duplicate step definition commented out duplicate step definition.  @Then("^the user validates the content on benefits and coverage page")
 	public void validateContentOnBenefitsAndCoveragePage() {
 		try {
 			
@@ -610,8 +610,8 @@ public class BenefitsAndCoverageUmsStepDefinition {
 		FormsandresourcesPage formsAndResourcesPage = accountHomePage.navigateToMydocumentUmsPage();		
 	}
 	
-	
-	@Then("^the user validates the content on mydocument page$")
+	//jma duplicate step definition
+	//@Then("^the user validates the content on mydocument page$")
 	public void views_mydoument_validation_ums_site() {
 		try {
 			
@@ -630,12 +630,13 @@ public class BenefitsAndCoverageUmsStepDefinition {
 
 	}
 	
-	@Then("^the user validates the backtopreviouspage link on mydocument page$")
+	@Then("^the user validates the backtopreviouspage link on mydocument page in UMS site$")
 	public void view(){
 		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstants.ACCOUNT_HOME_PAGE);
 		//FormsandresourcesPage formsAndResourcesPage=null;
 		FormsandresourcesPage formsAndResourcesPage = accountHomePage.navigatebackToformsandresourcesUmsPage();
 	}
+
 
 
 	@Then("^I will be able access a PDF flyer in  English,Spanish or Chinese that explains passport benefits when a plan has this feature$")
@@ -667,6 +668,42 @@ public class BenefitsAndCoverageUmsStepDefinition {
 	       }
 	       System.out.println("-----add plans validation ended----------");
 	}
+
+	//jma duplicate step definition
+	//@Then("^the user validates the view/download link on mydocument page$")
+	public void view_download_link_validation_ums_site(){
+		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstants.ACCOUNT_HOME_PAGE);
+		//FormsandresourcesPage formsAndResourcesPage=null;
+		FormsandresourcesPage formsAndResourcesPage = accountHomePage.navigateToviewdownloadlinkUmsPage();
+	}
+	//jma duplicate step definition
+	//@Then("^the user validates the pagination link on mydocument page$")
+	public void view_pagination_link_validation_ums_site(){
+		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstants.ACCOUNT_HOME_PAGE);
+		//FormsandresourcesPage formsAndResourcesPage=null;
+		FormsandresourcesPage formsAndResourcesPage = accountHomePage.navigateTopaginationlinkUmsPage();
+	}
+	
+	//jma duplicate step definition
+	//@Then("^the user validates the custom search on mydocument page$")
+	public void view_custom_search_link_validation_ums_site(){
+		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstants.ACCOUNT_HOME_PAGE);
+		//FormsandresourcesPage formsAndResourcesPage=null;
+		FormsandresourcesPage formsAndResourcesPage = accountHomePage.navigateTocustomsearchlinkUmsPage();
+	}
+	
+
+//jma duplicate step definition
+//@Then("^the user validates the sorting link on mydocument page$")
+	public void view_sorting_search_link_validation_ums_site(){
+		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstants.ACCOUNT_HOME_PAGE);
+		//FormsandresourcesPage formsAndResourcesPage=null;
+		FormsandresourcesPage formsAndResourcesPage = accountHomePage.navigateTosortingsearchlinkUmsPage();
+	}
+
+	
+
+	
 
 
 }

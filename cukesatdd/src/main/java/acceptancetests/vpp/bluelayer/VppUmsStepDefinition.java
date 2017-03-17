@@ -1500,6 +1500,7 @@ public class VppUmsStepDefinition {
 		
 		plansummaryPage.viewPlanSummary(planType);
 	}
+
 	@When("^the user performs plan search  in UMS site$")
 	public void zipcode_details_in_UMS(DataTable givenAttributes) {
 
@@ -1633,4 +1634,5 @@ public class VppUmsStepDefinition {
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 		vppPlanSummaryPage.validateReactiveChat();
 	}
+
 }

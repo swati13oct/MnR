@@ -331,8 +331,11 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		} catch (Exception e) {
 			System.out.println("county box not found");
 		}
-		
-		if (driver.getTitle().equalsIgnoreCase(PageTitleConstants.ULAYER_PLAN_SUMMARY_PAGE_TITLE)) {
+
+		if (getTitle()
+				.equalsIgnoreCase(
+						"Our Medicare Plan Types | UnitedHealthcare®")) {
+
 			return new VPPPlanSummaryPage(driver);
 		}
 		return null;

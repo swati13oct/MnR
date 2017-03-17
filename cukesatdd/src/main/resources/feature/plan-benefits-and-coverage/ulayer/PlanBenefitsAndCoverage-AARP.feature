@@ -824,7 +824,7 @@ Feature: To test plan benefits and Coverage on AARP site for Federal members
       | planType | copayCategory |
       | MAPD     | NON LIS       |
 
-  @availableRiders
+  @availablehighOptionRiders
   Scenario Outline: Verify Federal Available High Optional Dental riders on benefits and coverage in AARP site for MAPD Lis 2 member
     Given registered AMP with following details for plan benefits and coverage flow in AARP site
       | Plan Type      | <planType>      |
@@ -837,7 +837,8 @@ Feature: To test plan benefits and Coverage on AARP site for Federal members
 
     Examples: 
       | planType | copayCategory |
-      | MAPD     | LIS 2         |
+      | MAPD     | NON LIS       |
+#Data Used: q1_feb_ulayer072
 
   @availableRider
   Scenario Outline: Verify Federal Available  Dental 260  riders on benefits and coverage in AARP site for  MAPD member
@@ -911,6 +912,7 @@ Feature: To test plan benefits and Coverage on AARP site for Federal members
     Examples: 
       | planType | copayCategory |
       | MAPD     | NON LIS       |
+#Data Used: DentalPlatinumLis2
 
   @disclaimers
   Scenario Outline: Verify Disclaimers section is in place on Benefits and Coverage page
@@ -921,6 +923,21 @@ Feature: To test plan benefits and Coverage on AARP site for Federal members
     Then the user view benefits and coverage in AARP site
     And the user clicks on Disclaimers link
     And the user validates the content on benefits and coverage page
+
+    Examples: 
+      | planType | copayCategory |
+      | MAPD     | NON LIS       |
+
+  @needHelpContactUs
+  Scenario Outline: Verify Need Help section is in place on Benefits and Coverage page
+    Given registered AMP with following details for plan benefits and coverage flow in AARP site
+      | Plan Type      | <planType>      |
+      | Copay Category | <copayCategory> |
+    When the user view forms and resources in AARP site
+    Then the user view benefits and coverage in AARP site
+    And the user validates the content on benefits and coverage page
+    When the user navigates to contact us page in AARP site
+    Then the user validates the contact us page in AARP site
 
     Examples: 
       | planType | copayCategory |

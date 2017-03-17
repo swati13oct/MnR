@@ -8,6 +8,7 @@ import org.junit.Assert;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoAlertPresentException;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -76,13 +77,13 @@ public class DrugCostEstimatorPage extends UhcDriver{
 	@FindBy(xpath="/html/body/div[2]/div[3]/div/div/div/div/div/div[3]/div/table/tbody/tr")
 	public WebElement SaveDrugPage;
 	
-	@FindBy (xpath = "//div[@id='dce.member']/div[2]/div/div/div/div/div/div[2]/div[1]/div[2]/div[1]/ul/li[2]/a/p[2]")
+	@FindBy(xpath="//p[contains(text(),'STEP2:')]/following-sibling::span[p[contains(text(),'PHARMACY')]]")
 	public WebElement step2PharmacyTab;
 	
-	@FindBy(className = "milesSelection")
+	@FindBy(id = "distance")
 	public WebElement milesSelection;
 	
-	@FindBy (xpath = "//div[@id='dce.member']/div/div[5]/div/div/form/div/div/div/div[2]/div[3]/span[1]")
+	@FindBy (id = "zipcode")
 	public WebElement zipcodeInput;
 	
 	@FindBy(xpath = "//div[@id='dce.member']/div/div[5]/div/div/form/div/div/div/div[2]/div[3]/a[1]")
@@ -106,7 +107,27 @@ public class DrugCostEstimatorPage extends UhcDriver{
 	@FindBy(xpath = "//span[contains(./text(),'Men')]")
 	public WebElement PharmacyName;
 	
+	@FindBy(xpath="//p[contains(text(), 'Summary')]")
+	public WebElement SummaryHeader;
+	
+	@FindBy(xpath="//div/p[contains(text(),'Enter your drugs to see your total drug costs')]")
+	public WebElement Enter_drug_text;
+	
+	@FindBy(xpath="//a[@href='#drugs-tab']/span/p")
+	public WebElement drugTab;
+	
+	@FindBy(xpath="//span[@class='msg-more-drugs ng-scope']/p")
+	public WebElement mesgMoreDrugsOther;
 
+	@FindBy(xpath="//div[@class='drug-container ng-scope'][1]/p[@class='ng-binding ng-scope']")
+	public WebElement drugndosage1;
+	
+	@FindBy(xpath="//div[@class='drug-container ng-scope'][2]/p[@class='ng-binding ng-scope']")
+	public WebElement drugndosage2;
+	
+	@FindBy(xpath="//div[@class='drug-container ng-scope'][3]/p[@class='ng-binding ng-scope']")
+	public WebElement drugndosage3;
+	
 	@Override
 	public void openAndValidate() {
 
@@ -147,8 +168,8 @@ public class DrugCostEstimatorPage extends UhcDriver{
 	}
 	public void changeUrlToNewDCEPage() {
 
-		//String NewDCEUrl = "https://member.team-b-uhcmedicaresolutions.uhc.com/content/dashboard/home/drug-cost-estimator.html#/drugCostEstimator";
-		String NewDCEUrl = "https://www.team-b-uhcmedicaresolutions.uhc.com/content/dashboard/home/drug-cost-estimator.html";
+		String NewDCEUrl = "https://member.team-b-uhcmedicaresolutions.uhc.com/content/dashboard/home/drug-cost-estimator.html";
+		//String NewDCEUrl = "https://www.team-b-uhcmedicaresolutions.uhc.com/content/dashboard/home/drug-cost-estimator.html";
 		driver.get(NewDCEUrl);
 		
 		try{
@@ -199,6 +220,7 @@ public class DrugCostEstimatorPage extends UhcDriver{
 			AddNewDrugModal addNewDrugModal = clickOnAddDrug();
 			if((getDrugsCount()) == 25 || i == 26){
 				System.out.println("Exceeded the limit");
+				addNewDrugModal.verifyExceededError();
 				break;
 			}
 			addNewDrugModal.typeDrugName(drug);
@@ -245,7 +267,90 @@ public class DrugCostEstimatorPage extends UhcDriver{
 		options.selectByVisibleText(radius);
 					
 	}
+	
+	public boolean validatemesgmoredrugsothertext(String otherscount) {
+		// TODO Auto-generated method stub
 		
+		System.out.println("--------------" + mesgMoreDrugsOther.getText());
+		if(mesgMoreDrugsOther.getText().contentEquals(otherscount))
+			//mesgMoreDrugsOther.getText().contentEquals(cs)
+			return true;
+		else 
+			return false;
+	}
+	public void validateenterdrugtext() {
+		Assert.assertTrue(Enter_drug_text.isDisplayed());
+		}
+
+public void validatesummaryheading() {
+	
+		Assert.assertTrue(SummaryHeader.isDisplayed());
+	}
+	
+	public boolean validatetabdrugheading() {
+		// TODO Auto-generated method stub
+		
+		if(drugTab.getText().equalsIgnoreCase("DRUGS")){
+			
+			return true;
+		}
+			else 
+			return false;
+	}
+
+public void validateDrugsnotPresent(String dosage){
+		
+		String deleteDrugXpath="//div[@id='drugs-tab']//p[contains (text(), '"+dosage+"')]";
+		try{
+		WebElement dosagedrug=driver.findElement(By.xpath(deleteDrugXpath));
+		Assert.assertFalse(true);
+		}catch(NoSuchElementException e){
+			Assert.assertFalse(false);
+		}
+		
+	}
+
+public void deleteDrugsByDosage(String dosage) throws InterruptedException {
+	Thread.sleep(15000);
+	String deleteDrugXpath="//div[@id='drugs-tab']//p[contains (text(), '"+dosage+"')]/following-sibling::ul//li/a[@class='delete-drug']";
+	WebElement deletedrug=driver.findElement(By.xpath(deleteDrugXpath));
+	deletedrug.click();
+	Thread.sleep(5000);
+
+}
+
+public AddDrugDetails navigateToEditDrug(String drug) throws Exception{
+	//editDrug.click();
+	Thread.sleep(15000);
+	WebElement editDrug = driver.findElement(By.xpath("//div[@class='drug-container']//p[contains(text(),'"+drug+"')]/parent::section//a[@class='edit-drug']"));
+	editDrug.click();
+	Thread.sleep(5000);
+	return new AddDrugDetails(driver);
+}
+
+
+public boolean validateAddedDrug(String args1,String arg2, String arg3) {
+		// TODO Auto-generated method stub
+		validate(driver.findElement(By.xpath("//div[@id='drugs-tab']//p[contains (text(), '"+args1+"')]/following-sibling::p/span[contains(text(),'"+arg2+"')]")));
+		
+		//List<WebElement> stri = driver.findElements(By.xpath("//div[@id='drugs-tab']//p[contains (text(), '"+args1+"')]")).getText();
+	//System.out.println("++++++++drugdetails+++++++++" + drugdetails + "+++++++++++++++++" );
+
+	 driver.findElement(By.xpath("//div[@id='drugs-tab']//p[contains (text(), '"+args1+"')]")).getText().contains(arg2);
+	 driver.findElement(By.xpath("//div[@id='drugs-tab']//p[contains (text(), '"+args1+"')]")).getText().contains(arg3);
+	
+		//driver.findElements(By.xpath("//div[@id='drugs-tab']//p[contains (text(), '"+args1+"')]).gettext();
+	return true;
+	}
+
+
+	public boolean validatedrugdosagetext(String arg1, String arg2, String arg3) {
+		// TODO Auto-generated method stub
+		if(drugndosage1.getText().equalsIgnoreCase(arg1)&&drugndosage2.getText().equalsIgnoreCase(arg2)&&drugndosage3.getText().equalsIgnoreCase(arg3))
+			return true;
+		else 
+			return false;
+	}
 		
 }
 

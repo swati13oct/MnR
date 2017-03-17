@@ -54,25 +54,28 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 
 	@FindBy(xpath = ".//*[@id='planBenefitsApp']/div[7]/div[1]/div/div[2]/div[2]/div[2]/div/div[2]/div/div/button")
 	private WebElement addRiderButton;
-	
-	@FindBy(className = "btn_addRider_atdd")
+
+	@FindBy(id = "test")
 	private WebElement addRiderPopupButton;
-	
+
 	@FindBy(xpath = "//a[contains(.,'CANCEL')]")
 	private WebElement cancelButton;
-	
+
 	@FindBy(xpath = "//button[@ng-click='loadRemoveRiderPopUp(rider)']")
 	private WebElement removeRiderButton;
-	
+
 	@FindBy(className = "btn_removeRider_atdd")
 	private WebElement removeRiderPopupButton;
-	
+
 	@FindBy(className = "btn_repalceRider_atdd ")
 	private WebElement replacceRiderPopupButton;
-	
-	@FindBy(className = "disclaimers-atdd")
+
+	@FindBy(xpath = "//span[contains(.,'keyboard_arrow_down')]")
 	private WebElement disclaimersLink;
-	
+
+	@FindBy(xpath = "//a[contains(.,'contact us')]")
+	private WebElement contactUsLink;
+
 	public BenefitsAndCoveragePage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
@@ -191,7 +194,7 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 			e.printStackTrace();
 		}
 	}
-	
+
 	public BenefitsAndCoveragePage validateAddRiderPopup() throws Exception {
 
 		String MainWindow = driver.getWindowHandle();
@@ -205,16 +208,17 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 			if (!MainWindow.equalsIgnoreCase(ChildWindow)) {
 
 				driver.switchTo().window(ChildWindow);
-				
+			}
 				validate(addRiderPopupButton);
 				validate(cancelButton);
-				Thread.sleep(3000);
+				//Thread.sleep(3000);
+				System.out.println("Add this rider button to be clicked");
 				addRiderPopupButton.click();
-			}
+			
 		}
 		return null;
 	}
-	
+
 	public void clickOnRemoveRider() {
 		// TODO Auto-generated method stub
 		validate(removeRiderButton);
@@ -226,7 +230,7 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 			e.printStackTrace();
 		}
 	}
-	
+
 	public BenefitsAndCoveragePage validateRemoveRiderPopup() throws Exception {
 
 		String MainWindow = driver.getWindowHandle();
@@ -240,16 +244,15 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 			if (!MainWindow.equalsIgnoreCase(ChildWindow)) {
 
 				driver.switchTo().window(ChildWindow);
-				
+			}
 				validate(removeRiderPopupButton);
 				validate(cancelButton);
 				Thread.sleep(3000);
 				addRiderPopupButton.click();
-			}
 		}
 		return null;
 	}
-	
+
 	public BenefitsAndCoveragePage validateReplaceRiderPopup() throws Exception {
 
 		String MainWindow = driver.getWindowHandle();
@@ -263,16 +266,15 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 			if (!MainWindow.equalsIgnoreCase(ChildWindow)) {
 
 				driver.switchTo().window(ChildWindow);
-				
+			}	
 				validate(replacceRiderPopupButton);
 				validate(cancelButton);
 				Thread.sleep(3000);
-				//addRiderPopupButton.click();
-			}
+				addRiderPopupButton.click();
 		}
 		return null;
 	}
-	
+
 	public void clickOnDisclaimers() {
 		// TODO Auto-generated method stub
 		validate(disclaimersLink);
@@ -283,5 +285,15 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	}
+
+	public ContactUsPage navigatesToContactUsPage() {
+
+		contactUsLink.click();
+		if (getTitle().equalsIgnoreCase("AARP Medicare Plans | Contact Us")) {
+			return new ContactUsPage(driver);
+		}
+		return null;
+
 	}
 }

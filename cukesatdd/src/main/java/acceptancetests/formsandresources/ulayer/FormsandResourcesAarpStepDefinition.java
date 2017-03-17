@@ -201,12 +201,35 @@ public class FormsandResourcesAarpStepDefinition {
 	formsandresourcesPage.verifyPassportFlyer();
 	}
 
+
 	@Then("^I will be able access a PDF flyer in Spanish or Chinese that explains passport benefits when a plan has this feature$")
 	public void I_will_be_able_access_a_PDF_flyer_spanish() {
 	FormsandresourcesPage formsandresourcesPage = (FormsandresourcesPage) getLoginScenario()
 	.getBean(PageConstants.FORMS_AND_RESOURCES_PAGE);
 	formsandresourcesPage.verifyPassportFlyer();
 	}
+
+	@Then("^i should see the mail order pdf link$")
+	public void validates_mail_order_pdf_present() {
+		FormsandresourcesPage formsandresourcesAarpPage = (FormsandresourcesPage) getLoginScenario()
+				.getBean(PageConstants.FORMS_AND_RESOURCES_PAGE);
+		JSONObject formsAndResourcesActualJson = (JSONObject) getLoginScenario()
+				.getBean(FnRCommonConstants.FORMS_AND_RESOURCES_ACTUAL);
+		JSONObject formsAndResourcesExpectedJson = (JSONObject) getLoginScenario()
+				.getBean(FnRCommonConstants.FORMS_AND_RESOURCES_EXPECTED);
+		/* Validations */
+		try {
+			JSONAssert.assertEquals(formsAndResourcesExpectedJson,
+					formsAndResourcesActualJson, true);
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}
+
+		formsandresourcesAarpPage.logOut();
+
+	}
+
+
 	@After
 	public void tearDown() {
 

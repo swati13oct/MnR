@@ -1,12 +1,11 @@
-@ourPlans
+@vppportfoliopage
 Feature: To Verify view plans and pricing Portfolio Page
 
 Scenario Outline: To validate zip code widget functionality MA/PDP prospect
-Given the user is on the AARP our plans page
+Given the user is on the vpp portfolio page
 Then the user performs plan serach using zipcode
 		| Zip Code |<zipCode>|
 		| County   |<county> |
-And verifies the zipcode on VPP page 
 Examples:
 		|zipCode|county     |
 		|90210  |Los Angeles County|

@@ -10,16 +10,16 @@ import atdd.framework.UhcDriver;
 
 public class VPPAarpNeedAStepBackWidget extends UhcDriver{
 	
-	//Need a Step Back? Widget(US447571)
-	    @FindBy(xpath="//div/div[3]/div[3]/div/div[3]/div[2]/div/div/div/div[4]/div[1]")
+ 	    @FindBy(xpath="//h4[contains(text(),'Need a Step Back')]/parent::div[@class='segment-title']/parent::div")
 	    private WebElement needAStepBackWidget;
-		//@FindBy(xpath="//*[contains(text(),'Need a Step Back?')]")
-	    @FindBy(xpath="//div[3]/div/div[3]/div[2]/div/div/div/div[4]/div[1]/div[1]/h2")
+	    
+ 	    @FindBy(xpath="//h4[contains(text(),'Need a Step Back')]")
 		private WebElement stepBackHeader;
-		//@FindBy(xpath="//*[contains(text(),'Start Plan Selector')]")
-		@FindBy(xpath="//div[3]/div/div[3]/div[2]/div/div/div/div[4]/div[1]/div[2]/ul/div/div/p[2]/a/span")
+ 	    
+ 		@FindBy(id="selector")
 		private WebElement planSelectorButton;
-		@FindBy(xpath="//div[3]/div/div[3]/div[2]/div/div/div/div[4]/div[1]/div[2]/ul/div/div/p[1]")
+ 		
+		@FindBy(xpath="//h4[contains(text(),'Need a Step Back')]/parent::div[@class='segment-title']/following-sibling::div/div/p")
 		private WebElement stepBackContent;
 
 	public VPPAarpNeedAStepBackWidget(WebDriver driver) {
@@ -30,9 +30,9 @@ public class VPPAarpNeedAStepBackWidget extends UhcDriver{
 
 	@Override
 	public void openAndValidate() {
-		validate(stepBackHeader);
+		/*validate(stepBackHeader);
 		validate(planSelectorButton);
-		validate(needAStepBackWidget);
+		validate(needAStepBackWidget);*/
 	}
     
 	public void validateStepBackWidget(){
@@ -49,6 +49,14 @@ public class VPPAarpNeedAStepBackWidget extends UhcDriver{
 				//validate start plan selector button				
 					if(planSelectorButton.isDisplayed()){
  						driver.getTitle().equalsIgnoreCase("Plan Selector");
+ 						planSelectorButton.click();
+ 						try {
+							Thread.sleep(5000);
+						} catch (InterruptedException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+ 						if(driver.getTitle().equals("Plan Selector"))
 						System.out.println("---------plan selector page displayed successfuly-------");
 					}else{
 					     Assert.fail("----------plan selector page not displayed-----------------");

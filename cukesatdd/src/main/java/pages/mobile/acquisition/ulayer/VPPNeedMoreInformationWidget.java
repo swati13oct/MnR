@@ -10,15 +10,13 @@ import atdd.framework.UhcDriver;
 
 public class VPPNeedMoreInformationWidget extends UhcDriver{
 	
-	//Need more information widget(US447570)
-		//@FindBy(xpath="//*[contains(text(),'Need More Information')]")
-	    @FindBy(xpath="//div[3]/div/div[3]/div[2]/div/div/div/div[3]/div[1]/div[1]/h2")
+ 	    @FindBy(xpath="//h4[contains(text(),'Need more Information')]")
 		private WebElement moreInformatonHeader;
-		//@FindBy(xpath="//*[contains(text(),'Choose a video')]")
-	    @FindBy(xpath="//div[3]/div/div[3]/div[2]/div/div/div/div[3]/div[1]/div[2]/ul/div/div[2]/div/a")
+ 	    
+ 	    @FindBy(xpath="//h4[contains(text(),'Need more Information')]/parent::div/following-sibling::div/div/a")
 		private WebElement chooseAVideoLink;
-		//@FindBy(xpath="//div/div[2]/div/div[2]/div[1]/div/div/div[2]/div/p")
-	    @FindBy(xpath="//div[3]/div/div[3]/div[2]/div/div/div/div[3]/div[1]/div[2]/ul/div/div[1]/p")
+ 	    
+ 	    @FindBy(xpath="//h4[contains(text(),'Need more Information')]/parent::div/following-sibling::div/div")
 		private WebElement moreInformationDynamicContent;
 
 	public VPPNeedMoreInformationWidget(WebDriver driver) {

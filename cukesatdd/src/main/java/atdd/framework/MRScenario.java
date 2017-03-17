@@ -43,6 +43,7 @@ import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxBinary;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxProfile;
+import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.phantomjs.PhantomJSDriver;
 import org.openqa.selenium.phantomjs.PhantomJSDriverService;
@@ -51,6 +52,10 @@ import org.springframework.ldap.core.DistinguishedName;
 import org.springframework.stereotype.Component;
 
 import acceptancetests.atdd.data.CommonConstants;
+
+
+import com.gargoylesoftware.htmlunit.BrowserVersion;
+import com.gargoylesoftware.htmlunit.WebClient;
 
 /**
  * 
@@ -80,7 +85,6 @@ public class MRScenario {
 	public static String environment, browser;
 
 	private static final String DIRECTORY = "/src/main/resources/";
-
 	public static int count = 0;
 
 	public void saveBean(String id, Object object) {
@@ -123,7 +127,7 @@ public class MRScenario {
 		String line = "";
 		String cvsSplitBy = ",";
 		String defaultSchema = props.get(CommonConstants.DB_SCHEMA);
-
+        
 		try {
 			InputStream memberTypeStream = ClassLoader.class
 					.getResourceAsStream("/database/AMP-Member-Type.csv");
@@ -783,6 +787,7 @@ public class MRScenario {
 			fileName = fileName.replaceAll("/", "_");
 		}
 		fileName = fileName + ".json";
+		
 		JSONObject jsonObject = null;
 		String parentDirectory = null;
 		try {
@@ -796,6 +801,8 @@ public class MRScenario {
 			stream = new FileInputStream(parentDirectory + DIRECTORY
 					+ directory + fileName);
 		} catch (FileNotFoundException e) {
+			System.out.println("FILE NOT FOUND: " + parentDirectory + DIRECTORY
+					+ directory + fileName);
 			return jsonObject;
 		}
 
@@ -833,14 +840,21 @@ public class MRScenario {
 				jsonObject = new JSONObject(response);
 			}
 		} catch (JSONException e) {
-			// TODO Auto-generated catch block
+			System.out.println("EMPTY RESPONSE: " + parentDirectory + DIRECTORY
+					+ directory + fileName);
 			e.printStackTrace();
 		}
+		
+//		if (fileName.equalsIgnoreCase("DentalPlatinumLis2.json")) {
+//			System.out.println("===>File:" + parentDirectory + DIRECTORY
+//					+ directory + fileName + "Value => " + jsonObject);
+//		}
 		return jsonObject;
 	}
 
 	public Map<String, JSONObject> getExpectedJson(String user) {
 
+		
 		if (null != user && expectedDataMapUlayer.containsKey(user)) {
 			return expectedDataMapUlayer.get(user);
 		}
@@ -856,19 +870,49 @@ public class MRScenario {
 	}
 
 	/**
-	 * Figure out which web browser we're going to use. The JENKINS browser will
-	 * take precendence because it will only exist if this is running in
-	 * Jenkins. Otherwise, use the browser configured in the config.properties
-	 * file.
+	 * Set values in your config file to use the various web browsers. Add the following 
+	 * two lines to your config file: 
 	 * 
-	 */
+	 *  WebDriver=PHANTOMJS
+      * BrowserPathToBinary=C:\\Apps\\phantomjs-2.1.1-windows\\bin\\phantomjs.exe
+      * 
+      * or for Fire Fox:
+      * 
+      * WebDriver=FIREFOX
+      * BrowserPathToBinary=C:\\Program Files (x86)\\Mozilla Firefox\\firefox.exe
+      * 
+      * Of course your path to the binary will be different.
+      * 
+      * PhantomJS supports mimicking browsers.  By changing the agentString, one can spoof
+      * a browser type for example, this is a desktop string:
+      * 
+      * Mozilla/5.0 (Windows NT 6.0) AppleWebKit/535.1 (KHTML, like Gecko) Chrome/13.0.782.41 Safari/535.1
+      * 
+      * Using this string causes PhantomJS to act like a desktop browser and will access desktop versions of websites.
+      * This is a mobile string:
+      * 
+      * Mozilla/5.0 (Linux; U; Android 2.3.3; en-us; LG-LU3000 Build/GRI40) AppleWebKit/533.1 (KHTML, like Gecko) Version/4.0 Mobile Safari/533.1
+      * 
+      * Using this string makes PhantomJS identfy itself as a mobile browser (on a mobile device) and will allow you to use the mobile versions
+      * of websites.
+      * 
+      * By default, When a job is run in Jenkins, the values defines in Jenkins will override values in the config file, but will not change them.  If you 
+      * look at the Jenkins job, it specifies a browser type and it should be PhantomJS.
+      * Anything else may be a problem.
+      */
 	public WebDriver getWebDriver() {
 
-		 
+
 		String browser = (null == System.getProperty(CommonConstants.JENKINS_BROWSER)
-				? props.get("WebDriver") : System.getProperty(CommonConstants.JENKINS_BROWSER));
+				? props.get(CommonConstants.DESKTOP_WEBDRIVER) : System.getProperty(CommonConstants.JENKINS_BROWSER));
 		
-		System.out.println("getWebDriver, returning driver " + browser);
+		String agent = (null == System.getProperty(CommonConstants.JENKINS_BROWSER_AGENT_STRING)
+				? props.get(CommonConstants.DESKTOP_BROWSER_AGENT_STRING) : System.getProperty(CommonConstants.JENKINS_BROWSER_AGENT_STRING));
+		
+		System.out.println("getWebDriver: returning driver for " + browser);
+		if (browser.equalsIgnoreCase(CommonConstants.JENKINS_BROWSER_PHANTOMJS)) {
+			System.out.println("PHANTOMJS Agent: " + agent);
+		}
 		
 		// if webDriver is null, create one, otherwise send the existing one
 		// back.
@@ -880,44 +924,40 @@ public class MRScenario {
 			String pathToBinary = (null == System.getProperty("phantomjs") ? props.get("BrowserPathToBinary")
 					: System.getProperty("phantomjs"));
 			
-			// Choose your browser based on name. The name is what is in
+			// Choose your browser based on name. The name value is what is in
 			// CommonConstants.
 			// If the browser isn't configured (null) or it's set to HTMLUNIT,
 			// use HTMLUNIT.
 			// This is the default browser when I checked out the code, so it's
 			// the default
 			if (null == browser || browser.equalsIgnoreCase(CommonConstants.HTMLUNIT_BROWSER)) {
-//				// use the HtmlUnit Driver
-//				HtmlUnitDriver htmlUnitDriver = new HtmlUnitDriver(BrowserVersion.FIREFOX_24) {
-//					@Override
-//					protected WebClient modifyWebClient(WebClient client) {
-//						client.getOptions().setThrowExceptionOnScriptError(false);
-//						return client;
-//					}
-//				};
-//				htmlUnitDriver.setJavascriptEnabled(true);
-//
-//				webDriver = htmlUnitDriver;
-//				webDriver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
-//				webDriver.manage().window().maximize();
+				// use the HtmlUnit Driver
+				HtmlUnitDriver htmlUnitDriver = new HtmlUnitDriver(BrowserVersion.BEST_SUPPORTED) {
+					@Override
+					protected WebClient modifyWebClient(WebClient client) {
+						client.getOptions().setThrowExceptionOnScriptError(false);
+						return client;
+					}
+				};
+				htmlUnitDriver.setJavascriptEnabled(true);
+
+				webDriver = htmlUnitDriver;
+				webDriver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
+				webDriver.manage().window().maximize();
 			} else if (browser.equalsIgnoreCase(CommonConstants.JENKINS_BROWSER_PHANTOMJS)) {
 				// otherwise if we have a Jenkins browser defined, we use it.
 				DesiredCapabilities caps = new DesiredCapabilities();
 				caps.setCapability(PhantomJSDriverService.PHANTOMJS_EXECUTABLE_PATH_PROPERTY, pathToBinary);
 				//from Jarvis
-				//String agent = "Mozilla/5.0 (Linux; U; Android 2.3.3; en-us; LG-LU3000 Build/GRI40) AppleWebKit/533.1 (KHTML, like Gecko) Version/4.0 Mobile Safari/533.1";
-				String agent = "Mozilla/5.0 (Windows NT 6.0) AppleWebKit/535.1 (KHTML, like Gecko) Chrome/13.0.782.41 Safari/535.1";
-				
 				caps.setCapability(PhantomJSDriverService.PHANTOMJS_PAGE_SETTINGS_PREFIX + "userAgent", agent);
 				caps.setJavascriptEnabled(true);
 				caps.setCapability(PhantomJSDriverService.PHANTOMJS_CLI_ARGS,
-						new String[] { "--web-security=no", "--ignore-ssl-errors=yes", "--ssl-protocol=tlsv1" });
-				//System.setProperty("phantomjs.page.settings.userAgent", agent);
-
+						new String[] { "--web-security=no", "--ignore-ssl-errors=yes", "--ssl-protocol=any" });
+				
 				//end from jarvis
 				webDriver = new PhantomJSDriver(caps);
 				webDriver.manage().window().setSize(new Dimension(1400,1000));
-				webDriver.manage().timeouts().pageLoadTimeout(60,TimeUnit.SECONDS);
+				webDriver.manage().timeouts().pageLoadTimeout(120,TimeUnit.SECONDS);
 			} else if (browser.equalsIgnoreCase(CommonConstants.FIREFOX_BROWSER)) {
 				FirefoxBinary ffBinary = new FirefoxBinary(new File(pathToBinary));
 				FirefoxProfile firefoxProfile = new FirefoxProfile();
@@ -949,9 +989,7 @@ public class MRScenario {
 				webDriver = new ChromeDriver(capabilities);
 				return webDriver;
 			}
-
 		}
-
 		return webDriver;
 	}
 
@@ -965,9 +1003,11 @@ public class MRScenario {
 		webDriver = new InternetExplorerDriver(ieCaps);
 		webDriver.manage().window().maximize();
 		return webDriver;
-
 	}
 
+	/*
+	 * @return
+	 */
 	public WebDriver getMobileWebDriver() {
 		Map<String, String> mobileEmulation = new HashMap<String, String>();
 		mobileEmulation.put("deviceName",
