@@ -880,6 +880,8 @@ public class MRScenario {
 		
 		
 		    String phantomjs = System.getProperty("phantomjs");
+		    System.out.println("phantomjs path is "+ phantomjs +"*********************************************************88");
+		    if(phantomjs!=null){
 		    DesiredCapabilities caps = new DesiredCapabilities();
 		    System.out.print(System.getProperty("phantomjs"));
 		    if (StringUtils.isBlank(phantomjs)) {
@@ -897,15 +899,15 @@ public class MRScenario {
 		    webDriver = new PhantomJSDriver(caps);
 		    webDriver.manage().timeouts().pageLoadTimeout(120,TimeUnit.SECONDS);
 		    webDriver.manage().window().setSize(new Dimension(1400, 1000)); 
-		
-		
-		/*    if (null == webDriver) {
-			File pathToBinary = new File("C:/Program Files (x86)/Mozilla Firefox/firefox.exe");
-			FirefoxBinary ffBinary = new FirefoxBinary(pathToBinary);
-			FirefoxProfile firefoxProfile = new FirefoxProfile();
-			webDriver = new FirefoxDriver(ffBinary, firefoxProfile);
-			webDriver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS); 
-		} */
+		    }else{		
+	        if (null == webDriver) {
+	        	File pathToBinary = new File("C:/Program Files (x86)/Mozilla Firefox/firefox.exe");
+	        	FirefoxBinary ffBinary = new FirefoxBinary(pathToBinary);
+	        	FirefoxProfile firefoxProfile = new FirefoxProfile();
+	        	webDriver = new FirefoxDriver(ffBinary, firefoxProfile);
+	        	webDriver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS); 
+	            }
+		    } 
 		    return webDriver; 
 	}
 
