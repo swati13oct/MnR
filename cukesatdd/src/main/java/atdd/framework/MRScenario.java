@@ -71,6 +71,8 @@ public class MRScenario {
 	public static String environment;
 
 	private static final String DIRECTORY = "/src/main/resources/";
+	
+	private static final String SQL_COMMIT = "COMMIT";
 
 	public static int count = 0;
 
@@ -137,7 +139,7 @@ public class MRScenario {
 				String[] massRegisStreamAttributes = line.split(cvsSplitBy);
 				userName = massRegisStreamAttributes[0];
 
-				/*pperugu ::Approach followed is to remove the already registered member and register the members again*/
+				/*pperugu ::Approach followed :: to remove the already registered member and register the members again*/
 				if (checkMemberFound(userName, con, ctx, defaultSchema)) {
 					removeMemberFound(userName, con, ctx, defaultSchema);
 				}
@@ -217,7 +219,6 @@ public class MRScenario {
 			stmt = con.createStatement();
 			String query = "select * from " + defaultSchema
 					+ ".PORTAL_USER where USER_NAME='" + userName + "'";
-			System.out.println("query--->" + query);
 			rs = stmt.executeQuery(query);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -237,7 +238,6 @@ public class MRScenario {
 				System.out.println("member not found in database and ldap");
 			}
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return false;
@@ -253,7 +253,6 @@ public class MRScenario {
 			stmt = con.createStatement();
 			String query = "select * from " + defaultSchema
 					+ ".PORTAL_USER where USER_NAME='" + userName + "'";
-			System.out.println("query--->" + query);
 			rs = stmt.executeQuery(query);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -272,7 +271,6 @@ public class MRScenario {
 			/* Checking in LDAP */
 			if (user != null) {
 				ctx.unbind(buildUserDistinguishedName(userName));
-
 				System.out.println("USERNAME " + userName
 						+ " removed from LDAP");
 
@@ -292,16 +290,13 @@ public class MRScenario {
 						+ userName + "')";
 				String query1 = "DELETE FROM " + defaultSchema
 						+ ".PORTAL_USER where USER_NAME='" + userName + "'";
-				System.out.println("query--->" + query);
 				rs = stmt.executeQuery(query);
-				System.out.println("query--->" + query1);
 				rs = stmt.executeQuery(query1);
 
 				System.out.println("USERNAME " + userName
 						+ " :: deleted from PORTAL_USER table");
 
 			} else {
-
 				System.out.println("USERNAME " + userName
 						+ " :: member not found in database");
 			}
@@ -311,6 +306,23 @@ public class MRScenario {
 		} catch (NamingException e) {
 			e.printStackTrace();
 		}
+		
+		try {
+			/* Closing database connection */
+			con.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		try {
+			/* Closing LDAP connection */
+			ctx.close();
+		} catch (NamingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
 	}
 
 	private static void addMember(String userName, Connection con,
@@ -351,7 +363,8 @@ public class MRScenario {
 			System.out
 					.println(userName + " Entry Created in LDAP successfully");
 		} catch (NamingException e) {
-			// TODO Auto-generated catch block
+			System.out
+			.println("ERROR:: Creating "+userName+" in LDAP");
 			e.printStackTrace();
 		}
 
@@ -391,14 +404,16 @@ public class MRScenario {
 					+ ",'"
 					+ businessType
 					+ "','c7429fee012cdd44:-347aba25:1597345cc63:-6a7e',0,'portaladmin','16-JAN-17 05.28.36.998000000 AM','portaladmin','16-JAN-17 05.28.36.998000000 AM')";
-			String commitQuery = "COMMIT";
-			System.out.println("query--->" + portalUserEntryQuery);
 			rs = stmt.executeQuery(portalUserEntryQuery);
 			rs = stmt.executeQuery(portalUserAccountEntryQuery);
-			rs = stmt.executeQuery(commitQuery);
+			rs = stmt.executeQuery(SQL_COMMIT);
+			
+			System.out
+			.println(userName + " Entry Created in DATABASE successfully");
 
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
+			System.out
+			.println("ERROR:: Creating "+userName+" in DATABASE");
 			e.printStackTrace();
 		}
 
@@ -471,7 +486,6 @@ public class MRScenario {
 				stmt = con.createStatement();
 				String query = "select * from " + defaultSchema
 						+ ".PORTAL_USER where USER_NAME='" + userName + "'";
-				System.out.println("query--->" + query);
 				rs = stmt.executeQuery(query);
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
@@ -510,9 +524,7 @@ public class MRScenario {
 							+ userName + "')";
 					String query1 = "DELETE FROM " + defaultSchema
 							+ ".PORTAL_USER where USER_NAME='" + userName + "'";
-					System.out.println("query--->" + query);
 					rs = stmt.executeQuery(query);
-					System.out.println("query--->" + query1);
 					rs = stmt.executeQuery(query1);
 
 					System.out.println("USERNAME " + userName
