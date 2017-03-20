@@ -447,7 +447,7 @@ And I should see pharmacy saver pharmacies in results
 
 
 #----------------------------------
-#q1_feb_grp011  001620498-1 
+#q1_apr_grp010  001620498-1 
 
 @drug_cost_estimatorstep5
 Scenario Outline: Pharmacy saver results
@@ -462,7 +462,7 @@ Then I should not see pharmacy saver radio button under pharmacy type
 
  Examples:
 | planType | memberType|
-| MA     |Individual_non_pharmacy_saver |
+| MA     |Group_non_pharmacy_saver |
  
  
  
