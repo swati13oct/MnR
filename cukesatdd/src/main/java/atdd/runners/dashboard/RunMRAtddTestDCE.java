@@ -14,7 +14,7 @@ import cucumber.junit.Cucumber;
 @Cucumber.Options(glue = { "atdd.framework","acceptancetests.dashboard.drugcostestimator.bluelayer" }, 
 		features = { "feature/dashboard/drugcostestimator/bluelayer" }, 
 		format = {
-		"pretty", "html:reports/test-report" }, tags ={"@drug_cost_estimator"})
+		"pretty", "html:reports/test-report" }, tags ={"@drug_cost_estimatorstep5"})
 public class RunMRAtddTestDCE {
 
 }

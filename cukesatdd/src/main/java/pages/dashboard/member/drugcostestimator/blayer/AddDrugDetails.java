@@ -92,13 +92,26 @@ public class AddDrugDetails extends UhcDriver {
 	public void selectFrequency(String frquency){
 		Select options = new Select(selectYourFrequencyDropdown);
 		if(frquency.equalsIgnoreCase("Every 1 month")){
-			options.selectByValue("1");
+			options.selectByValue("30");
 		}
 		if(frquency.equalsIgnoreCase("Every 3 months")){
-			options.selectByValue("3");
+			options.selectByValue("90");
 		}
 	}
 
+	public SavingsOppurtunity continueAddDrugDetailsModal() throws InterruptedException{
+		waitforElement(continueButton);
+		continueButton.click();
+		Thread.sleep(12000);
+		return new SavingsOppurtunity(driver);
+		}
+	
+	public DrugCostEstimatorPage continueAddDrugDetailsMod() throws InterruptedException{
+		waitforElement(continueButton);
+		continueButton.click();
+		Thread.sleep(12000);
+		return new DrugCostEstimatorPage(driver);
+		}
 	public SavingsOppurtunity continueAddDrugDetails(){
 		waitforElement(continueButton);
 		continueButton.click();

@@ -72,6 +72,7 @@ public class SavingsOppurtunity extends UhcDriver{
 		Thread.sleep(10000);
 		waitforElement(savedrugbutton);
 		savedrugbutton.click();
+		Thread.sleep(15000);
 		// TODO Auto-generated method stub
 		
 	}

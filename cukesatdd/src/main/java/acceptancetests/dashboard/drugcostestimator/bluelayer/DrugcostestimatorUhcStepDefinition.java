@@ -173,7 +173,7 @@ public class DrugcostestimatorUhcStepDefinition {
 
 
 	@Then("^I should be able to edit that list by either adding drugs up to a total of 25 or subtracting drugs at any time while using the tool$")
-	public void i_navigate_edit_drugs() {
+	public void i_navigate_edit_drugs() throws InterruptedException {
 		WebDriver wd = (WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
 
 
@@ -203,7 +203,7 @@ public class DrugcostestimatorUhcStepDefinition {
 		addDrugDetails.selectQnty("14");
 	}
 	@And("^I should have the ability to advance to the next step in the flow$")
-	public void i_should_have_the_ability_to_advance_to_the_next_step_in_the_flow(){
+	public void i_should_have_the_ability_to_advance_to_the_next_step_in_the_flow() throws InterruptedException{
 		System.out.println(" PASSED : ");
 		WebDriver wd = (WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
 		AddDrugDetails addDrugDetails = new AddDrugDetails(wd);
@@ -251,7 +251,7 @@ public class DrugcostestimatorUhcStepDefinition {
 		dce.navigateToStep2();
 	}
 	@And("^I should see Drug List as an active tab in the DCE tool upon click$")
-	public void i_should_see_drug_list_as_active(){
+	public void i_should_see_drug_list_as_active() throws InterruptedException{
 		DrugCostEstimatorPage dce = (DrugCostEstimatorPage) getLoginScenario().getBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE);
 		dce.changeUrlToNewDCEPage();
 	}
@@ -304,7 +304,7 @@ public class DrugcostestimatorUhcStepDefinition {
 		addDrugDetails.validateThePage();
 	}
 	@Then("^the modal should refresh to the next step in the flow if I select one of the suggested results$")
-	public void the_modal_should_regresh(){
+	public void the_modal_should_regresh() throws InterruptedException{
 		AddDrugDetails addDrugDetails = (AddDrugDetails) getLoginScenario().getBean(PageConstants.ADD_DRUG_DETAILS);
 		SavingsOppurtunity savingsOppurtunity = addDrugDetails.continueAddDrugDetails();
 		getLoginScenario().saveBean(PageConstants.SAVING_OPPORTUNITY, savingsOppurtunity);
@@ -322,7 +322,7 @@ public class DrugcostestimatorUhcStepDefinition {
 	}*/
 
 	@And("^the user selects the pharmacy tab information like miles, zipcode and pharmacy type$")
-	public void navigate_drugcostestimator_pharmacytab(DataTable memberAttributes) {
+	public void navigate_drugcostestimator_pharmacytab(DataTable memberAttributes) throws InterruptedException {
 		List<DataTableRow> memberAttributesRow = memberAttributes
 				.getGherkinRows();
 		Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
@@ -405,7 +405,7 @@ public class DrugcostestimatorUhcStepDefinition {
 
 
 	@When("^I access the page containing the DCE tool$")
-	public void I_access_the_page_containing_the_DCE_tool() {
+	public void I_access_the_page_containing_the_DCE_tool() throws InterruptedException {
 
 		WebDriver wd = (WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
 
@@ -662,7 +662,7 @@ public class DrugcostestimatorUhcStepDefinition {
 
 	}
 
-	@When("^I select the Pharmacy type$")
+	@When("^I select the first pharmacy from the list$")
 	public void I_select_the_Pharmacy_type(DataTable arg1) throws InterruptedException {
 		List<DataTableRow> memberAttributesRow = arg1.getGherkinRows();
 		DrugCostEstimatorPage dce = (DrugCostEstimatorPage) getLoginScenario().getBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE);
@@ -714,14 +714,14 @@ public class DrugcostestimatorUhcStepDefinition {
 		AddNewDrugModal addNewDrugModal = (AddNewDrugModal) getLoginScenario().getBean(PageConstants.ADD_DRUG_PAGE);
 		addNewDrugModal.typeDrugName(drug);
 	}
-    
+
 	@And("^I should see a default system error message from the current state error messages in the portal database$")
 	public void  I_should_see_a_default_system_error_message_from_the_current_state_error_messages_in_the_portal_database(){
-		
+
 		AddNewDrugModal addNewDrugModal = (AddNewDrugModal) getLoginScenario().getBean(PageConstants.ADD_DRUG_PAGE);
 		addNewDrugModal.validate_atleast_4_mesg();
 	}
-	
+
 	@Then("^I should see pharmacy type radio button is selected$")
 	public void I_should_see_pharmacy_type_radio_button_is_selected(DataTable data) throws InterruptedException {
 		List<DataTableRow> memberAttributesRow = data.getGherkinRows();
@@ -743,7 +743,7 @@ public class DrugcostestimatorUhcStepDefinition {
 		DrugCostEstimatorPage dce = (DrugCostEstimatorPage) getLoginScenario().getBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE);
 		dce.selectPharmacyType(pharmacy_type);
 	}
-	
+
 	@Then("^I should not see pharmacy button radio button under pharmacy type$")
 	public void I_should_not_see_pharmacy_button_radio_button_under_pharmacy_type(DataTable data) {
 		List<DataTableRow> memberAttributesRow = data.getGherkinRows();
@@ -751,7 +751,6 @@ public class DrugcostestimatorUhcStepDefinition {
 		DrugCostEstimatorPage dce = (DrugCostEstimatorPage) getLoginScenario().getBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE);
 		dce.validate_pharmacy_type_not_present(pharmacy_type);
 	}
-	
 
 	@And("^I enter a US other territory zip code and click select$")
 	public void I_enter_a_US_other_territory_zip_code_and_click_select(DataTable memberAttributes){
@@ -763,39 +762,39 @@ public class DrugcostestimatorUhcStepDefinition {
 			memberAttributesMap.put(memberAttributesRow.get(i).getCells()
 					.get(0), memberAttributesRow.get(i).getCells().get(1));
 		}
-		
+
 		String zipcode = memberAttributesMap.get("USOTZipcode");
 		WebDriver wd = (WebDriver)getLoginScenario().getBean(CommonConstants.WEBDRIVER);
 		DrugCostEstimatorPage dce = new DrugCostEstimatorPage(wd);
 		dce.pharmacyInformation(zipcode);
 	}
-	
+
 	@Then("^I should not see preferred mail service radio button under pharmacy type$")
 	public void I_should_not_see_preferred_mail_service_radio_button_under_pharmacy_type(){
 		DrugCostEstimatorPage dce = (DrugCostEstimatorPage) getLoginScenario()
 				.getBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE);
 		dce.validatePreferredMailServiceNotPresent();
-	
+
 	}
-	
+
 	@And("^I should be able to select the preferred mail service pharmacy$")
 	public void I_should_be_able_to_select_the_preferred_mail_service_pharmacy(){
 		DrugCostEstimatorPage dce = (DrugCostEstimatorPage) getLoginScenario()
 				.getBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE);
 		dce.btnMailServiceSelect.click();
-		
+
 	}
-	
-	
+
+
 	@And("^I should be able to select the preferred mail service radio button$")
 	public void I_should_be_able_to_select_the_preferred_mail_service_radio_button() throws InterruptedException{
 		DrugCostEstimatorPage dce = (DrugCostEstimatorPage) getLoginScenario()
 				.getBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE);
 		dce.selectPharmacyType("Preferred Mail Service");
-		
+
 	}
-	
-	
+
+
 	@Then("^I should see preferred mail service radio button under pharmacy type$")
 	public void I_should_see_preferred_mail_service_radio_button_under_pharmacy_type() {
 		DrugCostEstimatorPage dce = (DrugCostEstimatorPage) getLoginScenario()
@@ -803,6 +802,5 @@ public class DrugcostestimatorUhcStepDefinition {
 		dce.validatePreferredMailServiceRD();
 
 	}
-	
 }
 
