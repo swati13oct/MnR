@@ -335,12 +335,14 @@ public class AccountHomePage extends UhcDriver {
 	}
 	
 	public PharmacySearchPage navigateToPharmacyLocator() {
+		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+		driver.navigate().to("https://member.team-a-aarpmedicareplans.uhc.com/content/aarpm/home/pharmacy_search.html#/Pharmacy-Search-English");
 
-		pharmacyLocator.click();
+		/*pharmacyLocator.click();
 		if (driver.getTitle().equalsIgnoreCase(
 				"AARP Medicare Plans | Pharmacy Directory")) {
 			return new PharmacySearchPage(driver);
-		}
+		}*/
 		return null;
 	}
 
