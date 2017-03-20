@@ -339,6 +339,9 @@ public class DrugCostEstimatorPage extends UhcDriver{
 		waitforElement(step2);
 		step2.click();
 		Thread.sleep(10000);
+		waitforElement(pharmacy_form);
+
+
 	}
 
 	public void backwardToStep1(){
