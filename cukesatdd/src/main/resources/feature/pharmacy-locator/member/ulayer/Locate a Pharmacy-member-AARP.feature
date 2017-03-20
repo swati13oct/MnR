@@ -98,7 +98,7 @@ Scenario Outline:To verify pharmacies displayed based on MAPD and PDP in AARP si
 Given registered member to verify locate a pharmacy in AARP Site
 	| <plantype> |
 When the user navigates to pharmacy search page in AARP site
-And the user searches for pharmaciy search results available in AARP site
+#And the user searches for pharmaciy search results available in AARP site
 Then the user validates the content on pharmacy search page
 
 Examples:
