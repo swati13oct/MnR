@@ -9,9 +9,7 @@ import java.net.URL;
 import java.util.List;
 import java.util.Map;
 import java.nio.file.Paths;
-node('docker-maven-slave') {
-
-
+node('docker-atdd-slave') {
 	currentBuild.result="SUCCESS"
 	def GIT_BRANCH="${env.BRANCH_NAME}"
 	def MAVEN_VERSION="${env.MAVEN_VERSION}"
@@ -41,7 +39,7 @@ node('docker-maven-slave') {
 		stage('Build') {
 			// Run the maven build
 			sauce('bbbc3afb-4712-4005-8d1e-8392783ec4dc') {
-				sh "${MAVEN_PATH} -f cukesatdd/pom.xml -Dbuild.time=${BUILD_TIMESTAMP} -Dbuild.number=${PIPELINE_VERSION} -Dgit.url=${GIT_URL} -Dgit.branch=${GIT_BRANCH} -U clean install test -Dtest=${RUNNER_NAME} -DfailIfNoTests=false -Denvironment=${ENVIRONMENT} -Dwebdriverhost=${WEBDRIVER_HOST} -Dcucumber.options='--tags ${ATDD_TAGS} --plugin json:target/cucumber.json --plugin html:target/cucumber-${GIT_BRANCH}'"
+				sh "${MAVEN_PATH} -f cukesatdd/pom.xml -Dbuild.time=${BUILD_TIMESTAMP} -Dbuild.number=${PIPELINE_VERSION} -Dgit.url=${GIT_URL} -Dgit.branch=${GIT_BRANCH} -U clean install test -Dtest=${RUNNER_NAME} -DfailIfNoTests=false -Denvironment=${ENVIRONMENT} -Dwebdriverhost=${WEBDRIVER_HOST} -Dphantomjs=${NODEJS_HOME}/bin/phantomjs -Dcucumber.options='--tags ${ATDD_TAGS} --plugin json:target/cucumber.json --plugin html:target/cucumber-${GIT_BRANCH}'"
 			}
 		}
 
