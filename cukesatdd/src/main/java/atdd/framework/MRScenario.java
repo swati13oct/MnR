@@ -739,7 +739,6 @@ public class MRScenario {
 				 * (PhantomJS)
 				 */
 				String phantomjs = System.getProperty("phantomjs");
-				String agent = "Mozilla/5.0 (Linux; U; Android 2.3.3; en-us; LG-LU3000 Build/GRI40) AppleWebKit/533.1 (KHTML, like Gecko) Version/4.0 Mobile Safari/533.1";
 				DesiredCapabilities caps = new DesiredCapabilities();
 				if (StringUtils.isBlank(phantomjs)) {
 					caps.setCapability(
@@ -750,9 +749,6 @@ public class MRScenario {
 							PhantomJSDriverService.PHANTOMJS_EXECUTABLE_PATH_PROPERTY,
 							System.getProperty("phantomjs"));
 				}
-				caps.setCapability(
-						PhantomJSDriverService.PHANTOMJS_PAGE_SETTINGS_PREFIX
-								+ "userAgent", agent);
 				caps.setJavascriptEnabled(true);
 				caps.setCapability(PhantomJSDriverService.PHANTOMJS_CLI_ARGS,
 						new String[] { "--web-security=false",
