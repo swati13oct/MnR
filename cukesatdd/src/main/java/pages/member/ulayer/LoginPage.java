@@ -64,36 +64,19 @@ public class LoginPage extends UhcDriver {
 		loginIn.click();	
 		sendkeys(userNameField,username);
 		sendkeys(passwordField,password);
+		System.out.println(signInButton.isEnabled());
 		signInButton.click();
 		
 
-		if (MRScenario.environment.equals("awe-dev-b") || MRScenario.environment.equals("dev-a") || MRScenario.environment.equals("dev-c") || MRScenario.environment.equals("team-b") || MRScenario.environment.equals("team-a") || MRScenario.environment.equals("team-c")) {
+		/*if (MRScenario.environment.equals("awe-dev-b") || MRScenario.environment.equals("dev-a") || MRScenario.environment.equals("dev-c") || MRScenario.environment.equals("team-b") || MRScenario.environment.equals("team-a") || MRScenario.environment.equals("team-c")) {
 
 			Alert alert = driver.switchTo().alert();
 			alert.accept();
 			Alert alert1 = driver.switchTo().alert();
 			alert1.accept();
-					
-			/*if (!(MRScenario.environment.equals("awe-dev-b") || MRScenario.environment.equals("dev-c") || MRScenario.environment.equals("team-b"))){
-				Alert alert2 = driver.switchTo().alert();
-				alert2.accept();
-			}*/
 			
 		}
-/*
-		if ( MRScenario.environment.equals("dev-a") || MRScenario.environment.equals("dev-c")
-		|| MRScenario.environment.equals("team-a")) {
-		Alert alert = driver.switchTo().alert();
-        alert.accept();
-        Alert alert1 = driver.switchTo().alert();
-        alert1.accept();        
-        	if (!MRScenario.environment.equals("dev-c")){
-        		Alert alert2 = driver.switchTo().alert();
-        		alert2.accept();
- 			}
 
- 		}*/
-            
 		
 		if(currentUrl().contains("home/my-account-home.html"))
 
@@ -103,7 +86,8 @@ public class LoginPage extends UhcDriver {
 		else if (currentUrl().contains("terminated-plan.html")) {
 			return new TerminatedHomePage(driver); 
 		}
-		return null;
+		return null;*/
+		return new AccountHomePage(driver);
 	}
 
 	public LoginAssistancePage navigateToLoginAssistance() {
