@@ -131,6 +131,10 @@ public class DrugCostEstimatorPage extends UhcDriver{
 
 	@FindBy(id = "zipcode-button")
 	public WebElement btnSearch;
+	
+	@FindBy(id = "pharmacy-form")
+	public WebElement pharmacy_form;
+	
 
 	@FindBy(id="pharmacy-results")
 	public WebElement pharmacyResults;
@@ -249,27 +253,36 @@ public class DrugCostEstimatorPage extends UhcDriver{
 	}
 	public void changeUrlToNewDCEPage() throws InterruptedException {
 
-		//String NewDCEUrl = "https://member.team-b-uhcmedicaresolutions.uhc.com/content/dashboard/home/drug-cost-estimator.html";
-		String NewDCEUrl = "https://member.team-b-aarpmedicareplans.uhc.com/content/dashboard/home/drug-cost-estimator.html#/drug-cost-estimator";
-		//String NewDCEUrl = "https://www.team-b-uhcmedicaresolutions.uhc.com/content/dashboard/home/drug-cost-estimator.html";
+		String Current_url = driver.getCurrentUrl();
+		String NewDCEUrl;
+		
+		if (driver.getCurrentUrl().contains("aarpmedicareplans"))
+		{
+			NewDCEUrl = "https://member.team-b-aarpmedicareplans.uhc.com/content/dashboard/home/drug-cost-estimator.html";
+		}
+		else
+		{
+			NewDCEUrl = "https://member.team-b-uhcmedicaresolutions.uhc.com/content/dashboard/home/drug-cost-estimator.html";	
+		}
+		
 		driver.get(NewDCEUrl);
 
-		try{
-			Alert alert = driver.switchTo().alert();
-			alert.accept();
-		}catch(NoAlertPresentException e){
+//		try{
+//			Alert alert = driver.switchTo().alert();
+//			alert.accept();
+//		}catch(NoAlertPresentException e){
+//
+//		}
 
-		}
+//		driver.manage().window().maximize();
+//		try {
+//			//CommonUtility.waitForPageLoad(driver, SaveDrugPage, 10);
+//		} catch (Exception e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
 
-		driver.manage().window().maximize();
-		try {
-			//CommonUtility.waitForPageLoad(driver, SaveDrugPage, 10);
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
-		Thread.sleep(10000);
+		Thread.sleep(15000);
 	}
 
 	public void deleteDrugs(int i) {
