@@ -53,3 +53,16 @@ Then the user validate error message
 Examples:
 	 | planMemberId | dateOfBirth |
 	 | 812334463    | 06-22-1939  |
+
+@aarpOnBluelayer	 
+Scenario Outline: To verify AARP member is not able to register on UMS site
+Given the user is on registration page of UMS site 
+When the user registers with dob and memberId in UMS site
+	| Plan Member ID         | <planMemberId> |	
+	| Date of birth          | <dateOfBirth>  |
+Then the user navigate to error page
+Then the user validate error message
+
+Examples:
+	 | planMemberId | dateOfBirth |
+	 | 016999628    | 02-19-1946  |
