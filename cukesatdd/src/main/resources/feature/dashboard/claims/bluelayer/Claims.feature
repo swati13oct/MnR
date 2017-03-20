@@ -76,3 +76,13 @@ Examples:
  | MAPD      |  Group     |
  |   MA      | Individual |
  | PDP       | Group      |
+
+@claimsSample
+Scenario Outline: To verify Jenkins setup
+Given I am an UHC member on the redesigned member site
+| Plan Type   | <planType>   |
+| Member Type	  | <memberType> |
+
+Examples:
+| planType  | memberType |
+| MA       | Individual      |
