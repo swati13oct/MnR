@@ -195,7 +195,7 @@ public class AccountHomePage extends UhcDriver {
 		super(driver);
 		PageFactory.initElements(driver, this);
 		
-		openAndValidate();
+//		openAndValidate();
 	}
 
 	public String getMyPlans() {
