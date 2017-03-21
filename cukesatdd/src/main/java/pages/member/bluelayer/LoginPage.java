@@ -64,10 +64,11 @@ public class LoginPage extends UhcDriver {
 		loginIn.click();
 		sendkeys(userNameField, username);
 		sendkeys(passwordField, password);
+		System.out.println(signInButton.isEnabled());
 		signInButton.click();
 
 		
-		if (MRScenario.environment.equals("dev-a") || MRScenario.environment.equals("team-a")) {
+		/*if (MRScenario.environment.equals("dev-a") || MRScenario.environment.equals("team-a")) {
 			while (!isAlertPresent());
         }
 
@@ -94,7 +95,8 @@ public class LoginPage extends UhcDriver {
 		else if (currentUrl().contains("terminated-plan.html")) {
 			return new TerminatedHomePage(driver);
 		}
-		return null;
+		return null;*/
+		return new AccountHomePage(driver);
 	}
 
 

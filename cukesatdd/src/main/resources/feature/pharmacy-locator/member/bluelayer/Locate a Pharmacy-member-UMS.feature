@@ -221,7 +221,7 @@ When the user navigates to pharmacy search page in UMS site
 
 Examples:
 |plantype    |memberType    | 
-|PDP        |Group   |
+|MAPD        |Individual   |
    	
 
 @bluePharmacysearchresult
