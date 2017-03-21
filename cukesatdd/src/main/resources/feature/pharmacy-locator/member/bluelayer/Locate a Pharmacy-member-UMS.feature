@@ -323,7 +323,7 @@ Examples:
 |plantype    |memberType    | 
 |PDP        |Group   |
 
-@pharmacygetdirection
+@US459522
 Scenario Outline: Verify Pharmacy Locator Search page in UMS site
 Given registered member to verify locate a pharmacy in UMS Site
 | Plan Type    | <plantype>   |
