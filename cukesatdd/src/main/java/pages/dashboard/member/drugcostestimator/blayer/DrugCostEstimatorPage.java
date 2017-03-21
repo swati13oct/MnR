@@ -48,7 +48,7 @@ public class DrugCostEstimatorPage extends UhcDriver{
 	@FindBy(id="pharmacy-form")
 	public WebElement pharmacyform;
 
-	@FindBy(id="standard")
+	@FindBy(xpath ="//div[@id='pharmacy-type']/div[1]/label")
 	public WebElement rbStandardNetwork;
 
 	@FindBy(id="saver")
@@ -142,8 +142,8 @@ public class DrugCostEstimatorPage extends UhcDriver{
 	@FindBy(xpath="//div[@id='pharmacy-results']//span[contains(@class,'pharmacy-name')]")
 	public List<WebElement> pharmacies;
 
-	@FindBy(xpath="//div[@id='pharmacy-results']//li[1]//a[@class='btn btn--secondary select-pharmacy']")
-	public WebElement select_btn_first;
+	@FindBy(xpath="//div[@id='pharmacy-results']/div[1]/ul[1]/li[1]/div/div[2]/a") //[@id='pharmacy-results']//li[1]//a[@class='btn btn--secondary select-pharmacy']")
+	public WebElement select_btn_first; //[@id='pharmacy-results']/div[1]/ul[1]/li[1]/div/div[2]/a
 
 	@FindBy(id="saverSavingSpan")
 	public WebElement card_promo_blue_saver;
@@ -753,6 +753,54 @@ public class DrugCostEstimatorPage extends UhcDriver{
 			Thread.sleep(2000);
 
 		}
+	}
+	public void fillPharmacyInfo(){
+		//rbStandardNetwork.click();// select pharmacy type standard network
+		if(select_btn_first.isDisplayed()){
+			select_btn_first.click();// select a pharmacy
+		}
+	}
+	
+	public void addDrug(String drug) throws InterruptedException{
+		
+		AddNewDrugModal addNewDrugModal = clickOnAddDrug();
+		addNewDrugModal.typeDrugName(drug);
+		addNewDrugModal.submit();
+		//addNewDrugModal.selectDrug(drug);
+		AddDrugDetails addDrugDetails = new AddDrugDetails(driver);
+		
+		SavingsOppurtunity savingsOppurtunity  = addDrugDetails.continueAddDrugDetailsModal();
+		
+		//if(addDrugDetails.continueAddDrugDetails()!=null){
+		//SavingsOppurtunity savingsOppurtunity1 = new SavingsOppurtunity(driver);  
+		savingsOppurtunity.savedrugbutton();
+		//}
+		Thread.sleep(2000);
+	
+	}
+	@FindBy(xpath = "//div[@id='total_drugsavings']/div[2]")
+	public WebElement totalDrugSavingsBox;
+	
+	@FindBy(xpath = "//div[@id='total_drugsavings']/div[2]/span")
+	public WebElement drugSavingValue;
+	
+	@FindBy(xpath = "//div[@id='total_drugsavings']/div[2]/a")
+	public WebElement editDrugListLink;
+	
+	
+	public void validateDrugSavingInfo(){
+		if(totalDrugSavingsBox.isDisplayed()){
+			
+			if(drugSavingValue.isDisplayed() && editDrugListLink.isDisplayed()){
+				System.out.println("All of the info for drug savings is displayed under the box on the left rail");
+			}
+			
+		}else
+			System.out.println("The Drug Cost Savings Info on the left rail is not displayed");
+	}
+	
+	public void clickOnEditDrugListLink(){
+		editDrugListLink.click();
 	}
 }
 

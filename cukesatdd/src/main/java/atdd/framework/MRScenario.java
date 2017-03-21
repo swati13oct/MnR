@@ -911,7 +911,7 @@ webDriver.manage().window().maximize();*/
 ieCaps.setCapability(PhantomJSDriverService.PHANTOMJS_EXECUTABLE_PATH_PROPERTY, "C:/dev/programs/phantomjs/bin/phantomjs.exe");
 webDriver = new PhantomJSDriver(ieCaps); */
 
-
+/*
 		String phantomjs = System.getProperty("phantomjs");
 		DesiredCapabilities caps = new DesiredCapabilities();
 		//    caps.setCapability(PhantomJSDriverService.PHANTOMJS_EXECUTABLE_PATH_PROPERTY,"C:/dev/programs/phantomjs/bin/phantomjs.exe");
@@ -933,16 +933,16 @@ webDriver = new PhantomJSDriver(ieCaps); */
 		caps.setCapability(PhantomJSDriverService.PHANTOMJS_PAGE_SETTINGS_PREFIX + "userAgent", userAgent);
 		webDriver = new PhantomJSDriver(caps);
 		webDriver.manage().timeouts().pageLoadTimeout(120,TimeUnit.SECONDS);
-		webDriver.manage().window().setSize(new Dimension(1400, 1000));
+		webDriver.manage().window().setSize(new Dimension(1400, 1000));*/
 
 
-		/*  if (null == webDriver) {
-  File pathToBinary = new File("C:/Users/tpravee2/AppData/Local/Mozilla Firefox/firefox.exe");
+		 if (null == webDriver) {
+  File pathToBinary = new File("C:/Users/ashah120/AppData/Local/Mozilla Firefox/firefox.exe");
   FirefoxBinary ffBinary = new FirefoxBinary(pathToBinary);
   FirefoxProfile firefoxProfile = new FirefoxProfile();
   webDriver = new FirefoxDriver(ffBinary, firefoxProfile);
   webDriver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS); 
-} */
+} 
 		return webDriver; 
 
 

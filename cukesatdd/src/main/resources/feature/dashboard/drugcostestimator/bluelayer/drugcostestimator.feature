@@ -552,3 +552,20 @@ Examples:
  | MAPD      |GroupPEEHIPwithoutMailService |
  
  
+@drug_cost_estimator_savings
+Scenario Outline: M&R portal members using DCE on a desktop device will be able to see their calculated drug cost savings options after entering at least one or more drugs to their drug list and selecting a pharmacy.
+Given I am a registered member using the new M&R member portal on a desktop computer
+	| Plan Type   | <planType>   |
+	| Member Type	  | <memberType> |
+When the above plantype user logs in UMS Site Desktop
+And I use the DCE tool to enter one or more drugs to my drug list and complete the flow
+ 	|Drug|<drug1>|
+And I navigate to step2 page and I have selected a pharmacy
+And I navigate to step3 page
+Then I should be able to view the section on the left rail regarding drug cost saving with the link 
+And I should be able to click on the link to go back to step 1
+Examples: 
+	|planType | memberType | drug1 |
+	|MAPD     | Individual_savings | Lipitor |  
+ 
+ 

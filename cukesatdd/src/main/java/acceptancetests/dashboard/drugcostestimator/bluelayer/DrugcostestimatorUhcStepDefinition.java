@@ -802,5 +802,56 @@ public class DrugcostestimatorUhcStepDefinition {
 		dce.validatePreferredMailServiceRD();
 
 	}
+	
+	@When("^I use the DCE tool to enter one or more drugs to my drug list and complete the flow$")
+	public void I_use_the_DCE_tool_to_enter_one_or_more_drugs_to_my_drug_list_and_complete_the_flow(DataTable data) throws InterruptedException {
+		List<DataTableRow> memberAttributesRow = data.getGherkinRows();
+		String drug = memberAttributesRow.get(0).getCells().get(1);
+
+		WebDriver wd = (WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
+
+		DrugCostEstimatorPage dce = new DrugCostEstimatorPage(wd);
+		dce.changeUrlToNewDCEPage();
+		dce.addDrug(drug);
+		
+	}
+	
+	@And("^I navigate to step2 page and I have selected a pharmacy$")
+	public void selectPharmacy() throws InterruptedException{
+		
+		WebDriver wd = (WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
+		DrugCostEstimatorPage dce = new DrugCostEstimatorPage(wd);
+		dce.navigateToStep2();
+		dce.fillPharmacyInfo();
+		Thread.sleep(1000);
+		
+	}
+	
+	@And("^I navigate to step3 page$")
+	public void I_navigate_to_step3_page() throws InterruptedException {
+		
+		WebDriver wd = (WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
+		DrugCostEstimatorPage dce = new DrugCostEstimatorPage(wd);
+		//DrugCostEstimatorPage dce = (DrugCostEstimatorPage) getLoginScenario()
+		//		.getBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE);
+		dce.navigateToStep3();
+
+	}
+	
+	@Then("^I should be able to view the section on the left rail regarding drug cost saving with the link$")
+	public void drugCostSavingsSectionLeftRail() throws InterruptedException{
+		Thread.sleep(4000);
+		WebDriver wd = (WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
+		DrugCostEstimatorPage dce = new DrugCostEstimatorPage(wd);
+		dce.validateDrugSavingInfo();
+		//dce.clickOnEditDrugListLink();
+	}
+	
+	@And("^I should be able to click on the link to go back to step 1$")
+	public void I_should_be_able_to_click_on_the_link_to_go_back_to_step_1(){
+		WebDriver wd = (WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
+		DrugCostEstimatorPage dce = new DrugCostEstimatorPage(wd);
+		dce.clickOnEditDrugListLink();
+	}
 }
 
