@@ -167,73 +167,64 @@ public class ResponsiveStepDefiniton {
  	}
 	
 	@And("^the user select plan to compare in AARP site")
-	public void the_user_select_plan_to_compare() throws InterruptedException{
-		PortfolioPage portfolioPage = (PortfolioPage) getLoginScenario().getBean(PageConstants. PORTFOLIO_PAGE);
-		portfolioPage.selectAddToCompareCheckboxes();
-		//portfolioPage.validate();
+	public void the_user_select_plan_to_compare() throws InterruptedException {
+		{
+			ResponsivePlanSummary planSummary = (ResponsivePlanSummary) getLoginScenario()
+					.getBean(PageConstants.RESPONSIVE_PLAN_SUMMARY_PAGE);
+			planSummary.selectAddToCompareCheckboxes();
+			
+		}
+	
+		try {
+			Thread.sleep(10000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
 	}
+	
 	
 	@And("^the user click compare plans in AARP site")
 	public void the_user_click_compare_plans_to_compare(){
-		PortfolioPage portfolioPage = (PortfolioPage) getLoginScenario().getBean(PageConstants. PORTFOLIO_PAGE);
-		portfolioPage.comparePlanslnk();
-		//portfolioPage.validate();
+		ResponsivePlanSummary planSummary = (ResponsivePlanSummary) getLoginScenario()
+				.getBean(PageConstants.RESPONSIVE_PLAN_SUMMARY_PAGE);
+		planSummary.comparePlanslnk();
+		
 	}
 	
 	@And("^the user click plan view details link on compare in AARP site")
 	public void the_user_click_plan_viewdetails_link(){
-		PortfolioPage portfolioPage = (PortfolioPage) getLoginScenario().getBean(PageConstants. PORTFOLIO_PAGE);
-		portfolioPage.viewdetailslnk();
-		
+		ResponsivePlanSummary planSummary = (ResponsivePlanSummary) getLoginScenario()
+				.getBean(PageConstants.RESPONSIVE_PLAN_SUMMARY_PAGE);
+		planSummary.viewdetailslnk();
+				
 	}
 	
 	@And("^the user remove plan link on compare page in AARP site")
 	public void the_user_remove_plan_link(){
-		PortfolioPage portfolioPage = (PortfolioPage) getLoginScenario().getBean(PageConstants. PORTFOLIO_PAGE);
-		portfolioPage.removePlanlnk();
+		ResponsivePlanSummary planSummary = (ResponsivePlanSummary) getLoginScenario()
+				.getBean(PageConstants.RESPONSIVE_PLAN_SUMMARY_PAGE);
+		planSummary.removePlanlnk();
+		planSummary.removePlanlnk1();
+				
+	}
+	
+	@And("^the user verify footnote section on compare page")
+	public void the_user_verify_footnotes_section_on_compare_page(){
+		ResponsivePlanSummary planSummary = (ResponsivePlanSummary) getLoginScenario()
+				.getBean(PageConstants.RESPONSIVE_PLAN_SUMMARY_PAGE);
+		planSummary.footNoteSection();
+				
+	}
+	
+	@And("^the user verify disclaimer text for MA/MAPD plan for plan compare page in AARP site")
+	public void the_user_verify_disclaimer_text(){
+		ResponsivePlanSummary planSummary = (ResponsivePlanSummary) getLoginScenario()
+				.getBean(PageConstants.RESPONSIVE_PLAN_SUMMARY_PAGE);
+		planSummary.disclaimerText();
 		
 	}
 	
-	@And("^the user selects desired plan to compare$")
-	public void user_clicks_on_plans_to_compare(DataTable givenAttributes){
-		
-		List<DataTableRow> memberAttributesRow = givenAttributes 
-				.getGherkinRows();
-		Map<String, String> memberAttributesMap = new HashMap<String, String>();
-		for (int i = 0; i < memberAttributesRow.size(); i++) {
-
-			memberAttributesMap.put(memberAttributesRow.get(i).getCells()
-					.get(0), memberAttributesRow.get(i).getCells().get(1));
-		}
-
-		String planName1 = memberAttributesMap.get("Plan 1");
-		String planName2 = memberAttributesMap.get("Plan 2");
-		System.out.println(planName1);
-		System.out.println(planName2);
-		ResponsivePlanSummary plansummaryPage = (ResponsivePlanSummary) getLoginScenario()
-				.getBean(PageConstants.RESPONSIVE_PLAN_SUMMARY_PAGE);
-		plansummaryPage.selectPlansToCompareTwoPlans(planName1, planName2);				
-	}
-	@Then("^the user validates medical benefits$")
-	public void user_validates_medical_benefits(DataTable givenAttributes){
-		List<DataTableRow> memberAttributesRow = givenAttributes 
-				.getGherkinRows();
-		Map<String, String> memberAttributesMap = new HashMap<String, String>();
-		for (int i = 0; i < memberAttributesRow.size(); i++) {
-
-			memberAttributesMap.put(memberAttributesRow.get(i).getCells()
-					.get(0), memberAttributesRow.get(i).getCells().get(1));
-		}
-
-		String monthlyPremium1 = memberAttributesMap.get("MP Plan1");
-		String monthlyPremium2 = memberAttributesMap.get("MP Plan2");
-		String outofpocket1 = memberAttributesMap.get("Oop Plan1");
-		String outofpocket2 = memberAttributesMap.get("Oop Plan2");
-		ResponsivePlanSummary plansummaryPage = (ResponsivePlanSummary) getLoginScenario()
-				.getBean(PageConstants.RESPONSIVE_PLAN_SUMMARY_PAGE);
-		plansummaryPage.validateMedicalBenefitsTable(monthlyPremium1, monthlyPremium2, outofpocket1, outofpocket2);
-		
-	}
+	
 	
 	
 }

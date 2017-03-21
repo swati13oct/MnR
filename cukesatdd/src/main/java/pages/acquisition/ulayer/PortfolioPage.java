@@ -63,17 +63,7 @@ public class PortfolioPage extends UhcDriver {
     @FindBy(className="zip-button")
 	private WebElement Findplansbuttonportfolio;
     
-    @FindBy(id="compare-plan-1")
-    private WebElement chkBoxAddtoCompare1;
-    
-    @FindBy(id="compare-plan-2")
-    private WebElement chkBoxAddtoCompare2;
-    
-    @FindBy(id="compare-plan-3")
-    private WebElement chkBoxAddtoCompare3;
-    
-    @FindBy(id="compare-plan-4")
-    private WebElement chkBoxAddtoCompare4;
+   
     
     @FindBy(className="single-added-text show")
     private WebElement onePlanAdded;
@@ -81,14 +71,9 @@ public class PortfolioPage extends UhcDriver {
     @FindBy(className="multiple-added-text show")
     private WebElement twoPlanAdded;
     
-    @FindBy(xpath=".//*[@id='plan-list-1']/div/div[2]/div/div[4]/div/div[3]/div/div/span[4]/a")
-    private WebElement comparePlans;
+
     
-    @FindBy(xpath="(.//*[text()='View details'])[1]")
-    private WebElement viewDetails;
     
-    @FindBy(xpath="(.//*[@class='remove-button'])[1]")
-    private WebElement removePlanlnk;
     
     
    
@@ -128,50 +113,11 @@ public class PortfolioPage extends UhcDriver {
 		validate(OurPlansLink);
 	}
 	
-	public void selectAddToCompareCheckboxes()  {
-		//driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-		//waitforElement(selectAddToCompareCheckbox);
-		//System.out.println(chkBoxAddtoCompare1.isEnabled());
-		
-		try {
-			Thread.sleep(10000);
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
-		JavascriptExecutor js = (JavascriptExecutor)driver;
-		try {
-			Thread.sleep(10000);
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
-		js.executeScript("arguments[0].click();", chkBoxAddtoCompare1);
-		js.executeScript("arguments[0].click();", chkBoxAddtoCompare2);
-		js.executeScript("arguments[0].click();", chkBoxAddtoCompare3);
-		js.executeScript("arguments[0].click();", chkBoxAddtoCompare4);
-		
-		//selectAddToCompareCheckbox.click();
-		validate(onePlanAdded);
-		/*selectAddToCompareCheckbox2.click();
-		validate(twoPlanAdded);*/		
-		
-	}
 	
-	public void comparePlanslnk(){
-		comparePlans.click();
-		validate(comparePlans);
-		
-	}
 	
-	public void viewdetailslnk(){
-		viewDetails.click();
-		validate(viewDetails);
-		
-	}
 	
-	public void removePlanlnk(){
-		removePlanlnk.click();
-		validate(removePlanlnk);
-	}
+	
+	
 
 	public Boolean findplansbuttonclick2() {
 

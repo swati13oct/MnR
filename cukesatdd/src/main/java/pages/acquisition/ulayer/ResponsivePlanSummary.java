@@ -7,6 +7,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.junit.Assert;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -70,50 +71,42 @@ public class ResponsivePlanSummary extends UhcDriver{
 		
 		@FindBy(xpath="(.//span[text()='View Plans'])[2]")
 		private WebElement showMaPlans;
-			
-		@FindBy(xpath="//div/div/div[2]/div/div[2]/div[2]/div/span[2]")
-		private WebElement showPdpPlans;
 		
-		//planCOmpare path
 		 @FindBy(id="compare-plan-1")
-		 private WebElement chkBoxAddtoCompare1;
+		    private WebElement chkBoxAddtoCompare1;
 		    
-	  @FindBy(id="compare-plan-2")
+		 @FindBy(id="compare-plan-2")
 		    private WebElement chkBoxAddtoCompare2;
 		    
-		    @FindBy(id="compare-plan-3")
-		    private WebElement chkBoxAddtoCompare3;
+		 @FindBy(id="compare-plan-3")
+		  private WebElement chkBoxAddtoCompare3;
 		    
 		    @FindBy(id="compare-plan-4")
 		    private WebElement chkBoxAddtoCompare4;
 		    
-		    @FindBy(className="single-added-text show")
-		    private WebElement onePlanAdded;
-		    
-		    @FindBy(xpath=".//*[@id='plan-list-1']/div/div[2]/div/div[4]/div/div[3]/div/div/span[4]/a")
+		    @FindBy(xpath="(//*[text()='Compare plans'])[8]")
 		    private WebElement comparePlans;
 		    
-		    @FindBy(xpath=".//*[@id='plan-list-1']/div/div[2]/div/div[1]/div[3]/div/div/span[3]/a")
-		    private WebElement comparePlansLink;
-//Medical Benefits
+		    @FindBy(xpath="(.//*[text()='View details'])[1]")
+		    private WebElement viewDetails;
 		    
-		    @FindBy (xpath=".//*[@id='fixTable']/tbody/tr[2]/td[2]")
-		    private WebElement monthlypremium1;
+		    @FindBy(xpath="(.//*[@class='remove-button'])[1]")
+		    private WebElement removePlanlnk;
 		    
-		    @FindBy (xpath= ".//*[@id='fixTable']/tbody/tr[2]/td[4]")
-		    private WebElement monthlypremium2;
+		    @FindBy(xpath="(.//*[@class='remove-button'])[2]")
+		    private WebElement removePlanlnk1;
 		    
-		    @FindBy (xpath= ".//*[@id='fixTable']/tbody/tr[3]/td[1]/p")
-		    private WebElement outofpocketmaximum;
+		    @FindBy(xpath=".//*[@id='fixTable']/tbody/tr[24]/td/p")
+		    private WebElement footNote;
 		    
-		    @FindBy (xpath=".//*[@id='fixTable']/tbody/tr[2]/td[1]/p")
-		    private WebElement monthlypremium;
-		    
-		    @FindBy (xpath=".//*[@id='fixTable']/tbody/tr[3]/td[2]")
-		    private WebElement outofpocket1;
-		    
-		    @FindBy (xpath=".//*[@id='fixTable']/tbody/tr[3]/td[4]")
-		    private WebElement outofpocket2;
+		    @FindBy(xpath=".//*[@class='parbase planscompare section']/div[2]")
+		    private WebElement disclaimerTxt;
+		
+		
+		
+		
+		@FindBy(xpath="//div/div/div[2]/div/div[2]/div[2]/div/span[2]")
+		private WebElement showPdpPlans;
 
 	private PageData vppPlanSummary;
 
@@ -233,6 +226,56 @@ private JSONObject getActualJsonObject(String fileName, String planName, List<We
 	}
 	return null;
 }
+
+public void selectAddToCompareCheckboxes()  {
+	//driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+	//waitforElement(selectAddToCompareCheckbox);
+	//System.out.println(chkBoxAddtoCompare1.isEnabled());
+	
+	try {
+		Thread.sleep(10000);
+	} catch (InterruptedException e) {
+		e.printStackTrace();
+	}
+	JavascriptExecutor js = (JavascriptExecutor)driver;
+	try {
+		Thread.sleep(10000);
+	} catch (InterruptedException e) {
+		e.printStackTrace();
+	}
+	js.executeScript("arguments[0].click();", chkBoxAddtoCompare1);
+	js.executeScript("arguments[0].click();", chkBoxAddtoCompare2);
+	js.executeScript("arguments[0].click();", chkBoxAddtoCompare3);
+	js.executeScript("arguments[0].click();", chkBoxAddtoCompare4);
+	
+
+}
+
+public void viewdetailslnk(){
+	viewDetails.click();
+	validate(viewDetails);
+	
+}
+
+public void removePlanlnk(){
+	removePlanlnk.click();
+	validate(removePlanlnk);
+}
+
+public void removePlanlnk1(){
+	removePlanlnk1.click();
+}
+
+public void footNoteSection(){
+	String txt = footNote.getText();
+	System.out.println(txt);
+}
+
+public void disclaimerText(){
+	String disclaimertxt = disclaimerTxt.getText();
+	System.out.println(disclaimertxt);
+}
+
 public ResponsivePlanSummary viewPlanSummary(String planType) {
 	if (planType.equalsIgnoreCase("PDP")) {
 		showPdpPlans.click();
@@ -244,6 +287,11 @@ public ResponsivePlanSummary viewPlanSummary(String planType) {
 	return new ResponsivePlanSummary(driver);
 }
  
+public void comparePlanslnk(){
+	comparePlans.click();
+	validate(comparePlans);
+	
+}
 	public void validateStickyZipcode(String actualZipcode){
 		validate(changeLoationLink);
 		changeLoationLink.click();
@@ -309,59 +357,4 @@ public ResponsivePlanSummary viewPlanSummary(String planType) {
 		 }
 		 return null;
 	 }
-	 public void selectPlansToCompareTwoPlans(String planName1, String planName2){
-			// int i=0;
-			 List<WebElement> plans = driver.findElements(By.xpath("//h2[contains(text(),'AARP')]"));
-			 System.out.println("PLANS SIZE :: "+plans.size());
-			 String xpath="//label[contains(text(),'Add to Compare')]"; 
-			// List<WebElement> comparePlansLink = driver.findElements(By.xpath("//*[contains(text(),'Compare plans')]"));
-			 List<WebElement> compareCheckBox = driver.findElements(By.xpath(xpath));
-			 for(int i=0; i<plans.size();i++){
-				 if(plans.get(i).getText().equals(planName1)){
-					 compareCheckBox.get(i).click();
-					 System.out.println(planName1+"compare link clicked");
-				 }
-				 if(plans.get(i).getText().equals(planName2)){
-					 compareCheckBox.get(i).click();
-					 System.out.println(planName2+"compare link clicked");
-					// .//*[@id='plan-list-1']/div/div[2]/div/div["+"i"+""]
-					  
-	 			 }		  		 
-
-			}
-			 comparePlansLink.click();
- 
-		 }
-		 public void validateMedicalBenefitsTable(String monthlyPremium1, String monthlyPremium2, String outofPocket1, String outofPocket2){
-			 if(monthlypremium.getText().equals("Monthly Premium")){
-				 if(monthlyPremium1.equals(monthlypremium1.getText())){
-			 
-				 System.out.println("monthly premium is verified");
-				 Assert.assertTrue(true);
-			 }else{
-				 Assert.fail("Error in displaying monthly premium 1");
-			 }
-			 if(monthlyPremium2.equals(monthlypremium2.getText())){
-				 Assert.assertTrue(true);
-			 }else{
-				 Assert.fail("Error in displaying monthly premium 2");
-			 }
-			 }
-			 if (outofpocketmaximum.getText().equals("Out of Pocket Maximum")) {
-				 if(outofpocket1.getText().equals(outofPocket1)){
-					 
-					 System.out.print("Out of pockect is verified");
-					 Assert.assertTrue(true);
-				 }else{
-					 Assert.fail("Error in displaying outofpocket1");
-				 }
-				 if(outofpocket2.getText().equals(outofPocket2)){
-					 Assert.assertTrue(true);
-				 }else{
-					 Assert.fail("Error in displaying outofpocket2");
-				 }
-				 }
-				
-			}
-		 
 }
