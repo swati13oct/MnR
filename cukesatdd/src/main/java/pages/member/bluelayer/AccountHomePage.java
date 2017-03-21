@@ -283,13 +283,14 @@ public class AccountHomePage extends UhcDriver {
 	}
 
 	public PharmacySearchPage navigateToPharmacyLocator() {
-
-		pharmacyLocator.click();
+		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+		driver.navigate().to("https://member.team-a-uhcmedicaresolutions.uhc.com/content/uhcm/home/pharmacy_search.html.html#/Pharmacy-Search-English");
+		/*pharmacyLocator.click();
 		CommonUtility.waitForPageLoad(driver, pharmacyLocatorHeading, CommonConstants.TIMEOUT_30);
 		if (getTitle().equalsIgnoreCase(
 				"UnitedHealthcare Medicare Solutions | Pharmacy Directory")) {
 			return new PharmacySearchPage(driver);
-		}
+		}*/
 		return null;
 	}
 	
