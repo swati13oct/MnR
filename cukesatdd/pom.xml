@@ -68,9 +68,9 @@
 							<goal>test</goal>
 						</goals>
 						<configuration>
-							<daemon>true</daemon>
-							<testFailureIgnore>false</testFailureIgnore>
-						</configuration>
+                          <daemon>true</daemon>
+                          <testFailureIgnore>false</testFailureIgnore>
+                        </configuration>
 					</execution>
 				</executions>
 			</plugin>
