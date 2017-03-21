@@ -160,13 +160,14 @@ public class AccountHomePage extends UhcDriver {
 	@FindBy(xpath = "//*[@id='saver-checkbox']/label")
 	private WebElement filterLink;
 	
-	@FindBy(xpath = "//form/fieldset[1]/ul/li[2]/label")
+	@FindBy(xpath = "//fieldset[1]/ul/li[2]/label")
 	private WebElement pharmacyfilterLink;
 	
 	@FindBy(xpath = "//*[@id='_content_pharmacy_en_uhc_jcr_content_pharmacylocator_par_teaser']")
 	private WebElement widgetLink;
 	
-	
+	@FindBy(xpath = "//a[contains(text(),'Get Directions')]")
+	private WebElement getdirectionLink;
 
 	private PageData myAccountHome;
 
@@ -674,7 +675,13 @@ public FormsandresourcesPage navigateToMydocumentUmsPage() {
 		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 		return null;
 	}
-	
 
+	public PharmacySearchPage navigateToGetDirection() {
+		getdirectionLink.click();
+		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+		return null;
+	}
+	
+	
 
 }

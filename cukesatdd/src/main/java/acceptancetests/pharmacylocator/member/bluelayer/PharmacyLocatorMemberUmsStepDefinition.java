@@ -235,6 +235,14 @@ try {
 		}
 	}
 	
+	@And("^the user searches for get direcion available in UMS site$")
+	public void user_views_get_direction_ums() {
+		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario()
+				.getBean(PageConstants.ACCOUNT_HOME_PAGE);
+		PharmacySearchPage pharmacySearchPage = accountHomePage
+				.navigateToGetDirection();	
+	}
+	
 	@Then("^the user validates Search checkbox displayed dynamically related to the pharmacy network$")
 	public void validates_Pharmacy_Network_Displayed_Dynamically_UMS(){
 		PharmacySearchPage PharmacySearchPage = (PharmacySearchPage) getLoginScenario()
