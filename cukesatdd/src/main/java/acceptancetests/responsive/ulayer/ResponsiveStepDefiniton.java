@@ -198,6 +198,8 @@ public class ResponsiveStepDefiniton {
 		}
 	}
 	
+	
+	
 	@And("^the user validates Need a step back in right rail widgets$")
 	public void the_user_validates_Need_step_back(){
 		ResponsivePlanSummary planSummary= (ResponsivePlanSummary) 
