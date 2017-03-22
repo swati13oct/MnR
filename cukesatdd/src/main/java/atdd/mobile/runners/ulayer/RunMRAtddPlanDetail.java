@@ -15,7 +15,7 @@ import cucumber.junit.Cucumber;
 @Cucumber.Options(glue = { "atdd.framework","acceptancetests.mobile.plandetail.ulayer" }, 
 features = { "feature/mobile/ulayer" }, 
 format = {
-"pretty", "html:reports/test-report" }, tags ={"@Ship"})
+"pretty", "html:reports/test-report","json:target/cucumber.json"}, tags ={"@Ship"})
 public class RunMRAtddPlanDetail {
 
 }
