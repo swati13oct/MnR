@@ -313,6 +313,46 @@ public class ResponsiveStepDefiniton {
 		
 	}
 	
+	@And("^the user selects desired plan to compare$")
+	public void user_clicks_on_plans_to_compare(DataTable givenAttributes){
+		
+		List<DataTableRow> memberAttributesRow = givenAttributes 
+				.getGherkinRows();
+		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells()
+					.get(0), memberAttributesRow.get(i).getCells().get(1));
+		}
+
+		String planName1 = memberAttributesMap.get("Plan 1");
+		String planName2 = memberAttributesMap.get("Plan 2");
+		System.out.println(planName1);
+		System.out.println(planName2);
+		ResponsivePlanSummary plansummaryPage = (ResponsivePlanSummary) getLoginScenario()
+				.getBean(PageConstants.RESPONSIVE_PLAN_SUMMARY_PAGE);
+		plansummaryPage.selectPlansToCompareTwoPlans(planName1, planName2);				
+	}
+	@Then("^the user validates medical benefits$")
+	public void user_validates_medical_benefits(DataTable givenAttributes){
+		List<DataTableRow> memberAttributesRow = givenAttributes 
+				.getGherkinRows();
+		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells()
+					.get(0), memberAttributesRow.get(i).getCells().get(1));
+		}
+
+		String monthlyPremium1 = memberAttributesMap.get("MP Plan1");
+		String monthlyPremium2 = memberAttributesMap.get("MP Plan2");
+		String outofpocket1 = memberAttributesMap.get("Oop Plan1");
+		String outofpocket2 = memberAttributesMap.get("Oop Plan2");
+		ResponsivePlanSummary plansummaryPage = (ResponsivePlanSummary) getLoginScenario()
+				.getBean(PageConstants.RESPONSIVE_PLAN_SUMMARY_PAGE);
+		plansummaryPage.validateMedicalBenefitsTable(monthlyPremium1, monthlyPremium2, outofpocket1, outofpocket2);
+		
+	}
 	
 	
 	

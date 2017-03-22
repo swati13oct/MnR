@@ -118,7 +118,28 @@ public class ResponsivePlanSummary extends UhcDriver{
 		    
 		    @FindBy(xpath=".//*[@class='parbase planscompare section']/div[2]")
 		    private WebElement disclaimerTxt;
-		
+		    
+		    
+//Medical Benefits
+		    
+		    @FindBy (xpath=".//*[@id='fixTable']/tbody/tr[2]/td[2]")
+		    private WebElement monthlypremium1;
+		    
+		    @FindBy (xpath= ".//*[@id='fixTable']/tbody/tr[2]/td[4]")
+		    private WebElement monthlypremium2;
+		    
+		    @FindBy (xpath= ".//*[@id='fixTable']/tbody/tr[3]/td[1]/p")
+		    private WebElement outofpocketmaximum;
+		    
+		    @FindBy (xpath=".//*[@id='fixTable']/tbody/tr[2]/td[1]/p")
+		    private WebElement monthlypremium;
+		    
+		    @FindBy (xpath=".//*[@id='fixTable']/tbody/tr[3]/td[2]")
+		    private WebElement outofpocket1;
+		    
+		    @FindBy (xpath=".//*[@id='fixTable']/tbody/tr[3]/td[4]")
+		    private WebElement outofpocket2;
+
 		
 		
 		
@@ -457,4 +478,59 @@ public void comparePlanslnk(){
 				 i++;			 
 				 return null;
 			}
+		 public void selectPlansToCompareTwoPlans(String planName1, String planName2){
+				// int i=0;
+				 List<WebElement> plans = driver.findElements(By.xpath("//h2[contains(text(),'AARP')]"));
+				 System.out.println("PLANS SIZE :: "+plans.size());
+				 String xpath="//label[contains(text(),'Add to Compare')]"; 
+				// List<WebElement> comparePlansLink = driver.findElements(By.xpath("//*[contains(text(),'Compare plans')]"));
+				 List<WebElement> compareCheckBox = driver.findElements(By.xpath(xpath));
+				 for(int i=0; i<plans.size();i++){
+					 if(plans.get(i).getText().equals(planName1)){
+						 compareCheckBox.get(i).click();
+						 System.out.println(planName1+"compare link clicked");
+					 }
+					 if(plans.get(i).getText().equals(planName2)){
+						 compareCheckBox.get(i).click();
+						 System.out.println(planName2+"compare link clicked");
+						// .//*[@id='plan-list-1']/div/div[2]/div/div["+"i"+""]
+						  
+		 			 }		  		 
+
+				}
+				 comparePlansLink.click();
+	 
+			 }
+			 public void validateMedicalBenefitsTable(String monthlyPremium1, String monthlyPremium2, String outofPocket1, String outofPocket2){
+				 if(monthlypremium.getText().equals("Monthly Premium")){
+					 if(monthlyPremium1.equals(monthlypremium1.getText())){
+				 
+					 System.out.println("monthly premium is verified");
+					 Assert.assertTrue(true);
+				 }else{
+					 Assert.fail("Error in displaying monthly premium 1");
+				 }
+				 if(monthlyPremium2.equals(monthlypremium2.getText())){
+					 Assert.assertTrue(true);
+				 }else{
+					 Assert.fail("Error in displaying monthly premium 2");
+				 }
+				 }
+				 if (outofpocketmaximum.getText().equals("Out of Pocket Maximum")) {
+					 if(outofpocket1.getText().equals(outofPocket1)){
+						 
+						 System.out.print("Out of pockect is verified");
+						 Assert.assertTrue(true);
+					 }else{
+						 Assert.fail("Error in displaying outofpocket1");
+					 }
+					 if(outofpocket2.getText().equals(outofPocket2)){
+						 Assert.assertTrue(true);
+					 }else{
+						 Assert.fail("Error in displaying outofpocket2");
+					 }
+					 }
+					
+				}
+		
 }
