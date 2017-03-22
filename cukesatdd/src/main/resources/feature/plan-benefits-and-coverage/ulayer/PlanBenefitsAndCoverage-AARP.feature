@@ -914,6 +914,19 @@ Feature: To test plan benefits and Coverage on AARP site for Federal members
       | MAPD     | NON LIS       |
 #Data Used: DentalPlatinumLis2
 
+@needHelp1
+  Scenario Outline: Verify Need Help section is in place on Benefits and Coverage page
+    Given registered AMP with following details for plan benefits and coverage flow in AARP site
+      | Plan Type      | <planType>      |
+      | Copay Category | <copayCategory> |
+    When the user view jenkins benefits and coverage in AARP site
+    And the user validates the content on benefits and coverage page
+
+    Examples: 
+      | planType | copayCategory |
+      | MAPD     | NON LIS       |
+#Data Used: DentalPlatinumLis2
+
   @disclaimers
   Scenario Outline: Verify Disclaimers section is in place on Benefits and Coverage page
     Given registered AMP with following details for plan benefits and coverage flow in AARP site
