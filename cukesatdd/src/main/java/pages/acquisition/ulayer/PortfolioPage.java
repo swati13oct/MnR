@@ -258,21 +258,7 @@ public ResponsivePlanSummary searchPlans(String zipcode, String CountyName) {
 		return null;
 	
 }
- public ResponsivePlanSummary searchPlans(String zipcode, String countyName) {
-	    sendkeys(zipCodeField, zipcode);
-	    zipCodeField.sendKeys(Keys.ENTER);
-	    //remove thread once page is stable
-	    try {
-			Thread.sleep(10000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		if (driver.getTitle().equalsIgnoreCase(PageTitleConstants.PORTFOLIO_HOME_PAGE_TITLE_HEADLESS)) {
- 			return new ResponsivePlanSummary(driver);
-		}
-		return null;
-	}
+
 
 
 }

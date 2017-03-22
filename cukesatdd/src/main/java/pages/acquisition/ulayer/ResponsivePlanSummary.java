@@ -58,6 +58,9 @@ public class ResponsivePlanSummary extends UhcDriver{
 		@FindBy(xpath="//*[@class='content-cols']/div[1]/h3")
 		private WebElement planHighlightsHeader;
 		
+		@FindBy(xpath="//h2[contains(text(),'We have')]")
+		private WebElement countyNameDetail;
+		
 		//@FindBy(xpath="//div[@class='content-cols']/descendant::div[1]/h3")
 		@FindBy(xpath="//*[@class='content-cols']/div[2]/h3")
 		private WebElement benefitsHeader;
@@ -82,6 +85,9 @@ public class ResponsivePlanSummary extends UhcDriver{
 		
 		@FindBy(xpath = "//*[@class='tab med-supp']/div[1]/span[3]")
 		private WebElement showMsPlans;
+		
+		@FindBy(xpath="//*[contains(text(),'Start Plan Selector')]")
+		private WebElement planSelector;
 		
 		/*@FindBy(xpath="//html/body/div[4]/div[2]/div[1]/div/div/div/div/div[1]/div/div/div/div[2]/div/div[2]/div[1]/div/span[1]")
 		private WebElement showMaPlans;*/
@@ -420,6 +426,7 @@ public void comparePlanslnk(){
 			// TODO Auto-generated method stub
 			
 		}
+
 		public VPPAarpNeedAStepBackWidget validateStepBackWidget(){
 			 return new VPPAarpNeedAStepBackWidget(driver);
 		}
@@ -498,7 +505,7 @@ public void comparePlanslnk(){
 		 			 }		  		 
 
 				}
-				 comparePlansLink.click();
+				 comparePlans.click();
 	 
 			 }
 			 public void validateMedicalBenefitsTable(String monthlyPremium1, String monthlyPremium2, String outofPocket1, String outofPocket2){
