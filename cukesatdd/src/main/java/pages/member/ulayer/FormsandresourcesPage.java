@@ -50,6 +50,12 @@ public class FormsandresourcesPage extends UhcDriver {
 	@FindBy(linkText = "Passport Flyer Spanish")
 	private WebElement passport_Flyer_Spanish;
 	
+	@FindBy(xpath = ".//*[@id='_content_campaigns_aarpm_formsresources-plandocs-main_federal_jcr_content_par_borderedtitledescrip_subContent_teaser_1']/div/p[1]")
+	private WebElement myDocuments;
+	
+	@FindBy(xpath = ".//*[@id='_content_campaigns_aarpm_formsresources-plandocs-main_federal_jcr_content_par_borderedtitledescrip_subContent_teaser_1']/div/p[2]/a")
+	private WebElement viewMyDocsLink;
+	
 	private PageData planDocsPDF;
 	private PageData formsAndResources;
 
@@ -241,6 +247,30 @@ public class FormsandresourcesPage extends UhcDriver {
 		}
 		public boolean verifyPassportFlyerSpanish(){
 		return validate(passport_Flyer_Spanish);
+		}
+
+		public void validateMyDocsSection() {
+			
+			String actualText = myDocuments.getText();
+			if(actualText.equalsIgnoreCase("My Documents"))
+			{
+				System.out.println("My Documents section is present");
+			}
+		}
+
+		public void clickOnviewmydocsLink() {			
+			viewMyDocsLink.click();
+			try {
+				Thread.sleep(10000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			if(driver.getTitle().equalsIgnoreCase("My Documents"))
+			{
+				System.out.println("Navigated to My Documents page");
+			}
+			
 		} 
 	}
 	
