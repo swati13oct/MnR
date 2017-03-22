@@ -15,3 +15,5 @@ q1_feb_ulayer125/Password@1,MAPD,Individual_dce_flow_pharmacy_saver_cost,
 q1_feb_combo031/Password@1,PDP,Individual_pharmacy_retail,
 q1_feb_ulayer001/Password@1,MAPD,Individual_pharmacy_saver,
 q1_apr_blayer033/Password@1,MAPD,Individual_savings,
+q1_feb_blayer023/Password@1,MAPD,IndividualwithCostSavings
+q1_apr_grp357/Password@1,MAPD,IndividualwithoutCostSavings

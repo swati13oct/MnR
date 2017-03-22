@@ -144,6 +144,9 @@ public class DrugcostestimatorUhcStepDefinition {
 		BenefitsSummaryPage benefitsSummaryPage = loginPage.loginWith(userName, pwd);
 
 		getLoginScenario().saveBean(PageConstants.BENEFITS_SUMMARY_PAGE, benefitsSummaryPage);
+		
+		DrugCostEstimatorPage dce = new DrugCostEstimatorPage(wd);
+		getLoginScenario().saveBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE, dce);
 
 	}
 	@When("^the above plantype user logs in UMS Site Desktop$")
@@ -853,5 +856,141 @@ public class DrugcostestimatorUhcStepDefinition {
 		DrugCostEstimatorPage dce = new DrugCostEstimatorPage(wd);
 		dce.clickOnEditDrugListLink();
 	}
+	
+	@And("^I add lipitor generic and branded drug$")
+	public void I_add_lipitor_generic_and_brand_drug() throws InterruptedException {
+		DrugCostEstimatorPage dce = (DrugCostEstimatorPage) getLoginScenario()
+				.getBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE);
+
+		dce.deleteAllDrugs();
+		dce.addDrug("lipitor");
+		dce.addDrug("atorvastatin calcium");
+	}
+	
+	@And("^I add lipitor generic drug$")
+	public void I_add_lipitor_generic_drug() throws InterruptedException {
+		DrugCostEstimatorPage dce = (DrugCostEstimatorPage) getLoginScenario()
+				.getBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE);
+
+		dce.deleteAllDrugs();
+		dce.addGenericDrug("lipitor");
+		//dce.addDrug("atorvastatin calcium");
+	}
+	
+	@And("^I select first pharmacy from standard network pharmacy type$")
+	public void I_select_this_pharmacy_from_standard_network_pharmacy_type() throws InterruptedException{
+		DrugCostEstimatorPage dce = (DrugCostEstimatorPage) getLoginScenario()
+				.getBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE);
+		dce.selectPharmacyType("Standard Network");
+		dce.select_first_pharmacy();
+		
+	}
+	
+	@Then("^I should see that total estimated annual drug costs in summary section matches with left rail value$")
+	public void I_should_see_that_total_estimated_annual_drug_costs_in_summary_section_matches_with_left_rail_value(DataTable memberAttributes) throws InterruptedException{
+		
+		List<DataTableRow> memberAttributesRow = memberAttributes
+				.getGherkinRows();
+		Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells()
+					.get(0), memberAttributesRow.get(i).getCells().get(1));
+		}
+		//System.out.println("Map values"+memberAttributesMap);
+		String totalAnnualDrugCost = memberAttributesMap.get("totalAnnualDrugCost");
+		WebDriver wd = (WebDriver)getLoginScenario().getBean(CommonConstants.WEBDRIVER);
+		DrugCostEstimatorPage dce = (DrugCostEstimatorPage) getLoginScenario()
+				.getBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE);
+		
+		dce.validateTotalEstimatedAnnualDrugCosts(totalAnnualDrugCost);
+		
+	}
+	
+	@And("^I should see that total available savings in summary section matches with left rail value$")
+	public void I_should_see_that_total_available_savings_in_summary_section_matches_with_left_rail_value(DataTable memberAttributes){
+		
+		List<DataTableRow> memberAttributesRow = memberAttributes
+				.getGherkinRows();
+		Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells()
+					.get(0), memberAttributesRow.get(i).getCells().get(1));
+		}
+		
+		String totalAvailableSavings = memberAttributesMap.get("totalAvailableSavings");
+		DrugCostEstimatorPage dce = (DrugCostEstimatorPage) getLoginScenario()
+				.getBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE);
+		dce.validatetotalAvailableSavings(totalAvailableSavings);
+	}
+	
+	@And("^I should see this value for drug cost savings by switching to generics$")
+	public void I_should_see_this_value_for_drug_cost_savings_by_switching_to_generics(DataTable memberAttributes) {
+
+		List<DataTableRow> memberAttributesRow = memberAttributes.getGherkinRows();
+		Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+					memberAttributesRow.get(i).getCells().get(1));
+		}
+
+		String drugSavings = memberAttributesMap.get("drugSavings");
+		DrugCostEstimatorPage dce = (DrugCostEstimatorPage) getLoginScenario()
+				.getBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE);
+		dce.validateDrugSavings(drugSavings);
+	}
+	
+	
+	@And("^I should see this value for pharmacy cost savings by switching to recommended pharmacies$")
+	public void I_should_see_this_value_for_pharmacy_cost_savings_by_switching_to_recommended_pharmacies(DataTable memberAttributes) {
+		List<DataTableRow> memberAttributesRow = memberAttributes.getGherkinRows();
+		Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+					memberAttributesRow.get(i).getCells().get(1));
+		}
+
+		String pharmacySavings = memberAttributesMap.get("pharmacySavings");
+		DrugCostEstimatorPage dce = (DrugCostEstimatorPage) getLoginScenario()
+				.getBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE);
+		dce.validatePharmacySavings(pharmacySavings);
+	}
+	
+	@And("^I should see this value for initial coverage stage, Coverage Gap stage, Catastrophic Coverage Stage$")
+	public void I_should_see_this_value_for_initial_coverage_stage_Coverage_Gap_stage_Catastrophic_Coverage_Stage(DataTable memberAttributes) {
+		List<DataTableRow> memberAttributesRow = memberAttributes.getGherkinRows();
+		Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+					memberAttributesRow.get(i).getCells().get(1));
+		}
+
+		String drugCoverage = memberAttributesMap.get("drugCoverage");
+		DrugCostEstimatorPage dce = (DrugCostEstimatorPage) getLoginScenario()
+				.getBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE);
+		dce.validateDrugCoverage(drugCoverage);
+	}
+	
+	
+	@And("^I should be able to switch to drugs or pharmacy that the tool has recommended$")
+	public void I_should_be_able_to_switch_to_drugs_or_pharmacy_that_the_tool_has_recommended(){
+		DrugCostEstimatorPage dce = (DrugCostEstimatorPage) getLoginScenario()
+				.getBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE);
+		dce.validateEditDrugAndPharmacyLinks();
+	}
+	
+	
+	@And("^I should not see drug savings and be unable to switch the drugs$")
+	public void I_should_not_see_drug_savings_and_be_unable_to_switch_the_drugs(){
+		DrugCostEstimatorPage dce = (DrugCostEstimatorPage) getLoginScenario()
+				.getBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE);
+		dce.validateEditDrugLinkNotPresent();
+	}
+	
+	
 }
 

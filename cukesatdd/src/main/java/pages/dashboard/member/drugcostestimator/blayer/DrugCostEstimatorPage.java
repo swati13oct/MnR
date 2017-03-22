@@ -211,6 +211,15 @@ public class DrugCostEstimatorPage extends UhcDriver{
 
 	@FindBy(id="mail-service-type")
 	public WebElement lbPreferredMailService;
+	
+	@FindBy(xpath=".//*[@id='pharmacyTabId']/div/p[2]")
+	public WebElement step2Pharmacy;
+	
+	@FindBy(xpath = ".//*[@id='total_drugsavings']/div[2]/a")
+	public WebElement lkEditDrugsList;
+	
+	@FindBy(xpath = ".//*[@id='total_pharmacysavings']/div[2]/a")
+	public WebElement lkEditPharmacyList;
 
 
 	@Override
@@ -330,6 +339,9 @@ public class DrugCostEstimatorPage extends UhcDriver{
 			Thread.sleep(3000);
 		}
 	}
+	
+	
+	
 	public int getDrugsCount(){
 		List<WebElement> drugs = driver.findElements(By.xpath("//div[@id='drugs-tab']//div[contains(@ng-repeat,'eachDrug')]"));
 		return drugs.size();
@@ -509,7 +521,7 @@ public class DrugCostEstimatorPage extends UhcDriver{
 	}
 
 	public void selectPharmacyType(String pharmacy) throws InterruptedException{
-		WebElement rbtn = driver.findElement(By.xpath(".//*[@id='pharmacy-type']/div/label[contains(text(),'"+pharmacy +"')]"));
+		WebElement rbtn = driver.findElement(By.xpath(".//*[@id='pharmacy-type']/div/label/p[contains(text(),'"+pharmacy +"')]"));
 		rbtn.isDisplayed();
 		if(!rbtn.isSelected()){
 			rbtn.click();
@@ -560,10 +572,13 @@ public class DrugCostEstimatorPage extends UhcDriver{
 		Assert.assertEquals(3,pharmacies.size());
 	}	
 
-	public void select_first_pharmacy() throws InterruptedException
-	{   waitforElement(select_btn_first);
-	select_btn_first.click();
-	Thread.sleep(5000);
+	public void select_first_pharmacy() throws InterruptedException {
+		Thread.sleep(10000);
+		// waitforElement(select_btn_first);
+		if (select_btn_first.isDisplayed()) {
+			select_btn_first.click();
+		}
+		Thread.sleep(5000);
 	}
 
 	public void validate_cost_saving_present(String pharmacy_type)
@@ -802,5 +817,136 @@ public class DrugCostEstimatorPage extends UhcDriver{
 	public void clickOnEditDrugListLink(){
 		editDrugListLink.click();
 	}
+	
+	public void deleteAllDrugs() throws InterruptedException{
+		System.out.println("Drugs count: "+getDrugsCount()); 
+		
+		while(getDrugsCount() != 0){
+			String deleteDrugXpath = ".//*[@id='drugdetails']/div[1]/div[1]/div/div/section/ul/li[2]/a";
+			WebElement deleteDrug = driver.findElement(By.xpath(deleteDrugXpath));
+			deleteDrug.click();
+			Thread.sleep(5000);
+			
+		}
+	}
+	
+	public void addGenericDrug(String drug) throws InterruptedException{
+		AddNewDrugModal addNewDrugModal = clickOnAddDrug();
+		if((getDrugsCount()) == 25){
+			addNewDrugModal.verifyExceededError();
+			//break;
+		}
+		addNewDrugModal.typeDrugName(drug);
+		addNewDrugModal.submit();
+		//addNewDrugModal.selectDrug(drug);
+		AddDrugDetails addDrugDetails = new AddDrugDetails(driver);
+		addDrugDetails.selectQnty(60+""); 
+		SavingsOppurtunity savingsOppurtunity = addDrugDetails.continueAddDrugDetails();
+		SavingsOppurtunity savingsOppurtunity1 = new SavingsOppurtunity(driver);
+		savingsOppurtunity1.switchToGeneric();
+		savingsOppurtunity1.savedrugbutton();
+		Thread.sleep(3000);
+		
+		
+	}
+	
+	public void validateTotalEstimatedAnnualDrugCosts(String totalAnnualDrugCost) throws InterruptedException{
+		  Thread.sleep(10000);
+		  List<WebElement> totDrugCost_Summary = driver.findElements(By.xpath(".//*[@id='summary_totalCost']"));
+		  List<WebElement> totDrugCost_LeftRail = driver.findElements(By.xpath(".//*[@id='total_annualcost']"));
+		  
+		  if(totDrugCost_Summary.size() > 0 & totDrugCost_LeftRail.size() >0){
+			  String valTotDrugCost_Summary = totDrugCost_Summary.get(0).getText();
+			  String valtotDrugCost_LeftRail = totDrugCost_LeftRail.get(0).getText();
+			  //System.out.println("given value "+totalAnnualDrugCost);
+			  //System.out.println("summary value "+valTotDrugCost_Summary);
+			  //System.out.println("left rail value "+ valtotDrugCost_LeftRail);
+			  Assert.assertEquals(valTotDrugCost_Summary, valtotDrugCost_LeftRail);
+			  Assert.assertEquals(totalAnnualDrugCost, valTotDrugCost_Summary);
+			  Assert.assertEquals(totalAnnualDrugCost, valtotDrugCost_LeftRail);
+		  }else{
+			  Assert.assertTrue(false);
+		  }
+		  
+	  }
+	  
+	  
+	  public void validatetotalAvailableSavings(String totalAvailableSavings){
+		  List<WebElement> totAvailableSav_Summary = driver.findElements(By.xpath(".//*[@id='summary_savings']/span"));
+		  List<WebElement> totAvailableSav_LeftRail = driver.findElements(By.xpath(".//*[@id='total_availablesavings']/section/span"));
+		  
+		  if(totAvailableSav_Summary.size() > 0 & totAvailableSav_LeftRail.size() >0){
+			  String valTotAvailableSav_Summary = totAvailableSav_Summary.get(0).getText();
+			  String valTotAvailableSav_LeftRail = totAvailableSav_LeftRail.get(0).getText();
+			  //System.out.println("totAvailableSav summary value "+ valTotAvailableSav_Summary);
+			  //System.out.println("totAvailableSav left rail value "+ valTotAvailableSav_LeftRail);
+			  Assert.assertEquals(valTotAvailableSav_Summary, valTotAvailableSav_LeftRail);
+			  Assert.assertEquals(totalAvailableSavings, valTotAvailableSav_Summary);
+			  Assert.assertEquals(totalAvailableSavings, valTotAvailableSav_LeftRail);
+			  
+		  }else{
+			  Assert.assertTrue(false);
+		  }
+		  
+	  }
+	  
+	  public void validateDrugSavings(String drugSavings){
+		  List<WebElement> totDrugSavings = driver.findElements(By.xpath(".//*[@id='total_drugsavings']/div[2]/span"));
+		
+		  if(totDrugSavings.size() > 0 ){
+			  String valTotDrugSavings = totDrugSavings.get(0).getText();
+			  //System.out.println("totDrugSavings value "+ valTotDrugSavings);
+			  Assert.assertEquals(drugSavings, valTotDrugSavings);
+			  
+		  }else{
+			  Assert.assertTrue(false);
+		  }
+		  
+	  }
+	  
+	  public void validatePharmacySavings(String pharmacySavings){
+		  List<WebElement> totPharmacySavings = driver.findElements(By.xpath(".//*[@id='total_pharmacysavings']/div[2]/span"));
+		
+		  if(totPharmacySavings.size() > 0 ){
+			  String valTotPharmacySavings = totPharmacySavings.get(0).getText();
+			  //System.out.println("totPharmacySavings value "+ valTotPharmacySavings);
+			  Assert.assertEquals(pharmacySavings, valTotPharmacySavings);
+		  }else{
+			  Assert.assertTrue(false);
+		  }
+	  }
+	  
+	  public void validateDrugCoverage(String drugCoverage){
+		  List<WebElement> initialDrugCoverage = driver.findElements(By.xpath(".//*[@id='drugcosts']/div[2]/div[2]/div/div[2]/div/div/section/div[2]/div[2]/p/span"));
+		  List<WebElement> coverageGapStage = driver.findElements(By.xpath(".//*[@id='drugcosts']/div[2]/div[2]/div/div[2]/div/div/section/div[2]/div[3]/p/span"));
+		  List<WebElement> catastrophicCoverageStage = driver.findElements(By.xpath(".//*[@id='drugcosts']/div[2]/div[2]/div/div[2]/div/div/section/div[2]/div[4]/p/span"));
+		  if(initialDrugCoverage.size() > 0 && coverageGapStage.size()>0 && catastrophicCoverageStage.size()>0){
+			  String valInitialDrugCoverage = initialDrugCoverage.get(0).getText();
+			  String valCoverageGapStage = coverageGapStage.get(0).getText();
+			  String valCatastrophicCoverageStage = catastrophicCoverageStage.get(0).getText();
+			  //System.out.println("valInitialDrugCoverage value "+valInitialDrugCoverage);
+			  Assert.assertEquals(drugCoverage, valInitialDrugCoverage);
+			  Assert.assertEquals(drugCoverage, valCoverageGapStage);
+			  Assert.assertEquals(drugCoverage, valCatastrophicCoverageStage);
+		  }else{
+			  Assert.assertTrue(false);
+		  }
+	  }
+	  
+	  public void validateEditDrugAndPharmacyLinks(){
+		  Assert.assertTrue(elementFound(lkEditDrugsList));
+		  Assert.assertTrue(elementFound(lkEditPharmacyList));
+	  }
+	  
+	  public void validateEditDrugLinkNotPresent(){
+		  List<WebElement> editDrugLink = driver.findElements(By.xpath(".//*[@id='total_drugsavings']/div[2]/a"));
+		  //String valEditDrugLink = editDrugLink.get(0).getText();
+		  if(!editDrugLink.get(0).isDisplayed()){
+				Assert.assertFalse(false);
+			}else{
+				Assert.assertFalse(true);
+			}
+	  }
+
 }
 

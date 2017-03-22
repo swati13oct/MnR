@@ -1,4 +1,5 @@
 package pages.dashboard.member.drugcostestimator.blayer;
+import java.util.List;
 import java.util.Map;
 
 import org.json.JSONException;
@@ -31,6 +32,7 @@ public class SavingsOppurtunity extends UhcDriver{
 	
 	@FindBy(xpath="//header[@class='add-drug-slide-header']/span[contains(text(),' SAVINGS OPPORTUNITY')]")
 	public WebElement SwitchGenericPage;
+	
 	
 	public SavingsOppurtunity(WebDriver driver) {
 		super(driver);
@@ -75,5 +77,12 @@ public class SavingsOppurtunity extends UhcDriver{
 		Thread.sleep(15000);
 		// TODO Auto-generated method stub
 		
+	}
+	
+	public void switchToGeneric() throws InterruptedException {
+
+		List<WebElement> generic = driver.findElements(By.xpath(".//*[@id='generic-check']/div[1]"));
+		generic.get(0).click();
+		Thread.sleep(3000);
 	}
 }
