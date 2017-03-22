@@ -1,6 +1,8 @@
 package pages.acquisition.ulayer;
 
 import java.util.List;
+import java.util.ArrayList;
+import java.util.concurrent.TimeUnit;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -19,6 +21,12 @@ import acceptancetests.atdd.data.ElementData;
 import acceptancetests.atdd.data.PageData;
 import acceptancetests.atdd.util.CommonUtility;
 import atdd.framework.UhcDriver;
+import java.util.ArrayList;
+import pages.member.ulayer.Rallytool_Page;
+import pages.mobile.acquisition.ulayer.VPPAarpNeedAStepBackWidget;
+import pages.mobile.acquisition.ulayer.VPPAarpNeedHelpWidgetPage;
+import pages.mobile.acquisition.ulayer.VPPNeedMoreInformationWidget;
+import pages.mobile.acquisition.ulayer.VPPRequestSendEmailPage;
 
 public class ResponsivePlanSummary extends UhcDriver{
 	
@@ -54,7 +62,7 @@ public class ResponsivePlanSummary extends UhcDriver{
 		@FindBy(xpath="//*[@class='content-cols']/div[2]/h3")
 		private WebElement benefitsHeader;
 		
-		@FindBy(xpath="//a[contains(text(),'Is my provider covered?')]")
+		@FindBy(xpath="//a[contains(text(),'Find a provider')]")
 		private WebElement providerSearchLink;
 		
 		@FindBy(xpath="//*[@class='content-cols']/div[1]/ul/li")
@@ -65,6 +73,15 @@ public class ResponsivePlanSummary extends UhcDriver{
 		
 		@FindBy(className="plan-index")
 		private List<WebElement> planIndexList;
+		
+		@FindBy(xpath = "//*[@class='tab']/div[1]/span[3]")
+		private WebElement showMaPlansClickable;
+		
+		@FindBy(xpath="//*[@class='tab active' and contains(text(),'Medicare Advantage Plans')]/div[1]/span[3]")
+		private WebElement showMaPlansNotClickable;
+		
+		@FindBy(xpath = "//*[@class='tab med-supp']/div[1]/span[3]")
+		private WebElement showMsPlans;
 		
 		/*@FindBy(xpath="//html/body/div[4]/div[2]/div[1]/div/div/div/div/div[1]/div/div/div/div[2]/div/div[2]/div[1]/div/span[1]")
 		private WebElement showMaPlans;*/
@@ -127,7 +144,8 @@ public class ResponsivePlanSummary extends UhcDriver{
 
 	@Override
 	public void openAndValidate() {
-		
+		validate(showMsPlans);		
+	// validate(showMsPlans);
 	//	validate(viewMaPlans);
 	//	validate(viewPdpPlans);
 	//	validate (viewSnpPlans);
@@ -282,9 +300,20 @@ public ResponsivePlanSummary viewPlanSummary(String planType) {
 	} else if (planType.equalsIgnoreCase("MA")
 			|| planType.equalsIgnoreCase("MAPD")) {
 		System.out.println("inside MA");
-		showMaPlans.click();
+		if(showMaPlansClickable.isEnabled()&& showMaPlansClickable.isDisplayed()){
+		showMaPlansClickable.click();
+		}
 	}
-	return new ResponsivePlanSummary(driver);
+	else if (planType.equalsIgnoreCase("MS")) {
+		showMsPlans.click();
+		if (driver
+				.getTitle()
+				.equalsIgnoreCase(
+						"AARP Medicare Supplement Insurance Plans")){
+//	return new ResponsivePlanSummary(driver);
+}
+	}
+	return null;
 }
  
 public void comparePlanslnk(){
@@ -357,4 +386,75 @@ public void comparePlanslnk(){
 		 }
 		 return null;
 	 }
+	 
+	 public void validateCountyName(String CountyName)  {
+			if(countyNameDetail.getText().contains(CountyName)){
+				System.out.println("CountyName"+CountyName);
+			
+				Assert.assertTrue("---content displayed---", true);		
+				}else{
+			  Assert.fail();
+			}
+			
+			// TODO Auto-generated method stub
+			
+		}
+		public VPPAarpNeedAStepBackWidget validateStepBackWidget(){
+			 return new VPPAarpNeedAStepBackWidget(driver);
+		}
+		public VPPAarpNeedHelpWidgetPage validateNeedHelpWidget(){
+			 return new VPPAarpNeedHelpWidgetPage(driver);
+		}
+		public VPPNeedMoreInformationWidget validateNeedMoreInformationWidget(){
+			 return new VPPNeedMoreInformationWidget(driver);
+		}
+		public VPPRequestSendEmailPage validateEmailWidget(){
+			 return new VPPRequestSendEmailPage(driver);
+		}
+		public PlanSelectorPage navigateToPlanSelectorPage(){
+			 planSelector.click();
+			 try {
+				Thread.sleep(10000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			 if(driver.getTitle().equalsIgnoreCase("Plan Selector")){
+				 return new PlanSelectorPage(driver);
+			 }
+			 return null;	 
+		}
+		public Rallytool_Page navigateToRallyPage(String planName) { 
+			driver.manage().window().maximize(); 
+			//a[contains(text(),'Is my provider covered?')]
+			int i=0;
+			 List<WebElement> plans = driver.findElements(By.xpath("//h2[contains(text(),'AARP MedicareComplete')]"));
+			 System.out.println("PLANS SIZE :: "+plans.size());
+			 String xpath="//a[contains(text(),'Is my provider covered?')]";  
+			 List<WebElement> providerSearch = driver.findElements(By.xpath(xpath));
+			 
+			 System.out.println("Is my provider covered? "+providerSearch.size());
+			 for(WebElement plan : plans){
+				 if(plan.getText().equalsIgnoreCase(planName)){			 
+					 providerSearch.get(i).click();
+					 try {
+						Thread.sleep(8000);
+					} catch (InterruptedException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}						  
+							ArrayList<String> tabs = new ArrayList<String> (driver.getWindowHandles());
+							driver.switchTo().window(tabs.get(1));
+							System.out.println(driver.getTitle());
+							if (driver.getTitle().equalsIgnoreCase("Welcome")) {
+							return new Rallytool_Page(driver);
+							}
+							else{
+
+							}
+						 }
+					 }
+				 i++;			 
+				 return null;
+			}
 }
