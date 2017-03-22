@@ -64,3 +64,14 @@ Examples:
 
 | planType |
 | MAPD	   |
+
+@mercuryMyDocuments
+Scenario Outline:To verify passport pdfs displayed in forms and resources in AARP site
+Given registered member for forms and resources in AARP Site
+	| Plan Type      |<planType> |
+When the user view forms and resources in AARP site
+Then the user validates My Documents section and clicks on the link in AARP site
+Examples:
+
+| planType |
+| PDP     |
