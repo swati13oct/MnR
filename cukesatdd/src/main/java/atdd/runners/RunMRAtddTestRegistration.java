@@ -15,7 +15,7 @@ import cucumber.junit.Cucumber;
 @Cucumber.Options(glue = { "atdd.framework","acceptancetests.registration.bluelayer" }, 
 		features = { "feature/registration/bluelayer" }, 
 		format = {
-		"pretty", "html:reports/test-report","json:target/cucumber.json",  }, tags ={"@registration1"})
+		"pretty", "html:reports/test-report","json:target/cucumber.json",  }, tags ={"@aarpOnBluelayer"})
 public class RunMRAtddTestRegistration {
 
 }
