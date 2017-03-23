@@ -8,7 +8,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.List;
 import java.util.Map;
-import java.nio.file.Paths;
+import java.nio.file.Paths; 
 node('docker-atdd-slave') {
 	currentBuild.result="SUCCESS"
 	def GIT_BRANCH="${env.BRANCH_NAME}"
