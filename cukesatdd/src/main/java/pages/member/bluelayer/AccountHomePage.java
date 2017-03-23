@@ -677,7 +677,7 @@ public FormsandresourcesPage navigateToMydocumentUmsPage() {
 	}
 
 	public PharmacySearchPage navigateToGetDirection() {
-		driver.manage().timeouts().implicitlyWait(40, TimeUnit.SECONDS);
+		driver.manage().timeouts().implicitlyWait(400, TimeUnit.SECONDS);
 		getdirectionLink.click();
 		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 		return null;
