@@ -417,14 +417,14 @@ try {
 
 	}
 
-	@After
+	/*@After
 	public void tearDown() {
 
 		WebDriver wd = (WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
 		wd.quit();
 		getLoginScenario().flushBeans();
 	}
-
+*/
 
 
 /* Scenario for MAPD should show Preferred Retail Pharmacies */
