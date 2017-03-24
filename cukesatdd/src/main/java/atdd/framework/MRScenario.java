@@ -647,6 +647,9 @@ public class MRScenario {
 
 		Set<String> keySetUms = umsRegistrationDataMap.keySet();
 		for (String umsKey : keySetUms) {
+			if(umsKey.equalsIgnoreCase("q1_feb_grp043")){
+				System.out.println("stop at here 1...........................");
+			}
 			Map<String, JSONObject> umsObjectMap = new HashMap<String, JSONObject>();
 			for (int i = 0; i < CommonConstants.PAGES_BLUELAYER.length; i++) {
 				JSONObject jsonObject = readExpectedJson(umsKey,
@@ -658,6 +661,7 @@ public class MRScenario {
 				}
 			}
 			if (!umsObjectMap.isEmpty())
+				System.out.println("stop at here 2...........................");
 				expectedDataMapBluelayer.put(umsKey, umsObjectMap);
 		}
 
@@ -902,27 +906,33 @@ public class MRScenario {
       */
 	public WebDriver getWebDriver() {
 
-
+        //Is system propery exists defining JENKINS_BROWSER, we're running in JENKINS and
+		//will prefer those browser properties.
 		String browser = (null == System.getProperty(CommonConstants.JENKINS_BROWSER)
 				? props.get(CommonConstants.DESKTOP_WEBDRIVER) : System.getProperty(CommonConstants.JENKINS_BROWSER));
+		
 		
 		String agent = (null == System.getProperty(CommonConstants.JENKINS_BROWSER_AGENT_STRING)
 				? props.get(CommonConstants.DESKTOP_BROWSER_AGENT_STRING) : System.getProperty(CommonConstants.JENKINS_BROWSER_AGENT_STRING));
 		
-		System.out.println("getWebDriver: returning driver for " + browser);
+		
 		if (browser.equalsIgnoreCase(CommonConstants.JENKINS_BROWSER_PHANTOMJS)) {
 			System.out.println("PHANTOMJS Agent: " + agent);
 		}
 		
+		// Again, Jenkins takes precedent. 
+		String pathToBinary = (null == System.getProperty("phantomjs") ? props.get("BrowserPathToBinary")
+				: System.getProperty("phantomjs"));
+		
+		
+		System.out.println("getWebDriver: returning driver for " + browser);
 		// if webDriver is null, create one, otherwise send the existing one
 		// back.
 		// This has to happen to preserve the state of webDriver so that we can
 		// take screenshots at the end.
 		if (null == webDriver) {
 			System.out.println("New WebDriver CREATED");
-			// Again, Jenkins takes precedent. 
-			String pathToBinary = (null == System.getProperty("phantomjs") ? props.get("BrowserPathToBinary")
-					: System.getProperty("phantomjs"));
+			
 			
 			// Choose your browser based on name. The name value is what is in
 			// CommonConstants.

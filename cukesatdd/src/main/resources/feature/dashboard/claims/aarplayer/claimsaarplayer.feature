@@ -1,51 +1,80 @@
 @claimspage
-Feature: To validate the new changes related to claims page for MA/MAPD on the member redesigned site
-Scenario Outline: To Verify Claims Page Header for
-Given I am an AMS member on the redesigned member site
-| Plan Type   | <planType>   |
-When i navigate to the Claims Summary page in AMS site
-Then i can view a Page Header in Claims Sumamry page in AMS site
-And a View Claims for dropdown menu that defaults to last 90 days in Claims Sumamry page in AMS site
-And a Claim type dropdown in Claims Sumamry page in AMS site
-And all Body Copy on the page in Claims Sumamry page in AMS site
- Examples:
- | planType  | 
- | MAPD      |  
- |   MA      | 
- 
- 
-#US492608 
-@cliamstable 
- Scenario Outline: To verify Claims Table for MA/MAPD member on new UHC Claims Sumamry Page
- Given I am an AMS member on the redesigned member site
-| Plan Type   | <planType>   |
-When i navigate to the Claims Summary page in AMS site
-Then I can view all Body Copy on the page in AMS site
-And dynamic text with the number of claims and search criteria, or date range for custom search
-And a Claims Table with pagination in AMS site
-#And all Text on the page in the AMS site
+Feature: To validate the new changes related to claims page for MA/MAPD/PDP on the member redesigned site
+@claimsHeader
+  Scenario Outline: To Verify Claims Page Header for
+    Given I am an AARP member on the redesigned site
+      | Plan Type | <planType> |
+    When I navigate to the Claims Summary page in AARP site
+    Then I can view a Page Header in Claims Sumamry page in AARP site
+    And A View Claims from dropdown menu that defaults to last 90 days in Claims Sumamry page in AARP site
+    And A Claim type dropdown in Claims Sumamry page in AARP site
+    And All Body Copy on the page in Claims Sumamry page in AARP site
 
-Examples:
+    Examples: 
+      | planType |
+      | MA       |
+      | MAPD     |
+      | PDP      |
 
- | planType  | 
- | MA        |
- | MAPD      |
- 
-#US494688 
-@claimsEob
-Scenario Outline: To verify EOB for MA/MAPD member on new UHC Claims Summary Page
-Given I am an AMS member on the redesigned member site
-| Plan Type   | <planType>   |
-When i navigate to the Claims Summary page in AMS site
-Then I can view an Explanation of Benefits component with the Medical and/or Prescription Drug EOB search buttons based on my plan type
-| Domain | <domain>  |
+  #US492608
+  @cliamstable
+  Scenario Outline: To verify Claims Table for MA/MAPD/PDPPDP member on new AARP Claims Sumamry Page
+    Given I am an AARP member on the redesigned site
+      | Plan Type | <planType> |
+    When I navigate to the Claims Summary page in AARP site
+    Then I can view all Body Copy on the page in AARP site
+    And Dynamic text with the number of claims and search criteria, or date range for custom search
+    And A Claims Table with pagination in AARP site
 
-Examples:
+    Examples: 
+      
+      Examples:
 
- | planType  |  domain |
- | MA        |  COSMOS |
- | MAPD      |  COSMOS |
- 
- 
- 
- 
+      | planType |
+      | MA       |
+      | MAPD     |
+      | PDP      |
+
+  #US494688
+  @claimsEob
+  Scenario Outline: To verify EOB for MA/MAPD/PDP member on new AMS Claims Summary Page
+    Given I am an AARP member on the redesigned site
+      | Plan Type | <planType> |
+    When I navigate to the Claims Summary page in AARP site
+    Then I can view an Explanation of Benefits component with the Medical and/or Prescription Drug EOB search buttons based on my plan type
+      | Domain | <domain> |
+
+    Examples: 
+      
+      Examples:
+
+      | planType | domain |
+      | MA       | COSMOS |
+      | MAPD     | COSMOS |
+      | PDP      | COSMOS |
+
+  @claimslearnmoresection
+  Scenario Outline: To verify Learn More About Your Cost Breakdown on AARP claims summary page
+    Given I am an AARP member on the redesigned site
+      | Plan Type | <planType> |
+    When I navigate to the Claims Summary page in AARP site
+    Then I can view the Learn More About Your Cost Breakdown section
+
+    Examples: 
+      | planType |
+      | MA       |
+      | MAPD     |
+      | PDP      |
+
+  @claimsDownloadmydataButton
+  Scenario Outline: To Verify Downloadmydata button on AARP calims summary page
+    Given I am an AARP member on the redesigned site
+      | Plan Type | <planType> |
+    When I navigate to the Claims Summary page in AARP site
+    Then I can view and validate the download my data button in calims summary page
+
+    Examples: 
+      | planType |
+      | MA       |
+      | MAPD     |
+      | PDP      |

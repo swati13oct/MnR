@@ -1,4 +1,4 @@
-package acceptancetests.dashboard.drugcostestimator.bluelayer;
+package acceptancetests.dashboard.drugcostestimator.ulayer;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -28,11 +28,11 @@ import pages.dashboard.member.drugcostestimator.blayer.AddDrugDetails;
 import pages.dashboard.member.drugcostestimator.blayer.AddNewDrugModal;
 import pages.dashboard.member.drugcostestimator.blayer.DrugCostEstimatorPage;
 import pages.dashboard.member.drugcostestimator.blayer.SavingsOppurtunity;
-import pages.member.bluelayer.AccountHomePage;
-import pages.member.bluelayer.LoginPage;
-import pages.mobile.member.blayer.BenefitsSummaryPage;
+import pages.member.ulayer.AccountHomePage;
+import pages.member.ulayer.LoginPage;
+import pages.mobile.member.ulayer.BenefitsSummaryPage;
 
-public class DrugcostestimatorUhcStepDefinition {
+public class DrugcostestimatorAarpStepDefinition {
 
 
 	@Autowired
@@ -43,7 +43,7 @@ public class DrugcostestimatorUhcStepDefinition {
 	}
 
 	@Given("^I am a registered member using the new M&R member portal on a desktop computer$")
-	public void i_am_an_uhc_individual_member_on_the_dashboard_site(DataTable memberAttributes) {
+	public void i_am_an_aarp_individual_member_on_the_dashboard_site(DataTable memberAttributes) {
 		WebDriver wd = getLoginScenario().getWebDriver();
 		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
 		List<DataTableRow> memberAttributesRow = memberAttributes
@@ -92,7 +92,7 @@ public class DrugcostestimatorUhcStepDefinition {
 		getLoginScenario().saveBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE, dce);
 
 	}
-	@Given("^I am an UHC Individual member on the Dashboard site SmartPhone$")
+	@Given("^I am an AARP member on the Dashboard site SmartPhone$")
 	public void i_am_an_uhc_individual_member_on_the_dashboard_site_smartphone(DataTable memberAttributes) {
 		List<DataTableRow> memberAttributesRow = memberAttributes.getGherkinRows();
 		Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
@@ -132,29 +132,29 @@ public class DrugcostestimatorUhcStepDefinition {
 			getLoginScenario().saveBean(LoginCommonConstants.PASSWORD, pwd);
 		}
 	}
-	@When("^plantype user logs in mobile in UHC Site$")
-	public void the_above_plantype_user_logs_in_mobile() {
+	@When("^plantype user logs in mobile in AARP Site$")
+	public void plantype_user_logs_in_mobile_in_AARP_Site() {
 		String userName = (String) getLoginScenario().getBean(LoginCommonConstants.USERNAME);
 		String pwd = (String) getLoginScenario().getBean(LoginCommonConstants.PASSWORD);
 
 		WebDriver wd = getLoginScenario().getMobileWebDriver();
 		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
-		pages.mobile.member.blayer.LoginPage loginPage = new pages.mobile.member.blayer.LoginPage(wd);
+		pages.mobile.member.ulayer.LoginPage loginPage = new pages.mobile.member.ulayer.LoginPage(wd);
 
 		BenefitsSummaryPage benefitsSummaryPage = loginPage.loginWith(userName, pwd);
 
 		getLoginScenario().saveBean(PageConstants.BENEFITS_SUMMARY_PAGE, benefitsSummaryPage);
 
 	}
-	@When("^the above plantype user logs in UMS Site Desktop$")
-	public void plantype_user_logs_in() {
+	@When("^the above plantype user logs in AARP Site Desktop$")
+	public void the_above_plantype_user_logs_in_AARP_Site_Desktop() {
 		String userName = (String) getLoginScenario().getBean(LoginCommonConstants.USERNAME);
 		String pwd = (String) getLoginScenario().getBean(LoginCommonConstants.PASSWORD);
 		String category = (String) getLoginScenario().getBean(LoginCommonConstants.CATOGERY);
 		WebDriver wd = (WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
 		LoginPage loginPage = new LoginPage(wd);
 		getLoginScenario().saveBean(PageConstants.LOGIN_PAGE, loginPage);
-		AccountHomePage accountHomePage = (AccountHomePage) loginPage.loginWith(userName, pwd,category);
+		AccountHomePage accountHomePage = (AccountHomePage) loginPage.loginWith(userName, pwd);
 		getLoginScenario().saveBean(PageConstants.ACCOUNT_HOME_PAGE, accountHomePage);
 	}
 
@@ -750,58 +750,6 @@ public class DrugcostestimatorUhcStepDefinition {
 		String pharmacy_type = memberAttributesRow.get(0).getCells().get(1);
 		DrugCostEstimatorPage dce = (DrugCostEstimatorPage) getLoginScenario().getBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE);
 		dce.validate_pharmacy_type_not_present(pharmacy_type);
-	}
-	
-
-	@And("^I enter a US other territory zip code and click select$")
-	public void I_enter_a_US_other_territory_zip_code_and_click_select(DataTable memberAttributes){
-		List<DataTableRow> memberAttributesRow = memberAttributes
-				.getGherkinRows();
-		Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
-		for (int i = 0; i < memberAttributesRow.size(); i++) {
-
-			memberAttributesMap.put(memberAttributesRow.get(i).getCells()
-					.get(0), memberAttributesRow.get(i).getCells().get(1));
-		}
-		
-		String zipcode = memberAttributesMap.get("USOTZipcode");
-		WebDriver wd = (WebDriver)getLoginScenario().getBean(CommonConstants.WEBDRIVER);
-		DrugCostEstimatorPage dce = new DrugCostEstimatorPage(wd);
-		dce.pharmacyInformation(zipcode);
-	}
-	
-	@Then("^I should not see preferred mail service radio button under pharmacy type$")
-	public void I_should_not_see_preferred_mail_service_radio_button_under_pharmacy_type(){
-		DrugCostEstimatorPage dce = (DrugCostEstimatorPage) getLoginScenario()
-				.getBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE);
-		dce.validatePreferredMailServiceNotPresent();
-	
-	}
-	
-	@And("^I should be able to select the preferred mail service pharmacy$")
-	public void I_should_be_able_to_select_the_preferred_mail_service_pharmacy(){
-		DrugCostEstimatorPage dce = (DrugCostEstimatorPage) getLoginScenario()
-				.getBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE);
-		dce.btnMailServiceSelect.click();
-		
-	}
-	
-	
-	@And("^I should be able to select the preferred mail service radio button$")
-	public void I_should_be_able_to_select_the_preferred_mail_service_radio_button() throws InterruptedException{
-		DrugCostEstimatorPage dce = (DrugCostEstimatorPage) getLoginScenario()
-				.getBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE);
-		dce.selectPharmacyType("Preferred Mail Service");
-		
-	}
-	
-	
-	@Then("^I should see preferred mail service radio button under pharmacy type$")
-	public void I_should_see_preferred_mail_service_radio_button_under_pharmacy_type() {
-		DrugCostEstimatorPage dce = (DrugCostEstimatorPage) getLoginScenario()
-				.getBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE);
-		dce.validatePreferredMailServiceRD();
-
 	}
 	
 }

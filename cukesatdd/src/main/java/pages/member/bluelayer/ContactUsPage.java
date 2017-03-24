@@ -33,7 +33,8 @@ public class ContactUsPage extends UhcDriver{
 	@FindBy(xpath="//*[@id='secureWidget']/div[1]")
 	private WebElement securewidget;
 	
-	@FindBy(xpath="//*[@id='addAnotherPlanLink']")	
+	//@FindBy(xpath="//*[@id='addAnotherPlanLink']")
+	@FindBy(id = "addAnotherPlanLink")
 	private WebElement addPlan;
 	
 	
