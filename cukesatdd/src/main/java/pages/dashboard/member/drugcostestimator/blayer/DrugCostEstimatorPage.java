@@ -36,7 +36,7 @@ public class DrugCostEstimatorPage extends UhcDriver{
 	public JSONObject savedrugpageJson;
 
 
-	@FindBy(xpath = "//div[@id='drugs-tab']//div[@id='add-drug']")
+	@FindBy(xpath = "//div[@id='drugs-tab']//a[@id='add-drug']")
 	public WebElement addDrug;
 
 	@FindBy(xpath="//p[contains(text(),'STEP2:')]/following-sibling::span[p[contains(text(),'PHARMACY')]]")
@@ -221,6 +221,30 @@ public class DrugCostEstimatorPage extends UhcDriver{
 	@FindBy(xpath = ".//*[@id='total_pharmacysavings']/div[2]/a")
 	public WebElement lkEditPharmacyList;
 
+	@FindBy(xpath="//div[@class='pharmacy-container']")
+	public WebElement pharmacyContainer;
+
+	@FindBy(xpath="//div[@id='learnmoreTiersId']/a")
+	public WebElement learnmoreTiers;
+
+	@FindBy(xpath="//div[@id='learnmoreStagesId']/a")
+	public WebElement learnmoreStages;
+
+	@FindBy(id="learnmoreStagesId")
+	public WebElement stagesTexts;
+
+	@FindBy(id="learnmoreTiersId")
+	public WebElement tierTexts;
+	
+	@FindBy(id="selected-name")
+	public WebElement SelectedName;
+	
+	@FindBy(xpath="//div[@id='idLearnmoreAboutDelivery']/a")
+	public WebElement learnMoreHomeDelivery;
+	
+	
+	@FindBy(id="collapseHomeDel")
+	public WebElement homeDeliveryContent;
 
 	@Override
 	public void openAndValidate() {
@@ -948,5 +972,71 @@ public class DrugCostEstimatorPage extends UhcDriver{
 			}
 	  }
 
+	  public void select_pharmacy_if_not_selected() throws InterruptedException
+		{
+			if(pharmacyContainer.getText().contains("Selected"))
+			{
+				System.out.println("One of the Pharmacy is already selected");
+			}
+
+			else select_first_pharmacy_result();
+
+		}
+
+		public void clicklearnmoreTiersLink() throws InterruptedException{
+			learnmoreTiers.click();
+			Thread.sleep(3000);
+		}
+
+		public void clicklearnmoreStagesLink() throws InterruptedException{
+			learnmoreStages.click();
+			Thread.sleep(3000);
+		}
+
+		public void verifystagesTexts(){
+			
+			String all_text = stagesTexts.getText();
+			Assert.assertTrue("Annual Deductible Stage heading is not present", all_text.contains("Annual Deductible Stage"));
+			Assert.assertTrue("Initial Coverage Stage heading is not present", all_text.contains("Initial Coverage Stage"));
+			Assert.assertTrue("Catastrophic Coverage Stage heading is not present", all_text.contains("Catastrophic Coverage Stage"));
+		}
+
+	    public void verifyTiersTexts(String year, String layer, String plan){
+			
+			String all_text = tierTexts.getText();
+			Assert.assertTrue(year+" is not present", all_text.contains(year));
+			Assert.assertTrue(layer+" is not present", all_text.contains(layer));
+			Assert.assertTrue(plan+" is not present", all_text.contains(plan));
+		}
+
+	    public void selectPharmacyMailServicePharmacy() throws InterruptedException{
+
+	    	//String all_text = pharmacyResults.getText();
+
+	    	if (pharmacyResults.getText().contains("Preferred Mail Service"))
+	    	{
+	    		mail_service_select_btn.click();
+
+	    		Thread.sleep(4000);
+	    		
+	    		Assert.assertTrue("Preferred Mail Service Pharmacy is not selected", SelectedName.getText().contains("Preferred Mail Service Pharmacy"));
+	    	}
+
+	    	
+
+	    }
+
+	    public void click_learnMoreHomeDeliveryLink() throws InterruptedException
+	    
+	    {
+	    	learnMoreHomeDelivery.click();
+	    	Thread.sleep(3000);
+	    }
+	    
+	    public void verifyLearnMoreDeliveryContent(String content)
+	    {
+	    	homeDeliveryContent.getText().contains(content);
+	    	Assert.assertTrue(content+"is not present", homeDeliveryContent.getText().contains(content));
+	    }
 }
 

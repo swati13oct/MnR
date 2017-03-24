@@ -806,41 +806,6 @@ public class DrugcostestimatorUhcStepDefinition {
 
 	}
 	
-	@When("^I use the DCE tool to enter one or more drugs to my drug list and complete the flow$")
-	public void I_use_the_DCE_tool_to_enter_one_or_more_drugs_to_my_drug_list_and_complete_the_flow(DataTable data) throws InterruptedException {
-		List<DataTableRow> memberAttributesRow = data.getGherkinRows();
-		String drug = memberAttributesRow.get(0).getCells().get(1);
-
-		WebDriver wd = (WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
-
-		DrugCostEstimatorPage dce = new DrugCostEstimatorPage(wd);
-		dce.changeUrlToNewDCEPage();
-		dce.addDrug(drug);
-		
-	}
-	
-	@And("^I navigate to step2 page and I have selected a pharmacy$")
-	public void selectPharmacy() throws InterruptedException{
-		
-		WebDriver wd = (WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
-		DrugCostEstimatorPage dce = new DrugCostEstimatorPage(wd);
-		dce.navigateToStep2();
-		dce.fillPharmacyInfo();
-		Thread.sleep(1000);
-		
-	}
-	
-	@And("^I navigate to step3 page$")
-	public void I_navigate_to_step3_page() throws InterruptedException {
-		
-		WebDriver wd = (WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
-		DrugCostEstimatorPage dce = new DrugCostEstimatorPage(wd);
-		//DrugCostEstimatorPage dce = (DrugCostEstimatorPage) getLoginScenario()
-		//		.getBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE);
-		dce.navigateToStep3();
-
-	}
-	
 	@Then("^I should be able to view the section on the left rail regarding drug cost saving with the link$")
 	public void drugCostSavingsSectionLeftRail() throws InterruptedException{
 		Thread.sleep(4000);
@@ -991,6 +956,70 @@ public class DrugcostestimatorUhcStepDefinition {
 		dce.validateEditDrugLinkNotPresent();
 	}
 	
+	@When("^I use the DCE tool to enter one or more drugs to my drug list and complete the flow$")
+	public void I_use_the_DCE_tool_to_enter_one_or_more_drugs_to_my_drug_list_and_complete_the_flow(DataTable data) throws InterruptedException {
+		List<DataTableRow> memberAttributesRow = data.getGherkinRows();
+		String drug = memberAttributesRow.get(0).getCells().get(1);
+
+		WebDriver wd = (WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
+
+		DrugCostEstimatorPage dce = new DrugCostEstimatorPage(wd);
+		dce.changeUrlToNewDCEPage();
+		dce.addDrug(drug);
+		
+	}
 	
+	@And("^I navigate to step2 page and I have selected a pharmacy$")
+	public void selectPharmacy() throws InterruptedException{
+		
+		WebDriver wd = (WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
+		DrugCostEstimatorPage dce = new DrugCostEstimatorPage(wd);
+		dce.navigateToStep2();
+		dce.fillPharmacyInfo();
+		Thread.sleep(1000);
+		
+	}
+	
+	@And("^I navigate to step3 page$")
+	public void I_navigate_to_step3_page() throws InterruptedException {
+		
+		WebDriver wd = (WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
+		DrugCostEstimatorPage dce = new DrugCostEstimatorPage(wd);
+		//DrugCostEstimatorPage dce = (DrugCostEstimatorPage) getLoginScenario()
+		//		.getBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE);
+		dce.navigateToStep3();
+
+	}
+	
+	
+	
+	
+	@Then("^I delete the existing drug if present$")
+	public void I_delete_the_existing_drug_if_present() throws InterruptedException {
+		DrugCostEstimatorPage dce = (DrugCostEstimatorPage) getLoginScenario().getBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE);
+		//Thread.sleep(10000);
+		dce.delete_all_drugs();
+	}
+	
+	@When("^I select the Preferred Mail Service Pharmacy from the pharmacy result if not selected$")
+	public void I_select_the_Preferred_Mail_Service_Pharmacy_from_the_pharmacy_result_if_not_selected() throws InterruptedException {
+		DrugCostEstimatorPage dce = (DrugCostEstimatorPage) getLoginScenario().getBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE);
+	    dce.selectPharmacyMailServicePharmacy();
+	}
+
+	@When("^I click Learn more about starting home delivery link$")
+	public void I_click_Learn_more_about_starting_home_delivery_link() throws InterruptedException {
+		DrugCostEstimatorPage dce = (DrugCostEstimatorPage) getLoginScenario().getBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE);
+	    dce.click_learnMoreHomeDeliveryLink();
+		
+	}
+
+	@Then("^I should see user plan content$")
+	public void I_should_be_user_plan_content(DataTable data) {
+		List<DataTableRow> memberAttributesRow = data.getGherkinRows();
+		String plan = memberAttributesRow.get(0).getCells().get(1);
+		DrugCostEstimatorPage dce = (DrugCostEstimatorPage) getLoginScenario().getBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE);
+		dce.verifyLearnMoreDeliveryContent(plan);
+}
 }
 

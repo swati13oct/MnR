@@ -647,3 +647,33 @@ Examples:
  | planType| memberType|
  | MAPD|IndividualwithoutCostSavings|
  
+ 
+  #--------------------------------
+ #MAPD Grp q1_apr_grp008
+ 
+ @drug_cost_estimatorlearnmore_home_delivery
+Scenario Outline: To Verify Members who have access to mail service should be able to see dynamic content related to their plan when using the Pharmacy Search functionality of the DCE tool and selecting the mail service option
+Given I am a registered member using the new M&R member portal on a desktop computer
+| Plan Type   | <planType>   |
+| Member Type	  | <memberType> |
+When the above plantype user logs in UMS Site Desktop
+And I access the page containing the DCE tool
+And I delete the existing drug if present
+When I add the drug with Dosage and Quantity and frequency to the list
+|Drug|Lipitor|
+|Dosage|Lipitor TAB 10MG|
+|Quantity|60|
+|Frequency|Every 1 month|
+And I navigate to step2 page
+And I select the pharmacy type
+|Pharmacy Type|Preferred Mail Service|
+And I select the Preferred Mail Service Pharmacy from the pharmacy result if not selected
+And I click Learn more about starting home delivery link
+Then I should see user plan content
+|Plan|<plan>|
+
+Examples:
+ | planType|memberType|plan|
+ | MAPD|Group_Inc1|MAPD GROUP CURRENT YEAR|
+ 
+ 

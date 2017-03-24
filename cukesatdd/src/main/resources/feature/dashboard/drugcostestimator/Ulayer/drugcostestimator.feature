@@ -59,7 +59,7 @@ Then I should not see pharmacy button radio button under pharmacy type
  
  
   #--------------------------------------
-  #Ciba Vision Saline ampicillin sodium Exelon default pharmacy saver q1_feb_ulayer125
+  #Ciba Vision Saline ampicillin sodium Exelon default pharmacy saver q1_apr_ulayer125
 @drug_cost_estimatorcost
 Scenario Outline: To Verify total annual costs, tier information and any available savings in the left rail of the Drug Costs step of the DCE tool
 Given I am a registered member using the new M&R member portal on a desktop computer
@@ -67,8 +67,8 @@ Given I am a registered member using the new M&R member portal on a desktop comp
 | Member Type	  | <memberType> |
 When the above plantype user logs in AARP Site Desktop
 And I access the page containing the DCE tool
-#Then I delete the existing drug if present
-#When I add the drug with Dosage and Quantity and frequency to the list
+Then I delete the existing drug if present
+When I add the drug with Dosage and Quantity and frequency to the list
 |Drug|Exelon|
 |Dosage|Exelon CAP 1.5MG|
 |Quantity|60|
@@ -127,4 +127,68 @@ And I should see amount deductible on left rail
 Examples:
  | planType |memberType|
  | MAPD     |Individual_dce_flow_pharmacy_saver_cost|
+ 
+ 
+ 
+   #--------------------------------------
+#q1_apr_ulayer161 MAPD q1_feb_ulayer206 PDP
+@drug_cost_estimatorlearn
+Scenario Outline: To Verify relevant content in the Learn More section of Step 3 so I can understand any limitations or restrictions that may apply to my plan benefits
+Given I am a registered member using the new M&R member portal on a desktop computer
+| Plan Type   | <planType>   |
+| Member Type	  | <memberType> |
+When the above plantype user logs in AARP Site Desktop
+And I access the page containing the DCE tool
+Then I delete the existing drug if present
+When I add the drug with Dosage and Quantity and frequency to the list
+|Drug|Lipitor|
+|Dosage|Lipitor TAB 10MG|
+|Quantity|60|
+|Frequency|Every 1 month|
+And I navigate to step2 page
+And I select the pharmacy from the list if not selected
+And I navigate to step3 page
+And I click on learn more tiers link
+Then I should see relevant content for tiers
+|Year|<year>|
+|Layer|<layer>|
+|Plan|<planType>|
+When I click on learn more stages link
+Then I should see relevant content for stages
+
+Examples:
+ | planType |memberType|year|layer|
+ | MAPD     |Individual_Inc|CurrentYear|AARP|
+ | PDP      |Individual_Inc|Current|AArp|
+ 
+ 
+ #--------------------------------
+ #MAPD q1_apr_ulayer025 PDP q1_feb_ulayer203
+ 
+ @drug_cost_estimatorlearnmore_home_delivery
+Scenario Outline: To Verify Members who have access to mail service should be able to see dynamic content related to their plan when using the Pharmacy Search functionality of the DCE tool and selecting the mail service option
+Given I am a registered member using the new M&R member portal on a desktop computer
+| Plan Type   | <planType>   |
+| Member Type	  | <memberType> |
+When the above plantype user logs in AARP Site Desktop
+And I access the page containing the DCE tool
+And I delete the existing drug if present
+When I add the drug with Dosage and Quantity and frequency to the list
+|Drug|Lipitor|
+|Dosage|Lipitor TAB 10MG|
+|Quantity|60|
+|Frequency|Every 1 month|
+And I navigate to step2 page
+And I select the pharmacy type
+|Pharmacy Type|Preferred Mail Service|
+And I select the Preferred Mail Service Pharmacy from the pharmacy result if not selected
+And I click Learn more about starting home delivery link
+Then I should see user plan content
+|Plan|<plan>|
+
+Examples:
+ | planType|memberType|plan|
+ | PDP|Individual_Inc1|PDP Current Year|
+ | MAPD|Individual_Inc1|MAPD Current Year|
+
  
