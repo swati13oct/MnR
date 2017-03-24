@@ -15,7 +15,7 @@ import cucumber.junit.Cucumber;
 @Cucumber.Options(glue = { "atdd.framework","acceptancetests.benefitsandcoveragejenkins.ulayer" }, 
 		features = { "feature/plan-benefits-and-coverage" }, 
 		format = {
-		"pretty", "html:reports/test-report","json:target/cucumber.json"}, tags ={"@needHelp1"})
+		"pretty", "html:reports/test-report","json:target/cucumber.json"}, tags ={"@availableRider,@availableRider3"})
 public class RunMRAtddTestBnC {
 
 }

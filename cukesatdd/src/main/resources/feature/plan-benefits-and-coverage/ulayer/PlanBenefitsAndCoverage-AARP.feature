@@ -788,7 +788,21 @@ Feature: To test plan benefits and Coverage on AARP site for Federal members
     Given registered AMP with following details for plan benefits and coverage flow in AARP site
       | Plan Type      | <planType>      |
       | Copay Category | <copayCategory> |
-    When the user view forms and resources in AARP site
+    When the user view jenkins benefits and coverage in AARP site
+    And the user validates the content on benefits and coverage page
+    When user clicks on Add Rider button
+    Then Add rider popup appears and clicks Add Rider button
+
+    Examples: 
+      | planType | copayCategory |
+      | MAPD     | NON LIS       |
+      
+   @availableRiders1
+  Scenario Outline: Verify Federal Available Riders Dental Platinum on benefits and coverage in AARP site for MAPD Lis 2 member
+    Given registered AMP with following details for plan benefits and coverage flow in AARP site
+      | Plan Type      | <planType>      |
+      | Copay Category | <copayCategory> |
+    #When the user view forms and resources in AARP site
     Then the user view benefits and coverage in AARP site
     And the user validates the content on benefits and coverage page
     When user clicks on Add Rider button
@@ -796,7 +810,7 @@ Feature: To test plan benefits and Coverage on AARP site for Federal members
 
     Examples: 
       | planType | copayCategory |
-      | MAPD     | LIS 2         |
+      | MAPD     | NON LIS       |
 
   Scenario Outline: Verify Federal Optional Dental on benefits and coverage in AARP site
     Given registered AMP with following details for plan benefits and coverage flow in AARP site
@@ -841,19 +855,32 @@ Feature: To test plan benefits and Coverage on AARP site for Federal members
 #Data Used: q1_feb_ulayer072
 
   @availableRider
+  Scenario Outline: Verify Federal Available  Dental Platinum  riders on benefits and coverage in AARP site for  MAPD member
+    Given registered AMP with following details for plan benefits and coverage flow in AARP site
+      | Plan Type      | <planType>      |
+      | Copay Category | <copayCategory> |
+    When the user view jenkins benefits and coverage in AARP site
+    And the user validates the content on benefits and coverage page
+    When user clicks on Add Rider button
+    #Then Add rider popup appears and clicks Add Rider button
+
+    Examples: 
+      | planType | copayCategory |
+      | MAPD     | LIS2          |
+      
+  @availableRider3
   Scenario Outline: Verify Federal Available  Dental 260  riders on benefits and coverage in AARP site for  MAPD member
     Given registered AMP with following details for plan benefits and coverage flow in AARP site
       | Plan Type      | <planType>      |
       | Copay Category | <copayCategory> |
-    When the user view forms and resources in AARP site
-    Then the user view benefits and coverage in AARP site
+    When the user view jenkins benefits and coverage in AARP site
     And the user validates the content on benefits and coverage page
     When user clicks on Add Rider button
-    Then Add rider popup appears and clicks Add Rider button
+    #Then Add rider popup appears and clicks Add Rider button
 
     Examples: 
       | planType | copayCategory |
-      | MAPD     | LIS 2         |
+      | MAPD     | NON LIS       |
 
   @availableRider2
   Scenario Outline: Verify Federal Available  Fitness riders on benefits and coverage in AARP site for  MAPD member

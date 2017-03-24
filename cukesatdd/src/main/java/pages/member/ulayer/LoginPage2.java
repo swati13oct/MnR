@@ -110,10 +110,10 @@ public class LoginPage2 extends UhcDriver {
 			        alert3.accept();*/
 			        }
 
-		if(currentUrl().contains("home/my-account-home.html"))
+		if(currentUrl().contains("home/my-plans/benefits-and-coverage-page.html"))
 
 		{
-			return new AccountHomePage(driver);
+			return new BenefitsAndCoveragePage(driver);
 		}
 		else if (currentUrl().contains("terminated-plan.html")) {
 			return new TerminatedHomePage(driver); 
