@@ -861,7 +861,7 @@ Feature: To test plan benefits and Coverage on AARP site for Federal members
       | Copay Category | <copayCategory> |
     When the user view jenkins benefits and coverage in AARP site
     And the user validates the content on benefits and coverage page
-    When user clicks on Add Rider button
+    #When user clicks on Add Rider button
     #Then Add rider popup appears and clicks Add Rider button
 
     Examples: 
@@ -876,7 +876,7 @@ Feature: To test plan benefits and Coverage on AARP site for Federal members
     When the user view jenkins benefits and coverage in AARP site
     And the user validates the content on benefits and coverage page
     When user clicks on Add Rider button
-    #Then Add rider popup appears and clicks Add Rider button
+    Then Add rider popup appears and clicks Add Rider button
 
     Examples: 
       | planType | copayCategory |
