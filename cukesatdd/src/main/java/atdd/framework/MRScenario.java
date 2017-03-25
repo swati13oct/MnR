@@ -887,66 +887,52 @@ public class MRScenario {
       * 
       * Of course your path to the binary will be different.
       * 
-      * By default, the Jenkins job can override these values, but will not change them.  If you 
+      * PhantomJS supports mimicking browsers.  By changing the agentString, one can spoof
+      * a browser type for example, this is a desktop string:
+      * 
+      * Mozilla/5.0 (Windows NT 6.0) AppleWebKit/535.1 (KHTML, like Gecko) Chrome/13.0.782.41 Safari/535.1
+      * 
+      * Using this string causes PhantomJS to act like a desktop browser and will access desktop versions of websites.
+      * This is a mobile string:
+      * 
+      * Mozilla/5.0 (Linux; U; Android 2.3.3; en-us; LG-LU3000 Build/GRI40) AppleWebKit/533.1 (KHTML, like Gecko) Version/4.0 Mobile Safari/533.1
+      * 
+      * Using this string makes PhantomJS identfy itself as a mobile browser (on a mobile device) and will allow you to use the mobile versions
+      * of websites.
+      * 
+      * By default, When a job is run in Jenkins, the values defines in Jenkins will override values in the config file, but will not change them.  If you 
       * look at the Jenkins job, it specifies a browser type and it should be PhantomJS.
       * Anything else may be a problem.
       */
 	public WebDriver getWebDriver() {
 
-
-
+        //Is system propery exists defining JENKINS_BROWSER, we're running in JENKINS and
+		//will prefer those browser properties.
 		String browser = (null == System.getProperty(CommonConstants.JENKINS_BROWSER)
-				? props.get("WebDriver") : System.getProperty(CommonConstants.JENKINS_BROWSER));
-
-		//webDriver = htmlUnitDriver;
-		webDriver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
-		webDriver.manage().window().maximize();
-		
-	/*	DesiredCapabilities ieCaps = new DesiredCapabilities();
-		ieCaps.setCapability(PhantomJSDriverService.PHANTOMJS_EXECUTABLE_PATH_PROPERTY, "C:/dev/programs/phantomjs/bin/phantomjs.exe");
-		webDriver = new PhantomJSDriver(ieCaps); */
+				? props.get(CommonConstants.DESKTOP_WEBDRIVER) : System.getProperty(CommonConstants.JENKINS_BROWSER));
 		
 		
-		    String phantomjs = System.getProperty("phantomjs");
-		    DesiredCapabilities caps = new DesiredCapabilities();
-		//    caps.setCapability(PhantomJSDriverService.PHANTOMJS_EXECUTABLE_PATH_PROPERTY,"C:/dev/programs/phantomjs/bin/phantomjs.exe");
-		    System.out.print(System.getProperty("phantomjs"));
-		    if (StringUtils.isBlank(phantomjs)) {
-		    	caps.setCapability(PhantomJSDriverService.PHANTOMJS_EXECUTABLE_PATH_PROPERTY,props.get("HeadlessBrowserPath"));
-		    	
-		    } else {
-		    	caps.setCapability(PhantomJSDriverService.PHANTOMJS_EXECUTABLE_PATH_PROPERTY,System.getProperty("phantomjs"));
-		    }
-		  //  caps.setCapability("browserType", "phantomjs");
-		 //   caps.setCapability(PhantomJSDriverService.PHANTOMJS_PAGE_SETTINGS_PREFIX + "userAgent", agent);
-		  //  caps.setCapability("takesScreenshot", false);
-		    caps.setJavascriptEnabled(true);
-		    caps.setCapability(PhantomJSDriverService.PHANTOMJS_CLI_ARGS, new String[] {"--web-security=no", "--ignore-ssl-errors=yes", "--ssl-protocol=any"});
-		    String userAgent = "Mozilla/5.0 (Windows NT 6.0) AppleWebKit/535.1 (KHTML, like Gecko) Chrome/13.0.782.41 Safari/535.1";
-
-		                       // "Mozilla/5.0 (Linux; U; Android 2.3.3; en-us; LG-LU3000 Build/GRI40) AppleWebKit/533.1 (KHTML, like Gecko) Version/4.0 Mobile Safari/533.1";
-		   
-		    caps.setCapability(PhantomJSDriverService.PHANTOMJS_PAGE_SETTINGS_PREFIX + "userAgent", userAgent);
-		    webDriver = new PhantomJSDriver(caps);
-		    webDriver.manage().timeouts().pageLoadTimeout(120,TimeUnit.SECONDS);
-		    webDriver.manage().window().setSize(new Dimension(1400, 1000)); 
-
+		String agent = (null == System.getProperty(CommonConstants.JENKINS_BROWSER_AGENT_STRING)
+				? props.get(CommonConstants.DESKTOP_BROWSER_AGENT_STRING) : System.getProperty(CommonConstants.JENKINS_BROWSER_AGENT_STRING));
 		
-		System.out.println("getWebDriver, returning driver " + browser);
 		
-
-
-
-
+		if (browser.equalsIgnoreCase(CommonConstants.JENKINS_BROWSER_PHANTOMJS)) {
+			System.out.println("PHANTOMJS Agent: " + agent);
+		}
+		
+		// Again, Jenkins takes precedent. 
+		String pathToBinary = (null == System.getProperty("phantomjs") ? props.get("BrowserPathToBinary")
+				: System.getProperty("phantomjs"));
+		
+		
+		System.out.println("getWebDriver: returning driver for " + browser);
 		// if webDriver is null, create one, otherwise send the existing one
 		// back.
 		// This has to happen to preserve the state of webDriver so that we can
 		// take screenshots at the end.
 		if (null == webDriver) {
 			System.out.println("New WebDriver CREATED");
-			// Again, Jenkins takes precedent. 
-			String pathToBinary = (null == System.getProperty("phantomjs") ? props.get("BrowserPathToBinary")
-					: System.getProperty("phantomjs"));
+			
 			
 			// Choose your browser based on name. The name value is what is in
 			// CommonConstants.
@@ -970,11 +956,9 @@ public class MRScenario {
 				webDriver.manage().window().maximize();
 			} else if (browser.equalsIgnoreCase(CommonConstants.JENKINS_BROWSER_PHANTOMJS)) {
 				// otherwise if we have a Jenkins browser defined, we use it.
-				//DesiredCapabilities caps = new DesiredCapabilities();
+				DesiredCapabilities caps = new DesiredCapabilities();
 				caps.setCapability(PhantomJSDriverService.PHANTOMJS_EXECUTABLE_PATH_PROPERTY, pathToBinary);
 				//from Jarvis
-				//String agent = "Mozilla/5.0 (Windows NT 6.0) AppleWebKit/535.1 (KHTML, like Gecko) Chrome/13.0.782.41 Safari/535.1";
-				
 				caps.setCapability(PhantomJSDriverService.PHANTOMJS_PAGE_SETTINGS_PREFIX + "userAgent", agent);
 				caps.setJavascriptEnabled(true);
 				caps.setCapability(PhantomJSDriverService.PHANTOMJS_CLI_ARGS,
@@ -1017,20 +1001,6 @@ public class MRScenario {
 			}
 		}
 		return webDriver;
-
-		/*if (null == webDriver) {
-
-
-			File pathToBinary = new File("C:/Program Files (x86)/Mozilla Firefox/firefox.exe");
-			FirefoxBinary ffBinary = new FirefoxBinary(pathToBinary);
-			FirefoxProfile firefoxProfile = new FirefoxProfile();
-			webDriver = new FirefoxDriver(ffBinary, firefoxProfile);
-
-			webDriver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
-		} 
-		    return webDriver; */
-
-
 	}
 
 	public WebDriver getIEDriver() {

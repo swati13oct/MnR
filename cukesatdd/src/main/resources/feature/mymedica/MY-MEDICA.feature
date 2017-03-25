@@ -38,3 +38,17 @@ Feature: Test case for My MEDICA site
 Examples: 
      | memberid1 | dateOfBirth |
      | 967169097 | 04-10-1942  |
+     
+ 
+@uhcgrouponmedica
+    Scenario Outline: Verify negativescenarios in My Medica site
+    Given the user is on registration page of My Medica site
+    When the user registers with below details in My Medica site
+      | Plan Member ID | <memberid1>   |
+      | Date of birth  | <dateOfBirth> |
+    Then the user navigate to error page
+    Then the user validate error message
+
+Examples: 
+     | memberid1 | dateOfBirth |
+     | 925606181 | 05-27-1938  |

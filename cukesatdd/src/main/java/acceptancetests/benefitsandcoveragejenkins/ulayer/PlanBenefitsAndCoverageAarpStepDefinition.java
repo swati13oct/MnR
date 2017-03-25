@@ -1,7 +1,7 @@
 /**
  * 
  */
-package acceptancetests.benefitsandcoverage.ulayer;
+package acceptancetests.benefitsandcoveragejenkins.ulayer;
 
 import gherkin.formatter.model.DataTableRow;
 
@@ -25,6 +25,7 @@ import pages.member.ulayer.BenefitsAndCoveragePage;
 import pages.member.ulayer.ContactUsPage;
 import pages.member.ulayer.FormsandresourcesPage;
 import pages.member.ulayer.LoginPage;
+import pages.member.ulayer.LoginPage2;
 import pages.member.ulayer.PlanBenefitsCoveragePage;
 import acceptancetests.atdd.data.CommonConstants;
 import acceptancetests.atdd.data.member.PageConstants;
@@ -98,12 +99,17 @@ public class PlanBenefitsAndCoverageAarpStepDefinition {
 
 		WebDriver wd = getLoginScenario().getWebDriver();
 		//wd.manage().window().maximize();
-		LoginPage loginPage = new LoginPage(wd);
-		AccountHomePage accountHomePage = (AccountHomePage) loginPage.loginWith(userName, pwd);
-		JSONObject accountHomeActualJson = null;
+		LoginPage2 loginPage = new LoginPage2(wd);
+		BenefitsAndCoveragePage  benefitsCoveragePage = (BenefitsAndCoveragePage) loginPage.loginWith(userName, pwd);
+		if (benefitsCoveragePage != null) {
+			getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
+			getLoginScenario().saveBean(PageConstants.BENEFITS_COVERAGE_PAGE,benefitsCoveragePage);
+			Assert.assertTrue(true);
+		}
+		//JSONObject accountHomeActualJson = null;
 
 		/*Get expected data*/
-		Map<String,JSONObject> expectedDataMap = loginScenario.getExpectedJson(userName);
+		/*Map<String,JSONObject> expectedDataMap = loginScenario.getExpectedJson(userName);
 		JSONObject accountHomeExpectedJson = accountHomePage.getExpectedData(expectedDataMap);
 
 		if (accountHomePage != null) {
@@ -120,7 +126,7 @@ public class PlanBenefitsAndCoverageAarpStepDefinition {
 			e.printStackTrace();
 		}
 
-		getLoginScenario().saveBean(CommonConstants.EXPECTED_DATA_MAP,expectedDataMap);
+		getLoginScenario().saveBean(CommonConstants.EXPECTED_DATA_MAP,expectedDataMap);*/
 
 	}
 	
@@ -402,8 +408,29 @@ public class PlanBenefitsAndCoverageAarpStepDefinition {
 			System.out.println("Benefits and coverage expected ==============>"+benefitsandcoverageExectedJson.toString());
 		}
 	}
+	@Then("^the user view jenkins benefits and coverage in AARP site")
+	public void user_views_jenkinsBenefitsAndCoverage() {
 
-//	@Then("^the user validates the content on benefits and coverage page")
+		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario().getBean(
+				PageConstants.BENEFITS_COVERAGE_PAGE);
+		
+		if(benefitsCoveragePage!=null){
+			//Get actual data
+			JSONObject actualJsonObj=benefitsCoveragePage.benefitsandcoverageJson;
+			loginScenario.saveBean(PlanBenefitsAndCoverageCommonConstants.BENEFITS_AND_COVERAGE_ACTUAL, actualJsonObj);	
+			getLoginScenario().saveBean(PageConstants.BENEFITS_COVERAGE_PAGE, benefitsCoveragePage);
+			System.out.println("Benefits and coverage actual ==============>"+actualJsonObj.toString());
+			// Get expected data 
+			String fileName = this.userName;
+			String directory = CommonConstants.BENEFITS_AND_COVERAGE_PAGE_DIRECTORY;					
+			JSONObject benefitsandcoverageExectedJson = MRScenario.readExpectedJson(
+					fileName, directory);
+			loginScenario.saveBean(PlanBenefitsAndCoverageCommonConstants.BENEFITS_AND_COVERAGE_EXPECTED, benefitsandcoverageExectedJson);
+			System.out.println("Benefits and coverage expected ==============>"+benefitsandcoverageExectedJson.toString());
+		}
+	}
+
+	@Then("^the user validates the content on benefits and coverage page")
 	public void validateContentOnBenefitsAndCoveragePage() {
 		
 		try {
@@ -560,22 +587,6 @@ public class PlanBenefitsAndCoverageAarpStepDefinition {
 		} catch (JSONException e) {
 			e.printStackTrace();
 		}
-	}
-
-
-
-	@Then("^the user validates the sorting link on mydocument page$")
-	public void view_sorting_search_aarp_site(){
-		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstants.ACCOUNT_HOME_PAGE);
-		
-		FormsandresourcesPage formsAndResourcesPage = accountHomePage.navigateTosortingsearchlinkAarpPage();		
-		
-
-		WebDriver wd = (WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
-		if(wd!=null){
-			wd.quit();
-		}
-
 
 	}
 

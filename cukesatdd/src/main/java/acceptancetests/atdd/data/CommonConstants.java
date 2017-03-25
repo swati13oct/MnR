@@ -52,17 +52,23 @@ public class CommonConstants {
 	 * This parm is set in Jenkins and should evaluate to null when running 
 	 * in a desktop environment.
 	 */
-	public static final String JENKINS_BROWSER = "JENKINS_BROWSER"; 
+	public static final String JENKINS_BROWSER = "JENKINS_BROWSER";
 	
-	/*
-	 * Headless web browser for testing in Jenkins.
-	 */
+	//The following identify the browser to the website.   DESKTOP_BROWSER_AGENT_STRING is from 
+	//the config file, JENKINS_BROWSER_AGENT_STRING is a SYSTEM parameter set in Jenkins.
+	public static final String DESKTOP_BROWSER_AGENT_STRING = "BrowserAgentString";
+	public static final String JENKINS_BROWSER_AGENT_STRING = "JENKINS_BROWSER_AGENT_STRING";
+
+	
+	//Browsers supported in MRScenario
 	public static final String JENKINS_BROWSER_PHANTOMJS = "PHANTOMJS";
 	public static final String HTMLUNIT_BROWSER = "HTMLUNIT";
 	public static final String FIREFOX_BROWSER = "FIREFOX";
 	public static final String CHROME_BROWSER = "CHROME";
 	public static final String IE_BROWSER = "IE";
 	public static final String MOBILE_BROWSER = "MOBILE";
+	
+	public static final String DESKTOP_WEBDRIVER = "WebDriver";
 	
 	public static final String PLAN_BENEFITS_AND_COVERAGE = "planBenefitsAndCoverage";
 
@@ -826,6 +832,9 @@ public class CommonConstants {
 	public static final String NEW_CLAIM_DETAILS_PAGE_DATA = "newClaimDetailsPage.json";
 
 	public static final String NEW_CLAIM_SUMMARY_PAGE_DATA = "newClaimsSummaryPage.json";
+
+	
+	
 	
 	
 }
