@@ -552,13 +552,13 @@ public void comparePlanslnk(){
 					int i=0;
 					 List<WebElement> plans = driver.findElements(By.xpath("//h2[contains(text(),'AARP')]"));
 					 System.out.println("PLANS SIZE :: "+plans.size());
-					 String xpath="//a[contains(text(),'Estimate Your Drugs')]";  
-					 List<WebElement> estimateDrugLink = driver.findElements(By.xpath(xpath));
+					 String xpath="Estimate Your Drugs";  
+					 List<WebElement> estimateDrugLink = driver.findElements(By.linkText(xpath));
 					 
 					 System.out.println("Estimate your drugs"+estimateDrugLink.size());
 					 for(WebElement plan : plans){
 						 if(plan.getText().equalsIgnoreCase(planName)){			 
-								 estimateDrugLink.get(i).click();
+		 					 estimateDrugLink.get(i).click();
 							 try {
 								Thread.sleep(3000);
 							} catch (InterruptedException e) {

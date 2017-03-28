@@ -1,6 +1,6 @@
 @planSummaryPage
 Feature: To vefify mobile responsive 
- 
+@fixed 
 Scenario Outline: To validate plan highlights and provider searh link
 Given the user is on the vpp portfolio page
 Then the user performs plan serach using zipcode
