@@ -552,7 +552,7 @@ public void comparePlanslnk(){
 					int i=0;
 					 List<WebElement> plans = driver.findElements(By.xpath("//h2[contains(text(),'AARP')]"));
 					 System.out.println("PLANS SIZE :: "+plans.size());
-					 String xpath="//*[contains(text(),'Estimate')]";  
+					 String xpath="//a[contains(text(),'Estimate Your Drugs')]";  
 					 List<WebElement> estimateDrugLink = driver.findElements(By.xpath(xpath));
 					 
 					 System.out.println("Estimate your drugs"+estimateDrugLink.size());
