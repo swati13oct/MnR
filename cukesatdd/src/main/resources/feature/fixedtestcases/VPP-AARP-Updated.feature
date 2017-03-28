@@ -13,4 +13,4 @@ Then the user validates plan summary for the below plan in the AARP site
 	| Plan Name | <planName> |
 Examples:
 | zipcode | county             | plantype | planName                                         |
-| 90210   | Los Angeles County | MA	  | AARP MedicareComplete SecureHorizons Plan 4 (HMO)    |
+| 90210   | Los Angeles County | MA	  | AARP MedicareComplete SecureHorizons Plan 1 (HMO)    |
