@@ -58,6 +58,12 @@ public class GetStartedPage extends UhcDriver {
 	}
 		  
 	public AddDrugPage clicksOnGetStarted() {
+		try {
+			Thread.sleep(6000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		driver.switchTo().frame(dceToolFrame);
 		getStartedLink.click();
 		return new AddDrugPage(driver);
