@@ -245,6 +245,12 @@ public class DrugCostEstimatorPage extends UhcDriver{
 	
 	@FindBy(id="collapseHomeDel")
 	public WebElement homeDeliveryContent;
+	
+	@FindBy(xpath = ".//*[@id='drugdetails']/div[1]/div[1]/div/div/section/div")
+	public WebElement switchGenericOption;
+	
+	@FindBy(xpath = ".//*[@id='drugdetails']/div[1]/div[1]/div/div/section/div/section/div[2]/a")
+	public WebElement switchNowLink;
 
 	@Override
 	public void openAndValidate() {
@@ -843,8 +849,7 @@ public class DrugCostEstimatorPage extends UhcDriver{
 	}
 	
 	public void deleteAllDrugs() throws InterruptedException{
-		System.out.println("Drugs count: "+getDrugsCount()); 
-		
+
 		while(getDrugsCount() != 0){
 			String deleteDrugXpath = ".//*[@id='drugdetails']/div[1]/div[1]/div/div/section/ul/li[2]/a";
 			WebElement deleteDrug = driver.findElement(By.xpath(deleteDrugXpath));
@@ -1038,5 +1043,104 @@ public class DrugCostEstimatorPage extends UhcDriver{
 	    	homeDeliveryContent.getText().contains(content);
 	    	Assert.assertTrue(content+"is not present", homeDeliveryContent.getText().contains(content));
 	    }
+	    
+	    public void isPharmacySelected(){
+			  List<WebElement> selectedPharmacy = driver.findElements(By.className("pharmacy-container"));
+			  //System.out.println("selectedPharmacy size"+selectedPharmacy.size());
+			  //System.out.println("selectedPharmacy"+selectedPharmacy.get(0).getText());
+			  String valselectedPharmacy = selectedPharmacy.get(0).getText();
+			  if(valselectedPharmacy.equals("Select a pharmacy to see your drug costs") || valselectedPharmacy.equals(" ")){
+				  Assert.assertTrue(true);
+			  }else{
+				  Assert.assertTrue(false);
+			  }
+		  }
+		  
+	    
+	    public void validatePharmacySelected(){
+			  List<WebElement> selectedPharmacy = driver.findElements(By.className("pharmacy-container"));
+			  String valselectedPharmacy = selectedPharmacy.get(0).getText();
+			  if(!valselectedPharmacy.equals("Select a pharmacy to see your drug costs") || !valselectedPharmacy.equals(" ")){
+				  Assert.assertTrue(true);
+			  }else{
+				  Assert.assertTrue(false);
+			  }
+		  }
+	    
+	    public void validateSwitchGenericOption(){
+			  
+			  System.out.println("switch generic option"+switchGenericOption.getText());
+			  if(switchGenericOption.isDisplayed()){
+				  Assert.assertTrue(true);
+			  }else{
+				  Assert.assertTrue(false);
+			  }
+				 
+			  
+		  }
+		  
+		  public void validateSwitchNowLink(){
+			  if(switchNowLink.isDisplayed()){
+				  Assert.assertTrue(true);
+			  }else{
+				  Assert.assertTrue(false);
+			  }
+		  }
+		  
+		  public void validateSaveGenericMessage(){
+			  List<WebElement> saveGenericMessage = driver.findElements(By.xpath(".//*[@id='drugdetails']/div[1]/div[1]/div/div/section/div/section/div[2]/p/span"));
+			  String valSaveGenericMessage = saveGenericMessage.get(0).getText();
+			  if(valSaveGenericMessage.equals("Save money")){
+				  Assert.assertTrue(true);
+			  }else{
+				  Assert.assertTrue(false);
+			  }
+		  }
+		  public void validateSaveDollarValueMessage(){
+			  List<WebElement> saveGenericMessage = driver.findElements(By.xpath(".//*[@id='drugdetails']/div[1]/div[1]/div/div/section/div/section/div[2]/p/span"));
+			  String valSaveGenericMessage = saveGenericMessage.get(0).getText();
+			  if(!valSaveGenericMessage.equals("Save money")){
+				  Assert.assertTrue(true);
+			  }else{
+				  Assert.assertTrue(false);
+			  }
+		  }
+		  
+		  public void clickSwitchNow() throws InterruptedException{
+			  switchNowLink.click();
+			  Thread.sleep(5000);
+			  System.out.println("Current Page title :: "+driver.getTitle());
+			  System.out.println("sav heading id"+ driver.findElement(By.id("switchToGenericHeadingsId")).getText());
+			  if (driver.getTitle().equalsIgnoreCase("My Benefits & Coverage")) {
+					String savingsOpputunityHeading = driver.findElement(By.xpath(".//*[@id='drugModal']/div/div/div[2]/div/div/div[4]/h2")).getText();
+					if(savingsOpputunityHeading.equals("SAVINGS OPPORTUNITY")){
+						Assert.assertTrue(true);
+					  }else{
+						  Assert.assertTrue(false);
+					  }
+				}
+			  
+		  }
+		  
+		  public void clickSwitchToGeneric() throws InterruptedException{
+				WebElement btnSwitchToGeneric = driver.findElement(By.id("switchToGenericBtnId"));
+				btnSwitchToGeneric.click();
+				Thread.sleep(3000);
+			}
+		  
+		public void isGeneric() throws InterruptedException {
+			Thread.sleep(5000);
+			String lbGenericdrug = driver.findElement(By.id("drugDosageStrengthId")).getText();
+			// System.out.println("lbGenericdrug txt "+lbGenericdrug);
+			String[] genericDrug = lbGenericdrug.split(" ");
+			if (genericDrug[0].equalsIgnoreCase("ATORVASTATIN")) {
+				Assert.assertTrue(true);
+			} else {
+				Assert.assertTrue(false);
+			}
+
+		}
+		  
+	    
 }
 

@@ -1009,17 +1009,109 @@ public class DrugcostestimatorUhcStepDefinition {
 
 	@When("^I click Learn more about starting home delivery link$")
 	public void I_click_Learn_more_about_starting_home_delivery_link() throws InterruptedException {
-		DrugCostEstimatorPage dce = (DrugCostEstimatorPage) getLoginScenario().getBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE);
-	    dce.click_learnMoreHomeDeliveryLink();
-		
+		DrugCostEstimatorPage dce = (DrugCostEstimatorPage) getLoginScenario()
+				.getBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE);
+		dce.click_learnMoreHomeDeliveryLink();
+
 	}
 
 	@Then("^I should see user plan content$")
 	public void I_should_be_user_plan_content(DataTable data) {
 		List<DataTableRow> memberAttributesRow = data.getGherkinRows();
 		String plan = memberAttributesRow.get(0).getCells().get(1);
-		DrugCostEstimatorPage dce = (DrugCostEstimatorPage) getLoginScenario().getBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE);
+		DrugCostEstimatorPage dce = (DrugCostEstimatorPage) getLoginScenario()
+				.getBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE);
 		dce.verifyLearnMoreDeliveryContent(plan);
-}
+	}
+	
+	
+	
+
+	@And("^I have not yet selected pharmacy$")
+	public void I_have_not_yet_selected_pharmacy() throws InterruptedException{
+		DrugCostEstimatorPage dce = (DrugCostEstimatorPage) getLoginScenario()
+				.getBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE);
+		//dce.navigateToStep2();
+		dce.isPharmacySelected();
+	}
+	
+	@And("^I have selected pharmacy$")
+	public void I_have_selected_pharmacy(){
+		DrugCostEstimatorPage dce = (DrugCostEstimatorPage) getLoginScenario()
+				.getBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE);
+		dce.validatePharmacySelected();
+	}
+	
+	@Then("I should be presented the option to switch to the generic option")
+	public void I_should_be_presented_the_option_to_switch_to_the_generic_option(){
+		DrugCostEstimatorPage dce = (DrugCostEstimatorPage) getLoginScenario()
+				.getBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE);
+		//dce.backwardToStep1();
+		dce.validateSwitchGenericOption();
+	}
+	
+	@And("^I will see a SWITCH NOW link in the drug tile with appropriate save message$")
+	public void I_will_see_a_SWITCH_NOW_link_in_the_drug_tile_with_appropriate_save_message(){
+		DrugCostEstimatorPage dce = (DrugCostEstimatorPage) getLoginScenario()
+				.getBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE);
+		dce.validateSwitchNowLink();
+		dce.validateSaveGenericMessage();
+	}
+	
+	@And("^I will see a modal appear upon clicking on SWITCH NOW$")
+	public void I_will_see_a_modal_appear_upon_clicking_on_SWITCH_NOW() throws InterruptedException{
+		DrugCostEstimatorPage dce = (DrugCostEstimatorPage) getLoginScenario()
+				.getBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE);
+		dce.clickSwitchNow();
+		//savingsOppurtunity.clickSwitchToGeneric();
+				
+	}
+	
+	@And("^when I click on the button to accept the generic$")
+	public void when_I_click_on_the_button_to_accept_the_generic() throws InterruptedException{
+		DrugCostEstimatorPage dce = (DrugCostEstimatorPage) getLoginScenario()
+				.getBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE);
+		dce.clickSwitchToGeneric();
+	}
+	
+	@And("^any cost savings will be applied to my total cost savings in Step3$")
+	public void any_cost_savings_will_be_applied_to_my_total_cost_savings_in_Step3(){
+		DrugCostEstimatorPage dce = (DrugCostEstimatorPage) getLoginScenario()
+				.getBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE);
+		dce.validateEditDrugLinkNotPresent();
+		
+	}
+	
+	@Then("^the drug name will automatically update within the Drug List$")
+	public void the_drug_name_will_automatically_update_within_the_Drug_List() throws InterruptedException{
+		DrugCostEstimatorPage dce = (DrugCostEstimatorPage) getLoginScenario()
+				.getBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE);
+		
+		dce.isGeneric();
+		dce.navigateToStep3();
+	}
+	
+	@Then("^I will see a SWITCH NOW link in the drug tile with a pharmacy savings cost value$")
+	public void I_will_see_a_SWITCH_NOW_link_in_the_drug_tile_with_a_pharmacy_savings_cost_value() {
+		DrugCostEstimatorPage dce = (DrugCostEstimatorPage) getLoginScenario()
+				.getBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE);
+		dce.validateSwitchNowLink();
+		dce.validateSaveDollarValueMessage();
+	    
+	}
+	
+	@And("^I have added a drug to my drug list and a generic equivalent is available for the drug I have selected$")
+	public void I_have_added_a_drug_to_my_drug_list_and_a_generic_equivalent_is_available_for_the_drug_I_have_selected(DataTable data) throws InterruptedException{
+		List<DataTableRow> memberAttributesRow = data.getGherkinRows();
+		String drug = memberAttributesRow.get(0).getCells().get(1);
+
+		WebDriver wd = (WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
+
+		DrugCostEstimatorPage dce = new DrugCostEstimatorPage(wd);
+		
+		dce.addDrug(drug);
+	}
+	
+	
 }
 
