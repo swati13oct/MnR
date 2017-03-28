@@ -321,11 +321,20 @@ public void disclaimerText(){
 }
 
 public ResponsivePlanSummary viewPlanSummary(String planType) {
+	JavascriptExecutor js = (JavascriptExecutor)driver;
+	try {
+		Thread.sleep(4000);
+	} catch (InterruptedException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
 	if (planType.equalsIgnoreCase("PDP")) {
-		showPdpPlans.click();
+		js.executeScript("arguments[0].click();", showPdpPlans);
+		//showPdpPlans.click();
 	} else if (planType.equalsIgnoreCase("MA")
 			|| planType.equalsIgnoreCase("MAPD")) {
-		showMaPlans.click();
+		js.executeScript("arguments[0].click();", showMaPlans);
+		//showMaPlans.click();
 	}
 	else if (planType.equalsIgnoreCase("MS")) {
 		showMsPlans.click();
