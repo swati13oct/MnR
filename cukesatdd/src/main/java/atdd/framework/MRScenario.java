@@ -967,7 +967,7 @@ public class MRScenario {
 				//end from jarvis
 				webDriver = new PhantomJSDriver(caps);
 				webDriver.manage().window().setSize(new Dimension(1400,1000));
-				webDriver.manage().timeouts().pageLoadTimeout(120,TimeUnit.SECONDS);
+				webDriver.manage().timeouts().pageLoadTimeout(200,TimeUnit.SECONDS);
 			} else if (browser.equalsIgnoreCase(CommonConstants.FIREFOX_BROWSER)) {
 				FirefoxBinary ffBinary = new FirefoxBinary(new File(pathToBinary));
 				FirefoxProfile firefoxProfile = new FirefoxProfile();
