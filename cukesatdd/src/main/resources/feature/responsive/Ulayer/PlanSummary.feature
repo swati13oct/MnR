@@ -280,6 +280,7 @@ And the user clicks on Estimate drug link for the respetive plan
 		|zipCode|county						 |planType|planName																						  |
 		|90210  |Los Angeles County|MAPD      |AARP MedicareComplete SecureHorizons Plan 1 (HMO)  |
 
+@planSummaryDce
 Scenario Outline: To validate Launch of DCE from PDP
 Given the user is on the vpp portfolio page
 Then the user performs plan serach using zipcode
