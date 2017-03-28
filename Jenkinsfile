@@ -54,63 +54,65 @@ node('docker-atdd-slave') {
 				archiveArtifacts artifacts: '**/*cucumber*.json, **/*cucumber*/*.html,**/*cucumber*.pdf,', fingerprint: true
 			}
 			stage('Cucumber Report Publisher'){
-				step([$class: 'CucumberReportPublisher', buildStatus: 'FAILURE', failedFeaturesNumber: 1, failedScenariosNumber: 1, failedStepsNumber: 1, fileExcludePattern: '', fileIncludePattern: '**/*.json', jenkinsBasePath: '', jsonReportDirectory: '/atdd/ATDD-test-project/${BUILD_NUMBER}/artifact/cukesatdd/target/', parallelTesting: false, pendingStepsNumber: 1, skippedStepsNumber: 1, trendsLimit: 0, undefinedStepsNumber: 1])
+				step([$class: 'CucumberReportPublisher', buildStatus: 'FAILURE', failedFeaturesNumber: 1, failedScenariosNumber: 1, failedStepsNumber: 1, fileExcludePattern: '', fileIncludePattern: '**/*.json', jenkinsBasePath: '', jsonReportDirectory: '**/${BUILD_NUMBER}/artifact/cukesatdd/target/', parallelTesting: false, pendingStepsNumber: 1, skippedStepsNumber: 1, trendsLimit: 0, undefinedStepsNumber: 1])
 			}
 			if( currentBuild.result == "FAILURE"){
 
 				stage('Results'){
-					String connectionURL = BUILD_URL+"artifact/cukesatdd/target/cucumber.json";
-					URL url = new URL(connectionURL);
-					InputStream urlStream = null;
-					urlStream = url.openStream();
-					BufferedReader reader = new BufferedReader(new InputStreamReader(urlStream));
-					JsonSlurper jsonSlurper = new JsonSlurper();
-					Object result = jsonSlurper.parse(reader);
-					
-					List<List<List<String>>> elementList =  null;
-					
-					if( null == result || null == result.elements)
-					{
-						println "results are not found" 
-					}
-					else
-					{
-						elementList = result.elements;
-					}					
-
-					if(null == elementList  || null == elementList.get(0))
-					{
-						errorMsg = "Error while generating reports.\n"  
-					}
-					else
-					{				
-						for(i=0;i<=elementList.size()-1;i++)
-						{
-							List<String> stepElementList =  result.elements[i].steps;
-							for(j=0;j<=stepElementList.size()-1;j++)
-							{
-								List<String> statusList =  result.elements[i].steps[j].result.status;
-								for(status in statusList){
-									if(status=="passed"){
-										totalPassCount++;
-									}
-									if(status=="failed"){
-										totalfailedCount++;
-									}
-									if(status=="skipped"){
-										totalSkippedCount++;
-									}
-									if(status=="pending"){
-										totalPendingCount++;
-									}
-									if(status=="undefined"){
-										totalUndefinedCount++;
-									}
-								}
-							}
-						}
-					}
-					totalCount=totalPassCount+totalfailedCount+totalSkippedCount+totalPendingCount+totalUndefinedCount;
+          					String jsonPath = BUILD_URL+"artifact/cukesatdd/target/cucumber.json"
+                    URL url = new URL(jsonPath);
+                    JsonSlurper jsonSlurper = new JsonSlurper();
+                    Object results = jsonSlurper.parse(url);
+                     for(result in results)
+                     {
+                        if(null !=  result && null != result.elements  &&  null !=result.elements.get(0))
+                        {
+                            for(element in result.elements)
+                            {    
+                                if(null != element && (null != element.steps))
+                                {
+                                    for(step in element.steps)
+                                    {
+                                        if(null != element && (null != element.steps))
+                                        {
+                                            def status = step.result.status;
+                                            if(status=="passed"){
+                                                totalPassCount++;
+                                            }
+                                            if(status=="failed"){
+                                                totalfailedCount++;
+                                            }
+                                            if(status=="skipped"){
+                                                totalSkippedCount++;
+                                            }
+                                            if(status=="pending"){
+                                                totalPendingCount++;
+                                            }
+                                            if(status=="undefined"){
+                                                totalUndefinedCount++;
+                                            }
+                                        }
+                                        else{
+                                            errorMsg = "Error while generating mail reports.\n"  
+                                        }
+                                    } 
+                                }
+                                else{
+                                    errorMsg = "Error while generating mail reports.\n"  
+                                }
+                            }
+                        }
+                        else{
+                            errorMsg = "Error while generating mail reports.\n"  
+                        }
+                    }
+                    totalCount=totalPassCount+totalfailedCount+totalSkippedCount+totalPendingCount+totalUndefinedCount;
+                    println "totalPassCount::"+totalPassCount;
+                    println "totalfailedCount::"+totalfailedCount;
+                    println "totalSkippedCount::"+totalSkippedCount;
+                    println "totalPendingCount::"+totalPendingCount;
+                    println "totalUndefinedCount::"+totalUndefinedCount;
+                    println "totalCount::"+totalCount;
 				}
 
 				stage('Notify'){
