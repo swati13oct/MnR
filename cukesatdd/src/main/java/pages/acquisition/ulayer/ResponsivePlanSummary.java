@@ -330,10 +330,14 @@ public ResponsivePlanSummary viewPlanSummary(String planType) {
 	}
 	if (planType.equalsIgnoreCase("PDP")) {
 		js.executeScript("arguments[0].click();", showPdpPlans);
+		System.out.println("PDP clicked");
+		return new ResponsivePlanSummary(driver);
 		//showPdpPlans.click();
 	} else if (planType.equalsIgnoreCase("MA")
 			|| planType.equalsIgnoreCase("MAPD")) {
 		js.executeScript("arguments[0].click();", showMaPlans);
+		System.out.println("MAPD/MA clicked");
+		return new ResponsivePlanSummary(driver);
 		//showMaPlans.click();
 	}
 	else if (planType.equalsIgnoreCase("MS")) {
