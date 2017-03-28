@@ -266,7 +266,7 @@ Examples:
 		|zipCode|county            |planType|planName1 											|planName2                                             |mpPlan1|mpPlan2|oopPlan1|oopPlan2|
 		|90210  |Los Angeles County|MA      |AARP MedicareComplete SecureHorizons Plan 1 (HMO)  |AARP MedicareComplete SecureHorizons Plan 2 (HMO)     |$0.00  |$0.00  |$4,600.00|$2,000.00|	
 
-		
+@planSummaryDce		
 Scenario Outline: To validate Launch of DCE from MAPD
 Given the user is on the vpp portfolio page
 Then the user performs plan serach using zipcode

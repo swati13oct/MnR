@@ -93,10 +93,7 @@ public class ResponsivePlanSummary extends UhcDriver{
 		
 		/*@FindBy(xpath="//html/body/div[4]/div[2]/div[1]/div/div/div/div/div[1]/div/div/div/div[2]/div/div[2]/div[1]/div/span[1]")
 		private WebElement showMaPlans;*/
-		
-		@FindBy(xpath="(.//span[text()='View Plans'])[2]")
-		private WebElement showMaPlans;
-		
+	
 		 @FindBy(id="compare-plan-1")
 		    private WebElement chkBoxAddtoCompare1;
 		    
@@ -147,12 +144,12 @@ public class ResponsivePlanSummary extends UhcDriver{
 		    
 		    @FindBy (xpath=".//*[@id='fixTable']/tbody/tr[3]/td[4]")
 		    private WebElement outofpocket2;
-
-		
-		
-		
-		@FindBy(xpath="//div/div/div[2]/div/div[2]/div[2]/div/span[2]")
-		private WebElement showPdpPlans;
+		    
+		    @FindBy(xpath="//*[@class='title' and contains(text(),'Medicare Advantage Plans')]")
+			private WebElement showMaPlans;
+			
+			@FindBy(xpath="//*[contains(text(),'Medicare Prescription')]/following-sibling::span[2]")
+			private WebElement showPdpPlans;
 
 	private PageData vppPlanSummary;
 
@@ -328,10 +325,7 @@ public ResponsivePlanSummary viewPlanSummary(String planType) {
 		showPdpPlans.click();
 	} else if (planType.equalsIgnoreCase("MA")
 			|| planType.equalsIgnoreCase("MAPD")) {
-		System.out.println("inside MA");
-		if(showMaPlansClickable.isEnabled()&& showMaPlansClickable.isDisplayed()){
-		showMaPlansClickable.click();
-		}
+		showMaPlans.click();
 	}
 	else if (planType.equalsIgnoreCase("MS")) {
 		showMsPlans.click();
