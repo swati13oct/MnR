@@ -41,6 +41,7 @@ Examples:
 	 | planMemberId | dateOfBirth | userName           | password   | confirmPassword | email                   | confirmEmail            |
 	 | 006916255    | 08-13-1931  | apr_blayer069      | Password@1 | Password@1      | UHCMNRPORTALS@GMAIL.COM | UHCMNRPORTALS@GMAIL.COM |
 
+@registration1
 Scenario Outline: To verify registration negative scenarios in UMS site
 Given the user is on registration page of UMS site 
 When the user registers with dob and memberId in UMS site
@@ -51,4 +52,17 @@ Then the user validate error message
 
 Examples:
 	 | planMemberId | dateOfBirth |
-	 | 951498845    | 08-12-1945  |
+	 | 812334463    | 06-22-1939  |
+
+@aarpOnBluelayer	 
+Scenario Outline: To verify AARP member is not able to register on UMS site
+Given the user is on registration page of UMS site 
+When the user registers with dob and memberId in UMS site
+	| Plan Member ID         | <planMemberId> |	
+	| Date of birth          | <dateOfBirth>  |
+Then the user navigate to error page
+Then the user validate error message
+
+Examples:
+	 | planMemberId | dateOfBirth |
+	 | 016999628    | 02-19-1946  |

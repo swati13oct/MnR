@@ -15,7 +15,7 @@ import cucumber.junit.Cucumber;
 @Cucumber.Options(glue = { "atdd.framework","acceptancetests.benefitsandcoverage" }, 
 		features = { "feature/debug" }, 
 		format = {
-		"pretty", "html:reports/test-report" }, tags ={"@Example1"})
+		"pretty", "html:reports/test-report", "json:target/cucumber.json" }, tags ={"@Example1"})
 public class Example1 {
 
 }
