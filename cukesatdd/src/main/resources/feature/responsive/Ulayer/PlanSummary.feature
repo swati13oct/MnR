@@ -267,6 +267,32 @@ Examples:
 		|90210  |Los Angeles County|MA      |AARP MedicareComplete SecureHorizons Plan 1 (HMO)  |AARP MedicareComplete SecureHorizons Plan 2 (HMO)     |$0.00  |$0.00  |$4,600.00|$2,000.00|	
 
 		
+Scenario Outline: To validate Launch of DCE from MAPD
+Given the user is on the vpp portfolio page
+Then the user performs plan serach using zipcode
+		| Zip Code |<zipCode>|
+		| County   |<county> |
+Then the user navigates to the following plan type
+	  | Plan Type | <planType> |
+And the user clicks on Estimate drug link for the respetive plan
+    | Plan Name |<planName>  | 		    
+ Examples:
+		|zipCode|county						 |planType|planName																						  |
+		|90210  |Los Angeles County|MAPD      |AARP MedicareComplete SecureHorizons Plan 1 (HMO)  |
+
+Scenario Outline: To validate Launch of DCE from PDP
+Given the user is on the vpp portfolio page
+Then the user performs plan serach using zipcode
+		| Zip Code |<zipCode>|
+		| County   |<county> |
+Then the user navigates to the following plan type
+	  | Plan Type | <planType> |
+And the user clicks on Estimate drug link for the respetive plan
+    | Plan Name |<planName>  | 		
+  
+ Examples:
+		|zipCode|county						 |planType|planName													 |
+		|92010  |Los Angeles County|PDP      |AARP MedicareRx Walgreens (PDP)  | 
 
 
 

@@ -1,14 +1,20 @@
 package pages.acquisition.ulayer;
 
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.junit.Assert;
+import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import acceptancetests.atdd.data.CommonConstants;
 import acceptancetests.atdd.data.PageData;
@@ -16,6 +22,18 @@ import acceptancetests.atdd.util.CommonUtility;
 import atdd.framework.UhcDriver;
 
 public class ResponsivePlanDetails extends UhcDriver{
+	
+	@FindBy(xpath="//*[@class='title' and contains(text(),'Prescription Drug Benefits')]")
+	private WebElement prescriptionDrugTab;
+	
+	@FindBy(xpath="//a[@id='estimateYourDrugsLink']")
+	private WebElement estimateYourDrugs;
+	
+	@FindBy(linkText = "Get started")
+	private WebElement getStartedLink;
+	
+	@FindBy(xpath="//iframe[@src='/health-plans/dce.html#/estimate-drug-costs']")
+	WebElement dceToolFrame;
 	
 	private PageData vppPlanDetails;
 
@@ -39,6 +57,32 @@ public class ResponsivePlanDetails extends UhcDriver{
 		}else{
 			return null; 
 		}
+	}
+	
+	public GetStartedPage launchDceTool(){
+		driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
+		prescriptionDrugTab.isEnabled();
+		System.out.println("prescription button is enabled");
+		prescriptionDrugTab.click();
+		System.out.println("prescription button clicked");
+		WebDriverWait wait = new WebDriverWait(driver, 20);
+		wait.until(ExpectedConditions.visibilityOf(estimateYourDrugs));
+		try {
+			Thread.sleep(5000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		JavascriptExecutor executor = (JavascriptExecutor)driver;
+		executor.executeScript("arguments[0].click();", estimateYourDrugs);
+		//estimateYourDrugs.click();
+		driver.switchTo().frame(dceToolFrame);
+		if(getStartedLink.isDisplayed()){
+		return new GetStartedPage(driver);
+		}else{
+			Assert.fail();
+		}
+		return null;
 	}
 	
 }

@@ -22,6 +22,8 @@ import cucumber.annotation.en.Then;
 import cucumber.annotation.en.When;
 import cucumber.table.DataTable;
 import gherkin.formatter.model.DataTableRow;
+import pages.acquisition.ulayer.AddDrugPage;
+import pages.acquisition.ulayer.GetStartedPage;
 import pages.acquisition.ulayer.PortfolioPage;
 import pages.acquisition.ulayer.ResponsivePlanDetails;
 import pages.acquisition.ulayer.ResponsivePlanSummary;
@@ -355,7 +357,40 @@ public class ResponsiveStepDefiniton {
 		plansummaryPage.validateMedicalBenefitsTable(monthlyPremium1, monthlyPremium2, outofpocket1, outofpocket2);
 		
 	}
-	
-	
+	@Then("^the user clicks on Estimate drug link for the respetive plan$")
+	public void the_user_clicks_on_Estimate_drug_link_for_the_respetive_plan(DataTable givenAttributes) {
+		ResponsivePlanSummary planSummary = (ResponsivePlanSummary) getLoginScenario().getBean(PageConstants.RESPONSIVE_PLAN_SUMMARY_PAGE);
+ 		List<DataTableRow> memberAttributesRow = givenAttributes
+				.getGherkinRows();
+		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells()
+					.get(0), memberAttributesRow.get(i).getCells().get(1));
+		}
+
+		String planName = memberAttributesMap.get("Plan Name");
+		System.out.println(planName);
+		GetStartedPage getStartedPage= planSummary.estimateYourDrugs(planName);
+		 
+		try {
+			Thread.sleep(10000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		AddDrugPage addDrugPage = getStartedPage.clicksOnGetStarted();
+		if (addDrugPage != null) {
+			getLoginScenario().saveBean(PageConstants.ADD_DRUG_PAGE,
+					addDrugPage);
+		}
+	}
+	@Then("^the user validates DCE tool on plan details page$")
+	public void user_validates_DCE_tool_on_plan_details_page(){
+		ResponsivePlanDetails planDetailsPage = (ResponsivePlanDetails) getLoginScenario().getBean(PageConstants.RESPONSIVE_DETAILS_PAGE);
+		planDetailsPage.launchDceTool();
+		
+	}
 	
 }

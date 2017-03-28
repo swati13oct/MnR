@@ -80,4 +80,20 @@ Examples:
 #          |MAPD      |withDeductible      |LIS 4        |AllTier    | 123            |     
 #          |MAPD      |withDeductible      |LIS 4        |Tier 3/4/5 | 123            |     
 #          |MAPD      |withDeductible      |LIS 4        |Tier 4/5   | 123            |
-#          |PDP       |Walgreen            |LIS 4        |NA         | 123            |      
+#          |PDP       |Walgreen            |LIS 4        |NA         | 123            |
+
+Scenario Outline: To validate DCE tool on plan details page
+Given the user is on the vpp portfolio page
+When the user performs plan serach using zipcode
+		| Zip Code |<zipCode>|
+		| County   |<county> |
+And the user navigates to the following plan type
+	  | Plan Type | <planType> |
+And the user navigates to plan details page
+    |Plan Name|<planName>|
+Then the user validates DCE tool on plan details page    
+Examples:
+		|zipCode|county            |planType|planName													|
+  	|90210  |Los Angeles County|PDP    |AARP MedicareRx Walgreens (PDP)  |	
+		|90210  |Los Angeles County|MA     |AARP MedicareComplete SecureHorizons Plan 1 (HMO)  |
+      
