@@ -393,4 +393,14 @@ public class ResponsiveStepDefiniton {
 		
 	}
 	
+	@And("^User click on Enroll in plan link on plan detail page")
+
+	public void userclickenrollbuttononplandetail(){
+		Object plantype = getLoginScenario().getBean(
+				VPPCommonConstants.PLAN_TYPE);
+		ResponsivePlanDetails plandetails = (ResponsivePlanDetails) getLoginScenario()
+				.getBean(PageConstants.RESPONSIVE_DETAILS_PAGE);
+		plandetails.verifyandclickenrolllink(plantype.toString());
+	
+}
 }
