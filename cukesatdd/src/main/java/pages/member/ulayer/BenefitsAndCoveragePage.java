@@ -52,19 +52,19 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 	@FindBy(className = "changepcp-atdd")
 	private WebElement changePcp;
 
-	@FindBy(xpath = ".//*[@id='planBenefitsApp']/div[7]/div[1]/div/div[2]/div[2]/div[2]/div/div[2]/div/div/button")
+	@FindBy(id="btnAddThisRider")
 	private WebElement addRiderButton;
 
-	@FindBy(id = "test")
+	@FindBy(xpath = "//*[@id='addBenefitModal']/div/div/div[3]/input")
 	private WebElement addRiderPopupButton;
 
 	@FindBy(xpath = "//a[contains(.,'CANCEL')]")
 	private WebElement cancelButton;
 
-	@FindBy(xpath = "//button[@ng-click='loadRemoveRiderPopUp(rider)']")
+	@FindBy(xpath = "//*[@id='planBenefitsApp']/div[7]/div[1]/div/div[2]/div[1]/div[2]/div/div/div/div/button")
 	private WebElement removeRiderButton;
 
-	@FindBy(className = "btn_removeRider_atdd")
+	@FindBy(xpath = "//*[@id='removeBenefitModal']/div/div/div[3]/input")
 	private WebElement removeRiderPopupButton;
 
 	@FindBy(className = "btn_repalceRider_atdd ")
@@ -185,10 +185,11 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 
 	public void clickOnAddRider() {
 		// TODO Auto-generated method stub
-		validate(addRiderButton);
-		addRiderButton.click();
+		System.out.println("testng");
 		try {
-			Thread.sleep(10000);
+			Thread.sleep(30000);
+			validate(addRiderButton);
+			addRiderButton.click();
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -248,7 +249,7 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 				validate(removeRiderPopupButton);
 				validate(cancelButton);
 				Thread.sleep(3000);
-				addRiderPopupButton.click();
+				removeRiderPopupButton.click();
 		}
 		return null;
 	}
