@@ -32,6 +32,12 @@ public class ResponsivePlanDetails extends UhcDriver{
 	@FindBy(linkText = "Get started")
 	private WebElement getStartedLink;
 	
+	@FindBy(xpath = "html/body/div[6]/div[4]/div/div/div[1]/div/div/div[2]/div/div[1]/div[1]/div/div/div/a")
+	private WebElement PDPEnrolllink;
+	
+	@FindBy(xpath = "html/body/div[6]/div[4]/div/div/div[1]/div/div/div[2]/div/div[1]/div[1]/div/div/div/a")
+	private WebElement MAEnrolllink;
+	
 	@FindBy(xpath="//iframe[@src='/health-plans/dce.html#/estimate-drug-costs']")
 	WebElement dceToolFrame;
 	
@@ -83,6 +89,33 @@ public class ResponsivePlanDetails extends UhcDriver{
 			Assert.fail();
 		}
 		return null;
+	}
+	
+	public IntroductionInformationPage verifyandclickenrolllink(String plantype) {
+		
+		if (plantype.equals("PDP")) {
+			if (validate(PDPEnrolllink)) {
+				PDPEnrolllink.click();
+				
+				if(driver.getTitle().equalsIgnoreCase("Medicare Advantage Enrollment | AARP® Medicare Plans from UnitedHealthcare®")){
+					 return new IntroductionInformationPage(driver);
+				
+				
+			}
+		}
+		}
+		else if (plantype.equals("MA")) {
+			if (validate(MAEnrolllink)) {
+				MAEnrolllink.click();
+				if(driver.getTitle().equalsIgnoreCase("Medicare Advantage Enrollment | AARP® Medicare Plans from UnitedHealthcare®")){
+					 return new IntroductionInformationPage(driver);
+				
+		}
+		}
+		}
+		return null;
+		// TODO Auto-generated method stub
+		
 	}
 	
 }

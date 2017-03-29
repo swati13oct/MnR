@@ -294,6 +294,24 @@ And the user clicks on Estimate drug link for the respetive plan
  Examples:
 		|zipCode|county						 |planType|planName													 |
 		|92010  |Los Angeles County|PDP      |AARP MedicareRx Walgreens (PDP)  | 
+		
+@US511662
+Scenario Outline: To validate launch of enrollment page
+Given the user is on the vpp portfolio page
+Then the user performs plan serach using zipcode
+		| Zip Code |<zipCode>|
+		| County   |<county> |
+Then the user navigates to the following plan type
+	  | Plan Type | <planType> |
+And the user navigates to plan details page
+    |Plan Name|<planName>|
+And User click on Enroll in plan link on plan detail page
+Examples:
+		|zipCode|county            |planType|planName 																					|
+    |90210  |Los Angeles County|MA      |AARP MedicareComplete SecureHorizons Plan 2 (HMO)  |
+    |90210  |Los Angeles County|PDP      |AARP MedicareRx Preferred (PDP)  | 
+
+
 
 
 

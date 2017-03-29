@@ -401,7 +401,7 @@ public void comparePlanslnk(){
 		   }
 	 }
 	 
-	 public ResponsivePlanDetails viewPlanDetails(String planName){
+	/* public ResponsivePlanDetails viewPlanDetails(String planName){
 		int i=0;
 		 List<WebElement> plans = driver.findElements(By.xpath("//h2[contains(text(),'AARP')]"));
 		 System.out.println("PLANS SIZE :: "+plans.size());
@@ -422,6 +422,35 @@ public void comparePlanslnk(){
 		 }
 		 return null;
 	 }
+	 */
+	 
+	 public ResponsivePlanDetails viewPlanDetails(String planName)
+	 {
+	               List<WebElement> plans = driver.findElements(By.xpath("//h2[contains(text(),'AARP')][1]"));
+	               System.out.println("PLANS SIZE :: "+plans.size());
+	               String xpath="//a[@class='view-more-link']";  
+	                List<WebElement> viewMoreLnks = driver.findElements(By.xpath(xpath));            
+	                System.out.println("VIEW MORE LINKS SIZE"+viewMoreLnks.size());     
+	               for(int i=0; i<plans.size();i++){
+	                      if(plans.get(i).getText().equalsIgnoreCase(planName)){
+	                            viewMoreLnks.get(i).click();
+	                            if(driver.getTitle().equalsIgnoreCase("plans")){
+	                                   try {
+	                                          Thread.sleep(5000);
+	                                   } catch (InterruptedException e) {
+	                                          // TODO Auto-generated catch block
+	                                          e.printStackTrace();
+	                                   }
+	                                   return new ResponsivePlanDetails(driver);
+	                            }
+	                            break;
+	                      }
+	               }
+	               return null;
+	        
+
+	 	 }
+
 	 
 	 public void validateCountyName(String CountyName)  {
 			if(countyNameDetail.getText().contains(CountyName)){
