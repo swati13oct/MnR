@@ -98,7 +98,7 @@ public class PlanBenefitsAndCoverageAarpStepDefinition {
 		}
 
 		WebDriver wd = getLoginScenario().getWebDriver();
-		//wd.manage().window().maximize();
+		
 		LoginPage2 loginPage = new LoginPage2(wd);
 		BenefitsAndCoveragePage  benefitsCoveragePage = (BenefitsAndCoveragePage) loginPage.loginWith(userName, pwd);
 		Thread.sleep(30000);
