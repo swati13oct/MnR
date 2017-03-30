@@ -1075,9 +1075,10 @@ public class DrugcostestimatorUhcStepDefinition {
 	}
 	
 	@And("^any cost savings will be applied to my total cost savings in Step3$")
-	public void any_cost_savings_will_be_applied_to_my_total_cost_savings_in_Step3(){
+	public void any_cost_savings_will_be_applied_to_my_total_cost_savings_in_Step3() throws InterruptedException{
 		DrugCostEstimatorPage dce = (DrugCostEstimatorPage) getLoginScenario()
 				.getBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE);
+		dce.navigateToStep3();
 		dce.validateEditDrugLinkNotPresent();
 		
 	}
@@ -1086,9 +1087,7 @@ public class DrugcostestimatorUhcStepDefinition {
 	public void the_drug_name_will_automatically_update_within_the_Drug_List() throws InterruptedException{
 		DrugCostEstimatorPage dce = (DrugCostEstimatorPage) getLoginScenario()
 				.getBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE);
-		
 		dce.isGeneric();
-		dce.navigateToStep3();
 	}
 	
 	@Then("^I will see a SWITCH NOW link in the drug tile with a pharmacy savings cost value$")
@@ -1108,7 +1107,7 @@ public class DrugcostestimatorUhcStepDefinition {
 		WebDriver wd = (WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
 
 		DrugCostEstimatorPage dce = new DrugCostEstimatorPage(wd);
-		
+		dce.deleteAllDrugs();
 		dce.addDrug(drug);
 	}
 	

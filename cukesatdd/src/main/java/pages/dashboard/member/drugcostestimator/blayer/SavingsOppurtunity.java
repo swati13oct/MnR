@@ -39,9 +39,9 @@ public class SavingsOppurtunity extends UhcDriver{
 		PageFactory.initElements(driver, this);
 		CommonUtility.waitForPageLoad(driver, SwitchGenericPage, 10);
 		String fileName = CommonConstants.SWITCH_GENERIC_PAGE_DATA;
-		switchgeneric = CommonUtility.readPageData(fileName,
-				CommonConstants.PAGE_OBJECT_DIRECTORY_BLAYER_MEMBER);
-		openAndValidate();
+		//switchgeneric = CommonUtility.readPageData(fileName,
+			//	CommonConstants.PAGE_OBJECT_DIRECTORY_BLAYER_MEMBER);
+		//openAndValidate();
 	}
 	@Override
 	public void openAndValidate() {

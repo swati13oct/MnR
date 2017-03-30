@@ -676,6 +676,8 @@ Examples:
  | planType|memberType|plan|
  | MAPD|Group_Inc1|MAPD GROUP CURRENT YEAR|
  
+ #-----------------------------------------------------------------
+ #MAPD Grp q1_apr_grp091 (918084105-1, DOB - 1946-03-03)  US529088
  
  @drug_cost_estimator_switch_to_generic_case_1
 Scenario Outline: To Verify MR portal members using DCE on a desktop device, I want to be able to switch from branded to generic drug, given that no pharmacy is selected and it suggests the user with an appropriate save money message.
@@ -698,6 +700,8 @@ Examples:
  | MAPD|Individualwithoutpharmacy|lipitor|
  
  
+  #---------------------------------------------
+ #MAPD Grp q1_apr_grp357(971691002-1 / DOB- 5/29/1945)  US529088
  
  @drug_cost_estimator_switch_to_generic_case_2
 Scenario Outline: To Verify MR portal members using DCE on a desktop device, I want to be able to switch from branded to generic drug, given that a pharmacy is selected and it suggests the user with an appropriate save money message and cost savings are also updated
