@@ -653,7 +653,7 @@ public void comparePlanslnk(){
 					
 				}	
 			 public GetStartedPage estimateYourDrugs(String planName){
-					int i=0;
+				//	int i=0;
 					List<WebElement> plans = driver.findElements(By.xpath("//h2[contains(text(),'AARP')]"));
 					System.out.println("PLANS SIZE :: "+plans.size());
 					String xpath="Estimate Your Drugs";  
@@ -662,7 +662,12 @@ public void comparePlanslnk(){
 					System.out.println("Estimate your drugs"+estimateDrugLink.size());
 					for(WebElement plan : plans){
 					if(plan.getText().equalsIgnoreCase(planName)){ 
-				 estimateDrugLink.get(i).click();
+						for(WebElement drugLink: estimateDrugLink){
+							drugLink.click();	
+							return new GetStartedPage(driver);
+						}
+					
+				// estimateDrugLink.get(i).click();
 					try {
 					Thread.sleep(3000);
 					} catch (InterruptedException e) {
@@ -674,7 +679,7 @@ public void comparePlanslnk(){
 					}
 					break;
 					}
-					i++;
+				//	i++;
 					}
 					return null;
 					}
