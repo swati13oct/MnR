@@ -356,4 +356,231 @@ Examples:
 		|90210  |Los Angeles County|MA      |AARP MedicareComplete SecureHorizons Plan 2 (HMO)  |		
 		|33713  |Pinellas County		|MA      |AARP MedicareComplete (HMO)  |	
 
+@aprilReleaseSprint5
+Scenario Outline: To validate plan details
+Given the user is on the vpp portfolio page
+Then the user performs plan serach using zipcode
+		| Zip Code |<zipCode>|
+		| County   |<county> |
+Then the user navigates to the following plan type
+	  | Plan Type | <planType> |
+And the user navigates to plan details page
+    |Plan Name|<planName>|
+And the user validates the medical benefits tab,Prescription Drug Benefits tab,Optional Services tab on Plan details page    
+Examples:
+		|zipCode|county            |planType|planName 																					|
+		|90210  |Los Angeles County|MA      |AARP MedicareComplete SecureHorizons Plan 2 (HMO)  |		
+		|33713  |Pinellas County		|MA      |AARP MedicareComplete (HMO)  |
+@aprilReleaseSprint5
+Scenario Outline: To validate DCE tool on plan details page
+Given the user is on the vpp portfolio page
+When the user performs plan serach using zipcode
+		| Zip Code |<zipCode>|
+		| County   |<county> |
+And the user navigates to the following plan type
+	  | Plan Type | <planType> |
+And the user navigates to plan details page
+    |Plan Name|<planName>|
+Then the user validates DCE tool on plan details page    
+Examples:
+		|zipCode|county            |planType|planName													|
+  	|90210  |Los Angeles County|PDP    |AARP MedicareRx Walgreens (PDP)  |	
+		|90210  |Los Angeles County|MA     |AARP MedicareComplete SecureHorizons Plan 1 (HMO)  |
 
+ @aprilReleaseSprint5
+Scenario Outline: To validate enroll in plan onplan summary page
+Given the user is on the vpp portfolio page
+Then the user performs plan serach using zipcode
+		| Zip Code |<zipCode>|
+		| County   |<county> |
+Then the user navigates to the following plan type
+	| Plan Type | <planType> |
+Then the user clicks on Enroll in Plan link on Plan summary page
+ |Plan Name|<planName>|
+Examples:
+		|zipCode|county            |planType|planName|
+		|90210  |Los Angeles County|MA      |AARP MedicareComplete SecureHorizons Plan 1 (HMO)|
+	
+	@US511662 @aprilReleaseSprint5
+Scenario Outline: To validate launch of enrollment page
+Given the user is on the vpp portfolio page
+Then the user performs plan serach using zipcode
+		| Zip Code |<zipCode>|
+		| County   |<county> |
+Then the user navigates to the following plan type
+	  | Plan Type | <planType> |
+And the user navigates to plan details page
+    |Plan Name|<planName>|
+And User click on Enroll in plan link on plan detail page
+Examples:
+		|zipCode|county            |planType|planName 																					|
+    |90210  |Los Angeles County|MA      |AARP MedicareComplete SecureHorizons Plan 2 (HMO)  |
+    |90210  |Los Angeles County|PDP      |AARP MedicareRx Preferred (PDP)  | 
+   
+   @planSummaryDce @aprilReleaseSprint5
+Scenario Outline: To validate Launch of DCE from PDP
+Given the user is on the vpp portfolio page
+Then the user performs plan serach using zipcode
+		| Zip Code |<zipCode>|
+		| County   |<county> |
+Then the user navigates to the following plan type
+	  | Plan Type | <planType> |
+And the user clicks on Estimate drug link for the respetive plan
+    | Plan Name |<planName>  | 		
+  
+ Examples:
+		|zipCode|county						 |planType|planName													 |
+		|92010  |Los Angeles County|PDP      |AARP MedicareRx Walgreens (PDP)  |
+	
+	@planSummaryDce	@aprilReleaseSprint5
+Scenario Outline: To validate Launch of DCE from MAPD
+Given the user is on the vpp portfolio page
+Then the user performs plan serach using zipcode
+		| Zip Code |<zipCode>|
+		| County   |<county> |
+Then the user navigates to the following plan type
+	  | Plan Type | <planType> |
+And the user clicks on Estimate drug link for the respetive plan
+    | Plan Name |<planName>  | 		    
+ Examples:
+		|zipCode|county						 |planType|planName																						  |
+		|90210  |Los Angeles County|MAPD      |AARP MedicareComplete SecureHorizons Plan 1 (HMO)  |
+
+
+
+@US501386 @aprilReleaseSprint1
+Scenario Outline: To validate plan highlights and provider searh link
+Given the user is on the vpp portfolio page
+Then the user performs plan serach using zipcode
+		| Zip Code |<zipCode>|
+		| County   |<county> |
+Then the user navigates to the following plan type
+	| Plan Type | <planType> |
+And the user validates plan highlight and provider search	
+Examples:
+		|zipCode|county            |planType|
+		|90210  |Los Angeles County|MA      |			
+		 			
+@aprilReleaseSprint1
+Scenario Outline: To validate zip code widget functionality MA/PDP prospect
+Given the user is on the vpp portfolio page
+Then the user performs plan serach using zipcode
+		| Zip Code |<zipCode>|
+		| County   |<county> |
+And verifies the zipcode on VPP page 
+Examples:
+		|zipCode|county     |
+		|90210  |Los Angeles County|
+@aprilReleaseSprint2
+Scenario Outline: To validate plan highlights and provider searh link
+Given the user is on the vpp portfolio page
+Then the user performs plan serach using zipcode
+		| Zip Code |<zipCode>|
+		| County   |<county> |
+Then the user navigates to the following plan type
+	| Plan Type | <planType> |
+And the user validates plan highlight and provider search	
+Examples:
+		|zipCode|county            |planType|
+		|90210  |Los Angeles County|MA      |	
+		|90210  |Los Angeles County|PDP     |
+		|90210  |Los Angeles County|MAPD      |	
+	@aprilReleaseSprint2	
+Scenario Outline: To validate plan count from portfolio page
+Given the user is on the vpp portfolio page
+Then the user performs plan serach using zipcode
+              | Zip Code |<zipCode>|
+              | County   |<county> |
+Then user validates plan count for all plan types on plan summary page in AARP site
+Then user validates county name on plan summary page
+Examples:
+|zipCode|county     |
+|78006 |Bexar County|			
+
+	@aprilReleaseSprint2
+Scenario Outline: To validate sticky zipcode functionality
+Given the user is on the vpp portfolio page
+Then the user performs plan serach using zipcode
+		| Zip Code |<zipCode>|
+		| County   |<county> |
+Then the user navigates to the following plan type
+	| Plan Type | <planType> |	
+And the user validates sticky zipcode
+Examples:
+		|zipCode|county            |planType|
+		|90210  |Los Angeles County|MA      |	
+@aprilReleaseSprint3
+Scenario Outline: To validate plan details link
+Given the user is on the vpp portfolio page
+Then the user performs plan serach using zipcode
+		| Zip Code |<zipCode>|
+		| County   |<county> |
+Then the user navigates to the following plan type
+	  | Plan Type | <planType> |
+And the user navigates to plan details page
+    |Plan Name|<planName>|
+Examples:
+		|zipCode|county            |planType|planName 																					|
+		|90210  |Los Angeles County|MA      |AARP MedicareComplete SecureHorizons Plan 2 (HMO)  |
+@aprilReleaseSprint3		
+Scenario Outline: To validate need step back widget in right rail
+Given the user is on the vpp portfolio page
+Then the user performs plan serach using zipcode
+		| Zip Code |<zipCode>|
+		| County   |<county> |
+Then the user navigates to the following plan type
+	  | Plan Type | <planType> |
+And the user validates Need a step back in right rail widgets	  
+	  
+Examples:
+		|zipCode|county            |planType	|
+		|90210  |Los Angeles County|MA        |	
+
+@aprilReleaseSprint3 	
+Scenario Outline: To validate chat now widget in right rail
+Given the user is on the vpp portfolio page
+Then the user performs plan serach using zipcode
+		| Zip Code |<zipCode>|
+		| County   |<county> |
+Then the user navigates to the following plan type
+	  | Plan Type | <planType> |
+And the user validates chat now widget in right rail widgets	  
+	  
+Examples:
+		|zipCode|county            |planType	|
+		|90210  |Los Angeles County|MA        |		 
+
+@aprilReleaseSprint3
+Scenario Outline: To validate need more info widget in right rail
+Given the user is on the vpp portfolio page
+Then the user performs plan serach using zipcode
+		| Zip Code |<zipCode>|
+		| County   |<county> |
+Then the user navigates to the following plan type
+	  | Plan Type | <planType> |
+And the user validates need more information widget in right rail widgets	  
+	  
+Examples:
+		|zipCode|county            |planType	|
+		|90210  |Los Angeles County|MA        |		 		 		
+		
+@aprilReleaseSprint3
+Scenario Outline: To validate send email widget in right rail
+Given the user is on the vpp portfolio page
+Then the user performs plan serach using zipcode
+		| Zip Code |<zipCode>|
+		| County   |<county> |
+Then the user navigates to the following plan type
+	  | Plan Type | <planType> |
+When the user moved to the email update widget in selected plan section in AARP site
+And the user enter information to Get Email Update widget and submit in AARP site
+| First Name| <firstname> |
+| Last Name | <lastname>  |
+| Email Address | <emailaddress> |  
+	  
+Examples:
+		|zipCode|county            |planType	|  firstname | lastname | emailaddress |
+		|90210  |Los Angeles County|PDP        |	 Eva        | Zhong     |weixin.zhong@optum.com|
+			
+				
+ 
