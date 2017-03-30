@@ -51,11 +51,11 @@ public class VPPNeedMoreInformationWidget extends UhcDriver{
 				chooseAVideoLink.click();
 				//validate that page name in new tab
 				switchToNewTab();
-//				if(driver.getTitle().equalsIgnoreCase("UnitedHealthcare Medicare Plans Video Guide")){
-//  					Assert.assertTrue("---------------video page displayed successfully---------",true);
-//				}else{
-//				    Assert.fail("----------------video page not displayed correctly------------");
-//				}
+				if(driver.getTitle().equalsIgnoreCase("UnitedHealthcare Medicare Plans Video Guide")){
+  					Assert.assertTrue("---------------video page displayed successfully---------",true);
+				}else{
+				    Assert.fail("----------------video page not displayed correctly------------");
+				}
 			}
 			
 		}
