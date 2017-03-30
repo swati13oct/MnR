@@ -95,7 +95,7 @@ Examples:
 		|90210  |Los Angeles County|PDP        |	 Eva        | Zhong     |weixin.zhong@optum.com|
 		
 
-@medsupp
+@medsupp @aprilReleaseSprint4 @US501729
 Scenario Outline: To view medsupp plan in VPP		
 Given the user is on the vpp portfolio page
 Then the user performs plan serach using zipcode
@@ -107,7 +107,8 @@ Examples:
 		|zipCode|county            |planType	|
 		|90210  |Los Angeles County|MS        |
  
- 
+
+@aprilReleaseSprint4 @US501724 
 Scenario Outline: To validate Integration with DST
 Given the user is on the vpp portfolio page
 Then the user performs plan serach using zipcode
@@ -120,7 +121,9 @@ Then the user navigates to the following plan type
 Examples:
 		|zipCode|county            |planType	|
 		|90210  |Los Angeles County|MA        |	
-	#	|90210  |Los Angeles County|MS        |			
+	#	|90210  |Los Angeles County|MS        |		
+	
+	@US501728	@aprilReleaseSprint4
 	Scenario Outline: To validate provider search
 Given the user is on the vpp portfolio page
 Then the user performs plan serach using zipcode
@@ -325,7 +328,7 @@ Examples:
 		|zipCode|county            |planType|planName|
 		|90210  |Los Angeles County|MA      |AARP MedicareComplete SecureHorizons Plan 1 (HMO)|
 
-
+@aprilReleaseSprint4 @US501732
 Scenario Outline: To validate the Campaign Landing Page 
 Given the user directly routes to Campaign page
 		| Campaign Page |<campaignPage>|
