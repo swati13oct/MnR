@@ -243,6 +243,39 @@ try {
 				.navigateToGetDirection();	
 	}
 	
+	@And("^the user validate more information is available in UMS site$")
+	public void user_views_more_information_ums() {
+		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario()
+				.getBean(PageConstants.ACCOUNT_HOME_PAGE);
+		PharmacySearchPage pharmacySearchPage = accountHomePage
+				.navigateToMoreInformation();	
+	}
+	
+	@Then("^the user searches for texas ers plan type is available in UMS site$")
+	public void user_views_texas_ers_plan_type_ums() {
+try {
+			
+			JSONObject actual=(JSONObject) loginScenario.getBean(PlanBenefitsAndCoverageCommonConstants.PHARMACYSEARCH_ACTUAL);
+			
+			JSONObject expected=(JSONObject) loginScenario.getBean(PlanBenefitsAndCoverageCommonConstants.PHARMACYSEARCH_EXPECTED);
+			
+			if(actual!=null && expected !=null){
+				JSONAssert.assertEquals(expected, actual, true);
+			}			
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	@And("^the user validate filter and tooltip is available in UMS site$")
+	public void user_views_filter_and_tooltip_ums() {
+		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario()
+				.getBean(PageConstants.ACCOUNT_HOME_PAGE);
+		PharmacySearchPage pharmacySearchPage = accountHomePage
+				.navigateToFilterAndTooltip();	
+	}
+	
 	@Then("^the user validates Search checkbox displayed dynamically related to the pharmacy network$")
 	public void validates_Pharmacy_Network_Displayed_Dynamically_UMS(){
 		PharmacySearchPage PharmacySearchPage = (PharmacySearchPage) getLoginScenario()

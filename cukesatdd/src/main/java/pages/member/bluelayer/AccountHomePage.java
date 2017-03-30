@@ -168,6 +168,12 @@ public class AccountHomePage extends UhcDriver {
 	
 	@FindBy(xpath = "//a[contains(text(),'Get Directions')]")
 	private WebElement getdirectionLink;
+	
+	@FindBy(xpath = "//a[contains(text(),'More Information')]")
+	private WebElement moreinformationLink;
+	
+	@FindBy(xpath = "//*[@id='pharmacySaverPharmacyTooltip']/svg/path")
+	private WebElement tooltipLink;
 
 	private PageData myAccountHome;
 
@@ -682,6 +688,27 @@ public FormsandresourcesPage navigateToMydocumentUmsPage() {
 		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 		return null;
 	}
+	
+	public PharmacySearchPage navigateToMoreInformation() {
+		driver.manage().timeouts().implicitlyWait(400, TimeUnit.SECONDS);
+		System.out.println(moreinformationLink.isEnabled());
+		moreinformationLink.click();
+		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+		return null;
+	}
+
+	public PharmacySearchPage navigateToFilterAndTooltip() {
+		driver.manage().timeouts().implicitlyWait(40, TimeUnit.SECONDS);
+		System.out.println(filterLink.isEnabled());
+		filterLink.click();
+		//tooltipLink.mouseover();
+		
+		
+		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+		return null;
+	}
+	
+
 	
 	
 

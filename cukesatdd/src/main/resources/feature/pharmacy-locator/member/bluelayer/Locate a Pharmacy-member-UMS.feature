@@ -334,4 +334,41 @@ And the user searches for get direcion available in UMS site
 Examples:
 |plantype    |memberType    | 
 |MAPD        |Individual   | 
+
+
+@US459888
+Scenario Outline: Verify Pharmacy Locator Search page in UMS site
+Given registered member to verify locate a pharmacy in UMS Site
+| Plan Type    | <plantype>   |
+| Member Type  | <memberType> |
+When the user navigates to pharmacy search page in UMS site
+And the user validate more information is available in UMS site
+
+Examples:
+|plantype    |memberType    | 
+|MAPD        |Individual   |  
+
+@texasers
+Scenario Outline: Verify Pharmacy Locator Search page in UMS site
+Given registered member to verify locate a pharmacy in UMS Site
+| Plan Type    | <plantype>   |
+| Member Type  | <memberType> |
+When the user navigates to pharmacy search page in UMS site
+Then the user searches for texas ers plan type is available in UMS site
+
+Examples:
+|plantype    |memberType    | 
+|PDP        |Group  |
+   	
+@pharmacyfilterandtooltip
+Scenario Outline: Verify Pharmacy Locator Search page in UMS site
+Given registered member to verify locate a pharmacy in UMS Site
+| Plan Type    | <plantype>   |
+| Member Type  | <memberType> |
+When the user navigates to pharmacy search page in UMS site
+And the user validate filter and tooltip is available in UMS site
+
+Examples:
+|plantype    |memberType    | 
+|MAPD        |Individual   |  
    	
