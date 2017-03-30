@@ -403,7 +403,7 @@ public class ResponsiveStepDefiniton {
 		plandetails.verifyandclickenrolllink(plantype.toString());
 	
 }
-	
+		
 	@Given("^the user directly routes to Campaign page$")
 	public void user_on_Campaign_page(DataTable givenAttributes){
 	WebDriver wd = getLoginScenario().getWebDriver();

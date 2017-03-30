@@ -126,6 +126,9 @@ public class ResponsivePlanSummary extends UhcDriver{
 		    @FindBy(xpath=".//*[@class='parbase planscompare section']/div[2]")
 		    private WebElement disclaimerTxt;
 		    
+		    @FindBy(xpath=".//*[text()='2017 AARP MedicareComplete SecureHorizons Plan 1 (HMO)']")
+		    private WebElement mapdPlan1;
+		    
 		    
 //Medical Benefits
 		    
