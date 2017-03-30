@@ -477,5 +477,83 @@ public class ResponsiveStepDefiniton {
 				getBean(PageConstants.RESPONSIVE_DETAILS_PAGE);
 		planDetails.validatePlandetailsPage();
 	}
+	@Then("^the user validates prescription drug benefits$")
+	public void user_validates_prescription_benefits(DataTable givenAttributes){
+	List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+	Map<String, String> memberAttributesMap = new HashMap<String, String>();
+	for (int i = 0; i < memberAttributesRow.size(); i++) {
+
+		memberAttributesMap.put(memberAttributesRow.get(i).getCells()
+				.get(0), memberAttributesRow.get(i).getCells().get(1));
+	}
+	String deduct1 = memberAttributesMap.get("deduc Plan1");
+	String deduct2 = memberAttributesMap.get("deduc Plan2");
+	String tiervalue1 = memberAttributesMap.get("tier1 Plan1");
+	String tiervalue2 = memberAttributesMap.get("tier1 Plan2");
+	ResponsivePlanSummary plansummaryPage = (ResponsivePlanSummary) getLoginScenario()
+			.getBean(PageConstants.RESPONSIVE_PLAN_SUMMARY_PAGE);
+	plansummaryPage.validatePrescriptionBenefitsTable(deduct1, deduct2, tiervalue1, tiervalue2);
+
+	}
+		@Then("^the user validates optional services$")
+		public void user_validates_optional_services(DataTable givenAttributes){
+			List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+			Map<String, String> memberAttributesMap = new HashMap<String, String>();
+			for (int i = 0; i < memberAttributesRow.size(); i++) {
+
+				memberAttributesMap.put(memberAttributesRow.get(i).getCells()
+						.get(0), memberAttributesRow.get(i).getCells().get(1));
+			}
+			String opDen1 = memberAttributesMap.get("optionalDental Plan1");
+			String opDen2 = memberAttributesMap.get("optionalDental Plan2");
+			String highOpDen1 = memberAttributesMap.get("hignOptionalDental Plan1");
+			String highOpDen2 = memberAttributesMap.get("hignOptionalDental Plan2");
+			ResponsivePlanSummary plansummaryPage = (ResponsivePlanSummary) getLoginScenario()
+					.getBean(PageConstants.RESPONSIVE_PLAN_SUMMARY_PAGE);
+			plansummaryPage.validateOptionalServicesTable(opDen1, opDen2, highOpDen1, highOpDen2);
+			
+		}	
+		
+		@Then("^the user validates plan costs$")
+		public void user_validates_plan_costs(DataTable givenAttributes){
+			List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+			Map<String, String> memberAttributesMap = new HashMap<String, String>();
+			for (int i = 0; i < memberAttributesRow.size(); i++) {
+
+				memberAttributesMap.put(memberAttributesRow.get(i).getCells()
+						.get(0), memberAttributesRow.get(i).getCells().get(1));
+			}
+			String planPrem1 = memberAttributesMap.get("Premium Plan1");
+			String planPrem2 = memberAttributesMap.get("Premium Plan2");
+			String medBen1 = memberAttributesMap.get("Medical Benefits Plan1");
+			String medBen2 = memberAttributesMap.get("Medical Benefits Plan2");
+			ResponsivePlanSummary plansummaryPage = (ResponsivePlanSummary) getLoginScenario()
+					.getBean(PageConstants.RESPONSIVE_PLAN_SUMMARY_PAGE);
+			plansummaryPage.validatePlanCostsTable(planPrem1, planPrem2, medBen1, medBen2);
+			
+		}
+		@And("^the user selects 5 plans to compare in AARP site$")
+		public void select_five_plans() throws InterruptedException {
+			{
+				ResponsivePlanSummary planSummary = (ResponsivePlanSummary) getLoginScenario()
+						.getBean(PageConstants.RESPONSIVE_PLAN_SUMMARY_PAGE);
+				planSummary.selectFivePlans();
+				
+			}
+		
+			try {
+				Thread.sleep(10000);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+		}
+		
+		@Then("^error message for fifth plan should be displayed$")
+		public void error_message() {
+			ResponsivePlanSummary planSummary = (ResponsivePlanSummary) getLoginScenario()
+					.getBean(PageConstants.RESPONSIVE_PLAN_SUMMARY_PAGE);
+			planSummary.errorMessage();		
+		}
+	}
 	
 }

@@ -108,6 +108,9 @@ public class ResponsivePlanSummary extends UhcDriver{
 		    @FindBy(id="compare-plan-4")
 		    private WebElement chkBoxAddtoCompare4;
 		    
+		    @FindBy(id="compare-plan-5")
+		    private WebElement chkBoxAddtoCompare5;
+		    
 		    @FindBy(xpath="(//*[text()='Compare plans'])[8]")
 		    private WebElement comparePlans;
 		    
@@ -155,6 +158,66 @@ public class ResponsivePlanSummary extends UhcDriver{
 			
 			@FindBy(xpath="//*[contains(text(),'Medicare Prescription')]/following-sibling::span[2]")
 			private WebElement showPdpPlans;
+			
+			//prescription drug benefits
+			@FindBy (xpath="//*[@id='fixTable']/tbody/tr[16]/td[1]/p")
+		    private WebElement deductible;
+			
+			@FindBy (xpath="//*[@id='fixTable']/tbody/tr[16]/td[2]/span")
+		    private WebElement deductible1;
+			
+			@FindBy (xpath="//*[@id='fixTable']/tbody/tr[16]/td[10]/span")
+		    private WebElement deductible2;
+			
+			@FindBy (xpath="//*[@id='fixTable']/tbody/tr[17]/td[1]/p")
+		    private WebElement tier1value;
+			
+			@FindBy (xpath="//*[@id='fixTable']/tbody/tr[17]/td[2]/span[1]/strong")
+		    private WebElement tier1value1;
+			
+			@FindBy (xpath="//*[@id='fixTable']/tbody/tr[17]/td[8]/span[1]/strong")
+		    private WebElement tier1value2;
+			
+//Optional Services
+			@FindBy (xpath="//*[@id='fixTable']/tbody/tr[11]/td[1]/p")
+		    private WebElement optionalDental;
+			
+			@FindBy (xpath="//*[@id='fixTable']/tbody/tr[11]/td[2]/div[1]/div/strong")
+		    private WebElement optionalDental1;
+			
+			@FindBy (xpath="//*[@id='fixTable']/tbody/tr[11]/td[4]/div[1]/div/strong")
+		    private WebElement optionalDental2;
+			
+			@FindBy (xpath="//*[@id='fixTable']/tbody/tr[12]/td[1]/p")
+		    private WebElement highOptionDental;
+			
+			@FindBy (xpath="//*[@id='fixTable']/tbody/tr[12]/td[2]/div[2]/div/strong")
+		    private WebElement highOptionDental1;
+			
+			@FindBy (xpath="//*[@id='fixTable']/tbody/tr[12]/td[4]/div[2]/div/strong")
+		    private WebElement highOptionDental2;
+			
+//Plan Costs
+			@FindBy (xpath="//*[@id='fixTable']/tbody/tr[22]/td[1]/p")
+		    private WebElement planPremium;
+			
+			@FindBy (xpath="//*[@id='fixTable']/tbody/tr[22]/td[2]/strong[1]")
+		    private WebElement planPremium1;
+			
+			@FindBy (xpath="//*[@id='fixTable']/tbody/tr[22]/td[4]/strong[1]")
+		    private WebElement planPremium2;
+			
+			@FindBy (xpath="//*[@id='fixTable']/tbody/tr[24]/td[1]/p")
+		    private WebElement medicalBenefits;
+			
+			@FindBy (xpath="//*[@id='fixTable']/tbody/tr[24]/td[2]/strong[1]")
+		    private WebElement medicalBenefits1;
+			
+			@FindBy (xpath="//*[@id='fixTable']/tbody/tr[24]/td[4]/strong[1]")
+		    private WebElement medicalBenefits2;
+			
+		@FindBy	(xpath="//span[@class='remove-plan-text show']/p")
+		private WebElement errorMessage;
 			
 			private static String CAMPAIGN_URL_1 = MRConstants.CAMPAIGN_PAGE_URL1;
 			
@@ -658,6 +721,173 @@ public void comparePlanslnk(){
 					}
 					//return new IntroductionInformationPage(driver);
 				}
+			 public void validatePrescriptionBenefitsTable(String deduct1, String deduct2, String tiervalue1, String tiervalue2){
+				 System.out.println("Inside validatePrescriptionBenefitsTabl");
+				 /**System.out.println("Deductible 1: "+deduct1);
+				 System.out.println("Actual value: "+deductible1.getText());
+				 System.out.println("Deductible 2: "+deduct2);
+				 System.out.println("Actual value: "+deductible2.getText());
+				 System.out.println("Tier 1: "+tiervalue1);
+				 System.out.println("Actual value: "+tier1value1.getText());
+				 System.out.println("Tier 2: "+tiervalue2);
+				 System.out.println("Actual value: "+tier1value2.getText());
+				 
+				 if(deductible.getText().equals("Annual Prescription Deductible"))
+				 {
+					 System.out.println("Deductible value is:"+deductible1.getText());
+					 System.out.println("Inside comparisons");
+					 if(deduct1.equals(deductible1.getText()))
+					 {
+						 System.out.println("Annual Prescription Deductible is verified");
+						 Assert.assertTrue(true);
+					 }
+					 else
+					 {
+						 Assert.fail("Error in displaying Annual Prescription Deductible for plan 1");
+					 }
+					 if(deduct2.equals(deductible2.getText()))
+					 {
+						 System.out.println("Annual Prescription Deductible is verified");
+						 Assert.assertTrue(true);
+					 }
+					 else
+					 {
+						 Assert.fail("Error in displaying Annual Prescription Deductible for plan 2");
+					 }
+					 
+				 }*/
+				 if(tier1value.getText().equals("Tier 1: Preferred Generic Drugs"))
+				 {
+					 if(tiervalue1.equals(tier1value1.getText()))
+					 {
+						 System.out.println("Tier 1 value is verified for plan 1");
+						 Assert.assertTrue(true);
+					 }
+					 else
+					 {
+						 Assert.fail("Error in displaying Tier 1 value for plan 1");
+					 }
+					 if(tiervalue2.equals(tier1value2.getText()))
+					 {
+						 System.out.println("Tier1 value is verified for plan 2");
+						 Assert.assertTrue(true);
+					 }
+					 else
+					 {
+						 Assert.fail("Error in displaying Tier 1 value for plan 2");
+					 }
+					 
+				 }
+			 }
+			public void validateOptionalServicesTable(String opDen1, String opDen2, String highOpDen1, String highOpDen2){
+				 if(optionalDental.getText().equals("Optional Dental"))
+				 {
+					 if(opDen1.equals(optionalDental1.getText()))
+					 {
+						 System.out.println("Optional Dental is verified for Plan 1");
+						 Assert.assertTrue(true);
+					 }
+					 else
+					 {
+						 Assert.fail("Error in displaying Optional Dental for plan 1");
+					 }
+					 if(opDen1.equals(optionalDental2.getText()))
+					 {
+						 System.out.println("Optional Dental is verified for Plan 2");
+						 Assert.assertTrue(true);
+					 }
+					 else
+					 {
+						 Assert.fail("Error in displaying Optional Dental for plan 2");
+					 }
+					 
+				 }
+				 if(highOptionDental.getText().equals("High Option Dental"))
+				 {
+					 if(highOpDen1.equals(highOptionDental1.getText()))
+					 {
+						 System.out.println("Hign Option Dental is verified for plan 1");
+						 Assert.assertTrue(true);
+					 }
+					 else
+					 {
+						 Assert.fail("Error in displaying High Option Denatl value for plan 1");
+					 }
+					 if(highOpDen2.equals(highOptionDental2.getText()))
+					 {
+						 System.out.println("Hign Option Dental is verified for plan 2");
+						 Assert.assertTrue(true);
+					 }
+					 else
+					 {
+						 Assert.fail("Error in displaying High Option Denatl value for plan 2");
+					 }
+					 
+				 }
+			 }
+			 
+			 public void validatePlanCostsTable(String planPrem1, String planPrem2, String medBen1, String medBen2){
+				 if(planPremium.getText().equals("Plan Premium"))
+				 {
+					 if(planPrem1.equals(planPremium1.getText()))
+					 {
+						 System.out.println("Plan Premium is verified for Plan 1");
+						 Assert.assertTrue(true);
+					 }
+					 else
+					 {
+						 Assert.fail("Error in displaying Plan Premium for plan 1");
+					 }
+					 if(planPrem2.equals(planPremium2.getText()))
+					 {
+						 System.out.println("Plan Premium is verified for Plan 2");
+						 Assert.assertTrue(true);
+					 }
+					 else
+					 {
+						 Assert.fail("Error in displaying Plan Premium for plan 2");
+					 }
+					 
+				 }
+				 if(medicalBenefits.getText().equals("Medical Benefits"))
+				 {
+					 if(medBen1.equals(medicalBenefits1.getText()))
+					 {
+						 System.out.println("Medical Benefits is verified for plan 1");
+						 Assert.assertTrue(true);
+					 }
+					 else
+					 {
+						 Assert.fail("Error in displaying Medical Benefits value for plan 1");
+					 }
+					 if(medBen2.equals(medicalBenefits2.getText()))
+					 {
+						 System.out.println("Medical Benefits is verified for plan 2");
+						 Assert.assertTrue(true);
+					 }
+					 else
+					 {
+						 Assert.fail("Error in displaying Medical Benefits value for plan 2");
+					 }
+					 
+				 }
+			 }
+			 
+			 public void selectFivePlans()  {				
+
+					JavascriptExecutor js = (JavascriptExecutor)driver;
+
+					js.executeScript("arguments[0].click();", chkBoxAddtoCompare1);
+					js.executeScript("arguments[0].click();", chkBoxAddtoCompare2);
+					js.executeScript("arguments[0].click();", chkBoxAddtoCompare3);
+					js.executeScript("arguments[0].click();", chkBoxAddtoCompare4);
+					js.executeScript("arguments[0].click();", chkBoxAddtoCompare5);
+				}
+			 
+			 public void errorMessage() {
+				 validate(errorMessage);
+				 System.out.println(errorMessage.getText());
+			 }
 
 			 
 }
