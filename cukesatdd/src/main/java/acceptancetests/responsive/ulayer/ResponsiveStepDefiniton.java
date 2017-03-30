@@ -95,23 +95,6 @@ public class ResponsiveStepDefiniton {
 			getLoginScenario().saveBean(
 					VPPCommonConstants.VPP_PLAN_SUMMARY_EXPECTED,
 					planSummaryExpectedJson);
-
-			/* Get actual data */
-			JSONObject planSummaryActualJson = vppPlan.vppPlanSummaryJson;
-			getLoginScenario().saveBean(
-					VPPCommonConstants.VPP_PLAN_SUMMARY_ACTUAL,
-					planSummaryActualJson);
-			System.out
-			.println("planSummaryActualJson---->" + planSummaryActualJson);
-	System.out.println("planSummaryExpectedJson---->"
-			+ planSummaryExpectedJson);
-
-	try {
-		JSONAssert.assertEquals(planSummaryExpectedJson,
-				planSummaryActualJson, true);
-	} catch (JSONException e) {
-		e.printStackTrace();
-	}
 		}
 	@Then("^the user navigates to the following plan type$")
 	public void planType_details_in_aarp_site(DataTable givenAttributes) {
