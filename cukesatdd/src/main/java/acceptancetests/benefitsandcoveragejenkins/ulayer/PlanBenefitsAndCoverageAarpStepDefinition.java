@@ -59,7 +59,7 @@ public class PlanBenefitsAndCoverageAarpStepDefinition {
 	}
 
 	@Given("^registered AMP with following details for plan benefits and coverage flow in AARP site$")
-	public void login_with_member(DataTable memberAttributes) {
+	public void login_with_member(DataTable memberAttributes) throws InterruptedException {
 
 		/* Reading the given attribute from feature file */
 		List<DataTableRow> memberAttributesRow = memberAttributes.getGherkinRows();
@@ -101,6 +101,7 @@ public class PlanBenefitsAndCoverageAarpStepDefinition {
 		//wd.manage().window().maximize();
 		LoginPage2 loginPage = new LoginPage2(wd);
 		BenefitsAndCoveragePage  benefitsCoveragePage = (BenefitsAndCoveragePage) loginPage.loginWith(userName, pwd);
+		Thread.sleep(30000);
 		if (benefitsCoveragePage != null) {
 			getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
 			getLoginScenario().saveBean(PageConstants.BENEFITS_COVERAGE_PAGE,benefitsCoveragePage);
