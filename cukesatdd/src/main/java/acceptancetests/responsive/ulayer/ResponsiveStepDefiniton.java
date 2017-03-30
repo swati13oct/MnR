@@ -403,4 +403,47 @@ public class ResponsiveStepDefiniton {
 		plandetails.verifyandclickenrolllink(plantype.toString());
 	
 }
+	
+	@Given("^the user directly routes to Campaign page$")
+	public void user_on_Campaign_page(DataTable givenAttributes){
+	WebDriver wd = getLoginScenario().getWebDriver();
+	List<DataTableRow> memberAttributesRow = givenAttributes
+	.getGherkinRows();
+	Map<String, String> memberAttributesMap = new HashMap<String, String>();
+	for (int i = 0; i < memberAttributesRow.size(); i++) {
+
+	memberAttributesMap.put(memberAttributesRow.get(i).getCells()
+	.get(0), memberAttributesRow.get(i).getCells().get(1));
+	}
+
+	String urlType = memberAttributesMap.get("Campaign Page");
+	System.out.println(urlType);
+ ResponsivePlanSummary ourPlans = new ResponsivePlanSummary(wd, urlType);
+   
+	getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
+	getLoginScenario().saveBean(PageConstants. RESPONSIVE_PLAN_SUMMARY_PAGE, ourPlans);
+	}
+
+	@Then("^the user clicks on Enroll in Plan link on Plan summary page$")
+	public void the_user_navigates_to_OLE_page(DataTable givenAttributes) {
+		
+		List<DataTableRow> memberAttributesRow = givenAttributes 
+				.getGherkinRows();
+		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells()
+					.get(0), memberAttributesRow.get(i).getCells().get(1));
+		}
+
+		String planName = memberAttributesMap.get("Plan Name");
+		System.out.println(planName);
+		getLoginScenario().saveBean(VPPCommonConstants.PLAN_NAME, planName);
+		ResponsivePlanSummary plansummaryPage = (ResponsivePlanSummary) getLoginScenario()
+				.getBean(PageConstants.RESPONSIVE_PLAN_SUMMARY_PAGE);
+		plansummaryPage.clicksOnEnrollInplanLink(planName);
+ 	}
+
+
+	
 }

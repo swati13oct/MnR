@@ -18,9 +18,11 @@ import org.openqa.selenium.support.PageFactory;
 
 import acceptancetests.atdd.data.CommonConstants;
 import acceptancetests.atdd.data.ElementData;
+import acceptancetests.atdd.data.MRConstants;
 import acceptancetests.atdd.data.PageData;
 import acceptancetests.atdd.util.CommonUtility;
 import atdd.framework.UhcDriver;
+
 import java.util.ArrayList;
 
 import pages.acquisition.ulayer.GetStartedPage;
@@ -150,6 +152,12 @@ public class ResponsivePlanSummary extends UhcDriver{
 			
 			@FindBy(xpath="//*[contains(text(),'Medicare Prescription')]/following-sibling::span[2]")
 			private WebElement showPdpPlans;
+			
+			private static String CAMPAIGN_URL_1 = MRConstants.CAMPAIGN_PAGE_URL1;
+			
+			private static String CAMPAIGN_URL_2 = MRConstants.CAMPAIGN_PAGE_URL2;
+			
+	   private String urlType;  
 
 	private PageData vppPlanSummary;
 
@@ -164,6 +172,14 @@ public class ResponsivePlanSummary extends UhcDriver{
 		vppPlanSummary = CommonUtility.readPageData(fileName, CommonConstants.PAGE_OBJECT_DIRECTORY_ULAYER_ACQ);
 		openAndValidate();
 	}
+	public ResponsivePlanSummary(WebDriver driver, String url) {
+		super(driver);
+		urlType=url;
+		PageFactory.initElements(driver, this);
+		String fileName = CommonConstants.VPP_PLAN_SUMMARY_PAGE_DATA;
+		vppPlanSummary = CommonUtility.readPageData(fileName, CommonConstants.PAGE_OBJECT_DIRECTORY_ULAYER_ACQ);
+		openAndValidate();
+		}
 		// TODO Auto-generated constructor stub
 		// ADD JSON Validation Path if required
 	
@@ -603,4 +619,42 @@ public void comparePlanslnk(){
 					 }
 					 return null;
 				 }
+			 
+			 public void clicksOnEnrollInplanLink(String planName) {
+					if (planName.contains("HMO")) {
+						for (WebElement plan : maPlanElement) {
+							if (plan.getText().contains(planName)) {
+								ElementData elementData = new ElementData("xpath", "//*[contains(text(),'Enroll in plan')]");
+								findChildElement(elementData, plan).click();
+				                try {
+									Thread.sleep(3000);
+								} catch (InterruptedException e) {
+									// TODO Auto-generated catch block
+									e.printStackTrace();
+								}
+				                System.out.println(driver.getTitle());
+				                if(driver.getTitle().equalsIgnoreCase("Medicare Advantage Enrollment | AARP® Medicare Plans from UnitedHealthcare®")){
+				                	System.out.println("Page displayed successfully");
+				                	Assert.assertTrue(true);
+				                }else{
+				                	Assert.fail();
+				                }
+							}
+							break;
+						}
+					} else if (planName.contains("PDP")) {
+						for (WebElement plan : pdpPlanElement) {
+							if (plan.getText().contains(planName)) {
+								ElementData elementData = new ElementData("id", "enrollPDP"); // TODO:
+																								// Re-check
+								findChildElement(elementData, plan).click();
+
+							}
+							break;
+						}
+					}
+					//return new IntroductionInformationPage(driver);
+				}
+
+			 
 }

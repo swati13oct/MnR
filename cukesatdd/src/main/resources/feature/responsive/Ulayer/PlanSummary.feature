@@ -310,6 +310,32 @@ Examples:
 		|zipCode|county            |planType|planName 																					|
     |90210  |Los Angeles County|MA      |AARP MedicareComplete SecureHorizons Plan 2 (HMO)  |
     |90210  |Los Angeles County|PDP      |AARP MedicareRx Preferred (PDP)  | 
+    
+   		
+Scenario Outline: To validate enroll in plan onplan summary page
+Given the user is on the vpp portfolio page
+Then the user performs plan serach using zipcode
+		| Zip Code |<zipCode>|
+		| County   |<county> |
+Then the user navigates to the following plan type
+	| Plan Type | <planType> |
+Then the user clicks on Enroll in Plan link on Plan summary page
+ |Plan Name|<planName>|
+Examples:
+		|zipCode|county            |planType|planName|
+		|90210  |Los Angeles County|MA      |AARP MedicareComplete SecureHorizons Plan 1 (HMO)|
+
+
+Scenario Outline: To validate the Campaign Landing Page 
+Given the user directly routes to Campaign page
+		| Campaign Page |<campaignPage>|
+		
+Examples:
+
+	|campaignPage|	
+	|campaignPage1|
+	|campaignPage2|
+    
 
 
 
