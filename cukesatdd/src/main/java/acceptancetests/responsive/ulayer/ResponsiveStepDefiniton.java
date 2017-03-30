@@ -164,7 +164,8 @@ public class ResponsiveStepDefiniton {
 		portfolioPage.searchbyaddressclick();
 		portfolioPage.validate();
 	}
-	@And("^the user navigates to plan details page$")
+
+	/*@And("^the user validates the medical benefits tab,Prescription Drug Benefits tab,Optional Services tab on Plan details page$")
 	public void the_user_navigates_to_plan_details_page(DataTable givenAttributes) {
 		ResponsivePlanSummary plansummaryPage = (ResponsivePlanSummary) getLoginScenario()
 				.getBean(PageConstants.RESPONSIVE_PLAN_SUMMARY_PAGE);
@@ -182,7 +183,7 @@ public class ResponsiveStepDefiniton {
 		getLoginScenario().saveBean(VPPCommonConstants.PLAN_NAME, planName);
  		ResponsivePlanDetails planDetails =  plansummaryPage.viewPlanDetails(planName);
  		getLoginScenario().saveBean(PageConstants.RESPONSIVE_DETAILS_PAGE, planDetails);
- 	}
+ 	}*/
 	
 	@And("^the user select plan to compare in AARP site")
 	public void the_user_select_plan_to_compare() throws InterruptedException {
@@ -443,7 +444,38 @@ public class ResponsiveStepDefiniton {
 				.getBean(PageConstants.RESPONSIVE_PLAN_SUMMARY_PAGE);
 		plansummaryPage.clicksOnEnrollInplanLink(planName);
  	}
+	
+	@And("^the user navigates to plan details page$")
+	public void the_user_navigates_to_plan_details_page(DataTable givenAttributes) {
+		ResponsivePlanSummary plansummaryPage = (ResponsivePlanSummary) getLoginScenario()
+				.getBean(PageConstants.RESPONSIVE_PLAN_SUMMARY_PAGE);
+		List<DataTableRow> memberAttributesRow = givenAttributes 
+				.getGherkinRows();
+		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
 
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells()
+					.get(0), memberAttributesRow.get(i).getCells().get(1));
+		}
 
+		String planName = memberAttributesMap.get("Plan Name");
+		System.out.println(planName);
+		getLoginScenario().saveBean(VPPCommonConstants.PLAN_NAME, planName);
+ 		ResponsivePlanDetails planDetails =  plansummaryPage.viewPlanDetails(planName);
+ 		getLoginScenario().saveBean(PageConstants.RESPONSIVE_DETAILS_PAGE, planDetails);
+ 	}
+	
+	@And("^the user validates the medical benefits tab,Prescription Drug Benefits tab,Optional Services tab on Plan details page")
+	public void the_user_validates_the_medical_benefits_tab(){
+		try {
+			Thread.sleep(12000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		ResponsivePlanDetails planDetails = (ResponsivePlanDetails) getLoginScenario().
+				getBean(PageConstants.RESPONSIVE_DETAILS_PAGE);
+		planDetails.validatePlandetailsPage();
+	}
 	
 }

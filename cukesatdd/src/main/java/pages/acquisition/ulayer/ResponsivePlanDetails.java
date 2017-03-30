@@ -41,6 +41,36 @@ public class ResponsivePlanDetails extends UhcDriver{
 	@FindBy(xpath="//iframe[@src='/health-plans/dce.html#/estimate-drug-costs']")
 	WebElement dceToolFrame;
 	
+	@FindBy(css="div#medicalBenefits table.plan-detail-table:first-child")
+	private WebElement medicalBenefitsTable;
+	
+	@FindBy(css="div#planDetailTabs a:first-child span")
+	private WebElement medicalBenefitsTab;
+	
+	@FindBy(css="div#planDetailTabs a:nth-child(2) span")
+	private WebElement prescriptionDrugBenefitsTab;
+	
+	@FindBy(css="div#planDetailTabs a:nth-child(3) span")
+	private WebElement optionalServicesTab;
+	
+	@FindBy(css="div#planDetailTabs a:nth-child(4) span")
+	private WebElement planCostsTab;
+	
+	@FindBy(css="#medicalBenefits>h3")
+	private WebElement medicalBenefitsHeader;
+	
+	@FindBy(css="#po7link")
+	private WebElement btnLookUpYourDoctor;
+	
+	@FindBy(css="div#drugBenefits>h3")
+	private WebElement prescriptionDrugHeader;
+	
+	@FindBy(css="div#optionalRiders>h3")
+	private WebElement optionalServicesHeader;
+	
+	@FindBy(css="#planCosts>h3")
+	private WebElement planCostsHeader;
+	
 	private PageData vppPlanDetails;
 
 		
@@ -117,5 +147,32 @@ public class ResponsivePlanDetails extends UhcDriver{
 		// TODO Auto-generated method stub
 		
 	}
-	
+	public void validatePlandetailsPage(){
+
+		try {
+			Thread.sleep(5000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		medicalBenefitsTab.click();
+		Assert.assertEquals("header verification","Medical Benefits", medicalBenefitsHeader.getText());
+		Assert.assertTrue(medicalBenefitsTable.isDisplayed());
+		Assert.assertTrue(btnLookUpYourDoctor.isDisplayed());
+		Assert.assertTrue(prescriptionDrugBenefitsTab.isDisplayed());
+		prescriptionDrugBenefitsTab.click();
+		Assert.assertEquals("header verification","Prescription Drug Benefits", prescriptionDrugHeader.getText());
+		Assert.assertTrue(optionalServicesTab.isDisplayed());
+		optionalServicesTab.click();
+		Assert.assertEquals("header verification","Optional Services to Customize Your Plan (Riders)", optionalServicesHeader.getText());
+		Assert.assertTrue(planCostsTab.isDisplayed());
+		planCostsTab.click();
+		Assert.assertEquals("header verification","Plan Cost", planCostsHeader.getText());
+		try {
+			Thread.sleep(5000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 }

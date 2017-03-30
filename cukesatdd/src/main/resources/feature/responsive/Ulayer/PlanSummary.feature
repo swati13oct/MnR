@@ -32,7 +32,7 @@ Given the user is on the vpp portfolio page
 Then the user performs plan serach using zipcode
               | Zip Code |<zipCode>|
               | County   |<county> |
-#Then user validates plan count for all plan types on plan summary page in AARP site
+Then user validates plan count for all plan types on plan summary page in AARP site
 Then user validates county name on plan summary page
 Examples:
 |zipCode|county     |
@@ -338,6 +338,19 @@ Examples:
     
 
 
-
+Scenario Outline: To validate plan details
+Given the user is on the vpp portfolio page
+Then the user performs plan serach using zipcode
+		| Zip Code |<zipCode>|
+		| County   |<county> |
+Then the user navigates to the following plan type
+	  | Plan Type | <planType> |
+And the user navigates to plan details page
+    |Plan Name|<planName>|
+And the user validates the medical benefits tab,Prescription Drug Benefits tab,Optional Services tab on Plan details page    
+Examples:
+		|zipCode|county            |planType|planName 																					|
+		|90210  |Los Angeles County|MA      |AARP MedicareComplete SecureHorizons Plan 2 (HMO)  |		
+		|33713  |Pinellas County		|MA      |AARP MedicareComplete (HMO)  |	
 
 
