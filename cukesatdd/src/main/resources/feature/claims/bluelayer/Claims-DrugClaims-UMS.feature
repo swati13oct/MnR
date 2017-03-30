@@ -96,7 +96,7 @@ Examples:
 
 
 
-
+@claimfnf
 Scenario Outline:Verify the drug claim summary and details for selected time period
 Given the registered UMS with following attributes in UMS site for drug claims
 	| Plan Type    | <planType>    |
@@ -105,7 +105,7 @@ When the user navigates to claim summary page in UMS site for drug claims
 Examples:
 	| planType | memberType | 
 #	| MA       | Individual |  
-	| MAPD     | Individual |  
-#	| MAPD     | Group      |   
+#	| MAPD     | Individual |  
+	| MAPD     | Group      |   
 #	| MA       | Group      | 
 

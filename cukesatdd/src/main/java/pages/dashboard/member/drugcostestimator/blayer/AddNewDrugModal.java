@@ -48,6 +48,10 @@ public class AddNewDrugModal extends UhcDriver {
 	@FindBy(xpath = "//span[contains(text(),'Your Drug List can contain a maximum of 25 drugs.')]")
 	public WebElement exceededError;
 
+	@FindBy(xpath = "//span[@class='color-red']")
+	public WebElement atleast_4_mesg;
+	
+	
 	public AddNewDrugModal(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
@@ -148,6 +152,12 @@ public class AddNewDrugModal extends UhcDriver {
 //		}
 		continueButton.click();
 		return new AddDrugDetails(driver);
+	}
+	
+	public void validate_atleast_4_mesg()
+	{
+		waitforElement(atleast_4_mesg);
+		
 	}
 }
 

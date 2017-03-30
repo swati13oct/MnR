@@ -403,7 +403,7 @@ public class PlanBenefitsAndCoverageAarpStepDefinition {
 		}
 	}
 
-	@Then("^the user validates the content on benefits and coverage page")
+//	@Then("^the user validates the content on benefits and coverage page")
 	public void validateContentOnBenefitsAndCoveragePage() {
 		
 		try {
@@ -560,6 +560,22 @@ public class PlanBenefitsAndCoverageAarpStepDefinition {
 		} catch (JSONException e) {
 			e.printStackTrace();
 		}
+	}
+
+
+
+	@Then("^the user validates the sorting link on mydocument page$")
+	public void view_sorting_search_aarp_site(){
+		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstants.ACCOUNT_HOME_PAGE);
+		
+		FormsandresourcesPage formsAndResourcesPage = accountHomePage.navigateTosortingsearchlinkAarpPage();		
+		
+
+		WebDriver wd = (WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
+		if(wd!=null){
+			wd.quit();
+		}
+
 
 	}
 
