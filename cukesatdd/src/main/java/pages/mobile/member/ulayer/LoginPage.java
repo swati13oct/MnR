@@ -88,7 +88,7 @@ public class LoginPage extends UhcDriver{
 			Alert alert1 = driver.switchTo().alert();
 			alert1.accept();
 		}
-		if(currentUrl().contains("mobile/home/my-benefit-summary.html"))
+		if(currentUrl().contains("mobile/home/my-benefit-summary.html") || currentUrl().contains("mobile/login.html"))
 		{
 			return new BenefitsSummaryPage(driver);
 		}

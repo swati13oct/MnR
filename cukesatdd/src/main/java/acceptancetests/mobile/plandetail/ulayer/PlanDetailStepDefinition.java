@@ -47,9 +47,9 @@ public class PlanDetailStepDefinition {
 	
 	@Given("^the user is on the AARP medicare site login page$")
 	public void user_login_page()
-	{
-		//WebDriver wd = getLoginScenario().getMobileWebDriver();
-		WebDriver wd = getLoginScenario().getWebDriver();
+	{		
+	//	WebDriver wd = getLoginScenario().getMobileWebDriver();
+ 		WebDriver wd = getLoginScenario().getWebDriver();
 		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
 
 		LoginPage loginPage = new LoginPage(wd);

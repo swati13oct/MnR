@@ -31,7 +31,9 @@ public abstract class UhcDriver {
 	public WebDriver driver;
 
 	public void start(String url) {
+		System.out.println("**************** "+driver.getCurrentUrl());
 		driver.get(url);
+		System.out.println("++++++++++++++++ "+driver.getCurrentUrl());
 	}
 
 	public UhcDriver(WebDriver driver) {
@@ -293,6 +295,7 @@ public abstract class UhcDriver {
 	}
 
 	public String currentUrl() {
+		System.out.println("******************"+driver.getCurrentUrl());
 		return driver.getCurrentUrl();
 	}
 

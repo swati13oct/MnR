@@ -232,7 +232,7 @@ public class ResponsivePlanSummary extends UhcDriver{
 	public ResponsivePlanSummary(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
-		CommonUtility.waitForPageLoad(driver, responsivevpppage, CommonConstants.TIMEOUT_30);
+	//	CommonUtility.waitForPageLoad(driver, responsivevpppage, CommonConstants.TIMEOUT_30);
 
 		String fileName = CommonConstants.VPP_PLAN_SUMMARY_PAGE_DATA;
 		vppPlanSummary = CommonUtility.readPageData(fileName, CommonConstants.PAGE_OBJECT_DIRECTORY_ULAYER_ACQ);
@@ -403,36 +403,29 @@ public void disclaimerText(){
 }
 
 public ResponsivePlanSummary viewPlanSummary(String planType) {
-	JavascriptExecutor js = (JavascriptExecutor)driver;
+//	JavascriptExecutor js = (JavascriptExecutor)driver;
 	try {
 		Thread.sleep(4000);
 	} catch (InterruptedException e) {
 		// TODO Auto-generated catch block
 		e.printStackTrace();
-	}
+	}	
 	if (planType.equalsIgnoreCase("PDP")) {
-		js.executeScript("arguments[0].click();", showPdpPlans);
-		System.out.println("PDP clicked");
+			showPdpPlans.click();
 		return new ResponsivePlanSummary(driver);
-		//showPdpPlans.click();
-	} else if (planType.equalsIgnoreCase("MA")
+			} else if (planType.equalsIgnoreCase("MA")
 			|| planType.equalsIgnoreCase("MAPD")) {
-		js.executeScript("arguments[0].click();", showMaPlans);
-		System.out.println("MAPD/MA clicked");
+			System.out.println("inside MA");
+			showMaPlans.click();
 		return new ResponsivePlanSummary(driver);
-		//showMaPlans.click();
-	}
-	else if (planType.equalsIgnoreCase("MS")) {
-		showMsPlans.click();
-		if (driver
-				.getTitle()
-				.equalsIgnoreCase(
-						"AARP Medicare Supplement Insurance Plans")){
-//	return new ResponsivePlanSummary(driver);
+			}else if(planType.equalsIgnoreCase("MS")){
+		           showMsPlans.click();
+		return new ResponsivePlanSummary(driver);
+		}
+			return null;
 }
-	}
-	return null;
-}
+	
+
  
 public void comparePlanslnk(){
 	comparePlans.click();
@@ -578,7 +571,7 @@ public void comparePlanslnk(){
 			int i=0;
 			 List<WebElement> plans = driver.findElements(By.xpath("//h2[contains(text(),'AARP MedicareComplete')]"));
 			 System.out.println("PLANS SIZE :: "+plans.size());
-			 String xpath="//a[contains(text(),'Is my provider covered?')]";  
+			 String xpath="//a[contains(text(),'Find a provider')]";  
 			 List<WebElement> providerSearch = driver.findElements(By.xpath(xpath));
 			 
 			 System.out.println("Is my provider covered? "+providerSearch.size());
