@@ -654,30 +654,30 @@ public void comparePlanslnk(){
 				}	
 			 public GetStartedPage estimateYourDrugs(String planName){
 					int i=0;
-					 List<WebElement> plans = driver.findElements(By.xpath("//h2[contains(text(),'AARP')]"));
-					 System.out.println("PLANS SIZE :: "+plans.size());
-					 String xpath="Estimate Your Drugs";  
-					 List<WebElement> estimateDrugLink = driver.findElements(By.linkText(xpath));
-					 
-					 System.out.println("Estimate your drugs"+estimateDrugLink.size());
-					 for(WebElement plan : plans){
-						 if(plan.getText().equalsIgnoreCase(planName)){			 
-		 					 estimateDrugLink.get(i).click();
-							 try {
-								Thread.sleep(3000);
-							} catch (InterruptedException e) {
-								// TODO Auto-generated catch block
-								e.printStackTrace();
-							}
-							 if(driver.getTitle().equalsIgnoreCase("plans")){
-								 return new GetStartedPage(driver);
-							 }
-							 break;
-						 }
-						 i++;
-					 }
-					 return null;
-				 }
+					List<WebElement> plans = driver.findElements(By.xpath("//h2[contains(text(),'AARP')]"));
+					System.out.println("PLANS SIZE :: "+plans.size());
+					String xpath="Estimate Your Drugs";  
+					List<WebElement> estimateDrugLink = driver.findElements(By.linkText(xpath));
+
+					System.out.println("Estimate your drugs"+estimateDrugLink.size());
+					for(WebElement plan : plans){
+					if(plan.getText().equalsIgnoreCase(planName)){ 
+				 estimateDrugLink.get(i).click();
+					try {
+					Thread.sleep(3000);
+					} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+					}
+					if(driver.getTitle().equalsIgnoreCase("plans")){
+					return new GetStartedPage(driver);
+					}
+					break;
+					}
+					i++;
+					}
+					return null;
+					}
 			 
 			 public void clicksOnEnrollInplanLink(String planName) {
 					if (planName.contains("HMO")) {

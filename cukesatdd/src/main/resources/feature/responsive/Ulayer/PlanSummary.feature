@@ -356,7 +356,6 @@ Examples:
 		|90210  |Los Angeles County|MA      |AARP MedicareComplete SecureHorizons Plan 2 (HMO)  |		
 		|33713  |Pinellas County		|MA      |AARP MedicareComplete (HMO)  |	
 
-@aprilReleaseSprint5
 Scenario Outline: To validate plan details
 Given the user is on the vpp portfolio page
 Then the user performs plan serach using zipcode
