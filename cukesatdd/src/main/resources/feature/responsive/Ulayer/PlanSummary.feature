@@ -494,7 +494,7 @@ Then user validates plan count for all plan types on plan summary page in AARP s
 Then user validates county name on plan summary page
 Examples:
 |zipCode|county     |
-|78006 |Bexar County|			
+|90210  |Los Angeles County|			
 
 	@aprilReleaseSprint2
 Scenario Outline: To validate sticky zipcode functionality
