@@ -117,9 +117,8 @@ public class ResponsivePlanSummary extends UhcDriver{
 		    @FindBy(xpath="(.//*[text()='View details'])[1]")
 		    private WebElement viewDetails;
 		    
-			@FindBy(xpath="//a[contains(.,'Back to all plans')]")
+			@FindBy(xpath=".//*[text()='Back to all plans']")
 			private WebElement backtoallPlans;
-
 		    
 		    @FindBy(xpath="(.//*[@class='remove-button'])[1]")
 		    private WebElement removePlanlnk;
