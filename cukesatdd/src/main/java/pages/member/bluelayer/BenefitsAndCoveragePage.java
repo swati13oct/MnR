@@ -47,11 +47,11 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 	@FindBy(xpath="//*[@id='_content_uhcm_home_my-plans_benefits-and-coverage-page_jcr_content_overview_needhelp_tfnParplansource_teaser']/div/section/div/div[1]/div/h2")
 	private WebElement NeedHelpHeader;
 	
-	
+	@FindBy(xpath="//*[@id='_content_uhcm_home_my-plans_benefits-and-coverage-page_jcr_content_overview_needhelp_tfnParplansource_teaser']/div/section/div/div[3]/div/p")
+	private WebElement Contactussection;
 	
 
-
-	public BenefitsAndCoveragePage(WebDriver driver) {
+        public BenefitsAndCoveragePage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
 		String fileName = CommonConstants.BENEFITS_AND_COVERAGE_PAGE_DATA;
@@ -144,6 +144,22 @@ public void validateNeedhelpheader(){
 		}
 	}
 
-
-	
+public boolean validatecontactussection()
+{
+	try{
+	if(Contactussection.getText().contains("See more ways to contact us")){
+	System.out.println("contactus section is coming ");
+	}
+	else
+	{
+	System.out.println("Contactussection.getText() >>>>>>   "+Contactussection.getText());
+	}
+	}
+	catch(Exception e){
+	return false;
+	}
+	return true;
+	}
 }
+	
+

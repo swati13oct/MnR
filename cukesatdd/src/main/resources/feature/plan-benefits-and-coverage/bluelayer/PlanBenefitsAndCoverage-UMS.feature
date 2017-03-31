@@ -773,6 +773,7 @@ Examples:
     Then the user view benefits and coverage in UMS site
     And the user validates the content on benefits and coverage page
     And the user validates Needhelp header
+    And the user validates contactus section
 
     Examples: 
       | planType | memberType| copayCategory |

@@ -590,13 +590,13 @@ public class BenefitsAndCoverageUmsStepDefinition {
 
 	}
 	
-	@Then("^the user validates the content on benefits and coverage page")
+	@Then("^the user validates Needhelp header")
 	public void validateContentOnBenefitsAndCoveragePage() {
 		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario().getBean(PageConstants.BENEFITS_AND_COVERAGE_PAGE);
 		benefitsCoveragePage.validateNeedhelpheader();
      }
 	
-	@Then("^the user validates Needhelp header")
+	@Then("^the user validates the content on benefits and coverage page")
 	public void validateneedhelpheader() {
 		try {
 			
@@ -613,9 +613,11 @@ public class BenefitsAndCoverageUmsStepDefinition {
 		}
 				
 	}
-	
-	
-	
+	@Then("^the user validates contactus section")
+	public void validatecontactussection() {
+		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario().getBean(PageConstants.BENEFITS_AND_COVERAGE_PAGE);
+		benefitsCoveragePage.validatecontactussection();
+     }
 	
 	@Then("^the user view mydocument in UMS site$")
 	public void views_mydocument_ums_site() {
