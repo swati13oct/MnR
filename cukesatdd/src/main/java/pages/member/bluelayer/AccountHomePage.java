@@ -654,7 +654,8 @@ public FormsandresourcesPage navigateToMydocumentUmsPage() {
 		driver.manage().timeouts().implicitlyWait(50, TimeUnit.SECONDS);
 		/*Select select = new  Select(driver.findElement(By.id("lang-select")));
 		select.selectByVisibleText("español");*/
-		((JavascriptExecutor) driver).executeScript("return document.getElementById('lang-select').selectedIndex = '" + "español" + "'");
+		//((JavascriptExecutor) driver).executeScript("return document.getElementById('lang-select').selectedIndex = '" + "español" + "'");
+		driver.findElement(By.xpath("//select[@id='lang-select']/option[1]")).click();
 		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 		return null;
 	}
