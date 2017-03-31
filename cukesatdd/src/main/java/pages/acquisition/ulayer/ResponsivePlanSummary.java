@@ -117,6 +117,10 @@ public class ResponsivePlanSummary extends UhcDriver{
 		    @FindBy(xpath="(.//*[text()='View details'])[1]")
 		    private WebElement viewDetails;
 		    
+			@FindBy(xpath="//a[contains(.,'Back to all plans')]")
+			private WebElement backtoallPlans;
+
+		    
 		    @FindBy(xpath="(.//*[@class='remove-button'])[1]")
 		    private WebElement removePlanlnk;
 		    
@@ -387,6 +391,11 @@ public void footNoteSection(){
 	String txt = footNote.getText();
 	System.out.println(txt);
 }
+
+public void backtoAllPlans(){
+	backtoallPlans.click();
+}
+
 
 public void disclaimerText(){
 	String disclaimertxt = disclaimerTxt.getText();

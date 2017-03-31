@@ -188,6 +188,15 @@ public class ResponsiveStepDefiniton {
 		VPPAarpNeedAStepBackWidget stepBackWidget =  planSummary.validateStepBackWidget();
 		stepBackWidget.validateStepBackWidget();
 	}
+	
+	@And("^the user click back to all plans in AARP site")
+	public void the_user_clic_backtoallplan(){
+		ResponsivePlanSummary planSummary = (ResponsivePlanSummary) getLoginScenario()
+				.getBean(PageConstants.RESPONSIVE_PLAN_SUMMARY_PAGE);
+		planSummary.backtoAllPlans();	
+		
+	}
+
 	@And("^the user validates chat now widget in right rail widgets$")
 	 public void the_user_validates_help_widget_in_raight_rail(){
 		ResponsivePlanSummary planSummary= (ResponsivePlanSummary) 
