@@ -372,6 +372,8 @@ public void selectAddToCompareCheckboxes()  {
 	
 }
 
+
+
 public void viewdetailslnk(){
 	viewDetails.click();
 	validate(viewDetails);
@@ -892,6 +894,17 @@ public void comparePlanslnk(){
 						System.out.println("zipcode box doesn't displays sticky zipCode as  "+stickyZipcode);
 						Assert.fail();
 					}
+					
+				}
+				
+				public void selecttwoplanCheckboxes() {
+					JavascriptExecutor js = (JavascriptExecutor)driver;
+					try {
+						Thread.sleep(10000);
+					} catch (InterruptedException e) {
+						e.printStackTrace();
+					}
+					js.executeScript("arguments[0].click();", chkBoxAddtoCompare1);
 					
 				}
 			 

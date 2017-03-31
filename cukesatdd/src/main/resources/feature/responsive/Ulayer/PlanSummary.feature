@@ -241,6 +241,20 @@ Examples:
 		|zipCode|county            |planType|
 		|90210  |Los Angeles County|MA      |	
 
+@US544283	
+Scenario Outline: To validate Add to Compare Checboxes
+Given the user is on the vpp portfolio page
+Then the user performs plan serach using zipcode
+		| Zip Code |<zipCode>|
+		| County   |<county> |
+Then the user navigates to the following plan type
+	  | Plan Type | <planType> |
+And the user select two plan in AARP site
+
+Examples:
+		|zipCode|county            |planType|
+		|35004  |St. Clair County  |MA      |
+
 
 
 @medicalbenefits

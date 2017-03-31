@@ -179,6 +179,19 @@ public class ResponsiveStepDefiniton {
 	
 	}
 	
+	@And("^the user select two plan in AARP site")
+	public void the_user_select_two_plans(){
+		{
+			ResponsivePlanSummary planSummary = (ResponsivePlanSummary) getLoginScenario()
+					.getBean(PageConstants.RESPONSIVE_PLAN_SUMMARY_PAGE);
+			planSummary.selecttwoplanCheckboxes();
+			
+		}
+	
+	}
+	
+	
+	
 	
 	
 	@And("^the user validates Need a step back in right rail widgets$")
@@ -196,6 +209,8 @@ public class ResponsiveStepDefiniton {
 		planSummary.backtoAllPlans();	
 		
 	}
+	
+	
 
 	@And("^the user validates chat now widget in right rail widgets$")
 	 public void the_user_validates_help_widget_in_raight_rail(){
@@ -204,6 +219,7 @@ public class ResponsiveStepDefiniton {
 		VPPAarpNeedHelpWidgetPage needHelpWidget = planSummary.validateNeedHelpWidget();
 	   needHelpWidget.chatWithUsWidget();			
 	}
+	
 	@And("^the user validates need more information widget in right rail widgets$")
 	 public void the_user_validates_needInformation_widget_in_raight_rail(){
 		ResponsivePlanSummary planSummary= (ResponsivePlanSummary) 
