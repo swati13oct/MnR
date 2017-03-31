@@ -537,6 +537,20 @@ public class ResponsiveStepDefiniton {
 					.getBean(PageConstants.RESPONSIVE_PLAN_SUMMARY_PAGE);
 			planSummary.errorMessage();		
 		}
+		@Then("^user validates plan count for all plan types on plan summary page in AARP site$")
+		public void user_validates_following_benefits_ui_aarp() {
+		       JSONObject planSummaryActualJson = (JSONObject) getLoginScenario()
+		                     .getBean(VPPCommonConstants.VPP_PLAN_SUMMARY_ACTUAL);
+		       JSONObject planSummaryExpectedJson = (JSONObject) getLoginScenario()
+		                     .getBean(VPPCommonConstants.VPP_PLAN_SUMMARY_EXPECTED);
+		       try {
+		              JSONAssert.assertEquals(planSummaryExpectedJson,
+		                           planSummaryActualJson, true);
+		       } catch (JSONException e) {
+		              // TODO Auto-generated catch block
+		              e.printStackTrace();
+		       }
+		}
 	}
 	
 
