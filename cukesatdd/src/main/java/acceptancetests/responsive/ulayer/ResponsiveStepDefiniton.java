@@ -551,6 +551,13 @@ public class ResponsiveStepDefiniton {
 		              e.printStackTrace();
 		       }
 		}
+		@And("^the user validates sticky zipcode$")
+		public void user_validates_sticky_zipcode(){
+			ResponsivePlanSummary planSummary = (ResponsivePlanSummary) getLoginScenario().getBean(PageConstants.RESPONSIVE_PLAN_SUMMARY_PAGE);
+			String actualZipcode = (String) getLoginScenario().getBean(VPPCommonConstants.ZIPCODE);
+			System.out.println(actualZipcode);
+			planSummary.validateStickyZipcode(actualZipcode);
+		}
 	}
 	
 

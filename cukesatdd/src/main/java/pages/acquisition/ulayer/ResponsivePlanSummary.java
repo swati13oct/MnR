@@ -432,19 +432,6 @@ public void comparePlanslnk(){
 	validate(comparePlans);
 	
 }
-	public void validateStickyZipcode(String actualZipcode){
-		validate(changeLoationLink);
-		changeLoationLink.click();
-		String stickyZipcode=zipcodeBox.getAttribute("");
-		if(stickyZipcode.equals(actualZipcode)){
-			System.out.println("zipcode box displays sticky zipCode as  "+stickyZipcode);
-			Assert.assertTrue(true);
-		}else{
-			System.out.println("zipcode box doesn't displays sticky zipCode as  "+stickyZipcode);
-			Assert.fail();
-		}
-		
-	}
 	
 	//US501386 - Plan Highlights 
 	public ResponsivePlanSummary validatePlanHighlights(){
@@ -886,6 +873,22 @@ public void comparePlanslnk(){
 				 validate(errorMessage);
 				 System.out.println(errorMessage.getText());
 			 }
-
+				public void validateStickyZipcode(String actualZipcode){
+					validate(changeLoationLink);
+					changeLoationLink.click();
+					JavascriptExecutor executor = (JavascriptExecutor)driver;
+					String stickyZipcode =  (String) executor.executeScript("return document.getElementById('zipcode').value;");
+					System.out.println(stickyZipcode);
+					//String stickyZipcode=zipcodeBox.getText();
+					//System.out.println(driver.findElement(By.xpath("//*[@id='zipd
+					if(stickyZipcode.equals(actualZipcode)){
+						System.out.println("zipcode box displays sticky zipCode as  "+stickyZipcode);
+						Assert.assertTrue(true);
+					}else{
+						System.out.println("zipcode box doesn't displays sticky zipCode as  "+stickyZipcode);
+						Assert.fail();
+					}
+					
+				}
 			 
 }
