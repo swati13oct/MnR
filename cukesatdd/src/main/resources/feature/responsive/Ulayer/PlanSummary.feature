@@ -575,5 +575,85 @@ Examples:
 		|zipCode|county            |planType	|  firstname | lastname | emailaddress |
 		|90210  |Los Angeles County|PDP        |	 Eva        | Zhong     |weixin.zhong@optum.com|
 			
-				
+			
+@Prescriptionbenefits
+Scenario Outline: To validate prescription drug benefits in compare page
+Given the user is on the vpp portfolio page
+Then the user performs plan serach using zipcode
+		| Zip Code |<zipCode>|
+		| County   |<county> |
+Then the user navigates to the following plan type
+	  | Plan Type | <planType> |
+	  
+And the user select plan to compare in AARP site
+And the user click compare plans in AARP site
+Then the user validates prescription drug benefits
+	  |deduc Plan1|<deducPlan1>|
+      |deduc Plan2|<deducPlan2>|
+      |tier1 Plan1|<tier1Plan1>|
+      |tier1 Plan2|<tier1Plan2>|      
+Examples:
+		|zipCode|county            |planType|deducPlan1	|deducPlan2	|tier1Plan1		|tier1Plan2		|
+		|90210  |Los Angeles County|MA      |$0  		|$400	  	|$4.00 co-pay	|$0.00 co-pay	|
+
+@OptionalServices
+Scenario Outline: To validate Optional Services in compare page
+Given the user is on the vpp portfolio page
+Then the user performs plan serach using zipcode
+		| Zip Code |<zipCode>|
+		| County   |<county> |
+Then the user navigates to the following plan type
+	  | Plan Type | <planType> |
+	  
+And the user select plan to compare in AARP site
+And the user click compare plans in AARP site
+      
+Then the user validates optional services
+	  |optionalDental Plan1		|<opDenPlan1>		|
+      |optionalDental Plan2		|<opDenPlan2>		|
+      |hignOptionalDental Plan1	|<highOpDenPlan1>	|
+      |hignOptionalDental Plan2	|<highOpDenPlan2>	|      
+Examples:
+		|zipCode|county            |planType|opDenPlan1	|opDenPlan2	|highOpDenPlan1	|highOpDenPlan2	|
+		|90210  |Los Angeles County|MA      |$3.00  	|$3.00  	|$14.00			|$14.00			|
+	
+
+@PlanCosts
+Scenario Outline: To validate Plan Costs in compare page
+Given the user is on the vpp portfolio page
+Then the user performs plan serach using zipcode
+		| Zip Code |<zipCode>|
+		| County   |<county> |
+Then the user navigates to the following plan type
+	  | Plan Type | <planType> |
+	  
+And the user select plan to compare in AARP site
+And the user click compare plans in AARP site
+      
+Then the user validates plan costs
+	  |Premium Plan1			|<premPlan1>	|
+      |Premium Plan2			|<premPlan2>	|
+      |Medical Benefits Plan1	|<medBenPlan1>	|
+      |Medical Benefits Plan2	|<medBenPlan2>	|      
+Examples:
+		|zipCode|county            |planType|premPlan1	|premPlan2	|medBenPlan1|medBenPlan2|
+		|90210  |Los Angeles County|MA      |$0.00  	|$0.00  	|Varies		|Varies		|
+
+
+@ErrorMessage
+Scenario Outline: To validate error message on selecting more than 4 plans on Plan summary
+Given the user is on the vpp portfolio page
+Then the user performs plan serach using zipcode
+		| Zip Code |<zipCode>|
+		| County   |<county> |
+Then the user navigates to the following plan type
+	  | Plan Type | <planType> |
+	  
+And the user selects 5 plans to compare in AARP site
+Then error message for fifth plan should be displayed
+Examples:
+		|zipCode|county         |planType	|
+		|02801  |Newport County	|MA 		|
+
+		
  
