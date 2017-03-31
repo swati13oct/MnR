@@ -44,6 +44,8 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 	@FindBy(xpath="//*[@id='planBenefitsApp']/div/div/div[2]/div[1]/div/div[4]/div[1]/span")
 	private WebElement effectiveDate;
 	
+	@FindBy(xpath="//*[@id='_content_uhcm_home_my-plans_benefits-and-coverage-page_jcr_content_overview_needhelp_tfnParplansource_teaser']/div/section/div/div[1]/div/h2")
+	private WebElement NeedHelpHeader;
 	
 	
 	
@@ -61,16 +63,16 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 	public JSONObject getExpectedData(Map<String, JSONObject> expectedDataMap) {
 
 		/*get PHR expected data*/
-		JSONObject benefitsExpectedJson = expectedDataMap.get(CommonConstants.BENEFITS_AND_COVERAGE_PAGE_DATA);
+		JSONObject benefitsExpectedJson = expectedDataMap.get(CommonConstants.BENEFITS_AND_COVERAGE);
 		JSONObject commonExpectedJson = expectedDataMap.get(CommonConstants.COMMON);
-		JSONObject globalExpectedJson = expectedDataMap.get(CommonConstants.GLOBAL);
-		benefitsExpectedJson = CommonUtility.mergeJson(benefitsExpectedJson, globalExpectedJson);
+		//JSONObject globalExpectedJson = expectedDataMap.get(CommonConstants.GLOBAL);
 		benefitsExpectedJson = CommonUtility.mergeJson(benefitsExpectedJson, commonExpectedJson);
+		//benefitsExpectedJson = CommonUtility.mergeJson(benefitsExpectedJson, commonExpectedJson);
 
 		return benefitsExpectedJson;
 
 	}
-		
+	
 	public void validateFieldsOnBenefitsAndCoveragePage(){
 		
 		try {
@@ -132,6 +134,16 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 		
 	}
 	
+	
+public void validateNeedhelpheader(){
+		
+		try {
+			validate(NeedHelpHeader);
+		} catch (Exception e) {
+			System.out.println("Elements is not found ...");
+		}
+	}
+
 
 	
 }

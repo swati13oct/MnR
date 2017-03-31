@@ -771,7 +771,8 @@ Examples:
       | Copay Category | <copayCategory>|
     When the user view forms and resources in UMS site
     Then the user view benefits and coverage in UMS site
-    #And the user validates the content on benefits and coverage page
+    And the user validates the content on benefits and coverage page
+    And the user validates Needhelp header
 
     Examples: 
       | planType | memberType| copayCategory |
