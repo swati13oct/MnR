@@ -354,15 +354,7 @@ private JSONObject getActualJsonObject(String fileName, String planName, List<We
 }
 
 public void selectAddToCompareCheckboxes()  {
-	//driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-	//waitforElement(selectAddToCompareCheckbox);
-	//System.out.println(chkBoxAddtoCompare1.isEnabled());
 	
-	try {
-		Thread.sleep(10000);
-	} catch (InterruptedException e) {
-		e.printStackTrace();
-	}
 	JavascriptExecutor js = (JavascriptExecutor)driver;
 	try {
 		Thread.sleep(10000);
@@ -374,7 +366,6 @@ public void selectAddToCompareCheckboxes()  {
 	js.executeScript("arguments[0].click();", chkBoxAddtoCompare3);
 	js.executeScript("arguments[0].click();", chkBoxAddtoCompare4);
 	
-
 }
 
 public void viewdetailslnk(){
@@ -428,8 +419,12 @@ public ResponsivePlanSummary viewPlanSummary(String planType) {
 
  
 public void comparePlanslnk(){
-	comparePlans.click();
-	validate(comparePlans);
+	
+	driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS); 
+	 boolean link = comparePlans.isEnabled(); 
+	 System.out.println(link); 
+	 comparePlans.click(); 
+	 validate(comparePlans); 
 	
 }
 	

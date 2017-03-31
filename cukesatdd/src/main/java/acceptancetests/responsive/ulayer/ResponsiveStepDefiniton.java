@@ -169,7 +169,7 @@ public class ResponsiveStepDefiniton {
  	}*/
 	
 	@And("^the user select plan to compare in AARP site")
-	public void the_user_select_plan_to_compare() throws InterruptedException {
+	public void the_user_select_plan_to_compare(){
 		{
 			ResponsivePlanSummary planSummary = (ResponsivePlanSummary) getLoginScenario()
 					.getBean(PageConstants.RESPONSIVE_PLAN_SUMMARY_PAGE);
@@ -177,11 +177,6 @@ public class ResponsiveStepDefiniton {
 			
 		}
 	
-		try {
-			Thread.sleep(10000);
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
 	}
 	
 	
