@@ -11,6 +11,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.junit.Assert;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -651,8 +652,9 @@ public FormsandresourcesPage navigateToMydocumentUmsPage() {
 
 	public PharmacySearchPage navigateTomultipleLanguageDropdownResultsearch() {
 		driver.manage().timeouts().implicitlyWait(50, TimeUnit.SECONDS);
-		Select select = new  Select(driver.findElement(By.id("lang-select")));
-		select.selectByVisibleText("español");
+		/*Select select = new  Select(driver.findElement(By.id("lang-select")));
+		select.selectByVisibleText("español");*/
+		((JavascriptExecutor) driver).executeScript("return document.getElementById('lang-select').selectedIndex = '" + "español" + "'");
 		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 		return null;
 	}
