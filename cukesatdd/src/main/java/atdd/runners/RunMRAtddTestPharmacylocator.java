@@ -15,7 +15,7 @@ import cucumber.junit.Cucumber;
 @Cucumber.Options(glue = { "atdd.framework","acceptancetests.pharmacylocator.member.bluelayer" }, 
 		features = { "feature/pharmacy-locator/member/bluelayer" }, 
 		format = {
-		"pretty", "html:reports/test-report", "json:target/cucumber.json" }, tags ={"@US459888,@pharmacyfilterandtooltip,@bluePharmacymultilang,@bluePharmacysearchaep"})
+		"pretty", "html:reports/test-report", "json:target/cucumber.json" }, tags ={"@bluePharmacymultilang"})
 
 public class RunMRAtddTestPharmacylocator {
 
