@@ -906,6 +906,13 @@ public class MRScenario {
       */
 	public WebDriver getWebDriver() {
 
+		
+		//    !!!!! ATTENTION   !!!!!
+		///If you're changing this code to get a browser to work the you're doing it wrong
+		//You should be able to configure a browser in whatever config.preoperties file
+		// you're using.   You shouldn't have to change code.
+		
+		
         //Is system propery exists defining JENKINS_BROWSER, we're running in JENKINS and
 		//will prefer those browser properties.
 		String browser = (null == System.getProperty(CommonConstants.JENKINS_BROWSER)
