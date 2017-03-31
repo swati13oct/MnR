@@ -908,17 +908,17 @@ public class MRScenario {
 
         //Is system propery exists defining JENKINS_BROWSER, we're running in JENKINS and
 		//will prefer those browser properties.
-		String browser = (null == System.getProperty(CommonConstants.JENKINS_BROWSER)
-				? props.get(CommonConstants.DESKTOP_WEBDRIVER) : System.getProperty(CommonConstants.JENKINS_BROWSER));
+		String browser = (null == System.getProperty(CommonConstants.FIREFOX_BROWSER)
+				? props.get(CommonConstants.DESKTOP_WEBDRIVER) : System.getProperty(CommonConstants.FIREFOX_BROWSER));
 		
 		
-		String agent = (null == System.getProperty(CommonConstants.JENKINS_BROWSER_AGENT_STRING)
-				? props.get(CommonConstants.DESKTOP_BROWSER_AGENT_STRING) : System.getProperty(CommonConstants.JENKINS_BROWSER_AGENT_STRING));
+		/*String agent = (null == System.getProperty(CommonConstants.JENKINS_BROWSER_AGENT_STRING)
+				? props.get(CommonConstants.DESKTOP_BROWSER_AGENT_STRING) : System.getProperty(CommonConstants.JENKINS_BROWSER_AGENT_STRING));*/
 		
 		
-		if (browser.equalsIgnoreCase(CommonConstants.JENKINS_BROWSER_PHANTOMJS)) {
+		/*if (browser.equalsIgnoreCase(CommonConstants.JENKINS_BROWSER_PHANTOMJS)) {
 			System.out.println("PHANTOMJS Agent: " + agent);
-		}
+		}*/
 		
 		// Again, Jenkins takes precedent. 
 		String pathToBinary = (null == System.getProperty("phantomjs") ? props.get("BrowserPathToBinary")
@@ -959,7 +959,7 @@ public class MRScenario {
 				DesiredCapabilities caps = new DesiredCapabilities();
 				caps.setCapability(PhantomJSDriverService.PHANTOMJS_EXECUTABLE_PATH_PROPERTY, pathToBinary);
 				//from Jarvis
-				caps.setCapability(PhantomJSDriverService.PHANTOMJS_PAGE_SETTINGS_PREFIX + "userAgent", agent);
+				//caps.setCapability(PhantomJSDriverService.PHANTOMJS_PAGE_SETTINGS_PREFIX + "userAgent", agent);
 				caps.setJavascriptEnabled(true);
 				caps.setCapability(PhantomJSDriverService.PHANTOMJS_CLI_ARGS,
 						new String[] { "--web-security=no", "--ignore-ssl-errors=yes", "--ssl-protocol=any" });

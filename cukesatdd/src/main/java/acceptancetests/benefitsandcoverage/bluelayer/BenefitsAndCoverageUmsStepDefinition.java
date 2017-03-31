@@ -548,11 +548,12 @@ public class BenefitsAndCoverageUmsStepDefinition {
 		JSONObject formsAndResourcesExpectedJson = formsAndResourcesPage.getExpectedData(expectedDataMap);
 		getLoginScenario().saveBean(FnRCommonConstants.FORMS_AND_RESOURCES_EXPECTED, formsAndResourcesExpectedJson);
 */
-		/* Actual data *
+		/* Actual data */
 		if (formsAndResourcesPage != null) {
 			getLoginScenario().saveBean(PageConstants.FORMS_AND_RESOURCES_PAGE, formsAndResourcesPage);
+		}
 			/*Assert.assertTrue(true);
-			formsAndResourcesActualJson = formsAndResourcesPage.formsAndResourcesJson;*/
+			//formsAndResourcesActualJson = formsAndResourcesPage.formsAndResourcesJson;*/
 		//}
 		//getLoginScenario().saveBean(FnRCommonConstants.FORMS_AND_RESOURCES_ACTUAL, formsAndResourcesActualJson);
 	}
@@ -563,9 +564,12 @@ public class BenefitsAndCoverageUmsStepDefinition {
 		FormsandresourcesPage formsandresourcesPage = (FormsandresourcesPage) getLoginScenario().getBean(
 				PageConstants.FORMS_AND_RESOURCES_PAGE);
 
-		BenefitsAndCoveragePage benefitsCoveragePage = formsandresourcesPage
-				.navigateToBenefitsAndCoverage();
+		BenefitsAndCoveragePage benefitsCoveragePage = formsandresourcesPage.navigateToBenefitsAndCoverage();
+		if (benefitsCoveragePage != null) {
 		
+			getLoginScenario().saveBean(PageConstants.BENEFITS_AND_COVERAGE_PAGE,benefitsCoveragePage);
+		
+		}
 		/*if(benefitsCoveragePage!=null){
 			//Get actual data
 			JSONObject actualJsonObj=benefitsCoveragePage.benefitsandcoverageJson;

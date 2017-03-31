@@ -12,10 +12,10 @@ import cucumber.junit.Cucumber;
  *
  */
 @RunWith(Cucumber.class)
-@Cucumber.Options(glue = { "atdd.framework","acceptancetests.benefitsandcoveragejenkins.ulayer" }, 
-		features = { "feature/plan-benefits-and-coverage/ulayer" }, 
+@Cucumber.Options(glue = { "atdd.framework","acceptancetests.benefitsandcoverage.bluelayer" }, 
+		features = { "feature/plan-benefits-and-coverage/bluelayer" }, 
 		format = {
-		"pretty", "html:reports/test-report","json:target/cucumber.json"}, tags ={"@activeRider3"})
+		"pretty", "html:reports/test-report","json:target/cucumber.json"}, tags ={"@needHelpums"})
 public class RunMRAtddTestBnC {
 
 }
