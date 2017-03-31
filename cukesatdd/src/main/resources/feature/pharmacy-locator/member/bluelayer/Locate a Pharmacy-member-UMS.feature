@@ -272,7 +272,7 @@ And the user validates AEP plan year and type in pharmaciy search results availa
 
 Examples:
 |plantype    |memberType    | 
-|PDP        |Group   |
+|MAPD        |Individual   |
 
 @bluePharmacypreferedwidget
 Scenario Outline: Verify Pharmacy Locator Search page in UMS site
@@ -321,7 +321,7 @@ Then the user validate multiple language dropdown menu in UMS site
 
 Examples:
 |plantype    |memberType    | 
-|PDP        |Group   |
+|MAPD        |Individual   |
 
 @US459522
 Scenario Outline: Verify Pharmacy Locator Search page in UMS site

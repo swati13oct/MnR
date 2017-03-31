@@ -664,8 +664,8 @@ public FormsandresourcesPage navigateToMydocumentUmsPage() {
 		select = new  Select(driver.findElement(By.id("plan-type")));
 		select.selectByVisibleText("UnitedHealthcare MedicareComplete Plan 1 (HMO)");
 		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
-		pharmacyfilterLink.click();
-		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+		//pharmacyfilterLink.click();
+		//driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 		return null;
 	}
 
@@ -699,7 +699,7 @@ public FormsandresourcesPage navigateToMydocumentUmsPage() {
 
 	public PharmacySearchPage navigateToFilterAndTooltip() {
 		driver.manage().timeouts().implicitlyWait(40, TimeUnit.SECONDS);
-		System.out.println(filterLink.isEnabled());
+		//System.out.println(filterLink.isEnabled());
 		filterLink.click();
 		//tooltipLink.mouseover();
 		
