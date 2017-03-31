@@ -61,7 +61,7 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 	@FindBy(xpath = "//a[contains(.,'CANCEL')]")
 	private WebElement cancelButton;
 
-	@FindBy(xpath = "//*[@id='planBenefitsApp']/div[7]/div[1]/div/div[2]/div[1]/div[2]/div/div/div/div/button")
+	@FindBy(className="btn btn--secondary")
 	private WebElement removeRiderButton;
 
 	@FindBy(xpath = "//*[@id='removeBenefitModal']/div/div/div[3]/input")
