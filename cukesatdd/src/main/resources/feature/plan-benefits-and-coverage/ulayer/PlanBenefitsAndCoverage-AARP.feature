@@ -845,8 +845,8 @@ Feature: To test plan benefits and Coverage on AARP site for Federal members
       | Copay Category | <copayCategory> |
     When the user view jenkins benefits and coverage in AARP site
     And the user validates the content on benefits and coverage page
-    When user clicks on Remove This Rider button
-    Then Add rider popup appears and clicks Remove This Rider button
+    Then user clicks on Remove This Rider button
+    #Then Add rider popup appears and clicks Remove This Rider button
 
     Examples: 
       | planType | copayCategory |
@@ -889,12 +889,12 @@ Feature: To test plan benefits and Coverage on AARP site for Federal members
       | Copay Category | <copayCategory> |
     When the user view jenkins benefits and coverage in AARP site
     And the user validates the content on benefits and coverage page
-    When user clicks on Add Rider button
-    Then Add rider popup appears and clicks Add Rider button
+    Then user clicks on Add Rider button
+    #Then Add rider popup appears and clicks Add Rider button
 
     Examples: 
       | planType | copayCategory |
-      | MAPD     | NON LIS       |
+      | MAPD     | LIS2          |
 
   @availableRider2
   Scenario Outline: Verify Federal Available  Fitness riders on benefits and coverage in AARP site for  MAPD member
