@@ -846,7 +846,7 @@ Feature: To test plan benefits and Coverage on AARP site for Federal members
     When the user view jenkins benefits and coverage in AARP site
     And the user validates the content on benefits and coverage page
     Then user clicks on Remove This Rider button
-    #Then Add rider popup appears and clicks Remove This Rider button
+    Then Add rider popup appears and clicks Remove This Rider button
 
     Examples: 
       | planType | copayCategory |
