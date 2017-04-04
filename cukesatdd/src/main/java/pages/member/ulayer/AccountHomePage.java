@@ -708,8 +708,9 @@ public class AccountHomePage extends UhcDriver {
 
 	public PharmacySearchPage navigateTomultipleLanguageDropdownResult() {
 		driver.manage().timeouts().implicitlyWait(50, TimeUnit.SECONDS);
-		Select select = new  Select(driver.findElement(By.id("lang-select")));
-		select.selectByVisibleText("español");
+		//Select select = new  Select(driver.findElement(By.id("lang-select")));
+		//select.selectByVisibleText("español");
+		driver.findElement(By.xpath("//select[@id='lang-select']/option[1]")).click();
 		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);		
 		return null;
 		
