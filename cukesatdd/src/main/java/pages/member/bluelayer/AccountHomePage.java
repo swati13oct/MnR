@@ -161,7 +161,7 @@ public class AccountHomePage extends UhcDriver {
 	@FindBy(xpath = "//*[@id='saver-checkbox']/label")
 	private WebElement filterLink;
 	
-	@FindBy(xpath = "//fieldset[1]/ul/li[2]/label")
+	@FindBy(xpath = "//fieldset[1]/ul/li[1]/label")
 	private WebElement pharmacyfilterLink;
 	
 	@FindBy(xpath = "//*[@id='_content_pharmacy_en_uhc_jcr_content_pharmacylocator_par_teaser']")
@@ -673,7 +673,7 @@ public FormsandresourcesPage navigateToMydocumentUmsPage() {
 	}
 
 	public PharmacySearchPage navigateToPreferedMailServiceWidgetResult() {
-		pharmacyfilterLink.click();
+		//pharmacyfilterLink.click();
 		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 		widgetLink.isDisplayed();
 		return null;
@@ -703,7 +703,7 @@ public FormsandresourcesPage navigateToMydocumentUmsPage() {
 	public PharmacySearchPage navigateToFilterAndTooltip() {
 		driver.manage().timeouts().implicitlyWait(40, TimeUnit.SECONDS);
 		//System.out.println(filterLink.isEnabled());
-		filterLink.click();
+		pharmacyfilterLink.click();
 		//tooltipLink.mouseover();
 		
 		
