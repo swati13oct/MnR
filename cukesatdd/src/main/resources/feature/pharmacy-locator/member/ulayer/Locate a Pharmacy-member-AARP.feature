@@ -137,7 +137,7 @@ And the user validate multiple language dropdown available in AARP site
 
 Examples:
 	| plantype | 
-	| PDP     |
+	| MAPD     |
 	
 @pharmacyresultpdf
 Scenario Outline:To verify pharmacies displayed based on MAPD and PDP in AARP site
