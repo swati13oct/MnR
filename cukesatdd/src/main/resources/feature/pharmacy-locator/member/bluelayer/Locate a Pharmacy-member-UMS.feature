@@ -284,7 +284,7 @@ Then the user validates the Preferred Mail service Pharmacy widget available in 
 
 Examples:
 |plantype    |memberType    | 
-|PDP        |Group   |
+|Peehip        |Group   |
 
 @bluePharmacysaverandballon
 Scenario Outline: Verify Pharmacy Locator Search page in UMS site
