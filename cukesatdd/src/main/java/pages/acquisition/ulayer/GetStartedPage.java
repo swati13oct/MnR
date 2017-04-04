@@ -66,7 +66,7 @@ public class GetStartedPage extends UhcDriver {
 		}
 		driver.switchTo().frame(dceToolFrame);
 		try{
-		getStartedLink.click();
+			getStartedLink.click();
 		}catch(Exception e){
 			System.out.println("phantomjs doesn't support the element on switched iframe");
 		}
