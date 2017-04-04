@@ -762,3 +762,47 @@ And the user navigates to plan benefits and coverage and validates summary right
 Examples:
 |planType  |planGroup|sequenceRefNum1-4|sequenceRefNum5                              |sequenceRefNum6-8             |sequenceRefNum9 |sequenceRefNum10                             |sequenceRefNum11-12  |sequenceRefNum13                   |benefitText1    |benefitText2     |benefitText3           |benefitText4            |benefitText5                    |benefitText6|benefitText11                        |benefitText12         |benefitText13                |
 | SHIP     | G01     |Hospital stays   |Blood or packed red blood cells under Part A |Skilled nursing facility stays|Hospice care    |Blood or packed red blood cells under Part B |Medical care                          |Emergency care in foreign countries|For days 1 - 60 |For days 61 - 90 |For days 91 and beyond |For days 91 and greater | will pay Medicare Part A costs |Since Medicare covers days 1 - 20 |For days 21 - 100 |Must follow a hospital stay |Hospice Care and Respite Care |Medicare Part B costs not covered |20% of the Medicare-eligibleexpense |Part B Excess charge  | $250 emergency medical care |
+
+@needHelpums
+    Scenario Outline: Verify Need Help section is in place on Benefits and Coverage page
+    Given registered UHC with following details for plan benefits and coverage flow in UMS site
+      | Plan Type      | <planType>  |
+      | Member Type     | <memberType>|
+      | Copay Category | <copayCategory>|
+    When the user view forms and resources in UMS site
+    Then the user view benefits and coverage in UMS site
+    And the user validates the content on benefits and coverage page
+    And the user validates Needhelp header
+
+   Examples: 
+      | planType | memberType| copayCategory |
+      | MAPD     | Group     |     NON LIS   |
+
+@contactussection
+    Scenario Outline: Verify Need Help section is in place on Benefits and Coverage pageR
+    Given registered UHC with following details for plan benefits and coverage flow in UMS site
+      | Plan Type      | <planType>  |
+      | Member Type     | <memberType>|
+      | Copay Category | <copayCategory>|
+    When the user view forms and resources in UMS site
+    Then the user view benefits and coverage in UMS site     
+    And the user validates contactus section
+    
+    Examples: 
+      | planType | memberType| copayCategory |
+      | MAPD     | Group     |     NON LIS   |
+      
+@disclaimersection
+    Scenario Outline: Verify Need Help section is in place on Benefits and Coverage page
+    Given registered UHC with following details for plan benefits and coverage flow in UMS site
+      | Plan Type      | <planType>  |
+      | Member Type     | <memberType>|
+      | Copay Category | <copayCategory>|
+    When the user view forms and resources in UMS site
+    Then the user view benefits and coverage in UMS site
+    And the user validates Needhelp header and disclaimer header
+    
+    
+    Examples: 
+      | planType | memberType| copayCategory |
+      | MAPD     | Group     |     NON LIS   |

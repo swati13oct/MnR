@@ -75,10 +75,12 @@ public class CommonConstants {
 	public static final String BENEFITS_AND_COVERAGE_PDP_NONLIS_NONUS_PAGE_DATA = "planbenefitsandcoveragenonlisnotusother.json";
 
 	public static final String BENEFITS_AND_COVERAGE_PAGE_DATA = "benefitsandcoveragelisnonlis.json";
+	
+	
 
 	public static final String BENEFITS_AND_COVERAGE_PAGE_DIRECTORY = "/jsonresponse/member/ulayer/benefitsandcoverage/";
 
-	public static final String BENEFITS_AND_COVERAGE_PAGE_BLAYER_DIRECTORY = "/jsonresponse/member/bluelayer/benefitsandcoverage/";
+	
 
 	public static final String BENEFITS_AND_COVERAGE_DIRECTORY = "/jsonresponse/member/ulayer/planbenefitsandcoverage/";
 
@@ -130,6 +132,7 @@ public class CommonConstants {
 	
 	public static final Page[] PAGES = { new Page(CommonConstants.GLOBAL, CommonConstants.GLOBAL_DIRECTORY),
 			new Page(CommonConstants.MY_ACCOUNT_HOME, CommonConstants.MY_ACCOUNT_HOME_DIRECTORY),
+			
 			new Page(CommonConstants.MY_ACCOUNT_HOME_COMBO, CommonConstants.MY_ACCOUNT_HOME_COMBO_DIRECTORY),
 			new Page(CommonConstants.PHR, CommonConstants.PHR_DIRECTORY),
 			new Page(CommonConstants.COMMON, CommonConstants.COMMON_DIRECTORY),
@@ -291,8 +294,12 @@ public class CommonConstants {
 
 	public static final String PAYMENT_HISTORY_ULAYER_DIRECTORY_MOBILE = "/jsonresponse/mobile/member/ulayer/paymenthistory/";
 
+	public static final String BENEFITS_AND_COVERAGE = "benefitsandcoverage" ;
+	public static final String BENEFITS_AND_COVERAGE_PAGE_BLAYER_DIRECTORY = "/jsonresponse/member/bluelayer/benefitsandcoverage/";
+	
 	public static final Page[] PAGES_BLUELAYER = {
 			new Page(CommonConstants.GLOBAL, CommonConstants.GLOBAL_BLUELAYER_DIRECTORY),
+			new Page(CommonConstants.BENEFITS_AND_COVERAGE, CommonConstants.BENEFITS_AND_COVERAGE_PAGE_BLAYER_DIRECTORY),
 			new Page(CommonConstants.MY_ACCOUNT_HOME, CommonConstants.MY_ACCOUNT_HOME_BLUELAYER_DIRECTORY),
 			new Page(CommonConstants.COMMON, CommonConstants.COMMON_BLUELAYER_DIRECTORY),
 			new Page(CommonConstants.PHR, CommonConstants.PHR_BLUELAYER_DIRECTORY),

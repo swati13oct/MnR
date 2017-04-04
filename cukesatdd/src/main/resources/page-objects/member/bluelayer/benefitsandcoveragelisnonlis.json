@@ -64,7 +64,7 @@
 "outOfNetwork":{
 "identifier":"xpath",
 "elementName":"//*[@id='planBenefitsApp']/div[5]/div/div[2]/div[2]/div"
-
+},
 "outPatientSurgery":{
 "identifier":"className", 
 "elementName":"outpatientsurgery-atdd"
@@ -76,11 +76,11 @@
 "outPatientSurgeryTier2":{
 "identifier":"className", 
 "elementName":"outpatientsurgery-tier2-atdd"
-
+},
+"disclaimerheader":{
+"identifier" :"xpath",
+"elementName" :"//span[contains(.,'keyboard_arrow_down')]"
 }
-
-
-
 
 }
 }

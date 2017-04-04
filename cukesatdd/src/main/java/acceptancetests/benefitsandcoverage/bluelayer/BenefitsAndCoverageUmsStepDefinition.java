@@ -109,10 +109,10 @@ public class BenefitsAndCoverageUmsStepDefinition {
 			getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
 			getLoginScenario().saveBean(PageConstants.ACCOUNT_HOME_PAGE,
 					accountHomePage);
-			/*Assert.assertTrue(true);
-			accountHomeActualJson = accountHomePage.accountHomeJson;*/
+			Assert.assertTrue(true);
+			accountHomeActualJson = accountHomePage.accountHomeJson;
 		}
-		/*System.out.println("accountHomeActualJson====>"
+		System.out.println("accountHomeActualJson====>"
 				+ accountHomeActualJson.toString());
 		System.out.println("accountHomeExpectedJson====>"
 				+ accountHomeExpectedJson.toString());
@@ -126,7 +126,7 @@ public class BenefitsAndCoverageUmsStepDefinition {
 
 		getLoginScenario().saveBean(CommonConstants.EXPECTED_DATA_MAP,
 				expectedDataMap);
-*/
+
 	}
 
 	@Given("^registered member to login in UMS site$")
@@ -548,11 +548,12 @@ public class BenefitsAndCoverageUmsStepDefinition {
 		JSONObject formsAndResourcesExpectedJson = formsAndResourcesPage.getExpectedData(expectedDataMap);
 		getLoginScenario().saveBean(FnRCommonConstants.FORMS_AND_RESOURCES_EXPECTED, formsAndResourcesExpectedJson);
 */
-		/* Actual data *
+		/* Actual data */
 		if (formsAndResourcesPage != null) {
 			getLoginScenario().saveBean(PageConstants.FORMS_AND_RESOURCES_PAGE, formsAndResourcesPage);
+		}
 			/*Assert.assertTrue(true);
-			formsAndResourcesActualJson = formsAndResourcesPage.formsAndResourcesJson;*/
+			//formsAndResourcesActualJson = formsAndResourcesPage.formsAndResourcesJson;*/
 		//}
 		//getLoginScenario().saveBean(FnRCommonConstants.FORMS_AND_RESOURCES_ACTUAL, formsAndResourcesActualJson);
 	}
@@ -563,28 +564,43 @@ public class BenefitsAndCoverageUmsStepDefinition {
 		FormsandresourcesPage formsandresourcesPage = (FormsandresourcesPage) getLoginScenario().getBean(
 				PageConstants.FORMS_AND_RESOURCES_PAGE);
 
-		BenefitsAndCoveragePage benefitsCoveragePage = formsandresourcesPage
-				.navigateToBenefitsAndCoverage();
+		BenefitsAndCoveragePage benefitsCoveragePage = formsandresourcesPage.navigateToBenefitsAndCoverage();
+		if (benefitsCoveragePage != null) {
 		
-		/*if(benefitsCoveragePage!=null){
+			getLoginScenario().saveBean(PageConstants.BENEFITS_AND_COVERAGE_PAGE,benefitsCoveragePage);
+		
+		}
+		if(benefitsCoveragePage!=null){
 			//Get actual data
+			
 			JSONObject actualJsonObj=benefitsCoveragePage.benefitsandcoverageJson;
 			loginScenario.saveBean(PlanBenefitsAndCoverageCommonConstants.BENEFITS_AND_COVERAGE_ACTUAL, actualJsonObj);	
 			System.out.println("Benefits and coverage actual ==============>"+actualJsonObj.toString());
 			// Get expected data 
-			String fileName = this.userName;
+			/*String fileName = this.userName;
 			String directory = CommonConstants.BENEFITS_AND_COVERAGE_PAGE_DIRECTORY;					
 			JSONObject benefitsandcoverageExectedJson = MRScenario.readExpectedJson(
-					fileName, directory);
+					fileName, directory);*/
+			Map<String, JSONObject> expectedDataMap = (Map<String, JSONObject>) getLoginScenario().getBean(
+					CommonConstants.EXPECTED_DATA_MAP);
+		    JSONObject benefitsandcoverageExectedJson = benefitsCoveragePage.getExpectedData(expectedDataMap);
 			loginScenario.saveBean(PlanBenefitsAndCoverageCommonConstants.BENEFITS_AND_COVERAGE_EXPECTED, benefitsandcoverageExectedJson);
-			System.out.println("Benefits and coverage expected ==============>"+benefitsandcoverageExectedJson.toString());			
-		}*/
+			System.out.println("Benefits and coverage expected ==============>"+benefitsandcoverageExectedJson.toString());	
+			//JSONObject benefitsandcoverageExpectedJson =(JSONObject) loginScenario.getBean(PlanBenefitsAndCoverageCommonConstants.BENEFITS_AND_COVERAGE_EXPECTED);
+			benefitsCoveragePage.clickOnDisclaimers(benefitsandcoverageExectedJson);
+		}
 		
 
 	}
 	
-	//jma duplicate step definition commented out duplicate step definition.  @Then("^the user validates the content on benefits and coverage page")
-	public void validateContentOnBenefitsAndCoveragePage() {
+	@Then("^the user validates Needhelp header and disclaimer header")
+	public void validateneedhelpheader() {
+		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario().getBean(PageConstants.BENEFITS_AND_COVERAGE_PAGE);
+		benefitsCoveragePage.validateNeedhelpheader();
+     }
+	
+	@Then("^the user validates the content on benefits and coverage page")
+	public void validatecontentonbnc() {
 		try {
 			
 			JSONObject actual=(JSONObject) loginScenario.getBean(PlanBenefitsAndCoverageCommonConstants.BENEFITS_AND_COVERAGE_ACTUAL);
@@ -598,8 +614,19 @@ public class BenefitsAndCoverageUmsStepDefinition {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
-		
+				
+	}
+	@Then("^the user validates contactus section")
+	public void validatecontactussection() {
+		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario().getBean(PageConstants.BENEFITS_AND_COVERAGE_PAGE);
+		benefitsCoveragePage.validatecontactussection();
+     }
+	
+	@Then("^the user clicks on Disclaimers link$")
+	public void the_user_clicks_on_Disclaimers_link() {
+		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario().getBean(PageConstants.BENEFITS_COVERAGE_PAGE);
+		JSONObject benefitsandcoverageExectedJson =(JSONObject) loginScenario.getBean(PlanBenefitsAndCoverageCommonConstants.BENEFITS_AND_COVERAGE_EXPECTED);
+		benefitsCoveragePage.clickOnDisclaimers(benefitsandcoverageExectedJson);
 	}
 	
 	
@@ -668,6 +695,8 @@ public class BenefitsAndCoverageUmsStepDefinition {
 	       }
 	       System.out.println("-----add plans validation ended----------");
 	}
+	
+	
 
 	//jma duplicate step definition
 	//@Then("^the user validates the view/download link on mydocument page$")

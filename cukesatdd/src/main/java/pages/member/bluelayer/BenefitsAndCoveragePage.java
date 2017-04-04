@@ -9,6 +9,8 @@ import java.util.Map;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.junit.Assert;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -44,12 +46,21 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 	@FindBy(xpath="//*[@id='planBenefitsApp']/div/div/div[2]/div[1]/div/div[4]/div[1]/span")
 	private WebElement effectiveDate;
 	
+	@FindBy(xpath="//*[@id='_content_uhcm_home_my-plans_benefits-and-coverage-page_jcr_content_overview_needhelp_tfnParplansource_teaser']/div/section/div/div[1]/div/h2")
+	private WebElement NeedHelpHeader;
+	
+	@FindBy(xpath="//*[@id='_content_uhcm_home_my-plans_benefits-and-coverage-page_jcr_content_overview_needhelp_tfnParplansource_teaser']/div/section/div/div[3]/div/p")
+	private WebElement Contactussection;
+	
+	@FindBy(xpath = "//span[contains(.,'keyboard_arrow_down')]")
+	private WebElement disclaimersLink;
 	
 	
+	
+	public static final String disclaimertextarea_xpath ="//*[@id='collapseDisclaimer']";
 	
 
-
-	public BenefitsAndCoveragePage(WebDriver driver) {
+        public BenefitsAndCoveragePage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
 		String fileName = CommonConstants.BENEFITS_AND_COVERAGE_PAGE_DATA;
@@ -61,16 +72,16 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 	public JSONObject getExpectedData(Map<String, JSONObject> expectedDataMap) {
 
 		/*get PHR expected data*/
-		JSONObject benefitsExpectedJson = expectedDataMap.get(CommonConstants.BENEFITS_AND_COVERAGE_PAGE_DATA);
+		JSONObject benefitsExpectedJson = expectedDataMap.get(CommonConstants.BENEFITS_AND_COVERAGE);
 		JSONObject commonExpectedJson = expectedDataMap.get(CommonConstants.COMMON);
-		JSONObject globalExpectedJson = expectedDataMap.get(CommonConstants.GLOBAL);
-		benefitsExpectedJson = CommonUtility.mergeJson(benefitsExpectedJson, globalExpectedJson);
+		//JSONObject globalExpectedJson = expectedDataMap.get(CommonConstants.GLOBAL);
 		benefitsExpectedJson = CommonUtility.mergeJson(benefitsExpectedJson, commonExpectedJson);
+		//benefitsExpectedJson = CommonUtility.mergeJson(benefitsExpectedJson, commonExpectedJson);
 
 		return benefitsExpectedJson;
 
 	}
-		
+	
 	public void validateFieldsOnBenefitsAndCoveragePage(){
 		
 		try {
@@ -132,6 +143,77 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 		
 	}
 	
+	
+public void validateNeedhelpheader(){
+		
+		try {
+			validate(NeedHelpHeader);
+			validate(disclaimersLink);
+		    System.out.println("text"+ disclaimersLink.getText());
+		} catch (Exception e) {
+			System.out.println("Elements is not found ...");
+		}
+	}
+
+public boolean validatecontactussection()
+{
+	try{
+	if(Contactussection.getText().contains("See more ways to contact us")){
+	System.out.println("contactus section is coming ");
+	}
+	else
+	{
+	System.out.println("Contactussection.getText() >>>>>>   "+Contactussection.getText());
+	}
+	}
+	catch(Exception e){
+	return false;
+	}
+	return true;
+	}
+
+public void clickOnDisclaimers(JSONObject benefitsandcoverageExectedJson) {
+	// TODO Auto-generated method stub
+	
+	disclaimersLink.click();
+	//Thread.sleep(15000);
+	String finalPath;
+	String table_data;
+    
+	//validate(disclaimertextarea_xpath);
+	try {
+	finalPath = disclaimertextarea_xpath+"/p[1]";  
+	table_data = driver.findElement(By.xpath(finalPath)).getText();
+	System.out.println(table_data);
+	Assert.assertEquals(benefitsandcoverageExectedJson
+			.get("1stline"), table_data);
+	// to validate amount Billed
+	finalPath = disclaimertextarea_xpath+"/p[2]";
+	table_data = driver.findElement(By.xpath(finalPath)).getText();
+	System.out.println(table_data);
+	Assert.assertEquals(benefitsandcoverageExectedJson
+			.get("2ndline"), table_data);
+	// to validate amount Paid
+	//finalPath = disclaimertextarea_xpath+"/p[3]";
+	//table_data = driver.findElement(By.xpath(finalPath)).getText();
+	//System.out.println(table_data);
+	//Assert.assertEquals(benefitsandcoverageExectedJson
+			//.get("3rdline"), table_data);
+	// to validate paid Date
+	//finalPath = disclaimertextarea_xpath+"/p[4]";
+	//table_data = driver.findElement(By.xpath(finalPath)).getText();
+	//System.out.println(table_data);
+	//Assert.assertEquals(benefitsandcoverageExectedJson
+			//.get("4thline"), table_data);
+	}
+catch (JSONException e) {
+	e.printStackTrace();
+}
+
+}
+}
+
+
 
 	
-}
+

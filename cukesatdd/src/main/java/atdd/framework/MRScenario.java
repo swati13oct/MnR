@@ -906,6 +906,13 @@ public class MRScenario {
       */
 	public WebDriver getWebDriver() {
 
+		
+		//    !!!!! ATTENTION   !!!!!
+		///If you're changing this code to get a browser to work the you're doing it wrong
+		//You should be able to configure a browser in whatever config.preoperties file
+		// you're using.   You shouldn't have to change code.
+		
+		
         //Is system propery exists defining JENKINS_BROWSER, we're running in JENKINS and
 		//will prefer those browser properties.
 		String browser = (null == System.getProperty(CommonConstants.JENKINS_BROWSER)
@@ -959,7 +966,7 @@ public class MRScenario {
 				DesiredCapabilities caps = new DesiredCapabilities();
 				caps.setCapability(PhantomJSDriverService.PHANTOMJS_EXECUTABLE_PATH_PROPERTY, pathToBinary);
 				//from Jarvis
-				caps.setCapability(PhantomJSDriverService.PHANTOMJS_PAGE_SETTINGS_PREFIX + "userAgent", agent);
+				//caps.setCapability(PhantomJSDriverService.PHANTOMJS_PAGE_SETTINGS_PREFIX + "userAgent", agent);
 				caps.setJavascriptEnabled(true);
 				caps.setCapability(PhantomJSDriverService.PHANTOMJS_CLI_ARGS,
 						new String[] { "--web-security=no", "--ignore-ssl-errors=yes", "--ssl-protocol=any" });
