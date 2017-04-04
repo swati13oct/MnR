@@ -773,8 +773,36 @@ Examples:
     Then the user view benefits and coverage in UMS site
     And the user validates the content on benefits and coverage page
     And the user validates Needhelp header
-    And the user validates contactus section
 
+   Examples: 
+      | planType | memberType| copayCategory |
+      | MAPD     | Group     |     NON LIS   |
+
+@contactussection
+    Scenario Outline: Verify Need Help section is in place on Benefits and Coverage pageR
+    Given registered UHC with following details for plan benefits and coverage flow in UMS site
+      | Plan Type      | <planType>  |
+      | Member Type     | <memberType>|
+      | Copay Category | <copayCategory>|
+    When the user view forms and resources in UMS site
+    Then the user view benefits and coverage in UMS site     
+    And the user validates contactus section
+    
+    Examples: 
+      | planType | memberType| copayCategory |
+      | MAPD     | Group     |     NON LIS   |
+      
+@disclaimersection
+    Scenario Outline: Verify Need Help section is in place on Benefits and Coverage page
+    Given registered UHC with following details for plan benefits and coverage flow in UMS site
+      | Plan Type      | <planType>  |
+      | Member Type     | <memberType>|
+      | Copay Category | <copayCategory>|
+    When the user view forms and resources in UMS site
+    Then the user view benefits and coverage in UMS site
+    And the user validates Needhelp header and disclaimer header
+    
+    
     Examples: 
       | planType | memberType| copayCategory |
       | MAPD     | Group     |     NON LIS   |
