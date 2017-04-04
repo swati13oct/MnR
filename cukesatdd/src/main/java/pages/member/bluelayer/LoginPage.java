@@ -72,8 +72,8 @@ public class LoginPage extends UhcDriver {
 
 	public Object loginWith(String username, String password, String category) {
 		//driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
-		WebElement loginInEle= this.driver.findElement(By.id("fd_memberSignInButton"));
-		loginInEle.click();
+		/*WebElement loginInEle= this.driver.findElement(By.id("fd_memberSignInButton"));
+		loginInEle.click();*/
 		sendkeys(userNameField, username);
 		sendkeys(passwordField, password);
 		signInButton.click();
@@ -88,13 +88,13 @@ public class LoginPage extends UhcDriver {
 
 			while (!isAlertPresent());
 		}
-		if ( MRScenario.environment.equals("team-c") || MRScenario.environment.equals("team-b")) {
+		/*if ( MRScenario.environment.equals("team-c") || MRScenario.environment.equals("team-b")) {
 			
 			Alert alert = driver.switchTo().alert();
 	        alert.accept();
 	        Alert alert1 = driver.switchTo().alert();
 	        alert1.accept();
-	        }
+	        }*/
 		
 		try {
 			Thread.sleep(10000);

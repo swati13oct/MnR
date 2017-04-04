@@ -974,6 +974,7 @@ public class MRScenario {
 				FirefoxProfile firefoxProfile = new FirefoxProfile();
 				webDriver = new FirefoxDriver(ffBinary, firefoxProfile);
 				webDriver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
+				webDriver.manage().window().maximize();
 			} else if (browser.equalsIgnoreCase(CommonConstants.CHROME_BROWSER)) {
 				Map<String, Object> chromeOptions = new HashMap<String, Object>();
 				chromeOptions.put("binary", pathToBinary);
