@@ -173,7 +173,7 @@ try {
 			e.printStackTrace();
 		}
 	}
-	}
+	
 	
 	@Then("^the user validate multiple language dropdown menu in UMS site$")
 	public void user_views_multiple_language_dropdown_result_ums() {
@@ -203,7 +203,7 @@ try {
 			e.printStackTrace();
 		}
 	}
-	}
+	
 	
 	@Then("^the user validates the PRPN search result and red balloon marker available in UMS site$")
 	public void user_views_prpn_search_result_ballon_marker_available_ums() {
@@ -226,7 +226,7 @@ try {
 			e.printStackTrace();
 		}
 	}
-	}
+	
 	
 	@Then("^the user validate ninty days filter available in UMS site$")
 	public void user_views_ninty_days_available_result_ums() {
@@ -333,7 +333,7 @@ try {
 			e.printStackTrace();
 		}
 	}
-	}
+	
 	
 	@Then("^the user validates Search checkbox displayed dynamically related to the pharmacy network$")
 	public void validates_Pharmacy_Network_Displayed_Dynamically_UMS(){
