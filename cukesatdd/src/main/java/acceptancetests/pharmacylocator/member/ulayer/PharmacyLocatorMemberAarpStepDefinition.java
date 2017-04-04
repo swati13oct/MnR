@@ -369,10 +369,23 @@ public class PharmacyLocatorMemberAarpStepDefinition {
 	
 	@And("^the user validates the PRPN widget available in AARP site$")
 	public void user_views_prpn_widget_available_aarp() {
-		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario()
+		/*AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario()
 				.getBean(PageConstants.ACCOUNT_HOME_PAGE);
 		PharmacySearchPage pharmacySearchPage = accountHomePage
-				.navigateToPrpnWidgetResult();		
+				.navigateToPrpnWidgetResult();	*/
+try {
+			
+			JSONObject actual=(JSONObject) loginScenario.getBean(PlanBenefitsAndCoverageCommonConstants.PHARMACYSEARCH_ACTUAL);
+			
+			JSONObject expected=(JSONObject) loginScenario.getBean(PlanBenefitsAndCoverageCommonConstants.PHARMACYSEARCH_EXPECTED);
+			
+			if(actual!=null && expected !=null){
+				JSONAssert.assertEquals(expected, actual, true);
+			}			
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 	
 	@Then("^the user validates the content on pharmacy search page$")
