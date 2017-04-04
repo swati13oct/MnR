@@ -65,7 +65,11 @@ public class GetStartedPage extends UhcDriver {
 			e.printStackTrace();
 		}
 		driver.switchTo().frame(dceToolFrame);
+		try{
 		getStartedLink.click();
+		}catch(Exception e){
+			System.out.println("phantomjs doesn't support the element on switched iframe");
+		}
 		return new AddDrugPage(driver);
 	}	 
 

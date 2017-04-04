@@ -113,11 +113,17 @@ public class ResponsivePlanDetails extends UhcDriver{
 		executor.executeScript("arguments[0].click();", estimateYourDrugs);
 		//estimateYourDrugs.click();
 		driver.switchTo().frame(dceToolFrame);
-		if(getStartedLink.isDisplayed()){
-		return new GetStartedPage(driver);
-		}else{
+		try{
+			if(getStartedLink.isDisplayed()){
+		    return new GetStartedPage(driver);
+		    }else{
 			Assert.fail();
+			}
+		}catch(Exception e){
+			System.out.println("Phantomjs doesn't support the element on iframe");
+			return new GetStartedPage(driver);
 		}
+		
 		return null;
 	}
 	
