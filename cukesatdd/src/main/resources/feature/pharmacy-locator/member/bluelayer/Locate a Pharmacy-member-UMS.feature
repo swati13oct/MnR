@@ -247,7 +247,7 @@ Then the user validates the PRPN search result and red balloon marker available 
 
 Examples:
 |plantype    |memberType    | 
-|PDP        |Group   |
+|MAPD        |Group   |
 
 @bluePharmacysearchnonaep
 Scenario Outline: Verify Pharmacy Locator Search page in UMS site
