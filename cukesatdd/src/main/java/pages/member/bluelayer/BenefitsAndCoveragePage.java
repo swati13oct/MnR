@@ -54,6 +54,9 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 	
 	@FindBy(xpath = "//span[contains(.,'keyboard_arrow_down')]")
 	private WebElement disclaimersLink;
+
+        @FindBy(xpath = "html/body/div[4]/div[2]/section/div/div/div/h2")
+	private WebElement planBenefitsDocuments;
 	
 	
 	
@@ -150,6 +153,15 @@ public void validateNeedhelpheader(){
 			validate(NeedHelpHeader);
 			validate(disclaimersLink);
 		    System.out.println("text"+ disclaimersLink.getText());
+		} catch (Exception e) {
+			System.out.println("Elements is not found ...");
+		}
+	}
+
+	public void PlanDocumentssection() {
+
+		try {
+			validate(planBenefitsDocuments);
 		} catch (Exception e) {
 			System.out.println("Elements is not found ...");
 		}

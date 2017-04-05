@@ -80,7 +80,10 @@
 "disclaimerheader":{
 "identifier" :"xpath",
 "elementName" :"//span[contains(.,'keyboard_arrow_down')]"
+},
+"planDocumentSection":{
+"identifier":"xpath", 
+"elementName":"html/body/div[4]/div[2]/section"
 }
-
 }
 }

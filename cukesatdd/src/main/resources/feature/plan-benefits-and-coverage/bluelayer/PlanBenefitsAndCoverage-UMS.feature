@@ -806,3 +806,19 @@ Examples:
     Examples: 
       | planType | memberType| copayCategory |
       | MAPD     | Group     |     NON LIS   |
+
+@plandocument
+    Scenario Outline: Plan Documents section is in place on Benefits and Coverage page
+    Given registered UHC with following details for plan benefits and coverage flow in UMS site
+      | Plan Type      | <planType>  |
+      | Member Type     | <memberType>|
+      | Copay Category | <copayCategory>|
+    When the user view forms and resources in UMS site
+    Then the user view benefits and coverage in UMS site
+    And the user validates the content on benefits and coverage page
+    And the user validates Plan Documents section
+    
+    Examples: 
+      | planType | memberType| copayCategory |
+      | MAPD     | Group     |     NON LIS   |
+      ##member used :q1_apr_grp_015

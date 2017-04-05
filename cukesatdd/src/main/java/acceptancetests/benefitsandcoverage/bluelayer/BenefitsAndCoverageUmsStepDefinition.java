@@ -730,10 +730,11 @@ public class BenefitsAndCoverageUmsStepDefinition {
 		FormsandresourcesPage formsAndResourcesPage = accountHomePage.navigateTosortingsearchlinkUmsPage();
 	}
 
-	
-
-	
-
+	@Then("^the user validates Plan Documents section")
+	public void validateContentOnBenefitsAndCoveragePage1() {
+		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario().getBean(PageConstants.BENEFITS_AND_COVERAGE_PAGE);
+		benefitsCoveragePage.PlanDocumentssection();
+	}
 
 }
 	
