@@ -335,9 +335,9 @@ public class AccountHomePage extends UhcDriver {
 	}
 	
 	public PharmacySearchPage navigateToPharmacyLocator() {
-		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+		driver.manage().timeouts().implicitlyWait(400, TimeUnit.SECONDS);
 		driver.navigate().to("https://member.team-a-aarpmedicareplans.uhc.com/content/aarpm/home/pharmacy_search.html#/Pharmacy-Search-English");
-
+		driver.manage().timeouts().implicitlyWait(400, TimeUnit.SECONDS);
 		/*pharmacyLocator.click();
 		if (driver.getTitle().equalsIgnoreCase(
 				"AARP Medicare Plans | Pharmacy Directory")) {
@@ -701,7 +701,7 @@ public class AccountHomePage extends UhcDriver {
 	}
 
 	public PharmacySearchPage navigateToshowOnMapResult() {
-		driver.manage().timeouts().implicitlyWait(50, TimeUnit.SECONDS);
+		driver.manage().timeouts().implicitlyWait(400, TimeUnit.SECONDS);
 		showonmapLink.click();
 		return null;
 	}
