@@ -388,6 +388,14 @@ try {
 		}
 	}
 	
+	@And("^the user validate filter and tooltip is available in AARP site$")
+	public void user_views_filter_and_tooltip_available_aarp() {
+		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario()
+				.getBean(PageConstants.ACCOUNT_HOME_PAGE);
+		PharmacySearchPage pharmacySearchPage = accountHomePage
+				.navigateToFilterAndTooltipResult();		
+	}
+	
 	@Then("^the user validates the content on pharmacy search page$")
 	public void views_pharmacy_search_page_aarp() {
 		try {

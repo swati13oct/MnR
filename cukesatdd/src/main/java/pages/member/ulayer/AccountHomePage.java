@@ -728,7 +728,13 @@ public class AccountHomePage extends UhcDriver {
 		return null;
 	}
 	
-
+	public PharmacySearchPage navigateToFilterAndTooltipResult() {
+		driver.manage().timeouts().implicitlyWait(40, TimeUnit.SECONDS);
+		filterLink.click();
+		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+		return null;
+	}
+	
 
 
 }
