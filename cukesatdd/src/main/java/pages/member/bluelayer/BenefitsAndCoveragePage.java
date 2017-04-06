@@ -206,17 +206,17 @@ public void clickOnDisclaimers(JSONObject benefitsandcoverageExectedJson) {
 	Assert.assertEquals(benefitsandcoverageExectedJson
 			.get("2ndline"), table_data);
 	// to validate amount Paid
-	//finalPath = disclaimertextarea_xpath+"/p[3]";
-	//table_data = driver.findElement(By.xpath(finalPath)).getText();
-	//System.out.println(table_data);
-	//Assert.assertEquals(benefitsandcoverageExectedJson
-			//.get("3rdline"), table_data);
+	finalPath = disclaimertextarea_xpath+"/p[3]";
+	table_data = driver.findElement(By.xpath(finalPath)).getText();
+	System.out.println(table_data);
+	Assert.assertEquals(benefitsandcoverageExectedJson
+			.get("3rdline"), table_data);
 	// to validate paid Date
-	//finalPath = disclaimertextarea_xpath+"/p[4]";
-	//table_data = driver.findElement(By.xpath(finalPath)).getText();
-	//System.out.println(table_data);
-	//Assert.assertEquals(benefitsandcoverageExectedJson
-			//.get("4thline"), table_data);
+	finalPath = disclaimertextarea_xpath+"/p[4]";
+	table_data = driver.findElement(By.xpath(finalPath)).getText();
+	System.out.println(table_data);
+	Assert.assertEquals(benefitsandcoverageExectedJson
+			.get("4thline"), table_data);
 	}
 catch (JSONException e) {
 	e.printStackTrace();

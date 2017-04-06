@@ -599,6 +599,12 @@ public class BenefitsAndCoverageUmsStepDefinition {
 		benefitsCoveragePage.validateNeedhelpheader();
      }
 	
+	@Then("^the user validates Plan Documents section")
+	public void validateContentOnBenefitsAndCoveragePage1() {
+		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario().getBean(PageConstants.BENEFITS_AND_COVERAGE_PAGE);
+		benefitsCoveragePage.PlanDocumentssection();
+	}
+	
 	@Then("^the user validates the content on benefits and coverage page")
 	public void validatecontentonbnc() {
 		try {
@@ -730,11 +736,7 @@ public class BenefitsAndCoverageUmsStepDefinition {
 		FormsandresourcesPage formsAndResourcesPage = accountHomePage.navigateTosortingsearchlinkUmsPage();
 	}
 
-	@Then("^the user validates Plan Documents section")
-	public void validateContentOnBenefitsAndCoveragePage1() {
-		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario().getBean(PageConstants.BENEFITS_AND_COVERAGE_PAGE);
-		benefitsCoveragePage.PlanDocumentssection();
-	}
+	
 
 }
 	
