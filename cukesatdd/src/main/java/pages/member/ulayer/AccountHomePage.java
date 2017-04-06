@@ -694,9 +694,9 @@ public class AccountHomePage extends UhcDriver {
 	}
 
 	public PharmacySearchPage navigateToviewResultPdf() {
-		driver.manage().timeouts().implicitlyWait(50, TimeUnit.SECONDS);
+		driver.manage().timeouts().implicitlyWait(400, TimeUnit.SECONDS);
 		driver.findElement(By.linkText("VIEW RESULTS AS PDF")).click();
-		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+		driver.manage().timeouts().implicitlyWait(400, TimeUnit.SECONDS);
 		return null;
 	}
 
