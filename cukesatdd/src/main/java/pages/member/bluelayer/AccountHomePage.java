@@ -291,8 +291,9 @@ public class AccountHomePage extends UhcDriver {
 	}
 
 	public PharmacySearchPage navigateToPharmacyLocator() {
-		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+		driver.manage().timeouts().implicitlyWait(300, TimeUnit.SECONDS);
 		driver.navigate().to("https://member.team-a-uhcmedicaresolutions.uhc.com/content/uhcm/home/pharmacy_search.html.html#/Pharmacy-Search-English");
+		driver.manage().timeouts().implicitlyWait(400, TimeUnit.SECONDS);
 		/*pharmacyLocator.click();
 		CommonUtility.waitForPageLoad(driver, pharmacyLocatorHeading, CommonConstants.TIMEOUT_30);
 		if (getTitle().equalsIgnoreCase(
@@ -693,7 +694,7 @@ public FormsandresourcesPage navigateToMydocumentUmsPage() {
 	}
 	
 	public PharmacySearchPage navigateToMoreInformation() {
-		driver.manage().timeouts().implicitlyWait(40, TimeUnit.SECONDS);
+		driver.manage().timeouts().implicitlyWait(400, TimeUnit.SECONDS);
 		//System.out.println(moreinformationLink.isEnabled());
 		moreinformationLink.click();
 		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
