@@ -15,7 +15,7 @@ import cucumber.junit.Cucumber;
 @Cucumber.Options(glue = { "atdd.framework","acceptancetests.formsandresources.bluelayer" }, 
 		features = { "feature/forms-and-resources/bluelayer" }, 
 		format = {
-		"pretty", "html:reports/test-report" }, tags ={"@appoint"})
+				"pretty", "html:reports/test-report", "json:target/cucumber.json" }, tags ={"@appoint"})
 public class RunMRAtddTestFormsandResources {
 
 }
