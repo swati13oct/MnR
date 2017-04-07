@@ -1,4 +1,4 @@
-@fixedTestCaseTest
+@fixedTestCaseTest1
 Feature: To test DCE to VPP plan Summary flow  in UMS site
 Scenario Outline: To Verify the drugs and plan summary for non AEP period
 Given the user is on the UHC medicare solutions site landing page

@@ -1,146 +1,138 @@
 #!groovy
-import groovy.json.JsonSlurper
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.util.List;
-import java.util.Map;
-import java.nio.file.Paths; 
-node('docker-atdd-slave') {
-	currentBuild.result="SUCCESS"
-	def GIT_BRANCH="${env.BRANCH_NAME}"
-	def MAVEN_VERSION="${env.MAVEN_VERSION}"
-	def MAVEN_PATH="/tools/maven/apache-maven-${MAVEN_VERSION}/bin/mvn"
-	def GIT_URL="https://codehub.optum.com/consumer-portals/mratdd.git"
-	String BUILD_URL= "${env.BUILD_URL}"
-	def PIPELINE_VERSION="1.0.${BUILD_NUMBER}-${GIT_BRANCH}"
-	currentBuild.displayName = "${PIPELINE_VERSION}"
-	String teamDL =  "";
-	if(GIT_BRANCH=="upgradedATDD" || GIT_BRANCH=="theATeam")
-	{
-		teamDL = "UCP_TheATeam_DL@ds.uhc.com"
-	}
-	int totalCount = 0;
-	int totalPassCount = 0;
-	int totalfailedCount = 0;
-	int totalSkippedCount = 0;
-	int totalPendingCount = 0;
-	int totalUndefinedCount = 0;
-	String errorMsg = "";
+//original author: Brian Wyka
+//modified for M&R by Olga Mackevica
 
-	try {
-		stage('Checkout') {
-			git branch: "${GIT_BRANCH}", credentialsId: 'c35e98d4-5b20-4607-854e-ddc6f0fd8ba4', url:"${GIT_URL}"
+// Global Variables
+def pom, fullGitCommit, pipelineVersion
+def credentialsId = 'c35e98d4-5b20-4607-854e-ddc6f0fd8ba4'
+def codeHubRepoUrl = 'https://codehub.optum.com/consumer-portals/mratdd.git'
+def gitBranch = "${env.BRANCH_NAME}"
+def mvnParams = "-Dgit.branch=${gitBranch} -Dbuild.number=${env.BUILD_NUMBER} -Dbuild.time=${env.BUILD_TIMESTAMP} -Dgit.url=${codeHubRepoUrl}"
+def pomLocation = "cukesatdd/pom.xml"
+/**
+ * Run with java and maven version environment setup
+ *
+ * @param closure - the closure to execute
+ */
+def withJavaAndMaven(Closure closure) {
+    withEnv(['JAVA_VERSION=1.7.0', "JAVA_HOME=${tool 'java'}", "PATH+MAVEN=${tool 'Maven'}/bin:${env.JAVA_HOME}/bin"]) {
+        closure()
+    }
+}
+
+/**
+ * Run a closure on the docker-maven-slave with
+ * java and maven environment configured
+ *
+ * @param closure - the closure to execute
+ */
+def withDockerMavenSlave(Closure closure) {
+    withJavaAndMaven {
+            unstash 'source'
+            closure()
+    }
+}
+
+/**
+ * Run a closure with the given credentials
+ *
+ * @param credentialsId - the credentials id
+ * @param usernameVariable - the username variable
+ * @param passwordVariable - the password variable
+ * @param closure - the closure to execute
+ */
+def withUsernamePasswordCredentials(credentialsId, usernameVariable, passwordVariable, Closure closure) {
+    withCredentials([usernamePassword(credentialsId: credentialsId, usernameVariable: usernameVariable, passwordVariable: passwordVariable)]) {
+        closure()
+    }
+}
+
+/**
+ * Perform a git checkout for the respective branch
+ *
+ * @param branch - the branch to checkout
+ * @param credentialsId - the credentials to authenticate
+ * @param codeHubRepUrl - the CodeHub repository URL
+ */
+def performGitCheckout(branch, credentialsId, codeHubRepUrl) {
+	git branch: branch, credentialsId: credentialsId, url: codeHubRepUrl
+}
+/**
+* If this is release or hotfix branch, then replace pipeline version with version from branch name: last 3 digits in yy-majorVersion-hotfixversion format
+*
+* @param gitBranch - git branch
+* return String 
+*/
+def updatePipelineVersion(String gitBranch, String pipelineVersion){
+   def matcher = gitBranch ==~ /(RELEASE|HOTFIX)-\d{1,2}-\d{1,2}-\d{1,2}/
+   echo "updatePipelineVersion matcher: ${matcher}"
+   if(matcher){
+		echo "Branch name matched RELEASE|HOTFIX-yy-d{1,2}-d{1,2}-d{1,2} name pattern pattern."
+		def version = gitBranch.replaceAll(/(RELEASE|HOTFIX)-/,'')
+		version = version.replaceAll(/\-/,".")
+		pipelineVersion = "${version}-${env.BUILD_NUMBER}"
+   } else if (gitBranch=="develop"){
+	   echo "Branch name is develop. Use global Jenkins variable UCP_DEVELOP_RELEASE_VERSION to set version to ${UCP_DEVELOP_RELEASE_VERSION}"
+	   pipelineVersion = "${UCP_DEVELOP_RELEASE_VERSION}-d{env.BUILD_NUMBER}"
+   }
+	echo "New version: ${pipelineVersion}"
+	return pipelineVersion
+}
+
+/**
+*Write build properties files to be used in subsequent jobs
+*
+* @param gitBranch
+* @codeHubRepoUrl
+* @gitBranch
+*
+*/
+def writeBuildPropertiesFile(String gitBranch, String codeHubRepoUrl, String pipelineVersion){
+	writeFile file: 'build.properties', text: "GIT_BRANCH=${gitBranch}\nSOURCE_BUILD_NUMBER=${env.BUILD_NUMBER}\nSOURCE_GIT_URL=${codeHubRepoUrl}\nSOURCE_JOB_NAME=${env.JOB_NAME}\nSOURCE_JOB_URL=${env.JOB_URL}\nPIPELINE_VERSION=${pipelineVersion}"
+		
+	archiveArtifacts artifacts: 'build.properties', fingerprint: true
+}
+	
+// Pipeline
+node('docker-maven-slave') {
+
+    stage('GiT Clone') {
+		
+        // Checkout source code from CodeHub branch
+        performGitCheckout(gitBranch, credentialsId, codeHubRepoUrl)
+        stash name: 'source'
+
+        // Get POM version and set it as pipeline version
+        pom = readMavenPom file: "${pomLocation}"
+        fullGitCommit = sh(returnStdout: true, script: 'git rev-parse HEAD').trim()
+        pipelineVersion = "${pom.version}-${env.BUILD_NUMBER}"
+		pipelineVersion = updatePipelineVersion(gitBranch, pipelineVersion)
+		writeBuildPropertiesFile(gitBranch, codeHubRepoUrl, pipelineVersion)		
+
+        // Set build display name and description
+		currentBuild.displayName = "#${env.BUILD_NUMBER} - ${pipelineVersion}"
+        currentBuild.description = "Git commit: ${fullGitCommit.take(6)}"
+
+        echo "Building version: ${env.BUILD_NUMBER} from commit: ${fullGitCommit}"
+    }
+
+    stage ('Build') {
+        echo "Building source code"
+
+        withDockerMavenSlave {
+            unstash 'source'
+            sh "mvn -f ${pomLocation} -U -B clean compile ${mvnParams}"
+        }
+
+        echo "Build complete"
+		archiveArtifacts artifacts: '**/target/*.war , **/target/*.ear, **/build/*.zip, **/build_info.txt, **/build.properties', fingerprint: true
+    }
+    echo "Build complete"
+	
+	stage('Trigger Downstream TestSuite'){
+		//trigger tests
+		if("${env.BRANCH_NAME}" == "upgradedATDD"){
+            build job: '/atdd/upgradedATDD/', parameters: [string(name: 'BRANCH_NAME', value: "${env.BRANCH_NAME}"), string(name: 'RUNNER_NAME', value: 'RunMRATDDFixedTests'), string(name: 'ATDD_TAGS', value: '@fixedTestCaseTest'), string(name: 'ENVIRONMENT', value: 'ci'), string(name: 'WEBDRIVER_HOST', value: 'headless')], wait:false
 		}
-
-		stage('Build') {
-			// Run the maven build
-			sauce('bbbc3afb-4712-4005-8d1e-8392783ec4dc') {
-				sh "${MAVEN_PATH} -f cukesatdd/pom.xml -Dbuild.time=${BUILD_TIMESTAMP} -Dbuild.number=${PIPELINE_VERSION} -Dgit.url=${GIT_URL} -Dgit.branch=${GIT_BRANCH} -U clean install test -Dtest=${RUNNER_NAME} -DfailIfNoTests=false -Denvironment=${ENVIRONMENT} -Dwebdriverhost=${WEBDRIVER_HOST} -Dphantomjs=${NODEJS_HOME}/bin/phantomjs -Dcucumber.options='--tags ${ATDD_TAGS} --plugin json:target/cucumber.json --plugin html:target/cucumber-${GIT_BRANCH}'"
-			}
-		}
-
 	}
-	catch (err) {
-		currentBuild.result = "FAILURE"
-				println "BUILD FAILED"
-	}
-	finally {
-		try{
-			stage('Archive Artifacts'){
-				archiveArtifacts artifacts: '**/*cucumber*.json, **/*cucumber*/*.html,**/*cucumber*.pdf,', fingerprint: true
-			}
-			stage('Cucumber Report Publisher'){
-				step([$class: 'CucumberReportPublisher', buildStatus: 'FAILURE', failedFeaturesNumber: 1, failedScenariosNumber: 1, failedStepsNumber: 1, fileExcludePattern: '', fileIncludePattern: '**/*.json', jenkinsBasePath: '', jsonReportDirectory: '**/${BUILD_NUMBER}/artifact/cukesatdd/target/', parallelTesting: false, pendingStepsNumber: 1, skippedStepsNumber: 1, trendsLimit: 0, undefinedStepsNumber: 1])
-			}
-			if( currentBuild.result == "FAILURE"){
-
-				stage('Results'){
-          					String jsonPath = BUILD_URL+"artifact/cukesatdd/target/cucumber.json"
-                    URL url = new URL(jsonPath);
-                    JsonSlurper jsonSlurper = new JsonSlurper();
-                    Object results = jsonSlurper.parse(url);
-                     for(result in results)
-                     {
-                        if(null !=  result && null != result.elements  &&  null !=result.elements.get(0))
-                        {
-                            for(element in result.elements)
-                            {    
-                                if(null != element && (null != element.steps))
-                                {
-                                    for(step in element.steps)
-                                    {
-                                        if(null != element && (null != element.steps))
-                                        {
-                                            def status = step.result.status;
-                                            if(status=="passed"){
-                                                totalPassCount++;
-                                            }
-                                            if(status=="failed"){
-                                                totalfailedCount++;
-                                            }
-                                            if(status=="skipped"){
-                                                totalSkippedCount++;
-                                            }
-                                            if(status=="pending"){
-                                                totalPendingCount++;
-                                            }
-                                            if(status=="undefined"){
-                                                totalUndefinedCount++;
-                                            }
-                                        }
-                                        else{
-                                            errorMsg = "Error while generating mail reports.\n"  
-                                        }
-                                    } 
-                                }
-                                else{
-                                    errorMsg = "Error while generating mail reports.\n"  
-                                }
-                            }
-                        }
-                        else{
-                            errorMsg = "Error while generating mail reports.\n"  
-                        }
-                    }
-                    totalCount=totalPassCount+totalfailedCount+totalSkippedCount+totalPendingCount+totalUndefinedCount;
-                    println "totalPassCount::"+totalPassCount;
-                    println "totalfailedCount::"+totalfailedCount;
-                    println "totalSkippedCount::"+totalSkippedCount;
-                    println "totalPendingCount::"+totalPendingCount;
-                    println "totalUndefinedCount::"+totalUndefinedCount;
-                    println "totalCount::"+totalCount;
-				}
-
-				stage('Notify'){
-					emailext attachmentsPattern: '**/*cucumber*.pdf', 
-					body: '''<h2>ATDD Test-Suite Run completed with following results:</h2><br><b>Project Name: MRATDD_'''+PIPELINE_VERSION+'''</b>
-					'''+errorMsg+'''<p>
-				<b>Total Steps:</b> '''+totalCount+'''<br>
-				<b>Total Steps Passed:</b> '''+totalPassCount+'''<br>
-				<b>Total Steps Failed:</b> '''+totalfailedCount+'''<br>
-				<b>Total Steps Skipped:</b> '''+totalSkippedCount+'''<br>
-				<b>Total Steps Pending:</b> '''+totalPendingCount+'''<br>
-				<b>Total Steps undefined:</b> '''+totalUndefinedCount+'''<br>
-				</p>
-
-				<p><em><a href="'''+BUILD_URL+'''cucumber-html-reports/overview-features.html">Click here for the report for  further details</a>.</em></p>
-
-				<p><em>Please see attached reports for further details.</em></p>
-
-				''', subject: 'ATDD RUN Failed::'+PIPELINE_VERSION,
-					to: emailextrecipients([[$class: 'CulpritsRecipientProvider'], [$class: 'DevelopersRecipientProvider'], [$class: 'RequesterRecipientProvider'], [$class: 'UpstreamComitterRecipientProvider']])+";"+teamDL
-
-				}
-			}
-		}
-		catch (err) {
-			throw err
-		}
-
-	}
-
 }
