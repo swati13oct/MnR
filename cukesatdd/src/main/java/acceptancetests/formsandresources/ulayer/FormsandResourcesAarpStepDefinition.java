@@ -21,6 +21,7 @@ import pages.member.ulayer.FormsandresourcesPage;
 import pages.member.ulayer.LoginPage;
 import acceptancetests.atdd.data.CommonConstants;
 import acceptancetests.atdd.data.member.PageConstants;
+import acceptancetests.benefitsandcoverage.data.PlanBenefitsAndCoverageCommonConstants;
 import acceptancetests.formsandresources.data.FnRCommonConstants;
 import acceptancetests.login.data.LoginCommonConstants;
 import acceptancetests.vpp.data.VPPCommonConstants;
