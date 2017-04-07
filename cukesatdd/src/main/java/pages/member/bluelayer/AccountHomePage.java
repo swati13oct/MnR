@@ -175,6 +175,12 @@ public class AccountHomePage extends UhcDriver {
 	
 	@FindBy(xpath = "//*[@id='pharmacySaverPharmacyTooltip']/svg/path")
 	private WebElement tooltipLink;
+	
+	@FindBy(xpath = "//*[@id='phr_widget_7_box']/div[9]/p/a")
+	private WebElement preferdPharmacyBenefitLink;
+	
+	@FindBy(xpath = "//*[@id='_content_campaigns_uhcm_formsresources-main_formsresources-main_jcr_content_par_teaser']/div/div[1]/div[2]/div[1]/div/div[1]/p[3]/a[1]")
+	private WebElement appointRepresentativeLink;
 
 	private PageData myAccountHome;
 
@@ -709,6 +715,19 @@ public FormsandresourcesPage navigateToMydocumentUmsPage() {
 		
 		
 		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+		return null;
+	}
+	
+	public FormsandresourcesPage navigateToPreferedPharmacyBenefit() {
+		preferdPharmacyBenefitLink.click();
+		driver.manage().timeouts().implicitlyWait(400, TimeUnit.SECONDS);
+		return null;
+	}
+
+	public FormsandresourcesPage navigateToAppointRepresentative() {
+		driver.manage().timeouts().implicitlyWait(400, TimeUnit.SECONDS);
+		appointRepresentativeLink.click();
+		driver.manage().timeouts().implicitlyWait(400, TimeUnit.SECONDS);
 		return null;
 	}
 	

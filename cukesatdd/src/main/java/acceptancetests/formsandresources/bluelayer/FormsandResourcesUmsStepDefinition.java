@@ -372,4 +372,20 @@ public class FormsandResourcesUmsStepDefinition {
 			e.printStackTrace();
 		}
 	}
+	
+	@Then("the user view prefered mail service pharmacy benefit in UMS site$")
+	public void views_prefered_pharmacy_benefit_Ums_site() {
+		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario()
+				.getBean(PageConstants.ACCOUNT_HOME_PAGE);
+		FormsandresourcesPage formsAndResourcesPage = accountHomePage
+				.navigateToPreferedPharmacyBenefit();
+	}
+	
+	@Then("the user view how to appoint a representive in UMS site$")
+	public void views_appoint_a_representative_Ums_site() {
+		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario()
+				.getBean(PageConstants.ACCOUNT_HOME_PAGE);
+		FormsandresourcesPage formsAndResourcesPage = accountHomePage
+				.navigateToAppointRepresentative();
+	}
 }

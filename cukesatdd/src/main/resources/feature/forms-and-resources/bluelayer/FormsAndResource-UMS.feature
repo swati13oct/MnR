@@ -67,3 +67,25 @@ Examples:
 #| SSUP		| Group |
 | SSRD		| Group |
 
+@pharmacybenefit
+Scenario Outline: Verify forms and resource content for members in ums site
+Given registered member for forms and resources in UMS Site
+	| Plan Type      |<planType> |
+	| Member Type		 |<memberType> |
+When the user navigates to my personal health record in UMS site
+Then the user view prefered mail service pharmacy benefit in UMS site
+#Then the user validates the content on prefered mail service pharmacy benefit page
+
+Examples:
+| planType | memberType |
+| MAPD	   | Individual |
+
+
+@appoint
+Scenario Outline: Verify benefit summary content for group members in ums site
+Given registered member for forms and resources in UMS Site
+	| Plan Type      |<planType> |
+	| Member Type		 |<memberType> |
+When the user navigates to forms and resources in UMS site
+Then the user view how to appoint a representive in UMS site
+#Then the user validates the content on appoint a representative page
