@@ -176,6 +176,9 @@ public class AccountHomePage extends UhcDriver {
 	@FindBy(xpath = "//*[@id='pharmacySaverPharmacyTooltip']/svg/path")
 	private WebElement tooltipLink;
 	
+	@FindBy(xpath = "//*[@id='healthrecord']/a")
+	private WebElement myHealthRecordLink;
+	
 	@FindBy(xpath = "//*[@id='phr_widget_7_box']/div[9]/p/a")
 	private WebElement preferdPharmacyBenefitLink;
 	
@@ -715,6 +718,12 @@ public FormsandresourcesPage navigateToMydocumentUmsPage() {
 		
 		
 		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+		return null;
+	}
+	
+	public FormsandresourcesPage navigateToMyPersonalHealthrecord() {
+		myHealthRecordLink.click();
+		driver.manage().timeouts().implicitlyWait(400, TimeUnit.SECONDS);
 		return null;
 	}
 	

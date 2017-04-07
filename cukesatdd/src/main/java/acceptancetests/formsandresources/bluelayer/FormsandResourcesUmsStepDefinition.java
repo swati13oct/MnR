@@ -373,6 +373,14 @@ public class FormsandResourcesUmsStepDefinition {
 		}
 	}
 	
+	@When("^the user navigates to my personal health record in UMS site$")
+	public void views_my_personal_health_record_Ums_site() {
+		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario()
+				.getBean(PageConstants.ACCOUNT_HOME_PAGE);
+		FormsandresourcesPage formsAndResourcesPage = accountHomePage
+				.navigateToMyPersonalHealthrecord();
+	}
+	
 	@Then("the user view prefered mail service pharmacy benefit in UMS site$")
 	public void views_prefered_pharmacy_benefit_Ums_site() {
 		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario()
