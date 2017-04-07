@@ -89,3 +89,7 @@ Given registered member for forms and resources in UMS Site
 When the user navigates to forms and resources in UMS site
 Then the user view how to appoint a representive in UMS site
 #Then the user validates the content on appoint a representative page
+
+Examples:
+| planType | memberType |
+| MAPD	   | Individual |
