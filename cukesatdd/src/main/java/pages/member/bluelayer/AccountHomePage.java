@@ -277,12 +277,7 @@ public class AccountHomePage extends UhcDriver {
 
 		formsAndResourcesLink.click();
 
-		if (getTitle().equalsIgnoreCase(
-				"UnitedHealthcare Medicare Solutions | Forms and Resources")) {
-			return new FormsandresourcesPage(driver);
-		} else
-
-			return null;
+		return null;
 
 	}
 
@@ -740,8 +735,4 @@ public FormsandresourcesPage navigateToMydocumentUmsPage() {
 		return null;
 	}
 	
-
-	
-	
-
 }

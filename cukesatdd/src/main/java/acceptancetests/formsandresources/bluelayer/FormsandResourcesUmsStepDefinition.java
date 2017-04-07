@@ -303,7 +303,7 @@ public class FormsandResourcesUmsStepDefinition {
 		FormsandresourcesPage formsAndResourcesPage = accountHomePage.navigateToFormsandResourcePage();
 
 		/* Get expected data */
-		JSONObject formsAndResourcesActualJson = null;
+		/*JSONObject formsAndResourcesActualJson = null;
 		@SuppressWarnings("unchecked")
 		Map<String, JSONObject> expectedDataMap = (Map<String, JSONObject>) getLoginScenario()
 				.getBean(CommonConstants.EXPECTED_DATA_MAP);
@@ -311,10 +311,10 @@ public class FormsandResourcesUmsStepDefinition {
 				.getExpectedData(expectedDataMap);
 		getLoginScenario().saveBean(
 				FnRCommonConstants.FORMS_AND_RESOURCES_EXPECTED,
-				formsAndResourcesExpectedJson);
+				formsAndResourcesExpectedJson);*/
 
 		/* Actual data */
-		if (formsAndResourcesPage != null) {
+		/*if (formsAndResourcesPage != null) {
 			getLoginScenario().saveBean(PageConstants.FORMS_AND_RESOURCES_PAGE,
 					formsAndResourcesPage);
 			Assert.assertTrue(true);
@@ -322,7 +322,7 @@ public class FormsandResourcesUmsStepDefinition {
 		}
 		getLoginScenario().saveBean(
 				FnRCommonConstants.FORMS_AND_RESOURCES_ACTUAL,
-				formsAndResourcesActualJson);
+				formsAndResourcesActualJson);*/
 
 	}
 
