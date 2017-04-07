@@ -93,3 +93,27 @@ Then the user view how to appoint a representive in UMS site
 Examples:
 | planType | memberType |
 | MAPD	   | Individual |
+
+@privacypolicy
+Scenario Outline: Verify benefit summary content for group members in ums site
+Given registered member for forms and resources in UMS Site
+	| Plan Type      |<planType> |
+	| Member Type		 |<memberType> |
+When the user view privacy policy in UMS site
+Then the user validates the content on privacy policy page
+
+Examples:
+| planType | memberType |
+| MAPD	   | Individual |
+
+@noaccordion
+Scenario Outline: Verify benefit summary content for group members in ums site
+Given registered member for forms and resources in UMS Site
+	| Plan Type      |<planType> |
+	| Member Type		 |<memberType> |
+When the user view forms and resources in UMS site
+Then the user validates the content on no accordion page
+
+Examples:
+| planType | memberType |
+| MAPD	   | Individual |

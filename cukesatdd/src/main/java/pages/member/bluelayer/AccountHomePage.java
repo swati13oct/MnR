@@ -184,6 +184,9 @@ public class AccountHomePage extends UhcDriver {
 	
 	@FindBy(xpath = "//*[@id='_content_campaigns_uhcm_formsresources-main_formsresources-main_jcr_content_par_teaser']/div/div[1]/div[2]/div[1]/div/div[1]/p[3]/a[1]")
 	private WebElement appointRepresentativeLink;
+	
+	@FindBy(xpath = "//*[@id='row2link2']/p/a")
+	private WebElement privacypolicyLink;
 
 	private PageData myAccountHome;
 
@@ -731,6 +734,13 @@ public FormsandresourcesPage navigateToMydocumentUmsPage() {
 	public FormsandresourcesPage navigateToAppointRepresentative() {
 		driver.manage().timeouts().implicitlyWait(400, TimeUnit.SECONDS);
 		appointRepresentativeLink.click();
+		driver.manage().timeouts().implicitlyWait(400, TimeUnit.SECONDS);
+		return null;
+	}
+	
+	public FormsandresourcesPage navigateToprivacypolicyUms() {
+		driver.manage().timeouts().implicitlyWait(400, TimeUnit.SECONDS);
+		privacypolicyLink.click();
 		driver.manage().timeouts().implicitlyWait(400, TimeUnit.SECONDS);
 		return null;
 	}
