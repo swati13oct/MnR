@@ -189,6 +189,9 @@ public class AccountHomePage extends UhcDriver {
 	
 	@FindBy(xpath = "//form/fieldset[1]/ul/li[2]/label")
 	private WebElement pharmacyfilterLink;
+	
+	@FindBy(xpath = "//*[@id='row2link2']/p/a")
+	private WebElement privacypolicyLink;
 
 	
 	
@@ -735,6 +738,19 @@ public class AccountHomePage extends UhcDriver {
 		return null;
 	}
 	
+	public FormsandresourcesPage navigateToPrescriptionDrugAarpPage() {
+		driver.manage().timeouts().implicitlyWait(300, TimeUnit.SECONDS);
+		driver.navigate().to("https://member.team-a-aarpmedicareplans.uhc.com/content/aarpm/home/my-plans/forms-and-resources/new-drug-transition-process-pdp.html");
+		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+		return null;
+	}
 
+	public FormsandresourcesPage navigateToPrivacyPolicyAarpPage() {
+		// TODO Auto-generated method stub
+		privacypolicyLink.click();	
+		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+		return null;
+	}
+	
 
 }

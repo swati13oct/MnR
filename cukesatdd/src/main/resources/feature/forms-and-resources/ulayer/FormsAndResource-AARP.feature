@@ -51,3 +51,27 @@ Examples:
 #| PDP      |
 #| MS       |
 #| HIP      |
+
+@drugtransistion
+Scenario Outline:To verify content story in forms and resource in AARP site
+Given registered member for forms and resources in AARP Site
+	| <planType> |
+When the user view forms and resources in AARP site
+Then the user validates prescription drug transistion in AARP site
+
+Examples:
+
+| planType |
+| PDP	   |
+
+@privacypolicy
+Scenario Outline:To verify content story in forms and resource in AARP site
+Given registered member for forms and resources in AARP Site
+	| <planType> |
+When the user view privacy policy in AARP site
+Then the user validates privacy policy in AARP site
+
+Examples:
+
+| planType |
+| PDP	   |

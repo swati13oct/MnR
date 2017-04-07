@@ -81,22 +81,22 @@ public class FormsandResourcesAarpStepDefinition {
 
 		LoginPage loginPage = new LoginPage(wd);
 		AccountHomePage accountHomePage = (AccountHomePage)loginPage.loginWith(userName, pwd);
-		JSONObject accountHomeActualJson = null;
+		//JSONObject accountHomeActualJson = null;
 		 
 		/* Get expected data */
-		Map<String, JSONObject> expectedDataMap = loginScenario
+		/*Map<String, JSONObject> expectedDataMap = loginScenario
 				.getExpectedJson(userName);
 		JSONObject accountHomeExpectedJson = accountHomePage
-				.getExpectedData(expectedDataMap);
+				.getExpectedData(expectedDataMap);*/
 
 		if (accountHomePage != null) {
 			getLoginScenario().saveBean(PageConstants.ACCOUNT_HOME_PAGE,
 					accountHomePage);
-			Assert.assertTrue(true);
-			accountHomeActualJson = accountHomePage.accountHomeJson;
+			/*Assert.assertTrue(true);
+			accountHomeActualJson = accountHomePage.accountHomeJson;*/
 		}
 
-		try {
+		/*try {
 			JSONAssert.assertEquals(accountHomeExpectedJson,
 					accountHomeActualJson, true);
 		} catch (JSONException e) {
@@ -104,7 +104,7 @@ public class FormsandResourcesAarpStepDefinition {
 		}
 
 		getLoginScenario().saveBean(CommonConstants.EXPECTED_DATA_MAP,
-				expectedDataMap);
+				expectedDataMap);*/
 
 	}
 
@@ -116,7 +116,7 @@ public class FormsandResourcesAarpStepDefinition {
 				.navigateToFormsandResourceAarpPage();
 
 		/* Get expected data */
-		JSONObject formsAndResourcesActualJson = null;
+		/*JSONObject formsAndResourcesActualJson = null;
 		@SuppressWarnings("unchecked")
 		Map<String, JSONObject> expectedDataMap = (Map<String, JSONObject>) getLoginScenario()
 				.getBean(CommonConstants.EXPECTED_DATA_MAP);
@@ -124,10 +124,10 @@ public class FormsandResourcesAarpStepDefinition {
 				.getExpectedData(expectedDataMap);
 		getLoginScenario().saveBean(
 				FnRCommonConstants.FORMS_AND_RESOURCES_EXPECTED,
-				formsAndResourcesExpectedJson);
+				formsAndResourcesExpectedJson);*/
 
 		/* Actual data */
-		if (formsAndResourcesPage != null) {
+		/*if (formsAndResourcesPage != null) {
 			getLoginScenario().saveBean(PageConstants.FORMS_AND_RESOURCES_PAGE,
 					formsAndResourcesPage);
 			Assert.assertTrue(true);
@@ -135,7 +135,7 @@ public class FormsandResourcesAarpStepDefinition {
 		}
 		getLoginScenario().saveBean(
 				FnRCommonConstants.FORMS_AND_RESOURCES_ACTUAL,
-				formsAndResourcesActualJson);
+				formsAndResourcesActualJson);*/
 	}
 
 	@Then("^the user validates the plan materials under plan document section$")
@@ -193,13 +193,50 @@ public class FormsandResourcesAarpStepDefinition {
 		formsandresourcesAarpPage.clickOnPDF();
 		formsandresourcesAarpPage.logOut();
 	}
-	@After
+	
+	@Then("^the user validates prescription drug transistion in AARP site$")
+	public void views_drug_transistion_aarp_site() {
+		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario()
+				.getBean(PageConstants.ACCOUNT_HOME_PAGE);
+		FormsandresourcesPage formsAndResourcesPage = accountHomePage
+				.navigateToPrescriptionDrugAarpPage();
+	}
+	
+	@When("^the user view privacy policy in AARP site$")
+	public void views_privacy_policy_aarp_site() {
+		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario()
+				.getBean(PageConstants.ACCOUNT_HOME_PAGE);
+		FormsandresourcesPage formsAndResourcesPage = accountHomePage
+				.navigateToPrivacyPolicyAarpPage();
+	}
+	
+	@Then("^the user validates privacy policy in AARP site$")
+	public void views_privacy_policy_page_aarp() {
+		try {
+			
+			JSONObject actual=(JSONObject) loginScenario.getBean(PlanBenefitsAndCoverageCommonConstants.BENEFITS_AND_COVERAGE_ACTUAL);
+			
+			JSONObject expected=(JSONObject) loginScenario.getBean(PlanBenefitsAndCoverageCommonConstants.BENEFITS_AND_COVERAGE_EXPECTED);
+			
+			if(actual!=null && expected !=null){
+				JSONAssert.assertEquals(expected, actual, true);
+			}			
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+
+	}
+
+	
+	/*@After
 	public void tearDown() {
 
 		WebDriver wd = (WebDriver) getLoginScenario().getBean(
 				CommonConstants.WEBDRIVER);
 		wd.quit();
 		getLoginScenario().flushBeans();
-	}
+	}*/
 
 }
