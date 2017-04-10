@@ -1,12 +1,13 @@
 package atdd.framework;
 
 import java.io.BufferedReader;
-import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.nio.MappedByteBuffer;
 import java.nio.channels.FileChannel;
 import java.nio.charset.Charset;
@@ -25,7 +26,6 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Properties;
 import java.util.Set;
-import java.util.concurrent.TimeUnit;
 
 import javax.naming.Context;
 import javax.naming.Name;
@@ -36,26 +36,16 @@ import javax.naming.directory.InitialDirContext;
 import org.apache.commons.lang3.StringUtils;
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.openqa.selenium.Dimension;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
-import org.openqa.selenium.firefox.FirefoxBinary;
-import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.firefox.FirefoxProfile;
-import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
-import org.openqa.selenium.phantomjs.PhantomJSDriver;
-import org.openqa.selenium.phantomjs.PhantomJSDriverService;
 import org.openqa.selenium.remote.DesiredCapabilities;
+import org.openqa.selenium.remote.RemoteWebDriver;
 import org.springframework.ldap.core.DistinguishedName;
 import org.springframework.stereotype.Component;
 
 import acceptancetests.atdd.data.CommonConstants;
-
-
-import com.gargoylesoftware.htmlunit.BrowserVersion;
-import com.gargoylesoftware.htmlunit.WebClient;
 
 /**
  * 
@@ -85,7 +75,18 @@ public class MRScenario {
 	public static String environment, browser;
 
 	private static final String DIRECTORY = "/src/main/resources/";
+	
 	public static int count = 0;
+	
+	public static final String USERNAME = "pperugu";
+
+	public static final String ACCESS_KEY = "06f50b57-693a-4cd1-aaf9-14046e63942e";
+	
+	//public static final String USERNAME = System.getenv("SAUCE_USERNAME");
+	
+	//public static final String ACCESS_KEY = System.getenv("SAUCE_ACCESS_KEY");
+
+	public static final String URL = "https://" + USERNAME + ":" + ACCESS_KEY+ "@ondemand.saucelabs.com:443/wd/hub";
 
 	public void saveBean(String id, Object object) {
 		scenarioObjectMap.put(id, object);
@@ -127,7 +128,7 @@ public class MRScenario {
 		String line = "";
 		String cvsSplitBy = ",";
 		String defaultSchema = props.get(CommonConstants.DB_SCHEMA);
-        
+
 		try {
 			InputStream memberTypeStream = ClassLoader.class
 					.getResourceAsStream("/database/AMP-Member-Type.csv");
@@ -647,9 +648,6 @@ public class MRScenario {
 
 		Set<String> keySetUms = umsRegistrationDataMap.keySet();
 		for (String umsKey : keySetUms) {
-			if(umsKey.equalsIgnoreCase("q1_feb_grp043")){
-				System.out.println("stop at here 1...........................");
-			}
 			Map<String, JSONObject> umsObjectMap = new HashMap<String, JSONObject>();
 			for (int i = 0; i < CommonConstants.PAGES_BLUELAYER.length; i++) {
 				JSONObject jsonObject = readExpectedJson(umsKey,
@@ -661,7 +659,6 @@ public class MRScenario {
 				}
 			}
 			if (!umsObjectMap.isEmpty())
-				System.out.println("stop at here 2...........................");
 				expectedDataMapBluelayer.put(umsKey, umsObjectMap);
 		}
 
@@ -791,7 +788,6 @@ public class MRScenario {
 			fileName = fileName.replaceAll("/", "_");
 		}
 		fileName = fileName + ".json";
-		
 		JSONObject jsonObject = null;
 		String parentDirectory = null;
 		try {
@@ -805,8 +801,6 @@ public class MRScenario {
 			stream = new FileInputStream(parentDirectory + DIRECTORY
 					+ directory + fileName);
 		} catch (FileNotFoundException e) {
-			System.out.println("FILE NOT FOUND: " + parentDirectory + DIRECTORY
-					+ directory + fileName);
 			return jsonObject;
 		}
 
@@ -844,21 +838,14 @@ public class MRScenario {
 				jsonObject = new JSONObject(response);
 			}
 		} catch (JSONException e) {
-			System.out.println("EMPTY RESPONSE: " + parentDirectory + DIRECTORY
-					+ directory + fileName);
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
-//		if (fileName.equalsIgnoreCase("DentalPlatinumLis2.json")) {
-//			System.out.println("===>File:" + parentDirectory + DIRECTORY
-//					+ directory + fileName + "Value => " + jsonObject);
-//		}
 		return jsonObject;
 	}
 
 	public Map<String, JSONObject> getExpectedJson(String user) {
 
-		
 		if (null != user && expectedDataMapUlayer.containsKey(user)) {
 			return expectedDataMapUlayer.get(user);
 		}
@@ -873,138 +860,62 @@ public class MRScenario {
 		}
 	}
 
-	/**
-	 * Set values in your config file to use the various web browsers. Add the following 
-	 * two lines to your config file: 
-	 * 
-	 *  WebDriver=PHANTOMJS
-      * BrowserPathToBinary=C:\\Apps\\phantomjs-2.1.1-windows\\bin\\phantomjs.exe
-      * 
-      * or for Fire Fox:
-      * 
-      * WebDriver=FIREFOX
-      * BrowserPathToBinary=C:\\Program Files (x86)\\Mozilla Firefox\\firefox.exe
-      * 
-      * Of course your path to the binary will be different.
-      * 
-      * PhantomJS supports mimicking browsers.  By changing the agentString, one can spoof
-      * a browser type for example, this is a desktop string:
-      * 
-      * Mozilla/5.0 (Windows NT 6.0) AppleWebKit/535.1 (KHTML, like Gecko) Chrome/13.0.782.41 Safari/535.1
-      * 
-      * Using this string causes PhantomJS to act like a desktop browser and will access desktop versions of websites.
-      * This is a mobile string:
-      * 
-      * Mozilla/5.0 (Linux; U; Android 2.3.3; en-us; LG-LU3000 Build/GRI40) AppleWebKit/533.1 (KHTML, like Gecko) Version/4.0 Mobile Safari/533.1
-      * 
-      * Using this string makes PhantomJS identfy itself as a mobile browser (on a mobile device) and will allow you to use the mobile versions
-      * of websites.
-      * 
-      * By default, When a job is run in Jenkins, the values defines in Jenkins will override values in the config file, but will not change them.  If you 
-      * look at the Jenkins job, it specifies a browser type and it should be PhantomJS.
-      * Anything else may be a problem.
-      */
+
 	public WebDriver getWebDriver() {
 
-		
-		//    !!!!! ATTENTION   !!!!!
-		///If you're changing this code to get a browser to work the you're doing it wrong
-		//You should be able to configure a browser in whatever config.preoperties file
-		// you're using.   You shouldn't have to change code.
-		
-		
-        //Is system propery exists defining JENKINS_BROWSER, we're running in JENKINS and
-		//will prefer those browser properties.
-		String browser = (null == System.getProperty(CommonConstants.JENKINS_BROWSER)
-				? props.get(CommonConstants.DESKTOP_WEBDRIVER) : System.getProperty(CommonConstants.JENKINS_BROWSER));
-		
-		
-		String agent = (null == System.getProperty(CommonConstants.JENKINS_BROWSER_AGENT_STRING)
-				? props.get(CommonConstants.DESKTOP_BROWSER_AGENT_STRING) : System.getProperty(CommonConstants.JENKINS_BROWSER_AGENT_STRING));
-		
-		
-		if (browser.equalsIgnoreCase(CommonConstants.JENKINS_BROWSER_PHANTOMJS)) {
-			System.out.println("PHANTOMJS Agent: " + agent);
-		}
-		
-		// Again, Jenkins takes precedent. 
-		String pathToBinary = (null == System.getProperty("phantomjs") ? props.get("BrowserPathToBinary")
-				: System.getProperty("phantomjs"));
-		
-		
-		System.out.println("getWebDriver: returning driver for " + browser);
-		// if webDriver is null, create one, otherwise send the existing one
-		// back.
-		// This has to happen to preserve the state of webDriver so that we can
-		// take screenshots at the end.
-		if (null == webDriver) {
-			System.out.println("New WebDriver CREATED");
-			
-			
-			// Choose your browser based on name. The name value is what is in
-			// CommonConstants.
-			// If the browser isn't configured (null) or it's set to HTMLUNIT,
-			// use HTMLUNIT.
-			// This is the default browser when I checked out the code, so it's
-			// the default
-			if (null == browser || browser.equalsIgnoreCase(CommonConstants.HTMLUNIT_BROWSER)) {
-				// use the HtmlUnit Driver
-				HtmlUnitDriver htmlUnitDriver = new HtmlUnitDriver(BrowserVersion.BEST_SUPPORTED) {
-					@Override
-					protected WebClient modifyWebClient(WebClient client) {
-						client.getOptions().setThrowExceptionOnScriptError(false);
-						return client;
-					}
-				};
-				htmlUnitDriver.setJavascriptEnabled(true);
+		/*
+		 * 
+		 * Below code excecutes if webdriver value is passed in build command ::
+		 * either saucelabs or headless
+		 */
+		if (null != System.getProperty("webdriverhost")) {
 
-				webDriver = htmlUnitDriver;
-				webDriver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
-				webDriver.manage().window().maximize();
-			} else if (browser.equalsIgnoreCase(CommonConstants.JENKINS_BROWSER_PHANTOMJS)) {
-				// otherwise if we have a Jenkins browser defined, we use it.
-				DesiredCapabilities caps = new DesiredCapabilities();
-				caps.setCapability(PhantomJSDriverService.PHANTOMJS_EXECUTABLE_PATH_PROPERTY, pathToBinary);
-				//from Jarvis
-				//caps.setCapability(PhantomJSDriverService.PHANTOMJS_PAGE_SETTINGS_PREFIX + "userAgent", agent);
-				caps.setJavascriptEnabled(true);
-				caps.setCapability(PhantomJSDriverService.PHANTOMJS_CLI_ARGS,
-						new String[] { "--web-security=no", "--ignore-ssl-errors=yes", "--ssl-protocol=any" });
-				
-				//end from jarvis
-				webDriver = new PhantomJSDriver(caps);
-				webDriver.manage().window().setSize(new Dimension(1400,1000));
-				webDriver.manage().timeouts().pageLoadTimeout(200,TimeUnit.SECONDS);
-			} else if (browser.equalsIgnoreCase(CommonConstants.FIREFOX_BROWSER)) {
-				FirefoxBinary ffBinary = new FirefoxBinary(new File(pathToBinary));
-				FirefoxProfile firefoxProfile = new FirefoxProfile();
-				webDriver = new FirefoxDriver(ffBinary, firefoxProfile);
-				webDriver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
-			} else if (browser.equalsIgnoreCase(CommonConstants.CHROME_BROWSER)) {
-				Map<String, Object> chromeOptions = new HashMap<String, Object>();
-				chromeOptions.put("binary", pathToBinary);
-				DesiredCapabilities capabilities = DesiredCapabilities.chrome();
-				capabilities.setCapability(ChromeOptions.CAPABILITY, chromeOptions);
-				webDriver = new ChromeDriver(capabilities);
-			} else if (browser.equalsIgnoreCase(CommonConstants.IE_BROWSER)) {
-				System.setProperty("webdriver.ie.driver",
-						pathToBinary);
-				DesiredCapabilities ieCaps = DesiredCapabilities.internetExplorer();
-				ieCaps.setCapability(InternetExplorerDriver.INTRODUCE_FLAKINESS_BY_IGNORING_SECURITY_DOMAINS, true);
-				webDriver = new InternetExplorerDriver(ieCaps);
-				webDriver.manage().window().maximize();
-				return webDriver;
-			} else if (browser.equalsIgnoreCase(CommonConstants.MOBILE_BROWSER)) {
-				Map<String, String> mobileEmulation = new HashMap<String, String>();
-				mobileEmulation.put("deviceName", props.get(CommonConstants.DEVICE_NAME));
-				Map<String, Object> chromeOptions = new HashMap<String, Object>();
-				chromeOptions.put("mobileEmulation", mobileEmulation);
-				DesiredCapabilities capabilities = DesiredCapabilities.chrome();
-				capabilities.setCapability("chrome.switches", Arrays.asList("--start-maximized"));
-				capabilities.setCapability(ChromeOptions.CAPABILITY, chromeOptions);
-				System.setProperty("webdriver.chrome.driver", props.get(CommonConstants.CHROME_DRIVER));
-				webDriver = new ChromeDriver(capabilities);
-				return webDriver;
+			if (System.getProperty("webdriverhost").equalsIgnoreCase(
+					"saucelabs")) {
+				DesiredCapabilities capabilities = DesiredCapabilities
+						.firefox();
+				capabilities.setCapability("platform", "Windows XP");
+				capabilities.setCapability("version", "45.0");
+				capabilities.setCapability("parent-tunnel", "sauce_admin");
+				capabilities.setCapability("tunnelIdentifier",
+						"OptumSharedTunnel-Prd");
+				capabilities.setCapability("name", "MRATDD-TestSuite");
+				try {
+					webDriver = new RemoteWebDriver(new URL(URL), capabilities);
+				} catch (MalformedURLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			} else {
+				/*
+				 * TODO: pperugu :: Need to update the headless browser code for
+				 * Jenkins
+				 */
+			}
+
+		} else {/*
+				 * Below code excecutes if webdriver value is not passed in
+				 * build command :: mostly running locally and triggering runner
+				 * class directly
+				 */
+			/*
+			 * TODO: pperugu :: Need to update the headless browser code below for
+			 * local
+			 */
+			
+			DesiredCapabilities capabilities = DesiredCapabilities
+					.firefox();
+			capabilities.setCapability("platform", "Windows XP");
+			capabilities.setCapability("version", "45.0");
+			capabilities.setCapability("parent-tunnel", "sauce_admin");
+			capabilities.setCapability("tunnelIdentifier",
+					"OptumSharedTunnel-Prd");
+			capabilities.setCapability("name", "MRATDD-TestSuite");
+			try {
+				webDriver = new RemoteWebDriver(new URL(URL), capabilities);
+			} catch (MalformedURLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
 			}
 		}
 		return webDriver;
@@ -1020,11 +931,9 @@ public class MRScenario {
 		webDriver = new InternetExplorerDriver(ieCaps);
 		webDriver.manage().window().maximize();
 		return webDriver;
+
 	}
 
-	/*
-	 * @return
-	 */
 	public WebDriver getMobileWebDriver() {
 		Map<String, String> mobileEmulation = new HashMap<String, String>();
 		mobileEmulation.put("deviceName",
