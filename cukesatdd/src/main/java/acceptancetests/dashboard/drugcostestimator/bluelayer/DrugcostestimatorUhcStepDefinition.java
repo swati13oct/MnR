@@ -214,8 +214,8 @@ public class DrugcostestimatorUhcStepDefinition {
 	}
 
 	@Then("^I should see the Pharmacy search tab as a clickable element within the DCE tool$")
-	public void i_should_see_the_pharmacy_search(DataTable data) throws InterruptedException{
-		List<DataTableRow> memberAttributesRow = data.getGherkinRows();
+	public void i_should_see_the_pharmacy_search() throws InterruptedException{
+		/*List<DataTableRow> memberAttributesRow = data.getGherkinRows();
 		String drug = memberAttributesRow.get(1).getCells().get(0);
 
 		WebDriver wd = (WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
@@ -243,12 +243,16 @@ public class DrugcostestimatorUhcStepDefinition {
 		addNewDrugModal.clickonSearchButton(drug);
 		addNewDrugModal.selectDrug(drug);
 		AddDrugDetails addDrugDetails = new AddDrugDetails(wd);
-		addDrugDetails.continueAddDrugDetails();
+		addDrugDetails.continueAddDrugDetails();*/
+		DrugCostEstimatorPage dce = (DrugCostEstimatorPage) getLoginScenario().getBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE);
+		dce.changeUrlToNewDCEPage();
+		dce.navigateToStep2();
+		
 	}
 	@And("^I should be able to move forward or backward in the tool flow$")
 	public void i_should_be_able_to_move_forward_backward() throws InterruptedException{
 		DrugCostEstimatorPage dce = (DrugCostEstimatorPage) getLoginScenario().getBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE);
-		dce.navigateToStep2();
+		//dce.navigateToStep2();
 		dce.validatePharmacyForm();
 		dce.backwardToStep1();
 		dce.navigateToStep2();
@@ -304,7 +308,7 @@ public class DrugcostestimatorUhcStepDefinition {
 		AddDrugDetails addDrugDetails = addNewDrugModal.submit();
 		if(addDrugDetails !=null)
 			getLoginScenario().saveBean(PageConstants.ADD_DRUG_DETAILS, addDrugDetails);
-		addDrugDetails.validateThePage();
+		//addDrugDetails.validateThePage();
 	}
 	@Then("^the modal should refresh to the next step in the flow if I select one of the suggested results$")
 	public void the_modal_should_regresh() throws InterruptedException{
@@ -422,7 +426,7 @@ public class DrugcostestimatorUhcStepDefinition {
 	public void I_should_not_see_the_drug_with_Dosage_in_the_list(DataTable data) {
 
 		List<DataTableRow> memberAttributesRow = data.getGherkinRows();
-		String dosage = memberAttributesRow.get(1).getCells().get(0);
+		String dosage = memberAttributesRow.get(0).getCells().get(1);
 		DrugCostEstimatorPage dce = new DrugCostEstimatorPage((WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER));
 		dce.validateDrugsnotPresent (dosage);  
 	}
@@ -431,7 +435,7 @@ public class DrugcostestimatorUhcStepDefinition {
 	@When("^I delete the drug with Dosage$")
 	public void I_delete_the_drug_with_Dosage(DataTable data) throws InterruptedException {
 		List<DataTableRow> memberAttributesRow = data.getGherkinRows();
-		String dosage = memberAttributesRow.get(1).getCells().get(0);
+		String dosage = memberAttributesRow.get(0).getCells().get(1);
 
 		DrugCostEstimatorPage dce = new DrugCostEstimatorPage((WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER));
 		dce.deleteDrugsByDosage(dosage);
@@ -453,9 +457,9 @@ public class DrugcostestimatorUhcStepDefinition {
 		}
 
 		String drug = memberAttributesMap.get("Drug");
-		String dosage = memberAttributesMap.get("Dosage");
-		String quantity = memberAttributesMap.get("Quantity");
-		String frequency = memberAttributesMap.get("Frequency");
+		String dosage = memberAttributesMap.get("EditDosage");
+		String quantity = memberAttributesMap.get("EditQuantity");
+		String frequency = memberAttributesMap.get("EditFrequency");
 
 		WebDriver wd = (WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
 		DrugCostEstimatorPage dce = new DrugCostEstimatorPage(wd);
@@ -493,6 +497,27 @@ public class DrugcostestimatorUhcStepDefinition {
 		DrugCostEstimatorPage dce = new DrugCostEstimatorPage((WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER));
 		dce.validateAddedDrug(dosage,quantity,frequency);
 	}
+	
+	@Then("^I should validate drug with Dosage and Quantity and frequency edited to the list$")
+	public void I_should_validate_drug_with_Dosage_and_Quantity_and_frequency_edited_to_the_list(DataTable memberAttributes) {
+		// Express the Regexp above with the code you wish you had
+		//	WebDriver wd = (WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
+		List<DataTableRow> memberAttributesRow = memberAttributes
+				.getGherkinRows();
+		Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells()
+					.get(0), memberAttributesRow.get(i).getCells().get(1));
+		}
+
+		String dosage = memberAttributesMap.get("EditDosage");
+		String quantity = memberAttributesMap.get("EditQuantity");
+		String frequency = memberAttributesMap.get("EditFrequency");
+
+		DrugCostEstimatorPage dce = new DrugCostEstimatorPage((WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER));
+		dce.validateAddedDrug(dosage,quantity,frequency);
+	}
 
 
 
@@ -516,6 +541,7 @@ public class DrugcostestimatorUhcStepDefinition {
 
 		DrugCostEstimatorPage dce = new DrugCostEstimatorPage(wd);
 		//dce.changeUrlToNewDCEPage();
+		dce.deleteAllDrugs();
 		AddNewDrugModal addNewDrugModal = dce.clickOnAddDrug();
 		addNewDrugModal.clickonSearchButton(drug);
 
@@ -551,6 +577,7 @@ public class DrugcostestimatorUhcStepDefinition {
 
 		DrugCostEstimatorPage dce = new DrugCostEstimatorPage(wd);
 		//dce.changeUrlToNewDCEPage();
+		dce.deleteAllDrugs();
 		AddNewDrugModal addNewDrugModal = dce.clickOnAddDrug();
 		addNewDrugModal.clickonSearchButton(drug);
 
@@ -605,7 +632,7 @@ public class DrugcostestimatorUhcStepDefinition {
 		dce.selectRadius();
 		Thread.sleep(10000);
 		dce.selectZipcode(zipcode);
-		dce.selectPharmacyType(Pharmacy_type);
+		//dce.selectPharmacyType(Pharmacy_type);
 		Thread.sleep(2000);
 		dce.clickstep2Search();
 		Thread.sleep(10000);
@@ -828,8 +855,10 @@ public class DrugcostestimatorUhcStepDefinition {
 				.getBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE);
 
 		dce.deleteAllDrugs();
+		dce.addGenericDrug("lipitor");
 		dce.addDrug("lipitor");
-		dce.addDrug("atorvastatin calcium");
+		//dce.addDrug("atorvastatin calcium");
+		
 	}
 	
 	@And("^I add lipitor generic drug$")
@@ -965,6 +994,7 @@ public class DrugcostestimatorUhcStepDefinition {
 
 		DrugCostEstimatorPage dce = new DrugCostEstimatorPage(wd);
 		dce.changeUrlToNewDCEPage();
+		dce.deleteAllDrugs();
 		dce.addDrug(drug);
 		
 	}
@@ -1091,7 +1121,7 @@ public class DrugcostestimatorUhcStepDefinition {
 	}
 	
 	@Then("^I will see a SWITCH NOW link in the drug tile with a pharmacy savings cost value$")
-	public void I_will_see_a_SWITCH_NOW_link_in_the_drug_tile_with_a_pharmacy_savings_cost_value() {
+	public void I_will_see_a_SWITCH_NOW_link_in_the_drug_tile_with_a_pharmacy_savings_cost_value() throws InterruptedException {
 		DrugCostEstimatorPage dce = (DrugCostEstimatorPage) getLoginScenario()
 				.getBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE);
 		dce.validateSwitchNowLink();

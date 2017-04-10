@@ -50,16 +50,16 @@ public class DrugCostEstimatorPage extends UhcDriver {
 	@FindBy(id = "pharmacy-form")
 	public WebElement pharmacyform;
 
-	@FindBy(xpath = "//div[@id='pharmacy-type']/div[1]/label")
+	@FindBy(id = "standard-type")
 	public WebElement rbStandardNetwork;
 
-	@FindBy(id = "saver")
+	@FindBy(id = "saver-type")
 	public WebElement rbPharmacySaver;
 
-	@FindBy(id = "mail-service")
+	@FindBy(id = "mail-service-type")
 	public WebElement rbPreferredMailService;
 
-	@FindBy(id = "retail")
+	@FindBy(id = "retail-type")
 	public WebElement rbPreferredRetail;
 
 	@FindBy(className = "edit-drug")
@@ -80,7 +80,7 @@ public class DrugCostEstimatorPage extends UhcDriver {
 	@FindBy(xpath = "//p[contains(text(),'STEP2:')]/following-sibling::span[p[contains(text(),'PHARMACY')]]")
 	public WebElement step2PharmacyTab;
 
-	@FindBy(id = "distance")
+	@FindBy(id = "dce-pharmacy-radius")
 	public WebElement milesSelection;
 
 	@FindBy(id = "zipcode")
@@ -140,10 +140,8 @@ public class DrugCostEstimatorPage extends UhcDriver {
 	@FindBy(xpath = "//div[@id='pharmacy-results']//span[contains(@class,'pharmacy-name')]")
 	public List<WebElement> pharmacies;
 
-	@FindBy(xpath = "//div[@id='pharmacy-results']/div[1]/ul[1]/li[1]/div/div[2]/a") // [@id='pharmacy-results']//li[1]//a[@class='btn
-																						// btn--secondary
-																						// select-pharmacy']")
-	public WebElement select_btn_first; // [@id='pharmacy-results']/div[1]/ul[1]/li[1]/div/div[2]/a
+	@FindBy(xpath = "//div[@id='pharmacy-results']/div[1]/ul[1]/li[1]/div/div[2]/a") 
+	public WebElement select_btn_first; 
 
 	@FindBy(id = "saverSavingSpan")
 	public WebElement card_promo_blue_saver;
@@ -363,7 +361,7 @@ public class DrugCostEstimatorPage extends UhcDriver {
 			}
 			addNewDrugModal.typeDrugName(drug);
 			addNewDrugModal.submit();
-			addNewDrugModal.selectDrug(drug);
+			//addNewDrugModal.selectDrug(drug);
 			AddDrugDetails addDrugDetails = new AddDrugDetails(driver);
 			addDrugDetails.selectQnty(i + "");
 			addDrugDetails.continueAddDrugDetails();
@@ -396,7 +394,7 @@ public class DrugCostEstimatorPage extends UhcDriver {
 		Assert.assertTrue(rbStandardNetwork.isDisplayed());
 		Assert.assertTrue(rbPharmacySaver.isDisplayed());
 		Assert.assertTrue(rbPreferredMailService.isDisplayed());
-		Assert.assertTrue(rbPreferredRetail.isDisplayed());
+		//Assert.assertTrue(rbPreferredRetail.isDisplayed());
 	}
 
 	public void pharmacyInformation(String zipcode, String radius) {
@@ -563,8 +561,9 @@ public class DrugCostEstimatorPage extends UhcDriver {
 	}
 
 	public void selectPharmacyType(String pharmacy) throws InterruptedException {
-		WebElement rbtn = driver
-				.findElement(By.xpath(".//*[@id='pharmacy-type']/div/label/p[contains(text(),'" + pharmacy + "')]"));
+		
+		WebElement rbtn = driver.findElement(By.xpath(".//*[@id='pharmacy-type']/div/label/p[contains(text(),'" + pharmacy + "')]"));
+
 		rbtn.isDisplayed();
 		if (!rbtn.isSelected()) {
 			rbtn.click();
@@ -610,7 +609,7 @@ public class DrugCostEstimatorPage extends UhcDriver {
 
 	public void select_first_pharmacy() throws InterruptedException {
 		Thread.sleep(10000);
-		// waitforElement(select_btn_first);
+		//waitforElement(select_btn_first);
 		if (select_btn_first.isDisplayed()) {
 			select_btn_first.click();
 		}
@@ -704,8 +703,8 @@ public class DrugCostEstimatorPage extends UhcDriver {
 
 	public void validatePreferredMailServiceNotPresent() {
 		List<WebElement> mailService = driver.findElements(By.id("mail-service-type"));
-		if (mailService.size() > 0) {
-			Assert.assertFalse(true);
+		if (mailService.get(0).isDisplayed()) {
+			Assert.assertFalse("Preferred Mail Servic pharmacy type is present",true);
 		} else {
 			Assert.assertFalse(false);
 		}
@@ -856,7 +855,7 @@ public class DrugCostEstimatorPage extends UhcDriver {
 		addNewDrugModal.submit();
 		// addNewDrugModal.selectDrug(drug);
 		AddDrugDetails addDrugDetails = new AddDrugDetails(driver);
-		addDrugDetails.selectQnty(60 + "");
+		//addDrugDetails.selectQnty(60 + "");
 		SavingsOppurtunity savingsOppurtunity = addDrugDetails.continueAddDrugDetails();
 		SavingsOppurtunity savingsOppurtunity1 = new SavingsOppurtunity(driver);
 		savingsOppurtunity1.switchToGeneric();
@@ -867,6 +866,7 @@ public class DrugCostEstimatorPage extends UhcDriver {
 
 	public void validateTotalEstimatedAnnualDrugCosts(String totalAnnualDrugCost) throws InterruptedException {
 		Thread.sleep(10000);
+		Thread.sleep(5000);
 		List<WebElement> totDrugCost_Summary = driver.findElements(By.xpath(".//*[@id='summary_totalCost']"));
 		List<WebElement> totDrugCost_LeftRail = driver.findElements(By.xpath(".//*[@id='total_annualcost']"));
 
@@ -1111,8 +1111,9 @@ public class DrugCostEstimatorPage extends UhcDriver {
 		
 	}
 
-	public void validateSaveDollarValueMessage() {
+	public void validateSaveDollarValueMessage() throws InterruptedException {
 		int drugscount = getDrugsCount();
+		Thread.sleep(10000);
 		if (drugscount > 0) {
 			List<WebElement> saveGenericMessage = driver
 					.findElements(By.id("generic-drug-saving-amount-"+(drugscount-1)));

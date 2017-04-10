@@ -78,6 +78,7 @@ public class AddDrugDetails extends UhcDriver {
 		return addDrugDetailsPageExpectedJson;
 	}
 	public void selectDosage(String dosage){
+	
 		WebElement element = driver.findElement(By.xpath("//input[@value='"+dosage+"']"));
 		if(!element.isSelected()){
 			element.click();
@@ -102,6 +103,7 @@ public class AddDrugDetails extends UhcDriver {
 	public SavingsOppurtunity continueAddDrugDetailsModal() throws InterruptedException{
 		waitforElement(continueButton);
 		continueButton.click();
+		continueButton.click();
 		Thread.sleep(12000);
 		return new SavingsOppurtunity(driver);
 		}
@@ -113,6 +115,7 @@ public class AddDrugDetails extends UhcDriver {
 		return new DrugCostEstimatorPage(driver);
 		}
 	public SavingsOppurtunity continueAddDrugDetails(){
+		
 		waitforElement(continueButton);
 		continueButton.click();
 		if (driver.getTitle().equalsIgnoreCase("SAVINGS OPPORTUNITY")) {
