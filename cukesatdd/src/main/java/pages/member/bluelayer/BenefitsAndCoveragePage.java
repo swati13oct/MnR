@@ -54,6 +54,9 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 	
 	@FindBy(xpath = "//span[contains(.,'keyboard_arrow_down')]")
 	private WebElement disclaimersLink;
+
+        @FindBy(xpath = "html/body/div[4]/div[2]/section/div/div/div/h2")
+	private WebElement planBenefitsDocuments;
 	
 	
 	
@@ -155,6 +158,15 @@ public void validateNeedhelpheader(){
 		}
 	}
 
+	public void PlanDocumentssection() {
+
+		try {
+			validate(planBenefitsDocuments);
+		} catch (Exception e) {
+			System.out.println("Elements is not found ...");
+		}
+	}
+
 public boolean validatecontactussection()
 {
 	try{
@@ -194,17 +206,17 @@ public void clickOnDisclaimers(JSONObject benefitsandcoverageExectedJson) {
 	Assert.assertEquals(benefitsandcoverageExectedJson
 			.get("2ndline"), table_data);
 	// to validate amount Paid
-	//finalPath = disclaimertextarea_xpath+"/p[3]";
-	//table_data = driver.findElement(By.xpath(finalPath)).getText();
-	//System.out.println(table_data);
-	//Assert.assertEquals(benefitsandcoverageExectedJson
-			//.get("3rdline"), table_data);
+	finalPath = disclaimertextarea_xpath+"/p[3]";
+	table_data = driver.findElement(By.xpath(finalPath)).getText();
+	System.out.println(table_data);
+	Assert.assertEquals(benefitsandcoverageExectedJson
+			.get("3rdline"), table_data);
 	// to validate paid Date
-	//finalPath = disclaimertextarea_xpath+"/p[4]";
-	//table_data = driver.findElement(By.xpath(finalPath)).getText();
-	//System.out.println(table_data);
-	//Assert.assertEquals(benefitsandcoverageExectedJson
-			//.get("4thline"), table_data);
+	finalPath = disclaimertextarea_xpath+"/p[4]";
+	table_data = driver.findElement(By.xpath(finalPath)).getText();
+	System.out.println(table_data);
+	Assert.assertEquals(benefitsandcoverageExectedJson
+			.get("4thline"), table_data);
 	}
 catch (JSONException e) {
 	e.printStackTrace();
