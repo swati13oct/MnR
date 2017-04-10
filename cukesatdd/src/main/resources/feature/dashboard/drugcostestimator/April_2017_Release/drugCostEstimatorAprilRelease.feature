@@ -90,8 +90,6 @@ Then I should see preferred mail service radio button under pharmacy type
 And I enter a US other territory zip code and click select
 | USOTZipcode | <USOTZipcode> |
 Then I should see preferred mail service radio button under pharmacy type
-And I should be able to select the preferred mail service radio button
-And I should be able to select the preferred mail service pharmacy
 
 Examples:
  | planType  | memberType  | USOTZipcode |
