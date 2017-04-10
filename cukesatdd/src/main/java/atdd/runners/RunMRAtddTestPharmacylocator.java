@@ -8,14 +8,14 @@ import org.junit.runner.RunWith;
 import cucumber.junit.Cucumber;
 
 /**
- * @author pperugu RAni
+ * @author pperugu 
  *
  */
 @RunWith(Cucumber.class)
 @Cucumber.Options(glue = { "atdd.framework","acceptancetests.pharmacylocator.member.ulayer" }, 
 		features = { "feature/pharmacy-locator/member/ulayer" }, 
 		format = {
-		"pretty", "html:reports/test-report", "json:target/cucumber.json" }, tags ={"@pharmacyprpnwidget,@pharmacysearch"})
+		"pretty", "html:reports/test-report", "json:target/cucumber.json" }, tags ={"@pharmacyprpnwidget,@pharmacyresultpdf,@pharmacyshowmap,@pharmacyaep"})
 
 public class RunMRAtddTestPharmacylocator {
 
