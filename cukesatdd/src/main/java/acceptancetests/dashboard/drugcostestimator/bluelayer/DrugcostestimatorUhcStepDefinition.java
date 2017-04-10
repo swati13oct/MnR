@@ -811,8 +811,9 @@ public class DrugcostestimatorUhcStepDefinition {
 	public void I_should_be_able_to_select_the_preferred_mail_service_pharmacy(){
 		DrugCostEstimatorPage dce = (DrugCostEstimatorPage) getLoginScenario()
 				.getBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE);
-		dce.btnMailServiceSelect.click();
-
+		if(dce.btnMailServiceSelect.isDisplayed()){
+			dce.btnMailServiceSelect.click();
+		}
 	}
 
 
