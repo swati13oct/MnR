@@ -50,6 +50,8 @@ public class OneTimePaymentsPage extends UhcDriver{
 	@FindBy(xpath="//div[@id='atdd_electronicsignature_label']/div/fieldset/label")
 	private WebElement electronicSignatureCheck;
 	
+	@FindBy(xpath="//*[text()='Edit Payment Information']") 
+	 private WebElement editPaymentInfo; 
 
 	public OneTimePaymentsPage(WebDriver driver) {
 		super(driver);
@@ -83,7 +85,15 @@ public class OneTimePaymentsPage extends UhcDriver{
 		lastNameField.sendKeys("Ln");
 		electronicSignatureCheck.click();
 		reviewContinue.click();
-		if(driver.getTitle().equalsIgnoreCase("review-one-time-payments")){
+		if(driver.getTitle().equalsIgnoreCase("My Benefits & Coverage")){
+			return new ReviewOneTimePaymentsPage(driver);
+		}
+		return null;
+	}
+	
+	public ReviewOneTimePaymentsPage editPaymentInfobtn(){
+		editPaymentInfo.click();
+		if(driver.getTitle().equalsIgnoreCase("My Benefits & Coverage")){
 			return new ReviewOneTimePaymentsPage(driver);
 		}
 		return null;

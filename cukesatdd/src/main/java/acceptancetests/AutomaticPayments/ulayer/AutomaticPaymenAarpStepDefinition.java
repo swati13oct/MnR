@@ -150,11 +150,11 @@ public class AutomaticPaymenAarpStepDefinition {
 		
 	}
 	
-	@And("^the user enters details and click on continue button on One Time Payments Page for  Dashboard$")
+	@And("^the user enters details and click on continue button on Automatic Payments Page for Dashboard$")
 	public void user_clicks_continue()
 	{
 		AutomaticPaymentsPage automaticPaymentsPage = (AutomaticPaymentsPage)getLoginScenario().getBean(PageConstants.AUTOMATIC_PAYMENTS_DASHBOARD);
-		ReviewOneTimePaymentsPage reviewAutomaticPaymentsPage = automaticPaymentsPage.enterInfoAndContinue();
+		ReviewAutomaticPaymentsPage reviewAutomaticPaymentsPage = automaticPaymentsPage.enterInfoAndContinue();
 		if(reviewAutomaticPaymentsPage != null){
 			getLoginScenario().saveBean(PageConstants.REVIEW_AUTOMATIC_PAYMENTS_DASHBOARD,
 					reviewAutomaticPaymentsPage);
@@ -200,4 +200,33 @@ public class AutomaticPaymenAarpStepDefinition {
 		}
 		
 	}
-}
+	
+	@And("^the user clicks on cancel button and validate payment history$")
+	public void user_clicks_cancel()
+	{
+		AutomaticPaymentsPage automaticPaymentsPage = (AutomaticPaymentsPage)getLoginScenario().getBean(PageConstants.AUTOMATIC_PAYMENTS_DASHBOARD);
+		ReviewAutomaticPaymentsPage reviewAutomaticPaymentsPage = automaticPaymentsPage.cancelbtn();
+		/*if(reviewAutomaticPaymentsPage != null){
+			getLoginScenario().saveBean(PageConstants.REVIEW_AUTOMATIC_PAYMENTS_DASHBOARD,
+					reviewAutomaticPaymentsPage);
+			Assert.assertTrue(true);
+		}else {
+			Assert.fail("automatic payments dashboard page not found");
+		}*/
+		
+		
+	}
+	
+	@And("the user validate edit payment information on review automatic payment page$")
+	public void user_clicks_editPaymentinfobtn(){
+		AutomaticPaymentsPage automaticPaymentsPage = (AutomaticPaymentsPage)getLoginScenario().getBean(PageConstants.AUTOMATIC_PAYMENTS_DASHBOARD);
+		ReviewAutomaticPaymentsPage reviewAutomaticPaymentsPage = automaticPaymentsPage.editPaymentbtn();
+		/*if(reviewAutomaticPaymentsPage != null){
+			getLoginScenario().saveBean(PageConstants.REVIEW_AUTOMATIC_PAYMENTS_DASHBOARD, reviewAutomaticPaymentsPage);
+			Assert.assertTrue(true);
+		}else{
+			Assert.fail("autoamtic payments dashbaord page not found");
+		}*/
+		}
+	}
+

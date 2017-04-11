@@ -41,13 +41,21 @@ public class AutomaticPaymentsPage extends UhcDriver{
 	@FindBy(id = "last-name")
 	private WebElement lastNameField;
 	
+	@FindBy(xpath=".//*[text()='Edit Payment Information ']") 
+	private WebElement editPayment; 
+	 
+	@FindBy(xpath="//div[contains(./text(),'Payment')][contains(./text(),'Date')]/../div[2]/span") 
+	private WebElement paymentDate; 
+	 
+	@FindBy(xpath="//a[contains(text(),'cancel  ')]") 
+	private WebElement cancelbtn; 
+
 	
-	@FindBy(id = "review-continue")
-	private WebElement reviewContinue;
 	
+	@FindBy(xpath="//*[text()='continue']")
+	private WebElement reviewContinue;	
 	
-	
-	@FindBy(xpath="//div[@id='atdd_electronicsignature_label']/div/fieldset/label")
+	@FindBy(xpath="//label[@for='consent']")
 	private WebElement electronicSignatureCheck;
 	
 	public AutomaticPaymentsPage(WebDriver driver) {
@@ -58,6 +66,7 @@ public class AutomaticPaymentsPage extends UhcDriver{
 
 	@Override
 	public void openAndValidate() {
+		validate(paymentDate);
 		validate(routingNumberField);
 		validate(confirmRoutingNumberField);
 		validate(accountNumberField);
@@ -69,7 +78,7 @@ public class AutomaticPaymentsPage extends UhcDriver{
 		
 	}
 
-	public ReviewOneTimePaymentsPage enterInfoAndContinue() {
+	public ReviewAutomaticPaymentsPage enterInfoAndContinue() {
 		routingNumberField.sendKeys("123123000");
 		confirmRoutingNumberField.sendKeys("123123000");
 		accountNumberField.sendKeys("1234");
@@ -78,12 +87,31 @@ public class AutomaticPaymentsPage extends UhcDriver{
 		lastNameField.sendKeys("Ln");
 		electronicSignatureCheck.click();
 		reviewContinue.click();
-		if(driver.getTitle().equalsIgnoreCase("review-one-time-payments")){
-			return new ReviewOneTimePaymentsPage(driver);
+		if(driver.getTitle().equalsIgnoreCase("My Benefits & Coverage")){
+			return new ReviewAutomaticPaymentsPage(driver);
 		}
 		return null;
 	}
 	
+	public ReviewAutomaticPaymentsPage cancelbtn(){
+		cancelbtn.click();
+		System.out.println("Navigated to payment history");		
+		return null;
+		
+	}
+	
+	public ReviewAutomaticPaymentsPage editPaymentbtn(){
+		editPayment.click();
+		boolean editbtn = validate(editPayment);
+		System.out.println(editbtn);
+		if(driver.getTitle().equalsIgnoreCase("My Benefits & Coverage")){
+			return new ReviewAutomaticPaymentsPage(driver);
+		}
+		return null;
+		
+	}
+	
+
 
 	
 

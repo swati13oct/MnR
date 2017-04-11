@@ -58,5 +58,21 @@ Examples:
 #	| PDP      |
 #	| MS       |
 #	| HIP      |
+
+@US455296
+Scenario Outline: Verify the edit payment information on One Time Payments Tool for Dashboard
+Given the user is on the AARP medicare site login page
+When the user logs in with a registered AMP with following details in AARP site
+	| Plan Type   | <planType>  |
+And the user navigates to One Time Payments page
+And the user enters details and click on continue button on One Time Payments Page for Dashboard
+Then user lands on Review One time Payments Page and validates the one time payment page
+And the user clicks on edit payment information button on Review Payments Page
+
+
+Examples:
+	| planType |
+	| MAPD     |
+
      
      

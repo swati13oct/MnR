@@ -1,4 +1,4 @@
-package acceptancetests.payments.ulayer;
+package acceptancetests.payments.ulayer.onetimepayment;
 
 import gherkin.formatter.model.DataTableRow;
 
