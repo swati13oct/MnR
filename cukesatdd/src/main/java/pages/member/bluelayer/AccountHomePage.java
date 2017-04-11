@@ -659,7 +659,7 @@ public FormsandresourcesPage navigateToMydocumentUmsPage() {
 	}
 
 	public PharmacySearchPage navigateTomultipleLanguageDropdownResultsearch() {
-		driver.manage().timeouts().implicitlyWait(50, TimeUnit.SECONDS);
+		driver.manage().timeouts().implicitlyWait(400, TimeUnit.SECONDS);
 		/*Select select = new  Select(driver.findElement(By.id("lang-select")));
 		select.selectByVisibleText("español");*/
 		//((JavascriptExecutor) driver).executeScript("return document.getElementById('lang-select').selectedIndex = '" + "español" + "'");
