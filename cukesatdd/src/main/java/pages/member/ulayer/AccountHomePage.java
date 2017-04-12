@@ -57,11 +57,11 @@ public class AccountHomePage extends UhcDriver {
 	@FindBy(linkText = "View recent premium payments")
 	private WebElement paymentsLink;
 
-//	@FindBy(partialLinkText = "get forms & resources")
-//	private WebElement formsAndResourcesLink;
-	
-	@FindBy(xpath="//*[@id='footer']/ul/li[1]/div[2]/div[2]/a/span")
+	@FindBy(partialLinkText = "get forms & resources")
 	private WebElement formsAndResourcesLink;
+	
+	/*@FindBy(xpath="//*[@id='footer']/ul/li[1]/div[2]/div[2]/a/span")
+	private WebElement formsAndResourcesLink;*/
 	
 	@FindBy(xpath="//[@id='benefits']/a")
 	private WebElement benefitsAndCoverageLink;
@@ -271,11 +271,11 @@ public class AccountHomePage extends UhcDriver {
 	public FormsandresourcesPage navigateToFormsandResourceAarpPage() {
 
 		formsAndResourcesLink.click();
-		CommonUtility.checkPageIsReady(driver);
+		/*CommonUtility.checkPageIsReady(driver);
 		if (driver.getTitle().equalsIgnoreCase(
 				"AARP Medicare Plans | Forms and Resources")) {
 			return new FormsandresourcesPage(driver);
-		} else
+		} else*/
 
 			return null;
 
