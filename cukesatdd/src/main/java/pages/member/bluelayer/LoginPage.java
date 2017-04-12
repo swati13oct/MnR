@@ -41,13 +41,16 @@ public class LoginPage extends UhcDriver {
 
 	private WebElement loginIn;
 
-	@FindBy(id = "loginPOPUPuser")
+	//@FindBy(id = "loginPOPUPuser")
+	@FindBy(xpath = "//*[@id='loginSTANDuser']")
 	private WebElement userNameField;
 
-	@FindBy(id = "loginPOPUPpass")
+	//@FindBy(id = "loginPOPUPpass")
+	@FindBy(xpath = "//*[@id='loginSTANDpass']")
 	private WebElement passwordField;
 
-	@FindBy(xpath = "//div[@class='fd_userPassSection']/button")
+	//@FindBy(xpath = "//div[@class='fd_userPassSection']/button")
+	@FindBy(xpath = "//*[@id='accessURAccountBTN']")
 	private WebElement signInButton;
 
 	@FindBy(linkText = "Forgot your username or password?")
@@ -69,8 +72,8 @@ public class LoginPage extends UhcDriver {
 
 	public Object loginWith(String username, String password, String category) {
 		//driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
-		WebElement loginInEle= this.driver.findElement(By.id("fd_memberSignInButton"));
-		loginInEle.click();
+		/*WebElement loginInEle= this.driver.findElement(By.id("fd_memberSignInButton"));
+		loginInEle.click();*/
 		sendkeys(userNameField, username);
 		sendkeys(passwordField, password);
 		signInButton.click();
@@ -85,13 +88,13 @@ public class LoginPage extends UhcDriver {
 
 			while (!isAlertPresent());
 		}
-		if ( MRScenario.environment.equals("team-c") || MRScenario.environment.equals("team-b")) {
+		/*if ( MRScenario.environment.equals("team-c") || MRScenario.environment.equals("team-b")) {
 			
 			Alert alert = driver.switchTo().alert();
 	        alert.accept();
 	        Alert alert1 = driver.switchTo().alert();
 	        alert1.accept();
-	        }
+	        }*/
 		
 		try {
 			Thread.sleep(10000);
@@ -100,12 +103,12 @@ public class LoginPage extends UhcDriver {
 			e.printStackTrace();
 		}
 
-		if(currentUrl().contains("home/my-account-home.html") && category.equalsIgnoreCase("Group") || currentUrl().contains("/guest/home.html"))
+		if(currentUrl().contains("home/my-account-home.html") && category.equalsIgnoreCase("Group") || currentUrl().contains("/guest/home.html") || currentUrl().contains("/login.html"))
 
 		{
 			return new AccountHomePage(driver,category);
 		}
-		else if(currentUrl().contains("home/my-account-home.html") && category.equalsIgnoreCase("Individual") ) {
+		else if(currentUrl().contains("home/my-account-home.html") && category.equalsIgnoreCase("Individual") || currentUrl().contains("/login.html") ) {
 			return new AccountHomePage(driver, category);
 		}
 		else if (currentUrl().contains("terminated-plan.html")) {

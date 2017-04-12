@@ -47,8 +47,8 @@ Then I can view an Explanation of Benefits component with the Medical and/or Pre
 Examples:
  | planType  |  memberType |domain  |
  | MA        | Individual | COSMOS |
- | MAPD      |  Group     | COSMOS |
- |PDP        | Group      | COSMOS |
+ #| MAPD      |  Group     | COSMOS |
+# |PDP        | Group      | COSMOS |
  
 @claimsDownloadmydataButton
 Scenario Outline: To Verify Downloadmydata button on new UHC Claims Summary Page 
@@ -76,3 +76,13 @@ Examples:
  | MAPD      |  Group     |
  |   MA      | Individual |
  | PDP       | Group      |
+
+@claimsSample
+Scenario Outline: To verify Jenkins setup
+Given I am an UHC member on the redesigned member site
+| Plan Type   | <planType>   |
+| Member Type	  | <memberType> |
+
+Examples:
+| planType  | memberType |
+| MA       | Individual      |
