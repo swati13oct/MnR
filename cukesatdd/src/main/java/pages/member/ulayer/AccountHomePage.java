@@ -635,6 +635,24 @@ public pages.dashboard.member.ulayer.ClaimSummarypage navigateToClaimsSummaryPag
 	}
 		return null;
 	}
+
+public pages.dashboard.member.ulayer.ClaimDetailsPage navigateToClaimDetailsPage(WebDriver driver) {
+	// TODO Auto-generated method stub
+			String url = "https://member.team-b-aarpmedicareplans.uhc.com/home/claimtest.html#/claims-Detail";
+			driver.get(url);
+			/*try {
+				Thread.sleep(1000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}*/
+			System.out.println(driver.getTitle());
+			if (driver.getTitle().equalsIgnoreCase("Member Claims")) {
+				return new pages.dashboard.member.ulayer.ClaimDetailsPage(driver);		
+	
+}
+			return new pages.dashboard.member.ulayer.ClaimDetailsPage(driver);
+}
 public FormsandresourcesPage navigateToMydocumentAarpPage() {
 		
 		MyDocumentLink.click();
