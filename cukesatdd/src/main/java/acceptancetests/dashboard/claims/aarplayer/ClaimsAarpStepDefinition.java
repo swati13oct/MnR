@@ -31,6 +31,7 @@ import cucumber.table.DataTable;
 import gherkin.formatter.model.DataTableRow;
 import pages.acquisition.uhcretiree.AcquisitionHomePage;
 import pages.acquisition.uhcretiree.RetireesOfSelectedPlans;
+import pages.dashboard.member.ulayer.ClaimDetailsPage;
 import pages.dashboard.member.ulayer.ClaimSummarypage;
 import pages.member.ulayer.AccountHomePage;
 import pages.member.ulayer.ClaimSummaryPage;
@@ -237,6 +238,110 @@ public void validate_bownload_my_data_button(){
 	Assert.assertTrue(claimSummarypage.validateDownloadMyDataButton());
 	
 }
+
+@When("^I navigate to the Claim Details page in AARP site$")	
+public void i_navigate_to_member_redesign_claim_details_page(){
+AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstants.ACCOUNT_HOME_PAGE);
+ClaimDetailsPage newClaimDetailsPage = accountHomePage.navigateToClaimDetailsPage(loginScenario.getWebDriver());
+getLoginScenario().saveBean(PageConstants.NEW_CLAIM_DETAILS_PAGE, newClaimDetailsPage);
+
+}
+
+@Then("^I can view a claim search back button in Claims Details page in AARP site$")
+public void validate_claim_search_button()
+  {
+	ClaimDetailsPage claimDetailspage = (ClaimDetailsPage) getLoginScenario().getBean(PageConstants.NEW_CLAIM_DETAILS_PAGE);
+	
+	Assert.assertTrue(claimDetailspage.validateClaimSearch());
+  }
+
+@And("^A Page Header in Claims Details page in AARP site$")
+public void validate_the_details_header()
+  {
+	/*ClaimSummarypage newClaimsSummaryPage = (ClaimSummarypage) getLoginScenario().getBean(PageConstants.NEW_CLAIMS_SUMMARY_PAGE);
+	newClaimsSummaryPage.validateHeader();*/
+	
+}
+
+@And("^A Date range in Claims Details page in AARP site")
+public void validate_dynamic_dates()
+  {
+	
+	ClaimDetailsPage claimDetailspage = (ClaimDetailsPage) getLoginScenario().getBean(PageConstants.NEW_CLAIM_DETAILS_PAGE);
+	Assert.assertTrue(claimDetailspage.verifyDateRange());
+}
+@And("^A Provider name in Claims Details page in AARP site$")
+public void validate_dynamic_provider_name()
+{
+	ClaimDetailsPage claimDetailspage = (ClaimDetailsPage) getLoginScenario().getBean(PageConstants.NEW_CLAIM_DETAILS_PAGE);
+	Assert.assertTrue(claimDetailspage.verifyProviderName());
+	
+}
+@And("^A Claim number label in Claims Details page in AARP site$")
+public void validate_claim_nummber_label(){
+	
+	ClaimDetailsPage claimDetailspage = (ClaimDetailsPage) getLoginScenario().getBean(PageConstants.NEW_CLAIM_DETAILS_PAGE);
+	Assert.assertTrue(claimDetailspage.verifyClaimNumber());
+	
+}
+@And("^A Claim number with dynamic value in Claims Details page in AARP site$")
+public void validate_dynamic_claim_num(){
+	
+	ClaimDetailsPage claimDetailspage = (ClaimDetailsPage) getLoginScenario().getBean(PageConstants.NEW_CLAIM_DETAILS_PAGE);
+	Assert.assertTrue(claimDetailspage.verifyDynamicClaimNumber());
+	
+}
+@And("^A Claim type label with dynamic value in Claims Details page in AARP site$")
+public void validate_claim_type_label(){
+	
+	ClaimDetailsPage claimDetailspage = (ClaimDetailsPage) getLoginScenario().getBean(PageConstants.NEW_CLAIM_DETAILS_PAGE);
+	Assert.assertTrue(claimDetailspage.validateClaimType());
+	
+}
+@And("^A Claim type with dynamic value in Claims Details page in AARP site$")
+public void validate_dynamic_claim_type(){
+	
+	ClaimDetailsPage claimDetailspage = (ClaimDetailsPage) getLoginScenario().getBean(PageConstants.NEW_CLAIM_DETAILS_PAGE);
+	Assert.assertTrue(claimDetailspage.validateDynamicClaimType());
+}
+@And("^A Claim status label with dynamic value in Claims Details page in AARP site$")
+public void validate_claim_status(){
+	
+	ClaimDetailsPage claimDetailspage = (ClaimDetailsPage) getLoginScenario().getBean(PageConstants.NEW_CLAIM_DETAILS_PAGE);
+	Assert.assertTrue(claimDetailspage.validateClaimStatus());
+}
+@And("^A Claim status with dynamic value in Claims Details page in AARP site$")
+public void validate_dynamic_claim_status(){
+	
+	ClaimDetailsPage claimDetailspage = (ClaimDetailsPage) getLoginScenario().getBean(PageConstants.NEW_CLAIM_DETAILS_PAGE);
+	Assert.assertTrue(claimDetailspage.validateDynamicClaimStatus());
+}
+@And("^A Medical EOB for MAPD Cosmos type in Claims Details page in AARP site$")
+public void validate_medical_eob(DataTable memberAttributes){
+	List<DataTableRow> memberAttributesRow = memberAttributes
+			.getGherkinRows();
+	//Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
+	for (int i = 0; i < memberAttributesRow.size(); i++) {
+
+		memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0), memberAttributesRow.get(i).getCells().get(1));
+	}
+	String planType = memberAttributesMap.get("Plan Type");
+	String domain  = memberAttributesMap.get("Domain");
+	
+	ClaimDetailsPage claimDetailspage = (ClaimDetailsPage) getLoginScenario().getBean(PageConstants.NEW_CLAIM_DETAILS_PAGE);
+	
+	Assert.assertTrue(claimDetailspage.validateMedicalEOBfordifferentDomainType(domain, planType));
+	
+}
+
+@Then("^I can view the Details Learn More About Your Cost Breakdown section$")
+public void validate_learn_more_about_section_details(){
+	ClaimDetailsPage claimDetailspage = (ClaimDetailsPage) getLoginScenario().getBean(PageConstants.NEW_CLAIM_DETAILS_PAGE);
+	
+	Assert.assertTrue(claimDetailspage.validateDetailsLearnmoreaboutsectionDetails());	
+	
+}
+
 
 
 
