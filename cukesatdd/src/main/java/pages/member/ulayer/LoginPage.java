@@ -1,11 +1,12 @@
 /**
-* 
+ * 
  */
 package pages.member.ulayer;
 
 
 import org.json.JSONException;
 import org.json.JSONObject;
+
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.NoAlertPresentException;
 import org.openqa.selenium.UnhandledAlertException;
@@ -24,166 +25,159 @@ import atdd.framework.MRScenario;
 import atdd.framework.UhcDriver;
 
 /**
-* @author pjaising
-*
-*/
+ * @author pjaising
+ *
+ */
 public class LoginPage extends UhcDriver {
 
-                // Page URL
-                private static String PAGE_URL = MRConstants.AARPM_URL;
+	// Page URL
+	private static String PAGE_URL = MRConstants.AARPM_URL;
 
-                @FindBy(id = "fd_memberSignInButton")
-                private WebElement loginIn;
+	@FindBy(id = "fd_memberSignInButton")
+	private WebElement loginIn;
 
-                @FindBy(id = "loginSTANDuser")
-                private WebElement userNameField;
+	@FindBy(id = "loginPOPUPuser")
+	private WebElement userNameField;
 
-                @FindBy(id = "loginSTANDpass")
-                private WebElement passwordField;
+	@FindBy(id = "loginPOPUPpass")
+	private WebElement passwordField;
 
-                //@FindBy(xpath = "//div[@class='fd_userPassSection']/button")
-                @FindBy(id = "accessURAccountBTN")
-                private WebElement signInButton;
+	@FindBy(xpath = "//div[@class='fd_userPassSection']/button")
+	private WebElement signInButton;
 
-                @FindBy(linkText = "Forgot your username or password?")
-                private WebElement forgotUsernamePasswordLink;
+	@FindBy(linkText = "Forgot your username or password?")
+	private WebElement forgotUsernamePasswordLink;
 
-                @FindBy(id = "usercheckbox")
-                private WebElement userNameCheckBox;
+	@FindBy(id = "usercheckbox")
+	private WebElement userNameCheckBox;
 
-                private PageData browserCheckData;
+	private PageData browserCheckData;
 
-                private JSONObject browserCheckJson;
-
+	private JSONObject browserCheckJson;
 
 
 
-                public LoginPage(WebDriver driver) {
-                                super(driver);
-                                PageFactory.initElements(driver, this);
-                                openAndValidate();
-                }
 
-                public Object loginWith(String username, String password) {
-                                //loginIn.click();                
-                                sendkeys(userNameField,username);
-                                sendkeys(passwordField,password);
-                                try {
-                                                Thread.sleep(3000);
-                                } catch (InterruptedException e) {
-                                                // TODO Auto-generated catch block
-                                                e.printStackTrace();
-                                }
-                                signInButton.click();
+	public LoginPage(WebDriver driver) {
+		super(driver);
+		PageFactory.initElements(driver, this);
+		openAndValidate();
+	}
 
-                                
+	public Object loginWith(String username, String password) {
+		loginIn.click();	
+		sendkeys(userNameField,username);
+		sendkeys(passwordField,password);
+		signInButton.click();
 
-                                if (MRScenario.environment.equals("awe-dev-b") || MRScenario.environment.equals("dev-a") || MRScenario.environment.equals("dev-c") || MRScenario.environment.equals("team-b") || MRScenario.environment.equals("team-a") || MRScenario.environment.equals("team-c")) {
+		
 
-                                                while(isAlertPresent(driver));
-                                                                                
-                                                /*if (!(MRScenario.environment.equals("awe-dev-b") || MRScenario.environment.equals("dev-c") || MRScenario.environment.equals("team-b"))){
-                                                                Alert alert2 = driver.switchTo().alert();
-                                                                alert2.accept();
-                                                }*/
-                                                
-                                }
+		if (MRScenario.environment.equals("awe-dev-b") || MRScenario.environment.equals("dev-a") || MRScenario.environment.equals("dev-c") || MRScenario.environment.equals("team-b") || MRScenario.environment.equals("team-a") || MRScenario.environment.equals("team-c")) {
+
+			while(isAlertPresent(driver));
+					
+			/*if (!(MRScenario.environment.equals("awe-dev-b") || MRScenario.environment.equals("dev-c") || MRScenario.environment.equals("team-b"))){
+				Alert alert2 = driver.switchTo().alert();
+				alert2.accept();
+			}*/
+			
+		}
 /*
-                                if ( MRScenario.environment.equals("dev-a") || MRScenario.environment.equals("dev-c")
-                                || MRScenario.environment.equals("team-a")) {
-                                Alert alert = driver.switchTo().alert();
+		if ( MRScenario.environment.equals("dev-a") || MRScenario.environment.equals("dev-c")
+		|| MRScenario.environment.equals("team-a")) {
+		Alert alert = driver.switchTo().alert();
         alert.accept();
         Alert alert1 = driver.switchTo().alert();
         alert1.accept();        
-                if (!MRScenario.environment.equals("dev-c")){
-                                Alert alert2 = driver.switchTo().alert();
-                                alert2.accept();
-                                               }
+        	if (!MRScenario.environment.equals("dev-c")){
+        		Alert alert2 = driver.switchTo().alert();
+        		alert2.accept();
+ 			}
 
-                               }*/
+ 		}*/
             
-                                
+		
 
-                                if (MRScenario.environment.equals("dev-c")) {
+		if (MRScenario.environment.equals("dev-c")) {
 
-                                                Alert alert = driver.switchTo().alert();
-                                                        alert.accept();
-                                                        Alert alert1 = driver.switchTo().alert();
-                                                        alert1.accept();
-                                                   /*     Alert alert2 = driver.switchTo().alert();
-                                                        alert2.accept();
-                                                        Alert alert3 = driver.switchTo().alert();
-                                                        alert3.accept();*/
-                                                        }
+			Alert alert = driver.switchTo().alert();
+			        alert.accept();
+			        Alert alert1 = driver.switchTo().alert();
+			        alert1.accept();
+			   /*     Alert alert2 = driver.switchTo().alert();
+			        alert2.accept();
+			        Alert alert3 = driver.switchTo().alert();
+			        alert3.accept();*/
+			        }
 
-                                if(currentUrl().contains("home/my-account-home.html"))
+		if(currentUrl().contains("home/my-account-home.html"))
 
-                                {
-                                                return new AccountHomePage(driver);
-                                }
-                                else if (currentUrl().contains("terminated-plan.html")) {
-                                                return new TerminatedHomePage(driver); 
-                                }
-                                return null;
-                }
+		{
+			return new AccountHomePage(driver);
+		}
+		else if (currentUrl().contains("terminated-plan.html")) {
+			return new TerminatedHomePage(driver); 
+		}
+		return null;
+	}
 
-                public LoginAssistancePage navigateToLoginAssistance() {
-                                loginIn.click();
-                                forgotUsernamePasswordLink.click();
-                                CommonUtility.waitForPageLoad(driver, userNameCheckBox, 5);
-                                if(driver.getTitle().equalsIgnoreCase("AARP Medicare Plans |Username and Password Assistance"))
-                                {
-                                                return new LoginAssistancePage(driver);
-                                }
+	public LoginAssistancePage navigateToLoginAssistance() {
+		loginIn.click();
+		forgotUsernamePasswordLink.click();
+		CommonUtility.waitForPageLoad(driver, userNameCheckBox, 5);
+		if(driver.getTitle().equalsIgnoreCase("AARP Medicare Plans |Username and Password Assistance"))
+		{
+			return new LoginAssistancePage(driver);
+		}
 
-                                return null;
+		return null;
 
-                }
+	}
 
 
-                @Override
-                public void openAndValidate() {
-                                start(PAGE_URL);
-                                validate(signInButton);
+	@Override
+	public void openAndValidate() {
+		start(PAGE_URL);
+		validate(loginIn);
 
-                }
+	}
 
-                public JSONObject getBrowserCheck() {
-                                String fileName = CommonConstants.AARPM_BROWSER_CHECK_DATA;
-                                browserCheckData = CommonUtility.readPageData(fileName,
-                                                                CommonConstants.PAGE_OBJECT_DIRECTORY_ULAYER_MEMBER);
+	public JSONObject getBrowserCheck() {
+		String fileName = CommonConstants.AARPM_BROWSER_CHECK_DATA;
+		browserCheckData = CommonUtility.readPageData(fileName,
+				CommonConstants.PAGE_OBJECT_DIRECTORY_ULAYER_MEMBER);
 
-                                JSONObject jsonObject = new JSONObject();
-                                for (String key : browserCheckData.getExpectedData().keySet()) {
-                                                WebElement element = findElement(browserCheckData.getExpectedData()
-                                                                                .get(key));
-                                                if (element != null) {
-                                                                if (validate(element)) {
-                                                                                try {
-                                                                                                jsonObject.put(key, element.getText());
-                                                                                } catch (JSONException e) {
-                                                                                                // TODO Auto-generated catch block
-                                                                                                e.printStackTrace();
-                                                                                }
-                                                                }
-                                                }
-                                }
-                                browserCheckJson = jsonObject;
+		JSONObject jsonObject = new JSONObject();
+		for (String key : browserCheckData.getExpectedData().keySet()) {
+			WebElement element = findElement(browserCheckData.getExpectedData()
+					.get(key));
+			if (element != null) {
+				if (validate(element)) {
+					try {
+						jsonObject.put(key, element.getText());
+					} catch (JSONException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				}
+			}
+		}
+		browserCheckJson = jsonObject;
 
-                                return browserCheckJson;
+		return browserCheckJson;
 
-                }
-                
-                public static boolean isAlertPresent(WebDriver wd) {
-                                try {
-                                                Alert alert = wd.switchTo().alert();
-                                                alert.dismiss();
-                                                return true;
-                                } catch (NoAlertPresentException e) {
-                                                return false;
-                                } catch (UnsupportedCommandException e) {
-                                                System.out.println("WebDriver doesn't support switchTo() method");
-                                                return false;
-                                }
-                }
+	}
+	
+	public static boolean isAlertPresent(WebDriver wd) {
+		try {
+			Alert alert = wd.switchTo().alert();
+			alert.dismiss();
+			return true;
+		} catch (NoAlertPresentException e) {
+			return false;
+		} catch (UnsupportedCommandException e) {
+			System.out.println("WebDriver doesn't support switchTo() method");
+			return false;
+		}
+	}
 }
