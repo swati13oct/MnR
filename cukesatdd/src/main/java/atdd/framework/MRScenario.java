@@ -905,223 +905,144 @@ public class MRScenario {
       * look at the Jenkins job, it specifies a browser type and it should be PhantomJS.
       * Anything else may be a problem.
       */
-	/*public WebDriver getWebDriver() {
+	public WebDriver getWebDriver() {
 
-    //Is system propery exists defining JENKINS_BROWSER, we're running in JENKINS and
-	//will prefer those browser properties.
-	String browser = (null == System.getProperty(CommonConstants.JENKINS_BROWSER)
-			? props.get(CommonConstants.DESKTOP_WEBDRIVER) : System.getProperty(CommonConstants.JENKINS_BROWSER));
-	
-	
-	String agent = (null == System.getProperty(CommonConstants.JENKINS_BROWSER_AGENT_STRING)
-			? props.get(CommonConstants.DESKTOP_BROWSER_AGENT_STRING) : System.getProperty(CommonConstants.JENKINS_BROWSER_AGENT_STRING));
-	
-	
-	if (browser.equalsIgnoreCase(CommonConstants.JENKINS_BROWSER_PHANTOMJS)) {
-		System.out.println("PHANTOMJS Agent: " + agent);
-	}
-	
-	// Again, Jenkins takes precedent. 
-	String pathToBinary = (null == System.getProperty("phantomjs") ? props.get("BrowserPathToBinary")
-			: System.getProperty("phantomjs"));
-	
-	
-	System.out.println("getWebDriver: returning driver for " + browser);
-	// if webDriver is null, create one, otherwise send the existing one
-	// back.
-	// This has to happen to preserve the state of webDriver so that we can
-	// take screenshots at the end.
-	if (null == webDriver) {
-		System.out.println("New WebDriver CREATED");
+        //Is system propery exists defining JENKINS_BROWSER, we're running in JENKINS and
+		//will prefer those browser properties.
+		String browser = (null == System.getProperty(CommonConstants.JENKINS_BROWSER)
+				? props.get(CommonConstants.DESKTOP_WEBDRIVER) : System.getProperty(CommonConstants.JENKINS_BROWSER));
 		
 		
-		// Choose your browser based on name. The name value is what is in
-		// CommonConstants.
-		// If the browser isn't configured (null) or it's set to HTMLUNIT,
-		// use HTMLUNIT.
-		// This is the default browser when I checked out the code, so it's
-		// the default
-		if (null == browser || browser.equalsIgnoreCase(CommonConstants.HTMLUNIT_BROWSER)) {
-			// use the HtmlUnit Driver
-			HtmlUnitDriver htmlUnitDriver = new HtmlUnitDriver(BrowserVersion.BEST_SUPPORTED) {
-				@Override
-				protected WebClient modifyWebClient(WebClient client) {
-					client.getOptions().setThrowExceptionOnScriptError(false);
-					return client;
-				}
-			};
-			htmlUnitDriver.setJavascriptEnabled(true);
-
-			webDriver = htmlUnitDriver;
-			webDriver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
-			webDriver.manage().window().maximize();
-		} else if (browser.equalsIgnoreCase(CommonConstants.JENKINS_BROWSER_PHANTOMJS)) {
-			// otherwise if we have a Jenkins browser defined, we use it.
-			DesiredCapabilities caps = new DesiredCapabilities();
-			caps.setCapability(PhantomJSDriverService.PHANTOMJS_EXECUTABLE_PATH_PROPERTY, pathToBinary);
-			//from Jarvis
-			caps.setCapability(PhantomJSDriverService.PHANTOMJS_PAGE_SETTINGS_PREFIX + "userAgent", agent);
-			caps.setJavascriptEnabled(true);
-			caps.setCapability(PhantomJSDriverService.PHANTOMJS_CLI_ARGS,
-					new String[] { "--web-security=no", "--ignore-ssl-errors=yes", "--ssl-protocol=any" });
-			
-			//end from jarvis
-			webDriver = new PhantomJSDriver(caps);
-			webDriver.manage().window().setSize(new Dimension(1400,1000));
-			webDriver.manage().timeouts().pageLoadTimeout(200,TimeUnit.SECONDS);
-		} else if (browser.equalsIgnoreCase(CommonConstants.FIREFOX_BROWSER)) {
-			FirefoxBinary ffBinary = new FirefoxBinary(new File(pathToBinary));
-			FirefoxProfile firefoxProfile = new FirefoxProfile();
-			webDriver = new FirefoxDriver(ffBinary, firefoxProfile);
-			webDriver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
-		} else if (browser.equalsIgnoreCase(CommonConstants.CHROME_BROWSER)) {
-			Map<String, Object> chromeOptions = new HashMap<String, Object>();
-			chromeOptions.put("binary", pathToBinary);
-			DesiredCapabilities capabilities = DesiredCapabilities.chrome();
-			capabilities.setCapability(ChromeOptions.CAPABILITY, chromeOptions);
-			webDriver = new ChromeDriver(capabilities);
-		} else if (browser.equalsIgnoreCase(CommonConstants.IE_BROWSER)) {
-			System.setProperty("webdriver.ie.driver",
-					pathToBinary);
-			DesiredCapabilities ieCaps = DesiredCapabilities.internetExplorer();
-			ieCaps.setCapability(InternetExplorerDriver.INTRODUCE_FLAKINESS_BY_IGNORING_SECURITY_DOMAINS, true);
-			webDriver = new InternetExplorerDriver(ieCaps);
-			webDriver.manage().window().maximize();
-			return webDriver;
-		} else if (browser.equalsIgnoreCase(CommonConstants.MOBILE_BROWSER)) {
-			Map<String, String> mobileEmulation = new HashMap<String, String>();
-			mobileEmulation.put("deviceName", props.get(CommonConstants.DEVICE_NAME));
-			Map<String, Object> chromeOptions = new HashMap<String, Object>();
-			chromeOptions.put("mobileEmulation", mobileEmulation);
-			DesiredCapabilities capabilities = DesiredCapabilities.chrome();
-			capabilities.setCapability("chrome.switches", Arrays.asList("--start-maximized"));
-			capabilities.setCapability(ChromeOptions.CAPABILITY, chromeOptions);
-			System.setProperty("webdriver.chrome.driver", props.get(CommonConstants.CHROME_DRIVER));
-			webDriver = new ChromeDriver(capabilities);
-			return webDriver;
+		String agent = (null == System.getProperty(CommonConstants.JENKINS_BROWSER_AGENT_STRING)
+				? props.get(CommonConstants.DESKTOP_BROWSER_AGENT_STRING) : System.getProperty(CommonConstants.JENKINS_BROWSER_AGENT_STRING));
+		
+		
+		if (browser.equalsIgnoreCase(CommonConstants.JENKINS_BROWSER_PHANTOMJS)) {
+			System.out.println("PHANTOMJS Agent: " + agent);
 		}
-	}
-	return webDriver;
+		
+		// Again, Jenkins takes precedent. 
+		String pathToBinary = (null == System.getProperty("phantomjs") ? props.get("BrowserPathToBinary")
+				: System.getProperty("phantomjs"));
+		
+		
+		System.out.println("getWebDriver: returning driver for " + browser);
+		// if webDriver is null, create one, otherwise send the existing one
+		// back.
+		// This has to happen to preserve the state of webDriver so that we can
+		// take screenshots at the end.
+		if (null == webDriver) {
+			System.out.println("New WebDriver CREATED");
+			
+			
+			// Choose your browser based on name. The name value is what is in
+			// CommonConstants.
+			// If the browser isn't configured (null) or it's set to HTMLUNIT,
+			// use HTMLUNIT.
+			// This is the default browser when I checked out the code, so it's
+			// the default
+			if (null == browser || browser.equalsIgnoreCase(CommonConstants.HTMLUNIT_BROWSER)) {
+				// use the HtmlUnit Driver
+				HtmlUnitDriver htmlUnitDriver = new HtmlUnitDriver(BrowserVersion.BEST_SUPPORTED) {
+					@Override
+					protected WebClient modifyWebClient(WebClient client) {
+						client.getOptions().setThrowExceptionOnScriptError(false);
+						return client;
+					}
+				};
+				htmlUnitDriver.setJavascriptEnabled(true);
 
-}
-//public WebDriver getWebDriver() {
-//    String phantomjs = System.getProperty("phantomjs");
-////        String agent = "Mozilla/5.0 (Linux; U; Android 2.3.3; en-us; LG-LU3000 Build/GRI40) AppleWebKit/533.1 (KHTML, like Gecko) Version/4.0 Mobile Safari/533.1";
-//    DesiredCapabilities caps = new DesiredCapabilities();
-//    //   caps.setCapability(PhantomJSDriverService.PHANTOMJS_EXECUTABLE_PATH_PROPERTY,"C:/dev/programs/phantomjs/bin/phantomjs.exe");
-//    System.out.print(System.getProperty("phantomjs"));
-//    if (StringUtils.isBlank(phantomjs)) {
-//                   caps.setCapability(PhantomJSDriverService.PHANTOMJS_EXECUTABLE_PATH_PROPERTY,props.get("HeadlessBrowserPath"));
-//    } else {
-//                   caps.setCapability(PhantomJSDriverService.PHANTOMJS_EXECUTABLE_PATH_PROPERTY,System.getProperty("phantomjs"));
-//    }
-//    //caps.setCapability(PhantomJSDriverService.PHANTOMJS_PAGE_SETTINGS_PREFIX + "userAgent", agent);
-//
-//    caps.setJavascriptEnabled(true);
-//    caps.setCapability(PhantomJSDriverService.PHANTOMJS_CLI_ARGS, new String[] {"--web-security=no", "--ignore-ssl-errors=yes", "--ssl-protocol=any"});
-//    String userAgent = "Mozilla/5.0 (Windows NT 6.0) AppleWebKit/535.1 (KHTML, like Gecko) Chrome/13.0.782.41 Safari/535.1";
-//    System.setProperty("phantomjs.page.settings.userAgent", userAgent);
-//    WebDriver webDriver = new PhantomJSDriver(caps); 
-//    
-//    
-//
-//    return webDriver; 
-//
-//
-//}
-public WebDriver getWebDriver() {
-    /*HtmlUnitDriver htmlUnitDriver = new HtmlUnitDriver(
-                 BrowserVersion.FIREFOX_38) {
-           @Override
-           protected WebClient modifyWebClient(WebClient client) {
-                 client.getOptions().setThrowExceptionOnScriptError(false);
-                 return client;
-           }
-    };
-    htmlUnitDriver.setJavascriptEnabled(true);
+				webDriver = htmlUnitDriver;
+				webDriver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
+				webDriver.manage().window().maximize();
+			} else if (browser.equalsIgnoreCase(CommonConstants.JENKINS_BROWSER_PHANTOMJS)) {
+				// otherwise if we have a Jenkins browser defined, we use it.
+				DesiredCapabilities caps = new DesiredCapabilities();
+				caps.setCapability(PhantomJSDriverService.PHANTOMJS_EXECUTABLE_PATH_PROPERTY, pathToBinary);
+				//from Jarvis
+				caps.setCapability(PhantomJSDriverService.PHANTOMJS_PAGE_SETTINGS_PREFIX + "userAgent", agent);
+				caps.setJavascriptEnabled(true);
+				caps.setCapability(PhantomJSDriverService.PHANTOMJS_CLI_ARGS,
+						new String[] { "--web-security=no", "--ignore-ssl-errors=yes", "--ssl-protocol=any" });
+				
+				//end from jarvis
+				webDriver = new PhantomJSDriver(caps);
+				webDriver.manage().window().setSize(new Dimension(1400,1000));
+				webDriver.manage().timeouts().pageLoadTimeout(200,TimeUnit.SECONDS);
+			} else if (browser.equalsIgnoreCase(CommonConstants.FIREFOX_BROWSER)) {
+				FirefoxBinary ffBinary = new FirefoxBinary(new File(pathToBinary));
+				FirefoxProfile firefoxProfile = new FirefoxProfile();
+				webDriver = new FirefoxDriver(ffBinary, firefoxProfile);
+				webDriver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
+				webDriver.manage().window().maximize();
+			} else if (browser.equalsIgnoreCase(CommonConstants.CHROME_BROWSER)) {
+				Map<String, Object> chromeOptions = new HashMap<String, Object>();
+				chromeOptions.put("binary", pathToBinary);
+				DesiredCapabilities capabilities = DesiredCapabilities.chrome();
+				capabilities.setCapability(ChromeOptions.CAPABILITY, chromeOptions);
+				webDriver = new ChromeDriver(capabilities);
+			} else if (browser.equalsIgnoreCase(CommonConstants.IE_BROWSER)) {
+				System.setProperty("webdriver.ie.driver",
+						pathToBinary);
+				DesiredCapabilities ieCaps = DesiredCapabilities.internetExplorer();
+				ieCaps.setCapability(InternetExplorerDriver.INTRODUCE_FLAKINESS_BY_IGNORING_SECURITY_DOMAINS, true);
+				webDriver = new InternetExplorerDriver(ieCaps);
+				webDriver.manage().window().maximize();
+				return webDriver;
+			} else if (browser.equalsIgnoreCase(CommonConstants.MOBILE_BROWSER)) {
+				Map<String, String> mobileEmulation = new HashMap<String, String>();
+				mobileEmulation.put("deviceName", props.get(CommonConstants.DEVICE_NAME));
+				Map<String, Object> chromeOptions = new HashMap<String, Object>();
+				chromeOptions.put("mobileEmulation", mobileEmulation);
+				DesiredCapabilities capabilities = DesiredCapabilities.chrome();
+				capabilities.setCapability("chrome.switches", Arrays.asList("--start-maximized"));
+				capabilities.setCapability(ChromeOptions.CAPABILITY, chromeOptions);
+				System.setProperty("webdriver.chrome.driver", props.get(CommonConstants.CHROME_DRIVER));
+				webDriver = new ChromeDriver(capabilities);
+				return webDriver;
+			}
+		}
+		return webDriver;
 
-    webDriver = htmlUnitDriver;
-    webDriver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
-    webDriver.manage().window().maximize();
-    
-    DesiredCapabilities ieCaps = new DesiredCapabilities();
-    ieCaps.setCapability(PhantomJSDriverService.PHANTOMJS_EXECUTABLE_PATH_PROPERTY, "C:/dev/programs/phantomjs/bin/phantomjs.exe");
-    webDriver = new PhantomJSDriver(ieCaps); 
-    
-    
-        String phantomjs = System.getProperty("phantomjs");
-        DesiredCapabilities caps = new DesiredCapabilities();
-    //    caps.setCapability(PhantomJSDriverService.PHANTOMJS_EXECUTABLE_PATH_PROPERTY,"C:/dev/programs/phantomjs/bin/phantomjs.exe");
-        System.out.print(System.getProperty("phantomjs"));
-        if (StringUtils.isBlank(phantomjs)) {
-               caps.setCapability(PhantomJSDriverService.PHANTOMJS_EXECUTABLE_PATH_PROPERTY,props.get("HeadlessBrowserPath"));
-           
-        } else {
-               caps.setCapability(PhantomJSDriverService.PHANTOMJS_EXECUTABLE_PATH_PROPERTY,System.getProperty("phantomjs"));
-        }
-      //  caps.setCapability("browserType", "phantomjs");
-    //   caps.setCapability(PhantomJSDriverService.PHANTOMJS_PAGE_SETTINGS_PREFIX + "userAgent", agent);
-      //  caps.setCapability("takesScreenshot", false);
-        caps.setJavascriptEnabled(true);
-        caps.setCapability(PhantomJSDriverService.PHANTOMJS_CLI_ARGS, new String[] {"--web-security=no", "--ignore-ssl-errors=yes", "--ssl-protocol=any"});
-        String userAgent = "Mozilla/5.0 (Windows NT 6.0) AppleWebKit/535.1 (KHTML, like Gecko) Chrome/13.0.782.41 Safari/535.1";
-                          //  "Mozilla/5.0 (Linux; U; Android 2.3.3; en-us; LG-LU3000 Build/GRI40) AppleWebKit/533.1 (KHTML, like Gecko) Version/4.0 Mobile Safari/533.1";
-       
-        caps.setCapability(PhantomJSDriverService.PHANTOMJS_PAGE_SETTINGS_PREFIX + "userAgent", userAgent);
-        webDriver = new PhantomJSDriver(caps);
-        webDriver.manage().timeouts().pageLoadTimeout(120,TimeUnit.SECONDS);
-        webDriver.manage().window().setSize(new Dimension(1400, 1000));
-    
-    
-     /*if (null == webDriver) {
-           File pathToBinary = new File("C:/Program Files (x86)/Mozilla Firefox/firefox.exe");
-           FirefoxBinary ffBinary = new FirefoxBinary(pathToBinary);
-           FirefoxProfile firefoxProfile = new FirefoxProfile();
-           webDriver = new FirefoxDriver(ffBinary, firefoxProfile);
-           webDriver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS); 
-    }*/
-        return webDriver; 
-}
-
-
-
-public WebDriver getIEDriver() {
-	System.setProperty("webdriver.ie.driver",
-			"C:/Users/pgupta15/Downloads/IEDriverServer_x64_2.27.0/IEDriverServer.exe");
-	DesiredCapabilities ieCaps = DesiredCapabilities.internetExplorer();
-	ieCaps.setCapability(
-			InternetExplorerDriver.INTRODUCE_FLAKINESS_BY_IGNORING_SECURITY_DOMAINS,
-			true);
-	webDriver = new InternetExplorerDriver(ieCaps);
-	webDriver.manage().window().maximize();
-	return webDriver;
-}
-
-/*
- * @return
- */
-public WebDriver getMobileWebDriver() {
-	Map<String, String> mobileEmulation = new HashMap<String, String>();
-	mobileEmulation.put("deviceName",
-			props.get(CommonConstants.DEVICE_NAME));
-	Map<String, Object> chromeOptions = new HashMap<String, Object>();
-	chromeOptions.put("mobileEmulation", mobileEmulation);
-	DesiredCapabilities capabilities = DesiredCapabilities.chrome();
-	capabilities.setCapability("chrome.switches",
-			Arrays.asList("--start-maximized"));
-	capabilities.setCapability(ChromeOptions.CAPABILITY, chromeOptions);
-	System.setProperty("webdriver.chrome.driver",
-			props.get(CommonConstants.CHROME_DRIVER));
-	webDriver = new ChromeDriver(capabilities);
-	return webDriver;
-}
-
-public void nullifyWebDriver() {
-	if (null != webDriver) {
-		webDriver.close();
-		webDriver = null;
 	}
 
-}
+	public WebDriver getIEDriver() {
+		System.setProperty("webdriver.ie.driver",
+				"C:/Users/pgupta15/Downloads/IEDriverServer_x64_2.27.0/IEDriverServer.exe");
+		DesiredCapabilities ieCaps = DesiredCapabilities.internetExplorer();
+		ieCaps.setCapability(
+				InternetExplorerDriver.INTRODUCE_FLAKINESS_BY_IGNORING_SECURITY_DOMAINS,
+				true);
+		webDriver = new InternetExplorerDriver(ieCaps);
+		webDriver.manage().window().maximize();
+		return webDriver;
+	}
+
+	/*
+	 * @return
+	 */
+	public WebDriver getMobileWebDriver() {
+		Map<String, String> mobileEmulation = new HashMap<String, String>();
+		mobileEmulation.put("deviceName",
+				props.get(CommonConstants.DEVICE_NAME));
+		Map<String, Object> chromeOptions = new HashMap<String, Object>();
+		chromeOptions.put("mobileEmulation", mobileEmulation);
+		DesiredCapabilities capabilities = DesiredCapabilities.chrome();
+		capabilities.setCapability("chrome.switches",
+				Arrays.asList("--start-maximized"));
+		capabilities.setCapability(ChromeOptions.CAPABILITY, chromeOptions);
+		System.setProperty("webdriver.chrome.driver",
+				props.get(CommonConstants.CHROME_DRIVER));
+		webDriver = new ChromeDriver(capabilities);
+		return webDriver;
+	}
+
+	public void nullifyWebDriver() {
+		if (null != webDriver) {
+			webDriver.close();
+			webDriver = null;
+		}
+
+	}
 
 }
