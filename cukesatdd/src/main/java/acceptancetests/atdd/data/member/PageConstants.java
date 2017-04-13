@@ -178,5 +178,6 @@ public class PageConstants {
 	public static final String DASHBOARD_PAYMENT_HISTORY_PAGE = "dashboardPaymentOverview";
 
 	public static final String NEW_CLAIMS_SUMMARY_PAGE = "newClaimsSummaryPage";	
-
+	
+	public static final String NEW_CLAIM_DETAILS_PAGE = "newClaimDetailsPage";
 }
