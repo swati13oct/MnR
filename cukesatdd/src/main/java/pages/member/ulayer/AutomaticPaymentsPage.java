@@ -50,7 +50,8 @@ public class AutomaticPaymentsPage extends UhcDriver{
 	@FindBy(xpath="//a[contains(text(),'cancel  ')]") 
 	private WebElement cancelbtn; 
 
-	
+	@FindBy(xpath="//*[text()='Cancel']")
+	private WebElement automaticpagecancelbtn;
 	
 	@FindBy(xpath="//*[text()='continue']")
 	private WebElement reviewContinue;	
@@ -98,6 +99,16 @@ public class AutomaticPaymentsPage extends UhcDriver{
 		System.out.println("Navigated to payment history");		
 		return null;
 		
+	}
+	
+	public AutomaticPaymentPage automaticpagecancelbtn(){
+		automaticpagecancelbtn.click();
+		if(driver.getTitle().equalsIgnoreCase("My Benefits & Coverage")){
+			return new AutomaticPaymentPage(driver);
+		}
+		return null;
+		
+	
 	}
 	
 	public ReviewAutomaticPaymentsPage editPaymentbtn(){

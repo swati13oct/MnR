@@ -217,6 +217,13 @@ public class AutomaticPaymenAarpStepDefinition {
 		
 	}
 	
+	@And("^the user clicks on cancel button in automatic payment page and validate payment history$")
+	public void user_clicks_cancelbtn_onAutomaticPaymentsPage()
+	{
+		AutomaticPaymentsPage automaticPaymentsPage = (AutomaticPaymentsPage)getLoginScenario().getBean(PageConstants.AUTOMATIC_PAYMENTS_DASHBOARD);
+		AutomaticPaymentPage reviewAutomaticPaymentsPage = automaticPaymentsPage.automaticpagecancelbtn();
+	}
+	
 	@And("the user validate edit payment information on review automatic payment page$")
 	public void user_clicks_editPaymentinfobtn(){
 		AutomaticPaymentsPage automaticPaymentsPage = (AutomaticPaymentsPage)getLoginScenario().getBean(PageConstants.AUTOMATIC_PAYMENTS_DASHBOARD);
