@@ -21,16 +21,16 @@ import atdd.framework.UhcDriver;
  */
 public class PlanInformationPage extends UhcDriver {
                 
-        @FindBy(id = "enrollment.medicareBeneficiary.hasEndStateRenalDisease1")
+        @FindBy(id = "enrollment.medicareBeneficiary.hasEndStateRenalDisease2")
         private WebElement noRadioButton;
         
-        @FindBy(id = "enrollment.medicareBeneficiary.hasEndStateRenalDisease2")
+        @FindBy(id = "enrollment.medicareBeneficiary.hasEndStateRenalDisease1")
         private WebElement yesRadioButton;
         
         @FindBy(id = "enrollmentNext")
         private WebElement enrollmentNext;
         
-        @FindBy(xpath = "//div[@class='enrollment_content']/div[2]/form/h2")
+        @FindBy(xpath = "//div[@class='enrollment_content']/div[2]/form/h3")
         private WebElement pageHeading;
         
         private PageData planInformation;
@@ -58,8 +58,6 @@ public class PlanInformationPage extends UhcDriver {
         @Override
         public void openAndValidate() {
 
-                validate(noRadioButton);
-                validate(yesRadioButton);
                 validate(enrollmentNext);
                 
                 JSONObject jsonObject = new JSONObject();
@@ -95,8 +93,8 @@ public class PlanInformationPage extends UhcDriver {
 
         public BeneficiaryInformationPage navigateToNextStep() {
                 enrollmentNext.click();
-                if(pageHeading.getText().equalsIgnoreCase("Step 2: Beneficiary Information"))
-                {
+                if(pageHeading.getText().contains("Beneficiary Information"))
+                {	
                         return new BeneficiaryInformationPage(driver);
                 }
                 return null;

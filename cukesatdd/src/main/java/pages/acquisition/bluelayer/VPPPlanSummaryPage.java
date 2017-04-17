@@ -26,6 +26,8 @@ import org.openqa.selenium.support.PageFactory;
 
 
 
+
+
 import pages.acquisition.bluelayer.EnrollPlanInfoPage;
 import pages.acquisition.uhcretiree.Rallytool_Page;
 
@@ -557,7 +559,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 
 	public EnrollPlanInfoPage clicksOnEnrollInplanLink(String planName) {
 		if (planName.contains("HMO")) {
-			for (WebElement plan : maPlanElement) {
+			for (WebElement plan : maPlans) {
 				if (plan.getText().contains(planName)) {
 					ElementData elementData = new ElementData("id", "enrollMA");
 					findChildElement(elementData, plan).click();
@@ -565,20 +567,36 @@ public class VPPPlanSummaryPage extends UhcDriver {
 			}
 		}
 		if (planName.contains("PDP")) {
-			for (WebElement plan : pdpPlanElement) {
+			for (WebElement plan : pdpPlans) {
 				if (plan.getText().contains(planName)) {
-					ElementData elementData = new ElementData("id", "enrollPDP"); // TODO:
+					ElementData elementData = new ElementData("className", "enrollinplanBtn"); // TODO:
 					// Re-check
 					findChildElement(elementData, plan).click();
 				}
 			}
 		}
+
+
+		for( int i = 0; i<10; i++){
+			if (pageHeading.getText().equalsIgnoreCase(
+					"You Have Chosen to Enroll in the Following Plan")) {
+				break;
+			}else{
+				try {
+					Thread.sleep(1000);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		}	
 		if (pageHeading.getText().equalsIgnoreCase(
 				"You Have Chosen to Enroll in the Following Plan")) {
 			return new EnrollPlanInfoPage(driver);
 		}else{
 			return null;
 		}
+
 	}	
 
 	public GetStartedPage clicksOnEnterDrugInformationLink(String planName) {
