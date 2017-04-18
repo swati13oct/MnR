@@ -20,6 +20,7 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
 
 import pages.member.bluelayer.OrderplanmaterialsPage;
+import pages.mypcp.SignInPage;
 import pages.member.bluelayer.ContactUsPage;
 import acceptancetests.atdd.data.CommonConstants;
 import acceptancetests.atdd.data.PageData;
@@ -113,7 +114,6 @@ public class AccountHomePage extends UhcDriver {
 	@FindBy(xpath = "html/body/div[2]/div[1]/p/a[2]")
 	private WebElement backToPreviousPage;
 	
-
 	@FindBy(xpath = "//span[contains(.,'Print temporary ID card')]")
 	private WebElement viewIDCard;
 	
@@ -183,6 +183,9 @@ public class AccountHomePage extends UhcDriver {
 	
 	@FindBy(xpath = "//*[@id='healthrecord']/a")
 	private WebElement myHealthRecordLink;
+	
+	@FindBy(xpath = "(.//a)[1]")
+	private WebElement disclaimerbackToPreviousPage;
 	
 	@FindBy(xpath = "//*[@id='phr_widget_7_box']/div[9]/p/a")
 	private WebElement preferdPharmacyBenefitLink;
@@ -255,7 +258,8 @@ public class AccountHomePage extends UhcDriver {
 		return null;
 		
 	}
-
+	
+	
 	public ManageDrugPage navigateToEstimateCost(String category) {
 
 		estimateCostLink.click();
@@ -319,7 +323,45 @@ public class AccountHomePage extends UhcDriver {
 			return null;
 
 	}
+	
+	public AccountHomePage navigateToDisclaimerPage(){
+		driver.navigate().to("https://member."+MRScenario.environment+"-uhcmedicaresolutions.uhc.com/content/mypcp/guest/noacc-disclaimers.html");
+	try{
+		Alert alert = driver.switchTo().alert();
+		alert.accept();
+	}
+		
+	catch(Exception e)
+	{
+		
+	}
+			System.out.println("title  "+driver.getTitle());
+		if(driver.getTitle().equalsIgnoreCase("My Benefits & Coverage")){
+			return new AccountHomePage(driver);
+			}
+			return null;
 
+	}
+	
+	public SignInPage disclaimerbackToPreviousPage(){
+		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+		/*JavascriptExecutor ex  = (JavascriptExecutor)driver;
+		ex.executeScript("args[0].click();", disclaimerbackToPreviousPage);*/
+		disclaimerbackToPreviousPage.click();
+		if (driver.getTitle().equalsIgnoreCase("UnitedHealthcare Medicare Solutions | Sign In")) {
+			return new SignInPage(driver);
+		}
+		return null;
+		/*if (title.equalsIgnoreCase("UnitedHealthcare Medicare Solutions | Sign In")) {
+			return new BenefitsCoveragePage(driver);
+		}
+		else
+		return null;*/
+		
+		
+	}
+	
+	
 	public PlanSummaryPage navigateToPlanSummary() {
 
 		myPlansTab.click();

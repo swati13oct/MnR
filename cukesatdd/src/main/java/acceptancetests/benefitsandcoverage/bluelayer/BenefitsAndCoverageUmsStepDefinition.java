@@ -24,6 +24,7 @@ import pages.member.bluelayer.LoginPage;
 import pages.member.bluelayer.BenefitsAndCoveragePage;
 import pages.member.bluelayer.FormsandresourcesPage;
 import pages.member.ulayer.PlanBenefitsCoveragePage;
+import pages.mypcp.SignInPage;
 import acceptancetests.atdd.data.CommonConstants;
 import acceptancetests.atdd.data.member.PageConstants;
 import acceptancetests.benefitsandcoverage.data.PlanBenefitsAndCoverageCommonConstants;
@@ -282,6 +283,8 @@ public class BenefitsAndCoverageUmsStepDefinition {
 		
 	}
 	
+	
+	
 	@When("^the user clicks on back to previous page$")
 	public void user_clicks_backToPreviousPage(){
 		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario()
@@ -289,7 +292,27 @@ public class BenefitsAndCoverageUmsStepDefinition {
 		accountHomePage.backToPreviousPage();
 	}
 	
+	@Given("^the user lands on the guest PCP medicare site login page$")
+	public void user_lands_on_pcp_site(){
+		WebDriver wd = getLoginScenario().getWebDriver();
 
+		AccountHomePage accountHomePage1 = new AccountHomePage(wd);
+	
+		AccountHomePage accountHomePage2 =accountHomePage1.navigateToDisclaimerPage();
+		getLoginScenario().saveBean(PageConstants.MYPCP_DISCLAIMER_PAGE,
+				accountHomePage2);
+		
+		
+	}
+	
+	@When("^the user clicks on disclaimer page back to previous page$")
+	public void user_clicks_disclaimerbackToPreviousPage(){
+		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario()
+				.getBean(PageConstants.MYPCP_DISCLAIMER_PAGE);
+		accountHomePage.disclaimerbackToPreviousPage();
+	}
+	
+	
 	@Then("^the user validates plan and member details after login in UHC site$")
 	public void login_validation() {
 		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario()

@@ -700,6 +700,13 @@ Scenario: Verify Terms and Conditions in ums site
 Given the user lands on the guest UHC medicare site login page
 When the user clicks on back to previous page
 
+@disclaimerpage       
+Scenario: Verify disclaimer text page in PCP medicare site
+Given the user lands on the guest PCP medicare site login page
+When the user clicks on disclaimer page back to previous page
+
+
+
 
 
 
