@@ -13,7 +13,7 @@ import cucumber.junit.Cucumber;
  */
 @RunWith(Cucumber.class)
 @Cucumber.Options(glue = { "atdd.framework","acceptancetests.formsandresources.bluelayer" }, 
-		features = { "feature/guestloginpage/blayer" }, 
+		features = { "feature/forms-and-resources/bluelayer" }, 
 		format = {
 				"pretty", "html:reports/test-report","json:target/cucumber.json"}, tags ={"@pharmacybenefit,@appoint,@privacypolicy,@noaccordion"})
 public class RunMRAtddTestFormsandResources {
