@@ -10,6 +10,7 @@ import java.util.concurrent.TimeUnit;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.junit.Assert;
+import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
@@ -24,6 +25,7 @@ import acceptancetests.atdd.data.CommonConstants;
 import acceptancetests.atdd.data.PageData;
 import acceptancetests.atdd.util.CommonUtility;
 import acceptancetests.login.data.LoginCommonConstants;
+import atdd.framework.MRScenario;
 import atdd.framework.UhcDriver;
 
 
@@ -105,8 +107,11 @@ public class AccountHomePage extends UhcDriver {
 	@FindBy(xpath = "//*[@id='medicareTitle']/p/a[2]")   //Story 261070
 	private WebElement chineseLink;
 	
-	@FindBy(xpath = "////*[@id='subPageLeft']/div[2]/div[2]/h3[2]/a")
+	@FindBy(xpath = "//*[@id='subPageLeft']/div[2]/div[2]/h3[2]/a")
 	private WebElement createPdfLink;
+	
+	@FindBy(xpath = "html/body/div[2]/div[1]/p/a[2]")
+	private WebElement backToPreviousPage;
 	
 
 	@FindBy(xpath = "//span[contains(.,'Print temporary ID card')]")
@@ -238,6 +243,18 @@ public class AccountHomePage extends UhcDriver {
 		else
 		return null;
 	}
+	
+	public BenefitsCoveragePage backToPreviousPage(){
+		backToPreviousPage.click();
+		String title = driver.getTitle().toString();
+		System.out.println(title);
+		if (title.equalsIgnoreCase("UnitedHealthcare Medicare Solutions | Home")) {
+			return new BenefitsCoveragePage(driver);
+		}
+		else
+		return null;
+		
+	}
 
 	public ManageDrugPage navigateToEstimateCost(String category) {
 
@@ -283,11 +300,29 @@ public class AccountHomePage extends UhcDriver {
 		return null;
 
 	}
+	
+	public AccountHomePage navigateToTermsandConditions(){
+		driver.navigate().to("https://member."+MRScenario.environment+"-uhcmedicaresolutions.uhc.com/content/uhcm/guest/noacc-terms-and-conditions.html");
+	try{
+		Alert alert = driver.switchTo().alert();
+		alert.accept();
+	}
+		
+	catch(Exception e)
+	{
+		
+	}
+			System.out.println("title  "+driver.getTitle());
+		if(driver.getTitle().equalsIgnoreCase("My Benefits & Coverage")){
+			return new AccountHomePage(driver);
+			}
+			return null;
+
+	}
 
 	public PlanSummaryPage navigateToPlanSummary() {
 
 		myPlansTab.click();
-
 		CommonUtility.checkPageIsReady(driver);
 		if (getTitle().equalsIgnoreCase(
 				"UnitedHealthcare Medicare Solutions | Plan Summary")) {

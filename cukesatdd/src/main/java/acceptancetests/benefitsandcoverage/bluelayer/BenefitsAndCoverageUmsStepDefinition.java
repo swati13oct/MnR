@@ -269,6 +269,26 @@ public class BenefitsAndCoverageUmsStepDefinition {
 
 	}
 	
+	@Given("^the user lands on the guest UHC medicare site login page$")
+	public void user_lands_on_ums_site(){
+		WebDriver wd = getLoginScenario().getWebDriver();
+		
+
+		AccountHomePage accountHomePage1 = new AccountHomePage(wd);
+		getLoginScenario().saveBean(PageConstants.ACCOUNT_HOME_PAGE,
+				accountHomePage1);
+		accountHomePage1.navigateToTermsandConditions();
+		
+		
+	}
+	
+	@When("^the user clicks on back to previous page$")
+	public void user_clicks_backToPreviousPage(){
+		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario()
+				.getBean(PageConstants.ACCOUNT_HOME_PAGE);
+		accountHomePage.backToPreviousPage();
+	}
+	
 
 	@Then("^the user validates plan and member details after login in UHC site$")
 	public void login_validation() {

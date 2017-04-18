@@ -72,8 +72,8 @@ public class BenefitsCoveragePage extends UhcDriver {
 		PageFactory.initElements(driver, this);
 		//String fileName = CommonConstants.BENEFITS_AND_COVERAGE_PDP_NONLIS_NONUS_PAGE_DATA;
 		String fileName = CommonConstants.BENEFITS_AND_COVERAGE_MAPD_LIS_NONUS_PAGE_DATA;
-		benefitsAndCoverage = CommonUtility.readPageData(fileName,
-				CommonConstants.PAGE_OBJECT_DIRECTORY_BLUELAYER_MEMBER);
+		//benefitsAndCoverage = CommonUtility.readPageData(fileName,
+				//CommonConstants.PAGE_OBJECT_DIRECTORY_BLUELAYER_MEMBER);
 		openAndValidate();
 	}
 

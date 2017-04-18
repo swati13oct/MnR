@@ -694,7 +694,11 @@ Then the user validates the content on mydocument page
 Examples:
         |planType  |Member Type     |
         |MAPD        |Individual    | 
-
+        
+@termsandConditions        
+Scenario: Verify Terms and Conditions in ums site
+Given the user lands on the guest UHC medicare site login page
+When the user clicks on back to previous page
 
 
 
