@@ -127,7 +127,7 @@ And the user fill following information in beneficiary information step in UHC s
      |<answerLongTermCareFacilitySelected>| 
   And the user select the answer for medicaid program question in Additional Information
      |<answerStateMedicaidSelected>|
-  And the user checks for Primary Care Provider by clicking on look up your provider link
+#  And the user checks for Primary Care Provider by clicking on look up your provider link
   And the user select the answer for other health insurance question in Additional Information
      |<answerOtherHealthInsurance>|   
   And the user select the answer for this question "Do you want to add a dental supplemental benefit?" in supplemental benefits 
