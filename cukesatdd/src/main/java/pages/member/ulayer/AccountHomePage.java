@@ -618,6 +618,7 @@ public class AccountHomePage extends UhcDriver {
 		}
 		return null;
 	}
+
 public pages.dashboard.member.ulayer.ClaimSummarypage navigateToClaimsSummaryPage(WebDriver driver) {
 		// TODO Auto-generated method stub
 				String url = "https://member.team-b-aarpmedicareplans.uhc.com/guest/mirumclaims.html";
@@ -676,7 +677,8 @@ public FormsandresourcesPage navigateToMydocumentAarpPage() {
 		
 		return null;
 	}
-
+	
+	
 	public FormsandresourcesPage navigateToviewdowloadlinkAarpPage() {
 		
 		viewanddownloadLink.click();
@@ -730,14 +732,44 @@ public FormsandresourcesPage navigateToMydocumentAarpPage() {
 		}
 	}
 
-	
 
- 
+
+	public Object validateLoginPageElements() {
+		
+		validate(myPlansTab);
+		validate(profAndPrefLink);
+		validate(contactUsLink);
+		validate(phrTab);
+		validate(benefitsLink);
+		validate(logOut);
+		validate(paymentsLink);
+		validate(formsAndResourcesLink);
+		validate(benefitsAndCoverageLink);
+		validate(pharmacyLocator);
+		validate(medicalProviders);
+		validate(myMenuNavigator);
+		validate(viewIDCard);
+		validate(drugLookupLink);
+		validate(searchClaimsHistory);
+		validate(myPlansTab);
+		validate(myPlansTab);
+		validate(myPlansTab);
+		validate(myPlansTab);
+		validate(myPlansTab);
+		validate(myPlansTab);
+		validate(myPlansTab);
+		validate(myPlansTab);
+
+		if(currentUrl().contains("home/my-account-home.html"))
+
+		{
+			return new AccountHomePage(driver);
+		}
+		else if (currentUrl().contains("terminated-plan.html")) {
+			return new TerminatedHomePage(driver); 
+		}
+		return null;
+		
+	}
+
 }
-
-
-
-
-
-
-
