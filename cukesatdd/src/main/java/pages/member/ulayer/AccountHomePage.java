@@ -179,6 +179,9 @@ public class AccountHomePage extends UhcDriver {
 	
 	@FindBy(linkText = "Date")
 	private WebElement dateLink;
+	
+	@FindBy(xpath = "//*[@id='secureMessagingApp']/a")
+	private WebElement envelopeId;
 
 	public JSONObject accountHomeJson;
 
@@ -227,6 +230,13 @@ public class AccountHomePage extends UhcDriver {
 	public void logOut() {
 		logOut.click();
 
+	}
+	
+	public void validateEnvelope(){
+		System.out.println("under validate Envelope");
+		validate(envelopeId);
+		
+		
 	}
 
 	public PaymentHistoryPage navigateToPayments() {

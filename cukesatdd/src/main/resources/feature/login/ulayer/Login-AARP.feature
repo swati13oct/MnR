@@ -10,7 +10,21 @@ Examples:
 	| planType |
 	| MAPD     |
 #	| MA       |
-#	| PDP      |
+	| PDP      |
+#	| MS       |
+#	| HIP      |
+
+Scenario Outline: Verify login in AARP site 
+Given the user is on the AARP medicare site login page
+When the user logs in with a registered AMP with following details in AARP site
+	| Plan Type   | <planType>  |
+Then the user validates envelop icon on  member details page after login in AARP site
+
+Examples:
+	| planType |
+#	| MAPD     |
+#	| MA       |
+	| PDP      |
 #	| MS       |
 #	| HIP      |
 	

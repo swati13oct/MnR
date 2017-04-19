@@ -123,6 +123,27 @@ public class LoginAarpStepDefinition {
 	}
 
 	}
+	
+	@Then("^the user validates envelop icon on  member details page after login in AARP site$")
+	public void envolpe_validation() {
+
+		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario()
+				.getBean(PageConstants.ACCOUNT_HOME_PAGE);
+		JSONObject accountHomeActual = (JSONObject) getLoginScenario().getBean(
+				LoginCommonConstants.ACCOUNT_HOME_ACTUAL);
+		JSONObject accountHomeExpected = (JSONObject) getLoginScenario()
+				.getBean(LoginCommonConstants.ACCOUNT_HOME_EXPECTED);
+		try {
+			JSONAssert.assertEquals(accountHomeExpected, accountHomeActual,
+					true);
+			accountHomePage.validateEnvelope();
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		//accountHomePage.logOut();
+
+	}
 
 	@When("^the terminated user logs in with a registered AMP with following details in AARP site$")
 	public void login_terminateduser_successful(DataTable memberAttributes) {
