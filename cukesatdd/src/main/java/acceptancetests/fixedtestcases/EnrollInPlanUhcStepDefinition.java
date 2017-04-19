@@ -2,21 +2,16 @@ package acceptancetests.fixedtestcases;
 
 import gherkin.formatter.model.DataTableRow;
 
-import java.io.File;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.json.JSONException;
 import org.json.JSONObject;
 import org.junit.Assert;
 import org.openqa.selenium.NoAlertPresentException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
-import org.skyscreamer.jsonassert.JSONAssert;
 import org.springframework.beans.factory.annotation.Autowired;
-
-import com.google.gson.JsonObject;
 
 import pages.acquisition.bluelayer.AcquisitionHomePage;
 import pages.acquisition.bluelayer.AdditionalInformationPage;
@@ -29,17 +24,15 @@ import pages.acquisition.bluelayer.SubmitApplicationPage;
 import pages.acquisition.bluelayer.VPPPlanSummaryPage;
 import acceptancetests.atdd.data.CommonConstants;
 import acceptancetests.atdd.data.acquisition.PageConstants;
-import acceptancetests.atdd.util.CommonUtility;
-import acceptancetests.dce.data.DceCommonConstants;
 import acceptancetests.enrollinplan.data.EnrollInPlanCommonConstants;
 import acceptancetests.vpp.data.VPPCommonConstants;
 import atdd.framework.MRScenario;
+import cucumber.api.DataTable;
 import cucumber.api.java.After;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
-import cucumber.api.DataTable;
 /**
  * @author pperugu
  *
@@ -827,14 +820,6 @@ public class EnrollInPlanUhcStepDefinition {
 		return toJson;
 
 	}*/
-
-	@After
-	public void tearDown() {
-		WebDriver wd = (WebDriver) getLoginScenario().getBean(
-				CommonConstants.WEBDRIVER);
-		wd.quit();
-		getLoginScenario().flushBeans();
-	}
 
 	public static boolean isAlertPresent(FirefoxDriver wd) {
 		try {
