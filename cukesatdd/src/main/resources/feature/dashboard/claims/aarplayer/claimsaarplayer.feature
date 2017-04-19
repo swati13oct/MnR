@@ -78,3 +78,42 @@ Feature: To validate the new changes related to claims page for MA/MAPD/PDP on t
       | MA       |
       | MAPD     |
       | PDP      |
+      
+  #US495101
+  @claimDetailsHeader  
+  Scenario Outline: To Verify Claim Details Page Header for
+    Given I am an AARP member on the redesigned site
+      | Plan Type | <planType> |
+    When I navigate to the Claim Details page in AARP site
+    Then I can view a claim search back button in Claims Details page in AARP site
+    And A Page Header in Claims Details page in AARP site
+    And A Date range in Claims Details page in AARP site
+    And A Provider name in Claims Details page in AARP site
+    And A Claim number label in Claims Details page in AARP site
+    And A Claim number with dynamic value in Claims Details page in AARP site
+    And A Claim type label with dynamic value in Claims Details page in AARP site
+    And A Claim type with dynamic value in Claims Details page in AARP site
+    And A Claim status label with dynamic value in Claims Details page in AARP site
+    And A Claim status with dynamic value in Claims Details page in AARP site
+    And A Medical EOB for MAPD Cosmos type in Claims Details page in AARP site 
+    	| Domain | <domain> |
+    		
+    Examples: 
+      | planType | domain |
+      | MA       | COSMOS |
+      | MAPD     | COSMOS |
+      
+  @claimDetailsLearnMore
+  Scenario Outline: To verify Learn More About Your Cost Breakdown on AARP claims details page
+    Given I am an AARP member on the redesigned site
+      | Plan Type | <planType> |
+    When I navigate to the Claims Details page in AARP site
+    Then I can view the Details Learn More About Your Cost Breakdown section
+
+    Examples: 
+      | planType |
+      | MA       |
+      | MAPD     |
+      | PDP      |
+      
+      
