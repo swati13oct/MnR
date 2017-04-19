@@ -137,15 +137,18 @@ public class MRScenario {
 		try {
 			while ((line = massRegisStreamReader.readLine()) != null) {
 				String[] massRegisStreamAttributes = line.split(cvsSplitBy);
-				userName = massRegisStreamAttributes[0];
-
-				/*pperugu ::Approach followed :: to remove the already registered member and register the members again*/
-				if (checkMemberFound(userName, con, ctx, defaultSchema)) {
-					removeMemberFound(userName, con, ctx, defaultSchema);
+				/*pperugu: To skip the first line in CSV file */
+				if(!(massRegisStreamAttributes[0].equalsIgnoreCase("USERNAME")))
+				{
+					userName = massRegisStreamAttributes[0];
+					/*pperugu ::Approach followed :: to remove the already registered member and register the members again*/
+					if (checkMemberFound(userName, con, ctx, defaultSchema)) {
+						removeMemberFound(userName, con, ctx, defaultSchema);
+					}
+					addMember(userName, con, ctx, defaultSchema,
+							massRegisStreamAttributes);
+					userNamesAddedList.add(userName);
 				}
-				addMember(userName, con, ctx, defaultSchema,
-						massRegisStreamAttributes);
-				userNamesAddedList.add(userName);
 			}
 		} catch (IOException e1) {
 			// TODO Auto-generated catch block
