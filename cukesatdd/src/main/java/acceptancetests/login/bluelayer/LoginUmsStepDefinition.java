@@ -169,5 +169,86 @@ public class LoginUmsStepDefinition {
 			Assert.fail("Aboutus page not found");
 		}
 	}
+	
+	@Given("^registered member to login in UMS site$")
+	public void registered_member_UMS(DataTable memberAttributes){
+		/* Reading the given attribute from feature file */
+		List<DataTableRow> memberAttributesRow = memberAttributes
+				.getGherkinRows();
+		Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
 
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells()
+					.get(0), memberAttributesRow.get(i).getCells().get(1));
+		}
+		
+		String category = memberAttributesMap.get("Member Type");
+
+		Set<String> memberAttributesKeySet = memberAttributesMap.keySet();
+		List<String> desiredAttributes = new ArrayList<String>();
+		for (Iterator<String> iterator = memberAttributesKeySet.iterator(); iterator
+				.hasNext();) {
+			{
+				String key = iterator.next();
+				desiredAttributes.add(memberAttributesMap.get(key));
+			}
+
+		}
+		System.out.println("desiredAttributes.." + desiredAttributes);
+
+		Map<String, String> loginCreds = loginScenario
+				.getUMSMemberWithDesiredAttributes(desiredAttributes);
+
+		String userName = null;
+		String pwd = null;
+		if (loginCreds == null) {
+			// no match found
+			System.out.println("Member Type data could not be setup !!!");
+			Assert.fail("unable to find a " + desiredAttributes + " member");
+		} else {
+			userName = loginCreds.get("user");
+			pwd = loginCreds.get("pwd");
+			System.out.println("User is..." + userName);
+			System.out.println("Password is..." + pwd);
+			getLoginScenario()
+					.saveBean(LoginCommonConstants.USERNAME, userName);
+			getLoginScenario().saveBean(LoginCommonConstants.PASSWORD, pwd);
+		}
+
+		getLoginScenario().saveBean(CommonConstants.CATEGORY, category);
+
+		WebDriver wd = getLoginScenario().getWebDriver();
+
+		LoginPage loginPage = new LoginPage(wd);
+		TerminatedHomePage terminatedHomePage = (TerminatedHomePage) loginPage.loginWith(userName, pwd,category);
+		if (terminatedHomePage != null) {
+			getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
+			getLoginScenario().saveBean(PageConstants.TERMINATED_HOME_PAGE,
+					terminatedHomePage);
+		}
+		
+	}
+	
+	 @Then("the user validate add a plan link is not displayed for albama memeber$")
+	 
+	 public void user_validates_addaplan_link()
+	    {
+		 TerminatedHomePage terminatedHomePage = ( TerminatedHomePage) getLoginScenario().getBean(PageConstants.TERMINATED_HOME_PAGE);
+	    
+
+			
+			boolean flagValue=terminatedHomePage.validateaddaplanlink();
+			if(!flagValue){
+				System.out.println("add a plan link is not displayed");
+				Assert.assertTrue(true);
+			}else{
+				System.out.println("add a plan link is displayed");
+				Assert.assertTrue(false);
+				
+			}
+	    }
 }
+				
+
+
+	  

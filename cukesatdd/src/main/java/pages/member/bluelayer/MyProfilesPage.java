@@ -7,6 +7,7 @@ import java.util.Map;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -156,6 +157,9 @@ public class MyProfilesPage extends UhcDriver {
 	@FindBy(linkText = "Sign Out")
 	private WebElement logOut;
 
+	@FindBy(id = "addAnotherPlanLink")
+	private WebElement addAnotherPlanLink;
+	
 	private PageData myProfiles;
 
 	public JSONObject myProfilesJson;
@@ -319,5 +323,15 @@ public class MyProfilesPage extends UhcDriver {
 			return false;
 		}
 		return true;
+	}
+	
+	public void validateAddPlanLink() {
+
+		if (validate(addAnotherPlanLink)) {
+			Assert.fail("Add Plan is displayed");
+		} else {
+			System.out
+					.println("Add Plan link is hidden for Alabama PEEHIP member");
+		}
 	}
 }

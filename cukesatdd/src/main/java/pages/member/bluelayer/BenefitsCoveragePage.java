@@ -60,6 +60,14 @@ public class BenefitsCoveragePage extends UhcDriver {
 	private WebElement emerCoPayAmtPct;
 
 
+	@FindBy(id="addAnotherPlanLink")
+	private WebElement addPlansTab;
+
+	
+	@FindBy(xpath="//a[contains(text(),'Passport Flyer') and contains(text(),'PDF')]")
+	private WebElement passportFlyerPdf;
+
+
 	private PageData benefitsAndCoverage;
 
 	public JSONObject benefitsAndCoverageJson;
@@ -280,6 +288,35 @@ public class BenefitsCoveragePage extends UhcDriver {
 			System.out.println("Elements are not found ...");
 		}
 		
+	}
+
+	public boolean validateAddPlanLink(){
+        boolean flag = false;
+        try{
+               if(addPlansTab.isDisplayed()){
+               System.out.println(addPlansTab.getText()+" is displayed, hence scenario failed");
+               //Assert.assertTrue(flag);
+               flag=true;
+               return flag;
+        }else{
+               System.out.println("addPlansTab is not displayed");
+               //Assert.fail();!
+               return flag;
+        }
+        
+        }catch(Exception e){
+            System.out.println("element not displayed and exception handled");
+        }
+        return flag;
+ }
+
+	public void verifyPassportFlyerPdf(){
+		try {
+		validate(passportFlyerPdf);
+
+		} catch (Exception e) {
+			System.out.println("PASSPORT PDF NOT FOUND ...");
+		}
 	}
 
 

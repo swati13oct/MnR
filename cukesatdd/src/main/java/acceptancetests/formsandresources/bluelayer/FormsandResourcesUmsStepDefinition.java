@@ -102,13 +102,13 @@ public class FormsandResourcesUmsStepDefinition {
 
 		LoginPage loginPage = new LoginPage(wd);
 		AccountHomePage accountHomePage = (AccountHomePage)loginPage.loginWith(userName, pwd, category);
-		JSONObject accountHomeActualJson = null;
+		//JSONObject accountHomeActualJson = null;
 
 		// Get expected data 
-		Map<String, JSONObject> expectedDataMap = loginScenario
+		/*Map<String, JSONObject> expectedDataMap = loginScenario
 				.getExpectedJson(userName);
 		JSONObject accountHomeExpectedJson = accountHomePage
-				.getExpectedData(expectedDataMap);
+				.getExpectedData(expectedDataMap);*/
 
 		/*get actual data*/
 		if (accountHomePage != null) {
@@ -116,10 +116,10 @@ public class FormsandResourcesUmsStepDefinition {
 			getLoginScenario().saveBean(PageConstants.ACCOUNT_HOME_PAGE,
 					accountHomePage);
 			Assert.assertTrue(true);
-			accountHomeActualJson = accountHomePage.accountHomeJson;
+			//accountHomeActualJson = accountHomePage.accountHomeJson;
 		}
 
-		try {
+		/*try {
 			JSONAssert.assertEquals(accountHomeExpectedJson,
 					accountHomeActualJson, true);
 		} catch (JSONException e) {
@@ -127,7 +127,7 @@ public class FormsandResourcesUmsStepDefinition {
 		}
 
 		getLoginScenario().saveBean(CommonConstants.EXPECTED_DATA_MAP,
-				expectedDataMap);
+				expectedDataMap);*/
 	}
 
 	@When("^the user navigates to forms and resources in UMS site$")
@@ -138,7 +138,7 @@ public class FormsandResourcesUmsStepDefinition {
 				.navigateToFormsandResourcePage();
 
 		/* Get expected data */
-		JSONObject formsAndResourcesActualJson = null;
+		/*JSONObject formsAndResourcesActualJson = null;
 		@SuppressWarnings("unchecked")
 		Map<String, JSONObject> expectedDataMap = (Map<String, JSONObject>) getLoginScenario()
 				.getBean(CommonConstants.EXPECTED_DATA_MAP);
@@ -146,18 +146,31 @@ public class FormsandResourcesUmsStepDefinition {
 				.getExpectedData(expectedDataMap);
 		getLoginScenario().saveBean(
 				FnRCommonConstants.FORMS_AND_RESOURCES_EXPECTED,
-				formsAndResourcesExpectedJson);
+				formsAndResourcesExpectedJson);*/
 		
-		/* Actual data */
+		// Actual data 
 		if (formsAndResourcesPage != null) {
 			getLoginScenario().saveBean(PageConstants.FORMS_AND_RESOURCES_PAGE,
 					formsAndResourcesPage);
-		Assert.assertTrue(true);
-			formsAndResourcesActualJson = formsAndResourcesPage.formsAndResourcesJson;
+		/*Assert.assertTrue(true);
+			formsAndResourcesActualJson = formsAndResourcesPage.formsAndResourcesJson;*/
 		}
-		getLoginScenario().saveBean(
+		/*getLoginScenario().saveBean(
 				FnRCommonConstants.FORMS_AND_RESOURCES_ACTUAL,
-				formsAndResourcesActualJson);
+				formsAndResourcesActualJson);*/
+	}
+	
+	@Then("^the user validates My Documents section and clicks on the link in UMS site$")
+	public void validates_My_Documents_ums(){
+		FormsandresourcesPage formsandresourcesPage = (FormsandresourcesPage) getLoginScenario()
+				.getBean(PageConstants.FORMS_AND_RESOURCES_PAGE);
+		formsandresourcesPage.validateMyDocumentsSection();
+		formsandresourcesPage.clickOnViewotherdocLink();
+		if (formsandresourcesPage != null) {
+			getLoginScenario().saveBean(PageConstants.FORMS_AND_RESOURCES_PAGE,
+					formsandresourcesPage);
+		}
+		
 	}
 
 	
@@ -371,5 +384,50 @@ public class FormsandResourcesUmsStepDefinition {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+	}
+	
+
+	@Then("^validates that add plans tab is not available$")
+	public void validates_that_add_plans_tab_is_not_available() {
+		System.out.println("-----add plans validation started--------");
+		FormsandresourcesPage formsAndResources = (FormsandresourcesPage) getLoginScenario().getBean(PageConstants.FORMS_AND_RESOURCES_PAGE);
+		boolean linkToValidate = formsAndResources.validateAddPlanLink();
+		System.out.println(PageConstants.FORMS_AND_RESOURCES_PAGE);
+		try{
+		if(linkToValidate!=true){
+			System.out.println("---------Scenario Passed successfully--------");
+			Assert.assertTrue(true);
+		}else{
+			System.out.println("---------Sceanrio Failed due to presence of link-------");
+			Assert.fail();
+		}
+		}catch(Exception e){
+			Assert.fail();
+		}
+		System.out.println("-----add plans validation ended----------");
+	}
+
+
+	@Then("^I will be able access a PDF flyer in  English,Spanish or Chinese that explains passport benefits when a plan has this feature$")
+	public void I_will_be_able_access_a_PDF_flyer_spanish() {
+		WebDriver wd = getLoginScenario().getWebDriver();
+		FormsandresourcesPage formsandresourcesPage = new FormsandresourcesPage(wd);
+		formsandresourcesPage.verifyPassportFlyer();
+		formsandresourcesPage.verifyPassportFlyerSpanish();
+	}
+	
+	@Then("^the user validates preferred mail order benefit pdfs in plan materials and formsandresources section in UMS site")
+	public void validates_plan_prescriptionmaterials_plan_document_section_ums() {
+		FormsandresourcesPage formsAndResourcesPage = (FormsandresourcesPage) getLoginScenario()
+				.getBean(PageConstants.FORMS_AND_RESOURCES_PAGE);
+
+		String preferredMailOrderFlag=formsAndResourcesPage.validatePrescriptionmailorderBenefitPdfs();
+	
+		//Validations 
+		try {
+			JSONAssert.assertEquals(preferredMailOrderFlag,"true", true);
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}	
 	}
 }

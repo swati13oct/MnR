@@ -14,6 +14,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.Select;
 
 import pages.member.bluelayer.OrderplanmaterialsPage;
 import pages.member.bluelayer.ContactUsPage;
@@ -131,6 +132,37 @@ public class AccountHomePage extends UhcDriver {
 	@FindBy(xpath = "//*[@id='gogreenlogin_box']/div[4]/div")
 	private WebElement gogreenPopup;
 	
+	@FindBy(linkText = "My Documents")
+	private WebElement MyDocumentLink;
+	
+	@FindBy(linkText = "Back to previous page")
+	private WebElement backTopreviouspageLink;
+	
+
+	@FindBy(xpath = "//html/body/title")
+	private WebElement newClaimsPageHeading;
+	
+
+	@FindBy(linkText = "View/Download")
+	private WebElement viewanddownloadLink;
+
+	
+	@FindBy(xpath = "//*[@id='myDocuments']/div/div[2]/div/p[2]/ul/li[4]/a")
+	private WebElement paginationLink;
+	
+	@FindBy(xpath = "//*[@id='myDocuments']/div/div[1]/div/form/div/div[2]/div[2]/div[2]/div[1]/div/input")
+	private WebElement fromdate;
+	
+	@FindBy(xpath = "//*[@id='myDocuments']/div/div[1]/div/form/div/div[2]/div[2]/div[2]/div[2]/div/input")
+	private WebElement todate;
+	
+	@FindBy(xpath = "//*[@id='myDocuments']/div/div[1]/div/form/div/div[2]/div[2]/div[2]/div[3]/button")
+	private WebElement searchLink;
+	
+	@FindBy(linkText = "Date")
+	private WebElement dateLink;
+	
+
 	private PageData myAccountHome;
 
 	public JSONObject accountHomeJson;
@@ -320,7 +352,7 @@ public class AccountHomePage extends UhcDriver {
 		return null;
 	}
 public ContactUsPage navigatesToContactUsPage() {
-		
+	//	this.waitforElement(contactUsLink);
 		contactUsLink.click();
 		if(getTitle().equalsIgnoreCase("UnitedHealthcare Medicare Solutions | Contact Us"))
 		{
@@ -549,5 +581,74 @@ public ContactUsPage navigatesToContactUsPage() {
 			return null;
 
 	}
+	
+	
+public FormsandresourcesPage navigateToMydocumentUmsPage() {
+		
+		MyDocumentLink.click();
+		
+		return null;
+	}
+
+	public FormsandresourcesPage navigatebackToformsandresourcesUmsPage() {
+		
+		backTopreviouspageLink.click();
+		return null;
+	}
+	
+    public FormsandresourcesPage navigateToviewdownloadlinkUmsPage() {
+		
+		viewanddownloadLink.click();
+		
+		return null;
+	}
+
+	public FormsandresourcesPage navigateTopaginationlinkUmsPage() {
+		
+		Select select = new  Select(driver.findElement(By.id("document-date")));
+		select.selectByVisibleText("Current Year");
+		
+		paginationLink.click();
+		
+		return null;
+	}
+
+	public FormsandresourcesPage navigateTocustomsearchlinkUmsPage() {
+		Select select = new  Select(driver.findElement(By.id("document-date")));
+		select.selectByVisibleText("Custom Search");
+		fromdate.sendKeys("01/04/2017");
+		todate.sendKeys("01/07/2017");
+		searchLink.click();
+		return null;
+	}
+
+	public FormsandresourcesPage navigateTosortingsearchlinkUmsPage() {
+		Select select = new  Select(driver.findElement(By.id("document-date")));
+		select.selectByVisibleText("Current Year");
+		dateLink.click();
+		return null;
+	}
+	
+
+
+
+	public pages.dashboard.member.blayer.ClaimsSummary navigateToClaimsSummaryPage() {
+		// TODO Auto-generated method stub
+		String url = "https://member.team-b-aarpmedicareplans.uhc.com/guest/mirumclaims.html";
+		driver.get(url);
+		try {
+			Thread.sleep(10000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		
+		if (driver.getTitle().equals("My Benefits & Coverage")) {
+			return new  pages.dashboard.member.blayer.ClaimsSummary(driver);
+		}
+		return null;
+	}
 
 }
+

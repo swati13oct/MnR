@@ -1,9 +1,0 @@
-{
-    "drugSearchResult": 
-       [ {
-            "drugName": "Lipitor",
-            "drugType": "Brand",
-            "addDrugLink": "Add Drug"
-        }
-       ]
-}

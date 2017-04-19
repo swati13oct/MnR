@@ -215,5 +215,25 @@ public class OrderPlanMaterialsUmsStepDefinition {
 		planMaterialConfirmationPage.logOut();
 
 	}
+	
+	@Then("^the user validates add plan link on order and beneefits page$")
+	public void the_user_validates_add_plan_link_on_order_and_beneefits_page() {
+	     System.out.println("-----------Order Plan Material page validation started------------");
+	     OrderplanmaterialsPage orderPlanMaterialPage = (OrderplanmaterialsPage) getLoginScenario()
+	    		 								.getBean(PageConstants.ORDER_PLAN_MATERIALS_PAGE);
+	     boolean linkToValidate = orderPlanMaterialPage.validateAddPlanLink();
+	     try{
+	 		if(linkToValidate!=true){
+	 			System.out.println("---------Scenario Passed successfully--------");
+	 			Assert.assertTrue(true);
+	 		}else{
+	 			System.out.println("---------Sceanrio Failed due to presence of link-------");
+	 			Assert.fail();
+	 		}
+	 		}catch(Exception e){
+	 			Assert.fail();
+	 		}
+	     System.out.println("-----------Order Plan Material page validation ended--------------");
+	}
 
 }

@@ -62,6 +62,27 @@ public class FormsandresourcesPage extends UhcDriver {
 	@FindBy(xpath="//*[@id='planBenefitsApp']/div/div/div[2]/div[3]/span[2]")
 	private WebElement monthlyPremiumText;
 	
+	@FindBy(linkText = "Prescription Mail Order Form - Preferred Mail Service Pharmacy through OptumRx")
+	private WebElement preferredMailOrderLink;
+	
+	@FindBy(id="addAnotherPlanLink")
+	private WebElement addPlansTab;
+	
+	@FindBy(className="fd_FormsResouceSelected")
+	private WebElement formsAndResourcesTab;
+
+	@FindBy(linkText = "Passport Flyer")
+	private WebElement passport_Flyer;
+	
+	@FindBy(linkText = "Passport Flyer Spanish")
+	private WebElement passport_Flyer_Spanish;
+	
+	@FindBy(xpath = ".//*[@id='_content_campaigns_uhcm_formsresources-plandocs-main_group_jcr_content_par_borderedtitledescrip_subContent_teaser_1']/div/p[1]")
+	private WebElement myDocuments;
+
+	@FindBy(xpath = ".//*[@id='_content_campaigns_uhcm_formsresources-plandocs-main_group_jcr_content_par_borderedtitledescrip_subContent_teaser_1']/div/p[2]/a")
+	private WebElement viewMyDocsLink;
+	
 	private PageData formsAndResources;
 
 	public JSONObject formsAndResourcesJson;
@@ -244,6 +265,65 @@ public class FormsandresourcesPage extends UhcDriver {
 		}
 		
 	}	
+
+
+	public boolean validateAddPlanLink(){
+		boolean flag = false;
+		try{
+		if(formsAndResourcesTab.getText().equals("Forms and Resources")){
+		if(addPlansTab.isDisplayed()){
+			System.out.println(addPlansTab.getText()+" is displayed, hence scenario failed");
+			//Assert.assertTrue(flag);
+			flag=true;
+			return flag;
+		}else{
+			System.out.println("addPlansTab is not displayed");
+			//Assert.fail();!
+			return flag;
+		}
+		}
+		}catch(Exception e){
+			Assert.fail();
+		}
+		return flag;
+	}
+
+	public boolean verifyPassportFlyer(){
+		return validate(passport_Flyer);
+	}
+	public boolean verifyPassportFlyerSpanish(){
+		return validate(passport_Flyer_Spanish);
+
+	}
 	
+	public String validatePrescriptionmailorderBenefitPdfs() {
+		// TODO Auto-generated method stub
+		validate(preferredMailOrderLink);
+		preferredMailOrderLink.click();
+		if (currentUrl().contains("Prescription Mail Order Form - Preferred Mail Service Pharmacy through OptumRx")){
+			return "true";
+		}else{
+			
+		return "false";
+		}
+	}
+
+	public void validateMyDocumentsSection() {
+		String actualText = myDocuments.getText();
+		if(actualText.equalsIgnoreCase("My Documents"))
+		{
+			System.out.println("My Documents section is present");
+		}
+		
+	}
+
+	public void clickOnViewotherdocLink() {
+		viewMyDocsLink.click();
+		if(driver.getTitle().equalsIgnoreCase("My Documents"))
+		{
+			System.out.println("Navigated to My Documents page");
+		}
+		
+	}
 
 }
