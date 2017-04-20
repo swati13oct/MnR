@@ -440,6 +440,150 @@ public class FormsandResourcesUmsStepDefinition {
 			e.printStackTrace();
 		}
 	}
+	
+	@Then("the user view member right responsibilities in UMS site$")
+	public void views_member_right_responsibilities_Ums_site() {
+		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario()
+				.getBean(PageConstants.ACCOUNT_HOME_PAGE);
+		FormsandresourcesPage formsAndResourcesPage = accountHomePage
+				.navigateToMemberRightResp();
+	}
+
+
+
+	@Then("^the user validates the content on member right responsibilities page in UMS site$")
+	public void the_user_validates_the_content_on_membet_right_page() {
+		try {
+			
+			JSONObject actual=(JSONObject) loginScenario.getBean(PlanBenefitsAndCoverageCommonConstants.BENEFITS_AND_COVERAGE_ACTUAL);
+			
+			JSONObject expected=(JSONObject) loginScenario.getBean(PlanBenefitsAndCoverageCommonConstants.BENEFITS_AND_COVERAGE_EXPECTED);
+			
+			if(actual!=null && expected !=null){
+				JSONAssert.assertEquals(expected, actual, true);
+			}			
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+		@Then("the user validate backtoprevious link in UMS site$")
+		public void views_back_to_previous_Ums_site() {
+			AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario()
+					.getBean(PageConstants.ACCOUNT_HOME_PAGE);
+			FormsandresourcesPage formsAndResourcesPage = accountHomePage
+					.navigateToBackToPreviousPage();
+		}
+		
+		@When("^the user view MAPD appeals and grievances in UMS site$")
+		public void views_mapd_appeals_and_grievances_Ums_site() {
+			AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario()
+					.getBean(PageConstants.ACCOUNT_HOME_PAGE);
+			FormsandresourcesPage formsAndResourcesPage = accountHomePage
+					.navigateToappealsandgrievancesUms();
+		}
+
+
+
+	@Then("^the user validates the content on MAPD appeals and grievances page in UMS site$")
+		public void the_user_validates_the_content_on_mapd_appeals_grievances_page() {
+			try {
+				
+				JSONObject actual=(JSONObject) loginScenario.getBean(PlanBenefitsAndCoverageCommonConstants.BENEFITS_AND_COVERAGE_ACTUAL);
+				
+				JSONObject expected=(JSONObject) loginScenario.getBean(PlanBenefitsAndCoverageCommonConstants.BENEFITS_AND_COVERAGE_EXPECTED);
+				
+				if(actual!=null && expected !=null){
+					JSONAssert.assertEquals(expected, actual, true);
+				}			
+				
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+	
+	@When("^the user view SSUP appeals and grievances in UMS site$")
+	public void views_ssup_appeals_and_grievances_Ums_site() {
+		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario()
+				.getBean(PageConstants.ACCOUNT_HOME_PAGE);
+		FormsandresourcesPage formsAndResourcesPage = accountHomePage
+				.navigateToappealsandgrievancesUms();
+	}
+
+
+
+@Then("^the user validates the content on SSUP appeals and grievances page in UMS site$")
+	public void the_user_validates_the_content_on_ssup_appeals_grievances_page() {
+		try {
+			
+			JSONObject actual=(JSONObject) loginScenario.getBean(PlanBenefitsAndCoverageCommonConstants.BENEFITS_AND_COVERAGE_ACTUAL);
+			
+			JSONObject expected=(JSONObject) loginScenario.getBean(PlanBenefitsAndCoverageCommonConstants.BENEFITS_AND_COVERAGE_EXPECTED);
+			
+			if(actual!=null && expected !=null){
+				JSONAssert.assertEquals(expected, actual, true);
+			}			
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	@Then("^the user view medical therapy management program in UMS site$")
+	public void views_medical_therapy_program_Ums_site() {
+		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario()
+				.getBean(PageConstants.ACCOUNT_HOME_PAGE);
+		FormsandresourcesPage formsAndResourcesPage = accountHomePage
+				.navigateToMedicalTherapyProgUms();
+	}
+
+
+
+	@Then("^the user validates the content on medical therapy management program page in UMS site$")
+	public void the_user_validates_the_content_on_medical_therapy_program_page() {
+		try {
+			
+			JSONObject actual=(JSONObject) loginScenario.getBean(PlanBenefitsAndCoverageCommonConstants.BENEFITS_AND_COVERAGE_ACTUAL);
+			
+			JSONObject expected=(JSONObject) loginScenario.getBean(PlanBenefitsAndCoverageCommonConstants.BENEFITS_AND_COVERAGE_EXPECTED);
+			
+			if(actual!=null && expected !=null){
+				JSONAssert.assertEquals(expected, actual, true);
+			}			
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	@Then("^the user view season flu shot information in UMS site$")
+	public void views_season_flu_info_Ums_site() {
+		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario()
+				.getBean(PageConstants.ACCOUNT_HOME_PAGE);
+		FormsandresourcesPage formsAndResourcesPage = accountHomePage
+				.navigateToSeasonFluInfoUms();
+	}
+
+
+
+	@Then("^the user validates the content on season flu shot information page in UMS site$")
+	public void the_user_validates_the_content_on_season_flu_info_page() {
+		try {
+			
+			JSONObject actual=(JSONObject) loginScenario.getBean(PlanBenefitsAndCoverageCommonConstants.BENEFITS_AND_COVERAGE_ACTUAL);
+			
+			JSONObject expected=(JSONObject) loginScenario.getBean(PlanBenefitsAndCoverageCommonConstants.BENEFITS_AND_COVERAGE_EXPECTED);
+			
+			if(actual!=null && expected !=null){
+				JSONAssert.assertEquals(expected, actual, true);
+			}			
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
 
 	
 	

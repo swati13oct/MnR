@@ -192,6 +192,22 @@ public class AccountHomePage extends UhcDriver {
 	
 	@FindBy(xpath = "//*[@id='row2link2']/p/a")
 	private WebElement privacypolicyLink;
+	
+	@FindBy(xpath = "//a[2]/span['DOWNLOAD']")
+	private WebElement downloadLink;
+		
+	@FindBy(linkText = "VIEW")
+	private WebElement viewLink;
+
+	@FindBy(xpath = "html/body/div[2]/div/div/header/div/div/div/div/div/div/a/p")
+	private WebElement backtopreviousLink;
+	
+	@FindBy(xpath = "//*[@id='row2link3']/p/a")
+	private WebElement termsofuseLink;
+	
+	@FindBy(xpath = "//*[@id='fd_myMenu']/a")
+	private WebElement mymenuLink;
+
 
 	
 	
@@ -751,6 +767,73 @@ public class AccountHomePage extends UhcDriver {
 		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 		return null;
 	}
+	
+	public FormsandresourcesPage navigateToappealsAarpPage() {
+		driver.navigate().to("https://member.team-a-aarpmedicareplans.uhc.com/content/aarpm/home/my-plans/forms-and-resources/appeals-and-grievances-process-noaccordion-ma.html");
+		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+		return null;
+	}
+
+	public FormsandresourcesPage navigateToDownloadAarpPage() {
+		downloadLink.click();	
+		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+		return null;
+	}
+
+	public FormsandresourcesPage navigateToViewAarpPage() {
+		viewLink.click();	
+		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+		return null;
+	}
+
+	public FormsandresourcesPage navigateToBackToPreviousAarpPage() {
+		backtopreviousLink.click();	
+		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+		return null;
+	}
+	
+	public FormsandresourcesPage navigateToMemberResponsibilitiesAarpPage() {
+		driver.navigate().to("https://member.team-a-aarpmedicareplans.uhc.com/content/aarpm/home/my-plans/forms-and-resources/noacc-member-rights-and-responsibilities-ma.html");
+		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+		return null;
+	}
+
+	public FormsandresourcesPage navigateToSeasonalFluInformationAarpPage() {
+		driver.navigate().to("https://member.team-a-aarpmedicareplans.uhc.com/content/aarpm/home/my-plans/forms-and-resources/season-flu-shot-info0.html");
+		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+		return null;
+	}
+
+	public FormsandresourcesPage navigateToTermsOfUseAarpPage() {
+		termsofuseLink.click();	
+		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+		return null;
+	}
+
+	public FormsandresourcesPage navigateToMedicalTherapyProgramAarpPage() {
+		driver.navigate().to("https://member.team-a-aarpmedicareplans.uhc.com/content/aarpm/home/my-plans/forms-and-resources/medication-therapy-mgmt-mapd0.html");
+		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+		return null;
+	}
+
+	public FormsandresourcesPage navigateToPreferedMailServiceAarpPage() {
+		driver.navigate().to("https://member.team-a-aarpmedicareplans.uhc.com/content/aarpm/home/my-plans/noacc-mail-service-pharmacy-mapd.html");
+		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+		return null;
+	}
+
+	public FormsandresourcesPage navigateToMymenuAarpPage() {
+		mymenuLink.click();	
+		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+		return null;
+	}
+
+	public FormsandresourcesPage navigateTodisenrollmentAarpPage() {
+		driver.navigate().to("https://member.team-a-aarpmedicareplans.uhc.com/content/aarpm/home/my-plans/forms-and-resources/disenrollment-rights-responsibilities-noacc-pdp.html");
+		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+		return null;
+	}
+
 	
 
 }

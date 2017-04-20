@@ -195,6 +195,9 @@ public class AccountHomePage extends UhcDriver {
 	
 	@FindBy(xpath = "//*[@id='row2link2']/p/a")
 	private WebElement privacypolicyLink;
+	
+	@FindBy(xpath = "html/body/div[2]/div/div/header/div/div/div/div/div/div/a/p")
+	private WebElement backtopreviouspageLink;
 
 	private PageData myAccountHome;
 
@@ -821,5 +824,37 @@ public FormsandresourcesPage navigateToMydocumentUmsPage() {
 		driver.manage().timeouts().implicitlyWait(400, TimeUnit.SECONDS);
 		return null;
 	}
+	
+	public FormsandresourcesPage navigateToMemberRightResp() {
+		driver.navigate().to("https://member.team-a-uhcmedicaresolutions.uhc.com/content/uhcm/home/my-plans/forms-and-resources/member-rights-and-responsibilities-noaccordion-ma.html");
+		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+		return null;
+	}
+
+	public FormsandresourcesPage navigateToBackToPreviousPage() {
+		backtopreviouspageLink.click();
+		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+		return null;
+	}
+
+	public FormsandresourcesPage navigateToappealsandgrievancesUms() {
+		driver.navigate().to("https://member.team-a-uhcmedicaresolutions.uhc.com/content/uhcm/home/my-plans/forms-and-resources/acc-appeals-and-grievances-ma.html");
+		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+		return null;
+	}
+
+	public FormsandresourcesPage navigateToMedicalTherapyProgUms() {
+		driver.navigate().to("https://member.team-a-uhcmedicaresolutions.uhc.com/content/uhcm/home/my-plans/forms-and-resources/acc-appeals-and-grievances-ma.html");
+		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+		return null;
+	}
+
+	public FormsandresourcesPage navigateToSeasonFluInfoUms() {
+		driver.navigate().to("https://member.team-a-uhcmedicaresolutions.uhc.com/content/uhcm/home/my-plans/forms-and-resources/season-flu-shot-info0.html");
+		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+		return null;
+	}
+
+	
 	
 }

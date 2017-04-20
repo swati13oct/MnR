@@ -75,3 +75,111 @@ Examples:
 
 | planType |
 | PDP	   |
+
+@appeals
+Scenario Outline:To verify content story in forms and resource in AARP site
+Given registered member for forms and resources in AARP Site
+	| <planType> |
+When the user view forms and resources in AARP site
+Then the user view appeals in AARP site
+Then the user validates appeals content in AARP site
+
+Examples:
+
+| planType |
+| MA	   |
+
+
+@udrugtrasition
+Scenario Outline:To verify content story in forms and resource in AARP site
+Given registered member for forms and resources in AARP Site
+	| <planType> |
+When the user view forms and resources in AARP site
+Then the user validates prescription drug transistion in AARP site
+#Then the user validate download link in AARP site
+#Then the user validate view link in AARP site
+Then the user validate backtoprevious link in AARP site
+
+Examples:
+
+| planType |
+| MAPD	   |
+
+@memberright
+Scenario Outline:To verify content story in forms and resource in AARP site
+Given registered member for forms and resources in AARP Site
+	| <planType> |
+When the user view forms and resources in AARP site
+Then the user view member right responsibilities in AARP site
+Then the user validates member right responsibilities in AARP site
+
+Examples:
+
+| planType |
+| MAPD	   |
+
+@seasonalflu
+Scenario Outline:To verify content story in forms and resource in AARP site
+Given registered member for forms and resources in AARP Site
+	| <planType> |
+When the user view forms and resources in AARP site
+Then the user view seasonal flu shot information in AARP site
+Then the user validates seasonal flu shot information in AARP site
+Then the user validate backtoprevious link in AARP site
+
+Examples:
+
+| planType |
+| MA	   |
+
+@termofuse
+Scenario Outline:To verify content story in forms and resource in AARP site
+Given registered member for forms and resources in AARP Site
+	| <planType> |
+When the user view terms of use in AARP site
+Then the user validates terms of use in AARP site
+Then the user validate backtoprevious link in AARP site
+
+Examples:
+
+| planType |
+| MA	   |
+
+@medicaltherapy
+Scenario Outline:To verify content story in forms and resource in AARP site
+Given registered member for forms and resources in AARP Site
+	| <planType> |
+When the user view forms and resources in AARP site
+Then the user view medical therapy management program in AARP site
+Then the user validate medical therapy management program in AARP site
+
+Examples:
+
+| planType |
+| MAPD	   |
+
+@pharmacymail
+Scenario Outline:To verify content story in forms and resource in AARP site
+Given registered member for forms and resources in AARP Site
+	| <planType> |
+When the user view mymenu in AARP site
+Then the user view preffered mail service pharmacy in AARP site
+Then the user validate preffered mail service pharmacy in AARP site
+
+Examples:
+
+| planType |
+| MAPD	   |
+
+@disenrollment
+Scenario Outline:To verify content story in forms and resource in AARP site
+Given registered member for forms and resources in AARP Site
+	| <planType> |
+When the user view forms and resources in AARP site
+Then the user view disenrollment rights responsibilities in AARP site
+Then the user validate disenrollment rights responsibilities in AARP site
+
+Examples:
+
+| planType |
+| MAPD	   |
