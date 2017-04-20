@@ -117,3 +117,76 @@ Then the user validates the content on no accordion page
 Examples:
 | planType | memberType |
 | MAPD	   | Individual |
+
+@memberrightres
+Scenario Outline: Verify benefit summary content for group members in ums site
+Given registered member for forms and resources in UMS Site
+	| Plan Type      |<planType> |
+	| Member Type		 |<memberType> |
+When the user view forms and resources in UMS site 
+Then the user view member right responsibilities in UMS site
+Then the user validates the content on member right responsibilities page in UMS site
+Then the user validate backtoprevious link in UMS site
+
+
+Examples:
+| planType | memberType |
+| MAPD	   | Group |
+
+@mapdappealsandgrievances
+Scenario Outline: Verify benefit summary content for group members in ums site
+Given registered member for forms and resources in UMS Site
+	| Plan Type      |<planType> |
+	| Member Type		 |<memberType> |
+When the user view MAPD appeals and grievances in UMS site 
+Then the user validates the content on MAPD appeals and grievances page in UMS site
+Then the user validate backtoprevious link in UMS site
+
+
+Examples:
+| planType | memberType |
+| MAPD	   | Individual |
+
+@ssupappealsandgrievances
+Scenario Outline: Verify benefit summary content for group members in ums site
+Given registered member for forms and resources in UMS Site
+	| Plan Type      |<planType> |
+	| Member Type		 |<memberType> |
+When the user view SSUP appeals and grievances in UMS site 
+Then the user validates the content on SSUP appeals and grievances page in UMS site
+Then the user validate backtoprevious link in UMS site
+
+
+Examples:
+| planType | memberType |
+| SSUP	   | Group |
+
+
+@medicaltherapyprog
+Scenario Outline: Verify benefit summary content for group members in ums site
+Given registered member for forms and resources in UMS Site
+	| Plan Type      |<planType> |
+	| Member Type		 |<memberType> |
+When the user view forms and resources in UMS site 
+Then the user view medical therapy management program in UMS site
+Then the user validates the content on medical therapy management program page in UMS site
+
+
+Examples:
+| planType | memberType |
+| PDP	   | Group |
+
+@seasonflushot
+Scenario Outline: Verify benefit summary content for group members in ums site
+Given registered member for forms and resources in UMS Site
+	| Plan Type      |<planType> |
+	| Member Type		 |<memberType> |
+When the user view forms and resources in UMS site 
+Then the user view season flu shot information in UMS site
+Then the user validates the content on season flu shot information page in UMS site
+
+Examples:
+| planType | memberType |
+| MAPD	   | Individual |
+
+
