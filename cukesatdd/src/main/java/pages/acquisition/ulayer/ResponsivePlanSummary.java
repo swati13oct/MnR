@@ -563,7 +563,7 @@ public void comparePlanslnk(){
 			int i=0;
 			 List<WebElement> plans = driver.findElements(By.xpath("//h2[contains(text(),'AARP MedicareComplete')]"));
 			 System.out.println("PLANS SIZE :: "+plans.size());
-			 String xpath="//a[contains(text(),'Find a provider')]";  
+			 String xpath="//a[contains(text(),'Is my provider')]";  
 			 List<WebElement> providerSearch = driver.findElements(By.xpath(xpath));
 			 
 			 System.out.println("Is my provider covered? "+providerSearch.size());
