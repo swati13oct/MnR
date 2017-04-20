@@ -406,4 +406,10 @@ public class OneTimePaymentAarpStepDefintion {
 		}
 		
 	}
+	@And("^the user clicks on cancel button on Review Payments Page and validates payments history page$")
+	public void user_clicks_cancelbtn_onOnetimePaymentPage()
+	{
+		OneTimePaymentsPage oneTimePaymentsPage = (OneTimePaymentsPage)getLoginScenario().getBean(PageConstants.ONE_TIME_PAYMENTS_DASHBOARD);
+		OneTimePaymentPage reviewOneTimePaymentsPage = oneTimePaymentsPage.onetimepagecancelbtn();
+	}
 }

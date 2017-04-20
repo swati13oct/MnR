@@ -45,7 +45,8 @@ public class OneTimePaymentsPage extends UhcDriver{
 	@FindBy(id = "review-continue")
 	private WebElement reviewContinue;
 	
-	
+	@FindBy(xpath ="//*[text()='cancel ']")
+	private WebElement onetimecancelbtn;
 	
 	@FindBy(xpath="//div[@id='atdd_electronicsignature_label']/div/fieldset/label")
 	private WebElement electronicSignatureCheck;
@@ -99,5 +100,14 @@ public class OneTimePaymentsPage extends UhcDriver{
 		return null;
 	}
 	
+	public OneTimePaymentPage onetimepagecancelbtn(){
+		onetimecancelbtn.click();
+		if(driver.getTitle().equalsIgnoreCase("My Benefits & Coverage")){
+			return new OneTimePaymentPage(driver);
+		}
+		return null;
+		
+	
+	}
 
 }

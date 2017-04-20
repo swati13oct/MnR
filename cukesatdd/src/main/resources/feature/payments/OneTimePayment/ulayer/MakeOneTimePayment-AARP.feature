@@ -74,5 +74,20 @@ Examples:
 	| planType |
 	| MAPD     |
 
-     
+   
+
+@US454601
+Scenario Outline: Verify that payment history page is navigated when cancel button is clicked in Review One Time Payment Page
+Given the user is on the AARP medicare site login page
+When the user logs in with a registered AMP with following details in AARP site
+	| Plan Type   | <planType>  |
+And the user navigates to One Time Payments page
+And the user enters details and click on continue button on One Time Payments Page for Dashboard
+And the user clicks on cancel button on Review Payments Page and validates payments history page
+
+
+Examples:
+	| planType |
+	| MAPD     |
+       
      
