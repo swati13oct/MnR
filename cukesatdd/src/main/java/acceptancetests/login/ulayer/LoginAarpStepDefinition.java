@@ -20,10 +20,12 @@ import org.skyscreamer.jsonassert.JSONAssert;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import pages.member.ulayer.AccountHomePage;
+import pages.member.ulayer.ContactUsPage;
 import pages.member.ulayer.LoginPage;
 import pages.member.ulayer.TerminatedHomePage;
 import acceptancetests.atdd.data.CommonConstants;
 import acceptancetests.atdd.data.member.PageConstants;
+import acceptancetests.contactus.data.ContactUsCommonConstants;
 import acceptancetests.login.data.LoginCommonConstants;
 import atdd.framework.MRScenario;
 import cucumber.annotation.After;
@@ -144,10 +146,93 @@ public class LoginAarpStepDefinition {
 		//accountHomePage.logOut();
 
 	}
+	@Then ("^the user validates secure email widget display on  contact US page after login in AARP site")
+	public void secure_Email_validation() {
+
+		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario()
+				.getBean(PageConstants.ACCOUNT_HOME_PAGE);
+		ContactUsPage contactUsPage=accountHomePage.navigatesToContactUsPage();
+		if (contactUsPage != null) {
+		getLoginScenario().saveBean(PageConstants.CONTACT_US_PAGE,
+				contactUsPage);
+		 contactUsPage = (ContactUsPage) getLoginScenario()
+				.getBean(PageConstants.CONTACT_US_PAGE);
+		
+		
+		 contactUsPage.secureEmailWidgetDisplayed();
+			contactUsPage.logOut();
+		}
+		//accountHomePage.logOut();
+
+	}
+	@Then ("^the user validates secure email widget non display  on  contact US page after login in AARP site")
+	public void secure_Email_nonDisplayvalidation() {
+
+		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario()
+				.getBean(PageConstants.ACCOUNT_HOME_PAGE);
+		ContactUsPage contactUsPage=accountHomePage.navigatesToContactUsPage();
+		if (contactUsPage != null) {
+		getLoginScenario().saveBean(PageConstants.CONTACT_US_PAGE,
+				contactUsPage);
+		 contactUsPage = (ContactUsPage) getLoginScenario()
+				.getBean(PageConstants.CONTACT_US_PAGE);
+		
+		
+		 contactUsPage.secureEmailWidgetNonDisplayedCheck();
+		 /*try {
+			wait(30000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}*/
+		 
+		contactUsPage.logOut();
+		}
+		//accountHomePage.logOut();
+
+	}
+	
+	@Then ("^the user checks the getstarted link on  secure email widget on  member details page after login in AARP site")
+	public void getStarted_link_validation() {
+
+		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario()
+				.getBean(PageConstants.ACCOUNT_HOME_PAGE);
+		ContactUsPage contactUsPage=accountHomePage.navigatesToContactUsPage();
+		if (contactUsPage != null) {
+		getLoginScenario().saveBean(PageConstants.CONTACT_US_PAGE,
+				contactUsPage);
+		 contactUsPage = (ContactUsPage) getLoginScenario()
+				.getBean(PageConstants.CONTACT_US_PAGE);
+		
+		
+		 contactUsPage.validatesecureemail();
+		 
+			/*JSONObject contactUsExpectedJson = (JSONObject) getLoginScenario()
+					.getBean(ContactUsCommonConstants.CONTACT_US_EXPECTED_JSON);
+			JSONObject contactUsActualJson = (JSONObject) getLoginScenario()
+					.getBean(ContactUsCommonConstants.CONTACT_US_ACTUAL_JSON);
+			
+			System.out.println("contactUsExpectedJson"+contactUsExpectedJson.toString());
+			System.out.println("contactUsActualJson"+contactUsActualJson.toString());
+			
+			try {
+				JSONAssert.assertEquals(contactUsExpectedJson, contactUsActualJson,
+						true);
+				
+				
+			} catch (JSONException e) {
+				e.printStackTrace();
+			}*/
+			contactUsPage.logOut();
+		}
+		System.out.println("contact us");
+		//accountHomePage.logOut();
+
+	}
 
 	@When("^the terminated user logs in with a registered AMP with following details in AARP site$")
 	public void login_terminateduser_successful(DataTable memberAttributes) {
-		/* Reading the given attribute from feature file */
+		 /*Reading the given attribute from feature file */
 		List<DataTableRow> memberAttributesRow = memberAttributes
 				.getGherkinRows();
 		Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
@@ -190,7 +275,7 @@ public class LoginAarpStepDefinition {
 		LoginPage loginPage = (LoginPage)getLoginScenario().getBean(PageConstants.LOGIN_PAGE);
 		TerminatedHomePage terminatedHomePage = (TerminatedHomePage) loginPage.loginWith(userName, pwd);
 		
-		/* Get expected data */
+		// Get expected data 
 		Map<String, JSONObject> expectedDataMap = loginScenario
 				.getExpectedJson(userName);
 		JSONObject accountHomeExpectedJson = terminatedHomePage
@@ -281,7 +366,7 @@ public class LoginAarpStepDefinition {
 
 	
 
-	@After
+	/*@After
 	public void tearDown() {
 		
 		WebDriver wd = (WebDriver) getLoginScenario().getBean(
@@ -290,6 +375,6 @@ public class LoginAarpStepDefinition {
 		wd.quit();
 		getLoginScenario().flushBeans();
 		
-	}
+	}*/
 
 }

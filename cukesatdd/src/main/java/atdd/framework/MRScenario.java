@@ -127,6 +127,7 @@ public class MRScenario {
 		String line = "";
 		String cvsSplitBy = ",";
 		String defaultSchema = props.get(CommonConstants.DB_SCHEMA);
+		
         
 		try {
 			InputStream memberTypeStream = ClassLoader.class
@@ -915,7 +916,7 @@ public class MRScenario {
 		
         //Is system propery exists defining JENKINS_BROWSER, we're running in JENKINS and
 		//will prefer those browser properties.
-		String browser = (null == System.getProperty(CommonConstants.JENKINS_BROWSER)
+		/*String browser = (null == System.getProperty(CommonConstants.JENKINS_BROWSER)
 				? props.get(CommonConstants.DESKTOP_WEBDRIVER) : System.getProperty(CommonConstants.JENKINS_BROWSER));
 		
 		
@@ -1007,7 +1008,21 @@ public class MRScenario {
 				return webDriver;
 			}
 		}
-		return webDriver;
+		return webDriver;*/
+		
+		if (null == webDriver) {
+			File pathToBinary = new File("C:/Mozilla Firefox/firefox.exe");
+			FirefoxBinary ffBinary = new FirefoxBinary(pathToBinary);
+			FirefoxProfile firefoxProfile = new FirefoxProfile();
+			webDriver = new FirefoxDriver(ffBinary, firefoxProfile);
+			webDriver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
+		}
+/*            
+        
+        webDriver = new FirefoxDriver();
+        webDriver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);*/
+        return webDriver;
+		
 	}
 
 	public WebDriver getIEDriver() {

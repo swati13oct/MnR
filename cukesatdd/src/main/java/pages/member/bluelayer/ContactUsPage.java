@@ -37,6 +37,9 @@ public class ContactUsPage extends UhcDriver{
 	@FindBy(id = "addAnotherPlanLink")
 	private WebElement addPlan;
 	
+	@FindBy(css="#secureWidget")
+	private WebElement securewidgetlink;
+	
 	
 	
 	private PageData contactUs;
@@ -127,7 +130,19 @@ public class ContactUsPage extends UhcDriver{
 		return secureemailwidgetDataJson;
 	}
 
+	public void secureEmailWidgetDisplayed(){
+		
+		Assert.assertTrue("Secure Email widget is displayed", securewidget.isDisplayed());
+		
 	
+}
+
+public void secureEmailWidgetNonDisplayedCheck(){
+		Assert.assertEquals("display: block;", securewidgetlink.getAttribute("style"));
+	
+		//Assert.assertTrue("Secure Email widget not displayed", !securewidgetlink.isDisplayed());
+		
+}
 	
 
 	public void logOut() {

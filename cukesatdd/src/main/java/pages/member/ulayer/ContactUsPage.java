@@ -3,10 +3,12 @@
  */
 package pages.member.ulayer;
 
+
 import java.util.Map;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -36,6 +38,18 @@ public class ContactUsPage extends UhcDriver{
 	private JSONObject secureemailwidgetDataJson;
 	
 	public JSONObject contactUsJson;
+	
+	@FindBy(xpath="//*[@id='secureWidget']/div[2]/p[4]/a/span")
+	private WebElement getstartedlink;
+	
+	@FindBy(xpath="//*[@id='modelContent']/div[1]")
+	private WebElement emialUslink;
+	
+	@FindBy(xpath="//*[@id='contActButton']")
+	private WebElement continuelink;
+	
+	@FindBy(css="#secureWidget")
+	private WebElement securewidgetlink;
 	
 	public ContactUsPage(WebDriver driver) {
 		super(driver);
@@ -83,11 +97,26 @@ public class ContactUsPage extends UhcDriver{
 		if (securewidget.isDisplayed())
 		{
 			System.out.println("Secure widget is displayed");
+			Assert.assertTrue("Secure Email widget is displayed", securewidget.isDisplayed());
+			
 		}
 		else
 		{
 			System.out.println("Secure widget is not  displayed");
 		}
+	}
+	public void secureEmailWidgetDisplayed(){
+		
+			Assert.assertTrue("Secure Email widget is displayed", securewidget.isDisplayed());
+			
+		
+	}
+	
+	public void secureEmailWidgetNonDisplayedCheck(){
+			Assert.assertEquals("display: block;", securewidgetlink.getAttribute("style"));
+		
+			//Assert.assertTrue("Secure Email widget not displayed", !securewidgetlink.isDisplayed());
+			
 	}
 
 	public JSONObject getsecurewidget() {

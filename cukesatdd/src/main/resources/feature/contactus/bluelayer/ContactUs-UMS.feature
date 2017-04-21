@@ -1,4 +1,4 @@
-@contactUsTest
+@contactUs
 Feature: To test contact us flow in UMS site
 Scenario Outline: Verify contact us page in UMS site 
 Given registered UMS member with following attributes

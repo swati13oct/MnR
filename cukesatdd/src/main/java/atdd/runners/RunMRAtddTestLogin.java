@@ -15,7 +15,7 @@ import cucumber.junit.Cucumber;
 		features = { "feature/login" }, 
 		format = {
 
-		"pretty", "html:reports/test-report" }, tags ={"@loginfnf"})
+		"pretty", "html:reports/test-report" }, tags ={"@loginvelocityblue"})
 
 
 public class RunMRAtddTestLogin {
