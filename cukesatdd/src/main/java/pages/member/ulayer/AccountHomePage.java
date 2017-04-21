@@ -18,6 +18,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
 import acceptancetests.atdd.data.CommonConstants;
+import acceptancetests.atdd.data.MRConstants;
 import acceptancetests.atdd.data.PageData;
 import acceptancetests.atdd.util.CommonUtility;
 import atdd.framework.MRScenario;
@@ -145,6 +146,8 @@ public class AccountHomePage extends UhcDriver {
 	private WebElement paymentsHeading;
 	
 	private PageData myAccountHome;
+	
+	private static String EOB_DIRECT_URL = MRConstants.EOB_DIRECT_URL;
 
 	public JSONObject accountHomeJson;
 
@@ -583,6 +586,12 @@ public class AccountHomePage extends UhcDriver {
 		return null;
 	}
 
-
+	public MedicalEobPage navigateDirectToEOBPage(){
+		driver.navigate().to(EOB_DIRECT_URL);
+ 		if(driver.getTitle().equalsIgnoreCase("Member Claims")){
+        return new MedicalEobPage(driver);
+		}
+		return null;
+	}
 
 }
