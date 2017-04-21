@@ -45,14 +45,25 @@ public class OneTimePaymentsPage extends UhcDriver{
 	@FindBy(id = "review-continue")
 	private WebElement reviewContinue;
 	
+
+	@FindBy(className = "error-count")
+	private WebElement ErrorMessageChkbox;
+
 	@FindBy(xpath ="//*[text()='cancel ']")
 	private WebElement onetimecancelbtn;
+
 	
 	@FindBy(xpath="//div[@id='atdd_electronicsignature_label']/div/fieldset/label")
 	private WebElement electronicSignatureCheck;
 	
 	@FindBy(xpath="//*[text()='Edit Payment Information']") 
 	 private WebElement editPaymentInfo; 
+	
+	@FindBy(linkText="CANCEL")
+	 private WebElement CancelButton;
+	
+	@FindBy(xpath=".//*[@id='paymentHistoryApp']/div/div/div/div/h1")
+	 private WebElement PaymentHistoryText;
 
 	public OneTimePaymentsPage(WebDriver driver) {
 		super(driver);
@@ -87,6 +98,47 @@ public class OneTimePaymentsPage extends UhcDriver{
 		electronicSignatureCheck.click();
 		reviewContinue.click();
 		if(driver.getTitle().equalsIgnoreCase("My Benefits & Coverage")){
+			return new ReviewOneTimePaymentsPage(driver);
+		}
+		return null;
+	}
+	
+	public ReviewOneTimePaymentsPage enterInfoWithoutCheckBoxAndContinue() {
+		otherAmountRadio.click();
+		otherAmountNumber.sendKeys("56.00");
+		routingNumberField.sendKeys("123123000");
+		confirmRoutingNumberField.sendKeys("123123000");
+		accountNumberField.sendKeys("1234");
+		confirmAccountNumberField.sendKeys("1234");
+		firstNameField.sendKeys("Fn");
+		lastNameField.sendKeys("Ln");
+		//electronicSignatureCheck.click();
+		reviewContinue.click();
+		if(driver.getTitle().equalsIgnoreCase("My Benefits & Coverage")){
+			return new ReviewOneTimePaymentsPage(driver);
+		}
+		return null;
+	}
+	
+	public ReviewOneTimePaymentsPage errorMessagechkBox()
+	{
+		if(ErrorMessageChkbox.getText().contains("errors found in the form")){
+			return new ReviewOneTimePaymentsPage(driver);
+		}
+		return null;
+	}
+	
+	public ReviewOneTimePaymentsPage CancelButton() {
+		CancelButton.click();		
+		if(driver.getTitle().equalsIgnoreCase("My Benefits & Coverage")){
+			return new ReviewOneTimePaymentsPage(driver);
+		}
+		return null;
+	}
+	
+	
+	public ReviewOneTimePaymentsPage HistoryPageValidation(){
+		if(PaymentHistoryText.getText().contains("Payment History")){
 			return new ReviewOneTimePaymentsPage(driver);
 		}
 		return null;

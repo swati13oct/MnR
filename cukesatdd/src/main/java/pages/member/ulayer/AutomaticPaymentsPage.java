@@ -59,6 +59,9 @@ public class AutomaticPaymentsPage extends UhcDriver{
 	@FindBy(xpath="//label[@for='consent']")
 	private WebElement electronicSignatureCheck;
 	
+	@FindBy(className = "error-count")
+	private WebElement ErrorMessageChkbox;
+	
 	public AutomaticPaymentsPage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
@@ -93,6 +96,33 @@ public class AutomaticPaymentsPage extends UhcDriver{
 		}
 		return null;
 	}
+	
+	public ReviewAutomaticPaymentsPage enterInfoWithoutCheckBoxAndContinue() {
+		routingNumberField.sendKeys("123123000");
+		confirmRoutingNumberField.sendKeys("123123000");
+		accountNumberField.sendKeys("1234");
+		confirmAccountNumberField.sendKeys("1234");
+		firstNameField.sendKeys("Fn");
+		lastNameField.sendKeys("Ln");		
+		reviewContinue.click();
+		if(driver.getTitle().equalsIgnoreCase("My Benefits & Coverage")){
+			return new ReviewAutomaticPaymentsPage(driver);
+		}
+		return null;
+	}
+	
+	
+	public ReviewAutomaticPaymentsPage errorMessagechkBox()
+	{
+		if(ErrorMessageChkbox.getText().contains("errors found in the form")){
+			return new ReviewAutomaticPaymentsPage(driver);
+		}
+		return null;
+	}
+	
+	
+
+	
 	
 	public ReviewAutomaticPaymentsPage cancelbtn(){
 		cancelbtn.click();

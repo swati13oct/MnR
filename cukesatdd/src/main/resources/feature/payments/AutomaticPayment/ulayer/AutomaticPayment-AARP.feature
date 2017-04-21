@@ -76,4 +76,15 @@ Examples:
 	| planType |
 	| MAPD     |
      
+@US497804
+Scenario Outline: Verify the Payment History page from Automatic Payment page
+Given the user is on the AARP medicare site login page
+When the user logs in with a registered AMP with following details in AARP site
+	| Plan Type   | <planType>  |
+And the user navigates to Automatic Payments page
+And the user clicks on Continue button in automatic payment page without clicking checkbox 
+
+Examples:
+	| planType |
+	| MAPD     |
      

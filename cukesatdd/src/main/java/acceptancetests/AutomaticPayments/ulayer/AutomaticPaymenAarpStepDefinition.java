@@ -235,5 +235,23 @@ public class AutomaticPaymenAarpStepDefinition {
 			Assert.fail("autoamtic payments dashbaord page not found");
 		}*/
 		}
+	
+	@And("^the user clicks on Continue button in automatic payment page without clicking checkbox$")
+	public void user_continueswithoutCheckbox()
+	{
+		AutomaticPaymentsPage automaticPaymentsPage = (AutomaticPaymentsPage)getLoginScenario().getBean(PageConstants.AUTOMATIC_PAYMENTS_DASHBOARD);
+		ReviewAutomaticPaymentsPage reviewautomaticPaymentsPage = automaticPaymentsPage.enterInfoWithoutCheckBoxAndContinue();
+		ReviewAutomaticPaymentsPage reviewautomaticPaymentsPagechkbox = automaticPaymentsPage.errorMessagechkBox();
+		if(reviewautomaticPaymentsPage != null){
+			getLoginScenario().saveBean(PageConstants.REVIEW_AUTOMATIC_PAYMENTS_DASHBOARD,
+					reviewautomaticPaymentsPage);
+			Assert.assertTrue(true);
+		}else {
+			Assert.fail("Automatic payments dashboard page not found");
+		}
+		
+		
+	}
+	
 	}
 

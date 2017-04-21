@@ -90,4 +90,32 @@ Examples:
 	| planType |
 	| MAPD     |
        
+
+@US497862
+Scenario Outline: Verify the Error Message when user clicks on continue button on OTP Page without clicking checkbox
+Given the user is on the AARP medicare site login page
+When the user logs in with a registered AMP with following details in AARP site
+	| Plan Type   | <planType>  |
+And the user navigates to One Time Payments page
+And the user enters details without clicking checkbox and clicks on continue button on OTP Page for Dashboard
+
+Examples:
+	| planType |
+	| MAPD     |
+	
+
+@US497834
+Scenario Outline: Verify the User is taken to Payment History page when he clicks cancel button on OTP page
+Given the user is on the AARP medicare site login page
+When the user logs in with a registered AMP with following details in AARP site
+	| Plan Type   | <planType>  |
+And the user navigates to One Time Payments page
+And the user clicks on cancel button on OTP Page and validates title
+Then user validates the Payment History Page
+
+Examples:
+	| planType |
+	| MAPD     |
+
+
      

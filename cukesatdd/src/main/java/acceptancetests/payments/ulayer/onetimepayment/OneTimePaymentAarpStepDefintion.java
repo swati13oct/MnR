@@ -367,10 +367,53 @@ public class OneTimePaymentAarpStepDefintion {
 			Assert.assertTrue(true);
 		}else {
 			Assert.fail("one time payments dashboard page not found");
-		}
-		
+		}		
+	}
+	
+	@And("^the user enters details without clicking checkbox and clicks on continue button on OTP Page for Dashboard$")
+	public void user_continueswithoutCheckbox()
+	{
+		OneTimePaymentsPage oneTimePaymentsPage = (OneTimePaymentsPage)getLoginScenario().getBean(PageConstants.ONE_TIME_PAYMENTS_DASHBOARD);
+		ReviewOneTimePaymentsPage reviewOneTimePaymentsPage = oneTimePaymentsPage.enterInfoWithoutCheckBoxAndContinue();
+		ReviewOneTimePaymentsPage reviewOneTimePaymentsPagechkbox = oneTimePaymentsPage.errorMessagechkBox();
+		if(reviewOneTimePaymentsPage != null){
+			getLoginScenario().saveBean(PageConstants.REVIEW_ONE_TIME_PAYMENTS_DASHBOARD,
+					reviewOneTimePaymentsPage);
+			Assert.assertTrue(true);
+		}else {
+			Assert.fail("one time payments dashboard page not found");
+		}		
 		
 	}
+	
+	@And("^the user clicks on cancel button on OTP Page and validates title$")
+	public void user_clicks_cancel_button()
+	{
+		OneTimePaymentsPage oneTimePaymentsPage = (OneTimePaymentsPage)getLoginScenario().getBean(PageConstants.ONE_TIME_PAYMENTS_DASHBOARD);
+		ReviewOneTimePaymentsPage reviewOneTimePaymentsPage = oneTimePaymentsPage.CancelButton();		
+		if(reviewOneTimePaymentsPage != null){
+			getLoginScenario().saveBean(PageConstants.REVIEW_ONE_TIME_PAYMENTS_DASHBOARD,
+					reviewOneTimePaymentsPage);
+			Assert.assertTrue(true);
+		}else {
+			Assert.fail("one time payments dashboard page not found");
+		}		
+		
+	}
+	
+	@Then("^user validates the Payment History Page$")
+	public void user_validates_Payment_History_PageDetails() {
+		OneTimePaymentsPage oneTimePaymentsPage = (OneTimePaymentsPage)getLoginScenario().getBean(PageConstants.ONE_TIME_PAYMENTS_DASHBOARD);
+		ReviewOneTimePaymentsPage reviewOneTimePaymentsPage = oneTimePaymentsPage.HistoryPageValidation();		
+		if(reviewOneTimePaymentsPage != null){
+			getLoginScenario().saveBean(PageConstants.PAYMENT_HISTORY_PAGE,
+					reviewOneTimePaymentsPage);
+			Assert.assertTrue(true);
+		}else {
+			Assert.fail("one time payments dashboard page not found");
+		}		
+	}
+	
 	
 	@Then("^user lands on Review One time Payments Page and validates the amount and routing number values$")
 	public void review_onetime_payments_validation()
