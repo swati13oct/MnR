@@ -45,6 +45,7 @@ public class ContactUsPage extends UhcDriver{
 	@FindBy(xpath="//*[@id='modelContent']/div[1]")
 	private WebElement emialUslink;
 	
+	
 	@FindBy(xpath="//*[@id='contActButton']")
 	private WebElement continuelink;
 	
@@ -113,11 +114,12 @@ public class ContactUsPage extends UhcDriver{
 	}
 	
 	public void secureEmailWidgetNonDisplayedCheck(){
-			Assert.assertEquals("display: block;", securewidgetlink.getAttribute("style"));
+			/*Assert.assertEquals("display: block;", securewidgetlink.getAttribute("style"));*/
 		
-			//Assert.assertTrue("Secure Email widget not displayed", !securewidgetlink.isDisplayed());
+			Assert.assertTrue("Secure Email widget not displayed", !securewidget.isDisplayed());
 			
 	}
+	
 
 	public JSONObject getsecurewidget() {
 		String fileName = CommonConstants.AARPM_SECURE_EMAIL_DATA;

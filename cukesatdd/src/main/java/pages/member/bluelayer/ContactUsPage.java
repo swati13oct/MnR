@@ -10,6 +10,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.junit.Assert;
 import org.openqa.selenium.By;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -138,12 +139,26 @@ public class ContactUsPage extends UhcDriver{
 }
 
 public void secureEmailWidgetNonDisplayedCheck(){
-		Assert.assertEquals("display: block;", securewidgetlink.getAttribute("style"));
+		/*Assert.assertEquals("display: block;", securewidgetlink.getAttribute("style"));*/
 	
-		//Assert.assertTrue("Secure Email widget not displayed", !securewidgetlink.isDisplayed());
+		Assert.assertTrue("Secure Email widget not displayed", !securewidget.isDisplayed());
 		
 }
 	
+public void secureEmailWidgetNonDisplayedCheckfrEmployers(){
+	/*Assert.assertEquals("display: block;", securewidgetlink.getAttribute("style"));*/
+	try{
+		if(!securewidget.isDisplayed()){
+			Assert.assertTrue("Secure widget is not  displayed for Employers", !securewidget.isDisplayed());
+			
+		}
+	}catch(NoSuchElementException se){
+		/*Assert.fail("Secure widget is not  displayed for Employers");*/
+	}
+	
+	
+	System.out.println("Secure widget is not  displayed for Employers");
+}
 
 	public void logOut() {
 		logOut.click();

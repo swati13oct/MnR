@@ -275,7 +275,7 @@ public class LoginUmsStepDefinition {
 				.getBean(PageConstants.CONTACT_US_PAGE);
 		
 		
-		 contactUsPage.secureEmailWidgetNonDisplayedCheck();
+		 contactUsPage.secureEmailWidgetNonDisplayedCheckfrEmployers();
 		 /*try {
 			wait(30000);
 		} catch (InterruptedException e) {
