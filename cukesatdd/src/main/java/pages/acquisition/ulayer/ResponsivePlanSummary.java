@@ -172,14 +172,17 @@ public class ResponsivePlanSummary extends UhcDriver{
 			@FindBy (xpath="//*[@id='fixTable']/tbody/tr[16]/td[10]/span")
 		    private WebElement deductible2;
 			
-			@FindBy (xpath="//*[@id='fixTable']/tbody/tr[17]/td[1]/p")
-		    private WebElement tier1value;
+			//@FindBy (xpath="//*[@id='fixTable']/tbody/tr[17]/td[1]/p")
+			@FindBy (xpath="//*[@id='fixTable']/tbody/tr[22]/td[1]/p")
+		    private WebElement tier1value;			
 			
-			@FindBy (xpath="//*[@id='fixTable']/tbody/tr[17]/td[2]/span[1]/strong")
+			@FindBy (xpath="//*[@id='fixTable']/tbody/tr[22]/td[2]/span[1]/strong")
 		    private WebElement tier1value1;
+			// .//*[@id='fixTable']/tbody/tr[17]/td[2]/span[1]/strong
 			
-			@FindBy (xpath="//*[@id='fixTable']/tbody/tr[17]/td[8]/span[1]/strong")
+			@FindBy (xpath="//*[@id='fixTable']/tbody/tr[22]/td[6]/span[1]/strong")
 		    private WebElement tier1value2;
+			// .//*[@id='fixTable']/tbody/tr[22]/td[6]/span[1]/strong
 			
 //Optional Services
 			@FindBy (xpath="//*[@id='fixTable']/tbody/tr[11]/td[1]/p")
@@ -600,8 +603,12 @@ public void comparePlanslnk(){
 				// int i=0;
 				 List<WebElement> plans = driver.findElements(By.xpath("//h2[contains(text(),'AARP')]"));
 				 System.out.println("PLANS SIZE :: "+plans.size());
-				 String xpath="//label[contains(text(),'Add to Compare')]"; 
+				 //String xpath="//label[contains(text(),'Add to Compare')]"; 
+				 //String xpath="//span/input[@class='custom-checkbox']";
+				 String xpath="//span[contains(text(),'Enroll in plan')]";
+				 System.out.println("xpath is :"+ xpath);
 				// List<WebElement> comparePlansLink = driver.findElements(By.xpath("//*[contains(text(),'Compare plans')]"));
+				 //List<WebElement> compareCheckBox = driver.findElements(By.xpath(xpath));
 				 List<WebElement> compareCheckBox = driver.findElements(By.xpath(xpath));
 				 for(int i=0; i<plans.size();i++){
 					 if(plans.get(i).getText().equals(planName1)){

@@ -169,10 +169,11 @@ public class ResponsiveStepDefiniton {
  	}*/
 	
 	@And("^the user select plan to compare in AARP site")
-	public void the_user_select_plan_to_compare(){
+	public void the_user_select_plan_to_compare() throws InterruptedException{
 		{
 			ResponsivePlanSummary planSummary = (ResponsivePlanSummary) getLoginScenario()
 					.getBean(PageConstants.RESPONSIVE_PLAN_SUMMARY_PAGE);
+			Thread.sleep(10000);
 			planSummary.selectAddToCompareCheckboxes();
 			
 		}

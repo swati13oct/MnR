@@ -164,8 +164,6 @@ Then the user performs plan serach using zipcode
 		| County   |<county> |
 Then the user navigates to the following plan type
 	  | Plan Type | <planType> |
-And the user navigates to plan details page
-    |Plan Name|<planName>|
 And the user select plan to compare in AARP site
 And the user click compare plans in AARP site
 And the user click plan view details link on compare in AARP site
@@ -265,9 +263,8 @@ Then the user performs plan serach using zipcode
 		| County   |<county> |
 Then the user navigates to the following plan type
 	  | Plan Type | <planType> |
-And the user selects desired plan to compare
-      |Plan 1|<planName1>|
-      |Plan 2|<planName2>|
+And the user select plan to compare in AARP site
+And the user click compare plans in AARP site
 Then the user validates medical benefits
       |MP Plan1|<mpPlan1>|
       |MP Plan2|<mpPlan2>|
@@ -275,7 +272,7 @@ Then the user validates medical benefits
       |Oop Plan2|<oopPlan2>|      
 Examples:
 		|zipCode|county            |planType|planName1 											|planName2                                             |mpPlan1|mpPlan2|oopPlan1|oopPlan2|
-		|90210  |Los Angeles County|MA      |AARP MedicareComplete SecureHorizons Plan 1 (HMO)  |AARP MedicareComplete SecureHorizons Plan 2 (HMO)     |$0.00  |$0.00  |$4,600.00|$2,000.00|	
+		|90210  |Los Angeles County|MA      |AARP MedicareComplete SecureHorizons Plan 1 (HMO)  |AARP MedicareComplete SecureHorizons Plan 2 (HMO)     |$0  |$0  |In-Network: $4,600|In-Network: $2,000|	
 
 	@backtoAllPlans	
 			Scenario Outline: To validate Add to Compare Checboxes
@@ -624,8 +621,8 @@ Then the user validates prescription drug benefits
       |tier1 Plan1|<tier1Plan1>|
       |tier1 Plan2|<tier1Plan2>|      
 Examples:
-		|zipCode|county            |planType|deducPlan1	|deducPlan2	|tier1Plan1		|tier1Plan2		|
-		|90210  |Los Angeles County|MA      |$0  		|$400	  	|$4.00 co-pay	|$0.00 co-pay	|
+		|zipCode|county            |planType|deducPlan1	|deducPlan2	|tier1Plan1		|tier1Plan2	|
+		|90210  |Los Angeles County|MA      |$0  		|$0	  	|$4 co-pay		|$0 co-pay	|
 
 @OptionalServices
 Scenario Outline: To validate Optional Services in compare page
