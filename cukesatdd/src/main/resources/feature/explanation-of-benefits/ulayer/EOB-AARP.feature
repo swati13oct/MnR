@@ -140,3 +140,18 @@ Then the user navigates to EOB page and validates the page
 Examples:
 	| planType  | memberType   | eobTypeData       | fromDate   | toDate     |dateRange       |
  	| Ship      | withEOB      | Medical           | 12/12/2007 | 12/12/2008 |Last 6 months   |	
+ 	
+ 	@F85974
+Scenario Outline: To verify mobile responsive for all plans on EOB page
+Given registered AMP with for EOB flow
+	| Plan Type      |<planType>  |
+	| Member Type    |<memberType>|
+Then the user navigates to EOB page and validates the page
+ |Date Range|<dateRange>  |
+ |Plan Type |<planType>   |
+ |EOB Type  |<eobTypeData>|
+ |From Date |<fromDate>   |
+ |To Date   |<toDate>     |
+Examples:
+	| planType  | memberType   | eobTypeData       | fromDate   | toDate     |dateRange       |
+ 	| MA  | withEOB      | Medical           | 12/12/2007 | 12/12/2008 |Last 6 months   |
