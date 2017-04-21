@@ -68,12 +68,14 @@ public class LoginPage extends UhcDriver {
 		
 
 		if (MRScenario.environment.equals("awe-dev-b") || MRScenario.environment.equals("dev-a") || MRScenario.environment.equals("dev-c") || MRScenario.environment.equals("team-b") || MRScenario.environment.equals("team-a") || MRScenario.environment.equals("team-c")) {
-
+			try{
 			Alert alert = driver.switchTo().alert();
 			alert.accept();
 			Alert alert1 = driver.switchTo().alert();
 			alert1.accept();
-					
+			}catch(Exception e)		{
+				System.out.println("No Such alert displayed");
+			}
 			/*if (!(MRScenario.environment.equals("awe-dev-b") || MRScenario.environment.equals("dev-c") || MRScenario.environment.equals("team-b"))){
 				Alert alert2 = driver.switchTo().alert();
 				alert2.accept();
