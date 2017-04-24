@@ -1010,3 +1010,19 @@ Feature: To test plan benefits and Coverage on AARP site for Federal members
     Examples: 
       | planType | copayCategory |
       | MAPD     | NON LIS       |
+@validatePdfsection
+  Scenario Outline: Verify PDF section is in place on Benefits and Coverage page
+    Given registered AMP with following details for plan benefits and coverage flow in AARP site
+      | Plan Type      | <planType>      |
+    When the user view forms and resources in AARP site
+    Then the user view benefits and coverage in AARP site
+    And the user validates the content on benefits and coverage page
+    And the user validates view and documents label
+    And the user validates the language dropdown and the value displayed by default
+      | Language      | <language>      |
+    And the user selects new value in dropdown successfully
+    
+     Examples: 
+      | planType | language | 
+      | SHIP     | SPANISH  |  
+      | SHIP     | CHINESE  |

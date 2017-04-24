@@ -579,6 +579,32 @@ public class PlanBenefitsAndCoverageAarpStepDefinition {
 
 	}
 
+	@And("^the user validates view and documents label$")
+	public void validate_labels()
+	{
+		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario().getBean(
+				PageConstants.BENEFITS_COVERAGE_PAGE);
+		benefitsCoveragePage.validatelabels();
+	}
+	
+	@And("^the user validates the language dropdown and the value displayed by default$")
+	public void validate_languagedropdown(DataTable givenAttributes)
+	{
+		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario().getBean(
+				PageConstants.BENEFITS_COVERAGE_PAGE);
+		benefitsCoveragePage.validate_langdropdown_first_selection();
+		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells()
+					.get(0), memberAttributesRow.get(i).getCells().get(1));
+		}
+		String language = memberAttributesMap.get("Language");
+		getLoginScenario().saveBean(PlanBenefitsAndCoverageCommonConstants.Language,language);
+		benefitsCoveragePage.validate_langdropdown_select(language);
+	}
+
 	/*@After
 	public void tearDown() {
 

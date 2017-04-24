@@ -75,6 +75,15 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 
 	@FindBy(xpath = "//a[contains(.,'contact us')]")
 	private WebElement contactUsLink;
+    
+        @FindBy(xpath = ".//*[@id='planBenefitsApp']/section/div/div[2]/div/form/span[1]")
+	private WebElement pdfsectionviewlabel;
+	
+	@FindBy(xpath=".//*[@id='lang-select-2']")
+        private WebElement langdropdown;
+	
+	@FindBy(xpath = ".//*[@id='planBenefitsApp']/section/div/div[2]/div/form/span[2]")
+	private WebElement pdfsectiondocumentlabel;
 
 	public BenefitsAndCoveragePage(WebDriver driver) {
 		super(driver);
@@ -296,5 +305,41 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 		}
 		return null;
 
+	}
+        public void validatelabels()
+	{
+	validate(pdfsectionviewlabel);
+	validate(pdfsectiondocumentlabel);
+	try {
+		Thread.sleep(10000);
+	} catch (InterruptedException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
+	}
+	
+	public void validate_langdropdown_first_selection()
+	{
+		 //WebElement langdropdown;
+		if (langdropdown.isDisplayed())
+		{
+		    Select langdropdwn = new Select(langdropdown);
+			if (langdropdwn.getFirstSelectedOption().getText().equals("ENGLISH"))
+			{
+				Assert.assertTrue(true);
+			}
+			else
+				Assert.fail("Issue in English selection");
+		}
+		else
+			Assert.fail("Plan year dropdown not displayed");
+		
+	   
+	} 
+	
+	public void validate_langdropdown_select(String language)
+	{
+		Select langdropdwn = new Select(langdropdown);
+		langdropdwn.selectByVisibleText(language);
 	}
 }
