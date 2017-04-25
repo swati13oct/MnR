@@ -123,7 +123,7 @@ public class ManageDrugPage extends UhcDriver {
 	public boolean validateDruginformation(String drugSelected,Map<String, String> dosageMap){
 		boolean flag = true;
 		try {
-			Thread.sleep(5000);
+			Thread.sleep(5000);	
 		} catch (InterruptedException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
@@ -199,6 +199,30 @@ public class ManageDrugPage extends UhcDriver {
 			if (pharmacySearchButton2.isDisplayed()) {
 				CommonUtility.waitForElementToDisappear(driver,
 						pharmacySearchButton2, CommonConstants.TIMEOUT_30);
+			}
+			Thread.sleep(2000);
+		} catch (NoSuchElementException e) {
+			System.out.println("pharmacySearchButton not found");
+		} catch (TimeoutException ex) {
+			System.out.println("pharmacySearchButton not found");
+		} catch (Exception e) {
+			System.out.println("pharmacySearchButton not found");
+		}
+
+		if (currentUrl().contains("selectPharmacy")) {
+			return new SelectPharmacyPage(driver);
+		} else {
+			return null;
+		}
+
+	}
+	
+	public SelectPharmacyPage navigateToPharmacyPageByclickingEditPharmacy() {
+		editPharmacyLink.click();
+		try {
+			if (editPharmacyLink.isDisplayed()) {
+				CommonUtility.waitForElementToDisappear(driver,
+						editPharmacyLink, CommonConstants.TIMEOUT_30);
 			}
 			Thread.sleep(2000);
 		} catch (NoSuchElementException e) {
@@ -467,6 +491,10 @@ public class ManageDrugPage extends UhcDriver {
 		}
 	}
 
+	public void performSwitchtoGenericfunctionality(){
+		switchToGenericLink.click();
+		drugDelete.click();
+	}
 	public VPPPlanSummaryPage applieschanges() {
 		closeAndApplyChangesLink.click();
 		try {

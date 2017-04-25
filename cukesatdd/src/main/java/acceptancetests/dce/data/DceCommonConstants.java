@@ -27,7 +27,9 @@ public class DceCommonConstants {
 	public static final String DOSAGE_INFORMATION = "dosageInformation";
 
 	public static final String DRUG_NAME = "drugName";
-
+	
+	public static final String DRUG_INITIALS = "druginitils";
+	
 	public static final String ADD_DRUG_ACTUAL = "addDrugActualJson";
 
 	public static final String ADD_DRUG_EXPECTED = "addDrugExpectedJson";

@@ -575,8 +575,13 @@ public class VPPPlanSummaryPage extends UhcDriver {
 				}
 			}
 		}
-
-
+				try {
+			Thread.sleep(10000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 		for( int i = 0; i<10; i++){
 			if (pageHeading.getText().equalsIgnoreCase(
 					"You Have Chosen to Enroll in the Following Plan")) {

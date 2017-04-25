@@ -45,11 +45,25 @@ public class SelectPharmacyPage extends UhcDriver {
 	@FindBy(className = "select_link")
 	WebElement selectLink;
 
+	@FindBy(linkText = "Edit ZIP code")
+	private WebElement editzipCodeLink;
+	
+	@FindBy(xpath = "//div[@id='dcemodal']/div/div/form/div[5]/div[12]/div/a/span")
+	private WebElement upgradeButton;
+	
+	@FindBy(className = "ZIPCodeBox")
+	WebElement zipCodeField;
+	
+	@FindBy(xpath="//div[@class='tabsHead']/div")
+	WebElement manageDrugTab;
+	
 	private PageData pharmacies;
 
 	public JSONObject availablePharmaciesJson;
 
 	public PageData pharmacyInfo;
+	
+	
 
 	public SelectPharmacyPage(WebDriver driver) {
 		super(driver);
@@ -79,7 +93,21 @@ public class SelectPharmacyPage extends UhcDriver {
 		}
 		return flag;
 	}
+	
+	public void editZipcode(String zipCode){
+		editzipCodeLink.click();
+		sendkeys(zipCodeField, zipCode);
+		upgradeButton.click();
+	}
 
+	public ManageDrugPage naviageToManageDrugTab(){
+		manageDrugTab.click();
+		if (currentUrl().contains("manageDrugList")) {
+			return new ManageDrugPage(driver);
+		} else {
+			return null;
+		}
+	}
 	public void selectPharmacyType(String pharmacyType, String distance) {
 
 		String pharmacyPath = "//div[@id='dcemodal']/div/div/form/div[5]/div[12]/select[1]/*[. = '"
