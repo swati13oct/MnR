@@ -11,10 +11,12 @@ import java.util.Set;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.Select;
 
 import com.google.gson.JsonObject;
 
@@ -75,12 +77,12 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 
 	@FindBy(xpath = "//a[contains(.,'contact us')]")
 	private WebElement contactUsLink;
-    
-        @FindBy(xpath = ".//*[@id='planBenefitsApp']/section/div/div[2]/div/form/span[1]")
+	
+	@FindBy(xpath = ".//*[@id='planBenefitsApp']/section/div/div[2]/div/form/span[1]")
 	private WebElement pdfsectionviewlabel;
 	
 	@FindBy(xpath=".//*[@id='lang-select-2']")
-        private WebElement langdropdown;
+    private WebElement langdropdown;
 	
 	@FindBy(xpath = ".//*[@id='planBenefitsApp']/section/div/div[2]/div/form/span[2]")
 	private WebElement pdfsectiondocumentlabel;
@@ -306,7 +308,8 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 		return null;
 
 	}
-        public void validatelabels()
+
+	public void validatelabels()
 	{
 	validate(pdfsectionviewlabel);
 	validate(pdfsectiondocumentlabel);
@@ -341,5 +344,6 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 	{
 		Select langdropdwn = new Select(langdropdown);
 		langdropdwn.selectByVisibleText(language);
-	}
+	}	
+
 }
