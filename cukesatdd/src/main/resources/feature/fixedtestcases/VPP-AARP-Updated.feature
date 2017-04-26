@@ -1,4 +1,4 @@
-@fixedTestCaseTest
+#@fixedTestCaseTest
 Feature: To test plan summary in AARP site
 Scenario Outline: Verify plan summary in AARP site
 Given the user is on AARP medicare acquisition site landing page
