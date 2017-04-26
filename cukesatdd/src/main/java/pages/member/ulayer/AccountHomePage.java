@@ -586,10 +586,10 @@ public class AccountHomePage extends UhcDriver {
 		return null;
 	}
 
-	public pages.dashboard.member.ulayer.ClaimSummarypage navigateToClaimsSummaryPage(WebDriver driver) {
+	public pages.dashboard.member.ulayer.ClaimSummarypage navigateToClaimsSummaryPage() {
 		// TODO Auto-generated method stub
-		String url = "https://member.team-b-aarpmedicareplans.uhc.com/guest/mirumclaims.html";
-		driver.navigate().to(url);
+		String url = "https://member.team-b-aarpmedicareplans.uhc.com/home/claimtest.html";
+		driver.get(url);
 		/*
 		 * try { Thread.sleep(1000); } catch (InterruptedException e) { // TODO
 		 * Auto-generated catch block e.printStackTrace(); }
