@@ -161,8 +161,37 @@ public class AutomaticPaymenAarpStepDefinition {
 			Assert.assertTrue(true);
 		}else {
 			Assert.fail("automatic payments dashboard page not found");
-		}
+		}		
 		
+	}
+	
+	@And("^the user lands on Review Automatic Payments Page and clicks on Submit button$")
+	public void Review_Automatic_paymentPage()
+	{
+		ReviewAutomaticPaymentsPage reviewAutomaticPage = (ReviewAutomaticPaymentsPage)getLoginScenario().getBean(PageConstants.REVIEW_AUTOMATIC_PAYMENTS_DASHBOARD);
+		ReviewAutomaticPaymentsPage reviewAutomaticPaymentsPage = reviewAutomaticPage.navigatetoPaymentSubmittedPage();
+		if(reviewAutomaticPaymentsPage != null){
+			getLoginScenario().saveBean(PageConstants.CONFIRM_AUTOMATIC_PAYMENT_PAGE,
+					reviewAutomaticPaymentsPage);
+			Assert.assertTrue(true);
+		}else {
+			Assert.fail("Automatic Payment confirmation page not found");
+		}		
+		
+	}
+	
+	@Then("^the user presses Back To Payment History button on Automatic Payment Submitted page and validates it$")
+	public void Automatic_payment_SuccessPage()
+	{
+		ReviewAutomaticPaymentsPage reviewAutomaticPaymentsPage = (ReviewAutomaticPaymentsPage)getLoginScenario().getBean(PageConstants.CONFIRM_AUTOMATIC_PAYMENT_PAGE);
+		ReviewAutomaticPaymentsPage PaymentsHistoryPage = reviewAutomaticPaymentsPage.navigatetoPaymentHistoryDashboard();
+		if(PaymentsHistoryPage != null){
+			getLoginScenario().saveBean(PageConstants.DASHBOARD_PAYMENT_HISTORY_PAGE,
+					PaymentsHistoryPage);
+			Assert.assertTrue(true);
+		}else {
+			Assert.fail("Payment history confirmation page not found");
+		}		
 		
 	}
 	
