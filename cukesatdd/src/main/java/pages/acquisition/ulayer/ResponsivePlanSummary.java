@@ -173,14 +173,14 @@ public class ResponsivePlanSummary extends UhcDriver{
 		    private WebElement deductible2;
 			
 			//@FindBy (xpath="//*[@id='fixTable']/tbody/tr[17]/td[1]/p")
-			@FindBy (xpath="//*[@id='fixTable']/tbody/tr[22]/td[1]/p")
+			@FindBy (xpath="//*[@id='fixTable']/tbody/tr[25]/td[1]/p")
 		    private WebElement tier1value;			
 			
-			@FindBy (xpath="//*[@id='fixTable']/tbody/tr[22]/td[2]/span[1]/strong")
+			@FindBy (xpath="//*[@id='fixTable']/tbody/tr[25]/td[2]/span[1]/strong")
 		    private WebElement tier1value1;
 			// .//*[@id='fixTable']/tbody/tr[17]/td[2]/span[1]/strong
 			
-			@FindBy (xpath="//*[@id='fixTable']/tbody/tr[22]/td[6]/span[1]/strong")
+			@FindBy (xpath="//*[@id='fixTable']/tbody/tr[25]/td[5]/span[1]/strong")
 		    private WebElement tier1value2;
 			// .//*[@id='fixTable']/tbody/tr[22]/td[6]/span[1]/strong
 			
