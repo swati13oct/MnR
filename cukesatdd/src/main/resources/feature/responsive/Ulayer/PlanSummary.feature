@@ -53,7 +53,8 @@ Examples:
 
 Scenario Outline: To validate chat now widget in right rail
 Given the user is on the vpp portfolio page
-Then the user performs plan serach using zipcode
+Then the user performs plan serach using zipcodemedical
+
 		| Zip Code |<zipCode>|
 		| County   |<county> |
 Then the user navigates to the following plan type
@@ -272,7 +273,7 @@ Then the user validates medical benefits
       |Oop Plan2|<oopPlan2>|      
 Examples:
 		|zipCode|county            |planType|planName1 											|planName2                                             |mpPlan1|mpPlan2|oopPlan1|oopPlan2|
-		|90210  |Los Angeles County|MA      |AARP MedicareComplete SecureHorizons Plan 1 (HMO)  |AARP MedicareComplete SecureHorizons Plan 2 (HMO)     |$0  |$0  |In-Network: $4,600|In-Network: $2,000|	
+		|90210  |Los Angeles County|MA      |AARP MedicareComplete SecureHorizons Plan 1 (HMO)  |AARP MedicareComplete SecureHorizons Plan 2 (HMO)     |$0.00  |$0.00  |In-Network: $4,600|In-Network: $2,000|	
 
 	@backtoAllPlans	
 			Scenario Outline: To validate Add to Compare Checboxes
@@ -622,7 +623,7 @@ Then the user validates prescription drug benefits
       |tier1 Plan2|<tier1Plan2>|      
 Examples:
 		|zipCode|county            |planType|deducPlan1	|deducPlan2	|tier1Plan1		|tier1Plan2	|
-		|90210  |Los Angeles County|MA      |$0  		|$0	  	|$4 co-pay		|$0 co-pay	|
+		|90210  |Los Angeles County|MA      |$0  		|$0	  	|$4.00 co-pay		|$0.00 co-pay	|
 
 @OptionalServices
 Scenario Outline: To validate Optional Services in compare page
