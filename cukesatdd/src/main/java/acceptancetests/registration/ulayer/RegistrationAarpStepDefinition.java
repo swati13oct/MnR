@@ -303,11 +303,6 @@ public class RegistrationAarpStepDefinition {
 		}
 	}
 	
-	@After
-	public void tearDown() {
-		WebDriver wd = (WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
-		wd.quit();
-		getLoginScenario().flushBeans();
-	}
+	
 
 }
