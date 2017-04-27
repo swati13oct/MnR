@@ -52,7 +52,7 @@ public class ClaimSummarypage extends UhcDriver{
 	@FindBy(xpath = "//option[@value = 'custom-search']")
 	private WebElement customSearch;
 
-	@FindBy(xpath = "//option[@value = '24 months']")
+	@FindBy(xpath = "//div[2]/section/div/div/div/form/fieldset/div/div/div[2]/div/select/option[@value='6 months']")
 	private WebElement last24Months;
 	
 	@FindBy(xpath="//div[normalize-space()='Prescription Drug']")
@@ -126,7 +126,7 @@ public class ClaimSummarypage extends UhcDriver{
 		super(driver);
 
 		PageFactory.initElements(driver, this);
-		CommonUtility.waitForPageLoad(driver, ClaimsSummaryPage, 60);
+		//CommonUtility.waitForPageLoad(driver, ClaimsSummaryPage, 60);
 
 		// TODO Auto-generated constructor stub
 	}
@@ -299,8 +299,12 @@ public class ClaimSummarypage extends UhcDriver{
 	
 	public void searchClaimsByTimePeriod(String claimPeriod) {
 		System.out.println("The title of the page is-------->"+driver.getTitle());
+		System.out.println("The URL of the page is---------->"+driver.getCurrentUrl());
 		if(driver.getTitle().equalsIgnoreCase("Member Claims")){
+			CommonUtility.waitForPageLoad(driver, last24Months, 60);
 			last24Months.click();
+			/*Select claimsFrom = new Select(viewClaimsFrom);
+			claimsFrom.selectByValue("24 months");*/
 		}
 	}
 

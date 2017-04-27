@@ -588,7 +588,7 @@ public class AccountHomePage extends UhcDriver {
 
 	public pages.dashboard.member.ulayer.ClaimSummarypage navigateToClaimsSummaryPage() {
 		// TODO Auto-generated method stub
-		String url = "https://member.team-b-aarpmedicareplans.uhc.com/home/claimtest.html";
+		String url = "https://member.team-b-aarpmedicareplans.uhc.com/home/claimstest.html";
 		driver.get(url);
 		/*
 		 * try { Thread.sleep(1000); } catch (InterruptedException e) { // TODO
