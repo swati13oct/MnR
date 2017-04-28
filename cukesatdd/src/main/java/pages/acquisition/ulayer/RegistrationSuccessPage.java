@@ -1,4 +1,4 @@
-package pages.acquisition.bluelayer;
+package pages.acquisition.ulayer;
 
 import java.util.Map;
 
@@ -9,15 +9,14 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-
-//import pages.member.bluelayer.AccountHomePage;
+import pages.member.ulayer.AccountHomePage;
 import acceptancetests.atdd.data.CommonConstants;
 import acceptancetests.atdd.data.PageData;
 import acceptancetests.atdd.util.CommonUtility;
 import atdd.framework.UhcDriver;
 
 /**
- * @author pagarwa5
+ * @author pperugu
  *
  */
 public class RegistrationSuccessPage extends UhcDriver {
@@ -40,32 +39,28 @@ public class RegistrationSuccessPage extends UhcDriver {
 		PageFactory.initElements(driver, this);
 		String fileName = CommonConstants.REGISTRATION_SUCCESS_PAGE_DATA;
 		registrationSuccess = CommonUtility.readPageData(fileName,
-				CommonConstants.PAGE_OBJECT_DIRECTORY_BLUELAYER_MEMBER);
+				CommonConstants.PAGE_OBJECT_DIRECTORY_ULAYER_MEMBER);
 		openAndValidate();
 	}
 
 	public String getContent() {
-		CommonUtility.checkPageIsReady(driver);
-		return registrationSuccessContent.getText();
+		return registrationSuccessContent.getText(); // get page id
+	}
+
+	public AccountHomePage navigateToHomePage() {
+		homePageLink.click();
+		if (getTitle().equalsIgnoreCase(
+				"AARP Medicare Plans | My Account Home"))
+			return new AccountHomePage(driver);
+		else
+			return null;
+
 	}
 
 	public void logOut() {
 		logOut.click();
 
 	}
-
-	/*public AccountHomePage navigateToHomePage() {
-		if (homePageLink.isEnabled()) {
-			homePageLink.click();
-
-		}
-		if (getTitle().equalsIgnoreCase(
-				"UnitedHealthcare Medicare Solutions | My Account Home"))
-			return new AccountHomePage(driver);
-		else
-			return null;
-
-	}*/
 
 	@Override
 	public void openAndValidate() {
@@ -77,14 +72,15 @@ public class RegistrationSuccessPage extends UhcDriver {
 		for (String key : registrationSuccess.getExpectedData().keySet()) {
 			WebElement element = findElement(registrationSuccess
 					.getExpectedData().get(key));
-			if (element != null) {
-				validate(element);
-				try {
-					jsonObject.put(key, element.getText());
-				} catch (JSONException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
+			if(element != null)
+			{
+			validate(element);
+			try {
+				jsonObject.put(key, element.getText());
+			} catch (JSONException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			}
 
 		}
@@ -93,7 +89,7 @@ public class RegistrationSuccessPage extends UhcDriver {
 		System.out.println("registrationSuccessJson---->"+registrationSuccessJson);
 	}
 
-public JSONObject getExpectedData(Map<String, JSONObject> expectedDataMap, JSONObject registrationCommonExpected) {
+	public JSONObject getExpectedData(Map<String, JSONObject> expectedDataMap, JSONObject registrationCommonExpected) {
 		
 		JSONObject registrationSuccessExpectedJson = expectedDataMap
 				.get(CommonConstants.REGISTRATION_SUCCESS);
@@ -116,7 +112,7 @@ public JSONObject getExpectedData(Map<String, JSONObject> expectedDataMap, JSONO
 			{
 				String[] fullName = name.split(" ");
 				String firstName = fullName[0];
-				String lastName = name.replace(fullName[0]+" ", "");
+				String lastName = fullName[1];
 				registrationSuccessExpectedJson.put("firstName", firstName);
 				registrationSuccessExpectedJson.put("lastName", lastName);
 				
@@ -131,35 +127,22 @@ public JSONObject getExpectedData(Map<String, JSONObject> expectedDataMap, JSONO
 		return registrationSuccessExpectedJson;
 	}
 
-public boolean validateRegistrationSuccessPage() {
-	
-	boolean flag = false;
-	for (String key : registrationSuccess.getExpectedData().keySet()) {
+	public boolean validateRegistrationSuccessPage() {
+		
+		boolean flag = false;
+		for (String key : registrationSuccess.getExpectedData().keySet()) {
+			System.err.println("key::"+key);
+			WebElement element = findElement(registrationSuccess.getExpectedData()
+					.get(key));
 
-		WebElement element = findElement(registrationSuccess.getExpectedData()
-				.get(key));
-
-		if (validate(element) && null != element.getText()
-				&& element.getText() != "") {
-			flag = true;
-		} else {
-			return false;
+			if (validate(element) && null != element.getText()
+					&& element.getText() != "") {
+				flag = true;
+			} else {
+				return false;
+			}
 		}
+
+		return flag;
 	}
-
-	return flag;
-}
-
-	/*public AccountHomePage navigateToHomePage(String category) {
-		if (homePageLink.isEnabled()) {
-			homePageLink.click();
-		}
-		if (currentUrl().contains("home/my-account-home.html") && category!=null)
-			return new AccountHomePage(driver,category);
-		else if(currentUrl().contains("home/my-account-home.html")){
-			return new AccountHomePage(driver);
-		}
-		return null;
-	}*/
-
 }

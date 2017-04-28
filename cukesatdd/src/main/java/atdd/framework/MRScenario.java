@@ -796,6 +796,7 @@ public class MRScenario {
 			System.setProperty("phantomjs.page.settings.userAgent", userAgent);
 			webDriver = new PhantomJSDriver(caps);
 
+
 		}
 		return webDriver;
 	}
@@ -835,6 +836,104 @@ public class MRScenario {
 			webDriver = null;
 		}
 
+	}
+
+	public void removeMember(String userName) {
+
+		System.out.println("Removing members in registration flow");
+
+		Map<String, String> props = getProperties();
+
+		// Set up DB
+		Connection con = getDBConnection(props);
+
+		// Get LDAP Context
+		DirContext ctx = getLdapContext(props);
+
+		// Default Schema
+		String defaultSchema = props.get(CommonConstants.DB_SCHEMA);
+
+		Statement stmt;
+		ResultSet rs = null;
+			try {
+				stmt = con.createStatement();
+				String query = "select * from " + defaultSchema
+						+ ".PORTAL_USER where USER_NAME='" + userName + "'";
+				rs = stmt.executeQuery(query);
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+
+			try {
+				Object user = null;
+				try {
+					user = ctx.lookup(buildUserDistinguishedName(userName));
+
+				} catch (NamingException e) {
+					System.out.println("member not found in ldap");
+				}
+
+				/* Checking in LDAP */
+				if (user != null) {
+					ctx.unbind(buildUserDistinguishedName(userName));
+
+					System.out.println("USERNAME " + userName
+							+ " removed from LDAP");
+
+				} else {
+					System.out.println("member not found in ldap :: USERNAME "
+							+ userName + " NOT REGISTERED");
+				}
+
+				/* Checking in DataBase */
+				if (rs.next()) {
+					stmt = con.createStatement();
+
+					String query = "DELETE FROM "
+							+ defaultSchema
+							+ ".PORTAL_USER_ACCOUNT where PORTAL_USER_ID in (select PORTAL_USER_ID from "
+							+ defaultSchema + ".PORTAL_USER where USER_NAME='"
+							+ userName + "')";
+					String query1 = "DELETE FROM " + defaultSchema
+							+ ".PORTAL_USER where USER_NAME='" + userName + "'";
+					rs = stmt.executeQuery(query);
+					rs = stmt.executeQuery(query1);
+
+					System.out.println("USERNAME " + userName
+							+ " :: deleted from PORTAL_USER table");
+
+				} else {
+
+					System.out.println("USERNAME " + userName
+							+ " :: member not found in database");
+				}
+
+			} catch (SQLException e) {
+				e.printStackTrace();
+			} catch (NamingException e) {
+				e.printStackTrace();
+			}
+		
+		 
+		try {
+			/* Closing database connection */
+			con.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		try {
+			/* Closing LDAP connection */
+			ctx.close();
+		} catch (NamingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		System.out.println("Removing members in registration flow:: Complete");
+		
 	}
 
 }

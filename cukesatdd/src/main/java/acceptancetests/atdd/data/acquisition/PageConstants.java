@@ -3,7 +3,6 @@
  */
 package acceptancetests.atdd.data.acquisition;
 
-//import pages.acquisition.bluelayer.MARightsAndResponsibilitiesPage;
 
 /**
  * @author pjaising
@@ -74,7 +73,7 @@ public class PageConstants {
 	public static final String BENEFICIARY_INFORMATION_PAGE = "beneficiaryInformationPage";
 
 	public static final String INTRODUCTION_INFORMATION_PAGE = "introductionInformationPage";
-	
+
 	public static final String ESRD_PAGE = "esrdPage";
 
 	public static final String PRESCRIPTION_DRUG_COVERAGE_PAGE = "prescriptiondrugcoveragePage";
