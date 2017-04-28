@@ -3,6 +3,7 @@
  */
 package pages.member.ulayer;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -82,6 +83,12 @@ public class MedicalEobPage extends UhcDriver{
 
 	@FindBy(xpath="//*[contains(text(),'State Health Insurance Plan')]")
 	private WebElement shipTab;
+	
+	@FindBy(xpath="//*[contains(text(),'Learn More About My Medical EOB')][2]")
+	private WebElement learnMoreLink;
+	
+	@FindBy(xpath="//*[contains(text(),'How to read your Medical EOB ')]")
+	private WebElement readMedicalEOB;
 	
 	private PageData medicalEob;
 
@@ -277,5 +284,36 @@ public class MedicalEobPage extends UhcDriver{
 		validateEOBStatements(dateRange, memberType, eobTypeData, fromDate, toDate);
 		validatePageToggle();
 		return new MedicalEobPage(driver);
+	}
+	
+	public MedicalEobPage validateReadPDF(){
+		learnMoreLink.click();
+		if(readMedicalEOB.isDisplayed()){
+			System.out.println("Read medical EOB pDF link displayed correctly");
+			readMedicalEOB.click();
+			try {
+				Thread.sleep(5000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			ArrayList<String> tabs = new ArrayList<String> (driver.getWindowHandles());
+			try {
+				Thread.sleep(5000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}		
+			driver.switchTo().window(tabs.get(1));
+			System.out.println(driver.getTitle());
+			if (driver.getTitle().contains("How_to_read_Medical_EOB.pdf")) {
+		    System.out.println("PDF successfully displayed");
+			return new MedicalEobPage(driver);
+			}
+ 		}else{
+			System.out.println("Read Medical EOB PDF not displayed");
+			Assert.fail();
+		}
+		return null;
 	}
 }

@@ -547,6 +547,24 @@ public class EobAarpStepDefinition {
 			Assert.fail();
 		}
 	}
+	
+	@Then("^the user navigates to EOB page$")
+	public void the_user_navigates_to_EOB_page() {
+		AccountHomePage accountHomePage =  (AccountHomePage) getLoginScenario().getBean(PageConstants.ACCOUNT_HOME_PAGE);
+		MedicalEobPage eobPage = accountHomePage.navigateDirectToEOBPage();
+		if(eobPage!=null){
+			getLoginScenario().saveBean(PageConstants.MEDICAL_EOB_PAGE,
+					eobPage);
+		}else{
+ 			Assert.fail();
+		}
+	}
+   
+	@And("^the user validates how to read medical eob PDF$")
+	public void the_user_validates_how_to_read_medical_eob_PDF() {
+		MedicalEobPage eobPage = (MedicalEobPage) getLoginScenario().getBean(PageConstants.MEDICAL_EOB_PAGE);
+		eobPage.validateReadPDF();
+	}
 	@After
 	public void tearDown() {
 

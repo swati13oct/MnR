@@ -155,3 +155,15 @@ Then the user navigates to EOB page and validates the page
 Examples:
 	| planType  | memberType   | eobTypeData       | fromDate   | toDate     |dateRange       |
  	| MA  | withEOB      | Medical           | 12/12/2007 | 12/12/2008 |Last 6 months   |
+ 	
+ @F85974 	
+Scenario Outline: To verify How to read a medical EOB PDF
+Given registered AMP with for EOB flow
+	| Plan Type      |<planType>  |
+	| Member Type    |<memberType>|
+Then the user navigates to EOB page
+And the user validates how to read medical eob PDF
+ 	Examples:
+	| planType  | memberType   |
+	| MAPD      | withEOB      |
+	| MA        | withEOB      |	
