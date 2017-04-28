@@ -7,6 +7,7 @@ import gherkin.formatter.model.DataTableRow;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -105,7 +106,6 @@ public class PlanBenefitsAndCoverageAarpStepDefinition {
 		if (benefitsCoveragePage != null) {
 			getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
 			getLoginScenario().saveBean(PageConstants.BENEFITS_COVERAGE_PAGE,benefitsCoveragePage);
-			Assert.assertTrue(true);
 		}
 		//JSONObject accountHomeActualJson = null;
 
@@ -590,6 +590,33 @@ public class PlanBenefitsAndCoverageAarpStepDefinition {
 		}
 
 	}
+	
+	@And("^the user validates view and documents label$")
+	public void validate_labels()
+	{
+		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario().getBean(
+				PageConstants.BENEFITS_COVERAGE_PAGE);
+		benefitsCoveragePage.validatelabels();
+	}
+	
+	@And("^the user validates the language dropdown and the value displayed by default$")
+	public void validate_languagedropdown(DataTable givenAttributes)
+	{
+		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario().getBean(
+				PageConstants.BENEFITS_COVERAGE_PAGE);
+		benefitsCoveragePage.validate_langdropdown_first_selection();
+		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells()
+					.get(0), memberAttributesRow.get(i).getCells().get(1));
+		}
+		String language = memberAttributesMap.get("Language");
+		getLoginScenario().saveBean(PlanBenefitsAndCoverageCommonConstants.Language,language);
+		benefitsCoveragePage.validate_langdropdown_select(language);
+	}
+
 
 	/*@After
 	public void tearDown() {

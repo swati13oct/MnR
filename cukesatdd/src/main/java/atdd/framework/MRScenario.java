@@ -921,7 +921,7 @@ public class MRScenario {
 		
 		
 		String agent = (null == System.getProperty(CommonConstants.JENKINS_BROWSER_AGENT_STRING)
-				? props.get(CommonConstants.DESKTOP_BROWSER_AGENT_STRING) : System.getProperty(CommonConstants.JENKINS_BROWSER_AGENT_STRING));
+			? props.get(CommonConstants.DESKTOP_BROWSER_AGENT_STRING) : System.getProperty(CommonConstants.JENKINS_BROWSER_AGENT_STRING));
 		
 		
 		if (browser.equalsIgnoreCase(CommonConstants.JENKINS_BROWSER_PHANTOMJS)) {

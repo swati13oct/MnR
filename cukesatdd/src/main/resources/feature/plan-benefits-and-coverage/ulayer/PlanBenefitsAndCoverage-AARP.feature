@@ -838,7 +838,7 @@ Feature: To test plan benefits and Coverage on AARP site for Federal members
       | planType | copayCategory |
       | MAPD     | NON LIS       |
       
-  @activeRider3
+  @activeRider3jenkins
   Scenario Outline: Verify Federal Active Riders Fitness on benefits and coverage in AARP site for MAPD Non Lis member
     Given registered AMP with following details for plan benefits and coverage flow in AARP site
       | Plan Type      | <planType>      |
@@ -850,7 +850,7 @@ Feature: To test plan benefits and Coverage on AARP site for Federal members
 
     Examples: 
       | planType | copayCategory |
-      | MAPD     | LIS2       |
+      | MAPD     | LIS2          |
 
   @availablehighOptionRiders
   Scenario Outline: Verify Federal Available High Optional Dental riders on benefits and coverage in AARP site for MAPD Lis 2 member
@@ -969,7 +969,7 @@ Feature: To test plan benefits and Coverage on AARP site for Federal members
       | MAPD     | NON LIS       |
 #Data Used: DentalPlatinumLis2
 
-@needHelp1
+@needHelpjenkins
   Scenario Outline: Verify Need Help section is in place on Benefits and Coverage page
     Given registered AMP with following details for plan benefits and coverage flow in AARP site
       | Plan Type      | <planType>      |
@@ -1016,6 +1016,23 @@ Feature: To test plan benefits and Coverage on AARP site for Federal members
       | Plan Type      | <planType>      |
     When the user view forms and resources in AARP site
     Then the user view benefits and coverage in AARP site
+    And the user validates the content on benefits and coverage page
+    And the user validates view and documents label
+    And the user validates the language dropdown and the value displayed by default
+      | Language      | <language>      |
+    And the user selects new value in dropdown successfully
+    
+     Examples: 
+      | planType | language | 
+      | SHIP     | SPANISH  |  
+      | SHIP     | CHINESE  |
+  
+  @validatePdfsectionjenkins
+  Scenario Outline: Verify PDF section is in place on Benefits and Coverage page
+    Given registered AMP with following details for plan benefits and coverage flow in AARP site
+      | Plan Type      | <planType>      |
+      | Copay Category | <copayCategory> |
+    When the user view jenkins benefits and coverage in AARP site
     And the user validates the content on benefits and coverage page
     And the user validates view and documents label
     And the user validates the language dropdown and the value displayed by default
