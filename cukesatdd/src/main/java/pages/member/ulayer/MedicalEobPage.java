@@ -159,6 +159,12 @@ public class MedicalEobPage extends UhcDriver{
 	// dateRange= value that we need to select from dropdown
 	//memberTYpeData=MAPD/MA/PDP/Combo/SHIP
 	public MedicalEobPage selectDateRange(String dateRange, String planType, String eobTypeData){
+		try {
+			Thread.sleep(5000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		if(planType.equalsIgnoreCase("MAPD")){
 			Select select = new Select(eobType);
 			select.selectByValue(eobTypeData);			
