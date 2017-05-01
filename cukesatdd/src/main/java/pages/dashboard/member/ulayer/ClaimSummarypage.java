@@ -53,7 +53,7 @@ public class ClaimSummarypage extends UhcDriver{
 	private WebElement customSearch;
 
 	@FindBy(xpath = "//div[2]/section/div/div/div/form/fieldset/div/div/div[2]/div/select/option[@value='6 months']")
-	private WebElement last24Months;
+	private WebElement last6Months;
 	
 	@FindBy(xpath="//div[normalize-space()='Prescription Drug']")
 	private WebElement claimTypePDP;
@@ -90,6 +90,9 @@ public class ClaimSummarypage extends UhcDriver{
 
 	@FindBy (xpath="//h2[contains(.,'Prescription Drug EOB')]")
 	private WebElement PrescriptionEobText;
+	
+	@FindBy (xpath="//h2[contains(.,'SHIP EOB')]")
+	private WebElement ShipClaimsEobText;
 
 	@FindBy (xpath=".//*[@id='table-medical']/div[2]/div[1]/div/a")
 	private WebElement learnmorefalse;
@@ -223,6 +226,12 @@ public class ClaimSummarypage extends UhcDriver{
 			System.out.println("for MA medical Eob is diplayed ====>"+ (medicalEobText.isDisplayed()));
 			return medicalEobText.isDisplayed();
 		}
+		//SHIP CLAIMS EOB
+		else if ((domain.equals("NA") && plantype.equals("SHIP"))){
+			System.out.println("for SHIP Eob is diplayed ====>"+ (ShipClaimsEobText.isDisplayed()));
+			return ShipClaimsEobText.isDisplayed();			
+			
+		}
 		else {
 			System.out.println("for PDP prescription drug EOB's are diaplayed ====> "+ (PrescriptionEobText.isDisplayed()));
 			return PrescriptionEobText.isDisplayed();
@@ -301,8 +310,8 @@ public class ClaimSummarypage extends UhcDriver{
 		System.out.println("The title of the page is-------->"+driver.getTitle());
 		System.out.println("The URL of the page is---------->"+driver.getCurrentUrl());
 		if(driver.getTitle().equalsIgnoreCase("Member Claims")){
-			CommonUtility.waitForPageLoad(driver, last24Months, 60);
-			last24Months.click();
+			CommonUtility.waitForPageLoad(driver, last6Months, 60);
+			last6Months.click();
 			/*Select claimsFrom = new Select(viewClaimsFrom);
 			claimsFrom.selectByValue("24 months");*/
 		}

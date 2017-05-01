@@ -1,5 +1,5 @@
 @claimspage
-Feature: To validate the new changes related to claims page for MA/MAPD/PDP on the member redesigned site
+Feature: To validate the new changes related to claims page on the member redesigned site
 @claimsHeader
   Scenario Outline: To Verify Claims Page Header for
     Given I am an AARP member on the redesigned site
@@ -141,8 +141,10 @@ When I navigate to the claims Summary page in redesigned site
 And the user search claims for the following claim period in AARP site
 	| Claim Period | <claimPeriod> | 
 Then user validates the claims displayed based on the selection in redesigned site
+And the user validates the EOB section based on domain in redesigned site
+	| Domain | <domain> |
 
 Examples:
-| planType | claimPeriod       |
-| SHIP     | Last 24 Months    |
+| planType | claimPeriod       | domain |
+| SHIP     | Last 6 Months    |  NA    |
       
