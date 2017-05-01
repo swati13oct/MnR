@@ -15,7 +15,7 @@ import cucumber.junit.Cucumber;
 @Cucumber.Options(glue = { "atdd.framework","acceptancetests.eob" }, 
 		features = { "feature/explanation-of-benefits" }, 
 		format = { 
-		"pretty", "html:reports/test-report","json:target/cucumber.json" }, tags ={"@F85974"})
+		"pretty", "html:reports/test-report","json:target/cucumber.json" }, tags ={"@sprint3"})
 public class RunMRAtddEob {
 
 }

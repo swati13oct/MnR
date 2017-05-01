@@ -156,7 +156,7 @@ Examples:
 	| planType  | memberType   | eobTypeData       | fromDate   | toDate     |dateRange       |
  	| MA  | withEOB      | Medical           | 12/12/2007 | 12/12/2008 |Last 6 months   |
  	
- @F85974 	
+ @sprint3 	
 Scenario Outline: To verify How to read a medical EOB PDF
 Given registered AMP with for EOB flow
 	| Plan Type      |<planType>  |
