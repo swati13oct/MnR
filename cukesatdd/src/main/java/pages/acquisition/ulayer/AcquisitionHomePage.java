@@ -314,6 +314,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		}
 		
 		if (driver.getTitle().equalsIgnoreCase(PageTitleConstants.ULAYER_PLAN_SUMMARY_PAGE_TITLE)) {
+			System.out.println("title matches");
 			return new VPPPlanSummaryPage(driver);
 		}
 		return null;

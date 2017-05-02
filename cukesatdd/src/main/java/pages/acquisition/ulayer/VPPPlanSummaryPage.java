@@ -10,6 +10,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.junit.Assert;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -31,20 +32,20 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	@FindBy(xpath = "//a[text()='Passport Flyer (PDF)']")
 	private WebElement PassportFlyerPDF;
 	
-	@FindBy(xpath = "//div[@class='maplans_planbutton']/div[2]/div[2]/div")
+	@FindBy(xpath = ".//*[@id='site-wrapper']/div[4]/div/div[1]/div[1]/div/div/div[1]/div/div/div[1]/div[2]/div/div[2]/div[1]/div/span[3]")
 	private WebElement showMaPlans;
 	
 	@FindBy(xpath = "//div[@class='maplans_planbutton']/div[2]/div[2]/div[2]")
 	private WebElement hideMaPlans;
 
-	@FindBy(xpath = "//div[@class='planValues']")
+	@FindBy(xpath = "//div[@class='plan-overview-wrapper']")
 	private WebElement vppplansummarypage;
 
-	@FindBy(xpath = "//div[@class='medsupplans_planbutton']/div[2]/div/a")
+	@FindBy(xpath = ".//*[@id='site-wrapper']/div[4]/div/div[1]/div[1]/div/div/div[1]/div/div/div[1]/div[2]/div/div[2]/div[2]/div/span[3]")
 	private WebElement showMsPlans;
 	
 
-	@FindBy(xpath = "//div[@class='pdpplans_planbutton']/div[2]/div[2]/div")
+	@FindBy(xpath = ".//*[@id='site-wrapper']/div[4]/div/div[1]/div[1]/div/div/div[1]/div/div/div[1]/div[2]/div/div[2]/div[3]/div/span[3]")
 	private WebElement showPdpPlans;
 	
 	@FindBy(xpath = "//div[@class='pdpplans_planbutton']/div[2]/div[2]/div[2]")
@@ -78,13 +79,13 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	@FindBy(id = "allplanssise")
 	private WebElement allPlansSize;
 
-	@FindBy(xpath = "//div[@class='maplans_planbutton']/div[1]/p")
+	@FindBy(xpath = ".//*[@id='site-wrapper']/div[4]/div/div[1]/div[1]/div/div/div[1]/div/div/div[1]/div[2]/div/div[2]/div[1]/div/span[1]/span")
 	private WebElement maPlansCount;
 	
 	@FindBy(xpath = "//div[@class='medsupplans_planbutton']/div[1]/p")
 	private WebElement msPlansCount;
 	
-	@FindBy(xpath = "//div[@class='pdpplans_planbutton']/div[1]/p")
+	@FindBy(xpath = ".//*[@id='site-wrapper']/div[4]/div/div[1]/div[1]/div/div/div[1]/div/div/div[1]/div[2]/div/div[2]/div[3]/div/span[1]/span")
 	private WebElement pdpPlansCount;
 	
 	@FindBy(id = "pageHeader")
@@ -207,9 +208,9 @@ public class VPPPlanSummaryPage extends UhcDriver {
 
 	@Override
 	public void openAndValidate() {
-		validate(showMaPlans);
+		/*validate(showMaPlans);
 		validate(showMsPlans);
-		validate(showPdpPlans);
+		validate(showPdpPlans);*/
 		// vppPlanSummaryJson = formJsonObject(vppPlanSummary);
 	}
 
@@ -278,11 +279,11 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	public VPPPlanSummaryPage viewPlanSummary(String planType) {
 		if (planType.equalsIgnoreCase("PDP")) {
 			showPdpPlans.click();
-			validate(hidePdpPlans);
+			//validate(hidePdpPlans);
 		} else if (planType.equalsIgnoreCase("MA")
 				|| planType.equalsIgnoreCase("MAPD")) {
 			showMaPlans.click();
-			validate(hideMaPlans);
+			//validate(hideMaPlans);
 		} else if (planType.equalsIgnoreCase("MS")) {
 			showMsPlans.click();
 		}
@@ -555,7 +556,54 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		}
 		return false;
 	}
-
+	
+	@FindBy(linkText = "Change location")
+	private WebElement changeLocationBtn;
+	
+	public boolean validateVPPPlanSummaryPage(){
+		List<WebElement> elements = driver.findElements(By.xpath(".//*[@id='zipLookup']/p/a"));
+		System.out.println("Change loc elements size: "+ elements.size());
+		
+		System.out.println("Change loc elements text: "+ elements.get(0).getText());
+		boolean flag = false;
+		if(validate(showMaPlans)&&validate(showMsPlans)&&validate(showPdpPlans)&&validate(changeLocationBtn))
+			flag = true;
+		return flag;
+	}
+	public IntroductionInformationPage clicksOnEnrollInplanLink(String planName) {
+		 
+		int pdpValue = Integer.parseInt(pdpPlansCount.getText());
+		int maValue = Integer.parseInt(maPlansCount.getText());
+		
+		if (planName.contains("HMO")) {
+			System.out.println("Entered the plan");
+			for(int i=1; i<=maValue; i++){
+				WebElement maPlanElement= driver.findElement(By.xpath(".//*[@id='plan-list-1']/div/div[2]/div/div["+i+"]"));
+				if (maPlanElement.getText().contains(planName)) {
+					ElementData elementData = new ElementData("linkText", "Enroll in plan");//("id", "enrollMA");
+					System.out.println("***Element Data is: "+elementData);
+					findChildElement(elementData, maPlanElement).click();
+					System.out.println("Clicked on the Enroll Link");
+					break;
+				}
+				
+			}
+		} else if (planName.contains("PDP")) {
+			for(int i=1; i<=pdpValue; i++){
+				WebElement pdpPlanElement= driver.findElement(By.xpath(".//*[@id='plan-list-3']/div/div[2]/div/div["+i+"]"));
+				if (pdpPlanElement.getText().contains(planName)) {
+					ElementData elementData = new ElementData("linkText", "Enroll in plan");//("id", "enrollPDP"); // TODO:
+					System.out.println("***Element Data is: "+elementData);													// Re-check
+					findChildElement(elementData, pdpPlanElement).click();
+					System.out.println("Clicked on the Enroll Link");
+					break;
+				}
+				
+			}
+			
+		}
+		return new IntroductionInformationPage(driver);
+	}
 
 }
 
