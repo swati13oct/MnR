@@ -167,3 +167,40 @@ And the user validates how to read medical eob PDF
 	| planType  | memberType   |
 	| MAPD      | withEOB      |
 	| MA        | withEOB      |	
+
+@US593757
+Scenario Outline: To verify mobile responsive for all plans on EOB page
+Given registered AMP with for EOB flow
+       | Plan Type      |<planType>  |
+       | Member Type    |<memberType>|
+Then the user navigates to EOB page and validates the page
+|Date Range|<dateRange1>  |
+|Plan Type |<planType>   |
+|EOB Type  |<eobTypeData>|
+|From Date |<fromDate>   |
+|To Date   |<toDate>     |
+Then the user navigates to EOB page and validates the page
+|Date Range|<dateRange2>  |
+|Plan Type |<planType>   |
+|EOB Type  |<eobTypeData>|
+|From Date |<fromDate>   |
+|To Date   |<toDate>     |
+Then the user navigates to EOB page and validates the page
+|Date Range|<dateRange3>  |
+|Plan Type |<planType>   |
+|EOB Type  |<eobTypeData>|
+|From Date |<fromDate>   |
+|To Date   |<toDate>     |
+Then the user navigates to EOB page and validates the page
+|Date Range|<dateRange4>  |
+|Plan Type |<planType>   |
+|EOB Type  |<eobTypeData>|
+|From Date |<fromDate>   |
+|To Date   |<toDate>     |
+Examples:
+       | planType  | memberType   | eobTypeData       | fromDate   | toDate     |dateRange1       |dateRange2 |dateRange3 |dateRange4 |
+      |Ship      | withEOB      | Medical           | 01/01/2016 | 04/01/2017 |Last 90 Days  |  Last 3-6 months |Last 6-12 months|Last 12-18 months| 
+      | MA      |  with EOB     | Medical           | 01/01/2016 | 04/01/2017 |Last 90 Days  |  Last 6 months  | Last 12 months  | Last 18 months |
+      | MAPD      |  with EOB     | Medical           | 01/01/2016 | 04/01/2017 |Last 90 Days  |  Last 6 months  | Last 12 months  | Last 18 months |  
+      | PDP      |  with EOB     | Medical           | 01/01/2016 | 04/01/2017 |Last 90 Days  |  Last 6 months  | Last 12 months  | Last 18 months |   
+ 	
