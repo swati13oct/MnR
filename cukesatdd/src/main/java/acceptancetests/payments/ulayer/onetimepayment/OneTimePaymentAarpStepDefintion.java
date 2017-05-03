@@ -208,6 +208,57 @@ public class OneTimePaymentAarpStepDefintion {
 		}
 
 	}
+	
+	
+	@And("^the user makes one time payment in AARP site by entering required details$")
+	public void makes_one_time_payment_required_details(DataTable accountAttributes) {
+		List<DataTableRow> accountAttributesRow = accountAttributes
+				.getGherkinRows();
+		Map<String, String> accountAttributessMap = new HashMap<String, String>();
+
+		for (int i = 0; i < accountAttributesRow.size(); i++) {
+			accountAttributessMap.put(accountAttributesRow.get(i).getCells()
+					.get(0), accountAttributesRow.get(i).getCells().get(1));
+		}
+
+		System.out.println("accountAttributessMap.." + accountAttributessMap);
+		
+
+		OneTimePaymentsPage oneTimePaymentsPage = (OneTimePaymentsPage)getLoginScenario().getBean(PageConstants.ONE_TIME_PAYMENTS_DASHBOARD);
+		ReviewOneTimePaymentsPage reviewOneTimePaymentsPage =  oneTimePaymentsPage.enterAllPaymentDetails(accountAttributessMap);
+		if(reviewOneTimePaymentsPage != null){
+			getLoginScenario().saveBean(PageConstants.REVIEW_ONE_TIME_PAYMENTS_DASHBOARD,
+					reviewOneTimePaymentsPage);
+			Assert.assertTrue(true);
+		}else {
+			Assert.fail("one time payments dashboard page not found");
+		}	
+	}
+	
+	@And("^the user confirms the values in AARP site$")
+	public void makes_one_time_payment_required_details(){
+		ReviewOneTimePaymentsPage reviewoneTimePaymentsPage = (ReviewOneTimePaymentsPage)getLoginScenario().getBean(PageConstants.REVIEW_ONE_TIME_PAYMENTS_DASHBOARD);
+		//OneTimePaymentSuccessPage onetimePaymentsSuccessPage = reviewoneTimePaymentsPage.validateValues();
+		ReviewOneTimePaymentsPage onetimePaymentsSuccessPage = reviewoneTimePaymentsPage.validateValues();
+		if(onetimePaymentsSuccessPage != null){
+			getLoginScenario().saveBean(PageConstants.ONE_TIME_PAYMENT_SUCCESS_PAGE,
+					onetimePaymentsSuccessPage);
+			Assert.assertTrue(true);
+		}else {
+			Assert.fail("Review success dashboard page not found");
+		}	
+	}
+	
+	@Then("^the user validates the One Time Payment Submitted successfull page$")
+	public void Payment_success_page(){
+		ReviewOneTimePaymentsPage reviewoneTimePaymentsPage = (ReviewOneTimePaymentsPage)getLoginScenario().getBean(PageConstants.ONE_TIME_PAYMENT_SUCCESS_PAGE);
+		ReviewOneTimePaymentsPage OneTimePaymentSubmittedValidation = reviewoneTimePaymentsPage.validateOTPSubmittedPageValues();
+				if(OneTimePaymentSubmittedValidation != null){	
+			Assert.assertTrue(true);
+		}else {
+			Assert.fail("One Time Payments Submitted dashboard page not found");
+		}	
+	}
 
 	@And("^the user confirms the payment in AARP site$")
 	public void confirms_payment_aarp() {
@@ -358,6 +409,22 @@ public class OneTimePaymentAarpStepDefintion {
 	
 	@And("^the user enters details and click on continue button on One Time Payments Page for  Dashboard$")
 	public void user_clicks_otheramountradio()
+	{
+		OneTimePaymentsPage oneTimePaymentsPage = (OneTimePaymentsPage)getLoginScenario().getBean(PageConstants.ONE_TIME_PAYMENTS_DASHBOARD);
+		ReviewOneTimePaymentsPage reviewOneTimePaymentsPage = oneTimePaymentsPage.enterInfoAndContinue();
+		if(reviewOneTimePaymentsPage != null){
+			getLoginScenario().saveBean(PageConstants.REVIEW_ONE_TIME_PAYMENTS_DASHBOARD,
+					reviewOneTimePaymentsPage);
+			Assert.assertTrue(true);
+		}else {
+			Assert.fail("one time payments dashboard page not found");
+		}		
+	}
+	
+	
+	
+	@And("^user reaches to One Time Payment submitted page and navigates again to One Time Payments page$")
+	public void user_navigates_OTPPage_from_OTPSubmittedPage()
 	{
 		OneTimePaymentsPage oneTimePaymentsPage = (OneTimePaymentsPage)getLoginScenario().getBean(PageConstants.ONE_TIME_PAYMENTS_DASHBOARD);
 		ReviewOneTimePaymentsPage reviewOneTimePaymentsPage = oneTimePaymentsPage.enterInfoAndContinue();

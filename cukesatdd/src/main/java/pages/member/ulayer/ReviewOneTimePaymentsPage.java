@@ -14,6 +14,7 @@ import acceptancetests.atdd.data.CommonConstants;
 import acceptancetests.atdd.data.PageData;
 import acceptancetests.atdd.util.CommonUtility;
 import atdd.framework.UhcDriver;
+import junit.framework.Assert;
 
 /**
  * @author saduri
@@ -26,6 +27,15 @@ public class ReviewOneTimePaymentsPage extends UhcDriver{
 	
 	@FindBy(xpath="//div[@id='atdd_reviewonetime_label']/div[4]/div[2]/span")
 	private WebElement routingNumber;
+	
+	@FindBy(xpath="//*[@id='atdd_reviewonetime_label']/div[5]/div[2]/span")
+	private WebElement AccountNumber;
+	
+	@FindBy(xpath="//*[@id='atdd_reviewonetime_label']/div[6]/div[2]/span")
+	private WebElement AccountHolderName;
+	
+	@FindBy(xpath="/html/body/div[2]/div/div/div[2]/div[3]/div/div/div/button")
+	private WebElement SubmitButton;
 	
 	private PageData reviewOneTime;
 	
@@ -44,6 +54,58 @@ public class ReviewOneTimePaymentsPage extends UhcDriver{
 		validate(routingNumber);
 	}
 
+	
+	public ReviewOneTimePaymentsPage validateValues() {
+	   if(AccountNumber.getText().equalsIgnoreCase("1234567890"))
+	   {
+		   System.out.println("Account number value matched on Review Page");
+		   Assert.assertTrue(true);
+	   }
+	   else
+	   {		  
+		  Assert.fail("Account number Value does not match"+AccountNumber.getText());
+	   }
+	   
+	   if(AccountHolderName.getText().equalsIgnoreCase("first second third"))
+	   {
+		   System.out.println("Account Holder Name value matched on Review Page");
+		   Assert.assertTrue(true);
+	   }
+	   else
+	   {		  
+		  Assert.fail("Account number Value does not match"+AccountHolderName.getText());
+	   } 	   
+	    SubmitButton.click();
+	    //if
+	    return new ReviewOneTimePaymentsPage(driver);
+	}
+	
+	
+	
+	public ReviewOneTimePaymentsPage validateOTPSubmittedPageValues() {
+		   if(AccountNumber.getText().equalsIgnoreCase("1234567890"))
+		   {
+			   System.out.println("Account number value matched on Review Page");
+			   Assert.assertTrue(true);
+		   }
+		   else
+		   {		  
+			  Assert.fail("Account number Value does not match" +AccountNumber.getText());
+		   }
+		   
+		   if(AccountHolderName.getText().equalsIgnoreCase("first second third"))
+		   {
+			   System.out.println("Account Holder Name value matched on Review Page");
+			   Assert.assertTrue(true);
+		   }
+		   else
+		   {		  
+			  Assert.fail("Account number Value does not match "+AccountHolderName.getText());
+		   } 	   
+		    
+		    return new ReviewOneTimePaymentsPage(driver);
+		}
+	
 	
 	public JSONObject reviewOneTimeValues() {
 		String fileName = CommonConstants.REVIEW_ONE_TIME_PAGE_DATA;

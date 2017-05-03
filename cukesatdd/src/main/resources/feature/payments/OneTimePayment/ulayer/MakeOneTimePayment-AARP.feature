@@ -118,4 +118,40 @@ Examples:
 	| MAPD     |
 
 
-     
+@US604912
+Scenario Outline: Verify the User is displayed error message if he tries to submit more than one payment per day.
+Given the user is on the AARP medicare site login page
+When the user logs in with a registered AMP with following details in AARP site
+	| Plan Type   | <planType>  |
+And the user navigates to One Time Payments page
+And the user enters details and click on continue button on One Time Payments Page for  Dashboard
+And the user confirms the payment in AARP site
+And user reaches to One Time Payment submitted page and navigates again to One Time Payments page
+And the user enters details and click on continue button on One Time Payments Page for  Dashboard
+Then user validates the error
+
+Examples:
+	| planType |
+	| MAPD     |
+
+
+@US454623
+Scenario Outline: Verify the User is able to validate values on One-Time Payment Submitted page
+Given registered AARP with a planType member for AARP site
+ | <planType> |
+When the user navigates to One Time Payments page
+And the user makes one time payment in AARP site by entering required details
+	| Amount to be paid	     | <Amount>		  |
+	| Routing number             | <routingNo>        |
+	| Confirm routing number     | <confirmRoutingNo> |
+	| Account number             | <accountNo>        |
+	| Confirm account number     | <confirmAccountNo> | 
+	| Account holder first name  | <firstName>        |
+	| Account holder middle name | <middleName>       |
+	| Account holder last name   | <lastName>         |  
+And the user confirms the values in AARP site
+Then the user validates the One Time Payment Submitted successfull page
+
+Examples:
+        |planType | routingNo | confirmRoutingNo | accountNo   | confirmAccountNo | firstName | middleName | lastName | Amount |
+        |  MA     | 123000000 |  123000000       | 1234567890  | 1234567890       | first     | second     | third    | 2.00   |

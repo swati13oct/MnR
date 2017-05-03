@@ -13,6 +13,7 @@ import acceptancetests.atdd.data.CommonConstants;
 import acceptancetests.atdd.data.PageData;
 import acceptancetests.atdd.util.CommonUtility;
 import atdd.framework.UhcDriver;
+import junit.framework.Assert;
 
 /**
  * @author pperugu
@@ -25,6 +26,13 @@ public class OneTimePaymentSuccessPage extends UhcDriver{
 	                 
 	@FindBy(xpath = "/html/body/div[6]/div/div/table/tbody/tr[5]/td/div[2]/div/div/div[2]/div[7]/div/div/div/div/div/div")
 	private WebElement OneTimePaymentSuccess;
+	
+	@FindBy(xpath = "/html/body/div[2]/div/div[2]/div/div/div[1]/div/div/div[5]/div[2]/span")
+	private WebElement AccountNumber;
+	
+	@FindBy(xpath = "/html/body/div[2]/div/div[2]/div/div/div[1]/div/div/div[6]/div[2]/span")
+	private WebElement AccountHolderName;
+
 
 	private PageData oneTimePaymentSuccess;
 	
@@ -78,4 +86,6 @@ public class OneTimePaymentSuccessPage extends UhcDriver{
 		return oneTimePaymentExpectedJson;
 	}
 
+	
+	
 }

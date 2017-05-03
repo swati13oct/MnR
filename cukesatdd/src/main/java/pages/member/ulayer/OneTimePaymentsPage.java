@@ -3,6 +3,8 @@
  */
 package pages.member.ulayer;
 
+import java.util.Map;
+
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -64,6 +66,24 @@ public class OneTimePaymentsPage extends UhcDriver{
 	
 	@FindBy(xpath=".//*[@id='paymentHistoryApp']/div/div/div/div/h1")
 	 private WebElement PaymentHistoryText;
+	
+	@FindBy(name = "amount")
+	private WebElement amountRadioButton;	
+	
+	@FindBy(id = "middle-name")
+	private WebElement middleNameField;	
+	
+	@FindBy(id="review-continue")			
+	private WebElement continueButton;
+	
+	@FindBy(xpath = "/html/body/div[6]/div/div/table/tbody/tr[5]/td/div[2]/div/div/div[2]/div[7]/div/div/div/div/form/div/div/div[2]/div/table[1]/tbody/tr[1]/td[2]")			
+	private WebElement amountDisplayed;
+	
+	@FindBy(xpath = "//*[@id='atdd_otheramount_label']/label")			
+	private WebElement otherAmtRadioButton;
+	
+	@FindBy(id = "other-amount-number")
+	private WebElement amountToBePaidField;
 
 	public OneTimePaymentsPage(WebDriver driver) {
 		super(driver);
@@ -157,9 +177,66 @@ public class OneTimePaymentsPage extends UhcDriver{
 		if(driver.getTitle().equalsIgnoreCase("My Benefits & Coverage")){
 			return new OneTimePaymentPage(driver);
 		}
-		return null;
-		
+		return null;	
 	
 	}
 
+	
+public ReviewOneTimePaymentsPage enterAllPaymentDetails(Map<String, String> accountAttributessMap) {
+		
+		String amount = accountAttributessMap.get("Amount to be paid");
+		String routingNumber = accountAttributessMap.get("Routing number");
+		String confirmRoutingNumber = accountAttributessMap.get("Confirm routing number");
+		String accountNumber = accountAttributessMap.get("Account number");
+		String confirmAccountNumber = accountAttributessMap.get("Confirm account number");
+		String firstName = accountAttributessMap.get("Account holder first name");
+		String middleName = accountAttributessMap.get("Account holder middle name");
+		String lastName = accountAttributessMap.get("Account holder last name");
+	
+		
+		otherAmtRadioButton.click();
+		
+		amountToBePaidField.clear();
+		amountToBePaidField.click();
+		amountToBePaidField.sendKeys(amount);
+		
+		routingNumberField.click();
+		routingNumberField.clear();
+		routingNumberField.sendKeys(routingNumber);
+		
+		confirmRoutingNumberField.click();
+		confirmRoutingNumberField.clear();
+		confirmRoutingNumberField.sendKeys(confirmRoutingNumber);
+		
+		accountNumberField.click();
+		accountNumberField.clear();
+		accountNumberField.sendKeys(accountNumber);
+		
+		confirmAccountNumberField.click();
+		confirmAccountNumberField.clear();
+		confirmAccountNumberField.sendKeys(confirmAccountNumber);
+		
+		firstNameField.click();
+		firstNameField.clear();
+		firstNameField.sendKeys(firstName);
+		
+		middleNameField.click();
+		middleNameField.clear();
+		middleNameField.sendKeys(middleName);
+		
+		lastNameField.click();
+		lastNameField.clear();
+		lastNameField.sendKeys(lastName);
+		
+		electronicSignatureCheck.click();
+				
+		continueButton.click();
+		
+		if(driver.getTitle().equalsIgnoreCase("My Benefits & Coverage")){
+			return new ReviewOneTimePaymentsPage(driver);
+		}
+		return null;
+		
+	}
+	
 }
