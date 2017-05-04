@@ -203,4 +203,15 @@ Examples:
       | MA      |  withEOB     | Medical           | 01/01/2016 | 04/01/2017 |Last 90 Days  |  Last 6 months  | Last 12 months  | Last 18 months |
       | MAPD      |  withEOB     | Medical           | 01/01/2016 | 04/01/2017 |Last 90 Days  |  Last 6 months  | Last 12 months  | Last 18 months |  
       | PDP      |  withEOB     | Medical           | 01/01/2016 | 04/01/2017 |Last 90 Days  |  Last 6 months  | Last 12 months  | Last 18 months |   
- 	
+
+ @eobStatements 	
+Scenario Outline: To verify EOB result list
+Given registered AMP with for EOB flow
+	| Plan Type      |<planType>  |
+	| Member Type    |<memberType>|
+Then the user navigates to EOB page	
+And the user validates EOB statments displayed
+	Examples:
+	| planType  | memberType   | eobTypeData       | fromDate   | toDate     |dateRange       |
+ 	| MA      | withEOB      | Medical           | 12/12/2007 | 12/12/2008 |Last 6 months   |
+ 		

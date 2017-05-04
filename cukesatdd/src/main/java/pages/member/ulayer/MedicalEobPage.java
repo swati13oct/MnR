@@ -6,6 +6,7 @@ package pages.member.ulayer;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -322,4 +323,46 @@ public class MedicalEobPage extends UhcDriver{
 		}
 		return null;
 	}
+	
+	public MedicalEobPage validateEachEOBonUI(){
+		// this method validates size/date/link displayed on UI for each EOB
+		 List<WebElement> listOfEOBs = driver.findElements(By.xpath("//*[contains(text(),'EOB Statement')]"));
+		 List<WebElement> pdfIcon = driver.findElements(By.xpath("//*[contains(text(),'EOB Statement')]/img")); 
+		 List<WebElement> fileType = driver.findElements(By.xpath("//*[contains(text(),'EOB Statement')]/span"));
+		 List<WebElement> datesDisplayed = driver.findElements(By.xpath("//*[contains(text(),'EOB Statement')]/following-sibling::p"));
+   		 if(listOfEOBs.size()==pdfIcon.size()&& listOfEOBs.size()== fileType.size() &&
+				 listOfEOBs.size()==datesDisplayed.size()){
+  				 driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS); 
+				 // Code optimization required for same logic
+				 for(int i=0; i<=pdfIcon.size()-1;i++){
+					 if(pdfIcon.get(i).isDisplayed()){			 
+						 System.out.println(pdfIcon.get(i).getAttribute("alt")+" icon at "+(i+1)+" displayed correctly");
+					 }else{
+						 System.out.println("Icon "+(i+1)+" not displayed");
+						 Assert.fail();
+ 				     }
+				   }
+				 for(int i=0; i<=fileType.size()-1;i++){
+					 if(fileType.get(i).isDisplayed()){			 
+						 System.out.println(fileType.get(i).getText()+" size at "+(i+1)+" displayed correctly");
+					 }else{
+						 System.out.println("Size at "+(i+1)+" not displayed");
+						 Assert.fail();
+ 				     }
+				   }
+				 for(int i=0; i<=datesDisplayed.size()-1;i++){
+					 if(datesDisplayed.get(i).isDisplayed()){			 
+						 System.out.println(datesDisplayed.get(i).getText()+" for PDF at "+(i+1)+" displayed correctly");
+					 }else{
+						 System.out.println("Date at "+(i+1)+" not displayed");
+						 Assert.fail();
+ 				     }
+				   }
+				 return new MedicalEobPage(driver);
+ 			 }else{
+				 System.out.println("Count of PDFs and EOB doesn't match");
+				 Assert.fail();
+			 }
+		 	return null;
+		}
 }

@@ -565,6 +565,13 @@ public class EobAarpStepDefinition {
 		MedicalEobPage eobPage = (MedicalEobPage) getLoginScenario().getBean(PageConstants.MEDICAL_EOB_PAGE);
 		eobPage.validateReadPDF();
 	}
+	
+	@Then("^the user validates EOB statments displayed$")
+	public void the_user_validates_EOB_statments_displayed() {
+		MedicalEobPage eobPage = (MedicalEobPage) getLoginScenario().getBean(PageConstants.MEDICAL_EOB_PAGE);
+        eobPage.validateEachEOBonUI();
+	}
+	
 	@After
 	public void tearDown() {
 
