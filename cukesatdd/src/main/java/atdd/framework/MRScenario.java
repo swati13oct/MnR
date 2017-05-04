@@ -309,22 +309,6 @@ public class MRScenario {
 		} catch (NamingException e) {
 			e.printStackTrace();
 		}
-		
-		try {
-			/* Closing database connection */
-			con.close();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
-		try {
-			/* Closing LDAP connection */
-			ctx.close();
-		} catch (NamingException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 
 	}
 
