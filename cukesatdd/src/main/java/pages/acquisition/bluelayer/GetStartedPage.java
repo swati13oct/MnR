@@ -17,8 +17,9 @@ public class GetStartedPage extends UhcDriver {
 
 	public GetStartedPage(WebDriver driver) {
 		 super(driver);
-	       PageFactory.initElements(driver, this);
-	       openAndValidate();
+		 switchToNewIframe("dceIframe");
+	     PageFactory.initElements(driver, this);
+	     openAndValidate();
 	}
 
 	public LocationSearchPage getStarted() {

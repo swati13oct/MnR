@@ -255,7 +255,9 @@ public class RegistrationUmsStepDefinition {
 	@After("@Registration")
 	public void deRegister(){
 		String userName = (String) getLoginScenario().getBean(RegistrationConstants.USER_NAME);
-		getLoginScenario().removeMember(userName);
+		if(null != userName){
+			getLoginScenario().removeMember(userName);
+		}
 	}
 
 }
