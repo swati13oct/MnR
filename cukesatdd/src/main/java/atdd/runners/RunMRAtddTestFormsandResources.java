@@ -8,7 +8,7 @@ import org.junit.runner.RunWith;
 import cucumber.junit.Cucumber;
 
 /**
- * @author pperugu sandy
+ * @author pperugu
  *
  */
 @RunWith(Cucumber.class)
