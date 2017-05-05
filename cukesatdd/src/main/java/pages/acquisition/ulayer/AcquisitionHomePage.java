@@ -39,6 +39,9 @@ public class AcquisitionHomePage extends GlobalWebElements {
 
 	@FindBy(id = "learnfindplanBtn")
 	private WebElement learnfindPlansButton;
+	
+	@FindBy(linkText = "Find a pharmacy near you")
+	private WebElement pharmacyNearLink;
 
 	@FindBy(className = "zip-button")
 	private WebElement FindPlansButton1;
@@ -171,7 +174,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 
 	@FindBy(id = "ghn_lnk_2")
 	public static WebElement ourPlansHoverLink;
-
+	
 	@FindBy(id = "subnav_2")
 	public static WebElement ourPlansDropdownText;
 
@@ -932,6 +935,45 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		return null;
 	}
 
+	public void navigateToRequestMoreHelpAndInformation(String planType){
+		Actions action = new Actions(driver);
+		action.moveToElement(navigationSectionHomeLink).moveToElement(ourPlansHoverLink).build().perform();
+		if(planType.contains("MA"))
+				ma_moreHelpInfoLink.click();
+		else if(planType.contains("PDP")){
+				pdp_moreHelpInfoLink.click();		
+		}
+		for(int i=0;i<10;i++){
+			try {
+				Thread.sleep(2000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			if(driver.getCurrentUrl().contains("request-information"))
+				break;
+		}
+		
+	}
+	
+	public PharmacySearchPage navigateToPharmacyLocator() {
+		pharmacyNearLink.click();
+		for(int i=0;i<10;i++){
+			try {
+				Thread.sleep(6000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			if(driver.getCurrentUrl().contains("-pharmacy."))
+				break;
+		}
+		if (driver.getTitle().equalsIgnoreCase("Find a Pharmacy | AARP® Medicare Plans from UnitedHealthcare®")) {
+			return new PharmacySearchPage(driver);
+		}
+		return null;
+
+	}
 
 
 

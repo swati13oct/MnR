@@ -568,6 +568,8 @@ public class CommonConstants {
 	public static final String LOW_COST_OPTIONS_INDIVIDUAL_BLUE_LAYER_PAGE_DATA = "lowcostoptionsindividual.json";
 
 	public static final String SELECT_PHARMACY = "selectpharmacy";
+	
+	public static final String LOCATE_PHARMACIES_PAGE_DATA = "locatepharmacy.json";
 
 	public static final String SELECT_PHARMACY_BLUE_LAYER_DIRECTORY = "/jsonresponse/member/bluelayer/estimatedrugcosts/selectpharmacy/";
 
