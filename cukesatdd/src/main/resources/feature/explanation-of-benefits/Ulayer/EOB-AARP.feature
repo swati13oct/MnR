@@ -168,7 +168,7 @@ And the user validates how to read medical eob PDF
 	| MAPD      | withEOB      |
 	| MA        | withEOB      |	
 
-@US593757
+@US604139
 Scenario Outline: To verify mobile responsive for all plans on EOB page
 Given registered AMP with for EOB flow
        | Plan Type      |<planType>  |
@@ -220,4 +220,5 @@ And the user validates EOB statments displayed
  	| PDP     | withEOB      | Prescription      |12/12/2007 | 12/12/2008 | Last 6 months |
  	| PDP     | withEOB      | Prescription      |12/12/2007 | 12/12/2008 | Last 12 months |
  	| PDP     | withEOB      | Prescription      |12/12/2007 | 12/12/2008 | Last 18 months |
+ 	| Ship    | withEOB      | Medical           |12/12/2007 | 12/12/2008 | Last 18 months |
  		
