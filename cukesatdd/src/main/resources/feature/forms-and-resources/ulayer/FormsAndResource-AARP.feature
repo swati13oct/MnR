@@ -139,6 +139,7 @@ Given registered member for forms and resources in AARP Site
 When the user view terms of use in AARP site
 Then the user validates terms of use in AARP site
 #Then the user validate backtoprevious link in AARP site
+#sandy
 
 Examples:
 
