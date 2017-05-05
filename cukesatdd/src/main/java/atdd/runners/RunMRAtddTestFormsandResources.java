@@ -15,7 +15,7 @@ import cucumber.junit.Cucumber;
 @Cucumber.Options(glue = { "atdd.framework","acceptancetests.formsandresources.bluelayer" }, 
 		features = { "feature/forms-and-resources/bluelayer" }, 
 		format = {
-				"pretty", "html:reports/test-report","json:target/cucumber.json"}, tags ={"@pharmacybenefit,@appoint,@privacypolicy,@noaccordion"})
+				"pretty", "html:reports/test-report","json:target/cucumber.json"}, tags ={"@memberrightres,@mapdappealsandgrievances,@ssupappealsandgrievances,@medicaltherapyprog,@seasonflushot,@medicathreapymapd,@prescriptiondrug,@prescriptiondrug"})
 public class RunMRAtddTestFormsandResources {
 
 }
