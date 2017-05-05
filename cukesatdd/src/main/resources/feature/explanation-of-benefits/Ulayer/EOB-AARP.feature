@@ -214,4 +214,4 @@ And the user validates EOB statments displayed
 	Examples:
 	| planType  | memberType   | eobTypeData       | fromDate   | toDate     |dateRange       |
  	| MA      | withEOB      | Medical           | 12/12/2007 | 12/12/2008 |Last 6 months   |
- 		
+ 	| PDP     | withEOB      | Prescription      |12/12/2007 | 12/12/2008 | Last 18 months |	
