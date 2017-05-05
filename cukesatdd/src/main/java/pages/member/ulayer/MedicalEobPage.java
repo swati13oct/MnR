@@ -345,6 +345,13 @@ public class MedicalEobPage extends UhcDriver{
 				 for(int i=0; i<=fileType.size()-1;i++){
 					 if(fileType.get(i).isDisplayed()){			 
 						 System.out.println(fileType.get(i).getText()+" size at "+(i+1)+" displayed correctly");
+						 if(fileType.get(i).getText().contains("kb") 
+								 || fileType.get(i).getText().contains("mb")) {
+							 System.out.println("Size of the PDF displayed correctly");
+						 }else{
+							 System.out.println("PDF size not displayed");
+							 Assert.fail();
+						 }
 					 }else{
 						 System.out.println("Size at "+(i+1)+" not displayed");
 						 Assert.fail();
