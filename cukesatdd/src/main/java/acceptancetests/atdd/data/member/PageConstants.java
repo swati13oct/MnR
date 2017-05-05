@@ -143,6 +143,8 @@ public class PageConstants {
 	
 	public static final String MYPCP_DISCLAIMER_PAGE = "pcpDisclaimerPage";
 	
+	
+	
 	public static final String MYPCP_ABOUT_US_PAGE = "pcpAboutUsPage";
 	
 	public static final String MYPCP_CONTACT_US_PAGE = "pcpContactUsPage";
@@ -158,5 +160,9 @@ public class PageConstants {
 	public static final String REGISTRATION_ERROR_PAGE = "regErrorPage";
 
 	public static final String DASHBOARD_PAYMENT_HISTORY_PAGE = "dashboardPaymentOverview";	
+	
+	public static final String AARP_DISCLAIMER_PAGE = "disclaimerpage";
+	
+	public static final String ABOUT_US_PAGE = "aboutus";
 
 }

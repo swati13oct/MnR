@@ -34,6 +34,7 @@ import atdd.framework.UhcDriver;
  * @author pagarwa5
  *
  */
+
 public class AccountHomePage extends UhcDriver {
 
 	@FindBy(css = "a.fd_myPersonalHealthRecord")
@@ -187,6 +188,18 @@ public class AccountHomePage extends UhcDriver {
 	@FindBy(xpath = "(.//a)[1]")
 	private WebElement disclaimerbackToPreviousPage;
 	
+	@FindBy(xpath = "(.//a)[1]")
+	private WebElement contactusPagebackToPreviousPage;
+	
+	@FindBy(xpath = "(.//a)[1]")
+	private WebElement pcpContactUsPagebackToPreviousPage;
+	
+	@FindBy(xpath = "(.//a)[1]")
+	private WebElement aboutUsPagebackToPreviousPage;
+	
+	@FindBy(xpath = "(.//a)[1]")
+	private WebElement aboutUsPCPPagebackToPreviousPage;
+	
 	@FindBy(xpath = "//*[@id='phr_widget_7_box']/div[9]/p/a")
 	private WebElement preferdPharmacyBenefitLink;
 	
@@ -327,7 +340,7 @@ public class AccountHomePage extends UhcDriver {
 
 	}
 	
-	public AccountHomePage navigateToDisclaimerPage(){
+	/*public AccountHomePage navigateToDisclaimerPage(){
 		driver.navigate().to("https://member."+MRScenario.environment+"-uhcmedicaresolutions.uhc.com/content/mypcp/guest/noacc-disclaimers.html");
 	try{
 		Alert alert = driver.switchTo().alert();
@@ -348,10 +361,182 @@ public class AccountHomePage extends UhcDriver {
 	
 	public SignInPage disclaimerbackToPreviousPage(){
 		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+		JavascriptExecutor ex  = (JavascriptExecutor)driver;
+		ex.executeScript("args[0].click();", disclaimerbackToPreviousPage);
+		disclaimerbackToPreviousPage.click();
+		if (driver.getTitle().equalsIgnoreCase("UnitedHealthcare Medicare Solutions | Sign In")) {
+			return new SignInPage(driver);
+		}
+		return null;
+		if (title.equalsIgnoreCase("UnitedHealthcare Medicare Solutions | Sign In")) {
+			return new BenefitsCoveragePage(driver);
+		}
+		else
+		return null;
+		
+		
+	}*/
+	
+	public AccountHomePage navigateToDisclaimerPage(){
+		driver.navigate().to("https://member."+MRScenario.environment+"-uhcmedicaresolutions.uhc.com/content/mypcp/guest/noacc-disclaimers.html");
+	try{
+		Alert alert = driver.switchTo().alert();
+		alert.accept();
+	}
+		
+	catch(Exception e)
+	{
+		
+	}
+			System.out.println("title  "+driver.getTitle());
+		if(driver.getTitle().equalsIgnoreCase("My Benefits & Coverage")){
+			return new AccountHomePage(driver);
+			}
+			return null;
+
+	}
+	
+	public AccountHomePage navigateToPCPContactUSPage(){
+		driver.navigate().to("https://www."+MRScenario.environment+"-mypcpmedicare.uhc.com/content/mypcp/guest/acc-contact-us.html");
+		
+	try{
+		Alert alert = driver.switchTo().alert();
+		alert.accept();
+	}
+		
+	catch(Exception e)
+	{
+		
+	}
+			System.out.println("title  "+driver.getTitle());
+		if(driver.getTitle().equalsIgnoreCase("My Benefits & Coverage")){
+			return new AccountHomePage(driver);
+			}
+			return null;
+
+	}
+	
+	
+	
+	public AccountHomePage navigateToPCPABoutUSPage(){
+		driver.navigate().to("https://www."+MRScenario.environment+"-mypcpmedicare.uhc.com/content/uhcm/guest/about-us0.html");
+	try{
+		Alert alert = driver.switchTo().alert();
+		alert.accept();
+	}
+		
+	catch(Exception e)
+	{
+		
+	}
+			System.out.println("title  "+driver.getTitle());
+		if(driver.getTitle().equalsIgnoreCase("My Benefits & Coverage")){
+			return new AccountHomePage(driver);
+			}
+			return null;
+
+	}
+	
+	
+	public AccountHomePage navigateToContactUSPage(){
+		driver.navigate().to("https://member."+MRScenario.environment+"-uhcmedicaresolutions.uhc.com/content/uhcm/guest/contact-us-accordion.html");
+	try{
+		Alert alert = driver.switchTo().alert();
+		alert.accept();
+	}
+		
+	catch(Exception e)
+	{
+		
+	}
+			System.out.println("title  "+driver.getTitle());
+		if(driver.getTitle().equalsIgnoreCase("My Benefits & Coverage")){
+			return new AccountHomePage(driver);
+			}
+			return null;
+
+	}
+	
+	
+	
+	public SignInPage disclaimerbackToPreviousPage(){
+		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 		/*JavascriptExecutor ex  = (JavascriptExecutor)driver;
 		ex.executeScript("args[0].click();", disclaimerbackToPreviousPage);*/
 		disclaimerbackToPreviousPage.click();
 		if (driver.getTitle().equalsIgnoreCase("UnitedHealthcare Medicare Solutions | Sign In")) {
+			return new SignInPage(driver);
+		}
+		return null;
+		/*if (title.equalsIgnoreCase("UnitedHealthcare Medicare Solutions | Sign In")) {
+			return new BenefitsCoveragePage(driver);
+		}
+		else
+		return null;*/
+		
+		
+	}
+	
+	public SignInPage pcpContactUspagebackToPreviousPage(){
+		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+		/*JavascriptExecutor ex  = (JavascriptExecutor)driver;
+		ex.executeScript("args[0].click();", disclaimerbackToPreviousPage);*/
+		pcpContactUsPagebackToPreviousPage.click();
+		if (driver.getTitle().equalsIgnoreCase("UnitedHealthcare Medicare Solutions | Sign In")) {
+			return new SignInPage(driver);
+		}
+		return null;
+		/*if (title.equalsIgnoreCase("UnitedHealthcare Medicare Solutions | Sign In")) {
+			return new BenefitsCoveragePage(driver);
+		}
+		else
+		return null;*/
+		
+		
+	}
+	
+	public SignInPage aboutUspagebackToPreviousPage(){
+		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+		/*JavascriptExecutor ex  = (JavascriptExecutor)driver;
+		ex.executeScript("args[0].click();", disclaimerbackToPreviousPage);*/
+		aboutUsPagebackToPreviousPage.click();
+		if (driver.getTitle().equalsIgnoreCase("UnitedHealthcare Medicare Solutions | Home")) {
+			return new SignInPage(driver);
+		}
+		return null;
+		/*if (title.equalsIgnoreCase("UnitedHealthcare Medicare Solutions | Sign In")) {
+			return new BenefitsCoveragePage(driver);
+		}
+		else
+		return null;*/
+		
+		
+	}
+	
+	public SignInPage aboutUsPCPpagebackToPreviousPage(){
+		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+		/*JavascriptExecutor ex  = (JavascriptExecutor)driver;
+		ex.executeScript("args[0].click();", disclaimerbackToPreviousPage);*/
+		aboutUsPCPPagebackToPreviousPage.click();
+		if (driver.getTitle().equalsIgnoreCase("UnitedHealthcare Medicare Solutions | Sign In")) {
+			return new SignInPage(driver);
+		}
+		return null;
+		/*if (title.equalsIgnoreCase("UnitedHealthcare Medicare Solutions | Sign In")) {
+			return new BenefitsCoveragePage(driver);
+		}
+		else
+		return null;*/
+		
+		
+	}
+	
+	public SignInPage contactusPagebackToPreviousPage(){
+		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+		/*JavascriptExecutor ex  = (JavascriptExecutor)driver;
+		ex.executeScript("args[0].click();", disclaimerbackToPreviousPage);*/
+		contactusPagebackToPreviousPage.click();
+		if (driver.getTitle().equalsIgnoreCase("UnitedHealthcare Medicare Solutions | Home")) {
 			return new SignInPage(driver);
 		}
 		return null;
@@ -885,6 +1070,24 @@ public FormsandresourcesPage navigateToMydocumentUmsPage() {
 		return null;
 	}
 
+	public AccountHomePage navigateToAboutUSPage() {
+		driver.navigate().to("https://member."+MRScenario.environment+"-uhcmedicaresolutions.uhc.com/content/uhcm/guest/about-us0.html");
+		try{
+			Alert alert = driver.switchTo().alert();
+			alert.accept();
+		}
+			
+		catch(Exception e)
+		{
+			
+		}
+				System.out.println("title  "+driver.getTitle());
+			if(driver.getTitle().equalsIgnoreCase("My Benefits & Coverage")){
+				return new AccountHomePage(driver);
+				}
+				return null;
+		
+	}
 	
 	
 }
