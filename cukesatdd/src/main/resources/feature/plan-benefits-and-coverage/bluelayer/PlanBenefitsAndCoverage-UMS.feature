@@ -705,6 +705,26 @@ Scenario: Verify disclaimer text page in PCP medicare site
 Given the user lands on the guest PCP medicare site login page
 When the user clicks on disclaimer page back to previous page
 
+@contactus
+Scenario: Verify contactus page in UMS site
+Given the user lands on the contactus page in UMS site
+When the user clicks on contactus page back to previous page
+
+@PCPcontactus
+Scenario: Verify PCP contactus page in PCP site
+Given the user lands on the contactus page in PCP site
+When the user clicks on pcp contactus page back to previous page
+
+@PCPaboutus
+Scenario: Verify PCP aboutus page in PCP site
+Given the user lands on the aboutus page in PCP site
+When the user clicks on pcp aboutus page back to previous page
+
+@aboutus
+Scenario: Verify aboutus page in UMS site
+Given the user lands on the aboutus page in UMS site
+When the user clicks on aboutus page back to previous page
+
 
 
 

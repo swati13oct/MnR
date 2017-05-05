@@ -13,10 +13,18 @@ import java.util.Set;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.junit.Assert;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.WebDriver;
 import org.skyscreamer.jsonassert.JSONAssert;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.openqa.selenium.By;
+import gherkin.formatter.model.DataTableRow;
+import pages.member.bluelayer.AccountHomePage;
+import pages.member.bluelayer.BenefitsAndCoveragePage;
+import pages.member.bluelayer.BenefitsCoveragePage;
+import pages.member.bluelayer.FormsandresourcesPage;
+import pages.member.bluelayer.LoginPage;
 
 import pages.member.bluelayer.AccountHomePage;
 import pages.member.bluelayer.BenefitsCoveragePage;
@@ -709,6 +717,91 @@ public class BenefitsAndCoverageUmsStepDefinition {
 		//FormsandresourcesPage formsAndResourcesPage=null;
 		FormsandresourcesPage formsAndResourcesPage = accountHomePage.navigateTosortingsearchlinkUmsPage();
 	}
+
+@Given("^the user lands on the contactus page in PCP site$")
+public void user_lands_on_pcpcontactus_page(){
+	WebDriver wd = getLoginScenario().getWebDriver();
+
+	AccountHomePage accountHomePage1 = new AccountHomePage(wd);
+
+	AccountHomePage accountHomePage2 =accountHomePage1.navigateToPCPContactUSPage();
+	getLoginScenario().saveBean(PageConstants.MYPCP_CONTACT_US_PAGE,
+			accountHomePage2);
+	
+	
+}
+
+@When("^the user clicks on aboutus page back to previous page$")
+public void user_clicks_aboutus_pagebackToPreviousPage(){
+	AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario()
+			.getBean(PageConstants.ABOUT_US_PAGE);
+	accountHomePage.aboutUspagebackToPreviousPage();
+}
+
+@Given("^the user lands on the aboutus page in PCP site$")
+public void user_lands_on_PCPaboutus_page(){
+	WebDriver wd = getLoginScenario().getWebDriver();
+
+	AccountHomePage accountHomePage1 = new AccountHomePage(wd);
+
+	AccountHomePage accountHomePage2 =accountHomePage1.navigateToPCPABoutUSPage();
+	getLoginScenario().saveBean(PageConstants.MYPCP_ABOUT_US_PAGE,
+			accountHomePage2);
+	
+	
+}
+
+@When("^the user clicks on pcp aboutus page back to previous page$")
+public void user_clicks_PCPaboutus_pagebackToPreviousPage(){
+	AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario()
+			.getBean(PageConstants.MYPCP_ABOUT_US_PAGE);
+	accountHomePage.aboutUsPCPpagebackToPreviousPage();
+}
+
+
+
+
+@Given("^the user lands on the aboutus page in UMS site$")
+public void user_lands_on_aboutus_page(){
+	WebDriver wd = getLoginScenario().getWebDriver();
+
+	AccountHomePage accountHomePage1 = new AccountHomePage(wd);
+
+	AccountHomePage accountHomePage2 =accountHomePage1.navigateToAboutUSPage();
+	getLoginScenario().saveBean(PageConstants.ABOUT_US_PAGE,
+			accountHomePage2);
+	
+	
+}
+
+@When("^the user clicks on pcp contactus page back to previous page$")
+public void user_clicks_pcpContactUSpagebackToPreviousPage(){
+	AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario()
+			.getBean(PageConstants.MYPCP_CONTACT_US_PAGE);
+	accountHomePage.pcpContactUspagebackToPreviousPage();
+}
+
+@Given("^the user lands on the contactus page in UMS site$")
+public void user_lands_on_contactus_page(){
+	WebDriver wd = getLoginScenario().getWebDriver();
+
+	AccountHomePage accountHomePage1 = new AccountHomePage(wd);
+
+	AccountHomePage accountHomePage2 =accountHomePage1.navigateToContactUSPage();
+	getLoginScenario().saveBean(PageConstants.CONTACT_US_PAGE,
+			accountHomePage2);
+	
+	
+}
+
+@When("^the user clicks on contactus page back to previous page$")
+public void user_clicks_contactusPagebackToPreviousPage(){
+	AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario()
+			.getBean(PageConstants.CONTACT_US_PAGE);
+	accountHomePage.contactusPagebackToPreviousPage();
+}
+
+
 
 	
 
