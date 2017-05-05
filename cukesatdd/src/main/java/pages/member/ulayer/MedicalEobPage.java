@@ -30,7 +30,7 @@ import atdd.framework.UhcDriver;
  */
 public class MedicalEobPage extends UhcDriver{
 	
-	@FindBy(id = "date-range-1")
+	@FindBy(xpath="//select[@name='date-range']")
 	private WebElement eobMonthDateRange;
 	
 	@FindBy(id="eob-type")

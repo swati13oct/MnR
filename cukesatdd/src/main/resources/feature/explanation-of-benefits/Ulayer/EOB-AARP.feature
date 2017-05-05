@@ -199,7 +199,7 @@ Then the user navigates to EOB page and validates the page
 |To Date   |<toDate>     |
 Examples:
        | planType  | memberType   | eobTypeData       | fromDate   | toDate     |dateRange1       |dateRange2 |dateRange3 |dateRange4 |
-      |Ship      | withEOB      | Medical           | 01/01/2016 | 04/01/2017 |Last 18 months  |  Last 6 months |Last 12 months|Last 18 months| 
+      |Ship      | withEOB      | Medical           | 01/01/2016 | 04/01/2017 |Last 90 Days  |  Last 3-6 months |Last 6-12 months|Last 12-18 months| 
       | MA      |  withEOB     | Medical           | 01/01/2016 | 04/01/2017 |Last 90 Days  |  Last 6 months  | Last 12 months  | Last 18 months |
       | MAPD      |  withEOB     | Medical           | 01/01/2016 | 04/01/2017 |Last 90 Days  |  Last 6 months  | Last 12 months  | Last 18 months |  
       | PDP      |  withEOB     | Medical           | 01/01/2016 | 04/01/2017 |Last 90 Days  |  Last 6 months  | Last 12 months  | Last 18 months |   
@@ -220,5 +220,5 @@ And the user validates EOB statments displayed
  	| PDP     | withEOB      | Prescription      |12/12/2007 | 12/12/2008 | Last 6 months |
  	| PDP     | withEOB      | Prescription      |12/12/2007 | 12/12/2008 | Last 12 months |
  	| PDP     | withEOB      | Prescription      |12/12/2007 | 12/12/2008 | Last 18 months |
- 	| Ship    | withEOB      | Medical           |12/12/2007 | 12/12/2008 | Last 18 months |
+ 	| Ship    | withEOB      | Medical           |12/12/2007 | 12/12/2008 | Last 12-18 months |
  		
