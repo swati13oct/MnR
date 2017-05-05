@@ -215,7 +215,7 @@ Examples:
 | planType | memberType |
 | MAPD	   | Individual |
 
-@prescriptiondrug
+@preferredmail
 Scenario Outline: Verify benefit summary content for group members in ums site
 Given registered member for forms and resources in UMS Site
 	| Plan Type      |<planType> |
