@@ -98,7 +98,7 @@ When the user view forms and resources in AARP site
 Then the user validates prescription drug transistion in AARP site
 #Then the user validate download link in AARP site
 #Then the user validate view link in AARP site
-Then the user validate backtoprevious link in AARP site
+#Then the user validate backtoprevious link in AARP site
 
 Examples:
 
@@ -125,7 +125,7 @@ Given registered member for forms and resources in AARP Site
 When the user view forms and resources in AARP site
 Then the user view seasonal flu shot information in AARP site
 Then the user validates seasonal flu shot information in AARP site
-Then the user validate backtoprevious link in AARP site
+#Then the user validate backtoprevious link in AARP site
 
 Examples:
 
@@ -138,7 +138,7 @@ Given registered member for forms and resources in AARP Site
 	| <planType> |
 When the user view terms of use in AARP site
 Then the user validates terms of use in AARP site
-Then the user validate backtoprevious link in AARP site
+#Then the user validate backtoprevious link in AARP site
 
 Examples:
 
