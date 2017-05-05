@@ -855,6 +855,36 @@ public FormsandresourcesPage navigateToMydocumentUmsPage() {
 		return null;
 	}
 
+	public FormsandresourcesPage navigateToPrescriptionDrugTransitionUms() {
+		driver.navigate().to("https://member.team-a-uhcmedicaresolutions.uhc.com/content/uhcm/home/my-plans/forms-and-resources/acc-prescription-drug-transition-process-pdp.html");
+		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+		return null;
+	}
+
+	public FormsandresourcesPage navigateToDisenrollmentRightsUms() {
+		driver.navigate().to("https://member.team-a-uhcmedicaresolutions.uhc.com/content/uhcm/home/my-plans/forms-and-resources/disenrollmentRightsResponsibilitiesPDPacc.html");
+		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+		return null;
+	}
+
+	public FormsandresourcesPage navigateToMedicaTherapymanagementtsUms() {
+		driver.navigate().to("https://member.team-a-uhcmedicaresolutions.uhc.com/content/uhcm/home/my-plans/forms-and-resources/medication-therapy-mgmt-noaccordion-mapd.html");
+		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+		return null;
+	}
+
+	public FormsandresourcesPage navigateToPrescriptionDrugProcesssUms() {
+		driver.navigate().to("https://member.team-a-uhcmedicaresolutions.uhc.com/content/uhcm/home/my-plans/forms-and-resources/new-prescription-drug-transition-process-mapd.html");
+		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+		return null;
+	}
+
+	public FormsandresourcesPage navigateToPreferredMailServiceUms() {
+		driver.navigate().to("https://member.team-a-uhcmedicaresolutions.uhc.com/content/uhcm/home/my-plans/mail-service-pharmacy-acc-pdp.html");
+		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+		return null;
+	}
+
 	
 	
 }

@@ -189,4 +189,71 @@ Examples:
 | planType | memberType |
 | MAPD	   | Individual |
 
+@medicathreapymapd
+Scenario Outline: Verify benefit summary content for group members in ums site
+Given registered member for forms and resources in UMS Site
+	| Plan Type      |<planType> |
+	| Member Type		 |<memberType> |
+When the user view forms and resources in UMS site 
+Then the user view medica therapy management in UMS site
+Then the user validates the content on medica therapy management page in UMS site
+
+Examples:
+| planType | memberType |
+| MAPD	   | Individual |
+
+@prescriptiondrug
+Scenario Outline: Verify benefit summary content for group members in ums site
+Given registered member for forms and resources in UMS Site
+	| Plan Type      |<planType> |
+	| Member Type		 |<memberType> |
+When the user view forms and resources in UMS site 
+Then the user view prescription drug transition in UMS site
+Then the user validates the content on prescription drug transition page in UMS site
+
+Examples:
+| planType | memberType |
+| MAPD	   | Individual |
+
+@prescriptiondrug
+Scenario Outline: Verify benefit summary content for group members in ums site
+Given registered member for forms and resources in UMS Site
+	| Plan Type      |<planType> |
+	| Member Type		 |<memberType> |
+When the user view forms and resources in UMS site 
+Then the user view preferred mail service pharmacy benefit in UMS site
+Then the user validates the content on preferred mail service pharmacy benefit page in UMS site
+
+Examples:
+| planType | memberType |
+| PDP	   | Group |
+
+#Sprint 3
+
+@drugtransition
+Scenario Outline: Verify benefit summary content for group members in ums site
+Given registered member for forms and resources in UMS Site
+	| Plan Type      |<planType> |
+	| Member Type		 |<memberType> |
+When the user view forms and resources in UMS site 
+Then the user view prescription drug transition process in UMS site
+Then the user validates the content on prescription drug transition process page in UMS site
+
+Examples:
+| planType | memberType |
+| MAPD	   | Individual |
+
+
+@disenrollment
+Scenario Outline: Verify benefit summary content for group members in ums site
+Given registered member for forms and resources in UMS Site
+	| Plan Type      |<planType> |
+	| Member Type		 |<memberType> |
+When the user view forms and resources in UMS site 
+Then the user view disenrollment rights and responsibilities in UMS site
+Then the user validates the content on disenrollment rights and responsibilities page in UMS site
+
+Examples:
+| planType | memberType |
+| PDP	     | Group |
 

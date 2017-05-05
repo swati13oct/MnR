@@ -445,6 +445,83 @@ public class FormsandResourcesAarpStepDefinition {
 		}
 
 
+	@Then("^the user view medication therapy management in AARP site$")
+	public void views_medication_therapy_aarp_site() {
+		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario()
+				.getBean(PageConstants.ACCOUNT_HOME_PAGE);
+		FormsandresourcesPage formsAndResourcesPage = accountHomePage
+				.navigateToMedicationTherapyManagementAarpPage();
+	}
+
+	@Then("^the user validate medication therapy management in AARP site$")
+	public void validate_medication_therapy_management_page_aarp() {
+	try {
+		
+		JSONObject actual=(JSONObject) loginScenario.getBean(PlanBenefitsAndCoverageCommonConstants.BENEFITS_AND_COVERAGE_ACTUAL);
+		
+		JSONObject expected=(JSONObject) loginScenario.getBean(PlanBenefitsAndCoverageCommonConstants.BENEFITS_AND_COVERAGE_EXPECTED);
+		
+		if(actual!=null && expected !=null){
+			JSONAssert.assertEquals(expected, actual, true);
+		}			
+		
+	} catch (Exception e) {
+		e.printStackTrace();
+	}
+}
+	
+	@Then("^the user view coverage appeals and grievances in AARP site$")
+	public void views_coverage_appeals_aarp_site() {
+		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario()
+				.getBean(PageConstants.ACCOUNT_HOME_PAGE);
+		FormsandresourcesPage formsAndResourcesPage = accountHomePage
+				.navigateToCoverageAppealsAndGrievancesAarpPage();
+	}
+
+
+	@Then("^the user validate coverage appeals and grievances in AARP site$")
+		public void validate_coverage_appeals_and_grievances_page_aarp() {
+			try {
+				
+				JSONObject actual=(JSONObject) loginScenario.getBean(PlanBenefitsAndCoverageCommonConstants.BENEFITS_AND_COVERAGE_ACTUAL);
+				
+				JSONObject expected=(JSONObject) loginScenario.getBean(PlanBenefitsAndCoverageCommonConstants.BENEFITS_AND_COVERAGE_EXPECTED);
+				
+				if(actual!=null && expected !=null){
+					JSONAssert.assertEquals(expected, actual, true);
+				}			
+				
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+	
+	@Then("^the user view preferred mail service pharmacy benefit in AARP site$")
+	public void views_preferred_mail_benefit_aarp_site() {
+		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario()
+				.getBean(PageConstants.ACCOUNT_HOME_PAGE);
+		FormsandresourcesPage formsAndResourcesPage = accountHomePage
+				.navigateToPreferredMailPharmacyBenefitAarpPage();
+	}
+
+
+	@Then("^the user validate preferred mail service pharmacy benefit in AARP site$")
+		public void validate_preferred_mail_service_benefit_page_aarp() {
+			try {
+				
+				JSONObject actual=(JSONObject) loginScenario.getBean(PlanBenefitsAndCoverageCommonConstants.BENEFITS_AND_COVERAGE_ACTUAL);
+				
+				JSONObject expected=(JSONObject) loginScenario.getBean(PlanBenefitsAndCoverageCommonConstants.BENEFITS_AND_COVERAGE_EXPECTED);
+				
+				if(actual!=null && expected !=null){
+					JSONAssert.assertEquals(expected, actual, true);
+				}			
+				
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+
 
 	
 	/*@After

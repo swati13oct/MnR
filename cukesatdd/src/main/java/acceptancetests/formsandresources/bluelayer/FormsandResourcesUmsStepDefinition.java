@@ -584,6 +584,159 @@ public class FormsandResourcesUmsStepDefinition {
 		}
 	}
 
+	
+	@Then("^the user view prescription drug transition process in UMS site$")
+	public void views_prescription_drug_process_Ums_site() {
+		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario()
+				.getBean(PageConstants.ACCOUNT_HOME_PAGE);
+		FormsandresourcesPage formsAndResourcesPage = accountHomePage
+				.navigateToPrescriptionDrugTransitionUms();
+	}
+
+
+
+	@Then("^the user validates the content on prescription drug transition process page in UMS site$")
+	public void the_user_validates_the_content_on_prescription_drug_transition_page() {
+		try {
+			
+			JSONObject actual=(JSONObject) loginScenario.getBean(PlanBenefitsAndCoverageCommonConstants.BENEFITS_AND_COVERAGE_ACTUAL);
+			
+			JSONObject expected=(JSONObject) loginScenario.getBean(PlanBenefitsAndCoverageCommonConstants.BENEFITS_AND_COVERAGE_EXPECTED);
+			
+			if(actual!=null && expected !=null){
+				JSONAssert.assertEquals(expected, actual, true);
+			}			
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	
+	@Then("^the user view disenrollment rights and responsibilities in UMS site$")
+	public void views_disenrollment_rights_responsibilities_Ums_site() {
+		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario()
+				.getBean(PageConstants.ACCOUNT_HOME_PAGE);
+		FormsandresourcesPage formsAndResourcesPage = accountHomePage
+				.navigateToDisenrollmentRightsUms();
+	}
+
+
+
+	@Then("^the user validates the content on disenrollment rights and responsibilities page in UMS site$")
+	public void the_user_validates_the_content_on_disenrollment_right_responsibilities_page() {
+		try {
+			
+			JSONObject actual=(JSONObject) loginScenario.getBean
+
+(PlanBenefitsAndCoverageCommonConstants.BENEFITS_AND_COVERAGE_ACTUAL);
+			
+			JSONObject expected=(JSONObject) loginScenario.getBean
+
+(PlanBenefitsAndCoverageCommonConstants.BENEFITS_AND_COVERAGE_EXPECTED);
+			
+			if(actual!=null && expected !=null){
+				JSONAssert.assertEquals(expected, actual, true);
+			}			
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	@Then("^the user view medica therapy management in UMS site$")
+	public void views_medica_therapy_management_Ums_site() {
+		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario()
+				.getBean(PageConstants.ACCOUNT_HOME_PAGE);
+		FormsandresourcesPage formsAndResourcesPage = accountHomePage
+				.navigateToMedicaTherapymanagementtsUms();
+	}
+
+
+
+	@Then("^the user validates the content on medica therapy management page in UMS site$")
+	public void the_user_validates_the_content_on_medica_therapy_management_page() {
+		try {
+			
+			JSONObject actual=(JSONObject) loginScenario.getBean
+
+					(PlanBenefitsAndCoverageCommonConstants.BENEFITS_AND_COVERAGE_ACTUAL);
+			
+			JSONObject expected=(JSONObject) loginScenario.getBean
+
+					(PlanBenefitsAndCoverageCommonConstants.BENEFITS_AND_COVERAGE_EXPECTED);
+			
+			if(actual!=null && expected !=null){
+				JSONAssert.assertEquals(expected, actual, true);
+			}			
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	
+	@Then("^the user view prescription drug transition in UMS site$")
+	public void views_prescription_drug_process_transition_Ums_site() {
+		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario()
+				.getBean(PageConstants.ACCOUNT_HOME_PAGE);
+		FormsandresourcesPage formsAndResourcesPage = accountHomePage
+				.navigateToPrescriptionDrugProcesssUms();
+	}
+
+
+
+	@Then("^the user validates the content on prescription drug transition page in UMS site$")
+	public void the_user_validates_the_content_on_prescription_drug_process_page() {
+		try {
+			
+			JSONObject actual=(JSONObject) loginScenario.getBean
+
+(PlanBenefitsAndCoverageCommonConstants.BENEFITS_AND_COVERAGE_ACTUAL);
+			
+			JSONObject expected=(JSONObject) loginScenario.getBean
+
+(PlanBenefitsAndCoverageCommonConstants.BENEFITS_AND_COVERAGE_EXPECTED);
+			
+			if(actual!=null && expected !=null){
+				JSONAssert.assertEquals(expected, actual, true);
+			}			
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	@Then("^the user view preferred mail service pharmacy benefit in UMS site$")
+	public void views_preferred_mail_service_Ums_site() {
+		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario()
+				.getBean(PageConstants.ACCOUNT_HOME_PAGE);
+		FormsandresourcesPage formsAndResourcesPage = accountHomePage
+				.navigateToPreferredMailServiceUms();
+	}
+
+
+
+	@Then("^the user validates the content on preferred mail service pharmacy benefit page in UMS site$")
+	public void the_user_validates_the_content_on_preferred_mail_service_page() {
+		try {
+			
+			JSONObject actual=(JSONObject) loginScenario.getBean
+
+					(PlanBenefitsAndCoverageCommonConstants.BENEFITS_AND_COVERAGE_ACTUAL);
+			
+			JSONObject expected=(JSONObject) loginScenario.getBean
+
+					(PlanBenefitsAndCoverageCommonConstants.BENEFITS_AND_COVERAGE_EXPECTED);
+			
+			if(actual!=null && expected !=null){
+				JSONAssert.assertEquals(expected, actual, true);
+			}			
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
 
 	
 	

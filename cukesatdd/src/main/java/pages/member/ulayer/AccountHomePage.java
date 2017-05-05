@@ -834,6 +834,23 @@ public class AccountHomePage extends UhcDriver {
 		return null;
 	}
 
-	
+	public FormsandresourcesPage navigateToMedicationTherapyManagementAarpPage() {
+		driver.navigate().to("https://member.team-a-aarpmedicareplans.uhc.com/content/aarpm/home/my-plans/forms-and-resources/medication-therapy-mgmt-pdp0.html");
+		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+		return null;
+	}
+
+	public FormsandresourcesPage navigateToCoverageAppealsAndGrievancesAarpPage() {
+		driver.navigate().to("https://member.team-a-aarpmedicareplans.uhc.com/content/aarpm/home/my-plans/forms-and-resources/coverage-determination-appeals-pdp-acc.html");
+		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+		return null;
+	}
+
+	public FormsandresourcesPage navigateToPreferredMailPharmacyBenefitAarpPage() {
+		driver.navigate().to("https://member.team-a-aarpmedicareplans.uhc.com/content/aarpm/home/my-plans/mailOrderPharmacyNonAccPDP.html");
+		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+		return null;
+	}
+
 
 }

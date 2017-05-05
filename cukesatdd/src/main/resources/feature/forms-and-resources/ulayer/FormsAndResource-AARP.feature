@@ -183,3 +183,57 @@ Examples:
 
 | planType |
 | MAPD	   |
+
+@medicationtherapy
+Scenario Outline:To verify content story in forms and resource in AARP site
+Given registered member for forms and resources in AARP Site
+	| <planType> |
+When the user view forms and resources in AARP site
+Then the user view medication therapy management in AARP site
+Then the user validate medication therapy management in AARP site
+
+Examples:
+
+| planType |
+| PDP	   |
+
+@coverageappealspdp
+Scenario Outline:To verify content story in forms and resource in AARP site
+Given registered member for forms and resources in AARP Site
+	| <planType> |
+When the user view forms and resources in AARP site
+Then the user view coverage appeals and grievances in AARP site
+Then the user validate coverage appeals and grievances in AARP site
+
+Examples:
+
+| planType |
+| PDP	   |
+
+@coverageappealsmapd
+Scenario Outline:To verify content story in forms and resource in AARP site
+Given registered member for forms and resources in AARP Site
+	| <planType> |
+When the user view forms and resources in AARP site
+Then the user view coverage appeals and grievances in AARP site
+Then the user validate coverage appeals and grievances in AARP site
+
+Examples:
+
+| planType |
+| MAPD	   |
+
+
+@preferedmailbenefit
+Scenario Outline:To verify content story in forms and resource in AARP site
+Given registered member for forms and resources in AARP Site
+	| <planType> |
+When the user view forms and resources in AARP site
+Then the user view preferred mail service pharmacy benefit in AARP site
+Then the user validate preferred mail service pharmacy benefit in AARP site
+
+Examples:
+
+| planType |
+| PDP	   |
+
