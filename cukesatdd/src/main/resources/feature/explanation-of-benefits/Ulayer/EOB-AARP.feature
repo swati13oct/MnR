@@ -204,7 +204,7 @@ Examples:
       | MAPD      |  withEOB     | Medical           | 01/01/2016 | 04/01/2017 |Last 90 Days  |  Last 6 months  | Last 12 months  | Last 18 months |  
       | PDP      |  withEOB     | Medical           | 01/01/2016 | 04/01/2017 |Last 90 Days  |  Last 6 months  | Last 12 months  | Last 18 months |   
 
- @eobStatements 	
+ @US604139 	
 Scenario Outline: To verify EOB result list
 Given registered AMP with for EOB flow
 	| Plan Type      |<planType>  |
