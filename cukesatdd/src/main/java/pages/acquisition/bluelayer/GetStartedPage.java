@@ -17,7 +17,6 @@ public class GetStartedPage extends UhcDriver {
 
 	public GetStartedPage(WebDriver driver) {
 		 super(driver);
-		 switchToNewIframe("dceIframe");
 	     PageFactory.initElements(driver, this);
 	     openAndValidate();
 	}
