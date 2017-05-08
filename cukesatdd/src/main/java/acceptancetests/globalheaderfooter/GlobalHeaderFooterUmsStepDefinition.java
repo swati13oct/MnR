@@ -33,6 +33,7 @@ import pages.acquisition.bluelayer.PrepareForInitialEnrollmentuhcPage;
 import pages.acquisition.bluelayer.PrescriptionDrugRequestMoreHelpPage;
 import pages.acquisition.bluelayer.PrivacyPolicyUmsPage;
 import pages.acquisition.bluelayer.RegistrationHomePage;
+import pages.acquisition.bluelayer.RequestForAssistanceUMSPage;
 import pages.acquisition.bluelayer.ResumeYourSavedApplicationPage;
 import pages.acquisition.bluelayer.SiteMapUMSPage;
 import pages.acquisition.bluelayer.SpecialNeedGetEnrollmentInformationPage;
@@ -1246,5 +1247,57 @@ public class GlobalHeaderFooterUmsStepDefinition {
 		}
 
 	}
+	
+	@When("^the user clicks on Request for assistance link from home page footer UHC Medicaresolutions Site$")
+	public void the_user_clicks_on_Request_for_assistance_link_from_home_page_footer_UHC_Medicaresolutions_Site() {
+	    // Express the Regexp above with the code you wish you had
+		AcquisitionHomePage acquistionhomepage=(AcquisitionHomePage) getLoginScenario().getBean(PageConstants.ACQUISITION_HOME_PAGE);
+		RequestForAssistanceUMSPage requestforassistance= acquistionhomepage.requestforassistanceclick();
+		if (requestforassistance!=null)
+		{
+			getLoginScenario().saveBean(PageConstants.REQUEST_FOR_ASSISTANCE_PAGE,
+					requestforassistance);
+		}
+		else
+		{
+			Assert.fail("failure in opening cobrowsing model window");
+		}
+		
+	  
+	}
+	
+	@When("^user access the cobrowse model window$")
+	public void user_access_cobrowse_window()
+	{
+		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
+				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+		JSONObject cobrowseactual = aquisitionhomepage.validatecobrowsemodelwindow();
+		// Get expected data 
+				String fileName = "cobrowseexpected";
+				String directory = CommonConstants.ACQUISITION_EXPECTED_DIRECTORY
+						+ File.separator + CommonConstants.SITE_BLUELAYER
+						+ File.separator
+						+ AcquistionCommonConstants.COBROWSE_FLOW_NAME
+						+ File.separator;
+				JSONObject cobrowseExpectedJson = MRScenario.readExpectedJson(
+						fileName, directory);
+
+				getLoginScenario().saveBean(
+						AcquistionCommonConstants.COBROWSE_ACTUAL,
+						cobrowseactual);
+				getLoginScenario().saveBean(
+						AcquistionCommonConstants.COBROWSE_EXPECTED,
+						cobrowseExpectedJson);
+	}
+	
+ @Then("^user validates the cobrowsing model window.$")
+ public void user_validates_cobrowse_window()
+ {
+			RequestForAssistanceUMSPage requestforassistance = (RequestForAssistanceUMSPage)getLoginScenario().getBean(PageConstants.REQUEST_FOR_ASSISTANCE_PAGE);
+			requestforassistance.validatecobrosemodelwindow();
+ }
+	
+
+
 
 }

@@ -1,92 +1,86 @@
 {
-    "pharmacyTypes": [
-        {
-            "pharmacyDropDown": "All Pharmacies"
-        },
-        {
-            "pharmacyDropDown": "Cost Savings Pharmacies"
-        },
-        {
-            "pharmacyDropDown": "Standard Network Pharmacy"
-        },
-        {
-            "pharmacyDropDown": "Preferred Mail Service Pharmacy"
-        }
-    ],
-    "previousLink": "Previous 10 results",
-    "pharmacies": [
-        {
-            "pharmacyDistance": "0.14",
-            "selectLink": "Select",
-            "pharmacyName": "COSTCO PHARMACY 676"
-        },
-        {
-            "pharmacyDistance": "0.41",
-            "selectLink": "Select",
-            "pharmacyName": "SAMS PHARMACY 10-6630 106630"
-        },
-        {
-            "pharmacyDistance": "0.95",
-            "selectLink": "Select",
-            "pharmacyName": "WALGREENS #4366 4366"
-        },
-        {
-            "pharmacyDistance": "1.38",
-            "selectLink": "Select",
-            "pharmacyName": "SAFEWAY PHARMACY #1479 1479"
-        },
-        {
-            "pharmacyDistance": "1.4",
-            "selectLink": "Select",
-            "pharmacyName": "PIONEER PHARMACY LLC"
-        },
-        {
-            "pharmacyDistance": "1.43",
-            "selectLink": "Select",
-            "pharmacyName": "KING SOOPERS PHARMACY 620022"
-        },
-        {
-            "pharmacyDistance": "1.48",
-            "selectLink": "Select",
-            "pharmacyName": "TARGET PHARMACY 2021"
-        },
-        {
-            "pharmacyDistance": "1.49",
-            "selectLink": "Select",
-            "pharmacyName": "WAL-MART PHARMACY 10-5957 105957"
-        },
-        {
-            "pharmacyDistance": "1.52",
-            "selectLink": "Select",
-            "pharmacyName": "KMART PHARMACY4129 4129"
-        },
-        {
-            "pharmacyDistance": "1.69",
-            "selectLink": "Select",
-            "pharmacyName": "WHEAT RIDGE PROFESSIONAL PHARMAC"
-        }
-    ],
-    "zipcode": "80002",
-    "editZipCodeLink": "Edit ZIP code",
-    "miles": [
-        {
-            "milesDropDown": "1 mile"
-        },
-        {
-            "milesDropDown": "2 miles"
-        },
-        {
-            "milesDropDown": "5 miles"
-        },
-        {
-            "milesDropDown": "10 miles"
-        },
-        {
-            "milesDropDown": "15 miles"
-        },
-        {
-            "milesDropDown": "25 miles"
-        }
-    ],
-    "nextLink": "Next 10 results"
+   "pharmacyTypes":[
+      {
+         "pharmacyDropDown":"Available Pharmacies"
+      },
+      {
+         "pharmacyDropDown":"Mail Service Pharmacy"
+      }
+   ],
+   "previousLink":"Previous results",
+   "pharmacies":[
+      {
+         "pharmacyDistance":"0.5",
+         "selectLink":"Select",
+         "pharmacyName":"Paladina Health - Arvada"
+      },
+      {
+         "pharmacyDistance":"0.76",
+         "selectLink":"Select",
+         "pharmacyName":"King Soopers Pharmacy"
+      },
+      {
+         "pharmacyDistance":"0.77",
+         "selectLink":"Select",
+         "pharmacyName":"CVS Pharmacy #"
+      },
+      {
+         "pharmacyDistance":"0.8",
+         "selectLink":"Select",
+         "pharmacyName":"Costco Pharmacy"
+      },
+      {
+         "pharmacyDistance":"0.82",
+         "selectLink":"Select",
+         "pharmacyName":"Kmart Pharmacy4129"
+      },
+      {
+         "pharmacyDistance":"0.87",
+         "selectLink":"Select",
+         "pharmacyName":"Blue Spruce Pharmacy At Independence"
+      },
+      {
+         "pharmacyDistance":"0.98",
+         "selectLink":"Select",
+         "pharmacyName":"Better Life Medical Weight Loss"
+      },
+      {
+         "pharmacyDistance":"1.06",
+         "selectLink":"Select",
+         "pharmacyName":"Sams Pharmacy 10-6630"
+      },
+      {
+         "pharmacyDistance":"1.45",
+         "selectLink":"Select",
+         "pharmacyName":"Walgreens #4366"
+      },
+      {
+         "pharmacyDistance":"1.52",
+         "selectLink":"Select",
+         "pharmacyName":"Medstuff Inc"
+      }
+   ],
+   "zipcode":"80002",
+   "editZipCodeLink":"Edit ZIP code",
+   "miles":[
+      {
+         "milesDropDown":"1 mile"
+      },
+      {
+         "milesDropDown":"2 miles"
+      },
+      {
+         "milesDropDown":"5 miles"
+      },
+      {
+         "milesDropDown":"10 miles"
+      },
+      {
+         "milesDropDown":"15 miles"
+      },
+      {
+         "milesDropDown":"25 miles"
+      }
+   ],
+   "nextLink":"Next results"
 }

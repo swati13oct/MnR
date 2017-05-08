@@ -81,8 +81,13 @@ public class SearchEnginePage {
 			bingSearchFeild.sendKeys(searchParamter);
 			bingSubmitFeild.click();
 			CommonUtility.checkPageIsReady(driver);
-			if (driver.getTitle().equalsIgnoreCase(
-					"UHC medicare solutions - Bing")) {
+//			if (driver.getTitle().equalsIgnoreCase(
+//					"UHC medicare solutions - Bing")) {
+//				return new SearchResultsPage(driver);
+//			}
+			
+			if (driver.getCurrentUrl().contains("q=UHC"))
+			{
 				return new SearchResultsPage(driver);
 			}
 			return null;

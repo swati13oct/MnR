@@ -1,0 +1,109 @@
+{
+   "planName":"2016 Prescription Drug Plan Details\nAARP MedicareRx Preferred (PDP)",
+   "marketingBullets":"The plan chosen by most of our members. A good value with robust drug coverage.\nThe drug list includes nearly all generic drugs and most commonly used brand name drugs covered by Medicare Part D.\nYou pay no more than 65% of the total cost for generic drugs or 45% of the total cost for brand name drugs, for any drug tier during the coverage gap.",
+   "prescriptionDrugCovrageLink":"Prescription Drug Coverage",
+   "planpdf_generalPlanInfo_otherlanguages":"Formulario de Inscripción (PDF)\n\nComprobante de Cobertura (PDF)\n\nResumen de Beneficios (PDF)\n\nAviso Annual de Cambios (PDF)2\n\nClasificación de la Calidad del Plan (PDF)",
+   "planCost_planPremium_monthlyCost":"$71",
+   "estimateAnnualCostViewDetailsLink":"View Details",
+   "drugCopayTableRow":[
+      {
+         "drugCopayTableRow":"Prescription Drugs Your Costs"
+      },
+      {
+         "drugCopayTableRow":"Annual Prescription Deductible   \n$0"
+      },
+      {
+         "drugCopayTableRow":"Initial Coverage Stage Preferred Retail Cost Sharing (30 days) Standard Network Pharmacy Cost Sharing (30 days) Preferred Mail Order Pharmacy (90 days)"
+      },
+      {
+         "drugCopayTableRow":"Tier 1: Preferred Generic Drugs\nN/A\nN/A\nStandard: $30 co-pay"
+      },
+      {
+         "drugCopayTableRow":"Tier 2: Generic Drugs\nN/A\nN/A\nStandard: $54 co-pay"
+      },
+      {
+         "drugCopayTableRow":"Tier 3: Preferred Brand Drugs\nN/A\nN/A\nStandard: $141 co-pay"
+      },
+      {
+         "drugCopayTableRow":"Tier 4: Non-Preferred Brand Drugs\nN/A\nN/A\nStandard: 50% of the cost"
+      },
+      {
+         "drugCopayTableRow":"Tier 5: Specialty Tier Drugs\nN/A\nN/A\nStandard: 33% of the cost"
+      },
+      {
+         "drugCopayTableRow":"Tier 1: Preferred Generic Drugs\nN/A\nN/A\nN/A"
+      },
+      {
+         "drugCopayTableRow":"Tier 2: Generic Drugs\nN/A\nN/A\nN/A"
+      },
+      {
+         "drugCopayTableRow":"Tier 3: Preferred Brand Drugs\nN/A\nN/A\nN/A"
+      },
+      {
+         "drugCopayTableRow":"Tier 4: Non-Preferred Brand Drugs\nN/A\nN/A\nN/A"
+      },
+      {
+         "drugCopayTableRow":"Tier 5: Specialty Tier Drugs\nN/A\nN/A\nN/A"
+      },
+      {
+         "drugCopayTableRow":"Tier 1: Preferred Generic Drugs\nN/A\n$10 co-pay\nN/A"
+      },
+      {
+         "drugCopayTableRow":"Tier 2: Generic Drugs\nN/A\n$18 co-pay\nN/A"
+      },
+      {
+         "drugCopayTableRow":"Tier 3: Preferred Brand Drugs\nN/A\n$47 co-pay\nN/A"
+      },
+      {
+         "drugCopayTableRow":"Tier 4: Non-Preferred Brand Drugs\nN/A\n50% of the cost\nN/A"
+      },
+      {
+         "drugCopayTableRow":"Tier 5: Specialty Tier Drugs\nN/A\n33% of the cost\nN/A"
+      },
+      {
+         "drugCopayTableRow":"Coverage Gap Stage\nDuring the Coverage Gap Stage, you (or others on your behalf) will pay no more than 58% of the total cost for generic drugs or 45% of the total cost for brand name drugs, for any drug tier until the total amount you (or others on your behalf) have paid reaches $4,850 in year-to-date out-of-pocket costs.\nYou may pay less if your plan has additional coverage in the gap.\nAlways use your Medicare Advantage member ID card during the coverage gap to get the plan's discounted drug rates. The money you spend using your card counts toward your out-of-pocket costs.\n "
+      },
+      {
+         "drugCopayTableRow":"Catastrophic Coverage Stage\nYou enter the Catastrophic Coverage Stage after $4,850 is reached (excluding premiums), you will have to pay only one of the following through the end of the year: $2.95 co-pay for generic drugs, $7.40 co-pay for brand name drugs or a 5% co-insurance, whichever is greater. On January 1 each year, the four drug payment stages start over.\n "
+      },
+      {
+         "drugCopayTableRow":""
+      },
+      {
+         "drugCopayTableRow":""
+      },
+      {
+         "drugCopayTableRow":"Preferred Retail Pharmacy Network\nUnitedHealthcare members1 can save money on thousands of prescription drugs through our Preferred Retail Pharmacy Network. We've worked with many retail pharmacies in your area to help you save money on your prescription co-pays."
+      },
+      {
+         "drugCopayTableRow":"OptumRx® Home Delivery\n$0 co-pay for a 90-day supply of Tier 1 and Tier 2 medications with home delivery from OptumRx.2"
+      },
+      {
+         "drugCopayTableRow":"Footnotes\nMember may use any pharmacy in the network but may not receive preferred retail pharmacy pricing. Pharmacies in the Preferred Retail Pharmacy Network may not be available in all areas. Co-pays apply after deductible. The Preferred Retail Pharmacy Network is not available in Guam, American Samoa, U.S. Virgin Islands or Northern Mariana Islands.\n2 You are not required to use OptumRx to obtain a 90-day supply of your maintenance medication. New prescriptions from OptumRx should arrive within ten business days from the date the completed order is received and refill orders should arrive in about seven business days. Contact OptumRx anytime at 1-877-266-4832 (TTY 711).\n  OptumRx is an affiliate of UnitedHealthcare Insurance Company. $0 co-pay is applicable for tier 1 and tier 2 medications during the initial coverage phase and may not apply during the coverage gap; it does not apply during the catastrophic stage.\n "
+      },
+      {
+         "drugCopayTableRow":"Hide details"
+      }
+   ],
+   "planCost_planPremium_annualCost":"$852",
+   "annualPrescriptionDeductible":"$0",
+   "planCost_planPremium_description":"The monthly fee you pay to the plan for your health care. The amount shown does not include the Part B premium you already pay to the government. You must continue to pay your Medicare Part B premium if not otherwise paid for under Medicaid or by another third party.",
+   "backToplansLinkBottomSection":"Enroll in a plan",
+   "planpdf_generalPlanInfo_english":"Enrollment Form (PDF)\n\nEvidence of Coverage (PDF)\n\nSummary of Benefits (PDF)\n\nAnnual Notice of Changes (ANOC) (PDF)2\n\nStar Ratings (PDF)",
+   "planCost_drugCost_annualCost":"$451.14",
+   "estimateTotalAnnualCost":"$451.14",
+   "backToplansLinkTopSection":"Back to plans",
+   "selectedDrugName":"Restasis EMU 0.05%\nQty 2 Every 3 Months",
+   "planCost_drugCost_description":"1 out of 1 Drugs covered.\nEdit Drug List",
+   "selectedDrugCoverageDetails":"T3",
+   "planpdf_prescriptionDrugCoverage_otherlanguages":"Formulario Completo (PDF)",
+   "planCost_drugCost_monthlyCost":"Varies",
+   "annualDeductibleLink":"$0 Annual Deductible",
+   "planCost_estimatedAnnualTotalCost":"Estimated Annual Total (total is based on dollar values above):\n$1,303.14",
+   "monthlyPremiumLink":"$71 Monthly Premium",
+   "enrollInPlanLinkTopSection":"Enroll in a plan",
+   "enrollInPlanLinkBottomSection":"Back to plans",
+   "currentPharmacy":"Current Pharmacy Edit\nSams Pharmacy 10-6630\n(Preferred Retail Pharmacy)",
+   "ics_copay_or_coinsurance":"$105",
+   "planpdf_prescriptionDrugCoverage_english":"Comprehensive Formulary (PDF)\n\nPrior Authorization Criteria (PDF)\n\nStep Therapy Criteria (PDF)\n\nFormulary Additions (PDF)\n\nFormulary Deletions (PDF)"
+}

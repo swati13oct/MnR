@@ -1,6 +1,5 @@
 package pages.acquisition.ulayer;
 
-import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
@@ -9,6 +8,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
 import acceptancetests.atdd.data.CommonConstants;
+import acceptancetests.atdd.data.ElementData;
 import acceptancetests.atdd.util.CommonUtility;
 import atdd.framework.UhcDriver;
 
@@ -18,7 +18,7 @@ import atdd.framework.UhcDriver;
  */
 public class AdditionalPlanPage extends UhcDriver{
 
-	@FindBy(xpath = "//*[contains(text(), 'no other plans to add')]")
+	@FindBy(id = "popupClose")
 	private WebElement noOtherPlanToAddLink;
 
 	@FindBy(id = "popupSubmit")
@@ -57,7 +57,7 @@ public class AdditionalPlanPage extends UhcDriver{
 			System.out.println("popupSubmitButton not found");
 		}
 
-		if (driver.getTitle().equalsIgnoreCase(
+		if (getTitle().equalsIgnoreCase(
 				"AARP Medicare Plans | Registration")) {
 			return new PlanConfirmationPage(driver);
 		}
@@ -67,7 +67,9 @@ public class AdditionalPlanPage extends UhcDriver{
 
 	public CreateAccountPage addNoOtherPlan() {
 		noOtherPlanToAddLink.click();
-		if (driver.findElement(By.tagName("h1")).getText()
+		ElementData elementData = new ElementData("tagName","h1");
+		WebElement element = findElement(elementData);
+		if (element.getText()
 				.equalsIgnoreCase("Register for an Online Account")) {
 			return new CreateAccountPage(driver);
 		}

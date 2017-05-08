@@ -15,7 +15,7 @@
 },
 "planStatus1":{
 "identifier":"xpath",
-"elementName":"//div[@id='planinformation']/div[2]/div[5]/span[2]"
+"elementName":"//div[@id='planinformation']/div[2]/div[3]/span[2]"
 },
 "planMaterialsSection":{
 "identifier":"xpath",
@@ -33,10 +33,35 @@
 "identifier":"xpath",
 "elementName":"//div[@id='_content_campaigns_uhcm_formsresources-main_formsresources-main_jcr_content_par_teaser']/div[1]/div[1]/div[2]/div[1]/div[1]/div[1]/p[7]"
 },
+"preferredmailorderbenefit":
+{
+"identifier":"xpath",
+"elementName":"//a[text()='Prescription Mail Order Form - Preferred Mail Service Pharmacy through OptumRx']"
+},
 "groupId1":
 {
 "identifier":"xpath",
 "elementName":"//div[@id='planinformation']/div[2]/div[1]/span[2]"
+},
+"Formulary Additions":
+{
+"identifier":"xpath",
+"elementName":"//a[text()='Formulary Additions']"
+},
+"Prior Autorization":
+{
+"identifier":"xpath",
+"elementName":"//a[text()='Prior Authorization']"
+},
+"Step Therapy":
+{
+"identifier":"xpath",
+"elementName":"//a[text()='Step Therapy']"
+},
+"Formulary Deletions":
+{
+"identifier":"xpath",
+"elementName":"//a[text()='Formulary Deletions']"
 }
 }
 }

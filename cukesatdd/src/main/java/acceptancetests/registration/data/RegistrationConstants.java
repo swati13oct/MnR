@@ -9,7 +9,9 @@ package acceptancetests.registration.data;
  */
 public class RegistrationConstants {
 
-	public static final String REGISTRATION_SUCCESS_EXPECTED = "registrationSuccessExpectedJson";
+	public static final String REGISTRATION_SUCCESS_EXPECTED = "registrationSuccessJson";
+	
+	public static final String REG_FAILURE_EXPECTED = "registrationFailureJson"; 
 	
 	public static final String REGISTRATION_SUCCESS_ACTUAL = "registrationSuccessActualJson";
 	
@@ -24,5 +26,7 @@ public class RegistrationConstants {
 	public static final String PAGE = "page";
 	
 	public static final String REGSITRATION_COMMON_EXPECTED = "registrationCommonExpected";
+	
+	public static final String REG_ERROR_PAGE_ACTUAL = "registrationErrorPageActualJson";
 
 }

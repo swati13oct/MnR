@@ -35,6 +35,42 @@ Scenario Outline:To verify all available pharmacies for particular zipcode and p
 Given registered member to verify locate a pharmacy in AARP Site
 	| <plantype> |
 When the user navigates to pharmacy search page in AARP site
+And the user clicks chinese in AARP Site 
+And the user enters zipcode and distance details for AARP Site
+    | Zip Code    | 90210  |
+	| Distance    |25 |
+	| County      | |
+And the user chooses a plan from dropdown in AARP site
+	| planName |AARP MedicareRx Walgreens (PDP)|
+And the user clicks create pdf in AARP Site
+And the user searches for pharmacy available in AARP Site
+Then the user validates the pharmacies available in AARP Site
+Examples:
+	| plantype | zipCode | countyName    | distance |  planName			|
+	| PDP      | 80002   | Adams County  |	25   |  AARP MedicareRx Preferred (PDP) |
+#	| PDP      | 80001   |		     |	25   |  AARP MedicareRx Preferred (PDP) |
+#	| MAPD	   | 80002   |		     |	25   |  AARP MedicareRx Preferred (PDP) |
+	
+Scenario Outline:To verify all Content in espanol
+Given registered member to verify locate a pharmacy in AARP Site
+	| <plantype> |
+When the user navigates to pharmacy search page in AARP site
+And the user clicks espanol in AARP Site 
+And the user enters zipcode and distance details for AARP Site
+    | Zip Code    | 90210  |
+	| Distance    |25 |
+	| County      | |
+And the user chooses a plan from dropdown in AARP site
+	| planName |AARP MedicareRx Walgreens (PDP)|
+And the user clicks create pdf in AARP Site
+And the user searches for pharmacy available in AARP Site
+Then the user validates the pharmacies available in AARP Site
+
+Examples:
+	| plantype | zipCode | countyName    | distance |  planName			|
+	| PDP      | 80002   | Adams County  |	25   |  AARP MedicareRx Preferred (PDP) |
+#	| PDP      | 80001   |		     |	25   |  AARP MedicareRx Preferred (PDP) |
+#	| MAPD	   | 80002   |		     |	25   |  AARP MedicareRx Preferred (PDP) |
 And the user enters zipcode and distance details for AARP Site
         | Zip Code    | <zipCode>   |
 	| Distance    | <distance>  |
@@ -71,3 +107,20 @@ Examples:
 	| PDP      | 80002   | Adams County  |	25      |  AARP MedicareRx Preferred (PDP) | Open 24 hours,Long-term care,Standard Network Pharmacy (90-day) |
 	| PDP      | 80001   |		     |	25      |  AARP MedicareRx Preferred (PDP) | Open 24 hours,Long-term care,Standard Network Pharmacy (90-day) |
 #	| MAPD	   | 80002   |		     |	25      |  AARP MedicareRx Preferred (PDP) | Open 24 hours,Long-term care,Standard Network Pharmacy (90-day) |
+
+@pharmacylocator
+Scenario Outline:To verify pharmacies displayed based on contract and PBP in AARP site
+Given registered member to verify locate a pharmacy in AARP Site
+	| <plantype> |
+When the user navigates to pharmacy search page in AARP site
+And the user chooses the year and a plan from dropdown in AARP site
+    |  Year     | <year> |
+	| Plan Name | <planName>  |
+And the user hovers over the tooltip in AARP Site
+	| <pharmacyType> |
+And the user searches for pharmacies available in AARP site
+Then the user validates the pharmacies available in AARP site
+
+Examples:
+	| plantype | year |  planName			                | pharmacyType						     |
+	| PDP      | 2016 |  AARP MedicareRx Saver Plus (PDP)   | Preferred Retail Pharmacy Network      | 

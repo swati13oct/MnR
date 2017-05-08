@@ -2,6 +2,7 @@ package pages.member.bluelayer;
 
 import java.util.List;
 import java.util.Map;
+import java.util.NoSuchElementException;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -24,6 +25,9 @@ public class ClaimSummaryPage extends UhcDriver {
 
 	@FindBy(id = "fromMonth")
 	private WebElement fromMonth;
+	
+	@FindBy(linkText = "add plan")
+	private WebElement addaplanlink;
 
 	@FindBy(id = "fromDay")
 	private WebElement fromDay;
@@ -60,6 +64,9 @@ public class ClaimSummaryPage extends UhcDriver {
 
 	@FindBy(id = "radioDrug")
 	private WebElement radioDrug;
+	
+	@FindBy(xpath = "//p[@id='linktodrugcostbenefit']/p/a")
+	private WebElement linkexistense;
 
 	private PageData claimsSummary;
 
@@ -361,5 +368,56 @@ public class ClaimSummaryPage extends UhcDriver {
 		System.out.println("claimSummaryJson----->"+claimSummaryJson);
 
 	}
+	
+	public String searchlinkexistense() {
+		try {
+			Thread.sleep(3000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		
+		if(linkexistense.isDisplayed())
+		{
+			return linkexistense.getText();
+		}
+			return null;
+	}
+	
+	public DrugCostandBenefitSummaryPage navigateToPrescriptionDrugCostPage() {
 
+		linkexistense.click();
+	
+		if (getTitle().equalsIgnoreCase(
+						"UnitedHealthcare Medicare Solutions | Drug Cost and Benefits Summary")) {
+			
+			return new DrugCostandBenefitSummaryPage(driver);
+		}
+
+		return null;
+	}
+
+	public boolean validateaddaplanlink() {
+		
+boolean presentLink =false;
+		
+		try {
+			if(addaplanlink.isDisplayed()){
+				
+				presentLink = true;
+				return presentLink;
+			}			  
+			 
+		} catch (NoSuchElementException e) {
+			presentLink = false;
+		}
+		return presentLink;
+		// TODO Auto-generated method stub
+		
+	}
+	
+	
+	
+	
+	
+	
 }

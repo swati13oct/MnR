@@ -13,9 +13,9 @@ import cucumber.junit.Cucumber;
  */
 @RunWith(Cucumber.class)
 @Cucumber.Options(glue = { "atdd.framework","acceptancetests.contactus" }, 
-		features = { "feature/contactus" }, 
+		features = { "feature/contactus/" }, 
 		format = {
-		"pretty", "html:reports/test-report" }, tags ={"@contactUsTest"})
+		"pretty", "html:reports/test-report","json:target/cucumber.json"}, tags ={"@contactUsTest"})
 public class RunMRAtddTestContactUs {
 
 }

@@ -39,7 +39,10 @@ public class PlanComparePage extends UhcDriver {
 
 	@FindBy(id = "disclosure_link")
 	private WebElement logOut;
-
+	
+	@FindBy(xpath="/html/body/div[7]/div/div/table/tbody/tr[5]/td/div[2]/div/div[2]/div[2]/div[2]/div/div[283]/div[2]/table/tbody/tr[41]/td[3]/a")
+	private WebElement nextYearButton;
+	
 	public PlanComparePage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
@@ -72,7 +75,7 @@ public class PlanComparePage extends UhcDriver {
 				}
 			} else if (elements.size() > 1) {
 
-				try {
+				try { 
 					if (elements.get(1).getText() != null
 							&& !(elements.get(1).getText().equalsIgnoreCase(""))) {
 						currentYearPlan.put(key, elements.get(1).getText());
@@ -138,14 +141,14 @@ public class PlanComparePage extends UhcDriver {
 		for (WebElement element : planSelectionOptions) {
 
 			if (element.getText().contains(planName)) {
-				ElementData elementData = new ElementData("tagName", "a");
+				ElementData elementData = new ElementData("tagName", "c");
 				builder.click(findChildElement(elementData, element)).perform();
 				break;
 			}
 
 		}
 
-		if (getTitle().equalsIgnoreCase("Compare 2016 Plans")) {
+		if (getTitle().equalsIgnoreCase("Compare 2017 Plans")) {
 			return new PlanComparePage(driver);
 		}
 		return null;
@@ -155,6 +158,17 @@ public class PlanComparePage extends UhcDriver {
 	public void logOut() {
 		logOut.click();
 
+	}
+
+	public PlanCompareDetails selectNextYearPlan() {
+		nextYearButton.click();
+		
+		if(getTitle().equalsIgnoreCase("Compare 2017 Plans"))
+		{
+			return new PlanCompareDetails(driver);
+			
+					}
+		return null;
 	}
 
 }

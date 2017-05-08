@@ -3,8 +3,6 @@
  */
 package acceptancetests.pharmacylocator.bluelayer;
 
-import gherkin.formatter.model.DataTableRow;
-
 import java.io.File;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -17,9 +15,6 @@ import org.openqa.selenium.WebDriver;
 import org.skyscreamer.jsonassert.JSONAssert;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import pages.acquisition.bluelayer.AcquisitionHomePage;
-import pages.acquisition.bluelayer.PharmacyResultPage;
-import pages.acquisition.bluelayer.PharmacySearchPage;
 import acceptancetests.atdd.data.CommonConstants;
 import acceptancetests.atdd.data.acquisition.PageConstants;
 import acceptancetests.pharmacylocator.data.PharmacySearchCommonConstants;
@@ -29,6 +24,10 @@ import cucumber.annotation.en.Given;
 import cucumber.annotation.en.Then;
 import cucumber.annotation.en.When;
 import cucumber.table.DataTable;
+import gherkin.formatter.model.DataTableRow;
+import pages.acquisition.bluelayer.AcquisitionHomePage;
+import pages.acquisition.bluelayer.PharmacyResultPage;
+import pages.acquisition.bluelayer.PharmacySearchPage;
 
 /**
  * @author pagarwa5
@@ -250,5 +249,35 @@ public class PharmacyLocatorUmsStepDefinition {
 		}
 
 	}
+
+	@Then("^the user validates the right rail widget and logo slider$")
+	public void validates_Right_Rail_Widget_And_Logo_UMS(){
+		PharmacySearchPage PharmacySearchPage = (PharmacySearchPage) getLoginScenario()
+				.getBean(PageConstants.PHARMACY_SEARCH_PAGE);
+	 //PharmacySearchPage.validateRightRailWidgetandLogo();		
+		
+		//PharmacySearchPage.logOut();
+		
+	}
+	
+	@Then("^the user validates Pharmacy Locator tool plan dropdown menu for the Medica and PCP member plan$")
+	public void validates_Pharmacy_Locator_Tool_Plan_UMS(){
+		PharmacySearchPage PharmacySearchPage = (PharmacySearchPage) getLoginScenario()
+				.getBean(PageConstants.PHARMACY_SEARCH_PAGE);
+		//PharmacySearchPage.validateMedicaandPCPMemberplan();		
+		
+		//PharmacySearchPage.logOut();
+		
+	}
+	@Then("^the user validates Search checkbox displayed dynamically related to the pharmacy network$")
+	public void validates_Pharmacy_Network_Displayed_Dynamically_UMS(){
+		PharmacySearchPage PharmacySearchPage = (PharmacySearchPage) getLoginScenario()
+				.getBean(PageConstants.PHARMACY_SEARCH_PAGE);
+		//PharmacySearchPage.clickOnShowPharmaciesForTheseServices();		
+		
+		//PharmacySearchPage.logOut();
+		
+	}
+
 	
 }

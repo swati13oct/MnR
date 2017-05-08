@@ -5,13 +5,13 @@ import java.util.List;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
 import acceptancetests.atdd.data.CommonConstants;
+import acceptancetests.atdd.data.ElementData;
 import acceptancetests.atdd.data.PageData;
 import acceptancetests.atdd.util.CommonUtility;
 import atdd.framework.UhcDriver;
@@ -44,7 +44,9 @@ public class PlanConfirmationPage extends UhcDriver {
 		if (currentUrl().contains("/confirmPlans")) {
 			return new CreateAccountPage(driver);
 		}
-		if (driver.findElement(By.tagName("h2")).getText()
+		ElementData elementData = new ElementData("tagName","h2");
+		WebElement webElement = findElement(elementData);
+		if (webElement.getText()
 				.equalsIgnoreCase("Confirm information for additional plans")) {
 			return new AdditionalPlanPage(driver);
 		}
@@ -97,6 +99,8 @@ public class PlanConfirmationPage extends UhcDriver {
 
 		}
 		planConfirmationJson = jsonObject;
+		
+		System.out.println("planConfirmationJson----->"+planConfirmationJson);
 	}
 
 }

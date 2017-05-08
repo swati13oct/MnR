@@ -1,19 +1,13 @@
 {
     "pharmacyTypes": [
         {
-            "pharmacyDropDown": "All Pharmacies"
-        },
-        {
-            "pharmacyDropDown": "Cost Savings Pharmacies"
-        },
-        {
-            "pharmacyDropDown": "Standard Network Pharmacy"
+            "pharmacyDropDown": "Available Pharmacies"
         },
         {
             "pharmacyDropDown": "Preferred Mail Service Pharmacy"
         }
     ],
-    "previousLink": "Previous 10 results",
+    "previousLink": "Previous results",
     "pharmacies": [
         {
             "pharmacyDistance": "0.72",
@@ -88,5 +82,5 @@
             "milesDropDown": "25 miles"
         }
     ],
-    "nextLink": "Next 10 results"
+    "nextLink": "Next results"
 }

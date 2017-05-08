@@ -14,6 +14,9 @@ public class PageConstants {
 	public static final String PLAN_CONFIRMATION_PAGE = "planConfirmationPage";
 
 	public static final String CREATE_ACCOUNT_PAGE = "createAccountPage";
+	
+	public static final String BENEFITS_SUMMARY_PAGE = "benefitsSummaryPage";
+	
 
 	public static final String REGISTRATION_SUCCESS_PAGE = "registrationSuccessPage";
 
@@ -55,6 +58,8 @@ public class PageConstants {
 	public static final String FORMS_AND_RESOURCES_PAGE = "formsandresourcesAarpPage";
 
 	public static final String BENEFITS_AND_COVERAGE_PAGE = "planBenefitsCoveragePage";
+	
+	public static final String BENEFITS_COVERAGE_PAGE = "benefitsCoveragePage";
 
 	public static final String ORDER_PLAN_MATERIALS_PAGE = "orderplanmaterialsPage";
 
@@ -67,10 +72,16 @@ public class PageConstants {
 	public static final String PAYMENT_HISTORY_PAGE = "paymentHistoryPage";
 
 	public static final String ONE_TIME_PAYMENT_PAGE = "oneTimePaymentPage";
+	
+	public static final String AUTOMATIC_PAYMENT_PAGE = "automaticPaymentPage";
 
 	public static final String CONFIRM_ONE_TIME_PAYMENT_PAGE = "confirmOneTimePaymentPage";
+	
+	public static final String CONFIRM_AUTOMATIC_PAYMENT_PAGE = "confirmAutomaticPaymentPage";
 
 	public static final String ONE_TIME_PAYMENT_SUCCESS_PAGE = "oneTimePaymentSuccessPage";
+	
+	public static final String AUTOMATIC_PAYMENT_SUCCESS_PAGE = "automaticPaymentSuccessPage";
 
 	public static final String SETUP_AUTO_PAYMENTS_PAGE = "setupAutoPaymentPage";
 
@@ -97,10 +108,16 @@ public class PageConstants {
 	public static final String MANAGE_DRUG_PAGE = "estimateCostPage";
 
 	public static final String ADD_DRUG_PAGE = "addDrugPage";
+	public static final String ADD_DRUG_DETAILS = "addDrugDetails";
+	public static final String SAVING_OPPORTUNITY = "savingopportunity";
+
 
 	public static final String PHARMACY_TYPES = "pharmacyTypeArray";
 
 	public static final String REGISTRATION_HOME_PAGE = "registrationHomePage";
+	public static final String DRUG_COST_ESTIMATOR_PAGE = "drugcostestimatorPage";
+
+	public static final String PASSWORD_ASSISTANCE_PAGE = "passwordAssistancePage";
 
 	public static final String LOGIN_PAGE = "loginPage";
 
@@ -110,5 +127,57 @@ public class PageConstants {
 
 	public static final String PLAN_COMPARE_PAGE = "planComparePage";
 	
+	
+	
+	public static final String ONE_TIME_PAYMENTS_DASHBOARD = "onetimePaymentsPageDashboard";
+	
+	public static final String AUTOMATIC_PAYMENTS_DASHBOARD = "automaticPaymentsPageDashboard";
+	
+	public static final String REVIEW_ONE_TIME_PAYMENTS_DASHBOARD = "reviewOnetimePaymentsPageDashboard";
+	
+	public static final String REVIEW_AUTOMATIC_PAYMENTS_DASHBOARD = "reviewAutomaticPaymentsPageDashboard";
 
+	
+
+	public static final String RALLY_TOOL_PAGE = "rallytool";
+
+	public static final String ACQUISITION_HOME_PAGE = "acquisitionhomepage";
+
+	
+
+	public static final String VPP_PLAN_SUMMARY_PAGE = "plansummaryPage";
+
+	public static final String VPP_PLAN_DETAILS_PAGE = "vppPlanDetailsPage";	
+
+	public static final String ESTIMATE_YOUR_DRUG_COST_PAGE = "estimateYourDrugCostPage";	
+
+	public static final String PLAN_COMPARE_DETAILS = "planCompareDetails";
+	
+	public static final String BENEFITS_AND_COVERAGE = "benefitsandcoverage";
+
+	public static final String MEMBER_BENEFITS_AND_COVERAGE_ACTUAL = "planDocsPDFActualJson";
+
+	public static final String MEMBER_BENEFITS_AND_COVERAGE_EXPECTED = "planDocsPDFExpectedJson";
+	
+	public static final String MYPCP_SIGN_IN_PAGE = "pcpSignInPage";
+	
+	public static final String MYPCP_ABOUT_US_PAGE = "pcpAboutUsPage";
+	
+	public static final String MYPCP_CONTACT_US_PAGE = "pcpContactUsPage";
+	
+	public static final String MYMEDICA_SIGN_IN_PAGE = "medicaSignInPage";
+	
+	public static final String MYMEDICA_ABOUT_US_PAGE = "medicaAboutUsPage";
+	
+	public static final String MYMEDICA_CONTACT_US_PAGE = "medicaContactUsPage";
+
+	public static final String RALLY_SSO_ACTUAL = "rallySSOActualJson";
+
+	public static final String REGISTRATION_ERROR_PAGE = "regErrorPage";
+
+	public static final String DASHBOARD_PAYMENT_HISTORY_PAGE = "dashboardPaymentOverview";
+
+	public static final String NEW_CLAIMS_SUMMARY_PAGE = "newClaimsSummaryPage";	
+	
+	public static final String NEW_CLAIM_DETAILS_PAGE = "newClaimDetailsPage";
 }

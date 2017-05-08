@@ -16,15 +16,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import pages.acquisition.bluelayer.AcquisitionHomePage;
 import pages.acquisition.bluelayer.OurPlansPage;
-import pages.acquisition.bluelayer.ZipcodeLookupPage;
-import pages.acquisition.bluelayer.ZipcodeSelectionPage;
 import pages.acquisition.bluelayer.ZipcodeLookupHomePage;
+import pages.acquisition.bluelayer.ZipcodeLookupPage;
 import pages.acquisition.bluelayer.ZipcodeSelectionHomePage;
+import pages.acquisition.bluelayer.ZipcodeSelectionPage;
 import acceptancetests.atdd.data.CommonConstants;
 import acceptancetests.atdd.data.acquisition.PageConstants;
 import acceptancetests.lookupzipcode.data.ZipLookupCommonConstants;
 import atdd.framework.MRScenario;
 import cucumber.annotation.en.And;
+import cucumber.annotation.en.Given;
 import cucumber.annotation.en.Then;
 import cucumber.annotation.en.When;
 import cucumber.table.DataTable;
@@ -41,18 +42,26 @@ public class LookupZipcodeUmsStepDefinition {
 	public MRScenario getLoginScenario() {
 		return loginScenario;
 	}
+	
+	
+	@Given("^the user is on the UHC medicare solutions landing page$")
+	public void user_uhc_medicare_solutions(){
+
+		WebDriver wd = getLoginScenario().getWebDriver();
+		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
+
+		AcquisitionHomePage acquisitionHomePage = new AcquisitionHomePage(wd);
+
+		getLoginScenario().saveBean(PageConstants.ACQUISITION_HOME_PAGE,
+				acquisitionHomePage);
+	}
 
 	@When("^the user clicks on lookup zipcode link from UMS home page$")
 	public void clicks_lookup_Zipcode_ums() {
 
-			WebDriver wd = getLoginScenario().getWebDriver();
-		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
-
-		AcquisitionHomePage umsAcquisitionHomePage = new AcquisitionHomePage(wd);
-
-		getLoginScenario().saveBean(PageConstants.UHC_ACQUISITION_HOME_PAGE,
-				umsAcquisitionHomePage);
-		ZipcodeLookupHomePage zipcodeLookupPage = umsAcquisitionHomePage
+		AcquisitionHomePage acquisitionHomePage = (AcquisitionHomePage) getLoginScenario().getBean(PageConstants.ACQUISITION_HOME_PAGE);
+		
+		ZipcodeLookupHomePage zipcodeLookupPage = acquisitionHomePage
 				.looksupforZipcodes();
 
 		if (zipcodeLookupPage != null) {
@@ -79,14 +88,14 @@ public class LookupZipcodeUmsStepDefinition {
 		String city = addressAttributesMap.get("City");
 		String state = addressAttributesMap.get("State");
 
-		ZipcodeLookupPage zipcodeLookupPage = (ZipcodeLookupPage) getLoginScenario()
-				.getBean(PageConstants.ZIP_LOOK_UP_PAGE);
-		ZipcodeSelectionPage zipcodeSelectionPage = zipcodeLookupPage
-				.enterAddressDetails(address, city, state);
+		ZipcodeLookupHomePage zipcodeLookupHomePage = (ZipcodeLookupHomePage) getLoginScenario()
+				.getBean(PageConstants.ZIP_LOOK_UP_HOME_PAGE);
+		ZipcodeSelectionHomePage zipcodeSelectionHomePage = zipcodeLookupHomePage.enterAddressDetails(address, city, state);
 
-		if (zipcodeSelectionPage != null) {
-			getLoginScenario().saveBean(PageConstants.ZIP_SELECTION_PAGE,
-					zipcodeSelectionPage);
+
+		if (zipcodeSelectionHomePage != null) {
+			getLoginScenario().saveBean(PageConstants.ZIP_SELECTION_HOME_PAGE,
+					zipcodeSelectionHomePage);
 			/* Get expected data */
 			String fileName = address;
 			String directory = CommonConstants.ACQUISITION_EXPECTED_DIRECTORY
@@ -101,8 +110,7 @@ public class LookupZipcodeUmsStepDefinition {
 					ZipLookupCommonConstants.ZIP_SELECTION_EXPECTED,
 					zipcodeSelectionExpectedJson);
 
-			JSONObject zipcodeSelectionActualJson = zipcodeSelectionPage.zipSelectionJson;
-			getLoginScenario().saveBean(
+			JSONObject zipcodeSelectionActualJson = zipcodeSelectionHomePage.zipSelectionhomeJson;			getLoginScenario().saveBean(
 					ZipLookupCommonConstants.ZIP_SELECTION_ACTUAL,
 					zipcodeSelectionActualJson);
 		}
@@ -111,11 +119,9 @@ public class LookupZipcodeUmsStepDefinition {
 
 	@When("^the user clicks on lookup zipcode link in our plans page in UMS$")
 	public void clicks_lookup_Zipcode_ourplan_ums() {
-
-		WebDriver wd = getLoginScenario().getWebDriver();
-		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
-
-		OurPlansPage ourPlansPage = new OurPlansPage(wd);
+		
+		AcquisitionHomePage acquisitionHomePage = (AcquisitionHomePage) getLoginScenario().getBean(PageConstants.ACQUISITION_HOME_PAGE);
+		OurPlansPage ourPlansPage = acquisitionHomePage.navigationSectionOurPlansLinkClick();
 
 		getLoginScenario().saveBean(PageConstants.OUR_PLANS_PAGE, ourPlansPage);
 

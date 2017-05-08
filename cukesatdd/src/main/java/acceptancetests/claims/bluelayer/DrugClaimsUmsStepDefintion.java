@@ -20,6 +20,7 @@ import pages.member.bluelayer.AccountHomePage;
 import pages.member.bluelayer.ClaimDetailsPage;
 import pages.member.bluelayer.ClaimSummaryPage;
 import pages.member.bluelayer.DrugClaimDetailsPage;
+import pages.member.bluelayer.DrugCostandBenefitSummaryPage;
 import pages.member.bluelayer.LoginPage;
 import pages.member.bluelayer.TerminatedHomePage;
 import acceptancetests.atdd.data.CommonConstants;
@@ -102,7 +103,6 @@ public class DrugClaimsUmsStepDefintion {
 				.getExpectedJson(userName);
 		JSONObject accountHomeExpectedJson = accountHomePage
 				.getExpectedData(expectedDataMap);
-
 		if (accountHomePage != null) {
 			getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
 			getLoginScenario().saveBean(PageConstants.ACCOUNT_HOME_PAGE,
@@ -170,8 +170,7 @@ public class DrugClaimsUmsStepDefintion {
 
 		.getBean(PageConstants.DRUG_CLAIM_SUMMARY_PAGE);
 
-		claimSummaryPage = claimSummaryPage.searchDrugClaimsByPeriod(
-				timeAttributesMap, planCategory);
+		claimSummaryPage = claimSummaryPage.searchDrugClaimsByPeriod(timeAttributesMap, planCategory);
 		Map<String, JSONObject> expectedDataMap = (Map<String, JSONObject>) getLoginScenario()
 				.getBean(CommonConstants.EXPECTED_DATA_MAP);
 		JSONObject claimSummaryExpectedJson = claimSummaryPage.getExpectedData(
@@ -482,5 +481,48 @@ public class DrugClaimsUmsStepDefintion {
 		claimDetailsPage.logout();
 
 	}
+	
+	@When("^I want to display the link to the My Drug Costs and Benefits page$")
+	public void I_want_to_display_the_link_to_the_My_Drug_Costs_and_Benefits_page() {
+		
+		String linkexistense= null;
+		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstants.ACCOUNT_HOME_PAGE);
+		ClaimSummaryPage claimSummaryPage = accountHomePage.navigateToDrugClaimsSummary("");
+		if (claimSummaryPage != null) {
 
+			getLoginScenario().saveBean(PageConstants.DRUG_CLAIM_SUMMARY_PAGE, claimSummaryPage);
+
+			getLoginScenario().saveBean(PageConstants.CLAIM_SUMMARY_PAGE, claimSummaryPage);
+
+			Assert.assertTrue(true);
+		} else {
+			Assert.fail("claimSummaryPage Not Available");
+		}
+		
+
+		linkexistense = claimSummaryPage.searchlinkexistense();
+		System.out.println(linkexistense);
+		if (linkexistense != null) {
+			getLoginScenario().saveBean(PageConstants.DRUG_CLAIM_SUMMARY_PAGE, claimSummaryPage);		
+		} else {
+			Assert.assertFalse("Link does not exist", false);
+		}
+
+		
+	}
+
+	@Then("^We should be able to reach My Drug Costs and Benefits page$")
+	public void I_will_be_able_to_do_so_in_AEM_without_IT_intervention() {
+		ClaimSummaryPage claimSummaryPage = (ClaimSummaryPage) getLoginScenario().getBean(PageConstants.CLAIM_SUMMARY_PAGE);
+		
+		DrugCostandBenefitSummaryPage drugcostbenefPage= claimSummaryPage.navigateToPrescriptionDrugCostPage();
+		if(drugcostbenefPage!= null){
+			Assert.assertTrue(true);
+			
+		}else{
+			Assert.assertTrue("Drug cost and Benefit is not reached after click on link",false);
+		}
+		
+	}
 }
+		

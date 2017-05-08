@@ -7,7 +7,6 @@ import gherkin.formatter.model.DataTableRow;
 
 import java.io.File;
 import java.util.HashMap;
-import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -20,17 +19,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import pages.acquisition.ulayer.AcquisitionHomePage;
 import pages.acquisition.ulayer.EnquiryKitConfirmationPage;
-import pages.acquisition.ulayer.LoginAssistancePage;
-import pages.acquisition.ulayer.LoginAssitanceMessagePage;
 import pages.acquisition.ulayer.PDPEnrollementGuidePage;
 import pages.acquisition.ulayer.PDPRequestHelpAndInformationPage;
-import pages.acquisition.ulayer.PersonalIdentificationPage;
-import pages.member.ulayer.LoginPage;
 import acceptancetests.atdd.data.CommonConstants;
 import acceptancetests.atdd.data.acquisition.PageConstants;
-import acceptancetests.loginassistance.data.LoginAssistanceCommonConstants;
 import acceptancetests.pdpenquirykit.data.EnquiryKitCommonConstants;
-import acceptancetests.vpp.data.VPPCommonConstants;
 import atdd.framework.MRScenario;
 import cucumber.annotation.After;
 import cucumber.annotation.en.And;
@@ -134,7 +127,7 @@ public class PDPEnquiryKitAarpStepDefintion {
 		}
 	}
 	
-	@Then("^the user validates the enquiry kit confirmation page in AARP site$")
+	@Then("^the user validates the inquiry kit confirmation page in AARP site$")
 	public void user_validates_enquiry_kit_confirmation_page_aarp()
 	{
 		JSONObject enquiryKitConfirmationExpectedJson = (JSONObject) getLoginScenario().getBean(

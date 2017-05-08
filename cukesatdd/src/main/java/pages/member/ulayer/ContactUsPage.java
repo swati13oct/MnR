@@ -26,8 +26,15 @@ public class ContactUsPage extends UhcDriver{
 	@FindBy(id = "disclosure_link")
 	private WebElement logOut;
 	
+	@FindBy(xpath="//*[@id='secureWidget']/div[1]")
+	private WebElement securewidget;
+	
 	private PageData contactUs;
-
+	
+	private PageData secureemailwidgetData;
+	
+	private JSONObject secureemailwidgetDataJson;
+	
 	public JSONObject contactUsJson;
 	
 	public ContactUsPage(WebDriver driver) {
@@ -62,14 +69,52 @@ public class ContactUsPage extends UhcDriver{
 
 	public JSONObject getExpectedData(Map<String, JSONObject> expectedDataMap) {
 
-		JSONObject globalExpectedJson = expectedDataMap
-				.get(CommonConstants.GLOBAL);
+		/*JSONObject globalExpectedJson = expectedDataMap
+				.get(CommonConstants.GLOBAL);*/
 		JSONObject contactUsExpectedJson = expectedDataMap
 				.get(CommonConstants.CONTACT_US);
-		contactUsExpectedJson = CommonUtility.mergeJson(
-				contactUsExpectedJson, globalExpectedJson);
+		/*contactUsExpectedJson = CommonUtility.mergeJson(
+				contactUsExpectedJson, globalExpectedJson);*/
 		return contactUsExpectedJson;
 	}
+	
+	public void validatesecureemail()
+	{
+		if (securewidget.isDisplayed())
+		{
+			System.out.println("Secure widget is displayed");
+		}
+		else
+		{
+			System.out.println("Secure widget is not  displayed");
+		}
+	}
+
+	public JSONObject getsecurewidget() {
+		String fileName = CommonConstants.AARPM_SECURE_EMAIL_DATA;
+		secureemailwidgetData = CommonUtility.readPageData(fileName,
+				CommonConstants.PAGE_OBJECT_DIRECTORY_ULAYER_MEMBER);
+
+		JSONObject jsonObject = new JSONObject();
+		for (String key : secureemailwidgetData.getExpectedData().keySet()) {
+			WebElement element = findElement(secureemailwidgetData.getExpectedData()
+					.get(key));
+			if (element != null) {
+				if (validate(element)) {
+					try {
+						jsonObject.put(key, element.getText());
+					} catch (JSONException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				}
+			}
+		}
+		secureemailwidgetDataJson = jsonObject;
+
+		return secureemailwidgetDataJson;
+	}
+
 
 
 	public void logOut() {

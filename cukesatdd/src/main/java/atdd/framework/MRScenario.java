@@ -15,6 +15,7 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Hashtable;
@@ -32,17 +33,29 @@ import javax.naming.NamingException;
 import javax.naming.directory.DirContext;
 import javax.naming.directory.InitialDirContext;
 
+import org.apache.commons.lang3.StringUtils;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.openqa.selenium.Dimension;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.chrome.ChromeOptions;import org.openqa.selenium.firefox.FirefoxBinary;
+import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.firefox.FirefoxBinary;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxProfile;
-import org.openqa.selenium.remote.DesiredCapabilities;import org.springframework.ldap.core.DistinguishedName;
+import org.openqa.selenium.htmlunit.HtmlUnitDriver;
+import org.openqa.selenium.ie.InternetExplorerDriver;
+import org.openqa.selenium.phantomjs.PhantomJSDriver;
+import org.openqa.selenium.phantomjs.PhantomJSDriverService;
+import org.openqa.selenium.remote.DesiredCapabilities;
+import org.springframework.ldap.core.DistinguishedName;
 import org.springframework.stereotype.Component;
 
 import acceptancetests.atdd.data.CommonConstants;
+
+
+import com.gargoylesoftware.htmlunit.BrowserVersion;
+import com.gargoylesoftware.htmlunit.WebClient;
 
 /**
  * 
@@ -59,19 +72,20 @@ public class MRScenario {
 
 	private static Map<String, List<String>> umsMemberAttributesMap = new LinkedHashMap<String, List<String>>();
 
-	private static Map<String, List<String>> registrationDataMap = new LinkedHashMap<String, List<String>>();
-
 	private static Map<String, List<String>> ampRegistrationDataMap = new LinkedHashMap<String, List<String>>();
 
 	private static Map<String, Map<String, JSONObject>> expectedDataMapUlayer = new LinkedHashMap<String, Map<String, JSONObject>>();
 
 	private static Map<String, Map<String, JSONObject>> expectedDataMapBluelayer = new LinkedHashMap<String, Map<String, JSONObject>>();
 
+	private static Map<String, List<String>> umsRegistrationDataMap = new LinkedHashMap<String, List<String>>();
+
 	private static Map<String, String> props = new HashMap<String, String>();
 
-	public static String environment;
+	public static String environment, browser;
 
 	private static final String DIRECTORY = "/src/main/resources/";
+	public static int count = 0;
 
 	public void saveBean(String id, Object object) {
 		scenarioObjectMap.put(id, object);
@@ -97,7 +111,7 @@ public class MRScenario {
 	static {
 
 		props = getProperties();
-
+		browser = props.get("browser");
 		/* Set acqusisition and member urls */
 		environment = props.get("Environment");
 
@@ -133,7 +147,7 @@ public class MRScenario {
 					userName = memberAttributes[0];
 
 				}
-				boolean memberFound = false;
+				boolean memberFound = true;
 				if (!ampMemberAttributesMap.isEmpty()) {
 					boolean memberExists = false;
 					for (String key : ampMemberAttributesMap.keySet()) {
@@ -143,12 +157,12 @@ public class MRScenario {
 						}
 					}
 					if (!memberExists) {
-						memberFound = checkMemberFound(userName, con, ctx,
-								defaultSchema);
+						// memberFound = checkMemberFound(userName, con, ctx,
+						// defaultSchema);
 					}
 				} else {
-					memberFound = checkMemberFound(userName, con, ctx,
-							defaultSchema);
+					// memberFound = checkMemberFound(userName, con, ctx,
+					// defaultSchema);
 				}
 
 				if (memberFound) {
@@ -175,7 +189,7 @@ public class MRScenario {
 					userName = memberAttributes[0];
 
 				}
-				boolean memberFound = false;
+				boolean memberFound = true;
 				if (!umsMemberAttributesMap.isEmpty()) {
 					boolean memberExists = false;
 					for (String key : umsMemberAttributesMap.keySet()) {
@@ -185,12 +199,12 @@ public class MRScenario {
 						}
 					}
 					if (!memberExists) {
-						memberFound = checkMemberFound(userName, con, ctx,
-								defaultSchema);
+						// memberFound = checkMemberFound(userName, con, ctx,
+						// defaultSchema);
 					}
 				} else {
-					memberFound = checkMemberFound(userName, con, ctx,
-							defaultSchema);
+					// memberFound = checkMemberFound(userName, con, ctx,
+					// defaultSchema);
 				}
 
 				if (memberFound) {
@@ -198,21 +212,6 @@ public class MRScenario {
 				}
 
 			}
-
-			InputStream memberTypeStream2 = ClassLoader.class
-					.getResourceAsStream("/database/Registration-data.csv");
-			BufferedReader deregistermemberReader = new BufferedReader(
-					new InputStreamReader(memberTypeStream2));
-			while ((line = deregistermemberReader.readLine()) != null) {
-				// use comma as separator
-				String[] memberAttributes = line.split(cvsSplitBy);
-				List<String> attrList = Arrays.asList(memberAttributes)
-						.subList(1, memberAttributes.length);
-				String userName = memberAttributes[0];
-				registrationDataMap.put(userName, attrList);
-
-			}
-
 			InputStream ampMemberTypeStream = ClassLoader.class
 					.getResourceAsStream("/database/AMP-Registration-data.csv");
 			BufferedReader registermemberReader = new BufferedReader(
@@ -226,9 +225,25 @@ public class MRScenario {
 				ampRegistrationDataMap.put(userName, attrList);
 
 			}
-		}
 
-		catch (IOException e) {
+			InputStream umsMemberTypeStream = ClassLoader.class
+					.getResourceAsStream("/database/UMS-Registration-data.csv");
+			BufferedReader umsRegistermemberReader = new BufferedReader(
+					new InputStreamReader(umsMemberTypeStream));
+			while ((line = umsRegistermemberReader.readLine()) != null) {
+				// use comma as separator
+				String[] memberAttributes = line.split(cvsSplitBy);
+				List<String> attrList = Arrays.asList(memberAttributes)
+						.subList(1, memberAttributes.length);
+				String userName = memberAttributes[0];
+				umsRegistrationDataMap.put(userName, attrList);
+
+			}
+			List<String> tempList = new ArrayList<String>();
+			tempList.add("MAPD_TestOnly");
+			tempList.add("Individual");
+			umsMemberAttributesMap.put("Dec_Sierra_001", tempList);
+		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			// schak38: when member-types csv is not found
 			e.printStackTrace();
@@ -249,7 +264,7 @@ public class MRScenario {
 			}
 			try {
 				ctx.close();
-			} catch (NamingException e) {
+			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
@@ -358,7 +373,7 @@ public class MRScenario {
 		Statement stmt;
 		ResultSet rs = null;
 
-		for (String userName : registrationDataMap.keySet()) {
+		for (String userName : umsRegistrationDataMap.keySet()) {
 
 			try {
 				stmt = con.createStatement();
@@ -508,33 +523,36 @@ public class MRScenario {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
 	}
 
 	private static Map<String, String> getProperties() {
-
 		Map<String, String> props = new HashMap<String, String>();
 		Properties prop = new Properties();
-		InputStream input = null;
-		File propertyFile = new File(CommonConstants.PROPERTY_FILE_LOCATION);
-		try {
-			input = new FileInputStream(propertyFile);
-		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		String propertiesFileToPick = System.getProperty("environment");
+		//String propertiesFileToPick = "team-b";
+		System.out.println("Using properties for environment ...."
+				+ propertiesFileToPick);
+		if (StringUtils.isBlank(propertiesFileToPick)) {
+			System.out
+			.println("Using CI as default since environment was not passed in !!!");
+			propertiesFileToPick = CommonConstants.DEFAULT_ENVIRONMENT_CI;
 		}
+		// Read properties from classpath
+		StringBuffer propertyFilePath = new StringBuffer(
+				CommonConstants.PROPERTY_FILE_FOLDER);
+		propertyFilePath.append("/").append(propertiesFileToPick).append("/")
+		.append(CommonConstants.PROPERTY_FILE_NAME);
+		InputStream is = ClassLoader.class.getResourceAsStream(propertyFilePath
+				.toString());
 		try {
-			prop.load(input);
+			prop.load(is);
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
 		for (String key : prop.stringPropertyNames()) {
 			String value = prop.getProperty(key);
 			props.put(key, value);
 		}
-
 		return props;
 	}
 
@@ -628,8 +646,11 @@ public class MRScenario {
 				expectedDataMapUlayer.put(ampKey, ampObjectMap);
 		}
 
-		Set<String> keySetUms = registrationDataMap.keySet();
+		Set<String> keySetUms = umsRegistrationDataMap.keySet();
 		for (String umsKey : keySetUms) {
+			if(umsKey.equalsIgnoreCase("q1_feb_grp043")){
+				System.out.println("stop at here 1...........................");
+			}
 			Map<String, JSONObject> umsObjectMap = new HashMap<String, JSONObject>();
 			for (int i = 0; i < CommonConstants.PAGES_BLUELAYER.length; i++) {
 				JSONObject jsonObject = readExpectedJson(umsKey,
@@ -641,7 +662,8 @@ public class MRScenario {
 				}
 			}
 			if (!umsObjectMap.isEmpty())
-				expectedDataMapBluelayer.put(umsKey, umsObjectMap);
+				System.out.println("stop at here 2...........................");
+			expectedDataMapBluelayer.put(umsKey, umsObjectMap);
 		}
 
 		Set<String> umsKeySet = umsMemberAttributesMap.keySet();
@@ -684,8 +706,8 @@ public class MRScenario {
 											.getDirectory());
 							if (jsonObject != null) {
 								pageObjectMap
-										.put(CommonConstants.PAGES_REGISTRATION_ULAYER[i]
-												.getPageName(), jsonObject);
+								.put(CommonConstants.PAGES_REGISTRATION_ULAYER[i]
+										.getPageName(), jsonObject);
 							}
 
 						}
@@ -715,10 +737,11 @@ public class MRScenario {
 
 		}
 
-		Set<String> registrationUmsKeySet = registrationDataMap.keySet();
+		Set<String> registrationUmsKeySet = umsRegistrationDataMap.keySet();
 		for (String registrationKey : registrationUmsKeySet) {
-			if (registrationDataMap.get(registrationKey).size() > 2) {
-				List<String> value = registrationDataMap.get(registrationKey);
+			if (umsRegistrationDataMap.get(registrationKey).size() > 2) {
+				List<String> value = umsRegistrationDataMap
+						.get(registrationKey);
 				List<String> subValue = value.subList(1, 3);
 				if (!subValue.isEmpty()) {
 					String[] key = { value.get(0) + "_" + value.get(1),
@@ -732,8 +755,8 @@ public class MRScenario {
 											.getDirectory());
 							if (jsonObject != null) {
 								pageObjectMap
-										.put(CommonConstants.PAGES_REGISTRATION_BLUELAYER[i]
-												.getPageName(), jsonObject);
+								.put(CommonConstants.PAGES_REGISTRATION_BLUELAYER[i]
+										.getPageName(), jsonObject);
 							}
 
 						}
@@ -742,8 +765,9 @@ public class MRScenario {
 					}
 				}
 			} else {
-				String key = registrationDataMap.get(registrationKey).get(0)
-						+ "_" + registrationDataMap.get(registrationKey).get(1);
+				String key = umsRegistrationDataMap.get(registrationKey).get(0)
+						+ "_"
+						+ umsRegistrationDataMap.get(registrationKey).get(1);
 				Map<String, JSONObject> pageObjectMap = new HashMap<String, JSONObject>();
 				for (int i = 0; i < CommonConstants.PAGES_REGISTRATION_BLUELAYER.length; i++) {
 					JSONObject jsonObject = readExpectedJson(key,
@@ -768,6 +792,7 @@ public class MRScenario {
 			fileName = fileName.replaceAll("/", "_");
 		}
 		fileName = fileName + ".json";
+
 		JSONObject jsonObject = null;
 		String parentDirectory = null;
 		try {
@@ -781,6 +806,8 @@ public class MRScenario {
 			stream = new FileInputStream(parentDirectory + DIRECTORY
 					+ directory + fileName);
 		} catch (FileNotFoundException e) {
+			System.out.println("FILE NOT FOUND: " + parentDirectory + DIRECTORY
+					+ directory + fileName);
 			return jsonObject;
 		}
 
@@ -814,15 +841,24 @@ public class MRScenario {
 		// Need to update here a method to replace special characters with
 		// \special Characters
 		try {
-			jsonObject = new JSONObject(response);
+			if (!response.isEmpty()) {
+				jsonObject = new JSONObject(response);
+			}
 		} catch (JSONException e) {
-			// TODO Auto-generated catch block
+			System.out.println("EMPTY RESPONSE: " + parentDirectory + DIRECTORY
+					+ directory + fileName);
 			e.printStackTrace();
 		}
+
+		//		if (fileName.equalsIgnoreCase("DentalPlatinumLis2.json")) {
+		//			System.out.println("===>File:" + parentDirectory + DIRECTORY
+		//					+ directory + fileName + "Value => " + jsonObject);
+		//		}
 		return jsonObject;
 	}
 
 	public Map<String, JSONObject> getExpectedJson(String user) {
+
 
 		if (null != user && expectedDataMapUlayer.containsKey(user)) {
 			return expectedDataMapUlayer.get(user);
@@ -838,19 +874,153 @@ public class MRScenario {
 		}
 	}
 
-public WebDriver getWebDriver() {
-		/*webDriver = new FirefoxDriver();
-		webDriver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
-		return webDriver;*/
-	
-    File pathToBinary = new File("C:/Users/pagarwa5/AppData/Local/Mozilla Firefox/firefox.exe");
-    FirefoxBinary ffBinary = new FirefoxBinary(pathToBinary);
-    FirefoxProfile firefoxProfile = new FirefoxProfile();       
-    webDriver = new FirefoxDriver(ffBinary,firefoxProfile);
-    webDriver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
-	return webDriver;
+	/**
+	 * Set values in your config file to use the various web browsers. Add the following 
+	 * two lines to your config file: 
+	 * 
+	 *  WebDriver=PHANTOMJS
+      * BrowserPathToBinary=C:\\Apps\\phantomjs-2.1.1-windows\\bin\\phantomjs.exe
+      * 
+      * or for Fire Fox:
+      * 
+      * WebDriver=FIREFOX
+      * BrowserPathToBinary=C:\\Program Files (x86)\\Mozilla Firefox\\firefox.exe
+      * 
+      * Of course your path to the binary will be different.
+      * 
+      * PhantomJS supports mimicking browsers.  By changing the agentString, one can spoof
+      * a browser type for example, this is a desktop string:
+      * 
+      * Mozilla/5.0 (Windows NT 6.0) AppleWebKit/535.1 (KHTML, like Gecko) Chrome/13.0.782.41 Safari/535.1
+      * 
+      * Using this string causes PhantomJS to act like a desktop browser and will access desktop versions of websites.
+      * This is a mobile string:
+      * 
+      * Mozilla/5.0 (Linux; U; Android 2.3.3; en-us; LG-LU3000 Build/GRI40) AppleWebKit/533.1 (KHTML, like Gecko) Version/4.0 Mobile Safari/533.1
+      * 
+      * Using this string makes PhantomJS identfy itself as a mobile browser (on a mobile device) and will allow you to use the mobile versions
+      * of websites.
+      * 
+      * By default, When a job is run in Jenkins, the values defines in Jenkins will override values in the config file, but will not change them.  If you 
+      * look at the Jenkins job, it specifies a browser type and it should be PhantomJS.
+      * Anything else may be a problem.
+      */
+	public WebDriver getWebDriver() {
+
+        //Is system propery exists defining JENKINS_BROWSER, we're running in JENKINS and
+		//will prefer those browser properties.
+		String browser = (null == System.getProperty(CommonConstants.JENKINS_BROWSER)
+				? props.get(CommonConstants.DESKTOP_WEBDRIVER) : System.getProperty(CommonConstants.JENKINS_BROWSER));
+		
+		
+		String agent = (null == System.getProperty(CommonConstants.JENKINS_BROWSER_AGENT_STRING)
+				? props.get(CommonConstants.DESKTOP_BROWSER_AGENT_STRING) : System.getProperty(CommonConstants.JENKINS_BROWSER_AGENT_STRING));
+		
+		
+		if (browser.equalsIgnoreCase(CommonConstants.JENKINS_BROWSER_PHANTOMJS)) {
+			System.out.println("PHANTOMJS Agent: " + agent);
+		}
+		
+		// Again, Jenkins takes precedent. 
+		String pathToBinary = (null == System.getProperty("phantomjs") ? props.get("BrowserPathToBinary")
+				: System.getProperty("phantomjs"));
+		
+		
+		System.out.println("getWebDriver: returning driver for " + browser);
+		// if webDriver is null, create one, otherwise send the existing one
+		// back.
+		// This has to happen to preserve the state of webDriver so that we can
+		// take screenshots at the end.
+		if (null == webDriver) {
+			System.out.println("New WebDriver CREATED");
+			
+			
+			// Choose your browser based on name. The name value is what is in
+			// CommonConstants.
+			// If the browser isn't configured (null) or it's set to HTMLUNIT,
+			// use HTMLUNIT.
+			// This is the default browser when I checked out the code, so it's
+			// the default
+			if (null == browser || browser.equalsIgnoreCase(CommonConstants.HTMLUNIT_BROWSER)) {
+				// use the HtmlUnit Driver
+				HtmlUnitDriver htmlUnitDriver = new HtmlUnitDriver(BrowserVersion.BEST_SUPPORTED) {
+					@Override
+					protected WebClient modifyWebClient(WebClient client) {
+						client.getOptions().setThrowExceptionOnScriptError(false);
+						return client;
+					}
+				};
+				htmlUnitDriver.setJavascriptEnabled(true);
+
+				webDriver = htmlUnitDriver;
+				webDriver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
+				webDriver.manage().window().maximize();
+			} else if (browser.equalsIgnoreCase(CommonConstants.JENKINS_BROWSER_PHANTOMJS)) {
+				// otherwise if we have a Jenkins browser defined, we use it.
+				DesiredCapabilities caps = new DesiredCapabilities();
+				caps.setCapability(PhantomJSDriverService.PHANTOMJS_EXECUTABLE_PATH_PROPERTY, pathToBinary);
+				//from Jarvis
+				caps.setCapability(PhantomJSDriverService.PHANTOMJS_PAGE_SETTINGS_PREFIX + "userAgent", agent);
+				caps.setJavascriptEnabled(true);
+				caps.setCapability(PhantomJSDriverService.PHANTOMJS_CLI_ARGS,
+						new String[] { "--web-security=no", "--ignore-ssl-errors=yes", "--ssl-protocol=any" });
+				
+				//end from jarvis
+				webDriver = new PhantomJSDriver(caps);
+				webDriver.manage().window().setSize(new Dimension(1400,1000));
+				webDriver.manage().timeouts().pageLoadTimeout(200,TimeUnit.SECONDS);
+			} else if (browser.equalsIgnoreCase(CommonConstants.FIREFOX_BROWSER)) {
+				FirefoxBinary ffBinary = new FirefoxBinary(new File(pathToBinary));
+				FirefoxProfile firefoxProfile = new FirefoxProfile();
+				webDriver = new FirefoxDriver(ffBinary, firefoxProfile);
+				webDriver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
+				webDriver.manage().window().maximize();
+			} else if (browser.equalsIgnoreCase(CommonConstants.CHROME_BROWSER)) {
+				Map<String, Object> chromeOptions = new HashMap<String, Object>();
+				chromeOptions.put("binary", pathToBinary);
+				DesiredCapabilities capabilities = DesiredCapabilities.chrome();
+				capabilities.setCapability(ChromeOptions.CAPABILITY, chromeOptions);
+				webDriver = new ChromeDriver(capabilities);
+			} else if (browser.equalsIgnoreCase(CommonConstants.IE_BROWSER)) {
+				System.setProperty("webdriver.ie.driver",
+						pathToBinary);
+				DesiredCapabilities ieCaps = DesiredCapabilities.internetExplorer();
+				ieCaps.setCapability(InternetExplorerDriver.INTRODUCE_FLAKINESS_BY_IGNORING_SECURITY_DOMAINS, true);
+				webDriver = new InternetExplorerDriver(ieCaps);
+				webDriver.manage().window().maximize();
+				return webDriver;
+			} else if (browser.equalsIgnoreCase(CommonConstants.MOBILE_BROWSER)) {
+				Map<String, String> mobileEmulation = new HashMap<String, String>();
+				mobileEmulation.put("deviceName", props.get(CommonConstants.DEVICE_NAME));
+				Map<String, Object> chromeOptions = new HashMap<String, Object>();
+				chromeOptions.put("mobileEmulation", mobileEmulation);
+				DesiredCapabilities capabilities = DesiredCapabilities.chrome();
+				capabilities.setCapability("chrome.switches", Arrays.asList("--start-maximized"));
+				capabilities.setCapability(ChromeOptions.CAPABILITY, chromeOptions);
+				System.setProperty("webdriver.chrome.driver", props.get(CommonConstants.CHROME_DRIVER));
+				webDriver = new ChromeDriver(capabilities);
+				return webDriver;
+			}
+		}
+		return webDriver;
 
 	}
+
+	public WebDriver getIEDriver() {
+		System.setProperty("webdriver.ie.driver",
+				"C:/Users/pgupta15/Downloads/IEDriverServer_x64_2.27.0/IEDriverServer.exe");
+		DesiredCapabilities ieCaps = DesiredCapabilities.internetExplorer();
+		ieCaps.setCapability(
+				InternetExplorerDriver.INTRODUCE_FLAKINESS_BY_IGNORING_SECURITY_DOMAINS,
+				true);
+		webDriver = new InternetExplorerDriver(ieCaps);
+		webDriver.manage().window().maximize();
+		return webDriver;
+	}
+
+	/*
+	 * @return
+	 */
 	public WebDriver getMobileWebDriver() {
 		Map<String, String> mobileEmulation = new HashMap<String, String>();
 		mobileEmulation.put("deviceName",
@@ -865,6 +1035,14 @@ public WebDriver getWebDriver() {
 				props.get(CommonConstants.CHROME_DRIVER));
 		webDriver = new ChromeDriver(capabilities);
 		return webDriver;
+	}
+
+	public void nullifyWebDriver() {
+		if (null != webDriver) {
+			webDriver.close();
+			webDriver = null;
+		}
+
 	}
 
 }

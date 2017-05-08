@@ -11,7 +11,17 @@ import acceptancetests.atdd.data.ulayer.Page;
  */
 public class CommonConstants {
 
-	public static final String PROPERTY_FILE_LOCATION = "C:/portal/conf/mratdd/config.properties";
+	public static final String FLOW_NAME = "registration/planconfirmation";
+
+	public static final String REG_FAILURE_FLOW_NAME = "registration/registrationfailure";
+
+	public static final String LOGIN_ASSISTANCE_FAILURE_FLOW_NAME = "loginassistance/loginassistancefailure";
+
+	public static final String PROPERTY_FILE_FOLDER = "/config";
+
+	public static final String PROPERTY_FILE_NAME = "config.properties";
+
+	public static final String DEFAULT_ENVIRONMENT_CI = "ci";
 
 	public static final String UID = "uid";
 
@@ -34,12 +44,43 @@ public class CommonConstants {
 	public static final String WEBDRIVER = "webDriver";
 
 	public static final String DEVICE_NAME = "DeviceName";
-
+	
+	//Browser Drivers for WebDriver
 	public static final String CHROME_DRIVER = "ChromeDriver";
+	
+	/*
+	 * This parm is set in Jenkins and should evaluate to null when running 
+	 * in a desktop environment.
+	 */
+	public static final String JENKINS_BROWSER = "JENKINS_BROWSER";
+	
+	//The following identify the browser to the website.   DESKTOP_BROWSER_AGENT_STRING is from 
+	//the config file, JENKINS_BROWSER_AGENT_STRING is a SYSTEM parameter set in Jenkins.
+	public static final String DESKTOP_BROWSER_AGENT_STRING = "BrowserAgentString";
+	public static final String JENKINS_BROWSER_AGENT_STRING = "JENKINS_BROWSER_AGENT_STRING";
 
+	
+	//Browsers supported in MRScenario
+	public static final String JENKINS_BROWSER_PHANTOMJS = "PHANTOMJS";
+	public static final String HTMLUNIT_BROWSER = "HTMLUNIT";
+	public static final String FIREFOX_BROWSER = "FIREFOX";
+	public static final String CHROME_BROWSER = "CHROME";
+	public static final String IE_BROWSER = "IE";
+	public static final String MOBILE_BROWSER = "MOBILE";
+	
+	public static final String DESKTOP_WEBDRIVER = "WebDriver";
+	
 	public static final String PLAN_BENEFITS_AND_COVERAGE = "planBenefitsAndCoverage";
 
 	public static final String BENEFITS_AND_COVERAGE_PDP_NONLIS_NONUS_PAGE_DATA = "planbenefitsandcoveragenonlisnotusother.json";
+
+	public static final String BENEFITS_AND_COVERAGE_PAGE_DATA = "benefitsandcoveragelisnonlis.json";
+	
+	
+
+	public static final String BENEFITS_AND_COVERAGE_PAGE_DIRECTORY = "/jsonresponse/member/ulayer/benefitsandcoverage/";
+
+	
 
 	public static final String BENEFITS_AND_COVERAGE_DIRECTORY = "/jsonresponse/member/ulayer/planbenefitsandcoverage/";
 
@@ -47,25 +88,26 @@ public class CommonConstants {
 
 	public static final String PAGE_OBJECT_DIRECTORY_ULAYER_MEMBER = "/page-objects/member/ulayer/";
 
-	public static final String PLAN_SUMMARY_PAGE_DATA = "plansummarypdp.json";
-	
-	
+	public static final String PAGE_OBJECT_DIRECTORY_BLAYER_MEMBER = "/page-objects/member/bluelayer/";
+	public static final String PAGE_OBJECT_DIRECTORY_DCE_MEMBER = "/page-objects/member/dashboard/drugcostestimator/";
 
-	public static final String PLAN_SUMMARY_DIRECTORY = "/jsonresponse/Member/ulayer/planSummary/";
+	public static final String PLAN_SUMMARY_PAGE_DATA = "plansummarypdp.json";
+
+	public static final String PLAN_SUMMARY_DIRECTORY = "/jsonresponse/member/ulayer/planSummary/";
 
 	public static final String REGISTRATION_COMMON_BLUELAYER_DIRECTORY = "/jsonresponse/member/bluelayer/registration/registrationcommon/";
 
 	public static final String REGISTRATION_COMMON_ULAYER_DIRECTORY = "/jsonresponse/member/ulayer/registration/registrationcommon/";
 
-	private static final String TERMINATED_ACCOUNT_DIRECTORY = "/jsonresponse/Member/ulayer/terminatedaccount/";
+	private static final String TERMINATED_ACCOUNT_DIRECTORY = "/jsonresponse/member/ulayer/terminatedaccount/";
 
 	private static final String MANAGE_DRUG_ULAYER_DIRECTORY = "/jsonresponse/member/ulayer/druglookup/managedrug/";
 
-	private static final String ADD_DRUG_ULAYER_DIRECTORY = "/jsonresponse/member/ulayer/druglookup/adddrug/";
+	public static final String ADD_DRUG_ULAYER_DIRECTORY = "/jsonresponse/member/ulayer/druglookup/adddrug/";
 
-	private static final String DRUG_DOSAGE_ULAYER_DIRECTORY = "/jsonresponse/member/ulayer/druglookup/drugdosage/";
+	public static final String DRUG_DOSAGE_ULAYER_DIRECTORY = "/jsonresponse/member/ulayer/druglookup/drugdosage/";
 
-	private static final String LOW_COST_OPTIONS_ULAYER_DIRECTORY = "/jsonresponse/member/ulayer/druglookup/lowcostoptions/";
+	public static final String LOW_COST_OPTIONS_ULAYER_DIRECTORY = "/jsonresponse/member/ulayer/druglookup/lowcostoptions/";
 
 	private static final String SELECT_PHARMACY_ULAYER_DIRECTORY = "/jsonresponse/member/ulayer/druglookup/selectpharmacy/";
 
@@ -73,88 +115,87 @@ public class CommonConstants {
 
 	private static final String CONTACT_US_ULAYER_DIRECTORY = "/jsonresponse/member/ulayer/contactus/";
 
-	public static final Page[] PAGES = {
-			new Page(CommonConstants.GLOBAL, CommonConstants.GLOBAL_DIRECTORY),
-			new Page(CommonConstants.MY_ACCOUNT_HOME,
-					CommonConstants.MY_ACCOUNT_HOME_DIRECTORY),
-			new Page(CommonConstants.MY_ACCOUNT_HOME_COMBO,
-					CommonConstants.MY_ACCOUNT_HOME_COMBO_DIRECTORY),
+	public static final String DTM_TAG_MEMBER_FILENAME = "member";
+	public static final String DTM_TAG_ACQ_FILENAME = "acquisition";
+	public static final String PAGE_OBJECT_DTM_TAG_DIR = "/page-objects/dtm-common-data/";
+	public static final String NEW_PAYMENT_HISTORY_PAGE_DATA = "newpaymenthistory.json";
+
+	public static final String PAYMENT_HISTORY_MOBILE = "payment_history_mobile";
+
+	public static final String PAYMENT_HISTORY_MOBILE_DATA = "paymenthistory_mobile.json";
+	
+	public static final String  PAYMENT_HISTORY_BLUELAYER_DIRECTORY_MOBILE ="/jsonresponse/mobile/member/bluelayer/payment-history/";
+	
+	public static final String  DASHBOARD_PAYMENT_HISTORY_ULAYER_DIRECTORY_MOBILE ="/jsonresponse/mobile/member/ulayer/payment-history/";
+	public static final String DASHBOARD_DRUG_COST_ESTIMATOR = "dashboard_drugcostestimator";
+	public static final String  DASHBOARD_DRUGCOSTESTIMATOR_DIRECTORY ="/jsonresponse/member/dashboard/drugcostestimator/";
+	
+	public static final Page[] PAGES = { new Page(CommonConstants.GLOBAL, CommonConstants.GLOBAL_DIRECTORY),
+			new Page(CommonConstants.MY_ACCOUNT_HOME, CommonConstants.MY_ACCOUNT_HOME_DIRECTORY),
+			
+			new Page(CommonConstants.MY_ACCOUNT_HOME_COMBO, CommonConstants.MY_ACCOUNT_HOME_COMBO_DIRECTORY),
 			new Page(CommonConstants.PHR, CommonConstants.PHR_DIRECTORY),
 			new Page(CommonConstants.COMMON, CommonConstants.COMMON_DIRECTORY),
-			new Page(CommonConstants.PLAN_SUMMARY,
-					CommonConstants.PLAN_SUMMARY_DIRECTORY),
-			new Page(CommonConstants.PAYMENT_HISTORY,
-					CommonConstants.PAYMENT_HISTORY_DIRECTORY),
-			new Page(CommonConstants.ONE_TIME_PAYMENT_SUCCESS,
-					CommonConstants.ONE_TIME_PAYMENT_DIRECTORY),
-			new Page(CommonConstants.SET_UP_PAYMENT_SUCCESS,
-					CommonConstants.SET_UP_PAYMENT_DIRECTORY),
-			new Page(CommonConstants.FORMS_AND_RESOURCES,
-					CommonConstants.FORMS_AND_RESOURCES_DIRECTORY),
-			new Page(CommonConstants.ORDER_PLAN_MATERIALS,
-					CommonConstants.ORDER_PLAN_MATERIALS_DIRECTORY),
-			new Page(CommonConstants.PLAN_CONFIRMATION,
-					CommonConstants.PLAN_CONFIRMATION_DIRECTORY),
-			new Page(CommonConstants.REGISTRATION,
-					CommonConstants.REGISTRATION_DIRECTORY),
-			new Page(CommonConstants.ADD_PLAN,
-					CommonConstants.ADD_PLAN_DIRECTORY),
-			new Page(CommonConstants.PHARMACY_RESULT,
-					CommonConstants.PHARMACY_RESULT_DIRECTORY),
-			new Page(CommonConstants.DRUG_COST_BENEFIT_SUMMARY,
-					CommonConstants.DRUG_COST_BENEFIT_SUMMARY_DIRECTORY),
-			new Page(
-					CommonConstants.BENEFITS_AND_COVERAGE_PDP_NONLIS_NONUS_PAGE_DATA,
+			new Page(CommonConstants.PLAN_SUMMARY, CommonConstants.PLAN_SUMMARY_DIRECTORY),
+			new Page(CommonConstants.PAYMENT_HISTORY, CommonConstants.PAYMENT_HISTORY_DIRECTORY),
+			new Page(CommonConstants.ONE_TIME_PAYMENT_SUCCESS, CommonConstants.ONE_TIME_PAYMENT_DIRECTORY),
+			new Page(CommonConstants.SET_UP_PAYMENT_SUCCESS, CommonConstants.SET_UP_PAYMENT_DIRECTORY),
+			new Page(CommonConstants.FORMS_AND_RESOURCES, CommonConstants.FORMS_AND_RESOURCES_DIRECTORY),
+			new Page(CommonConstants.ORDER_PLAN_MATERIALS, CommonConstants.ORDER_PLAN_MATERIALS_DIRECTORY),
+			new Page(CommonConstants.PLAN_CONFIRMATION, CommonConstants.PLAN_CONFIRMATION_DIRECTORY),
+			new Page(CommonConstants.REGISTRATION, CommonConstants.REGISTRATION_DIRECTORY),
+			new Page(CommonConstants.ADD_PLAN, CommonConstants.ADD_PLAN_DIRECTORY),
+			new Page(CommonConstants.PHARMACY_RESULT, CommonConstants.PHARMACY_RESULT_DIRECTORY),
+			new Page(CommonConstants.DRUG_COST_BENEFIT_SUMMARY, CommonConstants.DRUG_COST_BENEFIT_SUMMARY_DIRECTORY),
+			new Page(CommonConstants.BENEFITS_AND_COVERAGE_PDP_NONLIS_NONUS_PAGE_DATA,
 					CommonConstants.BENEFITS_AND_COVERAGE_DIRECTORY),
-			new Page(CommonConstants.DRUG_CLAIMS_SUMMARY,
-					CommonConstants.DRUG_CLAIMS_SUMMARY_DIRECTORY),
-			new Page(CommonConstants.DRUG_CLAIMS_DETAILS,
-					CommonConstants.DRUG_CLAIMS_DETAILS_DIRECTORY),
-			new Page(CommonConstants.MEDICAL_CLAIMS_SUMMARY,
-					CommonConstants.MEDICAL_CLAIMS_SUMMARY_DIRECTORY),
-			new Page(CommonConstants.MEDICAL_CLAIMS_DETAILS,
-					CommonConstants.MEDICAL_CLAIMS_DETAILS_DIRECTORY),
+			new Page(CommonConstants.DRUG_CLAIMS_SUMMARY, CommonConstants.DRUG_CLAIMS_SUMMARY_DIRECTORY),
+			new Page(CommonConstants.DRUG_CLAIMS_DETAILS, CommonConstants.DRUG_CLAIMS_DETAILS_DIRECTORY),
+			new Page(CommonConstants.MEDICAL_CLAIMS_SUMMARY, CommonConstants.MEDICAL_CLAIMS_SUMMARY_DIRECTORY),
+			new Page(CommonConstants.MEDICAL_CLAIMS_DETAILS, CommonConstants.MEDICAL_CLAIMS_DETAILS_DIRECTORY),
 
-			new Page(CommonConstants.MY_PROFILES,
-					CommonConstants.MY_PROFILES_DIRECTORY),
-			new Page(CommonConstants.MY_PREFERENCES,
-					CommonConstants.MY_PREFERENCES_DIRECTORY),
-			new Page(CommonConstants.VIEW_DRUG_COST,
-					CommonConstants.VIEW_DRUG_COST_ULAYER_DIRECTORY),
-			new Page(CommonConstants.MEDICAL_EOB,
-					CommonConstants.MEDICAL_EOB_DIRECTORY),
-			new Page(CommonConstants.PRESCRIPTION_DRUG_EOB,
-					CommonConstants.PRESCRIPTION_DRUG_EOB_DIRECTORY),
-			new Page(CommonConstants.MANAGE_DRUG,
-					CommonConstants.MANAGE_DRUG_ULAYER_DIRECTORY),
-			new Page(CommonConstants.ADD_DRUG,
-					CommonConstants.ADD_DRUG_ULAYER_DIRECTORY),
-			new Page(CommonConstants.DRUG_DOSAGE,
-					CommonConstants.DRUG_DOSAGE_ULAYER_DIRECTORY),
-			new Page(CommonConstants.LOW_COST_OPTIONS,
-					CommonConstants.LOW_COST_OPTIONS_ULAYER_DIRECTORY),
-			new Page(CommonConstants.SELECT_PHARMACY,
-					CommonConstants.SELECT_PHARMACY_ULAYER_DIRECTORY),
-			new Page(CommonConstants.TERMINATED_ACCOUNT,
-					CommonConstants.TERMINATED_ACCOUNT_DIRECTORY),
-			new Page(CommonConstants.REGISTRATION_SUCCESS,
-					CommonConstants.REGISTRATION_SUCCESS_DIRECTORY),
+			new Page(CommonConstants.MY_PROFILES, CommonConstants.MY_PROFILES_DIRECTORY),
+			new Page(CommonConstants.MY_PREFERENCES, CommonConstants.MY_PREFERENCES_DIRECTORY),
+			new Page(CommonConstants.VIEW_DRUG_COST, CommonConstants.VIEW_DRUG_COST_ULAYER_DIRECTORY),
+			new Page(CommonConstants.MEDICAL_EOB, CommonConstants.MEDICAL_EOB_DIRECTORY),
+			new Page(CommonConstants.PRESCRIPTION_DRUG_EOB, CommonConstants.PRESCRIPTION_DRUG_EOB_DIRECTORY),
+			new Page(CommonConstants.MANAGE_DRUG, CommonConstants.MANAGE_DRUG_ULAYER_DIRECTORY),
+			new Page(CommonConstants.ADD_DRUG, CommonConstants.ADD_DRUG_ULAYER_DIRECTORY),
+			new Page(CommonConstants.DRUG_DOSAGE, CommonConstants.DRUG_DOSAGE_ULAYER_DIRECTORY),
+			new Page(CommonConstants.LOW_COST_OPTIONS, CommonConstants.LOW_COST_OPTIONS_ULAYER_DIRECTORY),
+			new Page(CommonConstants.SELECT_PHARMACY, CommonConstants.SELECT_PHARMACY_ULAYER_DIRECTORY),
+			new Page(CommonConstants.TERMINATED_ACCOUNT, CommonConstants.TERMINATED_ACCOUNT_DIRECTORY),
+			new Page(CommonConstants.REGISTRATION_SUCCESS, CommonConstants.REGISTRATION_SUCCESS_DIRECTORY),
 			new Page(CommonConstants.MY_PREFERENCES_BEFORE_UPDATE,
 					CommonConstants.MY_PREF_BEFORE_UPDATE_ULAYER_DIRECTORY),
 			new Page(CommonConstants.MY_PREFERENCES_AFTER_UPDATE,
 					CommonConstants.MY_PREF_AFTER_UPDATE_ULAYER_DIRECTORY),
-			new Page(CommonConstants.CONTACT_US,
-					CommonConstants.CONTACT_US_ULAYER_DIRECTORY),
-			new Page(CommonConstants.BENEFITS_SUMMARY,
-					CommonConstants.BENEFITS_SUMMARY_DIRECTORY),
-			new Page(CommonConstants.PLAN_COMPARE,
-					CommonConstants.PLAN_COMPARE_ULAYER_DIRECTORY)
-
+			new Page(CommonConstants.CONTACT_US, CommonConstants.CONTACT_US_ULAYER_DIRECTORY),
+			new Page(CommonConstants.BENEFITS_SUMMARY, CommonConstants.BENEFITS_SUMMARY_DIRECTORY),
+			new Page(CommonConstants.BENEFITS_DETAIL, CommonConstants.BENEFITS_DETAIL_DIRECTORY),
+			new Page(CommonConstants.PLAN_COMPARE, CommonConstants.PLAN_COMPARE_ULAYER_DIRECTORY),
+			new Page(CommonConstants.ADD_PLAN_CONFIRMATION, CommonConstants.ADD_PLAN_CONFIRMATION_ULAYER_DIRECTORY),
+			new Page(CommonConstants.PAYMENT_HISTORY_MOBILE,
+					CommonConstants.DASHBOARD_PAYMENT_HISTORY_ULAYER_DIRECTORY_MOBILE),
+			new Page(CommonConstants.DASHBOARD_DRUG_COST_ESTIMATOR,
+					CommonConstants.DASHBOARD_DRUGCOSTESTIMATOR_DIRECTORY),
+			new Page(CommonConstants.ADD_NEW_DRUG_MODAL,
+					CommonConstants.DASHBOARD_DRUGCOSTESTIMATOR_DIRECTORY),
+			new Page(CommonConstants.ADD_DRUG_DETAILS,
+			CommonConstants.DASHBOARD_DRUGCOSTESTIMATOR_DIRECTORY)
 	};
 
 	public static final String BENEFITS_SUMMARY_DIRECTORY = "/jsonresponse/mobile/member/ulayer/benefits-summary/";
 
 	public static final String BENEFITS_SUMMARY = "benefitssummary";
+
+	public static final String BENEFITS_DETAIL = "benefitsdetail";
+
+	public static final String BENEFITS_DETAIL_DIRECTORY = "/jsonresponse/mobile/member/ulayer/benefits-detail/";
+
+	public static final String BENEFITS_SUMMARY_BLAYER = "benefitssummary";
+
+	public static final String BENEFITS_SUMMARY_DIRECTORY_BLAYER = "/jsonresponse/mobile/member/bluelayer/benefits-summary/";
 
 	public static final String GLOBAL_DIRECTORY = "/jsonresponse/member/ulayer/global/";
 
@@ -194,23 +235,23 @@ public class CommonConstants {
 
 	public static final String PLAN_SUMMARY = "plansummary";
 
-	private static final String FORMS_AND_RESOURCES_BLUELAYER_DIRECTORY = "/jsonresponse/Member/bluelayer/formsandresources/";
+	private static final String FORMS_AND_RESOURCES_BLUELAYER_DIRECTORY = "/jsonresponse/member/bluelayer/formsandresources/";
 
-	private static final String BENEFITS_AND_COVERAGE_BLUELAYER_DIRECTORY = "/jsonresponse/Member/bluelayer/benefitsandcoverage/";
+	private static final String BENEFITS_AND_COVERAGE_BLUELAYER_DIRECTORY = "/jsonresponse/member/bluelayer/benefitsandcoverage/";
 
-	private static final String PLAN_CONFIRMATION_BLUELAYER_DIRECTORY = "/jsonresponse/Member/bluelayer/registration/planconfirmation/";
+	private static final String PLAN_CONFIRMATION_BLUELAYER_DIRECTORY = "/jsonresponse/member/bluelayer/registration/planconfirmation/";
 
-	private static final String REGISTRATION_BLUELAYER_DIRECTORY = "/jsonresponse/Member/bluelayer/registration/registrationsuccess/";
+	private static final String REGISTRATION_BLUELAYER_DIRECTORY = "/jsonresponse/member/bluelayer/registration/registrationsuccess/";
 
 	private static final String ADD_PLAN_BLUELAYER_DIRECTORY = "/jsonresponse/member/bluelayer/addplan/";
 
 	private static final String MY_ACCOUNT_HOME_COMBO_BLUELAYER_DIRECTORY = "/jsonresponse/member/bluelayer/myaccounthomecombo/";
 
-	private static final String PAYMENT_HISTORY_BLUELAYER_DIRECTORY = "/jsonresponse/Member/bluelayer/payment/paymenthistory/";
+	private static final String PAYMENT_HISTORY_BLUELAYER_DIRECTORY = "/jsonresponse/member/bluelayer/payment/paymenthistory/";
 
-	private static final String ONE_TIME_PAYMENT_BLUELAYER_DIRECTORY = "/jsonresponse/Member/bluelayer/payment/onetimepaymentsuccess/";
+	private static final String ONE_TIME_PAYMENT_BLUELAYER_DIRECTORY = "/jsonresponse/member/bluelayer/payment/onetimepaymentsuccess/";
 
-	private static final String SET_UP_PAYMENT_BLUELAYER_DIRECTORY = "/jsonresponse/Member/bluelayer/payment/setuppaymentsuccess/";
+	private static final String SET_UP_PAYMENT_BLUELAYER_DIRECTORY = "/jsonresponse/member/bluelayer/payment/setuppaymentsuccess/";
 
 	private static final String CLAIM_SUMMARY_BLUELAYER_DIRECTORY = "/jsonresponse/member/bluelayer/claims/claimsummary/";
 
@@ -228,13 +269,13 @@ public class CommonConstants {
 
 	private static final String MY_PREF_AFTER_UPDATE_ULAYER_DIRECTORY = "/jsonresponse/member/ulayer/profilesandpref/mypreferences/afterupdate/";
 
-	private static final String DRUG_COST_BENEFIT_SUMMARY_BLUELAYER_DIRECTORY = "/jsonresponse/Member/bluelayer/drugcostbenefitsummary/";
+	private static final String DRUG_COST_BENEFIT_SUMMARY_BLUELAYER_DIRECTORY = "/jsonresponse/member/bluelayer/drugcostbenefitsummary/";
 
-	private static final String ORDER_PLAN_MATERIALS_BLUELAYER_DIRECTORY = "/jsonresponse/Member/bluelayer/orderplanmaterials/";
+	private static final String ORDER_PLAN_MATERIALS_BLUELAYER_DIRECTORY = "/jsonresponse/member/bluelayer/orderplanmaterials/";
 
-	private static final String PREFERENCES_COMMON_BLUELAYER_DIRECTORY = "/jsonresponse/Member/bluelayer/profilesandpref/mypreferences/preferencescommon/";
+	private static final String PREFERENCES_COMMON_BLUELAYER_DIRECTORY = "/jsonresponse/member/bluelayer/profilesandpref/mypreferences/preferencescommon/";
 
-	private static final String PRESCRIPTION_DRUG_EOB_BLUELAYER_DIRECTORY = "/jsonresponse/Member/bluelayer/prescriptiondrugeob/";
+	private static final String PRESCRIPTION_DRUG_EOB_BLUELAYER_DIRECTORY = "/jsonresponse/member/bluelayer/prescriptiondrugeob/";
 
 	public static final String MY_PROFILES_BEFORE_UPDATE = "myprofilebeforeupdate";
 
@@ -246,72 +287,74 @@ public class CommonConstants {
 
 	public static final String PREFERENCES_COMMON = "preferenceColumn";
 
+	public static final String PAYMENT_HISTORY_MOBILE_DIRECTORY = "/page-objects/mobile/member/bluelayer/";
+
+	public static final String PAYMENT_HISTORY_MOBILE_ULAYER = "payment_history_mobile_ulayer";
+	public static final String PAYMENT_HISTORY_MOBILE_ULAYER_DIRECTORY = "/page-objects/mobile/member/ulayer/";
+
+	public static final String PAYMENT_HISTORY_ULAYER_DIRECTORY_MOBILE = "/jsonresponse/mobile/member/ulayer/paymenthistory/";
+
+	public static final String BENEFITS_AND_COVERAGE = "benefitsandcoverage" ;
+	public static final String BENEFITS_AND_COVERAGE_PAGE_BLAYER_DIRECTORY = "/jsonresponse/member/bluelayer/benefitsandcoverage/";
+	
 	public static final Page[] PAGES_BLUELAYER = {
-			new Page(CommonConstants.GLOBAL,
-					CommonConstants.GLOBAL_BLUELAYER_DIRECTORY),
-			new Page(CommonConstants.MY_ACCOUNT_HOME,
-					CommonConstants.MY_ACCOUNT_HOME_BLUELAYER_DIRECTORY),
-			new Page(CommonConstants.COMMON,
-					CommonConstants.COMMON_BLUELAYER_DIRECTORY),
-			new Page(CommonConstants.PHR,
-					CommonConstants.PHR_BLUELAYER_DIRECTORY),
-			new Page(CommonConstants.PLAN_SUMMARY,
-					CommonConstants.PLAN_SUMMARY_BLUELAYER_DIRECTORY),
-			new Page(CommonConstants.FORMS_AND_RESOURCES,
-					CommonConstants.FORMS_AND_RESOURCES_BLUELAYER_DIRECTORY),
+			new Page(CommonConstants.GLOBAL, CommonConstants.GLOBAL_BLUELAYER_DIRECTORY),
+			new Page(CommonConstants.BENEFITS_AND_COVERAGE, CommonConstants.BENEFITS_AND_COVERAGE_PAGE_BLAYER_DIRECTORY),
+			new Page(CommonConstants.MY_ACCOUNT_HOME, CommonConstants.MY_ACCOUNT_HOME_BLUELAYER_DIRECTORY),
+			new Page(CommonConstants.COMMON, CommonConstants.COMMON_BLUELAYER_DIRECTORY),
+			new Page(CommonConstants.PHR, CommonConstants.PHR_BLUELAYER_DIRECTORY),
+			new Page(CommonConstants.PLAN_SUMMARY, CommonConstants.PLAN_SUMMARY_BLUELAYER_DIRECTORY),
+			new Page(CommonConstants.FORMS_AND_RESOURCES, CommonConstants.FORMS_AND_RESOURCES_BLUELAYER_DIRECTORY),
 			new Page(CommonConstants.PLAN_BENEFITS_AND_COVERAGE,
 					CommonConstants.BENEFITS_AND_COVERAGE_BLUELAYER_DIRECTORY),
-			new Page(CommonConstants.PHARMACY_RESULT,
-					CommonConstants.PHARMACY_RESULT_BLUELAYER_DIRECTORY),
-			new Page(CommonConstants.ADD_PLAN,
-					CommonConstants.ADD_PLAN_BLUELAYER_DIRECTORY),
-			new Page(CommonConstants.MY_ACCOUNT_HOME_COMBO,
-					CommonConstants.MY_ACCOUNT_HOME_COMBO_BLUELAYER_DIRECTORY),
-			new Page(CommonConstants.PAYMENT_HISTORY,
-					CommonConstants.PAYMENT_HISTORY_BLUELAYER_DIRECTORY),
-			new Page(CommonConstants.ONE_TIME_PAYMENT_SUCCESS,
-					CommonConstants.ONE_TIME_PAYMENT_BLUELAYER_DIRECTORY),
-			new Page(CommonConstants.SET_UP_PAYMENT_SUCCESS,
-					CommonConstants.SET_UP_PAYMENT_BLUELAYER_DIRECTORY),
-			new Page(CommonConstants.CLAIM_SUMMARY,
-					CommonConstants.CLAIM_SUMMARY_BLUELAYER_DIRECTORY),
-			new Page(CommonConstants.CLAIM_DETAILS,
-					CommonConstants.CLAIM_DETAILS_BLUELAYER_DIRECTORY),
-			new Page(
-					CommonConstants.MY_PROFILES_BEFORE_UPDATE,
+			new Page(CommonConstants.PHARMACY_RESULT, CommonConstants.PHARMACY_RESULT_BLUELAYER_DIRECTORY),
+			new Page(CommonConstants.ADD_PLAN, CommonConstants.ADD_PLAN_BLUELAYER_DIRECTORY),
+			new Page(CommonConstants.MY_ACCOUNT_HOME_COMBO, CommonConstants.MY_ACCOUNT_HOME_COMBO_BLUELAYER_DIRECTORY),
+			new Page(CommonConstants.PAYMENT_HISTORY, CommonConstants.PAYMENT_HISTORY_BLUELAYER_DIRECTORY),
+			new Page(CommonConstants.ONE_TIME_PAYMENT_SUCCESS, CommonConstants.ONE_TIME_PAYMENT_BLUELAYER_DIRECTORY),
+			new Page(CommonConstants.SET_UP_PAYMENT_SUCCESS, CommonConstants.SET_UP_PAYMENT_BLUELAYER_DIRECTORY),
+			new Page(CommonConstants.CLAIM_SUMMARY, CommonConstants.CLAIM_SUMMARY_BLUELAYER_DIRECTORY),
+			new Page(CommonConstants.CLAIM_DETAILS, CommonConstants.CLAIM_DETAILS_BLUELAYER_DIRECTORY),
+			new Page(CommonConstants.MY_PROFILES_BEFORE_UPDATE,
 					CommonConstants.MY_PROFILES_BEFORE_UPDATE_BLUELAYER_DIRECTORY),
-			new Page(
-					CommonConstants.MY_PROFILES_AFTER_UPDATE,
+			new Page(CommonConstants.MY_PROFILES_AFTER_UPDATE,
 					CommonConstants.MY_PROFILES_AFTER_UPDATE_BLUELAYER_DIRECTORY),
 			new Page(CommonConstants.MY_PREFERENCES_BEFORE_UPDATE,
 					CommonConstants.MY_PREF_BEFORE_UPDATE_BLUELAYER_DIRECTORY),
 			new Page(CommonConstants.MY_PREFERENCES_AFTER_UPDATE,
 					CommonConstants.MY_PREF_AFTER_UPDATE_BLUELAYER_DIRECTORY),
-			new Page(CommonConstants.PREFERENCES_COMMON,
-					CommonConstants.PREFERENCES_COMMON_BLUELAYER_DIRECTORY),
-			new Page(
-					CommonConstants.DRUG_COST_BENEFIT_SUMMARY,
+			new Page(CommonConstants.PREFERENCES_COMMON, CommonConstants.PREFERENCES_COMMON_BLUELAYER_DIRECTORY),
+			new Page(CommonConstants.DRUG_COST_BENEFIT_SUMMARY,
 					CommonConstants.DRUG_COST_BENEFIT_SUMMARY_BLUELAYER_DIRECTORY),
-			new Page(CommonConstants.ORDER_PLAN_MATERIALS,
-					CommonConstants.ORDER_PLAN_MATERIALS_BLUELAYER_DIRECTORY),
-			new Page(CommonConstants.VIEW_DRUG_COST,
-					CommonConstants.VIEW_DRUG_COST_BLUELAYER_DIRECTORY),
-			new Page(CommonConstants.PRESCRIPTION_DRUG_EOB,
-					CommonConstants.PRESCRIPTION_DRUG_EOB_BLUELAYER_DIRECTORY),
-			new Page(CommonConstants.MANAGE_DRUG,
-					CommonConstants.MANAGE_DRUG_BLUE_LAYER_DIRECTORY),
-			new Page(CommonConstants.ADD_DRUG,
-					CommonConstants.ADD_DRUG_BLUE_LAYER_DIRECTORY),
-			new Page(CommonConstants.DRUG_DOSAGE,
-					CommonConstants.DRUG_DOSAGE_BLUE_LAYER_DIRECTORY),
-			new Page(CommonConstants.LOW_COST_OPTIONS,
-					CommonConstants.LOW_COST_OPTIONS_BLUE_LAYER_DIRECTORY),
-			new Page(CommonConstants.SELECT_PHARMACY,
-					CommonConstants.SELECT_PHARMACY_BLUE_LAYER_DIRECTORY) };
+			new Page(CommonConstants.ORDER_PLAN_MATERIALS, CommonConstants.ORDER_PLAN_MATERIALS_BLUELAYER_DIRECTORY),
+			new Page(CommonConstants.VIEW_DRUG_COST, CommonConstants.VIEW_DRUG_COST_BLUELAYER_DIRECTORY),
+			new Page(CommonConstants.PRESCRIPTION_DRUG_EOB, CommonConstants.PRESCRIPTION_DRUG_EOB_BLUELAYER_DIRECTORY),
+			new Page(CommonConstants.MANAGE_DRUG, CommonConstants.MANAGE_DRUG_BLUE_LAYER_DIRECTORY),
+			new Page(CommonConstants.ADD_DRUG, CommonConstants.ADD_DRUG_BLUE_LAYER_DIRECTORY),
+			new Page(CommonConstants.DRUG_DOSAGE, CommonConstants.DRUG_DOSAGE_BLUE_LAYER_DIRECTORY),
+			new Page(CommonConstants.LOW_COST_OPTIONS, CommonConstants.LOW_COST_OPTIONS_BLUE_LAYER_DIRECTORY),
+			new Page(CommonConstants.SELECT_PHARMACY, CommonConstants.SELECT_PHARMACY_BLUE_LAYER_DIRECTORY),
+			new Page(CommonConstants.REGISTRATION_SUCCESS, CommonConstants.REGISTRATION_SUCCESS_BLUELAYER_DIRECTORY),
+			new Page(CommonConstants.ADD_PLAN_CONFIRMATION, CommonConstants.ADD_PLAN_CONFIRMATION_BLUELAYER_DIRECTORY),
+			new Page(CommonConstants.BENEFITS_SUMMARY_BLAYER, CommonConstants.BENEFITS_SUMMARY_DIRECTORY_BLAYER),
+			new Page(CommonConstants.PAYMENT_HISTORY_MOBILE,
+					CommonConstants.PAYMENT_HISTORY_BLUELAYER_DIRECTORY_MOBILE),
+			new Page(CommonConstants.DASHBOARD_DRUG_COST_ESTIMATOR,
+					CommonConstants.DASHBOARD_DRUGCOSTESTIMATOR_DIRECTORY),
+			new Page(CommonConstants.ADD_NEW_DRUG_MODAL,
+					CommonConstants.DASHBOARD_DRUGCOSTESTIMATOR_DIRECTORY),
+			new Page(CommonConstants.ADD_DRUG_DETAILS,
+					CommonConstants.DASHBOARD_DRUGCOSTESTIMATOR_DIRECTORY)
+			
+	};
 
 	public static final String PAGE_OBJECT_DIRECTORY_BLUELAYER_MEMBER = "/page-objects/member/bluelayer/";
 
-	public static final String REGISTRATION = "registrationsuccess";
+	public static final String PAGE_OBJECT_DIRECTORY_MYMEDICA_MEMBER = "/page-objects/member/mymedica/";
+
+	public static final String RETIREE_PAGE_OBJECT_DIRECTORY = "/page-objects/uhcretiree/acquisition/";
+
+	public static final String REGISTRATION = "registration";
 
 	public static final String REGISTRATION_SUCCESS = "registrationsuccess";
 
@@ -323,7 +366,7 @@ public class CommonConstants {
 
 	public static final String PLAN_CONFIRMATION = "planconfirmation";
 
-	public static final String PLAN_CONFIRMATION_DIRECTORY = "/jsonresponse/Member/ulayer/registration/planconfirmation/";
+	public static final String PLAN_CONFIRMATION_DIRECTORY = "/jsonresponse/member/ulayer/registration/planconfirmation/";
 
 	public static final String PLAN_CONFIRMATION_PAGE_DATA = "planconfirmation.json";
 
@@ -331,29 +374,31 @@ public class CommonConstants {
 
 	public static final String PAYMENT_HISTORY_PAGE_DATA = "paymenthistory.json";
 
-	public static final String PAYMENT_HISTORY_DIRECTORY = "/jsonresponse/Member/ulayer/payment/paymenthistory/";
+	public static final String PAYMENT_HISTORY_DIRECTORY = "/jsonresponse/member/ulayer/payment/paymenthistory/";
 
 	public static final String ONE_TIME_PAYMENT_SUCCESS = "onetimepaymentsuccess";
 
-	public static final String ONE_TIME_PAYMENT_DIRECTORY = "/jsonresponse/Member/ulayer/payment/onetimepaymentsuccess/";
+	public static final String ONE_TIME_PAYMENT_DIRECTORY = "/jsonresponse/member/ulayer/payment/onetimepaymentsuccess/";
 
 	public static final String ONE_PAYMENT_SUCCESS_PAGE_DATA = "onetimepaymentsuccess.json";
 
 	public static final String FORMS_AND_RESOURCES = "formsandresources";
 
-	public static final String FORMS_AND_RESOURCES_DIRECTORY = "/jsonresponse/Member/ulayer/formsandresources/";
+	public static final String FORMS_AND_RESOURCES_DIRECTORY = "/jsonresponse/member/ulayer/formsandresources/";
+
+	public static final String FR_NEXTYEAR_DIRECTORY = "/jsonresponse/member/ulayer/Nextyearpdf/";
 
 	public static final String FORMS_AND_RESOURCES_PAGE_DATA = "formsandresources.json";
 
 	public static final String ORDER_PLAN_MATERIALS = "orderplanmaterials";
 
-	public static final String ORDER_PLAN_MATERIALS_DIRECTORY = "/jsonresponse/Member/ulayer/orderplanmaterials/";
+	public static final String ORDER_PLAN_MATERIALS_DIRECTORY = "/jsonresponse/member/ulayer/orderplanmaterials/";
 
 	public static final String ORDER_PLAN_MATERIALS_PAGE_DATA = "orderplanmaterials.json";
 
 	public static final String SET_UP_PAYMENT_SUCCESS = "setuppaymentsuccess";
 
-	public static final String SET_UP_PAYMENT_DIRECTORY = "/jsonresponse/Member/ulayer/payment/setuppaymentsuccess/";
+	public static final String SET_UP_PAYMENT_DIRECTORY = "/jsonresponse/member/ulayer/payment/setuppaymentsuccess/";
 
 	public static final String SET_UP_PAYMENT_SUCCESS_PAGE_DATA = "setuppaymentsuccess.json";
 
@@ -375,7 +420,7 @@ public class CommonConstants {
 
 	public static final String DRUG_COST_BENEFIT_SUMMARY_SUCCESS = "drugcostbenefitsummary";
 
-	public static final String DRUG_COST_BENEFIT_SUMMARY_DIRECTORY = "/jsonresponse/Member/ulayer/drugcostbenefitsummary/";
+	public static final String DRUG_COST_BENEFIT_SUMMARY_DIRECTORY = "/jsonresponse/member/ulayer/drugcostbenefitsummary/";
 
 	public static final String DRUG_COST_BENEFIT_SUMMARY_PAGE_DATA = "drugcostbenefitsummary.json";
 
@@ -397,8 +442,20 @@ public class CommonConstants {
 
 	public static final String SITE_BLUELAYER = "bluelayer";
 
+	public static final String SITE_MYMEDICA = "mymedica";
+
+	public static final String SITE_MYPCP = "mypcp";
+
+	public static final String SITE_UHCRETIREE = "uhcretiree";
+
+	public static final String SITE_BLUELAYER_MEMBER = "bluelayer";
+
+	public static final String SITE_ULAYER_MEMBER = "ulayer";
+
 	public static final String ACQUISITION_EXPECTED_DIRECTORY = "/jsonresponse/acquisition";
-	
+
+	public static final String MEMBER_EXPECTED_DIRECTORY = "/jsonresponse/member";
+
 	public static final String DRX_EXPECTED_DIRECTORY = "/jsonresponse/drx";
 
 	public static final String DRUG_CLAIMS_SUMMARY = "drugclaimsummary";
@@ -409,7 +466,7 @@ public class CommonConstants {
 
 	public static final String DRUG_CLAIMS_DETAILS = "drugclaimdetails";
 
-	public static final String DRUG_CLAIMS_DETAILS_DIRECTORY = "/jsonresponse/Member/ulayer/claims/drugclaimdetails/";
+	public static final String DRUG_CLAIMS_DETAILS_DIRECTORY = "/jsonresponse/member/ulayer/claims/drugclaimdetails/";
 
 	public static final String DRUG_CLAIMS_DETAILS_PAGE_DATA = "drugclaimdetails.json";
 
@@ -421,7 +478,7 @@ public class CommonConstants {
 
 	public static final String MEDICAL_CLAIMS_DETAILS = "medicalclaimdetails";
 
-	public static final String MEDICAL_CLAIMS_DETAILS_DIRECTORY = "/jsonresponse/Member/ulayer/claims/medicalclaimdetails/";
+	public static final String MEDICAL_CLAIMS_DETAILS_DIRECTORY = "/jsonresponse/member/ulayer/claims/medicalclaimdetails/";
 
 	public static final String MEDICAL_CLAIMS_DETAILS_PAGE_DATA = "medicalclaimdetails.json";
 
@@ -437,17 +494,17 @@ public class CommonConstants {
 
 	public static final String MY_PROFILES = "myprofiles";
 
-	public static final String MY_PROFILES_DIRECTORY = "/jsonresponse/Member/ulayer/profilesandprefereneces/myprofiles/";
+	public static final String MY_PROFILES_DIRECTORY = "/jsonresponse/member/ulayer/profilesandprefereneces/myprofiles/";
 
 	public static final String MY_PROFILES_PAGE_DATA = "myprofiles.json";
 
 	public static final String MY_PREFERENCES = "mypreferences";
 
-	public static final String MY_PREFERENCES_DIRECTORY = "/jsonresponse/Member/ulayer/profilesandprefereneces/mypreferences/";
+	public static final String MY_PREFERENCES_DIRECTORY = "/jsonresponse/member/ulayer/profilesandprefereneces/mypreferences/";
 
 	public static final String MY_PREFERENCES_PAGE_DATA = "mypreferences.json";
 
-	public static final String VIEW_DRUG_COST_ULAYER_DIRECTORY = "/jsonresponse/Member/ulayer/druglookup/viewdrugcost/";
+	public static final String VIEW_DRUG_COST_ULAYER_DIRECTORY = "/jsonresponse/member/ulayer/druglookup/viewdrugcost/";
 
 	public static final String VIEW_DRUG_COST_PDP_PAGE_DATA = "viewdrugcostpdp.json";
 
@@ -457,11 +514,11 @@ public class CommonConstants {
 
 	public static final String MEDICAL_EOB = "medicaleob";
 
-	public static final String MEDICAL_EOB_DIRECTORY = "/jsonresponse/Member/ulayer/eob/medical/";
+	public static final String MEDICAL_EOB_DIRECTORY = "/jsonresponse/member/ulayer/eob/medical/";
 
 	public static final String MEDICAL_EOB_PAGE_DATA = "medicaleob.json";
 
-	public static final String PRESCRIPTION_DRUG_EOB_DIRECTORY = "/jsonresponse/Member/ulayer/eob/drug/";
+	public static final String PRESCRIPTION_DRUG_EOB_DIRECTORY = "/jsonresponse/member/ulayer/eob/drug/";
 
 	public static final String DRUG_LOOK_UP = "druglookup";
 
@@ -486,7 +543,7 @@ public class CommonConstants {
 	public static final String ADD_DRUG_DIRECTORY = "/jsonresponse/member/ulayer/druglookup/adddrug/";
 
 	public static final String ADD_DRUG_PAGE_DATA = "adddrug.json";
-	
+
 	public static final String DRUG_SEARCH_PAGE_DATA = "searchdrug.json";
 
 	public static final String LOW_COST_OPTIONS = "lowcostoptions";
@@ -496,20 +553,12 @@ public class CommonConstants {
 	public static final String LOW_COST_OPTIONS_PAGE_DATA = "lowcostoptions.json";
 
 	public static final Page[] PAGES_REGISTRATION_BLUELAYER = {
-			new Page(CommonConstants.PLAN_CONFIRMATION,
-					CommonConstants.PLAN_CONFIRMATION_BLUELAYER_DIRECTORY),
-			new Page(CommonConstants.REGISTRATION,
-					CommonConstants.REGISTRATION_BLUELAYER_DIRECTORY),
-			new Page(CommonConstants.ADD_PLAN_CONFIRMATION,
-					CommonConstants.ADD_PLAN_CONFIRMATION_BLUELAYER_DIRECTORY),
-			new Page(CommonConstants.REGISTRATION_COMMON,
-					CommonConstants.REGISTRATION_COMMON_BLUELAYER_DIRECTORY), };
+			new Page(CommonConstants.PLAN_CONFIRMATION, CommonConstants.PLAN_CONFIRMATION_BLUELAYER_DIRECTORY),
+			new Page(CommonConstants.REGISTRATION_COMMON, CommonConstants.REGISTRATION_COMMON_BLUELAYER_DIRECTORY) };
 
 	public static final Page[] PAGES_REGISTRATION_ULAYER = {
-			new Page(CommonConstants.PLAN_CONFIRMATION,
-					CommonConstants.PLAN_CONFIRMATION_DIRECTORY),
-			new Page(CommonConstants.REGISTRATION_COMMON,
-					CommonConstants.REGISTRATION_COMMON_ULAYER_DIRECTORY) };
+			new Page(CommonConstants.PLAN_CONFIRMATION, CommonConstants.PLAN_CONFIRMATION_DIRECTORY),
+			new Page(CommonConstants.REGISTRATION_COMMON, CommonConstants.REGISTRATION_COMMON_ULAYER_DIRECTORY) };
 
 	public static final String PRESCRIPTION_DRUG_EOB_PAGE_DATA = "prescriptiondrugeob.json";
 
@@ -520,7 +569,7 @@ public class CommonConstants {
 	public static final String TERMINATED_ACCOUNT = "terminatedAccount";
 
 	public static final String PAGE_OBJECT_DIRECTORY_BLUELAYER_ACQ = "/page-objects/acquisition/bluelayer/";
-	
+
 	public static final String PAGE_OBJECT_DIRECTORY_DRX = "/page-objects/drx/";
 
 	public static final String PHR_SHIP_PAGE_DATA = "phrship.json";
@@ -567,9 +616,15 @@ public class CommonConstants {
 
 	public static final String VIEW_DRUG_COST_BLUE_LAYER_PAGE_DATA = "viewdrugcost.json";
 
+	public static final String PLAN_SELECTOR_PAGE_DATA = "planselector.json";
+
 	public static final String VIEW_DRUG_COST_INDIVIDUAL_BLUE_LAYER_PAGE_DATA = "viewdrugcostindividual.json";
 
 	public static final String GROUP = "Group";
+
+	public static final String LEARN_ABOUT_PLAN_PAGE_DATA = "learnaboutmedicare.json";
+
+	public static final String INITIAL_ENROLL_PAGE_DATA = "initialenroll.json";
 
 	public static final String MANAGE_DRUG_ULAYER_PAGE_DATA = "manageDrug.json";
 
@@ -590,7 +645,7 @@ public class CommonConstants {
 	public static final String ZIPCODE_SELECTION_PAGE_DATA = "zipselection.json";
 
 	public static final String ZIPCODE_SELECTION_HOME_PAGE_DATA = "zipselectionhome.json";
-	
+
 	public static final long TIMEOUT_30 = 30;
 
 	public static final long TIMEOUT_40 = 40;
@@ -606,6 +661,14 @@ public class CommonConstants {
 	public static final String PHARMACY_INFORMATION_PAGE_DATA = "pharmacyInformation.json";
 
 	public static final String GLOBAL_FOOTER_PAGE_DATA = "globalfooteractual.json";
+	
+	public static final String REVIEW_ONE_TIME_PAGE_DATA = "reviewonetimeactual.json";
+	
+	public static final String REVIEW_AUTOMATIC_PAGE_DATA = "reviewautomaticactual.json";
+
+	public static final String OLE_DTMOBJECT_PAGE_DATA = "oledtmObject.json";
+
+	public static final String OLE_DTMOBJECT_PART2_PAGE_DATA = "oledtmObjectPart2.json";
 
 	public static final String SITE_MAP_PAGE_DATA = "sitemap.json";
 
@@ -629,7 +692,33 @@ public class CommonConstants {
 
 	public static final String PDP_PLAN_INFORMATION_PAGE_DATA = "pdpplaninformation.json";
 
+	public static final String INTRODUCTION_INFORMATION_PAGE_DATA = "introductioninformation.json";
+
 	public static final String BENEFICIARY_INFORMATION_PAGE_DATA = "beneficiaryinformation.json";
+
+	public static final String SEP_INFORMATION_PAGE_DATA = "sepinformation.json";
+
+	public static final String ESRD_PAGE_DATA = "esrd.json";
+
+	public static final String PRESCRIPTION_DRUG_COVERAGE_PAGE_DATA = "prescriptiondrugcoverage.json";
+
+	public static final String LONG_TERM_CARE_PAGE_DATA = "longtermcare.json";
+
+	public static final String MEDICAID_PAGE_DATA = "medicaid.json";
+
+	public static final String OTHER_HEALTH_INSURANCE_PAGE_DATA = "otherhealthinsurance.json";
+
+	public static final String PRIMARY_CARE_PROVIDER_PAGE_DATA = "primarycareprovider.json";
+
+	public static final String PLAN_PAYMENT_OPTION_PAGE_DATA = "planpaymentoption.json";
+
+	public static final String OPTIONAL_RIDERS_PAGE_DATA = "optionalriders.json";
+
+	public static final String PED_PAGE_DATA = "proposedEffectiveDate.json";
+
+	public static final String MA_REVIEW_AND_SUMMIT_PAGE_DATA = "mareviewandsubmit.json";
+
+	public static final String PDP_REVIEW_AND_SUMMIT_PAGE_DATA = "pdpreviewandsubmit.json";
 
 	public static final String MA_ADDITIONAL_INFORMATION_PAGE_DATA = "maadditionalinformation.json";
 
@@ -659,12 +748,15 @@ public class CommonConstants {
 
 	public static final String OUR_PLANS_NAV_PAGE_DATA = "ourPlansDropdownActual.json";
 
-	public static final String HEALTH_AND_WELLNESS_DROPDOWN_DATA= "healthandwellnessdropdownactual.json";
+	public static final String HEALTH_AND_WELLNESS_DROPDOWN_DATA = "healthandwellnessdropdownactual.json";
+
 	public static final String OUR_PLANS_DROPDOWN_DATA = "ourplansdropdownactual.json";
 
 	private static final String HEALTH_AND_WELLNESS_DIRECTORY = "/jsonresponse/member/ulayer/healthandwellness/";
 
 	public static final String PLAN_COMPARE_PAGE_DATA = "plancompare.json";
+
+	public static final String PLAN_COMPARE_DETAILS = "plancomparedetails.json";
 
 	public static final String PLAN_COMPARE = "plancompare";
 
@@ -672,6 +764,84 @@ public class CommonConstants {
 
 	public static final String PROVIDER_SEARCH_PAGE_DATA = "providersearch.json";
 
+	public static final String SELECT_FORMULARY_PAGE_DATA = "selectformulary.json";
+
+	public static final String ENTER_DRUG_PAGE_DATA = "enterdrug.json";
+
+	public static final String RETIREE_EXPECTED_DIRECTORY = "/jsonresponse/uhcretiree/acquisition/";
+
 	public static final String AUTO_DRUG_SEARCH_PAGE_DATA = "autocompletedrugsearch.json";
 
+	private static final String ADD_PLAN_CONFIRMATION_ULAYER_DIRECTORY = "/jsonresponse/member/ulayer/registration/addplanconfirmation/";
+
+	private static final String REGISTRATION_SUCCESS_BLUELAYER_DIRECTORY = "/jsonresponse/member/bluelayer/registration/registrationsuccess/";
+
+	public static final String SECOND_PLAN_INFO_BLUELAYER_PAGE_DATA = "secondplaninfo.json";
+
+	public static final String AARP_BROWSER_CHECK_DATA = "aarpbrowsercheck.json";
+
+	public static final String UHC_BROWSER_CHECK_DATA = "uhcbrowsercheck.json";
+
+	public static final String UHCM_BROWSER_CHECK_DATA = "uhcmbrowsercheck.json";
+
+	public static final String AARPM_BROWSER_CHECK_DATA = "aarpmbrowsercheck.json";
+
+	public static final String AARPM_SECURE_EMAIL_DATA = "aarpmsecureemailwidget.json";
+
+	public static final String GR_BROWSER_CHECK_DATA = "uhcretireebrowsercheck.json";
+
+	public static final String UHCM_MOBILE_BROWSER_CHECK_DATA = "browsercheck_uhcm.json";
+
+	public static final String COBROWSE_MODEL_WINDOW = "cobrowse.json";
+
+	public static final String Request_For_Assistance_PAGE_DATA = "requestforassistance.json";
+
+	public static final String CONFIRMATION_PAGE_DATA = "confirmation.json";
+	public static final String ULAYER_DRUGDOSAGEPAGE_EXPECTED_DIRECTORY = "drugdosage";
+	public static final String ULAYER_ADDADRUG_DROPDOWN_DIRECTORY = "dropdown";
+	public static final String ULAYER_LOWCOSTOPTIONS_EXPECTED_DIRECTORY = "lowcostoptions";
+	public static final String ADD_DRUG_ULAYER_DRUG_TYPE = "drugtype";
+	public static final String ADD_DRUG_ULAYER_PHARMACIES = "pharmacies";
+
+	public static final String PLAN_DOC_PDF_ACQ_PAGE_DATA = "plandocumentspdf.json";
+
+	public static final String B_AND_C_PDF_MEMBER_PAGE_DATA = "benefitsandcoveragepdfs.json";
+
+	public static final String PLAN_PREV_PDF_PAGE_DATA = "planpreviewpdf.json";
+
+	public static final String AARPM_FR_PDF_PAGE_DATA = "nextyearpdfs.json";
+	public static final String FORMS_AND_RESOURCES_PLANMATERIAL_SECTION_PDFS = "planmaterialpdfs.json";
+	public static final String FORMS_AND_RESOURCES_PLANMATERIAL_SECTION_PDFS_AARP = "plandocpdfs.json";
+	public static final String REGISTRATION_ERROR_PAGE_DATA = "registrationerrorpage.json";
+
+	public static final String LOGIN_ASSISTANCE_PERSONAL_IDENTIFICATION_ERROR_SCENARIO = "personalIdentificationErrorScenario.json";
+
+	public static final String NEXT_YEAR = "nextyear";
+
+	public static final String BENEFITS_AND_COVERAGE_MAPD_LIS_NONUS_PAGE_DATA = "planbenefitsandcoveragelisnotusother.json";
+
+	public static final String SIERRA_PLAN_NAME = "UnitedHealthcare MedicareComplete Choice (PPO)";
+
+	public static final String NEW_PAYMENT_HISTORY_ACTUAL_JSON = "newPaymentHistoryActualJSON";
+	public static final String NEW_PAYMENT_HISTORY_EXPECTED_JSON = "newPaymentHistoryexpectedJSON";
+	
+	public static final String SAVE_DRUG_PAGE_DATA="savedrugpagedata.json";
+	public static final String ADD_NEW_DRUG_MODAL = "addnewdrugmodal";
+	public static final String ADD_DRUG_DETAILS = "adddrugdetails";
+	public static final String ADD_NEW_DRUG_PAGE_DATA = "addnewdrugpagedata.json";
+	public static final String DRUGCOSTESTIMATORDATAPAGE = "DrugCostEstimatorPage.json";
+	public static final String ADD_DRUG_DETAILS_PAGE_DATA = "adddrugdetailspagedata.json";
+	public static final String SWITCH_GENERIC_PAGE_DATA = "switchgenericpagedata.json";
+	
+	public static final String DCEstimator = "DCEstimator.json";
+	public static final String SWITCH_GENERIC="switchgeneric.json";
+
+	public static final String NEW_CLAIM_DETAILS_PAGE_DATA = "newClaimDetailsPage.json";
+
+	public static final String NEW_CLAIM_SUMMARY_PAGE_DATA = "newClaimsSummaryPage.json";
+
+	
+	
+	
+	
 }

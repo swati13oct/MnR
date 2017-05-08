@@ -12,8 +12,9 @@ Examples:
 	#	| MAPD     | Individual |
 	#	| MA       | Group      |   
 	#	| MAPD     | Group      |
-	##	| PDP      | Group      |
+	#	| PDP      | Group      |
 	#	| SSUP     | Group      |
+        | MAPD     |  Group     |
 
 
 Scenario Outline:To verify My Profile and edit profile in UMS site
@@ -76,7 +77,7 @@ Examples:
 #			| MAPD     | Individual |
 #			| MA       | Group      |   
 #			| MAPD     | Group      |
-			| PDP      | Group      |
+#			| PDP      | Group      |
 #			| SSUP     | Group      |
 
 
@@ -103,6 +104,16 @@ Examples:
 #	| MAPD     | Individual |Prescription Drug Explanation of Benefits (EOB)   | U.S. Mail            |
          
 	       
-
+Scenario Outline:To verify whether add plan link is hidden in UMS site for AL PEEHIP
+Given registered member for My Profile & Preferences in UMS site
+	| Plan Type | <plantype> |
+	| Member Type     | <memberType>|
+When the user navigates to My Profiles in UMS site
+And the add plan link should be hidden in UMS site
+Examples:
+	        | plantype | memberType |
+		#| MA       | GROUP |
+		#| MAPD     | INDIVIDUAL |
+		| MAPD       | GROUP |
 
 

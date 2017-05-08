@@ -7,12 +7,15 @@ import java.util.Map;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.openqa.selenium.By;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
 import acceptancetests.atdd.data.CommonConstants;
+import acceptancetests.atdd.data.ElementData;
 import acceptancetests.atdd.data.PageData;
 import acceptancetests.atdd.util.CommonUtility;
 import atdd.framework.UhcDriver;
@@ -47,8 +50,11 @@ public class PlanSummaryPage extends UhcDriver {
 
 	public AddPlanPopUpPage clickAddPlan() {
 		addAnotherPlanLink.click();
-		CommonUtility.checkPageIsReady(driver);
+		ElementData elementData = new ElementData("className", "editInfoHead");
+		WebElement element = findElement(elementData);
+		if(validate(element) && element.getText().equalsIgnoreCase("Add Another Plan to Your Online Account"))
 		return new AddPlanPopUpPage(driver);
+		else return null;
 
 	}
 
@@ -64,7 +70,6 @@ public class PlanSummaryPage extends UhcDriver {
 	@Override
 	public void openAndValidate() {
 		validate(addAnotherPlanLink);
-		validate(planSummarySuccess);
 		validate(logOut);
 
 		JSONObject jsonObject = new JSONObject();
@@ -98,6 +103,29 @@ public class PlanSummaryPage extends UhcDriver {
 				planSummaryExpectedJson, globalExpectedJson);
 		return planSummaryExpectedJson;
 
+	}
+
+	public void validatePharmacySaver() {
+		driver.navigate().refresh();
+		try {
+			Thread.sleep(10000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		boolean present;
+		try {
+			driver.findElement(By.id("Atdd_Pharmacy_Saver_Widget"));
+			present = true;
+		} catch (NoSuchElementException e) {
+			present = false;
+		}
+
+		if(present)
+			System.out.println("@@@@@@@@@ Able to find Pharmacy Saver widget @@@@@@@@@");
+		else
+			System.out.println("@@@@@@@@@ No Pharmacy Saver widget @@@@@@@@@");
+		
 	}
 
 }

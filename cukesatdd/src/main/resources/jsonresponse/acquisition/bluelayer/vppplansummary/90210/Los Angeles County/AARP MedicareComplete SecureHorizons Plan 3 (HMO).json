@@ -1,11 +1,1 @@
-{
-"benefits_routinePhysical": "$0 co-pay",
-"planHighlights": "$0 premium.\n\n\u2022 Covers care you receive through our network of local doctors and hospitals.\n\n\u2022 May require referral.\n\n\u2022 Includes prescription drug coverage.",
-"monthlyPremium": "$27.40",
-"benefits_officeVisit": "Office Visit1:\nPrimary Care Physician:\n$0 co-pay   \nSpecialist:\n20% of the cost",
-"enrollPlanLink": "Enroll in plan",
-"drugInformation": "Drugs:\nEnter drug information",
-"benefits_prescriptionDrugCost": "Prescription Drugs: Tier 1\n25% of the cost",
-"planDetailsLink": "View plan details",
-"providerSearchLink": "Is my provider covered?"
-}
+{"benefits_routinePhysical":"$0 co-pay","planHighlights":"Low premium.\nCovers care you receive through our network of local doctors and hospitals.\nSpecialist visit may require referral.\nIncludes prescription drug coverage.","monthlyPremium":"$26.70","benefits_officeVisit":"Office Visit1:\nPrimary Care Physician:\n$0 co-pay   \nSpecialist:\n20% of the cost","enrollPlanLink":"Enroll in plan","benefits_prescriptionDrugCost":"Prescription Drugs: Tier 1\n25% of the cost","drugInformation":"Drugs:\nEnter drug information","planDetailsLink":"View plan details","providerSearchLink":"Is my provider covered in my ZIP code/county?"}

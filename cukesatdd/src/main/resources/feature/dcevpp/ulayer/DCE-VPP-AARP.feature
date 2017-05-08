@@ -38,8 +38,8 @@ And the user validates the plan summary for the below plan in AARP site
 	| Plan Name | <planName> |
 
 Examples:
-	| zipcode | county             | drugInitials | drugName      |  drugDosage	        | packages                                          | quantity | drugFrequency  | genericAvailable | brand/generic                            | pharmacyType	 	 		| distance   |  pharmacyName          | plantype | planName 					                         |
-	| 90210   | Los Angeles County | lipi	      |  Lipitor      |  Lipitor TAB 20MG   | null                                              | 40       | Every 3 months | yes              | Lipitor TAB 20MG (Qty 40 Every 3 Months) | Standard Network Pharmacy   | 25 miles   |  CVS PHARMACY 09652    | MAPD     | AARP MedicareComplete SecureHorizons Plan 2 (HMO)  |
+	| zipcode | county             | drugInitials | drugName      |  drugDosage	    | packages                                          | quantity | drugFrequency  | genericAvailable | brand/generic                            | pharmacyType	 	| distance   |  pharmacyName		   | plantype | planName 					   |
+	| 90210   | Los Angeles County | lipi	      |  Lipitor      |  Lipitor TAB 20MG   | null                                              | 40       | Every 3 months | yes              | Lipitor TAB 20MG (Qty 40 Every 3 Months) | Available Pharmacies	| 15 miles   |  Men's Health Foundation    | MAPD     | AARP MedicareComplete SecureHorizons Plan 2 (HMO)  |
 
 Scenario Outline: To Verify the drugs and plan summary for AEP period 
 Given the zipcode and county information DCE to Vpp Plan summary flow in AARP site
@@ -216,4 +216,75 @@ Then user validated estimated drug cost and tooltip in AARP site
 Examples:
 	| zipcode | county             | drugInitials | drugName      |  drugDosage	        | packages | quantity | drugFrequency  | genericAvailable | brand/generic                                           | pharmacyType	 	 	      | distance   |  pharmacyName          | plantype | planName 					                         |
 	| 90210   | Los Angeles County | lipi	      |  Lipitor      |  Lipitor TAB 20MG   | null     | 40       | Every 3 months | yes              | Lipitor TAB 20MG (Qty 40 Every 3 Months)                | Standard Network Pharmacy   | 25 miles   |  CVS PHARMACY 09652    | MAPD     | AARP MedicareComplete SecureHorizons Plan 2 (HMO)  |
+	
+	
+Scenario Outline: To Verify the drugs and pharmacy model for new generic flow 
+Given the user is on the AARP medicare site landing page
+When the user performs drug search using the following information in AARP site
+	| Zip Code    | <zipcode>  |
+	| County      | <county>   |
+When the user search the drug using drug initials in AARP site
+	| <drugInitials> |
+Then the user validates the drug list that has above mentioned drug initials in AARP site
+When the user selects following drug in AARP site
+	| <drugName> |
+Then the user validates the available drug information in AARP site
+When the user selects the following dosage information in AARP site
+	| Drug Dosage    | <drugDosage>    |
+	| Quantity       | <quantity>      |
+	| Drug Frequency | <drugFrequency> |
+	| Packages       | <packages>      |
+And the user selects low cost options for above selected drug in AARP site
+	| Generic Available | <genericAvailable> |
+	| Brand or Generic  | <brand/generic>    |
+Then the user validates all the drugs added in dce flow in AARP site
+When the user search for pharmacies in dce flow in AARP site
+Then the user validates the available pharmacies in the selected zipcode in AARP site
+When the user selects the pharmacy type and distance in AARP site
+	| Pharmacy Type | <pharmacyType> |
+	| Distance      | <distance>     |
+Then the user validates the available pharmacies based on selection made above in AARP site
+When the user selects a pharmacy from the list of pharmacies in AARP site
+	| <pharmacyName> |
+Then the user validates the selected drug and selected pharmacy on manage drug list page in AARP site
+
+Examples:
+	| zipcode | county             | drugInitials | drugName      |  drugDosage	        | packages | quantity | drugFrequency  | genericAvailable | brand/generic                            | pharmacyType	 	 		   | distance   |  pharmacyName          |
+	| 90210   | Los Angeles County | lipi	      |  Lipitor      |  Lipitor TAB 20MG   | null     | 40       | Every 3 months | yes              | Lipitor TAB 20MG (Qty 40 Every 3 Months) |  Standard Network Pharmacy  | 25 miles   |  CVS PHARMACY 09652    | 
+	
+Scenario Outline: To Verify the drug list and plan cost sections in View Plan Details page 
+Given the user is on the AARP medicare site landing page
+When the user performs drug search using the following information in AARP site
+	| Zip Code    | <zipcode>  |
+	| County      | <county>   |
+And the user search for the drug in AARP site
+	| <drugInitials> |
+And the user selects the drug from the dropdown in AARP site
+	| <drugName> |
+And the user selects the following dosage information in AARP site
+	| Drug Dosage    | <drugDosage>    |
+	| Quantity       | <quantity>      |
+	| Drug Frequency | <drugFrequency> |
+	| Packages       | <packages>      |
+And the user selects low cost options for the selected drug in AARP site
+	| Generic Available | <genericAvailable> |
+	| Brand or Generic  | <brand/generic>    |
+And the user search for pharmacies in AARP site
+And the user selects the type of pharmacy and distance in AARP site
+	| Pharmacy Type | <pharmacyType> |
+	| Distance      | <distance>     |
+And the user selects a pharmacy in AARP site
+	| <pharmacyName> |
+And the user navigates to VPP page in AARP site
+And the user selects the plan in AARP site
+	| Plan Type | <plantype> |
+Then the user view plan details of the selected plan in AARP site
+	| Plan Name | <planName> |
+    |Error Message | <errorMessage> |
+
+
+
+Examples:
+	| zipcode | county             | drugInitials | drugName      |  drugDosage	        | packages                                          | quantity | drugFrequency  | genericAvailable | brand/generic                            | pharmacyType	 	 		| distance   |  pharmacyName               | plantype |planYear| planName 					                       |errorMessage                                                                                                                                   |
+	| 76270   | Montague County    | lipi	      |  Lipitor      |  Lipitor TAB 20MG   | null                                              | 40       | Every 3 months | yes              | Lipitor TAB 20MG (Qty 40 Every 3 Months) | Available Pharmacies        | 25 miles   |  CVS Pharmacy               | PDP      | 2016   |AARP MedicareRx Preferred (PDP)                    |The pharmacy selected is not part of this plan's pharmacy network. Please edit your current pharmacy to estimate your drug costs for this plan.|
 	 		 

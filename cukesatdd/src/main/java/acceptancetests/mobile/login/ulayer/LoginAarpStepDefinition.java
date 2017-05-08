@@ -1,6 +1,7 @@
 /**
  * 
  */
+
 package acceptancetests.mobile.login.ulayer;
 
 import gherkin.formatter.model.DataTableRow;
@@ -19,6 +20,8 @@ import org.openqa.selenium.WebDriver;
 import org.skyscreamer.jsonassert.JSONAssert;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import pages.acquisition.ulayer.AcquisitionHomePage;
+import pages.mobile.member.ulayer.BenefitDetailsPage;
 import pages.mobile.member.ulayer.BenefitsSummaryPage;
 import pages.mobile.member.ulayer.LoginPage;
 import acceptancetests.atdd.data.mobile.member.PageConstants;
@@ -26,8 +29,10 @@ import acceptancetests.atdd.mobile.data.CommonConstants;
 import acceptancetests.mobile.login.data.LoginCommonConstants;
 import atdd.framework.MRScenario;
 import cucumber.annotation.After;
+import cucumber.annotation.en.Then;
 import cucumber.annotation.en.And;
 import cucumber.annotation.en.Given;
+import cucumber.annotation.en.Then;
 import cucumber.annotation.en.When;
 import cucumber.table.DataTable;
 
@@ -115,9 +120,23 @@ public class LoginAarpStepDefinition {
 		}
 
 		getLoginScenario().saveBean(CommonConstants.EXPECTED_DATA_MAP, expectedDataMap);
+	
+	}	
+
+@Then("^the user validates View ID Card displays with member information populated$")
+	public void view_id_card(){
+		LoginPage loginPage = (LoginPage)getLoginScenario().getBean(PageConstants.LOGIN_PAGE);
+		LoginPage.clickOnViewIDCard();
+		//loginPage.logout();
 	}
 	
-	@And("^the user validates plan and member details on benefits summary page in AARP site$")
+	@And("^the user validate AARP MedicareRX Walgreens$")
+		public void verify_AARPMEdicare_Walgreen(){
+		LoginPage loginPage = (LoginPage)getLoginScenario().getBean(PageConstants.LOGIN_PAGE);
+		LoginPage.verifyMedicareRxWalgreen();
+	}
+
+	@Then("^the user validates plan and member details on benefits summary page in AARP site$")
 	public void log_in_successful()
 	{
 		JSONObject benefitsSummaryActualJson = (JSONObject)getLoginScenario().getBean(LoginCommonConstants.BENEFITS_SUMMARY_ACTUAL);
@@ -136,8 +155,11 @@ public class LoginAarpStepDefinition {
 		BenefitsSummaryPage benefitsSummaryPage = (BenefitsSummaryPage)getLoginScenario().getBean(PageConstants.BENEFITS_SUMMARY_PAGE);
 		benefitsSummaryPage.logout();
 		
-	}
 	
+	}
+
+	
+
 	@After
 	public void tearDown() {
 
@@ -147,5 +169,7 @@ public class LoginAarpStepDefinition {
 		wd.quit();
 		getLoginScenario().flushBeans();
 	}
+	
+	
 
 }

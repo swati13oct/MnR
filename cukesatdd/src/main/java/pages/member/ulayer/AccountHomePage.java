@@ -3,25 +3,34 @@
  */
 package pages.member.ulayer;
 
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.Map;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.junit.Assert;
+import org.openqa.selenium.By;
 import org.openqa.selenium.Cookie;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.openqa.selenium.support.ui.Select;
 
 import acceptancetests.atdd.data.CommonConstants;
 import acceptancetests.atdd.data.PageData;
 import acceptancetests.atdd.util.CommonUtility;
+import atdd.framework.MRScenario;
 import atdd.framework.UhcDriver;
+import pages.dashboard.member.ulayer.ClaimSummarypage;
 
 /**
  * @author pjaising
  */
+
 public class AccountHomePage extends UhcDriver {
 
 	@FindBy(className = "fd_myPlans")
@@ -45,15 +54,30 @@ public class AccountHomePage extends UhcDriver {
 	@FindBy(linkText = "View recent premium payments")
 	private WebElement paymentsLink;
 
-	@FindBy(linkText = "get forms & resources")
+//	@FindBy(partialLinkText = "get forms & resources")
+//	private WebElement formsAndResourcesLink;
+	
+	@FindBy(xpath="//*[@id='footer']/ul/li[1]/div[2]/div[2]/a/span")
 	private WebElement formsAndResourcesLink;
+	
+	@FindBy(xpath="//[@id='benefits']/a")
+	private WebElement benefitsAndCoverageLink;
 
 	@FindBy(linkText = "locate a pharmacy")
 	private WebElement pharmacyLocator;
+	
+	@FindBy(linkText = "medical providers")
+	private WebElement medicalProviders ;
 
 	@FindBy(xpath = "//li[@id='fd_myMenu']/a")
 	private WebElement myMenuNavigator;
 
+	@FindBy(xpath = "//span[contains(.,'Print temporary ID card')]")
+	private WebElement viewIDCard;
+	
+	@FindBy(id = "pcpLogoPrint1left")
+	private WebElement validateLogo;
+	
 	@FindBy(linkText = "Prescription drug cost and benefits summary")
 	private WebElement prescriptionDrugCostBenefitSummaryLink;
 
@@ -96,7 +120,7 @@ public class AccountHomePage extends UhcDriver {
 	@FindBy(className = "fd_myHealthWellness")
 	private WebElement hwTab;
 	
-	@FindBy(linkText = "Compare 2016 Plans")
+	@FindBy(linkText = "Compare 2017 Plans")
 	private WebElement planCompareLink;	
 	
 	@FindBy(xpath = "//div[@class='prefermain_mid mapd_div']/div/h3")
@@ -107,10 +131,60 @@ public class AccountHomePage extends UhcDriver {
 	
 	@FindBy(xpath = "//div[@class='myProfileMid']/div/form/div/div/div/div[2]/div/div[2]/h3")
 	private WebElement preferencesPageHeading;
-
+	
+	@FindBy(xpath=".//*[contains(text(),'search for providers')]")
+	private WebElement searchForProviders;
+	
+	@FindBy(xpath = "//*[@id='medicareTitle']/a[1]")
+	private WebElement espanolLink;
+	
+	@FindBy(xpath = "//*[@id='medicareTitle']/a[2]")   //Story 261070
+	private WebElement chineseLink;
+	
+	@FindBy(xpath = "//*[@id='subPageLeft']/div[2]/div[2]/div[2]/div/h3[2]/a")
+	private WebElement createPdfLink;
+	
+	@FindBy(xpath = "//*[@id='gogreenlogin_box']/div[4]/div")
+	private WebElement gogreenPopup;
+	
+	@FindBy(xpath = "//*[@id='gogreenlogin_box']/div[4]/div/a")
+	private WebElement gogreenPopupClose;
+	
+	
+	@FindBy(xpath = "//*[@id='paymentOverviewApp']/div[1]/div/div/div/h1")
+	private WebElement paymentsHeading;
+	
 	private PageData myAccountHome;
 
+	@FindBy(linkText = "My Documents")
+	private WebElement MyDocumentLink;
+	
+	@FindBy(linkText = "Back to previous page")
+	private WebElement backTopreviouspageLink;
+	
+	@FindBy(xpath = "//*[@id='myDocuments']/div/div[2]/div/p[2]/ul/li[4]/a")
+	private WebElement paginationLink;
+	
+	@FindBy(linkText = "View/Download")
+	private WebElement viewanddownloadLink;
+	
+	@FindBy(xpath = "//*[@id='myDocuments']/div/div[1]/div/form/div/div[2]/div[2]/div[2]/div[1]/div/input")
+	private WebElement fromdate;
+	
+	@FindBy(xpath = "//*[@id='myDocuments']/div/div[1]/div/form/div/div[2]/div[2]/div[2]/div[2]/div/input")
+	private WebElement todate;
+	
+	@FindBy(xpath = "//*[@id='myDocuments']/div/div[1]/div/form/div/div[2]/div[2]/div[2]/div[3]/button")
+	private WebElement searchLink;
+	
+	@FindBy(linkText = "Date")
+	private WebElement dateLink;
+
 	public JSONObject accountHomeJson;
+
+	private PageData browserCheckData;
+
+	private JSONObject browserCheckJson;
 
 	public AccountHomePage(WebDriver driver) {
 		super(driver);
@@ -129,12 +203,22 @@ public class AccountHomePage extends UhcDriver {
 		} else
 			return null;
 	}
+	
+	
+	public PlanBenefitsCoveragePage navigateToBenefitsAndCoverage() {
+		benefitsAndCoverageLink.click();
+		if (driver.getTitle().equalsIgnoreCase(
+				"AARP Medicare Plans | Plan Benefits and Coverage")) {
+			return new PlanBenefitsCoveragePage(driver);
+		} else
+			return null;
+	}
+	
 
-	public ManageDrugPage navigateToDrugLookup() {
-
+	public EstimateYourDrugCostPage navigateToDrugLookup() {		
 		drugLookupLink.click();
 		if (driver.getTitle().equalsIgnoreCase("Drug Lookup")) {
-			return new ManageDrugPage(driver);
+			return new EstimateYourDrugCostPage(driver);
 		} else
 
 			return null;
@@ -179,6 +263,16 @@ public class AccountHomePage extends UhcDriver {
 			return null;
 
 	}
+	public PharmacySearchPage navigateNonEnglishContent() {  //STORY 261070
+		espanolLink.click();
+		chineseLink.click();
+		createPdfLink.click();
+		if (driver.getTitle().equalsIgnoreCase(
+				"AARP Medicare Plans | Pharmacy Directory")) {
+			return new PharmacySearchPage(driver);
+		}
+		return null;
+	}
 
 	public MyProfilesPage navigateToProfAndPref() {
 
@@ -206,6 +300,26 @@ public class AccountHomePage extends UhcDriver {
 
 	}
 
+
+
+	public pages.dashboard.member.ulayer.PaymentHistoryPage changeUrlToNewPaymentHistoryPage() {
+
+		String NewPayHistoryUrl = "content/dashboard/home/Payments.html";
+
+		String url = driver.getCurrentUrl();
+		url = url.replace("home/my-account-home.html", NewPayHistoryUrl);
+
+		driver.get(url);
+		// System.out.println("testing2");
+		if (paymentsHeading.getText().contains("Premium Payments Overview")) {
+
+			return new pages.dashboard.member.ulayer.PaymentHistoryPage(driver);
+
+		}
+
+		return null;
+	}
+	
 	public PharmacySearchPage navigateToPharmacyLocator() {
 
 		pharmacyLocator.click();
@@ -325,13 +439,10 @@ public class AccountHomePage extends UhcDriver {
 	}
 
 	public JSONObject getExpectedData(Map<String, JSONObject> expectedDataMap) {
-
-		JSONObject globalExpectedJson = expectedDataMap
-				.get(CommonConstants.GLOBAL);
+		
 		JSONObject accountHomeExpectedJson = expectedDataMap
 				.get(CommonConstants.MY_ACCOUNT_HOME);
-		accountHomeExpectedJson = CommonUtility.mergeJson(
-				accountHomeExpectedJson, globalExpectedJson);
+		
 		return accountHomeExpectedJson;
 	}
 
@@ -396,16 +507,201 @@ public class AccountHomePage extends UhcDriver {
 	}
 
 	public PlanComparePage navigateToPlanCompare() {
-		//Compare 2016 Plans
+		//Compare 2017 Plans
 		planCompareLink.click();
+		
 		CommonUtility.waitForPageLoad(driver, planCompareHeader, 20);
-		if(getTitle().equalsIgnoreCase("Compare 2016 Plans"))
+		
+		if(getTitle().equalsIgnoreCase("Compare 2017 Plans"))
 		{
 			return new PlanComparePage(driver);
-		}
+			
+					}
 		return null;
 		
+	
 	}
+
+	public JSONObject getBrowserCheck() {
+		String fileName = CommonConstants.AARPM_BROWSER_CHECK_DATA;
+		browserCheckData = CommonUtility.readPageData(fileName,
+				CommonConstants.PAGE_OBJECT_DIRECTORY_ULAYER_MEMBER);
+
+		JSONObject jsonObject = new JSONObject();
+		for (String key : browserCheckData.getExpectedData().keySet()) {
+			WebElement element = findElement(browserCheckData.getExpectedData()
+					.get(key));
+			if (element != null) {
+				if (validate(element)) {
+					try {
+						jsonObject.put(key, element.getText());
+					} catch (JSONException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				}
+			}
+		}
+		browserCheckJson = jsonObject;
+
+		return browserCheckJson;
+	}
+
+	public Rallytool_Page navigateToRallyPage() { 
+		driver.manage().window().maximize(); 
+		try{
+		searchForProviders.click();
+		//switch to Rally Page
+		ArrayList<String> tabs = new ArrayList<String> (driver.getWindowHandles());
+		driver.switchTo().window(tabs.get(1));
+		if (driver.getTitle().equalsIgnoreCase("Find Care")) {
+		return new Rallytool_Page(driver);
+		}
+		else{
+			Assert.fail();
+		}
+		}
+		catch(Exception e){
+					
+		Assert.fail("Link is not Present");
+		} 
+
+		return null;
+		}
+	
+
+	public void navigate_ProviderSearch() {
+		validate(medicalProviders);
+		medicalProviders.click();
+			
+	}
+	
+	public boolean validateGogreenPopup(){
+		boolean flag=false;
+		try {
+			flag= validate(gogreenPopup);
+			return flag;
+		} catch (Exception e) {
+			return flag;
+		}		
+	}
+	
+	public void closeGogreenPopup(){
+		gogreenPopupClose.click();
+	}
+	
+
+	public OneTimePaymentsPage navigateToOneTimePaymentsPage() {
+		driver.navigate().to("https://member."+MRScenario.environment+"-aarpmedicareplans.uhc.com/content/dashboard/home/one-time-payments.html");
+		System.out.println("title  "+driver.getTitle());
+		if(driver.getTitle().equalsIgnoreCase("one-time-payments")){
+			return new OneTimePaymentsPage(driver);
+		}
+		return null;
+	}
+
+	public Boolean tempIdValidation() {
+		validate(viewIDCard);
+		viewIDCard.click();
+		if(validate(validateLogo)){
+			return true;
+		}
+		return false;
+		
+	}
+
+	public AutomaticPaymentsPage navigateToAutomaticPaymentsPage() {
+		driver.navigate().to("https://member."+MRScenario.environment+"-aarpmedicareplans.uhc.com/content/dashboard/home/automatic-payments.html");
+		System.out.println("title  "+driver.getTitle());
+		if(driver.getTitle().equalsIgnoreCase("Automatic Payments")){
+			return new AutomaticPaymentsPage(driver);
+		}
+		return null;
+	}
+public pages.dashboard.member.ulayer.ClaimSummarypage navigateToClaimsSummaryPage(WebDriver driver) {
+		// TODO Auto-generated method stub
+				String url = "https://member.team-b-aarpmedicareplans.uhc.com/guest/mirumclaims.html";
+				driver.navigate().to(url);
+				/*try {
+					Thread.sleep(1000);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}*/
+				
+				if (driver.getTitle().equals("Member Claims")) {
+					return new pages.dashboard.member.ulayer.ClaimSummarypage(driver);		
+		
+	}
+		return null;
+	}
+
+public pages.dashboard.member.ulayer.ClaimDetailsPage navigateToClaimDetailsPage(WebDriver driver) {
+	// TODO Auto-generated method stub
+			String url = "https://member.team-b-aarpmedicareplans.uhc.com/home/claimtest.html#/claims-Detail";
+			driver.get(url);
+			/*try {
+				Thread.sleep(1000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}*/
+			System.out.println(driver.getTitle());
+			if (driver.getTitle().equalsIgnoreCase("Member Claims")) {
+				return new pages.dashboard.member.ulayer.ClaimDetailsPage(driver);		
+	
+}
+			return new pages.dashboard.member.ulayer.ClaimDetailsPage(driver);
+}
+public FormsandresourcesPage navigateToMydocumentAarpPage() {
+		
+		MyDocumentLink.click();
+		
+		return null;
+	}
+
+	public FormsandresourcesPage navigatebackToformsandresourcesAarpPage() {
+		
+		backTopreviouspageLink.click();
+		
+		return null;
+	}
+
+	public FormsandresourcesPage navigateTopaginationAarpPage() {
+		
+		Select select = new  Select(driver.findElement(By.id("document-date")));
+		select.selectByVisibleText("Current Year");
+		
+		paginationLink.click();
+		
+		return null;
+	}
+
+	public FormsandresourcesPage navigateToviewdowloadlinkAarpPage() {
+		
+		viewanddownloadLink.click();
+		return null;
+	}
+
+	public FormsandresourcesPage navigateTocustomersearchlinkAarpPage() {
+		
+		Select select = new  Select(driver.findElement(By.id("document-date")));
+		select.selectByVisibleText("Custom Search");
+		fromdate.sendKeys("01/09/2017");
+		todate.sendKeys("01/13/2017");
+		searchLink.click();
+		return null;
+	}
+
+	public FormsandresourcesPage navigateTosortingsearchlinkAarpPage() {
+		Select select = new  Select(driver.findElement(By.id("document-date")));
+		select.selectByVisibleText("Current Year");
+		dateLink.click();
+		return null;
+	}
+	
+
+
 
 	public void validatePreferredMailOderLink() {
 		Actions actions = new Actions(driver);
@@ -434,4 +730,14 @@ public class AccountHomePage extends UhcDriver {
 		}
 	}
 
+	
+
+ 
 }
+
+
+
+
+
+
+

@@ -78,7 +78,7 @@ public class PlanSummaryAarpStepDefintion {
 		LoginPage loginPage = new LoginPage(wd);
 		AccountHomePage accountHomePage = (AccountHomePage)loginPage.loginWith(userName, pwd);
 		JSONObject accountHomeActualJson = null;
-		 
+
 		/* Get expected data */
 		Map<String, JSONObject> expectedDataMap = loginScenario
 				.getExpectedJson(userName);
@@ -101,8 +101,50 @@ public class PlanSummaryAarpStepDefintion {
 
 		getLoginScenario().saveBean(CommonConstants.EXPECTED_DATA_MAP,
 				expectedDataMap);
-
 	}
+
+	@When("^registered member to login in AARP site$")
+	public void registered_AARP_with_attributes_payment(DataTable memberAttributes) {
+
+		/* Reading the given attribute from feature file */
+		List<List<String>> dataTable = memberAttributes.raw();
+		List<String> desiredAttributes = new ArrayList<String>();
+
+		for (List<String> data : dataTable) {
+			desiredAttributes.add(data.get(0));
+		}
+		System.out.println("desiredAttributes.." + desiredAttributes);
+		Map<String, String> loginCreds = loginScenario
+				.getAMPMemberWithDesiredAttributes(desiredAttributes);
+
+		String userName = null;
+		String pwd = null;
+		if (loginCreds == null) {
+			// no match found
+			System.out.println("Member Type data could not be setup !!!");
+			Assert.fail("unable to find a " + desiredAttributes + " member");
+		} else {
+			userName = loginCreds.get("user");
+			pwd = loginCreds.get("pwd");
+			System.out.println("User is..." + userName);
+			System.out.println("Password is..." + pwd);
+			getLoginScenario()
+			.saveBean(LoginCommonConstants.USERNAME, userName);
+			getLoginScenario().saveBean(LoginCommonConstants.PASSWORD, pwd);
+		}
+
+		WebDriver wd = getLoginScenario().getWebDriver();
+		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
+
+		LoginPage loginPage = new LoginPage(wd);
+		AccountHomePage accountHomePage = (AccountHomePage)loginPage.loginWith(userName, pwd);
+
+		if (accountHomePage != null) {
+			getLoginScenario().saveBean(PageConstants.ACCOUNT_HOME_PAGE,
+					accountHomePage);
+		}
+
+	}		
 
 	@When("^the user navigates to plan summary page in AARP site$")
 	public void user_views_plan_summary_aarp() {
@@ -118,7 +160,7 @@ public class PlanSummaryAarpStepDefintion {
 		getLoginScenario().saveBean(
 				PlanSummaryCommonConstants.PLAN_SUMMARY_EXPECTED,
 				planSummaryExpectedJson);
-		
+
 		JSONObject planSummaryActualJson = null;
 		if (planSummaryPage != null) {
 			getLoginScenario().saveBean(PageConstants.PLAN_SUMMARY_PAGE,
@@ -126,7 +168,7 @@ public class PlanSummaryAarpStepDefintion {
 			Assert.assertTrue(true);
 			planSummaryActualJson = planSummaryPage.planSummaryJson;
 		}
-		
+
 		getLoginScenario().saveBean(
 				PlanSummaryCommonConstants.PLAN_SUMMARY_ACTUAL,
 				planSummaryActualJson);
@@ -134,7 +176,23 @@ public class PlanSummaryAarpStepDefintion {
 				planSummaryPage);
 	}
 
-	@Then("^the user the validates plan summary page in AARP site$")
+
+	@When("^the user navigates to plan summary page under my plans in AARP site$")
+	public void user_views_plan_summary_my_plans_aarp() {
+		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario()
+				.getBean(PageConstants.ACCOUNT_HOME_PAGE);
+		PlanSummaryPage planSummaryPage = accountHomePage
+				.navigateToPlanSummary();
+		if (planSummaryPage != null) {
+			getLoginScenario().saveBean(PageConstants.PLAN_SUMMARY_PAGE,
+					planSummaryPage);
+		}
+	}
+
+
+
+	@Then("^the user the validates different resources in AARP site$")
+
 	public void user_validates_plan_summary_aarp() {
 		PlanSummaryPage planSummaryPage = (PlanSummaryPage) getLoginScenario()
 				.getBean(PageConstants.PLAN_SUMMARY_PAGE);
@@ -156,6 +214,14 @@ public class PlanSummaryAarpStepDefintion {
 		}
 
 		planSummaryPage.logOut();
+	}
+	
+	@Then("^the user validates pharmacy saver widget in AARP site$")
+	public void user_validates_pharmacy_saver_widget_AARP(){
+		PlanSummaryPage planSummaryPage = (PlanSummaryPage) getLoginScenario()
+				.getBean(PageConstants.PLAN_SUMMARY_PAGE);
+		planSummaryPage.validatePharmacySaver();
+		planSummaryPage.logOut();		
 	}
 
 	@After

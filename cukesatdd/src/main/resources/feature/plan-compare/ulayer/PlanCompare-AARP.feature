@@ -12,6 +12,6 @@ Then the user validates plan benefits for the plans in current year and next yea
 
  Examples:
 	 | planType | planChoice			|
-	 | PDP      | AARP MedicareRx Saver Plus (PDP)	|
+	 | MA       | AARP MedicareComplete Choice Essential (PPO)	|
 
 ##-Note : the PDP memeber used here is a AARP MedicareRx Preferred (PDP) plan member

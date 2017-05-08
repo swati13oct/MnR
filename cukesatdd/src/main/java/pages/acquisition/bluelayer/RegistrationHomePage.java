@@ -36,7 +36,7 @@ public class RegistrationHomePage extends UhcDriver {
 	@FindBy(id = "year")
 	private WebElement yearToEnter;
 
-	@FindBy(name = "Continue")
+	@FindBy(className = "shipcontinue_btn")
 	private WebElement continueButton;
 
 	private static String PAGE_URL = MRConstants.UHCM_REGISTRATION_URL;
@@ -63,7 +63,7 @@ public class RegistrationHomePage extends UhcDriver {
 		sendkeys(yearToEnter, year);
 		continueButton.click();
 
-		if (this.driver.getTitle().equalsIgnoreCase(
+		if (getTitle().equalsIgnoreCase(
 				"UnitedHealthcare Medicare Solutions | Registration")) {
 			return new PlanConfirmationPage(driver);
 		}
@@ -88,11 +88,26 @@ public class RegistrationHomePage extends UhcDriver {
 		
 	}
 
+	public RegistrationUMSErrorPage navigateToErrorPage() {		
+		if (driver.getTitle().equalsIgnoreCase(
+				"UnitedHealthcare Medicare Solutions | Registration")) {
+			return new RegistrationUMSErrorPage(driver);
+		}
+		return null;
+	}
+	/*TODO:sseetala Please check if this method is required. Unable to find references in the codebase*/
 	public AcquisitionHomePage switchBack() {
+		
+		/*----------Start---------
+		 * TODO:sseetala Please create a method in UhcDriver class for the below selenium operation/command and consume it here
+		 * 
+		 * */
 			ArrayList<String> tabs = new ArrayList<String> (driver.getWindowHandles());
 			driver.switchTo().window(tabs.get(0));
+			
+			/*-----------end--------------*/
 			validate(registerHereLink);
-			if(driver.getTitle().equalsIgnoreCase("Medicare Plans for Different Needs | UnitedHealthcare®"))
+			if(getTitle().equalsIgnoreCase("Medicare Plans for Different Needs | UnitedHealthcare®"))
 			{
 				return new AcquisitionHomePage(driver);
 			}

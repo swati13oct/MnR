@@ -1,0 +1,89 @@
+{
+   "pharmacyTypes":[
+      {
+         "pharmacyDropDown":"Preferred Retail Pharmacy"
+      },
+      {
+         "pharmacyDropDown":"Standard Network Pharmacy"
+      },
+      {
+         "pharmacyDropDown":"Mail Service Pharmacy"
+      }
+   ],
+   "previousLink":"Previous 10 results",
+   "pharmacies":[
+      {
+         "pharmacyDistance":"1.72",
+         "selectLink":"Select",
+         "pharmacyName":"Vons Pharmacy #2739"
+      },
+      {
+         "pharmacyDistance":"2.15",
+         "selectLink":"Select",
+         "pharmacyName":"Community, A Walgreens Pharmacy"
+      },
+      {
+         "pharmacyDistance":"2.8",
+         "selectLink":"Select",
+         "pharmacyName":"Walgreens"
+      },
+      {
+         "pharmacyDistance":"2.96",
+         "selectLink":"Select",
+         "pharmacyName":"Ralphs Pharmacy"
+      },
+      {
+         "pharmacyDistance":"2.99",
+         "selectLink":"Select",
+         "pharmacyName":"Community, A Walgreens Pharmacy"
+      },
+      {
+         "pharmacyDistance":"3.35",
+         "selectLink":"Select",
+         "pharmacyName":"Walgreens"
+      },
+      {
+         "pharmacyDistance":"3.35",
+         "selectLink":"Select",
+         "pharmacyName":"Ralphs Pharmacy"
+      },
+      {
+         "pharmacyDistance":"3.87",
+         "selectLink":"Select",
+         "pharmacyName":"Walgreens"
+      },
+      {
+         "pharmacyDistance":"3.92",
+         "selectLink":"Select",
+         "pharmacyName":"Ralphs Pharmacy"
+      },
+      {
+         "pharmacyDistance":"3.92",
+         "selectLink":"Select",
+         "pharmacyName":"CVS Pharmacy #"
+      }
+   ],
+   "zipcode":"90210",
+   "editZipCodeLink":"Edit ZIP code",
+   "miles":[
+      {
+         "milesDropDown":"1 mile"
+      },
+      {
+         "milesDropDown":"2 miles"
+      },
+      {
+         "milesDropDown":"5 miles"
+      },
+      {
+         "milesDropDown":"10 miles"
+      },
+      {
+         "milesDropDown":"15 miles"
+      },
+      {
+         "milesDropDown":"25 miles"
+      }
+   ],
+   "nextLink":"Next 10 results"
+}

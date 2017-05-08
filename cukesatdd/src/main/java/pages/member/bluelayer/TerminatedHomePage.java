@@ -3,6 +3,8 @@
  */
 package pages.member.bluelayer;
 
+import java.util.NoSuchElementException;
+
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -21,6 +23,9 @@ public class TerminatedHomePage {
 
 	@FindBy(id = "memberId")
 	private WebElement memberId;
+	
+	@FindBy(linkText = "addaplan")
+	private WebElement addaplanlink;
 	
 	@FindBy(id = "terminatedDate")
 	private WebElement terminatedDate;
@@ -53,6 +58,26 @@ public class TerminatedHomePage {
 		}
 		return null;
 	}
+	
+	public boolean validateaddaplanlink() {
+		
+	boolean presentLink =false;
+		
+		try {
+			if(addaplanlink.isDisplayed()){
+				
+				presentLink = true;
+				return presentLink;
+			}			  
+			 
+		} catch (NoSuchElementException e) {
+			presentLink = false;
+		}
+		return presentLink;
+		// TODO Auto-generated method stub
+		
+	}
+
 
 
 }

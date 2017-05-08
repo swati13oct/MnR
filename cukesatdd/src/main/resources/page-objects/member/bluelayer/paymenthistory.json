@@ -2,12 +2,24 @@
 "url":null,
 "expectedData":{
 "totalAmountDue":{
-"identifier": "xpath",
-"elementName": "//div[@id='paymentHistoryApp']/div[1]/div[1]/div/div/div[2]/table[1]/tbody/tr[1]/td[2]"
+"identifier": "id",
+"elementName": "totalamtdueVal"
 },
 "paymentMethod" : {
-"identifier": "xpath",
-"elementName": "//div[@id='paymentHistoryApp']/div[1]/div[1]/div/div/div[2]/table[1]/tbody/tr[3]/td[2]"
+"identifier": "id",
+"elementName": "paymentMethodVal"
+},
+ "creditBalance":{
+	"identifier": "id",
+	"elementName": "paymentCreditBalVal"
+},
+"makeaPaymentButton" : {
+"identifier": "id",
+"elementName": "onetimepayment"
+},
+"automicPayments" : {
+"identifier": "id",
+"elementName": "autopayment"
 },
 "paymentHistoryTable":{
 "identifier": "xpath",

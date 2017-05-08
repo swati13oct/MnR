@@ -1,0 +1,42 @@
+{
+    "planName": "AARP MEDICARECOMPLETE SECUREHORIZONS PLAN 2 (HMO)",
+    "memberDetails": [
+        {
+            "memberDetails": "Member ID\n002962871-01"
+        },
+        {
+            "memberDetails": "Plan Effective Date\n01/01/2016"
+        },
+        {
+            "memberDetails": "Primary Care Provider\nABOAF, ALAN P"
+        }
+    ],
+    "drugBenefits": [
+        {
+            "drugBenefits": "Tier 1\n$2.00"
+        },
+        {
+            "drugBenefits": "Tier 2\n$8.00"
+        },
+        {
+            "drugBenefits": "Tier 3\n$45.00"
+        },
+        {
+            "drugBenefits": "Tier 4\n$95.00"
+        },
+        {
+            "drugBenefits": "Tier 5 (Specialty Tier)\n28% co-insurance"
+        }
+    ],
+    "medicalBenefitsDetailsLink": "VIEW DETAILS",
+    "medicalBenefits": [
+        {
+            "medicalBenefits": "Office Visits\nPrimary Care Provider:\n$10.00\nSpecialist:\n$50.00"
+        },
+        {
+            "medicalBenefits": "Inpatient Hospital Visits\nDays 1 - 5:\n$345.00/day\nDays 6 - 90:\n$0.00/day"
+        }
+    ],
+    "drugBenefitsDetailsLink": "VIEW DETAILS",
+    "planStatus": "Active"
+}

@@ -5,17 +5,24 @@ package acceptancetests.tollfreenumber.bluelayer;
 
 import gherkin.formatter.model.DataTableRow;
 
+import java.io.File;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
 import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.interactions.ClickAction;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import pages.acquisition.bluelayer.AcquisitionHomePage;
 import pages.acquisition.bluelayer.SearchEnginePage;
 import pages.acquisition.bluelayer.SearchResultsPage;
+import pages.acquisition.ulayer.MaViewPlansAndPricingPage;
+import pages.acquisition.ulayer.MsViewPlansAndPricingPage;
+import pages.acquisition.ulayer.PdpViewPlansAndPricingPage;
+import acceptancetests.atdd.data.CommonConstants;
+import acceptancetests.atdd.data.acquisition.PageConstants;
 import acceptancetests.atdd.util.CampaignPSC;
 import acceptancetests.atdd.util.TFNCommonConstants;
 import atdd.framework.MRScenario;
@@ -91,5 +98,87 @@ public class TFNHomePageFooterUmsStepDefinition {
 		System.out.println("HomeFooterContent" + footerContent);
 	}
 
+	@Then("^user navigates to Medicare Advantage page on UMS site$")
+	public void user_navigates_medicare_advantage_ums() 
+	{
+		AcquisitionHomePage acquisitionHomePage = (AcquisitionHomePage) getLoginScenario()
+				.getBean("acquisitionHomePage");
+		acquisitionHomePage.start("https://www.awe-dev-a-uhcmedicaresolutions.uhc.com/health-plans/medicare-advantage-plans.html");
 
+	}
+	@When("^the user navigates to View Plans and Pricing for below plan type section in UMS site$")
+	public void user_navigates_view_plans_pricing_plantype_aarp(
+			DataTable givenattribute) {
+		String planType = givenattribute.getGherkinRows().get(0).getCells()
+				.get(0);
+		AcquisitionHomePage acquisitionHomePage = (AcquisitionHomePage) getLoginScenario()
+				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+		String searchEngine = (String) getLoginScenario().getBean(
+				TFNCommonConstants.SEARCH_ENGINE);
+
+		Object vppPage = acquisitionHomePage.navigatesToVppSection(planType);
+
+		String fileName = "vpp";
+		String directory = CommonConstants.ACQUISITION_EXPECTED_DIRECTORY
+				+ File.separator + CommonConstants.SITE_ULAYER + File.separator
+				+ TFNCommonConstants.TFN_FLOW_NAME + File.separator;
+
+		if (vppPage.getClass().toString().contains("Ma")) {
+			MaViewPlansAndPricingPage maViewPlansAndPricingPage = (MaViewPlansAndPricingPage) vppPage;
+			getLoginScenario().saveBean(PageConstants.MA_VPP_PAGE,
+					maViewPlansAndPricingPage);
+
+			String TFNActual = maViewPlansAndPricingPage.getTfnDisplayed();
+			String TFNExpected = maViewPlansAndPricingPage.getTfnExpected(
+					fileName, directory, searchEngine);
+
+			getLoginScenario().saveBean(TFNCommonConstants.TFN_ACTUAL,
+					TFNActual);
+			getLoginScenario().saveBean(TFNCommonConstants.TFN_EXPECTED,
+					TFNExpected);
+
+		}
+		if (vppPage.getClass().toString().contains("Pdp")) {
+			PdpViewPlansAndPricingPage pdpViewPlansAndPricingPage = (PdpViewPlansAndPricingPage) vppPage;
+			getLoginScenario().saveBean(PageConstants.PDP_VPP_PAGE,
+					pdpViewPlansAndPricingPage);
+
+			String TFNActual = pdpViewPlansAndPricingPage.getTfnDisplayed();
+			String TFNExpected = pdpViewPlansAndPricingPage.getTfnExpected(
+					fileName, directory, searchEngine);
+
+			getLoginScenario().saveBean(TFNCommonConstants.TFN_ACTUAL,
+					TFNActual);
+			getLoginScenario().saveBean(TFNCommonConstants.TFN_EXPECTED,
+					TFNExpected);
+		}
+		if (vppPage.getClass().toString().contains("Ms")) {
+			MsViewPlansAndPricingPage msViewPlansAndPricingPage = (MsViewPlansAndPricingPage) vppPage;
+			getLoginScenario().saveBean(PageConstants.MS_VPP_PAGE,
+					msViewPlansAndPricingPage);
+
+			String TFNActual = msViewPlansAndPricingPage.getTfnDisplayed();
+			String TFNExpected = msViewPlansAndPricingPage.getTfnExpected(
+					fileName, directory, searchEngine);
+
+			getLoginScenario().saveBean(TFNCommonConstants.TFN_ACTUAL,
+					TFNActual);
+			getLoginScenario().saveBean(TFNCommonConstants.TFN_EXPECTED,
+					TFNExpected);
+		}
+
+	}
+	@Then("^user validates the TFN displayed in UMS site$")
+	public void user_validates_data_home_page_footer() {
+
+		String TFNActual = (String) getLoginScenario().getBean(
+				TFNCommonConstants.TFN_ACTUAL);
+		String TFNExpected = (String) getLoginScenario().getBean(
+				TFNCommonConstants.TFN_EXPECTED);
+
+		Assert.assertEquals(TFNExpected, TFNActual);
+
+	}
+
+	
 }

@@ -20,3 +20,19 @@ Examples:
 #      	| MA       | 123000000 |  123000000       |1234567890  | 1234567890       | first     | second     | third    |
 	| PDP      | 123000000 |  123000000       |1234567890  | 1234567890       | first     | second     | third    |
 #	| MAPD     | 123000000 |  123000000       |1234567890  | 1234567890       | first     | second     | third    |
+
+
+Scenario Outline: Verify the Automatic Payments Tool for Dashboard
+Given the user is on the AARP medicare site login page
+When the user logs in with a registered AMP with following details in AARP site
+	| Plan Type   | <planType>  |
+And the user navigates to Automatic Payments page
+
+
+Examples:
+	| planType |
+	| MAPD     |
+#	| MA       |
+#	| PDP      |
+#	| MS       |
+#	| HIP      |

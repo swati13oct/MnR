@@ -2,10 +2,14 @@ package acceptancetests.payments.ulayer;
 
 import gherkin.formatter.model.DataTableRow;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -19,13 +23,14 @@ import pages.member.ulayer.ConfirmOneTimePaymentPage;
 import pages.member.ulayer.LoginPage;
 import pages.member.ulayer.OneTimePaymentPage;
 import pages.member.ulayer.OneTimePaymentSuccessPage;
+import pages.member.ulayer.OneTimePaymentsPage;
 import pages.member.ulayer.PaymentHistoryPage;
+import pages.member.ulayer.ReviewOneTimePaymentsPage;
 import acceptancetests.atdd.data.CommonConstants;
 import acceptancetests.atdd.data.member.PageConstants;
 import acceptancetests.login.data.LoginCommonConstants;
 import acceptancetests.payments.data.PaymentCommonConstants;
 import atdd.framework.MRScenario;
-import cucumber.annotation.After;
 import cucumber.annotation.en.And;
 import cucumber.annotation.en.Given;
 import cucumber.annotation.en.Then;
@@ -255,5 +260,150 @@ public class OneTimePaymentAarpStepDefintion {
 		}
 
 		oneTimePaymentSuccessPage.logOut();
+	}
+	
+	@Given("^the user is on the AARP medicare site login page$")
+	public void user_login_page()
+	{
+		WebDriver wd = getLoginScenario().getWebDriver();
+		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
+
+		LoginPage loginPage = new LoginPage(wd);
+		getLoginScenario().saveBean(PageConstants.LOGIN_PAGE, loginPage);
+	}
+	
+	@When("^the user logs in with a registered AMP with following details in AARP site$")
+	public void user_logs_in(DataTable memberAttributes)
+	{
+		/* Reading the given attribute from feature file */
+		List<DataTableRow> memberAttributesRow = memberAttributes
+				.getGherkinRows();
+		Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells()
+					.get(0), memberAttributesRow.get(i).getCells().get(1));
+		}
+
+		Set<String> memberAttributesKeySet = memberAttributesMap.keySet();
+		List<String> desiredAttributes = new ArrayList<String>();
+		for (Iterator<String> iterator = memberAttributesKeySet.iterator(); iterator
+				.hasNext();) {
+			{
+				String key = iterator.next();
+				desiredAttributes.add(memberAttributesMap.get(key));
+			}
+
+		}
+		System.out.println("desiredAttributes.." + desiredAttributes);
+
+		Map<String,String> loginCreds = loginScenario
+				.getAMPMemberWithDesiredAttributes(desiredAttributes);
+		
+		String userName = null;
+		String pwd = null;
+		if (loginCreds == null) {
+			// no match found
+			System.out.println("Member Type data could not be setup !!!");
+			Assert.fail("unable to find a "+ desiredAttributes + " member");
+		} else {
+			userName = loginCreds.get("user");
+			pwd = loginCreds.get("pwd");
+			System.out.println("User is..." + userName);
+			System.out.println("Password is..." + pwd );
+			getLoginScenario().saveBean(LoginCommonConstants.USERNAME, userName);
+			getLoginScenario().saveBean(LoginCommonConstants.PASSWORD, pwd);
+		}
+		
+		LoginPage loginPage = (LoginPage)getLoginScenario().getBean(PageConstants.LOGIN_PAGE);
+		AccountHomePage accountHomePage = (AccountHomePage) loginPage.loginWith(userName, pwd);
+		
+		
+		if (accountHomePage != null) {
+			getLoginScenario().saveBean(PageConstants.ACCOUNT_HOME_PAGE,
+					accountHomePage);
+			Assert.assertTrue(true);
+			JSONObject accountHomeActualJson = accountHomePage.accountHomeJson;
+			getLoginScenario().saveBean(
+					LoginCommonConstants.ACCOUNT_HOME_ACTUAL,
+					accountHomeActualJson);
+			
+			/* Get expected data */
+			Map<String, JSONObject> expectedDataMap = loginScenario
+					.getExpectedJson(userName);
+			JSONObject accountHomeExpectedJson = accountHomePage
+					.getExpectedData(expectedDataMap);
+			getLoginScenario().saveBean(LoginCommonConstants.ACCOUNT_HOME_EXPECTED,
+					accountHomeExpectedJson);
+	
+	
+	}
+
+	}
+	
+	@And("^the user navigates to One Time Payments page$")
+	public void user_navigates_to_onw_time_payments()
+	{
+		AccountHomePage accountHomePage = (AccountHomePage)getLoginScenario().getBean(PageConstants.ACCOUNT_HOME_PAGE);
+		OneTimePaymentsPage oneTimePaymentsPage = accountHomePage.navigateToOneTimePaymentsPage();
+		if(oneTimePaymentsPage!= null){
+			getLoginScenario().saveBean(PageConstants.ONE_TIME_PAYMENTS_DASHBOARD,
+					oneTimePaymentsPage);
+			Assert.assertTrue(true);
+		} else {
+			Assert.fail("one time payments dashboard page not found");
+		}
+		
+	}
+	
+	@And("^the user enters details and click on continue button on One Time Payments Page for  Dashboard$")
+	public void user_clicks_otheramountradio()
+	{
+		OneTimePaymentsPage oneTimePaymentsPage = (OneTimePaymentsPage)getLoginScenario().getBean(PageConstants.ONE_TIME_PAYMENTS_DASHBOARD);
+		ReviewOneTimePaymentsPage reviewOneTimePaymentsPage = oneTimePaymentsPage.enterInfoAndContinue();
+		if(reviewOneTimePaymentsPage != null){
+			getLoginScenario().saveBean(PageConstants.REVIEW_ONE_TIME_PAYMENTS_DASHBOARD,
+					reviewOneTimePaymentsPage);
+			Assert.assertTrue(true);
+		}else {
+			Assert.fail("one time payments dashboard page not found");
+		}
+		
+		
+	}
+	
+	@Then("^user lands on Review One time Payments Page and validates the amount and routing number values$")
+	public void review_onetime_payments_validation()
+	{
+		ReviewOneTimePaymentsPage reviewOneTimePaymentsPage = (ReviewOneTimePaymentsPage)getLoginScenario().getBean(PageConstants.REVIEW_ONE_TIME_PAYMENTS_DASHBOARD);
+		JSONObject reviewOneTimeActual = reviewOneTimePaymentsPage.reviewOneTimeValues();
+		/* Get expected data */
+		String fileName = "reviewonetimeexpected";
+		String directory = CommonConstants.MEMBER_EXPECTED_DIRECTORY
+				+ File.separator + CommonConstants.SITE_ULAYER
+				+ File.separator
+				+ PaymentCommonConstants.ONE_TIME_PAYMENTS_FLOW_NAME
+				+ File.separator;
+		JSONObject reviewOneTimeExpectedJson = MRScenario.readExpectedJson(
+				fileName, directory);
+
+		getLoginScenario().saveBean(
+				PaymentCommonConstants.ONE_TIME_PAYMENTS_ACTUAL,
+				reviewOneTimeActual);
+		getLoginScenario().saveBean(
+				PaymentCommonConstants.ONE_TIME_PAYMENTS_EXPECTED,
+				reviewOneTimeExpectedJson);
+			
+		System.out.println("reviewOneTimeActual---->" + reviewOneTimeActual);
+		System.out.println("reviewOneTimeExpectedJson---->" + reviewOneTimeExpectedJson); 
+		
+		try {
+			JSONAssert.assertEquals(reviewOneTimeExpectedJson, reviewOneTimeActual,
+					true);
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 	}
 }

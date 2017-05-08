@@ -1,1 +1,0 @@
-{  "success" : true,  "data" : {    "drug" : [ {      "drugName" : "Lipichol 540",      "drugID" : 51012    }, {      "drugName" : "Lipidshield Plus",      "drugID" : 46544    }, {      "drugName" : "Lipistart",      "drugID" : 21637    }, {      "drugName" : "Lipitor",      "drugID" : 13158    }, {      "drugName" : "Microlipid",      "drugID" : 13501    } ]  },  "error" : null}

@@ -24,4 +24,39 @@ Examples:
 #        |  MS     | 123000000 |  123000000       | 1234567890  | 1234567890       | first     | second     | third    | 2.00   |
 #        |  HIP    | 123000000 |  123000000       | 1234567890  | 1234567890       | first     | second     | third    | 2.00   |
 #	|  RIDER  | 123000000 |  123000000       | 1234567890  | 1234567890       | first     | second     | third    | 2.00   |
+
+
+Scenario Outline: Verify the One Time Payments Tool for Dashboard
+Given the user is on the AARP medicare site login page
+When the user logs in with a registered AMP with following details in AARP site
+	| Plan Type   | <planType>  |
+And the user navigates to One Time Payments page
+
+
+Examples:
+	| planType |
+	| MAPD     |
+#	| MA       |
+#	| PDP      |
+#	| MS       |
+#	| HIP      |
+
+
+Scenario Outline: Verify the Payment amount and Routing Number on One Time Payments Tool for Dashboard
+Given the user is on the AARP medicare site login page
+When the user logs in with a registered AMP with following details in AARP site
+	| Plan Type   | <planType>  |
+And the user navigates to One Time Payments page
+And the user enters details and click on continue button on One Time Payments Page for  Dashboard
+Then user lands on Review One time Payments Page and validates the amount and routing number values
+
+
+Examples:
+	| planType |
+	| MAPD     |
+#	| MA       |
+#	| PDP      |
+#	| MS       |
+#	| HIP      |
+     
      

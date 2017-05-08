@@ -58,7 +58,7 @@ public class RegistrationSuccessPage extends UhcDriver {
 			homePageLink.click();
 
 		}
-		if (this.driver.getTitle().equalsIgnoreCase(
+		if (getTitle().equalsIgnoreCase(
 				"UnitedHealthcare Medicare Solutions | My Account Home"))
 			return new AccountHomePage(driver);
 		else
@@ -88,17 +88,45 @@ public class RegistrationSuccessPage extends UhcDriver {
 
 		}
 		registrationSuccessJson = jsonObject;
+		
+		System.out.println("registrationSuccessJson---->"+registrationSuccessJson);
 	}
 
-	public JSONObject getExpectedData(Map<String, JSONObject> expectedDataMap) {
-
-		JSONObject registrationCommonExpectedJson = expectedDataMap
-				.get(CommonConstants.REGISTRATION_COMMON);
+public JSONObject getExpectedData(Map<String, JSONObject> expectedDataMap, JSONObject registrationCommonExpected) {
+		
 		JSONObject registrationSuccessExpectedJson = expectedDataMap
-				.get(CommonConstants.REGISTRATION);
-		registrationSuccessExpectedJson = CommonUtility
-				.mergeJson(registrationSuccessExpectedJson,
-						registrationCommonExpectedJson);
+				.get(CommonConstants.REGISTRATION_SUCCESS);
+		String dateOfBirth = null;
+		String name = null;
+		
+		try {
+			JSONObject jsonObject = registrationCommonExpected.getJSONArray("dateOfBirth").getJSONObject(0);
+			dateOfBirth = jsonObject.getString("dob");
+			
+			JSONObject jsonObject2 = registrationCommonExpected.getJSONArray("memberName").getJSONObject(0);
+			name = jsonObject2.getString("name");
+			
+			if(null!=dateOfBirth)
+			{
+				registrationSuccessExpectedJson.put("dateOfBirth", dateOfBirth);
+			}
+			
+			if(null!=name)
+			{
+				String[] fullName = name.split(" ");
+				String firstName = fullName[0];
+				String lastName = name.replace(fullName[0]+" ", "");
+				registrationSuccessExpectedJson.put("firstName", firstName);
+				registrationSuccessExpectedJson.put("lastName", lastName);
+				
+			}
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		System.out.println("registrationSuccessExpectedJson---->"+registrationSuccessExpectedJson);
+		
 		return registrationSuccessExpectedJson;
 	}
 
@@ -106,11 +134,9 @@ public class RegistrationSuccessPage extends UhcDriver {
 		if (homePageLink.isEnabled()) {
 			homePageLink.click();
 		}
-		if (this.driver.getTitle().equalsIgnoreCase(
-				"UnitedHealthcare Medicare Solutions | My Account Home") && category.equalsIgnoreCase(CommonConstants.GROUP))
+		if (currentUrl().contains("home/my-account-home.html") && category!=null)
 			return new AccountHomePage(driver,category);
-		else if(this.driver.getTitle().equalsIgnoreCase(
-				"UnitedHealthcare Medicare Solutions | My Account Home")){
+		else if(currentUrl().contains("home/my-account-home.html")){
 			return new AccountHomePage(driver);
 		}
 		return null;

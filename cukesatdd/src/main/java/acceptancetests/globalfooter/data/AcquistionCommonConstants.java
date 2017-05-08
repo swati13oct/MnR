@@ -10,11 +10,14 @@ package acceptancetests.globalfooter.data;
 public class AcquistionCommonConstants {
 
 	public static final String GLOBAL_FOOTER_FLOW_NAME = "globalfooter";
+	public static final String OLE_DTM_FLOW_NAME = "oledtm";
 	public static final String GLOBAL_FOOTER_ACTUAL = "globalFooterActual";
 	public static final String GLOBAL_FOOTER_EXPECTED = "globalFooterExpectedJson";
 	public static final String SITE_MAP_FLOW_NAME = "sitemap";
 	public static final String SITE_MAP_ACTUAL = "siteMapActual";
 	public static final String SITE_MAP_EXPECTED = "siteMapExpectedJson";
+	
+	
 	
 	public static final String ABOUT_US_FLOW_NAME = "aboutus";
 	public static final String ABOUT_US_ACTUAL = "aboutUsActualJson";
@@ -54,7 +57,12 @@ public class AcquistionCommonConstants {
 	
 	public static final String HEALTH_AND_WELLNESS_DROPDOWN_ACTUAL = "healthandwellnessdropdownactual";
 	public static final String HEALTH_AND_WELLNESS_DROPDOWN_EXPECTED = "healthandwellnessdropdownexpectedJson";
+	public static final String BROWSER_CHECK_FLOW_NAME = "browsercheck";
+	public static final String BROWSER_CHECK_ACTUAL = "browserCheckActual";
+	public static final String BROWSER_CHECK_EXPECTED = "browserCheckExpected";
 	
-	
+	public static final String COBROWSE_FLOW_NAME = "cobrowse";
+	public static final String COBROWSE_ACTUAL = "cobrowseActual";
+	public static final String COBROWSE_EXPECTED = "cobrowseExpected";
 
 }
