@@ -309,6 +309,7 @@ public class MRScenario {
 		} catch (NamingException e) {
 			e.printStackTrace();
 		}
+
 try {
 			/* Closing database connection */
 			con.close();
@@ -324,6 +325,8 @@ try {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+
+
 	}
 
 	private static void addMember(String userName, Connection con,
