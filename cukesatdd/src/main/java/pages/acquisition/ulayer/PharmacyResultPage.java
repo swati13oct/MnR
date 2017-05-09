@@ -1,7 +1,7 @@
 /**
  * 
  */
-package pages.acquisition.bluelayer;
+package pages.acquisition.ulayer;
 
 import java.util.List;
 
@@ -23,18 +23,18 @@ import atdd.framework.UhcDriver;
  *
  */
 public class PharmacyResultPage extends UhcDriver{
-
+	
 	@FindBy(id = "currentRowObject")
 	private WebElement pharmacyResults;
-
+	
 	@FindBy(id ="disclosure_link")
 	private WebElement logOut;
-
+	
 	public JSONObject pharmacyResultJson;
-
+	
 	private PageData pharmacyResult;
-
-	@FindBy(xpath = "//div[@class='pub_mid']/p")
+	
+	@FindBy(xpath = "//div[@class='pharmacymid']/p")
 	private WebElement pharmacyTypesicondescription;
 
 	@FindBy(xpath = "//div[@class='Pharmacyresults']/table[@class='searchResults']/thead/tr/th[@class='colPhar2']/div/span")
@@ -60,16 +60,15 @@ public class PharmacyResultPage extends UhcDriver{
 		PageFactory.initElements(driver, this);
 		String fileName = CommonConstants.PHARMACY_RESULT_PAGE_DATA;
 		pharmacyResult = CommonUtility.readPageData(fileName,
-				CommonConstants.PAGE_OBJECT_DIRECTORY_BLUELAYER_ACQ);
+				CommonConstants.PAGE_OBJECT_DIRECTORY_ULAYER_ACQ);
 		openAndValidate();
-	}
+	   }
 
 	@Override
 	public void openAndValidate() {
 
 		JSONObject jsonObject = new JSONObject();
 		for (String key : pharmacyResult.getExpectedData().keySet()) {
-			System.out.println(key);
 			List<WebElement> elements = findElements(pharmacyResult
 					.getExpectedData().get(key));
 			if (elements.size() == 1) {
@@ -106,52 +105,57 @@ public class PharmacyResultPage extends UhcDriver{
 
 		}
 		pharmacyResultJson = jsonObject;
-	}
 
+		
+	}
 	public boolean validatePharmacyResultpage(JSONObject jsonObject, String zipcode, String planName){
 		boolean flag = true;
 		try {
 			if(planName.contains("PDP")){
 				if(!jsonObject.get("pharmacySaverRightRailWidget").toString().equals("Preferred Retail Pharmacy Network\nThe Preferred Retail "
-						+ "Pharmacy Network may help you save money on your prescription co-pays. UnitedHealthcare has worked with many "
-						+ "retail pharmacies to help you get the savings you've been looking for. You could save 25% or more on co-pays when "
-						+ "you fill your prescriptions at a preferred retail pharmacy.1\n1Savings of 25% or more apply to Tier 1 and Tier 2 "
-						+ "co-pays on the AARP MedicareRx Preferred (PDP) and AARP MedicareRx Saver Plus (PDP) plans at a preferred retail "
-						+ "pharmacy compared with the co-pays of standard pharmacies within the network .\nEstimate your drug costs at a "
-						+ "preferred retail pharmacy"))
+						+ "Pharmacy Network is designed to help save you money on your prescription co-pays. UnitedHealthcare has worked with "
+						+ "many retail pharmacies to help you get the savings you've been looking for. You could save 25% or more on co-pays "
+						+ "when you fill your prescriptions at a preferred retail pharmacy.1\n1Savings of 25% or more apply to Tier 1 and Tier 2 "
+						+ "co-pays on the AARP MedicareRx Preferred (PDP) and AARP MedicareRx Saver Plus (PDP) plans at a "
+						+ "preferred retail pharmacy compared with the co-pays of standard pharmacies within the network.\n"
+						+ "Estimate your drug costs at a preferred retail pharmacy"))
 					flag = false;
 				
-				if(!jsonObject.get("preferredMailRightRailWidget").toString().equals("Preferred Mail Service Pharmacy\nGet savings and convenience "
-						+ "delivered right to your mailbox when you use home delivery through OptumRx, your plan's preferred mail service pharmacy. "
-						+ "You could pay less for the same medications.\nLearn more about the OptumRx Preferred Mail Service Pharmacy"))
+				if(!jsonObject.get("preferredMailRightRailWidget").toString().equals("Preferred Mail Service Pharmacy\nGet savings and convenience"
+						+ " delivered right to your mailbox when you use home delivery through OptumRX, your plan's preffered "
+						+ "mail service pharmacy. You could pay less for the same medications.\nLearn more about the OptumRx "
+						+ "Preferred Mail Service Pharmacy"))
 					flag = false;
 
-				if(!jsonObject.get("contactUsRightRailWidget").toString().equals("Preferred Mail Service Pharmacy\nGet savings and convenience "
-						+ "delivered right to your mailbox when you use home delivery through OptumRx, your plan's preferred mail service pharmacy. "
-						+ "You could pay less for the same medications.\nLearn more about the OptumRx Preferred Mail Service Pharmacy"))
+				if(!jsonObject.get("contactUsRightRailWidget").toString().equals("Contact OptumRx\nOptumRx Preferred Mail Service Pharmacy\nPO Box "
+						+ "2975\nShawnee Mission, KS\n66201-1375\nCall toll-free: 1-877-266-4832,\n24 hours a day, 7 days a week.\nTTY users, "
+						+ "call 711.\n "))
 					flag = false;
 				
 				if(!(pharmacyTypesicondescription.getText().split("\n")[0].contains("Preferred Retail Pharmacy") && 
 						pharmacyTypesicondescription.getText().split("\n")[1].contains("Standard Network Pharmacy")))
 					flag = false;
 			}else{
-				if(!jsonObject.get("pharmacySaverRightRailWidget").toString().equals("Pharmacy SaverTM offers prescriptions as low as $1.501."
-						+ "\nPharmacy SaverTM is a cost savings prescription drug program available to you as a plan member. UnitedHealthcare® "
-						+ "has worked with many of our network pharmacies to offer even lower prices on many common prescription drugs. "
-						+ "You may be able to pay less than your plan co-pay for your prescription drugs with the Pharmacy Saver program. "
-						+ "Simply use one of the participating pharmacies and show your member ID card.\nLook up qualifying drugs, prices and "
-						+ "participating pharmacies\n1Drugs and prices may vary between pharmacies and are subject to change during the plan year. "
-						+ "Prices are based on quantity filled at the pharmacy. Quantities may be limited by pharmacy based on their dispensing policy or "
-						+ "by the plan based on Quantity Limit requirements; if prescription is in excess of a limit, co-pay amounts may be higher."))
+				if(!jsonObject.get("pharmacySaverRightRailWidget").toString().equals("Pharmacy Saver™ offers prescriptions as low as $1.501.\n\n"
+						+ "Pharmacy Saver™ is a cost savings prescription drug program available to you as a plan member. UnitedHealthcare® has "
+						+ "worked with many of our network pharmacies to offer even lower prices on many common prescription drugs. You may be "
+						+ "able to pay less than your plan co-pay for your prescription drugs with the Pharmacy Saver program. Simply use one of "
+						+ "the participating pharmacies and show your member ID card.\n\nLook up qualifying drugs, prices and participating "
+						+ "pharmacies\n\n1Drugs and prices may vary between pharmacies and are subject to change during the plan year. "
+						+ "Prices are based on quantity filled at the pharmacy. Quantities may be limited by pharmacy based on their "
+						+ "dispensing policy or by the plan based on Quantity Limit requirements; if prescription is in excess of a limit, "
+						+ "co-pay amounts may be higher."))
 					flag = false;
 				
 				if(!jsonObject.get("preferredMailRightRailWidget").toString().equals("Preferred Mail Service Pharmacy\nGet savings and "
-						+ "convenience delivered right to your mailbox when you use home delivery through OptumRx, your plan's preferred mail service pharmacy."
-						+ " You could pay less for the same medications.\nLearn more about the OptumRx Preferred Mail Service Pharmacy"))
+						+ "convenience delivered right to your mailbox when you use home delivery through OptumRX, your plan's preffered "
+						+ "mail service pharmacy. You could pay less for the same medications.\nLearn more about the OptumRx Preferred "
+						+ "Mail Service Pharmacy"))
 					flag = false;
 
-				if(!jsonObject.get("contactUsRightRailWidget").toString().equals("Contact OptumRx\nOptumRx Preferred Mail Service Pharmacy\nPO Box 2975\n"
-						+ "Shawnee Mission, KS 66201-1375\nCall toll-free: 1-877-266-4832, 24 hours a day, 7 days a week. TTY users, call: 711."))
+				if(!jsonObject.get("contactUsRightRailWidget").toString().equals("Contact OptumRx\nOptumRx Preferred Mail Service"
+						+ " Pharmacy\nPO Box 2975\nShawnee Mission, KS\n66201-1375\nCall toll-free: 1-877-266-4832,\n24 hours a day, 7"
+						+ " days a week.\nTTY users, call 711.\n "))
 					flag = false;
 				
 				if(!(pharmacyTypesicondescription.getText().split("\n")[0].contains("Pharmacy SaverTM Pharmacy") && 
@@ -162,13 +166,13 @@ public class PharmacyResultPage extends UhcDriver{
 			if(!jsonObject.get("pharmacyTitleText").toString().equals("Pharmacies close to "+zipcode+" for "+planName))
 				flag = false;
 
-			if(!jsonObject.get("pharmacyNameheader").toString().equals("Pharmacy name"))
+			if(!jsonObject.get("pharmacyNameheader").toString().contains("Pharmacy name"))
 				flag = false;
 
 			if(!jsonObject.get("servicesHeader").toString().contains("Services"))
 				flag = false;
 
-			if(!jsonObject.get("distnaceHeader").toString().equals("Distance"))
+			if(!jsonObject.get("distnaceHeader").toString().contains("Distance"))
 				flag = false;
 
 			viewMaplink.click();
@@ -233,7 +237,7 @@ public class PharmacyResultPage extends UhcDriver{
 			e.printStackTrace();
 		}
 		if (driver.getTitle().equalsIgnoreCase(
-				"Locate a Pharmacy | UnitedHealthcare®")) {
+				"Find a Pharmacy | AARP® Medicare Plans from UnitedHealthcare®")) {
 			return new PharmacySearchPage(driver);
 		}
 		return null;

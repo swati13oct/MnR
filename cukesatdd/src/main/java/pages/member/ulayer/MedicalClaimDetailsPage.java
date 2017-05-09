@@ -163,22 +163,5 @@ public class MedicalClaimDetailsPage extends UhcDriver {
 		System.out.println("medicalClaimDetailsJson----->"+medicalClaimDetailsJson);
 
 	}
-	
-	@FindBy(xpath = ".//*[@id='drugclaimdetail']")
-	private WebElement drugclaimdetailbox;
-	
-	@FindBy(xpath = ".//*[@id='medicaldetailsinner']")
-	private WebElement medDetailsInnerBox;
-	
-	@FindBy(xpath = ".//*[@id='medicaldetailsouter']/div[2]/a")
-	private WebElement backtoClaimSearchbtn;
-	
-	public boolean validateMoreInfo(){
-		boolean flag = false;
-		if(validate(drugclaimdetailbox)&&validate(medDetailsInnerBox)&&validate(backtoClaimSearchbtn))
-			flag = true;
-		
-		return flag;
-	}
 
 }

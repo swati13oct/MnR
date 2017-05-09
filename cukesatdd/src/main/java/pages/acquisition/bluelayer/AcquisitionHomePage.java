@@ -7,6 +7,7 @@ import java.util.List;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
@@ -82,12 +83,19 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	
 	@FindBy(xpath = "//div[@id='subnav_2']/div/div/div/div/div[1]/p[2]/a/span")
 	private WebElement ma_moreHelpInfoLink;
+	
+	@FindBy(xpath = "//div[@id='subnav_2']/div/div/div/div/div[2]/p[2]/a/span")
+	private WebElement pdp_moreHelpInfoLink;
 
 	@FindBys(value = { @FindBy(xpath = "//table[@id='selectcountytable']/tbody/tr/td") })
 	List<WebElement> countyRows;
 
 	@FindBy(linkText = "View all disclaimer information")
 	private WebElement disclaimerViewLink;
+	
+	@FindBy(linkText = "Find a pharmacy near you")
+	private WebElement pharmacyNearLink;
+	
 
 	@FindBy(className = "disclaimer hideLink")
 	private WebElement disclaimerHideLink;
@@ -102,6 +110,12 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	
 	@FindBy(id = "ghn_lnk_2")
 	private WebElement ourPlans;
+	
+	@FindBy(id = "ghn_lnk_1")
+	private WebElement Home;
+	
+	@FindBy(linkText = "Request More Help and Information")
+	private WebElement requestInfoLink;
 	
 	@FindBy(xpath = "//*[@id='subnav_2']/div/div/div[1]/div[1]/div[2]/h3/a/span")
 	private WebElement maVppLink;
@@ -155,6 +169,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		for(int i = 0; i<10;i++){
 			if (driver.getTitle().equalsIgnoreCase(
 					"Our Medicare Plan Types | UnitedHealthcare®")) {
+				
 				return new GetStartedPage(driver);
 			}else{
 				try {
@@ -658,9 +673,40 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		}
 		return null;
 	}
+	
+	public void navigateToRequestMoreHelpAndInformation(String planType){
+		Actions action = new Actions(driver);
+		action.moveToElement(Home).moveToElement(ourPlans).build().perform();
+		if(planType.contains("MA"))
+				ma_moreHelpInfoLink.click();
+		else if(planType.contains("PDP")){
+				pdp_moreHelpInfoLink.click();		
+		}
+		for(int i=0;i<10;i++){
+			try {
+				Thread.sleep(2000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			if(driver.getCurrentUrl().contains("request-information"))
+				break;
+		}
+		
+	}
 
 	public PharmacySearchPage navigateToPharmacyLocator() {
-		pharmacyLink.click();
+		pharmacyNearLink.click();
+		for(int i=0;i<10;i++){
+			try {
+				Thread.sleep(6000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			if(driver.getCurrentUrl().contains("-pharmacy."))
+				break;
+		}
 		if (driver.getTitle().equalsIgnoreCase(
 				"Locate a Pharmacy | UnitedHealthcare®")) {
 			return new PharmacySearchPage(driver);
@@ -739,7 +785,6 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		}
 */
 		return null;
-		
 	}
 
 

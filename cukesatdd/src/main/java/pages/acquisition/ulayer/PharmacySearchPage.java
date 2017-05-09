@@ -1,18 +1,14 @@
 /**
  * 
  */
-package pages.acquisition.bluelayer;
+package pages.acquisition.ulayer;
 
 import java.util.List;
 
 import junit.framework.Assert;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.openqa.selenium.By;
-import org.openqa.selenium.NoSuchElementException;
-import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -23,7 +19,6 @@ import acceptancetests.atdd.data.CommonConstants;
 import acceptancetests.atdd.data.ElementData;
 import acceptancetests.atdd.data.PageData;
 import acceptancetests.atdd.util.CommonUtility;
-import atdd.framework.MRScenario;
 import atdd.framework.UhcDriver;
 
 /**
@@ -53,12 +48,8 @@ public class PharmacySearchPage extends UhcDriver {
 	@FindBys(value = { @FindBy(xpath = "//select[@id='plan']/option") })
 	private List<WebElement> planNamesList;
 
-	//@FindBys(value = { @FindBy(xpath = "//table[@id='selectcountytable']/tbody/tr") })
-	//private List<WebElement> countyList;
-	
-	@FindBy(xpath = "//div[@id='selectcountydiv']/p")
+	@FindBys(value = { @FindBy(xpath = "//table[@id='selectcountytable']/tbody/tr") })
 	private List<WebElement> countyList;
-	
 
 	@FindBy(id = "pharmacies")
 	private WebElement allPharmacies;
@@ -71,27 +62,6 @@ public class PharmacySearchPage extends UhcDriver {
 
 	@FindBys(value = { @FindBy(xpath = "//select/option") })
 	private List<WebElement> distanceDropDown;
-
-	@FindBys(value = { @FindBy(xpath = "//ul[@id='pharm_services']/li") })
-	private List<WebElement> pharmacyTypesCheckboxes;
-
-	@FindBy(xpath = "//form[@id='searchCriteria']/div[3]/p[2]/span")
-	private WebElement narrowYourSearchContent;
-
-	@FindBy(xpath = "//div[@id='medicareTitle']/h1")
-	private WebElement pharmacyResultHeader;
-	
-	@FindBy(id = "services")
-	private WebElement pharmacyTypeSelectionRadioButton;
-
-	@FindBy(xpath = "//div[@class='pharmacyListScroll']")
-	private WebElement pharmacyTable;
-	
-	@FindBys(value = { @FindBy(xpath = "//select[@class='pharmacyDropDown']/option") })
-	private List<WebElement> pharmacyDropDowmElements;
-
-	@FindBys(value = { @FindBy(xpath = "//select[@class='milesDropDown']/option") })
-	private List<WebElement> milesDropDownElements;
 	
 	@FindBy(xpath = "//div[@class='showPharmacies']/select[@id='plan']")
 	private WebElement seletPlandropdown;
@@ -108,11 +78,17 @@ public class PharmacySearchPage extends UhcDriver {
 	@FindBy(xpath = "//div[@class='showPharmacies']/ul/li/input")
 	private List<WebElement> pharmaciesListCheckbox;
 	
-	@FindBy(className = "dceBlueBtn")
-	WebElement selectLink;
+	@FindBys(value = { @FindBy(xpath = "//ul[@id='pharm_services']/li") })
+	private List<WebElement> pharmacyTypesCheckboxes;
 
-	@FindBy(className = "rowBorder")
-	List<WebElement> pharmacyRows;
+	@FindBy(xpath = "//form[@id='searchCriteria']/div[3]/h3")
+	private WebElement narrowYourSearchContent;
+
+	@FindBy(xpath = "//div[@id='medicareTitle']/h1")
+	private WebElement pharmacyResultHeader;
+	
+	@FindBy(id = "services")
+	private WebElement pharmacyTypeSelectionRadioButton;
 	
 	@FindBy(className = "customercare")
 	WebElement customercare;
@@ -123,28 +99,16 @@ public class PharmacySearchPage extends UhcDriver {
 	@FindBy(className = "errorPoints")
 	WebElement errorPoints;
 	
-	
-	
-	public JSONObject availablePharmaciesJson;
-	
-	public JSONObject locatePharmacyJson;
-	
 	private PageData locatePharmacy;
 	
-	public PageData pharmacyInfo;
-	
+	public JSONObject locatePharmacyJson;
+
 	public PharmacySearchPage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
-
 		String fileName = CommonConstants.LOCATE_PHARMACIES_PAGE_DATA;
 		locatePharmacy = CommonUtility.readPageData(fileName,
-				CommonConstants.PAGE_OBJECT_DIRECTORY_BLUELAYER_ACQ);
-		
-		//String pharmacyInfoFileName = CommonConstants.PHARMACY_INFORMATION_PAGE_DATA;
-		//pharmacyInfo = CommonUtility.readPageData(pharmacyInfoFileName,
-				//CommonConstants.PAGE_OBJECT_DIRECTORY_BLUELAYER_ACQ);
-
+				CommonConstants.PAGE_OBJECT_DIRECTORY_ULAYER_ACQ);
 		openAndValidate();
 	}
 
@@ -176,6 +140,10 @@ public class PharmacySearchPage extends UhcDriver {
 		}
 		if (driver.getTitle().equalsIgnoreCase(
 				"Locate a Pharmacy | UnitedHealthcare®")) {
+			return new PharmacySearchPage(driver);
+		}
+		if (driver.getTitle().equalsIgnoreCase(
+				"Find a Pharmacy | AARP® Medicare Plans from UnitedHealthcare®")) {
 			return new PharmacySearchPage(driver);
 		}
 		return null;
@@ -220,7 +188,7 @@ public class PharmacySearchPage extends UhcDriver {
 		searchPharmaciesButton.click();
 		for(int i=0;i<10;i++){
 			try {
-				Thread.sleep(5000);
+				Thread.sleep(10000);
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -241,104 +209,8 @@ public class PharmacySearchPage extends UhcDriver {
 
 	}
 
-	public PharmacyResultPage searchSelectingPharmacyTypes(
-			String[] pharmacyTypeArray) {
-
-		pharmacyTypeSelectionRadioButton.click();
-		for (String pharmacyType : pharmacyTypeArray) {
-			for (WebElement checkBox : pharmacyTypesCheckboxes) {
-				if (checkBox.getText().equalsIgnoreCase(pharmacyType)) {
-					ElementData elementData = new ElementData("id",
-							"pharmacyTypesCheckboxes");
-					findChildElement(elementData, checkBox).click();
-				}
-				
-			}
-		}
-		searchPharmaciesButton.click();
-		for(int i=0;i<10;i++){
-			try {
-				Thread.sleep(10000);
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			if(pharmacyResultHeader.isDisplayed())
-				break;
-			
-		}
-		if (pharmacyResultHeader.getText().equalsIgnoreCase(
-				"Pharmacies Available in Your Area")) {
-			return new PharmacyResultPage(driver);
-		}
-		return null;
-	}
-	
-		public AddDrugPage selectPharmacy(String pharmacyName) {
-			for (WebElement element : pharmacyRows) {
-				if (element.getText().contains(pharmacyName)) {
-					ElementData elementData = new ElementData("className",
-							"dceBlueBtn");
-					WebElement selectLink = findChildElement(elementData, element);
-					selectLink.click();
-					break;
-				}
-
-			}
-			try {
-				if (pharmacyTable.isDisplayed()) {
-					CommonUtility.waitForElementToDisappear(driver, pharmacyTable,
-							CommonConstants.TIMEOUT_30);
-				}
-			} catch (NoSuchElementException e) {
-				System.out.println("pharmacyTable not found");
-			} catch (TimeoutException ex) {
-				System.out.println("pharmacyTable not found");
-			} catch (Exception e) {
-				System.out.println("pharmacyTable not found");
-			}
-			if (currentUrl().contains("manageDrugList")) {
-				return new AddDrugPage(driver);
-			} else {
-				return null;
-			}
-		}
-
-		public PharmacySearchPage searchPharmacies(String pharmacyType,
-				String distance) {
-			try {
-				Thread.sleep(5000);
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			/*ElementData pharmacyTypeElement = new ElementData("select:className",
-					"pharmacyDropDown");
-			List<WebElement> pharmacyTypeOptions = findElements(pharmacyTypeElement);
-	*/
-			for (WebElement pharmacyTypeOption : pharmacyDropDowmElements) {
-				if (pharmacyTypeOption.getText().equalsIgnoreCase(pharmacyType)) {
-					pharmacyTypeOption.click();
-				}
-			}
-	/*
-			ElementData distanceElement = new ElementData("select:className",
-					"milesDropDown");
-			List<WebElement> distanceOptions = findElements(distanceElement);*/
-
-			for (WebElement distanceOption : milesDropDownElements) {
-				if (distanceOption.getText().equalsIgnoreCase(distance)) {
-					distanceOption.click();
-				}
-			}
-			return new PharmacySearchPage(driver);
-		}
-	
-	@SuppressWarnings("deprecation")
 	@Override
 	public void openAndValidate() {
-
-		
 		JSONObject jsonObject = new JSONObject();
 		for (String key : locatePharmacy.getExpectedData().keySet()) {
 			List<WebElement> elements = findElements(locatePharmacy
@@ -373,6 +245,42 @@ public class PharmacySearchPage extends UhcDriver {
 		
 		validate(customercare);
 		
+	
+	}
+
+	public PharmacyResultPage searchSelectingPharmacyTypes(
+			String[] pharmacyTypeArray) {
+
+
+		pharmacyTypeSelectionRadioButton.click();
+		for (String pharmacyType : pharmacyTypeArray) {
+			for (WebElement checkBox : pharmacyTypesCheckboxes) {
+				if (checkBox.getText().equalsIgnoreCase(pharmacyType)) {
+					ElementData elementData = new ElementData("id",
+							"pharmacyTypesCheckboxes");
+					findChildElement(elementData, checkBox).click();
+				}
+				
+			}
+		}
+		searchPharmaciesButton.click();
+		for(int i=0;i<10;i++){
+			try {
+				Thread.sleep(10000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			if(pharmacyResultHeader.isDisplayed())
+				break;
+			
+		}
+		if (pharmacyResultHeader.getText().equalsIgnoreCase(
+				"Pharmacies Available in Your Area")) {
+			return new PharmacyResultPage(driver);
+		}
+		return null;
+	
 	}
 	
 	@SuppressWarnings("deprecation")
@@ -448,17 +356,5 @@ public class PharmacySearchPage extends UhcDriver {
 
 		}
 	}
-
-	public JSONObject getExpectedData(String fileName, String directory) {
-		JSONObject availablePharmaciesExpectedJson = MRScenario
-				.readExpectedJson(fileName, directory);
-		return availablePharmaciesExpectedJson;
-	}
-	
-	public String getPharmacyList() {
-
-		return pharmacyTable.getText();
-	}
-	
 
 }

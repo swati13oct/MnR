@@ -470,38 +470,4 @@ public class DrugClaimSummaryPage extends UhcDriver {
 		return claimSummaryExpectedJson;
 	}
 
-	@FindBy(xpath = ".//*[@id='columnsort0']/table/tbody/tr/td[1]/p/b")
-	private WebElement dateFilled;
-	
-	@FindBy(xpath = ".//*[@id='columnsort1']/table/tbody/tr/td[1]/p/b")
-	private WebElement rxNumber;
-	
-	@FindBy(xpath = ".//*[@id='columnsort2']/table/tbody/tr/td[1]/p/b")
-	private WebElement medication;
-	
-	@FindBy(xpath = ".//*[@id='columnsort3']/table/tbody/tr/td[1]/p/b")
-	private WebElement pharmacy;
-	
-	@FindBy(xpath = ".//*[@id='columnsort4']/table/tbody/tr/td[1]/p/b")
-	private WebElement memberHasPaid;
-	
-	@FindBy(xpath = ".//*[@id='columnsort5']/table/tbody/tr/td[1]/p/b")
-	private WebElement planHasPaid;
-	
-	@FindBy(xpath = ".//*[@id='columnsort5']/table/tbody/tr/td[1]/p/b")
-	private WebElement otherPayments;
-	
-	@FindBy(xpath = ".//*[@id='searchResultMsg']/p")
-	private WebElement searchResultMsg;
-	
-	public boolean validateRxClaims() {
-		boolean flag = false;
-		if(validate(dateFilled)&&validate(rxNumber)&&validate(medication)&&validate(pharmacy)&&validate(memberHasPaid)
-				&&validate(planHasPaid)&&validate(otherPayments)&&validate(searchResultMsg)){
-			flag = true;
-			
-		}else
-			System.out.println("Could not verify the Med Claims elements");
-		return flag;
-	}
 }
