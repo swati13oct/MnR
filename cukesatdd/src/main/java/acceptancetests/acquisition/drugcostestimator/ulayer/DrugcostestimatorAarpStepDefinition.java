@@ -1,4 +1,4 @@
-package acceptancetests.dashboard.drugcostestimator.ulayer;
+package acceptancetests.acquisition.drugcostestimator.ulayer;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -25,10 +25,7 @@ import cucumber.annotation.en.When;
 import cucumber.table.DataTable;
 import gherkin.formatter.model.DataTableRow;
 import pages.acquisition.ulayer.AcquisitionHomePage;
-import pages.dashboard.member.drugcostestimator.blayer.AddDrugDetails;
-import pages.dashboard.member.drugcostestimator.blayer.AddNewDrugModal;
-import pages.dashboard.member.drugcostestimator.blayer.DrugCostEstimatorPage;
-import pages.dashboard.member.drugcostestimator.blayer.SavingsOppurtunity;
+import pages.acquisition.dce.ulayer.*;
 import pages.member.ulayer.AccountHomePage;
 import pages.member.ulayer.LoginPage;
 import pages.mobile.member.ulayer.BenefitsSummaryPage;
@@ -105,6 +102,8 @@ public class DrugcostestimatorAarpStepDefinition {
 		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
 		getLoginScenario().saveBean(PageConstants.ACQUISITION_HOME_PAGE,
 				aquisitionhomepage);
+		DrugCostEstimatorPage dce = new DrugCostEstimatorPage(wd);
+		getLoginScenario().saveBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE, dce);
 	}
 	
 	@Given("^I am an AARP member on the Dashboard site SmartPhone$")
@@ -846,14 +845,63 @@ public class DrugcostestimatorAarpStepDefinition {
 		dce.delete_all_drugs();
 	}
 	
-	@When("^I access the DCE tool$")
+	@When("^I access the acquisition DCE tool$")
 	public void I_access_the_DCE_tool() throws InterruptedException {
 		WebDriver wd = (WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
 
 		DrugCostEstimatorPage dce = new DrugCostEstimatorPage(wd);
 		dce.navigateToDCETool();
-		dce.addDrug("lipitor");
 	}
 	
+	@And("^I have added a drug to my drug list and a generic equivalent is available for the drug I have selected$")
+	public void I_have_added_a_drug_to_my_drug_list_and_a_generic_equivalent_is_available_for_the_drug_I_have_selected(DataTable data) throws InterruptedException{
+		List<DataTableRow> memberAttributesRow = data.getGherkinRows();
+		String drug = memberAttributesRow.get(0).getCells().get(1);
+
+		WebDriver wd = (WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
+
+		DrugCostEstimatorPage dce = new DrugCostEstimatorPage(wd);
+		dce.deleteAllDrugs();
+		dce.addDrug(drug);
+	}
+	
+	@Then("I should be presented the option to switch to the generic option")
+	public void I_should_be_presented_the_option_to_switch_to_the_generic_option(){
+		DrugCostEstimatorPage dce = (DrugCostEstimatorPage) getLoginScenario()
+				.getBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE);
+		//dce.backwardToStep1();
+		dce.validateSwitchGenericOption();
+	}
+	
+	@And("^I will see a SWITCH NOW link in the drug tile with appropriate save message$")
+	public void I_will_see_a_SWITCH_NOW_link_in_the_drug_tile_with_appropriate_save_message(){
+		DrugCostEstimatorPage dce = (DrugCostEstimatorPage) getLoginScenario()
+				.getBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE);
+		dce.validateSwitchNowLink();
+		dce.validateSaveGenericMessage();
+	}
+	
+	@And("^I will see a modal appear upon clicking on SWITCH NOW$")
+	public void I_will_see_a_modal_appear_upon_clicking_on_SWITCH_NOW() throws InterruptedException{
+		DrugCostEstimatorPage dce = (DrugCostEstimatorPage) getLoginScenario()
+				.getBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE);
+		dce.clickSwitchNow();
+		//savingsOppurtunity.clickSwitchToGeneric();
+				
+	}
+	
+	@And("^when I click on the button to accept the generic$")
+	public void when_I_click_on_the_button_to_accept_the_generic() throws InterruptedException{
+		DrugCostEstimatorPage dce = (DrugCostEstimatorPage) getLoginScenario()
+				.getBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE);
+		dce.clickSwitchToGeneric();
+	}
+	
+	@Then("^the drug name will automatically update within the Drug List$")
+	public void the_drug_name_will_automatically_update_within_the_Drug_List() throws InterruptedException{
+		DrugCostEstimatorPage dce = (DrugCostEstimatorPage) getLoginScenario()
+				.getBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE);
+		dce.isGeneric();
+	}
 }
 

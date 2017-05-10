@@ -94,7 +94,7 @@ public class LoginPage extends UhcDriver {
 	        alert.accept();
 	        Alert alert1 = driver.switchTo().alert();
 	        alert1.accept();
-	        }*/
+	        } */
 		
 		try {
 			Thread.sleep(10000);
