@@ -252,6 +252,9 @@ public class DrugCostEstimatorPage extends UhcDriver {
 	@FindBy(className = "pharmacy-container")
 	public WebElement selectedPharmacy;
 
+	@FindBy(xpath = "//div[@class='dce-nav-btns']/button[contains(text(),'Delete')]")
+	public WebElement confdelpopup_del_button;
+	
 	@Override
 	public void openAndValidate() {
 
@@ -453,23 +456,26 @@ public class DrugCostEstimatorPage extends UhcDriver {
 	}
 
 	public void deleteDrugsByDosage(String dosage) throws InterruptedException {
-		Thread.sleep(15000);
+		Thread.sleep(5000);
 		String deleteDrugXpath = "//div[@id='drugs-tab']//p[contains (text(), '" + dosage
 				+ "')]/following-sibling::ul//li/a[@class='delete-drug']";
 		WebElement deletedrug = driver.findElement(By.xpath(deleteDrugXpath));
 		deletedrug.click();
-		Thread.sleep(5000);
+		Thread.sleep(3000);
+		waitforElement(confdelpopup_del_button);
+		confdelpopup_del_button.click();
+		Thread.sleep(3000);
 
 	}
 
-	public AddDrugDetails navigateToEditDrug(String drug) throws Exception {
+	public EditDrugDetails navigateToEditDrug(String drug) throws Exception {
 		// editDrug.click();
-		Thread.sleep(15000);
+		Thread.sleep(10000);
 		WebElement editDrug = driver.findElement(By.xpath("//div[@class='drug-container']//p[contains(text(),'" + drug
 				+ "')]/parent::section//a[@class='edit-drug']"));
 		editDrug.click();
-		Thread.sleep(5000);
-		return new AddDrugDetails(driver);
+		Thread.sleep(15000);
+		return new EditDrugDetails(driver);
 	}
 
 	public boolean validateAddedDrug(String args1, String arg2, String arg3) {

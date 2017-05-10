@@ -1,0 +1,10 @@
+{
+"url":null,
+"expectedData":{
+"editDrugDetailsPage":{
+"identifier":"xpath",
+"elementName":"//span[contains(text(),'EDIT DRUG DETAILS')]"
+}
+
+}
+}

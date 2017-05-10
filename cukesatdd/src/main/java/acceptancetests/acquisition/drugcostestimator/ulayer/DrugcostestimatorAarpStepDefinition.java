@@ -25,10 +25,12 @@ import cucumber.annotation.en.When;
 import cucumber.table.DataTable;
 import gherkin.formatter.model.DataTableRow;
 import pages.acquisition.ulayer.AcquisitionHomePage;
+//import pages.dashboard.member.drugcostestimator.blayer.DrugCostEstimatorPage;
 import pages.acquisition.dce.ulayer.*;
 import pages.member.ulayer.AccountHomePage;
 import pages.member.ulayer.LoginPage;
 import pages.mobile.member.ulayer.BenefitsSummaryPage;
+//import pages.acquisition.dce.ulayer;
 
 public class DrugcostestimatorAarpStepDefinition {
 
@@ -433,16 +435,16 @@ public class DrugcostestimatorAarpStepDefinition {
 	public void I_should_not_see_the_drug_with_Dosage_in_the_list(DataTable data) {
 
 		List<DataTableRow> memberAttributesRow = data.getGherkinRows();
-		String dosage = memberAttributesRow.get(1).getCells().get(0);
+		String dosage = memberAttributesRow.get(0).getCells().get(1);
 		DrugCostEstimatorPage dce = new DrugCostEstimatorPage((WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER));
-		dce.validateDrugsnotPresent (dosage);  
+		dce.validateDrugsnotPresent(dosage);  
 	}
 
 
 	@When("^I delete the drug with Dosage$")
 	public void I_delete_the_drug_with_Dosage(DataTable data) throws InterruptedException {
 		List<DataTableRow> memberAttributesRow = data.getGherkinRows();
-		String dosage = memberAttributesRow.get(1).getCells().get(0);
+		String dosage = memberAttributesRow.get(0).getCells().get(1);
 
 		DrugCostEstimatorPage dce = new DrugCostEstimatorPage((WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER));
 		dce.deleteDrugsByDosage(dosage);
@@ -464,21 +466,22 @@ public class DrugcostestimatorAarpStepDefinition {
 		}
 
 		String drug = memberAttributesMap.get("Drug");
-		String dosage = memberAttributesMap.get("Dosage");
-		String quantity = memberAttributesMap.get("Quantity");
-		String frequency = memberAttributesMap.get("Frequency");
+		String dosage = memberAttributesMap.get("EditDosage");
+		String quantity = memberAttributesMap.get("EditQuantity");
+		String frequency = memberAttributesMap.get("EditFrequency");
+	
 
 		WebDriver wd = (WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
 		DrugCostEstimatorPage dce = new DrugCostEstimatorPage(wd);
-		AddDrugDetails adddrugdetails = dce.navigateToEditDrug(drug);
-		adddrugdetails.selectDosage(dosage);
-		adddrugdetails.selectQnty(quantity);
-		adddrugdetails.selectFrequency(frequency);
-		adddrugdetails.continueAddDrugDetails();
+		EditDrugDetails editdrugdetails = dce.navigateToEditDrug(drug);
+		editdrugdetails.selectDosage(dosage);
+		editdrugdetails.selectQnty(quantity);
+		editdrugdetails.selectFrequency(frequency);
+		editdrugdetails.updateEditDrugDetails();
 
-		// Saving Opportunity Details
-		SavingsOppurtunity savingsOppurtunity = new SavingsOppurtunity(wd);
-		savingsOppurtunity.savedrugbutton();
+//		// Saving Opportunity Details
+//		SavingsOppurtunity savingsOppurtunity = new SavingsOppurtunity(wd);
+//		savingsOppurtunity.savedrugbutton();
 
 	}
 
@@ -842,7 +845,7 @@ public class DrugcostestimatorAarpStepDefinition {
 	public void I_delete_the_existing_drug_if_present() throws InterruptedException {
 		DrugCostEstimatorPage dce = (DrugCostEstimatorPage) getLoginScenario().getBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE);
 		//Thread.sleep(10000);
-		dce.delete_all_drugs();
+		dce.deleteAllDrugs();
 	}
 	
 	@When("^I access the acquisition DCE tool$")
@@ -903,5 +906,27 @@ public class DrugcostestimatorAarpStepDefinition {
 				.getBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE);
 		dce.isGeneric();
 	}
+	
+	@Then("^I should validate drug with Dosage and Quantity and frequency edited to the list$")
+	public void I_should_validate_drug_with_Dosage_and_Quantity_and_frequency_edited_to_the_list(DataTable memberAttributes) {
+		// Express the Regexp above with the code you wish you had
+		//	WebDriver wd = (WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
+		List<DataTableRow> memberAttributesRow = memberAttributes
+				.getGherkinRows();
+		Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells()
+					.get(0), memberAttributesRow.get(i).getCells().get(1));
+		}
+
+		String dosage = memberAttributesMap.get("EditDosage");
+		String quantity = memberAttributesMap.get("EditQuantity");
+		String frequency = memberAttributesMap.get("EditFrequency");
+
+		DrugCostEstimatorPage dce = new DrugCostEstimatorPage((WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER));
+		dce.validateAddedDrug(dosage,quantity,frequency);
+	}
+
 }
 
