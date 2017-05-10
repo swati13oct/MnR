@@ -141,7 +141,7 @@ Examples:
 	| planType  | memberType   | eobTypeData       | fromDate   | toDate     |dateRange       |
  	| Ship      | withEOB      | Medical           | 12/12/2007 | 12/12/2008 |Last 6 months   |	
  	
- @F85974
+@F85974
 Scenario Outline: To verify mobile responsive for all plans on EOB page
 Given registered AMP with for EOB flow
 	| Plan Type      |<planType>  |
@@ -156,7 +156,7 @@ Examples:
 	| planType  | memberType   | eobTypeData       | fromDate   | toDate     |dateRange       |
  	| MA  | withEOB      | Medical           | 12/12/2007 | 12/12/2008 |Last 6 months   |
  	
- @sprint3	
+@F85974	
 Scenario Outline: To verify How to read a medical EOB PDF
 Given registered AMP with for EOB flow
 	| Plan Type      |<planType>  |
@@ -168,7 +168,7 @@ And the user validates how to read medical eob PDF
 	| MAPD      | withEOB      |
 	| MA        | withEOB      |	
 
-@US604139
+@F85974
 Scenario Outline: To verify mobile responsive for all plans on EOB page
 Given registered AMP with for EOB flow
        | Plan Type      |<planType>  |
@@ -204,7 +204,7 @@ Examples:
       | MAPD      |  withEOB     | Medical           | 01/01/2016 | 04/01/2017 |Last 90 Days  |  Last 6 months  | Last 12 months  | Last 18 months |  
       | PDP      |  withEOB     | Medical           | 01/01/2016 | 04/01/2017 |Last 90 Days  |  Last 6 months  | Last 12 months  | Last 18 months |   
 
- @US604139 	
+@F85974 	
 Scenario Outline: To verify EOB result list
 Given registered AMP with for EOB flow
 	| Plan Type      |<planType>  |
