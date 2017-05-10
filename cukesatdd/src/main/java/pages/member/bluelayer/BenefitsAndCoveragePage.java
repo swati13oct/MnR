@@ -58,6 +58,24 @@ public class BenefitsAndCoveragePage extends UhcDriver {
         @FindBy(xpath = "html/body/div[4]/div[2]/section/div/div/div/h2")
 	private WebElement planBenefitsDocuments;
 	
+        @FindBy(xpath = ".//*[@id='lang-select-2']")
+	private WebElement langdropdown;
+    
+        @FindBy(xpath = ".//*[@id='planBenefitsApp']/div[2]/div[1]/div")
+	private WebElement Hearingsection;
+    
+        @FindBy(xpath = ".//*[@id='planBenefitsApp']/div[2]/div[2]/div")
+	private WebElement Hearingaid;
+    
+        @FindBy(xpath = ".//*[@id='planBenefitsApp']/div[3]/div[1]/div")
+	private WebElement Visionsection;
+    
+        @FindBy(xpath = ".//*[@id='planBenefitsApp']/div[3]/div[2]/div")
+	private WebElement Dentalsection;
+    
+        @FindBy(xpath = ".//*[@id='planBenefitsApp']/div[1]/div")
+	private WebElement Headersection;    
+       
 	
 	
 	public static final String disclaimertextarea_xpath ="//*[@id='collapseDisclaimer']";
@@ -221,7 +239,80 @@ public void clickOnDisclaimers(JSONObject benefitsandcoverageExectedJson) {
 catch (JSONException e) {
 	e.printStackTrace();
 }
+public WebElement getview_label() {
+    return view_label;
+       }
 
+public WebElement getdocuments_label() {
+    return documents_lebel;
+       }
+
+
+
+public void validate_langdropdown_first_selection()
+{
+//WebElement langdropdown;
+if (langdropdown.isDisplayed())
+{
+    Select langdropdwn = new Select(langdropdown);
+if (langdropdwn.getFirstSelectedOption().getText().equals("ENGLISH"))
+{
+Assert.assertTrue(true);
+}
+else
+Assert.fail("Issue in English selection");
+}
+else
+Assert.fail("Plan year dropdown not displayed");
+
+   
+} 
+
+public void validate_langdropdown_select(String language)
+{
+Select langdropdwn = new Select(langdropdown);
+langdropdwn.selectByVisibleText(language);
+}
+
+public void HearingSection() {
+
+	try {
+		validate(Hearingsection);
+	} catch (Exception e) {
+		System.out.println("Elements is not found ...");
+	}
+}
+public void HearingAid() {
+
+	try {
+		validate(Hearingaid);
+	} catch (Exception e) {
+		System.out.println("Elements is not found ...");
+	}
+}
+public void Vision() {
+
+	try {
+		validate(Visionsection);
+	} catch (Exception e) {
+		System.out.println("Elements is not found ...");
+	}
+}
+public void Dental() {
+
+	try {
+		validate(Dentalsection);
+	} catch (Exception e) {
+		System.out.println("Elements is not found ...");
+	}
+}
+public void Header() {
+
+	try {
+		validate(Headersection);
+	} catch (Exception e) {
+		System.out.println("Elements is not found ...");
+	}
 }
 }
 

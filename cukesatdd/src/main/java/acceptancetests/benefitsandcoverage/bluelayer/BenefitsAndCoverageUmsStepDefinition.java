@@ -234,6 +234,20 @@ public class BenefitsAndCoverageUmsStepDefinition {
 	}
 
 
+@When("^the user navigates to benefits and coverage page under my plans in UMS site$")
+	public void navigates_benefits_and_Coverage_UMS() {
+		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario()
+				.getBean(PageConstants.ACCOUNT_HOME_PAGE);
+		BenefitsCoveragePage benefitsCoveragePage = accountHomePage
+				.navigateToBnC();
+
+		if (benefitsCoveragePage != null) {
+			getLoginScenario().saveBean(
+					PageConstants.BENEFITS_AND_COVERAGE_PAGE,
+					benefitsCoveragePage);
+
+
+
 	@Then("^the user validates plan benefits and coverage details in UMS site$")
 	public void details_validation(DataTable attributes) {
 		BenefitsCoveragePage benefitsCoveragePage = (BenefitsCoveragePage) getLoginScenario()
@@ -736,7 +750,72 @@ public class BenefitsAndCoverageUmsStepDefinition {
 		FormsandresourcesPage formsAndResourcesPage = accountHomePage.navigateTosortingsearchlinkUmsPage();
 	}
 
+@And("^the user validates view and documents label$")
+	public void user_validates_view_and_document_label()
+	{
+		BenefitsAndCoveragePage benefitsncoveragepage = (BenefitsAndCoveragePage) getLoginScenario()
+				.getBean(PageConstants.BENEFITS_AND_COVERAGE_PAGE);
+		
+		
+	benefitsncoveragepage.getdocuments_label();
+		benefitsncoveragepage.getview_label();
+		
+	}
+	@And("^the user validates the language dropdown and the value displayed by default$")
+	public void validate_languagedropdown(DataTable givenAttributes)
+	{
+		BenefitsAndCoveragePage benefitsncoveragepage = (BenefitsAndCoveragePage) getLoginScenario()
+				.getBean(PageConstants.BENEFITS_AND_COVERAGE_PAGE);
+				benefitsncoveragepage.validate_langdropdown_first_selection();
+	List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+	Map<String, String> memberAttributesMap = new HashMap<String, String>();
+	for (int i = 0; i < memberAttributesRow.size(); i++) {
+
+	memberAttributesMap.put(memberAttributesRow.get(i).getCells()
+	.get(0), memberAttributesRow.get(i).getCells().get(1));
+	}
+	String language = memberAttributesMap.get("Language");
+	getLoginScenario().saveBean(PlanBenefitsAndCoverageCommonConstants.Language,language);
+	benefitsncoveragepage.validate_langdropdown_select(language);
+	}
 	
+	@Then("^the user validates Hearing section$")
+	public void user_validates__Hearing_section()
+	{
+		BenefitsAndCoveragePage benefitsncoveragepage = (BenefitsAndCoveragePage) getLoginScenario()
+				.getBean(PageConstants.BENEFITS_AND_COVERAGE_PAGE);
+		benefitsncoveragepage.HearingSection();
+	
+              }
+	@And("^the user validates the Hearing Aid section$")
+	public void user_validates__Hearing_Aid_section()
+	{
+		BenefitsAndCoveragePage benefitsncoveragepage = (BenefitsAndCoveragePage) getLoginScenario()
+				.getBean(PageConstants.BENEFITS_AND_COVERAGE_PAGE);
+		benefitsncoveragepage.HearingAid();
+         }
+	@And("^the user validates the Vision section$")
+	public void user_validates__Vision_section()
+	{
+		BenefitsAndCoveragePage benefitsncoveragepage = (BenefitsAndCoveragePage) getLoginScenario()
+				.getBean(PageConstants.BENEFITS_AND_COVERAGE_PAGE);
+		benefitsncoveragepage.Vision();
+            }
+	@And("^the user validates the Dental section$")
+	public void user_validates__Dental_section()
+	{
+		BenefitsAndCoveragePage benefitsncoveragepage = (BenefitsAndCoveragePage) getLoginScenario()
+				.getBean(PageConstants.BENEFITS_AND_COVERAGE_PAGE);
+		benefitsncoveragepage.Dental();
+              }	
+	@Then("^the user validates Header section$")
+	public void user_validates__Header_section()
+	{
+		BenefitsAndCoveragePage benefitsncoveragepage = (BenefitsAndCoveragePage) getLoginScenario()
+				.getBean(PageConstants.BENEFITS_AND_COVERAGE_PAGE);
+		benefitsncoveragepage.Header();
+	
+         }	
 
 }
 	

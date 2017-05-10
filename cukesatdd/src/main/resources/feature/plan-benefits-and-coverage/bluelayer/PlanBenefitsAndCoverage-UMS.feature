@@ -822,3 +822,22 @@ Examples:
       | planType | memberType| copayCategory |
       | MAPD     | Group     |     NON LIS   |
       ##member used :q1_apr_grp_015
+
+    @Ancillarysec 
+  Scenario Outline: Verify PDF section is in place on Benefits and Coverage page
+    Given registered UHC with following details for plan benefits and coverage flow in UMS site
+      | Plan Type      | <planType>      |
+      | Copay Category | <copayCategory>|
+    When the user view forms and resources in UMS site
+    Then the user view benefits and coverage in UMS site
+    And the user validates the content on benefits and coverage page
+    Then the user validates Header section
+    Then the user validates Hearing section
+    Then the user validates the Hearing Aid section
+    Then the user validates the Vision section
+    Then the user validates the Dental section 
+     Examples: 
+      | planType| copayCategory |
+      | MA      |  NON LIS       |
+      ##TESTMAHMO1
+      
