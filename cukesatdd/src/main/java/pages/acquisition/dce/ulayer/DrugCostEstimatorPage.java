@@ -479,15 +479,9 @@ public class DrugCostEstimatorPage extends UhcDriver {
 	}
 
 	public boolean validateAddedDrug(String args1, String arg2, String arg3) {
-		// TODO Auto-generated method stub
+		
 		validate(driver.findElement(By.xpath("//div[@id='drugs-tab']//p[contains (text(), '" + args1
 				+ "')]/following-sibling::p/span[contains(text(),'" + arg2 + "')]")));
-
-		// List<WebElement> stri =
-		// driver.findElements(By.xpath("//div[@id='drugs-tab']//p[contains
-		// (text(), '"+args1+"')]")).getText();
-		// System.out.println("++++++++drugdetails+++++++++" + drugdetails +
-		// "+++++++++++++++++" );
 
 		driver.findElement(By.xpath("//div[@id='drugs-tab']//p[contains (text(), '" + args1 + "')]")).getText()
 				.contains(arg2);

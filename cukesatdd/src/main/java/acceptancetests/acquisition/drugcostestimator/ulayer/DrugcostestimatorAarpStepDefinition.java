@@ -844,7 +844,6 @@ public class DrugcostestimatorAarpStepDefinition {
 	@Then("^I delete the existing drug if present$")
 	public void I_delete_the_existing_drug_if_present() throws InterruptedException {
 		DrugCostEstimatorPage dce = (DrugCostEstimatorPage) getLoginScenario().getBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE);
-		//Thread.sleep(10000);
 		dce.deleteAllDrugs();
 	}
 	
@@ -909,8 +908,7 @@ public class DrugcostestimatorAarpStepDefinition {
 	
 	@Then("^I should validate drug with Dosage and Quantity and frequency edited to the list$")
 	public void I_should_validate_drug_with_Dosage_and_Quantity_and_frequency_edited_to_the_list(DataTable memberAttributes) {
-		// Express the Regexp above with the code you wish you had
-		//	WebDriver wd = (WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
+		
 		List<DataTableRow> memberAttributesRow = memberAttributes
 				.getGherkinRows();
 		Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();

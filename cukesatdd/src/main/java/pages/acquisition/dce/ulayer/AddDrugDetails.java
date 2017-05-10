@@ -60,7 +60,7 @@ public class AddDrugDetails extends UhcDriver {
 			try {
 				jsonObject.put(key, element.getText());
 			} catch (JSONException e) {
-				// TODO Auto-generated catch block
+				
 				e.printStackTrace();
 			}
 

@@ -16,7 +16,7 @@ Examples:
  | drug |
  |lipitor|
  
- #--------------------------------------------------------------------
+ ##--------------------------------------------------------------------
   @acq_drug_cost_estimator1
 Scenario Outline: As a prospective member using the DCE tool on the M&R portal site, I want to be able to choose my dosage, package and frequency when assembling a drug list on either a desktop or mobile device so I can eventually choose a pharmacy and accurately estimate the cost of my drugs.
 Given the user is on AARP medicare site landing page
