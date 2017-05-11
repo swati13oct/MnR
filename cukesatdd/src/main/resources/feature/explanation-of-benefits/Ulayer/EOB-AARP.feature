@@ -222,7 +222,7 @@ And the user validates EOB statments displayed
  	| PDP     | withEOB      | Prescription      |12/12/2007 | 12/12/2008 | Last 18 Months |
  	| Ship    | withEOB      | Medical           |12/12/2007 | 12/12/2008 | Last 12-18 Months |
  
-@F85974 	
+@srint4MAPDUI	
 Scenario Outline: To validate EOB Type Drop-Down (UI) - MAPD
 Given registered AMP with for EOB flow
 	| Plan Type      |<planType>  |
