@@ -329,18 +329,48 @@ public class PharmacyLocatorMemberAarpStepDefinition {
 	
 	@And("^the user searches for pharmaciy search results available in AARP site$")
 	public void user_views_pharmacy_search_result_aarp() {
-		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario()
+		/*AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario()
 				.getBean(PageConstants.ACCOUNT_HOME_PAGE);
 		PharmacySearchPage pharmacySearchPage = accountHomePage
-				.navigateToPharmacySearchResult();		
+				.navigateToPharmacySearchResult();*/
+		
+		try {
+			
+			JSONObject actual=(JSONObject) loginScenario.getBean(PlanBenefitsAndCoverageCommonConstants.PHARMACYSEARCH_ACTUAL);
+			
+			JSONObject expected=(JSONObject) loginScenario.getBean(PlanBenefitsAndCoverageCommonConstants.PHARMACYSEARCH_EXPECTED);
+			
+			if(actual!=null && expected !=null){
+				JSONAssert.assertEquals(expected, actual, true);
+			}			
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
 	}
 	
 	@Then("^the user validates the PRPN search result and red balloon marker available in AARP site$")
 	public void user_views_prpn_search_result_available_aarp() {
-		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario()
+		/*AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario()
 				.getBean(PageConstants.ACCOUNT_HOME_PAGE);
 		PharmacySearchPage pharmacySearchPage = accountHomePage
-				.navigateToPrpnSearchAndBallonMarkerResult();		
+				.navigateToPrpnSearchAndBallonMarkerResult();*/
+		
+		try {
+			
+			JSONObject actual=(JSONObject) loginScenario.getBean(PlanBenefitsAndCoverageCommonConstants.PHARMACYSEARCH_ACTUAL);
+			
+			JSONObject expected=(JSONObject) loginScenario.getBean(PlanBenefitsAndCoverageCommonConstants.PHARMACYSEARCH_EXPECTED);
+			
+			if(actual!=null && expected !=null){
+				JSONAssert.assertEquals(expected, actual, true);
+			}			
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
 	}
 	@And("^the user searches for view result as pdf available in AARP site$")
 	public void user_view_result_as_pdf_aarp() {
@@ -373,7 +403,7 @@ public class PharmacyLocatorMemberAarpStepDefinition {
 				.getBean(PageConstants.ACCOUNT_HOME_PAGE);
 		PharmacySearchPage pharmacySearchPage = accountHomePage
 				.navigateToPrpnWidgetResult();	*/
-try {
+		try {
 			
 			JSONObject actual=(JSONObject) loginScenario.getBean(PlanBenefitsAndCoverageCommonConstants.PHARMACYSEARCH_ACTUAL);
 			
