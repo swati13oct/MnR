@@ -229,7 +229,8 @@ Given registered AMP with for EOB flow
 	| Member Type    |<memberType>|
 Then the user navigates to EOB page	
 And the user validates EOB type and Date Range for MAPD
-
+| Plan Type      |<planType>  |
+|Date Range| <dateRange>|
 Examples:
 | planType  | memberType   | eobTypeData       | fromDate   | toDate     |dateRange       |
 | Ship      | withEOB      | Medical           |12/12/2015 | 12/12/2017|Last 6 Months |
