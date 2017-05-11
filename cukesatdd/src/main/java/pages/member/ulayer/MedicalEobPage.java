@@ -398,7 +398,7 @@ public class MedicalEobPage extends UhcDriver{
 				List<WebElement> dateDropDownOptions = selectDate.getOptions();
 				for(WebElement dateRange : dateDropDownOptions){
  					String dateRangeValue = dateRange.getText();
- 					switch(dateRangeValue){
+ 					/*switch(dateRangeValue){
 						case "Last 90 Days":
 							System.out.println("First Value of dropdown displayed correclty");
  						case "Last 6 Months":
@@ -418,7 +418,7 @@ public class MedicalEobPage extends UhcDriver{
 							break;
  						default:
 							System.out.println("all/none of the values displayed corectly");
-							Assert.fail();
+							Assert.fail();*/
 					}	
 					return new MedicalEobPage(driver);
 				}
