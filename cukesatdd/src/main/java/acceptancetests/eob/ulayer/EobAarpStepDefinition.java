@@ -574,9 +574,19 @@ public class EobAarpStepDefinition {
         eobPage.validateEachEOBonUI();
 	}
 	@Then("^the user validates EOB type and Date Range for MAPD$")
-	public void the_user_validates_EOB_type_and_Date_Range_for_MAPD() {
+	public void the_user_validates_EOB_type_and_Date_Range_for_MAPD(DataTable givenAttributes) {
+		List<DataTableRow> memberAttributesRow = givenAttributes
+				.getGherkinRows();
+		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells()
+					.get(0), memberAttributesRow.get(i).getCells().get(1));
+		}
+
+		String dateRange = memberAttributesMap.get("Date Range");
+		String planType  = memberAttributesMap.get("Plan Type");
 		MedicalEobPage eobPage = (MedicalEobPage) getLoginScenario().getBean(PageConstants.MEDICAL_EOB_PAGE);
-        String planType = (String) getLoginScenario().getBean(CommonConstants.PLAN_TYPE);
         System.out.println(planType);
 		eobPage.validateDropDowns(planType);
 	}

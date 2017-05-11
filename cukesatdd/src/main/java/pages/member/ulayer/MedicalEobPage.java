@@ -455,9 +455,9 @@ public class MedicalEobPage extends UhcDriver{
 	}
 	public void validateDateRangeContentDisplayed(String dateRangeValue){
 		if(eobDetailsHeader.getText().contains(dateRangeValue)){
-			System.out.println();
+			System.out.println(dateRangeValue+" displayed correctly");
 		}else{
-			System.out.println();
+			System.out.println("Desired value not displayed correctly for EOB statement header");
 			Assert.fail();
 		}
 	}
