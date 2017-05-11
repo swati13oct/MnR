@@ -426,7 +426,7 @@ public class MedicalEobPage extends UhcDriver{
 				System.out.println("First element Date Range dropdown not displayed correctly ");
 				Assert.fail();
 			}
- 		}
+ 		
 		return null;
 	}
 }
