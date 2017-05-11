@@ -91,6 +91,8 @@ public class MedicalEobPage extends UhcDriver{
 	@FindBy(xpath="//*[contains(text(),'How to read your Medical EOB ')]")
 	private WebElement readMedicalEOB;
 	
+	@FindBy(xpath="//*[contains(text(),'You have')]")
+	private WebElement eobDetailsHeader;
 	private PageData medicalEob;
 
 	public JSONObject medicalEobJson;
@@ -398,6 +400,28 @@ public class MedicalEobPage extends UhcDriver{
 				List<WebElement> dateDropDownOptions = selectDate.getOptions();
 				for(WebElement dateRange : dateDropDownOptions){
  					String dateRangeValue = dateRange.getText();
+ 					if(dateRangeValue.equals("Last 90 Days")){
+ 						System.out.println("First Value of dropdown displayed correclty");
+ 						validateDateRangeContentDisplayed(dateRangeValue);
+ 					}if(dateRangeValue.equals("Last 12 Months")){
+ 						System.out.println("Second Value of dropdown displayed correclty");
+ 						validateDateRangeContentDisplayed(dateRangeValue);
+ 					}if(dateRangeValue.equals("Last 18 Months")){
+ 						System.out.println("Fourth Value of dropdown displayed correclty");
+ 						validateDateRangeContentDisplayed(dateRangeValue);
+ 					}if(dateRangeValue.equals("Custom Search")){
+ 						System.out.println("Last Value of dropdown displayed correclty");
+						if(!planType.equals("Ship")){
+							System.out.println("Values are displayed correctly for "+planType);
+							}else{
+							System.out.println("For ship member value displayed incorrectly");
+							Assert.fail();
+						}
+ 					} else{
+ 						System.out.println("all/none of the values displayed corectly");
+						Assert.fail();
+ 					}
+ 					
  					/*switch(dateRangeValue){
 						case "Last 90 Days":
 							System.out.println("First Value of dropdown displayed correclty");
@@ -428,5 +452,13 @@ public class MedicalEobPage extends UhcDriver{
 			}
  		
 		return null;
+	}
+	public void validateDateRangeContentDisplayed(String dateRangeValue){
+		if(eobDetailsHeader.getText().contains(dateRangeValue)){
+			System.out.println();
+		}else{
+			System.out.println();
+			Assert.fail();
+		}
 	}
 }
