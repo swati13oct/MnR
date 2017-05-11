@@ -535,6 +535,8 @@ public class EobAarpStepDefinition {
 		String eobTypeData = memberAttributesMap.get("EOB Type");
 		String fromDate = memberAttributesMap.get("From Date");
 		String toDate = memberAttributesMap.get("To Date");
+		
+		getLoginScenario().saveBean(CommonConstants.PLAN_TYPE, planType);
 
  	     //Pass the direct URL to validate the page
 		AccountHomePage accountHomePage =  (AccountHomePage) getLoginScenario().getBean(PageConstants.ACCOUNT_HOME_PAGE);
@@ -571,7 +573,13 @@ public class EobAarpStepDefinition {
 		MedicalEobPage eobPage = (MedicalEobPage) getLoginScenario().getBean(PageConstants.MEDICAL_EOB_PAGE);
         eobPage.validateEachEOBonUI();
 	}
-	
+	@Then("^the user validates EOB type and Date Range for MAPD$")
+	public void the_user_validates_EOB_type_and_Date_Range_for_MAPD() {
+		MedicalEobPage eobPage = (MedicalEobPage) getLoginScenario().getBean(PageConstants.MEDICAL_EOB_PAGE);
+        String planType = (String) getLoginScenario().getBean(CommonConstants.PLAN_TYPE);
+        System.out.println(planType);
+		eobPage.validateDropDowns(planType);
+	}
 	@After
 	public void tearDown() {
 

@@ -372,4 +372,61 @@ public class MedicalEobPage extends UhcDriver{
 			 }
 		 	return null;
 		}
+	public MedicalEobPage validateDropDowns(String planType){
+		if(planType.equals(planType)){
+			Select select = new Select(eobType);
+			List<WebElement> eobTypeOptions = select.getOptions();
+			WebElement firstInDropDown = select.getFirstSelectedOption();
+			if(firstInDropDown.getText().equals("Medical")){
+				System.out.println("First element EOB Type dropdown displayed correctly "+firstInDropDown.getText());
+				for(WebElement eobType : eobTypeOptions){
+					if(eobType.getText().equals("Medical") || eobType.getText().equals("Prescription Drug")){
+						System.out.println("Desired value of EOB displayed "+eobType.getText());
+					}else{
+						System.out.println("------Desired values not displayed in EOB Type Dropdown-------");
+						Assert.fail();
+					}
+				}
+			}else{
+				System.out.println("First Element of dropdown not displayed correctly");
+				Assert.fail();
+			}
+			Select selectDate = new Select(eobMonthDateRange);
+			WebElement firstInDateDropDown = selectDate.getFirstSelectedOption();
+			if(firstInDateDropDown.getText().equals("Last 90 Days")){
+				System.out.println("First element Date Range dropdown displayed correctly "+ firstInDateDropDown.getText());
+				List<WebElement> dateDropDownOptions = selectDate.getOptions();
+				for(WebElement dateRange : dateDropDownOptions){
+ 					String dateRangeValue = dateRange.getText();
+ 					switch(dateRangeValue){
+						case "Last 90 Days":
+							System.out.println("First Value of dropdown displayed correclty");
+ 						case "Last 6 Months":
+							System.out.println("Second Value of dropdown displayed correclty");						    
+						case "Last 12 Months":
+							System.out.println("Third Value of dropdown displayed correclty");	
+ 						case "Last 18 Months":
+							System.out.println("Fourth Value of dropdown displayed correclty");
+ 						case "Custom Search":
+							System.out.println("Last Value of dropdown displayed correclty");
+							if(!planType.equals("Ship")){
+								System.out.println("Values are displayed correctly for "+planType);
+ 							}else{
+								System.out.println("For ship member value displayed incorrectly");
+								Assert.fail();
+							}
+							break;
+ 						default:
+							System.out.println("all/none of the values displayed corectly");
+							Assert.fail();
+					}	
+					return new MedicalEobPage(driver);
+				}
+			}else{
+				System.out.println("First element Date Range dropdown not displayed correctly ");
+				Assert.fail();
+			}
+ 		}
+		return null;
+	}
 }
