@@ -683,6 +683,19 @@ Then error message for fifth plan should be displayed
 Examples:
 		|zipCode|county         |planType	|
 		|02801  |Newport County	|MA 		|
+		
+@aprilReleaseSprint3
+Scenario Outline: To validate error message on entering invalid Zipcode
+Given the user is on the vpp portfolio page
+Then the user performs plan serach using zipcode
+		| Zip Code |<zipCode>|
+		| County   |<county> |
+And the user enters incorrect zipcode
+| InvalidZipCode |<zipCode1>|
+Then user validate error message for invalid zipcode
+Examples:
+		|zipCode|county         |planType	|zipCode1|
+		|02801  |Newport County	|MA 		|00000   | 
 
 		
  

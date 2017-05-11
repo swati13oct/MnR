@@ -10,6 +10,7 @@ import org.json.JSONObject;
 import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -37,6 +38,12 @@ public class ResponsivePlanSummary extends UhcDriver{
 	//US504467
 		@FindBy(xpath = "//div[@class='tab'][1]")
 		private WebElement viewMaPlans;
+		
+		@FindBy(xpath = "//*[@class='ng-valid ng-dirty']/span/div")
+		private WebElement errorMessageincorrect;
+		
+		@FindBy(id = "zipcode")
+		private WebElement zipCodeField;
 		
 		@FindBy(xpath = "//div[@class='tab'][2]")
 		private WebElement viewPdpPlans;
@@ -919,5 +926,39 @@ public void comparePlanslnk(){
 					js.executeScript("arguments[0].click();", chkBoxAddtoCompare1);
 					
 				}
+				public void validateincorrectZipcode(String actualZipcode,
+						String invalidzipcode) {
+					
+					validate(changeLoationLink);
+					changeLoationLink.click();
+					JavascriptExecutor executor = (JavascriptExecutor)driver;
+					String stickyZipcode =  (String) executor.executeScript("return document.getElementById('zipcode').value;");
+					System.out.println(stickyZipcode);
+					//String stickyZipcode=zipcodeBox.getText();
+					//System.out.println(driver.findElement(By.xpath("//*[@id='zipd
+					if(stickyZipcode.equals(actualZipcode)){
+						System.out.println("zipcode box displays sticky zipCode as  "+stickyZipcode);
+						Assert.assertTrue(true);
+					}else{
+						System.out.println("zipcode box doesn't displays sticky zipCode as  "+stickyZipcode);
+						Assert.fail();
+					}
+					
+					driver.findElement(By.id("zipcode")).clear(); 
+					
+					 sendkeys(zipCodeField, invalidzipcode);
+					    zipCodeField.sendKeys(Keys.ENTER);
+					//driver.findElement(By.className("change-location-link")).sendKeys(By.id("zipcode");
+					
+				}
+				public void errorMessageforincorrectzipcode() {
+					validate(errorMessageincorrect);
+					 System.out.println(errorMessageincorrect.getText());
+					// TODO Auto-generated method stub
+					
+				}
+				
+					// TODO Auto-generated method stub
+					
+				}
 			 
-}

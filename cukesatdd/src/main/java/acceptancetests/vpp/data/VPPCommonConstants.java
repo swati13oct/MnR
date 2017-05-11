@@ -45,4 +45,6 @@ public class VPPCommonConstants {
 
 	public static final String EMAIL_ADDRESS = "emailaddress";
 
+	public static final String ZIPCODEINVALID = "invalidzipcode";
+
 }
