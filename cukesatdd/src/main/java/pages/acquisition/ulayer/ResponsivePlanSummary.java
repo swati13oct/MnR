@@ -944,7 +944,8 @@ public void comparePlanslnk(){
 						Assert.fail();
 					}
 					
-					driver.findElement(By.id("zipcode")).clear(); 
+					zipCodeField.click();
+					zipCodeField.clear();
 					
 					 sendkeys(zipCodeField, invalidzipcode);
 					    zipCodeField.sendKeys(Keys.ENTER);
