@@ -373,7 +373,7 @@ public class MedicalEobPage extends UhcDriver{
 		 	return null;
 		}
 	public MedicalEobPage validateDropDowns(String planType){
-		if(planType.equals(planType)){
+		if(planType.equals("MAPD")){
 			Select select = new Select(eobType);
 			List<WebElement> eobTypeOptions = select.getOptions();
 			WebElement firstInDropDown = select.getFirstSelectedOption();
