@@ -938,11 +938,13 @@ public void comparePlanslnk(){
 					//System.out.println(driver.findElement(By.xpath("//*[@id='zipd
 					if(stickyZipcode.equals(actualZipcode)){
 						System.out.println("zipcode box displays sticky zipCode as  "+stickyZipcode);
-						Assert.assertTrue(true);
+						//Assert.assertTrue(true);
 					}else{
 						System.out.println("zipcode box doesn't displays sticky zipCode as  "+stickyZipcode);
 						Assert.fail();
 					}
+					//element.sendkeys(KEYS.TABS);
+					driver.manage().window().maximize();
 					
 					zipCodeField.click();
 					zipCodeField.clear();
