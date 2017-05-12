@@ -222,7 +222,7 @@ And the user validates EOB statments displayed
  	| PDP     | withEOB      | Prescription      |12/12/2007 | 12/12/2008 | Last 18 Months |
  	| Ship    | withEOB      | Medical           |12/12/2007 | 12/12/2008 | Last 12-18 Months |
  
-@srint4MAPDUI	
+@F85974	
 Scenario Outline: To validate EOB Type Drop-Down (UI) - MAPD
 Given registered AMP with for EOB flow
 	| Plan Type      |<planType>  |
@@ -232,5 +232,5 @@ And the user validates EOB type and Date Range for MAPD
 | Plan Type      |<planType>  |
 |Date Range| <dateRange>|
 Examples:
-| planType  | memberType   | eobTypeData      | dateRanege |
-| MAPD     | withEOB      | Medical           | Last 90 Days |
+| planType  | memberType   | eobTypeData      |  
+| MAPD     | withEOB      | Medical           |  

@@ -583,8 +583,6 @@ public class EobAarpStepDefinition {
 			memberAttributesMap.put(memberAttributesRow.get(i).getCells()
 					.get(0), memberAttributesRow.get(i).getCells().get(1));
 		}
-
-		String dateRange = memberAttributesMap.get("Date Range");
 		String planType  = memberAttributesMap.get("Plan Type");
 		MedicalEobPage eobPage = (MedicalEobPage) getLoginScenario().getBean(PageConstants.MEDICAL_EOB_PAGE);
         System.out.println(planType);
