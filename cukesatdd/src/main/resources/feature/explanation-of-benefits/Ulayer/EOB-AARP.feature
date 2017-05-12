@@ -232,11 +232,5 @@ And the user validates EOB type and Date Range for MAPD
 | Plan Type      |<planType>  |
 |Date Range| <dateRange>|
 Examples:
-| planType  | memberType   | eobTypeData       | fromDate   | toDate     |dateRange       |
-| Ship      | withEOB      | Medical           |12/12/2015 | 12/12/2017|Last 6 Months |
-| MAPD     | withEOB      | Medical           |12/12/2015 | 12/12/2017|Last 6 Months |
-| MA      | withEOB      | Medical           |12/12/2015 | 12/12/2017|Last 6 Months |
-| PDP     | withEOB      | Medical           |12/12/2015 | 12/12/2017|Last 6 Months |
-	
- 		
- 		
+| planType  | memberType   | eobTypeData      | dateRanege |
+| MAPD     | withEOB      | Medical           | Last 90 Days |
