@@ -943,8 +943,9 @@ public void comparePlanslnk(){
 						System.out.println("zipcode box doesn't displays sticky zipCode as  "+stickyZipcode);
 						Assert.fail();
 					}
-					//element.sendkeys(KEYS.TABS);
-					driver.manage().window().maximize();
+					countyNameDetail.click();
+					countyNameDetail.sendKeys(Keys.TAB);
+					//driver.manage().window().maximize();
 					
 					zipCodeField.click();
 					zipCodeField.clear();
