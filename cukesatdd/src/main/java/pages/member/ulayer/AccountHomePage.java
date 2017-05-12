@@ -207,6 +207,9 @@ public class AccountHomePage extends UhcDriver {
 	
 	@FindBy(xpath = "//*[@id='fd_myMenu']/a")
 	private WebElement mymenuLink;
+	
+	@FindBy(xpath = "//*[@id='planinformation']/div[2]/div[5]/span[2]/a")
+	private WebElement benefitandcoverageLink;
 
 
 	
@@ -852,5 +855,15 @@ public class AccountHomePage extends UhcDriver {
 		return null;
 	}
 
+	public FormsandresourcesPage navigateToBenefitAndCoverageAarpPage() {
+		benefitandcoverageLink.click();
+		return null;
+	}
+
+	public FormsandresourcesPage navigateToLowerTierDrugLearnmoreAarpPage() {
+		driver.navigate().to("https://member.team-a-aarpmedicareplans.uhc.com/content/aarpm/home/my-plans/noaccordion-medicare-partd-coverage.html");
+		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+		return null;
+	}
 
 }

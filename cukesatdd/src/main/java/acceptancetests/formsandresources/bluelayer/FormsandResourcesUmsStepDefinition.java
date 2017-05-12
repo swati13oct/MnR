@@ -737,6 +737,39 @@ public class FormsandResourcesUmsStepDefinition {
 			e.printStackTrace();
 		}
 	}
+	
+	
+	@Then("^the user view prescription drug explanation of eob in UMS site$")
+	public void views_drug_eob_Ums_site() {
+		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario()
+				.getBean(PageConstants.ACCOUNT_HOME_PAGE);
+		FormsandresourcesPage formsAndResourcesPage = accountHomePage
+				.navigateToPrescriptionDrugEobUms();
+	}
+
+
+
+	@Then("^the user validates the content on prescription drug explanation of eob page in UMS site$")
+	public void the_user_validates_the_content_on_drug_explanation_eob_page() {
+		try {
+			
+			JSONObject actual=(JSONObject) loginScenario.getBean
+
+					(PlanBenefitsAndCoverageCommonConstants.BENEFITS_AND_COVERAGE_ACTUAL);
+			
+			JSONObject expected=(JSONObject) loginScenario.getBean
+
+					(PlanBenefitsAndCoverageCommonConstants.BENEFITS_AND_COVERAGE_EXPECTED);
+			
+			if(actual!=null && expected !=null){
+				JSONAssert.assertEquals(expected, actual, true);
+			}			
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
 
 	
 	

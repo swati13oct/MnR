@@ -238,3 +238,15 @@ Examples:
 | planType |
 | PDP	   |
 
+@lowertierdruglearnmore
+Scenario Outline:To verify content story in forms and resource in AARP site
+Given registered member for forms and resources in AARP Site
+	| <planType> |
+When the user view benefit and coverage in AARP site
+Then the user view lower tier drug and click on learnmore in AARP site
+Then the user validate lower tier drug learnmore in AARP site
+
+Examples:
+
+| planType |
+| PDP	   |

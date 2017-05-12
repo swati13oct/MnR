@@ -521,6 +521,42 @@ public class FormsandResourcesAarpStepDefinition {
 				e.printStackTrace();
 			}
 		}
+	
+	@When("^the user view benefit and coverage in AARP site$")
+	public void views_benefit_and_coverage_aarp_site() {
+		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario()
+				.getBean(PageConstants.ACCOUNT_HOME_PAGE);
+		FormsandresourcesPage formsAndResourcesPage = accountHomePage
+				.navigateToBenefitAndCoverageAarpPage();
+	}
+
+@Then("^the user view lower tier drug and click on learnmore in AARP site$")
+	public void views_lower_drug_learnmore_aarp_site() {
+		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario()
+				.getBean(PageConstants.ACCOUNT_HOME_PAGE);
+		FormsandresourcesPage formsAndResourcesPage = accountHomePage
+				.navigateToLowerTierDrugLearnmoreAarpPage();
+	}
+
+
+	@Then("^the user validate lower tier drug learnmore in AARP site$")
+		public void validate_lower_drug_learn_more_page_aarp() {
+			try {
+				
+				JSONObject actual=(JSONObject) loginScenario.getBean(PlanBenefitsAndCoverageCommonConstants.BENEFITS_AND_COVERAGE_ACTUAL);
+				
+				JSONObject expected=(JSONObject) loginScenario.getBean(PlanBenefitsAndCoverageCommonConstants.BENEFITS_AND_COVERAGE_EXPECTED);
+				
+				if(actual!=null && expected !=null){
+					JSONAssert.assertEquals(expected, actual, true);
+				}			
+				
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+	
+
 
 
 	

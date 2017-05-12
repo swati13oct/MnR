@@ -228,6 +228,19 @@ Examples:
 | planType | memberType |
 | PDP	   | Group |
 
+@drugeob
+Scenario Outline: Verify benefit summary content for group members in ums site
+Given registered member for forms and resources in UMS Site
+	| Plan Type      |<planType> |
+	| Member Type		 |<memberType> |
+When the user view forms and resources in UMS site 
+Then the user view prescription drug explanation of eob in UMS site
+Then the user validates the content on prescription drug explanation of eob page in UMS site
+
+Examples:
+| planType | memberType |
+| MAPD	   | Individual |
+
 #Sprint 3
 
 @drugtransition

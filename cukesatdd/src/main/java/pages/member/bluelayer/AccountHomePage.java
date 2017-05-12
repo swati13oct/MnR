@@ -1069,6 +1069,13 @@ public FormsandresourcesPage navigateToMydocumentUmsPage() {
 		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 		return null;
 	}
+	
+	public FormsandresourcesPage navigateToPrescriptionDrugEobUms() {
+		driver.navigate().to("https://member.team-a-uhcmedicaresolutions.uhc.com/content/uhcm/home/my-plans/claims/explanation-of-benefits-pdp0.html");
+		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+		return null;
+	}
+	
 
 	public AccountHomePage navigateToAboutUSPage() {
 		driver.navigate().to("https://member."+MRScenario.environment+"-uhcmedicaresolutions.uhc.com/content/uhcm/guest/about-us0.html");
