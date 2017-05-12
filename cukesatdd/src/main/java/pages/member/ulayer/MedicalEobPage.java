@@ -400,49 +400,35 @@ public class MedicalEobPage extends UhcDriver{
 				List<WebElement> dateDropDownOptions = selectDate.getOptions();
 				for(WebElement dateRange : dateDropDownOptions){
  					String dateRangeValue = dateRange.getText();
- 					if(dateRangeValue.equals("Last 90 Days")){
- 						System.out.println("First Value of dropdown displayed correclty");
+ 					System.out.println("Date Range Value Captured " + dateRangeValue);
+	 			   if(dateRangeValue.equals("Last 90 Days")){
+	 					System.out.println("First Value of dropdown displayed correclty "+dateRangeValue);
+	 					validateDateRangeContentDisplayed(dateRangeValue);	
+	 			   }else if(dateRangeValue.equals("Last 6 Months")){
+ 						System.out.println("Second Value of dropdown displayed correclty "+dateRangeValue);
+  						selectDateRange(dateRangeValue, planType, "Medical");
+  						validateDateRangeContentDisplayed(dateRangeValue);
+ 					}else if(dateRangeValue.equals("Last 12 Months")){
+ 						System.out.println("Third Value of dropdown displayed correclty "+dateRangeValue);
+ 						selectDateRange(dateRangeValue, planType, "Medical");
  						validateDateRangeContentDisplayed(dateRangeValue);
- 					}if(dateRangeValue.equals("Last 12 Months")){
- 						System.out.println("Second Value of dropdown displayed correclty");
+ 					}else if(dateRangeValue.equals("Last 18 Months")){
+ 						System.out.println("Fourth Value of dropdown displayed correclty "+dateRangeValue);
+ 						selectDateRange(dateRangeValue, planType, "Medical");
  						validateDateRangeContentDisplayed(dateRangeValue);
- 					}if(dateRangeValue.equals("Last 18 Months")){
- 						System.out.println("Fourth Value of dropdown displayed correclty");
- 						validateDateRangeContentDisplayed(dateRangeValue);
- 					}if(dateRangeValue.equals("Custom Search")){
- 						System.out.println("Last Value of dropdown displayed correclty");
-						if(!planType.equals("Ship")){
+ 					}else if(dateRangeValue.equals("Custom Search")){
+ 						System.out.println("Last Value of dropdown displayed correclty "+dateRangeValue);
+ 						selectDateRange(dateRangeValue, planType, "Medical");
+ 						if(!planType.equals("Ship")){
 							System.out.println("Values are displayed correctly for "+planType);
-							}else{
+ 							}else{
 							System.out.println("For ship member value displayed incorrectly");
 							Assert.fail();
 						}
- 					} else{
+ 					} else if(dateRange.equals(null)){
  						System.out.println("all/none of the values displayed corectly");
 						Assert.fail();
  					}
- 					
- 					/*switch(dateRangeValue){
-						case "Last 90 Days":
-							System.out.println("First Value of dropdown displayed correclty");
- 						case "Last 6 Months":
-							System.out.println("Second Value of dropdown displayed correclty");						    
-						case "Last 12 Months":
-							System.out.println("Third Value of dropdown displayed correclty");	
- 						case "Last 18 Months":
-							System.out.println("Fourth Value of dropdown displayed correclty");
- 						case "Custom Search":
-							System.out.println("Last Value of dropdown displayed correclty");
-							if(!planType.equals("Ship")){
-								System.out.println("Values are displayed correctly for "+planType);
- 							}else{
-								System.out.println("For ship member value displayed incorrectly");
-								Assert.fail();
-							}
-							break;
- 						default:
-							System.out.println("all/none of the values displayed corectly");
-							Assert.fail();*/
 					}	
 					return new MedicalEobPage(driver);
 				}
@@ -454,6 +440,7 @@ public class MedicalEobPage extends UhcDriver{
 		return null;
 	}
 	public void validateDateRangeContentDisplayed(String dateRangeValue){
+		CommonUtility.waitForPageLoad(driver, eobDetailsHeader, 20 );
 		if(eobDetailsHeader.getText().contains(dateRangeValue)){
 			System.out.println(dateRangeValue+" displayed correctly");
 		}else{
