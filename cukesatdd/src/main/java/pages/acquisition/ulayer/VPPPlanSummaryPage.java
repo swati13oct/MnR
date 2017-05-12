@@ -816,6 +816,26 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		return false;
 	}
 
+	public void validateProactiveChat() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void validateReactiveChat() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void clickReactiveChat() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void clickProactiveChat() {
+		// TODO Auto-generated method stub
+		
+	}
+
 
 }
 

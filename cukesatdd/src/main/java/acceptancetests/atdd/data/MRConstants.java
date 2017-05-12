@@ -35,6 +35,8 @@ public class MRConstants {
 	
 	public static final String VERIZON_HOME_PAGE_URL = "https://www."+MRScenario.environment+"-uhcretiree.uhc.com/verizon/home.html";
 	
+	public static final String NOKIA_HOME_PAGE_URL = "https://www."+MRScenario.environment+"-uhcretiree.uhc.com/nokia/home.html";
+	
 	public static final String CALPERS_HOME_PAGE_URL = "https://www."+MRScenario.environment+"-uhcretiree.uhc.com/calpers/home.html";
 	
 	public static final String JOHNSONANDJOHNSON_HOME_PAGE_URL = "https://www."+MRScenario.environment+"-uhcretiree.uhc.com/jnj/home.html";

@@ -730,6 +730,11 @@ public FormsandresourcesPage navigateToMydocumentAarpPage() {
 		}
 	}
 
+	public AccountHomePage validateLoginPageElements() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 	
 
  
