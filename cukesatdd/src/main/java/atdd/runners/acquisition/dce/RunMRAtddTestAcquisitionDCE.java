@@ -14,7 +14,7 @@ import cucumber.junit.Cucumber;
 @Cucumber.Options(glue = { "atdd.framework","acceptancetests.acquisition.drugcostestimator.ulayer" }, 
 		features = { "feature/dceacquisition/ULayer" }, 
 		format = {
-		"pretty", "html:reports/test-report","json:target/cucumber.json" }, tags ={"@acq_drug_cost_estimator1"})
+		"pretty", "html:reports/test-report","json:target/cucumber.json" }, tags ={"@acq_drug_cost_estimator2"})
 public class RunMRAtddTestAcquisitionDCE {
 //
 }

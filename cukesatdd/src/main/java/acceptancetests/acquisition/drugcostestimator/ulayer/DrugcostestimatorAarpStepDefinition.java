@@ -926,5 +926,16 @@ public class DrugcostestimatorAarpStepDefinition {
 		dce.validateAddedDrug(dosage,quantity,frequency);
 	}
 
+	@Then("^I should see all generic headers and elements$")
+	public void I_should_see_all_generic_headers_and_elements() {
+		DrugCostEstimatorPage dce = new DrugCostEstimatorPage((WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER));
+		dce.validateStep1Item();
+	}
+
+	@Then("^I should see disclaimers link at the bottom$")
+	public void I_should_see_disclaimers_link_at_the_bottom() throws InterruptedException {
+		DrugCostEstimatorPage dce = new DrugCostEstimatorPage((WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER));
+		dce.validateStep1Disclaimer();
+	}
 }
 
