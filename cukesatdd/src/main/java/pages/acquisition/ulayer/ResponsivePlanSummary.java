@@ -946,11 +946,8 @@ public void comparePlanslnk(){
 					}
 					countyNameDetail.click();
 					countyNameDetail.sendKeys(Keys.TAB);
-					//driver.manage().window().maximize();
-					executor.executeScript("document.getElementById('zipcode').click()");
+ 					executor.executeScript("document.getElementById('zipcode').click()");
 					System.out.println("clicked inside tet box");
-					//executor.executeScript("document.getElementById('zipcode').clear()");
-					//executor.executeScript("arguments[0].doubleClick();", zipCodeField);
 					Actions action = new Actions(driver);
 					action.moveToElement(zipCodeField).perform();
 					action.doubleClick();
@@ -960,17 +957,9 @@ public void comparePlanslnk(){
 					action.perform();
 					
 					System.out.println("tet box clean");
-					//
-					//sendkeys(zipCodeField, invalidzipcode);
-					/*zipCodeField.click();
-					zipCodeField.clear();*/
-					/*action.sendKeys(invalidzipcode);
-					action.perform();
-					action.sendKeys(Keys.ENTER);
-					action.perform();*/
-					executor.executeScript("document.getElementById('zipcode').value = 00000;");
+					sendkeys(zipCodeField, invalidzipcode);
 					zipCodeField.sendKeys(Keys.ENTER);
-					System.out.println("values entered "+invalidzipcode);
+					System.out.println(errorMessageincorrect.getText());
 					//errorMessageforincorrectzipcode();
 					// sendkeys(zipCodeField, invalidzipcode);
 					//    zipCodeField.sendKeys(Keys.ENTER);

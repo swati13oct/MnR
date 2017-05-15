@@ -8,7 +8,7 @@ import cucumber.junit.Cucumber;
 @Cucumber.Options(glue = { "atdd.framework","acceptancetests.responsive.ulayer" }, 
 		features = { "feature/responsive/Ulayer" }, 
 		format = {
-		"pretty", "html:reports/test-report","json:target/cucumber.json" }, tags ={"@US557073,@US519611,@US540565,@US519614,@medicalbenefits,@OptionalServices,@Prescriptionbenefits"})
+		"pretty", "html:reports/test-report","json:target/cucumber.json" }, tags ={"@defect"})
 public class RunMRATddTestResponsiveVPP {
 
 }
