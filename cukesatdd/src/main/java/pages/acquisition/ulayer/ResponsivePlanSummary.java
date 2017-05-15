@@ -946,9 +946,13 @@ public void comparePlanslnk(){
 					countyNameDetail.click();
 					countyNameDetail.sendKeys(Keys.TAB);
 					//driver.manage().window().maximize();
-					
-					zipCodeField.click();
-					zipCodeField.clear();
+					executor.executeScript("document.getElementById('zipcode').click()");
+					System.out.println("clicked inside tet box");
+					executor.executeScript("document.getElementById('zipcode').clear()");
+					System.out.println("tet box cleared");
+					//sendkeys(zipCodeField, invalidzipcode);
+					/*zipCodeField.click();
+					zipCodeField.clear();*/
 					
 					 sendkeys(zipCodeField, invalidzipcode);
 					    zipCodeField.sendKeys(Keys.ENTER);
