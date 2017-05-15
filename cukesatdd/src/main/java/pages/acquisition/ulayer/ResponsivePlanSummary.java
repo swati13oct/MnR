@@ -40,7 +40,7 @@ public class ResponsivePlanSummary extends UhcDriver{
 		@FindBy(xpath = "//div[@class='tab'][1]")
 		private WebElement viewMaPlans;
 		
-		@FindBy(xpath = "//*[@class='ng-valid ng-dirty']/span/div")
+		@FindBy(xpath = "//*[@class='ng-valid ng-dirty']/span/div[1]/p")
 		private WebElement errorMessageincorrect;
 		
 		@FindBy(id = "zipcode")
@@ -972,8 +972,20 @@ public void comparePlanslnk(){
 					
 				}
 				public void errorMessageforincorrectzipcode() {
-					validate(errorMessageincorrect);
+				//	validate(errorMessageincorrect);
 					 System.out.println(errorMessageincorrect.getText());
+					 if(errorMessageincorrect.isDisplayed()){
+						 System.out.println("Displayed Error message is "+errorMessageincorrect.getText());
+						 if(errorMessageincorrect.getText().equals("Please enter a valid ZIP code.")){
+							 System.out.println("Error message content displayed correctly");
+						 }else{
+							 System.out.println("content of error message not displayed correctly");
+							 Assert.fail();
+						 }
+					 }else{
+						 System.out.println("Error message not displayed");
+						 Assert.fail();
+					 }
 					// TODO Auto-generated method stub
 					
 				}
