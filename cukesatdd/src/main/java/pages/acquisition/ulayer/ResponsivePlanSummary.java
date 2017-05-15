@@ -9,6 +9,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.junit.Assert;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Dimension;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
@@ -939,11 +940,12 @@ public void comparePlanslnk(){
 						System.out.println("zipcode box doesn't displays sticky zipCode as  "+stickyZipcode);
 						Assert.fail();
 					}
+					driver.manage().window().setSize(new Dimension(1400, 1000));
 					countyNameDetail.click();
 					countyNameDetail.sendKeys(Keys.TAB);
  					executor.executeScript("document.getElementById('zipcode').click()");
 					System.out.println("clicked inside tet box");
-					Actions action = new Actions(driver);
+ 					Actions action = new Actions(driver);
 					action.moveToElement(zipCodeField).perform();
 					action.doubleClick();
 					action.perform();
