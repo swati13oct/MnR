@@ -951,6 +951,7 @@ public void comparePlanslnk(){
 					//executor.executeScript("document.getElementById('zipcode').clear()");
 					executor.executeScript("arguments[0].doubleClick();", zipCodeField);
 					System.out.println("tet box double clicked");
+					//
 					//sendkeys(zipCodeField, invalidzipcode);
 					/*zipCodeField.click();
 					zipCodeField.clear();*/
