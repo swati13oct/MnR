@@ -954,10 +954,13 @@ public void comparePlanslnk(){
 					action.perform();
 					
 					System.out.println("tet box clean");
-					zipcodeBox.sendKeys(invalidzipcode);
+					action.moveToElement(zipCodeField).perform();
+					action.sendKeys(invalidzipcode).perform();
+					action.sendKeys(Keys.ENTER).perform();
+					/*zipcodeBox.sendKeys(invalidzipcode);
 					zipCodeField.sendKeys(Keys.ENTER);
-					
-					executor.executeScript("document.getElementById('submit').click()");
+					*/
+					//executor.executeScript("document.getElementById('submit').click()");
 					
 					System.out.println(errorMessageincorrect.getText());
 					//errorMessageforincorrectzipcode();
