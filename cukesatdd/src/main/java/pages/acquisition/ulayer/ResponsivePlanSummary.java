@@ -1,7 +1,7 @@
 package pages.acquisition.ulayer;
 
-import java.util.List;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import org.json.JSONArray;
@@ -15,7 +15,6 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.FindBys;
 import org.openqa.selenium.support.PageFactory;
 
 import acceptancetests.atdd.data.CommonConstants;
@@ -24,10 +23,6 @@ import acceptancetests.atdd.data.MRConstants;
 import acceptancetests.atdd.data.PageData;
 import acceptancetests.atdd.util.CommonUtility;
 import atdd.framework.UhcDriver;
-
-import java.util.ArrayList;
-
-import pages.acquisition.ulayer.GetStartedPage;
 import pages.member.ulayer.Rallytool_Page;
 import pages.mobile.acquisition.ulayer.VPPAarpNeedAStepBackWidget;
 import pages.mobile.acquisition.ulayer.VPPAarpNeedHelpWidgetPage;
@@ -944,10 +939,10 @@ public void comparePlanslnk(){
 						System.out.println("zipcode box doesn't displays sticky zipCode as  "+stickyZipcode);
 						Assert.fail();
 					}
-					countyNameDetail.click();
+					/*countyNameDetail.click();
 					countyNameDetail.sendKeys(Keys.TAB);
  					executor.executeScript("document.getElementById('zipcode').click()");
-					System.out.println("clicked inside tet box");
+					System.out.println("clicked inside tet box");*/
 					Actions action = new Actions(driver);
 					action.moveToElement(zipCodeField).perform();
 					action.doubleClick();
@@ -957,8 +952,11 @@ public void comparePlanslnk(){
 					action.perform();
 					
 					System.out.println("tet box clean");
-					sendkeys(zipCodeField, invalidzipcode);
+					zipcodeBox.sendKeys(invalidzipcode);
 					zipCodeField.sendKeys(Keys.ENTER);
+					
+					executor.executeScript("document.getElementById('submit').click()");
+					
 					System.out.println(errorMessageincorrect.getText());
 					//errorMessageforincorrectzipcode();
 					// sendkeys(zipCodeField, invalidzipcode);
