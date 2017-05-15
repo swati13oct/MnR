@@ -211,6 +211,12 @@ public class AccountHomePage extends UhcDriver {
 	
 	@FindBy(xpath = "html/body/div[2]/div/div/header/div/div/div/div/div/div/a/p")
 	private WebElement backtopreviouspageLink;
+	
+	@FindBy(xpath = "//*[@id='notShipRadio']/div[1]/div")
+	private WebElement radiokitLink;
+	
+	@FindBy(xpath = "//*[@id='notShipRadio']/div[2]/div")
+	private WebElement radioidLink;
 
 	private PageData myAccountHome;
 
@@ -1094,6 +1100,19 @@ public FormsandresourcesPage navigateToMydocumentUmsPage() {
 				}
 				return null;
 		
+	}
+	
+	public OrderplanmaterialsPage navigateToLinkOrderPlanMaterialsPage() {
+		driver.navigate().to("https://member.team-a-uhcmedicaresolutions.uhc.com/content/uhcm/home/order-plan-materials-dashboard.html");
+		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+		return null;
+	}
+
+	public OrderplanmaterialsPage navigateToValidateRadioButtonPage() {
+		radiokitLink.click();
+		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+		radioidLink.click();
+		return null;
 	}
 	
 	

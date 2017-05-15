@@ -215,5 +215,22 @@ public class OrderPlanMaterialsUmsStepDefinition {
 		planMaterialConfirmationPage.logOut();
 
 	}
+	
+	@When("^the user views order materials in UHC site$")
+	public void views_order_plan_materials_in_Ums_site() {
+		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario()
+				.getBean(PageConstants.ACCOUNT_HOME_PAGE);
+		OrderplanmaterialsPage orderPlanMaterialsPage = accountHomePage
+				.navigateToLinkOrderPlanMaterialsPage();		
+	}
+	
+	@And("^the user validate radio button for ma and ssup in UHC site$")
+	public void validate_radio_button_ma_and_ssup_in_Ums_site() {
+		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario()
+				.getBean(PageConstants.ACCOUNT_HOME_PAGE);
+		OrderplanmaterialsPage orderPlanMaterialsPage = accountHomePage
+				.navigateToValidateRadioButtonPage();		
+	}
+
 
 }

@@ -68,7 +68,7 @@ public class LoginPage extends UhcDriver {
 		signInButton.click();
 
 		
-		/*if (MRScenario.environment.equals("dev-a") || MRScenario.environment.equals("team-a")) {
+		if (MRScenario.environment.equals("dev-a") || MRScenario.environment.equals("team-a")) {
 			while (!isAlertPresent());
         }
 
@@ -92,11 +92,17 @@ public class LoginPage extends UhcDriver {
 		else if(currentUrl().contains("home/my-account-home.html") && category.equalsIgnoreCase("Individual") ) {
 			return new AccountHomePage(driver, category);
 		}
+		else if(currentUrl().contains("home/testharness.html") && category.equalsIgnoreCase("Group") ) {
+			return new AccountHomePage(driver, category);
+		}
+		else if(currentUrl().contains("home/testharness.html") && category.equalsIgnoreCase("Individual") ) {
+			return new AccountHomePage(driver, category);
+		}
 		else if (currentUrl().contains("terminated-plan.html")) {
 			return new TerminatedHomePage(driver);
 		}
-		return null;*/
-		return new AccountHomePage(driver);
+		return null;
+		//return new AccountHomePage(driver);
 	}
 
 
@@ -153,6 +159,12 @@ public class LoginPage extends UhcDriver {
 	        if(a!=null){
 	            System.out.println("Alert is present = " + a.getText());
 	            driver.switchTo().alert().accept();
+	            Alert a2 = new WebDriverWait(driver, 5).until(ExpectedConditions.alertIsPresent());
+	            if(a2!=null){
+		            System.out.println("Alert is present = " + a2.getText());
+		            
+		            driver.switchTo().alert().accept();
+	            }
 	            return true;
 	        }else{
 	            //throw new Throwable();

@@ -11,10 +11,10 @@ import cucumber.junit.Cucumber;
  *
  */
 @RunWith(Cucumber.class)
-@Cucumber.Options(glue = { "atdd.framework","acceptancetests.ordermaterials" }, 
-		features = { "feature/ordermaterials" }, 
+@Cucumber.Options(glue = { "atdd.framework","acceptancetests.ordermaterials.bluelayer" }, 
+		features = { "feature/ordermaterials/bluelayer" }, 
 		format = {
-		"pretty", "html:reports/test-report" }, tags ={"@ordermaterials"})
+		"pretty", "html:reports/test-report" }, tags ={"@radiobuttonmassup"})
 
 public class RunMRAtddTestOrderPlanMaterials {
 	

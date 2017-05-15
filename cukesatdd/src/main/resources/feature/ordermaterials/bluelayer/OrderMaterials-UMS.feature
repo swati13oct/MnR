@@ -48,3 +48,16 @@ Examples:
    # | MAPD       | Group          | Member Materials    |
    # | SSUP       | Group          | Replacement ID card |
    # | PDP        | Group          | Member Materials    |
+   
+   
+@radiobuttonmassup
+Scenario Outline:Verify order plan materials in UHC site for ma and ssup member
+Given registered UHC member for order plan materials with following attributes
+	| Plan Type    | <planType>   |
+	| Member Type  | <memberType> | 
+When the user views order materials in UHC site
+And the user validate radio button for ma and ssup in UHC site
+
+Examples:
+  | planType   | memberType     | 
+  | MA         |  Group         | 
