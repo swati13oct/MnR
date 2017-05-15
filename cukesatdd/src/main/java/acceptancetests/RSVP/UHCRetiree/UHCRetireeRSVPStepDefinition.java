@@ -19,6 +19,7 @@ import pages.acquisition.uhcretiree.AlcatelLucentSiteMapPage;
 import pages.acquisition.uhcretiree.CalperFindaProviderPage;
 import pages.acquisition.uhcretiree.CalpersHomePage;
 import pages.acquisition.uhcretiree.CalpersSiteMapPage;
+import pages.acquisition.uhcretiree.EatonHomePage;
 import pages.acquisition.uhcretiree.JohnsonAndJohnsonHomePage;
 import pages.acquisition.uhcretiree.JohnsonAndJohnsonProviderPage;
 import pages.acquisition.uhcretiree.JohnsonAndJohnsonSiteMapPage;
@@ -108,7 +109,7 @@ public class UHCRetireeRSVPStepDefinition {
 
 	}
 	
-	@And("uswr clicks on get started button on RSVP tracker")
+	@Then("user clicks on get started button on RSVP tracker")
 	
 	public void RSVPNokia() {
 		
@@ -125,10 +126,67 @@ public class UHCRetireeRSVPStepDefinition {
 			Assert.fail(" Page not found");
 		}
 	}
+	
+	@Given("^user navigates to the Eaton Home Page$")
+
+	public void eatonhomepage() {
+		WebDriver wd = getLoginScenario().getWebDriver();
+		EatonHomePage eatonhomepages = new EatonHomePage(wd);
+		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
+
+
+		getLoginScenario().saveBean(PageConstants.EATON_HOME_PAGE, eatonhomepages);
+
+	}
+	
+	@Then("user clicks on get started button on RSVP tracker for Eaton group")
+	
+	public void RSVPEaton() {
+		
+		EatonHomePage eatonhomepages = (EatonHomePage)getLoginScenario().getBean(PageConstants.EATON_HOME_PAGE);
 		
 		
+		SalesforceSitePage salesforce = eatonhomepages.clickgetstarted();
+		
+		if(salesforce!= null){
+			getLoginScenario().saveBean(PageConstants.Salesforce_PAGE,
+					salesforce);
+			Assert.assertTrue(true);
+		} else {
+			Assert.fail(" Page not found");
+		}
+	}
 		
 		
+	@Given("^user navigates to the SHBP Home Page$")
+
+	public void SHBPhomepage() {
+		WebDriver wd = getLoginScenario().getWebDriver();
+		UHCRetireeSHBPPage uhcRetireeAcqSHBPPage = new UHCRetireeSHBPPage(wd);
+		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
+
+
+		getLoginScenario().saveBean(PageConstants.UHCRETIREE_ACQ_SHBP_PAGE, uhcRetireeAcqSHBPPage);
+
+	}
+	
+	@Then("user clicks on get started button on RSVP tracker for SHBP group")
+	
+	public void RSVPSHBP() {
+		
+		UHCRetireeSHBPPage uhcRetireeAcqSHBPPage = (UHCRetireeSHBPPage)getLoginScenario().getBean(PageConstants.UHCRETIREE_ACQ_SHBP_PAGE);
+		
+		
+		SalesforceSitePage salesforce = uhcRetireeAcqSHBPPage.clickgetstarted();
+		
+		if(salesforce!= null){
+			getLoginScenario().saveBean(PageConstants.Salesforce_PAGE,
+					salesforce);
+			Assert.assertTrue(true);
+		} else {
+			Assert.fail(" Page not found");
+		}
+	}	
 		
 		
 		

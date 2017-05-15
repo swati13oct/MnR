@@ -226,6 +226,7 @@ public class MRConstants {
 
   
   public static final String AARP_PORTFOLIO_URL = "https://www."+MRScenario.environment+"-aarpmedicareplans.uhc.com/health-plans/plans.html";
+public static final String EATON_HOME_PAGE_URL = "https://www."+MRScenario.environment+"-uhcretiree.uhc.com/eaton/home.html";
 	
 	
 }
