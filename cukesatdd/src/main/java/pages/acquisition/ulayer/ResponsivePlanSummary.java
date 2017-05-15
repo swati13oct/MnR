@@ -964,7 +964,9 @@ public void comparePlanslnk(){
 					//sendkeys(zipCodeField, invalidzipcode);
 					/*zipCodeField.click();
 					zipCodeField.clear();*/
-					action.sendKeys(invalidzipcode, Keys.ENTER);
+					action.sendKeys(invalidzipcode);
+					action.perform();
+					action.sendKeys(Keys.ENTER);
 					action.perform();
 					System.out.println("values entered "+invalidzipcode);
 					//errorMessageforincorrectzipcode();
