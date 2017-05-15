@@ -948,8 +948,9 @@ public void comparePlanslnk(){
 					//driver.manage().window().maximize();
 					executor.executeScript("document.getElementById('zipcode').click()");
 					System.out.println("clicked inside tet box");
-					executor.executeScript("document.getElementById('zipcode').clear()");
-					System.out.println("tet box cleared");
+					//executor.executeScript("document.getElementById('zipcode').clear()");
+					executor.executeScript("arguments[0].doubleClick();", zipCodeField);
+					System.out.println("tet box double clicked");
 					//sendkeys(zipCodeField, invalidzipcode);
 					/*zipCodeField.click();
 					zipCodeField.clear();*/
