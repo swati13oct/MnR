@@ -952,6 +952,7 @@ public void comparePlanslnk(){
 					//executor.executeScript("document.getElementById('zipcode').clear()");
 					//executor.executeScript("arguments[0].doubleClick();", zipCodeField);
 					Actions action = new Actions(driver);
+					action.moveToElement(zipCodeField).perform();
 					action.doubleClick();
 					action.perform();
 					
@@ -962,9 +963,11 @@ public void comparePlanslnk(){
 					//sendkeys(zipCodeField, invalidzipcode);
 					/*zipCodeField.click();
 					zipCodeField.clear();*/
-					
-					 sendkeys(zipCodeField, invalidzipcode);
-					    zipCodeField.sendKeys(Keys.ENTER);
+					action.sendKeys(invalidzipcode, Keys.ENTER);
+					System.out.println("values entered");
+					errorMessageforincorrectzipcode();
+					// sendkeys(zipCodeField, invalidzipcode);
+					//    zipCodeField.sendKeys(Keys.ENTER);
 					//driver.findElement(By.className("change-location-link")).sendKeys(By.id("zipcode");
 					
 				}
