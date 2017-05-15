@@ -939,10 +939,10 @@ public void comparePlanslnk(){
 						System.out.println("zipcode box doesn't displays sticky zipCode as  "+stickyZipcode);
 						Assert.fail();
 					}
-					/*countyNameDetail.click();
+					countyNameDetail.click();
 					countyNameDetail.sendKeys(Keys.TAB);
  					executor.executeScript("document.getElementById('zipcode').click()");
-					System.out.println("clicked inside tet box");*/
+					System.out.println("clicked inside tet box");
 					Actions action = new Actions(driver);
 					action.moveToElement(zipCodeField).perform();
 					action.doubleClick();
