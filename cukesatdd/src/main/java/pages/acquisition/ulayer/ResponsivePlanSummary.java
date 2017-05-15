@@ -13,6 +13,7 @@ import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.FindBys;
 import org.openqa.selenium.support.PageFactory;
@@ -949,8 +950,14 @@ public void comparePlanslnk(){
 					executor.executeScript("document.getElementById('zipcode').click()");
 					System.out.println("clicked inside tet box");
 					//executor.executeScript("document.getElementById('zipcode').clear()");
-					executor.executeScript("arguments[0].doubleClick();", zipCodeField);
-					System.out.println("tet box double clicked");
+					//executor.executeScript("arguments[0].doubleClick();", zipCodeField);
+					Actions action = new Actions(driver);
+					action.doubleClick();
+					action.perform();
+					
+					action.sendKeys(Keys.BACK_SPACE);
+					
+					System.out.println("tet box clean");
 					//
 					//sendkeys(zipCodeField, invalidzipcode);
 					/*zipCodeField.click();
