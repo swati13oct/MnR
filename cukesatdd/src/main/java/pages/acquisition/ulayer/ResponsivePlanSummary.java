@@ -956,7 +956,8 @@ public void comparePlanslnk(){
 					action.doubleClick();
 					action.perform();
 					
-					action.sendKeys(Keys.BACK_SPACE);
+					action.sendKeys(Keys.DELETE);
+					action.perform();
 					
 					System.out.println("tet box clean");
 					//
@@ -964,8 +965,9 @@ public void comparePlanslnk(){
 					/*zipCodeField.click();
 					zipCodeField.clear();*/
 					action.sendKeys(invalidzipcode, Keys.ENTER);
-					System.out.println("values entered");
-					errorMessageforincorrectzipcode();
+					action.perform();
+					System.out.println("values entered "+invalidzipcode);
+					//errorMessageforincorrectzipcode();
 					// sendkeys(zipCodeField, invalidzipcode);
 					//    zipCodeField.sendKeys(Keys.ENTER);
 					//driver.findElement(By.className("change-location-link")).sendKeys(By.id("zipcode");
