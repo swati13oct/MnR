@@ -964,10 +964,12 @@ public void comparePlanslnk(){
 					//sendkeys(zipCodeField, invalidzipcode);
 					/*zipCodeField.click();
 					zipCodeField.clear();*/
-					action.sendKeys(invalidzipcode);
+					/*action.sendKeys(invalidzipcode);
 					action.perform();
 					action.sendKeys(Keys.ENTER);
-					action.perform();
+					action.perform();*/
+					executor.executeScript("document.getElementById('zipcode').value = 00000;");
+					zipCodeField.sendKeys(Keys.ENTER);
 					System.out.println("values entered "+invalidzipcode);
 					//errorMessageforincorrectzipcode();
 					// sendkeys(zipCodeField, invalidzipcode);
