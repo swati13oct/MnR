@@ -964,13 +964,18 @@ public void comparePlanslnk(){
 					System.out.println("tet box clean");
 					action.moveToElement(zipCodeField).perform();
 					action.sendKeys(invalidzipcode).perform();
+					action.moveToElement(driver.findElement(By.id("submit"))).perform();;
 					action.sendKeys(Keys.ENTER).perform();
 					/*zipcodeBox.sendKeys(invalidzipcode);
 					zipCodeField.sendKeys(Keys.ENTER);
 					*/
-					//executor.executeScript("document.getElementById('submit').click()");
+					executor.executeScript("document.getElementById('submit').click()");
 					
+<<<<<<< HEAD
 					System.out.println(errorMessageincorrect2.getText());
+=======
+					//System.out.println(errorMessageincorrect.getText());
+>>>>>>> c6f5f3fb0e9a56aba1ea39ea12ae0c7d12678a7c
 					//errorMessageforincorrectzipcode();
 					// sendkeys(zipCodeField, invalidzipcode);
 					//    zipCodeField.sendKeys(Keys.ENTER);
@@ -979,9 +984,22 @@ public void comparePlanslnk(){
 				}
 				public void errorMessageforincorrectzipcode() {
 				//	validate(errorMessageincorrect);
+<<<<<<< HEAD
 					 if(errorMessageincorrect2.isDisplayed()){
 						 System.out.println("Displayed Error message is "+errorMessageincorrect2.getText());
 						 if(errorMessageincorrect2.getText().equals("Please enter a valid ZIP code.")){
+=======
+					// System.out.println(errorMessageincorrect.getText());
+					try {
+						Thread.sleep(4000);
+					} catch (InterruptedException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					 /*if(errorMessageincorrect.isDisplayed()){
+						 System.out.println("Displayed Error message is "+errorMessageincorrect.getText());
+						 if(errorMessageincorrect.getText().equals("Please enter a valid ZIP code.")){
+>>>>>>> c6f5f3fb0e9a56aba1ea39ea12ae0c7d12678a7c
 							 System.out.println("Error message content displayed correctly");
 						 }else{
 							 System.out.println("content of error message not displayed correctly");
@@ -996,10 +1014,43 @@ public void comparePlanslnk(){
 						 }
 					 }
 					// TODO Auto-generated method stub
-					
+*/					
 				}
 				
 					// TODO Auto-generated method stub
+				
+				public void enterZipandVAlidateError(String actualZipcode, 
+						String invalidzipcode){
+ 					driver.manage().window().maximize();
+					if(changeLoationLink.isDisplayed()){
+ 						driver.manage().window().maximize();
+						changeLoationLink.click();
+						try{
+							System.out.println("User clicks changelocation and enters error zipcode");
+ 							driver.manage().window().maximize();
+							zipCodeField.clear();
+ 							driver.manage().window().maximize();
+							zipCodeField.sendKeys(invalidzipcode, Keys.ENTER);
+  							if(errorMessageincorrect.isDisplayed()){
+								 System.out.println("Displayed Error message is "+errorMessageincorrect.getText());
+ 									driver.manage().window().maximize();
+								 if(errorMessageincorrect.getText().equals("Please enter a valid ZIP code.")){
+									 System.out.println("Error message content displayed correctly");
+								 }else{
+									 System.out.println("content of error message not displayed correctly");
+									 Assert.fail();
+								 }
+							 }else{
+								 System.out.println("Error message not displayed");
+								 Assert.fail();
+							 }
+						}catch(Exception e){
+							System.out.println("Element not accessable");
+							Assert.fail();
+						}
+					}
+					
+				}
 					
 				}
 			 
