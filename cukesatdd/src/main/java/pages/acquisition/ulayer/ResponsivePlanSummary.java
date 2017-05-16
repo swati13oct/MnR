@@ -996,6 +996,39 @@ public void comparePlanslnk(){
 				}
 				
 					// TODO Auto-generated method stub
+				
+				public void enterZipandVAlidateError(String actualZipcode, 
+						String invalidzipcode){
+ 					driver.manage().window().maximize();
+					if(changeLoationLink.isDisplayed()){
+ 						driver.manage().window().maximize();
+						changeLoationLink.click();
+						try{
+							System.out.println("User clicks changelocation and enters error zipcode");
+ 							driver.manage().window().maximize();
+							zipCodeField.clear();
+ 							driver.manage().window().maximize();
+							zipCodeField.sendKeys(invalidzipcode, Keys.ENTER);
+  							if(errorMessageincorrect.isDisplayed()){
+								 System.out.println("Displayed Error message is "+errorMessageincorrect.getText());
+ 									driver.manage().window().maximize();
+								 if(errorMessageincorrect.getText().equals("Please enter a valid ZIP code.")){
+									 System.out.println("Error message content displayed correctly");
+								 }else{
+									 System.out.println("content of error message not displayed correctly");
+									 Assert.fail();
+								 }
+							 }else{
+								 System.out.println("Error message not displayed");
+								 Assert.fail();
+							 }
+						}catch(Exception e){
+							System.out.println("Element not accessable");
+							Assert.fail();
+						}
+					}
+					
+				}
 					
 				}
 			 
