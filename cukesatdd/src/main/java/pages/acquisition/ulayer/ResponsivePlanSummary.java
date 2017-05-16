@@ -979,7 +979,7 @@ public void comparePlanslnk(){
 						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
-					 if(errorMessageincorrect.isDisplayed()){
+					 /*if(errorMessageincorrect.isDisplayed()){
 						 System.out.println("Displayed Error message is "+errorMessageincorrect.getText());
 						 if(errorMessageincorrect.getText().equals("Please enter a valid ZIP code.")){
 							 System.out.println("Error message content displayed correctly");
@@ -992,7 +992,7 @@ public void comparePlanslnk(){
 						 Assert.fail();
 					 }
 					// TODO Auto-generated method stub
-					
+*/					
 				}
 				
 					// TODO Auto-generated method stub
