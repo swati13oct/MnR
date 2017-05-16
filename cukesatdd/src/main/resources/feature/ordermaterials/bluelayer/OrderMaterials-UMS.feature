@@ -61,3 +61,41 @@ And the user validate radio button for ma and ssup in UHC site
 Examples:
   | planType   | memberType     | 
   | MA         |  Group         | 
+  
+@radiobuttonpdpgroup
+Scenario Outline:Verify order plan materials in UHC site for PDP member
+Given registered UHC member for order plan materials with following attributes
+	| Plan Type    | <planType>   |
+	| Member Type  | <memberType> | 
+When the user views order materials in UHC site
+And the user validate radio button for PDP member in UHC site
+
+Examples:
+  | planType   | memberType     | 
+  | PDP         |  Group         | 
+  
+ 
+@radiobuttonmaindiv
+Scenario Outline:Verify order plan materials in UHC site for MA member
+Given registered UHC member for order plan materials with following attributes
+	| Plan Type    | <planType>   |
+	| Member Type  | <memberType> | 
+When the user views order materials in UHC site
+And the user validate radio button for MA member in UHC site
+
+Examples:
+  | planType   | memberType     | 
+  | MA         |  Individual         | 
+     
+     
+@radiobuttonmapdssrdgroup
+Scenario Outline:Verify order plan materials in UHC site for MAPD member
+Given registered UHC member for order plan materials with following attributes
+	| Plan Type    | <planType>   |
+	| Member Type  | <memberType> | 
+When the user views order materials in UHC site
+And the user validate radio button for MAPD and SSRD member in UHC site
+
+Examples:
+  | planType   | memberType     | 
+  | MAPD       |  Group         |

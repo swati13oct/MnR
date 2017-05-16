@@ -231,6 +231,31 @@ public class OrderPlanMaterialsUmsStepDefinition {
 		OrderplanmaterialsPage orderPlanMaterialsPage = accountHomePage
 				.navigateToValidateRadioButtonPage();		
 	}
+	
+	@And("^the user validate radio button for PDP member in UHC site$")
+	public void validate_radio_button_pdp_member_in_Ums_site() {
+		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario()
+				.getBean(PageConstants.ACCOUNT_HOME_PAGE);
+		OrderplanmaterialsPage orderPlanMaterialsPage = accountHomePage
+				.navigateToValidateRadioButtonPage();		
+	}
+	
+	@And("^the user validate radio button for MA member in UHC site$")
+	public void validate_radio_button_ma_member_in_Ums_site() {
+		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario()
+				.getBean(PageConstants.ACCOUNT_HOME_PAGE);
+		OrderplanmaterialsPage orderPlanMaterialsPage = accountHomePage
+				.navigateToValidateRadioButtonPage();		
+	}
+	
+	@And("^the user validate radio button for MAPD and SSRD member in UHC site$")
+	public void validate_radio_button_mapd_member_in_Ums_site() {
+		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario()
+				.getBean(PageConstants.ACCOUNT_HOME_PAGE);
+		OrderplanmaterialsPage orderPlanMaterialsPage = accountHomePage
+				.navigateToValidateRadioButtonPage();		
+	}
+
 
 
 }

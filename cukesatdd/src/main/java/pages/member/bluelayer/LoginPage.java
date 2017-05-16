@@ -102,7 +102,14 @@ public class LoginPage extends UhcDriver {
 			return new TerminatedHomePage(driver);
 		}
 		return null;*/
-		return new AccountHomePage(driver);
+		if(currentUrl().contains("home/testharness.html") && category.equalsIgnoreCase("Group") ) {
+			return new AccountHomePage(driver, category);
+		}
+		else if(currentUrl().contains("home/testharness.html") && category.equalsIgnoreCase("Individual") ) {
+			return new AccountHomePage(driver, category);
+		}
+		return null;
+		//return new AccountHomePage(driver);
 	}
 
 
