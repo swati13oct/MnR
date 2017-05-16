@@ -280,8 +280,8 @@ public class DrugCostEstimatorPage extends UhcDriver {
 	}
 
 	public AddNewDrugModal clickOnAddDrug() throws InterruptedException {
-		Thread.sleep(5000);
-		waitforElement(addDrug);
+		Thread.sleep(10000);
+		//waitforElement(addDrug);
 		addDrug.click();
 		System.out.println("Current Page title :: " + driver.getTitle());
 

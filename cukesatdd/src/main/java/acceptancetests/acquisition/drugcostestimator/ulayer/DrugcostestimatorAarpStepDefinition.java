@@ -26,6 +26,7 @@ import cucumber.table.DataTable;
 import gherkin.formatter.model.DataTableRow;
 import pages.acquisition.ulayer.AcquisitionHomePage;
 import pages.acquisition.dce.ulayer.*;
+import pages.acquisition.dce.ulayer.DrugCostEstimatorPage;
 import pages.member.ulayer.AccountHomePage;
 import pages.member.ulayer.LoginPage;
 import pages.mobile.member.ulayer.BenefitsSummaryPage;
@@ -903,5 +904,32 @@ public class DrugcostestimatorAarpStepDefinition {
 				.getBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE);
 		dce.isGeneric();
 	}
+	
+	@And("^I have selected pharmacy$")
+	public void I_have_selected_pharmacy(){
+		DrugCostEstimatorPage dce = (DrugCostEstimatorPage) getLoginScenario()
+				.getBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE);
+		dce.validatePharmacySelected();
+	}
+	
+	@Then("^I will see a SWITCH NOW link in the drug tile with a pharmacy savings cost value$")
+	public void I_will_see_a_SWITCH_NOW_link_in_the_drug_tile_with_a_pharmacy_savings_cost_value() throws InterruptedException {
+		DrugCostEstimatorPage dce = (DrugCostEstimatorPage) getLoginScenario()
+				.getBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE);
+		dce.validateSwitchNowLink();
+		dce.validateSaveDollarValueMessage();
+	    
+	}
+	
+	@And("^any cost savings will be applied to my total cost savings in Step3$")
+	public void any_cost_savings_will_be_applied_to_my_total_cost_savings_in_Step3() throws InterruptedException{
+		DrugCostEstimatorPage dce = (DrugCostEstimatorPage) getLoginScenario()
+				.getBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE);
+		dce.navigateToStep3();
+		dce.validateEditDrugLinkNotPresent();
+		
+	}
+	
+	
 }
 
