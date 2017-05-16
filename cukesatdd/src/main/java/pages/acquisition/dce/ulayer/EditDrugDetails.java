@@ -17,17 +17,17 @@ import acceptancetests.atdd.data.PageData;
 import acceptancetests.atdd.util.CommonUtility;
 import atdd.framework.UhcDriver;
 
-public class AddDrugDetails extends UhcDriver {
+public class EditDrugDetails extends UhcDriver {
 
-	private PageData adddrugdetails;
+	private PageData editdrugdetails;
 
-	public JSONObject adddrugdetailsJson;
+	public JSONObject editdrugdetailsJson;
 
-	@FindBy(xpath = "//span[contains(text(),'Add Drug Details')]")
-	public WebElement addDrugDetailsPage;
+	@FindBy(xpath = "//span[contains(text(),'Edit Drug Details')]")
+	public WebElement editDrugDetailsPage;
 
-	@FindBy(id = "drug-dosage-button")
-	public WebElement continueButton;
+	@FindBy(xpath = "//button[@class='cta-button popUpdate']")
+	public WebElement updateButton;
 
 	@FindBy(xpath = "//input[@value='Lipitor TAB 10MG']")
 	public WebElement Dosageone;
@@ -40,12 +40,12 @@ public class AddDrugDetails extends UhcDriver {
 	
 	@FindBy(id = "frequency")
 	public WebElement selectYourFrequencyDropdown;
-	public AddDrugDetails(WebDriver driver) {
+	public EditDrugDetails(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
 		//CommonUtility.waitForPageLoad(driver, addDrugDetailsPage, 10);
 		String fileName = CommonConstants.ADD_DRUG_DETAILS_PAGE_DATA;
-		adddrugdetails = CommonUtility.readPageData(fileName, CommonConstants.PAGE_OBJECT_DIRECTORY_DCE_MEMBER);
+		editdrugdetails = CommonUtility.readPageData(fileName, CommonConstants.PAGE_OBJECT_DIRECTORY_DCE_MEMBER);
 		openAndValidate();
 	}
 
@@ -53,22 +53,22 @@ public class AddDrugDetails extends UhcDriver {
 	public void openAndValidate() {
 
 		JSONObject jsonObject = new JSONObject();
-		for (String key : adddrugdetails.getExpectedData().keySet()) {
-			WebElement element = findElement(adddrugdetails.getExpectedData().get(key));
+		for (String key : editdrugdetails.getExpectedData().keySet()) {
+			WebElement element = findElement(editdrugdetails.getExpectedData().get(key));
 			if (null != element) {
 			validate(element);
 			try {
 				jsonObject.put(key, element.getText());
 			} catch (JSONException e) {
-				
+				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 
 		}
 	}
-		adddrugdetailsJson = jsonObject;
+		editdrugdetailsJson = jsonObject;
 
-		System.out.println("addnewdrugJson----->" + adddrugdetailsJson);
+		System.out.println("addnewdrugJson----->" + editdrugdetailsJson);
 	}
 
 	public JSONObject getExpectedData(Map<String, JSONObject> expectedDataMap) {
@@ -100,35 +100,35 @@ public class AddDrugDetails extends UhcDriver {
 		}
 	}
 
-	public SavingsOppurtunity continueAddDrugDetailsModal() throws InterruptedException{
-		waitforElement(continueButton);
-		continueButton.click();
-		continueButton.click();
-		Thread.sleep(12000);
-		return new SavingsOppurtunity(driver);
-		}
-	
-	public DrugCostEstimatorPage continueAddDrugDetailsMod() throws InterruptedException{
-		waitforElement(continueButton);
-		continueButton.click();
+//	public SavingsOppurtunity continueAddDrugDetailsModal() throws InterruptedException{
+//		waitforElement(continueButton);
+//		continueButton.click();
+//		continueButton.click();
+//		Thread.sleep(12000);
+//		return new SavingsOppurtunity(driver);
+//		}
+//	
+	public DrugCostEstimatorPage updateEditDrugDetails() throws InterruptedException{
+		waitforElement(updateButton);
+		updateButton.click();
 		Thread.sleep(12000);
 		return new DrugCostEstimatorPage(driver);
 		}
-	public SavingsOppurtunity continueAddDrugDetails(){
-		
-		waitforElement(continueButton);
-		continueButton.click();
-		if (driver.getTitle().equalsIgnoreCase("SAVINGS OPPORTUNITY")) {
-			return new SavingsOppurtunity(driver);
-		}
-		return null;
-	}
-	public AddNewDrugModal backToSeach(){
-		backToSearchBtn.click();
-		return new AddNewDrugModal(driver);
-	}
+//	public SavingsOppurtunity continueAddDrugDetails(){
+//		
+//		waitforElement(updateButton);
+//		updateButton.click();
+//		if (driver.getTitle().equalsIgnoreCase("SAVINGS OPPORTUNITY")) {
+//			return new SavingsOppurtunity(driver);
+//		}
+//		return null;
+//	}
+//	public AddNewDrugModal backToSeach(){
+//		backToSearchBtn.click();
+//		return new AddNewDrugModal(driver);
+//	}
 	public void validateThePage(){
-		Assert.assertTrue(addDrugDetailsPage.isDisplayed());
+		Assert.assertTrue(editDrugDetailsPage.isDisplayed());
 	}
 
 }

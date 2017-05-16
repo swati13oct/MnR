@@ -69,7 +69,7 @@ public class DrugCostEstimatorPage extends UhcDriver {
 	@FindBy(id = "drug-search-input")
 	public WebElement drugsearchinput;
 
-	@FindBy(xpath = "//h1[contains(text(),'Drug')][contains(text(),'Cost')][contains(text(),'Estimator')]")
+	@FindBy(id = "drugcostestimatorHeading") //[contains(text(),'Cost')][contains(text(),'Estimator')]")
 	public WebElement validateIntroductoryText;
 
 	@FindBy(id = "drug-alt-search-button")
@@ -192,7 +192,7 @@ public class DrugCostEstimatorPage extends UhcDriver {
 	@FindBy(id = "total_pharmacysavings")
 	public WebElement left_rail_pharmacy_saving;
 
-	@FindBy(xpath = "//p[contains(text(),'STEP3:')]/following-sibling::span[p[contains(text(),'COSTS')]]")
+	@FindBy(xpath = "//p[contains(text(),'STEP3:')]/following-sibling::span[p[contains(text(),'SUMMARY')]]")
 	public WebElement step3;
 
 	@FindBy(id = "total_annauldeductible")
@@ -252,6 +252,22 @@ public class DrugCostEstimatorPage extends UhcDriver {
 	@FindBy(className = "pharmacy-container")
 	public WebElement selectedPharmacy;
 
+	@FindBy(xpath = "//div[@class='dce-nav-btns']/button[contains(text(),'Delete')]")
+	public WebElement confdelpopup_del_button;
+	
+	@FindBy(id = "returnLink")
+	public WebElement returnLink;
+	
+	@FindBy(id = "drugcostestimatorDetails")
+	public WebElement description;
+
+	@FindBy(id = "disclaimersHeading")
+	public WebElement disclaimers;
+	
+	@FindBy(xpath = "//div[@id='collapseDisclaimer']/div/div/div/p")
+	public WebElement disclaimerContent;
+	
+	
 	@Override
 	public void openAndValidate() {
 
@@ -329,12 +345,12 @@ public class DrugCostEstimatorPage extends UhcDriver {
 
 	}
 
-	public boolean validateintroductorytext() {
+	public void validateintroductorytext() {
 		// TODO Auto-generated method stub
 		if (validateIntroductoryText.getText().equalsIgnoreCase("Drug Cost Estimator"))
-			return true;
+			Assert.assertTrue(true);
 		else
-			return false;
+			Assert.assertTrue("Drug Cost Estimator is not present", false);	
 	}
 
 	public boolean validatedrugheading() {
@@ -453,35 +469,32 @@ public class DrugCostEstimatorPage extends UhcDriver {
 	}
 
 	public void deleteDrugsByDosage(String dosage) throws InterruptedException {
-		Thread.sleep(15000);
+		Thread.sleep(5000);
 		String deleteDrugXpath = "//div[@id='drugs-tab']//p[contains (text(), '" + dosage
 				+ "')]/following-sibling::ul//li/a[@class='delete-drug']";
 		WebElement deletedrug = driver.findElement(By.xpath(deleteDrugXpath));
 		deletedrug.click();
-		Thread.sleep(5000);
+		Thread.sleep(3000);
+		waitforElement(confdelpopup_del_button);
+		confdelpopup_del_button.click();
+		Thread.sleep(3000);
 
 	}
 
-	public AddDrugDetails navigateToEditDrug(String drug) throws Exception {
+	public EditDrugDetails navigateToEditDrug(String drug) throws Exception {
 		// editDrug.click();
-		Thread.sleep(15000);
+		Thread.sleep(10000);
 		WebElement editDrug = driver.findElement(By.xpath("//div[@class='drug-container']//p[contains(text(),'" + drug
 				+ "')]/parent::section//a[@class='edit-drug']"));
 		editDrug.click();
-		Thread.sleep(5000);
-		return new AddDrugDetails(driver);
+		Thread.sleep(15000);
+		return new EditDrugDetails(driver);
 	}
 
 	public boolean validateAddedDrug(String args1, String arg2, String arg3) {
-		// TODO Auto-generated method stub
+		
 		validate(driver.findElement(By.xpath("//div[@id='drugs-tab']//p[contains (text(), '" + args1
 				+ "')]/following-sibling::p/span[contains(text(),'" + arg2 + "')]")));
-
-		// List<WebElement> stri =
-		// driver.findElements(By.xpath("//div[@id='drugs-tab']//p[contains
-		// (text(), '"+args1+"')]")).getText();
-		// System.out.println("++++++++drugdetails+++++++++" + drugdetails +
-		// "+++++++++++++++++" );
 
 		driver.findElement(By.xpath("//div[@id='drugs-tab']//p[contains (text(), '" + args1 + "')]")).getText()
 				.contains(arg2);
@@ -1217,6 +1230,24 @@ public class DrugCostEstimatorPage extends UhcDriver {
 		Thread.sleep(15000);
 	}
 	
+	public void validateStep1Item() {
+		validateintroductorytext();
+		Assert.assertTrue("returnLink is not present", returnLink.isDisplayed());
+		Assert.assertTrue("description text is not present", description.isDisplayed());
+		Assert.assertTrue("step1 text is not present", step1.isDisplayed());
+		Assert.assertTrue("step2 text is not present", step2.isDisplayed());
+		Assert.assertTrue("step3 text is not present", step3.isDisplayed());
+
+	}
 	
+	public void validateStep1Disclaimer() throws InterruptedException {
+		Assert.assertTrue(disclaimers.isDisplayed());
+		disclaimers.click();
+		waitforElement(disclaimerContent);
+		Assert.assertTrue("disclaimerContent is not present", disclaimerContent.isDisplayed());
+		disclaimers.click();
+		Thread.sleep(5000);
+		Assert.assertFalse("disclaimerContent is present",disclaimerContent.isDisplayed());
+	}
 
 }

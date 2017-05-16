@@ -1,5 +1,5 @@
 @acq_drug_cost_estimator
-Feature:Drug Cost Estimator (DCE)  (Secondary/Tertiary Page) - HTML/CSS - Drug List - Edit/Delete Functionality
+Feature:Drug Cost Estimator (DCE) - HTML/CSS - Drug List - Edit/Delete Functionality
 Scenario Outline: As a prospective member using redesigned DCE tool on the M&R portal site on either a desktop or mobile device, I want to be able to choose a generic option if it is available from my Drug List and see any cost savings associated with it if I have selected a pharmacy so I can save on the cost of my prescription drugs.
 Given the user is on AARP medicare site landing page
 When I access the acquisition DCE tool
@@ -33,3 +33,48 @@ Then the drug name will automatically update within the Drug List
 Examples:
 | drug |
 |lipitor|
+
+
+ @acq_drug_cost_estimator1
+Scenario Outline: As a prospective member using the DCE tool on the M&R portal site, I want to be able to choose my dosage, package and frequency when assembling a drug list on either a desktop or mobile device so I can eventually choose a pharmacy and accurately estimate the cost of my drugs.
+Given the user is on AARP medicare site landing page
+When I access the acquisition DCE tool
+And I delete the existing drug if present
+And I add the drug with Dosage and Quantity and frequency to the list
+|Drug|<drug>|
+|Dosage|<dosage>|
+|Quantity|<quantity>|
+|Frequency|<frequency>|
+Then I should see drug with Dosage and Quantity and frequency added to the list
+|Drug|<drug>|
+|Dosage|<dosage>|
+|Quantity|<quantity>|
+|Frequency|<frequency>|
+When I edit the drug with Dosage and Quantity and frequency
+|Drug|<drug>|
+|EditDosage|<editdosage>|
+|EditQuantity|<editquantity>|
+|EditFrequency|<editfrequency>|
+Then I should validate drug with Dosage and Quantity and frequency edited to the list
+|EditDosage|<editdosage>|
+|EditQuantity|<editquantity>|
+|EditFrequency|<editfrequency>|
+When I delete the drug with Dosage
+|EditDosage|<editdosage>|
+Then I should not see the drug with Dosage in the list 
+|EditDosage|<editdosage>|
+ 
+Examples:
+ |drug|dosage|quantity|frequency|editdosage|editquantity|editfrequency|
+ |Lipitor|Lipitor TAB 10MG|30|Every 1 month|Lipitor TAB 20MG|60|Every 3 months|
+ 
+ 
+ 
+  ##--------------------------------------------------------------------
+ @acq_drug_cost_estimator2
+Scenario: As a prospective member using the DCE tool on the M&R portal site, I want to be able to choose my dosage, package and frequency when assembling a drug list on either a desktop or mobile device so I can eventually choose a pharmacy and accurately estimate the cost of my drugs.
+Given the user is on AARP medicare site landing page
+When I access the acquisition DCE tool
+Then I should see all generic headers and elements
+And I should see disclaimers link at the bottom
+
