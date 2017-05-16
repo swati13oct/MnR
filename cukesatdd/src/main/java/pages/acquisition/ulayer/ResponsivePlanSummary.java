@@ -962,7 +962,7 @@ public void comparePlanslnk(){
 					*/
 					//executor.executeScript("document.getElementById('submit').click()");
 					
-					System.out.println(errorMessageincorrect.getText());
+					//System.out.println(errorMessageincorrect.getText());
 					//errorMessageforincorrectzipcode();
 					// sendkeys(zipCodeField, invalidzipcode);
 					//    zipCodeField.sendKeys(Keys.ENTER);
@@ -971,7 +971,13 @@ public void comparePlanslnk(){
 				}
 				public void errorMessageforincorrectzipcode() {
 				//	validate(errorMessageincorrect);
-					 System.out.println(errorMessageincorrect.getText());
+					// System.out.println(errorMessageincorrect.getText());
+					try {
+						Thread.sleep(4000);
+					} catch (InterruptedException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
 					 if(errorMessageincorrect.isDisplayed()){
 						 System.out.println("Displayed Error message is "+errorMessageincorrect.getText());
 						 if(errorMessageincorrect.getText().equals("Please enter a valid ZIP code.")){
