@@ -697,7 +697,7 @@ Examples:
 		|zipCode|county         |planType	|zipCode1|
 		|02801  |Newport County	|MA 		|00000   | 
 		
-@defect
+@defectFix
 Scenario Outline: To validate error message on entering invalid Zipcode
 Given the user is on the vpp portfolio page
 Then the user performs plan serach using zipcode
