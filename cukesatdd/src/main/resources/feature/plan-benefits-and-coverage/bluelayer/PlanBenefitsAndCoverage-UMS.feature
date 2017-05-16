@@ -823,8 +823,26 @@ Examples:
       | MAPD     | Group     |     NON LIS   |
       ##member used :q1_apr_grp_015
 
-    @Ancillarysec 
-  Scenario Outline: Verify PDF section is in place on Benefits and Coverage page
+
+ @validatePdfsection
+      Scenario Outline: Verify PDF section is in place on Benefits and     Coverage page
+    Given registered UHC with following details for plan benefits and coverage flow in UMS site
+      | Plan Type      | <planType>      |
+    When the user view forms and resources in UMS site
+    Then the user view benefits and coverage in UMS site
+    And the user validates the content on benefits and coverage page
+    And the user validates view and documents label
+    And the user validates the language dropdown and the value displayed     by default
+      | Language      | <language>      |
+    And the user selects new value in dropdown successfully
+     Examples: 
+      | planType | language | 
+      | SHIP     | SPANISH  |  
+      | SHIP     | CHINESE  |
+
+
+  @Ancillarysec 
+    Scenario Outline: Verify PDF section is in place on Benefits and Coverage page
     Given registered UHC with following details for plan benefits and coverage flow in UMS site
       | Plan Type      | <planType>      |
       | Copay Category | <copayCategory>|
