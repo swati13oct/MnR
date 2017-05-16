@@ -956,11 +956,12 @@ public void comparePlanslnk(){
 					System.out.println("tet box clean");
 					action.moveToElement(zipCodeField).perform();
 					action.sendKeys(invalidzipcode).perform();
+					action.moveToElement(driver.findElement(By.id("submit"))).perform();;
 					action.sendKeys(Keys.ENTER).perform();
 					/*zipcodeBox.sendKeys(invalidzipcode);
 					zipCodeField.sendKeys(Keys.ENTER);
 					*/
-					//executor.executeScript("document.getElementById('submit').click()");
+					executor.executeScript("document.getElementById('submit').click()");
 					
 					//System.out.println(errorMessageincorrect.getText());
 					//errorMessageforincorrectzipcode();
