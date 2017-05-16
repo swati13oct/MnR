@@ -37,6 +37,8 @@ public class MRConstants {
 	
 	public static final String NOKIA_HOME_PAGE_URL = "https://www."+MRScenario.environment+"-uhcretiree.uhc.com/nokia/home.html";
 	
+	
+	
 	public static final String CALPERS_HOME_PAGE_URL = "https://www."+MRScenario.environment+"-uhcretiree.uhc.com/calpers/home.html";
 	
 	public static final String JOHNSONANDJOHNSON_HOME_PAGE_URL = "https://www."+MRScenario.environment+"-uhcretiree.uhc.com/jnj/home.html";
@@ -227,6 +229,10 @@ public class MRConstants {
   
   public static final String AARP_PORTFOLIO_URL = "https://www."+MRScenario.environment+"-aarpmedicareplans.uhc.com/health-plans/plans.html";
 public static final String EATON_HOME_PAGE_URL = "https://www."+MRScenario.environment+"-uhcretiree.uhc.com/eaton/home.html";
+public static final String OELOCAL12_HOME_PAGE_URL = "https://www."+MRScenario.environment+"-uhcretiree.uhc.com/oelocal12/home.html";
+public static final String PEEHIP_HOME_PAGE_URL = "https://www."+MRScenario.environment+"-uhcretiree.uhc.com/peehip/home.html";
+public static final String NONCUSTOM_HOME_PAGE_URL = "https://www."+MRScenario.environment+"-uhcretiree.uhc.com/noncustomgroups/home.html";
+public static final String UNIVERSITYOFMISSOURI_HOME_PAGE_URL = "https://www."+MRScenario.environment+"-uhcretiree.uhc.com/umsystem/home.html";
 	
 	
 }
