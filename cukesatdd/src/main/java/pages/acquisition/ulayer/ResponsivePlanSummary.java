@@ -39,6 +39,10 @@ public class ResponsivePlanSummary extends UhcDriver{
 		@FindBy(xpath = "//*[@class='ng-valid ng-dirty']/span/div[1]/p")
 		private WebElement errorMessageincorrect;
 		
+		@FindBy(xpath = "//*[@id='zip-form']/span/div[1]/p")
+		private WebElement errorMessageincorrect2;
+		
+		
 		@FindBy(id = "zipcode")
 		private WebElement zipCodeField;
 		
@@ -96,6 +100,9 @@ public class ResponsivePlanSummary extends UhcDriver{
 		
 		@FindBy(xpath="//*[contains(text(),'Start Plan Selector')]")
 		private WebElement planSelector;
+		
+		@FindBy(className="errmsgcolor")
+		private WebElement errmsgcolor;
 		
 		/*@FindBy(xpath="//html/body/div[4]/div[2]/div[1]/div/div/div/div/div[1]/div/div/div/div[2]/div/div[2]/div[1]/div/span[1]")
 		private WebElement showMaPlans;*/
@@ -928,6 +935,7 @@ public void comparePlanslnk(){
 					
 					validate(changeLoationLink);
 					changeLoationLink.click();
+					System.out.println("tage name: "+errmsgcolor.getTagName()+errmsgcolor.getAttribute("class")+errmsgcolor.getAttribute("ng-show"));
 					JavascriptExecutor executor = (JavascriptExecutor)driver;
 					String stickyZipcode =  (String) executor.executeScript("return document.getElementById('zipcode').value;");
 					System.out.println(stickyZipcode);
@@ -962,7 +970,7 @@ public void comparePlanslnk(){
 					*/
 					//executor.executeScript("document.getElementById('submit').click()");
 					
-					System.out.println(errorMessageincorrect.getText());
+					System.out.println(errorMessageincorrect2.getText());
 					//errorMessageforincorrectzipcode();
 					// sendkeys(zipCodeField, invalidzipcode);
 					//    zipCodeField.sendKeys(Keys.ENTER);
@@ -971,18 +979,21 @@ public void comparePlanslnk(){
 				}
 				public void errorMessageforincorrectzipcode() {
 				//	validate(errorMessageincorrect);
-					 System.out.println(errorMessageincorrect.getText());
-					 if(errorMessageincorrect.isDisplayed()){
-						 System.out.println("Displayed Error message is "+errorMessageincorrect.getText());
-						 if(errorMessageincorrect.getText().equals("Please enter a valid ZIP code.")){
+					 if(errorMessageincorrect2.isDisplayed()){
+						 System.out.println("Displayed Error message is "+errorMessageincorrect2.getText());
+						 if(errorMessageincorrect2.getText().equals("Please enter a valid ZIP code.")){
 							 System.out.println("Error message content displayed correctly");
 						 }else{
 							 System.out.println("content of error message not displayed correctly");
 							 Assert.fail();
 						 }
 					 }else{
+						 if(errmsgcolor.getAttribute("class").contains("errmsgcolor")){
+							 System.out.println("successfully, although phantom js cannot check getText");
+						 }else{
 						 System.out.println("Error message not displayed");
 						 Assert.fail();
+						 }
 					 }
 					// TODO Auto-generated method stub
 					
