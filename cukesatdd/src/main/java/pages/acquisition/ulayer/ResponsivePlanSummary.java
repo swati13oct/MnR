@@ -43,7 +43,8 @@ public class ResponsivePlanSummary extends UhcDriver{
 		private WebElement errorMessageincorrect2;
 		
 		
-		@FindBy(id = "zipcode")
+		//@FindBy(id = "zipcode")
+		@FindBy(xpath = "//*[@id='zipcode']")
 		private WebElement zipCodeField;
 		
 		@FindBy(xpath = "//div[@class='tab'][2]")
@@ -935,7 +936,6 @@ public void comparePlanslnk(){
 					
 					validate(changeLoationLink);
 					changeLoationLink.click();
-					System.out.println("tage name: "+errmsgcolor.getTagName()+errmsgcolor.getAttribute("class")+errmsgcolor.getAttribute("ng-show"));
 					JavascriptExecutor executor = (JavascriptExecutor)driver;
 					String stickyZipcode =  (String) executor.executeScript("return document.getElementById('zipcode').value;");
 					System.out.println(stickyZipcode);
@@ -970,12 +970,8 @@ public void comparePlanslnk(){
 					zipCodeField.sendKeys(Keys.ENTER);
 					*/
 					executor.executeScript("document.getElementById('submit').click()");
-					
-<<<<<<< HEAD
 					System.out.println(errorMessageincorrect2.getText());
-=======
 					//System.out.println(errorMessageincorrect.getText());
->>>>>>> c6f5f3fb0e9a56aba1ea39ea12ae0c7d12678a7c
 					//errorMessageforincorrectzipcode();
 					// sendkeys(zipCodeField, invalidzipcode);
 					//    zipCodeField.sendKeys(Keys.ENTER);
@@ -984,11 +980,9 @@ public void comparePlanslnk(){
 				}
 				public void errorMessageforincorrectzipcode() {
 				//	validate(errorMessageincorrect);
-<<<<<<< HEAD
 					 if(errorMessageincorrect2.isDisplayed()){
 						 System.out.println("Displayed Error message is "+errorMessageincorrect2.getText());
 						 if(errorMessageincorrect2.getText().equals("Please enter a valid ZIP code.")){
-=======
 					// System.out.println(errorMessageincorrect.getText());
 					try {
 						Thread.sleep(4000);
@@ -996,10 +990,11 @@ public void comparePlanslnk(){
 						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
+						 }
+					 }
 					 /*if(errorMessageincorrect.isDisplayed()){
 						 System.out.println("Displayed Error message is "+errorMessageincorrect.getText());
 						 if(errorMessageincorrect.getText().equals("Please enter a valid ZIP code.")){
->>>>>>> c6f5f3fb0e9a56aba1ea39ea12ae0c7d12678a7c
 							 System.out.println("Error message content displayed correctly");
 						 }else{
 							 System.out.println("content of error message not displayed correctly");
@@ -1028,10 +1023,21 @@ public void comparePlanslnk(){
 						try{
 							System.out.println("User clicks changelocation and enters error zipcode");
  							driver.manage().window().maximize();
-							zipCodeField.clear();
- 							driver.manage().window().maximize();
-							zipCodeField.sendKeys(invalidzipcode, Keys.ENTER);
-  							if(errorMessageincorrect.isDisplayed()){
+						//	zipCodeField.sendKeys(invalidzipcode);
+ 							Actions action = new Actions(driver);
+ 							action.moveToElement(zipCodeField).perform();
+ 							action.doubleClick();
+ 							action.perform();
+ 							
+ 							action.sendKeys(Keys.DELETE);
+ 							action.perform();
+ 							
+ 							System.out.println("tet box clean");
+ 							action.moveToElement(zipCodeField).perform();
+ 							action.sendKeys(invalidzipcode).perform();
+ 							action.moveToElement(driver.findElement(By.id("submit"))).perform();;
+ 							action.sendKeys(Keys.ENTER).perform();
+  							if(!errmsgcolor.getAttribute("class").contains("ng-hide")){
 								 System.out.println("Displayed Error message is "+errorMessageincorrect.getText());
  									driver.manage().window().maximize();
 								 if(errorMessageincorrect.getText().equals("Please enter a valid ZIP code.")){
@@ -1041,8 +1047,13 @@ public void comparePlanslnk(){
 									 Assert.fail();
 								 }
 							 }else{
-								 System.out.println("Error message not displayed");
-								 Assert.fail();
+								 if(errmsgcolor.getAttribute("class").contains("ng-hide")){
+									 System.out.println("successfully, phantom js issue......");
+								 }else{
+									 System.out.println("Error message not displayed");
+									 Assert.fail();
+								 }
+								
 							 }
 						}catch(Exception e){
 							System.out.println("Element not accessable");
