@@ -1,6 +1,7 @@
 package acceptancetests.acquisition.drugcostestimator.ulayer;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -27,7 +28,6 @@ import gherkin.formatter.model.DataTableRow;
 import pages.acquisition.ulayer.AcquisitionHomePage;
 //import pages.dashboard.member.drugcostestimator.blayer.DrugCostEstimatorPage;
 import pages.acquisition.dce.ulayer.*;
-import pages.acquisition.dce.ulayer.DrugCostEstimatorPage;
 import pages.member.ulayer.AccountHomePage;
 import pages.member.ulayer.LoginPage;
 import pages.mobile.member.ulayer.BenefitsSummaryPage;
@@ -963,6 +963,67 @@ public class DrugcostestimatorAarpStepDefinition {
 	public void I_should_see_disclaimers_link_at_the_bottom() throws InterruptedException {
 		DrugCostEstimatorPage dce = new DrugCostEstimatorPage((WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER));
 		dce.validateStep1Disclaimer();
+	}
+	
+	@And("^user validates the Summary$")
+	public void validates_Summary_AARP(){
+		DrugCostEstimatorPage dce = (DrugCostEstimatorPage) getLoginScenario()
+				.getBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE);
+		dce.validateSummary();
+	}
+
+	@And("^user validates the Drugs link$")
+	public void validate_Drugs_AARP(){
+		DrugCostEstimatorPage dce = (DrugCostEstimatorPage) getLoginScenario()
+				.getBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE);
+		dce.validateDrugs();
+	}
+
+	@And("^user validates the Pharmacy link$")
+	public void validate_Pharmacy_AARP(){
+		DrugCostEstimatorPage dce = (DrugCostEstimatorPage) getLoginScenario()
+				.getBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE);
+		dce.validatePharmacy();
+	}
+
+	@And("^user validates the Costs link$")
+	public void validate_Costs_AARP(){
+		DrugCostEstimatorPage dce = (DrugCostEstimatorPage) getLoginScenario()
+				.getBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE);
+		dce.validateCosts();		
+	}
+
+	@And("^user validates the Find a Plan link$")
+	public void validates_Find_a_Plan_AARP(){
+		DrugCostEstimatorPage dce = (DrugCostEstimatorPage) getLoginScenario()
+				.getBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE);
+		dce.validateFindAPlan();
+	}
+
+	@And("^user validates the disclaimers$")
+	public void validates_disclaimers_AARP(){
+		DrugCostEstimatorPage dce = (DrugCostEstimatorPage) getLoginScenario()
+				.getBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE);
+		dce.validateDisclaimers();
+	}
+
+	@And("^user searches with multi county zipcode and navigates to VPP page$")
+	public void multi_county_AARP(DataTable zipcodeAttributes){
+		List<DataTableRow> zipcodeAttributesRow = zipcodeAttributes
+				.getGherkinRows();
+		Map<String, String> zipcodeAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < zipcodeAttributesRow.size(); i++) {
+
+			zipcodeAttributesMap.put(zipcodeAttributesRow.get(i).getCells().get(0),
+					zipcodeAttributesRow.get(i).getCells().get(1));
+		}
+
+		String zipCode = zipcodeAttributesMap.get("Zip Code");
+		String county = zipcodeAttributesMap.get("County");
+
+		DrugCostEstimatorPage dce = (DrugCostEstimatorPage) getLoginScenario()
+				.getBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE);
+		dce.validateMultiCountyPopup(zipCode, county);
 	}
 
 }

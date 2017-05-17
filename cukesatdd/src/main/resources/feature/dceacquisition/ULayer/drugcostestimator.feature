@@ -78,3 +78,22 @@ When I access the acquisition DCE tool
 Then I should see all generic headers and elements
 And I should see disclaimers link at the bottom
 
+##-----------
+@step3genericFlow 
+Scenario Outline: To verify the Step 3 of DCE tool in AARP site from the generic flow
+Given the user is on AARP medicare site landing page
+When I access the acquisition DCE tool
+Then I navigate to step3 page 
+And user validates the Summary
+And user validates the Drugs link
+And user validates the Pharmacy link
+And user validates the Find a Plan link
+And user validates the disclaimers
+And user searches with multi county zipcode and navigates to VPP page
+| Zip Code    | <zipcode>  |
+| County      | <county>   |
+
+Examples:
+	| zipcode | county        |
+	| 80516   | Weld County   |
+
