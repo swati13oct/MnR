@@ -99,3 +99,15 @@ And the user validate radio button for MAPD and SSRD member in UHC site
 Examples:
   | planType   | memberType     | 
   | MAPD       |  Group         |
+  
+@US627227
+Scenario Outline:Verify Submit Order Button and Radio Dial Validations in order plan materials in UHC site
+Given registered UHC member for order plan materials with following attributes
+	| Plan Type    | <planType>   |
+	| Member Type  | <memberType> | 
+When the user views order materials in UHC site
+And the user validate radio button validation in UHC site
+
+Examples:
+  | planType   | memberType     | 
+  | MA         |  Individual    | 

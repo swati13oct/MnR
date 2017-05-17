@@ -255,6 +255,16 @@ public class OrderPlanMaterialsUmsStepDefinition {
 		OrderplanmaterialsPage orderPlanMaterialsPage = accountHomePage
 				.navigateToValidateRadioButtonPage();		
 	}
+	
+	@And("^the user validate Submit Order Button and Radio Dial Validations UHC site$")
+	public void validate_submit_button_and_radio_button_validation_in_Ums_site() {
+		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario()
+				.getBean(PageConstants.ACCOUNT_HOME_PAGE);
+		boolean orderPlanMaterialsPage = accountHomePage.submitOrderbtn();
+		accountHomePage.submitOrderBtnvalidation();
+						
+	}
+	
 
 
 
