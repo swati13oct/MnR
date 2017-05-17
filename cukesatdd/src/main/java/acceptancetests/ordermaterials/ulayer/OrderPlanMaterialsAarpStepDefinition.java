@@ -84,22 +84,22 @@ public class OrderPlanMaterialsAarpStepDefinition {
 
 		LoginPage loginPage = new LoginPage(wd);
 		AccountHomePage accountHomePage = (AccountHomePage)loginPage.loginWith(userName, pwd);
-		JSONObject accountHomeActualJson = null;
+		//JSONObject accountHomeActualJson = null;
 		
 		/* Get expected data */
-		Map<String, JSONObject> expectedDataMap = loginScenario
+		/*Map<String, JSONObject> expectedDataMap = loginScenario
 				.getExpectedJson(userName);
 		JSONObject accountHomeExpectedJson = accountHomePage
-				.getExpectedData(expectedDataMap);
+				.getExpectedData(expectedDataMap);*/
 
 		if (accountHomePage != null) {
 			getLoginScenario().saveBean(PageConstants.ACCOUNT_HOME_PAGE,
 					accountHomePage);
-			Assert.assertTrue(true);
-			accountHomeActualJson = accountHomePage.accountHomeJson;
+			/*Assert.assertTrue(true);
+			accountHomeActualJson = accountHomePage.accountHomeJson;*/
 		}
 
-		try {
+		/*try {
 			JSONAssert.assertEquals(accountHomeExpectedJson,
 					accountHomeActualJson, true);
 		} catch (JSONException e) {
@@ -107,7 +107,7 @@ public class OrderPlanMaterialsAarpStepDefinition {
 		}
 
 		getLoginScenario().saveBean(CommonConstants.EXPECTED_DATA_MAP,
-				expectedDataMap);
+				expectedDataMap);*/
 
 	}
 	
@@ -182,13 +182,29 @@ public class OrderPlanMaterialsAarpStepDefinition {
 		planMaterialConfirmationPage.logOut();
 
 	}
+	
+	@When("^the user views order plan materials in AARP site$")
+	public void views_order_plan_materials_in_AARP_site() {
+		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario()
+				.getBean(PageConstants.ACCOUNT_HOME_PAGE);
+		OrderplanmaterialsPage orderPlanMaterialsPage = accountHomePage
+				.navigateToLinkOrderPlanMaterialsAarpPage();
+	}
+	
+	@And("^the user validate radio button for PDP member in AARP site$")
+	public void validate_radio_button_pdp_in_AARP_site() {
+		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario()
+				.getBean(PageConstants.ACCOUNT_HOME_PAGE);
+		OrderplanmaterialsPage orderPlanMaterialsPage = accountHomePage
+				.navigateToValidateRadioButtonInAarpPage();
+	}
 
-	@After
+	/*@After
 	public void tearDown() {
 		WebDriver wd = (WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
 		wd.quit();
 		getLoginScenario().flushBeans();
-	}
+	}*/
 
 	public static boolean isAlertPresent(FirefoxDriver wd) {
 		try {

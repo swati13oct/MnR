@@ -210,6 +210,12 @@ public class AccountHomePage extends UhcDriver {
 	
 	@FindBy(xpath = "//*[@id='planinformation']/div[2]/div[5]/span[2]/a")
 	private WebElement benefitandcoverageLink;
+	
+	@FindBy(xpath = "//*[@id='notShipRadio']/div[1]/div")
+	private WebElement radiokitLink;
+	
+	@FindBy(xpath = "//*[@id='notShipRadio']/div[2]/div")
+	private WebElement radioidLink;
 
 
 	
@@ -863,6 +869,19 @@ public class AccountHomePage extends UhcDriver {
 	public FormsandresourcesPage navigateToLowerTierDrugLearnmoreAarpPage() {
 		driver.navigate().to("https://member.team-a-aarpmedicareplans.uhc.com/content/aarpm/home/my-plans/noaccordion-medicare-partd-coverage.html");
 		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+		return null;
+	}
+	
+	public OrderplanmaterialsPage navigateToLinkOrderPlanMaterialsAarpPage() {
+		driver.navigate().to("https://member.team-a-aarpmedicareplans.uhc.com/content/aarpm/home/order-plan-materials-dashboard.html");
+		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+		return null;
+	}
+
+	public OrderplanmaterialsPage navigateToValidateRadioButtonInAarpPage() {
+		radiokitLink.click();
+		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+		radioidLink.click();
 		return null;
 	}
 

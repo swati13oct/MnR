@@ -111,3 +111,15 @@ And the user validate radio button validation in UHC site
 Examples:
   | planType   | memberType     | 
   | MA         |  Individual    | 
+  
+@radiobuttonmapdindi
+Scenario Outline:Verify order plan materials in UHC site for MAPD member
+Given registered UHC member for order plan materials with following attributes
+	| Plan Type    | <planType>   |
+	| Member Type  | <memberType> | 
+When the user views order materials in UHC site
+And the user validate radio button for MAPD member in UHC site
+
+Examples:
+  | planType   | memberType     | 
+  | MAPD       |  Individual    |

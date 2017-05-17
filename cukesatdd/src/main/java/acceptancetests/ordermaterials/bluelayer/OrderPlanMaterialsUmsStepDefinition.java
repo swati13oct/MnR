@@ -265,7 +265,13 @@ public class OrderPlanMaterialsUmsStepDefinition {
 						
 	}
 	
-
+	@And("^the user validate radio button for MAPD member in UHC site$")
+	public void validate_radio_button_mapd_individual_member_in_Ums_site() {
+		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario()
+				.getBean(PageConstants.ACCOUNT_HOME_PAGE);
+		OrderplanmaterialsPage orderPlanMaterialsPage = accountHomePage
+				.navigateToValidateRadioButtonPage();		
+	}
 
 
 }
