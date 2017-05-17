@@ -1,7 +1,4 @@
-/**
- * 
- */
-package pages.member.ulayer;
+package pages.member.bluelayer;
 
 import java.util.List;
 import java.util.Map;
@@ -20,10 +17,10 @@ import acceptancetests.atdd.util.CommonUtility;
 import atdd.framework.UhcDriver;
 
 /**
- * @author pperugu
+ * @author pagarwa5
  *
  */
-public class MedicalClaimDetailsPage extends UhcDriver {
+public class ClaimDetailsPage extends UhcDriver {
 
 	@FindBy(id = "searchRange")
 	private WebElement searchRange;
@@ -37,14 +34,11 @@ public class MedicalClaimDetailsPage extends UhcDriver {
 	@FindBy(id = "medicaldetailsinner")
 	private WebElement medicalClaimDetailsSection;
 
+	@FindBy(linkText = "Sign Out")
+	private WebElement logOut;
+
 	@FindBy(id = "drugclaimdetail")
 	private WebElement servicesChargesSection;
-
-	@FindBy(id = "drugdetailtableheader")
-	private WebElement drugdetailtableheader;
-
-	@FindBy(id = "disclosure_link")
-	private WebElement logOut;
 	
 	@FindBy(xpath = ".//*[@id='drugclaimdetail']")
 	private WebElement drugclaimdetailbox;
@@ -55,23 +49,19 @@ public class MedicalClaimDetailsPage extends UhcDriver {
 	@FindBy(xpath = ".//*[@id='medicaldetailsouter']/div[2]/a")
 	private WebElement backtoClaimSearchbtn;
 
-	private PageData medicalClaimDetails;
+	private PageData claimsDetails;
 
-	public JSONObject medicalClaimDetailsJson;
+	public JSONObject claimsDetailsJson;
 
-	public MedicalClaimDetailsPage(WebDriver driver) {
+	public ClaimDetailsPage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
-		CommonUtility.waitForPageLoad(driver, drugdetailtableheader, CommonConstants.TIMEOUT_30);
-		String fileName = CommonConstants.MEDICAL_CLAIMS_DETAILS_PAGE_DATA;
-		medicalClaimDetails = CommonUtility.readPageData(fileName,
-				CommonConstants.PAGE_OBJECT_DIRECTORY_ULAYER_MEMBER);
+		String fileName = CommonConstants.MEDICAL_CLAIM_DETAILS_PAGE_DATA;
+		claimsDetails = CommonUtility.readPageData(fileName,
+				CommonConstants.PAGE_OBJECT_DIRECTORY_BLUELAYER_MEMBER);
 		openAndValidate();
 	}
-
-	public MedicalClaimDetailsPage searchClaims(
-			Map<String, String> timeAttributesMap) {
-
+	public ClaimDetailsPage searchClaims(Map<String, String> timeAttributesMap) {
 		String claimPeriod = timeAttributesMap.get("Claim Period");
 		searchRange.click();
 		searchRange.sendKeys(claimPeriod);
@@ -80,7 +70,7 @@ public class MedicalClaimDetailsPage extends UhcDriver {
 		CommonUtility.checkPageIsReady(driver);
 
 		if (driver.getTitle().equalsIgnoreCase("Claims")) {
-			return new MedicalClaimDetailsPage(driver);
+			return new ClaimDetailsPage(driver);
 		}
 		return null;
 	}
@@ -93,56 +83,37 @@ public class MedicalClaimDetailsPage extends UhcDriver {
 		return servicesChargesSection.getText();
 	}
 
-	public void logOut() {
-		logOut.click();
-
-	}
-
 	public JSONObject getExpectedData(Map<String, JSONObject> expectedDataMap) {
 
+		// // get expected data for claim summary
+		String claimNumber = getClaimNumber();
 		JSONObject globalExpectedJson = expectedDataMap
 				.get(CommonConstants.GLOBAL);
-		JSONObject medicalClaimDetailsExpectedJson = expectedDataMap
-				.get(CommonConstants.MEDICAL_CLAIMS_DETAILS);
-
-		String claimNumber = getClaimNumber();
-
+		JSONObject claimdetailsExpectedJson = null;
 		try {
-			medicalClaimDetailsExpectedJson = (JSONObject) medicalClaimDetailsExpectedJson
-					.get(claimNumber);
+			claimdetailsExpectedJson = expectedDataMap.get(
+					CommonConstants.CLAIM_DETAILS).getJSONObject(claimNumber);
 		} catch (JSONException e) {
 			e.printStackTrace();
 		}
-		medicalClaimDetailsExpectedJson = CommonUtility.mergeJson(
-				medicalClaimDetailsExpectedJson, globalExpectedJson);
-		return medicalClaimDetailsExpectedJson;
-	}
-
-	private String getClaimNumber() {
-		String claimNumber;
-		String currentUrl = currentUrl();
-		String claimNumUrl = currentUrl.split("cn=")[1];
-		if (claimNumUrl.contains("&")) {
-			claimNumber = claimNumUrl.split("&")[0];
-		} else {
-			claimNumber = claimNumUrl;
-		}
-		return claimNumber;
+		claimdetailsExpectedJson = CommonUtility.mergeJson(
+				claimdetailsExpectedJson, globalExpectedJson);
+		return claimdetailsExpectedJson;
 	}
 
 	@Override
 	public void openAndValidate() {
 
-		validate(logOut);
 		JSONObject jsonObject = new JSONObject();
-		for (String key : medicalClaimDetails.getExpectedData().keySet()) {
-			List<WebElement> elements = findElements(medicalClaimDetails
+		for (String key : claimsDetails.getExpectedData().keySet()) {
+			List<WebElement> elements = findElements(claimsDetails
 					.getExpectedData().get(key));
 			if (elements.size() == 1) {
-				if (validate(elements.get(0))) {
+				if (elementFound(elements.get(0))) {
 					try {
 						jsonObject.put(key, elements.get(0).getText());
 					} catch (JSONException e) {
+						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
 				}
@@ -167,12 +138,28 @@ public class MedicalClaimDetailsPage extends UhcDriver {
 			}
 
 		}
-		medicalClaimDetailsJson = jsonObject;
+		claimsDetailsJson = jsonObject;
 		
-		System.out.println("medicalClaimDetailsJson----->"+medicalClaimDetailsJson);
+		System.out.println("claimsDetailsJson----->"+claimsDetailsJson);
 
 	}
 
+	private String getClaimNumber() {
+		String claimNumber;
+		String currentUrl = currentUrl();
+		String claimNumUrl = currentUrl.split("cn=")[1];
+		if (claimNumUrl.contains("&")) {
+			claimNumber = claimNumUrl.split("&")[0];
+		} else {
+			claimNumber = claimNumUrl;
+		}
+		return claimNumber;
+	}
+
+	public void logout() {
+		logOut.click();
+	}
+	
 	public boolean validateMoreInfo(){
 		boolean flag = false;
 		if(validate(drugclaimdetailbox)&&validate(medDetailsInnerBox)&&validate(backtoClaimSearchbtn))
@@ -180,5 +167,5 @@ public class MedicalClaimDetailsPage extends UhcDriver {
 		
 		return flag;
 	}
-
+	
 }

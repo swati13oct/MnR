@@ -144,6 +144,18 @@ public class AccountHomePage extends UhcDriver {
 	@FindBy(xpath = "//*[@id='paymentOverviewApp']/div[1]/div/div/div/h1")
 	private WebElement paymentsHeading;
 	
+	@FindBy(xpath = ".//*[@id='contentRow']")
+	private WebElement homePageContent;
+	
+	@FindBy(xpath = ".//*[@id='_content_campaigns_aarpm_home-myresources-main_home-myresources-main_jcr_content_par_teaser_2']/div/div[2]")
+	private WebElement drugLookupBox;
+	
+	@FindBy(xpath = ".//*[@id='_content_campaigns_aarpm_home-myresources-main_home-myresources-main_jcr_content_par_teaser_2']/div/div[2]/a/span")
+	private WebElement drugLookupBtn;
+	
+	@FindBy(xpath = ".//*[@id='contentRow']/td/table/tbody/tr/td/div/div[2]/div[3]/div[3]/div[2]/div/div/div[2]/div")
+	private WebElement myResourcesContent;
+	
 	private PageData myAccountHome;
 
 	public JSONObject accountHomeJson;
@@ -588,6 +600,11 @@ public class AccountHomePage extends UhcDriver {
 		return null;
 	}
 
-
+	public boolean validateAccountHome(){
+		boolean flag = false;
+		if(validate(homePageContent)&&validate(logOut)&&validate(myResourcesContent)&&validate(drugLookupBox)&&validate(drugLookupBtn))
+			flag = true;
+		return flag;
+	}
 
 }
