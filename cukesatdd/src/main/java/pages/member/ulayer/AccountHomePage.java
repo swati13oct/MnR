@@ -585,6 +585,15 @@ public class AccountHomePage extends UhcDriver {
 		}
 		return null;
 	}
+	
+	public TestHarness navigateToTestHarnesspage() {
+		driver.navigate().to("https://member."+MRScenario.environment+"-aarpmedicareplans.uhc.com/home/testharness.html");
+		System.out.println("title  "+driver.getTitle());
+		if(driver.getTitle().equalsIgnoreCase("testharness")){
+			return new TestHarness(driver);
+		}
+		return null;
+	}
 
 	public MedicalEobPage navigateDirectToEOBPage(){
 		driver.navigate().to(EOB_DIRECT_URL);

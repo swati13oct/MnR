@@ -155,3 +155,54 @@ Then the user validates the One Time Payment Submitted successfull page
 Examples:
         |planType | routingNo | confirmRoutingNo | accountNo   | confirmAccountNo | firstName | middleName | lastName | Amount |
         |  MA     | 123000000 |  123000000       | 1234567890  | 1234567890       | first     | second     | third    | 2.00   |
+        
+        
+@US454631
+Scenario Outline: Verify the PDF link on OneTime Payment Submitted page
+Given the user is on the AARP medicare site login page
+When the user logs in with a registered AMP with following details in AARP site
+	| Plan Type   | <planType>  |
+And the user navigates to TestHarness Page
+And the user navigates to PaymentOverview Page
+And the user navigates to One Time Payments page
+And the user enters details and click on continue button on One Time Payments Page for Dashboard
+And user lands on Review One time Payments Page and navigates to OTP Submitted Page
+Then the user lands on OneTime Payment Submitted Page and validates PDF link
+
+Examples:
+	| planType |
+	| MA       |
+
+#US454627 also covered
+@US454620
+Scenario Outline: Verify the Payment Amount and Member Name on OneTime Payment Submitted page
+Given the user is on the AARP medicare site login page
+When the user logs in with a registered AMP with following details in AARP site
+	| Plan Type   | <planType>  |
+And the user navigates to TestHarness Page
+And the user navigates to PaymentOverview Page
+And the user navigates to One Time Payments page
+And the user enters details and click on continue button on One Time Payments Page for Dashboard
+And user lands on Review One time Payments Page and navigates to OTP Submitted Page
+Then the user lands on OneTime Payment Submitted Page and validates Payment Amount and Member Name
+
+Examples:
+	| planType |
+	| PDP      |
+
+
+@US628468
+Scenario Outline: Verify the Timestamp on OneTime Payment Submitted page
+Given the user is on the AARP medicare site login page
+When the user logs in with a registered AMP with following details in AARP site
+	| Plan Type   | <planType>  |
+And the user navigates to TestHarness Page
+And the user navigates to PaymentOverview Page
+And the user navigates to One Time Payments page
+And the user enters details and click on continue button on One Time Payments Page for Dashboard
+And user lands on Review One time Payments Page and navigates to OTP Submitted Page
+Then the user lands on OneTime Payment Submitted Page and validates Timestamp
+
+Examples:
+	| planType |
+	| MA       |

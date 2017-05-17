@@ -83,7 +83,7 @@
 
 		<dependency>
 			<groupId>org.springframework</groupId>
-			<artifactId>org.springframework.beans</artifactId>
+			<artifactId>spring-beans</artifactId>
 			<version>3.1.1.RELEASE</version>
 		</dependency>
 		<dependency>

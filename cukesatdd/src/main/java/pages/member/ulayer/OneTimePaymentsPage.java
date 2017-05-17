@@ -106,17 +106,18 @@ public class OneTimePaymentsPage extends UhcDriver{
 		
 	}
 
-	public ReviewOneTimePaymentsPage enterInfoAndContinue() {
+	public ReviewOneTimePaymentsPage enterInfoAndContinue() throws InterruptedException {
 		otherAmountRadio.click();
 		otherAmountNumber.sendKeys("56.00");
 		routingNumberField.sendKeys("123123000");
 		confirmRoutingNumberField.sendKeys("123123000");
 		accountNumberField.sendKeys("1234");
 		confirmAccountNumberField.sendKeys("1234");
-		firstNameField.sendKeys("Fn");
-		lastNameField.sendKeys("Ln");
+		firstNameField.sendKeys("Test");
+		lastNameField.sendKeys("MA");
 		electronicSignatureCheck.click();
 		reviewContinue.click();
+		Thread.sleep(2000);
 		if(driver.getTitle().equalsIgnoreCase("My Benefits & Coverage")){
 			return new ReviewOneTimePaymentsPage(driver);
 		}

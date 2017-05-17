@@ -25,14 +25,17 @@ import org.openqa.selenium.WebDriver;
 		@FindBy(xpath="//div[@id='atdd_reviewonetime_label']/div[4]/div[2]/span")
 		private WebElement routingNumber;
 		
-		@FindBy(xpath="html/body/div[2]/div/div/div[2]/div[3]/div/div/div/button[1]") 
+		@FindBy(xpath="html/body/div[2]/div/div/div/div/div/div/div[2]/div[3]/div/div/div/button[1]") 
 		private WebElement AutomaticPaymentReviewSubmitbtn; 
 		
-		@FindBy(id = "termError")
+		@FindBy(id ="termError")
 		private WebElement AutomaticPaymentelectronicSignatureCheck;
 		
 		@FindBy(xpath="html/body/div[2]/div/div/div[2]/div[3]/div/div/div/button[1]") 
 		private WebElement BacktoPaymentHistoryButton; 
+		
+		@FindBy(xpath ="html/body/div[2]/div/div/div/div/div/div/div[2]/div[3]/div/div/div/button[2]")
+		private WebElement ViewPDFLink;
 		
 		private PageData reviewAutomatic;
 		
@@ -51,12 +54,17 @@ import org.openqa.selenium.WebDriver;
 			openAndValidate();
 		}*/
 		
-		public ReviewAutomaticPaymentsPage navigatetoPaymentSubmittedPage(){
+		public AutomaticPaymentSubmittedPage navigatetoPaymentSubmittedPage() throws InterruptedException{
+			Thread.sleep(5000);
 			AutomaticPaymentelectronicSignatureCheck.click();
+			System.out.println("Legal checkbox checked");
+			Thread.sleep(2000);
 			AutomaticPaymentReviewSubmitbtn.click();
+			System.out.println("Submit button clicked");			
 			System.out.println("Navigated to Automatic Payment submitted page");
-			if(driver.findElement(By.xpath("html/body/div[2]/div/div/div[2]/div[1]/div/div/div/h1")).getText().contains("Automatic Payment Submitted")){
-				return new ReviewAutomaticPaymentsPage(driver);
+			Thread.sleep(2000);
+			if(driver.getTitle().equalsIgnoreCase("Member Claims")){
+				return new AutomaticPaymentSubmittedPage(driver);
 			}
 			return null;		
 		}
@@ -68,6 +76,15 @@ import org.openqa.selenium.WebDriver;
 				return new ReviewAutomaticPaymentsPage(driver);
 			}
 			return null;		
+		}
+		
+		public AutomaticPaymentSubmittedPage ValidatePDFLink()
+		{
+			if(ViewPDFLink.isEnabled()){
+				ViewPDFLink.click();
+				return new AutomaticPaymentSubmittedPage(driver);
+			}
+			return null;
 		}
 
 
@@ -101,6 +118,3 @@ import org.openqa.selenium.WebDriver;
 		}
 
 	}
-
-
-

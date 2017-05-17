@@ -21,6 +21,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import pages.member.ulayer.AccountHomePage;
 import pages.member.ulayer.AutomaticPaymentPage;
+import pages.member.ulayer.AutomaticPaymentSubmittedPage;
 import pages.member.ulayer.AutomaticPaymentSuccessPage;
 import pages.member.ulayer.AutomaticPaymentsPage;
 import pages.member.ulayer.ConfirmAutomaticPaymentPage;
@@ -29,8 +30,10 @@ import pages.member.ulayer.OneTimePaymentPage;
 import pages.member.ulayer.OneTimePaymentSuccessPage;
 import pages.member.ulayer.OneTimePaymentsPage;
 import pages.member.ulayer.PaymentHistoryPage;
+import pages.member.ulayer.PaymentsOverview;
 import pages.member.ulayer.ReviewAutomaticPaymentsPage;
 import pages.member.ulayer.ReviewOneTimePaymentsPage;
+import pages.member.ulayer.TestHarness;
 import acceptancetests.atdd.data.CommonConstants;
 import acceptancetests.atdd.data.member.PageConstants;
 import acceptancetests.login.data.LoginCommonConstants;
@@ -150,10 +153,58 @@ public class AutomaticPaymenAarpStepDefinition {
 		
 	}
 	
+	@And("^the user navigates to TestHarness Page$")
+	public void user_navigates_to_TestHarness_Page()
+	{
+		AccountHomePage accountHomePage = (AccountHomePage)getLoginScenario().getBean(PageConstants.ACCOUNT_HOME_PAGE);
+		TestHarness testHarness = accountHomePage.navigateToTestHarnesspage();
+		if(testHarness!= null){
+			getLoginScenario().saveBean(PageConstants.TEST_HARNESS_PAGE,
+					testHarness);
+			Assert.assertTrue(true);
+		} else {
+			Assert.fail("Test Harness Page not found");
+		}
+		
+	}
+	
+	
+	@And("^the user navigates to PaymentOverview Page$")
+	public void user_navigates_to_PaymentOverview_Page() throws InterruptedException
+	{
+		TestHarness testHarness = (TestHarness)getLoginScenario().getBean(PageConstants.TEST_HARNESS_PAGE);
+		Thread.sleep(2000);
+		PaymentsOverview paymentsOverview = testHarness.navigateToPaymentOverview();
+		if(paymentsOverview!= null){
+			getLoginScenario().saveBean(PageConstants.PAYMENT_OVERVIEW,
+					paymentsOverview);
+			Assert.assertTrue(true);
+		} else {
+			Assert.fail("Payment Overview Page not found");
+		}
+		
+	}
+	
+	@And("^the user navigates to Automatic Payments page from Payments Overview Page$")
+	public void user_navigates_to_automatic_payments_from_paymentsOverview()
+	{
+		PaymentsOverview paymentsOverview = (PaymentsOverview)getLoginScenario().getBean(PageConstants.PAYMENT_OVERVIEW);
+		AutomaticPaymentsPage automaticPaymentsPage = paymentsOverview.navigateToAutomaticPaymentpage();
+		if(automaticPaymentsPage!= null){
+			getLoginScenario().saveBean(PageConstants.AUTOMATIC_PAYMENTS_DASHBOARD,
+					automaticPaymentsPage);
+			Assert.assertTrue(true);
+		} else {
+			Assert.fail("automatic payments page not found");
+		}
+		
+	}
+	
 	@And("^the user enters details and click on continue button on Automatic Payments Page for Dashboard$")
-	public void user_clicks_continue()
+	public void user_clicks_continue() throws InterruptedException
 	{
 		AutomaticPaymentsPage automaticPaymentsPage = (AutomaticPaymentsPage)getLoginScenario().getBean(PageConstants.AUTOMATIC_PAYMENTS_DASHBOARD);
+		Thread.sleep(3000);
 		ReviewAutomaticPaymentsPage reviewAutomaticPaymentsPage = automaticPaymentsPage.enterInfoAndContinue();
 		if(reviewAutomaticPaymentsPage != null){
 			getLoginScenario().saveBean(PageConstants.REVIEW_AUTOMATIC_PAYMENTS_DASHBOARD,
@@ -166,19 +217,71 @@ public class AutomaticPaymenAarpStepDefinition {
 	}
 	
 	@And("^the user lands on Review Automatic Payments Page and clicks on Submit button$")
-	public void Review_Automatic_paymentPage()
+	public void Review_Automatic_paymentPage() throws InterruptedException
 	{
 		ReviewAutomaticPaymentsPage reviewAutomaticPage = (ReviewAutomaticPaymentsPage)getLoginScenario().getBean(PageConstants.REVIEW_AUTOMATIC_PAYMENTS_DASHBOARD);
-		ReviewAutomaticPaymentsPage reviewAutomaticPaymentsPage = reviewAutomaticPage.navigatetoPaymentSubmittedPage();
-		if(reviewAutomaticPaymentsPage != null){
+		AutomaticPaymentSubmittedPage automaticPaymentSubmittedPage = reviewAutomaticPage.navigatetoPaymentSubmittedPage();
+		if(automaticPaymentSubmittedPage != null){
 			getLoginScenario().saveBean(PageConstants.CONFIRM_AUTOMATIC_PAYMENT_PAGE,
-					reviewAutomaticPaymentsPage);
+					automaticPaymentSubmittedPage);
 			Assert.assertTrue(true);
 		}else {
-			Assert.fail("Automatic Payment confirmation page not found");
+			Assert.fail("Review Automatic Payment Page not found");
 		}		
 		
 	}
+	
+	
+	@Then("^the user lands on Automatic Payment Submitted Page and validates PDF link$")
+	public void Automatic_payment_SubmittedPage()
+	{
+		//ReviewAutomaticPaymentsPage reviewAutomaticPaymentsPage = (ReviewAutomaticPaymentsPage)getLoginScenario().getBean(PageConstants.CONFIRM_AUTOMATIC_PAYMENT_PAGE);
+		AutomaticPaymentSubmittedPage automaticPaymentSubmittedPage = (AutomaticPaymentSubmittedPage)getLoginScenario().getBean(PageConstants.CONFIRM_AUTOMATIC_PAYMENT_PAGE);
+		AutomaticPaymentSubmittedPage PDFValidation = automaticPaymentSubmittedPage.ValidatePDFLink();
+		if(PDFValidation != null){
+			getLoginScenario().saveBean(PageConstants.PDF_LINK,
+					PDFValidation);
+			Assert.assertTrue(true);
+		}else {
+			Assert.fail("Payment Submitted Page not found");
+		}		
+		
+	}
+	
+	@Then("^the user lands on Automatic Payment Submitted Page and validates Timestamp, Payment Type and Payment Amount$")
+	public void Automatic_payment_SubmittedPage_Validations() throws InterruptedException
+	{
+		//ReviewAutomaticPaymentsPage reviewAutomaticPaymentsPage = (ReviewAutomaticPaymentsPage)getLoginScenario().getBean(PageConstants.CONFIRM_AUTOMATIC_PAYMENT_PAGE);
+		AutomaticPaymentSubmittedPage automaticPaymentSubmittedPage = (AutomaticPaymentSubmittedPage)getLoginScenario().getBean(PageConstants.CONFIRM_AUTOMATIC_PAYMENT_PAGE);
+		AutomaticPaymentSubmittedPage PaymentTypeValidation = automaticPaymentSubmittedPage.ValidatePaymentType();
+		AutomaticPaymentSubmittedPage TimeStampValidation = automaticPaymentSubmittedPage.ValidateTimeStamp();
+		AutomaticPaymentSubmittedPage PaymentAmountValidation = automaticPaymentSubmittedPage.ValidatePaymentAmount();
+		if(PaymentTypeValidation != null){
+			getLoginScenario().saveBean(PageConstants.PAYMENT_TYPE,
+					PaymentTypeValidation);
+			Assert.assertTrue(true);
+		}else {
+			Assert.fail("Payment Submitted Page not found");
+		}
+		
+		if(TimeStampValidation != null){
+			getLoginScenario().saveBean(PageConstants.TIMESTAMP,
+					TimeStampValidation);
+			Assert.assertTrue(true);
+		}else {
+			Assert.fail("Payment Submitted Page not found");
+		}
+		
+		if(PaymentAmountValidation != null){
+			getLoginScenario().saveBean(PageConstants.PAYMENT_AMOUNT,
+					PaymentAmountValidation);
+			Assert.assertTrue(true);
+		}else {
+			Assert.fail("Payment Submitted Page not found");
+		}
+		
+	}
+	
 	
 	@Then("^the user presses Back To Payment History button on Automatic Payment Submitted page and validates it$")
 	public void Automatic_payment_SuccessPage()
@@ -193,7 +296,7 @@ public class AutomaticPaymenAarpStepDefinition {
 			Assert.fail("Payment history confirmation page not found");
 		}		
 		
-	}
+	}	
 	
 	@Then("^user lands on Review Automatic Payments Page and validates the payments page$")
 	public void review_automatic_payments_validation()
@@ -283,4 +386,5 @@ public class AutomaticPaymenAarpStepDefinition {
 	}
 	
 	}
+
 

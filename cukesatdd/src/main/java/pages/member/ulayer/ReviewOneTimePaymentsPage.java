@@ -3,8 +3,11 @@
  */
 package pages.member.ulayer;
 
+import java.util.concurrent.TimeUnit;
+
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -31,11 +34,24 @@ public class ReviewOneTimePaymentsPage extends UhcDriver{
 	@FindBy(xpath="//*[@id='atdd_reviewonetime_label']/div[5]/div[2]/span")
 	private WebElement AccountNumber;
 	
+	@FindBy(xpath="/html/body/div[2]/div/div[2]/div/div/div[1]/div/div/div[5]/div[2]/span")
+	private WebElement AccountNumberPaymentSubmittedPage;
+	
 	@FindBy(xpath="//*[@id='atdd_reviewonetime_label']/div[6]/div[2]/span")
 	private WebElement AccountHolderName;
 	
-	@FindBy(xpath="/html/body/div[2]/div/div/div[2]/div[3]/div/div/div/button")
+	@FindBy(xpath="html/body/div[2]/div/div[2]/div/div/div[1]/div/div/div[6]/div[2]/span")
+	private WebElement AccountHolderNamePaymentSubmittedpage;
+	
+	@FindBy(id="termError")
+	private WebElement Legalcheckbox;
+	
+	//@FindBy(xpath="/html/body/div[2]/div/div/div/div/div/div/div[2]/div[3]/div/div/div/button")
+	@FindBy(xpath="//button[contains(text(), 'submit ')]")
 	private WebElement SubmitButton;
+	
+	@FindBy(xpath="html/body/div[2]/div/div[2]/div/div/div[1]/div/div/div[1]/div[2]/span")
+	private WebElement PaymentType;
 	
 	private PageData reviewOneTime;
 	
@@ -74,35 +90,52 @@ public class ReviewOneTimePaymentsPage extends UhcDriver{
 	   else
 	   {		  
 		  Assert.fail("Account number Value does not match"+AccountHolderName.getText());
-	   } 	   
-	    SubmitButton.click();
-	    //if
-	    return new ReviewOneTimePaymentsPage(driver);
+	   }
+	    Legalcheckbox.click();
+	    System.out.println("Legal terms checkbox clicked");
+	    SubmitButton.click();	
+	    System.out.println("Submit Button clicked");
+	    if(driver.getTitle().equalsIgnoreCase("My Benefits & Coverage")){
+			return new ReviewOneTimePaymentsPage(driver);
+		}
+	    return null;
 	}
 	
 	
+	public OneTimePaymentPageSubmitted navigateToOTPSubmittedPage() throws InterruptedException {
+		
+		Thread.sleep(2000);		
+		Legalcheckbox.click();
+		System.out.println("Checkbox clicked");		
+		Thread.sleep(1000);
+		SubmitButton.click();
+		System.out.println("Submit Button clicked");
+	    Thread.sleep(5000);
+		 if(driver.getTitle().equalsIgnoreCase("My Benefits & Coverage")){
+				return new OneTimePaymentPageSubmitted(driver);
+			}
+		    return null;
+	}
 	
-	public ReviewOneTimePaymentsPage validateOTPSubmittedPageValues() {
-		   if(AccountNumber.getText().equalsIgnoreCase("1234567890"))
-		   {
-			   System.out.println("Account number value matched on Review Page");
-			   Assert.assertTrue(true);
+	
+	public ReviewOneTimePaymentsPage validateOTPSubmittedPageValues() {			
+		   if(AccountNumberPaymentSubmittedPage.getText().equalsIgnoreCase("1234567890")){
+			   System.out.println("Account number value matched on Submitted Page");			   
 		   }
-		   else
-		   {		  
-			  Assert.fail("Account number Value does not match" +AccountNumber.getText());
+		   else{		  
+			  Assert.fail("Account number Value does not match " +AccountNumber.getText());
+		   }		   
+		   if(AccountHolderNamePaymentSubmittedpage.getText().equalsIgnoreCase("first second third")){
+			   System.out.println("Account Holder Name value matched on Submitted Page");			   
 		   }
-		   
-		   if(AccountHolderName.getText().equalsIgnoreCase("first second third"))
-		   {
-			   System.out.println("Account Holder Name value matched on Review Page");
-			   Assert.assertTrue(true);
+		   else{		  
+			  Assert.fail("Account Holder Name Value does not match "+AccountHolderName.getText());
 		   }
-		   else
-		   {		  
-			  Assert.fail("Account number Value does not match "+AccountHolderName.getText());
-		   } 	   
-		    
+		   if(PaymentType.getText().equalsIgnoreCase("EFT-Checking (One-Time)")){
+			   System.out.println("Payment Type Value mtached");
+		   }else{
+			   Assert.fail("Payment Type not matched "+ PaymentType.getText());			  
+		   }
 		    return new ReviewOneTimePaymentsPage(driver);
 		}
 	

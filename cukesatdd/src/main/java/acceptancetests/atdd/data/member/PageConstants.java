@@ -11,12 +11,15 @@ public class PageConstants {
 
 	public static final String ACCOUNT_HOME_PAGE = "accountHomePage";
 
+	public static final String TIMESTAMP = "TimeStamp";
+	
 	public static final String PLAN_CONFIRMATION_PAGE = "planConfirmationPage";
 
 	public static final String CREATE_ACCOUNT_PAGE = "createAccountPage";
 	
 	public static final String BENEFITS_SUMMARY_PAGE = "benefitsSummaryPage";
 	
+	public static final String TEST_HARNESS_PAGE = "TestHarnessPage";
 
 	public static final String REGISTRATION_SUCCESS_PAGE = "registrationSuccessPage";
 
@@ -42,7 +45,14 @@ public class PageConstants {
 
 	public static final String MY_PREF_PAGE = "myPrefPage";
 
-
+	public static final String PDF_LINK = "PDFLink";
+	
+	public static final String PAYMENT_AMOUNT = "PaymentAmount";
+	
+	public static final String PAYMENT_TYPE = "PaymentType";
+	
+	public static final String MEMBER_NAME = "MemberName";
+	
 	public static final String CLAIM_SUMMARY_PAGE = "claimSummaryPage";
 
 	public static final String CLAIM_DETAILS_PAGE = "claimDetailPage";
@@ -123,7 +133,7 @@ public class PageConstants {
 
 	public static final String PLAN_COMPARE_PAGE = "planComparePage";
 	
-	
+	public static final String PAYMENT_OVERVIEW = "PaymentOverview";
 	
 	public static final String ONE_TIME_PAYMENTS_DASHBOARD = "onetimePaymentsPageDashboard";
 	

@@ -5,9 +5,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
+import org.skyscreamer.jsonassert.JSONAssert;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import acceptancetests.atdd.data.CommonConstants;
@@ -583,50 +585,4 @@ public class ResponsiveStepDefiniton {
 			System.out.println(actualZipcode);
 			planSummary.validateStickyZipcode(actualZipcode);
 		}
-	
-@And("^the user enters incorrect zipcode$")
-public void user_validates_sticky_zipcode(DataTable givenAttributes){
-	List<DataTableRow> memberAttributesRow = givenAttributes
-			.getGherkinRows();
-	Map<String, String> memberAttributesMap = new HashMap<String, String>();
-	for (int i = 0; i < memberAttributesRow.size(); i++) {
-
-		memberAttributesMap.put(memberAttributesRow.get(i).getCells()
-				.get(0), memberAttributesRow.get(i).getCells().get(1));
 	}
-	
-	String actualZipcode = (String) getLoginScenario().getBean(VPPCommonConstants.ZIPCODE);
-	String invalidzipcode = memberAttributesMap.get("InvalidZipCode");
-	getLoginScenario().saveBean(VPPCommonConstants.ZIPCODEINVALID, invalidzipcode);
-	System.out.println(actualZipcode);
-	ResponsivePlanSummary planSummary = (ResponsivePlanSummary) getLoginScenario().getBean(PageConstants.RESPONSIVE_PLAN_SUMMARY_PAGE);
-	planSummary.validateincorrectZipcode(actualZipcode,invalidzipcode);
-}
-
-@Then("^user validate error message for invalid zipcode$")
-public void error_messageincorrectzipcode() {
-	ResponsivePlanSummary planSummary = (ResponsivePlanSummary) getLoginScenario()
-			.getBean(PageConstants.RESPONSIVE_PLAN_SUMMARY_PAGE);
-	planSummary.errorMessageforincorrectzipcode();		
-}
-@Then("^user validate error message for invalid zipcode for change location$")
-public void validate_error_message(DataTable givenAttributes){
-	List<DataTableRow> memberAttributesRow = givenAttributes
-			.getGherkinRows();
-	Map<String, String> memberAttributesMap = new HashMap<String, String>();
-	for (int i = 0; i < memberAttributesRow.size(); i++) {
-
-		memberAttributesMap.put(memberAttributesRow.get(i).getCells()
-				.get(0), memberAttributesRow.get(i).getCells().get(1));
-	}
-	
-	String actualZipcode = (String) getLoginScenario().getBean(VPPCommonConstants.ZIPCODE);
-	String invalidzipcode = memberAttributesMap.get("InvalidZipCode");
-	getLoginScenario().saveBean(VPPCommonConstants.ZIPCODEINVALID, invalidzipcode);
-	System.out.println(actualZipcode);
-	ResponsivePlanSummary planSummary = (ResponsivePlanSummary) getLoginScenario().getBean(PageConstants.RESPONSIVE_PLAN_SUMMARY_PAGE);
-	planSummary.enterZipandVAlidateError(actualZipcode, invalidzipcode);
-}
-}
-	
-

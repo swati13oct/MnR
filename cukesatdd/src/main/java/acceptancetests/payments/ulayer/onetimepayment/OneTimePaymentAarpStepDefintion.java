@@ -22,10 +22,13 @@ import pages.member.ulayer.AccountHomePage;
 import pages.member.ulayer.ConfirmOneTimePaymentPage;
 import pages.member.ulayer.LoginPage;
 import pages.member.ulayer.OneTimePaymentPage;
+import pages.member.ulayer.OneTimePaymentPageSubmitted;
 import pages.member.ulayer.OneTimePaymentSuccessPage;
 import pages.member.ulayer.OneTimePaymentsPage;
 import pages.member.ulayer.PaymentHistoryPage;
+import pages.member.ulayer.PaymentsOverview;
 import pages.member.ulayer.ReviewOneTimePaymentsPage;
+import pages.member.ulayer.TestHarness;
 import acceptancetests.atdd.data.CommonConstants;
 import acceptancetests.atdd.data.member.PageConstants;
 import acceptancetests.login.data.LoginCommonConstants;
@@ -250,15 +253,16 @@ public class OneTimePaymentAarpStepDefintion {
 	}
 	
 	@Then("^the user validates the One Time Payment Submitted successfull page$")
-	public void Payment_success_page(){
-		ReviewOneTimePaymentsPage reviewoneTimePaymentsPage = (ReviewOneTimePaymentsPage)getLoginScenario().getBean(PageConstants.ONE_TIME_PAYMENT_SUCCESS_PAGE);
-		ReviewOneTimePaymentsPage OneTimePaymentSubmittedValidation = reviewoneTimePaymentsPage.validateOTPSubmittedPageValues();
+	public void Payment_success_page() throws InterruptedException{		
+		ReviewOneTimePaymentsPage onetimePaymentsSuccessPage = (ReviewOneTimePaymentsPage )getLoginScenario().getBean(PageConstants.ONE_TIME_PAYMENT_SUCCESS_PAGE);
+		ReviewOneTimePaymentsPage OneTimePaymentSubmittedValidation = onetimePaymentsSuccessPage.validateOTPSubmittedPageValues();
 				if(OneTimePaymentSubmittedValidation != null){	
 			Assert.assertTrue(true);
 		}else {
 			Assert.fail("One Time Payments Submitted dashboard page not found");
 		}	
 	}
+
 
 	@And("^the user confirms the payment in AARP site$")
 	public void confirms_payment_aarp() {
@@ -392,8 +396,41 @@ public class OneTimePaymentAarpStepDefintion {
 
 	}
 	
+	@And("^the user navigates to TestHarness Page$")
+	public void user_navigates_to_TestHarness_page()
+	{
+		AccountHomePage accountHomePage = (AccountHomePage)getLoginScenario().getBean(PageConstants.ACCOUNT_HOME_PAGE);
+		TestHarness testHarness = accountHomePage.navigateToTestHarnesspage();
+		if(testHarness!= null){
+			getLoginScenario().saveBean(PageConstants.TEST_HARNESS_PAGE,
+					testHarness);
+			Assert.assertTrue(true);
+		} else {
+			Assert.fail("Test Harness page not found");
+		}
+		
+	}
+	
+	@And("^the user navigates to PaymentOverview Page$")
+	public void user_navigates_to_PaymentOverview_Page()
+	{
+		TestHarness testHarness = (TestHarness)getLoginScenario().getBean(PageConstants.TEST_HARNESS_PAGE);
+		PaymentsOverview paymentsOverview = testHarness.navigateToPaymentOverview();
+		if(paymentsOverview!= null){
+			getLoginScenario().saveBean(PageConstants.PAYMENT_OVERVIEW,
+					paymentsOverview);
+			Assert.assertTrue(true);
+		} else {
+			Assert.fail("Payment Overview page not found");
+		}
+		
+	}
+	
+	
+	
+	
 	@And("^the user navigates to One Time Payments page$")
-	public void user_navigates_to_onw_time_payments()
+	public void user_navigates_to_one_time_payments()
 	{
 		AccountHomePage accountHomePage = (AccountHomePage)getLoginScenario().getBean(PageConstants.ACCOUNT_HOME_PAGE);
 		OneTimePaymentsPage oneTimePaymentsPage = accountHomePage.navigateToOneTimePaymentsPage();
@@ -407,8 +444,8 @@ public class OneTimePaymentAarpStepDefintion {
 		
 	}
 	
-	@And("^the user enters details and click on continue button on One Time Payments Page for  Dashboard$")
-	public void user_clicks_otheramountradio()
+	@And("^the user enters details and click on continue button on One Time Payments Page for Dashboard$")
+	public void user_clicks_and_navigates_to_Review_page() throws InterruptedException
 	{
 		OneTimePaymentsPage oneTimePaymentsPage = (OneTimePaymentsPage)getLoginScenario().getBean(PageConstants.ONE_TIME_PAYMENTS_DASHBOARD);
 		ReviewOneTimePaymentsPage reviewOneTimePaymentsPage = oneTimePaymentsPage.enterInfoAndContinue();
@@ -421,21 +458,77 @@ public class OneTimePaymentAarpStepDefintion {
 		}		
 	}
 	
-	
-	
-	@And("^user reaches to One Time Payment submitted page and navigates again to One Time Payments page$")
-	public void user_navigates_OTPPage_from_OTPSubmittedPage()
+	@And("^user lands on Review One time Payments Page and navigates to OTP Submitted Page$")
+	public void Review_OneTime_Payment_Navigation_to_OTPSubmitted() throws InterruptedException
 	{
-		OneTimePaymentsPage oneTimePaymentsPage = (OneTimePaymentsPage)getLoginScenario().getBean(PageConstants.ONE_TIME_PAYMENTS_DASHBOARD);
-		ReviewOneTimePaymentsPage reviewOneTimePaymentsPage = oneTimePaymentsPage.enterInfoAndContinue();
-		if(reviewOneTimePaymentsPage != null){
-			getLoginScenario().saveBean(PageConstants.REVIEW_ONE_TIME_PAYMENTS_DASHBOARD,
-					reviewOneTimePaymentsPage);
+		ReviewOneTimePaymentsPage reviewOneTimePaymentsPage = (ReviewOneTimePaymentsPage)getLoginScenario().getBean(PageConstants.REVIEW_ONE_TIME_PAYMENTS_DASHBOARD);
+		OneTimePaymentPageSubmitted OTPSubmitted = reviewOneTimePaymentsPage.navigateToOTPSubmittedPage();
+		Thread.sleep(1000);
+		if(OTPSubmitted != null){
+			getLoginScenario().saveBean(PageConstants.CONFIRM_ONE_TIME_PAYMENT_PAGE,
+					OTPSubmitted);
 			Assert.assertTrue(true);
 		}else {
-			Assert.fail("one time payments dashboard page not found");
+			Assert.fail("OTP Submitted page not found");
 		}		
 	}
+
+	
+	@Then("^the user lands on OneTime Payment Submitted Page and validates PDF link$")
+	public void OneTime_payment_SubmittedPage()	{
+		
+		OneTimePaymentPageSubmitted OTPSubmitted = (OneTimePaymentPageSubmitted)getLoginScenario().getBean(PageConstants.CONFIRM_ONE_TIME_PAYMENT_PAGE);
+		OneTimePaymentPageSubmitted PDFValidation = OTPSubmitted.ValidatePDFLink();
+		if(PDFValidation != null){
+			getLoginScenario().saveBean(PageConstants.PDF_LINK,
+					PDFValidation);
+			Assert.assertTrue(true);
+		}else {
+			Assert.fail("PDF Link not found");
+		}		
+		
+	}
+	
+	@Then("^the user lands on OneTime Payment Submitted Page and validates Payment Amount and Member Name$")
+	public void OTP_SubmittedPage_Validations() throws InterruptedException	{
+		
+		OneTimePaymentPageSubmitted OTPSubmitted = (OneTimePaymentPageSubmitted)getLoginScenario().getBean(PageConstants.CONFIRM_ONE_TIME_PAYMENT_PAGE);
+		Thread.sleep(2000);
+		OneTimePaymentPageSubmitted PaymentAmount = OTPSubmitted.ValidatePaymentAmount();
+		OneTimePaymentPageSubmitted MemberName = OTPSubmitted.ValidateMemberName();
+		if(PaymentAmount != null){
+			getLoginScenario().saveBean(PageConstants.PAYMENT_AMOUNT,
+					PaymentAmount);
+			Assert.assertTrue(true);
+		}else {
+			Assert.fail("Payment Amount not found");
+		}		
+		
+		if(MemberName != null){
+			getLoginScenario().saveBean(PageConstants.MEMBER_NAME,
+					MemberName);
+			Assert.assertTrue(true);
+		}else {
+			Assert.fail("Member name not found");
+		}
+		
+	}
+	
+	@Then("^the user lands on OneTime Payment Submitted Page and validates Timestamp$")
+	public void OTP_SubmittedPage_Timestamp() throws InterruptedException	{
+		
+		OneTimePaymentPageSubmitted OTPSubmitted = (OneTimePaymentPageSubmitted)getLoginScenario().getBean(PageConstants.CONFIRM_ONE_TIME_PAYMENT_PAGE);
+		Thread.sleep(2000);
+		OneTimePaymentPageSubmitted Timestamp = OTPSubmitted.ValidateTimeStamp();		
+		if(Timestamp != null){
+			getLoginScenario().saveBean(PageConstants.TIMESTAMP,
+					Timestamp);
+			Assert.assertTrue(true);
+		}else {
+			Assert.fail("Payment Amount not found");
+		}		
+	}
+	
 	
 	@And("^the user enters details without clicking checkbox and clicks on continue button on OTP Page for Dashboard$")
 	public void user_continueswithoutCheckbox()

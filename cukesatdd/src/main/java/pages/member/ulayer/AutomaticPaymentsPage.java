@@ -83,16 +83,19 @@ public class AutomaticPaymentsPage extends UhcDriver{
 		
 	}
 
-	public ReviewAutomaticPaymentsPage enterInfoAndContinue() {
+	public ReviewAutomaticPaymentsPage enterInfoAndContinue() throws InterruptedException {
+		Thread.sleep(2000);
 		routingNumberField.sendKeys("123123000");
 		confirmRoutingNumberField.sendKeys("123123000");
 		accountNumberField.sendKeys("1234");
 		confirmAccountNumberField.sendKeys("1234");
 		firstNameField.sendKeys("Fn");
 		lastNameField.sendKeys("Ln");
+		Thread.sleep(2000);
 		electronicSignatureCheck.click();
+		Thread.sleep(2000);
 		reviewContinue.click();
-		if(driver.getTitle().equalsIgnoreCase("My Benefits & Coverage")){
+		if(driver.getTitle().equalsIgnoreCase("Member Claims")){
 			return new ReviewAutomaticPaymentsPage(driver);
 		}
 		return null;

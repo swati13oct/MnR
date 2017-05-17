@@ -103,4 +103,37 @@ Then the user presses Back To Payment History button on Automatic Payment Submit
 Examples:
 	| planType |
 	| MAPD     |
-     
+
+@US458747
+Scenario Outline: Verify the PDF link on Automatic Payment Submitted page
+Given the user is on the AARP medicare site login page
+When the user logs in with a registered AMP with following details in AARP site
+	| Plan Type   | <planType>  |
+And the user navigates to TestHarness Page
+And the user navigates to PaymentOverview Page
+And the user navigates to Automatic Payments page from Payments Overview Page
+And the user enters details and click on continue button on Automatic Payments Page for Dashboard
+And the user lands on Review Automatic Payments Page and clicks on Submit button
+Then the user lands on Automatic Payment Submitted Page and validates PDF link
+
+Examples:
+	| planType |
+	| MA     |
+
+#US458581, US458605 also covered
+@US628468
+Scenario Outline: Verify the Payment Type and Timestamp
+Given the user is on the AARP medicare site login page
+When the user logs in with a registered AMP with following details in AARP site
+	| Plan Type   | <planType>  |
+And the user navigates to TestHarness Page
+And the user navigates to PaymentOverview Page
+And the user navigates to Automatic Payments page from Payments Overview Page
+And the user enters details and click on continue button on Automatic Payments Page for Dashboard
+And the user lands on Review Automatic Payments Page and clicks on Submit button
+Then the user lands on Automatic Payment Submitted Page and validates Timestamp, Payment Type and Payment Amount
+
+Examples:
+	| planType |
+	| MA     |
+
