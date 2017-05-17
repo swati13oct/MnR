@@ -4,6 +4,7 @@ import gherkin.formatter.model.DataTableRow;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -30,6 +31,7 @@ import acceptancetests.benefitsandcoverage.data.PlanBenefitsAndCoverageCommonCon
 import acceptancetests.formsandresources.data.FnRCommonConstants;
 import acceptancetests.login.data.LoginCommonConstants;
 import atdd.framework.MRScenario;
+import cucumber.annotation.en.And;
 import cucumber.annotation.en.Given;
 import cucumber.annotation.en.Then;
 import cucumber.annotation.en.When;
@@ -235,7 +237,7 @@ public class BenefitsAndCoverageUmsStepDefinition {
 
 
 @When("^the user navigates to benefits and coverage page under my plans in UMS site$")
-	public void navigates_benefits_and_Coverage_UMS() {
+	public void navigates_benefits_and_Coverage_UMS1() {
 		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario()
 				.getBean(PageConstants.ACCOUNT_HOME_PAGE);
 		BenefitsCoveragePage benefitsCoveragePage = accountHomePage
@@ -246,7 +248,8 @@ public class BenefitsAndCoverageUmsStepDefinition {
 					PageConstants.BENEFITS_AND_COVERAGE_PAGE,
 					benefitsCoveragePage);
 
-
+		}
+}
 
 	@Then("^the user validates plan benefits and coverage details in UMS site$")
 	public void details_validation(DataTable attributes) {
@@ -750,15 +753,15 @@ public class BenefitsAndCoverageUmsStepDefinition {
 		FormsandresourcesPage formsAndResourcesPage = accountHomePage.navigateTosortingsearchlinkUmsPage();
 	}
 
-@And("^the user validates view and documents label$")
+@And("^the user validates view and document label$")
 	public void user_validates_view_and_document_label()
 	{
 		BenefitsAndCoveragePage benefitsncoveragepage = (BenefitsAndCoveragePage) getLoginScenario()
 				.getBean(PageConstants.BENEFITS_AND_COVERAGE_PAGE);
 		
 		
-	benefitsncoveragepage.getdocuments_label();
-		benefitsncoveragepage.getview_label();
+	//benefitsncoveragepage.getdocuments_label();
+		//benefitsncoveragepage.getview_label();
 		
 	}
 	@And("^the user validates the language dropdown and the value displayed by default$")

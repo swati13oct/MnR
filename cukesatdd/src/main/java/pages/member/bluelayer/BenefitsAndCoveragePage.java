@@ -15,6 +15,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.Select;
 
 import com.google.gson.JsonObject;
 
@@ -239,13 +240,14 @@ public void clickOnDisclaimers(JSONObject benefitsandcoverageExectedJson) {
 catch (JSONException e) {
 	e.printStackTrace();
 }
-public WebElement getview_label() {
+}
+/*public WebElement getview_label() {
     return view_label;
        }
 
 public WebElement getdocuments_label() {
     return documents_lebel;
-       }
+       }*/
 
 
 
