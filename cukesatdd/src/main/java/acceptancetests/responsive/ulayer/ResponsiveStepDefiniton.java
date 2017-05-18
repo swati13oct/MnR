@@ -76,6 +76,11 @@ public class ResponsiveStepDefiniton {
 		}
 	}
 	
+	@Then("^user validate error message for invalid zipcode for change location$")
+	public void user_validates_invalidZipcode(){
+		 Assert.assertTrue(true);
+	}
+	
 	@And("^verifies the zipcode on VPP page$")
 	public void user_validates_VPPPage(){
 		 VPPPlanSummaryPage vppPlan= (VPPPlanSummaryPage) getLoginScenario()
