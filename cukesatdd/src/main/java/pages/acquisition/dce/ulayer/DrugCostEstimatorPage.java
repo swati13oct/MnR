@@ -1219,23 +1219,7 @@ public class DrugCostEstimatorPage extends UhcDriver {
 			Assert.assertTrue("There are no drugs added ", false);
 		}
 	}
-	
-	public void navigateToDCETool() throws InterruptedException {
-
-		String Current_url = driver.getCurrentUrl();
-		String NewDCEUrl;
-
-		if (driver.getCurrentUrl().contains("aarpmedicareplans")) {
-			NewDCEUrl = "https://www.team-b-aarpmedicareplans.uhc.com/content/aarpmedicareplans/en/drugcostestimatoracquisition.html";
-		} else {
-			NewDCEUrl = "https://www.team-b-uhcmedicaresolutions.uhc.com/content/uhcmedicaresolutions/en/drugcostestimatoracquisition.html";
-		}
-
-		driver.get(NewDCEUrl);
-
-		Thread.sleep(15000);
-	}
-	
+			
 	public void validateStep1Item() {
 		validateintroductorytext();
 		Assert.assertTrue("returnLink is not present", returnLink.isDisplayed());
@@ -1279,4 +1263,165 @@ public class DrugCostEstimatorPage extends UhcDriver {
 		return isPresent;
 	}
 
+	@FindBy(id = "show-pharmacy-list")
+	public WebElement step3searchButton; 
+	
+	@FindBy(xpath = ".//*[@id='zip-radios']/div[2]/label")
+	public WebElement countySelection;
+	
+	@FindBy(xpath = "//*[@id='acqsummary']/div[1]/div/h2")
+	public WebElement summary;
+
+	@FindBy(xpath = ".//*[@id='acqsummary']/div[2]/div[1]/a")
+	public WebElement drugsLink;
+
+	@FindBy(xpath = ".//*[@id='acqsummary']/div[2]/div[2]/a/p")
+	public WebElement pharmacyLink;
+
+	@FindBy(xpath = ".//*[@id='acqsummary']/div[2]/div[4]/div/a")
+	public WebElement costs;
+
+	@FindBy(xpath = ".//*[@id='acqsummary']/div[2]/div[3]/a")
+	public WebElement findAPlan;
+
+	@FindBy(id = "step3DisclaimerHome")
+	public WebElement step3DisclaimerHome;
+
+	@FindBy(id = "dce")
+	public WebElement getStarted;
+
+	@FindBy(id = "zipcode-costs")
+	public WebElement zipCodeTextBox;
+
+	@FindBy(xpath = ".//*[@id='acqsummary']/div[2]/div[3]/div[1]/a/p")
+	public WebElement findPlansButton;
+
+	@FindBy(name = "zipcode")
+	List<WebElement> counties;
+	
+	public void navigateToDCETool() throws InterruptedException {
+
+		/*String Current_url = driver.getCurrentUrl();
+		String NewDCEUrl;
+
+		if (driver.getCurrentUrl().contains("aarpmedicareplans")) {
+			NewDCEUrl = "https://www.team-b-aarpmedicareplans.uhc.com/drugcostestimatoracquisition.html#/drug-cost-estimator";
+
+			//https://member.team-b-aarpmedicareplans.uhc.com/content/dashboard/home/drug-cost-estimator.html
+		} else {
+			NewDCEUrl = "https://www.team-b-uhcmedicaresolutions.uhc.com/content/uhcmedicaresolutions/en/drugcostestimatoracquisition.html";
+		}
+
+		driver.get(NewDCEUrl);*/
+
+		getStarted.click();
+
+		Thread.sleep(15000);
+	}
+
+	public void validateSummary() {
+		try {
+			Thread.sleep(5000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		String summaryActual = summary.getText();
+		if(summaryActual.contains("Summary")){
+			Assert.assertTrue(true);
+		} else {
+			Assert.assertTrue("Summary heading does not show up",false);
+		}
+	}
+
+	public void validateDrugs() {
+		String drugActual = drugsLink.getText();
+		if(drugActual.contains("Drugs")){
+			Assert.assertTrue(true);
+		} else {
+			Assert.assertTrue("Drugs link does not show up",false);
+		}	
+	}
+
+	public void validatePharmacy() {
+		String pharmacyActual = pharmacyLink.getText();
+		if(pharmacyActual.contains("Pharmacy")){
+			Assert.assertTrue(true);
+		} else {
+			Assert.assertTrue("Pharmacy link does not show up",false);
+		}	
+
+	}
+
+	public void validateCosts() {
+		String costsActual = costs.getText();
+		if(costsActual.contains("Costs")){
+			Assert.assertTrue(true);
+		} else {
+			Assert.assertTrue("Costs link does not show up",false);
+		}	
+
+	}
+
+	public void validateFindAPlan() {
+		String findAPlanActual = findAPlan.getText();
+		if(findAPlanActual.contains("Find a Plan")){
+			Assert.assertTrue(true);
+		} else {
+			Assert.assertTrue("Find a Plan link does not show up",false);
+		}	
+
+	}
+
+	public void validateDisclaimers() {
+		String disclaimersActual = step3DisclaimerHome.getText();
+		if(disclaimersActual.contains("Disclaimer")){
+			Assert.assertTrue(true);
+		} else {
+			Assert.assertTrue("Disclaimer link does not show up",false);
+		}	
+		step3DisclaimerHome.click();
+	}
+
+	public void validateMultiCountyPopup(String zipcode, String county) {
+		zipCodeTextBox.sendKeys(zipcode);
+		findPlansButton.click();
+		/*String myWindowHandle = driver.getWindowHandle();
+		driver.switchTo().window("drugModalPharmacy");
+		if(counties.size()>1)
+		{
+			for(WebElement countyElement :counties)
+			{
+				String elementId = countyElement.getAttribute("id");
+				if(elementId.contains(county))
+				{
+					countyElement.click();
+					System.out.println("county clicked");
+					try {
+						Thread.sleep(10000);
+					} catch (InterruptedException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				}				
+			}			
+			continueButton.click();
+		}*/
+		try {
+			Thread.sleep(9000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		//To select a county
+		countySelection.click();
+		//To search for plans in that county
+		step3searchButton.click();
+		if(driver.getTitle().contains("Our Medicare Plans")){
+			Assert.assertTrue(true);
+		}
+		else{
+			Assert.assertTrue("Unable to navigate to VPP page",false);
+		}
+	}
 }
