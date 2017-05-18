@@ -216,7 +216,8 @@ public class ResponsivePlanSummary extends UhcDriver{
 		    private WebElement highOptionDental2;
 			
 //Plan Costs
-			@FindBy (xpath="//*[@id='fixTable']/tbody/tr[22]/td[1]/p")
+			//@FindBy (xpath="//*[@id='fixTable']/tbody/tr[22]/td[1]/p")
+			@FindBy (xpath=".//*[@id='fixTable']/tbody/tr[29]/td[1]/p/span")
 		    private WebElement planPremium;
 			
 			@FindBy (xpath="//*[@id='fixTable']/tbody/tr[22]/td[2]/strong[1]")
