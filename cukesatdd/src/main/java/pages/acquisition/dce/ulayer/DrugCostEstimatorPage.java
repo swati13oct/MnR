@@ -1252,7 +1252,7 @@ public class DrugCostEstimatorPage extends UhcDriver {
 	@FindBy(xpath = ".//*[@id='acqsummary']/div[2]/div[4]/div/a")
 	public WebElement costs;
 
-	@FindBy(xpath = ".//*[@id='acqsummary']/div[2]/div[3]/a")
+	@FindBy(xpath = "//a[contains(text(),'Find a Plan')]")
 	public WebElement findAPlan;
 
 	@FindBy(id = "step3DisclaimerHome")
@@ -1264,7 +1264,7 @@ public class DrugCostEstimatorPage extends UhcDriver {
 	@FindBy(id = "zipcode-costs")
 	public WebElement zipCodeTextBox;
 
-	@FindBy(xpath = ".//*[@id='acqsummary']/div[2]/div[3]/div[1]/a/p")
+	@FindBy(xpath = "//div[@id='acqsummary']/div[2]/div[3]/div/div/a/p")
 	public WebElement findPlansButton;
 
 	@FindBy(name = "zipcode")
@@ -1272,20 +1272,19 @@ public class DrugCostEstimatorPage extends UhcDriver {
 	
 	public void navigateToDCETool() throws InterruptedException {
 
-		/*String Current_url = driver.getCurrentUrl();
+		String Current_url = driver.getCurrentUrl();
 		String NewDCEUrl;
 
 		if (driver.getCurrentUrl().contains("aarpmedicareplans")) {
-			NewDCEUrl = "https://www.team-b-aarpmedicareplans.uhc.com/drugcostestimatoracquisition.html#/drug-cost-estimator";
+			NewDCEUrl = "https://www.team-b-aarpmedicareplans.uhc.com/health-plans/estimate-drug-costs.html";
 
 			//https://member.team-b-aarpmedicareplans.uhc.com/content/dashboard/home/drug-cost-estimator.html
 		} else {
 			NewDCEUrl = "https://www.team-b-uhcmedicaresolutions.uhc.com/content/uhcmedicaresolutions/en/drugcostestimatoracquisition.html";
 		}
 
-		driver.get(NewDCEUrl);*/
-
-		getStarted.click();
+		driver.get(NewDCEUrl);
+		//getStarted.click();
 
 		Thread.sleep(15000);
 	}
@@ -1357,8 +1356,6 @@ public class DrugCostEstimatorPage extends UhcDriver {
 	public void validateMultiCountyPopup(String zipcode, String county) {
 		zipCodeTextBox.sendKeys(zipcode);
 		findPlansButton.click();
-		/*String myWindowHandle = driver.getWindowHandle();
-		driver.switchTo().window("drugModalPharmacy");
 		if(counties.size()>1)
 		{
 			for(WebElement countyElement :counties)
@@ -1376,23 +1373,7 @@ public class DrugCostEstimatorPage extends UhcDriver {
 					}
 				}				
 			}			
-			continueButton.click();
-		}*/
-		try {
-			Thread.sleep(9000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		//To select a county
-		countySelection.click();
-		//To search for plans in that county
-		step3searchButton.click();
-		if(driver.getTitle().contains("Our Medicare Plans")){
-			Assert.assertTrue(true);
-		}
-		else{
-			Assert.assertTrue("Unable to navigate to VPP page",false);
+			step3searchButton.click();
 		}
 	}
 }

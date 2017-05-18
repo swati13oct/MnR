@@ -1,7 +1,7 @@
 /**
  * 
  */
-package acceptancetests.formsandresources.ulayer;
+package acceptancetests.formsandresources.Ulayer;
 
 import gherkin.formatter.model.DataTableRow;
 
