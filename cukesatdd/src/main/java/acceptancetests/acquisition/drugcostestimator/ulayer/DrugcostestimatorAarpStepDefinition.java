@@ -228,8 +228,8 @@ public class DrugcostestimatorAarpStepDefinition {
 	}
 
 	@Then("^I should see the Pharmacy search tab as a clickable element within the DCE tool$")
-	public void i_should_see_the_pharmacy_search(DataTable data) throws InterruptedException{
-		List<DataTableRow> memberAttributesRow = data.getGherkinRows();
+	public void i_should_see_the_pharmacy_search() throws InterruptedException{
+		/*List<DataTableRow> memberAttributesRow = data.getGherkinRows();
 		String drug = memberAttributesRow.get(1).getCells().get(0);
 
 		WebDriver wd = (WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
@@ -257,7 +257,7 @@ public class DrugcostestimatorAarpStepDefinition {
 		addNewDrugModal.clickonSearchButton(drug);
 		addNewDrugModal.selectDrug(drug);
 		AddDrugDetails addDrugDetails = new AddDrugDetails(wd);
-		addDrugDetails.continueAddDrugDetails();
+		addDrugDetails.continueAddDrugDetails();*/
 	}
 	@And("^I should be able to move forward or backward in the tool flow$")
 	public void i_should_be_able_to_move_forward_backward() throws InterruptedException{
@@ -354,7 +354,7 @@ public class DrugcostestimatorAarpStepDefinition {
 		WebDriver wd = (WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
 
 		DrugCostEstimatorPage dce = new DrugCostEstimatorPage(wd);
-		dce.changeUrlToNewDCEPage();
+		
 		dce.pharmacyInformation(zipcode,radius);
 	}
 
@@ -597,8 +597,8 @@ public class DrugcostestimatorAarpStepDefinition {
 	public void I_navigate_to_step2_page () throws InterruptedException
 	{
 		DrugCostEstimatorPage dce = (DrugCostEstimatorPage) getLoginScenario().getBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE);
+		
 		dce.navigateToStep2();
-
 	}
 
 	@When("^we search the pharmacy within miles zipcode and pharmacy type$")
@@ -959,11 +959,33 @@ public class DrugcostestimatorAarpStepDefinition {
 		dce.validateStep1Item();
 	}
 
-	@Then("^I should see disclaimers link at the bottom$")
-	public void I_should_see_disclaimers_link_at_the_bottom() throws InterruptedException {
+	@Then("^I should see step 1 disclaimers link at the bottom$")
+	public void I_should_see_step_1_disclaimers_link_at_the_bottom() throws InterruptedException {
 		DrugCostEstimatorPage dce = new DrugCostEstimatorPage((WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER));
 		dce.validateStep1Disclaimer();
 	}
+	
+	@Then("^I should see step 2 disclaimers link at the bottom$")
+	public void I_should_see_step_2_disclaimers_link_at_the_bottom() throws InterruptedException {
+		DrugCostEstimatorPage dce = new DrugCostEstimatorPage((WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER));
+		dce.validateStep2Disclaimer();
+	}
+	
+	@When("^I have added a drug to my drug list$")
+	public void I_have_added_a_drug_to_my_drug_list(DataTable data) throws InterruptedException {
+		List<DataTableRow> memberAttributesRow = data.getGherkinRows();
+		String drug = memberAttributesRow.get(0).getCells().get(1);
+
+		WebDriver wd = (WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
+		DrugCostEstimatorPage dce = new DrugCostEstimatorPage(wd);
+		boolean isDrugPresent = dce.isDrugPresent(drug);
+		if(!isDrugPresent){
+			dce.addDrug(drug.split(" ")[0]);
+		}
+
+		
+	}
+	
 
 }
 
