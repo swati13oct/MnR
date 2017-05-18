@@ -393,6 +393,7 @@ Examples:
 		|zipCode|county            |planType|planName 																					|
 		|90210  |Los Angeles County|MA      |AARP MedicareComplete SecureHorizons Plan 2 (HMO)  |		
 		|33713  |Pinellas County		|MA      |AARP MedicareComplete (HMO)  |
+		
 @aprilReleaseSprint5
 Scenario Outline: To validate DCE tool on plan details page
 Given the user is on the vpp portfolio page
@@ -531,6 +532,7 @@ And the user validates sticky zipcode
 Examples:
 		|zipCode|county            |planType|
 		|90210  |Los Angeles County|MA      |	
+		
 @aprilReleaseSprint3
 Scenario Outline: To validate plan details link
 Given the user is on the vpp portfolio page
