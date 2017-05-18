@@ -77,7 +77,19 @@ public class ResponsiveStepDefiniton {
 	}
 	
 	@Then("^user validate error message for invalid zipcode for change location$")
-	public void user_validates_invalidZipcode(){
+	public void user_validates_invalidZipcode(DataTable givenAttributes){
+		List<DataTableRow> memberAttributesRow = givenAttributes
+				.getGherkinRows();
+		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells()
+					.get(0), memberAttributesRow.get(i).getCells().get(1));
+		}
+
+		String zipcode = memberAttributesMap.get("Zip Code");
+		getLoginScenario().saveBean(VPPCommonConstants.ZIPCODE, zipcode);
+
 		 Assert.assertTrue(true);
 	}
 	
