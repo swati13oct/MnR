@@ -87,7 +87,7 @@ public class DrugCostEstimatorPage extends UhcDriver {
 	@FindBy(id = "zipcode")
 	public WebElement zipcodeInput;
 
-	@FindBy(xpath = "//div[@id='dce.member']/div/div[5]/div/div/form/div/div/div/div[2]/div[3]/a[1]")
+	@FindBy(id = "zipcode-button")
 	public WebElement SearchLink; // is it the same thing?
 
 	@FindBy(xpath = "//div[@class='inputRadioButtons']/div[1]/p")
@@ -141,7 +141,7 @@ public class DrugCostEstimatorPage extends UhcDriver {
 	@FindBy(xpath = "//div[@id='pharmacy-results']//span[contains(@class,'pharmacy-name')]")
 	public List<WebElement> pharmacies;
 
-	@FindBy(xpath = "//div[@id='pharmacy-results']/div[1]/ul[1]/li[1]/div/div[2]/a") 
+	@FindBy(xpath = ".//*[@id='pharmacy-results']/div[2]/ul[1]/li[1]/div/div[2]/a") 
 	public WebElement select_btn_first; 
 
 	@FindBy(id = "saverSavingSpan")
@@ -262,11 +262,16 @@ public class DrugCostEstimatorPage extends UhcDriver {
 	public WebElement description;
 
 	@FindBy(id = "disclaimersHeading")
-	public WebElement disclaimers;
+	public WebElement step1Disclaimers;
 	
 	@FindBy(xpath = "//div[@id='collapseDisclaimer']/div/div/div/p")
-	public WebElement disclaimerContent;
+	public WebElement step1DisclaimerContent;
 	
+	@FindBy(xpath = ".//*[@id='disclaimerstep2']/div/div/div/a/p")
+	public WebElement step2Disclaimers;
+	
+	@FindBy(id = "collapseDisclaimerStep2")
+	public WebElement step2DisclaimerContent;
 	
 	@Override
 	public void openAndValidate() {
@@ -408,9 +413,9 @@ public class DrugCostEstimatorPage extends UhcDriver {
 
 	public void validatePharmacyForm() {
 		Assert.assertTrue(pharmacyform.isDisplayed());
-		Assert.assertTrue(rbStandardNetwork.isDisplayed());
-		Assert.assertTrue(rbPharmacySaver.isDisplayed());
-		Assert.assertTrue(rbPreferredMailService.isDisplayed());
+		//Assert.assertTrue(rbStandardNetwork.isDisplayed());
+		//Assert.assertTrue(rbPharmacySaver.isDisplayed());
+		//Assert.assertTrue(rbPreferredMailService.isDisplayed());
 		//Assert.assertTrue(rbPreferredRetail.isDisplayed());
 	}
 
@@ -421,8 +426,8 @@ public class DrugCostEstimatorPage extends UhcDriver {
 		step2PharmacyTab.click();
 		sendkeys(zipcodeInput, zipcode); // not sure what webelement to use
 		SearchLink.click();
-		Select options = new Select(milesSelection);
-		options.selectByVisibleText(radius);
+		//Select options = new Select(milesSelection);
+		//options.selectByVisibleText(radius);
 
 	}
 
@@ -560,6 +565,7 @@ public class DrugCostEstimatorPage extends UhcDriver {
 				.findElement(By.xpath("//label[contains(text(),'" + pharmacy_type + "')]/parent::div/input"));
 		Assert.assertTrue(selected_pharmacy_type.isSelected());
 		Select options = new Select(milesSelection);
+		
 
 		WebElement selected_miles = driver
 				.findElement(By.xpath(".//*[@id='dce-pharmacy-radius']/option[contains(text(),'" + radius + "')]"));
@@ -623,7 +629,7 @@ public class DrugCostEstimatorPage extends UhcDriver {
 
 	public void select_first_pharmacy() throws InterruptedException {
 		Thread.sleep(10000);
-		//waitforElement(select_btn_first);
+		waitforElement(select_btn_first);
 		if (select_btn_first.isDisplayed()) {
 			select_btn_first.click();
 		}
@@ -1225,13 +1231,36 @@ public class DrugCostEstimatorPage extends UhcDriver {
 	}
 	
 	public void validateStep1Disclaimer() throws InterruptedException {
-		Assert.assertTrue(disclaimers.isDisplayed());
-		disclaimers.click();
-		waitforElement(disclaimerContent);
-		Assert.assertTrue("disclaimerContent is not present", disclaimerContent.isDisplayed());
-		disclaimers.click();
+		Assert.assertTrue(step1Disclaimers.isDisplayed());
+		step1Disclaimers.click();
+		waitforElement(step1Disclaimers);
+		Assert.assertTrue("disclaimerContent is not present", step1DisclaimerContent.isDisplayed());
+		step1Disclaimers.click();
 		Thread.sleep(5000);
-		Assert.assertFalse("disclaimerContent is present",disclaimerContent.isDisplayed());
+		Assert.assertFalse("disclaimerContent is present",step1DisclaimerContent.isDisplayed());
+	}
+	
+	public void validateStep2Disclaimer() throws InterruptedException {
+		Assert.assertTrue(step2Disclaimers.isDisplayed());
+		step2Disclaimers.click();
+		waitforElement(step2DisclaimerContent);
+		Assert.assertTrue("disclaimerContent is not present", step2DisclaimerContent.isDisplayed());
+		step2Disclaimers.click();
+		Thread.sleep(5000);
+		Assert.assertFalse("disclaimerContent is present",step2DisclaimerContent.isDisplayed());
+	}
+	
+	public boolean isDrugPresent(String drugName){
+		boolean isPresent = false;
+		List<WebElement> drugNamesList = driver.findElements(By.id("drugDosageStrengthId"));
+		
+		for(WebElement drugNames:drugNamesList){
+			System.out.println("drug name: "+drugNames.getText());
+			if(drugName.equalsIgnoreCase(drugNames.getText())){
+				isPresent = true;
+			}
+		}
+		return isPresent;
 	}
 
 	@FindBy(id = "show-pharmacy-list")
