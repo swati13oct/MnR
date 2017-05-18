@@ -699,17 +699,7 @@ Examples:
 		|zipCode|county         |planType	|zipCode1|
 		|02801  |Newport County	|MA 		|00000   | 
 		
-@defectFix
-Scenario Outline: To validate error message on entering invalid Zipcode
-Given the user is on the vpp portfolio page
-Then the user performs plan serach using zipcode
-		| Zip Code |<zipCode>|
-		| County   |<county> |
-Then user validate error message for invalid zipcode for change location
-| InvalidZipCode |<zipCode1>|
-Examples:
-		|zipCode|county         |planType	|zipCode1|
-		|02801  |Newport County	|MA 		|00000   | 
+
 		
 
 		
