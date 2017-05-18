@@ -233,6 +233,7 @@ public static final String OELOCAL12_HOME_PAGE_URL = "https://www."+MRScenario.e
 public static final String PEEHIP_HOME_PAGE_URL = "https://www."+MRScenario.environment+"-uhcretiree.uhc.com/peehip/home.html";
 public static final String NONCUSTOM_HOME_PAGE_URL = "https://www."+MRScenario.environment+"-uhcretiree.uhc.com/noncustomgroups/home.html";
 public static final String UNIVERSITYOFMISSOURI_HOME_PAGE_URL = "https://www."+MRScenario.environment+"-uhcretiree.uhc.com/umsystem/home.html";
+public static final String WELLSFARGO_HOME_PAGE_URL = "https://www."+MRScenario.environment+"-uhcretiree.uhc.com/wf/home.html";
 	
 	
 }

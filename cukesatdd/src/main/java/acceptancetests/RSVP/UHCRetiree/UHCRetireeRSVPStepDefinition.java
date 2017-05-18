@@ -72,6 +72,7 @@ import pages.acquisition.uhcretiree.IllinoisSiteMapPage;
 import pages.acquisition.uhcretiree.SanFranciscoHomePage;
 import pages.acquisition.uhcretiree.SanfranciscoFindaProviderPage;
 import pages.acquisition.uhcretiree.SannFranciscoSiteMapPage;
+import pages.acquisition.uhcretiree.WellsFargohomepage;
 import pages.acquisition.ulayer.LoginAssistancePage;
 import acceptancetests.atdd.data.CommonConstants;
 import acceptancetests.atdd.data.acquisition.PageConstants;
@@ -372,10 +373,94 @@ public class UHCRetireeRSVPStepDefinition {
 		}
 	}	
 	
+	@Given("^user navigates to the Wells Fargo Home Page$")
+
+	public void WellsFargohomepage() {
+		WebDriver wd = getLoginScenario().getWebDriver();
+		WellsFargohomepage wellsfargopage = new WellsFargohomepage(wd);
+		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
+
+
+		getLoginScenario().saveBean(PageConstants.WELLSFARGO_HOME_PAGE, wellsfargopage);
+
+	}
+	
+	@Then("user clicks on get started button on RSVP tracker for Wells Fargo group")
+	
+	public void RSVPWellsFargo() {
+		
+		WellsFargohomepage wellsfargopage = (WellsFargohomepage)getLoginScenario().getBean(PageConstants.WELLSFARGO_HOME_PAGE);
+		
+		
+		SalesforceSitePage salesforce = wellsfargopage.clickgetstarted();
+		
+		if(salesforce!= null){
+			getLoginScenario().saveBean(PageConstants.Salesforce_PAGE,
+					salesforce);
+			Assert.assertTrue(true);
+		} else {
+			Assert.fail(" Page not found");
+		}
+	}	
+	
+	@Given("^user navigates to the Illinios Home Page$")
+
+	public void Illinioshomepage() {
+		WebDriver wd = getLoginScenario().getWebDriver();
+		IllinoisHomePage illinois = new IllinoisHomePage(wd);
+		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
+
+
+		getLoginScenario().saveBean(PageConstants.ILLINOIS_HOME_PAGE, illinois);
+
+	}
+	
+	@Then("user clicks on get started button on RSVP tracker for Illinios group")
+	
+	public void RSVPIllinios() {
+		
+		IllinoisHomePage illinois = (IllinoisHomePage)getLoginScenario().getBean(PageConstants.ILLINOIS_HOME_PAGE);
+			
+		SalesforceSitePage salesforce = illinois.clickgetstarted();
+		
+		if(salesforce!= null){
+			getLoginScenario().saveBean(PageConstants.Salesforce_PAGE,
+					salesforce);
+			Assert.assertTrue(true);
+		} else {
+			Assert.fail(" Page not found");
+		}
+	}	
 	
 	
+	@Given("^user navigates to the Metlife Home Page$")
+
+	public void Metlifehomepage() {
+		WebDriver wd = getLoginScenario().getWebDriver();
+		MetlifeHomePage metlife = new MetlifeHomePage(wd);
+		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
+
+
+		getLoginScenario().saveBean(PageConstants.METLIFE_HOME_PAGE, metlife);
+
+	}
 	
+	@Then("user clicks on get started button on RSVP tracker for Metlife group")
 	
+	public void RSVPMetlife() {
+		
+		MetlifeHomePage metlife = (MetlifeHomePage)getLoginScenario().getBean(PageConstants.METLIFE_HOME_PAGE);
+			
+		SalesforceSitePage salesforce = metlife.clickgetstarted();
+		
+		if(salesforce!= null){
+			getLoginScenario().saveBean(PageConstants.Salesforce_PAGE,
+					salesforce);
+			Assert.assertTrue(true);
+		} else {
+			Assert.fail(" Page not found");
+		}
+	}	
 	
 		
 	}

@@ -35,3 +35,18 @@ Then user clicks on get started button on RSVP tracker for UniversityofMissouri 
 Scenario:Verify RSVP link from UAW Group Page 
 Given user navigates to the UAW Home Page
 Then user clicks on get started button on RSVP tracker for UAW group
+
+Scenario:Verify RSVP link from Wells Fargo Group Page 
+Given user navigates to the Wells Fargo Home Page
+Then user clicks on get started button on RSVP tracker for Wells Fargo group
+
+Scenario:Verify RSVP link from Illinios Group Page 
+Given user navigates to the Illinios Home Page
+Then user clicks on get started button on RSVP tracker for Illinios group
+
+Scenario:Verify RSVP link from Metlife Group Page 
+Given user navigates to the Metlife Home Page
+Then user clicks on get started button on RSVP tracker for Metlife group
+
+
+
