@@ -82,10 +82,17 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 	private WebElement pdfsectionviewlabel;
 	
 	@FindBy(xpath=".//*[@id='lang-select-2']")
-    private WebElement langdropdown;
+        private WebElement langdropdown;
 	
 	@FindBy(xpath = ".//*[@id='planBenefitsApp']/section/div/div[2]/div/form/span[2]")
 	private WebElement pdfsectiondocumentlabel;
+
+        @FindBy(xpath = ".//*[@id='planBenefitsApp']/div")
+	private WebElement vassection;
+
+	@FindBy(xpath = ".//*[@id='planBenefitsApp']/div/div/div/div/div[2]/a")
+	private WebElement learnmorebutton;
+	
 
 	public BenefitsAndCoveragePage(WebDriver driver) {
 		super(driver);
@@ -345,5 +352,33 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 		Select langdropdwn = new Select(langdropdown);
 		langdropdwn.selectByVisibleText(language);
 	}	
+
+	public void vasSection() {
+
+		try {
+			validate(vassection);
+			} catch (Exception e) {
+			System.out.println("Elements is not found ...");
+		}
+	}
+		public void clickOnLearnMore() {
+			// TODO Auto-generated method stub
+			validate(learnmorebutton);
+			learnmorebutton.click();
+			try {
+				Thread.sleep(10000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		public ValueAddedServicepage navigateToValueAddService() { 
+			//learnmorebutton.click();
+			if (this.driver.getTitle().equalsIgnoreCase("My Benefits & Coverage")) {
+			return new ValueAddedServicepage(driver);
+			}
+            return null;
+			
+	}
 
 }

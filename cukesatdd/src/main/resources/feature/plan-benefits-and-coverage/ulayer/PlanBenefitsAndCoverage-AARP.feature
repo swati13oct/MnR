@@ -1041,3 +1041,21 @@ Feature: To test plan benefits and Coverage on AARP site for Federal members
       | planType | language | 
       | SHIP     | SPANISH  |  
       | SHIP     | CHINESE  |
+@Vassection
+  Scenario Outline: Verify Vas section is in place on Benefits and Coverage page
+    Given registered AMP with following details for plan benefits and coverage flow in AARP site
+      | Plan Type      | <planType>      |
+    When the user view forms and resources in AARP site
+    Then the user view benefits and coverage in AARP site
+    And the user validates the content on benefits and coverage page
+    And the user validates the Vas section on benefits and coverage page
+    And the user clicks on Learn More button
+    And the user validate Value Add Service page 
+    And the user validates Nurse Health line section
+    And the user validates SilverSneaker section 
+    And the user validates My Care Path section
+    And the user validates Vision Discount program section
+      Examples:
+      | planType | copayCategory |
+      |SHIP      | NON LIS       |
+##q1_apr_ship121

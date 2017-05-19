@@ -74,6 +74,8 @@ public class CommonConstants {
 
 	public static final String BENEFITS_AND_COVERAGE_PDP_NONLIS_NONUS_PAGE_DATA = "planbenefitsandcoveragenonlisnotusother.json";
 
+	public static final String VALUE_ADDED_SERVICE_PAGE_DATA = "valueaddedservice.json";
+	
 	public static final String BENEFITS_AND_COVERAGE_PAGE_DATA = "benefitsandcoveragelisnonlis.json";
 	
 	

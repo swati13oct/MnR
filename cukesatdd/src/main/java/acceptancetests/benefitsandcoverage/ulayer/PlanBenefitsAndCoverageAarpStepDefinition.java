@@ -605,11 +605,67 @@ public class PlanBenefitsAndCoverageAarpStepDefinition {
 		getLoginScenario().saveBean(PlanBenefitsAndCoverageCommonConstants.Language,language);
 		benefitsCoveragePage.validate_langdropdown_select(language);
 	}
+	@And("^the user validates the Vas section on benefits and coverage page$")
+	public void validate_VAS_section()
+	{
+		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario().getBean(
+				PageConstants.BENEFITS_COVERAGE_PAGE);
+		benefitsCoveragePage.vasSection();
+	}
+	@And("^the user clicks on Learn More button$")
+	public void click_learn_section()
+	{
+		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario().getBean(
+				PageConstants.BENEFITS_COVERAGE_PAGE);
+		benefitsCoveragePage.clickOnLearnMore();
+	}
+	
+	@And("^the user validate Value Add Service page$")
+	public void validate_Value_Add_page()
+	{
+		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario().getBean(
+				PageConstants.BENEFITS_COVERAGE_PAGE);
+		ValueAddedServicepage valueaddedservices= benefitsCoveragePage.navigateToValueAddService();
+		if (valueaddedservices!= null) {
+		getLoginScenario().saveBean(PageConstants.VALUE_ADDED_SERVICES, valueaddedservices);
+		}
+ }
+	
+	@And("^the user validates Nurse Health line section$")
+	public void validate_nurse_health_line()
+	{
+		ValueAddedServicepage valueaddedservices = (ValueAddedServicepage) getLoginScenario().getBean(
+				PageConstants.VALUE_ADDED_SERVICES);
+		valueaddedservices.validatenurseHealthLine();
+	}
+	
 
+	@And("^the user validates SilverSneaker section$")
+	public void validate_silversneaker_section()
+	{
+		ValueAddedServicepage valueaddedservices = (ValueAddedServicepage) getLoginScenario().getBean(
+				PageConstants.VALUE_ADDED_SERVICES);
+		valueaddedservices.validatesilverSneaker();
+	}
+	@And("^the user validates My Care Path section$")
+	public void validate_my_care_path()
+	{
+		ValueAddedServicepage valueaddedservices = (ValueAddedServicepage) getLoginScenario().getBean(
+				PageConstants.VALUE_ADDED_SERVICES);
+		valueaddedservices.validatemyCarePath();
+	}
+	@And("^the user validates Vision Discount program section$")
+	public void validate_vision_discount_program()
+	{
+		ValueAddedServicepage valueaddedservices = (ValueAddedServicepage) getLoginScenario().getBean(
+				PageConstants.VALUE_ADDED_SERVICES);
+		valueaddedservices.validatevisionDiscount();
+	}
 	/*@After
 	public void tearDown() {
 
 		WebDriver wd = (WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
 		wd.quit();
 	}*/
-}
+	
+	}
