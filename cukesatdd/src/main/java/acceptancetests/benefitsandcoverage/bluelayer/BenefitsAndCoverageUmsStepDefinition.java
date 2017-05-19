@@ -802,6 +802,26 @@ public void user_clicks_contactusPagebackToPreviousPage(){
 	accountHomePage.contactusPagebackToPreviousPage();
 }
 
+@Given("^the user lands on the disclaimer UHC site login page$")
+public void user_lands_on_uhc_site(){
+	WebDriver wd = getLoginScenario().getWebDriver();
+
+	AccountHomePage accountHomePage1 = new AccountHomePage(wd);
+
+	AccountHomePage accountHomePage2 =accountHomePage1.navigateToUHCDisclaimerPage();
+	getLoginScenario().saveBean(PageConstants.MYUHC_DISCLAIMER_PAGE,
+			accountHomePage2);
+	
+	}
+
+
+@When("^the user clicks on uhc disclaimer page back to previous page$")
+public void user_clicks_uhc_disclaimerbackToPreviousPage(){
+	AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario()
+			.getBean(PageConstants.MYUHC_DISCLAIMER_PAGE);
+	accountHomePage.disclaimerbackToPreviousPage();
+}
+
 
 
 	

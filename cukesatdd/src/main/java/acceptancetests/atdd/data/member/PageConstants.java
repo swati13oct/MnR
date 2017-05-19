@@ -122,7 +122,6 @@ public class PageConstants {
 	public static final String RALLY_TOOL_PAGE = "rallytool";
 
 	public static final String ACQUISITION_HOME_PAGE = "acquisitionhomepage";
-
 	
 
 	public static final String VPP_PLAN_SUMMARY_PAGE = "plansummaryPage";
@@ -143,7 +142,7 @@ public class PageConstants {
 	
 	public static final String MYPCP_DISCLAIMER_PAGE = "pcpDisclaimerPage";
 	
-	
+	public static final String MYUHC_DISCLAIMER_PAGE = "uhcDisclaimerPage";	
 	
 	public static final String MYPCP_ABOUT_US_PAGE = "pcpAboutUsPage";
 	

@@ -200,6 +200,10 @@ public class AccountHomePage extends UhcDriver {
 	@FindBy(xpath = "(.//a)[1]")
 	private WebElement aboutUsPCPPagebackToPreviousPage;
 	
+	@FindBy(xpath = "(.//a)[1]") 
+	private WebElement uhcdisclaimerbackToPreviousPage; 
+
+	
 	@FindBy(xpath = "//*[@id='phr_widget_7_box']/div[9]/p/a")
 	private WebElement preferdPharmacyBenefitLink;
 	
@@ -1160,9 +1164,24 @@ public FormsandresourcesPage navigateToMydocumentUmsPage() {
 		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 		return null;
 	}
+	
+	public AccountHomePage navigateToUHCDisclaimerPage(){
+		driver.navigate().to("https://member."+MRScenario.environment+"-uhcmedicaresolutions.uhc.com/content/uhcm/guest/newdisclaimers.html.html");
+	try{
+		Alert alert = driver.switchTo().alert();
+		alert.accept();
+	}
+		
+	catch(Exception e)
+	{
+		
+	}
+			System.out.println("title  "+driver.getTitle());
+		if(driver.getTitle().equalsIgnoreCase("newdisclaimers")){
+			return new AccountHomePage(driver);
+			}
+			return null;
 
-	
-	
-	
+	}
 	
 }
