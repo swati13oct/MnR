@@ -1,4 +1,4 @@
-package acceptancetests.vpp.ulayer;
+package acceptancetests.vpp.Ulayer;
 
 import gherkin.formatter.model.DataTableRow;
 
@@ -91,7 +91,7 @@ public class VppAarpStepDefinition {
 			getLoginScenario().saveBean(PageConstants.VPP_PLAN_SUMMARY_PAGE,
 					plansummaryPage);
 			/* Get expected data */
-			String fileName = "vppPlanSummary";
+			/*String fileName = "vppPlanSummary";
 			String directory = CommonConstants.ACQUISITION_EXPECTED_DIRECTORY
 					+ File.separator + CommonConstants.SITE_ULAYER
 					+ File.separator + VPPCommonConstants.VPP_PLAN_FLOW_NAME
@@ -103,11 +103,11 @@ public class VppAarpStepDefinition {
 					VPPCommonConstants.VPP_PLAN_SUMMARY_EXPECTED,
 					planSummaryExpectedJson);
 
-			/* Get actual data */
+			 Get actual data 
 			JSONObject planSummaryActualJson = plansummaryPage.vppPlanSummaryJson;
 			getLoginScenario().saveBean(
 					VPPCommonConstants.VPP_PLAN_SUMMARY_ACTUAL,
-					planSummaryActualJson);
+					planSummaryActualJson);*/
 		}
 	}
 
@@ -1667,5 +1667,27 @@ System.out.println("planSummaryExpectedJson---->"
 		VPPPlanSummaryPage vppPlanSummaryPage = (VPPPlanSummaryPage) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 		vppPlanSummaryPage.validateReactiveChat();
+	}
+
+@And("^the user validates the view plan details link displayed for the selected plan$")
+	public void validates_planDetails_links_AARP(DataTable givenAttributes){
+		List<DataTableRow> memberAttributesRow = givenAttributes
+				.getGherkinRows();
+		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells()
+					.get(0), memberAttributesRow.get(i).getCells().get(1));
+		}
+
+		String planName = memberAttributesMap.get("Plan Name");
+		getLoginScenario().saveBean(VPPCommonConstants.PLAN_NAME, planName);
+		
+		String planType = (String) getLoginScenario().getBean(VPPCommonConstants.PLAN_TYPE);
+
+		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);	
+		
+		plansummaryPage.validateViewPlanDetailsLink(planType,planName);
 	}
 }
