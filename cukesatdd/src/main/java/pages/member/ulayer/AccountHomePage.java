@@ -884,5 +884,22 @@ public class AccountHomePage extends UhcDriver {
 		radioidLink.click();
 		return null;
 	}
+	
+	public OrderplanmaterialsPage navigateToValidateRadioAndSubmitButtonInAarpPage() {
+		driver.manage().timeouts().implicitlyWait(600, TimeUnit.SECONDS);
+		radioidLink.click();
+		driver.manage().timeouts().implicitlyWait(600, TimeUnit.SECONDS);
+		submitLink.click();
+		driver.manage().timeouts().implicitlyWait(600, TimeUnit.SECONDS);
+		return null;
+	}
+
+	public OrderplanmaterialsPage navigateToValidateOrderConfirmationInAarpPage() {
+		driver.manage().timeouts().implicitlyWait(600, TimeUnit.SECONDS);
+		addordermaterialLink.click();
+		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+		return null;
+	}
+
 
 }

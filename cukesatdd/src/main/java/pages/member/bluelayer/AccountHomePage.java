@@ -224,6 +224,12 @@ public class AccountHomePage extends UhcDriver {
 	@FindBy(xpath = "//span[text()='SUBMIT ORDER']")
 	private WebElement submitOrderbtn;
 	
+	@FindBy(xpath = "html/body/div[2]/div/div/main/div/section[1]/div/div/div/form/button")
+	private WebElement submitLink;
+	
+	@FindBy(linkText = "ORDER ADDITIONAL MATERIALS")
+	private WebElement addordermaterialLink;
+	
 	private PageData myAccountHome;
 
 	public JSONObject accountHomeJson;
@@ -1138,6 +1144,30 @@ public FormsandresourcesPage navigateToMydocumentUmsPage() {
 		submitOrderbtn.click();
 		return null;
 	}
+	
+	public OrderplanmaterialsPage navigateToValidateRadioButtonPage() {
+		radiokitLink.click();
+		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+		radioidLink.click();
+		return null;
+	}
+
+	public OrderplanmaterialsPage navigateToValidateOrderConfirmationPage() {
+		driver.manage().timeouts().implicitlyWait(600, TimeUnit.SECONDS);
+		radioidLink.click();
+		driver.manage().timeouts().implicitlyWait(600, TimeUnit.SECONDS);
+		submitLink.click();
+		driver.manage().timeouts().implicitlyWait(600, TimeUnit.SECONDS);
+		return null;
+	}
+
+	public OrderplanmaterialsPage navigateToValidateOrderAdditionalMaterialPage() {
+		driver.manage().timeouts().implicitlyWait(600, TimeUnit.SECONDS);
+		addordermaterialLink.click();
+		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+		return null;
+	}
+
 	
 	
 	

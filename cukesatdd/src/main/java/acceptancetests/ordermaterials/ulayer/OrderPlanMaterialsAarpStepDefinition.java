@@ -198,6 +198,25 @@ public class OrderPlanMaterialsAarpStepDefinition {
 		OrderplanmaterialsPage orderPlanMaterialsPage = accountHomePage
 				.navigateToValidateRadioButtonInAarpPage();
 	}
+	
+	@Then("^the user validate radio button and click on submit button for PDP member in AARP site$")
+	public void validate_radio_and_submit_button_pdp_in_AARP_site() {
+		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario()
+				.getBean(PageConstants.ACCOUNT_HOME_PAGE);
+		OrderplanmaterialsPage orderPlanMaterialsPage = accountHomePage
+				.navigateToValidateRadioAndSubmitButtonInAarpPage();
+	}
+
+
+
+	@And("^the user validate order additional material and click to add other order additional material in AARP site$")
+	public void validate_add_order_additional_material_for_pdp_in_AARP_site() {
+		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario()
+				.getBean(PageConstants.ACCOUNT_HOME_PAGE);
+		OrderplanmaterialsPage orderPlanMaterialsPage = accountHomePage
+				.navigateToValidateOrderConfirmationInAarpPage();
+	}
+
 
 	/*@After
 	public void tearDown() {

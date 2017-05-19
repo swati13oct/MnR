@@ -78,21 +78,21 @@ public class OrderPlanMaterialsUmsStepDefinition {
 
 		Map<String, String> loginCreds = loginScenario
 				.getUMSMemberWithDesiredAttributes(desiredAttributes);
-		String userName = "q1_apr_grp324";
-		String pwd = "Password@1";
-		/*if (loginCreds == null) {
+		String userName = null;
+		String pwd = null;
+		if (loginCreds == null) {
 			// no match found
 			System.out.println("Member Type data could not be setup !!!");
 			Assert.fail("unable to find a " + desiredAttributes + " member");
 		} else {
 			userName = loginCreds.get("user");
-			pwd = loginCreds.get("pwd");*/
+			pwd = loginCreds.get("pwd");
 			System.out.println("User is..." + userName);
 			System.out.println("Password is..." + pwd);
 			getLoginScenario()
 					.saveBean(LoginCommonConstants.USERNAME, userName);
 			getLoginScenario().saveBean(LoginCommonConstants.PASSWORD, pwd);
-		//}
+		}
 
 		WebDriver wd = getLoginScenario().getWebDriver();
 
@@ -272,6 +272,41 @@ public class OrderPlanMaterialsUmsStepDefinition {
 		OrderplanmaterialsPage orderPlanMaterialsPage = accountHomePage
 				.navigateToValidateRadioButtonPage();		
 	}
+	
+	@Then("^the user validate radio button and click on submit button for MA and SSUP member in UHC site$")
+	public void validate_radio_and_submit_button_for_ma_ssup_member_in_Ums_site() {
+		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario()
+				.getBean(PageConstants.ACCOUNT_HOME_PAGE);
+		OrderplanmaterialsPage orderPlanMaterialsPage = accountHomePage
+				.navigateToValidateOrderConfirmationPage();		
+	}
+
+
+
+	@And("^the user validate order additional material and click to add other order additional material in UHC site$")
+	public void validate_add_order_additional_material_in_Ums_site() {
+		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario()
+				.getBean(PageConstants.ACCOUNT_HOME_PAGE);
+		OrderplanmaterialsPage orderPlanMaterialsPage = accountHomePage
+				.navigateToValidateOrderAdditionalMaterialPage();		
+	}
+	
+	@Then("^the user validate radio button and click on submit button for PDP member in UHC site$")
+	public void validate_radio_and_submit_button_for_pdp_member_in_Ums_site() {
+		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario()
+				.getBean(PageConstants.ACCOUNT_HOME_PAGE);
+		OrderplanmaterialsPage orderPlanMaterialsPage = accountHomePage
+				.navigateToValidateOrderConfirmationPage();		
+	}
+	
+	@Then("^the user validate radio button and click on submit button for MAPD and MA member in UHC site$")
+	public void validate_radio_and_submit_button_for_mapd_ma_indi_member_in_Ums_site() {
+		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario()
+				.getBean(PageConstants.ACCOUNT_HOME_PAGE);
+		OrderplanmaterialsPage orderPlanMaterialsPage = accountHomePage
+				.navigateToValidateOrderConfirmationPage();		
+	}	
+
 
 
 }

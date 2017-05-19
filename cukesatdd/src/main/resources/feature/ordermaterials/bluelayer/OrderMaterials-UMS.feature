@@ -123,3 +123,45 @@ And the user validate radio button for MAPD member in UHC site
 Examples:
   | planType   | memberType     | 
   | MAPD       |  Individual    |
+  
+  
+@radiobuttonvalidationmaandssup
+Scenario Outline:Verify order plan materials in UHC site for radio button validation for ma and ssup member
+Given registered UHC member for order plan materials with following attributes
+	| Plan Type    | <planType>   |
+	| Member Type  | <memberType> | 
+When the user views order materials in UHC site
+Then the user validate radio button and click on submit button for MA and SSUP member in UHC site
+And the user validate order additional material and click to add other order additional material in UHC site 
+
+Examples:
+  | planType   | memberType     | 
+  | MA         |  Group         |
+  
+  
+@radiobuttonvalidationpdpgrp
+Scenario Outline:Verify order plan materials in UHC site for radio button validation for pdp member
+Given registered UHC member for order plan materials with following attributes
+	| Plan Type    | <planType>   |
+	| Member Type  | <memberType> | 
+When the user views order materials in UHC site
+Then the user validate radio button and click on submit button for PDP member in UHC site
+And the user validate order additional material and click to add other order additional material in UHC site 
+
+Examples:
+  | planType   | memberType     | 
+  | PDP         |  Group         |
+  
+  
+@radiobuttonvalidationmapdandmaindi
+Scenario Outline:Verify order plan materials in UHC site for radio button validation for mapd and ma member
+Given registered UHC member for order plan materials with following attributes
+	| Plan Type    | <planType>   |
+	| Member Type  | <memberType> | 
+When the user views order materials in UHC site
+Then the user validate radio button and click on submit button for MAPD and MA member in UHC site
+And the user validate order additional material and click to add other order additional material in UHC site 
+
+Examples:
+  | planType   | memberType     | 
+  | MAPD       |  Individual         |
