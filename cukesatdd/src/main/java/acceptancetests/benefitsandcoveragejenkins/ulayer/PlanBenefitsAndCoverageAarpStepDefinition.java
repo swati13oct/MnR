@@ -599,7 +599,7 @@ public class PlanBenefitsAndCoverageAarpStepDefinition {
 		benefitsCoveragePage.validatelabels();
 	}
 	
-	@And("^the user validates the language dropdown and the value displayed by default$")
+	@And("^the user validates the language dropdown and the value displayed by default and selects new value in dropdown successfully$")
 	public void validate_languagedropdown(DataTable givenAttributes)
 	{
 		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario().getBean(
@@ -617,11 +617,7 @@ public class PlanBenefitsAndCoverageAarpStepDefinition {
 		benefitsCoveragePage.validate_langdropdown_select(language);
 	}
 
-
-	/*@After
-	public void tearDown() {
-
-		WebDriver wd = (WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
-		wd.quit();
-	}*/
+	
+	
+	
 }

@@ -1031,15 +1031,13 @@ Feature: To test plan benefits and Coverage on AARP site for Federal members
   Scenario Outline: Verify PDF section is in place on Benefits and Coverage page
     Given registered AMP with following details for plan benefits and coverage flow in AARP site
       | Plan Type      | <planType>      |
-      | Copay Category | <copayCategory> |
     When the user view jenkins benefits and coverage in AARP site
     And the user validates the content on benefits and coverage page
     And the user validates view and documents label
-    And the user validates the language dropdown and the value displayed by default
+    And the user validates the language dropdown and the value displayed by default and selects new value in dropdown successfully
       | Language      | <language>      |
-    And the user selects new value in dropdown successfully
-    
-     Examples: 
+
+    Examples: 
       | planType | language | 
       | SHIP     | SPANISH  |  
       | SHIP     | CHINESE  |
