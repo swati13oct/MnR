@@ -1145,13 +1145,6 @@ public FormsandresourcesPage navigateToMydocumentUmsPage() {
 		return null;
 	}
 	
-	public OrderplanmaterialsPage navigateToValidateRadioButtonPage() {
-		radiokitLink.click();
-		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
-		radioidLink.click();
-		return null;
-	}
-
 	public OrderplanmaterialsPage navigateToValidateOrderConfirmationPage() {
 		driver.manage().timeouts().implicitlyWait(600, TimeUnit.SECONDS);
 		radioidLink.click();
