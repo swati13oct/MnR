@@ -14,7 +14,7 @@ import cucumber.junit.Cucumber;
 @Cucumber.Options(glue = { "atdd.framework","acceptancetests.ordermaterials.bluelayer" }, 
 		features = { "feature/ordermaterials/bluelayer" }, 
 		format = {
-				"pretty", "html:reports/test-report","json:target/cucumber.json"}, tags ={"@radiobuttonvalidationmaandssup"})
+				"pretty", "html:reports/test-report","json:target/cucumber.json"}, tags ={"@radiobuttonvalidationmapdandmaindi"})
 
 public class RunMRAtddTestOrderPlanMaterials {
 	
