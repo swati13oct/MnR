@@ -625,7 +625,7 @@ Then the user validates prescription drug benefits
       |tier1 Plan2|<tier1Plan2>|      
 Examples:
 		|zipCode|county            |planType|deducPlan1	|deducPlan2	|tier1Plan1		|tier1Plan2	|
-		|90210  |Los Angeles County|MA      |$0  		|$0	  	|$0.00 co-pay		|$4.00 co-pay	|
+		|90210  |Los Angeles County|MA      |$0  		|$0	  	|$4.00 co-pay		|$0.00 co-pay	|
 
 @OptionalServices
 Scenario Outline: To validate Optional Services in compare page
