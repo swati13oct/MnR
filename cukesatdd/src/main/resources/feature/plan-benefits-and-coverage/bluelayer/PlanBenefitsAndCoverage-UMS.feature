@@ -725,6 +725,11 @@ Scenario: Verify aboutus page in UMS site
 Given the user lands on the aboutus page in UMS site
 When the user clicks on aboutus page back to previous page
 
+@UHCdisclaimerpage       
+Scenario: Verify disclaimer text page in UHC site
+Given the user lands on the disclaimer UHC site login page
+When the user clicks on uhc disclaimer page back to previous page
+
 
 
 
