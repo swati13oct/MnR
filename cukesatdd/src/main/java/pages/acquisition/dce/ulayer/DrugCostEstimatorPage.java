@@ -273,6 +273,31 @@ public class DrugCostEstimatorPage extends UhcDriver {
 	@FindBy(id = "collapseDisclaimerStep2")
 	public WebElement step2DisclaimerContent;
 	
+	@FindBy(xpath = "//nav/ul[@class='uhc-pagination']/li[1]")
+	public WebElement pagination_text;
+	
+	@FindBy(xpath = "//nav/ul[@class='uhc-pagination']/li[2][@class='disabled']")
+	public WebElement leftPaginationDisabled;
+	
+	@FindBy(xpath = "//nav/ul[@class='uhc-pagination']/li[3][@class='disableGreyRgtIcon']")
+	public WebElement rightPaginationDisabled;
+	
+	@FindBy(xpath = "//nav/ul[@class='uhc-pagination']/li[3]/a")
+	public WebElement rightPaginationArrow;
+	
+	@FindBy(xpath = "//nav/ul[@class='uhc-pagination']/li[2]/a")
+	public WebElement leftPaginationArrow;
+	
+	@FindBy(xpath = "//li[1]//div[@id='pharInfo']/img")
+	public WebElement mapIcon;
+	
+	@FindBy(id = "ascOrderPharmacySortId")
+	public WebElement AtoZtab;
+	
+	@FindBy(id = "descOrderPharmacySortId")
+	public WebElement ZtoAtab;
+	
+	
 	@Override
 	public void openAndValidate() {
 
@@ -306,10 +331,10 @@ public class DrugCostEstimatorPage extends UhcDriver {
 		addDrug.click();
 		System.out.println("Current Page title :: " + driver.getTitle());
 
-		if (driver.getTitle().equalsIgnoreCase("drugcostestimatoracquisition")) {
+	//	if (driver.getTitle().equalsIgnoreCase("drugcostestimatoracquisition")) {
 			return new AddNewDrugModal(driver);
-		}
-		return null;
+		//}
+		//return null;
 	}
 
 	public void changeUrlToNewDCEPage() throws InterruptedException {
@@ -582,7 +607,7 @@ public class DrugCostEstimatorPage extends UhcDriver {
 
 	public void selectPharmacyType(String pharmacy) throws InterruptedException {
 		
-		WebElement rbtn = driver.findElement(By.xpath(".//*[@id='pharmacy-type']/div/label/p[contains(text(),'" + pharmacy + "')]"));
+		WebElement rbtn = driver.findElement(By.xpath(".//*[@id='pharmacy-type']/div/label//p[contains(text(),'" + pharmacy + "')]"));
 
 		rbtn.isDisplayed();
 		if (!rbtn.isSelected()) {
@@ -1281,7 +1306,7 @@ public class DrugCostEstimatorPage extends UhcDriver {
 	@FindBy(xpath = ".//*[@id='acqsummary']/div[2]/div[4]/div/a")
 	public WebElement costs;
 
-	@FindBy(xpath = "//a[contains(text(),'Find a Plan')]")
+	@FindBy(xpath = ".//*[@id='acqsummary']/div[2]/div[3]/a")
 	public WebElement findAPlan;
 
 	@FindBy(id = "step3DisclaimerHome")
@@ -1293,7 +1318,7 @@ public class DrugCostEstimatorPage extends UhcDriver {
 	@FindBy(id = "zipcode-costs")
 	public WebElement zipCodeTextBox;
 
-	@FindBy(xpath = "//div[@id='acqsummary']/div[2]/div[3]/div/div/a/p")
+	@FindBy(xpath = ".//*[@id='acqsummary']/div[2]/div[3]/div[1]/a/p")
 	public WebElement findPlansButton;
 
 	@FindBy(name = "zipcode")
@@ -1301,19 +1326,20 @@ public class DrugCostEstimatorPage extends UhcDriver {
 	
 	public void navigateToDCETool() throws InterruptedException {
 
-		String Current_url = driver.getCurrentUrl();
+		/*String Current_url = driver.getCurrentUrl();
 		String NewDCEUrl;
 
 		if (driver.getCurrentUrl().contains("aarpmedicareplans")) {
-			NewDCEUrl = "https://www.team-b-aarpmedicareplans.uhc.com/health-plans/estimate-drug-costs.html";
+			NewDCEUrl = "https://www.team-b-aarpmedicareplans.uhc.com/drugcostestimatoracquisition.html#/drug-cost-estimator";
 
 			//https://member.team-b-aarpmedicareplans.uhc.com/content/dashboard/home/drug-cost-estimator.html
 		} else {
 			NewDCEUrl = "https://www.team-b-uhcmedicaresolutions.uhc.com/content/uhcmedicaresolutions/en/drugcostestimatoracquisition.html";
 		}
 
-		driver.get(NewDCEUrl);
-		//getStarted.click();
+		driver.get(NewDCEUrl);*/
+
+		getStarted.click();
 
 		Thread.sleep(15000);
 	}
@@ -1385,6 +1411,8 @@ public class DrugCostEstimatorPage extends UhcDriver {
 	public void validateMultiCountyPopup(String zipcode, String county) {
 		zipCodeTextBox.sendKeys(zipcode);
 		findPlansButton.click();
+		/*String myWindowHandle = driver.getWindowHandle();
+		driver.switchTo().window("drugModalPharmacy");
 		if(counties.size()>1)
 		{
 			for(WebElement countyElement :counties)
@@ -1402,7 +1430,138 @@ public class DrugCostEstimatorPage extends UhcDriver {
 					}
 				}				
 			}			
-			step3searchButton.click();
+			continueButton.click();
+		}*/
+		try {
+			Thread.sleep(9000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		//To select a county
+		countySelection.click();
+		//To search for plans in that county
+		step3searchButton.click();
+		if(driver.getTitle().contains("Our Medicare Plans")){
+			Assert.assertTrue(true);
+		}
+		else{
+			Assert.assertTrue("Unable to navigate to VPP page",false);
 		}
 	}
-}
+	
+	
+	public int getPaginationText()
+	{   
+		String pgText = pagination_text.getText();
+		int page = Integer.parseInt(pgText.substring(9).trim());
+		return page;
+	}
+	
+	
+	public void validatePaginationPresent()
+	{
+		waitforElement(pagination_text);
+	}
+	
+	public void validatePagination() throws InterruptedException
+	{ int pagesize= getPaginationText();
+	    Assert.assertTrue("Initially left pagination arrow is not disabled", leftPaginationDisabled.isDisplayed());
+		for (int i=0;i<pagesize;i++)
+		{
+			rightPaginationArrow.click();
+			Thread.sleep(4000);
+		}
+		Assert.assertTrue("After reaching the last pagination right arrow is not disabled", rightPaginationDisabled.isDisplayed());	
+		
+		for (int i=0;i<pagesize;i++)
+		{
+			leftPaginationArrow.click();
+			Thread.sleep(4000);
+		}
+		Assert.assertTrue("After moving to first pagination left arrow is not disabled", leftPaginationDisabled.isDisplayed());
+		
+	
+	}
+	
+	public void validateMapIcon()
+	{
+		List<WebElement> mapNumber = driver.findElements(By.id("pharmacyIndex"));
+		waitforElement(mapIcon);
+
+      if(mapIcon.getAttribute("src").contains("images/icon-svgs/mapmarker-pin-blue.svg"))
+      {
+    	  System.out.println("-----------mapIcon.getAttribute()-----" + mapIcon.getAttribute("src"));
+    	  Assert.assertTrue(true);
+      }
+       else Assert.assertTrue(false);
+
+
+		Assert.assertTrue("1 map number is not present",mapNumber.get(0).getText().contains("1"));
+		System.out.println("----mapNumber.get(0).getText()--------" + mapNumber.get(0).getText());
+		Assert.assertTrue("2 map number is not present",mapNumber.get(1).getText().contains("2"));
+		System.out.println("----mapNumber.get(1).getText()--------" + mapNumber.get(1).getText());
+		Assert.assertTrue("3 map number is not present",mapNumber.get(2).getText().contains("3"));
+		System.out.println("----mapNumber.get(2).getText()--------" + mapNumber.get(2).getText());
+		Assert.assertTrue("4 map number is not present",mapNumber.get(3).getText().contains("4"));
+		System.out.println("----mapNumber.get(3).getText()--------" + mapNumber.get(3).getText());
+	}
+	
+	public void validateNearestPharOrder() throws InterruptedException
+	{
+		Thread.sleep(5000);
+		List<WebElement> miles = driver.findElements(By.xpath("//div[@id='pharMileId']/div[2]/span"));
+		if(Float.parseFloat(miles.get(0).getText().substring(0,4).trim()) <= Float.parseFloat(miles.get(1).getText().substring(0,4).trim()) && Float.parseFloat(miles.get(1).getText().substring(0,4).trim())<=Float.parseFloat(miles.get(2).getText().substring(0,4).trim()))
+		{
+			Assert.assertTrue(true);
+		}
+		else
+			Assert.assertTrue("Not in Nearest Order",false);
+     }
+
+	public int verboseCompare(String s1, String s2){
+        System.out.println("Comparing \"" + s1 + "\" to \"" + s2 + "\"...");
+         int comparisonResult = s1.compareTo(s2);
+       return comparisonResult;
+    }
+	
+	public void validateAtoZorder()
+	{
+		List<WebElement> pharmnames = driver.findElements(By.xpath("//div[@id='pharInfoId']/span"));
+		int comparisonResult = verboseCompare(pharmnames.get(0).getText(), pharmnames.get(1).getText());
+		if(comparisonResult < 0)
+		{
+			Assert.assertTrue( true);
+		}
+		else
+			Assert.assertTrue("Not following A to Z order",false);
+	}
+	public void validateZtoAorder()
+	{
+		List<WebElement> pharmnames = driver.findElements(By.xpath("//div[@id='pharInfoId']/span"));
+		int comparisonResult = verboseCompare(pharmnames.get(0).getText(), pharmnames.get(1).getText());
+		if(comparisonResult > 0)
+		{
+			Assert.assertTrue(true);
+		}
+		else
+			Assert.assertTrue("Not following Z to A order",false);
+	}
+	
+	
+	
+	public void clickAtoZtab()
+	{
+		AtoZtab.click();
+	}
+
+	public void clickZtoAtab()
+	{
+		ZtoAtab.click();
+		
+	}
+	
+	
+	
+	}
+
