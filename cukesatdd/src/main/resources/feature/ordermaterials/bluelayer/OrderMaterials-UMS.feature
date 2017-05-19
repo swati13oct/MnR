@@ -165,3 +165,17 @@ And the user validate order additional material and click to add other order add
 Examples:
   | planType   | memberType     | 
   | MAPD       |  Individual         |
+  
+  
+@radiobuttonvalidationmapdandssrdgrp
+Scenario Outline:Verify order plan materials in UHC site for radio button validation for mapd and ssrd member
+Given registered UHC member for order plan materials with following attributes
+	| Plan Type    | <planType>   |
+	| Member Type  | <memberType> | 
+When the user views order materials in UHC site
+Then the user validate radio button and click on submit button for MAPD and SSRD member in UHC site
+And the user validate order additional material and click to add other order additional material in UHC site 
+
+Examples:
+  | planType   | memberType     | 
+  | MAPD       |  Group         |
