@@ -122,3 +122,50 @@ Examples:
 	| zipcode | county        |
 	| 80516   | Weld County   |
 
+#----------------------------------
+@acq_drug_cost_estimator_US628083
+Scenario Outline: As a prospect who is using the DCE tool on the ULAYER, I want to be able to see the pharmacies that are available to me based on my zip code so I can choose a pharmacy to help me estimate my annual drug costs.
+Given the user is on AARP medicare site landing page
+When I access the acquisition DCE tool
+And I add the drug with Dosage and Quantity and frequency to the list
+|Drug|<drug>|
+|Dosage|<dosage>|
+|Quantity|<quantity>|
+|Frequency|<frequency>|
+And I navigate to step2 page
+#And I navigate to step2 page
+And the user selects the pharmacy tab information like miles, zipcode and pharmacy type 
+| Zipcode	  | <zipcode> |
+| Radius  | <radius>   |
+Then I should see pharmacy list in nearest order
+And I should see map icons with index
+When I click on AtoZ tab
+Then I should see pharmacy in AtoZ order
+When I click on ZtoA tab
+Then I should see pharmacy in ZtoA order
+
+ Examples:
+|drug|dosage|quantity|frequency|zipcode| radius|
+ |Lipitor|Lipitor TAB 10MG|30|Every 1 month| 90210 | 25miles |
+
+#--------------------------------------------------
+@acq_drug_cost_estimator_US580719
+Scenario Outline: As a prospect who is using the DCE tool on the ULAYER, I want to be able to see the pharmacies that are available to me based on my zip code so I can choose a pharmacy to help me estimate my annual drug costs.
+Given the user is on AARP medicare site landing page
+When I access the acquisition DCE tool
+And I add the drug with Dosage and Quantity and frequency to the list
+|Drug|<drug>|
+|Dosage|<dosage>|
+|Quantity|<quantity>|
+|Frequency|<frequency>|
+And I navigate to step2 page
+And the user selects the pharmacy tab information like miles, zipcode and pharmacy type 
+| Zipcode	  | <zipcode> |
+| Radius  | <radius>   |
+Then I should see Pagination under pharmacy list
+And I should able to move right and left using pagination
+
+ Examples:
+ |drug|dosage|quantity|frequency|zipcode| radius|
+ |Lipitor|Lipitor TAB 10MG|30|Every 1 month|90210 | 25miles |
+

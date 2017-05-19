@@ -91,12 +91,13 @@ public class AddNewDrugModal extends UhcDriver {
 		return addnewdrugExpectedJson;
 	}
 	public AddDrugDetails clickonSearchButton(String DrugName) {
+		//drugsearchinput.click();
 		drugsearchinput.sendKeys(DrugName);
 		searchButton.click();     
-		if (driver.getTitle().equalsIgnoreCase("Our Add Drug Details®")) {
+		//if (driver.getTitle().equalsIgnoreCase("ADD A NEW DRUG")) {
 			return new AddDrugDetails(driver);
-		}
-		return null;
+		//}
+		//return null;
 	}
 	
 	public void typeDrugName(String DrugName) {
