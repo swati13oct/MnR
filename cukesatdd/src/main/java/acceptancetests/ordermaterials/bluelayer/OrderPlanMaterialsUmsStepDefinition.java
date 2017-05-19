@@ -307,6 +307,12 @@ public class OrderPlanMaterialsUmsStepDefinition {
 				.navigateToValidateOrderConfirmationPage();		
 	}	
 
-
+	@Then("^the user validate radio button and click on submit button for MAPD and SSRD member in UHC site$")
+	public void validate_radio_and_submit_button_for_mapd_ssrd_group_member_in_Ums_site() {
+		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario()
+				.getBean(PageConstants.ACCOUNT_HOME_PAGE);
+		OrderplanmaterialsPage orderPlanMaterialsPage = accountHomePage
+				.navigateToValidateOrderConfirmationPage();		
+	}
 
 }
