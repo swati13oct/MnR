@@ -1068,7 +1068,6 @@ public class DrugcostestimatorAarpStepDefinition {
 		DrugCostEstimatorPage dce = (DrugCostEstimatorPage) getLoginScenario()
 				.getBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE);
 		dce.clickAtoZtab();
-	    
 	}
 
 	@Then("^I should see pharmacy in AtoZ order$")

@@ -168,4 +168,6 @@ And I should able to move right and left using pagination
  Examples:
  |drug|dosage|quantity|frequency|zipcode| radius|
  |Lipitor|Lipitor TAB 10MG|30|Every 1 month|90210 | 25miles |
+ 
+ #----------------------------------
 
