@@ -848,12 +848,31 @@ public class DrugcostestimatorAarpStepDefinition {
 		dce.deleteAllDrugs();
 	}
 	
-	@When("^I access the acquisition DCE tool$")
-	public void I_access_the_DCE_tool() throws InterruptedException {
+	@When("^I access the acquisition DCE tool from home page$")
+	public void I_access_the_DCE_tool_home_page() throws InterruptedException {
 		WebDriver wd = (WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
 
 		DrugCostEstimatorPage dce = new DrugCostEstimatorPage(wd);
-		dce.navigateToDCETool();
+		dce.navigateToDCEToolFromHome();;
+	}
+	
+	@When("^I access the acquisition DCE tool from vpp page using below zipcode$")
+	public void I_access_the_DCE_tool_vpp_page(DataTable memberAttributes) throws InterruptedException {
+		List<DataTableRow> memberAttributesRow = memberAttributes
+				.getGherkinRows();
+		Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells()
+					.get(0), memberAttributesRow.get(i).getCells().get(1));
+		}
+
+		String zipcode = memberAttributesMap.get("Zip Code");
+		
+		WebDriver wd = (WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
+
+		DrugCostEstimatorPage dce = new DrugCostEstimatorPage(wd);
+		dce.navigateToDCEToolFromvpp(zipcode);
 	}
 	
 	@And("^I have added a drug to my drug list and a generic equivalent is available for the drug I have selected$")
@@ -908,10 +927,25 @@ public class DrugcostestimatorAarpStepDefinition {
 	}
 
 	@And("^I have selected pharmacy$")
-	public void I_have_selected_pharmacy(){
+	public void I_have_selected_pharmacy() throws InterruptedException{
 		DrugCostEstimatorPage dce = (DrugCostEstimatorPage) getLoginScenario()
 				.getBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE);
+		dce.navigateToStep2();
+		dce.populateZipCode("90210");
+		dce.selectPharmacyType("Available");
+		dce.select_first_pharmacy();
+		dce.backwardToStep1();
+	}
+	
+	@When("^I have not yet selected pharmacy$")
+	public void I_have_not_yet_selected_pharmacy() throws InterruptedException {
+	    
+		DrugCostEstimatorPage dce = (DrugCostEstimatorPage) getLoginScenario()
+				.getBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE);
+		dce.navigateToStep2();
+		dce.populateZipCode("90210");
 		dce.validatePharmacySelected();
+		dce.backwardToStep1();
 	}
 	
 	@Then("^I will see a SWITCH NOW link in the drug tile with a pharmacy savings cost value$")
