@@ -296,3 +296,19 @@ Examples:
 	| zipcode | county             | plantype | planName                                             |
 	| 78006   | Bexar County       | PDP      | AARP MedicareRx Saver Plus (PDP)                     |
 
+@VPPPlanLinks
+Scenario Outline: To verify the DCE links present in different plan types in AARP site
+Given the user is on the AARP medicare site landing page
+When the user performs plan search using following information in AARP site
+	| Zip Code    | <zipcode> |
+Then the user navigates to the following plan type
+	| Plan Type | <plantype> |
+And the user validates the view plan details link displayed for the selected plan
+	| Plan Name | <planname> |
+
+Examples:
+| zipcode	| plantype| planname                                             |
+| 90210  	| MA      | AARP MedicareComplete SecureHorizons Essential (HMO) |
+| 90210  	| MAPD    | AARP MedicareComplete SecureHorizons Plan 2 (HMO)    |
+| 90210 	| PDP     | AARP MedicareRx Walgreens (PDP)                      |
+

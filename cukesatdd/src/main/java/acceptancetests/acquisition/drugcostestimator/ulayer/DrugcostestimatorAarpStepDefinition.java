@@ -879,11 +879,12 @@ public class DrugcostestimatorAarpStepDefinition {
 	public void I_have_added_a_drug_to_my_drug_list_and_a_generic_equivalent_is_available_for_the_drug_I_have_selected(DataTable data) throws InterruptedException{
 		List<DataTableRow> memberAttributesRow = data.getGherkinRows();
 		String drug = memberAttributesRow.get(0).getCells().get(1);
-
-		WebDriver wd = (WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
-
-		DrugCostEstimatorPage dce = new DrugCostEstimatorPage(wd);
-		dce.deleteAllDrugs();
+        System.out.println("drug------------"  + drug);
+		//WebDriver wd = (WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
+		DrugCostEstimatorPage dce = (DrugCostEstimatorPage) getLoginScenario()
+				.getBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE);
+		//DrugCostEstimatorPage dce = new DrugCostEstimatorPage(wd);
+		//dce.deleteAllDrugs();
 		dce.addDrug(drug);
 	}
 	
@@ -1081,6 +1082,62 @@ public class DrugcostestimatorAarpStepDefinition {
 				.getBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE);
 		dce.validateMultiCountyPopup(zipCode, county);
 	}
+	
+	@Then("^I should see pharmacy list in nearest order$")
+	public void I_should_see_pharmacy_list_in_nearest_order() throws InterruptedException {
+		DrugCostEstimatorPage dce = (DrugCostEstimatorPage) getLoginScenario()
+				.getBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE);
+		dce.validateNearestPharOrder();
+	}
 
+	@Then("^I should see map icons with index$")
+	public void I_should_see_map_icons_with_index() {
+		DrugCostEstimatorPage dce = (DrugCostEstimatorPage) getLoginScenario()
+				.getBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE);
+		dce.validateMapIcon();   
+	}
+
+	@When("^I click on AtoZ tab$")
+	public void I_click_on_AtoZ_tab() {
+		DrugCostEstimatorPage dce = (DrugCostEstimatorPage) getLoginScenario()
+				.getBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE);
+		dce.clickAtoZtab();
+	}
+
+	@Then("^I should see pharmacy in AtoZ order$")
+	public void I_should_see_pharmacy_in_AtoZ_order() {
+		DrugCostEstimatorPage dce = (DrugCostEstimatorPage) getLoginScenario()
+				.getBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE);
+		dce.validateAtoZorder();
+	}
+
+	@When("^I click on ZtoA tab$")
+	public void I_click_on_ZtoA_tab() {
+		DrugCostEstimatorPage dce = (DrugCostEstimatorPage) getLoginScenario()
+				.getBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE);
+		dce.clickZtoAtab();
+	}
+
+	@Then("^I should see pharmacy in ZtoA order$")
+	public void I_should_see_pharmacy_in_ZtoA_order() {
+		DrugCostEstimatorPage dce = (DrugCostEstimatorPage) getLoginScenario()
+				.getBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE);
+		dce.validateZtoAorder();
+	}
+
+	@Then("^I should see Pagination under pharmacy list$")
+	public void I_should_see_Pagination_under_pharmacy_list() {
+		DrugCostEstimatorPage dce = (DrugCostEstimatorPage) getLoginScenario()
+				.getBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE);
+		dce.validatePaginationPresent();
+	}
+
+	@Then("^I should able to move right and left using pagination$")
+	public void I_should_able_to_move_right_and_left_using_pagination() throws InterruptedException {
+		DrugCostEstimatorPage dce = (DrugCostEstimatorPage) getLoginScenario()
+				.getBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE);  
+		dce.validatePagination();          		
+	}
+	
 }
 
