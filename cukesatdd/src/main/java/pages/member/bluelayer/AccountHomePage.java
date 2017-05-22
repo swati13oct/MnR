@@ -3,12 +3,17 @@
  */
 package pages.member.bluelayer;
 
+
 import java.util.List;
 import java.util.Map;
-
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.junit.Assert;
+import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -17,6 +22,11 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
 
 import pages.member.bluelayer.*;
+
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.Select;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
 import acceptancetests.atdd.data.CommonConstants;
 import acceptancetests.atdd.data.PageData;
 import acceptancetests.atdd.util.CommonUtility;
@@ -63,7 +73,9 @@ public class AccountHomePage extends UhcDriver {
 	@FindBy(linkText = "My Profile & Preferences")
 	private WebElement profAndPrefLink;
 
+
 	@FindBy(xpath = "//a[@class='fd_myPlans']")
+	//@FindBy(xpath = ".//*[@id='myshipplans']/a")
 	private WebElement myPlansTab;
 
 	@FindBy(linkText = "locate a pharmacy")
@@ -84,7 +96,9 @@ public class AccountHomePage extends UhcDriver {
 	@FindBy(linkText = "Search claim history")
 	private WebElement searchClaimsHistory;
 
+
 	@FindBy(linkText = "Search medical claims")
+	//@FindBy(xpath = ".//*[@id='_content_campaigns_uhcm_chunkyfooter-activitylinks-main_activitylinks-main_jcr_content_par_teaser']/div/li/a")//(linkText = "Search medical claims")
 	private WebElement searchMedicalClaims;
 
 	@FindBy(linkText = "Medical Explanation of Benefits (EOB)")
@@ -182,24 +196,17 @@ public class AccountHomePage extends UhcDriver {
 	@FindBy(xpath = ".//*[@id='plan_box']/div/div[2]/div/p/a")
 	private WebElement planNameLink;
 	
+	@FindBy(xpath = ".//*[@id='contentRow']")
+	private WebElement homePageContent;
 	
+	@FindBy(xpath = ".//*[@id='_content_campaigns_uhcm_home-myresources-main_home-myresources-main_jcr_content_par_teaser_2']/div/div[2]")
+	private WebElement drugLookupBox;
 	
+	@FindBy(xpath = ".//*[@id='_content_campaigns_uhcm_home-myresources-main_home-myresources-main_jcr_content_par_teaser_2']/div/div[2]/a/span")
+	private WebElement estimateCostsBtn;
 	
-	
-	//plan link -.//*[@id='plan_box']/div/div[2]/div/p
-	//group id -  .//*[@id='plan_box']/div/div[2]/div/table/tbody/tr[1]/td[2]
-	//member id - .//*[@id='plan_box']/div/div[2]/div/table/tbody/tr[2]/td[2]
-	//status - .//*[@id='plan_box']/div/div[2]/div/table/tbody/tr[3]/td[2]
-	//myresource - .//*[@id='_content_uhcm_home_my-account-home_jcr_content_contentPar_myresource_contentParResource_teaser']
-	//medical provider - .//*[@id='_content_campaigns_uhcm_home-myresources-main_home-myresources-main_jcr_content_par_teaser']/div/div[2]/a[1]
-	//mental health or substance use -  .//*[@id='_content_campaigns_uhcm_home-myresources-main_home-myresources-main_jcr_content_par_teaser']/div/div[2]/a[2]
-	//estimate costs - .//*[@id='_content_campaigns_uhcm_home-myresources-main_home-myresources-main_jcr_content_par_teaser_2']/div/div[2]/a
-	//drug lookup -   .//*[@id='_content_campaigns_uhcm_home-myresources-main_home-myresources-main_jcr_content_par_teaser_2']/div/div[2]
-	//pharmacy locator -  .//*[@id='_content_campaigns_uhcm_home-myresources-main_home-myresources-main_jcr_content_par_teaser_1']/div/div[2]
-	//locate a pharmacy -   .//*[@id='_content_campaigns_uhcm_home-myresources-main_home-myresources-main_jcr_content_par_teaser_1']/div/div[2]/a
-	
-
-	
+	@FindBy(xpath = ".//*[@id='contentRow']/td/table/tbody/tr/td/div/div[2]/div[3]/div[3]/div[2]")
+	private WebElement myResourcesContent;
 	
 	private PageData myAccountHome;
 
@@ -227,7 +234,7 @@ public class AccountHomePage extends UhcDriver {
 	public AccountHomePage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
-		
+		System.out.println("Validation: ");validate(searchMedicalClaims);
 		openAndValidate();
 	}
 
@@ -272,9 +279,9 @@ public class AccountHomePage extends UhcDriver {
 	public PlanSummaryPage navigateToPlanSummary() {
 
 		List<WebElement> planNameLink = driver.findElements(By.xpath(".//*[@id='plan_box']/div/div[2]/div/p/a"));
-		System.out.println("plan name size "+planNameLink.size());
-		System.out.println("plan name "+planNameLink.get(0).getText());
+
 		planNameLink.get(0).click();
+		//myPlansTab.click();
 
 		CommonUtility.checkPageIsReady(driver);
 		if (getTitle().equalsIgnoreCase(
@@ -284,6 +291,7 @@ public class AccountHomePage extends UhcDriver {
 
 		return null;
 	}
+
 
 	public PharmacySearchPage navigateToPharmacyLocator() {
 
@@ -300,9 +308,17 @@ public class AccountHomePage extends UhcDriver {
 
 
 
-	public ClaimSummaryPage navigateToMedicalClaimsSummary() {
 
+	public ClaimSummaryPage navigateToMedicalClaimsSummary() {
+		
+		validate(searchMedicalClaims);
 		searchMedicalClaims.click();
+		try {
+			Thread.sleep(2000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		if (getTitle().equalsIgnoreCase(
 				"UnitedHealthcare Medicare Solutions | Claims")) {
 			return new ClaimSummaryPage(driver);
@@ -336,7 +352,6 @@ public class AccountHomePage extends UhcDriver {
 	public void openAndValidate() {
 
 		JSONObject jsonObject = new JSONObject();
-		System.out.println("Key set "+myAccountHome.getExpectedData().keySet());
 		for (String key : myAccountHome.getExpectedData().keySet()) {
 			WebElement element = findElement(myAccountHome.getExpectedData()
 					.get(key));
@@ -445,6 +460,7 @@ public class AccountHomePage extends UhcDriver {
 	return true;
 	}
 
+
 	public HealthAndWellnessPage navigateToHealthAndWellnessPage() {
 
 		healthAndWellnessTab.click();
@@ -482,6 +498,7 @@ public class AccountHomePage extends UhcDriver {
 		driver.get(homeUrl);
 		//driver.close();
 	}
+
 	
 	public boolean validateGogreenPopup(){
 		boolean flag=false;
@@ -496,8 +513,7 @@ public class AccountHomePage extends UhcDriver {
 	public void closeGogreenPopup(){
 		gogreenPopupClose.click();
 	}
-		
-	
+
 	public void validateTabs(){
 		Assert.assertTrue("My Plans tab is not displayed",myPlansTab.isDisplayed());
 		Assert.assertTrue("Health and Wellness Tab is not displayed",healthAndWellnessTab.isDisplayed());
@@ -559,6 +575,13 @@ public class AccountHomePage extends UhcDriver {
 		healthAndWellness.validateRewardsTab();
 	}
 	
+	
+	public boolean validateAccountHome(){
+		boolean flag = false;
+		if(validate(homePageContent)&&validate(planBox)&&validate(logOut)&&validate(myResourcesContent)&&validate(drugLookupBox)&&validate(estimateCostsBtn))
+			flag = true;
+		return flag;
+	}
 	
 
 }

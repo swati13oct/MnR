@@ -24,7 +24,9 @@ import acceptancetests.atdd.data.PageData;
 import acceptancetests.atdd.util.CommonUtility;
 import atdd.framework.MRScenario;
 import atdd.framework.UhcDriver;
+
 import pages.member.bluelayer.AccountHomePage;
+
 
 /**
  * @author pagarwa5
@@ -38,21 +40,18 @@ public class LoginPage extends UhcDriver {
 
 	//@FindBy(xpath = "//button[@id='fd_memberSignInButton' or @id='accessURAccountBTN']")
 	@FindBy(id = "fd_memberSignInButton")
-
-	//@FindBy(xpath = "//div[@class='fd_SignIn floatLeft pos_rel']/a")
-
 	private WebElement loginIn;
 
-	//@FindBy(id = "loginPOPUPuser")
-	@FindBy(xpath = "//*[@id='loginSTANDuser']")
+	@FindBy(id = "loginPOPUPuser")
+	//@FindBy(xpath = "//*[@id='loginSTANDuser']")
 	private WebElement userNameField;
 
-	//@FindBy(id = "loginPOPUPpass")
-	@FindBy(xpath = "//*[@id='loginSTANDpass']")
+	@FindBy(id = "loginPOPUPpass")
+	//@FindBy(xpath = "//*[@id='loginSTANDpass']")
 	private WebElement passwordField;
 
-	//@FindBy(xpath = "//div[@class='fd_userPassSection']/button")
-	@FindBy(xpath = "//*[@id='accessURAccountBTN']")
+	@FindBy(xpath = "//div[@class='fd_userPassSection']/button")
+	//@FindBy(xpath = "//*[@id='accessURAccountBTN']")
 	private WebElement signInButton;
 
 	@FindBy(linkText = "Forgot your username or password?")
@@ -74,8 +73,13 @@ public class LoginPage extends UhcDriver {
 
 	public Object loginWith(String username, String password, String category) {
 		//driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+
 		/*WebElement loginInEle= this.driver.findElement(By.id("fd_memberSignInButton"));
 		loginInEle.click();*/
+
+		/*WebElement loginInEle= this.driver.findElement(By.id("fd_memberSignInButton"));*/
+		loginIn.click();
+
 		sendkeys(userNameField, username);
 		sendkeys(passwordField, password);
 		signInButton.click();
@@ -186,6 +190,6 @@ public class LoginPage extends UhcDriver {
 	    } 
 
 	} 
-	
+
 
 }

@@ -1,6 +1,6 @@
 @fixedTestCaseTest
 Feature: To test enroll in plan on UHC site
-#@VBF-enrollInPlanUHC
+@VBF-enrollInPlanUHC
 Scenario Outline: Verify enroll in plan in UHC site for federal plan type member  
 Given the user is on the UHC medicare solutions landing page
 When user performs plan search using following information in UHC site
@@ -43,7 +43,7 @@ Then the user validates the enrollment application confirmation in UHC site
  |80002   |Adams County | MA         |AARP MedicareComplete SecureHorizons Essential (HMO)|No    | First   |  m          |  last  |01/01/1940 |  Male                | 111-11-1111-A      |07/01/1988                   |07/01/1988                  |1234            | Colorado    | UHG       |9999911111      |1111199999      | test@uhc.com   | test@uhc.com        |  English           |
  |80002  |Adams County | PDP        |AARP MedicareRx Preferred (PDP)                     |No    | miller  |  j          |desh    |11/12/1950 |  Male                | 222-22-2222-C      |07/01/1989                   |07/01/1989                  |7890   | Colorado  | a-12    |  9999922222                |8888811111             | testpdp@uhc.com       | testpdp@uhc.com             |English               | 
 
-#@VBF-enrollInPlanUHC
+@VBF-enrollInPlanUHC
 Scenario Outline: Verify enroll in plan in UHC site for federal plan type member  
 Given the user is on the UHC medicare solutions landing page
 When user performs plan search using following information in UHC site
@@ -87,7 +87,7 @@ Then the user validates the enrollment application confirmation in UHC site
   |78006   |Comal County | PDP         |AARP MedicareRx Preferred (PDP)    |No |First   |  m          |  last  |01/01/1940 |  Male                | 111-11-1111-A      |07/01/1988                   |07/01/1988                  |1234            | Colorado    | UHG       |9999911111      |1111199999      | test@uhc.com   | test@uhc.com        |  English           |
   |90210   |Los Angeles County | PDP         |AARP MedicareRx Preferred (PDP)    |No |First   |  m          |  last  |01/01/1940 |  Male                | 222-22-2222-A      |07/01/1988                   |07/01/1988                  |1234            | Beverly Hills    | UHG       |1111199999      |9999911111      | test@uhc.com   | test@uhc.com        |  English           |
      
-#@VBF-enrollInPlanUHC
+@VBF-enrollInPlanUHC
 Scenario Outline: Verify enroll in plan  in UHC site for federal plan type member  
 Given the user is on the UHC medicare solutions landing page
 When user performs plan search using following information in UHC site
@@ -127,10 +127,10 @@ And the user fill following information in beneficiary information step in UHC s
      |<answerLongTermCareFacilitySelected>| 
   And the user select the answer for medicaid program question in Additional Information
      |<answerStateMedicaidSelected>|
-#  And the user checks for Primary Care Provider by clicking on look up your provider link
+# And the user checks for Primary Care Provider by clicking on look up your provider link
   And the user select the answer for other health insurance question in Additional Information
      |<answerOtherHealthInsurance>|   
-  And the user select the answer for this question "Do you want to add a dental supplemental benefit?" in supplemental benefits 
+# And the user select the answer for this question "Do you want to add a dental supplemental benefit?" in supplemental benefits 
      |<answerRiderSelected>|
     And the user select option for plan payment options
      |<planPaymentOptionSelected>|     

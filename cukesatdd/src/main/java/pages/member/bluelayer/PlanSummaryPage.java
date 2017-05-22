@@ -9,13 +9,13 @@ import java.util.Map;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.junit.Assert;
+import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-
 import pages.member.bluelayer.AddPlanPopUpPage;
 import acceptancetests.atdd.data.CommonConstants;
 import acceptancetests.atdd.data.PageData;
@@ -57,6 +57,28 @@ public class PlanSummaryPage extends UhcDriver {
 	
 	@FindBy(id="btn_viewdetails")
 	private WebElement viewDetailsButton;
+	
+	@FindBy(xpath = ".//*[@id='plan_box']")
+	private WebElement claimsPlanBox;
+	
+	@FindBy(xpath = ".//*[@id='plan_box']/div[1]/div[2]/div/p[1]")
+	private WebElement claimsStatement;
+	
+	@FindBy(xpath = ".//*[@id='btn_searchallclaims']")
+	private WebElement searchClaimsBtn;
+	
+	@FindBy(xpath = ".//*[@id='btn_searchallclaims1']")
+	private WebElement searchClaimsBtn1;
+	
+	@FindBy(xpath = ".//*[@id='btn_viewclaims']")
+	private WebElement viewClaimsBtn;
+	
+	@FindBy(xpath = ".//*[@id='btn_viewclaims1']")
+	private WebElement viewClaimsBtn1;
+	
+	@FindBy(xpath = ".//*[@id='plan_box']/div[2]/div[2]/div/p[1]")
+	private WebElement rxClaimsStatement;
+
 
 	private PageData planSummary;
 
@@ -66,8 +88,10 @@ public class PlanSummaryPage extends UhcDriver {
 		super(driver);
 		PageFactory.initElements(driver, this);
 		String fileName = CommonConstants.PLAN_SUMMARY_PAGE_DATA;
-		CommonUtility.waitForPageLoad(driver, planInformationHeading,CommonConstants.TIMEOUT_30);
-		CommonUtility.waitForPageLoad(driver, claimSectionHeading,CommonConstants.TIMEOUT_30);
+
+		//CommonUtility.waitForPageLoad(driver, planInformationHeading,CommonConstants.TIMEOUT_30);
+		//CommonUtility.waitForPageLoad(driver, claimSectionHeading,CommonConstants.TIMEOUT_30);
+
 		planSummary = CommonUtility.readPageData(fileName,
 				CommonConstants.PAGE_OBJECT_DIRECTORY_BLUELAYER_MEMBER);
 		openAndValidate();
@@ -84,11 +108,14 @@ public class PlanSummaryPage extends UhcDriver {
 		openAndValidate();
 	}
 
+
 	public AddPlanPopUpPage clickAddPlan() {
 		addAnotherPlanLink.click();
 		CommonUtility.checkPageIsReady(driver);
 		return new AddPlanPopUpPage(driver);
 	}
+
+
 
 	public void logOut() {
 		logOut.click();
@@ -134,7 +161,6 @@ public class PlanSummaryPage extends UhcDriver {
 
 		return planSummaryExpectedJson;
 	}
-
 
 
 	public void validatePlanName(){
@@ -198,7 +224,7 @@ public class PlanSummaryPage extends UhcDriver {
 		
 	}
 	
-	
+
 	public boolean validateaddaplanlink() {
 		
 	boolean presentLink =false;
@@ -217,6 +243,60 @@ public class PlanSummaryPage extends UhcDriver {
 		// TODO Auto-generated method stub
 		
 	}
+
+	
+	private WebElement medClaimsbtn = null, rxClaimsbtn = null;
+	public boolean validateClaims() {
+		boolean flag = false;
+		CommonUtility.waitForPageLoad(driver, claimSectionHeading,20);
+		if(validate(claimSectionHeading)&&validate(claimsPlanBox)){
+			
+			if(claimsStatement.getText().equals("No medical claims were processed.")){
+				System.out.println("There were no medical claims found in the last 90 days");
+				medClaimsbtn = searchClaimsBtn;
+			}else{
+				System.out.println("There were some medical claims found in the last 90 days");
+				medClaimsbtn = viewClaimsBtn;
+			}
+			if(rxClaimsStatement.getText().equals("No prescription drug claims were processed.")){
+				System.out.println("There were no rx claims found in the last 90 days");
+				rxClaimsbtn = searchClaimsBtn1;
+			}else{
+				System.out.println("There were some rx claims found in the last 90 days");
+				rxClaimsbtn = searchClaimsBtn;
+			}
+			if(validate(medClaimsbtn)&&validate(rxClaimsbtn))
+				flag = true;
+		}
+		return flag;
+	}
+	
+	public ClaimSummaryPage navigateToMedicalClaimsSummary() {
+		
+		viewClaimsBtn.click();
+		try {
+			Thread.sleep(2000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		if (getTitle().equalsIgnoreCase(
+				"UnitedHealthcare Medicare Solutions | Claims")) {
+			return new ClaimSummaryPage(driver);
+		}
+		return null;
+	}
+	public ClaimSummaryPage navigateToDrugClaimsSummary() {
+
+		viewClaimsBtn1.click();
+		if (getTitle().equalsIgnoreCase(
+				"UnitedHealthcare Medicare Solutions | Claims")) {
+				return new ClaimSummaryPage(driver);
+		}
+		return null;
+	}
+	
+
 }
 
 

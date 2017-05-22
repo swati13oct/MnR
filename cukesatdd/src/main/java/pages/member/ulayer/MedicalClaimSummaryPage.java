@@ -101,6 +101,30 @@ public class MedicalClaimSummaryPage extends UhcDriver {
 
 	@FindBy(id = "radioDrug")
 	private WebElement radioDrug;
+	
+	@FindBy(xpath = ".//*[@id='columnsort0']/table/tbody/tr/td[1]/p/b")
+	private WebElement serviceDate;
+	
+	@FindBy(xpath = ".//*[@id='columnsort1']/table/tbody/tr/td[1]/p/b")
+	private WebElement providerName;
+	
+	@FindBy(xpath = ".//*[@id='columnsort2']/table/tbody/tr/td[1]/p/b")
+	private WebElement claimType;
+	
+	@FindBy(xpath = ".//*[@id='columnsort3']/table/tbody/tr/td[1]/p/b")
+	private WebElement charged;
+	
+	@FindBy(xpath = ".//*[@id='columnsort4']/table/tbody/tr/td[1]/p/b")
+	private WebElement claimStatus;
+	
+	@FindBy(xpath = ".//*[@id='columnsort5']/table/tbody/tr/td[1]/p/b")
+	private WebElement claimDetails;
+	
+	@FindBy(xpath = ".//*[@id='claim']/tbody/tr[2]/td[6]/form/input[12]")
+	private WebElement moreInfoLink1;
+	
+	@FindBy(xpath = ".//*[@id='searchResultMsg']/p")
+	private WebElement searchResultMsg;
 
 	private PageData medicalClaimsSummary;
 
@@ -558,5 +582,22 @@ public class MedicalClaimSummaryPage extends UhcDriver {
 	public String getRxNumber() {
 		// TODO Auto-generated method stub
 		return null;
+	}
+	
+	public boolean validateClaims(){
+		boolean flag = false;
+		try {
+			Thread.sleep(5000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		if(validate(serviceDate)&&validate(providerName)&&validate(claimType)&&validate(charged)&&validate(claimStatus)
+				&&validate(claimDetails)&&validate(moreInfoLink1)&&validate(searchResultMsg)){
+			flag = true;
+			
+		}else
+			System.out.println("Could not verify the Med Claims elements");
+		return flag;
 	}
 }

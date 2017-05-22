@@ -40,6 +40,15 @@ public class ClaimDetailsPage extends UhcDriver {
 	@FindBy(id = "drugclaimdetail")
 	private WebElement servicesChargesSection;
 
+	@FindBy(xpath = ".//*[@id='drugclaimdetail']")
+	private WebElement drugclaimdetailbox;
+	
+	@FindBy(xpath = ".//*[@id='medicaldetailsinner']")
+	private WebElement medDetailsInnerBox;
+	
+	@FindBy(xpath = ".//*[@id='medicaldetailsouter']/div[2]/a")
+	private WebElement backtoClaimSearchbtn;
+
 	private PageData claimsDetails;
 
 	public JSONObject claimsDetailsJson;
@@ -150,4 +159,14 @@ public class ClaimDetailsPage extends UhcDriver {
 	public void logout() {
 		logOut.click();
 	}
+
+	
+	public boolean validateMoreInfo(){
+		boolean flag = false;
+		if(validate(drugclaimdetailbox)&&validate(medDetailsInnerBox)&&validate(backtoClaimSearchbtn))
+			flag = true;
+		
+		return flag;
+	}
+
 }

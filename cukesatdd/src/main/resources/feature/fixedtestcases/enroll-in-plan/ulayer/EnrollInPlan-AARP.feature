@@ -1,4 +1,4 @@
-@fixedTestCase
+@fixedTestCaseTest
 @enrollInPlan
 Feature: To test enroll in plan on AARP site
 @OLE_MA
