@@ -153,7 +153,7 @@ And I select the first pharmacy
 @acq_drug_cost_estimator_US628083
 Scenario Outline: As a prospect who is using the DCE tool on the ULAYER, I want to be able to see the pharmacies that are available to me based on my zip code so I can choose a pharmacy to help me estimate my annual drug costs.
 Given the user is on AARP medicare site landing page
-When I access the acquisition DCE tool
+When I access the acquisition DCE tool from home page
 And I add the drug with Dosage and Quantity and frequency to the list
 |Drug|<drug>|
 |Dosage|<dosage>|
@@ -179,7 +179,7 @@ Then I should see pharmacy in ZtoA order
 @acq_drug_cost_estimator_US580719
 Scenario Outline: As a prospect who is using the DCE tool on the ULAYER, I want to be able to see the pharmacies that are available to me based on my zip code so I can choose a pharmacy to help me estimate my annual drug costs.
 Given the user is on AARP medicare site landing page
-When I access the acquisition DCE tool
+When I access the acquisition DCE tool from home page
 And I add the drug with Dosage and Quantity and frequency to the list
 |Drug|<drug>|
 |Dosage|<dosage>|
