@@ -45,6 +45,8 @@ public class MedicalClaimsUMSStepDefinition {
 	public MRScenario getLoginScenario() {
 		return loginScenario;
 	}
+	
+	/*
     @Given("^the user is on the UHC medicare site login page$")
     public void uhc_login_page(){
                    WebDriver wd = getLoginScenario().getWebDriver();
@@ -58,7 +60,7 @@ public class MedicalClaimsUMSStepDefinition {
     @When("^the user logs in with a registered UMP with following details in UHC site$")
     public void login_with_member(DataTable memberAttributes) {
 
-                   /* Reading the given attribute from feature file */
+                   //Reading the given attribute from feature file 
                    List<DataTableRow> memberAttributesRow = memberAttributes
                                                  .getGherkinRows();
                    Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
@@ -113,7 +115,7 @@ public class MedicalClaimsUMSStepDefinition {
                     				Assert.fail("Error in validating the Account Home Page");
                    }
 
-    }
+    }*/
 	
 	@When("^the user navigates to plan summary page in UMS site and validates$")
 	public void user_navigates_to_plan_summary_ums() {

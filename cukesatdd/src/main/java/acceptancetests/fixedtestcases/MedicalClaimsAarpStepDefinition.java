@@ -47,9 +47,9 @@ public class MedicalClaimsAarpStepDefinition {
 	public MRScenario getLoginScenario() {
 		return loginScenario;
 	}
-	
+	/*
 	@Given("^the user is on the AARP medicare site login page$")
-    public void uhc_login_page(){
+    public void aarp_login_page(){
                    WebDriver wd = getLoginScenario().getWebDriver();
                    getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
 
@@ -57,7 +57,7 @@ public class MedicalClaimsAarpStepDefinition {
                    getLoginScenario().saveBean(PageConstants.LOGIN_PAGE, loginPage);
                    
     }
-
+*/
 	@When("^the registered AMP with following attributes in AARP site for medical claims$")
 	public void registered_AMP_with_attributes_medical_claims_aarp(
 			DataTable memberAttributes) {

@@ -144,13 +144,13 @@ public class AccountHomePage extends UhcDriver {
 	@FindBy(xpath = "//*[@id='paymentOverviewApp']/div[1]/div/div/div/h1")
 	private WebElement paymentsHeading;
 	
-<<<<<<< HEAD
+
 	@FindBy(linkText = "Preferred Mail Service Pharmacy")
 	private WebElement preferredMailServicePharmacyLink;
 	
 	@FindBy(linkText = "Order drugs from your Preferred Mail Service Pharmacy")
 	private WebElement drugPreferredMailServicePharmacyLink;
-=======
+
 	@FindBy(xpath = ".//*[@id='contentRow']")
 	private WebElement homePageContent;
 	
@@ -162,7 +162,7 @@ public class AccountHomePage extends UhcDriver {
 	
 	@FindBy(xpath = ".//*[@id='contentRow']/td/table/tbody/tr/td/div/div[2]/div[3]/div[3]/div[2]/div/div/div[2]/div")
 	private WebElement myResourcesContent;
->>>>>>> 44fc462072e26b232ff1abd36c145c5704743996
+
 	
 	private PageData myAccountHome;
 
