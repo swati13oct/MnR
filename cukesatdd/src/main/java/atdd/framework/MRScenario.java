@@ -719,19 +719,97 @@ public class MRScenario {
 	}
 
 
-	
 	public WebDriver getWebDriver() {
-		if (null == webDriver) {
-			File pathToBinary = new File("C:/bhavana/FF 29/firefox.exe");
-			FirefoxBinary ffBinary = new FirefoxBinary(pathToBinary);
-			FirefoxProfile firefoxProfile = new FirefoxProfile();
-			webDriver = new FirefoxDriver(ffBinary, firefoxProfile);
-			webDriver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
+
+		/*
+		 * 
+		 * Below code excecutes if webdriver value is passed in build command ::
+		 * either saucelabs or headless
+		 */
+		if (null != System.getProperty("webdriverhost")
+				&& !(System.getProperty("webdriverhost").equalsIgnoreCase(""))) {
+
+			if (System.getProperty("webdriverhost").equalsIgnoreCase(
+					"saucelabs")) {
+				DesiredCapabilities capabilities = DesiredCapabilities
+						.firefox();
+				capabilities.setCapability("platform", "Windows XP");
+				capabilities.setCapability("version", "45.0");
+				capabilities.setCapability("parent-tunnel", "sauce_admin");
+				capabilities.setCapability("tunnelIdentifier",
+						"OptumSharedTunnel-Prd");
+				capabilities.setCapability("name", "MRATDD-TestSuite");
+				try {
+					webDriver = new RemoteWebDriver(new URL(URL), capabilities);
+				} catch (MalformedURLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			} else {
+				/*
+				 * Below code snippet is for triggering HeadLess Browser
+				 * (PhantomJS)
+				 */
+				String phantomjs = System.getProperty("phantomjs");
+				DesiredCapabilities caps = new DesiredCapabilities();
+				if (StringUtils.isBlank(phantomjs)) {
+					caps.setCapability(
+							PhantomJSDriverService.PHANTOMJS_EXECUTABLE_PATH_PROPERTY,
+							props.get("HeadlessBrowserPath"));
+				} else {
+					caps.setCapability(
+							PhantomJSDriverService.PHANTOMJS_EXECUTABLE_PATH_PROPERTY,
+							System.getProperty("phantomjs"));
+				}
+				caps.setJavascriptEnabled(true);
+				caps.setCapability(PhantomJSDriverService.PHANTOMJS_CLI_ARGS,
+						new String[] { "--web-security=false",
+								"--ignore-ssl-errors=true",
+								"--ssl-protocol=any" });
+				String userAgent = "Mozilla/5.0 (Windows NT 6.0) AppleWebKit/535.1 (KHTML, like Gecko) Chrome/13.0.782.41 Safari/535.1";
+				System.setProperty("phantomjs.page.settings.userAgent",
+						userAgent);
+				webDriver = new PhantomJSDriver(caps);
+			}
+
+		} else {/*
+				 * Below code excecutes if webdriver value is not passed in
+				 * build command :: mostly running locally and triggering runner
+				 * class directly
+				 */
+			/*
+			 * TODO: pperugu :: Need to update the headless browser code below
+			 * for local
+			 */
+
+			String phantomjs = System.getProperty("phantomjs");
+			String agent = "Mozilla/5.0 (Linux; U; Android 2.3.3; en-us; LG-LU3000 Build/GRI40) AppleWebKit/533.1 (KHTML, like Gecko) Version/4.0 Mobile Safari/533.1";
+			DesiredCapabilities caps = new DesiredCapabilities();
+			if (StringUtils.isBlank(phantomjs)) {
+				caps.setCapability(
+						PhantomJSDriverService.PHANTOMJS_EXECUTABLE_PATH_PROPERTY,
+						props.get("HeadlessBrowserPath"));
+			} else {
+				caps.setCapability(
+						PhantomJSDriverService.PHANTOMJS_EXECUTABLE_PATH_PROPERTY,
+						System.getProperty("phantomjs"));
+			}
+			caps.setCapability(
+					PhantomJSDriverService.PHANTOMJS_PAGE_SETTINGS_PREFIX
+							+ "userAgent", agent);
+			caps.setJavascriptEnabled(true);
+			caps.setCapability(PhantomJSDriverService.PHANTOMJS_CLI_ARGS,
+					new String[] { "--web-security=false",
+							"--ignore-ssl-errors=true", "--ssl-protocol=any" });
+			String userAgent = "Mozilla/5.0 (Windows NT 6.0) AppleWebKit/535.1 (KHTML, like Gecko) Chrome/13.0.782.41 Safari/535.1";
+			System.setProperty("phantomjs.page.settings.userAgent", userAgent);
+			webDriver = new PhantomJSDriver(caps);
+
+
 		}
-
 		return webDriver;
-
 	}
+	
 
 	public WebDriver getIEDriver() {
 		System.setProperty("webdriver.ie.driver",
