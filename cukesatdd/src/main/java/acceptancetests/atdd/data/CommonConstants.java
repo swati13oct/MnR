@@ -10,6 +10,16 @@ import acceptancetests.atdd.data.ulayer.Page;
  *
  */
 public class CommonConstants {
+	
+	public static final String JENKINS_BROWSER = "JENKINS_BROWSER";
+	public static final String JENKINS_BROWSER_PHANTOMJS = "PHANTOMJS";
+	public static final String HTMLUNIT_BROWSER = "HTMLUNIT";
+	public static final String FIREFOX_BROWSER = "FIREFOX";
+	public static final String CHROME_BROWSER = "CHROME";
+	public static final String IE_BROWSER = "IE";
+	public static final String MOBILE_BROWSER = "MOBILE";
+	public static final String SAUCE_BROWSER_WEB = "SAUCE_LABS_IE";
+	public static final String SAUCE_BROWSER_MOBILE = "SAUCE_LABS_MOBILE";
 
 	public static final String FLOW_NAME = "registration/planconfirmation";
 
