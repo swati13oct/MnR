@@ -231,7 +231,8 @@ public class AccountHomePage extends UhcDriver {
 	@FindBy(xpath = "html/body/div[2]/div/div/main/div/section[1]/div/div/div/form/button")
 	private WebElement submitLink;
 	
-	@FindBy(linkText = "ORDER ADDITIONAL MATERIALS")
+	@FindBy(xpath = "//a[contains(text(),'ORDER ADDITIONAL MATERIALS')]")
+	//@FindBy(linkText = "ORDER ADDITIONAL MATERIALS")
 	private WebElement addordermaterialLink;
 	
 	private PageData myAccountHome;
