@@ -151,4 +151,12 @@ public class LoginPage extends UhcDriver {
 		return browserCheckJson;
 
 	}
+	
+	public LoginPage validateLoginPage(){
+		if (driver.getTitle().equalsIgnoreCase(
+				"AARP Medicare Plans | Home")) {
+			return new LoginPage(driver);
+		} else
+			return null;
+	}
 }

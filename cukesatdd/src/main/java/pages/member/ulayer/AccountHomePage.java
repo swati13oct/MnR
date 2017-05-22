@@ -144,6 +144,12 @@ public class AccountHomePage extends UhcDriver {
 	@FindBy(xpath = "//*[@id='paymentOverviewApp']/div[1]/div/div/div/h1")
 	private WebElement paymentsHeading;
 	
+	@FindBy(linkText = "Preferred Mail Service Pharmacy")
+	private WebElement preferredMailServicePharmacyLink;
+	
+	@FindBy(linkText = "Order drugs from your Preferred Mail Service Pharmacy")
+	private WebElement drugPreferredMailServicePharmacyLink;
+	
 	private PageData myAccountHome;
 
 	public JSONObject accountHomeJson;
@@ -151,6 +157,9 @@ public class AccountHomePage extends UhcDriver {
 	private PageData browserCheckData;
 
 	private JSONObject browserCheckJson;
+	
+	@FindBy(xpath ="//*[@id='healthwellness']/a")
+	private WebElement healthAndWellnessTab;
 
 	public AccountHomePage(WebDriver driver) {
 		super(driver);
@@ -587,6 +596,71 @@ public class AccountHomePage extends UhcDriver {
 		}
 		return null;
 	}
+	
+	
+	public void validateHWTabsAndContent() {
+
+		HealthAndWellnessPage healthAndWellness = new HealthAndWellnessPage(driver);
+		healthAndWellness.validateTabsAndContent();
+
+	}
+
+	public void validateHWLifeStyleTab() {
+		HealthAndWellnessPage healthAndWellness = new HealthAndWellnessPage(driver);
+		healthAndWellness.validateLifeStyleTab();
+	}
+
+	public void validateHWLearningTab() {
+		HealthAndWellnessPage healthAndWellness = new HealthAndWellnessPage(driver);
+		healthAndWellness.validateLearningTab();
+	}
+
+	public void validateHWRewardsTab() {
+		HealthAndWellnessPage healthAndWellness = new HealthAndWellnessPage(driver);
+		healthAndWellness.validateRewardsTab();
+	}
+	
+
+	public void validatePreferredMailOderLink() {
+		Actions actions = new Actions(driver);
+		actions.moveToElement(myMenuLinkAarp);
+		actions.perform();
+		if(validate(preferredMailServicePharmacyLink))
+		{
+			System.out.println("Preferred Mail Service Link is displaying ");	
+		}
+		else
+		{
+			System.out.println("Preferred Mail Service Link is not displaying ");
+		}
+		
+	}
+
+	public void validateDrugsPreferredMailOderLink() {
+		
+		if(validate(drugPreferredMailServicePharmacyLink))
+		{
+			System.out.println("Drug Preferred Mail Service Link is displaying in footer");	
+		}
+		else
+		{
+			System.out.println("Drug Preferred Mail Service Link is not displaying in footer");
+		}
+	}
+	
+	public HealthAndWellnessPage navigateToHealthAndWellnessPage() {
+
+		healthAndWellnessTab.click();
+		if (getTitle().equalsIgnoreCase(
+				"UnitedHealthcare Medicare Solutions | My Health and Wellness")) {
+			return new HealthAndWellnessPage(driver);
+		}
+
+		return null;
+
+	}
+
+
 
 
 

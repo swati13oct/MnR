@@ -1,12 +1,10 @@
-/**
- * 
- */
-package pages.member.ulayer;
+package pages.member.bluelayer;
+
+/*@sunya*/
 
 import java.util.List;
 import java.util.Map;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.junit.Assert;
@@ -21,98 +19,87 @@ import acceptancetests.atdd.data.PageData;
 import acceptancetests.atdd.util.CommonUtility;
 import atdd.framework.UhcDriver;
 
-/**
- * @author pjaising
- *
- */
 public class HealthAndWellnessPage extends UhcDriver {
-	
-	@FindBy(id = "disclosure_link")
+
+	@FindBy(xpath = "//a[contains(text(),'UnitedHealthcare MedicareComplete Choice (PPO)')]")
+	private WebElement uhcMedicareCompleteChoicePPO;
+
+	@FindBy(xpath = ".//*[@id='hl-hw-banner']/a")
+	private WebElement healthAndWellnessBanner;
+
+	@FindBy(linkText = "Sign Out")
 	private WebElement logOut;
 
-	private PageData healthAndWelless;
+	private PageData healthAndWellness;
 
-	public JSONObject healthAndWellessJson;
+	public JSONObject myProfilesJson;
+	public JSONObject accountHomeJson;
 
 	public HealthAndWellnessPage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
-		String fileName = CommonConstants.HEALTH_AND_WELLNESS_PAGE_DATA;
-		healthAndWelless = CommonUtility.readPageData(fileName,
-				CommonConstants.PAGE_OBJECT_DIRECTORY_ULAYER_MEMBER);
+		String fileName = CommonConstants.MY_PROFILES_PAGE_DATA;
+		healthAndWellness = CommonUtility.readPageData(fileName,
+				CommonConstants.PAGE_OBJECT_DIRECTORY_BLUELAYER_MEMBER);
 		openAndValidate();
 	}
 
 	@Override
 	public void openAndValidate() {
+		validate(healthAndWellnessBanner);
+
 		JSONObject jsonObject = new JSONObject();
-		for (String key : healthAndWelless.getExpectedData().keySet()) {
-			List<WebElement> elements = findElements(healthAndWelless
-					.getExpectedData().get(key));
-			if (elements.size() == 1) {
-				if (validate(elements.get(0))) {
+		for (String key : healthAndWellness.getExpectedData().keySet()) {
+			WebElement element = findElement(healthAndWellness.getExpectedData().get(key));
+			if (element != null) {
+				if (validate(element)) {
 					try {
-						jsonObject.put(key, elements.get(0).getText());
+						jsonObject.put(key, element.getText());
 					} catch (JSONException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
 				}
-			} else if (elements.size() > 1) {
-				JSONArray jsonArray = new JSONArray();
-				for (WebElement element : elements) {
-
-					if (validate(element)) {
-						try {
-							JSONObject jsonObjectForArray = new JSONObject();
-							jsonObjectForArray.put(key, element.getText());
-							jsonArray.put(jsonObjectForArray);
-						} catch (JSONException e) {
-							// TODO Auto-generated catch block
-							e.printStackTrace();
-						}
-					}
-				}
-				try {
-					jsonObject.put(key, jsonArray);
-				} catch (JSONException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-
 			}
+		}
+		accountHomeJson = jsonObject;
+
+		System.out.println("accountHomeJson----->" + accountHomeJson);
+
+	}
+
+	public boolean validate(WebElement element) {
+		try {
+			if (element.isDisplayed()) {
+				System.out.println("Element found!!!!");
+				return true;
+			} else {
+				System.out.println("Element not found/not visible");
+			}
+		} catch (Exception e) {
+			System.out.println("Exception: Element not found/not visible");
 
 		}
-		healthAndWellessJson = jsonObject;
-		
-		System.out.println("healthAndWellessJson----->"+healthAndWellessJson);
-
-	}
-	
-	public JSONObject getExpectedData(Map<String, JSONObject> expectedDataMap) {
-
-		JSONObject globalExpectedJson = expectedDataMap
-				.get(CommonConstants.GLOBAL);
-		JSONObject healthAndWellnessExpectedJson = expectedDataMap
-				.get(CommonConstants.HEALTH_AND_WELLNESS);
-		healthAndWellnessExpectedJson = CommonUtility.mergeJson(
-				healthAndWellnessExpectedJson, globalExpectedJson);
-		return healthAndWellnessExpectedJson;
-
+		return false;
 	}
 
-	public void logout() {
+	public void logOut() {
 		logOut.click();
-		
 	}
-	
+
+	/**
+	 * Below method will validate plan name: 'uhcMedicareCompleteChoicePPO'
+	 * Added as part of commandos team
+	 * 
+	 * @return
+	 */
 
 	public void validateTabsAndContent() {
 
-		WebElement largeWidget = driver.findElement(By.id("hl-div-threecol-body"));
-		WebElement lifestyleTab = driver.findElement(By.id("life"));
-		WebElement learningTab = driver.findElement(By.id("learn"));
-		WebElement rewardsTab = driver.findElement(By.id("rwd"));
+		WebElement largeWidget = driver.findElement(By.className("hl-hw-dashboard-container"));
+		WebElement lifestyleTab = driver.findElement(By.xpath(".//*[@id='lifestyle']/span"));
+		WebElement learningTab = driver.findElement(By.xpath(".//*[@id='learning']/span"));
+		WebElement rewardsTab = driver.findElement(By.xpath(".//*[@id='rewards']/span"));
 		
 		WebElement renewLifestyleTab = driver.findElement(By.xpath(".//*[@id='hl-hw-buckets']/div/div[1]/a/img"));
 		WebElement renewLearningTab = driver.findElement(By.xpath(".//*[@id='hl-hw-buckets']/div/div[2]/a/img"));
@@ -129,7 +116,7 @@ public class HealthAndWellnessPage extends UhcDriver {
 	}
 	
 	public void validateLifeStyleTab(){
-		WebElement lifestyleTab =  driver.findElement(By.id("life"));
+		WebElement lifestyleTab = driver.findElement(By.xpath(".//*[@id='lifestyle']/span"));
 		lifestyleTab.click();
 		try {
 			Thread.sleep(10000);
@@ -138,14 +125,16 @@ public class HealthAndWellnessPage extends UhcDriver {
 			e.printStackTrace();
 		}
 		
-		WebElement lifeStyleContent = driver.findElement(By.className("hw-fc-list-container"));
+		WebElement lifeStyleContent = driver.findElement(By.className("hw-lifestyle-main-content"));
+		WebElement lifeStyleRightNav = driver.findElement(By.className("hw-lifestyle-rightNav"));
 		
 		Assert.assertTrue("Life style tab content is not displayed", lifeStyleContent.isDisplayed());
+		Assert.assertTrue("Life style tab right nav is not displayed", lifeStyleRightNav.isDisplayed());
 	}
 	
 	
 	public void validateLearningTab(){
-		WebElement learningTab = driver.findElement(By.id("learn"));
+		WebElement learningTab = driver.findElement(By.xpath(".//*[@id='learning']/span"));
 		learningTab.click();
 		try {
 			Thread.sleep(10000);
@@ -162,7 +151,7 @@ public class HealthAndWellnessPage extends UhcDriver {
 	}
 	
 	public void validateRewardsTab(){
-		WebElement rewardsTab = driver.findElement(By.id("rwd"));
+		WebElement rewardsTab = driver.findElement(By.xpath(".//*[@id='rewards']/span"));
 		rewardsTab.click();
 		try {
 			Thread.sleep(10000);
@@ -171,15 +160,11 @@ public class HealthAndWellnessPage extends UhcDriver {
 			e.printStackTrace();
 		}
 		
-		WebElement rewardsContent = driver.findElement(By.id("hw-rewards-feedback"));
-		WebElement rewardsBottomContent = driver.findElement(By.id("hl-hw-subscribe-rewards"));
+		WebElement rewardsContent = driver.findElement(By.id("hl-hw-banner-rewards"));
+		WebElement rewardsRightNav = driver.findElement(By.id("hl-hw-subscribe-rewards"));
 		
 		Assert.assertTrue("Rewards tab content is not displayed", rewardsContent.isDisplayed());
-		Assert.assertTrue("Rewards tab right nav is not displayed", rewardsBottomContent.isDisplayed());
+		Assert.assertTrue("Rewards tab right nav is not displayed", rewardsRightNav.isDisplayed());
 	}
-
-	
-	
-
 
 }
