@@ -18,7 +18,7 @@ public class CommonConstants {
 	public static final String CHROME_BROWSER = "CHROME";
 	public static final String IE_BROWSER = "IE";
 	public static final String MOBILE_BROWSER = "MOBILE";
-	public static final String SAUCE_BROWSER_WEB = "SAUCE_LABS_IE";
+	public static final String SAUCE_BROWSER_WEB = "SAUCE_BROWSER_WEB";
 	public static final String SAUCE_BROWSER_MOBILE = "SAUCE_LABS_MOBILE";
 
 	public static final String FLOW_NAME = "registration/planconfirmation";
