@@ -1,6 +1,7 @@
-package acceptancetests.dashboard.drugcostestimator.ulayer;
+package acceptancetests.acquisition.drugcostestimator.ulayer;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -25,13 +26,12 @@ import cucumber.annotation.en.When;
 import cucumber.table.DataTable;
 import gherkin.formatter.model.DataTableRow;
 import pages.acquisition.ulayer.AcquisitionHomePage;
-import pages.dashboard.member.drugcostestimator.blayer.AddDrugDetails;
-import pages.dashboard.member.drugcostestimator.blayer.AddNewDrugModal;
-import pages.dashboard.member.drugcostestimator.blayer.DrugCostEstimatorPage;
-import pages.dashboard.member.drugcostestimator.blayer.SavingsOppurtunity;
+//import pages.dashboard.member.drugcostestimator.blayer.DrugCostEstimatorPage;
+import pages.acquisition.dce.ulayer.*;
 import pages.member.ulayer.AccountHomePage;
 import pages.member.ulayer.LoginPage;
 import pages.mobile.member.ulayer.BenefitsSummaryPage;
+//import pages.acquisition.dce.ulayer;
 
 public class DrugcostestimatorAarpStepDefinition {
 
@@ -105,6 +105,8 @@ public class DrugcostestimatorAarpStepDefinition {
 		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
 		getLoginScenario().saveBean(PageConstants.ACQUISITION_HOME_PAGE,
 				aquisitionhomepage);
+		DrugCostEstimatorPage dce = new DrugCostEstimatorPage(wd);
+		getLoginScenario().saveBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE, dce);
 	}
 	
 	@Given("^I am an AARP member on the Dashboard site SmartPhone$")
@@ -226,8 +228,8 @@ public class DrugcostestimatorAarpStepDefinition {
 	}
 
 	@Then("^I should see the Pharmacy search tab as a clickable element within the DCE tool$")
-	public void i_should_see_the_pharmacy_search(DataTable data) throws InterruptedException{
-		List<DataTableRow> memberAttributesRow = data.getGherkinRows();
+	public void i_should_see_the_pharmacy_search() throws InterruptedException{
+		/*List<DataTableRow> memberAttributesRow = data.getGherkinRows();
 		String drug = memberAttributesRow.get(1).getCells().get(0);
 
 		WebDriver wd = (WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
@@ -255,7 +257,7 @@ public class DrugcostestimatorAarpStepDefinition {
 		addNewDrugModal.clickonSearchButton(drug);
 		addNewDrugModal.selectDrug(drug);
 		AddDrugDetails addDrugDetails = new AddDrugDetails(wd);
-		addDrugDetails.continueAddDrugDetails();
+		addDrugDetails.continueAddDrugDetails();*/
 	}
 	@And("^I should be able to move forward or backward in the tool flow$")
 	public void i_should_be_able_to_move_forward_backward() throws InterruptedException{
@@ -352,7 +354,7 @@ public class DrugcostestimatorAarpStepDefinition {
 		WebDriver wd = (WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
 
 		DrugCostEstimatorPage dce = new DrugCostEstimatorPage(wd);
-		dce.changeUrlToNewDCEPage();
+		
 		dce.pharmacyInformation(zipcode,radius);
 	}
 
@@ -434,16 +436,16 @@ public class DrugcostestimatorAarpStepDefinition {
 	public void I_should_not_see_the_drug_with_Dosage_in_the_list(DataTable data) {
 
 		List<DataTableRow> memberAttributesRow = data.getGherkinRows();
-		String dosage = memberAttributesRow.get(1).getCells().get(0);
+		String dosage = memberAttributesRow.get(0).getCells().get(1);
 		DrugCostEstimatorPage dce = new DrugCostEstimatorPage((WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER));
-		dce.validateDrugsnotPresent (dosage);  
+		dce.validateDrugsnotPresent(dosage);  
 	}
 
 
 	@When("^I delete the drug with Dosage$")
 	public void I_delete_the_drug_with_Dosage(DataTable data) throws InterruptedException {
 		List<DataTableRow> memberAttributesRow = data.getGherkinRows();
-		String dosage = memberAttributesRow.get(1).getCells().get(0);
+		String dosage = memberAttributesRow.get(0).getCells().get(1);
 
 		DrugCostEstimatorPage dce = new DrugCostEstimatorPage((WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER));
 		dce.deleteDrugsByDosage(dosage);
@@ -465,21 +467,22 @@ public class DrugcostestimatorAarpStepDefinition {
 		}
 
 		String drug = memberAttributesMap.get("Drug");
-		String dosage = memberAttributesMap.get("Dosage");
-		String quantity = memberAttributesMap.get("Quantity");
-		String frequency = memberAttributesMap.get("Frequency");
+		String dosage = memberAttributesMap.get("EditDosage");
+		String quantity = memberAttributesMap.get("EditQuantity");
+		String frequency = memberAttributesMap.get("EditFrequency");
+	
 
 		WebDriver wd = (WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
 		DrugCostEstimatorPage dce = new DrugCostEstimatorPage(wd);
-		AddDrugDetails adddrugdetails = dce.navigateToEditDrug(drug);
-		adddrugdetails.selectDosage(dosage);
-		adddrugdetails.selectQnty(quantity);
-		adddrugdetails.selectFrequency(frequency);
-		adddrugdetails.continueAddDrugDetails();
+		EditDrugDetails editdrugdetails = dce.navigateToEditDrug(drug);
+		editdrugdetails.selectDosage(dosage);
+		editdrugdetails.selectQnty(quantity);
+		editdrugdetails.selectFrequency(frequency);
+		editdrugdetails.updateEditDrugDetails();
 
-		// Saving Opportunity Details
-		SavingsOppurtunity savingsOppurtunity = new SavingsOppurtunity(wd);
-		savingsOppurtunity.savedrugbutton();
+//		// Saving Opportunity Details
+//		SavingsOppurtunity savingsOppurtunity = new SavingsOppurtunity(wd);
+//		savingsOppurtunity.savedrugbutton();
 
 	}
 
@@ -594,8 +597,8 @@ public class DrugcostestimatorAarpStepDefinition {
 	public void I_navigate_to_step2_page () throws InterruptedException
 	{
 		DrugCostEstimatorPage dce = (DrugCostEstimatorPage) getLoginScenario().getBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE);
+		
 		dce.navigateToStep2();
-
 	}
 
 	@When("^we search the pharmacy within miles zipcode and pharmacy type$")
@@ -842,18 +845,208 @@ public class DrugcostestimatorAarpStepDefinition {
 	@Then("^I delete the existing drug if present$")
 	public void I_delete_the_existing_drug_if_present() throws InterruptedException {
 		DrugCostEstimatorPage dce = (DrugCostEstimatorPage) getLoginScenario().getBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE);
-		//Thread.sleep(10000);
-		dce.delete_all_drugs();
+		dce.deleteAllDrugs();
 	}
 	
-	@When("^I access the DCE tool$")
+	@When("^I access the acquisition DCE tool$")
 	public void I_access_the_DCE_tool() throws InterruptedException {
 		WebDriver wd = (WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
 
 		DrugCostEstimatorPage dce = new DrugCostEstimatorPage(wd);
 		dce.navigateToDCETool();
-		dce.addDrug("lipitor");
 	}
 	
+	@And("^I have added a drug to my drug list and a generic equivalent is available for the drug I have selected$")
+	public void I_have_added_a_drug_to_my_drug_list_and_a_generic_equivalent_is_available_for_the_drug_I_have_selected(DataTable data) throws InterruptedException{
+		List<DataTableRow> memberAttributesRow = data.getGherkinRows();
+		String drug = memberAttributesRow.get(0).getCells().get(1);
+
+		WebDriver wd = (WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
+
+		DrugCostEstimatorPage dce = new DrugCostEstimatorPage(wd);
+		dce.deleteAllDrugs();
+		dce.addDrug(drug);
+	}
+	
+	@Then("I should be presented the option to switch to the generic option")
+	public void I_should_be_presented_the_option_to_switch_to_the_generic_option(){
+		DrugCostEstimatorPage dce = (DrugCostEstimatorPage) getLoginScenario()
+				.getBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE);
+		//dce.backwardToStep1();
+		dce.validateSwitchGenericOption();
+	}
+	
+	@And("^I will see a SWITCH NOW link in the drug tile with appropriate save message$")
+	public void I_will_see_a_SWITCH_NOW_link_in_the_drug_tile_with_appropriate_save_message(){
+		DrugCostEstimatorPage dce = (DrugCostEstimatorPage) getLoginScenario()
+				.getBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE);
+		dce.validateSwitchNowLink();
+		dce.validateSaveGenericMessage();
+	}
+	
+	@And("^I will see a modal appear upon clicking on SWITCH NOW$")
+	public void I_will_see_a_modal_appear_upon_clicking_on_SWITCH_NOW() throws InterruptedException{
+		DrugCostEstimatorPage dce = (DrugCostEstimatorPage) getLoginScenario()
+				.getBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE);
+		dce.clickSwitchNow();
+		//savingsOppurtunity.clickSwitchToGeneric();
+				
+	}
+	
+	@And("^when I click on the button to accept the generic$")
+	public void when_I_click_on_the_button_to_accept_the_generic() throws InterruptedException{
+		DrugCostEstimatorPage dce = (DrugCostEstimatorPage) getLoginScenario()
+				.getBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE);
+		dce.clickSwitchToGeneric();
+	}
+	
+	@Then("^the drug name will automatically update within the Drug List$")
+	public void the_drug_name_will_automatically_update_within_the_Drug_List() throws InterruptedException{
+		DrugCostEstimatorPage dce = (DrugCostEstimatorPage) getLoginScenario()
+				.getBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE);
+		dce.isGeneric();
+	}
+
+	@And("^I have selected pharmacy$")
+	public void I_have_selected_pharmacy(){
+		DrugCostEstimatorPage dce = (DrugCostEstimatorPage) getLoginScenario()
+				.getBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE);
+		dce.validatePharmacySelected();
+	}
+	
+	@Then("^I will see a SWITCH NOW link in the drug tile with a pharmacy savings cost value$")
+	public void I_will_see_a_SWITCH_NOW_link_in_the_drug_tile_with_a_pharmacy_savings_cost_value() throws InterruptedException {
+		DrugCostEstimatorPage dce = (DrugCostEstimatorPage) getLoginScenario()
+				.getBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE);
+		dce.validateSwitchNowLink();
+		dce.validateSaveDollarValueMessage();
+	    
+	}
+	
+	@And("^any cost savings will be applied to my total cost savings in Step3$")
+	public void any_cost_savings_will_be_applied_to_my_total_cost_savings_in_Step3() throws InterruptedException{
+		DrugCostEstimatorPage dce = (DrugCostEstimatorPage) getLoginScenario()
+				.getBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE);
+		dce.navigateToStep3();
+		dce.validateEditDrugLinkNotPresent();
+		
+	}
+	
+
+	@Then("^I should validate drug with Dosage and Quantity and frequency edited to the list$")
+	public void I_should_validate_drug_with_Dosage_and_Quantity_and_frequency_edited_to_the_list(DataTable memberAttributes) {
+		
+		List<DataTableRow> memberAttributesRow = memberAttributes
+				.getGherkinRows();
+		Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells()
+					.get(0), memberAttributesRow.get(i).getCells().get(1));
+		}
+
+		String dosage = memberAttributesMap.get("EditDosage");
+		String quantity = memberAttributesMap.get("EditQuantity");
+		String frequency = memberAttributesMap.get("EditFrequency");
+
+		DrugCostEstimatorPage dce = new DrugCostEstimatorPage((WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER));
+		dce.validateAddedDrug(dosage,quantity,frequency);
+	}
+
+	@Then("^I should see all generic headers and elements$")
+	public void I_should_see_all_generic_headers_and_elements() {
+		DrugCostEstimatorPage dce = new DrugCostEstimatorPage((WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER));
+		dce.validateStep1Item();
+	}
+
+	@Then("^I should see step 1 disclaimers link at the bottom$")
+	public void I_should_see_step_1_disclaimers_link_at_the_bottom() throws InterruptedException {
+		DrugCostEstimatorPage dce = new DrugCostEstimatorPage((WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER));
+		dce.validateStep1Disclaimer();
+	}
+	
+	@Then("^I should see step 2 disclaimers link at the bottom$")
+	public void I_should_see_step_2_disclaimers_link_at_the_bottom() throws InterruptedException {
+		DrugCostEstimatorPage dce = new DrugCostEstimatorPage((WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER));
+		dce.validateStep2Disclaimer();
+	}
+	
+	@When("^I have added a drug to my drug list$")
+	public void I_have_added_a_drug_to_my_drug_list(DataTable data) throws InterruptedException {
+		List<DataTableRow> memberAttributesRow = data.getGherkinRows();
+		String drug = memberAttributesRow.get(0).getCells().get(1);
+
+		WebDriver wd = (WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
+		DrugCostEstimatorPage dce = new DrugCostEstimatorPage(wd);
+		boolean isDrugPresent = dce.isDrugPresent(drug);
+		if(!isDrugPresent){
+			dce.addDrug(drug.split(" ")[0]);
+		}
+
+		
+	}
+	
+
+	@And("^user validates the Summary$")
+	public void validates_Summary_AARP(){
+		DrugCostEstimatorPage dce = (DrugCostEstimatorPage) getLoginScenario()
+				.getBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE);
+		dce.validateSummary();
+	}
+
+	@And("^user validates the Drugs link$")
+	public void validate_Drugs_AARP(){
+		DrugCostEstimatorPage dce = (DrugCostEstimatorPage) getLoginScenario()
+				.getBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE);
+		dce.validateDrugs();
+	}
+
+	@And("^user validates the Pharmacy link$")
+	public void validate_Pharmacy_AARP(){
+		DrugCostEstimatorPage dce = (DrugCostEstimatorPage) getLoginScenario()
+				.getBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE);
+		dce.validatePharmacy();
+	}
+
+	@And("^user validates the Costs link$")
+	public void validate_Costs_AARP(){
+		DrugCostEstimatorPage dce = (DrugCostEstimatorPage) getLoginScenario()
+				.getBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE);
+		dce.validateCosts();		
+	}
+
+	@And("^user validates the Find a Plan link$")
+	public void validates_Find_a_Plan_AARP(){
+		DrugCostEstimatorPage dce = (DrugCostEstimatorPage) getLoginScenario()
+				.getBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE);
+		dce.validateFindAPlan();
+	}
+
+	@And("^user validates the disclaimers$")
+	public void validates_disclaimers_AARP(){
+		DrugCostEstimatorPage dce = (DrugCostEstimatorPage) getLoginScenario()
+				.getBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE);
+		dce.validateDisclaimers();
+	}
+
+	@And("^user searches with multi county zipcode and navigates to VPP page$")
+	public void multi_county_AARP(DataTable zipcodeAttributes){
+		List<DataTableRow> zipcodeAttributesRow = zipcodeAttributes
+				.getGherkinRows();
+		Map<String, String> zipcodeAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < zipcodeAttributesRow.size(); i++) {
+
+			zipcodeAttributesMap.put(zipcodeAttributesRow.get(i).getCells().get(0),
+					zipcodeAttributesRow.get(i).getCells().get(1));
+		}
+
+		String zipCode = zipcodeAttributesMap.get("Zip Code");
+		String county = zipcodeAttributesMap.get("County");
+
+		DrugCostEstimatorPage dce = (DrugCostEstimatorPage) getLoginScenario()
+				.getBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE);
+		dce.validateMultiCountyPopup(zipCode, county);
+	}
+
 }
 

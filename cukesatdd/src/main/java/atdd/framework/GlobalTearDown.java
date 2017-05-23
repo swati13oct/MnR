@@ -51,15 +51,25 @@ public class GlobalTearDown {
 	 * 
 	 * @param scenario
 	 */
-	/*@After
+	@After
 	public void tearDown(ScenarioResult scenario) {
-
+		/*
 		//Clean up the existing webdriver.
 		
 		getLoginScenario().webDriver.close();
 		getLoginScenario().webDriver.quit();
+		getLoginScenario().flushBeans();*/
+		
+		WebDriver wd = getLoginScenario().getWebDriver();
+		final byte[] screenshot = ((TakesScreenshot) wd).getScreenshotAs(OutputType.BYTES);
+		scenario.embed(new ByteArrayInputStream(screenshot), "image/png"); // ... and
+																	// embed it
+																	// in the
+																	// report.
+		//Clean up the existing webdriver.
 		getLoginScenario().flushBeans();
+		getLoginScenario().nullifyWebDriver();
 
-	}*/
+	}
 
 }

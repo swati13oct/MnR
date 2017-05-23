@@ -4,8 +4,9 @@
 package pages.acquisition.ulayer;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
-
+import java.util.Set;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -138,6 +139,24 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	
 	@FindBy(name = "emailWidgetForm")
 	private WebElement emailWidgetForm;
+
+	@FindBy(xpath = ".//*[@id='_pac_logo']")
+	private WebElement reactiveButton;
+
+	@FindBy(xpath = ".//*[@id='CloseBtn']")
+	private WebElement reactiveCloseButton;
+
+	@FindBy(xpath = ".//*[@id='_pac_helpbutton']")
+	private WebElement proactiveButton;
+
+	@FindBy(xpath = ".//*[@id='questionDiv']/div[1]/label/span")
+	private WebElement proactiveFirstName;
+
+	@FindBy(xpath = ".//*[@id='questionDiv']/div[2]/label/span")
+	private WebElement proactiveLastName;
+
+	@FindBy(xpath = ".//*[@id='CloseBtn']")
+	private WebElement proactiveCloseButton;
 
 	private PageData vppPlanSummary;
 
@@ -540,7 +559,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		
 		for(WebElement element : providerNameList){
 			ElementData providerElementData = new ElementData("className", "providerName");
-			if(findChildElement(providerElementData,element).getText().equalsIgnoreCase(physicianName))
+		 * if(findChildElement(providerElementData,element).getText().
 			{ 
 				ElementData addToListElementData = new ElementData("linkText", "Add to List");
 				findChildElement(addToListElementData,element).click();
@@ -815,28 +834,70 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		}
 		return false;
 	}
+	
+		public AcquisitionHomePage clickProactiveChat() {
 
-	public void validateProactiveChat() {
-		// TODO Auto-generated method stub
-		
+		proactiveButton.click();
+		return null;
 	}
 
-	public void validateReactiveChat() {
-		// TODO Auto-generated method stub
-		
+	public AcquisitionHomePage validateProactiveChat() throws Exception {
+
+		String MainWindow = driver.getWindowHandle();
+
+		Set<String> s1 = driver.getWindowHandles();
+		Iterator<String> i1 = s1.iterator();
+
+		while (i1.hasNext()) {
+			String ChildWindow = i1.next();
+
+			if (!MainWindow.equalsIgnoreCase(ChildWindow)) {
+
+				driver.switchTo().window(ChildWindow);
+				
+				//validate(proactiveFirstName);
+				//validate(proactiveLastName);
+				validate(proactiveCloseButton);
+				Thread.sleep(3000);
+				proactiveCloseButton.click();
+			}
+		}
+		return null;
 	}
 
-	public void clickReactiveChat() {
-		// TODO Auto-generated method stub
-		
+	public VPPPlanSummaryPage clickReactiveChat() {
+
+		driver.switchTo().frame(1);
+		reactiveButton.click();
+		return null;
 	}
 
-	public void clickProactiveChat() {
-		// TODO Auto-generated method stub
-		
+	public VPPPlanSummaryPage validateReactiveChat() throws Exception {
+
+		String MainWindow = driver.getWindowHandle();
+
+		Set<String> s1 = driver.getWindowHandles();
+		Iterator<String> i1 = s1.iterator();
+
+		while (i1.hasNext()) {
+			String ChildWindow = i1.next();
+
+			if (!MainWindow.equalsIgnoreCase(ChildWindow)) {
+
+				driver.switchTo().window(ChildWindow);
+
+				validate(reactiveCloseButton);
+				Thread.sleep(3000);
+				reactiveCloseButton.click();
+			}
+		}
+
+		driver.switchTo().window(MainWindow);
+		return null;
 	}
-
-
 }
+
+
+
 
 	

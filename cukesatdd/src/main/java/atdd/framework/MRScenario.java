@@ -905,6 +905,7 @@ public class MRScenario {
       * look at the Jenkins job, it specifies a browser type and it should be PhantomJS.
       * Anything else may be a problem.
       */
+	
 	public WebDriver getWebDriver() {
 
         //Is system propery exists defining JENKINS_BROWSER, we're running in JENKINS and
@@ -1005,6 +1006,7 @@ public class MRScenario {
 		return webDriver;
 
 	}
+
 
 	public WebDriver getIEDriver() {
 		System.setProperty("webdriver.ie.driver",

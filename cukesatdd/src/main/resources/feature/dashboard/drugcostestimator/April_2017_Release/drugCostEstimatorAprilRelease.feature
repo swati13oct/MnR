@@ -143,3 +143,4 @@ Examples:
  | planType| memberType| drug |
  | MAPD|IndividualDCEmember|lipitor|
  
+ 
