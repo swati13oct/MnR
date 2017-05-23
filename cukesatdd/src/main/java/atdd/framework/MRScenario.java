@@ -1050,7 +1050,7 @@ public class MRScenario {
                 
  		}
  		return webDriver;
-	}
+	}*/
 
 	public WebDriver getIEDriver() {
 		System.setProperty("webdriver.ie.driver",
@@ -1079,7 +1079,7 @@ public class MRScenario {
 		webDriver = new ChromeDriver(capabilities);
 		//webDriver = new ChromeDriver();
 		return webDriver;
-	}*/
+	}
 	public WebDriver getWebDriver() {
 		/*if (null == webDriver) {
 			File pathToBinary = new File("C:/Program Files (x86)/Mozilla Firefox/firefox.exe");
