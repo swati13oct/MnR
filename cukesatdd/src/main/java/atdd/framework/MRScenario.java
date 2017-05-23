@@ -1007,6 +1007,10 @@ public class MRScenario {
                 capabilities.setCapability("version", "48");
                 capabilities.setCapability("idleTimeout", 180);
                 capabilities.setCapability("platform", "Windows 7");
+                capabilities.setCapability("avoidProxy", true);
+                capabilities.setCapability("autoAcceptsAlerts", true);
+                capabilities.setCapability("parent-tunnel", "sauce_admin");
+                capabilities.setCapability("tunnelIdentifier", "OptumSharedTunnel-Prd"); 
                 String USERNAME = "apriyad4";
                 String ACCESS_KEY = "6e1345f1-80ea-4863-8573-187bf3151ac0";
                 String URL = "http://" + USERNAME + ":" + ACCESS_KEY + "@ondemand.saucelabs.com:80/wd/hub";
