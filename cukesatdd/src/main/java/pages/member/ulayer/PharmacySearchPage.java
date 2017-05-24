@@ -6,6 +6,7 @@ package pages.member.ulayer;
 import java.util.List;
 import java.util.Map;
 
+import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -69,6 +70,12 @@ public class PharmacySearchPage extends UhcDriver{
 	
 	@FindBy(xpath = "//*[@id='subPageLeft']/div[2]/div[2]/div[2]/div/h3[2]/a")
 	private WebElement createPdfLink;
+	
+	@FindBy(id = "disclosure_link")
+	private WebElement logOut;
+	
+	@FindBy(xpath = "//div[@id='medicareTitle']/h1")
+	private WebElement locatePharmacyTitle;
 
 	public PharmacySearchPage(WebDriver driver){
 		super(driver);
@@ -111,6 +118,12 @@ public class PharmacySearchPage extends UhcDriver{
 		planNameDropDown.sendKeys(planName);
 		planNameDropDown.click();
 		*/
+		try {
+			Thread.sleep(10000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		selectFromDropDown(planNameDropDownList, planName);
 		
 		if(driver.getTitle().equalsIgnoreCase("AARP Medicare Plans | Pharmacy Directory"))
@@ -131,6 +144,12 @@ public class PharmacySearchPage extends UhcDriver{
 
 		searchPharmaciesButton.click();
 		CommonUtility.checkPageIsReady(driver);
+		try {
+			Thread.sleep(10000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		if(driver.getTitle().equalsIgnoreCase("AARP Medicare Plans | Pharmacy Directory"))
 		{
 			return new PharmacyResultPage(driver);
@@ -178,6 +197,7 @@ public class PharmacySearchPage extends UhcDriver{
 		validate(espanolLink);
 		validate(chineseLink);
 		validate(createPdfLink); 
+		validate(logOut);
 	}
 
 	public PharmacySearchPage enterZipDistanceDetails(
@@ -186,6 +206,12 @@ public class PharmacySearchPage extends UhcDriver{
 		String zipcode = zipAttributesMap.get("Zip Code");
 		String distance = zipAttributesMap.get("Distance");
 
+		try { 
+			Thread.sleep(15000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		sendkeys(zipcodeField,zipcode);
 
 		distanceField.click();
@@ -196,7 +222,7 @@ public class PharmacySearchPage extends UhcDriver{
 
 		if(countyPopOut.isDisplayed())
 		{
-			String county  = zipAttributesMap.get("County");
+			String county  = zipAttributesMap.get("County Name");
 			List<WebElement> countyList =  selectcountytable.findElements(By.tagName("tr"));
 
 			for (WebElement webElement : countyList) {
@@ -260,12 +286,14 @@ public class PharmacySearchPage extends UhcDriver{
 	public PharmacySearchPage clickEspanol(){
 		espanolLink.click();
 		System.out.println("Espanol language selected:");
+		Assert.assertTrue("Locate pharmacy title displyed incorrectly", !locatePharmacyTitle.getText().equals("Encuentre una Farmacia"));
 		return new PharmacySearchPage(driver);
 	}
 	
 	public PharmacySearchPage clickChinese(){
-		chineseLink.click();
+		chineseLink.click();		
 		System.out.println("Chinese language selected");   //Story 261070
+		Assert.assertTrue("Locate pharmacy title displyed incorrectly", !locatePharmacyTitle.getText().equals("尋找藥房"));
 		return new PharmacySearchPage(driver);
 	}
 	

@@ -120,6 +120,7 @@ public class PharmacySearchPage extends UhcDriver {
 
 		continueField.click();
 		CommonUtility.checkPageIsReady(driver);
+		try{
 		if (countyPopOut.isDisplayed()) {
 			for (WebElement webElement : countyList) {
 				if (webElement.getText().contains(county)) {
@@ -127,6 +128,9 @@ public class PharmacySearchPage extends UhcDriver {
 					break;
 				}
 			}
+		}
+		}catch(Exception e){
+			System.out.println("County not exists");
 		}
 		for(int i=0;i<10;i++){
 			try {

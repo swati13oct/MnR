@@ -34,6 +34,9 @@ public class LoginPage extends UhcDriver {
 	@FindBy(id = "loginPOPUPuser")
 	private WebElement userNameField;
 
+	@FindBy(xpath = "//div[@id='IPEinvL']/map/area[@alt='close']")
+	private WebElement alertClosebutton;
+
 	@FindBy(id = "loginPOPUPpass")
 	private WebElement passwordField;
 
@@ -64,7 +67,7 @@ public class LoginPage extends UhcDriver {
 		sendkeys(userNameField,username);
 		sendkeys(passwordField,password);
 		signInButton.click();
-		
+
 
 		if (MRScenario.environment.equals("awe-dev-b") || MRScenario.environment.equals("dev-a") || MRScenario.environment.equals("dev-c") || MRScenario.environment.equals("team-b") || MRScenario.environment.equals("team-a") || MRScenario.environment.equals("team-c")) {
 
@@ -72,14 +75,14 @@ public class LoginPage extends UhcDriver {
 			alert.accept();
 			Alert alert1 = driver.switchTo().alert();
 			alert1.accept();
-					
+
 			/*if (!(MRScenario.environment.equals("awe-dev-b") || MRScenario.environment.equals("dev-c") || MRScenario.environment.equals("team-b"))){
 				Alert alert2 = driver.switchTo().alert();
 				alert2.accept();
 			}*/
-			
+
 		}
-/*
+		/*
 		if ( MRScenario.environment.equals("dev-a") || MRScenario.environment.equals("dev-c")
 		|| MRScenario.environment.equals("team-a")) {
 		Alert alert = driver.switchTo().alert();
@@ -92,8 +95,19 @@ public class LoginPage extends UhcDriver {
  			}
 
  		}*/
-            
-		
+
+		try {
+			Thread.sleep(10000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		try{
+			if(alertClosebutton.isDisplayed())
+				alertClosebutton.click();
+		} catch (Exception e) {
+			System.out.println("Alert is not displayed");
+		}
 		if(currentUrl().contains("home/my-account-home.html"))
 
 		{
@@ -151,7 +165,7 @@ public class LoginPage extends UhcDriver {
 		return browserCheckJson;
 
 	}
-	
+
 	public LoginPage validateLoginPage(){
 		if (driver.getTitle().equalsIgnoreCase(
 				"AARP Medicare Plans | Home")) {

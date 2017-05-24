@@ -204,13 +204,13 @@ public class MRScenario {
 				String uhcUserName = null;
 				if (memberAttributes[0].contains("/")) {
 					String[] memberAttributArr = memberAttributes[0].split("/");
-					userName = memberAttributArr[0];
+					uhcUserName = memberAttributArr[0];
 
 				} else {
-					userName = memberAttributes[0];
+					uhcUserName = memberAttributes[0];
 				}
 				if (userNamesAddedList.contains(uhcUserName)) {
-					umsMemberAttributesMap.put(userName, attrList);
+					umsMemberAttributesMap.put(uhcUserName, attrList);
 				}
 
 			}

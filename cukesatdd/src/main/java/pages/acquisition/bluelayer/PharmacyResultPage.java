@@ -112,15 +112,6 @@ public class PharmacyResultPage extends UhcDriver{
 		boolean flag = true;
 		try {
 			if(planName.contains("PDP")){
-				if(!jsonObject.get("pharmacySaverRightRailWidget").toString().equals("Preferred Retail Pharmacy Network\nThe Preferred Retail "
-						+ "Pharmacy Network may help you save money on your prescription co-pays. UnitedHealthcare has worked with many "
-						+ "retail pharmacies to help you get the savings you've been looking for. You could save 25% or more on co-pays when "
-						+ "you fill your prescriptions at a preferred retail pharmacy.1\n1Savings of 25% or more apply to Tier 1 and Tier 2 "
-						+ "co-pays on the AARP MedicareRx Preferred (PDP) and AARP MedicareRx Saver Plus (PDP) plans at a preferred retail "
-						+ "pharmacy compared with the co-pays of standard pharmacies within the network .\nEstimate your drug costs at a "
-						+ "preferred retail pharmacy"))
-					flag = false;
-				
 				if(!jsonObject.get("preferredMailRightRailWidget").toString().equals("Preferred Mail Service Pharmacy\nGet savings and convenience "
 						+ "delivered right to your mailbox when you use home delivery through OptumRx, your plan's preferred mail service pharmacy. "
 						+ "You could pay less for the same medications.\nLearn more about the OptumRx Preferred Mail Service Pharmacy"))
@@ -135,15 +126,6 @@ public class PharmacyResultPage extends UhcDriver{
 						pharmacyTypesicondescription.getText().split("\n")[1].contains("Standard Network Pharmacy")))
 					flag = false;
 			}else{
-				if(!jsonObject.get("pharmacySaverRightRailWidget").toString().equals("Pharmacy SaverTM offers prescriptions as low as $1.501."
-						+ "\nPharmacy SaverTM is a cost savings prescription drug program available to you as a plan member. UnitedHealthcare® "
-						+ "has worked with many of our network pharmacies to offer even lower prices on many common prescription drugs. "
-						+ "You may be able to pay less than your plan co-pay for your prescription drugs with the Pharmacy Saver program. "
-						+ "Simply use one of the participating pharmacies and show your member ID card.\nLook up qualifying drugs, prices and "
-						+ "participating pharmacies\n1Drugs and prices may vary between pharmacies and are subject to change during the plan year. "
-						+ "Prices are based on quantity filled at the pharmacy. Quantities may be limited by pharmacy based on their dispensing policy or "
-						+ "by the plan based on Quantity Limit requirements; if prescription is in excess of a limit, co-pay amounts may be higher."))
-					flag = false;
 				
 				if(!jsonObject.get("preferredMailRightRailWidget").toString().equals("Preferred Mail Service Pharmacy\nGet savings and "
 						+ "convenience delivered right to your mailbox when you use home delivery through OptumRx, your plan's preferred mail service pharmacy."
@@ -192,9 +174,10 @@ public class PharmacyResultPage extends UhcDriver{
 				expectedTooltip = "Preferred Retail Pharmacy – Preferred retail pharmacies may help you save money on your prescription co-pays. "
 						+ "UnitedHealthcare has worked with many retail pharmacies to help you get the savings you've been looking for.";
 			else
-				expectedTooltip = "Pharmacy Saver™ Program - Pharmacy Saver is a cost savings prescription drug program available to our plan"
-						+ " members. UnitedHealthcare has worked with many of our network pharmacies to offer even"
-						+ " lower prices on many common prescription drugs.";
+				expectedTooltip = "Pharmacy Saver™ Program - Pharmacy Saver is a cost "
+						+ "savings prescription drug program available to our plan members. "
+						+ "UnitedHealthcare has worked with many of our network pharmacies to offer even lower prices on"
+						+ " many common prescription drugs.";
 
 			expectedTooltip =expectedTooltip + "Standard Network Pharmacy - A pharmacy where you get the prescription "
 					+ "drug benefits provided by your plan.Open 24 hours - This store is open to serve your pharmacy needs 24 hours a day, 7 days a "
