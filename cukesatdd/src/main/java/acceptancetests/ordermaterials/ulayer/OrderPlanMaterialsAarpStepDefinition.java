@@ -63,21 +63,21 @@ public class OrderPlanMaterialsAarpStepDefinition {
 		Map<String, String> loginCreds = loginScenario
 				.getAMPMemberWithDesiredAttributes(desiredAttributes);
 
-		String userName = null;
-		String pwd = null;
-		if (loginCreds == null) {
+		String userName = "q1_apr_ulayer203";
+		String pwd = "Password@1";
+		/*if (loginCreds == null) {
 			// no match found
 			System.out.println("Member Type data could not be setup !!!");
 			Assert.fail("unable to find a " + desiredAttributes + " member");
 		} else {
 			userName = loginCreds.get("user");
-			pwd = loginCreds.get("pwd");
+			pwd = loginCreds.get("pwd");*/
 			System.out.println("User is..." + userName);
 			System.out.println("Password is..." + pwd);
 			getLoginScenario()
 			.saveBean(LoginCommonConstants.USERNAME, userName);
 			getLoginScenario().saveBean(LoginCommonConstants.PASSWORD, pwd);
-		}
+		//}
 
 		WebDriver wd = getLoginScenario().getWebDriver();
 		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
