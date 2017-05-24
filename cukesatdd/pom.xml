@@ -53,10 +53,10 @@
         <reuseForks>true</reuseForks>
         <includes>
 
-            <include>**/RunMRATDDTestRunnerSrint1*.java</include>
-            <include>**/RunMRATDDTestRunnerSrint2*.java</include>
-            <include>**/RunMRATDDTestRunnerSrint3*.java</include>
-            <include>**/RunMRATDDTestRunnerSrint5*.java</include>
+            <include>**/RunMRATDDTestRunnerSrint1.java</include>
+            <include>**/RunMRATDDTestRunnerSrint2.java</include>
+            <!-- <include>**/RunMRATDDTestRunnerSrint3*.java</include>
+            <include>**/RunMRATDDTestRunnerSrint5*.java</include> -->
         </includes>  
         <cucumberOutputDir>target/cucumber-parallel</cucumberOutputDir>
                 <format>json,html</format>
