@@ -52,12 +52,17 @@
         <forkCount>5</forkCount>
         <reuseForks>true</reuseForks>
         <includes>
+
             <include>**/RunMRATDDTestRunnerSrint1*.java</include>
             <include>**/RunMRATDDTestRunnerSrint2*.java</include>
             <include>**/RunMRATDDTestRunnerSrint3*.java</include>
             <include>**/RunMRATDDTestRunnerSrint5*.java</include>
-        </includes>         
+        </includes>  
+        <cucumberOutputDir>target/cucumber-parallel</cucumberOutputDir>
+                <format>json,html</format>
+                <tags>"~@ignored"</tags>
     </configuration>
+    
 </plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
