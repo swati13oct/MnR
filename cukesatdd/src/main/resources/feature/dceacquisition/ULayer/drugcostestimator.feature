@@ -113,7 +113,6 @@ When I access the acquisition DCE tool from home page
 Then I navigate to step3 page 
 And user validates the Summary
 And user validates the functionality of Drugs link
-And user validates the Find a Plan link
 And user validates the disclaimers
 And user searches with multi county zipcode and navigates to VPP page
 | Zip Code    | <zipcode>  |
