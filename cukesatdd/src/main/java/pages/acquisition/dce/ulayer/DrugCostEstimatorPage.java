@@ -15,7 +15,9 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import acceptancetests.atdd.data.CommonConstants;
 import acceptancetests.atdd.data.PageData;
@@ -284,20 +286,37 @@ public class DrugCostEstimatorPage extends UhcDriver {
 	@FindBy(xpath = "//*[@id='acqsummary']/div[1]/div/h2")
 	public WebElement summary;
 
-	@FindBy(xpath = ".//*[@id='acqsummary']/div[2]/div[1]/a")
+	@FindBy(xpath = "//a[contains(text(),'Drugs')]")
 	public WebElement drugsLink;
 
-	@FindBy(xpath = ".//*[@id='acqsummary']/div[2]/div[2]/a/p")
+	//@FindBy(xpath = ".//*[@id='acqsummary']/div[2]/div[2]/a/p")
+	//@FindBy(xpath = "//p[contains(text(),'Pharmacy')]")
+	@FindBy(xpath = "//div[2]/a/p")
 	public WebElement pharmacyLink;
 
-	@FindBy(xpath = ".//*[@id='acqsummary']/div[2]/div[4]/div/a")
+	//@FindBy(xpath = ".//*[@id='acqsummary']/div[2]/div[4]/div/a")
+	//@FindBy(xpath = "//div[@id='acqsummary']/div[2]/div[4]/div/div/a")
+	@FindBy(xpath = "//a[contains(text(),'Costs')]")
 	public WebElement costs;
 
-	@FindBy(xpath = ".//*[@id='acqsummary']/div[2]/div[3]/a")
+	@FindBy(xpath = "//a[contains(text(),'Find a Plan')]")
 	public WebElement findAPlan;
 
 	@FindBy(id = "step3DisclaimerHome")
 	public WebElement step3DisclaimerHome;
+	
+	@FindBy(xpath = ".//*[@id='drugdetails']/div[1]/div/div/div/p")
+	public WebElement step1Text;
+	
+	@FindBy(xpath = ".//*[@id='pharmacymilestext']")
+	public WebElement step2Text;
+	
+	//@FindBy(xpath = ".//*[@id='costs-tab']/div/div[1]/div[2]/div/a")
+	@FindBy(xpath = "//a[contains(text(),'Return to plans')]")
+	public WebElement returnToPlans;
+	
+	@FindBy(id = "step3DisclaimerVPP")
+	public WebElement step3DisclaimerVPP;
 
 	@FindBy(id = "dce")
 	public WebElement getStarted;
@@ -305,10 +324,10 @@ public class DrugCostEstimatorPage extends UhcDriver {
 	@FindBy(id = "zipcode-costs")
 	public WebElement zipCodeTextBox;
 
-	@FindBy(xpath = ".//*[@id='acqsummary']/div[2]/div[3]/div[1]/a/p")
+	@FindBy(xpath = ".//*[@id='acqsummary']/div[2]/div[3]/div/div[1]/a/p")
 	public WebElement findPlansButton;
 
-	@FindBy(name = "zipcode")
+	@FindBy(name = "county")
 	List<WebElement> counties;
 
 	@FindBy(id = "cta-zipcode")
@@ -1393,7 +1412,7 @@ public class DrugCostEstimatorPage extends UhcDriver {
 
 		viewPlans.click();
 		Thread.sleep(10000);
-		List<WebElement> enterDrugInformation = driver.findElements(By.linkText("Enter drug information"));
+		List<WebElement> enterDrugInformation = driver.findElements(By.linkText("Edit drug list"));
 		enterDrugInformation.get(0).click();
 		Thread.sleep(1000);
 
@@ -1416,81 +1435,147 @@ public class DrugCostEstimatorPage extends UhcDriver {
 
 	public void validateDrugs() {
 		String drugActual = drugsLink.getText();
-		if (drugActual.contains("Drugs")) {
+		if(drugActual.contains("Drugs")){
 			Assert.assertTrue(true);
 		} else {
-			Assert.assertTrue("Drugs link does not show up", false);
+			Assert.assertTrue("Drugs link does not show up",false);
+		}
+		drugsLink.click();
+		try {
+			Thread.sleep(2000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		if(step1Text.getText().contains("Create a list")){
+			step3.click();
+			Assert.assertTrue(true);
+		}
+		else{
+			Assert.assertTrue("Unable to navigate to Step 1",false);
 		}
 	}
 
 	public void validatePharmacy() {
 		String pharmacyActual = pharmacyLink.getText();
-		if (pharmacyActual.contains("Pharmacy")) {
+		try {
+			Thread.sleep(20000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		CommonUtility.waitForPageLoad(driver, pharmacyLink, 60);
+		WebDriverWait wait = new WebDriverWait(driver, 10);
+		wait.until(ExpectedConditions.elementToBeClickable(pharmacyLink));
+		
+		if(pharmacyActual.equalsIgnoreCase("Pharmacy")){
 			Assert.assertTrue(true);
 		} else {
-			Assert.assertTrue("Pharmacy link does not show up", false);
+			Assert.assertTrue("Pharmacy link does not show up",false);
+		}	
+		pharmacyLink.click();
+		try {
+			Thread.sleep(2000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		if(step2Text.getText().contains("Find a pharmacy")){
+			step3.click();
+			Assert.assertTrue(true);
+		}
+		else{
+			Assert.assertTrue("Unable to navigate to Step 2",false);
 		}
 
 	}
 
 	public void validateCosts() {
 		String costsActual = costs.getText();
-		if (costsActual.contains("Costs")) {
+		if(costsActual.contains("Costs")){
 			Assert.assertTrue(true);
 		} else {
-			Assert.assertTrue("Costs link does not show up", false);
+			Assert.assertTrue("Costs link does not show up",false);
+		}
+		
+		returnToPlans.click();
+		if(driver.getCurrentUrl().contains("health-plans.html")){
+			Assert.assertTrue(true);
+		}else {
+			Assert.assertTrue("Unable to navigate to VPP page from DCE tool",false);
 		}
 
 	}
 
 	public void validateFindAPlan() {
 		String findAPlanActual = findAPlan.getText();
-		if (findAPlanActual.contains("Find a Plan")) {
+		try {
+			Thread.sleep(8000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		if(findAPlanActual.contains("Find a Plan")){
 			Assert.assertTrue(true);
 		} else {
-			Assert.assertTrue("Find a Plan link does not show up", false);
+			Assert.assertTrue("Find a Plan link does not show up",false);
 		}
 
 	}
 
 	public void validateDisclaimers() {
 		String disclaimersActual = step3DisclaimerHome.getText();
-		if (disclaimersActual.contains("Disclaimer")) {
-			Assert.assertTrue(true);
-		} else {
-			Assert.assertTrue("Disclaimer link does not show up", false);
+		String disclaimersActual1 = step3DisclaimerVPP.getText();
+		if(disclaimersActual.contains("Disclaimer")){
+			step3DisclaimerHome.click();
+		} else if(disclaimersActual1.contains("Disclaimer")){
+			step3DisclaimerVPP.click();
 		}
-		step3DisclaimerHome.click();
 	}
 
 	public void validateMultiCountyPopup(String zipcode, String county) {
 		zipCodeTextBox.sendKeys(zipcode);
 		findPlansButton.click();
-		/*
-		 * String myWindowHandle = driver.getWindowHandle();
-		 * driver.switchTo().window("drugModalPharmacy"); if(counties.size()>1)
-		 * { for(WebElement countyElement :counties) { String elementId =
-		 * countyElement.getAttribute("id"); if(elementId.contains(county)) {
-		 * countyElement.click(); System.out.println("county clicked"); try {
-		 * Thread.sleep(10000); } catch (InterruptedException e) { // TODO
-		 * Auto-generated catch block e.printStackTrace(); } } }
-		 * continueButton.click(); }
-		 */
-		try {
+		//String myWindowHandle = driver.getWindowHandle();
+		//driver.switchTo().window("drugModalPharmacy");
+		WebDriverWait wait = new WebDriverWait(driver, 10);
+		wait.until(ExpectedConditions.elementToBeClickable(step3searchButton));
+		
+		if(counties.size()>1)
+		{
+			for(WebElement countyElement :counties)
+			{
+				String elementId = countyElement.getAttribute("id");
+				if(elementId.contains(county))
+				{
+					countyElement.click();
+					System.out.println("county clicked");
+					try {
+						Thread.sleep(10000);
+					} catch (InterruptedException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				}				
+			}			
+			step3searchButton.click();
+		}
+		/*try {
 			Thread.sleep(9000);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
-		// To select a county
-		countySelection.click();
-		// To search for plans in that county
-		step3searchButton.click();
-		if (driver.getTitle().contains("Our Medicare Plans")) {
+		}*/
+		//To select a county
+		//countySelection.click();
+		//To search for plans in that county
+		/*step3searchButton.click();
+		if(driver.getTitle().contains("Our Medicare Plans")){
 			Assert.assertTrue(true);
-		} else {
-			Assert.assertTrue("Unable to navigate to VPP page", false);
 		}
+		else{
+			Assert.assertTrue("Unable to navigate to VPP page",false);
+		}*/
 	}
 
 	public void populateZipCode(String zipcode) {

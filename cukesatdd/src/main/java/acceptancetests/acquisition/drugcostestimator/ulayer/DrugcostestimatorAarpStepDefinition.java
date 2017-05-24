@@ -1029,21 +1029,21 @@ public class DrugcostestimatorAarpStepDefinition {
 		dce.validateSummary();
 	}
 
-	@And("^user validates the Drugs link$")
+	@And("^user validates the functionality of Drugs link$")
 	public void validate_Drugs_AARP(){
 		DrugCostEstimatorPage dce = (DrugCostEstimatorPage) getLoginScenario()
 				.getBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE);
 		dce.validateDrugs();
 	}
 
-	@And("^user validates the Pharmacy link$")
+	@And("^user validates the functionality of Pharmacy link$")
 	public void validate_Pharmacy_AARP(){
 		DrugCostEstimatorPage dce = (DrugCostEstimatorPage) getLoginScenario()
 				.getBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE);
 		dce.validatePharmacy();
 	}
 
-	@And("^user validates the Costs link$")
+	@And("^user validates the Costs link and functionality of Return to Plans button$")
 	public void validate_Costs_AARP(){
 		DrugCostEstimatorPage dce = (DrugCostEstimatorPage) getLoginScenario()
 				.getBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE);

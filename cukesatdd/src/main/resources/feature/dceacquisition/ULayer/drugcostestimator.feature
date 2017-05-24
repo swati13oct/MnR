@@ -112,17 +112,30 @@ Given the user is on AARP medicare site landing page
 When I access the acquisition DCE tool from home page
 Then I navigate to step3 page 
 And user validates the Summary
-And user validates the Drugs link
-And user validates the Pharmacy link
+And user validates the functionality of Drugs link
 And user validates the Find a Plan link
 And user validates the disclaimers
 And user searches with multi county zipcode and navigates to VPP page
 | Zip Code    | <zipcode>  |
 | County      | <county>   |
-
 Examples:
 	| zipcode | county        |
 	| 80516   | Weld County   |
+	
+@step3VPP
+Scenario Outline: To verify the Step 3 of DCE tool in AARP site from VPP
+Given the user is on AARP medicare site landing page
+When I access the acquisition DCE tool from vpp page using below zipcode
+| Zip Code    | <zipcode>  |
+Then I navigate to step3 page
+And user validates the Summary
+And user validates the functionality of Drugs link
+And user validates the disclaimers
+And user validates the Costs link and functionality of Return to Plans button
+
+ Examples:
+| zipcode|
+| 90210 |
 
 @acq_drug_cost_estimator_pharmacy2
 Scenario Outline: As a prospective member using redesigned DCE tool on the M&R portal site on either a desktop or mobile device, I want to be able to choose a generic option if it is available from my Drug List and see any cost savings associated with it if I have selected a pharmacy so I can save on the cost of my prescription drugs.
