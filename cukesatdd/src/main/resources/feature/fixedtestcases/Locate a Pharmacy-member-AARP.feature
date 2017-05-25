@@ -1,6 +1,6 @@
-@pharmacylocator1
-Feature:To test Locate a Pharmacy tool in AARP site for all pharmacy types for default zipcode in AARP site
+@fixedTestCaseTest
 @pharmacylocator
+Feature:To test Locate a Pharmacy tool in AARP site for all pharmacy types for default zipcode in AARP site
 Scenario Outline:To verify all available pharmacies for default zipcode in AARP site
 Given registered member to verify locate a pharmacy in AARP Site
 	| <planType> |
@@ -15,7 +15,6 @@ Examples:
 	| PDP      | 25       |
 #	| MAPD	   | 2        |
 
-@pharmacylocator1
 Scenario Outline:To verify pharmacies displayed for particular pharamcy type for default zipcode in AARP site
 Given registered member to verify locate a pharmacy in AARP Site
 	| <planType> |
@@ -32,7 +31,6 @@ Examples:
 	| PDP      | 25       |	Open 24 hours,Long-term care,Standard Network Pharmacy (90-day) |
 #	| MAPD	   | 2        | Open 24 hours,Long-term care,Standard Network Pharmacy (90-day) |
 
-@pharmacylocator1
 Scenario Outline:To verify all available pharmacies for particular zipcode and plan name in AARP site
 Given registered member to verify locate a pharmacy in AARP Site
 	| <plantype> |
@@ -50,7 +48,6 @@ Examples:
 	| PDP      | 90210   | |	25   |  AARP MedicareRx Walgreens (PDP) |
 #	| PDP      | 80002   | Adams County  |	25   |  AARP MedicareRx Preferred (PDP) |
 	
-@pharmacylocator1
 Scenario Outline:To verify pharmacies displayed for particular zipcode, plan name and  pharmacy type in AARP site
 Given registered member to verify locate a pharmacy in AARP Site
 	| <plantype> |
@@ -70,7 +67,6 @@ Examples:
 	| plantype | zipCode | countyName    | distance |  planName			   | pharmacyType						     |
 	| PDP      | 90210   |  |	25      |  AARP MedicareRx Preferred (PDP) | Long-term care,Standard Network Pharmacy (90-day) |
 
-@pharmacylocator1
 Scenario Outline:To verify all Content in espanol
 Given registered member to verify locate a pharmacy in AARP Site
 	| <plantype> |
