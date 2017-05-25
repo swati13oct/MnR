@@ -316,7 +316,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 			System.out.println("county box not found");
 		}
 		
-		if (driver.getTitle().equalsIgnoreCase(PageTitleConstants.ULAYER_PLAN_SUMMARY_PAGE_TITLE)) {
+		if (driver.getTitle().equalsIgnoreCase("Our Medicare Plans | AARP® Medicare Plans From UnitedHealthcare®")) {
 			System.out.println("title matches");
 			return new VPPPlanSummaryPage(driver);
 		}

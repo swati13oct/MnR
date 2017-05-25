@@ -604,6 +604,34 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		}
 		return new IntroductionInformationPage(driver);
 	}
+	
+	public PlanDetailsPage navigateToPlanDetails(String planName, String planType) {
+
+		if (planType.equalsIgnoreCase("MA") || planType.equalsIgnoreCase("MAPD")) {
+			ElementData elementData = new ElementData("linkText", "View more details");
+			WebElement element = getViewPlanDetailsElement(maPlanElement, elementData, planName);
+			if (element != null) {
+				element.click();
+
+			}
+
+		} else if (planType.equalsIgnoreCase("PDP")) {
+			ElementData elementData = new ElementData("linkText", "View more details");
+			WebElement element = getViewPlanDetailsElement(pdpPlanElement, elementData, planName);
+			if (element != null) {
+				element.click();
+
+			}
+
+		}
+		CommonUtility.checkPageIsReady(driver);
+		if (driver.getTitle().equalsIgnoreCase("Plan Details | AARP® Medicare Plans from UnitedHealthcare®")
+				|| driver.getTitle().equalsIgnoreCase("Plan Detail")) {
+			return new PlanDetailsPage(driver, planType);
+		}
+
+		return null;
+	}
 
 }
 

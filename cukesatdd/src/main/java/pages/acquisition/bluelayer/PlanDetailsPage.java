@@ -63,9 +63,35 @@ public class PlanDetailsPage extends UhcDriver{
     @FindBy(xpath = "//*[@id='yourDruglist']/div[2]/table/tbody/tr[4]/td/div[1]/p[1]")
     private WebElement drugListPharmacyName;
 	
-
-	@FindBy(xpath = "//*[@id='detailplanNameBox']/div/div/div/span/h3")
+    @FindBy(xpath = "//*[@id='detailplanNameBox']/div/div/div/span/h3")
 	private WebElement planName;
+    
+    @FindBy(xpath=".//*[@id='medicalBenefits']")
+	private WebElement medBenefitsSection;
+	
+	@FindBy(xpath=".//*[@id='myDoctorDetails']")
+	private WebElement isMyDoctorCoveredLink;
+	
+	@FindBy(xpath=".//*[@id='additionalBenefits']")
+	private WebElement addBenefitsSection;
+
+	@FindBy(xpath=".//*[@id='drugCopayandDiscounts']")
+	private WebElement drugCoPaysSection;
+	
+	@FindBy(xpath=".//*[@id='backToplans']")
+	private WebElement backToPlansBtn;
+	
+	@FindBy(xpath=".//*[@id='enrollDetails']")
+	private WebElement enrollInPlanBtn;
+	
+	@FindBy(xpath=".//*[@id='optRiders']")
+	private WebElement optRiderSection;
+	
+	@FindBy(xpath=".//*[@id='planCost']")
+	private WebElement planCostsSection;
+	
+	@FindBy(xpath=".//*[@id='_content_uhcmedicaresolutions_en_health-plans_medicare-advantage-plans_plan-detail_jcr_content_contentPar_plandetails_parsys_plandetailstwocoloum_parsys_teaser']")
+	private WebElement planDocsSection;
 
 	private PageData vppPlanDetails;
 
@@ -320,7 +346,18 @@ public class PlanDetailsPage extends UhcDriver{
         
     }
 	
-
+	    public boolean validatePlanDetailsPage(){
+			boolean flag = false;
+			if(validate(backToPlansBtn)&&validate(isMyDoctorCoveredLink)&&validate(enrollInPlanBtn)&&
+					medBenefitsSection.getText().contains("Monthly Premium")&&addBenefitsSection.getText().contains("Routine Physical")
+					&&drugCoPaysSection.getText().contains("Annual Prescription Deductible")&&optRiderSection.getText().contains("Optional Dental")&&
+					optRiderSection.getText().contains("High Option Dental")&& planCostsSection.getText().contains("Plan Premium")
+					&& planCostsSection.getText().contains("Estimated Annual Total")&&planDocsSection.getText().contains("General Plan Information")){
+				flag =true;
+				
+			}
+			return flag;
+		}
 
 }
 

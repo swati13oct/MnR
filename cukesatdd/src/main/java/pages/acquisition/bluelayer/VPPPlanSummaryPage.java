@@ -47,10 +47,10 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	@FindBy(xpath = "//a[text()='Passport Flyer (PDF)']")
 	private WebElement PassportFlyerPDF;
 
-	@FindBy(xpath = "//div[@class='maplans_planbutton']/div[2]/div[2]/div")
+	@FindBy(xpath = ".//*[@id='maplans2']")
 	private WebElement showMaPlans;
 
-	@FindBy(xpath = "//div[@class='pdpplans_planbutton']/div[2]/div[2]/div")
+	@FindBy(xpath = ".//*[@id='pdpplans2']")
 	private WebElement showPdpPlans;
 
 	@FindBy(xpath = "//div[@class='snpplans_planbutton']/div[2]/div[2]/div")
@@ -73,7 +73,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 
 
 	//@FindBy(xpath ="//div[@id='maplans_container']/div[3]/div/div/div/div[@class='ng-scope']")
-	@FindBy(xpath ="//div[@id='maplans_container']")
+	@FindBy(xpath = "//div[@id='maplans_container']")
 	List<WebElement> maPlanElement;
 
 	@FindBy(xpath = "//div[@id='maplans_container']/h1/span[2]")
@@ -108,6 +108,9 @@ public class VPPPlanSummaryPage extends UhcDriver {
 
 	@FindBy(xpath =".//*[@id='pdpplans_container']")
 	List<WebElement> pdpPlanElement;
+	
+	@FindBy(xpath =".//*[@id='viewDetailsMA']")
+	private WebElement viewDetailsBtnMA;
 
 	//@FindBy(xpath ="//div[@id='snpplans_container']/div[2]/div/div/div/div[@class='ng-scope']")	
 
@@ -322,10 +325,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		System.out.println(planName);
 		if (planName.contains("HMO")) {
 			ElementData elementData = new ElementData("id", "viewDetailsMA");
-			WebElement element = getViewPlanDetailsElement(maPlanElement,
-					elementData, planName);
-			System.out.println(element.getText());
-
+			WebElement element = getViewPlanDetailsElement(maPlanElement, elementData, planName);
 			if (element != null) {
 				element.click();
 			}
@@ -374,14 +374,20 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		return null;
 	}
 
-	private WebElement getViewPlanDetailsElement(
-			List<WebElement> maPlanElement2, ElementData elementData,
+	private WebElement getViewPlanDetailsElement(List<WebElement> maPlanElement2, ElementData elementData,
 			String planName) {
+		CommonUtility.waitForPageLoad(driver,viewDetailsBtnMA,CommonConstants.TIMEOUT_30);
 		for (WebElement plan : maPlanElement2) {
+			System.out.println(plan.getText());
+			try {
+				Thread.sleep(3000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			if (plan.getText().contains(planName)) {
 
-				WebElement element = findChildElement(elementData,
-						plan);
+				WebElement element = findChildElement(elementData, plan);
 
 				return element;
 
@@ -767,6 +773,16 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		// TODO Auto-generated method stub
 		return true;
 
+	}
+	
+	@FindBy(linkText = "Change location")
+	private WebElement changeLocationBtn;            
+	
+	public boolean validateVPPPlanSummaryPage(){
+		boolean flag = false;
+		if(validate(showMaPlans)&&validate(showPdpPlans)&&validate(changeLocationBtn))
+			flag = true;
+		return flag;
 	}
 }
 

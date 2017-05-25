@@ -33,8 +33,8 @@ public class PlanDetailsPage extends UhcDriver {
 	@FindBy(id = "learnmorebtnDetails")
 	private WebElement waysToSaveLink;
 
-	@FindBy(xpath="//*[@id='enrollDetails']/span")
-	private WebElement enrollinaPlan;
+	@FindBy(xpath=".//*[@id='highlights']/div/a")
+	private WebElement enrollInPlanBtn;
 
 	@FindBy(xpath = "//*[@id='detailplanNameBox']/div/div/div/span/h3")
 	private WebElement planName;
@@ -66,9 +66,38 @@ public class PlanDetailsPage extends UhcDriver {
     @FindBy(xpath = "//*[@id='yourDruglist']/div[2]/table/tbody/tr[4]/td/div[1]/p[1]")
     private WebElement drugListPharmacyName;
 	
-	
 	@FindBy(id = "backToplans")
 	private WebElement backToAllPlans;
+	
+	@FindBy(xpath="//*[@id='detailTabs']/div[1]/a[1]")
+	private WebElement medBenefitsTab;
+	
+	@FindBy(xpath="//*[@id='detail-0']/div/div/div[1]")
+	private WebElement medBenefitsSection;
+	
+	@FindBy(xpath="//*[@id='detail-0']/div/div/div[2]")
+	private WebElement addBenefitsSection;
+
+	@FindBy(xpath="//*[@id='detailTabs']/div[1]/a[1]")
+	private WebElement presDrugTab;
+	
+	@FindBy(xpath=".//*[@id='drugBenefits']")
+	private WebElement drugBenefitsSection;
+	
+	@FindBy(xpath=".//*[@id='DrugListDetails']")
+	private WebElement drugListEditBtn;
+	
+	@FindBy(xpath="//*[@id='detailTabs']/div[1]/a[1]")
+	private WebElement optRidersTab;
+	
+	@FindBy(xpath=".//*[@id='optionalRiders']")
+	private WebElement optRiderSection;
+	
+	@FindBy(xpath="//*[@id='detailTabs']/div[1]/a[1]")
+	private WebElement planCostsTab;
+	
+	@FindBy(xpath=".//*[@id='planCosts']")
+	private WebElement planCostsSection;
 	
 	private PageData vppPlanDetails;
 
@@ -159,7 +188,7 @@ public class PlanDetailsPage extends UhcDriver {
 
 	public PlanInformationPage navigatetoenrollinplanlink(String planName)
 	{
-		enrollinaPlan.click();
+		enrollInPlanBtn.click();
 		System.out.println(driver.getTitle());
 		if (driver.getTitle().equalsIgnoreCase("AARP Medicare Complete Online Application") || driver.getTitle().equalsIgnoreCase("AARP Medicarerx Online Application")|| driver.getTitle().equalsIgnoreCase("Enrollment Information"))
 		{
@@ -286,6 +315,37 @@ public class PlanDetailsPage extends UhcDriver {
         
         
     }
+    
+    public boolean validatePlanDetailsPage(){
+		boolean flag = false, flag1 = false, flag2 = false, flag3 = false;
+		if(validate(medBenefitsTab)&&validate(presDrugTab)&&validate(optRidersTab)&&validate(planCostsTab)&& validate(enrollInPlanBtn)&&
+				medBenefitsSection.getText().contains("Monthly Premium")&&addBenefitsSection.getText().contains("Annual Routine Physical")){
+			
+			presDrugTab.click();
+				if(drugBenefitsSection.getText().contains("Prescription Drug Benefits")&&drugBenefitsSection.getText().contains("Your Drug List")
+					&&validate(drugListEditBtn))
+					flag1 = true;
+				else
+					System.out.println("Error in validating the Prescription Drug Page");
+			
+			optRidersTab.click();
+				if(optRiderSection.getText().contains("Optional Dental")&&optRiderSection.getText().contains("High Option Dental"))
+					flag2 = true;
+				else
+					System.out.println("Error in validating the Optional Page");
+				
+			planCostsTab.click();
+				if(planCostsSection.getText().contains("Plan Premium")&&planCostsSection.getText().contains("Medical Benefits")&&
+					planCostsSection.getText().contains("Estimate Annual Total"))
+					flag3 = true;
+				else
+					System.out.println("Error in validating the Plan Costs Page");
+			
+			if(flag1 && flag2 && flag3)
+				flag = true;;
+		}
+		return flag;
+	}
 
    	
 
