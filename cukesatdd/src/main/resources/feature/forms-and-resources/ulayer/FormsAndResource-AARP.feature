@@ -163,8 +163,8 @@ Examples:
 Scenario Outline:To verify content story in forms and resource in AARP site
 Given registered member for forms and resources in AARP Site
 	| <planType> |
-When the user view mymenu in AARP site
-Then the user view preffered mail service pharmacy in AARP site
+#When the user view mymenu in AARP site
+When the user view preffered mail service pharmacy in AARP site
 Then the user validate preffered mail service pharmacy in AARP site
 
 Examples:

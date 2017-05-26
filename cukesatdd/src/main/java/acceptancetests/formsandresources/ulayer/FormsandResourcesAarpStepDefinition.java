@@ -393,7 +393,7 @@ public class FormsandResourcesAarpStepDefinition {
 				.navigateToMymenuAarpPage();
 	}
 
-	@Then("^the user view preffered mail service pharmacy in AARP site$")
+	@When("^the user view preffered mail service pharmacy in AARP site$")
 	public void views_prefered_mail_service_aarp_site() {
 		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario()
 				.getBean(PageConstants.ACCOUNT_HOME_PAGE);

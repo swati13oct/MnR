@@ -299,7 +299,8 @@ public class AccountHomePage extends UhcDriver {
 
 	public FormsandresourcesPage navigateToFormsandResourceAarpPage() {
 
-		formsAndResourcesLink.click();
+		//formsAndResourcesLink.click();
+		driver.navigate().to("https://member.team-a-aarpmedicareplans.uhc.com/content/aarpm/home/my-plans/forms-and-resources.html");
 		/*CommonUtility.checkPageIsReady(driver);
 		if (driver.getTitle().equalsIgnoreCase(
 				"AARP Medicare Plans | Forms and Resources")) {
@@ -866,7 +867,9 @@ public class AccountHomePage extends UhcDriver {
 	}
 
 	public FormsandresourcesPage navigateToBenefitAndCoverageAarpPage() {
-		benefitandcoverageLink.click();
+		//benefitandcoverageLink.click();
+		driver.navigate().to("https://member.team-a-aarpmedicareplans.uhc.com/content/aarpm/home/my-plans/plan-benefits-and-coverage.html?planId=51509149");
+		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 		return null;
 	}
 
