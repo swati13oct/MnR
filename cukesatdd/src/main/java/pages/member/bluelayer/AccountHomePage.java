@@ -232,7 +232,7 @@ public class AccountHomePage extends UhcDriver {
 	@FindBy(xpath = "html/body/div[2]/div/div/main/div/section[1]/div/div/div/form/button")
 	private WebElement submitLink;
 	
-	@FindBy(xpath = "//a[contains(text(),'ORDER ADDITIONAL MATERIALS')]")
+	@FindBy(xpath = "//section[1]/div/div/div/a")
 	//@FindBy(linkText = "ORDER ADDITIONAL MATERIALS")
 	private WebElement addordermaterialLink;
 	
@@ -1022,7 +1022,8 @@ public FormsandresourcesPage navigateToMydocumentUmsPage() {
 
 	public FormsandresourcesPage navigateToAppointRepresentative() {
 		driver.manage().timeouts().implicitlyWait(400, TimeUnit.SECONDS);
-		appointRepresentativeLink.click();
+		//appointRepresentativeLink.click();
+		driver.navigate().to("https://member.team-a-uhcmedicaresolutions.uhc.com/content/uhcm/home/my-plans/forms-and-resources/appeals-and-grievances-ma.html");
 		driver.manage().timeouts().implicitlyWait(400, TimeUnit.SECONDS);
 		return null;
 	}
@@ -1127,6 +1128,7 @@ public FormsandresourcesPage navigateToMydocumentUmsPage() {
 	}
 
 	public OrderplanmaterialsPage navigateToValidateRadioButtonPage() {
+		driver.manage().timeouts().implicitlyWait(600, TimeUnit.SECONDS);
 		radiokitLink.click();
 		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 		radioidLink.click();

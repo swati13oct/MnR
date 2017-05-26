@@ -385,10 +385,24 @@ public class FormsandResourcesUmsStepDefinition {
 	
 	@Then("the user view prefered mail service pharmacy benefit in UMS site$")
 	public void views_prefered_pharmacy_benefit_Ums_site() {
-		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario()
+		/*AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario()
 				.getBean(PageConstants.ACCOUNT_HOME_PAGE);
 		FormsandresourcesPage formsAndResourcesPage = accountHomePage
-				.navigateToPreferedPharmacyBenefit();
+				.navigateToPreferedPharmacyBenefit();*/
+		
+		try {
+			
+			JSONObject actual=(JSONObject) loginScenario.getBean(PlanBenefitsAndCoverageCommonConstants.BENEFITS_AND_COVERAGE_ACTUAL);
+			
+			JSONObject expected=(JSONObject) loginScenario.getBean(PlanBenefitsAndCoverageCommonConstants.BENEFITS_AND_COVERAGE_EXPECTED);
+			
+			if(actual!=null && expected !=null){
+				JSONAssert.assertEquals(expected, actual, true);
+			}			
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 	
 	@Then("the user view how to appoint a representive in UMS site$")
