@@ -177,10 +177,24 @@ try {
 	
 	@Then("^the user validate multiple language dropdown menu in UMS site$")
 	public void user_views_multiple_language_dropdown_result_ums() {
-		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario()
+		/*AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario()
 				.getBean(PageConstants.ACCOUNT_HOME_PAGE);
 		PharmacySearchPage pharmacySearchPage = accountHomePage
-				.navigateTomultipleLanguageDropdownResultsearch();		
+				.navigateTomultipleLanguageDropdownResultsearch();*/
+		
+		try {
+			
+			JSONObject actual=(JSONObject) loginScenario.getBean(PlanBenefitsAndCoverageCommonConstants.PHARMACYSEARCH_ACTUAL);
+			
+			JSONObject expected=(JSONObject) loginScenario.getBean(PlanBenefitsAndCoverageCommonConstants.PHARMACYSEARCH_EXPECTED);
+			
+			if(actual!=null && expected !=null){
+				JSONAssert.assertEquals(expected, actual, true);
+			}			
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 	
 	@Then("^the user validates the Preferred Mail service Pharmacy widget available in UMS site$")
@@ -189,7 +203,7 @@ try {
 				.getBean(PageConstants.ACCOUNT_HOME_PAGE);
 		PharmacySearchPage pharmacySearchPage = accountHomePage
 				.navigateToPreferedMailServiceWidgetResult();	*/
-try {
+		try {
 			
 			JSONObject actual=(JSONObject) loginScenario.getBean(PlanBenefitsAndCoverageCommonConstants.PHARMACYSEARCH_ACTUAL);
 			
@@ -264,7 +278,7 @@ try {
 	
 	@And("^the user validates AEP plan year and type in pharmaciy search results available in UMS site$")
 	public void user_views_aep_available_in_ums() {
-try {
+	try {
 			
 			JSONObject actual=(JSONObject) loginScenario.getBean(PlanBenefitsAndCoverageCommonConstants.PHARMACYSEARCH_ACTUAL);
 			
@@ -281,18 +295,45 @@ try {
 	
 	@And("^the user searches for get direcion available in UMS site$")
 	public void user_views_get_direction_ums() {
-		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario()
+		/*AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario()
 				.getBean(PageConstants.ACCOUNT_HOME_PAGE);
 		PharmacySearchPage pharmacySearchPage = accountHomePage
-				.navigateToGetDirection();	
+				.navigateToGetDirection();*/
+	try {
+			
+			JSONObject actual=(JSONObject) loginScenario.getBean(PlanBenefitsAndCoverageCommonConstants.PHARMACYSEARCH_ACTUAL);
+			
+			JSONObject expected=(JSONObject) loginScenario.getBean(PlanBenefitsAndCoverageCommonConstants.PHARMACYSEARCH_EXPECTED);
+			
+			if(actual!=null && expected !=null){
+				JSONAssert.assertEquals(expected, actual, true);
+			}			
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 	
 	@And("^the user validate more information is available in UMS site$")
 	public void user_views_more_information_ums() {
-		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario()
+		/*AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario()
 				.getBean(PageConstants.ACCOUNT_HOME_PAGE);
 		PharmacySearchPage pharmacySearchPage = accountHomePage
-				.navigateToMoreInformation();	
+				.navigateToMoreInformation();*/
+		
+	try {
+			
+			JSONObject actual=(JSONObject) loginScenario.getBean(PlanBenefitsAndCoverageCommonConstants.PHARMACYSEARCH_ACTUAL);
+			
+			JSONObject expected=(JSONObject) loginScenario.getBean(PlanBenefitsAndCoverageCommonConstants.PHARMACYSEARCH_EXPECTED);
+			
+			if(actual!=null && expected !=null){
+				JSONAssert.assertEquals(expected, actual, true);
+			}			
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 	
 	@Then("^the user searches for texas ers plan type is available in UMS site$")
