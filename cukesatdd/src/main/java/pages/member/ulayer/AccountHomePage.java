@@ -211,16 +211,17 @@ public class AccountHomePage extends UhcDriver {
 	@FindBy(xpath = "//*[@id='planinformation']/div[2]/div[5]/span[2]/a")
 	private WebElement benefitandcoverageLink;
 	
-	@FindBy(xpath = "//*[@id='notShipRadio']/div[1]/div")
+	@FindBy(xpath = "//*[@id='notShipRadio']/div[1]/div/div/label/div/div[2]/div/p")
 	private WebElement radiokitLink;
 	
-	@FindBy(xpath = "//*[@id='notShipRadio']/div[2]/div")
+	@FindBy(xpath = "//*[@id='notShipRadio']/div[2]/div/div/label/div/div/div/p[1]")
 	private WebElement radioidLink;
 
 	@FindBy(xpath = "html/body/div[2]/div/div/main/div/section[1]/div/div/div/form/button")
 	private WebElement submitLink;
 	
-	@FindBy(linkText = "ORDER ADDITIONAL MATERIALS")
+	//@FindBy(linkText = "ORDER ADDITIONAL MATERIALS")
+	@FindBy(xpath = "//section[1]/div/div/div/a")
 	private WebElement addordermaterialLink;
 	
 	
