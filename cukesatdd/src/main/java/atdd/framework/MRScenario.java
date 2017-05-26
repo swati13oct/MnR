@@ -1010,21 +1010,6 @@ public class MRScenario {
 		}
 		return webDriver;
 		
-		/*if (null == webDriver) {
-			File pathToBinary = new File("C:/Mozilla Firefox/firefox.exe");
-			FirefoxBinary ffBinary = new FirefoxBinary(pathToBinary);
-			FirefoxProfile firefoxProfile = new FirefoxProfile();
-			webDriver = new FirefoxDriver(ffBinary, firefoxProfile);
-			webDriver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);*/
-		}
-/*            
-        
-        webDriver = new FirefoxDriver();
-        webDriver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);*/
-        //return webDriver;
-		
-	
-
 	public WebDriver getIEDriver() {
 		System.setProperty("webdriver.ie.driver",
 				"C:/Users/pgupta15/Downloads/IEDriverServer_x64_2.27.0/IEDriverServer.exe");
