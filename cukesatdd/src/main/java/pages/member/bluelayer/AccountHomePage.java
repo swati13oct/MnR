@@ -195,10 +195,10 @@ public class AccountHomePage extends UhcDriver {
 	@FindBy(xpath = "(.//a)[2]")
 	private WebElement pcpContactUsPagebackToPreviousPage;
 	
-	@FindBy(xpath = "(.//a)[2]")
+	@FindBy(xpath = "(.//a)[1]")
 	private WebElement aboutUsPagebackToPreviousPage;
 	
-	@FindBy(xpath = "(.//a)[2]")
+	@FindBy(xpath = "(.//a)[1]")
 	private WebElement aboutUsPCPPagebackToPreviousPage;
 	
 	@FindBy(xpath = "(.//a)[2]") 
