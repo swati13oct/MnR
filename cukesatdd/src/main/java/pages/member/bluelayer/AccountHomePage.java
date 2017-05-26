@@ -112,7 +112,8 @@ public class AccountHomePage extends UhcDriver {
 	@FindBy(xpath = "//*[@id='subPageLeft']/div[2]/div[2]/h3[2]/a")
 	private WebElement createPdfLink;
 	
-	@FindBy(xpath = "html/body/div[2]/div[1]/p/a[2]")
+	//@FindBy(xpath = "html/body/div[2]/div[1]/p/a[2]")
+	@FindBy(xpath = "html/body/div[2]/div/div[1]/header/div/div/div/div/div/div/p/a[2]")	
 	private WebElement backToPreviousPage;
 	
 	@FindBy(xpath = "//span[contains(.,'Print temporary ID card')]")
