@@ -339,7 +339,7 @@ public class AccountHomePage extends UhcDriver {
 
 	public FormsandresourcesPage navigateToFormsandResourcePage() {
 
-		formsAndResourcesLink.click();
+		driver.navigate().to("https://member.team-a-uhcmedicaresolutions.uhc.com/content/uhcm/home/my-plans/forms-and-resources.html");
 
 		return null;
 

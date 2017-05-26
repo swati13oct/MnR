@@ -126,7 +126,7 @@ Given registered member for forms and resources in UMS Site
 When the user view forms and resources in UMS site 
 Then the user view member right responsibilities in UMS site
 Then the user validates the content on member right responsibilities page in UMS site
-Then the user validate backtoprevious link in UMS site
+#Then the user validate backtoprevious link in UMS site
 
 
 Examples:
@@ -140,7 +140,7 @@ Given registered member for forms and resources in UMS Site
 	| Member Type		 |<memberType> |
 When the user view MAPD appeals and grievances in UMS site 
 Then the user validates the content on MAPD appeals and grievances page in UMS site
-Then the user validate backtoprevious link in UMS site
+#Then the user validate backtoprevious link in UMS site
 
 
 Examples:
@@ -154,7 +154,7 @@ Given registered member for forms and resources in UMS Site
 	| Member Type		 |<memberType> |
 When the user view SSUP appeals and grievances in UMS site 
 Then the user validates the content on SSUP appeals and grievances page in UMS site
-Then the user validate backtoprevious link in UMS site
+#Then the user validate backtoprevious link in UMS site
 
 
 Examples:
