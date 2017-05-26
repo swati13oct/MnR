@@ -36,11 +36,14 @@ public class LoginPage extends UhcDriver {
 
 
 	private static String PAGE_URL = MRConstants.UHCM_URL;
-	
+
 
 	//@FindBy(xpath = "//button[@id='fd_memberSignInButton' or @id='accessURAccountBTN']")
 	@FindBy(id = "fd_memberSignInButton")
 	private WebElement loginIn;
+
+	@FindBy(xpath = "//div[@id='IPEinvL']/map/area[@alt='close']")
+	private WebElement alertClosebutton;
 
 	@FindBy(id = "loginPOPUPuser")
 	//@FindBy(xpath = "//*[@id='loginSTANDuser']")
@@ -84,10 +87,10 @@ public class LoginPage extends UhcDriver {
 		sendkeys(passwordField, password);
 		signInButton.click();
 
-		
+
 		if (MRScenario.environment.equals("dev-a") || MRScenario.environment.equals("team-a")) {
 			while (!isAlertPresent());
-        }
+		}
 
 
 		if (MRScenario.environment.equals("dev-a"))  {
@@ -95,18 +98,26 @@ public class LoginPage extends UhcDriver {
 			while (!isAlertPresent());
 		}
 		if ( MRScenario.environment.equals("team-c") || MRScenario.environment.equals("team-b")) {
-			
+
 			Alert alert = driver.switchTo().alert();
-	        alert.accept();
-	        Alert alert1 = driver.switchTo().alert();
-	        alert1.accept();
-	        }
-		
+			alert.accept();
+			Alert alert1 = driver.switchTo().alert();
+			alert1.accept();
+		}
+
 		try {
 			Thread.sleep(10000);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		}
+
+		try
+		{
+			if(alertClosebutton.isDisplayed())
+				alertClosebutton.click();
+		} catch (Exception e) {
+			System.out.println("Alert is not displayed");
 		}
 
 		if(currentUrl().contains("home/my-account-home.html") && category.equalsIgnoreCase("Group") || currentUrl().contains("/guest/home.html") || currentUrl().contains("/login.html"))
@@ -170,24 +181,24 @@ public class LoginPage extends UhcDriver {
 
 
 	}
-	
+
 	public boolean isAlertPresent(){ 
-	    try{ 
-	        Alert a = new WebDriverWait(driver, 5).until(ExpectedConditions.alertIsPresent());
-	        if(a!=null){
-	            System.out.println("Alert is present = " + a.getText());
-	            driver.switchTo().alert().accept();
-	            return true;
-	        }else{
-	            //throw new Throwable();
-	        	System.out.println("alert is not present 1");
-	        	return false;
-	        }
-	    } 
-	    catch (Throwable e) {
-	        System.err.println("Alert isn't present!!");
-	        return false; 
-	    } 
+		try{ 
+			Alert a = new WebDriverWait(driver, 5).until(ExpectedConditions.alertIsPresent());
+			if(a!=null){
+				System.out.println("Alert is present = " + a.getText());
+				driver.switchTo().alert().accept();
+				return true;
+			}else{
+				//throw new Throwable();
+				System.out.println("alert is not present 1");
+				return false;
+			}
+		} 
+		catch (Throwable e) {
+			System.err.println("Alert isn't present!!");
+			return false; 
+		} 
 
 	} 
 

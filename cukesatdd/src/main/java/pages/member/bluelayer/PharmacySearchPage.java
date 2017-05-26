@@ -150,6 +150,13 @@ public class PharmacySearchPage extends UhcDriver {
 		}
 		String distance = zipAttributesMap.get("Distance");
 		selectFromDropDown(distanceValues, distance);
+		
+		try {
+			Thread.sleep(5000);
+		} catch (InterruptedException e2) {
+			// TODO Auto-generated catch block
+			e2.printStackTrace();
+		}
 
 		if (zipcode != null) {
 			continueButton.click();
@@ -182,7 +189,11 @@ public class PharmacySearchPage extends UhcDriver {
 	}
 
 	public PharmacySearchPage selectsPlanName(String planName) {
-		
+		try {
+			Thread.sleep(5000);
+		} catch (InterruptedException e1) {
+			e1.printStackTrace();
+		}
 		selectFromDropDown(planNames,planName);
 		if (driver.getTitle().equalsIgnoreCase(
 				"UnitedHealthcare Medicare Solutions | Pharmacy Directory")) {
@@ -221,6 +232,36 @@ public class PharmacySearchPage extends UhcDriver {
 		return null;
 
 	}
+	
+	public PharmacySearchPage selectsPharmacy(
+			String givenPharmacyTypes) {
+
+
+		String[] pharmacyTypeArray = givenPharmacyTypes.split(",");
+		CommonUtility.checkPageIsReady(driver);
+		pharmacyTypeSelectionRadioButton.click();
+
+		List<WebElement> pharmacyTypesCheckboxes = pharmacyTypes.findElements(By.tagName("li"));
+		for(String pharmacyType : pharmacyTypeArray )
+		{
+			for(WebElement checkBox : pharmacyTypesCheckboxes)
+			{
+				checkBox.getText();
+				System.out.println(""+checkBox.getText());
+				if(checkBox.getText().equalsIgnoreCase(pharmacyType))
+				{
+					checkBox.findElement(By.xpath(".//input[@class='pharCheckBox']")).click();
+				}
+			}
+		}
+		if(driver.getTitle().equalsIgnoreCase("UnitedHealthcare Medicare Solutions | Pharmacy Directory"))
+		{
+			return new PharmacySearchPage(driver);
+		}
+		return null;
+
+	}
+
 	public PharmacySearchPage clickEspanol(){
 		espanolLink.click();
 		return new PharmacySearchPage(driver);
