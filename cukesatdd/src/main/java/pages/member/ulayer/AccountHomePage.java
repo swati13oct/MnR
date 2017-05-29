@@ -23,6 +23,7 @@ import acceptancetests.atdd.data.PageData;
 import acceptancetests.atdd.util.CommonUtility;
 import atdd.framework.MRScenario;
 import atdd.framework.UhcDriver;
+import pages.dashboard.eob.EOBPage;
 
 /**
  * @author pjaising
@@ -594,11 +595,19 @@ public class AccountHomePage extends UhcDriver {
 		}
 		return null;
 	}
-
+	
 	public MedicalEobPage navigateDirectToEOBPage(){
 		driver.navigate().to(EOB_DIRECT_URL);
  		if(driver.getTitle().equalsIgnoreCase("Member Claims")){
         return new MedicalEobPage(driver);
+		}
+		return null;
+	}
+
+	public EOBPage navigateDirectToEOBPag(){
+		driver.navigate().to(EOB_DIRECT_URL);
+ 		if(driver.getTitle().equalsIgnoreCase("Member Claims")){
+        return new EOBPage(driver);
 		}
 		return null;
 	}
