@@ -932,6 +932,17 @@ public class DrugcostestimatorAarpStepDefinition {
 		DrugCostEstimatorPage dce = (DrugCostEstimatorPage) getLoginScenario()
 				.getBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE);
 		dce.navigateToStep2();
+		//dce.populateZipCode("90210");
+		dce.selectPharmacyType("Standard Network");
+		dce.select_first_pharmacy();
+		dce.backwardToStep1();
+	}
+	
+	@And("^I have selected pharmacy in generic flow$")
+	public void I_have_selected_pharmacy_generic_flow() throws InterruptedException{
+		DrugCostEstimatorPage dce = (DrugCostEstimatorPage) getLoginScenario()
+				.getBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE);
+		dce.navigateToStep2();
 		dce.populateZipCode("90210");
 		dce.selectPharmacyType("Available");
 		dce.select_first_pharmacy();

@@ -42,10 +42,10 @@ public class DrugCostEstimatorPage extends UhcDriver {
 	@FindBy(id = "add-drug")
 	public WebElement addDrug;
 
-	@FindBy(xpath = "//p[contains(text(),'STEP2:')]/following-sibling::span[p[contains(text(),'PHARMACY')]]")
+	@FindBy(xpath = "//p[contains(text(),'STEP2:')]/following-sibling::span[p[contains(text(),'Pharmacy')]]")
 	public WebElement step2;
 
-	@FindBy(xpath = "//p[contains(text(),'STEP1:')]/following-sibling::span[p[contains(text(),'DRUGS')]]")
+	@FindBy(xpath = "//p[contains(text(),'STEP1:')]/following-sibling::span[p[contains(text(),'Drugs')]]")
 	public WebElement step1;
 
 	@FindBy(id = "pharmacy-form")
@@ -141,7 +141,9 @@ public class DrugCostEstimatorPage extends UhcDriver {
 	@FindBy(xpath = "//div[@id='pharmacy-results']//span[contains(@class,'pharmacy-name')]")
 	public List<WebElement> pharmacies;
 
-	@FindBy(xpath = ".//*[@id='pharmacy-results']/div[2]/ul[1]/li[1]/div/div[2]/a")
+	//.//*[@id='pharmacy-results']/div[2]/ul[1]/li[1]/div/div[2]/button
+	//.//*[@id='pharmacy-results']/div[2]/ul[1]/li[1]/div/div[2]/a
+	@FindBy(xpath = ".//*[@id='pharmacy-results']/div[2]/ul[1]/li[1]/div/div[2]/button")
 	public WebElement select_btn_first;
 
 	@FindBy(id = "saverSavingSpan")
@@ -473,7 +475,7 @@ public class DrugCostEstimatorPage extends UhcDriver {
 
 	public void navigateToStep2() throws InterruptedException {
 		Thread.sleep(5000);
-		waitforElement(step2);
+		//waitforElement(step2);
 		step2.click();
 		Thread.sleep(10000);
 		waitforElement(pharmacy_form);
@@ -703,10 +705,12 @@ public class DrugCostEstimatorPage extends UhcDriver {
 	public void select_first_pharmacy() throws InterruptedException {
 		Thread.sleep(15000);
 
-		waitforElement(select_btn_first);
+		//waitforElement(select_btn_first);
+		System.out.println("first pharmacy");
 		if (select_btn_first.isDisplayed()) {
 			select_btn_first.click();
 		}
+		System.out.println("first pharmacy 2");
 		Thread.sleep(5000);
 	}
 

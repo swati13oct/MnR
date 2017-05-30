@@ -7,8 +7,10 @@ Given the user is on AARP medicare site landing page
 When I access the acquisition DCE tool from home page
 And I have added a drug to my drug list and a generic equivalent is available for the drug I have selected
  	|Drug|<drug>|
-And I have not yet selected pharmacy
 Then I should be presented the option to switch to the generic option
+And I have not yet selected pharmacy
+And I will see a SWITCH NOW link in the drug tile with appropriate save message
+And I have selected pharmacy in generic flow
 And I will see a SWITCH NOW link in the drug tile with appropriate save message
 And I will see a modal appear upon clicking on SWITCH NOW
 And when I click on the button to accept the generic
@@ -21,11 +23,14 @@ Examples:
 @acq_drug_cost_estimator_switch_to_generic
 Scenario Outline: As a prospective member using redesigned DCE tool on the M&R portal site on either a desktop or mobile device, I want to be able to choose a generic option if it is available from my Drug List and see any cost savings associated with it if I have selected a pharmacy so I can save on the cost of my prescription drugs.
 Given the user is on AARP medicare site landing page
-When I access the acquisition DCE tool from home page
+When I access the acquisition DCE tool from vpp page using below zipcode
+| Zip Code    | <zipcode>  |
 And I have added a drug to my drug list and a generic equivalent is available for the drug I have selected
  	|Drug|<drug>|
-And I have selected pharmacy
 Then I should be presented the option to switch to the generic option
+And I have not yet selected pharmacy
+And I will see a SWITCH NOW link in the drug tile with appropriate save message
+And I have selected pharmacy
 And I will see a SWITCH NOW link in the drug tile with a pharmacy savings cost value
 And I will see a modal appear upon clicking on SWITCH NOW 
 And when I click on the button to accept the generic
@@ -33,8 +38,8 @@ Then the drug name will automatically update within the Drug List
 #And any cost savings will be applied to my total cost savings in Step3
 
 Examples:
-| drug |
-|lipitor|
+|zipcode| drug |
+|90210|lipitor|
 
 @acq_drug_cost_estimator1
 Scenario Outline: As a prospective member using the DCE tool on the M&R portal site, I want to be able to choose my dosage, package and frequency when assembling a drug list on either a desktop or mobile device so I can eventually choose a pharmacy and accurately estimate the cost of my drugs.
@@ -153,7 +158,7 @@ And I select the first pharmacy
 @acq_drug_cost_estimator_US628083
 Scenario Outline: As a prospect who is using the DCE tool on the ULAYER, I want to be able to see the pharmacies that are available to me based on my zip code so I can choose a pharmacy to help me estimate my annual drug costs.
 Given the user is on AARP medicare site landing page
-When I access the acquisition DCE tool from home page
+When I access the acquisition DCE tool from home page 
 And I add the drug with Dosage and Quantity and frequency to the list
 |Drug|<drug>|
 |Dosage|<dosage>|
@@ -179,7 +184,7 @@ Then I should see pharmacy in ZtoA order
 @acq_drug_cost_estimator_US580719
 Scenario Outline: As a prospect who is using the DCE tool on the ULAYER, I want to be able to see the pharmacies that are available to me based on my zip code so I can choose a pharmacy to help me estimate my annual drug costs.
 Given the user is on AARP medicare site landing page
-When I access the acquisition DCE tool from home page
+When I access the acquisition DCE tool from home page 
 And I add the drug with Dosage and Quantity and frequency to the list
 |Drug|<drug>|
 |Dosage|<dosage>|
