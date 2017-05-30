@@ -75,7 +75,7 @@ Examples:
 	| planType  | memberType   | eobTypeData       | fromDate   | toDate     |dateRange       |
  	| MA  | withEOB      | Medical           | 12/12/2007 | 12/12/2008 |Last 6 Months   |
  	
-@F85974	
+@F85974passed	
 Scenario Outline: To verify How to read a medical EOB PDF
 Given registered AMP with for EOB flow
 	| Plan Type      |<planType>  |
@@ -119,7 +119,7 @@ Then the user navigates to EOB page and validates the page
 Examples:
        | planType  | memberType   | eobTypeData       | fromDate   | toDate     |dateRange1       |dateRange2 |dateRange3 |dateRange4 |
       #|Ship      | withEOB      | Medical           | 01/01/2016 | 04/01/2017 |Last 90 Days  |  Last 3-6 Months |Last 6-12 Months|Last 12-18 Months| 
-      #| MA      |  withEOB     | Medical           | 01/01/2016 | 04/01/2017 |Last 90 Days  |  Last 6 Months  | Last 12 Months  | Last 18 Months |
+      | MA      |  withEOB     | Medical           | 01/01/2016 | 04/01/2017 |Last 90 Days  |  Last 6 Months  | Last 12 Months  | Last 18 Months |
       | MAPD      |  withEOB     | Medical           | 01/01/2016 | 04/01/2017 |Last 90 Days  |  Last 6 Months  | Last 12 Months  | Last 18 Months |  
       #| PDP      |  withEOB     | Medical           | 01/01/2016 | 04/01/2017 |Last 90 Days  |  Last 6 Months  | Last 12 Months  | Last 18 Months |   
 
@@ -133,7 +133,7 @@ And the user validates EOB statments displayed
 	Examples:
 	| planType  | memberType   | eobTypeData       | fromDate   | toDate     |dateRange       |
  	| MAPD      | withEOB      | Medical           | 12/12/2007 | 12/12/2008 |Last 6 Months   |
- 	#| MA      | withEOB      | Medical           | 12/12/2007 | 12/12/2008 |Last 9 Months   |
+ 	| MA      | withEOB      | Medical           | 12/12/2007 | 12/12/2008 |Last 9 Months   |
  	#| MA      | withEOB      | Medical           | 12/12/2007 | 12/12/2008 |Last 12 Months   |
  	#| MA      | withEOB      | Medical           | 12/12/2007 | 12/12/2008 |Last 18 Months   | 	
  	#| PDP     | withEOB      | Prescription      |12/12/2007 | 12/12/2008 | Last 6 Months |
