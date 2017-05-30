@@ -218,6 +218,8 @@ public static String CAMPAIGN_PAGE_URL1 = "https://www."+MRScenario.environment+
   
   public static String CAMPAIGN_PAGE_URL2 = "https://www."+MRScenario.environment+"-aarpmedicareplans.uhc.com/health-plans/medicare-advantage-plans/available-plans.html?msg=zero&lang=en&zipcode=02211&WT.mc_id=832467";
   
-  public static String EOB_DIRECT_URL = "https://member."+MRScenario.environment+"-aarpmedicareplans.uhc.com/home/eobtest.html";
+  //public static String EOB_DIRECT_URL = "https://member."+MRScenario.environment+"-aarpmedicareplans.uhc.com/home/eobsearch.html";
+  
+  public static String EOB_DIRECT_URL = "https://member."+MRScenario.environment+"-uhcmedicaresolutions.uhc.com/home/eobsearch.html";
 
 }
