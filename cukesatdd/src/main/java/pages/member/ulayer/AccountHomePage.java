@@ -149,7 +149,7 @@ public class AccountHomePage extends UhcDriver {
 	private PageData myAccountHome;
 	
 	private static String EOB_DIRECT_URL = MRConstants.EOB_DIRECT_URL;
-
+	
 	public JSONObject accountHomeJson;
 
 	private PageData browserCheckData;

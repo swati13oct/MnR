@@ -27,7 +27,10 @@ import atdd.framework.UhcDriver;
 public class LoginPage extends UhcDriver {
 
 	// Page URL
-	private static String PAGE_URL = MRConstants.AARPM_URL;
+	//private static String PAGE_URL = MRConstants.AARPM_URL;
+	//BL url
+	
+	private static String PAGE_URL = MRConstants.UHCM_URL;
 
 	@FindBy(id = "fd_memberSignInButton")
 	private WebElement loginIn;
