@@ -9,6 +9,7 @@ import atdd.framework.MRScenario;
  * @author pjaising
  *
  */
+
 public class MRConstants {
 
 	public static final String AARPM_URL = "https://member."+MRScenario.environment+"-aarpmedicareplans.uhc.com";
