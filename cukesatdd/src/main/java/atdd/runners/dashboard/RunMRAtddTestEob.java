@@ -16,6 +16,6 @@ import cucumber.junit.Cucumber;
 		features = { "feature/dashboard/eob" }, 
 		format = { 
 		"pretty", "html:reports/test-report","json:target/cucumber.json" }, tags ={"@F85974passed"})
-public class RunMRAtddEob {
+public class RunMRAtddTestEob {
 
 }
