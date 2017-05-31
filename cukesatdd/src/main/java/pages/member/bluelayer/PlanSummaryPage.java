@@ -36,9 +36,11 @@ public class PlanSummaryPage extends UhcDriver {
 	@FindBy(linkText = "addaplan")
 	private WebElement addaplanlink;
 	
+	@FindBy(xpath = ".//*[@id='plan_box']/div[1]/div[2]/div/p[2]/a")
+	private WebElement searchMedClaimsBtn;
 	
-	@FindBy(xpath = "//a[@id='btn_viewdetails']")
-   private WebElement viewDetailsButtons;
+	@FindBy(xpath = ".//*[@id='plan_box']/div[2]/div[2]/div/p[2]/a")
+	private WebElement searchDrugClaimsBtn;
 
 	@FindBy(xpath = "//div[@id='main_content']/div[2]/div/div[2]/div/div[2]/div/div[2]/div/h3")
 	private WebElement planInformationHeading;
@@ -55,31 +57,9 @@ public class PlanSummaryPage extends UhcDriver {
 	@FindBy(id = "disclosure_link")
 	private WebElement logOut;
 	
-	@FindBy(id="btn_viewdetails")
-	private WebElement viewDetailsButton;
-	
 	@FindBy(xpath = ".//*[@id='plan_box']")
 	private WebElement claimsPlanBox;
 	
-	@FindBy(xpath = ".//*[@id='plan_box']/div[1]/div[2]/div/p[1]")
-	private WebElement claimsStatement;
-	
-	@FindBy(xpath = ".//*[@id='btn_searchallclaims']")
-	private WebElement searchClaimsBtn;
-	
-	@FindBy(xpath = ".//*[@id='btn_searchallclaims1']")
-	private WebElement searchClaimsBtn1;
-	
-	@FindBy(xpath = ".//*[@id='btn_viewclaims']")
-	private WebElement viewClaimsBtn;
-	
-	@FindBy(xpath = ".//*[@id='btn_viewclaims1']")
-	private WebElement viewClaimsBtn1;
-	
-	@FindBy(xpath = ".//*[@id='plan_box']/div[2]/div[2]/div/p[1]")
-	private WebElement rxClaimsStatement;
-
-
 	private PageData planSummary;
 
 	public JSONObject planSummaryJson;
@@ -209,10 +189,10 @@ public class PlanSummaryPage extends UhcDriver {
 		boolean presentLink =false;
 		
 		try {
-			if(viewDetailsButtons.isDisplayed()){
+		//	if(viewDetailsButtons.isDisplayed()){
 				
 				presentLink = true;
-			}			  
+		//	}			  
 			 
 		} catch (NoSuchElementException e) {
 			presentLink = false;
@@ -245,27 +225,11 @@ public class PlanSummaryPage extends UhcDriver {
 	}
 
 	
-	private WebElement medClaimsbtn = null, rxClaimsbtn = null;
+
 	public boolean validateClaims() {
 		boolean flag = false;
-		CommonUtility.waitForPageLoad(driver, claimSectionHeading,20);
+		CommonUtility.waitForPageLoad(driver, claimSectionHeading,CommonConstants.TIMEOUT_30);
 		if(validate(claimSectionHeading)&&validate(claimsPlanBox)){
-			
-			if(claimsStatement.getText().equals("No medical claims were processed.")){
-				System.out.println("There were no medical claims found in the last 90 days");
-				medClaimsbtn = searchClaimsBtn;
-			}else{
-				System.out.println("There were some medical claims found in the last 90 days");
-				medClaimsbtn = viewClaimsBtn;
-			}
-			if(rxClaimsStatement.getText().equals("No prescription drug claims were processed.")){
-				System.out.println("There were no rx claims found in the last 90 days");
-				rxClaimsbtn = searchClaimsBtn1;
-			}else{
-				System.out.println("There were some rx claims found in the last 90 days");
-				rxClaimsbtn = searchClaimsBtn;
-			}
-			if(validate(medClaimsbtn)&&validate(rxClaimsbtn))
 				flag = true;
 		}
 		return flag;
@@ -273,7 +237,7 @@ public class PlanSummaryPage extends UhcDriver {
 	
 	public ClaimSummaryPage navigateToMedicalClaimsSummary() {
 		
-		viewClaimsBtn.click();
+		searchMedClaimsBtn.click();
 		try {
 			Thread.sleep(2000);
 		} catch (InterruptedException e) {
@@ -288,7 +252,7 @@ public class PlanSummaryPage extends UhcDriver {
 	}
 	public ClaimSummaryPage navigateToDrugClaimsSummary() {
 
-		viewClaimsBtn1.click();
+		searchDrugClaimsBtn.click();
 		if (getTitle().equalsIgnoreCase(
 				"UnitedHealthcare Medicare Solutions | Claims")) {
 				return new ClaimSummaryPage(driver);

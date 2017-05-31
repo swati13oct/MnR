@@ -133,9 +133,9 @@ public class MedicalClaimSummaryPage extends UhcDriver {
 	public MedicalClaimSummaryPage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
-		CommonUtility.waitForPageLoad(driver, searchResultMessage, CommonConstants.TIMEOUT_30);
+	/*	CommonUtility.waitForPageLoad(driver, searchResultMessage, CommonConstants.TIMEOUT_30);
 		CommonUtility.waitForPageLoad(driver, customResultMessage, CommonConstants.TIMEOUT_30);
-		CommonUtility.waitForPageLoad(driver, noClaimsFoundMessage, CommonConstants.TIMEOUT_30);
+		CommonUtility.waitForPageLoad(driver, noClaimsFoundMessage, CommonConstants.TIMEOUT_30);*/
 		String fileName = CommonConstants.MEDICAL_CLAIMS_SUMMARY_PAGE_DATA;
 		medicalClaimsSummary = CommonUtility.readPageData(fileName,
 				CommonConstants.PAGE_OBJECT_DIRECTORY_ULAYER_MEMBER);
@@ -586,12 +586,7 @@ public class MedicalClaimSummaryPage extends UhcDriver {
 	
 	public boolean validateClaims(){
 		boolean flag = false;
-		try {
-			Thread.sleep(5000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		CommonUtility.waitForPageLoad(driver, searchResultMsg, CommonConstants.TIMEOUT_30);
 		if(validate(serviceDate)&&validate(providerName)&&validate(claimType)&&validate(charged)&&validate(claimStatus)
 				&&validate(claimDetails)&&validate(moreInfoLink1)&&validate(searchResultMsg)){
 			flag = true;

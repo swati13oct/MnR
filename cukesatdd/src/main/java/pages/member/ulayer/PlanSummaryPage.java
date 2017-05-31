@@ -49,9 +49,6 @@ public class PlanSummaryPage extends UhcDriver {
 	
 	@FindBy(xpath = ".//*[@id='main_content']/div[1]/div[2]/div/div[3]/div[1]/div[2]/div/h3")
 	private WebElement claimSectionHeading;
-	
-	@FindBy(xpath = ".//*[@id='plan_box']/div[2]/div[2]/div/p[2]/a")
-	private WebElement rxClaimsStatement;
 
 	private PageData planSummary;
 
@@ -148,17 +145,8 @@ public class PlanSummaryPage extends UhcDriver {
 	public boolean validateClaims() {
 		boolean flag = false;
 		CommonUtility.waitForPageLoad(driver, claimSectionHeading,20);
-		if(validate(claimSectionHeading)&&validate(claimsPlanBox)&&validate(medClaimsBtn)&&validate(drugClaimsBtn)){
+		if(validate(claimSectionHeading)&&validate(claimsPlanBox)){
 			flag = true;
-			if(claimsStatement.getText().equals("No medical claims were processed."))
-				System.out.println("There were no medical claims found in the last 90 days");
-			else
-				System.out.println("There were some medical claims found in the last 90 days");
-			
-			if(rxClaimsStatement.getText().equals("No prescription drug claims were processed."))
-				System.out.println("There were no rx claims found in the last 90 days");
-			else
-				System.out.println("There were some rx claims found in the last 90 days");
 		}
 		return flag;
 	}

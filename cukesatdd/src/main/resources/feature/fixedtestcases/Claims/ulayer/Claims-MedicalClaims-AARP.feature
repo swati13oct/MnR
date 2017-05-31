@@ -3,7 +3,7 @@
 Feature:To test the medical claims summary and details flow in AARP site
 @medClaimsUlayer
 Scenario Outline:Verify the medical claim summary  and details for selected time period in AARP site
-Given the user is on the AARP medicare site login page
+Given the user is on the AARPM site login page
 When the registered AMP with following attributes in AARP site for medical claims
 	| Plan Type   | <planType>   |
 	| Claim Type  | <claimType>  |
@@ -16,4 +16,4 @@ Then user validates the medical claims displayed based on the selection in AARP 
 And user views the claim details for the first medical claim in AARP site and validates
 Examples:
 	| planType | claimType | claimPeriod    |
-	| MAPD       | Nice_med      | Last 6 Months |
+	| MAPD       | Nice_med      | Last 24 Months |
