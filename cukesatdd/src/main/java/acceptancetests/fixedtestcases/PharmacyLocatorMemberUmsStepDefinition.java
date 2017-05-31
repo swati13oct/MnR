@@ -106,7 +106,7 @@ public class PharmacyLocatorMemberUmsStepDefinition {
 					accountHomePage);
 			Assert.assertTrue(true);
 		}else{
-			Assert.fail("Account Home page nit displayed ");
+			Assert.fail("Account Home page not displayed for the user "+userName);
 		}
 		/* Get expected data */
 		/*Map<String, JSONObject> expectedDataMap = loginScenario
