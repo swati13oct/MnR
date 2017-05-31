@@ -187,12 +187,9 @@ public class PharmacyResultPage extends UhcDriver{
 					+ " Network Pharmacy (90-day) - You can fill a 90-day supply of prescription drugs at this retail pharmacy.Mail Order "
 					+ "Pharmacy - You can have a 90-day supply of medications you take regularly shipped directly to your home through a mail "
 					+ "service pharmacy.";
-			for(int i = 0;i <tooltipDetails.size();i++){
-				if(!tooltipDetails.get(i).getText().isEmpty()){
-					if(!(expectedTooltip.contains(tooltipDetails.get(i).getText()))){
-						System.out.println(tooltipDetails.get(i).getText());
-						flag=false;
-					}
+			for(int i = 11;i <tooltipDetails.size();i++){
+				if(tooltipDetails.get(i).getText().isEmpty()){
+					flag  = false;
 				}				
 			}
 			System.out.println(flag);
