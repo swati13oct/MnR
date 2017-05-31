@@ -162,7 +162,7 @@ public class EOBPage extends UhcDriver{
 						 Assert.fail();
  				     }
 				   }
-				 for(int i=0; i<=fileType.size()-1;i++){
+				 /*for(int i=0; i<=fileType.size()-1;i++){
 					 if(fileType.get(i).isDisplayed()){			 
 						 System.out.println(fileType.get(i).getText()+" size at "+(i+1)+" displayed correctly");
 						 if(fileType.get(i).getText().contains("kb") 
@@ -180,7 +180,7 @@ public class EOBPage extends UhcDriver{
 						 System.out.println("Size at "+(i+1)+" not displayed");
 						 Assert.fail();
  				     }
-				   }
+				   
 				 for(int i=0; i<=datesDisplayed.size()-1;i++){
 					 if(datesDisplayed.get(i).isDisplayed()){			 
 						 System.out.println(datesDisplayed.get(i).getText()+" for PDF at "+(i+1)+" displayed correctly");
@@ -188,7 +188,7 @@ public class EOBPage extends UhcDriver{
 						 System.out.println("Date at "+(i+1)+" not displayed");
 						 Assert.fail();
  				     }
-				   }
+				   }*/
 				 return new MedicalEobPage(driver);
  			 }else{
 				 System.out.println("Count of PDFs and EOB doesn't match");
