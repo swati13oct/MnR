@@ -602,9 +602,9 @@ public class AccountHomePage extends UhcDriver {
 		return null;
 	}
 
-	public pages.dashboard.member.ulayer.ClaimDetailsPage navigateToClaimDetailsPage(WebDriver driver) {
+	public pages.dashboard.member.ulayer.ClaimDetailsPage navigateToClaimDetailsPage() {
 		// TODO Auto-generated method stub
-		String url = "https://member.team-b-aarpmedicareplans.uhc.com/home/claimtest.html#/claims-Detail";
+		String url = "https://member.team-b-aarpmedicareplans.uhc.com/home/claims.html#/claims-Detail";
 		driver.get(url);
 		/*
 		 * try { Thread.sleep(1000); } catch (InterruptedException e) { // TODO

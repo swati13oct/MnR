@@ -72,11 +72,14 @@ public class ClaimDetailsPage extends UhcDriver{
 	@FindBy (xpath="//*[@id='learnmorePDP']")
 	private WebElement learnmorePDP;
 	
+	@FindBy(className = "claimdettable")
+	public WebElement claimsTable;
+	
 	public ClaimDetailsPage(WebDriver driver) {
 		super(driver);
 
 		PageFactory.initElements(driver, this);
-		CommonUtility.waitForPageLoad(driver, ClaimDetailsPage, 60);
+		//CommonUtility.waitForPageLoad(driver, ClaimDetailsPage, 60);
 
 		// TODO Auto-generated constructor stub
 	}
@@ -165,15 +168,16 @@ public class ClaimDetailsPage extends UhcDriver{
 		return learnmoreMA.isDisplayed() || learnmorePDP.isDisplayed();
 
 	}
-	
-//	public static boolean validateMedicalEOB(){
-//
-//		return medicalEOB.isDisplayed();
-//	}
-//	public static boolean validateviewPDF(){
-//
-//		return viewPDF.isDisplayed();
-//	}
-//	
 
+	@SuppressWarnings("deprecation")
+	public void validateClaimsTableInDetailsPage() {
+		if(claimsTable.isDisplayed()){
+			Assert.assertTrue(true);
+		}
+			else{
+				Assert.assertTrue("Claims Table is not present in Claims Details Page", false);
+		}
+		
+	}
+	
 }
