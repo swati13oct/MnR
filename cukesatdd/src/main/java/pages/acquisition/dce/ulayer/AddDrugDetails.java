@@ -77,12 +77,12 @@ public class AddDrugDetails extends UhcDriver {
 
 		return addDrugDetailsPageExpectedJson;
 	}
-	public void selectDosage(String dosage){
-	
+	public void selectDosage(String dosage) throws InterruptedException{
+	    Thread.sleep(8000);
 		WebElement element = driver.findElement(By.xpath("//input[@value='"+dosage+"']/following-sibling::label"));
-		if(!element.isSelected()){
+		//if(!element.isSelected()){
 			element.click();
-		}
+		//}
 	}
 
 	public void selectQnty(String qnty){

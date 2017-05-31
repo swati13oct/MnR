@@ -80,7 +80,7 @@ public class DrugCostEstimatorPage extends UhcDriver {
 	@FindBy(xpath = "/html/body/div[2]/div[3]/div/div/div/div/div/div[3]/div/table/tbody/tr")
 	public WebElement SaveDrugPage;
 
-	@FindBy(xpath = "//p[contains(text(),'STEP2:')]/following-sibling::span[p[contains(text(),'PHARMACY')]]")
+	@FindBy(xpath = "//p[contains(text(),'STEP2:')]/following-sibling::span[p[contains(text(),'Pharmacy')]]")
 	public WebElement step2PharmacyTab;
 
 	@FindBy(id = "dce-pharmacy-radius")
@@ -196,7 +196,7 @@ public class DrugCostEstimatorPage extends UhcDriver {
 	@FindBy(id = "total_pharmacysavings")
 	public WebElement left_rail_pharmacy_saving;
 
-	@FindBy(xpath = "//p[contains(text(),'STEP3:')]/following-sibling::span[p[contains(text(),'SUMMARY')]]")
+	@FindBy(xpath = "//p[contains(text(),'STEP3:')]/following-sibling::span[p[contains(text(),'Summary')]]")
 	public WebElement step3;
 
 	@FindBy(id = "total_annauldeductible")
@@ -394,7 +394,7 @@ public class DrugCostEstimatorPage extends UhcDriver {
 
 	public AddNewDrugModal clickOnAddDrug() throws InterruptedException {
 		Thread.sleep(10000);
-		//waitforElement(addDrug);
+		waitforElement(addDrug);
 		addDrug.click();
 		System.out.println("Current Page title :: " + driver.getTitle());
 
@@ -445,7 +445,7 @@ public class DrugCostEstimatorPage extends UhcDriver {
 
 	public void validateintroductorytext() {
 		// TODO Auto-generated method stub
-		if (validateIntroductoryText.getText().equalsIgnoreCase("Drug Cost Estimator"))
+		if (validateIntroductoryText.getText().equalsIgnoreCase("Drug Cost Estimator."))
 			Assert.assertTrue(true);
 		else
 			Assert.assertTrue("Drug Cost Estimator is not present", false);

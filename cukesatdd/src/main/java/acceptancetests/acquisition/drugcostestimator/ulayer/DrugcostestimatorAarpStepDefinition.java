@@ -190,7 +190,7 @@ public class DrugcostestimatorAarpStepDefinition {
 
 
 	@Then("^I should be able to edit that list by either adding drugs up to a total of 25 or subtracting drugs at any time while using the tool$")
-	public void i_navigate_edit_drugs() {
+	public void i_navigate_edit_drugs() throws InterruptedException {
 		WebDriver wd = (WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
 
 

@@ -72,7 +72,7 @@ Then I should not see the drug with Dosage in the list
  
 Examples:
  |drug|dosage|quantity|frequency|editdosage|editquantity|editfrequency|
- |Lipitor|Lipitor TAB 10MG|30|Every 1 month|Lipitor TAB 20MG|60|Every 3 months|
+ |Lipito|Lipitor TAB 10MG|30|Every 1 month|Lipitor TAB 20MG|60|Every 3 months|
  
  
  
@@ -190,7 +190,7 @@ Then I should see pharmacy in ZtoA order
 
  Examples:
 |drug|dosage|quantity|frequency|zipcode| radius|
- |Lipitor|Lipitor TAB 10MG|30|Every 1 month| 90210 | 25miles |
+ |Lipito|Lipitor TAB 20MG|30|Every 1 month| 90210 | 15miles |
 
 #--------------------------------------------------
 @acq_drug_cost_estimator_US580719
@@ -211,7 +211,7 @@ And I should able to move right and left using pagination
 
  Examples:
  |drug|dosage|quantity|frequency|zipcode| radius|
- |Lipitor|Lipitor TAB 10MG|30|Every 1 month|90210 | 25miles |
+ |Lipito|Lipitor TAB 20MG|30|Every 1 month|90210 | 15miles |
  
 
 
