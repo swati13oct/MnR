@@ -244,3 +244,39 @@ And the user validates How to read your Medical EOB video
 	| planType  | memberType   |
 	| MAPD      | withEOBVideo      |
 	#| MA        | withEOBVideo      |
+	
+@EOBSepsprint1
+Scenario Outline: To validate EOB Type Drop-Down
+Given registered AMP with for EOB flow
+	| Plan Type      |<planType>  |
+	| Member Type    |<memberType>|
+Then the user navigates to EOB page
+Then the user navigates to EOB page and validates the page
+|Date Range|<dateRange>  |
+|Plan Type |<planType>   |
+|EOB Type  |<eobTypeData>|
+|From Date |<fromDate>   |
+|To Date   |<toDate>     |      
+
+Examples:
+       | planType  | memberType   | eobTypeData        | fromDate   | toDate     |   dateRange    | 
+       | MAPD       | withEOB      | Medical           | 2016/01/01 | 2017/04/01 | Custom Search  |
+ 
+ @EOBSepsprint1
+Scenario Outline: To validate EOB PAgination
+Given registered AMP with for EOB flow
+	| Plan Type      |<planType>  |
+	| Member Type    |<memberType>|
+Then the user navigates to EOB page
+And the user validates pagination functionality
+|Date Range|<dateRange>  |
+|Plan Type |<planType>   |
+|EOB Type  |<eobTypeData>|
+|From Date |<fromDate>   |
+|To Date   |<toDate>     |      
+
+Examples:
+       | planType  | memberType   | eobTypeData        | fromDate   | toDate     |   dateRange    | 
+       | MAPD       | withEOB      | Medical           | 2016/01/01 | 2017/04/01 | Custom Search  |      
+       
+       	

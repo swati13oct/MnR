@@ -180,6 +180,30 @@ public class EobStepDefinition {
 		EOBPage eobPage = (EOBPage) getLoginScenario().getBean(PageConstants.MEDICAL_EOB_PAGE);
 		eobPage.validateEobVideo();
 	}
+	
+	@And("the user validates pagination functionality")
+	public void validate_pagination(DataTable givenAttributes){
+		List<DataTableRow> memberAttributesRow = givenAttributes
+				.getGherkinRows();
+		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells()
+					.get(0), memberAttributesRow.get(i).getCells().get(1));
+		}
+
+		String dateRange = memberAttributesMap.get("Date Range");
+		String planType  = memberAttributesMap.get("Plan Type");
+		String eobTypeData = memberAttributesMap.get("EOB Type");
+		String fromDate = memberAttributesMap.get("From Date");
+		String toDate = memberAttributesMap.get("To Date");
+		try {
+			Thread.sleep(5000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 	@After
 	public void tearDown() {
 
