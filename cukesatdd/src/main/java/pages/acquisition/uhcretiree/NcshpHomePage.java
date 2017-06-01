@@ -24,12 +24,13 @@ public class NcshpHomePage extends UhcDriver{
 	}
 	
 	@FindBy(xpath=".//*[@id='cq-events-jsp-/content/gr/en/ncshp/home/jcr:content/parsys/events']/div/div[1]/div[3]/div/div[1]/div[1]/p[3]/a")
-	
 	private WebElement ncshpfindaproviderlink;
 	
 	@FindBy(xpath=".//*[@id='cq-imagebutton-jsp-/content/gr/en/ncshp/header/jcr:content/parsys/textbgimage/parsys/imagebutton_1']")
-	
 	private WebElement ncshpfindaprovidertab;
+	
+	@FindBy(xpath="//*[@id='main']/div/div[1]/div/div[3]/div[2]/div[6]/div/div/div[1]/a/span")
+    private WebElement getstartedbutton;
 	
 	
 	private static String NCSHP_HOME_PAGE_URL= MRConstants.NCSHP_HOME_PAGE_URL;
@@ -69,6 +70,21 @@ public class NcshpHomePage extends UhcDriver{
 		
 		
 		// TODO Auto-generated method stub
+		return null;
+	}
+	
+	
+	public SalesforceSitePage clickgetstarted() {
+		// TODO Auto-generated method stub
+		
+		validate(getstartedbutton);
+		getstartedbutton.click();
+		
+		if(driver.getTitle().equalsIgnoreCase("Problem loading page"))
+		{
+			return new SalesforceSitePage(driver);
+		}
+		
 		return null;
 	}
 }

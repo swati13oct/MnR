@@ -1659,7 +1659,7 @@ System.out.println("planSummaryExpectedJson---->"
 	public void user_clicks_on_Chat_Now_button() {
 		VPPPlanSummaryPage vppPlanSummaryPage = (VPPPlanSummaryPage) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
-		vppPlanSummaryPage.clickReactiveChat();
+		 vppPlanSummaryPage.clickReactiveChat();
 	}
 	
 	@Then("^the reactive chat should display$")
