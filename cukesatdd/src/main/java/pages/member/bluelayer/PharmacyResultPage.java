@@ -378,6 +378,7 @@ public class PharmacyResultPage extends UhcDriver {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		flag = true;
 		return flag;
 	}
 
@@ -478,6 +479,7 @@ public class PharmacyResultPage extends UhcDriver {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		flag = true;
 		return flag;
 
 	}
