@@ -333,9 +333,8 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		}
 
 		if (getTitle()
-				.equalsIgnoreCase(
-						"Our Medicare Plan Types | UnitedHealthcare®")) {
-
+				.contains(
+						"Our Medicare Plans")) {
 			return new VPPPlanSummaryPage(driver);
 		}
 		return null;

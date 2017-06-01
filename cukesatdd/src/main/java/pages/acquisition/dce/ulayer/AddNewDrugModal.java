@@ -58,7 +58,7 @@ public class AddNewDrugModal extends UhcDriver {
 		CommonUtility.waitForPageLoad(driver, addNewDrugHeading, 10);
 		String fileName = CommonConstants.ADD_NEW_DRUG_PAGE_DATA;
 		addnewdrug = CommonUtility.readPageData(fileName, CommonConstants.PAGE_OBJECT_DIRECTORY_DCE_MEMBER);
-		openAndValidate();
+		//openAndValidate();
 	}
 	@Override
 	public void openAndValidate() {
@@ -90,13 +90,15 @@ public class AddNewDrugModal extends UhcDriver {
 
 		return addnewdrugExpectedJson;
 	}
-	public AddDrugDetails clickonSearchButton(String DrugName) {
+	public AddDrugDetails clickonSearchButton(String DrugName) throws InterruptedException {
+		//drugsearchinput.click();
 		drugsearchinput.sendKeys(DrugName);
+		Thread.sleep(3000);
 		searchButton.click();     
-		if (driver.getTitle().equalsIgnoreCase("Our Add Drug Details®")) {
+		//if (driver.getTitle().equalsIgnoreCase("ADD A NEW DRUG")) {
 			return new AddDrugDetails(driver);
-		}
-		return null;
+		//}
+		//return null;
 	}
 	
 	public void typeDrugName(String DrugName) {
@@ -126,9 +128,16 @@ public class AddNewDrugModal extends UhcDriver {
 		}
 	}
 	public AddDrugDetails submit() throws InterruptedException{
-		searchButton.click();
-		waitforElement(continueButton);
-		continueButton.click();
+//		if(searchButton.isDisplayed()){
+//			searchButton.click();
+//		}
+		//searchButton.click();
+		//waitforElement(continueButton);
+		Thread.sleep(10000);
+		if(continueButton.isDisplayed()){
+			continueButton.click();
+		}
+		
 		Thread.sleep(5000);
 		return new AddDrugDetails(driver);
 	}

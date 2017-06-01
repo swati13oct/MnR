@@ -147,4 +147,24 @@ And the user validates the EOB section based on domain in redesigned site
 Examples:
 | planType | claimPeriod       | domain |
 | SHIP     | Last 6 Months    |  NA    |
+
+@claimsDetailsTableFED
+Scenario Outline: To Verify Claim Table on Claims Details Page
+Given I am an AARP member on the redesigned site
+      | Plan Type | <planType> |
+When I navigate to the Claim Details page in AARP site
+Then I validate the Claims Table in claims details page in AARP site
+ Examples: 
+      | planType |
+      | MA       |
+     
+@LearnMoreClaimsDetailsSHIP
+Scenario Outline: To Verify Learn more section on Claims Details Page
+Given I am an AARP member on the redesigned site
+      | Plan Type | <planType> |
+When I navigate to the Claim Details page in AARP site
+Then I validate the Learn more section in claims details page in AARP site
+ Examples: 
+      | planType |
+      | SHIP     |
       

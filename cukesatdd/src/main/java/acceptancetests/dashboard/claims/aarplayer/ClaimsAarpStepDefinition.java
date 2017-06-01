@@ -301,17 +301,29 @@ public class ClaimsAarpStepDefinition {
 	@When("^I navigate to the Claim Details page in AARP site$")	
 	public void i_navigate_to_member_redesign_claim_details_page(){
 		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstants.ACCOUNT_HOME_PAGE);
-		ClaimDetailsPage newClaimDetailsPage = accountHomePage.navigateToClaimDetailsPage(loginScenario.getWebDriver());
+		ClaimDetailsPage newClaimDetailsPage = accountHomePage.navigateToClaimDetailsPage();
 		getLoginScenario().saveBean(PageConstants.NEW_CLAIM_DETAILS_PAGE, newClaimDetailsPage);
 
 	}
 
+	@Then("^I validate the Learn more section in claims details page in AARP site$")
+	public void validate_Learn_More_details_AARP(){
+		ClaimDetailsPage claimDetailspage = (ClaimDetailsPage) getLoginScenario().getBean(PageConstants.NEW_CLAIM_DETAILS_PAGE);
+		claimDetailspage.validateLearnMoreInDetailsPage();
+		
+	}
 	@Then("^I can view a claim search back button in Claims Details page in AARP site$")
 	public void validate_claim_search_button()
 	{
 		ClaimDetailsPage claimDetailspage = (ClaimDetailsPage) getLoginScenario().getBean(PageConstants.NEW_CLAIM_DETAILS_PAGE);
 
 		Assert.assertTrue(claimDetailspage.validateClaimSearch());
+	}
+	
+	@Then("^I validate the Claims Table in claims details page in AARP site$")
+	public void validate_claimsTable_claimsDetails_AARP(){
+		ClaimDetailsPage claimDetailspage = (ClaimDetailsPage) getLoginScenario().getBean(PageConstants.NEW_CLAIM_DETAILS_PAGE);
+		claimDetailspage.validateClaimsTableInDetailsPage();
 	}
 
 	@And("^A Page Header in Claims Details page in AARP site$")
