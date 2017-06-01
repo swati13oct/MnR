@@ -261,7 +261,9 @@ Then the user navigates to EOB page and validates the page
 Examples:
        | planType  | memberType   | eobTypeData        | fromDate   | toDate     |   dateRange    | 
        | MAPD       | withEOB      | Medical           | 2016/01/01 | 2017/04/01 | Custom Search  |
- 
+ | MA         | withEOB      | Medical           | 2016/01/01 | 2017/04/01 | Custom Search  |
+       | PDP       | withEOB      | Medical           | 2016/01/01 | 2017/04/01 | Custom Search  |
+       | Ship      | withEOB      | Medical           | 2016/01/01 | 2017/04/01 | Custom Search  |
  @EOBSepsprint1
 Scenario Outline: To validate EOB PAgination
 Given registered AMP with for EOB flow
