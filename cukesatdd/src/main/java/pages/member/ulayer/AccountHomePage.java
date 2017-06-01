@@ -211,10 +211,10 @@ public class AccountHomePage extends UhcDriver {
 	@FindBy(xpath = "//*[@id='planinformation']/div[2]/div[5]/span[2]/a")
 	private WebElement benefitandcoverageLink;
 	
-	@FindBy(xpath = "//*[@id='notShipRadio']/div[1]/div/div/label/div/div[2]/div/p")
+	@FindBy(xpath = "//label[@for='member-materials']")
 	private WebElement radiokitLink;
 	
-	@FindBy(xpath = "//*[@id='notShipRadio']/div[2]/div/div/label/div/div/div/p[1]")
+	@FindBy(xpath = "//p[contains(text(),'Replacement ID card')]")
 	private WebElement radioidLink;
 
 	@FindBy(xpath = "html/body/div[2]/div/div/main/div/section[1]/div/div/div/form/button")

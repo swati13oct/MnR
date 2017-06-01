@@ -217,10 +217,10 @@ public class AccountHomePage extends UhcDriver {
 	@FindBy(xpath = "html/body/div[2]/div/div/header/div/div/div/div/div/div/a/p")
 	private WebElement backtopreviouspageLink;
 	
-	@FindBy(xpath = "//*[@id='notShipRadio']/div[1]/div")
+	@FindBy(xpath = "//label[@for='member-materials']")
 	private WebElement radiokitLink;
 	
-	@FindBy(xpath = "//*[@id='notShipRadio']/div[2]/div")
+	@FindBy(xpath = "//p[contains(text(),'Replacement ID card')]")
 	private WebElement radioidLink;
 	
 	@FindBy(xpath = "//label[@id='order-materials-error']")
