@@ -232,3 +232,15 @@ And the user validates EOB type and Date Range for MAPD
 Examples:
 | planType  | memberType   | eobTypeData      |  
 | MAPD     | GroupwithEOB      | Medical           |
+
+@F101852 @EOBVideos
+Scenario Outline: To verify How to read a medical EOB Videos
+Given registered AMP with for EOB flow
+	| Plan Type      |<planType>  |
+	| Member Type    |<memberType>|
+Then the user navigates to EOB page
+And the user validates How to read your Medical EOB video
+ 	Examples:
+	| planType  | memberType   |
+	| MAPD      | withEOBVideo      |
+	#| MA        | withEOBVideo      |
