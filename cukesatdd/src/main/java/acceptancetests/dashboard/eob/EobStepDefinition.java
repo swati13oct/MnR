@@ -128,7 +128,7 @@ public class EobStepDefinition {
 		
 		getLoginScenario().saveBean(CommonConstants.PLAN_TYPE, planType);
 
- 	     //Pass the direct URL to validate the page
+ 	    /* //Pass the direct URL to validate the page
 		AccountHomePage accountHomePage =  (AccountHomePage) getLoginScenario().getBean(PageConstants.ACCOUNT_HOME_PAGE);
 		EOBPage eobPage = accountHomePage.navigateDirectToEOBPag();
 		eobPage.selectDateRange(dateRange, planType, eobTypeData);
@@ -137,7 +137,7 @@ public class EobStepDefinition {
 			System.out.println("Passed");
 		}else{
 			Assert.fail();
-		}
+		}*/
 	}
 	@Then("^the user navigates to EOB page$")
 	public void the_user_navigates_to_EOB_page() {
