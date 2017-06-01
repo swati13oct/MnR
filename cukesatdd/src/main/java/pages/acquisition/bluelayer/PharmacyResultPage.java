@@ -55,6 +55,9 @@ public class PharmacyResultPage extends UhcDriver{
 	@FindBy(xpath = "//a[@id='find_searchagainbtn']")
 	private WebElement searchAgainButton;
 	
+	@FindBy(id = "find_searchbtn")
+	private WebElement searchPharmaciesButton;
+	
 	public PharmacyResultPage(WebDriver driver){
 		super(driver);
 		PageFactory.initElements(driver, this);
@@ -203,8 +206,8 @@ public class PharmacyResultPage extends UhcDriver{
 		return flag;
 	}
 	
-	public PharmacySearchPage navigateTopharmacySearch(){
-
+	public boolean navigateTopharmacySearch(){
+		boolean flag = false;
 		searchAgainButton.click();
 		try {
 			Thread.sleep(5000);
@@ -212,11 +215,10 @@ public class PharmacyResultPage extends UhcDriver{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		if (driver.getTitle().equalsIgnoreCase(
-				"Locate a Pharmacy | UnitedHealthcare®")) {
-			return new PharmacySearchPage(driver);
+		if (!searchPharmaciesButton.isDisplayed()) {
+			flag  = false;
 		}
-		return null;
+		return flag;
 		
 	}
 

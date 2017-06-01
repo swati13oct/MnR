@@ -246,13 +246,12 @@ public class PharmacyLocatorUmsStepDefinition {
 		PharmacyResultPage pharmacyResultPage = (PharmacyResultPage) getLoginScenario()
 				.getBean(PageConstants.PHARMACY_RESULTS_PAGE);
 		
-		PharmacySearchPage pharmacySearchPage = pharmacyResultPage.navigateTopharmacySearch();
-		if (pharmacySearchPage != null) {
-			getLoginScenario().saveBean(PageConstants.PHARMACY_SEARCH_PAGE,
-					pharmacySearchPage);
-		}else {
+		if(pharmacyResultPage.navigateTopharmacySearch()){
+			Assert.assertTrue(true);
+		} else {
 			Assert.fail("Failed to load Pharmacy search page");
 		}
+		
 	}
 	
 	@Then("^the user validates the available pharmacies page in UMS site$")
