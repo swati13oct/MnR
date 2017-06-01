@@ -306,6 +306,12 @@ public class ClaimsAarpStepDefinition {
 
 	}
 
+	@Then("^I validate the Learn more section in claims details page in AARP site$")
+	public void validate_Learn_More_details_AARP(){
+		ClaimDetailsPage claimDetailspage = (ClaimDetailsPage) getLoginScenario().getBean(PageConstants.NEW_CLAIM_DETAILS_PAGE);
+		claimDetailspage.validateLearnMoreInDetailsPage();
+		
+	}
 	@Then("^I can view a claim search back button in Claims Details page in AARP site$")
 	public void validate_claim_search_button()
 	{

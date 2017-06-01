@@ -75,6 +75,9 @@ public class ClaimDetailsPage extends UhcDriver{
 	@FindBy(className = "claimdettable")
 	public WebElement claimsTable;
 	
+	@FindBy(id = "learnmoretoggleship")
+	private WebElement learnMoreLink;
+	
 	public ClaimDetailsPage(WebDriver driver) {
 		super(driver);
 
@@ -176,6 +179,17 @@ public class ClaimDetailsPage extends UhcDriver{
 		}
 			else{
 				Assert.assertTrue("Claims Table is not present in Claims Details Page", false);
+		}
+		
+	}
+
+	@SuppressWarnings("deprecation")
+	public void validateLearnMoreInDetailsPage() {
+		if(learnMoreLink.isDisplayed()){
+			Assert.assertTrue(true);
+		}
+			else{
+				Assert.assertTrue("Learn more section is not present in Claims Details Page", false);
 		}
 		
 	}
