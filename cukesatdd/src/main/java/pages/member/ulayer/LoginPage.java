@@ -30,7 +30,7 @@ public class LoginPage extends UhcDriver {
 	//private static String PAGE_URL = MRConstants.AARPM_URL;
 	//BL url
 	
-	private static String PAGE_URL = MRConstants.UHCM_URL;
+	private static String PAGE_URL = MRConstants.AARPM_URL;
 
 	@FindBy(id = "fd_memberSignInButton")
 	private WebElement loginIn;

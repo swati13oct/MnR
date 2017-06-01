@@ -43,6 +43,9 @@ public class EOBPage extends UhcDriver{
 	@FindBy(xpath="//*[contains(text(),'You have')]")
 	private WebElement eobDetailsHeader;
 	
+	@FindBy(xpath="//*[contains(text(),'Watch Video')]")
+	private WebElement readEOBVideo;
+	
 	private static String EOB_DIRECT_URL = MRConstants.EOB_DIRECT_URL;
 	
 	public EOBPage(WebDriver driver) {
@@ -270,4 +273,24 @@ public class EOBPage extends UhcDriver{
 			Assert.fail();
 		}
 	}
+	public EOBPage validateEobVideo(){
+		learnMoreLink.click();
+		if(readEOBVideo.isDisplayed()){
+			System.out.println("HOW TO READ YOUR MONTHLY MEDICAL EXPLANATION OF BENEFITS (VIDEO) link displayed correctly");
+			readEOBVideo.click();
+			try {
+				Thread.sleep(5000);
+				return new EOBPage(driver);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		
+ 		}else{
+			System.out.println("HOW TO READ YOUR MONTHLY MEDICAL EXPLANATION OF BENEFITS (VIDEO) link not displayed");
+			Assert.fail();
+		}
+		return null;
+	}
 }
+ 

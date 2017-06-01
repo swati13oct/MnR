@@ -175,6 +175,11 @@ public class EobStepDefinition {
         System.out.println(planType);
 		eobPage.validateDropDowns(planType);
 	}
+	@And("^the user validates How to read your Medical EOB video$")
+	public void the_user_validates_how_to_read_medical_eob_Video() {
+		EOBPage eobPage = (EOBPage) getLoginScenario().getBean(PageConstants.MEDICAL_EOB_PAGE);
+		eobPage.validateEobVideo();
+	}
 	@After
 	public void tearDown() {
 
