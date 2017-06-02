@@ -17,6 +17,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.FindBys;
 import org.openqa.selenium.support.PageFactory;
 
+
 //import pages.member.bluelayer.AccountHomePage;
 import acceptancetests.atdd.data.CommonConstants;
 import acceptancetests.atdd.data.MRConstants;
@@ -378,6 +379,12 @@ public class AcquisitionHomePage extends GlobalWebElements {
 			}
 		} catch (Exception e) {
 			System.out.println("county box not found");
+		}
+		try {
+			Thread.sleep(10000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 		if (driver.getTitle().equalsIgnoreCase(
 				"Our Medicare Plan Types | UnitedHealthcare®")) {
