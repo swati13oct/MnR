@@ -1,4 +1,4 @@
-@fixedTestCaseTest
+@fixedTestCaseTest_work_in_progress
 @dcevppulayer
 Feature: To test plan summary in AARP site
 Scenario Outline: Verify plan summary in AARP site

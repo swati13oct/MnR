@@ -1,5 +1,5 @@
 @fixedTestCaseTest
-@pharmacylocator
+@pharmacylocatormulayer
 Feature:To test Locate a Pharmacy tool in AARP site for all pharmacy types for default zipcode in AARP site
 Scenario Outline:To verify all available pharmacies for default zipcode in AARP site
 Given registered member to verify locate a pharmacy in AARP Site
@@ -12,7 +12,7 @@ Then the user validates the pharmacies available in AARP site
 
 Examples:
 	| planType | distance |
-	| PDP      | 25       |
+#	| PDP      | 25       |
 #	| MAPD	   | 2        |
 
 Scenario Outline:To verify pharmacies displayed for particular pharamcy type for default zipcode in AARP site
@@ -28,7 +28,7 @@ Then the user validates the pharmacies available in AARP site
 
 Examples:
 	| planType | distance | pharmacyType							|
-	| PDP      | 25       |	Open 24 hours,Long-term care,Standard Network Pharmacy (90-day) |
+#	| PDP      | 25       |	Open 24 hours,Long-term care,Standard Network Pharmacy (90-day) |
 #	| MAPD	   | 2        | Open 24 hours,Long-term care,Standard Network Pharmacy (90-day) |
 
 Scenario Outline:To verify all available pharmacies for particular zipcode and plan name in AARP site
@@ -65,9 +65,9 @@ Then the user validates the pharmacies available in AARP site
 
 Examples:
 	| plantype | zipCode | countyName    | distance |  planName			   | pharmacyType						     |
-	| PDP      | 90210   |  |	25      |  AARP MedicareRx Preferred (PDP) | Long-term care,Standard Network Pharmacy (90-day) |
+#	| PDP      | 90210   |  |	25      |  AARP MedicareRx Preferred (PDP) | Long-term care,Standard Network Pharmacy (90-day) |
 
-Scenario Outline:To verify all Content in espanol
+Scenario Outline:To verify all Content in espanol and chinease
 Given registered member to verify locate a pharmacy in AARP Site
 	| <plantype> |
 When the user navigates to pharmacy search page in AARP site

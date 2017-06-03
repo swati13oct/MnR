@@ -1,4 +1,4 @@
-@fixedTestCaseTest
+@fixedTestCaseTest_work_in_progress
 @dcevppblayer
 Feature: To test DCE to VPP plan Summary flow  in UMS site
 Scenario Outline: To Verify the drugs and plan summary for non AEP period
@@ -42,7 +42,7 @@ And the user validates the plan summary for the below plan in UMS site
 	
 Examples:
 	| zipcode | county              | drugInitials	|  drugName      |  drugDosage	       | quantity	| drugFrequency  | packages | genericAvailable	| brand/generic								| pharmacyType				| distance	| pharmacyName					| plantype	| planName						|
-	| 90210   |  Los Angeles County	| lipi       	| Lipitor        |  Lipitor TAB 20MG   |   40		| Every 3 Months | null     |	yes				| Lipitor TAB 20MG (Qty 40 Every 3 Months)	| Available Pharmacies		| 15 miles	| Garfield Pharmacy  			| MAPD		| AARP MedicareComplete SecureHorizons Plan 2 (HMO)	|
+#	| 90210   |  Los Angeles County	| lipi       	| Lipitor        |  Lipitor TAB 20MG   |   40		| Every 3 Months | null     |	yes				| Lipitor TAB 20MG (Qty 40 Every 3 Months)	| Available Pharmacies		| 15 miles	| Garfield Pharmacy  			| MAPD		| AARP MedicareComplete SecureHorizons Plan 2 (HMO)	|
 	| 80002   |   Adams County      | lipi		    | Lipitor        |  Lipitor TAB 20MG   |   40		| Every 3 Months | null     |	yes				| Lipitor TAB 20MG (Qty 40 Every 3 Months)	| Available Pharmacies		| 15 miles	| Costco Pharmacy				| PDP		| AARP MedicareRx Preferred (PDP) | 
 
 Scenario Outline: To Verify the drugs and plan summary for AEP period 

@@ -1,4 +1,4 @@
-@fixedTestCaseTest
+@fixedTestCaseTest_work_in_progress
 @claims
 Feature:To test the drug claims summary and details flow in AARP site
 @drugClaimsUlayer
