@@ -286,6 +286,12 @@ public class PharmacySearchPage extends UhcDriver{
 	public PharmacySearchPage clickEspanol(){
 		espanolLink.click();
 		System.out.println("Espanol language selected:");
+		try {
+			Thread.sleep(5000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		Assert.assertTrue("Locate pharmacy title displyed incorrectly", !locatePharmacyTitle.getText().equals("Encuentre una Farmacia"));
 		return new PharmacySearchPage(driver);
 	}
@@ -293,6 +299,12 @@ public class PharmacySearchPage extends UhcDriver{
 	public PharmacySearchPage clickChinese(){
 		chineseLink.click();		
 		System.out.println("Chinese language selected");   //Story 261070
+		try {
+			Thread.sleep(5000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		Assert.assertTrue("Locate pharmacy title displyed incorrectly", !locatePharmacyTitle.getText().equals("尋找藥房"));
 		return new PharmacySearchPage(driver);
 	}
