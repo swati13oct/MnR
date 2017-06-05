@@ -1,5 +1,5 @@
 @fixedTestCaseTest
-@enrollInPlan
+@enrollInPlanulayer
 Feature: To test enroll in plan on AARP site
 @OLE_MA
 Scenario Outline: Verify enroll in plan in AARP site for federal plan type member  for MA or MAPD plan

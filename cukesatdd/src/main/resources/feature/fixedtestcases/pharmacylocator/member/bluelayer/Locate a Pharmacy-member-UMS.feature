@@ -1,5 +1,5 @@
 @fixedTestCaseTest
-@pharmacylocatormblayer
+@memberpharmacylocatorblayer
 Feature:To test Locate a Pharmacy tool in UMS site for all pharmacy types for default zipcode in UMS site
 Scenario Outline:To verify available pharmacies for default zipcode in UMS site
 Given registered member to verify locate a pharmacy in UMS Site
@@ -36,7 +36,7 @@ Then the user validates the pharmacies available in UMS site
 Examples:
 	| plantype | memberType   | distance  | countyName |planName|pharmacyType						     |
 	| MAPD      |  Group     |   25      | Cayuga County|UnitedHealthcare MedicareComplete Choice Plan 1 (Regional PPO)|Standard Network Pharmacy |
-	
+
 Scenario Outline:To verify available pharmacies for particular zipcode in UMS site
 Given registered member to verify locate a pharmacy in UMS Site
 	| Plan Type    | <plantype>   |

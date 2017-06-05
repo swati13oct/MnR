@@ -1,5 +1,5 @@
 @fixedTestCaseTest
-@pharmacylocatormulayer
+@memberpharmacylocatorulayer
 Feature:To test Locate a Pharmacy tool in AARP site for all pharmacy types for default zipcode in AARP site
 Scenario Outline:To verify all available pharmacies for default zipcode in AARP site
 Given registered member to verify locate a pharmacy in AARP Site
