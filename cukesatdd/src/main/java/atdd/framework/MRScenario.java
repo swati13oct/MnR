@@ -81,7 +81,7 @@ public class MRScenario {
 
 	private static Map<String, String> props = new HashMap<String, String>();
 
-	public static String environment, browser, webdriver;
+	public static String environment, browser;
 
 	private static final String DIRECTORY = "/src/main/resources/";
 	public static int count = 0;
@@ -113,8 +113,7 @@ public class MRScenario {
 		browser = props.get("browser");
 		/* Set acqusisition and member urls */
 		environment = props.get("Environment");
-		webdriver = props.get("WebDriver");
-
+ 
 		/* Set up DB */
 		Connection con = getDBConnection(props);
 
