@@ -58,6 +58,14 @@
 					</dependency>
 				</dependencies>
 				<configuration>
+					<forkCount>5</forkCount>
+					<reuseForks>true</reuseForks>
+					<includes>
+						<include>**/RunMRATDDFixedTests1.java</include>
+						<include>**/RunMRATDDFixedTests2.java</include>
+						<!-- <include>**/RunMRATDDTestRunnerSrint3.java</include> <include>**/RunMRATDDTestRunnerSrint4.java</include> 
+							<include>**/RunMRATDDTestRunnerSrint5.java</include> -->
+					</includes>
 					<testSourceDirectory>${basedir}/src/main/java/</testSourceDirectory>
 					<testClassesDirectory>${project.build.directory}/classes/</testClassesDirectory>
 					<argLine>-Xmx512m -XX:MaxPermSize=512m</argLine>
