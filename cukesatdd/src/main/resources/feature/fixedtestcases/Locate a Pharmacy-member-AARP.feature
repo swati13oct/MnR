@@ -45,7 +45,7 @@ And the user searches for pharmacies available in AARP site
 Then the user validates the pharmacies available in AARP site
 Examples:
 	| plantype | zipcode | county    | distance |  planName			|
-	| PDP      | 90210   | |	25   |  AARP MedicareRx Walgreens (PDP) |
+#	| PDP      | 90210   | |	25   |  AARP MedicareRx Walgreens (PDP) |
 #	| PDP      | 80002   | Adams County  |	25   |  AARP MedicareRx Preferred (PDP) |
 	
 Scenario Outline:To verify pharmacies displayed for particular zipcode, plan name and  pharmacy type in AARP site
