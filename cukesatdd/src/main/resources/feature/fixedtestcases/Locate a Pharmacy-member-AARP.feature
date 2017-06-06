@@ -67,7 +67,7 @@ Examples:
 	| plantype | zipCode | countyName    | distance |  planName			   | pharmacyType						     |
 #	| PDP      | 90210   |  |	25      |  AARP MedicareRx Preferred (PDP) | Long-term care,Standard Network Pharmacy (90-day) |
 
-Scenario Outline:To verify all Content in espanol and chinease
+Scenario Outline:To verify all Content in espanol and chinese
 Given registered member to verify locate a pharmacy in AARP Site
 	| <plantype> |
 When the user navigates to pharmacy search page in AARP site
@@ -84,6 +84,6 @@ Then the user validates the pharmacies available for the above selected language
 
 Examples:
 	| plantype | zipCode | countyName    | distance |  planName			|language|
-	| PDP      | 90210   |   |	25   |  AARP MedicareRx Preferred (PDP) |Spanish|
+#	| PDP      | 90210   |   |	25   |  AARP MedicareRx Preferred (PDP) |Spanish|
 	| PDP      | 90210   |   |	25   |  AARP MedicareRx Preferred (PDP) |Chinese|
 	
