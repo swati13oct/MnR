@@ -187,7 +187,7 @@ public class MRScenario {
 				}
 
 				if (userNamesAddedList.contains(ampUserName)) {
-					ampMemberAttributesMap.put(userName, attrList);
+					ampMemberAttributesMap.put(ampUserName, attrList);
 				}
 			}
 

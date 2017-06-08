@@ -1099,7 +1099,20 @@ public class AcquisitionHomePage extends GlobalWebElements {
 					return null;
 				}
 
+				public PDPRequestHelpAndInformationPage navigateToPDPMoreHelpAndInfo() {
 
+					Actions actions = new Actions(driver);
+					actions.moveToElement(ourPlansHoverLink);
+					actions.moveToElement(pdp_moreHelpInfoLink);
+					actions.click().build().perform();
+
+					if (currentUrl().contains("prescription-drug-plans/request-information.html")) {
+						return new PDPRequestHelpAndInformationPage(driver);
+					}
+
+					return null;
+
+				}
 }
 
 		
