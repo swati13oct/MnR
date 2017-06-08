@@ -59,6 +59,21 @@ public class ManageDrugPage extends UhcDriver {
 	@FindBy(id = "disclosure_link")
 	private WebElement logOut;
 	
+	@FindBy(xpath = ".//*[@id='dce.member']/div/div[5]/div/div/div[1]/div[1]/div[3]")
+	private WebElement viewDrugCostTab;
+	
+	@FindBy(xpath = ".//*[@id='dce.member']/div/div[5]/div/div/div[1]/div[1]/div[1]")
+	private WebElement drugListTab;
+	
+	@FindBy(xpath = ".//*[@id='dce.member']/div/div[5]/div/div/div[1]/div[2]/div[4]/div/div")
+	private WebElement drugListBox; //box where all the added drugs will show 
+	
+	@FindBy(xpath = ".//*[@id='dce.member']/div/div[5]/div/div/div[1]/div[2]/div[4]/div/div/div[5]/a")
+	private WebElement editDrugLink;
+	
+	@FindBy(xpath = ".//*[@id='dce.member']div/div[5]/div/div/div[1]/div[2]/div[4]/div/div/div[6]/a")
+	private WebElement deleteDrugLink;
+	
 	@FindBys(value = { @FindBy(name = "typeofdrug") })
 	private List<WebElement> genericDrugs;
 	
@@ -310,7 +325,26 @@ public class ManageDrugPage extends UhcDriver {
 		}
 		return null;
 	}
-
+	
+	public boolean validateDrugListSection(){
+		boolean flag = false;
+		try {
+			Thread.sleep(4000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		if(validate(addDrugLink)&&validate(viewDrugCostTab)&&validate(pharmacyTab)&&validate(drugListTab))
+			flag = true;
+		return flag;
+	}
+	
+	public boolean validateDrugAdded(){
+		if(validate(drugListBox)&&validate(editDrugLink)&&validate(deleteLink))
+			return true;
+		else
+			return false;
+	}
 
 
 }

@@ -1,4 +1,4 @@
-package pages.member.ulayer;
+package pages.member.bluelayer;
 
 /**
  * @author pagarwa5
@@ -21,8 +21,11 @@ import atdd.framework.UhcDriver;
 
 public class ViewDrugCostPage extends UhcDriver {
 
-	@FindBy(linkText = "Edit")
+	@FindBy(linkText = "edit")
 	private WebElement editLink;
+
+	@FindBy(linkText = "Delete")
+	private WebElement deleteLink;
 
 	@FindBy(className = "viewDrugCost")
 	private WebElement drugCostContent;
@@ -30,35 +33,27 @@ public class ViewDrugCostPage extends UhcDriver {
 	@FindBy(linkText = "Sign Out")
 	private WebElement logOut;
 
-	@FindBy(linkText = "Delete")
-	private WebElement deleteLink;
-	
-	@FindBy(xpath = ".//*[@id='dce.member']/div/div[7]/div/div/div/div/div[1]/div[3]/div[3]/table/tbody/tr[8]/td[1]")
-	private WebElement drugInfoBox;
-	
-	@FindBy(linkText ="Edit pharmacy")
-	private WebElement editPharmacyLink;
-	
-	@FindBy(xpath =".//*[@id='dce.member']/div/div[7]/div/div/div/div/div[1]/div[3]/div[3]")
-	private WebElement descriptionTable;
-
 	private PageData viewDrugCost;
 
 	public JSONObject viewDrugCostJson;
 
-	public ViewDrugCostPage(WebDriver driver, String planType) {
+	public ViewDrugCostPage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
 		CommonUtility.waitForPageLoad(driver, drugCostContent, CommonConstants.TIMEOUT_30);
-		String fileName = null;
-		if (planType.equalsIgnoreCase("PDP")) {
-			fileName = CommonConstants.VIEW_DRUG_COST_PDP_PAGE_DATA;
-		}
-		if (planType.equalsIgnoreCase("MAPD")) {
-			fileName = CommonConstants.VIEW_DRUG_COST_MAPD_PAGE_DATA;
-		}
+		String fileName = CommonConstants.VIEW_DRUG_COST_INDIVIDUAL_BLUE_LAYER_PAGE_DATA;
 		viewDrugCost = CommonUtility.readPageData(fileName,
-				CommonConstants.PAGE_OBJECT_DIRECTORY_ULAYER_MEMBER);
+				CommonConstants.PAGE_OBJECT_DIRECTORY_BLUELAYER_MEMBER);
+		openAndValidate();
+	}
+
+	public ViewDrugCostPage(WebDriver driver, String category) {
+		super(driver);
+		PageFactory.initElements(driver, this);
+		CommonUtility.waitForPageLoad(driver, drugCostContent, CommonConstants.TIMEOUT_30);
+		String fileName = CommonConstants.VIEW_DRUG_COST_BLUE_LAYER_PAGE_DATA;
+		viewDrugCost = CommonUtility.readPageData(fileName,
+				CommonConstants.PAGE_OBJECT_DIRECTORY_BLUELAYER_MEMBER);
 		openAndValidate();
 	}
 
@@ -102,6 +97,7 @@ public class ViewDrugCostPage extends UhcDriver {
 		for (String key : viewDrugCost.getExpectedData().keySet()) {
 			WebElement element = findElement(viewDrugCost.getExpectedData()
 					.get(key));
+
 			if (null != element && !element.getText().equalsIgnoreCase("")) {
 				validate(element);
 				try {
@@ -109,7 +105,9 @@ public class ViewDrugCostPage extends UhcDriver {
 				} catch (JSONException e) {
 					e.printStackTrace();
 				}
+
 			}
+
 		}
 		viewDrugCostJson = jsonObject;
 		
@@ -122,12 +120,27 @@ public class ViewDrugCostPage extends UhcDriver {
 
 	}
 	
+	@FindBy(xpath = ".//*[@id='dce.member']/div/div[6]/div/div/div/div/div[1]/div[3]/div[2]/table/tbody/tr[7]/td[1]")
+	private WebElement drugInfoBox;
+	
+	@FindBy(linkText ="Edit pharmacy")
+	private WebElement editPharmacyLink;
+	
+	@FindBy(xpath =".//*[@id='dce.member']/div/div[6]/div/div/div/div/div[1]/div[3]/div[2]")
+	private WebElement descriptionTable;
+	
 	public boolean validateViewDrugPage(String dosage) {
-		CommonUtility.waitForPageLoad(driver, editLink, CommonConstants.TIMEOUT_30);
+		try {
+			Thread.sleep(5000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		System.out.println("text: " +drugInfoBox.getText()); System.out.println("dosage: "+dosage);
 		if(validate(descriptionTable)&&(drugInfoBox.getText().contains(dosage)) && validate(editLink)&&validate(editPharmacyLink))
 			return true;
 		else 
 			return false;
 	}
+
 }
