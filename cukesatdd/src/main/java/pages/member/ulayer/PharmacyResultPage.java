@@ -203,6 +203,27 @@ public class PharmacyResultPage extends UhcDriver {
 		return flag;
 	}
 
+	
+	public boolean validatePharmacyResultpage(){
+		
+	boolean flag = false;
+	for (String key : pharmacyResult.getExpectedData().keySet()) {
+		System.out.println("key:::"+key);
+		WebElement element = findElement(pharmacyResult.getExpectedData()
+				.get(key));
+
+		if (validate(element) && null != element.getText()
+				&& element.getText() != "") {
+			flag = true;
+		} else {
+			//return false;
+			System.out.println("false block");
+		}
+	}
+
+	return true;
+	}
+	
 	public boolean validatelanguageSpecificPharmacyResultpage(JSONObject jsonObject, String zipcode, String planName, String language){
 
 		boolean flag = true;
@@ -249,10 +270,10 @@ public class PharmacyResultPage extends UhcDriver {
 			}
 			else if(language.equals("Chinese")){
 				if(zipcode == null && planName == null){
-					if(!jsonObject.get("pharmacyTitleText").toString().contains("附近的 "))	
+					if(!jsonObject.get("pharmacyTitleText").toString().contains("é™„è¿‘çš„ "))	
 						flag = false;
 				}else{
-					if(!jsonObject.get("pharmacyTitleText").toString().contains(zipcode+" 附近的 "+planName+" 藥房"))
+					if(!jsonObject.get("pharmacyTitleText").toString().contains(zipcode+" é™„è¿‘çš„ "+planName+" è—¥æˆ¿"))
 						flag = false;
 				}
 
@@ -263,13 +284,13 @@ public class PharmacyResultPage extends UhcDriver {
 						+ "Mission, KS\n66201-1375\nCall: 1-877-266-4832,\n24 hours a day, 7 days a week.\nTTY users, call 711.\n "))
 					flag = false;
 
-				if(!jsonObject.get("pharmacyNameheader").toString().contains("藥房名稱"))
+				if(!jsonObject.get("pharmacyNameheader").toString().contains("è—¥æˆ¿å��ç¨±"))
 					flag = false;
 
-				if(!jsonObject.get("servicesHeader").toString().contains("服務"))
+				if(!jsonObject.get("servicesHeader").toString().contains("æœ�å‹™"))
 					flag = false;
 
-				if(!jsonObject.get("distnaceHeader").toString().contains("距離"))
+				if(!jsonObject.get("distnaceHeader").toString().contains("è·�é›¢"))
 					flag = false;
 
 				viewMaplink.click();

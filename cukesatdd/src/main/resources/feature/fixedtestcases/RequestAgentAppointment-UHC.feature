@@ -1,5 +1,4 @@
 @agentAppointment
-@fixedTestCaseTest
 Feature: To test request an appointment with an agent flow in UHC site
 @ebrc-UHC
 Scenario Outline: Verify request an appointment with an agent flow in UHC site
