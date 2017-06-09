@@ -113,7 +113,7 @@ public class MRScenario {
 		browser = props.get("browser");
 		/* Set acqusisition and member urls */
 		environment = props.get("Environment");
- 
+
 		/* Set up DB */
 		Connection con = getDBConnection(props);
 
@@ -877,7 +877,7 @@ public class MRScenario {
  				System.out.println("inside null"); 				 
  				webDriver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
  				webDriver.manage().window().maximize();
- 			} else if (browserName.equalsIgnoreCase(CommonConstants.FIREFOX_BROWSER)) {
+ 			} /*else if (browserName.equalsIgnoreCase(CommonConstants.FIREFOX_BROWSER)) {
  				System.out.println("Execution started in firefox web browser !!!!!!");
  				//FirefoxBinary ffBinary = new FirefoxBinary(new File(pathToBinary));
  				FirefoxProfile firefoxProfile = new FirefoxProfile();
@@ -911,21 +911,22 @@ public class MRScenario {
  				System.setProperty("webdriver.chrome.driver", props.get(CommonConstants.CHROME_DRIVER));
  				webDriver = new ChromeDriver(capabilities);
  				return webDriver;
- 			}else if (browser.equalsIgnoreCase(CommonConstants.SAUCE_BROWSER_WEB)) {
+ 			}*/else if (browser.equalsIgnoreCase(CommonConstants.SAUCE_BROWSER_WEB)) {
 				System.out.println("Execution is Going to Start on SauceLabs Web.....!!!!!");
                 DesiredCapabilities capabilities = null;
-                if(browserName.equalsIgnoreCase(CommonConstants.FIREFOX_BROWSER)){
+                if(browserName.equalsIgnoreCase("firefox")){
                 	System.out.println("Inside firefox");
                 capabilities = DesiredCapabilities.firefox();
                 capabilities.setCapability("platform", "Windows 7");
                 capabilities.setCapability("version", "48");
                 capabilities.setCapability("idleTimeout", 180);
-                }else if(browserName.equalsIgnoreCase(CommonConstants.IE_BROWSER)){
+                }else if(browserName.equalsIgnoreCase("IE")){
                 	capabilities = DesiredCapabilities.internetExplorer();
                 	capabilities.setCapability("platform", "Windows 7");
                 	capabilities.setCapability("version", "11.0");
                 	capabilities.setCapability("screenResolution", "1024x768");
-                }else if(browserName.equalsIgnoreCase(CommonConstants.CHROME_BROWSER)){
+                }else if(browserName.equalsIgnoreCase("chrome")){
+                	System.out.println("Inside chrome");
                 	capabilities = DesiredCapabilities.chrome();
                 	capabilities.setCapability("platform", "Windows 7");
                 	capabilities.setCapability("version", "52.0");
@@ -962,7 +963,7 @@ public class MRScenario {
                 capabilities.setCapability("appiumVersion", props.get(CommonConstants.DEVICE_VERSION));
         		capabilities.setCapability("deviceName",props.get(CommonConstants.DEVICE_NAME));
         		capabilities.setCapability("deviceOrientation", "portrait");
-        		capabilities.setCapability("browserName", "Chrome");
+        		capabilities.setCapability("browserName", browserName);
         		capabilities.setCapability("platformVersion", props.get(CommonConstants.PLATFORM_VERSION));
         		capabilities.setCapability("platformName",props.get(CommonConstants.PLATFORM_NAME));        		    
     		    capabilities.setCapability("autoAcceptsAlerts", true);
