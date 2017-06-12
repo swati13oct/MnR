@@ -864,7 +864,7 @@ public class MRScenario {
               System.out.println("getWebDriver, returning driver " + browser);
               String browserName = (null == System.getProperty(CommonConstants.BROWSER_NAME)
                           ? props.get("BrowserName") : System.getProperty(CommonConstants.BROWSER_NAME));
-             if (null == webDriver) {
+             if (null == webDriver) { 
                     System.out.println("New WebDriver CREATED");
                     // Again, Jenkins takes precedent. 
                      String pathToBinary = (null == System.getProperty("phantomjs") ? props.get("BrowserPathToBinary")
