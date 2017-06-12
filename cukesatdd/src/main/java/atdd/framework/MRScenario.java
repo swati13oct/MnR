@@ -955,8 +955,9 @@ public class MRScenario {
                 }else{
                      capabilities = DesiredCapabilities.android();
                 }
-                System.out.println(props.get(CommonConstants.DEVICE_VERSION)+" "+props.get(CommonConstants.DEVICE_NAME)+" "
+                System.out.println("CHECK THE VALUES************: "+props.get(CommonConstants.DEVICE_VERSION)+" "+props.get(CommonConstants.DEVICE_NAME)+" "
                            +""+props.get(CommonConstants.PLATFORM_VERSION)+" "+props.get(CommonConstants.PLATFORM_NAME)+" "+browserName);
+                
                 capabilities.setCapability("appiumVersion", props.get(CommonConstants.DEVICE_VERSION));
                      capabilities.setCapability("deviceName",props.get(CommonConstants.DEVICE_NAME));
                      capabilities.setCapability("deviceOrientation", "portrait");
@@ -966,6 +967,16 @@ public class MRScenario {
                   capabilities.setCapability("autoAcceptsAlerts", true);
                 capabilities.setCapability("parent-tunnel", "sauce_admin");
                 capabilities.setCapability("tunnelIdentifier", "OptumSharedTunnel-Prd");
+                
+                
+                
+           /*     caps.SetCapability("appiumVersion", "1.6.4"); 
+                caps.SetCapability("deviceName", "Samsung Galaxy S3 Emulator"); 
+                caps.SetCapability("deviceOrientation", "portrait"); 
+                caps.SetCapability("browserName", "Browser"); 
+                caps.SetCapability("platformVersion", "4.4"); 
+                caps.SetCapability("platformName", "Android");*/
+
                          String USERNAME = "wzhong";
                     String ACCESS_KEY = "dcd255bb-5eba-4e01-9ca2-25e25e518b17";
                     String URL = "http://" + USERNAME + ":" + ACCESS_KEY + "@ondemand.saucelabs.com:80/wd/hub";
