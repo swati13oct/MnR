@@ -19,6 +19,7 @@ import org.openqa.selenium.support.ui.Select;
 import pages.member.bluelayer.OrderplanmaterialsPage;
 import pages.member.bluelayer.ContactUsPage;
 import acceptancetests.atdd.data.CommonConstants;
+import acceptancetests.atdd.data.MRConstants;
 import acceptancetests.atdd.data.PageData;
 import acceptancetests.atdd.util.CommonUtility;
 import acceptancetests.login.data.LoginCommonConstants;
@@ -33,6 +34,9 @@ public class AccountHomePage extends UhcDriver {
 
 	@FindBy(css = "a.fd_myPersonalHealthRecord")
 	private WebElement phrTab;
+	
+	// Page URL
+    private static String PAGE_URL = MRConstants.TESTHARNESS_URL;
 
 	@FindBy(id = "plan_box")
 	private WebElement planBox;
@@ -162,12 +166,14 @@ public class AccountHomePage extends UhcDriver {
 	@FindBy(linkText = "Date")
 	private WebElement dateLink;
 	
-
+	@FindBy(linkText = "Go to redesign benefits and coverage page")
+	private WebElement BnClink;
+	
 	private PageData myAccountHome;
 
 	public JSONObject accountHomeJson;
 
-	public AccountHomePage(WebDriver driver,String category) {
+	/*public AccountHomePage(WebDriver driver,String category) {
 		super(driver);
 		PageFactory.initElements(driver, this);
 		if(category.equalsIgnoreCase("Individual"))
@@ -184,12 +190,14 @@ public class AccountHomePage extends UhcDriver {
 		}
 		
 		openAndValidate();
-	}
+	}*/
 
 	public AccountHomePage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
-		
+		String fileName = CommonConstants.ACCOUNT_HOME_PAGE_DATA;
+		myAccountHome = CommonUtility.readPageData(fileName,
+				CommonConstants.PAGE_OBJECT_DIRECTORY_BLUELAYER_MEMBER);
 		openAndValidate();
 	}
 
@@ -650,5 +658,14 @@ public FormsandresourcesPage navigateToMydocumentUmsPage() {
 		return null;
 	}
 
+	public BenefitsAndCoveragePage navigateDirectToBnCPag()
+	{
+		driver.navigate().to(PAGE_URL);
+		BnClink.click();
+	 if(driver.getTitle().equalsIgnoreCase("Benefits And Coverage Page Redesign")){
+	        return new BenefitsAndCoveragePage(driver);
+		}
+		return null;
+		}
 }
 

@@ -3,6 +3,8 @@
  */
 package pages.member.bluelayer;
 
+import static org.junit.Assert.assertTrue;
+
 import java.util.List;
 import java.util.Map;
 
@@ -25,7 +27,7 @@ import acceptancetests.atdd.util.CommonUtility;
 import atdd.framework.UhcDriver;
 
 /**
- * @author pagarwa5
+ * @author njain112
  *
  */
 public class BenefitsAndCoveragePage extends UhcDriver {
@@ -74,16 +76,53 @@ public class BenefitsAndCoveragePage extends UhcDriver {
         @FindBy(xpath = ".//*[@id='planBenefitsApp']/div[3]/div[2]/div")
 	private WebElement Dentalsection;
     
-        @FindBy(xpath = ".//*[@id='planBenefitsApp']/div[1]/div")
-	private WebElement Headersection;    
-       
-	
-	
+    @FindBy(xpath = ".//*[@id='planBenefitsApp']/div[1]/div")
+	private WebElement Headersection; 
+    
+    @FindBy(className = "h4 color-blue medium margin-small")
+    private WebElement DrugCoverageHeader;
+
+    @FindBy(xpath = ".//*[@id='benefitsMain']/div[2]/div/div/div[3]/div/div/section/div/div[5]/div/span")
+    private WebElement DrugCoverageText;
+    
+    @FindBy(className = "margin-small")
+    private WebElement LookupDrugstext;
+    
+    @FindBy(xpath="html/body/div[2]/div/div[1]/div/div[2]/div/div/div[3]/div/div/section/div/div[6]/div[1]/a")
+    private WebElement LookUpDrugsButton;
+    
+    @FindBy(xpath = ".//*[@id='benefitsMain']/div[2]/div/div/div[3]/div/div/section/div/div[1]/div/h2")
+    private WebElement DrugCopayHeader;
+    
+    @FindBy(xpath = ".//*[@id='benefitsMain']/div[2]/div/div/div[3]/div/div/section/div/div[1]/div/p[2]")
+    private WebElement DrugCopayText;
+    
+    @FindBy(id = "drug-costs")
+    private WebElement DrugCostDropdown;
+    
+    @FindBy(xpath = "html/body/div[2]/div/div[1]/div/div[2]/div/div/div[2]/div/section/div/div[2]/div")
+    private WebElement DrugCostheaderandtext;
+    
+   
+    @FindBy(xpath = "html/body/div[2]/div/div[1]/div/div[2]/div/div/div[3]/div/div/section/div/div[4]/div/div[1]/div/div[1]/a")
+    private WebElement Learnmoretierslink;
+    
+    @FindBy(xpath = "html/body/div[2]/div/div[1]/div/div[2]/div/div/div[3]/div/div/section/div/div[4]/div/div[1]/div/div[2]/a")
+    private WebElement Learnmorestagelink;
+ 
+    @FindBy(xpath = "html/body/div[2]/div/div[1]/div/div[2]/div/div/div[2]/div/section/div/div[6]/div[2]")
+    private WebElement locateapharmacysection;
+
+    public static final String learnmorestagetext_xpath ="html/body/div[2]/div/div[1]/div/div[2]/div/div/div[3]/div/div/section/div/div[4]/div/div[1]/div/div[2]/div/div";
+
+    public static final String learnmorelinktiertext_xpath ="html/body/div[2]/div/div[1]/div/div[2]/div/div/div[3]/div/div/section/div/div[4]/div/div[1]/div/div[1]/div/div";
+    
 	public static final String disclaimertextarea_xpath ="//*[@id='collapseDisclaimer']";
 	
 
+
         public BenefitsAndCoveragePage(WebDriver driver) {
-		super(driver);
+        	super(driver);
 		PageFactory.initElements(driver, this);
 		String fileName = CommonConstants.BENEFITS_AND_COVERAGE_PAGE_DATA;
 		benefitsCoverage = CommonUtility.readPageData(fileName,
@@ -120,29 +159,30 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 		}
 	}
 
-	@Override
+	
 	public void openAndValidate() {
-		
+
 		JSONObject jsonObject = new JSONObject();
 		for (String key : benefitsCoverage.getExpectedData().keySet()) {
 			List<WebElement> elements = findElements(benefitsCoverage.getExpectedData().get(key));
-			if (elements.size() == 1) {
+			/*if (elements.size() == 1) {
 				validate(elements.get(0));
 				try {
 					jsonObject.put(key, elements.get(0).getText());
+					//System.out.println("Text"+elements.get(0).getText());
 				} catch (JSONException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-			}else if (elements.size() > 1) {
+			} else if (elements.size() > 1) {*/
 				JSONArray jsonArray = new JSONArray();
 				for (WebElement element : elements) {
 
 					validate(element);
 					try {
 						JSONObject jsonObjectForArray = new JSONObject();
-						jsonObjectForArray.put(benefitsCoverage.getExpectedData()
-								.get(key).getElementName(), element.getText());
+						jsonObjectForArray.put(benefitsCoverage.getExpectedData().get(key).getElementName(),
+								element.getText());
 						jsonArray.put(jsonObjectForArray);
 					} catch (JSONException e) {
 						// TODO Auto-generated catch block
@@ -158,10 +198,10 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 
 			}
 
-		}
+		
 		benefitsandcoverageJson = jsonObject;
 
-		System.out.println("BenefitsCoverageJson----->"+benefitsandcoverageJson);
+		System.out.println("BenefitsCoverageJson----->" + benefitsandcoverageJson);
 		
 	}
 	
@@ -316,6 +356,163 @@ public void Header() {
 		System.out.println("Elements is not found ...");
 	}
 }
+
+public void validatedrugcoverageheaderandtext()
+{
+	validate(DrugCoverageHeader);
+	validate(DrugCoverageText);
+}
+
+public void validatelookupdrugsbutton()
+{
+if (LookUpDrugsButton.isDisplayed())
+{
+	Assert.assertTrue(true);
+}
+else
+Assert.fail("Button not displayed");
+}
+
+
+public void validate_lookupdrugstext()
+{
+	validate(LookupDrugstext);
+}
+
+public void validate_drugcopayheaderntext()
+{
+	validate(DrugCopayHeader);
+	validate(DrugCopayText);
+
+}
+
+public void validate_drugcostheaderntext()
+{
+	validate(DrugCostheaderandtext);
+	
+}
+
+public void validate_locateapharmacysection()
+{
+	validate(locateapharmacysection);
+	
+}
+
+public void validate_drugcostdropdownoptions(JSONObject benefitsandcoverageExectedJson)
+
+{
+	try {
+	validate(DrugCostDropdown);
+	Assert.assertEquals("true or not", benefitsandcoverageExectedJson.get("drugcostdropdown"), benefitsandcoverageJson.get("drugcostdropdown"));
+	}
+catch (JSONException e) {
+	// TODO Auto-generated catch block
+	e.printStackTrace();
+}
+}
+	
+
+public void validate_learnmoreaboutlink()
+{
+	validate(Learnmoretierslink);
+	validate(Learnmorestagelink);
+	
+}
+
+
+
+public void clickOnLearnmoreaboutlinktier(JSONObject benefitsandcoverageExectedJson) {
+	// TODO Auto-generated method stub
+	
+	Learnmoretierslink.click();
+	//Thread.sleep(15000);
+	String finalPath;
+	String table_data;
+    
+	//validate(disclaimertextarea_xpath);
+	try {
+	finalPath = learnmorelinktiertext_xpath+"/p[1]";  
+	table_data = driver.findElement(By.xpath(finalPath)).getText();
+	System.out.println(table_data);
+	Assert.assertEquals(benefitsandcoverageExectedJson
+			.get("1stLinetier"), table_data);
+	// to validate amount Billed
+	finalPath = learnmorelinktiertext_xpath+"/p[2]";
+	table_data = driver.findElement(By.xpath(finalPath)).getText();
+	System.out.println(table_data);
+	Assert.assertEquals(benefitsandcoverageExectedJson
+			.get("2ndLinetier"), table_data);
+	// to validate amount Paid
+	finalPath = learnmorelinktiertext_xpath+"/p[3]";
+	table_data = driver.findElement(By.xpath(finalPath)).getText();
+	System.out.println(table_data);
+	Assert.assertEquals(benefitsandcoverageExectedJson
+			.get("3rdLinetier"), table_data);
+	// to validate paid Date
+	finalPath = learnmorelinktiertext_xpath+"/p[5]";
+	table_data = driver.findElement(By.xpath(finalPath)).getText();
+	System.out.println(table_data);
+	Assert.assertEquals(benefitsandcoverageExectedJson
+			.get("4thLinetier"), table_data);
+	finalPath = learnmorelinktiertext_xpath+"/p[7]";
+	table_data = driver.findElement(By.xpath(finalPath)).getText();
+	System.out.println(table_data);
+	Assert.assertEquals(benefitsandcoverageExectedJson
+			.get("5thLinetier"), table_data);
+	finalPath = learnmorelinktiertext_xpath+"/p[9]";
+	table_data = driver.findElement(By.xpath(finalPath)).getText();
+	System.out.println(table_data);
+	Assert.assertEquals(benefitsandcoverageExectedJson
+			.get("6thLinetier"), table_data);
+	Learnmoretierslink.click();
+	}
+catch (JSONException e) {
+	e.printStackTrace();
+}
+}
+
+public void clickOnLearnmoreaboutlinkstage(JSONObject benefitsandcoverageExectedJson) {
+	// TODO Auto-generated method stub
+	
+	Learnmorestagelink.click();
+	//Thread.sleep(15000);
+	String finalPath;
+	String table_data;
+    
+
+	try {
+	finalPath = learnmorestagetext_xpath+"/p[1]";  
+	table_data = driver.findElement(By.xpath(finalPath)).getText();
+	System.out.println(table_data);
+	Assert.assertEquals(benefitsandcoverageExectedJson
+			.get("1stLinestage"), table_data);
+	// to validate amount Billed
+	finalPath = learnmorestagetext_xpath+"/p[3]";
+	table_data = driver.findElement(By.xpath(finalPath)).getText();
+	System.out.println(table_data);
+	Assert.assertEquals(benefitsandcoverageExectedJson
+			.get("2thLinestage"), table_data);
+	// to validate amount Paid
+	finalPath = learnmorestagetext_xpath+"/p[5]";
+	table_data = driver.findElement(By.xpath(finalPath)).getText();
+	System.out.println(table_data);
+	Assert.assertEquals(benefitsandcoverageExectedJson
+			.get("3rdLinestage"), table_data);
+	// to validate paid Date
+	finalPath = learnmorestagetext_xpath+"/p[7]";
+	table_data = driver.findElement(By.xpath(finalPath)).getText();
+	System.out.println(table_data);
+	Assert.assertEquals(benefitsandcoverageExectedJson
+			.get("4thLinestage"), table_data);
+	
+
+	Learnmorestagelink.click();
+	}
+catch (JSONException e) {
+	e.printStackTrace();
+}
+}
+	
 }
 
 

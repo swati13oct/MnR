@@ -12,17 +12,14 @@
 "memberName":{
 "identifier":"xpath",
 "elementName":"//*[@id='planBenefitsApp']/div/div/div[2]/div/div[1]/div/div[1]/div[2]"
-
 },
 "groupId":{
 "identifier":"xpath",
 "elementName":"//*[@id='planBenefitsApp']/div/div/div[2]/div/div[1]/div/div[3]/div[2]"
-
 },
-
 "effectiveDate":{
 "identifier":"xpath",
-"elementName":"//*[@id='planBenefitsApp']/div/div/div[2]/div/div[1]/div/div[4]/div[2]"
+"elementName":".//*[@id='planBenefitsApp']/div/div/div[2]/div[1]/div/div[4]/div[1]"
 },
 "monthlyPremium":{
 "identifier":"xpath",
@@ -48,7 +45,6 @@
 "identifier":"xpath",
 "elementName":"//*[@id='planBenefitsApp']/div/div/div[3]/div/div/section/div/div/h1"
 },
-
 "hospitalVisit":{
 "identifier":"xpath",
 "elementName":"//*[@id='planBenefitsApp']/div[3]/div[2]/div"
@@ -104,6 +100,9 @@
 "planHeader":{
 "identifier":"xpath", 
 "elementName":".//*[@id='planBenefitsApp']/div[1]/div"
-}
-}
+},
+"drugcostdropdown":{
+"identifier":"id",
+"elementName":"drug-costs"}
+ }
 }

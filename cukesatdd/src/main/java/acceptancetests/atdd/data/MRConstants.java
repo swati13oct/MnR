@@ -13,6 +13,11 @@ public class MRConstants {
 
 	public static final String AARPM_URL = "https://member.awe-"+MRScenario.environment+"-aarpmedicareplans.uhc.com";
 	public static final String BNCURL = "https://member.awe-"+MRScenario.environment+"-aarpmedicareplans.uhc.com/guest/login.html?TARGET=SMSR/home/my-plans/benefits-and-coverage-page.html";
+	
+	public static final String TESTHARNESS_URL = "https://member.awe-"+MRScenario.environment+"-uhcmedicaresolutions.uhc.com/content/uhcm/home/testharness.html";
+	
+	public static final String BNCBURL = "https://member.awe-"+MRScenario.environment+"-uhcmedicaresolutions.uhc.com/";
+	
 	public static final String UHCM_URL = "https://member.awe-"+MRScenario.environment+"-uhcmedicaresolutions.uhc.com/guest/home.html";
 
 	//public static final String AARP_URL = "https://www.awe-"+MRScenario.environment+"-aarpmedicareplans.uhc.com/";
