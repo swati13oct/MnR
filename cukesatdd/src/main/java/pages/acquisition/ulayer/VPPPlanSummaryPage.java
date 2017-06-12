@@ -4,8 +4,9 @@
 package pages.acquisition.ulayer;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
-
+import java.util.Set;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -32,7 +33,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	@FindBy(xpath = "//a[text()='Passport Flyer (PDF)']")
 	private WebElement PassportFlyerPDF;
 	
-	@FindBy(xpath = "//div[@class='maplans_planbutton']/div[2]/div[2]/div")
+	@FindBy(xpath = ".//*[@id='site-wrapper']/div[4]/div/div[1]/div[1]/div/div/div[1]/div/div/div[1]/div[2]/div/div[2]/div[1]/div/span[3]")
 	private WebElement showMaPlans;
 	
 	@FindBy(xpath = "//div[@class='maplans_planbutton']/div[2]/div[2]/div[2]")
@@ -45,16 +46,16 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	private WebElement showMsPlans;
 	
 
-	@FindBy(xpath = "//div[@class='pdpplans_planbutton']/div[2]/div[2]/div")
+	@FindBy(xpath = ".//*[@id='site-wrapper']/div[4]/div/div[1]/div[1]/div/div/div[1]/div/div/div[1]/div[2]/div/div[2]/div[3]/div/span[3]")
 	private WebElement showPdpPlans;
 	
 	@FindBy(xpath = "//div[@class='pdpplans_planbutton']/div[2]/div[2]/div[2]")
 	private WebElement hidePdpPlans;
 
-	@FindBy(xpath = "//div[@class='enabled ng-scope']")
+	@FindBy(xpath = "//div[@class='module-plan-overview module swiper-slide ng-scope']")
 	List<WebElement> maPlanElement;
 
-	@FindBy(xpath = "//div[@class='disabledprint ng-scope']")
+	@FindBy(xpath = "//div[@class='module-plan-overview module swiper-slide ng-scope']")
 	List<WebElement> pdpPlanElement;
 	
 	@FindBy(id = "medicalinsursectionheading")
@@ -138,6 +139,24 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	
 	@FindBy(name = "emailWidgetForm")
 	private WebElement emailWidgetForm;
+
+	@FindBy(xpath = ".//*[@id='_pac_logo']")
+	private WebElement reactiveButton;
+
+	@FindBy(xpath = ".//*[@id='CloseBtn']")
+	private WebElement reactiveCloseButton;
+
+	@FindBy(xpath = ".//*[@id='_pac_helpbutton']")
+	private WebElement proactiveButton;
+
+	@FindBy(xpath = ".//*[@id='questionDiv']/div[1]/label/span")
+	private WebElement proactiveFirstName;
+
+	@FindBy(xpath = ".//*[@id='questionDiv']/div[2]/label/span")
+	private WebElement proactiveLastName;
+
+	@FindBy(xpath = ".//*[@id='CloseBtn']")
+	private WebElement proactiveCloseButton;
 
 	private PageData vppPlanSummary;
 
@@ -311,11 +330,11 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	public VPPPlanSummaryPage viewPlanSummary(String planType) {
 		if (planType.equalsIgnoreCase("PDP")) {
 			showPdpPlans.click();
-			validate(hidePdpPlans);
+			//validate(hidePdpPlans);
 		} else if (planType.equalsIgnoreCase("MA")
 				|| planType.equalsIgnoreCase("MAPD")) {
 			showMaPlans.click();
-			validate(hideMaPlans);
+			//validate(hideMaPlans);
 		} else if (planType.equalsIgnoreCase("MS")) {
 			showMsPlans.click();
 		}
@@ -540,7 +559,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		
 		for(WebElement element : providerNameList){
 			ElementData providerElementData = new ElementData("className", "providerName");
-			if(findChildElement(providerElementData,element).getText().equalsIgnoreCase(physicianName))
+		 * if(findChildElement(providerElementData,element).getText().
 			{ 
 				ElementData addToListElementData = new ElementData("linkText", "Add to List");
 				findChildElement(addToListElementData,element).click();
@@ -815,8 +834,96 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		}
 		return false;
 	}
+	
+		public AcquisitionHomePage clickProactiveChat() {
 
+		proactiveButton.click();
+		return null;
+	}
 
+	public AcquisitionHomePage validateProactiveChat() throws Exception {
+
+		String MainWindow = driver.getWindowHandle();
+
+		Set<String> s1 = driver.getWindowHandles();
+		Iterator<String> i1 = s1.iterator();
+
+		while (i1.hasNext()) {
+			String ChildWindow = i1.next();
+
+			if (!MainWindow.equalsIgnoreCase(ChildWindow)) {
+
+				driver.switchTo().window(ChildWindow);
+				
+				//validate(proactiveFirstName);
+				//validate(proactiveLastName);
+				validate(proactiveCloseButton);
+				Thread.sleep(3000);
+				proactiveCloseButton.click();
+			}
+		}
+		return null;
+	}
+
+	public VPPPlanSummaryPage clickReactiveChat() {
+
+		driver.switchTo().frame(1);
+		reactiveButton.click();
+		return null;
+	}
+
+	public VPPPlanSummaryPage validateReactiveChat() throws Exception {
+
+		String MainWindow = driver.getWindowHandle();
+
+		Set<String> s1 = driver.getWindowHandles();
+		Iterator<String> i1 = s1.iterator();
+
+		while (i1.hasNext()) {
+			String ChildWindow = i1.next();
+
+			if (!MainWindow.equalsIgnoreCase(ChildWindow)) {
+
+				driver.switchTo().window(ChildWindow);
+
+				validate(reactiveCloseButton);
+				Thread.sleep(3000);
+				reactiveCloseButton.click();
+			}
+		}
+
+		driver.switchTo().window(MainWindow);
+		return null;
+	}
+	
+	public void validateViewPlanDetailsLink(String planType, String planName) {
+
+		if (planName.contains("HMO") && planType.equals("MA")) {
+			ElementData elementData = new ElementData("xpath", "//a[contains(text(),'View more details')]");
+			WebElement element = getViewPlanDetailsElement(maPlanElement, elementData, planName);
+			if (element != null) {
+				element.isDisplayed();
+			}
+
+		} else if (planName.contains("PDP") && planType.equals("PDP")) {
+			ElementData elementData = new ElementData("xpath", "//a[contains(text(),'View Plan and Drug Coverage Details')]");
+			WebElement element = getViewPlanDetailsElement(pdpPlanElement, elementData, planName);
+			if (element != null) {
+				element.isDisplayed();
+			}
+		} 
+		else if (planName.contains("HMO") && planType.equals("MAPD")) {
+			ElementData elementData = new ElementData("xpath", "//a[contains(text(),'View Plan and Drug Coverage Details')]");
+			WebElement element = getViewPlanDetailsElement(maPlanElement, elementData, planName);
+			if (element != null) {
+				element.isDisplayed();
+			}
+
+		}
+	}
 }
+
+
+
 
 	

@@ -17,7 +17,7 @@ public class MRConstants {
 	//public static final String UHCM_URL = "https://member."+MRScenario.environment+"-uhcmedicaresolutions.uhc.com/guest/home.html";
 
 	public static final String AARPM_URL = "https://member."+MRScenario.environment+"-aarpmedicareplans.uhc.com/guest/login.html";
-	public static final String BNCURL = "https://member.awe-"+MRScenario.environment+"-aarpmedicareplans.uhc.com/guest/login.html?TARGET=SMSR/home/my-plans/benefits-and-coverage-page.html";
+	public static final String BNCURL = "https://member."+MRScenario.environment+"-aarpmedicareplans.uhc.com/guest/login.html?TARGET=SMSR/home/my-plans/benefits-and-coverage-page.html";
 	public static final String UHCM_URL = "https://member."+MRScenario.environment+"-uhcmedicaresolutions.uhc.com/guest/login.html";
 	
 	//public static final String AARP_URL = "https://www.awe-"+MRScenario.environment+"-aarpmedicareplans.uhc.com/";
@@ -34,6 +34,10 @@ public class MRConstants {
 	public static final String VERIZON_SITE_MAP_URL = "https://www."+MRScenario.environment+"-uhcretiree.uhc.com/verizon/site_map.html";
 	
 	public static final String VERIZON_HOME_PAGE_URL = "https://www."+MRScenario.environment+"-uhcretiree.uhc.com/verizon/home.html";
+	
+	public static final String NOKIA_HOME_PAGE_URL = "https://www."+MRScenario.environment+"-uhcretiree.uhc.com/nokia/home.html";
+	
+	
 	
 	public static final String CALPERS_HOME_PAGE_URL = "https://www."+MRScenario.environment+"-uhcretiree.uhc.com/calpers/home.html";
 	
@@ -224,6 +228,12 @@ public class MRConstants {
 
   
   public static final String AARP_PORTFOLIO_URL = "https://www."+MRScenario.environment+"-aarpmedicareplans.uhc.com/health-plans/plans.html";
+public static final String EATON_HOME_PAGE_URL = "https://www."+MRScenario.environment+"-uhcretiree.uhc.com/eaton/home.html";
+public static final String OELOCAL12_HOME_PAGE_URL = "https://www."+MRScenario.environment+"-uhcretiree.uhc.com/oelocal12/home.html";
+public static final String PEEHIP_HOME_PAGE_URL = "https://www."+MRScenario.environment+"-uhcretiree.uhc.com/peehip/home.html";
+public static final String NONCUSTOM_HOME_PAGE_URL = "https://www."+MRScenario.environment+"-uhcretiree.uhc.com/noncustomgroups/home.html";
+public static final String UNIVERSITYOFMISSOURI_HOME_PAGE_URL = "https://www."+MRScenario.environment+"-uhcretiree.uhc.com/umsystem/home.html";
+public static final String WELLSFARGO_HOME_PAGE_URL = "https://www."+MRScenario.environment+"-uhcretiree.uhc.com/wf/home.html";
 	
 	
 }

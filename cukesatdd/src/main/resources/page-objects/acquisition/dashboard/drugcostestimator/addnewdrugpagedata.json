@@ -1,0 +1,15 @@
+{
+"url":null,
+"expectedData":{
+"addNewDrugHeading":{
+"identifier":"xpath",
+"elementName":"//header[@class='add-drug-slide-header']/span[contains(text(),'ADD A NEW DRUG')]"
+},
+"cancelButton":{
+"identifier":"id",
+"elementName":"closeDrugPopup"
+}
+
+}
+
+}

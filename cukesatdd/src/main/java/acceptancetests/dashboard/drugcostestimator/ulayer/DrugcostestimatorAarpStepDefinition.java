@@ -24,6 +24,7 @@ import cucumber.annotation.en.Then;
 import cucumber.annotation.en.When;
 import cucumber.table.DataTable;
 import gherkin.formatter.model.DataTableRow;
+import pages.acquisition.ulayer.AcquisitionHomePage;
 import pages.dashboard.member.drugcostestimator.blayer.AddDrugDetails;
 import pages.dashboard.member.drugcostestimator.blayer.AddNewDrugModal;
 import pages.dashboard.member.drugcostestimator.blayer.DrugCostEstimatorPage;
@@ -92,6 +93,20 @@ public class DrugcostestimatorAarpStepDefinition {
 		getLoginScenario().saveBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE, dce);
 
 	}
+	
+	
+	@Given("^the user is on AARP medicare site landing page$")
+	public void the_user_is_on_AARP_medicare_site_landing_page() {
+		System.out.println("AARP given");
+		WebDriver wd = getLoginScenario().getWebDriver();
+
+		AcquisitionHomePage aquisitionhomepage = new AcquisitionHomePage(wd);
+
+		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
+		getLoginScenario().saveBean(PageConstants.ACQUISITION_HOME_PAGE,
+				aquisitionhomepage);
+	}
+	
 	@Given("^I am an AARP member on the Dashboard site SmartPhone$")
 	public void i_am_an_uhc_individual_member_on_the_dashboard_site_smartphone(DataTable memberAttributes) {
 		List<DataTableRow> memberAttributesRow = memberAttributes.getGherkinRows();
@@ -830,5 +845,15 @@ public class DrugcostestimatorAarpStepDefinition {
 		//Thread.sleep(10000);
 		dce.delete_all_drugs();
 	}
+	
+	@When("^I access the DCE tool$")
+	public void I_access_the_DCE_tool() throws InterruptedException {
+		WebDriver wd = (WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
+
+		DrugCostEstimatorPage dce = new DrugCostEstimatorPage(wd);
+		dce.navigateToDCETool();
+		dce.addDrug("lipitor");
+	}
+	
 }
 

@@ -25,6 +25,8 @@ public class UawHomePage extends UhcDriver {
 	
 	public WebElement uawprovidertablink;
 	
+	@FindBy(xpath="//*[@id='main']/div/div[1]/div/div[3]/div[2]/div[8]/div/div/div[1]/a/span")
+    private WebElement getstartedbutton;
 	
 	private static String UAW_HOME_PAGE_URL= MRConstants.UAW_HOME_PAGE_URL;
 	
@@ -66,19 +68,25 @@ public class UawHomePage extends UhcDriver {
 				"UAW Trust Group Retiree – Find a provider")) {
 	return new UawProviderPage(driver);
 	}
-		
-		
-		
-		
-	
-		
-		
-		
-		
-		
-		
-	
-		// TODO Auto-generated method stub
 		return null;
+	}		
+		
+		public SalesforceSitePage clickgetstarted() {
+			// TODO Auto-generated method stub
+			
+			validate(getstartedbutton);
+			getstartedbutton.click();
+			
+			if(driver.getTitle().equalsIgnoreCase("Problem loading page"))
+			{
+				return new SalesforceSitePage(driver);
+			}
+			
+			return null;
+		}
+		
 	}
-}
+		
+		
+		
+		

@@ -14,6 +14,7 @@ import org.openqa.selenium.support.FindBys;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
 
+import pages.member.ulayer.DrugClaimSummaryPage;
 import acceptancetests.atdd.data.CommonConstants;
 import acceptancetests.atdd.data.PageData;
 import acceptancetests.atdd.util.CommonUtility;
@@ -36,7 +37,7 @@ public class ClaimSummarypage extends UhcDriver{
 	@FindBy(xpath=".//*[@class='claimsearch section']/div[1]//h1")
 	private WebElement myCaimsText;
 
-	@FindBy(id="medical")
+	@FindBy(xpath = "//html/head/title")
 	private WebElement ClaimsSummaryPage;
 
 	@FindBy(xpath=".//h2[contains(.,'Plan Name Lorem Ipsum')]")
@@ -48,29 +49,39 @@ public class ClaimSummarypage extends UhcDriver{
 	@FindBy(id="claim-type")
 	private WebElement claimTypeMAPD;
 
+	@FindBy(xpath = "//option[@value = 'custom-search']")
+	private WebElement customSearch;
 
+	@FindBy(xpath = "//div[2]/section/div/div/div/form/fieldset/div/div/div[2]/div/select/option[@value='6 months']")
+	private WebElement last6Months;
+	
 	@FindBy(xpath="//div[normalize-space()='Prescription Drug']")
 	private WebElement claimTypePDP;
 
-	@FindBy(xpath=".//*[@id='document-date']")
+	@FindBy(id="document-date")
 	private WebElement viewClaimsFrom;
 
 	@FindBy (xpath="(.//*[@id='summaryview']//section/div/div/div/p)[1]")                    
 	private WebElement claimsCopyText;
-
 
 	@FindBy (xpath="(.//*[@id='summaryview']//section/div/div/div/p)[2]")                    
 	private WebElement claimsCopyText2;
 
 	@FindBy (xpath=".//*[@id='table-medical']/div[1]/div[1]/div/h2[1]")
 	private WebElement dynamicNumberOfClaimsText;
-	
+
 	@FindBy (xpath=".//*[@id='table-medical']/div[1]/div[1]/div/h2[2]")
 	private WebElement dynamicNumberOfClaimsTextPdp;
 
-	@FindBy (xpath=".//*[@id='table-medical']/div[3]/div/div")
-	private WebElement claimsTable;
+	@FindBy (id = "medical")
+	private WebElement claimsTableMedical;
 
+	@FindBy (id = "prescriptionDrug")
+	private WebElement claimsTablePrescriptionDrug;
+	
+	@FindBy (id = "ship")
+	private WebElement claimsTableSHIP;
+	
 	@FindBy (xpath=".//*[@id='summaryview']/div/div/main/div/div[2]/section/div/div/div[2]/div/div/ul")
 	private WebElement claimsTablePagination;
 
@@ -79,10 +90,13 @@ public class ClaimSummarypage extends UhcDriver{
 
 	@FindBy (xpath="//h2[contains(.,'Prescription Drug EOB')]")
 	private WebElement PrescriptionEobText;
+	
+	@FindBy (xpath="//h2[contains(.,'SHIP EOB')]")
+	private WebElement ShipClaimsEobText;
 
 	@FindBy (xpath=".//*[@id='table-medical']/div[2]/div[1]/div/a")
 	private WebElement learnmorefalse;
-	
+
 	@FindBy (xpath=".//*[@id='table-medical']/div[2]/div[2]/div/a")
 	private WebElement learnmorePdp;
 
@@ -95,12 +109,27 @@ public class ClaimSummarypage extends UhcDriver{
 	@FindBy (xpath=".//*[@id='differentProviderClaims']/div/div")
 	private WebElement proceedToDownloadPopUp;
 
+	@FindBy(id="replace-current-rider")
+	private WebElement proceedButtonDownloadPopUp;
+
+	@FindBy (xpath = "//a[contains(text(),'CANCEL')]")
+	private WebElement cancelButtonDownloadPopUp;
+
+	@FindBy (xpath="//button")
+	private WebElement searchButton;
+
+	@FindBy (id="custom-from")
+	private WebElement from;
+
+	@FindBy (id="custom-to")
+	private WebElement to;
+
 
 	public ClaimSummarypage(WebDriver driver) {
 		super(driver);
 
 		PageFactory.initElements(driver, this);
-		CommonUtility.waitForPageLoad(driver, ClaimsSummaryPage, 60);
+		//CommonUtility.waitForPageLoad(driver, ClaimsSummaryPage, 60);
 
 		// TODO Auto-generated constructor stub
 	}
@@ -175,11 +204,11 @@ public class ClaimSummarypage extends UhcDriver{
 
 	public boolean verifyClaimsTableAndPagination(){
 
-		return claimsTable.isDisplayed()&& claimsTablePagination.isDisplayed();
+		return claimsTableMedical.isDisplayed()&& claimsTablePagination.isDisplayed();
 
 	}
 
-	public boolean validteEobfordifferentDomainType(String domain, String plantype){
+	public boolean validateEobfordifferentDomainType(String domain, String plantype){
 
 		if (domain.equals("COSMOS")&& plantype.equals("MAPD"))
 		{
@@ -196,6 +225,12 @@ public class ClaimSummarypage extends UhcDriver{
 		{
 			System.out.println("for MA medical Eob is diplayed ====>"+ (medicalEobText.isDisplayed()));
 			return medicalEobText.isDisplayed();
+		}
+		//SHIP CLAIMS EOB
+		else if ((domain.equals("NA") && plantype.equals("SHIP"))){
+			System.out.println("for SHIP Eob is diplayed ====>"+ (ShipClaimsEobText.isDisplayed()));
+			return ShipClaimsEobText.isDisplayed();			
+			
 		}
 		else {
 			System.out.println("for PDP prescription drug EOB's are diaplayed ====> "+ (PrescriptionEobText.isDisplayed()));
@@ -257,6 +292,65 @@ public class ClaimSummarypage extends UhcDriver{
 
 	}
 
+	public void searchClaimsByTimeInterval(String toDate, String fromDate) {
+		System.out.println("The title of the page is-------->"+driver.getTitle());
+		if(driver.getTitle().equalsIgnoreCase("Member Claims")){
+
+			customSearch.click();
+
+			sendkeys(from,fromDate);
+			sendkeys(to,toDate);
+
+			CommonUtility.waitForPageLoad(driver, searchButton,60);
+			searchButton.click();
+		}
+	}
+	
+	public void searchClaimsByTimePeriod(String claimPeriod) {
+		System.out.println("The title of the page is-------->"+driver.getTitle());
+		System.out.println("The URL of the page is---------->"+driver.getCurrentUrl());
+		if(driver.getTitle().equalsIgnoreCase("Member Claims")){
+			CommonUtility.waitForPageLoad(driver, last6Months, 60);
+			last6Months.click();
+			/*Select claimsFrom = new Select(viewClaimsFrom);
+			claimsFrom.selectByValue("24 months");*/
+		}
+	}
+
+	public void validateClaimsTable() {
+		CommonUtility.waitForPageLoad(driver, ClaimsSummaryPage,60);
+		if(claimsTableMedical.isDisplayed() || claimsTablePrescriptionDrug.isDisplayed() || claimsTableSHIP.isDisplayed()){
+			System.out.println("!!!!!!!!! Able to find the claims table !!!!!!!!!");
+		}		
+	}
+
+	public void validateDownloadMyData() {
+		CommonUtility.waitForPageLoad(driver, downloadmydatabutton, 60);
+		if (downloadmydatabutton.isDisplayed())
+
+		{			
+			downloadmydatabutton.click();		
+			waitforElement(proceedToDownloadPopUp);
+			System.out.println("Proceed button is displayed ===>"+(proceedToDownloadPopUp.isDisplayed()));
+			proceedToDownloadPopUp.click();
+			if(proceedToDownloadPopUp.isDisplayed()){
+				proceedButtonDownloadPopUp.click();
+				System.out.println("Proceed button functionality is working as expected");
+			}
+
+			cancelButtonDownloadPopUp.click();
+			if(driver.getTitle().contains("Claims")){
+				System.out.println("Cancel button functionality is working as expected");
+			}
+
+
+		}
+		else 
+		{
+			System.out.println("Downlaod my data button is not displayed ");
+
+		}
+	}
 }
 
 

@@ -38,7 +38,8 @@ public class DrugCostEstimatorPage extends UhcDriver {
 
 	public JSONObject savedrugpageJson;
 
-	@FindBy(xpath = "//div[@id='drugs-tab']//a[@id='add-drug']")
+	//@FindBy(xpath = "//div[@id='drugs-tab']//a[@id='add-drug']")
+	@FindBy(id = "add-drug")
 	public WebElement addDrug;
 
 	@FindBy(xpath = "//p[contains(text(),'STEP2:')]/following-sibling::span[p[contains(text(),'PHARMACY')]]")
@@ -284,7 +285,7 @@ public class DrugCostEstimatorPage extends UhcDriver {
 		addDrug.click();
 		System.out.println("Current Page title :: " + driver.getTitle());
 
-		if (driver.getTitle().equalsIgnoreCase("My Benefits & Coverage")) {
+		if (driver.getTitle().equalsIgnoreCase("drugcostestimatoracquisition")) {
 			return new AddNewDrugModal(driver);
 		}
 		return null;
@@ -835,14 +836,36 @@ public class DrugCostEstimatorPage extends UhcDriver {
 
 	public void deleteAllDrugs() throws InterruptedException {
 
-		
+		int drugCount = getDrugsCount();
 		while (getDrugsCount() != 0) {
-			String deleteDrugXpath = ".//*[@id='drugdetails']/div[1]/div[1]/div/div/section/ul/li[2]/a";
+//			String deleteDrugXpath = ".//*[@id='drugdetails']/div[1]/div[1]/div/div/section/ul/li[2]/a";
+//			WebElement deleteDrug = driver.findElement(By.xpath(deleteDrugXpath));
+//			deleteDrug.click();
+//			deleteDrug();
+			
+			String deleteDrugXpath = ".//*[@id='drugdetails']/div[2]/div["+drugCount+"]/div/div/section/ul/li[2]/a";
 			WebElement deleteDrug = driver.findElement(By.xpath(deleteDrugXpath));
+			
 			deleteDrug.click();
+			WebElement deleteButtonXpath = driver.findElement(By.xpath(".//*[@id='drugModal']/div/div/div[2]/div/section/div/button[2]"));
+			waitforElement(deleteButtonXpath);
+			deleteButtonXpath.click();
+			drugCount--;
 			Thread.sleep(5000);
-
 		}
+	}
+	
+	public void deleteDrug() throws InterruptedException{
+		
+		
+		String deleteDrugXpath = ".//*[@id='drugdetails']/div[2]/div[3]/div/div/section/ul/li[2]/a";
+		WebElement deleteDrug = driver.findElement(By.xpath(deleteDrugXpath));
+		
+		deleteDrug.click();
+		WebElement deleteButtonXpath = driver.findElement(By.xpath(".//*[@id='drugModal']/div/div/div[2]/div/section/div/button[2]"));
+		waitforElement(deleteButtonXpath);
+		deleteButtonXpath.click();
+		Thread.sleep(5000);
 	}
 
 	public void addGenericDrug(String drug) throws InterruptedException {
@@ -1177,5 +1200,23 @@ public class DrugCostEstimatorPage extends UhcDriver {
 			Assert.assertTrue("There are no drugs added ", false);
 		}
 	}
+	
+	public void navigateToDCETool() throws InterruptedException {
+
+		String Current_url = driver.getCurrentUrl();
+		String NewDCEUrl;
+
+		if (driver.getCurrentUrl().contains("aarpmedicareplans")) {
+			NewDCEUrl = "https://www.team-b-aarpmedicareplans.uhc.com/content/aarpmedicareplans/en/drugcostestimatoracquisition.html";
+		} else {
+			NewDCEUrl = "https://www.team-b-uhcmedicaresolutions.uhc.com/content/uhcmedicaresolutions/en/drugcostestimatoracquisition.html";
+		}
+
+		driver.get(NewDCEUrl);
+
+		Thread.sleep(15000);
+	}
+	
+	
 
 }

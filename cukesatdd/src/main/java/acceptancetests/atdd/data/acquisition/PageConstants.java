@@ -300,13 +300,19 @@ public class PageConstants {
 	public static final String PFIZER_SITE_MAP = "pfizersitemap";
 
 	public static final String NCSHP_HOME_PAGE = "ncshp";
+	
+	public static final String OELOCAL12_HOME_PAGE = "oelocal12";
+	
+	public static final String PEEHIP_HOME_PAGE = "peehip";
 
 	public static final String NCSHP_FIND_A_PROVIDER = "ncshpfindaprovider";
 
 	public static final String NCSHP_SITE_MAP = "ncshpsitemap";
 
 	public static final String UAW_HOME_PAGE = "uawhomepage";
-
+	
+	public static final String WELLSFARGO_HOME_PAGE = "wellsfargopage";
+			
 	public static final String UAW_PROVIDER_PAGE = "uawproviderpage";
 
 	public static final String UAW_SITE_MAP_PAGE = "uawsitemappage";
@@ -353,5 +359,17 @@ public class PageConstants {
     public static final String RESPONSIVE_PLAN_SUMMARY_PAGE = "responsivePlanSummaryPage";
 	
 	public static final String RESPONSIVE_DETAILS_PAGE = "responsiveDetailsPage";
+
+	public static final String NOKIA_HOME_PAGE = "nokiahomepages";
+	
+	public static final String EATON_HOME_PAGE = "eatonhomepages";
+
+	public static final String Salesforce_PAGE = "salesforce";
+
+	public static final String NONCUSTOM_HOME_PAGE = "noncustom";
+
+	public static final String UNIVERSITYOFMISSOURI_HOME_PAGE = "UniversityofMissouri";
+
+	
 
 }
