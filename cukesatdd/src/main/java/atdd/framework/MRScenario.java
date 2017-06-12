@@ -859,8 +859,6 @@ public class MRScenario {
 
 
        public WebDriver getWebDriver() {
-
-
              String browser = (null == System.getProperty(CommonConstants.JENKINS_BROWSER)
                           ? props.get("WebDriver") : System.getProperty(CommonConstants.JENKINS_BROWSER));
               System.out.println("getWebDriver, returning driver " + browser);
@@ -985,8 +983,7 @@ public class MRScenario {
                 
               }
              return webDriver;
-      }
-
+      } 		 
 
        public WebDriver getIEDriver() {
               System.setProperty("webdriver.ie.driver",

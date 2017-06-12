@@ -41,7 +41,7 @@
              <!-- <include>**/RunMRATddTestResponsiveVPP.java</include>  -->
             <!--  <include>**/RunMRATDDTestRunnerSrint2.java</include> 
             <include>**/RunMRATDDTestRunnerSrint3.java</include> -->
-             <include>**/RunMRATDDTestRunnerSrint4.java</include> 
+           <!--  <include>**/RunMRATDDTestRunnerSrint4.java</include> -->
           <!--  <include>**/RunMRATDDTestRunnerSrint5.java</include>  -->
         </includes>       
     </configuration>
