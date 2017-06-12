@@ -220,6 +220,8 @@ public class PharmacySearchPage extends UhcDriver{
 		continueField.click();
 		CommonUtility.checkPageIsReady(driver);
 
+		try {
+		
 		if(countyPopOut.isDisplayed())
 		{
 			String county  = zipAttributesMap.get("County Name");
@@ -232,6 +234,10 @@ public class PharmacySearchPage extends UhcDriver{
 					break;
 				}
 			}
+		}
+		}
+		catch (Exception e){
+			System.out.println("County not exists");			
 		}
 		if(driver.getTitle().equalsIgnoreCase("AARP Medicare Plans | Pharmacy Directory")) // TODO
 		{
@@ -297,6 +303,7 @@ public class PharmacySearchPage extends UhcDriver{
 	}
 	
 	public PharmacySearchPage clickChinese(){
+		CommonUtility.waitForPageLoad(driver, chineseLink, 5);
 		chineseLink.click();		
 		System.out.println("Chinese language selected");   //Story 261070
 		try {

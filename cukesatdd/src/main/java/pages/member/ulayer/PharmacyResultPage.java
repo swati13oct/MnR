@@ -216,12 +216,11 @@ public class PharmacyResultPage extends UhcDriver {
 				&& element.getText() != "") {
 			flag = true;
 		} else {
-			//return false;
-			System.out.println("false block");
+			return false;
 		}
 	}
 
-	return true;
+	return flag;
 	}
 	
 	public boolean validatelanguageSpecificPharmacyResultpage(JSONObject jsonObject, String zipcode, String planName, String language){

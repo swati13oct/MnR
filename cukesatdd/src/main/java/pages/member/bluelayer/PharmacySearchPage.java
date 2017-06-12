@@ -177,7 +177,7 @@ public class PharmacySearchPage extends UhcDriver {
 				selectFromDropDown(countyList, county);
 			}
 		} catch (Exception e) {
-			return null;
+			System.out.println("County not exists");
 		}
 
 		if (this.driver.getTitle().equalsIgnoreCase(
