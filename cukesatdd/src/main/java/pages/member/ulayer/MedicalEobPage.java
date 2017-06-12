@@ -16,7 +16,6 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.events.WebDriverEventListener;
 import org.openqa.selenium.support.ui.Select;
 
 import acceptancetests.atdd.data.CommonConstants;
@@ -344,6 +343,12 @@ public class MedicalEobPage extends UhcDriver{
 						 Assert.fail();
  				     }
 				   }
+				 try {
+					Thread.sleep(4000);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 				 for(int i=0; i<=fileType.size()-1;i++){
 					 if(fileType.get(i).isDisplayed()){			 
 						 System.out.println(fileType.get(i).getText()+" size at "+(i+1)+" displayed correctly");

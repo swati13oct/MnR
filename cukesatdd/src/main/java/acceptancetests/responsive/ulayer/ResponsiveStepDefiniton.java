@@ -302,7 +302,7 @@ public class ResponsiveStepDefiniton {
 	public void the_user_click_compare_plans_to_compare(){
 		ResponsivePlanSummary planSummary = (ResponsivePlanSummary) getLoginScenario()
 				.getBean(PageConstants.RESPONSIVE_PLAN_SUMMARY_PAGE);
-		planSummary.comparePlanslnk();
+	//	planSummary.comparePlanslnk();
 		
 	}
 	
@@ -335,7 +335,7 @@ public class ResponsiveStepDefiniton {
 	public void the_user_verify_disclaimer_text(){
 		ResponsivePlanSummary planSummary = (ResponsivePlanSummary) getLoginScenario()
 				.getBean(PageConstants.RESPONSIVE_PLAN_SUMMARY_PAGE);
-		planSummary.disclaimerText();
+//		planSummary.disclaimerText();
 		
 	}
 	
