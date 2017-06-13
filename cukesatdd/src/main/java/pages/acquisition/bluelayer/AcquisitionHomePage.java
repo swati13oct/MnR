@@ -7,7 +7,6 @@ import java.util.List;
 
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
@@ -17,15 +16,11 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.FindBys;
 import org.openqa.selenium.support.PageFactory;
 
-
 //import pages.member.bluelayer.AccountHomePage;
 import acceptancetests.atdd.data.CommonConstants;
 import acceptancetests.atdd.data.MRConstants;
 import acceptancetests.atdd.data.PageData;
 import acceptancetests.atdd.util.CommonUtility;
-import pages.acquisition.bluelayer.ZipcodeLookupHomePage;
-import pages.acquisition.bluelayer.PlanSelectorPage;
-import pages.acquisition.bluelayer.RequestHelpAndInformationPage;
 //import pages.acquisition.ulayer.MaViewPlansAndPricingPage;
 //import pages.acquisition.ulayer.MsViewPlansAndPricingPage;
 //import pages.acquisition.ulayer.PdpViewPlansAndPricingPage;
@@ -94,10 +89,12 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	@FindBy(linkText = "View all disclaimer information")
 	private WebElement disclaimerViewLink;
 	
-	@FindBy(linkText = "Find a pharmacy near you")
+	@FindBy(id = "Find a pharmacy for Medicare Advantage plans")
+	private WebElement pharmacyNearLink_MA;
+	
+	@FindBy(id = "Find a pharmacy near you")
 	private WebElement pharmacyNearLink;
 	
-
 	@FindBy(className = "disclaimer hideLink")
 	private WebElement disclaimerHideLink;
 
@@ -702,8 +699,16 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		
 	}
 
-	public PharmacySearchPage navigateToPharmacyLocator() {
-		pharmacyNearLink.click();
+	public PharmacySearchPage navigateToPharmacyLocator(String planType) {
+
+		
+		if(planType.contains("MA"))
+			pharmacyNearLink_MA.click();
+	else if(planType.contains("PDP")){
+			pharmacyNearLink.click();		
+	}
+		
+		
 		for(int i=0;i<10;i++){
 			try {
 				Thread.sleep(6000);

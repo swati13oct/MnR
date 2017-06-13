@@ -21,11 +21,11 @@ import acceptancetests.atdd.data.CommonConstants;
 import acceptancetests.atdd.data.acquisition.PageConstants;
 import acceptancetests.pharmacylocator.data.PharmacySearchCommonConstants;
 import atdd.framework.MRScenario;
+import cucumber.api.DataTable;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
-import cucumber.api.DataTable;
 
 
 /**
@@ -70,8 +70,9 @@ public class PharmacyLocatorUmsStepDefinition {
 	public void user_views_pharmacy_locator_UMS() {
 		AcquisitionHomePage acqusitionHomePage = (AcquisitionHomePage) getLoginScenario()
 				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+		String planType = (String) getLoginScenario().getBean(PharmacySearchCommonConstants.PLAN_TYPE);
 		PharmacySearchPage pharmacySearchPage = acqusitionHomePage
-				.navigateToPharmacyLocator();
+				.navigateToPharmacyLocator(planType);
 
 		if (pharmacySearchPage != null) {
 			getLoginScenario().saveBean(PageConstants.PHARMACY_SEARCH_PAGE,
