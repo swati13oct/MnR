@@ -47,10 +47,10 @@ public class ResponsivePlanSummaryUhc extends UhcDriver{
 		@FindBy(xpath = "//*[@id='zipcode']")
 		private WebElement zipCodeField;
 		
-		@FindBy(xpath = "//div[@class='tab'][2]")
+		@FindBy(xpath = "//div[@class='tab plancountheight'][2]")
 		private WebElement viewPdpPlans;
 
-		@FindBy(xpath = "//div[@class='tab'][3]")
+		@FindBy(xpath = "//div[@class='tab plancountheight'][3]")
 		private WebElement viewSnpPlans;
 		
  		@FindBy(xpath="//*[contains(text(),'HMO')]")

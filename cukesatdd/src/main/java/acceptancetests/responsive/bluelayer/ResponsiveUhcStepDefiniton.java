@@ -109,7 +109,7 @@ public class ResponsiveUhcStepDefiniton {
 	}
 	
 	
-	@And ("^the user validates plan highlight and provider search$")
+	@And ("^the user validates plan highlights$")
 	public void user_validates_planHighlights_poviderLink(){
 		ResponsivePlanSummaryUhc planSummary = (ResponsivePlanSummaryUhc) getLoginScenario()
 				.getBean(PageConstants.RESPONSIVE_PLAN_SUMMARY_PAGE_UHC);

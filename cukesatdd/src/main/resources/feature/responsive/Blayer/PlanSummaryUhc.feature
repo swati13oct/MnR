@@ -22,8 +22,7 @@ Then the user performs plan search using zipcode
 Then user validates plan count for all plan types on plan summary page in AARP site
 Then the user navigates to the following plan type
 | PlanType | <planType> |
-And the user validates plan highlight and provider search
-#Then user validates county name on plan summary page
+And the user validates plan highlights
 Examples:
 |zipCode|county          |planType |
 |33012 |Miami-Dade County| SNP     |			
