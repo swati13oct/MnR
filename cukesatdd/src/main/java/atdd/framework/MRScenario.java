@@ -242,8 +242,6 @@ public class MRScenario {
                      tempList.add("Individual");
                      umsMemberAttributesMap.put("Dec_Sierra_001", tempList);
               } catch (IOException e) {
-                     // TODO Auto-generated catch block
-                     // schak38: when member-types csv is not found
                      e.printStackTrace();
               } finally {
                      try {
@@ -251,19 +249,16 @@ public class MRScenario {
                                   memberAmpTypeReader.close();
                            }
                      } catch (IOException e) {
-                           // TODO Auto-generated catch block
                            e.printStackTrace();
                      }
                      try {
                            con.close();
                      } catch (SQLException e1) {
-                           // TODO Auto-generated catch block
                            e1.printStackTrace();
                      }
                      try {
                            ctx.close();
                      } catch (Exception e) {
-                           // TODO Auto-generated catch block
                            e.printStackTrace();
                      }
               }
@@ -283,7 +278,6 @@ public class MRScenario {
                      System.out.println("query--->" + query);
                      rs = stmt.executeQuery(query);
               } catch (SQLException e) {
-                     // TODO Auto-generated catch block
                      e.printStackTrace();
               }
 
@@ -306,7 +300,6 @@ public class MRScenario {
 
                      }
               } catch (SQLException e) {
-                     // TODO Auto-generated catch block
                      e.printStackTrace();
               }
 
@@ -327,7 +320,6 @@ public class MRScenario {
               try {
                      ctx = new InitialDirContext(env);
               } catch (NamingException e) {
-                     // TODO Auto-generated catch block
                      e.printStackTrace();
               }
               return ctx;
@@ -338,7 +330,6 @@ public class MRScenario {
               try {
                      Class.forName("oracle.jdbc.driver.OracleDriver");
               } catch (ClassNotFoundException e) {
-                     // TODO Auto-generated catch block
                      e.printStackTrace();
               }
               Connection connection = null;
@@ -348,7 +339,6 @@ public class MRScenario {
                                   props.get(CommonConstants.DB_USERNAME),
                                   props.get(CommonConstants.DB_PASSWORD));
               } catch (SQLException e) {
-                     // TODO Auto-generated catch block
                      e.printStackTrace();
               }
               return connection;
@@ -380,7 +370,6 @@ public class MRScenario {
                            System.out.println("query--->" + query);
                            rs = stmt.executeQuery(query);
                      } catch (SQLException e) {
-                           // TODO Auto-generated catch block
                            e.printStackTrace();
                      }
 
@@ -430,10 +419,8 @@ public class MRScenario {
                            }
 
                      } catch (SQLException e) {
-                           // TODO Auto-generated catch block
                            e.printStackTrace();
                      } catch (NamingException e) {
-                           // TODO Auto-generated catch block
                            e.printStackTrace();
                      }
 
@@ -447,7 +434,6 @@ public class MRScenario {
                            System.out.println("query--->" + query);
                            rs = stmt.executeQuery(query);
                      } catch (SQLException e) {
-                           // TODO Auto-generated catch block
                            e.printStackTrace();
                      }
 
@@ -497,10 +483,8 @@ public class MRScenario {
                            }
 
                      } catch (SQLException e) {
-                           // TODO Auto-generated catch block
                            e.printStackTrace();
                      } catch (NamingException e) {
-                           // TODO Auto-generated catch block
                            e.printStackTrace();
                      }
 
@@ -510,7 +494,6 @@ public class MRScenario {
                      /* Closing database connection */
                      con.close();
               } catch (SQLException e) {
-                     // TODO Auto-generated catch block
                      e.printStackTrace();
               }
 
@@ -518,7 +501,6 @@ public class MRScenario {
                      /* Closing LDAP connection */
                      ctx.close();
               } catch (NamingException e) {
-                     // TODO Auto-generated catch block
                      e.printStackTrace();
               }
        }
@@ -790,7 +772,6 @@ public class MRScenario {
               try {
                      parentDirectory = new java.io.File(".").getCanonicalPath();
               } catch (IOException e) {
-                     // TODO Auto-generated catch block
                      e.printStackTrace();
               }
               FileInputStream stream = null;
@@ -808,7 +789,6 @@ public class MRScenario {
                      bb = fc.map(FileChannel.MapMode.READ_ONLY, 0, fc.size());
 
               } catch (IOException e) {
-                     // TODO Auto-generated catch block
                      e.printStackTrace();
               }
 
@@ -824,7 +804,6 @@ public class MRScenario {
               try {
                      stream.close();
               } catch (IOException e) {
-                     // TODO Auto-generated catch block
                      e.printStackTrace();
               }
 
@@ -835,7 +814,6 @@ public class MRScenario {
                            jsonObject = new JSONObject(response);
                      }
               } catch (JSONException e) {
-                     // TODO Auto-generated catch block
                      e.printStackTrace();
               }
               return jsonObject;
@@ -908,7 +886,8 @@ public class MRScenario {
                           System.setProperty("webdriver.chrome.driver", props.get(CommonConstants.CHROME_DRIVER));
                           webDriver = new ChromeDriver(capabilities);
                           return webDriver;
-                    }*/else if (browser.equalsIgnoreCase(CommonConstants.SAUCE_BROWSER_WEB)) {
+                    }*/
+               else if (browser.trim().equalsIgnoreCase(CommonConstants.SAUCE_BROWSER_WEB.trim())) {
                            System.out.println("Execution is Going to Start on SauceLabs Web.....!!!!!");
                 DesiredCapabilities capabilities = null;
                 if(browserName.equalsIgnoreCase("firefox")){
@@ -945,11 +924,12 @@ public class MRScenario {
                        Assert.fail("Invalid Sauce URL: [" + URL + "]");
                 }
                 return webDriver;
-                    }
+                }
                     //https://wiki.saucelabs.com/display/DOCS/Platform+Configurator#/
-                    else if (browser.equalsIgnoreCase(CommonConstants.SAUCE_BROWSER_MOBILE)){
-                          System.out.println("Execution is Going to Start on SauceLabs Mobile.....!!!!!");
-                 DesiredCapabilities capabilities = null;
+                
+                else if (browser.trim().equalsIgnoreCase(CommonConstants.SAUCE_BROWSER_MOBILE.trim())){
+                	System.out.println("Execution is Going to Start on SauceLabs Mobile.....!!!!!");
+                	DesiredCapabilities capabilities = null;
                 if(browserName.equalsIgnoreCase("Safari")){
                      capabilities = DesiredCapabilities.iphone();
                 }else{
@@ -957,25 +937,17 @@ public class MRScenario {
                 }
                 System.out.println("CHECK THE VALUES************: "+props.get(CommonConstants.DEVICE_VERSION)+" "+props.get(CommonConstants.DEVICE_NAME)+" "
                            +""+props.get(CommonConstants.PLATFORM_VERSION)+" "+props.get(CommonConstants.PLATFORM_NAME)+" "+browserName);
+                //TODO: check the values
                 
-                capabilities.setCapability("appiumVersion", props.get(CommonConstants.DEVICE_VERSION));
-                     capabilities.setCapability("deviceName",props.get(CommonConstants.DEVICE_NAME));
-                     capabilities.setCapability("deviceOrientation", "portrait");
-                     capabilities.setCapability("browserName", browserName);
-                     capabilities.setCapability("platformVersion", props.get(CommonConstants.PLATFORM_VERSION));
-                     capabilities.setCapability("platformName",props.get(CommonConstants.PLATFORM_NAME));                          
-                  capabilities.setCapability("autoAcceptsAlerts", true);
+                capabilities.setCapability("appiumVersion", props.get(CommonConstants.DEVICE_VERSION).trim());
+                capabilities.setCapability("deviceName",props.get(CommonConstants.DEVICE_NAME).trim());
+                capabilities.setCapability("deviceOrientation", "portrait");
+                capabilities.setCapability("browserName", browserName.trim());
+                capabilities.setCapability("platformVersion", props.get(CommonConstants.PLATFORM_VERSION).trim());
+                capabilities.setCapability("platformName",props.get(CommonConstants.PLATFORM_NAME).trim());                          
+                capabilities.setCapability("autoAcceptsAlerts", true);
                 capabilities.setCapability("parent-tunnel", "sauce_admin");
                 capabilities.setCapability("tunnelIdentifier", "OptumSharedTunnel-Prd");
-                
-                
-                
-                capabilities.setCapability("appiumVersion", "1.6.4"); 
-                capabilities.setCapability("deviceName", "Samsung Galaxy S3 Emulator"); 
-                capabilities.setCapability("deviceOrientation", "portrait"); 
-                capabilities.setCapability("browserName", "Browser"); 
-                capabilities.setCapability("platformVersion", "4.4"); 
-                capabilities.setCapability("platformName", "Android");
 
                 String USERNAME = "apriyad4";
                 String ACCESS_KEY = "6e1345f1-80ea-4863-8573-187bf3151ac0";
