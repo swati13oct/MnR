@@ -14,7 +14,7 @@ import cucumber.junit.Cucumber;
 @Cucumber.Options(glue = { "atdd.framework","acceptancetests.dashboard.claims.aarplayer" }, 
 features = { "feature/dashboard/claims/aarplayer" }, 
 format = {
-		"pretty", "html:reports/test-report", "json:target/cucumber.json" }, tags ={"@claimsSummarySHIP"})
+		"pretty", "html:reports/test-report", "json:target/cucumber.json" }, tags ={"@ClaimsDetailsSHIP"})
 public class RunMRAtddTestClaimsRedesign {
 
 }

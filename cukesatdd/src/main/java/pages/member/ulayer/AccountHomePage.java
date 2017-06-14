@@ -611,7 +611,7 @@ public class AccountHomePage extends UhcDriver {
 		 * Auto-generated catch block e.printStackTrace(); }
 		 */
 		System.out.println(driver.getTitle());
-		if (driver.getTitle().equalsIgnoreCase("Member Claims")) {
+		if (driver.getTitle().equalsIgnoreCase("claims")) {
 			return new pages.dashboard.member.ulayer.ClaimDetailsPage(driver);
 
 		}

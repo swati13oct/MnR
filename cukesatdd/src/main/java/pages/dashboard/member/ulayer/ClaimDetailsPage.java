@@ -22,10 +22,10 @@ import junit.framework.Assert;
 public class ClaimDetailsPage extends UhcDriver{
 	private PageData newClaimDetailspage;
 
-	@FindBy (xpath=".//*[@id='claimSearchButton']")
+	@FindBy (xpath=".//*[@id='claimSearchButton']/p/b")
 	private WebElement claimSearch;
 
-	@FindBy(xpath=".//*[@id='claimDetailsHeader']")
+	@FindBy(xpath = "//html/body/div[2]/div/div/div/div/main/div/div[1]/div[2]/header/div/div/div/div/div/div/h2")
 	private  WebElement myCaimsDetailsText;
 
 	@FindBy(xpath=".//*[@id='claimdetailspage']")
@@ -72,11 +72,19 @@ public class ClaimDetailsPage extends UhcDriver{
 	@FindBy (xpath="//*[@id='learnmorePDP']")
 	private WebElement learnmorePDP;
 	
-	@FindBy(className = "claimdettable")
+	//@FindBy(className = "claimdettable")
+	@FindBy(xpath = "//html/body/div[3]/div/div/div/div/main/div/div[2]/div/div/div[2]/div[3]/div/div/div")
 	public WebElement claimsTable;
 	
-	@FindBy(id = "learnmoretoggleship")
+	//@FindBy(id = "learnmoretoggleship")
+	@FindBy(xpath = ".//*[@id='learnmoredetailstoggle']/p")
 	private WebElement learnMoreLink;
+	
+	@FindBy(id = "eobClass")
+	private WebElement headerEOB;
+	
+	@FindBy(xpath = ".//*[@id='ship_eob']/div/section/a/p")
+	private WebElement EOB;
 	
 	public ClaimDetailsPage(WebDriver driver) {
 		super(driver);
@@ -94,21 +102,28 @@ public class ClaimDetailsPage extends UhcDriver{
 	}
 	
 	@SuppressWarnings("deprecation")
-	public boolean validateClaimSearch() {
-		// TODO Auto-generated method stub
-		System.out.println("validateClaimSearch not found------"+ claimSearch.isDisplayed());
-		return claimSearch.isDisplayed();
+	public void validateClaimSearch() {
+		try {
+			Thread.sleep(1000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		if(claimSearch.isDisplayed()){
+			Assert.assertTrue(true);
+		}
+		else{
+			Assert.assertTrue("Claims Search button is not present in Claims Details Page", false);
+		}
 		
 	}
 	public void validateHeader() {
-		// TODO Auto-generated method stub
-		if(myCaimsDetailsText.getText().equals("My Claims Detail")){
+		if(myCaimsDetailsText.getText().equals("My Claims Details")){
 			Assert.assertTrue(true);
-			System.out.println("validateHeader");
 		}
 		else{
-			System.out.println("exception");
-			Assert.fail("Claim Details Page Header Not found");
+
+			Assert.assertTrue("Claims Details Header is not present in Claims Details Page", false);
 		}
 	}
 
@@ -190,6 +205,29 @@ public class ClaimDetailsPage extends UhcDriver{
 		}
 			else{
 				Assert.assertTrue("Learn more section is not present in Claims Details Page", false);
+		}
+		
+	}
+
+	@SuppressWarnings("deprecation")
+	public void clickOnEOB() {
+		if(headerEOB.isDisplayed()){
+			Assert.assertTrue(true);
+			headerEOB.click();			
+		}
+		else{
+			Assert.assertTrue("EOB link is not present in Claims Details Page", false);
+		}
+		
+	}
+
+	public void validateEOB() {
+		if(EOB.isDisplayed()){
+			Assert.assertTrue(true);
+			EOB.click();			
+		}
+		else{
+			Assert.assertTrue("Search your history button is not present in Claims Details Page", false);
 		}
 		
 	}
