@@ -72,7 +72,6 @@ Examples:
 
 	
 #US634971
-contactUsTestredesign
 
 Scenario Outline: Verify go To Inbox button on contactUS redesign page for opted in member 
 Given AArp member validation on redesigned site
