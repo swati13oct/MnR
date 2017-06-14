@@ -256,7 +256,7 @@ public class PortfolioPageUhc extends UhcDriver {
 	}
 
 public ResponsivePlanSummaryUhc searchPlans(String zipcode, String CountyName) {
-	    driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+//	    driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 //	    WebDriverWait wait = new WebDriverWait(driver, 40);
 //	    WebElement element = wait.until(ExpectedConditions.elementToBeClickable(By.id("zipcode")));
 	    
@@ -266,6 +266,7 @@ public ResponsivePlanSummaryUhc searchPlans(String zipcode, String CountyName) {
 	    
 	//    sendkeys(element, zipcode);
 	//    element.sendKeys(Keys.ENTER);
+	    
 	    sendkeys(zipCodeField, zipcode);
 	    zipCodeField.sendKeys(Keys.ENTER);
 	    //remove thread once page is stable

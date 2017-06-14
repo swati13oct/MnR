@@ -12,5 +12,3 @@ import cucumber.junit.Cucumber;
 public class RunMRATddTestResponsiveVPP {
 
 }
- 
- 

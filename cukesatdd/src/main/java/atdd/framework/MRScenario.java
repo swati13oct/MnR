@@ -1,6 +1,7 @@
 package atdd.framework;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -850,7 +851,7 @@ public class MRScenario {
                     System.out.println(pathToBinary);
                     if (null == browserName || browserName.equalsIgnoreCase(CommonConstants.HTMLUNIT_BROWSER)) {
                           System.out.println("inside null");                             
-                           webDriver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
+                          webDriver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
                           webDriver.manage().window().maximize();
                     } /*else if (browserName.equalsIgnoreCase(CommonConstants.FIREFOX_BROWSER)) {
                           System.out.println("Execution started in firefox web browser !!!!!!");
@@ -895,7 +896,7 @@ public class MRScenario {
                 capabilities = DesiredCapabilities.firefox();
                 capabilities.setCapability("platform", "Windows 7");
                 capabilities.setCapability("version", "48");
-                capabilities.setCapability("idleTimeout", 180);
+              //  capabilities.setCapability("idleTimeout", 180);
                 }else if(browserName.equalsIgnoreCase("IE")){
                      capabilities = DesiredCapabilities.internetExplorer();
                      capabilities.setCapability("platform", "Windows 7");
@@ -911,8 +912,8 @@ public class MRScenario {
                 capabilities.setCapability("autoAcceptsAlerts", true);
                 capabilities.setCapability("parent-tunnel", "sauce_admin");
                 capabilities.setCapability("tunnelIdentifier", "OptumSharedTunnel-Prd");
-                String USERNAME = "apriyad4";
-                String ACCESS_KEY = "6e1345f1-80ea-4863-8573-187bf3151ac0";
+                String USERNAME = "wzhong";
+                String ACCESS_KEY = "dcd255bb-5eba-4e01-9ca2-25e25e518b17";
                 String URL = "http://" + USERNAME + ":" + ACCESS_KEY + "@ondemand.saucelabs.com:80/wd/hub";
                 if (USERNAME == null || ACCESS_KEY == null) {
                        Assert.fail(
@@ -949,8 +950,8 @@ public class MRScenario {
                 capabilities.setCapability("parent-tunnel", "sauce_admin");
                 capabilities.setCapability("tunnelIdentifier", "OptumSharedTunnel-Prd");
 
-                String USERNAME = "apriyad4";
-                String ACCESS_KEY = "6e1345f1-80ea-4863-8573-187bf3151ac0";
+                String USERNAME = "wzhong";
+                String ACCESS_KEY = "dcd255bb-5eba-4e01-9ca2-25e25e518b17";
                     String URL = "http://" + USERNAME + ":" + ACCESS_KEY + "@ondemand.saucelabs.com:80/wd/hub";
                     if (USERNAME == null || ACCESS_KEY == null) {
                            Assert.fail(
@@ -966,7 +967,9 @@ public class MRScenario {
                 
               }
              return webDriver;
-      } 		 
+      } 		        
+       
+      
 
        public WebDriver getIEDriver() {
               System.setProperty("webdriver.ie.driver",
