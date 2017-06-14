@@ -1,7 +1,7 @@
 /**
  * 
  */
-package pages.member.ulayer;
+package pages.mobile.member.ulayer;
 
 import java.util.List;
 import java.util.Map;
@@ -21,7 +21,7 @@ import acceptancetests.atdd.util.CommonUtility;
 import atdd.framework.UhcDriver;
 
 /**
- * @author pperugu
+ * @author asiripu
  *
  */
 public class ContactUsPage extends UhcDriver{
@@ -163,7 +163,7 @@ public class ContactUsPage extends UhcDriver{
 	{
 		if (getStartedButton.isDisplayed())
 		{
-			System.out.println("email widget is displayed");
+			System.out.println("email widget is displayed under mobile");
 			getStartedButton.click();
 			try {
 				Thread.sleep(5000);
@@ -384,7 +384,7 @@ public class ContactUsPage extends UhcDriver{
 	//}
 	
 	
-	public void validateSecureEmailModel_other_functionalities()
+	public void validateSecureEmailModel_Cancellink_Click()
 	{
 		if (getStartedButton.isDisplayed())
 		{
@@ -415,7 +415,6 @@ public class ContactUsPage extends UhcDriver{
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			
 			waitforElement(continueButton);
 			try {
 				Thread.sleep(5000);
@@ -437,15 +436,79 @@ public class ContactUsPage extends UhcDriver{
 			sendAmessageButton.click();
 			waitforElement(secureModelCancel);
 			secureModelCancel.click();
-			/*waitforElement(secureModelContinueButton);
-			secureModelContinueButton.click();*/
-			waitforElement(sendAmessageButton);
+			waitforElement(secureModelContinueButton);
+			secureModelContinueButton.click();
+			//waitforElement(sendAmessageButton);
 			try {
 				Thread.sleep(5000);
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+			System.out.println("End of Cancel click in Model ");
+		}
+		}
+	public void validateSecureEmailModel_PreScripionDruglinkClick()
+	{
+		if (getStartedButton.isDisplayed())
+		{
+			System.out.println("email widget is displayed");
+			getStartedButton.click();
+			try {
+				Thread.sleep(5000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+			waitforElement(useDifferentEmailRadioButton);
+			useDifferentEmailRadioButton.click();
+			//emailAddressonFile.click();
+			//useDifferentEmailRadioButton.click();
+			try {
+				Thread.sleep(5000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			newemailId.sendKeys("miasdgaarp@gmail.com");
+			confirmemailId.sendKeys("miasdgaarp@gmail.com");
+			try {
+				Thread.sleep(5000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			waitforElement(continueButton);
+			try {
+				Thread.sleep(5000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			continueButton.click();
+			waitforElement(ConfirmationWidgetButton);
+			
+			waitforElement(sendAmessageButton);
+			
+			try {
+				Thread.sleep(5000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			sendAmessageButton.click();
+			waitforElement(secureModelCancel);
+			waitforElement(prescriptionLink);
+			prescriptionLink.click();
+			System.out.println("secure model prescription link click ");
+			try {
+				Thread.sleep(5000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			System.out.println("End of Cancel click in Model ");
 		}
 		}
 	

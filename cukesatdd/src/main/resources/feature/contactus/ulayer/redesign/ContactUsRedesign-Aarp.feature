@@ -47,16 +47,16 @@ Feature: To test EmailUs Widget and Click to call functionality in contact us re
 #	| planType | |  memberType   |
 #	| MA      | |  Individual   |
 
-Scenario Outline: Verify secureMessaging Model section upon clicking the send A Message button
-Given AArp member validation on redesigned site
-	| Plan Type   | <planType>   |
-	| Member Type | <memberType> |
-When the user validates the contact us redesign  page in AARP site
-Then user validates secure Messaging Model Cancel link
+#Scenario Outline: Verify secureMessaging Model section upon clicking the send A Message button
+#Given AArp member validation on redesigned site
+#	| Plan Type   | <planType>   |
+#	| Member Type | <memberType> |
+#When the user validates the contact us redesign  page in AARP site
+#Then user validates secure Messaging Model Cancel link
 
-Examples:
-	| planType | |  memberType   |
-	| MA      | |  Individual   |
+#Examples:
+#	| planType | |  memberType   |
+#	| MA      | |  Individual   |
 
 	
 #US634971
