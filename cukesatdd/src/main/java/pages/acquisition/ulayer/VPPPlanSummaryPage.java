@@ -35,6 +35,33 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	@FindBy(xpath = ".//*[@id='site-wrapper']/div[4]/div/div[1]/div[1]/div/div/div[1]/div/div/div[1]/div[2]/div/div[2]/div[1]/div/span[3]")
 	private WebElement showMaPlans;
 	
+	@FindBy(xpath = "//div[@class='overview-tabs module-tabs-tabs']/div[1]/div/span/span[@class='ng-binding']")
+	private WebElement maPlansNumber;
+	
+	@FindBy(xpath = "//div[@class='overview-tabs module-tabs-tabs']/div[1]//span[@class='trigger-closed']")
+	private WebElement maPlansViewLink;
+	
+	@FindBy(id = "plan-list-1")
+	private WebElement maPlanList;
+	
+	@FindBy(id = "plan-list-3")
+	private WebElement pdpPlanList;
+	
+	@FindBy(xpath = "//div[@class='overview-tabs module-tabs-tabs']/div[2]//span[@class='ng-binding']")
+	private WebElement msPlansNumber;
+	
+	@FindBy(xpath = "//div[@class='overview-tabs module-tabs-tabs']/div[2]//span[@class='trigger-closed']")
+	private WebElement msPlansViewLink;
+	
+	@FindBy(xpath = "//div[@class='overview-tabs module-tabs-tabs']/div[3]//span[@class='ng-binding']")
+	private WebElement pdpPlansNumber;
+	
+	@FindBy(xpath = "//div[@class='overview-tabs module-tabs-tabs']/div[3]//span[@class='trigger-closed']")
+	private WebElement pdpPlansViewLink;
+
+	@FindBy(xpath = "//div[@class='overview-main']/h2")
+	private WebElement vppTop;
+	
 	@FindBy(xpath = "//div[@class='maplans_planbutton']/div[2]/div[2]/div[2]")
 	private WebElement hideMaPlans;
 
@@ -278,14 +305,14 @@ public class VPPPlanSummaryPage extends UhcDriver {
 
 	public VPPPlanSummaryPage viewPlanSummary(String planType) {
 		if (planType.equalsIgnoreCase("PDP")) {
-			showPdpPlans.click();
+			pdpPlansViewLink.click();
 			//validate(hidePdpPlans);
 		} else if (planType.equalsIgnoreCase("MA")
 				|| planType.equalsIgnoreCase("MAPD")) {
-			showMaPlans.click();
+			maPlansViewLink.click();
 			//validate(hideMaPlans);
 		} else if (planType.equalsIgnoreCase("MS")) {
-			showMsPlans.click();
+			msPlansViewLink.click();
 		}
 		return new VPPPlanSummaryPage(driver, planType);
 	}
@@ -510,17 +537,19 @@ public class VPPPlanSummaryPage extends UhcDriver {
 
 	public boolean getSpecificPlanInfo(String planName) {
 		WebElement element = null;
+		ElementData elementData = new ElementData("className",
+				"module-plan-overview");
 		if (planName.contains("HMO")) {
 			//ElementData elementData = new ElementData("id", "viewDetailsMA");
-			 element = getSpecificPlanSummary(maPlanElement, planName);
+			 element = getSpecificPlanSummary(findChildElements(elementData, maPlanList), planName);
 
 		} else if (planName.contains("PDP")) {
 			//ElementData elementData = new ElementData("id", "viewDetailsPDP");
-			 element = getSpecificPlanSummary(pdpPlanElement, planName);
+			 element = getSpecificPlanSummary(findChildElements(elementData, pdpPlanList), planName);
 		} 
 		else if (planName.contains("Regional PPO")) {
 			//ElementData elementData = new ElementData("id", "viewDetailsMA");
-			 element = getSpecificPlanSummary(maPlanElement, planName);
+			 element = getSpecificPlanSummary(findChildElements(elementData, maPlanList), planName);
 		}
 		
 		return validate(element);
@@ -543,16 +572,21 @@ public class VPPPlanSummaryPage extends UhcDriver {
 
 	public boolean validatePlanNames(String planType) {
 
+		ElementData elementData = new ElementData("className",
+				"module-plan-overview");
+
 		if (planType.equalsIgnoreCase("PDP")) {
-			int pdpPlans = Integer.valueOf(pdpPlansCount.getText().replace(
-					" Plans", ""));
-			return pdpPlans == pdpPlanElement.size();
+
+			int pdpPlans = Integer.valueOf(pdpPlansNumber.getText());
+			return pdpPlans == findChildElements(elementData, pdpPlanList)
+					.size();
 
 		} else if (planType.equalsIgnoreCase("MA")
 				|| planType.equalsIgnoreCase("MAPD")) {
-			int maPlans = Integer.valueOf(maPlansCount.getText().replace(
-					" Plans", ""));
-			return maPlans == maPlanElement.size();
+
+			int maPlans = Integer.valueOf(maPlansNumber.getText());
+			 //driver.findElement(By.className("module-plan-overview"));
+			return maPlans == findChildElements(elementData, maPlanList).size();
 		}
 		return false;
 	}
@@ -560,20 +594,28 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	@FindBy(linkText = "Change location")
 	private WebElement changeLocationBtn;
 	
-	public boolean validateVPPPlanSummaryPage(){
-		List<WebElement> elements = driver.findElements(By.xpath(".//*[@id='zipLookup']/p/a"));
-		System.out.println("Change loc elements size: "+ elements.size());
-		
-		System.out.println("Change loc elements text: "+ elements.get(0).getText());
-		boolean flag = false;
-		if(validate(showMaPlans)&&validate(showMsPlans)&&validate(showPdpPlans)&&validate(changeLocationBtn))
-			flag = true;
-		return flag;
+	public boolean validateVPPPlanSummaryPage() {
+
+		validate(vppTop);
+		validate(maPlansNumber);
+		validate(msPlansNumber);
+		validate(pdpPlansNumber);
+
+		int allPlans = Integer.valueOf(vppTop.getText().substring(8, 10));
+		int maPlans = Integer.valueOf(maPlansNumber.getText());
+		int msPlans = Integer.valueOf(msPlansNumber.getText());
+		int pdpPlans = Integer.valueOf(pdpPlansNumber.getText());
+
+		if (allPlans == maPlans + msPlans + pdpPlans) {
+			return true;
+		}
+		return false;
+
 	}
 	public IntroductionInformationPage clicksOnEnrollInplanLink(String planName) {
 		 
-		int pdpValue = Integer.parseInt(pdpPlansCount.getText());
-		int maValue = Integer.parseInt(maPlansCount.getText());
+		int pdpValue = Integer.parseInt(pdpPlansNumber.getText());
+		int maValue = Integer.parseInt(maPlansNumber.getText());
 		
 		if (planName.contains("HMO")) {
 			System.out.println("Entered the plan");
