@@ -1038,6 +1038,16 @@ public class MRScenario {
                 String USERNAME = "ckoppura";
                 String ACCESS_KEY = "e645d799-278b-4468-9768-8311342a46df";
                 String URL = "http://" + USERNAME + ":" + ACCESS_KEY + "@ondemand.saucelabs.com:80/wd/hub";
+
+                
+                //This is the code to set up job name in Sauce lab
+                
+                String jobName = "MnR test Execution of [" +getClass().getSimpleName()+  ":] - Using " + capabilities.getBrowserName() + " in  " + environment +" environment";
+            	capabilities.setCapability("name", jobName);
+            	
+            	//////////////////////////////////////////
+            	
+
                 if (USERNAME == null || ACCESS_KEY == null) {
                        Assert.fail(
                                      "Missing value for environment variable(s) SAUCE_USERNAME or SAUCE_ACCESS_KEY.  Check environment configuration and try again");
