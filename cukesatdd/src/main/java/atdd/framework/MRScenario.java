@@ -1034,6 +1034,7 @@ public class MRScenario {
                 capabilities.setCapability("autoAcceptsAlerts", true);
                 capabilities.setCapability("parent-tunnel", "sauce_admin");
                 capabilities.setCapability("tunnelIdentifier", "OptumSharedTunnel-Prd");
+                capabilities.setCapability("build", System.getenv("JOB_NAME") + "__" + System.getenv("BUILD_NUMBER"));
                 String USERNAME = "ckoppura";
                 String ACCESS_KEY = "e645d799-278b-4468-9768-8311342a46df";
                 String URL = "http://" + USERNAME + ":" + ACCESS_KEY + "@ondemand.saucelabs.com:80/wd/hub";
