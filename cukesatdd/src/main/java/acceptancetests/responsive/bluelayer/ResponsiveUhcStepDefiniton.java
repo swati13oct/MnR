@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import pages.acquisition.bluelayer.PortfolioPageUhc;
 import pages.acquisition.bluelayer.ResponsivePlanSummaryUhc;
+import pages.acquisition.ulayer.ResponsivePlanDetails;
 import pages.acquisition.ulayer.ResponsivePlanSummary;
 import cucumber.annotation.en.And;
 import cucumber.annotation.en.Given;
@@ -115,7 +116,26 @@ public class ResponsiveUhcStepDefiniton {
 				.getBean(PageConstants.RESPONSIVE_PLAN_SUMMARY_PAGE_UHC);
 		planSummary.validatePlanHighlights();
 	
+}
+	@And("^User click on Enroll in plan link on plan detail page")
 
+	public void userclickenrollbuttononplandetail(DataTable givenAttributes){
+		
+		List<DataTableRow> memberAttributesRow = givenAttributes
+				.getGherkinRows();
+		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
 
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells()
+					.get(0), memberAttributesRow.get(i).getCells().get(1));
+		}
+
+		String planName = memberAttributesMap.get("PlanName");
+		System.out.println(planName);
+		getLoginScenario().saveBean(VPPCommonConstants.PLAN_NAME, planName);
+		ResponsivePlanSummaryUhc planSummary = (ResponsivePlanSummaryUhc) getLoginScenario()
+				.getBean(PageConstants.RESPONSIVE_PLAN_SUMMARY_PAGE_UHC);
+		planSummary.clicksOnEnrollInplanLink(planName);
+	
 }
 }

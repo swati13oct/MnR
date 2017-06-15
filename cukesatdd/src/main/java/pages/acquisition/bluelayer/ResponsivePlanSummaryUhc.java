@@ -33,7 +33,7 @@ import pages.mobile.acquisition.ulayer.VPPRequestSendEmailPage;
 public class ResponsivePlanSummaryUhc extends UhcDriver{
 	
 	//US504467
-		@FindBy(xpath = "//div[@class='tab'][1]")
+		@FindBy(xpath = "//div[@class='tab plancountheight'][1]")
 		private WebElement viewMaPlans;
 		
 		@FindBy(xpath = "//*[@class='ng-valid ng-dirty']/span/div[1]/p")
@@ -1042,5 +1042,6 @@ public void comparePlanslnk(){
 					
 				}
 					
+				
 				}
 			 
