@@ -10,6 +10,20 @@ import acceptancetests.atdd.data.ulayer.Page;
  *
  */
 public class CommonConstants {
+	public static final String SAUCE_BROWSER_WEB = "SAUCE_BROWSER_WEB";
+
+	public static final String SAUCE_BROWSER_MOBILE = "SAUCE_BROWSER_MOBILE";
+ 
+	public static final String JENKINS_BROWSER = "JENKINS_BROWSER";
+	
+	public static final String BROWSER_NAME = "BROWSER_NAME";
+	
+	public static final String PLATFORM_VERSION = "PlatformVersion";
+	
+	public static final String PLATFORM_NAME = "PlatformName";
+	
+	public static final String DEVICE_VERSION = "DeviceVersion";
+
 
 	public static final String FLOW_NAME = "registration/planconfirmation";
 

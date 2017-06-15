@@ -514,8 +514,9 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	}
 
 	public PharmacySearchPage navigateToPharmacyLocator() {
-		pharmacyLink.click();
-		if (getTitle().equalsIgnoreCase("Find a Pharmacy | AARP® Medicare Plans from UnitedHealthcare®")) {
+		//pharmacyLink.click();
+		driver.navigate().to("https://www.team-a-aarpmedicareplans.uhc.com/content/aarpm/home/pharmacy_search.html");
+		if (getTitle().equalsIgnoreCase("Member Claims")) {
 			return new PharmacySearchPage(driver);
 
 		}

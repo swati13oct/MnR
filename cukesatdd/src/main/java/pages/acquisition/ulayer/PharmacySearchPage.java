@@ -4,6 +4,7 @@
 package pages.acquisition.ulayer;
 
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -21,8 +22,11 @@ import atdd.framework.UhcDriver;
  */
 public class PharmacySearchPage extends UhcDriver {
 
-	@FindBy(id = "zipCode")
+	@FindBy(id = "zipcodeTxt")
 	private WebElement zipcodeField;
+	
+	@FindBy(id = "zipcode-button")
+	private WebElement searchbtn;
 
 	@FindBy(id = "showresults")
 	private WebElement distanceField;
@@ -42,7 +46,7 @@ public class PharmacySearchPage extends UhcDriver {
 	@FindBys(value = { @FindBy(xpath = "//select[@id='plan']/option") })
 	private List<WebElement> planNamesList;
 
-	@FindBys(value = { @FindBy(xpath = "//table[@id='selectcountytable']/tbody/tr") })
+	@FindBy(xpath = ".//*[@id='selectZiptable']/tbody[1]/tr//a")
 	private List<WebElement> countyList;
 
 	@FindBy(id = "pharmacies")
@@ -79,11 +83,15 @@ public class PharmacySearchPage extends UhcDriver {
 			String distance, String county) {
 
 		sendkeys(zipcodeField, zipcode);
-		selectFromDropDown(distanceDropDown, distance);
+		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+		searchbtn.click();
+		
+		//selectFromDropDown(distanceDropDown, distance);
 
-		continueField.click();
+		//continueField.click();
 		CommonUtility.checkPageIsReady(driver);
 		if (countyPopOut.isDisplayed()) {
+			
 			for (WebElement webElement : countyList) {
 				if (webElement.getText().contains(county)) {
 					webElement.click();
@@ -92,7 +100,7 @@ public class PharmacySearchPage extends UhcDriver {
 			}
 		}
 		if (driver.getTitle().equalsIgnoreCase(
-				"Find a Pharmacy | AARP® Medicare Plans from UnitedHealthcare®")) {
+				"Member Claims")) {
 			return new PharmacySearchPage(driver);
 		}
 		return null;
