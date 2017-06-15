@@ -86,7 +86,7 @@ public class ContactUSRedesignAarpStepDefinition {
 				getLoginScenario().saveBean(LoginCommonConstants.PASSWORD, pwd);
 			}
 			
-			WebDriver wd = getLoginScenario().getMobileWebDriver();
+			WebDriver wd = getLoginScenario().getWebDriver();
 			getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
 
 			LoginPage loginPage = new LoginPage(wd);

@@ -56,9 +56,9 @@ public class ContactUSRedesignAarpStepDefinition {
 			Map<String, String> loginCreds = loginScenario
 					.getAMPMemberWithDesiredAttributes(desiredAttributes);
 
-			String userName = "q2_jun_ulayer175";
-			String pwd = "Password@1";
-			/*if (loginCreds == null) {
+			String userName = "";
+			String pwd = "";
+			if (loginCreds == null) {
 				// no match found
 				System.out.println("Member Type data could not be setup !!!");
 				Assert.fail("unable to find a " + desiredAttributes + " member");
@@ -70,8 +70,7 @@ public class ContactUSRedesignAarpStepDefinition {
 				getLoginScenario()
 				.saveBean(LoginCommonConstants.USERNAME, userName);
 				getLoginScenario().saveBean(LoginCommonConstants.PASSWORD, pwd);
-			} */
-
+			} 
 			WebDriver wd = getLoginScenario().getWebDriver();
 			getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
 
@@ -107,7 +106,7 @@ public class ContactUSRedesignAarpStepDefinition {
 		
 		
 		@When("^the user validates the contact us redesign  page in AARP site$")
-		public void validates_plan_materials_plan_document_section_redesignums() {
+		public void validates_contactUs_Redesign_Page() {
 			
 			AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstants.ACCOUNT_HOME_PAGE);
 			
@@ -166,12 +165,12 @@ public class ContactUSRedesignAarpStepDefinition {
 			
 		}
 		
-		@Then("^user validates secure Messaging Model Cancel link $")
+		@Then("^user validates secure Messaging Model Cancel link$")
 		public void user_validates_SecureMessagingModel_Cancel()
 		{
 			ContactUsPage contactusPage=(ContactUsPage)getLoginScenario().getBean(PageConstants.CONTACT_US_PAGE);
 			
-			contactusPage.validateSecureEmailModel_other_functionalities();
+			contactusPage.validateSecureEmailModel_Cancellink_Click();
 			
 			if(contactusPage != null)				
 				getLoginScenario().saveBean(PageConstants.CONTACT_US_PAGE,

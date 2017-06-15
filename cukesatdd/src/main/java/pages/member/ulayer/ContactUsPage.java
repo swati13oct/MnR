@@ -384,7 +384,7 @@ public class ContactUsPage extends UhcDriver{
 	//}
 	
 	
-	public void validateSecureEmailModel_other_functionalities()
+	public void validateSecureEmailModel_Cancellink_Click()
 	{
 		if (getStartedButton.isDisplayed())
 		{

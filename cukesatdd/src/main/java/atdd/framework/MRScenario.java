@@ -7,6 +7,8 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.nio.MappedByteBuffer;
 import java.nio.channels.FileChannel;
 import java.nio.charset.Charset;
@@ -36,6 +38,7 @@ import javax.naming.directory.InitialDirContext;
 import org.apache.commons.lang3.StringUtils;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.junit.Assert;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -48,11 +51,11 @@ import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.phantomjs.PhantomJSDriver;
 import org.openqa.selenium.phantomjs.PhantomJSDriverService;
 import org.openqa.selenium.remote.DesiredCapabilities;
+import org.openqa.selenium.remote.RemoteWebDriver;
 import org.springframework.ldap.core.DistinguishedName;
 import org.springframework.stereotype.Component;
 
 import acceptancetests.atdd.data.CommonConstants;
-
 
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.WebClient;
@@ -934,7 +937,8 @@ public class MRScenario {
 		// take screenshots at the end.
 		if (null == webDriver) {
 			System.out.println("New WebDriver CREATED");
-			
+			String browserName =props.get("BrowserName");
+			System.out.println("browserName:: " +browserName);
 			
 			// Choose your browser based on name. The name value is what is in
 			// CommonConstants.
@@ -1001,7 +1005,80 @@ public class MRScenario {
 				System.setProperty("webdriver.chrome.driver", props.get(CommonConstants.CHROME_DRIVER));
 				webDriver = new ChromeDriver(capabilities);
 				return webDriver;
-			}
+			}else if (browser.equalsIgnoreCase(CommonConstants.SAUCE_BROWSER_WEB)) {
+				System.out.println("Execution is Going to Start on SauceLabs Web.....!!!!!");
+                DesiredCapabilities capabilities = null;
+                if(browserName.equalsIgnoreCase("firefox")){
+                	System.out.println("Inside firefox");
+                capabilities = DesiredCapabilities.firefox();
+                capabilities.setCapability("platform", "Windows 7");
+                capabilities.setCapability("version", "48");
+                capabilities.setCapability("idleTimeout", 180);
+                }else if(browserName.equalsIgnoreCase("IE")){
+                	capabilities = DesiredCapabilities.internetExplorer();
+                	capabilities.setCapability("platform", "Windows 7");
+                	capabilities.setCapability("version", "11.0");
+                	capabilities.setCapability("screenResolution", "1024x768");
+                }else if(browserName.equalsIgnoreCase("chrome")){
+                	System.out.println("Inside chrome");
+                	capabilities = DesiredCapabilities.chrome();
+                	capabilities.setCapability("platform", "Windows 7");
+                	capabilities.setCapability("version", "52.0");
+                	capabilities.setCapability("screenResolution", "800x600");
+                }
+                capabilities.setCapability("autoAcceptsAlerts", true);
+                capabilities.setCapability("parent-tunnel", "sauce_admin");
+                capabilities.setCapability("tunnelIdentifier", "OptumSharedTunnel-Prd");
+                String USERNAME = "msid";// provide ms id here
+                String ACCESS_KEY = "";
+                //String URL = "http://" + USERNAME + ":" + ACCESS_KEY + "@ondemand.saucelabs.com:80/wd/hub";
+                String URL = "http://" + USERNAME + ":" + ACCESS_KEY + "@ondemand.saucelabs.com:80/wd/hub";
+                if (USERNAME == null || ACCESS_KEY == null) {
+                       Assert.fail(
+                                     "Missing value for environment variable(s) SAUCE_USERNAME or SAUCE_ACCESS_KEY.  Check environment configuration and try again");
+                }
+                try {
+                       webDriver = new RemoteWebDriver(new URL(URL), capabilities);
+                } catch (MalformedURLException e) {
+                       Assert.fail("Invalid Sauce URL: [" + URL + "]");
+                }
+                return webDriver;
+ 			}
+			/*SauceLabs Mobile
+			URL to check the capabilities - //https://wiki.saucelabs.com/display/DOCS/Platform+Configurator#/ */
+ 			else if (browser.equalsIgnoreCase(CommonConstants.SAUCE_BROWSER_MOBILE)){
+ 				System.out.println("Execution is Going to Start on SauceLabs Mobile.....!!!!!");
+                 DesiredCapabilities capabilities = null;
+                if(browserName.equalsIgnoreCase("Safari")){
+                	capabilities = DesiredCapabilities.iphone();
+                }else{
+                	capabilities = DesiredCapabilities.android();
+                }
+                System.out.println(props.get(CommonConstants.DEVICE_VERSION)+" "+props.get(CommonConstants.DEVICE_NAME)+" "
+                		+""+props.get(CommonConstants.PLATFORM_VERSION)+" "+props.get(CommonConstants.PLATFORM_NAME)+" "+browserName);
+                capabilities.setCapability("appiumVersion", "1.6.4");
+                capabilities.setCapability("deviceName","Samsung Galaxy S4 Emulator");
+                capabilities.setCapability("deviceOrientation", "portrait");
+                capabilities.setCapability("browserName", "Browser");
+                capabilities.setCapability("platformVersion", "4.4");
+                capabilities.setCapability("platformName","Android");    
+                capabilities.setCapability("autoAcceptsAlerts", true);
+                capabilities.setCapability("parent-tunnel", "sauce_admin");
+                capabilities.setCapability("tunnelIdentifier", "OptumSharedTunnel-Prd");
+                	String USERNAME = "bnaveen4";
+                	String ACCESS_KEY = "7d7097c5-93ad-4524-aa1c-f6e7b8cdc4cf";
+                    String URL = "http://" + USERNAME + ":" + ACCESS_KEY + "@ondemand.saucelabs.com:80/wd/hub";
+                    if (USERNAME == null || ACCESS_KEY == null) {
+                           Assert.fail(
+                                         "Missing value for environment variable(s) SAUCE_USERNAME or SAUCE_ACCESS_KEY.  Check environment configuration and try again");
+                    }
+                    try {
+                           webDriver = new RemoteWebDriver(new URL(URL), capabilities);
+                    } catch (MalformedURLException e) {
+                           Assert.fail("Invalid Sauce URL: [" + URL + "]");
+                    }
+                    return webDriver;
+ 			}
 		}
 		return webDriver;
 
@@ -1041,7 +1118,7 @@ public class MRScenario {
 
 	public void nullifyWebDriver() {
 		if (null != webDriver) {
-			webDriver.close();
+			webDriver.quit();
 			webDriver = null;
 		}
 
