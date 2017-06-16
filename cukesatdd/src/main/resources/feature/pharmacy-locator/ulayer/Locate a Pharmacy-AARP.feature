@@ -52,10 +52,35 @@ And the user enters following details for pharmacy search in AARP Site
 	| County Name	| <county>	|
 And the user chooses a plan from dropdown in AARP Site
 	| <planName> |
-And the user searches available pharmacies by selecting "Show pharmacies for ALL types" in AARP site
-Then the user validates the available pharmacies page in AARP site
 	
 Examples:
-	| zipcode     | distance  | county            |  planName 			                 	                 | pharmacytype				   										|
-	| 80002       | 15        | Adams County      | AARP MedicareComplete SecureHorizons Plan 1 (HMO)  |  Standard Network Pharmacy,Open 24 hours	|	
+	| zipcode     | distance  | county            |  planName 			                 	  							|			 
+	| 80002       | 15        | Adams County      | AARP MedicareComplete SecureHorizons Plan 1 (HMO) |
 
+@language	
+Scenario Outline: To verify pharmacy locator language in AARP site
+Given the user is on the AARP Medicare Site landing page
+When the user navigates to pharmacy search page in AARP Site
+And the user enters following details for pharmacy search in AARP Site
+  | Zip Code	| <zipcode>	|
+	| Distance	| <distance>	|
+	| County Name	| <county>	|
+Then the user validate multiple language dropdown menu in AARP site
+   
+Examples:
+	| zipcode     | distance  | county            |			 
+	| 90210       | 15        | Los Angeles       |
+	
+@planType
+Scenario Outline: To verify pharmacy locator language in AARP site
+Given the user is on the AARP Medicare Site landing page
+When the user navigates to pharmacy search page in AARP Site
+And the user enters following details for pharmacy search in AARP Site
+  | Zip Code	| <zipcode>	|
+	| Distance	| <distance>	|
+	| County Name	| <county>	|
+And the user chooses a plan from dropdown in AARP Site
+	| <planName> |
+Examples:
+	| zipcode     | distance  | county            |  planName 			                 	  							|			 
+	| 90210       | 15        | Adams County      | AARP MedicareComplete SecureHorizons Plan 1 (HMO) |	

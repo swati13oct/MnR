@@ -6,11 +6,13 @@ package pages.acquisition.ulayer;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.FindBys;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.Select;
 
 import acceptancetests.atdd.data.ElementData;
 import acceptancetests.atdd.util.CommonUtility;
@@ -72,6 +74,12 @@ public class PharmacySearchPage extends UhcDriver {
 	
 	@FindBy(id = "services")
 	private WebElement pharmacyTypeSelectionRadioButton;
+	
+	@FindBy(xpath = "(//*[@id='lang-select']//option)[1]")
+	private WebElement language;
+	
+	@FindBy(xpath = "(.//*[@id='plan-type']//option)[2]")
+	private WebElement planType;
 
 	public PharmacySearchPage(WebDriver driver) {
 		super(driver);
@@ -106,12 +114,15 @@ public class PharmacySearchPage extends UhcDriver {
 		return null;
 	}
 
-	public PharmacySearchPage selectsPlanName(String planName) {
-		selectFromDropDown(planNamesList, planName);
-		if (narrowYourSearchContent.getText().equalsIgnoreCase(
+	public PharmacySearchPage selectsPlanName() {
+		//selectFromDropDown(planNamesList, planName);
+		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+		planType.click();		
+		/*if (narrowYourSearchContent.getText().equalsIgnoreCase(
 				"Narrow your search")) {
 			return new PharmacySearchPage(driver);
 		}
+		return null;*/
 		return null;
 	}
 
@@ -138,6 +149,16 @@ public class PharmacySearchPage extends UhcDriver {
 				"Pharmacies Available in Your Area")) {
 			return new PharmacyResultPage(driver);
 		}
+		return null;
+	}
+	
+	public PharmacyResultPage selectLanguage(){
+		language.click();
+		if (driver.getTitle().equalsIgnoreCase(
+				"Member Claims")) {
+			return new PharmacyResultPage(driver);
+		}
+
 		return null;
 	}
 
@@ -174,5 +195,7 @@ public class PharmacySearchPage extends UhcDriver {
 		}
 		return null;
 	}
+	
+	
 
 }

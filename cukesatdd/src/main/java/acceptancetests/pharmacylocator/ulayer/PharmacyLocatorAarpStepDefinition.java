@@ -109,13 +109,17 @@ public class PharmacyLocatorAarpStepDefinition {
 
 	@And("^the user chooses a plan from dropdown in AARP Site$")
 	public void user_chooses_plan_dropdown_aarp(DataTable planAttributes) {
+		
+		PharmacySearchPage pharmacySearchPage = (PharmacySearchPage) getLoginScenario()
+				.getBean(PageConstants.PHARMACY_SEARCH_PAGE);
+		PharmacySearchPage pharmacyResultPage = pharmacySearchPage.selectsPlanName();
 
-		String planName = planAttributes.getGherkinRows().get(0).getCells()
+		/*String planName = planAttributes.getGherkinRows().get(0).getCells()
 				.get(0);
 		getLoginScenario().saveBean(PharmacySearchCommonConstants.PLAN_NAME, planName);
 		PharmacySearchPage pharmacySearchPage = (PharmacySearchPage) getLoginScenario()
 				.getBean(PageConstants.PHARMACY_SEARCH_PAGE);
-		pharmacySearchPage = pharmacySearchPage.selectsPlanName(planName);
+		pharmacySearchPage = pharmacySearchPage.selectsPlanName();
 
 		if (pharmacySearchPage != null) {
 			getLoginScenario().saveBean(PageConstants.PHARMACY_SEARCH_PAGE,
@@ -123,7 +127,7 @@ public class PharmacyLocatorAarpStepDefinition {
 			Assert.assertTrue(true);
 		} else {
 			Assert.fail("Failed to load Pharmacy search page");
-		}
+		}*/
 
 	}
 
@@ -249,6 +253,15 @@ public class PharmacyLocatorAarpStepDefinition {
 			e.printStackTrace();
 		}
 
+	}
+	
+	@Then("^the user validate multiple language dropdown menu in AARP site$")
+	public void user_views_multiple_language_dropdown_result_AARP() {
+		PharmacySearchPage pharmacySearchPage = (PharmacySearchPage) getLoginScenario()
+				.getBean(PageConstants.PHARMACY_SEARCH_PAGE);
+		PharmacyResultPage pharmacyResultPage = pharmacySearchPage
+				.selectLanguage();
+		
 	}
 	
 }
