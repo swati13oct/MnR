@@ -136,4 +136,20 @@ Then the user lands on Automatic Payment Submitted Page and validates Timestamp,
 Examples:
 	| planType |
 	| MA     |
+	
+
+@US657544
+Scenario Outline: Verify the error Message on Payment History Page for Date Range
+Given the user is on the AARP medicare site login page
+When the user logs in with a registered AMP with following details in AARP site
+	| Plan Type   | <planType>  |
+And the user navigates to TestHarness Page
+And the user navigates to PaymentOverview Page
+And the user scrolls down and selects custom range from Drop down
+Then user clicks on Search and gets error message
+
+Examples:
+	| planType |
+	| MA     |
+
 

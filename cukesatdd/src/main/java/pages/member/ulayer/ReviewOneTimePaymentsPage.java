@@ -53,6 +53,9 @@ public class ReviewOneTimePaymentsPage extends UhcDriver{
 	@FindBy(xpath="html/body/div[2]/div/div[2]/div/div/div[1]/div/div/div[1]/div[2]/span")
 	private WebElement PaymentType;
 	
+	@FindBy(xpath="//*[@class='payments']/div/div/div/div/div/div/p")
+	private WebElement OTPError;
+	
 	private PageData reviewOneTime;
 	
 	public JSONObject reviewOneTimeJson;
@@ -113,6 +116,22 @@ public class ReviewOneTimePaymentsPage extends UhcDriver{
 	    Thread.sleep(5000);
 		 if(driver.getTitle().equalsIgnoreCase("My Benefits & Coverage")){
 				return new OneTimePaymentPageSubmitted(driver);
+			}
+		    return null;
+	}
+	
+	
+public ReviewOneTimePaymentsPage ValidateOnePaymentPerDayErrorMessage() throws InterruptedException {
+		
+		Thread.sleep(5000);		
+		Legalcheckbox.click();
+		System.out.println("Checkbox clicked");		
+		Thread.sleep(3000);
+		SubmitButton.click();
+		System.out.println("Submit Button clicked");
+	    Thread.sleep(5000);
+		 if(OTPError.getText().contains("Only one payment request can be submitted per business day")){
+				return new ReviewOneTimePaymentsPage(driver);
 			}
 		    return null;
 	}

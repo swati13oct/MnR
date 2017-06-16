@@ -10,6 +10,12 @@ package acceptancetests.atdd.data.member;
 public class PageConstants {
 
 	public static final String ACCOUNT_HOME_PAGE = "accountHomePage";
+	
+	public static final String CUSTOM_RANGE = "customRange";
+	
+	public static final String DATE_ERROR_MESSAGE = "dateErrorMessage";
+	
+	public static final String ONE_PAYMENT_PER_DAY_ERROR_MESSAGE = "onePaymentPerDayErrorMessage";
 
 	public static final String TIMESTAMP = "TimeStamp";
 	

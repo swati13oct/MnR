@@ -206,3 +206,20 @@ Then the user lands on OneTime Payment Submitted Page and validates Timestamp
 Examples:
 	| planType |
 	| MA       |
+
+
+@US645003
+Scenario Outline: Verify the error message for More that 1 payment 1 Business day
+Given the user is on the AARP medicare site login page and has already done one time payment for the day
+When the user logs in with a registered AMP with following details in AARP site
+	| Plan Type   | <planType>  |
+And the user navigates to TestHarness Page
+And the user navigates to PaymentOverview Page
+And the user navigates to One Time Payments page
+And the user enters details and click on continue button on One Time Payments Page for Dashboard
+Then user lands on Review One time Payments Page and validates one payment per day error message
+
+
+Examples:
+	| planType |
+	| MA       |

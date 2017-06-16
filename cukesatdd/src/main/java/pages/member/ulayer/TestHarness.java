@@ -13,7 +13,7 @@ import pages.member.bluelayer.ConfirmOneTimePaymentPage;
 public class TestHarness extends UhcDriver{
 	
 	
-	@FindBy(linkText="Go to Payments Page page")
+	@FindBy(linkText="Go to Payments page")
 	private WebElement PaymentPage;
 	
 	public TestHarness(WebDriver driver) {

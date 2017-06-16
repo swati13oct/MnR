@@ -107,7 +107,9 @@ public class OneTimePaymentsPage extends UhcDriver{
 	}
 
 	public ReviewOneTimePaymentsPage enterInfoAndContinue() throws InterruptedException {
+		Thread.sleep(6000);
 		otherAmountRadio.click();
+		Thread.sleep(2000);
 		otherAmountNumber.sendKeys("56.00");
 		routingNumberField.sendKeys("123123000");
 		confirmRoutingNumberField.sendKeys("123123000");
@@ -118,7 +120,7 @@ public class OneTimePaymentsPage extends UhcDriver{
 		electronicSignatureCheck.click();
 		reviewContinue.click();
 		Thread.sleep(2000);
-		if(driver.getTitle().equalsIgnoreCase("My Benefits & Coverage")){
+		if(driver.getTitle().equalsIgnoreCase("payments-client")){
 			return new ReviewOneTimePaymentsPage(driver);
 		}
 		return null;
@@ -135,7 +137,7 @@ public class OneTimePaymentsPage extends UhcDriver{
 		lastNameField.sendKeys("Ln");
 		//electronicSignatureCheck.click();
 		reviewContinue.click();
-		if(driver.getTitle().equalsIgnoreCase("My Benefits & Coverage")){
+		if(driver.getTitle().equalsIgnoreCase("payments-client")){
 			return new ReviewOneTimePaymentsPage(driver);
 		}
 		return null;
@@ -151,7 +153,7 @@ public class OneTimePaymentsPage extends UhcDriver{
 	
 	public ReviewOneTimePaymentsPage CancelButton() {
 		CancelButton.click();		
-		if(driver.getTitle().equalsIgnoreCase("My Benefits & Coverage")){
+		if(driver.getTitle().equalsIgnoreCase("payments-client")){
 			return new ReviewOneTimePaymentsPage(driver);
 		}
 		return null;

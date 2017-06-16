@@ -185,8 +185,41 @@ public class AutomaticPaymenAarpStepDefinition {
 		
 	}
 	
+	
+	@And("^the user scrolls down and selects custom range from Drop down$")
+	public void user_selects_custom_date_range() throws InterruptedException
+	{
+		PaymentsOverview paymentsOverview = (PaymentsOverview)getLoginScenario().getBean(PageConstants.PAYMENT_OVERVIEW);
+		PaymentsOverview CustomRange = paymentsOverview.ScrollDownAndSelectRange();
+		if(CustomRange!= null){
+			getLoginScenario().saveBean(PageConstants.CUSTOM_RANGE,
+					CustomRange);
+			Assert.assertTrue(true);
+		} else {
+			Assert.fail("Issue with custom Date Range");
+		}
+		
+	}
+	
+	@Then("^user clicks on Search and gets error message$")
+	public void user_sees_error_message() throws InterruptedException
+	{
+		PaymentsOverview paymentsOverview = (PaymentsOverview)getLoginScenario().getBean(PageConstants.CUSTOM_RANGE);
+		PaymentsOverview ErrorMessage = paymentsOverview.VerifyErrorMessage();
+		if(ErrorMessage!= null){
+			getLoginScenario().saveBean(PageConstants.DATE_ERROR_MESSAGE,
+					ErrorMessage);
+			Assert.assertTrue(true);
+		} else {
+			Assert.fail("Error Message not Displayed");
+		}
+		
+	}
+	
+	
+	
 	@And("^the user navigates to Automatic Payments page from Payments Overview Page$")
-	public void user_navigates_to_automatic_payments_from_paymentsOverview()
+	public void user_navigates_to_automatic_payments_from_paymentsOverview() throws InterruptedException
 	{
 		PaymentsOverview paymentsOverview = (PaymentsOverview)getLoginScenario().getBean(PageConstants.PAYMENT_OVERVIEW);
 		AutomaticPaymentsPage automaticPaymentsPage = paymentsOverview.navigateToAutomaticPaymentpage();
@@ -338,14 +371,6 @@ public class AutomaticPaymenAarpStepDefinition {
 	{
 		AutomaticPaymentsPage automaticPaymentsPage = (AutomaticPaymentsPage)getLoginScenario().getBean(PageConstants.AUTOMATIC_PAYMENTS_DASHBOARD);
 		ReviewAutomaticPaymentsPage reviewAutomaticPaymentsPage = automaticPaymentsPage.cancelbtn();
-		/*if(reviewAutomaticPaymentsPage != null){
-			getLoginScenario().saveBean(PageConstants.REVIEW_AUTOMATIC_PAYMENTS_DASHBOARD,
-					reviewAutomaticPaymentsPage);
-			Assert.assertTrue(true);
-		}else {
-			Assert.fail("automatic payments dashboard page not found");
-		}*/
-		
 		
 	}
 	
@@ -386,5 +411,3 @@ public class AutomaticPaymenAarpStepDefinition {
 	}
 	
 	}
-
-

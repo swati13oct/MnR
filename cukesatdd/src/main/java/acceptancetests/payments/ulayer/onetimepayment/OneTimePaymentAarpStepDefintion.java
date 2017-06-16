@@ -327,6 +327,21 @@ public class OneTimePaymentAarpStepDefintion {
 		getLoginScenario().saveBean(PageConstants.LOGIN_PAGE, loginPage);
 	}
 	
+	
+	@Given("^the user is on the AARP medicare site login page and has already done one time payment for the day$")
+	public void user_Payment_done()
+	{
+		WebDriver wd = getLoginScenario().getWebDriver();
+		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
+
+		LoginPage loginPage = new LoginPage(wd);
+		getLoginScenario().saveBean(PageConstants.LOGIN_PAGE, loginPage);
+		
+		wd.manage().deleteAllCookies();
+		System.out.println("Cookie cleared");
+	}
+	
+	
 	@When("^the user logs in with a registered AMP with following details in AARP site$")
 	public void user_logs_in(DataTable memberAttributes)
 	{
@@ -473,6 +488,21 @@ public class OneTimePaymentAarpStepDefintion {
 		}		
 	}
 
+	
+	@Then("^user lands on Review One time Payments Page and validates one payment per day error message$")
+	public void One_Payment_Per_Day_Error() throws InterruptedException
+	{
+		ReviewOneTimePaymentsPage reviewOneTimePaymentsPage = (ReviewOneTimePaymentsPage)getLoginScenario().getBean(PageConstants.REVIEW_ONE_TIME_PAYMENTS_DASHBOARD);
+		ReviewOneTimePaymentsPage OTPError = reviewOneTimePaymentsPage.ValidateOnePaymentPerDayErrorMessage();
+		Thread.sleep(1000);
+		if(OTPError != null){
+			getLoginScenario().saveBean(PageConstants.ONE_PAYMENT_PER_DAY_ERROR_MESSAGE,
+					OTPError);
+			Assert.assertTrue(true);
+		}else {
+			Assert.fail("OTP Submitted page not found");
+		}		
+	}
 	
 	@Then("^the user lands on OneTime Payment Submitted Page and validates PDF link$")
 	public void OneTime_payment_SubmittedPage()	{

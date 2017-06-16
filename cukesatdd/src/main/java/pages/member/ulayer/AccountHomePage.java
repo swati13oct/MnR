@@ -141,10 +141,15 @@ public class AccountHomePage extends UhcDriver {
 	
 	@FindBy(xpath = "//*[@id='gogreenlogin_box']/div[4]/div/a")
 	private WebElement gogreenPopupClose;
-	
-	
+		
 	@FindBy(xpath = "//*[@id='paymentOverviewApp']/div[1]/div/div/div/h1")
 	private WebElement paymentsHeading;
+	
+	@FindBy(id = "onetimepayment")
+	private WebElement OTPButton;
+	
+	@FindBy(id = "setupautopayment")
+	private WebElement AutomaticPaymentButton;
 	
 	private PageData myAccountHome;
 	
@@ -560,9 +565,10 @@ public class AccountHomePage extends UhcDriver {
 	
 
 	public OneTimePaymentsPage navigateToOneTimePaymentsPage() {
-		driver.navigate().to("https://member."+MRScenario.environment+"-aarpmedicareplans.uhc.com/content/dashboard/home/one-time-payments.html");
+		//river.navigate().to("https://member."+MRScenario.environment+"-aarpmedicareplans.uhc.com/content/dashboard/home/one-time-payments.html");
+		OTPButton.click();
 		System.out.println("title  "+driver.getTitle());
-		if(driver.getTitle().equalsIgnoreCase("My Benefits & Coverage")){
+		if(driver.getTitle().equalsIgnoreCase("payments-client")){
 			return new OneTimePaymentsPage(driver);
 		}
 		return null;
@@ -579,9 +585,10 @@ public class AccountHomePage extends UhcDriver {
 	}
 
 	public AutomaticPaymentsPage navigateToAutomaticPaymentsPage() {
-		driver.navigate().to("https://member."+MRScenario.environment+"-aarpmedicareplans.uhc.com/content/dashboard/home/automatic-payments.html");
+		//driver.navigate().to("https://member."+MRScenario.environment+"-aarpmedicareplans.uhc.com/content/dashboard/home/automatic-payments.html");
+		AutomaticPaymentButton.click();
 		System.out.println("title  "+driver.getTitle());
-		if(driver.getTitle().equalsIgnoreCase("My Benefits & Coverage")){
+		if(driver.getTitle().equalsIgnoreCase("payments-client")){
 			return new AutomaticPaymentsPage(driver);
 		}
 		return null;
