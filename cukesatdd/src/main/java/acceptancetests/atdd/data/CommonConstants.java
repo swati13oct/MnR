@@ -18,6 +18,8 @@ public class CommonConstants {
 	
 	public static final String BROWSER_NAME = "BROWSER_NAME";
 	
+	public static final String HTMLUNIT_BROWSER = "HTMLUNIT_BROWSER";
+	
 	public static final String PLATFORM_VERSION = "PlatformVersion";
 	
 	public static final String PLATFORM_NAME = "PlatformName";

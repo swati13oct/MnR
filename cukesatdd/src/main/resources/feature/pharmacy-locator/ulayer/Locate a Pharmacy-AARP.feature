@@ -42,20 +42,18 @@ Examples:
  #       | 80002       | 2        | Adams County      | AARP MedicareComplete SecureHorizons Plan 2 (HMO)  |  Pharmacy Saver™ Program			|
 #	| 78006       | 2        | Bexar County      | AARP MedicareRx Saver Plus (PDP)                   |  Open 24 hours				|
 
-@US657557
-Scenario Outline: To verify pharmacy locator zipcode entry in AARP site
+@multicounty
+Scenario Outline: To verify pharmacy locator multi county lookup modal in AARP site
 Given the user is on the AARP Medicare Site landing page
 When the user navigates to pharmacy search page in AARP Site
 And the user enters following details for pharmacy search in AARP Site
 	| Zip Code	| <zipcode>	|
 	| Distance	| <distance>	|
 	| County Name	| <county>	|
-And the user chooses a plan from dropdown in AARP Site
-	| <planName> |
-	
+
 Examples:
-	| zipcode     | distance  | county            |  planName 			                 	  							|			 
-	| 80002       | 15        | Adams County      | AARP MedicareComplete SecureHorizons Plan 1 (HMO) |
+	| zipcode     | distance  | county            |			 
+	| 80002       | 15        | Adams County      |
 
 @language	
 Scenario Outline: To verify pharmacy locator language in AARP site
@@ -73,6 +71,20 @@ Examples:
 	
 @planType
 Scenario Outline: To verify pharmacy locator language in AARP site
+Given the user is on the AARP Medicare Site landing page
+When the user navigates to pharmacy search page in AARP Site
+And the user enters following details for pharmacy search in AARP Site
+  | Zip Code	| <zipcode>	|
+	| Distance	| <distance>	|
+	| County Name	| <county>	|
+And the user chooses a plan from dropdown in AARP Site
+	| <planName> |
+Examples:
+	| zipcode     | distance  | county            |  planName 			                 	  							|			 
+	| 90210       | 15        | Adams County      | AARP MedicareComplete SecureHorizons Plan 1 (HMO) |	
+	
+@zipcodeEntry
+Scenario Outline: To verify pharmacy locator zipcode entry in AARP site
 Given the user is on the AARP Medicare Site landing page
 When the user navigates to pharmacy search page in AARP Site
 And the user enters following details for pharmacy search in AARP Site
