@@ -80,6 +80,12 @@ public class PharmacySearchPage extends UhcDriver {
 	
 	@FindBy(xpath = "(.//*[@id='plan-type']//option)[2]")
 	private WebElement planType;
+	
+	@FindBy(xpath = "(//*[contains(text(),'Show on Map')])[1]")
+	private WebElement showonmap;
+	
+	@FindBy(xpath = "//*[contains(text(),'VIEW RESULTS AS PDF')]")
+	private WebElement viewsearchpdf;
 
 	public PharmacySearchPage(WebDriver driver) {
 		super(driver);
@@ -191,6 +197,24 @@ public class PharmacySearchPage extends UhcDriver {
 
 		if (pharmacyResultHeader.getText().equalsIgnoreCase(
 				"Pharmacies Available in Your Area")) {
+			return new PharmacyResultPage(driver);
+		}
+		return null;
+	}
+	
+	public PharmacyResultPage ValidateShowOnMapResult() {
+		showonmap.click();
+		if (driver.getTitle().equalsIgnoreCase(
+				"Member Claims")) {
+			return new PharmacyResultPage(driver);
+		}
+		return null;
+	}
+
+	public PharmacyResultPage ValidateSearchPdfResult() {
+		viewsearchpdf.click();
+		if (driver.getTitle().equalsIgnoreCase(
+				"Member Claims")) {
 			return new PharmacyResultPage(driver);
 		}
 		return null;

@@ -79,6 +79,7 @@ And the user enters following details for pharmacy search in AARP Site
 	| County Name	| <county>	|
 And the user chooses a plan from dropdown in AARP Site
 	| <planName> |
+Then the user click on view search PDF link in AARP Site
 Examples:
 	| zipcode     | distance  | county            |  planName 			                 	  							|			 
 	| 90210       | 15        | Adams County      | AARP MedicareComplete SecureHorizons Plan 1 (HMO) |	
@@ -96,3 +97,50 @@ And the user chooses a plan from dropdown in AARP Site
 Examples:
 	| zipcode     | distance  | county            |  planName 			                 	  							|			 
 	| 90210       | 15        | Adams County      | AARP MedicareComplete SecureHorizons Plan 1 (HMO) |	
+	
+@showonmap
+Scenario Outline: To verify pharmacy locator zipcode entry in AARP site
+Given the user is on the AARP Medicare Site landing page
+When the user navigates to pharmacy search page in AARP Site
+And the user enters following details for pharmacy search in AARP Site
+	| Zip Code	| <zipcode>	|
+	| Distance	| <distance>	|	
+And the user chooses a plan from dropdown in AARP Site
+	| <planName> |
+Then the user click on show on map link in AARP Site
+	
+Examples:
+	| zipcode     | distance  | planName 			                 	  							|			 
+	| 90210       | 15        | AARP MedicareComplete SecureHorizons Plan 1 (HMO) |
+	
+@resultpdf
+Scenario Outline: To verify pharmacy locator zipcode entry in AARP site
+Given the user is on the AARP Medicare Site landing page
+When the user navigates to pharmacy search page in AARP Site
+And the user enters following details for pharmacy search in AARP Site
+	| Zip Code	| <zipcode>	|
+	| Distance	| <distance>	|	
+And the user chooses a plan from dropdown in AARP Site
+	| <planName> |
+Then the user click on view search PDF link in AARP Site
+	
+Examples:
+	| zipcode     | distance  | planName 			                 	  							|			 
+	| 90210       | 15        | AARP MedicareComplete SecureHorizons Plan 1 (HMO) |
+	
+	
+@googlemap
+Scenario Outline: To verify pharmacy locator zipcode entry in AARP site
+Given the user is on the AARP Medicare Site landing page
+When the user navigates to pharmacy search page in AARP Site
+And the user enters following details for pharmacy search in AARP Site
+	| Zip Code	| <zipcode>	|
+	| Distance	| <distance>	|	
+And the user chooses a plan from dropdown in AARP Site
+	| <planName> |
+Then the user validate google map colcor for pharmacy and standard network in AARP Site
+	
+Examples:
+	| zipcode     | distance  | planName 			                 	  							|			 
+	| 80002       | 15        | AARP MedicareComplete SecureHorizons Plan 1 (HMO) |
+

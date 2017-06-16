@@ -264,4 +264,46 @@ public class PharmacyLocatorAarpStepDefinition {
 		
 	}
 	
+	@Then("^the user click on show on map link in AARP Site$")
+	public void user_views_show_on_map_result_AARP() {
+		PharmacySearchPage pharmacySearchPage = (PharmacySearchPage) getLoginScenario()
+				.getBean(PageConstants.PHARMACY_SEARCH_PAGE);
+		PharmacyResultPage pharmacyResultPage = pharmacySearchPage
+				.ValidateShowOnMapResult();
+		
+	}
+	
+	@Then("^the user click on view search PDF link in AARP Site$")
+	public void user_views_search_pdf_result_AARP() {
+		PharmacySearchPage pharmacySearchPage = (PharmacySearchPage) getLoginScenario()
+				.getBean(PageConstants.PHARMACY_SEARCH_PAGE);
+		PharmacyResultPage pharmacyResultPage = pharmacySearchPage
+				.ValidateSearchPdfResult();
+		
+	}
+	
+	@Then("^the user validate google map colcor for pharmacy and standard network in AARP Site$")
+	public void user_views_google_map_color_AARP() {
+		JSONObject pharmacyResultActualJson = (JSONObject) getLoginScenario()
+				.getBean(PharmacySearchCommonConstants.PHARMACY_RESULT_ACTUAL);
+		JSONObject pharmacyResultExpectedJson = (JSONObject) getLoginScenario()
+				.getBean(PharmacySearchCommonConstants.PHARMACY_RESULT_EXPECTED);
+
+		System.out.println("pharmacyResultActualJson:::"
+				+ pharmacyResultActualJson);
+		System.out.println("pharmacyResultExpectedJson:::"
+				+ pharmacyResultExpectedJson);
+		
+		try {
+			JSONAssert.assertEquals(pharmacyResultExpectedJson,
+					pharmacyResultActualJson, true);
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		
+	}
+	
+	
 }
