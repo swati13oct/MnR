@@ -50,9 +50,9 @@ public class ContactUSRedesignUmsStepDefinition {
 			Map<String, String> loginCreds = loginScenario
 					.getUMSMemberWithDesiredAttributes(desiredAttributes);
 
-			String userName = "q2_jun_grp142";
-			String pwd = "Password@1";
-			/*if (loginCreds == null) {
+			String userName = "";
+			String pwd = "";
+			if (loginCreds == null) {
 				// no match found
 				System.out.println("Member Type data could not be setup !!!");
 				Assert.fail("unable to find a " + desiredAttributes + " member");
@@ -64,7 +64,7 @@ public class ContactUSRedesignUmsStepDefinition {
 				getLoginScenario()
 				.saveBean(LoginCommonConstants.USERNAME, userName);
 				getLoginScenario().saveBean(LoginCommonConstants.PASSWORD, pwd);
-			}*/ 
+			} 
 
 			WebDriver wd = getLoginScenario().getWebDriver();
 			getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
