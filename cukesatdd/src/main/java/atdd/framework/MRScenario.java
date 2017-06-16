@@ -861,146 +861,141 @@ public class MRScenario {
 
        public WebDriver getWebDriver() {
     	   
-    	   if (null == webDriver) {
+    	   /****FIrefox Browser******/
+    	   
+    	/*   if (null == webDriver) {
 			File pathToBinary = new File("C:/Users/tpravee2/AppData/Local/Mozilla Firefox/firefox.exe");
 			FirefoxBinary ffBinary = new FirefoxBinary(pathToBinary);
 			FirefoxProfile firefoxProfile = new FirefoxProfile();
 			webDriver = new FirefoxDriver(ffBinary, firefoxProfile);
 			webDriver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
-		}
+		}*/
 
 
-             String browser = (null == System.getProperty(CommonConstants.JENKINS_BROWSER)
-                          ? props.get("WebDriver") : System.getProperty(CommonConstants.JENKINS_BROWSER));
-              System.out.println("getWebDriver, returning driver " + browser);
-              String browserName = (null == System.getProperty(CommonConstants.BROWSER_NAME)
-                          ? props.get("BrowserName") : System.getProperty(CommonConstants.BROWSER_NAME));
-             if (null == webDriver) {
-                    System.out.println("New WebDriver CREATED");
-                    // Again, Jenkins takes precedent. 
-                     String pathToBinary = (null == System.getProperty("phantomjs") ? props.get("BrowserPathToBinary")
-                                 : System.getProperty("phantomjs"));
-                    System.out.println(pathToBinary);
-                    if (null == browserName || browserName.equalsIgnoreCase(CommonConstants.HTMLUNIT_BROWSER)) {
-                          System.out.println("inside null");                             
-                           webDriver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
-                          webDriver.manage().window().maximize();
-                          
-                    } 
-                    
-                    /*else if (browserName.equalsIgnoreCase(CommonConstants.FIREFOX_BROWSER)) {
-                          System.out.println("Execution started in firefox web browser !!!!!!");
-                          //FirefoxBinary ffBinary = new FirefoxBinary(new File(pathToBinary));
-                          FirefoxProfile firefoxProfile = new FirefoxProfile();
-                          webDriver = new FirefoxDriver(firefoxProfile);
-                          webDriver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
-                    } else if (browserName.equalsIgnoreCase(CommonConstants.CHROME_BROWSER)) {
-                          System.out.println("Execution started in chrome web browser !!!!!!");
-                          Map<String, Object> chromeOptions = new HashMap<String, Object>();
-                          chromeOptions.put("binary", pathToBinary);
-                          DesiredCapabilities capabilities = DesiredCapabilities.chrome();
-                          capabilities.setCapability(ChromeOptions.CAPABILITY, chromeOptions);
-                          webDriver = new ChromeDriver(capabilities);
-                    } else if (browserName.equalsIgnoreCase(CommonConstants.IE_BROWSER)) {
-                          System.out.println("Execution started in firefox IE browser !!!!!!");
-                          System.setProperty("webdriver.ie.driver",
-                                        pathToBinary);
-                          DesiredCapabilities ieCaps = DesiredCapabilities.internetExplorer();
-                           ieCaps.setCapability(InternetExplorerDriver.INTRODUCE_FLAKINESS_BY_IGNORING_SECURITY_DOMAINS, true);
-                          webDriver = new InternetExplorerDriver(ieCaps);
-                          webDriver.manage().window().maximize();
-                          return webDriver;
-                    } else if (browser.equalsIgnoreCase(CommonConstants.MOBILE_BROWSER)) {
-                          System.out.println("Execution started in firefox web chrome mobile emulator !!!!!!");
-                          Map<String, String> mobileEmulation = new HashMap<String, String>();
-                          mobileEmulation.put("deviceName", props.get(CommonConstants.DEVICE_NAME));
-                          Map<String, Object> chromeOptions = new HashMap<String, Object>();
-                          chromeOptions.put("mobileEmulation", mobileEmulation);
-                          DesiredCapabilities capabilities = DesiredCapabilities.chrome();
-                          capabilities.setCapability("chrome.switches", Arrays.asList("--start-maximized"));
-                          capabilities.setCapability(ChromeOptions.CAPABILITY, chromeOptions);
-                          System.setProperty("webdriver.chrome.driver", props.get(CommonConstants.CHROME_DRIVER));
-                          webDriver = new ChromeDriver(capabilities);
-                          return webDriver;
-                    }*/
-                    
-                    /****Sauce Lab Code*****/
-                    
-                    else if (browser.equalsIgnoreCase(CommonConstants.SAUCE_BROWSER_WEB)) {
-                           System.out.println("Execution is Going to Start on SauceLabs Web.....!!!!!");
-                DesiredCapabilities capabilities = null;
-                if(browserName.equalsIgnoreCase("firefox")){
-                     System.out.println("Inside firefox");
-                capabilities = DesiredCapabilities.firefox();
-                capabilities.setCapability("platform", "Windows 7");
-                capabilities.setCapability("version", "48");
-                capabilities.setCapability("idleTimeout", 180);
-                }else if(browserName.equalsIgnoreCase("IE")){
-                     capabilities = DesiredCapabilities.internetExplorer();
-                     capabilities.setCapability("platform", "Windows 7");
-                     capabilities.setCapability("version", "11.0");
-                     capabilities.setCapability("screenResolution", "1024x768");
-                }else if(browserName.equalsIgnoreCase("chrome")){
-                     System.out.println("Inside chrome");
-                     capabilities = DesiredCapabilities.chrome();
-                     capabilities.setCapability("platform", "Windows 7");
-                     capabilities.setCapability("version", "52.0");
-                     capabilities.setCapability("screenResolution", "800x600");
-                }
-                capabilities.setCapability("autoAcceptsAlerts", true);
-                capabilities.setCapability("parent-tunnel", "sauce_admin");
-                capabilities.setCapability("tunnelIdentifier", "OptumSharedTunnel-Prd");
-                String USERNAME = "tpravee2";
-                String ACCESS_KEY = "3ac93b20-b695-45bc-8d78-2889e524557a";
-                String URL = "http://" + USERNAME + ":" + ACCESS_KEY + "@ondemand.saucelabs.com:80/wd/hub";
-                if (USERNAME == null || ACCESS_KEY == null) {
-                       Assert.fail(
-                                     "Missing value for environment variable(s) SAUCE_USERNAME or SAUCE_ACCESS_KEY.  Check environment configuration and try again");
-                }
-                try {
-                       webDriver = new RemoteWebDriver(new URL(URL), capabilities);
-                } catch (MalformedURLException e) {
-                       Assert.fail("Invalid Sauce URL: [" + URL + "]");
-                }
-                
-                return webDriver;
-                    }
-                    //https://wiki.saucelabs.com/display/DOCS/Platform+Configurator#/
-                    else if (browser.equalsIgnoreCase(CommonConstants.SAUCE_BROWSER_MOBILE)){
-                          System.out.println("Execution is Going to Start on SauceLabs Mobile.....!!!!!");
-                 DesiredCapabilities capabilities = null;
-                if(browserName.equalsIgnoreCase("Safari")){
-                     capabilities = DesiredCapabilities.iphone();
-                }else{
-                     capabilities = DesiredCapabilities.android();
-                }
-                System.out.println(props.get(CommonConstants.DEVICE_VERSION)+" "+props.get(CommonConstants.DEVICE_NAME)+" "
-                           +""+props.get(CommonConstants.PLATFORM_VERSION)+" "+props.get(CommonConstants.PLATFORM_NAME)+" "+browserName);
-                capabilities.setCapability("appiumVersion", props.get(CommonConstants.DEVICE_VERSION));
-                     capabilities.setCapability("deviceName",props.get(CommonConstants.DEVICE_NAME));
-                     capabilities.setCapability("deviceOrientation", "portrait");
-                     capabilities.setCapability("browserName", browserName);
-                     capabilities.setCapability("platformVersion", props.get(CommonConstants.PLATFORM_VERSION));
-                     capabilities.setCapability("platformName",props.get(CommonConstants.PLATFORM_NAME));                          
-                  capabilities.setCapability("autoAcceptsAlerts", true);
-                capabilities.setCapability("parent-tunnel", "sauce_admin");
-                capabilities.setCapability("tunnelIdentifier", "OptumSharedTunnel-Prd");
-                         String USERNAME = "apriyad4";
-                    String ACCESS_KEY = "6e1345f1-80ea-4863-8573-187bf3151ac0";
-                    String URL = "http://" + USERNAME + ":" + ACCESS_KEY + "@ondemand.saucelabs.com:80/wd/hub";
-                    if (USERNAME == null || ACCESS_KEY == null) {
-                           Assert.fail(
-                                         "Missing value for environment variable(s) SAUCE_USERNAME or SAUCE_ACCESS_KEY.  Check environment configuration and try again");
-                    }
-                    try {
-                           webDriver = new RemoteWebDriver(new URL(URL), capabilities);
-                    } catch (MalformedURLException e) {
-                           Assert.fail("Invalid Sauce URL: [" + URL + "]");
-                    }
-                    return webDriver;
-                    }
-                
-              }
+    	   String browser = (null == System.getProperty(CommonConstants.JENKINS_BROWSER)
+                   ? props.get("WebDriver") : System.getProperty(CommonConstants.JENKINS_BROWSER));
+       System.out.println("getWebDriver, returning driver " + browser);
+       String browserName = (null == System.getProperty(CommonConstants.BROWSER_NAME)
+                   ? props.get("BrowserName") : System.getProperty(CommonConstants.BROWSER_NAME));
+      if (null == webDriver) {
+             System.out.println("New WebDriver CREATED");
+             // Again, Jenkins takes precedent. 
+              String pathToBinary = (null == System.getProperty("phantomjs") ? props.get("BrowserPathToBinary")
+                          : System.getProperty("phantomjs"));
+             System.out.println(pathToBinary);
+             if (null == browserName || browserName.equalsIgnoreCase(CommonConstants.HTMLUNIT_BROWSER)) {
+                   System.out.println("inside null");                             
+                    webDriver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
+                   webDriver.manage().window().maximize();
+             } /*else if (browserName.equalsIgnoreCase(CommonConstants.FIREFOX_BROWSER)) {
+                   System.out.println("Execution started in firefox web browser !!!!!!");
+                   //FirefoxBinary ffBinary = new FirefoxBinary(new File(pathToBinary));
+                   FirefoxProfile firefoxProfile = new FirefoxProfile();
+                   webDriver = new FirefoxDriver(firefoxProfile);
+                   webDriver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
+             } else if (browserName.equalsIgnoreCase(CommonConstants.CHROME_BROWSER)) {
+                   System.out.println("Execution started in chrome web browser !!!!!!");
+                   Map<String, Object> chromeOptions = new HashMap<String, Object>();
+                   chromeOptions.put("binary", pathToBinary);
+                   DesiredCapabilities capabilities = DesiredCapabilities.chrome();
+                   capabilities.setCapability(ChromeOptions.CAPABILITY, chromeOptions);
+                   webDriver = new ChromeDriver(capabilities);
+             } else if (browserName.equalsIgnoreCase(CommonConstants.IE_BROWSER)) {
+                   System.out.println("Execution started in firefox IE browser !!!!!!");
+                   System.setProperty("webdriver.ie.driver",
+                                 pathToBinary);
+                   DesiredCapabilities ieCaps = DesiredCapabilities.internetExplorer();
+                    ieCaps.setCapability(InternetExplorerDriver.INTRODUCE_FLAKINESS_BY_IGNORING_SECURITY_DOMAINS, true);
+                   webDriver = new InternetExplorerDriver(ieCaps);
+                   webDriver.manage().window().maximize();
+                   return webDriver;
+             } else if (browser.equalsIgnoreCase(CommonConstants.MOBILE_BROWSER)) {
+                   System.out.println("Execution started in firefox web chrome mobile emulator !!!!!!");
+                   Map<String, String> mobileEmulation = new HashMap<String, String>();
+                   mobileEmulation.put("deviceName", props.get(CommonConstants.DEVICE_NAME));
+                   Map<String, Object> chromeOptions = new HashMap<String, Object>();
+                   chromeOptions.put("mobileEmulation", mobileEmulation);
+                   DesiredCapabilities capabilities = DesiredCapabilities.chrome();
+                   capabilities.setCapability("chrome.switches", Arrays.asList("--start-maximized"));
+                   capabilities.setCapability(ChromeOptions.CAPABILITY, chromeOptions);
+                   System.setProperty("webdriver.chrome.driver", props.get(CommonConstants.CHROME_DRIVER));
+                   webDriver = new ChromeDriver(capabilities);
+                   return webDriver;
+             }*/else if (browser.equalsIgnoreCase(CommonConstants.SAUCE_BROWSER_WEB)) {
+                    System.out.println("Execution is Going to Start on SauceLabs Web.....!!!!!");
+         DesiredCapabilities capabilities = null;
+         if(browserName.equalsIgnoreCase("firefox")){
+              System.out.println("Inside firefox");
+         capabilities = DesiredCapabilities.firefox();
+         capabilities.setCapability("platform", "Windows 7");
+         capabilities.setCapability("version", "48");
+         capabilities.setCapability("idleTimeout", 180);
+         }else if(browserName.equalsIgnoreCase("IE")){
+              capabilities = DesiredCapabilities.internetExplorer();
+              capabilities.setCapability("platform", "Windows 7");
+              capabilities.setCapability("version", "11.0");
+              capabilities.setCapability("screenResolution", "1024x768");
+         }else if(browserName.equalsIgnoreCase("chrome")){
+              System.out.println("Inside chrome");
+              capabilities = DesiredCapabilities.chrome();
+              capabilities.setCapability("platform", "Windows 7");
+              capabilities.setCapability("version", "52.0");
+              capabilities.setCapability("screenResolution", "800x600");
+         }
+         capabilities.setCapability("autoAcceptsAlerts", true);
+         capabilities.setCapability("parent-tunnel", "sauce_admin");
+         capabilities.setCapability("tunnelIdentifier", "OptumSharedTunnel-Prd");
+         String USERNAME = "tpravee2";
+         String ACCESS_KEY = "3ac93b20-b695-45bc-8d78-2889e524557a";
+         String URL = "http://" + USERNAME + ":" + ACCESS_KEY + "@ondemand.saucelabs.com:80/wd/hub";
+         if (USERNAME == null || ACCESS_KEY == null) {
+                Assert.fail(
+                              "Missing value for environment variable(s) SAUCE_USERNAME or SAUCE_ACCESS_KEY.  Check environment configuration and try again");
+         }
+         try {
+                webDriver = new RemoteWebDriver(new URL(URL), capabilities);
+         } catch (MalformedURLException e) {
+                Assert.fail("Invalid Sauce URL: [" + URL + "]");
+         }
+         return webDriver;
+             }
+             //https://wiki.saucelabs.com/display/DOCS/Platform+Configurator#/
+             else if (browser.equalsIgnoreCase(CommonConstants.SAUCE_BROWSER_MOBILE)){
+                   System.out.println("Execution is Going to Start on SauceLabs Mobile.....!!!!!");
+          DesiredCapabilities capabilities = null;
+         if(browserName.equalsIgnoreCase("Safari")){
+              capabilities = DesiredCapabilities.iphone();
+         }else{
+              capabilities = DesiredCapabilities.android();
+         }
+         System.out.println(props.get(CommonConstants.DEVICE_VERSION)+" "+props.get(CommonConstants.DEVICE_NAME)+" "
+                    +""+props.get(CommonConstants.PLATFORM_VERSION)+" "+props.get(CommonConstants.PLATFORM_NAME)+" "+browserName);
+         capabilities.setCapability("appiumVersion", props.get(CommonConstants.DEVICE_VERSION));
+              capabilities.setCapability("deviceName",props.get(CommonConstants.DEVICE_NAME));
+              capabilities.setCapability("deviceOrientation", "portrait");
+              capabilities.setCapability("browserName", browserName);
+              capabilities.setCapability("platformVersion", props.get(CommonConstants.PLATFORM_VERSION));
+              capabilities.setCapability("platformName",props.get(CommonConstants.PLATFORM_NAME));                          
+           capabilities.setCapability("autoAcceptsAlerts", true);
+         capabilities.setCapability("parent-tunnel", "sauce_admin");
+         capabilities.setCapability("tunnelIdentifier", "OptumSharedTunnel-Prd");
+                  String USERNAME = "apriyad4";
+             String ACCESS_KEY = "6e1345f1-80ea-4863-8573-187bf3151ac0";
+             String URL = "http://" + USERNAME + ":" + ACCESS_KEY + "@ondemand.saucelabs.com:80/wd/hub";
+             if (USERNAME == null || ACCESS_KEY == null) {
+                    Assert.fail(
+                                  "Missing value for environment variable(s) SAUCE_USERNAME or SAUCE_ACCESS_KEY.  Check environment configuration and try again");
+             }
+             try {
+                    webDriver = new RemoteWebDriver(new URL(URL), capabilities);
+             } catch (MalformedURLException e) {
+                    Assert.fail("Invalid Sauce URL: [" + URL + "]");
+             }
+             return webDriver;
+             }
+         
+       }
+
              return webDriver;
       }
 
