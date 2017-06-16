@@ -78,9 +78,9 @@ public class ResponsivePlanSummaryUhc extends UhcDriver{
 		@FindBy(xpath="//*[@class='content-cols']/div[2]/h3")
 		private WebElement benefitsHeader;
 		
-		@FindBy(xpath="//a[contains(text(),'Find a provider')]")
+		/*@FindBy(xpath="//a[contains(text(),'Find a provider')]")
 		private WebElement providerSearchLink;
-		
+		*/
 		@FindBy(xpath="//*[@class='content-cols']/div[1]/ul")
 		private List<WebElement> marketingBullet;
 		
@@ -234,6 +234,10 @@ public class ResponsivePlanSummaryUhc extends UhcDriver{
 			
 			@FindBy (xpath="//*[@id='fixTable']/tbody/tr[24]/td[4]/strong[1]")
 		    private WebElement medicalBenefits2;
+			
+			@FindBy(xpath="//a[contains(text(),'Is my provider covered in my ZIP code/county?')]")
+            private WebElement providerSearchLink;
+
 			
 		@FindBy	(xpath="//span[@class='remove-plan-text show']/p")
 		private WebElement errorMessage;
@@ -551,7 +555,7 @@ public void comparePlanslnk(){
 			 }
 			 return null;	 
 		}
-		public Rallytool_Page navigateToRallyPage(String planName) { 
+		/*public Rallytool_Page navigateToRallyPage(String planName) { 
 			driver.manage().window().maximize(); 
 			//a[contains(text(),'Is my provider covered?')]
 			int i=0;
@@ -589,7 +593,7 @@ public void comparePlanslnk(){
 					 }
 				 i++;			 
 				 return null;
-			}
+			}*/
 		 public void selectPlansToCompareTwoPlans(String planName1, String planName2){
 				// int i=0;
 				 List<WebElement> plans = driver.findElements(By.xpath("//h2[contains(text(),'AARP')]"));
@@ -1041,7 +1045,46 @@ public void comparePlanslnk(){
 					}
 					
 				}
-					
+				public Rallytool_Page navigateToRallyPage(String planName) { 
+                    driver.manage().window().maximize(); 
+                    //a[contains(text(),'Is my provider covered?')]
+                    int i=0;
+                    List<WebElement> plans = driver.findElements(By.xpath("//h2[contains(text(),'UnitedHealthcare Senior Care')]"));
+                    System.out.println("PLANS SIZE :: "+plans.size());
+                    String xpath="//a[contains(text(),'Is my provider')]";  
+                     List<WebElement> providerSearch = driver.findElements(By.xpath(xpath));
+                    
+                     System.out.println("Is my provider covered? "+providerSearch.size());
+                    for(WebElement plan : plans){
+                          if(plan.getText().equalsIgnoreCase(planName)){               
+                                  providerSearch.get(i+4).click();
+                                 try {
+                                        Thread.sleep(8000);
+                                 } catch (InterruptedException e) {
+                                        // TODO Auto-generated catch block
+                                        e.printStackTrace();
+                                 }                                          
+                                               ArrayList<String> tabs = new ArrayList<String> (driver.getWindowHandles());
+                                               try {
+                                                      Thread.sleep(6000);
+                                               } catch (InterruptedException e) {
+                                                      // TODO Auto-generated catch block
+                                                      e.printStackTrace();
+                                               }             
+                                               driver.switchTo().window(tabs.get(1));
+                                               System.out.println(driver.getTitle());
+                                               if (driver.getTitle().equalsIgnoreCase("Welcome")) {
+                                               return new Rallytool_Page(driver);
+                                               }
+                                               else{
+
+                                               }
+                                        }
+                                 }
+                          i++;                
+                           return null;
+                    }
+
 				
 				}
 			 
