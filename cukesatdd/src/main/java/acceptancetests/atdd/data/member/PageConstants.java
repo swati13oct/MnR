@@ -182,5 +182,11 @@ public class PageConstants {
 	public static final String REGISTRATION_ERROR_PAGE = "regErrorPage";
 
 	public static final String DASHBOARD_PAYMENT_HISTORY_PAGE = "dashboardPaymentOverview";	
+	
+	public static final String DRUG_COST_ESTIMATOR_PAGE = "drugcostestimatorPage";
+	
+	public static final String ADD_DRUG_DETAILS = "addDrugDetails";
+	
+	public static final String SAVING_OPPORTUNITY = "savingopportunity";
 
 }

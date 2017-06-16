@@ -165,6 +165,7 @@ public class CommonConstants {
 			new Page(CommonConstants.ADD_PLAN_CONFIRMATION, CommonConstants.ADD_PLAN_CONFIRMATION_ULAYER_DIRECTORY),
 			new Page(CommonConstants.PAYMENT_HISTORY_MOBILE,
 					CommonConstants.DASHBOARD_PAYMENT_HISTORY_ULAYER_DIRECTORY_MOBILE)
+			
 	};
 
 	public static final String BENEFITS_SUMMARY_DIRECTORY = "/jsonresponse/mobile/member/ulayer/benefits-summary/";
@@ -805,5 +806,7 @@ public class CommonConstants {
 	public static final String ADD_DRUG_DETAILS="adddrugdetails.json";
 	public static final String SWITCH_GENERIC="switchgeneric.json";
 	
+	public static final String ADD_NEW_DRUG_MODAL = "addnewdrugmodal";
 	
+	public static final String PAGE_OBJECT_DIRECTORY_DCE_MEMBER = "/page-objects/member/dashboard/drugcostestimator/";
 }
