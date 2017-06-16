@@ -37,7 +37,14 @@ public class ContactUsPage extends UhcDriver{
 	@FindBy(id = "addAnotherPlanLink")
 	private WebElement addPlan;
 	
+	@FindBy(xpath="//*[@id='question-btn']")
+	private WebElement fillOutFormButton;
 	
+	
+	@FindBy(xpath="//*[@id='question-cancel']")
+	private WebElement cancelLink;
+	
+	//*[@id="question-about"]
 	
 	private PageData contactUs;
 
@@ -126,6 +133,55 @@ public class ContactUsPage extends UhcDriver{
 
 		return secureemailwidgetDataJson;
 	}
+	
+	public void validateSendUaQuestionWidget()
+	{
+		if (fillOutFormButton.isDisplayed())
+		{
+			System.out.println("send us Question is  displayed");
+			fillOutFormButton.click();
+			try {
+				Thread.sleep(5000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+			
+		}
+		else
+		{
+			System.out.println("send us Question is not  displayed");
+		}
+	}
+	
+	public void validateSendUaQuestionWidgetfunctionality()
+	{
+		if (fillOutFormButton.isDisplayed())
+		{
+			System.out.println("send us Question is  displayed");
+			fillOutFormButton.click();
+			try {
+				Thread.sleep(5000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			cancelLink.click();
+			try {
+				Thread.sleep(5000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+		}
+		else
+		{
+			System.out.println("send us Question is not  displayed");
+		}
+	}
+	
 
 	
 	

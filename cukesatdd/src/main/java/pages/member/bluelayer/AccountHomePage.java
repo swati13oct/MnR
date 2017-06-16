@@ -649,6 +649,18 @@ public FormsandresourcesPage navigateToMydocumentUmsPage() {
 		}
 		return null;
 	}
+	
+	public pages.member.bluelayer.ContactUsPage navigateToContactusRedesignPage() {
+		// TODO Auto-generated method stub
+		String url = "https://member.team-e-uhcmedicaresolutions.uhc.com/content/uhcm/home/contact.html";
+		driver.get(url);
+		if (driver.getTitle().equals("Contact Us")) {
+			return new pages.member.bluelayer.ContactUsPage(driver);
+
+		}
+		return null;
+	}
+
 
 }
 

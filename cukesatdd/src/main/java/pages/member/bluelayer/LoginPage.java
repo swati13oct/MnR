@@ -32,26 +32,30 @@ public class LoginPage extends UhcDriver {
 
 
 	private static String PAGE_URL = MRConstants.UHCM_URL;
+	private static String UHCM_PAGE_URL = MRConstants.UHCM_TEAM_E_URL;
 	
 
 	//@FindBy(xpath = "//button[@id='fd_memberSignInButton' or @id='accessURAccountBTN']")
 	@FindBy(id = "fd_memberSignInButton")
 
-	//@FindBy(xpath = "//div[@class='fd_SignIn floatLeft pos_rel']/a")
-
 	private WebElement loginIn;
 
-	//@FindBy(id = "loginPOPUPuser")
-	@FindBy(xpath = "//*[@id='loginSTANDuser']")
+	
+	@FindBy(xpath = "//*[@id='loginPOPUPuser']")
 	private WebElement userNameField;
+	
 
 	//@FindBy(id = "loginPOPUPpass")
-	@FindBy(xpath = "//*[@id='loginSTANDpass']")
+	@FindBy(xpath = "//*[@id='loginPOPUPpass']")
 	private WebElement passwordField;
 
 	//@FindBy(xpath = "//div[@class='fd_userPassSection']/button")
 	@FindBy(xpath = "//*[@id='accessURAccountBTN']")
 	private WebElement signInButton;
+	
+	@FindBy(xpath = "//*[@id='fd_signInPanel']/div[2]/div[4]/button")
+	private WebElement signInNewButton;
+	
 
 	@FindBy(linkText = "Forgot your username or password?")
 	private WebElement forgotUsernamePasswordLink;
@@ -74,12 +78,13 @@ public class LoginPage extends UhcDriver {
 		//driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 		/*WebElement loginInEle= this.driver.findElement(By.id("fd_memberSignInButton"));
 		loginInEle.click();*/
+		loginIn.click();
 		sendkeys(userNameField, username);
 		sendkeys(passwordField, password);
-		signInButton.click();
+		signInNewButton.click();
 
 		
-		if (MRScenario.environment.equals("dev-a") || MRScenario.environment.equals("team-a")) {
+		if (MRScenario.environment.equals("dev-a") || MRScenario.environment.equals("team-a") ) {
 			while (!isAlertPresent());
         }
 
@@ -120,7 +125,12 @@ public class LoginPage extends UhcDriver {
 
 	@Override
 	public void openAndValidate() {
-		start(PAGE_URL);
+		if(MRScenario.environment.equals("team-e")){
+			start(UHCM_PAGE_URL);
+		}else{
+			start(PAGE_URL);
+		}
+		
 		validate(loginIn);
 
 	}
