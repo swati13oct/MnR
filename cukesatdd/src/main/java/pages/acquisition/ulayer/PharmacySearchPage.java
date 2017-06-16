@@ -122,7 +122,13 @@ public class PharmacySearchPage extends UhcDriver {
 
 	public PharmacySearchPage selectsPlanName() {
 		//selectFromDropDown(planNamesList, planName);
-		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+		try {
+			Thread.sleep(3000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		//driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 		Select select = new Select(planType);	
 		select.selectByIndex(1);
 		/*if (narrowYourSearchContent.getText().equalsIgnoreCase(
