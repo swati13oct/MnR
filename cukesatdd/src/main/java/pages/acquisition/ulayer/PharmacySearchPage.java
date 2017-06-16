@@ -78,7 +78,7 @@ public class PharmacySearchPage extends UhcDriver {
 	@FindBy(xpath = "(//*[@id='lang-select']//option)[1]")
 	private WebElement language;
 	
-	@FindBy(xpath = "(.//*[@id='plan-type']//option)[2]")
+	@FindBy(id = "plan-type")
 	private WebElement planType;
 	
 	@FindBy(xpath = "(//*[contains(text(),'Show on Map')])[1]")
@@ -122,14 +122,15 @@ public class PharmacySearchPage extends UhcDriver {
 
 	public PharmacySearchPage selectsPlanName() {
 		//selectFromDropDown(planNamesList, planName);
-		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-		planType.click();		
+		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+		Select select = new Select(planType);	
+		select.selectByIndex(1);
 		/*if (narrowYourSearchContent.getText().equalsIgnoreCase(
 				"Narrow your search")) {
 			return new PharmacySearchPage(driver);
 		}
 		return null;*/
-		return null;
+		return new PharmacySearchPage(driver);
 	}
 
 	public PharmacyResultPage searchesPharmacy() {
