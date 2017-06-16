@@ -860,6 +860,14 @@ public class MRScenario {
 
 
        public WebDriver getWebDriver() {
+    	   
+    	   if (null == webDriver) {
+			File pathToBinary = new File("C:/Users/tpravee2/AppData/Local/Mozilla Firefox/firefox.exe");
+			FirefoxBinary ffBinary = new FirefoxBinary(pathToBinary);
+			FirefoxProfile firefoxProfile = new FirefoxProfile();
+			webDriver = new FirefoxDriver(ffBinary, firefoxProfile);
+			webDriver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
+		}
 
 
              String browser = (null == System.getProperty(CommonConstants.JENKINS_BROWSER)
@@ -877,7 +885,10 @@ public class MRScenario {
                           System.out.println("inside null");                             
                            webDriver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
                           webDriver.manage().window().maximize();
-                    } /*else if (browserName.equalsIgnoreCase(CommonConstants.FIREFOX_BROWSER)) {
+                          
+                    } 
+                    
+                    /*else if (browserName.equalsIgnoreCase(CommonConstants.FIREFOX_BROWSER)) {
                           System.out.println("Execution started in firefox web browser !!!!!!");
                           //FirefoxBinary ffBinary = new FirefoxBinary(new File(pathToBinary));
                           FirefoxProfile firefoxProfile = new FirefoxProfile();
@@ -911,7 +922,11 @@ public class MRScenario {
                           System.setProperty("webdriver.chrome.driver", props.get(CommonConstants.CHROME_DRIVER));
                           webDriver = new ChromeDriver(capabilities);
                           return webDriver;
-                    }*/else if (browser.equalsIgnoreCase(CommonConstants.SAUCE_BROWSER_WEB)) {
+                    }*/
+                    
+                    /****Sauce Lab Code*****/
+                    
+                    else if (browser.equalsIgnoreCase(CommonConstants.SAUCE_BROWSER_WEB)) {
                            System.out.println("Execution is Going to Start on SauceLabs Web.....!!!!!");
                 DesiredCapabilities capabilities = null;
                 if(browserName.equalsIgnoreCase("firefox")){
@@ -935,8 +950,8 @@ public class MRScenario {
                 capabilities.setCapability("autoAcceptsAlerts", true);
                 capabilities.setCapability("parent-tunnel", "sauce_admin");
                 capabilities.setCapability("tunnelIdentifier", "OptumSharedTunnel-Prd");
-                String USERNAME = "apriyad4";
-                String ACCESS_KEY = "6e1345f1-80ea-4863-8573-187bf3151ac0";
+                String USERNAME = "tpravee2";
+                String ACCESS_KEY = "3ac93b20-b695-45bc-8d78-2889e524557a";
                 String URL = "http://" + USERNAME + ":" + ACCESS_KEY + "@ondemand.saucelabs.com:80/wd/hub";
                 if (USERNAME == null || ACCESS_KEY == null) {
                        Assert.fail(
@@ -947,6 +962,7 @@ public class MRScenario {
                 } catch (MalformedURLException e) {
                        Assert.fail("Invalid Sauce URL: [" + URL + "]");
                 }
+                
                 return webDriver;
                     }
                     //https://wiki.saucelabs.com/display/DOCS/Platform+Configurator#/
