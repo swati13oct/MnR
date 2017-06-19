@@ -606,7 +606,7 @@ public class PlanBenefitsAndCoverageAarpStepDefinition {
 		getLoginScenario().saveBean(PlanBenefitsAndCoverageCommonConstants.Language,language);
 		benefitsCoveragePage.validate_langdropdown_select(language);
 	}
-	@And("^the user validates the Vas section on benefits and coverage page$")
+	/*@And("^the user validates the Vas section on benefits and coverage page$")
 	public void validate_VAS_section()
 	{
 		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario().getBean(
@@ -661,7 +661,7 @@ public class PlanBenefitsAndCoverageAarpStepDefinition {
 		ValueAddedServicepage valueaddedservices = (ValueAddedServicepage) getLoginScenario().getBean(
 				PageConstants.VALUE_ADDED_SERVICES);
 		valueaddedservices.validatevisionDiscount();
-	}
+	}*/
 	/*@After
 	public void tearDown() {
 
