@@ -88,7 +88,7 @@ public class BenefitsAndCoveragePage extends UhcDriver {
     @FindBy(className = "margin-small")
     private WebElement LookupDrugstext;
     
-    @FindBy(xpath="html/body/div[2]/div/div[1]/div/div[2]/div/div/div[3]/div/div/section/div/div[6]/div[1]/a")
+    @FindBy(xpath=".//*[@id='drug-copays-and-discounts']/section/div[2]/div[11]/div[1]/a")
     private WebElement LookUpDrugsButton;
     
     @FindBy(xpath = ".//*[@id='benefitsMain']/div[2]/div/div/div[3]/div/div/section/div/div[1]/div/h2")
@@ -100,22 +100,22 @@ public class BenefitsAndCoveragePage extends UhcDriver {
     @FindBy(id = "drug-costs")
     private WebElement DrugCostDropdown;
     
-    @FindBy(xpath = "html/body/div[2]/div/div[1]/div/div[2]/div/div/div[2]/div/section/div/div[2]/div")
+    @FindBy(xpath = ".//*[@id='drug-copays-and-discounts']/section/div[2]/div[1]/div")
     private WebElement DrugCostheaderandtext;
     
    
-    @FindBy(xpath = "html/body/div[2]/div/div[1]/div/div[2]/div/div/div[3]/div/div/section/div/div[4]/div/div[1]/div/div[1]/a")
+    @FindBy(xpath = ".//*[@id='drug-copays-and-discounts']/section/div[2]/div[3]/div/div/div/div[1]/a")
     private WebElement Learnmoretierslink;
     
-    @FindBy(xpath = "html/body/div[2]/div/div[1]/div/div[2]/div/div/div[3]/div/div/section/div/div[4]/div/div[1]/div/div[2]/a")
+    @FindBy(xpath = ".//*[@id='drug-copays-and-discounts']/section/div[2]/div[3]/div/div/div/div[2]/a")
     private WebElement Learnmorestagelink;
  
-    @FindBy(xpath = "html/body/div[2]/div/div[1]/div/div[2]/div/div/div[2]/div/section/div/div[6]/div[2]")
+    @FindBy(xpath = ".//*[@id='drug-copays-and-discounts']/section/div[2]/div[11]/div[2]")
     private WebElement locateapharmacysection;
 
-    public static final String learnmorestagetext_xpath ="html/body/div[2]/div/div[1]/div/div[2]/div/div/div[3]/div/div/section/div/div[4]/div/div[1]/div/div[2]/div/div";
+    public static final String learnmorestagetext_xpath =".//*[@id='collapseStages']";
 
-    public static final String learnmorelinktiertext_xpath ="html/body/div[2]/div/div[1]/div/div[2]/div/div/div[3]/div/div/section/div/div[4]/div/div[1]/div/div[1]/div/div";
+    public static final String learnmorelinktiertext_xpath = ".//*[@id='collapseTiers']";
     
 	public static final String disclaimertextarea_xpath ="//*[@id='collapseDisclaimer']";
 	
@@ -423,8 +423,19 @@ public void validate_learnmoreaboutlink()
 
 public void clickOnLearnmoreaboutlinktier(JSONObject benefitsandcoverageExectedJson) {
 	// TODO Auto-generated method stub
-	
+	try {
+		Thread.sleep(30000);
+	} catch (InterruptedException e1) {
+		// TODO Auto-generated catch block
+		e1.printStackTrace();
+	}
 	Learnmoretierslink.click();
+	try {
+		Thread.sleep(30000);
+	} catch (InterruptedException e1) {
+		// TODO Auto-generated catch block
+		e1.printStackTrace();
+	}
 	//Thread.sleep(15000);
 	String finalPath;
 	String table_data;
@@ -475,6 +486,12 @@ public void clickOnLearnmoreaboutlinkstage(JSONObject benefitsandcoverageExected
 	// TODO Auto-generated method stub
 	
 	Learnmorestagelink.click();
+	try {
+		Thread.sleep(30000);
+	} catch (InterruptedException e1) {
+		// TODO Auto-generated catch block
+		e1.printStackTrace();
+	}
 	//Thread.sleep(15000);
 	String finalPath;
 	String table_data;

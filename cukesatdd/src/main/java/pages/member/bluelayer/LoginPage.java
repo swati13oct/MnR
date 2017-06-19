@@ -103,10 +103,10 @@ public class LoginPage extends UhcDriver {
 		if(currentUrl().contains("home/my-account-home.html") && category.equalsIgnoreCase("Group") || currentUrl().contains("/guest/home.html"))
 
 		{
-			return new AccountHomePage(driver,category);
+			return new AccountHomePage(driver);
 		}
 		else if(currentUrl().contains("home/my-account-home.html") && category.equalsIgnoreCase("Individual") ) {
-			return new AccountHomePage(driver, category);
+			return new AccountHomePage(driver);
 		}
 		else if (currentUrl().contains("terminated-plan.html")) {
 			return new TerminatedHomePage(driver);

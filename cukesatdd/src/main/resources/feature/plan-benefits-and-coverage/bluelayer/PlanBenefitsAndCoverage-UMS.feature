@@ -898,8 +898,7 @@ Examples:
     Then the user navigate to benefit and coverage page
     Then the user view jenkins benefits and coverage in UMS site
     And the user validates the content on benefits and coverage page
-    And the user view the Drug Copays & Discounts header
-    And the user validates dropdown should show three values  
+    And the user view the Drug Copays & Discounts header 
     And the user validates the Learn More section link for stage and tier
     And the user validates the user click on the link it expands and when user clicks it again it should collapse
     And the user validates Drug coverage header and text under the section

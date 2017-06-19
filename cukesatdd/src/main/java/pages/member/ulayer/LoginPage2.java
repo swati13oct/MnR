@@ -109,8 +109,8 @@ public class LoginPage2 extends UhcDriver {
 			        Alert alert3 = driver.switchTo().alert();
 			        alert3.accept();*/
 			        }
-
-		if(currentUrl().contains("home/my-plans/benefits-and-coverage-page.html"))
+System.out.println(currentUrl());
+		if(currentUrl().contains("home/my-plans/redesign-benefits-and-coverage-page.html"))
 
 		{
 			return new BenefitsAndCoveragePage(driver);

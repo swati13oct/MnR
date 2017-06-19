@@ -134,7 +134,7 @@ public JSONObject getExpectedData(Map<String, JSONObject> expectedDataMap, JSONO
 			homePageLink.click();
 		}
 		if (currentUrl().contains("home/my-account-home.html") && category!=null)
-			return new AccountHomePage(driver,category);
+			return new AccountHomePage(driver);
 		else if(currentUrl().contains("home/my-account-home.html")){
 			return new AccountHomePage(driver);
 		}

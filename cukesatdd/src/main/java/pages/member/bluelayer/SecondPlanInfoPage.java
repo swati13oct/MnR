@@ -89,7 +89,7 @@ public class SecondPlanInfoPage extends UhcDriver{
 		}
 		}
 		if (currentUrl().contains("home/my-account-home.html")) {
-			return new AccountHomePage(driver,category);
+			return new AccountHomePage(driver);
 		}
 		
 		return null;

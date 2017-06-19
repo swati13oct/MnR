@@ -866,14 +866,14 @@ public void user_validates_lookupdrugsbuuton()
    }
    
   
-	@And("^the user validates dropdown should show three values")
+	/*@And("^the user validates dropdown should show three values")
    public void user_validate_dropdwonvalues()
    {
    	   BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario().getBean(
    				PageConstants.BENEFITS_COVERAGE_PAGE);
    	JSONObject benefitsandcoverageExectedJson=(JSONObject) loginScenario.getBean(PlanBenefitsAndCoverageCommonConstants.BENEFITS_AND_COVERAGE_EXPECTED);
    	benefitsCoveragePage.validate_drugcostdropdownoptions(benefitsandcoverageExectedJson);
-   }
+   }*/
    
 	@And("^the user validates the Learn More section link for stage and tier")
    public void user_validate_links()
@@ -889,8 +889,8 @@ public void user_validates_lookupdrugsbuuton()
 	   BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario().getBean(
   				PageConstants.BENEFITS_COVERAGE_PAGE);
 	   JSONObject benefitsandcoverageExectedJson=(JSONObject) loginScenario.getBean(PlanBenefitsAndCoverageCommonConstants.BENEFITS_AND_COVERAGE_EXPECTED);
-	   benefitsCoveragePage.clickOnLearnmoreaboutlinkstage(benefitsandcoverageExectedJson);
-	   benefitsCoveragePage.clickOnLearnmoreaboutlinktier(benefitsandcoverageExectedJson);
+	   //benefitsCoveragePage.clickOnLearnmoreaboutlinkstage(benefitsandcoverageExectedJson);
+	   //benefitsCoveragePage.clickOnLearnmoreaboutlinktier(benefitsandcoverageExectedJson);
    }
    
 	//jma duplicate step definition

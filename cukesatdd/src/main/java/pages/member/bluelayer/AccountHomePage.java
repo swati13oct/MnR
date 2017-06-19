@@ -5,6 +5,7 @@ package pages.member.bluelayer;
 
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -662,6 +663,14 @@ public FormsandresourcesPage navigateToMydocumentUmsPage() {
 	{
 		driver.navigate().to(PAGE_URL);
 		BnClink.click();
+		try {
+			Thread.sleep(30000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		//driver.manage().timeouts().implicitlyWait(40, TimeUnit.SECONDS);
+		System.out.println(driver.getTitle());
 	 if(driver.getTitle().equalsIgnoreCase("Benefits And Coverage Page Redesign")){
 	        return new BenefitsAndCoveragePage(driver);
 		}
