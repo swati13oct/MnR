@@ -73,7 +73,7 @@ public class ResponsiveUhcStepDefiniton {
 	                     .getBean(VPPCommonConstants.VPP_PLAN_SUMMARY_ACTUAL);
 	       JSONObject planSummaryExpectedJson = (JSONObject) getLoginScenario()
 	                     .getBean(VPPCommonConstants.VPP_PLAN_SUMMARY_EXPECTED);
-	       /*try {
+	      /* try {
 	              JSONAssert.assertEquals(planSummaryExpectedJson,
 	                           planSummaryActualJson, true);
 	       } catch (JSONException e) {
@@ -85,7 +85,7 @@ public class ResponsiveUhcStepDefiniton {
 	@Then("^the user navigates to the following plan type$")
 	public void planType_details_in_aarp_site(DataTable givenAttributes) {
 
-	/*	List<DataTableRow> memberAttributesRow = givenAttributes
+	List<DataTableRow> memberAttributesRow = givenAttributes
 				.getGherkinRows();
 		Map<String, String> memberAttributesMap = new HashMap<String, String>();
 		for (int i = 0; i < memberAttributesRow.size(); i++) {
@@ -106,7 +106,7 @@ public class ResponsiveUhcStepDefiniton {
 			getLoginScenario().saveBean(PageConstants.RESPONSIVE_PLAN_SUMMARY_PAGE_UHC, vppPlan);
 		}else{
 			Assert.fail();
-		}*/
+		}
 	}
 	
 	
@@ -204,5 +204,20 @@ public class ResponsiveUhcStepDefiniton {
            getLoginScenario().saveBean(VPPCommonConstants.PLAN_TYPE, planName);
           planSummary.navigateToRallyPage(planName);
     }
+    @And("^the user validate the Blue banner and plan year toggle$")
+    public void user_validate_blueBanner_planToggle(DataTable givenAttributes){
+    	 ResponsivePlanSummaryUhc planSummary = (ResponsivePlanSummaryUhc) getLoginScenario().getBean(PageConstants.RESPONSIVE_PLAN_SUMMARY_PAGE_UHC);
+         List<DataTableRow> memberAttributesRow = givenAttributes
+                       .getGherkinRows();
+          Map<String, String> memberAttributesMap = new HashMap<String, String>();
+          for (int i = 0; i < memberAttributesRow.size(); i++) {
 
+                 memberAttributesMap.put(memberAttributesRow.get(i).getCells()
+                              .get(0), memberAttributesRow.get(i).getCells().get(1));
+          }
+          String timePeriod = memberAttributesMap.get("Current Period");
+           String currentYear = memberAttributesMap.get("CurrentYear");
+          String futureYear = memberAttributesMap.get("FutureYear");
+          planSummary.validateBlueBanner(timePeriod, currentYear, futureYear);
+    }
 }

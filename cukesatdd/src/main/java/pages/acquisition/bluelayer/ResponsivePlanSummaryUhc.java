@@ -237,6 +237,15 @@ public class ResponsivePlanSummaryUhc extends UhcDriver{
 			
 			@FindBy(xpath="//a[contains(text(),'Is my provider covered in my ZIP code/county?')]")
             private WebElement providerSearchLink;
+			
+			@FindBy(xpath="//*[contains(text(),'Want to enroll')]")
+            private WebElement blueBannerText;
+
+			@FindBy(xpath="//a[@class='ng-binding']")
+            private WebElement planYearToggle;
+			
+			@FindBy(xpath="//div[4]/div/div[1]/div/div/h2")
+            private WebElement viewPlanHeader;
 
 			
 		@FindBy	(xpath="//span[@class='remove-plan-text show']/p")
@@ -1085,6 +1094,30 @@ public void comparePlanslnk(){
                            return null;
                     }
 
-				
+				public ResponsivePlanSummaryUhc validateBlueBanner(String timePeriod, String currentYear, String futureYear){
+					if(timePeriod.equalsIgnoreCase("AEP")){
+						System.out.println("User is in AEP");
+						if(blueBannerText.getText().contains(futureYear)) {
+							if(viewPlanHeader.getText().contains(futureYear)){
+								System.out.println(futureYear + " Plans Displayed correctly"); 
+							}else{
+								System.out.println(futureYear + " Plans Not Displayed correctly");
+								Assert.fail();
+							}	
+							planYearToggle.click();				
+							if(viewPlanHeader.getText().contains(currentYear)){
+								System.out.println(currentYear + " Plans Displayed correctly"); 
+							}else{
+								System.out.println(currentYear + " Plans Not Displayed correctly");
+								Assert.fail();
+							}				
+						}
+						return new ResponsivePlanSummaryUhc(driver);
+					}else if(timePeriod.equalsIgnoreCase("nonAEP")){
+						System.out.println("User is in non AEP period");
+						return new ResponsivePlanSummaryUhc(driver); 
+					}
+					return null;
+				}
 				}
 			 
