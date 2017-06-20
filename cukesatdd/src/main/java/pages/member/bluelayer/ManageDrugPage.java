@@ -54,6 +54,21 @@ public class ManageDrugPage extends UhcDriver {
 	@FindBy(id = "disclosure_link")
 	private WebElement logOut;
 	
+	@FindBy(xpath = ".//*[@id='dce.member']/div/div[4]/div/div/div[1]/div[1]/div[3]")
+	private WebElement viewDrugCostTab;
+	
+	@FindBy(xpath = ".//*[@id='dce.member']/div/div[4]/div/div/div[1]/div[1]/div[1]")
+	private WebElement drugListTab;
+	
+	@FindBy(xpath = ".//*[@id='dceMemberUlayer']/div/div[1]/div[2]/div[4]/div")
+	private WebElement drugListBox; //box where all the added drugs will show 
+	
+	@FindBy(xpath = ".//*[@id='dceMemberUlayer']/div/div[1]/div[2]/div[4]/div/div[1]/div[5]/a")
+	private WebElement editDrugLink;
+	
+	@FindBy(xpath = ".//*[@id='dceMemberUlayer']/div/div[1]/div[2]/div[4]/div/div[1]/div[6]/a")
+	private WebElement deleteDrugLink;
+	
 	private PageData manageDrug;
 
 	public JSONObject manageDrugJson;
@@ -77,11 +92,6 @@ public class ManageDrugPage extends UhcDriver {
 
 		openAndValidate();
 	}
-
-	
-
-	
-
 	
 	public void deleteDrugs() {
 		if (deleteLink.isEnabled()) {
@@ -234,6 +244,66 @@ public class ManageDrugPage extends UhcDriver {
 		manageDrugExpectedJson = CommonUtility.mergeJson(
 				manageDrugExpectedJson, globalExpectedJson);
 		return manageDrugExpectedJson;
+	}
+	
+	public AddDrugPage searchDrug(String drugInitials, String category) {
+		addDrugLink.click();
+		sendkeys(drugName, drugInitials);
+		try {
+			Thread.sleep(5000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		if (drugDropDownList.isDisplayed() && category.equalsIgnoreCase(CommonConstants.GROUP)) {
+			return new AddDrugPage(driver,category);
+		} else if (drugDropDownList.isDisplayed()) {
+			return new AddDrugPage(driver);
+		}
+			return null;
+
+	}
+	public SelectPharmacyPage navigateToPharmacyPage(String category) {
+
+		searchPharmacyTab.click();
+		try {
+			Thread.sleep(5000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		if (pharmacyHeading.getText().contains("select a pharmacy") && category.equalsIgnoreCase(CommonConstants.GROUP)) {
+			return new SelectPharmacyPage(driver,category);
+		}
+		else if(pharmacyHeading.getText().contains("select a pharmacy"))
+		{
+			return new SelectPharmacyPage(driver);
+		}
+		return null;
+
+	}
+	public boolean validateDrugListSection(){
+		boolean flag = false;
+		try {
+			Thread.sleep(4000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		for(int i=1; i<=3; i++){                               
+			WebElement tabElement= driver.findElement(By.xpath(".//*[@id='dce.member']/div/div[4]/div/div/div[1]/div[1]/div["+i+"]"));
+			System.out.println("Element "+i+": "+tabElement.getText());
+		}
+		if(validate(addDrugLink)&&validate(viewDrugCostTab)&&validate(searchPharmacyTab)&&validate(drugListTab))
+			flag = true;
+		return flag;
+	}
+	
+	public boolean validateDrugAdded(){
+		if(validate(drugListBox)&&validate(editDrugLink)&&validate(deleteDrugLink))
+			return true;
+		else
+			return false;
 	}
 
 }

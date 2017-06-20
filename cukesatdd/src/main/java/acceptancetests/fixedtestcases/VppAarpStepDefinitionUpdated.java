@@ -87,7 +87,7 @@ public class VppAarpStepDefinitionUpdated {
 
 		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
-		if (plansummaryPage.validatePlansNumber()) {
+		if (plansummaryPage.validateVPPPlanSummaryPage()) {
 			Assert.assertTrue(true);
 		} else {
 			Assert.fail("Error validating plans in  VPP plan summary page");

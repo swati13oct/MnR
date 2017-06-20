@@ -204,10 +204,10 @@ public class AccountHomePage extends UhcDriver {
 	}
 	
 
-	public EstimateYourDrugCostPage navigateToDrugLookup() {		
+	public ManageDrugPage navigateToDrugLookup() {		
 		drugLookupLink.click();
 		if (driver.getTitle().equalsIgnoreCase("Drug Lookup")) {
-			return new EstimateYourDrugCostPage(driver);
+			return new ManageDrugPage(driver);
 		} else
 
 			return null;
@@ -674,13 +674,13 @@ public class AccountHomePage extends UhcDriver {
 
 	}
 
-
-
 	public boolean validateAccountHome(){
 		boolean flag = false;
 		if(validate(homePageContent)&&validate(logOut)&&validate(myResourcesContent)&&validate(drugLookupBox)&&validate(drugLookupBtn))
 			flag = true;
 		return flag;
 	}
+	
+	
 
 }

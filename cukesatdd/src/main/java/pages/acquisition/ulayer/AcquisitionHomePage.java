@@ -156,8 +156,8 @@ public class AcquisitionHomePage extends GlobalWebElements {
 
 	@FindBy(xpath = "//div[@id='insuranceplan_nav']/div/div[3]/ul/li/a/span")
 	private WebElement pdpVppLink;
-
-	@FindBy(xpath = "//div[@id='subnav_2']/div/div/div/div/div[2]/p[2]/a/span")
+	                 
+	@FindBy(xpath = ".//*[@id='subnav_2']/div/div/div[1]/div[1]/div[2]/p[2]/a/span")
 	private WebElement pdp_moreHelpInfoLink;
 
 	@FindBy(xpath = "//div[@id='subnav_2']/div/div/div/div/div[1]/p[2]/a/span")
@@ -974,7 +974,45 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		return null;
 
 	}
+	public PDPRequestHelpAndInformationPage navigateToPDPMoreHelpAndInfo() {
 
+		Actions actions = new Actions(driver);
+		actions.moveToElement(ourPlansHoverLink);
+		actions.moveToElement(pdp_moreHelpInfoLink);
+		actions.click().build().perform();
+		if (currentUrl().contains("prescription-drug-plans/request-information.html")) {
+			return new PDPRequestHelpAndInformationPage(driver);
+		}
+
+		return null;
+
+	}
+	public RequestHelpAndInformationPage navigateToMaMoreHelpAndInfo() {
+
+		Actions actions = new Actions(driver);
+		actions.moveToElement(ourPlansHoverLink);
+		actions.moveToElement(ma_moreHelpInfoLink);
+		actions.click().build().perform();
+
+		try {
+			if (zipCodeField.isDisplayed()) {
+				CommonUtility.waitForElementToDisappear(driver, zipCodeField,
+						20);
+			}
+		} catch (NoSuchElementException e) {
+			System.out.println("zipCodeField not found");
+		} catch (TimeoutException ex) {
+			System.out.println("zipCodeField not found");
+		} catch (Exception e) {
+			System.out.println("zipCodeField not found");
+		}
+		if (currentUrl().contains(
+				"medicare-advantage-plans/request-information.html")) {
+			return new RequestHelpAndInformationPage(driver);
+		}
+
+		return null;
+	}
 
 
 }

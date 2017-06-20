@@ -218,7 +218,9 @@ public class PharmacyLocatorMemberAarpStepDefinition {
 				PharmacySearchCommonConstants.PLAN_NAME);
 		String language = (String) getLoginScenario().getBean(
 				PharmacySearchCommonConstants.LANGUAGE);
-		if(pharmacyResultPage.validatelanguageSpecificPharmacyResultpage(pharmacyResultActualJson,zipcode,planName,language)){
+		
+		//if(pharmacyResultPage.validatelanguageSpecificPharmacyResultpage(pharmacyResultActualJson,zipcode,planName,language)){
+		if(pharmacyResultPage.validatePharmacyResultpage()){
 			Assert.assertTrue(true);
 		} else {
 			Assert.fail("Error in validating Pharmacy Results page ");

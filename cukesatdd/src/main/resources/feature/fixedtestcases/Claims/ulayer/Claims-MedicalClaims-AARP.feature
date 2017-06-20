@@ -1,4 +1,4 @@
-@fixedTestCaseTest_work_in_progress
+@fixedTestCaseTest
 @claims
 Feature:To test the medical claims summary and details flow in AARP site
 @medClaimsUlayer
@@ -16,4 +16,4 @@ Then user validates the medical claims displayed based on the selection in AARP 
 And user views the claim details for the first medical claim in AARP site and validates
 Examples:
 	| planType | claimType | claimPeriod    |
-	| MAPD       | Nice_med      | Last 24 Months |
+	| MAPD       | Nice_med     | Last 24 Months |
