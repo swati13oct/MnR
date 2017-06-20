@@ -353,7 +353,7 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 		langdropdwn.selectByVisibleText(language);
 	}	
 
-}
+
 public void vasSection() {
 
 		try {
@@ -380,3 +380,4 @@ public void vasSection() {
 			}
             return null;
 		}
+}
