@@ -126,19 +126,23 @@ public class ResponsivePlanSummary extends UhcDriver{
 		    @FindBy(xpath="(//*[text()='Compare plans'])[8]")
 		    private WebElement comparePlans;
 		    
-		    @FindBy(xpath="(.//*[text()='View details'])[1]")
+		   // @FindBy(xpath="(.//*[text()='View details'])[1]")
+		    @FindBy(xpath=".//*[@id='topRowCopy']/div/div[1]/div/a[1]")
 		    private WebElement viewDetails;
 		    
 			@FindBy(xpath=".//*[text()='Back to all plans']")
 			private WebElement backtoallPlans;
 		    
-		    @FindBy(xpath="(.//*[@class='remove-button'])[1]")
+		   // @FindBy(xpath="(.//*[@class='remove-button'])[1]")
+		    @FindBy(xpath=".//*[@id='topRowCopy']/div/div[1]/span")
 		    private WebElement removePlanlnk;
 		    
-		    @FindBy(xpath="(.//*[@class='remove-button'])[2]")
+		    //@FindBy(xpath="(.//*[@class='remove-button'])[2]")
+		    @FindBy(xpath=".//*[@id='topRowCopy']/div/div[3]/span")
 		    private WebElement removePlanlnk1;
 		    
-		    @FindBy(xpath=".//*[@id='fixTable']/tbody/tr[24]/td/p")
+		    //@FindBy(xpath=".//*[@id='fixTable']/tbody/tr[24]/td/p")
+		    @FindBy(xpath=".//*[@id='fixTable']/tbody/tr[33]/td/p")
 		    private WebElement footNote;
 		    
 		    @FindBy(xpath=".//*[@class='parbase planscompare section']/div[2]")
@@ -150,10 +154,12 @@ public class ResponsivePlanSummary extends UhcDriver{
 		    
 //Medical Benefits
 		    
-		    @FindBy (xpath=".//*[@id='fixTable']/tbody/tr[2]/td[2]")
+		    //@FindBy (xpath=".//*[@id='fixTable']/tbody/tr[2]/td[2]")
+		    @FindBy (xpath=".//*[@id='fixTable']/tbody/tr[2]/td[2]/div")
 		    private WebElement monthlypremium1;
 		    
-		    @FindBy (xpath= ".//*[@id='fixTable']/tbody/tr[2]/td[4]")
+		   //@FindBy (xpath= ".//*[@id='fixTable']/tbody/tr[2]/td[4]")
+		    @FindBy(xpath= ".//*[@id='fixTable']/tbody/tr[2]/td[4]/div")
 		    private WebElement monthlypremium2;
 		    
 		    @FindBy (xpath= ".//*[@id='fixTable']/tbody/tr[3]/td[1]/p")
