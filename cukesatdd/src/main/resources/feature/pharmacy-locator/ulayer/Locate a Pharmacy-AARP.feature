@@ -143,4 +143,17 @@ Then the user validate google map colcor for pharmacy and standard network in AA
 Examples:
 	| zipcode     | distance  | planName 			                 	  							|			 
 	| 80002       | 15        | AARP MedicareComplete SecureHorizons Plan 1 (HMO) |
+	
+@plmapd
+Scenario Outline: To verify pharmacy locator zipcode entry in AARP site
+Given the user is on the AARP Medicare Site landing page
+When the user navigates to pharmacy search page for plan type MAPD in AARP Site
+Then the user click on pharmacy locater link in AARP site
+
+@plpdp
+Scenario Outline: To verify pharmacy locator zipcode entry in AARP site
+Given the user is on the AARP Medicare Site landing page
+When the user navigates to pharmacy search page for plan type PDP in AARP Site
+Then the user click on pharmacy locater link in AARP site
+
 

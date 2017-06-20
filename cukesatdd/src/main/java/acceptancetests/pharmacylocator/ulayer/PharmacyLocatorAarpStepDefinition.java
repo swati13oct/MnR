@@ -305,5 +305,34 @@ public class PharmacyLocatorAarpStepDefinition {
 		
 	}
 	
+	@When("^the user navigates to pharmacy search page for plan type MAPD in AARP Site$")
+    public void user_views_pharmacy_search_mapd_AARP() {
+           PharmacySearchPage pharmacySearchPage = (PharmacySearchPage) getLoginScenario()
+                        .getBean(PageConstants.PHARMACY_SEARCH_PAGE);
+           PharmacyResultPage pharmacyResultPage = pharmacySearchPage
+                        .ValidateSearchResultMapd();
+           
+    }
+
+    @Then("^the user click on pharmacy locater link in AARP site$")
+    public void user_views_pharmacy_locater_page_AARP() {
+           PharmacySearchPage pharmacySearchPage = (PharmacySearchPage) getLoginScenario()
+                        .getBean(PageConstants.PHARMACY_SEARCH_PAGE);
+           PharmacyResultPage pharmacyResultPage = pharmacySearchPage
+                        .ValidatePharmacyLocaterPage();
+           
+    }
+    
+    @When("^the user navigates to pharmacy search page for plan type PDP in AARP Site$")
+    public void user_views_pharmacy_search_pdp_AARP() {
+           PharmacySearchPage pharmacySearchPage = (PharmacySearchPage) getLoginScenario()
+                        .getBean(PageConstants.PHARMACY_SEARCH_PAGE);
+           PharmacyResultPage pharmacyResultPage = pharmacySearchPage
+                        .ValidateSearchResultpdp();
+           
+    }
+
+
+	
 	
 }

@@ -86,6 +86,10 @@ public class PharmacySearchPage extends UhcDriver {
 	
 	@FindBy(xpath = "//*[contains(text(),'VIEW RESULTS AS PDF')]")
 	private WebElement viewsearchpdf;
+	
+	@FindBy(xpath = "(.//*[@id='subPageRight']/div[2]/div[2]/ul/li[3]/a")
+    private WebElement pharmacyloc;
+
 
 	public PharmacySearchPage(WebDriver driver) {
 		super(driver);
@@ -226,6 +230,22 @@ public class PharmacySearchPage extends UhcDriver {
 		}
 		return null;
 	}
+	
+	public PharmacyResultPage ValidateSearchResultMapd() {
+        driver.navigate().to("https://www.aarpmedicareplans.com/health-plans/medicare-advantage-plans/medicare-enrollment.html");
+        return null;
+ }
+
+	public PharmacyResultPage ValidatePharmacyLocaterPage() {
+        pharmacyloc.click();
+        return null;
+ }
+
+	public PharmacyResultPage ValidateSearchResultpdp() {
+        driver.navigate().to("https://www.aarpmedicareplans.com/health-plans/prescription-drug-plans/medicare-application.html");
+        return null;
+ }
+
 	
 	
 
