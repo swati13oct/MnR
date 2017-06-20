@@ -38,9 +38,9 @@
         <forkCount>5</forkCount>
         <reuseForks>true</reuseForks>
         <includes>
-             <!-- <include>**/RunMRATddTestResponsiveVPP.java</include>  -->
-            <!--  <include>**/RunMRATDDTestRunnerSrint2.java</include> 
-            <include>**/RunMRATDDTestRunnerSrint3.java</include> -->
+              <include>**//RunMRATDDTestRunnerSrint1.java</include> 
+            <include>**/RunMRATDDTestRunnerSrint2.java</include> 
+        <!--   <include>**/RunMRATDDTestRunnerSrint3.java</include> -->
            <!--  <include>**/RunMRATDDTestRunnerSrint4.java</include> -->
           <!--  <include>**/RunMRATDDTestRunnerSrint5.java</include>  -->
         </includes>       
