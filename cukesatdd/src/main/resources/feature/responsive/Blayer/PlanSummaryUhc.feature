@@ -85,4 +85,21 @@ Then the user click on Is my Provider Covered link of SNP plans and validate Ral
 Examples:
 |zipCode|  county         | planType  | planName                   |
 |02210  | Suffolk County  | SNP        |UnitedHealthcare Senior Care Options (HMO SNP)|
+
+
+@planYearToggle
+Scenario Outline: To validate plan count from portfolio page
+Given the user is on the vpp portfolio page
+Then the user performs plan search using zipcode
+              | Zip Code |<zipCode>|
+              | County   |<county> |
+Then the user navigates to the following plan type
+| PlanType | <planType> |
+And the user validate the Blue banner and plan year toggle
+|Current Period |<curentPeriod>|
+|CurrentYear|<currentYear>|
+|FutureYear |<futureYear>|
+Examples:
+|zipCode|  county         | planType   | planName                                     | curentPeriod | currentYear | futureYear |
+|02210  | Suffolk County  | SNP        |UnitedHealthcare Senior Care Options (HMO SNP)| AEP        | 2016        | 2017       |
 		
