@@ -5,6 +5,8 @@ package pages.acquisition.ulayer;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
+import java.util.concurrent.TimeUnit;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -151,8 +153,6 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	@FindBy(xpath="//div[@data-ng-repeat='plan in maplans'][1]//div[contains(@id,'showcompare')][1]/div[@class='compareHeading']/p[2]")
 	private WebElement comparePopUpTxt2;
 
-
-		
 	@FindBy(xpath=".//div[@id='pdpplans_container']/div[3]/div[1]/div/div/div[2]/div/div[1]/div[3]/div/div/span[2]/a")
 	private WebElement PDPEnrolllink;
 
@@ -163,8 +163,47 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	@FindBy (xpath=".//*[@id='next']")
 	private WebElement stayOnthisPopup;
 	
+	@FindBy(xpath="//*[@id='site-wrapper']/div[4]/div/div[1]/div/div/div/div/div[1]/div/div/div[1]/div[2]/div/div[2]/div[1]/div/span[3]")
+	private WebElement viewMAPlansC;
+	
+	
+	@FindBy(xpath=".//*[@class='action-btn getStarted']")
+	private WebElement GetStarted;
+
+	
+
+	@FindBy(xpath=".//*[@class='img' and @src='/images/guidedSearch/gs_icn_pro_healthcarepro.svg']")
+	private WebElement People;
+
+
+	
+	@FindBy(xpath=".//*[@class='img' and @src='/images/guidedSearch/gs_icn_pro_primarycarephysicians.svg']")
+	private WebElement Primary;
+
+	@FindBy(xpath="//*[contains(text(),'Primary Care Physician (PCP')] ")
+	private WebElement Physician;
+
+	@FindBy(xpath=".//*[contains(@ng-bind-html,'buttonText')  and contains(text(),'Save')]")
+	private WebElement Savebtn;
+
+	
+
+	@FindBy(xpath="//*[@class='action-btn lt']")
+	private WebElement Viewsavebtn;
+
+	@FindBy(xpath=".//*[@class='action-btn negative' and @type='submit']")
+	private WebElement Checkcoverage;
+	
+	@FindBy(xpath="//p/span[@class='ng-binding']")
+	private WebElement provider;
+	
+	@FindBy(xpath = ".//*[@class='swiper-container']")
+	List<WebElement> maPlanElement1;
+	
 	@FindBy(name = "emailWidgetForm")
 	private WebElement emailWidgetForm;
+	
+	
 
 	private PageData vppPlanSummary;
 
@@ -316,6 +355,111 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		}
 		return new VPPPlanSummaryPage(driver, planType);
 	}
+	
+	public VPPPlanSummaryPage viewPlanSummaryButton(String planType) {
+		if (planType.equalsIgnoreCase("PDP")) {
+			showPdpPlans.click();
+			validate(hidePdpPlans);
+		} else if (planType.equalsIgnoreCase("MA")
+				|| planType.equalsIgnoreCase("MAPD")) {
+			//showMaPlans.click();
+			//viewMAPlans.click();
+			viewMAPlansC.click();
+			validate(hideMaPlans);
+		} else if (planType.equalsIgnoreCase("MS")) {
+			showMsPlans.click();
+		}
+		return new VPPPlanSummaryPage(driver, planType);
+	}
+	
+	public VPPPlanSummaryPage clicksOnIsProviderCovered(String planName) {
+		if (planName.contains("HMO")) {
+			driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+			for (WebElement plan : maPlanElement1) {
+				if (plan.getText().contains(planName)) {
+					//ElementData elementData = new ElementData("id",
+						//	"doctorCoverMA");
+
+					ElementData elementData = new ElementData("xpath",
+						
+"//*[contains(text(),'Is my provider covered in my ZIP code/county')]");
+//driver.findElement(By.xpath("//*[contains(text(),'Is my provider covered in my ZIP code/county')]")).click();
+					driver.findElement(By.xpath("//*[@id='plan-list-1']/div/div[2]/div/div[1]/div[2]/div/div[1]/div[1]/a")).click();
+
+					//findChildElement(elementData, plan).click();
+					
+				}
+			}
+		}
+		
+		String mainwindow=driver.getWindowHandle();
+
+		Set<String> allWindowHandles = driver.getWindowHandles();
+		for (String currentWindowHandle : allWindowHandles) {
+
+
+			if (!currentWindowHandle.equals(mainwindow)) {
+				driver.switchTo().window(currentWindowHandle);
+
+
+			}
+		}
+
+		driver.manage().window().maximize();
+		waitforElement(GetStarted);
+		GetStarted.click();
+
+		waitforElement( People);
+
+		People.click();
+
+		waitforElement(Primary);
+
+		Primary.click();
+
+		waitforElement(Physician);
+
+		Physician.click();
+
+		waitforElement(Savebtn);
+		try {
+			Thread.sleep(5000);
+		} catch (InterruptedException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+
+		Savebtn.click();
+		waitforElement(Viewsavebtn);
+
+		Viewsavebtn.click();
+		try {
+			Thread.sleep(5000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		waitforElement(Checkcoverage);
+		CommonUtility.waitForPageLoad(driver, Checkcoverage, 10);
+		Checkcoverage.click();
+		driver.switchTo().window(mainwindow);
+
+		
+		return new VPPPlanSummaryPage(driver);
+	}
+	
+	public boolean providerinfo()
+	{
+		String providerinfo=provider.getText();
+		if(providerinfo.contains("1 providers covered"))
+		{
+			return true;
+		}
+		return false;
+	}
+	
+   
+	
 	
 	
 	public boolean selectPlanType(String planType) {
