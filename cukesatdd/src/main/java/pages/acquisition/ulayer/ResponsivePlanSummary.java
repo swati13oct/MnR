@@ -395,22 +395,26 @@ public void selectAddToCompareCheckboxes()  {
 
 
 
-public void viewdetailslnk(){
+public void viewdetailslnk() throws InterruptedException{
+	Thread.sleep(3000);
 	viewDetails.click();
 	validate(viewDetails);
 	
 }
 
-public void removePlanlnk(){
+public void removePlanlnk() throws InterruptedException{
+	Thread.sleep(3000);
 	removePlanlnk.click();
 	validate(removePlanlnk);
 }
 
-public void removePlanlnk1(){
+public void removePlanlnk1() throws InterruptedException{
+	Thread.sleep(3000);
 	removePlanlnk1.click();
 }
 
-public void footNoteSection(){
+public void footNoteSection() throws InterruptedException{
+	Thread.sleep(3000);
 	String txt = footNote.getText();
 	System.out.println(txt);
 }

@@ -302,12 +302,12 @@ public class ResponsiveStepDefiniton {
 	public void the_user_click_compare_plans_to_compare(){
 		ResponsivePlanSummary planSummary = (ResponsivePlanSummary) getLoginScenario()
 				.getBean(PageConstants.RESPONSIVE_PLAN_SUMMARY_PAGE);
-	//	planSummary.comparePlanslnk();
+	         planSummary.comparePlanslnk();
 		
 	}
 	
 	@And("^the user click plan view details link on compare in AARP site")
-	public void the_user_click_plan_viewdetails_link(){
+	public void the_user_click_plan_viewdetails_link() throws InterruptedException{
 		ResponsivePlanSummary planSummary = (ResponsivePlanSummary) getLoginScenario()
 				.getBean(PageConstants.RESPONSIVE_PLAN_SUMMARY_PAGE);
 		planSummary.viewdetailslnk();
@@ -315,7 +315,7 @@ public class ResponsiveStepDefiniton {
 	}
 	
 	@And("^the user remove plan link on compare page in AARP site")
-	public void the_user_remove_plan_link(){
+	public void the_user_remove_plan_link() throws InterruptedException{
 		ResponsivePlanSummary planSummary = (ResponsivePlanSummary) getLoginScenario()
 				.getBean(PageConstants.RESPONSIVE_PLAN_SUMMARY_PAGE);
 		planSummary.removePlanlnk();
@@ -324,7 +324,7 @@ public class ResponsiveStepDefiniton {
 	}
 	
 	@And("^the user verify footnote section on compare page")
-	public void the_user_verify_footnotes_section_on_compare_page(){
+	public void the_user_verify_footnotes_section_on_compare_page() throws InterruptedException{
 		ResponsivePlanSummary planSummary = (ResponsivePlanSummary) getLoginScenario()
 				.getBean(PageConstants.RESPONSIVE_PLAN_SUMMARY_PAGE);
 		planSummary.footNoteSection();

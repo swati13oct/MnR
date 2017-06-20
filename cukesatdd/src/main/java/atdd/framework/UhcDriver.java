@@ -103,6 +103,7 @@ public abstract class UhcDriver {
 
 	public boolean validate(WebElement element) {
 		try {
+			Thread.sleep(3000);
 		//	this.waitforElement(element);
 			if (element.isDisplayed()) {
 				System.out.println("Element found!!!!");
