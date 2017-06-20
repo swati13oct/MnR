@@ -1,4 +1,5 @@
 @fixedTestCaseTest
+@AcqProviderSearchUlayer
 Feature: To test Provider Search Flow  in AARP site
 Scenario Outline: Verify Provider Search  in AARP site
 Given the user is on AARP Ulayer medicare acquisition site landing page
