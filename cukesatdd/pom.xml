@@ -28,7 +28,7 @@
 		</resources>
 
 		<plugins>
-			<plugin>
+		<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
 				<version>3.5.1</version>
@@ -58,27 +58,15 @@
 					</dependency>
 				</dependencies>
 				<configuration>
-					<forkCount>10</forkCount>
+					<forkCount>20</forkCount>
 					<reuseForks>true</reuseForks>
+					<testSourceDirectory>${basedir}/src/main/java/</testSourceDirectory>
+					<testClassesDirectory>${project.build.directory}/classes/</testClassesDirectory>
 					<argLine>-Xmx512m -XX:MaxPermSize=512m</argLine>
 					<systemPropertyVariables>
 						<environment>${environment}</environment>
 						<webdriverhost>${webdriverhost}</webdriverhost>
 					</systemPropertyVariables>
-					<includes>
-						<include>**/RunMRATDDFixedTests1.java</include>
-						<include>**/RunMRATDDFixedTests2.java</include>
-						<include>**/RunMRATDDFixedTests3.java</include>
-						<include>**/RunMRATDDFixedTests4.java</include>
-						<include>**/RunMRATDDFixedTests5.java</include>
-						<include>**/RunMRATDDFixedTests6.java</include>
-						<include>**/RunMRATDDFixedTests7.java</include>
-						<include>**/RunMRATDDFixedTests8.java</include>
-						<include>**/RunMRATDDFixedTests9.java</include>
-						<include>**/RunMRATDDFixedTests10.java</include>
-					</includes>
-					<testSourceDirectory>${basedir}/src/main/java/</testSourceDirectory>
-					<testClassesDirectory>${project.build.directory}/classes/</testClassesDirectory>
 				</configuration>
 				<executions>
 					<execution>
@@ -300,6 +288,12 @@
 			<groupId>org.skyscreamer</groupId>
 			<artifactId>jsonassert</artifactId>
 			<version>1.2.3</version>
+		</dependency>
+
+		<dependency>
+		    <groupId>com.googlecode.json-simple</groupId>
+		    <artifactId>json-simple</artifactId>
+		    <version>1.1</version>
 		</dependency>
 
 		<dependency>
