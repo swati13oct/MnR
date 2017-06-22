@@ -380,11 +380,12 @@ public class VPPPlanSummaryPage extends UhcDriver {
 					//ElementData elementData = new ElementData("id",
 						//	"doctorCoverMA");
 
-					ElementData elementData = new ElementData("xpath",
+					//ElementData elementData = new ElementData("xpath",
 						
-"//*[contains(text(),'Is my provider covered in my ZIP code/county')]");
-//driver.findElement(By.xpath("//*[contains(text(),'Is my provider covered in my ZIP code/county')]")).click();
-					driver.findElement(By.xpath("//*[@id='plan-list-1']/div/div[2]/div/div[1]/div[2]/div/div[1]/div[1]/a")).click();
+//"//*[contains(text(),'Is my provider covered in my ZIP code/county')]");
+					driver.findElement(By.xpath("//*[contains(text(),'Is my provider covered ')]")).click();
+
+					//driver.findElement(By.xpath("//*[@id='plan-list-1']/div/div[2]/div/div[1]/div[2]/div/div[1]/div[1]/a")).click();
 
 					//findChildElement(elementData, plan).click();
 					
