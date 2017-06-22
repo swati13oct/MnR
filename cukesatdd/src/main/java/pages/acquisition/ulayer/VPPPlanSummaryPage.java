@@ -163,9 +163,13 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	@FindBy (xpath=".//*[@id='next']")
 	private WebElement stayOnthisPopup;
 	
-	@FindBy(xpath="//*[@id='site-wrapper']/div[4]/div/div[1]/div/div/div/div/div[1]/div/div/div[1]/div[2]/div/div[2]/div[1]/div/span[3]")
+	
+	
+	
+	@FindBy(xpath="//div[@class='tab-contents']/span[contains(text(),'Medicare Advantage Plans')]/following-sibling::span[text()='View Plans'][2]")
 	private WebElement viewMAPlansC;
 	
+
 	
 	@FindBy(xpath=".//*[@class='action-btn getStarted']")
 	private WebElement GetStarted;
@@ -406,7 +410,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 			}
 		}
 
-		driver.manage().window().maximize();
+		//driver.manage().window().maximize();
 		waitforElement(GetStarted);
 		GetStarted.click();
 
