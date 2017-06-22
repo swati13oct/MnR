@@ -14,7 +14,13 @@ Feature: To test registration flow in redesign portal
 
     Examples: 
       | Plantype           | planMemberId | dateOfBirth | planname                                             |
-      | MAPD COSMOS        | 006916255    | 08-13-1931  | Sharp SecureHorizons Plan by UnitedHealthcare (HMO)  |
+      | MAPD COSMOS        | 935442812    | 03-03-1952  | UnitedHealthcare MedicareComplete Plan 1 (HMO)       |
+      | MA NICE            | 001605069    | 09-06-1935  | AARP MedicareComplete SecureHorizons Essential (HMO) |
+      | MA COSMOS          | 944089527    | 09-16-1945  | AARP MedicareComplete Essential (HMO)                |
+      | MAPD NICE          | 006916255    | 08-13-1931  | Sharp SecureHorizons Plan by UnitedHealthcare (HMO)  |
+      | PDP                | 0018651611   | 05-20-1935  | AARP MedicareRx Preferred (PDP)                      |
+      | PCP                | 949291584    | 02-17-1952  | Preferred Choice Palm Beach (HMO)                    |
+      | MEDICA             | 954480470    | 03-01-1952  | Medica HealthCare Plans MedicareMax (HMO)            |
       | SHIP/MED SUPP      | 365348555-11 | 03-01-1949  | AARP MEDICARE SUPPLEMENT PLAN                        |
       | 50-64              | 375682722-11 | 03-01-1964  | AARP PERSONAL HEALTH INSURANCE COMPREHENSIVE PLAN    |
       | SHIP MedSupp + PDP | 1011277011   | 05-13-1929  | AARP MedicareRx Saver Plus (PDP)                     |
@@ -25,6 +31,13 @@ Feature: To test registration flow in redesign portal
       | SHIP 50-64 + MAPD  | 006969409-11 | 03-16-1953  | AARP GROUP HOSPITAL PLAN                             |
       | SHIP 50-64 + PDP   | 1012231271   | 10-28-1942  | AARP MedicareRx Preferred (PDP)                      |
       | SHIP 50-64 + PDP   | 101223127-11 | 10-28-1942  | AARP GROUP HOSPITAL PLAN                             |
+      | Group MAPD NICE    | 007399823    | 05-18-1946  | UnitedHealthcare Group Medicare Advantage (HMO)      |
+      | Group MAPD COSMOS  | 927159089    | 06-21-1923  | UnitedHealthcare Group Medicare Advantage (PPO)      |
+      | Group MA COSMOS    | 968438341    | 01-04-1918  | UnitedHealthcare Group Medicare Advantage (PPO)      |
+      | Group MA NICE      | 004145183    | 01-20-1923  | UnitedHealthcare Group Medicare Advantage (HMO)      |
+      | Group SSUP         | 975499851    | 11-12-1930  | UnitedHealthcare Senior Supplement                   |
+      | Group SSRD         | 915897367    | 10-13-1946  | UnitedHealthcare Senior Supplement                   |
+      | Group PDP          | 0130686931   | 03-12-1948  | UnitedHealthcare MedicareRx for Groups (PDP)         |
 
   Scenario Outline: To verify registration Additional Information Section
     Given the member is on registration page of new portal part of redesign
@@ -107,15 +120,22 @@ Feature: To test registration flow in redesign portal
     Then the member validate future effective error message
 
     Examples: 
-      | Plantype      | planMemberId | dateOfBirth |
-      | MAPD NICE     | 008502739    | 02-02-1952  |
-      | MAPD COSMOS   | 957566851    | 03-26-1952  |
-      | MA COSMOS     | 976326464    | 02-20-1952  |
-      | MA NICE       | 008511769    | 05-09-1946  |
-      | Medica        | 927593325    | 02-09-1952  |
-      | PCP           | 953028092    | 02-21-1952  |
-      | PDP           | 0183275881   | 02-17-1950  |
-      | PDP Symphonix | 0184295991   | 10-25-1963  |
+      | Plantype          | planMemberId | dateOfBirth |
+      | MAPD NICE         | 008502739    | 02-02-1952  |
+      | MAPD COSMOS       | 957566851    | 03-26-1952  |
+      | MA COSMOS         | 976326464    | 02-20-1952  |
+      | MA NICE           | 008511769    | 05-09-1946  |
+      | Medica            | 927593325    | 02-09-1952  |
+      | PCP               | 953028092    | 02-21-1952  |
+      | PDP               | 0183275881   | 02-17-1950  |
+      | PDP Symphonix     | 0184295991   | 10-25-1963  |
+      | Group MAPD NICE   | 007922344    | 02-15-1941  |
+      | Group MAPD COSMOS | 864188443    | 04-13-1941  |
+      | Group MA COSMOS   | 927729952    | 12-27-1940  |
+      | Group MA NICE     | 004568181    | 11-27-1947  |
+      | Group SSUP        | 918226927    | 10-24-1951  |
+      | Group SSRD        | 968832852    | 09-17-1926  |
+      | Group PDP         | 0128086331   | 11-14-1947  |
 
   Scenario Outline: To verify registration member not found error page
     Given the member is on registration page of new portal part of redesign
