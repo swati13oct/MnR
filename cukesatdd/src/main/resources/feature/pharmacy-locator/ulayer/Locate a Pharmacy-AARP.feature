@@ -55,7 +55,7 @@ Examples:
 	| zipcode     | distance  | county            |			 
 	| 80002       | 15        | Adams County      |
 
-@language	
+@languageselection
 Scenario Outline: To verify pharmacy locator language in AARP site
 Given the user is on the AARP Medicare Site landing page
 When the user navigates to pharmacy search page in AARP Site

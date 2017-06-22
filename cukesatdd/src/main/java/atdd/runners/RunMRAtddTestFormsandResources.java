@@ -13,10 +13,10 @@ import cucumber.junit.Cucumber;
  */
 
 @RunWith(Cucumber.class)
-@Cucumber.Options(glue = { "atdd.framework","acceptancetests.formsandresources.ulayer" }, 
-		features = { "feature/forms-and-resources/ulayer" }, 
+@Cucumber.Options(glue = { "atdd.framework","acceptancetests.formsandresources.bluelayer" }, 
+		features = { "feature/forms-and-resources/bluelayer" }, 
 		format = {
-				"pretty", "html:reports/test-report","json:target/cucumber.json"}, tags ={"@drugtransistion,@privacypolicy,@appeals,@udrugtrasition,@memberright,@seasonalflu,@termofuse,@medicaltherapy,@pharmacymail,@disenrollment,@medicationtherapy,@coverageappealspdp,@coverageappealsmapd,@preferedmailbenefit,@lowertierdruglearnmore"})
+				"pretty", "html:reports/test-report","json:target/cucumber.json"}, tags ={"@pharmacybenefit,@appoint,@privacypolicy,@noaccordion,@memberrightres,@mapdappealsandgrievances,@ssupappealsandgrievances,@medicaltherapyprog,@seasonflushot,@medicathreapymapd,@prescriptiondrug,@prescriptiondrug,@drugeob,@drugtransition,@disenrollment"})
 public class RunMRAtddTestFormsandResources {
 
 }
