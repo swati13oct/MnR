@@ -17,13 +17,13 @@ Feature: To test registration flow in redesign portal
       | MAPD COSMOS        | 006916255    | 08-13-1931  | Sharp SecureHorizons Plan by UnitedHealthcare (HMO)  |
       | SHIP/MED SUPP      | 365348555-11 | 03-01-1949  | AARP MEDICARE SUPPLEMENT PLAN                        |
       | 50-64              | 375682722-11 | 03-01-1964  | AARP PERSONAL HEALTH INSURANCE COMPREHENSIVE PLAN    |
-      | SHIP MedSupp + PDP | 101127701-1  | 05-13-1929  | AARP MedicareRx Saver Plus (PDP)                     |
+      | SHIP MedSupp + PDP | 1011277011   | 05-13-1929  | AARP MedicareRx Saver Plus (PDP)                     |
       | SHIP MedSupp + PDP | 101127701-11 | 05-13-1929  | AARP MEDICARE SUPPLEMENT PLAN                        |
-      | SHIP 50-64 + MA    | 006880152-1  | 05-09-1934  | AARP MedicareComplete SecureHorizons Essential (HMO) |
+      | SHIP 50-64 + MA    | 006880152    | 05-09-1934  | AARP MedicareComplete SecureHorizons Essential (HMO) |
       | SHIP 50-64 + MA    | 006880152-11 | 05-09-1934  | AARP GROUP HOSPITAL PLAN                             |
-      | SHIP 50-64 + MAPD  | 006969409-1  | 03-16-1953  | AARP MedicareComplete SecureHorizons Plan 1 (HMO)    |
+      | SHIP 50-64 + MAPD  | 006969409    | 03-16-1953  | AARP MedicareComplete SecureHorizons Plan 1 (HMO)    |
       | SHIP 50-64 + MAPD  | 006969409-11 | 03-16-1953  | AARP GROUP HOSPITAL PLAN                             |
-      | SHIP 50-64 + PDP   | 101223127-1  | 10-28-1942  | AARP MedicareRx Preferred (PDP)                      |
+      | SHIP 50-64 + PDP   | 1012231271   | 10-28-1942  | AARP MedicareRx Preferred (PDP)                      |
       | SHIP 50-64 + PDP   | 101223127-11 | 10-28-1942  | AARP GROUP HOSPITAL PLAN                             |
 
   Scenario Outline: To verify registration Additional Information Section
@@ -63,11 +63,11 @@ Feature: To test registration flow in redesign portal
       # | MEDICA      | 914429086    | 08-28-1927  |
       | SHIP/MED SUPP     | 356357672-11 | 03-01-1949  |
       | 50-64             | 378564935-11 | 12-01-1956  |
-      | SHIP 50-64 + MA   | 861622172-1  | 07-27-1940  |
+      | SHIP 50-64 + MA   | 861622172    | 07-27-1940  |
       | SHIP 50-64 + MA   | 861622172-11 | 07-27-1940  |
-      | SHIP 50-64 + MAPD | 805816168-1  | 01-26-1934  |
+      | SHIP 50-64 + MAPD | 805816168    | 01-26-1934  |
       | SHIP 50-64 + MAPD | 805816168-11 | 01-26-1934  |
-      | SHIP 50-64 + PDP  | 980990989-1  | 10-13-1927  |
+      | SHIP 50-64 + PDP  | 9809909891   | 10-13-1927  |
       | SHIP 50-64 + PDP  | 980990989-11 | 10-13-1927  |
 
   Scenario Outline: To verify registration inactive or terminated member error page
