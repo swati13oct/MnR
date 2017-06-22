@@ -21,11 +21,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.openqa.selenium.support.ui.Select;
 
 import acceptancetests.atdd.data.CommonConstants;
+import acceptancetests.atdd.data.MRConstants;
 import acceptancetests.atdd.data.PageData;
 import acceptancetests.atdd.util.CommonUtility;
 import atdd.framework.MRScenario;
 import atdd.framework.UhcDriver;
 import pages.dashboard.member.ulayer.ClaimSummarypage;
+import pages.member.ulayer.BenefitsAndCoveragePage;
 
 /**
  * @author pjaising
@@ -33,6 +35,9 @@ import pages.dashboard.member.ulayer.ClaimSummarypage;
 
 public class AccountHomePage extends UhcDriver {
 
+	// Page URL
+    private static String PAGE_URL = MRConstants.TESTHARNESSU_URL;
+    
 	@FindBy(className = "fd_myPlans")
 	private WebElement myPlansTab;
 
@@ -182,6 +187,11 @@ public class AccountHomePage extends UhcDriver {
 	
 	@FindBy(xpath = "//*[@id='secureMessagingApp']/a")
 	private WebElement envelopeId;
+	
+	@FindBy(linkText = "Go to redesign benefits and coverage page")
+	private WebElement BnClink;
+	
+	
 
 	public JSONObject accountHomeJson;
 
@@ -721,7 +731,25 @@ public FormsandresourcesPage navigateToMydocumentAarpPage() {
 			System.out.println("Drug Preferred Mail Service Link is not displaying in footer");
 		}
 	}
-
+	
+	public BenefitsAndCoveragePage navigateDirectToBnCPag()
+	{
+		driver.navigate().to(PAGE_URL);
+		BnClink.click();
+		try {
+			Thread.sleep(30000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		//driver.manage().timeouts().implicitlyWait(40, TimeUnit.SECONDS);
+		System.out.println(driver.getTitle());
+	 if(driver.getTitle().equalsIgnoreCase("Benefits And Coverage Page Redesign")){
+	        return new BenefitsAndCoveragePage(driver);
+		}
+		return null;
+		}
+	
 	
 
  

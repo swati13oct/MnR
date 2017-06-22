@@ -31,7 +31,7 @@ import atdd.framework.UhcDriver;
 public class LoginPage2 extends UhcDriver {
 
 	// Page URL
-	private static String PAGE_URL = MRConstants.BNCURL;
+	private static String PAGE_URL = MRConstants.AARPM_URL;
 
 	@FindBy(id = "fd_memberSignInButton")
 	private WebElement loginIn;
@@ -110,10 +110,10 @@ public class LoginPage2 extends UhcDriver {
 			        alert3.accept();*/
 			        }
 System.out.println(currentUrl());
-		if(currentUrl().contains("home/my-plans/redesign-benefits-and-coverage-page.html"))
+		if(currentUrl().contains("home/my-account-home.html"))
 
 		{
-			return new BenefitsAndCoveragePage(driver);
+			return new AccountHomePage(driver);
 		}
 		else if (currentUrl().contains("terminated-plan.html")) {
 			return new TerminatedHomePage(driver); 

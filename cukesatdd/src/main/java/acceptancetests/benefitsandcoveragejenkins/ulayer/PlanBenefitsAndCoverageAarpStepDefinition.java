@@ -97,16 +97,19 @@ public class PlanBenefitsAndCoverageAarpStepDefinition {
 			getLoginScenario().saveBean(LoginCommonConstants.USERNAME, userName);
 			getLoginScenario().saveBean(LoginCommonConstants.PASSWORD, pwd);
 		}
+		
 
 		WebDriver wd = getLoginScenario().getWebDriver();
 		
 		LoginPage2 loginPage = new LoginPage2(wd);
-		BenefitsAndCoveragePage  benefitsCoveragePage = (BenefitsAndCoveragePage) loginPage.loginWith(userName, pwd);
-		Thread.sleep(30000);
-		if (benefitsCoveragePage != null) {
+        AccountHomePage accountHomePage = (AccountHomePage)loginPage.loginWith(userName, pwd);
+		
+		if (accountHomePage != null) 
+		   {
 			getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
-			getLoginScenario().saveBean(PageConstants.BENEFITS_COVERAGE_PAGE,benefitsCoveragePage);
-		}
+			getLoginScenario().saveBean(PageConstants.ACCOUNT_HOME_PAGE,
+					accountHomePage);
+		   }
 		//JSONObject accountHomeActualJson = null;
 
 		/*Get expected data*/
@@ -412,14 +415,18 @@ public class PlanBenefitsAndCoverageAarpStepDefinition {
 	@Then("^the user view jenkins benefits and coverage in AARP site")
 	public void user_views_jenkinsBenefitsAndCoverage() {
 
-		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario().getBean(
-				PageConstants.BENEFITS_COVERAGE_PAGE);
+		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstants.ACCOUNT_HOME_PAGE);
+        BenefitsAndCoveragePage benefitsCoveragePage = accountHomePage.navigateDirectToBnCPag();
+		
+		if (benefitsCoveragePage!= null) {
+			getLoginScenario().saveBean(PageConstants.BENEFITS_COVERAGE_PAGE,benefitsCoveragePage);
+		}
 		
 		if(benefitsCoveragePage!=null){
 			//Get actual data
 			JSONObject actualJsonObj=benefitsCoveragePage.benefitsandcoverageJson;
 			loginScenario.saveBean(PlanBenefitsAndCoverageCommonConstants.BENEFITS_AND_COVERAGE_ACTUAL, actualJsonObj);	
-			getLoginScenario().saveBean(PageConstants.BENEFITS_COVERAGE_PAGE, benefitsCoveragePage);
+			//getLoginScenario().saveBean(PageConstants.BENEFITS_COVERAGE_PAGE, benefitsCoveragePage);
 			System.out.println("Benefits and coverage actual ==============>"+actualJsonObj.toString());
 			// Get expected data 
 			String fileName = this.userName;
