@@ -1,17 +1,9 @@
-q1_apr_ulayer009,MAPD,
-q1_apr_ulayer138,MA,
-q1_apr_ulayer003,MAPD,
-q1_apr_ulayer438,PDP,
-q1_apr_ulayer203,PDP,
-q1_apr_ulayer249,PDP,
+q2_jun_blayer002,MAPD,
 q2_jun_grp246/Password@1,MA,Group,
-q1q2_jun_blayer153/Password@1,MA,Individual,
+q2_jun_blayer153/Password@1,MA,Individual,
 q2_jun_grp345/Password@1,SSUP,Group,
-q1_apr_blayer023/Password@1,MAPD,Individual,
-q1_apr_blayer003/Password@1,MAPD,Individual,
-q1_apr_grp085/Password@1,MAPD,Group,
-q1_apr_grp361/Password@1,PDP,Group,
+q2_jun_blayer002/Password@1,MAPD,Individual,
 q2_jun_grp317/Password@1,PDP,Group,
-q1_feb_grp043/Password@1,Peehip,Group,
-q1_feb_grp142/Password@1,MAPD,Group
+q2_jun_grp036/Password@1,Peehip,Group,
+q2_jun_grp004/Password@1,MAPD,Group
 
