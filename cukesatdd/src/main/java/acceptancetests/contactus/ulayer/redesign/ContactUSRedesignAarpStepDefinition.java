@@ -219,11 +219,24 @@ public class ContactUSRedesignAarpStepDefinition {
 		{
 			ContactUsPage contactusPage=(ContactUsPage)getLoginScenario().getBean(PageConstants.CONTACT_US_PAGE);
 			
-			contactusPage.reqCallclickConfrimation();
+			contactusPage.reqCallclickConformation();
 			
 			/*if(contactusPage != null)				
 				getLoginScenario().saveBean(PageConstants.CONTACT_US_PAGE,
 						contactusPage);*/
+			
+		}
+		
+		@Then("^user validates sendUS A question Widget in redesign contact us page$")
+		public void user_validates_sendUsQuestion_Widget()
+		{
+			ContactUsPage contactusPage=(ContactUsPage)getLoginScenario().getBean(PageConstants.CONTACT_US_PAGE);
+			
+			contactusPage.validateSendUsAQuestionWidget();
+			
+			if(contactusPage != null)				
+				getLoginScenario().saveBean(PageConstants.CONTACT_US_PAGE,
+						contactusPage);
 			
 		}
 

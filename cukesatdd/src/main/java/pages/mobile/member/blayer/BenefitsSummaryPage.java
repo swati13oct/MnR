@@ -428,5 +428,15 @@ public class BenefitsSummaryPage extends PharmacyLocator{
 		}
 		return null;
 	}
+	public pages.mobile.member.blayer.ContactUsPage navigateToContactusRedesignPage() {
+		// TODO Auto-generated method stub
+		String url = "https://member.team-e-uhcmedicaresolutions.uhc.com/content/uhcm/home/contact.html";
+		driver.get(url);
+		if (driver.getTitle().equals("Contact Us")) {
+			return new pages.mobile.member.blayer.ContactUsPage(driver);
+
+		}
+		return null;
+	}
 
 }

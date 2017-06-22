@@ -133,3 +133,15 @@ And user clicks on Request Confirmation Click
 Examples:
 	| planType | |  memberType   |
 	| MA      | |  Individual   |
+	
+#US630418
+Scenario Outline: Verify secureEmail Widget page section in contact us redesign page for not opted in aarp member of  AARP site covers scenario 1,2,5,6,7
+Given AArp member validation on redesigned site
+	| Plan Type   | <planType>   |
+	| Member Type | <memberType> |
+When the user validates the contact us redesign  page in AARP site
+Then user validates secure email widget UI in redesign contact us page
+
+Examples:
+	| planType | |  memberType   |
+	| MA      | |  Individual   |

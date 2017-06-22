@@ -1,93 +1,137 @@
-package acceptancetests.contactus.bluelayer.redesign;
+package acceptancetests.mobile.login.blayer.redesign.contactus;
 
 
+
+
+import gherkin.formatter.model.DataTableRow;
 
 import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import pages.member.bluelayer.AccountHomePage;
-import pages.member.bluelayer.ContactUsPage;
-import pages.member.bluelayer.LoginPage;
+import pages.mobile.member.blayer.BenefitsSummaryPage;
+import pages.mobile.member.blayer.ContactUsPage;
+import pages.mobile.member.blayer.LoginPage;
 import acceptancetests.atdd.data.CommonConstants;
-import acceptancetests.atdd.data.member.PageConstants;
+import acceptancetests.atdd.data.mobile.member.PageConstants;
 import acceptancetests.login.data.LoginCommonConstants;
 import atdd.framework.MRScenario;
 import cucumber.annotation.en.Given;
 import cucumber.annotation.en.Then;
-import cucumber.annotation.en.When;
 import cucumber.table.DataTable;
 
-public class ContactUSRedesignUmsStepDefinition {
+public class ContactUSRedesignUhcStepDefinition {
 	/**
 	 * 
 	 */
 
-		@Autowired
-		MRScenario loginScenario;
+	@Autowired
+	MRScenario loginScenario;
 
-		public MRScenario getLoginScenario() {
-			return loginScenario;
+	public MRScenario getLoginScenario() {
+		return loginScenario;
+	}
+	
+	@Given("^the user logs in with a registered UMS with following details in UHC site$")
+	public void ulayer_registered_member_with_following_attributes(
+			DataTable memberAttributes) {
+
+		/* Reading the given attribute from feature file */
+		/* Reading the given attribute from feature file */
+		List<DataTableRow> memberAttributesRow = memberAttributes
+				.getGherkinRows();
+		Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells()
+					.get(0), memberAttributesRow.get(i).getCells().get(1));
+		}
+
+		Set<String> memberAttributesKeySet = memberAttributesMap.keySet();
+		List<String> desiredAttributes = new ArrayList<String>();
+		for (Iterator<String> iterator = memberAttributesKeySet.iterator(); iterator
+				.hasNext();) {
+			{
+				String key = iterator.next();
+				desiredAttributes.add(memberAttributesMap.get(key));
+			}
+
+		}
+		desiredAttributes.add("mobile");
+		System.out.println("desiredAttributes.." + desiredAttributes);
+
+		Map<String,String> loginCreds = loginScenario
+				.getAMPMemberWithDesiredAttributes(desiredAttributes);
+		
+		//q2_jun_ulayer175
+		String userName = "";
+		String pwd = "";
+		if (loginCreds == null) {
+			// no match found
+			System.out.println("Member Type data could not be setup !!!");
+			Assert.fail("unable to find a "+ desiredAttributes + " member");
+		} else {
+			userName = loginCreds.get("user");
+			pwd = loginCreds.get("pwd");
+			System.out.println("User is..." + userName);
+			System.out.println("Password is..." + pwd );
+			getLoginScenario().saveBean(LoginCommonConstants.USERNAME, userName);
+			getLoginScenario().saveBean(LoginCommonConstants.PASSWORD, pwd);
 		}
 		
-		@Given("^registered UMS member with following attributes$")
-		public void registered_member_orderplanmaterials_ums(
-				DataTable memberAttributes) {
+		WebDriver wd = getLoginScenario().getWebDriver();
+		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
 
-			/* Reading the given attribute from feature file */
-			List<List<String>> dataTable = memberAttributes.raw();
-			List<String> desiredAttributes = new ArrayList<String>();
+		LoginPage loginPage = new LoginPage(wd);
+		getLoginScenario().saveBean(PageConstants.LOGIN_PAGE, loginPage);
+		
+		loginPage = (LoginPage)getLoginScenario().getBean(PageConstants.LOGIN_PAGE);
+		loginPage.openAndValidate();
+		
+		BenefitsSummaryPage benefitsSummaryPage = loginPage.loginWith(userName, pwd);		
 
-			for (List<String> data : dataTable) {
-				desiredAttributes.add(data.get(1));
-			}
-			System.out.println("desiredAttributes.." + desiredAttributes);
-			Map<String, String> loginCreds = loginScenario
-					.getUMSMemberWithDesiredAttributes(desiredAttributes);
+		
+		if(benefitsSummaryPage !=null)
+			getLoginScenario().saveBean(PageConstants.BENEFITS_SUMMARY_PAGE,
+					benefitsSummaryPage);
+	}
 
-			String userName = "";
-			String pwd = "";
-			if (loginCreds == null) {
-				// no match found
-				System.out.println("Member Type data could not be setup !!!");
-				Assert.fail("unable to find a " + desiredAttributes + " member");
-			} else {
-				userName = loginCreds.get("user");
-				pwd = loginCreds.get("pwd");
-				System.out.println("User is..." + userName);
-				System.out.println("Password is..." + pwd);
-				getLoginScenario()
-				.saveBean(LoginCommonConstants.USERNAME, userName);
-				getLoginScenario().saveBean(LoginCommonConstants.PASSWORD, pwd);
-			}
+	/*@When("^the user navigates to redesign contact us page in AARP site$")
+	public void views_order_materials_in_redesignUms_site() {
+		BenefitsSummaryPage beneFitsSummaryPage = (BenefitsSummaryPage) getLoginScenario()
+				.getBean(PageConstants.BENEFITS_SUMMARY_PAGE);
+		ContactUsPage contactUsPage = beneFitsSummaryPage
+				.navigateToContactusRedesignPage();
+		if (contactUsPage != null) {
 
-			WebDriver wd = getLoginScenario().getWebDriver();
-			getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
+			getLoginScenario().saveBean(PageConstants.CONTACTUS_PAGE,
+					contactUsPage);
 
-			LoginPage loginPage = new LoginPage(wd);
-			AccountHomePage accountHomePage = (AccountHomePage) loginPage.loginWith(userName, pwd,"Group");
-			if (accountHomePage != null) {
-				getLoginScenario().saveBean(PageConstants.ACCOUNT_HOME_PAGE,
-						accountHomePage);
-				Assert.assertTrue(true);
-				getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
-			} 
-
-			if (accountHomePage != null) {
-				getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
-				getLoginScenario().saveBean(PageConstants.ACCOUNT_HOME_PAGE,accountHomePage);
-				Assert.assertTrue(true);
-			}
-			
-			getLoginScenario().saveBean(PageConstants.ACCOUNT_HOME_PAGE,
-					accountHomePage);
-
-			
 		}
+
+	}*/
+	
+	
+	
+	@Then("^the user validates the contact us redesign  page in AARP site$")
+	public void validates_plan_materials_plan_document_section_redesignums() {
+		
+		BenefitsSummaryPage beneFitsSummaryPage = (BenefitsSummaryPage) getLoginScenario()
+				.getBean(PageConstants.BENEFITS_SUMMARY_PAGE);
+		ContactUsPage contactUsPage = beneFitsSummaryPage
+				.navigateToContactusRedesignPage();
+		if(contactUsPage != null)				
+			getLoginScenario().saveBean(PageConstants.CONTACTUS_PAGE,
+					contactUsPage);
+	}
+	
 		
 		
 
@@ -108,7 +152,7 @@ public class ContactUSRedesignUmsStepDefinition {
 		
 		
 		
-		@When("^the user navigates to contact us page in UHC site$")
+		/*@When("^the user navigates to contact us page in UHC site$")
 		public void validates_contactUs_Redesign_Page() {
 			
 			AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstants.ACCOUNT_HOME_PAGE);
@@ -171,20 +215,7 @@ public class ContactUSRedesignUmsStepDefinition {
 				getLoginScenario().saveBean(PageConstants.CONTACT_US_PAGE,
 						contactusPage);
 			
-		}
-		
-		@Then("^user clicks on submit question by selecting Billing Information option in redesign contact us page$")
-		public void user_clicks_submit_question_using_Billing_info()
-		{
-			ContactUsPage contactusPage=(ContactUsPage)getLoginScenario().getBean(PageConstants.CONTACT_US_PAGE);
-			
-			contactusPage.submitQuestionClick_by_BillingInfo_option();
-			
-			if(contactusPage != null)				
-				getLoginScenario().saveBean(PageConstants.CONTACT_US_PAGE,
-						contactusPage);
-			
-		}
+		}*/
 		
 	/*	@Then("^user validates secure email widget functionality using Email Address on File radio button$")
 		public void user_validates_email_widget_func_byEmailAddress_Radio_button()

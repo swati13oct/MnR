@@ -106,6 +106,9 @@ public class ContactUsPage extends UhcDriver{
 	
 	public JSONObject contactUsJson;
 	
+	@FindBy(xpath="//*[@id='question-btn']")
+	private WebElement fillOutFormButton;	
+	
 	public ContactUsPage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
@@ -523,7 +526,7 @@ public class ContactUsPage extends UhcDriver{
 		}
 	}
 	
-	public void reqCallclickConfrimation()
+	public void reqCallclickConformation()
 	{
 		if (sendArequest.isDisplayed())
 		{
@@ -561,6 +564,25 @@ public class ContactUsPage extends UhcDriver{
 			System.out.println("req confirmmation end" );
 		}
 		
+	}
+	
+	public void validateSendUsAQuestionWidget()
+	{
+		if (fillOutFormButton.isDisplayed())
+		{
+			System.out.println("send us Question is  displayed");
+			fillOutFormButton.click();
+			try {
+				Thread.sleep(5000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		else
+		{
+			System.out.println("send us Question is not  displayed");
+		}
 	}
 
 	public JSONObject getsecurewidget() {
