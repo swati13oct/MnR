@@ -102,7 +102,7 @@ public class LoginPage extends UhcDriver {
 			return new TerminatedHomePage(driver);
 		}
 		return null;*/
-		//return new AccountHomePage(driver);
+		return new AccountHomePage(driver);
 	}
 
 
