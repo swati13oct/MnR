@@ -750,7 +750,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		validate(msPlansNumber);
 		validate(pdpPlansNumber);
 
-		int allPlans = Integer.valueOf(vppTop.getText().substring(8, 10));
+		int allPlans = Integer.valueOf(vppTop.getText().substring(10, 12));
 		int maPlans = Integer.valueOf(maPlansNumber.getText());
 		int msPlans = Integer.valueOf(msPlansNumber.getText());
 		int pdpPlans = Integer.valueOf(pdpPlansNumber.getText());
