@@ -947,6 +947,8 @@ public class MRScenario {
          capabilities.setCapability("tunnelIdentifier", "OptumSharedTunnel-Prd");
          String USERNAME = "tpravee2";
          String ACCESS_KEY = "3ac93b20-b695-45bc-8d78-2889e524557a";
+         String jobName = "MnR test Execution of [" +System.getProperty("test")  +":] - Using " + capabilities.getBrowserName() + " in  " + environment +" environment";
+     	 capabilities.setCapability("name", jobName);
          String URL = "http://" + USERNAME + ":" + ACCESS_KEY + "@ondemand.saucelabs.com:80/wd/hub";
          if (USERNAME == null || ACCESS_KEY == null) {
                 Assert.fail(
