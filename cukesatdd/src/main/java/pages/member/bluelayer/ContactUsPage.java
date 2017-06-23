@@ -75,9 +75,33 @@ public class ContactUsPage extends UhcDriver{
 	@FindBy(xpath="/html/body/div[2]/div/div/div/div[5]/div/div/div[2]/div/div[1]/div/div/div/div/div/div[2]/div[3]/div[1]")	
 	private WebElement conformationMessage;
 	
+
+	@FindBy(xpath="//*[@id='question-about']")	
+	private WebElement alternativeEmailHeader;
+	
+	@FindBy(xpath="//*[@id='alt-email-wrapper']/div[2]/label]")	
+	private WebElement confirmEmailHeader;
+	
+	@FindBy(xpath="//*[@id='message-email-error2']")	
+	private WebElement messageEmailError;
+	
+
+	@FindBy(css="div.field.field-has-error label#message-email-error2")
+	private WebElement messageEmailError2;
+	
+	@FindBy(css="div.field.field-has-error div.field-input label#message-email-error4")
+	private WebElement confirmMsgEmailError;
 	
 	
-	//*[@id="question-about"]
+	@FindBy(css="div#alt-phone-wrapper div.field.field-has-error div.field-input label#message-email-error5.error")
+	private WebElement invalidPhneErrorMsg;
+	
+	@FindBy(css="div#alt-phone-wrapper div.field.field-has-error div.field-input label#message-email-error7.error")
+	private WebElement confirmPhneErrorMsg;
+	
+	@FindBy(css="div.field.ask-question-message.field-has-error div.field-input label#message-email-error.error")
+	private WebElement questionAboutEmailErrorMsg;
+	
 	
 	private PageData contactUs;
 
@@ -406,8 +430,111 @@ public class ContactUsPage extends UhcDriver{
 		}
 	}
 
-	
-	
+	public void sendUsQuestion_Field_Validations(){
+		if (fillOutFormButton.isDisplayed())
+		{
+			System.out.println("send us Question is  displayed");
+			fillOutFormButton.click();
+			try {
+				Thread.sleep(5000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			Select dropdown = new Select(driver.findElement(By.id("question-about")));
+			System.out.println("dropdown" +dropdown);
+			dropdown.getFirstSelectedOption().click();
+			dropdown.selectByVisibleText("Billing Information");
+			try {
+				Thread.sleep(5000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			waitforElement(questionMessage);
+			questionMessage.sendKeys("Billing Information");
+			/*entering email */
+			waitforElement(addAlternativeEmail);
+			addAlternativeEmail.click();
+			alternativeEmailAddress.sendKeys("abc");
+			confirmEmailAddress.sendKeys("");
+			//confirmEmailAddress.sendKeys("");
+			//waitforElement(messageEmailError);
+			//String s=driver.findElement(By.cssSelector(".error")).getAttribute(name)
+			 String alternativeerrorMessage=messageEmailError2.getText();
+			 //String confirmErrMessage=confirmMsgEmailError4.getText();
+			/* if(alternativeerrorMessage.equalsIgnoreCase("Email Address Not valid")){
+				 System.out.println();
+			 }*/
+			 Assert.assertTrue("Email address not valid", alternativeerrorMessage.equalsIgnoreCase("Email Address Not valid"));
+			 //Assert.assertTrue("Please enter same email id", confirmErrMessage.equalsIgnoreCase("Please enter same email id"));
+			
+			
+			/*if(messageEmailError.isDisplayed()){
+				System.out.println("Please enter same email id");
+			}
+			*/
+		
+	}else
+	{
+		System.out.println("send us Question is not  displayed");
+	}
+	}
+	public void sendUsQuestion_confirmEmailID_Validations(){
+		if (fillOutFormButton.isDisplayed())
+		{
+			System.out.println("send us Question is  displayed");
+			fillOutFormButton.click();
+			try {
+				Thread.sleep(5000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			Select dropdown = new Select(driver.findElement(By.id("question-about")));
+			System.out.println("dropdown" +dropdown);
+			dropdown.getFirstSelectedOption().click();
+			dropdown.selectByVisibleText("Billing Information");
+			try {
+				Thread.sleep(5000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			waitforElement(questionMessage);
+			questionMessage.sendKeys("Billing Information");
+			/*entering email */
+			waitforElement(addAlternativeEmail);
+			addAlternativeEmail.click();
+			//alternativeEmailAddress.sendKeys("abc");
+			//confirmEmailAddress.sendKeys("xyz");
+			//confirmEmailAddress.sendKeys("");
+			//waitforElement(messageEmailError);
+			//String s=driver.findElement(By.cssSelector(".error")).getAttribute(name)
+			 //String alternativeerrorMessage=messageEmailError2.getText();
+			 //String confirmErrMessage=confirmMsgEmailError.getText();
+			/* if(alternativeerrorMessage.equalsIgnoreCase("Email Address Not valid")){
+				 System.out.println();
+			 }*/
+			 
+			 //Assert.assertTrue("Please enter same email id", confirmErrMessage.equalsIgnoreCase("Please enter same email id"));
+			
+			addAlternativePhneNumberLink.click();
+			invalidPhneErrorMsg.sendKeys("123");
+			Assert.assertTrue("Phone number is not valid", invalidPhneErrorMsg.equals("Phone number is not valid"));
+			
+			 questionSubmit.click();
+			
+			/*if(messageEmailError.isDisplayed()){
+				System.out.println("Please enter same email id");
+			}
+			*/
+		
+	}else
+	{
+		System.out.println("send us Question is not  displayed");
+	}
+	}
 
 	public void logOut() {
 		logOut.click();

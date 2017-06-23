@@ -186,6 +186,31 @@ public class ContactUSRedesignUmsStepDefinition {
 			
 		}
 		
+		@Then("^user enters invalidate alternative email ID in sendUS A question widget$")
+		public void email_Validations()
+		{
+			ContactUsPage contactusPage=(ContactUsPage)getLoginScenario().getBean(PageConstants.CONTACT_US_PAGE);
+			
+			contactusPage.sendUsQuestion_Field_Validations();
+			
+			if(contactusPage != null)				
+				getLoginScenario().saveBean(PageConstants.CONTACT_US_PAGE,
+						contactusPage);
+			
+		}
+		
+		@Then("^user enters invalidate Confirm email ID in sendUS A question widget$")
+		public void invalidate_confirmEmailValidations()
+		{
+			ContactUsPage contactusPage=(ContactUsPage)getLoginScenario().getBean(PageConstants.CONTACT_US_PAGE);
+			
+			contactusPage.sendUsQuestion_confirmEmailID_Validations();
+			
+			if(contactusPage != null)				
+				getLoginScenario().saveBean(PageConstants.CONTACT_US_PAGE,
+						contactusPage);
+			
+		}
 	/*	@Then("^user validates secure email widget functionality using Email Address on File radio button$")
 		public void user_validates_email_widget_func_byEmailAddress_Radio_button()
 		{

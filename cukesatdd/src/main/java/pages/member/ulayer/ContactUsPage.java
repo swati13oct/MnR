@@ -109,6 +109,11 @@ public class ContactUsPage extends UhcDriver{
 	@FindBy(xpath="//*[@id='question-btn']")
 	private WebElement fillOutFormButton;	
 	
+	@FindBy(xpath="/html/body/div[2]/div/div/main/div/div[2]/div/div/h2/span")
+	private WebElement pdpHeader;	
+	
+	
+	
 	public ContactUsPage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
@@ -608,6 +613,11 @@ public class ContactUsPage extends UhcDriver{
 		secureemailwidgetDataJson = jsonObject;
 
 		return secureemailwidgetDataJson;
+	}
+	public void PdpPageDisplay(){
+		if(pdpHeader.isDisplayed()){
+			System.out.println("PDP page displayed");
+		}
 	}
 
 

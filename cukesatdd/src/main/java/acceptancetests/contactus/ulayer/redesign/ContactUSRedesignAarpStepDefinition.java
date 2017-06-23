@@ -239,6 +239,18 @@ public class ContactUSRedesignAarpStepDefinition {
 						contactusPage);
 			
 		}
+		@Then("^user validates PDP page display in redesign contact us page$")
+		public void PdpPageDisplay()
+		{
+			ContactUsPage contactusPage=(ContactUsPage)getLoginScenario().getBean(PageConstants.CONTACT_US_PAGE);
+			
+			contactusPage.PdpPageDisplay();
+			
+			if(contactusPage != null)				
+				getLoginScenario().saveBean(PageConstants.CONTACT_US_PAGE,
+						contactusPage);
+			
+		}
 
 		@After
 		public void tearDown() {

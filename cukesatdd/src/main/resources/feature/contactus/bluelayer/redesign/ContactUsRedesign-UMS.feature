@@ -79,4 +79,25 @@ Then user clicks on submit question by selecting Billing Information option in r
 Examples:
 	| planType | |  memberType   |
 	| MAPD      | |  Group   |
+Scenario Outline:validating emailIds in contact us redesign page 
+Given registered UMS member with following attributes
+	| Plan Type   | <planType>   |
+	| Member Type | <memberType> |
+When the user navigates to contact us page in UHC site
+Then user enters invalidate alternative email ID in sendUS A question widget
+
+Examples:
+	| planType | |  memberType   |
+	| MAPD      | |  Group   |
+	
+Scenario Outline:validating emailIds in contact us redesign page 
+Given registered UMS member with following attributes
+	| Plan Type   | <planType>   |
+	| Member Type | <memberType> |
+When the user navigates to contact us page in UHC site
+Then user enters invalidate Confirm email ID in sendUS A question widget
+
+Examples:
+	| planType | |  memberType   |
+	| MAPD      | |  Group   |
 	
