@@ -488,9 +488,7 @@ public class MRScenario {
                      } catch (NamingException e) {
                            e.printStackTrace();
                      }
-
               }
-
               try {
                      /* Closing database connection */
                      con.close();
@@ -519,11 +517,12 @@ public class MRScenario {
                      .println("Using CI as default since environment was not passed in !!!");
                      propertiesFileToPick = CommonConstants.DEFAULT_ENVIRONMENT_CI; 
               }
+              String configPropertyName = findBrowserTypeConfigurationFile(webdriverpickup);
               // Read properties from classpath
               StringBuffer propertyFilePath = new StringBuffer(
                            CommonConstants.PROPERTY_FILE_FOLDER);
-              propertyFilePath.append("/").append(propertiesFileToPick).append("/")
-              .append(CommonConstants.PROPERTY_FILE_NAME);
+              propertyFilePath.append("/").append(propertiesFileToPick).append("/").append(configPropertyName!=null?configPropertyName:CommonConstants.PROPERTY_FILE_NAME);
+           //   .append(CommonConstants.PROPERTY_FILE_NAME);
               System.out.println("********** property file path is **************: "+ propertyFilePath);
               InputStream is = ClassLoader.class.getResourceAsStream(propertyFilePath
                            .toString());
@@ -537,6 +536,18 @@ public class MRScenario {
                      props.put(key, value);
               }
               return props;
+       }
+       
+       private static String findBrowserTypeConfigurationFile(String browserType){
+    	   String configFile=null;
+    	   if(browserType.equalsIgnoreCase("saucelabs")){
+    		   configFile = CommonConstants.PROPERTY_FILE_NAME;
+    	   }else if(browserType.equalsIgnoreCase("saucelabs_firefox")){
+    		   configFile = CommonConstants.FIREFOXPROPERTY_FILE_NAME;
+    	   }else if(browserType.equalsIgnoreCase("saucelabs_android")){
+    		   configFile = CommonConstants.ANDROIDPROPERTY_FILE_NAME;
+    	   }    	   
+    	   return configFile;    	   
        }
 
        private static Name buildUserDistinguishedName(String userName) {
