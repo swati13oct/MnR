@@ -517,7 +517,7 @@ public class MRScenario {
               if (StringUtils.isBlank(propertiesFileToPick)) {
                      System.out
                      .println("Using CI as default since environment was not passed in !!!");
-                     propertiesFileToPick = CommonConstants.DEFAULT_ENVIRONMENT_CI;
+                     propertiesFileToPick = CommonConstants.DEFAULT_ENVIRONMENT_CI; 
               }
               // Read properties from classpath
               StringBuffer propertyFilePath = new StringBuffer(

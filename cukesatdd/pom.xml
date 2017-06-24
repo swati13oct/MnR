@@ -76,7 +76,7 @@
 					<systemPropertyVariables>
 						<environment>${environment}</environment>
 						<webdriver_browser>${webdriver_browser}</webdriver_browser>
-					</systemPropertyVariables>
+					</systemPropertyVariables> 
 				</configuration>
 				<executions>
 					<execution>
