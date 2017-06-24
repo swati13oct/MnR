@@ -524,6 +524,7 @@ public class MRScenario {
                            CommonConstants.PROPERTY_FILE_FOLDER);
               propertyFilePath.append("/").append(propertiesFileToPick).append("/")
               .append(CommonConstants.PROPERTY_FILE_NAME);
+              System.out.println("********** property file path is **************: "+ propertyFilePath);
               InputStream is = ClassLoader.class.getResourceAsStream(propertyFilePath
                            .toString());
               try {
