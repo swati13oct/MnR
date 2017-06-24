@@ -75,6 +75,7 @@
 					<argLine>-Xmx512m -XX:MaxPermSize=512m</argLine>
 					<systemPropertyVariables>
 						<environment>${environment}</environment>
+						<webdriver_browser>${webdriver_browser}</webdriver_browser>
 					</systemPropertyVariables>
 				</configuration>
 				<executions>

@@ -510,6 +510,8 @@ public class MRScenario {
               Map<String, String> props = new HashMap<String, String>();
               Properties prop = new Properties();
               String propertiesFileToPick = System.getProperty("environment");
+              String webdriverpickup = System.getProperty("webdriver_browser");
+              System.out.println("************* test which webdriver is picked up  **********"+webdriverpickup);
               System.out.println("Using properties for environment ...."
                            + propertiesFileToPick);
               if (StringUtils.isBlank(propertiesFileToPick)) {
