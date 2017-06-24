@@ -10,6 +10,10 @@ package acceptancetests.atdd.data.acquisition;
  *
  */
 public class PageConstants {
+	
+	public static final String SignIN_Page = "signinpage";
+	
+	public static final String Error_Message = "errorMessage";
 
 	public static final String ESTIMATE_DRUG_COST_PAGE = "estimateDrugCostPage";
 

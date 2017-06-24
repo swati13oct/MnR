@@ -20,6 +20,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import pages.acquisition.ulayer.LoginAssistancePage;
 import pages.acquisition.ulayer.LoginAssitanceMessagePage;
 import pages.acquisition.ulayer.PersonalIdentificationPage;
+import pages.member.ulayer.LoginAssistanceConfirmationJava;
 import pages.member.ulayer.LoginPage;
 import acceptancetests.atdd.data.CommonConstants;
 import acceptancetests.atdd.data.acquisition.PageConstants;
@@ -61,6 +62,27 @@ public class LoginAssistanceAarpStepDefintion {
 		}
 
 	}
+	
+	@Given("^user is on AssistanceConfirmationPage and moves to Sign in Page$")
+	public void AssistanceConfirmationPage() throws InterruptedException {
+		System.out.println("In Method");
+
+		WebDriver wd = getLoginScenario().getWebDriver();
+		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
+		//LoginPage loginPage = new LoginPage(wd);
+		LoginAssistanceConfirmationJava LoginAssistance = new LoginAssistanceConfirmationJava(wd);
+		Thread.sleep(2000);
+		LoginPage loginAssistancePage = LoginAssistance.navigateToSignInPage();
+		if (loginAssistancePage != null) {
+			getLoginScenario().saveBean(PageConstants.SignIN_Page,
+					loginAssistancePage);
+			Assert.assertTrue(true);
+		} else {
+			Assert.fail("Error loading SignInPage page");
+		}
+
+	}
+	
 	
 	@When("^the user selects the username or password checkbox in AARP site$")
 	public void user_selects_username_password_checkbox_aarp(DataTable attribute) {
@@ -131,6 +153,39 @@ public class LoginAssistanceAarpStepDefintion {
 		}
 		
 	}
+	
+
+	@And("^the user clicks continue button without entering anything$")
+	public void user_clicks_continue_button_without_entering_anything() {	
+		
+		PersonalIdentificationPage personalIdentificationPage = (PersonalIdentificationPage) getLoginScenario().getBean(PageConstants.PERSONAL_IDENTIFICATION_PAGE);
+		LoginAssitanceMessagePage loginAssitanceMessagePage = personalIdentificationPage.ContinueWithoutEnteringAnything();
+		if(loginAssitanceMessagePage!= null)
+		{
+			getLoginScenario().saveBean(PageConstants.LOGIN_ASSISTANCE_MESSAGE_PAGE,
+					loginAssitanceMessagePage);
+			Assert.assertTrue(true);
+		} else {
+			Assert.fail("Error loading loginAssitanceMessage page");
+		}
+	}
+	
+	@Then("^the user validates the successfully all fields error messages$")
+	public void the_user_validates_the_successfully_all_fields_error_messages() throws InterruptedException {
+		LoginAssitanceMessagePage loginAssitanceMessagePage = (LoginAssitanceMessagePage) getLoginScenario()
+				.getBean(PageConstants.LOGIN_ASSISTANCE_MESSAGE_PAGE);
+		LoginAssitanceMessagePage loginErrorMessages = loginAssitanceMessagePage.ErrorMessageValidation();
+		if(loginAssitanceMessagePage!= null)
+		{
+			getLoginScenario().saveBean(PageConstants.Error_Message,
+					loginAssitanceMessagePage);
+			Assert.assertTrue(true);
+		} else {
+			Assert.fail("Error loading loginAssitanceMessage page");
+		}
+		
+	}
+	
 	
 	@After
 	public void tearDown() {
