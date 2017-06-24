@@ -540,6 +540,9 @@ public class MRScenario {
        
        private static String findBrowserTypeConfigurationFile(String browserType){
     	   String configFile=null;
+    	   if(browserType==null)
+    		   return configFile;
+    	   
     	   if(browserType.equalsIgnoreCase("saucelabs")){
     		   configFile = CommonConstants.PROPERTY_FILE_NAME;
     	   }else if(browserType.equalsIgnoreCase("saucelabs_firefox")){
