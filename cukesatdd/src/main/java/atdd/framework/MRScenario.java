@@ -549,7 +549,11 @@ public class MRScenario {
     		   configFile = CommonConstants.FIREFOXPROPERTY_FILE_NAME;
     	   }else if(browserType.equalsIgnoreCase("saucelabs_android")){
     		   configFile = CommonConstants.ANDROIDPROPERTY_FILE_NAME;
-    	   }    	   
+    	   }else if(browserType.equalsIgnoreCase("saucelabs_chrome")){
+    		   configFile = CommonConstants.CHROMEPROPERTY_FILE_NAME;
+    	   }else if(browserType.equalsIgnoreCase("saucelabs_safari")){
+    		   configFile = CommonConstants.SAFARIPROPERTY_FILE_NAME;
+    	   }    	       	       	   
     	   return configFile;    	   
        }
 
