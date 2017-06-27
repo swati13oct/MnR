@@ -88,7 +88,7 @@ public class BenefitsAndCoveragePage extends UhcDriver {
     @FindBy(className = "margin-small")
     private WebElement LookupDrugstext;
     
-    @FindBy(xpath=".//*[@id='drug-copays-and-discounts']/section/div[2]/div[11]/div[1]/a")
+    @FindBy(xpath=".//*[@id='drug-copays-and-discounts']/section/div[2]/div[9]/div[1]/a")
     private WebElement LookUpDrugsButton;
     
     @FindBy(xpath = ".//*[@id='benefitsMain']/div[2]/div/div/div[3]/div/div/section/div/div[1]/div/h2")
@@ -112,6 +112,13 @@ public class BenefitsAndCoveragePage extends UhcDriver {
  
     @FindBy(xpath = ".//*[@id='drug-copays-and-discounts']/section/div[2]/div[11]/div[2]")
     private WebElement locateapharmacysection;
+    
+    @FindBy(xpath = ".//*[@id='drug-copays-and-discounts']/section/div[2]/div[2]/div/div/div/p")
+    private WebElement pharmacytext;
+    
+    @FindBy(id="mapdPageNonLis")
+    private WebElement drugcopaytable;
+ 
 
     public static final String learnmorestagetext_xpath =".//*[@id='collapseStages']";
 
@@ -377,6 +384,9 @@ Assert.fail("Button not displayed");
 public void validate_lookupdrugstext()
 {
 	validate(LookupDrugstext);
+	System.out.println(pharmacytext.getText());
+    validate(pharmacytext);
+	validate(drugcopaytable);
 }
 
 public void validate_drugcopayheaderntext()
@@ -529,8 +539,19 @@ catch (JSONException e) {
 	e.printStackTrace();
 }
 }
-	
+
+
+public void validatedrugcopaytable()
+{
+	//Select langdropdwn = new Select(langdropdown);
+	System.out.println(pharmacytext.getText());
+	    validate(pharmacytext);
+		validate(drugcopaytable);
+		
 }
+}
+
+
 
 
 

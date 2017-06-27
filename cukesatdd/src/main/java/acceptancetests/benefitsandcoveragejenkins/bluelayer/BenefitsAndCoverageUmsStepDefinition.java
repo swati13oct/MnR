@@ -652,9 +652,9 @@ public class BenefitsAndCoverageUmsStepDefinition {
 			
 			JSONObject expected=(JSONObject) loginScenario.getBean(PlanBenefitsAndCoverageCommonConstants.BENEFITS_AND_COVERAGE_EXPECTED);
 			
-			//if(actual!=null && expected !=null){
-				//JSONAssert.assertEquals(expected, actual, true);
-			//}			
+			if(actual!=null && expected !=null){
+				JSONAssert.assertEquals(expected, actual, true);
+			}			
 			
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -886,47 +886,21 @@ public void user_validates_lookupdrugsbuuton()
 	@And("^the user validates the user click on the link it expands and when user clicks it again it should collapse")
    public void user_validate_linksworking()
    {
-	   BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario().getBean(
-  				PageConstants.BENEFITS_COVERAGE_PAGE);
+		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario().getBean(
+	   				PageConstants.BENEFITS_COVERAGE_PAGE);
 	   JSONObject benefitsandcoverageExectedJson=(JSONObject) loginScenario.getBean(PlanBenefitsAndCoverageCommonConstants.BENEFITS_AND_COVERAGE_EXPECTED);
-	   //benefitsCoveragePage.clickOnLearnmoreaboutlinkstage(benefitsandcoverageExectedJson);
-	   //benefitsCoveragePage.clickOnLearnmoreaboutlinktier(benefitsandcoverageExectedJson);
+	   benefitsCoveragePage.clickOnLearnmoreaboutlinkstage(benefitsandcoverageExectedJson);
+	   benefitsCoveragePage.clickOnLearnmoreaboutlinktier(benefitsandcoverageExectedJson);
    }
    
-	//jma duplicate step definition
-	//@Then("^the user validates the view/download link on mydocument page$")
-	public void view_download_link_validation_ums_site(){
-		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstants.ACCOUNT_HOME_PAGE);
-		//FormsandresourcesPage formsAndResourcesPage=null;
-		FormsandresourcesPage formsAndResourcesPage = accountHomePage.navigateToviewdownloadlinkUmsPage();
-	}
-	//jma duplicate step definition
-	//@Then("^the user validates the pagination link on mydocument page$")
-	public void view_pagination_link_validation_ums_site(){
-		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstants.ACCOUNT_HOME_PAGE);
-		//FormsandresourcesPage formsAndResourcesPage=null;
-		FormsandresourcesPage formsAndResourcesPage = accountHomePage.navigateTopaginationlinkUmsPage();
+	@And("the user should see drug copay and discount table")
+	public void user_validate_drugcopaydiscounttable()
+	{
+		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario().getBean(
+				PageConstants.BENEFITS_COVERAGE_PAGE);
+		benefitsCoveragePage.validatedrugcopaytable();
 	}
 	
-	//jma duplicate step definition
-	//@Then("^the user validates the custom search on mydocument page$")
-	public void view_custom_search_link_validation_ums_site(){
-		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstants.ACCOUNT_HOME_PAGE);
-		//FormsandresourcesPage formsAndResourcesPage=null;
-		FormsandresourcesPage formsAndResourcesPage = accountHomePage.navigateTocustomsearchlinkUmsPage();
-	}
-	
-
-//jma duplicate step definition
-//@Then("^the user validates the sorting link on mydocument page$")
-	public void view_sorting_search_link_validation_ums_site(){
-		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstants.ACCOUNT_HOME_PAGE);
-		//FormsandresourcesPage formsAndResourcesPage=null;
-		FormsandresourcesPage formsAndResourcesPage = accountHomePage.navigateTosortingsearchlinkUmsPage();
-	}
-
-	
-
 }
 	
 

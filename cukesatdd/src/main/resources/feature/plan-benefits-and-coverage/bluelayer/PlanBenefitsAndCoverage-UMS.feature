@@ -823,6 +823,21 @@ Examples:
       | MA       | Group     |     NON LIS   |
       ##member used :q1_apr_grp_015
       ##member use  :uhc_ma001
+      
+ @plandocumentjenkins
+    Scenario Outline: Plan Documents section is in place on Benefits and Coverage page
+     Given registered UHC with following details for plan benefits and coverage flow in UMS site
+      | Plan Type      | <planType>      |
+    Then the user view jenkins benefits and coverage in UMS site
+    And the user validates the content on benefits and coverage page
+    And the user validates the content on benefits and coverage page
+    And the user validates Plan Documents section
+    
+    Examples: 
+      | planType | memberType| copayCategory |
+      | MA       | Group     |     NON LIS   |
+      ##member used :q1_apr_grp_015
+      ##member use  :uhc_ma001
 
 
 
@@ -900,93 +915,21 @@ Examples:
     And the user validates the content on benefits and coverage page
     And the user view the Drug Copays & Discounts header 
     And the user validates the Learn More section link for stage and tier
-    And the user validates the user click on the link it expands and when user clicks it again it should collapse
+    #And the user validates the user click on the link it expands and when user clicks it again it should collapse
     And the user validates Drug coverage header and text under the section
     And the user validates text for the Look Up Drugs section
     And the user validates Look Up Drugs button should be visible
     And the user validates text for the Locate a Pharmacy section
     And the user validates Locate a Pharmacy button should be visible
+    And the user should see drug copay and discount table
     Examples: 
       | planType| copayCategory |
       | MAPD    |  NON LIS      |
       ##TESTMAPDNONLIS1
       
-    @drugcopaysectionmalis1
-    Scenario Outline: Verify PDF section is in place on Benefits and Coverage page
-    Given registered UHC with following details for plan benefits and coverage flow in UMS site
-      | Plan Type      | <planType>     |
-      | Copay Category | <copayCategory>|
-    Then the user view jenkins benefits and coverage in UMS site
-    And the user validates the content on benefits and coverage page
-    Then the user validates Header section
-    Then the user view the Drug Copays & Discounts header
-    Then the user view the Drug Cost header and text 
-    Then the user validates first select option selected should be Preferred Retail Pharmacy
-    Then the user validates dropdown should show 3 values  
-    Then the user validates the text under dropdown should be updated according to value selected in dropdown
-    Then the user validates the Learn More section link for stage and tier
-    Then the user validates the user click on the link it expands and when user clicks it again it should collapse
-    Then the user validates Drug coverage header and text under it
-    Then the user validates text for the Look Up Drugs section
-    And the user validates Look Up Drugs button should be visible
-    Then the user validates text for the Locate a Pharmacy section
-    And the user validates Locate a Pharmacy button should be visible
-    Examples: 
-      | planType| copayCategory |
-      | MAPD    |  LIS 1        |
-     ##
       
-    @drugcopaysectionmapdlis2
-    Scenario Outline: Verify PDF section is in place on Benefits and Coverage page
-    Given registered UHC with following details for plan benefits and coverage flow in UMS site
-      | Plan Type      | <planType>     |
-      | Copay Category | <copayCategory>|
-    Then the user view jenkins benefits and coverage in UMS site
-    And the user validates the content on benefits and coverage page
-    Then the user validates Header section
-    Then the user view the Drug Copays & Discounts header
-    Then the user view the Drug Cost header and text 
-    Then the user validates first select option selected should be Preferred Retail Pharmacy
-    Then the user validates dropdown should show 3 values  
-    Then the user validates the text under dropdown should be updated according to value selected in dropdown
-    Then the user validates the Learn More section link for stage and tier
-    Then the user validates the user click on the link it expands and when user clicks it again it should collapse
-    Then the user validates Drug coverage header and text under it
-    Then the user validates text for the Look Up Drugs section
-    And the user validates Look Up Drugs button should be visible
-    Then the user validates text for the Locate a Pharmacy section
-    And the user validates Locate a Pharmacy button should be visible
-    Examples: 
-      | planType| copayCategory |
-      | MAPD    |  LIS 2        |
-    ##
-     
-    @drugcopaysectionmapdlis2
-    Scenario Outline: Verify PDF section is in place on Benefits and Coverage page
-    Given registered UHC with following details for plan benefits and coverage flow in UMS site
-      | Plan Type      | <planType>     |
-      | Copay Category | <copayCategory>|
-    Then the user view jenkins benefits and coverage in UMS site
-    And the user validates the content on benefits and coverage page
-    Then the user validates Header section
-    Then the user view the Drug Copays & Discounts header
-    Then the user view the Drug Cost header and text 
-    Then the user validates first select option selected should be Preferred Retail Pharmacy
-    Then the user validates dropdown should show 3 values  
-    Then the user validates the text under dropdown should be updated according to value selected in dropdown
-    Then the user validates the Learn More section link for stage and tier
-    Then the user validates the user click on the link it expands and when user clicks it again it should collapse
-    Then the user validates Drug coverage header and text under the section
-    Then the user validates text for the Look Up Drugs section
-    And the user validates Look Up Drugs button should be visible
-    Then the user validates text for the Locate a Pharmacy section
-    And the user validates Locate a Pharmacy button should be visible
-    Examples: 
-      | planType| copayCategory |
-      | PDP     |  NON LIS      |
-    ##  
       
-   
+    
       
       
       

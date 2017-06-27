@@ -961,10 +961,10 @@ public class MRScenario {
 			// the default
 			if (null == browser || browser.equalsIgnoreCase(CommonConstants.HTMLUNIT_BROWSER)) {
 				// use the HtmlUnit Driver
-				HtmlUnitDriver htmlUnitDriver = new HtmlUnitDriver(BrowserVersion.BEST_SUPPORTED) {
+				HtmlUnitDriver htmlUnitDriver = new HtmlUnitDriver(BrowserVersion.getDefault()) {
 					@Override
 					protected WebClient modifyWebClient(WebClient client) {
-						client.getOptions().setThrowExceptionOnScriptError(false);
+					client.getOptions().setThrowExceptionOnScriptError(false);
 						return client;
 					}
 				};
