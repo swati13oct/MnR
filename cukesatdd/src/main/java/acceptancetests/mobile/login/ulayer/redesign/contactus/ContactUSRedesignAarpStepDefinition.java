@@ -27,6 +27,7 @@ import cucumber.annotation.en.And;
 import cucumber.annotation.en.Given;
 import cucumber.annotation.en.Then;
 import cucumber.table.DataTable;
+import cucumber.annotation.en.When;
 public class ContactUSRedesignAarpStepDefinition {
 	/**
 	 * 
@@ -116,11 +117,10 @@ public class ContactUSRedesignAarpStepDefinition {
 
 			}
 
-		}*/
+		}
+		*/
 		
-		
-		
-		@Then("^the user validates the contact us redesign  page in AARP site$")
+		@When("^the user validates the contact us redesign  page in AARP site$")
 		public void validates_plan_materials_plan_document_section_redesignums() {
 			
 			BenefitsSummaryPage beneFitsSummaryPage = (BenefitsSummaryPage) getLoginScenario()
