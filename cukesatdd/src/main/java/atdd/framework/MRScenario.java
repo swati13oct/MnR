@@ -91,6 +91,16 @@ public class MRScenario {
 	private static final String DIRECTORY = "/src/main/resources/";
 	public static int count = 0;
 
+	
+	public static final String USERNAME = "ucpadmin";
+	
+	public static final String ACCESS_KEY = "2817affd-616e-4c96-819e-4583348d7b37";
+
+	
+	//public static final String USERNAME = System.getenv("SAUCE_USERNAME");
+	//public static final String ACCESS_KEY = System.getenv("SAUCE_ACCESS_KEY");
+
+	
 	public void saveBean(String id, Object object) {
 		scenarioObjectMap.put(id, object);
 	}
@@ -1033,8 +1043,6 @@ public class MRScenario {
 				capabilities.setCapability("parent-tunnel", "sauce_admin");
 				capabilities.setCapability("tunnelIdentifier", "OptumSharedTunnel-Prd");
 				capabilities.setCapability("build", System.getenv("JOB_NAME") + "__" + System.getenv("RUNNER_NUMBER"));
-				String USERNAME = "ckoppura";
-				String ACCESS_KEY = "e645d799-278b-4468-9768-8311342a46df";
 				String URL = "http://" + USERNAME + ":" + ACCESS_KEY + "@ondemand.saucelabs.com:80/wd/hub";
 				String jobName = "MnR test Execution of [" +System.getProperty("test")  +":] - Using " + capabilities.getBrowserName() + " in  " + environment +" environment";
 				capabilities.setCapability("name", jobName);
@@ -1087,7 +1095,6 @@ public class MRScenario {
 		return webDriver;
 
 	}
-
 
 	public WebDriver getIEDriver() {
 		System.setProperty("webdriver.ie.driver",
