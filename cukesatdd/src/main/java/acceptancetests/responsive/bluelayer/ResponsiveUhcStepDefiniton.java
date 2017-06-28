@@ -216,8 +216,10 @@ public class ResponsiveUhcStepDefiniton {
                               .get(0), memberAttributesRow.get(i).getCells().get(1));
           }
           String timePeriod = memberAttributesMap.get("Current Period");
-           String currentYear = memberAttributesMap.get("CurrentYear");
+          String currentYear = memberAttributesMap.get("CurrentYear");
           String futureYear = memberAttributesMap.get("FutureYear");
-          planSummary.validateBlueBanner(timePeriod, currentYear, futureYear);
+          String planType =  (String) getLoginScenario().getBean(VPPCommonConstants.PLAN_TYPE);
+          String planName =  memberAttributesMap.get("Plan Name");
+          planSummary.validateBlueBanner(timePeriod, currentYear, futureYear, planType, planName);
     }
 }
