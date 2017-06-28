@@ -41,7 +41,7 @@ public class ContactUsPage extends UhcDriver{
 	private WebElement fillOutFormButton;	
 	
 	@FindBy(xpath="//*[@id='question-cancel']")
-	private WebElement cancelLink;
+	private WebElement questionCancelLink;
 	
 	@FindBy(xpath="//*[@id='question-about']")
 	private WebElement questionAbout;
@@ -86,8 +86,8 @@ public class ContactUsPage extends UhcDriver{
 	private WebElement messageEmailError;
 	
 
-	@FindBy(css="div.field.field-has-error label#message-email-error2")
-	private WebElement messageEmailError2;
+	@FindBy(css="div.field.field-has-error label#message-email-error")
+	private WebElement alternativemessageEmailError;
 	
 	@FindBy(css="div.field.field-has-error div.field-input label#message-email-error4")
 	private WebElement confirmMsgEmailError;
@@ -222,7 +222,7 @@ public class ContactUsPage extends UhcDriver{
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			cancelLink.click();
+			questionCancelLink.click();
 			try {
 				Thread.sleep(5000);
 			} catch (InterruptedException e) {
@@ -266,7 +266,7 @@ public class ContactUsPage extends UhcDriver{
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			cancelLink.click();
+			questionCancelLink.click();
 			try {
 				Thread.sleep(5000);
 			} catch (InterruptedException e) {
@@ -300,7 +300,7 @@ public class ContactUsPage extends UhcDriver{
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			cancelLink.click();
+			questionCancelLink.click();
 			try {
 				Thread.sleep(5000);
 			} catch (InterruptedException e) {
@@ -461,7 +461,7 @@ public class ContactUsPage extends UhcDriver{
 			//confirmEmailAddress.sendKeys("");
 			//waitforElement(messageEmailError);
 			//String s=driver.findElement(By.cssSelector(".error")).getAttribute(name)
-			 String alternativeerrorMessage=messageEmailError2.getText();
+			 String alternativeerrorMessage=alternativemessageEmailError.getText();
 			 //String confirmErrMessage=confirmMsgEmailError4.getText();
 			/* if(alternativeerrorMessage.equalsIgnoreCase("Email Address Not valid")){
 				 System.out.println();

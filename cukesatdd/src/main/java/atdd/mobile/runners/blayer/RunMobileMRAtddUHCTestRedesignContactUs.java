@@ -6,7 +6,7 @@ import cucumber.junit.Cucumber;
 
 @RunWith(Cucumber.class)
 @Cucumber.Options(glue = { "atdd.framework","acceptancetests.mobile.login.blayer.redesign.contactus" }, 
-features = { "feature/mobile/ulayer/contactus/redesign" }, 
+features = { "feature/mobile/bluelayer/contactus/redesign" }, 
 format = {
 "pretty", "html:reports/test-report" }, tags ={"@contactUsTestredesignMob"})
 

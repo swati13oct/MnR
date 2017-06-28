@@ -1,4 +1,4 @@
-@contactUsTestredesignMob
+@contactUsTestredesignUlayerMob
 
 Feature: To test EmailUs Widget and Click to call functionality in contact us redesign pages in AARP site
 #US631665
@@ -145,3 +145,27 @@ Then user validates secure email widget UI in redesign contact us page
 Examples:
 	| planType | |  memberType   |
 	| MA      | |  Individual   |
+
+#US630418 shipUI
+Scenario Outline: Verify sendUs A Question Widget page section in contact us redesign page 
+Given AArp member validation on redesigned site
+	| Plan Type   | <planType>   |
+	| Member Type | <memberType> |
+When the user validates the contact us redesign  page in AARP site
+Then user validates sendUS A question Widget in redesign contact us page
+
+Examples:
+	| planType | |  memberType   |
+	| MA      | |  Individual   |
+
+Scenario Outline: Verify sendUs A Question Widget page section in contact us redesign page 
+Given AArp member validation on redesigned site
+	| Plan Type   | <planType>   |
+	| Member Type | <memberType> |
+When the user validates the contact us redesign  page in AARP site
+Then user validates PDP page display in redesign contact us page
+
+Examples:
+	| planType | |  memberType   |
+	| PDP      | |  Individual   |		
+	

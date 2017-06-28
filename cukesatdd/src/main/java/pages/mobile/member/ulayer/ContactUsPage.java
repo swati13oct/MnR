@@ -106,6 +106,13 @@ public class ContactUsPage extends UhcDriver{
 	
 	public JSONObject contactUsJson;
 	
+	@FindBy(xpath="//*[@id='question-btn']")
+	private WebElement fillOutFormButton;	
+	
+	@FindBy(xpath="/html/body/div[2]/div/div/div/div[2]/div/div/h2/span")
+	private WebElement pdpHeader;	
+	
+	
 	public ContactUsPage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
@@ -650,6 +657,30 @@ public class ContactUsPage extends UhcDriver{
 
 		return secureemailwidgetDataJson;
 	}
+	public void validateSendUsAQuestionWidget()
+	{
+		if (fillOutFormButton.isDisplayed())
+		{
+			System.out.println("send us Question is  displayed");
+			fillOutFormButton.click();
+			try {
+				Thread.sleep(5000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		else
+		{
+			System.out.println("send us Question is not  displayed");
+		}
+	}
+	public void PdpPageDisplay(){
+		if(pdpHeader.isDisplayed()){
+			System.out.println("PDP page displayed");
+		}
+	}
+
 
 
 

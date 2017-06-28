@@ -252,15 +252,7 @@ public class ContactUSRedesignAarpStepDefinition {
 			
 		}
 
-		@After
-		public void tearDown() {
-			WebDriver wd = (WebDriver) getLoginScenario().getBean(
-					CommonConstants.WEBDRIVER);
-			if(wd!=null){
-				wd.quit();
-			}
-			getLoginScenario().flushBeans();
-		}
+		
 
 	}
 

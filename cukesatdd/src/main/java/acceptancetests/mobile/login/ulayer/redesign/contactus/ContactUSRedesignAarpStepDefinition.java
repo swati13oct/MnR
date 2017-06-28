@@ -256,14 +256,29 @@ public class ContactUSRedesignAarpStepDefinition {
 			
 		}
 
-		@After
-		public void tearDown() {
-			WebDriver wd = (WebDriver) getLoginScenario().getBean(
-					CommonConstants.WEBDRIVER);
-			if(wd!=null){
-				wd.quit();
-			}
-			getLoginScenario().flushBeans();
+		@Then("^user validates sendUS A question Widget in redesign contact us page$")
+		public void user_validates_sendUsQuestion_Widget()
+		{
+			ContactUsPage contactusPage=(ContactUsPage)getLoginScenario().getBean(PageConstants.CONTACTUS_PAGE);
+			
+			contactusPage.validateSendUsAQuestionWidget();
+			
+			if(contactusPage != null)				
+				getLoginScenario().saveBean(PageConstants.CONTACTUS_PAGE,
+						contactusPage);
+			
+		}
+		@Then("^user validates PDP page display in redesign contact us page$")
+		public void PdpPageDisplay()
+		{
+			ContactUsPage contactusPage=(ContactUsPage)getLoginScenario().getBean(PageConstants.CONTACTUS_PAGE);
+			
+			contactusPage.PdpPageDisplay();
+			
+			if(contactusPage != null)				
+				getLoginScenario().saveBean(PageConstants.CONTACTUS_PAGE,
+						contactusPage);
+			
 		}
 
 	}

@@ -16,6 +16,7 @@ import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import pages.member.bluelayer.AccountHomePage;
 import pages.mobile.member.blayer.BenefitsSummaryPage;
 import pages.mobile.member.blayer.ContactUsPage;
 import pages.mobile.member.blayer.LoginPage;
@@ -25,6 +26,7 @@ import acceptancetests.login.data.LoginCommonConstants;
 import atdd.framework.MRScenario;
 import cucumber.annotation.en.Given;
 import cucumber.annotation.en.Then;
+import cucumber.annotation.en.When;
 import cucumber.table.DataTable;
 
 public class ContactUSRedesignUhcStepDefinition {
@@ -103,24 +105,10 @@ public class ContactUSRedesignUhcStepDefinition {
 					benefitsSummaryPage);
 	}
 
-	/*@When("^the user navigates to redesign contact us page in AARP site$")
-	public void views_order_materials_in_redesignUms_site() {
-		BenefitsSummaryPage beneFitsSummaryPage = (BenefitsSummaryPage) getLoginScenario()
-				.getBean(PageConstants.BENEFITS_SUMMARY_PAGE);
-		ContactUsPage contactUsPage = beneFitsSummaryPage
-				.navigateToContactusRedesignPage();
-		if (contactUsPage != null) {
-
-			getLoginScenario().saveBean(PageConstants.CONTACTUS_PAGE,
-					contactUsPage);
-
-		}
-
-	}*/
 	
 	
 	
-	@Then("^the user validates the contact us redesign  page in AARP site$")
+	@When("^the user validates the contact us redesign  page in UHC site$")
 	public void validates_plan_materials_plan_document_section_redesignums() {
 		
 		BenefitsSummaryPage beneFitsSummaryPage = (BenefitsSummaryPage) getLoginScenario()
@@ -133,72 +121,41 @@ public class ContactUSRedesignUhcStepDefinition {
 	}
 	
 		
-		
-
-		/*@When("^the user navigates to redesign contact us page in AARP site$")
-		public void views_order_materials_in_redesignUms_site() {
-			AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario()
-					.getBean(PageConstants.ACCOUNT_HOME_PAGE);
-			ContactUsPage contactUsPage = accountHomePage
-					.navigatesToContactUsPage();
-			if (contactUsPage != null) {
-
-				getLoginScenario().saveBean(PageConstants.CONTACT_US_PAGE,
-						contactUsPage);
-
-			}
-
-		}*/
-		
-		
-		
-		/*@When("^the user navigates to contact us page in UHC site$")
-		public void validates_contactUs_Redesign_Page() {
-			
-			AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstants.ACCOUNT_HOME_PAGE);
-			
-			ContactUsPage contactUsPage = accountHomePage.navigateToContactusRedesignPage();
-			if(contactUsPage != null)				
-				getLoginScenario().saveBean(PageConstants.CONTACT_US_PAGE,
-						contactUsPage);
-		}
-		
-		@Then("^user validates secure email widget UI in redesign contact us page$")
+		@Then("^user validates secure email Group widget UI in redesign contact us page$")
 		public void user_validates_email_widget_UIPage()
 		{
-			ContactUsPage contactusPage=(ContactUsPage)getLoginScenario().getBean(PageConstants.CONTACT_US_PAGE);
+			ContactUsPage contactusPage=(ContactUsPage)getLoginScenario().getBean(PageConstants.CONTACTUS_PAGE);
 			
 			contactusPage.validateSendUaQuestionWidget();
 			
 			if(contactusPage != null)				
-				getLoginScenario().saveBean(PageConstants.CONTACT_US_PAGE,
+				getLoginScenario().saveBean(PageConstants.CONTACTUS_PAGE,
 						contactusPage);
 			
 		}
 		
 		
-		
 		@Then("^user validates Group secure email widget  in redesign contact us page$")
 		public void user_validates_email_widget_func()
 		{
-			ContactUsPage contactusPage=(ContactUsPage)getLoginScenario().getBean(PageConstants.CONTACT_US_PAGE);
+			ContactUsPage contactusPage=(ContactUsPage)getLoginScenario().getBean(PageConstants.CONTACTUS_PAGE);
 			
 			contactusPage.validateSendUsaQuestionWidgetfunctionality();
 			
 			if(contactusPage != null)				
-				getLoginScenario().saveBean(PageConstants.CONTACT_US_PAGE,
+				getLoginScenario().saveBean(PageConstants.CONTACTUS_PAGE,
 						contactusPage);
 			
 		}
 		@Then("^user validates cancel click on Group secure email widget  in redesign contact us page$")
 		public void user_validates_email_widget_Cancel_Click()
 		{
-			ContactUsPage contactusPage=(ContactUsPage)getLoginScenario().getBean(PageConstants.CONTACT_US_PAGE);
+			ContactUsPage contactusPage=(ContactUsPage)getLoginScenario().getBean(PageConstants.CONTACTUS_PAGE);
 			
 			contactusPage.validateSendUaQuestionWidgetCancelClick();
 			
 			if(contactusPage != null)				
-				getLoginScenario().saveBean(PageConstants.CONTACT_US_PAGE,
+				getLoginScenario().saveBean(PageConstants.CONTACTUS_PAGE,
 						contactusPage);
 			
 		}
@@ -207,114 +164,41 @@ public class ContactUSRedesignUhcStepDefinition {
 		@Then("^user clicks on submit question by selecting Finding a Physician option in redesign contact us page$")
 		public void user_clicks_submit_question()
 		{
-			ContactUsPage contactusPage=(ContactUsPage)getLoginScenario().getBean(PageConstants.CONTACT_US_PAGE);
+			ContactUsPage contactusPage=(ContactUsPage)getLoginScenario().getBean(PageConstants.CONTACTUS_PAGE);
 			
 			contactusPage.submitQuestionClick();
 			
 			if(contactusPage != null)				
-				getLoginScenario().saveBean(PageConstants.CONTACT_US_PAGE,
+				getLoginScenario().saveBean(PageConstants.CONTACTUS_PAGE,
 						contactusPage);
 			
-		}*/
-		
-	/*	@Then("^user validates secure email widget functionality using Email Address on File radio button$")
-		public void user_validates_email_widget_func_byEmailAddress_Radio_button()
+		}
+		@Then("^user enters invalidate alternative email ID in sendUS A question widget$")
+		public void email_Validations()
 		{
-			ContactUsPage contactusPage=(ContactUsPage)getLoginScenario().getBean(PageConstants.CONTACT_US_PAGE);
+			ContactUsPage contactusPage=(ContactUsPage)getLoginScenario().getBean(PageConstants.CONTACTUS_PAGE);
 			
-			contactusPage.validateEmailby_Email_Address_RadioButton();
+			contactusPage.sendUsQuestion_Field_Validations();
 			
 			if(contactusPage != null)				
-				getLoginScenario().saveBean(PageConstants.CONTACT_US_PAGE,
+				getLoginScenario().saveBean(PageConstants.CONTACTUS_PAGE,
 						contactusPage);
 			
 		}
 		
-		@Then("^user validates secure Messaging Model$")
-		public void user_validates_SecureMessagingModel()
+		@Then("^user enters invalidate Confirm email ID in sendUS A question widget$")
+		public void invalidate_confirmEmailValidations()
 		{
-			ContactUsPage contactusPage=(ContactUsPage)getLoginScenario().getBean(PageConstants.CONTACT_US_PAGE);
+			ContactUsPage contactusPage=(ContactUsPage)getLoginScenario().getBean(PageConstants.CONTACTUS_PAGE);
 			
-			contactusPage.validateSecureEmailModelfunctionality();
+			contactusPage.sendUsQuestion_confirmEmailID_Validations();
 			
 			if(contactusPage != null)				
-				getLoginScenario().saveBean(PageConstants.CONTACT_US_PAGE,
-						contactusPage);
-			
-			
-		}
-		
-		@Then("^user validates secure Messaging Model Cancel link$")
-		public void user_validates_SecureMessagingModel_Cancel()
-		{
-			ContactUsPage contactusPage=(ContactUsPage)getLoginScenario().getBean(PageConstants.CONTACT_US_PAGE);
-			
-			contactusPage.validateSecureEmailModel_Cancellink_Click();
-			
-			if(contactusPage != null)				
-				getLoginScenario().saveBean(PageConstants.CONTACT_US_PAGE,
-						contactusPage);
-			
-			
-		}
-		
-		@Then("^user validates go To Inbox button  in redesign contact us page$")
-		public void user_validates_goToInBoxDiaplay()
-		{
-			ContactUsPage contactus=(ContactUsPage)getLoginScenario().getBean(PageConstants.CONTACT_US_PAGE);
-			
-			contactus.goToInBoxButtonDisplay();
-			
-		}
-		
-		@Then("^user validates clickToCallButton display on contactUS redesign page$")
-		public void validates_clickToCall_widget()
-		{
-			ContactUsPage contactusPage=(ContactUsPage)getLoginScenario().getBean(PageConstants.CONTACT_US_PAGE);
-			
-			contactusPage.validates_clickToCall_widget();
-			
-			if(contactusPage != null)				
-				getLoginScenario().saveBean(PageConstants.CONTACT_US_PAGE,
+				getLoginScenario().saveBean(PageConstants.CONTACTUS_PAGE,
 						contactusPage);
 			
 		}
 		
-		@And("^user clicks on send a Request button on Click to call widget$")
-		public void Requestcall_click()
-		{
-			ContactUsPage contactusPage=(ContactUsPage)getLoginScenario().getBean(PageConstants.CONTACT_US_PAGE);
-			
-			contactusPage.sendAreqclick();
-			
-			if(contactusPage != null)				
-				getLoginScenario().saveBean(PageConstants.CONTACT_US_PAGE,
-						contactusPage);
-			
-		}
 		
-		@And("^user clicks on Request Confirmation Click$")
-		public void RequestcallConfimration_click()
-		{
-			ContactUsPage contactusPage=(ContactUsPage)getLoginScenario().getBean(PageConstants.CONTACT_US_PAGE);
-			
-			contactusPage.reqCallclickConfrimation();
-			
-			if(contactusPage != null)				
-				getLoginScenario().saveBean(PageConstants.CONTACT_US_PAGE,
-						contactusPage);
-			
-		}*/
-
-		/*@After
-		public void tearDown() {
-			WebDriver wd = (WebDriver) getLoginScenario().getBean(
-					CommonConstants.WEBDRIVER);
-			if(wd!=null){
-				wd.quit();
-			}
-			getLoginScenario().flushBeans();
-		}*/
-
 	}
 
