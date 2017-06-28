@@ -58,25 +58,25 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 	@FindBy(xpath = "//span[contains(.,'keyboard_arrow_down')]")
 	private WebElement disclaimersLink;
 
-        @FindBy(xpath = "html/body/div[4]/div[2]/section/div/div/div/h2")
+        @FindBy(xpath = ".//*[@id='plan_benefit_documents']/section/div/div[1]/div")
 	private WebElement planBenefitsDocuments;
 	
         @FindBy(xpath = ".//*[@id='lang-select-2']")
 	private WebElement langdropdown;
     
-        @FindBy(xpath = ".//*[@id='planBenefitsApp']/div[2]/div[1]/div")
+        @FindBy(xpath = ".//*[@id='ancillary_benefits']/div[2]/div[1]/div")
 	private WebElement Hearingsection;
     
-        @FindBy(xpath = ".//*[@id='planBenefitsApp']/div[2]/div[2]/div")
+        @FindBy(xpath = ".//*[@id='ancillary_benefits']/div[2]/div[2]/div")
 	private WebElement Hearingaid;
     
-        @FindBy(xpath = ".//*[@id='planBenefitsApp']/div[3]/div[1]/div")
+        @FindBy(xpath = ".//*[@id='ancillary_benefits']/div[3]/div[1]/div")
 	private WebElement Visionsection;
     
-        @FindBy(xpath = ".//*[@id='planBenefitsApp']/div[3]/div[2]/div")
+        @FindBy(xpath = ".//*[@id='ancillary_benefits']/div[3]/div[2]/div")
 	private WebElement Dentalsection;
     
-    @FindBy(xpath = ".//*[@id='planBenefitsApp']/div[1]/div")
+    @FindBy(xpath = ".//*[@id='ancillary_benefits']/div[1]/div")
 	private WebElement Headersection; 
     
     @FindBy(className = "h4 color-blue medium margin-small")

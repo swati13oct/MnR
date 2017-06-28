@@ -191,6 +191,9 @@ public class AccountHomePage extends UhcDriver {
 	@FindBy(linkText = "Go to redesign benefits and coverage page")
 	private WebElement BnClink;
 	
+	@FindBy(linkText = "Go to benefits and coverage page page")
+	private WebElement BnClink2;
+	
 	
 
 	public JSONObject accountHomeJson;
@@ -745,6 +748,24 @@ public FormsandresourcesPage navigateToMydocumentAarpPage() {
 		//driver.manage().timeouts().implicitlyWait(40, TimeUnit.SECONDS);
 		System.out.println(driver.getTitle());
 	 if(driver.getTitle().equalsIgnoreCase("Benefits And Coverage Page Redesign")){
+	        return new BenefitsAndCoveragePage(driver);
+		}
+		return null;
+		}
+	
+	public BenefitsAndCoveragePage navigateDirectToBnCPage()
+	{
+		driver.navigate().to(PAGE_URL);
+		BnClink2.click();
+		try {
+			Thread.sleep(30000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		//driver.manage().timeouts().implicitlyWait(40, TimeUnit.SECONDS);
+		System.out.println(driver.getTitle());
+	 if(driver.getTitle().equalsIgnoreCase("Benefits And Coverage Page")){
 	        return new BenefitsAndCoveragePage(driver);
 		}
 		return null;

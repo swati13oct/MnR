@@ -98,7 +98,7 @@ public class BenefitsAndCoverageUmsStepDefinition {
 		WebDriver wd = getLoginScenario().getWebDriver();
         
 		LoginPage2 loginPage = new LoginPage2(wd);
-		AccountHomePage accountHomePage = (AccountHomePage)loginPage.loginWith(userName, pwd);
+		AccountHomePage accountHomePage = (AccountHomePage)loginPage.loginWith(userName, pwd,category);
 		
 		if (accountHomePage != null) 
 		   {
@@ -640,8 +640,9 @@ public class BenefitsAndCoverageUmsStepDefinition {
 	
 	@Then("^the user validates Plan Documents section")
 	public void validateContentOnBenefitsAndCoveragePage1() {
-		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario().getBean(PageConstants.BENEFITS_AND_COVERAGE_PAGE);
-		benefitsCoveragePage.PlanDocumentssection();
+		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario().getBean(
+   				PageConstants.BENEFITS_COVERAGE_PAGE);
+   	benefitsCoveragePage.PlanDocumentssection();
 	}
 	
 	@Then("^the user validates the content on benefits and coverage page")
@@ -811,12 +812,13 @@ public class BenefitsAndCoverageUmsStepDefinition {
 		benefitsCoveragePage.Header();
 	
          }	
-	@And("^the user validates Drug coverage header and text under the section")
+	@And("^the user validates plandocumentsection and Drug coverage header and text under the section")
 	public void user_validates__drugcoverage_section()
 	{
 		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario().getBean(
 				PageConstants.BENEFITS_COVERAGE_PAGE);
 		benefitsCoveragePage.validatedrugcoverageheaderandtext();
+		benefitsCoveragePage.PlanDocumentssection();
 }
 
 	@And("^the user validates text for the Look Up Drugs section")
