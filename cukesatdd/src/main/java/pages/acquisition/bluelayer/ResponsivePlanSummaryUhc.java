@@ -244,7 +244,7 @@ public class ResponsivePlanSummaryUhc extends UhcDriver{
 			@FindBy(xpath="//a[@class='ng-binding']")
             private WebElement planYearToggle;
 			
-			@FindBy(xpath="//div[4]/div/div[1]/div/div/h2")
+			@FindBy(xpath="html/body/div[6]/div[4]/div/div/div/div/div/div/div[3]/div[1]/div/div/div/div[1]/div/div[1]/div/div[1]/div/h2")
             private WebElement viewPlanHeader;
 
 			
@@ -1094,18 +1094,21 @@ public void comparePlanslnk(){
                            return null;
                     }
 
-				public ResponsivePlanSummaryUhc validateBlueBanner(String timePeriod, String currentYear, String futureYear){
+				public ResponsivePlanSummaryUhc validateBlueBanner(String timePeriod, String currentYear, String futureYear, String planType, String planName){
 					if(timePeriod.equalsIgnoreCase("AEP")){
 						System.out.println("User is in AEP");
 						if(blueBannerText.getText().contains(futureYear)) {
-							if(viewPlanHeader.getText().contains(futureYear)){
-								System.out.println(futureYear + " Plans Displayed correctly"); 
+							/*if(driver.findElement(By.xpath("//h2[@class='ng-binding' and contains(text(),'2017')]")).getText().contains(futureYear)){
+								System.out.println(futureYear + " Plans Displayed correctly");
+								//validateEnrollInPlan(planType, planName);
 							}else{
 								System.out.println(futureYear + " Plans Not Displayed correctly");
 								Assert.fail();
-							}	
-							planYearToggle.click();				
-							if(viewPlanHeader.getText().contains(currentYear)){
+							}*/	
+							planYearToggle.click();	
+							//System.out.println(viewPlanHeader.getText());
+							if(planYearToggle.getText().contains(futureYear)){
+								//validateEnrollInPlan(planType, planName);
 								System.out.println(currentYear + " Plans Displayed correctly"); 
 							}else{
 								System.out.println(currentYear + " Plans Not Displayed correctly");
@@ -1119,5 +1122,39 @@ public void comparePlanslnk(){
 					}
 					return null;
 				}
-				}
+			 
+				/*public ResponsivePlanSummaryUhc validateEnrollInPlan(String planType, String planName){
+					if(planType!="SNP"){
+						System.out.println("Enroll Plan Validation Starts");
+						if (planName.contains("HMO")) {
+							for (WebElement plan : maPlanElement) {
+								if (plan.getText().contains(planName)) {
+									ElementData elementData = new ElementData("xpath", "//*[contains(text(),'Enroll in plan')]");
+									if(findChildElement(elementData, plan).isDisplayed()){
+										System.out.println("Enroll Plan Link Displayed Correcetly");
+										Assert.assertTrue(true);
+										}else{
+											System.out.println("Enroll Plan Link not displayed");
+											Assert.fail();
+										}
+									}
+								}}
+						else if (planName.contains("PDP")) {
+									for (WebElement plan : pdpPlanElement) {
+										if (plan.getText().contains(planName)) {
+											ElementData elementData = new ElementData("id", "enrollPDP"); // TODO:
+																											// Re-check
+											findChildElement(elementData, plan).click();
+
+										}
+										break;
+									}
+							}		                 
+						return new ResponsivePlanSummaryUhc(driver);
+					}else{
+						System.out.println("No Enroll Option for SNP Plans");
+						return null;
+					}
+ 				}*/
+	}
 			 
