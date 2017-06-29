@@ -243,9 +243,21 @@ public class ResponsivePlanSummaryUhc extends UhcDriver{
 			@FindBy(xpath="html/body/div[6]/div[4]/div/div/div/div/div/div/div[3]/div[1]/div/div/div/div[1]/div/div[1]/div/div[1]/div/h2")
             private WebElement viewPlanHeader;
 
+			@FindBy(xpath="//div[@class='tab plancountheight'][1]/div/span/span")
+            private WebElement maPlanCount;
+			
+			/*@FindBy(xpath="//div[@class='tab plancountheight'][1]/div/span/span")
+            private WebElement maPlanCount;
+			
+			@FindBy(xpath="//div[@class='tab plancountheight'][1]/div/span/span")
+            private WebElement maPlanCount;*/
 			
 		@FindBy	(xpath="//span[@class='remove-plan-text show']/p")
 		private WebElement errorMessage;
+		
+		@FindBy	(xpath="//div[@class='mabenefittable']/parent::div/parent::div")
+		private List<WebElement> maPlanCardNumber;
+		
 			
 			private static String CAMPAIGN_URL_1 = MRConstants.CAMPAIGN_PAGE_URL1;
 			
@@ -483,6 +495,8 @@ public void comparePlanslnk(){
 	}
 	
 	 public void planCountOnPlanCard(){
+		 System.out.println(planCountList.size());
+		 System.out.println(planIndexList.size());
 		   for(int i=0;i<=planCountList.size();i++){
 			   planCountList.get(i).click();
 			   for(int j=0;j<=planIndexList.size();i++){
@@ -1153,6 +1167,25 @@ public void comparePlanslnk(){
 					}
  				}*/
 				
-				
+				public void validatePlanCount(String planType){
+					List<WebElement> planCardNumber = driver.findElements(By.xpath("//div[@class='"+planType+"benefittable']"
+							+ "/parent::div/parent::div"));
+					System.out.println(planCardNumber.size());
+					if (planType.equalsIgnoreCase("PDP")) {
+  							} else if (planType.equalsIgnoreCase("MA")|| planType.equalsIgnoreCase("MAPD")) {
+  								int planCount =	Integer.parseInt(maPlanCount.getText());
+  								System.out.println(planCount);
+  								if(planCardNumber.size()==planCount){
+  									System.out.println("------count number matches---"); 
+  									Assert.assertTrue(true);
+  								}else{
+  									System.out.println("-----count number mis-match-----");
+  									Assert.fail();
+  								}
+  							}else if(planType.equalsIgnoreCase("MS")){
+						           showMsPlans.click();
+ 						}else if(planType.equalsIgnoreCase("SNP")){
+  					}
+				}			
 	}
 			 

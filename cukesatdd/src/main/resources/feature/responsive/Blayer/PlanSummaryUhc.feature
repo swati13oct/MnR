@@ -164,7 +164,7 @@ Examples:
 		|zipCode|county            |planType	|  firstname | lastname | emailaddress |
 		|90210  |Los Angeles County|PDP        |	 Eva        | Zhong     |weixin.zhong@optum.com|
 		
-		
+@planCount12		
 Scenario Outline: To validate plan count from portfolio page
 Given the user is on the vpp portfolio page
 Then the user performs plan search using zipcode
@@ -172,7 +172,7 @@ Then the user performs plan search using zipcode
               | County   |<county> |
 Then the user navigates to the following plan type
 | PlanType | <planType> |
- And the user validates navigates plan selector page and validates the contents	  		
+ And the user should see plan count for the plan type seelcted	  		
 Examples:
-		|zipCode|county						 |planType |planName					   |
-		|33012  |Los Angeles County|SNP      |Miami-Dade County    |						
+		|zipCode|county						 |planType | 
+		|90210  |Los Angeles County|MA       | 						

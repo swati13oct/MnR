@@ -279,5 +279,11 @@ public class ResponsiveUhcStepDefiniton {
 				.getBean(PageConstants.VPP_REQUEST_SEND_EMAIL_PAGE);
 		requestSendEmailPage.sendEmailByClickSummbitButtonOnEmailWidget(firstName, lastName, emailAddress);
     }
-
+   @And("^the user should see plan count for the plan type seelcted$")
+   public void user_should_see_plan_count(){
+	   ResponsivePlanSummaryUhc planSummary = (ResponsivePlanSummaryUhc) getLoginScenario()
+				.getBean(PageConstants.RESPONSIVE_PLAN_SUMMARY_PAGE_UHC);
+	   planSummary.validatePlanCount("ma");
+	   
+   }
 }
