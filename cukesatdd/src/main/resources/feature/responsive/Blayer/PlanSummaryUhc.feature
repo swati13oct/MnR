@@ -1,6 +1,6 @@
 @planSummaryPage
 Feature: To verify mobile responsive
-@planCount @sprint1
+@planCount @sprint2
 Scenario Outline: To validate plan count from portfolio page
 Given the user is on the vpp portfolio page
 Then the user performs plan search using zipcode
@@ -14,7 +14,7 @@ Examples:
 |zipCode|county          |planType |
 |33012 |Miami-Dade County| SNP     |
 
-@planhighlights @sprint1
+@planhighlights @sprint2
 Scenario Outline: To validate plan count from portfolio page
 Given the user is on the vpp portfolio page
 Then the user performs plan search using zipcode
@@ -28,7 +28,7 @@ Examples:
 |zipCode|county          |planType |
 |33012 |Miami-Dade County| SNP     |
 
-@enrollPlan @sprint1
+@enrollPlan @sprint2
 Scenario Outline: To validate plan count from portfolio page
 Given the user is on the vpp portfolio page
 Then the user performs plan search using zipcode
