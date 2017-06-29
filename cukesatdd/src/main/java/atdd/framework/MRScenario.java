@@ -1,7 +1,6 @@
 package atdd.framework;
 
 import java.io.BufferedReader;
-import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -20,19 +19,11 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
-import java.util.Hashtable;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Properties;
-import java.util.concurrent.TimeUnit;
-
-import javax.naming.Context;
-import javax.naming.Name;
-import javax.naming.NamingException;
-import javax.naming.directory.DirContext;
-import javax.naming.directory.InitialDirContext;
 
 import org.apache.commons.lang3.StringUtils;
 import org.json.JSONException;
@@ -40,16 +31,11 @@ import org.json.JSONObject;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
-import org.openqa.selenium.firefox.FirefoxBinary;
-import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.firefox.FirefoxProfile;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.phantomjs.PhantomJSDriver;
 import org.openqa.selenium.phantomjs.PhantomJSDriverService;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
-import org.springframework.ldap.core.DirContextAdapter;
-import org.springframework.ldap.core.DistinguishedName;
 import org.springframework.stereotype.Component;
 
 import acceptancetests.atdd.data.CommonConstants;
@@ -79,7 +65,7 @@ public class MRScenario {
 	public static String environment;
 
 	private static final String DIRECTORY = "/src/main/resources/";
-	
+
 	private static final String SQL_COMMIT = "COMMIT";
 
 	public static int count = 0;
@@ -130,9 +116,6 @@ public class MRScenario {
 		/* Default Schema */
 		String defaultSchema = props.get(CommonConstants.DB_SCHEMA);
 
-		/* Get LDAP Context */
-		DirContext ctx = getLdapContext(props);
-
 		InputStream massRegisStream = ClassLoader.class
 				.getResourceAsStream("/database/mass-registration.csv");
 		BufferedReader massRegisStreamReader = new BufferedReader(
@@ -145,15 +128,17 @@ public class MRScenario {
 		try {
 			while ((line = massRegisStreamReader.readLine()) != null) {
 				String[] massRegisStreamAttributes = line.split(cvsSplitBy);
-				/*pperugu: To skip the first line in CSV file */
-				if(!(massRegisStreamAttributes[0].equalsIgnoreCase("USERNAME")))
-				{
+				/* pperugu: To skip the first line in CSV file */
+				if (!(massRegisStreamAttributes[0].equalsIgnoreCase("USERNAME"))) {
 					userName = massRegisStreamAttributes[0];
-					/*pperugu ::Approach followed :: to remove the already registered member and register the members again*/
-					if (checkMemberFound(userName, con, ctx, defaultSchema)) {
-						removeMemberFound(userName, con, ctx, defaultSchema);
+					/*
+					 * pperugu ::Approach followed :: to remove the already
+					 * registered member and register the members again
+					 */
+					if (checkMemberFound(userName, con, defaultSchema)) {
+						removeMemberFound(userName, con, defaultSchema);
 					}
-					addMember(userName, con, ctx, defaultSchema,
+					addMember(userName, con, defaultSchema,
 							massRegisStreamAttributes);
 					userNamesAddedList.add(userName);
 				}
@@ -222,7 +207,7 @@ public class MRScenario {
 	}
 
 	private static boolean checkMemberFound(String userName, Connection con,
-			DirContext ctx, String defaultSchema) {
+			String defaultSchema) {
 
 		Statement stmt;
 		ResultSet rs = null;
@@ -236,17 +221,11 @@ public class MRScenario {
 			e.printStackTrace();
 		}
 		try {
-			Object user = null;
-			try {
-				user = ctx.lookup(buildUserDistinguishedName(userName));
-			} catch (NamingException e) {
-				System.out.println("member not found in ldap");
-			}
 
-			if (rs.next() && user != null) {
+			if (rs.next()) {
 				return true;
 			} else {
-				System.out.println("member not found in database and ldap");
+				System.out.println(userName + ": Not found in database");
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -255,7 +234,7 @@ public class MRScenario {
 	}
 
 	private static void removeMemberFound(String userName, Connection con,
-			DirContext ctx, String defaultSchema) {
+			String defaultSchema) {
 
 		Statement stmt;
 		ResultSet rs = null;
@@ -271,25 +250,6 @@ public class MRScenario {
 		}
 
 		try {
-			Object user = null;
-			try {
-				user = ctx.lookup(buildUserDistinguishedName(userName));
-
-			} catch (NamingException e) {
-				System.out.println("member not found in ldap");
-			}
-
-			/* Checking in LDAP */
-			if (user != null) {
-				ctx.unbind(buildUserDistinguishedName(userName));
-				System.out.println("USERNAME " + userName
-						+ " removed from LDAP");
-
-			} else {
-				System.out.println("member not found in ldap :: USERNAME "
-						+ userName + " NOT REGISTERED");
-			}
-
 			/* Checking in DataBase */
 			if (rs.next()) {
 				stmt = con.createStatement();
@@ -314,54 +274,19 @@ public class MRScenario {
 
 		} catch (SQLException e) {
 			e.printStackTrace();
-		} catch (NamingException e) {
-			e.printStackTrace();
 		}
 
 	}
 
 	private static void addMember(String userName, Connection con,
-			DirContext ctx, String defaultSchema,
-			String[] massRegisStreamAttributes) {
+			String defaultSchema, String[] massRegisStreamAttributes) {
 
 		Statement stmt;
 		ResultSet rs = null;
 
-		String password = massRegisStreamAttributes[1];
-		String firstName = massRegisStreamAttributes[2];
-		String lastName = massRegisStreamAttributes[3];
 		String individualID = massRegisStreamAttributes[5];
 		String accountID = massRegisStreamAttributes[6];
 		String businessType = massRegisStreamAttributes[7];
-
-		List<String> objectClasses = Arrays.asList("top", "person",
-				"organizationalPerson", "inetorgperson");
-
-		/* Creating LDAP entry */
-		String cn = firstName + " " + lastName;
-		String sn = lastName;
-		String givenName = firstName;
-
-		DirContextAdapter context = createUserContext(userName);
-
-		context.setAttributeValue(CommonConstants.USER_PASSWORD, password);
-		context.setAttributeValue(CommonConstants.UID, userName);
-		context.setAttributeValue(CommonConstants.BUSINESS_CATEGORY, "");
-		context.setAttributeValue(CommonConstants.ATTRIB_FIRST_NAME, givenName);
-		context.setAttributeValues(CommonConstants.ATTRIB_OBJECT_CLASS,
-				objectClasses.toArray());
-		context.setAttributeValue(CommonConstants.ATTRIB_LAST_NAME, sn);
-		context.setAttributeValue(CommonConstants.ATTRIB_COMMON_NAME, cn);
-
-		try {
-			ctx.bind(context.getDn(), context, null);
-			System.out
-					.println(userName + " Entry Created in LDAP successfully");
-		} catch (NamingException e) {
-			System.out
-			.println("ERROR:: Creating "+userName+" in LDAP");
-			e.printStackTrace();
-		}
 
 		/* Creating Database entry */
 
@@ -402,41 +327,14 @@ public class MRScenario {
 			rs = stmt.executeQuery(portalUserEntryQuery);
 			rs = stmt.executeQuery(portalUserAccountEntryQuery);
 			rs = stmt.executeQuery(SQL_COMMIT);
-			
-			System.out
-			.println(userName + " Entry Created in DATABASE successfully");
+
+			System.out.println(userName
+					+ " Entry Created in DATABASE successfully");
 
 		} catch (SQLException e) {
-			System.out
-			.println("ERROR:: Creating "+userName+" in DATABASE");
+			System.out.println("ERROR:: Creating " + userName + " in DATABASE");
 			e.printStackTrace();
 		}
-
-	}
-
-	private static DirContextAdapter createUserContext(String userName) {
-		Name dn = buildUserDistinguishedName(userName);
-		return new DirContextAdapter(dn);
-	}
-
-	private static DirContext getLdapContext(Map<String, String> props) {
-		Hashtable<String, String> env = new Hashtable<String, String>();
-		env.put(Context.INITIAL_CONTEXT_FACTORY,
-				"com.sun.jndi.ldap.LdapCtxFactory");
-		env.put(Context.PROVIDER_URL, props.get(CommonConstants.LDAP_URL)
-				+ props.get(CommonConstants.LDAP_BASE));
-		env.put(Context.SECURITY_PRINCIPAL,
-				props.get(CommonConstants.LDAP_USER));
-		env.put(Context.SECURITY_CREDENTIALS,
-				props.get(CommonConstants.LDAP_PASSWORD));
-		DirContext ctx = null;
-		try {
-			ctx = new InitialDirContext(env);
-		} catch (NamingException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return ctx;
 
 	}
 
@@ -468,9 +366,6 @@ public class MRScenario {
 		// Set up DB
 		Connection con = getDBConnection(props);
 
-		// Get LDAP Context
-		DirContext ctx = getLdapContext(props);
-
 		// Default Schema
 		String defaultSchema = props.get(CommonConstants.DB_SCHEMA);
 
@@ -488,26 +383,6 @@ public class MRScenario {
 			}
 
 			try {
-				Object user = null;
-				try {
-					user = ctx.lookup(buildUserDistinguishedName(userName));
-
-				} catch (NamingException e) {
-					System.out.println("member not found in ldap");
-				}
-
-				/* Checking in LDAP */
-				if (user != null) {
-					ctx.unbind(buildUserDistinguishedName(userName));
-
-					System.out.println("USERNAME " + userName
-							+ " removed from LDAP");
-
-				} else {
-					System.out.println("member not found in ldap :: USERNAME "
-							+ userName + " NOT REGISTERED");
-				}
-
 				/* Checking in DataBase */
 				if (rs.next()) {
 					stmt = con.createStatement();
@@ -533,8 +408,6 @@ public class MRScenario {
 
 			} catch (SQLException e) {
 				e.printStackTrace();
-			} catch (NamingException e) {
-				e.printStackTrace();
 			}
 		}
 
@@ -542,14 +415,6 @@ public class MRScenario {
 			/* Closing database connection */
 			con.close();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
-		try {
-			/* Closing LDAP connection */
-			ctx.close();
-		} catch (NamingException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
@@ -584,12 +449,6 @@ public class MRScenario {
 			props.put(key, value);
 		}
 		return props;
-	}
-
-	private static Name buildUserDistinguishedName(String userName) {
-		DistinguishedName dn = new DistinguishedName();
-		dn.add(CommonConstants.UID, userName);
-		return dn;
 	}
 
 	public Map<String, String> getAMPMemberWithDesiredAttributes(
@@ -637,7 +496,6 @@ public class MRScenario {
 		// No match found
 		return null;
 	}
-
 
 	public static JSONObject readExpectedJson(String fileName, String directory) {
 
@@ -700,9 +558,8 @@ public class MRScenario {
 		}
 		return jsonObject;
 	}
-	
-	public Map<String, JSONObject> getExpectedJson(String user) {
 
+	public Map<String, JSONObject> getExpectedJson(String user) {
 
 		if (null != user && expectedDataMapUlayer.containsKey(user)) {
 			return expectedDataMapUlayer.get(user);
@@ -717,7 +574,6 @@ public class MRScenario {
 			return null;
 		}
 	}
-
 
 	public WebDriver getWebDriver() {
 
@@ -805,11 +661,9 @@ public class MRScenario {
 			System.setProperty("phantomjs.page.settings.userAgent", userAgent);
 			webDriver = new PhantomJSDriver(caps);
 
-
 		}
 		return webDriver;
 	}
-	
 
 	public WebDriver getIEDriver() {
 		System.setProperty("webdriver.ie.driver",
@@ -857,75 +711,48 @@ public class MRScenario {
 		// Set up DB
 		Connection con = getDBConnection(props);
 
-		// Get LDAP Context
-		DirContext ctx = getLdapContext(props);
-
 		// Default Schema
 		String defaultSchema = props.get(CommonConstants.DB_SCHEMA);
 
 		Statement stmt;
 		ResultSet rs = null;
-			try {
+		try {
+			stmt = con.createStatement();
+			String query = "select * from " + defaultSchema
+					+ ".PORTAL_USER where USER_NAME='" + userName + "'";
+			rs = stmt.executeQuery(query);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		try {
+			/* Checking in DataBase */
+			if (rs.next()) {
 				stmt = con.createStatement();
-				String query = "select * from " + defaultSchema
+				String query = "DELETE FROM "
+						+ defaultSchema
+						+ ".PORTAL_USER_ACCOUNT where PORTAL_USER_ID in (select PORTAL_USER_ID from "
+						+ defaultSchema + ".PORTAL_USER where USER_NAME='"
+						+ userName + "')";
+				String query1 = "DELETE FROM " + defaultSchema
 						+ ".PORTAL_USER where USER_NAME='" + userName + "'";
 				rs = stmt.executeQuery(query);
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+				rs = stmt.executeQuery(query1);
+
+				System.out.println("USERNAME " + userName
+						+ " :: deleted from PORTAL_USER table");
+
+			} else {
+
+				System.out.println("USERNAME " + userName
+						+ " :: member not found in database");
 			}
 
-			try {
-				Object user = null;
-				try {
-					user = ctx.lookup(buildUserDistinguishedName(userName));
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 
-				} catch (NamingException e) {
-					System.out.println("member not found in ldap");
-				}
-
-				/* Checking in LDAP */
-				if (user != null) {
-					ctx.unbind(buildUserDistinguishedName(userName));
-
-					System.out.println("USERNAME " + userName
-							+ " removed from LDAP");
-
-				} else {
-					System.out.println("member not found in ldap :: USERNAME "
-							+ userName + " NOT REGISTERED");
-				}
-
-				/* Checking in DataBase */
-				if (rs.next()) {
-					stmt = con.createStatement();
-
-					String query = "DELETE FROM "
-							+ defaultSchema
-							+ ".PORTAL_USER_ACCOUNT where PORTAL_USER_ID in (select PORTAL_USER_ID from "
-							+ defaultSchema + ".PORTAL_USER where USER_NAME='"
-							+ userName + "')";
-					String query1 = "DELETE FROM " + defaultSchema
-							+ ".PORTAL_USER where USER_NAME='" + userName + "'";
-					rs = stmt.executeQuery(query);
-					rs = stmt.executeQuery(query1);
-
-					System.out.println("USERNAME " + userName
-							+ " :: deleted from PORTAL_USER table");
-
-				} else {
-
-					System.out.println("USERNAME " + userName
-							+ " :: member not found in database");
-				}
-
-			} catch (SQLException e) {
-				e.printStackTrace();
-			} catch (NamingException e) {
-				e.printStackTrace();
-			}
-		
-		 
 		try {
 			/* Closing database connection */
 			con.close();
@@ -934,16 +761,8 @@ public class MRScenario {
 			e.printStackTrace();
 		}
 
-		try {
-			/* Closing LDAP connection */
-			ctx.close();
-		} catch (NamingException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
 		System.out.println("Removing members in registration flow:: Complete");
-		
+
 	}
 
 }
