@@ -404,7 +404,30 @@ public class PlanBenefitsAndCoverageAarpStepDefinition {
 			System.out.println("Benefits and coverage expected ==============>"+benefitsandcoverageExectedJson.toString());
 		}
 	}
+@Then("^the user view benefits and coverage in AARP site$")
+	public void user_views_BenefitsAndCoverages() {
 
+		AccountHomePage accounthomepage = (AccountHomePage) getLoginScenario().getBean(
+				PageConstants.ACCOUNT_HOME_PAGE);
+
+		BenefitsAndCoveragePage benefitsCoveragePage = accounthomepage
+				.navigatesToBandCpage();
+		
+		if(benefitsCoveragePage!=null){
+			//Get actual data
+			JSONObject actualJsonObj=benefitsCoveragePage.benefitsandcoverageJson;
+			loginScenario.saveBean(PlanBenefitsAndCoverageCommonConstants.BENEFITS_AND_COVERAGE_ACTUAL, actualJsonObj);	
+			getLoginScenario().saveBean(PageConstants.BENEFITS_COVERAGE_PAGE, benefitsCoveragePage);
+			System.out.println("Benefits and coverage actual ==============>"+actualJsonObj.toString());
+			// Get expected data 
+			String fileName = this.userName;
+			String directory = CommonConstants.BENEFITS_AND_COVERAGE_PAGE_DIRECTORY;					
+			JSONObject benefitsandcoverageExectedJson = MRScenario.readExpectedJson(
+					fileName, directory);
+			loginScenario.saveBean(PlanBenefitsAndCoverageCommonConstants.BENEFITS_AND_COVERAGE_EXPECTED, benefitsandcoverageExectedJson);
+			System.out.println("Benefits and coverage expected ==============>"+benefitsandcoverageExectedJson.toString());
+		}
+	}
 //	@Then("^the user validates the content on benefits and coverage page")
 	public void validateContentOnBenefitsAndCoveragePage() {
 		
@@ -662,6 +685,101 @@ public class PlanBenefitsAndCoverageAarpStepDefinition {
 				PageConstants.VALUE_ADDED_SERVICES);
 		valueaddedservices.validatevisionDiscount();
 	}
+	@Then("^the user validates Header section$")
+	public void validate_DCE_section()
+	{
+		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario().getBean(
+				PageConstants.BENEFITS_COVERAGE_PAGE);
+		benefitsCoveragePage.Validate_dce_Section();
+	}
+	
+	@Then("^the user view the Drug Copays & Discounts header$")
+	public void validate_drugcopayheaderntext()
+	{
+		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario().getBean(
+				PageConstants.BENEFITS_COVERAGE_PAGE);
+		benefitsCoveragePage.validatedrugcoverageheaderandtext();
+	}
+	@Then("^the user validates the Locate Pharmacy section$")
+	public void validate_Locate_pharmacy_section()
+	{
+		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario().getBean(
+				PageConstants.BENEFITS_COVERAGE_PAGE);
+		benefitsCoveragePage.ValidatelocatephrmacySection();
+	}
+	
+	@Then("^the user validates the Look Up Drugs button$")
+	public void validate_Lookup_drug_section()
+	{
+		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario().getBean(
+				PageConstants.BENEFITS_COVERAGE_PAGE);
+		benefitsCoveragePage.LookupDrugbutton();
+	}
+	
+	@Then("^the user validates the Drug Coverage  section$")
+	public void validate_Drug_coverage_section()
+	{
+		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario().getBean(
+				PageConstants.BENEFITS_COVERAGE_PAGE);
+		benefitsCoveragePage.validatedrugcoverageheaderandtext();
+	}
+	
+	@Then("^the user validates the Learn More link and click on arrow$")
+	public void validate_Learnmore_link_section()
+	{
+		   BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario().getBean(
+		  				PageConstants.BENEFITS_COVERAGE_PAGE);
+		benefitsCoveragePage.validateLearnmoreLink();
+	}
+	
+	@And("^the user validates the user click on the link it expands and when user clicks it again it should collapse")
+	   public void user_validate_linksworking()
+	   {
+		   BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario().getBean(
+	  				PageConstants.BENEFITS_COVERAGE_PAGE);
+		   JSONObject benefitsandcoverageExectedJson=(JSONObject) loginScenario.getBean(PlanBenefitsAndCoverageCommonConstants.BENEFITS_AND_COVERAGE_EXPECTED);
+		  //benefitsCoveragePage.clickOnLearnmoreaboutlinktier(benefitsandcoverageExectedJson);
+		   //benefitsCoveragePage.clickOnLearnmoreaboutlinkstage(benefitsandcoverageExectedJson);
+	   }
+	@Then("^the user validates the Drug Header section$")
+	public void validate_DrugHeader_section()
+	{
+		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario().getBean(
+				PageConstants.BENEFITS_COVERAGE_PAGE);
+		benefitsCoveragePage.Validate_drugheader_section();
+	}
+	
+	@Then("^the user validates the Drug cost Header and text$")
+	public void validate_DrugCost_section()
+	{
+		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario().getBean(
+				PageConstants.BENEFITS_COVERAGE_PAGE);
+		benefitsCoveragePage.validate_drugcostheaderntext();
+	}
+	/*
+	@And("^the user validates the content under the Drug Cost section$")
+	public void validate_Content_drugcost_section()
+	{
+		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario().getBean(
+				PageConstants.BENEFITS_COVERAGE_PAGE);
+		benefitsCoveragePage.vasSection();
+	}*/
+	
+	@Then("^the user validates first select option selected should be Preferred Retail Pharmacy$")
+	public void validate_Pharmacy_dropdown_section()
+	{
+		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario().getBean(
+				PageConstants.BENEFITS_COVERAGE_PAGE);
+		benefitsCoveragePage.validate_preselectedPharmacy();
+	}
+	@Then("^the user validates dropdown should show three values$")
+	   public void user_validate_dropdwonvalues()
+	   {
+	   	   BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario().getBean(
+	   				PageConstants.BENEFITS_COVERAGE_PAGE);
+	   	JSONObject benefitsandcoverageExectedJson=(JSONObject) loginScenario.getBean(PlanBenefitsAndCoverageCommonConstants.BENEFITS_AND_COVERAGE_EXPECTED);
+	   	benefitsCoveragePage.validate_drugcostdropdownoptions(benefitsandcoverageExectedJson);
+	   }
 	/*@After
 	public void tearDown() {
 
