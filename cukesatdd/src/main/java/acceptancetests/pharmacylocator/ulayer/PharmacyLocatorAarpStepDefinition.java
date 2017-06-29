@@ -64,13 +64,13 @@ public class PharmacyLocatorAarpStepDefinition {
 		PharmacySearchPage pharmacySearchPage = acqusitionHomePage
 				.navigateToPharmacyLocator();
 
-		if (pharmacySearchPage != null) {
+		/*if (pharmacySearchPage != null) {
 			getLoginScenario().saveBean(PageConstants.PHARMACY_SEARCH_PAGE,
 					pharmacySearchPage);
 			Assert.assertTrue(true);
 		} else {
 			Assert.fail("Failed to load Pharmacy search page");
-		}
+		}*/
 
 	}
 
@@ -330,6 +330,13 @@ public class PharmacyLocatorAarpStepDefinition {
            PharmacyResultPage pharmacyResultPage = pharmacySearchPage
                         .ValidateSearchResultpdp();
            
+    }
+    
+    @When("^the user navigates to Request more info page$")
+    public void user_navigates_to_request_more_info() {
+    	AcquisitionHomePage acqusitionHomePage = (AcquisitionHomePage) getLoginScenario()
+				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+    	 PharmacyResultPage pharmacyResultPage = acqusitionHomePage.navigateToRequestMoreHelp();
     }
 
 

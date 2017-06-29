@@ -144,5 +144,21 @@ Examples:
 	| zipcode     | distance  | planName 			                 	  							|			 
 	| 80002       | 15        | AARP MedicareComplete SecureHorizons Plan 1 (HMO) |
 	
+@MAplantype
+Scenario Outline: To verify MAplan for pharmacies in AARP site
+Given the user is on the AARP Medicare Site landing page
+When the user navigates to Request more info page
+When the user navigates to pharmacy search page in AARP Site
+And the user enters following details for pharmacy search in AARP Site
+	| Zip Code	| <zipcode>	|
+	| Distance	| <distance>|
+	| County Name	| <county>	|
+And the user chooses a plan from dropdown in AARP Site
+	| <planName> |
+
+Examples:
+	Examples:
+	| zipcode     | distance  | county            |  planName 			                 	  							|			 
+	| 90210       | 15        | Adams County      | AARP MedicareComplete SecureHorizons Plan 1 (HMO) |	
 
 

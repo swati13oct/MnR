@@ -50,6 +50,8 @@ public class MRConstants {
 
 	public static final String UHCRETIREE_SITE_MAP_URL = "https://www."+MRScenario.environment+"-uhcretiree.uhc.com/site_map.html";
 	
+	public static final String MAPD_REQUEST_PLAN_URL = "https://www.team-a-aarpmedicareplans.uhc.com/health-plans/medicare-advantage-plans/request-information.html";
+	
 	//public static final String UHCRETIREE_URL = "https://www.awe-"+MRScenario.environment+"-uhcretiree.uhc.com/";
 	
 	//public static final String VERIZON_PROVIDER_PAGE_URL = "https://www.awe-"+MRScenario.environment+"-uhcretiree.uhc.com/verizon/find_a_provider.html";

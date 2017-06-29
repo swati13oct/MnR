@@ -99,7 +99,7 @@ public class PharmacySearchPage extends UhcDriver {
 
 	public PharmacySearchPage enterZipDistanceDetails(String zipcode,
 			String distance, String county) {
-
+		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 		sendkeys(zipcodeField, zipcode);
 		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 		searchbtn.click();
@@ -118,7 +118,7 @@ public class PharmacySearchPage extends UhcDriver {
 			}
 		}
 		if (driver.getTitle().equalsIgnoreCase(
-				"Member Claims")) {
+				"Find a Pharmacy | AARP Medicare Plans from UnitedHealthcare")) {
 			return new PharmacySearchPage(driver);
 		}
 		return null;
@@ -245,8 +245,15 @@ public class PharmacySearchPage extends UhcDriver {
         driver.navigate().to("https://www.aarpmedicareplans.com/health-plans/prescription-drug-plans/medicare-application.html");
         return null;
  }
-
 	
+	public PharmacyResultPage navigateToRequestMoreHelp() {
+		driver.navigate().to("https://www.team-a-aarpmedicareplans.uhc.com/health-plans/medicare-advantage-plans/request-information.html");
+		if (getTitle().equalsIgnoreCase("Request MA Plan Information | AARP Medicare Plans from UnitedHealthcare")) {
+			return new PharmacyResultPage(driver);
+
+		}
+		return null;
+	}
 	
 
 }

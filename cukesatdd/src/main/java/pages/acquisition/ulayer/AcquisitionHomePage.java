@@ -197,6 +197,9 @@ public class AcquisitionHomePage extends GlobalWebElements {
 
 	@FindBy(xpath = "//*[@id='subnav_4']/div/div/div[1]/div[1]/div[1]/h3/a/span")
 	private WebElement healthcenterslink;
+	
+	@FindBy(xpath = ".//*[@id='Find a pharmacy near you']")
+	private WebElement findapharmacylink;
 
 	private static String AARP_ACQISITION_PAGE_URL = MRConstants.AARP_URL;
 
@@ -512,11 +515,11 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		}
 		return null;
 	}
-
-	public PharmacySearchPage navigateToPharmacyLocator() {
-		//pharmacyLink.click();
-		driver.navigate().to("https://www.team-a-aarpmedicareplans.uhc.com/content/aarpm/home/pharmacy_search.html");
-		if (getTitle().equalsIgnoreCase("Member Claims")) {
+	
+		public PharmacySearchPage navigateToPharmacyLocator() {
+		findapharmacylink.click();
+		//driver.navigate().to("MAPD_REQUEST_PLAN_URL");
+		if (getTitle().equalsIgnoreCase("Find a Pharmacy | AARP Medicare Plans from UnitedHealthcare")) {
 			return new PharmacySearchPage(driver);
 
 		}
@@ -1252,8 +1255,16 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		}
 		return null;
 	}
+	
+	public PharmacyResultPage navigateToRequestMoreHelp() {
+		driver.navigate().to("https://www.team-a-aarpmedicareplans.uhc.com/health-plans/medicare-advantage-plans/request-information.html");
+		if (getTitle().equalsIgnoreCase("Request MA Plan Information | AARP Medicare Plans from UnitedHealthcare")) {
+			return new PharmacyResultPage(driver);
 
-
+		}
+		return null;
+	}
+	
 
 
 }
