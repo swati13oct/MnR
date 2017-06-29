@@ -117,7 +117,9 @@ Then the user navigates to the following plan type
 And the user validates Need a step back in right rail widgets	
 Examples:
 		|zipCode|county						 |planType |planName					   |
-		|02210  | Suffolk County  | SNP        |UnitedHealthcare Senior Care Options (HMO SNP)|
+		|33012  |Los Angeles County|SNP      |Miami-Dade County    |
+		
+		
 
 @rightRail
 Scenario Outline: To validate chat now widget
@@ -126,11 +128,11 @@ Then the user performs plan search using zipcode
               | Zip Code |<zipCode>|
               | County   |<county> |
 Then the user navigates to the following plan type
-And the user validates chat now widget in right rail widgets
-| PlanType | <planType> |		
+ | PlanType | <planType> |	
+And the user validates chat now widget in right rail widgets	
 Examples:
 		|zipCode|county						 |planType |planName					   |
-		|02210  | Suffolk County  | SNP        |UnitedHealthcare Senior Care Options (HMO SNP)|
+		|33012  |Los Angeles County|SNP      |Miami-Dade County    |
 		
 @rightRail		
 Scenario Outline: To validate need more information
@@ -143,9 +145,9 @@ Then the user navigates to the following plan type
 And the user validates need more information widget in right rail widgets	
 Examples:
 		|zipCode|county						 |planType |planName					   |
-		|02210  | Suffolk County  | SNP        |UnitedHealthcare Senior Care Options (HMO SNP)|
+		|33012  |Los Angeles County|SNP      |Miami-Dade County    |
 		
-@rightRail		
+		
 Scenario Outline: To validate plan count from portfolio page
 Given the user is on the vpp portfolio page
 Then the user performs plan search using zipcode
@@ -160,7 +162,7 @@ And the user enter information to Get Email Update widget and submit in AARP sit
 | Email Address | <emailaddress> |
 Examples:
 		|zipCode|county            |planType	|  firstname | lastname | emailaddress |
-		|02210  | Suffolk County  | SNP        |UnitedHealthcare Senior Care Options (HMO SNP)|
+		|90210  |Los Angeles County|PDP        |	 Eva        | Zhong     |weixin.zhong@optum.com|
 		
 		
 Scenario Outline: To validate plan count from portfolio page
@@ -173,4 +175,4 @@ Then the user navigates to the following plan type
  And the user validates navigates plan selector page and validates the contents	  		
 Examples:
 		|zipCode|county						 |planType |planName					   |
-		|02210  | Suffolk County  | SNP        |UnitedHealthcare Senior Care Options (HMO SNP)|
+		|33012  |Los Angeles County|SNP      |Miami-Dade County    |						
