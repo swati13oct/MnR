@@ -309,7 +309,7 @@ public class PharmacyLocatorAarpStepDefinition {
     public void user_views_pharmacy_search_mapd_AARP() {
            PharmacySearchPage pharmacySearchPage = (PharmacySearchPage) getLoginScenario()
                         .getBean(PageConstants.PHARMACY_SEARCH_PAGE);
-           PharmacyResultPage pharmacyResultPage = pharmacySearchPage
+           PharmacySearchPage pharmacyResultPage = pharmacySearchPage
                         .ValidateSearchResultMapd();
            
     }
@@ -318,7 +318,7 @@ public class PharmacyLocatorAarpStepDefinition {
     public void user_views_pharmacy_locater_page_AARP() {
            PharmacySearchPage pharmacySearchPage = (PharmacySearchPage) getLoginScenario()
                         .getBean(PageConstants.PHARMACY_SEARCH_PAGE);
-           PharmacyResultPage pharmacyResultPage = pharmacySearchPage
+           PharmacySearchPage pharmacyResultPage = pharmacySearchPage
                         .ValidatePharmacyLocaterPage();
            
     }
@@ -327,7 +327,7 @@ public class PharmacyLocatorAarpStepDefinition {
     public void user_views_pharmacy_search_pdp_AARP() {
            PharmacySearchPage pharmacySearchPage = (PharmacySearchPage) getLoginScenario()
                         .getBean(PageConstants.PHARMACY_SEARCH_PAGE);
-           PharmacyResultPage pharmacyResultPage = pharmacySearchPage
+           PharmacySearchPage pharmacyResultPage = pharmacySearchPage
                         .ValidateSearchResultpdp();
            
     }
@@ -336,10 +336,15 @@ public class PharmacyLocatorAarpStepDefinition {
     public void user_navigates_to_request_more_info() {
     	AcquisitionHomePage acqusitionHomePage = (AcquisitionHomePage) getLoginScenario()
 				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
-    	 PharmacyResultPage pharmacyResultPage = acqusitionHomePage.navigateToRequestMoreHelp();
+    	PharmacySearchPage pharmacyResultPage = acqusitionHomePage.navigateToRequestMoreHelp();
     }
 
-
+    @And("^the user validate pharmacy saver widget in AARP site$")
+    public void user_validate_pharmacysaver_widget(){
+    	PharmacySearchPage pharmacySearchPage = (PharmacySearchPage) getLoginScenario()
+                .getBean(PageConstants.PHARMACY_SEARCH_PAGE);
+   PharmacySearchPage pharmacyResultPage = pharmacySearchPage.validatesPharmacySaverWidget();
+    }
 	
 	
 }

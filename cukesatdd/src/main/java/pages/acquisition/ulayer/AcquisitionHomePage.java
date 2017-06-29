@@ -1256,10 +1256,10 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		return null;
 	}
 	
-	public PharmacyResultPage navigateToRequestMoreHelp() {
+	public PharmacySearchPage navigateToRequestMoreHelp() {
 		driver.navigate().to("https://www.team-a-aarpmedicareplans.uhc.com/health-plans/medicare-advantage-plans/request-information.html");
 		if (getTitle().equalsIgnoreCase("Request MA Plan Information | AARP Medicare Plans from UnitedHealthcare")) {
-			return new PharmacyResultPage(driver);
+			return new PharmacySearchPage(driver);
 
 		}
 		return null;

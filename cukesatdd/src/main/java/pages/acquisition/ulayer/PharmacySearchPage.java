@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -89,6 +90,9 @@ public class PharmacySearchPage extends UhcDriver {
 	
 	@FindBy(xpath = "(.//*[@id='subPageRight']/div[2]/div[2]/ul/li[3]/a")
     private WebElement pharmacyloc;
+	
+	@FindBy(xpath = "//h2[contains(text(),'Pharmacy Saver offers prescriptions as low as $XX.XX')]")
+	private WebElement pharmacySaverWidget;
 
 
 	public PharmacySearchPage(WebDriver driver) {
@@ -233,28 +237,46 @@ public class PharmacySearchPage extends UhcDriver {
 		return null;
 	}
 	
-	public PharmacyResultPage ValidateSearchResultMapd() {
+	public PharmacySearchPage ValidateSearchResultMapd() {
         driver.navigate().to("https://www.aarpmedicareplans.com/health-plans/medicare-advantage-plans/medicare-enrollment.html");
         return null;
  }
 
-	public PharmacyResultPage ValidatePharmacyLocaterPage() {
+	public PharmacySearchPage ValidatePharmacyLocaterPage() {
         pharmacyloc.click();
         return null;
  }
 
-	public PharmacyResultPage ValidateSearchResultpdp() {
+	public PharmacySearchPage ValidateSearchResultpdp() {
         driver.navigate().to("https://www.aarpmedicareplans.com/health-plans/prescription-drug-plans/medicare-application.html");
         return null;
  }
 	
-	public PharmacyResultPage navigateToRequestMoreHelp() {
+	public PharmacySearchPage navigateToRequestMoreHelp() {
 		driver.navigate().to("https://www.team-a-aarpmedicareplans.uhc.com/health-plans/medicare-advantage-plans/request-information.html");
 		if (getTitle().equalsIgnoreCase("Request MA Plan Information | AARP Medicare Plans from UnitedHealthcare")) {
-			return new PharmacyResultPage(driver);
+			return new PharmacySearchPage(driver);
 
 		}
 		return null;
+	}
+	
+	public PharmacySearchPage validatesPharmacySaverWidget() {
+		
+		boolean present;
+		try {
+			validate(pharmacySaverWidget);
+			present = true;
+		} catch (NoSuchElementException e) {
+			present = false;
+		}
+
+		if(present)
+			System.out.println("@@@@@@@@@ Able to find Pharmacy Saver widget @@@@@@@@@");
+		else
+			System.out.println("@@@@@@@@@ No Pharmacy Saver widget @@@@@@@@@");
+		return null;
+		
 	}
 	
 
