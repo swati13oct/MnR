@@ -105,4 +105,72 @@ Examples:
 |zipCode|  county         | planType   | planName                                     | curentPeriod | currentYear | futureYear | 
 |02210  | Suffolk County  | SNP        |UnitedHealthcare Senior Care Options (HMO SNP)| AEP        | 2016        | 2017       | 
 #|02210  | Suffolk County  | MA         |AARP MedicareComplete Plan 2 (HMO)            | AEP        | 2016        | 2017       | 
+
+@rightRail		
+Scenario Outline: To validate Need a step back from right rail
+Given the user is on the vpp portfolio page
+Then the user performs plan search using zipcode
+              | Zip Code |<zipCode>|
+              | County   |<county> |
+Then the user navigates to the following plan type
+| PlanType | <planType> |		
+And the user validates Need a step back in right rail widgets	
+Examples:
+		|zipCode|county						 |planType |planName					   |
+		|02210  | Suffolk County  | SNP        |UnitedHealthcare Senior Care Options (HMO SNP)|
+
+@rightRail
+Scenario Outline: To validate chat now widget
+Given the user is on the vpp portfolio page
+Then the user performs plan search using zipcode
+              | Zip Code |<zipCode>|
+              | County   |<county> |
+Then the user navigates to the following plan type
+And the user validates chat now widget in right rail widgets
+| PlanType | <planType> |		
+Examples:
+		|zipCode|county						 |planType |planName					   |
+		|02210  | Suffolk County  | SNP        |UnitedHealthcare Senior Care Options (HMO SNP)|
 		
+@rightRail		
+Scenario Outline: To validate need more information
+Given the user is on the vpp portfolio page
+Then the user performs plan search using zipcode
+              | Zip Code |<zipCode>|
+              | County   |<county> |
+Then the user navigates to the following plan type
+| PlanType | <planType> |	
+And the user validates need more information widget in right rail widgets	
+Examples:
+		|zipCode|county						 |planType |planName					   |
+		|02210  | Suffolk County  | SNP        |UnitedHealthcare Senior Care Options (HMO SNP)|
+		
+@rightRail		
+Scenario Outline: To validate plan count from portfolio page
+Given the user is on the vpp portfolio page
+Then the user performs plan search using zipcode
+              | Zip Code |<zipCode>|
+              | County   |<county> |
+Then the user navigates to the following plan type
+| PlanType | <planType> |	
+When the user moved to the email update widget in selected plan section in AARP site
+And the user enter information to Get Email Update widget and submit in AARP site	
+| First Name| <firstname> |
+| Last Name | <lastname>  |
+| Email Address | <emailaddress> |
+Examples:
+		|zipCode|county            |planType	|  firstname | lastname | emailaddress |
+		|02210  | Suffolk County  | SNP        |UnitedHealthcare Senior Care Options (HMO SNP)|
+		
+		
+Scenario Outline: To validate plan count from portfolio page
+Given the user is on the vpp portfolio page
+Then the user performs plan search using zipcode
+              | Zip Code |<zipCode>|
+              | County   |<county> |
+Then the user navigates to the following plan type
+| PlanType | <planType> |
+ And the user validates navigates plan selector page and validates the contents	  		
+Examples:
+		|zipCode|county						 |planType |planName					   |
+		|02210  | Suffolk County  | SNP        |UnitedHealthcare Senior Care Options (HMO SNP)|

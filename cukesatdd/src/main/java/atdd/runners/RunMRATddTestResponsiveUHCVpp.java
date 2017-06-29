@@ -5,10 +5,10 @@ import org.junit.runner.RunWith;
 import cucumber.junit.Cucumber;
 
 @RunWith(Cucumber.class)
-@Cucumber.Options(glue = { "atdd.framework","acceptancetests.responsive.Blayer" }, 
+@Cucumber.Options(glue = { "atdd.framework","acceptancetests.responsive.bluelayer" }, 
 		features = { "feature/responsive/Blayer" }, 
 		format = {
-		"pretty", "html:reports/test-report","json:target/cucumber.json" }, tags ={"@sprint1"})
+		"pretty", "html:reports/test-report","json:target/cucumber.json" }, tags ={"@rightRail"})
 public class RunMRATddTestResponsiveUHCVpp {
 
 }

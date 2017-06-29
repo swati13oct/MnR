@@ -13,11 +13,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import pages.acquisition.bluelayer.PortfolioPageUhc;
 import pages.acquisition.bluelayer.ResponsivePlanSummaryUhc;
+import pages.acquisition.bluelayer.VPPAarpNeedAStepBackWidget;
+import pages.acquisition.bluelayer.VPPAarpNeedHelpWidgetPage;
+import pages.acquisition.bluelayer.VPPNeedMoreInformationWidget;
+import pages.acquisition.bluelayer.VPPRequestSendEmailPage;
 import pages.acquisition.ulayer.ResponsivePlanDetails;
 import pages.acquisition.ulayer.ResponsivePlanSummary;
 import cucumber.annotation.en.And;
 import cucumber.annotation.en.Given;
 import cucumber.annotation.en.Then;
+import cucumber.annotation.en.When;
 import cucumber.table.DataTable;
 import acceptancetests.atdd.data.CommonConstants;
 import acceptancetests.atdd.data.acquisition.PageConstants;
@@ -222,4 +227,57 @@ public class ResponsiveUhcStepDefiniton {
           String planName =  memberAttributesMap.get("Plan Name");
           planSummary.validateBlueBanner(timePeriod, currentYear, futureYear, planType, planName);
     }
+    
+    @And("^the user validates chat now widget in right rail widgets$")
+    public void user_validates_chat_now_widget(){
+    	ResponsivePlanSummaryUhc planSummary = (ResponsivePlanSummaryUhc) getLoginScenario()
+				.getBean(PageConstants.RESPONSIVE_PLAN_SUMMARY_PAGE_UHC);
+    	VPPAarpNeedHelpWidgetPage chatNowPage = planSummary.validateNeedHelpWidget();
+    	chatNowPage.chatWithUsWidget();
+    }
+    
+    @And("^the user validates Need a step back in right rail widgets$")
+    public void user_validates_need_step_back_widget(){
+    	ResponsivePlanSummaryUhc planSummary = (ResponsivePlanSummaryUhc) getLoginScenario()
+				.getBean(PageConstants.RESPONSIVE_PLAN_SUMMARY_PAGE_UHC);
+    	VPPAarpNeedAStepBackWidget needStepBackPage = planSummary.validateStepBackWidget();
+    	needStepBackPage.validateStepBackWidget();
+    }
+
+    @And("^the user validates need more information widget in right rail widgets$")
+    public void user_validates_need_more_information(){
+    	ResponsivePlanSummaryUhc planSummary = (ResponsivePlanSummaryUhc) getLoginScenario()
+				.getBean(PageConstants.RESPONSIVE_PLAN_SUMMARY_PAGE_UHC);
+    	VPPNeedMoreInformationWidget needMoreInformationPage = planSummary.validateNeedMoreInformationWidget();
+    	needMoreInformationPage.moreInformationWidget();
+    }
+    
+    @When("^the user moved to the email update widget in selected plan section in AARP site$")
+    public void user_moveTo_email_update_Widget(){
+    	ResponsivePlanSummaryUhc planSummary = (ResponsivePlanSummaryUhc) getLoginScenario()
+				.getBean(PageConstants.RESPONSIVE_PLAN_SUMMARY_PAGE_UHC);
+    	VPPRequestSendEmailPage emailWidegt = planSummary.validateEmailWidget();
+ 		if (emailWidegt != null) {
+			getLoginScenario().saveBean(PageConstants.VPP_REQUEST_SEND_EMAIL_PAGE,emailWidegt);
+		}
+    }
+    @And("^the user enter information to Get Email Update widget and submit in AARP site$")
+    public void user_enter_information_to_get_email_update_widget(DataTable personalAttributes){
+    	List<DataTableRow> personalAttributesRow = personalAttributes.getGherkinRows();
+		Map<String, String> personalAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < personalAttributesRow.size(); i++) {
+			personalAttributesMap.put(personalAttributesRow.get(i).getCells()
+					.get(0), personalAttributesRow.get(i).getCells().get(1));
+		}
+		String firstName = personalAttributesMap.get("First Name");
+		String lastName = personalAttributesMap.get("Last Name");
+		String emailAddress =personalAttributesMap.get("Email Address");
+		getLoginScenario().saveBean(VPPCommonConstants.FIRST_NAME, firstName);
+		getLoginScenario().saveBean(VPPCommonConstants.LAST_NAME, lastName);
+		getLoginScenario().saveBean(VPPCommonConstants.EMAIL_ADDRESS, emailAddress);		
+		VPPRequestSendEmailPage requestSendEmailPage= (VPPRequestSendEmailPage)getLoginScenario()
+				.getBean(PageConstants.VPP_REQUEST_SEND_EMAIL_PAGE);
+		requestSendEmailPage.sendEmailByClickSummbitButtonOnEmailWidget(firstName, lastName, emailAddress);
+    }
+
 }
