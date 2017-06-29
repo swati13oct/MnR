@@ -910,7 +910,9 @@ Examples:
     Examples: 
       | planType|  memberType  | copayCategory |
       | MAPD    |  Group       |  NON LIS      |
+      | PDP     |  Group       |  NON LIS      |
       ##MAPD_Group_113_nonlis
+      ##q2_jun_grp_292
       
       
       
