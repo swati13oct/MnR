@@ -200,6 +200,15 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	
 	@FindBy(xpath = ".//*[@id='Find a pharmacy near you']")
 	private WebElement findapharmacylink;
+	
+	@FindBy(xpath = ".//*[@id='site-wrapper']/div[4]/div/div/div/div/div/main/div/div[5]/div/div/div/a")
+	private WebElement moreInfoLink;
+	
+	@FindBy(xpath = ".//*[@id='site-wrapper']/div[4]/div/div/div/div/div/main/div/div[4]/div/div[4]/div[1]/div[2]")
+	private WebElement chatwidget;
+	
+	@FindBy(xpath = ".//*[@id='site-wrapper']/div[4]/div/div/div/div/div/main/div/div[4]/div/div[4]/div[1]/div[1]")
+	private WebElement TFNwidget;
 
 	private static String AARP_ACQISITION_PAGE_URL = MRConstants.AARP_URL;
 
@@ -1265,6 +1274,54 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		return null;
 	}
 	
+	public PharmacyResultPage navigateToRequestMoreHelpForPdp() {
+		driver.navigate().to("https://www.team-a-aarpmedicareplans.uhc.com/health-plans/prescription-drug-plans/request-information.html");
+		if (getTitle().equalsIgnoreCase("More Help & Information - Medicare Part D Plans | AARP® Medicare Plans from UnitedHealthcare")) {
+			return new PharmacyResultPage(driver);
+		}
+		return null;
+	}
+
+	public PharmacyResultPage validateMoreInfoContent() {
+		moreInfoLink.click();
+		if (getTitle().equalsIgnoreCase("Find a Pharmacy |Medicare Plans from UnitedHealthcare")) {
+			return new PharmacyResultPage(driver);
+		}
+		return null;
+	}
+
+	public PharmacyResultPage validateChatWidget() {
+		boolean present;
+		try {
+		validate(chatwidget);
+		present = true;
+		} catch (NoSuchElementException e) {
+		present = false;
+		}
+
+	if(present)
+		System.out.println("@@@@@@@@@ Able to find Chat widget @@@@@@@@@");
+		else
+		System.out.println("@@@@@@@@@ No Chat widget @@@@@@@@@");
+		return null;		
+	}
+
+	public PharmacyResultPage validateTfnWidget() {
+		boolean present;
+		try {
+		validate(TFNwidget);
+		present = true;
+		} catch (NoSuchElementException e) {
+		present = false;
+		}
+
+	if(present)
+		System.out.println("@@@@@@@@@ Able to find TFN widget @@@@@@@@@");
+		else
+		System.out.println("@@@@@@@@@ No TFN widget @@@@@@@@@");
+		return null;
+	}
+
 
 
 }

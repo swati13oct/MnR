@@ -345,6 +345,35 @@ public class PharmacyLocatorAarpStepDefinition {
                 .getBean(PageConstants.PHARMACY_SEARCH_PAGE);
    PharmacySearchPage pharmacyResultPage = pharmacySearchPage.validatesPharmacySaverWidget();
     }
+    
+    @When("^the user navigates to Request more info page for PDP plantype$")
+    public void user_navigates_to_request_more_info_for_pdp() {
+    	AcquisitionHomePage acqusitionHomePage = (AcquisitionHomePage) getLoginScenario()
+				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+    	 PharmacyResultPage pharmacyResultPage = acqusitionHomePage.navigateToRequestMoreHelpForPdp();
+    }
+    
+    @And("^the user validate more information content based on plan type in AARP Site$")
+    public void user_validate_more_information_content() {
+    	AcquisitionHomePage acqusitionHomePage = (AcquisitionHomePage) getLoginScenario()
+				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+    	 PharmacyResultPage pharmacyResultPage = acqusitionHomePage.validateMoreInfoContent();
+    }
+    
+    @And("^the user validate chat widget in AARP Site$")
+    public void user_validate_chat_widget() {
+    	AcquisitionHomePage acqusitionHomePage = (AcquisitionHomePage) getLoginScenario()
+				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+    	 PharmacyResultPage pharmacyResultPage = acqusitionHomePage.validateChatWidget();
+    }
+    
+    @And("^the user validate TFN widget in AARP Site$")
+    public void user_validate_tfn_widget() {
+    	AcquisitionHomePage acqusitionHomePage = (AcquisitionHomePage) getLoginScenario()
+				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+    	 PharmacyResultPage pharmacyResultPage = acqusitionHomePage.validateTfnWidget();
+    }
+
 	
 	
 }
