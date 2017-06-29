@@ -69,8 +69,8 @@ public class RequestAgentAppointmentAarpStepDefinition {
 		}else
 			Assert.fail("Error in loading the Request Help and Info Page");
 	}
-	@And("^the user navigates to request appointment with an agent in AARP site$")
-	public void request_appointment()
+	@And("^the user navigates to request appointment with an agent in AARP site and validates page is loaded$")
+	public void request_appointment(DataTable attributes)
 	{
 		RequestHelpAndInformationPage requestHelpAndInformationPage = (RequestHelpAndInformationPage) getLoginScenario().getBean(PageConstants.REQUEST_MORE_HELP_INFORMATION_PAGE);
 		RequestAgentAppointmentPage requestAgentAppointmentPage = requestHelpAndInformationPage.nagiateToAgentAppointmentRequest();
@@ -87,28 +87,4 @@ public class RequestAgentAppointmentAarpStepDefinition {
 		
 	}
 	
-	@And("^the user provides below personal details to request an appointment with an agent in AARP site and validates confirmation page$")
-	public void enter_personal_details(DataTable userAttributes)
-	{
-		/* Reading the given attribute from feature file */
-		List<DataTableRow> userAttributesRow = userAttributes
-				.getGherkinRows();
-		Map<String, String> userAttributesMap = new HashMap<String, String>();
-		for (int i = 0; i < userAttributesRow.size(); i++) {
-
-			userAttributesMap.put(userAttributesRow.get(i).getCells()
-					.get(0), userAttributesRow.get(i).getCells().get(1));
-		}
-		
-		RequestAgentAppointmentPage requestAgentAppointmentPage = (RequestAgentAppointmentPage) getLoginScenario().getBean(PageConstants.REQUEST_AGENT_APPOINTMENT_PAGE);
-		AgentAppointmentConfirmationPage agentAppointmentConfirmationPage = requestAgentAppointmentPage.requestAgentAppointment(userAttributesMap);
-		
-		if(agentAppointmentConfirmationPage!=null){
-				Assert.assertTrue(true);
-		}else
-			Assert.fail("Error in loading the Confirmation page");
-		
-	}
-	
-
 }

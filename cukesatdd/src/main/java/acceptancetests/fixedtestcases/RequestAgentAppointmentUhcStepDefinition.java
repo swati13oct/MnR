@@ -69,8 +69,8 @@ public class RequestAgentAppointmentUhcStepDefinition {
 		}else
 			Assert.fail("Error in loading the Help and Info Page");
 	}
-	@And("^the user navigates to request appointment with an agent in UHC site$")
-	public void request_appointment()
+	@And("^the user navigates to request appointment with an agent in UHC site and validates page loaded$")
+	public void request_appointment(DataTable userAttributes)
 	{
 		RequestHelpAndInformationPage requestHelpAndInformationPage = (RequestHelpAndInformationPage) getLoginScenario().getBean(PageConstants.REQUEST_MORE_HELP_INFORMATION_PAGE);
 		RequestAgentAppointmentPage requestAgentAppointmentPage = requestHelpAndInformationPage.nagiateToAgentAppointmentRequest();
@@ -80,33 +80,6 @@ public class RequestAgentAppointmentUhcStepDefinition {
 		}
 		else{
 			Assert.fail("Error in loading requestAgentAppointmentPage");
-		}
-		
-	}
-	
-	@And("^the user provides below personal details to request an appointment with an agent and complete the form$")
-	public void enter_personal_details(DataTable userAttributes)
-	{
-		/* Reading the given attribute from feature file */
-		List<DataTableRow> userAttributesRow = userAttributes
-				.getGherkinRows();
-		Map<String, String> userAttributesMap = new HashMap<String, String>();
-		for (int i = 0; i < userAttributesRow.size(); i++) {
-
-			userAttributesMap.put(userAttributesRow.get(i).getCells()
-					.get(0), userAttributesRow.get(i).getCells().get(1));
-		}
-		
-		RequestAgentAppointmentPage requestAgentAppointmentPage = (RequestAgentAppointmentPage) getLoginScenario().getBean(PageConstants.REQUEST_AGENT_APPOINTMENT_PAGE);
-		AgentAppointmentConfirmationPage agentAppointmentConfirmationPage = requestAgentAppointmentPage.requestAgentAppointment(userAttributesMap);
-		
-		if(agentAppointmentConfirmationPage!=null){
-			//if(agentAppointmentConfirmationPage.validateConfirmationPage())
-				Assert.assertTrue(true);
-			//else
-				//Assert.fail("Error in validating the confirmation page");
-		}else{
-			Assert.fail("Error in loading the confirmation page");
 		}
 		
 	}
