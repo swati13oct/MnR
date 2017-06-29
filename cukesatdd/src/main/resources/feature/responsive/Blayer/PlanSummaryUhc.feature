@@ -175,4 +175,17 @@ Then the user navigates to the following plan type
  And the user should see plan count for the plan type seelcted	  		
 Examples:
 		|zipCode|county						 |planType | 
-		|90210  |Los Angeles County|MA       | 						
+		|90210  |Los Angeles County|MA       |
+		
+@suplementPlan		
+Scenario Outline: To validate plan count from portfolio page
+Given the user is on the vpp portfolio page
+Then the user performs plan search using zipcode
+              | Zip Code |<zipCode>|
+              | County   |<county> |
+Then the user navigates to the following plan type
+| PlanType | <planType> |	
+And the user validates medicare supplement plan page
+Examples:
+		|zipCode|county						 |planType | 
+		|90210  |Los Angeles County|MS       |	 						

@@ -92,7 +92,7 @@ public class ResponsivePlanSummaryUhc extends UhcDriver{
 		@FindBy(xpath="//*[@class='tab active' and contains(text(),'Medicare Advantage Plans')]/div[1]/span[3]")
 		private WebElement showMaPlansNotClickable;
 		
-		@FindBy(xpath = "//*[@class='tab med-supp']/div[1]/span[3]")
+		@FindBy(xpath = "//div[@class='tab med-supp plancountheight']/div")
 		private WebElement showMsPlans;
 		
 		@FindBy(xpath="//*[contains(text(),'Start Plan Selector')]")
@@ -458,7 +458,12 @@ public ResponsivePlanSummaryUhc viewPlanSummary(String planType) {
 		return new ResponsivePlanSummaryUhc(driver);
 			}else if(planType.equalsIgnoreCase("MS")){
 		           showMsPlans.click();
+		           System.out.println(driver.getTitle());
+		           if(driver.getTitle().equals("UnitedHealthcare Medicare Solutions | AARP Medicare Supplement Plans")){
 		return new ResponsivePlanSummaryUhc(driver);
+		           }else{
+		        	   Assert.fail();
+		           }
 		}else if(planType.equalsIgnoreCase("SNP")){
 			viewSnpPlans.click();
 	return new ResponsivePlanSummaryUhc(driver);
