@@ -603,15 +603,18 @@ public class AccountHomePage extends UhcDriver {
 	}
 
 	public pages.dashboard.member.ulayer.ClaimDetailsPage navigateToClaimDetailsPage() {
-		// TODO Auto-generated method stub
-		String url = "https://member.team-b-aarpmedicareplans.uhc.com/home/claims.html#/claims-Detail";
+		//String url = "https://member.team-b-aarpmedicareplans.uhc.com/home/claims.html#/claims-Detail";
+		String url = "https://member.team-b-aarpmedicareplans.uhc.com/home/claims.html";
 		driver.get(url);
+		
+		//driver.findElement(By.xpath(".//*[@id='ship']/tbody/tr[2]/td[8]/span/a")).click();
+		driver.findElement(By.xpath("//a[contains(text(),'MORE INFO')]")).click();
 		/*
 		 * try { Thread.sleep(1000); } catch (InterruptedException e) { // TODO
 		 * Auto-generated catch block e.printStackTrace(); }
 		 */
 		System.out.println(driver.getTitle());
-		if (driver.getTitle().equalsIgnoreCase("claims")) {
+		if (driver.getTitle().equalsIgnoreCase("claims   ")) {
 			return new pages.dashboard.member.ulayer.ClaimDetailsPage(driver);
 
 		}

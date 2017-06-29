@@ -332,6 +332,12 @@ public class ClaimsAarpStepDefinition {
 		claimDetailspage.validateClaimsTableInDetailsPage();
 	}
 	
+	@And("^I validate the Claims Total in claims details page in AARP site$")
+	public void validate_claims_total_AARP(){
+		ClaimDetailsPage claimDetailspage = (ClaimDetailsPage) getLoginScenario().getBean(PageConstants.NEW_CLAIM_DETAILS_PAGE);
+		claimDetailspage.validateClaimsTotalInDetailsPage();
+	}
+	
 	/*@Then("^I can view a claim search back button in Claims Details page in AARP site$")
 	public void validate_claim_search_button()
 	{
