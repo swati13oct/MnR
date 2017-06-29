@@ -55,6 +55,8 @@ Feature: To test registration flow in redesign portal
     Examples: 
       | planMemberId | dateOfBirth | zipCode | firstName | lastName |
       | 920748371    | 03-02-1940  | 03855   | AABE      | BEAAEEF  |
+      | 008666811    | 02-22-1951  | 95380   | BCDBC     | DBDE     |
+      | 0186083571   | 05-27-1951  | 24524   | CDABDAF   | FFACFEFC |
 
   Scenario Outline: To verify registration existing member error page
     Given the member is on registration page of new portal part of redesign
@@ -75,7 +77,7 @@ Feature: To test registration flow in redesign portal
       | PCP               | 969148901    | 12-29-1935  |
       # | MEDICA      | 914429086    | 08-28-1927  |
       | SHIP/MED SUPP     | 356357672-11 | 03-01-1949  |
-      | 50-64             | 378564935-11 | 12-01-1956  |
+      | SHIP 50-64        | 378564935-11 | 12-01-1956  |
       | SHIP 50-64 + MA   | 861622172    | 07-27-1940  |
       | SHIP 50-64 + MA   | 861622172-11 | 07-27-1940  |
       | SHIP 50-64 + MAPD | 805816168    | 01-26-1934  |
@@ -109,6 +111,7 @@ Feature: To test registration flow in redesign portal
       | Group SSUP        | 919903974    | 09-28-1946  |
       | Group SSRD        | 970839429    | 11-11-1929  |
       | Group PDP         | 0152322881   | 06-11-1949  |
+      | SHIP/MED SUPP     | 363335622-11 | 02-01-1939  |
 
   Scenario Outline: To verify registration Future effective member error page
     Given the member is on registration page of new portal part of redesign
@@ -136,6 +139,7 @@ Feature: To test registration flow in redesign portal
       | Group SSUP        | 918226927    | 10-24-1951  |
       | Group SSRD        | 968832852    | 09-17-1926  |
       | Group PDP         | 0128086331   | 11-14-1947  |
+      | SHIP 50-64        | 399492182-11 | 12-01-1956  |
 
   Scenario Outline: To verify registration member not found error page
     Given the member is on registration page of new portal part of redesign
