@@ -86,6 +86,12 @@ public class ClaimDetailsPage extends UhcDriver{
 	@FindBy(xpath = ".//*[@id='ship_eob']/div/section/a/p")
 	private WebElement EOB;
 	
+	@FindBy(xpath = ".//*[@id='cltotshippartb']/div/div[1]/div")
+	private WebElement claimsTotalSHIP;
+	
+	@FindBy(xpath = ".//*[@id='cltotmednice']/div/div[1]/div/div")
+	private WebElement claimsTotalFED;
+	
 	public ClaimDetailsPage(WebDriver driver) {
 		super(driver);
 
@@ -228,6 +234,22 @@ public class ClaimDetailsPage extends UhcDriver{
 		}
 		else{
 			Assert.assertTrue("Search your history button is not present in Claims Details Page", false);
+		}
+		
+	}
+
+	public void validateClaimsTotalInDetailsPage() {
+		try {
+			Thread.sleep(9000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		if(claimsTotalSHIP.isDisplayed() || claimsTotalFED.isDisplayed()){
+			Assert.assertTrue(true);			
+		}
+		else{
+			Assert.assertTrue("Claims Total is not present in Claims Details Page", false);
 		}
 		
 	}
