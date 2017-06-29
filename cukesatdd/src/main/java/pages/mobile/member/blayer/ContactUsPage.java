@@ -136,22 +136,26 @@ public class ContactUsPage extends UhcDriver{
 	
 	@FindBy(xpath="//*[@id='question-submit']/span")
 	private WebElement questionSubmit;
-	
-	@FindBy(xpath="//*[@id='message-email-error2']")	
-	private WebElement messageEmailError;
+
+	@FindBy(css="div.field.ask-question-message.field-has-error label#message-email-error.error")	
+	private WebElement questionEmailmessageError;
 	
 
-	@FindBy(css="div.field.field-has-error label#message-email-error")
+	@FindBy(xpath="//div[not (contains(@class,'hidden')) and (@id='alt-phone-wrapper')]//div[2]//label[@id='message-email-error']")
 	private WebElement alternativemessageEmailError;
 	
-	@FindBy(css="div.field.field-has-error div.field-input label#message-email-error4")
+	
+	@FindBy(xpath="//div[not (contains(@class,'hidden')) and (@id='alt-email-wrapper')]//div[2]//label[@id='message-email-error']")
 	private WebElement confirmMsgEmailError;
 	
+	/*@FindBy(xpath="//label[@id='message-email-error'])[4]")
+	private WebElement confirmMsgEmailError;*/
 	
-	@FindBy(css="div#alt-phone-wrapper div.field.field-has-error div.field-input label#message-email-error5.error")
+	
+	@FindBy(css="div#alt-phone-wrapper div.field.field-has-error div.field-input label#message-email-error.error")
 	private WebElement invalidPhneErrorMsg;
 	
-	@FindBy(css="div#alt-phone-wrapper div.field.field-has-error div.field-input label#message-email-error7.error")
+	@FindBy(xpath="//div[not (contains(@class,'hidden')) and (@id='alt-phone-wrapper')]//div[2]//label[@id='message-email-error']")
 	private WebElement confirmPhneErrorMsg;
 	
 	@FindBy(css="div.field.ask-question-message.field-has-error div.field-input label#message-email-error.error")
@@ -446,16 +450,6 @@ public class ContactUsPage extends UhcDriver{
 			}
 			waitforElement(questionSubmit);
 			questionSubmit.click();
-			//waitforElement(conformationMessage);
-			
-			//Assert.assertTrue("Confirmation message displayed",conformationMessage.isDisplayed());
-			/*try {
-				Thread.sleep(5000);
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}*/
-			
 		}
 		else
 		{
@@ -512,6 +506,40 @@ public class ContactUsPage extends UhcDriver{
 		System.out.println("send us Question is not  displayed");
 	}
 	}
+	public void sendUsQuestion_Message_Validations(){
+		if (fillOutFormButton.isDisplayed())
+		{
+			System.out.println("send us Question is  displayed");
+			fillOutFormButton.click();
+			try {
+				Thread.sleep(5000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			Select dropdown = new Select(driver.findElement(By.id("question-about")));
+			System.out.println("dropdown" +dropdown);
+			dropdown.getFirstSelectedOption().click();
+			dropdown.selectByVisibleText("Billing Information");
+			try {
+				Thread.sleep(5000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			waitforElement(questionMessage);
+			questionMessage.sendKeys("hhh");
+			questionMessage.clear();
+			String questionErrorMessage=questionEmailmessageError.getText();
+			 Assert.assertTrue("Please dont leave it blank", questionErrorMessage.equalsIgnoreCase("Please dont leave it blank"));
+			 //Assert.assertTrue("Please enter same email id", confirmErrMessage.equalsIgnoreCase("Please enter same email id"));
+		
+		
+	}else
+	{
+		System.out.println("send us Question is not  displayed");
+	}
+	}
 	public void sendUsQuestion_confirmEmailID_Validations(){
 		if (fillOutFormButton.isDisplayed())
 		{
@@ -538,31 +566,60 @@ public class ContactUsPage extends UhcDriver{
 			/*entering email */
 			waitforElement(addAlternativeEmail);
 			addAlternativeEmail.click();
-			//alternativeEmailAddress.sendKeys("abc");
-			//confirmEmailAddress.sendKeys("xyz");
-			//confirmEmailAddress.sendKeys("");
-			//waitforElement(messageEmailError);
-			//String s=driver.findElement(By.cssSelector(".error")).getAttribute(name)
-			 //String alternativeerrorMessage=messageEmailError2.getText();
-			 //String confirmErrMessage=confirmMsgEmailError.getText();
-			/* if(alternativeerrorMessage.equalsIgnoreCase("Email Address Not valid")){
-				 System.out.println();
-			 }*/
-			 
-			 //Assert.assertTrue("Please enter same email id", confirmErrMessage.equalsIgnoreCase("Please enter same email id"));
+			alternativeEmailAddress.sendKeys("abc");
+			confirmEmailAddress.sendKeys("xyz");
+			confirmEmailAddress.clear();
+			confirmEmailAddress.click();
+			waitforElement(confirmMsgEmailError);
+			String confirmErrMessage=confirmMsgEmailError.getText();		
+			 System.out.println("confirmErrMessage;;" + confirmErrMessage);
+			 Assert.assertTrue("Please enter same email id", confirmErrMessage.equalsIgnoreCase("Please enter same email id"));
 			
-			//addAlternativePhneNumberLink.click();
-			//invalidPhneErrorMsg.sendKeys("123");
-			//Assert.assertTrue("Phone number is not valid", invalidPhneErrorMsg.equals("Phone number is not valid"));
 			
-			Assert.assertTrue("Phone number is not valid", invalidPhneErrorMsg.equals("Phone number is not valid"));
-			
-			 questionSubmit.click();
-			
-			/*if(messageEmailError.isDisplayed()){
-				System.out.println("Please enter same email id");
+	}else
+	{
+		System.out.println("send us Question is not  displayed");
+	}
+	}
+	public void sendUsQuestion_invalid_PhoneNumber_Validations(){
+		if (fillOutFormButton.isDisplayed())
+		{
+			System.out.println("send us Question is  displayed");
+			fillOutFormButton.click();
+			try {
+				Thread.sleep(5000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
 			}
-			*/
+			Select dropdown = new Select(driver.findElement(By.id("question-about")));
+			System.out.println("dropdown" +dropdown);
+			dropdown.getFirstSelectedOption().click();
+			dropdown.selectByVisibleText("Billing Information");
+			try {
+				Thread.sleep(5000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			waitforElement(questionMessage);
+			questionMessage.sendKeys("Billing Information");
+			waitforElement(addAlternativePhneNumberLink);
+			addAlternativePhneNumberLink.click();
+			waitforElement(alternativePhneNumber);
+			alternativePhneNumber.sendKeys("123");
+			alternativePhneNumber.click();
+			waitforElement(invalidPhneErrorMsg);
+			String invalidPhnenumerErrmsg = invalidPhneErrorMsg.getText();
+			System.out.println("invalidPhnenumerErrmsg::" +invalidPhnenumerErrmsg);
+			Assert.assertTrue("Phone number is not valid", invalidPhnenumerErrmsg.equals("Phone number is not valid"));
+			waitforElement(confirmAlternativePhneNumber);
+			confirmAlternativePhneNumber.sendKeys("789");
+			waitforElement(confirmPhneErrorMsg);
+			String confirmPhoneErrmsg = confirmPhneErrorMsg.getText();
+			Assert.assertTrue("Please enter same Number", confirmPhoneErrmsg.equals("Please enter same Number"));
+			
+			 
 		
 	}else
 	{

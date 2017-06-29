@@ -198,6 +198,31 @@ public class ContactUSRedesignUhcStepDefinition {
 						contactusPage);
 			
 		}
+		@Then("^user enters blank text  in sendUS A question  message widget$")
+		public void invalidate_blankEmailMsgValidations()
+		{
+			ContactUsPage contactusPage=(ContactUsPage)getLoginScenario().getBean(PageConstants.CONTACTUS_PAGE);
+			
+			contactusPage.sendUsQuestion_Message_Validations();
+			
+			if(contactusPage != null)				
+				getLoginScenario().saveBean(PageConstants.CONTACTUS_PAGE,
+						contactusPage);
+			
+		}
+		
+		@Then("^user enters invalid phone number  in sendUS A question widget$")
+		public void invalidate_PhoneValidations()
+		{
+			ContactUsPage contactusPage=(ContactUsPage)getLoginScenario().getBean(PageConstants.CONTACTUS_PAGE);
+			
+			contactusPage.sendUsQuestion_invalid_PhoneNumber_Validations();
+			
+			if(contactusPage != null)				
+				getLoginScenario().saveBean(PageConstants.CONTACTUS_PAGE,
+						contactusPage);
+			
+		}
 		
 		
 	}
