@@ -64,13 +64,13 @@ public class PharmacyLocatorAarpStepDefinition {
 		PharmacySearchPage pharmacySearchPage = acqusitionHomePage
 				.navigateToPharmacyLocator();
 
-		/*if (pharmacySearchPage != null) {
+		if (pharmacySearchPage != null) {
 			getLoginScenario().saveBean(PageConstants.PHARMACY_SEARCH_PAGE,
 					pharmacySearchPage);
 			Assert.assertTrue(true);
 		} else {
 			Assert.fail("Failed to load Pharmacy search page");
-		}*/
+		}
 
 	}
 

@@ -82,7 +82,7 @@ And the user chooses a plan from dropdown in AARP Site
 Then the user click on view search PDF link in AARP Site
 Examples:
 	| zipcode     | distance  | county            |  planName 			                 	  							|			 
-	| 90210       | 15        | Adams County      | AARP MedicareComplete SecureHorizons Plan 1 (HMO) |	
+	| 90210       | 15        | Los Angeles      | AARP MedicareComplete SecureHorizons Plan 1 (HMO) |	
 	
 @zipcodeEntry
 Scenario Outline: To verify pharmacy locator zipcode entry in AARP site
@@ -96,7 +96,7 @@ And the user chooses a plan from dropdown in AARP Site
 	| <planName> |
 Examples:
 	| zipcode     | distance  | county            |  planName 			                 	  							|			 
-	| 90210       | 15        | Adams County      | AARP MedicareComplete SecureHorizons Plan 1 (HMO) |	
+	| 90210       | 15        | Los Angeles      | AARP MedicareComplete SecureHorizons Plan 1 (HMO) |	
 	
 @showonmap
 Scenario Outline: To verify pharmacy locator showmap in AARP site
@@ -159,6 +159,6 @@ And the user chooses a plan from dropdown in AARP Site
 Examples:
 	Examples:
 	| zipcode     | distance  | county            |  planName 			                 	  							|			 
-	| 90210       | 15        | Adams County      | AARP MedicareComplete SecureHorizons Plan 1 (HMO) |	
+	| 90210       | 15        | Los Angeles       | AARP MedicareComplete SecureHorizons Plan 1 (HMO) |	
 
 

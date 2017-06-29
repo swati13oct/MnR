@@ -99,7 +99,8 @@ public class PharmacySearchPage extends UhcDriver {
 
 	public PharmacySearchPage enterZipDistanceDetails(String zipcode,
 			String distance, String county) {
-		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+		
+		//driver.findElement(By.id("zipcodeTxt")).sendKeys("90210");
 		sendkeys(zipcodeField, zipcode);
 		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 		searchbtn.click();
@@ -118,10 +119,11 @@ public class PharmacySearchPage extends UhcDriver {
 			}
 		}
 		if (driver.getTitle().equalsIgnoreCase(
-				"Find a Pharmacy | AARP Medicare Plans from UnitedHealthcare")) {
+				"Find a Pharmacy | AARP® Medicare Plans from UnitedHealthcare®")) {
 			return new PharmacySearchPage(driver);
 		}
 		return null;
+		
 	}
 
 	public PharmacySearchPage selectsPlanName() {

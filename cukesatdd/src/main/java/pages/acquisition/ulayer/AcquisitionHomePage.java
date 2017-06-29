@@ -519,7 +519,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		public PharmacySearchPage navigateToPharmacyLocator() {
 		findapharmacylink.click();
 		//driver.navigate().to("MAPD_REQUEST_PLAN_URL");
-		if (getTitle().equalsIgnoreCase("Find a Pharmacy | AARP Medicare Plans from UnitedHealthcare")) {
+		if (getTitle().equalsIgnoreCase("Find a Pharmacy | AARP® Medicare Plans from UnitedHealthcare®")) {
 			return new PharmacySearchPage(driver);
 
 		}
