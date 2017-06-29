@@ -118,6 +118,13 @@ public class BenefitsAndCoveragePage extends UhcDriver {
     
     @FindBy(id="mapdPageNonLis")
     private WebElement drugcopaytable;
+    
+    @FindBy(xpath = ".//*[@id='plan_benefit_documents']/section/div/div[2]/div/form/span[1]")
+    private WebElement view_label;
+    
+    @FindBy(xpath = ".//*[@id='plan_benefit_documents']/section/div/div[2]/div/form/span[2]")
+    private WebElement documents_label;
+    
  
 
     public static final String learnmorestagetext_xpath =".//*[@id='collapseStages']";
@@ -288,13 +295,16 @@ catch (JSONException e) {
 	e.printStackTrace();
 }
 }
-/*public WebElement getview_label() {
-    return view_label;
-       }
 
-public WebElement getdocuments_label() {
-    return documents_lebel;
-       }*/
+public WebElement getview_label() 
+{
+ return view_label;
+ }
+
+public WebElement getdocuments_label() 
+{
+ return documents_label;
+}
 
 
 

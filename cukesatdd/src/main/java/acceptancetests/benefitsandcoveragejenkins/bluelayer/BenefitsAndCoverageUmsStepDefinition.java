@@ -752,10 +752,11 @@ public class BenefitsAndCoverageUmsStepDefinition {
 				PageConstants.BENEFITS_COVERAGE_PAGE);
 		
 		
-		//benefitsCoveragePage.getdocuments_label();
-		//benefitsncoveragepage.getview_label();
+		benefitsCoveragePage.getdocuments_label();
+		benefitsCoveragePage.getview_label();
 		
 	}
+	
 	@And("^the user validates the language dropdown and the value displayed by default and selects new value in dropdown successfully$")
 	public void validate_languagedropdown(DataTable givenAttributes)
 	{

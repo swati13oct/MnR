@@ -79,7 +79,7 @@
 },
 "planDocumentSection":{
 "identifier":"xpath", 
-"elementName":"html/body/div[4]/div[2]/section"
+"elementName":".//*[@id='plan_benefit_documents']/section/div/div[1]/div"
 },
 "planHearingSection":{
 "identifier":"xpath", 
