@@ -141,7 +141,7 @@ public class ContactUsPage extends UhcDriver{
 	private WebElement questionEmailmessageError;
 	
 
-	@FindBy(xpath="//div[not (contains(@class,'hidden')) and (@id='alt-phone-wrapper')]//div[2]//label[@id='message-email-error']")
+	@FindBy(css="div.field.field-has-error div.field-input label#message-email-error.error")
 	private WebElement alternativemessageEmailError;
 	
 	

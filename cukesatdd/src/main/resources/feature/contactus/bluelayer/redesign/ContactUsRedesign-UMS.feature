@@ -1,5 +1,6 @@
 @contactUsTestredesignBlue
 Feature: To test Send us a question Widget and Click to call functionality in contact us redesign pages in UHCM site
+
 #US634975
 Scenario Outline: Verify Send us a question Widget section in contact us redesign page 
 Given registered UMS member with following attributes
@@ -100,4 +101,50 @@ Then user enters invalidate Confirm email ID in sendUS A question widget
 Examples:
 	| planType | |  memberType   |
 	| MAPD      | |  Group   |
+	
+Scenario Outline:validating emailIds in contact us redesign page 
+Given registered UMS member with following attributes
+	| Plan Type   | <planType>   |
+	| Member Type | <memberType> |
+When the user navigates to contact us page in UHC site
+Then user enters invalidate alternative email ID in sendUS A question widget
+
+Examples:
+	| planType | |  memberType   |
+	| MAPD      | |  Group   |
+	
+Scenario Outline:validating emailIds in contact us redesign page 
+Given registered UMS member with following attributes
+	| Plan Type   | <planType>   |
+	| Member Type | <memberType> |
+When the user navigates to contact us page in UHC site
+Then user enters invalidate Confirm email ID in sendUS A question widget
+
+Examples:
+	| planType | |  memberType   |
+	| MAPD      | |  Group   |
+	
+Scenario Outline:validating emailIds in contact us redesign page 
+Given registered UMS member with following attributes
+	| Plan Type   | <planType>   |
+	| Member Type | <memberType> |
+When the user navigates to contact us page in UHC site
+Then user enters blank text  in sendUS A question  message widget
+
+Examples:
+	| planType | |  memberType   |
+	| MAPD      | |  Group   |
+	
+Scenario Outline:validating emailIds in contact us redesign page 
+Given registered UMS member with following attributes
+	| Plan Type   | <planType>   |
+	| Member Type | <memberType> |
+When the user navigates to contact us page in UHC site
+Then user enters invalid phone number  in sendUS A question widget
+
+Examples:
+	| planType | |  memberType   |
+	| MAPD      | |  Group   |
+	
+	
 	

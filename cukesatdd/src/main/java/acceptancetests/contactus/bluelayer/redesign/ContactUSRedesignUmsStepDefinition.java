@@ -64,8 +64,7 @@ public class ContactUSRedesignUmsStepDefinition {
 				.saveBean(LoginCommonConstants.USERNAME, userName);
 				getLoginScenario().saveBean(LoginCommonConstants.PASSWORD, pwd);
 			}
-
-			WebDriver wd = getLoginScenario().getWebDriver();
+		WebDriver wd = getLoginScenario().getWebDriver();
 			getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
 
 			LoginPage loginPage = new LoginPage(wd);
@@ -179,7 +178,7 @@ public class ContactUSRedesignUmsStepDefinition {
 			ContactUsPage contactusPage=(ContactUsPage)getLoginScenario().getBean(PageConstants.CONTACT_US_PAGE);
 			
 			contactusPage.submitQuestionClick_by_BillingInfo_option();
-			
+			 
 			if(contactusPage != null)				
 				getLoginScenario().saveBean(PageConstants.CONTACT_US_PAGE,
 						contactusPage);
@@ -211,12 +210,13 @@ public class ContactUSRedesignUmsStepDefinition {
 						contactusPage);
 			
 		}
-	/*	@Then("^user validates secure email widget functionality using Email Address on File radio button$")
-		public void user_validates_email_widget_func_byEmailAddress_Radio_button()
+		
+		@Then("^user enters blank text  in sendUS A question  message widget$")
+		public void invalidate_blankEmailMsgValidations()
 		{
 			ContactUsPage contactusPage=(ContactUsPage)getLoginScenario().getBean(PageConstants.CONTACT_US_PAGE);
 			
-			contactusPage.validateEmailby_Email_Address_RadioButton();
+			contactusPage.sendUsQuestion_blankText_Message_Validations();
 			
 			if(contactusPage != null)				
 				getLoginScenario().saveBean(PageConstants.CONTACT_US_PAGE,
@@ -224,91 +224,23 @@ public class ContactUSRedesignUmsStepDefinition {
 			
 		}
 		
-		@Then("^user validates secure Messaging Model$")
-		public void user_validates_SecureMessagingModel()
+		
+		@Then("^user enters invalid phone number  in sendUS A question widget$")
+		public void alternative_email_idError_Validations()
 		{
 			ContactUsPage contactusPage=(ContactUsPage)getLoginScenario().getBean(PageConstants.CONTACT_US_PAGE);
 			
-			contactusPage.validateSecureEmailModelfunctionality();
-			
-			if(contactusPage != null)				
-				getLoginScenario().saveBean(PageConstants.CONTACT_US_PAGE,
-						contactusPage);
-			
-			
-		}
-		
-		@Then("^user validates secure Messaging Model Cancel link$")
-		public void user_validates_SecureMessagingModel_Cancel()
-		{
-			ContactUsPage contactusPage=(ContactUsPage)getLoginScenario().getBean(PageConstants.CONTACT_US_PAGE);
-			
-			contactusPage.validateSecureEmailModel_Cancellink_Click();
-			
-			if(contactusPage != null)				
-				getLoginScenario().saveBean(PageConstants.CONTACT_US_PAGE,
-						contactusPage);
-			
-			
-		}
-		
-		@Then("^user validates go To Inbox button  in redesign contact us page$")
-		public void user_validates_goToInBoxDiaplay()
-		{
-			ContactUsPage contactus=(ContactUsPage)getLoginScenario().getBean(PageConstants.CONTACT_US_PAGE);
-			
-			contactus.goToInBoxButtonDisplay();
-			
-		}
-		
-		@Then("^user validates clickToCallButton display on contactUS redesign page$")
-		public void validates_clickToCall_widget()
-		{
-			ContactUsPage contactusPage=(ContactUsPage)getLoginScenario().getBean(PageConstants.CONTACT_US_PAGE);
-			
-			contactusPage.validates_clickToCall_widget();
+			contactusPage.sendUsQuestion_invalid_PhoneNumber_Validations();
 			
 			if(contactusPage != null)				
 				getLoginScenario().saveBean(PageConstants.CONTACT_US_PAGE,
 						contactusPage);
 			
 		}
-		
-		@And("^user clicks on send a Request button on Click to call widget$")
-		public void Requestcall_click()
-		{
-			ContactUsPage contactusPage=(ContactUsPage)getLoginScenario().getBean(PageConstants.CONTACT_US_PAGE);
-			
-			contactusPage.sendAreqclick();
-			
-			if(contactusPage != null)				
-				getLoginScenario().saveBean(PageConstants.CONTACT_US_PAGE,
-						contactusPage);
-			
-		}
-		
-		@And("^user clicks on Request Confirmation Click$")
-		public void RequestcallConfimration_click()
-		{
-			ContactUsPage contactusPage=(ContactUsPage)getLoginScenario().getBean(PageConstants.CONTACT_US_PAGE);
-			
-			contactusPage.reqCallclickConfrimation();
-			
-			if(contactusPage != null)				
-				getLoginScenario().saveBean(PageConstants.CONTACT_US_PAGE,
-						contactusPage);
-			
-		}*/
 
-		/*@After
-		public void tearDown() {
-			WebDriver wd = (WebDriver) getLoginScenario().getBean(
-					CommonConstants.WEBDRIVER);
-			if(wd!=null){
-				wd.quit();
-			}
-			getLoginScenario().flushBeans();
-		}*/
+	
+
+		
 
 	}
 
