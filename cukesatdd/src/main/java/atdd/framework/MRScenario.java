@@ -527,7 +527,8 @@ public class MRScenario {
        private static Map<String, String> getProperties() {
               Map<String, String> props = new HashMap<String, String>();
               Properties prop = new Properties();
-              String propertiesFileToPick = System.getProperty("environment");
+              //String propertiesFileToPick = System.getProperty("environment");
+              String propertiesFileToPick = "team-a";
               System.out.println("Using properties for environment ...."
                            + propertiesFileToPick);
               if (StringUtils.isBlank(propertiesFileToPick)) {
@@ -863,15 +864,15 @@ public class MRScenario {
     	   
     	   /****FIrefox Browser******/
     	   
-    	/*   if (null == webDriver) {
+    	   if (null == webDriver) {
 			File pathToBinary = new File("C:/Users/tpravee2/AppData/Local/Mozilla Firefox/firefox.exe");
 			FirefoxBinary ffBinary = new FirefoxBinary(pathToBinary);
 			FirefoxProfile firefoxProfile = new FirefoxProfile();
 			webDriver = new FirefoxDriver(ffBinary, firefoxProfile);
 			webDriver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
-		}*/
+		}
 
-
+    	   							/****PhantomJS*******/
     	   String browser = (null == System.getProperty(CommonConstants.JENKINS_BROWSER)
                    ? props.get("WebDriver") : System.getProperty(CommonConstants.JENKINS_BROWSER));
        System.out.println("getWebDriver, returning driver " + browser);
@@ -887,41 +888,10 @@ public class MRScenario {
                    System.out.println("inside null");                             
                     webDriver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
                    webDriver.manage().window().maximize();
-             } /*else if (browserName.equalsIgnoreCase(CommonConstants.FIREFOX_BROWSER)) {
-                   System.out.println("Execution started in firefox web browser !!!!!!");
-                   //FirefoxBinary ffBinary = new FirefoxBinary(new File(pathToBinary));
-                   FirefoxProfile firefoxProfile = new FirefoxProfile();
-                   webDriver = new FirefoxDriver(firefoxProfile);
-                   webDriver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
-             } else if (browserName.equalsIgnoreCase(CommonConstants.CHROME_BROWSER)) {
-                   System.out.println("Execution started in chrome web browser !!!!!!");
-                   Map<String, Object> chromeOptions = new HashMap<String, Object>();
-                   chromeOptions.put("binary", pathToBinary);
-                   DesiredCapabilities capabilities = DesiredCapabilities.chrome();
-                   capabilities.setCapability(ChromeOptions.CAPABILITY, chromeOptions);
-                   webDriver = new ChromeDriver(capabilities);
-             } else if (browserName.equalsIgnoreCase(CommonConstants.IE_BROWSER)) {
-                   System.out.println("Execution started in firefox IE browser !!!!!!");
-                   System.setProperty("webdriver.ie.driver",
-                                 pathToBinary);
-                   DesiredCapabilities ieCaps = DesiredCapabilities.internetExplorer();
-                    ieCaps.setCapability(InternetExplorerDriver.INTRODUCE_FLAKINESS_BY_IGNORING_SECURITY_DOMAINS, true);
-                   webDriver = new InternetExplorerDriver(ieCaps);
-                   webDriver.manage().window().maximize();
-                   return webDriver;
-             } else if (browser.equalsIgnoreCase(CommonConstants.MOBILE_BROWSER)) {
-                   System.out.println("Execution started in firefox web chrome mobile emulator !!!!!!");
-                   Map<String, String> mobileEmulation = new HashMap<String, String>();
-                   mobileEmulation.put("deviceName", props.get(CommonConstants.DEVICE_NAME));
-                   Map<String, Object> chromeOptions = new HashMap<String, Object>();
-                   chromeOptions.put("mobileEmulation", mobileEmulation);
-                   DesiredCapabilities capabilities = DesiredCapabilities.chrome();
-                   capabilities.setCapability("chrome.switches", Arrays.asList("--start-maximized"));
-                   capabilities.setCapability(ChromeOptions.CAPABILITY, chromeOptions);
-                   System.setProperty("webdriver.chrome.driver", props.get(CommonConstants.CHROME_DRIVER));
-                   webDriver = new ChromeDriver(capabilities);
-                   return webDriver;
-             }*/else if (browser.equalsIgnoreCase(CommonConstants.SAUCE_BROWSER_WEB)) {
+             } 
+             
+            
+             else if (browser.equalsIgnoreCase(CommonConstants.SAUCE_BROWSER_WEB)) {
                     System.out.println("Execution is Going to Start on SauceLabs Web.....!!!!!");
          DesiredCapabilities capabilities = null;
          if(browserName.equalsIgnoreCase("firefox")){
@@ -961,7 +931,9 @@ public class MRScenario {
          }
          return webDriver;
              }
+             
              //https://wiki.saucelabs.com/display/DOCS/Platform+Configurator#/
+                               /******SauceLab Mobile********/             
              else if (browser.equalsIgnoreCase(CommonConstants.SAUCE_BROWSER_MOBILE)){
                    System.out.println("Execution is Going to Start on SauceLabs Mobile.....!!!!!");
           DesiredCapabilities capabilities = null;
@@ -995,6 +967,44 @@ public class MRScenario {
              }
              return webDriver;
              }
+             
+             
+             /*else if (browserName.equalsIgnoreCase(CommonConstants.FIREFOX_BROWSER)) {
+             System.out.println("Execution started in firefox web browser !!!!!!");
+             //FirefoxBinary ffBinary = new FirefoxBinary(new File(pathToBinary));
+             FirefoxProfile firefoxProfile = new FirefoxProfile();
+             webDriver = new FirefoxDriver(firefoxProfile);
+             webDriver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
+       } else if (browserName.equalsIgnoreCase(CommonConstants.CHROME_BROWSER)) {
+             System.out.println("Execution started in chrome web browser !!!!!!");
+             Map<String, Object> chromeOptions = new HashMap<String, Object>();
+             chromeOptions.put("binary", pathToBinary);
+             DesiredCapabilities capabilities = DesiredCapabilities.chrome();
+             capabilities.setCapability(ChromeOptions.CAPABILITY, chromeOptions);
+             webDriver = new ChromeDriver(capabilities);
+       } else if (browserName.equalsIgnoreCase(CommonConstants.IE_BROWSER)) {
+             System.out.println("Execution started in firefox IE browser !!!!!!");
+             System.setProperty("webdriver.ie.driver",
+                           pathToBinary);
+             DesiredCapabilities ieCaps = DesiredCapabilities.internetExplorer();
+              ieCaps.setCapability(InternetExplorerDriver.INTRODUCE_FLAKINESS_BY_IGNORING_SECURITY_DOMAINS, true);
+             webDriver = new InternetExplorerDriver(ieCaps);
+             webDriver.manage().window().maximize();
+             return webDriver;
+       } else if (browser.equalsIgnoreCase(CommonConstants.MOBILE_BROWSER)) {
+             System.out.println("Execution started in firefox web chrome mobile emulator !!!!!!");
+             Map<String, String> mobileEmulation = new HashMap<String, String>();
+             mobileEmulation.put("deviceName", props.get(CommonConstants.DEVICE_NAME));
+             Map<String, Object> chromeOptions = new HashMap<String, Object>();
+             chromeOptions.put("mobileEmulation", mobileEmulation);
+             DesiredCapabilities capabilities = DesiredCapabilities.chrome();
+             capabilities.setCapability("chrome.switches", Arrays.asList("--start-maximized"));
+             capabilities.setCapability(ChromeOptions.CAPABILITY, chromeOptions);
+             System.setProperty("webdriver.chrome.driver", props.get(CommonConstants.CHROME_DRIVER));
+             webDriver = new ChromeDriver(capabilities);
+             return webDriver;
+       }*/
+       
          
        }
 
