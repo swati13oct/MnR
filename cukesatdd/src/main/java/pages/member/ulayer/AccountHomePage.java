@@ -37,7 +37,7 @@ public class AccountHomePage extends UhcDriver {
 
 	// Page URL
     private static String PAGE_URL = MRConstants.TESTHARNESSU_URL;
-    private static String PAGE_URL = MRConstants.TESTHARNESS_URL;
+    //private static String PAGE_URL = MRConstants.TESTHARNESS_URL;
 	@FindBy(className = "fd_myPlans")
 	private WebElement myPlansTab;
 
@@ -194,8 +194,6 @@ public class AccountHomePage extends UhcDriver {
 	@FindBy(linkText = "Go to benefits and coverage page page")
 	private WebElement BnClink2;
 
-        @FindBy(xpath = "html/body/table/tbody/tr/td/div/div/table/tbody/tr[7]/td[2]/a")
-	private WebElement BnClink;
 	
 	
 
@@ -776,7 +774,8 @@ public FormsandresourcesPage navigateToMydocumentAarpPage() {
 	
 	
         public BenefitsAndCoveragePage navigatesToBandCpage() {
-		{ driver.navigate().to(PAGE_URL);
+		{ 
+			driver.navigate().to(PAGE_URL);
 			
 			BnClink.click();
 			if(driver.getTitle().equalsIgnoreCase("Benefits And Coverage Page Redesign")){
