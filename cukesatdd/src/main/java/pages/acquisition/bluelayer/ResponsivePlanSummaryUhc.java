@@ -1227,7 +1227,6 @@ public void comparePlanslnk(){
 				public boolean validateaddtocompare() {
 					
              boolean presentLink =false;
-					
 					try {
 						if(chkBoxAddtoCompare2.isDisplayed()){
 							

@@ -332,6 +332,7 @@ public class ResponsiveUhcStepDefiniton {
    		
    }
    }
+   
    @And("^User validate add to compare is not displayed for SNP$")
    public void addtocompare_notdisplayed(){
    ResponsivePlanSummaryUhc planSummary = (ResponsivePlanSummaryUhc) getLoginScenario().getBean(PageConstants.RESPONSIVE_PLAN_SUMMARY_PAGE_UHC);

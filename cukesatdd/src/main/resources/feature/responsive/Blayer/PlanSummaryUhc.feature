@@ -266,6 +266,7 @@ Examples:
 |zipCode|county          |planType | planName                                            |monthlypremium | primarycare |  specialist       |referralRequired| prescriptionDrug |
 |85901 | Navajo County   |  ma     |UnitedHealthcare MedicareDirect Rx (PFFS)             |   $52         | $25         |  $50             |  No            |   $2 |
 
+
 @learnmore
 Scenario Outline: To validate plan count from portfolio page
 Given the user is on the vpp portfolio page
