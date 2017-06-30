@@ -15,6 +15,7 @@ import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.FindBys;
 import org.openqa.selenium.support.PageFactory;
@@ -171,23 +172,33 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	
 
 	
-	@FindBy(xpath=".//*[@class='action-btn getStarted']")
+	
+	
+	
+	@FindBy(xpath="//button[contains(text(),'Get Started')]")
 	private WebElement GetStarted;
+	
 
 	
 
-	@FindBy(xpath=".//*[@class='img' and @src='/images/guidedSearch/gs_icn_pro_healthcarepro.svg']")
+	@FindBy(xpath="//h3[text()='People']/preceding::div[1]/img")
 	private WebElement People;
-
-
 	
-	@FindBy(xpath=".//*[@class='img' and @src='/images/guidedSearch/gs_icn_pro_primarycarephysicians.svg']")
-	private WebElement Primary;
+	
 
-	@FindBy(xpath="//*[contains(text(),'Primary Care Physician (PCP')] ")
+	@FindBy(xpath="//h3[text()='Primary Care']")
+	private WebElement Primary;
+	
+	
+	
+	
+	
+	@FindBy(xpath="//a[contains(text(),'Primary Care Physician (PCP')]")
 	private WebElement Physician;
 
-	@FindBy(xpath=".//*[contains(@ng-bind-html,'buttonText')  and contains(text(),'Save')]")
+	
+	
+	@FindBy(xpath="//div[contains(@class,'first')]//div[@class='hidden-phone']/button[not(contains(@class,'hidden'))]")
 	private WebElement Savebtn;
 
 	
@@ -195,7 +206,11 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	@FindBy(xpath="//*[@class='action-btn lt']")
 	private WebElement Viewsavebtn;
 
-	@FindBy(xpath=".//*[@class='action-btn negative' and @type='submit']")
+	
+	
+	
+	
+	@FindBy(xpath="//button[@class='action-btn negative']")
 	private WebElement Checkcoverage;
 	
 	@FindBy(xpath="//p/span[@class='ng-binding']")
@@ -387,11 +402,16 @@ public class VPPPlanSummaryPage extends UhcDriver {
 					//ElementData elementData = new ElementData("xpath",
 						
 //"//*[contains(text(),'Is my provider covered in my ZIP code/county')]");
-					driver.findElement(By.xpath("//*[contains(text(),'Is my provider covered ')]")).click();
+					//driver.findElement(By.xpath("//*[contains(text(),'Is my provider covered ')]")).click();
 
 					//driver.findElement(By.xpath("//*[@id='plan-list-1']/div/div[2]/div/div[1]/div[2]/div/div[1]/div[1]/a")).click();
 
 					//findChildElement(elementData, plan).click();
+					
+					WebElement ProviderSearchLink = driver.findElement(By.xpath("//h2[contains(text(),'"+planName+"')]/following::a[contains(text(),'Is')][1]"));
+					System.out.println(ProviderSearchLink.getText());
+					ProviderSearchLink.click();
+
 					
 				}
 			}
@@ -410,42 +430,39 @@ public class VPPPlanSummaryPage extends UhcDriver {
 			}
 		}
 
-		//driver.manage().window().maximize();
+		driver.manage().window().maximize();
 		waitforElement(GetStarted);
 		GetStarted.click();
-
-		waitforElement( People);
-
+		
+		wAitt();
+       
+		waitforElement(People);
+		wAitt();
+		System.out.println("Rally tool started");
 		People.click();
-
+				
+		wAitt();
+		
 		waitforElement(Primary);
+		
+		wAitt();
 
 		Primary.click();
 
 		waitforElement(Physician);
+		wAitt();
 
 		Physician.click();
 
 		waitforElement(Savebtn);
-		try {
-			Thread.sleep(5000);
-		} catch (InterruptedException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
-
+		wAitt();
 		Savebtn.click();
 		waitforElement(Viewsavebtn);
-
+		wAitt();
 		Viewsavebtn.click();
-		try {
-			Thread.sleep(5000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		wAitt();
 		waitforElement(Checkcoverage);
-		CommonUtility.waitForPageLoad(driver, Checkcoverage, 10);
+		wAitt();
 		Checkcoverage.click();
 		driver.switchTo().window(mainwindow);
 
@@ -453,10 +470,25 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		return new VPPPlanSummaryPage(driver);
 	}
 	
-	public boolean providerinfo()
+	public void wAitt()
+	{
+		try {
+			Thread.sleep(8000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	public boolean providerinfo(String planName)
 	{
 		String providerinfo=provider.getText();
-		if(providerinfo.contains("1 providers covered"))
+		
+		WebElement ProviderSearchLink1 = driver.findElement
+				(By.xpath("//h2[contains(text(),'"+planName+"')]/following::span[contains(text(),'covered')][1]"));
+		String mproviderinfo=ProviderSearchLink1.getText();
+        System.out.println(mproviderinfo);
+		if(providerinfo.contains("0 out of 1 providers covered"))
 		{
 			return true;
 		}

@@ -28,7 +28,7 @@ import cucumber.api.java.en.When;
  * 
  */
 
-public class UlayerProviderSearchUmsStepDefinition {
+public class UlayerProviderSearchAARPStepDefinition {
 
 	@Autowired
 	MRScenario loginScenario;
@@ -130,10 +130,21 @@ public class UlayerProviderSearchUmsStepDefinition {
 		}
 		}
 		@Then("^Verify X out of Y provider covered information is displayed on Plan Summary page Ulayer$")
-		public void verifyproviderscoveredulayer()
+		public void verifyproviderscoveredulayer(DataTable Planname )
 	{
-		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario().getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
-		if(plansummaryPage.providerinfo())
+			
+			List<DataTableRow> plannameAttributesRow = Planname
+					.getGherkinRows();
+			Map<String, String> plannameAttributesMap = new HashMap<String, String>();
+			for (int i = 0; i < plannameAttributesRow.size(); i++) {
+
+				plannameAttributesMap.put(plannameAttributesRow.get(i).getCells()
+						.get(0), plannameAttributesRow.get(i).getCells().get(1));
+			}
+			String planName = plannameAttributesMap.get("PlanName");
+	
+					VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario().getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		if(plansummaryPage.providerinfo(planName))
 		{
 			getLoginScenario().saveBean(PageConstants.VPP_PLAN_SUMMARY_PAGE,
 					plansummaryPage);

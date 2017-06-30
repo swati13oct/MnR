@@ -11,7 +11,14 @@ When the user Click on Show Plans link Ulayer
 When the user Click on Is my Provider covered link Ulayer
 |PlanName| <planname>|
 Then Verify X out of Y provider covered information is displayed on Plan Summary page Ulayer
-
+|PlanName| <planname>|
 Examples:
 | zipcode | county             | plantype| planname |               
 | 90210   | Los Angeles County | MA      | AARP MedicareComplete SecureHorizons Plan 2 (HMO)|
+
+
+
+	
+
+
+
