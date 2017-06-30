@@ -188,4 +188,80 @@ Then the user navigates to the following plan type
 | PlanType | <planType> |	
  Examples:
 		|zipCode|county						 |planType | 
-		|90210  |Los Angeles County|MS       |	 						
+		|90210  |Los Angeles County|MS       |	 
+		
+		
+@learnmoresnp
+Scenario Outline: To validate plan count from portfolio page
+Given the user is on the vpp portfolio page
+Then the user performs plan search using zipcode
+              | Zip Code |<zipCode>|
+              | County   |<county> |
+Then user validates plan count for all plan types on plan summary page in AARP site
+Then the user navigates to the following plan type
+| PlanType | <planType> |
+Then User validate learn more link for snp
+| Plan Name            | <planName>        |
+Examples:
+|zipCode|county          |planType | planName                                            |monthlypremium | primarycare |  specialist       |referralRequired| prescriptionDrug |
+|33012 |Miami-Dade County| snp     |UnitedHealthcare Dual Complete RP (Regional PPO SNP)  |  $29.10       |$0           |  20              | No             |  25  |
+
+
+
+@addtocomparenotdisplayed 	
+Scenario Outline: To validate plan count from portfolio page
+Given the user is on the vpp portfolio page
+Then the user performs plan search using zipcode
+              | Zip Code |<zipCode>|
+              | County   |<county> |
+Then user validates plan count for all plan types on plan summary page in AARP site
+Then the user navigates to the following plan type
+| PlanType | <planType> |
+And User validate add to compare is not displayed for SNP
+Examples:
+|zipCode|county          |planType | planName                                            |monthlypremium | primarycare |  specialist       |referralRequired| prescriptionDrug |
+|33012 |Miami-Dade County| snp     |UnitedHealthcare Dual Complete RP (Regional PPO SNP)  |  $29.10       |$0           |  20              | No             |  25  |
+
+
+
+
+@enrollnowforsnpnotdisplayed
+Scenario Outline: To validate plan count from portfolio page
+Given the user is on the vpp portfolio page
+Then the user performs plan search using zipcode
+              | Zip Code |<zipCode>|
+              | County   |<county> |
+Then user validates plan count for all plan types on plan summary page in AARP site
+Then the user navigates to the following plan type
+| PlanType | <planType> |
+And User validate Enroll now button is not displayed for SNP plans
+Examples:
+|zipCode|county          |planType | planName                                            |monthlypremium | primarycare |  specialist       |referralRequired| prescriptionDrug |
+|33012 |Miami-Dade County| snp     |UnitedHealthcare Dual Complete RP (Regional PPO SNP)  |  $29.10       |$0           |  20              | No             |  25  |
+
+
+
+
+@benefittable
+Scenario Outline: To validate plan count from portfolio page
+Given the user is on the vpp portfolio page
+Then the user performs plan search using zipcode
+              | Zip Code |<zipCode>|
+              | County   |<county> |
+Then user validates plan count for all plan types on plan summary page in AARP site
+Then the user navigates to the following plan type
+| PlanType | <planType> |
+And the user validates benefit table
+  | Plan Name            | <planName>        |
+  | MonthlyPremium		|<monthlypremium>   |
+  | PCP	                | <primarycare>		        |
+  | Specialist          | <specialist>	    |
+  | ReferralRequired    |<referralRequired>	| 
+  | Prescription Drugs  | <prescriptionDrug>| 
+Examples:
+|zipCode|county          |planType | planName                                            |monthlypremium | primarycare |  specialist       |referralRequired| prescriptionDrug |
+|33012 |Miami-Dade County| snp     |UnitedHealthcare Dual Complete RP (Regional PPO SNP)  |  $29.10       |$0           |  20              | No             |  25  |
+
+
+
+								

@@ -2,6 +2,7 @@ package pages.acquisition.bluelayer;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.concurrent.TimeUnit;
 
 import org.json.JSONArray;
@@ -42,6 +43,9 @@ public class ResponsivePlanSummaryUhc extends UhcDriver{
 		//@FindBy(id = "zipcode")
 		@FindBy(xpath = "//*[@id='zipcode']")
 		private WebElement zipCodeField;
+		
+		@FindBy(xpath="//span[contains(text(),'Enroll in plan')]")
+		private WebElement enrollbutton;
 		
 		@FindBy(xpath = "//div[@class='tab plancountheight'][2]")
 		private WebElement viewPdpPlans;
@@ -1191,6 +1195,137 @@ public void comparePlanslnk(){
 						           showMsPlans.click();
  						}else if(planType.equalsIgnoreCase("SNP")){
   					}
-				}			
-	}
+				}
+				public MAEnrollmentPage clicklearnmorelink(String planName) {
+					
+					List<WebElement> plans = driver.findElements(By.xpath("//div[@class='vppplanheading ng-binding']"));
+		               System.out.println("PLANS SIZE :: "+plans.size());
+		               String xpath=" //div[@class='vppsub_planbtnbar']/div/span[@class='vppenroll vppenrolllink_enrollLink']";  
+		                List<WebElement> learnMoreLinks = driver.findElements(By.xpath(xpath));            
+		                System.out.println("LEARN MORE LINKS SIZE"+learnMoreLinks.size());     
+		               for(int i=0; i<plans.size();i++){
+		                      if(plans.get(i).getText().equalsIgnoreCase(planName)){
+		                    	  learnMoreLinks.get(i).click();
+		                            if(driver.getTitle().equalsIgnoreCase("Medicare Advantage Plan Enrollment Information | UnitedHealthcare®")){
+		                                   try {
+		                                          Thread.sleep(5000);
+		                                   } catch (InterruptedException e) {
+		                                          // TODO Auto-generated catch block
+		                                          e.printStackTrace();
+		                                   }
+		                                   return new MAEnrollmentPage(driver);
+		                            }
+		                            break;
+		                      }
+		               }
+		                      return null;
+					// TODO Auto-generated method stub
+				
+		               }
+				
+	
+				public boolean validateaddtocompare() {
+					
+             boolean presentLink =false;
+					
+					try {
+						if(chkBoxAddtoCompare1.isDisplayed()){
+							
+							presentLink = true;
+						}			  
+						 
+					} catch (NoSuchElementException e) {
+						presentLink = false;
+					}
+					return presentLink;
+					
+				}
+				
+					// TODO Auto-generated method stub
+				
+			
+				public boolean validateenrollbutton() {
+					
+     boolean presentLink =false;
+					
+					try {
+						if(enrollbutton.isDisplayed()){
+							
+							presentLink = true;
+						}			  
+						 
+					} catch (NoSuchElementException e) {
+						presentLink = false;
+					}
+					return presentLink;
+					// TODO Auto-generated method stub
+					
+				}
+				public void validateBenefitTable(String monthlypremium,
+						String primarycare, String specialist,
+						String referralRequired, String prescriptionDrug, String planType, String planName) {
+					System.out.println(driver.findElement(By.xpath("//*[contains(text(),'"+planName+"')]/parent::div/following-sibling::div[1]/div/div/div[@class='snpbenefittable']/ul/li[1]/span")).getText());
+					System.out.println(monthlypremium);	
+						if(monthlypremium.equals(driver.findElement(By.xpath("//*[contains(text(),'"+planName+"')]/parent::div/following-sibling::div[1]/div/div/div[@class='snpbenefittable']/ul/li[1]/span")).getText()))
+							 {
+								 System.out.println("Monthly premium is displayed");
+								 Assert.assertTrue(true);
+							 }
+							 else
+							 {
+								 Assert.fail("Error in monthly premium");
+							 }
+						System.out.println(primarycare);
+						     System.out.println(driver.findElement(By.xpath("//*[contains(text(),'"+planName+"')]/parent::div/following-sibling::div[1]/div/div/div[@class='snpbenefittable']/ul/li[2]/span")).getText());
+							 
+						     if((driver.findElement(By.xpath("//*[contains(text(),'"+planName+"')]/parent::div/following-sibling::div[1]/div/div/div[@class='snpbenefittable']/ul/li[3]/span")).getText()).contains(specialist))
+							 {
+								 System.out.println("specialist is displayed");
+								 Assert.assertTrue(true);
+							 }
+							 else
+							 {
+								 Assert.fail("Error in specialist");
+							 }
+							 
+							 if((driver.findElement(By.xpath("//*[contains(text(),'"+planName+"')]/parent:"
+								 		+ ":div/following-sibling::div[1]/div/div/div[@class='snpbenefittable'"
+								 		+ "]/ul/li[2]/span")).getText()).contains(primarycare))
+							 {
+								 System.out.println("Specialist value is displayed");
+								 Assert.assertTrue(true);
+							 }
+							 else
+							 {
+								 Assert.fail("Error in specialist value is not displayed");
+							 }
+							 if((driver.findElement(By.xpath("//*[contains(text(),'"+planName+"')]/parent::div/following-sibling::div[1]/div/div/div[@class='snpbenefittable']/ul/li[4]/span")).getText()).contains(referralRequired))
+							 {
+								 System.out.println("Referral value is displayed");
+								 Assert.assertTrue(true);
+							 }
+							 else
+							 {
+								 Assert.fail("Error in referral value");
+							 }
+							 if((driver.findElement(By.xpath("//*[contains(text(),'"+planName+"')]/parent::div/following-sibling::div[1]/div/div/div[@class='snpbenefittable']/ul/li[5]/span")).getText()).contains(prescriptionDrug))
+							 {
+								 System.out.println("Prescription drug value is displayed");
+								 Assert.assertTrue(true);
+							 }
+							 else
+							 {
+								 Assert.fail("Error in displaying Prescription drug value");
+							 }
+							 
+							 
+						
+					
+				}
+					// TODO Auto-generated method stub
+					
+				}
+					
+				
+				
 			 

@@ -11,6 +11,7 @@ import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import pages.acquisition.bluelayer.MAEnrollmentPage;
 import pages.acquisition.bluelayer.PortfolioPageUhc;
 import pages.acquisition.bluelayer.ResponsivePlanSummaryUhc;
 import pages.acquisition.bluelayer.VPPAarpNeedAStepBackWidget;
@@ -286,6 +287,92 @@ public class ResponsiveUhcStepDefiniton {
 	   planSummary.validatePlanCount("ma");
 	   
    }
+   
+   @And("^the user validates benefit table$")
+   public void user_validate_benefit_table(DataTable givenAttributes){
+   	 ResponsivePlanSummaryUhc planSummary = (ResponsivePlanSummaryUhc) getLoginScenario().getBean(PageConstants.RESPONSIVE_PLAN_SUMMARY_PAGE_UHC);
+        List<DataTableRow> memberAttributesRow = givenAttributes
+                      .getGherkinRows();
+         Map<String, String> memberAttributesMap = new HashMap<String, String>();
+         for (int i = 0; i < memberAttributesRow.size(); i++) {
+
+                memberAttributesMap.put(memberAttributesRow.get(i).getCells()
+                             .get(0), memberAttributesRow.get(i).getCells().get(1));
+         }
+
+         String planName = memberAttributesMap.get("Plan Name");
+         System.out.println(planName);
+         getLoginScenario().saveBean(VPPCommonConstants.PLAN_TYPE, planName);
+         String monthlypremium = memberAttributesMap.get("MonthlyPremium");
+   		getLoginScenario().saveBean(VPPCommonConstants.MONTHLYPREMIUM, monthlypremium);
+   		String primarycare = memberAttributesMap.get("PCP");
+   		getLoginScenario().saveBean(VPPCommonConstants.PRIMARYCARE, primarycare);
+   		String specialist = memberAttributesMap.get("Specialist");
+   		getLoginScenario().saveBean(VPPCommonConstants.SPECIALIST, specialist);
+   		String requiredreferral = memberAttributesMap.get("ReferralRequired");
+   		getLoginScenario().saveBean(VPPCommonConstants.REQUIREDREFERRAL, requiredreferral);
+   		String prescriptiondrug  = memberAttributesMap.get("Prescription Drugs");
+   		getLoginScenario().saveBean(VPPCommonConstants.PRESCRIPTIONDRUG, prescriptiondrug);
+   		String planType = (String) getLoginScenario().getBean(VPPCommonConstants.PLAN_TYPE);
+   		
+   		planSummary.validateBenefitTable(monthlypremium, primarycare, specialist, requiredreferral, prescriptiondrug, planType, planName);
+   	}
+   @And("^User validate Enroll now button is not displayed for SNP plans$")
+   public void validate_enroll_buttonnotdisplayed(){
+   	ResponsivePlanSummaryUhc planSummary = (ResponsivePlanSummaryUhc) getLoginScenario().getBean(PageConstants.RESPONSIVE_PLAN_SUMMARY_PAGE_UHC);
+
+   	
+   	boolean flagValue=planSummary.validateenrollbutton();
+   	if(!flagValue){
+   		System.out.println("enroll button is not displayed");
+   		Assert.assertTrue(true);
+   		}else{
+   			System.out.println("enroll button is displayed");
+   		Assert.assertTrue(false);
+   		
+   }
+   }
+   @And("^User validate add to compare is not displayed for SNP$")
+   public void addtocompare_notdisplayed(){
+   ResponsivePlanSummaryUhc planSummary = (ResponsivePlanSummaryUhc) getLoginScenario().getBean(PageConstants.RESPONSIVE_PLAN_SUMMARY_PAGE_UHC);
+
+   	
+   	boolean flagValue=planSummary.validateaddtocompare();
+   	if(!flagValue){
+   		System.out.println("Add to compare is not displayed");
+   		Assert.assertTrue(true);
+   		}else{
+   			System.out.println("Add to compare is displayed");
+   		Assert.assertTrue(false);
+   	
+   }
+   	
+   }
+   @Then("^User validate learn more link for snp$")
+   public void learnmore_Displayed(DataTable givenAttributes){
+   	 ResponsivePlanSummaryUhc planSummary = (ResponsivePlanSummaryUhc) getLoginScenario().getBean(PageConstants.RESPONSIVE_PLAN_SUMMARY_PAGE_UHC);
+        List<DataTableRow> memberAttributesRow = givenAttributes
+                      .getGherkinRows();
+         Map<String, String> memberAttributesMap = new HashMap<String, String>();
+         for (int i = 0; i < memberAttributesRow.size(); i++) {
+
+                memberAttributesMap.put(memberAttributesRow.get(i).getCells()
+                             .get(0), memberAttributesRow.get(i).getCells().get(1));
+         }
+
+         String planName = memberAttributesMap.get("Plan Name");
+         System.out.println(planName);
+         getLoginScenario().saveBean(VPPCommonConstants.PLAN_TYPE, planName);
+         MAEnrollmentPage enrollmentpage = planSummary.clicklearnmorelink(planName);
+   		if(enrollmentpage!=null){
+   			getLoginScenario().saveBean(PageConstants.MA_ENROLLMENT_PAGE, enrollmentpage);
+   		}else{
+   			Assert.fail();
+   		}
+         
+
+   }
+
  
 
 }
