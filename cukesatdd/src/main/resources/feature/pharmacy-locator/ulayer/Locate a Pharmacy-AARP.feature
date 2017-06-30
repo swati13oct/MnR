@@ -45,6 +45,7 @@ Examples:
 @multicounty
 Scenario Outline: To verify pharmacy locator multi county lookup modal in AARP site
 Given the user is on the AARP Medicare Site landing page
+When the user navigates to Request more info page
 When the user navigates to pharmacy search page in AARP Site
 And the user enters following details for pharmacy search in AARP Site
 	| Zip Code	| <zipcode>	|
@@ -58,6 +59,7 @@ Examples:
 @languageselection
 Scenario Outline: To verify pharmacy locator language in AARP site
 Given the user is on the AARP Medicare Site landing page
+When the user navigates to Request more info page
 When the user navigates to pharmacy search page in AARP Site
 And the user enters following details for pharmacy search in AARP Site
   | Zip Code	| <zipcode>	|
@@ -72,6 +74,7 @@ Examples:
 @planType
 Scenario Outline: To verify plantype in pharmacy locator page in AARP site
 Given the user is on the AARP Medicare Site landing page
+When the user navigates to Request more info page
 When the user navigates to pharmacy search page in AARP Site
 And the user enters following details for pharmacy search in AARP Site
   | Zip Code	| <zipcode>	|
@@ -87,6 +90,7 @@ Examples:
 @zipcodeEntry
 Scenario Outline: To verify pharmacy locator zipcode entry in AARP site
 Given the user is on the AARP Medicare Site landing page
+When the user navigates to Request more info page
 When the user navigates to pharmacy search page in AARP Site
 And the user enters following details for pharmacy search in AARP Site
   | Zip Code	| <zipcode>	|
@@ -101,6 +105,7 @@ Examples:
 @showonmap
 Scenario Outline: To verify pharmacy locator showmap in AARP site
 Given the user is on the AARP Medicare Site landing page
+When the user navigates to Request more info page
 When the user navigates to pharmacy search page in AARP Site
 And the user enters following details for pharmacy search in AARP Site
 	| Zip Code	| <zipcode>	|
@@ -116,6 +121,7 @@ Examples:
 @resultpdf
 Scenario Outline: To verify pharmacy locator pdf results in AARP site
 Given the user is on the AARP Medicare Site landing page
+When the user navigates to Request more info page
 When the user navigates to pharmacy search page in AARP Site
 And the user enters following details for pharmacy search in AARP Site
 	| Zip Code	| <zipcode>	|
@@ -132,6 +138,7 @@ Examples:
 @googlemap
 Scenario Outline: To verify google maps for pharmacies in AARP site
 Given the user is on the AARP Medicare Site landing page
+When the user navigates to Request more info page
 When the user navigates to pharmacy search page in AARP Site
 And the user enters following details for pharmacy search in AARP Site
 	| Zip Code	| <zipcode>	|
