@@ -190,23 +190,6 @@ Then the user navigates to the following plan type
 		|zipCode|county						 |planType | 
 		|90210  |Los Angeles County|MS       |	 
 		
-		
-@learnmoresnp
-Scenario Outline: To validate plan count from portfolio page
-Given the user is on the vpp portfolio page
-Then the user performs plan search using zipcode
-              | Zip Code |<zipCode>|
-              | County   |<county> |
-Then user validates plan count for all plan types on plan summary page in AARP site
-Then the user navigates to the following plan type
-| PlanType | <planType> |
-Then User validate learn more link for snp
-| Plan Name            | <planName>        |
-Examples:
-|zipCode|county          |planType | planName                                            |monthlypremium | primarycare |  specialist       |referralRequired| prescriptionDrug |
-|33012 |Miami-Dade County| snp     |UnitedHealthcare Dual Complete RP (Regional PPO SNP)  |  $29.10       |$0           |  20              | No             |  25  |
-
-
 
 @addtocomparenotdisplayed 	
 Scenario Outline: To validate plan count from portfolio page
@@ -262,6 +245,46 @@ Examples:
 |zipCode|county          |planType | planName                                            |monthlypremium | primarycare |  specialist       |referralRequired| prescriptionDrug |
 |33012 |Miami-Dade County| snp     |UnitedHealthcare Dual Complete RP (Regional PPO SNP)  |  $29.10       |$0           |  20              | No             |  25  |
 
+
+@benefittablema
+Scenario Outline: To validate plan count from portfolio page
+Given the user is on the vpp portfolio page
+Then the user performs plan search using zipcode
+              | Zip Code |<zipCode>|
+              | County   |<county> |
+Then user validates plan count for all plan types on plan summary page in AARP site
+Then the user navigates to the following plan type
+| PlanType | <planType> |
+And the user validates benefit table for ma
+  | Plan Name            | <planName>        |
+  | MonthlyPremium		|<monthlypremium>   |
+  | PCP	                | <primarycare>		        |
+  | Specialist          | <specialist>	    |
+  | ReferralRequired    |<referralRequired>	| 
+  | Prescription Drugs  | <prescriptionDrug>| 
+Examples:
+|zipCode|county          |planType | planName                                            |monthlypremium | primarycare |  specialist       |referralRequired| prescriptionDrug |
+|85901 | Navajo County   |  ma     |UnitedHealthcare MedicareDirect Rx (PFFS)             |   $52         | $25         |  $50             |  No            |   $2 |
+
+@learnmore
+Scenario Outline: To validate plan count from portfolio page
+Given the user is on the vpp portfolio page
+Then the user performs plan search using zipcode
+              | Zip Code |<zipCode>|
+              | County   |<county> |
+Then user validates plan count for all plan types on plan summary page in AARP site
+Then the user navigates to the following plan type
+| PlanType | <planType> |
+And the user validate learn more button
+| Plan Name| <planName> |
+Examples:
+|zipCode|county          |planType | planName                                            |monthlypremium | primarycare |  specialist       |referralRequired| prescriptionDrug |
+|33012 |Miami-Dade County| snp     |UnitedHealthcare Dual Complete RP (Regional PPO SNP)  |  $29.10       |$0           |  20              | No             |  25  |
+
+
+
+
+								
 
 
 								

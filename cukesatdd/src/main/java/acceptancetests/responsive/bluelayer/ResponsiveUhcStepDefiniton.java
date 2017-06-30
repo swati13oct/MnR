@@ -348,30 +348,60 @@ public class ResponsiveUhcStepDefiniton {
    }
    	
    }
-   @Then("^User validate learn more link for snp$")
-   public void learnmore_Displayed(DataTable givenAttributes){
-   	 ResponsivePlanSummaryUhc planSummary = (ResponsivePlanSummaryUhc) getLoginScenario().getBean(PageConstants.RESPONSIVE_PLAN_SUMMARY_PAGE_UHC);
-        List<DataTableRow> memberAttributesRow = givenAttributes
-                      .getGherkinRows();
-         Map<String, String> memberAttributesMap = new HashMap<String, String>();
-         for (int i = 0; i < memberAttributesRow.size(); i++) {
+   @And("^the user validates benefit table for ma$")
+  	public void user_validate_benefit_table_for_MA(DataTable givenAttributes){
+  	   	 ResponsivePlanSummaryUhc planSummary = (ResponsivePlanSummaryUhc) getLoginScenario().getBean(PageConstants.RESPONSIVE_PLAN_SUMMARY_PAGE_UHC);
+  	        List<DataTableRow> memberAttributesRow = givenAttributes
+  	                      .getGherkinRows();
+  	         Map<String, String> memberAttributesMap = new HashMap<String, String>();
+  	         for (int i = 0; i < memberAttributesRow.size(); i++) {
 
-                memberAttributesMap.put(memberAttributesRow.get(i).getCells()
-                             .get(0), memberAttributesRow.get(i).getCells().get(1));
-         }
+  	                memberAttributesMap.put(memberAttributesRow.get(i).getCells()
+  	                             .get(0), memberAttributesRow.get(i).getCells().get(1));
+  	         }
 
-         String planName = memberAttributesMap.get("Plan Name");
-         System.out.println(planName);
-         getLoginScenario().saveBean(VPPCommonConstants.PLAN_TYPE, planName);
-         MAEnrollmentPage enrollmentpage = planSummary.clicklearnmorelink(planName);
-   		if(enrollmentpage!=null){
-   			getLoginScenario().saveBean(PageConstants.MA_ENROLLMENT_PAGE, enrollmentpage);
-   		}else{
-   			Assert.fail();
-   		}
-         
+  	         String planName = memberAttributesMap.get("Plan Name");
+  	         System.out.println(planName);
+  	         getLoginScenario().saveBean(VPPCommonConstants.PLAN_TYPE, planName);
+  	         String monthlypremium = memberAttributesMap.get("MonthlyPremium");
+  	   		getLoginScenario().saveBean(VPPCommonConstants.MONTHLYPREMIUM, monthlypremium);
+  	   		String primarycare = memberAttributesMap.get("PCP");
+  	   		getLoginScenario().saveBean(VPPCommonConstants.PRIMARYCARE, primarycare);
+  	   		String specialist = memberAttributesMap.get("Specialist");
+  	   		getLoginScenario().saveBean(VPPCommonConstants.SPECIALIST, specialist);
+  	   		String requiredreferral = memberAttributesMap.get("ReferralRequired");
+  	   		getLoginScenario().saveBean(VPPCommonConstants.REQUIREDREFERRAL, requiredreferral);
+  	   		String prescriptiondrug  = memberAttributesMap.get("Prescription Drugs");
+  	   		getLoginScenario().saveBean(VPPCommonConstants.PRESCRIPTIONDRUG, prescriptiondrug);
+  	   		String planType = (String) getLoginScenario().getBean(VPPCommonConstants.PLAN_TYPE);
+  	   		
+  	   		planSummary.validateBenefitTablema(monthlypremium, primarycare, specialist, requiredreferral, prescriptiondrug, planType, planName);
+  	   	}
+  	  
+  	  
+  	  @And("^the user validate learn more button$")
+  	  
+  	 public void learn_more(DataTable givenAttributes){
+  	   ResponsivePlanSummaryUhc planSummary = (ResponsivePlanSummaryUhc) getLoginScenario()
+  				.getBean(PageConstants.RESPONSIVE_PLAN_SUMMARY_PAGE_UHC);
+  	List<DataTableRow> memberAttributesRow = givenAttributes
+           .getGherkinRows();
+Map<String, String> memberAttributesMap = new HashMap<String, String>();
+for (int i = 0; i < memberAttributesRow.size(); i++) {
 
-   }
+     memberAttributesMap.put(memberAttributesRow.get(i).getCells()
+                  .get(0), memberAttributesRow.get(i).getCells().get(1));
+}
+  	 String planName = memberAttributesMap.get("Plan Name");
+    System.out.println(planName);
+    getLoginScenario().saveBean(VPPCommonConstants.PLAN_TYPE, planName);
+  	   planSummary.learnmore_button(planName);
+  	   
+     }
+     
+
+  
+
 
  
 
