@@ -50,7 +50,7 @@ Examples:
 
 
 @US622159
-Scenario: Verify Movement from Assistance confirmatin toSign In Page
+Scenario: Verify Movement from Assistance confirmatin to Sign In Page
 Given user is on AssistanceConfirmationPage and moves to Sign in Page
 
 

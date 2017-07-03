@@ -20,6 +20,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import pages.acquisition.ulayer.LoginAssistancePage;
 import pages.acquisition.ulayer.LoginAssitanceMessagePage;
 import pages.acquisition.ulayer.PersonalIdentificationPage;
+import pages.member.ulayer.LoginAssistanceConfirmationJava;
 //import pages.member.ulayer.LoginAssistanceConfirmationJava;
 import pages.member.ulayer.LoginPage;
 import acceptancetests.atdd.data.CommonConstants;
@@ -69,17 +70,17 @@ public class LoginAssistanceAarpStepDefintion {
 
 		WebDriver wd = getLoginScenario().getWebDriver();
 		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
-		//LoginPage loginPage = new LoginPage(wd);
-//		LoginAssistanceConfirmationJava LoginAssistance = new LoginAssistanceConfirmationJava(wd);
-//		Thread.sleep(2000);
-//		LoginPage loginAssistancePage = LoginAssistance.navigateToSignInPage();
-//		if (loginAssistancePage != null) {
-//			getLoginScenario().saveBean(PageConstants.SignIN_Page,
-//					loginAssistancePage);
-//			Assert.assertTrue(true);
-//		} else {
-//			Assert.fail("Error loading SignInPage page");
-//		}
+		LoginPage loginPage = new LoginPage(wd);
+        LoginAssistanceConfirmationJava LoginAssistance = new LoginAssistanceConfirmationJava(wd);
+		Thread.sleep(2000);
+		LoginPage loginAssistancePage = LoginAssistance.navigateToSignInPage();
+		if (loginAssistancePage != null) {
+			getLoginScenario().saveBean(PageConstants.SignIN_Page,
+					loginAssistancePage);
+			Assert.assertTrue(true);
+		} else {
+			Assert.fail("Error loading SignInPage page");
+		}
 
 	}
 	
