@@ -773,19 +773,19 @@ public FormsandresourcesPage navigateToMydocumentAarpPage() {
 		}
 	
 	
-        public BenefitsAndCoveragePage navigatesToBandCpage() {
-		{ 
+   
+	
+
+		public BenefitsAndCoveragePage navigatesToBandCpage() {
 			driver.navigate().to(PAGE_URL);
-			
 			BnClink.click();
 			if(driver.getTitle().equalsIgnoreCase("Benefits And Coverage Page Redesign")){
 			        return new BenefitsAndCoveragePage(driver);
 			}
 			return null;
 
+		}
 
-		}
-		}
  
 }
 

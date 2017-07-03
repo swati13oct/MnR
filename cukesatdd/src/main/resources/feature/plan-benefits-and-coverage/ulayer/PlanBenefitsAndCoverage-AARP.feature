@@ -1092,3 +1092,19 @@ Feature: To test plan benefits and Coverage on AARP site for Federal members
       | planType | copayCategory |
       | PDP      | NON LIS       |
       ##q1_apr_ulayer211
+      
+      
+      
+      
+           @DrugcopaytableLISmembersmapd
+  Scenario Outline: To validate the drug copay table in benefits and coverage page in AARP site
+    Given registered AMP with following details for plan benefits and coverage flow in AARP site
+      | Plan Type      | <planType>      |
+      | Copay Category | <copayCategory> |
+
+    When the user navigate to benefits and coverage page under my plans in AARP site
+    Then the user validates drugcost  table  in AARP site for mapd member
+
+      Examples: 
+      | planType | copayCategory |
+      | MAPD     | LIS       |

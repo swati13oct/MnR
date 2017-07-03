@@ -134,6 +134,9 @@ public class PlanBenefitsAndCoverageAarpStepDefinition {
 
 	}
 	
+	
+	
+	
 	@Given("^registered member for forms and resources in AARP Site$")
 	public void registered_member_formsandresources_aarp(DataTable memberAttributes) {
 
@@ -283,6 +286,20 @@ public class PlanBenefitsAndCoverageAarpStepDefinition {
 		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstants.ACCOUNT_HOME_PAGE);
 		PlanBenefitsCoveragePage bncPage = accountHomePage.navigateToBnC();
 		getLoginScenario().saveBean(PageConstants.BENEFITS_AND_COVERAGE_PAGE, bncPage);
+	}
+	
+
+	
+	
+
+	@When("^the user navigate to benefits and coverage page under my plans in AARP site$")
+	public void benefits_and_coverage_AARP_new() {
+		
+		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstants.ACCOUNT_HOME_PAGE);
+		BenefitsAndCoveragePage bncPage = accountHomePage.navigatesToBandCpage();
+		getLoginScenario().saveBean(PageConstants.BENEFITS_AND_COVERAGE_PAGE, bncPage);
+		
+
 	}
 
 	@Then("^the user validates benefits and coverage of the member in AARP site$")
@@ -624,6 +641,19 @@ public class PlanBenefitsAndCoverageAarpStepDefinition {
 		benefitsCoveragePage.validate_langdropdown_select(language);
 	}
 
+	
+
+	@Then("^the user validates drugcost  table  in AARP site for mapd member$")
+	public void the_user_validates_drugcost_table_in_AARP_site_MAPD() 
+
+	{
+		
+		BenefitsAndCoveragePage benefitsnCoveragepage = (BenefitsAndCoveragePage) getLoginScenario()
+				.getBean(PageConstants.BENEFITS_AND_COVERAGE_PAGE);
+		
+		benefitsnCoveragepage.ValidateDrugCostTableMAPD();
+	    
+	}
 	
 	
 	

@@ -140,6 +140,10 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 	@FindBy(xpath = ".//*[@id='drug-costs']")
 	private WebElement 	pharmacydropdown;
 
+	@FindBy(id = "mapdPageLis")
+	private WebElement RetailDrugCost_Table ;
+
+
 	
         public static final String learnmorelinktiertext_xpath=".//*[@id='collapseTiers']";
 	public static final String learnmorelinkstagetext_xpath=".//*[@id='collapseStages']";
@@ -607,6 +611,20 @@ public class BenefitsAndCoveragePage extends UhcDriver {
             		System.out.println("Elements is not found ...");
             	}
             }
+
+			public void ValidateDrugCostTableMAPD() {
+				// TODO Auto-generated method stub
+				
+				validate(RetailDrugCost_Table);
+				System.out.println("c");
+					try {
+						Thread.sleep(10000);
+					} catch (InterruptedException e) {
+					System.out.println("Inside catch");
+						e.printStackTrace();
+					}
+				
+			}
 	
 
 }
