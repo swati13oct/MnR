@@ -916,6 +916,22 @@ Examples:
       
       
       
+
+          
+    @drugcosttablesectiongroupmembermapdpdplis
+    Scenario Outline: Verify that drug cost table  is in place on Benefits and Coverage page for LIS Members
+    Given registered UHC with following details for plan benefits and coverage flow in UMS site
+      | Plan Type      | <planType>     |
+      | Member Type    | <memberType>|
+      | Copay Category | <copayCategory>|
+    Then the user navigate to benefit and coverage page
+    And the user view the Drug Copays & Discounts header 
+    And the user should see drug cost table for Lis members
+    Examples: 
+      | planType|  memberType  | copayCategory |
+      | PDP    |  Group       |  LIS      |
+      
+      
     
       
       

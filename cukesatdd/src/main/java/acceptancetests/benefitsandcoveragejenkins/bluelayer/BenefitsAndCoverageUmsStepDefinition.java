@@ -904,6 +904,14 @@ public void user_validates_lookupdrugsbuuton()
 		benefitsCoveragePage.validatedrugcopaytable();
 	}
 	
+	
+	@And("the user should see drug cost table for Lis members")
+	public void user_validate_drugcosttable()
+	{
+		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario().getBean(
+				PageConstants.BENEFITS_COVERAGE_PAGE);
+		benefitsCoveragePage.validatedrugcosttable();
+	}
 }
 	
 

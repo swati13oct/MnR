@@ -119,11 +119,19 @@ public class BenefitsAndCoveragePage extends UhcDriver {
     @FindBy(id="mapdPageNonLis")
     private WebElement drugcopaytable;
     
+
+    
+    @FindBy(id="mapdPageLis")
+    private  WebElement RetailDrugCost_Table;
+
+    
     @FindBy(xpath = ".//*[@id='plan_benefit_documents']/section/div/div[2]/div/form/span[1]")
     private WebElement view_label;
     
     @FindBy(xpath = ".//*[@id='plan_benefit_documents']/section/div/div[2]/div/form/span[2]")
     private WebElement documents_label;
+    
+    
     
  
 
@@ -558,6 +566,19 @@ public void validatedrugcopaytable()
 	    validate(pharmacytext);
 		validate(drugcopaytable);
 		
+}
+
+public void validatedrugcosttable() {
+	// TODO Auto-generated method stub
+	validate(RetailDrugCost_Table);
+    System.out.println("c");
+	try {
+		Thread.sleep(10000);
+	} catch (InterruptedException e) {
+	System.out.println("Inside catch");
+		e.printStackTrace();
+	
+}
 }
 }
 
