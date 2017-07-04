@@ -36,6 +36,14 @@ public class CommonConstants {
 	public static final String PROPERTY_FILE_FOLDER = "/config";
 
 	public static final String PROPERTY_FILE_NAME = "config.properties";
+	
+	public static final String ANDROIDPROPERTY_FILE_NAME = "config_andr.properties";
+    
+    public static final String FIREFOXPROPERTY_FILE_NAME = "config_ff.properties";        
+    
+    public static final String CHROMEPROPERTY_FILE_NAME = "config_chrome.properties";
+    
+    public static final String SAFARIPROPERTY_FILE_NAME = "config_safari.properties";
 
 	public static final String DEFAULT_ENVIRONMENT_CI = "ci";
 
