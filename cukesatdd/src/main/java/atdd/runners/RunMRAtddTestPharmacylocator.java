@@ -13,10 +13,10 @@ import cucumber.junit.Cucumber;
  */
 
 @RunWith(Cucumber.class)
-@Cucumber.Options(glue = { "atdd.framework","acceptancetests.pharmacylocator.ulayer" }, 
-		features = { "feature/pharmacy-locator/ulayer" }, 
+@Cucumber.Options(glue = { "atdd.framework","acceptancetests.pharmacylocator.member.bluelayer" }, 
+		features = { "feature/pharmacy-locator/member/bluelayer" }, 
 		format = {
-				"pretty", "html:reports/test-report","json:target/cucumber.json"}, tags ={"@multicounty,@languageselection,@planType,@zipcodeEntry,@showonmap,@resultpdf,@googlemap,@plmapd,@plpdp,@MAplantype,@Widgets,@moreinfoPDPplantype,@moreinfoMAplantype,@chatPDPplantype,@chatMAplantype,@TFNPDPplantype,@TFNMAplantype"})
+				"pretty", "html:reports/test-report","json:target/cucumber.json"}, tags ={"@bluePharmacysearchaep,@bluePharmacysaverandballon,@bluePharmacysearchprpnandballon,@bluePharmacymultilang,@bluePharmacypreferedwidget,@bluePharmacynintydaysfilter,@bluePharmacysearchnonaep,@US459522,@US459888,@bluePharmacypreferedwidget,@texasers,@pharmacyfilterandtooltip"})
 public class RunMRAtddTestPharmacylocator {
 	
 	
