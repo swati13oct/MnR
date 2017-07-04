@@ -1437,8 +1437,12 @@ public void comparePlanslnk(){
                 		 return new ResponsivePlanSummaryUhc(driver);
                 	 }
                   }
-				// switchToNewIframe("reactiveChatiFrame");
-				 //driver.switchTo().frame("reactiveChatiFrame");
+					try {
+						Thread.sleep(4000);
+					} catch (InterruptedException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
                  if(enrollInPlan.getText().contains("You Have Chosen to Enroll in the Following Plan")){
                 	 System.out.println("Enroll Plan Pop Up Displayed Correctly");
                 	 return new ResponsivePlanSummaryUhc(driver);
