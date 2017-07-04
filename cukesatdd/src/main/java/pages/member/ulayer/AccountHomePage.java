@@ -898,8 +898,7 @@ public class AccountHomePage extends UhcDriver {
 		radioidLink.click();
 		driver.manage().timeouts().implicitlyWait(600, TimeUnit.SECONDS);
 		submitLink.click();
-		driver.manage().timeouts().implicitlyWait(600, TimeUnit.SECONDS);
-		return null;
+				return null;
 	}
 
 	public OrderplanmaterialsPage navigateToValidateOrderConfirmationInAarpPage() {

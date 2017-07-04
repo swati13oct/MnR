@@ -63,7 +63,7 @@ public class OrderPlanMaterialsAarpStepDefinition {
 		Map<String, String> loginCreds = loginScenario
 				.getAMPMemberWithDesiredAttributes(desiredAttributes);
 
-		String userName = "q1_apr_ulayer203";
+		String userName = "q2_Jun_combo019";
 		String pwd = "Password@1";
 		/*if (loginCreds == null) {
 			// no match found

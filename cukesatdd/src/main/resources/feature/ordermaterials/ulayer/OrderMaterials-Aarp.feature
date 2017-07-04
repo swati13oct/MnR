@@ -48,3 +48,16 @@ Examples:
         | planType      |  
         | PDP           |  
         
+        
+@comboConfirmationPage
+Scenario Outline:Verify order materials confirmation page in AARP site
+Given registered AMP member with following attributes
+	| Plan Type | <planType> |
+When the user views order plan materials in AARP site
+Then the user validate radio button and click on submit button for PDP member in AARP site
+And the user validate order additional material and click to add other order additional material in AARP site      
+
+
+Examples:   
+         | planType      |  
+        | PDP           |  
