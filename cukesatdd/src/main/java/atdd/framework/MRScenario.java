@@ -507,7 +507,8 @@ public class MRScenario {
        private static Map<String, String> getProperties() {
               Map<String, String> props = new HashMap<String, String>();
               Properties prop = new Properties();
-              String propertiesFileToPick = System.getProperty("environment");
+              //String propertiesFileToPick = System.getProperty("environment");
+              String propertiesFileToPick = "team-a";
               String webdriverpickup = System.getProperty("webdriver_browser");
               System.out.println("************* test which webdriver is picked up  **********"+webdriverpickup);
               System.out.println("Using properties for environment ...."
@@ -944,7 +945,7 @@ public class MRScenario {
                      capabilities = DesiredCapabilities.chrome();
                      capabilities.setCapability("platform", "Windows 7");
                      capabilities.setCapability("version", "52.0");
-                     capabilities.setCapability("screenResolution", "800x600");
+                     //capabilities.setCapability("screenResolution", "800x600");
                 }
                 capabilities.setCapability("autoAcceptsAlerts", true);
                 capabilities.setCapability("parent-tunnel", "sauce_admin");
