@@ -1,5 +1,7 @@
 package pages.acquisition.bluelayer;
 
+import static org.junit.Assert.fail;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
@@ -24,7 +26,10 @@ import acceptancetests.atdd.data.ElementData;
 import acceptancetests.atdd.data.MRConstants;
 import acceptancetests.atdd.data.PageData;
 import acceptancetests.atdd.util.CommonUtility;
+import acceptancetests.enrollinplan.bluelayer.EnrollInPlanUhcStepDefinition;
+import acceptancetests.planName.bluelayer.PlanNamesStepDefinition;
 import atdd.framework.UhcDriver;
+import pages.dashboard.member.blayer.DrugCostEstimatorPage;
 import pages.member.ulayer.Rallytool_Page;
 
 public class ResponsivePlanSummaryUhc extends UhcDriver{
@@ -147,6 +152,9 @@ public class ResponsivePlanSummaryUhc extends UhcDriver{
 		    @FindBy(xpath=".//*[text()='2017 AARP MedicareComplete SecureHorizons Plan 1 (HMO)']")
 		    private WebElement mapdPlan1;
 		    
+		    @FindBy(xpath="//*[contains(text(),'You Have Chosen to Enroll in the Following Plan')]")
+		    private WebElement enrollInPlan;
+		  
 		    
 //Medical Benefits
 		    
@@ -1398,6 +1406,48 @@ public void comparePlanslnk(){
 					// TODO Auto-generated method stub
 					
 				}
+			public DrugCostEstimatorPage navigateToDCE(String planType, String planName){
+				if(planType.equals("MA")){
+					driver.findElement(By.xpath("//*[contains(text(),'"+planName+"')]/parent::div/parent::div/"
+							+ "following-sibling::div[1]/div/div[1]/div[@class='mabenefittable']/ul/li[6]/span[2]/a")).click();
+					return new DrugCostEstimatorPage(driver);
+				}
+				return null;
+			}	
+			
+			public ResponsivePlanSummaryUhc enrollInPlan(String planType, String planName){
+                WebElement enrollNowLink;
+				if(planType.equalsIgnoreCase("ma")){
+					enrollNowLink = driver.findElement(By.xpath("//*[contains(text(),'"+planName+"')]"
+	            	 		+ "/parent::div/parent::div/following-sibling::div[2]/div/a/span"));
+                	 enrollNowLink.click();
+                  }else if(planType.equalsIgnoreCase("PDP")){
+                	  enrollNowLink = driver.findElement(By.xpath("//*[contains(text(),'"+planName+"')]"
+                    			 +	"/parent::div/following-sibling::div[2]/div/a/span"));
+                	  enrollNowLink.click();
+                  }else if(planType.equalsIgnoreCase("SNP")){
+                	 if(driver.findElement(By.xpath("//*[contains(text(),'"+planName+"')]"
+ 	            	 		+ "/parent::div/parent::div/following-sibling::div[2]/div/a/span")).isDisplayed()
+                			 ||driver.findElement(By.xpath("//*[contains(text(),'"+planName+"')]"
+                        			 +	"/parent::div/following-sibling::div[2]/div/a/span")).isDisplayed()){
+                		 System.out.println("Enroll Now link displayed for SNP");
+                		 Assert.fail();
+                	 }else{
+                		 System.out.println("Enroll Now link not displayed for SNP");
+                		 return new ResponsivePlanSummaryUhc(driver);
+                	 }
+                  }
+				// switchToNewIframe("reactiveChatiFrame");
+				 //driver.switchTo().frame("reactiveChatiFrame");
+                 if(enrollInPlan.getText().contains("You Have Chosen to Enroll in the Following Plan")){
+                	 System.out.println("Enroll Plan Pop Up Displayed Correctly");
+                	 return new ResponsivePlanSummaryUhc(driver);
+                 } else{
+                	 System.out.println("Enroll Pop up not displayed ");
+                	 Assert.fail();
+                 }
+				return null;
+			}
 }
 					
 				

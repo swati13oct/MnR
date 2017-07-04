@@ -42,33 +42,33 @@ Examples:
 |zipCode|county          |planType |planName|
 |33012 |Miami-Dade County| MA     |Preferred Choice Dade (HMO) |
 
-@dceBlayer
+@dceBlayerE2E
 Scenario Outline: To validate Edit Drug List link
 Given the user is on the vpp portfolio page
 Then the user performs plan search using zipcode
-		| Zip Code |<zipCode>|
-		| County   |<county> |
-Then the user navigates to the following plan type
-	  | Plan Type | <planType> |
+              | Zip Code |<zipCode>|
+              | County   |<county> |
+ Then the user navigates to the following plan type
+| PlanType | <planType> |
 And the user clicks on Estimate drug link for the respetive plan
-    #| Plan Name |<planName>  | 
+    | Plan Name |<planName>  | 
  
 And the user search the drug using drug initials in UHC site
-   # |lipi|	
+    |lipi|	
 And the user selects following drug in UHC site
-		#|lipitor|
+		|lipitor|
 And the user selects the following dosage information in UHC site
-   # |Drug Dosage|<drugDosage>|
-   # |Quantity   |<quantity>|
-   # |Drug Frequency|<drugFrequency>|
-    #|Packages|<packages>|
+    |Drug Dosage|<drugDosage>|
+    |Quantity   |<quantity>|
+    |Drug Frequency|<drugFrequency>|
+    |Packages|<packages>|
 And the user selects the pharamacy and navigates to plan summary page 
-    #|Pharmacy Name|<pharmacyName>|
-    #|Pharamcy Type|<pharmacyType>| 
+    |Pharmacy Name|<pharmacyName>|
+    |Pharamcy Type|<pharmacyType>| 
 Then the user validates edit drug link     		      				
 Examples:
-		|zipCode|county						 |planType |planName					   |drugDosage      |quantity|drugFrequency|packages|pharmacyName         |pharmacyType| 
-		|33012  |Los Angeles County|SNP      |Miami-Dade County    |Lipitor TAB 10MG|30      |Every 1 month|1       |null                 |Preferred Mail Service Pharmacy|
+		|zipCode|county						 |planType  |planName					                                 |drugDosage      |quantity|drugFrequency|packages|pharmacyName         |pharmacyType| 
+		|33012  |Miami-Dade County |MA        |AARP MedicareComplete Choice Plan 2 (Regional PPO)|Lipitor TAB 10MG|30      |Every 1 month|1       |null                 |Preferred Mail Service Pharmacy|
 
 		
 @dceBlayer
@@ -282,8 +282,22 @@ Examples:
 |zipCode|county          |planType | planName                                            |monthlypremium | primarycare |  specialist       |referralRequired| prescriptionDrug |
 |33012 |Miami-Dade County| snp     |UnitedHealthcare Dual Complete RP (Regional PPO SNP)  |  $29.10       |$0           |  20              | No             |  25  |
 
+@enrollNow
+Scenario Outline: To validate plan count from portfolio page
+Given the user is on the vpp portfolio page
+Then the user performs plan search using zipcode
+              | Zip Code |<zipCode>|
+              | County   |<county> |
+Then the user navigates to the following plan type
+| PlanType | <planType> |
+And the user validates enroll now link
+|PlanName  |<planName>|
 
-
+Examples:
+    |zipCode|county						 |planType | planName |
+		|90210  |Los Angeles County| MA      |AARP MedicareComplete SecureHorizons Plan 1 (HMO) |
+	#	|33012  |Miami-Dade County | snp     |UnitedHealthcare Dual Complete RP (Regional PPO SNP)  |
+		|10002  |Miami-Dade County | PDP     |AARP MedicareRx Walgreens (PDP) |
 
 								
 

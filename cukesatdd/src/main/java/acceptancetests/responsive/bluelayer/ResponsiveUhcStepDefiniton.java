@@ -20,6 +20,7 @@ import pages.acquisition.bluelayer.VPPNeedMoreInformationWidget;
 import pages.acquisition.bluelayer.VPPRequestSendEmailPage;
 import pages.acquisition.ulayer.ResponsivePlanDetails;
 import pages.acquisition.ulayer.ResponsivePlanSummary;
+import pages.dashboard.member.blayer.DrugCostEstimatorPage;
 import cucumber.annotation.en.And;
 import cucumber.annotation.en.Given;
 import cucumber.annotation.en.Then;
@@ -185,13 +186,24 @@ public class ResponsiveUhcStepDefiniton {
 		}
 	}
 	@And("^the user clicks on Estimate drug link for the respetive plan$")
-	public void user_estimate_drug_link(){
-		try {
-			Thread.sleep(3200);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+	public void user_estimate_drug_link(DataTable givenAttributes){
+		ResponsivePlanSummaryUhc planSummary = (ResponsivePlanSummaryUhc) getLoginScenario().getBean(PageConstants.RESPONSIVE_PLAN_SUMMARY_PAGE_UHC);
+        List<DataTableRow> memberAttributesRow = givenAttributes
+                      .getGherkinRows();
+         Map<String, String> memberAttributesMap = new HashMap<String, String>();
+         for (int i = 0; i < memberAttributesRow.size(); i++) {
+
+                memberAttributesMap.put(memberAttributesRow.get(i).getCells()
+                             .get(0), memberAttributesRow.get(i).getCells().get(1));
+         }
+
+         String planName = memberAttributesMap.get("Plan Name");
+         System.out.println(planName);
+         getLoginScenario().saveBean(VPPCommonConstants.PLAN_NAME, planName);
+         String planType = (String) getLoginScenario().getBean(CommonConstants.PLAN_TYPE);
+         DrugCostEstimatorPage dcePage = planSummary.navigateToDCE(planType, planName);
+         getLoginScenario().saveBean(PageConstants.ESTIMATE_DRUG_COST_PAGE, dcePage);
+         
 	}
 	@Then("^the user click on Is my Provider Covered link of SNP plans and validate Rally Connect Get Started page$")
     public void user_navigates_to_provider_search_page(DataTable givenAttributes){
@@ -387,23 +399,34 @@ public class ResponsiveUhcStepDefiniton {
   				.getBean(PageConstants.RESPONSIVE_PLAN_SUMMARY_PAGE_UHC);
   	List<DataTableRow> memberAttributesRow = givenAttributes
            .getGherkinRows();
-Map<String, String> memberAttributesMap = new HashMap<String, String>();
-for (int i = 0; i < memberAttributesRow.size(); i++) {
+  	Map<String, String> memberAttributesMap = new HashMap<String, String>();
+  	for (int i = 0; i < memberAttributesRow.size(); i++) {
 
-     memberAttributesMap.put(memberAttributesRow.get(i).getCells()
+  		memberAttributesMap.put(memberAttributesRow.get(i).getCells()
                   .get(0), memberAttributesRow.get(i).getCells().get(1));
-}
-  	 String planName = memberAttributesMap.get("Plan Name");
-    System.out.println(planName);
-    getLoginScenario().saveBean(VPPCommonConstants.PLAN_TYPE, planName);
+	}
+  	   String planName = memberAttributesMap.get("Plan Name");
+       System.out.println(planName);
+       getLoginScenario().saveBean(VPPCommonConstants.PLAN_TYPE, planName);
   	   planSummary.learnmore_button(planName);
   	   
      }
      
 
-  
-
-
- 
+  	@And("^the user validates enroll now link$")
+  	public void the_user_validates_enroll_now_link(DataTable givenAttributes) {
+  		ResponsivePlanSummaryUhc planSummary = (ResponsivePlanSummaryUhc) getLoginScenario()
+  				.getBean(PageConstants.RESPONSIVE_PLAN_SUMMARY_PAGE_UHC);
+  		List<DataTableRow> memberAttributesRow = givenAttributes
+           .getGherkinRows();
+  		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+  		for (int i = 0; i < memberAttributesRow.size(); i++) {
+  			memberAttributesMap.put(memberAttributesRow.get(i).getCells()
+                  .get(0), memberAttributesRow.get(i).getCells().get(1));
+  		}
+  		String planName = memberAttributesMap.get("PlanName");
+  		String planType = (String) getLoginScenario().getBean(VPPCommonConstants.PLAN_TYPE);
+  		planSummary.enrollInPlan(planType, planName);
+  	} 
 
 }
