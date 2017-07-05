@@ -111,11 +111,15 @@ public class MRScenario {
 		environment = props.get("Environment");
 
 		/* Set up DB */
-		Connection con = getDBConnection(props);
+//		Connection con = getDBConnection(props);
 
 		/* Default Schema */
-		String defaultSchema = props.get(CommonConstants.DB_SCHEMA);
-
+///		String defaultSchema = props.get(CommonConstants.DB_SCHEMA);
+		
+		String line = "";
+		String cvsSplitBy = ",";
+	//	String userName = null;
+/*
 		InputStream massRegisStream = ClassLoader.class
 				.getResourceAsStream("/database/mass-registration.csv");
 		BufferedReader massRegisStreamReader = new BufferedReader(
@@ -128,13 +132,13 @@ public class MRScenario {
 		try {
 			while ((line = massRegisStreamReader.readLine()) != null) {
 				String[] massRegisStreamAttributes = line.split(cvsSplitBy);
-				/* pperugu: To skip the first line in CSV file */
+				 pperugu: To skip the first line in CSV file 
 				if (!(massRegisStreamAttributes[0].equalsIgnoreCase("USERNAME"))) {
 					userName = massRegisStreamAttributes[0];
-					/*
+					
 					 * pperugu ::Approach followed :: to remove the already
 					 * registered member and register the members again
-					 */
+					 
 					if (checkMemberFound(userName, con, defaultSchema)) {
 						removeMemberFound(userName, con, defaultSchema);
 					}
@@ -147,7 +151,7 @@ public class MRScenario {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
-
+*/
 		BufferedReader memberAmpTypeReader = null;
 		BufferedReader memberUmsTypeReader = null;
 
@@ -171,9 +175,9 @@ public class MRScenario {
 					ampUserName = memberAttributes[0];
 				}
 
-				if (userNamesAddedList.contains(ampUserName)) {
+		//		if (userNamesAddedList.contains(ampUserName)) {
 					ampMemberAttributesMap.put(ampUserName, attrList);
-				}
+			//	}
 			}
 
 			InputStream memberTypeStream1 = ClassLoader.class
@@ -194,9 +198,9 @@ public class MRScenario {
 				} else {
 					uhcUserName = memberAttributes[0];
 				}
-				if (userNamesAddedList.contains(uhcUserName)) {
+				//if (userNamesAddedList.contains(uhcUserName)) {
 					umsMemberAttributesMap.put(uhcUserName, attrList);
-				}
+				//}
 
 			}
 		} catch (IOException e) {
