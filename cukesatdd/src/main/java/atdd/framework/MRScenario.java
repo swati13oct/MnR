@@ -519,6 +519,7 @@ public class MRScenario {
                      propertiesFileToPick = CommonConstants.DEFAULT_ENVIRONMENT_CI; 
               }
               String configPropertyName = findBrowserTypeConfigurationFile(webdriverpickup);
+              configPropertyName = "config_chrome.properties";
               // Read properties from classpath
               StringBuffer propertyFilePath = new StringBuffer(
                            CommonConstants.PROPERTY_FILE_FOLDER);
