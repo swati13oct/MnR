@@ -6,6 +6,7 @@ package pages.acquisition.bluelayer;
 import java.util.Calendar;
 import java.util.List;
 import java.util.ArrayList;
+import java.util.Set;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -165,6 +166,40 @@ public class VPPPlanSummaryPage extends UhcDriver {
 
 	@FindBy(className = "planYear")
 	WebElement planYear;
+	
+	@FindBy(xpath=".//*[@class='action-btn getStarted']")
+	private WebElement GetStarted;
+
+	//@FindBy(xpath="//*[contains(text(),'People')]")
+
+	@FindBy(xpath=".//*[@class='img' and @src='/images/guidedSearch/gs_icn_pro_healthcarepro.svg']")
+	private WebElement People;
+
+
+	//@FindBy(xpath="//*[contains(text(),'Primary Care')]")
+	@FindBy(xpath=".//*[@class='img' and @src='/images/guidedSearch/gs_icn_pro_primarycarephysicians.svg']")
+	private WebElement Primary;
+
+	@FindBy(xpath="//*[contains(text(),'Primary Care Physician (PCP')] ")
+	private WebElement Physician;
+
+	@FindBy(xpath=".//*[contains(@ng-bind-html,'buttonText')  and contains(text(),'Save')]")
+	private WebElement Savebtn;
+
+	//@FindBy(xpath=".//*[@id='label_unsaved_selectedLocation0']")
+
+	@FindBy(xpath="//*[@class='action-btn lt']")
+	private WebElement Viewsavebtn;
+
+	@FindBy(xpath=".//*[@class='action-btn negative' and @type='submit']")
+	private WebElement Checkcoverage;
+	
+	@FindBy(xpath="//*[@id='physicians_info']")
+	private WebElement provider;
+
+
+	//@FindBy(xpath = "//div[@class='maplans_planbutton']/div[2]/div[2]/div")
+	//private WebElement showMaPlans;
 
 	@FindBy(className = "planType_info")
 	WebElement planHeadingText;
@@ -662,6 +697,93 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		}
 		// TODO Auto-generated method stub
 		return null;
+	}
+	
+	public VPPPlanSummaryPage clicksOnIsProviderCoveredA(String planName) {
+		if (planName.contains("HMO")) {
+			for (WebElement plan : maPlanElement) {
+				if (plan.getText().contains(planName)) {
+					ElementData elementData = new ElementData("id",
+							"doctorCoverMA");
+					findChildElement(elementData, plan).click();
+				}
+			}
+		}
+		if (planName.contains("SNP")) {
+			for (WebElement plan : snpPlanElement) {
+				if (plan.getText().contains(planName)) {
+					ElementData elementData = new ElementData("id",
+							"doctorCoverMA"); // TODO Re-check
+					findChildElement(elementData, plan).click();
+				}
+			}
+		}
+	/*	if (driver.getTitle().equalsIgnoreCase(
+				"Welcome")) { 
+			return new Rallytool_Page(driver);
+		}*/
+		
+		String mainwindow=driver.getWindowHandle();
+
+		Set<String> allWindowHandles = driver.getWindowHandles();
+		for (String currentWindowHandle : allWindowHandles) {
+
+
+			if (!currentWindowHandle.equals(mainwindow)) {
+				driver.switchTo().window(currentWindowHandle);
+
+
+			}
+		}
+
+		driver.manage().window().maximize();
+		waitforElement(GetStarted);
+		GetStarted.click();
+
+		waitforElement( People);
+
+		People.click();
+
+		waitforElement(Primary);
+
+		Primary.click();
+
+		waitforElement(Physician);
+
+		Physician.click();
+
+		waitforElement(Savebtn);
+
+		Savebtn.click();
+		waitforElement(Viewsavebtn);
+
+		Viewsavebtn.click();
+		try {
+			Thread.sleep(5000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		waitforElement(Checkcoverage);
+		CommonUtility.waitForPageLoad(driver, Checkcoverage, 10);
+		Checkcoverage.click();
+		driver.switchTo().window(mainwindow);
+  
+		return new VPPPlanSummaryPage(driver);
+		
+		
+	}
+	
+	
+	public boolean providerinfo()
+	{
+		String providerinfo=provider.getText();
+		if(providerinfo.contains("1 providers covered"))
+		{
+			return true;
+		}
+		return false;
 	}
 
 

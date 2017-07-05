@@ -46,6 +46,7 @@ public class PharmacyLocatorAarpStepDefinition {
 	@Given("^the user is on the AARP Medicare Site landing page$")
 	public void registered_member_located_pharmacy_aarp() {
 		WebDriver wd = getLoginScenario().getWebDriver();
+		System.out.println("********Running environment is " +loginScenario.environment);
 		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
 
 		AcquisitionHomePage acqusitionHomePage = new AcquisitionHomePage(wd);

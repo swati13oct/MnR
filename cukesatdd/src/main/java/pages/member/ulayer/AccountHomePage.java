@@ -6,10 +6,12 @@ package pages.member.ulayer;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Map;
+import java.util.Set;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.junit.Assert;
+import org.openqa.selenium.By;
 import org.openqa.selenium.Cookie;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -106,6 +108,9 @@ public class AccountHomePage extends UhcDriver {
 
 	@FindBy(id = "gogreenmeter")
 	private WebElement goGreenMeterIndicator;
+	
+	@FindBy(id="fd_myMenu")
+	private WebElement myMenu;
 
 	@FindBy(className = "fd_myHealthWellness")
 	private WebElement hwTab;
@@ -162,6 +167,83 @@ public class AccountHomePage extends UhcDriver {
 	
 	@FindBy(xpath = ".//*[@id='contentRow']/td/table/tbody/tr/td/div/div[2]/div[3]/div[3]/div[2]/div/div/div[2]/div")
 	private WebElement myResourcesContent;
+	
+	@FindBy(xpath = "//*[@class='zip']/span[1]")
+	private WebElement RallyZipcode;
+
+	@FindBy(xpath="//*[@id='IPEinvL']/map/area[3]")
+	private WebElement closebtn;
+	
+
+	
+@FindBy(xpath="//a[contains(text(),'Provider search')]")
+private WebElement providerSearchinPanelNavigation;
+
+@FindBy(xpath="//a[contains(text(),'Medical Explanation of Benefits (EOB)')]")
+private WebElement medicalEOBLinkInPanelNavigation;
+@FindBy(id="zipCode")
+private WebElement zipCode;
+
+
+
+
+
+
+@FindBy(xpath="//a[@class='searchforproviders margin_top_5px']")
+private WebElement medicalEOBproviderlink;
+
+@FindBy(linkText = "Benefits and Coverage")
+private WebElement benefitsAndCoveragelink;
+
+
+//@FindBy(xpath="//a[contains(text(),'Search for a provider')]")
+//private WebElement providerlinkinPCPSection;
+
+@FindBy(xpath="(//p/a[text()='Search for a provider'])[2]")
+private WebElement providerlinkinPCPSection;
+
+@FindBy(css="li#accountdetails>a")
+private WebElement accountHome;
+
+@FindBy(xpath="(//div[@class='widgetbuttonmid']/span)[1]")
+private WebElement searchLinkinClaimsPage;
+
+
+@FindBy(id = "phr_widget_3")
+private WebElement showLink;
+
+
+@FindBy(xpath="//div[@class='phr_greybox_mid']/p[contains(text(),'Looking for a doctor')]/following-sibling::p/a")
+private WebElement providerSearchinPHPage;
+
+//@FindBy(xpath="//*[@id='phr_widget_3_box']/div[233]/p[2]/a")
+//private WebElement providerSearchinPHPage1;
+
+
+@FindBy(xpath="//div[@class='phr_greybox_mid']/p[contains(text(),'Need to find a facility?')]/following-sibling::p/a")
+private WebElement providerSearchinPHPage1;
+
+@FindBy(linkText = "Claims")
+private WebElement claimsLink;
+
+@FindBy(linkText = "Forms and Resources")
+private WebElement FormsandResourcesLink;
+
+@FindBy(xpath="//a[contains(text(),'search for providers')]")
+private WebElement searchforproviderlinkinClaimsPage;
+
+  @FindBy(xpath="//*[@id='btn_searchforaprovider']")
+  private WebElement providerLink;
+  
+  @FindBy(xpath="//a[@class='searchforproviders margin_top_5px']")
+	private WebElement searchProviderinFormsandResourcePage;
+	
+	
+	
+	@FindBy(xpath="//span[text()='search providers']")
+	private WebElement searchProviderLinkinFormsandResourcePage;
+	
+
 
 	
 	private PageData myAccountHome;
@@ -204,10 +286,10 @@ public class AccountHomePage extends UhcDriver {
 	}
 	
 
-	public EstimateYourDrugCostPage navigateToDrugLookup() {		
+	public ManageDrugPage navigateToDrugLookup() {		
 		drugLookupLink.click();
 		if (driver.getTitle().equalsIgnoreCase("Drug Lookup")) {
-			return new EstimateYourDrugCostPage(driver);
+			return new ManageDrugPage(driver);
 		} else
 
 			return null;
@@ -218,6 +300,153 @@ public class AccountHomePage extends UhcDriver {
 
 	}
 
+
+	
+
+public void  rallytoolexist()
+	{
+		String mainwindow=driver.getWindowHandle();
+		Set<String> allWindowHandles = driver.getWindowHandles();
+		for (String currentWindowHandle : allWindowHandles) {
+			if (!currentWindowHandle.equals(mainwindow)) {
+			driver.switchTo().window(currentWindowHandle);
+			
+			}
+		}
+		CommonUtility.checkPageIsReady(driver);
+		try {
+			Thread.sleep(10000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		String s=driver.getTitle();
+		System.out.println(s);
+		
+		
+		if(s.equalsIgnoreCase("Find Care"))
+		{
+			System.out.println("Rally tool is opened Successfully");
+			driver.close();
+		}
+		else
+		{
+			System.out.println("Rally tool is not opened ");
+			
+			 Assert.assertFalse("Rally tool displayed", false);
+			
+			//Assert.fail("Error :Unable to Login");
+			driver.close();
+		}
+		
+driver.switchTo().window(mainwindow);
+
+}
+	public void panelNavigation()
+	{
+		waitt();
+		myPlansTab.click();
+		Actions actions = new Actions(driver);
+		actions.moveToElement(myMenu);
+		actions.click().build().perform();
+		providerSearchinPanelNavigation.click();
+		rallytoolexist();
+		
+		System.out.println("i am in panel Navigation method");
+		
+		if(providerSearchinPanelNavigation.isDisplayed())
+		{
+			myMenu.click();
+		}
+				
+	}
+	
+	public void  waitt()
+	{
+		try {
+			Thread.sleep(8000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	
+	public void providerSearchRHandWidget()
+	{
+		waitt();
+		myPlansTab.click();
+		waitforElement(medicalEOBproviderlink);
+		
+		medicalEOBproviderlink.click();
+		rallytoolexist();
+		System.out.println("I am in Provider searh Rifht method");
+	}
+	
+	public void BenefitsandCoverageProviderSearch()
+	{
+		benefitsAndCoveragelink.click();
+		waitforElement(medicalEOBproviderlink);
+		medicalEOBproviderlink.click();
+		rallytoolexist();
+		System.out.println("I am in Benefit Coverage  method");
+		
+	}
+	
+	public void providerSearchLinkinPCPSection()
+	{
+		
+		providerlinkinPCPSection.click();
+		rallytoolexist();
+		System.out.println("I am in PCP benefit  method");
+	}
+
+	public void providerSearchLinkinClaimsPage()
+	{
+		claimsLink.click();
+		waitforElement(searchLinkinClaimsPage);
+		
+		searchLinkinClaimsPage.click();
+		
+		//waitforElement(searchforproviderlinkinClaimsPage);
+		
+		//searchforproviderlinkinClaimsPage.click();
+		rallytoolexist();
+		System.out.println("I am in Claims method");
+		
+	}
+	
+	public void FormsandResourcesLinkinPlanSummaryPage()
+	
+	{
+		FormsandResourcesLink.click();
+		
+		waitforElement(searchProviderinFormsandResourcePage);
+		
+		searchProviderinFormsandResourcePage.click();
+		rallytoolexist();
+		
+		System.out.println("I am in forms and Resources  method");
+		
+	}
+	
+	
+	public void PHR()
+	{
+		phrTab.click();
+		
+		waitforElement(providerSearchinPHPage);
+		providerSearchinPHPage.click();
+		rallytoolexist();
+		showLink.click();
+		waitforElement(providerSearchinPHPage1);
+		providerSearchinPHPage1.click();
+		rallytoolexist();
+		System.out.println("I am in PHR");
+		
+	}
+	
+	
 	public PaymentHistoryPage navigateToPayments() {
 
 		paymentsLink.click();
@@ -674,13 +903,13 @@ public class AccountHomePage extends UhcDriver {
 
 	}
 
-
-
 	public boolean validateAccountHome(){
 		boolean flag = false;
 		if(validate(homePageContent)&&validate(logOut)&&validate(myResourcesContent)&&validate(drugLookupBox)&&validate(drugLookupBtn))
 			flag = true;
 		return flag;
 	}
+	
+	
 
 }

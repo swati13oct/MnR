@@ -46,6 +46,21 @@ public class DrugDosagePage extends UhcDriver {
 
 	@FindBy(linkText = "continue")
 	WebElement continueButton;
+	
+	@FindBy(xpath = ".//*[@id='dce.member']/div/div[3]/div/div/div[1]/div[1]/div[1]")
+    private WebElement manageDrugTab;
+    
+    @FindBy(xpath = ".//*[@id='dce.member']/div/div[3]/div/div/div[1]/div[1]/div[2]")
+    private WebElement selectPharmacyTab;
+    
+    @FindBy(xpath = ".//*[@id='dce.member']/div/div[3]/div/div/div[1]/div[1]/div[3]")
+    private WebElement viewDrugCostsTab;
+    
+    @FindBy(xpath = ".//*[@id='dce.member']/div/div[3]/div/div/div[1]/div[9]/div/a")
+    private WebElement cancelAndGoBackLink;
+    
+    @FindBy(xpath = ".//*[@id='dce.member']/div/div[4]/div/div/div[1]/p[1]/span/a")
+    private WebElement lowCostEditBtn;
 
 	private PageData drugDosage;
 
@@ -83,7 +98,7 @@ public class DrugDosagePage extends UhcDriver {
 		select(frequencyField, drugFrequency);
 
 		continueButton.click();
-		CommonUtility.waitForPageLoad(driver, genericPageText,CommonConstants.TIMEOUT_30);
+		CommonUtility.waitForPageLoad(driver, lowCostEditBtn,CommonConstants.TIMEOUT_30);
 		if (genericPageText.getText().contains("switching to a generic drug")) {
 			return new LowCostOptPage(driver);
 		} else {
@@ -136,4 +151,11 @@ public class DrugDosagePage extends UhcDriver {
 		return drugDosageExpectedJson;
 
 	}
+    
+    public boolean validateDrugDosagePage(){
+    	if(validate(manageDrugTab)&&validate(selectPharmacyTab)&&validate(viewDrugCostsTab)&&validate(continueButton)&&validate(cancelAndGoBackLink))
+    		return true;
+    	else
+    		return false;
+    }
 }

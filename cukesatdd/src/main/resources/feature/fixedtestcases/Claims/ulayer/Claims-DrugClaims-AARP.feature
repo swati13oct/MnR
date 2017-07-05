@@ -14,4 +14,4 @@ And the user search drug claims for the following claim period in AARP site
 Then user validates the drug claims displayed based on the selection in AARP site
 Examples:
 	| planType | category | claimPeriod    |
-	| MAPD     | COSMOS_drug   | Last 90 Days   |
+	| MAPD     | COSMOS_drug   | Last 24 Months   |
