@@ -29,9 +29,11 @@ public class PortfolioPageUhc extends UhcDriver {
 	@FindBy(linkText = "Look up a ZIP code")
 	private WebElement lookupZipcodeLink;
 
-	@FindBy(id = "zipcode")
+	/*@FindBy(id = "zipcode")
+	private WebElement zipCodeField;*/
+	@FindBy(xpath = "//button[@class='zip-button']/preceding-sibling::input[@id='zipcode']")
 	private WebElement zipCodeField;
-
+	//button[@class='zip-button']/preceding-sibling::input[@id='zipcode']
 	@FindBy(id = "goBtn")
 	private WebElement goButton;
 
@@ -267,7 +269,8 @@ public ResponsivePlanSummaryUhc searchPlans(String zipcode, String CountyName) {
 	//    sendkeys(element, zipcode);
 	//    element.sendKeys(Keys.ENTER);
 	    
-	    sendkeys(zipCodeField, zipcode);
+	    //sendkeys(zipCodeField, zipcode);
+	    zipCodeField.sendKeys(zipcode);
 	    zipCodeField.sendKeys(Keys.ENTER);
 	    //remove thread once page is stable
 	    try {

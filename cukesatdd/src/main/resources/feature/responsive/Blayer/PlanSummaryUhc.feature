@@ -1,4 +1,4 @@
-@planSummaryPage
+@planSummaryPage @sprint2
 Feature: To verify mobile responsive
 @planCount @sprint2
 Scenario Outline: To validate plan count from portfolio page
@@ -298,8 +298,8 @@ Examples:
 		|90210  |Los Angeles County| MA      |AARP MedicareComplete SecureHorizons Plan 1 (HMO) |
 	#	|33012  |Miami-Dade County | snp     |UnitedHealthcare Dual Complete RP (Regional PPO SNP)  |
 		|10002  |Miami-Dade County | PDP     |AARP MedicareRx Walgreens (PDP) |
-
-								
+    |90210  |Los Angeles County| MA      |AARP MedicareComplete SecureHorizons Plan 2 (HMO) |
+		|90210  |Los Angeles County| PDP     |AARP MedicareRx Preferred (PDP)  |						
 
 
 								
