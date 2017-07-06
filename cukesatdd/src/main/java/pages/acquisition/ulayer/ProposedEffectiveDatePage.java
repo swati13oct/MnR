@@ -23,6 +23,8 @@ public class ProposedEffectiveDatePage extends UhcDriver{
 	@FindBy(xpath = "//*[@id='enrollment-step-1-part-10']/div[1]/div/div[1]")
 	private WebElement segmentHeading;
 	
+	@FindBy(xpath = ".//*[@id='enrollment-step-1-part-10']/div[1]/div/div[2]/fieldset/span/label")
+	private WebElement proposedDate;
 	
 	private PageData ped;
 
@@ -64,11 +66,8 @@ public class ProposedEffectiveDatePage extends UhcDriver{
 		
 	}
 	
-	public void selectTheDate(Map<String, String> pedAttributesMap) {
-		String Date = pedAttributesMap.get("EffectiveDate");
-		String newDate = Date.replace("-","/");
-		
-		driver.findElement(By.xpath("//label[text() = '" + newDate + "']")).click();
+	public void selectTheDate() {
+		proposedDate.click();
 	}
 	
 	public ReviewAndSubmitPage clickOnSaveAndContinue(String plantype){

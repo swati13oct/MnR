@@ -658,7 +658,7 @@ public class EnrollInPlanAarpStepDefinition {
 		ProposedEffectiveDatePage proposedEffectiveDatePage = (ProposedEffectiveDatePage) getLoginScenario()
 				.getBean(PageConstants.PROPOSED_EFFECTIVE_DATE_PAGE);
 		
-		proposedEffectiveDatePage.selectTheDate(pedAttributesMap);
+		proposedEffectiveDatePage.selectTheDate();
 		 String plantype = pedAttributesMap.get("Plan Type");
 		 ReviewAndSubmitPage revSubmitPage = proposedEffectiveDatePage.clickOnSaveAndContinue(plantype);
 		getLoginScenario().saveBean(PageConstants.PROPOSED_EFFECTIVE_DATE_PAGE,	proposedEffectiveDatePage);
