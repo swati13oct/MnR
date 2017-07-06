@@ -877,6 +877,18 @@ public void FormsandResourcesLinkinPlanSummaryPageBlayer()
 		return flag;
 	}
 	
+	public FormsandresourcesPage navigateToFormsandResourceUmsPage() {
+
+		formsAndResourcesLink.click();
+		CommonUtility.checkPageIsReady(driver);
+		if (driver.getTitle().equalsIgnoreCase(
+				"UnitedHealthcare Medicare Solutions | Forms and Resources")) {
+			return new FormsandresourcesPage(driver);
+		} else
+
+			return null;
+
+	}
 
 }
 
