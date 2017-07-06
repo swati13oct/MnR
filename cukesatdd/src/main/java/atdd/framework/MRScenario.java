@@ -553,7 +553,9 @@ public class MRScenario {
     		   configFile = CommonConstants.CHROMEPROPERTY_FILE_NAME;
     	   }else if(browserType.equalsIgnoreCase("saucelabs_safari")){
     		   configFile = CommonConstants.SAFARIPROPERTY_FILE_NAME;
-    	   }    	       	       	   
+    	   }else if(browserType.equalsIgnoreCase("saucelabs_ie")){
+    		   configFile = CommonConstants.IEPROPERTY_FILE_NAME;
+    	   }       	       	       	   
     	   return configFile;    	   
        }
 
