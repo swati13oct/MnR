@@ -39,6 +39,8 @@ public class CommonConstants {
 	public static final String CHROMEPROPERTY_FILE_NAME = "config_chrome.properties";
 	
 	public static final String SAFARIPROPERTY_FILE_NAME = "config_safari.properties";
+	
+	public static final String IEPROPERTY_FILE_NAME = "config_ie.properties";
 
 	public static final String DEFAULT_ENVIRONMENT_CI = "ci";
 
