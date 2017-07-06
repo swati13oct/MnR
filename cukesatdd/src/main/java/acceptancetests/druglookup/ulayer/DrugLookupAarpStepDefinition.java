@@ -554,6 +554,20 @@ public class DrugLookupAarpStepDefinition {
 		Assert.assertFalse("Pharmacy Saver Plans disclaimer within the Disclaimer section is present",selectPharmacyPage.isPharmacySaveRadioButtonPresent());
 	}
 	
+	@And("^I should see the Pharmacy Saver Pharmacy type savings message$")
+	public void I_should_see_the_Pharmacy_Saver_Pharmacy_type_savings_message() throws InterruptedException {
+		SelectPharmacyPage selectPharmacyPage = (SelectPharmacyPage) getLoginScenario()
+				.getBean(PageConstants.SELECT_PHARMACY_PAGE);
+		Assert.assertTrue("Pharmacy Saver Pharmacy type savings message is not present",selectPharmacyPage.isPharmacySaver_SaverMessagePresent());
+	}
+	
+	@And("^I should not see the Pharmacy Saver Pharmacy type savings message$")
+	public void I_should_not_see_the_Pharmacy_Saver_Pharmacy_type_savings_message() throws InterruptedException {
+		SelectPharmacyPage selectPharmacyPage = (SelectPharmacyPage) getLoginScenario()
+				.getBean(PageConstants.SELECT_PHARMACY_PAGE);
+		Assert.assertFalse("Pharmacy Saver Pharmacy type savings message is present",selectPharmacyPage.isPharmacySaveRadioButtonPresent());
+	}
+	
 	@After
 	public void tearDown() {
 

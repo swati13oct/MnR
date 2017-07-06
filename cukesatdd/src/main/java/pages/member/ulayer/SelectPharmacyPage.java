@@ -64,6 +64,10 @@ public class SelectPharmacyPage extends UhcDriver {
 	@FindBy(xpath = ".//*[@id='dceMemberUlayer']/div/div[1]/div[2]/div[2]/div[10]/div[5]/div/div[1]/div/p")
 	private WebElement pharmacySaverDisclaimer;
 
+	@FindBy(xpath = ".//*[@id='dceMemberUlayer']/div/div[1]/div[2]/div[2]/div[3]/div[1]/span[3]/div")
+	private WebElement pharmacySaver_SaverMessage;
+	
+	
 	private PageData selectPharmacy;
 
 	public JSONObject selectPharmacyJson;
@@ -242,6 +246,16 @@ public class SelectPharmacyPage extends UhcDriver {
 	public boolean isPharmacySaverDisclaimerDisplayed() {
 
 		if (pharmacySaverDisclaimer.isDisplayed()) {
+			return true;
+		} else {
+			return false;
+		}
+
+	}
+	
+	public boolean isPharmacySaver_SaverMessagePresent() {
+
+		if (pharmacySaver_SaverMessage.isDisplayed()) {
 			return true;
 		} else {
 			return false;
