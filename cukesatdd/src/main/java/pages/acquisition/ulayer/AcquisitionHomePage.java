@@ -6,6 +6,7 @@ import java.util.List;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.openqa.selenium.Alert;
+import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
@@ -14,6 +15,7 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.FindBys;
 import org.openqa.selenium.support.PageFactory;
+
 import acceptancetests.atdd.data.CommonConstants;
 import acceptancetests.atdd.data.MRConstants;
 import acceptancetests.atdd.data.PageData;
@@ -112,8 +114,12 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	@FindBy(id = "zipcodebtn")
 	private WebElement viewPlansButton;
 
-	@FindBy(id = "vpp_selectcounty_box")
+	/*@FindBy(id = "vpp_selectcounty_box")
+	private WebElement countyModal;*/
+	
+	@FindBy(xpath = "//div[@class='modal-title']")
 	private WebElement countyModal;
+	
 
 	@FindBy(id = "homefooter")
 	private WebElement homefooter;
@@ -127,8 +133,12 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	@FindBy(linkText = "pharmacy")
 	private WebElement pharmacyLink;
 
-	@FindBys(value = { @FindBy(xpath = "//table[@id='selectcountytable']/tbody/tr/td") })
+	/*@FindBys(value = { @FindBy(xpath = "//table[@id='selectcountytable']/tbody/tr/td") })
 	List<WebElement> countyRows;
+	*/
+	@FindBys(value = { @FindBy(id="selectCounty")})
+	List<WebElement> countyRows;
+
 
 	@FindBy(xpath = "//div[@id='findazip_box']/div/div/div/h4")
 	private WebElement zipCodeSearchPopupHeading;
@@ -304,13 +314,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		viewPlansButton.click();
 		try {
 			if (countyModal.isDisplayed()) {
-				for (WebElement county : countyRows) {
-					if (county.getText().equalsIgnoreCase(countyName)) {
-						county.click();
-						break;
-					}
-
-				}
+				driver.findElement(By.xpath("//div[@id='selectCounty']//a[text()='"+countyName+"']")).click();
 			}
 		} catch (Exception e) {
 			System.out.println("county box not found");
