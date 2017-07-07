@@ -370,6 +370,6 @@ public class PageConstants {
 
 	public static final String UNIVERSITYOFMISSOURI_HOME_PAGE = "UniversityofMissouri";
 
-	
+	public static final String REGISTRATION_INFORMATION_PAGE = "RegistrationInformationPage";
 
 }
