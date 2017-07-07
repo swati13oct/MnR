@@ -1,0 +1,85 @@
+package pages.acquisition.bluelayer;
+
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
+
+import atdd.framework.UhcDriver;
+import pages.acquisition.bluelayer.PlanSelectorPage;
+import pages.acquisition.bluelayer.ResponsivePlanSummaryUhc;
+
+public class BLayerPlanComparePage extends UhcDriver {
+	
+	@FindBy(xpath = ".//*[@id='plan-list-1']/div/div[2]/div/div[1]/div[3]/div/div/span[1]/label")
+	private WebElement Plan2HMO;
+	
+	@FindBy(xpath = ".//*[@id='plan-list-1']/div/div[2]/div/div[2]/div[3]/div/div/span[1]/label")
+	private WebElement Plan1HMO;
+	
+	@FindBy(xpath = ".//*[@id='plan-list-1']/div/div[2]/div/div[2]/div[3]/div/div/span[3]/a")
+	private WebElement ComparePlansLink;
+	
+	@FindBy(xpath = ".//*[@id='site-wrapper']/div[4]/div/div/div/div/div/div/div/div/div[1]/div[1]/div/div[1]/a")
+	private WebElement BackToAllPlansLink;
+	
+	@FindBy(xpath = ".//*[@id='site-wrapper']/header/div/div[2]/div/div/div[3]/div[1]")
+	private WebElement HeaderLayer;
+	
+	@FindBy(id="nav")
+	private WebElement MenuLayer;
+	
+	public BLayerPlanComparePage(WebDriver driver) {
+		super(driver);
+		PageFactory.initElements(driver, this);
+		openAndValidate();
+	}
+
+	@Override
+	public void openAndValidate() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public BLayerPlanComparePage SelectAllPlans() throws InterruptedException {
+		
+		Thread.sleep(3000);
+		Plan2HMO.click();
+		JavascriptExecutor jse = (JavascriptExecutor)driver;
+		jse.executeScript("window.scrollBy(0,300)", "");
+		Plan1HMO.click();
+		jse.executeScript("window.scrollBy(0,300)", "");
+		Thread.sleep(1000);
+		ComparePlansLink.click();
+		Thread.sleep(5000);
+		 if(driver.getTitle().equalsIgnoreCase("plans")){
+			 return new BLayerPlanComparePage(driver);
+		 }
+		 return null;	 
+	}
+		
+	public BLayerPlanComparePage BackToAllPlans() throws InterruptedException {
+		Thread.sleep(7000);				
+		JavascriptExecutor jse = (JavascriptExecutor)driver;
+		jse.executeScript("window.scrollBy(0,300)", "");
+		Thread.sleep(1000);
+		jse.executeScript("window.scrollBy(0,-350)", "");
+		Thread.sleep(2000);
+		MenuLayer.click();
+		HeaderLayer.click();
+		Thread.sleep(1000);
+		BackToAllPlansLink.click();
+		Thread.sleep(5000);
+		if(driver.getTitle().equalsIgnoreCase("plans")){
+			 return new BLayerPlanComparePage(driver);
+		 }
+		 return null;
+	}
+		
+		
+	
+		
+	}
+
+

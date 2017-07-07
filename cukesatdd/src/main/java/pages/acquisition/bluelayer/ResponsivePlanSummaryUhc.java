@@ -38,6 +38,9 @@ public class ResponsivePlanSummaryUhc extends UhcDriver{
 		@FindBy(xpath = "//div[@class='tab plancountheight'][1]")
 		private WebElement viewMaPlans;
 		
+		@FindBy(xpath = ".//*[@id='site-wrapper']/div[4]/div/div/div/div/div/div/div[1]/div/div/div[1]/div[2]/div/div[2]/div[1]")
+		private WebElement viewMAPlans;
+		
 		@FindBy(xpath = "//*[@class='ng-valid ng-dirty']/span/div[1]/p")
 		private WebElement errorMessageincorrect;
 		
@@ -466,7 +469,8 @@ public ResponsivePlanSummaryUhc viewPlanSummary(String planType) {
 			} else if (planType.equalsIgnoreCase("MA")
 			|| planType.equalsIgnoreCase("MAPD")) {
 			System.out.println("inside MA");
-			viewMaPlans.click();
+			//viewMaPlans.click();
+			viewMAPlans.click();
 		return new ResponsivePlanSummaryUhc(driver);
 			}else if(planType.equalsIgnoreCase("MS")){
 		           showMsPlans.click();
@@ -483,6 +487,38 @@ public ResponsivePlanSummaryUhc viewPlanSummary(String planType) {
 			return null;
 }
 	
+
+public BLayerPlanComparePage TeamCviewPlanSummary(String planType) {
+//	JavascriptExecutor js = (JavascriptExecutor)driver;
+	try {
+		Thread.sleep(4000);
+	} catch (InterruptedException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}	
+	if (planType.equalsIgnoreCase("PDP")) {
+		viewPdpPlans.click();
+		return new BLayerPlanComparePage(driver);
+			} else if (planType.equalsIgnoreCase("MA")
+			|| planType.equalsIgnoreCase("MAPD")) {
+			System.out.println("inside MA");
+			//viewMaPlans.click();
+			viewMAPlans.click();
+		return new BLayerPlanComparePage(driver);
+			}else if(planType.equalsIgnoreCase("MS")){
+		           showMsPlans.click();
+		           System.out.println(driver.getTitle());
+		           if(driver.getTitle().equals("UnitedHealthcare Medicare Solutions | AARP Medicare Supplement Plans")){
+		return new BLayerPlanComparePage(driver);
+		           }else{
+		        	   Assert.fail();
+		           }
+		}else if(planType.equalsIgnoreCase("SNP")){
+			viewSnpPlans.click();
+	return new BLayerPlanComparePage(driver);
+	}
+			return null;
+}
 
  
 public void comparePlanslnk(){
