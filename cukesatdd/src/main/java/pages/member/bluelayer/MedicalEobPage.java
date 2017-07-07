@@ -47,7 +47,7 @@ public class MedicalEobPage {
 	}
 
 	public boolean medicalEobExists() {
-		
+		CommonUtility.waitForPageLoad(driver, eobtable, 20);
 		if(eobtable.getText().contains("My EOB Statements")&&eobtable.getText().contains("Download EOB (PDF)"))
 			return true;
 		return false;

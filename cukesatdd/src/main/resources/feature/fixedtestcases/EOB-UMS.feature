@@ -13,7 +13,7 @@ Then the user searches EOB history for the date range in UMS site and validates
 	| Date Range  | <dateRange> |
 Examples:
 	| plantype | memberType   | eobType | dateRange      |
-	| MAPD       |Individual  | Nice_med | Last 18 Months |
+	| MAPD       |Individual  | Med_EOB | Last 18 Months |
 
 
 #@rxEOB_blayer
