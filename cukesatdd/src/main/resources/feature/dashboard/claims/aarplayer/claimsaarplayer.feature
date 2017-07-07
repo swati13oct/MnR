@@ -153,17 +153,22 @@ Scenario Outline: To Verify Claim Table on Claims Details Page
 Given I am an AARP member on the redesigned site
       | Plan Type | <planType> |
 When I navigate to the Claim Details page in AARP site
-Then I validate the Claims Table in claims details page in AARP site
+#Then I validate the Claims Table in claims details page in AARP site
+And I validate the Claims Total in claims details page in AARP site
  Examples: 
       | planType |
       | MA       |
      
-@LearnMoreClaimsDetailsSHIP
+@ClaimsDetailsSHIP
 Scenario Outline: To Verify Learn more section on Claims Details Page
 Given I am an AARP member on the redesigned site
       | Plan Type | <planType> |
 When I navigate to the Claim Details page in AARP site
 Then I validate the Learn more section in claims details page in AARP site
+And the user validates the header in claims details in AARP site
+And the user validates the EOB section in claims details page in AARP site
+And I validate the Claims Table in claims details page in AARP site
+And I validate the Claims Total in claims details page in AARP site
  Examples: 
       | planType |
       | SHIP     |

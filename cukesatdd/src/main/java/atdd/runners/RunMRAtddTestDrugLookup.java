@@ -16,7 +16,7 @@ import cucumber.junit.Cucumber;
 		features = { "feature/druglookup" }, 
 		
 		format = {
-		"pretty", "html:reports/test-report" }, tags ={"@druglookup"})
+		"pretty", "html:reports/test-report" }, tags ={"@druglookup_pharmacysaver"})
 public class RunMRAtddTestDrugLookup {
 
 }
