@@ -2,6 +2,8 @@ package atdd.framework;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
+
+import cucumber.api.java.After;
 /**
  * This class will take a screen shot of the last screen executed by
  * cucumber and embed it in the report generated.   It will take a screen shot
@@ -43,15 +45,15 @@ public class GlobalTearDown {
 	 * 
 	 * @param scenario
 	 */
-	/*@After
-	public void tearDown(ScenarioResult scenario) {
+	@After
+	public void tearDown() {
 
 		//Clean up the existing webdriver.
-		
-		getLoginScenario().webDriver.close();
-		getLoginScenario().webDriver.quit();
-		getLoginScenario().flushBeans();
+		if(null !=getLoginScenario()  && null!=getLoginScenario().webDriver )
+		{
+			getLoginScenario().webDriver.close();
+		}
 
-	}*/
+	}
 
 }

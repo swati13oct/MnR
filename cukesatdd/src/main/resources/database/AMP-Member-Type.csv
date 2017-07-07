@@ -1,11 +1,3 @@
 ATDD_ULAYER_MAPD_01/Password@1,MAPD,
 ATDD_ULAYER_PDP_01/Password@1,PDP,
-ATDD_ULAYER_MAPD_PHR_01/Password@1,MAPD,PHR
-q2_jun_ulayer143/Password@1,MAPD
-q1_feb_ulayer179/Password@1,MAPD,
-q1_apr_ship003/Password@1,MedsuppShip,GroupShip
-Reward_ul_001/Password@1,NOVU,Individual
-q1_apr_ulayer006/Password@1,MAPD,IndividualLogin
-q2_jun_ulayer156/Password@1,MAPD,Nice_med
-q2_jun_ulayer004/Password@1,MAPD,Nice_med
-q2_jun_combo014/Password@1,PDP,eob
+ATDD_ULAYER_MAPD_NICE_MEDCLAIMS_01/Password@1,MAPD,Nice_med
