@@ -81,7 +81,7 @@ public class MRScenario {
 
        private static Map<String, String> props = new HashMap<String, String>();
 
-       public static String environment, browser;
+       public static String environment, browser, TeamCEnvironment;
 
        private static final String DIRECTORY = "/src/main/resources/";
        public static int count = 0;
@@ -113,6 +113,7 @@ public class MRScenario {
               browser = props.get("browser");
               /* Set acqusisition and member urls */
               environment = props.get("Environment");
+              TeamCEnvironment=props.get("TeamCEnvironment");
 
               /* Set up DB */
               Connection con = getDBConnection(props);
@@ -861,7 +862,7 @@ public class MRScenario {
 
 
        public WebDriver getWebDriver() {
-             String browser = (null == System.getProperty(CommonConstants.JENKINS_BROWSER)
+            /* String browser = (null == System.getProperty(CommonConstants.JENKINS_BROWSER)
                           ? props.get("WebDriver") : System.getProperty(CommonConstants.JENKINS_BROWSER));
               System.out.println("getWebDriver, returning driver " + browser);
               String browserName = (null == System.getProperty(CommonConstants.BROWSER_NAME)
@@ -876,7 +877,7 @@ public class MRScenario {
                           System.out.println("inside null");                             
                           webDriver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
                           webDriver.manage().window().maximize();
-                    } /*else if (browserName.equalsIgnoreCase(CommonConstants.FIREFOX_BROWSER)) {
+                    } else if (browserName.equalsIgnoreCase(CommonConstants.FIREFOX_BROWSER)) {
                           System.out.println("Execution started in firefox web browser !!!!!!");
                           //FirefoxBinary ffBinary = new FirefoxBinary(new File(pathToBinary));
                           FirefoxProfile firefoxProfile = new FirefoxProfile();
@@ -910,7 +911,7 @@ public class MRScenario {
                           System.setProperty("webdriver.chrome.driver", props.get(CommonConstants.CHROME_DRIVER));
                           webDriver = new ChromeDriver(capabilities);
                           return webDriver;
-                    }*/
+                    }
                else if (browser.trim().equalsIgnoreCase(CommonConstants.SAUCE_BROWSER_WEB.trim())) {
                            System.out.println("Execution is Going to Start on SauceLabs Web.....!!!!!");
                 DesiredCapabilities capabilities = null;
@@ -992,8 +993,21 @@ public class MRScenario {
                 
               }
              return webDriver;
-      } 		        
-       
+      }*/ 		        
+       if (null == webDriver) {                   
+           String userAgent = "Mozilla/5.0 (Windows NT 6.0) AppleWebKit/535.1 (KHTML, like Gecko) Chrome/13.0.782.41 Safari/535.1";
+                   // "Mozilla/5.0 (Linux; U; Android 2.3.3; en-us; LG-LU3000 Build/GRI40) AppleWebKit/533.1 (KHTML, like Gecko) Version/4.0 Mobile Safari/533.1";
+           File pathToBinary = new File("C:/Users/agoyal24/AppData/Local/Mozilla Firefox/firefox.exe");
+           FirefoxBinary ffBinary = new FirefoxBinary(pathToBinary);
+           FirefoxProfile firefoxProfile = new FirefoxProfile();
+           firefoxProfile.setPreference("general.useragent.override", userAgent);
+           webDriver = new FirefoxDriver(ffBinary, firefoxProfile);
+           webDriver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS); 
+        }
+
+         return webDriver;
+  } 		        
+
       
 
        public WebDriver getIEDriver() {
