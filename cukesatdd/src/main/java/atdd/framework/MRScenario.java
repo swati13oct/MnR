@@ -1,3 +1,4 @@
+
 package atdd.framework;
 
 import java.io.BufferedReader;
@@ -489,7 +490,9 @@ public class MRScenario {
                      } catch (NamingException e) {
                            e.printStackTrace();
                      }
+
               }
+
               try {
                      /* Closing database connection */
                      con.close();
@@ -509,22 +512,18 @@ public class MRScenario {
               Map<String, String> props = new HashMap<String, String>();
               Properties prop = new Properties();
               String propertiesFileToPick = System.getProperty("environment");
-              String webdriverpickup = System.getProperty("webdriver_browser");
-              System.out.println("************* test which webdriver is picked up  **********"+webdriverpickup);
               System.out.println("Using properties for environment ...."
                            + propertiesFileToPick);
               if (StringUtils.isBlank(propertiesFileToPick)) {
                      System.out
                      .println("Using CI as default since environment was not passed in !!!");
-                     propertiesFileToPick = CommonConstants.DEFAULT_ENVIRONMENT_CI; 
+                     propertiesFileToPick = CommonConstants.DEFAULT_ENVIRONMENT_CI;
               }
-              String configPropertyName = findBrowserTypeConfigurationFile(webdriverpickup);
               // Read properties from classpath
               StringBuffer propertyFilePath = new StringBuffer(
                            CommonConstants.PROPERTY_FILE_FOLDER);
-              propertyFilePath.append("/").append(propertiesFileToPick).append("/").append(configPropertyName!=null?configPropertyName:CommonConstants.PROPERTY_FILE_NAME);
-           //   .append(CommonConstants.PROPERTY_FILE_NAME);
-              System.out.println("********** property file path is **************: "+ propertyFilePath);
+              propertyFilePath.append("/").append(propertiesFileToPick).append("/")
+              .append(CommonConstants.PROPERTY_FILE_NAME);
               InputStream is = ClassLoader.class.getResourceAsStream(propertyFilePath
                            .toString());
               try {
@@ -537,27 +536,6 @@ public class MRScenario {
                      props.put(key, value);
               }
               return props;
-       }
-       
-       private static String findBrowserTypeConfigurationFile(String browserType){
-    	   String configFile=null;
-    	   if(browserType==null)
-    		   return configFile;
-    	   
-    	   if(browserType.equalsIgnoreCase("saucelabs")){
-    		   configFile = CommonConstants.PROPERTY_FILE_NAME;
-    	   }else if(browserType.equalsIgnoreCase("saucelabs_firefox")){
-    		   configFile = CommonConstants.FIREFOXPROPERTY_FILE_NAME;
-    	   }else if(browserType.equalsIgnoreCase("saucelabs_android")){
-    		   configFile = CommonConstants.ANDROIDPROPERTY_FILE_NAME;
-    	   }else if(browserType.equalsIgnoreCase("saucelabs_chrome")){
-    		   configFile = CommonConstants.CHROMEPROPERTY_FILE_NAME;
-    	   }else if(browserType.equalsIgnoreCase("saucelabs_safari")){
-    		   configFile = CommonConstants.SAFARIPROPERTY_FILE_NAME;
-    	   }else if(browserType.equalsIgnoreCase("saucelabs_ie")){
-    		   configFile = CommonConstants.IEPROPERTY_FILE_NAME;
-    	   }       	       	       	   
-    	   return configFile;    	   
        }
 
        private static Name buildUserDistinguishedName(String userName) {
@@ -792,7 +770,7 @@ public class MRScenario {
                      fileName = fileName.replaceAll("/", "_");
               }
               fileName = fileName + ".json";
-              JSONObject jsonObject = null;
+             JSONObject jsonObject = null;
               String parentDirectory = null;
               try {
                      parentDirectory = new java.io.File(".").getCanonicalPath();
@@ -862,7 +840,7 @@ public class MRScenario {
 
 
        public WebDriver getWebDriver() {
-            String browser = (null == System.getProperty(CommonConstants.JENKINS_BROWSER)
+             String browser = (null == System.getProperty(CommonConstants.JENKINS_BROWSER)
                           ? props.get("WebDriver") : System.getProperty(CommonConstants.JENKINS_BROWSER));
               System.out.println("getWebDriver, returning driver " + browser);
               String browserName = (null == System.getProperty(CommonConstants.BROWSER_NAME)
@@ -877,7 +855,7 @@ public class MRScenario {
                           System.out.println("inside null");                             
                           webDriver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
                           webDriver.manage().window().maximize();
-                    } else if (browserName.equalsIgnoreCase(CommonConstants.FIREFOX_BROWSER)) {
+                    } /*else if (browserName.equalsIgnoreCase(CommonConstants.FIREFOX_BROWSER)) {
                           System.out.println("Execution started in firefox web browser !!!!!!");
                           //FirefoxBinary ffBinary = new FirefoxBinary(new File(pathToBinary));
                           FirefoxProfile firefoxProfile = new FirefoxProfile();
@@ -911,7 +889,7 @@ public class MRScenario {
                           System.setProperty("webdriver.chrome.driver", props.get(CommonConstants.CHROME_DRIVER));
                           webDriver = new ChromeDriver(capabilities);
                           return webDriver;
-                    }
+                    }*/
                else if (browser.trim().equalsIgnoreCase(CommonConstants.SAUCE_BROWSER_WEB.trim())) {
                            System.out.println("Execution is Going to Start on SauceLabs Web.....!!!!!");
                 DesiredCapabilities capabilities = null;
@@ -939,9 +917,7 @@ public class MRScenario {
                 String USERNAME = "apriyad4";
                 String ACCESS_KEY = "6e1345f1-80ea-4863-8573-187bf3151ac0";
                 String URL = "http://" + USERNAME + ":" + ACCESS_KEY + "@ondemand.saucelabs.com:80/wd/hub";
-				String jobName = "MnR test Execution of [" +System.getProperty("test")  +":] - Using " + capabilities.getBrowserName() + " in  " + environment +" environment";
-				capabilities.setCapability("name", jobName);
-				if (USERNAME == null || ACCESS_KEY == null) {
+                if (USERNAME == null || ACCESS_KEY == null) {
                        Assert.fail(
                                      "Missing value for environment variable(s) SAUCE_USERNAME or SAUCE_ACCESS_KEY.  Check environment configuration and try again");
                 }
@@ -955,8 +931,8 @@ public class MRScenario {
                     //https://wiki.saucelabs.com/display/DOCS/Platform+Configurator#/
                 
                 else if (browser.trim().equalsIgnoreCase(CommonConstants.SAUCE_BROWSER_MOBILE.trim())){
-                	System.out.println("Execution is Going to Start on SauceLabs Mobile.....!!!!!");
-                	DesiredCapabilities capabilities = null;
+                                System.out.println("Execution is Going to Start on SauceLabs Mobile.....!!!!!");
+                                DesiredCapabilities capabilities = null;
                 if(browserName.equalsIgnoreCase("Safari")){
                      capabilities = DesiredCapabilities.iphone();
                 }else{
@@ -993,21 +969,8 @@ public class MRScenario {
                 
               }
              return webDriver;
-      }	        
-       /*if (null == webDriver) {                   
-           String userAgent = "Mozilla/5.0 (Windows NT 6.0) AppleWebKit/535.1 (KHTML, like Gecko) Chrome/13.0.782.41 Safari/535.1";
-                   // "Mozilla/5.0 (Linux; U; Android 2.3.3; en-us; LG-LU3000 Build/GRI40) AppleWebKit/533.1 (KHTML, like Gecko) Version/4.0 Mobile Safari/533.1";
-           File pathToBinary = new File("C:/Users/agoyal24/AppData/Local/Mozilla Firefox/firefox.exe");
-           FirefoxBinary ffBinary = new FirefoxBinary(pathToBinary);
-           FirefoxProfile firefoxProfile = new FirefoxProfile();
-           firefoxProfile.setPreference("general.useragent.override", userAgent);
-           webDriver = new FirefoxDriver(ffBinary, firefoxProfile);
-           webDriver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS); 
-        }
-
-         return webDriver;
-  } 		        */
-
+      }                                
+       
       
 
        public WebDriver getIEDriver() {
