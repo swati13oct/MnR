@@ -42,7 +42,7 @@ public class MedicalEobPage extends UhcDriver{
 		String fileName = CommonConstants.MEDICAL_EOB_PAGE_DATA;
 		medicalEob = CommonUtility.readPageData(fileName,
 				CommonConstants.PAGE_OBJECT_DIRECTORY_ULAYER_MEMBER);
-		openAndValidate();
+		//openAndValidate();
 	}
 
 	public MedicalEobPage searchesMedicalEob(String dateRange) {
