@@ -862,7 +862,7 @@ public class MRScenario {
 
 
        public WebDriver getWebDriver() {
-            /* String browser = (null == System.getProperty(CommonConstants.JENKINS_BROWSER)
+            /String browser = (null == System.getProperty(CommonConstants.JENKINS_BROWSER)
                           ? props.get("WebDriver") : System.getProperty(CommonConstants.JENKINS_BROWSER));
               System.out.println("getWebDriver, returning driver " + browser);
               String browserName = (null == System.getProperty(CommonConstants.BROWSER_NAME)
@@ -993,8 +993,8 @@ public class MRScenario {
                 
               }
              return webDriver;
-      }*/ 		        
-       if (null == webDriver) {                   
+      }	        
+       /*if (null == webDriver) {                   
            String userAgent = "Mozilla/5.0 (Windows NT 6.0) AppleWebKit/535.1 (KHTML, like Gecko) Chrome/13.0.782.41 Safari/535.1";
                    // "Mozilla/5.0 (Linux; U; Android 2.3.3; en-us; LG-LU3000 Build/GRI40) AppleWebKit/533.1 (KHTML, like Gecko) Version/4.0 Mobile Safari/533.1";
            File pathToBinary = new File("C:/Users/agoyal24/AppData/Local/Mozilla Firefox/firefox.exe");
@@ -1006,7 +1006,7 @@ public class MRScenario {
         }
 
          return webDriver;
-  } 		        
+  } 		        */
 
       
 
