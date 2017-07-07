@@ -361,5 +361,9 @@ public class PageConstants {
 	public static final String PORTFOLIO_PAGE_UHC = "ourPlans";
 
 	public static final String RESPONSIVE_PLAN_SUMMARY_PAGE_UHC = "vppPlan";
+	
+	public static final String TeamC_Plan_Compare_Page = "TeamCPlanComparePage";
+	
+	
 
 }

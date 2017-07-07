@@ -225,5 +225,6 @@ public static String CAMPAIGN_PAGE_URL1 = "https://www."+MRScenario.environment+
   //public static String EOB_DIRECT_URL = "https://member."+MRScenario.environment+"-aarpmedicareplans.uhc.com/home/eobsearch.html";
   
   public static String EOB_DIRECT_URL = "https://member."+MRScenario.environment+"-aarpmedicareplans.uhc.com/home/eobsearch.html";
-
+  
+  public static String TeamC_VPP_PAGE_UHC_URL = "https://www."+MRScenario.TeamCEnvironment+"-uhcmedicaresolutions.uhc.com";
 }

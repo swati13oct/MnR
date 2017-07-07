@@ -11,8 +11,10 @@ import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import pages.acquisition.bluelayer.BLayerPlanComparePage;
 import pages.acquisition.bluelayer.MAEnrollmentPage;
 import pages.acquisition.bluelayer.PortfolioPageUhc;
+import pages.acquisition.bluelayer.PortfolioTeamCUhc;
 import pages.acquisition.bluelayer.ResponsivePlanSummaryUhc;
 import pages.acquisition.bluelayer.VPPAarpNeedAStepBackWidget;
 import pages.acquisition.bluelayer.VPPAarpNeedHelpWidgetPage;
@@ -48,6 +50,42 @@ public class ResponsiveUhcStepDefiniton {
 		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
 		getLoginScenario().saveBean(PageConstants. PORTFOLIO_PAGE_UHC, ourPlans);
 	}
+	
+	@Given("^the user is on the  team-c vpp portfolio page$")
+	public void TeamC_VPP_Site_home(){
+		WebDriver wd = getLoginScenario().getWebDriver();
+		PortfolioTeamCUhc ourPlans = new PortfolioTeamCUhc(wd);
+		
+		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
+		getLoginScenario().saveBean(PageConstants. PORTFOLIO_PAGE_UHC, ourPlans);
+	}
+
+	
+	@Then("^the user performs plan search TeamC using zipcode$")
+	public void user_planSearch_TeamC_with_zipcode(DataTable givenAttributes){
+		List<DataTableRow> memberAttributesRow = givenAttributes
+				.getGherkinRows();
+		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells()
+					.get(0), memberAttributesRow.get(i).getCells().get(1));
+		}
+
+		String zipcode = memberAttributesMap.get("Zip Code");
+		getLoginScenario().saveBean(VPPCommonConstants.ZIPCODE, zipcode);
+		String county = memberAttributesMap.get("County");
+		getLoginScenario().saveBean(VPPCommonConstants.COUNTY, county);
+		PortfolioTeamCUhc PortfolioPageUhc = (PortfolioTeamCUhc) getLoginScenario()
+				.getBean(PageConstants.PORTFOLIO_PAGE_UHC);
+		ResponsivePlanSummaryUhc vppPlan = PortfolioPageUhc.searchPlans(zipcode, county);
+		if(vppPlan!=null){
+			getLoginScenario().saveBean(PageConstants.RESPONSIVE_PLAN_SUMMARY_PAGE_UHC, vppPlan);
+		}else{
+			Assert.fail();
+		}
+	}
+
 	
 	@Then("^the user performs plan search using zipcode$")
 	public void user_planSearch_with_zipcode(DataTable givenAttributes){
@@ -115,6 +153,59 @@ public class ResponsiveUhcStepDefiniton {
 			Assert.fail();
 		}
 	}
+	
+	@Then("^the user navigates to the TeamC plan type$")
+	public void planType_details_in_TeamC_aarp_site(DataTable givenAttributes) {
+
+	List<DataTableRow> memberAttributesRow = givenAttributes
+				.getGherkinRows();
+		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells()
+					.get(0), memberAttributesRow.get(i).getCells().get(1));
+		}
+
+		String planType = memberAttributesMap.get("PlanType");
+		System.out.println(planType);
+		getLoginScenario().saveBean(VPPCommonConstants.PLAN_TYPE, planType);
+
+		ResponsivePlanSummaryUhc plansummaryPage = (ResponsivePlanSummaryUhc) getLoginScenario()
+				.getBean(PageConstants.RESPONSIVE_PLAN_SUMMARY_PAGE_UHC);	
+		
+		BLayerPlanComparePage vppPlan =	plansummaryPage.TeamCviewPlanSummary(planType);
+		if(vppPlan!=null){
+			getLoginScenario().saveBean(PageConstants.RESPONSIVE_DETAILS_PAGE, vppPlan);
+		}else{
+			Assert.fail();
+		}
+	}
+
+	@And("^User selects Plans to compare$")
+	public void TeamC_Plan_Compare() throws InterruptedException{
+		BLayerPlanComparePage BLayerplanCompare = (BLayerPlanComparePage) getLoginScenario()
+				.getBean(PageConstants.RESPONSIVE_DETAILS_PAGE);
+		BLayerPlanComparePage BLayerTeamCCompare = BLayerplanCompare.SelectAllPlans();
+		if(BLayerTeamCCompare!=null){
+			getLoginScenario().saveBean(PageConstants.TeamC_Plan_Compare_Page, BLayerTeamCCompare);
+		}else{
+			Assert.fail();
+		}
+      }
+	
+	@Then("^user goes back to plan summary by clicking Back to all Plans Link$")
+	public void Back_to_Plan_Summary() throws InterruptedException{
+		BLayerPlanComparePage GobackToPlanSummary = (BLayerPlanComparePage) getLoginScenario()
+				.getBean(PageConstants.TeamC_Plan_Compare_Page);
+		BLayerPlanComparePage BLayerTeamCCompare = GobackToPlanSummary.BackToAllPlans();
+		if(BLayerTeamCCompare!=null){
+			getLoginScenario().saveBean(PageConstants.TeamC_Plan_Compare_Page, BLayerTeamCCompare);
+		}else{
+			Assert.fail();
+		}
+      }
+
+
 	
 	
 	@And ("^the user validates plan highlights$")
