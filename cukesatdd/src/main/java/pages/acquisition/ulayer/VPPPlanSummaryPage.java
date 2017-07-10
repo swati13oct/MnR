@@ -13,6 +13,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.junit.Assert;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
@@ -198,7 +199,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 
 	
 	
-	@FindBy(xpath="//div[contains(@class,'first')]//div[@class='hidden-phone']/button[not(contains(@class,'hidden'))]")
+	@FindBy(xpath="//div[contains(@class,'first')]//div[@class='hidden-phone']/button[not(contains(@class,'hidden'))]/span")
 	private WebElement Savebtn;
 
 	
@@ -434,35 +435,37 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		waitforElement(GetStarted);
 		GetStarted.click();
 		
-		wAitt();
+		
        
 		waitforElement(People);
-		wAitt();
+		
 		System.out.println("Rally tool started");
 		People.click();
 				
-		wAitt();
+		
 		
 		waitforElement(Primary);
 		
-		wAitt();
+		
 
 		Primary.click();
 
 		waitforElement(Physician);
-		wAitt();
+		
 
 		Physician.click();
 
 		waitforElement(Savebtn);
-		wAitt();
-		Savebtn.click();
+		
+		//Savebtn.click();
+		JavascriptExecutor js = (JavascriptExecutor)driver;
+		js.executeScript("arguments[0].click();", Savebtn);
 		waitforElement(Viewsavebtn);
-		wAitt();
+		
 		Viewsavebtn.click();
-		wAitt();
+	
 		waitforElement(Checkcoverage);
-		wAitt();
+		
 		Checkcoverage.click();
 		driver.switchTo().window(mainwindow);
 
