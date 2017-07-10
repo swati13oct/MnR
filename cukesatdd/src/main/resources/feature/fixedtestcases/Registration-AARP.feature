@@ -3,6 +3,7 @@
 Feature:To test registration flow in AARP site
 Scenario Outline:To verify registration for federal member without perks in AARP site
 Given the user is on registration page of AARP site 
+	|	User Name	|	<userName>	|
 When the user registers with below details in AARP site
 	| Plan Member ID         | <planMemberId> |	
 	| Date of birth          | <dateOfBirth>  |
@@ -23,7 +24,8 @@ Examples:
 	
 	
 Scenario Outline:To verify registration for Ship member in AARP site
-Given the user is on registration page of AARP site 
+Given the user is on registration page of AARP site
+	|	User Name	|	<userName>	| 
 When the user registers with below details in AARP site
 	| Plan Member ID         | <planMemberId> |	
 	| Date of birth          | <dateOfBirth>  |

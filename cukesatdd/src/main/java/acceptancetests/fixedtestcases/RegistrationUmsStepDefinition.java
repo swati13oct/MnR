@@ -22,10 +22,10 @@ import pages.acquisition.bluelayer.RegistrationSuccessPage;
 import pages.acquisition.bluelayer.RegistrationUMSErrorPage;
 import acceptancetests.atdd.data.CommonConstants;
 import acceptancetests.atdd.data.member.PageConstants;
+import acceptancetests.atdd.util.CommonUtility;
 import acceptancetests.registration.data.RegistrationConstants;
 import atdd.framework.MRScenario;
 import cucumber.api.DataTable;
-import cucumber.api.java.After;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
@@ -46,8 +46,22 @@ public class RegistrationUmsStepDefinition {
 	
 	
 	@Given("^the user is on registration page of UMS site$")
-	public void registration_landing_page()
+	public void registration_landing_page(DataTable memberAttributes)
 	{
+		
+		/* Reading the given attribute from feature file */
+		List<DataTableRow> memberAttributesRow = memberAttributes
+				.getGherkinRows();
+		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells()
+					.get(0), memberAttributesRow.get(i).getCells().get(1));
+		}
+		String userName = memberAttributesMap.get("User Name");
+		
+		CommonUtility.deRegister(getLoginScenario(),userName);
+		
 		WebDriver wd = getLoginScenario().getWebDriver();
 
 		RegistrationHomePage registrationHomePage = new RegistrationHomePage(wd);

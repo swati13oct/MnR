@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.util.Calendar;
 import java.util.Iterator;
 import java.util.TimeZone;
+
 import org.codehaus.jackson.JsonParseException;
 import org.codehaus.jackson.map.JsonMappingException;
 import org.codehaus.jackson.map.ObjectMapper;
@@ -19,6 +20,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+
 import acceptancetests.atdd.data.MRConstants;
 import acceptancetests.atdd.data.PageData;
 import atdd.framework.MRScenario;
@@ -268,5 +270,18 @@ public class CommonUtility {
 		}
 
 		return dtmObject;
+	}
+
+	public static void deRegister(MRScenario mrScenario, String username) {
+
+		if (System.getProperty("environment").equalsIgnoreCase("ci")) {
+			WebDriver driver = mrScenario.getWebDriver();
+			driver.get("http://partdtemp-ci.ose.optum.com/PartDPortalWeb/deregister.jsp");
+			driver.findElement(By.id("tobederegisteruser")).click();
+			driver.findElement(By.id("tobederegisteruser")).sendKeys(username);
+			driver.findElement(By.id("tobederegisteruser")).submit();
+			driver.quit();
+		}
+
 	}
 }
