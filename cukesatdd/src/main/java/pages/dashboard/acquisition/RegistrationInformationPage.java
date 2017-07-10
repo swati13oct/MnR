@@ -14,6 +14,21 @@ import atdd.framework.UhcDriver;
  */
 public class RegistrationInformationPage extends UhcDriver {
 
+	/**
+	 *Registration page objects 
+	 */
+	/** The Personal Information Text. */
+	@FindBy(id = "step1Text")
+	private WebElement personalInfoText;
+
+
+	/** The Plan Information Text. */
+	@FindBy(id = "step2Text")
+	private WebElement planInfoText;
+
+	/** The Create Account Text. */
+	@FindBy(id = "step3Text")
+	private WebElement createAccountText;
 	
 	/**
 	 *Personal information Section
@@ -90,6 +105,34 @@ public class RegistrationInformationPage extends UhcDriver {
 	/** The member not found error message. */
 	@FindBy(id = "member_Info_Not_Found_error")
 	private WebElement memberNotFound;
+
+	/** The Start over link on existing member error page. */
+	@FindBy(id = "startOver_existing_member_error")
+	private WebElement existingStartOverLink;
+
+	/** The Start over link on future Effective Plan error page. */
+	@FindBy(id = "startOver_future_Effective_Plan_error")
+	private WebElement futureStartOverLink;
+
+	/** The Start over link on inactive terminated Plan error page. */
+	@FindBy(id = "startOver_inactive_terminated_Plan_error")
+	private WebElement inactiveStartOverLink;
+
+	/** The Start over link on member Info Not Found error page. */
+	@FindBy(id = "startOver_member_Info_Not_Found_error")
+	private WebElement notFoundStartOverLink;
+
+	/**
+	 *existing member error page links
+	 */
+	
+	/** The username and password help link on existing member page. */
+	@FindBy(linkText = "username and password help")
+	private WebElement usernameAndPasswordHelpLink;
+
+	/** The sign in with your existing credentials link on existing member page. */
+	@FindBy(linkText = "SIGN IN WITH YOUR EXISTING CREDENTIALS")
+	private WebElement signInWithYourExistingCredentialsLink;
 	
 	/**
 	 *Plan information Page
@@ -119,10 +162,22 @@ public class RegistrationInformationPage extends UhcDriver {
 
 	
     /**
+     * Personal Information page functions.
+     */
+	
+    /**
      * Enter member ID.
      */
     public void enterMemberID(String memberID) {
 	sendkeys(memberid, memberID);
+    }
+    
+    
+    /**
+     * @return the member ID
+     */
+    public WebElement getMemberID() {
+	return memberid;
     }
     
     /**
@@ -133,10 +188,24 @@ public class RegistrationInformationPage extends UhcDriver {
     }
     
     /**
+     * @return the month to enter
+     */
+    public WebElement getEnterMonth() {
+	return monthToEnter;
+    }
+    
+    /**
      * Enter day.
      */
     public void enterDay(String day) {
 	sendkeys(dayToEnter, day);
+    }
+    
+    /**
+     * @return the day to enter
+     */
+    public WebElement getEnterDay() {
+	return dayToEnter;
     }
     
     /**
@@ -146,12 +215,26 @@ public class RegistrationInformationPage extends UhcDriver {
 	sendkeys(yearToEnter, year);
     }
     
+    /**
+     * @return the year to enter
+     */
+    public WebElement getEnterYear() {
+	return yearToEnter;
+    }
+    
     
     /**
      * Click the continue button
      */
     public void clickNext() {
     	nextButton.click();
+    }
+    
+    /**
+     * Click the cancel button
+     */
+    public void clickCancel() {
+    	cancelButton.click();
     }
     
     /**
@@ -179,6 +262,27 @@ public class RegistrationInformationPage extends UhcDriver {
      */
     public WebElement getAdditionalInfoHeader(){
     return personalInfoHeader;
+    }
+    
+    /**
+     * @return the Personal Info text
+     */
+    public WebElement getStepOneText() {
+	return personalInfoText;
+    }
+
+    /**
+     * @return the Plan Info text
+     */
+    public WebElement getStepTwoText() {
+	return planInfoText;
+    }
+
+    /**
+     * @return the Create Account Text
+     */
+    public WebElement getStepThreeText() {
+	return createAccountText;
     }
     
     /**
@@ -217,9 +321,50 @@ public class RegistrationInformationPage extends UhcDriver {
 	return planName;
 	}
 	
-	public WebElement getmemberId(){
-	return mNumber;
-	}
+	 /**
+     * Click the  existing Start Over link
+     */
+    public void clickExistingStartOver() {
+    	existingStartOverLink.click();
+     }
+
+    /**
+    * Click the  future Start Over link
+    */
+   public void clickFutureStartOver() {
+   	futureStartOverLink.click();
+    }
+
+    /**
+    *Click the inactive Start Over link
+    */
+   public void clickInactiveStartOver() {
+   	inactiveStartOverLink.click();
+    }
+
+    /**
+    *Click the not found Start Over link
+    */
+   public void clickNotFoundStartOver() {
+   	notFoundStartOverLink.click();
+    }
+   
+
+
+   /**
+   *Click the username and password link
+   */
+  public void clickUserNameAndPasswordLink() {
+  	usernameAndPasswordHelpLink.click();
+   }
+
+   /**
+   *Click the Sign in with existing link
+   */
+  public void clickSignInWithExistingLink() {
+  	signInWithYourExistingCredentialsLink.click();
+   }
+   
     
 	@Override
 	public void openAndValidate() {

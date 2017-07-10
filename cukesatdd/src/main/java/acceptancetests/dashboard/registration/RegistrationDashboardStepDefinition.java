@@ -1,4 +1,4 @@
-package acceptancetest.registration.memberRedesign;
+package acceptancetests.dashboard.registration;
 
 import gherkin.formatter.model.DataTableRow;
 
@@ -25,7 +25,7 @@ import atdd.framework.MRScenario;
  *
  */
 
-public class RegistrationMemberRedesignStepDefinition {
+public class RegistrationDashboardStepDefinition {
 
 	
 	@Autowired
@@ -109,6 +109,7 @@ public void RegistrationPlanInformation() {
 	RegistrationInformationPage registrationInformationPage = (RegistrationInformationPage) 
 			getLoginScenario().getBean(PageConstants.REGISTRATION_INFORMATION_PAGE);
 	Assert.assertTrue(registrationInformationPage.currentUrl().contains("memberRegistration-Step2"));
+	registrationInformationPage.getStepTwoText().isDisplayed();
 	}
 
 @Then("^Verify correct plan name id displayed$")
@@ -161,6 +162,7 @@ public void existingMemberErrorMessage() {
 	RegistrationInformationPage registrationInformationPage = (RegistrationInformationPage) 
 			getLoginScenario().getBean(PageConstants.REGISTRATION_INFORMATION_PAGE);
 	registrationInformationPage.getExistingMemberError().isDisplayed();
+	Assert.assertTrue(registrationInformationPage.getExistingMemberError().toString().contains("existing"));
 	}
 
 @Then("^the member validate inactive or terminated error message$")
@@ -168,6 +170,7 @@ public void inactiveTerminatedErrorMessage() {
 	RegistrationInformationPage registrationInformationPage = (RegistrationInformationPage) 
 			getLoginScenario().getBean(PageConstants.REGISTRATION_INFORMATION_PAGE);
 	registrationInformationPage.getInactiveTerminatedError().isDisplayed(); 
+	Assert.assertTrue(registrationInformationPage.getInactiveTerminatedError().toString().contains("inactive"));
 	}
 
 @Then("^the member validate future effective error message$")
@@ -175,6 +178,8 @@ public void futureEffectiveErrorMessage() {
 	RegistrationInformationPage registrationInformationPage = (RegistrationInformationPage) 
 			getLoginScenario().getBean(PageConstants.REGISTRATION_INFORMATION_PAGE);
 	registrationInformationPage.getFutureEffectiveError().isDisplayed();
+	Assert.assertTrue(registrationInformationPage.getFutureEffectiveError().toString().contains("future"));
+
    }
 
 @Then("^the member validate member not found error message$")
@@ -182,5 +187,6 @@ public void memberNotFoundErrorMessage() {
 	RegistrationInformationPage registrationInformationPage = (RegistrationInformationPage) 
 			getLoginScenario().getBean(PageConstants.REGISTRATION_INFORMATION_PAGE);
 	registrationInformationPage.getmemberNotFoundError().isDisplayed();
+	Assert.assertTrue(registrationInformationPage.getmemberNotFoundError().toString().contains("Not_Found"));
 	}
 }
