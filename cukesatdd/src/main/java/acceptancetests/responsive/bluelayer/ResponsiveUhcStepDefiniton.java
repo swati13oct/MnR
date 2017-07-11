@@ -205,6 +205,18 @@ public class ResponsiveUhcStepDefiniton {
 		}
       }
 
+	
+	@Then("^user goes to footnotes section and validates it$")
+	public void FootNotes_section() throws InterruptedException{
+		BLayerPlanComparePage GoToFootNotesSection = (BLayerPlanComparePage) getLoginScenario()
+				.getBean(PageConstants.TeamC_Plan_Compare_Page);
+		BLayerPlanComparePage BLayerTeamCFootNotes = GoToFootNotesSection.FootNotesValidation();
+		if(BLayerTeamCFootNotes!=null){
+			getLoginScenario().saveBean(PageConstants.TeamC_FootNotes_Section, BLayerTeamCFootNotes);
+		}else{
+			Assert.fail();
+		}
+      }
 
 	
 	

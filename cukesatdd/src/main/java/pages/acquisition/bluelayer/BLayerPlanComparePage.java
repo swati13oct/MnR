@@ -30,6 +30,12 @@ public class BLayerPlanComparePage extends UhcDriver {
 	@FindBy(id="nav")
 	private WebElement MenuLayer;
 	
+	@FindBy(xpath = ".//*[@id='fixTable']/tbody/tr[34]/td/p")
+	private WebElement FootNotes;
+	
+	@FindBy(linkText = "Summary of Plan Benefits (PDF)")
+	private WebElement FootNotesPDF;
+	
 	public BLayerPlanComparePage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
@@ -77,6 +83,17 @@ public class BLayerPlanComparePage extends UhcDriver {
 		 return null;
 	}
 		
+	
+	public BLayerPlanComparePage FootNotesValidation() throws InterruptedException {
+		Thread.sleep(6000);				
+		JavascriptExecutor jse = (JavascriptExecutor)driver;
+		jse.executeScript("window.scrollBy(0,2600)", "");		
+		Thread.sleep(2000);		
+		if(FootNotesPDF.isEnabled()){
+			 return new BLayerPlanComparePage(driver);
+		 }
+		 return null;
+	}
 		
 	
 		
