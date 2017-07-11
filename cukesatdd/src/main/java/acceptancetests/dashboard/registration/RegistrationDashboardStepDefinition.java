@@ -62,6 +62,12 @@ public void enterMemberID(DataTable givenAttributes) {
   	// navigate to registration page
 	RegistrationInformationPage registrationInformationPage = (RegistrationInformationPage) 
 			getLoginScenario().getBean(PageConstants.REGISTRATION_INFORMATION_PAGE);
+	try {
+		Thread.sleep(2000);
+	} catch (InterruptedException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
 	registrationInformationPage.enterMemberID(memberId);
 }
 
@@ -112,7 +118,7 @@ public void RegistrationPlanInformation() {
 	registrationInformationPage.getStepTwoText().isDisplayed();
 	}
 
-@Then("^Verify correct plan name id displayed$")
+@Then("^Verify correct plan name is displayed$")
 public void verifyRegistrationPlanInformation(DataTable givenAttributes){
 	// get test variables
 	List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();

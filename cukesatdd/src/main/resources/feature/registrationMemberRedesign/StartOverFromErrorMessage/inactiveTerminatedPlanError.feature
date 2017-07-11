@@ -17,4 +17,4 @@ Feature: To test links present on inactive Terminated Plan page
       | planMemberId | dateOfBirth |
       # | 004560292    | 05-01-1945  |
       #  | 0152322881   | 06-11-1949  |
-      | 363335622-11 | 02-01-1939  |
+      | 0173439611 | 07-09-1958  |

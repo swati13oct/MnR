@@ -1,7 +1,7 @@
 @existingMemberErrorPage
-Feature: To test links present on existing member error page
+Feature: To test Start Over link present on existing member error page
 
-  Scenario Outline: To verify member is navigated to the personal Information page
+  Scenario Outline: To verify member is navigated to the personal Information page on clicking start over link
     Given the member is on registration page of new portal part of redesign
     When the member enter the member ID into Member ID field
       | Plan Member ID | <planMemberId> |
