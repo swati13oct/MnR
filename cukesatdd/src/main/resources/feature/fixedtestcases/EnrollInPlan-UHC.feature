@@ -1,6 +1,6 @@
 @fixedTestCaseTest
 @enrollInPlanblayer
-Feature: To test enroll in plan on UHC site
+Feature:[7/11/17 Known Issue] To test enroll in plan on UHC site
 Scenario Outline: Verify enroll in plan in UHC site for federal plan type member  
 Given the user is on the UHC medicare solutions landing page
 When user performs plan search using following information in UHC site

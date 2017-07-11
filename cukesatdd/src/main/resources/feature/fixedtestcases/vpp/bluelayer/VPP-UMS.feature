@@ -1,9 +1,8 @@
 @fixedTestCaseTest
 @fixedTestCaseVPP
-Feature: To test plan summary in vpp flow UMS site
-
+Feature:[7/11/17 Known Issue] To test plan summary in vpp flow UMS site
 @vppBlayer
-Scenario Outline: Verify plan details in UMS site
+Scenario Outline: Verify plan details in UMS site 
 Given the user is on the uhcmedicaresolutions site landing page
 When the user performs plan search using following information in UMS site
 	| Zip Code    | <zipcode>|
