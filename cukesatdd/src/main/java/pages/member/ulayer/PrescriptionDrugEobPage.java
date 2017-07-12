@@ -44,9 +44,6 @@ public class PrescriptionDrugEobPage extends UhcDriver{
 	@FindBy(className = "shipbtnEobHistory")
 	private WebElement shipbtnEobHistory;
 	
-	@FindBy(id = "eobtable")
-	private WebElement eobtable;
-	
 	@FindBy(xpath = "//div[@class='eobCntMidBg']/h3")
 	private WebElement drugEobHeading;
 	
@@ -120,7 +117,7 @@ public class PrescriptionDrugEobPage extends UhcDriver{
 	}
 
 	public String getPrescriptionDrugEobContent() {
-		return eobtable.getText();
+		return eobTable.getText();
 	}
 
 
@@ -156,6 +153,7 @@ public class PrescriptionDrugEobPage extends UhcDriver{
 	}
 
 	public boolean validateRxEob(){
+		CommonUtility.waitForPageLoad(driver, eobTable, 20);
 		if(eobTable.getText().contains("EOB Date")&&eobTable.getText().contains("My EOB Statements")&&
 				eobTable.getText().contains("Download EOB (PDF)"))
 			return true;
