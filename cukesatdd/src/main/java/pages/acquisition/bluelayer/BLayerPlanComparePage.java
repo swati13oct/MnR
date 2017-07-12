@@ -30,6 +30,21 @@ public class BLayerPlanComparePage extends UhcDriver {
 	@FindBy(id="nav")
 	private WebElement MenuLayer;
 	
+	@FindBy(xpath = ".//*[@id='fixTable']/tbody/tr[34]/td/p")
+	private WebElement FootNotes;
+	
+	@FindBy(linkText = "Summary of Plan Benefits (PDF)")
+	private WebElement FootNotesPDF;
+	
+	@FindBy(xpath = ".//*[@id='fixTable']/tbody/tr[1]/td")
+	private WebElement MedText;
+	
+	@FindBy(xpath = ".//*[@id='fixTable']/tbody/tr[5]/td[1]/p")
+	private WebElement SpecialistPay;
+	
+	@FindBy(xpath = ".//*[@id='fixTable']/tbody/tr[24]/td")
+	private WebElement PrescriptionBenefit;
+	
 	public BLayerPlanComparePage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
@@ -77,7 +92,40 @@ public class BLayerPlanComparePage extends UhcDriver {
 		 return null;
 	}
 		
-		
+	
+	public BLayerPlanComparePage FootNotesValidation() throws InterruptedException {
+		Thread.sleep(6000);				
+		JavascriptExecutor jse = (JavascriptExecutor)driver;
+		jse.executeScript("window.scrollBy(0,2600)", "");		
+		Thread.sleep(2000);		
+		if(FootNotesPDF.isEnabled()){
+			 return new BLayerPlanComparePage(driver);
+		 }
+		 return null;
+	}		
+	
+	
+	public BLayerPlanComparePage MedicalSectionValidation() throws InterruptedException {
+		Thread.sleep(6000);				
+		JavascriptExecutor jse = (JavascriptExecutor)driver;
+		jse.executeScript("window.scrollBy(0,150)", "");		
+		Thread.sleep(2000);		
+		if(MedText.getText().contains("Medical Benefits") && SpecialistPay.getText().contains("Specialist Co-Pay")){
+			 return new BLayerPlanComparePage(driver);
+		 }
+		 return null;
+	}
+	
+	public BLayerPlanComparePage PDBSectionValidation() throws InterruptedException {
+		Thread.sleep(6000);				
+		JavascriptExecutor jse = (JavascriptExecutor)driver;
+		jse.executeScript("window.scrollBy(0,1500)", "");		
+		Thread.sleep(2000);		
+		if(PrescriptionBenefit.getText().contains("Prescription Drug Benefits")){
+			 return new BLayerPlanComparePage(driver);
+		 }
+		 return null;
+	}
 	
 		
 	}

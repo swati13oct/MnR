@@ -205,7 +205,43 @@ public class ResponsiveUhcStepDefiniton {
 		}
       }
 
+	
+	@Then("^user goes to footnotes section and validates it$")
+	public void FootNotes_section() throws InterruptedException{
+		BLayerPlanComparePage GoToFootNotesSection = (BLayerPlanComparePage) getLoginScenario()
+				.getBean(PageConstants.TeamC_Plan_Compare_Page);
+		BLayerPlanComparePage BLayerTeamCFootNotes = GoToFootNotesSection.FootNotesValidation();
+		if(BLayerTeamCFootNotes!=null){
+			getLoginScenario().saveBean(PageConstants.TeamC_FootNotes_Section, BLayerTeamCFootNotes);
+		}else{
+			Assert.fail();
+		}
+      }
 
+	
+	@Then("^user validates Medical Benefits section$")
+	public void MedicalBenefits_section() throws InterruptedException{
+		BLayerPlanComparePage GoToFootNotesSection = (BLayerPlanComparePage) getLoginScenario()
+				.getBean(PageConstants.TeamC_Plan_Compare_Page);
+		BLayerPlanComparePage BLayerTeamCFootNotes = GoToFootNotesSection.MedicalSectionValidation();
+		if(BLayerTeamCFootNotes!=null){
+			getLoginScenario().saveBean(PageConstants.TeamC_FootNotes_Section, BLayerTeamCFootNotes);
+		}else{
+			Assert.fail();
+		}
+      }
+	
+	@Then("^user validates Prescription Drug Benefits section$")
+	public void PDB_section() throws InterruptedException{
+		BLayerPlanComparePage GoToFootNotesSection = (BLayerPlanComparePage) getLoginScenario()
+				.getBean(PageConstants.TeamC_Plan_Compare_Page);
+		BLayerPlanComparePage BLayerTeamCFootNotes = GoToFootNotesSection.PDBSectionValidation();
+		if(BLayerTeamCFootNotes!=null){
+			getLoginScenario().saveBean(PageConstants.TeamC_FootNotes_Section, BLayerTeamCFootNotes);
+		}else{
+			Assert.fail();
+		}
+      }
 	
 	
 	@And ("^the user validates plan highlights$")

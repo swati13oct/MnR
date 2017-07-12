@@ -315,7 +315,51 @@ Then user goes back to plan summary by clicking Back to all Plans Link
 Examples:
 |zipCode|county          |planType|
 |90210 |Los Angeles County| MA     |
-					
+
+@US689345
+Scenario Outline: To validate footnotes on Plan Compare Page
+Given the user is on the  team-c vpp portfolio page
+Then the user performs plan search TeamC using zipcode
+              | Zip Code |<zipCode>|
+              | County   |<county> |
+Then the user navigates to the TeamC plan type
+| PlanType | <planType> |
+And User selects Plans to compare
+Then user goes to footnotes section and validates it
+
+Examples:
+|zipCode|county          |planType|
+|90210 |Los Angeles County| MA     |
 
 
+@US689475
+Scenario Outline: To validate footnotes on Plan Compare Page
+Given the user is on the  team-c vpp portfolio page
+Then the user performs plan search TeamC using zipcode
+              | Zip Code |<zipCode>|
+              | County   |<county> |
+Then the user navigates to the TeamC plan type
+| PlanType | <planType> |
+And User selects Plans to compare
+Then user validates Medical Benefits section
+
+Examples:
+|zipCode|county          |planType|
+|90210 |Los Angeles County| MA     |
+
+
+@US689477
+Scenario Outline: To validate footnotes on Plan Compare Page
+Given the user is on the  team-c vpp portfolio page
+Then the user performs plan search TeamC using zipcode
+              | Zip Code |<zipCode>|
+              | County   |<county> |
+Then the user navigates to the TeamC plan type
+| PlanType | <planType> |
+And User selects Plans to compare
+Then user validates Prescription Drug Benefits section
+
+Examples:
+|zipCode|county          |planType|
+|90210 |Los Angeles County| MA     |
 								
