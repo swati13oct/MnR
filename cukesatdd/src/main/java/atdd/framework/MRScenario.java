@@ -514,8 +514,11 @@ public class MRScenario {
 		Map<String, String> props = new HashMap<String, String>();
 		Properties prop = new Properties();
 		String propertiesFileToPick = System.getProperty("environment");
-		String webdriverpickup = System.getProperty("webdriver_browser");
-		System.out.println("************* test which webdriver is picked up  **********"+webdriverpickup);
+	//	String webdriverpickup = System.getProperty("webdriver_browser"); //"RUN_ON-"
+	//	System.out.println("************* test which webdriver is picked up  **********"+webdriverpickup);
+		String run_on = System.getProperty("RUN_ON");
+		String browserName = System.getProperty("BrowserName");
+		String browserType = System.getProperty("BrowserType");
 		System.out.println("Using properties for environment ...."
 				+ propertiesFileToPick);
 		if (StringUtils.isBlank(propertiesFileToPick)) {
@@ -523,7 +526,7 @@ public class MRScenario {
 			.println("Using CI as default since environment was not passed in !!!");
 			propertiesFileToPick = CommonConstants.DEFAULT_ENVIRONMENT_CI; 
 		}
-		String configPropertyName = findBrowserTypeConfigurationFile(webdriverpickup);
+		String configPropertyName = findBrowserTypeConfigurationFile(run_on,browserName, browserType );
 		// Read properties from classpath
 		StringBuffer propertyFilePath = new StringBuffer(
 				CommonConstants.PROPERTY_FILE_FOLDER);
@@ -544,22 +547,22 @@ public class MRScenario {
 		return props;
 	}
 
-	private static String findBrowserTypeConfigurationFile(String browserType){
+	private static String findBrowserTypeConfigurationFile(String run_on,String browserName, String browserType){
 		String configFile=null;
-		if(browserType==null)
+		if(run_on==null && browserName==null && browserType==null)
 			return configFile;
 
-		if(browserType.equalsIgnoreCase("saucelabs")){
+		if(run_on.equalsIgnoreCase("Sauce") && browserName.equalsIgnoreCase("FIREFOX") && browserType.equalsIgnoreCase("WEB")){
+			configFile = CommonConstants.FIREFOXPROPERTY_WEB_FILE_NAME;
+		}else if(run_on.equalsIgnoreCase("Sauce") && browserName.equalsIgnoreCase("saucelabs_chrome") && browserType.equalsIgnoreCase("WEB")){
+			configFile = CommonConstants.CHROMEPROPERTY_WEB_FILE_NAME;
+		}else if(run_on.equalsIgnoreCase("Sauce") && browserName.equalsIgnoreCase("saucelabs_android") && browserType.equalsIgnoreCase("MOBILE")){
+			configFile = CommonConstants.ANDROIDPROPERTY_MOBILE_FILE_NAME;
+		}else if(run_on.equalsIgnoreCase("Sauce") && browserName.equalsIgnoreCase("saucelabs_safari")&& browserType.equalsIgnoreCase("MOBILE")){
+			configFile = CommonConstants.SAFARIPROPERTY_MOBILE_FILE_NAME;
+		}else{
 			configFile = CommonConstants.PROPERTY_FILE_NAME;
-		}else if(browserType.equalsIgnoreCase("saucelabs_firefox")){
-			configFile = CommonConstants.FIREFOXPROPERTY_FILE_NAME;
-		}else if(browserType.equalsIgnoreCase("saucelabs_android")){
-			configFile = CommonConstants.ANDROIDPROPERTY_FILE_NAME;
-		}else if(browserType.equalsIgnoreCase("saucelabs_chrome")){
-			configFile = CommonConstants.CHROMEPROPERTY_FILE_NAME;
-		}else if(browserType.equalsIgnoreCase("saucelabs_safari")){
-			configFile = CommonConstants.SAFARIPROPERTY_FILE_NAME;
-		}    	       	       	   
+		}
 		return configFile;    	   
 	}
 

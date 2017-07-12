@@ -32,15 +32,25 @@ public class CommonConstants {
 
 	public static final String PROPERTY_FILE_NAME = "config.properties";
 	
-	public static final String ANDROIDPROPERTY_FILE_NAME = "config_andr.properties";
+	public static final String ANDROIDPROPERTY_WEB_FILE_NAME = "config_andr_web.properties";
 	
-	public static final String FIREFOXPROPERTY_FILE_NAME = "config_ff.properties";	
+	public static final String ANDROIDPROPERTY_MOBILE_FILE_NAME = "config_andr_mobile.properties";
 	
-	public static final String CHROMEPROPERTY_FILE_NAME = "config_chrome.properties";
+	public static final String FIREFOXPROPERTY_WEB_FILE_NAME = "config_ff_web.properties";	
 	
-	public static final String SAFARIPROPERTY_FILE_NAME = "config_safari.properties";
+	public static final String FIREFOXPROPERTY_MOBILE_FILE_NAME = "config_ff_mobile.properties";
 	
-	public static final String IEPROPERTY_FILE_NAME = "config_ie.properties";
+	public static final String CHROMEPROPERTY_WEB_FILE_NAME = "config_chrome_web.properties";
+	
+	public static final String CHROMEPROPERTY_MOBILE_FILE_NAME = "config_chrome_mobile.properties";
+	
+	public static final String SAFARIPROPERTY_WEB_FILE_NAME = "config_safari_web.properties";
+	
+	public static final String SAFARIPROPERTY_MOBILE_FILE_NAME = "config_safari_mobile.properties";
+	
+	public static final String IEPROPERTY_WEB_FILE_NAME = "config_ie_web.properties";
+	
+	public static final String IEPROPERTY_MOBILE_FILE_NAME = "config_ie_mobile.properties";
 
 	public static final String DEFAULT_ENVIRONMENT_CI = "ci";
 
