@@ -11,5 +11,6 @@ import cucumber.junit.Cucumber;
 		"pretty", "html:reports/test-report","json:target/cucumber.json" }, tags ={"@failsprint2"})
 
 public class RunMRATddTestResponsiveUHCVpp {
+	
 
 }
