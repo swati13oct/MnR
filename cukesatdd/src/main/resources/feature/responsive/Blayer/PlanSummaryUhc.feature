@@ -334,7 +334,7 @@ Examples:
 
 
 @US689475
-Scenario Outline: To validate footnotes on Plan Compare Page
+Scenario Outline: To validate Medical Benefits section on Plan compare Page
 Given the user is on the  team-c vpp portfolio page
 Then the user performs plan search TeamC using zipcode
               | Zip Code |<zipCode>|
@@ -350,7 +350,7 @@ Examples:
 
 
 @US689477
-Scenario Outline: To validate footnotes on Plan Compare Page
+Scenario Outline: To validate Prescription Drugs Benefit Section on Plan Compare page
 Given the user is on the  team-c vpp portfolio page
 Then the user performs plan search TeamC using zipcode
               | Zip Code |<zipCode>|

@@ -45,6 +45,10 @@ public class BLayerPlanComparePage extends UhcDriver {
 	@FindBy(xpath = ".//*[@id='fixTable']/tbody/tr[24]/td")
 	private WebElement PrescriptionBenefit;
 	
+	@FindBy(xpath = ".//*[@id='fixTable']/tbody/tr[25]/td[2]/span")
+	private WebElement AnnualDeductibleValue;
+	
+	
 	public BLayerPlanComparePage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
@@ -121,7 +125,7 @@ public class BLayerPlanComparePage extends UhcDriver {
 		JavascriptExecutor jse = (JavascriptExecutor)driver;
 		jse.executeScript("window.scrollBy(0,1500)", "");		
 		Thread.sleep(2000);		
-		if(PrescriptionBenefit.getText().contains("Prescription Drug Benefits")){
+		if(PrescriptionBenefit.getText().contains("Prescription Drug Benefits") && AnnualDeductibleValue.getText().contains("$0")){
 			 return new BLayerPlanComparePage(driver);
 		 }
 		 return null;
