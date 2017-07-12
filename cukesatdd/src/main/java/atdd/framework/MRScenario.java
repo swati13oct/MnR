@@ -548,6 +548,7 @@ public class MRScenario {
 	}
 
 	private static String findBrowserTypeConfigurationFile(String run_on,String browserName, String browserType){
+		System.out.println("********** run on broser name type ********"+run_on+ browserName+ browserType);
 		String configFile=null;
 		if(run_on==null && browserName==null && browserType==null)
 			return configFile;
