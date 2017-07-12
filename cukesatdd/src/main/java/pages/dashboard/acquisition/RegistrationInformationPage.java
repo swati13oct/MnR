@@ -9,167 +9,196 @@ import acceptancetests.atdd.data.MRConstants;
 import atdd.framework.UhcDriver;
 
 /**
- * @author akuma103
- *
- */
+* @author akuma103
+*
+*/
 public class RegistrationInformationPage extends UhcDriver {
 
-	/**
-	 *Registration page objects 
-	 */
-	/** The Personal Information Text. */
-	@FindBy(id = "step1Text")
-	private WebElement personalInfoText;
+       /**
+       *Registration page objects 
+        */
+       /** The Personal Information Text. */
+       @FindBy(id = "step1Text")
+       private WebElement personalInfoText;
 
 
-	/** The Plan Information Text. */
-	@FindBy(id = "step2Text")
-	private WebElement planInfoText;
+       /** The Plan Information Text. */
+       @FindBy(id = "step2Text")
+       private WebElement planInfoText;
 
-	/** The Create Account Text. */
-	@FindBy(id = "step3Text")
-	private WebElement createAccountText;
-	
-	/**
-	 *Personal information Section
-	 */
-	
-	/** The member id field. */
-	@FindBy(id = "member-id")
-	private WebElement memberid;
-	
-	/** The month field. */
-	@FindBy(id = "date-mm")
-	private WebElement monthToEnter;
+       /** The Create Account Text. */
+       @FindBy(id = "step3Text")
+       private WebElement createAccountText;
+       
+       /**
+       *Personal information Section
+       */
+       
+       /** The member id field. */
+       @FindBy(id = "member-id")
+       private WebElement memberid;
+       
+       /** The month field. */
+       @FindBy(id = "date-mm")
+       private WebElement monthToEnter;
 
-	/** The date field. */
-	@FindBy(id = "date-dd")
-	private WebElement dayToEnter;
+       /** The date field. */
+       @FindBy(id = "date-dd")
+       private WebElement dayToEnter;
 
-	/** The year field. */
-	@FindBy(id = "date-yyyy")
-	private WebElement yearToEnter;
-	
-	/** The cancel button. */
-	@FindBy(className = "btn btn--secondary")
-	private WebElement cancelButton;
-	
-	/** The next button. */
-	@FindBy(id = "continue-btn")
-	private WebElement nextButton;
+       /** The year field. */
+       @FindBy(id = "date-yyyy")
+       private WebElement yearToEnter;
+       
+       /** The cancel button. */
+       @FindBy(className = "btn btn--secondary")
+       private WebElement cancelButton;
+       
+       /** The next button. */
+       @FindBy(id = "continue-btn")
+       private WebElement nextButton;
+       
+       /** The previous button. */
+       @FindBy(xpath = "//*[@id='register-form']/div[5]/div/div/a[1]")
+       private WebElement previousButton;
 
-	/** The direct URL for registration redesign page. */
-	private static String PAGE_URL = MRConstants.REDESIGN_REGISTRATION_URL;
-	
-	
-	/**
-	 *Additional personal Information section
-	 */
-	
-	/** The Personal Info heading. */
-	@FindBy(id = "additionalInfo")
-	private WebElement personalInfoHeader;
-	
-	/** The Zip Code field. */
-	@FindBy(id = "zip")
-	private WebElement zipCode;
-	
-	/** The First Name field. */
-	@FindBy(id = "firstname")
-	private WebElement firstName;	
-	
-	/** The Last Name field. */
-	@FindBy(id = "lastname")
-	private WebElement lastName;
-	
-	/** The medicare ID field. */
-	@FindBy(id = "medicareID")
-	private WebElement medicareID;	
-	
-	/**
-	 *Error message section Values
-	 */
-		
-	/** The already existing member account error message. */
-	@FindBy(id = "existing_member_error")
-	private WebElement existingMember;
-	
-	/** The inactive or terminated error message. */
-	@FindBy(id = "inactive_terminated_Plan_error")
-	private WebElement inactiveTerminatedMember;
-	
-	/** The future date effective error message. */
-	@FindBy(id = "future_Effective_Plan_error")
-	private WebElement futureEffectivePlanMember;
-	
-	/** The member not found error message. */
-	@FindBy(id = "member_Info_Not_Found_error")
-	private WebElement memberNotFound;
 
-	/** The Start over link on existing member error page. */
-	@FindBy(id = "startOver_existing_member_error")
-	private WebElement existingStartOverLink;
+       /** The direct URL for registration redesign page. */
+       private static String PAGE_URL = MRConstants.REDESIGN_REGISTRATION_URL;
+       
+       /**
+       *Additional personal Information section
+       */
+       
+       /** The Personal Info heading. */
+       @FindBy(id = "additionalInfo")
+       private WebElement personalInfoHeader;
+       
+       /** The Zip Code field. */
+       @FindBy(id = "zip")
+       private WebElement zipCode;
+       
+       /** The First Name field. */
+       @FindBy(id = "firstname")
+       private WebElement firstName;     
+       
+       /** The Last Name field. */
+       @FindBy(id = "lastname")
+       private WebElement lastName;
+       
+       /** The medicare ID field. */
+       @FindBy(id = "medicareID")
+       private WebElement medicareID;    
+       
+       /**
+       *Error message section Values
+       */
+              
+       /** The already existing member account error message. */
+       @FindBy(id = "existing_member_error")
+       private WebElement existingMember;
+       
+       /** The inactive or terminated error message. */
+       @FindBy(id = "inactive_terminated_Plan_error")
+       private WebElement inactiveTerminatedMember;
+       
+       /** The future date effective error message. */
+       @FindBy(id = "future_Effective_Plan_error")
+       private WebElement futureEffectivePlanMember;
+       
+       /** The member not found error message. */
+       @FindBy(id = "member_Info_Not_Found_error")
+       private WebElement memberNotFound;
 
-	/** The Start over link on future Effective Plan error page. */
-	@FindBy(id = "startOver_future_Effective_Plan_error")
-	private WebElement futureStartOverLink;
+       /** The Start over link on existing member error page. */
+       @FindBy(id = "startOver_existing_member_error")
+       private WebElement existingStartOverLink;
 
-	/** The Start over link on inactive terminated Plan error page. */
-	@FindBy(id = "startOver_inactive_terminated_Plan_error")
-	private WebElement inactiveStartOverLink;
+       /** The Start over link on future Effective Plan error page. */
+       @FindBy(id = "startOver_future_Effective_Plan_error")
+       private WebElement futureStartOverLink;
 
-	/** The Start over link on member Info Not Found error page. */
-	@FindBy(id = "startOver_member_Info_Not_Found_error")
-	private WebElement notFoundStartOverLink;
+       /** The Start over link on inactive terminated Plan error page. */
+       @FindBy(id = "startOver_inactive_terminated_Plan_error")
+       private WebElement inactiveStartOverLink;
 
-	/**
-	 *existing member error page links
-	 */
-	
-	/** The username and password help link on existing member page. */
-	@FindBy(linkText = "username and password help")
-	private WebElement usernameAndPasswordHelpLink;
+       /** The Start over link on member Info Not Found error page. */
+       @FindBy(id = "startOver_member_Info_Not_Found_error")
+       private WebElement notFoundStartOverLink;
 
-	/** The sign in with your existing credentials link on existing member page. */
-	@FindBy(linkText = "SIGN IN WITH YOUR EXISTING CREDENTIALS")
-	private WebElement signInWithYourExistingCredentialsLink;
-	
-	/**
-	 *Plan information Page
-	 */
-	
-	/** The pre populated Plan Name. */
-	@FindBy(id = "memberPlanName")
-	private WebElement planName;
-	
-	/** The pre populated member ID. */
-	@FindBy(id = "memberNumber")
-	private WebElement mNumber;
-	
-	/** The pre populated member name. */
-	@FindBy(id = "memberName")
-	private WebElement mName;
-	
-	/** The pre populated member Date of Birth. */
-	@FindBy(id = "memberDob")
-	private WebElement mDOB;
+       /**
+       *existing member error page links
+       */
+       
+       /** The username and password help link on existing member page. */
+       @FindBy(linkText = "username and password help")
+       private WebElement usernameAndPasswordHelpLink;
 
-	public RegistrationInformationPage(WebDriver driver) {
-		super(driver);
-		PageFactory.initElements(driver, this);
-		openAndValidate();
-	}
+       /** The sign in with your existing credentials link on existing member page. */
+       @FindBy(linkText = "SIGN IN WITH YOUR EXISTING CREDENTIALS")
+       private WebElement signInWithYourExistingCredentialsLink;
+       
+       /**
+       *Plan information Page
+       */
+       
+       /** The pre populated Plan Name. */
+       @FindBy(id = "memberPlanName")
+       private WebElement planName;
+       
+        
+       /** The pre populated member ID. */
+       @FindBy(id = "memberNumber")
+       private WebElement mNumber;
+       
+       /** The pre populated member name. */
+       @FindBy(id = "memberName")
+       private WebElement mName;
+       
+       /** The pre populated member Date of Birth. */
+       @FindBy(id = "memberDob")
+       private WebElement mDOB;
 
-	
+       public RegistrationInformationPage(WebDriver driver) {
+              super(driver);
+              PageFactory.initElements(driver, this);
+              openAndValidate();
+       }
+
+    /**
+     * Functions to verify the page headings
+     */       
+    
+    /**
+     * @return the Personal Info text
+     */
+    public WebElement getStepOneText() {
+       return personalInfoText;
+    }
+
+    /**
+     * @return the Plan Info text
+     */
+    public WebElement getStepTwoText() {
+       return planInfoText;
+    }
+
+    /**
+     * @return the Create Account Text
+     */
+    public WebElement getStepThreeText() {
+       return createAccountText;
+    }
+       
     /**
      * Personal Information page functions.
      */
-	
+       
     /**
      * Enter member ID.
      */
     public void enterMemberID(String memberID) {
-	sendkeys(memberid, memberID);
+       sendkeys(memberid, memberID);
     }
     
     
@@ -177,49 +206,50 @@ public class RegistrationInformationPage extends UhcDriver {
      * @return the member ID
      */
     public WebElement getMemberID() {
-	return memberid;
+       return memberid;
     }
+    
     
     /**
      * Enter month.
      */
     public void enterMonth(String month) {
-	sendkeys(monthToEnter, month);
+       sendkeys(monthToEnter, month);
     }
     
     /**
      * @return the month to enter
      */
     public WebElement getEnterMonth() {
-	return monthToEnter;
+       return monthToEnter;
     }
     
     /**
      * Enter day.
      */
     public void enterDay(String day) {
-	sendkeys(dayToEnter, day);
+       sendkeys(dayToEnter, day);
     }
     
     /**
      * @return the day to enter
      */
     public WebElement getEnterDay() {
-	return dayToEnter;
+       return dayToEnter;
     }
     
     /**
      * Enter year.
      */
     public void enterYear(String year) {
-	sendkeys(yearToEnter, year);
+       sendkeys(yearToEnter, year);
     }
     
     /**
      * @return the year to enter
      */
     public WebElement getEnterYear() {
-	return yearToEnter;
+       return yearToEnter;
     }
     
     
@@ -227,36 +257,24 @@ public class RegistrationInformationPage extends UhcDriver {
      * Click the continue button
      */
     public void clickNext() {
-    	nextButton.click();
+       nextButton.click();
     }
+    
+    /**
+     * Click the previous button
+     */
+    public void clickPreviousButtuon() {
+       previousButton.click();
+    }
+    
     
     /**
      * Click the cancel button
      */
     public void clickCancel() {
-    	cancelButton.click();
+       cancelButton.click();
     }
-    
-    /**
-     * Enter Zip Code additional Information.
-     */
-    public void enterZip(String Zip) {
-	sendkeys(zipCode, Zip);
-    }
-    /**
-     * Enter first name additional Information.
-     */
-    public void enterFirstName(String fName) {
-	sendkeys(firstName, fName);
-    }
-    /**
-     * Enter last name additional Information.
-     */
-    public void enterLastName(String lNmae) {
-	sendkeys(lastName, lNmae);
-    }
-
-    
+        
     /**
      * @return the get Personal info header for additional info is displayed
      */
@@ -265,25 +283,27 @@ public class RegistrationInformationPage extends UhcDriver {
     }
     
     /**
-     * @return the Personal Info text
+     * Enter Zip Code additional Information.
      */
-    public WebElement getStepOneText() {
-	return personalInfoText;
+    public void enterZip(String Zip) {
+       sendkeys(zipCode, Zip);
     }
-
     /**
-     * @return the Plan Info text
+     * Enter first name additional Information.
      */
-    public WebElement getStepTwoText() {
-	return planInfoText;
+    public void enterFirstName(String fName) {
+       sendkeys(firstName, fName);
     }
-
     /**
-     * @return the Create Account Text
+     * Enter last name additional Information.
      */
-    public WebElement getStepThreeText() {
-	return createAccountText;
+    public void enterLastName(String lNmae) {
+       sendkeys(lastName, lNmae);
     }
+   
+    /**
+     * Functions to verify the Error message pages
+     */       
     
     /**
      * @return the member not found error message
@@ -314,67 +334,116 @@ public class RegistrationInformationPage extends UhcDriver {
     }
     
     /**
-     * Plan information page validation
-     */
-    
-	public WebElement getPlanName(){
-	return planName;
-	}
-	
-	 /**
+     * Functions to click link on Error message pages
+     */       
+
+       /**
      * Click the  existing Start Over link
      */
     public void clickExistingStartOver() {
-    	existingStartOverLink.click();
+       existingStartOverLink.click();
      }
 
     /**
     * Click the  future Start Over link
     */
    public void clickFutureStartOver() {
-   	futureStartOverLink.click();
+       futureStartOverLink.click();
     }
 
     /**
     *Click the inactive Start Over link
     */
    public void clickInactiveStartOver() {
-   	inactiveStartOverLink.click();
+       inactiveStartOverLink.click();
     }
 
     /**
     *Click the not found Start Over link
     */
    public void clickNotFoundStartOver() {
-   	notFoundStartOverLink.click();
+       notFoundStartOverLink.click();
     }
    
-
 
    /**
    *Click the username and password link
    */
   public void clickUserNameAndPasswordLink() {
-  	usernameAndPasswordHelpLink.click();
+       usernameAndPasswordHelpLink.click();
    }
 
    /**
    *Click the Sign in with existing link
    */
   public void clickSignInWithExistingLink() {
-  	signInWithYourExistingCredentialsLink.click();
+       signInWithYourExistingCredentialsLink.click();
    }
-   
-    
-	@Override
-	public void openAndValidate() {
-		start(PAGE_URL);
-		validate(memberid);
-		validate(monthToEnter);
-		validate(dayToEnter);
-		validate(yearToEnter); {
-		validate(nextButton);
+  
+  
+  /**
+   * Functions for Plan information page validation
+   */
+  
+  /**
+   * @return the plan name on plan info page
+   */
+  
+       public WebElement getPlanName(){
+       return planName;
+       }
+       
 
-	}
-	}
-	}
+    /**
+     * @return the member id on plan info page
+     */
+       public WebElement getMemberNumber(){
+       return mNumber;
+       }
+
+
+    /**
+     * @return the Member name on plan info page
+     */
+       public WebElement getMemberName(){
+       return mName;
+       }
+
+
+    /**
+     * @return the DOB on plan info page
+     */
+       public WebElement getPMemberDob(){
+       return mDOB;
+       }
+       
+       
+       /**
+        * @return the previous button on plan info page
+        */
+          public WebElement getPreviousButton(){
+          return previousButton;
+          }
+          
+          
+          /**
+           * @return the next button on plan info page
+           */
+             public WebElement getNextButton(){
+             return nextButton;
+             }
+          
+          
+           
+       @Override
+       public void openAndValidate() {
+              start(PAGE_URL);
+              validate(memberid);
+              validate(monthToEnter);
+              validate(dayToEnter);
+              validate(yearToEnter); {
+              validate(nextButton);
+
+       }
+       }
+       }
