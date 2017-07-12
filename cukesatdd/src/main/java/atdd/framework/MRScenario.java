@@ -1,4 +1,3 @@
-
 package atdd.framework;
 
 import java.io.BufferedReader;
@@ -490,9 +489,7 @@ public class MRScenario {
                      } catch (NamingException e) {
                            e.printStackTrace();
                      }
-
               }
-
               try {
                      /* Closing database connection */
                      con.close();
@@ -512,18 +509,22 @@ public class MRScenario {
               Map<String, String> props = new HashMap<String, String>();
               Properties prop = new Properties();
               String propertiesFileToPick = System.getProperty("environment");
+              String webdriverpickup = System.getProperty("webdriver_browser");
+              System.out.println("************* test which webdriver is picked up  **********"+webdriverpickup);
               System.out.println("Using properties for environment ...."
                            + propertiesFileToPick);
               if (StringUtils.isBlank(propertiesFileToPick)) {
                      System.out
                      .println("Using CI as default since environment was not passed in !!!");
-                     propertiesFileToPick = CommonConstants.DEFAULT_ENVIRONMENT_CI;
+                     propertiesFileToPick = CommonConstants.DEFAULT_ENVIRONMENT_CI; 
               }
+              String configPropertyName = findBrowserTypeConfigurationFile(webdriverpickup);
               // Read properties from classpath
               StringBuffer propertyFilePath = new StringBuffer(
                            CommonConstants.PROPERTY_FILE_FOLDER);
-              propertyFilePath.append("/").append(propertiesFileToPick).append("/")
-              .append(CommonConstants.PROPERTY_FILE_NAME);
+              propertyFilePath.append("/").append(propertiesFileToPick).append("/").append(configPropertyName!=null?configPropertyName:CommonConstants.PROPERTY_FILE_NAME);
+           //   .append(CommonConstants.PROPERTY_FILE_NAME);
+              System.out.println("********** property file path is **************: "+ propertyFilePath);
               InputStream is = ClassLoader.class.getResourceAsStream(propertyFilePath
                            .toString());
               try {
@@ -536,6 +537,25 @@ public class MRScenario {
                      props.put(key, value);
               }
               return props;
+       }
+       
+       private static String findBrowserTypeConfigurationFile(String browserType){
+    	   String configFile=null;
+    	   if(browserType==null)
+    		   return configFile;
+    	   
+    	   if(browserType.equalsIgnoreCase("saucelabs")){
+    		   configFile = CommonConstants.PROPERTY_FILE_NAME;
+    	   }else if(browserType.equalsIgnoreCase("saucelabs_firefox")){
+    		   configFile = CommonConstants.FIREFOXPROPERTY_FILE_NAME;
+    	   }else if(browserType.equalsIgnoreCase("saucelabs_android")){
+    		   configFile = CommonConstants.ANDROIDPROPERTY_FILE_NAME;
+    	   }else if(browserType.equalsIgnoreCase("saucelabs_chrome")){
+    		   configFile = CommonConstants.CHROMEPROPERTY_FILE_NAME;
+    	   }else if(browserType.equalsIgnoreCase("saucelabs_safari")){
+    		   configFile = CommonConstants.SAFARIPROPERTY_FILE_NAME;
+    	   }    	       	       	   
+    	   return configFile;    	   
        }
 
        private static Name buildUserDistinguishedName(String userName) {
@@ -770,7 +790,7 @@ public class MRScenario {
                      fileName = fileName.replaceAll("/", "_");
               }
               fileName = fileName + ".json";
-             JSONObject jsonObject = null;
+              JSONObject jsonObject = null;
               String parentDirectory = null;
               try {
                      parentDirectory = new java.io.File(".").getCanonicalPath();
@@ -931,8 +951,8 @@ public class MRScenario {
                     //https://wiki.saucelabs.com/display/DOCS/Platform+Configurator#/
                 
                 else if (browser.trim().equalsIgnoreCase(CommonConstants.SAUCE_BROWSER_MOBILE.trim())){
-                                System.out.println("Execution is Going to Start on SauceLabs Mobile.....!!!!!");
-                                DesiredCapabilities capabilities = null;
+                	System.out.println("Execution is Going to Start on SauceLabs Mobile.....!!!!!");
+                	DesiredCapabilities capabilities = null;
                 if(browserName.equalsIgnoreCase("Safari")){
                      capabilities = DesiredCapabilities.iphone();
                 }else{
@@ -969,7 +989,7 @@ public class MRScenario {
                 
               }
              return webDriver;
-      }                                
+      } 		        
        
       
 
