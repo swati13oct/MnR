@@ -10,13 +10,13 @@ import atdd.framework.UhcDriver;
 
 /**
 * @author akuma103
-*
 */
 public class RegistrationInformationPage extends UhcDriver {
 
        /**
        *Registration page objects 
-        */
+       *
+      */
        /** The Personal Information Text. */
        @FindBy(id = "step1Text")
        private WebElement personalInfoText;
@@ -58,10 +58,6 @@ public class RegistrationInformationPage extends UhcDriver {
        @FindBy(id = "continue-btn")
        private WebElement nextButton;
        
-       /** The previous button. */
-       @FindBy(xpath = "//*[@id='register-form']/div[5]/div/div/a[1]")
-       private WebElement previousButton;
-
 
        /** The direct URL for registration redesign page. */
        private static String PAGE_URL = MRConstants.REDESIGN_REGISTRATION_URL;
@@ -158,6 +154,14 @@ public class RegistrationInformationPage extends UhcDriver {
        /** The pre populated member Date of Birth. */
        @FindBy(id = "memberDob")
        private WebElement mDOB;
+       
+       /** The previous button. */
+       @FindBy(id = "step2-previous-btn")
+       private WebElement previousButton;
+       
+       /** The Additional Plan Information Header. */
+       @FindBy(id = "addPlanHeading")
+       private WebElement additionalInfoHeader;
 
        public RegistrationInformationPage(WebDriver driver) {
               super(driver);
@@ -214,7 +218,7 @@ public class RegistrationInformationPage extends UhcDriver {
      * Enter month.
      */
     public void enterMonth(String month) {
-       sendkeys(monthToEnter, month);
+      sendkeys(monthToEnter, month);
     }
     
     /**
@@ -418,21 +422,27 @@ public class RegistrationInformationPage extends UhcDriver {
        }
        
        
-       /**
-        * @return the previous button on plan info page
-        */
-          public WebElement getPreviousButton(){
-          return previousButton;
-          }
+    /**
+     * @return the previous button on plan info page
+     */
+       public WebElement getPreviousButton(){
+       return previousButton;
+       }
           
           
-          /**
-           * @return the next button on plan info page
-           */
-             public WebElement getNextButton(){
-             return nextButton;
-             }
+    /**
+     * @return the next button on plan info page
+     */
+      public WebElement getNextButton(){
+      return nextButton;
+      }
           
+    /**
+     * @return the additional plan information header plan info page
+     */
+      public WebElement getAdditionalPlanInfoHeader(){
+      return additionalInfoHeader;
+      }
           
            
        @Override
