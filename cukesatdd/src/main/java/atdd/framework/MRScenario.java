@@ -903,7 +903,8 @@ public class MRScenario {
 		}else if(RUN_ON!=null && RUN_ON.equalsIgnoreCase("Sauce")){            
 			System.out.println("Execution is Going to Start on SauceLabs Web.....!!!!!");
 			DesiredCapabilities capabilities = null;
-			if(browser.equalsIgnoreCase("WEB")){
+			String browserType = System.getProperty("browser_type");
+			if(browserType.equalsIgnoreCase("WEB")){
 				if(browserName.equalsIgnoreCase(CommonConstants.FIREFOX_BROWSER)){
 					System.out.println("Inside firefox");
 					capabilities = DesiredCapabilities.firefox();
