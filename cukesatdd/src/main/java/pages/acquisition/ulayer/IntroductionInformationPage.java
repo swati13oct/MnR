@@ -137,7 +137,15 @@ public class IntroductionInformationPage extends UhcDriver{
 
 	public BeneficiaryInformationPage navigatesToNextStep() {
 		enrollmentNext.click();
-		ElementData elementData = new ElementData("id","step2Heading");
+		
+		try {
+			Thread.sleep(10000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+/*		ElementData elementData = new ElementData("id","step2Heading");
 		try {
 			CommonUtility.waitForElementToDisappear(driver, enrollmentNext,
 					CommonConstants.TIMEOUT_30);
@@ -147,8 +155,12 @@ public class IntroductionInformationPage extends UhcDriver{
 		catch(Exception e)
 		{
 			return null;
-		}
-		if(validate(findElement(elementData)) && findElement(elementData).getText().equalsIgnoreCase("Step 2: Personal Information"))
+		}*/
+		
+		ElementData elementData = new ElementData("id","step2Heading");
+		
+		
+		if(null !=findElement(elementData)  && findElement(elementData).getText().equalsIgnoreCase("Step 2: Personal Information"))
 		{
 			return new BeneficiaryInformationPage(driver);
 		}

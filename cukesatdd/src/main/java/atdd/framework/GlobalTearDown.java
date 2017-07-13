@@ -51,7 +51,7 @@ public class GlobalTearDown {
 		//Clean up the existing webdriver.
 		if(null !=getLoginScenario()  && null!=getLoginScenario().webDriver )
 		{
-			getLoginScenario().webDriver.close();
+			getLoginScenario().webDriver.quit();
 		}
 
 	}
