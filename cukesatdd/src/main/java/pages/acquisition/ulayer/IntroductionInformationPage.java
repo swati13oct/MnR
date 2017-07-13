@@ -13,6 +13,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
 import acceptancetests.atdd.data.CommonConstants;
+import acceptancetests.atdd.data.ElementData;
 import acceptancetests.atdd.data.PageData;
 import acceptancetests.atdd.util.CommonUtility;
 import atdd.framework.UhcDriver;
@@ -136,13 +137,20 @@ public class IntroductionInformationPage extends UhcDriver{
 
 	public BeneficiaryInformationPage navigatesToNextStep() {
 		enrollmentNext.click();
+		ElementData elementData = new ElementData("id","step2Heading");
 		try {
 			Thread.sleep(10000);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-        return new BeneficiaryInformationPage(driver);
+		if(findElement(elementData).getText().equalsIgnoreCase("Step 2: Personal Information"))
+		{
+			return new BeneficiaryInformationPage(driver);
+		}
+		
+		return null;
+        
 	}
 	
 	@FindBy(id = "beginOnlineEnrollmentBtn")
