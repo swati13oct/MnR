@@ -874,7 +874,8 @@ public class MRScenario {
 		System.out.println("getWebDriver, returning driver " + browser);
 		String browserName = (null == System.getProperty(CommonConstants.BROWSER_NAME)
 				? props.get("BrowserName") : System.getProperty(CommonConstants.BROWSER_NAME));
-		if(RUN_ON.equalsIgnoreCase("Desktop")){
+		System.out.println("browsername :::::::::: "+browserName);
+		if(RUN_ON!=null && RUN_ON.equalsIgnoreCase("Desktop")){
 			if (browserName.equalsIgnoreCase(CommonConstants.FIREFOX_BROWSER)) {
 				System.out.println("Execution started in firefox web browser !!!!!!");
 				//FirefoxBinary ffBinary = new FirefoxBinary(new File(pathToBinary));
@@ -899,7 +900,7 @@ public class MRScenario {
 				webDriver.manage().window().maximize();
 				return webDriver;
 			}
-		}else if(RUN_ON.equalsIgnoreCase("Sauce")){            
+		}else if(RUN_ON!=null && RUN_ON.equalsIgnoreCase("Sauce")){            
 			System.out.println("Execution is Going to Start on SauceLabs Web.....!!!!!");
 			DesiredCapabilities capabilities = null;
 			if(browser.equalsIgnoreCase("WEB")){
@@ -915,6 +916,7 @@ public class MRScenario {
 					capabilities.setCapability("version", "11.0");
 					capabilities.setCapability("screenResolution", "1024x768");
 				}else if(browserName.equalsIgnoreCase(CommonConstants.CHROME_BROWSER)){
+					System.out.println("enter chrome ***************** ");
 					capabilities = DesiredCapabilities.chrome();
 					capabilities.setCapability("platform", "Windows 7");
 					capabilities.setCapability("version", "52.0");
