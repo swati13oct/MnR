@@ -56,4 +56,6 @@ public class VPPCommonConstants {
 	public static final String REQUIREDREFERRAL = "requiredreferral";
 
 	public static final String PRESCRIPTIONDRUG = "prescriptiondrug";
+
+	public static final String PLAN_TYPE_CRITERIA = "urlType";
 }

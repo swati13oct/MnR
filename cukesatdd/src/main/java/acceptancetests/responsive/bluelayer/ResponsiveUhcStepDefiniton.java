@@ -556,4 +556,75 @@ public class ResponsiveUhcStepDefiniton {
   		planSummary.enrollInPlan(planType, planName);
   	} 
 
+
+
+@Given("^user navigated to connector model page$")
+	 public void connector_model(DataTable givenAttributes){
+		WebDriver wd = getLoginScenario().getWebDriver();
+		
+		
+	   
+		
+		List<DataTableRow> memberAttributesRow = givenAttributes
+	           .getGherkinRows();
+	Map<String, String> memberAttributesMap = new HashMap<String, String>();
+	for (int i = 0; i < memberAttributesRow.size(); i++) {
+
+	     memberAttributesMap.put(memberAttributesRow.get(i).getCells()
+	                  .get(0), memberAttributesRow.get(i).getCells().get(1));
+	}
+	String urlType = memberAttributesMap.get("PlanTypeCriteria");
+
+System.out.println(urlType);
+	
+	getLoginScenario().saveBean(VPPCommonConstants.PLAN_TYPE_CRITERIA, urlType);
+	
+
+//getLoginScenario().saveBean(VPPCommonConstants.CONNECTOR_URL,urlType);
+
+	 ResponsivePlanSummaryUhc planSummary = new ResponsivePlanSummaryUhc(wd,urlType);
+	 getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
+ 		getLoginScenario().saveBean(PageConstants. RESPONSIVE_PLAN_SUMMARY_PAGE_UHC, planSummary);
+	  	/* String planName = memberAttributesMap.get("Plan Name");
+	    System.out.println(planName);
+	    getLoginScenario().saveBean(VPPCommonConstants.PLAN_TYPE, planName);
+	  String planTypeCrieteria = memberAttributesMap.get("PlanTypeCriteria");
+		getLoginScenario().saveBean(VPPCommonConstants.PLAN_TYPE_CRITERIA, planTypeCrieteria);
+		 
+	
+	planSummary.validateEndorsedPlans(planTypeCrieteria,planName,urlType);*/
+	}
+	
+	@And("^user validate connector model flow$")
+	public void user_validate_connector(DataTable givenAttributes){
+   	 ResponsivePlanSummaryUhc planSummary = (ResponsivePlanSummaryUhc) getLoginScenario().getBean(PageConstants.RESPONSIVE_PLAN_SUMMARY_PAGE_UHC);
+        List<DataTableRow> memberAttributesRow = givenAttributes
+                      .getGherkinRows();
+         Map<String, String> memberAttributesMap = new HashMap<String, String>();
+         for (int i = 0; i < memberAttributesRow.size(); i++) {
+
+                memberAttributesMap.put(memberAttributesRow.get(i).getCells()
+                             .get(0), memberAttributesRow.get(i).getCells().get(1));}
+      //  String urlType = memberAttributesMap.get("PlanTypeCriteria");
+                
+               String planName = memberAttributesMap.get("Plan Name");
+        	    System.out.println(planName);
+        	    getLoginScenario().saveBean(VPPCommonConstants.PLAN_TYPE, planName);
+        	String urlType = (String) getLoginScenario().getBean(VPPCommonConstants.PLAN_TYPE_CRITERIA);
+         		        	
+        	planSummary.validateEndorsedPlans(planName,urlType);
+         }
+
+	
+	
+	
+	@And("^User clicks on change location$")
+	
+	public void change_location_cm(){
+		
+		ResponsivePlanSummaryUhc planSummary = (ResponsivePlanSummaryUhc) getLoginScenario()
+				.getBean(PageConstants.RESPONSIVE_PLAN_SUMMARY_PAGE_UHC);
+		planSummary.changelocationcm();
+	}
 }
+

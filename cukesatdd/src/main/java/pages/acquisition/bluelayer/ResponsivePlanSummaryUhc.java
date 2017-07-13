@@ -278,6 +278,11 @@ public class ResponsivePlanSummaryUhc extends UhcDriver{
 			
 			private static String CAMPAIGN_URL_2 = MRConstants.CAMPAIGN_PAGE_URL2;
 			
+			private static String ENDORSED_URL=MRConstants.Connector_model_url1;
+			//change to non-endorsed url
+			
+			private static String NON_ENDORSEDURL=MRConstants.Connector_model_url1;
+			
 	   private String urlType;  
 
 	private PageData vppPlanSummary;
@@ -307,7 +312,13 @@ public class ResponsivePlanSummaryUhc extends UhcDriver{
 
 	@Override
 	public void openAndValidate() {
-		validate(showMsPlans);		
+		validate(showMsPlans);	
+		if(urlType.equalsIgnoreCase("endorsed")){
+			start(ENDORSED_URL);
+		}
+		if(urlType.equalsIgnoreCase("non-endorsed")){
+			start(NON_ENDORSEDURL);
+		}
 	// validate(showMsPlans);
 	//	validate(viewMaPlans);
 	//	validate(viewPdpPlans);
@@ -1488,7 +1499,60 @@ public void comparePlanslnk(){
                  }
 				return null;
 			}
-}
+			public ResponsivePlanSummaryUhc validateEndorsedPlans(String planName, String urlType2) {
+				
+				if(urlType.equalsIgnoreCase("Endorse")){
+					System.out.println(planName);
+		             System.out.println(driver.findElement(By.xpath("//div[@class='segment-title']/h2")).getText()); 
+					if(planName.equalsIgnoreCase(driver.findElement(By.xpath("//div[@class='segment-title']/h2")).getText())){
+						System.out.println("Endorsed Plan Displayed Successfully");
+						return new ResponsivePlanSummaryUhc(driver);
+					}else{
+						System.out.println("Endorsed Plan not Displayed Correctly");
+						Assert.fail();
+					} 
+				}else if(urlType.equalsIgnoreCase("Non-Endorsed")){
+					if(planName.equalsIgnoreCase(driver.findElement(By.xpath("//div[@class='segment-title']/h2")).getText())){
+						System.out.println("Non Endorsed Plan Displayed Successfully");
+						return new ResponsivePlanSummaryUhc(driver);
+					}else{
+						System.out.println("Non Endorsed Plan not Displayed Correctly");
+						Assert.fail();
+					} 
+					
+				}
+				return null;
+			}
+				// TODO Auto-generated method stub
+			public void changelocationcm() {
+				
+				validate(changeLoationLink);
+				String pageTitle = driver.getTitle();
+				System.out.println(pageTitle);
+				changeLoationLink.click();	
+				try {
+					Thread.sleep(3000);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				System.out.println(driver.getTitle());
+				if(!driver.getTitle().equals(pageTitle)){
+					System.out.println("plan is not displayed"); 
+					System.out.println(driver.getTitle());
+					Assert.assertTrue(true);
+				}else{
+					System.out.println("Cm is displayed");
+					Assert.fail();
+				}
+
+
+				// TODO Auto-generated method stub
+				
+			}
+				
+			}
+
 					
 				
 				

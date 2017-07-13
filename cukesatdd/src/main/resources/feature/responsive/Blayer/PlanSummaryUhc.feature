@@ -363,4 +363,16 @@ Then user validates Prescription Drug Benefits section
 Examples:
 |zipCode|county          |planType|
 |90210 |Los Angeles County| MA     |
+
+
+@connectormodel
+Scenario Outline: To validate plan count from portfolio page
+Given user navigated to connector model page
+	|PlanTypeCriteria|<planTypeCriteria>|
+And user validate connector model flow
+ 	|Plan Name		 |<planName>		|
+And User clicks on change location
+ Examples:	 
+	  | planTypeCriteria |planName                                        |            
+	  |	Endorsed         |UnitedHealthcare Group Medicare Advantage (PPO) |
 								
