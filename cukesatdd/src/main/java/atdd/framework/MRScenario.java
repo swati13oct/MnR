@@ -516,10 +516,10 @@ public class MRScenario {
 		String propertiesFileToPick = System.getProperty("environment");
 	//	String webdriverpickup = System.getProperty("webdriver_browser"); //"RUN_ON-"
 	//	System.out.println("************* test which webdriver is picked up  **********"+webdriverpickup);
-		String run_on = System.getProperty("RUN_ON");
-		String browserName = System.getProperty("BrowserName");
-		String browserType = System.getProperty("BrowserType");
-		System.out.println("Using properties for environment ...."
+		String run_on = System.getProperty("run_on");
+		String browserName = System.getProperty("browser_name");
+		String browserType = System.getProperty("browser_type");
+		System.out.println("Using properties for environment ...." 
 				+ propertiesFileToPick);
 		if (StringUtils.isBlank(propertiesFileToPick)) {
 			System.out
@@ -548,6 +548,7 @@ public class MRScenario {
 	}
 
 	private static String findBrowserTypeConfigurationFile(String run_on,String browserName, String browserType){
+		System.out.println("********** run on broser name type ********"+run_on+ browserName+ browserType);
 		String configFile=null;
 		if(run_on==null && browserName==null && browserType==null)
 			return configFile;
