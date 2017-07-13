@@ -829,4 +829,8 @@ public class CommonConstants {
 	public static final String ADD_NEW_DRUG_MODAL = "addnewdrugmodal";
 	
 	public static final String PAGE_OBJECT_DIRECTORY_DCE_MEMBER = "/page-objects/member/dashboard/drugcostestimator/";
+	public static final String FIREFOXPROPERTY_FILE_NAME = "config_ff_web.properties";
+	public static final String ANDROIDPROPERTY_FILE_NAME = "config_andr_web.properties";
+	public static final String CHROMEPROPERTY_FILE_NAME = "config_chrome_web.properties";
+	public static final String SAFARIPROPERTY_FILE_NAME = "config_safari_web.properties";
 }
