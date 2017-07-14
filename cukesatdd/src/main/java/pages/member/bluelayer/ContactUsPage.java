@@ -123,7 +123,7 @@ public class ContactUsPage extends UhcDriver{
 	public ContactUsPage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
-		CommonUtility.waitForPageLoad(driver, addPlan, CommonConstants.TIMEOUT_30);
+		//CommonUtility.waitForPageLoad(driver, addPlan, CommonConstants.TIMEOUT_30);
 		openAndValidate();
 		
 	}
@@ -131,8 +131,9 @@ public class ContactUsPage extends UhcDriver{
 	@Override
 	public void openAndValidate() {
 
-		validate(addPlan);
-		validate(logOut);
+		/*validate(addPlan);
+		validate(logOut);*/
+		Assert.assertEquals("Contact Us", driver.getTitle());
 	}
 
 	public JSONObject getExpectedData(Map<String, JSONObject> expectedDataMap) {
@@ -342,7 +343,8 @@ public class ContactUsPage extends UhcDriver{
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			Select dropdown = new Select(driver.findElement(By.xpath("//div[contains(@class,'parsys request-email')]/div[not (contains(@class,'ng-hide'))][1]//select[@id='question-about']")));
+			Select dropdown = new Select(driver.findElement(By.xpath("//div[contains(@class,'parsys request-email')]"
+					+ "/div[not (contains(@class,'ng-hide'))][1]//select[@id='question-about']")));
 			System.out.println("dropdown" +dropdown);
 			dropdown.getFirstSelectedOption().click();
 			dropdown.selectByVisibleText("Payment Information");
@@ -387,7 +389,8 @@ public class ContactUsPage extends UhcDriver{
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			Select dropdown = new Select(driver.findElement(By.id("question-about")));
+			Select dropdown = new Select(driver.findElement(By.xpath("//div[contains(@class,'parsys request-email')]"
+					+ "/div[not (contains(@class,'ng-hide'))][1]//select[@id='question-about']")));
 			System.out.println("dropdown" +dropdown);
 			dropdown.getFirstSelectedOption().click();
 			dropdown.selectByVisibleText("Billing Information");
@@ -437,7 +440,8 @@ public class ContactUsPage extends UhcDriver{
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			Select dropdown = new Select(driver.findElement(By.id("question-about")));
+			Select dropdown = new Select(driver.findElement(By.xpath("//div[contains(@class,'parsys request-email')]"
+					+ "/div[not (contains(@class,'ng-hide'))][1]//select[@id='question-about']")));
 			System.out.println("dropdown" +dropdown);
 			dropdown.getFirstSelectedOption().click();
 			dropdown.selectByVisibleText("Billing Information");
@@ -474,7 +478,8 @@ public class ContactUsPage extends UhcDriver{
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			Select dropdown = new Select(driver.findElement(By.id("question-about")));
+			Select dropdown = new Select(driver.findElement(By.xpath("//div[contains(@class,'parsys request-email')]"
+					+ "/div[not (contains(@class,'ng-hide'))][1]//select[@id='question-about']")));
 			System.out.println("dropdown" +dropdown);
 			dropdown.getFirstSelectedOption().click();
 			dropdown.selectByVisibleText("Billing Information");
@@ -512,7 +517,8 @@ public class ContactUsPage extends UhcDriver{
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			Select dropdown = new Select(driver.findElement(By.id("question-about")));
+			Select dropdown = new Select(driver.findElement(By.xpath("//div[contains(@class,'parsys request-email')]"
+					+ "/div[not (contains(@class,'ng-hide'))][1]//select[@id='question-about']")));
 			//System.out.println("dropdown" +dropdown);
 			dropdown.getFirstSelectedOption().click();
 			dropdown.selectByVisibleText("Billing Information");
@@ -550,7 +556,8 @@ public class ContactUsPage extends UhcDriver{
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			Select dropdown = new Select(driver.findElement(By.id("question-about")));
+			Select dropdown = new Select(driver.findElement(By.xpath("//div[contains(@class,'parsys request-email')]"
+					+ "/div[not (contains(@class,'ng-hide'))][1]//select[@id='question-about']")));
 			System.out.println("dropdown" +dropdown);
 			dropdown.getFirstSelectedOption().click();
 			dropdown.selectByVisibleText("Billing Information");
