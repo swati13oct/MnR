@@ -432,6 +432,21 @@ public class PharmacyLocatorAarpStepDefinition {
 			Assert.fail("Failed to load Pharmacy search page");
 		}
 	}
+    
+    @Then("^the user validate google map red ballon based on plan type in AARP Site$")
+	public void user_views_pharmacy_saver_google_map_color_AARP() {
+		JSONObject pharmacyResultActualJson = (JSONObject) getLoginScenario()
+				.getBean(PharmacySearchCommonConstants.PHARMACY_RESULT_ACTUAL);
+		JSONObject pharmacyResultExpectedJson = (JSONObject) getLoginScenario()
+				.getBean(PharmacySearchCommonConstants.PHARMACY_RESULT_EXPECTED);		
+	}
+	
+	@Then("^the user validate tool tip for pharmacy saver plan type in AARP Site$")
+	public void user_validate_tooltip_pharmacy_saver_aarp() {
+    	PharmacySearchPage pharmacySearchPage = (PharmacySearchPage) getLoginScenario()
+				.getBean(PageConstants.PHARMACY_SEARCH_PAGE);
+		pharmacySearchPage = pharmacySearchPage.navigateToToolTipPharmacySaver();
+	}
    
 	
 }

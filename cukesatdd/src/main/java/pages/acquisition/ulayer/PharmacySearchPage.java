@@ -103,6 +103,9 @@ public class PharmacySearchPage extends UhcDriver {
 	@FindBy(xpath = "(//*[@id='lang-select']//option)[2]")
 	private WebElement chineseLink;
 	
+	@FindBy(xpath = "(.//*[@id='e8ac2588-cc57-4f00-af99-e99f38d2e3ea_toolTip']")
+	private WebElement toolTip;
+	
 	
 
 
@@ -319,7 +322,16 @@ public class PharmacySearchPage extends UhcDriver {
 		return new PharmacySearchPage(driver);
 	}
 	
-	
+	public PharmacySearchPage navigateToToolTipPharmacySaver() {
+		toolTip.click();
+			try {
+			Thread.sleep(1000);
+			} catch (InterruptedException e) {
+			e.printStackTrace();
+			} 
+			System.out.println("Hovered over the tooltip");			
+		return null;
+	}
 	
 
 }
