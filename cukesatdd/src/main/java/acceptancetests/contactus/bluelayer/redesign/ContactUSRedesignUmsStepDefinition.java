@@ -10,17 +10,18 @@ import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import pages.member.bluelayer.AccountHomePage;
-import pages.member.bluelayer.ContactUsPage;
-import pages.member.bluelayer.LoginPage;
 import acceptancetests.atdd.data.CommonConstants;
 import acceptancetests.atdd.data.member.PageConstants;
 import acceptancetests.login.data.LoginCommonConstants;
 import atdd.framework.MRScenario;
+import cucumber.annotation.en.And;
 import cucumber.annotation.en.Given;
 import cucumber.annotation.en.Then;
 import cucumber.annotation.en.When;
 import cucumber.table.DataTable;
+import pages.member.bluelayer.AccountHomePage;
+import pages.member.bluelayer.ContactUsPage;
+import pages.member.bluelayer.LoginPage;
 
 public class ContactUSRedesignUmsStepDefinition {
 	/**
@@ -223,7 +224,21 @@ public class ContactUSRedesignUmsStepDefinition {
 						contactusPage);
 			
 		}
-		
+
+		@And("^UI should be replaced by a confirmation display$")
+		public void UI_should_be_replaced_by_a_confirmation_display(){
+			
+			ContactUsPage contactusPage=(ContactUsPage)getLoginScenario().getBean(PageConstants.CONTACT_US_PAGE);
+			
+			String expectedMessage = "Thank you. We value your input, and will be happy to answer your questions."
+				+ " A Customer Service representative will review your question and respond to you shortly.";
+			
+			contactusPage.validateThankYouMessage(expectedMessage);
+			
+			if(contactusPage != null)				
+				getLoginScenario().saveBean(PageConstants.CONTACT_US_PAGE,
+						contactusPage);
+		}
 		
 		@Then("^user enters invalid phone number  in sendUS A question widget$")
 		public void alternative_email_idError_Validations()

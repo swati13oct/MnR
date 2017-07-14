@@ -37,39 +37,39 @@ public class ContactUsPage extends UhcDriver{
 	@FindBy(id = "addAnotherPlanLink")
 	private WebElement addPlan;
 	
-	@FindBy(xpath="//*[@id='question-btn']")
+	@FindBy(xpath="//div[contains(@class,'parsys request-email')]/div[not (contains(@class,'ng-hide'))][1]//a[@id='question-btn']")
 	private WebElement fillOutFormButton;	
 	
-	@FindBy(xpath="//*[@id='question-cancel']")
+	@FindBy(xpath="//div[contains(@class,'parsys request-email')]/div[not (contains(@class,'ng-hide'))][1]//a[@id='question-cancel']")
 	private WebElement questionCancelLink;
 	
 	@FindBy(xpath="//*[@id='question-about']")
 	private WebElement questionAbout;
 	
 	
-	@FindBy(xpath="//*[@id='question-message']")
+	@FindBy(xpath="//div[contains(@class,'parsys request-email')]/div[not (contains(@class,'ng-hide'))][1]//textarea[@id='question-message']")
 	private WebElement questionMessage;
 	
-	@FindBy(xpath="//*[@id='question-submit']/span")
+	@FindBy(xpath="//div[contains(@class,'parsys request-email')]/div[not (contains(@class,'ng-hide'))][1]//button[@id='question-submit']")
 	private WebElement questionSubmit;
 	
 	
-	@FindBy(xpath="//*[@id='add-alt-email']")
+	@FindBy(xpath="//div[contains(@class,'parsys request-email')]/div[not (contains(@class,'ng-hide'))][1]//a[@id='add-alt-email']")
 	private WebElement addAlternativeEmail;
 	
-	@FindBy(xpath="//*[@id='question-alt-email']")
+	@FindBy(xpath="//div[contains(@class,'parsys request-email')]/div[not (contains(@class,'ng-hide'))][1]//input[@id='question-alt-email']")
 	private WebElement alternativeEmailAddress;
 	
-	@FindBy(xpath="//*[@id='question-alt-email-confirm']")
+	@FindBy(xpath="//div[contains(@class,'parsys request-email')]/div[not (contains(@class,'ng-hide'))][1]//input[@id='question-alt-email-confirm']")
 	private WebElement confirmEmailAddress;
 	
-	@FindBy(xpath="//*[@id='add-alt-phone']")
+	@FindBy(xpath="//div[contains(@class,'parsys request-email')]/div[not (contains(@class,'ng-hide'))][1]//a[@id='add-alt-phone']")
 	private WebElement addAlternativePhneNumberLink;
 	
-	@FindBy(xpath="//*[@id='question-alt-phone']")
+	@FindBy(xpath="//div[contains(@class,'parsys request-email')]/div[not (contains(@class,'ng-hide'))][1]//input[@id='question-alt-phone']")
 	private WebElement alternativePhneNumber;
 	
-	@FindBy(xpath="//*[@id='question-alt-phone-confirm']")	
+	@FindBy(xpath="//div[contains(@class,'parsys request-email')]/div[not (contains(@class,'ng-hide'))][1]//input[@id='question-alt-phone-confirm']")	
 	private WebElement confirmAlternativePhneNumber;
 	
 	@FindBy(xpath="/html/body/div[2]/div/div/div/div[5]/div/div/div[2]/div/div[1]/div/div/div/div/div/div[2]/div[3]/div[1]")	
@@ -104,6 +104,12 @@ public class ContactUsPage extends UhcDriver{
 	
 	@FindBy(css="div.field.ask-question-message.field-has-error div.field-input label#message-email-error.error")
 	private WebElement questionAboutEmailErrorMsg;
+	
+	@FindBy(xpath="//div[contains(@class,'parsys request-email')]/div[not (contains(@class,'ng-hide'))][1]//span[contains(@class,'green')]")
+	private WebElement requestReceivedMessageHeader;
+	
+	@FindBy(xpath="//div[contains(@class,'parsys request-email')]/div[not (contains(@class,'ng-hide'))][1]//div[contains(@class,'message-block-body')]/p[2]")
+	private WebElement thankYouMessage;
 	
 	
 	private PageData contactUs;
@@ -192,6 +198,13 @@ public class ContactUsPage extends UhcDriver{
 		secureemailwidgetDataJson = jsonObject;
 
 		return secureemailwidgetDataJson;
+	}
+	
+	public void validateThankYouMessage(String expectedMessage){
+		
+		Assert.assertEquals("Your Request has Been Received", requestReceivedMessageHeader.getText().trim());
+		Assert.assertEquals(expectedMessage, thankYouMessage.getText().trim());
+		
 	}
 	
 	public void validateSendUaQuestionWidget()
@@ -329,7 +342,7 @@ public class ContactUsPage extends UhcDriver{
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			Select dropdown = new Select(driver.findElement(By.id("question-about")));
+			Select dropdown = new Select(driver.findElement(By.xpath("//div[contains(@class,'parsys request-email')]/div[not (contains(@class,'ng-hide'))][1]//select[@id='question-about']")));
 			System.out.println("dropdown" +dropdown);
 			dropdown.getFirstSelectedOption().click();
 			dropdown.selectByVisibleText("Payment Information");
@@ -339,10 +352,8 @@ public class ContactUsPage extends UhcDriver{
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			waitforElement(questionMessage);
 			questionMessage.sendKeys("Payment information");
 			/*entering email */
-			waitforElement(addAlternativeEmail);
 			addAlternativeEmail.click();
 			alternativeEmailAddress.sendKeys("utestums@gmail.com");
 			confirmEmailAddress.sendKeys("utestums@gmail.com");
@@ -352,15 +363,7 @@ public class ContactUsPage extends UhcDriver{
 			alternativePhneNumber.sendKeys("9023456121");
 			waitforElement(confirmAlternativePhneNumber);
 			confirmAlternativePhneNumber.sendKeys("9023456121");
-			try {
-				Thread.sleep(5000);
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			waitforElement(questionSubmit);
 			questionSubmit.click();
-			waitforElement(conformationMessage);
 			try {
 				Thread.sleep(5000);
 			} catch (InterruptedException e) {
@@ -397,10 +400,8 @@ public class ContactUsPage extends UhcDriver{
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			waitforElement(questionMessage);
 			questionMessage.sendKeys("Billing Information");
 			/*entering email */
-			waitforElement(addAlternativeEmail);
 			addAlternativeEmail.click();
 			alternativeEmailAddress.sendKeys("uuuuuyyy@gmail.com");
 			confirmEmailAddress.sendKeys("uuuuuyyy@gmail.com");
@@ -454,7 +455,6 @@ public class ContactUsPage extends UhcDriver{
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			waitforElement(questionMessage);
 			questionMessage.sendKeys("Billing Information");
 			/*entering email */
 			waitforElement(addAlternativeEmail);
@@ -494,7 +494,6 @@ public class ContactUsPage extends UhcDriver{
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			waitforElement(questionMessage);
 			questionMessage.sendKeys("Billing Information");
 			/*entering email */
 			waitforElement(addAlternativeEmail);
@@ -535,7 +534,6 @@ public class ContactUsPage extends UhcDriver{
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			waitforElement(questionMessage);
 			questionMessage.sendKeys("Billing Information");
 			waitforElement(addAlternativePhneNumberLink);
 			addAlternativePhneNumberLink.click();
@@ -579,7 +577,6 @@ public class ContactUsPage extends UhcDriver{
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			waitforElement(questionMessage);
 			questionMessage.sendKeys("hhh");
 			questionMessage.clear();
 			String questionErrorMessage=questionEmailmessageError.getText();
