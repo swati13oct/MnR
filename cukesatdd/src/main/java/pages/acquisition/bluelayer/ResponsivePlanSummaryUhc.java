@@ -574,7 +574,7 @@ public void comparePlanslnk(){
 		   }
 	 }
 	 
-	/* public ResponsivePlanDetails viewPlanDetails(String planName){
+	 public ResponsivePlanDetailsUhc viewPlanDetails(String planName){
 		int i=0;
 		 List<WebElement> plans = driver.findElements(By.xpath("//h2[contains(text(),'AARP')]"));
 		 System.out.println("PLANS SIZE :: "+plans.size());
@@ -587,7 +587,7 @@ public void comparePlanslnk(){
 			 if(plan.getText().equalsIgnoreCase(planName)){			 
 				 plan.click();
 				 if(driver.getTitle().equalsIgnoreCase("plans")){
-					 return new ResponsivePlanDetails(driver);
+					 return new ResponsivePlanDetailsUhc(driver);
 				 }
 				 break;
 			 }
@@ -595,7 +595,7 @@ public void comparePlanslnk(){
 		 }
 		 return null;
 	 }
-	 */
+	 
 	 
 		 	 
 
