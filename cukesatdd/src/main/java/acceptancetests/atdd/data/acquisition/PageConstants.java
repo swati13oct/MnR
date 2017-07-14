@@ -357,6 +357,8 @@ public class PageConstants {
     public static final String RESPONSIVE_PLAN_SUMMARY_PAGE = "responsivePlanSummaryPage";
 	
 	public static final String RESPONSIVE_DETAILS_PAGE = "responsiveDetailsPage";
+	
+	public static final String RESPONSIVE_DETAILS_UHC_PAGE = "responsiveDetailsUHCPage";
 
 	public static final String PORTFOLIO_PAGE_UHC = "ourPlans";
 
