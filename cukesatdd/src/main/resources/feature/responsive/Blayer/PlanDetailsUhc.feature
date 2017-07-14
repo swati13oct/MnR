@@ -9,10 +9,11 @@ Then the user performs plan search using zipcode
 Then the user navigates to the following plan type
 | PlanType | <planType> |		
 Then the user navigates to pan details page
+|Plan Name| <planName>|
 And the user validates Need a step back in right rail widgets	
 Examples:
 		|zipCode|county						 |planType |planName					   |
-		|33012  |Los Angeles County|SNP      |Miami-Dade County    |
+		|90210  |Los Angeles County|MA       |AARP MedicareComplete SecureHorizons Plan 2 (HMO)  |
 				
 
 @rightRail

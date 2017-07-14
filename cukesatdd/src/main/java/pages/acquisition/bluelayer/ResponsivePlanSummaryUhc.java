@@ -312,7 +312,7 @@ public class ResponsivePlanSummaryUhc extends UhcDriver{
 
 	@Override
 	public void openAndValidate() {
-		validate(showMsPlans);	
+		//validate(showMsPlans);	
 		if(urlType.equalsIgnoreCase("endorsed")){
 			start(ENDORSED_URL);
 		}
