@@ -22,6 +22,7 @@ import pages.acquisition.ulayer.RegistrationHomePage;
 import pages.acquisition.ulayer.RegistrationSuccessPage;
 import acceptancetests.atdd.data.CommonConstants;
 import acceptancetests.atdd.data.member.PageConstants;
+import acceptancetests.atdd.util.CommonUtility;
 import acceptancetests.registration.data.RegistrationConstants;
 import atdd.framework.MRScenario;
 import cucumber.api.DataTable;
@@ -44,9 +45,24 @@ public class RegistrationAarpStepDefinition {
 	}
 
 	@Given("^the user is on registration page of AARP site$")
-	public void registration_landing_page() {
+	public void registration_landing_page(DataTable memberAttributes) {
+		
+		/* Reading the given attribute from feature file */
+		List<DataTableRow> memberAttributesRow = memberAttributes
+				.getGherkinRows();
+		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells()
+					.get(0), memberAttributesRow.get(i).getCells().get(1));
+		}
+		String userName = memberAttributesMap.get("User Name");
+		
+		CommonUtility.deRegister(getLoginScenario(),userName);
+		
 		WebDriver wd = getLoginScenario().getWebDriver();
 		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
+		
 		RegistrationHomePage registrationHomePage = new RegistrationHomePage(wd);
 		getLoginScenario().saveBean(PageConstants.REGISTRATION_HOME_PAGE,
 				registrationHomePage);

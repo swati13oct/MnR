@@ -28,7 +28,7 @@
 		</resources>
 
 		<plugins>
-			<plugin>
+		<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
 				<version>3.5.1</version>
@@ -58,6 +58,8 @@
 					</dependency>
 				</dependencies>
 				<configuration>
+					<forkCount>20</forkCount>
+					<reuseForks>true</reuseForks>
 					<testSourceDirectory>${basedir}/src/main/java/</testSourceDirectory>
 					<testClassesDirectory>${project.build.directory}/classes/</testClassesDirectory>
 					<argLine>-Xmx512m -XX:MaxPermSize=512m</argLine>
@@ -286,6 +288,12 @@
 			<groupId>org.skyscreamer</groupId>
 			<artifactId>jsonassert</artifactId>
 			<version>1.2.3</version>
+		</dependency>
+
+		<dependency>
+		    <groupId>com.googlecode.json-simple</groupId>
+		    <artifactId>json-simple</artifactId>
+		    <version>1.1</version>
 		</dependency>
 
 		<dependency>
