@@ -95,7 +95,15 @@ public class PharmacySearchPage extends UhcDriver {
 	private WebElement pharmacySaverWidget;
 	
 	@FindBy(id = "plan-year")
-	private WebElement planYearDropDown;
+	private WebElement planYearDropDown;	
+
+	@FindBy(xpath = "//p[contains(.,'Pharmacy Saver™ Pharmacy ')]")
+	private WebElement filterLink;
+	
+	@FindBy(xpath = "(//*[@id='lang-select']//option)[2]")
+	private WebElement chineseLink;
+	
+	
 
 
 	public PharmacySearchPage(WebDriver driver) {
@@ -173,6 +181,7 @@ public class PharmacySearchPage extends UhcDriver {
 	}
 	
 	public PharmacyResultPage selectLanguage(){
+			
 		language.click();
 		if (driver.getTitle().equalsIgnoreCase(
 				"Member Claims")) {
@@ -294,6 +303,20 @@ public class PharmacySearchPage extends UhcDriver {
 		}
 		return new PharmacySearchPage(driver);
 
+	}
+	
+	public PharmacySearchPage navigateToPharmacySearchResult() {
+		
+		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+		filterLink.click();
+		
+		return null;
+	}
+	
+	public PharmacySearchPage clickChinese(){
+		chineseLink.click();
+		System.out.println("Chinese language selected");   
+		return new PharmacySearchPage(driver);
 	}
 	
 	

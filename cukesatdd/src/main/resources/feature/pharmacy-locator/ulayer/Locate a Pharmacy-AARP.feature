@@ -206,7 +206,7 @@ Examples:
 
 
 @moreinfoMAplantype
-Scenario Outline: To verify MAplan for pharmacies in AARP site
+Scenario Outline: To verify moreinfo for MA plantype in AARP site
 Given the user is on the AARP Medicare Site landing page
 When the user navigates to Request more info page
 When the user navigates to pharmacy search page in AARP Site
@@ -225,7 +225,7 @@ Examples:
 
 
 @chatPDPplantype
-Scenario Outline: To verify MAplan for pharmacies in AARP site
+Scenario Outline: To verify chat window for PDP plantype for pharmacies in AARP site
 Given the user is on the AARP Medicare Site landing page
 When the user navigates to Request more info page for PDP plantype
 When the user navigates to pharmacy search page in AARP Site
@@ -244,7 +244,7 @@ Examples:
 	
 	
 @chatMAplantype
-Scenario Outline: To verify MAplan for pharmacies in AARP site
+Scenario Outline: To verify chat window for MA plantype for pharmacies in AARP site
 Given the user is on the AARP Medicare Site landing page
 When the user navigates to Request more info page
 When the user navigates to pharmacy search page in AARP Site
@@ -263,7 +263,7 @@ Examples:
 	
 
 @TFNPDPplantype
-Scenario Outline: To verify MAplan for pharmacies in AARP site
+Scenario Outline: To verify toll free PDP plantype for pharmacies in AARP site
 Given the user is on the AARP Medicare Site landing page
 When the user navigates to Request more info page for PDP plantype
 When the user navigates to pharmacy search page in AARP Site
@@ -282,7 +282,7 @@ Examples:
 	
 	
 @TFNMAplantype
-Scenario Outline: To verify MAplan for pharmacies in AARP site
+Scenario Outline: To verify toll free MA plantype for pharmacies in AARP site
 Given the user is on the AARP Medicare Site landing page
 When the user navigates to Request more info page
 When the user navigates to pharmacy search page in AARP Site
@@ -301,7 +301,7 @@ Examples:
 	
 	
 @pharmacysaverwidget
-Scenario Outline: To verify MAplan for pharmacies in AARP site
+Scenario Outline: To verify pharmacysaverwidget in AARP site
 Given the user is on the AARP Medicare Site landing page
 When the user navigates to Request more info page
 When the user navigates to pharmacy search page in AARP Site
@@ -314,6 +314,43 @@ And the user chooses the year and a plan from dropdown in AARP site
 	| Plan Name| <planName> |	
 And the user validate pharmacy saver widget in AARP site
 
+Examples:
+	| zipcode     | distance  | county            | year     |  planName 			                 	  							|			 
+	| 90210       | 15        | Los Angeles       | 2017     | AARP MedicareComplete SecureHorizons Plan 1 (HMO) |	
+	
+@Pharmacylist
+Scenario Outline: To verify Pharmacylist in AARP site
+Given the user is on the AARP Medicare Site landing page
+When the user navigates to Request more info page
+When the user navigates to pharmacy search page in AARP Site
+And the user enters following details for pharmacy search in AARP Site
+	| Zip Code	| <zipcode>	|
+	| Distance	| <distance>|
+	| County Name	| <county>	|
+And the user chooses the year and a plan from dropdown in AARP site
+  |  Year | <year> |
+	| Plan Name| <planName> |	
+And the user searches for pharmacy search results available in AARP site
+	
+Examples:
+	| zipcode     | distance  | county            | year     |  planName 			                 	  							|			 
+	| 90210       | 15        | Los Angeles       | 2017     | AARP MedicareComplete SecureHorizons Plan 1 (HMO) |	
+	
+@chineselanguage
+Scenario Outline: To verify pharmacy locator language in AARP site
+Given the user is on the AARP Medicare Site landing page
+When the user navigates to Request more info page
+When the user navigates to pharmacy search page in AARP Site
+And the user clicks chineseLink in AARP Site
+And the user enters following details for pharmacy search in AARP Site
+  | Zip Code	| <zipcode>	|
+	| Distance	| <distance>	|
+	| County Name	| <county>	|
+And the user chooses the year and a plan from dropdown in AARP site
+  |  Year | <year> |
+	| Plan Name| <planName> |	
+And the user searches for pharmacy search results available in AARP site
+   
 Examples:
 	| zipcode     | distance  | county            | year     |  planName 			                 	  							|			 
 	| 90210       | 15        | Los Angeles       | 2017     | AARP MedicareComplete SecureHorizons Plan 1 (HMO) |	

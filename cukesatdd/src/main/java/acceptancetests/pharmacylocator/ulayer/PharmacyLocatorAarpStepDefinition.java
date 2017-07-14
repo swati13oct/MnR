@@ -124,7 +124,7 @@ public class PharmacyLocatorAarpStepDefinition {
 				.getBean(PageConstants.PHARMACY_SEARCH_PAGE);
 		pharmacySearchPage = pharmacySearchPage.selectYear();
 		pharmacySearchPage = pharmacySearchPage.selectsPlanName();
-
+		
 		if (pharmacySearchPage != null) {
 			getLoginScenario().saveBean(PageConstants.PHARMACY_SEARCH_PAGE,
 					pharmacySearchPage);
@@ -403,7 +403,35 @@ public class PharmacyLocatorAarpStepDefinition {
 				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
     	 PharmacyResultPage pharmacyResultPage = acqusitionHomePage.validateTfnWidget();
     }
-
-	
+    
+    @And("^the user searches for pharmacy search results available in AARP site$")
+	public void user_views_pharmacy_search_result_aarp() {
+    	PharmacySearchPage pharmacySearchPage = (PharmacySearchPage) getLoginScenario()
+				.getBean(PageConstants.PHARMACY_SEARCH_PAGE);
+		pharmacySearchPage = pharmacySearchPage.navigateToPharmacySearchResult();
+		
+		if (pharmacySearchPage != null) {
+			getLoginScenario().saveBean(PageConstants.PHARMACY_SEARCH_PAGE,
+					pharmacySearchPage);
+			Assert.assertTrue(true);
+		} else {
+			Assert.fail("Failed to load Pharmacy search page");
+		}
+    	
+    }
+    
+    @And("^the user clicks chineseLink in AARP Site$")
+	public void click_chinese() {
+		PharmacySearchPage pharmacySearchAarpPage = (PharmacySearchPage) getLoginScenario()
+				.getBean(PageConstants.PHARMACY_SEARCH_PAGE);
+		pharmacySearchAarpPage = pharmacySearchAarpPage.clickChinese();
+		if (pharmacySearchAarpPage != null) {
+			getLoginScenario().saveBean(PageConstants.PHARMACY_SEARCH_PAGE, pharmacySearchAarpPage);
+			Assert.assertTrue(true);
+		} else {
+			Assert.fail("Failed to load Pharmacy search page");
+		}
+	}
+   
 	
 }
