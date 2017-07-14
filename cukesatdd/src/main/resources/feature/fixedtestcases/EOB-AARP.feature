@@ -1,6 +1,6 @@
 @fixedTestCaseTest
 @eob
-Feature: To test Medical EOB flow under forms and resources in AARP site
+Feature: To test EOB flows under forms and resources in AARP site
 @medEOBUlayer
 Scenario Outline:To verify Medical EOB in forms and resoutces flow in AARP site
 Given registered AMP with following details for EOB flow
