@@ -133,7 +133,6 @@ public class ContactUsPage extends UhcDriver{
 
 		/*validate(addPlan);
 		validate(logOut);*/
-		Assert.assertEquals("Contact Us", driver.getTitle());
 	}
 
 	public JSONObject getExpectedData(Map<String, JSONObject> expectedDataMap) {

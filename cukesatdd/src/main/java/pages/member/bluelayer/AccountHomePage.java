@@ -654,6 +654,11 @@ public FormsandresourcesPage navigateToMydocumentUmsPage() {
 		// TODO Auto-generated method stub
 		String url = "https://member.team-e-uhcmedicaresolutions.uhc.com/content/uhcm/home/contact.html";
 		driver.get(url);
+		try {
+			Thread.sleep(6000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+		}
 		if (driver.getTitle().equals("Contact Us")) {
 			return new pages.member.bluelayer.ContactUsPage(driver);
 
