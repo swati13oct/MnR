@@ -656,5 +656,10 @@ public class ResponsiveUhcStepDefiniton {
 		/*ResponsivePlanDetailsUhc planDetailsPage = (ResponsivePlanDetailsUhc) getLoginScenario().getBean(PageConstants.RESPONSIVE_DETAILS_UHC_PAGE);
 		planDetailsPage.validateRallyPage();*/
 	}
+	
+	@And("^the user navigated back using back to all plans$")
+	public void user_validates_back_to_all_plans() throws InterruptedException  {
+		Thread.sleep(4000);
+	}
 }
 
