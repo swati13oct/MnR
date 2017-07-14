@@ -247,7 +247,7 @@ public class ContactUsPage extends UhcDriver{
 			}
 			//fillOutFormButton.click();
 			
-			waitforElement(addAlternativeEmail);
+			/*waitforElement(addAlternativeEmail);
 			addAlternativeEmail.click();
 			alternativeEmailAddress.sendKeys("jkij@ums.com");
 			confirmEmailAddress.sendKeys("jkij@ums.com");
@@ -262,7 +262,7 @@ public class ContactUsPage extends UhcDriver{
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
-			}
+			}*/
 			System.out.println("end of the secure emial");
 		}
 		else
@@ -357,11 +357,8 @@ public class ContactUsPage extends UhcDriver{
 			addAlternativeEmail.click();
 			alternativeEmailAddress.sendKeys("utestums@gmail.com");
 			confirmEmailAddress.sendKeys("utestums@gmail.com");
-			waitforElement(addAlternativePhneNumberLink);
 			addAlternativePhneNumberLink.click();
-			waitforElement(alternativePhneNumber);
 			alternativePhneNumber.sendKeys("9023456121");
-			waitforElement(confirmAlternativePhneNumber);
 			confirmAlternativePhneNumber.sendKeys("9023456121");
 			questionSubmit.click();
 			try {
@@ -405,11 +402,8 @@ public class ContactUsPage extends UhcDriver{
 			addAlternativeEmail.click();
 			alternativeEmailAddress.sendKeys("uuuuuyyy@gmail.com");
 			confirmEmailAddress.sendKeys("uuuuuyyy@gmail.com");
-			waitforElement(addAlternativePhneNumberLink);
 			addAlternativePhneNumberLink.click();
-			waitforElement(alternativePhneNumber);
 			alternativePhneNumber.sendKeys("9123456123");
-			waitforElement(confirmAlternativePhneNumber);
 			confirmAlternativePhneNumber.sendKeys("9123456123");
 			try {
 				Thread.sleep(5000);
@@ -417,9 +411,7 @@ public class ContactUsPage extends UhcDriver{
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			waitforElement(questionSubmit);
 			questionSubmit.click();
-			waitforElement(conformationMessage);
 			try {
 				Thread.sleep(5000);
 			} catch (InterruptedException e) {
@@ -457,13 +449,11 @@ public class ContactUsPage extends UhcDriver{
 			}
 			questionMessage.sendKeys("Billing Information");
 			/*entering email */
-			waitforElement(addAlternativeEmail);
 			addAlternativeEmail.click();
 			alternativeEmailAddress.sendKeys("abc");
 			//confirmEmailAddress.sendKeys("");
 			alternativeEmailAddress.clear();
 			alternativeEmailAddress.click();
-			waitforElement(alternativemessageEmailError);
 			String alternativeerrorMessage=alternativemessageEmailError.getText();
 			System.out.println("alternativeerrorMessage::" +alternativeerrorMessage);
 			Assert.assertTrue("Email address not valid", alternativeerrorMessage.equalsIgnoreCase("Email Address Not valid"));
@@ -496,13 +486,11 @@ public class ContactUsPage extends UhcDriver{
 			}
 			questionMessage.sendKeys("Billing Information");
 			/*entering email */
-			waitforElement(addAlternativeEmail);
 			addAlternativeEmail.click();
 			alternativeEmailAddress.sendKeys("abc");
 			confirmEmailAddress.sendKeys("xyz");
 			confirmEmailAddress.clear();
 			confirmEmailAddress.click();
-			waitforElement(confirmMsgEmailError);
 			String confirmErrMessage=confirmMsgEmailError.getText();		
 			 System.out.println("confirmErrMessage;;" + confirmErrMessage);
 			 Assert.assertTrue("Please enter same email id", confirmErrMessage.equalsIgnoreCase("Please enter same email id"));
@@ -535,18 +523,13 @@ public class ContactUsPage extends UhcDriver{
 				e.printStackTrace();
 			}
 			questionMessage.sendKeys("Billing Information");
-			waitforElement(addAlternativePhneNumberLink);
 			addAlternativePhneNumberLink.click();
-			waitforElement(alternativePhneNumber);
 			alternativePhneNumber.sendKeys("123");
 			alternativePhneNumber.click();
-			waitforElement(invalidPhneErrorMsg);
 			String invalidPhnenumerErrmsg = invalidPhneErrorMsg.getText();
 			System.out.println("invalidPhnenumerErrmsg::" +invalidPhnenumerErrmsg);
 			Assert.assertTrue("Phone number is not valid", invalidPhnenumerErrmsg.equals("Phone number is not valid"));
-			waitforElement(confirmAlternativePhneNumber);
 			confirmAlternativePhneNumber.sendKeys("789");
-			waitforElement(confirmPhneErrorMsg);
 			String confirmPhoneErrmsg = confirmPhneErrorMsg.getText();
 			Assert.assertTrue("Please enter same Number", confirmPhoneErrmsg.equals("Please enter same Number"));
 			
