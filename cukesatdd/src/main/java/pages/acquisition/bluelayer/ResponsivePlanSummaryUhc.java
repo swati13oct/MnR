@@ -313,12 +313,12 @@ public class ResponsivePlanSummaryUhc extends UhcDriver{
 	@Override
 	public void openAndValidate() {
 		//validate(showMsPlans);	
-		if(urlType.equalsIgnoreCase("endorsed")){
+		/*if(urlType.equalsIgnoreCase("endorsed")){
 			start(ENDORSED_URL);
 		}
 		if(urlType.equalsIgnoreCase("non-endorsed")){
 			start(NON_ENDORSEDURL);
-		}
+		}*/
 	// validate(showMsPlans);
 	//	validate(viewMaPlans);
 	//	validate(viewPdpPlans);
@@ -586,7 +586,7 @@ public void comparePlanslnk(){
 			 System.out.println(plan.getText());
 			 if(plan.getText().equalsIgnoreCase(planName)){			 
 				 plan.click();
-				 if(driver.getTitle().equalsIgnoreCase("plans")){
+				 if(driver.getTitle().equalsIgnoreCase("Our Medicare Plans | AARP® Medicare Plans from UnitedHealthcare®")){
 					 return new ResponsivePlanDetailsUhc(driver);
 				 }
 				 break;

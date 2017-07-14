@@ -13,7 +13,7 @@ Then the user navigates to pan details page
 And the user validates Need a step back in right rail widgets	
 Examples:
 		|zipCode|county						 |planType |planName					   |
-		|90210  |Los Angeles County|MA       |AARP MedicareComplete SecureHorizons Plan 2 (HMO)  |
+		|90210  |Los Angeles County|MA       |AARP MedicareComplete SecureHorizons Plan 1 (HMO)  |
 				
 
 @rightRail
@@ -25,10 +25,11 @@ Then the user performs plan search using zipcode
 Then the user navigates to the following plan type
  | PlanType | <planType> |
  Then the user navigates to pan details page	
+ |Plan Name| <planName>|
 And the user validates chat now widget in right rail widgets	
 Examples:
 		|zipCode|county						 |planType |planName					   |
-		|33012  |Los Angeles County|SNP      |Miami-Dade County    |
+		|90210  |Los Angeles County|MA       |AARP MedicareComplete SecureHorizons Plan 1 (HMO)  |
 		
 @rightRail		
 Scenario Outline: To validate need more information
@@ -39,10 +40,11 @@ Then the user performs plan search using zipcode
 Then the user navigates to the following plan type
 | PlanType | <planType> |	
 Then the user navigates to pan details page
+|Plan Name| <planName>|
 And the user validates need more information widget in right rail widgets	
 Examples:
 		|zipCode|county						 |planType |planName					   |
-		|33012  |Los Angeles County|SNP      |Miami-Dade County    |
+		|90210  |Los Angeles County|MA       |AARP MedicareComplete SecureHorizons Plan 1 (HMO)  |
 		
 @rightRail		
 Scenario Outline: To validate plan count from portfolio page
@@ -53,12 +55,27 @@ Then the user performs plan search using zipcode
 Then the user navigates to the following plan type
 | PlanType | <planType> |	
 Then the user navigates to pan details page
+|Plan Name| <planName>|
 When the user moved to the email update widget in selected plan section in AARP site
 And the user enter information to Get Email Update widget and submit in AARP site	
 | First Name| <firstname> |
 | Last Name | <lastname>  |
 | Email Address | <emailaddress> |
 Examples:
-		|zipCode|county            |planType	|  firstname | lastname | emailaddress |
-		|90210  |Los Angeles County|PDP        |	 Eva        | Zhong     |weixin.zhong@optum.com|
+		|zipCode|county            |planType	|planName																						|  firstname  | lastname  | emailaddress |
+		|90210  |Los Angeles County|MA        |AARP MedicareComplete SecureHorizons Plan 1 (HMO)  |	 Eva        | Zhong     |weixin.zhong@optum.com|
  
+ @providerSearch
+ Scenario Outline: To validate need more information
+Given the user is on the vpp portfolio page
+Then the user performs plan search using zipcode
+              | Zip Code |<zipCode>|
+              | County   |<county> |
+Then the user navigates to the following plan type
+| PlanType | <planType> |	
+Then the user navigates to pan details page
+|Plan Name| <planName>|
+And the user validates provider search page
+Examples:
+		|zipCode|county						 |planType  |planName					   |
+		|90210  |Los Angeles County|MA        |AARP MedicareComplete SecureHorizons Plan 1 (HMO)  |

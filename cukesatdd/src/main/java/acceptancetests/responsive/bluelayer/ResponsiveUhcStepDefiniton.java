@@ -13,8 +13,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import pages.acquisition.bluelayer.BLayerPlanComparePage;
 import pages.acquisition.bluelayer.MAEnrollmentPage;
+import pages.acquisition.bluelayer.PlanDetailsPage;
 import pages.acquisition.bluelayer.PortfolioPageUhc;
 import pages.acquisition.bluelayer.PortfolioTeamCUhc;
+import pages.acquisition.bluelayer.ResponsivePlanDetailsUhc;
 import pages.acquisition.bluelayer.ResponsivePlanSummaryUhc;
 import pages.acquisition.bluelayer.VPPAarpNeedAStepBackWidget;
 import pages.acquisition.bluelayer.VPPAarpNeedHelpWidgetPage;
@@ -639,7 +641,20 @@ public class ResponsiveUhcStepDefiniton {
 		String planName = memberAttributesMap.get("Plan Name");
 		System.out.println(planName);
 		ResponsivePlanSummaryUhc planSummaryPage = (ResponsivePlanSummaryUhc) getLoginScenario().getBean(PageConstants.RESPONSIVE_PLAN_SUMMARY_PAGE_UHC);
-		planSummaryPage.viewPlanDetails(planName);
+		ResponsivePlanDetailsUhc planDetailPage = planSummaryPage.viewPlanDetails(planName);
+		if(planDetailPage!=null){
+			loginScenario.saveBean(PageConstants.RESPONSIVE_DETAILS_UHC_PAGE, planDetailPage);
+		}
+		else{
+			System.out.println("Page null value displayed");
+			Assert.fail();
+		}
+	}
+	
+	@And("^the user validates provider search page$")
+	public void user_validates_provider_search_page(){
+		/*ResponsivePlanDetailsUhc planDetailsPage = (ResponsivePlanDetailsUhc) getLoginScenario().getBean(PageConstants.RESPONSIVE_DETAILS_UHC_PAGE);
+		planDetailsPage.validateRallyPage();*/
 	}
 }
 
