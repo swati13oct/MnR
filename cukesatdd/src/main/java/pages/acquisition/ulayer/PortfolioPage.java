@@ -288,7 +288,7 @@ public ResponsivePlanSummary searchPlans(String zipcode, String CountyName) {
 	    		break;
 	    	}
 	    }
-		if (driver.getTitle().equalsIgnoreCase(PageTitleConstants.PORTFOLIO_HOME_PAGE_TITLE_HEADLESS)) {
+		if (driver.getTitle().equalsIgnoreCase(PageTitleConstants.ULAYER_PLAN_SUMMARY_PAGE_TITLE)) {
 			return new ResponsivePlanSummary(driver);
 		} 
 		return null;

@@ -299,7 +299,7 @@ public class ResponsiveStepDefiniton {
 	
 	
 	@And("^the user click compare plans in AARP site")
-	public void the_user_click_compare_plans_to_compare(){
+	public void the_user_click_compare_plans_to_compare() throws InterruptedException{
 		ResponsivePlanSummary planSummary = (ResponsivePlanSummary) getLoginScenario()
 				.getBean(PageConstants.RESPONSIVE_PLAN_SUMMARY_PAGE);
 	         planSummary.comparePlanslnk();

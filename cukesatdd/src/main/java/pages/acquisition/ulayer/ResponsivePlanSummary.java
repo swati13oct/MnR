@@ -454,11 +454,12 @@ public ResponsivePlanSummary viewPlanSummary(String planType) {
 	
 
  
-public void comparePlanslnk(){
+public void comparePlanslnk() throws InterruptedException{
 	
 	driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS); 
 	 boolean link = comparePlans.isEnabled(); 
 	 System.out.println(link); 
+	 Thread.sleep(5000);
 	 comparePlans.click(); 
 	 validate(comparePlans); 
 	
