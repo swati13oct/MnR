@@ -84,8 +84,15 @@ public class RegistrationInformationPage extends UhcDriver {
        
        /** The medicare ID field. */
        @FindBy(id = "medicareID")
-       private WebElement medicareID;    
+       private WebElement medicareID;
        
+       /** The IncorrectINfo Error on Additional Info page*/
+       @FindBy(id = "invalidData-error")
+       private WebElement incorrectinfoerror;
+       
+       /** The Completion Error on Additional Info page*/
+       @FindBy(id = "orGroup-error")
+       private WebElement fieldcompletionerror ;
        /**
        *Error message section Values
        */
@@ -278,7 +285,36 @@ public class RegistrationInformationPage extends UhcDriver {
     public void clickCancel() {
        cancelButton.click();
     }
+      
+    /**
+     * @return the medicare id to enter
+     */
+    public WebElement getMedicareId(){
+        return medicareID;
+        }
+    
+    /**
+     * @return the zipcode field to enter
+     */
+    public WebElement getZipcode(){
+        return zipCode;
+        }
         
+    /**
+     * @return the first name field to enter
+     */
+    public WebElement getFirstName(){
+        return firstName;
+        }
+    
+    
+    /**
+     * @return the last name field to enter
+     */
+    public WebElement getLastName(){
+        return lastName;
+        }
+    
     /**
      * @return the get Personal info header for additional info is displayed
      */
@@ -303,6 +339,12 @@ public class RegistrationInformationPage extends UhcDriver {
      */
     public void enterLastName(String lNmae) {
        sendkeys(lastName, lNmae);
+    }
+    /**
+     * Enter medicareID.
+     */
+    public void enterMedicareID(String medicare_id) {
+       sendkeys(medicareID, medicare_id);
     }
    
     /**
@@ -339,8 +381,8 @@ public class RegistrationInformationPage extends UhcDriver {
     
     /**
      * Functions to click link on Error message pages
-     */       
-
+     */  
+  
        /**
      * Click the  existing Start Over link
      */
@@ -430,21 +472,34 @@ public class RegistrationInformationPage extends UhcDriver {
        }
           
           
+             
     /**
      * @return the next button on plan info page
      */
       public WebElement getNextButton(){
       return nextButton;
       }
+
+             /**
+              * Functions for Additional Info Error messages
+              */        
+             public WebElement getIncorrectInfoError(){
+             	return incorrectinfoerror;
+             	
+             }
+             public WebElement getfieldCompletionError(){
+             	return fieldcompletionerror;
+             	
+             }
           
+
     /**
      * @return the additional plan information header plan info page
      */
       public WebElement getAdditionalPlanInfoHeader(){
       return additionalInfoHeader;
       }
-          
-           
+                 
        @Override
        public void openAndValidate() {
               start(PAGE_URL);
