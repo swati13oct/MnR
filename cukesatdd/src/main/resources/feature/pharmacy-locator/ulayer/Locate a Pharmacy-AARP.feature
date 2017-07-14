@@ -298,3 +298,22 @@ Examples:
 	Examples:
 	| zipcode     | distance  | county            |  planName 			                 	  							|			 
 	| 90210       | 15        | Los Angeles       | AARP MedicareComplete SecureHorizons Plan 1 (HMO) |		
+	
+	
+@pharmacysaverwidget
+Scenario Outline: To verify MAplan for pharmacies in AARP site
+Given the user is on the AARP Medicare Site landing page
+When the user navigates to Request more info page
+When the user navigates to pharmacy search page in AARP Site
+And the user enters following details for pharmacy search in AARP Site
+	| Zip Code	| <zipcode>	|
+	| Distance	| <distance>|
+	| County Name	| <county>	|
+And the user chooses the year and a plan from dropdown in AARP site
+  |  Year | <year> |
+	| Plan Name| <planName> |	
+And the user validate pharmacy saver widget in AARP site
+
+Examples:
+	| zipcode     | distance  | county            | year     |  planName 			                 	  							|			 
+	| 90210       | 15        | Los Angeles       | 2017     | AARP MedicareComplete SecureHorizons Plan 1 (HMO) |	

@@ -106,13 +106,43 @@ public class PharmacyLocatorAarpStepDefinition {
 			Assert.fail("Failed to load Pharmacy search page");
 		}
 	}
+	
+	@And("^the user chooses the year and a plan from dropdown in AARP site$")
+	public void chooses_year_chooses_plan(DataTable planAttributes){
+		List<DataTableRow> planAttributesRow = planAttributes.getGherkinRows();
+		Map<String, String> planAttributesMap = new LinkedHashMap<String, String>();
+		for (int i = 0; i < planAttributesRow.size(); i++) {
 
+			planAttributesMap.put(planAttributesRow.get(i).getCells().get(0),
+					planAttributesRow.get(i).getCells().get(1));
+		}
+		
+		String year = planAttributesMap.get("year");
+		//String planName = planAttributesMap.get("Plan Name");		
+
+		PharmacySearchPage pharmacySearchPage = (PharmacySearchPage) getLoginScenario()
+				.getBean(PageConstants.PHARMACY_SEARCH_PAGE);
+		pharmacySearchPage = pharmacySearchPage.selectYear();
+		pharmacySearchPage = pharmacySearchPage.selectsPlanName();
+
+		if (pharmacySearchPage != null) {
+			getLoginScenario().saveBean(PageConstants.PHARMACY_SEARCH_PAGE,
+					pharmacySearchPage);
+			Assert.assertTrue(true);
+		} else {
+			Assert.fail("Failed to load Pharmacy search page");
+		}
+	}
+	
+	
 	@And("^the user chooses a plan from dropdown in AARP Site$")
 	public void user_chooses_plan_dropdown_aarp(DataTable planAttributes) {
 		
 		PharmacySearchPage pharmacySearchPage = (PharmacySearchPage) getLoginScenario()
 				.getBean(PageConstants.PHARMACY_SEARCH_PAGE);
-		PharmacySearchPage pharmacyResultPage = pharmacySearchPage.selectsPlanName();
+		
+		PharmacySearchPage pharmacyResultPage = pharmacySearchPage.selectsPlanName();	
+		
 
 		/*String planName = planAttributes.getGherkinRows().get(0).getCells()
 				.get(0);

@@ -6,7 +6,6 @@ package pages.acquisition.ulayer;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
-import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -18,6 +17,7 @@ import org.openqa.selenium.support.ui.Select;
 import acceptancetests.atdd.data.ElementData;
 import acceptancetests.atdd.util.CommonUtility;
 import atdd.framework.UhcDriver;
+
 
 /**
  * @author pagarwa5
@@ -93,6 +93,9 @@ public class PharmacySearchPage extends UhcDriver {
 	
 	@FindBy(xpath = "//h2[contains(text(),'Pharmacy Saver offers prescriptions as low as $XX.XX')]")
 	private WebElement pharmacySaverWidget;
+	
+	@FindBy(id = "plan-year")
+	private WebElement planYearDropDown;
 
 
 	public PharmacySearchPage(WebDriver driver) {
@@ -130,22 +133,16 @@ public class PharmacySearchPage extends UhcDriver {
 		
 	}
 
+	//selectFromDropDown(planNamesList, planName);
 	public PharmacySearchPage selectsPlanName() {
-		//selectFromDropDown(planNamesList, planName);
 		try {
 			Thread.sleep(3000);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		//driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 		Select select = new Select(planType);	
 		select.selectByIndex(1);
-		/*if (narrowYourSearchContent.getText().equalsIgnoreCase(
-				"Narrow your search")) {
-			return new PharmacySearchPage(driver);
-		}
-		return null;*/
 		return new PharmacySearchPage(driver);
 	}
 
@@ -278,6 +275,28 @@ public class PharmacySearchPage extends UhcDriver {
 		return null;
 		
 	}
+	
+	public PharmacySearchPage selectYear() {
+		
+		Select dropDown = new Select(planYearDropDown);		
+		try {
+			Thread.sleep(5000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		dropDown.selectByValue("1");
+		try {
+			Thread.sleep(5000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return new PharmacySearchPage(driver);
+
+	}
+	
+	
 	
 
 }
