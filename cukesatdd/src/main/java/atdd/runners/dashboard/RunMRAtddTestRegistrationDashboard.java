@@ -1,7 +1,7 @@
 /**
  * 
  */
-package atdd.runners;
+package atdd.runners.dashboard;
 
 import org.junit.runner.RunWith;
 
@@ -12,10 +12,10 @@ import cucumber.junit.Cucumber;
  *
  */
 @RunWith(Cucumber.class)
-@Cucumber.Options(glue = { "atdd.framework","acceptancetest.registration" }, 
+@Cucumber.Options(glue = { "atdd.framework","acceptancetests.dashboard.registration" }, 
 		features = { "feature/registrationMemberRedesign" }, 
 		format = {
-		"pretty", "html:reports/test-report" }, tags ={"@registrationRedesign"})
+		"pretty", "html:reports/test-report" }, tags ={"@inactiveTerminatedPlanError , @existingMemberErrorPage , @memberInfoNotFoundError"})
 public class RunMRAtddTestRegistrationDashboard {
 
 }

@@ -9,7 +9,7 @@ Feature: To test registration flow in redesign portal
       | Date of birth | <dateOfBirth> |
     When member click Next
     Then member will be navigated to registration plan information page
-    And Verify correct plan name id displayed
+    And Verify correct plan name is displayed
       | Plan name | <planname> |
 
     Examples: 
