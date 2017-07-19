@@ -80,12 +80,14 @@ And the user enters following details for pharmacy search in AARP Site
   | Zip Code	| <zipcode>	|
 	| Distance	| <distance>	|
 	| County Name	| <county>	|
-And the user chooses a plan from dropdown in AARP Site
-	| <planName> |
+And the user chooses the year and a plan from dropdown in AARP site
+	|  Year | <year> |
+	| Plan Name| <planName> |
 Then the user click on view search PDF link in AARP Site
-Examples:
-	| zipcode     | distance  | county            |  planName 			                 	  							|			 
-	| 90210       | 15        | Los Angeles      | AARP MedicareComplete SecureHorizons Plan 1 (HMO) |	
+
+	Examples:
+	| zipcode     | distance  | county            | year     |  planName 			                 	  							|
+  | 90210       | 15        | Los Angeles       | 2017     | AARP MedicareComplete SecureHorizons Plan 1 (HMO) |
 	
 @zipcodeEntry
 Scenario Outline: To verify pharmacy locator zipcode entry in AARP site
@@ -96,11 +98,13 @@ And the user enters following details for pharmacy search in AARP Site
   | Zip Code	| <zipcode>	|
 	| Distance	| <distance>	|
 	| County Name	| <county>	|
-And the user chooses a plan from dropdown in AARP Site
-	| <planName> |
+And the user chooses the year and a plan from dropdown in AARP site
+	|  Year | <year> |
+	| Plan Name| <planName> |
+	
 Examples:
-	| zipcode     | distance  | county            |  planName 			                 	  							|			 
-	| 90210       | 15        | Los Angeles      | AARP MedicareComplete SecureHorizons Plan 1 (HMO) |	
+	| zipcode     | distance  | county            | year     |  planName 			                 	  							|
+  | 90210       | 15        | Los Angeles       | 2017     | AARP MedicareComplete SecureHorizons Plan 1 (HMO) |
 	
 @showonmap
 Scenario Outline: To verify pharmacy locator showmap in AARP site
@@ -110,13 +114,14 @@ When the user navigates to pharmacy search page in AARP Site
 And the user enters following details for pharmacy search in AARP Site
 	| Zip Code	| <zipcode>	|
 	| Distance	| <distance>	|	
-And the user chooses a plan from dropdown in AARP Site
-	| <planName> |
+And the user chooses the year and a plan from dropdown in AARP site
+	|  Year | <year> |
+	| Plan Name| <planName> |
 Then the user click on show on map link in AARP Site
 	
 Examples:
-	| zipcode     | distance  | planName 			                 	  							|			 
-	| 90210       | 15        | AARP MedicareComplete SecureHorizons Plan 1 (HMO) |
+	| zipcode     | distance  | county            | year     |  planName 			                 	  							|
+  | 90210       | 15        | Los Angeles       | 2017     | AARP MedicareComplete SecureHorizons Plan 1 (HMO) |
 	
 @resultpdf
 Scenario Outline: To verify pharmacy locator pdf results in AARP site
@@ -126,13 +131,14 @@ When the user navigates to pharmacy search page in AARP Site
 And the user enters following details for pharmacy search in AARP Site
 	| Zip Code	| <zipcode>	|
 	| Distance	| <distance>	|	
-And the user chooses a plan from dropdown in AARP Site
-	| <planName> |
+And the user chooses the year and a plan from dropdown in AARP site
+	|  Year | <year> |
+	| Plan Name| <planName> |
 Then the user click on view search PDF link in AARP Site
 	
 Examples:
-	| zipcode     | distance  | planName 			                 	  							|			 
-	| 90210       | 15        | AARP MedicareComplete SecureHorizons Plan 1 (HMO) |
+	| zipcode     | distance  | county            | year     |  planName 			                 	  							|
+  | 90210       | 15        | Los Angeles       | 2017     | AARP MedicareComplete SecureHorizons Plan 1 (HMO) |
 	
 	
 @googlemap
@@ -143,13 +149,14 @@ When the user navigates to pharmacy search page in AARP Site
 And the user enters following details for pharmacy search in AARP Site
 	| Zip Code	| <zipcode>	|
 	| Distance	| <distance>	|	
-And the user chooses a plan from dropdown in AARP Site
-	| <planName> |
+And the user chooses the year and a plan from dropdown in AARP site
+	|  Year | <year> |
+	| Plan Name| <planName> |
 Then the user validate google map colcor for pharmacy and standard network in AARP Site
 	
 Examples:
-	| zipcode     | distance  | planName 			                 	  							|			 
-	| 80002       | 15        | AARP MedicareComplete SecureHorizons Plan 1 (HMO) |
+	| zipcode     | distance  | county            | year     |  planName 			                 	  							|
+  | 90210       | 15        | Los Angeles       | 2017     | AARP MedicareComplete SecureHorizons Plan 1 (HMO) |
 	
 @MAplantype
 Scenario Outline: To verify MAplan for pharmacies in AARP site
@@ -160,13 +167,13 @@ And the user enters following details for pharmacy search in AARP Site
 	| Zip Code	| <zipcode>	|
 	| Distance	| <distance>|
 	| County Name	| <county>	|
-And the user chooses a plan from dropdown in AARP Site
-	| <planName> |
+And the user chooses the year and a plan from dropdown in AARP site
+	|  Year | <year> |
+	| Plan Name| <planName> |
 
 Examples:
-	Examples:
-	| zipcode     | distance  | county            |  planName 			                 	  							|			 
-	| 90210       | 15        | Los Angeles       | AARP MedicareComplete SecureHorizons Plan 1 (HMO) |	
+	| zipcode     | distance  | county            | year     |  planName 			                 	  							|
+  | 90210       | 15        | Los Angeles       | 2017     | AARP MedicareComplete SecureHorizons Plan 1 (HMO) |
 	
 @Widgets
 Scenario Outline: To verify MAplan for pharmacies in AARP site
@@ -177,14 +184,14 @@ And the user enters following details for pharmacy search in AARP Site
 	| Zip Code	| <zipcode>	|
 	| Distance	| <distance>|
 	| County Name	| <county>	|
-And the user chooses a plan from dropdown in AARP Site
-	| <planName> |
+And the user chooses the year and a plan from dropdown in AARP site
+	|  Year | <year> |
+	| Plan Name| <planName> |
 And the user validate pharmacy saver widget in AARP site
 
 Examples:
-	Examples:
-	| zipcode     | distance  | county            |  planName 			                 	  							|			 
-	| 90210       | 15        | Los Angeles       | AARP MedicareComplete SecureHorizons Plan 1 (HMO) |	
+	| zipcode     | distance  | county            | year     |  planName 			                 	  							|
+  | 90210       | 15        | Los Angeles       | 2017     | AARP MedicareComplete SecureHorizons Plan 1 (HMO) |
 
 @moreinfoPDPplantype
 Scenario Outline: To verify MAplan for pharmacies in AARP site
@@ -195,14 +202,15 @@ And the user enters following details for pharmacy search in AARP Site
 	| Zip Code	| <zipcode>	|
 	| Distance	| <distance>|
 	| County Name	| <county>	|
-And the user chooses a plan from dropdown in AARP Site
-	| <planName> |
+And the user chooses the year and a plan from dropdown in AARP site
+	|  Year | <year> |
+	| Plan Name| <planName> |
 And the user validate more information content based on plan type in AARP Site
 
 Examples:
-	Examples:
-	| zipcode     | distance  | county            |  planName 			                 	  							|			 
-	| 82001       | 15        | Los Angeles       | AARP MedicareRx Walgreens (PDP) |	
+	| zipcode     | distance  | county            | year     |  planName 			                 	  							|
+  | 90210       | 15        | Los Angeles       | 2017     | AARP MedicareComplete SecureHorizons Plan 1 (HMO) |
+
 
 
 @moreinfoMAplantype
@@ -214,14 +222,14 @@ And the user enters following details for pharmacy search in AARP Site
 	| Zip Code	| <zipcode>	|
 	| Distance	| <distance>|
 	| County Name	| <county>	|
-And the user chooses a plan from dropdown in AARP Site
-	| <planName> |
+And the user chooses the year and a plan from dropdown in AARP site
+	|  Year | <year> |
+	| Plan Name| <planName> |
 And the user validate more information content based on plan type in AARP Site
 
 Examples:
-	Examples:
-	| zipcode     | distance  | county            |  planName 			                 	  							|			 
-	| 90210       | 15        | Los Angeles       | AARP MedicareComplete SecureHorizons Plan 1 (HMO) |	
+	| zipcode     | distance  | county            | year     |  planName 			                 	  							|
+  | 90210       | 15        | Los Angeles       | 2017     | AARP MedicareComplete SecureHorizons Plan 1 (HMO) |
 
 
 @chatPDPplantype
@@ -233,14 +241,14 @@ And the user enters following details for pharmacy search in AARP Site
 	| Zip Code	| <zipcode>	|
 	| Distance	| <distance>|
 	| County Name	| <county>	|
-And the user chooses a plan from dropdown in AARP Site
-	| <planName> |
+And the user chooses the year and a plan from dropdown in AARP site
+	|  Year | <year> |
+	| Plan Name| <planName> |
 And the user validate chat widget in AARP Site
 
 Examples:
-	Examples:
-	| zipcode     | distance  | county            |  planName 			                | 		 
-	| 82001       | 15        | Los Angeles       | AARP MedicareRx Walgreens (PDP) |	
+	| zipcode     | distance  | county            | year     |  planName 			                 	  							|
+  | 90210       | 15        | Los Angeles       | 2017     | AARP MedicareComplete SecureHorizons Plan 1 (HMO) |
 	
 	
 @chatMAplantype
@@ -252,16 +260,15 @@ And the user enters following details for pharmacy search in AARP Site
 	| Zip Code	| <zipcode>	|
 	| Distance	| <distance>|
 	| County Name	| <county>	|
-And the user chooses a plan from dropdown in AARP Site
-	| <planName> |
+And the user chooses the year and a plan from dropdown in AARP site
+	|  Year | <year> |
+	| Plan Name| <planName> |
 And the user validate chat widget in AARP Site
 
 Examples:
-	Examples:
-	| zipcode     | distance  | county            |  planName 			                 	  							|			 
-	| 90210       | 15        | Los Angeles       | AARP MedicareComplete SecureHorizons Plan 1 (HMO) |
+	| zipcode     | distance  | county            | year     |  planName 			                 	  							|
+  | 90210       | 15        | Los Angeles       | 2017     | AARP MedicareComplete SecureHorizons Plan 1 (HMO) |
 	
-
 @TFNPDPplantype
 Scenario Outline: To verify toll free PDP plantype for pharmacies in AARP site
 Given the user is on the AARP Medicare Site landing page
@@ -271,14 +278,14 @@ And the user enters following details for pharmacy search in AARP Site
 	| Zip Code	| <zipcode>	|
 	| Distance	| <distance>|
 	| County Name	| <county>	|
-And the user chooses a plan from dropdown in AARP Site
-	| <planName> |
+And the user chooses the year and a plan from dropdown in AARP site
+	|  Year | <year> |
+	| Plan Name| <planName> |
 And the user validate TFN widget in AARP Site
 
 Examples:
-	Examples:
-	| zipcode     | distance  | county            |  planName 			                | 		 
-	| 82001       | 15        | Los Angeles       | AARP MedicareRx Walgreens (PDP) |	
+	| zipcode     | distance  | county            | year     |  planName 			                 	  							|
+  | 90210       | 15        | Los Angeles       | 2017     | AARP MedicareComplete SecureHorizons Plan 1 (HMO) |
 	
 	
 @TFNMAplantype
@@ -290,14 +297,14 @@ And the user enters following details for pharmacy search in AARP Site
 	| Zip Code	| <zipcode>	|
 	| Distance	| <distance>|
 	| County Name	| <county>	|
-And the user chooses a plan from dropdown in AARP Site
-	| <planName> |
+And the user chooses the year and a plan from dropdown in AARP site
+	|  Year | <year> |
+	| Plan Name| <planName> |
 And the user validate TFN widget in AARP Site
 
 Examples:
-	Examples:
-	| zipcode     | distance  | county            |  planName 			                 	  							|			 
-	| 90210       | 15        | Los Angeles       | AARP MedicareComplete SecureHorizons Plan 1 (HMO) |		
+	| zipcode     | distance  | county            | year     |  planName 			                 	  							|
+  | 90210       | 15        | Los Angeles       | 2017     | AARP MedicareComplete SecureHorizons Plan 1 (HMO) |
 	
 	
 @pharmacysaverwidget
@@ -349,11 +356,30 @@ And the user enters following details for pharmacy search in AARP Site
 And the user chooses the year and a plan from dropdown in AARP site
   |  Year | <year> |
 	| Plan Name| <planName> |	
-And the user searches for pharmacy search results available in AARP site
+And the user searches multi lang for pharmacy search results available in AARP site
    
 Examples:
 	| zipcode     | distance  | county            | year     |  planName 			                 	  							|			 
 	| 90210       | 15        | Los Angeles       | 2017     | AARP MedicareComplete SecureHorizons Plan 1 (HMO) |	
+	
+@spanishlanguage
+Scenario Outline: To verify pharmacy locator language in AARP site
+Given the user is on the AARP Medicare Site landing page
+When the user navigates to Request more info page
+When the user navigates to pharmacy search page in AARP Site
+Then the user validate multiple language dropdown menu in AARP site
+And the user enters following details for pharmacy search in AARP Site
+  | Zip Code	| <zipcode>	|
+	| Distance	| <distance>	|
+	| County Name	| <county>	|
+And the user chooses the year and a plan from dropdown in AARP site
+  |  Year | <year> |
+	| Plan Name| <planName> |	
+And the user searches multi lang for pharmacy search results available in AARP site
+
+Examples:
+	| zipcode     | distance  | county            | year     |  planName 			                 	  							|			 
+	| 90210       | 15        | Los Angeles       | 2017     | AARP MedicareComplete SecureHorizons Plan 1 (HMO) | 
 	
 	
 @resultpdfpharmacysaver

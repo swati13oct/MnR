@@ -97,7 +97,7 @@ public class PharmacySearchPage extends UhcDriver {
 	@FindBy(id = "plan-year")
 	private WebElement planYearDropDown;	
 
-	@FindBy(xpath = "//p[contains(.,'Pharmacy Saver™ Pharmacy ')]")
+	@FindBy(xpath = ".//*[@for='pharmacy-saver']")
 	private WebElement filterLink;
 	
 	@FindBy(xpath = "(//*[@id='lang-select']//option)[2]")
@@ -106,7 +106,8 @@ public class PharmacySearchPage extends UhcDriver {
 	@FindBy(xpath = "(.//*[@id='e8ac2588-cc57-4f00-af99-e99f38d2e3ea_toolTip']")
 	private WebElement toolTip;
 	
-	
+	@FindBy(xpath = ".//*[@for='pharmacy-saver']")
+	private WebElement multilangfilter;
 
 
 	public PharmacySearchPage(WebDriver driver) {
@@ -183,12 +184,12 @@ public class PharmacySearchPage extends UhcDriver {
 		return null;
 	}
 	
-	public PharmacyResultPage selectLanguage(){
+	public PharmacySearchPage selectspanLanguage(){
 			
 		language.click();
 		if (driver.getTitle().equalsIgnoreCase(
 				"Member Claims")) {
-			return new PharmacyResultPage(driver);
+			return new PharmacySearchPage(driver);
 		}
 
 		return null;
@@ -332,6 +333,16 @@ public class PharmacySearchPage extends UhcDriver {
 			System.out.println("Hovered over the tooltip");			
 		return null;
 	}
+	
+    public PharmacySearchPage multilangPharmacySearchResult() {
+		
+		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+		multilangfilter.click();
+		
+		return null;
+	}
+
+	
 	
 
 }
