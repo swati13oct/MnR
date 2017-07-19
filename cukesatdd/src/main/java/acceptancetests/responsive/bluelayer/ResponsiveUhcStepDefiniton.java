@@ -1,6 +1,16 @@
 package acceptancetests.responsive.bluelayer;
 
 import gherkin.formatter.model.DataTableRow;
+import pages.acquisition.bluelayer.BLayerPlanComparePage;
+import pages.acquisition.bluelayer.PortfolioPageUhc;
+import pages.acquisition.bluelayer.PortfolioTeamCUhc;
+import pages.acquisition.bluelayer.ResponsivePlanDetailsUhc;
+import pages.acquisition.bluelayer.ResponsivePlanSummaryUhc;
+import pages.acquisition.bluelayer.VPPAarpNeedAStepBackWidget;
+import pages.acquisition.bluelayer.VPPAarpNeedHelpWidgetPage;
+import pages.acquisition.bluelayer.VPPNeedMoreInformationWidget;
+import pages.acquisition.bluelayer.VPPRequestSendEmailPage;
+import pages.dashboard.member.blayer.DrugCostEstimatorPage;
 
 import java.util.HashMap;
 import java.util.List;
@@ -11,29 +21,18 @@ import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import pages.acquisition.bluelayer.BLayerPlanComparePage;
-import pages.acquisition.bluelayer.MAEnrollmentPage;
-import pages.acquisition.bluelayer.PlanDetailsPage;
-import pages.acquisition.bluelayer.PortfolioPageUhc;
-import pages.acquisition.bluelayer.PortfolioTeamCUhc;
-import pages.acquisition.bluelayer.ResponsivePlanDetailsUhc;
-import pages.acquisition.bluelayer.ResponsivePlanSummaryUhc;
-import pages.acquisition.bluelayer.VPPAarpNeedAStepBackWidget;
-import pages.acquisition.bluelayer.VPPAarpNeedHelpWidgetPage;
-import pages.acquisition.bluelayer.VPPNeedMoreInformationWidget;
-import pages.acquisition.bluelayer.VPPRequestSendEmailPage;
-import pages.acquisition.ulayer.ResponsivePlanDetails;
-import pages.acquisition.ulayer.ResponsivePlanSummary;
-import pages.dashboard.member.blayer.DrugCostEstimatorPage;
+import acceptancetests.atdd.data.CommonConstants;
+import acceptancetests.atdd.data.acquisition.PageConstants;
+import acceptancetests.vpp.data.VPPCommonConstants;
+import atdd.framework.MRScenario;
 import cucumber.annotation.en.And;
 import cucumber.annotation.en.Given;
 import cucumber.annotation.en.Then;
 import cucumber.annotation.en.When;
 import cucumber.table.DataTable;
-import acceptancetests.atdd.data.CommonConstants;
-import acceptancetests.atdd.data.acquisition.PageConstants;
-import acceptancetests.vpp.data.VPPCommonConstants;
-import atdd.framework.MRScenario;
+import pages.acquisition.bluelayer.BLayerPlanComparePage;
+
+
 
 public class ResponsiveUhcStepDefiniton {
 

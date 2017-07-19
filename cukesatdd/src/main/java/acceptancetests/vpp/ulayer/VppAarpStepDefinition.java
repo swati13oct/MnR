@@ -112,7 +112,7 @@ public class VppAarpStepDefinition {
 	}
 
 	@And("^the user views plans of the below plan type in AARP site$")
-	public void user_performs_planSearch_in_aarp_site(DataTable givenAttributes) {
+	public void user_performs_planSearch_in_aarp_site(DataTable givenAttributes) throws InterruptedException {
 		List<DataTableRow> givenAttributesRow = givenAttributes
 				.getGherkinRows();
 		Map<String, String> givenAttributesMap = new HashMap<String, String>();
@@ -165,7 +165,7 @@ public class VppAarpStepDefinition {
 /*------- */
 	
 	@And("^the user selects the plan in AARP site$")
-	public void user_selects_plan(DataTable givenAttributes){
+	public void user_selects_plan(DataTable givenAttributes) throws InterruptedException{
 		List<DataTableRow> givenAttributesRow = givenAttributes
 				.getGherkinRows();
 		Map<String, String> givenAttributesMap = new HashMap<String, String>();
@@ -1186,7 +1186,7 @@ System.out.println("planSummaryExpectedJson---->"
 	}
 	
 	@When("^the user views plans of the below plan type in AARP site during AEP$")
-	public void user_performs_planSearch_in_aarp_site_aep(DataTable givenAttributes) {
+	public void user_performs_planSearch_in_aarp_site_aep(DataTable givenAttributes) throws InterruptedException {
 		List<DataTableRow> givenAttributesRow = givenAttributes
 				.getGherkinRows();
 		Map<String, String> givenAttributesMap = new HashMap<String, String>();
@@ -1425,7 +1425,7 @@ System.out.println("planSummaryExpectedJson---->"
 	}
 
 	@Then ("^user select MA/MAPD/PDP plans on plan summary page using following information during AEP period$")
-	public void click_on_showplans(DataTable givenAttributes) {
+	public void click_on_showplans(DataTable givenAttributes) throws InterruptedException {
 		VPPPlanSummaryPage plansummary = (VPPPlanSummaryPage) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 		List<DataTableRow> memberAttributesRow = givenAttributes
@@ -1488,7 +1488,7 @@ System.out.println("planSummaryExpectedJson---->"
 	}
 	
 	@When("^the user navigates to the following plan type$")
-	public void planType_details_in_aarp_site(DataTable givenAttributes) {
+	public void planType_details_in_aarp_site(DataTable givenAttributes) throws InterruptedException {
 
 		List<DataTableRow> memberAttributesRow = givenAttributes
 				.getGherkinRows();
@@ -1536,7 +1536,7 @@ System.out.println("planSummaryExpectedJson---->"
 			
 	}
 	@When("user views plans of the below plan in aarp site$")
-	public void user_performs_planSearch_UMS_site(DataTable givenAttributes) {
+	public void user_performs_planSearch_UMS_site(DataTable givenAttributes) throws InterruptedException {
 		List<DataTableRow> givenAttributesRow = givenAttributes
 				.getGherkinRows();
 		Map<String, String> givenAttributesMap = new HashMap<String, String>();

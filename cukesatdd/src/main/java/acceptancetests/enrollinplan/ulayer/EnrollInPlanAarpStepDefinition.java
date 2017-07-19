@@ -143,7 +143,7 @@ public class EnrollInPlanAarpStepDefinition {
 	}
 
 	@And("^the user views plans of the below plan type in AARP site$")
-	public void user_performs_planSearch_in_aarp_site(DataTable givenAttributes) {
+	public void user_performs_planSearch_in_aarp_site(DataTable givenAttributes) throws InterruptedException {
 		List<DataTableRow> givenAttributesRow = givenAttributes
 				.getGherkinRows();
 		Map<String, String> givenAttributesMap = new HashMap<String, String>();

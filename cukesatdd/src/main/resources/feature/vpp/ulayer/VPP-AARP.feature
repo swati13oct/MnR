@@ -152,7 +152,7 @@ Examples:
    #| 90210   | Los Angeles County | MA       |  AARP MedicareComplete SecureHorizons Plan 2 (HMO)    |
 	| 80210   | Denver County      | MA       |  AARP MedicareComplete SecureHorizons Plan 1 (HMO)    |
 	
-	
+
 Scenario Outline: Verify Enroll now link on plan summary page in AARP site for AEP only from 15th October till 30th November
 Given the user is on the aquisition AARP medicare site home page 
 When the user performs plan search using following information in aquisition AARP site during AEP period

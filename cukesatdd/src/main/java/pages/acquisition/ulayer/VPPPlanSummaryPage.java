@@ -270,10 +270,11 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		return validatePopup;
 	}
 
-	public VPPPlanSummaryPage viewPlanSummary(String planType) {
+	public VPPPlanSummaryPage viewPlanSummary(String planType) throws InterruptedException {
 		if (planType.equalsIgnoreCase("PDP")) {
 			showPdpPlans.click();
 		} else if (planType.equalsIgnoreCase("MA") || planType.equalsIgnoreCase("MAPD")) {
+			Thread.sleep(3000);
 			showMaPlans.click();
 		} else if (planType.equalsIgnoreCase("MS")) {
 			showMsPlans.click();
