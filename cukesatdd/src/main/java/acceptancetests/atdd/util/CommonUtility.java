@@ -5,8 +5,10 @@ package acceptancetests.atdd.util;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.Calendar;
 import java.util.Iterator;
+import java.util.List;
 import java.util.TimeZone;
 
 import org.codehaus.jackson.JsonParseException;
@@ -34,7 +36,7 @@ public class CommonUtility {
 	private static String MRREST_TIME_ADMIN_URL = MRConstants.MRREST_TIME_ADMIN_URL;
 
 	private static String PARTD_TIME_ADMIN_URL = MRConstants.PARTD_TIME_ADMIN_URL;
-
+	
 	public static boolean checkPageIsReady(WebDriver driver) {
 
 		JavascriptExecutor js = (JavascriptExecutor) driver;
@@ -283,5 +285,64 @@ public class CommonUtility {
 			driver.quit();
 		}
 
+	}
+
+	public static void createVersionFile(MRScenario globalScenario) {
+		System.out.println("inside version method");
+		WebDriver wd = globalScenario.getWebDriver();
+		try {
+
+			int widthMaxLimit = 45;
+			PrintWriter writer = new PrintWriter("target/version.txt", "UTF-8");
+			String headerCol1 = "Artifact Name";
+			String headerLine = headerCol1
+					+ String.format("%" + (widthMaxLimit - headerCol1.length())
+							+ "s", "") + "Build Number";
+			writer.println(headerLine);
+
+			wd.get("https://ci-generic.uhc.com/content/cqartifactsversion.html");
+			List<WebElement> rows = wd.findElements(By
+					.xpath("//table[@id='package_info_table']/tbody/tr"));
+
+			for (WebElement row : rows) {
+				String artifactName = row.findElements(By.tagName("td")).get(0)
+						.getText();
+				String buildNumber = row.findElements(By.tagName("td")).get(1)
+						.getText();
+				row.findElements(By.tagName("td")).get(2).getText();
+				String line = artifactName
+						+ String.format(
+								"%" + (widthMaxLimit - artifactName.length())
+										+ "s", "") + buildNumber;
+				writer.println(line);
+			}
+
+			wd.get("http://mrrest-ci.ose.optum.com/MRRestWAR/version.jsp");
+			String mrrestAppName = "MRRestWAR";
+			String mrrLine = mrrestAppName
+					+ String.format(
+							"%" + (widthMaxLimit - mrrestAppName.length())
+									+ "s", "")
+					+ wd.findElement(
+							By.xpath("//table[@class='outer']/tbody/tr[3]/td[2]"))
+							.getText();
+			writer.println(mrrLine);
+
+			wd.get("http://partdtemp-ci.ose.optum.com/PartDPortalWeb/version.jsp");
+			String partdAppName = "PartDPortalWeb";
+			String partDLine = partdAppName
+					+ String.format(
+							"%" + (widthMaxLimit - partdAppName.length()) + "s",
+							"")
+					+ wd.findElement(
+							By.xpath("//table[@class='outer']/tbody/tr[7]/td[2]"))
+							.getText();
+			writer.println(partDLine);
+			writer.close();
+		} catch (IOException e) {
+			System.out.println("ERROR creating version text file");
+		}
+
+		wd.close();
 	}
 }

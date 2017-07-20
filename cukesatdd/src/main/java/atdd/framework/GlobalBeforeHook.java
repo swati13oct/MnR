@@ -1,7 +1,10 @@
 package atdd.framework;
 
+import java.io.File;
+
 import org.springframework.beans.factory.annotation.Autowired;
 
+import acceptancetests.atdd.util.CommonUtility;
 import cucumber.api.java.Before;
 
 
@@ -12,6 +15,8 @@ import cucumber.api.java.Before;
  *
  */
 public class GlobalBeforeHook implements BeforeHook {
+	
+	private static final String VERSION_FILE_PATH = "target//version.txt";
 	
 	@Autowired 
 	MRScenario globalScenario;
@@ -27,6 +32,11 @@ public class GlobalBeforeHook implements BeforeHook {
 
 	@Before
 	public void setup() throws Exception {
+		
+		File f = new File(VERSION_FILE_PATH);
+		if(!f.exists()){
+			CommonUtility.createVersionFile(globalScenario);
+		}
 		
 		Runtime.getRuntime().addShutdownHook(new Thread() {
 			public void run() {
