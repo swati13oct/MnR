@@ -132,7 +132,7 @@ node('docker-maven-slave') {
 	stage('Trigger Downstream TestSuite'){
 		//trigger tests
 		if("${env.BRANCH_NAME}" == "upgradedATDD"){
-            build job: '/atdd/upgradedATDD/', parameters: [string(name: 'BRANCH_NAME', value: "${env.BRANCH_NAME}"), string(name: 'RUNNER_NAME', value: 'RunMRATDDFixedTests'), string(name: 'ATDD_TAGS', value: '@fixedTestCaseTest'), string(name: 'ENVIRONMENT', value: 'ci'), string(name: 'WEBDRIVER_HOST', value: 'headless')], wait:false
+            build job: '/atdd/ATDD-DataLoad/', wait: false
 		}
 	}
 }

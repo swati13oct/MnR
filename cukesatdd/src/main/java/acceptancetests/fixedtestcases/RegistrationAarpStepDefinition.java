@@ -26,6 +26,7 @@ import acceptancetests.atdd.util.CommonUtility;
 import acceptancetests.registration.data.RegistrationConstants;
 import atdd.framework.MRScenario;
 import cucumber.api.DataTable;
+import cucumber.api.java.After;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
@@ -286,6 +287,14 @@ public class RegistrationAarpStepDefinition {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	}
+	
+	@After("@Registration")
+	public void getVersionData()
+	{
+		
+		CommonUtility.createVersionFile((WebDriver) getLoginScenario()
+				.getBean(CommonConstants.WEBDRIVER));
 	}
 
 }
