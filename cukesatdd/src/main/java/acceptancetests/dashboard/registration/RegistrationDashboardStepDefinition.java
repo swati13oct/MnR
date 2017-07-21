@@ -361,6 +361,18 @@ public void VerifyAdditionPlanInformtionSeaction() {
                                                 getLoginScenario().getBean(PageConstants.REGISTRATION_INFORMATION_PAGE);
                 registrationInformationPage.getAdditionalPlanInfoHeader().isDisplayed();
                 
+                
+                
 }
+
+@Then("the member validates pffs member error message$")
+public void pffsMemberErrorMessage() {
+	RegistrationInformationPage registrationInformationPage = (RegistrationInformationPage) 
+            getLoginScenario().getBean(PageConstants.REGISTRATION_INFORMATION_PAGE);
+	registrationInformationPage.validatePffsMemberErrorMessage();
+	
+}
+
+
 
 }

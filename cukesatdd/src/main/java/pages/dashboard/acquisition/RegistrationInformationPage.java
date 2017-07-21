@@ -1,5 +1,6 @@
 package pages.dashboard.acquisition;
 
+import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -169,6 +170,10 @@ public class RegistrationInformationPage extends UhcDriver {
        /** The Additional Plan Information Header. */
        @FindBy(id = "addPlanHeading")
        private WebElement additionalInfoHeader;
+       
+       /**Pffs Error message. */
+       @FindBy(xpath = ".//*[@id='register-form']/div[1]/div/div/div/div/p")
+       private WebElement pffsErrorMessage;
 
        public RegistrationInformationPage(WebDriver driver) {
               super(driver);
@@ -510,5 +515,15 @@ public class RegistrationInformationPage extends UhcDriver {
               validate(nextButton);
 
        }
+                 }
+       
+       public void validatePffsMemberErrorMessage(){
+    	   if (!pffsErrorMessage.isDisplayed()){
+    		   Assert.assertTrue("pffs Error Message is not displayed", false);
+    		   
+    	   }else{
+    		   
+    		   Assert.assertTrue("pffs Error Message is displayed", true); }
+    	   
        }
        }
