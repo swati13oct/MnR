@@ -375,4 +375,38 @@ And User clicks on change location
  Examples:	 
 	  | planTypeCriteria |planName                                        |            
 	  |	Endorsed         |UnitedHealthcare Group Medicare Advantage (PPO) |
+<<<<<<< HEAD
+
+
+@US689310
+Scenario Outline: To validate DCE Section on Plan Compare page
+Given the user is on the  team-c vpp portfolio page
+Then the user performs plan search TeamC using zipcode
+              | Zip Code |<zipCode>|
+              | County   |<county> |
+Then the user navigates to the TeamC plan type
+| PlanType | <planType> |
+And User selects Plans to compare
+Then user validates DCE Section
+
+Examples:
+|zipCode|county          |planType|
+|90210 |Los Angeles County| MA     |
+
+@US689260
+Scenario Outline: To validate the Provider section is enabled
+Given the user is on the  team-c vpp portfolio page
+Then the user performs plan search TeamC using zipcode
+              | Zip Code |<zipCode>|
+              | County   |<county> |
+Then the user navigates to the TeamC plan type
+| PlanType | <planType> |
+And User selects Plans to compare
+Then user validates Provider Section is enabled
+
+Examples:
+|zipCode|county          |planType|
+|90210 |Los Angeles County| MA     |
+=======
+>>>>>>> parent of 71ed3c7... F100852:US689310 - Mobile Shopping Plan Compare Page - BLayer - Integration with DCE
 								

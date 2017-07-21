@@ -244,6 +244,33 @@ public class ResponsiveUhcStepDefiniton {
 		}
 	}
 
+<<<<<<< HEAD
+	
+	@Then("^user validates DCE Section$")
+	public void DCE_section() throws InterruptedException{
+		BLayerPlanComparePage GoToFootNotesSection = (BLayerPlanComparePage) getLoginScenario()
+				.getBean(PageConstants.TeamC_Plan_Compare_Page);
+		BLayerPlanComparePage BLayerTeamCFootNotes = GoToFootNotesSection.DCEValidation();
+		if(BLayerTeamCFootNotes!=null){
+			getLoginScenario().saveBean(PageConstants.TeamC_FootNotes_Section, BLayerTeamCFootNotes);
+		}else{
+			Assert.fail();
+		}
+	}
+	
+	@Then("^user validates Provider Section is enabled$")
+	public void Provider_section() throws InterruptedException{
+		BLayerPlanComparePage GoToFootNotesSection = (BLayerPlanComparePage) getLoginScenario()
+				.getBean(PageConstants.TeamC_Plan_Compare_Page);
+		BLayerPlanComparePage BLayerTeamCFootNotes = GoToFootNotesSection.ProviderValidation();
+		if(BLayerTeamCFootNotes!=null){
+			getLoginScenario().saveBean(PageConstants.TeamC_FootNotes_Section, BLayerTeamCFootNotes);
+		}else{
+			Assert.fail();
+		}
+	}
+=======
+>>>>>>> parent of 71ed3c7... F100852:US689310 - Mobile Shopping Plan Compare Page - BLayer - Integration with DCE
 
 	@And ("^the user validates plan highlights$")
 	public void user_validates_planHighlights_poviderLink(){
