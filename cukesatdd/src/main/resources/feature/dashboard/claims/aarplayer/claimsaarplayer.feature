@@ -146,7 +146,7 @@ And the user validates the EOB section based on domain in redesigned site
 
 Examples:
 | planType | claimPeriod       | domain |
-| SHIP     | Last 6 Months    |  NA    |
+| SHIP     | Last 24 Months    |  NA    |
 
 @claimsDetailsTableFED
 Scenario Outline: To Verify Claim Table on Claims Details Page

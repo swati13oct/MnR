@@ -1,6 +1,7 @@
 package acceptancetests.dashboard.claims.aarplayer;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -136,10 +137,24 @@ public class ClaimsAarpStepDefinition {
 	@And("^the user search claims for the following claim period in AARP site$")
 	public void search_claims_period_redesigned_site(DataTable timeAttributes){
 		List<DataTableRow> timeAttributesRow = timeAttributes.getGherkinRows();
-		String claimPeriod = timeAttributesRow.get(0).getCells().get(0);
+		Map<String, String> urlAttributesMap = new HashMap<String, String>();
+
+		for (int i = 0; i < timeAttributesRow.size(); i++) {
+
+		urlAttributesMap .put(timeAttributesRow.get(i).getCells()
+		.get(0), timeAttributesRow.get(i).getCells().get(1));
+		}
+		
+		System.out.println(urlAttributesMap.get("Claim Period"));
+		String s=urlAttributesMap.get("Claim Period");
+		
+		//String claimPeriod = timeAttributesRow.get(0).getCells().get(0);
+		//String s = urlAttributesMap.get(key)
+		//System.out.println(claimPeriod);
 
 		ClaimSummarypage newClaimsSummaryPage = (ClaimSummarypage) getLoginScenario().getBean(PageConstants.NEW_CLAIMS_SUMMARY_PAGE);
-		newClaimsSummaryPage.searchClaimsByTimePeriod(claimPeriod);
+		
+		newClaimsSummaryPage.searchClaimsByTimePeriod("s");
 
 		if(newClaimsSummaryPage != null)
 			getLoginScenario().saveBean(PageConstants.NEW_CLAIMS_SUMMARY_PAGE, newClaimsSummaryPage);

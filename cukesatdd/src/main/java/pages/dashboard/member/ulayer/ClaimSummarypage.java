@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.omg.CORBA.PUBLIC_MEMBER;
+import org.openqa.selenium.By;
 /**
  * 
  */
@@ -55,11 +56,15 @@ public class ClaimSummarypage extends UhcDriver{
 	@FindBy(xpath = "//div[2]/section/div/div/div/form/fieldset/div/div/div[2]/div/select/option[@value='6 months']")
 	private WebElement last6Months;
 	
+	@FindBy (xpath = "//option[@value='24 months']")
+	private WebElement last24months;
+	
 	@FindBy(xpath="//div[normalize-space()='Prescription Drug']")
 	private WebElement claimTypePDP;
 
 	@FindBy(id="document-date")
 	private WebElement viewClaimsFrom;
+	
 
 	@FindBy (xpath="(.//*[@id='summaryview']//section/div/div/div/p)[1]")                    
 	private WebElement claimsCopyText;
@@ -91,7 +96,7 @@ public class ClaimSummarypage extends UhcDriver{
 	@FindBy (xpath="//h2[contains(.,'Prescription Drug EOB')]")
 	private WebElement PrescriptionEobText;
 	
-	@FindBy (xpath="//h2[contains(.,'SHIP EOB')]")
+	@FindBy (xpath="//a[contains(.,'Ship EOBSEARCH YOUR HISTORY')]")
 	private WebElement ShipClaimsEobText;
 
 	@FindBy (xpath=".//*[@id='table-medical']/div[2]/div[1]/div/a")
@@ -294,7 +299,7 @@ public class ClaimSummarypage extends UhcDriver{
 
 	public void searchClaimsByTimeInterval(String toDate, String fromDate) {
 		System.out.println("The title of the page is-------->"+driver.getTitle());
-		if(driver.getTitle().equalsIgnoreCase("Member Claims")){
+		if(driver.getTitle().equalsIgnoreCase("Claims")){
 
 			customSearch.click();
 
@@ -309,9 +314,15 @@ public class ClaimSummarypage extends UhcDriver{
 	public void searchClaimsByTimePeriod(String claimPeriod) {
 		System.out.println("The title of the page is-------->"+driver.getTitle());
 		System.out.println("The URL of the page is---------->"+driver.getCurrentUrl());
-		if(driver.getTitle().equalsIgnoreCase("Member Claims")){
-			CommonUtility.waitForPageLoad(driver, last6Months, 60);
-			last6Months.click();
+		if(driver.getTitle().equalsIgnoreCase("Claims")){
+			
+			Select dropdown = new Select(driver.findElement(By.id("document-date")));
+			
+			dropdown.selectByVisibleText("Last 24 months");
+			
+			
+			//CommonUtility.waitForPageLoad(driver, last24months, 60);
+			//last24months.click();
 			/*Select claimsFrom = new Select(viewClaimsFrom);
 			claimsFrom.selectByValue("24 months");*/
 		}
