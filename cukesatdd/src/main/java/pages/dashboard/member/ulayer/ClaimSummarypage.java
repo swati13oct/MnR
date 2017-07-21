@@ -90,10 +90,10 @@ public class ClaimSummarypage extends UhcDriver{
 	@FindBy (xpath=".//*[@id='summaryview']/div/div/main/div/div[2]/section/div/div/div[2]/div/div/ul")
 	private WebElement claimsTablePagination;
 
-	@FindBy (xpath="//h2[contains(.,'Medical EOB')]")
+	@FindBy (xpath="//div[not (contains(@class,'ng-hide')) and contains(@ng-show,'AEM')]//div[@id='ma_mapd']//a")
 	private WebElement medicalEobText;
 
-	@FindBy (xpath="//h2[contains(.,'Prescription Drug EOB')]")
+	@FindBy (xpath="//div[not (contains(@class,'ng-hide')) and contains(@ng-show,'AEM')]//div[@id='pdp_mapd']//a")
 	private WebElement PrescriptionEobText;
 	
 	@FindBy (xpath="//a[contains(.,'Ship EOBSEARCH YOUR HISTORY')]")
@@ -226,7 +226,7 @@ public class ClaimSummarypage extends UhcDriver{
 			System.out.println("for MAPD NICE prescription drug EOB's are displayed ===>"+ (PrescriptionEobText.isDisplayed()));
 			return PrescriptionEobText.isDisplayed();
 		}
-		else if (plantype.equals("MA"))
+		else if (domain.equals("NICE")&&plantype.equals("MA"))
 		{
 			System.out.println("for MA medical Eob is diplayed ====>"+ (medicalEobText.isDisplayed()));
 			return medicalEobText.isDisplayed();

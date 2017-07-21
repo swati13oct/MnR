@@ -121,17 +121,19 @@ Scenario Outline: To validate the claims present for the Federal member on claim
 Given I am an AARP member on the redesigned site
       | Plan Type | <planType> |
 When I navigate to the claims Summary page in redesigned site
-And the user search claims for the following time interval in redesigned site
-	| Claims To Date   | <claimToDate>   |
-	| Claims From Date | <claimFromDate>  |
+And the user search claims for the following claim period in AARP site
+	| Claim Period | <claimPeriod> |
+#And the user search claims for the following time interval in redesigned site
+	#| Claims To Date   | <claimToDate>   |
+	#| Claims From Date | <claimFromDate>  |
 Then user validates the claims displayed based on the selection in redesigned site
 And the user validates the EOB section based on domain in redesigned site
 	| Domain | <domain> |
 And the user validates the DownloadMyData section in redesigned site
 
 Examples:
-| planType | claimFromDate | claimToDate | domain  |
-| MA       | 09-01-2017    | 04-14-2017  | COSMOS  |
+| planType | claimPeriod      | domain  |
+| MA       |   Last 24 Months | NICE    |
 
 @claimsSummarySHIP
 Scenario Outline: To validate the claims present for the SHIP member on claims sumamry page for AARP site
