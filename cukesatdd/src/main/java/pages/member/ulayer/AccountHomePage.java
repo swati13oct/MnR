@@ -18,6 +18,9 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+
+
+
 import org.openqa.selenium.support.ui.Select;
 
 import acceptancetests.atdd.data.CommonConstants;
@@ -588,14 +591,18 @@ public class AccountHomePage extends UhcDriver {
 
 	public pages.dashboard.member.ulayer.ClaimSummarypage navigateToClaimsSummaryPage() {
 		// TODO Auto-generated method stub
-		String url = "https://member.team-b-aarpmedicareplans.uhc.com/home/claims.html";
-		driver.get(url);
+		//String url = "https://member.team-b-aarpmedicareplans.uhc.com/home/claims.html";
+		String testharnessUrl = "https://member.team-b-aarpmedicareplans.uhc.com/content/aarpm/home/testharness.html";
+		driver.get(testharnessUrl);
+		driver.findElement(By.xpath("//a[contains(.,'Go to Claims Link page')]")).click();
+		
 		/*
 		 * try { Thread.sleep(1000); } catch (InterruptedException e) { // TODO
 		 * Auto-generated catch block e.printStackTrace(); }
 		 */
+      System.out.println(driver.getTitle());
 
-		if (driver.getTitle().equals("Member Claims")) {
+		if (driver.getTitle().equalsIgnoreCase("Claims")) {
 			return new pages.dashboard.member.ulayer.ClaimSummarypage(driver);
 
 		}
