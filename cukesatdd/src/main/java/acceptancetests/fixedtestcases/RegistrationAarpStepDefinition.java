@@ -293,8 +293,7 @@ public class RegistrationAarpStepDefinition {
 	public void getVersionData()
 	{
 		
-		CommonUtility.createVersionFile((WebDriver) getLoginScenario()
-				.getBean(CommonConstants.WEBDRIVER));
+		CommonUtility.createVersionFile(getLoginScenario());
 	}
 
 }

@@ -287,8 +287,10 @@ public class CommonUtility {
 
 	}
 
-	public static void createVersionFile(WebDriver wd) {
+	public static void createVersionFile(MRScenario mrScenario) {
 		System.out.println("inside version method");
+		
+		WebDriver wd = mrScenario.getWebDriver();
 		try {
 
 			int widthMaxLimit = 45;
@@ -341,5 +343,6 @@ public class CommonUtility {
 		} catch (IOException e) {
 			System.out.println("ERROR creating version text file");
 		}
+		wd.quit();
 	}
 }
