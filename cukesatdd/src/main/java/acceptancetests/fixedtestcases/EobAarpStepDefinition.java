@@ -225,11 +225,4 @@ public class EobAarpStepDefinition {
 			
 	}
 
-	@After
-	public void tearDown() {
-
-		WebDriver wd = (WebDriver) getLoginScenario().getBean("webDriver");
-		wd.quit();
-	}
-
 }

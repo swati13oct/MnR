@@ -289,10 +289,18 @@ public class RegistrationAarpStepDefinition {
 		}
 	}
 	
+	
+	/*
+	 * Below code fetches versions of all artifacts deployed on which Current ATDD Test suite run
+	 * 
+	 * Triggering only on @Registration , just to have this file created only once
+	 * 
+	 * For queries reach out to Praveen Yadav (pperugu)- ATeam 
+	 */
+	
 	@After("@Registration")
 	public void getVersionData()
 	{
-		
 		CommonUtility.createVersionFile(getLoginScenario());
 	}
 

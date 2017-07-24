@@ -288,11 +288,8 @@ public class CommonUtility {
 	}
 
 	public static void createVersionFile(MRScenario mrScenario) {
-		System.out.println("inside version method");
-		
 		WebDriver wd = mrScenario.getWebDriver();
 		try {
-
 			int widthMaxLimit = 45;
 			PrintWriter writer = new PrintWriter("target/version.txt", "UTF-8");
 			String headerCol1 = "Artifact Name";
@@ -301,46 +298,74 @@ public class CommonUtility {
 							+ "s", "") + "Build Number";
 			writer.println(headerLine);
 
-			wd.get("https://ci-generic.uhc.com/content/cqartifactsversion.html");
-			List<WebElement> rows = wd.findElements(By
-					.xpath("//table[@id='package_info_table']/tbody/tr"));
+			try {
+				wd.get("https://ci-generic.uhc.com/content/cqartifactsversion.html");
+				List<WebElement> rows = wd.findElements(By
+						.xpath("//table[@id='package_info_table']/tbody/tr"));
 
-			for (WebElement row : rows) {
-				String artifactName = row.findElements(By.tagName("td")).get(0)
-						.getText();
-				String buildNumber = row.findElements(By.tagName("td")).get(1)
-						.getText();
-				row.findElements(By.tagName("td")).get(2).getText();
-				String line = artifactName
-						+ String.format(
-								"%" + (widthMaxLimit - artifactName.length())
-										+ "s", "") + buildNumber;
-				writer.println(line);
+				for (WebElement row : rows) {
+					String artifactName = row.findElements(By.tagName("td"))
+							.get(0).getText();
+					String buildNumber = row.findElements(By.tagName("td"))
+							.get(1).getText();
+					row.findElements(By.tagName("td")).get(2).getText();
+					String line = artifactName
+							+ String.format(
+									"%"
+											+ (widthMaxLimit - artifactName
+													.length()) + "s", "")
+							+ buildNumber;
+					writer.println(line);
+				}
+			} catch (Exception e1) {
+				// e1.printStackTrace();
+				System.out.println("ERROR getting CQ Artifacts version");
 			}
-
-			wd.get("http://mrrest-ci.ose.optum.com/MRRestWAR/version.jsp");
 			String mrrestAppName = "MRRestWAR";
-			String mrrLine = mrrestAppName
-					+ String.format(
-							"%" + (widthMaxLimit - mrrestAppName.length())
-									+ "s", "")
-					+ wd.findElement(
-							By.xpath("//table[@class='outer']/tbody/tr[3]/td[2]"))
-							.getText();
-			writer.println(mrrLine);
-
-			wd.get("http://partdtemp-ci.ose.optum.com/PartDPortalWeb/version.jsp");
+			try {
+				wd.get("http://mrrest-ci.ose.optum.com/MRRestWAR/version.jsp");
+				
+				String mrrLine = mrrestAppName
+						+ String.format(
+								"%" + (widthMaxLimit - mrrestAppName.length())
+										+ "s", "")
+						+ wd.findElement(
+								By.xpath("//table[@class='outer']/tbody/tr[3]/td[2]"))
+								.getText();
+				writer.println(mrrLine);
+			} catch (Exception e2) {
+				// e.printStackTrace();
+				String mrrLine = mrrestAppName
+						+ String.format(
+								"%" + (widthMaxLimit - mrrestAppName.length())
+										+ "s", "")
+						+"Failed to load Build NUmber(Deployment Failed)";
+				writer.println(mrrLine);
+				System.out.println("ERROR getting MRREST application version");
+			}
 			String partdAppName = "PartDPortalWeb";
-			String partDLine = partdAppName
-					+ String.format(
-							"%" + (widthMaxLimit - partdAppName.length()) + "s",
-							"")
-					+ wd.findElement(
-							By.xpath("//table[@class='outer']/tbody/tr[7]/td[2]"))
-							.getText();
-			writer.println(partDLine);
+			try {
+				wd.get("http://partdtemp-ci.ose.optum.com/PartDPortalWeb/version.jsp");
+				String partDLine = partdAppName
+						+ String.format(
+								"%" + (widthMaxLimit - partdAppName.length())
+										+ "s", "")
+						+ wd.findElement(
+								By.xpath("//table[@class='outer']/tbody/tr[7]/td[2]"))
+								.getText();
+				writer.println(partDLine);
+			} catch (Exception e3) {
+				// e.printStackTrace();
+				String partDLine = partdAppName
+						+ String.format(
+								"%" + (widthMaxLimit - partdAppName.length())
+										+ "s", "")
+						+ "Failed to load Build Number(Deployment Failed)";
+				writer.println(partDLine);
+				System.out.println("ERROR getting PartD application version");
+			}
 			writer.close();
-		} catch (IOException e) {
+		} catch (Exception e) {
 			System.out.println("ERROR creating version text file");
 		}
 		wd.quit();
