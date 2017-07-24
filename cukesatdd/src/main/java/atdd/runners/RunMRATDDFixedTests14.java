@@ -14,9 +14,9 @@ import cucumber.api.CucumberOptions;
  */
 
 @RunWith(ExtendedCucumber.class)
-@ExtendedCucumberOptions(screenShotSize="", screenShotLocation="/screenshots/",jsonReport = "target/cucumber-RunMRATDDFixedTests11.json",detailedReport = true, detailedAggregatedReport = true, overviewReport = true, toPDF = true, outputFolder = "target")
+@ExtendedCucumberOptions(screenShotSize="", screenShotLocation="/screenshots/",jsonReport = "target/cucumber-RunMRATDDFixedTests14.json",detailedReport = true, detailedAggregatedReport = true, overviewReport = true, toPDF = true, outputFolder = "target")
 @CucumberOptions(glue = { "atdd.framework", "acceptancetests.fixedtestcases" }, features = { "src/main/resources/feature/fixedtestcases" }, plugin = {
-		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDFixedTests11.json" }, tags = { "@AcqProviderSearchUlayer" })
-public class RunMRATDDFixedTests11 {
+		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDFixedTests14.json" }, tags = { "@eob" })
+public class RunMRATDDFixedTests14 {
 
 }

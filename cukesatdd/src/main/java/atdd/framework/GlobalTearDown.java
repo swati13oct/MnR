@@ -1,8 +1,13 @@
 package atdd.framework;
 
 
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
+import org.openqa.selenium.WebDriver;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import acceptancetests.atdd.data.CommonConstants;
+import cucumber.api.Scenario;
 import cucumber.api.java.After;
 /**
  * This class will take a screen shot of the last screen executed by
@@ -46,12 +51,18 @@ public class GlobalTearDown {
 	 * @param scenario
 	 */
 	@After
-	public void tearDown() {
+	public void tearDown(Scenario scenario) {
 
-		//Clean up the existing webdriver.
-		if(null !=getLoginScenario()  && null!=getLoginScenario().webDriver )
+		if(null !=getLoginScenario()  && null!=getLoginScenario().getBean(CommonConstants.WEBDRIVER))
 		{
-			getLoginScenario().webDriver.quit();
+		    WebDriver wd  =(WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
+			final byte[] screenshot = ((TakesScreenshot) wd).getScreenshotAs(OutputType.BYTES);
+			
+			//To get the report embedded in the report
+			scenario.embed(screenshot, "image/png");
+			
+			//Clean up the existing webdriver.
+		    wd.quit();
 		}
 
 	}
