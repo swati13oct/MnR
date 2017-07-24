@@ -23,10 +23,18 @@ And user validates the Summary, functionality of Drugs link, Costs link and func
 
 @acq_drug_cost_estimator_disclaimer
 Scenario: As a prospective member using the DCE tool on the M&R portal site, I want to be able to choose my dosage, package and frequency when assembling a drug list on either a desktop or mobile device so I can eventually choose a pharmacy and accurately estimate the cost of my drugs.
-Given the user is on AARP medicare site landing page
+Given the user is on UHC medicare site landing page
 When I access the acquisition DCE tool from home page
 Then I should see all generic headers and elements
 And I should see step 1 disclaimers link at the bottom
 And I navigate to step2 page
 And I should see step 2 disclaimers link at the bottom
 And I navigate to step3 page
+
+@acq_drug_cost_estimator_yearplan
+Scenario: As a prospective member using the DCE tool on the M&R portal site, the user will be able to select option for 2017/2018 Plans
+Given the user is on UHC medicare site landing page
+When I access the acquisition DCE tool from home page
+Then I should see plan year options which are clickable
+
+

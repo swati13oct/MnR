@@ -1237,6 +1237,12 @@ public class DrugcostestimatorUhcStepDefinition {
 		dce.navigateToDCEToolFromvpp(zipcode);
 	}
 	
+	@Then("^I should see plan year options which are clickable$")
+	public void I_should_see_plan_year_options() throws InterruptedException {
+		DrugCostEstimatorPage dce = new DrugCostEstimatorPage((WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER));
+		dce.validatePlanYear();;
+	}
+	
 }
 
 

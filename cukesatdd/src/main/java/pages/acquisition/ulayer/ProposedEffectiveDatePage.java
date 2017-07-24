@@ -23,6 +23,8 @@ public class ProposedEffectiveDatePage extends UhcDriver{
 	@FindBy(xpath = "//*[@id='enrollment-step-1-part-10']/div[1]/div/div[1]")
 	private WebElement segmentHeading;
 	
+	@FindBy(xpath = ".//*[@id='enrollment-step-1-part-10']/div[1]/div/div[2]/fieldset/span/label")
+	private WebElement proposedDate;
 	
 	private PageData ped;
 
@@ -64,11 +66,8 @@ public class ProposedEffectiveDatePage extends UhcDriver{
 		
 	}
 	
-	public void selectTheDate(Map<String, String> pedAttributesMap) {
-		String Date = pedAttributesMap.get("EffectiveDate");
-		String newDate = Date.replace("-","/");
-		
-		driver.findElement(By.xpath("//label[text() = '" + newDate + "']")).click();
+	public void selectTheDate() {
+		proposedDate.click();
 	}
 	
 	public ReviewAndSubmitPage clickOnSaveAndContinue(String plantype){
@@ -84,7 +83,22 @@ public class ProposedEffectiveDatePage extends UhcDriver{
 		//}
 		//return null;
 	}
-
+	@FindBy(xpath = ".//*[@id='enrollment-step-1-part-10']/div[1]/div/div[2]/fieldset/span/label")
+	private WebElement dateRadioBtn;
+	
+	@FindBy(xpath = ".//*[@id='enrollment-step-1-part-10']/div[2]/a[2]")
+	private WebElement pedPrevBtn;
+	
+	@FindBy(xpath = ".//*[@id='enrollment-step-1-part-10']/div[2]/a[3]")
+	private WebElement pedCancelBtn;
+	
+	public boolean validateEffectiveDatePage(){
+		boolean flag = false;
+		if(validate(segmentHeading)&&validate(saveAndContinue)&&validate(dateRadioBtn)&&
+		validate(pedPrevBtn)&&validate(pedCancelBtn))
+			flag = true;
+		return flag;
+	}
 	
 }
 

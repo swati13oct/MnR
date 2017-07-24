@@ -93,4 +93,19 @@ public class ESRDPage extends UhcDriver{
 				return new PrescriptionDrugCoveragePage(driver);
 		}
 		
+	
+	@FindBy(xpath = ".//*[@id='esrdInfo']/p")
+	private WebElement esrdHeader;
+	
+	@FindBy(xpath = ".//*[@id='esrdquestion']/p/strog/span/span/b")
+	private WebElement esrdQuestion;
+	
+	public boolean validateESRDPage(){
+		boolean flag = false;
+		if(validate(esrdHeader)&&validate(esrdQuestion)&&validate(esrdno)&&validate(esrdyes)&&validate(esrdprevious)
+		&&validate(esrdsaveandcontinue)&&validate(esrdcancelregistration))
+			flag = true;
+		return flag;
+	}
+	
 }

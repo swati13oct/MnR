@@ -37,22 +37,22 @@ public class PlanPaymentOptions extends UhcDriver{
 	private WebElement pcpprevious;
 	
 	@FindBy(id = "planPaymentOptionSaveBtnId")
-	private WebElement pcpsaveandcont;
+	private WebElement pposaveandcont;
 	
 	@FindBy(id = "ppcpcancel")
 	private WebElement pcpcancel;
 	
-	@FindBy(xpath = "//*[@id='disclaimerAgreeBtnplanpayment']")
+	@FindBy(xpath = ".//*[@id='disclaimerAgreeBtnplanpayment']")
 	private WebElement disclaimerppoagreebutton;
 	
-	@FindBy(xpath = "//*[@id='planPaymentOptionSaveBtnId']")
+	@FindBy(xpath = ".//*[@id='planPaymentOptionSaveBtnId']")
 	private WebElement saveandcontinuebutton;
 	
 	@FindBy(xpath = "//*[@id='pcpsaveandcont']")
 	private WebElement saveandcontinuepcp;
 	
-	@FindBy(xpath = "//*[@id='planpaymentLink']")
-	private WebElement disclaimerppo ;
+	@FindBy(xpath = ".//*[@id='planpaymentLink']")
+	private WebElement disclaimerppo;
 	
 	private PageData planpaymentInformation;
 
@@ -114,13 +114,13 @@ public class PlanPaymentOptions extends UhcDriver{
 		
 		
 	public OptionalRidersPage navigatesToNextStepMAPDorMA() {
-			pcpsaveandcont.click();
+		pposaveandcont.click();
 				return new OptionalRidersPage(driver);
 	
 		}
 	
 	public ProposedEffectiveDatePage navigatesToNextStepPDP() {
-		pcpsaveandcont.click();
+		pposaveandcont.click();
 			return new ProposedEffectiveDatePage(driver);
 
 	}
@@ -130,8 +130,22 @@ public class PlanPaymentOptions extends UhcDriver{
 		validate(disclaimerppo);
 		disclaimerppo.click();
 		
+		try {
+			Thread.sleep(1000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 		validate(disclaimerppoagreebutton);
 		disclaimerppoagreebutton.click();
+		
+		try {
+			Thread.sleep(1000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 		validate(saveandcontinuebutton);
 		saveandcontinuebutton.click();
@@ -143,7 +157,21 @@ public class PlanPaymentOptions extends UhcDriver{
 		
 		
 	}
-
-		
 	
+	@FindBy(xpath = ".//*[@id='ppoInfo']/p")
+	private WebElement ppoHeader ;	
+	
+	@FindBy(xpath = ".//*[@id='planPaymentOptionprevious']")
+	private WebElement ppoPrevBtn;
+	
+	@FindBy(xpath = ".//*[@id='planPaymentOptioncancel']")
+	private WebElement ppoCancelBtn;
+	
+	public boolean validatePPOPage(){
+		boolean flag = false;
+		if(validate(ppoHeader)&&validate(ppoPrevBtn)&&validate(saveandcontinuebutton)&&validate(ppoCancelBtn)&&
+		validate(disclaimerppo)&&validate(planpaymentyes)&&validate(planpaymentno))
+			flag = true;
+		return flag;
+	}
 	}

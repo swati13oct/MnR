@@ -297,5 +297,17 @@ public class BeneficiaryInformationPage extends UhcDriver{
 		}
 		return null;
 	}
+	
+	@FindBy(id = "beneficiarycancel")
+	private WebElement beneficiaryCancelBtn;
+	
+	public boolean validateBeneficiaryPage(){
+		boolean flag = false;
+		if(validate(dateOfBirthField)&&validate(maleRadioButton)&&validate(femaleRadioButton)&&validate(address1Field)&&validate(address2Field)
+				&&validate(cityField)&& validate(stateField)&& validate(zipcodeField)&&validate(mailingAddressYesButton)&&validate(mailingAddressNoButton)
+				&&validate(emailAddressField)&& validate(enrollmentNext)&&validate(primaryPhoneNumberField)&&validate(alternatePhoneNumberlink)&&validate(beneficiaryCancelBtn))
+			flag= true;
+		return flag;
+	}
 
 }

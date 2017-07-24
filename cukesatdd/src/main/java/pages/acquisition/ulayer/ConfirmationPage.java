@@ -94,5 +94,20 @@ public class ConfirmationPage extends UhcDriver{
 		driver.switchTo().window(winHandleBefore);
 
 	}
+	
+	@FindBy(xpath =".//*[@id='confirmationView']/div/div[1]")
+	private WebElement confirmationViewBox;
+	
+	@FindBy(xpath =".//*[@id='confirmationView']/div/div[2]/div/div[2]/a")
+	private WebElement confPrintBtn;
+	
+	public boolean validateConfirmationPage(){
+		boolean flag = false;
+		if(validate(confirmationViewBox)&&validate(confPrintBtn)
+		&&confirmationViewBox.getText().contains("You have successfully submitted")&&
+		confirmationViewBox.getText().contains("Your confirmation number is:"))
+			flag = true;
+		return flag;
+	}
 
 }
