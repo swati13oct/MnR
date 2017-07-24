@@ -48,15 +48,14 @@ public class BLayerPlanComparePage extends UhcDriver {
 	@FindBy(xpath = ".//*[@id='fixTable']/tbody/tr[25]/td[2]/span")
 	private WebElement AnnualDeductibleValue;
 	
-<<<<<<< HEAD
+
 	@FindBy(linkText="Estimate drug costs")
 	private WebElement DCEText;
 	
 	@FindBy(linkText="Look up your doctor")
 	private WebElement ProviderLink;
 	
-=======
->>>>>>> parent of 71ed3c7... F100852:US689310 - Mobile Shopping Plan Compare Page - BLayer - Integration with DCE
+
 	
 	public BLayerPlanComparePage(WebDriver driver) {
 		super(driver);
@@ -141,7 +140,7 @@ public class BLayerPlanComparePage extends UhcDriver {
 	}
 	
 		
-<<<<<<< HEAD
+
 	public BLayerPlanComparePage DCEValidation() throws InterruptedException {
 		Thread.sleep(7000);				
 		JavascriptExecutor jse = (JavascriptExecutor)driver;
@@ -165,8 +164,6 @@ public class BLayerPlanComparePage extends UhcDriver {
 	}
 	
 	
-=======
->>>>>>> parent of 71ed3c7... F100852:US689310 - Mobile Shopping Plan Compare Page - BLayer - Integration with DCE
-	}
+}
 
 

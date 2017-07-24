@@ -244,7 +244,7 @@ public class ResponsiveUhcStepDefiniton {
 		}
 	}
 
-<<<<<<< HEAD
+
 	
 	@Then("^user validates DCE Section$")
 	public void DCE_section() throws InterruptedException{
@@ -269,8 +269,6 @@ public class ResponsiveUhcStepDefiniton {
 			Assert.fail();
 		}
 	}
-=======
->>>>>>> parent of 71ed3c7... F100852:US689310 - Mobile Shopping Plan Compare Page - BLayer - Integration with DCE
 
 	@And ("^the user validates plan highlights$")
 	public void user_validates_planHighlights_poviderLink(){
