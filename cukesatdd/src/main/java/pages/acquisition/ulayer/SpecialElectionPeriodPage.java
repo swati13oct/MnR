@@ -280,4 +280,14 @@ public class SpecialElectionPeriodPage extends UhcDriver {
 	
 			return new PrescriptionDrugCoveragePage(driver);
 	}
+	
+	@FindBy(xpath = ".//*[@id='enrollment-step-1-part-1']/div[1]/div/div[1]/h2")
+	private WebElement sepHeader;
+	
+	public boolean validateSEPPage(){
+		boolean flag = false;
+		if(validate(sepHeader)&&validate(yes)&&validate(no)&&validate(saveAndContinue))
+			flag = true;
+		return flag;
+	}
 }

@@ -209,4 +209,82 @@ public class ReviewAndSubmitPage extends UhcDriver{
 	
 	}
 	
+	@FindBy(xpath = ".//*[@id='author']/div/div[2]/fieldset/span[1]/label")
+	private WebElement authRepresentOptionagreeBtn1;
+	
+	@FindBy(xpath = ".//*[@id='author']/div/div[2]/fieldset/span[2]/label")
+	private WebElement authRepresentOptionagreeBtn2;
+	
+	@FindBy(xpath = ".//*[@id='enrollment-step-2-part-0']/div[11]/div/div/div[2]/a")
+	private WebElement otherHealthInsEditBtn;
+	
+	@FindBy(xpath = ".//*[@id='proeffecdate']") 
+	private WebElement pedEditBtn;
+	
+	@FindBy(xpath = ".//*[@id='enrollment-step-2-part-0']/div[9]/div/div[2]/a")
+	private WebElement ppoEditBtnMA;
+	
+	@FindBy(xpath = ".//*[@id='enrollment-step-2-part-0']/div[6]/div/div[2]/a")
+	private WebElement ppoEditBtnPDP;
+	
+	@FindBy(xpath = ".//*[@id='enrollment-step-2-part-0']/div[8]/div/div/div[2]/a")
+	private WebElement medicaidEditBtn;
+	
+	@FindBy(xpath = ".//*[@id='enrollment-step-2-part-0']/div[6]/div/div[2]/a")
+	private WebElement pdcEditBtnMA; //prescription drug coverage MA/MAPD
+	
+	@FindBy(xpath = ".//*[@id='enrollment-step-2-part-0']/div[4]/div/div[2]/a")
+	private WebElement pdcEditBtnPDP;//prescription drug coverage PDP
+	
+	@FindBy(xpath = ".//*[@id='enrollment-step-2-part-0']/div[5]/div/div/div[2]/a")
+	private WebElement esrdEditBtn; //end stage renal disease
+	
+	@FindBy(xpath = ".//*[@id='enrollment-step-2-part-0']/div[5]/div/div[2]/a")
+	private WebElement ltcEditBtnPDP;
+	
+	@FindBy(xpath = ".//*[@id='enrollment-step-2-part-0']/div[7]/div/div[2]/a")
+	private WebElement ltcEditBtnMA;
+	
+	@FindBy(xpath = ".//*[@id='enrollment-step-2-part-0']/div[4]/div/div/div[2]/a")
+	private WebElement pcpEditBtn; //primary care provider
+	
+	@FindBy(xpath = ".//*[@id='enrollment-step-2-part-0']/div[3]/div/div[2]/a")
+	private WebElement sepEditBtn; //special election period
+	
+	@FindBy(xpath = ".//*[@id='enrollment-step-2-part-0']/div[2]/div/div[2]/a")
+	private WebElement benInfoEditBtn; //beneficiary info
+	
+	@FindBy(xpath = ".//*[@id='enrollment-step-2-part-0']/div[16]/a[2]")
+	private WebElement printBtnMA;
+	
+	@FindBy(xpath = ".//*[@id='enrollment-step-2-part-0']/div[11]/a[2]")
+	private WebElement printBtnPDP;
+	
+	@FindBy(xpath = ".//*[@id='enrollment-step-2-part-0']/div[16]/a[3]")
+	private WebElement cancelBtnMA;
+	
+	@FindBy(xpath = ".//*[@id='enrollment-step-2-part-0']/div[11]/a[3]")
+	private WebElement cancelBtnPDP;
+	
+	@FindBy(xpath = ".//*[@id='step3save']")
+	private WebElement submitBtn;
+	
+	public boolean validateReviewPage(String plantype){
+		boolean flag = false;
+		if(plantype.equals("MA")||plantype.equals("MAPD")){
+			if(validate(authRepresentOptionagreeBtn1)&&validate(authRepresentOptionagreeBtn2)&&validate(stmtofUnderstandingAgreeBtn)&&validate(stmtofUnderstandingDisagreeBtn)&&
+			validate(stmtofUnderstandingDisclaimerBtn)&&validate(benInfoEditBtn)&&validate(sepEditBtn)
+			&&validate(pcpEditBtn)&&validate(ltcEditBtnMA)&&validate(esrdEditBtn)&&validate(pdcEditBtnMA)&&validate(medicaidEditBtn)&&validate(ppoEditBtnMA)
+			&&validate(pedEditBtn)&&validate(otherHealthInsEditBtn)&&validate(editIntroBtn)&&validate(cancelBtnMA)&&validate(printBtnMA)&&validate(submitBtn))
+				flag = true;
+		}else if(plantype.equals("PDP")){
+			if(validate(authRepresentOptionagreeBtn1)&&validate(authRepresentOptionagreeBtn2)&&validate(stmtofUnderstandingAgreeBtn)&&validate(stmtofUnderstandingDisagreeBtn)&&
+			validate(stmtofUnderstandingDisclaimerBtn)&&validate(benInfoEditBtn)&&validate(sepEditBtn)&&validate(ltcEditBtnPDP)
+			&&validate(pdcEditBtnPDP)&&validate(ppoEditBtnPDP)&&validate(pedEditBtn)&&validate(editIntroBtn)&&validate(cancelBtnPDP)&&validate(printBtnPDP)&&validate(submitBtn))
+				flag = true;
+		}else{
+			System.out.println("Invalid plan type");
+		}
+	return flag;
+	}
 }

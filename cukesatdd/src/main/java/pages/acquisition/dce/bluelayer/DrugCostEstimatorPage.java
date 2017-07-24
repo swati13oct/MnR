@@ -372,6 +372,12 @@ public class DrugCostEstimatorPage extends UhcDriver {
 
 	@FindBy(id = "descOrderPharmacySortId")
 	public WebElement ZtoAtab;
+	
+	@FindBy(xpath = ".//*[@id='borderContainer']/div/div[2]/div[2]/button[1]")
+	public WebElement year2017;
+	
+	@FindBy(xpath = ".//*[@id='borderContainer']/div/div[2]/div[2]/button[2]")
+	public WebElement year2018;
 
 	@Override
 	public void openAndValidate() {
@@ -1718,6 +1724,16 @@ public class DrugCostEstimatorPage extends UhcDriver {
 	public void clickZtoAtab() {
 		ZtoAtab.click();
 
+	}
+	
+	public void validatePlanYear(){
+		if(year2017.isDisplayed() && year2018.isDisplayed()){
+			Assert.assertTrue("Plan year are displayed", true);
+			year2017.click();
+			year2018.click();
+		}else{
+			Assert.assertFalse("Plan year are not displayed", true);
+		}
 	}
 	
 	

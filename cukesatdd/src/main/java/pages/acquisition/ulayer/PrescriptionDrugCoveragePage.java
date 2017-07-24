@@ -109,6 +109,17 @@ public class PrescriptionDrugCoveragePage extends UhcDriver{
 				return new LongTermCarePage(driver);
 		}
 		
+		
+		@FindBy(xpath = ".//*[@id='pdcInfo']/p")
+		private WebElement pdcHeader;
+		
+		public boolean validatePDCPage(){
+			boolean flag = false;
+			if(validate(pdcHeader)&&validate(pdcsaveandcont)&&validate(pdccancel)&&validate(pdcno)&&validate(pdcyes))
+				flag = true;
+			return flag;
+		}
+		
 	}
 		
 	

@@ -11,6 +11,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.junit.Assert;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -32,8 +33,8 @@ public class VPPPlanSummaryPage extends UhcDriver {
 
 	@FindBy(xpath = "//a[text()='Passport Flyer (PDF)']")
 	private WebElement PassportFlyerPDF;
-	
-	@FindBy(xpath = ".//*[@id='site-wrapper']/div[4]/div/div[1]/div[1]/div/div/div[1]/div/div/div[1]/div[2]/div/div[2]/div[1]/div/span[3]")
+					
+	@FindBy(xpath = ".//*[@id='site-wrapper']/div[4]/div/div[1]/div/div/div/div/div[1]/div/div/div[1]/div[2]/div/div[2]/div[1]/div/span[3]")
 	private WebElement showMaPlans;
 	
 	@FindBy(xpath = "//div[@class='maplans_planbutton']/div[2]/div[2]/div[2]")
@@ -161,6 +162,18 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	private PageData vppPlanSummary;
 
 	public JSONObject vppPlanSummaryJson;
+	
+	@FindBy(xpath = "//div[@class='overview-main']/h2")
+	private WebElement vppTop;
+	
+	@FindBy(xpath = "//div[@class='overview-tabs module-tabs-tabs']/div[1]/div/span/span[@class='ng-binding']")
+	private WebElement maPlansNumber;
+	
+	@FindBy(xpath = "//div[@class='overview-tabs module-tabs-tabs']/div[2]//span[@class='ng-binding']")
+	private WebElement msPlansNumber;
+	
+	@FindBy(xpath = "//div[@class='overview-tabs module-tabs-tabs']/div[3]//span[@class='ng-binding']")
+	private WebElement pdpPlansNumber;
 
 	public VPPPlanSummaryPage(WebDriver driver) {
 		super(driver);
@@ -413,28 +426,37 @@ public class VPPPlanSummaryPage extends UhcDriver {
 
 
 	public IntroductionInformationPage clicksOnEnrollInplanLink(String planName) { 
+		int pdpValue = Integer.parseInt(pdpPlansNumber.getText());
+		int maValue = Integer.parseInt(maPlansNumber.getText());
+		
 		if (planName.contains("HMO")) {
-			for (WebElement plan : maPlanElement) {
-				if (plan.getText().contains(planName)) {
-					ElementData elementData = new ElementData("id", "enrollMA");
-					findChildElement(elementData, plan).click();
-
+			System.out.println("Entered the plan");
+			for(int i=1; i<=maValue; i++){
+				WebElement maPlanElement= driver.findElement(By.xpath(".//*[@id='plan-list-1']/div/div[2]/div/div["+i+"]"));
+				if (maPlanElement.getText().contains(planName)) {
+					ElementData elementData = new ElementData("linkText", "Enroll in plan");//("id", "enrollMA");
+					System.out.println("***Element Data is: "+elementData);
+					findChildElement(elementData, maPlanElement).click();
+					System.out.println("Clicked on the Enroll Link");
+					break;
 				}
-				break;
+				
 			}
-		}
-		else if (planName.contains("PDP")) {
-			for (WebElement plan : pdpPlanElement) {
-				if (plan.getText().contains(planName)) {
-					ElementData elementData = new ElementData("id", "enrollPDP"); // TODO:
-																					// Re-check
-					findChildElement(elementData, plan).click();
-
+		} else if (planName.contains("PDP")) {
+			for(int i=1; i<=pdpValue; i++){
+				WebElement pdpPlanElement= driver.findElement(By.xpath(".//*[@id='plan-list-3']/div/div[2]/div/div["+i+"]"));
+				if (pdpPlanElement.getText().contains(planName)) {
+					ElementData elementData = new ElementData("linkText", "Enroll in plan");//("id", "enrollPDP"); // TODO:
+					System.out.println("***Element Data is: "+elementData);													// Re-check
+					findChildElement(elementData, pdpPlanElement).click();
+					System.out.println("Clicked on the Enroll Link");
+					break;
 				}
-				break;
+				
 			}
+			
 		}
-			return new IntroductionInformationPage(driver);
+		return new IntroductionInformationPage(driver);
 	}	
 	
 	public PlanInformationPage navigatetoEnrollInplanLink(String planName)
@@ -920,6 +942,25 @@ public class VPPPlanSummaryPage extends UhcDriver {
 			}
 
 		}
+	}
+	
+	public boolean validateVPPPlanSummaryPage() {
+
+		validate(vppTop);
+		validate(maPlansNumber);
+		validate(msPlansNumber);
+		validate(pdpPlansNumber);
+
+		int allPlans = Integer.valueOf(vppTop.getText().substring(8, 9));
+		int maPlans = Integer.valueOf(maPlansNumber.getText());
+		int msPlans = Integer.valueOf(msPlansNumber.getText());
+		int pdpPlans = Integer.valueOf(pdpPlansNumber.getText());
+
+		if (allPlans == maPlans + msPlans + pdpPlans) {
+			return true;
+		}
+		return false;
+
 	}
 }
 
