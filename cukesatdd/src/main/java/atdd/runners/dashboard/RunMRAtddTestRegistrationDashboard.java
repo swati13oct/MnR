@@ -15,7 +15,7 @@ import cucumber.junit.Cucumber;
 @Cucumber.Options(glue = { "atdd.framework","acceptancetests.dashboard.registration" }, 
 		features = { "feature/registrationMemberRedesign" }, 
 		format = {
-		"pretty", "html:reports/test-report" }, tags ={"@inactiveTerminatedPlanError , @existingMemberErrorPage , @memberInfoNotFoundError"})
+		"pretty", "html:reports/test-report" }, tags ={"@inactiveTerminatedPlanError , @existingMemberErrorPage , @memberInfoNotFoundError, @pffsMemberErrorPage"})
 public class RunMRAtddTestRegistrationDashboard {
 
 }
