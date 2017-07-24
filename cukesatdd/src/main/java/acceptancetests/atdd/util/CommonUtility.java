@@ -319,6 +319,13 @@ public class CommonUtility {
 				}
 			} catch (Exception e1) {
 				// e1.printStackTrace();
+				String cqAritifacts = "CQ Artifacts";
+				String mrrLine = cqAritifacts
+						+ String.format(
+								"%" + (widthMaxLimit - cqAritifacts.length())
+										+ "s", "")
+						+ "Failed to load CQ Artifacts Info(Deployment Failed)";
+				writer.println(mrrLine);
 				System.out.println("ERROR getting CQ Artifacts version");
 			}
 			String mrrestAppName = "MRRestWAR";
@@ -339,7 +346,7 @@ public class CommonUtility {
 						+ String.format(
 								"%" + (widthMaxLimit - mrrestAppName.length())
 										+ "s", "")
-						+"Failed to load Build NUmber(Deployment Failed)";
+						+"Failed to load Build Number(Deployment Failed)";
 				writer.println(mrrLine);
 				System.out.println("ERROR getting MRREST application version");
 			}
