@@ -61,6 +61,10 @@ public class PageConstants {
 	
 	public static final String BENEFITS_COVERAGE_PAGE = "benefitsCoveragePage";
 
+	public static final String PROFILE_AND_PREFERENCES_PAGE = "ProfileandPreferencesPage";
+
+	//public static final String PROFILEANDPREFERENCES_PAGE = "ProfilePreferencesPage";
+	
 	public static final String ORDER_PLAN_MATERIALS_PAGE = "orderplanmaterialsPage";
 
 	public static final String PLAN_MATERIALS_CONFIRMATION_PAGE = "planMaterialConfirmationPage";

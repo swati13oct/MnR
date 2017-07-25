@@ -3,7 +3,6 @@
  */
 package pages.member.ulayer;
 
-
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -45,18 +44,17 @@ public class LoginPage2 extends UhcDriver {
 	@FindBy(xpath = "//div[@class='fd_userPassSection']/button")
 	private WebElement signInButton;
 
-	//@FindBy(linkText = "Forgot your username or password?")
-	//private WebElement forgotUsernamePasswordLink;
+	// @FindBy(linkText = "Forgot your username or password?")
+	// private WebElement forgotUsernamePasswordLink;
 
-	//@FindBy(id = "usercheckbox")
-	//private WebElement userNameCheckBox;
+	// @FindBy(id = "usercheckbox")
+	// private WebElement userNameCheckBox;
 
-	/*private PageData browserCheckData;
-
-	private JSONObject browserCheckJson;*/
-
-
-
+	/*
+	 * private PageData browserCheckData;
+	 * 
+	 * private JSONObject browserCheckJson;
+	 */
 
 	public LoginPage2(WebDriver driver) {
 		super(driver);
@@ -65,64 +63,68 @@ public class LoginPage2 extends UhcDriver {
 	}
 
 	public Object loginWith(String username, String password) {
-		loginIn.click();	
-		sendkeys(userNameField,username);
-		sendkeys(passwordField,password);
+		loginIn.click();
+		sendkeys(userNameField, username);
+		sendkeys(passwordField, password);
 		signInButton.click();
 
-		
+		if (MRScenario.environment.equals("awe-dev-b") || MRScenario.environment.equals("dev-a")
+				|| MRScenario.environment.equals("dev-c") || MRScenario.environment.equals("team-b")
+				|| MRScenario.environment.equals("team-a") || MRScenario.environment.equals("team-c")) {
 
-		if (MRScenario.environment.equals("awe-dev-b") || MRScenario.environment.equals("dev-a") || MRScenario.environment.equals("dev-c") || MRScenario.environment.equals("team-b") || MRScenario.environment.equals("team-a") || MRScenario.environment.equals("team-c")) {
+			while (isAlertPresent(driver))
+				;
 
-			while(isAlertPresent(driver));
-					
-			/*if (!(MRScenario.environment.equals("awe-dev-b") || MRScenario.environment.equals("dev-c") || MRScenario.environment.equals("team-b"))){
-				Alert alert2 = driver.switchTo().alert();
-				alert2.accept();
-			}*/
-			
+			/*
+			 * if (!(MRScenario.environment.equals("awe-dev-b") ||
+			 * MRScenario.environment.equals("dev-c") ||
+			 * MRScenario.environment.equals("team-b"))){ Alert alert2 =
+			 * driver.switchTo().alert(); alert2.accept(); }
+			 */
+
 		}
-/*
-		if ( MRScenario.environment.equals("dev-a") || MRScenario.environment.equals("dev-c")
-		|| MRScenario.environment.equals("team-a")) {
-		Alert alert = driver.switchTo().alert();
-        alert.accept();
-        Alert alert1 = driver.switchTo().alert();
-        alert1.accept();        
-        	if (!MRScenario.environment.equals("dev-c")){
-        		Alert alert2 = driver.switchTo().alert();
-        		alert2.accept();
- 			}
+		/*
+		 * if ( MRScenario.environment.equals("dev-a") ||
+		 * MRScenario.environment.equals("dev-c") ||
+		 * MRScenario.environment.equals("team-a")) { Alert alert =
+		 * driver.switchTo().alert(); alert.accept(); Alert alert1 =
+		 * driver.switchTo().alert(); alert1.accept(); if
+		 * (!MRScenario.environment.equals("dev-c")){ Alert alert2 =
+		 * driver.switchTo().alert(); alert2.accept(); }
+		 * 
+		 * }
+		 */
 
- 		}*/
-            
-		
+		if (MRScenario.environment.equals("team-c") || MRScenario.environment.equals("team-d")) {
+
+			Alert alert = driver.switchTo().alert();
+			alert.accept();
+			Alert alert1 = driver.switchTo().alert();
+			alert1.accept();
+		}
 
 		if (MRScenario.environment.equals("dev-c")) {
 
 			Alert alert = driver.switchTo().alert();
-			        alert.accept();
-			        Alert alert1 = driver.switchTo().alert();
-			        alert1.accept();
-			   /*     Alert alert2 = driver.switchTo().alert();
-			        alert2.accept();
-			        Alert alert3 = driver.switchTo().alert();
-			        alert3.accept();*/
-			        }
-System.out.println(currentUrl());
-		if(currentUrl().contains("home/my-account-home.html"))
+			alert.accept();
+			Alert alert1 = driver.switchTo().alert();
+			alert1.accept();
+			/*
+			 * Alert alert2 = driver.switchTo().alert(); alert2.accept(); Alert
+			 * alert3 = driver.switchTo().alert(); alert3.accept();
+			 */
+		}
+		System.out.println(currentUrl());
+
+		if (currentUrl().contains("home/my-account-home.html"))
 
 		{
 			return new AccountHomePage(driver);
-		}
-		else if (currentUrl().contains("terminated-plan.html")) {
-			return new TerminatedHomePage(driver); 
+		} else if (currentUrl().contains("terminated-plan.html")) {
+			return new TerminatedHomePage(driver);
 		}
 		return null;
 	}
-
-	
-
 
 	@Override
 	public void openAndValidate() {
@@ -131,8 +133,6 @@ System.out.println(currentUrl());
 
 	}
 
-
-	
 	public static boolean isAlertPresent(WebDriver wd) {
 		try {
 			Alert alert = wd.switchTo().alert();

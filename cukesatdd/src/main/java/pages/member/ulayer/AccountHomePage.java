@@ -27,6 +27,7 @@ import acceptancetests.atdd.util.CommonUtility;
 import atdd.framework.MRScenario;
 import atdd.framework.UhcDriver;
 import pages.dashboard.member.ulayer.ClaimSummarypage;
+
 import pages.member.ulayer.BenefitsAndCoveragePage;
 
 /**
@@ -194,7 +195,8 @@ public class AccountHomePage extends UhcDriver {
 	@FindBy(linkText = "Go to benefits and coverage page page")
 	private WebElement BnClink2;
 
-	
+	@FindBy(linkText = "Go to Go to my profile and preferences redesign page")
+	private WebElement ProfileandPrefLink;
 	
 
 	public JSONObject accountHomeJson;
@@ -786,6 +788,27 @@ public FormsandresourcesPage navigateToMydocumentAarpPage() {
 
 		}
 
+		public pages.member.ulayer.ProfileandPreferencesPage navigateDirectToProfileandPreferencesPage() {
+			driver.navigate().to(PAGE_URL);
+			ProfileandPrefLink.click();
+			try {
+				Thread.sleep(30000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			//driver.manage().timeouts().implicitlyWait(40, TimeUnit.SECONDS);
+			System.out.println(driver.getTitle());
+			
+		 if(driver.getTitle().equalsIgnoreCase("My Profile & Preferences")){
+		        return new pages.member.ulayer.ProfileandPreferencesPage(driver);
+			}
+			return null;
+		
+			
+		}
+		
+		
  
 }
 
