@@ -20,10 +20,11 @@ import atdd.framework.UhcDriver;
  */
 public class RequestHelpAndInformationPage extends UhcDriver {
 	
-	@FindBy(linkText ="Request an Appointment with a Licensed Agent")
+    
+	@FindBy(xpath =".//*[@id='subPageLeft']/div/div/div/div[2]/div/div[1]/p[2]/a")
 	private WebElement ma_requestAgentAppointmentLink;
-	
-	@FindBy(linkText ="Find UnitedHealthcare in Your Community")
+         
+	@FindBy(xpath =".//*[@id='subPageLeft']/div/div/div/div[2]/div/div[1]/p[3]/a")
 	private WebElement findUnitedHealthcareLink;
 	
 	public RequestHelpAndInformationPage(WebDriver driver) {
@@ -67,5 +68,10 @@ public class RequestHelpAndInformationPage extends UhcDriver {
 			return true;
 		return false;
 	}
-
+	
+	public boolean validateUhcLink(){
+		if(validate(findUnitedHealthcareLink)&&findUnitedHealthcareLink.getText().contains("Find UnitedHealthcare in Your Community"))
+			return true;
+		return false;
+	}
 }
