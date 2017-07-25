@@ -193,6 +193,18 @@ public class ResponsiveUhcStepDefiniton {
 			Assert.fail();
 		}
 	}
+	
+	@And("^User selects the Plan to compare$")
+	public void TeamC_OnlyPlan_Compare() throws InterruptedException{
+		BLayerPlanComparePage BLayerplanCompare = (BLayerPlanComparePage) getLoginScenario()
+				.getBean(PageConstants.RESPONSIVE_DETAILS_PAGE);
+		BLayerPlanComparePage BLayerTeamCCompare = BLayerplanCompare.SelectThePlan();
+		if(BLayerTeamCCompare!=null){
+			getLoginScenario().saveBean(PageConstants.TeamC_Plan_Compare_Page, BLayerTeamCCompare);
+		}else{
+			Assert.fail();
+		}
+	}
 
 	@Then("^user goes back to plan summary by clicking Back to all Plans Link$")
 	public void Back_to_Plan_Summary() throws InterruptedException{
@@ -263,6 +275,30 @@ public class ResponsiveUhcStepDefiniton {
 		BLayerPlanComparePage GoToFootNotesSection = (BLayerPlanComparePage) getLoginScenario()
 				.getBean(PageConstants.TeamC_Plan_Compare_Page);
 		BLayerPlanComparePage BLayerTeamCFootNotes = GoToFootNotesSection.ProviderValidation();
+		if(BLayerTeamCFootNotes!=null){
+			getLoginScenario().saveBean(PageConstants.TeamC_FootNotes_Section, BLayerTeamCFootNotes);
+		}else{
+			Assert.fail();
+		}
+	}
+	
+	@Then("^user validates he is not displayed add another plan to compare option$")
+	public void Add_anotherPlan() throws InterruptedException{
+		BLayerPlanComparePage GoToFootNotesSection = (BLayerPlanComparePage) getLoginScenario()
+				.getBean(PageConstants.TeamC_Plan_Compare_Page);
+		BLayerPlanComparePage BLayerTeamCFootNotes = GoToFootNotesSection.AddAnotherPlanButtonValidation();
+		if(BLayerTeamCFootNotes!=null){
+			getLoginScenario().saveBean(PageConstants.TeamC_FootNotes_Section, BLayerTeamCFootNotes);
+		}else{
+			Assert.fail();
+		}
+	}
+	
+	@Then("^user validates Inpatient Hospital Co-pay$")
+	public void InpatientValidation() throws InterruptedException{
+		BLayerPlanComparePage GoToFootNotesSection = (BLayerPlanComparePage) getLoginScenario()
+				.getBean(PageConstants.TeamC_Plan_Compare_Page);
+		BLayerPlanComparePage BLayerTeamCFootNotes = GoToFootNotesSection.InPatientValueValidation();
 		if(BLayerTeamCFootNotes!=null){
 			getLoginScenario().saveBean(PageConstants.TeamC_FootNotes_Section, BLayerTeamCFootNotes);
 		}else{

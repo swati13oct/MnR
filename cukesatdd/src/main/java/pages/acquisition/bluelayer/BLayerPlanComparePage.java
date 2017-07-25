@@ -1,5 +1,6 @@
 package pages.acquisition.bluelayer;
 
+import org.junit.Assert;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -20,6 +21,9 @@ public class BLayerPlanComparePage extends UhcDriver {
 	
 	@FindBy(xpath = ".//*[@id='plan-list-1']/div/div[2]/div/div[2]/div[3]/div/div/span[3]/a")
 	private WebElement ComparePlansLink;
+	
+	@FindBy(xpath = ".//*[@id='plan-list-1']/div/div[2]/div/div[1]/div[3]/div/div/span[3]/a")
+	private WebElement ComparePlanLink;	
 	
 	@FindBy(xpath = ".//*[@id='site-wrapper']/div[4]/div/div/div/div/div/div/div/div/div[1]/div[1]/div/div[1]/a")
 	private WebElement BackToAllPlansLink;
@@ -46,14 +50,22 @@ public class BLayerPlanComparePage extends UhcDriver {
 	private WebElement PrescriptionBenefit;
 	
 	@FindBy(xpath = ".//*[@id='fixTable']/tbody/tr[25]/td[2]/span")
-	private WebElement AnnualDeductibleValue;
-	
+	private WebElement AnnualDeductibleValue;	
 
 	@FindBy(linkText="Estimate drug costs")
 	private WebElement DCEText;
 	
 	@FindBy(linkText="Look up your doctor")
 	private WebElement ProviderLink;
+	
+	@FindBy(xpath=".//*[@id='topRowCopy']/div/div[6]/div/a/span")
+	private WebElement AddAnotherPlanLink1;
+	
+	@FindBy(xpath=".//*[@id='topRowCopy']/div/div[8]/div/a/span")
+	private WebElement AddAnotherPlanLink2;
+	
+	@FindBy(xpath=".//*[@id='fixTable']/tbody/tr[7]/td[2]/div/div/span[1]")
+	private WebElement InPatientHospitalStay;
 	
 
 	
@@ -71,14 +83,30 @@ public class BLayerPlanComparePage extends UhcDriver {
 
 	public BLayerPlanComparePage SelectAllPlans() throws InterruptedException {
 		
-		Thread.sleep(3000);
-		Plan2HMO.click();
+		Thread.sleep(4000);
 		JavascriptExecutor jse = (JavascriptExecutor)driver;
+		jse.executeScript("window.scrollBy(0,100)", "");
+		Plan2HMO.click();		
 		jse.executeScript("window.scrollBy(0,300)", "");
 		Plan1HMO.click();
 		jse.executeScript("window.scrollBy(0,300)", "");
 		Thread.sleep(1000);
 		ComparePlansLink.click();
+		Thread.sleep(5000);
+		 if(driver.getTitle().equalsIgnoreCase("plans")){
+			 return new BLayerPlanComparePage(driver);
+		 }
+		 return null;	 
+	}
+	
+	
+	
+public BLayerPlanComparePage SelectThePlan() throws InterruptedException {
+		
+		Thread.sleep(3000);
+		Plan2HMO.click();		
+		Thread.sleep(1000);
+		ComparePlanLink.click();
 		Thread.sleep(5000);
 		 if(driver.getTitle().equalsIgnoreCase("plans")){
 			 return new BLayerPlanComparePage(driver);
@@ -163,6 +191,25 @@ public class BLayerPlanComparePage extends UhcDriver {
 		 return null;
 	}
 	
+	
+	public BLayerPlanComparePage AddAnotherPlanButtonValidation() throws InterruptedException {
+		Thread.sleep(9000);				
+		if(AddAnotherPlanLink1.isDisplayed() && AddAnotherPlanLink2.isDisplayed() ){			
+			return null;
+		}
+		return new BLayerPlanComparePage(driver); 
+	}	
+	
+	public BLayerPlanComparePage InPatientValueValidation() throws InterruptedException {
+		Thread.sleep(7000);				
+		JavascriptExecutor jse = (JavascriptExecutor)driver;
+		jse.executeScript("window.scrollBy(0,350)", "");		
+		Thread.sleep(1000);		
+		if(InPatientHospitalStay.getText().contains("Copay per day")){
+			 return new BLayerPlanComparePage(driver);
+		 }
+		 return null;
+	}
 	
 }
 
