@@ -3,8 +3,6 @@
  */
 package acceptancetests.fixedtestcases;
 
-import java.io.File;
-
 import org.json.JSONObject;
 import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
@@ -20,7 +18,6 @@ import pages.acquisition.ulayer.SiteMapAARPPage;
 import pages.acquisition.ulayer.TermsnConditionsAARPPage;
 import acceptancetests.atdd.data.CommonConstants;
 import acceptancetests.atdd.data.acquisition.PageConstants;
-import acceptancetests.globalfooter.data.AcquistionCommonConstants;
 import atdd.framework.MRScenario;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;

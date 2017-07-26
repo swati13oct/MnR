@@ -105,6 +105,14 @@ public class PrescriptionDrugEobPage extends UhcDriver{
 		toYear.sendKeys(toYearInput);
 		
 		shipbtnEobHistory.click();
+		
+		try {
+			Thread.sleep(15000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 		if (currentUrl().contains("part-d-eob-search.html")) {
 			return new PrescriptionDrugEobPage(driver);
 		}
