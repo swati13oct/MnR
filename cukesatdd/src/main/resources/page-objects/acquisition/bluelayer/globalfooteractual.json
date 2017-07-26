@@ -21,9 +21,9 @@
 "identifier":"linkText",
 "elementName":"Privacy Policy"
 },
-"footerTermsAndConditionsLink":{
+"footerTermsofUseLink":{
 "identifier":"linkText",
-"elementName":"Terms and Conditions"
+"elementName":"Terms of Use"
 },
 "footerDisclaimersLink":{
 "identifier":"linkText",
@@ -32,56 +32,6 @@
 "footerAgentsAndBrokersLink":{
 "identifier":"linkText",
 "elementName":"Agents & Brokers"
-},
-"medicareAdvantagePlansLink":{
-"identifier":"id",
-"elementName":"gfn_lnk_row2_1"
-},
-"medicareSupplementInsurancePlansLink":{
-"identifier":"id",
-"elementName":"gfn_lnk_row2_2"
-},
-"medicarePrescriptionDrug_PlansLink":{
-"identifier":"id",
-"elementName":"gfn_lnk_row2_3"
-},
-"medicareSpecialNeedPlansLink":{
-"identifier":"id",
-"elementName":"gfn_lnk_row2_4"
-},
-"learnAboutMedicareLink":{
-"identifier":"id",
-"elementName":"gfn_lnk_row3_1"
-},
-"prepareforInitialEnrollmentLink":{
-"identifier":"id",
-"elementName":"gfn_lnk_row3_2"
-},
-"exploreChangingPlansLink":{
-"identifier":"id",
-"elementName":"gfn_lnk_row3_3"
-},
-"discoverMoreResourcesLink":{
-"identifier":"id",
-"elementName":"gfn_lnk_row3_4"
-},
-"viewAllDisclaimerInformation":{
-"identifier":"linkText",
-"elementName":"View all disclaimer information"
-},
-"disclaimerBackToTopLink":{
-"identifier":"css",
-"elementName":"a.backtotop1.hideLink"
-},
-"hideDiscliamerInformation":{
-"identifier":"linkText",
-"elementName":"Hide discliamer information"
-},
-"footnotesContent":{
-"identifier":"id",
-"elementName":"footnotes1"
 }
-
-
 }
 }

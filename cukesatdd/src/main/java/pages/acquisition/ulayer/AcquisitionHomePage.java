@@ -1017,6 +1017,46 @@ public class AcquisitionHomePage extends GlobalWebElements {
 
 		return null;
 	}
+	
+	public AboutUsAARPPage aboutUsFooterClick() {
+		validate(GlobalWebElements.footerAboutUsLink);
+		GlobalWebElements.footerAboutUsLink.click();
+		validate(GlobalWebElements.footerAboutUsLink);
+
+		if (getTitle().equalsIgnoreCase("About UnitedHealthcare® | AARP® Medicare Plans from UnitedHealthcare")) {
+			return new AboutUsAARPPage(driver);
+		}
+		return null;
+	}
+
+	public boolean validateFooterLinks(JSONObject jsonObj){
+		boolean flag = true;
+		
+		try {
+			if(!jsonObj.get("footerPrivacyPolicyLink").equals("Privacy Policy"))
+				flag = false;
+			if(!jsonObj.get("footerDisclaimersLink").equals("Disclaimers"))
+				flag = false;
+			if(!jsonObj.get("footerHomeLink").equals("Home"))
+				flag = false;
+			if(!jsonObj.get("footerContactUsLink").equals("Contact Us"))
+				flag = false;
+			if(!jsonObj.get("footerAgentsnBrokersLink").equals("Agents & Brokers"))
+				flag = false;
+			if(!jsonObj.get("footerAboutUsLink").equals("About Us"))
+				flag = false;
+			if(!jsonObj.get("footerSiteMapLink").equals("Site Map"))
+				flag = false;
+			if(!jsonObj.get("footerTermsofUseLink").equals("Terms of Use"))
+				flag = false;
+			
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return flag;
+	}
 
 
 }
