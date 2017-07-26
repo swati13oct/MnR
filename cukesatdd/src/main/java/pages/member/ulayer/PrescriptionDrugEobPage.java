@@ -61,10 +61,6 @@ public class PrescriptionDrugEobPage extends UhcDriver{
 		super(driver);
 		PageFactory.initElements(driver, this);
 		CommonUtility.waitForPageLoad(driver, drugEobHeading, CommonConstants.TIMEOUT_30);
-		String fileName = CommonConstants.PRESCRIPTION_DRUG_EOB_PAGE_DATA;
-		prescriptionDrugEob = CommonUtility.readPageData(fileName,
-				CommonConstants.PAGE_OBJECT_DIRECTORY_ULAYER_MEMBER);
-		openAndValidate();
 	}
 
 	
