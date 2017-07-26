@@ -113,7 +113,21 @@ And the add plan link should be hidden in UMS site
 Examples:
 	        | plantype | memberType |
 		#| MA       | GROUP |
-		#| MAPD     | INDIVIDUAL |
+	#| MAPD     | INDIVIDUAL |
 		| MAPD       | GROUP |
 
+#@@@@@@@@@@@@@@@@@@memberRedesignPage@@@@@@@@@@@@@@@@@@@@@
+  
+  @ValidatePlanNamemembernameIDAccountSectionUMS
+  Scenario Outline: To verify Plan Name, Member name, Member ID and account section in UMS site
+    Given registered UHC with following details for Profile and Preferences flow in UMS site
+      | <planType> |
+    Then the user navigates to Profile and Preferences page
+    Then the user validates the Plan Name, Member name, Member ID and account section in UMS site
+
+       Examples: 
+      | planType |
+     # | PDP     |
+      | MAPD     |
+     # | MA       |
 

@@ -9,13 +9,11 @@ import cucumber.junit.Cucumber;
  *
  */
 @RunWith(Cucumber.class)
-@Cucumber.Options(glue = { "atdd.framework","acceptancetests.benefitsandcoveragejenkins.bluelayer" }, 
-		features = {"feature/plan-benefits-and-coverage/bluelayer" }, 
-		format = {
-		"pretty", "html:reports/test-report","json:target/cucumber.json"}, tags ={"@drugcosttablesectiongroupmembermapdpdplis"})
-public class RunMRAtddTestBnC 
+@Cucumber.Options(glue = { "atdd.framework", "acceptancetests.benefitsandcoveragejenkins.bluelayer" }, features = {
+		"feature/plan-benefits-and-coverage/bluelayer" }, format = { "pretty", "html:reports/test-report",
+				"json:target/cucumber.json" }, tags = { "@MobileView" })
+public class RunMRAtddTestBnC
 
 {
-	
-	
+
 }

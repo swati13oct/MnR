@@ -98,7 +98,7 @@ Feature: To test My Profile & Preferences in AARP site
   
   #@@@@@@@@@@@@@@@@@@memberRedesignPage@@@@@@@@@@@@@@@@@@@@@
   
-  @ValidatePlanNamemembernameID
+  @ValidatePlanNamemembernameIDAccountSectionAARP
   Scenario Outline: To verify Plan Name, Member name, Member ID section in AARP site
     Given registered AMP with following details for profile and preferences flow in AARP site
       | <planType> |
@@ -107,4 +107,6 @@ Feature: To test My Profile & Preferences in AARP site
 
        Examples: 
       | planType |
-      | PDP     |
+    #| PDP     |
+     #| MAPD     |
+      | MA       |

@@ -3,7 +3,6 @@
  */
 package pages.member.bluelayer;
 
-
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -39,25 +38,36 @@ public class LoginPage2 extends UhcDriver {
 
 	@FindBy(id = "loginPOPUPuser")
 	private WebElement userNameField;
-
+	
+	
 	@FindBy(id = "loginPOPUPpass")
 	private WebElement passwordField;
+	
+	//MOB
+	@FindBy(id = "loginSTANDuser")
+	private WebElement usernameMob;
 
+
+	@FindBy(id = "loginSTANDpass")
+	private WebElement passwordMob;
+	
+	@FindBy(id = "accessURAccountBTN")
+	private WebElement Signin;
+	
 	@FindBy(xpath = "//div[@class='fd_userPassSection']/button")
 	private WebElement signInButton;
 
-	//@FindBy(linkText = "Forgot your username or password?")
-	//private WebElement forgotUsernamePasswordLink;
+	// @FindBy(linkText = "Forgot your username or password?")
+	// private WebElement forgotUsernamePasswordLink;
 
-	//@FindBy(id = "usercheckbox")
-	//private WebElement userNameCheckBox;
+	// @FindBy(id = "usercheckbox")
+	// private WebElement userNameCheckBox;
 
-	/*private PageData browserCheckData;
-
-	private JSONObject browserCheckJson;*/
-
-
-
+	/*
+	 * private PageData browserCheckData;
+	 * 
+	 * private JSONObject browserCheckJson;
+	 */
 
 	public LoginPage2(WebDriver driver) {
 		super(driver);
@@ -66,89 +76,87 @@ public class LoginPage2 extends UhcDriver {
 	}
 
 	public Object loginWith(String username, String password) {
-		loginIn.click();	
-		sendkeys(userNameField,username);
-		sendkeys(passwordField,password);
+		loginIn.click();
+		sendkeys(userNameField, username);
+		sendkeys(passwordField, password);
 		signInButton.click();
 
-		
+		if (MRScenario.environment.equals("awe-dev-b") || MRScenario.environment.equals("dev-a")
+				|| MRScenario.environment.equals("dev-c") || MRScenario.environment.equals("team-b")
+				|| MRScenario.environment.equals("team-a") || MRScenario.environment.equals("team-c")) {
 
-		if (MRScenario.environment.equals("awe-dev-b") || MRScenario.environment.equals("dev-a") || MRScenario.environment.equals("dev-c") || MRScenario.environment.equals("team-b") || MRScenario.environment.equals("team-a") || MRScenario.environment.equals("team-c")) {
+			while (isAlertPresent(driver))
+				;
 
-			while(isAlertPresent(driver));
-					
-			/*if (!(MRScenario.environment.equals("awe-dev-b") || MRScenario.environment.equals("dev-c") || MRScenario.environment.equals("team-b"))){
-				Alert alert2 = driver.switchTo().alert();
-				alert2.accept();
-			}*/
-			
+			/*
+			 * if (!(MRScenario.environment.equals("awe-dev-b") ||
+			 * MRScenario.environment.equals("dev-c") ||
+			 * MRScenario.environment.equals("team-b"))){ Alert alert2 =
+			 * driver.switchTo().alert(); alert2.accept(); }
+			 */
+
 		}
-/*
-		if ( MRScenario.environment.equals("dev-a") || MRScenario.environment.equals("dev-c")
-		|| MRScenario.environment.equals("team-a")) {
-		Alert alert = driver.switchTo().alert();
-        alert.accept();
-        Alert alert1 = driver.switchTo().alert();
-        alert1.accept();        
-        	if (!MRScenario.environment.equals("dev-c")){
-        		Alert alert2 = driver.switchTo().alert();
-        		alert2.accept();
- 			}
+		/*
+		 * if ( MRScenario.environment.equals("dev-a") ||
+		 * MRScenario.environment.equals("dev-c") ||
+		 * MRScenario.environment.equals("team-a")) { Alert alert =
+		 * driver.switchTo().alert(); alert.accept(); Alert alert1 =
+		 * driver.switchTo().alert(); alert1.accept(); if
+		 * (!MRScenario.environment.equals("dev-c")){ Alert alert2 =
+		 * driver.switchTo().alert(); alert2.accept(); }
+		 * 
+		 * }
+		 */
 
- 		}*/
-            
-		
-
-		if (MRScenario.environment.equals("dev-c")) {
+		if (MRScenario.environment.equals("team-c") || MRScenario.environment.equals("team-d")) {
 
 			Alert alert = driver.switchTo().alert();
-			        alert.accept();
-			        Alert alert1 = driver.switchTo().alert();
-			        alert1.accept();
-			   /*     Alert alert2 = driver.switchTo().alert();
-			        alert2.accept();
-			        Alert alert3 = driver.switchTo().alert();
-			        alert3.accept();*/
-			        }
+			alert.accept();
+			Alert alert1 = driver.switchTo().alert();
+			alert1.accept();
+		
+			/*
+			 * Alert alert2 = driver.switchTo().alert(); alert2.accept(); Alert
+			 * alert3 = driver.switchTo().alert(); alert3.accept();
+			 */
+		}
 
-		if(currentUrl().contains("home/my-account-home.html"))
+		if (currentUrl().contains("home/my-account-home.html"))
 
 		{
 			return new AccountHomePage(driver);
-		}
-		else if (currentUrl().contains("terminated-plan.html")) {
-			return new TerminatedHomePage(driver); 
+		} else if (currentUrl().contains("terminated-plan.html")) {
+			return new TerminatedHomePage(driver);
 		}
 		return null;
 	}
-	
-	
+
 	public Object loginWith(String username, String password, String category) {
-		//driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
-		WebElement loginInEle= this.driver.findElement(By.id("fd_memberSignInButton"));
+		// driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+		WebElement loginInEle = this.driver.findElement(By.id("fd_memberSignInButton"));
 		loginInEle.click();
 		sendkeys(userNameField, username);
 		sendkeys(passwordField, password);
 		signInButton.click();
 
-		
 		if (MRScenario.environment.equals("dev-a") || MRScenario.environment.equals("team-a")) {
-			while (!isAlertPresent(driver));
-        }
-
-
-		if (MRScenario.environment.equals("dev-a"))  {
-
-			while (!isAlertPresent(driver));
+			while (!isAlertPresent(driver))
+				;
 		}
-		if ( MRScenario.environment.equals("team-c") || MRScenario.environment.equals("team-d")) {
-			
+
+		if (MRScenario.environment.equals("dev-a")) {
+
+			while (!isAlertPresent(driver))
+				;
+		}
+		if (MRScenario.environment.equals("team-c") || MRScenario.environment.equals("team-d")) {
+
 			Alert alert = driver.switchTo().alert();
-	        alert.accept();
-	        Alert alert1 = driver.switchTo().alert();
-	        alert1.accept();
-	        }
-		
+			alert.accept();
+			Alert alert1 = driver.switchTo().alert();
+			alert1.accept();
+		}
+
 		try {
 			Thread.sleep(10000);
 		} catch (InterruptedException e) {
@@ -156,23 +164,18 @@ public class LoginPage2 extends UhcDriver {
 			e.printStackTrace();
 		}
 
-		if(currentUrl().contains("home/my-account-home.html") && category.equalsIgnoreCase("Group") || currentUrl().contains("/guest/home.html"))
+		if (currentUrl().contains("home/my-account-home.html") && category.equalsIgnoreCase("Group")
+				|| currentUrl().contains("/guest/home.html"))
 
 		{
 			return new AccountHomePage(driver);
-		}
-		else if(currentUrl().contains("home/my-account-home.html") && category.equalsIgnoreCase("Individual") ) {
+		} else if (currentUrl().contains("home/my-account-home.html") && category.equalsIgnoreCase("Individual")) {
 			return new AccountHomePage(driver);
-		}
-		else if (currentUrl().contains("terminated-plan.html")) {
+		} else if (currentUrl().contains("terminated-plan.html")) {
 			return new TerminatedHomePage(driver);
 		}
 		return null;
 	}
-
-
-	
-
 
 	@Override
 	public void openAndValidate() {
@@ -181,8 +184,6 @@ public class LoginPage2 extends UhcDriver {
 
 	}
 
-
-	
 	public static boolean isAlertPresent(WebDriver wd) {
 		try {
 			Alert alert = wd.switchTo().alert();
@@ -195,4 +196,59 @@ public class LoginPage2 extends UhcDriver {
 			return false;
 		}
 	}
+	
+	
+	public Object loginMobile(String username, String password, String category) {
+		// driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+		
+		sendkeys(usernameMob, username);
+		sendkeys(passwordMob, password);
+		Signin.click();
+		
+		
+		
+		
+		if (MRScenario.environment.equals("dev-a") || MRScenario.environment.equals("team-a")) {
+			while (!isAlertPresent(driver))
+				;
+		}
+
+		if (MRScenario.environment.equals("dev-a")) {
+
+			while (!isAlertPresent(driver))
+				;
+		}
+		if (MRScenario.environment.equals("team-c") || MRScenario.environment.equals("team-d")) {
+
+			/*Alert alert = driver.switchTo().alert();
+			alert.accept();
+			Alert alert1 = driver.switchTo().alert();
+			alert1.accept();*/
+		}
+
+		try {
+			Thread.sleep(10000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		if (currentUrl().contains("home/my-account-home.html") && category.equalsIgnoreCase("Group")
+				|| currentUrl().contains("/guest/home.html"))
+
+		{
+			return new AccountHomePage(driver);
+		} else if (currentUrl().contains("home/my-account-home.html") && category.equalsIgnoreCase("Individual")) {
+			return new AccountHomePage(driver);
+		} 
+		 else if (currentUrl().contains("home/my-benefit-summary.html")) {
+				return new AccountHomePage(driver);
+			}
+		
+		else if (currentUrl().contains("terminated-plan.html")) {
+			return new TerminatedHomePage(driver);
+		}
+		return null;
+	}
+
 }

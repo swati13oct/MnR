@@ -1,4 +1,4 @@
-package acceptancetests.ProfileandPreferencesjenkins.ulayer;
+package acceptancetests.ProfileandPreferencesjenkins.bluelayer;
 
 import gherkin.formatter.model.DataTableRow;
 
@@ -11,21 +11,16 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import org.json.JSONException;
-import org.json.JSONObject;
 import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
-import org.skyscreamer.jsonassert.JSONAssert;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.openqa.selenium.By;
+import pages.member.bluelayer.AccountHomePage;
 
-import pages.member.ulayer.AccountHomePage;
-import pages.member.ulayer.LoginPage2;
-import pages.member.ulayer.PlanBenefitsCoveragePage;
+import pages.member.bluelayer.LoginPage2;
+import pages.member.bluelayer.ProfilePreferencesPage;
 import acceptancetests.atdd.data.CommonConstants;
 import acceptancetests.atdd.data.member.PageConstants;
-import acceptancetests.benefitsandcoverage.data.PlanBenefitsAndCoverageCommonConstants;
-import acceptancetests.formsandresources.data.FnRCommonConstants;
+
 import acceptancetests.login.data.LoginCommonConstants;
 import atdd.framework.MRScenario;
 import cucumber.annotation.en.And;
@@ -40,7 +35,7 @@ import org.openqa.selenium.WebElement;
  * @author akapoo18
  *
  */
-public class ProfileandPreferencesAARPStepDefinition {
+public class ProfileandPreferencesUMSStepDefinition {
 
 	@Autowired
 	MRScenario loginScenario;
@@ -51,9 +46,8 @@ public class ProfileandPreferencesAARPStepDefinition {
 		return loginScenario;
 	}
 
-	@Given("^registered AMP with following details for profile and preferences flow in AARP site$")
+	@Given("^registered UHC with following details for Profile and Preferences flow in UMS site$")
 	public void login_with_member(DataTable memberAttributes) {
-
 		/* Reading the given attribute from feature file */
 		List<List<String>> dataTable = memberAttributes.raw();
 		List<String> desiredAttributes = new ArrayList<String>();
@@ -62,8 +56,8 @@ public class ProfileandPreferencesAARPStepDefinition {
 			desiredAttributes.add(data.get(0));
 		}
 		System.out.println("desiredAttributes.." + desiredAttributes);
-		Map<String, String> loginCreds = loginScenario.getAMPMemberWithDesiredAttributes(desiredAttributes);
 
+		Map<String, String> loginCreds = loginScenario.getUMSMemberWithDesiredAttributes(desiredAttributes);
 		String userName = null;
 		String pwd = null;
 		if (loginCreds == null) {
@@ -71,7 +65,7 @@ public class ProfileandPreferencesAARPStepDefinition {
 			System.out.println("Member Type data could not be setup !!!");
 			Assert.fail("unable to find a " + desiredAttributes + " member");
 		} else {
-			userName = loginCreds.get("user");
+			this.userName = userName = loginCreds.get("user");
 			pwd = loginCreds.get("pwd");
 			System.out.println("User is..." + userName);
 			System.out.println("Password is..." + pwd);
@@ -80,29 +74,34 @@ public class ProfileandPreferencesAARPStepDefinition {
 		}
 
 		WebDriver wd = getLoginScenario().getWebDriver();
-		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
+		// MRScenario.keyEvent(wd);
 
 		LoginPage2 loginPage = new LoginPage2(wd);
 		AccountHomePage accountHomePage = (AccountHomePage) loginPage.loginWith(userName, pwd);
+
 		if (accountHomePage != null) {
 			getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
 			getLoginScenario().saveBean(PageConstants.ACCOUNT_HOME_PAGE, accountHomePage);
 		}
 
+		// JSONObject accountHomeActualJson = null;
+
 		/* Get expected data */
 		/*
-		 * Map<String, JSONObject> expectedDataMap = loginScenario
-		 * .getExpectedJson(userName); JSONObject accountHomeExpectedJson =
-		 * accountHomePage .getExpectedData(expectedDataMap);
+		 * Map<String,JSONObject> expectedDataMap =
+		 * loginScenario.getExpectedJson(userName); JSONObject
+		 * accountHomeExpectedJson =
+		 * accountHomePage.getExpectedData(expectedDataMap);
 		 * 
 		 * if (accountHomePage != null) {
+		 * getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
 		 * getLoginScenario().saveBean(PageConstants.ACCOUNT_HOME_PAGE,
 		 * accountHomePage); Assert.assertTrue(true); accountHomeActualJson =
 		 * accountHomePage.accountHomeJson; }
 		 * 
 		 * try { JSONAssert.assertEquals(accountHomeExpectedJson,
-		 * accountHomeActualJson, true); } catch (JSONException e) {
-		 * e.printStackTrace(); }
+		 * accountHomeActualJson, true); } catch (JSONException e) { // TODO
+		 * Auto-generated catch block e.printStackTrace(); }
 		 * 
 		 * getLoginScenario().saveBean(CommonConstants.EXPECTED_DATA_MAP,
 		 * expectedDataMap);
@@ -110,31 +109,30 @@ public class ProfileandPreferencesAARPStepDefinition {
 
 	}
 
-	@Then("^the user navigate to Profile and Preference page")
+	@Then("^the user navigates to Profile and Preferences page")
 	public void user_navigate_toProfileandPreferencespage() {
-		pages.member.ulayer.AccountHomePage accountHomePage = (pages.member.ulayer.AccountHomePage) getLoginScenario()
-				.getBean(PageConstants.ACCOUNT_HOME_PAGE);
-		pages.member.ulayer.ProfileandPreferencesPage ProfileandPreferencespage = accountHomePage
-				.navigateDirectToProfileandPreferencesPage();
+		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstants.ACCOUNT_HOME_PAGE);
+		ProfilePreferencesPage ProfilePreferencesPage = accountHomePage.navigateDirectToProfilePreferencesPage();
 
-		if (ProfileandPreferencespage != null) {
-	
-			getLoginScenario().saveBean(PageConstants.PROFILE_AND_PREFERENCES_PAGE, ProfileandPreferencespage);
+		if (ProfilePreferencesPage != null) {
+			getLoginScenario().saveBean(PageConstants.ProfilePreferencesPage, ProfilePreferencesPage);
 		}
-		
-		if (ProfileandPreferencespage == null)
-		{
-			System.out.println(" Variable is NULL" );
+		if (ProfilePreferencesPage == null) {
+			System.out.println(" Variable is NULL");
+
 		}
 	}
 
-	@Then("^the user validates the Plan Name, Member name, Member ID section in AARP site")
-	public void user_Validates_FED_PROFILE_MEMBERNAME_ID() {
-		pages.member.ulayer.ProfileandPreferencesPage ProfileandPreferencespage = (pages.member.ulayer.ProfileandPreferencesPage) getLoginScenario()
-				.getBean(PageConstants.PROFILE_AND_PREFERENCES_PAGE);
+	@And("the user validates the Plan Name, Member name, Member ID and account section in UMS site")
+	public void user_Validates_FED_PROFILE_MEMBERNAME_ID_AccountProfile() {
+		ProfilePreferencesPage ProfilePreferencesPage = (ProfilePreferencesPage) getLoginScenario()
+				.getBean(PageConstants.ProfilePreferencesPage);
+		System.out.println("1");
+		if (ProfilePreferencesPage == null) {
+			System.out.println(" Variable is NULL");
+		}
+		ProfilePreferencesPage.validatePlanNameMemberidNameAcountProfile();
 
-		ProfileandPreferencespage.validatePlanNameMemberidandName();
-	
 	}
 
 }

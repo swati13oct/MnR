@@ -20,6 +20,7 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
 
 import com.google.gson.JsonObject;
+import com.sun.xml.internal.ws.policy.sourcemodel.AssertionData;
 
 import acceptancetests.atdd.data.CommonConstants;
 import acceptancetests.atdd.data.PageData;
@@ -103,6 +104,9 @@ public class BenefitsAndCoveragePage extends UhcDriver {
     @FindBy(xpath = ".//*[@id='drug-copays-and-discounts']/section/div[2]/div[1]/div")
     private WebElement DrugCostheaderandtext;
     
+    
+    @FindBy(xpath=".//*[@id='waystosave']/div/div/div[1]/div/h1")
+    private WebElement TextWaystoSave;
    
     @FindBy(xpath = ".//*[@id='drug-copays-and-discounts']/section/div[2]/div[3]/div/div/div/div[1]/a")
     private WebElement Learnmoretierslink;
@@ -124,6 +128,9 @@ public class BenefitsAndCoveragePage extends UhcDriver {
     @FindBy(id="mapdPageLis")
     private  WebElement RetailDrugCost_Table;
 
+    @FindBy(id="waystosave")
+    private  WebElement waysToSave;
+    
     
     @FindBy(xpath = ".//*[@id='plan_benefit_documents']/section/div/div[2]/div/form/span[1]")
     private WebElement view_label;
@@ -571,15 +578,25 @@ public void validatedrugcopaytable()
 public void validatedrugcosttable() {
 	// TODO Auto-generated method stub
 	validate(RetailDrugCost_Table);
-    System.out.println("c");
-	try {
-		Thread.sleep(10000);
-	} catch (InterruptedException e) {
-	System.out.println("Inside catch");
-		e.printStackTrace();
+
 	
 }
+
+
+
+public void validateWaystoSave() 
+{
+	validate(waysToSave);
+	validate(TextWaystoSave);
+	
+	System.out.println(TextWaystoSave.getText());
+	//Assert.assertEquals(, );
+
+	
+	
 }
+
+
 }
 
 
