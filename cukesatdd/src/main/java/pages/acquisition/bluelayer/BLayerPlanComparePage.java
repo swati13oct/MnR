@@ -1,6 +1,9 @@
 package pages.acquisition.bluelayer;
 
+import java.util.List;
+
 import org.junit.Assert;
+import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -193,13 +196,14 @@ public BLayerPlanComparePage SelectThePlan() throws InterruptedException {
 	
 	
 	public BLayerPlanComparePage AddAnotherPlanButtonValidation() throws InterruptedException {
-		Thread.sleep(9000);				
-		if(AddAnotherPlanLink1.isDisplayed() && AddAnotherPlanLink2.isDisplayed() ){			
-			return null;
-		}
-		return new BLayerPlanComparePage(driver); 
+		Thread.sleep(7000);		
+		List<WebElement> deleteLinks = driver.findElements(By.xpath(".//*[@id='topRowCopy']/div/div[6]/div/a/span"));
+			Assert.assertTrue(deleteLinks.isEmpty());
+			return new BLayerPlanComparePage(driver); 
 	}	
 	
+	
+
 	public BLayerPlanComparePage InPatientValueValidation() throws InterruptedException {
 		Thread.sleep(7000);				
 		JavascriptExecutor jse = (JavascriptExecutor)driver;
