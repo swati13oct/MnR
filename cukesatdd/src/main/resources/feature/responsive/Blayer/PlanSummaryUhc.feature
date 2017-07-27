@@ -454,3 +454,19 @@ Then user validates PCP and Specialist Co-pay
 Examples:
 |zipCode|county          |planType|
 |28682 |Alexander| MA     |
+
+
+@US698836
+Scenario Outline: To validate the Provider section is enabled
+Given the user is on the  team-c vpp portfolio page
+Then the user performs plan search TeamC using zipcode
+              | Zip Code |<zipCode>|
+              | County   |<county> |
+Then the user navigates to the TeamC plan type
+| PlanType | <planType> |
+And User selects Plans to compare
+Then user validates Outpatient Surgery row for AARPMedicareFocus Plans
+
+Examples:
+|zipCode|county          |planType|
+|32963 |Indian River| MA     |

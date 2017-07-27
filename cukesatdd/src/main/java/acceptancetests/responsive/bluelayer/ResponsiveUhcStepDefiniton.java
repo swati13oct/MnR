@@ -157,6 +157,9 @@ public class ResponsiveUhcStepDefiniton {
 
 	@Then("^the user navigates to the TeamC plan type$")
 	public void planType_details_in_TeamC_aarp_site(DataTable givenAttributes) {
+		
+		WebDriver wd = getLoginScenario().getWebDriver();
+		wd.navigate().refresh();
 
 		List<DataTableRow> memberAttributesRow = givenAttributes
 				.getGherkinRows();
@@ -184,6 +187,7 @@ public class ResponsiveUhcStepDefiniton {
 
 	@And("^User selects Plans to compare$")
 	public void TeamC_Plan_Compare() throws InterruptedException{
+	    
 		BLayerPlanComparePage BLayerplanCompare = (BLayerPlanComparePage) getLoginScenario()
 				.getBean(PageConstants.RESPONSIVE_DETAILS_PAGE);
 		BLayerPlanComparePage BLayerTeamCCompare = BLayerplanCompare.SelectAllPlans();
@@ -312,6 +316,19 @@ public class ResponsiveUhcStepDefiniton {
 		BLayerPlanComparePage GoToFootNotesSection = (BLayerPlanComparePage) getLoginScenario()
 				.getBean(PageConstants.TeamC_Plan_Compare_Page);
 		BLayerPlanComparePage BLayerTeamCFootNotes = GoToFootNotesSection.PDPandSpecialistCopayValidation();
+		if(BLayerTeamCFootNotes!=null){
+			getLoginScenario().saveBean(PageConstants.TeamC_FootNotes_Section, BLayerTeamCFootNotes);
+		}else{
+			Assert.fail();
+		}
+	}
+	
+	
+	@Then("^user validates Outpatient Surgery row for AARPMedicareFocus Plans$")
+	public void OutpatientValueValidation() throws InterruptedException{
+		BLayerPlanComparePage GoToFootNotesSection = (BLayerPlanComparePage) getLoginScenario()
+				.getBean(PageConstants.TeamC_Plan_Compare_Page);
+		BLayerPlanComparePage BLayerTeamCFootNotes = GoToFootNotesSection.OutPatientValidation();
 		if(BLayerTeamCFootNotes!=null){
 			getLoginScenario().saveBean(PageConstants.TeamC_FootNotes_Section, BLayerTeamCFootNotes);
 		}else{
