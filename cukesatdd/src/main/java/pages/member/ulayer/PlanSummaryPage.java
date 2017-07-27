@@ -44,7 +44,7 @@ public class PlanSummaryPage extends UhcDriver {
 	@FindBy(xpath = ".//*[@id='plan_box']/div[1]/div[2]/div/p[2]/a")
 	private WebElement medClaimsBtn;
 	
-	@FindBy(xpath = ".//*[@id='plan_box']/div[2]/div[2]/div/p[2]/a")
+	@FindBy(xpath = ".//*[@id='plan_box']/div/div[2]/div/p[2]/a")
 	private WebElement drugClaimsBtn;
 	
 	@FindBy(xpath = ".//*[@id='main_content']/div[1]/div[2]/div/div[3]/div[1]/div[2]/div/h3")
@@ -57,10 +57,10 @@ public class PlanSummaryPage extends UhcDriver {
 	public PlanSummaryPage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
-		String fileName = CommonConstants.PLAN_SUMMARY_PAGE_DATA;
+		/*String fileName = CommonConstants.PLAN_SUMMARY_PAGE_DATA;
 		planSummary = CommonUtility.readPageData(fileName,
 				CommonConstants.PAGE_OBJECT_DIRECTORY_ULAYER_MEMBER);
-		openAndValidate();
+		openAndValidate();*/
 	}
 
 	public AddPlanPopUpPage clickAddPlan() {

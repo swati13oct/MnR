@@ -135,14 +135,10 @@ public class DrugClaimSummaryPage extends UhcDriver {
 		super(driver);
 		PageFactory.initElements(driver, this);
 		// TODO: Finally we should wait only for one element
-		CommonUtility.waitForPageLoad(driver, drugClaimsPageheading,CommonConstants.TIMEOUT_30);
-		CommonUtility.waitForPageLoad(driver, searchResultMessage,CommonConstants.TIMEOUT_30);
-		CommonUtility.waitForPageLoad(driver, customResultMessage, CommonConstants.TIMEOUT_30);
-		CommonUtility.waitForPageLoad(driver, noClaimsFoundMessage, CommonConstants.TIMEOUT_30);
-		String fileName = CommonConstants.DRUG_CLAIMS_SUMMARY_PAGE_DATA;
+		/*String fileName = CommonConstants.DRUG_CLAIMS_SUMMARY_PAGE_DATA;
 		drugClaimsSummary = CommonUtility.readPageData(fileName,
 				CommonConstants.PAGE_OBJECT_DIRECTORY_ULAYER_MEMBER);
-		openAndValidate();
+		openAndValidate();*/
 	}
 
 	/*
@@ -496,6 +492,12 @@ public class DrugClaimSummaryPage extends UhcDriver {
 	
 	public boolean validateRxClaims() {
 		boolean flag = false;
+		try {
+			Thread.sleep(2000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		if(validate(dateFilled)&&validate(rxNumber)&&validate(medication)&&validate(pharmacy)&&validate(memberHasPaid)
 				&&validate(planHasPaid)&&validate(otherPayments)&&validate(searchResultMsg)){
 			flag = true;
