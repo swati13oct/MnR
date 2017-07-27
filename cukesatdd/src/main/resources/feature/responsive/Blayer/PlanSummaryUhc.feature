@@ -439,3 +439,18 @@ Then user validates Inpatient Hospital Co-pay
 Examples:
 |zipCode|county          |planType|
 |90210 |Los Angeles County| MA     |
+
+@US699362
+Scenario Outline: To validate the Provider section is enabled
+Given the user is on the  team-c vpp portfolio page
+Then the user performs plan search TeamC using zipcode
+              | Zip Code |<zipCode>|
+              | County   |<county> |
+Then the user navigates to the TeamC plan type
+| PlanType | <planType> |
+And User selects Plans to compare
+Then user validates PCP and Specialist Co-pay
+
+Examples:
+|zipCode|county          |planType|
+|28682 |Alexander| MA     |

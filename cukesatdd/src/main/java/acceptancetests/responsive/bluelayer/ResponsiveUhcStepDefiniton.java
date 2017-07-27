@@ -305,6 +305,19 @@ public class ResponsiveUhcStepDefiniton {
 			Assert.fail();
 		}
 	}
+	
+	
+	@Then("^user validates PCP and Specialist Co-pay$")
+	public void PCPandSpecialistCopayValidate() throws InterruptedException{
+		BLayerPlanComparePage GoToFootNotesSection = (BLayerPlanComparePage) getLoginScenario()
+				.getBean(PageConstants.TeamC_Plan_Compare_Page);
+		BLayerPlanComparePage BLayerTeamCFootNotes = GoToFootNotesSection.PDPandSpecialistCopayValidation();
+		if(BLayerTeamCFootNotes!=null){
+			getLoginScenario().saveBean(PageConstants.TeamC_FootNotes_Section, BLayerTeamCFootNotes);
+		}else{
+			Assert.fail();
+		}
+	}
 
 	@And ("^the user validates plan highlights$")
 	public void user_validates_planHighlights_poviderLink(){

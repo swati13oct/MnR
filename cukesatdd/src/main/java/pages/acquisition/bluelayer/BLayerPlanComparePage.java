@@ -61,11 +61,11 @@ public class BLayerPlanComparePage extends UhcDriver {
 	@FindBy(linkText="Look up your doctor")
 	private WebElement ProviderLink;
 	
-	@FindBy(xpath=".//*[@id='topRowCopy']/div/div[6]/div/a/span")
-	private WebElement AddAnotherPlanLink1;
+	@FindBy(xpath=".//*[@id='fixTable']/tbody/tr[4]/td[2]/div[1]/div/span[1]")
+	private WebElement PCPCopay;
 	
-	@FindBy(xpath=".//*[@id='topRowCopy']/div/div[8]/div/a/span")
-	private WebElement AddAnotherPlanLink2;
+	@FindBy(xpath=".//*[@id='fixTable']/tbody/tr[5]/td[2]/div[1]/div/span[1]")
+	private WebElement SpecialistCoPay;
 	
 	@FindBy(xpath=".//*[@id='fixTable']/tbody/tr[7]/td[2]/div/div/span[1]")
 	private WebElement InPatientHospitalStay;
@@ -215,6 +215,17 @@ public BLayerPlanComparePage SelectThePlan() throws InterruptedException {
 		 return null;
 	}
 	
-}
+	
+	public BLayerPlanComparePage PDPandSpecialistCopayValidation() throws InterruptedException {
+		Thread.sleep(7000);				
+		JavascriptExecutor jse = (JavascriptExecutor)driver;
+		jse.executeScript("window.scrollBy(0,100)", "");		
+		Thread.sleep(1000);		
+		if(PCPCopay.getText().contains("Tier 2") && SpecialistCoPay.getText().contains("Tier 2")){
+			 return new BLayerPlanComparePage(driver);
+		 }
+		 return null;
+	}
+} 
 
 
