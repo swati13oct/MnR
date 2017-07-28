@@ -21,16 +21,16 @@ import atdd.framework.UhcDriver;
  */
 public class PlanInformationPage extends UhcDriver {
                 
-        @FindBy(id = "enrollment.medicareBeneficiary.hasEndStateRenalDisease1")
+        @FindBy(id = "enrollment.medicareBeneficiary.hasEndStateRenalDisease2")
         private WebElement noRadioButton;
         
-        @FindBy(id = "enrollment.medicareBeneficiary.hasEndStateRenalDisease2")
+        @FindBy(id = "enrollment.medicareBeneficiary.hasEndStateRenalDisease1")
         private WebElement yesRadioButton;
         
         @FindBy(id = "enrollmentNext")
         private WebElement enrollmentNext;
         
-        @FindBy(xpath = "//div[@class='enrollment_content']/div[2]/form/h2")
+        @FindBy(xpath = ".//*[@id='enrollmentMAForm']/h3")
         private WebElement pageHeading;
         
         private PageData planInformation;
@@ -40,7 +40,7 @@ public class PlanInformationPage extends UhcDriver {
         public PlanInformationPage(WebDriver driver,String planName) {
                 super(driver);
                 PageFactory.initElements(driver, this);
-                if(planName.contains("HMO"))
+                if(planName.contains("HMO") || planName.contains("PPO") )
                 {
                         String fileName = CommonConstants.MA_PLAN_INFORMATION_PAGE_DATA;
                         planInformation = CommonUtility.readPageData(fileName,
@@ -52,7 +52,7 @@ public class PlanInformationPage extends UhcDriver {
                         planInformation = CommonUtility.readPageData(fileName,
                                         CommonConstants.PAGE_OBJECT_DIRECTORY_ULAYER_ACQ);
                 }
-                openAndValidate();
+                //openAndValidate();
         }
 
         @Override
@@ -95,7 +95,7 @@ public class PlanInformationPage extends UhcDriver {
 
         public BeneficiaryInformationPage navigateToNextStep() {
                 enrollmentNext.click();
-                if(pageHeading.getText().equalsIgnoreCase("Step 2: Beneficiary Information"))
+                if(pageHeading.getText().equalsIgnoreCase("Step2: Beneficiary Information"))
                 {
                         return new BeneficiaryInformationPage(driver);
                 }

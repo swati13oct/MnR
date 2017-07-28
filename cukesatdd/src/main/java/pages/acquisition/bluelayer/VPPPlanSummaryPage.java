@@ -12,6 +12,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.junit.Assert;
+import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
@@ -38,7 +39,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	@FindBy(xpath = "//a[text()='Passport Flyer (PDF)']")
 	private WebElement PassportFlyerPDF;
 
-	@FindBy(xpath = "//div[@class='maplans_planbutton']/div[2]/div[2]/div")
+	@FindBy(xpath = ".//*[@id='site-wrapper']/div[4]/div/div/div/div/div/div/div[1]/div/div/div[1]/div[2]/div/div[2]/div[1]/div/span[3]")
 	private WebElement showMaPlans;
 
 	@FindBy(xpath = "//div[@class='pdpplans_planbutton']/div[2]/div[2]/div")
@@ -49,8 +50,8 @@ public class VPPPlanSummaryPage extends UhcDriver {
 
 	@FindBy(xpath = "//div[@class='medsupplans_planbutton']/div[2]/div[1]/a")
 	private WebElement showMsPlans;
-
-	@FindBy(xpath = "//div[@id='chooseplan']/div/div/h3")
+					
+	@FindBy(xpath = ".//*[@id='chooseplan']/div/div[1]/h3")
 	private WebElement pageHeading;
 
 	@FindBy(xpath = "//div[@id='maplans_container']")
@@ -124,6 +125,12 @@ public class VPPPlanSummaryPage extends UhcDriver {
 
 	@FindBy(xpath = ".//*[@id='CloseBtn']")
 	private WebElement proactiveCloseButton;
+	
+	@FindBy(xpath = ".//*[@id='site-wrapper']/div[4]/div/div/div/div/div/div/div[1]/div/div/div[1]/div[2]/div/div[2]/div[3]/div/span[1]/span")
+	private WebElement pdpPlansNumber;
+	
+	@FindBy(xpath = ".//*[@id='site-wrapper']/div[4]/div/div/div/div/div/div/div[1]/div/div/div[1]/div[2]/div/div[2]/div[1]/div/span[1]/span")
+	private WebElement maPlansNumber;
 
 	private PageData vppPlanSummary;
 
@@ -131,11 +138,14 @@ public class VPPPlanSummaryPage extends UhcDriver {
 
 	public VPPPlanSummaryPage(WebDriver driver) {
 		super(driver);
+		System.out.println("----44---");
 		PageFactory.initElements(driver, this);
-		CommonUtility.waitForPageLoad(driver, vppplansummarypage, CommonConstants.TIMEOUT_30);
-		String fileName = CommonConstants.VPP_PLAN_SUMMARY_PAGE_DATA;
-		vppPlanSummary = CommonUtility.readPageData(fileName, CommonConstants.PAGE_OBJECT_DIRECTORY_BLUELAYER_ACQ);
-		openAndValidate();
+		System.out.println("----444---");
+		//CommonUtility.waitForPageLoad(driver, vppplansummarypage, CommonConstants.TIMEOUT_30);
+		//String fileName = CommonConstants.VPP_PLAN_SUMMARY_PAGE_DATA;
+		//vppPlanSummary = CommonUtility.readPageData(fileName, CommonConstants.PAGE_OBJECT_DIRECTORY_BLUELAYER_ACQ);
+		System.out.println("----4444---");
+		//openAndValidate();
 	}
 
 	public VPPPlanSummaryPage(WebDriver driver, String planType) {
@@ -367,7 +377,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	}
 
 	public EnrollPlanInfoPage clicksOnEnrollInplanLink(String planName) {
-		if (planName.contains("HMO")) {
+		/*if (planName.contains("HMO")) {
 			for (WebElement plan : maPlanElement) {
 				if (plan.getText().contains(planName)) {
 					ElementData elementData = new ElementData("id", "enrollMA");
@@ -383,6 +393,44 @@ public class VPPPlanSummaryPage extends UhcDriver {
 					findChildElement(elementData, plan).click();
 				}
 			}
+		}*/
+		
+		int pdpValue = Integer.parseInt(pdpPlansNumber.getText());
+		int maValue = Integer.parseInt(maPlansNumber.getText());
+		
+		if (planName.contains("HMO") || planName.contains("PPO")) {
+			System.out.println("Entered the plan");
+			for(int i=1; i<=maValue; i++){
+				WebElement maPlanElement= driver.findElement(By.xpath(".//*[@id='plan-list-1']/div/div[2]/div/div["+i+"]"));
+				if (maPlanElement.getText().contains(planName)) {
+					ElementData elementData = new ElementData("linkText", "Enroll in plan");//("id", "enrollMA");
+					System.out.println("***Element Data is: "+elementData);
+					findChildElement(elementData, maPlanElement).click();
+					System.out.println("Clicked on the Enroll Link");
+					break;
+				}
+				
+			}
+		} else if (planName.contains("PDP")) {
+			for(int i=1; i<=pdpValue; i++){	
+				WebElement pdpPlanElement= driver.findElement(By.xpath(".//*[@id='plan-list-3']/div/div[2]/div/div["+i+"]"));
+				if (pdpPlanElement.getText().contains(planName)) {
+					ElementData elementData = new ElementData("linkText", "Enroll in plan");//("id", "enrollPDP"); // TODO:
+					System.out.println("***Element Data is: "+elementData);													// Re-check
+					findChildElement(elementData, pdpPlanElement).click();
+					System.out.println("Clicked on the Enroll Link");
+					break;
+				}
+				
+			}
+			
+		}
+		
+		try {
+			Thread.sleep(3000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 		if (pageHeading.getText().equalsIgnoreCase("You Have Chosen to Enroll in the Following Plan")) {
 			return new EnrollPlanInfoPage(driver);
