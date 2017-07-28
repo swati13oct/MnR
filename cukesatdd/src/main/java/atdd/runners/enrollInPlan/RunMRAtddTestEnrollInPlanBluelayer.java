@@ -12,7 +12,7 @@ import cucumber.junit.Cucumber;
 @Cucumber.Options(glue = { "atdd.framework","acceptancetests.enrollinplan.bluelayer" }, 
 		features = { "feature/enroll-in-plan/bluelayer" }, 
 		format = {
-		"pretty", "html:reports/test-report" }, tags ={"@OLEBlayerMapd"})
+		"pretty", "html:reports/test-report","json:target/cucumber.json" }, tags ={"@OLEBlayerMapd"})
 
 public class RunMRAtddTestEnrollInPlanBluelayer {
 

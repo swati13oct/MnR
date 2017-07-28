@@ -12,7 +12,7 @@ import cucumber.junit.Cucumber;
 @Cucumber.Options(glue = { "atdd.framework","acceptancetests.enrollinplan.ulayer" }, 
 		features = { "feature/enroll-in-plan/Ulayer" }, 
 		format = {
-		"pretty", "html:reports/test-report" }, tags ={"@enrollInPlanulayer"})
+		"pretty", "html:reports/test-report","json:target/cucumber.json" }, tags ={"@enrollInPlanulayer"})
 
 public class RunMRAtddTestEnrollInPlanUlayer {
 
