@@ -1,3 +1,4 @@
+@AcqSEO
 @BlayerAcqSEO
 Feature: To test httpfox should not list more than 3 permanent 301 redirects in UMS site Blayer
 Scenario Outline: Verify httpfox should not list more than 3 permanent 301 redirects in UMS site Blayer

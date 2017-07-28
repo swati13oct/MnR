@@ -1,3 +1,4 @@
+@AcqSEO
 @UlayerAcqSEO
 Feature: To test httpfox should not list more than 3 permanent 301 redirects in AARP site Ulayer
 Scenario Outline: Verify httpfox should not list more than 3 permanent 301 redirects in AARP site Ulayer
