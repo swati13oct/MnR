@@ -1,4 +1,5 @@
 @fixedTestCaseTest
+@globalfooter
 @globalfooterUMS
 Feature:To test Global Footer links in UMS site
 Scenario:To verify links displayed in Global footer section in UMS site

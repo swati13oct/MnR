@@ -1,4 +1,5 @@
 @fixedTestCaseTest
+@globalfooter
 @globalfooterAARP
 Feature:To test global footer links in AARP site
 Scenario:To verify links displayed in the global footer of AARP site
