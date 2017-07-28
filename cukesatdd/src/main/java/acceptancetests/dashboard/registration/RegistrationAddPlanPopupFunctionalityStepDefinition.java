@@ -131,7 +131,7 @@
                                 }
                 
                 
-                @And("^correct second plan name value is displayed$")
+                @And("^correct second plans name value is displayed$")
                 public void correctPlanNameisdisplayed(DataTable givenAttributes) {
 // get test variables
                             List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
@@ -185,7 +185,15 @@
                                 registrationInformationPage.getConfirmonPopup().isDisplayed(); 
                                 
                                 }
-
+     
+                @And("^member clicks continue button$")
+                public void clickbuttonspresent() {
+                                RegistrationInformationPage registrationInformationPage = (RegistrationInformationPage) 
+                                                                getLoginScenario().getBean(PageConstants.REGISTRATION_INFORMATION_PAGE);
+                                registrationInformationPage.clickContinuebuttononPopup(); 
+                                
+                                
+                                }
 
                 @Then("^the user is navigated to  Multiple Plan Variation View and the checkbox is checked for both the plans$")
                 public void navigatetoMultiPlanView()

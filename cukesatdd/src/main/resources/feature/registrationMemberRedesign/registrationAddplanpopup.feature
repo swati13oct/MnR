@@ -11,13 +11,12 @@ Feature: To test add a plan flow and error for registration flow in redesign por
     Then member will be navigated to registration plan information page
     And Previous button is displayed
     And Next button is displayed
-    When member clicks on Next button
+    When member clicks on next button
     Then the member navigate to the Additional Plans section is displayed on Plan Information page
     When member enters memberid for second plan into member id text field
       | Second Plan Member ID | <secplanMemberId> |
     And clicks on Add a Plan button
-    Then Confirm Plan Details pop up is displayed
-    And verify Add Plan Popup Header is displayed
+    Then Confirm Plan Details pop up is displayed with correct header
     And Cancel button in top right hand corner is displayed
     And correct second plans member ID value is displayed
       | Second Plan Member ID | <secplanMemberId> |
@@ -27,7 +26,7 @@ Feature: To test add a plan flow and error for registration flow in redesign por
       | Second Plan name | <secplanname> |
     And correct second plans Member date of birth value is displayed
       | Second Date of birth | <secdateOfBirth> |
-    And verify continue and cancel button is displayed
+    And verify continue button and cancel link is displayed
     When member clicks continue button
     Then the user is navigated to  Multiple Plan Variation View and the checkbox is checked for both the plans
     And Next button is displayed
