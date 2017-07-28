@@ -171,10 +171,83 @@ public class RegistrationInformationPage extends UhcDriver {
        @FindBy(id = "addPlanHeading")
        private WebElement additionalInfoHeader;
        
-       /**Pffs Error message. */
-       @FindBy(xpath = ".//*[@id='register-form']/div[1]/div/div/div/div/p")
+       /** The PFFS member Id error message */
+       @FindBy(id = "pffsMemberErrorMsg")
        private WebElement pffsErrorMessage;
+       
+       /** Multiple Plans**/
+      
+  
+       /** The additional Plan member ID */
+       @FindBy(id = "multiple-member-id")
+       private WebElement additionalPlanMemberID;
 
+       /** The add a plan button */
+      @FindBy(id = "add-to-plan")
+       private WebElement addPlanButton;
+
+
+       /**
+        *Add a Plan pop up objects
+        *
+        */
+
+
+       /** The add a plan pop up header*/
+       @FindBy(id = "addPlanModalLabel")
+       private WebElement addPlanPopUpHeader;
+       
+       /** The cancel link button on add a plan pop up*/
+       @FindBy(id = "modalCancelBtn")
+       private WebElement cancelLinkPopup;
+       
+
+       /** The confirm button on add a plan pop up*/
+       @FindBy(id = "add-plan-confirm")
+       private WebElement addPlanConfirmButton;
+       
+       /** The modal values to be validated**/
+       @FindBy(id = "modalMemberIdValue")
+       private WebElement modalMemberIdValue;
+       
+       @FindBy(id = "modalMemberNameValue")
+       private WebElement modalMemberNameValue;
+       
+       @FindBy(id = "modalPlanNameValue")
+       private WebElement modalPlanNameValue;
+      
+       @FindBy(id = "modalDateOfBirthValue")
+       private WebElement modalDateOfBirthValue;
+       
+       /*checkbox status*/
+       
+       @FindBy(id="add-to-account2")
+       private WebElement addtoaccount2;
+       
+       @FindBy(id="add-to-account")
+       private WebElement addtoaccount;
+       
+       /** The member id already registered error message */
+       @FindBy(id="planAlreadyRegisteredErrorMessage")
+       private WebElement memberAlreadyRegisteredError;
+
+/** The future effective member Id error message */
+       @FindBy(id="planInFutureErrorMessage")
+       private WebElement futureEffectiveError;
+
+/** The terminated member Id error message */
+       @FindBy(id="planTerminatedErrorMessage")
+       private WebElement terminatedErrorMessage;
+
+/** The invalid member Id error message */
+       @FindBy(id="invalidMemberErrorMessage")
+       private WebElement invalidMemberError;
+
+/** The same member Id error message */
+       @FindBy(id="addingSamePlanErrorMessage")
+       private WebElement samePlanError;
+       
+       
        public RegistrationInformationPage(WebDriver driver) {
               super(driver);
               PageFactory.initElements(driver, this);
@@ -526,4 +599,128 @@ public class RegistrationInformationPage extends UhcDriver {
     		   Assert.assertTrue("pffs Error Message is displayed", true); }
     	   
        }
+       
+       /*Multiple Plan*/
+       
+       public void clickAddplanButton()
+       {
+    	   addPlanButton.click();
+       }
+       
+       /**
+        * @return the Add Plan header
+        */
+       public WebElement getPlanPopupHeader() {
+          return addPlanPopUpHeader;
+       }
+     
+       /**
+        * @return the Confirm on Add Plan Popup
+        */
+       public WebElement getConfirmonPopup() {
+          return addPlanConfirmButton;
+       }
+       /**
+        * @return the Cancel link on Add Plan Popup
+        */
+       public WebElement getCancelLinkonPopup() {
+          return cancelLinkPopup;
+       }
+       
+      
+        
+       /** clicks on Continue on Popup**/
+       
+       
+       public void clickContinuebuttononPopup()
+       {
+    	   addPlanConfirmButton.click();
+       }
+       /** correct modal values are displayed**/
+       
+       public WebElement getModalMemberIdValue()
+       {
+    	  return modalMemberIdValue;
+       }
+       
+       public WebElement getModalMemberNameValue()
+       {
+    	  return modalMemberNameValue;
+       }
+       
+       public WebElement getModalPlanNameValue()
+       {
+    	  return modalPlanNameValue;
+       }
+       
+       public WebElement getModalDateOfBirthValue()
+       {
+    	  return modalDateOfBirthValue;
+       }
+       /**
+        * @return the invalid mem id error message on Adding a Plan 
+        */
+       public WebElement getinvalidmemidError() {
+          return invalidMemberError;
+       }
+       
+       
+       /** 
+        * return the checkbox status
+        */
+       public WebElement getcheckbox1() {
+           return addtoaccount2;
+        }
+       
+       /** 
+        * return the another checkbox status
+        */
+       public WebElement getcheckbox2() {
+           return addtoaccount;
+        }
+       
+       
+       public boolean isChecked2()
+       {
+    	   if(addtoaccount2.getAttribute("checked")!=null)
+    	   return true; 
+    			   
+    	   else return false;
+       }
+      
+        
+         public boolean isChecked1()
+       {
+    	   if(addtoaccount.getAttribute("checked")!=null)
+    	   return true; 
+    			   
+    	   else return false;
+       }
+       /*
+        * @return the same mem plan error message on Adding a Plan 
+        */
+       public WebElement getsameMemIdError() {
+          return samePlanError;
+       }
+       
+       /**
+        * @return the future effective plan error message on Adding a Plan 
+        */
+       public WebElement getFuturePlanError() {
+          return futureEffectiveError;
+       }
+       
+       /**
+        * @return the plan being terminated error message on Adding a Plan 
+        */
+       public WebElement getplanterminatedError() {
+          return terminatedErrorMessage;
+       }
+       
+       
+       /*member id already registered*/
+       public WebElement getmemberidalreadyregisteredError() {
+           return memberAlreadyRegisteredError;
+        }
+       
        }
