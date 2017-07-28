@@ -747,7 +747,7 @@ public class ResponsiveUhcStepDefiniton {
 		planDetailsPage.validateRallyPage();*/
 	}
 	
-	@And("^the user navigated back using back to all plans$")
+	@And("^the user validates plan details from DCE$")
 	public void user_validates_back_to_all_plans() throws InterruptedException  {
 		Thread.sleep(4000);
 	}
