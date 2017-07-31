@@ -46,11 +46,12 @@
                                                     memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0), memberAttributesRow.get(i).getCells().get(1));
                                                 }
                                                 // get member ID
-                                                String secmemberId = memberAttributesMap.get("Second Plan Member ID");
+                                                String secMemberId = memberAttributesMap.get("Second Plan Member ID");
 
                                                 RegistrationInformationPage registrationInformationPage = (RegistrationInformationPage) 
                                                                                 getLoginScenario().getBean(PageConstants.REGISTRATION_INFORMATION_PAGE);      
-                                                registrationInformationPage.enterMedicareID(secmemberId);
+                                                //registrationInformationPage.enterMedicareID(secmemberId);
+                                                registrationInformationPage.enterSecMemberID(secMemberId);
                                                 try {
                                                                 Thread.sleep(2000);
                                                 } catch (InterruptedException e) {
@@ -101,12 +102,11 @@
 
         // get expected member ID
         String expectedmemberId = memberAttributesMap.get("Second Plan Member ID");
-//System.out.println("expected member id is" +expectedmemberId);
-// get actual member id from portal
+
+        // get actual member id from portal
         RegistrationInformationPage registrationInformationPage = (RegistrationInformationPage) 
         getLoginScenario().getBean(PageConstants.REGISTRATION_INFORMATION_PAGE);
         String actualmemberId = registrationInformationPage.getModalMemberIdValue().getText();
-        //System.out.println("actual member id is" +actualmemberId);
         Assert.assertEquals(expectedmemberId, actualmemberId);
                                 }
                 
@@ -121,19 +121,17 @@
 
                             // get expected member name
                             String expectedmembername = memberAttributesMap.get("Second Member name");
-              //  System.out.println("expected member name is" +expectedmembername);
-                // get actual member name from portal
+                            // get actual member name from portal
                             RegistrationInformationPage registrationInformationPage = (RegistrationInformationPage) 
                             getLoginScenario().getBean(PageConstants.REGISTRATION_INFORMATION_PAGE);
                             String actualmembername = registrationInformationPage.getModalMemberNameValue().getText();
-                            //System.out.println("actual member id is" +actualmembername);
                             Assert.assertEquals(expectedmembername, actualmembername); 
                                 }
                 
                 
                 @And("^correct second plans name value is displayed$")
                 public void correctPlanNameisdisplayed(DataTable givenAttributes) {
-// get test variables
+                	// get test variables
                             List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
                             Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
                             for (int i = 0; i < memberAttributesRow.size(); i++) {
@@ -142,18 +140,16 @@
 
             // get expected member name
             String expectedplanname = memberAttributesMap.get("Second Plan name");
-//  System.out.println("expected member name is" +expectedmembername);
-// get actual member name from portal
+            // get actual member name from portal
             RegistrationInformationPage registrationInformationPage = (RegistrationInformationPage) 
             getLoginScenario().getBean(PageConstants.REGISTRATION_INFORMATION_PAGE);
             String actualplanname = registrationInformationPage.getModalPlanNameValue().getText();
-            //System.out.println("actual member id is" +actualmembername);
             Assert.assertEquals(expectedplanname, actualplanname); 
                 }
 
                 @And("^correct second plans Member date of birth value is displayed$")
                 public void correctMemberDatePfBirthValueisdisplayed(DataTable givenAttributes) {
-        // get test variables
+                	// get test variables
                         List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
                         Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
                         for (int i = 0; i < memberAttributesRow.size(); i++) {
@@ -200,21 +196,21 @@
                 {
                                 RegistrationInformationPage registrationInformationPage = (RegistrationInformationPage) 
                                                                 getLoginScenario().getBean(PageConstants.REGISTRATION_INFORMATION_PAGE);
-                                ((RegistrationInformationPage) registrationInformationPage.getcheckbox1()).isChecked1();
-                                ((RegistrationInformationPage) registrationInformationPage.getcheckbox2()).isChecked2();
+                                 
                                 
+                               Assert.assertTrue(registrationInformationPage.getcheckbox1().isSelected());
+                               Assert.assertTrue(registrationInformationPage.getcheckbox2().isSelected());
+                               
                 
                 }
              
-              
-                
-                
+
                 @Then("^error message of invalid member id is displayed$")
                 public void planNotFoundErrorMessage() {
             		RegistrationInformationPage registrationInformationPage = (RegistrationInformationPage) 
             				getLoginScenario().getBean(PageConstants.REGISTRATION_INFORMATION_PAGE);
             		registrationInformationPage.getinvalidmemidError().isDisplayed();
-            		Assert.assertTrue(registrationInformationPage.getIncorrectInfoError().getText().contains("invalid"));
+            		Assert.assertTrue(registrationInformationPage.getinvalidmemidError().getText().contains("Invalid "));
             		
             		}
                 
@@ -223,7 +219,7 @@
             		RegistrationInformationPage registrationInformationPage = (RegistrationInformationPage) 
             				getLoginScenario().getBean(PageConstants.REGISTRATION_INFORMATION_PAGE);
             		registrationInformationPage.getsameMemIdError().isDisplayed();
-            		Assert.assertTrue(registrationInformationPage.getIncorrectInfoError().getText().contains("samePlan"));
+            		Assert.assertTrue(registrationInformationPage.getsameMemIdError().getText().contains("same plan"));
             		
             		}
                 @Then("^error message of plan has a future effective date is displayed$")
@@ -231,7 +227,7 @@
             		RegistrationInformationPage registrationInformationPage = (RegistrationInformationPage) 
             				getLoginScenario().getBean(PageConstants.REGISTRATION_INFORMATION_PAGE);
             		registrationInformationPage.getFuturePlanError().isDisplayed();
-            		Assert.assertTrue(registrationInformationPage.getIncorrectInfoError().getText().contains("future"));
+            		Assert.assertTrue(registrationInformationPage.getFuturePlanError().getText().contains("future"));
             		
             		}
                 
@@ -241,7 +237,7 @@
                 	RegistrationInformationPage registrationInformationPage = (RegistrationInformationPage) 
             				getLoginScenario().getBean(PageConstants.REGISTRATION_INFORMATION_PAGE);
             		registrationInformationPage.getplanterminatedError().isDisplayed();
-            		Assert.assertTrue(registrationInformationPage.getIncorrectInfoError().getText().contains("terminated"));
+            		Assert.assertTrue(registrationInformationPage.getplanterminatedError().getText().contains("Teminated "));
                 
                 }
                 
@@ -251,15 +247,10 @@
                 	RegistrationInformationPage registrationInformationPage = (RegistrationInformationPage) 
             				getLoginScenario().getBean(PageConstants.REGISTRATION_INFORMATION_PAGE);
             		registrationInformationPage.getmemberidalreadyregisteredError().isDisplayed();
-            		Assert.assertTrue(registrationInformationPage.getIncorrectInfoError().getText().contains("AlreadyRegistered"));
+            		Assert.assertTrue(registrationInformationPage.getmemberidalreadyregisteredError().getText().contains("AlreadyRegistered"));
                 
                 }
-                
-                
-                
-                
-                
-                
+  
                 
 }
 

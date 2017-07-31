@@ -557,6 +557,10 @@ public class RegistrationInformationPage extends UhcDriver {
       public WebElement getNextButton(){
       return nextButton;
       }
+      
+      
+      
+     
 
              /**
               * Functions for Additional Info Error messages
@@ -602,6 +606,18 @@ public class RegistrationInformationPage extends UhcDriver {
        
        /*Multiple Plan*/
        
+       
+       /**
+        * Enter Secondary plan member ID.
+        */
+       public void enterSecMemberID(String memberID) {
+          sendkeys(additionalPlanMemberID, memberID);
+       }
+       
+       
+       /**
+        * click on add a plan button.
+        */
        public void clickAddplanButton()
        {
     	   addPlanButton.click();
@@ -630,18 +646,17 @@ public class RegistrationInformationPage extends UhcDriver {
       
         
        /** clicks on Continue on Popup**/
-       
-       
        public void clickContinuebuttononPopup()
        {
     	   addPlanConfirmButton.click();
        }
-       /** correct modal values are displayed**/
        
+       /** correct modal values are displayed**/
        public WebElement getModalMemberIdValue()
        {
     	  return modalMemberIdValue;
        }
+       
        
        public WebElement getModalMemberNameValue()
        {
@@ -657,6 +672,7 @@ public class RegistrationInformationPage extends UhcDriver {
        {
     	  return modalDateOfBirthValue;
        }
+      
        /**
         * @return the invalid mem id error message on Adding a Plan 
         */
@@ -679,24 +695,7 @@ public class RegistrationInformationPage extends UhcDriver {
            return addtoaccount;
         }
        
-       
-       public boolean isChecked2()
-       {
-    	   if(addtoaccount2.getAttribute("checked")!=null)
-    	   return true; 
-    			   
-    	   else return false;
-       }
-      
-        
-         public boolean isChecked1()
-       {
-    	   if(addtoaccount.getAttribute("checked")!=null)
-    	   return true; 
-    			   
-    	   else return false;
-       }
-       /*
+         /*
         * @return the same mem plan error message on Adding a Plan 
         */
        public WebElement getsameMemIdError() {

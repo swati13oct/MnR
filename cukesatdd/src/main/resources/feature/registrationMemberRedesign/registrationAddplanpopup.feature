@@ -50,7 +50,7 @@ Feature: To test add a plan flow and error for registration flow in redesign por
     Then member will be navigated to registration plan information page
     And Previous button is displayed
     And Next button is displayed
-    When member clicks on Next button
+    When member clicks on next button
     Then the member navigate to the Additional Plans section is displayed on Plan Information page
     When member enters memberid for second plan into member id text field
       | Second Plan Member ID | <secplanMemberId> |
@@ -71,7 +71,7 @@ Feature: To test add a plan flow and error for registration flow in redesign por
     Then member will be navigated to registration plan information page
     And Previous button is displayed
     And Next button is displayed
-    When member clicks on Next button
+    When member clicks on next button
     Then the member navigate to the Additional Plans section is displayed on Plan Information page
     When member enters memberid for second plan into member id text field
       | Second Plan Member ID | <secplanMemberId> |
@@ -92,7 +92,7 @@ Feature: To test add a plan flow and error for registration flow in redesign por
     Then member will be navigated to registration plan information page
     And Previous button is displayed
     And Next button is displayed
-    When member clicks on Next button
+    When member clicks on next button
     Then the member navigate to the Additional Plans section is displayed on Plan Information page
     When member enters memberid for second plan into member id text field
       | Second Plan Member ID | <secplanMemberId> |
@@ -113,7 +113,7 @@ Feature: To test add a plan flow and error for registration flow in redesign por
     Then member will be navigated to registration plan information page
     And Previous button is displayed
     And Next button is displayed
-    When member clicks on Next button
+    When member clicks on next button
     Then the member navigate to the Additional Plans section is displayed on Plan Information page
     When member enters memberid for second plan into member id text field
       | Second Plan Member ID | <secplanMemberId> |
@@ -134,7 +134,7 @@ Feature: To test add a plan flow and error for registration flow in redesign por
     Then member will be navigated to registration plan information page
     And Previous button is displayed
     And Next button is displayed
-    When member clicks on Next button
+    When member clicks on next button
     Then the member navigate to the Additional Plans section is displayed on Plan Information page
     When member enters memberid for second plan into member id text field
       | Second Plan Member ID | <secplanMemberId> |
