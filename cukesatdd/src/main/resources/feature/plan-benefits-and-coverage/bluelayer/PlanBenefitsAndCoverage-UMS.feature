@@ -825,7 +825,7 @@ Examples:
       ##member used :PDP_GROUP123
 
       
-  @validatePdfsectionjenkins
+  @validatePdfsection
       Scenario Outline: Verify PDF section is in place on Benefits and     Coverage page
     Given registered UHC with following details for plan benefits and coverage flow in UMS site
       | Plan Type      | <planType>  |
@@ -840,9 +840,8 @@ Examples:
      Examples:
       
       | planType|  memberType  | copayCategory | language |
-      | MAPD    |  Group       |  NON LIS      | SPANISH  | 
-      | MAPD    |  Group       |  NON LIS      | CHINESE  |
-      ##MAPD_Group_113_nonlis
+      | MAPD    |  Group       |  NON LIS      | ENGLISH  | 
+      ##q2_jun_grp340
 
 
       

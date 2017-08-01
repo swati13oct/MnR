@@ -11,8 +11,7 @@ import atdd.framework.MRScenario;
  */
 public class MRConstants {
 
-	public static final String AARPM_URL = "https://member." + MRScenario.environment
-			+ "-aarpmedicareplans.uhc.com";
+	public static final String AARPM_URL = "https://member." + MRScenario.environment+ "-aarpmedicareplans.uhc.com";
 
 
 	public static final String TESTHARNESSU_URL = "https://member." + MRScenario.environment
@@ -22,8 +21,7 @@ public class MRConstants {
 	public static final String TESTHARNESS_URL_ULAYER = "https://member.awe-" + MRScenario.environment
 			+ "-aarpmedicareplans.uhc.com/content/aarpm/home/testharness.html";
 	public static final String BNCBURL = "https://member." + MRScenario.environment + "-uhcmedicaresolutions.uhc.com/";
-	public static final String UHCM_URL = "https://member.awe-" + MRScenario.environment
-			+ "-uhcmedicaresolutions.uhc.com/guest/home.html";
+	public static final String UHCM_URL = "https://member.awe-" + MRScenario.environment+ "-uhcmedicaresolutions.uhc.com/login.html";
 	 //public static final String AARP_URL ="https://www.awe-"+MRScenario.environment+"-aarpmedicareplans.uhc.com/";
 	public static final String AARP_URL = "https://www.awe-" + MRScenario.environment + "-aarpmedicareplans.uhc.com/";
 
