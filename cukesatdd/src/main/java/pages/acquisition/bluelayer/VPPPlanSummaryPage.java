@@ -12,6 +12,8 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.junit.Assert;
+import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
@@ -183,7 +185,11 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	@FindBy(xpath="//*[contains(text(),'Primary Care Physician (PCP')] ")
 	private WebElement Physician;
 
-	@FindBy(xpath=".//*[contains(@ng-bind-html,'buttonText')  and contains(text(),'Save')]")
+	//@FindBy(xpath=".//*[contains(@ng-bind-html,'buttonText')  and contains(text(),'Save')]")
+	//private WebElement Savebtn;
+	
+	
+	@FindBy(xpath="//div[contains(@class,'first')]//div[@class='hidden-phone']/button[not(contains(@class,'hidden'))]")
 	private WebElement Savebtn;
 
 	//@FindBy(xpath=".//*[@id='label_unsaved_selectedLocation0']")
@@ -753,8 +759,11 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		Physician.click();
 
 		waitforElement(Savebtn);
+		
+		JavascriptExecutor js = (JavascriptExecutor)driver;
+		js.executeScript("arguments[0].click();", Savebtn);
 
-		Savebtn.click();
+		//Savebtn.click();
 		waitforElement(Viewsavebtn);
 
 		Viewsavebtn.click();
@@ -779,6 +788,21 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	public boolean providerinfo()
 	{
 		String providerinfo=provider.getText();
+		if(providerinfo.contains("1 providers covered"))
+		{
+			return true;
+		}
+		return false;
+	}
+
+	public boolean providerinfo(String planName)
+	{
+		String providerinfo=provider.getText();
+		
+		WebElement ProviderSearchLink1 = driver.findElement
+					(By.xpath("//div[contains(text(),'"+planName+"')]/following::p[contains(text(),'covered')][1]"));
+		String mproviderinfo=ProviderSearchLink1.getText();
+        System.out.println(mproviderinfo);
 		if(providerinfo.contains("1 providers covered"))
 		{
 			return true;
