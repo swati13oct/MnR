@@ -316,6 +316,14 @@ public class ClaimSummarypage extends UhcDriver{
 		System.out.println("The URL of the page is---------->"+driver.getCurrentUrl());
 		if(driver.getTitle().equalsIgnoreCase("Claims")){
 			
+			
+			try { Thread.sleep(10000); } 
+			catch (InterruptedException e) {
+				
+				
+				// TODO Auto-generated catch block e.printStackTrace();
+				}
+			
 			waitforElement(driver.findElement(By.id("document-date")));
 			
 			Select dropdown = new Select(driver.findElement(By.id("document-date")));
