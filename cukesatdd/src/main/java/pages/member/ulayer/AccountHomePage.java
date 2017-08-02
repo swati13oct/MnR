@@ -616,6 +616,7 @@ public class AccountHomePage extends UhcDriver {
 	}
 
 	public pages.dashboard.member.ulayer.ClaimDetailsPage navigateToClaimDetailsPage() {
+		CommonUtility.waitForPageLoad(driver, claimstablemoreinfolink, 60);
 		claimstablemoreinfolink.click();
 		CommonUtility.waitForPageLoad(driver, claimDetTableMainSection, 30);
 		
