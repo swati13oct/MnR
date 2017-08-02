@@ -181,6 +181,12 @@ public class AccountHomePage extends UhcDriver {
 
 	@FindBy(linkText = "Date")
 	private WebElement dateLink;
+	
+	@FindBy(xpath = "//div[@class='claim-results']//table[not (contains(@class,'ng-hide'))]//tbody//tr[2]//a[text()='MORE INFO']")
+	private WebElement claimstablemoreinfolink;
+	
+	@FindBy (css = ".claimDetTableMainSection")
+	private WebElement claimDetTableMainSection;
 
 	public JSONObject accountHomeJson;
 
@@ -610,12 +616,10 @@ public class AccountHomePage extends UhcDriver {
 	}
 
 	public pages.dashboard.member.ulayer.ClaimDetailsPage navigateToClaimDetailsPage() {
-		//String url = "https://member.team-b-aarpmedicareplans.uhc.com/home/claims.html#/claims-Detail";
-		String url = "https://member.team-b-aarpmedicareplans.uhc.com/home/claims.html";
-		driver.get(url);
+		claimstablemoreinfolink.click();
+		CommonUtility.waitForPageLoad(driver, claimDetTableMainSection, 30);
 		
-		//driver.findElement(By.xpath(".//*[@id='ship']/tbody/tr[2]/td[8]/span/a")).click();
-		driver.findElement(By.xpath("//a[contains(text(),'MORE INFO')]")).click();
+		//driver.findElement(By.xpath("//a[contains(text(),'MORE INFO')]")).click();
 		/*
 		 * try { Thread.sleep(1000); } catch (InterruptedException e) { // TODO
 		 * Auto-generated catch block e.printStackTrace(); }
