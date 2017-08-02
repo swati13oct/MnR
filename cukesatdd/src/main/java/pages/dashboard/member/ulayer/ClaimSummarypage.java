@@ -316,6 +316,8 @@ public class ClaimSummarypage extends UhcDriver{
 		System.out.println("The URL of the page is---------->"+driver.getCurrentUrl());
 		if(driver.getTitle().equalsIgnoreCase("Claims")){
 			
+			waitforElement(driver.findElement(By.id("document-date")));
+			
 			Select dropdown = new Select(driver.findElement(By.id("document-date")));
 			
 			dropdown.selectByVisibleText("Last 24 months");
