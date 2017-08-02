@@ -38,7 +38,7 @@ public class ClaimSummarypage extends UhcDriver{
 	@FindBy(xpath=".//*[@class='claimsearch section']/div[1]//h1")
 	private WebElement myCaimsText;
 
-	@FindBy(xpath = "//html/head/title")
+	@FindBy(css = ".claim-results")
 	private WebElement ClaimsSummaryPage;
 
 	@FindBy(xpath=".//h2[contains(.,'Plan Name Lorem Ipsum')]")
