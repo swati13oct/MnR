@@ -600,7 +600,9 @@ public class AccountHomePage extends UhcDriver {
 		//String url = "https://member.team-b-aarpmedicareplans.uhc.com/home/claims.html";
 		String testharnessUrl = "https://member.team-b-aarpmedicareplans.uhc.com/content/aarpm/home/testharness.html";
 		driver.get(testharnessUrl);
-		driver.findElement(By.xpath("//a[contains(.,'Go to Claims Link page')]")).click();
+		CommonUtility.waitForPageLoad(driver, driver.findElement(By.xpath(".//*[text()='Go to Claims Link page']")), 60); 
+		driver.findElement(By.xpath(".//*[text()='Go to Claims Link page']")).click();
+		//driver.findElement(By.xpath("//a[contains(.,'Go to Claims Link page')]")).click();
 		
 		/*
 		 * try { Thread.sleep(1000); } catch (InterruptedException e) { // TODO
