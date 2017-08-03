@@ -369,7 +369,8 @@ public void VerifyAdditionPlanInformtionSeaction() {
 public void pffsMemberErrorMessage() {
 	RegistrationInformationPage registrationInformationPage = (RegistrationInformationPage) 
             getLoginScenario().getBean(PageConstants.REGISTRATION_INFORMATION_PAGE);
-	registrationInformationPage.validatePffsMemberErrorMessage();
+	registrationInformationPage.getpffsError().isDisplayed();
+	Assert.assertTrue(registrationInformationPage.getpffsError().toString().contains("pffsMember"));
 	
 }
 

@@ -594,13 +594,9 @@ public class RegistrationInformationPage extends UhcDriver {
        }
                  }
        
-       public void validatePffsMemberErrorMessage(){
-    	   if (!pffsErrorMessage.isDisplayed()){
-    		   Assert.assertTrue("pffs Error Message is not displayed", false);
-    		   
-    	   }else{
-    		   
-    		   Assert.assertTrue("pffs Error Message is displayed", true); }
+       public WebElement getpffsError()
+       {
+    	 return pffsErrorMessage; 
     	   
        }
        
