@@ -1108,3 +1108,18 @@ Feature: To test plan benefits and Coverage on AARP site for Federal members
       Examples: 
       | planType | copayCategory |
       | MAPD     | LIS       |
+      
+      
+                  
+ @PlanBenefitSummary
+  Scenario Outline: To validate the Plan benefit summary  in benefits and coverage page in AARP site
+    Given registered AMP with following details for plan benefits and coverage flow in AARP site
+      | Plan Type      | <planType>      |
+     
+
+    When the user navigate to benefits and coverage page under my plans in AARP site
+    Then the user validates Benefits summary in AARP site
+
+      Examples: 
+      | planType | 
+      | SHIP     |

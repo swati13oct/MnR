@@ -136,5 +136,15 @@ public class ProfileandPreferencesAARPStepDefinition {
 		ProfileandPreferencespage.validatePlanNameMemberidandName();
 	
 	}
+	@Then("^the user validates the Email section in AARP site")
+	public void UserValidatesEmail() {
+		pages.member.ulayer.ProfileandPreferencesPage ProfileandPreferencespage = (pages.member.ulayer.ProfileandPreferencesPage) getLoginScenario()
+				.getBean(PageConstants.PROFILE_AND_PREFERENCES_PAGE);
+
+		ProfileandPreferencespage.validateEmail();
+	
+	}
+	
+	
 
 }
