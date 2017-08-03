@@ -168,7 +168,11 @@ public class MRConstants {
 
 	public static final String MA_RESOURCES_AND_PLAN_TAB_URL = "https://www."+MRScenario.environment+"-uhcmedicaresolutions.uhc.com/health-plans/medicare-advantage-plans/resources-plan-material.html";
 
-	public static final String REDESIGN_REGISTRATION_URL = "https://www.awe-"+MRScenario.environment+"-uhcmedicaresolutions.uhc.com/content/uhcm/guest/member-registration.html";
+	/** Registration URL for dev-c */
+	//public static final String REDESIGN_REGISTRATION_URL = "https://www.awe-"+MRScenario.environment+"-uhcmedicaresolutions.uhc.com/content/uhcm/guest/member-registration.html";
+
+	/** Registration URL for team-h */
+	public static final String REDESIGN_REGISTRATION_URL = "https://member."+MRScenario.environment+"-uhcmedicaresolutions.uhc.com/content/uhcm/guest/member-registration.html#/memberRegistration";
 	
 	//public static final String UHCRETIREE_OEHWF_URL = "https://www.awe-"+MRScenario.environment+"-uhcretiree.uhc.com/oehwf/home.html";
 

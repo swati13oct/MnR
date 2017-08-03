@@ -15,9 +15,11 @@ Feature: To test Start Over link present on existing member error page
 
     Examples: 
       | planMemberId | dateOfBirth |
-      | 957566851    | 03-26-1952  |
-      | 008511769    | 05-09-1946  |
-
+      #dev-c
+     # | 957566851    | 03-26-1952  |
+     # | 008511769    | 05-09-1946  |
+   #team-h member 
+   | 9809909891   | 10-13-1927  |
   Scenario Outline: To verify member is navigated to the username and password help page
     Given the member is on registration page of new portal part of redesign
     When the member enter the member ID into Member ID field
@@ -31,9 +33,11 @@ Feature: To test Start Over link present on existing member error page
 
     Examples: 
       | planMemberId | dateOfBirth |
-      | 930564080    | 03-01-1952  |
-      | 002776817    | 10-07-1943  |
-
+      #dev-c
+     # | 930564080    | 03-01-1952  |
+     # | 002776817    | 10-07-1943  |
+      #team-h member 
+   | 9809909891   | 10-13-1927  |  
   Scenario Outline: To verify member is navigated to the sign In page
     Given the member is on registration page of new portal part of redesign
     When the member enter the member ID into Member ID field
@@ -46,6 +50,7 @@ Feature: To test Start Over link present on existing member error page
     Then the member navigate to the Sign in page
 
     Examples: 
+    #dev-c and team-h
       | planMemberId | dateOfBirth |
       | 9809909891   | 10-13-1927  |
       | 980990989-11 | 10-13-1927  |

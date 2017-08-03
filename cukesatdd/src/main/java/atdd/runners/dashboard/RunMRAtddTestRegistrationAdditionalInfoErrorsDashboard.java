@@ -15,7 +15,7 @@ import cucumber.junit.Cucumber;
 @Cucumber.Options(glue = { "atdd.framework","acceptancetests.dashboard.registration" }, 
 		features = { "feature/registrationMemberRedesign" }, 
 		format = {
-		"pretty", "html:reports/test-report" }, tags ={"@registrationRedesign"})
-public class RunMRAtddTestRegistrationDashboard {
+		"pretty", "html:reports/test-report" }, tags ={"@registrationAddplanpopup"})
+public class RunMRAtddTestRegistrationAdditionalInfoErrorsDashboard {
 
 }

@@ -26,6 +26,7 @@ Feature: To test registration flow in redesign portal
       | Date of birth  | <dateOfBirth>  |
 
     Examples: 
+    #dev-c and team-h
       | Plantype | planMemberId | dateOfBirth | planname                        | membername     |
       | PDP      | 0187121481   | 06-23-1949  | AARP MedicareRx Walgreens (PDP) | BAECCEB CFCBBF |
 
@@ -50,7 +51,8 @@ Feature: To test registration flow in redesign portal
     When member clicks on next button
     Then the member navigate to the create account page
 
-    Examples: 
+    Examples:
+    #dev-c and team-h 
       | Plantype | planMemberId | dateOfBirth | planname                        | membername     |
       | PDP      | 0187121481   | 06-23-1949  | AARP MedicareRx Walgreens (PDP) | BAECCEB CFCBBF |
 

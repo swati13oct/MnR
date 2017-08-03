@@ -13,4 +13,5 @@ Feature: To validate pffs error on the registration page
     
     Examples: 
       | planMemberId | dateOfBirth |
+      #dev-c and team-h
       | 929173773    | 02-09-1952  |
