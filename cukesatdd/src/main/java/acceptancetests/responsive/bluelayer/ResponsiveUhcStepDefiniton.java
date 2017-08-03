@@ -708,7 +708,14 @@ public class ResponsiveUhcStepDefiniton {
 	}
 
 
-
+	@And("^the user validates plan Documents section$")
+	public void validatesPlanDosuments(){
+		
+	}
+	@And("^the user validates plan Learn more$")
+	public void learnMore(){
+		
+	}
 
 	@And("^User clicks on change location$")
 

@@ -81,7 +81,7 @@ Examples:
 		|90210  |Los Angeles County|MA        |AARP MedicareComplete SecureHorizons Plan 1 (HMO)  |
 		
 		
-		
+	@sprint5	
 Scenario Outline: To validate need more information
 Given the user is on the vpp portfolio page
 Then the user performs plan search using zipcode
@@ -96,7 +96,7 @@ Examples:
 		|zipCode|county						 |planType  |planName					   |
 		|90210  |Los Angeles County|MA        |AARP MedicareComplete SecureHorizons Plan 1 (HMO)  |	
 	
-@planCost @US674468		
+@planCost @US674468 @sprint5
 Scenario Outline: To validate Plan Costs tab
 Given the user is on the vpp portfolio page
 Then the user performs plan search using zipcode
@@ -110,4 +110,36 @@ And the user validates plan details from DCE
 Examples:
 		|zipCode|county						 |planType  |planName					                                  |
    	|90210  |Los Angeles County|MA        |AARP MedicareComplete SecureHorizons Essential (HMO)  |
+	#	|90201  |Los Angeles County|PDP       |AARP MedicareRx Walgreens (PDP) |
+	
+	@planCost @US674468	@sprint5
+Scenario Outline: To validate Plan Documetns tab
+Given the user is on the vpp portfolio page
+Then the user performs plan search using zipcode
+              | Zip Code |<zipCode>|
+              | County   |<county> |
+Then the user navigates to the following plan type
+| PlanType | <planType> |	
+Then the user navigates to pan details page
+|Plan Name| <planName>|	
+And the user validates plan Documents section
+Examples:
+		|zipCode|county						 |planType  |planName					                                  |
+   	|90210  |Los Angeles County|MA        |AARP MedicareComplete SecureHorizons Essential (HMO)  |
+	#	|90201  |Los Angeles County|PDP       |AARP MedicareRx Walgreens (PDP) |
+	
+@sprint5
+	Scenario Outline: To validate Learn more
+Given the user is on the vpp portfolio page
+Then the user performs plan search using zipcode
+              | Zip Code |<zipCode>|
+              | County   |<county> |
+Then the user navigates to the following plan type
+| PlanType | <planType> |	
+Then the user navigates to pan details page
+|Plan Name| <planName>|	
+And the user validates plan Learn more
+Examples:
+		|zipCode|county						 |planType   |planName					                                  |
+   	|90210  |Los Angeles County|SNP        |AARP MedicareComplete SecureHorizons Essential (HMO)  |
 	#	|90201  |Los Angeles County|PDP       |AARP MedicareRx Walgreens (PDP) |
