@@ -1,5 +1,5 @@
 @pharmacylocatorblayerscenario1
-Feature:To test Locate a Pharmacy in acqusition flow UMS site
+Feature:To test Locate a Pharmacy in acqusition flow UMS site TEST1
 Scenario Outline:To verify available pharmacies in UMS site
 Given the user is on the UMS Medicare Site landing page
 When the user hovers to Our Plans and select Request More Help and Information for following plan type

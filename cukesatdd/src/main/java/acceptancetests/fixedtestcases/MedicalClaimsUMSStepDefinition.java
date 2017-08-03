@@ -225,7 +225,7 @@ public class MedicalClaimsUMSStepDefinition {
 		
 	}
 	
-	public void tearDown() {
+/*	public void tearDown() {
 		WebDriver wd = (WebDriver) getLoginScenario().getBean(
 				CommonConstants.WEBDRIVER);
 		wd.quit();
@@ -233,6 +233,6 @@ public class MedicalClaimsUMSStepDefinition {
 		CommonUtility.resetPartDTime(getLoginScenario());
 		getLoginScenario().flushBeans();
 	}
-
+*/
 }
 

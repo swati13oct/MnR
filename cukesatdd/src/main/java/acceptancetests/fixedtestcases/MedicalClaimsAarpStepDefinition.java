@@ -237,14 +237,14 @@ public class MedicalClaimsAarpStepDefinition {
 		}
 	
 	}
-	public void tearDown() {
+/*	public void tearDown() {
 		WebDriver wd = (WebDriver) getLoginScenario().getBean(
 				CommonConstants.WEBDRIVER);
 		wd.quit();
 		CommonUtility.resetMRRestTime(getLoginScenario());
 		CommonUtility.resetPartDTime(getLoginScenario());
 		getLoginScenario().flushBeans();
-	}
+	}*/
 
 }
 
