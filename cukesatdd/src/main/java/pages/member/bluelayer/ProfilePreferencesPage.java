@@ -62,6 +62,12 @@ public class ProfilePreferencesPage extends UhcDriver {
 
 	@FindBy(xpath = "//*[@id='Artwork']")
 	private WebElement EditButton;
+	
+	@FindBy(xpath = "//*[@id='tab-1']/div[2]/div[1]/div/div[1]/div[1]/div/div/div/div[1]/p")
+	private WebElement EmailLabel;
+
+	@FindBy(xpath = "//*[@id='tab-1']/div[2]/div[1]/div/div[1]/div[1]/div/div/div/div[2]/div[1]/div/div/span[1]")
+	private WebElement EmailAddressLabel;
 
 	public void openAndValidate() {
 
@@ -128,5 +134,12 @@ public class ProfilePreferencesPage extends UhcDriver {
 		System.out.println("EditButton is " + EditButton.isDisplayed());
 
 	}
+	
+	public void validateEmail() {
+		validateNew(EmailLabel);
+		validateNew(EmailAddressLabel);
+
+	}
+
 
 }

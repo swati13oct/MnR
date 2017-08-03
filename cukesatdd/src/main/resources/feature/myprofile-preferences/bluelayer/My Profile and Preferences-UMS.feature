@@ -131,3 +131,18 @@ Examples:
       | MAPD     |
      # | MA       |
 
+
+
+     
+      
+       @ValidateEmail
+  Scenario Outline: To verify Email section in UMS site
+    Given registered UHC with following details for Profile and Preferences flow in UMS site
+      | <planType> |
+    Then the user navigates to Profile and Preferences page
+    Then the user validates the Email section in UMS site
+
+         Examples: 
+      | planType |
+      #| MAPD     |
+     | MA       |

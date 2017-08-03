@@ -123,16 +123,25 @@ public class ProfileandPreferencesUMSStepDefinition {
 		}
 	}
 
-	@And("the user validates the Plan Name, Member name, Member ID and account section in UMS site")
+	@And("^the user validates the Plan Name, Member name, Member ID and account section in UMS site")
 	public void user_Validates_FED_PROFILE_MEMBERNAME_ID_AccountProfile() {
 		ProfilePreferencesPage ProfilePreferencesPage = (ProfilePreferencesPage) getLoginScenario()
 				.getBean(PageConstants.ProfilePreferencesPage);
-		System.out.println("1");
+		
 		if (ProfilePreferencesPage == null) {
 			System.out.println(" Variable is NULL");
 		}
 		ProfilePreferencesPage.validatePlanNameMemberidNameAcountProfile();
 
 	}
+	
+	@Then("^the user validates the Email section in UMS site")
+	public void user_Validates_email() {
+		ProfilePreferencesPage ProfilePreferencesPage = (ProfilePreferencesPage) getLoginScenario()
+				.getBean(PageConstants.ProfilePreferencesPage);
+		
 
+		ProfilePreferencesPage.validateEmail();
+
+	}
 }
