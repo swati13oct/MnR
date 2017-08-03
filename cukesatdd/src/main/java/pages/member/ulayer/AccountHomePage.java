@@ -598,10 +598,22 @@ public class AccountHomePage extends UhcDriver {
 	public pages.dashboard.member.ulayer.ClaimSummarypage navigateToClaimsSummaryPage() {
 		// TODO Auto-generated method stub
 		//String url = "https://member.team-b-aarpmedicareplans.uhc.com/home/claims.html";
-		String testharnessUrl = "https://member.team-b-aarpmedicareplans.uhc.com/content/aarpm/home/testharness.html";
+		String testharnessUrl = "https://member." +MRScenario.environment+"-aarpmedicareplans.uhc.com/content/aarpm/home/testharness.html";
 		driver.get(testharnessUrl);
-		CommonUtility.waitForPageLoad(driver, driver.findElement(By.xpath(".//*[text()='Go to Claims Link page']")), 60); 
-		driver.findElement(By.xpath(".//*[text()='Go to Claims Link page']")).click();
+		if (MRScenario.environment.equalsIgnoreCase("team-h")) {
+			CommonUtility.waitForPageLoad(driver, driver.findElement(By.linkText("Go to Claims page")), 60); 	
+			driver.findElement(By.linkText("Go to Claims page")).click();
+		}
+		
+		else if (MRScenario.environment.equalsIgnoreCase("team-b")) {
+			CommonUtility.waitForPageLoad(driver, driver.findElement(By.linkText("Go to Claims Link page")), 60); 	
+			driver.findElement(By.linkText("Go to Claims Link page")).click();
+		}
+		
+		else 
+		{
+		System.out.println("This script is only intended to be run using test harness on team-b or team-h. Update condition for your own environment");	
+		}
 		//driver.findElement(By.xpath("//a[contains(.,'Go to Claims Link page')]")).click();
 		
 		/*
