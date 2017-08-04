@@ -53,5 +53,24 @@ Examples:
 Scenario: Verify Movement from Assistance confirmatin to Sign In Page
 Given user is on AssistanceConfirmationPage and moves to Sign in Page
 
+@US622167
+Scenario: Verify Movement from Identity Assistance to Personal Identification page
+Given user is on Identity Assistance page selects Username and Password then user should be moved to Personal Identification page
+
+#@US622167
+Scenario: Verify Error messages on Personal Identification page
+Given user is on Identity Assistance page and selects Nothing then user should be displayed error message
+
+@US622156
+Scenario: Verify Sign in page movement
+Given user is on Identity Assistance page and clicks cancel then user should be taken to sign in page
+
+
+@LoginAssistanceErrorMessages
+Scenario: Verify Error messages on Ulayer Personal Identification page
+Given user is on Identity Assistance page, moves to PI page and validates error messages
+
+
+
 
 

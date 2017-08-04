@@ -23,6 +23,7 @@ import pages.acquisition.ulayer.PersonalIdentificationPage;
 import pages.member.ulayer.LoginAssistanceConfirmationJava;
 //import pages.member.ulayer.LoginAssistanceConfirmationJava;
 import pages.member.ulayer.LoginPage;
+import pages.member.ulayer.PersonalIdentityUlayerPage;
 import acceptancetests.atdd.data.CommonConstants;
 import acceptancetests.atdd.data.acquisition.PageConstants;
 import acceptancetests.loginassistance.data.LoginAssistanceCommonConstants;
@@ -33,6 +34,7 @@ import cucumber.annotation.en.Given;
 import cucumber.annotation.en.Then;
 import cucumber.annotation.en.When;
 import cucumber.table.DataTable;
+import pages.member.ulayer.IdentityAssistance;
 
 /**
  * @author pperugu
@@ -84,6 +86,122 @@ public class LoginAssistanceAarpStepDefintion {
 
 	}
 	
+	
+	@Given("^user is on Identity Assistance page selects Username and Password then user should be moved to Personal Identification page$")
+	public void IdentityAssistance() throws InterruptedException {
+		System.out.println("In Identity Method");
+		WebDriver wd = getLoginScenario().getWebDriver();
+		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
+		//LoginPage loginPage = new LoginPage(wd);
+        PersonalIdentityUlayerPage PIUPage = new PersonalIdentityUlayerPage(wd);
+        Thread.sleep(2000);
+		PersonalIdentityUlayerPage loginAssistancePage = PIUPage.navigateToPersonalIdentificationPage();
+				if (loginAssistancePage != null) {
+			getLoginScenario().saveBean(PageConstants.SignIN_Page,
+					loginAssistancePage);
+			Assert.assertTrue(true);
+		} else {
+			Assert.fail("Error loading Personal Identity Page");
+		}
+
+	}
+	
+
+	
+	@Given("^user navigates to login assistance page PI page$")
+	public void user_navigates_PersonalIdentity() throws InterruptedException{
+
+		WebDriver wd = getLoginScenario().getWebDriver();
+		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
+		PersonalIdentityUlayerPage PIUPage = new PersonalIdentityUlayerPage(wd);
+		Thread.sleep(3000);
+		PersonalIdentityUlayerPage loginAssistancePage = PIUPage.navigateToPersonalIdentificationPage();
+		if (loginAssistancePage != null) {
+			getLoginScenario().saveBean(PageConstants.LOGIN_ASSISTANCE_PAGE,
+					loginAssistancePage);
+			Assert.assertTrue(true);
+		} else {
+			Assert.fail("Error loading LoginAssistance page");
+		}
+
+	}
+	
+	
+
+@Given("^user is on Identity Assistance page, moves to PI page and validates error messages$")
+	public void ErrorrrValidation() throws InterruptedException {
+		System.out.println("In error Method");
+		WebDriver wd = getLoginScenario().getWebDriver();
+		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
+		//LoginPage loginPage = new LoginPage(wd);
+        PersonalIdentityUlayerPage PIUPage = new PersonalIdentityUlayerPage(wd);
+        Thread.sleep(3000);
+		PersonalIdentityUlayerPage loginAssistancePage = PIUPage.navigateToPersonalIdentificationPage();
+		PersonalIdentityUlayerPage ErrorMessagesCorrect = loginAssistancePage.PIErrorMessageValidation();
+				if (ErrorMessagesCorrect != null) {
+			getLoginScenario().saveBean(PageConstants.SignIN_Page,
+					ErrorMessagesCorrect);
+			Assert.assertTrue(true);
+		} else {
+			Assert.fail("Error loading Personal Identity Page");
+		}
+
+	}
+	
+	
+	@Then("^user clicks on continue button and user validates error messages$")
+	public void ErrorValidation() throws InterruptedException {
+		System.out.println("In Error Validation method Method");		
+		PersonalIdentityUlayerPage ErrorValidation = (PersonalIdentityUlayerPage) getLoginScenario()
+				.getBean(PageConstants.LOGIN_ASSISTANCE_PAGE);  		
+		PersonalIdentityUlayerPage ErrorMessagesCorrect = ErrorValidation.PIErrorMessageValidation();
+				if (ErrorMessagesCorrect != null) {
+			getLoginScenario().saveBean(PageConstants.SamePage,
+					ErrorMessagesCorrect);
+			Assert.assertTrue(true);
+		} else {
+			Assert.fail("Error loading Personal Identity Page");
+		}
+
+	}
+	
+	
+	@Given("^user is on Identity Assistance page and selects Nothing then user should be displayed error message$")
+	public void ErrorMessageValidation() throws InterruptedException {
+		System.out.println("In ErrorMessageValidation Method");
+		WebDriver wd = getLoginScenario().getWebDriver();
+		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);		
+        PersonalIdentityUlayerPage PIUPage = new PersonalIdentityUlayerPage (wd);
+		Thread.sleep(2000);
+		PersonalIdentityUlayerPage loginAssistancePage = PIUPage.ErrorMessageValidation();
+				if (loginAssistancePage != null) {
+			getLoginScenario().saveBean(PageConstants.SignIN_Page,
+					loginAssistancePage);
+			Assert.assertTrue(true);
+		} else {
+			Assert.fail("No error message");
+		}
+
+	}
+	
+	
+	@Given("^user is on Identity Assistance page and clicks cancel then user should be taken to sign in page$")
+	public void SignInPageMovement() throws InterruptedException {
+		System.out.println("In SignInvalidation Method");
+		WebDriver wd = getLoginScenario().getWebDriver();
+		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);		
+        PersonalIdentityUlayerPage PIUPage = new PersonalIdentityUlayerPage (wd);
+		Thread.sleep(2000);
+		PersonalIdentityUlayerPage loginAssistancePage = PIUPage.SignInPageMovement();
+				if (loginAssistancePage != null) {
+			getLoginScenario().saveBean(PageConstants.SignIN_Page,
+					loginAssistancePage);
+			Assert.assertTrue(true);
+		} else {
+			Assert.fail("Error loading SignInPage page");
+		}
+
+	}
 	
 	@When("^the user selects the username or password checkbox in AARP site$")
 	public void user_selects_username_password_checkbox_aarp(DataTable attribute) {
