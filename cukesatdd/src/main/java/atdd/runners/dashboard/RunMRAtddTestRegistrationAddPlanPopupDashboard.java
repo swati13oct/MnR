@@ -11,11 +11,10 @@ import cucumber.junit.Cucumber;
  * @author sarora29
  *
  */
+
 @RunWith(Cucumber.class)
-@Cucumber.Options(glue = { "atdd.framework","acceptancetests.dashboard.registration" }, 
-		features = { "feature/registrationMemberRedesign" }, 
-		format = {
-		"pretty", "html:reports/test-report","json:target/RunJarvisCloaking-cucumber.json" }, tags ={"@registrationAdditionalInfoErrors"})
+@Cucumber.Options(glue = { "atdd.framework","acceptancetests.dashboard.registration" }, features = { "feature/registrationMemberRedesign" }, format = { "pretty", "html:reports/test-report","json:target/RunJarvisCloaking-cucumber.json" }, tags = { "@registrationAddplanpopup" })
+
 public class RunMRAtddTestRegistrationAddPlanPopupDashboard {
 
 }
