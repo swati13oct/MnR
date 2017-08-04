@@ -38,7 +38,7 @@ public class ClaimSummarypage extends UhcDriver{
 	@FindBy(xpath=".//*[@class='claimsearch section']/div[1]//h1")
 	private WebElement myCaimsText;
 
-	@FindBy(xpath = "//html/head/title")
+	@FindBy(css = ".claim-results")
 	private WebElement ClaimsSummaryPage;
 
 	@FindBy(xpath=".//h2[contains(.,'Plan Name Lorem Ipsum')]")
@@ -315,6 +315,16 @@ public class ClaimSummarypage extends UhcDriver{
 		System.out.println("The title of the page is-------->"+driver.getTitle());
 		System.out.println("The URL of the page is---------->"+driver.getCurrentUrl());
 		if(driver.getTitle().equalsIgnoreCase("Claims")){
+			
+			
+			try { Thread.sleep(10000); } 
+			catch (InterruptedException e) {
+				
+				
+				// TODO Auto-generated catch block e.printStackTrace();
+				}
+			
+			waitforElement(driver.findElement(By.id("document-date")));
 			
 			Select dropdown = new Select(driver.findElement(By.id("document-date")));
 			

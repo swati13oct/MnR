@@ -134,6 +134,7 @@ And the user validates the DownloadMyData section in redesigned site
 Examples:
 | planType | claimPeriod      | domain  |
 | MA       |   Last 24 Months | NICE    |
+| MAPD     |   Last 24 Months | COSMOS  |
 
 @claimsSummarySHIP
 Scenario Outline: To validate the claims present for the SHIP member on claims sumamry page for AARP site
@@ -154,12 +155,17 @@ Examples:
 Scenario Outline: To Verify Claim Table on Claims Details Page
 Given I am an AARP member on the redesigned site
       | Plan Type | <planType> |
-When I navigate to the Claim Details page in AARP site
-#Then I validate the Claims Table in claims details page in AARP site
+When I navigate to the claims Summary page in redesigned site
+And the user search claims for the following claim period in AARP site
+	| Claim Period | <claimPeriod> |
+Then user validates the claims displayed based on the selection in redesigned site
+And  I navigate to the Claim Details page in AARP site
+Then I validate the Claims Table in claims details page in AARP site
 And I validate the Claims Total in claims details page in AARP site
  Examples: 
-      | planType |
-      | MA       |
+      | planType |claimPeriod    |
+      | MA       |Last 24 Months |
+      | MAPD     |Last 24 Months |
      
 @ClaimsDetailsSHIP
 Scenario Outline: To Verify Learn more section on Claims Details Page

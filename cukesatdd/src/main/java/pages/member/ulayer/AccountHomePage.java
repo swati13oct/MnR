@@ -181,6 +181,12 @@ public class AccountHomePage extends UhcDriver {
 
 	@FindBy(linkText = "Date")
 	private WebElement dateLink;
+	
+	@FindBy(xpath = "//div[@class='claim-results']//table[not (contains(@class,'ng-hide'))]//tbody//tr[2]//a[text()='MORE INFO']")
+	private WebElement claimstablemoreinfolink;
+	
+	@FindBy (css = ".claimDetTableMainSection")
+	private WebElement claimDetTableMainSection;
 
 	public JSONObject accountHomeJson;
 
@@ -592,9 +598,23 @@ public class AccountHomePage extends UhcDriver {
 	public pages.dashboard.member.ulayer.ClaimSummarypage navigateToClaimsSummaryPage() {
 		// TODO Auto-generated method stub
 		//String url = "https://member.team-b-aarpmedicareplans.uhc.com/home/claims.html";
-		String testharnessUrl = "https://member.team-b-aarpmedicareplans.uhc.com/content/aarpm/home/testharness.html";
+		String testharnessUrl = "https://member." +MRScenario.environment+"-aarpmedicareplans.uhc.com/content/aarpm/home/testharness.html";
 		driver.get(testharnessUrl);
-		driver.findElement(By.xpath("//a[contains(.,'Go to Claims Link page')]")).click();
+		if (MRScenario.environment.equalsIgnoreCase("team-h")) {
+			CommonUtility.waitForPageLoad(driver, driver.findElement(By.linkText("Go to Claims page")), 60); 	
+			driver.findElement(By.linkText("Go to Claims page")).click();
+		}
+		
+		else if (MRScenario.environment.equalsIgnoreCase("team-b")) {
+			CommonUtility.waitForPageLoad(driver, driver.findElement(By.linkText("Go to Claims Link page")), 60); 	
+			driver.findElement(By.linkText("Go to Claims Link page")).click();
+		}
+		
+		else 
+		{
+		System.out.println("This script is only intended to be run using test harness on team-b or team-h. Update condition for your own environment");	
+		}
+		//driver.findElement(By.xpath("//a[contains(.,'Go to Claims Link page')]")).click();
 		
 		/*
 		 * try { Thread.sleep(1000); } catch (InterruptedException e) { // TODO
@@ -610,12 +630,11 @@ public class AccountHomePage extends UhcDriver {
 	}
 
 	public pages.dashboard.member.ulayer.ClaimDetailsPage navigateToClaimDetailsPage() {
-		//String url = "https://member.team-b-aarpmedicareplans.uhc.com/home/claims.html#/claims-Detail";
-		String url = "https://member.team-b-aarpmedicareplans.uhc.com/home/claims.html";
-		driver.get(url);
+		CommonUtility.waitForPageLoad(driver, claimstablemoreinfolink, 60);
+		claimstablemoreinfolink.click();
+		CommonUtility.waitForPageLoad(driver, claimDetTableMainSection, 30);
 		
-		//driver.findElement(By.xpath(".//*[@id='ship']/tbody/tr[2]/td[8]/span/a")).click();
-		driver.findElement(By.xpath("//a[contains(text(),'MORE INFO')]")).click();
+		//driver.findElement(By.xpath("//a[contains(text(),'MORE INFO')]")).click();
 		/*
 		 * try { Thread.sleep(1000); } catch (InterruptedException e) { // TODO
 		 * Auto-generated catch block e.printStackTrace(); }
