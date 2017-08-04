@@ -1599,8 +1599,3 @@ public void comparePlanslnk(){
 				 }}
 				
 			}
-
-					
-				
-				
-			 

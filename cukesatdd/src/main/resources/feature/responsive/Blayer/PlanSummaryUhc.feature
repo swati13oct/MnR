@@ -471,7 +471,6 @@ Examples:
 |zipCode|county          |planType|
 |32963 |Indian River| MA     |
 
-
 @US689475 @US689478
 Scenario Outline: To validate Medical Benefits section on Plan compare Page
 Given the user is on the  team-c vpp portfolio page

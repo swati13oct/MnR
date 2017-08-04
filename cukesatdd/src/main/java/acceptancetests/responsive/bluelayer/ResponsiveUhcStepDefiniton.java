@@ -42,6 +42,7 @@ public class ResponsiveUhcStepDefiniton {
 	public MRScenario getLoginScenario() {
 		return loginScenario;
 	}
+	
 
 	@Given("^the user is on the vpp portfolio page$")
 	public void user_on_aarp_ourPlans_page(){
