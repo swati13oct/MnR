@@ -808,24 +808,9 @@ Examples:
       | MAPD     | Group     |     NON LIS   |
 
       
- @plandocumentjenkins
-    Scenario Outline: Plan Documents section is in place on Benefits and Coverage page
-     Given registered UHC with following details for plan benefits and coverage flow in UMS site
-      | Plan Type      | <planType>  |
-      | Member Type    | <memberType>|
-      | Copay Category | <copayCategory>|
-     Then the user navigate to benefit and coverage page
-    Then the user view jenkins benefits and coverage in UMS site
-    And the user validates the content on benefits and coverage page
-    And the user validates plandocumentsection and Drug coverage header and text under the section
-    
-    Examples: 
-      | planType | memberType| copayCategory |
-      | PDP      | Group     |     NON LIS   |
-      ##member used :PDP_GROUP123
 
       
-  @validatePdfsection
+  @validatePdfsectiongroupenglish
       Scenario Outline: Verify PDF section is in place on Benefits and     Coverage page
     Given registered UHC with following details for plan benefits and coverage flow in UMS site
       | Plan Type      | <planType>  |
@@ -835,17 +820,54 @@ Examples:
     Then the user view jenkins benefits and coverage in UMS site
     And the user validates the content on benefits and coverage page
     And the user validates view and document label
-    And the user validates the language dropdown and the value displayed by default and selects new value in dropdown successfully
-      | Language      | <language>      |
+    And the user validates the language dropdown and the value displayed by default should be English
+   
      Examples:
       
-      | planType|  memberType  | copayCategory | language |
-      | MAPD    |  Group       |  NON LIS      | ENGLISH  | 
+      | planType|  memberType  | copayCategory |
+      | MAPD    |  Group       |  NON LIS      | 
+      | MA      |  Group       |  LIS 1        |
+      | PDP     |  Group       |  NON LIS      |
       ##q2_jun_grp340
 
 
+ @validatePdfsectiongroupspanishchinese
+    Scenario Outline: Verify PDF section is in place on Benefits and     Coverage page
+    Given registered UHC with following details for plan benefits and coverage flow in UMS site
+      | Plan Type      | <planType>  |
+      | Member Type    | <memberType>|
+      | Copay Category | <copayCategory>|
+    Then the user navigate to benefit and coverage page
+    Then the user view jenkins benefits and coverage in UMS site
+    And the user validates the content on benefits and coverage page
+    And the user validates view and document label
+    And the user validates spanish and chinese should not display in dropdown
+ 
+     Examples:
       
-    @Ancillarysecjenkins
+      | planType|  memberType  | copayCategory |
+      | MAPD    |  Group       |  NON LIS      | 
+
+ @validatePdfsectionindividual
+    Scenario Outline: Verify PDF section is in place on Benefits and     Coverage page
+    Given registered UHC with following details for plan benefits and coverage flow in UMS site
+      | Plan Type      | <planType>  |
+      | Member Type    | <memberType>|
+      | Copay Category | <copayCategory>|
+    Then the user navigate to benefit and coverage page
+    Then the user view jenkins benefits and coverage in UMS site
+    And the user validates the content on benefits and coverage page
+    And the user validates view and document label
+    And the user validates the language dropdown and the value displayed by default and selects new value in dropdown successfully$")
+ 
+     Examples:
+      
+      | planType|  memberType  | copayCategory |
+      | MAPD    |  Individual  |  NON LIS      | 
+      | MA      |  Individual  |  LIS 1        |
+      | PDP     |  Individual  |  NON LIS      |
+      
+ @Ancillarysecjenkins
     Scenario Outline: Verify PDF section is in place on Benefits and Coverage page
     Given registered UHC with following details for plan benefits and coverage flow in UMS site
       | Plan Type      | <planType>  |
@@ -865,7 +887,7 @@ Examples:
       | PDP      | Group     |     NON LIS   |
       ##MAPD_Group_113_nonlis
       
-   @drugcopaysectiongroupPreferredmailpharmacy
+   @drugcopaysectionnonlis
     Scenario Outline: Verify PDF section is in place on Benefits and Coverage page
     Given registered UHC with following details for plan benefits and coverage flow in UMS site
       | Plan Type      | <planType>     |
@@ -882,42 +904,48 @@ Examples:
     And the user validates Look Up Drugs button should be visible
     And the user validates text for the Locate a Pharmacy section
     And the user validates Locate a Pharmacy button should be visible
-    And the user should see drug copay and discount table
+    #And the user should see drug copay and discount table
     Examples: 
       | planType|  memberType  | copayCategory |
-      | MAPD    |  Individual  |  NON LIS      |
-      ##TESTMAPDNONLIS1
-      
-    @drugcopaysectiongroupstandardnetworkpharmacy
-    Scenario Outline: Verify PDF section is in place on Benefits and Coverage page
-    Given registered UHC with following details for plan benefits and coverage flow in UMS site
-      | Plan Type      | <planType>     |
-      | Member Type    | <memberType>|
-      | Copay Category | <copayCategory>|
-    Then the user navigate to benefit and coverage page
-    Then the user view jenkins benefits and coverage in UMS site
-    And the user validates the content on benefits and coverage page
-    And the user view the Drug Copays & Discounts header 
-    And the user validates the Learn More section link for stage and tier
-    #And the user validates the user click on the link it expands and when user clicks it again it should collapse
-    And the user validates plandocumentsection and Drug coverage header and text under the section
-    And the user validates text for the Look Up Drugs section
-    And the user validates Look Up Drugs button should be visible
-    And the user validates text for the Locate a Pharmacy section
-    And the user validates Locate a Pharmacy button should be visible
-    And the user should see drug copay and discount table
-    Examples: 
-      | planType|  memberType  | copayCategory |
-      | MAPD    |  Group       |  NON LIS      |
       | PDP     |  Group       |  NON LIS      |
-      ##MAPD_Group_113_nonlis
-      ##q2_jun_grp_292
+      | MAPD    |  Group       |  NON LIS      |
+      | MAPD    |  Individual  |  NON LIS      |
+      ##q3_sep_blayer001
+      ##q3_sep_grp285
+      ##q3_sep_grp004
       
+    @drugcopaysectionlis
+    Scenario Outline: Verify PDF section is in place on Benefits and Coverage page
+    Given registered UHC with following details for plan benefits and coverage flow in UMS site
+      | Plan Type      | <planType>     |
+      | Member Type    | <memberType>|
+      | Copay Category | <copayCategory>|
+    Then the user navigate to benefit and coverage page
+    Then the user view jenkins benefits and coverage in UMS site
+    And the user validates the content on benefits and coverage page
+    And the user view the Drug Copays & Discounts header 
+    And the drugcost dropdown should not display
+    And the user validates the Learn More section link for stage
+    And the user validates tier link should not display 
+    #And the user validates the user click on the link it expands and when user clicks it again it should collapse
+    And the user validates plandocumentsection and Drug coverage header and text under the section
+    And the user validates text for the Look Up Drugs section
+    And the user validates Look Up Drugs button should be visible
+    And the user validates text for the Locate a Pharmacy section
+    And the user validates Locate a Pharmacy button should be visible
+    #And the user should see drug copay and discount table
+    Examples: 
+      | planType|  memberType  | copayCategory |
+      | MAPD    |  Individual  |   LIS 1       |
+      | MAPD    |  Group       |   LIS 3       |
+      | PDP     |  Group       |   LIS 2       |     
+      ##q3_sep_blayer006
+      ##q3_sep_grp271
+      ##q3_sep_grp324
       
       
 
-          
-    @drugcosttablesectiongroupmembermapdpdplis
+    @drugcosttablesectiongroupmemberlis
     Scenario Outline: Verify that drug cost table  is in place on Benefits and Coverage page for LIS Members
     Given registered UHC with following details for plan benefits and coverage flow in UMS site
       | Plan Type      | <planType>     |
@@ -927,8 +955,9 @@ Examples:
     And the user view the Drug Copays & Discounts header 
     And the user should see drug cost table for Lis members
     Examples: 
-      | planType|  memberType  | copayCategory |
-      | PDP    |  Group       |  LIS      |
+      | planType|  memberType  | copayCategory|
+      | PDP     |  Group       |  LIS         |
+      | MAPD    |  Group       |  LIS 1       |
       
       
     

@@ -3,6 +3,7 @@
  */
 package pages.member.bluelayer;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -75,22 +76,22 @@ public class BenefitsAndCoveragePage extends UhcDriver {
     @FindBy(xpath = ".//*[@id='ancillary_benefits']/div[1]/div")
 	private WebElement Headersection; 
     
-    @FindBy(className = "h4 color-blue medium margin-small")
-    private WebElement DrugCoverageHeader;
+    @FindBy(xpath = ".//*[@id='drug-copays-and-discounts']/section/div[2]/div[5]/div/span/div/div/div/div/h3/span")
+    private WebElement DrugCoveragetext;
 
-    @FindBy(xpath = ".//*[@id='benefitsMain']/div[2]/div/div/div[3]/div/div/section/div/div[5]/div/span")
-    private WebElement DrugCoverageText;
+    @FindBy(xpath = ".//*[@id='drug-copays-and-discounts']/section/div[2]/div[5]/div/span/div/div/div/div/p")
+    private WebElement DrugCoverageHeader;
     
-    @FindBy(className = "margin-small")
+    @FindBy(xpath = ".//*[@id='drug-copays-and-discounts']/section/div[2]/div[6]/div[1]/div/div/div/div/p")
     private WebElement LookupDrugstext;
     
-    @FindBy(xpath=".//*[@id='drug-copays-and-discounts']/section/div[2]/div[9]/div[1]/a")
+    @FindBy(xpath=".//*[@id='drug-copays-and-discounts']/section/div[2]/div[6]/div[1]/a")
     private WebElement LookUpDrugsButton;
     
-    @FindBy(xpath = ".//*[@id='benefitsMain']/div[2]/div/div/div[3]/div/div/section/div/div[1]/div/h2")
+    @FindBy(xpath = ".//*[@id='drug-copays-and-discounts']/section/div[1]/div/div/div/div/div/div/h2")
     private WebElement DrugCopayHeader;
     
-    @FindBy(xpath = ".//*[@id='benefitsMain']/div[2]/div/div/div[3]/div/div/section/div/div[1]/div/p[2]")
+    @FindBy(xpath = ".//*[@id='drug-copays-and-discounts']/section/div[1]/div/div/div/div/div/div/p")
     private WebElement DrugCopayText;
     
     @FindBy(id = "drug-costs")
@@ -99,26 +100,26 @@ public class BenefitsAndCoveragePage extends UhcDriver {
     @FindBy(xpath = ".//*[@id='drug-copays-and-discounts']/section/div[2]/div[1]/div")
     private WebElement DrugCostheaderandtext;
     
+    @FindBy(xpath = ".//*[@id='drug-copays-and-discounts']/section/div[2]/div[2]/div/div/div[2]/p[2]")
+    private WebElement Pharmacycontent;
     
     @FindBy(xpath=".//*[@id='waystosave']/div/div/div[1]/div/h1")
     private WebElement TextWaystoSave;
    
-    @FindBy(xpath = ".//*[@id='drug-copays-and-discounts']/section/div[2]/div[3]/div/div/div/div[1]/a")
+    @FindBy(xpath = ".//*[@id='drug-copays-and-discounts']/section/div[2]/div[3]/div/div/div/div/div[1]/div/a")
     private WebElement Learnmoretierslink;
     
-    @FindBy(xpath = ".//*[@id='drug-copays-and-discounts']/section/div[2]/div[3]/div/div/div/div[2]/a")
+    @FindBy(xpath = ".//*[@id='drug-copays-and-discounts']/section/div[2]/div[3]/div/div/div/div/div[2]/div/a")
     private WebElement Learnmorestagelink;
  
-    @FindBy(xpath = ".//*[@id='drug-copays-and-discounts']/section/div[2]/div[11]/div[2]")
+    @FindBy(xpath = ".//*[@id='drug-copays-and-discounts']/section/div[2]/div[6]/div[2]/div/div/div/div/p")
     private WebElement locateapharmacysection;
     
-    @FindBy(xpath = ".//*[@id='drug-copays-and-discounts']/section/div[2]/div[2]/div/div/div/p")
-    private WebElement pharmacytext;
+    @FindBy(xpath = ".//*[@id='drug-copays-and-discounts']/section/div[2]/div[6]/div[2]/a")
+    private WebElement locateapharmacybutton;
     
     @FindBy(id="mapdPageNonLis")
     private WebElement drugcopaytable;
-    
-
     
     @FindBy(id="mapdPageLis")
     private  WebElement RetailDrugCost_Table;
@@ -306,18 +307,40 @@ catch (JSONException e) {
 }
 }
 
-public WebElement getview_label() 
+public boolean getview_label() 
 {
- return view_label;
+ return validate(view_label);
  }
 
-public WebElement getdocuments_label() 
+public boolean getdocuments_label() 
 {
- return documents_label;
+ return validate(documents_label);
 }
 
-
-
+public void languagevalidation()
+{
+	if (langdropdown.isDisplayed())
+	{
+	    List<String> listActual = new ArrayList<String>();
+		Select dropdown = new Select(langdropdown);
+		List<WebElement> webElements = dropdown.getOptions();
+		for(WebElement element : webElements)
+		 {
+	     
+	     if (element.getText().equals("SPANISH") || element.getText().equals("CHINESE")) 
+	     {
+	        Assert.fail("The element" + element.getText() + "should not display");
+            System.out.println("The element " + element.getText() + "should not display");
+         }
+	     else
+	     {
+	    	 Assert.assertTrue(true);
+	     }
+	     }
+	     }
+	     
+ }
+		
 public void validate_langdropdown_first_selection()
 {
 //WebElement langdropdown;
@@ -387,7 +410,7 @@ public void Header() {
 public void validatedrugcoverageheaderandtext()
 {
 	validate(DrugCoverageHeader);
-	validate(DrugCoverageText);
+	validate(DrugCoveragetext);
 }
 
 public void validatelookupdrugsbutton()
@@ -404,9 +427,7 @@ Assert.fail("Button not displayed");
 public void validate_lookupdrugstext()
 {
 	validate(LookupDrugstext);
-	System.out.println(pharmacytext.getText());
-    validate(pharmacytext);
-	validate(drugcopaytable);
+	
 }
 
 public void validate_drugcopayheaderntext()
@@ -425,6 +446,35 @@ public void validate_drugcostheaderntext()
 public void validate_locateapharmacysection()
 {
 	validate(locateapharmacysection);
+	validate(locateapharmacybutton);
+	
+}
+
+public void validate_tierlinknotdisplay()
+{
+	if(Learnmoretierslink.isDisplayed())
+	{
+        Assert.fail("The element" + Learnmoretierslink.getText() + "should not display");
+        System.out.println("The element " + Learnmoretierslink.getText() + "should not display");
+     }
+     else
+     {
+    	 Assert.assertTrue(true);
+     }
+	
+}
+
+public void validate_dropdownnotdisplay()
+{
+	if(DrugCostDropdown.isDisplayed())
+	{
+        Assert.fail("The element" + DrugCostDropdown.getText() + "should not display");
+        System.out.println("The element " + DrugCostDropdown.getText() + "should not display");
+     }
+     else
+     {
+    	 Assert.assertTrue(true);
+     }
 	
 }
 
@@ -433,6 +483,7 @@ public void validate_drugcostdropdownoptions(JSONObject benefitsandcoverageExect
 {
 	try {
 	validate(DrugCostDropdown);
+	validate(Pharmacycontent);
 	Assert.assertEquals("true or not", benefitsandcoverageExectedJson.get("drugcostdropdown"), benefitsandcoverageJson.get("drugcostdropdown"));
 	}
 catch (JSONException e) {
@@ -445,6 +496,13 @@ catch (JSONException e) {
 public void validate_learnmoreaboutlink()
 {
 	validate(Learnmoretierslink);
+	validate(Learnmorestagelink);
+	
+}
+
+public void validate_learnmoreaboutstagelink()
+{
+	
 	validate(Learnmorestagelink);
 	
 }
@@ -564,8 +622,7 @@ catch (JSONException e) {
 public void validatedrugcopaytable()
 {
 	//Select langdropdwn = new Select(langdropdown);
-	System.out.println(pharmacytext.getText());
-	    validate(pharmacytext);
+	
 		validate(drugcopaytable);
 		
 }

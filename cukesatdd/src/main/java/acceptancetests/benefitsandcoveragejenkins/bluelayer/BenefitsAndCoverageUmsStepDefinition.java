@@ -760,7 +760,15 @@ public class BenefitsAndCoverageUmsStepDefinition {
 		benefitsCoveragePage.getview_label();
 
 	}
-
+	
+	@And("the user validates spanish and chinese should not display in dropdown")
+	public void user_validates_spanish_chinese_notvisible() {
+		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario()
+				.getBean(PageConstants.BENEFITS_COVERAGE_PAGE);
+		benefitsCoveragePage.languagevalidation();
+		
+	}
+	
 	@And("^the user validates the language dropdown and the value displayed by default and selects new value in dropdown successfully$")
 	public void validate_languagedropdown(DataTable givenAttributes) {
 		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario()
@@ -769,13 +777,19 @@ public class BenefitsAndCoverageUmsStepDefinition {
 		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
 		Map<String, String> memberAttributesMap = new HashMap<String, String>();
 		for (int i = 0; i < memberAttributesRow.size(); i++) {
-
-			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+            memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
 					memberAttributesRow.get(i).getCells().get(1));
 		}
 		String language = memberAttributesMap.get("Language");
 		getLoginScenario().saveBean(PlanBenefitsAndCoverageCommonConstants.Language, language);
 		benefitsCoveragePage.validate_langdropdown_select(language);
+	}
+	
+	@And("the user validates the language dropdown and the value displayed by default should be English")
+	public void user_validates_englishlanguage() {
+		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario()
+				.getBean(PageConstants.BENEFITS_COVERAGE_PAGE);
+		benefitsCoveragePage.validate_langdropdown_first_selection();
 	}
 
 	@Then("^the user validates Hearing section$")
@@ -866,7 +880,13 @@ public class BenefitsAndCoverageUmsStepDefinition {
 				.getBean(PageConstants.BENEFITS_COVERAGE_PAGE);
 		benefitsCoveragePage.validate_locateapharmacysection();
 	}
-
+	
+	@And("^the user validates tier link should not display")
+	public void user_validate_tierinkshouldnotdisplay() {
+		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario()
+				.getBean(PageConstants.BENEFITS_COVERAGE_PAGE);
+		benefitsCoveragePage.validate_tierlinknotdisplay();
+	}
 	/*
 	 * @And("^the user validates dropdown should show three values") public void
 	 * user_validate_dropdwonvalues() { BenefitsAndCoveragePage
@@ -878,12 +898,26 @@ public class BenefitsAndCoverageUmsStepDefinition {
 	 * benefitsCoveragePage.validate_drugcostdropdownoptions(
 	 * benefitsandcoverageExectedJson); }
 	 */
+	
+	@And("the drugcost dropdown should not display")
+	public void user_validate_dropdownshouldnotdisplay() {
+		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario()
+				.getBean(PageConstants.BENEFITS_COVERAGE_PAGE);
+		benefitsCoveragePage.validate_dropdownnotdisplay();
+	}
 
 	@And("^the user validates the Learn More section link for stage and tier")
 	public void user_validate_links() {
 		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario()
 				.getBean(PageConstants.BENEFITS_COVERAGE_PAGE);
 		benefitsCoveragePage.validate_learnmoreaboutlink();
+	}
+	
+	@And("^the user validates the Learn More section link for stage")
+	public void user_validate_stagelink() {
+		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario()
+				.getBean(PageConstants.BENEFITS_COVERAGE_PAGE);
+		benefitsCoveragePage.validate_learnmoreaboutstagelink();
 	}
 
 	@And("^the user validates the user click on the link it expands and when user clicks it again it should collapse")
