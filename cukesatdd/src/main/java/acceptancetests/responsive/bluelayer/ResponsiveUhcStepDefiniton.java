@@ -758,5 +758,25 @@ public class ResponsiveUhcStepDefiniton {
 	public void user_validates_back_to_all_plans() throws InterruptedException  {
 		Thread.sleep(4000);
 	}
+	@And("^User selects Plans to compare generic$")
+	public void user_selectPlanToCompare(DataTable givenAttributes){
+		ResponsivePlanSummaryUhc planSummary = (ResponsivePlanSummaryUhc) getLoginScenario().getBean(PageConstants.RESPONSIVE_PLAN_SUMMARY_PAGE_UHC);
+ 		String planType = (String) getLoginScenario().getBean(VPPCommonConstants.PLAN_TYPE);
+ 		List<DataTableRow> memberAttributesRow = givenAttributes
+				.getGherkinRows();
+		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells()
+					.get(0), memberAttributesRow.get(i).getCells().get(1));}
+		String planName1 = memberAttributesMap.get("Plan Name 1");
+		String planName2 = memberAttributesMap.get("Plan Name 2");
+		planSummary.selectPlanToCompare(planName1, planType);
+		planSummary.selectPlanToCompare(planName2, planType);
+		planSummary.clickCompareLink();
+		
+		
+		
+}
 }
 

@@ -1550,6 +1550,53 @@ public void comparePlanslnk(){
 				// TODO Auto-generated method stub
 				
 			}
+			
+			public void selectPlanToCompare(String planName, String planType){
+				if(planType.equalsIgnoreCase("MAPD")){
+					System.out.println("Inside MAPD");
+					driver.findElement(By.xpath("//*[contains(text(),'"+planName+"')]/parent::div/parent::div/following-sibling::div[2]/div/div/span[1]/label")).click();										
+				}
+				if(planType.equalsIgnoreCase("PDP")){
+					System.out.println("Inside PDP");
+					driver.findElement(By.xpath("//*[contains(text(),'"+planName+"')]/parent::div/following-sibling::div[2]/div/div/span[1]/label")).click();
+				}
+				
+				//driver.findElement(By.xpath(".//*[@id='plan-list-1']/div/div[2]/div/div[3]/div[3]/div/div/span[4]/a")).click();
+			}
+				
+			public void clickCompareLink(){
+				driver.findElement(By.xpath(".//*[@id='plan-list-1']/div/div[3]/div/div[2]/div[3]/div/div/span[3]/a")).click();
+ 			}
+
+			public void validateMedicalBenefitsTableblayer(String monthlyPremium1, String monthlyPremium2, String outofPocket1, String outofPocket2){
+				 if(monthlypremium.getText().equals("Monthly Premium")){
+					 if(monthlyPremium1.equals(monthlypremium1.getText())){
+				 
+					 System.out.println("monthly premium is verified");
+					 Assert.assertTrue(true);
+				 }else{
+					 Assert.fail("Error in displaying monthly premium 1");
+				 }
+				 if(monthlyPremium2.equals(monthlypremium2.getText())){
+					 Assert.assertTrue(true);
+				 }else{
+					 Assert.fail("Error in displaying monthly premium 2");
+				 }
+				 }
+				 if (outofpocketmaximum.getText().equals("Out of Pocket Maximum")) {
+					 if(outofpocket1.getText().equals(outofPocket1)){
+						 
+						 System.out.print("Out of pockect is verified");
+						 Assert.assertTrue(true);
+					 }else{
+						 Assert.fail("Error in displaying outofpocket1");
+					 }
+					 if(outofpocket2.getText().equals(outofPocket2)){
+						 Assert.assertTrue(true);
+					 }else{
+						 Assert.fail("Error in displaying outofpocket2");
+					 }
+				 }}
 				
 			}
 

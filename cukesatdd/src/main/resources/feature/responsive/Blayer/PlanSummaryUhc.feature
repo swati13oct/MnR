@@ -470,3 +470,35 @@ Then user validates Outpatient Surgery row for AARPMedicareFocus Plans
 Examples:
 |zipCode|county          |planType|
 |32963 |Indian River| MA     |
+
+
+@US689475 @US689478
+Scenario Outline: To validate Medical Benefits section on Plan compare Page
+Given the user is on the  team-c vpp portfolio page
+Then the user performs plan search TeamC using zipcode
+              | Zip Code |<zipCode>|
+              | County   |<county> |
+Then the user navigates to the TeamC plan type
+| PlanType | <planType> |
+And User selects Plans to compare generic
+| Plan Name 1| <planName1> |
+|Plan Name 2 |<planName2>|
+Then the user validates medical benefits
+      |MP Plan1|<mpPlan1>|
+      |MP Plan2|<mpPlan2>|
+      |Oop Plan1|<oopPlan1>|
+      |Oop Plan2|<oopPlan2>|
+ And the user validates optional services     
+     |OD1 |<od1> |
+     |HOD1| <hod1>| 
+     |OD2 |<od2> |
+     |HOD2| <hod2>|  
+
+Examples:
+|zipCode|county           |planType  |                planName1                           |              planName2                            |mpPlan1 |mpPlan2 |         oopPlan1  |oopPlan2           | od1   | od2  |hod1  | hod2|
+|90210 |Los Angeles County| MAPD     | AARP MedicareComplete SecureHorizons Plan 1 (HMO)  | AARP MedicareComplete SecureHorizons Plan 2 (HMO) | $0     |$0      |In-Network: $0     |In-Network: $0     |  $2.50| $2.50|$12.50|$2.50|
+
+
+	
+
+								
