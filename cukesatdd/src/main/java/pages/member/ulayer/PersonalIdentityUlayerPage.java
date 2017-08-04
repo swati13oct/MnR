@@ -68,7 +68,7 @@ public class PersonalIdentityUlayerPage extends UhcDriver {
 		Continue.click();
 		System.out.println("Continue Clicked");
 		Thread.sleep(7000);
-		if(MemberId.getText().contains("Member"))
+		if(MemberId.getText().contains("Member ID Number"))
 		{
 			return new PersonalIdentityUlayerPage(driver);
 		}
