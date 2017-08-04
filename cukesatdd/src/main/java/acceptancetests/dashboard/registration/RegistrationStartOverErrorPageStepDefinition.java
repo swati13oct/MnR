@@ -72,9 +72,10 @@ public class RegistrationStartOverErrorPageStepDefinition {
 	}
 	
 	@When("^member click on start over link on future effective page$")
-	public void clickStartOverLinkFutureEffectivePage() {
+	public void clickStartOverLinkFutureEffectivePage() throws InterruptedException {
 		RegistrationInformationPage registrationInformationPage = (RegistrationInformationPage) 
 				getLoginScenario().getBean(PageConstants.REGISTRATION_INFORMATION_PAGE);
+		Thread.sleep(1000);
 		registrationInformationPage.clickFutureStartOver();
 
 	}
