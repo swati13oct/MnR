@@ -128,14 +128,11 @@ Examples:
        Examples: 
       | planType |
      # | PDP     |
-      | MAPD     |
-     # | MA       |
+       | MAPD     |
+       | MA       |
 
 
-
-     
-      
-       @ValidateEmail
+  @ValidateEmail
   Scenario Outline: To verify Email section in UMS site
     Given registered UHC with following details for Profile and Preferences flow in UMS site
       | <planType> |
@@ -143,6 +140,6 @@ Examples:
     Then the user validates the Email section in UMS site
 
          Examples: 
-      | planType |
-      #| MAPD     |
-     | MA       |
+        | planType |
+        | MAPD     |
+        | MA       |

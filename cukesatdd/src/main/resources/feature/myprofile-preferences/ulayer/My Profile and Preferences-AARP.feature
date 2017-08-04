@@ -107,14 +107,12 @@ Feature: To test My Profile & Preferences in AARP site
 
        Examples: 
       | planType |
-    #| PDP     |
-     #| MAPD     |
-      | MA       |
+     #| PDP     |
+      | MAPD     |
+      #| MA       |
       
       
-      
-      
-       @ValidateEmail
+  @ValidateEmail
   Scenario Outline: To verify Email section in AARP site
     Given registered AMP with following details for profile and preferences flow in AARP site
       | <planType> |
@@ -124,5 +122,5 @@ Feature: To test My Profile & Preferences in AARP site
        Examples: 
       | planType |
     #| PDP     |
-     #| MAPD     |
-      | MA       |
+      | MAPD     |
+      #| MA       |
