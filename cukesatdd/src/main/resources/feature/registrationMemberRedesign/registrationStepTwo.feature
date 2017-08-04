@@ -56,7 +56,7 @@ Feature: To test registration flow in redesign portal
       | Plantype | planMemberId | dateOfBirth | planname                        | membername     |
       | PDP      | 0187121481   | 06-23-1949  | AARP MedicareRx Walgreens (PDP) | BAECCEB CFCBBF |
 
-  Scenario Outline: To verify member with additional plan is navigated to step 3 (Create Account) after clicking next button on Step 2 (plan Information)
+  Scenario Outline: To verify member with additional plan is navigated to additional Information section  after clicking next button on plan Information
     Given the member is on registration page of new portal part of redesign
     When the member enter the member ID into Member ID field
       | Plan Member ID | <planMemberId> |
@@ -80,6 +80,6 @@ Feature: To test registration flow in redesign portal
     Examples: 
       | Plantype     | planMemberId | dateOfBirth | planname                                     | membername       |
       | PDP          | 0105048371   | 09-21-1945  | UnitedHealthcare MedicareRx for Groups (PDP) | BFFDBD CDBCD     |
-      | SSUP         | 803983905-00 | 09-21-1945  | UnitedHealthcare Senior Supplement           | BFFDBD CDBCD     |
-      | PDP          | 1011277011   | 05-13-1929  | AARP MedicareRx Saver Plus (PDP)             | EEDDAECC ABDEDFB |
-      | SHIP MedSupp | 101127701-11 | 05-13-1929  | AARP MEDICARE SUPPLEMENT PLAN                | EEDDAECC ABDEDFB |
+     # | SSUP         | 803983905-00 | 09-21-1945  | UnitedHealthcare Senior Supplement           | BFFDBD CDBCD     |
+     # | PDP          | 1011277011   | 05-13-1929  | AARP MedicareRx Saver Plus (PDP)             | EEDDAECC ABDEDFB |
+     #| SHIP MedSupp | 101127701-11 | 05-13-1929  | AARP MEDICARE SUPPLEMENT PLAN                | EEDDAECC ABDEDFB |
