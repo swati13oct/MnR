@@ -943,7 +943,7 @@ public class MRScenario {
 			}
 		}
 		//https://wiki.saucelabs.com/display/DOCS/Platform+Configurator#/
-		else if(RUN_ON!=null && RUN_ON.equalsIgnoreCase("Sauce_MOBILE"))	{
+		else if(browser.equalsIgnoreCase("MOBILE"))	{
 			if (browser.equalsIgnoreCase(CommonConstants.SAUCE_BROWSER_MOBILE)){    				
 				System.out.println("Execution is Going to Start on SauceLabs Mobile.....!!!!!");
 				DesiredCapabilities capabilities = null;
