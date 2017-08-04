@@ -378,7 +378,7 @@ And User clicks on change location
 
 
 
-@US689310
+@US689310 @sprint5
 Scenario Outline: To validate DCE Section on Plan Compare page
 Given the user is on the  team-c vpp portfolio page
 Then the user performs plan search TeamC using zipcode
@@ -393,7 +393,7 @@ Examples:
 |zipCode|county          |planType|
 |90210 |Los Angeles County| MA     |
 
-@US689260
+@US689260 @sprint5
 Scenario Outline: To validate the Provider section is enabled
 Given the user is on the  team-c vpp portfolio page
 Then the user performs plan search TeamC using zipcode
@@ -409,7 +409,7 @@ Examples:
 |90210 |Los Angeles County| MA     |
 
 
-@US702406
+@US702406 @sprint5
 Scenario Outline: To validate that user should not be able to see add another plan option for zipcode having only 2 plans
 Given the user is on the  team-c vpp portfolio page
 Then the user performs plan search TeamC using zipcode
@@ -425,7 +425,7 @@ Examples:
 |95545 |Humboldt County| MA     |
 
 
-@US699059
+@US699059 @sprint5
 Scenario Outline: To validate the Provider section is enabled
 Given the user is on the  team-c vpp portfolio page
 Then the user performs plan search TeamC using zipcode
@@ -440,7 +440,7 @@ Examples:
 |zipCode|county          |planType|
 |90210 |Los Angeles County| MA     |
 
-@US699362
+@US699362 @sprint5
 Scenario Outline: To validate the Provider section is enabled
 Given the user is on the  team-c vpp portfolio page
 Then the user performs plan search TeamC using zipcode
@@ -456,7 +456,7 @@ Examples:
 |28682 |Alexander| MA     |
 
 
-@US698836
+@US698836 @sprint5
 Scenario Outline: To validate the Provider section is enabled
 Given the user is on the  team-c vpp portfolio page
 Then the user performs plan search TeamC using zipcode
@@ -471,7 +471,7 @@ Examples:
 |zipCode|county          |planType|
 |32963 |Indian River| MA     |
 
-@US689475 @US689478
+@US689475 @US689478 @sprint5
 Scenario Outline: To validate Medical Benefits section on Plan compare Page
 Given the user is on the  team-c vpp portfolio page
 Then the user performs plan search TeamC using zipcode
