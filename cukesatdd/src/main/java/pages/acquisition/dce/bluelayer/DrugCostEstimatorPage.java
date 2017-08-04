@@ -1517,7 +1517,7 @@ public class DrugCostEstimatorPage extends UhcDriver {
 		WebDriverWait wait = new WebDriverWait(driver, 10);
 		wait.until(ExpectedConditions.elementToBeClickable(pharmacyLink));
 		
-		if(pharmacyActual.equalsIgnoreCase("Pharmacy")){
+		if(pharmacyActual.contains("Pharmacy")){
 			Assert.assertTrue(true);
 		} else {
 			Assert.assertTrue("Pharmacy link does not show up",false);
