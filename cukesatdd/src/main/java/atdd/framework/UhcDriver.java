@@ -118,6 +118,23 @@ public abstract class UhcDriver {
 			return false;
 			}
 	
+	public boolean validateNew(WebElement element) {
+
+		// this.waitforElement(element);
+		try {
+		if (element.isDisplayed()) {
+
+		System.out.println("@@@The element " + element.getText() + "is found@@@");
+
+		}
+		} catch (Exception e) {
+
+		Assert.fail("The element " + element.getText() + "is not  found" );
+
+		}
+		return false;
+		}
+	
 
 	public WebElement findElement(ElementData elementData) {
 		WebElement element = null;
