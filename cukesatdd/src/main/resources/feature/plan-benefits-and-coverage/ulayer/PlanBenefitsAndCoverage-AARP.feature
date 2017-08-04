@@ -1070,7 +1070,8 @@ Feature: To test plan benefits and Coverage on AARP site for Federal members
       | planType | copayCategory |
       | MAPD     | NON LIS       |
       ##TESTAPRIL001
-      @PDP
+      
+      @drugcopaynonlis
   Scenario Outline: Verify DCE section is in place on Benefits and Coverage page
     Given registered AMP with following details for plan benefits and coverage flow in AARP site
       | Plan Type      | <planType>      |
@@ -1081,17 +1082,17 @@ Feature: To test plan benefits and Coverage on AARP site for Federal members
     And the user validates Header section
     Then the user validates the Drug Header section
     Then  the user validates the Drug cost Header and text
-    Then the user validates first select option selected should be Preferred Retail Pharmacy
+    #Then the user validates first select option selected should be Preferred Retail Pharmacy
     Then the user validates dropdown should show three values
     Then the user validates the Locate Pharmacy section
     Then the user validates the Look Up Drugs button
     Then the user validates the Drug Coverage  section
     Then the user validates the Learn More link and click on arrow
-    Then the user validates the user click on the link it expands and when user clicks it again it should collapse 
+    #Then the user validates the user click on the link it expands and when user clicks it again it should collapse 
      Examples:
       | planType | copayCategory |
-      | PDP      | NON LIS       |
-      ##q1_apr_ulayer211
+      | MAPD     | NON LIS       |
+      ##q3_sep_ulayer068
       
       
       
