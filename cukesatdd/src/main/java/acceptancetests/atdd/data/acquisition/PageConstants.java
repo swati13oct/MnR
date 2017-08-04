@@ -367,5 +367,7 @@ public class PageConstants {
 	public static final String TeamC_Plan_Compare_Page = "TeamCPlanComparePage";
 	
 	public static final String TeamC_FootNotes_Section = "TeamCFootNotesSection";
+	
+	public static final String SamePage = "SamePage";
 
 }
