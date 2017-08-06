@@ -37,7 +37,6 @@ public class LoginPage extends UhcDriver {
 
 	//@FindBy(xpath = "//button[@id='fd_memberSignInButton' or @id='accessURAccountBTN']")
 	@FindBy(id = "fd_memberSignInButton")
-
 	private WebElement loginIn;
 
 	
@@ -79,6 +78,8 @@ public class LoginPage extends UhcDriver {
 		/*WebElement loginInEle= this.driver.findElement(By.id("fd_memberSignInButton"));
 		loginInEle.click();*/
 		loginIn.click();
+		System.out.println(username);
+		System.out.println(password);
 		sendkeys(userNameField, username);
 		sendkeys(passwordField, password);
 		signInNewButton.click();
@@ -125,7 +126,7 @@ public class LoginPage extends UhcDriver {
 
 	@Override
 	public void openAndValidate() {
-		if(MRScenario.environment.equals("team-e")){
+		if(MRScenario.environment.equals("team-e") || MRScenario.environment.equals("team-h")){
 			start(UHCM_PAGE_URL);
 		}else{
 			start(PAGE_URL);

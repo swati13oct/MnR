@@ -40,6 +40,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.junit.Assert;
 import org.openqa.selenium.Dimension;
+import org.openqa.selenium.Platform;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -50,6 +51,7 @@ import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.phantomjs.PhantomJSDriver;
 import org.openqa.selenium.phantomjs.PhantomJSDriverService;
+import org.openqa.selenium.remote.CapabilityType;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.springframework.ldap.core.DistinguishedName;
@@ -983,6 +985,7 @@ public class MRScenario {
 			} else if (browser.equalsIgnoreCase(CommonConstants.CHROME_BROWSER)) {
 				Map<String, Object> chromeOptions = new HashMap<String, Object>();
 				chromeOptions.put("binary", pathToBinary);
+				System.setProperty("webdriver.chrome.driver",pathToBinary);
 				DesiredCapabilities capabilities = DesiredCapabilities.chrome();
 				capabilities.setCapability(ChromeOptions.CAPABILITY, chromeOptions);
 				webDriver = new ChromeDriver(capabilities);
@@ -1029,11 +1032,11 @@ public class MRScenario {
                 capabilities.setCapability("autoAcceptsAlerts", true);
                 capabilities.setCapability("parent-tunnel", "sauce_admin");
                 capabilities.setCapability("tunnelIdentifier", "OptumSharedTunnel-Prd");
-                String USERNAME = "bnaveen4";// provide ms id here
-                String ACCESS_KEY = "7d7097c5-93ad-4524-aa1c-f6e7b8cdc4cf";
+                String SAUCE_USERNAME = props.get("SAUCE_USERNAME");
+	            String SAUCE_ACCESS_KEY = props.get("SAUCE_ACCESS_KEY");
                 //String URL = "http://" + USERNAME + ":" + ACCESS_KEY + "@ondemand.saucelabs.com:80/wd/hub";
-                String URL = "http://" + USERNAME + ":" + ACCESS_KEY + "@ondemand.saucelabs.com:80/wd/hub";
-                if (USERNAME == null || ACCESS_KEY == null) {
+                String URL = "http://" + SAUCE_USERNAME + ":" + SAUCE_ACCESS_KEY + "@ondemand.saucelabs.com:80/wd/hub";
+                if (SAUCE_USERNAME == null || SAUCE_ACCESS_KEY == null) {
                        Assert.fail(
                                      "Missing value for environment variable(s) SAUCE_USERNAME or SAUCE_ACCESS_KEY.  Check environment configuration and try again");
                 }
@@ -1065,25 +1068,72 @@ public class MRScenario {
                 capabilities.setCapability("autoAcceptsAlerts", true);
                 capabilities.setCapability("parent-tunnel", "sauce_admin");
                 capabilities.setCapability("tunnelIdentifier", "OptumSharedTunnel-Prd");
-                	String USERNAME = "bnaveen4";
-                	String ACCESS_KEY = "7d7097c5-93ad-4524-aa1c-f6e7b8cdc4cf";
-                    String URL = "http://" + USERNAME + ":" + ACCESS_KEY + "@ondemand.saucelabs.com:80/wd/hub";
-                    if (USERNAME == null || ACCESS_KEY == null) {
-                           Assert.fail(
-                                         "Missing value for environment variable(s) SAUCE_USERNAME or SAUCE_ACCESS_KEY.  Check environment configuration and try again");
-                    }
+                String SAUCE_USERNAME = props.get("SAUCE_USERNAME");
+	            String SAUCE_ACCESS_KEY = props.get("SAUCE_ACCESS_KEY");
+                //String URL = "http://" + USERNAME + ":" + ACCESS_KEY + "@ondemand.saucelabs.com:80/wd/hub";
+                String URL = "http://" + SAUCE_USERNAME + ":" + SAUCE_ACCESS_KEY + "@ondemand.saucelabs.com:80/wd/hub";
+                if (SAUCE_USERNAME == null || SAUCE_ACCESS_KEY == null) {
+                       Assert.fail(
+                                     "Missing value for environment variable(s) SAUCE_USERNAME or SAUCE_ACCESS_KEY.  Check environment configuration and try again");
+                }
                     try {
                            webDriver = new RemoteWebDriver(new URL(URL), capabilities);
                     } catch (MalformedURLException e) {
                            Assert.fail("Invalid Sauce URL: [" + URL + "]");
                     }
                     return webDriver;
- 			}
+ 			}else if (browser.equalsIgnoreCase(CommonConstants.PERFECTO)) {
+ 	              DesiredCapabilities capabilities = null;
+ 	              String host = props.get("PERFECTO_HOST");
+ 	              String perfectoUserNAme = props.get("PERFECTO_USERNAME");
+ 	              String PerfectoPassword = props.get("PERFECTO_PASSWORD");
+ 	              String URL = "https://" + host + "/nexperience/perfectomobile/wd/hub";
+ 	              String perfectoBrowserName = "mobileOS";
+ 	              String deviceID;
+ 	              if (perfectoUserNAme == null || PerfectoPassword == null) {
+ 	                     Assert.fail(
+ 	                                  "Missing value for environment variable(s) cloudUser or cloudPw.  Check environment configuration and try again");
+ 	              }
+ 	              	 deviceID = getDeviceId(props.get("DeviceName"));
+                     capabilities = new DesiredCapabilities(perfectoBrowserName, "", Platform.ANY);
+
+                  // define credentials for the CQ Lab connection
+                     capabilities.setCapability("user", perfectoUserNAme);
+                     capabilities.setCapability("password", PerfectoPassword);
+                     capabilities.setCapability(CapabilityType.ACCEPT_SSL_CERTS, true);
+                     capabilities.setCapability("outputReport", false);
+                     capabilities.setCapability("outputVideo", false);
+                     // Selecting Device By Device Id
+                     capabilities.setCapability("deviceName", deviceID);
+                     
+                     try {
+                  	   webDriver = new RemoteWebDriver(new URL(URL), capabilities);
+ 	                     
+                  	   webDriver.manage().deleteAllCookies();
+ 	                     
+ 	              } catch (MalformedURLException e) {
+ 	            	  Assert.fail("Invalid Perfecto URL: [" + URL + "]"+ e);
+ 	              }
+                     return webDriver;
+		}
 		}
 		return webDriver;
-
 	}
 
+	 /**
+     * Fills the deivce Id from config.properties file
+     * @param deviceId
+     * @return
+     */
+    public String getDeviceId(String deviceName){
+   	 Map<String ,String> devices = new HashMap<String, String>();
+   	 devices.put("iPadMini3", props.get("iPadMini3"));
+   	 devices.put("iphone_6", props.get("iphone_6"));
+   	 devices.put("iphone6Plus", props.get("iphone6Plus"));
+   	 devices.put("SAMSUNG_TAB", props.get("SAMSUNG_TAB"));
+   	 devices.put("SAMSUNG_MOBILE", props.get("SAMSUNG_MOBILE"));
+   	 return devices.get(deviceName);
+    }
 
 	public WebDriver getIEDriver() {
 		System.setProperty("webdriver.ie.driver",

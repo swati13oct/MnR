@@ -2,7 +2,7 @@ package acceptancetests.contactus.bluelayer.redesign;
 
 
 
-import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -12,13 +12,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import acceptancetests.atdd.data.CommonConstants;
 import acceptancetests.atdd.data.member.PageConstants;
-import acceptancetests.login.data.LoginCommonConstants;
 import atdd.framework.MRScenario;
 import cucumber.annotation.en.And;
 import cucumber.annotation.en.Given;
 import cucumber.annotation.en.Then;
 import cucumber.annotation.en.When;
 import cucumber.table.DataTable;
+import gherkin.formatter.model.DataTableRow;
 import pages.member.bluelayer.AccountHomePage;
 import pages.member.bluelayer.ContactUsPage;
 import pages.member.bluelayer.LoginPage;
@@ -37,10 +37,10 @@ public class ContactUSRedesignUmsStepDefinition {
 		
 		@Given("^registered UMS member with following attributes$")
 		public void registered_member_orderplanmaterials_ums(
-				DataTable memberAttributes) {
+				DataTable givenAttributes) {
 
 			/* Reading the given attribute from feature file */
-			List<List<String>> dataTable = memberAttributes.raw();
+			/*List<List<String>> dataTable = memberAttributes.raw();
 			List<String> desiredAttributes = new ArrayList<String>();
 
 			for (List<String> data : dataTable) {
@@ -64,12 +64,22 @@ public class ContactUSRedesignUmsStepDefinition {
 				getLoginScenario()
 				.saveBean(LoginCommonConstants.USERNAME, userName);
 				getLoginScenario().saveBean(LoginCommonConstants.PASSWORD, pwd);
+			}*/
+			List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+			Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
+			for (int i = 0; i < memberAttributesRow.size(); i++) {
+			    memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0), memberAttributesRow.get(i).getCells().get(1));
 			}
+			// get parameter username and password
+			String userName = memberAttributesMap.get("UserName");
+			String passWord = memberAttributesMap.get("Password");
+			String category = memberAttributesMap.get("Member Type");
+			
 		WebDriver wd = getLoginScenario().getWebDriver();
 			getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
 
 			LoginPage loginPage = new LoginPage(wd);
-			AccountHomePage accountHomePage = (AccountHomePage) loginPage.loginWith(userName, pwd,"Group");
+			AccountHomePage accountHomePage = (AccountHomePage) loginPage.loginWith(userName, passWord,category);
 			if (accountHomePage != null) {
 				getLoginScenario().saveBean(PageConstants.ACCOUNT_HOME_PAGE,
 						accountHomePage);

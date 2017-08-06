@@ -21,6 +21,7 @@ public class MRConstants {
 	public static final String UHCM_URL = "https://member.awe-"+MRScenario.environment+"-uhcmedicaresolutions.uhc.com/guest/login.html";
 	public static final String UHCM_TEAM_E_URL = "https://member."+MRScenario.environment+"-uhcmedicaresolutions.uhc.com";
 	public static final String REDESIGN_AARPM_URL = "https://member."+MRScenario.environment+"-aarpmedicareplans.uhc.com/content/aarpm/home/contact.html";
+	public static final String REDESIGN_UHCM_URL = "https://member."+MRScenario.environment+"-uhcmedicaresolutions.uhc.com/content/uhcm/home/contact.html";
 	
 	//public static final String AARP_URL = "https://www.awe-"+MRScenario.environment+"-aarpmedicareplans.uhc.com/";
 	public static final String AARP_URL = "https://www.awe-"+MRScenario.environment+"-aarpmedicareplans.uhc.com/";
