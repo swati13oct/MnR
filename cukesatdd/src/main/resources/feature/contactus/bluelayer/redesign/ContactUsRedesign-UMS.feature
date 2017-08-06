@@ -2,17 +2,17 @@
 Feature: To test Send us a question Widget and Click to call functionality in contact us redesign pages in UHCM site
 
   #US634975
-  #Scenario Outline: Verify Send us a question Widget section in contact us redesign page
-    #Given registered UMS member with following attributes
-      #| UserName    | <userName>   |
-      #| Password    | <password>   |
-      #| Member Type | <memberType> |
-    #When the user navigates to contact us page in UHC site
-    #Then user validates secure email widget UI in redesign contact us page
-#
-    #Examples: 
-      #| userName      |  | password   | memberType |
-      #| q3_sep_grp001 |  | Password@1 | Group      |
+  Scenario Outline: Verify Send us a question Widget section in contact us redesign page
+    Given registered UMS member with following attributes
+      | UserName    | <userName>   |
+      | Password    | <password>   |
+      | Member Type | <memberType> |
+    When the user navigates to contact us page in UHC site
+    Then user validates secure email widget UI in redesign contact us page
+
+    Examples: 
+      | userName      |  | password   | memberType |
+      | q3_sep_grp098 |  | Password@1 | Group      |
       
   #US634972
   Scenario Outline: Verify Send us a question Widget section in contact us redesign page which covers 1,3,4
@@ -25,7 +25,7 @@ Feature: To test Send us a question Widget and Click to call functionality in co
 
    Examples: 
       | userName      |  | password   | memberType |
-      | q3_sep_grp001 |  | Password@1 | Group      |
+      | q3_sep_grp098 |  | Password@1 | Group      |
 
   Scenario Outline: Verify Send us a question Widget section in contact us redesign page
    Given registered UMS member with following attributes
@@ -37,7 +37,7 @@ Feature: To test Send us a question Widget and Click to call functionality in co
 
     Examples: 
       | userName      |  | password   | memberType |
-      | q3_sep_grp001 |  | Password@1 | Group      |
+      | q3_sep_grp098 |  | Password@1 | Group      |
 
   Scenario Outline: Verify Send us a question Widget section in contact us redesign page
     Given registered UMS member with following attributes
@@ -49,7 +49,7 @@ Feature: To test Send us a question Widget and Click to call functionality in co
 
     Examples: 
 		  | userName      |  | password   | memberType |
-      | q3_sep_grp001 |  | Password@1 | Group      |
+      | q3_sep_grp098 |  | Password@1 | Group      |
 
 
   #US634977
@@ -63,7 +63,7 @@ Feature: To test Send us a question Widget and Click to call functionality in co
 
     Examples: 
       | userName      |  | password   | memberType |
-      | q3_sep_grp001 |  | Password@1 | Group      |
+      | q3_sep_grp098 |  | Password@1 | Group      |
 
   Scenario Outline: routing to appropriate department after clicking submit question button by  selecting Physician option  in contact us redesign page
     Given registered UMS member with following attributes
@@ -75,7 +75,7 @@ Feature: To test Send us a question Widget and Click to call functionality in co
 
     Examples: 
       | userName      |  | password   | memberType |
-      | q3_sep_grp001 |  | Password@1 | Group      |
+      | q3_sep_grp098 |  | Password@1 | Group      |
 
   Scenario Outline: routing to appropriate department after clicking submit question button by  selecting Billing Information option  in contact us redesign page
     Given registered UMS member with following attributes
@@ -87,7 +87,7 @@ Feature: To test Send us a question Widget and Click to call functionality in co
 
 		Examples: 
       | userName      |  | password   | memberType |
-      | q3_sep_grp001 |  | Password@1 | Group      |
+      | q3_sep_grp098 |  | Password@1 | Group      |
 
   Scenario Outline: validating emailIds in contact us redesign page
     Given registered UMS member with following attributes
@@ -99,7 +99,7 @@ Feature: To test Send us a question Widget and Click to call functionality in co
 
     Examples: 
       | userName      |  | password   | memberType |
-      | q3_sep_grp001 |  | Password@1 | Group      |
+      | q3_sep_grp098 |  | Password@1 | Group      |
 
   Scenario Outline: validating emailIds in contact us redesign page
     Given registered UMS member with following attributes
@@ -111,7 +111,7 @@ Feature: To test Send us a question Widget and Click to call functionality in co
 
 			Examples: 
       | userName      |  | password   | memberType |
-      | q3_sep_grp001 |  | Password@1 | Group      |
+      | q3_sep_grp098 |  | Password@1 | Group      |
 
   Scenario Outline: validating emailIds in contact us redesign page
     Given registered UMS member with following attributes
@@ -123,7 +123,7 @@ Feature: To test Send us a question Widget and Click to call functionality in co
 
     Examples: 
       | userName      |  | password   | memberType |
-      | q3_sep_grp001 |  | Password@1 | Group      |
+      | q3_sep_grp098 |  | Password@1 | Group      |
 
   Scenario Outline: validating emailIds in contact us redesign page
     Given registered UMS member with following attributes
@@ -135,7 +135,7 @@ Feature: To test Send us a question Widget and Click to call functionality in co
 
     Examples: 
       | userName      |  | password   | memberType |
-      | q3_sep_grp001 |  | Password@1 | Group      |
+      | q3_sep_grp098 |  | Password@1 | Group      |
 
   Scenario Outline: validating emailIds in contact us redesign page
     Given registered UMS member with following attributes
@@ -147,30 +147,30 @@ Feature: To test Send us a question Widget and Click to call functionality in co
 
     Examples: 
       | userName      |  | password   | memberType |
-      | q3_sep_grp001 |  | Password@1 | Group      |
+      | q3_sep_grp098 |  | Password@1 | Group      |
 
   Scenario Outline: validating emailIds in contact us redesign page
     Given registered UMS member with following attributes
       | UserName    | <userName>   |
       | Password    | <password>   |
-      | Member Type | <memberType> ||
+      | Member Type | <memberType> |
     When the user navigates to contact us page in UHC site
     Then user enters invalid phone number  in sendUS A question widget
 
     Examples: 
       | userName      |  | password   | memberType |
-      | q3_sep_grp001 |  | Password@1 | Group      |
+      | q3_sep_grp098 |  | Password@1 | Group      |
 
   #US635973
   Scenario Outline: Verify Group Email Widget Confirm Request in contact us redesign page
     Given registered UMS member with following attributes
       | UserName    | <userName>   |
       | Password    | <password>   |
-      | Member Type | <memberType> ||
+      | Member Type | <memberType> |
     When the user navigates to contact us page in UHC site
     Then user clicks on submit question by selecting Finding a Physician option in redesign contact us page
     And UI should be replaced by a confirmation display
 
  		Examples: 
       | userName      |  | password   | memberType |
-      | q3_sep_grp001 |  | Password@1 | Group      |
+      | q3_sep_grp098 |  | Password@1 | Group      |
