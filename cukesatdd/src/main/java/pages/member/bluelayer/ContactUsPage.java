@@ -455,8 +455,10 @@ public class ContactUsPage extends UhcDriver{
 			addAlternativeEmail.click();
 			alternativeEmailAddress.sendKeys("abc");
 			//confirmEmailAddress.sendKeys("");
-			alternativeEmailAddress.clear();
 			alternativeEmailAddress.click();
+			jsClick(driver.findElement(By.xpath("//div[contains(@class,'parsys request-email')]/div[not (contains(@class,'ng-hide'))][3]//input[@id='question-alt-email']/preceding::p[1]")));
+			driver.findElement(By.xpath
+					("//div[contains(@class,'parsys request-email')]/div[not (contains(@class,'ng-hide'))][3]//input[@id='question-alt-email']/preceding::p[1]")).click();
 			try {
 				Thread.sleep(5000);
 			} catch (InterruptedException e) {
@@ -501,6 +503,9 @@ public class ContactUsPage extends UhcDriver{
 			confirmEmailAddress.sendKeys("xyz");
 			confirmEmailAddress.clear();
 			confirmEmailAddress.click();
+			jsClick(driver.findElement(By.xpath("//div[contains(@class,'parsys request-email')]/div[not (contains(@class,'ng-hide'))][3]//input[@id='question-alt-email']/preceding::p[1]")));
+			driver.findElement(By.xpath
+					("//div[contains(@class,'parsys request-email')]/div[not (contains(@class,'ng-hide'))][3]//input[@id='question-alt-email']/preceding::p[1]")).click();
 			try {
 				Thread.sleep(5000);
 			} catch (InterruptedException e) {
@@ -543,6 +548,9 @@ public class ContactUsPage extends UhcDriver{
 			addAlternativePhneNumberLink.click();
 			alternativePhneNumber.sendKeys("123");
 			alternativePhneNumber.click();
+			jsClick(driver.findElement(By.xpath("//div[contains(@class,'parsys request-email')]/div[not (contains(@class,'ng-hide'))][3]//input[@id='question-alt-email']/preceding::p[1]")));
+			driver.findElement(By.xpath
+					("//div[contains(@class,'parsys request-email')]/div[not (contains(@class,'ng-hide'))][3]//input[@id='question-alt-email']/preceding::p[1]")).click();
 			try {
 				Thread.sleep(5000);
 			} catch (InterruptedException e) {
