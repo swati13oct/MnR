@@ -343,7 +343,7 @@ public class ContactUsPage extends UhcDriver{
 				e.printStackTrace();
 			}
 			Select dropdown = new Select(driver.findElement(By.xpath("//div[contains(@class,'parsys request-email')]"
-					+ "/div[not (contains(@class,'ng-hide'))][1]//select[@id='question-about']")));
+					+ "/div[not (contains(@class,'ng-hide'))][3]//select[@id='question-about']")));
 			System.out.println("dropdown" +dropdown);
 			dropdown.getFirstSelectedOption().click();
 			dropdown.selectByVisibleText("Payment Information");
@@ -389,7 +389,7 @@ public class ContactUsPage extends UhcDriver{
 				e.printStackTrace();
 			}
 			Select dropdown = new Select(driver.findElement(By.xpath("//div[contains(@class,'parsys request-email')]"
-					+ "/div[not (contains(@class,'ng-hide'))][1]//select[@id='question-about']")));
+					+ "/div[not (contains(@class,'ng-hide'))][3]//select[@id='question-about']")));
 			System.out.println("dropdown" +dropdown);
 			dropdown.getFirstSelectedOption().click();
 			dropdown.selectByVisibleText("Billing Information");
@@ -440,7 +440,7 @@ public class ContactUsPage extends UhcDriver{
 				e.printStackTrace();
 			}
 			Select dropdown = new Select(driver.findElement(By.xpath("//div[contains(@class,'parsys request-email')]"
-					+ "/div[not (contains(@class,'ng-hide'))][1]//select[@id='question-about']")));
+					+ "/div[not (contains(@class,'ng-hide'))][3]//select[@id='question-about']")));
 			System.out.println("dropdown" +dropdown);
 			dropdown.getFirstSelectedOption().click();
 			dropdown.selectByVisibleText("Billing Information");
@@ -478,7 +478,7 @@ public class ContactUsPage extends UhcDriver{
 				e.printStackTrace();
 			}
 			Select dropdown = new Select(driver.findElement(By.xpath("//div[contains(@class,'parsys request-email')]"
-					+ "/div[not (contains(@class,'ng-hide'))][1]//select[@id='question-about']")));
+					+ "/div[not (contains(@class,'ng-hide'))][3]//select[@id='question-about']")));
 			System.out.println("dropdown" +dropdown);
 			dropdown.getFirstSelectedOption().click();
 			dropdown.selectByVisibleText("Billing Information");
@@ -517,7 +517,7 @@ public class ContactUsPage extends UhcDriver{
 				e.printStackTrace();
 			}
 			Select dropdown = new Select(driver.findElement(By.xpath("//div[contains(@class,'parsys request-email')]"
-					+ "/div[not (contains(@class,'ng-hide'))][1]//select[@id='question-about']")));
+					+ "/div[not (contains(@class,'ng-hide'))][3]//select[@id='question-about']")));
 			//System.out.println("dropdown" +dropdown);
 			dropdown.getFirstSelectedOption().click();
 			dropdown.selectByVisibleText("Billing Information");
@@ -556,7 +556,7 @@ public class ContactUsPage extends UhcDriver{
 				e.printStackTrace();
 			}
 			Select dropdown = new Select(driver.findElement(By.xpath("//div[contains(@class,'parsys request-email')]"
-					+ "/div[not (contains(@class,'ng-hide'))][1]//select[@id='question-about']")));
+					+ "/div[not (contains(@class,'ng-hide'))][3]//select[@id='question-about']")));
 			System.out.println("dropdown" +dropdown);
 			dropdown.getFirstSelectedOption().click();
 			dropdown.selectByVisibleText("Billing Information");
