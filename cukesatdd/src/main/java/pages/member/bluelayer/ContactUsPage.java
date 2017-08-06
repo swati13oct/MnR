@@ -457,6 +457,12 @@ public class ContactUsPage extends UhcDriver{
 			//confirmEmailAddress.sendKeys("");
 			alternativeEmailAddress.clear();
 			alternativeEmailAddress.click();
+			try {
+				Thread.sleep(5000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			String alternativeerrorMessage=alternativemessageEmailError.getText();
 			System.out.println("alternativeerrorMessage::" +alternativeerrorMessage);
 			Assert.assertTrue("Email address not valid", alternativeerrorMessage.equalsIgnoreCase("Email Address Not valid"));
@@ -495,6 +501,12 @@ public class ContactUsPage extends UhcDriver{
 			confirmEmailAddress.sendKeys("xyz");
 			confirmEmailAddress.clear();
 			confirmEmailAddress.click();
+			try {
+				Thread.sleep(5000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			String confirmErrMessage=confirmMsgEmailError.getText();		
 			 System.out.println("confirmErrMessage;;" + confirmErrMessage);
 			 Assert.assertTrue("Please enter same email id", confirmErrMessage.equalsIgnoreCase("Please enter same email id"));
@@ -531,6 +543,12 @@ public class ContactUsPage extends UhcDriver{
 			addAlternativePhneNumberLink.click();
 			alternativePhneNumber.sendKeys("123");
 			alternativePhneNumber.click();
+			try {
+				Thread.sleep(5000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			String invalidPhnenumerErrmsg = invalidPhneErrorMsg.getText();
 			System.out.println("invalidPhnenumerErrmsg::" +invalidPhnenumerErrmsg);
 			Assert.assertTrue("Phone number is not valid", invalidPhnenumerErrmsg.equals("Phone number is not valid"));
