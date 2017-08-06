@@ -657,7 +657,7 @@ public FormsandresourcesPage navigateToMydocumentUmsPage() {
 		System.out.println(MRConstants.REDESIGN_UHCM_URL);
 		driver.get(MRConstants.REDESIGN_UHCM_URL);
 		try {
-			Thread.sleep(6000);
+			Thread.sleep(15000);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 		}
