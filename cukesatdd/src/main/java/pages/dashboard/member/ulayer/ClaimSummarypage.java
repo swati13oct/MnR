@@ -352,7 +352,7 @@ public class ClaimSummarypage extends UhcDriver{
 		}	
 		else
 		{
-			System.out.println("!!!!!!!!! NOT Able to find the claims table !!!!!!!!!");
+			System.out.println("!!!!!!!!! NOT Able to find the claim table !!!!!!!!!");
 		}
 	}
 
