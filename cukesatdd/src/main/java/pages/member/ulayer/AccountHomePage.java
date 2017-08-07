@@ -21,6 +21,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.openqa.selenium.support.ui.Select;
 
 import acceptancetests.atdd.data.CommonConstants;
+import acceptancetests.atdd.data.MRConstants;
 import acceptancetests.atdd.data.PageData;
 import acceptancetests.atdd.util.CommonUtility;
 import atdd.framework.MRScenario;
@@ -603,8 +604,8 @@ public class AccountHomePage extends UhcDriver {
 	}
 	public pages.member.ulayer.ContactUsPage navigateToContactusRedesignPage() {
 		// TODO Auto-generated method stub
-		String url = "https://member.team-e-aarpmedicareplans.uhc.com/content/aarpm/home/contact.html";
-		driver.get(url);
+		//String url = "https://member.team-e-aarpmedicareplans.uhc.com/content/aarpm/home/contact.html";
+		driver.get(MRConstants.REDESIGN_AARPM_URL);
 		if (driver.getTitle().equals("Contact Us")) {
 			return new pages.member.ulayer.ContactUsPage(driver);
 
