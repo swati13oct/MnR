@@ -76,10 +76,10 @@ public class ContactUsPage extends UhcDriver{
 	private WebElement prescriptionLink;
 	
 	
-	@FindBy(xpath = "/html/body/div[2]/div/div/div/div[4]/div/div/div[1]/div/div/div/div/div/div/div/div[1]/p[1]")
+	@FindBy(xpath = "//div[contains(@class,'parsys click-to-call')]/div/div[not (contains(@class,'ng-hide'))]//div[@class='card-header']/p[1]")
 	private WebElement haveUsCallYou;
 	
-	@FindBy(xpath = "//*[@id='call-btn']")
+	@FindBy(xpath = "//div[contains(@class,'parsys click-to-call')]/div/div[not (contains(@class,'ng-hide'))]//a[@id='call-btn']")
 	private WebElement sendArequest;
 	
 	@FindBy(xpath = "//*[@id='call-submit']/span")
@@ -95,7 +95,7 @@ public class ContactUsPage extends UhcDriver{
 	@FindBy(xpath = "//*[@id='call-cancel'] ")
 	private WebElement callCancel;
 	
-	@FindBy(xpath = "//html/body/div[2]/div/div/div/div[4]/div/div/div[1]/div/div/div/div/div/div/div/div[2]/div[3]/div[1] ")
+	@FindBy(xpath = "//div[contains(@class,'parsys click-to-call')]/div/div[not (contains(@class,'ng-hide'))]//div[@class='message-block--full-width success margin-none']")
 	private WebElement reqConfirmation;
 	
 	private PageData contactUs;
@@ -109,7 +109,7 @@ public class ContactUsPage extends UhcDriver{
 	@FindBy(xpath="//*[@id='question-btn']")
 	private WebElement fillOutFormButton;	
 	
-	@FindBy(xpath="/html/body/div[2]/div/div/main/div/div[2]/div/div/h2/span")
+	@FindBy(css="h2.plan.margin-large>span")
 	private WebElement pdpHeader;	
 	
 	
@@ -244,8 +244,8 @@ public class ContactUsPage extends UhcDriver{
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			newemailId.sendKeys("miasdgaarp@gmail.com");
-			confirmemailId.sendKeys("miasdgaarp@gmail.com");
+			driver.findElement(By.id("message-email")).sendKeys("miasdgaarp@gmail.com");
+			driver.findElement(By.id("message-email-confirm")).sendKeys("miasdgaarp@gmail.com");
 			try {
 				Thread.sleep(5000);
 			} catch (InterruptedException e) {
@@ -344,8 +344,8 @@ public class ContactUsPage extends UhcDriver{
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			newemailId.sendKeys("miasdgaarp@gmail.com");
-			confirmemailId.sendKeys("miasdgaarp@gmail.com");
+			driver.findElement(By.id("message-email")).sendKeys("miasdgaarp@gmail.com");
+			driver.findElement(By.id("message-email-confirm")).sendKeys("miasdgaarp@gmail.com");
 			try {
 				Thread.sleep(5000);
 			} catch (InterruptedException e) {
@@ -415,8 +415,8 @@ public class ContactUsPage extends UhcDriver{
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			newemailId.sendKeys("miasdgaarp@gmail.com");
-			confirmemailId.sendKeys("miasdgaarp@gmail.com");
+			driver.findElement(By.id("message-email")).sendKeys("miasdgaarp@gmail.com");
+			driver.findElement(By.id("message-email-confirm")).sendKeys("miasdgaarp@gmail.com");
 			try {
 				Thread.sleep(5000);
 			} catch (InterruptedException e) {
@@ -553,6 +553,7 @@ public class ContactUsPage extends UhcDriver{
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+			driver.findElement(By.id("call-number")).sendKeys("9023456121");
 			requestCall.click();
 			try {
 				Thread.sleep(5000);
