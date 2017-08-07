@@ -606,9 +606,13 @@ public class AccountHomePage extends UhcDriver {
 		// TODO Auto-generated method stub
 		//String url = "https://member.team-e-aarpmedicareplans.uhc.com/content/aarpm/home/contact.html";
 		driver.get(MRConstants.REDESIGN_AARPM_URL);
+		try {
+			Thread.sleep(15000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
 		if (driver.getTitle().equals("Contact Us")) {
 			return new pages.member.ulayer.ContactUsPage(driver);
-
 		}
 		return null;
 	}
