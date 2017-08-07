@@ -46,7 +46,7 @@ And I should see the Pharmacy Saver plans disclaimer within the Disclaimer secti
 And the user navigates back to drug search page
 And the user selects plan year and plan name
 	  | Plan Year | 2018 |
-	  | Plane Name | AARP MedicareComplete (HMO) |
+	  | Plane Name | AARP MedicareComplete Plan 1 (HMO) |
 Then I should not see the Pharmacy Saver Plans Radio Button
 And I should not see the Pharmacy Saver Pharmacy type savings message
 And I should not see the Pharmacy Saver plans disclaimer within the Disclaimer section
