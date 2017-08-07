@@ -561,6 +561,15 @@ public class ContactUsPage extends UhcDriver{
 			System.out.println("invalidPhnenumerErrmsg::" +invalidPhnenumerErrmsg);
 			Assert.assertTrue("Phone number is not valid", invalidPhnenumerErrmsg.equals("Phone number is not valid"));
 			confirmAlternativePhneNumber.sendKeys("789");
+			jsClick(driver.findElement(By.xpath("//div[contains(@class,'parsys request-email')]/div[not (contains(@class,'ng-hide'))][3]//input[@id='question-alt-email']/preceding::p[1]")));
+			driver.findElement(By.xpath
+					("//div[contains(@class,'parsys request-email')]/div[not (contains(@class,'ng-hide'))][3]//input[@id='question-alt-email']/preceding::p[1]")).click();
+			try {
+				Thread.sleep(3000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			String confirmPhoneErrmsg = confirmPhneErrorMsg.getText();
 			Assert.assertTrue("Please enter same Number", confirmPhoneErrmsg.equals("Please enter same Number"));
 			

@@ -4,6 +4,7 @@ package acceptancetests.contactus.ulayer.redesign;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -25,6 +26,7 @@ import cucumber.annotation.en.Given;
 import cucumber.annotation.en.Then;
 import cucumber.annotation.en.When;
 import cucumber.table.DataTable;
+import gherkin.formatter.model.DataTableRow;
 import pages.dashboard.member.ulayer.ClaimSummarypage;
 import pages.member.ulayer.AccountHomePage;
 import pages.member.ulayer.ContactUsPage;
@@ -46,7 +48,7 @@ public class ContactUSRedesignAarpStepDefinition {
 				DataTable memberAttributes) {
 
 			/* Reading the given attribute from feature file */
-			List<List<String>> dataTable = memberAttributes.raw();
+			/*List<List<String>> dataTable = memberAttributes.raw();
 			List<String> desiredAttributes = new ArrayList<String>();
 
 			for (List<String> data : dataTable) {
@@ -70,12 +72,21 @@ public class ContactUSRedesignAarpStepDefinition {
 				getLoginScenario()
 				.saveBean(LoginCommonConstants.USERNAME, userName);
 				getLoginScenario().saveBean(LoginCommonConstants.PASSWORD, pwd);
-			} 
+			} */
+			List<DataTableRow> memberAttributesRow = memberAttributes.getGherkinRows();
+			Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
+			for (int i = 0; i < memberAttributesRow.size(); i++) {
+			    memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0), memberAttributesRow.get(i).getCells().get(1));
+			}
+			// get parameter username and password
+			String userName = memberAttributesMap.get("UserName");
+			String passWord = memberAttributesMap.get("Password");
+			String category = memberAttributesMap.get("Member Type");
 			WebDriver wd = getLoginScenario().getWebDriver();
 			getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
 
 			LoginPage loginPage = new LoginPage(wd);
-			AccountHomePage accountHomePage = (AccountHomePage) loginPage.loginWith(userName, pwd);
+			AccountHomePage accountHomePage = (AccountHomePage) loginPage.loginWith(userName, passWord);
 
 
 			if (accountHomePage != null) {
