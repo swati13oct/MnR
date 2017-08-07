@@ -43,7 +43,7 @@ public class ContactUSRedesignAarpStepDefinition {
 			return loginScenario;
 		}
 		
-		@Given("^AArp member validation on redesigned site$")
+		@Given("^registered UMS member with following attributes$")
 		public void ulayer_registered_member_with_following_attributes(
 				DataTable memberAttributes) {
 

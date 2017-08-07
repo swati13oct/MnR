@@ -62,17 +62,17 @@ Feature: To test EmailUs Widget and Click to call functionality in contact us re
       | userName         |  | password   | memberType |
       | q3_sep_ulayer005 |  | Password@1 | Federal    |
 
-  Scenario Outline: Verify secureMessaging Model section upon clicking the send A Message button
-    Given registered UMS member with following attributes
-      | UserName    | <userName>   |
-      | Password    | <password>   |
-      | Member Type | <memberType> |
-    When the user validates the contact us redesign  page in AARP site
-    Then user validates secure Messaging Model Prescription link click on SecureEmail Model
-
-    Examples: 
-      | userName         |  | password   | memberType |
-      | q3_sep_ulayer005 |  | Password@1 | Federal    |
+  #Scenario Outline: Verify secureMessaging Model section upon clicking the send A Message button
+    #Given registered UMS member with following attributes
+      #| UserName    | <userName>   |
+      #| Password    | <password>   |
+      #| Member Type | <memberType> |
+    #When the user validates the contact us redesign  page in AARP site
+    #Then user validates secure Messaging Model Prescription link click on SecureEmail Model
+#
+    #Examples: 
+      #| userName         |  | password   | memberType |
+      #| q3_sep_ulayer005 |  | Password@1 | Federal    |
 
   #US634971
   #contactUsTestredesign
@@ -100,17 +100,17 @@ Feature: To test EmailUs Widget and Click to call functionality in contact us re
       | userName         |  | password   | memberType |
       | q3_sep_ulayer005 |  | Password@1 | Federal    |
 
-  Scenario Outline: Verify secureEmail widget non display on contactUS redesign page for non eligible member
-    Given registered UMS member with following attributes
-      | UserName    | <userName>   |
-      | Password    | <password>   |
-      | Member Type | <memberType> |
-    When the user validates the contact us redesign  page in AARP site
-    Then user validates non display secure email widget UI in redesign contact us page
-
-    Examples: 
-      | userName         |  | password   | memberType |
-      | q3_sep_ulayer005 |  | Password@1 | Federal    |
+  #Scenario Outline: Verify secureEmail widget non display on contactUS redesign page for non eligible member
+    #Given registered UMS member with following attributes
+      #| UserName    | <userName>   |
+      #| Password    | <password>   |
+      #| Member Type | <memberType> |
+    #When the user validates the contact us redesign  page in AARP site
+    #Then user validates non display secure email widget UI in redesign contact us page
+#
+    #Examples: 
+      #| userName         |  | password   | memberType |
+      #| q3_sep_ulayer005 |  | Password@1 | Federal    |
 
   #US633085
   Scenario Outline: Verify clickToCallButton Widget and Button display on contactUS redesign page
