@@ -13,7 +13,7 @@ public class LoginAssistanceConfirmationJava extends UhcDriver {
 	
 	//private static String PAGE_URL = MRConstants.Assistance_Confirmation_URL;
 	
-	@FindBy(xpath = "html/body/div[2]/div/div/div/div/div/main/div/div/div/div/div/div/div/a")
+	@FindBy(xpath = "html/body/div[3]/div/div/div/div/div/main/div/div/div/div/div/div/div/a")
 	private WebElement BackToSignInPage;
 	
 
@@ -33,6 +33,7 @@ public class LoginAssistanceConfirmationJava extends UhcDriver {
 	
 	public LoginPage navigateToSignInPage() throws InterruptedException {
 		System.out.println("In Other method");
+		Thread.sleep(1000);
 		BackToSignInPage.click();
 		BackToSignInPage.click();
 		System.out.println("Back to Sign In link clicked");

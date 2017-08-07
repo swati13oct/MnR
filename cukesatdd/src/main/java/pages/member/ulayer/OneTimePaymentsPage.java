@@ -120,7 +120,7 @@ public class OneTimePaymentsPage extends UhcDriver{
 		electronicSignatureCheck.click();
 		reviewContinue.click();
 		Thread.sleep(2000);
-		if(driver.getTitle().equalsIgnoreCase("payments-client")){
+		if(driver.getTitle().equalsIgnoreCase("payments-client") || driver.getTitle().equalsIgnoreCase("onetimepayments")){
 			return new ReviewOneTimePaymentsPage(driver);
 		}
 		return null;

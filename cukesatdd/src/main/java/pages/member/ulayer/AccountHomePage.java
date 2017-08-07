@@ -568,7 +568,7 @@ public class AccountHomePage extends UhcDriver {
 		//river.navigate().to("https://member."+MRScenario.environment+"-aarpmedicareplans.uhc.com/content/dashboard/home/one-time-payments.html");
 		OTPButton.click();
 		System.out.println("title  "+driver.getTitle());
-		if(driver.getTitle().equalsIgnoreCase("payments-client")){
+		if(driver.getTitle().equalsIgnoreCase("payments-client") || driver.getTitle().equalsIgnoreCase("onetimepayments")){
 			return new OneTimePaymentsPage(driver);
 		}
 		return null;
@@ -596,6 +596,15 @@ public class AccountHomePage extends UhcDriver {
 	
 	public TestHarness navigateToTestHarnesspage() {
 		driver.navigate().to("https://member."+MRScenario.environment+"-aarpmedicareplans.uhc.com/home/testharness.html");
+		System.out.println("title  "+driver.getTitle());
+		if(driver.getTitle().equalsIgnoreCase("testharness")){
+			return new TestHarness(driver);
+		}
+		return null;
+	}
+	
+	public TestHarness navigateToTeamHTestHarnesspage() {
+		driver.navigate().to("https://member."+MRScenario.TeamHEnvironment+"-aarpmedicareplans.uhc.com/home/testharness.html");
 		System.out.println("title  "+driver.getTitle());
 		if(driver.getTitle().equalsIgnoreCase("testharness")){
 			return new TestHarness(driver);

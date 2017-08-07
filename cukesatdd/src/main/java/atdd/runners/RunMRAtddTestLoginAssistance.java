@@ -15,7 +15,7 @@ import cucumber.junit.Cucumber;
 @Cucumber.Options(glue = { "atdd.framework","acceptancetests.loginassistance.ulayer" }, 
 		features = { "feature/login-assistance/ulayer" }, 
 		format = {
-		"pretty", "html:reports/test-report" }, tags ={"@LoginAssistanceErrorMessages,@US622156"})
+		"pretty", "html:reports/test-report" }, tags ={"@US622167,@US622159,@US622156,@LoginAssistanceErrorMessages"})
 public class RunMRAtddTestLoginAssistance {
 
 }

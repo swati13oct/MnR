@@ -53,7 +53,7 @@ public class ReviewOneTimePaymentsPage extends UhcDriver{
 	@FindBy(xpath="html/body/div[2]/div/div[2]/div/div/div[1]/div/div/div[1]/div[2]/span")
 	private WebElement PaymentType;
 	
-	@FindBy(xpath="//*[@class='payments']/div/div/div/div/div/div/p")
+	@FindBy(xpath="html/body/div[3]/div/div/div/div/div[2]/div[1]/div/div/div/div[2]/div/p[2]")
 	private WebElement OTPError;
 	
 	private PageData reviewOneTime;
@@ -114,7 +114,7 @@ public class ReviewOneTimePaymentsPage extends UhcDriver{
 		SubmitButton.click();
 		System.out.println("Submit Button clicked");
 	    Thread.sleep(5000);
-		 if(driver.getTitle().equalsIgnoreCase("My Benefits & Coverage")){
+		 if(driver.getTitle().equalsIgnoreCase("My Benefits & Coverage") || driver.getTitle().equalsIgnoreCase("onetimepayments") ){
 				return new OneTimePaymentPageSubmitted(driver);
 			}
 		    return null;

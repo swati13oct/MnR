@@ -22,7 +22,7 @@ public class TeamCLoginUlayer extends UhcDriver {
 		//private static String PAGE_URL = MRConstants.AARPM_URL;
 		//BL url
 		
-		private static String PAGE_URL = MRConstants.TeamH_ULayer_Member_URL;
+		private static String PAGE_URL = MRConstants.TeamC_VPP_PAGE_UHC_URL;
 
 		@FindBy(id = "fd_memberSignInButton")
 		private WebElement loginIn;
@@ -63,7 +63,7 @@ public class TeamCLoginUlayer extends UhcDriver {
 			signInButton.click();
 			
 
-			if(MRScenario.TeamCEnvironment.equals("team-h") || MRScenario.TeamCEnvironment.equals("team-c")) {
+			if(MRScenario.TeamCEnvironment.equals("team-c")) {
 				try{
 				Alert alert = driver.switchTo().alert();
 				alert.accept();
