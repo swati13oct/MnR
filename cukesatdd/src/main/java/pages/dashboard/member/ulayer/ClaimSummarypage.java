@@ -340,9 +340,20 @@ public class ClaimSummarypage extends UhcDriver{
 
 	public void validateClaimsTable() {
 		CommonUtility.waitForPageLoad(driver, ClaimsSummaryPage,60);
+		
+		try {
+			Thread.sleep(5000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		if(claimsTableMedical.isDisplayed() || claimsTablePrescriptionDrug.isDisplayed() || claimsTableSHIP.isDisplayed()){
 			System.out.println("!!!!!!!!! Able to find the claims table !!!!!!!!!");
-		}		
+		}	
+		else
+		{
+			System.out.println("!!!!!!!!! NOT Able to find the claim table !!!!!!!!!");
+		}
 	}
 
 	public void validateDownloadMyData() {
