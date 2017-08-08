@@ -182,4 +182,6 @@ public class PageConstants {
 	public static final String NEW_CLAIM_DETAILS_PAGE = "newClaimDetailsPage";
 	
 	public static final String TIME_ADMIN_PAGE = "timeAdminPage";
+
+	public static final String NEW_SIGN_PAGE = "sign_Page";
 }
