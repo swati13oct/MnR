@@ -95,7 +95,7 @@ public class AutomaticPaymentsPage extends UhcDriver{
 		electronicSignatureCheck.click();
 		Thread.sleep(2000);
 		reviewContinue.click();
-		if(driver.getTitle().equalsIgnoreCase("Member Claims")){
+		if(driver.getTitle().equalsIgnoreCase("Member Claims") || driver.getTitle().equalsIgnoreCase("eftpayments")){
 			return new ReviewAutomaticPaymentsPage(driver);
 		}
 		return null;

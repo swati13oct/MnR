@@ -25,8 +25,11 @@ import org.openqa.selenium.WebDriver;
 		@FindBy(xpath="//div[@id='atdd_reviewonetime_label']/div[4]/div[2]/span")
 		private WebElement routingNumber;
 		
-		@FindBy(xpath="html/body/div[2]/div/div/div/div/div/div/div[2]/div[3]/div/div/div/button[1]") 
-		private WebElement AutomaticPaymentReviewSubmitbtn; 
+		/*@FindBy(xpath="html/body/div[2]/div/div/div/div/div/div/div[2]/div[3]/div/div/div/button[1]") 
+		private WebElement AutomaticPaymentReviewSubmitbtn; */
+		
+		@FindBy(xpath="html/body/div[3]/div/div/div/div/div[2]/div[3]/div/div/div/button[1]") 
+		private WebElement AutomaticPaymentReviewSubmitbtn;
 		
 		@FindBy(id ="termError")
 		private WebElement AutomaticPaymentelectronicSignatureCheck;
@@ -63,7 +66,7 @@ import org.openqa.selenium.WebDriver;
 			System.out.println("Submit button clicked");			
 			System.out.println("Navigated to Automatic Payment submitted page");
 			Thread.sleep(2000);
-			if(driver.getTitle().equalsIgnoreCase("Member Claims")){
+			if(driver.getTitle().equalsIgnoreCase("Member Claims") || driver.getTitle().equalsIgnoreCase("eftpayments")){
 				return new AutomaticPaymentSubmittedPage(driver);
 			}
 			return null;		

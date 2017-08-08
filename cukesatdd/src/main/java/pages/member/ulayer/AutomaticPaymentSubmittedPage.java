@@ -17,7 +17,11 @@ public class AutomaticPaymentSubmittedPage extends UhcDriver{
 	@FindBy(xpath="//button[contains(text(), 'View As PDF')]")
 	private WebElement ViewPDFLink;
 	
-	@FindBy(xpath=".//*[contains(text(),'Payment Type')]/following-sibling::div/span")
+	/*@FindBy(xpath=".//*[contains(text(),'Payment Type')]/following-sibling::div/span")
+	private WebElement PaymentType;
+	*/
+	
+	@FindBy(xpath=".//*[@id='generatePdf']/div[1]/div/div/div/div[2]/div[1]/div[2]/span[1]")
 	private WebElement PaymentType;
 	
 	@FindBy(xpath=".//*[contains(text(),'Payment Date')]/following-sibling::div/span")

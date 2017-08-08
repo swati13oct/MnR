@@ -33,6 +33,7 @@ import pages.member.ulayer.PaymentHistoryPage;
 import pages.member.ulayer.PaymentsOverview;
 import pages.member.ulayer.ReviewAutomaticPaymentsPage;
 import pages.member.ulayer.ReviewOneTimePaymentsPage;
+import pages.member.ulayer.TeamHLoginUlayer;
 import pages.member.ulayer.TestHarness;
 import acceptancetests.atdd.data.CommonConstants;
 import acceptancetests.atdd.data.member.PageConstants;
@@ -67,6 +68,16 @@ public class AutomaticPaymenAarpStepDefinition {
 
 		LoginPage loginPage = new LoginPage(wd);
 		getLoginScenario().saveBean(PageConstants.LOGIN_PAGE, loginPage);
+	}
+	
+	@Given("^the user is on the Team-H AARP medicare site login page$")
+	public void user_TeamHlogin_page()
+	{
+		WebDriver wd = getLoginScenario().getWebDriver();
+		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
+
+		TeamHLoginUlayer THloginPage = new TeamHLoginUlayer(wd);
+		getLoginScenario().saveBean(PageConstants.LOGIN_PAGE, THloginPage);
 	}
 	
 	@When("^the user logs in with a registered AMP with following details in AARP site$")
@@ -138,6 +149,76 @@ public class AutomaticPaymenAarpStepDefinition {
 
 	}
 	
+	
+	@When("^the user logs in TeamH with a registered AMP with following details in AARP site$")
+	public void user_logs_inTeamH(DataTable memberAttributes)
+	{
+		/* Reading the given attribute from feature file */
+		List<DataTableRow> memberAttributesRow = memberAttributes
+				.getGherkinRows();
+		Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells()
+					.get(0), memberAttributesRow.get(i).getCells().get(1));
+		}
+
+		Set<String> memberAttributesKeySet = memberAttributesMap.keySet();
+		List<String> desiredAttributes = new ArrayList<String>();
+		for (Iterator<String> iterator = memberAttributesKeySet.iterator(); iterator
+				.hasNext();) {
+			{
+				String key = iterator.next();
+				desiredAttributes.add(memberAttributesMap.get(key));
+			}
+
+		}
+		System.out.println("desiredAttributes.." + desiredAttributes);
+
+		Map<String,String> loginCreds = loginScenario
+				.getAMPMemberWithDesiredAttributes(desiredAttributes);
+		
+		String userName = null;
+		String pwd = null;
+		if (loginCreds == null) {
+			// no match found
+			System.out.println("Member Type data could not be setup !!!");
+			Assert.fail("unable to find a "+ desiredAttributes + " member");
+		} else {
+			userName = loginCreds.get("user");
+			pwd = loginCreds.get("pwd");
+			System.out.println("User is..." + userName);
+			System.out.println("Password is..." + pwd );
+			getLoginScenario().saveBean(LoginCommonConstants.USERNAME, userName);
+			getLoginScenario().saveBean(LoginCommonConstants.PASSWORD, pwd);
+		}
+		
+		TeamHLoginUlayer loginPage = (TeamHLoginUlayer)getLoginScenario().getBean(PageConstants.LOGIN_PAGE);
+		AccountHomePage accountHomePage = (AccountHomePage) loginPage.loginWith(userName, pwd);
+		
+		
+		if (accountHomePage != null) {
+			getLoginScenario().saveBean(PageConstants.ACCOUNT_HOME_PAGE,
+					accountHomePage);
+			Assert.assertTrue(true);
+			/*JSONObject accountHomeActualJson = accountHomePage.accountHomeJson;
+			getLoginScenario().saveBean(
+					LoginCommonConstants.ACCOUNT_HOME_ACTUAL,
+					accountHomeActualJson);
+			
+			 Get expected data 
+			Map<String, JSONObject> expectedDataMap = loginScenario
+					.getExpectedJson(userName);
+			JSONObject accountHomeExpectedJson = accountHomePage
+					.getExpectedData(expectedDataMap);
+			getLoginScenario().saveBean(LoginCommonConstants.ACCOUNT_HOME_EXPECTED,
+					accountHomeExpectedJson);*/
+	
+	
+	}
+
+	}
+	
 	@And("^the user navigates to Automatic Payments page$")
 	public void user_navigates_to_automatic_payments()
 	{
@@ -168,6 +249,21 @@ public class AutomaticPaymenAarpStepDefinition {
 		
 	}
 	
+	@And("^the user navigates to Team-h TestHarness Page$")
+	public void user_navigates_to_TeamHTestHarness_page()
+	{
+		AccountHomePage accountHomePage = (AccountHomePage)getLoginScenario().getBean(PageConstants.ACCOUNT_HOME_PAGE);
+		TestHarness testHarness = accountHomePage.navigateToTeamHTestHarnesspage();
+		if(testHarness!= null){
+			getLoginScenario().saveBean(PageConstants.TEST_HARNESS_PAGE,
+					testHarness);
+			Assert.assertTrue(true);
+		} else {
+			Assert.fail("Test Harness page not found");
+		}
+		
+	}
+	
 	
 	@And("^the user navigates to PaymentOverview Page$")
 	public void user_navigates_to_PaymentOverview_Page() throws InterruptedException
@@ -181,6 +277,21 @@ public class AutomaticPaymenAarpStepDefinition {
 			Assert.assertTrue(true);
 		} else {
 			Assert.fail("Payment Overview Page not found");
+		}
+		
+	}
+	
+	@And("^the user navigates to TeamHPaymentOverview Page$")
+	public void user_navigates_to_TeamHPaymentOverview_Page()
+	{
+		TestHarness testHarness = (TestHarness)getLoginScenario().getBean(PageConstants.TEST_HARNESS_PAGE);
+		PaymentsOverview paymentsOverview = testHarness.navigateToTeamHPaymentOverview();
+		if(paymentsOverview!= null){
+			getLoginScenario().saveBean(PageConstants.PAYMENT_OVERVIEW,
+					paymentsOverview);
+			Assert.assertTrue(true);
+		} else {
+			Assert.fail("Payment Overview page not found");
 		}
 		
 	}

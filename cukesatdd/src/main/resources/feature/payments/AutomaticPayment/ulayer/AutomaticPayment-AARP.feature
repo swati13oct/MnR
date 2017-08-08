@@ -151,5 +151,21 @@ Then user clicks on Search and gets error message
 Examples:
 	| planType |
 	| MA     |
+	
 
+@TeamH
+Scenario Outline: Verify the Timestamp on Automatic Payment Submitted page
+Given the user is on the Team-H AARP medicare site login page
+When the user logs in TeamH with a registered AMP with following details in AARP site
+	| Plan Type   | <planType>  |
+And the user navigates to Team-h TestHarness Page
+And the user navigates to TeamHPaymentOverview Page
+And the user navigates to Automatic Payments page from Payments Overview Page
+And the user enters details and click on continue button on Automatic Payments Page for Dashboard
+And the user lands on Review Automatic Payments Page and clicks on Submit button
+Then the user lands on Automatic Payment Submitted Page and validates Timestamp, Payment Type and Payment Amount
+
+Examples:
+	| planType |
+	| MAPD     |
 
