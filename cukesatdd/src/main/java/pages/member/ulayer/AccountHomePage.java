@@ -607,7 +607,7 @@ public class AccountHomePage extends UhcDriver {
 		//String url = "https://member.team-e-aarpmedicareplans.uhc.com/content/aarpm/home/contact.html";
 		driver.get(MRConstants.REDESIGN_AARPM_URL);
 		try {
-			Thread.sleep(15000);
+			Thread.sleep(10000);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
