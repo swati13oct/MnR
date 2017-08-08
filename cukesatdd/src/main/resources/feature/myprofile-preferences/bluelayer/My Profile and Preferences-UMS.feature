@@ -143,3 +143,18 @@ Examples:
         | planType |
         | MAPD     |
         | MA       |
+        
+ @AccountProfileEdit
+  Scenario Outline: To verify the edit functionality in Account Profile section in AARP site
+  Given registered UHC with following details for Profile and Preferences flow in UMS site
+      | <planType> |
+    Then the user navigates to Profile and Preferences page
+    Then the user validates the elements on clicking the edit link
+    Then the user validates the functionality of save Button
+    Then the user validates the functionality of Cancel Button
+
+       Examples: 
+      | planType |
+    #| PDP     |
+     #| MAPD     |
+     | MA       |

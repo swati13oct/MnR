@@ -144,4 +144,31 @@ public class ProfileandPreferencesUMSStepDefinition {
 		ProfilePreferencesPage.validateEmail();
 
 	}
+	@Then("^the user validates the elements on clicking the edit link")
+	public void UserValidatesAccountEditOptions() {
+		ProfilePreferencesPage ProfilePreferencesPage = (ProfilePreferencesPage) getLoginScenario()
+				.getBean(PageConstants.ProfilePreferencesPage);
+		ProfilePreferencesPage.validateAccountEditElements();
+	
+	}
+	@Then("^the user validates the functionality of save Button")
+	public void UserValidatesAccountEditSaveButton() {
+		ProfilePreferencesPage ProfilePreferencesPage = (ProfilePreferencesPage) getLoginScenario()
+				.getBean(PageConstants.ProfilePreferencesPage);
+
+	
+		
+		String	 Password = (String) getLoginScenario().getBean(LoginCommonConstants.PASSWORD);
+		ProfilePreferencesPage.validateAccountEdit(Password);
+	
+	}
+	@Then("^the user validates the functionality of Cancel Button")
+	public void UserValidatesAccountEditCancelButton() {
+		ProfilePreferencesPage ProfilePreferencesPage = (ProfilePreferencesPage) getLoginScenario()
+				.getBean(PageConstants.ProfilePreferencesPage);
+
+		ProfilePreferencesPage.validateCancelButton();
+	
+	}
+	
 }

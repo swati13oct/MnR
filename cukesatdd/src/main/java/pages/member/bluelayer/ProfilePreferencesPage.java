@@ -11,6 +11,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.springframework.util.Assert;
+
 import acceptancetests.atdd.data.PageData;
 import atdd.framework.UhcDriver;
 
@@ -68,6 +70,22 @@ public class ProfilePreferencesPage extends UhcDriver {
 
 	@FindBy(xpath = "//*[@id='tab-1']/div[2]/div[1]/div/div[1]/div[1]/div/div/div/div[2]/div[1]/div/div/span[1]")
 	private WebElement EmailAddressLabel;
+	
+
+	@FindBy(id = "passwordOld")
+	private WebElement CurrentPassword;
+
+	@FindBy(id = "passwordNew")
+	private WebElement NewPassword;
+
+	@FindBy(id = "passwordNewConfirm")
+	private WebElement ConfirmPassword;
+
+	@FindBy(xpath = "//*[@id='updatePassword']/span")
+	private WebElement SaveButton;
+
+	@FindBy(xpath = "//*[@id='password-form']/div[4]/div/a")
+	private WebElement CancelButton;
 
 	public void openAndValidate() {
 
@@ -138,6 +156,34 @@ public class ProfilePreferencesPage extends UhcDriver {
 	public void validateEmail() {
 		validateNew(EmailLabel);
 		validateNew(EmailAddressLabel);
+
+	}
+
+	public void validateAccountEdit(String password2) {
+
+		EditLink.click();
+		CurrentPassword.sendKeys(password2);
+		NewPassword.sendKeys(password2 + "1");
+		ConfirmPassword.sendKeys(password2 + "1");
+		SaveButton.click();
+
+	}
+
+	public void validateAccountEditElements() {
+		// TODO Auto-generated method stub
+
+		validateNew(CurrentPassword);
+		validateNew(NewPassword);
+		validateNew(ConfirmPassword);
+		validateNew(SaveButton);
+		validateNew(CancelButton);
+
+	}
+
+	public void validateCancelButton() {
+
+		CancelButton.click();
+		Assert.isTrue(Password.isDisplayed());
 
 	}
 

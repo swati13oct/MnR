@@ -3,7 +3,6 @@
  */
 package pages.member.ulayer;
 
-
 import java.util.List;
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -12,7 +11,13 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.springframework.util.Assert;
+
+import acceptancetests.ProfileandPreferencesjenkins.ulayer.ProfileandPreferencesAARPStepDefinition;
 import acceptancetests.atdd.data.PageData;
+import acceptancetests.atdd.data.member.PageConstants;
+import acceptancetests.login.data.LoginCommonConstants;
+import atdd.framework.MRScenario;
 import atdd.framework.UhcDriver;
 
 /**
@@ -49,20 +54,32 @@ public class ProfileandPreferencesPage extends UhcDriver {
 	@FindBy(xpath = "//*[@id='profilePreferencesApp']//div[1]//div//section//div//div[2]//div//div//div//div//div[2]//div//div//span[2]")
 	private WebElement Passwordtext;
 
-	
 	@FindBy(xpath = "//*[@id='profilePreferencesApp']//div[1]//div//section//div//div[2]//div//div//div//div//div[2]//a")
-    private WebElement EditLink;
+	private WebElement EditLink;
 
 	@FindBy(xpath = "//*[@id='Artwork']")
 	private WebElement EditButton;
-
 
 	@FindBy(xpath = "//*[@id='tab-1']/div[2]/div[1]/div/div[1]/div[1]/div/div/div/div[1]/p")
 	private WebElement EmailLabel;
 
 	@FindBy(xpath = "//*[@id='tab-1']/div[2]/div[1]/div/div[1]/div[1]/div/div/div/div[2]/div[1]/div/div/span[1]")
 	private WebElement EmailAddressLabel;
-	
+
+	@FindBy(id = "passwordOld")
+	private WebElement CurrentPassword;
+
+	@FindBy(id = "passwordNew")
+	private WebElement NewPassword;
+
+	@FindBy(id = "passwordNewConfirm")
+	private WebElement ConfirmPassword;
+
+	@FindBy(xpath = "//*[@id='updatePassword']/span")
+	private WebElement SaveButton;
+
+	@FindBy(xpath = "//*[@id='password-form']/div[4]/div/a")
+	private WebElement CancelButton;
 
 	public PageData ProfileandPreferences;
 
@@ -138,12 +155,40 @@ public class ProfileandPreferencesPage extends UhcDriver {
 		System.out.println("Edit link is " + EditLink.isDisplayed());
 
 		validate(EditButton);
-		System.out.println("EditButton is " + EditButton.isDisplayed() );
+		System.out.println("EditButton is " + EditButton.isDisplayed());
 	}
 
 	public void validateEmail() {
 		validateNew(EmailLabel);
 		validateNew(EmailAddressLabel);
+
+	}
+
+	public void validateAccountEdit(String password2) {
+
+		EditLink.click();
+		CurrentPassword.sendKeys(password2);
+		NewPassword.sendKeys(password2 + "1");
+		ConfirmPassword.sendKeys(password2 + "1");
+		SaveButton.click();
+
+	}
+
+	public void validateAccountEditElements() {
+		// TODO Auto-generated method stub
+
+		validateNew(CurrentPassword);
+		validateNew(NewPassword);
+		validateNew(ConfirmPassword);
+		validateNew(SaveButton);
+		validateNew(CancelButton);
+
+	}
+
+	public void validateCancelButton() {
+
+		CancelButton.click();
+		Assert.isTrue(Password.isDisplayed());
 
 	}
 }
