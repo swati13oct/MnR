@@ -358,7 +358,21 @@ public class ContactUsPage extends UhcDriver{
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+			driver.findElement(By.id("message-email")).click();
+			try {
+				Thread.sleep(1000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			driver.findElement(By.id("message-email")).sendKeys("miasdgaarp@gmail.com");
+			driver.findElement(By.id("message-email-confirm")).click();
+			try {
+				Thread.sleep(1000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			driver.findElement(By.id("message-email-confirm")).sendKeys("miasdgaarp@gmail.com");
 			try {
 				Thread.sleep(5000);

@@ -82,6 +82,8 @@ public class ContactUSRedesignAarpStepDefinition {
 			String userName = memberAttributesMap.get("UserName");
 			String passWord = memberAttributesMap.get("Password");
 			String category = memberAttributesMap.get("Member Type");
+			System.out.println("User is..." + userName);
+			System.out.println("Password is..." + passWord);
 			WebDriver wd = getLoginScenario().getWebDriver();
 			getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
 
