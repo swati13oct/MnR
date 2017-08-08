@@ -29,6 +29,7 @@ import acceptancetests.atdd.util.CommonUtility;
 import acceptancetests.enrollinplan.bluelayer.EnrollInPlanUhcStepDefinition;
 import acceptancetests.planName.bluelayer.PlanNamesStepDefinition;
 import atdd.framework.UhcDriver;
+import pages.acquisition.ulayer.ResponsivePlanDetails;
 import pages.dashboard.member.blayer.DrugCostEstimatorPage;
 import pages.member.ulayer.Rallytool_Page;
 
@@ -575,7 +576,7 @@ public void comparePlanslnk(){
 	 }
 	 
 	 public ResponsivePlanDetailsUhc viewPlanDetails(String planName){
-		int i=0;
+		/*int i=0;
 		 List<WebElement> plans = driver.findElements(By.xpath("//h2[contains(text(),'AARP')]"));
 		 System.out.println("PLANS SIZE :: "+plans.size());
 		 String xpath="View more details";  
@@ -592,6 +593,37 @@ public void comparePlanslnk(){
 				 break;
 			 }
 			 i++;
+		 }
+		 return null;*/
+		 /*List<WebElement> plans = driver.findElements(By.xpath("//h2[contains(text(),'AARP')][1]"));
+         System.out.println("PLANS SIZE :: "+plans.size());
+         String xpath="//a[@class='view-more-link']";  
+          List<WebElement> viewMoreLnks = driver.findElements(By.xpath(xpath));            
+          System.out.println("VIEW MORE LINKS SIZE"+viewMoreLnks.size());     
+         for(int i=0; i<plans.size();i++){
+                if(plans.get(i).getText().equalsIgnoreCase(planName)){
+                      viewMoreLnks.get(i).click();
+                      if(driver.getTitle().equalsIgnoreCase("plans")){
+                             try {
+                                    Thread.sleep(5000);
+                             } catch (InterruptedException e) {
+                                    // TODO Auto-generated catch block
+                                    e.printStackTrace();
+                             }
+                             return new ResponsivePlanDetailsUhc(driver);
+                      }
+                      break;
+                }
+         }*/
+		 if(planName.contains("AARP")){
+		 driver.findElement(By.xpath("//*[contains(text(),'"+planName+"')]/parent::div/parent::div/following-sibling::div[1]/div/div[3]/a")).click();
+		 try {
+			Thread.sleep(3000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		 return new ResponsivePlanDetailsUhc(driver);
 		 }
 		 return null;
 	 }

@@ -779,5 +779,20 @@ public class ResponsiveUhcStepDefiniton {
 		
 		
 }
+	@And("^user validates optional services$")	
+	public void user_validates_optional_services(DataTable givenAttributes){
+		List<DataTableRow> memberAttributesRow = givenAttributes
+				.getGherkinRows();
+		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells()
+					.get(0), memberAttributesRow.get(i).getCells().get(1));}
+		String optionalDental = memberAttributesMap.get("Optional Dental");
+		String highOptionalDental = memberAttributesMap.get("High Optional Dental");
+		ResponsivePlanDetailsUhc planDetailsPage = (ResponsivePlanDetailsUhc) getLoginScenario().getBean(PageConstants.RESPONSIVE_DETAILS_UHC_PAGE);
+		planDetailsPage.valiadateOptionalServices(optionalDental, highOptionalDental);
+		 
+	}
 }
 
