@@ -505,7 +505,7 @@ public class OneTimePaymentAarpStepDefintion {
 		
 	}
 	
-	@And("^the user navigates to Team-h TestHarness Page$")
+/*	@And("^the user navigates to Team-h TestHarness Page$")
 	public void user_navigates_to_TeamHTestHarness_page()
 	{
 		AccountHomePage accountHomePage = (AccountHomePage)getLoginScenario().getBean(PageConstants.ACCOUNT_HOME_PAGE);
@@ -518,7 +518,7 @@ public class OneTimePaymentAarpStepDefintion {
 			Assert.fail("Test Harness page not found");
 		}
 		
-	}
+	}*/
 	
 	@And("^the user navigates to PaymentOverview Page$")
 	public void user_navigates_to_PaymentOverview_Page()
