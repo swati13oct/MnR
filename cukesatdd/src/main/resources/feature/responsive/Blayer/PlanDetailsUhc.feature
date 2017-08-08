@@ -143,3 +143,21 @@ Examples:
 		|zipCode|county						 |planType   |planName					                                  |
    	|90210  |Los Angeles County|SNP        |AARP MedicareComplete SecureHorizons Essential (HMO)  |
 	#	|90201  |Los Angeles County|PDP       |AARP MedicareRx Walgreens (PDP) |
+	
+	@US674467
+	Scenario Outline: To validate optional services
+Given the user is on the vpp portfolio page
+Then the user performs plan search using zipcode
+              | Zip Code |<zipCode>|
+              | County   |<county> |
+Then the user navigates to the following plan type
+| PlanType | <planType> |	
+Then the user navigates to pan details page
+|Plan Name| <planName>|	
+And user validates optional services
+|Optional Dental|<optionalDenatl>|
+|High Optional Dental|<highOptionalDental>|
+Examples:
+		|zipCode|county						 |planType   |planName					                                    |optionalDenatl|highOptionalDental|
+   	|90210  |Los Angeles County|MA         |AARP MedicareComplete SecureHorizons Plan 1 (HMO)     |true          |true|
+	#	|90201  |Los Angeles County|PDP       |AARP MedicareRx Walgreens (PDP) |
