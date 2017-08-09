@@ -8,7 +8,6 @@ Then the user click on  providers button on the Plan Summary page
 Then the user navigate to Panel navigation and click on provider search
 Then the user navigate to Benefits and Coverage page and click on provider search
 Then the user navigate to Benefits and Coverage page and click on provider search in PCP Section 
-Then the user navigate to Claims page and click on provider search
 Then the user navigate to PHR  page and expand my Doctors and my Facility and click on provider search
 Then the user navigate to Forms and Resources page and click on provider search 
 
