@@ -4,3 +4,4 @@ ATDD_BLAYER_MAPD_IND_MEDCLAIMS_01/Password@1,MAPD,Individual,Nice_med,
 ATDD_BLAYER_MAPD_IND_DRUGCLAIMS_01/Password@1,MAPD,Individual,Drug,
 ATDD_BLAYER_MAPD_IND_MEDEOB_01/Password@1,MAPD,Individual,Med_EOB
 ATDD_MAPD_IND_RX_EOB_01/Password@1,MAPD,Individual,rx_Eob,
+ATDD_MAPD_IND_RX_EOB_01/Password@1,MAPD-PHR,Individual,

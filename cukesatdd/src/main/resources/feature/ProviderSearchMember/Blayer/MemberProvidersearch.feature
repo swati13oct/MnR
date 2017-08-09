@@ -7,7 +7,6 @@ When the user logs in with a registered AMP with following details in UMS site
 | Member Type | <memberType> |
 Then the user click on providers button under my Resource Section 
 Then the user navigate to Panel navigation and click on provider search in Blayer
-Then the user navigate to Plan Summary page  and click on provider search in Blayer
 Then the user navigate to Benefits and Coverage page and click on provider search Blayer
 Then the user navigate to Benefits and Coverage page and click on provider search in PCP Section Blayer
 Then the user navigate to Claims page and click on provider search  EOB Blayer
@@ -16,7 +15,7 @@ Then the user navigate to Forms and Resources page and click on provider search 
 
 Examples:
 | planType  | memberType| 
-| MAPD        |Individual| 
+| MAPD-PHR        |Individual| 
 
 
 

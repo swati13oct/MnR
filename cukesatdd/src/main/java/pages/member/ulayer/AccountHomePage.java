@@ -31,8 +31,14 @@ import atdd.framework.UhcDriver;
 
 public class AccountHomePage extends UhcDriver {
 
-	@FindBy(className = "fd_myPlans")
-	private WebElement myPlansTab;
+	//@FindBy(className = "fd_myPlans")
+	//private WebElement myPlansTab;
+	
+	//@FindBy(xpath="//*[@id='myshipplans']/a")
+	//private WebElement myPlansTab;
+	
+	@FindBy(id="myshipplans")
+	private WebElement  myPlansTab;
 
 	@FindBy(linkText = "My Profile & Preferences")
 	private WebElement profAndPrefLink;
@@ -192,7 +198,7 @@ private WebElement zipCode;
 @FindBy(xpath="//a[@class='searchforproviders margin_top_5px']")
 private WebElement medicalEOBproviderlink;
 
-@FindBy(linkText = "Benefits and Coverage")
+@FindBy(linkText = "Benefits and Coverage") 
 private WebElement benefitsAndCoveragelink;
 
 
@@ -228,6 +234,9 @@ private WebElement claimsLink;
 
 @FindBy(linkText = "Forms and Resources")
 private WebElement FormsandResourcesLink;
+
+@FindBy(xpath ="(//a[contains(@href,'my-plans/forms-and-resources')])[4]")
+private WebElement FormsandResourcesLinkn;
 
 @FindBy(xpath="//a[contains(text(),'search for providers')]")
 private WebElement searchforproviderlinkinClaimsPage;
@@ -344,21 +353,24 @@ driver.switchTo().window(mainwindow);
 }
 	public void panelNavigation()
 	{
-		waitt();
-		myPlansTab.click();
+	
+		waitforElement(myMenu);
+		myMenu.click();	
+		/*myPlansTab.click();
 		Actions actions = new Actions(driver);
 		actions.moveToElement(myMenu);
-		actions.click().build().perform();
+		actions.click().build().perform();*/
+		waitforElement(providerSearchinPanelNavigation);
 		providerSearchinPanelNavigation.click();
 		rallytoolexist();
 		
-		System.out.println("i am in panel Navigation method");
-		
+		System.out.println(" in panel Navigation method");
+		/*
 		if(providerSearchinPanelNavigation.isDisplayed())
 		{
 			myMenu.click();
-		}
-				
+		}*/
+			
 	}
 	
 	public void  waitt()
@@ -375,58 +387,64 @@ driver.switchTo().window(mainwindow);
 	public void providerSearchRHandWidget()
 	{
 		waitt();
-		myPlansTab.click();
+		//myPlansTab.click();
 		waitforElement(medicalEOBproviderlink);
 		
 		medicalEOBproviderlink.click();
 		rallytoolexist();
-		System.out.println("I am in Provider searh Rifht method");
+		System.out.println(" in Provider searh Rifht method");
 	}
 	
 	public void BenefitsandCoverageProviderSearch()
 	{
+		accountHome.click();
+		waitforElement(myPlansTab);
+		myPlansTab.click();
+		waitforElement(benefitsAndCoveragelink);
 		benefitsAndCoveragelink.click();
 		waitforElement(medicalEOBproviderlink);
 		medicalEOBproviderlink.click();
 		rallytoolexist();
-		System.out.println("I am in Benefit Coverage  method");
+		System.out.println(" in Benefit Coverage  method");
 		
 	}
 	
 	public void providerSearchLinkinPCPSection()
 	{
-		
+		waitforElement(providerlinkinPCPSection);
 		providerlinkinPCPSection.click();
 		rallytoolexist();
-		System.out.println("I am in PCP benefit  method");
+		System.out.println(" in PCP benefit  method");
 	}
 
 	public void providerSearchLinkinClaimsPage()
 	{
+		waitforElement(claimsLink);
 		claimsLink.click();
 		waitforElement(searchLinkinClaimsPage);
 		
 		searchLinkinClaimsPage.click();
 		
-		//waitforElement(searchforproviderlinkinClaimsPage);
+		waitforElement(searchforproviderlinkinClaimsPage);
 		
-		//searchforproviderlinkinClaimsPage.click();
+		searchforproviderlinkinClaimsPage.click();
 		rallytoolexist();
-		System.out.println("I am in Claims method");
+		System.out.println(" in Claims method");
 		
 	}
 	
 	public void FormsandResourcesLinkinPlanSummaryPage()
 	
 	{
-		FormsandResourcesLink.click();
+		waitforElement(FormsandResourcesLinkn);
+		FormsandResourcesLinkn.click();
 		
 		waitforElement(searchProviderinFormsandResourcePage);
 		
 		searchProviderinFormsandResourcePage.click();
 		rallytoolexist();
 		
-		System.out.println("I am in forms and Resources  method");
+		System.out.println(" in forms and Resources  method");
 		
 	}
 	
@@ -442,7 +460,7 @@ driver.switchTo().window(mainwindow);
 		waitforElement(providerSearchinPHPage1);
 		providerSearchinPHPage1.click();
 		rallytoolexist();
-		System.out.println("I am in PHR");
+		System.out.println(" in PHR");
 		
 	}
 	
@@ -794,6 +812,7 @@ driver.switchTo().window(mainwindow);
 	public void navigate_ProviderSearch() {
 		validate(medicalProviders);
 		medicalProviders.click();
+		rallytoolexist();
 			
 	}
 	

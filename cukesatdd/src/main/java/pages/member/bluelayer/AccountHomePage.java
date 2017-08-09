@@ -76,8 +76,7 @@ public class AccountHomePage extends UhcDriver {
 	private WebElement profAndPrefLink;
 
 
-	@FindBy(xpath = "//a[@class='fd_myPlans']")
-	//@FindBy(xpath = ".//*[@id='myshipplans']/a")
+	@FindBy(xpath = "//*[@id='myshipplans']/a")
 	private WebElement myPlansTab;
 
 	@FindBy(linkText = "locate a pharmacy")
@@ -225,6 +224,9 @@ private WebElement medicalEOBLinkInPanelNavigation;
 @FindBy(id="btn_searchforaprovider")
 private WebElement medicalEOBproviderlink;
 
+@FindBy(linkText="Medical Explanation of Benefits (EOB)")
+private WebElement medicalEOBlink;
+
 @FindBy(id="zipCode")
 private WebElement zipCode;
 
@@ -257,7 +259,11 @@ private WebElement providerSearchinPHPage;
 //private WebElement providerSearchinPHPage1;
 
 
-@FindBy(xpath="div[@class='phr_greybox_mid']/p[contains(text(),'Need to find a facility?')]/following-sibling::p/a")
+//@FindBy(xpath="div[@class='phr_greybox_mid']/p[contains(text(),'Need to find a facility?')]/following-sibling::p/a")
+//private WebElement providerSearchinPHPage1;
+
+		
+@FindBy(xpath="(//a[@id='btn_searchforaprovider'])[1]")
 private WebElement providerSearchinPHPage1;
 
 @FindBy(linkText = "Claims")
@@ -269,6 +275,11 @@ private WebElement claimsLink;
 
 @FindBy(linkText = "Forms and Resources")
 private WebElement FormsandResourcesLink;
+
+@FindBy(xpath ="(//a[contains(@href,'my-plans/forms-and-resources')])[4]")
+private WebElement FormsandResourcesLinkn;
+
+
 
 @FindBy(xpath="//a[contains(text(),'search for providers')]")
 private WebElement searchforproviderlinkinClaimsPage;
@@ -386,7 +397,7 @@ driver.switchTo().window(mainwindow);
 		
 		medicalProviders.click();
 		rallytoolexist();
-System.out.println("I am in navigate Provider Search under my Resource");
+System.out.println(" in navigate Provider Search under my Resource");
 
 
 	}
@@ -402,18 +413,17 @@ System.out.println("I am in navigate Provider Search under my Resource");
 	
 	public void panelNavigation()
 	{
-	   myPlansTab.click();
-	   waitt();
-	   //myMenu.click();
-		Actions actions = new Actions(driver);
-		
-		actions.moveToElement(myMenu);
-		actions.click().build().perform();
+	  
+	   
+	   waitforElement(myMenu);
+	   myMenu.click();
+	
+	   waitforElement(providerSearchinPanelNavigation);
 		providerSearchinPanelNavigation.click();
 		rallytoolexist();
 		
-		System.out.println("i am in panel Navigation method");
-		waitt();
+		System.out.println(" in panel Navigation method");
+		
 		
 	}
 	
@@ -432,19 +442,13 @@ System.out.println("I am in navigate Provider Search under my Resource");
 		
 		providerLink.click();
 		rallytoolexist();
-		System.out.println("I am in Claims method");
+		System.out.println(" in Claims method");
 		
 	}
 	
 	public void providerSearchLinkInClaimsPageEOB()
 	{
-		myPlansTab.click();
-		try {
-			Thread.sleep(5000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		
 		waitforElement(claimsLink);
 		claimsLink.click();
 		waitforElement(searchLinkinClaimsPage);
@@ -455,7 +459,7 @@ System.out.println("I am in navigate Provider Search under my Resource");
 		
 		providerLink.click();
 		rallytoolexist();
-		System.out.println("I am in Claims EOB  method");
+		System.out.println(" in Claims EOB  method");
 	}
 	
 	
@@ -464,71 +468,56 @@ System.out.println("I am in navigate Provider Search under my Resource");
 	public void PHR()
 	{
 		phrTab.click();
-		try {
-			Thread.sleep(5000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		
 		
 		waitforElement(providerSearchinPHPage);
 		providerSearchinPHPage.click();
 		System.out.print("clicked the first provider search in Phr page");
 		rallytoolexist();
 		showLink.click();
-		//phrTab.click();
+		
 		waitforElement(providerSearchinPHPage1);
 		providerSearchinPHPage1.click();
 		rallytoolexist();
-		System.out.println("I am in PHR");
+		System.out.println(" in PHR");
 		
 	}
 
 	
 	public void BenefitsandCoverageProviderSearch()
 	{
+		
+		accountHome.click();
+		
+		waitforElement(myPlansTab);
 		myPlansTab.click();
-		    
-		waitt();	
-         waitforElement(benefitsAndCoveragelink);
+		
+        waitforElement(benefitsAndCoveragelink);
 		benefitsAndCoveragelink.click();
 		waitforElement(medicalEOBproviderlink);
 		medicalEOBproviderlink.click();
 		rallytoolexist();
-		System.out.println("I am in Benefit Coverage  method");
+		System.out.println(" in Benefit Coverage  method");
 		
 	}
 	public void providerSearchRHandWidgetBlayer()
 	{
-		myPlansTab.click();
 		
-		try {
-			Thread.sleep(5000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		waitforElement(medicalEOBproviderlink);
-		
-		medicalEOBproviderlink.click();
+	
+		waitforElement(medicalEOBlink);
+		medicalEOBlink.click();
+		//medicalEOBproviderlink.click();
 		rallytoolexist();
-		System.out.println("I am in Provider searh Rifht method");
+		System.out.println(" in Provider searh Rifht method");
+		
 	}
 	public void providerSearchLinkinPCPSection()
 	{
-		myPlansTab.click();
-		try {
-			Thread.sleep(5000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		waitt();
-		benefitsAndCoveragelink.click();
+		
 		waitforElement(providerlinkinPCPSection);
 		providerlinkinPCPSection.click();
 		rallytoolexist();
-		System.out.println("I am in PCP benefit  method");
+		System.out.println(" in PCP benefit  method");
 	}
 
 	
@@ -536,17 +525,17 @@ public void FormsandResourcesLinkinPlanSummaryPageBlayer()
 	
 	{
 	
-	myPlansTab.click();
-	waitforElement(FormsandResourcesLink);
+	  myPlansTab.click();
+	  waitforElement(FormsandResourcesLinkn);
 	
-		FormsandResourcesLink.click();
+		FormsandResourcesLinkn.click();
 		
 		waitforElement(searchProviderLinkinFormsandResourcePage);
 		
 		searchProviderLinkinFormsandResourcePage.click();
 		rallytoolexist();
 		
-		System.out.println("I am in forms and Resources  method");
+		System.out.println(" in forms and Resources  method");
 		
 	}
 
