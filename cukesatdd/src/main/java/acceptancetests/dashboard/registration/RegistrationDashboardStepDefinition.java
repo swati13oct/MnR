@@ -11,7 +11,9 @@ import junit.framework.Assert;
 import org.openqa.selenium.WebDriver;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import pages.acquisition.ulayer.AboutUsAARPPage;
 import pages.dashboard.acquisition.RegistrationInformationPage;
+import pages.dashboard.member.ulayer.MemberNewSignInPage;
 import cucumber.annotation.en.And;
 import cucumber.annotation.en.Given;
 import cucumber.annotation.en.Then;
@@ -33,8 +35,41 @@ public class RegistrationDashboardStepDefinition {
                 public MRScenario getLoginScenario() {
                                 return loginScenario;
                 }
+                
+                
+                @Given("^the member is on sign in page of new portal part of redesign$")
+                public void SigninPage() {
+                                // navigate to Sign in page
+                                WebDriver wd = getLoginScenario().getWebDriver();
+                                getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
+                                
 
-@Given("^the member is on registration page of new portal part of redesign$")
+                                //create registration context
+                                MemberNewSignInPage sign_Page = new MemberNewSignInPage(wd);
+                                getLoginScenario().saveBean(PageConstants.NEW_SIGN_PAGE, sign_Page);              
+                
+                }
+                
+                @And("^User clicks on the register button$")
+                public void registerbutton() {
+                	
+                	MemberNewSignInPage sign_Page  = (MemberNewSignInPage) getLoginScenario()
+            				.getBean(PageConstants.NEW_SIGN_PAGE);
+                    
+                    RegistrationInformationPage registrationInformationPage = sign_Page.clickRegisterbutton();
+                    
+                    if(registrationInformationPage!= null){
+            			getLoginScenario().saveBean(PageConstants.REGISTRATION_INFORMATION_PAGE,
+            					registrationInformationPage);
+            			Assert.assertTrue(true);
+            		} else {
+            			Assert.fail("Registration page not found");
+            		}
+                	
+                }
+                
+
+/*@Given("^the member is on registration page of new portal part of redesign$")
 public void navigateToRegistrationRedesignPage() {
                 // navigate to Registration page
                 WebDriver wd = getLoginScenario().getWebDriver();
@@ -45,7 +80,7 @@ public void navigateToRegistrationRedesignPage() {
                 RegistrationInformationPage registrationInformationPage = new RegistrationInformationPage(wd);
                 getLoginScenario().saveBean(PageConstants.REGISTRATION_INFORMATION_PAGE, registrationInformationPage);
     
-}
+}*/
 
 @When("^the member enter the member ID into Member ID field$")
 public void enterMemberID(DataTable givenAttributes) {

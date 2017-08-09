@@ -238,5 +238,6 @@ public static final String UNIVERSITYOFMISSOURI_HOME_PAGE_URL = "https://www."+M
 public static final String WELLSFARGO_HOME_PAGE_URL = "https://www."+MRScenario.environment+"-uhcretiree.uhc.com/wf/home.html";
 
 public static final String TEAMB_TIME_ADMIN_PAGE_URL = "http://apsrt0245.uhc.com:9083/DCERestWAR/dcerest/timeAdmin";
+public static final String SIGN_IN_URL = "https://member.team-b-aarpmedicareplans.uhc.com/content/dashboard/guest/signin.html";
 	
 }

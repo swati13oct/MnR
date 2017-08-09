@@ -5,12 +5,14 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
+import pages.dashboard.acquisition.RegistrationInformationPage;
+import acceptancetests.atdd.data.MRConstants;
 import acceptancetests.atdd.data.PageData;
 import acceptancetests.atdd.util.CommonUtility;
 import atdd.framework.UhcDriver;
 
 public class MemberNewSignInPage extends UhcDriver{
-	private PageData newSign;
+	//private PageData newSign;
 
 	@FindBy (css ="#siginaccheader")
 	private WebElement signInCard;
@@ -32,13 +34,20 @@ public class MemberNewSignInPage extends UhcDriver{
 
 	@FindBy (css ="#password-error>p")
 	private WebElement passwordErrorMessage;
+	
+	@FindBy (id ="regbutton")
+	private WebElement registerbutton;
 
 	private WebDriver driver;
 
+	private static String PAGE_URL = MRConstants.SIGN_IN_URL;
+	
 	public MemberNewSignInPage(WebDriver driver) {
 		super(driver);
 		this.driver=driver;
 		PageFactory.initElements(driver, this);
+		openAndValidate();
+		
 		//CommonUtility.waitForPageLoad(driver, ClaimDetailsPage, 60);
 
 		// TODO Auto-generated constructor stub
@@ -46,6 +55,7 @@ public class MemberNewSignInPage extends UhcDriver{
 
 	@Override
 	public void openAndValidate() {
+		start(PAGE_URL);
 		// TODO Auto-generated method stub
 
 	}
@@ -89,5 +99,21 @@ public class MemberNewSignInPage extends UhcDriver{
 		return passwordErrorMessage.isDisplayed();
 
 	}
+
+	public RegistrationInformationPage clickRegisterbutton() {
+		
+		validate(registerbutton);
+		registerbutton.click();
+		
+		if (getTitle().equalsIgnoreCase("")) {
+			return new RegistrationInformationPage(driver);
+		}
+		return null;
+		
+		
+	
+	}
+
+	
 
 }
