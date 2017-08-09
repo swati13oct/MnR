@@ -14,7 +14,7 @@ import cucumber.junit.Cucumber;
 @RunWith(Cucumber.class)
 @Cucumber.Options(glue = { "atdd.framework", "acceptancetests.ProfileandPreferencesjenkins.ulayer" }, features = {
 		"feature/myprofile-preferences/ulayer" }, format = { "pretty", "html:reports/test-report",
-				"json:target/cucumber.json" }, tags = { "@AccountProfileEdit"})
+				"json:target/cucumber.json" }, tags = { "@EmailEdit"})
 public class RunMRAtddTestUlayerProfileandPreferences
 
 {

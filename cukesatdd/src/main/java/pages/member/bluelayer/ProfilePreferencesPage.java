@@ -64,13 +64,12 @@ public class ProfilePreferencesPage extends UhcDriver {
 
 	@FindBy(xpath = "//*[@id='Artwork']")
 	private WebElement EditButton;
-	
+
 	@FindBy(xpath = "//*[@id='tab-1']/div[2]/div[1]/div/div[1]/div[1]/div/div/div/div[1]/p")
 	private WebElement EmailLabel;
 
 	@FindBy(xpath = "//*[@id='tab-1']/div[2]/div[1]/div/div[1]/div[1]/div/div/div/div[2]/div[1]/div/div/span[1]")
 	private WebElement EmailAddressLabel;
-	
 
 	@FindBy(id = "passwordOld")
 	private WebElement CurrentPassword;
@@ -86,6 +85,24 @@ public class ProfilePreferencesPage extends UhcDriver {
 
 	@FindBy(xpath = "//*[@id='password-form']/div[4]/div/a")
 	private WebElement CancelButton;
+
+	@FindBy(id = "emailNew")
+	private WebElement NewEmail;
+
+	@FindBy(id = "emailNewConfirm")
+	private WebElement emailConfirm;
+
+	@FindBy(xpath = "//*[@id='updateEmail']/span")
+	private WebElement SaveEmailButton;
+
+	@FindBy(xpath = "//*[@id='email-form']/div[3]/div/a")
+	private WebElement CanceEmaillButton;
+
+	@FindBy(xpath = "//*[@id='tab-1']/div[2]/div[1]/div/div[1]/div[1]/div/div/div/div[1]/a[1]")
+	private WebElement EditEmailLink;
+
+	@FindBy(xpath = "//*[@id='tab-1']/div[2]/div[1]/div/div[1]/div[1]/div/div/div/div[2]/div[2]/div/div/span[2]")
+	private WebElement EmailValue;
 
 	public void openAndValidate() {
 
@@ -137,22 +154,15 @@ public class ProfilePreferencesPage extends UhcDriver {
 		validate(memberName);
 		// ValidateAccount Profile
 		validate(Username);
-		System.out.println("Label for Username is  " + Username.getText());
 		validate(Usernametext);
-		System.out.println("Usernametext is " + Usernametext.getText());
 		validate(Password);
-		System.out.println("Label for Password is " + Password.getText());
 		validate(Passwordtext);
-		System.out.println("Passwordtext is " + Passwordtext.getText());
-
 		validate(EditLink);
-		System.out.println("Edit link is " + EditLink.isDisplayed());
-
 		validate(EditButton);
-		System.out.println("EditButton is " + EditButton.isDisplayed());
+	
 
 	}
-	
+
 	public void validateEmail() {
 		validateNew(EmailLabel);
 		validateNew(EmailAddressLabel);
@@ -181,11 +191,35 @@ public class ProfilePreferencesPage extends UhcDriver {
 	}
 
 	public void validateCancelButton() {
-
+		//EditLink.click();
 		CancelButton.click();
 		Assert.isTrue(Password.isDisplayed());
 
 	}
 
+	public void validateEmailEditElements() {
+
+		validateNew(EditEmailLink);
+		EditEmailLink.click();
+		validateNew(NewEmail);
+		validateNew(emailConfirm);
+		validateNew(SaveEmailButton);
+		validateNew(CanceEmaillButton);
+
+	}
+
+	public void SaveEmailEdit() {
+		
+		NewEmail.sendKeys("a" + EmailValue.getText());
+		emailConfirm.sendKeys("a" + EmailValue.getText());
+		SaveEmailButton.click();
+	}
+
+	public void validateEmailCancelButton() {
+
+		CanceEmaillButton.click();
+		
+	
+	}
 
 }

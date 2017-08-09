@@ -173,4 +173,33 @@ public class ProfileandPreferencesAARPStepDefinition {
 	}
 	
 
+	@Then("^the user validates the elements on clicking the email edit link")
+	public void UserValidatesEmailEditOptions() {
+		pages.member.ulayer.ProfileandPreferencesPage ProfileandPreferencespage = (pages.member.ulayer.ProfileandPreferencesPage) getLoginScenario()
+				.getBean(PageConstants.PROFILE_AND_PREFERENCES_PAGE);
+
+		ProfileandPreferencespage.validateEmailEditElements();
+	
+	}
+	@Then("^the user validates the functionality of save Button in the email section")
+	public void UserValidatesEmailEditSaveButton() {
+		pages.member.ulayer.ProfileandPreferencesPage ProfileandPreferencespage = (pages.member.ulayer.ProfileandPreferencesPage) getLoginScenario()
+				.getBean(PageConstants.PROFILE_AND_PREFERENCES_PAGE);
+
+	
+		ProfileandPreferencespage.SaveEmailEdit();
+	
+	}
+	@Then("^the user validates the functionality of Cancel Button in the email section")
+	public void UserValidatesEmailEditCancelButton() {
+		pages.member.ulayer.ProfileandPreferencesPage ProfileandPreferencespage = (pages.member.ulayer.ProfileandPreferencesPage) getLoginScenario()
+				.getBean(PageConstants.PROFILE_AND_PREFERENCES_PAGE);
+
+		ProfileandPreferencespage.validateEmailCancelButton();
+	
+	}
+	
+	
+	
+	
 }

@@ -141,3 +141,19 @@ Feature: To test My Profile & Preferences in AARP site
      #| MA       |
       
       
+         @EmailEdit
+  Scenario Outline: To verify the edit functionality of Email in AARP site
+    Given registered AMP with following details for profile and preferences flow in AARP site
+      | <planType> |
+    Then the user navigate to Profile and Preference page
+    Then the user validates the elements on clicking the email edit link
+    Then the user validates the functionality of save Button in the email section
+    Then the user validates the functionality of Cancel Button in the email section
+
+       Examples: 
+      | planType |
+    #| PDP     |
+     | MAPD     |
+     #| MA       |
+      
+      
