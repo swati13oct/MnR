@@ -559,6 +559,13 @@ driver.switchTo().window(mainwindow);
 	public PharmacySearchPage navigateToPharmacyLocator() {
 
 		pharmacyLocator.click();
+		
+		try {
+			Thread.sleep(30000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		if (driver.getTitle().equalsIgnoreCase(
 				"AARP Medicare Plans | Pharmacy Directory")) {
 			return new PharmacySearchPage(driver);

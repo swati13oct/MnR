@@ -733,14 +733,14 @@ public class EnrollInPlanAarpStepDefinition {
 			Assert.fail("ERROR loading Confirmation Page");
 		}		
 	}
-	public void tearDown() {
+/*	public void tearDown() {
 		WebDriver wd = (WebDriver) getLoginScenario().getBean(
 				CommonConstants.WEBDRIVER);
 		wd.quit();
 		CommonUtility.resetMRRestTime(getLoginScenario());
 		CommonUtility.resetPartDTime(getLoginScenario());
 		getLoginScenario().flushBeans();
-	}
+	}*/
 
 	
 
