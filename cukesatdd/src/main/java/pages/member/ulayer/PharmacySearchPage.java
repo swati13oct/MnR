@@ -298,6 +298,7 @@ public class PharmacySearchPage extends UhcDriver{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		System.out.println("****"+locatePharmacyTitle.getText()+"***");
 		Assert.assertTrue("Locate pharmacy title displyed incorrectly", locatePharmacyTitle.getText().equals("Encuentre una Farmacia"));
 		return new PharmacySearchPage(driver);
 	}
@@ -307,11 +308,12 @@ public class PharmacySearchPage extends UhcDriver{
 		chineseLink.click();		
 		System.out.println("Chinese language selected");   //Story 261070
 		try {
-			Thread.sleep(5000);
+			Thread.sleep(7000);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		System.out.println("****"+locatePharmacyTitle.getText()+"***");
 		Assert.assertTrue("Locate pharmacy title displyed incorrectly", locatePharmacyTitle.getText().equals("尋找藥房"));
 		return new PharmacySearchPage(driver);
 	}
