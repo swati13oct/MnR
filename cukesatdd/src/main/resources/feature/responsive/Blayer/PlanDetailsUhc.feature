@@ -162,7 +162,7 @@ Examples:
    	|90210  |Los Angeles County|MA         |AARP MedicareComplete SecureHorizons Plan 1 (HMO)     |true          |true|
    	
 @US706784  @msPlans
-Scenario Outline: To validate optional services
+Scenario Outline: To validate med supp plan on plan summary
 Given the user is on the vpp portfolio page
 Then the user performs plan search using zipcode
               | Zip Code |<zipCode>|
@@ -174,7 +174,7 @@ Examples:
 		|99501  |Anchorage Municipality|MS         |AARP MedicareComplete SecureHorizons Plan 1 (HMO)     |
 		   	
 @US706736   	@msPlans
-Scenario Outline: To validate optional services
+Scenario Outline: To validate med supp plan header and footer on plan details page
 Given the user is on the vpp portfolio page
 Then the user performs plan search using zipcode
               | Zip Code |<zipCode>|
@@ -190,7 +190,7 @@ Examples:
 		|99501  |Anchorage Municipality|MS         |Plan G    |
 		
 @US706738  	@msPlans
-Scenario Outline: To validate optional services
+Scenario Outline: To validate med supp header and footer on plan summry page
 Given the user is on the vpp portfolio page
 Then the user performs plan search using zipcode
               | Zip Code |<zipCode>|
@@ -201,5 +201,4 @@ And the user validates header and footer on plan summary page
 Examples:
 		|zipCode|county						     |planType   | 
 		|99501  |Anchorage Municipality|MS         | 
-		|99501  |Anchorage Municipality|MS         |
- 
+  

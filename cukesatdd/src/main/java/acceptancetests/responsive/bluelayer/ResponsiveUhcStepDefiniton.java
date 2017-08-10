@@ -794,5 +794,17 @@ public class ResponsiveUhcStepDefiniton {
 		planDetailsPage.valiadateOptionalServices(optionalDental, highOptionalDental);
 		 
 	}
+	
+	@And("^the user validates header and footer$")
+	public void user_validates_header_footer(){
+	ResponsivePlanDetailsUhc planDetailsPage = (ResponsivePlanDetailsUhc) getLoginScenario().getBean(PageConstants.RESPONSIVE_DETAILS_UHC_PAGE);
+	planDetailsPage.validateHeaderFooter();	
+	}
+	
+	@And("^the user validates header and footer on plan summary page$")
+	public void user_validates_header_footer_VPP_page(){
+		ResponsivePlanSummaryUhc planSummaryPage = (ResponsivePlanSummaryUhc) getLoginScenario().getBean(PageConstants.RESPONSIVE_PLAN_SUMMARY_PAGE_UHC);
+		planSummaryPage.validateHeaderFooter();
+	}
 }
 
