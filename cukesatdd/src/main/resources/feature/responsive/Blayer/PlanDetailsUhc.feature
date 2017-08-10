@@ -160,4 +160,46 @@ And user validates optional services
 Examples:
 		|zipCode|county						 |planType   |planName					                                    |optionalDenatl|highOptionalDental|
    	|90210  |Los Angeles County|MA         |AARP MedicareComplete SecureHorizons Plan 1 (HMO)     |true          |true|
-	#	|90201  |Los Angeles County|PDP       |AARP MedicareRx Walgreens (PDP) |
+   	
+@US706784  @msPlans
+Scenario Outline: To validate optional services
+Given the user is on the vpp portfolio page
+Then the user performs plan search using zipcode
+              | Zip Code |<zipCode>|
+              | County   |<county> |
+Then the user navigates to the following plan type
+| PlanType | <planType> |
+Examples:
+		|zipCode|county						     |planType   |planName					                                    |
+		|99501  |Anchorage Municipality|MS         |AARP MedicareComplete SecureHorizons Plan 1 (HMO)     |
+		   	
+@US706736   	@msPlans
+Scenario Outline: To validate optional services
+Given the user is on the vpp portfolio page
+Then the user performs plan search using zipcode
+              | Zip Code |<zipCode>|
+              | County   |<county> |
+Then the user navigates to the following plan type
+| PlanType | <planType> |
+Then the user navigates to pan details page
+|Plan Name| <planName>|	
+And the user validates header and footer
+Examples:
+		|zipCode|county						     |planType   |planName  |
+		|99501  |Anchorage Municipality|MS         |Plan F    |
+		|99501  |Anchorage Municipality|MS         |Plan G    |
+		
+@US706738  	@msPlans
+Scenario Outline: To validate optional services
+Given the user is on the vpp portfolio page
+Then the user performs plan search using zipcode
+              | Zip Code |<zipCode>|
+              | County   |<county> |
+Then the user navigates to the following plan type
+| PlanType | <planType> |
+And the user validates header and footer on plan summary page
+Examples:
+		|zipCode|county						     |planType   | 
+		|99501  |Anchorage Municipality|MS         | 
+		|99501  |Anchorage Municipality|MS         |
+ 

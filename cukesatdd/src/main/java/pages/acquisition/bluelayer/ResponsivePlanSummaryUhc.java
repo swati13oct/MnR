@@ -59,7 +59,7 @@ public class ResponsivePlanSummaryUhc extends UhcDriver{
 		@FindBy(xpath = "//div[@class='tab plancountheight'][2]")
 		private WebElement viewPdpPlans;
 
-		@FindBy(xpath = "//div[@class='tab plancountheight'][3]/div")
+		@FindBy(xpath = "//span[@class='title']/span[2]")
 		private WebElement viewSnpPlans;
 		
  		@FindBy(xpath="//*[contains(text(),'HMO')]")
@@ -107,6 +107,9 @@ public class ResponsivePlanSummaryUhc extends UhcDriver{
 		
 		@FindBy(xpath = "//div[@class='tab med-supp plancountheight']/div")
 		private WebElement showMsPlans;
+		
+		@FindBy(xpath = "//h3[text()='AARP® Medicare Supplement Insurance Plans']")
+		private WebElement msHeaderTitle;
 		
 		@FindBy(xpath="//*[contains(text(),'Start Plan Selector')]")
 		private WebElement planSelector;
@@ -274,7 +277,12 @@ public class ResponsivePlanSummaryUhc extends UhcDriver{
 		@FindBy	(xpath="//div[@class='mabenefittable']/parent::div/parent::div")
 		private List<WebElement> maPlanCardNumber;
 		
-			
+		@FindBy(id="nav")
+		private WebElement headerElement;
+		
+		@FindBy(className="footer")
+		private WebElement footerElement;
+		
 			private static String CAMPAIGN_URL_1 = MRConstants.CAMPAIGN_PAGE_URL1;
 			
 			private static String CAMPAIGN_URL_2 = MRConstants.CAMPAIGN_PAGE_URL2;
@@ -486,12 +494,12 @@ public ResponsivePlanSummaryUhc viewPlanSummary(String planType) {
 		return new ResponsivePlanSummaryUhc(driver);
 			}else if(planType.equalsIgnoreCase("MS")){
 		           showMsPlans.click();
-		           System.out.println(driver.getTitle());
-		           if(driver.getTitle().equals("UnitedHealthcare Medicare Solutions | AARP Medicare Supplement Plans")){
-		return new ResponsivePlanSummaryUhc(driver);
-		           }else{
-		        	   Assert.fail();
-		           }
+		    if(msHeaderTitle.isDisplayed()){
+		    	return new ResponsivePlanSummaryUhc(driver);
+		    }else{
+		    	System.out.println("MS plans header not displayed");
+		    	Assert.fail();
+		    }
 		}else if(planType.equalsIgnoreCase("SNP")){
 			viewSnpPlans.click();
 	return new ResponsivePlanSummaryUhc(driver);
@@ -624,6 +632,10 @@ public void comparePlanslnk(){
 			e.printStackTrace();
 		}
 		 return new ResponsivePlanDetailsUhc(driver);
+		 }
+		 if(planName.contains("F") || planName.contains("G")){
+			 driver.findElement(By.xpath("//h2[text()='"+planName+"']/parent::a/parent::div/following-sibling::div[2]/div/a")).click();
+			 return new ResponsivePlanDetailsUhc(driver);
 		 }
 		 return null;
 	 }
@@ -1629,5 +1641,14 @@ public void comparePlanslnk(){
 						 Assert.fail("Error in displaying outofpocket2");
 					 }
 				 }}
-				
+			public ResponsivePlanDetailsUhc validateHeaderFooter(){
+				if(headerElement.isDisplayed() && footerElement.isDisplayed()){
+					System.out.println("==============Header Footer displayed correctly==============");
+					return new ResponsivePlanDetailsUhc(driver);
+				}else{
+					System.out.println("==============Header Footer not displayed correctly==============");
+					Assert.fail();
+				}
+				return null;
+		 	}
 			}

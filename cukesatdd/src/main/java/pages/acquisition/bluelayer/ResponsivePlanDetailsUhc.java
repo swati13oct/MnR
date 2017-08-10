@@ -50,6 +50,12 @@ public class ResponsivePlanDetailsUhc extends UhcDriver {
 	@FindBy(xpath="//tr[@class='optionalServicesPlanCosts']/td[3]/strong[1]")
 	private WebElement optionalDentalPlanCostValue;
 	
+	@FindBy(id="nav")
+	private WebElement headerElement;
+	
+	@FindBy(className="footer")
+	private WebElement footerElement;
+	
 	public ResponsivePlanDetailsUhc(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
@@ -124,4 +130,15 @@ public class ResponsivePlanDetailsUhc extends UhcDriver {
 		}
 		return null;
 	}
+	
+	public ResponsivePlanDetailsUhc validateHeaderFooter(){
+		if(headerElement.isDisplayed() && footerElement.isDisplayed()){
+			System.out.println("==============Header Footer displayed correctly==============");
+			return new ResponsivePlanDetailsUhc(driver);
+		}else{
+			System.out.println("==============Header Footer not displayed correctly==============");
+			Assert.fail();
+		}
+		return null;
+ 	}
 }

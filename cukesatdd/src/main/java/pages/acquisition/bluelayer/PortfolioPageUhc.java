@@ -274,13 +274,6 @@ public ResponsivePlanSummaryUhc searchPlans(String zipcode, String CountyName) {
 	    zipCodeField.sendKeys(zipcode);
 	    zipCodeField.sendKeys(Keys.ENTER);
 	    //remove thread once page is stable
-	    try {
-			Thread.sleep(10000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	    
 	    List<WebElement> countyActuals = driver.findElements(By.xpath("//a[@class='ng-binding ng-pristine ng-valid']"));
 	    System.out.println(countyActuals.size());
 	    
