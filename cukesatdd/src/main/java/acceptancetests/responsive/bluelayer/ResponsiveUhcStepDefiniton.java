@@ -806,5 +806,22 @@ public class ResponsiveUhcStepDefiniton {
 		ResponsivePlanSummaryUhc planSummaryPage = (ResponsivePlanSummaryUhc) getLoginScenario().getBean(PageConstants.RESPONSIVE_PLAN_SUMMARY_PAGE_UHC);
 		planSummaryPage.validateHeaderFooter();
 	}
+	
+	@And("^the user validates header and footer on start application page$")
+	public void user_validates_Heaser_Footer_start_application_page(DataTable givenAttributes){
+		List<DataTableRow> memberAttributesRow = givenAttributes
+				.getGherkinRows();
+		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells()
+					.get(0), memberAttributesRow.get(i).getCells().get(1));
+		}
+
+		String planName = memberAttributesMap.get("PlanName");
+		System.out.println(planName);
+		ResponsivePlanSummaryUhc planSummaryPage = (ResponsivePlanSummaryUhc) getLoginScenario().getBean(PageConstants.RESPONSIVE_PLAN_SUMMARY_PAGE_UHC);
+		planSummaryPage.navigateToStartApplication(planName);
+	}
 }
 
