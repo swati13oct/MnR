@@ -161,7 +161,7 @@ Examples:
 		|zipCode|county						 |planType   |planName					                                    |optionalDenatl|highOptionalDental|
    	|90210  |Los Angeles County|MA         |AARP MedicareComplete SecureHorizons Plan 1 (HMO)     |true          |true|
    	
-@US706784  @msPlans
+@US706784  @msPlans @sprint6
 Scenario Outline: To validate med supp plan on plan summary
 Given the user is on the vpp portfolio page
 Then the user performs plan search using zipcode
@@ -216,3 +216,41 @@ Examples:
 		|zipCode|county						     |planType   |planName  |
 		|99501  |Anchorage Municipality|MS         |Plan F    |
 		|99501  |Anchorage Municipality|MS         |Plan G    |
+		
+@US674466
+Scenario Outline: To validate Prescription Drug Benefits table
+Given the user is on the vpp portfolio page
+Then the user performs plan search using zipcode
+              | Zip Code |<zipCode>|
+              | County   |<county> |
+Then the user navigates to the following plan type
+| PlanType | <planType> |	
+Then the user navigates to pan details page
+|Plan Name| <planName>|	
+And the user validates Prescription Drug Benefits table and dynamic footnotes 
+Examples:
+		|zipCode|county						 |planType  |planName					                                  |
+		|90210  |Los Angeles County|MA        |AARP MedicareComplete SecureHorizons Plan 1 (HMO)  |
+		|33012  |Miami-Dade County |MA        |AARP MedicareComplete Choice Plan 2 (Regional PPO)  |
+		
+		
+@US674464	@sprint6
+Scenario Outline: To validate medical benefits tab
+Given the user is on the vpp portfolio page
+Then the user performs plan search using zipcode
+              | Zip Code |<zipCode>|
+              | County   |<county> |
+Then the user navigates to the following plan type
+| PlanType | <planType> |	
+Then the user navigates to pan details page
+|Plan Name| <planName>|	
+And the user validates Medicare Benefits and Programs tab 
+|Monthly Premium |<monthlyPremium>|
+|Out of Pocket   |<outofPocket>|
+ 
+Examples:
+		|zipCode|county						 |planType  |planName					                                  |monthlyPremium | outofPocket1| 
+		|90210  |Los Angeles County|MA        |AARP MedicareComplete SecureHorizons Plan 1 (HMO)  |$0             |$4,600       |
+		#|15201  |Los Angeles County|MA        |AARP MedicareComplete Plan 1 (HMO)                 |$16            |$6,700       |
+ 	
+						
