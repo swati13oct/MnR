@@ -1651,4 +1651,9 @@ public void comparePlanslnk(){
 				}
 				return null;
 		 	}
+			
+			public ResponsivePlanSummaryUhc navigateToStartApplication(String planName){
+				driver.findElement(By.xpath("//h2[text()='"+planName+"']/parent::a/parent::div/following-sibling::div[3]/div/a")).click();
+				return new ResponsivePlanSummaryUhc(driver);
+				}
 			}

@@ -202,3 +202,17 @@ Examples:
 		|zipCode|county						     |planType   | 
 		|99501  |Anchorage Municipality|MS         | 
   
+ @US706784  @msPlans
+Scenario Outline: To validate med supp plan on plan summary
+Given the user is on the vpp portfolio page
+Then the user performs plan search using zipcode
+              | Zip Code |<zipCode>|
+              | County   |<county> |
+Then the user navigates to the following plan type
+| PlanType | <planType> |
+And the user validates header and footer on start application page
+|PlanName|<planName>|
+Examples:
+		|zipCode|county						     |planType   |planName  |
+		|99501  |Anchorage Municipality|MS         |Plan F    |
+		|99501  |Anchorage Municipality|MS         |Plan G    |
