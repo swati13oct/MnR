@@ -829,5 +829,22 @@ public class ResponsiveUhcStepDefiniton {
 		ResponsivePlanDetailsUhc planDetailsPage = (ResponsivePlanDetailsUhc) getLoginScenario().getBean(PageConstants.RESPONSIVE_DETAILS_UHC_PAGE);
         planDetailsPage.validatePrescriptionDrugsTab();
 	}
+	
+	@And("^the user validates Medicare Benefits and Programs tab$")
+	public void user_validates_medical_benefits_tab(DataTable givenAttributes){
+		List<DataTableRow> memberAttributesRow = givenAttributes
+				.getGherkinRows();
+		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells()
+					.get(0), memberAttributesRow.get(i).getCells().get(1));
+		}
+
+		String monthlyPremium = memberAttributesMap.get("Monthly Premium");
+		String outofPocket    = memberAttributesMap.get("Out of Pocket");
+		ResponsivePlanDetailsUhc planDetailsPage = (ResponsivePlanDetailsUhc) getLoginScenario().getBean(PageConstants.RESPONSIVE_DETAILS_UHC_PAGE);
+        planDetailsPage.validateMedicalBenefitsTable(monthlyPremium, outofPocket);
+	}
 }
 

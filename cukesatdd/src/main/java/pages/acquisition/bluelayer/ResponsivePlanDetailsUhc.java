@@ -67,8 +67,18 @@ public class ResponsivePlanDetailsUhc extends UhcDriver {
 		
 	@FindBy(xpath="	//div[@id='drugBenefits']/div[1]/following-sibling::div[1]/p")
 	private WebElement prescriptionDrugsDynamicFootnote;
-	
-	
+    
+    @FindBy (xpath= "//p[text()='Out of Pocket Maximum']")
+    private WebElement outofpocketmaximum;
+    
+    @FindBy (xpath="//*[text()='Monthly Premium']/parent::td/parent::tr/td[4]/strong")
+    private WebElement monthlypremium;
+    
+  //p[text()='Out of Pocket Maximum']/parent::td/parent::tr/td[4]
+    @FindBy (xpath="//*[@id='medicalBenefits']/div[1]/table/tbody/tr[3]/td[4]")
+    private WebElement outofpocket;
+    
+     
 	public ResponsivePlanDetailsUhc(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
@@ -173,4 +183,27 @@ public class ResponsivePlanDetailsUhc extends UhcDriver {
 		}
 		return null;
 	}
+	
+	 public void validateMedicalBenefitsTable(String monthlyPremium, String outofPocket){
+		 System.out.println(monthlyPremium+""+monthlypremium.getText() +" "+outofpocket.getText());
+		 if(monthlypremium.getText().equals("Monthly Premium")){
+			 if(monthlyPremium.equals(monthlypremium.getText())){
+		 
+			 System.out.println("monthly premium is verified");
+			 Assert.assertTrue(true);
+		 }else{
+			 Assert.fail("Error in displaying monthly premium 1");
+		 }
+		 }
+		 if (outofpocketmaximum.getText().equals("Out of Pocket Maximum")) {
+			 if(outofpocket.getText().equals(outofPocket)){
+				 
+				 System.out.print("Out of pockect is verified");
+				 Assert.assertTrue(true);
+			 }else{
+				 Assert.fail("Error in displaying outofpocket1");
+			 }
+			 }
+			
+		}
 }
