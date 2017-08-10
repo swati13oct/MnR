@@ -1,4 +1,4 @@
-package acceptancetests.ProfileandPreferencesjenkins.bluelayer;
+package acceptancetests.ProfileandPreferencesredesign.bluelayer;
 
 import gherkin.formatter.model.DataTableRow;
 
@@ -127,75 +127,48 @@ public class ProfileandPreferencesUMSStepDefinition {
 	public void user_Validates_FED_PROFILE_MEMBERNAME_ID_AccountProfile() {
 		ProfilePreferencesPage ProfilePreferencesPage = (ProfilePreferencesPage) getLoginScenario()
 				.getBean(PageConstants.ProfilePreferencesPage);
-
+		
 		if (ProfilePreferencesPage == null) {
 			System.out.println(" Variable is NULL");
 		}
 		ProfilePreferencesPage.validatePlanNameMemberidNameAcountProfile();
 
 	}
-
+	
 	@Then("^the user validates the Email section in UMS site")
 	public void user_Validates_email() {
 		ProfilePreferencesPage ProfilePreferencesPage = (ProfilePreferencesPage) getLoginScenario()
 				.getBean(PageConstants.ProfilePreferencesPage);
+		
 
 		ProfilePreferencesPage.validateEmail();
 
 	}
-
 	@Then("^the user validates the elements on clicking the edit link")
 	public void UserValidatesAccountEditOptions() {
 		ProfilePreferencesPage ProfilePreferencesPage = (ProfilePreferencesPage) getLoginScenario()
 				.getBean(PageConstants.ProfilePreferencesPage);
 		ProfilePreferencesPage.validateAccountEditElements();
-
+	
 	}
-
 	@Then("^the user validates the functionality of save Button")
 	public void UserValidatesAccountEditSaveButton() {
 		ProfilePreferencesPage ProfilePreferencesPage = (ProfilePreferencesPage) getLoginScenario()
 				.getBean(PageConstants.ProfilePreferencesPage);
 
-		String Password = (String) getLoginScenario().getBean(LoginCommonConstants.PASSWORD);
+	
+		
+		String	 Password = (String) getLoginScenario().getBean(LoginCommonConstants.PASSWORD);
 		ProfilePreferencesPage.validateAccountEdit(Password);
-
+	
 	}
-
 	@Then("^the user validates the functionality of Cancel Button")
 	public void UserValidatesAccountEditCancelButton() {
 		ProfilePreferencesPage ProfilePreferencesPage = (ProfilePreferencesPage) getLoginScenario()
 				.getBean(PageConstants.ProfilePreferencesPage);
 
 		ProfilePreferencesPage.validateCancelButton();
-
+	
 	}
-
-	@Then("^the user validates the elements on clicking the email edit link")
-	public void UserValidatesEmailEditOptions() {
-		ProfilePreferencesPage ProfilePreferencesPage = (ProfilePreferencesPage) getLoginScenario()
-				.getBean(PageConstants.ProfilePreferencesPage);
-
-		ProfilePreferencesPage.validateEmailEditElements();
-
-	}
-
-	@Then("^the user validates the functionality of save Button in the email section")
-	public void UserValidatesEmailEditSaveButton() {
-		ProfilePreferencesPage ProfilePreferencesPage = (ProfilePreferencesPage) getLoginScenario()
-				.getBean(PageConstants.ProfilePreferencesPage);
-
-		ProfilePreferencesPage.SaveEmailEdit();
-
-	}
-
-	@Then("^the user validates the functionality of Cancel Button in the email section")
-	public void UserValidatesEmailEditCancelButton() {
-		ProfilePreferencesPage ProfilePreferencesPage = (ProfilePreferencesPage) getLoginScenario()
-				.getBean(PageConstants.ProfilePreferencesPage);
-
-		ProfilePreferencesPage.validateEmailCancelButton();
-
-	}
-
+	
 }

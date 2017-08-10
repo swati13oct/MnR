@@ -1,4 +1,4 @@
-package acceptancetests.ProfileandPreferencesjenkins.ulayer;
+package acceptancetests.ProfileandPreferencesredesign.ulayer;
 
 import gherkin.formatter.model.DataTableRow;
 
@@ -25,6 +25,7 @@ import pages.member.ulayer.PlanBenefitsCoveragePage;
 import acceptancetests.atdd.data.CommonConstants;
 import acceptancetests.atdd.data.member.PageConstants;
 import acceptancetests.benefitsandcoverage.data.PlanBenefitsAndCoverageCommonConstants;
+import acceptancetests.profandpref.data.ProfnPrefCommonConstants;
 import acceptancetests.formsandresources.data.FnRCommonConstants;
 import acceptancetests.login.data.LoginCommonConstants;
 import atdd.framework.MRScenario;
@@ -172,34 +173,67 @@ public class ProfileandPreferencesAARPStepDefinition {
 	
 	}
 	
-
-	@Then("^the user validates the elements on clicking the email edit link")
-	public void UserValidatesEmailEditOptions() {
+	@Then("^the user validates see more ways to contact us section")
+	public void Uservalidatesneedhelpsection()
+	{
+	
 		pages.member.ulayer.ProfileandPreferencesPage ProfileandPreferencespage = (pages.member.ulayer.ProfileandPreferencesPage) getLoginScenario()
 				.getBean(PageConstants.PROFILE_AND_PREFERENCES_PAGE);
-
-		ProfileandPreferencespage.validateEmailEditElements();
-	
+		
+		ProfileandPreferencespage.validateseemorewaystext();
 	}
-	@Then("^the user validates the functionality of save Button in the email section")
-	public void UserValidatesEmailEditSaveButton() {
+	
+	@Then("^the user validates on clicking contact us link it should route to contact us page")
+	public void uservalidatescontactuslink()
+	{
 		pages.member.ulayer.ProfileandPreferencesPage ProfileandPreferencespage = (pages.member.ulayer.ProfileandPreferencesPage) getLoginScenario()
 				.getBean(PageConstants.PROFILE_AND_PREFERENCES_PAGE);
-
-	
-		ProfileandPreferencespage.SaveEmailEdit();
-	
+		
+		ProfileandPreferencespage.clickcontactUslink();
 	}
-	@Then("^the user validates the functionality of Cancel Button in the email section")
-	public void UserValidatesEmailEditCancelButton() {
+	
+	@Then("^the user validates disclaimer link and on clicking disclaimer link it should expand and on again clicking it should collapse")
+	public void uservalidatesdisclaimerlink()
+	{
 		pages.member.ulayer.ProfileandPreferencesPage ProfileandPreferencespage = (pages.member.ulayer.ProfileandPreferencesPage) getLoginScenario()
 				.getBean(PageConstants.PROFILE_AND_PREFERENCES_PAGE);
+		
+		
+		String userName = (String) getLoginScenario().getBean(LoginCommonConstants.USERNAME);
+		try
+		{
+		JSONObject profilenpreferencesActualJson = ProfileandPreferencespage.ProfileandPreferencesPageJson;
+		loginScenario.saveBean(ProfnPrefCommonConstants.MY_PROFILE_PREFERENCES_ACTUAL, profilenpreferencesActualJson);
+		System.out.println("profilenpreferencesActualJson---->" + profilenpreferencesActualJson);
+		System.out.println(userName);
+		// Get expected data
+					String fileName = userName;
+					String directory = CommonConstants.PROFILE_AND_PREFERNCES_PAGE_DIRECTORY;
+					JSONObject myProfilenpreferencesexpectedjson = MRScenario.readExpectedJson(fileName,directory);
+					loginScenario.saveBean(ProfnPrefCommonConstants.MY_PROFILE_PREFERENCES_EXPECTED,
+							myProfilenpreferencesexpectedjson);
+					ProfileandPreferencespage.clickOndisclaimerlink(myProfilenpreferencesexpectedjson);
+					System.out.println("profilenpreferencesExpectedJson---->" + myProfilenpreferencesexpectedjson);
 
-		ProfileandPreferencespage.validateEmailCancelButton();
+					/*if (profilenpreferencesActualJson != null && myProfilenpreferencesexpectedjson != null) 
+					{
+						JSONAssert.assertEquals(myProfilenpreferencesexpectedjson, profilenpreferencesActualJson, true);
+					}*/
+
+				} 
+		catch (Exception e) {
+					e.printStackTrace();
+				}
+		}
+	
+	
+	@Then("^the user validates the need help section")
+	public void uservalidatesneedhelpsection()
+	{
+	pages.member.ulayer.ProfileandPreferencesPage ProfileandPreferencespage = (pages.member.ulayer.ProfileandPreferencesPage) getLoginScenario()
+			.getBean(PageConstants.PROFILE_AND_PREFERENCES_PAGE);
+	
+	ProfileandPreferencespage.validateneedhelpheader();
 	
 	}
-	
-	
-	
-	
 }

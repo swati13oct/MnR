@@ -211,7 +211,7 @@ public class AccountHomePage extends UhcDriver {
 		String fileName = CommonConstants.ACCOUNT_HOME_PAGE_DATA;
 		myAccountHome = CommonUtility.readPageData(fileName,
 				CommonConstants.PAGE_OBJECT_DIRECTORY_ULAYER_MEMBER);
-		openAndValidate();
+		//openAndValidate();
 	}
 
 	public PlanBenefitsCoveragePage navigateToBnC() {

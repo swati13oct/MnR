@@ -125,7 +125,7 @@ public abstract class UhcDriver {
 		if (element.isDisplayed()) {
 
 		System.out.println("@@@The element " + element.getText() + "is found@@@");
-
+     
 		}
 		} catch (Exception e) {
 

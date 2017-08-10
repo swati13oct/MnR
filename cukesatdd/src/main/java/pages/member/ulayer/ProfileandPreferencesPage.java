@@ -4,20 +4,21 @@
 package pages.member.ulayer;
 
 import java.util.List;
+import java.util.Map;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-import org.springframework.util.Assert;
+import org.junit.Assert;
 
-import acceptancetests.ProfileandPreferencesjenkins.ulayer.ProfileandPreferencesAARPStepDefinition;
+import acceptancetests.atdd.data.CommonConstants;
 import acceptancetests.atdd.data.PageData;
-import acceptancetests.atdd.data.member.PageConstants;
-import acceptancetests.login.data.LoginCommonConstants;
-import atdd.framework.MRScenario;
+import acceptancetests.atdd.util.CommonUtility;
 import atdd.framework.UhcDriver;
 
 /**
@@ -80,36 +81,44 @@ public class ProfileandPreferencesPage extends UhcDriver {
 
 	@FindBy(xpath = "//*[@id='password-form']/div[4]/div/a")
 	private WebElement CancelButton;
-
-	@FindBy(id = "emailNew")
-	private WebElement NewEmail;
-
-	@FindBy(id = "emailNewConfirm")
-	private WebElement emailConfirm;
-
-	@FindBy(xpath = "//*[@id='updateEmail']/span")
-	private WebElement SaveEmailButton;
-
-	@FindBy(xpath = "//*[@id='email-form']/div[3]/div/a")
-	private WebElement CanceEmaillButton;
-
-	@FindBy(xpath = "//*[@id='tab-1']/div[2]/div[1]/div/div[1]/div[1]/div/div/div/div[1]/a[1]")
-	private WebElement EditEmailLink;
-
-	@FindBy(xpath = "//*[@id='tab-1']/div[2]/div[1]/div/div[1]/div[1]/div/div/div/div[2]/div[2]/div/div/span[2]")
-	private WebElement EmailValue;
-
+	
+	@FindBy(className = "margin-none")
+    private WebElement Seemorewaystext;
+	
+	@FindBy(className="lowercase")
+	private WebElement contactUs;
+	
+	@FindBy(xpath = "html/body/div[4]/div/div[2]/section/div/div[1]/div/h2")
+	private WebElement NeedHelpHeader;
+	
+	@FindBy(xpath ="html/body/div[4]/div/div[2]/section/div/div[2]/div/div/div[1]/div/div")
+	private WebElement Technicalsupportsection;
+	
+	@FindBy(xpath ="html/body/div[4]/div/div[2]/section/div/div[2]/div/div/div[2]/div/div")
+	private WebElement PlanSupportsection;
+	
+	@FindBy(xpath ="html/body/div[5]/div/div/div/div/a")
+	private WebElement Disclaimerlink;
+	
+	public static final String Disclaimerlinkcontent_xpath = ".//*[@id='collapseDisclaimer']";
+	
 	public PageData ProfileandPreferences;
 
 	public JSONObject ProfileandPreferencesPageJson;
+	
+	
 
 	public ProfileandPreferencesPage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
+		String fileName = CommonConstants.PROFILE_AND_PREFERENCES_REDESIGN_PAGE_DATA;
+		ProfileandPreferences = CommonUtility.readPageData(fileName, CommonConstants.PAGE_OBJECT_DIRECTORY_ULAYER_MEMBER);
+		openAndValidate();
 	}
 
 	@Override
-	public void openAndValidate() throws InterruptedException {
+	public void openAndValidate() 
+	{
 		// TODO Auto-generated method stub
 
 		JSONObject jsonObject = new JSONObject();
@@ -147,7 +156,21 @@ public class ProfileandPreferencesPage extends UhcDriver {
 
 		ProfileandPreferencesPageJson = jsonObject;
 
-		System.out.println("ProfileandPreferencesPageJson----->" + ProfileandPreferencesPageJson);
+		System.out.println("ProfilePreferencesJson----->" + ProfileandPreferencesPageJson);
+
+	}
+
+	
+	public JSONObject getExpectedData(Map<String, JSONObject> expectedDataMap) {
+
+		/*get PHR expected data*/
+		JSONObject profilenpreferencesExpectedJson = expectedDataMap.get(CommonConstants.PROFILE_AND_PREFERENCES_REDESIGN_PAGE_DATA);
+		JSONObject commonExpectedJson = expectedDataMap.get(CommonConstants.COMMON);
+		JSONObject globalExpectedJson = expectedDataMap.get(CommonConstants.GLOBAL);
+		profilenpreferencesExpectedJson = CommonUtility.mergeJson(profilenpreferencesExpectedJson, globalExpectedJson);
+		profilenpreferencesExpectedJson = CommonUtility.mergeJson(profilenpreferencesExpectedJson, commonExpectedJson);
+
+		return profilenpreferencesExpectedJson;
 
 	}
 
@@ -156,23 +179,23 @@ public class ProfileandPreferencesPage extends UhcDriver {
 		validate(planName);
 		System.out.println("Plan name is " + planName.getText());
 
-		validateNew(memberId);
-		validateNew(memberName);
+		validate(memberId);
+		validate(memberName);
 
 		// ValidateAccount Profile
-		validateNew(Username);
+		validate(Username);
 		System.out.println("Label for Username is  " + Username.getText());
-		validateNew(Usernametext);
+		validate(Usernametext);
 		System.out.println("Usernametext is " + Usernametext.getText());
-		validateNew(Password);
+		validate(Password);
 		System.out.println("Label for Password is " + Password.getText());
-		validateNew(Passwordtext);
+		validate(Passwordtext);
 		System.out.println("Passwordtext is " + Passwordtext.getText());
 
-		validateNew(EditLink);
+		validate(EditLink);
 		System.out.println("Edit link is " + EditLink.isDisplayed());
 
-		validateNew(EditButton);
+		validate(EditButton);
 		System.out.println("EditButton is " + EditButton.isDisplayed());
 	}
 
@@ -204,35 +227,70 @@ public class ProfileandPreferencesPage extends UhcDriver {
 	}
 
 	public void validateCancelButton() {
-		EditLink.click();
+
 		CancelButton.click();
-		Assert.isTrue(Password.isDisplayed());
-
+		Assert.assertTrue("Button displayed",Password.isDisplayed());
+		
 	}
-
-	public void validateEmailEditElements() {
-		validateNew(EditEmailLink);
-		EditEmailLink.click();
-		validateNew(NewEmail);
-		validateNew(emailConfirm);
-		validateNew(SaveEmailButton);
-		validateNew(CanceEmaillButton);
-
+	
+	public void validateseemorewaystext()
+	{
+	validate(Seemorewaystext);
 	}
-
-	public void SaveEmailEdit() {
-
-		NewEmail.sendKeys("a" + EmailValue.getText());
-		emailConfirm.sendKeys("a" + EmailValue.getText());
-
-		SaveEmailButton.click();
-
+	
+	public ContactUsPage clickcontactUslink()
+	{
+    validate(contactUs);
+    contactUs.click();
+    if(getTitle().equalsIgnoreCase("AARP Medicare Plans | Contact Us"))
+	{
+		return new ContactUsPage(driver);
 	}
+	return null;
+	}
+	
+	public void validateneedhelpheader()
+	{
+		validate(NeedHelpHeader);
+		validate(Technicalsupportsection);
+		validate(PlanSupportsection);
+	}
+	
+	public void clickOndisclaimerlink(JSONObject myProfilenpreferencesexpectedjson) {
+		// TODO Auto-generated method stub
 
-	public void validateEmailCancelButton() {
-		// EditEmailLink.click();
-		CanceEmaillButton.click();
+		Disclaimerlink.click();
+		// Thread.sleep(15000);
+		String finalPath;
+		String table_data;
 
+		// validate(disclaimertextarea_xpath);
+		try {
+			finalPath = Disclaimerlinkcontent_xpath + "/p[1]";
+			table_data = driver.findElement(By.xpath(finalPath)).getText();
+			System.out.println(table_data);
+			Assert.assertEquals(myProfilenpreferencesexpectedjson.get("1stline"),
+			table_data);
+			// to validate amount Billed
+			finalPath = Disclaimerlinkcontent_xpath + "/p[2]";
+			table_data = driver.findElement(By.xpath(finalPath)).getText();
+			System.out.println(table_data);
+			Assert.assertEquals(myProfilenpreferencesexpectedjson.get("2ndline"), table_data);
+			// to validate amount Paid
+			finalPath = Disclaimerlinkcontent_xpath + "/p[3]";
+			table_data = driver.findElement(By.xpath(finalPath)).getText();
+			System.out.println(table_data);
+			Assert.assertEquals(myProfilenpreferencesexpectedjson.get("3rdline"), table_data);
+			// to validate paid Date
+			finalPath = Disclaimerlinkcontent_xpath + "/p[4]";
+			table_data = driver.findElement(By.xpath(finalPath)).getText();
+			System.out.println(table_data);
+			Assert.assertEquals(myProfilenpreferencesexpectedjson.get("4thline"), table_data);
+			
+			Disclaimerlink.click();
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}
 	}
 
 }

@@ -90,6 +90,10 @@ public class CommonConstants {
 
 	public static final String BENEFITS_AND_COVERAGE_PAGE_DATA = "benefitsandcoveragelisnonlis.json";
 	
+	public static final String PROFILE_AND_PREFERENCES_REDESIGN_PAGE_DATA = "profilenpreferencesredesign.json";
+	
+	public static final String PROFILE_AND_PREFERNCES_PAGE_DIRECTORY = "/jsonresponse/member/ulayer/profilesandprefereneces/";
+	
 	public static final String PROFILE_AND_PREFERENCES_PAGE_DATA = "ProfileandPreferenceslisnonlis.json";
 
 	public static final String BENEFITS_AND_COVERAGE_PAGE_DIRECTORY = "/jsonresponse/member/ulayer/benefitsandcoverage/";

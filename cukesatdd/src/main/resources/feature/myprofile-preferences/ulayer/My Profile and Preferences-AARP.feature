@@ -136,24 +136,25 @@ Feature: To test My Profile & Preferences in AARP site
 
        Examples: 
       | planType |
-    #| PDP     |
-     | MAPD     |
+     #| PDP      |
+      | MAPD     |
      #| MA       |
-      
-      
-         @EmailEdit
-  Scenario Outline: To verify the edit functionality of Email in AARP site
+     
+     @Needhelp
+     Scenario Outline: To verify the edit functionality in Account Profile section in AARP site
     Given registered AMP with following details for profile and preferences flow in AARP site
       | <planType> |
     Then the user navigate to Profile and Preference page
-    Then the user validates the elements on clicking the email edit link
-    Then the user validates the functionality of save Button in the email section
-    Then the user validates the functionality of Cancel Button in the email section
-
-       Examples: 
+    And the user validates disclaimer link and on clicking disclaimer link it should expand and on again clicking it should collapse
+    And the user validates the need help section
+    And the user validates see more ways to contact us section 
+    And the user validates on clicking contact us link it should route to contact us page
+    
+     Examples: 
       | planType |
-    #| PDP     |
-     | MAPD     |
-     #| MA       |
+     #| PDP      |
+     #| MAPD     |
+      | MA       |
+     
       
       
