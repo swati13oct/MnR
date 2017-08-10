@@ -314,7 +314,7 @@ public class PharmacySearchPage extends UhcDriver{
 			e.printStackTrace();
 		}
 		System.out.println("****"+locatePharmacyTitle.getText()+"***");
-		Assert.assertTrue("Locate pharmacy title displyed incorrectly", locatePharmacyTitle.getText().equals("尋找藥房"));
+		Assert.assertTrue("Locate pharmacy title displyed incorrectly", locatePharmacyTitle.getText().contains("尋找藥房"));
 		return new PharmacySearchPage(driver);
 	}
 	
