@@ -56,6 +56,19 @@ public class ResponsivePlanDetailsUhc extends UhcDriver {
 	@FindBy(className="footer")
 	private WebElement footerElement;
 	
+	@FindBy(id="prescriptiondrug")
+	private WebElement prescriptionDrugsTab;
+	
+	@FindBy(xpath="//*[@id='drugBenefits']/h3")
+	private WebElement prescriptionDrugsHeader;
+	
+	@FindBy(xpath="//div[@id='drugBenefits']/div[1]")
+	private WebElement prescriptionDrugsTable;
+		
+	@FindBy(xpath="	//div[@id='drugBenefits']/div[1]/following-sibling::div[1]/p")
+	private WebElement prescriptionDrugsDynamicFootnote;
+	
+	
 	public ResponsivePlanDetailsUhc(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
@@ -141,4 +154,23 @@ public class ResponsivePlanDetailsUhc extends UhcDriver {
 		}
 		return null;
  	}
+	
+	public ResponsivePlanDetailsUhc validatePrescriptionDrugsTab(){
+		prescriptionDrugsTab.click();
+		if(prescriptionDrugsHeader.getText().equalsIgnoreCase("Prescription Drug Benefits")){
+			System.out.println("==============Prescription Drug Tab header displayed corectly==============");
+			validate(prescriptionDrugsTable);
+			if(prescriptionDrugsDynamicFootnote.isDisplayed()){
+				System.out.println("================Dynamic footnotes displayed beneat the table correctly==================");
+				return new ResponsivePlanDetailsUhc(driver);
+			}else{
+				System.out.println("================Dynamic footnotes not displayed beneat the table correctly==================");
+				Assert.fail();
+			}
+		}else{
+			System.out.println("==============Prescription Drug Tab header displayed corectly==============");
+			Assert.fail();
+		}
+		return null;
+	}
 }

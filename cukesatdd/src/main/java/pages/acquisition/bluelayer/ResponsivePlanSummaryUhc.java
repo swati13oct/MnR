@@ -623,6 +623,8 @@ public void comparePlanslnk(){
                       break;
                 }
          }*/
+		 
+		 //SNP PATH- //*[contains(text(),'UnitedHealthcare Dual Complete RP (Regional PPO SNP) ')]/parent::div/following-sibling::div[1]/div/a
 		 if(planName.contains("AARP")){
 		 driver.findElement(By.xpath("//*[contains(text(),'"+planName+"')]/parent::div/parent::div/following-sibling::div[1]/div/div[3]/a")).click();
 		 try {

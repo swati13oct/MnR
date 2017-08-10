@@ -823,5 +823,11 @@ public class ResponsiveUhcStepDefiniton {
 		ResponsivePlanSummaryUhc planSummaryPage = (ResponsivePlanSummaryUhc) getLoginScenario().getBean(PageConstants.RESPONSIVE_PLAN_SUMMARY_PAGE_UHC);
 		planSummaryPage.navigateToStartApplication(planName);
 	}
+	
+	@And("^the user validates Prescription Drug Benefits table and dynamic footnotes$")
+	public void user_validates_prescription_table(){
+		ResponsivePlanDetailsUhc planDetailsPage = (ResponsivePlanDetailsUhc) getLoginScenario().getBean(PageConstants.RESPONSIVE_DETAILS_UHC_PAGE);
+        planDetailsPage.validatePrescriptionDrugsTab();
+	}
 }
 
