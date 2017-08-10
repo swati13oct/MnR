@@ -37,16 +37,19 @@ public class MemberNewSignInPage extends UhcDriver{
 	
 	@FindBy (id ="regbutton")
 	private WebElement registerbutton;
+	
+	@FindBy (id ="member-id")
+	private WebElement MemberId;
 
 	private WebDriver driver;
 
-	private static String PAGE_URL = MRConstants.SIGN_IN_URL;
+	
 	
 	public MemberNewSignInPage(WebDriver driver) {
 		super(driver);
 		this.driver=driver;
 		PageFactory.initElements(driver, this);
-		openAndValidate();
+		
 		
 		//CommonUtility.waitForPageLoad(driver, ClaimDetailsPage, 60);
 
@@ -55,7 +58,7 @@ public class MemberNewSignInPage extends UhcDriver{
 
 	@Override
 	public void openAndValidate() {
-		start(PAGE_URL);
+		
 		// TODO Auto-generated method stub
 
 	}
@@ -100,15 +103,17 @@ public class MemberNewSignInPage extends UhcDriver{
 
 	}
 
-	public RegistrationInformationPage clickRegisterbutton() {
+	public void  clickRegisterbutton() {
 		
 		validate(registerbutton);
-		registerbutton.click();
 		
-		if (getTitle().equalsIgnoreCase("")) {
-			return new RegistrationInformationPage(driver);
+		registerbutton.click();
+		CommonUtility.waitForPageLoad(driver, MemberId, 45);
+		
+		if (getTitle().equalsIgnoreCase("Member Registration")) {
+			System.out.println("i am in member regestration mage -------->"+ driver.getTitle());
 		}
-		return null;
+		
 		
 		
 	
