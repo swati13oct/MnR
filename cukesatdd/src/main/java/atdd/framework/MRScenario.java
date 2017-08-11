@@ -599,7 +599,10 @@ public class MRScenario {
 				capabilities.setCapability("parent-tunnel", "sauce_admin");
 				capabilities.setCapability("tunnelIdentifier",
 						"OptumSharedTunnel-Prd");
-				capabilities.setCapability("name", "MRATDD-TestSuite");
+				//capabilities.setCapability("name", "MRATDD-TestSuite");
+				capabilities.setCapability("build", System.getenv("JOB_NAME") + "__" + System.getenv("RUNNER_NUMBER"));
+				String jobName = "VBF Execution - Using " + capabilities.getBrowserName() + " in  " + System.getProperty("environment") +" environment";
+                capabilities.setCapability("name", jobName);
 				try {
 					webDriver = new RemoteWebDriver(new URL(URL), capabilities);
 				} catch (MalformedURLException e) {
