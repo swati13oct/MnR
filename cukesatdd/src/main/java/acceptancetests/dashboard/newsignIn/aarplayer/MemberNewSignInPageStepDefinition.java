@@ -36,8 +36,8 @@ public class MemberNewSignInPageStepDefinition {
 	@Given("^I am a  member on the sign-in page$")
 	public void I_am_a_memebr_on_the_signin_page (DataTable Url) throws Exception {
 
-		WebDriver wd = getLoginScenario().getWebDriver();
-		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
+		driver= getLoginScenario().getWebDriver();
+		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, driver);
 		List<DataTableRow> AttributesRow = Url
 				.getGherkinRows();
 		Map<String, String> urlAttributesMap = new HashMap<String, String>();
@@ -48,12 +48,12 @@ public class MemberNewSignInPageStepDefinition {
 					.get(0), AttributesRow.get(i).getCells().get(1));
 		}
 		String url = urlAttributesMap.get("URL");
-		wd.get(url);
+		driver.get(url);
 
-		MemberNewSignInPage sign_Page = new MemberNewSignInPage(wd);
+		MemberNewSignInPage sign_Page = new MemberNewSignInPage(driver);
 		sign_Page.validateNewSignPage();
 		if (sign_Page != null) {
-			getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
+			getLoginScenario().saveBean(CommonConstants.WEBDRIVER, driver);
 			getLoginScenario().saveBean(PageConstants.NEW_SIGN_PAGE,sign_Page);
 			Assert.assertTrue(true);
 		}
