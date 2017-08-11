@@ -9,6 +9,7 @@ import org.json.JSONObject;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.FindBys;
 import org.openqa.selenium.support.PageFactory;
 
 import acceptancetests.atdd.data.CommonConstants;
@@ -42,6 +43,9 @@ public class DrugClaimSummaryPage extends UhcDriver {
 
 	@FindBy(id = "searchRange")
 	private WebElement searchRange;
+	
+	@FindBys(value = { @FindBy(xpath = "//select[@id='searchRange']/option") })
+	private List<WebElement> searchRangeList;
 
 	@FindBy(id = "shipfromMonth")
 	private WebElement shipfromMonth;
@@ -287,10 +291,9 @@ public class DrugClaimSummaryPage extends UhcDriver {
 
 	public DrugClaimSummaryPage searchDrugClaimsByPeriod(String claimPeriod) {
 
-		searchRange.click();
-		searchRange.sendKeys(claimPeriod);
-		CommonUtility.waitForPageLoad(driver, searchbutton,CommonConstants.TIMEOUT_30);
+		selectFromDropDown(searchRangeList, claimPeriod);
 		searchbutton.click();
+		CommonUtility.waitForPageLoad(driver, searchbutton,CommonConstants.TIMEOUT_30);
 		if (driver.getTitle().equalsIgnoreCase("Claims")) {
 			return new DrugClaimSummaryPage(driver);
 		}
