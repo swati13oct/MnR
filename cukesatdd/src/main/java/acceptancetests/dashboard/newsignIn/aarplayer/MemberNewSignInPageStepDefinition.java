@@ -11,12 +11,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import acceptancetests.atdd.data.CommonConstants;
 import acceptancetests.atdd.data.member.PageConstants;
 import atdd.framework.MRScenario;
+import cucumber.annotation.en.And;
 import cucumber.annotation.en.Given;
 import cucumber.annotation.en.Then;
 import cucumber.annotation.en.When;
 import cucumber.table.DataTable;
 import gherkin.formatter.model.DataTableRow;
+import pages.dashboard.member.ulayer.ClaimSummarypage;
 import pages.dashboard.member.ulayer.MemberNewSignInPage;
+import pages.dashboard.member.ulayer.UsernamePasswordAssistancePage;
 
 
 public class MemberNewSignInPageStepDefinition {
@@ -28,6 +31,7 @@ public class MemberNewSignInPageStepDefinition {
 		return loginScenario;
 	}
 	WebDriver driver;
+
 	@Given("^I am a  member on the sign-in page$")
 	public void I_am_a_memebr_on_the_signin_page (DataTable Url) throws Exception {
 
@@ -99,10 +103,51 @@ public class MemberNewSignInPageStepDefinition {
 		System.out.println("validating the password error message ========>" + sign_Page.validatepassworderror()); 
 
 	}
+	
+	@When("^I click on the forgot your username and password link on signin page$")
+	public void clickUsernamePasswordLink() throws InterruptedException {
+		MemberNewSignInPage sign_Page =  ( MemberNewSignInPage) getLoginScenario().getBean(PageConstants.NEW_SIGN_PAGE);
+		UsernamePasswordAssistancePage usernamePasswordAssistancePage = sign_Page.clickForgotUsernamePasswordLink();
+		getLoginScenario().saveBean(PageConstants.USERNAME_PASSWORD_ASSISTANCE_PAGE,usernamePasswordAssistancePage);
+		
+		}
+		
+	@Then("^I should be taken to Username and Password Assistance page$")
+	public void verifyUsernamePasswordAssistancePage() {
+		UsernamePasswordAssistancePage usernamePasswordAssistancePage =  (UsernamePasswordAssistancePage) getLoginScenario().getBean(PageConstants.USERNAME_PASSWORD_ASSISTANCE_PAGE);
+		try {
+			Thread.sleep(5000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		Assert.assertTrue(usernamePasswordAssistancePage.currentUrl().contains("identityassistance"));
+		}
+		
+   @And("^siteID should be passed to the URL of Username and Password Assistance page$")
+	 
+       public void verifySiteID (DataTable SITEID) throws Exception {
+	   
+			List<DataTableRow> AttributesRow = SITEID
+				.getGherkinRows();
+		Map<String, String> urlAttributesMap = new HashMap<String, String>();
 
+		for (int i = 0; i < AttributesRow.size(); i++) {
 
-
+			urlAttributesMap .put(AttributesRow.get(i).getCells()
+					.get(0), AttributesRow.get(i).getCells().get(1));
+		}
+		String siteID = urlAttributesMap.get("SiteID");
+		UsernamePasswordAssistancePage usernamePasswordAssistancePage =  (UsernamePasswordAssistancePage) getLoginScenario().getBean(PageConstants.USERNAME_PASSWORD_ASSISTANCE_PAGE);
+		Assert.assertTrue(usernamePasswordAssistancePage.currentUrl().contains(siteID));
+		String PAGE_URL = usernamePasswordAssistancePage.currentUrl().toString();
+		System.out.println("Actual SiteID in the URL is "+PAGE_URL);
+		System.out.println("Expected SiteID in the URL is "+siteID);
+		    }
 }
+	
+
+
 
 
 
