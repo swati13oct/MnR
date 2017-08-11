@@ -49,4 +49,19 @@ And siteID should be passed to the URL of Username and Password Assistance page
  |https://member.team-b-uhcmedicaresolutions.uhc.com/content/dashboard/guest/signin.html|UHCM   |
  |https://www.team-b-mypcpmedicare.uhc.com/content/dashboard/guest/signin.html          |MYPCP|
 
+
+@registerbutton
+ Scenario Outline: To Verify The New Memebr  Registration Page
+  Given I am a  member on the sign-in page
+  | URL | <url> |
+  When the user click on registration page 
+  Then I should be taken to the new Registration page 
+  And I should see the SiteID that i have passed on the New Registration page
+  | RegSiteID | <regsiteID> | 
+   Examples:
+ |url                                                                                   | regsiteID |
+ |https://member.team-b-aarpmedicareplans.uhc.com/content/dashboard/guest/signin.html   |     AARP  |
+ |https://member.team-b-uhcmedicaresolutions.uhc.com/content/dashboard/guest/signin.html|     UHCM  |
+ |https://www.team-b-mypcpmedicare.uhc.com/content/dashboard/guest/signin.html          |     MYPCP |
+ 
  
