@@ -15,7 +15,7 @@ import cucumber.junit.Cucumber;
 		features = { "feature/dceacquisition/ULayer" }, 
 		format = {
 		"pretty", "html:reports/test-report","json:target/cucumber.json" }, tags ={"@acq_drug_cost_estimator"})
-public class RunMRAtddTestAcquisitionDCE {
+public class RunMRAtddTestAcquisitionDCEUlayer {
 //
 }
 

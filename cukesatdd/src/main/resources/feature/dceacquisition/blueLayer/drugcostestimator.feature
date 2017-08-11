@@ -43,7 +43,7 @@ Examples:
 |zipcode| drug |
 |90210|lipitor|
 
-@acq_drug_cost_estimator_flow
+@acq_drug_cost_estimator_blayer_flow
 Scenario Outline: As a prospective member using redesigned DCE tool on the M&R portal site on either a desktop or mobile device, I want to be able to choose a generic option if it is available from my Drug List and see any cost savings associated with it if I have selected a pharmacy so I can save on the cost of my prescription drugs.
 Given the user is on UHC medicare site landing page
 When I access the acquisition DCE tool from vpp page using below zipcode
@@ -51,9 +51,9 @@ When I access the acquisition DCE tool from vpp page using below zipcode
 And I have added a drug to my drug list
 |Drug|<drug>|
 And I navigate to step2 page
-#And the user selects the pharmacy tab information like miles, zipcode and pharmacy type 
-#| Zipcode	  | <zipcode> |
-#| Radius  | <radius>   |
+And the user selects the pharmacy tab information like miles, zipcode and pharmacy type 
+| Zipcode	  | <zipcode> |
+| Radius  | <radius>   |
 And I select the first pharmacy
 And I navigate to step3 page
 And user validates the Summary, functionality of Drugs link, Costs link and functionality of Return to Plans button

@@ -199,7 +199,8 @@ public class DrugCostEstimatorPage extends UhcDriver {
 	public WebElement left_rail_pharmacy_saving;
 
 	//@FindBy(xpath = "//p[contains(text(),'STEP3:')]/following-sibling::span[p[contains(text(),'Estimated Costs')]]")
-	@FindBy(id = "costsTabId")
+	//@FindBy(id = "costsTabId")
+	@FindBy(xpath = ".//*[@id='costsTabId']/a/span/p")
 	public WebElement step3;
 	
 	@FindBy(xpath = "//p[contains(text(),'STEP3:')]/following-sibling::span[p[contains(text(),'Summary')]]")
@@ -1464,9 +1465,12 @@ public class DrugCostEstimatorPage extends UhcDriver {
 		Thread.sleep(15000);
 		viewPlans.click();
 		WebElement view2017Plans = driver.findElement(By.linkText("View 2017 Plans"));
-		view2017Plans.click();
-		Thread.sleep(2000);
-		viewPlans.click();
+		if(view2017Plans.isDisplayed()){
+			view2017Plans.click();
+			Thread.sleep(2000);
+			
+		}
+		
 		Thread.sleep(10000);
 		List<WebElement> enterDrugInformation = driver.findElements(By.linkText("Enter drug information"));
 		List<WebElement> editDrugInformation = driver.findElements(By.linkText("Edit drug list"));
