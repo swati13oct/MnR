@@ -373,5 +373,7 @@ public class PageConstants {
 	public static final String REGISTRATION_INFORMATION_PAGE = "RegistrationInformationPage";
 
 	public static final String NEW_SIGN_PAGE = "sign_Page";
+	
+	public static final String USERNAME_PASSWORD_ASSISTANCE_PAGE = "usernamePasswordAssistancePage";
 
 }

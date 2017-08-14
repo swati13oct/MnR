@@ -11,12 +11,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import acceptancetests.atdd.data.CommonConstants;
 import acceptancetests.atdd.data.member.PageConstants;
 import atdd.framework.MRScenario;
+import cucumber.annotation.en.And;
 import cucumber.annotation.en.Given;
 import cucumber.annotation.en.Then;
 import cucumber.annotation.en.When;
 import cucumber.table.DataTable;
 import gherkin.formatter.model.DataTableRow;
+import pages.dashboard.member.ulayer.ClaimSummarypage;
 import pages.dashboard.member.ulayer.MemberNewSignInPage;
+import pages.dashboard.member.ulayer.NewMemebrRegistrationPage;
+import pages.dashboard.member.ulayer.UsernamePasswordAssistancePage;
 
 
 public class MemberNewSignInPageStepDefinition {
@@ -28,11 +32,12 @@ public class MemberNewSignInPageStepDefinition {
 		return loginScenario;
 	}
 	WebDriver driver;
+
 	@Given("^I am a  member on the sign-in page$")
 	public void I_am_a_memebr_on_the_signin_page (DataTable Url) throws Exception {
 
-		WebDriver wd = getLoginScenario().getWebDriver();
-		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
+		driver= getLoginScenario().getWebDriver();
+		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, driver);
 		List<DataTableRow> AttributesRow = Url
 				.getGherkinRows();
 		Map<String, String> urlAttributesMap = new HashMap<String, String>();
@@ -43,12 +48,12 @@ public class MemberNewSignInPageStepDefinition {
 					.get(0), AttributesRow.get(i).getCells().get(1));
 		}
 		String url = urlAttributesMap.get("URL");
-		wd.get(url);
+		driver.get(url);
 
-		MemberNewSignInPage sign_Page = new MemberNewSignInPage(wd);
+		MemberNewSignInPage sign_Page = new MemberNewSignInPage(driver);
 		sign_Page.validateNewSignPage();
 		if (sign_Page != null) {
-			getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
+			getLoginScenario().saveBean(CommonConstants.WEBDRIVER, driver);
 			getLoginScenario().saveBean(PageConstants.NEW_SIGN_PAGE,sign_Page);
 			Assert.assertTrue(true);
 		}
@@ -99,10 +104,95 @@ public class MemberNewSignInPageStepDefinition {
 		System.out.println("validating the password error message ========>" + sign_Page.validatepassworderror()); 
 
 	}
+	
+	@When("^I click on the forgot your username and password link on signin page$")
+	public void clickUsernamePasswordLink() throws InterruptedException {
+		MemberNewSignInPage sign_Page =  ( MemberNewSignInPage) getLoginScenario().getBean(PageConstants.NEW_SIGN_PAGE);
+		UsernamePasswordAssistancePage usernamePasswordAssistancePage = sign_Page.clickForgotUsernamePasswordLink();
+		getLoginScenario().saveBean(PageConstants.USERNAME_PASSWORD_ASSISTANCE_PAGE,usernamePasswordAssistancePage);
+		
+		}
+		
+	@Then("^I should be taken to Username and Password Assistance page$")
+	public void verifyUsernamePasswordAssistancePage() {
+		UsernamePasswordAssistancePage usernamePasswordAssistancePage =  (UsernamePasswordAssistancePage) getLoginScenario().getBean(PageConstants.USERNAME_PASSWORD_ASSISTANCE_PAGE);
+		try {
+			Thread.sleep(5000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		Assert.assertTrue(usernamePasswordAssistancePage.currentUrl().contains("identityassistance"));
+		}
+		
+   @And("^siteID should be passed to the URL of Username and Password Assistance page$")
+	 
+       public void verifySiteID (DataTable SITEID) throws Exception {
+	   
+			List<DataTableRow> AttributesRow = SITEID
+				.getGherkinRows();
+		Map<String, String> urlAttributesMap = new HashMap<String, String>();
 
+		for (int i = 0; i < AttributesRow.size(); i++) {
 
+			urlAttributesMap .put(AttributesRow.get(i).getCells()
+					.get(0), AttributesRow.get(i).getCells().get(1));
+		}
+		String siteID = urlAttributesMap.get("SiteID");
+		UsernamePasswordAssistancePage usernamePasswordAssistancePage =  (UsernamePasswordAssistancePage) getLoginScenario().getBean(PageConstants.USERNAME_PASSWORD_ASSISTANCE_PAGE);
+		Assert.assertTrue(usernamePasswordAssistancePage.currentUrl().contains(siteID));
+		String PAGE_URL = usernamePasswordAssistancePage.currentUrl().toString();
+		System.out.println("Actual SiteID in the URL is "+PAGE_URL);
+		System.out.println("Expected SiteID in the URL is "+siteID);
+		    }
+   @When("^the user click on registration page$")
+   public void the_user_click_on_registration_page() {
+	   MemberNewSignInPage sign_Page =  ( MemberNewSignInPage) getLoginScenario().getBean(PageConstants.NEW_SIGN_PAGE);
+	   
+	   NewMemebrRegistrationPage newMemebrRegistrationPage =  sign_Page.clickRegisterbutton();
+	   getLoginScenario().saveBean(PageConstants.NEW_REGISTRATION_PAGE,newMemebrRegistrationPage);
+      
+   }
 
+   @Then("^I should be taken to the new Registration page$")
+   public void I_should_be_taken_to_the_new_Registration_page() {
+	   NewMemebrRegistrationPage NewMemebrRegistrationPage =  (NewMemebrRegistrationPage) getLoginScenario().getBean(PageConstants.NEW_REGISTRATION_PAGE);
+		try {
+			Thread.sleep(5000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		Assert.assertTrue(NewMemebrRegistrationPage.currentUrl().contains("member-registration"));
+		}
+	   
+   
+
+   @Then("^I should see the SiteID that i have passed on the New Registration page$")
+   public void I_should_see_the_SiteID_that_i_have_passed_on_the_New_Registration_page(DataTable regsiteID) {	   
+	   
+			List<DataTableRow> AttributesRow = regsiteID
+				.getGherkinRows();
+		Map<String, String> urlAttributesMap = new HashMap<String, String>();
+
+		for (int i = 0; i < AttributesRow.size(); i++) {
+
+			urlAttributesMap .put(AttributesRow.get(i).getCells()
+					.get(0), AttributesRow.get(i).getCells().get(1));
+		}
+		String regsiteID1 = urlAttributesMap.get("RegSiteID");
+		
+		NewMemebrRegistrationPage NewMemebrRegistrationPage =  (NewMemebrRegistrationPage) getLoginScenario().getBean(PageConstants.NEW_REGISTRATION_PAGE);
+
+		Assert.assertTrue(NewMemebrRegistrationPage.currentUrl().contains(regsiteID1));
+		System.err.println("Actual SiteID in the URL is "+driver.getCurrentUrl());
+		System.err.println("Expected SiteID in the URL is "+regsiteID1);
+	          
+   }
 }
+	
+
+
 
 
 

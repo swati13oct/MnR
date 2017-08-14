@@ -156,14 +156,4 @@ Feature: To test registration flow in redesign portal
       | planMemberId | dateOfBirth |
       | 897948810    | 10-09-1946  |
       
- @registerbutton     
- Scenario Outline: To verify member is navigated to the registration plan Information page
- Given the member is on sign in page of new portal part of redesign
-  | URL | <url> |
-  And User clicks on the register button
- Examples:
- |url                                                                                  |
- |https://member.team-b-aarpmedicareplans.uhc.com/content/dashboard/guest/signin.html  |  
- |https://member.team-b-uhcmedicaresolutions.uhc.com/content/dashboard/guest/signin.html|
- |https://www.team-b-mypcpmedicare.uhc.com/content/dashboard/guest/signin.html|
-      
+ 

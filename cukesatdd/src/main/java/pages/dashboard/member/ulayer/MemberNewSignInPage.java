@@ -38,8 +38,15 @@ public class MemberNewSignInPage extends UhcDriver{
 	@FindBy (id ="regbutton")
 	private WebElement registerbutton;
 	
+	@FindBy (linkText ="Forgot your username and password?")
+	private WebElement forgotusernamepasswordlink;
+	
 	@FindBy (id ="member-id")
 	private WebElement MemberId;
+	
+	@FindBy (css = "#regbutton")
+	private WebElement regbutton;
+	
 
 	private WebDriver driver;
 
@@ -103,7 +110,7 @@ public class MemberNewSignInPage extends UhcDriver{
 
 	}
 
-	public void  clickRegisterbutton() {
+	public NewMemebrRegistrationPage  clickRegisterbutton() {
 		
 		validate(registerbutton);
 		
@@ -113,12 +120,18 @@ public class MemberNewSignInPage extends UhcDriver{
 		if (getTitle().equalsIgnoreCase("Member Registration")) {
 			System.out.println("i am in member regestration mage -------->"+ driver.getTitle());
 		}
-		
-		
-		
-	
+		return new NewMemebrRegistrationPage(driver);
 	}
-
-	
-
+		
+		public UsernamePasswordAssistancePage clickForgotUsernamePasswordLink() 
+		{
+			
+		forgotusernamepasswordlink.click();
+			
+			return new UsernamePasswordAssistancePage(driver);
+		}	
+		
+		
+		
+		
 }
