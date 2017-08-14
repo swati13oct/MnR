@@ -69,7 +69,7 @@ public class AccountHomePage extends UhcDriver {
 	@FindBy(linkText = "Premium payment information")
 	private WebElement paymentsLink;
 
-	@FindBy(xpath = "//*[@id='footer']/ul/li[1]/div[2]/div[2]/a/span")
+	@FindBy(xpath = ".//*[@id='_content_campaigns_uhcm_panelnav-planresources-main_links_jcr_content_par_teaser']/div/li/a")
 	private WebElement formsAndResourcesLink;
 
 	@FindBy(linkText = "My Profile & Preferences")

@@ -61,7 +61,7 @@ public class AccountHomePage extends UhcDriver {
 //	@FindBy(partialLinkText = "get forms & resources")
 //	private WebElement formsAndResourcesLink;
 	
-	@FindBy(xpath="//*[@id='footer']/ul/li[1]/div[2]/div[2]/a/span")
+	@FindBy(xpath=".//*[@id='_content_campaigns_aarpm_panelnav-planresources-main_links_jcr_content_par_teaser']/div/li/a")
 	private WebElement formsAndResourcesLink;
 	
 	@FindBy(xpath="//[@id='benefits']/a")
