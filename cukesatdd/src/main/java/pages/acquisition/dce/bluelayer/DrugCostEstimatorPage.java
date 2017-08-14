@@ -1464,12 +1464,15 @@ public class DrugCostEstimatorPage extends UhcDriver {
 
 		Thread.sleep(15000);
 		viewPlans.click();
-		WebElement view2017Plans = driver.findElement(By.linkText("View 2017 Plans"));
-		if(view2017Plans.isDisplayed()){
-			view2017Plans.click();
-			Thread.sleep(2000);
-			
+		List<WebElement> view2017Plans = driver.findElements(By.linkText("View 2017 Plans"));
+		if(view2017Plans.size()>0){
+			if(view2017Plans.get(0).isDisplayed()){
+				view2017Plans.get(0).click();
+				Thread.sleep(2000);
+				
+			}
 		}
+		
 		
 		Thread.sleep(10000);
 		List<WebElement> enterDrugInformation = driver.findElements(By.linkText("Enter drug information"));
