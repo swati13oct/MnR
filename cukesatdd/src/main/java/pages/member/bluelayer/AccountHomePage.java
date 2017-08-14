@@ -271,11 +271,6 @@ private WebElement claimsLink;
 
 
 
-
-
-@FindBy(linkText = "Forms and Resources")
-private WebElement FormsandResourcesLink;
-
 @FindBy(xpath ="(//a[contains(@href,'my-plans/forms-and-resources')])[4]")
 private WebElement FormsandResourcesLinkn;
 
@@ -867,7 +862,7 @@ public void FormsandResourcesLinkinPlanSummaryPageBlayer()
 	}
 	
 	public FormsandresourcesPage navigateToFormsandResourceUmsPage() {
-
+		myMenu.click();
 		formsAndResourcesLink.click();
 		CommonUtility.checkPageIsReady(driver);
 		if (driver.getTitle().equalsIgnoreCase(

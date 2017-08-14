@@ -48,6 +48,12 @@ public class MedicalEobPage {
 
 	public boolean medicalEobExists() {
 		CommonUtility.waitForPageLoad(driver, eobtable, 20);
+		try {
+			Thread.sleep(2000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		if(eobtable.getText().contains("My EOB Statements")&&eobtable.getText().contains("Download EOB (PDF)"))
 			return true;
 		return false;

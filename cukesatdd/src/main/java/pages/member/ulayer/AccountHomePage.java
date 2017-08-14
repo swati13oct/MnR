@@ -232,8 +232,6 @@ private WebElement providerSearchinPHPage1;
 @FindBy(linkText = "Claims")
 private WebElement claimsLink;
 
-@FindBy(linkText = "Forms and Resources")
-private WebElement FormsandResourcesLink;
 
 @FindBy(xpath ="(//a[contains(@href,'my-plans/forms-and-resources')])[4]")
 private WebElement FormsandResourcesLinkn;
@@ -488,7 +486,7 @@ driver.switchTo().window(mainwindow);
 	}
 
 	public FormsandresourcesPage navigateToFormsandResourceAarpPage() {
-
+		myMenuLinkAarp.click();
 		formsAndResourcesLink.click();
 		CommonUtility.checkPageIsReady(driver);
 		if (driver.getTitle().equalsIgnoreCase(
