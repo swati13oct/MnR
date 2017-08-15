@@ -536,8 +536,8 @@ public class DrugCostEstimatorPage extends UhcDriver {
 		validate(zipcodeInput);
 		validate(milesSelection);
 		step2PharmacyTab.click();
-		sendkeys(zipcodeInput, zipcode); // not sure what webelement to use
-		SearchLink.click();
+		//sendkeys(zipcodeInput, zipcode); // not sure what webelement to use
+		//SearchLink.click();
 		// Select options = new Select(milesSelection);
 		// options.selectByVisibleText(radius);
 
@@ -907,8 +907,16 @@ public class DrugCostEstimatorPage extends UhcDriver {
 	}
 
 	public void navigateToStep3() throws InterruptedException {
+		
 		waitforElement(step3);
 		step3.click();
+		Thread.sleep(10000);
+	}
+	
+public void navigateFromStep2ToStep3() throws InterruptedException {
+		WebElement nextViewCosts = driver.findElement(By.xpath(".//*[@id='drugspharmacy']/div[3]/div[1]/div/button[2]"));
+		waitforElement(nextViewCosts);
+		nextViewCosts.click();
 		Thread.sleep(10000);
 	}
 	

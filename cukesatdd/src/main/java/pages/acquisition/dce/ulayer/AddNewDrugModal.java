@@ -103,6 +103,7 @@ public class AddNewDrugModal extends UhcDriver {
 	
 	public void typeDrugName(String DrugName) {
 		drugsearchinput.sendKeys(DrugName);
+		searchButton.click();
 	}
 	public AddDrugDetails selectDrug(String drugname){
 		String xpath = "//label[contains(text(),'"+drugname+"')]/parent::div/input[contains(@id,'drugs-')]";

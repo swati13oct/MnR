@@ -396,6 +396,13 @@ public class VPPPlanSummaryPage extends UhcDriver {
 			}
 		}*/
 		
+		try {
+			Thread.sleep(6000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 		int pdpValue = Integer.parseInt(pdpPlansNumber.getText());
 		int maValue = Integer.parseInt(maPlansNumber.getText());
 		

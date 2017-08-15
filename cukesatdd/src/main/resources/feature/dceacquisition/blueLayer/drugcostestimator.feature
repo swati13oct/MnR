@@ -48,14 +48,14 @@ Scenario Outline: As a prospective member using redesigned DCE tool on the M&R p
 Given the user is on UHC medicare site landing page
 When I access the acquisition DCE tool from vpp page using below zipcode
 | Zip Code    | <zipcode>  |
-And I have added a drug to my drug list
-|Drug|<drug>|
+#And I have added a drug to my drug list
+#|Drug|<drug>|
 And I navigate to step2 page
 And the user selects the pharmacy tab information like miles, zipcode and pharmacy type 
 | Zipcode	  | <zipcode> |
 | Radius  | <radius>   |
 And I select the first pharmacy
-And I navigate to step3 page
+And I navigate to step3 page from step 2
 And user validates the Summary, functionality of Drugs link, Costs link and functionality of Return to Plans button
 
  Examples:

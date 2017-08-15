@@ -1038,6 +1038,17 @@ public class DrugcostestimatorUhcStepDefinition {
 
 	}
 	
+	@And("^I navigate to step3 page from step 2$")
+	public void I_navigate_to_step3_page_from_step2() throws InterruptedException {
+		
+		WebDriver wd = (WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
+		DrugCostEstimatorPage dce = new DrugCostEstimatorPage(wd);
+		//DrugCostEstimatorPage dce = (DrugCostEstimatorPage) getLoginScenario()
+		//		.getBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE);
+		dce.navigateFromStep2ToStep3();
+
+	}
+	
 	@And("^I navigate to step3 Summary page$")
 	public void I_navigate_to_step3_summary_page() throws InterruptedException {
 		
