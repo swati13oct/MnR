@@ -119,6 +119,8 @@ public class PageConstants {
 	public static final String MS_VPP_PAGE = "msViewPlansAndPricingPage";
 
 	public static final String SITE_MAP_PAGE = "siteMapPage";
+	
+	public static final String DRUG_COST_ESTIMATOR_PAGE = "drugCostEstimatorPage";
 
 
 	public static final String ABOUT_US_PAGE = "aboutUsPage";
