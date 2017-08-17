@@ -516,7 +516,8 @@ public class ResponsiveUhcStepDefiniton {
 	public void user_should_see_plan_count(){
 		ResponsivePlanSummaryUhc planSummary = (ResponsivePlanSummaryUhc) getLoginScenario()
 				.getBean(PageConstants.RESPONSIVE_PLAN_SUMMARY_PAGE_UHC);
-		planSummary.validatePlanCount("ma");
+		String planType = (String) getLoginScenario().getBean(VPPCommonConstants.PLAN_TYPE);
+		planSummary.validatePlanCount(planType);
 
 	}
 
@@ -845,6 +846,58 @@ public class ResponsiveUhcStepDefiniton {
 		String outofPocket    = memberAttributesMap.get("Out of Pocket");
 		ResponsivePlanDetailsUhc planDetailsPage = (ResponsivePlanDetailsUhc) getLoginScenario().getBean(PageConstants.RESPONSIVE_DETAILS_UHC_PAGE);
         planDetailsPage.validateMedicalBenefitsTable(monthlyPremium, outofPocket);
+	}
+	
+	@Then("^the add to compare checkbox message should read 1 plan added, please select another plan to continue$")
+	public void user_validates_checkbox_message_one_plan_added(){
+		ResponsivePlanDetailsUhc planDetailsPage = (ResponsivePlanDetailsUhc) getLoginScenario().getBean(PageConstants.RESPONSIVE_DETAILS_UHC_PAGE);
+		planDetailsPage.validateAddToCompareCheckboxMessage();
+	}
+	
+	@Then("^the user navigates to DCE and adds a drug$")
+	public void addADrug(DataTable givenAttributes){
+		List<DataTableRow> memberAttributesRow = givenAttributes
+				.getGherkinRows();
+		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells()
+					.get(0), memberAttributesRow.get(i).getCells().get(1));
+		}
+
+		String planName = memberAttributesMap.get("Plan Name");
+		getLoginScenario().saveBean(VPPCommonConstants.PLAN_NAME, planName);
+		String drugName    = memberAttributesMap.get("Drug Name");
+		String planType= (String) getLoginScenario().getBean(VPPCommonConstants.PLAN_TYPE);
+		ResponsivePlanSummaryUhc planSummaryPage = (ResponsivePlanSummaryUhc) getLoginScenario().getBean(PageConstants.RESPONSIVE_PLAN_SUMMARY_PAGE_UHC);
+		planSummaryPage.navigateToEstimateDrugPage(planName, planType, drugName);
+		planSummaryPage.addDrug(drugName);
+	}
+	
+	@And("^the user validates benefits table$")
+	public void user_validates_beneifts_table(){		 
+		ResponsivePlanSummaryUhc planSummaryPage = (ResponsivePlanSummaryUhc) getLoginScenario().getBean(PageConstants.RESPONSIVE_PLAN_SUMMARY_PAGE_UHC);
+		String planType = (String) getLoginScenario().getBean(VPPCommonConstants.PLAN_TYPE);
+		String planName = (String) getLoginScenario().getBean(VPPCommonConstants.PLAN_NAME);
+		planSummaryPage.validateBenefitsTableAfterAddingDrug(planType, planName);
+	}
+	
+	@And("^the user validates plan costs$")
+	public void user_validates_plan_costs(DataTable givenAttributes){
+		List<DataTableRow> memberAttributesRow = givenAttributes
+				.getGherkinRows();
+		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells()
+					.get(0), memberAttributesRow.get(i).getCells().get(1));
+		}
+
+		String highOptionalDental = memberAttributesMap.get("High Optional Dental");
+		String optionalDental = memberAttributesMap.get("Optional Dental");
+		
+		ResponsivePlanDetailsUhc planDetailsPage = (ResponsivePlanDetailsUhc) getLoginScenario().getBean(PageConstants.RESPONSIVE_DETAILS_UHC_PAGE);
+		planDetailsPage.vaidatePlanCost(highOptionalDental, optionalDental);
 	}
 }
 

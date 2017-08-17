@@ -56,10 +56,10 @@ public class ResponsivePlanSummaryUhc extends UhcDriver{
 		@FindBy(xpath="//span[contains(text(),'Enroll in plan')]")
 		private WebElement enrollbutton;
 		
-		@FindBy(xpath = "//div[@class='tab plancountheight'][2]")
+		@FindBy(xpath = "//span[@class='title' and contains(text(),'Medicare Prescription Drug Plan')]")
 		private WebElement viewPdpPlans;
 
-		@FindBy(xpath = "//span[@class='title']/span[2]")
+		@FindBy(xpath = "//span[@class='title' and contains(text(),'Medicare Special Needs Plans')]")
 		private WebElement viewSnpPlans;
 		
  		@FindBy(xpath="//*[contains(text(),'HMO')]")
@@ -262,8 +262,8 @@ public class ResponsivePlanSummaryUhc extends UhcDriver{
 			@FindBy(xpath="html/body/div[6]/div[4]/div/div/div/div/div/div/div[3]/div[1]/div/div/div/div[1]/div/div[1]/div/div[1]/div/h2")
             private WebElement viewPlanHeader;
 
-			@FindBy(xpath="//div[@class='tab plancountheight'][1]/div/span/span")
-            private WebElement maPlanCount;
+			@FindBy(xpath="//div[@class='tab plancountheight active']/div/span/span")
+            private WebElement planCount;
 			
 			/*@FindBy(xpath="//div[@class='tab plancountheight'][1]/div/span/span")
             private WebElement maPlanCount;
@@ -291,6 +291,10 @@ public class ResponsivePlanSummaryUhc extends UhcDriver{
 			//change to non-endorsed url
 			
 			private static String NON_ENDORSEDURL=MRConstants.Connector_model_url1;
+			
+			String drugCost=null;
+			
+			String pharmacyDetails=null;
 			
 	   private String urlType;  
 
@@ -635,8 +639,14 @@ public void comparePlanslnk(){
 		}
 		 return new ResponsivePlanDetailsUhc(driver);
 		 }
-		 if(planName.contains("F") || planName.contains("G")){
+		 /*if(planName.contains("F") || planName.contains("G")){
 			 driver.findElement(By.xpath("//h2[text()='"+planName+"']/parent::a/parent::div/following-sibling::div[2]/div/a")).click();
+			 return new ResponsivePlanDetailsUhc(driver);
+		 }*/if(planName.contains("PDP")){
+			 driver.findElement(By.xpath("//*[contains(text(),'"+planName+"')]/parent::div/following-sibling::div[1]/div/a[2]")).click();
+			 return new ResponsivePlanDetailsUhc(driver);
+		 }if(planName.contains("SNP")){
+			 driver.findElement(By.xpath("//*[contains(text(),'"+planName+"')]/parent::div/following-sibling::div[1]/div/a[2]")).click();
 			 return new ResponsivePlanDetailsUhc(driver);
 		 }
 		 return null;
@@ -1280,22 +1290,18 @@ public void comparePlanslnk(){
 				public void validatePlanCount(String planType){
 					List<WebElement> planCardNumber = driver.findElements(By.xpath("//div[@class='"+planType+"benefittable']"
 							+ "/parent::div/parent::div"));
-					System.out.println(planCardNumber.size());
-					if (planType.equalsIgnoreCase("PDP")) {
-  							} else if (planType.equalsIgnoreCase("MA")|| planType.equalsIgnoreCase("MAPD")) {
-  								int planCount =	Integer.parseInt(maPlanCount.getText());
-  								System.out.println(planCount);
-  								if(planCardNumber.size()==planCount){
+					 
+  								int planCountValue =	Integer.parseInt(planCount.getText());
+  								System.out.println(planCountValue);
+  								if(planCardNumber.size()==planCountValue){
   									System.out.println("------count number matches---"); 
+  									validatePlanNumbersOnEachPlanCard(planType, planCountValue, "");
   									Assert.assertTrue(true);
   								}else{
   									System.out.println("-----count number mis-match-----");
   									Assert.fail();
   								}
-  							}else if(planType.equalsIgnoreCase("MS")){
-						           showMsPlans.click();
- 						}else if(planType.equalsIgnoreCase("SNP")){
-  					}
+                             
 				}
 				public MAEnrollmentPage clicklearnmorelink(String planName) {
 					
@@ -1658,4 +1664,170 @@ public void comparePlanslnk(){
 				driver.findElement(By.xpath("//h2[text()='"+planName+"']/parent::a/parent::div/following-sibling::div[3]/div/a")).click();
 				return new ResponsivePlanSummaryUhc(driver);
 				}
+			
+			public void validatePlanNumbersOnEachPlanCard(String planType, int planCountValue, String drugName){
+				if(planType.equalsIgnoreCase("MA")){
+					List<WebElement> planCardNumber = driver.findElements(By.xpath("//h2[contains(text(),'HMO')]/parent::div/parent::div/span"));
+					for(int i=0; i<planCardNumber.size(); i++){
+						if(planCardNumber.get(i).getText().trim().equalsIgnoreCase((i+1)+" of "+planCountValue+" Plans")){
+							System.out.println((i+1)+" of "+planCountValue +" value displayed correctly on plan number "+ (i+1));
+							System.out.println(drugCost + " " +pharmacyDetails);
+						}else{							 
+							System.out.println("Value not displayed correectly on plan card number "+(i+1));
+							Assert.fail();
+						}
+					}
+				}if(planType.equalsIgnoreCase("PDP")){
+					List<WebElement> planCardNumber = driver.findElements(By.xpath("//h2[contains(text(),'PDP')]/parent::div/span"));
+					for(int i=0; i<planCardNumber.size(); i++){
+						if(planCardNumber.get(i).getText().trim().equalsIgnoreCase((i+1)+" of "+planCountValue+" Plans")){
+							System.out.println((i+1)+" of "+planCountValue +" value displayed correctly on plan number "+ (i+1));
+						}else{							 
+							System.out.println("Value not displayed correectly on plan card number "+(i+1));
+							Assert.fail();
+						}
+					}
+				}if(planType.equalsIgnoreCase("SNP")){
+					List<WebElement> planCardNumber = driver.findElements(By.xpath("//h2[contains(text(),'SNP')]/parent::div/span"));
+					for(int i=0; i<planCardNumber.size(); i++){
+						if(planCardNumber.get(i).getText().trim().equalsIgnoreCase((i+1)+" of "+planCountValue+" Plans")){
+							System.out.println((i+1)+" of "+planCountValue +" value displayed correctly on plan number "+ (i+1));
+						}else{							 
+							System.out.println("Value not displayed correectly on plan card number "+(i+1));
+							Assert.fail();
+						}
+					}
+				}
+			}
+			
+			public ResponsivePlanSummaryUhc navigateToEstimateDrugPage(String planName, String planType, String drugName){
+				if(planType.equalsIgnoreCase("MAPD")){
+					System.out.println("Inside MAPD");
+					driver.findElement(By.xpath("//*[contains(text(),'"+planName+"')]/parent::div/parent::div/"
+							+ "following-sibling::div[1]/div/div[1]/div[@class='mabenefittable']/ul/li[6]/span[2]/a")).click();					 
+				}
+				if(planType.equalsIgnoreCase("PDP")){
+					System.out.println("Inside PDP");
+					driver.findElement(By.xpath("//*[contains(text(),'"+planName+"')]/parent::div/parent::div/div[2]/div/div/div[2]/ul/li[3]/span[2]/a")).click();
+					return new ResponsivePlanSummaryUhc(driver);
+				}if(planType.equalsIgnoreCase("SNP")){
+					System.out.println("Inside SNP");
+					driver.findElement(By.xpath("//*[contains(text(),'"+planName+"')]/parent::div/following-sibling::div[1]/div/div/div[2]/ul/li[5]/span[2]/a")).click();
+					return new ResponsivePlanSummaryUhc(driver);
+				}			
+				return null;
+			}
+			
+			public ResponsivePlanSummaryUhc addDrug(String drugName){
+				try {
+					Thread.sleep(6000);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				driver.findElement(By.xpath("//*[contains(text(),'+ADD A DRUG')]")).click();
+				driver.findElement(By.id("drug-search-input")).sendKeys(drugName);
+				try {
+					Thread.sleep(5000);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				driver.findElement(By.id("drug-search-button")).click();
+				try {
+					Thread.sleep(3000);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				driver.findElement(By.id("drug-alt-search-button")).click();
+				try {
+					Thread.sleep(2000);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				driver.findElement(By.id("drug-dosage-button")).click();
+				try {
+					Thread.sleep(3000);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				driver.findElement(By.id("save-drug-button")).click();
+				try {
+					Thread.sleep(3000);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				driver.findElement(By.xpath("//*[contains(text(),'NEXT: SELECT PHARMACY')]")).click();
+				try {
+					Thread.sleep(3000);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				driver.findElement(By.xpath("//li[1]/div[1]/div[2]/button[@class='cta-button secondary select-pharmacy']")).click();
+				try {
+					Thread.sleep(6000);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				driver.findElement(By.xpath("//*[contains(text(),'NEXT:VIEW COSTS')]")).click();
+				try {
+					Thread.sleep(3000);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				pharmacyDetails = driver.findElement(By.xpath("//*[text()='Pharmacy123']/parent::a/following-sibling::div")).getText();
+				try {
+					Thread.sleep(3000);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				drugCost = driver.findElement(By.xpath("//*[text()='Costs']/parent::div/p")).getText();
+				System.out.println(pharmacyDetails + "------------" + drugCost);	
+				
+				driver.findElement(By.xpath("//*[text()='Return to plans']")).click();
+				try {
+					Thread.sleep(3000);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				return new ResponsivePlanSummaryUhc(driver);
+ 				 
+			}
+			public ResponsivePlanSummaryUhc validateBenefitsTableAfterAddingDrug(String planType, String planName){
+ 				String drugCostActual=null;
+ 				String drugCoverage=null;
+ 				WebElement editDrugLink=null;
+ 				if(planType.equalsIgnoreCase("MA")||planType.equalsIgnoreCase("MAPD")){
+ 					drugCoverage = driver.findElement(By.xpath("//*[contains(text(),'"+planName+"')]/parent::div/parent::div/following-sibling::div[1]/div/div[1]/div[2]/ul/li[7]/p")).getText();
+ 					drugCostActual = driver.findElement(By.xpath("//*[contains(text(),'"+planName+"')]/parent::div/parent::div/following-sibling::div[1]/div/div[1]/div[2]/ul/li[7]/span[2]")).getText();
+ 					editDrugLink = driver.findElement(By.xpath("//*[contains(text(),'"+planName+"')]/parent::div/parent::div/following-sibling::div[1]/div/div[1]/div[2]/ul/li[7]/a")); 								 
+ 				}if(planType.equalsIgnoreCase("PDP")){
+ 					drugCoverage = driver.findElement(By.xpath("//*[contains(text(),'"+planName+"')]/parent::div/following-sibling::div[1]/div/div/div[2]/ul/li[4]/p")).getText();
+ 					drugCostActual = driver.findElement(By.xpath("//*[contains(text(),'"+planName+"')]/parent::div/following-sibling::div[1]/div/div/div[2]/ul/li[4]/span[2]")).getText();
+ 					editDrugLink = driver.findElement(By.xpath("//*[contains(text(),'"+planName+"')]/parent::div/following-sibling::div[1]/div/div/div[2]/ul/li[4]/a"));
+ 				}if(planType.equalsIgnoreCase("SNP")){
+ 					drugCoverage = driver.findElement(By.xpath("//*[contains(text(),'"+planName+"')]/parent::div/following-sibling::div[1]/div/div/div[2]/ul/li[6]/p")).getText();
+ 					drugCostActual = driver.findElement(By.xpath("//*[contains(text(),'"+planName+"')]/parent::div/following-sibling::div[1]/div/div/div[2]/ul/li[6]/span[2]")).getText();
+ 					editDrugLink = driver.findElement(By.xpath("//*[contains(text(),'"+planName+"')]/parent::div/following-sibling::div[1]/div/div/div[2]/ul/li[6]/span[4]/a"));
+ 				}
+ 				if(drugCoverage.contains("out of 1 drugs covered")
+ 					    && editDrugLink.isDisplayed()
+ 						&& drugCostActual.equals(drugCost)){
+ 						System.out.println(drugCoverage+" =========displayed correctly");
+ 						Assert.assertTrue(true);
+ 					}else{
+ 						System.out.println("=======Drug cost not displayed corectly=============");
+ 						Assert.fail();
+ 					}	
+				return null;
+			}
 			}

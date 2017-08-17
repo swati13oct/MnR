@@ -3,12 +3,14 @@ package pages.acquisition.bluelayer;
 import java.util.ArrayList;
 
 import org.junit.Assert;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
 import atdd.framework.UhcDriver;
+import pages.acquisition.ulayer.ResponsivePlanDetails;
 import pages.member.ulayer.Rallytool_Page;
 
 public class ResponsivePlanDetailsUhc extends UhcDriver {
@@ -78,7 +80,38 @@ public class ResponsivePlanDetailsUhc extends UhcDriver {
     @FindBy (xpath="//*[@id='medicalBenefits']/div[1]/table/tbody/tr[3]/td[4]")
     private WebElement outofpocket;
     
+    @FindBy (xpath="//div[@class='col-md-9']/div[1]/div/div/div/div/span[1]/label")
+    private WebElement addToCompareCheckbox1;
+    
+    @FindBy (xpath="//div[@class='col-md-9']/div[3]/div/div/div/div/span[1]/label")
+    private WebElement addToCompareCheckbox2;
+    
+    @FindBy (xpath="//div[@class='col-md-9']/div[1]/div/div/div/div/span[2]")
+    private WebElement addToCompareMessage1For1Plan;
+    
+    @FindBy (xpath="//div[@class='col-md-9']/div[3]/div/div/div/div/span[2]")
+    private WebElement addToCompareMessage2For1Plan;
      
+    @FindBy (xpath="//*[@id='planCosts']/h3")
+    private WebElement planCostHeader;
+    
+    @FindBy (xpath="//p[text()='Drug Costs from Formulary']/following-sibling::a")
+    private WebElement planCostDrugLink;
+    
+    @FindBy (xpath="//span[@class='totalmorethanzero']/strong")
+    private WebElement estimateAnnualCost;
+    
+    @FindBy (xpath="//p[text()='High Option Dental']")
+    private WebElement highOptionPlanCost;
+    
+    @FindBy (xpath="//p[text()='High Option Dental']")
+    private WebElement optionalDentalPlanCost;
+  
+  
+    String drugCost=null;
+	
+	String pharmacyDetails=null;
+			
 	public ResponsivePlanDetailsUhc(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
@@ -206,4 +239,142 @@ public class ResponsivePlanDetailsUhc extends UhcDriver {
 			 }
 			
 		}
+	 
+	 public ResponsivePlanDetailsUhc validateAddToCompareCheckboxMessage(){
+		 validate(addToCompareCheckbox1);
+		 validate(addToCompareCheckbox2);
+		 addToCompareCheckbox1.click();
+		 System.out.println(addToCompareMessage1For1Plan.getText());
+		 System.out.println(addToCompareMessage2For1Plan.getText());
+		 if(addToCompareMessage1For1Plan.getText().equals("1 plan added, please select another plan to continue")
+				 && addToCompareMessage2For1Plan.getText().equals("1 plan added, please select another plan to continue")){
+			 System.out.println("===================1 plan added, please select another plan to continue====Message displayed correctly======");
+			 return new ResponsivePlanDetailsUhc(driver);
+		 }else{
+			 System.out.println("===================1 plan added, please select another plan to continue====Message not displayed correctly======");
+			 Assert.fail();
+		 }
+ 		 return null;
+	 }
+	 
+	 public ResponsivePlanDetails addDrug(String drugName){
+			try {
+				Thread.sleep(6000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			driver.findElement(By.xpath("//*[contains(text(),'+ADD A DRUG')]")).click();
+			driver.findElement(By.id("drug-search-input")).sendKeys(drugName);
+			try {
+				Thread.sleep(5000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			driver.findElement(By.id("drug-search-button")).click();
+			try {
+				Thread.sleep(3000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			driver.findElement(By.id("drug-alt-search-button")).click();
+			try {
+				Thread.sleep(2000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			driver.findElement(By.id("drug-dosage-button")).click();
+			try {
+				Thread.sleep(3000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			driver.findElement(By.id("save-drug-button")).click();
+			try {
+				Thread.sleep(3000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			driver.findElement(By.xpath("//*[contains(text(),'NEXT: SELECT PHARMACY')]")).click();
+			try {
+				Thread.sleep(3000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			driver.findElement(By.xpath("//li[1]/div[1]/div[2]/button[@class='cta-button secondary select-pharmacy']")).click();
+			try {
+				Thread.sleep(6000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			driver.findElement(By.xpath("//*[contains(text(),'NEXT:VIEW COSTS')]")).click();
+			try {
+				Thread.sleep(3000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			pharmacyDetails = driver.findElement(By.xpath("//*[text()='Pharmacy123']/parent::a/following-sibling::div")).getText();
+			try {
+				Thread.sleep(3000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			drugCost = driver.findElement(By.xpath("//*[text()='Costs']/parent::div/p")).getText();
+			System.out.println(pharmacyDetails + "------------" + drugCost);	
+			
+			driver.findElement(By.xpath("//*[text()='Return to plans']")).click();
+			try {
+				Thread.sleep(3000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			return new ResponsivePlanDetails(driver);
+			 
+		}
+	 
+	 public ResponsivePlanDetailsUhc vaidatePlanCost(String highOptionalDental, String optionalDental){
+		 planCostsTab.click();
+	     waitforElement(planCostHeader);
+		 validate(planCostHeader);
+		 validate(planCostDrugLink);
+		 if(highOptionalDental.equals("true")){
+			 if(highOptionPlanCost.isDisplayed()){
+				 highOptionPlanCost.click();
+				 if(highOptionalDentalDollarValue.getText().equals(estimateAnnualCost.getText())){
+					 System.out.println("Estimate annual value displayed correctly for high optional dental");
+				 }else{
+					 System.out.println("Estimate annual value not displayed correctly for high optional dental");
+					 Assert.fail();
+				 }
+				 
+			 }else{
+				 System.out.println("High optional check box not displayed");
+				 Assert.fail();
+			 }
+		 }if(optionalDental.equals("true")){
+			 if(optionalDentalPlanCost.isDisplayed()){
+				 optionalDentalPlanCost.click();
+				 if(optionalDentalDollarValue.getText().equals(estimateAnnualCost.getText())){
+					 System.out.println("Estimate annual value displayed correctly for optional dental");
+				 }else{
+					 System.out.println("Estimate annual value not displayed correctly for optional dental");
+					 Assert.fail();
+				 }
+			 }else{
+				 System.out.println("Optional Dental check box not displayed");
+				 Assert.fail();
+			 }
+		 }
+		 return null;
+	 }
 }
