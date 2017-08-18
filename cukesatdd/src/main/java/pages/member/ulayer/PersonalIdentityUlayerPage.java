@@ -24,41 +24,26 @@ public class PersonalIdentityUlayerPage extends UhcDriver {
 	private WebElement Cancel;
 	
 	@FindBy(xpath = ".//*[@id='sign-in-form']/fieldset/div[1]/label[1]")
-	private WebElement MemberId;
+	private WebElement MemberId;	
 	
 	@FindBy(id = "missingerror")
 	private WebElement ErrorMessage;
-	
-	@FindBy(id = "member-idErr")
-	private WebElement MemberIdErrorMessage;
-	
-	@FindBy(id = "dobGroup")
-	private WebElement DOBErrorMessage;
-	
-	@FindBy(id = "lastnameErr")
-	private WebElement LastNameErr;
-	
-	@FindBy(id = "invalidzipErr")
-	private WebElement InvalidZipErr;
-	
-	@FindBy(id = "missing-additional-btn")
-	private WebElement ContinuePI;
+			
 	
 	public PersonalIdentityUlayerPage(WebDriver driver) {
 		super(driver);
-		PageFactory.initElements(driver, this);
-		System.out.println("In console");
+		PageFactory.initElements(driver, this);		
 		openAndValidate();
 		
 	}
 
 	@Override
 	public void openAndValidate() {
-		driver.get("https://member."+MRScenario.environment+"-aarpmedicareplans.uhc.com/content/dashboard/guest/unpwclient.html#/identityassistance");
+		driver.get("https://member."+MRScenario.TeamCEnvironment+"-aarpmedicareplans.uhc.com/content/dashboard/guest/username-and-password-assistance.html#/identityassistance");
 		}
 	
 	
-	public PersonalIdentityUlayerPage navigateToPersonalIdentificationPage() throws InterruptedException {
+	public PersonalIdentificationPageNew navigateToPersonalIdentificationPage() throws InterruptedException {
 		System.out.println("In PI method");
 		Thread.sleep(2000);
 		Username.click();
@@ -70,25 +55,14 @@ public class PersonalIdentityUlayerPage extends UhcDriver {
 		Thread.sleep(7000);
 		if(MemberId.getText().contains("Member ID Number"))
 		{
-			return new PersonalIdentityUlayerPage(driver);
+			return new PersonalIdentificationPageNew(driver);
 		}
 		return null;
 	}
 
-	public PersonalIdentityUlayerPage ErrorMessageValidation() throws InterruptedException {
-		System.out.println("In ErrorMessage method");
-		Thread.sleep(2000);		
-		Continue.click();
-		System.out.println("Continue Clicked");
-		Thread.sleep(2000);
-		if(ErrorMessage.getText().contains("This field is required"))
-		{
-			return new PersonalIdentityUlayerPage(driver);
-		}
-		return null;
-	}
+
 	
-	public PersonalIdentityUlayerPage SignInPageMovement() throws InterruptedException {
+	public LoginPage SignInPageMovement() throws InterruptedException {
 		System.out.println("In Sign In Movement method");
 		Thread.sleep(2000);		
 		Cancel.click();
@@ -96,27 +70,25 @@ public class PersonalIdentityUlayerPage extends UhcDriver {
 		Thread.sleep(2000);
 		if(driver.getTitle().equalsIgnoreCase("signin"))
 		{
-			return new PersonalIdentityUlayerPage(driver);
+			return new LoginPage(driver);
 		}
 		return null;
 	}
 	
 	
-	public PersonalIdentityUlayerPage PIErrorMessageValidation() throws InterruptedException {
-		Username.click();
-		Password.click();
+	public PersonalIdentificationPageNew ErrorMessageValidation() throws InterruptedException {
+		System.out.println("In ErrorMessage method");
+		Thread.sleep(2000);		
 		Continue.click();
-		Thread.sleep(5000);
-		ContinuePI.click();
-		Thread.sleep(1000);
-		if(MemberIdErrorMessage.getText().contains("This field is required") &&
-				DOBErrorMessage.getText().contains("Please complete all date fields") &&
-				LastNameErr.getText().contains("This field is required") &&
-				InvalidZipErr.getText().contains("Please enter valid zipcode"))
-		{	
-			return new PersonalIdentityUlayerPage(driver);
+		System.out.println("Continue Clicked");
+		Thread.sleep(2000);
+		if(ErrorMessage.getText().contains("This field is required"))
+		{
+			return new PersonalIdentificationPageNew(driver);
 		}
 		return null;
 	}
+
+	
 	
 }

@@ -23,6 +23,7 @@ import pages.acquisition.ulayer.PersonalIdentificationPage;
 import pages.member.ulayer.LoginAssistanceConfirmationJava;
 //import pages.member.ulayer.LoginAssistanceConfirmationJava;
 import pages.member.ulayer.LoginPage;
+import pages.member.ulayer.PersonalIdentificationPageNew;
 import pages.member.ulayer.PersonalIdentityUlayerPage;
 import acceptancetests.atdd.data.CommonConstants;
 import acceptancetests.atdd.data.acquisition.PageConstants;
@@ -95,7 +96,7 @@ public class LoginAssistanceAarpStepDefintion {
 		//LoginPage loginPage = new LoginPage(wd);
         PersonalIdentityUlayerPage PIUPage = new PersonalIdentityUlayerPage(wd);
         Thread.sleep(2000);
-		PersonalIdentityUlayerPage loginAssistancePage = PIUPage.navigateToPersonalIdentificationPage();
+        PersonalIdentificationPageNew loginAssistancePage = PIUPage.navigateToPersonalIdentificationPage();
 				if (loginAssistancePage != null) {
 			getLoginScenario().saveBean(PageConstants.SignIN_Page,
 					loginAssistancePage);
@@ -115,7 +116,7 @@ public class LoginAssistanceAarpStepDefintion {
 		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
 		PersonalIdentityUlayerPage PIUPage = new PersonalIdentityUlayerPage(wd);
 		Thread.sleep(3000);
-		PersonalIdentityUlayerPage loginAssistancePage = PIUPage.navigateToPersonalIdentificationPage();
+		PersonalIdentificationPageNew loginAssistancePage = PIUPage.navigateToPersonalIdentificationPage();
 		if (loginAssistancePage != null) {
 			getLoginScenario().saveBean(PageConstants.LOGIN_ASSISTANCE_PAGE,
 					loginAssistancePage);
@@ -136,8 +137,8 @@ public class LoginAssistanceAarpStepDefintion {
 		//LoginPage loginPage = new LoginPage(wd);
         PersonalIdentityUlayerPage PIUPage = new PersonalIdentityUlayerPage(wd);
         Thread.sleep(3000);
-		PersonalIdentityUlayerPage loginAssistancePage = PIUPage.navigateToPersonalIdentificationPage();
-		PersonalIdentityUlayerPage ErrorMessagesCorrect = loginAssistancePage.PIErrorMessageValidation();
+        PersonalIdentificationPageNew loginAssistancePage = PIUPage.navigateToPersonalIdentificationPage();
+        PersonalIdentificationPageNew ErrorMessagesCorrect = loginAssistancePage.PIErrorMessageValidation();
 				if (ErrorMessagesCorrect != null) {
 			getLoginScenario().saveBean(PageConstants.SignIN_Page,
 					ErrorMessagesCorrect);
@@ -149,12 +150,12 @@ public class LoginAssistanceAarpStepDefintion {
 	}
 	
 	
-	@Then("^user clicks on continue button and user validates error messages$")
+	/*@Then("^user clicks on continue button and user validates error messages$")
 	public void ErrorValidation() throws InterruptedException {
 		System.out.println("In Error Validation method Method");		
 		PersonalIdentityUlayerPage ErrorValidation = (PersonalIdentityUlayerPage) getLoginScenario()
 				.getBean(PageConstants.LOGIN_ASSISTANCE_PAGE);  		
-		PersonalIdentityUlayerPage ErrorMessagesCorrect = ErrorValidation.PIErrorMessageValidation();
+		PersonalIdentityUlayerPage ErrorMessagesCorrect = ErrorValidation.ErrorMessageValidation();
 				if (ErrorMessagesCorrect != null) {
 			getLoginScenario().saveBean(PageConstants.SamePage,
 					ErrorMessagesCorrect);
@@ -163,7 +164,7 @@ public class LoginAssistanceAarpStepDefintion {
 			Assert.fail("Error loading Personal Identity Page");
 		}
 
-	}
+	}*/
 	
 	
 	@Given("^user is on Identity Assistance page and selects Nothing then user should be displayed error message$")
@@ -173,7 +174,7 @@ public class LoginAssistanceAarpStepDefintion {
 		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);		
         PersonalIdentityUlayerPage PIUPage = new PersonalIdentityUlayerPage (wd);
 		Thread.sleep(2000);
-		PersonalIdentityUlayerPage loginAssistancePage = PIUPage.ErrorMessageValidation();
+		PersonalIdentificationPageNew loginAssistancePage = PIUPage.ErrorMessageValidation();
 				if (loginAssistancePage != null) {
 			getLoginScenario().saveBean(PageConstants.SignIN_Page,
 					loginAssistancePage);
@@ -192,7 +193,7 @@ public class LoginAssistanceAarpStepDefintion {
 		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);		
         PersonalIdentityUlayerPage PIUPage = new PersonalIdentityUlayerPage (wd);
 		Thread.sleep(2000);
-		PersonalIdentityUlayerPage loginAssistancePage = PIUPage.SignInPageMovement();
+		LoginPage loginAssistancePage = PIUPage.SignInPageMovement();
 				if (loginAssistancePage != null) {
 			getLoginScenario().saveBean(PageConstants.SignIN_Page,
 					loginAssistancePage);

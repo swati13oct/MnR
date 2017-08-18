@@ -24,7 +24,8 @@ public class AutomaticPaymentSubmittedPage extends UhcDriver{
 	@FindBy(xpath=".//*[@id='generatePdf']/div[1]/div/div/div/div[2]/div[1]/div[2]/span[1]")
 	private WebElement PaymentType;
 	
-	@FindBy(xpath=".//*[contains(text(),'Payment Date')]/following-sibling::div/span")
+	//@FindBy(xpath=".//*[contains(text(),'Payment Date')]/following-sibling::div/span")
+	@FindBy(xpath=".//*[@id='generatePdf']/div[1]/div/div/div/div[2]/div[2]/div[2]/span")	
 	private WebElement TimeStamp;
 	
 	@FindBy(xpath=".//*[contains(text(),'Payment Amount')]/following-sibling::div/span")
