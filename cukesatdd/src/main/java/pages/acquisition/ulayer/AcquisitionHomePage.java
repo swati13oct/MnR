@@ -526,11 +526,21 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	}
 	
 		public PharmacySearchPage navigateToPharmacyLocator() {
+			
 		findapharmacylink.click();
 		//driver.navigate().to("MAPD_REQUEST_PLAN_URL");
-		if (getTitle().equalsIgnoreCase("Find a Pharmacy | AARP® Medicare Plans from UnitedHealthcare®")) {
-			return new PharmacySearchPage(driver);
+		try {
+			Thread.sleep(10000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
+		System.out.println(driver.getTitle());
+		if (driver.getTitle().equalsIgnoreCase("Locate a Pharmacy | UnitedHealthcare®")) {
+			System.out.println();
+			return new PharmacySearchPage(driver);
+			
 		}
 		return null;
 	}

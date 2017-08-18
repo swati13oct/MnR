@@ -10,6 +10,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.junit.Assert;
+import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
@@ -40,13 +41,13 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	@FindBy(xpath = "//a[text()='Passport Flyer (PDF)']")
 	private WebElement PassportFlyerPDF;
 	
-	@FindBy(xpath = "//div[@class='maplans_planbutton']/div[2]/div[2]/div")
+	@FindBy(xpath = "(.//*[@class='trigger-closed'])[1]")
 	private WebElement showMaPlans;
 
-	@FindBy(xpath = "//div[@class='pdpplans_planbutton']/div[2]/div[2]/div")
+	@FindBy(xpath = "(.//*[@class='trigger-closed'])[3]")
 	private WebElement showPdpPlans;
 
-	@FindBy(xpath = "//div[@class='snpplans_planbutton']/div[2]/div[2]/div")
+	@FindBy(xpath = "(.//*[@class='trigger-closed'])[2]")
 	private WebElement showSnpPlans;
 
 	@FindBy(xpath = "//div[@class='medsupplans_planbutton']/div[2]/div[1]/a")
@@ -108,6 +109,15 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	
 	@FindBy(xpath = "//div[@id='maplans_container']/div[3]/div/div[2]/div[1]/div/div[1]/div[1]/div/div[1]/div[2]/table/tbody/tr/td[3]/div/div[2]/div[3]/div[1]/p/a")
 	private WebElement MaProviderLink;
+	
+	@FindBy(xpath = "(.//*[contains(text(),'View')])[12]")
+	private WebElement planYear;
+	
+	@FindBy(xpath = "(//span[contains(text(),'Enroll in plan')])[1]")
+	private WebElement enrollNowbtn;
+	
+	@FindBy(xpath = ".//*[@id='continueEnrollment']/span")
+	private WebElement onlineEnrollmentlnk;
 
 
 	private PageData vppPlanSummary;
@@ -263,16 +273,16 @@ public class VPPPlanSummaryPage extends UhcDriver {
 
 	}
 
-	@Override
+	/*@Override
 	public void openAndValidate() {
 		validate(showMaPlans);
 		validate(showMsPlans);
 		validate(showPdpPlans);
 		validate(showSnpPlans);
 		vppPlanSummaryJson = formJsonObject(vppPlanSummary);
-	}
-
-	public JSONObject getPlanSummaryActualData(String planName) {
+	}*/
+   
+	/*public JSONObject getPlanSummaryActualData(String planName) {
 		String fileName = null;
 		if (planName.contains("SNP")) {
 			fileName = "snpplansummary.json";
@@ -299,8 +309,8 @@ public class VPPPlanSummaryPage extends UhcDriver {
 
 		return null;
 	}
-
-	private JSONObject getActualJsonObject(String fileName, String planName,
+*/
+	/*private JSONObject getActualJsonObject(String fileName, String planName,
 			WebElement planContainer) {
 
 		vppPlanSummary = CommonUtility.readPageData(fileName,
@@ -329,12 +339,12 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		}
 		return null;
 	
-	}
+	}*/
 
-	public String viewplans(String planName) {
+	/*public String viewplans(String planName) {
 		// TODO Auto-generated method stub
 		return null;
-	}
+	}*/
 	
 	public EstimateDrugCostPage navigateToSummaryPage(String planType) {
 		if (planType.equalsIgnoreCase("PDP")) {
@@ -560,6 +570,43 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		}
 		// TODO Auto-generated method stub
 		return true;
+		
+	}
+	
+	public VPPPlanSummaryPage verifyPDPCards(){
+		List<WebElement> webElements =driver.findElements(By.xpath("(.//*[@class='swiper-wrapper'])[2]/div"));
+		for(int i=0;i<webElements.size();i++){
+			System.out.println(webElements.get(i).findElement(By.xpath(".//h2")).getText());
+		}
+		if(webElements.get(0).findElement(By.xpath(".//h2")).getText().equals("AARP MedicareRx Walgreens (PDP)")&&webElements.get(1).findElement(By.xpath(".//h2")).getText().equals("Symphonix Value Rx (PDP)")&&webElements.get(2).findElement(By.xpath(".//h2")).getText().equals("AARP MedicareRx Preferred (PDP)")
+				&& webElements.get(3).findElement(By.xpath(".//h2")).getText().equals("AARP MedicareRx Saver Plus (PDP)")){
+			
+		}
+		else{
+			Assert.fail("Order is not correct");
+		}
+		
+		return null;
+		
+	}
+	
+	public VPPPlanSummaryPage enrollNowbtn(){
+		enrollNowbtn.click();
+		onlineEnrollmentlnk.click();		
+		System.out.println("Online enrollment tool launched");
+		return null;
+	}
+	
+	public VPPPlanSummaryPage planYear(){
+		planYear.click();
+		showMaPlans.click();
+		return null;
+		
+	}
+
+	@Override
+	public void openAndValidate() {
+		// TODO Auto-generated method stub
 		
 	}
 }

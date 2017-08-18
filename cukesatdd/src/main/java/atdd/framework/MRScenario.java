@@ -111,7 +111,7 @@ public class MRScenario {
 
               props = getProperties();
               browser = props.get("browser");
-              /* Set acqusisition and member urls */
+              /* Set acquisition and member urls */
               environment = props.get("Environment");
 
               /* Set up DB */
@@ -864,13 +864,13 @@ public class MRScenario {
     	   
     	   								/****FIrefox Browser******/
            
-           /*if (null == webDriver) {
+           if (null == webDriver) {
                     File pathToBinary = new File("C:/Users/tpravee2/AppData/Local/Mozilla Firefox/firefox.exe");
                     FirefoxBinary ffBinary = new FirefoxBinary(pathToBinary);
                     FirefoxProfile firefoxProfile = new FirefoxProfile();
                     webDriver = new FirefoxDriver(ffBinary, firefoxProfile);
                     webDriver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
-            }*/
+            }
     	   
     	   										/****PhantomJS*******/
     	   

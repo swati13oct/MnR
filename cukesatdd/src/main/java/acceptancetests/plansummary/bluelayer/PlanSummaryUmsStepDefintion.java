@@ -266,7 +266,8 @@ public class PlanSummaryUmsStepDefintion {
 	 @Then("^user validate view details button is not displayed for  group LIS 3$")
 	  
 	 public void user_validates_view_button()
-	    {PlanSummaryPage planSummaryPage = (PlanSummaryPage) getLoginScenario().getBean(PageConstants.PLAN_SUMMARY_PAGE);
+	    {
+		 PlanSummaryPage planSummaryPage = (PlanSummaryPage) getLoginScenario().getBean(PageConstants.PLAN_SUMMARY_PAGE);
 
 			
 			boolean flagValue=planSummaryPage.validateViewDetailsButton();
@@ -276,6 +277,46 @@ public class PlanSummaryUmsStepDefintion {
 				Assert.assertTrue(false);
  }
 }
+	 @Given("^the user is on the vpp portfolio page$")
+     public void user_on_aarp_ourPlans_page(){
+             WebDriver wd = getLoginScenario().getWebDriver();
+             PlanSummaryPage ourPlans = new PlanSummaryPage(wd);
+
+             getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
+             getLoginScenario().saveBean(PageConstants. PLAN_SUMMARY_PAGE, ourPlans);
+     }
+	 
+	 /*@Then("^the user performs plan search using zipcode$")
+     public void user_planSearch_with_zipcode(DataTable givenAttributes){
+             List<DataTableRow> memberAttributesRow = givenAttributes
+                             .getGherkinRows();
+             Map<String, String> memberAttributesMap = new HashMap<String, String>();
+             for (int i = 0; i < memberAttributesRow.size(); i++) {
+
+                     memberAttributesMap.put(memberAttributesRow.get(i).getCells()
+                                     .get(0), memberAttributesRow.get(i).getCells().get(1));
+             }
+
+             String zipcode = memberAttributesMap.get("Zip Code");
+             getLoginScenario().saveBean(VPPCommonConstants.ZIPCODE, zipcode);
+             String county = memberAttributesMap.get("County");
+             getLoginScenario().saveBean(VPPCommonConstants.COUNTY, county);
+             PortfolioPageUhc PortfolioPageUhc = (PortfolioPageUhc) getLoginScenario()
+                             .getBean(PageConstants. PORTFOLIO_PAGE_UHC);
+             ResponsivePlanSummaryUhc vppPlan = PortfolioPageUhc.searchPlans(zipcode, county);
+             if(vppPlan!=null){
+                     getLoginScenario().saveBean(PageConstants.RESPONSIVE_PLAN_SUMMARY_PAGE_UHC, vppPlan);
+             }else{
+                     Assert.fail();
+             }
+     }*/
+	 
+	 
+	 
+	 
+	 
+	 
+	 
 }
 
 

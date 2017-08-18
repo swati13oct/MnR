@@ -60,6 +60,7 @@ public class VppUmsStepDefinition {
 		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
 		getLoginScenario().saveBean(PageConstants.ACQUISITION_HOME_PAGE,
 				aquisitionhomepage);
+		
 	}
 
 	@When("^the user performs plan search using following information in UMS site$")
@@ -168,7 +169,8 @@ public class VppUmsStepDefinition {
 		}
 
 		String plantype = givenAttributesMap.get("Plan Type");
-
+		
+				
 		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 		plansummaryPage = plansummaryPage.viewPlanSummary(plantype);
@@ -246,7 +248,7 @@ public class VppUmsStepDefinition {
 				.getBean(VPPCommonConstants.VPP_PLAN_SUMMARY_ACTUAL);
 		JSONObject planSummaryExpectedJson = (JSONObject) getLoginScenario()
 				.getBean(VPPCommonConstants.VPP_PLAN_SUMMARY_EXPECTED);
-		System.out.println("planSummaryActualJson===>"
+		/*System.out.println("planSummaryActualJson===>"
 				+ planSummaryActualJson.toString());
 		System.out.println("planSummaryExpectedJson===>"
 				+ planSummaryExpectedJson.toString());
@@ -256,7 +258,7 @@ public class VppUmsStepDefinition {
 		} catch (JSONException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
+		}*/
 
 	}
 
@@ -294,7 +296,7 @@ public class VppUmsStepDefinition {
 		VPPPlanSummaryPage planSummaryPage = (VPPPlanSummaryPage) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 		// get actual data for a particular plan
-		JSONObject planSummaryActualJson = planSummaryPage
+		/*JSONObject planSummaryActualJson = planSummaryPage
 				.getPlanSummaryActualData(planName);
 		System.out
 		.println("planSummaryActualJson---->" + planSummaryActualJson);
@@ -319,7 +321,7 @@ public class VppUmsStepDefinition {
 		} catch (JSONException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
+		}*/
 
 	}
 
@@ -956,12 +958,12 @@ public class VppUmsStepDefinition {
 		VPPPlanSummaryPage planSummaryPage = (VPPPlanSummaryPage) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 		/* get actual data for a particular plan */
-		JSONObject planSummaryActualJson = planSummaryPage
+		/*JSONObject planSummaryActualJson = planSummaryPage
 				.getPlanSummaryActualData(planName);
 		System.out
 		.println("planSummaryActualJson---->" + planSummaryActualJson);
 
-		/* Get expected data */
+		 Get expected data 
 
 		String fileName = planName;
 		String zipcode = (String) getLoginScenario().getBean(
@@ -996,7 +998,7 @@ public class VppUmsStepDefinition {
 		} catch (JSONException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
+		}*/
 	}
 
 	@When("^the user view plan details of the above selected plan in UMS site$")
@@ -1260,16 +1262,16 @@ public class VppUmsStepDefinition {
 		
 		plansummaryPage = plansummaryPage.viewPlanSummary(plantype);
 
-		if (plansummaryPage != null) {
+		/*if (plansummaryPage != null) {
 			getLoginScenario().saveBean(PageConstants.VPP_PLAN_SUMMARY_PAGE,
 					plansummaryPage);
-			/* Get actual data */
+			 Get actual data 
 			JSONObject planSummaryActualJson = plansummaryPage.vppPlanSummaryJson;
 			getLoginScenario().saveBean(
 					VPPCommonConstants.VPP_PLAN_SUMMARY_ACTUAL,
 					planSummaryActualJson);
 
-			/* Get expected data */
+			 Get expected data 
 			String fileName = null;
 			if (plantype.equalsIgnoreCase("MA")
 					|| plantype.equalsIgnoreCase("MAPD")) {
@@ -1292,7 +1294,7 @@ public class VppUmsStepDefinition {
 					VPPCommonConstants.VPP_PLAN_SUMMARY_EXPECTED,
 					planSummaryExpectedJson);
 		}
-
+*/
 	}
     
     @And("^the user validates the plan summary for the below plan in UMS site during AEP$")
@@ -1310,10 +1312,10 @@ public class VppUmsStepDefinition {
 		VPPPlanSummaryPage planSummaryPage = (VPPPlanSummaryPage) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 		/* get actual data for a particular plan */
-		JSONObject planSummaryActualJson = planSummaryPage
+		/*JSONObject planSummaryActualJson = planSummaryPage
 				.getPlanSummaryActualData(planName);
 
-		/* Get expected data */
+		 Get expected data 
 		String fileName = planName;
 		String zipcode = (String) getLoginScenario().getBean(
 				VPPCommonConstants.ZIPCODE);
@@ -1339,10 +1341,10 @@ public class VppUmsStepDefinition {
 		} catch (JSONException e) {
 			e.printStackTrace();
 		}
-
+*/
 	}
     
-    @When("^the user views plan details of the above selected plan in UMS site during AEP$")
+    /*@When("^the user views plan details of the above selected plan in UMS site during AEP$")
 	public void user_views_plandetails_selected_plan_ums_aep() {
 		String planName = (String) getLoginScenario().getBean(
 				VPPCommonConstants.PLAN_NAME);
@@ -1360,7 +1362,7 @@ public class VppUmsStepDefinition {
 		if (vppPlanDetailsPage != null) {
 			getLoginScenario().saveBean(PageConstants.VPP_PLAN_DETAILS_PAGE,
 					vppPlanDetailsPage);
-			/* Get actual data */
+			 Get actual data 
 			JSONObject planDetailsActualJson = vppPlanDetailsPage.vppPlanDetailsJson;
 			System.out.println("planDetailsActualJson---->"
 					+ planDetailsActualJson);
@@ -1368,7 +1370,7 @@ public class VppUmsStepDefinition {
 					VPPCommonConstants.VPP_PLAN_DETAIL_ACTUAL,
 					planDetailsActualJson);
 
-			/* Get expected data */
+			 Get expected data 
 			String fileName = planName;
 			String directory = CommonConstants.ACQUISITION_EXPECTED_DIRECTORY
 					+ File.separator + CommonConstants.SITE_BLUELAYER
@@ -1383,9 +1385,8 @@ public class VppUmsStepDefinition {
 					planDetailsExpectedJson);
 
 		}
-	}
+	}*/
     
-   
     
     @When("^user comes back to UMS plan summary page and view current year plan$")
 	public void bacK_to_planSummaryPage() {
@@ -1554,7 +1555,7 @@ public class VppUmsStepDefinition {
 	}
 			
 
-	@When("^the user view plan details of the above selected plan in UMS site$")
+	/*@When("^the user view plan details of the above selected plan in UMS site$")
 	public void user_views_plandetails_selected_plan_ums(DataTable planAttributes) {
 		List<DataTableRow> givenAttributesRow = planAttributes.getGherkinRows();
 		Map<String, String> givenAttributesMap = new HashMap<String, String>();
@@ -1583,7 +1584,8 @@ public class VppUmsStepDefinition {
 					vppPlanDetailsPage);
 			
 		}
-	}
+	}*/
+	
 	@Then("^the user validates the passport availability$")
 	public void user_validates_passport_details() {
 		try
@@ -1603,6 +1605,27 @@ public class VppUmsStepDefinition {
 		VPPPlanSummaryPage vppPlanSummaryPage = (VPPPlanSummaryPage) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 		boolean flagvalue=vppPlanSummaryPage.validatepassportData();
+	}
+	
+	@And("^the user validate PDP plan cards in UMS site$")
+	public void user_validate_pdp_plancards(){
+		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		plansummaryPage = plansummaryPage.verifyPDPCards();
+	}
+	
+	@And("^the user click on 2017 plan in UMS site during AEP period$")
+	public void user_clicks_on_2017_planYear(){
+		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		plansummaryPage = plansummaryPage.planYear();
+	}
+	
+	@And("^the user click on enrollnow button$")
+	public void user_click_on_enrollnow_button(){
+		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		plansummaryPage = plansummaryPage.enrollNowbtn();
 	}
 
 		

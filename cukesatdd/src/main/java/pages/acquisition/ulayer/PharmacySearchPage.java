@@ -34,7 +34,7 @@ public class PharmacySearchPage extends UhcDriver {
 	@FindBy(id = "showresults")
 	private WebElement distanceField;
 
-	@FindBy(id = "continue")
+	@FindBy(id = "zipcode-button")
 	private WebElement continueField;
 
 	@FindBy(id = "selectcounty_box")
@@ -103,7 +103,7 @@ public class PharmacySearchPage extends UhcDriver {
 	@FindBy(xpath = "(//*[@id='lang-select']//option)[2]")
 	private WebElement chineseLink;
 	
-	@FindBy(xpath = "(.//*[@id='e8ac2588-cc57-4f00-af99-e99f38d2e3ea_toolTip']")
+	@FindBy(xpath = ".//*[@tabindex='0']")
 	private WebElement toolTip;
 	
 	@FindBy(xpath = ".//*[@for='pharmacy-saver']")
@@ -138,7 +138,7 @@ public class PharmacySearchPage extends UhcDriver {
 			}
 		}
 		if (driver.getTitle().equalsIgnoreCase(
-				"Find a Pharmacy | AARP® Medicare Plans from UnitedHealthcare®")) {
+				"Locate a Pharmacy | UnitedHealthcare®")) {
 			return new PharmacySearchPage(driver);
 		}
 		return null;
@@ -146,7 +146,7 @@ public class PharmacySearchPage extends UhcDriver {
 	}
 
 	//selectFromDropDown(planNamesList, planName);
-	public PharmacySearchPage selectsPlanName() {
+	public PharmacySearchPage selectsPlanName(String planName) {
 		try {
 			Thread.sleep(3000);
 		} catch (InterruptedException e) {
@@ -154,7 +154,7 @@ public class PharmacySearchPage extends UhcDriver {
 			e.printStackTrace();
 		}
 		Select select = new Select(planType);	
-		select.selectByIndex(1);
+		select.selectByVisibleText(planName);
 		return new PharmacySearchPage(driver);
 	}
 
@@ -324,7 +324,7 @@ public class PharmacySearchPage extends UhcDriver {
 	}
 	
 	public PharmacySearchPage navigateToToolTipPharmacySaver() {
-		toolTip.click();
+		validate(toolTip);
 			try {
 			Thread.sleep(1000);
 			} catch (InterruptedException e) {

@@ -166,7 +166,7 @@ And user verify enroll now link for next year MA/MAPD/PDP plans during AEP perio
 Examples:
 
 	| zipcode | county             | plantype |  planName                                             |  		 
-  	| 90210   | Los Angeles County | MA       |  AARP MedicareComplete SecureHorizons Plan 1 (HMO)    |
+  	| 90210   | Los Angeles County | MAPD       |  AARP MedicareComplete SecureHorizons Plan 1 (HMO)    |
 #	| 90210   | Los Angeles County | PDP      |  AARP MedicareRx Preferred (PDP)					  |
 	
 
@@ -270,6 +270,38 @@ And the user validates the passport availability
 	
 Examples:
 	| zipcode |  plantype | planName                                               |
-        | 06001   |   MA      | AARP MedicareComplete Choice (Regional PPO)            |
-  
+  | 06001   |   MA      | AARP MedicareComplete Choice (Regional PPO)            |
+        
+@pdpPlansCard 
+ Scenario Outline: Verify pdp plan cards
+Given the user is on the AARP medicare site landing page
+When the user performs plan search using following information in AARP site during AEP period
+	| Zip Code    | <zipcode> |
+	| County Name | <county>  |
+#Then user validates plan count for all plan types on plan summary page in AARP site
+When the user views plans of the below plan type in AARP site during AEP
+	| Plan Type | <plantype> |
+Then the user validates the available plans for selected plan types in AARP site
 
+Examples:
+	| zipcode |county     |plantype|planName|
+	| 60646   |Cook County|PDP		 |AARP MedicareRx Walgreens (PDP)|
+	
+@AEP  
+Scenario Outline: Verify Enroll now link on plan summary page in AARP site for AEP only from 15th October till 30th November
+Given the user is on the aquisition AARP medicare site home page 
+When the user performs plan search using following information in aquisition AARP site during AEP period
+	| Zip Code    | <zipcode> |
+	| County Name | <county>  |
+Then user select MA/MAPD/PDP plans on plan summary page using following information during AEP period
+	| Plan Type | <plantype> |
+	| Plan Name | <planName> |
+And the user click on 2017 plan in UMS site during AEP period
+And the user click on enrollnow button during AEP period
+
+Examples:
+
+	| zipcode | county             | plantype |  planName                                             |  		 
+  | 90210   | Los Angeles County | MAPD       |  AARP MedicareComplete SecureHorizons Plan 2 (HMO)    |
+#	| 90210   | Los Angeles County | PDP      |  AARP MedicareRx Preferred (PDP)					  |
+	

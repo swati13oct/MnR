@@ -4,6 +4,7 @@
 package pages.acquisition.bluelayer;
 
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -15,6 +16,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.FindBys;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.Select;
 
 import acceptancetests.atdd.data.CommonConstants;
 import acceptancetests.atdd.data.ElementData;
@@ -22,6 +24,7 @@ import acceptancetests.atdd.data.PageData;
 import acceptancetests.atdd.util.CommonUtility;
 import atdd.framework.MRScenario;
 import atdd.framework.UhcDriver;
+import pages.acquisition.bluelayer.PharmacySearchPage;
 
 /**
  * @author pagarwa5
@@ -88,9 +91,21 @@ public class PharmacySearchPage extends UhcDriver {
 	
 	@FindBy(className = "dceBlueBtn")
 	WebElement selectLink;
+	
+	@FindBy(id = "zipcode-button")
+	private WebElement searchbtn;
 
 	@FindBy(className = "rowBorder")
 	List<WebElement> pharmacyRows;
+	
+	@FindBy(id = "plan-year")
+	private WebElement planYearDropDown;
+	
+	@FindBy(id = "plan-type")
+	private WebElement planType;
+	
+	@FindBy(xpath = "//h2[contains(text(),'Pharmacy Saver offers prescriptions as low as $XX.XX')]")
+	private WebElement pharmacySaverWidget;
 	
 	public JSONObject availablePharmaciesJson;
 	
@@ -116,9 +131,11 @@ public class PharmacySearchPage extends UhcDriver {
 			String distance, String county) {
 
 		sendkeys(zipcodeField, zipcode);
-		selectFromDropDown(distanceDropDown, distance);
+		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+		searchbtn.click();
+		/*selectFromDropDown(distanceDropDown, distance);
 
-		continueField.click();
+		continueField.click();*/
 		CommonUtility.checkPageIsReady(driver);
 		if (countyPopOut.isDisplayed()) {
 			for (WebElement webElement : countyList) {
@@ -132,6 +149,8 @@ public class PharmacySearchPage extends UhcDriver {
 				"Locate a Pharmacy | UnitedHealthcare®")) {
 			return new PharmacySearchPage(driver);
 		}
+		
+		
 		return null;
 	}
 
@@ -369,5 +388,53 @@ public class PharmacySearchPage extends UhcDriver {
 		return pharmacyTable.getText();
 	}
 	
+ public PharmacySearchPage selectYear() {
+		
+		Select dropDown = new Select(planYearDropDown);		
+		try {
+			Thread.sleep(5000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		dropDown.selectByValue("1");
+		try {
+			Thread.sleep(5000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return new PharmacySearchPage(driver);
+
+	}
+
+  public PharmacySearchPage selectsPlanName() {
+	try {
+		Thread.sleep(3000);
+	} catch (InterruptedException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
+	Select select = new Select(planType);	
+	select.selectByIndex(1);
+	return new PharmacySearchPage(driver);
+}
+  public PharmacySearchPage validatesPharmacySaverWidget() {
+		
+		boolean present;
+		try {
+			validate(pharmacySaverWidget);
+			present = true;
+		} catch (NoSuchElementException e) {
+			present = false;
+		}
+
+		if(present)
+			System.out.println("@@@@@@@@@ Able to find Pharmacy Saver widget @@@@@@@@@");
+		else
+			System.out.println("@@@@@@@@@ No Pharmacy Saver widget @@@@@@@@@");
+		return null;
+		
+	}
 
 }

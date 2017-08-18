@@ -798,4 +798,10 @@ public class CommonConstants {
 	public static final String NEW_PAYMENT_HISTORY_ACTUAL_JSON = "newPaymentHistoryActualJSON";
 	public static final String NEW_PAYMENT_HISTORY_EXPECTED_JSON = "newPaymentHistoryexpectedJSON";
 
+	public static final String DCEstimator = "DCEstimator.json";
+	
+	public static final String SAVE_DRUG_PAGE_DATA="savedrugpagedata.json";
+	
+	
+
 }

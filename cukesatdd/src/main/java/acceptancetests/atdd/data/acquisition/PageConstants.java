@@ -347,5 +347,23 @@ public class PageConstants {
 	public static final String LOGIN_ASSISTANCE_PERSONAL_IDENTIFICATION_ERROR_SCENARIO = "personalIdentificationErrorActualJson";
 
 	public static final String VPP_REQUEST_SEND_EMAIL_PAGE = "vppRequestSendEmailPage";
+	
+	public static final String PORTFOLIO_PAGE = "portfoliopage";
+	
+	public static final String PORTFOLIO_PAGE_UHC = "ourPlans";
+
+	public static final String RESPONSIVE_PLAN_SUMMARY_PAGE = "responsivePlanSummaryPage";
+	
+	public static final String RESPONSIVE_PLAN_SUMMARY_PAGE_UHC = "vppPlan";
+	
+	public static final String RESPONSIVE_DETAILS_PAGE = "responsiveDetailsPage";
+    
+	public static final String TeamC_Plan_Compare_Page = "TeamCPlanComparePage";
+	
+	public static final String TeamC_FootNotes_Section = "TeamCFootNotesSection";
+	
+	public static final String RESPONSIVE_DETAILS_UHC_PAGE = "responsiveDetailsUHCPage";
+
+	
 
 }

@@ -118,12 +118,12 @@ public class PharmacyLocatorAarpStepDefinition {
 		}
 		
 		String year = planAttributesMap.get("year");
-		//String planName = planAttributesMap.get("Plan Name");		
+		String planName = planAttributesMap.get("Plan Name");		
 
 		PharmacySearchPage pharmacySearchPage = (PharmacySearchPage) getLoginScenario()
 				.getBean(PageConstants.PHARMACY_SEARCH_PAGE);
 		pharmacySearchPage = pharmacySearchPage.selectYear();
-		pharmacySearchPage = pharmacySearchPage.selectsPlanName();
+		pharmacySearchPage = pharmacySearchPage.selectsPlanName(planName);
 		
 		if (pharmacySearchPage != null) {
 			getLoginScenario().saveBean(PageConstants.PHARMACY_SEARCH_PAGE,
@@ -141,7 +141,7 @@ public class PharmacyLocatorAarpStepDefinition {
 		PharmacySearchPage pharmacySearchPage = (PharmacySearchPage) getLoginScenario()
 				.getBean(PageConstants.PHARMACY_SEARCH_PAGE);
 		
-		PharmacySearchPage pharmacyResultPage = pharmacySearchPage.selectsPlanName();	
+		//PharmacySearchPage pharmacyResultPage = pharmacySearchPage.selectsPlanName();	
 		
 
 		/*String planName = planAttributes.getGherkinRows().get(0).getCells()

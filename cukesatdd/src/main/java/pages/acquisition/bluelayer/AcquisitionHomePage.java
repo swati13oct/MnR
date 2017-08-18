@@ -27,6 +27,7 @@ import pages.acquisition.bluelayer.RequestHelpAndInformationPage;
 import pages.acquisition.ulayer.MaViewPlansAndPricingPage;
 import pages.acquisition.ulayer.MsViewPlansAndPricingPage;
 import pages.acquisition.ulayer.PdpViewPlansAndPricingPage;
+import pages.acquisition.bluelayer.PharmacySearchPage;
 
 public class AcquisitionHomePage extends GlobalWebElements {
 
@@ -354,7 +355,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 			System.out.println("county box not found");
 		}
 		if (driver.getTitle().equalsIgnoreCase(
-				"Our Medicare Plan Types | UnitedHealthcare®")) {
+				"Our Medicare Plan Types | UnitedHealthcare®") || driver.getTitle().equalsIgnoreCase("plans")) {
 			return new VPPPlanSummaryPage(driver);
 		}
 		return null;
@@ -377,8 +378,8 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		} catch (Exception e) {
 			System.out.println("county box not found");
 		}
-		if (getTitle().equalsIgnoreCase(
-				"Our Medicare Plan Types | UnitedHealthcare®")) {
+		System.out.println(driver.getTitle());
+		if (driver.getTitle().equalsIgnoreCase("Our Medicare Plan Types | UnitedHealthcare®")||driver.getTitle().equalsIgnoreCase("plans")) {
 			return new VPPPlanSummaryPage(driver);
 		}
 		return null;
@@ -1030,6 +1031,15 @@ public class AcquisitionHomePage extends GlobalWebElements {
 					if (driver.getTitle().equalsIgnoreCase(
 							"Our Medicare Plan Types | UnitedHealthcare®")) {
 						return new VPPPlanSummaryPage(driver);
+					}
+					return null;
+				}
+				
+				public PharmacySearchPage navigateToRequestMoreHelp() {
+					driver.navigate().to("https://www.team-a-uhcmedicaresolutions.uhc.com/health-plans/medicare-advantage-plans/request-information.html");
+					if (getTitle().equalsIgnoreCase("Request Information about Medicare Advantage Plans | UnitedHealthcare®")) {
+						return new PharmacySearchPage(driver);
+
 					}
 					return null;
 				}

@@ -1206,6 +1206,11 @@ System.out.println("planSummaryExpectedJson---->"
 		if (plansummaryPage != null) {
 			getLoginScenario().saveBean(PageConstants.VPP_PLAN_SUMMARY_PAGE,
 					plansummaryPage);
+		}else
+		{
+			Assert.fail();
+		}
+		
 			/* Get actual data */
 			JSONObject planSummaryActualJson = plansummaryPage.vppPlanSummaryJson;
 			getLoginScenario().saveBean(
@@ -1236,7 +1241,7 @@ System.out.println("planSummaryExpectedJson---->"
 					planSummaryExpectedJson);
 		}
 
-	}
+	
 
 	@And("^the user validates the plan summary for the below plan in AARP site during AEP$")
 	public void user_validates_plan_summary_aep(DataTable planAttributes) {
@@ -1639,6 +1644,26 @@ System.out.println("planSummaryExpectedJson---->"
 		else
 			Assert.assertFalse(false);
 	}
+	
+	@And("^the user click on 2017 plan in UMS site during AEP period$")
+	public void user_clicks_on_2017_planYear(){
+		VPPPlanSummaryPage vppPlanSummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		try {
+			vppPlanSummaryPage.planYear();
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	@And("^the user click on enrollnow button during AEP period$")
+	public void user_click_on_enrollnow_button(){
+		VPPPlanSummaryPage vppPlanSummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		vppPlanSummaryPage.enrollNowbtn();
+	}
+	
 
 	
 
