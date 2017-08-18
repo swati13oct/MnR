@@ -311,7 +311,13 @@ public class PharmacySearchPage extends UhcDriver {
 	
 	public PharmacySearchPage navigateToPharmacySearchResult() {
 		
-		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+		//driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+		try {
+			Thread.sleep(5000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		filterLink.click();
 		
 		return null;
