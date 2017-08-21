@@ -18,3 +18,20 @@ And I navigate to step3 page and validate
  Examples:
 | drug|zipcode| radius|
 | Lipitor TAB 10MG| 90210 | 15miles |
+
+
+@dceVppUlayer
+Scenario Outline: To test the dce vpp flow
+Given the user is on ulayer medicare acq site landing page
+When I access the acquisition DCE tool from vpp page using below zipcode
+	| Zip Code    | <zipcode>  |
+And I have added a drug to my drug list
+	|Drug|<drug>|
+And I navigate to step2 page
+And I select the first pharmacy
+And I navigate to step3 page and validate
+	|Drug|<drug>|
+	
+Examples:
+| zipcode  |   drug   | 
+| 90210    | Lipitor TAB 10MG|

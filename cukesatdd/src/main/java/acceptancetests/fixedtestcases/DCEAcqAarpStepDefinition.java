@@ -65,6 +65,25 @@ public class DCEAcqAarpStepDefinition {
 		dce.navigateToDCEToolFromHome();;
 	}
 	
+	@When("^I access the acquisition DCE tool from vpp page using below zipcode$")
+	public void I_access_the_DCE_tool_vpp_page(DataTable memberAttributes) throws InterruptedException {
+		List<DataTableRow> memberAttributesRow = memberAttributes
+				.getGherkinRows();
+		Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells()
+					.get(0), memberAttributesRow.get(i).getCells().get(1));
+		}
+
+		String zipcode = memberAttributesMap.get("Zip Code");
+		
+		WebDriver wd = (WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
+
+		DrugCostEstimatorPage dce = new DrugCostEstimatorPage(wd);
+		dce.navigateToDCEToolFromvpp(zipcode);
+	}
+	
 	@When("^I have added a drug to my drug list$")
 	public void I_have_added_a_drug_to_my_drug_list(DataTable data) throws InterruptedException {
 		List<DataTableRow> memberAttributesRow = data.getGherkinRows();

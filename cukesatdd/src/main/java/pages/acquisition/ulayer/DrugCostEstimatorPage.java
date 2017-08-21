@@ -78,7 +78,7 @@ public class DrugCostEstimatorPage extends UhcDriver {
 	@FindBy(id = "dce-pharmacy-radius")
 	public WebElement milesSelection;
 
-	@FindBy(id = "zipcode")
+	@FindBy(id = "cta-zipcode")
 	public WebElement zipcodeInput;
 
 	@FindBy(xpath = "//div[@class='inputRadioButtons']/div[1]/p")
@@ -131,7 +131,7 @@ public class DrugCostEstimatorPage extends UhcDriver {
 
 	@FindBy(xpath = "//div[@id='pharmacy-results']//span[contains(@class,'pharmacy-name')]")
 	public List<WebElement> pharmacies;
-	
+	               
 	@FindBy(xpath = ".//*[@id='pharmacy-results']/div[2]/ul[1]/li[1]/div/div[2]/button")
 	public WebElement select_btn_first;
 
@@ -317,7 +317,7 @@ public class DrugCostEstimatorPage extends UhcDriver {
 	@FindBy(id = "zipcodebtn")
 	public WebElement zipcodeFindPlans;
 
-	@FindBy(xpath = ".//*[@id='site-wrapper']/div[4]/div/div[1]/div[1]/div/div/div[1]/div/div/div[1]/div[2]/div/div[2]/div[1]/div/span[3]")
+	@FindBy(xpath = ".//*[@id='site-wrapper']/div[4]/div/div[1]/div/div/div/div/div[1]/div/div/div[1]/div[2]/div/div[2]/div[1]")
 	public WebElement viewPlans;
 
 	@FindBy(xpath = "//nav/ul[@class='uhc-pagination']/li[1]")
@@ -717,7 +717,7 @@ public class DrugCostEstimatorPage extends UhcDriver {
 			select_btn_first.click();
 		}
 		System.out.println("first pharmacy 2");
-		Thread.sleep(5000);
+		Thread.sleep(10000);
 	}
 
 	public void validate_cost_saving_present(String pharmacy_type) {
@@ -1383,11 +1383,11 @@ public class DrugCostEstimatorPage extends UhcDriver {
 		zipcodeInput.sendKeys(zipcode);
 		zipcodeFindPlans.click();
 
-		Thread.sleep(15000);
+		Thread.sleep(10000);
 
 		viewPlans.click();
-		Thread.sleep(10000);
-		List<WebElement> enterDrugInformation = driver.findElements(By.linkText("Edit drug list"));
+		Thread.sleep(5000);
+		List<WebElement> enterDrugInformation = driver.findElements(By.id("maDCELink"));
 		enterDrugInformation.get(0).click();
 		Thread.sleep(1000);
 
