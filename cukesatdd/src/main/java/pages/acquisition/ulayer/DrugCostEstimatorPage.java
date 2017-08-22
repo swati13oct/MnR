@@ -78,8 +78,11 @@ public class DrugCostEstimatorPage extends UhcDriver {
 	@FindBy(id = "dce-pharmacy-radius")
 	public WebElement milesSelection;
 
+	@FindBy(id = "zipcode")
+	public WebElement zipcodeInput; // zipcode in step 2 in dce flow
+	
 	@FindBy(id = "cta-zipcode")
-	public WebElement zipcodeInput;
+	public WebElement zipcodeBtn; //zipcode on acq home page
 
 	@FindBy(xpath = "//div[@class='inputRadioButtons']/div[1]/p")
 	public WebElement StandardNetworkPharmaciesRadioButton;
