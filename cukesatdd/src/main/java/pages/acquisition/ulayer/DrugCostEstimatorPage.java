@@ -1383,7 +1383,7 @@ public class DrugCostEstimatorPage extends UhcDriver {
 		 * driver.get(NewDCEUrl);
 		 */
 		driver.manage().window().maximize();
-		zipcodeInput.sendKeys(zipcode);
+		zipcodeBtn.sendKeys(zipcode);
 		zipcodeFindPlans.click();
 
 		Thread.sleep(10000);
