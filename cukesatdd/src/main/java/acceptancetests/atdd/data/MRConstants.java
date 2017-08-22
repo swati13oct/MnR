@@ -233,4 +233,8 @@ public static String CAMPAIGN_PAGE_URL1 = "https://www."+MRScenario.environment+
   public static final String TeamH_ULayer_Member_URL = "https://member.team-h-aarpmedicareplans.uhc.com";
   
   public static final String TeamH_BLayer_Member_URL = "https://member.team-h-uhcmedicaresolutions.uhc.com";
+  
+  public static String TeamC_MultipleEmail_address_URL = "https://member."+MRScenario.TeamCEnvironment+"-uhcmedicaresolutions.uhc.com/content/dashboard/guest/multipleemailaddress.html";
+  
+  
 }

@@ -100,3 +100,27 @@ Examples:
    | planType1 | planType2 |
 #   | PDP       | HIP       |
 #   | MA        | HIP       |
+
+
+Scenario Outline: Verify Error messages in aarp member site for combo members
+Given the user is on the AARP Ulayer site login page
+When the user logs in with a registered AMP with following details in AARP site
+	| Plan Type 1        | <planType1>              |
+Then the user validates multiple email address page
+Then User selects different mail option and clicks on continue to validate error messages
+
+Examples:
+   | planType1 |
+   | COMBO |
+
+@US621839
+Scenario: Verify Error messages in aarp member site for multiple Email address page
+Given the user is on the multipleEmailAddressPage and clicks on continue
+
+@US621839
+Scenario: Verify Error messages in aarp member site for multiple Email address page
+Given the user is on the multipleEmailAddressPage and enters invalid email address
+
+@US621839
+Scenario: Verify Error messages in aarp member site for multiple Email address page
+Given the user is on the multipleEmailAddressPage and enters does not enters same email address

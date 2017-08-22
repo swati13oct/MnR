@@ -21,6 +21,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import pages.member.ulayer.AccountHomePage;
 import pages.member.ulayer.LoginPage;
+import pages.member.ulayer.MultipleEmailAddressNewPage;
+import pages.member.ulayer.PersonalIdentityUlayerPage;
 import pages.member.ulayer.TerminatedHomePage;
 import acceptancetests.atdd.data.CommonConstants;
 import acceptancetests.atdd.data.member.PageConstants;
@@ -52,6 +54,16 @@ public class LoginAarpStepDefinition {
 		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
 
 		LoginPage loginPage = new LoginPage(wd);
+		getLoginScenario().saveBean(PageConstants.LOGIN_PAGE, loginPage);
+	}
+	
+	@Given("^the user is on the AARP Ulayer site login page$")
+	public void user_Ulayer_login_page()
+	{
+		WebDriver wd = getLoginScenario().getWebDriver();
+		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
+
+		PersonalIdentityUlayerPage loginPage = new PersonalIdentityUlayerPage(wd);
 		getLoginScenario().saveBean(PageConstants.LOGIN_PAGE, loginPage);
 	}
 	
@@ -105,19 +117,19 @@ public class LoginAarpStepDefinition {
 		if (accountHomePage != null) {
 			getLoginScenario().saveBean(PageConstants.ACCOUNT_HOME_PAGE,
 					accountHomePage);
-			Assert.assertTrue(true);
+			/*Assert.assertTrue(true);
 			JSONObject accountHomeActualJson = accountHomePage.accountHomeJson;
 			getLoginScenario().saveBean(
 					LoginCommonConstants.ACCOUNT_HOME_ACTUAL,
 					accountHomeActualJson);
 			
-			/* Get expected data */
+			 Get expected data 
 			Map<String, JSONObject> expectedDataMap = loginScenario
 					.getExpectedJson(userName);
 			JSONObject accountHomeExpectedJson = accountHomePage
 					.getExpectedData(expectedDataMap);
 			getLoginScenario().saveBean(LoginCommonConstants.ACCOUNT_HOME_EXPECTED,
-					accountHomeExpectedJson);
+					accountHomeExpectedJson);*/
 	
 	
 	}
@@ -210,6 +222,40 @@ public class LoginAarpStepDefinition {
 		accountHomePage.logOut();
 
 	}
+	
+	
+	@Then("^the user validates multiple email address page11$")
+	public void EmailMultipleAddress_validation() throws InterruptedException {
+
+		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario()
+				.getBean(PageConstants.ACCOUNT_HOME_PAGE);
+	    AccountHomePage MultipleEmailPage = accountHomePage.ValidateMultipleEmailAddress();
+	    if(MultipleEmailPage!=null){
+	    	getLoginScenario().saveBean(PageConstants.MULTIPLE_EMAIL_ADDRESS,
+	    			MultipleEmailPage);
+			Assert.assertTrue(true);
+		} else {
+			Assert.fail("Multiple Email page not found");
+		}
+         
+	}
+	
+	
+	@Then("^the user validates multiple email address page$")
+	public void EmailMultipleAddresses_validation() throws InterruptedException {
+
+		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario()
+				.getBean(PageConstants.ACCOUNT_HOME_PAGE);
+	    AccountHomePage MultipleEmailPage = accountHomePage.ValidateMultipleEmailAddress();
+	    if(MultipleEmailPage!=null){
+	    	getLoginScenario().saveBean(PageConstants.MULTIPLE_EMAIL_ADDRESS,
+	    			MultipleEmailPage);
+			Assert.assertTrue(true);
+		} else {
+			Assert.fail("Multiple Email page not found");
+		}
+         
+	}
 
 	@Then("^the user validates terminated plan details$")
 	public void login_terminate_validation() {
@@ -246,7 +292,40 @@ public class LoginAarpStepDefinition {
 				Assert.fail("Aboutus page not found");
 			}
 	}
-		
+	
+	@Given("^the user is on the multipleEmailAddressPage and clicks on continue$")
+	public void Multiple_Email_address()
+	{
+		WebDriver wd = getLoginScenario().getWebDriver();
+		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
+
+		MultipleEmailAddressNewPage loginPage = new MultipleEmailAddressNewPage(wd);
+		getLoginScenario().saveBean(PageConstants.LOGIN_PAGE, loginPage);
+		AccountHomePage accountHomePage = loginPage.ClickOnContinue();
+	}
+	
+	@Given("^the user is on the multipleEmailAddressPage and enters invalid email address$")
+	public void Invallid_Email_address() throws InterruptedException
+	{
+		WebDriver wd = getLoginScenario().getWebDriver();
+		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
+
+		MultipleEmailAddressNewPage loginPage = new MultipleEmailAddressNewPage(wd);
+		getLoginScenario().saveBean(PageConstants.LOGIN_PAGE, loginPage);
+		AccountHomePage accountHomePage = loginPage.EnterInvalidMail();
+	}
+	
+	@Given("^the user is on the multipleEmailAddressPage and enters does not enters same email address$")
+	public void NotMatching_Email_address() throws InterruptedException
+	{
+		WebDriver wd = getLoginScenario().getWebDriver();
+		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
+
+		MultipleEmailAddressNewPage loginPage = new MultipleEmailAddressNewPage(wd);
+		getLoginScenario().saveBean(PageConstants.LOGIN_PAGE, loginPage);
+		AccountHomePage accountHomePage = loginPage.ConfirmMailIssue();
+	}
+	
 
 	@After
 	public void tearDown() {

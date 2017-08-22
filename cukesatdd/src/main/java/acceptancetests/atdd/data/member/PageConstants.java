@@ -194,5 +194,7 @@ public class PageConstants {
 	public static final String ADD_DRUG_DETAILS = "addDrugDetails";
 	
 	public static final String SAVING_OPPORTUNITY = "savingopportunity";
+	
+	public static final String MULTIPLE_EMAIL_ADDRESS = "multipleEmailAddress";
 
 }

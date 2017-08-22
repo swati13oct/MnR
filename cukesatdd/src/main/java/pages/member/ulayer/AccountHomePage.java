@@ -151,6 +151,9 @@ public class AccountHomePage extends UhcDriver {
 	@FindBy(id = "setupautopayment")
 	private WebElement AutomaticPaymentButton;
 	
+	@FindBy(xpath = ".//*[@id='emailOption.label']/strong")
+	private WebElement MultipleEmailAddressMessage;
+	
 	private PageData myAccountHome;
 	
 	private static String EOB_DIRECT_URL = MRConstants.EOB_DIRECT_URL;
@@ -627,5 +630,23 @@ public class AccountHomePage extends UhcDriver {
 		}
 		return null;
 	}
+	
+	public AccountHomePage ValidateMultipleEmailAddress() throws InterruptedException{
+		Thread.sleep(10000);
+ 		if(MultipleEmailAddressMessage.getText().equalsIgnoreCase("Which email address would you like to use?")){
+        return new AccountHomePage(driver);
+		}
+		return null;
+	}
+	
+
+	public AccountHomePage SelectDifferentEmailAddress() throws InterruptedException{
+		Thread.sleep(10000);
+ 		if(MultipleEmailAddressMessage.getText().equalsIgnoreCase("Which email address would you like to use?")){
+        return new AccountHomePage(driver);
+		}
+		return null;
+	}
+	
 
 }
