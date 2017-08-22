@@ -4,13 +4,18 @@
 package pages.member.bluelayer;
 
 import java.util.List;
+
+import org.apache.poi.util.SystemOutLogger;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.springframework.util.Assert;
 
 import acceptancetests.atdd.data.PageData;
@@ -104,6 +109,14 @@ public class ProfilePreferencesPage extends UhcDriver {
 	@FindBy(xpath = "//*[@id='tab-1']/div[2]/div[1]/div/div[1]/div[1]/div/div/div/div[2]/div[2]/div/div/span[2]")
 	private WebElement EmailValue;
 
+	@FindBy(xpath = "//*[@id='tab-1']/div[3]/div[1]/div/div[1]/div/div/div/div[2]/div[2]/div/div/div/div[1]/p")
+	private WebElement PermanentAddressHeader;
+
+	@FindBy(linkText = "contact us")
+	private WebElement ContactUs;
+
+	
+
 	public void openAndValidate() {
 
 		JSONObject jsonObject = new JSONObject();
@@ -159,7 +172,6 @@ public class ProfilePreferencesPage extends UhcDriver {
 		validate(Passwordtext);
 		validate(EditLink);
 		validate(EditButton);
-	
 
 	}
 
@@ -191,7 +203,7 @@ public class ProfilePreferencesPage extends UhcDriver {
 	}
 
 	public void validateCancelButton() {
-		//EditLink.click();
+		// EditLink.click();
 		CancelButton.click();
 		Assert.isTrue(Password.isDisplayed());
 
@@ -209,7 +221,7 @@ public class ProfilePreferencesPage extends UhcDriver {
 	}
 
 	public void SaveEmailEdit() {
-		
+
 		NewEmail.sendKeys("a" + EmailValue.getText());
 		emailConfirm.sendKeys("a" + EmailValue.getText());
 		SaveEmailButton.click();
@@ -218,8 +230,26 @@ public class ProfilePreferencesPage extends UhcDriver {
 	public void validateEmailCancelButton() {
 
 		CanceEmaillButton.click();
-		
+
+	}
+
+	public void permanentAddressHeader() {
+		// TODO Auto-generated method stub
+		validateNew(PermanentAddressHeader);
+	}
+
+	public void validateContactUs() {
+		// TODO Auto-generated method stub
+		validateNew(ContactUs);
 	
+		if (ContactUs.isDisplayed()) {
+			ContactUs.click();
+			WebDriverWait wait = new WebDriverWait(driver, 60);
+			
+			wait.until(ExpectedConditions.visibilityOfElementLocated(By.className("fd_navHome")));
+			System.out.println(driver.getTitle());
+			Assert.isTrue(driver.getTitle().equalsIgnoreCase("UnitedHealthcare Medicare Solutions | Contact Us"));
+		}
 	}
 
 }

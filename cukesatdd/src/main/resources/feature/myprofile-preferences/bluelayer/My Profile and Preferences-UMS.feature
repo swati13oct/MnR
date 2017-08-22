@@ -174,3 +174,16 @@ Examples:
     #| PDP     |
      #| MAPD     |
      | MA       |
+     
+  @PermanentAddress
+ Scenario Outline: To verify Permanent Address in UMS site
+    Given registered UHC with following details for Profile and Preferences flow in UMS site
+      | <planType> |
+    Then the user navigates to Profile and Preferences page
+    Then the user validates the permanent address Header
+    Then the user validates the ContactUs Link
+
+       Examples: 
+      | planType |
+     | MAPD     |
+    # | MA       |

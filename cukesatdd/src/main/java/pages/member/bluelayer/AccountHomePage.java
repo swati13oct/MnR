@@ -649,7 +649,7 @@ public class AccountHomePage extends UhcDriver {
 		// driver.manage().timeouts().implicitlyWait(40, TimeUnit.SECONDS);
 		System.out.println(driver.getTitle());
 
-		if (driver.getTitle().equalsIgnoreCase("My Profile & Preferences")) {
+		if (driver.getTitle().equalsIgnoreCase("profileandpreferences")) {
 			return new ProfilePreferencesPage(driver);
 		}
 

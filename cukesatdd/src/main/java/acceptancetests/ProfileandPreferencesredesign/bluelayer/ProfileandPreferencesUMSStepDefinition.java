@@ -170,5 +170,21 @@ public class ProfileandPreferencesUMSStepDefinition {
 		ProfilePreferencesPage.validateCancelButton();
 	
 	}
+	@Then("^the user validates the permanent address Header")
+	public void UserValidatespermanentaddressHeader() {
+		ProfilePreferencesPage ProfilePreferencesPage = (ProfilePreferencesPage) getLoginScenario()
+				.getBean(PageConstants.ProfilePreferencesPage);
+
+		ProfilePreferencesPage.permanentAddressHeader();
+		
+	}
+	@Then("^the user validates the ContactUs Link")
+	public void UserValidatesContactUsLink() {
+		ProfilePreferencesPage ProfilePreferencesPage = (ProfilePreferencesPage) getLoginScenario()
+				.getBean(PageConstants.ProfilePreferencesPage);
+
+		ProfilePreferencesPage.validateContactUs();
+	
+	}
 	
 }
