@@ -195,7 +195,7 @@ public class AccountHomePage extends UhcDriver {
 	@FindBy(linkText = "Go to benefits and coverage page page")
 	private WebElement BnClink2;
 
-	@FindBy(linkText = "Go to Go to my profile and preferences redesign page")
+	@FindBy(linkText = "Go to redesign my profile and preferences page")
 	private WebElement ProfileandPrefLink;
 	
 
@@ -800,7 +800,7 @@ public FormsandresourcesPage navigateToMydocumentAarpPage() {
 			//driver.manage().timeouts().implicitlyWait(40, TimeUnit.SECONDS);
 			System.out.println(driver.getTitle());
 			
-		 if(driver.getTitle().equalsIgnoreCase("My Profile & Preferences")){
+		 if(driver.getTitle().equalsIgnoreCase("profileandpreferences")){
 		        return new pages.member.ulayer.ProfileandPreferencesPage(driver);
 			}
 			return null;

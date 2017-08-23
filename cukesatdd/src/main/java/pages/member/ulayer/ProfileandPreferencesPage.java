@@ -28,6 +28,7 @@ import atdd.framework.UhcDriver;
 
 public class ProfileandPreferencesPage extends UhcDriver {
 
+	public JSONObject ProfileandPreferencesJson;
 	@FindBy(xpath = "//*[@id='tab-1']//div[1]//div//h2")
 	private WebElement planName;
 
@@ -81,90 +82,105 @@ public class ProfileandPreferencesPage extends UhcDriver {
 
 	@FindBy(xpath = "//*[@id='password-form']/div[4]/div/a")
 	private WebElement CancelButton;
-	
+
 	@FindBy(className = "margin-none")
-    private WebElement Seemorewaystext;
-	
-	@FindBy(className="lowercase")
+	private WebElement Seemorewaystext;
+
+	@FindBy(className = "lowercase")
 	private WebElement contactUs;
-	
+
 	@FindBy(xpath = "html/body/div[4]/div/div[2]/section/div/div[1]/div/h2")
 	private WebElement NeedHelpHeader;
-	
-	@FindBy(xpath ="html/body/div[4]/div/div[2]/section/div/div[2]/div/div/div[1]/div/div")
+
+	@FindBy(xpath = "html/body/div[4]/div/div[2]/section/div/div[2]/div/div/div[1]/div/div")
 	private WebElement Technicalsupportsection;
-	
-	@FindBy(xpath ="html/body/div[4]/div/div[2]/section/div/div[2]/div/div/div[2]/div/div")
+
+	@FindBy(xpath = "html/body/div[4]/div/div[2]/section/div/div[2]/div/div/div[2]/div/div")
 	private WebElement PlanSupportsection;
-	
-	@FindBy(xpath ="html/body/div[5]/div/div/div/div/a")
+
+	@FindBy(xpath = "html/body/div[5]/div/div/div/div/a")
 	private WebElement Disclaimerlink;
-	
+
+	@FindBy(xpath = "//*[@id='tab-1']/div[3]/div[1]/div/div[2]/div/div/div/div[1]/div/div/div[1]/p")
+	private WebElement PhoneHeader;
+	@FindBy(xpath = "//*[@id='tab-1']/div[3]/div[1]/div/div[2]/div/div/div/div[1]/div/div/div[1]/div/div/div/div/div/a[1]")
+	private WebElement PhoneEditButton;
+
+	@FindBy(xpath = "//*[@id='tab-1']/div[3]/div[1]/div/div[2]/div/div/div/div[1]/div/div/div[1]/div/div/div/div/div/a[1]/svg")
+
+	private WebElement PhoneEditLink;
+	@FindBy(xpath = "//*[@id='tab-1']/div[3]/div[1]/div/div[2]/div/div/div/div[1]/div/div/div[2]/div[1]/div[1]/div/span[1]")
+	private WebElement Daytimephone;
+	@FindBy(xpath = "//*[@id='tab-1']/div[3]/div[1]/div/div[2]/div/div/div/div[1]/div/div/div[2]/div[1]/div[2]/div/span[1]")
+	private WebElement EveningPhone;
+
 	public static final String Disclaimerlinkcontent_xpath = ".//*[@id='collapseDisclaimer']";
-	
+
 	public PageData ProfileandPreferences;
 
 	public JSONObject ProfileandPreferencesPageJson;
-	
-	
 
 	public ProfileandPreferencesPage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
-		String fileName = CommonConstants.PROFILE_AND_PREFERENCES_REDESIGN_PAGE_DATA;
-		ProfileandPreferences = CommonUtility.readPageData(fileName, CommonConstants.PAGE_OBJECT_DIRECTORY_ULAYER_MEMBER);
-		openAndValidate();
+		/*String fileName = CommonConstants.PROFILE_AND_PREFERENCES_REDESIGN_PAGE_DATA;
+		ProfileandPreferences = CommonUtility.readPageData(fileName,
+	    CommonConstants.PAGE_OBJECT_DIRECTORY_ULAYER_MEMBER);
+		openAndValidate();*/
 	}
 
 	@Override
-	public void openAndValidate() 
-	{
+	public void openAndValidate() {
 		// TODO Auto-generated method stub
 
 		JSONObject jsonObject = new JSONObject();
 		for (String key : ProfileandPreferences.getExpectedData().keySet()) {
 			List<WebElement> elements = findElements(ProfileandPreferences.getExpectedData().get(key));
-			/*
-			 * if (elements.size() == 1) { validate(elements.get(0)); try {
-			 * jsonObject.put(key, elements.get(0).getText());
-			 * //System.out.println("Text"+elements.get(0).getText()); } catch
-			 * (JSONException e) { // TODO Auto-generated catch block
-			 * e.printStackTrace(); } } else if (elements.size() > 1) {
-			 */
-			JSONArray jsonArray = new JSONArray();
-			for (WebElement element : elements) {
 
-				validate(element);
+			if (elements.size() == 1) {
+				validate(elements.get(0));
 				try {
-					JSONObject jsonObjectForArray = new JSONObject();
-					jsonObjectForArray.put(ProfileandPreferences.getExpectedData().get(key).getElementName(),
-							element.getText());
-					jsonArray.put(jsonObjectForArray);
+					jsonObject.put(key, elements.get(0).getText());
+					System.out.println("Text" + elements.get(0).getText());
+				} catch (JSONException e) { // TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			} else if (elements.size() > 1) {
+
+				JSONArray jsonArray = new JSONArray();
+				for (WebElement element : elements) {
+
+					validate(element);
+					try {
+						JSONObject jsonObjectForArray = new JSONObject();
+						jsonObjectForArray.put(ProfileandPreferences.getExpectedData().get(key).getElementName(),
+								element.getText());
+						jsonArray.put(jsonObjectForArray);
+					} catch (JSONException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				}
+				try {
+					jsonObject.put(key, jsonArray);
 				} catch (JSONException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
+
 			}
-			try {
-				jsonObject.put(key, jsonArray);
-			} catch (JSONException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+
+			ProfileandPreferencesJson = jsonObject;
+			System.out.println("ProfilePreferencesJson----->" + ProfileandPreferencesJson);
 
 		}
-
-		ProfileandPreferencesPageJson = jsonObject;
-
-		System.out.println("ProfilePreferencesJson----->" + ProfileandPreferencesPageJson);
-
 	}
 
-	
 	public JSONObject getExpectedData(Map<String, JSONObject> expectedDataMap) {
 
-		/*get PHR expected data*/
-		JSONObject profilenpreferencesExpectedJson = expectedDataMap.get(CommonConstants.PROFILE_AND_PREFERENCES_REDESIGN_PAGE_DATA);
+		/* get PHR expected data */
+		JSONObject profilenpreferencesExpectedJson = expectedDataMap
+				.get(CommonConstants.PROFILE_AND_PREFERENCES_REDESIGN_PAGE_DATA);
 		JSONObject commonExpectedJson = expectedDataMap.get(CommonConstants.COMMON);
 		JSONObject globalExpectedJson = expectedDataMap.get(CommonConstants.GLOBAL);
 		profilenpreferencesExpectedJson = CommonUtility.mergeJson(profilenpreferencesExpectedJson, globalExpectedJson);
@@ -229,33 +245,29 @@ public class ProfileandPreferencesPage extends UhcDriver {
 	public void validateCancelButton() {
 
 		CancelButton.click();
-		Assert.assertTrue("Button displayed",Password.isDisplayed());
-		
+		Assert.assertTrue("Button displayed", Password.isDisplayed());
+
 	}
-	
-	public void validateseemorewaystext()
-	{
-	validate(Seemorewaystext);
+
+	public void validateseemorewaystext() {
+		validate(Seemorewaystext);
 	}
-	
-	public ContactUsPage clickcontactUslink()
-	{
-    validate(contactUs);
-    contactUs.click();
-    if(getTitle().equalsIgnoreCase("AARP Medicare Plans | Contact Us"))
-	{
-		return new ContactUsPage(driver);
+
+	public ContactUsPage clickcontactUslink() {
+		validate(contactUs);
+		contactUs.click();
+		if (getTitle().equalsIgnoreCase("AARP Medicare Plans | Contact Us")) {
+			return new ContactUsPage(driver);
+		}
+		return null;
 	}
-	return null;
-	}
-	
-	public void validateneedhelpheader()
-	{
+
+	public void validateneedhelpheader() {
 		validate(NeedHelpHeader);
 		validate(Technicalsupportsection);
 		validate(PlanSupportsection);
 	}
-	
+
 	public void clickOndisclaimerlink(JSONObject myProfilenpreferencesexpectedjson) {
 		// TODO Auto-generated method stub
 
@@ -269,8 +281,7 @@ public class ProfileandPreferencesPage extends UhcDriver {
 			finalPath = Disclaimerlinkcontent_xpath + "/p[1]";
 			table_data = driver.findElement(By.xpath(finalPath)).getText();
 			System.out.println(table_data);
-			Assert.assertEquals(myProfilenpreferencesexpectedjson.get("1stline"),
-			table_data);
+			Assert.assertEquals(myProfilenpreferencesexpectedjson.get("1stline"), table_data);
 			// to validate amount Billed
 			finalPath = Disclaimerlinkcontent_xpath + "/p[2]";
 			table_data = driver.findElement(By.xpath(finalPath)).getText();
@@ -286,11 +297,21 @@ public class ProfileandPreferencesPage extends UhcDriver {
 			table_data = driver.findElement(By.xpath(finalPath)).getText();
 			System.out.println(table_data);
 			Assert.assertEquals(myProfilenpreferencesexpectedjson.get("4thline"), table_data);
-			
+
 			Disclaimerlink.click();
 		} catch (JSONException e) {
 			e.printStackTrace();
 		}
+	}
+
+	public  void validatePhoneElements() {
+
+		validateNew(PhoneHeader);
+		validateNew(PhoneEditButton);
+		// validateNew(PhoneEditLink);
+		validateNew(Daytimephone);
+		validateNew(EveningPhone);
+
 	}
 
 }

@@ -130,14 +130,15 @@ Feature: To test My Profile & Preferences in AARP site
     Given registered AMP with following details for profile and preferences flow in AARP site
       | <planType> |
     Then the user navigate to Profile and Preference page
+
     Then the user validates the elements on clicking the edit link
     Then the user validates the functionality of save Button
     Then the user validates the functionality of Cancel Button
 
        Examples: 
       | planType |
-     #| PDP      |
-      | MAPD     |
+     | PDP      |
+      #| MAPD     |
      #| MA       |
      
      @Needhelp
@@ -156,5 +157,16 @@ Feature: To test My Profile & Preferences in AARP site
      #| MAPD     |
       | MA       |
      
+       @Phone
+  Scenario Outline: To verify Phone in Aarp site
+      Given registered AMP with following details for profile and preferences flow in AARP site
+      | <planType> |
+       Then the user navigate to Profile and Preference page
+      Then the user validates the Phone section in AARP site
+
+    Examples: 
+      | planType |
+      | MAPD     |
+   #   | MA       |
       
       

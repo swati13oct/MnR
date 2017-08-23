@@ -114,9 +114,22 @@ public class ProfilePreferencesPage extends UhcDriver {
 
 	@FindBy(linkText = "contact us")
 	private WebElement ContactUs;
-
 	
-
+	
+	@FindBy(xpath = "//*[@id='tab-1']/div[3]/div[1]/div/div[2]/div/div/div/div[1]/div/div/div[1]/p")
+private WebElement PhoneHeader;
+	@FindBy(xpath = "//*[@id='tab-1']/div[3]/div[1]/div/div[2]/div/div/div/div[1]/div/div/div[1]/div/div/div/div/div/a[1]")
+	private WebElement PhoneEditButton;
+	
+	@FindBy(xpath = "//*[@id='tab-1']/div[3]/div[1]/div/div[2]/div/div/div/div[1]/div/div/div[1]/div/div/div/div/div/a[1]/svg")
+	
+	private WebElement PhoneEditLink;
+	@FindBy(xpath = "//*[@id='tab-1']/div[3]/div[1]/div/div[2]/div/div/div/div[1]/div/div/div[2]/div[1]/div[1]/div/span[1]")
+	private WebElement Daytimephone;
+	@FindBy(xpath = "//*[@id='tab-1']/div[3]/div[1]/div/div[2]/div/div/div/div[1]/div/div/div[2]/div[1]/div[2]/div/span[1]")
+	private WebElement EveningPhone;
+	
+	
 	public void openAndValidate() {
 
 		JSONObject jsonObject = new JSONObject();
@@ -250,6 +263,17 @@ public class ProfilePreferencesPage extends UhcDriver {
 			System.out.println(driver.getTitle());
 			Assert.isTrue(driver.getTitle().equalsIgnoreCase("UnitedHealthcare Medicare Solutions | Contact Us"));
 		}
+	}
+
+	public void validatePhoneElements()
+	{
+		validateNew(PhoneHeader);
+		validateNew(PhoneEditButton);
+		//validateNew(PhoneEditLink);
+		validateNew(Daytimephone);
+		validateNew(EveningPhone);
+	
+		
 	}
 
 }

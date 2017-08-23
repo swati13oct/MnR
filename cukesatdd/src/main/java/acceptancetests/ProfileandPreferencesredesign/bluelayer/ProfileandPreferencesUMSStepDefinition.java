@@ -187,4 +187,12 @@ public class ProfileandPreferencesUMSStepDefinition {
 	
 	}
 	
+	@Then("^the user validates the Phone section in UMS site")
+	public void UserValidatesPhoneSection() {
+		ProfilePreferencesPage ProfilePreferencesPage = (ProfilePreferencesPage) getLoginScenario()
+				.getBean(PageConstants.ProfilePreferencesPage);
+
+		ProfilePreferencesPage.validatePhoneElements();
+	
+	}
 }

@@ -19,9 +19,12 @@ import org.skyscreamer.jsonassert.JSONAssert;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.openqa.selenium.By;
 
+import pages.member.bluelayer.ProfilePreferencesPage;
 import pages.member.ulayer.AccountHomePage;
+import pages.member.ulayer.BenefitsAndCoveragePage;
 import pages.member.ulayer.LoginPage2;
 import pages.member.ulayer.PlanBenefitsCoveragePage;
+import pages.member.ulayer.ProfileandPreferencesPage;
 import acceptancetests.atdd.data.CommonConstants;
 import acceptancetests.atdd.data.member.PageConstants;
 import acceptancetests.benefitsandcoverage.data.PlanBenefitsAndCoverageCommonConstants;
@@ -47,6 +50,7 @@ public class ProfileandPreferencesAARPStepDefinition {
 	MRScenario loginScenario;
 
 	private String userName = null;
+	pages.member.ulayer.ProfileandPreferencesPage ProfileandPreferencespage;
 
 	public MRScenario getLoginScenario() {
 		return loginScenario;
@@ -128,6 +132,54 @@ public class ProfileandPreferencesAARPStepDefinition {
 			System.out.println(" Variable is NULL" );
 		}
 	}
+	
+	
+	
+	
+	
+	@Then("^the user view jenkins of Profile and preferences in AARP site")
+	public void user_views_ProfileandPreferences() {
+
+		
+		if (ProfileandPreferencespage != null) {
+			// Get actual data
+			JSONObject actualJsonObj = ProfileandPreferencespage.ProfileandPreferencesJson;
+			loginScenario.saveBean(ProfnPrefCommonConstants.MY_Profile_AND_PREFERENCES_ACTUAL, actualJsonObj);
+			// getLoginScenario().saveBean(PageConstants.BENEFITS_COVERAGE_PAGE,
+			// benefitsCoveragePage);
+			System.out.println("Profile and Preferences actual ==============>" + actualJsonObj.toString());
+			// Get expected data
+			String fileName = this.userName;
+			String directory = CommonConstants.PROFILE_AND_PREFERNCES_PAGE_DIRECTORY;
+			JSONObject profileAndPreferencesExpectedJson = MRScenario.readExpectedJson(fileName, directory);
+			loginScenario.saveBean(ProfnPrefCommonConstants.MY_Profile_AND_PREFERENCES_EXPECTED,
+					profileAndPreferencesExpectedJson);
+			System.out.println(
+					"Profile and Preferences Expected==============>" + profileAndPreferencesExpectedJson.toString());
+		}
+	}
+	
+	@Then("^the user validates the content on Profile and Preferences page")
+	public void validateContentOnProfileandPreferncesPage() {
+
+		try {
+
+			JSONObject actual = (JSONObject) loginScenario
+					.getBean(ProfnPrefCommonConstants.MY_Profile_AND_PREFERENCES_ACTUAL);
+
+			JSONObject expected = (JSONObject) loginScenario
+					.getBean(ProfnPrefCommonConstants.MY_Profile_AND_PREFERENCES_EXPECTED);
+
+			if (actual != null && expected != null) {
+				JSONAssert.assertEquals(expected, actual, true);
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+	}
+
 
 	@Then("^the user validates the Plan Name, Member name, Member ID section in AARP site")
 	public void user_Validates_FED_PROFILE_MEMBERNAME_ID() {
@@ -234,6 +286,15 @@ public class ProfileandPreferencesAARPStepDefinition {
 			.getBean(PageConstants.PROFILE_AND_PREFERENCES_PAGE);
 	
 	ProfileandPreferencespage.validateneedhelpheader();
+	
+	}
+	
+	@Then("^the user validates the Phone section in AARP site")
+	public void UserValidatesPhoneSection() {
+		pages.member.ulayer.ProfileandPreferencesPage ProfileandPreferencespage = (pages.member.ulayer.ProfileandPreferencesPage) getLoginScenario()
+				.getBean(PageConstants.PROFILE_AND_PREFERENCES_PAGE);
+
+		ProfileandPreferencespage.validatePhoneElements();
 	
 	}
 }
