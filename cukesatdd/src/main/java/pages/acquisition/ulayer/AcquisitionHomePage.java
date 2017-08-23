@@ -973,7 +973,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 			if(driver.getCurrentUrl().contains("-pharmacy."))
 				break;
 		}
-		if (driver.getTitle().equalsIgnoreCase("Find a Pharmacy | AARP® Medicare Plans from UnitedHealthcare®")) {
+		if (driver.getTitle().equalsIgnoreCase("Locate a Pharmacy | UnitedHealthcare®")) {
 			return new PharmacySearchPage(driver);
 		}
 		return null;

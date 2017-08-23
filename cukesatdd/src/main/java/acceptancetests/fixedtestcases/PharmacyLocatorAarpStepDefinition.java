@@ -258,7 +258,7 @@ public class PharmacyLocatorAarpStepDefinition {
 	
 	@Then("^the user validates the available pharmacies page in AARP site$")
 	public void user_validates_available_pharmacies_aarp() {
-		PharmacyResultPage pharmacyResultsPage = (PharmacyResultPage) getLoginScenario()
+		/*PharmacyResultPage pharmacyResultsPage = (PharmacyResultPage) getLoginScenario()
 				.getBean(PageConstants.PHARMACY_RESULTS_PAGE);
 		
 		JSONObject pharmacyResultActualJson = (JSONObject) getLoginScenario()
@@ -274,11 +274,13 @@ public class PharmacyLocatorAarpStepDefinition {
 				PharmacySearchCommonConstants.DISTANCE);
 		String planName = (String) getLoginScenario().getBean(
 				PharmacySearchCommonConstants.PLAN_NAME);
-		
-		if(pharmacyResultsPage.validatePharmacyResultpage(pharmacyResultActualJson, zipcode, planName)){
+		*/
+		PharmacySearchPage pharmacySearchPage = (PharmacySearchPage) getLoginScenario()
+				.getBean(PageConstants.PHARMACY_SEARCH_PAGE);
+		if(pharmacySearchPage.validatePharmacyResults()){
 			Assert.assertTrue(true);
 		} else {
-			Assert.fail("Error in validating Pharmacy Results page ");
+			Assert.fail("Error in validating Pharmacy Results ");
 		}
 		/*JSONObject pharmacyResultExpectedJson = (JSONObject) getLoginScenario()
 				.getBean(PharmacySearchCommonConstants.PHARMACY_RESULT_EXPECTED);

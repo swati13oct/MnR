@@ -9,6 +9,7 @@ import junit.framework.Assert;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -27,17 +28,23 @@ import atdd.framework.UhcDriver;
  */
 public class PharmacySearchPage extends UhcDriver {
 
-	@FindBy(id = "zipCode")
+	@FindBy(id = "zipcodeTxt")
 	private WebElement zipcodeField;
 
-	@FindBy(id = "showresults")
+	@FindBy(id = "distance")
 	private WebElement distanceField;
 
 	@FindBy(id = "continue")
 	private WebElement continueField;
 
+	@FindBy(id = "zipcode-button")
+	private WebElement zipcodeSearchButton;
+
 	@FindBy(id = "selectcounty_box")
 	private WebElement countyPopOut;
+
+	@FindBy(xpath = "//div/h2[contains(@class, 'pharmacy-count')]")
+	private WebElement pharmacyCount;
 
 	@FindBy(id = "selectcountytable")
 	private WebElement selectcountytable;
@@ -45,10 +52,10 @@ public class PharmacySearchPage extends UhcDriver {
 	@FindBy(id = "plan")
 	private WebElement planNameDropDown;
 
-	@FindBys(value = { @FindBy(xpath = "//select[@id='plan']/option") })
+	@FindBys(value = { @FindBy(xpath = "//select[@id='plan-type']/option") })
 	private List<WebElement> planNamesList;
 
-	@FindBys(value = { @FindBy(xpath = "//table[@id='selectcountytable']/tbody/tr") })
+	@FindBys(value = { @FindBy(xpath = "//div[@id='selectCounty']/p") })
 	private List<WebElement> countyList;
 
 	@FindBy(id = "pharmacies")
@@ -60,24 +67,30 @@ public class PharmacySearchPage extends UhcDriver {
 	@FindBy(id = "find_searchbtn")
 	private WebElement searchPharmaciesButton;
 
-	@FindBys(value = { @FindBy(xpath = "//select/option") })
+	@FindBys(value = { @FindBy(xpath = "//select[@id='distance']/option") })
 	private List<WebElement> distanceDropDown;
-	
-	@FindBy(xpath = "//div[@class='showPharmacies']/select[@id='plan']")
+
+	@FindBy(xpath = "//select[@id='plan-type']")
 	private WebElement seletPlandropdown;
-	
+
+	@FindBy(id = "pharmacy-preffered")
+	private WebElement preferredPharmacy;
+
+	@FindBy(id = "pharmacy-standard")
+	private WebElement standardPharmacy;
+
 	@FindBy(xpath = "//div[@class='showPharmacies']/div/input[@id='pharmacies']")
 	private WebElement allPharmacieselection;
-	
+
 	@FindBy(xpath = "//div[@class='showPharmacies']/div/input[@id='services']")
 	private WebElement allServices;
-	
+
 	@FindBy(xpath = "//div[@class='showPharmacies']/ul/li")
 	private List<WebElement> pharmaciesList;
-	
+
 	@FindBy(xpath = "//div[@class='showPharmacies']/ul/li/input")
 	private List<WebElement> pharmaciesListCheckbox;
-	
+
 	@FindBys(value = { @FindBy(xpath = "//ul[@id='pharm_services']/li") })
 	private List<WebElement> pharmacyTypesCheckboxes;
 
@@ -86,21 +99,42 @@ public class PharmacySearchPage extends UhcDriver {
 
 	@FindBy(xpath = "//div[@id='medicareTitle']/h1")
 	private WebElement pharmacyResultHeader;
-	
+
 	@FindBy(id = "services")
 	private WebElement pharmacyTypeSelectionRadioButton;
-	
-	@FindBy(className = "customercare")
+
+	@FindBy(xpath = "//div[contains(@class,'callus')]")
 	WebElement customercare;
 
 	@FindBy(className = "errorHeader")
 	WebElement errorHeader;
-	
+
 	@FindBy(className = "errorPoints")
 	WebElement errorPoints;
-	
+
+	@FindBy(xpath = "//div[@class='pharmacy-search-resultParsys']/div/div/div[1]/div/div[2]")
+	WebElement pharmacyResults;
+
+	@FindBy(xpath = "//div[@class='pharmacy-search-resultParsys']/div/div/div[1]/div/div[1]")
+	WebElement zeropharmacyResults;
+
+	@FindBy(xpath = "//div[@class='pharmacy-search-resultParsys']/div/div/div[1]/div/div[2]/div/ul[@class='map-toggle']")
+	WebElement mapToggleElement;
+
+	@FindBy(xpath = "//div[@class='pharmacy-search-resultParsys']/div/div/div[1]/div/div[2]/div/div[@class='collapse-wrapper']/div")
+	WebElement mapView;
+
+	@FindBy(xpath = "//div[@class='pharmacy-search-resultParsys']/div/div/div[1]/div/div[2]/div/ul[@class='pharmacy-list']")
+	WebElement pharmacyList;
+
+	@FindBy(xpath = "//div[@class='pharmacy-search-resultParsys']/div/div/div[1]/div/div[2]/div/ul[@class='pharmacy-list']/li")
+	List<WebElement> pharmacyListItems;
+
+	@FindBy(linkText = "VIEW RESULT AS PDF")
+	WebElement resultAsPDF;
+
 	private PageData locatePharmacy;
-	
+
 	public JSONObject locatePharmacyJson;
 
 	public PharmacySearchPage(WebDriver driver) {
@@ -118,30 +152,49 @@ public class PharmacySearchPage extends UhcDriver {
 		sendkeys(zipcodeField, zipcode);
 		selectFromDropDown(distanceDropDown, distance);
 
-		continueField.click();
+		zipcodeSearchButton.click();
+		try {
+			Thread.sleep(2000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		CommonUtility.checkPageIsReady(driver);
 		try{
-		if (countyPopOut.isDisplayed()) {
-			for (WebElement webElement : countyList) {
-				if (webElement.getText().contains(county)) {
-					webElement.click();
-					break;
+			if (countyPopOut.isDisplayed()) {
+				for (WebElement webElement : countyList) {
+					try {
+						Thread.sleep(2000);
+					} catch (InterruptedException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					if (webElement.getText().contains(county)) {
+						try {
+							Thread.sleep(2000);
+						} catch (InterruptedException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+						WebElement countylink = driver.findElement(By.linkText(webElement.getText()));
+
+						countylink.click();
+						break;
+					}
 				}
 			}
-		}
 		}catch(Exception e){
 			System.out.println("County not exists");
 		}
-		for(int i=0;i<10;i++){
-			try {
-				Thread.sleep(5000);
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			if(driver.getCurrentUrl().contains("map-zip-state-county-market-flow"))
-				break;
+
+
+		try {
+			Thread.sleep(5000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
+
 		if (driver.getTitle().equalsIgnoreCase(
 				"Locate a Pharmacy | UnitedHealthcare®")) {
 			return new PharmacySearchPage(driver);
@@ -155,18 +208,16 @@ public class PharmacySearchPage extends UhcDriver {
 
 	public PharmacySearchPage selectsPlanName(String planName) {
 		selectFromDropDown(planNamesList, planName);
-		for(int i=0;i<10;i++){
-			try {
-				Thread.sleep(5000);
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			if(driver.getCurrentUrl().contains("pharmacy-search-flow"))
-				break;
+
+		try {
+			Thread.sleep(5000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
-		if (narrowYourSearchContent.getText().equalsIgnoreCase(
-				"Narrow your search")) {
+
+		if (driver.getTitle().equalsIgnoreCase(
+				"Locate a Pharmacy | UnitedHealthcare®")) {
 			return new PharmacySearchPage(driver);
 		}
 		return null;
@@ -246,10 +297,10 @@ public class PharmacySearchPage extends UhcDriver {
 		locatePharmacyJson = jsonObject;
 		System.out.println("locatePharmacyJson----->"
 				+ locatePharmacyJson);
-		
+
 		validate(customercare);
-		
-	
+
+
 	}
 
 	public PharmacyResultPage searchSelectingPharmacyTypes(
@@ -264,7 +315,7 @@ public class PharmacySearchPage extends UhcDriver {
 							"pharmacyTypesCheckboxes");
 					findChildElement(elementData, checkBox).click();
 				}
-				
+
 			}
 		}
 		searchPharmaciesButton.click();
@@ -277,50 +328,46 @@ public class PharmacySearchPage extends UhcDriver {
 			}
 			if(pharmacyResultHeader.isDisplayed())
 				break;
-			
+
 		}
 		if (pharmacyResultHeader.getText().equalsIgnoreCase(
 				"Pharmacies Available in Your Area")) {
 			return new PharmacyResultPage(driver);
 		}
 		return null;
-	
+
 	}
-	
+
 	@SuppressWarnings("deprecation")
 	public void validateDefaultChooseaPlanSection(){
-		int[] expectedDropdownmiles ={1,2,5,10,25};
-		for(int i=0;(i<distanceDropDown.size()-1);i++){
+		int[] expectedDropdownmiles ={1,2,5,10,15,25};
+		for(int i=0;(i<distanceDropDown.size());i++){
 			System.out.println(distanceDropDown.get(i).getText());
-			Assert.assertTrue("Expected dropdown miles is not available",Integer.parseInt(distanceDropDown.get(i).getText())==expectedDropdownmiles[i]);
+			Assert.assertTrue("Expected dropdown miles is not available",Integer.parseInt(distanceDropDown.get(i).getText().split(" ")[0])==expectedDropdownmiles[i]);
 		}
-		
+
 		Assert.assertTrue("Select Plan drop down is not disabled", !seletPlandropdown.isEnabled());
-		Assert.assertTrue("Select All pharmacies is not disabled",!allPharmacieselection.isEnabled());
-		Assert.assertTrue("Select All pharmacies is not selected by default",allPharmacieselection.isSelected());
-		Assert.assertTrue("Select services is not disabled",!allServices.isEnabled());
-		Assert.assertTrue("Select services is selected",!allServices.isSelected());
-		
-		for(int i = 0; i<pharmaciesList.size();i++){
+		Assert.assertTrue("Preferred Pharmacy is selected by default",!preferredPharmacy.isSelected());
+		Assert.assertTrue("Standard Pharmacy is selected by default",!standardPharmacy.isSelected());
+
+		/*for(int i = 0; i<pharmaciesList.size();i++){
 			Assert.assertTrue("Pharmacies List not displayed", pharmaciesList.get(i).isDisplayed());
 			Assert.assertTrue("Check box for "+ pharmaciesList.get(i).getText()+" is not disabled",pharmaciesListCheckbox.get(i).getAttribute("disabled").equals("true"));
-		}
+		}*/
 	}
-	
+
 	@SuppressWarnings("deprecation")
 	public void validateChoosePlanSectionAfterzipcodeSearch(){
 		Assert.assertTrue("Select Plan drop down is not enabled", seletPlandropdown.isEnabled());
-		Assert.assertTrue("Select All pharmacies is not disabled",!allPharmacieselection.isEnabled());
-		Assert.assertTrue("Select All pharmacies is not selected by default",allPharmacieselection.isSelected());
-		Assert.assertTrue("Select services is not disabled",!allServices.isEnabled());
-		Assert.assertTrue("Select services is selected",!allServices.isSelected());
-		
-		for(int i = 0; i<pharmaciesList.size();i++){
+		Assert.assertTrue("Preferred Pharmacy is selected by default",!preferredPharmacy.isSelected());
+		Assert.assertTrue("Standard Pharmacy is selected by default",!standardPharmacy.isSelected());
+
+		/*for(int i = 0; i<pharmaciesList.size();i++){
 			Assert.assertTrue("Pharmacies List not displayed", pharmaciesList.get(i).isDisplayed());
 			Assert.assertTrue("Check box for "+ pharmaciesList.get(i).getText()+" is not disabled",pharmaciesListCheckbox.get(i).getAttribute("disabled").equals("true"));
-		}
+		}*/
 	}
-	
+
 	@SuppressWarnings("deprecation")
 	public void validateNoPharmacyErrormsg(String[] pharmacyTypeArray){
 		pharmacyTypeSelectionRadioButton.click();
@@ -331,7 +378,7 @@ public class PharmacySearchPage extends UhcDriver {
 							"pharmacyTypesCheckboxes");
 					findChildElement(elementData, checkBox).click();
 				}
-				
+
 			}
 		}
 		searchPharmaciesButton.click();
@@ -346,19 +393,32 @@ public class PharmacySearchPage extends UhcDriver {
 		System.out.println(errorHeader.getText() + errorPoints.getText());
 		Assert.assertTrue("Incorrect error message displayed",expectedErrormsg.equals(errorHeader.getText() + errorPoints.getText()));
 	}
-	
+
 	@SuppressWarnings("deprecation")
 	public void validatePharmaciesSectionAfterplanSelection(){
-		Assert.assertTrue("Select All pharmacies is not enabled",allPharmacieselection.isEnabled());
-		Assert.assertTrue("Select All pharmacies is not selected by default",allPharmacieselection.isSelected());
-		Assert.assertTrue("Select services is not enabled",allServices.isEnabled());
-		Assert.assertTrue("Select services is selected",!allServices.isSelected());
-		for(int i = 0; i<pharmaciesList.size();i++){
-			Assert.assertTrue("Pharmacies List not displayed", pharmaciesList.get(i).isDisplayed());
-			//Assert.assertTrue("Check box for "+ pharmaciesList.get(i).getText()+" is not enabled",pharmaciesListCheckbox.get(i).getAttribute("disabled") == null);
-			Assert.assertTrue("Check box for "+ pharmaciesList.get(i).getText()+" is not disabled",pharmaciesListCheckbox.get(i).getAttribute("disabled").equals("true"));
+		Assert.assertTrue("Preferred Pharmacy is selected by default",!preferredPharmacy.isSelected());
+		Assert.assertTrue("Standard Pharmacy is selected by default",!standardPharmacy.isSelected());
+	}
 
+	public boolean validatePharmacyResults(){
+		boolean flag = true;
+		System.out.println(pharmacyCount.getText());
+		if(pharmacyCount.getText().split(" ")[0].equals("") || Integer.parseInt(pharmacyCount.getText().split(" ")[0])==0)
+			flag =  false;
+
+		if(pharmacyResults.getAttribute("class").toString().contains("ng-hide"))
+			flag = false;
+		else{
+			if(!mapToggleElement.isDisplayed())
+				flag = false;
+			if(!pharmacyList.isDisplayed())
+				flag = false;
+			if(mapView.getAttribute("class").contains("ng-hide"))
+				flag = false;
+			if(!(pharmacyListItems.size()>1))
+				flag = false;
 		}
+		return flag;
 	}
 
 }
