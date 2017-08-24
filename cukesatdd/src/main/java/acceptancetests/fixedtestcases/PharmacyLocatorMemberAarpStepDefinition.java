@@ -201,7 +201,7 @@ public class PharmacyLocatorMemberAarpStepDefinition {
 		} else {
 			Assert.fail("Error in validating Pharmacy Results page ");
 		}
-		pharmacyResultPage.logOut();
+		//pharmacyResultPage.logOut();
 	}
 	
 	@Then("^the user validates the pharmacies available for the above selected language in AARP site$")
@@ -225,7 +225,7 @@ public class PharmacyLocatorMemberAarpStepDefinition {
 		} else {
 			Assert.fail("Error in validating Pharmacy Results page ");
 		}
-		pharmacyResultPage.logOut();
+		//pharmacyResultPage.logOut();
 	}
 
 	@And("^the user selects \"Show pharmacies for these services\" in AARP Site$")

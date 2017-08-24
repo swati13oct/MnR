@@ -219,7 +219,7 @@ public class PharmacyLocatorMemberUmsStepDefinition {
 		} else {
 			Assert.fail("Error in validating Pharmacy Results page ");
 		}
-		pharmacyResultPage.logOut();
+		//pharmacyResultPage.logOut();
 	}
 
 	@Then("^the user validates the pharmacies available for the above selected language in UMS site$")
@@ -241,7 +241,7 @@ public class PharmacyLocatorMemberUmsStepDefinition {
 		} else {
 			Assert.fail("Error in validating Pharmacy Results page ");
 		}
-		pharmacyResultPage.logOut();
+		//pharmacyResultPage.logOut();
 	}
 
 	@And("^the user selects \"Show pharmacies for these services\" in UMS Site$")
