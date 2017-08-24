@@ -417,7 +417,6 @@ And the user searches for pharmacy search results available in AARP site
 And the user validate more information content based on plan type in AARP Site
 
 Examples:
-	Examples:
 	| zipcode     | distance  | county            | year     |  planName 			                 	  							|			 
 	| 90210       | 15        | Los Angeles       | 2017     | AARP MedicareComplete SecureHorizons Plan 1 (HMO) |	
 
@@ -438,7 +437,6 @@ And the user searches for pharmacy search results available in AARP site
 Then the user validate google map red ballon based on plan type in AARP Site
 
 Examples:
-	Examples:
 	| zipcode     | distance  | county            | year     |  planName 			                 	  							|			 
 	| 90210       | 15        | Los Angeles       | 2017     | AARP MedicareComplete SecureHorizons Plan 1 (HMO) |	
 
@@ -458,8 +456,25 @@ And the user searches for pharmacy search results available in AARP site
 Then the user validate tool tip for pharmacy saver plan type in AARP Site
 
 Examples:
-	Examples:
 	| zipcode     | distance  | county            | year     |  planName 			                 	  							|			 
 	| 90210       | 15        | Los Angeles       | 2017     | AARP MedicareComplete SecureHorizons Plan 1 (HMO) |	
+	
+	
+@errormessages
+Scenario Outline: To verify error messages in pharmacy locator page in AARP site
+Given the user is on the AARP Medicare Site landing page
+When the user navigates to Request more info page
+When the user navigates to pharmacy search page in AARP Site
+And the user enters following details for pharmacy search in AARP Site
+	| Zip Code	| <zipcode>	|
+	| Distance	| <distance>|
+	| County Name	| <county>	|
+And the user verify error messages in pharmacy locator page in AARP site
+
+Examples:
+	| zipcode     | distance  | county            |	 
+	|             | 15        | Los Angeles       |
+	|  9999       | 15        |	Los Angeles       |
+	
 	
 

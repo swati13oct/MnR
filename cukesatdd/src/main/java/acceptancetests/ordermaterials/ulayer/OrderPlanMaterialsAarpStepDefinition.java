@@ -7,8 +7,11 @@ import gherkin.formatter.model.DataTableRow;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -25,6 +28,7 @@ import pages.member.ulayer.OrderplanmaterialsPage;
 import pages.member.ulayer.PlanMaterialConfirmationPage;
 import acceptancetests.atdd.data.CommonConstants;
 import acceptancetests.atdd.data.member.PageConstants;
+import acceptancetests.claims.data.ClaimsCommonConstants;
 import acceptancetests.login.data.LoginCommonConstants;
 import acceptancetests.ordermaterials.data.OrderPlanMaterialsCommonConstants;
 import atdd.framework.MRScenario;
@@ -53,53 +57,82 @@ public class OrderPlanMaterialsAarpStepDefinition {
 			DataTable memberAttributes) {
 
 		/* Reading the given attribute from feature file */
-		List<List<String>> dataTable = memberAttributes.raw();
-		List<String> desiredAttributes = new ArrayList<String>();
+		List<DataTableRow> memberAttributesRow = memberAttributes
+				.getGherkinRows();
+		Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
 
-		for (List<String> data : dataTable) {
-			desiredAttributes.add(data.get(0));
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells()
+					.get(0), memberAttributesRow.get(i).getCells().get(1));
+		}
+		String planType = memberAttributesMap.get("Plan Type");
+		String businessType = null;
+		if (planType.equalsIgnoreCase("MA")
+				|| planType.equalsIgnoreCase("MAPD")
+				|| planType.equalsIgnoreCase("PDP")) {
+			businessType = "GOVT";
+		} else {
+			businessType = "SHIP";
+		}
+		getLoginScenario().saveBean(ClaimsCommonConstants.BUSINESS_TYPE,
+				businessType);
+
+		Set<String> memberAttributesKeySet = memberAttributesMap.keySet();
+		List<String> desiredAttributes = new ArrayList<String>();
+		for (Iterator<String> iterator = memberAttributesKeySet.iterator(); iterator
+				.hasNext();) {
+			{
+				String key = iterator.next();
+				if (!memberAttributesMap.get(key).isEmpty()) {
+					desiredAttributes.add(memberAttributesMap.get(key));
+				}
+			}
 		}
 		System.out.println("desiredAttributes.." + desiredAttributes);
 		Map<String, String> loginCreds = loginScenario
 				.getAMPMemberWithDesiredAttributes(desiredAttributes);
 
-		String userName = "q2_Jun_combo019";
-		String pwd = "Password@1";
-		/*if (loginCreds == null) {
+		String userName = null;
+		String pwd = null;
+		if (loginCreds == null) {
 			// no match found
 			System.out.println("Member Type data could not be setup !!!");
 			Assert.fail("unable to find a " + desiredAttributes + " member");
 		} else {
 			userName = loginCreds.get("user");
-			pwd = loginCreds.get("pwd");*/
+			pwd = loginCreds.get("pwd");
 			System.out.println("User is..." + userName);
 			System.out.println("Password is..." + pwd);
 			getLoginScenario()
-			.saveBean(LoginCommonConstants.USERNAME, userName);
+					.saveBean(LoginCommonConstants.USERNAME, userName);
 			getLoginScenario().saveBean(LoginCommonConstants.PASSWORD, pwd);
-		//}
+		}
 
 		WebDriver wd = getLoginScenario().getWebDriver();
 		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
-
+		JSONObject accountHomeActualJson = null;
 		LoginPage loginPage = new LoginPage(wd);
+
 		AccountHomePage accountHomePage = (AccountHomePage)loginPage.loginWith(userName, pwd);
-		//JSONObject accountHomeActualJson = null;
 		
+		 getLoginScenario().saveBean(PageConstants.ACCOUNT_HOME_PAGE,accountHomePage);
+		
+
 		/* Get expected data */
 		/*Map<String, JSONObject> expectedDataMap = loginScenario
 				.getExpectedJson(userName);
 		JSONObject accountHomeExpectedJson = accountHomePage
-				.getExpectedData(expectedDataMap);*/
+				.getExpectedData(expectedDataMap);
 
 		if (accountHomePage != null) {
+			getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
 			getLoginScenario().saveBean(PageConstants.ACCOUNT_HOME_PAGE,
 					accountHomePage);
-			/*Assert.assertTrue(true);
-			accountHomeActualJson = accountHomePage.accountHomeJson;*/
+			Assert.assertTrue(true);
+			accountHomeActualJson = accountHomePage.accountHomeJson;
 		}
 
-		/*try {
+		try {
 			JSONAssert.assertEquals(accountHomeExpectedJson,
 					accountHomeActualJson, true);
 		} catch (JSONException e) {
@@ -216,6 +249,24 @@ public class OrderPlanMaterialsAarpStepDefinition {
 		OrderplanmaterialsPage orderPlanMaterialsPage = accountHomePage
 				.navigateToValidateOrderConfirmationInAarpPage();
 	}
+	
+	@Then("^the user verify need help component in AARP site$")
+	public void validate_needhelp_component(){
+		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario()
+				.getBean(PageConstants.ACCOUNT_HOME_PAGE);
+		OrderplanmaterialsPage orderPlanMaterialsPage = accountHomePage
+				.verifyneedHelpcomponent();
+	}
+	
+	@Then("^the user verify header and sub text in order materials page in AARP site$")
+	public void verify_headerandsubtext_in_orderplanmaterial_page(){
+		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario()
+				.getBean(PageConstants.ACCOUNT_HOME_PAGE);
+	OrderplanmaterialsPage orderPlanMaterialsPage = accountHomePage
+			.verifyHeaderTextandSubtext();
+    }
+			
+	
 
 
 	/*@After

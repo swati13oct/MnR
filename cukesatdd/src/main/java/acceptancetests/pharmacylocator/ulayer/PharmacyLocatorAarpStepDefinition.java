@@ -463,6 +463,13 @@ public class PharmacyLocatorAarpStepDefinition {
 			}*/
 	    	
 	    }
+	 
+	 @And("^the user verify error messages in pharmacy locator page in AARP site$")
+	 public void user_verify_pharmacyerrormessages(){
+		 PharmacySearchPage pharmacySearchPage = (PharmacySearchPage) getLoginScenario()
+					.getBean(PageConstants.PHARMACY_SEARCH_PAGE);
+			pharmacySearchPage = pharmacySearchPage.verifyPharmacyErrormessages();
+	 }
 	  
 	
 }

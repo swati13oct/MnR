@@ -61,3 +61,27 @@ And the user validate order additional material and click to add other order add
 Examples:   
          | planType      |  
         | PDP           |  
+        
+        
+@needhelpcomponent
+Scenario Outline: Verify need help component in AARP site
+Given registered AMP member with following attributes
+	| Plan Type | <planType> |
+When the user views order materials in AARP site
+Then the user verify need help component in AARP site
+
+Examples:   
+        | planType      |  
+        | MA            | 
+        
+@headertextandsubtext
+Scenario Outline: Verify header and sub text in order materials page in AARP site for ship only combo plan
+Given registered AMP member with following attributes
+	| Plan Type | <planType> |
+When the user views order materials in AARP site
+Then the user verify header and sub text in order materials page in AARP site
+
+Examples:   
+        | planType      |  
+        | SHIP          | 
+

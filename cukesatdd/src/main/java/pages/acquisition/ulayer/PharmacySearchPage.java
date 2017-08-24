@@ -17,6 +17,7 @@ import org.openqa.selenium.support.ui.Select;
 import acceptancetests.atdd.data.ElementData;
 import acceptancetests.atdd.util.CommonUtility;
 import atdd.framework.UhcDriver;
+import junit.framework.Assert;
 
 
 /**
@@ -108,6 +109,12 @@ public class PharmacySearchPage extends UhcDriver {
 	
 	@FindBy(xpath = ".//*[@for='pharmacy-saver']")
 	private WebElement multilangfilter;
+	
+	@FindBy(xpath="//span[@class='errorRedColorFormat']")
+	private WebElement noZipcode;
+	
+	@FindBy(xpath="//span[@ng-show='vadiationZipError']")
+	private WebElement invalidZip;
 
 
 	public PharmacySearchPage(WebDriver driver) {
@@ -347,6 +354,27 @@ public class PharmacySearchPage extends UhcDriver {
 		
 		return null;
 	}
+    
+    public PharmacySearchPage verifyPharmacyErrormessages(){
+    	boolean present;
+    	try{
+    	validate(noZipcode);
+    	validate(invalidZip);
+    	present=true;
+    	}catch(NoSuchElementException e)
+    	{
+    		present=false;
+    	}
+    	if(present){
+    		System.out.println(noZipcode.getText());
+    		System.out.println(invalidZip.getText());
+    	}
+    	else{
+    		System.out.println("error message is not displayed");
+    	}
+		return null;
+    	
+    }
 
 	
 	

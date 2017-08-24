@@ -6,6 +6,7 @@ package pages.member.ulayer;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Map;
+import java.util.NoSuchElementException;
 import java.util.concurrent.TimeUnit;
 
 import org.joda.time.DateTime;
@@ -223,6 +224,15 @@ public class AccountHomePage extends UhcDriver {
 	//@FindBy(linkText = "ORDER ADDITIONAL MATERIALS")
 	@FindBy(xpath = "//section[1]/div/div/div/a")
 	private WebElement addordermaterialLink;
+	
+	@FindBy(xpath="//a[contains(text(),'Go to Order plan materials  page')]")
+	private WebElement OrderPlanMaterialslnk;
+	
+	@FindBy(xpath="//h3[contains(text(),'Technical Support') or contains(text(),'Plan Support')]/ancestor::div[@class='col-md-4']")
+	private WebElement needhelpcomponent;
+	
+	@FindBy(xpath="//h1[@class='h4 margin-none']")
+	private WebElement orderplanHeadertxt;
 	
 	
 	private PageData myAccountHome;
@@ -516,11 +526,11 @@ public class AccountHomePage extends UhcDriver {
 
 	public OrderplanmaterialsPage navigateToOrderPlanMaterialsAarpPage() {
 
-		myMenuLinkAarp.click();
-		orderPlanMaterials.click();
+		//myMenuLinkAarp.click();
+		OrderPlanMaterialslnk.click();
 		CommonUtility.checkPageIsReady(driver);
 		if (driver.getTitle().equalsIgnoreCase(
-				"AARP Medicare Plans | Order Plan Materials")) {
+				"AARP Medicare Plans | Order Plan Materials") || (driver.getTitle().equalsIgnoreCase("Order Plan Materials"))) {
 			return new OrderplanmaterialsPage(driver);
 		}
 		return null;
@@ -881,8 +891,15 @@ public class AccountHomePage extends UhcDriver {
 	}
 	
 	public OrderplanmaterialsPage navigateToLinkOrderPlanMaterialsAarpPage() {
-		driver.navigate().to("https://member.team-a-aarpmedicareplans.uhc.com/content/aarpm/home/order-plan-materials-dashboard.html");
 		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+		driver.navigate().to("https://member.team-a-aarpmedicareplans.uhc.com/content/aarpm/home/order-plan-materials-dashboard.html");
+		//OrderPlanMaterialslnk.click();
+		if(driver.getTitle().equalsIgnoreCase("Order Plan Materials")){
+			return new OrderplanmaterialsPage(driver);
+		}
+		
+		
+		
 		return null;
 	}
 
@@ -907,6 +924,37 @@ public class AccountHomePage extends UhcDriver {
 		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 		return null;
 	}
-
+	
+	public OrderplanmaterialsPage verifyneedHelpcomponent(){
+		boolean present;
+		try{
+			validate(needhelpcomponent);
+			present=true;
+		}catch(NoSuchElementException e)
+		{
+			present=false;
+		}
+		if(present)
+		System.out.println("Able to find needhelp component");
+		else
+			System.out.println("No needhelp component is displayed");
+		return null;
+	}
+	
+	public OrderplanmaterialsPage verifyHeaderTextandSubtext(){
+		boolean present;
+		try{
+			validate(orderplanHeadertxt);
+			present=true;
+		}catch(NoSuchElementException e)
+		{
+			present=false;
+		}
+		if(present)
+		System.out.println("@@@@@ Able to find order plan header text @@@@@");
+		else
+			System.out.println("order plan header text is not displayed");
+		return null;
+	}
 
 }
