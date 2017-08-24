@@ -265,7 +265,41 @@ public class OrderPlanMaterialsAarpStepDefinition {
 	OrderplanmaterialsPage orderPlanMaterialsPage = accountHomePage
 			.verifyHeaderTextandSubtext();
     }
-			
+	
+	@Then("^user navigates to Order Materials page for all Plans$")
+	public void user_navigates_Plan_Tabs(DataTable givenAttributes) {
+
+		OrderplanmaterialsPage orderPlanMaterialsPage = (OrderplanmaterialsPage) getLoginScenario().getBean(PageConstants.ORDER_PLAN_MATERIALS_PAGE);
+		
+		List<DataTableRow> givenAttributesRow = givenAttributes
+				.getGherkinRows();
+		Map<String, String> givenAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < givenAttributesRow.size(); i++) {
+			givenAttributesMap.put(givenAttributesRow.get(i).getCells().get(0),
+					givenAttributesRow.get(i).getCells().get(1));
+		}
+		String PlanTypes = givenAttributesMap.get("Combo Plans");
+		System.out.println(PlanTypes);
+		String[] Plans= PlanTypes.split(",");
+		System.out.println(Plans.length);
+		for(String currentPlan: Plans){
+			System.out.println(currentPlan);
+			orderPlanMaterialsPage.navigatePlanTabs(currentPlan);
+			if(!orderPlanMaterialsPage.ValidateHeader()){
+				System.out.println("Header Text and Subtext not displayed for "+currentPlan);
+			}
+		}
+		
+	}
+	
+	@And("^user Validates Page Header and Sub-Header text$")
+	public void user_validates_orderMaterialsHeader(){
+		OrderplanmaterialsPage orderPlanMaterialsPage = (OrderplanmaterialsPage) getLoginScenario().getBean(PageConstants.ORDER_PLAN_MATERIALS_PAGE);
+		if(!orderPlanMaterialsPage.ValidateHeader()){
+			System.out.println("Header Text and Subtext not displayed for Order materials Page");
+		}
+		
+	}
 	
 
 

@@ -84,4 +84,19 @@ Then the user verify header and sub text in order materials page in AARP site
 Examples:   
         | planType      |  
         | SHIP          | 
+        
+   
+ @ValidateHeaderTabs
+ Scenario Outline: Verify Aarp Order Materials Page Header - All Combo Plan Types
+    Given registered AMP member with following attributes
+      | Plan Type   | <planType>   |
+    When the user views order materials in AARP site
+    Then user navigates to Order Materials page for all Plans
+      | Combo Plans | <comboPlans> |
+    And user Validates Page Header and Sub-Header text
+
+    Examples: 
+      | planType | comboPlans |
+      | MA       | MA,HIP     |
+ 
 

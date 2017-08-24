@@ -16,7 +16,7 @@ import cucumber.junit.Cucumber;
 @Cucumber.Options(glue = { "atdd.framework","acceptancetests.pharmacylocator.ulayer" }, 
 		features = { "feature/pharmacy-locator/ulayer" }, 
 		format = {
-				"pretty", "html:reports/test-report","json:target/cucumber.json"}, tags ={"@pharmacysaverwidget"})
+				"pretty", "html:reports/test-report","json:target/cucumber.json"}, tags ={"@errormessages"})
 public class RunMRAtddTestPharmacylocator {
 	
 	
