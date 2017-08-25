@@ -864,14 +864,14 @@ public class MRScenario {
     	   
     	   								/****FIrefox Browser******/
            
-           if (null == webDriver) {
+/*           if (null == webDriver) {
                     File pathToBinary = new File("C:/Tools/FF/firefox.exe");
                     FirefoxBinary ffBinary = new FirefoxBinary(pathToBinary);
                     FirefoxProfile firefoxProfile = new FirefoxProfile();
                     webDriver = new FirefoxDriver(ffBinary, firefoxProfile);
                     webDriver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
             }
-    	   
+  */  	   
     	 
     	   										/****PhantomJS*******/
     	   
