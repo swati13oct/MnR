@@ -864,14 +864,15 @@ public class MRScenario {
     	   
     	   								/****FIrefox Browser******/
            
-          /* if (null == webDriver) {
-                    File pathToBinary = new File("C:/Users/tpravee2/AppData/Local/Mozilla Firefox/firefox.exe");
+           if (null == webDriver) {
+                    File pathToBinary = new File("C:/Tools/FF/firefox.exe");
                     FirefoxBinary ffBinary = new FirefoxBinary(pathToBinary);
                     FirefoxProfile firefoxProfile = new FirefoxProfile();
                     webDriver = new FirefoxDriver(ffBinary, firefoxProfile);
                     webDriver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
-            }*/
+            }
     	   
+    	 
     	   										/****PhantomJS*******/
     	   
              String browser = (null == System.getProperty(CommonConstants.JENKINS_BROWSER)
@@ -1016,7 +1017,7 @@ public class MRScenario {
 
        public WebDriver getIEDriver() {
               System.setProperty("webdriver.ie.driver",
-                           "C:/Users/pgupta15/Downloads/IEDriverServer_x64_2.27.0/IEDriverServer.exe");
+            		  "C:/Tools/IEDriverServer_Win32_3.5.1/IEDriverServer.exe");
               DesiredCapabilities ieCaps = DesiredCapabilities.internetExplorer();
               ieCaps.setCapability(
                             InternetExplorerDriver.INTRODUCE_FLAKINESS_BY_IGNORING_SECURITY_DOMAINS,

@@ -8,7 +8,7 @@ import pages.acquisition.bluelayer.ResponsivePlanDetailsUhc;
 import pages.acquisition.bluelayer.ResponsivePlanSummaryUhc;
 import pages.acquisition.bluelayer.VPPNeedMoreInformationWidget;
 import pages.acquisition.ulayer.ResponsivePlanSummary;
-import pages.dashboard.member.blayer.DrugCostEstimatorPage;
+//import pages.dashboard.member.blayer.DrugCostEstimatorPage;
 
 import java.util.HashMap;
 import java.util.List;
@@ -418,8 +418,8 @@ public class ResponsiveUhcStepDefiniton {
                 System.out.println(planName);
                 getLoginScenario().saveBean(VPPCommonConstants.PLAN_NAME, planName);
                 String planType = (String) getLoginScenario().getBean(CommonConstants.PLAN_TYPE);
-                DrugCostEstimatorPage dcePage = planSummary.navigateToDCE(planType, planName);
-                getLoginScenario().saveBean(PageConstants.ESTIMATE_DRUG_COST_PAGE, dcePage);
+                //DrugCostEstimatorPage dcePage = planSummary.navigateToDCE(planType, planName);
+                //getLoginScenario().saveBean(PageConstants.ESTIMATE_DRUG_COST_PAGE, dcePage);
 
         }
         @Then("^the user click on Is my Provider Covered link of SNP plans and validate Rally Connect Get Started page$")

@@ -168,7 +168,7 @@ public class MyProfilesPage extends UhcDriver{
 		String fileName = CommonConstants.MY_PROFILES_PAGE_DATA;
 		myProfiles = CommonUtility.readPageData(fileName,
 				CommonConstants.PAGE_OBJECT_DIRECTORY_ULAYER_MEMBER);
-		openAndValidate();
+		//openAndValidate();
 	}
 
 	public MyPreferencesPage navigateToMyPrefTab() {
@@ -346,9 +346,20 @@ public class MyProfilesPage extends UhcDriver{
 	}
 
 
+	public boolean Validate_Single_Tab_SHIP(){
+		List<WebElement> PlanTabs = driver.findElements(By.xpath("//a[contains(text(),'Supplemental  Insurance Plans')]"));
+		System.out.println("No of tabs: "+PlanTabs.size());
+		if(PlanTabs.size()>1){
+			return false;
+		}
+		else{
+			return true;
+		}
+	}
+
 	@Override
 	public void openAndValidate() {
-		validate(logOut);
+		//validate(logOut);
 
 		JSONObject jsonObject = new JSONObject();
 		for (String key : myProfiles.getExpectedData().keySet()) {

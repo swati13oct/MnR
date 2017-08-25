@@ -279,11 +279,8 @@ public class OrderPlanMaterialsAarpStepDefinition {
 					givenAttributesRow.get(i).getCells().get(1));
 		}
 		String PlanTypes = givenAttributesMap.get("Combo Plans");
-		System.out.println(PlanTypes);
 		String[] Plans= PlanTypes.split(",");
-		System.out.println(Plans.length);
 		for(String currentPlan: Plans){
-			System.out.println(currentPlan);
 			orderPlanMaterialsPage.navigatePlanTabs(currentPlan);
 			if(!orderPlanMaterialsPage.ValidateHeader()){
 				System.out.println("Header Text and Subtext not displayed for "+currentPlan);
@@ -301,7 +298,30 @@ public class OrderPlanMaterialsAarpStepDefinition {
 		
 	}
 	
+	
+	@And("^the user click Submit without any selection$")
+	public void user_submits_with_no_option_selected(){
+		OrderplanmaterialsPage orderPlanMaterialsPage = (OrderplanmaterialsPage) getLoginScenario().getBean(PageConstants.ORDER_PLAN_MATERIALS_PAGE);
+		PlanMaterialConfirmationPage planMaterialConfirmationpage = orderPlanMaterialsPage.selectsOption("None");
+		
+		if(planMaterialConfirmationpage == null){
+			System.out.println("In Order Materials Page");
+			Assert.assertTrue(true);
+		}
+		else
+			Assert.fail("Fail : navigages to Order Confirmation page");
+	}
 
+	@Then("^the user validates error message in Order Materials page$")
+	public void user_validates_error_message(){
+		OrderplanmaterialsPage orderPlanMaterialsPage = (OrderplanmaterialsPage) getLoginScenario().getBean(PageConstants.ORDER_PLAN_MATERIALS_PAGE);
+		
+		if(!orderPlanMaterialsPage.ValidateErrorMessage()){
+			System.out.println("Error Message not displayed for Order materials Page");
+			Assert.fail("Error Message failed");
+		}
+		
+	}
 
 	/*@After
 	public void tearDown() {

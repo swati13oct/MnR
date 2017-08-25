@@ -23,13 +23,16 @@ public class OrderplanmaterialsPage extends UhcDriver {
 
 	@FindBy(xpath = "//a[contains(text(), 'Hospital Indemnity')]")
 	private WebElement HIPplanTab;
+	
+	@FindBy(xpath = "//a[contains(text(), 'Medicare Prescription Drug Plan')]")
+	private WebElement PDPPlanTab;
 
-
-	//@FindBy(id = "documentIdName1")
+	@FindBy(xpath = "//a[contains(text(), 'Medicare Supplement Insurance Plan')]")
+	private WebElement MedSuppPlanTab;
+	
 	@FindBy(id = "member-materials")
 	private WebElement memberMaterialsfield;
 
-	//@FindBy(id = "documentIdName2")
 	@FindBy(id = "replacement-id")
 	private WebElement replacementIdField;
 	
@@ -39,23 +42,18 @@ public class OrderplanmaterialsPage extends UhcDriver {
 	@FindBy(id = "eft-id")
 	private WebElement EFTbrochureField;
 
-	//@FindBy(id = "documentIdName3")
 	@FindBy(id = "ppe-id")
 	private WebElement premiumPayment;
 
-	//@FindBy(id = "documentIdName4")
 	@FindBy(id = "couponBook-id")
 	private WebElement couponBook;
 
-	//@FindBy(id = "documentIdName5")
 	@FindBy(id = "medicareHospital-id")
 	private WebElement medicareHospital;
 
-	//@FindBy(id = "documentIdName6")
 	@FindBy(id = "claimsEnvelope-id")
 	private WebElement claimsEnvelope;
 
-	//@FindBy(id = "documentIdName7")
 	@FindBy(id = "coi-id")
 	private WebElement certificateInsurance;
 
@@ -85,36 +83,58 @@ public class OrderplanmaterialsPage extends UhcDriver {
 	
 	@SuppressWarnings("deprecation")
 	public void navigatePlanTabs(String PlanType){
-		System.out.println("Plan Type"+PlanType);
-		if (PlanType.contains("MA")) {
-			System.out.println("Plan Type"+PlanType);
-			validate(MAPlanTab);
+		
+		if (PlanType.contains("MA") || PlanType.contains("MAPD")) {
+		validate(MAPlanTab);
 			MAPlanTab.click();
-			Assert.assertTrue("Cant navigate to MA Plan Tab", memberMaterialsfield.isDisplayed());
+			Assert.assertTrue("Cant navigate to MA / MAPD Plan Tab", memberMaterialsfield.isDisplayed());
+			System.out.println("*************Displaying Medicare Advantage Plan Tab **********");
 		}
 		
 		else if (PlanType.contains("HIP")) {
-			System.out.println("Plan Type"+PlanType);
 			validate(HIPplanTab);
 			HIPplanTab.click();
 			Assert.assertTrue("Cant navigate to HIP Plan Tab", MemberIDcardField.isDisplayed());
+			System.out.println("*************Displaying SHIP - HIP Plan Tab **********");
+			
+		}
+		else if (PlanType.contains("PDP")) {
+			validate(PDPPlanTab);
+			PDPPlanTab.click();
+			Assert.assertTrue("Cant navigate to PDP Plan Tab", memberMaterialsfield.isDisplayed());
+			System.out.println("*************Displaying PDP Plan Tab **********");
+			
+		}
+		else if (PlanType.contains("MedSupp")) {
+			validate(MedSuppPlanTab);
+			MedSuppPlanTab.click();
+			Assert.assertTrue("Cant navigate to Med Supp PlanTab Plan Tab", MemberIDcardField.isDisplayed());
+			System.out.println("*************Displaying SHIP - Med Supp Plan Tab Plan Tab **********");
+			
 		}
 		else{
 			System.out.println("Invalid Plan Type / Plan Type not found");
 		}	
 	}
 
-	@SuppressWarnings("deprecation")
 	public boolean ValidateHeader(){
-		//Assert.assertTrue("Header text not displayed", driver.findElement(By.xpath("//*[contains(text(), 'Order Plan Materials')]")).isDisplayed());
-		//Assert.assertTrue("Header Sub-text not displayed", driver.findElement(By.xpath("//*[contains(text(), 'Get hard copies delivered')]")).isDisplayed());
 		if (driver.findElement(By.xpath("//h1[@class='h4 margin-none']")).isDisplayed() && driver.findElement(By.xpath("//h2[@class='h3 medium margin-large']")).isDisplayed()){
-			System.out.println("Header Text and Subtext displayed for Order materials Page");
+			System.out.println("*************Header Text and Subtext displayed for Order materials Page***************");
 			
 			return true;
 		}
 		else{ 
-			System.out.println("Header Text and Subtext not displayed for Order materials Page");
+			System.out.println("************Header Text and Subtext not displayed for Order materials Page***************");
+			return false;}
+		
+	}
+	public boolean ValidateErrorMessage(){
+		if (driver.findElement(By.xpath("//*[contains(text(), 'Please select one of the items above')]")).isDisplayed()){
+			System.out.println("*************Error Message Displayed displayed for Order materials Page***************");
+			return true;
+		}
+		else{ 
+			System.out.println("************Error message not displayed for Order materials Page***************");
 			return false;}
 		
 	}
@@ -144,6 +164,11 @@ public class OrderplanmaterialsPage extends UhcDriver {
 		if (option.contains("Coupon Book")) {
 			couponBook.click();
 		}
+		
+		if (option.contains("None")) {
+			System.out.println("No option for order material selected");
+		}
+		
 
 		/*
 		 * if (option.contains("Medicare Select Hospital Directory")){
@@ -168,6 +193,7 @@ public class OrderplanmaterialsPage extends UhcDriver {
 		} else
 			return null;
 		*/
+		
 		
 		if (driver.findElement(By.className("orderplanmaterials")).getText()
 				.contains("The following documents have been ordered")) {

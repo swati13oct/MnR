@@ -66,6 +66,7 @@ public class AccountHomePage extends UhcDriver {
 	
 	@FindBy(xpath="//[@id='benefits']/a")
 	private WebElement benefitsAndCoverageLink;
+	
 
 	@FindBy(linkText = "locate a pharmacy")
 	private WebElement pharmacyLocator;
@@ -97,9 +98,24 @@ public class AccountHomePage extends UhcDriver {
 	@FindBy(linkText = "Search claim history")
 	private WebElement searchClaimsHistory;
 
-	@FindBy(linkText = "Search medical claims")
+	@FindBy(linkText = "Search medical claims" )
 	private WebElement searchMedicalClaims;
+	
+	@FindBy(xpath = "//a[contains(text(), 'Go to Claims')]")
+	private WebElement ClaimsLink;
+	
+	@FindBy(xpath = "//a[contains(text(), 'Go to EOB Search')]")
+	private WebElement EOBsearchLink;
+	
+	@FindBy(xpath = "//a[contains(text(), 'Go to MyProfile ')]")
+	private WebElement MyProfileLink;
 
+	@FindBy(xpath = "//a[contains(text(), 'Go to Payments')]")
+	private WebElement GoToPaymentsLink;
+	
+	@FindBy(xpath = "//a[contains(text(), 'Go to Contact Us')]")
+	private WebElement GoToContactUsLnk;
+	
 	@FindBy(linkText = "Search drug claims")
 	private WebElement searchDrugClaims;
 
@@ -225,7 +241,7 @@ public class AccountHomePage extends UhcDriver {
 	@FindBy(xpath = "//section[1]/div/div/div/a")
 	private WebElement addordermaterialLink;
 	
-	@FindBy(xpath="//a[contains(text(),'Go to Order plan materials  page')]")
+	@FindBy(xpath="//a[contains(text(),'Go to Order plan materials')]")
 	private WebElement OrderPlanMaterialslnk;
 	
 	@FindBy(xpath="//h3[contains(text(),'Technical Support') or contains(text(),'Plan Support')]/ancestor::div[@class='col-md-4']")
@@ -263,12 +279,15 @@ public class AccountHomePage extends UhcDriver {
 	
 	
 	public PlanBenefitsCoveragePage navigateToBenefitsAndCoverage() {
-		benefitsAndCoverageLink.click();
+		EOBsearchLink.click();
+		//benefitsAndCoverageLink.click();
 		if (driver.getTitle().equalsIgnoreCase(
-				"AARP Medicare Plans | Plan Benefits and Coverage")) {
+				"AARP Medicare Plans | Plan Benefits and Coverage") || driver.getTitle().equalsIgnoreCase("Explanation of Benefits (EOB)")) {
 			return new PlanBenefitsCoveragePage(driver);
-		} else
+		} 
+		else {
 			return null;
+		}
 	}
 	
 
@@ -288,12 +307,14 @@ public class AccountHomePage extends UhcDriver {
 
 	public PaymentHistoryPage navigateToPayments() {
 
-		paymentsLink.click();
-		if (driver.getTitle().equalsIgnoreCase("Premium Payment History")) {
+		GoToPaymentsLink.click();
+		//paymentsLink.click();
+		if (driver.getTitle().equalsIgnoreCase("Premium Payment History") || driver.getTitle().equalsIgnoreCase("payments-overview")) {
 			return new PaymentHistoryPage(driver);
-		} else
-
+		} 
+		else{
 			return null;
+		}
 	}
 
 	public PhrPage navigateToPhr() {
@@ -334,16 +355,20 @@ public class AccountHomePage extends UhcDriver {
 
 	public MyProfilesPage navigateToProfAndPref() {
 
-		profAndPrefLink.click();
+		MyProfileLink.click();
+		/*profAndPrefLink.click();
 		CommonUtility.waitForPageLoad(driver, myProfilePageHeading, 25);
 		Cookie ck = driver.manage().getCookieNamed("green");
 		System.out.println("Cooke Name ::: " + ck.getName());
-		System.out.println("Cooke value ::: " + ck.getValue());
+		System.out.println("Cooke value ::: " + ck.getValue());*/
 		if (driver.getTitle().equalsIgnoreCase(
-				"AARP Medicare Plans | My Personal Profile")) {
+				"AARP Medicare Plans | My Personal Profile") || driver.getTitle().equalsIgnoreCase(
+						"My Profile & Preferences")) {
 			return new MyProfilesPage(driver);
 		}
-		return null;
+		else{
+			return null;
+		}
 
 	}
 
@@ -408,12 +433,23 @@ public class AccountHomePage extends UhcDriver {
 	}
 
 	public MedicalClaimSummaryPage navigateToMedicalClaimsSummary() {
+		ClaimsLink.click();
+		//searchMedicalClaims.click();
+		System.out.println("Claims link clicked");
 
-		searchMedicalClaims.click();
+		/*if (ClaimsLink.isDisplayed()){
+			ClaimsLink.click();
+		}
+		else{
+			
+		}*/
 		if (driver.getTitle().equalsIgnoreCase("Claims")) {
+			System.out.println("Claims Page loaded");
 			return new MedicalClaimSummaryPage(driver);
 		}
-		return null;
+		else{
+			return null;
+		}
 	}
 
 	public DrugClaimSummaryPage navigateToDrugClaimsSummary() {
@@ -469,11 +505,11 @@ public class AccountHomePage extends UhcDriver {
 
 	@Override
 	public void openAndValidate() {
-		validate(benefitsLink);
+		/*validate(benefitsLink);
 		validate(phrTab);
 		// validate(formsAndResourcesLink);
 		validate(benefitsLink);
-		validate(logOut);
+		validate(logOut);*/
 
 		JSONObject jsonObject = new JSONObject();
 		for (String key : myAccountHome.getExpectedData().keySet()) {
@@ -532,7 +568,8 @@ public class AccountHomePage extends UhcDriver {
 		if (driver.getTitle().equalsIgnoreCase(
 				"AARP Medicare Plans | Order Plan Materials") || (driver.getTitle().equalsIgnoreCase("Order Plan Materials"))) {
 			return new OrderplanmaterialsPage(driver);
-		}else{
+		}
+		else{
 		return null;
 	}
 	}
@@ -555,14 +592,15 @@ public class AccountHomePage extends UhcDriver {
 	}
 
 	public ContactUsPage navigatesToContactUsPage() {
-		
-		contactUsLink.click();
-		if(getTitle().equalsIgnoreCase("AARP Medicare Plans | Contact Us"))
+		GoToContactUsLnk.click();
+		//contactUsLink.click();
+		if(getTitle().equalsIgnoreCase("AARP Medicare Plans | Contact Us") || getTitle().equalsIgnoreCase("Contact Us"))
 		{
 			return new ContactUsPage(driver);
 		}
-		return null;
-				
+		else{
+			return null;
+		}
 	}
 
 	public PlanComparePage navigateToPlanCompare() {

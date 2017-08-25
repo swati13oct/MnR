@@ -179,3 +179,19 @@ And the user validate order additional material and click to add other order add
 Examples:
   | planType   | memberType     | 
   | MAPD       |  Group         |
+
+  
+ @PDPgroupComboValidateHeaderandTabs
+Scenario Outline: Verify UHC Aarp Order Materials Page Header - All  Plan Types for Group Members
+Given registered UHC member for order plan materials with following attributes
+	| Plan Type    | <planType>   |
+	| Member Type  | <memberType> | 
+When the user views order materials in UHC site
+Then user navigates to Order Materials page for all Plans
+  | Combo Plans | <comboPlans> |
+And user Validates Page Header and Sub-Header text
+
+Examples:
+  | planType   | memberType    |  comboPlans |
+  | PDP       |  Group         |  PDP,SSUP	 |
+  

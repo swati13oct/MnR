@@ -232,6 +232,9 @@ public class AccountHomePage extends UhcDriver {
 	@FindBy(xpath = "html/body/div[2]/div/div/main/div/section[1]/div/div/div/form/button")
 	private WebElement submitLink;
 	
+	@FindBy(xpath="//a[contains(text(),'Go to order-plan-materials')]")
+	private WebElement OrderPlanMaterialslnk;
+	
 	@FindBy(xpath = "//section[1]/div/div/div/a")
 	//@FindBy(linkText = "ORDER ADDITIONAL MATERIALS")
 	private WebElement addordermaterialLink;
@@ -1122,10 +1125,22 @@ public FormsandresourcesPage navigateToMydocumentUmsPage() {
 	}
 	
 	public OrderplanmaterialsPage navigateToLinkOrderPlanMaterialsPage() {
-		driver.navigate().to("https://member.team-a-uhcmedicaresolutions.uhc.com/content/uhcm/home/order-plan-materials-dashboard.html");
-		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+		
+		OrderPlanMaterialslnk.click();
+		
+		CommonUtility.checkPageIsReady(driver);
+		if (driver.getTitle().equalsIgnoreCase(
+				"AARP Medicare Plans | Order Plan Materials") || (driver.getTitle().equalsIgnoreCase("Order Plan Materials"))) {
+			return new OrderplanmaterialsPage(driver);
+		}
+		else{
 		return null;
 	}
+		/*driver.navigate().to("https://member.team-a-uhcmedicaresolutions.uhc.com/content/uhcm/home/order-plan-materials-dashboard.html");
+		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+		return null;*/
+	}
+	
 
 	public OrderplanmaterialsPage navigateToValidateRadioButtonPage() {
 		driver.manage().timeouts().implicitlyWait(600, TimeUnit.SECONDS);

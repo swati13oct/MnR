@@ -1,6 +1,6 @@
 package pages.acquisition.bluelayer;
 
-import static org.junit.Assert.fail;
+//import static org.junit.Assert.fail;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,7 +30,7 @@ import acceptancetests.enrollinplan.bluelayer.EnrollInPlanUhcStepDefinition;
 import acceptancetests.planName.bluelayer.PlanNamesStepDefinition;
 import atdd.framework.UhcDriver;
 import pages.acquisition.ulayer.VPPPlanSummaryPage;
-import pages.dashboard.member.blayer.DrugCostEstimatorPage;
+//import pages.dashboard.member.blayer.DrugCostEstimatorPage;
 import pages.member.ulayer.Rallytool_Page;
 import pages.mobile.acquisition.ulayer.VPPAarpNeedAStepBackWidget;
 import pages.mobile.acquisition.ulayer.VPPAarpNeedHelpWidgetPage;
@@ -1461,14 +1461,14 @@ public void comparePlanslnk(){
                                         // TODO Auto-generated method stub
                                         
                                 }
-                        public DrugCostEstimatorPage navigateToDCE(String planType, String planName){
-                                if(planType.equals("MA")){
-                                        driver.findElement(By.xpath("//*[contains(text(),'"+planName+"')]/parent::div/parent::div/"
-                                                        + "following-sibling::div[1]/div/div[1]/div[@class='mabenefittable']/ul/li[6]/span[2]/a")).click();
-                                        return new DrugCostEstimatorPage(driver);
-                                }
-                                return null;
-                        }        
+//                        public DrugCostEstimatorPage navigateToDCE(String planType, String planName){
+//                                if(planType.equals("MA")){
+//                                        driver.findElement(By.xpath("//*[contains(text(),'"+planName+"')]/parent::div/parent::div/"
+//                                                        + "following-sibling::div[1]/div/div[1]/div[@class='mabenefittable']/ul/li[6]/span[2]/a")).click();
+//                                        return new DrugCostEstimatorPage(driver);
+//                                }
+//                                return null;
+//                        }        
                         
                         public ResponsivePlanSummaryUhc enrollInPlan(String planType, String planName){
                 WebElement enrollNowLink;

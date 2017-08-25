@@ -12,10 +12,10 @@ import cucumber.junit.Cucumber;
  */
 
 @RunWith(Cucumber.class)
-@Cucumber.Options(glue = { "atdd.framework","acceptancetests.ordermaterials.ulayer" }, 
-		features = { "feature/ordermaterials/ulayer" }, 
+@Cucumber.Options(glue = { "atdd.framework","acceptancetests.ordermaterials.bluelayer" }, 
+		features = { "feature/ordermaterials/bluelayer" }, 
 		format = {
-				"pretty", "html:reports/test-report","json:target/cucumber.json"}, tags ={"@ValidateHeaderTabs,@headertextandsubtext,@needhelpcomponent"})
+				"pretty", "html:reports/test-report","json:target/cucumber.json"}, tags ={"@ValidateErrorMessage, @ValidateHeaderTabs, @PDPgroupComboValidateHeaderandTabs"})
 
 public class RunMRAtddTestOrderPlanMaterials {
 	

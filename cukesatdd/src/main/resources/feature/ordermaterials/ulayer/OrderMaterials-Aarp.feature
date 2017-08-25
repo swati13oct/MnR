@@ -96,7 +96,21 @@ Examples:
     And user Validates Page Header and Sub-Header text
 
     Examples: 
-      | planType | comboPlans |
-      | MA       | MA,HIP     |
+      	| planType | comboPlans |
+     		| MA       | MA,HIP     |
+     		| MAPD		 | MAPD,HIP		|
+      	| PDP			 | PDP,MedSupp|
  
 
+@ValidateErrorMessage
+ Scenario Outline: Verify Aarp Order Materials Page Error Message
+    Given registered AMP member with following attributes
+      | Plan Type   | <planType>   |
+    When the user views order materials in AARP site
+    And the user click Submit without any selection
+    Then the user validates error message in Order Materials page
+    
+    Examples: 
+      	| planType | comboPlans |
+     		| MA       | MA,HIP     |
+    
