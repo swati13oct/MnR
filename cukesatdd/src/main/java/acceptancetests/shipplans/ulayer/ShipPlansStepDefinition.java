@@ -147,7 +147,7 @@ public class ShipPlansStepDefinition {
 	@When("^the user navigates to mentioned page in AARP site$")
 	public void views_pages_in_Ums_site(DataTable givenAttributes) {
 		
-		List<DataTableRow> givenAttributesRow = givenAttributes
+		/*List<DataTableRow> givenAttributesRow = givenAttributes
 				.getGherkinRows();
 		Map<String, String> givenAttributesMap = new HashMap<String, String>();
 		for (int i = 0; i < givenAttributesRow.size(); i++) {
@@ -229,7 +229,7 @@ public class ShipPlansStepDefinition {
 			break;
 		}
 		
-		}
+		}*/
 		
 	}
 	
@@ -237,7 +237,7 @@ public class ShipPlansStepDefinition {
 	public void user_validates_single_tab(DataTable givenAttributes) {
 		
 		
-		List<DataTableRow> givenAttributesRow = givenAttributes
+		/*List<DataTableRow> givenAttributesRow = givenAttributes
 				.getGherkinRows();
 		Map<String, String> givenAttributesMap = new HashMap<String, String>();
 		for (int i = 0; i < givenAttributesRow.size(); i++) {
@@ -318,7 +318,7 @@ public class ShipPlansStepDefinition {
 				}
 			break;
 			}
-		}
+		}*/
 		
 	}
 		

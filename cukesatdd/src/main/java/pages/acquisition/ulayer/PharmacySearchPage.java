@@ -38,7 +38,7 @@ public class PharmacySearchPage extends UhcDriver {
 	@FindBy(id = "zipcode-button")
 	private WebElement continueField;
 
-	@FindBy(id = "selectcounty_box")
+	@FindBy(id = "selectCounty")
 	private WebElement countyPopOut;
 
 	@FindBy(id = "selectcountytable")
@@ -86,7 +86,7 @@ public class PharmacySearchPage extends UhcDriver {
 	@FindBy(xpath = "(//*[contains(text(),'Show on Map')])[1]")
 	private WebElement showonmap;
 	
-	@FindBy(xpath = "//*[contains(text(),'VIEW RESULTS AS PDF')]")
+	@FindBy(xpath = "//*[contains(text(),'VIEW RESULT AS PDF')]")
 	private WebElement viewsearchpdf;
 	
 	@FindBy(xpath = "(.//*[@id='subPageRight']/div[2]/div[2]/ul/li[3]/a")
@@ -100,6 +100,7 @@ public class PharmacySearchPage extends UhcDriver {
 
 	@FindBy(xpath = ".//*[@for='pharmacy-saver']")
 	private WebElement filterLink;
+	
 	
 	@FindBy(xpath = "(//*[@id='lang-select']//option)[2]")
 	private WebElement chineseLink;
@@ -237,6 +238,7 @@ public class PharmacySearchPage extends UhcDriver {
 	}
 	
 	public PharmacyResultPage ValidateShowOnMapResult() {
+		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 		showonmap.click();
 		if (driver.getTitle().equalsIgnoreCase(
 				"Member Claims")) {

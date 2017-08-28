@@ -2,6 +2,7 @@ package pages.acquisition.ulayer;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -201,7 +202,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	@FindBy(xpath = ".//*[@id='Find a pharmacy near you']")
 	private WebElement findapharmacylink;
 	
-	@FindBy(xpath = ".//*[@id='site-wrapper']/div[4]/div/div/div/div/div/main/div/div[5]/div/div/div/a")
+	@FindBy(xpath = ".//a[@class='display-block collapse-expand collapsed']")
 	private WebElement moreInfoLink;
 	
 	@FindBy(xpath = ".//*[@id='site-wrapper']/div[4]/div/div/div/div/div/main/div/div[4]/div/div[4]/div[1]/div[2]")
@@ -1293,12 +1294,14 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	}
 
 	public PharmacyResultPage validateMoreInfoContent() {
+		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 		moreInfoLink.click();
 		if (getTitle().equalsIgnoreCase("Find a Pharmacy |Medicare Plans from UnitedHealthcare")) {
 			return new PharmacyResultPage(driver);
 		}
 		return null;
 	}
+	
 
 	public PharmacyResultPage validateChatWidget() {
 		boolean present;
