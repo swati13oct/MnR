@@ -1,5 +1,5 @@
 @acq_drug_cost_estimator
-Feature:Drug Cost Estimator (DCE) - To test DCE flow from home page on aarp acq site
+Feature:Drug Cost Estimator (DCE) - To test DCE flow from home page and dce vpp flow on aarp acq site
 
 @acq_drug_cost_estimator_ulayer_flow
 Scenario Outline: As a prospective member using redesigned DCE tool on the M&R portal site on either a desktop or mobile device, I want to be able to choose a generic option if it is available from my Drug List and see any cost savings associated with it if I have selected a pharmacy so I can save on the cost of my prescription drugs.
