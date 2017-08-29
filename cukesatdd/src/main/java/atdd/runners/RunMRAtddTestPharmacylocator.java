@@ -17,7 +17,10 @@ import cucumber.junit.Cucumber;
 @Cucumber.Options(glue = { "atdd.framework","acceptancetests.pharmacylocator.ulayer" }, 
 		features = { "feature/pharmacy-locator/ulayer" }, 
 		format = {
-				"pretty", "html:reports/test-report","json:target/cucumber.json"}, tags ={"@multicounty,@languageselection,@planType,@zipcodeEntry,@showonmap,@resultpdf,@plmapd,@plpdp,@MAplantype,@Widgets,@moreinfoPDPplantype,@moreinfoMAplantype,@chatPDPplantype,@chatMAplantype,@TFNPDPplantype,@TFNMAplantype,@pharmacysaverwidget,@Pharmacylist,@chineselanguage,@spanishlanguage,@resultpdfpharmacysaver,@moreinfopharmacysaver,@redballonpharmacysaver,@tooltippharmacysaver,@errormessages"})
+				"pretty", "html:reports/test-report","json:target/cucumber.json"}, 
+		tags ={"@Pharmacylist,@chineselanguage,@spanishlanguage,@resultpdfpharmacysaver,@moreinfopharmacysaver,@redballonpharmacysaver,@tooltippharmacysaver"})
+//@multicounty,@languageselection,@planType,@zipcodeEntry,@showonmap,
+//@resultpdf,@plmapd,@plpdp,@MAplantype,@Widgets,@moreinfoPDPplantype,@moreinfoMAplantype,@chatPDPplantype,@chatMAplantype,@TFNPDPplantype,@TFNMAplantype,@pharmacysaverwidget,@Pharmacylist,@chineselanguage,@spanishlanguage,@resultpdfpharmacysaver,@moreinfopharmacysaver,@redballonpharmacysaver,@tooltippharmacysaver,@errormessages
 public class RunMRAtddTestPharmacylocator {
 	
 	

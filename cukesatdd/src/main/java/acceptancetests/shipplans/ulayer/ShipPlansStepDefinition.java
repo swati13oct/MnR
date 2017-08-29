@@ -147,7 +147,7 @@ public class ShipPlansStepDefinition {
 	@When("^the user navigates to mentioned page in AARP site$")
 	public void views_pages_in_Ums_site(DataTable givenAttributes) {
 		
-		/*List<DataTableRow> givenAttributesRow = givenAttributes
+		List<DataTableRow> givenAttributesRow = givenAttributes
 				.getGherkinRows();
 		Map<String, String> givenAttributesMap = new HashMap<String, String>();
 		for (int i = 0; i < givenAttributesRow.size(); i++) {
@@ -156,8 +156,8 @@ public class ShipPlansStepDefinition {
 		}
 		String PageName = givenAttributesMap.get("Page Name");
 		System.out.println("Page Name"+PageName);
-		switch(PageName){
-		case "Claims" :{
+		//switch(PageName){
+		if (PageName.equalsIgnoreCase("Claims")){
 			AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario()
 					.getBean(PageConstants.ACCOUNT_HOME_PAGE);
 			MedicalClaimSummaryPage medicalClaimssummaryPage = accountHomePage.navigateToMedicalClaimsSummary();
@@ -170,9 +170,8 @@ public class ShipPlansStepDefinition {
 			else {
 				Assert.fail("Error in loading  Claims Summary Page");
 			}
-			break;
 		}
-		case "EOB" :{
+		else if (PageName.equalsIgnoreCase("EOB")){
 			AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario()
 					.getBean(PageConstants.ACCOUNT_HOME_PAGE);
 			PlanBenefitsCoveragePage planBenefitsCoverageage = accountHomePage.navigateToBenefitsAndCoverage();
@@ -184,9 +183,8 @@ public class ShipPlansStepDefinition {
 			else {
 				Assert.fail("Error in loading  EOB Page");
 			}
-			break;
 		}
-		case "Profile" :{
+		else if (PageName.equalsIgnoreCase("Profile")){
 			AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario()
 					.getBean(PageConstants.ACCOUNT_HOME_PAGE);
 			MyProfilesPage myProfilepage = accountHomePage.navigateToProfAndPref();
@@ -198,9 +196,8 @@ public class ShipPlansStepDefinition {
 			else {
 				Assert.fail("Error in Loading Profile and Preferences Summary Page");
 			}
-			break;
 		}
-		case "Payment" :{
+		else if (PageName.equalsIgnoreCase("Payment")){
 			AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario()
 					.getBean(PageConstants.ACCOUNT_HOME_PAGE);
 			PaymentHistoryPage paymentHistorypage = accountHomePage.navigateToPayments();
@@ -212,9 +209,8 @@ public class ShipPlansStepDefinition {
 			else {
 				Assert.fail("Error in loading Payment History Page");
 			}
-			break;
 		}
-		case "ContactUs" :{
+		else if (PageName.equalsIgnoreCase("ContactUs")){
 			AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario()
 					.getBean(PageConstants.ACCOUNT_HOME_PAGE);
 			ContactUsPage contactUspage = accountHomePage.navigatesToContactUsPage();
@@ -226,18 +222,15 @@ public class ShipPlansStepDefinition {
 			else {
 				Assert.fail("Error in loading  Contact Us Page");
 			}
-			break;
 		}
-		
-		}*/
-		
+		else{System.out.println("Invalid Page Name selection");}
 	}
 	
 	@Then("^the user validates single tab for all SHIP plans$")
 	public void user_validates_single_tab(DataTable givenAttributes) {
 		
 		
-		/*List<DataTableRow> givenAttributesRow = givenAttributes
+		List<DataTableRow> givenAttributesRow = givenAttributes
 				.getGherkinRows();
 		Map<String, String> givenAttributesMap = new HashMap<String, String>();
 		for (int i = 0; i < givenAttributesRow.size(); i++) {
@@ -246,9 +239,9 @@ public class ShipPlansStepDefinition {
 		}
 		String PageName = givenAttributesMap.get("SHIP Page");
 		System.out.println(PageName);
-		switch(PageName){
+		//switch(PageName){
 		
-		case "Claims" :{
+		if (PageName.equalsIgnoreCase("Claims")){
 			MedicalClaimSummaryPage medicalClaimssummaryPage = 
 					(MedicalClaimSummaryPage) getLoginScenario()
 					.getBean(PageConstants.CLAIM_SUMMARY_PAGE);
@@ -260,9 +253,8 @@ public class ShipPlansStepDefinition {
 			else{
 				System.out.println("**********Single Tab NOT displayed for all SHIP Plans");
 				}
-			break;
 			}
-		case "EOB" :{
+		else if (PageName.equalsIgnoreCase("EOB")){
 			PlanBenefitsCoveragePage planBenefitsCoverage = 
 					(PlanBenefitsCoveragePage) getLoginScenario()
 					.getBean(PageConstants.BENEFITS_AND_COVERAGE_PAGE);
@@ -274,9 +266,8 @@ public class ShipPlansStepDefinition {
 			else{
 				System.out.println("**********Single Tab NOT displayed for all SHIP Plans");
 				}
-			break;
 			}
-		case "Profile" :{
+		else if (PageName.equalsIgnoreCase("Profile")){
 			MyProfilesPage myProfilepage = 
 					(MyProfilesPage) getLoginScenario()
 					.getBean(PageConstants.PROF_AND_PREF_PAGE);
@@ -288,9 +279,8 @@ public class ShipPlansStepDefinition {
 			else{
 				System.out.println("**********Single Tab NOT displayed for all SHIP Plans");
 				}
-			break;
 			}
-		case "Payment" :{
+		else if (PageName.equalsIgnoreCase("Payment")){
 			PaymentHistoryPage paymentHistorypage  = 
 					(PaymentHistoryPage) getLoginScenario()
 					.getBean(PageConstants.PAYMENT_HISTORY_PAGE);
@@ -302,9 +292,8 @@ public class ShipPlansStepDefinition {
 			else{
 				System.out.println("**********Single Tab NOT displayed for all SHIP Plans");
 				}
-			break;
 			}
-		case "ContactUs" :{
+		else if (PageName.equalsIgnoreCase("ContactUs")){
 			ContactUsPage contactUspage  = 
 					(ContactUsPage) getLoginScenario()
 					.getBean(PageConstants.CONTACT_US_PAGE);
@@ -316,9 +305,10 @@ public class ShipPlansStepDefinition {
 			else{
 				System.out.println("**********Single Tab NOT displayed for all SHIP Plans");
 				}
-			break;
 			}
-		}*/
+		else{
+			System.out.println("Invalid Page Name Selection");
+		}
 		
 	}
 		

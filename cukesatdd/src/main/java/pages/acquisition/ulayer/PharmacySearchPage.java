@@ -86,7 +86,7 @@ public class PharmacySearchPage extends UhcDriver {
 	@FindBy(xpath = "(//*[contains(text(),'Show on Map')])[1]")
 	private WebElement showonmap;
 	
-	@FindBy(xpath = "//*[contains(text(),'VIEW RESULT AS PDF')]")
+	@FindBy(xpath = "//a[contains(text(),'VIEW RESULT AS PDF')]")
 	private WebElement viewsearchpdf;
 	
 	@FindBy(xpath = "(.//*[@id='subPageRight']/div[2]/div[2]/ul/li[3]/a")
@@ -98,7 +98,8 @@ public class PharmacySearchPage extends UhcDriver {
 	@FindBy(id = "plan-year")
 	private WebElement planYearDropDown;	
 
-	@FindBy(xpath = ".//*[@for='pharmacy-saver']")
+	//@FindBy(xpath = ".//*[@for='pharmacy-saver']")
+	@FindBy(xpath = "//a[@class='h5 filter-button bold color-blue-link margin-none']")
 	private WebElement filterLink;
 	
 	
@@ -129,9 +130,11 @@ public class PharmacySearchPage extends UhcDriver {
 		
 		//driver.findElement(By.id("zipcodeTxt")).sendKeys("90210");
 		sendkeys(zipcodeField, zipcode);
-		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-		searchbtn.click();
+		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 		
+		searchbtn.click();
+		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+
 		//selectFromDropDown(distanceDropDown, distance);
 
 		//continueField.click();
@@ -155,14 +158,17 @@ public class PharmacySearchPage extends UhcDriver {
 
 	//selectFromDropDown(planNamesList, planName);
 	public PharmacySearchPage selectsPlanName(String planName) {
-		try {
+/*		try {
 			Thread.sleep(3000);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+*/		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+		
 		Select select = new Select(planType);	
 		select.selectByVisibleText(planName);
+		driver.manage().timeouts().implicitlyWait(100, TimeUnit.SECONDS);
 		return new PharmacySearchPage(driver);
 	}
 
@@ -248,10 +254,16 @@ public class PharmacySearchPage extends UhcDriver {
 	}
 
 	public PharmacyResultPage ValidateSearchPdfResult() {
-		viewsearchpdf.click();
+		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+		
+		if (viewsearchpdf.isDisplayed())
+		{
+			viewsearchpdf.click();
+			}
 		if (driver.getTitle().equalsIgnoreCase(
-				"Member Claims")) {
+				"pharmacyDirectory.pdf")) {
 			return new PharmacyResultPage(driver);
+			
 		}
 		return null;
 	}
@@ -319,17 +331,17 @@ public class PharmacySearchPage extends UhcDriver {
 	}
 	
 	public PharmacySearchPage navigateToPharmacySearchResult() {
-		
-		//driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 		try {
 			Thread.sleep(5000);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		filterLink.click();
+		CommonUtility.checkPageIsReady(driver);
+		driver.manage().timeouts().implicitlyWait(1400, TimeUnit.SECONDS);
 		
-		return null;
+		filterLink.click();
+		return new PharmacySearchPage(driver);
 	}
 	
 	public PharmacySearchPage clickChinese(){
