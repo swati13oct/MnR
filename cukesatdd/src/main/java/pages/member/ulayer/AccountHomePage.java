@@ -563,6 +563,8 @@ public class AccountHomePage extends UhcDriver {
 	public OrderplanmaterialsPage navigateToOrderPlanMaterialsAarpPage() {
 
 		//myMenuLinkAarp.click();
+		
+		CommonUtility.checkPageIsReady(driver);
 		OrderPlanMaterialslnk.click();
 		CommonUtility.checkPageIsReady(driver);
 		if (driver.getTitle().equalsIgnoreCase(
