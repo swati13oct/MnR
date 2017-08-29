@@ -162,7 +162,7 @@ public class ShipPlansStepDefinition {
 					.getBean(PageConstants.ACCOUNT_HOME_PAGE);
 			MedicalClaimSummaryPage medicalClaimssummaryPage = accountHomePage.navigateToMedicalClaimsSummary();
 			if (medicalClaimssummaryPage != null) {
-				System.out.println("Claims not null");
+				System.out.println("Claims page Loaded");
 				getLoginScenario().saveBean(PageConstants.CLAIM_SUMMARY_PAGE,
 						medicalClaimssummaryPage);
 				Assert.assertTrue(true);
@@ -176,6 +176,7 @@ public class ShipPlansStepDefinition {
 					.getBean(PageConstants.ACCOUNT_HOME_PAGE);
 			PlanBenefitsCoveragePage planBenefitsCoverageage = accountHomePage.navigateToBenefitsAndCoverage();
 			if (planBenefitsCoverageage != null) {
+				System.out.println("EOB page Loaded");
 				getLoginScenario().saveBean(PageConstants.BENEFITS_AND_COVERAGE_PAGE,
 						planBenefitsCoverageage);
 				Assert.assertTrue(true);
@@ -189,6 +190,7 @@ public class ShipPlansStepDefinition {
 					.getBean(PageConstants.ACCOUNT_HOME_PAGE);
 			MyProfilesPage myProfilepage = accountHomePage.navigateToProfAndPref();
 			if (myProfilepage != null) {
+				System.out.println("Profile page Loaded");
 				getLoginScenario().saveBean(PageConstants.PROF_AND_PREF_PAGE,
 						myProfilepage);
 				Assert.assertTrue(true);
@@ -202,6 +204,7 @@ public class ShipPlansStepDefinition {
 					.getBean(PageConstants.ACCOUNT_HOME_PAGE);
 			PaymentHistoryPage paymentHistorypage = accountHomePage.navigateToPayments();
 			if (paymentHistorypage != null) {
+				System.out.println("Payment page Loaded");
 				getLoginScenario().saveBean(PageConstants.PAYMENT_HISTORY_PAGE,
 						paymentHistorypage);
 				Assert.assertTrue(true);
@@ -215,6 +218,7 @@ public class ShipPlansStepDefinition {
 					.getBean(PageConstants.ACCOUNT_HOME_PAGE);
 			ContactUsPage contactUspage = accountHomePage.navigatesToContactUsPage();
 			if (contactUspage != null) {
+				System.out.println("ContactUs page Loaded");
 				getLoginScenario().saveBean(PageConstants.CONTACT_US_PAGE,
 						contactUspage);
 				Assert.assertTrue(true);
@@ -247,11 +251,12 @@ public class ShipPlansStepDefinition {
 					.getBean(PageConstants.CLAIM_SUMMARY_PAGE);
 			
 			if(medicalClaimssummaryPage.Validate_Single_Tab_SHIP() ){
-				System.out.println("**********Single Tab displayed for all SHIP Plans");
+				System.out.println("**********CLAIMS Page - Single Tab displayed for all SHIP Plans");
 				Assert.assertTrue(true);
 			}
 			else{
-				System.out.println("**********Single Tab NOT displayed for all SHIP Plans");
+				System.out.println("**********CLAIMS Page - Single Tab NOT displayed for all SHIP Plans");
+				Assert.fail();
 				}
 			}
 		else if (PageName.equalsIgnoreCase("EOB")){
@@ -260,11 +265,12 @@ public class ShipPlansStepDefinition {
 					.getBean(PageConstants.BENEFITS_AND_COVERAGE_PAGE);
 			
 			if(planBenefitsCoverage.Validate_Single_Tab_SHIP() ){
-				System.out.println("**********Single Tab displayed for all SHIP Plans");
+				System.out.println("**********EOB Page - Single Tab displayed for all SHIP Plans");
 				Assert.assertTrue(true);
 			}
 			else{
-				System.out.println("**********Single Tab NOT displayed for all SHIP Plans");
+				System.out.println("**********EOB Page - Single Tab NOT displayed for all SHIP Plans");
+				Assert.fail();
 				}
 			}
 		else if (PageName.equalsIgnoreCase("Profile")){
@@ -273,11 +279,12 @@ public class ShipPlansStepDefinition {
 					.getBean(PageConstants.PROF_AND_PREF_PAGE);
 			
 			if(myProfilepage.Validate_Single_Tab_SHIP() ){
-				System.out.println("**********Single Tab displayed for all SHIP Plans");
+				System.out.println("**********Profile Page - Single Tab displayed for all SHIP Plans");
 				Assert.assertTrue(true);
 			}
 			else{
-				System.out.println("**********Single Tab NOT displayed for all SHIP Plans");
+				System.out.println("**********Profile Page - Single Tab NOT displayed for all SHIP Plans");
+				Assert.fail();
 				}
 			}
 		else if (PageName.equalsIgnoreCase("Payment")){
@@ -286,11 +293,12 @@ public class ShipPlansStepDefinition {
 					.getBean(PageConstants.PAYMENT_HISTORY_PAGE);
 			
 			if(paymentHistorypage.Validate_Single_Tab_SHIP() ){
-				System.out.println("**********Single Tab displayed for all SHIP Plans");
+				System.out.println("**********Payment Page - Single Tab displayed for all SHIP Plans");
 				Assert.assertTrue(true);
 			}
 			else{
-				System.out.println("**********Single Tab NOT displayed for all SHIP Plans");
+				System.out.println("**********Payment Page - Single Tab NOT displayed for all SHIP Plans");
+				Assert.fail();
 				}
 			}
 		else if (PageName.equalsIgnoreCase("ContactUs")){
@@ -299,15 +307,17 @@ public class ShipPlansStepDefinition {
 					.getBean(PageConstants.CONTACT_US_PAGE);
 			
 			if(contactUspage.Validate_Single_Tab_SHIP() ){
-				System.out.println("**********Single Tab displayed for all SHIP Plans");
+				System.out.println("**********Contact Us Page - Single Tab displayed for all SHIP Plans");
 				Assert.assertTrue(true);
 			}
 			else{
-				System.out.println("**********Single Tab NOT displayed for all SHIP Plans");
+				System.out.println("**********Contact Us Page - Single Tab NOT displayed for all SHIP Plans");
+				Assert.fail();
 				}
 			}
 		else{
 			System.out.println("Invalid Page Name Selection");
+			Assert.fail();
 		}
 		
 	}

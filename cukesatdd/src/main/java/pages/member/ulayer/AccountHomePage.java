@@ -280,6 +280,7 @@ public class AccountHomePage extends UhcDriver {
 	
 	public PlanBenefitsCoveragePage navigateToBenefitsAndCoverage() {
 		EOBsearchLink.click();
+		CommonUtility.checkPageIsReady(driver);
 		//benefitsAndCoverageLink.click();
 		if (driver.getTitle().equalsIgnoreCase(
 				"AARP Medicare Plans | Plan Benefits and Coverage") || driver.getTitle().equalsIgnoreCase("Explanation of Benefits (EOB)")) {
@@ -308,6 +309,7 @@ public class AccountHomePage extends UhcDriver {
 	public PaymentHistoryPage navigateToPayments() {
 
 		GoToPaymentsLink.click();
+		CommonUtility.checkPageIsReady(driver);
 		//paymentsLink.click();
 		if (driver.getTitle().equalsIgnoreCase("Premium Payment History") || driver.getTitle().equalsIgnoreCase("payments-overview")) {
 			return new PaymentHistoryPage(driver);
@@ -356,6 +358,7 @@ public class AccountHomePage extends UhcDriver {
 	public MyProfilesPage navigateToProfAndPref() {
 
 		MyProfileLink.click();
+		CommonUtility.checkPageIsReady(driver);
 		/*profAndPrefLink.click();
 		CommonUtility.waitForPageLoad(driver, myProfilePageHeading, 25);
 		Cookie ck = driver.manage().getCookieNamed("green");
@@ -434,6 +437,7 @@ public class AccountHomePage extends UhcDriver {
 
 	public MedicalClaimSummaryPage navigateToMedicalClaimsSummary() {
 		ClaimsLink.click();
+		CommonUtility.checkPageIsReady(driver);
 		//searchMedicalClaims.click();
 		System.out.println("Claims link clicked");
 
@@ -594,8 +598,10 @@ public class AccountHomePage extends UhcDriver {
 	}
 
 	public ContactUsPage navigatesToContactUsPage() {
+		
 		GoToContactUsLnk.click();
 		//contactUsLink.click();
+		CommonUtility.checkPageIsReady(driver);
 		if(getTitle().equalsIgnoreCase("AARP Medicare Plans | Contact Us") || getTitle().equalsIgnoreCase("Contact Us"))
 		{
 			return new ContactUsPage(driver);
