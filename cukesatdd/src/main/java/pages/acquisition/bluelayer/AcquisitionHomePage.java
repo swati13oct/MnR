@@ -62,6 +62,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 
 	@FindBy(id = "dce")
 	private WebElement prescriptionsLink;
+	
 	@FindBys(value = { @FindBy(xpath = "//table[@id='colhowdoesthiswork']/tbody/tr/td/span/span/a") })
 	private List<WebElement> howdoesthiswork;
 
@@ -77,10 +78,10 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	@FindBy(id = "homefooter")
 	private WebElement homefooter;
 
-	@FindBy(xpath = "//div[@id='subnav_2']/div/div/div/div/div[1]/p[2]/a/span")
+	@FindBy(id = "atdd_ma_plans")
 	private WebElement ma_moreHelpInfoLink;
 
-	@FindBy(xpath = "//div[@id='subnav_2']/div/div/div/div/div[2]/p[2]/a/span")
+	@FindBy(id = "atdd_mpd_plans")
 	private WebElement pdp_moreHelpInfoLink;
 
 	@FindBys(value = { @FindBy(xpath = "//table[@id='selectcountytable']/tbody/tr/td") })
