@@ -57,7 +57,7 @@ public class PharmacyLocatorUmsStepDefinition {
 
 	@When("^the user hovers to Our Plans and select Request More Help and Information for following plan type$")
 	public void user_hovers_to_our_plans_and_select_request_more_help_and_information(DataTable planAttributes){
-		
+
 		String planType = planAttributes.getGherkinRows().get(0).getCells()
 				.get(0);
 		getLoginScenario().saveBean(PharmacySearchCommonConstants.PLAN_TYPE, planType);
@@ -65,7 +65,7 @@ public class PharmacyLocatorUmsStepDefinition {
 				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
 		acqusitionHomePage.navigateToRequestMoreHelpAndInformation(planType);
 	}
-	
+
 	@When("^the user navigates to pharmacy search page in UMS Site$")
 	public void user_views_pharmacy_locator_UMS() {
 		AcquisitionHomePage acqusitionHomePage = (AcquisitionHomePage) getLoginScenario()
@@ -108,7 +108,7 @@ public class PharmacyLocatorUmsStepDefinition {
 				.getBean(PageConstants.PHARMACY_SEARCH_PAGE);
 		pharmacySearchPage = pharmacySearchPage.enterZipDistanceDetails(
 				zipcode, distance, county);
-		
+
 		if (pharmacySearchPage != null) {
 			getLoginScenario().saveBean(PageConstants.PHARMACY_SEARCH_PAGE,
 					pharmacySearchPage);
@@ -174,14 +174,14 @@ public class PharmacyLocatorUmsStepDefinition {
 			getLoginScenario().saveBean(
 					PharmacySearchCommonConstants.PHARMACY_RESULT_EXPECTED,
 					pharmacyResultExpectedJson);
-			*/
+			 */
 
 			/* Get actual data */
 			JSONObject pharmacyResultActualJson = pharmacyResultPage.pharmacyResultJson;
 			getLoginScenario().saveBean(
 					PharmacySearchCommonConstants.PHARMACY_RESULT_ACTUAL,
 					pharmacyResultActualJson);
-			
+
 		} else {
 			Assert.fail("Failed to load Pharmacy search page");
 		}
@@ -192,7 +192,7 @@ public class PharmacyLocatorUmsStepDefinition {
 	public void  user_searches_pharmacies_by_choosing_pharmacy_types_ums(DataTable pharmacyTypeAttributes)
 	{
 		String[] pharmacyTypeArray = pharmacyTypeAttributes.getGherkinRows().get(0).getCells().get(0).split(",");
-		
+
 		PharmacySearchPage pharmacySearchPage = (PharmacySearchPage) getLoginScenario()
 				.getBean(PageConstants.PHARMACY_SEARCH_PAGE);
 
@@ -207,7 +207,7 @@ public class PharmacyLocatorUmsStepDefinition {
 			for(String pharmacyType : pharmacyTypeArray){
 				fileName = fileName+"_"+pharmacyType;
 			}
-						
+
 			String directory = CommonConstants.ACQUISITION_EXPECTED_DIRECTORY
 					+ File.separator + CommonConstants.SITE_BLUELAYER
 					+ File.separator + PharmacySearchCommonConstants.PHARMACY_SEARCH
@@ -220,79 +220,81 @@ public class PharmacyLocatorUmsStepDefinition {
 			getLoginScenario().saveBean(
 					PharmacySearchCommonConstants.PHARMACY_RESULT_EXPECTED,
 					pharmacyResultExpectedJson);
-*/
+			 */
 			/* Get actual data */
 			JSONObject pharmacyResultActualJson = pharmacyResultPage.pharmacyResultJson;
 			getLoginScenario().saveBean(
 					PharmacySearchCommonConstants.PHARMACY_RESULT_ACTUAL,
 					pharmacyResultActualJson);
-			
+
 		} else {
 			Assert.fail("Failed to load Pharmacy search page");
 		}
-		
+
 	}
-	
+
 	@Then("^the user validates the error message for no pharmacies found for below pharmacy$")
 	public void validates_error_msg_for_no_pharmacies_found(DataTable pharmacyTypeAttributes){
 		String[] pharmacyTypeArray = pharmacyTypeAttributes.getGherkinRows().get(0).getCells().get(0).split(",");
-		
+
 		PharmacySearchPage pharmacySearchPage = (PharmacySearchPage) getLoginScenario()
 				.getBean(PageConstants.PHARMACY_SEARCH_PAGE);
 		pharmacySearchPage.validateNoPharmacyErrormsg(pharmacyTypeArray);
 	}
-	
+
 	@Then("^the user clicks on SearchAgain and navigates to pharmacies search page$")
 	public void clicks_searchAgain_navigates_to_pharmaacies_search_page(){
 		PharmacyResultPage pharmacyResultPage = (PharmacyResultPage) getLoginScenario()
 				.getBean(PageConstants.PHARMACY_RESULTS_PAGE);
-		
+
 		if(pharmacyResultPage.navigateTopharmacySearch()){
 			Assert.assertTrue(true);
 		} else {
 			Assert.fail("Failed to load Pharmacy search page");
 		}
-		
+
 	}
-	
+
 	@Then("^the user validates the available pharmacies page in UMS site$")
 	public void user_validates_available_pharmacies_UMS() {
-		PharmacyResultPage pharmacyResultsPage = (PharmacyResultPage) getLoginScenario()
-				.getBean(PageConstants.PHARMACY_RESULTS_PAGE);
-		
-		JSONObject pharmacyResultActualJson = (JSONObject) getLoginScenario()
-				.getBean(PharmacySearchCommonConstants.PHARMACY_RESULT_ACTUAL);
-		System.out.println("pharmacyResultActualJson:::"
-				+ pharmacyResultActualJson);
-		
-		String zipcode = (String) getLoginScenario().getBean(
-				PharmacySearchCommonConstants.ZIPCODE);
-		String county = (String) getLoginScenario().getBean(
-				PharmacySearchCommonConstants.COUNTY);
-		String distance = (String) getLoginScenario().getBean(
-				PharmacySearchCommonConstants.DISTANCE);
-		String planName = (String) getLoginScenario().getBean(
-				PharmacySearchCommonConstants.PLAN_NAME);
-		
-		if(pharmacyResultsPage.validatePharmacyResultpage(pharmacyResultActualJson, zipcode, planName)){
+		/*PharmacyResultPage pharmacyResultsPage = (PharmacyResultPage) getLoginScenario()
+		.getBean(PageConstants.PHARMACY_RESULTS_PAGE);
+
+JSONObject pharmacyResultActualJson = (JSONObject) getLoginScenario()
+		.getBean(PharmacySearchCommonConstants.PHARMACY_RESULT_ACTUAL);
+System.out.println("pharmacyResultActualJson:::"
+		+ pharmacyResultActualJson);
+
+String zipcode = (String) getLoginScenario().getBean(
+		PharmacySearchCommonConstants.ZIPCODE);
+String county = (String) getLoginScenario().getBean(
+		PharmacySearchCommonConstants.COUNTY);
+String distance = (String) getLoginScenario().getBean(
+		PharmacySearchCommonConstants.DISTANCE);
+String planName = (String) getLoginScenario().getBean(
+		PharmacySearchCommonConstants.PLAN_NAME);
+		 */
+		PharmacySearchPage pharmacySearchPage = (PharmacySearchPage) getLoginScenario()
+				.getBean(PageConstants.PHARMACY_SEARCH_PAGE);
+		if(pharmacySearchPage.validatePharmacyResults()){
 			Assert.assertTrue(true);
 		} else {
-			Assert.fail("Error in validating Pharmacy Results page ");
+			Assert.fail("Error in validating Pharmacy Results ");
 		}
 		/*JSONObject pharmacyResultExpectedJson = (JSONObject) getLoginScenario()
-				.getBean(PharmacySearchCommonConstants.PHARMACY_RESULT_EXPECTED);
+		.getBean(PharmacySearchCommonConstants.PHARMACY_RESULT_EXPECTED);
 
-		
-		System.out.println("pharmacyResultExpectedJson:::"
-				+ pharmacyResultExpectedJson);
-		
-		try {
-			JSONAssert.assertEquals(pharmacyResultExpectedJson,
-					pharmacyResultActualJson, true);
-		} catch (JSONException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}*/
+
+System.out.println("pharmacyResultExpectedJson:::"
+		+ pharmacyResultExpectedJson);
+
+try {
+	JSONAssert.assertEquals(pharmacyResultExpectedJson,
+			pharmacyResultActualJson, true);
+} catch (JSONException e) {
+	// TODO Auto-generated catch block
+	e.printStackTrace();
+}*/
 
 	}
 
@@ -300,30 +302,30 @@ public class PharmacyLocatorUmsStepDefinition {
 	public void validates_Right_Rail_Widget_And_Logo_UMS(){
 		PharmacySearchPage PharmacySearchPage = (PharmacySearchPage) getLoginScenario()
 				.getBean(PageConstants.PHARMACY_SEARCH_PAGE);
-	 //PharmacySearchPage.validateRightRailWidgetandLogo();		
-		
+		//PharmacySearchPage.validateRightRailWidgetandLogo();		
+
 		//PharmacySearchPage.logOut();
-		
+
 	}
-	
+
 	@Then("^the user validates Pharmacy Locator tool plan dropdown menu for the Medica and PCP member plan$")
 	public void validates_Pharmacy_Locator_Tool_Plan_UMS(){
 		PharmacySearchPage PharmacySearchPage = (PharmacySearchPage) getLoginScenario()
 				.getBean(PageConstants.PHARMACY_SEARCH_PAGE);
 		//PharmacySearchPage.validateMedicaandPCPMemberplan();		
-		
+
 		//PharmacySearchPage.logOut();
-		
+
 	}
 	@Then("^the user validates Search checkbox displayed dynamically related to the pharmacy network$")
 	public void validates_Pharmacy_Network_Displayed_Dynamically_UMS(){
 		PharmacySearchPage PharmacySearchPage = (PharmacySearchPage) getLoginScenario()
 				.getBean(PageConstants.PHARMACY_SEARCH_PAGE);
 		//PharmacySearchPage.clickOnShowPharmaciesForTheseServices();		
-		
+
 		//PharmacySearchPage.logOut();
-		
+
 	}
 
-	
+
 }
