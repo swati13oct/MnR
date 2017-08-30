@@ -146,6 +146,12 @@ public class ClaimSummaryPage extends UhcDriver {
 		String claimPeriod = timeAttributesMap.get("Claim Period");
 		select(searchRange, claimPeriod);
 		showClaimHistoryButton.click();
+		try {
+			Thread.sleep(5000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		if (driver.getTitle().equalsIgnoreCase(
 				"UnitedHealthcare Medicare Solutions | Claims")) {
 			return new ClaimSummaryPage(driver);

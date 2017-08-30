@@ -444,7 +444,12 @@ public class MedicalClaimSummaryPage extends UhcDriver {
 		searchRange.sendKeys(claimPeriod);
 		CommonUtility.waitForPageLoad(driver, searchbutton, CommonConstants.TIMEOUT_30);
 		searchbutton.click();
-
+		try {
+			Thread.sleep(6000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		if (driver.getTitle().equalsIgnoreCase("Claims")) {
 			return new MedicalClaimSummaryPage(driver);
 		}
