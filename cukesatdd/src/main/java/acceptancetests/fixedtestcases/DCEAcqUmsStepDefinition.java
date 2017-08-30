@@ -142,6 +142,10 @@ public class DCEAcqUmsStepDefinition {
 		   Assert.fail("Error:the drug did not display on step 3 page"); 
 	}
 	
-	
+	@Then("^I switch to generic drug and validate on ums site$")
+	public void I_switch_to_generic_drug_and_validate() throws InterruptedException{
+		DrugCostEstimatorPage dce = (DrugCostEstimatorPage) getLoginScenario().getBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE);
+		dce.clickSwitchNow();
+	}
 
 }

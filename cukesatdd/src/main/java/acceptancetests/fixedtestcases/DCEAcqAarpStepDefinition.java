@@ -127,7 +127,7 @@ public class DCEAcqAarpStepDefinition {
 
 		DrugCostEstimatorPage dce = (DrugCostEstimatorPage) getLoginScenario().getBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE);
 		dce.select_first_pharmacy();
-
+		
 	}
 	
 	@Then("^I navigate to step3 page and validate$")
@@ -140,6 +140,12 @@ public class DCEAcqAarpStepDefinition {
 		   Assert.assertTrue(true);
 	   else
 		   Assert.fail("Error:the drug did not display on step 3 page"); 
+	}
+	
+	@Then("^I switch to generic drug and validate$")
+	public void I_switch_to_generic_drug_and_validate() throws InterruptedException{
+		DrugCostEstimatorPage dce = (DrugCostEstimatorPage) getLoginScenario().getBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE);
+		dce.clickSwitchNow();
 	}
 	
 

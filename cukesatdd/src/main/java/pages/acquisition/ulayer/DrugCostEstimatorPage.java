@@ -355,6 +355,15 @@ public class DrugCostEstimatorPage extends UhcDriver {
 
 	@FindBy(xpath = "//div[@id='total_drugsavings']/div[2]/a")
 	public WebElement editDrugListLink;
+	
+	@FindBy(xpath = ".//*[@id='acqsummary']/div[3]/div[1]/div/div/div/div[2]/a")
+	private WebElement switchNowBtn;
+	
+	@FindBy(id="switchToGenericBtnId")
+	private WebElement updateBtn;
+	
+	@FindBy(xpath = ".//*[@id='acqsummary']/div[3]/div[4]/div/p")
+	private WebElement costText;
 
 	@Override
 	public void openAndValidate() {
@@ -472,8 +481,10 @@ public class DrugCostEstimatorPage extends UhcDriver {
 	}
 
 	public int getDrugsCount() {
-		List<WebElement> drugs = driver
-				.findElements(By.xpath("//div[@id='drugs-tab']//div[contains(@ng-repeat,'eachDrug')]"));
+	/*	List<WebElement> drugs = driver
+				.findElements(By.xpath("//div[@id='drugs-tab']//div[contains(@ng-repeat,'eachDrug')]"));*/
+		
+		List<WebElement> drugs = driver.findElements(By.xpath(".//*[@id='acqsummary']/div[3]/div[1]"));
 		return drugs.size();
 	}
 
@@ -720,7 +731,7 @@ public class DrugCostEstimatorPage extends UhcDriver {
 			select_btn_first.click();
 		}
 		System.out.println("first pharmacy 2");
-		Thread.sleep(10000);
+		//Thread.sleep(10000);
 	}
 
 	public void validate_cost_saving_present(String pharmacy_type) {
@@ -878,7 +889,7 @@ public class DrugCostEstimatorPage extends UhcDriver {
 	}
 
 	public void navigateToStep3() throws InterruptedException {
-		waitforElement(step3);
+		Thread.sleep(10000);
 		step3.click();
 		Thread.sleep(10000);
 	}
@@ -1254,28 +1265,21 @@ public class DrugCostEstimatorPage extends UhcDriver {
 		}
 
 	}
+	
 
+	
 	public void clickSwitchNow() throws InterruptedException {
-		int drugscount = getDrugsCount();
-		if (drugscount > 0) {
-			WebElement switchNowLink = driver.findElement(By.id("generic-drug-switch-btn-" + (drugscount - 1)));
-			switchNowLink.click();
-			Thread.sleep(5000);
-
-			// switchToGenericHeadingsId
-			if (driver.getTitle().equalsIgnoreCase("My Benefits & Coverage")) {
-				String savingsOpputunityHeading = driver.findElement(By.id("switchToGenericHeadingsId")).getText();
-				if (savingsOpputunityHeading.equals("SAVINGS OPPORTUNITY")) {
-					Assert.assertTrue(true);
-				} else {
-					Assert.assertTrue("Savings Oppurtunity modal popup does not show up", false);
-				}
-			}
-
-		} else {
-			Assert.assertTrue("There are no drugs added ", false);
-		}
-
+		Thread.sleep(5000);
+		String brandedCost = costText.getText();
+		System.out.println(brandedCost);
+		if(switchNowBtn.isDisplayed())
+			switchNowBtn.click();
+		Thread.sleep(3000);
+		updateBtn.click();
+		Thread.sleep(6000);
+		String genericCost = costText.getText();
+		if(brandedCost.equals(genericCost))
+			Assert.fail("Error in calculating costs after switching to generic");
 	}
 
 	public void clickSwitchToGeneric() throws InterruptedException {

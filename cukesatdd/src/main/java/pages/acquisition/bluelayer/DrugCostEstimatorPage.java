@@ -293,6 +293,15 @@ public class DrugCostEstimatorPage extends UhcDriver {
 
 	@FindBy(xpath = "//a[contains(text(),'Drugs')]")
 	public WebElement drugsLink;
+	
+	@FindBy(xpath = ".//*[@id='acqsummary']/div[3]/div[1]/div/div/div/div[2]/a")
+	private WebElement switchNowBtn;
+	
+	@FindBy(id="switchToGenericBtnId")
+	private WebElement updateBtn;
+	
+	@FindBy(xpath = ".//*[@id='acqsummary']/div[3]/div[4]/div/p")
+	private WebElement costText;
 
 	//@FindBy(xpath = ".//*[@id='acqsummary']/div[2]/div[2]/a/p")
 	//@FindBy(xpath = "//p[contains(text(),'Pharmacy')]")
@@ -1309,7 +1318,7 @@ public class DrugCostEstimatorPage extends UhcDriver {
 	}
 
 	public void clickSwitchNow() throws InterruptedException {
-		int drugscount = getDrugsCount();
+	/*	int drugscount = getDrugsCount();
 		if (drugscount > 0) {
 			WebElement switchNowLink = driver.findElement(By.id("generic-drug-switch-btn-" + (drugscount - 1)));
 			switchNowLink.click();
@@ -1327,7 +1336,18 @@ public class DrugCostEstimatorPage extends UhcDriver {
 
 		} else {
 			Assert.assertTrue("There are no drugs added ", false);
-		}
+		}*/
+		Thread.sleep(5000);
+		String brandedCost = costText.getText();
+		System.out.println(brandedCost);
+		if(switchNowBtn.isDisplayed())
+			switchNowBtn.click();
+		Thread.sleep(3000);
+		updateBtn.click();
+		Thread.sleep(6000);
+		String genericCost = costText.getText();
+		if(brandedCost.equals(genericCost))
+			Assert.fail("Error in calculating costs after switching to generic");
 
 	}
 

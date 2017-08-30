@@ -35,3 +35,20 @@ And I navigate to step3 page and validate the drug info
 Examples:
 | zipcode  |   drug   | 
 | 90210    | Lipitor TAB 10MG|
+
+@switchNowStep3Blayer
+Scenario Outline: To test the dce vpp flow
+Given the user is on blayer medicare acq site landing page
+When I access the acquisition DCE tool from vpp page using below zipcode on ums site
+	| Zip Code    | <zipcode>  |
+And I add a drug to my drug list
+	|Drug|<drug>|
+And I navigate to step2 page on ums site
+And I select the first pharmacy on there
+And I navigate to step3 page and validate the drug info
+	|Drug|<drug>|
+Then I switch to generic drug and validate on ums site
+	
+Examples:
+| zipcode  |   drug   | 
+| 90210    | Lipitor TAB 10MG|
