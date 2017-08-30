@@ -14,9 +14,7 @@ import cucumber.junit.Cucumber;
 @RunWith(Cucumber.class)
 @Cucumber.Options(glue = { "atdd.framework", "acceptancetests.ProfileandPreferencesredesign.ulayer" }, features = {
 		"feature/myprofile-preferences/ulayer" }, format = { "pretty", "html:reports/test-report",
-				"json:target/cucumber.json" }, tags = { "@Phone"})
+				"json:target/cucumber.json" }, tags = {"@EmailEdit2"})
 public class RunMRAtddTestUlayerProfileandPreferences
-
 {
-
 }

@@ -21,10 +21,8 @@ import org.openqa.selenium.By;
 
 import pages.member.bluelayer.ProfilePreferencesPage;
 import pages.member.ulayer.AccountHomePage;
-import pages.member.ulayer.BenefitsAndCoveragePage;
 import pages.member.ulayer.LoginPage2;
 import pages.member.ulayer.PlanBenefitsCoveragePage;
-import pages.member.ulayer.ProfileandPreferencesPage;
 import acceptancetests.atdd.data.CommonConstants;
 import acceptancetests.atdd.data.member.PageConstants;
 import acceptancetests.benefitsandcoverage.data.PlanBenefitsAndCoverageCommonConstants;
@@ -50,7 +48,6 @@ public class ProfileandPreferencesAARPStepDefinition {
 	MRScenario loginScenario;
 
 	private String userName = null;
-	pages.member.ulayer.ProfileandPreferencesPage ProfileandPreferencespage;
 
 	public MRScenario getLoginScenario() {
 		return loginScenario;
@@ -132,54 +129,6 @@ public class ProfileandPreferencesAARPStepDefinition {
 			System.out.println(" Variable is NULL" );
 		}
 	}
-	
-	
-	
-	
-	
-	@Then("^the user view jenkins of Profile and preferences in AARP site")
-	public void user_views_ProfileandPreferences() {
-
-		
-		if (ProfileandPreferencespage != null) {
-			// Get actual data
-			JSONObject actualJsonObj = ProfileandPreferencespage.ProfileandPreferencesJson;
-			loginScenario.saveBean(ProfnPrefCommonConstants.MY_Profile_AND_PREFERENCES_ACTUAL, actualJsonObj);
-			// getLoginScenario().saveBean(PageConstants.BENEFITS_COVERAGE_PAGE,
-			// benefitsCoveragePage);
-			System.out.println("Profile and Preferences actual ==============>" + actualJsonObj.toString());
-			// Get expected data
-			String fileName = this.userName;
-			String directory = CommonConstants.PROFILE_AND_PREFERNCES_PAGE_DIRECTORY;
-			JSONObject profileAndPreferencesExpectedJson = MRScenario.readExpectedJson(fileName, directory);
-			loginScenario.saveBean(ProfnPrefCommonConstants.MY_Profile_AND_PREFERENCES_EXPECTED,
-					profileAndPreferencesExpectedJson);
-			System.out.println(
-					"Profile and Preferences Expected==============>" + profileAndPreferencesExpectedJson.toString());
-		}
-	}
-	
-	@Then("^the user validates the content on Profile and Preferences page")
-	public void validateContentOnProfileandPreferncesPage() {
-
-		try {
-
-			JSONObject actual = (JSONObject) loginScenario
-					.getBean(ProfnPrefCommonConstants.MY_Profile_AND_PREFERENCES_ACTUAL);
-
-			JSONObject expected = (JSONObject) loginScenario
-					.getBean(ProfnPrefCommonConstants.MY_Profile_AND_PREFERENCES_EXPECTED);
-
-			if (actual != null && expected != null) {
-				JSONAssert.assertEquals(expected, actual, true);
-			}
-
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-
-	}
-
 
 	@Then("^the user validates the Plan Name, Member name, Member ID section in AARP site")
 	public void user_Validates_FED_PROFILE_MEMBERNAME_ID() {
@@ -195,6 +144,7 @@ public class ProfileandPreferencesAARPStepDefinition {
 				.getBean(PageConstants.PROFILE_AND_PREFERENCES_PAGE);
 
 		ProfileandPreferencespage.validateEmail();
+		ProfileandPreferencespage.validateeditform();
 	
 	}
 	@Then("^the user validates the elements on clicking the edit link")
@@ -206,7 +156,7 @@ public class ProfileandPreferencesAARPStepDefinition {
 	
 	}
 	@Then("^the user validates the functionality of save Button")
-	public void UserValidatesAccountEditSaveButton() {
+	public void UserValidatesAccountEditSaveButton() throws InterruptedException {
 		pages.member.ulayer.ProfileandPreferencesPage ProfileandPreferencespage = (pages.member.ulayer.ProfileandPreferencesPage) getLoginScenario()
 				.getBean(PageConstants.PROFILE_AND_PREFERENCES_PAGE);
 
@@ -222,7 +172,15 @@ public class ProfileandPreferencesAARPStepDefinition {
 				.getBean(PageConstants.PROFILE_AND_PREFERENCES_PAGE);
 
 		ProfileandPreferencespage.validateCancelButton();
+	}
 	
+	@Then("^the user clicks on save button without filling current and new password and the red mandatory message should come")
+	public void UserValidatesclickingbutton() 
+	{
+			pages.member.ulayer.ProfileandPreferencesPage ProfileandPreferencespage = (pages.member.ulayer.ProfileandPreferencesPage) getLoginScenario()
+					.getBean(PageConstants.PROFILE_AND_PREFERENCES_PAGE);
+
+			ProfileandPreferencespage.validateSavebuttonclick();
 	}
 	
 	@Then("^the user validates see more ways to contact us section")
@@ -289,12 +247,75 @@ public class ProfileandPreferencesAARPStepDefinition {
 	
 	}
 	
-	@Then("^the user validates the Phone section in AARP site")
-	public void UserValidatesPhoneSection() {
-		pages.member.ulayer.ProfileandPreferencesPage ProfileandPreferencespage = (pages.member.ulayer.ProfileandPreferencesPage) getLoginScenario()
-				.getBean(PageConstants.PROFILE_AND_PREFERENCES_PAGE);
-
-		ProfileandPreferencespage.validatePhoneElements();
+	@Then("^the user validates permanent address section")
+	public void uservalidatespermanentaddresssection()
+	{
+	pages.member.ulayer.ProfileandPreferencesPage ProfileandPreferencespage = (pages.member.ulayer.ProfileandPreferencesPage) getLoginScenario()
+			.getBean(PageConstants.PROFILE_AND_PREFERENCES_PAGE);
+	
+	ProfileandPreferencespage.validatepermanentaddress();
 	
 	}
+	
+	@Then("^the user clicks on contact us then contact us page should come")
+	public void uservalidatescontactuslinkpermanentadress()
+	{
+	pages.member.ulayer.ProfileandPreferencesPage ProfileandPreferencespage = (pages.member.ulayer.ProfileandPreferencesPage) getLoginScenario()
+			.getBean(PageConstants.PROFILE_AND_PREFERENCES_PAGE);
+	
+	ProfileandPreferencespage.validatecontactuslink();
+	
+	}
+	
+	@Then("^the user clicks on edit button")
+	public void userclickemailedit()
+	{
+			pages.member.ulayer.ProfileandPreferencesPage ProfileandPreferencespage = (pages.member.ulayer.ProfileandPreferencesPage) getLoginScenario()
+					.getBean(PageConstants.PROFILE_AND_PREFERENCES_PAGE);
+			
+			ProfileandPreferencespage.validateEmail();
+     }
+	
+	@Then("^the user clicks on save without filling both fields then the user should see red mandatory message")
+	public void uservalidatemandatorymessage()
+	{
+		pages.member.ulayer.ProfileandPreferencesPage ProfileandPreferencespage = (pages.member.ulayer.ProfileandPreferencesPage) getLoginScenario()
+				.getBean(PageConstants.PROFILE_AND_PREFERENCES_PAGE);
+		
+		ProfileandPreferencespage.emailblankfieldsvalidation();
+		
+	}
+	
+	
+	@Then("^the user fill new email address and click save then user should see new updated email on page")
+	public void uservalidatesemailsavefunctionality() 
+	{
+		pages.member.ulayer.ProfileandPreferencesPage ProfileandPreferencespage = (pages.member.ulayer.ProfileandPreferencesPage) getLoginScenario()
+				.getBean(PageConstants.PROFILE_AND_PREFERENCES_PAGE);
+		
+		ProfileandPreferencespage.validateemailsavefunctionality();
+	}
+	
+
+	@Then("^the user fill invalid email and clicks on save button then the user should see error message for invalid email")
+	public void uservalidatesinvalidemailmessage() 
+	{
+		pages.member.ulayer.ProfileandPreferencesPage ProfileandPreferencespage = (pages.member.ulayer.ProfileandPreferencesPage) getLoginScenario()
+				.getBean(PageConstants.PROFILE_AND_PREFERENCES_PAGE);
+		
+		ProfileandPreferencespage.validateinvalidemailerrormessage();
+
+	}
+	
+	@Then("^the user fill different email id in confirm email box from new email address then error message should come")
+	public void uservalidatesdifferentemail() 
+	{
+		pages.member.ulayer.ProfileandPreferencesPage ProfileandPreferencespage = (pages.member.ulayer.ProfileandPreferencesPage) getLoginScenario()
+				.getBean(PageConstants.PROFILE_AND_PREFERENCES_PAGE);
+		
+		ProfileandPreferencespage.validateduplicateerrormessage();
+	}
 }
+
+
+

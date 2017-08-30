@@ -11,6 +11,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import org.json.JSONObject;
 import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +23,7 @@ import acceptancetests.atdd.data.CommonConstants;
 import acceptancetests.atdd.data.member.PageConstants;
 
 import acceptancetests.login.data.LoginCommonConstants;
+import acceptancetests.profandpref.data.ProfnPrefCommonConstants;
 import atdd.framework.MRScenario;
 import cucumber.annotation.en.And;
 import cucumber.annotation.en.Given;
@@ -142,6 +144,7 @@ public class ProfileandPreferencesUMSStepDefinition {
 		
 
 		ProfilePreferencesPage.validateEmail();
+		ProfilePreferencesPage.validateEmailEditElements();
 
 	}
 	@Then("^the user validates the elements on clicking the edit link")
@@ -151,6 +154,9 @@ public class ProfileandPreferencesUMSStepDefinition {
 		ProfilePreferencesPage.validateAccountEditElements();
 	
 	}
+	
+	
+	
 	@Then("^the user validates the functionality of save Button")
 	public void UserValidatesAccountEditSaveButton() {
 		ProfilePreferencesPage ProfilePreferencesPage = (ProfilePreferencesPage) getLoginScenario()
@@ -162,6 +168,16 @@ public class ProfileandPreferencesUMSStepDefinition {
 		ProfilePreferencesPage.validateAccountEdit(Password);
 	
 	}
+	
+	@Then("^the user clicks on save button without filling current and new password and the red mandatory message should come")
+	public void UserValidatesclickingbutton() 
+	{
+			pages.member.ulayer.ProfileandPreferencesPage ProfileandPreferencespage = (pages.member.ulayer.ProfileandPreferencesPage) getLoginScenario()
+					.getBean(PageConstants.PROFILE_AND_PREFERENCES_PAGE);
+
+			ProfileandPreferencespage.validateSavebuttonclick();
+	}
+	
 	@Then("^the user validates the functionality of Cancel Button")
 	public void UserValidatesAccountEditCancelButton() {
 		ProfilePreferencesPage ProfilePreferencesPage = (ProfilePreferencesPage) getLoginScenario()
@@ -170,29 +186,137 @@ public class ProfileandPreferencesUMSStepDefinition {
 		ProfilePreferencesPage.validateCancelButton();
 	
 	}
-	@Then("^the user validates the permanent address Header")
-	public void UserValidatespermanentaddressHeader() {
+	
+	@Then("^the user validates see more ways to contact us section")
+	public void Uservalidatesneedhelpsection()
+	{
+	
 		ProfilePreferencesPage ProfilePreferencesPage = (ProfilePreferencesPage) getLoginScenario()
 				.getBean(PageConstants.ProfilePreferencesPage);
+		
+		ProfilePreferencesPage.validateseemorewaystext();
+	}
+	
+	@Then("^the user validates on clicking contact us link it should route to contact us page")
+	public void uservalidatescontactuslink()
+	{
+		ProfilePreferencesPage ProfilePreferencesPage = (ProfilePreferencesPage) getLoginScenario()
+				.getBean(PageConstants.ProfilePreferencesPage);
+		
+		ProfilePreferencesPage.clickcontactUslink();
+	}
+	
+	@Then("^the user validates disclaimer link and on clicking disclaimer link it should expand and on again clicking it should collapse")
+	public void uservalidatesdisclaimerlink()
+	{
+		ProfilePreferencesPage ProfilePreferencesPage = (ProfilePreferencesPage) getLoginScenario()
+				.getBean(PageConstants.ProfilePreferencesPage);
+		
+		
+		String userName = (String) getLoginScenario().getBean(LoginCommonConstants.USERNAME);
+		try
+		{
+		JSONObject profilenpreferencesActualJson = ProfilePreferencesPage.ProfileandPreferencesPageJson;
+		loginScenario.saveBean(ProfnPrefCommonConstants.MY_PROFILE_PREFERENCES_ACTUAL, profilenpreferencesActualJson);
+		System.out.println("profilenpreferencesActualJson---->" + profilenpreferencesActualJson);
+		System.out.println(userName);
+		// Get expected data
+					String fileName = userName;
+					String directory = CommonConstants.PROFILE_AND_PREFERNCES_PAGE_DIRECTORY;
+					JSONObject myProfilenpreferencesexpectedjson = MRScenario.readExpectedJson(fileName,directory);
+					loginScenario.saveBean(ProfnPrefCommonConstants.MY_PROFILE_PREFERENCES_EXPECTED,
+							myProfilenpreferencesexpectedjson);
+					ProfilePreferencesPage.clickOndisclaimerlink(myProfilenpreferencesexpectedjson);
+					System.out.println("profilenpreferencesExpectedJson---->" + myProfilenpreferencesexpectedjson);
 
-		ProfilePreferencesPage.permanentAddressHeader();
+					/*if (profilenpreferencesActualJson != null && myProfilenpreferencesexpectedjson != null) 
+					{
+						JSONAssert.assertEquals(myProfilenpreferencesexpectedjson, profilenpreferencesActualJson, true);
+					}*/
+
+				} 
+		catch (Exception e) {
+					e.printStackTrace();
+				}
+		}
+	
+	
+	@Then("^the user validates the need help section")
+	public void uservalidatesneedhelpsection()
+	{
+		ProfilePreferencesPage ProfilePreferencesPage = (ProfilePreferencesPage) getLoginScenario()
+				.getBean(PageConstants.ProfilePreferencesPage);
+		
+	
+		ProfilePreferencesPage.validateneedhelpheader();
+	
+	}
+	
+	@Then("^the user validates permanent address section")
+	public void uservalidatespermanentaddresssection()
+	{
+		ProfilePreferencesPage ProfilePreferencesPage = (ProfilePreferencesPage) getLoginScenario()
+				.getBean(PageConstants.ProfilePreferencesPage);
+	
+		ProfilePreferencesPage.validatepermanentaddress();
+	
+	}
+	
+	@Then("^the user clicks on contact us then contact us page should come")
+	public void uservalidatescontactuslinkpermanentadress()
+	{
+		ProfilePreferencesPage ProfilePreferencesPage = (ProfilePreferencesPage) getLoginScenario()
+				.getBean(PageConstants.ProfilePreferencesPage);
+	
+		ProfilePreferencesPage.validatecontactuslink();
+	
+	}
+	
+	@Then("^the user clicks on edit button")
+	public void userclickemailedit()
+	{
+		ProfilePreferencesPage ProfilePreferencesPage = (ProfilePreferencesPage) getLoginScenario()
+				.getBean(PageConstants.ProfilePreferencesPage);
+			
+		ProfilePreferencesPage.validateEmail();
+     }
+	
+	@Then("^the user clicks on save without filling both fields then the user should see red mandatory message")
+	public void uservalidatemandatorymessage()
+	{
+		ProfilePreferencesPage ProfilePreferencesPage = (ProfilePreferencesPage) getLoginScenario()
+				.getBean(PageConstants.ProfilePreferencesPage);
+		
+		ProfilePreferencesPage.emailblankfieldsvalidation();
 		
 	}
-	@Then("^the user validates the ContactUs Link")
-	public void UserValidatesContactUsLink() {
+	
+	
+	@Then("^the user fill new email address and click save then user should see new updated email on page")
+	public void uservalidatesemailsavefunctionality() 
+	{
 		ProfilePreferencesPage ProfilePreferencesPage = (ProfilePreferencesPage) getLoginScenario()
 				.getBean(PageConstants.ProfilePreferencesPage);
-
-		ProfilePreferencesPage.validateContactUs();
-	
+		
+		ProfilePreferencesPage.validateemailsavefunctionality();
 	}
 	
-	@Then("^the user validates the Phone section in UMS site")
-	public void UserValidatesPhoneSection() {
+	@Then("^the user fill invalid email and clicks on save button then the user should see error message for invalid email")
+	public void uservalidatesinvalidemailmessage() 
+	{
 		ProfilePreferencesPage ProfilePreferencesPage = (ProfilePreferencesPage) getLoginScenario()
 				.getBean(PageConstants.ProfilePreferencesPage);
+		
+		ProfilePreferencesPage.validateinvalidemailerrormessage();
 
-		ProfilePreferencesPage.validatePhoneElements();
+	}
 	
+	@Then("^the user fill different email id in confirm email box from new email address then error message should come")
+	public void uservalidatesdifferentemail() 
+	{
+		ProfilePreferencesPage ProfilePreferencesPage = (ProfilePreferencesPage) getLoginScenario()
+				.getBean(PageConstants.ProfilePreferencesPage);
+		
+		ProfilePreferencesPage.validateduplicateerrormessage();
 	}
 }
