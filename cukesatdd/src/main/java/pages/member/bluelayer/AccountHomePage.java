@@ -650,6 +650,7 @@ public class AccountHomePage extends UhcDriver {
 		System.out.println(driver.getTitle());
 
 		if (driver.getTitle().equalsIgnoreCase("profileandpreferences")) {
+			 System.out.println("Pass");
 			return new ProfilePreferencesPage(driver);
 		}
 

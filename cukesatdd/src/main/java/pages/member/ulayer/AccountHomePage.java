@@ -800,10 +800,13 @@ public FormsandresourcesPage navigateToMydocumentAarpPage() {
 			//driver.manage().timeouts().implicitlyWait(40, TimeUnit.SECONDS);
 			System.out.println(driver.getTitle());
 			
+			
 		 if(driver.getTitle().equalsIgnoreCase("profileandpreferences")){
+			 System.out.println("Pass");
 		        return new pages.member.ulayer.ProfileandPreferencesPage(driver);
 			}
 			return null;
+			
 		
 			
 		}
