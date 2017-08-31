@@ -145,6 +145,7 @@ public class ClaimSummaryPage extends UhcDriver {
 
 		String claimPeriod = timeAttributesMap.get("Claim Period");
 		select(searchRange, claimPeriod);
+		CommonUtility.waitForPageLoad(driver, showClaimHistoryButton, 30);
 		showClaimHistoryButton.click();
 		try {
 			Thread.sleep(5000);

@@ -319,7 +319,7 @@ public class DrugCostEstimatorPage extends UhcDriver {
 
 	@FindBy(id = "zipcodebtn")
 	public WebElement zipcodeFindPlans;
-
+	                 
 	@FindBy(xpath = ".//*[@id='site-wrapper']/div[4]/div/div[1]/div/div/div/div/div[1]/div/div/div[1]/div[2]/div/div[2]/div[1]")
 	public WebElement viewPlans;
 
@@ -1277,7 +1277,7 @@ public class DrugCostEstimatorPage extends UhcDriver {
 		Thread.sleep(3000);
 		updateBtn.click();
 		Thread.sleep(6000);
-		String genericCost = costText.getText();
+		String genericCost = costText.getText();System.out.println(genericCost);
 		if(brandedCost.equals(genericCost))
 			Assert.fail("Error in calculating costs after switching to generic");
 	}
@@ -1390,7 +1390,7 @@ public class DrugCostEstimatorPage extends UhcDriver {
 		zipcodeBtn.sendKeys(zipcode);
 		zipcodeFindPlans.click();
 
-		Thread.sleep(10000);
+		Thread.sleep(15000);
 
 		viewPlans.click();
 		Thread.sleep(5000);
