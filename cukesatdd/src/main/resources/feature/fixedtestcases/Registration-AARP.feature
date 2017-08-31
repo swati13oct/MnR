@@ -20,7 +20,8 @@ Then the user registers successfully in AARP site
 
 Examples:
 	| planMemberId | dateOfBirth | userName      		| password   | confirmPassword | email                   | confirmEmail            | availableDocs		                              |
-	| 0041615931   | 02-25-1937  | ATDD_REG_ULAYER_01	| Password@1 | Password@1      | UHCMNRPORTALS@GMAIL.COM | UHCMNRPORTALS@GMAIL.COM | Prescription Drug Explanation of Benefits (EOB) |
+	| 0162832881   | 06-06-1963  | q3_sep_ulayer389		| Password@1 | Password@1      | UHCMNRPORTALS@GMAIL.COM | UHCMNRPORTALS@GMAIL.COM | Prescription Drug Explanation of Benefits (EOB) |	
+	#| 0041615931   | 02-25-1937  | ATDD_REG_ULAYER_01	| Password@1 | Password@1      | UHCMNRPORTALS@GMAIL.COM | UHCMNRPORTALS@GMAIL.COM | Prescription Drug Explanation of Benefits (EOB) |
 	
 	
 Scenario Outline:To verify registration for Ship member in AARP site
@@ -41,5 +42,5 @@ Then the user registers successfully in AARP site
 
 Examples:
 	| planMemberId | dateOfBirth | userName   			  | password   | confirmPassword | email                   | confirmEmail            |
-	| 308794789-11 | 09-29-1949  | ATDD_REG_ULAYER_SHIP01 | Password@1 | Password@1      | UHCMNRPORTALS@GMAIL.COM | UHCMNRPORTALS@GMAIL.COM |
+	#| 308794789-11 | 09-29-1949  | ATDD_REG_ULAYER_SHIP01 | Password@1 | Password@1      | UHCMNRPORTALS@GMAIL.COM | UHCMNRPORTALS@GMAIL.COM |
  
