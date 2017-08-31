@@ -167,7 +167,10 @@ public class EobAarpStepDefinition {
 		if (medicalEobPage != null) {
 			getLoginScenario().saveBean(PageConstants.MEDICAL_EOB_PAGE,
 					medicalEobPage);
-			Assert.assertTrue(true);
+			if(medicalEobPage.validateEob())
+				Assert.assertTrue(true);
+			else
+				Assert.fail("Error in validating the EOB's");
 		} else {
 			Assert.fail("Error loading Eob Page");
 		}

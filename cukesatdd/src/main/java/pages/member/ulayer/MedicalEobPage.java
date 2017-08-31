@@ -51,6 +51,12 @@ public class MedicalEobPage extends UhcDriver{
 		eobMonthDateRange.sendKeys(dateRange);
 		
 		shipbtnEobHistory.click();
+		try {
+			Thread.sleep(3000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		if (currentUrl().contains("medical-eob-search.html")) {
 			return new MedicalEobPage(driver);
 		}
@@ -92,5 +98,14 @@ public class MedicalEobPage extends UhcDriver{
 		
 		System.out.println("medicalEobJson----->"+medicalEobJson);
 	}
-
+	@FindBy(xpath = ".//*[@id='eobSearchForm']/div[2]/div/div[3]")
+	private WebElement eobTable;
+	
+	public boolean validateEob(){
+		if(eobTable.getText().contains("EOB Date")&&eobTable.getText().contains("My EOB Statements")&&
+				eobTable.getText().contains("Download EOB (PDF)"))
+			return true;
+		else
+			return false;
+	}
 }
