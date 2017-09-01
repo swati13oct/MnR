@@ -217,6 +217,24 @@ Feature: To test My Profile & Preferences in AARP site
       | MAPD     |
      #| MA       |  
       
+      
+      @PhoneEdit
+  Scenario Outline: To verify Phone in Aarp site
+      Given registered AMP with following details for profile and preferences flow in AARP site
+      | <planType> |
+      Then the user navigate to Profile and Preference page
+      Then the user validates the Phone section in AARP site
+      Then the user Clicks on the the Edit Link and validates the elements
+      Then the user checks the Edit Button changes to Cancel Button
+      Then the user validates the functionality of save Button in Phoneeditsection 
+      Then the user validates the functionality of Cancel Button In phoneeditSection
+      
+
+    Examples: 
+      | planType |
+      #| MAPD     |
+    | MA       |
+      
      
       
       

@@ -134,6 +134,41 @@ public class ProfileandPreferencesPage extends UhcDriver {
 	private WebElement passworderrormessage;
 	
 	
+	@FindBy(xpath = "//*[@id='tab-1']/div[3]/div[1]/div/div[2]/div/div/div/div[1]/div/div/div[1]/p")
+	private WebElement PhoneHeader;
+	@FindBy(xpath = "//*[@id='tab-1']/div[3]/div[1]/div/div[2]/div/div/div/div[1]/div/div/div[1]/div/div/div/div/div/a[1]")
+	private WebElement PhoneEditButton;
+
+	@FindBy(xpath = "//*[@id='tab-1']/div[3]/div[1]/div/div[2]/div/div/div/div[1]/div/div/div[1]/div/div/div/div/div/a[1]/svg")
+	private WebElement PhoneEditLink;
+
+	@FindBy(xpath = "//*[@id='tab-1']/div[3]/div[1]/div/div[2]/div/div/div/div[1]/div/div/div[2]/div[1]/div[1]/div/span[1]")
+	private WebElement Daytimephone;
+	@FindBy(xpath = "//*[@id='tab-1']/div[3]/div[1]/div/div[2]/div/div/div/div[1]/div/div/div[2]/div[1]/div[2]/div/span[1]")
+	private WebElement EveningPhone;
+
+	@FindBy(xpath = "//*[@id='phone-form']/div[3]/div/button/span")
+	private WebElement PhoneSaveButton;
+
+	@FindBy(xpath = "//*[@id='phone-form']/div[3]/div/a")
+	private WebElement PhoneCancelButton;
+
+	@FindBy(xpath = "//*[@id='tab-1']/div[3]/div[1]/div/div[2]/div/div/div/div[1]/div/div/div[1]/div/div/div/div/div/a[2]")
+	private WebElement PhoneTopCancelButton;
+
+	@FindBy(id = "daytimePhone")
+	private WebElement DaytimePhoneTextField;
+
+	@FindBy(id = "eveningPhone")
+	private WebElement EveningTimePhoneTextField;
+
+	@FindBy(id = "//*[@id='tab-1']/div[3]/div[1]/div/div[2]/div/div/div/div[1]/div/div/div[2]/div[1]/div[2]/div/span[2]")
+	private WebElement eveningPhoneValue;
+
+	@FindBy(xpath = "//*[@id='tab-1']/div[3]/div[1]/div/div[2]/div/div/div/div[1]/div/div/div[2]/div[1]/div[1]/div/span[2]")
+	private WebElement DaytimePhoneValue;
+	
+	
 	public static final String Disclaimerlinkcontent_xpath = ".//*[@id='collapseDisclaimer']";
 	
 	public PageData ProfileandPreferences;
@@ -146,26 +181,26 @@ public class ProfileandPreferencesPage extends UhcDriver {
 		super(driver);
 		PageFactory.initElements(driver, this);
 		String fileName = CommonConstants.PROFILE_AND_PREFERENCES_REDESIGN_PAGE_DATA;
-		ProfileandPreferences = CommonUtility.readPageData(fileName, CommonConstants.PAGE_OBJECT_DIRECTORY_ULAYER_MEMBER);
+		//ProfileandPreferences = CommonUtility.readPageData(fileName, CommonConstants.PAGE_OBJECT_DIRECTORY_ULAYER_MEMBER);
 		openAndValidate();
 	}
 
 	@Override
 	public void openAndValidate() 
 	{
-		// TODO Auto-generated method stub
+		/*// TODO Auto-generated method stub
 
 		JSONObject jsonObject = new JSONObject();
 		for (String key : ProfileandPreferences.getExpectedData().keySet()) {
 			List<WebElement> elements = findElements(ProfileandPreferences.getExpectedData().get(key));
 			
-			/*
+			
 			 * if (elements.size() == 1) { validate(elements.get(0)); try {
 			 * jsonObject.put(key, elements.get(0).getText());
 			 * //System.out.println("Text"+elements.get(0).getText()); } catch
 			 * (JSONException e) { // TODO Auto-generated catch block
 			 * e.printStackTrace(); } } else if (elements.size() > 1) {
-			 */
+			 
 			JSONArray jsonArray = new JSONArray();
 			for (WebElement element : elements) {
 
@@ -192,7 +227,7 @@ public class ProfileandPreferencesPage extends UhcDriver {
 		ProfileandPreferencesPageJson = jsonObject;
 
 		System.out.println("ProfilePreferencesJson----->" + ProfileandPreferencesPageJson);
-
+*/
 	}
 
 	
@@ -455,6 +490,63 @@ public class ProfileandPreferencesPage extends UhcDriver {
             }
 			return false;
 			}
+	
+
+	public void validatePhoneElements() {
+
+		validateNew(PhoneHeader);
+		validateNew(PhoneEditButton);
+		// validateNew(PhoneEditLink);
+		validateNew(Daytimephone);
+		validateNew(EveningPhone);
+
+	}
+
+	public void validatePhoneEditElements() {
+		PhoneEditButton.click();
+		validateNew(EveningTimePhoneTextField);
+		validateNew(DaytimePhoneTextField);
+		validateNew(PhoneTopCancelButton);
+		validateNew(PhoneCancelButton);
+		validateNew(PhoneSaveButton);
+	}
+
+	public void validatePhoneCancel() {
+		if (PhoneCancelButton.isDisplayed()) {
+			// PhoneEditButton.click();
+			PhoneCancelButton.click();
+
+			if (EveningTimePhoneTextField.isDisplayed()) {
+
+				Assert.fail();
+			}
+
+		}
+
+	}
+
+	public void validatePhoneSave() {
+		if (PhoneSaveButton.isDisplayed()) {
+			String evetime = "1111111111";
+			String daytime = "2222222222";
+			EveningTimePhoneTextField.clear();
+			DaytimePhoneTextField.clear();
+			EveningTimePhoneTextField.sendKeys(evetime);
+			DaytimePhoneTextField.sendKeys(daytime);
+			PhoneSaveButton.click();
+
+			Assert.assertTrue(eveningPhoneValue.getText().equalsIgnoreCase(evetime)
+					&& DaytimePhoneValue.getText().equalsIgnoreCase(daytime));
+		}
+
+	}
+
+	public void validateCancelElement() {
+		// TODO Auto-generated method stub
+		Assert.assertTrue(PhoneTopCancelButton.getText().equalsIgnoreCase("CANCEL"));
+
+	}
+	
 	
 	
 }

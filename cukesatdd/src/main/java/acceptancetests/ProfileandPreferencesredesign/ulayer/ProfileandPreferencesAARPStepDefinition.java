@@ -315,6 +315,57 @@ public class ProfileandPreferencesAARPStepDefinition {
 		
 		ProfileandPreferencespage.validateduplicateerrormessage();
 	}
+	@Then("^the user validates the Phone section in AARP site")
+	public void UserValidatesPhoneSection() {
+		pages.member.ulayer.ProfileandPreferencesPage ProfileandPreferencespage = (pages.member.ulayer.ProfileandPreferencesPage) getLoginScenario()
+				.getBean(PageConstants.PROFILE_AND_PREFERENCES_PAGE);
+
+		ProfileandPreferencespage.validatePhoneElements();
+
+	}
+
+	@Then("^the user Clicks on the the Edit Link and validates the elements")
+	public void UserClicksEditPhoneSection() {
+		pages.member.ulayer.ProfileandPreferencesPage ProfileandPreferencespage = (pages.member.ulayer.ProfileandPreferencesPage) getLoginScenario()
+				.getBean(PageConstants.PROFILE_AND_PREFERENCES_PAGE);
+
+		ProfileandPreferencespage.validatePhoneEditElements();
+
+	}
+
+	@Then("^the user checks the Edit Button changes to Cancel Button")
+	public void UserChecksSaveCancelButton() {
+		pages.member.ulayer.ProfileandPreferencesPage ProfileandPreferencespage = (pages.member.ulayer.ProfileandPreferencesPage) getLoginScenario()
+				.getBean(PageConstants.PROFILE_AND_PREFERENCES_PAGE);
+
+		ProfileandPreferencespage.validateCancelElement();
+
+	}
+
+	@Then("^the user validates the functionality of save Button in Phoneeditsection")
+	public void UserValidatesPhoneSaveButton() {
+		pages.member.ulayer.ProfileandPreferencesPage ProfileandPreferencespage = (pages.member.ulayer.ProfileandPreferencesPage) getLoginScenario()
+				.getBean(PageConstants.PROFILE_AND_PREFERENCES_PAGE);
+
+		ProfileandPreferencespage.validatePhoneSave();
+
+	}
+
+	@Then("^the user validates the functionality of Cancel Button In phoneeditSection")
+	public void UserValidatesPhoneCancelButton() {
+		pages.member.ulayer.ProfileandPreferencesPage ProfileandPreferencespage = (pages.member.ulayer.ProfileandPreferencesPage) getLoginScenario()
+				.getBean(PageConstants.PROFILE_AND_PREFERENCES_PAGE);
+
+		ProfileandPreferencespage.validatePhoneCancel();
+
+	}
+
+
+	
+	
+	
+	
+	
 }
 
 
