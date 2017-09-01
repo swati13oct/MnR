@@ -48,13 +48,32 @@
 
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-surefire-plugin</artifactId>
-				<version>2.19.1</version>
-				<dependencies>
+				<artifactId>maven-failsafe-plugin</artifactId>
+				<version>2.20</version>
+				<executions>
+					<execution>
+						<id>acceptance-test</id>
+						<phase>integration-test</phase>
+						<goals>
+							<goal>integration-test</goal>
+						</goals>
+						<configuration>
+							<daemon>true</daemon>
+							<testFailureIgnore>true</testFailureIgnore>
+						</configuration>
+					</execution>
+					<execution>
+						<id>verify</id>
+						<goals>
+							<goal>verify</goal>
+						</goals>
+					</execution>
+				</executions>
+ 				<dependencies>
 					<dependency>
 						<groupId>org.apache.maven.surefire</groupId>
 						<artifactId>surefire-junit47</artifactId>
-						<version>2.19.1</version>
+						<version>2.20</version>
 					</dependency>
 				</dependencies>
 				<configuration>
@@ -68,19 +87,24 @@
 						<webdriverhost>${webdriverhost}</webdriverhost>
 					</systemPropertyVariables>
 				</configuration>
+				
+			</plugin>
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>exec-maven-plugin</artifactId>
+				<version>1.1.1</version>
 				<executions>
 					<execution>
-						<id>acceptance-test</id>
-						<phase>integration-test</phase>
+						<id>script-execution</id>
+						<phase>post-integration-test</phase>
 						<goals>
-							<goal>test</goal>
+							<goal>exec</goal>
 						</goals>
-						<configuration>
-							<daemon>true</daemon>
-							<testFailureIgnore>false</testFailureIgnore>
-						</configuration>
 					</execution>
 				</executions>
+				<configuration>
+					<executable>${basedir}/src/main/resources/pdfReportGenerator.sh</executable>
+				</configuration>
 			</plugin>
 		</plugins>
 		<pluginManagement>
@@ -319,7 +343,7 @@
 			<artifactId>phantomjsdriver</artifactId>
 			<version>1.2.1</version>
 		</dependency>
-		
+
 	</dependencies>
 
 </project>

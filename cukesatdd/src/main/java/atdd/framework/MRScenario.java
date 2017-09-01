@@ -1,6 +1,7 @@
 package atdd.framework;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -110,13 +111,23 @@ public class MRScenario {
 
 		/* Set acqusisition and member urls */
 		environment = props.get("Environment");
+		
+		File shellScript  =  new File("src/main/resources/pdfReportGenerator.sh");
+		File groovyScript  =  new File("src/main/resources/pdfReporter.groovy");
+		
+		shellScript.setReadable(true);
+		shellScript.setWritable(true);
+		shellScript.setExecutable(true);
+		
+		groovyScript.setReadable(true);
+		groovyScript.setWritable(true);
+		groovyScript.setExecutable(true);
 
 		/* Set up DB */
 //		Connection con = getDBConnection(props);
 
 		/* Default Schema */
 ///		String defaultSchema = props.get(CommonConstants.DB_SCHEMA);
-		
 		String line = "";
 		String cvsSplitBy = ",";
 	//	String userName = null;
