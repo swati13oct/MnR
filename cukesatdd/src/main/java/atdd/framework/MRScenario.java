@@ -112,6 +112,9 @@ public class MRScenario {
 		/* Set acqusisition and member urls */
 		environment = props.get("Environment");
 		
+		
+		
+		// Setting permission to the scripts , so that jenkins server can access
 		File shellScript  =  new File("src/main/resources/pdfReportGenerator.sh");
 		File groovyScript  =  new File("src/main/resources/pdfReporter.groovy");
 		
