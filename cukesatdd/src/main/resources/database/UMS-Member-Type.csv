@@ -2,6 +2,6 @@ ATDD_BLAYER_MAPD_GROUP_01/Password@1,MAPD,Group,
 ATDD_BLAYER_MAPD_IND_01/Password@1,MAPD,Individual,
 ATDD_BLAYER_MAPD_IND_MEDCLAIMS_01/Password@1,MAPD,Individual,Nice_med,
 q3_sep_blayer004/Password@1,MAPD,Individual,Drug,
-q3_sep_blayer144/Password@1,MAPD,Individual,Med_EOB
+q3_sep_blayer002/Password@1,MAPD,Individual,Med_EOB
 ATDD_MAPD_IND_RX_EOB_01/Password@1,MAPD,Individual,rx_Eob,
 q3_sep_blayer149/Password@1,MAPD-PHR,Individual,
