@@ -398,7 +398,7 @@ public class AccountHomePage extends UhcDriver {
 		for (String key : myAccountHome.getExpectedData().keySet()) {
 			WebElement element = findElement(myAccountHome.getExpectedData().get(key));
 			if (null != element) {
-				validate(element);
+				//validate(element);
 				try {
 					jsonObject.put(key, element.getText());
 				} catch (JSONException e) {
@@ -639,6 +639,7 @@ public class AccountHomePage extends UhcDriver {
 
 	public pages.member.bluelayer.ProfilePreferencesPage navigateDirectToProfilePreferencesPage() {
 		driver.navigate().to(PAGE_URL);
+		System.out.println(driver.getTitle());
 		ProfileandPrefLink.click();
 		try {
 			Thread.sleep(30000);

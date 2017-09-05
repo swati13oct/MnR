@@ -21,10 +21,11 @@ import pages.member.bluelayer.LoginPage2;
 import pages.member.bluelayer.ProfilePreferencesPage;
 import acceptancetests.atdd.data.CommonConstants;
 import acceptancetests.atdd.data.member.PageConstants;
-
+import acceptancetests.atdd.util.CommonUtility;
 import acceptancetests.login.data.LoginCommonConstants;
 import acceptancetests.profandpref.data.ProfnPrefCommonConstants;
 import atdd.framework.MRScenario;
+import cucumber.annotation.After;
 import cucumber.annotation.en.And;
 import cucumber.annotation.en.Given;
 import cucumber.annotation.en.Then;
@@ -319,4 +320,42 @@ public class ProfileandPreferencesUMSStepDefinition {
 		
 		ProfilePreferencesPage.validateduplicateerrormessage();
 	}
+	
+	@Then("^the user validates Communication Preferences section")
+	public void uservalidatescommunicationpreferncessection() 
+	{
+		ProfilePreferencesPage ProfilePreferencesPage = (ProfilePreferencesPage) getLoginScenario()
+				.getBean(PageConstants.ProfilePreferencesPage);
+		
+		ProfilePreferencesPage.validatecommunicationpreferences();
+
+	}
+	
+	@Then("^the user validates Go paperless button and on clicking button go green page should come")
+	public void uservalidatesgogreenpagerouting() 
+	{
+		ProfilePreferencesPage ProfilePreferencesPage = (ProfilePreferencesPage) getLoginScenario()
+				.getBean(PageConstants.ProfilePreferencesPage);
+		
+		ProfilePreferencesPage.validategogreenbutton();
+	}
+	
+	@Then("^the user validates headers on green page") 
+	public void uservalidatesgogreenheader() 
+	{
+		ProfilePreferencesPage ProfilePreferencesPage = (ProfilePreferencesPage) getLoginScenario()
+				.getBean(PageConstants.ProfilePreferencesPage);
+		
+		ProfilePreferencesPage.validateheader();
+	}
+	
+	@Then("^the user validates on clicking Profilenpreferences arrow user should route to Profile and Preferences page") 
+	public void uservalidatespnplinkatthetop() 
+	{
+		ProfilePreferencesPage ProfilePreferencesPage = (ProfilePreferencesPage) getLoginScenario()
+				.getBean(PageConstants.ProfilePreferencesPage);
+		
+		ProfilePreferencesPage.validatepnparrowlink();
+	}
+	
 }

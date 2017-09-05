@@ -20,6 +20,8 @@ import acceptancetests.atdd.data.CommonConstants;
 import acceptancetests.atdd.data.PageData;
 import acceptancetests.atdd.util.CommonUtility;
 import atdd.framework.UhcDriver;
+import pages.member.bluelayer.GoGreenPage;
+import pages.member.bluelayer.ProfilePreferencesPage;
 
 /**
  * @author akapoo18
@@ -167,6 +169,24 @@ public class ProfileandPreferencesPage extends UhcDriver {
 
 	@FindBy(xpath = "//*[@id='tab-1']/div[3]/div[1]/div/div[2]/div/div/div/div[1]/div/div/div[2]/div[1]/div[1]/div/span[2]")
 	private WebElement DaytimePhoneValue;
+	
+	@FindBy(xpath =".//*[@id='tab-1']/div[3]/div[2]/h3")
+    private WebElement communicationpreferencesheader;	
+    
+    @FindBy(xpath =".//*[@id='tab-1']/div[3]/div[2]/div/div/div/div/div[2]/a")
+    private WebElement gopaperlessbutton;
+    
+    @FindBy(xpath ="html/body/div[3]/div/div[1]/div/main/div[1]/section/div/div[1]/div/div/div[1]/img")
+    private WebElement gogreenleaf;
+    
+    @FindBy(xpath ="html/body/div[3]/div/div[1]/div/main/div[1]/section/div/div[1]/div/div/div[2]")
+    private WebElement goggreenheader;
+    
+    @FindBy(xpath ="html/body/div[3]/div/div[1]/div/header/div/div/div/div/div/div/h1")
+    private WebElement communicationheader;
+    
+    @FindBy(xpath ="html/body/div[3]/div/div[1]/div/header/div/div/div/div/div/div/a")
+    private WebElement Profilenprefernceslink;
 	
 	
 	public static final String Disclaimerlinkcontent_xpath = ".//*[@id='collapseDisclaimer']";
@@ -547,7 +567,41 @@ public class ProfileandPreferencesPage extends UhcDriver {
 
 	}
 	
+	public void validatecommunicationpreferences()
+	{
+		validate(communicationpreferencesheader);
+		validate(gopaperlessbutton);
+	}
 	
+	public GoGreenPage validategogreenbutton()
+	{
+		gopaperlessbutton.click();
+		System.out.println(driver.getTitle());
+		if(getTitle().equalsIgnoreCase("gogreen"))
+		{
+			return new GoGreenPage(driver);
+		}
+		return null;
+		}
+	
+	public void validateheader()
+    {
+    	validate(gogreenleaf);
+    	validate(goggreenheader);
+    	validate(communicationheader);
+    	validate(Profilenprefernceslink);
+    	
+    }
+    
+    public ProfilePreferencesPage validatepnparrowlink()
+    {
+    	Profilenprefernceslink.click();
+    	if (driver.getTitle().equalsIgnoreCase("profileandpreferences")) {
+			 System.out.println("Pass");
+			return new ProfilePreferencesPage(driver);
+    	}
+		return null;
+		}
 	
 }
 	

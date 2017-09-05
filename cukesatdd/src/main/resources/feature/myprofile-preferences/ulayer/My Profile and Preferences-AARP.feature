@@ -219,7 +219,7 @@ Feature: To test My Profile & Preferences in AARP site
       
       
       @PhoneEdit
-  Scenario Outline: To verify Phone in Aarp site
+      Scenario Outline: To verify Phone in Aarp site
       Given registered AMP with following details for profile and preferences flow in AARP site
       | <planType> |
       Then the user navigate to Profile and Preference page
@@ -233,7 +233,24 @@ Feature: To test My Profile & Preferences in AARP site
     Examples: 
       | planType |
       #| MAPD     |
-    | MA       |
+       | MA       |
+       
+    @CommunicationPreferences
+     Scenario Outline: To verify Go green in AARP site
+      Given registered AMP with following details for profile and preferences flow in AARP site
+      | <planType> |
+      Then the user navigate to Profile and Preference page
+    Then the user validates Communication Preferences section
+    And the user validates Go paperless button and on clicking button go green page should come
+    And the user validates headers on green page 
+    And the user validates on clicking Profilenpreferences arrow user should route to Profile and Preferences page
+      Examples: 
+      | planType |
+     #| PDP      |
+     #| MAPD     |
+      | MA       |
+      
+      
       
      
       

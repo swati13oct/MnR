@@ -145,8 +145,8 @@ Examples:
         | MA       |
         
  @PasswordEdit
-  Scenario Outline: To verify the edit functionality in Account Profile section in AARP site
-    Given registered AMP with following details for profile and preferences flow in AARP site
+  Scenario Outline: To verify the edit functionality in Account Profile section in UMS site
+    Given registered AMP with following details for profile and preferences flow in in UMS site
       | <planType> |
     When the user navigate to Profile and Preference page
     Then the user validates the elements on clicking the edit link
@@ -160,8 +160,8 @@ Examples:
      #| MA       |
      
     @PasswordEdit1
-     Scenario Outline: To verify the edit functionality in Account Profile section in AARP site
-    Given registered AMP with following details for profile and preferences flow in AARP site
+     Scenario Outline: To verify the edit functionality in Account Profile section in UMS site
+    Given registered AMP with following details for profile and preferences flow in in UMS site
       | <planType> |
     When the user navigate to Profile and Preference page
     Then the user validates the elements on clicking the edit link
@@ -190,7 +190,7 @@ Examples:
      
       
     @EmailEdit2
-    Scenario Outline: To verify Email section in AARP site
+    Scenario Outline: To verify Email section in in UMS site
      Given registered UHC with following details for Profile and Preferences flow in UMS site
       | <planType> |
     When the user navigates to Profile and Preferences page
@@ -205,10 +205,10 @@ Examples:
      #| MA       |
      
    @Needhelp
-     Scenario Outline: To verify the edit functionality in Account Profile section in AARP site
-    Given registered AMP with following details for profile and preferences flow in AARP site
+     Scenario Outline: To verify the edit functionality in Account Profile section in UMS site
+    Given registered UHC with following details for Profile and Preferences flow in UMS site
       | <planType> |
-    When the user navigate to Profile and Preference page
+    When the user navigates to Profile and Preferences page
     Then the user validates disclaimer link and on clicking disclaimer link it should expand and on again clicking it should collapse
     And the user validates the need help section
     And the user validates see more ways to contact us section 
@@ -221,10 +221,10 @@ Examples:
       | MA       |
       
     @PermanentAddress
-    Scenario Outline: To verify the edit functionality in Account Profile section in AARP site
-    Given registered AMP with following details for profile and preferences flow in AARP site
+    Scenario Outline: To verify the edit functionality in Account Profile section in UMS site
+    Given registered UHC with following details for Profile and Preferences flow in UMS site
       | <planType> |
-    When the user navigate to Profile and Preference page
+    When the user navigates to Profile and Preferences page
     Then the user validates permanent address section
     And the user clicks on contact us then contact us page should come
     
@@ -233,3 +233,20 @@ Examples:
      #| PDP      |
       | MAPD     |
      #| MA       | 
+     
+    @CommunicationPreferences
+    Scenario Outline: To verify Go green in UMS site
+    Given registered UHC with following details for Profile and Preferences flow in UMS site
+      | <planType> |
+    When the user navigates to Profile and Preferences page
+    Then the user validates Communication Preferences section
+    And the user validates Go paperless button and on clicking button go green page should come
+    And the user validates headers on green page 
+    And the user validates on clicking Profilenpreferences arrow user should route to Profile and Preferences page
+      Examples: 
+      | planType |
+     #| PDP      |
+     #| MAPD     |
+      | MA       | 
+      
+     

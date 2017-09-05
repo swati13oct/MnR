@@ -360,7 +360,43 @@ public class ProfileandPreferencesAARPStepDefinition {
 
 	}
 
+	@Then("^the user validates Communication Preferences section")
+	public void uservalidatescommunicationpreferncessection() 
+	{
+		pages.member.ulayer.ProfileandPreferencesPage ProfileandPreferencespage = (pages.member.ulayer.ProfileandPreferencesPage) getLoginScenario()
+				.getBean(PageConstants.PROFILE_AND_PREFERENCES_PAGE);
+		
+		ProfileandPreferencespage.validatecommunicationpreferences();
 
+	}
+	
+	@Then("^the user validates Go paperless button and on clicking button go green page should come")
+	public void uservalidatesgogreenpagerouting() 
+	{
+		pages.member.ulayer.ProfileandPreferencesPage ProfileandPreferencespage = (pages.member.ulayer.ProfileandPreferencesPage) getLoginScenario()
+				.getBean(PageConstants.PROFILE_AND_PREFERENCES_PAGE);
+		
+		ProfileandPreferencespage.validategogreenbutton();
+	}
+	
+	@Then("^the user validates headers on green page") 
+	public void uservalidatesgogreenheader() 
+	{
+		pages.member.ulayer.ProfileandPreferencesPage ProfileandPreferencespage = (pages.member.ulayer.ProfileandPreferencesPage) getLoginScenario()
+				.getBean(PageConstants.PROFILE_AND_PREFERENCES_PAGE);
+		
+		ProfileandPreferencespage.validateheader();
+	}
+	
+	@Then("^the user validates on clicking Profilenpreferences arrow user should route to Profile and Preferences page") 
+	public void uservalidatespnplinkatthetop() 
+	{
+		pages.member.ulayer.ProfileandPreferencesPage ProfileandPreferencespage = (pages.member.ulayer.ProfileandPreferencesPage) getLoginScenario()
+				.getBean(PageConstants.PROFILE_AND_PREFERENCES_PAGE);
+		
+		ProfileandPreferencespage.validatepnparrowlink();
+	}
+	
 	
 	
 	
