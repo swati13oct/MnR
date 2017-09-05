@@ -19,5 +19,5 @@ Then the user validates the pharmacies available for the above selected language
 
 Examples:
   | plantype | memberType  | zipCode     | distance | countyName        | planName 		           	           | language						     |
-  | MAPD    | 	Group	 | 90210       | 2        |       | AARP MedicareComplete SecureHorizons Plan 2 (HMO)  |Spanish |
+  | MAPD    | 	Group	 | 90210       | 2        |       | UnitedHealthcare Group Medicare Advantage (PPO)  |Spanish |
  # | MAPD    | 	Group	 | 90210       | 2        |       | AARP MedicareComplete SecureHorizons Plan 2 (HMO)  |Chinese |

@@ -18,4 +18,4 @@ Then the user validates the pharmacies available in UMS site
 
 Examples:
 	| plantype | memberType   | distance  | countyName |planName|pharmacyType						     |
-	| MAPD      |  Group     |   25      | Cayuga County|UnitedHealthcare MedicareComplete Choice Plan 1 (Regional PPO)|Standard Network Pharmacy |
+	| MAPD      |  Group     |   25      | Cayuga County| UnitedHealthcare Group Medicare Advantage (PPO)|Standard Network Pharmacy |

@@ -19,4 +19,4 @@ Then the user validates the pharmacies available in UMS site
 
 Examples:
   | plantype | memberType  | zipCode     | distance | countyName        | planName 		           	           | pharmacyType						     |
-  | MAPD    | 	Group	 | 90210       | 2        |       | AARP MedicareComplete SecureHorizons Plan 2 (HMO)  | Standard Network Pharmacy |
+  | MAPD    | 	Group	 | 90210       | 2        |       | UnitedHealthcare Group Medicare Advantage (PPO)  | Standard Network Pharmacy |
