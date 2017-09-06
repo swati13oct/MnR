@@ -1124,3 +1124,16 @@ Feature: To test plan benefits and Coverage on AARP site for Federal members
       Examples: 
       | planType | 
       | SHIP     |
+
+      
+          @PlanOverview
+    Scenario Outline: Verify that Plan overview section is visible on Benefits and coverage page
+ Given registered AMP with following details for plan benefits and coverage flow in AARP site
+      | Plan Type      | <planType>  |
+      | Member Type    | <memberType>| 
+    When the user navigate to benefits and coverage page under my plans in AARP site
+    And the user validates plan overview section 
+
+    Examples: 
+      | planType|  memberType  | 
+      | MAPD    |  LIS       | 

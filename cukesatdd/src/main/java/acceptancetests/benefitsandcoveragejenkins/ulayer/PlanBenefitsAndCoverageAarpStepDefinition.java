@@ -119,8 +119,7 @@ public class PlanBenefitsAndCoverageAarpStepDefinition {
 		 * accountHomePage.getExpectedData(expectedDataMap);
 		 * 
 		 * if (accountHomePage != null) {
-		 * getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
-		 * getLoginScenario().saveBean(PageConstants.ACCOUNT_HOME_PAGE,
+		 * 
 		 * accountHomePage); Assert.assertTrue(true); accountHomeActualJson =
 		 * accountHomePage.accountHomeJson; }
 		 * 
@@ -132,6 +131,7 @@ public class PlanBenefitsAndCoverageAarpStepDefinition {
 		 * expectedDataMap);
 		 */
 
+	
 	}
 
 	@Given("^registered member for forms and resources in AARP Site$")
@@ -655,4 +655,13 @@ public class PlanBenefitsAndCoverageAarpStepDefinition {
 
 	}
 
+	
+
+  	@And("the user validates plan overview section")
+public void user_validate_planOverview() {
+  		BenefitsAndCoveragePage benefitsnCoveragepage = (BenefitsAndCoveragePage) getLoginScenario()
+				.getBean(PageConstants.BENEFITS_AND_COVERAGE_PAGE);
+
+  		benefitsnCoveragepage.validatePlanOverview();
+}
 }

@@ -37,8 +37,6 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 
 	public JSONObject benefitsandcoverageJson;
 
-	@FindBy(xpath = "//*[@id='planBenefitsApp']/div/div/div[1]/div/div/div/div/h1")
-	private WebElement planName;
 
 	@FindBy(xpath = "//*[@id='planBenefitsApp']/div/div/div[2]/div[1]/div/div[2]/div[1]/span")
 	private WebElement memberId;
@@ -172,6 +170,24 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 	@FindBy(xpath = "//*[@id='planBenefitsApp']/div[2]/div[11]/div/div/div/header/span")
 	private WebElement EmergencyCare;
 
+	
+	
+	 
+    @FindBy(xpath="//*[@id='planBenefitsApp']/section/div/div[1]/div/div/div/div/h1")
+	private WebElement planName;
+	
+    @FindBy(xpath = "//*[@id='planBenefitsApp']/section/div/div[2]/div[1]/div/div[1]/div[1]/span")
+    private WebElement nameLabel;
+
+    @FindBy(xpath = "//*[@id='planBenefitsApp']/section/div/div[2]/div[1]/div/div[2]/div[1]/span")
+    private WebElement memberID;
+
+    @FindBy(xpath = "//*[@id='planBenefitsApp']/section/div/div[2]/div[1]/div/div[3]/div[1]/span")
+    private WebElement effective_Date;
+    
+    
+    @FindBy(xpath = "//*[@id='planBenefitsApp']/section/div/div[2]/div[4]/span[2]")
+    private WebElement Monthly_Premium;
 	public static final String learnmorelinktiertext_xpath = ".//*[@id='collapseTiers']";
 	public static final String learnmorelinkstagetext_xpath = ".//*[@id='collapseStages']";
 
@@ -215,7 +231,7 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 	@Override
 	public void openAndValidate() {
 
-		JSONObject jsonObject = new JSONObject();
+		/*JSONObject jsonObject = new JSONObject();
 		for (String key : benefitsCoverage.getExpectedData().keySet()) {
 			List<WebElement> elements = findElements(benefitsCoverage.getExpectedData().get(key));
 			if (elements.size() == 1) {
@@ -254,7 +270,7 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 		benefitsandcoverageJson = jsonObject;
 
 		System.out.println("BenefitsCoverageJson----->" + benefitsandcoverageJson);
-
+*/
 	}
 
 	public void navigateToRallySearchWindow() {
@@ -652,6 +668,19 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 			e.printStackTrace();
 		}
 
+	}
+	
+	public void validatePlanOverview() {
+		// TODO Auto-generated method stub
+		
+
+	validateNew(planName);
+	validateNew(nameLabel);
+	validateNew(memberID);
+	validateNew(effective_Date);
+	validateNew(Monthly_Premium);
+
+		
 	}
 
 }

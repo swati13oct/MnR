@@ -781,6 +781,7 @@ public FormsandresourcesPage navigateToMydocumentAarpPage() {
 		public BenefitsAndCoveragePage navigatesToBandCpage() {
 			driver.navigate().to(PAGE_URL);
 			BnClink.click();
+			System.out.println("On the page :" + driver.getTitle());
 			if(driver.getTitle().equalsIgnoreCase("Benefits And Coverage Page Redesign")){
 			        return new BenefitsAndCoveragePage(driver);
 			}
