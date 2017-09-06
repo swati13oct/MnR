@@ -300,6 +300,14 @@ public class CommonUtility {
 			driver.findElement(By.id("tobederegisteruser")).submit();
 			driver.quit();
 		}
+		if (System.getProperty("environment").equalsIgnoreCase("test-b")) {
+			WebDriver driver = mrScenario.getWebDriver();
+			driver.get("http://apsrt0247.uhc.com:9080/PartDPortalWeb/deregister.jsp");
+			driver.findElement(By.id("tobederegisteruser")).click();
+			driver.findElement(By.id("tobederegisteruser")).sendKeys(username);
+			driver.findElement(By.id("tobederegisteruser")).submit();
+			driver.quit();
+		}
 
 	}
 
