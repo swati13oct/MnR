@@ -2,7 +2,7 @@
 Feature:Drug Cost Estimator (DCE) - To test DCE flow from home page and dce vpp flow on aarp acq site
 
 @acq_drug_cost_estimator_ulayer_flow
-Scenario Outline: As a prospective member using redesigned DCE tool on the M&R portal site on either a desktop or mobile device, I want to be able to choose a generic option if it is available from my Drug List and see any cost savings associated with it if I have selected a pharmacy so I can save on the cost of my prescription drugs.
+Scenario Outline: To verify DCE flow from Ulayer home page
 Given the user is on ulayer medicare acq site landing page
 When I access the acquisition DCE tool from home page
 And I have added a drug to my drug list
@@ -21,7 +21,7 @@ And I navigate to step3 page and validate
 
 
 @dceVppUlayer
-Scenario Outline: To test the dce vpp flow
+Scenario Outline: To verify DCE flow from Ulayer Plan Summary page 
 Given the user is on ulayer medicare acq site landing page
 When I access the acquisition DCE tool from vpp page using below zipcode
 	| Zip Code    | <zipcode>  |
