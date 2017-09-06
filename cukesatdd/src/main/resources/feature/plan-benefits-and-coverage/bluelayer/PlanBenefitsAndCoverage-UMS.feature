@@ -960,6 +960,20 @@ Examples:
       | MAPD    |  Group       |  LIS 1       |
       
       
+      
+    @PlanOverview
+    Scenario Outline: Verify that drug cost table  is in place on Benefits and Coverage page for LIS Members
+    Given registered UHC with following details for plan benefits and coverage flow in UMS site
+      | Plan Type      | <planType>  |
+      | Member Type    | <memberType>| 
+    Then the user navigate to benefit and coverage page
+    And the user validates plan overview section 
+
+    Examples: 
+      | planType|  memberType  | 
+      | MAPD    |  Group       | 
+      
+      
     
       
       

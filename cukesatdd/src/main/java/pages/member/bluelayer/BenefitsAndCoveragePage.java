@@ -33,9 +33,7 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 	public PageData benefitsCoverage;
 
 	public JSONObject benefitsandcoverageJson;
-		
-	@FindBy(xpath="//*[@id='planBenefitsApp']/div/div/div[1]/div/div/div/div/h1")
-	private WebElement planName;
+
 	
 	@FindBy(xpath="//*[@id='planBenefitsApp']/div/div/div[2]/div[1]/div/div[2]/div[1]/span")
 	private WebElement memberId;
@@ -133,6 +131,24 @@ public class BenefitsAndCoveragePage extends UhcDriver {
     
     @FindBy(xpath = ".//*[@id='plan_benefit_documents']/section/div/div[2]/div/form/span[2]")
     private WebElement documents_label;
+    
+    
+    @FindBy(xpath="//*[@id='planBenefitsApp']/section/div/div[1]/div/div/div/div/h1")
+	private WebElement planName;
+	
+    @FindBy(xpath = "//*[@id='planBenefitsApp']/section/div/div[2]/div[1]/div/div[1]/div[1]/span")
+    private WebElement nameLabel;
+
+    @FindBy(xpath = "//*[@id='planBenefitsApp']/section/div/div[2]/div[1]/div/div[2]/div[1]/span")
+    private WebElement memberID;
+
+    @FindBy(xpath = "//*[@id='planBenefitsApp']/section/div/div[2]/div[1]/div/div[3]/div[1]/span")
+    private WebElement effective_Date;
+    
+    
+    @FindBy(xpath = "//*[@id='planBenefitsApp']/section/div/div[2]/div[4]/span[2]")
+    private WebElement Monthly_Premium;
+    
     
     
     
@@ -645,6 +661,19 @@ public void validateWaystoSave()
 	//Assert.assertEquals(, );
 
 	
+	
+}
+
+public void validatePlanOverview() {
+	// TODO Auto-generated method stub
+	
+
+validateNew(planName);
+validateNew(nameLabel);
+validateNew(memberID);
+validateNew(effective_Date);
+validateNew(Monthly_Premium);
+
 	
 }
 

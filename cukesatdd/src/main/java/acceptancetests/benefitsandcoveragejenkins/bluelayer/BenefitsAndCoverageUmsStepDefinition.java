@@ -951,6 +951,16 @@ public class BenefitsAndCoverageUmsStepDefinition {
 		benefitsCoveragePage.validateWaystoSave();
 	}
 
+	
+	
+
+  	@And("the user validates plan overview section")
+public void user_validate_planOverview() {
+	BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario()
+			.getBean(PageConstants.BENEFITS_COVERAGE_PAGE);
+	benefitsCoveragePage.validatePlanOverview();
+}
+
 	}
 	
 	

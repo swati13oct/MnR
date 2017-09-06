@@ -9,9 +9,9 @@ import cucumber.junit.Cucumber;
  *
  */
 @RunWith(Cucumber.class)
-@Cucumber.Options(glue = { "atdd.framework", "acceptancetests.benefitsandcoveragejenkins.ulayer" }, features = {
-		"feature/plan-benefits-and-coverage/ulayer" }, format = { "pretty", "html:reports/test-report",
-				"json:target/cucumber.json" }, tags = { "@drugcopaynonlis" })
+@Cucumber.Options(glue = { "atdd.framework", "acceptancetests.benefitsandcoveragejenkins.bluelayer" }, features = {
+		"feature/plan-benefits-and-coverage/bluelayer" }, format = { "pretty", "html:reports/test-report",
+				"json:target/cucumber.json" }, tags = { "@PlanOverview" })
 public class RunMRAtddTestBnC
 
 {
