@@ -162,7 +162,7 @@ public class AccountHomePage extends UhcDriver {
 	@FindBy(linkText = "Date")
 	private WebElement dateLink;
 
-	@FindBy(linkText = "Go to redesign benefits and coveage page page page")
+	@FindBy(linkText = "Go to redesign benefits and coverage page")
 	private WebElement BnClink;
 
 	@FindBy(linkText = "Go to redesign my profile and preferences page")

@@ -198,12 +198,12 @@ Examples:
 
 
 Scenario Outline: Verify plan benefits and coverage for pdp group nonlis in UMS site
-Given registered UHC with following details for plan benefits and coverage flow in UMS site
+Given registered member with following details logins in the member portal 
  	| Plan Type      			| PDP     					|
  	| Member Type     			| Group 					|
  	| Copay Category            | NON LIS               	|  
  	| Is Us Other Territories  | <isUsOtherTerritories>  	|
-When the user navigates to plan benefits and Coverage in UMS site
+When the user navigates to Benefits and coverage page
 Then the user validates plan benefits and coverage details in UMS site
 #Then the user validates customer details in UMS site
 #	| Member ID  		| 
@@ -427,7 +427,7 @@ Examples:
   # The below scenario to cover validate pdfs links section after in member area  
   Scenario Outline: To verify login in UHC site
     Given the user is on the UHC medicare site login page
-    When registered UHC with following details for plan benefits and coverage flow in UMS site
+    When registered member with following details logins in the member portal 
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |    
     Then the user validatespdf links after login in UHC site
@@ -441,7 +441,7 @@ Examples:
       #| MAPD     | Individual |
 @Q4
 Scenario Outline:To validate the pharmacy saver widget in benefits and coverage page in UMS site
-Given registered member to login in UMS site
+Given registered member with following details logins in the member portal 
 	| Plan Type    | <plantype>   |
 	| Member Type  | <memberType> |
 When the user navigates to benefits and coverage page under my plans in UMS site
@@ -453,7 +453,7 @@ Examples:
 	
 @Q4
 Scenario Outline:To validate the pharmacy saver widget in benefits and coverage page in UMS site
-Given registered member to login in UMS site
+Given registered member with following details logins in the member portal 
 	| Plan Type    | <plantype>   |
 	| Member Type  | <memberType> |
 When the user navigates to benefits and coverage page under my plans in UMS site
@@ -468,12 +468,12 @@ Examples:
 
 @benefitAndCoverage
 Scenario Outline: Verify My Medical Costs & Benefits Summary in UMS site
-Given registered UHC with following details for plan benefits and coverage flow in UMS site
+Given registered member with following details logins in the member portal 
 | Plan Type      | MAPD  |
 | Member Type     | Individual|
 | Copay Category | NON LIS               |  
 | Riders         | <riderAvailableCheck> |
-When the user navigates to plan benefits and Coverage in UMS site
+When the user navigates to Benefits and coverage page
 Then the user validates riders,benefit tiering and split tier deductibles 3,4,5 after login in UHC site
 Examples:
 
@@ -483,12 +483,12 @@ Examples:
 
 @mapdnonlisnonrider
 Scenario Outline:To validate the coverage and benefit amounts in benefits and coverage page in UMS site
-Given registered UHC with following details for plan benefits and coverage flow in UMS site
+Given registered member with following details logins in the member portal 
        | Plan Type    |MAPD|
        | Member Type  |Individual|
        | Copay Category |NON LIS|  
        | Riders         | <riderAvailableCheck> |      
-When the user navigates to plan benefits and Coverage in UMS site
+When the user navigates to Benefits and coverage page
 Then the user validates riders after login in UHC site
 
 Examples:
@@ -499,12 +499,12 @@ Examples:
 
 @mapdnonlisrider
 Scenario Outline:To validate the coverage and benefit amounts in benefits and coverage page in UMS site
-Given registered UHC with following details for plan benefits and coverage flow in UMS site
+Given registered member with following details logins in the member portal 
        | Plan Type    |MAPD|
        | Member Type  |Individual|
        | Copay Category |NON LIS|  
        | Riders         | <riderAvailableCheck> |      
-When the user navigates to plan benefits and Coverage in UMS site
+When the user navigates to Benefits and coverage page
 Then the user validates riders after login in UHC site
 
 Examples:
@@ -514,12 +514,12 @@ Examples:
 		
 @marider
 Scenario Outline: Verify My Medical Costs & Benefits Summary in UMS site
-Given registered UHC with following details for plan benefits and coverage flow in UMS site
+Given registered member with following details logins in the member portal 
 | Plan Type      | MA  |
 | Member Type     | Individual|
 | Copay Category |  LIS               |  
 | Riders         | <riderAvailableCheck> |
-When the user navigates to plan benefits and Coverage in UMS site
+When the user navigates to Benefits and coverage page
 And the user validates riders after login in UHC site
 Examples:
 
@@ -529,12 +529,12 @@ Examples:
 		
 @manonrider
 Scenario Outline: Verify My Medical Costs & Benefits Summary in UMS site
-Given registered UHC with following details for plan benefits and coverage flow in UMS site
+Given registered member with following details logins in the member portal 
 | Plan Type      | MA  |
 | Member Type     | Individual|
 | Copay Category |  LIS               |  
 | Riders         | <riderAvailableCheck> |
-When the user navigates to plan benefits and Coverage in UMS site
+When the user navigates to Benefits and coverage page
 And the user validates riders after login in UHC site
 Examples:
 
@@ -544,12 +544,12 @@ Examples:
 
 @Q4
 Scenario Outline: Verify My Medical Costs & Benefits Summary in UMS site
-Given registered UHC with following details for plan benefits and coverage flow in UMS site
+Given registered member with following details logins in the member portal 
  | Plan Type      |MAPD  |
  | Member Type    |Individual|
  | Copay Category |NON LIS               |  
  | Riders         |<riderAvailableCheck> |
- When the user navigates to plan benefits and Coverage in UMS site
+ When the user navigates to Benefits and coverage page
  Then the user validates My Optional Service and PDF links
  
   
@@ -561,7 +561,7 @@ Given registered UHC with following details for plan benefits and coverage flow 
 
 @US436849
 Scenario Outline:To verify PCP text on plan and benefits page for members in UMS site
-Given registered member to login in UMS site
+Given registered member with following details logins in the member portal 
 	| Plan Type   | <planType>   |
 	| Member Type | <memberType> |
 When the user navigates directly to plan benefits and Coverage in UMS site
@@ -580,12 +580,11 @@ Examples:
 
 @hospital       
 Scenario Outline: Verify benefits and coverage in UMS site for mapd and ma non lis with hospital visits
-Given registered UHC with following details for plan benefits and coverage flow in UMS site
+Given registered member with following details logins in the member portal 
 | Plan Type          | <planType>                |
 | Copay Category     | <copayCategory>           | 
 | Member Type				 | <Member Type>						 |
-When the user view forms and resources in UMS site
-Then the user view benefits and coverage in UMS site
+When the user navigates to Benefits and coverage page
 And the user validates the content on benefits and coverage page    	 
 Examples:
         |planType  | copayCategory  |Member Type     |
@@ -593,12 +592,11 @@ Examples:
 
 @outofp       
 Scenario Outline: Verify benefits and coverage in UMS site for mapd and ma non lis with out of pocket
-Given registered UHC with following details for plan benefits and coverage flow in UMS site
+Given registered member with following details logins in the member portal 
 | Plan Type          | <planType>                |
 | Copay Category     | <copayCategory>           | 
 | Member Type				 | <Member Type>						 |
-When the user view forms and resources in UMS site
-Then the user view benefits and coverage in UMS site
+When the user navigates to Benefits and coverage page
 And the user validates the content on benefits and coverage page    	 
 Examples:
         |planType  | copayCategory  |Member Type     |
@@ -608,13 +606,12 @@ Examples:
 
 @officev      
 Scenario Outline: Verify benefits and coverage in UMS site for mapd and ma non lis with office visits
-Given registered UHC with following details for plan benefits and coverage flow in UMS site
+Given registered member with following details logins in the member portal 
 | Plan Type          | <planType>                |
 | Copay Category     | <copayCategory>           | 
 | Member Type				 | <Member Type>	 |
 | Plan Name					 | <plan Name>		 |
-When the user view forms and resources in UMS site
-Then the user view benefits and coverage in UMS site
+When the user navigates to Benefits and coverage page
 And the user validates the content on benefits and coverage page    	 
 Examples:
         |planType  | copayCategory  |Member Type     | plan Name |
@@ -622,7 +619,7 @@ Examples:
         
 @dashboardfr       
 Scenario Outline: Verify dashboard forms and resources for mapd and ma in UMS site
-Given registered UHC with following details for plan benefits and coverage flow in UMS site
+Given registered member with following details logins in the member portal 
 | Plan Type          | <planType>                |
 | Member Type				 | <Member Type>						 |
 When the user view forms and resources in UMS site
@@ -636,7 +633,7 @@ Examples:
         
 @backtopre       
 Scenario Outline: Verify dashboard forms and resources for mapd and ma in UMS site
-Given registered UHC with following details for plan benefits and coverage flow in UMS site
+Given registered member with following details logins in the member portal 
 | Plan Type          | <planType>                |
 | Member Type				 | <Member Type>						 |
 When the user view forms and resources in UMS site
@@ -651,7 +648,7 @@ Examples:
         
 @udocdownload       
 Scenario Outline: Verify dashboard forms and resources for mapd and ma in UMS site
-Given registered UHC with following details for plan benefits and coverage flow in UMS site
+Given registered member with following details logins in the member portal 
 | Plan Type          | <planType>                |
 | Member Type				 | <Member Type>						 |
 When the user view forms and resources in UMS site
@@ -669,7 +666,7 @@ Examples:
 
 @docpagination
 Scenario Outline: Verify dashboard forms and resources for mapd and ma in UMS site
-Given registered UHC with following details for plan benefits and coverage flow in UMS site
+Given registered member with following details logins in the member portal 
 | Plan Type          | <planType>                |
 | Member Type				 | <Member Type>						 |
 When the user view forms and resources in UMS site
@@ -684,7 +681,7 @@ Examples:
         
 @docsorting
 Scenario Outline: Verify dashboard forms and resources for mapd and ma in UMS site
-Given registered UHC with following details for plan benefits and coverage flow in UMS site
+Given registered member with following details logins in the member portal 
 | Plan Type          | <planType>                |
 | Member Type				 | <Member Type>						 |
 When the user view forms and resources in UMS site
@@ -701,11 +698,11 @@ Examples:
 
 @bncfnf
 Scenario Outline:To verify Add Plan link not available on plan and benefits page for members in UMS site
-Given registered member to login in UMS site
+Given registered member with following details logins in the member portal 
 	| Plan Type   | <planType>   |
 	| Member Type | <memberType> |
 	| Group Type   | <groupType>  |
-When the user navigates to benefits and coverage page under my plans in UMS site
+When the user navigates to Benefits and coverage page
 Then validates that add plans tab is not available
 
 Examples:
@@ -720,10 +717,10 @@ Examples:
 
 Scenario Outline: To verify pdfs displayed in forms and resources in UMS site
 
-Given registered member to login in UMS site
+Given registered member with following details logins in the member portal 
 	| Plan Type   | <planType>   |
 	| Member Type | <memberType> |
-When the user navigates to benefits and coverage page under my plans in UMS site
+When the user navigates to Benefits and coverage page
 Then I will be able access a PDF flyer in  English,Spanish or Chinese that explains passport benefits when a plan has this feature
 
 Examples:
@@ -733,7 +730,7 @@ Examples:
 | MAPD     |Individual |
 
 Scenario Outline: Verify benefits and coverage in AARP site for G01 Ship member
-Given registered AMP with following details for plan benefits and coverage flow in AARP site
+Given registered member with following details logins in the member portal 
 | Plan Type          | <planType>                | 
 | Plan Group         | <planGroup>               |
 And the user navigates to plan benefits and coverage and validates summary left row for G01      
@@ -765,12 +762,11 @@ Examples:
 
 @needHelpums
     Scenario Outline: Verify Need Help section is in place on Benefits and Coverage page
-    Given registered UHC with following details for plan benefits and coverage flow in UMS site
+    Given registered member with following details logins in the member portal 
       | Plan Type      | <planType>  |
       | Member Type     | <memberType>|
       | Copay Category | <copayCategory>|
-    When the user view forms and resources in UMS site
-    Then the user view benefits and coverage in UMS site
+    When the user navigates to Benefits and coverage page
     And the user validates the content on benefits and coverage page
     And the user validates Needhelp header
 
@@ -780,12 +776,11 @@ Examples:
 
 @contactussection
     Scenario Outline: Verify Need Help section is in place on Benefits and Coverage pageR
-    Given registered UHC with following details for plan benefits and coverage flow in UMS site
+    Given registered member with following details logins in the member portal 
       | Plan Type      | <planType>  |
       | Member Type     | <memberType>|
       | Copay Category | <copayCategory>|
-    When the user view forms and resources in UMS site
-    Then the user view benefits and coverage in UMS site     
+    When the user navigates to Benefits and coverage page     
     And the user validates contactus section
     
     Examples: 
@@ -794,12 +789,11 @@ Examples:
       
 @disclaimersection
     Scenario Outline: Verify Need Help section is in place on Benefits and Coverage page
-    Given registered UHC with following details for plan benefits and coverage flow in UMS site
+    Given registered member with following details logins in the member portal 
       | Plan Type      | <planType>  |
       | Member Type     | <memberType>|
       | Copay Category | <copayCategory>|
-    When the user view forms and resources in UMS site
-    Then the user view benefits and coverage in UMS site
+    When the user navigates to Benefits and coverage page
     And the user validates Needhelp header and disclaimer header
     
     
@@ -812,12 +806,11 @@ Examples:
       
   @validatePdfsectiongroupenglish
       Scenario Outline: Verify PDF section is in place on Benefits and     Coverage page
-    Given registered UHC with following details for plan benefits and coverage flow in UMS site
+    Given registered member with following details logins in the member portal 
       | Plan Type      | <planType>  |
       | Member Type    | <memberType>|
       | Copay Category | <copayCategory>|
-    Then the user navigate to benefit and coverage page
-    Then the user view jenkins benefits and coverage in UMS site
+    Then the user navigates to Benefits and coverage page
     And the user validates the content on benefits and coverage page
     And the user validates view and document label
     And the user validates the language dropdown and the value displayed by default should be English
@@ -833,12 +826,11 @@ Examples:
 
  @validatePdfsectiongroupspanishchinese
     Scenario Outline: Verify PDF section is in place on Benefits and     Coverage page
-    Given registered UHC with following details for plan benefits and coverage flow in UMS site
+    Given registered member with following details logins in the member portal 
       | Plan Type      | <planType>  |
       | Member Type    | <memberType>|
       | Copay Category | <copayCategory>|
-    Then the user navigate to benefit and coverage page
-    Then the user view jenkins benefits and coverage in UMS site
+    Then the user navigates to Benefits and coverage page
     And the user validates the content on benefits and coverage page
     And the user validates view and document label
     And the user validates spanish and chinese should not display in dropdown
@@ -850,12 +842,11 @@ Examples:
 
  @validatePdfsectionindividual
     Scenario Outline: Verify PDF section is in place on Benefits and     Coverage page
-    Given registered UHC with following details for plan benefits and coverage flow in UMS site
+    Given registered member with following details logins in the member portal 
       | Plan Type      | <planType>  |
       | Member Type    | <memberType>|
       | Copay Category | <copayCategory>|
-    Then the user navigate to benefit and coverage page
-    Then the user view jenkins benefits and coverage in UMS site
+    Then the user navigates to Benefits and coverage page
     And the user validates the content on benefits and coverage page
     And the user validates view and document label
     And the user validates the language dropdown and the value displayed by default and selects new value in dropdown successfully$")
@@ -869,12 +860,11 @@ Examples:
       
  @Ancillarysecjenkins
     Scenario Outline: Verify PDF section is in place on Benefits and Coverage page
-    Given registered UHC with following details for plan benefits and coverage flow in UMS site
+    Given registered member with following details logins in the member portal 
       | Plan Type      | <planType>  |
       | Member Type    | <memberType>|
       | Copay Category | <copayCategory>|
-    Then the user navigate to benefit and coverage page
-    Then the user view jenkins benefits and coverage in UMS site
+    Then the user navigates to Benefits and coverage page
     And the user validates the content on benefits and coverage page
     Then the user validates Header section
     Then the user validates Hearing section
@@ -889,12 +879,11 @@ Examples:
       
    @drugcopaysectionnonlis
     Scenario Outline: Verify PDF section is in place on Benefits and Coverage page
-    Given registered UHC with following details for plan benefits and coverage flow in UMS site
+    Given registered member with following details logins in the member portal 
       | Plan Type      | <planType>     |
       | Member Type    | <memberType>|
       | Copay Category | <copayCategory>|
-    Then the user navigate to benefit and coverage page
-    Then the user view jenkins benefits and coverage in UMS site
+    Then the user navigates to Benefits and coverage page
     And the user validates the content on benefits and coverage page
     And the user view the Drug Copays & Discounts header 
     And the user validates the Learn More section link for stage and tier
@@ -916,12 +905,11 @@ Examples:
       
     @drugcopaysectionlis
     Scenario Outline: Verify PDF section is in place on Benefits and Coverage page
-    Given registered UHC with following details for plan benefits and coverage flow in UMS site
+    Given registered member with following details logins in the member portal 
       | Plan Type      | <planType>     |
       | Member Type    | <memberType>|
       | Copay Category | <copayCategory>|
-    Then the user navigate to benefit and coverage page
-    Then the user view jenkins benefits and coverage in UMS site
+    Then the user navigates to Benefits and coverage page
     And the user validates the content on benefits and coverage page
     And the user view the Drug Copays & Discounts header 
     And the drugcost dropdown should not display
@@ -947,26 +935,27 @@ Examples:
 
     @drugcosttablesectiongroupmemberlis
     Scenario Outline: Verify that drug cost table  is in place on Benefits and Coverage page for LIS Members
-    Given registered UHC with following details for plan benefits and coverage flow in UMS site
+    Given registered member with following details logins in the member portal 
       | Plan Type      | <planType>     |
       | Member Type    | <memberType>|
       | Copay Category | <copayCategory>|
-    Then the user navigate to benefit and coverage page
+    Then the user navigates to Benefits and coverage page
     And the user view the Drug Copays & Discounts header 
     And the user should see drug cost table for Lis members
     Examples: 
       | planType|  memberType  | copayCategory|
       | PDP     |  Group       |  LIS         |
-      | MAPD    |  Group       |  LIS 1       |
+     # | MAPD    |  Group       |  LIS 1       |
       
       
       
     @PlanOverview
     Scenario Outline: Verify that drug cost table  is in place on Benefits and Coverage page for LIS Members
-    Given registered UHC with following details for plan benefits and coverage flow in UMS site
+    Given registered member with following details logins in the member portal 
       | Plan Type      | <planType>  |
       | Member Type    | <memberType>| 
-    Then the user navigate to benefit and coverage page
+    Then the user navigates to Benefits and coverage page
+
     And the user validates plan overview section 
 
     Examples: 

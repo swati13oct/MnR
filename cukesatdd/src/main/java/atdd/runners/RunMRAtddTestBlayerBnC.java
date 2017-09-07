@@ -15,6 +15,9 @@ import cucumber.junit.Cucumber;
 @Cucumber.Options(glue = { "atdd.framework","acceptancetests.benefitsandcoveragejenkins.bluelayer"}, 
 		features = {"feature/plan-benefits-and-coverage/bluelayer" }, 
 		format = {
-		"pretty", "html:reports/test-report","json:target/cucumber.json"}, tags ={"@PlanOverview"})
+		"pretty", "html:reports/test-report","json:target/cucumber.json"}, tags ={"@drugcopaysectionlis"})
+
+
+
 public class RunMRAtddTestBlayerBnC {
 }

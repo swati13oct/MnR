@@ -55,7 +55,7 @@ public class BenefitsAndCoverageUmsStepDefinition {
 		return loginScenario;
 	}
 
-	@Given("^registered UHC with following details for plan benefits and coverage flow in UMS site$")
+	@Given("^registered member with following details logins in the member portal$")
 	public void login_with_member(DataTable memberAttributes) {
 		List<DataTableRow> memberAttributesRow = memberAttributes.getGherkinRows();
 		Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
@@ -98,7 +98,7 @@ public class BenefitsAndCoverageUmsStepDefinition {
 
 		LoginPage2 loginPage = new LoginPage2(wd);
 		AccountHomePage accountHomePage = (AccountHomePage) loginPage.loginWith(userName, pwd, category);
-		
+
 		if (accountHomePage != null) {
 			getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
 			getLoginScenario().saveBean(PageConstants.ACCOUNT_HOME_PAGE, accountHomePage);
@@ -127,6 +127,33 @@ public class BenefitsAndCoverageUmsStepDefinition {
 		 * expectedDataMap);
 		 */
 
+	}
+
+	@Then("^the user navigates to Benefits and coverage page$")
+	public void user_views_BenefitsAndCoveragejenkins() {
+
+		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstants.ACCOUNT_HOME_PAGE);
+		BenefitsAndCoveragePage benefitsCoveragePage = accountHomePage.navigateDirectToBnCPag();
+
+		if (benefitsCoveragePage != null) {
+			getLoginScenario().saveBean(PageConstants.BENEFITS_COVERAGE_PAGE, benefitsCoveragePage);
+
+			// Get actual data
+
+			JSONObject actualJsonObj = benefitsCoveragePage.benefitsandcoverageJson;
+			loginScenario.saveBean(PlanBenefitsAndCoverageCommonConstants.BENEFITS_AND_COVERAGE_ACTUAL, actualJsonObj);
+			System.out.println("Benefits and coverage actual ==============>" + actualJsonObj.toString());
+			// Get expected data
+			String fileName = this.userName;
+			String directory = CommonConstants.BENEFITS_AND_COVERAGE_PAGE_BLAYER_DIRECTORY;
+			JSONObject benefitsandcoverageExectedJson = MRScenario.readExpectedJson(fileName, directory);
+			loginScenario.saveBean(PlanBenefitsAndCoverageCommonConstants.BENEFITS_AND_COVERAGE_EXPECTED,
+					benefitsandcoverageExectedJson);
+			System.out.println(
+					"Benefits and coverage expected ==============>" + benefitsandcoverageExectedJson.toString());
+			loginScenario.saveBean(PlanBenefitsAndCoverageCommonConstants.BENEFITS_AND_COVERAGE_EXPECTED,
+					benefitsandcoverageExectedJson);
+		}
 	}
 
 	@Given("^registered UHC with following details for plan benefits and coverage flow in UMS site Mobile view$")
@@ -173,15 +200,13 @@ public class BenefitsAndCoverageUmsStepDefinition {
 		LoginPage2 loginPage = new LoginPage2(wd);
 
 		AccountHomePage accountHomePage = (AccountHomePage) loginPage.loginMobile(userName, pwd, category);
-		
+
 		if (accountHomePage != null) {
 			getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
 			getLoginScenario().saveBean(PageConstants.ACCOUNT_HOME_PAGE, accountHomePage);
 		}
 	}
-	
-	
-	
+
 	@Given("^registered member to login in UMS site$")
 	public void login_with_member_UMS(DataTable memberAttributes) {
 		List<DataTableRow> memberAttributesRow = memberAttributes.getGherkinRows();
@@ -270,22 +295,6 @@ public class BenefitsAndCoverageUmsStepDefinition {
 			getLoginScenario().saveBean(PageConstants.BENEFITS_AND_COVERAGE_PAGE, benefitsCoveragePage);
 		}
 	}
-	
-
-	@Then("^the user navigate to benefit and coverage page")
-	public void user_navigate_toBnCpage() {
-		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstants.ACCOUNT_HOME_PAGE);
-		BenefitsAndCoveragePage benefitsCoveragePage = accountHomePage.navigateDirectToBnCPag();
-
-	
-		
-		if (benefitsCoveragePage != null) {
-			getLoginScenario().saveBean(PageConstants.BENEFITS_COVERAGE_PAGE, benefitsCoveragePage);
-		}
-	}
-	
-	
-	
 
 	@Then("^the user validates plan benefits and coverage details in UMS site$")
 	public void details_validation(DataTable attributes) {
@@ -612,31 +621,6 @@ public class BenefitsAndCoverageUmsStepDefinition {
 
 	}
 
-
-	@Then("^the user view jenkins benefits and coverage in UMS site")
-	public void user_views_BenefitsAndCoveragejenkins() {
-
-		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario()
-				.getBean(PageConstants.BENEFITS_COVERAGE_PAGE);
-		if (benefitsCoveragePage != null) {
-			// Get actual data
-
-			JSONObject actualJsonObj = benefitsCoveragePage.benefitsandcoverageJson;
-			loginScenario.saveBean(PlanBenefitsAndCoverageCommonConstants.BENEFITS_AND_COVERAGE_ACTUAL, actualJsonObj);
-			System.out.println("Benefits and coverage actual ==============>" + actualJsonObj.toString());
-			// Get expected data
-			String fileName = this.userName;
-			String directory = CommonConstants.BENEFITS_AND_COVERAGE_PAGE_BLAYER_DIRECTORY;
-			JSONObject benefitsandcoverageExectedJson = MRScenario.readExpectedJson(fileName, directory);
-			loginScenario.saveBean(PlanBenefitsAndCoverageCommonConstants.BENEFITS_AND_COVERAGE_EXPECTED,
-					benefitsandcoverageExectedJson);
-			System.out.println(
-					"Benefits and coverage expected ==============>" + benefitsandcoverageExectedJson.toString());
-			loginScenario.saveBean(PlanBenefitsAndCoverageCommonConstants.BENEFITS_AND_COVERAGE_EXPECTED,
-					benefitsandcoverageExectedJson);
-		}
-	}
-
 	@Then("^the user validates Needhelp header and disclaimer header")
 	public void validateneedhelpheader() {
 		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario()
@@ -760,15 +744,15 @@ public class BenefitsAndCoverageUmsStepDefinition {
 		benefitsCoveragePage.getview_label();
 
 	}
-	
+
 	@And("the user validates spanish and chinese should not display in dropdown")
 	public void user_validates_spanish_chinese_notvisible() {
 		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario()
 				.getBean(PageConstants.BENEFITS_COVERAGE_PAGE);
 		benefitsCoveragePage.languagevalidation();
-		
+
 	}
-	
+
 	@And("^the user validates the language dropdown and the value displayed by default and selects new value in dropdown successfully$")
 	public void validate_languagedropdown(DataTable givenAttributes) {
 		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario()
@@ -777,14 +761,14 @@ public class BenefitsAndCoverageUmsStepDefinition {
 		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
 		Map<String, String> memberAttributesMap = new HashMap<String, String>();
 		for (int i = 0; i < memberAttributesRow.size(); i++) {
-            memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
 					memberAttributesRow.get(i).getCells().get(1));
 		}
 		String language = memberAttributesMap.get("Language");
 		getLoginScenario().saveBean(PlanBenefitsAndCoverageCommonConstants.Language, language);
 		benefitsCoveragePage.validate_langdropdown_select(language);
 	}
-	
+
 	@And("the user validates the language dropdown and the value displayed by default should be English")
 	public void user_validates_englishlanguage() {
 		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario()
@@ -880,7 +864,7 @@ public class BenefitsAndCoverageUmsStepDefinition {
 				.getBean(PageConstants.BENEFITS_COVERAGE_PAGE);
 		benefitsCoveragePage.validate_locateapharmacysection();
 	}
-	
+
 	@And("^the user validates tier link should not display")
 	public void user_validate_tierinkshouldnotdisplay() {
 		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario()
@@ -898,7 +882,7 @@ public class BenefitsAndCoverageUmsStepDefinition {
 	 * benefitsCoveragePage.validate_drugcostdropdownoptions(
 	 * benefitsandcoverageExectedJson); }
 	 */
-	
+
 	@And("the drugcost dropdown should not display")
 	public void user_validate_dropdownshouldnotdisplay() {
 		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario()
@@ -912,7 +896,7 @@ public class BenefitsAndCoverageUmsStepDefinition {
 				.getBean(PageConstants.BENEFITS_COVERAGE_PAGE);
 		benefitsCoveragePage.validate_learnmoreaboutlink();
 	}
-	
+
 	@And("^the user validates the Learn More section link for stage")
 	public void user_validate_stagelink() {
 		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario()
@@ -943,7 +927,7 @@ public class BenefitsAndCoverageUmsStepDefinition {
 				.getBean(PageConstants.BENEFITS_COVERAGE_PAGE);
 		benefitsCoveragePage.validatedrugcosttable();
 	}
-	
+
 	@And("the user should see Ways to save Option")
 	public void user_validate_waysToSave() {
 		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario()
@@ -951,17 +935,11 @@ public class BenefitsAndCoverageUmsStepDefinition {
 		benefitsCoveragePage.validateWaystoSave();
 	}
 
-	
-	
-
-  	@And("the user validates plan overview section")
-public void user_validate_planOverview() {
-	BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario()
-			.getBean(PageConstants.BENEFITS_COVERAGE_PAGE);
-	benefitsCoveragePage.validatePlanOverview();
-}
-
+	@And("the user validates plan overview section")
+	public void user_validate_planOverview() {
+		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario()
+				.getBean(PageConstants.BENEFITS_COVERAGE_PAGE);
+		benefitsCoveragePage.validatePlanOverview();
 	}
-	
-	
 
+}
