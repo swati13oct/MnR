@@ -1,11 +1,11 @@
 @acq_drug_cost_estimator_blayer
-Feature:Drug Cost Estimator (DCE) - To test DCE flow from home page and dce vpp flow on ums acq site
+Feature:Drug Cost Estimator (DCE) - To test DCE flows on UMS acq site
 
 @acq_drug_cost_estimator_blayer_flow
 Scenario Outline: As a prospective member using redesigned DCE tool on the M&R portal site on either a desktop or mobile device, I want to be able to choose a generic option if it is available from my Drug List and see any cost savings associated with it if I have selected a pharmacy so I can save on the cost of my prescription drugs.
 Given the user is on blayer medicare acq site landing page
 When I access the acquisition DCE tool from home page on ums site
-And I have added a drug to my drug list
+And I have added a drug to my drug list on ums site
 	|Drug|<drug>|
 And I navigate to step2 page on ums site
 And the user selects the pharmacy tab information
@@ -25,7 +25,7 @@ Scenario Outline: To test the dce vpp flow
 Given the user is on blayer medicare acq site landing page
 When I access the acquisition DCE tool from vpp page using below zipcode on ums site
 	| Zip Code    | <zipcode>  |
-And I add a drug to my drug list
+And I have added a drug to my drug list on ums site
 	|Drug|<drug>|
 And I navigate to step2 page on ums site
 And I select the first pharmacy on there
@@ -41,7 +41,7 @@ Scenario Outline: To test the dce vpp flow
 Given the user is on blayer medicare acq site landing page
 When I access the acquisition DCE tool from vpp page using below zipcode on ums site
 	| Zip Code    | <zipcode>  |
-And I add a drug to my drug list
+And I have added a drug to my drug list on ums site
 	|Drug|<drug>|
 And I navigate to step2 page on ums site
 And I select the first pharmacy on there

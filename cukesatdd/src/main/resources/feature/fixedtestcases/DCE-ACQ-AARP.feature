@@ -1,5 +1,5 @@
 @acq_drug_cost_estimator
-Feature:Drug Cost Estimator (DCE) - To test DCE flow from home page and dce vpp flow on aarp acq site
+Feature:Drug Cost Estimator (DCE) - To test DCE flows on aarp acq site
 
 @acq_drug_cost_estimator_ulayer_flow
 Scenario Outline: To verify DCE flow from Ulayer home page

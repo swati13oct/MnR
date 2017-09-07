@@ -84,7 +84,7 @@ public class DCEAcqUmsStepDefinition {
 		dce.navigateToDCEToolFromvpp(zipcode);
 	}
 	
-	@When("^I add a drug to my drug list$")
+	@When("^I have added a drug to my drug list on ums site$")
 	public void I_have_added_a_drug_to_my_drug_list(DataTable data) throws InterruptedException {
 		List<DataTableRow> memberAttributesRow = data.getGherkinRows();
 		String drug = memberAttributesRow.get(0).getCells().get(1);
