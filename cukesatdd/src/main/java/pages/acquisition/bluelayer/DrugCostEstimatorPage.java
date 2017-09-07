@@ -412,9 +412,8 @@ public class DrugCostEstimatorPage extends UhcDriver {
 		Thread.sleep(10000);
 		//waitforElement(addDrug);
 		addDrug.click();
-		System.out.println("Current Page title :: " + driver.getTitle());
 
-		if (driver.getTitle().equalsIgnoreCase("estimate-drug-costs")) {
+		if (validate(drugsearchinput)) {
 
 			return new AddNewDrugModal(driver);
 		}
