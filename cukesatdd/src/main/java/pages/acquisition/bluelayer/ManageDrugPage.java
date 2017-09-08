@@ -530,7 +530,7 @@ public class ManageDrugPage extends UhcDriver {
 		}
 
 		if(currentUrl().contains("plan-detail.html")){
-			return new PlanDetailsPage(driver,planName);
+			//return new PlanDetailsPage(driver,planName);
 		}
 
 		return null;

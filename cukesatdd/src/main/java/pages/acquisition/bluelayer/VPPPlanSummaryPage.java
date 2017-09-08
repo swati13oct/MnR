@@ -98,7 +98,8 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	@FindBy(xpath="//div[@data-ng-repeat='plan in pdpplans']")
 	List<WebElement> pdpPlans;
 
-
+	@FindBy(xpath = ".//*[@id='site-wrapper']/div[4]/div/div[1]/div/div/div/div/div[1]/div/div/div[1]/div[2]/div/div[2]/div[1]/div")
+	public WebElement viewPlans;
 
 	@FindBy(xpath = "//div[@id='snpplans_container']/h1/span[2]")
 	WebElement msnPlanHeadingText;
@@ -136,8 +137,8 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	@FindBy(css="#maplans_container .compareHeading>p")
 	private WebElement compareUpto3PlansPopup;
 
-	@FindBy(xpath="//div[@data-ng-repeat='plan in maplans'][1]//span[@class='cpcheckbox']")
-	private WebElement compareChkBox;
+	@FindBy(xpath=".//*[@id='plan-list-1']/div/div[2]/div/div[3]/div[3]/div/div/span[1]/label")
+	private WebElement compareChkBox3;
 
 	@FindBy(xpath="//div[@data-ng-repeat='plan in maplans'][1]//div[contains(@id,'showcompare')][1]/div[@class='compareHeading']/p[1]/b")
 	private WebElement comparePopUpTxt1;
@@ -168,6 +169,9 @@ public class VPPPlanSummaryPage extends UhcDriver {
 
 	@FindBy(className = "planYear")
 	WebElement planYear;
+	
+	@FindBy(xpath = ".//*[@id='plan-list-1']/div/div[2]/div/div[3]/div[2]/div/div[3]")
+	private WebElement viewMAPlanDetailsLink3;
 	
 	@FindBy(xpath=".//*[@class='action-btn getStarted']")
 	private WebElement GetStarted;
@@ -203,10 +207,6 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	@FindBy(xpath="//*[@id='physicians_info']")
 	private WebElement provider;
 
-
-	//@FindBy(xpath = "//div[@class='maplans_planbutton']/div[2]/div[2]/div")
-	//private WebElement showMaPlans;
-
 	@FindBy(className = "planType_info")
 	WebElement planHeadingText;
 
@@ -218,12 +218,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		super(driver);
 		PageFactory.initElements(driver, this);
 
-		CommonUtility.waitForPageLoad(driver, vppplansummarypage,CommonConstants.TIMEOUT_30);
-		String fileName = CommonConstants.VPP_PLAN_SUMMARY_PAGE_DATA;
-		vppPlanSummary = CommonUtility.readPageData(fileName,
-				CommonConstants.PAGE_OBJECT_DIRECTORY_BLUELAYER_ACQ);
-
-		openAndValidate();
+		//openAndValidate();
 	}
 
 
@@ -410,7 +405,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 				|| driver.getTitle().equalsIgnoreCase("Medicare Special Needs Plan Details | UnitedHealthcare®")
 				|| driver.getTitle().equalsIgnoreCase("Medicare Prescription Drug Plan Details | UnitedHealthcare®")
 				|| driver.getTitle().equalsIgnoreCase("Our Medicare Plan Types | UnitedHealthcare®")) {
-			return new PlanDetailsPage(driver,planName);
+			return new PlanDetailsPage(driver);
 		}
 		return null;
 	}
@@ -879,13 +874,13 @@ public class VPPPlanSummaryPage extends UhcDriver {
 
 	public void verifyCompareCheckBoxesAreUnchecked(){
 
-		Assert.assertEquals("compare_checkbox ng-scope ng-pristine ng-valid", compareChkBox.getAttribute("class"));
+		Assert.assertEquals("compare_checkbox ng-scope ng-pristine ng-valid", compareChkBox3.getAttribute("class"));
 
 	}
 
 	public void UncheckAndVerifyCompareChkBox(){
-		compareChkBox.click();
-		Assert.assertEquals("compare_checkbox ng-scope ng-valid ng-dirty", compareChkBox.getAttribute("class"));
+		compareChkBox3.click();
+		Assert.assertEquals("compare_checkbox ng-scope ng-valid ng-dirty", compareChkBox3.getAttribute("class"));
 	}
 
 	public void VerifyComparePopUpText(){
@@ -895,8 +890,13 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	}
 
 	public void clickCompareChkBox(){
-		waitforElement(compareChkBox);
-		compareChkBox.click();
+		try {
+			Thread.sleep(3000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		compareChkBox3.click();
 	}
 	public boolean validatepassportData() {
 		try {
@@ -929,6 +929,28 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		if(validate(showMaPlans)&&validate(showPdpPlans)&&validate(changeLocationBtn))
 			flag = true;
 		return flag;
+	}
+
+	
+
+	public PlanDetailsPage clickViewDetails() {
+		viewMAPlanDetailsLink3.click();
+		if(getTitle().equalsIgnoreCase("Our Medicare Plan Types | UnitedHealthcare®"))
+			return new PlanDetailsPage(driver);
+		return null;
+	}
+
+
+
+	public void clickonViewPlans() {
+		try {
+			Thread.sleep(5000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		viewPlans.click();
+		
 	}
 }
 

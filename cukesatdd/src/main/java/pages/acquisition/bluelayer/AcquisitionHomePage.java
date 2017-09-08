@@ -1029,20 +1029,17 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		return null;
 	}
 
-	public void multiple_county(String zipcode)
+	public VPPPlanSummaryPage navigateToVpp(String zipcode)
 	{
-		System.out.println("Hi");
+		
 		sendkeys(zipCodeField, zipcode);
-		System.out.println("Hi");
 		viewPlansButton.click();
-		if (countyModal.isDisplayed())
-		{
-			System.out.println("County model window appeared");
+		
+		if (getTitle().equalsIgnoreCase(
+				"Our Medicare Plan Types | UnitedHealthcare®")) {
+			return new VPPPlanSummaryPage(driver);
 		}
-		else
-		{
-			System.out.println("County model window not found");
-		}
+		return null;
 	}
 
 	public RequestForAssistanceUMSPage requestforassistanceclick()

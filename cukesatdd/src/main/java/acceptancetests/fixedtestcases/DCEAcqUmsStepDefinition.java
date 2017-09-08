@@ -27,6 +27,8 @@ import cucumber.api.DataTable;
 import gherkin.formatter.model.DataTableRow;
 import pages.acquisition.bluelayer.AcquisitionHomePage;
 import pages.acquisition.bluelayer.DrugCostEstimatorPage;
+import pages.acquisition.bluelayer.PlanDetailsPage;
+import pages.acquisition.bluelayer.VPPPlanSummaryPage;
 
 
 
@@ -82,6 +84,46 @@ public class DCEAcqUmsStepDefinition {
 
 		DrugCostEstimatorPage dce = new DrugCostEstimatorPage(wd);
 		dce.navigateToDCEToolFromvpp(zipcode);
+	}
+	
+	@When("^I access the vpp page$")
+	public void I_access_the_vpp_page(DataTable memberAttributes) throws InterruptedException {
+		List<DataTableRow> memberAttributesRow = memberAttributes
+				.getGherkinRows();
+		Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells()
+					.get(0), memberAttributesRow.get(i).getCells().get(1));
+		}
+
+		String zipcode = memberAttributesMap.get("Zip Code");
+		AcquisitionHomePage acqhomepage = (AcquisitionHomePage) loginScenario.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+		VPPPlanSummaryPage vppplansummarypage = acqhomepage.navigateToVpp(zipcode);
+		if(vppplansummarypage!=null){
+			getLoginScenario().saveBean(PageConstants.VPP_PLAN_SUMMARY_PAGE, vppplansummarypage);
+			
+		}
+	}
+	
+	@And("^I click on add to compare checkbox and click on view details link$")
+	public void I_click_on_compare_checkbox(){
+		VPPPlanSummaryPage vppplansummarypage = (VPPPlanSummaryPage) loginScenario.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		vppplansummarypage.clickonViewPlans();
+		vppplansummarypage.clickCompareChkBox();
+		PlanDetailsPage plandetailspage = vppplansummarypage.clickViewDetails();
+		if(plandetailspage!=null){
+			getLoginScenario().saveBean(PageConstants.VPP_PLAN_DETAILS_PAGE, plandetailspage);
+		}
+	}
+	
+	@Then("^I uncheck and recheck the compare box and verify the message and link exists$")
+	public void verifyPlanDetailsPage(){
+		PlanDetailsPage plandetailspage = (PlanDetailsPage) loginScenario.getBean(PageConstants.VPP_PLAN_DETAILS_PAGE);
+		if(plandetailspage.validateCompareBox()){
+			Assert.assertTrue(true);
+		}else
+			Assert.fail("Error in validating the compare checkbox message and/or link");
 	}
 	
 	@When("^I have added a drug to my drug list on ums site$")

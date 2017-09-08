@@ -90,6 +90,12 @@ public class PlanDetailsPage extends UhcDriver{
 	@FindBy(xpath=".//*[@id='planCost']")
 	private WebElement planCostsSection;
 	
+	 @FindBy(xpath = ".//*[@id='highlights']/div/div/span[1]/label")
+	 private WebElement compareBox;
+	    
+	 @FindBy(xpath = ".//*[@id='highlights']/div/div/span[2]/span/span")
+	 private WebElement compareBoxMessage;
+	    
 	@FindBy(xpath=".//*[@id='_content_uhcmedicaresolutions_en_health-plans_medicare-advantage-plans_plan-detail_jcr_content_contentPar_plandetails_parsys_plandetailstwocoloum_parsys_teaser']")
 	private WebElement planDocsSection;
 
@@ -102,27 +108,9 @@ public class PlanDetailsPage extends UhcDriver{
 	public JSONObject planDocPDFAcqJson;
 	
 
-	public PlanDetailsPage(WebDriver driver,String planName) {
+	public PlanDetailsPage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
-/*
-		 String fileName = null;
-		if(planName.contains("HMO"))
-		{
-			fileName = "maplandetails.json";
-		}
-		if(planName.contains("PDP"))
-		{
-			fileName = "pdpplandetails.json";
-		}
-		if(planName.contains("SNP"))
-		{
-			fileName = "snpplandetails.json";
-		}
-
-		vppPlanDetails = CommonUtility.readPageData(fileName,
-				CommonConstants.PAGE_OBJECT_DIRECTORY_BLUELAYER_ACQ);
-*/
 		//openAndValidate();
 	}
 
@@ -357,6 +345,21 @@ public class PlanDetailsPage extends UhcDriver{
 				
 			}
 			return flag;
+		}
+
+	   
+		public boolean validateCompareBox() {
+			compareBox.click();
+			try {
+				Thread.sleep(2000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			compareBox.click();
+			if(compareBoxMessage.getText().contains("plans added") && compareBoxMessage.getText().contains("Compare plans"))
+				return true;
+			return false;
 		}
 
 }
