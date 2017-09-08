@@ -298,7 +298,7 @@ public class PharmacySearchPage extends UhcDriver{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		Assert.assertTrue("Locate pharmacy title displyed correctly", locatePharmacyTitle.getText().equals("Encuentre una Farmacia"));
+		Assert.assertTrue("Locate pharmacy title displyed incorrectly", !locatePharmacyTitle.getText().equals("Encuentre una Farmacia"));
 		return new PharmacySearchPage(driver);
 	}
 	
@@ -312,7 +312,7 @@ public class PharmacySearchPage extends UhcDriver{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		Assert.assertTrue("Locate pharmacy title displyed correctly", locatePharmacyTitle.getText().equals("尋找藥房"));
+		Assert.assertTrue("Locate pharmacy title displyed incorrectly", !locatePharmacyTitle.getText().equals("尋找藥房"));
 		return new PharmacySearchPage(driver);
 	}
 	
