@@ -33,8 +33,8 @@ public class PharmacySearchPage extends UhcDriver {
 	@FindBy(id = "showresults")
 	private WebElement distanceField;
 
-	@FindBy(id = "dis_continue_btn")
-	private WebElement continueField;
+	//@FindBy(id = "dis_continue_btn")
+	//private WebElement continueField;
 	
 	@FindBy(id = "cancleBTN")
 	private WebElement continueButton;
@@ -158,11 +158,9 @@ public class PharmacySearchPage extends UhcDriver {
 			e2.printStackTrace();
 		}
 
-		if (zipcode != null) {
+		
 			continueButton.click();
-		} else {
-			continueField.click();
-		}
+		
 
 		try {
 			Thread.sleep(3000);
@@ -296,7 +294,7 @@ public class PharmacySearchPage extends UhcDriver {
  }
 	@Override
 	public void openAndValidate() {
-		validate(continueField);
+		validate(continueButton);
 		validate(searchPharmaciesButton);
 		validate(espanolLink);
 		validate(chineseLink);
