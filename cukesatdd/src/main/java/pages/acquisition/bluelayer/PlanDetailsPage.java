@@ -54,7 +54,7 @@ public class PlanDetailsPage extends UhcDriver{
 	private WebElement planCost4;
 	
 
-	@FindBy(id = "backToplans")
+	@FindBy(xpath = ".//*[@id='site-wrapper']/div[4]/div/div/div/div/div/div/div[1]/div/div/a")
 	private WebElement backToAllPlans;
 	
 	@FindBy(xpath = "//*[@id='yourDruglist']/div[2]/table/tbody/tr[3]/td/span[2]")
@@ -92,9 +92,12 @@ public class PlanDetailsPage extends UhcDriver{
 	
 	 @FindBy(xpath = ".//*[@id='highlights']/div/div/span[1]/label")
 	 private WebElement compareBox;
-	    
+	 
 	 @FindBy(xpath = ".//*[@id='highlights']/div/div/span[2]/span/span")
 	 private WebElement compareBoxMessage;
+	 
+	 @FindBy(xpath = ".//*[@id='highlights']/div/div/span[2]/span")
+	 private WebElement compareBoxMessagePDP;
 	    
 	@FindBy(xpath=".//*[@id='_content_uhcmedicaresolutions_en_health-plans_medicare-advantage-plans_plan-detail_jcr_content_contentPar_plandetails_parsys_plandetailstwocoloum_parsys_teaser']")
 	private WebElement planDocsSection;
@@ -219,11 +222,11 @@ public class PlanDetailsPage extends UhcDriver{
 
 	} 
 
-	public VPPPlanSummaryPage backtoPlanSummaryPage(String planType) {
+	public VPPPlanSummaryPage backtoPlanSummaryPage() {
 		validate(backToAllPlans);
 		if(backToAllPlans != null){
 		backToAllPlans.click();		
-		return new VPPPlanSummaryPage(driver, planType);
+		return new VPPPlanSummaryPage(driver);
 		}
 		
 	return null;
@@ -349,19 +352,36 @@ public class PlanDetailsPage extends UhcDriver{
 
 	   
 		public boolean validateCompareBox() {
-			compareBox.click();
+			clickCompareBox();
 			try {
 				Thread.sleep(2000);
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			compareBox.click();
+			clickCompareBox();
 			if(compareBoxMessage.getText().contains("plans added") && compareBoxMessage.getText().contains("Compare plans"))
 				return true;
 			return false;
 		}
-
+		
+		public void clickCompareBox(){
+			compareBox.click();
+		}
+		
+		public boolean validateCompareBoxPDP() {
+			clickCompareBox();
+			try {
+				Thread.sleep(2000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+			if(compareBoxMessagePDP.getText().contains("1 plan added, please select another plan to continue"))
+				return true;
+			return false;
+		}
 }
 
 

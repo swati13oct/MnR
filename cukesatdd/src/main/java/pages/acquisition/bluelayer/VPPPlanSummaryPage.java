@@ -99,7 +99,10 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	List<WebElement> pdpPlans;
 
 	@FindBy(xpath = ".//*[@id='site-wrapper']/div[4]/div/div[1]/div/div/div/div/div[1]/div/div/div[1]/div[2]/div/div[2]/div[1]/div")
-	public WebElement viewPlans;
+	private WebElement viewPlans;
+	
+	@FindBy(xpath = ".//*[@id='site-wrapper']/div[4]/div/div/div/div/div/div/div[1]/div/div/div[1]/div[2]/div/div[2]/div[3]")
+	private WebElement viewPDPPlans;
 
 	@FindBy(xpath = "//div[@id='snpplans_container']/h1/span[2]")
 	WebElement msnPlanHeadingText;
@@ -209,6 +212,9 @@ public class VPPPlanSummaryPage extends UhcDriver {
 
 	@FindBy(className = "planType_info")
 	WebElement planHeadingText;
+	
+	@FindBy(xpath=".//*[@id='viewmoredetlinkpdp']")
+	WebElement viewDetailsPDP;
 
 	private PageData vppPlanSummary;
 
@@ -872,10 +878,11 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		Assert.assertEquals("Compare up to 3 plans Select 2-3 plans that you'd like to compare.",compareUpto3PlansPopup.getText().trim());
 	}
 
-	public void verifyCompareCheckBoxesAreUnchecked(){
-
-		Assert.assertEquals("compare_checkbox ng-scope ng-pristine ng-valid", compareChkBox3.getAttribute("class"));
-
+	public boolean verifyCompareCheckBoxesAreUnchecked(){
+		if(!compareChkBox3.isSelected())
+			return true;
+		return false;
+		
 	}
 
 	public void UncheckAndVerifyCompareChkBox(){
@@ -940,7 +947,12 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		return null;
 	}
 
-
+	public PlanDetailsPage clickViewDetailsPDP() {
+		viewDetailsPDP.click();
+		if(getTitle().equalsIgnoreCase("Our Medicare Plan Types | UnitedHealthcare®"))
+			return new PlanDetailsPage(driver);
+		return null;
+	}
 
 	public void clickonViewPlans() {
 		try {
@@ -952,6 +964,17 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		viewPlans.click();
 		
 	}
+	
+	public void clickOnPDPPlans(){
+		try {
+			Thread.sleep(5000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		viewPDPPlans.click();
+	}
+	
 }
 
 

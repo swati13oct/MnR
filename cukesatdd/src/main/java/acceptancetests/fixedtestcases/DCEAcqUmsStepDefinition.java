@@ -117,6 +117,25 @@ public class DCEAcqUmsStepDefinition {
 		}
 	}
 	
+	@And("^I select pdp plans and go to view details page$")
+	public void I_select_pdp_plans_and_go_to_view_details_page(){
+		VPPPlanSummaryPage vppplansummarypage = (VPPPlanSummaryPage) loginScenario.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		vppplansummarypage.clickOnPDPPlans();
+		PlanDetailsPage plandetailspage = vppplansummarypage.clickViewDetailsPDP();
+		if(plandetailspage!=null){
+			getLoginScenario().saveBean(PageConstants.VPP_PLAN_DETAILS_PAGE, plandetailspage);
+		}
+	}
+	
+	@Then("^I check compare box and verify right info is shown$")
+	public void I_check_compare_box_and_verify(){
+		PlanDetailsPage plandetailspage = (PlanDetailsPage) loginScenario.getBean(PageConstants.VPP_PLAN_DETAILS_PAGE);
+		if(plandetailspage.validateCompareBoxPDP()){
+			Assert.assertTrue(true);
+		}else
+			Assert.fail("Error in validating the compare checkbox message and/or link");
+	}
+	
 	@Then("^I uncheck and recheck the compare box and verify the message and link exists$")
 	public void verifyPlanDetailsPage(){
 		PlanDetailsPage plandetailspage = (PlanDetailsPage) loginScenario.getBean(PageConstants.VPP_PLAN_DETAILS_PAGE);
@@ -124,6 +143,20 @@ public class DCEAcqUmsStepDefinition {
 			Assert.assertTrue(true);
 		}else
 			Assert.fail("Error in validating the compare checkbox message and/or link");
+	}
+	
+	@Then("^I uncheck and go back to the vpp page to validate$")
+	public void uncheck_and_validate_vpp_page(){
+		PlanDetailsPage plandetailspage = (PlanDetailsPage) loginScenario.getBean(PageConstants.VPP_PLAN_DETAILS_PAGE);
+		plandetailspage.clickCompareBox();
+		VPPPlanSummaryPage vppsummarypage = plandetailspage.backtoPlanSummaryPage();
+		if(vppsummarypage!=null){
+			if(vppsummarypage.verifyCompareCheckBoxesAreUnchecked())
+				Assert.assertTrue(true);
+			else
+				Assert.fail("Error in validating that the checkboxes are unchecked");
+		}else
+			Assert.fail("Error in loading the vpp plan summary page");
 	}
 	
 	@When("^I have added a drug to my drug list on ums site$")
