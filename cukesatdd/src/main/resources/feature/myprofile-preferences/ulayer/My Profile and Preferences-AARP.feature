@@ -100,9 +100,9 @@ Feature: To test My Profile & Preferences in AARP site
   
   @ValidatePlanNamemembernameIDAccountSectionAARP
   Scenario Outline: To verify Plan Name, Member name, Member ID section in AARP site
-    Given registered AMP with following details for profile and preferences flow in AARP site
+    Given registered member with following details for Profile and Preferences flow
       | <planType> |
-    When the user navigate to Profile and Preference page
+    When the user navigates to Profile and Preferences page
     Then the user validates the Plan Name, Member name, Member ID section in AARP site
 
        Examples: 
@@ -116,9 +116,9 @@ Feature: To test My Profile & Preferences in AARP site
       
   @ValidateEmail
   Scenario Outline: To verify Email section in AARP site
-    Given registered AMP with following details for profile and preferences flow in AARP site
+    Given registered member with following details for Profile and Preferences flow
       | <planType> |
-    When the user navigate to Profile and Preference page
+    When the user navigates to Profile and Preferences page
     And the user validates the Email section in AARP site
 
        Examples: 
@@ -129,9 +129,9 @@ Feature: To test My Profile & Preferences in AARP site
       
    @PasswordEdit
   Scenario Outline: To verify the edit functionality in Account Profile section in AARP site
-    Given registered AMP with following details for profile and preferences flow in AARP site
+    Given registered member with following details for Profile and Preferences flow
       | <planType> |
-    When the user navigate to Profile and Preference page
+    When the user navigates to Profile and Preferences page
     Then the user validates the elements on clicking the edit link
     Then the user validates the functionality of save Button
     Then the user validates the functionality of Cancel Button
@@ -144,9 +144,9 @@ Feature: To test My Profile & Preferences in AARP site
      
     @PasswordEdit1
      Scenario Outline: To verify the edit functionality in Account Profile section in AARP site
-    Given registered AMP with following details for profile and preferences flow in AARP site
+    Given registered member with following details for Profile and Preferences flow
       | <planType> |
-    When the user navigate to Profile and Preference page
+    When the user navigates to Profile and Preferences page
     Then the user validates the elements on clicking the edit link
     Then the user clicks on save button without filling current and new password and the red mandatory message should come
     
@@ -158,9 +158,9 @@ Feature: To test My Profile & Preferences in AARP site
     
     @EmailEdit1
       Scenario Outline: To verify Email section in AARP site
-    Given registered AMP with following details for profile and preferences flow in AARP site
+    Given registered member with following details for Profile and Preferences flow
       | <planType> |
-    When the user navigate to Profile and Preference page
+    When the user navigates to Profile and Preferences page
     Then the user clicks on edit button
     Then the user clicks on save without filling both fields then the user should see red mandatory message
     Then the user fill new email address and click save then user should see new updated email on page
@@ -173,9 +173,9 @@ Feature: To test My Profile & Preferences in AARP site
       
      @EmailEdit2
      Scenario Outline: To verify Email section in AARP site
-    Given registered AMP with following details for profile and preferences flow in AARP site
+    Given registered member with following details for Profile and Preferences flow
       | <planType> |
-    When the user navigate to Profile and Preference page
+    When the user navigates to Profile and Preferences page
     Then the user clicks on edit button
     Then the user fill invalid email and clicks on save button then the user should see error message for invalid email
     Then the user fill different email id in confirm email box from new email address then error message should come
@@ -189,9 +189,9 @@ Feature: To test My Profile & Preferences in AARP site
       
      @Needhelp
      Scenario Outline: To verify the edit functionality in Account Profile section in AARP site
-    Given registered AMP with following details for profile and preferences flow in AARP site
+    Given registered member with following details for Profile and Preferences flow
       | <planType> |
-    When the user navigate to Profile and Preference page
+    When the user navigates to Profile and Preferences page
     Then the user validates disclaimer link and on clicking disclaimer link it should expand and on again clicking it should collapse
     And the user validates the need help section
     And the user validates see more ways to contact us section 
@@ -205,9 +205,9 @@ Feature: To test My Profile & Preferences in AARP site
       
       @PermanentAddress
        Scenario Outline: To verify the edit functionality in Account Profile section in AARP site
-    Given registered AMP with following details for profile and preferences flow in AARP site
+    Given registered member with following details for Profile and Preferences flow
       | <planType> |
-    When the user navigate to Profile and Preference page
+    When the user navigates to Profile and Preferences page
     Then the user validates permanent address section
     And the user clicks on contact us then contact us page should come
     
@@ -220,10 +220,10 @@ Feature: To test My Profile & Preferences in AARP site
       
       @PhoneEdit
       Scenario Outline: To verify Phone in Aarp site
-      Given registered AMP with following details for profile and preferences flow in AARP site
+      Given registered member with following details for Profile and Preferences flow
       | <planType> |
-      Then the user navigate to Profile and Preference page
-      Then the user validates the Phone section in AARP site
+      Then the user navigates to Profile and Preferences page
+      Then the user validates the Phone section
       Then the user Clicks on the the Edit Link and validates the elements
       Then the user checks the Edit Button changes to Cancel Button
       Then the user validates the functionality of save Button in Phoneeditsection 
@@ -237,9 +237,9 @@ Feature: To test My Profile & Preferences in AARP site
        
     @CommunicationPreferences
      Scenario Outline: To verify Go green in AARP site
-      Given registered AMP with following details for profile and preferences flow in AARP site
+      Given registered member with following details for Profile and Preferences flow
       | <planType> |
-      Then the user navigate to Profile and Preference page
+      Then the user navigates to Profile and Preferences page
     Then the user validates Communication Preferences section
     And the user validates Go paperless button and on clicking button go green page should come
     And the user validates headers on green page 

@@ -49,7 +49,7 @@ public class ProfileandPreferencesUMSStepDefinition {
 		return loginScenario;
 	}
 
-	@Given("^registered UHC with following details for Profile and Preferences flow in UMS site$")
+	@Given("^registered member with following details for Profile and Preferences flow$")
 	public void login_with_member(DataTable memberAttributes) {
 		/* Reading the given attribute from feature file */
 		List<List<String>> dataTable = memberAttributes.raw();
@@ -356,6 +356,47 @@ public class ProfileandPreferencesUMSStepDefinition {
 				.getBean(PageConstants.ProfilePreferencesPage);
 		
 		ProfilePreferencesPage.validatepnparrowlink();
+	}
+	
+	
+	@Then("^the user validates the Phone section")
+	public void UserValidatesPhoneSection() {
+		ProfilePreferencesPage ProfilePreferencesPage = (pages.member.bluelayer.ProfilePreferencesPage) getLoginScenario().getBean(PageConstants.ProfilePreferencesPage);
+
+		ProfilePreferencesPage.validatePhoneElements();
+
+	}
+
+	@Then("^the user Clicks on the the Edit Link and validates the elements")
+	public void UserClicksEditPhoneSection() {
+		ProfilePreferencesPage ProfilePreferencesPage = (pages.member.bluelayer.ProfilePreferencesPage) getLoginScenario().getBean(PageConstants.ProfilePreferencesPage);
+
+		ProfilePreferencesPage.validatePhoneEditElements();
+
+	}
+
+	@Then("^the user checks the Edit Button changes to Cancel Button")
+	public void UserChecksSaveCancelButton() {
+		ProfilePreferencesPage ProfilePreferencesPage = (pages.member.bluelayer.ProfilePreferencesPage) getLoginScenario().getBean(PageConstants.ProfilePreferencesPage);
+
+		ProfilePreferencesPage.validateCancelElement();
+
+	}
+
+	@Then("^the user validates the functionality of save Button in Phoneeditsection")
+	public void UserValidatesPhoneSaveButton() {
+		ProfilePreferencesPage ProfilePreferencesPage = (pages.member.bluelayer.ProfilePreferencesPage) getLoginScenario().getBean(PageConstants.ProfilePreferencesPage);
+
+		ProfilePreferencesPage.validatePhoneSave();
+
+	}
+
+	@Then("^the user validates the functionality of Cancel Button In phoneeditSection")
+	public void UserValidatesPhoneCancelButton() {
+		ProfilePreferencesPage ProfilePreferencesPage = (pages.member.bluelayer.ProfilePreferencesPage) getLoginScenario().getBean(PageConstants.ProfilePreferencesPage);
+
+		ProfilePreferencesPage.validatePhoneCancel();
+
 	}
 	
 }

@@ -15,18 +15,19 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
-import org.skyscreamer.jsonassert.JSONAssert;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.openqa.selenium.By;
 
-import pages.member.bluelayer.ProfilePreferencesPage;
+
 import pages.member.ulayer.AccountHomePage;
 import pages.member.ulayer.LoginPage2;
-import pages.member.ulayer.PlanBenefitsCoveragePage;
+
 import acceptancetests.atdd.data.CommonConstants;
 import acceptancetests.atdd.data.member.PageConstants;
-import acceptancetests.benefitsandcoverage.data.PlanBenefitsAndCoverageCommonConstants;
-import acceptancetests.profandpref.data.ProfnPrefCommonConstants;
+
+import pages.member.ulayer.ProfileandPreferencesPage;
+import  acceptancetests.profandpref.data.ProfnPrefCommonConstants;
 import acceptancetests.formsandresources.data.FnRCommonConstants;
 import acceptancetests.login.data.LoginCommonConstants;
 import atdd.framework.MRScenario;
@@ -53,7 +54,7 @@ public class ProfileandPreferencesAARPStepDefinition {
 		return loginScenario;
 	}
 
-	@Given("^registered AMP with following details for profile and preferences flow in AARP site$")
+	@Given("^registered member with following details for Profile and Preferences flow$")
 	public void login_with_member(DataTable memberAttributes) {
 
 		/* Reading the given attribute from feature file */
@@ -112,7 +113,7 @@ public class ProfileandPreferencesAARPStepDefinition {
 
 	}
 
-	@Then("^the user navigate to Profile and Preference page")
+	@Then("^the user navigates to Profile and Preferences page")
 	public void user_navigate_toProfileandPreferencespage() {
 		pages.member.ulayer.AccountHomePage accountHomePage = (pages.member.ulayer.AccountHomePage) getLoginScenario()
 				.getBean(PageConstants.ACCOUNT_HOME_PAGE);
@@ -315,7 +316,7 @@ public class ProfileandPreferencesAARPStepDefinition {
 		
 		ProfileandPreferencespage.validateduplicateerrormessage();
 	}
-	@Then("^the user validates the Phone section in AARP site")
+	@Then("^the user validates the Phone section")
 	public void UserValidatesPhoneSection() {
 		pages.member.ulayer.ProfileandPreferencesPage ProfileandPreferencespage = (pages.member.ulayer.ProfileandPreferencesPage) getLoginScenario()
 				.getBean(PageConstants.PROFILE_AND_PREFERENCES_PAGE);

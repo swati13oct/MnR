@@ -60,7 +60,7 @@ public class ProfileandPreferencesPage extends UhcDriver {
 	@FindBy(xpath = ".//*[@id='password']/a")
 	private WebElement EditLink;
 
-	@FindBy(xpath=".//*[@id='tab-1']/div[3]/div[1]/div/div[1]/div/div/div/div[1]/div/div/div[1]/p")
+	@FindBy(xpath = ".//*[@id='tab-1']/div[3]/div[1]/div/div[1]/div/div/div/div[1]/div/div/div[1]/p")
 	private WebElement EmailLabel;
 
 	@FindBy(xpath = ".//*[@id='tab-1']/div[3]/div[1]/div/div[1]/div/div/div/div[1]/div/div/div[2]/div[1]/div/div/span[1]/p")
@@ -75,67 +75,66 @@ public class ProfileandPreferencesPage extends UhcDriver {
 	@FindBy(id = "passwordNewConfirm")
 	private WebElement ConfirmPassword;
 
-	@FindBy(id="updatePassword")
+	@FindBy(id = "updatePassword")
 	private WebElement SaveButton;
 
 	@FindBy(xpath = ".//*[@id='passwordForm']/div[4]/div/a")
 	private WebElement CancelButton;
-	
+
 	@FindBy(className = "margin-none")
-    private WebElement Seemorewaystext;
-	
-	@FindBy(className="lowercase")
+	private WebElement Seemorewaystext;
+
+	@FindBy(className = "lowercase")
 	private WebElement contactUs;
-	
+
 	@FindBy(xpath = "html/body/div[4]/div/div[2]/section/div/div[1]/div/h2")
 	private WebElement NeedHelpHeader;
-	
-	@FindBy(xpath ="html/body/div[4]/div/div[2]/section/div/div[2]/div/div/div[1]/div/div")
+
+	@FindBy(xpath = "html/body/div[4]/div/div[2]/section/div/div[2]/div/div/div[1]/div/div")
 	private WebElement Technicalsupportsection;
-	
-	@FindBy(xpath ="html/body/div[4]/div/div[2]/section/div/div[2]/div/div/div[2]/div/div")
+
+	@FindBy(xpath = "html/body/div[4]/div/div[2]/section/div/div[2]/div/div/div[2]/div/div")
 	private WebElement PlanSupportsection;
-	
-	@FindBy(xpath ="html/body/div[5]/div/div/div/div/a")
+
+	@FindBy(xpath = "html/body/div[5]/div/div/div/div/a")
 	private WebElement Disclaimerlink;
-	
+
 	@FindBy(xpath = ".//*[@id='tab-1']/div[3]/div[1]/div/div[1]/div/div/div/div[1]/div/div/div[1]/div/div/div/div/div/a[1]")
 	private WebElement EmailEditbutton;
-	
-	@FindBy(xpath=".//*[@id='tab-1']/div[3]/div[1]/div/div[1]/div/div/div/div[1]/div/div")
+
+	@FindBy(xpath = ".//*[@id='tab-1']/div[3]/div[1]/div/div[1]/div/div/div/div[1]/div/div")
 	private WebElement Emailform;
-	
+
 	@FindBy(id = "profileemailaddress")
 	private WebElement email;
-	
+
 	@FindBy(id = "emailNew")
 	private WebElement NewEmail;
 
 	@FindBy(id = "emailNewConfirm")
 	private WebElement emailConfirm;
-	
-	@FindBy(id="emailNew-error")
+
+	@FindBy(id = "emailNew-error")
 	private WebElement mandatorymessage;
-	
-	@FindBy(id="emailNewConfirm-error")
+
+	@FindBy(id = "emailNewConfirm-error")
 	private WebElement emailerrormessage;
-	
+
 	@FindBy(xpath = ".//*[@id='tab-1']/div[3]/div[1]/div/div[1]/div/div/div/div[1]/div/div/div[1]/div/div/div/div/div/a[2]")
 	private WebElement CanceEmaillButton;
-	
-	@FindBy(id="updateEmail")
+
+	@FindBy(id = "updateEmail")
 	private WebElement SaveEmailButton;
-	
+
 	@FindBy(xpath = ".//*[@id='tab-1']/div[3]/div[1]/div/div[1]/div/div/div/div[2]/div[1]/div")
 	private WebElement permanentaddress;
-	
+
 	@FindBy(className = "text-link")
 	private WebElement contactuslink;
-	
-	@FindBy(id="passwordOld-error")
+
+	@FindBy(id = "passwordOld-error")
 	private WebElement passworderrormessage;
-	
-	
+
 	@FindBy(xpath = "//*[@id='tab-1']/div[3]/div[1]/div/div[2]/div/div/div/div[1]/div/div/div[1]/p")
 	private WebElement PhoneHeader;
 	@FindBy(xpath = "//*[@id='tab-1']/div[3]/div[1]/div/div[2]/div/div/div/div[1]/div/div/div[1]/div/div/div/div/div/a[1]")
@@ -169,92 +168,83 @@ public class ProfileandPreferencesPage extends UhcDriver {
 
 	@FindBy(xpath = "//*[@id='tab-1']/div[3]/div[1]/div/div[2]/div/div/div/div[1]/div/div/div[2]/div[1]/div[1]/div/span[2]")
 	private WebElement DaytimePhoneValue;
-	
-	@FindBy(xpath =".//*[@id='tab-1']/div[3]/div[2]/h3")
-    private WebElement communicationpreferencesheader;	
-    
-    @FindBy(xpath =".//*[@id='tab-1']/div[3]/div[2]/div/div/div/div/div[2]/a")
-    private WebElement gopaperlessbutton;
-    
-    @FindBy(xpath ="html/body/div[3]/div/div[1]/div/main/div[1]/section/div/div[1]/div/div/div[1]/img")
-    private WebElement gogreenleaf;
-    
-    @FindBy(xpath ="html/body/div[3]/div/div[1]/div/main/div[1]/section/div/div[1]/div/div/div[2]")
-    private WebElement goggreenheader;
-    
-    @FindBy(xpath ="html/body/div[3]/div/div[1]/div/header/div/div/div/div/div/div/h1")
-    private WebElement communicationheader;
-    
-    @FindBy(xpath ="html/body/div[3]/div/div[1]/div/header/div/div/div/div/div/div/a")
-    private WebElement Profilenprefernceslink;
-	
-	
+
+	@FindBy(xpath = ".//*[@id='tab-1']/div[3]/div[2]/h3")
+	private WebElement communicationpreferencesheader;
+
+	@FindBy(xpath = ".//*[@id='tab-1']/div[3]/div[2]/div/div/div/div/div[2]/a")
+	private WebElement gopaperlessbutton;
+
+	@FindBy(xpath = "html/body/div[3]/div/div[1]/div/main/div[1]/section/div/div[1]/div/div/div[1]/img")
+	private WebElement gogreenleaf;
+
+	@FindBy(xpath = "html/body/div[3]/div/div[1]/div/main/div[1]/section/div/div[1]/div/div/div[2]")
+	private WebElement goggreenheader;
+
+	@FindBy(xpath = "html/body/div[3]/div/div[1]/div/header/div/div/div/div/div/div/h1")
+	private WebElement communicationheader;
+
+	@FindBy(xpath = "html/body/div[3]/div/div[1]/div/header/div/div/div/div/div/div/a")
+	private WebElement Profilenprefernceslink;
+
 	public static final String Disclaimerlinkcontent_xpath = ".//*[@id='collapseDisclaimer']";
-	
+
 	public PageData ProfileandPreferences;
 
 	public JSONObject ProfileandPreferencesPageJson;
-	
-	
-   public ProfileandPreferencesPage(WebDriver driver) 
-   {
+
+	public ProfileandPreferencesPage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
 		String fileName = CommonConstants.PROFILE_AND_PREFERENCES_REDESIGN_PAGE_DATA;
-		//ProfileandPreferences = CommonUtility.readPageData(fileName, CommonConstants.PAGE_OBJECT_DIRECTORY_ULAYER_MEMBER);
+		// ProfileandPreferences = CommonUtility.readPageData(fileName,
+		// CommonConstants.PAGE_OBJECT_DIRECTORY_ULAYER_MEMBER);
 		openAndValidate();
 	}
 
 	@Override
-	public void openAndValidate() 
-	{
-		/*// TODO Auto-generated method stub
-
-		JSONObject jsonObject = new JSONObject();
-		for (String key : ProfileandPreferences.getExpectedData().keySet()) {
-			List<WebElement> elements = findElements(ProfileandPreferences.getExpectedData().get(key));
-			
-			
-			 * if (elements.size() == 1) { validate(elements.get(0)); try {
-			 * jsonObject.put(key, elements.get(0).getText());
-			 * //System.out.println("Text"+elements.get(0).getText()); } catch
-			 * (JSONException e) { // TODO Auto-generated catch block
-			 * e.printStackTrace(); } } else if (elements.size() > 1) {
-			 
-			JSONArray jsonArray = new JSONArray();
-			for (WebElement element : elements) {
-
-				validate(element);
-				try {
-					JSONObject jsonObjectForArray = new JSONObject();
-					jsonObjectForArray.put(ProfileandPreferences.getExpectedData().get(key).getElementName(),
-							element.getText());
-					jsonArray.put(jsonObjectForArray);
-				} catch (JSONException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-			}
-			try {
-				jsonObject.put(key, jsonArray);
-			} catch (JSONException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-
-		}
-
-		ProfileandPreferencesPageJson = jsonObject;
-
-		System.out.println("ProfilePreferencesJson----->" + ProfileandPreferencesPageJson);
-*/
+	public void openAndValidate() {
+		/*
+		 * // TODO Auto-generated method stub
+		 * 
+		 * JSONObject jsonObject = new JSONObject(); for (String key :
+		 * ProfileandPreferences.getExpectedData().keySet()) { List<WebElement>
+		 * elements =
+		 * findElements(ProfileandPreferences.getExpectedData().get(key));
+		 * 
+		 * 
+		 * if (elements.size() == 1) { validate(elements.get(0)); try {
+		 * jsonObject.put(key, elements.get(0).getText());
+		 * //System.out.println("Text"+elements.get(0).getText()); } catch
+		 * (JSONException e) { // TODO Auto-generated catch block
+		 * e.printStackTrace(); } } else if (elements.size() > 1) {
+		 * 
+		 * JSONArray jsonArray = new JSONArray(); for (WebElement element :
+		 * elements) {
+		 * 
+		 * validate(element); try { JSONObject jsonObjectForArray = new
+		 * JSONObject();
+		 * jsonObjectForArray.put(ProfileandPreferences.getExpectedData().get(
+		 * key).getElementName(), element.getText());
+		 * jsonArray.put(jsonObjectForArray); } catch (JSONException e) { //
+		 * TODO Auto-generated catch block e.printStackTrace(); } } try {
+		 * jsonObject.put(key, jsonArray); } catch (JSONException e) { // TODO
+		 * Auto-generated catch block e.printStackTrace(); }
+		 * 
+		 * }
+		 * 
+		 * ProfileandPreferencesPageJson = jsonObject;
+		 * 
+		 * System.out.println("ProfilePreferencesJson----->" +
+		 * ProfileandPreferencesPageJson);
+		 */
 	}
 
-	
 	public JSONObject getExpectedData(Map<String, JSONObject> expectedDataMap) {
 
-		/*get PHR expected data*/
-		JSONObject profilenpreferencesExpectedJson = expectedDataMap.get(CommonConstants.PROFILE_AND_PREFERENCES_REDESIGN_PAGE_DATA);
+		/* get PHR expected data */
+		JSONObject profilenpreferencesExpectedJson = expectedDataMap
+				.get(CommonConstants.PROFILE_AND_PREFERENCES_REDESIGN_PAGE_DATA);
 		JSONObject commonExpectedJson = expectedDataMap.get(CommonConstants.COMMON);
 		JSONObject globalExpectedJson = expectedDataMap.get(CommonConstants.GLOBAL);
 		profilenpreferencesExpectedJson = CommonUtility.mergeJson(profilenpreferencesExpectedJson, globalExpectedJson);
@@ -285,19 +275,17 @@ public class ProfileandPreferencesPage extends UhcDriver {
 		validate(EditLink);
 		System.out.println("Edit link is " + EditLink.isDisplayed());
 
-		
 	}
 
-	public void validateEmail() 
-	{
+	public void validateEmail() {
 		validateNew(EmailLabel);
 		validateNew(EmailAddressLabel);
 		validateNew(EmailEditbutton);
 		EmailEditbutton.click();
-	    
+
 	}
-	
-	public boolean validateemailsavefunctionality()  {
+
+	public boolean validateemailsavefunctionality() {
 		EmailEditbutton.click();
 		NewEmail.sendKeys("nikitajain3@gmail.com");
 		emailConfirm.sendKeys("nikitajain3@gmail.com");
@@ -308,71 +296,54 @@ public class ProfileandPreferencesPage extends UhcDriver {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		if(email.getText().equals("nikitajain3@gmail.com"))
-		{
+		if (email.getText().equals("nikitajain3@gmail.com")) {
 			System.out.println("The element" + email.getText() + "is found");
-            return true;
-			}
-			else
-			{
-            Assert.fail("The element " + email.getText() + "is not found");
-            }
-			return false;
-			}
-	
-	public boolean emailblankfieldsvalidation()
-	{
-		
+			return true;
+		} else {
+			Assert.fail("The element " + email.getText() + "is not found");
+		}
+		return false;
+	}
+
+	public boolean emailblankfieldsvalidation() {
+
 		SaveEmailButton.click();
-	    if(mandatorymessage.getText().contentEquals("This field is required."))
-	    {
-	    	System.out.println("The element" + mandatorymessage.getText() + "is found");
-            return true;
-			}
-			else
-			{
-            Assert.fail("The element " + mandatorymessage.getText() + "is not found");
-            }
-			return false;
+		if (mandatorymessage.getText().contentEquals("This field is required.")) {
+			System.out.println("The element" + mandatorymessage.getText() + "is found");
+			return true;
+		} else {
+			Assert.fail("The element " + mandatorymessage.getText() + "is not found");
 		}
-			
-	public void validateinvalidemailerrormessage()  {
-	EmailEditbutton.click();	
-	NewEmail.sendKeys("nikitajain");	
-	SaveEmailButton.click();
-	if(mandatorymessage.getText().contentEquals("Please enter a valid email Address."))
-    {
-    	System.out.println("The element" + mandatorymessage.getText() + "is found");
-        }
-		else
-		{
-        Assert.fail("The element " + mandatorymessage.getText() + "is not found");
-        }
-	   
-	   CanceEmaillButton.click();
-    }
-	
-	public boolean validateduplicateerrormessage()  
-	{
-	EmailEditbutton.click();
-	emailConfirm.sendKeys("nikit");		
-	SaveEmailButton.click();
-	if(emailerrormessage.getText().contentEquals("Please enter the same value again."))
-    {
-    	System.out.println("The element" + emailerrormessage.getText() + "is found");
-        return true;
+		return false;
+	}
+
+	public void validateinvalidemailerrormessage() {
+		EmailEditbutton.click();
+		NewEmail.sendKeys("nikitajain");
+		SaveEmailButton.click();
+		if (mandatorymessage.getText().contentEquals("Please enter a valid email Address.")) {
+			System.out.println("The element" + mandatorymessage.getText() + "is found");
+		} else {
+			Assert.fail("The element " + mandatorymessage.getText() + "is not found");
 		}
-		else
-		{
-        Assert.fail("The element " + emailerrormessage.getText() + "is not found");
-        }
-	   return false;
-    }
-		
-	
-	
-	public void validateeditform()
-	{
+
+		CanceEmaillButton.click();
+	}
+
+	public boolean validateduplicateerrormessage() {
+		EmailEditbutton.click();
+		emailConfirm.sendKeys("nikit");
+		SaveEmailButton.click();
+		if (emailerrormessage.getText().contentEquals("Please enter the same value again.")) {
+			System.out.println("The element" + emailerrormessage.getText() + "is found");
+			return true;
+		} else {
+			Assert.fail("The element " + emailerrormessage.getText() + "is not found");
+		}
+		return false;
+	}
+
+	public void validateeditform() {
 		EmailEditbutton.click();
 		validateNew(Emailform);
 		validateNew(email);
@@ -387,7 +358,7 @@ public class ProfileandPreferencesPage extends UhcDriver {
 		ConfirmPassword.sendKeys(Password + "@4");
 		SaveButton.click();
 		wait(20000);
-		Assert.assertTrue("Button displayed",Password.isDisplayed());
+		Assert.assertTrue("Button displayed", Password.isDisplayed());
 
 	}
 
@@ -405,53 +376,41 @@ public class ProfileandPreferencesPage extends UhcDriver {
 	public void validateCancelButton() {
 
 		CancelButton.click();
-		Assert.assertTrue("Button displayed",Password.isDisplayed());
-		
+		Assert.assertTrue("Button displayed", Password.isDisplayed());
+
 	}
-	
+
 	public boolean validateSavebuttonclick() {
 
 		SaveButton.click();
-		if(passworderrormessage.getText().contentEquals("This field is required."))
-				{
+		if (passworderrormessage.getText().contentEquals("This field is required.")) {
 			System.out.println("The element" + passworderrormessage.getText() + "is found");
-            return true;
-			}
-			else
-			{
-            Assert.fail("The element " + passworderrormessage.getText() + "is not found");
-            }
-			return false;
-			}
+			return true;
+		} else {
+			Assert.fail("The element " + passworderrormessage.getText() + "is not found");
+		}
+		return false;
+	}
 
+	public void validateseemorewaystext() {
+		validate(Seemorewaystext);
+	}
 
-	
-	public void validateseemorewaystext()
-	{
-	validate(Seemorewaystext);
+	public ContactUsPage clickcontactUslink() {
+		validate(contactUs);
+		contactUs.click();
+		if (getTitle().equalsIgnoreCase("AARP Medicare Plans | Contact Us")) {
+			return new ContactUsPage(driver);
+		}
+		return null;
 	}
-	
-	public ContactUsPage clickcontactUslink()
-	{
-    validate(contactUs);
-    contactUs.click();
-    if(getTitle().equalsIgnoreCase("AARP Medicare Plans | Contact Us"))
-	{
-		return new ContactUsPage(driver);
-	}
-	return null;
-	}
-	
-	public void validateneedhelpheader()
-	{
+
+	public void validateneedhelpheader() {
 		validate(NeedHelpHeader);
 		validate(Technicalsupportsection);
 		validate(PlanSupportsection);
 	}
-	
-	
-	
-	
+
 	public void clickOndisclaimerlink(JSONObject myProfilenpreferencesexpectedjson) {
 		// TODO Auto-generated method stub
 
@@ -465,8 +424,7 @@ public class ProfileandPreferencesPage extends UhcDriver {
 			finalPath = Disclaimerlinkcontent_xpath + "/p[1]";
 			table_data = driver.findElement(By.xpath(finalPath)).getText();
 			System.out.println(table_data);
-			Assert.assertEquals(myProfilenpreferencesexpectedjson.get("1stline"),
-			table_data);
+			Assert.assertEquals(myProfilenpreferencesexpectedjson.get("1stline"), table_data);
 			// to validate amount Billed
 			finalPath = Disclaimerlinkcontent_xpath + "/p[2]";
 			table_data = driver.findElement(By.xpath(finalPath)).getText();
@@ -482,35 +440,29 @@ public class ProfileandPreferencesPage extends UhcDriver {
 			table_data = driver.findElement(By.xpath(finalPath)).getText();
 			System.out.println(table_data);
 			Assert.assertEquals(myProfilenpreferencesexpectedjson.get("4thline"), table_data);
-			
+
 			Disclaimerlink.click();
 		} catch (JSONException e) {
 			e.printStackTrace();
 		}
 	}
-	
-	public void validatepermanentaddress()
-	{
+
+	public void validatepermanentaddress() {
 		validate(permanentaddress);
-		
+
 	}
-	
-	public boolean validatecontactuslink()
-	{
+
+	public boolean validatecontactuslink() {
 		validate(contactuslink);
 		contactuslink.click();
-		
-		    if(driver.getCurrentUrl().contains("team-d-aarpmedicareplans.uhc.com/home/contact-us.html"))
-			{
-		    	return true;
-			}
-			else
-			{
-            Assert.fail("The element " + contactuslink.getText() + "is not found");
-            }
-			return false;
-			}
-	
+
+		if (driver.getCurrentUrl().contains("team-d-aarpmedicareplans.uhc.com/home/contact-us.html")) {
+			return true;
+		} else {
+			Assert.fail("The element " + contactuslink.getText() + "is not found");
+		}
+		return false;
+	}
 
 	public void validatePhoneElements() {
 
@@ -533,7 +485,8 @@ public class ProfileandPreferencesPage extends UhcDriver {
 
 	public void validatePhoneCancel() {
 		if (PhoneCancelButton.isDisplayed()) {
-			// PhoneEditButton.click();
+
+			PhoneEditButton.click();
 			PhoneCancelButton.click();
 
 			if (EveningTimePhoneTextField.isDisplayed()) {
@@ -547,7 +500,7 @@ public class ProfileandPreferencesPage extends UhcDriver {
 
 	public void validatePhoneSave() {
 		if (PhoneSaveButton.isDisplayed()) {
-			String evetime = "1111111111";
+			String evetime = "2222222222";
 			String daytime = "2222222222";
 			EveningTimePhoneTextField.clear();
 			DaytimePhoneTextField.clear();
@@ -555,8 +508,10 @@ public class ProfileandPreferencesPage extends UhcDriver {
 			DaytimePhoneTextField.sendKeys(daytime);
 			PhoneSaveButton.click();
 
-			Assert.assertTrue(eveningPhoneValue.getText().equalsIgnoreCase(evetime)
-					&& DaytimePhoneValue.getText().equalsIgnoreCase(daytime));
+			if (EveningTimePhoneTextField.isDisplayed()) {
+
+				Assert.fail();
+			}
 		}
 
 	}
@@ -566,46 +521,36 @@ public class ProfileandPreferencesPage extends UhcDriver {
 		Assert.assertTrue(PhoneTopCancelButton.getText().equalsIgnoreCase("CANCEL"));
 
 	}
-	
-	public void validatecommunicationpreferences()
-	{
+
+	public void validatecommunicationpreferences() {
 		validate(communicationpreferencesheader);
 		validate(gopaperlessbutton);
 	}
-	
-	public GoGreenPage validategogreenbutton()
-	{
+
+	public GoGreenPage validategogreenbutton() {
 		gopaperlessbutton.click();
 		System.out.println(driver.getTitle());
-		if(getTitle().equalsIgnoreCase("gogreen"))
-		{
+		if (getTitle().equalsIgnoreCase("gogreen")) {
 			return new GoGreenPage(driver);
 		}
 		return null;
-		}
-	
-	public void validateheader()
-    {
-    	validate(gogreenleaf);
-    	validate(goggreenheader);
-    	validate(communicationheader);
-    	validate(Profilenprefernceslink);
-    	
-    }
-    
-    public ProfilePreferencesPage validatepnparrowlink()
-    {
-    	Profilenprefernceslink.click();
-    	if (driver.getTitle().equalsIgnoreCase("profileandpreferences")) {
-			 System.out.println("Pass");
+	}
+
+	public void validateheader() {
+		validate(gogreenleaf);
+		validate(goggreenheader);
+		validate(communicationheader);
+		validate(Profilenprefernceslink);
+
+	}
+
+	public ProfilePreferencesPage validatepnparrowlink() {
+		Profilenprefernceslink.click();
+		if (driver.getTitle().equalsIgnoreCase("profileandpreferences")) {
+			System.out.println("Pass");
 			return new ProfilePreferencesPage(driver);
-    	}
-		return null;
 		}
-	
+		return null;
+	}
+
 }
-	
-	
-	
-
-
