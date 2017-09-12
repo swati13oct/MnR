@@ -27,4 +27,4 @@ And the user searches prescription drug EOB history for the date range in AARP s
 	| To Date   | <toDate> |
 Examples:
 	| plantype | memberType | fromDate   | toDate     |
-	| PDP   | rx_eob | 12-01-2016 | 06-06-2017 |
+	| PDP   | rx_eob | 01-01-2017 | 09-06-2017 |
