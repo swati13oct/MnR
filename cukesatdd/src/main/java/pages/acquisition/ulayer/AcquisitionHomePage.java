@@ -42,7 +42,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	@FindBy(id = "learnfindplanBtn")
 	private WebElement learnfindPlansButton;
 	
-	@FindBy(linkText = "Find a pharmacy near you")
+	@FindBy(id = "Find a pharmacy near you")
 	private WebElement pharmacyNearLink;
 
 	@FindBy(className = "zip-button")

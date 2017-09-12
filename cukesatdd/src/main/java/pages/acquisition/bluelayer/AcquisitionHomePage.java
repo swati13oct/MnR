@@ -90,7 +90,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	@FindBy(linkText = "View all disclaimer information")
 	private WebElement disclaimerViewLink;
 
-	@FindBy(id = "Find a pharmacy for Medicare Advantage plans")
+	@FindBy(id = "Find a pharmacy near you")
 	private WebElement pharmacyNearLink_MA;
 
 	@FindBy(id = "Find a pharmacy near you")
