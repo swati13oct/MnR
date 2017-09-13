@@ -443,7 +443,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 			showPdpPlans.click();
 		} else if (planType.equalsIgnoreCase("MA")
 				|| planType.equalsIgnoreCase("MAPD")) {
-			showMaPlans.click();
+			viewPlans.click();
 		} else if (planType.equalsIgnoreCase("SNP")) {
 			showSnpPlans.click();
 		} else {
@@ -933,7 +933,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	
 	public boolean validateVPPPlanSummaryPage(){
 		boolean flag = false;
-		if(validate(showMaPlans)&&validate(showPdpPlans)&&validate(changeLocationBtn))
+		if(validate(viewPlans)&&validate(viewPDPPlans)&&validate(changeLocationBtn))
 			flag = true;
 		return flag;
 	}

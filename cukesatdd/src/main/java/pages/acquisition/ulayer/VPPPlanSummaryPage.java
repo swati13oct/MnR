@@ -124,7 +124,34 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	@FindBy(id = "providerSearchFrame")
 	private WebElement providerSearchIframe;
 	
-
+	@FindBy(xpath = ".//*[@id='site-wrapper']/div[4]/div/div[1]/div/div/div/div/div[1]/div/div/div[1]/div[2]/div/div[2]/div[1]/div")
+	private WebElement viewPlans;
+	
+	@FindBy(xpath = ".//*[@id='site-wrapper']/div[4]/div/div/div/div/div/div/div[1]/div/div/div[1]/div[2]/div/div[2]/div[3]")
+	private WebElement viewPDPPlans;
+	
+	@FindBy(xpath = ".//*[@id='plan-list-1']/div/div[2]/div/div[1]/div[3]/div/div/span[1]/label")
+	private WebElement maplan1;
+	
+	@FindBy(xpath = ".//*[@id='plan-list-1']/div/div[2]/div/div[2]/div[3]/div/div/span[1]/label")
+	private WebElement maplan2;
+	
+	@FindBy(xpath = ".//*[@id='plan-list-1']/div/div[2]/div/div[3]/div[3]/div/div/span[1]/label")
+	private WebElement maplan3;
+	
+	@FindBy(xpath = ".//*[@id='plan-list-1']/div/div[2]/div/div[1]/div[3]/div/div/span[3]")
+	private WebElement maChkboxMessage1;
+	
+	@FindBy(xpath = ".//*[@id='plan-list-1']/div/div[2]/div/div[2]/div[3]/div/div/span[3]")
+	private WebElement maChkboxMessage2;
+	
+	@FindBy(xpath = ".//*[@id='plan-list-1']/div/div[2]/div/div[3]/div[3]/div/div/span[3]")
+	private WebElement maChkboxMessage3;
+	
+	
+	@FindBy(xpath = ".//*[@id='plan-list-1']/div/div[2]/div/div[3]/div[3]/div/div/span[3]/a")
+	private WebElement compareLink;
+	
 	@FindBy(className = "switchPlanYear")
 	private WebElement toggleplanYear;
 	
@@ -165,51 +192,29 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	private WebElement stayOnthisPopup;
 	
 	
-	
-	
 	@FindBy(xpath="//div[@class='tab-contents']/span[contains(text(),'Medicare Advantage Plans')]/following-sibling::span[text()='View Plans'][2]")
 	private WebElement viewMAPlansC;
-	
-
-	
-	
-	
 	
 	@FindBy(xpath="//button[contains(text(),'Get Started')]")
 	private WebElement GetStarted;
 	
 
-	
-
 	@FindBy(xpath="//h3[text()='People']/preceding::div[1]/img")
 	private WebElement People;
 	
-	
-
 	@FindBy(xpath="//h3[text()='Primary Care']")
 	private WebElement Primary;
-	
-	
-	
 	
 	
 	@FindBy(xpath="//a[contains(text(),'Primary Care Physician (PCP')]")
 	private WebElement Physician;
 
-	
-	
 	@FindBy(xpath="//div[contains(@class,'first')]//div[@class='hidden-phone']/button[not(contains(@class,'hidden'))]/span")
 	private WebElement Savebtn;
-
-	
 
 	@FindBy(xpath="//*[@class='action-btn lt']")
 	private WebElement Viewsavebtn;
 
-	
-	
-	
-	
 	@FindBy(xpath="//button[@class='action-btn negative']")
 	private WebElement Checkcoverage;
 	
@@ -232,7 +237,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		super(driver);
 		
 		PageFactory.initElements(driver, this);
-		CommonUtility.waitForPageLoad(driver, vppplansummarypage, CommonConstants.TIMEOUT_30);
+		//CommonUtility.waitForPageLoad(driver, vppplansummarypage, CommonConstants.TIMEOUT_30);
 		
 	/*	String fileName = CommonConstants.VPP_PLAN_SUMMARY_PAGE_DATA;
 		vppPlanSummary = CommonUtility.readPageData(fileName,
@@ -244,19 +249,6 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		super(driver);
 		PageFactory.initElements(driver, this);
 		openAndValidate();
-	/*	String fileName = null;
-		if (planType.equalsIgnoreCase("MA")
-				|| planType.equalsIgnoreCase("MAPD")) {
-			fileName = "maplans.json";
-		}
-		else
-		{
-			fileName = planType.toLowerCase()+"plans.json";
-		}
-		vppPlanSummary = CommonUtility.readPageData(fileName,
-				CommonConstants.PAGE_OBJECT_DIRECTORY_ULAYER_ACQ);
-		vppPlanSummaryJson = formJsonObject(vppPlanSummary);
-		*/
 
 	}
 
@@ -299,50 +291,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		// vppPlanSummaryJson = formJsonObject(vppPlanSummary);
 	}
 
-	private JSONObject formJsonObject(PageData vppPlanSummary) {
-		JSONObject jsonObject = new JSONObject();
-		for (String key : vppPlanSummary.getExpectedData().keySet()) {
-			List<WebElement> elements = findElements(vppPlanSummary
-					.getExpectedData().get(key));
-			if (elements.size() == 1) {
-				if (validate(elements.get(0))) {
-					try {
-						jsonObject.put(key, elements.get(0).getText().trim());
-					} catch (JSONException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
-				}
-			} else if (elements.size() > 1) {
-				JSONArray jsonArray = new JSONArray();
-				for (WebElement element : elements) {
-
-					if (validate(element)) {
-						try {
-							JSONObject jsonObjectForArray = new JSONObject();
-							jsonObjectForArray.put(vppPlanSummary
-									.getExpectedData().get(key)
-									.getElementName(), element.getText().trim());
-							jsonArray.put(jsonObjectForArray);
-						} catch (JSONException e) {
-							// TODO Auto-generated catch block
-							e.printStackTrace();
-						}
-					}
-				}
-				try {
-					jsonObject.put(key, jsonArray);
-				} catch (JSONException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-
-			}
-
-		}
-		return jsonObject;
-
-	}
+	
 	
 	public boolean validateTimeoutPopup()
 	{
@@ -497,9 +446,6 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		return false;
 	}
 	
-   
-	
-	
 	
 	public boolean selectPlanType(String planType) {
 		if (planType.equalsIgnoreCase("PDP")) {
@@ -516,69 +462,8 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		//return new VPPPlanSummaryPage(driver, planType);
 	}
 
-	public JSONObject getPlanSummaryActualData(String planName) {
-		String fileName = null;
-		if (planName.contains("HMO")) {
-			fileName = "maplansummary.json";
-			JSONObject jsonObject = getActualJsonObject(fileName, planName,maPlanElement);
-			return jsonObject;
-			
-		}
-		if(planName.contains("PDP"))
-		{
-			fileName = "pdpplansummary.json";
-			JSONObject jsonObject = getActualJsonObject(fileName, planName,pdpPlanElement);
-			return jsonObject;
-		}
-		if(planName.contains("Regional PPO"))
-		{
-		fileName = "mamultistateplansummary.json";
-		JSONObject jsonObject = getActualJsonObject(fileName, planName,maPlanElement);
-		return jsonObject;
-
-		}
-		
-		return null;
-	}
-
-	private JSONObject getActualJsonObject(String fileName, String planName,
-			List<WebElement> planElement) {
-		vppPlanSummary = CommonUtility.readPageData(fileName,
-				CommonConstants.PAGE_OBJECT_DIRECTORY_ULAYER_ACQ);
-		for (WebElement plan : planElement) {
-			if (plan.getText().contains(planName)) {
-
-				JSONObject jsonObject = new JSONObject();
-				for (String key : vppPlanSummary.getExpectedData().keySet()) {
-					WebElement element = findChildElement(
-							vppPlanSummary.getExpectedData().get(key), plan);
-					if(validate(element))
-					{
-					try {
-						jsonObject.put(key, element.getText());
-					} catch (JSONException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
-					}
-					
-				}
-				return jsonObject;
-
-			}
-		}
-		return null;
-	}
 
 
-	
-
-	
-	
-   
-
-	
-	
 	public String togglePlan() {
 		String currentYearFlag = "false";
 		try {
@@ -857,6 +742,62 @@ public class VPPPlanSummaryPage extends UhcDriver {
 
 		return null;
 	}
+	
+	public void clickonViewPlans() {
+		try {
+			Thread.sleep(5000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		viewPlans.click();
+		
+	}
+	
+	public void clickOnPDPPlans(){
+		try {
+			Thread.sleep(5000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		viewPDPPlans.click();
+	}
+	
+	
+	public void checkAllMAPlans(){
+		try {
+			Thread.sleep(2000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		maplan1.click();
+		maplan2.click();
+		maplan3.click();
+		
+	}
+	
+	public ComparePlansPage clickOnComapreLink(){
+		compareLink.click();
+		try {
+			Thread.sleep(3000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		if(currentUrl().contains("/health-plans.html#/plan-compare"))
+			return new ComparePlansPage(driver);
+		return null;
+	}
+	
+	public boolean validateAllPlansChecked() {
+		
+		if(validate(maChkboxMessage1)&&validate(maChkboxMessage2)&&validate(maChkboxMessage3))
+			return true;
+		return false;
+	}
+	
 
 }
 

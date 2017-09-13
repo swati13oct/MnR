@@ -51,6 +51,8 @@ public class PageConstants {
 	public static final String VPP_PLAN_SUMMARY_PAGE = "vppPlanSummaryPage";
 
 	public static final String VPP_PLAN_DETAILS_PAGE = "vppPlanDetailsPage";
+	
+	public static final String COMPARE_PLANS_PAGE = "comparePlansPage";
 
 	public static final String UHC_ACQUISITION_HOME_PAGE = "umsAcquisitionHomePage";
 

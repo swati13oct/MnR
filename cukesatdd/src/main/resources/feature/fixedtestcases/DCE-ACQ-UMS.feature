@@ -52,39 +52,4 @@ Then I switch to generic drug and validate on ums site
 Examples:
 | zipcode  |   drug   | 
 | 90210    | Lipitor TAB 10MG|
-
-@defect1964
-Scenario Outline: To test the compare plans message for MA plans
-Given the user is on blayer medicare acq site landing page
-When I access the vpp page
-	|Zip Code| <zipcode> |
-And I click on add to compare checkbox and click on view details link
-Then I uncheck and recheck the compare box and verify the message and link exists
-
-Examples:
-|zipcode| 
-|33012 | 
-
-@defect1803
-Scenario Outline: To test the compare plans message for MA plans
-Given the user is on blayer medicare acq site landing page
-When I access the vpp page
-	|Zip Code| <zipcode> |
-And I click on add to compare checkbox and click on view details link
-Then I uncheck and go back to the vpp page to validate
-
-Examples:
-|zipcode| 
-|33012 | 
-
-@defect1970
-Scenario Outline: To test the compare plans message for MA plans
-Given the user is on blayer medicare acq site landing page
-When I access the vpp page
-	|Zip Code| <zipcode> |
-And I select pdp plans and go to view details page
-Then I check compare box and verify right info is shown
-
-Examples:
-|zipcode| 
-|33012 | 
+  

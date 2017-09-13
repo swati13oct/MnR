@@ -11,6 +11,7 @@ import org.openqa.selenium.WebDriver;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import pages.acquisition.ulayer.AcquisitionHomePage;
+import pages.acquisition.ulayer.ComparePlansPage;
 import pages.acquisition.ulayer.PlanDetailsPage;
 import pages.acquisition.ulayer.VPPPlanSummaryPage;
 import acceptancetests.atdd.data.CommonConstants;
@@ -119,6 +120,31 @@ public class VppAarpStepDefinitionUpdated {
 			Assert.fail("Error loading plans of desired plantype in  VPP plan summary page");
 		}
 
+	}
+	
+	@And("^I select all 3 plans to compare in MA and click on compare plan link$")
+	public void I_select_all_3_plans_to_compare(){
+		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		plansummaryPage.clickonViewPlans();
+		plansummaryPage.checkAllMAPlans();
+		ComparePlansPage comparePlansPage = plansummaryPage.clickOnComapreLink();
+		if(comparePlansPage != null){
+			getLoginScenario().saveBean(PageConstants.COMPARE_PLANS_PAGE, comparePlansPage);
+			comparePlansPage.backToVPPPage();
+		}else
+			Assert.fail("Error in loading the compare plans page");
+	}
+	
+	@Then("^I click back to all plans button and verify that all 3 plans are still selected$")
+	public void verifyAllPlansStillSelected(){
+		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+			.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		if(plansummaryPage.validateAllPlansChecked()){
+			Assert.assertTrue(true);
+		}else
+			Assert.fail("Error in validating all plans are still selected");
+		
 	}
 	
 	@When("^the user view plan details of the above selected plan in AARP site and validates$")
