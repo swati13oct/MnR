@@ -110,9 +110,9 @@ public class DrugClaimsUmsStepDefinition {
                        			  getLoginScenario().saveBean(PageConstants.ACCOUNT_HOME_PAGE, accountHomePage);
                        			  
                        			if(accountHomePage.validateAccountHome())
-                    				Assert.assertTrue(true);
+                       				Assert.assertTrue("USERNAME:"+userName, true);
                     			else
-                    				Assert.fail("Error in validating the Account Home Page");
+                    				Assert.fail("Error in validating the Account Home Page - USERNAME:"+userName);
                    }   
     }
 	
