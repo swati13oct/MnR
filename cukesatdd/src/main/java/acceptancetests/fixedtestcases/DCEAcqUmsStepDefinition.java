@@ -67,8 +67,8 @@ public class DCEAcqUmsStepDefinition {
 		dce.navigateToDCEToolFromHome();;
 	}
 	
-	@When("^I access the acquisition DCE tool from vpp page using below zipcode on ums site$")
-	public void I_access_the_DCE_tool_vpp_page(DataTable memberAttributes) throws InterruptedException {
+	@When("^I access the vpp page using below zipcode on ums site$")
+	public void I_access_the__vpp_page(DataTable memberAttributes) throws InterruptedException {
 		List<DataTableRow> memberAttributesRow = memberAttributes
 				.getGherkinRows();
 		Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
@@ -79,15 +79,51 @@ public class DCEAcqUmsStepDefinition {
 		}
 
 		String zipcode = memberAttributesMap.get("Zip Code");
-		
-		WebDriver wd = (WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
-
-		DrugCostEstimatorPage dce = new DrugCostEstimatorPage(wd);
-		dce.navigateToDCEToolFromvpp(zipcode);
+		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage)loginScenario.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+		VPPPlanSummaryPage plansummaryPage = aquisitionhomepage.navigateToVpp(zipcode);
+		if(plansummaryPage!=null){
+			loginScenario.saveBean(PageConstants.VPP_PLAN_SUMMARY_PAGE, plansummaryPage);
+		}
 	}
 	
+	@And("^I choose the 2017 plan and go to DCE page$")
+	public void choosing2017Plan(DataTable attributes){
+		List<DataTableRow> memberAttributesRow = attributes
+				.getGherkinRows();
+		Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells()
+					.get(0), memberAttributesRow.get(i).getCells().get(1));
+		}
+
+		String plantype = memberAttributesMap.get("Plan Type");
+		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) loginScenario.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		plansummaryPage.choose2017Plans();
+		DrugCostEstimatorPage dce = plansummaryPage.navigateToDCE(plantype);
+		if(dce!=null){
+			loginScenario.saveBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE, dce);
+		}
+	}
 	
-	
+	@And("^I access the DCE tool$")
+	public void accessDCETool(DataTable attributes){
+		List<DataTableRow> memberAttributesRow = attributes
+				.getGherkinRows();
+		Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells()
+					.get(0), memberAttributesRow.get(i).getCells().get(1));
+		}
+
+		String plantype = memberAttributesMap.get("Plan Type");
+		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) loginScenario.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		DrugCostEstimatorPage dce = plansummaryPage.navigateToDCE(plantype);
+		if(dce!=null){
+			loginScenario.saveBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE, dce);
+		}
+	}
 	
 	
 	@When("^I have added a drug to my drug list on ums site$")
@@ -96,10 +132,7 @@ public class DCEAcqUmsStepDefinition {
 		String drug = memberAttributesRow.get(0).getCells().get(1);
 
 		DrugCostEstimatorPage dce = (DrugCostEstimatorPage) loginScenario.getBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE);
-		boolean isDrugPresent = dce.isDrugPresent(drug);
-		if(!isDrugPresent){
 			dce.addDrug(drug.split(" ")[0]);
-		}
 
 	}
 
@@ -126,6 +159,24 @@ public class DCEAcqUmsStepDefinition {
 		DrugCostEstimatorPage dce =  (DrugCostEstimatorPage) loginScenario.getBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE);
 		
 		dce.pharmacyInformation(zipcode,radius);
+	}
+	
+	@Then("^I validate preferred retail pharmacy type is displayed$")
+	public void validatePreferredRetailPharmacy(){
+		DrugCostEstimatorPage dce =  (DrugCostEstimatorPage) loginScenario.getBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE);
+		if(dce.verifyPharmacyRetailExists()){
+			Assert.assertTrue(true);
+		}else
+			Assert.fail("Error in validating that the pharmacy retail pharmacy type exists");
+	}
+	
+	@Then("^I validate pharmacy saver pharmacy type is displayed$")
+	public void validatePharmacySaverPharmacy(){
+		DrugCostEstimatorPage dce =  (DrugCostEstimatorPage) loginScenario.getBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE);
+		if(dce.verifyPharmacySaverExists()){
+			Assert.assertTrue(true);
+		}else
+			Assert.fail("Error in validating that the pharmacy retail pharmacy type exists");
 	}
 	
 	@When("^I select the first pharmacy on there$")

@@ -53,7 +53,7 @@ public class DrugCostEstimatorPage extends UhcDriver {
 	@FindBy(id = "standard-type")
 	public WebElement rbStandardNetwork;
 
-	@FindBy(id = "saver-type")
+	@FindBy(xpath = ".//*[@id='pharmacy-type']/div[3]/label")
 	public WebElement rbPharmacySaver;
 
 	@FindBy(id = "mail-service-type")
@@ -139,9 +139,7 @@ public class DrugCostEstimatorPage extends UhcDriver {
 
 	@FindBy(xpath = "//div[@id='pharmacy-results']//span[contains(@class,'pharmacy-name')]")
 	public List<WebElement> pharmacies;
-
-	//.//*[@id='pharmacy-results']/div[2]/ul[1]/li[1]/div/div[2]/button
-	//.//*[@id='pharmacy-results']/div[2]/ul[1]/li[1]/div/div[2]/a
+	
 	@FindBy(xpath = ".//*[@id='pharmacy-results']/div[2]/ul[1]/li[1]/div/div[2]/button")
 	public WebElement select_btn_first;
 
@@ -160,7 +158,7 @@ public class DrugCostEstimatorPage extends UhcDriver {
 	@FindBy(xpath = "//ul[@class='pharmacy-list']/li[1]/div//span[contains (text(), '  total annual drug cost')]")
 	public WebElement text_total_annual_drug_cost;
 
-	@FindBy(id = "retail-type")
+	@FindBy(xpath = ".//*[@id='pharmacy-type']/div[5]/label")
 	public WebElement pharmacy_retail_type;
 
 	@FindBy(id = "standard-type")
@@ -352,10 +350,16 @@ public class DrugCostEstimatorPage extends UhcDriver {
 
 	@FindBy(id = "zipcodebtn")
 	public WebElement zipcodeFindPlans;
+	
+	@FindBy(id = "drugModal")
+	public WebElement drugModalPopup;
 
 
 	@FindBy(xpath = ".//*[@id='site-wrapper']/div[4]/div/div[1]/div/div/div/div/div[1]/div/div/div[1]/div[2]/div/div[2]/div[1]/div")
 	public WebElement viewPlans;
+	
+	@FindBy(xpath = ".//*[@id='site-wrapper']/div[4]/div/div/div/div/div/div/div[1]/div/div/div[1]/div[2]/div/div[2]/div[3]")
+	private WebElement viewPDPPlans;
 
 	@FindBy(xpath = "//nav/ul[@class='uhc-pagination']/li[1]")
 	public WebElement pagination_text;
@@ -413,7 +417,7 @@ public class DrugCostEstimatorPage extends UhcDriver {
 		//waitforElement(addDrug);
 		addDrug.click();
 
-		if (validate(drugsearchinput)) {
+		if (drugModalPopup.getText().contains("ADD A NEW DRUG TO YOUR LIST")) {
 
 			return new AddNewDrugModal(driver);
 		}
@@ -738,7 +742,7 @@ public class DrugCostEstimatorPage extends UhcDriver {
 	}
 
 	public void select_first_pharmacy() throws InterruptedException {
-		Thread.sleep(15000);
+		Thread.sleep(10000);
 
 		//waitforElement(select_btn_first);
 		System.out.println("first pharmacy");
@@ -1450,7 +1454,7 @@ public class DrugCostEstimatorPage extends UhcDriver {
 		Thread.sleep(5000);
 	}
 
-	public void navigateToDCEToolFromvpp(String zipcode) throws InterruptedException {
+	public void navigateToDCEToolFromvpp(String zipcode, String plantype) throws InterruptedException {
 
 		/*
 		 * String Current_url = driver.getCurrentUrl(); String NewDCEUrl;
@@ -1471,11 +1475,17 @@ public class DrugCostEstimatorPage extends UhcDriver {
 		zipcodeFindPlans.click();
 
 		Thread.sleep(10000);
-		viewPlans.click();
-		List<WebElement> view2017Plans = driver.findElements(By.id("maDCELink"));
-		view2017Plans.get(0).click();
-		Thread.sleep(1000);
-
+		if(plantype.equals("MA")||plantype.equals("MAPD")){
+			viewPlans.click();
+			List<WebElement> view2017Plans = driver.findElements(By.id("maDCELink"));
+			view2017Plans.get(0).click();
+			Thread.sleep(1000);
+		}else{
+			viewPDPPlans.click();
+			List<WebElement> view2017PDPPlans = driver.findElements(By.id("pdpDrugCostEstimatorLink"));
+			view2017PDPPlans.get(0).click();
+			Thread.sleep(1000);
+		}
 	}
 
 	public void validateSummary() {
@@ -1753,6 +1763,19 @@ public class DrugCostEstimatorPage extends UhcDriver {
 			return true;
 		return false;
 		
+	}
+	
+	public boolean verifyPharmacyRetailExists(){
+		if(validate(pharmacy_retail_type))
+			return true;
+		return false;
+	}
+
+
+	public boolean verifyPharmacySaverExists() {
+		if(validate(rbPharmacySaver))
+			return true;
+		return false;
 	}
 	
 

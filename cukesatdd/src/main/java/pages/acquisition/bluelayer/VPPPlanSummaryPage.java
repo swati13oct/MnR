@@ -21,16 +21,6 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-
-
-
-
-
-
-
-
-
-
 import pages.acquisition.bluelayer.EnrollPlanInfoPage;
 import pages.acquisition.uhcretiree.Rallytool_Page;
 
@@ -139,7 +129,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 
 	@FindBy(css="#maplans_container .compareHeading>p")
 	private WebElement compareUpto3PlansPopup;
-
+	
 	@FindBy(xpath=".//*[@id='plan-list-1']/div/div[2]/div/div[3]/div[3]/div/div/span[1]/label")
 	private WebElement compareChkBox3;
 
@@ -973,6 +963,61 @@ public class VPPPlanSummaryPage extends UhcDriver {
 			e.printStackTrace();
 		}
 		viewPDPPlans.click();
+	}
+
+
+
+	public DrugCostEstimatorPage navigateToDCE(String plantype) {
+		try {
+			Thread.sleep(3000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		if(plantype.equals("MA")||plantype.equals("MAPD")){
+			viewPlans.click();
+			List<WebElement> view2017Plans = driver.findElements(By.id("maDCELink"));
+			view2017Plans.get(0).click();
+		}else{
+			viewPDPPlans.click();
+			List<WebElement> view2017PDPPlans = driver.findElements(By.id("pdpDrugCostEstimatorLink"));
+			view2017PDPPlans.get(0).click();
+			
+		}
+		try {
+			Thread.sleep(3000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		if(currentUrl().contains("/estimate-drug-costs.html#/drug-cost-estimator"))
+			return new DrugCostEstimatorPage(driver);
+		return null;
+		
+	}
+
+	@FindBy(xpath = ".//*[@id='site-wrapper']/div[4]/div/div/div/div/div/div/div[1]/div/div/div[2]/div/div/div/span/a")
+	private WebElement view2017Plans;
+
+	public void choose2017Plans() {
+		viewPlans.click();
+		try {
+			Thread.sleep(2000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		if(view2017Plans!=null){
+			view2017Plans.click();
+			try {
+				Thread.sleep(2000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			viewPlans.click();
+		}	
+		
 	}
 	
 }

@@ -23,8 +23,10 @@ And I navigate to step3 page and validate the drug info
 @dceVppBlayer
 Scenario Outline: To test the dce vpp flow
 Given the user is on blayer medicare acq site landing page
-When I access the acquisition DCE tool from vpp page using below zipcode on ums site
+When I access the vpp page using below zipcode on ums site
 	| Zip Code    | <zipcode>  |
+And I access the DCE tool
+	|Plan Type | <plantype> |
 And I have added a drug to my drug list on ums site
 	|Drug|<drug>|
 And I navigate to step2 page on ums site
@@ -33,14 +35,16 @@ And I navigate to step3 page and validate the drug info
 	|Drug|<drug>|
 	
 Examples:
-| zipcode  |   drug   | 
-| 90210    | Lipitor TAB 10MG|
+| zipcode  |plantype |   drug   | 
+| 90210    | MA 	 |Lipitor TAB 10MG|
 
 @switchNowStep3Blayer
 Scenario Outline: To test the dce vpp flow with switch now option
 Given the user is on blayer medicare acq site landing page
-When I access the acquisition DCE tool from vpp page using below zipcode on ums site
+When I access the vpp page using below zipcode on ums site
 	| Zip Code    | <zipcode>  |
+And I access the DCE tool
+	|Plan Type | <plantype> |
 And I have added a drug to my drug list on ums site
 	|Drug|<drug>|
 And I navigate to step2 page on ums site
@@ -50,6 +54,37 @@ And I navigate to step3 page and validate the drug info
 Then I switch to generic drug and validate on ums site
 	
 Examples:
-| zipcode  |   drug   | 
-| 90210    | Lipitor TAB 10MG|
-  
+| zipcode  | plantype |   drug   | 
+| 90210    |  MA 	  | Lipitor TAB 10MG|
+
+@defect3312
+Scenario Outline: To test Preferred Retail pharmacy type is there for Walgreens plan
+Given the user is on blayer medicare acq site landing page
+When I access the vpp page using below zipcode on ums site
+	| Zip Code    | <zipcode>  |
+And I access the DCE tool
+	|Plan Type | <plantype> |
+And I have added a drug to my drug list on ums site
+	|Drug|<drug>|
+And I navigate to step2 page on ums site
+Then I validate preferred retail pharmacy type is displayed
+
+Examples:
+| zipcode  | plantype |  drug   | 
+| 90210    | PDP	  |Lipitor TAB 10MG|
+
+@defect3255
+Scenario Outline: To test Pharmacy Saver pharmacy type is displayed
+Given the user is on blayer medicare acq site landing page
+When I access the vpp page using below zipcode on ums site
+	| Zip Code    | <zipcode>  |
+And I choose the 2017 plan and go to DCE page
+	|Plan Type | <plantype> |
+And I have added a drug to my drug list on ums site
+	|Drug|<drug>|
+And I navigate to step2 page on ums site
+Then I validate pharmacy saver pharmacy type is displayed	
+
+Examples:
+| zipcode  | plantype |  drug   | 
+| 90210    | MA	  |Lipitor TAB 10MG|
