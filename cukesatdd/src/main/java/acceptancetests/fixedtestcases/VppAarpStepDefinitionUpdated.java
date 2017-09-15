@@ -140,6 +140,7 @@ public class VppAarpStepDefinitionUpdated {
 	public void verifyAllPlansStillSelected(){
 		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
 			.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		plansummaryPage.clickonViewPlans();
 		if(plansummaryPage.validateAllPlansChecked()){
 			Assert.assertTrue(true);
 		}else

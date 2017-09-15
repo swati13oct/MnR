@@ -792,7 +792,12 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	}
 	
 	public boolean validateAllPlansChecked() {
-		
+		try {
+			Thread.sleep(2000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		if(validate(maChkboxMessage1)&&validate(maChkboxMessage2)&&validate(maChkboxMessage3))
 			return true;
 		return false;

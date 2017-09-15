@@ -11,7 +11,7 @@ And I navigate to step2 page on ums site
 And the user selects the pharmacy tab information
 	| Zipcode	  | <zipcode> |
 	| Radius  | <radius>   |
-And I select the the first pharmacy on there
+And I select the first pharmacy on there
 And I navigate to step3 page and validate the drug info
 	|Drug|<drug>|
 
