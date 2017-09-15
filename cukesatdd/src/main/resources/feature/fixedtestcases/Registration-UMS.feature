@@ -18,6 +18,7 @@ And the user registers with the following details in UMS site
 Then the user registers successfully in UMS site
 
 Examples:
-	 | planMemberId | dateOfBirth | userName           | password   | confirmPassword | email                   | confirmEmail            |
-	 | 866635641-01  | 11-17-1933  | q3_sep_blayer151   | Password@1 | Password@1      | UHCMNRPORTALS@GMAIL.COM | UHCMNRPORTALS@GMAIL.COM |
-	 #| 0162904141   | 01-09-1946  | ATDD_REG_BLAYER_02 | Password@1 | Password@1      | UHCMNRPORTALS@GMAIL.COM | UHCMNRPORTALS@GMAIL.COM |
+	 | planMemberId  | dateOfBirth | userName           | password   | confirmPassword | email                   | confirmEmail            |
+	 | 836904327-01  | 12-06-1942  | q3_sep_blayer152   | Password@1 | Password@1      | UHCMNRPORTALS@GMAIL.COM | UHCMNRPORTALS@GMAIL.COM |
+	#| 866635641-01  | 11-17-1933  | q3_sep_blayer151   | Password@1 | Password@1      | UHCMNRPORTALS@GMAIL.COM | UHCMNRPORTALS@GMAIL.COM |
+	#| 0162904141    | 01-09-1946  | ATDD_REG_BLAYER_02 | Password@1 | Password@1      | UHCMNRPORTALS@GMAIL.COM | UHCMNRPORTALS@GMAIL.COM |
