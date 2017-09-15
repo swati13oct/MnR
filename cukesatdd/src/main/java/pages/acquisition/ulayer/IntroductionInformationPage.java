@@ -51,6 +51,12 @@ public class IntroductionInformationPage extends UhcDriver{
 	@FindBy(id="beginOnlineEnrollmentbtn")
 	private WebElement enrollmentNext;
 	
+	@FindBy(id = "beginOnlineEnrollmentBtn")
+	private WebElement beginOnlineEnrBtn;
+	
+	@FindBy(xpath = "//div[@id='beginOnlineEnrollment']/span")
+	private WebElement alreadyEnrolledErrorMsg;
+	
 	@FindBy(xpath = "//div[@id='disclaimer']/div/p")
 	private WebElement disclaimerHeading;
 	
@@ -169,8 +175,7 @@ public class IntroductionInformationPage extends UhcDriver{
         
 	}
 	
-	@FindBy(id = "beginOnlineEnrollmentBtn")
-	private WebElement beginOnlineEnrBtn;
+
 	
 	public boolean validateIntroPage(){
 		boolean flag = false;
@@ -179,5 +184,10 @@ public class IntroductionInformationPage extends UhcDriver{
 			flag = true;
 		}
 		return flag;
+	}
+
+	public boolean hasEnrolledInLast24hrs() {
+		return validate(alreadyEnrolledErrorMsg);
+	
 	}
 }
