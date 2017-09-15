@@ -88,3 +88,25 @@ Then I validate pharmacy saver pharmacy type is displayed
 Examples:
 | zipcode  | plantype |  drug   | 
 | 90210    | MA	  |Lipitor TAB 10MG|
+
+@defect1662
+Scenario Outline: To go through dce from homepage and validate drug is still there when going to dce from vpp
+Given the user is on blayer medicare acq site landing page
+When I access the acquisition DCE tool from home page on ums site
+And I have added a drug to my drug list on ums site
+	|Drug|<drug>|
+And I navigate to step2 page on ums site
+And the user selects the pharmacy tab information
+	| Zipcode	  | <zipcode> |
+	| Radius  | <radius>   |
+And I select the first pharmacy on there
+And I click on the return link
+When I access the vpp page using below zipcode on ums site
+	| Zip Code    | <zipcode>  |
+And I access the DCE tool
+	|Plan Type | <plantype> |
+Then I verify that the drug is still there
+
+ Examples:
+| drug|zipcode| radius|	plantype |
+| Lipitor TAB 10MG| 90210 | 15miles | MA |

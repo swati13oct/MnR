@@ -23,6 +23,7 @@ import acceptancetests.atdd.data.CommonConstants;
 import acceptancetests.atdd.data.PageData;
 import acceptancetests.atdd.util.CommonUtility;
 import atdd.framework.UhcDriver;
+import pages.acquisition.ulayer.VPPPlanSummaryPage;
 
 public class DrugCostEstimatorPage extends UhcDriver {
 
@@ -1776,6 +1777,20 @@ public class DrugCostEstimatorPage extends UhcDriver {
 		if(validate(rbPharmacySaver))
 			return true;
 		return false;
+	}
+
+
+	public AcquisitionHomePage clickOnReturnLink() {
+		returnLink.click();	
+		try {
+			Thread.sleep(3000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		if(currentUrl().contains("https://www.awe-test-a-uhcmedicaresolutions.uhc.com/"))
+			return new AcquisitionHomePage(driver);
+		return null;
 	}
 	
 

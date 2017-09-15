@@ -1665,5 +1665,18 @@ public class DrugCostEstimatorPage extends UhcDriver {
 		return false;
 		
 	}
+	
+	public VPPPlanSummaryPage clickOnReturnLink() {
+		returnLink.click();	
+		try {
+			Thread.sleep(3000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		if(currentUrl().contains("#/plan-summary"))
+			return new VPPPlanSummaryPage(driver);
+		return null;
+	}
 
 }

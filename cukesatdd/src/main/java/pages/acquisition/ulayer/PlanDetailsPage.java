@@ -52,10 +52,15 @@ public class PlanDetailsPage extends UhcDriver {
 	private WebElement planCost3;
 	
 	@FindBy(xpath = "//*[@id='planCost']/table/tbody/tr[4]/td/div[3]/span[1]")
-      
-	
 	//*[@id='planCost']/table/tbody/tr[4]/td/div[3]/span[1]
 	private WebElement planCost4;
+	
+	@FindBy(xpath = ".//*[@id='highlights']/div/div/span[1]/label")
+	private WebElement compareChkBox;
+	
+	@FindBy(xpath = ".//*[@id='highlights']/div/div/span[2]/span")
+	private WebElement compareMessageBox;
+
 
        @FindBy(id = "yourDceInitial")
 	private WebElement enterDrugInfoLink;
@@ -78,14 +83,17 @@ public class PlanDetailsPage extends UhcDriver {
 	@FindBy(xpath="//*[@id='detail-0']/div/div/div[2]")
 	private WebElement addBenefitsSection;
 
-	@FindBy(xpath="//*[@id='detailTabs']/div[1]/a[1]")
-	private WebElement presDrugTab;
+	@FindBy(id = "prescriptiondrug")
+    private WebElement presDrugTab;
 	
 	@FindBy(xpath=".//*[@id='drugBenefits']")
 	private WebElement drugBenefitsSection;
 	
 	@FindBy(xpath=".//*[@id='DrugListDetails']")
 	private WebElement drugListEditBtn;
+	
+	@FindBy(id = "estimateYourDrugsLink")
+	private WebElement estimateDrugBtn;
 	
 	@FindBy(xpath="//*[@id='detailTabs']/div[1]/a[1]")
 	private WebElement optRidersTab;
@@ -345,6 +353,35 @@ public class PlanDetailsPage extends UhcDriver {
 				flag = true;;
 		}
 		return flag;
+	}
+    
+
+	public DrugCostEstimatorPage navigateToDCE() {
+
+		try {
+			Thread.sleep(2000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		presDrugTab.click();
+		estimateDrugBtn.click();
+		try {
+			Thread.sleep(4000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		if(currentUrl().contains("/estimate-drug-costs.html"))
+			return new DrugCostEstimatorPage(driver);
+		return null;
+	}
+
+	public boolean validateCompareBoxMessage() {
+		compareChkBox.click();
+		if(compareMessageBox.getText().contains("1 plan added, please select another plan to continue"))
+			return true;
+		return false;
 	}
 
    	

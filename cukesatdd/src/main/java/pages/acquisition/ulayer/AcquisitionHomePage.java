@@ -20,6 +20,7 @@ import acceptancetests.atdd.data.CommonConstants;
 import acceptancetests.atdd.data.MRConstants;
 import acceptancetests.atdd.data.PageData;
 import acceptancetests.atdd.util.CommonUtility;
+import pages.acquisition.ulayer.VPPPlanSummaryPage;
 
 /**
  * @author pperugu
@@ -348,6 +349,19 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		}
 		return null;
 	}
+	
+	public VPPPlanSummaryPage navigateToVpp(String zipcode)
+	{
+		
+		sendkeys(zipCodeField, zipcode);
+		viewPlansButton.click();
+		
+		if (getTitle().equalsIgnoreCase(
+				"Our Medicare Plans | AARP® Medicare Plans From UnitedHealthcare®")) {
+			return new VPPPlanSummaryPage(driver);
+		}
+		return null;
+	}
 
 	public String selectsHomeFooter() {
 
@@ -383,116 +397,6 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		return globalFooterJson;
 	}
 	
-	public JSONObject getBrowserCheck() {
-		String fileName = CommonConstants.AARP_BROWSER_CHECK_DATA;
-		browserCheckData = CommonUtility.readPageData(fileName,
-				CommonConstants.PAGE_OBJECT_DIRECTORY_ULAYER_ACQ);
-
-		JSONObject jsonObject = new JSONObject();
-		for (String key : browserCheckData.getExpectedData().keySet()) {
-			WebElement element = findElement(browserCheckData.getExpectedData()
-					.get(key));
-			if (element != null) {
-				if (validate(element)) {
-					try {
-						jsonObject.put(key, element.getText());
-					} catch (JSONException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
-				}
-			}
-		}
-		browserCheckJson = jsonObject;
-
-		return browserCheckJson;
-	}
-
-	public JSONObject accessingOurPlanslink() {
-
-		hoverourplanslink();
-		return getOurPlanDropDownJson();
-	}
-
-	public JSONObject getOurPlanDropDownJson() {
-
-		String fileName = CommonConstants.OUR_PLANS_DROPDOWN_DATA;
-		ourplansdropdown = CommonUtility.readPageData(fileName, CommonConstants.PAGE_OBJECT_DIRECTORY_ULAYER_ACQ);
-
-		JSONObject jsonObject = new JSONObject();
-		for (String key : ourplansdropdown.getExpectedData().keySet()) {
-			WebElement element = findElement(ourplansdropdown.getExpectedData().get(key));
-			if (element != null) {
-				if (validate(element)) {
-					try {
-						jsonObject.put(key, element.getText());
-					} catch (JSONException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
-				}
-			}
-		}
-		ourplansdropdownJson = jsonObject;
-
-		return ourplansdropdownJson;
-
-	}
-
-	public JSONObject accessViewAllDisclaimerInformation() {
-		validate(disclaimerViewLink);
-		disclaimerViewLink.click();
-		validate(disclaimerViewLink);
-		String fileName = CommonConstants.HOME_PAGE_DISCLAIMER_DATA;
-		homePageDisclaimer = CommonUtility.readPageData(fileName, CommonConstants.PAGE_OBJECT_DIRECTORY_ULAYER_ACQ);
-
-		JSONObject jsonObject = new JSONObject();
-		for (String key : homePageDisclaimer.getExpectedData().keySet()) {
-			WebElement element = findElement(homePageDisclaimer.getExpectedData().get(key));
-			if (element != null) {
-				if (validate(element)) {
-					try {
-						jsonObject.put(key, element.getText());
-					} catch (JSONException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
-				}
-			}
-		}
-		homePageDisclaimerJson = jsonObject;
-
-		return homePageDisclaimerJson;
-	}
-
-	public JSONObject accessViewAllDisclaimerHideInformation() {
-		validate(disclaimerHideLink);
-		disclaimerHideLink.click();
-		validate(disclaimerHideLink);
-		String fileName = CommonConstants.HOME_PAGE_DISCLAIMER_DATA;
-		homePageDisclaimerHide = CommonUtility.readPageData(fileName, CommonConstants.PAGE_OBJECT_DIRECTORY_ULAYER_ACQ);
-
-		JSONObject jsonObject = new JSONObject();
-		for (String key : homePageDisclaimerHide.getExpectedData().keySet()) {
-			WebElement element = findElement(homePageDisclaimerHide.getExpectedData().get(key));
-			if (element != null) {
-				if (validate(element)) {
-					try {
-						jsonObject.put(key, element.getText());
-					} catch (JSONException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
-				}
-			}
-		}
-		homePageDisclaimerHideJson = jsonObject;
-
-		return homePageDisclaimerHideJson;
-	}
-
-	
-
 	public AcquisitionHomePage veiwAllDisclaimerLinkSectionLinksClick() {
 		validate(GlobalWebElements.viewAllDisclaimerInformationLink);
 		GlobalWebElements.viewAllDisclaimerInformationLink.click();
@@ -509,31 +413,6 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		return null;
 	}
 
-	public JSONObject accessBrandSection() {
-		String fileName = CommonConstants.HEADER_PAGE_DATA;
-		header = CommonUtility.readPageData(fileName, CommonConstants.PAGE_OBJECT_DIRECTORY_ULAYER_ACQ);
-
-		JSONObject jsonObject = new JSONObject();
-		for (String key : header.getExpectedData().keySet()) {
-			WebElement element = findElement(header.getExpectedData().get(key));
-			if (element != null) {
-				if (validate(element)) {
-					try {
-						jsonObject.put(key, element.getText());
-					} catch (JSONException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
-				}
-			}
-		}
-		headerJson = jsonObject;
-
-		return headerJson;
-
-	}
-
-	
 
 	public Boolean visitAARPOrgClick() {
 		validate(GlobalWebElements.visitAARPLink);
@@ -563,59 +442,6 @@ public class AcquisitionHomePage extends GlobalWebElements {
 
 	}
 
-	public JSONObject getAlreadyPlanMemberJSON() {
-		String fileName = CommonConstants.ALREADY_PLAN_MEMBER_PAGE_DATA;
-		alreadyPlanMember = CommonUtility.readPageData(fileName, CommonConstants.PAGE_OBJECT_DIRECTORY_ULAYER_ACQ);
-
-		JSONObject jsonObject = new JSONObject();
-		for (String key : alreadyPlanMember.getExpectedData().keySet()) {
-			WebElement element = findElement(alreadyPlanMember.getExpectedData().get(key));
-			if (element != null) {
-				if (validate(element)) {
-					try {
-						jsonObject.put(key, element.getText());
-					} catch (JSONException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
-				}
-			}
-		}
-		alreadyPlanMemberJson = jsonObject;
-
-		return alreadyPlanMemberJson;
-	}
-
-	public JSONObject accessMedicareEducationDropDown() {
-
-		validate(navigationSectionMedicareEducationLink);
-
-		Actions actions = new Actions(driver);
-		actions.moveToElement(navigationSectionMedicareEducationLink);
-		actions.moveToElement(learnAboutMedicareMedicareEducationLink);
-		actions.perform();
-		String fileName = CommonConstants.MEDICARE_EDUCATION_SECTION_DATA;
-		medicareEducationDropDown = CommonUtility.readPageData(fileName,
-				CommonConstants.PAGE_OBJECT_DIRECTORY_ULAYER_ACQ);
-
-		JSONObject jsonObject = new JSONObject();
-		for (String key : medicareEducationDropDown.getExpectedData().keySet()) {
-			WebElement element = findElement(medicareEducationDropDown.getExpectedData().get(key));
-			if (element != null) {
-				if (validate(element)) {
-					try {
-						jsonObject.put(key, element.getText());
-					} catch (JSONException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
-				}
-			}
-		}
-		medicareEducationDropDownJson = jsonObject;
-
-		return medicareEducationDropDownJson;
-	}
 
 	public Boolean validate_textField() {
 
@@ -737,10 +563,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	// private PageData ourPlansNav;
 	public JSONObject ourPlansNavJson;
 
-	public JSONObject accessingOurPlansNav() {
-		ourPlansHover();
-		return getOurPlanDropDownJson();
-	}
+	
 
 	public void ourPlansHover() {
 		Actions actions = new Actions(driver);

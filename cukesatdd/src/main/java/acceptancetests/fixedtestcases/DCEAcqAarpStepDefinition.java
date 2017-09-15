@@ -25,8 +25,10 @@ import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import cucumber.api.DataTable;
 import gherkin.formatter.model.DataTableRow;
+import pages.acquisition.ulayer.VPPPlanSummaryPage;
 import pages.acquisition.ulayer.AcquisitionHomePage;
 import pages.acquisition.ulayer.DrugCostEstimatorPage;
+import pages.acquisition.ulayer.PlanDetailsPage;
 
 
 
@@ -65,8 +67,8 @@ public class DCEAcqAarpStepDefinition {
 		dce.navigateToDCEToolFromHome();;
 	}
 	
-	@When("^I access the acquisition DCE tool from vpp page using below zipcode$")
-	public void I_access_the_DCE_tool_vpp_page(DataTable memberAttributes) throws InterruptedException {
+	@When("^I access the vpp page using below zipcode on aarp site$")
+	public void I_access_the__vpp_page(DataTable memberAttributes) throws InterruptedException {
 		List<DataTableRow> memberAttributesRow = memberAttributes
 				.getGherkinRows();
 		Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
@@ -77,11 +79,55 @@ public class DCEAcqAarpStepDefinition {
 		}
 
 		String zipcode = memberAttributesMap.get("Zip Code");
-		
-		WebDriver wd = (WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
+		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage)loginScenario.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+		VPPPlanSummaryPage plansummaryPage = aquisitionhomepage.navigateToVpp(zipcode);
+		if(plansummaryPage!=null){
+			loginScenario.saveBean(PageConstants.VPP_PLAN_SUMMARY_PAGE, plansummaryPage);
+		}
+	}
+	
+	@And("^I go to the view plan details page and access DCE flow from prescription drugs tab$")
+	public void clickOnViewPlanDetailsAndGoTODCE(DataTable attributes){
+		List<DataTableRow> memberAttributesRow = attributes
+				.getGherkinRows();
+		Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
 
-		DrugCostEstimatorPage dce = new DrugCostEstimatorPage(wd);
-		dce.navigateToDCEToolFromvpp(zipcode);
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells()
+					.get(0), memberAttributesRow.get(i).getCells().get(1));
+		}
+
+		String planName = memberAttributesMap.get("Plan Name");
+		String planType = memberAttributesMap.get("Plan Type");
+
+		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) loginScenario.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		plansummaryPage.clickonViewPlans();
+		PlanDetailsPage plandetailspage = plansummaryPage.navigateToPlanDetails(planName, planType);
+		DrugCostEstimatorPage dce = plandetailspage.navigateToDCE();
+		if(dce!=null){
+			loginScenario.saveBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE, dce);
+			
+		}
+	}
+
+	
+	@And("^I access the DCE tool on aarp site$")
+	public void accessDCETool(DataTable attributes){
+		List<DataTableRow> memberAttributesRow = attributes
+				.getGherkinRows();
+		Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells()
+					.get(0), memberAttributesRow.get(i).getCells().get(1));
+		}
+
+		String plantype = memberAttributesMap.get("Plan Type");
+		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) loginScenario.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		DrugCostEstimatorPage dce = plansummaryPage.navigateToDCE(plantype);
+		if(dce!=null){
+			loginScenario.saveBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE, dce);
+		}
 	}
 	
 	@When("^I have added a drug to my drug list$")
@@ -129,6 +175,41 @@ public class DCEAcqAarpStepDefinition {
 		dce.select_first_pharmacy();
 		
 	}
+	
+	@And("I navigate back to plan summary page")
+	public void navigateToPlanSummaryPage(){
+		DrugCostEstimatorPage dce = (DrugCostEstimatorPage) getLoginScenario().getBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE);
+		VPPPlanSummaryPage vppplansummarypage = dce.clickOnReturnLink();
+		if(vppplansummarypage!=null){
+			loginScenario.saveBean(PageConstants.VPP_PLAN_SUMMARY_PAGE, vppplansummarypage);
+		}else
+			Assert.fail("Error in loading the vpp summary page");
+	}
+
+	@Then("I navigate to view plan details page and click on add to compare box under prescription drugs tab and verify correct message")
+	public void navigateToPlanDetailsPageAndVerify(DataTable attributes){
+		List<DataTableRow> memberAttributesRow = attributes
+				.getGherkinRows();
+		Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells()
+					.get(0), memberAttributesRow.get(i).getCells().get(1));
+		}
+
+		String planName = memberAttributesMap.get("Plan Name");
+		String planType = memberAttributesMap.get("Plan Type");
+		VPPPlanSummaryPage vppsummarypage = (VPPPlanSummaryPage) loginScenario.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		PlanDetailsPage plandetailspage = vppsummarypage.navigateToPlanDetails(planName, planType);
+		if(plandetailspage!=null){
+			if(plandetailspage.validateCompareBoxMessage())
+				Assert.assertTrue(true);
+			else
+				Assert.fail("Error in validating the correct compare box message");
+		}else
+			Assert.fail("Error in loading the plan details page");
+	}
+
 	
 	@Then("^I navigate to step3 page and validate$")
 	public void I_navigate_to_step_page(DataTable data) throws InterruptedException {

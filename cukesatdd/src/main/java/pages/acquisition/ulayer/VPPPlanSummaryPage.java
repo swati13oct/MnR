@@ -25,6 +25,7 @@ import acceptancetests.atdd.data.ElementData;
 import acceptancetests.atdd.data.PageData;
 import acceptancetests.atdd.util.CommonUtility;
 import atdd.framework.UhcDriver;
+import pages.acquisition.ulayer.DrugCostEstimatorPage;
 
 /**
  * @author 
@@ -718,7 +719,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	public PlanDetailsPage navigateToPlanDetails(String planName, String planType) {
 
 		if (planType.equalsIgnoreCase("MA") || planType.equalsIgnoreCase("MAPD")) {
-			ElementData elementData = new ElementData("linkText", "View more details");
+			ElementData elementData = new ElementData("id", "viewmoredetlinkmapd");
 			WebElement element = getViewPlanDetailsElement(maPlanElement, elementData, planName);
 			if (element != null) {
 				element.click();
@@ -801,6 +802,35 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		if(validate(maChkboxMessage1)&&validate(maChkboxMessage2)&&validate(maChkboxMessage3))
 			return true;
 		return false;
+	}
+	
+	public DrugCostEstimatorPage navigateToDCE(String plantype) {
+		try {
+			Thread.sleep(3000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		if(plantype.equals("MA")||plantype.equals("MAPD")){
+			viewPlans.click();
+			List<WebElement> view2017Plans = driver.findElements(By.id("maDCELink"));
+			view2017Plans.get(0).click();
+		}else{
+			viewPDPPlans.click();
+			List<WebElement> view2017PDPPlans = driver.findElements(By.id("pdpDrugCostEstimatorLink"));
+			view2017PDPPlans.get(0).click();
+			
+		}
+		try {
+			Thread.sleep(3000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		if(currentUrl().contains("/estimate-drug-costs.html#/drug-cost-estimator"))
+			return new DrugCostEstimatorPage(driver);
+		return null;
+		
 	}
 	
 

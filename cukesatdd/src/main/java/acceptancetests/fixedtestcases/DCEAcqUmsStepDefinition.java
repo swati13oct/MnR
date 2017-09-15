@@ -187,6 +187,32 @@ public class DCEAcqUmsStepDefinition {
 
 	}
 	
+	@And("I click on the return link")
+	public void clickOnReturnLink(){
+		DrugCostEstimatorPage dce = (DrugCostEstimatorPage) getLoginScenario().getBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE);
+		AcquisitionHomePage acqhomepage = dce.clickOnReturnLink();
+		
+	}
+	
+	@Then("I verify that the drug is still there")
+	public void verifyDrugIsStillThere(DataTable attributes){
+		List<DataTableRow> memberAttributesRow = attributes
+				.getGherkinRows();
+		Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells()
+					.get(0), memberAttributesRow.get(i).getCells().get(1));
+		}
+
+		String drugName = memberAttributesMap.get("Drug");
+		DrugCostEstimatorPage dce = (DrugCostEstimatorPage) getLoginScenario().getBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE);
+		if(dce.isDrugPresent(drugName))
+			Assert.assertTrue(true);
+		else
+			Assert.fail("Error in validating that the drug is still there");
+	}
+	
 	@Then("^I navigate to step3 page and validate the drug info$")
 	public void I_navigate_to_step_page(DataTable data) throws InterruptedException {
 		List<DataTableRow> memberAttributesRow = data.getGherkinRows();
