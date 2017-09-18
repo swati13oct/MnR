@@ -88,13 +88,13 @@ public class LoginPage extends UhcDriver {
 
 			while (!isAlertPresent());
 		}
-		/*if ( MRScenario.environment.equals("team-c") || MRScenario.environment.equals("team-b")) {
+		if ( MRScenario.environment.equals("team-c") || MRScenario.environment.equals("team-b")) {
 			
 			Alert alert = driver.switchTo().alert();
 	        alert.accept();
 	        Alert alert1 = driver.switchTo().alert();
 	        alert1.accept();
-	        } */
+	        } 
 		
 		try {
 			Thread.sleep(10000);

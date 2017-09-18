@@ -1,7 +1,8 @@
 @drug_cost_estimator
 Feature:Drug Cost Estimator
 
-@467875
+#@467875
+@drug_cost_estimator1
 Scenario Outline: To Verify MR portal members using DCE on a desktop device will be able to edit drugs
 Given I am a registered member using the new M&R member portal on a desktop computer
 | Plan Type   | <planType>   |
@@ -18,7 +19,8 @@ Examples:
  | MAPD      |IndividualDCEmember |
  
  
-@US502131
+#@US502131
+@drug_cost_estimator2
 Scenario Outline: To Verify MR portal members using DCE on a desktop device , Pharmacy search tab validation
 Given I am a registered member using the new M&R member portal on a desktop computer
 | Plan Type   | <planType>   |
@@ -30,19 +32,19 @@ Examples:
  | planType  | memberType  |
  | MAPD       |IndividualDCEmember |
 
-@drug_cost_estimatorstep5
-Scenario Outline: Pharmacy saver results
-Given I am a registered member using the new M&R member portal on a desktop computer
-| Plan Type   | <planType>   |
-| Member Type	  | <memberType> |
-When the above plantype user logs in UMS Site Desktop
-And I access the page containing the DCE tool
-And I navigate to step2 page
-Then I should not see pharmacy saver radio button under pharmacy type
+#@drug_cost_estimatorstep3
+#Scenario Outline: Pharmacy saver results
+#Given I am a registered member using the new M&R member portal on a desktop computer
+#| Plan Type   | <planType>   |
+#| Member Type	  | <memberType> |
+#When the above plantype user logs in UMS Site Desktop
+#And I access the page containing the DCE tool
+#And I navigate to step2 page
+#Then I should not see pharmacy saver radio button under pharmacy type
 
- Examples:
-| planType | memberType|
-| MA     |Group_non_pharmacy_saver |
+# Examples:
+#| planType | memberType|
+#| MA     |Group_non_pharmacy_saver |
 
  
 @drug_cost_estimatorstep4
@@ -64,19 +66,19 @@ And I should see pharmacy saver pharmacies in results
 | planType | memberType| zipcode| radius|pharmacytype|
 | MAPD     |IndividualDCEmember | 06450  | 25 miles|Pharmacy Saver|
  
- @drug_cost_estimator_without_mail_service
-Scenario Outline: To Verify MR portal members using DCE on a desktop device, if it is a PEEHIP member, then preferred mail service option will not be available.
-Given I am a registered member using the new M&R member portal on a desktop computer
-| Plan Type   | <planType>   |
-| Member Type	  | <memberType> |
-When the above plantype user logs in UMS Site Desktop
-And I access the page containing the DCE tool
-And I navigate to step2 page
-Then I should not see preferred mail service radio button under pharmacy type 
+#@drug_cost_estimator_without_mail_service
+#Scenario Outline: To Verify MR portal members using DCE on a desktop device, if it is a PEEHIP member, then preferred mail service option will not be available.
+#Given I am a registered member using the new M&R member portal on a desktop computer
+#| Plan Type   | <planType>   |
+#| Member Type	  | <memberType> |
+#When the above plantype user logs in UMS Site Desktop
+#And I access the page containing the DCE tool
+#And I navigate to step2 page
+#Then I should not see preferred mail service radio button under pharmacy type 
 
-Examples:
- | planType  | memberType  |
- | MAPD      |ALPEEHIP|
+#Examples:
+ #| planType  | memberType  |
+ #| MAPD      |ALPEEHIP|
  
  @drug_cost_estimator_with_mail_service
 Scenario Outline: To Verify MR portal members using DCE on a desktop device, will have preferred mail services option available depending on its member type.

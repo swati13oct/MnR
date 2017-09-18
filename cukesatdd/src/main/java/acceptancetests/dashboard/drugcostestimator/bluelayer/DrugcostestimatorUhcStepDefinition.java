@@ -1063,7 +1063,7 @@ public class DrugcostestimatorUhcStepDefinition {
 		DrugCostEstimatorPage dce = (DrugCostEstimatorPage) getLoginScenario()
 				.getBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE);
 		//dce.navigateToStep2();
-		dce.isPharmacySelected();
+		dce.validatePharmacySelected();
 	}
 	
 	@And("^I have selected pharmacy$")
