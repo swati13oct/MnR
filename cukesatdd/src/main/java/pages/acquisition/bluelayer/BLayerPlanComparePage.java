@@ -103,7 +103,7 @@ public class BLayerPlanComparePage extends UhcDriver {
 		Thread.sleep(1000);
 		ComparePlansLink.click();
 		Thread.sleep(5000);
-		 if(driver.getTitle().equalsIgnoreCase("plans")){
+		 if(driver.getTitle().contains("Our Medicare Plan Types")){
 			 return new BLayerPlanComparePage(driver);
 		 }
 		 return null;	 
