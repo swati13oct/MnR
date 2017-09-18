@@ -200,19 +200,15 @@ public class EnrollInPlanAarpStepDefinition {
 	public void the_user_navigates_beneficiary_information_step_aarp() {
 		IntroductionInformationPage introInformationPage = (IntroductionInformationPage) getLoginScenario()
 				.getBean(PageConstants.INTRODUCTION_INFORMATION_PAGE);
+		
+		BeneficiaryInformationPage beneficiaryInformationPage = introInformationPage
+				.navigatesToNextStep();
 
 		boolean hasEnrolled = introInformationPage.hasEnrolledInLast24hrs();
 		getLoginScenario().saveBean(EnrollInPlanCommonConstants.HAS_ENROLLED,
 				hasEnrolled);
 
 		if (!hasEnrolled) {
-
-			BeneficiaryInformationPage beneficiaryInformationPage = introInformationPage
-					.navigatesToNextStep();
-			getLoginScenario().saveBean(
-					PageConstants.BENEFICIARY_INFORMATION_PAGE,
-					beneficiaryInformationPage);
-
 			if (beneficiaryInformationPage != null) {
 
 				if (beneficiaryInformationPage.validateBeneficiaryPage()) {
@@ -224,6 +220,9 @@ public class EnrollInPlanAarpStepDefinition {
 				Assert.fail("ERROR loading BeneficiaryInformationPage");
 			}
 
+		}
+		else{
+			Assert.assertTrue("Already Enrolled",true);
 		}
 
 	}
