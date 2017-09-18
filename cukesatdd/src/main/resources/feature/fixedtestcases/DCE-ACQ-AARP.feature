@@ -64,7 +64,7 @@ When I access the vpp page using below zipcode on aarp site
 And I go to the view plan details page and access DCE flow from prescription drugs tab
 	|Plan Name | <planname> |
 	|Plan Type | <plantype> |
-nd I have added a drug to my drug list
+And I have added a drug to my drug list
 	|Drug|<drug>|
 And I navigate to step2 page
 And I select the first pharmacy
