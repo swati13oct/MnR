@@ -346,7 +346,7 @@ Then user validates Medical Benefits section
 
 Examples:
 |zipCode|county          |planType|
-|90210 |Los Angeles County| MA     |
+|90210 |Los Angeles County| MA    |
 
 
 @US689477
@@ -362,7 +362,7 @@ Then user validates Prescription Drug Benefits section
 
 Examples:
 |zipCode|county          |planType|
-|90210 |Los Angeles County| MA     |
+|90210 |Los Angeles County| MA    |
 
 
 @connectormodel
