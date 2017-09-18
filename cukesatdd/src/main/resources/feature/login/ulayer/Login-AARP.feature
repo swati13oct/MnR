@@ -113,6 +113,33 @@ Examples:
    | planType1 |
    | COMBO |
 
+@US621820
+Scenario Outline: Verify confirmation page for different Email option selected button
+Given the user is on the AARP Ulayer site login page
+When the user logs in with a registered AMP with following details in AARP site
+	| Plan Type 1        | <planType1>    |
+Then the User clicks moves to test harness page and clicks on go to Multiple Email Address Page
+Then User selects different mail option and validates the confirmation page
+
+Examples:
+   | planType1 |
+   | COMBO |
+
+
+@US621796
+Scenario Outline: Verify confirmation page for different Email option selected button
+Given the user is on the AARP Ulayer site login page
+When the user logs in with a registered AMP with following details in AARP site
+	| Plan Type 1        | <planType1>    |
+Then the User clicks moves to test harness page and clicks on go to Multiple Email Address Page
+Then User selects Radio button for available mail address option and validates the confirmation page
+
+Examples:
+   | planType1 |
+   | COMBO |
+
+
+
 @US621839
 Scenario: Verify Error messages in aarp member site for multiple Email address page
 Given the user is on the multipleEmailAddressPage and clicks on continue

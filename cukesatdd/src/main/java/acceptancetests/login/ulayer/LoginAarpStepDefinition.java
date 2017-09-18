@@ -223,22 +223,55 @@ public class LoginAarpStepDefinition {
 
 	}
 	
-	
-	@Then("^the user validates multiple email address page11$")
-	public void EmailMultipleAddress_validation() throws InterruptedException {
+	@Then("^the User clicks moves to test harness page and clicks on go to Multiple Email Address Page$")
+	public void Move_To_TestHarness_and_goMultipleEmailAddress() {
 
 		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario()
 				.getBean(PageConstants.ACCOUNT_HOME_PAGE);
-	    AccountHomePage MultipleEmailPage = accountHomePage.ValidateMultipleEmailAddress();
-	    if(MultipleEmailPage!=null){
-	    	getLoginScenario().saveBean(PageConstants.MULTIPLE_EMAIL_ADDRESS,
-	    			MultipleEmailPage);
+		MultipleEmailAddressNewPage MultipleEmailPage = accountHomePage.navigateToMultipleEmailTestHarness();
+		 if(MultipleEmailPage!=null){
+		    	getLoginScenario().saveBean(PageConstants.MULTIPLE_EMAIL_ADDRESS,
+		    			MultipleEmailPage);
+				Assert.assertTrue(true);
+			} else {
+				Assert.fail("Multiple Email page not found");
+			}
+
+	}
+	
+	
+	@Then("^User selects different mail option and validates the confirmation page$")
+	public void EmailMultipleAddress_validation() throws InterruptedException {
+
+		MultipleEmailAddressNewPage MEANewPage = (MultipleEmailAddressNewPage) getLoginScenario()
+				.getBean(PageConstants.MULTIPLE_EMAIL_ADDRESS);
+	    AccountHomePage MultipleEmailPageConfirmation = MEANewPage.SelectDifferentEmailAddress();
+	    if(MultipleEmailPageConfirmation!=null){
+	    	getLoginScenario().saveBean(PageConstants.MULTIPLE_EMAIL_CONFIRMATION,
+	    			MultipleEmailPageConfirmation);
 			Assert.assertTrue(true);
 		} else {
 			Assert.fail("Multiple Email page not found");
 		}
          
 	}
+	
+	@Then("^User selects Radio button for available mail address option and validates the confirmation page$")
+	public void EmailSelctOption_validation() throws InterruptedException {
+
+		MultipleEmailAddressNewPage MEANewPage = (MultipleEmailAddressNewPage) getLoginScenario()
+				.getBean(PageConstants.MULTIPLE_EMAIL_ADDRESS);
+	    AccountHomePage MultipleEmailPageConfirmation = MEANewPage.SelectEmailfromOption();
+	    if(MultipleEmailPageConfirmation!=null){
+	    	getLoginScenario().saveBean(PageConstants.MULTIPLE_EMAIL_CONFIRMATION,
+	    			MultipleEmailPageConfirmation);
+			Assert.assertTrue(true);
+		} else {
+			Assert.fail("Multiple Email page not found");
+		}
+         
+	}
+	
 	
 	
 	@Then("^the user validates multiple email address page$")

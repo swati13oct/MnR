@@ -11,10 +11,10 @@ import cucumber.junit.Cucumber;
  *
  */
 @RunWith(Cucumber.class)
-@Cucumber.Options(glue = { "atdd.framework","acceptancetests.login" }, 
-		features = { "feature/login" }, 
+@Cucumber.Options(glue = { "atdd.framework","acceptancetests.login.ulayer" }, 
+		features = { "feature/login/ulayer" }, 
 		format = {
-		"pretty", "html:reports/test-report","json:target/cucumber.json" }, tags ={"@albamafnf"})
+		"pretty", "html:reports/test-report","json:target/cucumber.json" }, tags ={"@US621820"})
 
 public class RunMRAtddTestLogin {
 	

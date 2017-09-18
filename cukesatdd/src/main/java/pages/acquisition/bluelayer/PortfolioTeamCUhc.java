@@ -56,7 +56,7 @@ public class PortfolioTeamCUhc extends UhcDriver {
 	    		break;
 	    	}
 	    }*/
-		if (driver.getTitle().equalsIgnoreCase("plans")) {
+		if (driver.getTitle().contains("Our Medicare Plan Types")) {
 			return new ResponsivePlanSummaryUhc(driver);
 		} 
 		return null;

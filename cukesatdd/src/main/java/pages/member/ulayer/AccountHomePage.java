@@ -115,6 +115,9 @@ public class AccountHomePage extends UhcDriver {
 	@FindBy(linkText = "Compare 2017 Plans")
 	private WebElement planCompareLink;	
 	
+	@FindBy(linkText = "Go to MultiEmail Address page")
+	private WebElement MultiEmailAddressLink;	
+	
 	@FindBy(xpath = "//div[@class='prefermain_mid mapd_div']/div/h3")
 	private WebElement planCompareHeader;	
 
@@ -627,6 +630,16 @@ public class AccountHomePage extends UhcDriver {
 		driver.navigate().to(EOB_DIRECT_URL);
  		if(driver.getTitle().equalsIgnoreCase("Member Claims")){
         return new EOBPage(driver);
+		}
+		return null;
+	}
+	
+	public MultipleEmailAddressNewPage navigateToMultipleEmailTestHarness(){
+		driver.navigate().to("https://member.team-c-aarpmedicareplans.uhc.com/home/testharness.html");
+ 		if(driver.getTitle().equalsIgnoreCase("testharness")){
+ 			MultiEmailAddressLink.click();
+ 			 Assert.assertTrue(driver.getTitle().equalsIgnoreCase("Multiple Email Address"));
+ 			 return new MultipleEmailAddressNewPage(driver);
 		}
 		return null;
 	}

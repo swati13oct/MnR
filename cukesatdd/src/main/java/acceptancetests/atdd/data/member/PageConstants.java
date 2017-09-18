@@ -196,5 +196,7 @@ public class PageConstants {
 	public static final String SAVING_OPPORTUNITY = "savingopportunity";
 	
 	public static final String MULTIPLE_EMAIL_ADDRESS = "multipleEmailAddress";
+	
+	public static final String MULTIPLE_EMAIL_CONFIRMATION = "multipleEmailConfirmation";
 
 }

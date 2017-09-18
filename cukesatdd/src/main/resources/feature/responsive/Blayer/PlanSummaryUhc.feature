@@ -457,7 +457,7 @@ Examples:
 
 
 @US698836 @sprint5
-Scenario Outline: To validate the Provider section is enabled
+Scenario Outline: To validate Outpatient Surgery row for AARPMedicareFocus Plans
 Given the user is on the  team-c vpp portfolio page
 Then the user performs plan search TeamC using zipcode
               | Zip Code |<zipCode>|
