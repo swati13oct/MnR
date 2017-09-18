@@ -326,6 +326,57 @@ try {
 		//PharmacySearchPage.logOut();
 
 	}
+	
+	@And("^the user selects a language from dropdown in UMS Site$")
+	public void user_selects_language_ums(DataTable languageAttributes) {
 
+		String langName = languageAttributes.getGherkinRows().get(0).getCells()
+				.get(0);
+		if(langName.equals("Spanish")){
+			langName = "espa";	
+		}else if(langName.equals("Chinese")){
+			langName = "中文";	
+		}else{
+			langName = "English";	
+		}
+		PharmacySearchPage pharmacySearchPage = (PharmacySearchPage) getLoginScenario()
+				.getBean(PageConstants.PHARMACY_SEARCH_PAGE);
+		pharmacySearchPage = pharmacySearchPage.selectLanguage(langName);
+
+		if (pharmacySearchPage != null) {
+			getLoginScenario().saveBean(PageConstants.PHARMACY_SEARCH_PAGE,
+					pharmacySearchPage);
+			Assert.assertTrue(true);
+		} else {
+			Assert.fail("Failed to load Pharmacy search page");
+		}
+	}
+	@Then("^the user should see county popup in UMS site$")
+	public void user_should_see_county_popup_ums() {
+		PharmacySearchPage pharmacySearchPage = (PharmacySearchPage) getLoginScenario()
+				.getBean(PageConstants.PHARMACY_SEARCH_PAGE);
+		if(pharmacySearchPage.validateCountypopoup()){
+			Assert.assertTrue(true);
+		} else {
+			Assert.fail("County Pop up did not appear");
+		}
+	}
+	
+	@When("^the user selects the county in UMS site$")
+	public void user_selects_county_ums(DataTable countyAttributes){
+		String countyName = countyAttributes.getGherkinRows().get(0).getCells()
+				.get(0);
+		PharmacySearchPage pharmacySearchPage = (PharmacySearchPage) getLoginScenario()
+				.getBean(PageConstants.PHARMACY_SEARCH_PAGE);
+		pharmacySearchPage.selectCounty(countyName);
+	}
+	
+	@Then("^the user should see choose a plan in UMS site$")
+	public void user_should_see_choose_plan_ums(){
+		PharmacySearchPage pharmacySearchPage = (PharmacySearchPage) getLoginScenario()
+				.getBean(PageConstants.PHARMACY_SEARCH_PAGE);
+		pharmacySearchPage.validateChoosePlanSectionAfterzipcodeSearch();
+	}
+	
 
 }

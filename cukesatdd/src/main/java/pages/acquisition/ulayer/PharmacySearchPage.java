@@ -55,6 +55,9 @@ public class PharmacySearchPage extends UhcDriver {
 	@FindBys(value = { @FindBy(xpath = "//select[@id='plan-type']/option") })
 	private List<WebElement> planNamesList;
 
+	@FindBys(value = { @FindBy(xpath = "//select[@id='lang-select']/option") })
+	private List<WebElement> langList;
+
 	@FindBys(value = { @FindBy(xpath = "//div[@id='selectCounty']/p") })
 	private List<WebElement> countyList;
 
@@ -146,6 +149,23 @@ public class PharmacySearchPage extends UhcDriver {
 		openAndValidate();
 	}
 
+	public boolean validateCountypopoup(){
+		boolean flag = false;
+
+		try {
+			Thread.sleep(2000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		CommonUtility.checkPageIsReady(driver);
+
+		if (countyPopOut.isDisplayed()) 
+			flag=true;
+
+		return flag;
+	}
+
 	public PharmacySearchPage enterZipDistanceDetails(String zipcode,
 			String distance, String county) {
 
@@ -223,6 +243,22 @@ public class PharmacySearchPage extends UhcDriver {
 		return null;
 	}
 
+	public PharmacySearchPage selectLanguage(String langName) {
+		selectFromDropDown(langList, langName);
+
+		try {
+			Thread.sleep(5000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		if (driver.getTitle().equalsIgnoreCase(
+				"Locate a Pharmacy | UnitedHealthcare®")) {
+			return new PharmacySearchPage(driver);
+		}
+		return null;
+	}
 	public PharmacyResultPage searchesPharmacy() {
 
 		searchPharmaciesButton.click();
@@ -401,6 +437,12 @@ public class PharmacySearchPage extends UhcDriver {
 	}
 
 	public boolean validatePharmacyResults(){
+		try {
+			Thread.sleep(5000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		boolean flag = true;
 		System.out.println(pharmacyCount.getText());
 		if(pharmacyCount.getText().split(" ")[0].equals("") || Integer.parseInt(pharmacyCount.getText().split(" ")[0])==0)
@@ -419,6 +461,37 @@ public class PharmacySearchPage extends UhcDriver {
 				flag = false;
 		}
 		return flag;
+	}
+	
+	public void selectCounty(String county){
+		try {
+			if (countyPopOut.isDisplayed()) {
+				for (WebElement webElement : countyList) {
+					try {
+						Thread.sleep(2000);
+					} catch (InterruptedException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					if (webElement.getText().contains(county)) {
+						try {
+							Thread.sleep(2000);
+						} catch (InterruptedException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+						WebElement countylink = driver.findElement(By.linkText(webElement.getText()));
+
+						countylink.click();
+						break;
+					}
+				}
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	
 	}
 
 }
