@@ -920,7 +920,7 @@ public class MRScenario {
                 capabilities.setCapability("platform", "Windows 7");
                 capabilities.setCapability("version", "48");
               //  capabilities.setCapability("idleTimeout", 180);
-                }else if(browserName.equalsIgnoreCase("IE")){
+                /*}else if(browserName.equalsIgnoreCase("IE")){
                      capabilities = DesiredCapabilities.internetExplorer();
                      capabilities.setCapability("platform", "Windows 7");
                      capabilities.setCapability("version", "11.0");
@@ -931,7 +931,7 @@ public class MRScenario {
                      capabilities.setCapability("platform", "Windows 7");
                      capabilities.setCapability("version", "52.0");
                      capabilities.setCapability("screenResolution", "800x600");
-                }
+                }*/
                 capabilities.setCapability("autoAcceptsAlerts", true);
                 capabilities.setCapability("parent-tunnel", "sauce_admin");
                 capabilities.setCapability("tunnelIdentifier", "OptumSharedTunnel-Prd");
