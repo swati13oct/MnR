@@ -601,8 +601,8 @@ public class AccountHomePage extends UhcDriver {
 		String testharnessUrl = "https://member." +MRScenario.environment+"-aarpmedicareplans.uhc.com/content/aarpm/home/testharness.html";
 		driver.get(testharnessUrl);
 		if (MRScenario.environment.equalsIgnoreCase("team-h")) {
-			CommonUtility.waitForPageLoad(driver, driver.findElement(By.linkText("Go to Claims page")), 60); 	
-			driver.findElement(By.linkText("Go to Claims page")).click();
+			CommonUtility.waitForPageLoad(driver, driver.findElement(By.linkText("Go to Claims Redesign page")), 60); 	
+			driver.findElement(By.linkText("Go to Claims Redesign page")).click();
 		}
 		
 		else if (MRScenario.environment.equalsIgnoreCase("team-b")) {
