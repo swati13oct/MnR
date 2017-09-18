@@ -82,7 +82,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	@FindBy(xpath = "//div[@class='pdpplans_planbutton']/div[2]/div[2]/div[2]")
 	private WebElement hidePdpPlans;
 
-	@FindBy(xpath = "//div[@class='enabled ng-scope']")
+	@FindBy(xpath = "//div[@class='module-plan-overview module swiper-slide ng-scope']")
 	List<WebElement> maPlanElement;
 
 	@FindBy(xpath = "//div[@class='disabledprint ng-scope']")
@@ -736,9 +736,9 @@ public class VPPPlanSummaryPage extends UhcDriver {
 
 		}
 		CommonUtility.checkPageIsReady(driver);
-		if (driver.getTitle().equalsIgnoreCase("Plan Details | AARP® Medicare Plans from UnitedHealthcare®")
+		if (driver.getTitle().equalsIgnoreCase("Our Medicare Plans | AARP® Medicare Plans from UnitedHealthcare®")
 				|| driver.getTitle().equalsIgnoreCase("Plan Detail")) {
-			return new PlanDetailsPage(driver, planType);
+			return new PlanDetailsPage(driver);
 		}
 
 		return null;

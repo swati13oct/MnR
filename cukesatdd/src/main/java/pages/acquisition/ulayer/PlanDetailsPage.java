@@ -74,7 +74,7 @@ public class PlanDetailsPage extends UhcDriver {
 	@FindBy(id = "backToplans")
 	private WebElement backToAllPlans;
 	
-	@FindBy(xpath="//*[@id='detailTabs']/div[1]/a[1]")
+	@FindBy(id="medicalbenefits")
 	private WebElement medBenefitsTab;
 	
 	@FindBy(xpath="//*[@id='detail-0']/div/div/div[1]")
@@ -101,10 +101,10 @@ public class PlanDetailsPage extends UhcDriver {
 	@FindBy(xpath=".//*[@id='optionalRiders']")
 	private WebElement optRiderSection;
 	
-	@FindBy(xpath="//*[@id='detailTabs']/div[1]/a[1]")
+	@FindBy(id="plancosts")
 	private WebElement planCostsTab;
 	
-	@FindBy(xpath=".//*[@id='planCosts']")
+	@FindBy(id="planCosts")
 	private WebElement planCostsSection;
 	
 	private PageData vppPlanDetails;
@@ -118,22 +118,9 @@ public class PlanDetailsPage extends UhcDriver {
 	
 	public JSONObject planDocPDFAcqJson;
 
-	public PlanDetailsPage(WebDriver driver, String planType) {
+	public PlanDetailsPage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
-		CommonUtility.waitForPageLoad(driver, plandetails, CommonConstants.TIMEOUT_30);
-		String fileName = null;
-		if(planType.equalsIgnoreCase("MA")||planType.equalsIgnoreCase("MAPD"))
-		{
-			fileName = "maplandetails.json";
-		}
-		else
-		{
-			fileName = planType.toLowerCase()+"plandetails.json";
-		}
-
-		vppPlanDetails = CommonUtility.readPageData(fileName,
-				CommonConstants.PAGE_OBJECT_DIRECTORY_ULAYER_ACQ);
 		openAndValidate();
 	}
 
@@ -149,49 +136,10 @@ public class PlanDetailsPage extends UhcDriver {
 
 	@Override
 	public void openAndValidate() {
-		validate(plandetails);
-		validate(waysToSaveLink);
-		JSONObject jsonObject = new JSONObject();
-		for (String key : vppPlanDetails.getExpectedData().keySet()) {
-			List<WebElement> elements = findElements(vppPlanDetails.getExpectedData()
-					.get(key));
-			if (elements.size() == 1) {
-				validate(elements.get(0));
-				try {
-					jsonObject.put(key, elements.get(0).getText());
-				} catch (JSONException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-			} else if (elements.size() > 1) {
-				JSONArray jsonArray = new JSONArray();
-				for (WebElement element : elements) {
-
-					validate(element);
-					try {
-						JSONObject jsonObjectForArray = new JSONObject();
-						jsonObjectForArray.put(key, element.getText());
-						jsonArray.put(jsonObjectForArray);
-					} catch (JSONException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
-				}
-				try {
-					jsonObject.put(key, jsonArray);
-				} catch (JSONException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-
-			}
-
-		}
-		vppPlanDetailsJson = jsonObject;
-		System.out.println("vppPlanDetailsJson------>" + vppPlanDetailsJson);
-
-
-
+		validate(medBenefitsTab);
+		validate(presDrugTab);
+		validate(planCostsTab);
+		
 	}
 
 	public PlanInformationPage navigatetoenrollinplanlink(String planName)
@@ -378,8 +326,20 @@ public class PlanDetailsPage extends UhcDriver {
 	}
 
 	public boolean validateCompareBoxMessage() {
+		try {
+			Thread.sleep(4000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		compareChkBox.click();
-		if(compareMessageBox.getText().contains("1 plan added, please select another plan to continue"))
+		try {
+			Thread.sleep(1000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		if(compareMessageBox.getText().contains("2 plans added") && compareMessageBox.getText().contains("Compare plans") )
 			return true;
 		return false;
 	}

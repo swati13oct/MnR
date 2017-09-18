@@ -176,31 +176,10 @@ public class DCEAcqAarpStepDefinition {
 		
 	}
 	
-	@And("I navigate back to plan summary page")
-	public void navigateToPlanSummaryPage(){
+	@And("I navigate back to plan details page and verify correct message shows when clicked on compare check box")
+	public void navigateToPlanDetailsPage(){
 		DrugCostEstimatorPage dce = (DrugCostEstimatorPage) getLoginScenario().getBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE);
-		VPPPlanSummaryPage vppplansummarypage = dce.clickOnReturnLink();
-		if(vppplansummarypage!=null){
-			loginScenario.saveBean(PageConstants.VPP_PLAN_SUMMARY_PAGE, vppplansummarypage);
-		}else
-			Assert.fail("Error in loading the vpp summary page");
-	}
-
-	@Then("I navigate to view plan details page and click on add to compare box under prescription drugs tab and verify correct message")
-	public void navigateToPlanDetailsPageAndVerify(DataTable attributes){
-		List<DataTableRow> memberAttributesRow = attributes
-				.getGherkinRows();
-		Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
-		for (int i = 0; i < memberAttributesRow.size(); i++) {
-
-			memberAttributesMap.put(memberAttributesRow.get(i).getCells()
-					.get(0), memberAttributesRow.get(i).getCells().get(1));
-		}
-
-		String planName = memberAttributesMap.get("Plan Name");
-		String planType = memberAttributesMap.get("Plan Type");
-		VPPPlanSummaryPage vppsummarypage = (VPPPlanSummaryPage) loginScenario.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
-		PlanDetailsPage plandetailspage = vppsummarypage.navigateToPlanDetails(planName, planType);
+		PlanDetailsPage plandetailspage = dce.clickOnReturnLink();
 		if(plandetailspage!=null){
 			if(plandetailspage.validateCompareBoxMessage())
 				Assert.assertTrue(true);
@@ -210,7 +189,6 @@ public class DCEAcqAarpStepDefinition {
 			Assert.fail("Error in loading the plan details page");
 	}
 
-	
 	@Then("^I navigate to step3 page and validate$")
 	public void I_navigate_to_step_page(DataTable data) throws InterruptedException {
 		List<DataTableRow> memberAttributesRow = data.getGherkinRows();
@@ -227,6 +205,26 @@ public class DCEAcqAarpStepDefinition {
 	public void I_switch_to_generic_drug_and_validate() throws InterruptedException{
 		DrugCostEstimatorPage dce = (DrugCostEstimatorPage) getLoginScenario().getBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE);
 		dce.clickSwitchNow();
+	}
+	
+	@Then("^I switch the year to 2017 and change zipcode and verify that the pharmacy previously selected isn't there$")
+	public void switchYearandCheckPharmacy(DataTable memberAttributes){
+		List<DataTableRow> memberAttributesRow = memberAttributes
+				.getGherkinRows();
+		Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells()
+					.get(0), memberAttributesRow.get(i).getCells().get(1));
+		}
+
+		String zipcode = memberAttributesMap.get("Zipcode");
+		String radius = memberAttributesMap.get("Radius");
+		
+		DrugCostEstimatorPage dce = (DrugCostEstimatorPage) getLoginScenario().getBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE);
+		dce.switchYear();		
+		dce.pharmacyInformation(zipcode,radius);
+		
 	}
 	
 

@@ -491,8 +491,7 @@ public class DrugCostEstimatorPage extends UhcDriver {
 		Thread.sleep(5000);
 		//waitforElement(step2);
 		step2.click();
-		Thread.sleep(10000);
-		waitforElement(pharmacy_form);
+		Thread.sleep(5000);
 
 	}
 
@@ -722,7 +721,8 @@ public class DrugCostEstimatorPage extends UhcDriver {
 	}
 
 	public void select_first_pharmacy() throws InterruptedException {
-		Thread.sleep(15000);
+		driver.manage().window().maximize();
+		Thread.sleep(10000);
 
 		//waitforElement(select_btn_first);
 		System.out.println("first pharmacy");
@@ -1666,7 +1666,7 @@ public class DrugCostEstimatorPage extends UhcDriver {
 		
 	}
 	
-	public VPPPlanSummaryPage clickOnReturnLink() {
+	public PlanDetailsPage clickOnReturnLink() {
 		returnLink.click();	
 		try {
 			Thread.sleep(3000);
@@ -1674,9 +1674,19 @@ public class DrugCostEstimatorPage extends UhcDriver {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		if(currentUrl().contains("#/plan-summary"))
-			return new VPPPlanSummaryPage(driver);
+		if(currentUrl().contains("#/details"))
+			return new PlanDetailsPage(driver);
 		return null;
+	}
+	@FindBy(xpath = ".//*[@id='borderContainer']/div/div[2]/div[2]/button[1]")
+	private WebElement btn2017;
+	
+	@FindBy(xpath = ".//*[@id='drugspharmacy']/div[3]/ul[1]/li")
+	private WebElement selectedPharmSection;
+
+	public void switchYear(){
+		btn2017.click();
+		
 	}
 
 }

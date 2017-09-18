@@ -95,7 +95,6 @@ Given the user is on blayer medicare acq site landing page
 When I access the acquisition DCE tool from home page on ums site
 And I have added a drug to my drug list on ums site
 	|Drug|<drug>|
-And I navigate to step2 page on ums site
 And the user selects the pharmacy tab information
 	| Zipcode	  | <zipcode> |
 	| Radius  | <radius>   |
@@ -106,6 +105,7 @@ When I access the vpp page using below zipcode on ums site
 And I access the DCE tool
 	|Plan Type | <plantype> |
 Then I verify that the drug is still there
+	|Drug|<drug>|
 
  Examples:
 | drug|zipcode| radius|	plantype |

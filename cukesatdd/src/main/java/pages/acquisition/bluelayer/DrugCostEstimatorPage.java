@@ -514,11 +514,7 @@ public class DrugCostEstimatorPage extends UhcDriver {
 
 	public void navigateToStep2() throws InterruptedException {
 		Thread.sleep(5000);
-		//waitforElement(step2);
 		step2.click();
-		Thread.sleep(5000);
-		waitforElement(pharmacy_form);
-
 	}
 
 	public void backwardToStep1() {
@@ -534,11 +530,9 @@ public class DrugCostEstimatorPage extends UhcDriver {
 	}
 
 	public void pharmacyInformation(String zipcode, String radius) {
-		validate(step2PharmacyTab);
-		validate(zipcodeInput);
-		validate(milesSelection);
+
 		step2.click();
-		sendkeys(zipcodeInput, zipcode); // not sure what webelement to use
+		sendkeys(zipcodeInput, zipcode); 
 		SearchLink.click();
 		// Select options = new Select(milesSelection);
 		// options.selectByVisibleText(radius);
