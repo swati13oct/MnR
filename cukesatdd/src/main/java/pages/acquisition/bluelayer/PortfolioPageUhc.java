@@ -275,8 +275,7 @@ public ResponsivePlanSummaryUhc searchPlans(String zipcode, String CountyName) {
 	    zipCodeField.sendKeys(Keys.ENTER);
 	    //remove thread once page is stable
 	    List<WebElement> countyActuals = driver.findElements(By.xpath("//a[@class='ng-binding ng-pristine ng-valid']"));
-	    System.out.println(countyActuals.size());
-	    
+	    System.out.println(countyActuals.size());	    
 	    for(int i=0; i<=countyActuals.size()-1;i++){
 	    	System.out.println(CountyName);
 	    	if(countyActuals.get(i).getText().equals(CountyName)){
@@ -286,7 +285,7 @@ public ResponsivePlanSummaryUhc searchPlans(String zipcode, String CountyName) {
 	    		break;
 	    	}
 	    }
-		if (driver.getTitle().equalsIgnoreCase("Our Medicare Plans | UnitedHealthcare®")) {
+		if (driver.getTitle().contains("Our Medicare Plan Types | UnitedHealthcare")) {
 			return new ResponsivePlanSummaryUhc(driver);
 		} 
 		return null;
