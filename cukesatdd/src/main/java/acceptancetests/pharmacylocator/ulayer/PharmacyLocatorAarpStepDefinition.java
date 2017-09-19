@@ -74,6 +74,7 @@ public class PharmacyLocatorAarpStepDefinition {
 
 	}
 
+	
 	@And("^the user enters following details for pharmacy search in AARP Site$")
 	public void user_enters_zipcode_distance_details_aarp(DataTable zipAttributes) {
 		List<DataTableRow> zipAttributesRow = zipAttributes.getGherkinRows();
@@ -95,6 +96,9 @@ public class PharmacyLocatorAarpStepDefinition {
 
 		PharmacySearchPage pharmacySearchPage = (PharmacySearchPage) getLoginScenario()
 				.getBean(PageConstants.PHARMACY_SEARCH_PAGE);
+		System.out.println("Zip Code is"+zipcode);
+		System.out.println("Distance is"+distance);
+		System.out.println("County is"+county);
 		pharmacySearchPage = pharmacySearchPage.enterZipDistanceDetails(
 				zipcode, distance, county);
 

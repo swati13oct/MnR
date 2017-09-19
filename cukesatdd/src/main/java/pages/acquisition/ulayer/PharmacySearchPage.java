@@ -6,6 +6,7 @@ package pages.acquisition.ulayer;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -109,13 +110,13 @@ public class PharmacySearchPage extends UhcDriver {
 	@FindBy(xpath = ".//*[@tabindex='0']")
 	private WebElement toolTip;
 	
-	@FindBy(xpath = ".//*[@for='pharmacy-saver']")
+	@FindBy(xpath = ".//*[@id='pharmacy-saver']")
 	private WebElement multilangfilter;
-	
-	@FindBy(xpath="//span[@class='errorRedColorFormat']")
+
+	@FindBy(xpath="//*[contains(text(), 'There were errors in the information ')]")
 	private WebElement noZipcode;
 	
-	@FindBy(xpath="//span[@ng-show='vadiationZipError']")
+	@FindBy(xpath="//*[contains(text(), 'ZIP code must be numeric, and contain 5 ')]")
 	private WebElement invalidZip;
 
 
@@ -134,13 +135,13 @@ public class PharmacySearchPage extends UhcDriver {
 		
 		searchbtn.click();
 		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+		System.out.println("*****Zipcode, distance and County details are entered******");
 
 		//selectFromDropDown(distanceDropDown, distance);
 
 		//continueField.click();
 		CommonUtility.checkPageIsReady(driver);
-		if (countyPopOut.isDisplayed()) {
-			
+		if (!planType.isEnabled()) {
 			for (WebElement webElement : countyList) {
 				if (webElement.getText().contains(county)) {
 					webElement.click();
@@ -148,11 +149,16 @@ public class PharmacySearchPage extends UhcDriver {
 				}
 			}
 		}
+		else{
+			System.out.println("County Popup not displayed");
+		}
 		if (driver.getTitle().equalsIgnoreCase(
 				"Locate a Pharmacy | UnitedHealthcare®")) {
 			return new PharmacySearchPage(driver);
 		}
-		return null;
+		else {
+			return null;
+		}
 		
 	}
 
@@ -164,7 +170,8 @@ public class PharmacySearchPage extends UhcDriver {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-*/		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+*/		
+		driver.manage().timeouts().implicitlyWait(5000, TimeUnit.SECONDS);
 		
 		Select select = new Select(planType);	
 		select.selectByVisibleText(planName);
@@ -314,14 +321,14 @@ public class PharmacySearchPage extends UhcDriver {
 		
 		Select dropDown = new Select(planYearDropDown);		
 		try {
-			Thread.sleep(5000);
+			Thread.sleep(10000);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		dropDown.selectByValue("1");
 		try {
-			Thread.sleep(5000);
+			Thread.sleep(10000);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -338,10 +345,17 @@ public class PharmacySearchPage extends UhcDriver {
 			e.printStackTrace();
 		}
 		CommonUtility.checkPageIsReady(driver);
-		driver.manage().timeouts().implicitlyWait(1400, TimeUnit.SECONDS);
+		driver.manage().timeouts().implicitlyWait(3000, TimeUnit.SECONDS);
+		if (filterLink.isDisplayed()){
+			return new PharmacySearchPage(driver);
 		
-		filterLink.click();
-		return new PharmacySearchPage(driver);
+		}
+		else
+		{
+			System.out.println("****************Pharmacy Search Page not Loaded*************************");
+			System.out.println("****************Pharmacy Search Page not Loaded*************************");
+			return null;
+		}
 	}
 	
 	public PharmacySearchPage clickChinese(){
@@ -364,7 +378,14 @@ public class PharmacySearchPage extends UhcDriver {
     public PharmacySearchPage multilangPharmacySearchResult() {
 		
 		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
-		multilangfilter.click();
+		System.out.println("Filter text is :*******"+filterLink.getText());
+		if (filterLink.getText().contains("FILTRAR")){
+			System.out.println("Spanish Language Filter displayed");
+		}
+		else if(!filterLink.getText().contains("Filter")){
+			System.out.println("Chinese Language Filter displayed");
+		}
+		//multilangfilter.click();
 		
 		return null;
 	}

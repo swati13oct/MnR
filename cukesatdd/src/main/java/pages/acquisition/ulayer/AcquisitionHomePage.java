@@ -1277,8 +1277,8 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	}
 	
 	public PharmacySearchPage navigateToRequestMoreHelp() {
-		driver.navigate().to("https://www.team-a-aarpmedicareplans.uhc.com/health-plans/medicare-advantage-plans/request-information.html");
-		if (getTitle().equalsIgnoreCase("Request MA Plan Information | AARP Medicare Plans from UnitedHealthcare")) {
+		//driver.navigate().to("https://www.team-a-aarpmedicareplans.uhc.com/health-plans/medicare-advantage-plans/request-information.html");
+		driver.navigate().to("https://www.awe-test-a-aarpmedicareplans.uhc.com/health-plans/medicare-advantage-plans/request-information.html");if (getTitle().equalsIgnoreCase("Request MA Plan Information | AARP Medicare Plans from UnitedHealthcare")) {
 			return new PharmacySearchPage(driver);
 
 		}
@@ -1286,7 +1286,8 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	}
 	
 	public PharmacyResultPage navigateToRequestMoreHelpForPdp() {
-		driver.navigate().to("https://www.team-a-aarpmedicareplans.uhc.com/health-plans/prescription-drug-plans/request-information.html");
+		//driver.navigate().to("https://www.team-a-aarpmedicareplans.uhc.com/health-plans/prescription-drug-plans/request-information.html");
+		driver.navigate().to("https://www.awe-test-a-aarpmedicareplans.uhc.com/health-plans/prescription-drug-plans/request-information.html");
 		if (getTitle().equalsIgnoreCase("More Help & Information - Medicare Part D Plans | AARP® Medicare Plans from UnitedHealthcare")) {
 			return new PharmacyResultPage(driver);
 		}
