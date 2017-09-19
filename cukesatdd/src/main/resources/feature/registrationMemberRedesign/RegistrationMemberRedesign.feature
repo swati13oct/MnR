@@ -15,7 +15,7 @@ Feature: To test registration flow in redesign portal
     Examples: 
       | Plantype           | planMemberId | dateOfBirth | planname                                             |
     #team-h and dev-c
-      | MAPD COSMOS        | 935442812    | 03-03-1952  | UnitedHealthcare MedicareComplete Plan 1 (HMO)       |
+     # | MAPD COSMOS        | 935442812    | 03-03-1952  | UnitedHealthcare MedicareComplete Plan 1 (HMO)       |
       #| MA NICE            | 001605069    | 09-06-1935  | AARP MedicareComplete SecureHorizons Essential (HMO) |
       #| MA COSMOS          | 944089527    | 09-16-1945  | AARP MedicareComplete Essential (HMO)                |
       #| MAPD NICE          | 006916255    | 08-13-1931  | Sharp SecureHorizons Plan by UnitedHealthcare (HMO)  |
@@ -28,7 +28,7 @@ Feature: To test registration flow in redesign portal
      # | SHIP MedSupp + PDP | 1011277011   | 05-13-1929  | AARP MedicareRx Saver Plus (PDP)                     |
      # | SHIP MedSupp + PDP | 101127701-11 | 05-13-1929  | AARP MEDICARE SUPPLEMENT PLAN                        |
      #team-h and dev-c
-      | SHIP 50-64 + MA    | 006880152    | 05-09-1934  | AARP MedicareComplete SecureHorizons Essential (HMO) |
+     # | SHIP 50-64 + MA    | 006880152    | 05-09-1934  | AARP MedicareComplete SecureHorizons Essential (HMO) |
       #| SHIP 50-64 + MA    | 006880152-11 | 05-09-1934  | AARP GROUP HOSPITAL PLAN                             |
      # | SHIP 50-64 + MAPD  | 006969409    | 03-16-1953  | AARP MedicareComplete SecureHorizons Plan 1 (HMO)    |
      # | SHIP 50-64 + MAPD  | 006969409-11 | 03-16-1953  | AARP GROUP HOSPITAL PLAN                             |
@@ -42,24 +42,24 @@ Feature: To test registration flow in redesign portal
      # | Group SSRD         | 915897367    | 10-13-1946  | UnitedHealthcare Senior Supplement                   |
      # | Group PDP          | 0130686931   | 03-12-1948  | UnitedHealthcare MedicareRx for Groups (PDP)         |
 
-  Scenario Outline: To verify registration Additional Information Section
-    Given the member is on registration page of new portal part of redesign
-    When the member enter the member ID into Member ID field
-      | Plan Member ID | <planMemberId> |
-    And member enter date of birth in the date of birth dropdown
-      | Date of birth | <dateOfBirth> |
-    When member click Next
-    Then the member navigate to additional information section
-    And member enter additional information
-      | Zip Code   | <zipCode>   |
-      | First Name | <firstName> |
-      | Last Name  | <lastName>  |
+ # Scenario Outline: To verify registration Additional Information Section
+  #  Given the member is on registration page of new portal part of redesign
+   # When the member enter the member ID into Member ID field
+   #   | Plan Member ID | <planMemberId> |
+  #  And member enter date of birth in the date of birth dropdown
+   #   | Date of birth | <dateOfBirth> |
+   # When member click Next
+   # Then the member navigate to additional information section
+  #  And member enter additional information
+   #   | Zip Code   | <zipCode>   |
+    #  | First Name | <firstName> |
+     # | Last Name  | <lastName>  |
 
-    Examples: 
-      | planMemberId | dateOfBirth | zipCode | firstName | lastName |
-     # | 920748371    | 03-02-1940  | 03855   | AABE      | BEAAEEF  |
-     # | 008666811    | 02-22-1951  | 95380   | BCDBC     | DBDE     |
-      | 0186083571   | 05-27-1951  | 24524   | CDABDAF   | FFACFEFC |
+	  #  Examples: 
+	   #   | planMemberId | dateOfBirth | zipCode | firstName | lastName |
+	     # | 920748371    | 03-02-1940  | 03855   | AABE      | BEAAEEF  |
+	     # | 008666811    | 02-22-1951  | 95380   | BCDBC     | DBDE     |
+     # | 0186083571   | 05-27-1951  | 24524   | CDABDAF   | FFACFEFC |  */
 
   Scenario Outline: To verify registration existing member error page
     Given the member is on registration page of new portal part of redesign
