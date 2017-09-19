@@ -150,8 +150,8 @@ public class RegistrationDashboardStepDefinition {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		String actualPlanName = registrationInformationPage.getPlanName()
-				.getText();
+		String actualPlanName = registrationInformationPage.getPlanName().getText();
+		System.out.println(actualPlanName);
 		Assert.assertEquals(expectedPlanName, actualPlanName);
 	}
 
@@ -234,9 +234,10 @@ public class RegistrationDashboardStepDefinition {
 	}
 
 	@And("^Previous button is displayed$")
-	public void previousButtonIsDisplayed() {
+	public void previousButtonIsDisplayed() throws InterruptedException {
 		RegistrationInformationPage registrationInformationPage = (RegistrationInformationPage) getLoginScenario()
 				.getBean(PageConstants.REGISTRATION_INFORMATION_PAGE);
+		Thread.sleep(1000);
 		registrationInformationPage.getPreviousButton().isDisplayed();
 	}
 
