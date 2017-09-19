@@ -203,6 +203,10 @@ public class EnrollInPlanAarpStepDefinition {
 		
 		BeneficiaryInformationPage beneficiaryInformationPage = introInformationPage
 				.navigatesToNextStep();
+		
+		getLoginScenario().saveBean(
+				PageConstants.BENEFICIARY_INFORMATION_PAGE,
+				beneficiaryInformationPage);
 
 		boolean hasEnrolled = introInformationPage.hasEnrolledInLast24hrs();
 		getLoginScenario().saveBean(EnrollInPlanCommonConstants.HAS_ENROLLED,
