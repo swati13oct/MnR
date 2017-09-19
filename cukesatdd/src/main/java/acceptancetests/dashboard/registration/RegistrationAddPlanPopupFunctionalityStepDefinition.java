@@ -192,12 +192,12 @@
                                 }
 
                 @Then("^the user is navigated to  Multiple Plan Variation View and the checkbox is checked for both the plans$")
-                public void navigatetoMultiPlanView()
+                public void navigatetoMultiPlanView() throws InterruptedException
                 {
                                 RegistrationInformationPage registrationInformationPage = (RegistrationInformationPage) 
                                                                 getLoginScenario().getBean(PageConstants.REGISTRATION_INFORMATION_PAGE);
                                  
-                                
+                                Thread.sleep(10000);
                                Assert.assertTrue(registrationInformationPage.getcheckbox1().isSelected());
                                Assert.assertTrue(registrationInformationPage.getcheckbox2().isSelected());
                                
