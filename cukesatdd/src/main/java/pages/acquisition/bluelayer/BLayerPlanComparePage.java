@@ -15,16 +15,16 @@ import pages.acquisition.bluelayer.ResponsivePlanSummaryUhc;
 
 public class BLayerPlanComparePage extends UhcDriver {
 	
-	@FindBy(xpath = ".//*[@id='plan-list-1']/div/div[2]/div/div[1]/div[3]/div/div/span[1]/label")
+	@FindBy(xpath = ".//*[@id='plan-list-1']/div/div[3]/div/div[1]/div[3]/div/div/span[1]/label")
 	private WebElement Plan2HMO;
 	
-	@FindBy(xpath = ".//*[@id='plan-list-1']/div/div[2]/div/div[2]/div[3]/div/div/span[1]/label")
+	@FindBy(xpath = "//*[@id='plan-list-1']/div/div[3]/div/div[2]/div[3]/div/div/span[1]/label")
 	private WebElement Plan1HMO;
 	
-	@FindBy(xpath = ".//*[@id='plan-list-1']/div/div[2]/div/div[2]/div[3]/div/div/span[3]/a")
+	@FindBy(xpath = ".//*[@id='plan-list-1']/div/div[3]/div/div[2]/div[3]/div/div/span[3]/a")
 	private WebElement ComparePlansLink;
 	
-	@FindBy(xpath = ".//*[@id='plan-list-1']/div/div[2]/div/div[1]/div[3]/div/div/span[3]/a")
+	@FindBy(xpath = ".//*[@id='plan-list-1']/div/div[3]/div/div[1]/div[3]/div/div/span[3]/a")
 	private WebElement ComparePlanLink;	
 	
 	@FindBy(xpath = ".//*[@id='site-wrapper']/div[4]/div/div/div/div/div/div/div/div/div[1]/div[1]/div/div[1]/a")
@@ -92,7 +92,7 @@ public class BLayerPlanComparePage extends UhcDriver {
 
 	public BLayerPlanComparePage SelectAllPlans() throws InterruptedException {
 		
-		Thread.sleep(4000);
+		Thread.sleep(7000);
 		JavascriptExecutor jse = (JavascriptExecutor)driver;
 		jse.executeScript("window.scrollBy(0,100)", "");
 		Plan2HMO.click();		
