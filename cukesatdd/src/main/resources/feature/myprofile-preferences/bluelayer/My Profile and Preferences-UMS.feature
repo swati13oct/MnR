@@ -246,7 +246,7 @@ Feature: To test My Profile & Preferences flow in UMS site
       | MA       |
 
   @PhoneEdit
-  Scenario Outline: To verify Phone in Aarp site
+  Scenario Outline: To verify Phone Edit Functionality
     Given registered member with following details for Profile and Preferences flow
       | <planType> |
     Then the user navigates to Profile and Preferences page
@@ -260,3 +260,41 @@ Feature: To test My Profile & Preferences flow in UMS site
       | planType |
       #| MAPD     |
       | MA       |
+
+  @TemporaryAddress
+  Scenario Outline: To verify Temporary adrress and Edit Functionality
+    Given registered member with following details for Profile and Preferences flow
+      | <planType> |
+    Then the user navigates to Profile and Preferences page
+    Then the user validates the temporary address section
+    Then the user clicks on the edit link and  validates the fieldsand Buttons of temp address section
+    Then the user checks the Edit Button on the top changes to Cancel Button
+    Then the user validates the functionality of save Button in Temporary adrress section
+    Then the user validates the functionality of Cancel Button In Temporary adrress section
+
+    Examples: 
+      | planType |
+      #| MAPD     |
+      | MA       |
+
+  @GoGreen
+  Scenario Outline: To verify Go Green page
+    Given registered member with following details for Profile and Preferences flow
+      | <planType> |
+    Then the user navigates to Profile and Preferences page
+    Then the user validates the presence of Go Paperless button
+    Then the user validates the presence of Plan Name
+    Then the user validates the presence of Communication prefernces header
+    Then the user validates the presence of Back to Profile and Preferences links
+    Then the user validates the Note section
+    Then the user validates the I have read checkbox and check it
+    Then the user validates the Save Preferences Button
+    Then the user validates the Go Green Header
+    
+    
+    
+     Examples: 
+      | planType |
+      #| MAPD     |
+      | MA       |
+    

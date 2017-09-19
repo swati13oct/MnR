@@ -5,6 +5,7 @@ package pages.member.ulayer;
 
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -186,6 +187,39 @@ public class ProfileandPreferencesPage extends UhcDriver {
 
 	@FindBy(xpath = "html/body/div[3]/div/div[1]/div/header/div/div/div/div/div/div/a")
 	private WebElement Profilenprefernceslink;
+	
+	@FindBy(xpath = ("//*[contains(text(), 'Go Paperless')]"))
+	private WebElement goPaperlessButton;
+
+	@FindBy(xpath = "//*[@id='mail-preferences-selector']/div/div/div/div/div[1]/p")
+	private WebElement planNameGoGreen;
+
+	@FindBy(xpath = "/html/body/div[4]/div/div[1]/div/header/div/div/div/div/div/div/h1")
+	private WebElement communicationPreferences;
+
+	@FindBy(xpath = "/html/body/div[4]/div/div[1]/div/header/div/div/div/div/div/div/a")
+	private WebElement backLink1;
+
+	@FindBy(xpath = "/html/body/div[4]/div/div[1]/div/main/div[1]/div/div/div/div/a")
+	private WebElement backLink2;
+
+	@FindBy(xpath = "/html/body/div[4]/div/div[1]/div/main/div[1]/section/div/div[3]/div/p")
+	private WebElement NoteSection;
+
+	@FindBy(xpath = "//*[@id='preferences-form']/div/div[1]/div[4]/div/label")
+	private WebElement iHavereadCheckbox;
+
+	@FindBy(id = "save-prefs-btn")
+	private WebElement savePreferencesButton;
+
+	@FindBy(linkText = "Edit Preferences")
+	private WebElement EditPreferenceButton;
+
+	@FindBy(xpath = "/html/body/div[4]/div[1]/div[1]/div/main/div[1]/section/div/div[1]/div/div/div[2]/h2")
+	private WebElement GoGreenHeader;
+
+	@FindBy(xpath = "/html/body/div[4]/div[1]/div[1]/div/main/div[1]/section/div/div[1]/div/div/div[2]/p")
+	private WebElement GoGreenText;
 
 	public static final String Disclaimerlinkcontent_xpath = ".//*[@id='collapseDisclaimer']";
 
@@ -551,6 +585,80 @@ public class ProfileandPreferencesPage extends UhcDriver {
 			return new ProfilePreferencesPage(driver);
 		}
 		return null;
+	}
+	
+	
+	public void validateGoPaperlessbutton() {
+		// TODO Auto-generated method stub
+		validateNew(goPaperlessButton);
+		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+	}
+
+	public void validatePlanName() {
+		goPaperlessButton.click();
+
+		validateNew(planNameGoGreen);
+	}
+
+	public void validatecommunicationpreferencesheader() {
+
+		validateNew(communicationPreferences);
+		if (communicationPreferences.isDisplayed()) {
+			String cp = communicationPreferences.getText();
+
+			System.out.println(cp);
+			Assert.assertTrue(cp.equalsIgnoreCase("Communication Preferences"));
+		}
+
+	}
+
+	public void validateBacktoPNPlink() throws InterruptedException {
+
+		validateNew(backLink1);
+		backLink1.click();
+		goPaperlessButton.click();
+		validateNew(backLink2);
+		backLink2.click();
+
+	}
+
+	public void validateNoteSection() {
+		goPaperlessButton.click();
+		validateNew(NoteSection);
+		String noteContentActual = NoteSection.getText();
+		String noteContentExpected = "Note: it may take up to two mail cycles for your updated delivery preferences to take effect. Your mailing cycle-the length of time between documents-varies by document. When the paper mailings stop, you will receive an email notification alerting you that a new document has been posted to your online account.";
+		Assert.assertTrue(noteContentActual.equalsIgnoreCase(noteContentExpected));
+
+	}
+
+	public void validateCheckbox() {
+		// TODO Auto-generated method stub
+		validateNew(iHavereadCheckbox);
+		iHavereadCheckbox.click();
+	}
+
+	public void validateSavePreferences() {
+		// TODO Auto-generated method stub
+		validateNew(savePreferencesButton);
+		if (iHavereadCheckbox.isSelected()) {
+			savePreferencesButton.click();
+			validateNew(EditPreferenceButton);
+		}
+
+	}
+
+	public void validateGoGreenHeader() {
+		validateNew(GoGreenHeader);
+		validateNew(GoGreenText);
+
+		if (GoGreenText.isDisplayed())
+
+		{
+			String GoGreenContentActual = GoGreenText.getText();
+			String GoGreenContentExpected = "Select the plan materials you want to sign up for paperless delivery per the terms and conditions below.";
+
+			Assert.assertTrue(GoGreenContentActual.equalsIgnoreCase(GoGreenContentExpected));
+		}
 	}
 
 }

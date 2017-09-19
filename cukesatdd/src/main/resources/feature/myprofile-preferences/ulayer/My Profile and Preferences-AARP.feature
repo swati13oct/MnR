@@ -95,9 +95,7 @@ Feature: To test My Profile & Preferences in AARP site
   #       | MS       | Claims-Online									|
   #       | HIP      | Claims-Online									|
   ##- working examples
-  
   #@@@@@@@@@@@@@@@@@@memberRedesignPage@@@@@@@@@@@@@@@@@@@@@
-  
   @ValidatePlanNamemembernameIDAccountSectionAARP
   Scenario Outline: To verify Plan Name, Member name, Member ID section in AARP site
     Given registered member with following details for Profile and Preferences flow
@@ -105,15 +103,13 @@ Feature: To test My Profile & Preferences in AARP site
     When the user navigates to Profile and Preferences page
     Then the user validates the Plan Name, Member name, Member ID section in AARP site
 
-       Examples: 
+    Examples: 
       | planType |
-     #| PDP     |
+      #| PDP     |
       | MAPD     |
-     #| MA       |
-      |SHIP      |
-      
-      
-      
+      #| MA       |
+      | SHIP     |
+
   @ValidateEmail
   Scenario Outline: To verify Email section in AARP site
     Given registered member with following details for Profile and Preferences flow
@@ -121,13 +117,13 @@ Feature: To test My Profile & Preferences in AARP site
     When the user navigates to Profile and Preferences page
     And the user validates the Email section in AARP site
 
-       Examples: 
+    Examples: 
       | planType |
-    #| PDP     |
+      #| PDP     |
       | MAPD     |
-      #| MA       |
-      
-   @PasswordEdit
+
+  #| MA       |
+  @PasswordEdit
   Scenario Outline: To verify the edit functionality in Account Profile section in AARP site
     Given registered member with following details for Profile and Preferences flow
       | <planType> |
@@ -136,122 +132,133 @@ Feature: To test My Profile & Preferences in AARP site
     Then the user validates the functionality of save Button
     Then the user validates the functionality of Cancel Button
 
-       Examples: 
+    Examples: 
       | planType |
-     #| PDP      |
+      #| PDP      |
       | MAPD     |
-     #| MA       |
-     
-    @PasswordEdit1
-     Scenario Outline: To verify the edit functionality in Account Profile section in AARP site
+
+  #| MA       |
+  @PasswordEdit1
+  Scenario Outline: To verify the edit functionality in Account Profile section in AARP site
     Given registered member with following details for Profile and Preferences flow
       | <planType> |
     When the user navigates to Profile and Preferences page
     Then the user validates the elements on clicking the edit link
     Then the user clicks on save button without filling current and new password and the red mandatory message should come
-    
+
     Examples: 
       | planType |
-     #| PDP      |
+      #| PDP      |
       | MAPD     |
-     #| MA       |
-    
-    @EmailEdit1
-      Scenario Outline: To verify Email section in AARP site
+
+  #| MA       |
+  @EmailEdit1
+  Scenario Outline: To verify Email section in AARP site
     Given registered member with following details for Profile and Preferences flow
       | <planType> |
     When the user navigates to Profile and Preferences page
     Then the user clicks on edit button
     Then the user clicks on save without filling both fields then the user should see red mandatory message
     Then the user fill new email address and click save then user should see new updated email on page
-    
-         Examples: 
+
+    Examples: 
       | planType |
-     #| PDP      |
+      #| PDP      |
       | MAPD     |
-     #| MA       |
-      
-     @EmailEdit2
-     Scenario Outline: To verify Email section in AARP site
+
+  #| MA       |
+  @EmailEdit2
+  Scenario Outline: To verify Email section in AARP site
     Given registered member with following details for Profile and Preferences flow
       | <planType> |
     When the user navigates to Profile and Preferences page
     Then the user clicks on edit button
     Then the user fill invalid email and clicks on save button then the user should see error message for invalid email
     Then the user fill different email id in confirm email box from new email address then error message should come
-    
-         Examples: 
+
+    Examples: 
       | planType |
-     #| PDP      |
-     #| MAPD     |
+      #| PDP      |
+      #| MAPD     |
       | MA       |
-      
-      
-     @Needhelp
-     Scenario Outline: To verify the edit functionality in Account Profile section in AARP site
+
+  @Needhelp
+  Scenario Outline: To verify the edit functionality in Account Profile section in AARP site
     Given registered member with following details for Profile and Preferences flow
       | <planType> |
     When the user navigates to Profile and Preferences page
     Then the user validates disclaimer link and on clicking disclaimer link it should expand and on again clicking it should collapse
     And the user validates the need help section
-    And the user validates see more ways to contact us section 
+    And the user validates see more ways to contact us section
     And the user validates on clicking contact us link it should route to contact us page
-    
-     Examples: 
+
+    Examples: 
       | planType |
-     #| PDP      |
-     #| MAPD     |
+      #| PDP      |
+      #| MAPD     |
       | MA       |
-      
-      @PermanentAddress
-       Scenario Outline: To verify the edit functionality in Account Profile section in AARP site
+
+  @PermanentAddress
+  Scenario Outline: To verify the edit functionality in Account Profile section in AARP site
     Given registered member with following details for Profile and Preferences flow
       | <planType> |
     When the user navigates to Profile and Preferences page
     Then the user validates permanent address section
     And the user clicks on contact us then contact us page should come
-    
+
     Examples: 
       | planType |
-     #| PDP      |
+      #| PDP      |
       | MAPD     |
-     #| MA       |  
-      
-      
-      @PhoneEdit
-      Scenario Outline: To verify Phone in Aarp site
-      Given registered member with following details for Profile and Preferences flow
+
+  #| MA       |
+  @PhoneEdit
+  Scenario Outline: To verify Phone in Aarp site
+    Given registered member with following details for Profile and Preferences flow
       | <planType> |
-      Then the user navigates to Profile and Preferences page
-      Then the user validates the Phone section
-      Then the user Clicks on the the Edit Link and validates the elements
-      Then the user checks the Edit Button changes to Cancel Button
-      Then the user validates the functionality of save Button in Phoneeditsection 
-      Then the user validates the functionality of Cancel Button In phoneeditSection
-      
+    Then the user navigates to Profile and Preferences page
+    Then the user validates the Phone section
+    Then the user Clicks on the the Edit Link and validates the elements
+    Then the user checks the Edit Button changes to Cancel Button
+    Then the user validates the functionality of save Button in Phoneeditsection
+    Then the user validates the functionality of Cancel Button In phoneeditSection
 
     Examples: 
       | planType |
       #| MAPD     |
-       | MA       |
-       
-    @CommunicationPreferences
-     Scenario Outline: To verify Go green in AARP site
-      Given registered member with following details for Profile and Preferences flow
+      | MA       |
+
+  @CommunicationPreferences
+  Scenario Outline: To verify Go green in AARP site
+    Given registered member with following details for Profile and Preferences flow
       | <planType> |
-      Then the user navigates to Profile and Preferences page
+    Then the user navigates to Profile and Preferences page
     Then the user validates Communication Preferences section
     And the user validates Go paperless button and on clicking button go green page should come
-    And the user validates headers on green page 
+    And the user validates headers on green page
     And the user validates on clicking Profilenpreferences arrow user should route to Profile and Preferences page
-      Examples: 
+
+    Examples: 
       | planType |
-     #| PDP      |
-     #| MAPD     |
+      #| PDP      |
+      #| MAPD     |
       | MA       |
-      
-      
-      
-     
-      
-      
+
+  @GoGreen
+  Scenario Outline: To verify Go Green page
+    Given registered member with following details for Profile and Preferences flow
+      | <planType> |
+    Then the user navigates to Profile and Preferences page
+    Then the user validates the presence of Go Paperless button
+    Then the user validates the presence of Plan Name
+    Then the user validates the presence of Communication prefernces header
+    Then the user validates the presence of Back to Profile and Preferences links
+    Then the user validates the Note section
+    Then the user validates the I have read checkbox and check it
+    Then the user validates the Save Preferences Button
+    Then the user validates the Go Green Header
+
+    Examples: 
+      | planType |
+      #| MAPD     |
+      | MA       |
