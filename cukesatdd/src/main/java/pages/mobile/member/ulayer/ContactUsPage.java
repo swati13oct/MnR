@@ -301,9 +301,7 @@ public class ContactUsPage extends UhcDriver{
 				e.printStackTrace();
 			}
 			continueButton.click();
-			waitforElement(ConfirmationWidgetButton);
-			
-			waitforElement(sendAmessageButton);
+			//waitforElement(ConfirmationWidgetButton);
 			
 			try {
 				Thread.sleep(5000);
@@ -312,6 +310,7 @@ public class ContactUsPage extends UhcDriver{
 				e.printStackTrace();
 			}
 			
+			waitforElement(sendAmessageButton);
 			
 		}
 		else

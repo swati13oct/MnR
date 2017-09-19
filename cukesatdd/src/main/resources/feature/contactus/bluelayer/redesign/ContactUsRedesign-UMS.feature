@@ -27,7 +27,7 @@ Feature: To test Send us a question Widget and Click to call functionality in co
       | userName      |  | password   | memberType |
       | q3_sep_grp098 |  | Password@1 | Group      |
 
-  Scenario Outline: Verify Send us a question Widget section in contact us redesign page
+  Scenario Outline: Verify cancel click on Group secure email widget  in redesign contact us page
     Given registered UMS member with following attributes
       | UserName    | <userName>   |
       | Password    | <password>   |
@@ -39,7 +39,7 @@ Feature: To test Send us a question Widget and Click to call functionality in co
       | userName      |  | password   | memberType |
       | q3_sep_grp098 |  | Password@1 | Group      |
 
-  Scenario Outline: Verify Send us a question Widget section in contact us redesign page
+  Scenario Outline: Verify user clicks on submit question by selecting Finding a Physician option in redesign contact us page
     Given registered UMS member with following attributes
       | UserName    | <userName>   |
       | Password    | <password>   |
@@ -100,7 +100,7 @@ Feature: To test Send us a question Widget and Click to call functionality in co
       | userName      |  | password   | memberType |
       | q3_sep_grp098 |  | Password@1 | Group      |
 
-  Scenario Outline: validating emailIds in contact us redesign page
+  Scenario Outline: validate user enters invalidate Confirm email ID in sendUS A question widget in contact us redesign page
     Given registered UMS member with following attributes
       | UserName    | <userName>   |  |
       | Password    | <password>   |  |
@@ -112,7 +112,7 @@ Feature: To test Send us a question Widget and Click to call functionality in co
       | userName      |  | password   | memberType |
       | q3_sep_grp098 |  | Password@1 | Group      |
 
-  Scenario Outline: validating emailIds in contact us redesign page
+  Scenario Outline: validateuser enters invalidate alternative email ID in sendUS A question widget in contact us redesign page
     Given registered UMS member with following attributes
       | UserName    | <userName>   |  |
       | Password    | <password>   |  |
@@ -124,7 +124,7 @@ Feature: To test Send us a question Widget and Click to call functionality in co
       | userName      |  | password   | memberType |
       | q3_sep_grp098 |  | Password@1 | Group      |
 
-  Scenario Outline: validating emailIds in contact us redesign page
+  Scenario Outline: validate user enters invalidate Confirm email ID in sendUS A question widget in contact us redesign page
     Given registered UMS member with following attributes
       | UserName    | <userName>   |  |
       | Password    | <password>   |  |
@@ -136,7 +136,7 @@ Feature: To test Send us a question Widget and Click to call functionality in co
       | userName      |  | password   | memberType |
       | q3_sep_grp098 |  | Password@1 | Group      |
 
-  Scenario Outline: validating emailIds in contact us redesign page
+  Scenario Outline: validate user enters blank text  in sendUS A question  message widget in contact us redesign page
     Given registered UMS member with following attributes
       | UserName    | <userName>   |  |
       | Password    | <password>   |  |
@@ -148,7 +148,7 @@ Feature: To test Send us a question Widget and Click to call functionality in co
       | userName      |  | password   | memberType |
       | q3_sep_grp098 |  | Password@1 | Group      |
 
-  Scenario Outline: validating emailIds in contact us redesign page
+  Scenario Outline: validate user enters invalid phone number  in sendUS A question widget in contact us redesign page
     Given registered UMS member with following attributes
       | UserName    | <userName>   |
       | Password    | <password>   |

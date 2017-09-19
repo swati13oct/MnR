@@ -57,6 +57,9 @@ public class PDPEnrollementGuidePage extends UhcDriver{
 	@FindBy(id = "medicareNumber")
 	private WebElement medicareNumberField;
 	
+	@FindBy(id="planGuide3")
+	private WebElement chkBoxPlanName;
+	
 	@FindBy(id = "oneTimeAddress.addressLine1")
 	private WebElement addressLine1Field;
 	
@@ -106,6 +109,7 @@ public class PDPEnrollementGuidePage extends UhcDriver{
 
 	public void entersDetails(Map<String, String> personalAttributesMap) {
 		
+		String planName = personalAttributesMap.get("Plan name");
 		String firstName = personalAttributesMap.get("First name");
 		String lastName = personalAttributesMap.get("Last name");
 		String dob = personalAttributesMap.get("Date of Birth");
@@ -122,6 +126,7 @@ public class PDPEnrollementGuidePage extends UhcDriver{
 		String zipCode = personalAttributesMap.get("Zip Code");
 		String dayTimePhNumber = personalAttributesMap.get("Daytime phone number");
 		
+		chkBoxPlanName.click();
 		sendkeys(firstNameField, firstName);
 		sendkeys(lastNameField, lastName);
 		sendkeys(birthDateField, dob);

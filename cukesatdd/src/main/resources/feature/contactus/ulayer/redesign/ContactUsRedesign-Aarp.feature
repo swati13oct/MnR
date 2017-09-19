@@ -13,7 +13,7 @@ Feature: To test EmailUs Widget and Click to call functionality in contact us re
       | userName         |  | password   | memberType |
       | q3_sep_ulayer005 |  | Password@1 | Federal    |
 
-  Scenario Outline: Verify secureEmail Widget page in contact us redesign page of  AARP site covers scenario 4
+  Scenario Outline: Verify secureEmail Widget page functionality in contact us redesign page of  AARP site covers scenario 4
     Given registered UMS member with following attributes
       | UserName    | <userName>   |
       | Password    | <password>   |
@@ -25,7 +25,7 @@ Feature: To test EmailUs Widget and Click to call functionality in contact us re
       | userName         |  | password   | memberType |
       | q3_sep_ulayer005 |  | Password@1 | Federal    |
 
-  Scenario Outline: Verify secureEmail Widget page in contact us redesign page of  AARP site covers scenario 3
+  Scenario Outline: Verify secureEmail Widget using using Email Address on File radio button in contact us redesign page of  AARP site
     Given registered UMS member with following attributes
       | UserName    | <userName>   |
       | Password    | <password>   |
@@ -50,7 +50,7 @@ Feature: To test EmailUs Widget and Click to call functionality in contact us re
       | userName         |  | password   | memberType |
       | q3_sep_ulayer005 |  | Password@1 | Federal    |
 
-  Scenario Outline: Verify secureMessaging Model section upon clicking the send A Message button
+  Scenario Outline: Verify secureMessaging Model section upon clicking the send A Message button and cancel link
     Given registered UMS member with following attributes
       | UserName    | <userName>   |
       | Password    | <password>   |
@@ -166,7 +166,7 @@ Feature: To test EmailUs Widget and Click to call functionality in contact us re
       | userName         |  | password   | memberType |
       | q3_sep_ulayer005 |  | Password@1 | Federal    |
 
-  Scenario Outline: Verify sendUs A Question Widget page section in contact us redesign page
+  Scenario Outline: Verify sendUs A Question Widget page for PDP display section in contact us redesign page
     Given registered UMS member with following attributes
       | UserName    | <userName>   |
       | Password    | <password>   |
