@@ -160,6 +160,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		super(driver);
 		PageFactory.initElements(driver, this);
 		openAndValidate();
+		driver.manage().window().maximize();
 	}
 
 	public GetStartedPage navigateToPrescriptionDrug() {

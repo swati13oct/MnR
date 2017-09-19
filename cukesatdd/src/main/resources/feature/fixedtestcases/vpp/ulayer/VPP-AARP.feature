@@ -1,6 +1,5 @@
 @fixedTestCaseTest
 @vppUlayer
-
 Feature: To test plan summary in vpp flow AARP site
 Scenario Outline: Verify plan summary in AARP site
 Given the user is on AARP medicare acquisition site landing page
@@ -17,6 +16,7 @@ Examples:
 | zipcode | county             | plantype | planName                                         |
 | 90210   | Los Angeles County | MA	  | AARP MedicareComplete SecureHorizons Plan 1 (HMO)    |
 
+@vppPlanDetailsAarp
 Scenario Outline: Verify plan details in AARP site
 Given the user is on AARP medicare acquisition site landing page
 When the user performs plan search using following information in the AARP site

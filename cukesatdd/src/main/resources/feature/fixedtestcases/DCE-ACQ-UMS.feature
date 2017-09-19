@@ -102,7 +102,7 @@ And I select the first pharmacy on there
 And I click on the return link
 When I access the vpp page using below zipcode on ums site
 	| Zip Code    | <zipcode>  |
-And I access the DCE tool
+And I access the DCE tool after adding drug
 	|Plan Type | <plantype> |
 Then I verify that the drug is still there
 	|Drug|<drug>|

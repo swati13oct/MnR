@@ -3,6 +3,7 @@
  */
 package acceptancetests.fixedtestcases;
 
+import java.sql.Driver;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -58,6 +59,7 @@ public class DCEAcqUmsStepDefinition {
 				aquisitionhomepage);
 		DrugCostEstimatorPage dce = new DrugCostEstimatorPage(wd);
 		getLoginScenario().saveBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE, dce);
+		
 	}
 	
 	@When("^I access the acquisition DCE tool from home page on ums site$")
@@ -108,6 +110,25 @@ public class DCEAcqUmsStepDefinition {
 	
 	@And("^I access the DCE tool$")
 	public void accessDCETool(DataTable attributes){
+		List<DataTableRow> memberAttributesRow = attributes
+				.getGherkinRows();
+		Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells()
+					.get(0), memberAttributesRow.get(i).getCells().get(1));
+		}
+
+		String plantype = memberAttributesMap.get("Plan Type");
+		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) loginScenario.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		DrugCostEstimatorPage dce = plansummaryPage.navigateToDCE(plantype);
+		if(dce!=null){
+			loginScenario.saveBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE, dce);
+		}
+	}
+	
+	@And("^I access the DCE tool after adding drug$")
+	public void accessDCEToolAfterDrugAdded(DataTable attributes){
 		List<DataTableRow> memberAttributesRow = attributes
 				.getGherkinRows();
 		Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();

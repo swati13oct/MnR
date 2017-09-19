@@ -730,7 +730,7 @@ public class DrugCostEstimatorPage extends UhcDriver {
 			select_btn_first.click();
 		}
 		System.out.println("first pharmacy 2");
-		//Thread.sleep(10000);
+		Thread.sleep(10000);
 	}
 
 	public void validate_cost_saving_present(String pharmacy_type) {
@@ -1669,7 +1669,7 @@ public class DrugCostEstimatorPage extends UhcDriver {
 	public PlanDetailsPage clickOnReturnLink() {
 		returnLink.click();	
 		try {
-			Thread.sleep(3000);
+			Thread.sleep(6000);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

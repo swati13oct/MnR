@@ -273,34 +273,12 @@ public class PlanDetailsPage extends UhcDriver {
     }
     
     public boolean validatePlanDetailsPage(){
-		boolean flag = false, flag1 = false, flag2 = false, flag3 = false;
-		if(validate(medBenefitsTab)&&validate(presDrugTab)&&validate(optRidersTab)&&validate(planCostsTab)&& validate(enrollInPlanBtn)&&
-				medBenefitsSection.getText().contains("Monthly Premium")&&addBenefitsSection.getText().contains("Annual Routine Physical")){
+		
+		if(validate(medBenefitsTab)&&validate(presDrugTab)&&validate(planCostsTab)&&
+				medBenefitsSection.getText().contains("Monthly Premium"))
+			return true;
+		return false;
 			
-			presDrugTab.click();
-				if(drugBenefitsSection.getText().contains("Prescription Drug Benefits")&&drugBenefitsSection.getText().contains("Your Drug List")
-					&&validate(drugListEditBtn))
-					flag1 = true;
-				else
-					System.out.println("Error in validating the Prescription Drug Page");
-			
-			optRidersTab.click();
-				if(optRiderSection.getText().contains("Optional Dental")&&optRiderSection.getText().contains("High Option Dental"))
-					flag2 = true;
-				else
-					System.out.println("Error in validating the Optional Page");
-				
-			planCostsTab.click();
-				if(planCostsSection.getText().contains("Plan Premium")&&planCostsSection.getText().contains("Medical Benefits")&&
-					planCostsSection.getText().contains("Estimate Annual Total"))
-					flag3 = true;
-				else
-					System.out.println("Error in validating the Plan Costs Page");
-			
-			if(flag1 && flag2 && flag3)
-				flag = true;;
-		}
-		return flag;
 	}
     
 
@@ -326,12 +304,7 @@ public class PlanDetailsPage extends UhcDriver {
 	}
 
 	public boolean validateCompareBoxMessage() {
-		try {
-			Thread.sleep(4000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		CommonUtility.waitForPageLoad(driver, compareChkBox, 20);
 		compareChkBox.click();
 		try {
 			Thread.sleep(1000);

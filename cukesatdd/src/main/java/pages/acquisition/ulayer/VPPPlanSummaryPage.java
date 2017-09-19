@@ -131,26 +131,16 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	@FindBy(xpath = ".//*[@id='site-wrapper']/div[4]/div/div/div/div/div/div/div[1]/div/div/div[1]/div[2]/div/div[2]/div[3]")
 	private WebElement viewPDPPlans;
 	
-	@FindBy(xpath = ".//*[@id='plan-list-1']/div/div[2]/div/div[1]/div[3]/div/div/span[1]/label")
-	private WebElement maplan1;
-	
-	@FindBy(xpath = ".//*[@id='plan-list-1']/div/div[2]/div/div[2]/div[3]/div/div/span[1]/label")
-	private WebElement maplan2;
-	
-	@FindBy(xpath = ".//*[@id='plan-list-1']/div/div[2]/div/div[3]/div[3]/div/div/span[1]/label")
-	private WebElement maplan3;
-	
-	@FindBy(xpath = ".//*[@id='plan-list-1']/div/div[2]/div/div[1]/div[3]/div/div/span[3]")
+	@FindBy(xpath = ".//*[@id='plan-list-1']/div/div[3]/div/div[1]/div[3]/div/div/span[3]")
 	private WebElement maChkboxMessage1;
 	
-	@FindBy(xpath = ".//*[@id='plan-list-1']/div/div[2]/div/div[2]/div[3]/div/div/span[3]")
+	@FindBy(xpath = ".//*[@id='plan-list-1']/div/div[3]/div/div[2]/div[3]/div/div/span[3]")
 	private WebElement maChkboxMessage2;
 	
-	@FindBy(xpath = ".//*[@id='plan-list-1']/div/div[2]/div/div[3]/div[3]/div/div/span[3]")
+	@FindBy(xpath = ".//*[@id='plan-list-1']/div/div[3]/div/div[3]/div[3]/div/div/span[3]")
 	private WebElement maChkboxMessage3;
 	
-	
-	@FindBy(xpath = ".//*[@id='plan-list-1']/div/div[2]/div/div[3]/div[3]/div/div/span[3]/a")
+	@FindBy(xpath=".//*[@id='plan-list-1']/div/div[3]/div/div[1]/div[3]/div/div/span[3]/a")
 	private WebElement compareLink;
 	
 	@FindBy(className = "switchPlanYear")
@@ -765,7 +755,6 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		viewPDPPlans.click();
 	}
 	
-	
 	public void checkAllMAPlans(){
 		try {
 			Thread.sleep(2000);
@@ -773,16 +762,18 @@ public class VPPPlanSummaryPage extends UhcDriver {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		maplan1.click();
-		maplan2.click();
-		maplan3.click();
+		List<WebElement> allMAPlans = driver.findElements(By.xpath(".//*[@id='plan-list-1']//div[contains(@class,'compare-box')]"));	
+
+		for(int i = 0; i<allMAPlans.size(); i++){
+			allMAPlans.get(i).click();
+		}
 		
 	}
-	
-	public ComparePlansPage clickOnComapreLink(){
+
+	public ComparePlansPage clickOnCompareLink(){
 		compareLink.click();
 		try {
-			Thread.sleep(3000);
+			Thread.sleep(6000);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

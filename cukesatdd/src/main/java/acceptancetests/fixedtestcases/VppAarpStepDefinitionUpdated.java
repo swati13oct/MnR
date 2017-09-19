@@ -128,7 +128,7 @@ public class VppAarpStepDefinitionUpdated {
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 		plansummaryPage.clickonViewPlans();
 		plansummaryPage.checkAllMAPlans();
-		ComparePlansPage comparePlansPage = plansummaryPage.clickOnComapreLink();
+		ComparePlansPage comparePlansPage = plansummaryPage.clickOnCompareLink();
 		if(comparePlansPage != null){
 			getLoginScenario().saveBean(PageConstants.COMPARE_PLANS_PAGE, comparePlansPage);
 			comparePlansPage.backToVPPPage();
