@@ -286,7 +286,7 @@ public ResponsivePlanSummaryUhc searchPlans(String zipcode, String CountyName) {
 	    		break;
 	    	}
 	    }
-		if (driver.getTitle().equalsIgnoreCase("Our Medicare Plans | AARP® Medicare Plans from UnitedHealthcare®")) {
+		if (driver.getTitle().equalsIgnoreCase("Our Medicare Plans | UnitedHealthcare®")) {
 			return new ResponsivePlanSummaryUhc(driver);
 		} 
 		return null;
