@@ -117,7 +117,7 @@ public BLayerPlanComparePage SelectThePlan() throws InterruptedException {
 		Thread.sleep(1000);
 		ComparePlanLink.click();
 		Thread.sleep(5000);
-		 if(driver.getTitle().equalsIgnoreCase("plans")){
+		 if(driver.getTitle().contains("Our Medicare Plan Types")){
 			 return new BLayerPlanComparePage(driver);
 		 }
 		 return null;	 
