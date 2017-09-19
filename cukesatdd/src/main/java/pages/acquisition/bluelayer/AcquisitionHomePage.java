@@ -97,7 +97,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	@FindBy(className = "fd_myPlans")
 	private WebElement myPlansTab;
 
-	@FindBy(linkText = "pharmacy")
+	@FindBy(id = "Find a pharmacy near you")
 	private WebElement pharmacyLink;
 	
 	@FindBy(id = "ghn_lnk_2")
@@ -649,6 +649,15 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	}
 
 	public PharmacySearchPage navigateToPharmacyLocator() {
+		Actions actions = new Actions(driver);
+		actions.moveToElement(ourPlansHoverLink);
+		actions.moveToElement(ma_moreHelpInfoLink);
+		actions.click().build().perform();
+		try {
+			Thread.sleep(5000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
 		pharmacyLink.click();
 		if (driver.getTitle().equalsIgnoreCase(
 				"Locate a Pharmacy | UnitedHealthcare®")) {
