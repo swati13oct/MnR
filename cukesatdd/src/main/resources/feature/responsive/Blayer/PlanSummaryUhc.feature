@@ -499,5 +499,21 @@ Examples:
 
 
 	
-
+@US638058
+Scenario Outline: Plan Summary DCE integration
+Given the user is on the vpp portfolio page
+Then the user performs plan search using zipcode
+              | Zip Code |<zipCode>|
+              | County   |<county> |
+Then the user navigates to the following plan type
+| PlanType | <planType> |	
+Then the user navigates to DCE and adds a drug
+|Plan Name|<planName>|
+|Drug Name|<drugName>|
+And the user validates benefits table
+ Examples:
+		|zipCode|county						 |planType | planName                                           |drugName|
+		|90210  |Los Angeles County|MAPD       |AARP MedicareComplete SecureHorizons Plan 1 (HMO) |lipitor |
+		|33012  |Miami-Dade County |SNP        | Preferred Special Care Miami-Dade (HMO SNP)      |lipitor |
+		|33012  |Miami-Dade County |PDP        | AARP MedicareRx Preferred (PDP)                  |lipitor |
 								

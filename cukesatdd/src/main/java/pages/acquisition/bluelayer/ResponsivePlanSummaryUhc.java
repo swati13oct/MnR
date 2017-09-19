@@ -1792,7 +1792,7 @@ public void comparePlanslnk(){
 				drugCost = driver.findElement(By.xpath("//*[text()='Costs']/parent::div/p")).getText();
 				System.out.println(pharmacyDetails + "------------" + drugCost);	
 				
-				driver.findElement(By.xpath("//*[text()='Return to plans']")).click();
+				driver.findElement(By.xpath("//*[text()='See other plans']")).click();
 				try {
 					Thread.sleep(3000);
 				} catch (InterruptedException e) {
@@ -1803,7 +1803,13 @@ public void comparePlanslnk(){
  				 
 			}
 			public ResponsivePlanSummaryUhc validateBenefitsTableAfterAddingDrug(String planType, String planName){
- 				String drugCostActual=null;
+				try {
+					Thread.sleep(5000);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				String drugCostActual=null;
  				String drugCoverage=null;
  				WebElement editDrugLink=null;
  				if(planType.equalsIgnoreCase("MA")||planType.equalsIgnoreCase("MAPD")){
@@ -1818,7 +1824,7 @@ public void comparePlanslnk(){
  					drugCoverage = driver.findElement(By.xpath("//*[contains(text(),'"+planName+"')]/parent::div/following-sibling::div[1]/div/div/div[2]/ul/li[6]/p")).getText();
  					drugCostActual = driver.findElement(By.xpath("//*[contains(text(),'"+planName+"')]/parent::div/following-sibling::div[1]/div/div/div[2]/ul/li[6]/span[2]")).getText();
  					editDrugLink = driver.findElement(By.xpath("//*[contains(text(),'"+planName+"')]/parent::div/following-sibling::div[1]/div/div/div[2]/ul/li[6]/span[4]/a"));
- 				}
+ 				}				
  				if(drugCoverage.contains("out of 1 drugs covered")
  					    && editDrugLink.isDisplayed()
  						&& drugCostActual.equals(drugCost)){
