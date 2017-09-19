@@ -18,6 +18,7 @@ import acceptancetests.atdd.data.CommonConstants;
 import acceptancetests.atdd.data.member.PageConstants;
 import acceptancetests.login.data.LoginCommonConstants;
 import atdd.framework.MRScenario;
+import cucumber.annotation.After;
 import cucumber.annotation.en.And;
 import cucumber.annotation.en.Given;
 import cucumber.annotation.en.Then;
@@ -253,7 +254,7 @@ public class DrugcostestimatorUhcStepDefinition {
 	public void i_should_be_able_to_move_forward_backward() throws InterruptedException{
 		DrugCostEstimatorPage dce = (DrugCostEstimatorPage) getLoginScenario().getBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE);
 		//dce.navigateToStep2();
-		dce.validatePharmacyForm();
+		//dce.validatePharmacyForm();
 		dce.backwardToStep1();
 		dce.navigateToStep2();
 	}
