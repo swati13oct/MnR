@@ -248,7 +248,7 @@ Examples:
 
 
 @benefittablema
-Scenario Outline: To validate plan count from portfolio page
+Scenario Outline: To validate benefit table
 Given the user is on the vpp portfolio page
 Then the user performs plan search using zipcode
               | Zip Code |<zipCode>|
@@ -265,7 +265,7 @@ And the user validates benefit table for ma
   | Prescription Drugs  | <prescriptionDrug>| 
 Examples:
 |zipCode|county          |planType | planName                                            |monthlypremium | primarycare |  specialist       |referralRequired| prescriptionDrug |
-|85901 | Navajo County   |  ma     |UnitedHealthcare MedicareDirect Rx (PFFS)             |   $52         | $25         |  $50             |  No            |   $2 |
+|85901 | Navajo County   |  ma     |UnitedHealthcare MedicareDirect Rx (PFFS)            |   $60        | $25         |  $50             |  No            |   $4 |
 
 
 @learnmore

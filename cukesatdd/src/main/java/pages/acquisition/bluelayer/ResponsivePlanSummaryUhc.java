@@ -481,12 +481,12 @@ public void disclaimerText(){
 
 public ResponsivePlanSummaryUhc viewPlanSummary(String planType) {
 //	JavascriptExecutor js = (JavascriptExecutor)driver;
-	try {
+	/*try {
 		Thread.sleep(4000);
 	} catch (InterruptedException e) {
 		// TODO Auto-generated catch block
 		e.printStackTrace();
-	}	
+	}*/	
 	if (planType.equalsIgnoreCase("PDP")) {
 		viewPdpPlans.click();
 		return new ResponsivePlanSummaryUhc(driver);
