@@ -825,10 +825,15 @@ public class AcquisitionHomePage extends GlobalWebElements {
 
 	public PDPRequestHelpAndInformationPage navigateToPDPMoreHelpAndInfo() {
 
-		Actions actions = new Actions(driver);
-		actions.moveToElement(ourPlansHoverLink);
-		actions.moveToElement(pdp_moreHelpInfoLink);
-		actions.click().build().perform();
+		driver.get(MRConstants.AARP_PDP_REQUEST_MORE_HELP_AND_INFORMATION_URL);
+		
+		try {
+			Thread.sleep(4000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		
+		pdp_moreHelpInfoLink.click();
 
 		if (currentUrl().contains("prescription-drug-plans/request-information.html")) {
 			return new PDPRequestHelpAndInformationPage(driver);

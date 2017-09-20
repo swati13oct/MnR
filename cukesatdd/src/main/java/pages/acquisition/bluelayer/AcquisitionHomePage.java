@@ -649,10 +649,12 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	}
 
 	public PharmacySearchPage navigateToPharmacyLocator() {
-		Actions actions = new Actions(driver);
+		/*Actions actions = new Actions(driver);
 		actions.moveToElement(ourPlansHoverLink);
 		actions.moveToElement(ma_moreHelpInfoLink);
-		actions.click().build().perform();
+		actions.click().build().perform();*/
+		
+		driver.get(MRConstants.UHC_MA_REQUEST_MORE_HELP_AND_INFORMATION_URL);
 		try {
 			Thread.sleep(5000);
 		} catch (InterruptedException e) {
