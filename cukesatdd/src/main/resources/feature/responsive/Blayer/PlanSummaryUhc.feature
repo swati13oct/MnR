@@ -244,7 +244,7 @@ And the user validates benefit table
   | Prescription Drugs  | <prescriptionDrug>| 
 Examples:
 |zipCode|county          |planType | planName                                            |monthlypremium | primarycare |  specialist       |referralRequired| prescriptionDrug |
-|33012 |Miami-Dade County| snp     |UnitedHealthcare Dual Complete RP (Regional PPO SNP)  |  $29.10       |$0           |  20              | No             |  25  |
+|33012 |Miami-Dade County| snp     |UnitedHealthcare Dual Complete RP (Regional PPO SNP)  |  $19.80      |$0           |  19              | No             |  25  |
 
 
 @benefittablema
