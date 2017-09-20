@@ -261,7 +261,7 @@ Feature: To test My Profile & Preferences flow in UMS site
       | MAPD     |
       #| MA       |
 
-  @TemporaryAddress
+  @Temporaryaddress
   Scenario Outline: To verify Temporary adrress and Edit Functionality
     Given registered member with following details for Profile and Preferences flow
       | <planType> |
