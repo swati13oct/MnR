@@ -75,13 +75,13 @@ public class BLayerPlanComparePage extends UhcDriver {
 	@FindBy(xpath=".//*[@id='fixTable']/tbody/tr[7]/td[2]/div/div/span[1]")
 	private WebElement InPatientHospitalStay;
 	
-	@FindBy(xpath=".//*[@id='fixTable']/tbody/tr[8]/td[3]/div[1]/div/span[2]/sup")
+	@FindBy(xpath="//*[@id='fixTable']/tbody/tr[8]/td[2]/div[1]/div/span[2]/sup")
 	private WebElement Superscript;
 
 	@FindBy(id="8075b5b6-838a-4c09-822f-ef18ce42baab_toolTip")
 	private WebElement toolTip;
 	
-	@FindBy(xpath=".//*[@id='fixTable']/tbody/tr[8]/td[3]/div[1]/div/span[1]")
+	@FindBy(xpath=".//*[@id='fixTable']/tbody/tr[8]/td[2]/div[1]/div/span[1]")
 	private WebElement TierValue;
 	
 	public BLayerPlanComparePage(WebDriver driver) {
