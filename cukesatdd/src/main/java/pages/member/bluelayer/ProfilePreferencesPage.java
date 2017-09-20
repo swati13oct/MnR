@@ -391,7 +391,7 @@ public class ProfilePreferencesPage extends UhcDriver {
 		validateNew(SaveEmailButton);
 		validateNew(CanceEmaillButton);
 		validateNew(Emailform);
-		validate(email);
+		//validate(email);
 		System.out.println(email.getText());
 
 	}
