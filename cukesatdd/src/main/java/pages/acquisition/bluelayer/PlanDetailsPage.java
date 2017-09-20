@@ -79,7 +79,7 @@ public class PlanDetailsPage extends UhcDriver{
 	private WebElement drugCoPaysSection;
 	
 	//@FindBy(xpath=".//*[@id='backToplans']")
-	@FindBy(xpath=".//*[@id='site-wrapper']/div[4]/div/div/div/div/div/div/div[1]/div/div/a")
+	@FindBy(linkText="Back to all plans")
 	private WebElement backToPlansBtn;
 	
 	@FindBy(xpath=".//*[@id='highlights']/div/a[1]") //*[@id='enrollDetails']")
@@ -340,7 +340,7 @@ public class PlanDetailsPage extends UhcDriver{
 	
 	    public boolean validatePlanDetailsPage(){
 			boolean flag = false;
-			if(validate(backToPlansBtn)&&validate(isMyDoctorCoveredLink)&&validate(enrollInPlanBtn)&&
+			if(validate(backToPlansBtn)&&validate(isMyDoctorCoveredLink)&&
 					medBenefitsSection.getText().contains("Monthly Premium")){
 				flag =true;
 				

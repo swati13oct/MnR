@@ -872,7 +872,9 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	}
 
 	public boolean verifyCompareCheckBoxesAreUnchecked(){
-		if(!compareChkBox3.isSelected())
+		List<WebElement> compareChkBoxes = driver.findElements(By.xpath(".//*[@id='plan-list-1']//div[contains(@class,'compare-box')]"));	
+
+		if(!compareChkBoxes.get(0).isSelected())
 			return true;
 		return false;
 		
@@ -896,7 +898,9 @@ public class VPPPlanSummaryPage extends UhcDriver {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		compareChkBox3.click();
+		List<WebElement> compareChkBoxes = driver.findElements(By.xpath(".//*[@id='plan-list-1']//div[contains(@class,'compare-box')]"));	
+
+		compareChkBoxes.get(0).click();
 	}
 	public boolean validatepassportData() {
 		try {
@@ -934,7 +938,8 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	
 
 	public PlanDetailsPage clickViewDetails() {
-		viewMAPlanDetailsLink3.click();
+		List<WebElement> maPlanDetailsLinks = driver.findElements(By.id("viewmoredetlinkmapd"));
+		maPlanDetailsLinks.get(2).click();
 		if(getTitle().equalsIgnoreCase("Our Medicare Plan Types | UnitedHealthcare®"))
 			return new PlanDetailsPage(driver);
 		return null;

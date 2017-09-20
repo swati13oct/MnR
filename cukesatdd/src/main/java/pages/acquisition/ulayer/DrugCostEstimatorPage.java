@@ -1667,6 +1667,12 @@ public class DrugCostEstimatorPage extends UhcDriver {
 	}
 	
 	public PlanDetailsPage clickOnReturnLink() {
+		try {
+			Thread.sleep(5000);
+		} catch (InterruptedException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 		returnLink.click();	
 		try {
 			Thread.sleep(10000);
