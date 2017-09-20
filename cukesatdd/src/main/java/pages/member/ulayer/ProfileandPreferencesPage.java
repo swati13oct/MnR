@@ -5,7 +5,6 @@ package pages.member.ulayer;
 
 import java.util.List;
 import java.util.Map;
-import java.util.concurrent.TimeUnit;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -46,25 +45,25 @@ public class ProfileandPreferencesPage extends UhcDriver {
 	@FindBy(xpath = "//*[@id='tab-1']//div[1]//div//p[2]//text()")
 	private WebElement memberIdtext;
 
-	@FindBy(xpath = "//*[@id='profilePreferencesApp']//div[1]//div//section//div//div[2]//div//div//div//div//div[1]//div//span[1]")
+	@FindBy(xpath = ".//*[@id='profilePreferencesController']/div[1]/div[1]/div/section/div/div[2]/div/div/div/div/div[1]/div/span[2]")
 	private WebElement Username;
 
-	@FindBy(xpath = "//*[@id='profilePreferencesApp']//div[1]//div//section//div//div[2]//div//div//div//div//div[1]//div//span[2]")
+	@FindBy(xpath = ".//*[@id='profilePreferencesController']/div[1]/div[1]/div/section/div/div[2]/div/div/div/div/div[1]/div/span[1]")
 	private WebElement Usernametext;
 
 	@FindBy(xpath = ".//*[@id='password']/div/div/span[2]")
 	private WebElement Password;
 
-	@FindBy(xpath = ".//*[@id='password']/div/div/span[1]/p/b")
+	@FindBy(xpath = ".//*[@id='password']/div/div/span[1]")
 	private WebElement Passwordtext;
 
 	@FindBy(xpath = ".//*[@id='password']/a")
 	private WebElement EditLink;
 
-	@FindBy(xpath = ".//*[@id='tab-1']/div[3]/div[1]/div/div[1]/div/div/div/div[1]/div/div/div[1]/p")
+	@FindBy(xpath = ".//*[@id='email']/div[1]/p")
 	private WebElement EmailLabel;
 
-	@FindBy(xpath = ".//*[@id='tab-1']/div[3]/div[1]/div/div[1]/div/div/div/div[1]/div/div/div[2]/div[1]/div/div/span[1]/p")
+	@FindBy(xpath = ".//*[@id='email']/div[2]/div[1]/div/div/span[1]")
 	private WebElement EmailAddressLabel;
 
 	@FindBy(id = "passwordOld")
@@ -100,7 +99,7 @@ public class ProfileandPreferencesPage extends UhcDriver {
 	@FindBy(xpath = "html/body/div[5]/div/div/div/div/a")
 	private WebElement Disclaimerlink;
 
-	@FindBy(xpath = ".//*[@id='tab-1']/div[3]/div[1]/div/div[1]/div/div/div/div[1]/div/div/div[1]/div/div/div/div/div/a[1]")
+	@FindBy(xpath = ".//*[@id='email']/div[1]/div/div/div/div/div/a[1]")
 	private WebElement EmailEditbutton;
 
 	@FindBy(xpath = ".//*[@id='tab-1']/div[3]/div[1]/div/div[1]/div/div/div/div[1]/div/div")
@@ -130,7 +129,7 @@ public class ProfileandPreferencesPage extends UhcDriver {
 	@FindBy(xpath = ".//*[@id='tab-1']/div[3]/div[1]/div/div[1]/div/div/div/div[2]/div[1]/div")
 	private WebElement permanentaddress;
 
-	@FindBy(className = "text-link")
+	@FindBy(xpath = ".//*[@id='permanenet']/div[2]/p/a")
 	private WebElement contactuslink;
 
 	@FindBy(id = "passwordOld-error")
@@ -173,53 +172,20 @@ public class ProfileandPreferencesPage extends UhcDriver {
 	@FindBy(xpath = ".//*[@id='tab-1']/div[3]/div[2]/h3")
 	private WebElement communicationpreferencesheader;
 
-	@FindBy(xpath = ".//*[@id='tab-1']/div[3]/div[2]/div/div/div/div/div[2]/a")
+	@FindBy(xpath = ".//*[@id='communicationAddress']/div[2]/a")
 	private WebElement gopaperlessbutton;
 
-	@FindBy(xpath = "html/body/div[3]/div/div[1]/div/main/div[1]/section/div/div[1]/div/div/div[1]/img")
+	@FindBy(xpath = "html/body/div[5]/div[1]/div/div[1]/main/div[1]/section/div/div[1]/div/div/div[1]/img")
 	private WebElement gogreenleaf;
 
-	@FindBy(xpath = "html/body/div[3]/div/div[1]/div/main/div[1]/section/div/div[1]/div/div/div[2]")
+	@FindBy(xpath = "html/body/div[5]/div[1]/div/div[1]/main/div[1]/section/div/div[1]/div/div/div[2]")
 	private WebElement goggreenheader;
 
-	@FindBy(xpath = "html/body/div[3]/div/div[1]/div/header/div/div/div/div/div/div/h1")
+	@FindBy(xpath = "html/body/div[5]/div[1]/div/div[1]/header/div/div/div/div/div/div/h1")
 	private WebElement communicationheader;
 
-	@FindBy(xpath = "html/body/div[3]/div/div[1]/div/header/div/div/div/div/div/div/a")
+	@FindBy(xpath = "html/body/div[5]/div[1]/div/div[1]/header/div/div/div/div/div/div/a")
 	private WebElement Profilenprefernceslink;
-	
-	@FindBy(xpath = ("//*[contains(text(), 'Go Paperless')]"))
-	private WebElement goPaperlessButton;
-
-	@FindBy(xpath = "//*[@id='mail-preferences-selector']/div/div/div/div/div[1]/p")
-	private WebElement planNameGoGreen;
-
-	@FindBy(xpath = "/html/body/div[4]/div/div[1]/div/header/div/div/div/div/div/div/h1")
-	private WebElement communicationPreferences;
-
-	@FindBy(xpath = "/html/body/div[4]/div/div[1]/div/header/div/div/div/div/div/div/a")
-	private WebElement backLink1;
-
-	@FindBy(xpath = "/html/body/div[4]/div/div[1]/div/main/div[1]/div/div/div/div/a")
-	private WebElement backLink2;
-
-	@FindBy(xpath = "/html/body/div[4]/div/div[1]/div/main/div[1]/section/div/div[3]/div/p")
-	private WebElement NoteSection;
-
-	@FindBy(xpath = "//*[@id='preferences-form']/div/div[1]/div[4]/div/label")
-	private WebElement iHavereadCheckbox;
-
-	@FindBy(id = "save-prefs-btn")
-	private WebElement savePreferencesButton;
-
-	@FindBy(linkText = "Edit Preferences")
-	private WebElement EditPreferenceButton;
-
-	@FindBy(xpath = "/html/body/div[4]/div[1]/div[1]/div/main/div[1]/section/div/div[1]/div/div/div[2]/h2")
-	private WebElement GoGreenHeader;
-
-	@FindBy(xpath = "/html/body/div[4]/div[1]/div[1]/div/main/div[1]/section/div/div[1]/div/div/div[2]/p")
-	private WebElement GoGreenText;
 
 	public static final String Disclaimerlinkcontent_xpath = ".//*[@id='collapseDisclaimer']";
 
@@ -315,14 +281,14 @@ public class ProfileandPreferencesPage extends UhcDriver {
 		validateNew(EmailLabel);
 		validateNew(EmailAddressLabel);
 		validateNew(EmailEditbutton);
-		EmailEditbutton.click();
-
 	}
+		
+		
 
 	public boolean validateemailsavefunctionality() {
-		EmailEditbutton.click();
-		NewEmail.sendKeys("nikitajain3@gmail.com");
-		emailConfirm.sendKeys("nikitajain3@gmail.com");
+	
+		NewEmail.sendKeys("nikitajain5@gmail.com");
+		emailConfirm.sendKeys("nikitajain5@gmail.com");
 		SaveEmailButton.click();
 		try {
 			Thread.sleep(20000);
@@ -330,7 +296,7 @@ public class ProfileandPreferencesPage extends UhcDriver {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		if (email.getText().equals("nikitajain3@gmail.com")) {
+		if (email.getText().equals("nikitajain5@gmail.com")) {
 			System.out.println("The element" + email.getText() + "is found");
 			return true;
 		} else {
@@ -340,8 +306,22 @@ public class ProfileandPreferencesPage extends UhcDriver {
 	}
 
 	public boolean emailblankfieldsvalidation() {
-
+		EmailEditbutton.click();
+		try {
+			Thread.sleep(20000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		System.out.println("NewEmail is " + NewEmail.isDisplayed());
+	
 		SaveEmailButton.click();
+		try {
+			Thread.sleep(20000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		if (mandatorymessage.getText().contentEquals("This field is required.")) {
 			System.out.println("The element" + mandatorymessage.getText() + "is found");
 			return true;
@@ -352,9 +332,20 @@ public class ProfileandPreferencesPage extends UhcDriver {
 	}
 
 	public void validateinvalidemailerrormessage() {
-		EmailEditbutton.click();
+		try {
+			Thread.sleep(30000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		NewEmail.sendKeys("nikitajain");
 		SaveEmailButton.click();
+		try {
+			Thread.sleep(20000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		if (mandatorymessage.getText().contentEquals("Please enter a valid email Address.")) {
 			System.out.println("The element" + mandatorymessage.getText() + "is found");
 		} else {
@@ -368,6 +359,12 @@ public class ProfileandPreferencesPage extends UhcDriver {
 		EmailEditbutton.click();
 		emailConfirm.sendKeys("nikit");
 		SaveEmailButton.click();
+		try {
+			Thread.sleep(20000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		if (emailerrormessage.getText().contentEquals("Please enter the same value again.")) {
 			System.out.println("The element" + emailerrormessage.getText() + "is found");
 			return true;
@@ -378,20 +375,25 @@ public class ProfileandPreferencesPage extends UhcDriver {
 	}
 
 	public void validateeditform() {
-		EmailEditbutton.click();
+		
 		validateNew(Emailform);
 		validateNew(email);
 		System.out.println(email.getText());
 	}
 
-	public void validateAccountEdit(String password2) throws InterruptedException {
+	public void validateAccountEdit(String password2) {
 
 		EditLink.click();
 		CurrentPassword.sendKeys(password2);
-		NewPassword.sendKeys(Password + "@4");
-		ConfirmPassword.sendKeys(Password + "@4");
+		NewPassword.sendKeys("Password@4");
+		ConfirmPassword.sendKeys("Password@4");
 		SaveButton.click();
-		wait(20000);
+		try {
+			Thread.sleep(20000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		Assert.assertTrue("Button displayed", Password.isDisplayed());
 
 	}
@@ -585,80 +587,6 @@ public class ProfileandPreferencesPage extends UhcDriver {
 			return new ProfilePreferencesPage(driver);
 		}
 		return null;
-	}
-	
-	
-	public void validateGoPaperlessbutton() {
-		// TODO Auto-generated method stub
-		validateNew(goPaperlessButton);
-		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-	}
-
-	public void validatePlanName() {
-		goPaperlessButton.click();
-
-		validateNew(planNameGoGreen);
-	}
-
-	public void validatecommunicationpreferencesheader() {
-
-		validateNew(communicationPreferences);
-		if (communicationPreferences.isDisplayed()) {
-			String cp = communicationPreferences.getText();
-
-			System.out.println(cp);
-			Assert.assertTrue(cp.equalsIgnoreCase("Communication Preferences"));
-		}
-
-	}
-
-	public void validateBacktoPNPlink() throws InterruptedException {
-
-		validateNew(backLink1);
-		backLink1.click();
-		goPaperlessButton.click();
-		validateNew(backLink2);
-		backLink2.click();
-
-	}
-
-	public void validateNoteSection() {
-		goPaperlessButton.click();
-		validateNew(NoteSection);
-		String noteContentActual = NoteSection.getText();
-		String noteContentExpected = "Note: it may take up to two mail cycles for your updated delivery preferences to take effect. Your mailing cycle-the length of time between documents-varies by document. When the paper mailings stop, you will receive an email notification alerting you that a new document has been posted to your online account.";
-		Assert.assertTrue(noteContentActual.equalsIgnoreCase(noteContentExpected));
-
-	}
-
-	public void validateCheckbox() {
-		// TODO Auto-generated method stub
-		validateNew(iHavereadCheckbox);
-		iHavereadCheckbox.click();
-	}
-
-	public void validateSavePreferences() {
-		// TODO Auto-generated method stub
-		validateNew(savePreferencesButton);
-		if (iHavereadCheckbox.isSelected()) {
-			savePreferencesButton.click();
-			validateNew(EditPreferenceButton);
-		}
-
-	}
-
-	public void validateGoGreenHeader() {
-		validateNew(GoGreenHeader);
-		validateNew(GoGreenText);
-
-		if (GoGreenText.isDisplayed())
-
-		{
-			String GoGreenContentActual = GoGreenText.getText();
-			String GoGreenContentExpected = "Select the plan materials you want to sign up for paperless delivery per the terms and conditions below.";
-
-			Assert.assertTrue(GoGreenContentActual.equalsIgnoreCase(GoGreenContentExpected));
-		}
 	}
 
 }

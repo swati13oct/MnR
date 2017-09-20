@@ -19,7 +19,7 @@ import org.openqa.selenium.WebDriver;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.openqa.selenium.By;
 
-import pages.member.bluelayer.ProfilePreferencesPage;
+
 import pages.member.ulayer.AccountHomePage;
 import pages.member.ulayer.LoginPage2;
 
@@ -27,7 +27,7 @@ import acceptancetests.atdd.data.CommonConstants;
 import acceptancetests.atdd.data.member.PageConstants;
 
 import pages.member.ulayer.ProfileandPreferencesPage;
-import acceptancetests.profandpref.data.ProfnPrefCommonConstants;
+import  acceptancetests.profandpref.data.ProfnPrefCommonConstants;
 import acceptancetests.formsandresources.data.FnRCommonConstants;
 import acceptancetests.login.data.LoginCommonConstants;
 import atdd.framework.MRScenario;
@@ -121,12 +121,13 @@ public class ProfileandPreferencesAARPStepDefinition {
 				.navigateDirectToProfileandPreferencesPage();
 
 		if (ProfileandPreferencespage != null) {
-
+	
 			getLoginScenario().saveBean(PageConstants.PROFILE_AND_PREFERENCES_PAGE, ProfileandPreferencespage);
 		}
-
-		if (ProfileandPreferencespage == null) {
-			System.out.println(" Variable is NULL");
+		
+		if (ProfileandPreferencespage == null)
+		{
+			System.out.println(" Variable is NULL" );
 		}
 	}
 
@@ -136,9 +137,8 @@ public class ProfileandPreferencesAARPStepDefinition {
 				.getBean(PageConstants.PROFILE_AND_PREFERENCES_PAGE);
 
 		ProfileandPreferencespage.validatePlanNameMemberidandName();
-
+	
 	}
-
 	@Then("^the user validates the Email section in AARP site")
 	public void UserValidatesEmail() {
 		pages.member.ulayer.ProfileandPreferencesPage ProfileandPreferencespage = (pages.member.ulayer.ProfileandPreferencesPage) getLoginScenario()
@@ -146,28 +146,27 @@ public class ProfileandPreferencesAARPStepDefinition {
 
 		ProfileandPreferencespage.validateEmail();
 		ProfileandPreferencespage.validateeditform();
-
+	
 	}
-
 	@Then("^the user validates the elements on clicking the edit link")
 	public void UserValidatesAccountEditOptions() {
 		pages.member.ulayer.ProfileandPreferencesPage ProfileandPreferencespage = (pages.member.ulayer.ProfileandPreferencesPage) getLoginScenario()
 				.getBean(PageConstants.PROFILE_AND_PREFERENCES_PAGE);
 
 		ProfileandPreferencespage.validateAccountEditElements();
-
+	
 	}
-
 	@Then("^the user validates the functionality of save Button")
-	public void UserValidatesAccountEditSaveButton() throws InterruptedException {
+	public void UserValidatesAccountEditSaveButton() {
 		pages.member.ulayer.ProfileandPreferencesPage ProfileandPreferencespage = (pages.member.ulayer.ProfileandPreferencesPage) getLoginScenario()
 				.getBean(PageConstants.PROFILE_AND_PREFERENCES_PAGE);
 
-		String Password = (String) getLoginScenario().getBean(LoginCommonConstants.PASSWORD);
+	
+		
+		String	 Password = (String) getLoginScenario().getBean(LoginCommonConstants.PASSWORD);
 		ProfileandPreferencespage.validateAccountEdit(Password);
-
+	
 	}
-
 	@Then("^the user validates the functionality of Cancel Button")
 	public void UserValidatesAccountEditCancelButton() {
 		pages.member.ulayer.ProfileandPreferencesPage ProfileandPreferencespage = (pages.member.ulayer.ProfileandPreferencesPage) getLoginScenario()
@@ -175,134 +174,148 @@ public class ProfileandPreferencesAARPStepDefinition {
 
 		ProfileandPreferencespage.validateCancelButton();
 	}
-
+	
 	@Then("^the user clicks on save button without filling current and new password and the red mandatory message should come")
-	public void UserValidatesclickingbutton() {
-		pages.member.ulayer.ProfileandPreferencesPage ProfileandPreferencespage = (pages.member.ulayer.ProfileandPreferencesPage) getLoginScenario()
-				.getBean(PageConstants.PROFILE_AND_PREFERENCES_PAGE);
+	public void UserValidatesclickingbutton() 
+	{
+			pages.member.ulayer.ProfileandPreferencesPage ProfileandPreferencespage = (pages.member.ulayer.ProfileandPreferencesPage) getLoginScenario()
+					.getBean(PageConstants.PROFILE_AND_PREFERENCES_PAGE);
 
-		ProfileandPreferencespage.validateSavebuttonclick();
+			ProfileandPreferencespage.validateSavebuttonclick();
 	}
-
+	
 	@Then("^the user validates see more ways to contact us section")
-	public void Uservalidatesneedhelpsection() {
-
+	public void Uservalidatesneedhelpsection()
+	{
+	
 		pages.member.ulayer.ProfileandPreferencesPage ProfileandPreferencespage = (pages.member.ulayer.ProfileandPreferencesPage) getLoginScenario()
 				.getBean(PageConstants.PROFILE_AND_PREFERENCES_PAGE);
-
+		
 		ProfileandPreferencespage.validateseemorewaystext();
 	}
-
+	
 	@Then("^the user validates on clicking contact us link it should route to contact us page")
-	public void uservalidatescontactuslink() {
+	public void uservalidatescontactuslink()
+	{
 		pages.member.ulayer.ProfileandPreferencesPage ProfileandPreferencespage = (pages.member.ulayer.ProfileandPreferencesPage) getLoginScenario()
 				.getBean(PageConstants.PROFILE_AND_PREFERENCES_PAGE);
-
+		
 		ProfileandPreferencespage.clickcontactUslink();
 	}
-
+	
 	@Then("^the user validates disclaimer link and on clicking disclaimer link it should expand and on again clicking it should collapse")
-	public void uservalidatesdisclaimerlink() {
+	public void uservalidatesdisclaimerlink()
+	{
 		pages.member.ulayer.ProfileandPreferencesPage ProfileandPreferencespage = (pages.member.ulayer.ProfileandPreferencesPage) getLoginScenario()
 				.getBean(PageConstants.PROFILE_AND_PREFERENCES_PAGE);
-
+		
+		
 		String userName = (String) getLoginScenario().getBean(LoginCommonConstants.USERNAME);
-		try {
-			JSONObject profilenpreferencesActualJson = ProfileandPreferencespage.ProfileandPreferencesPageJson;
-			loginScenario.saveBean(ProfnPrefCommonConstants.MY_PROFILE_PREFERENCES_ACTUAL,
-					profilenpreferencesActualJson);
-			System.out.println("profilenpreferencesActualJson---->" + profilenpreferencesActualJson);
-			System.out.println(userName);
-			// Get expected data
-			String fileName = userName;
-			String directory = CommonConstants.PROFILE_AND_PREFERNCES_PAGE_DIRECTORY;
-			JSONObject myProfilenpreferencesexpectedjson = MRScenario.readExpectedJson(fileName, directory);
-			loginScenario.saveBean(ProfnPrefCommonConstants.MY_PROFILE_PREFERENCES_EXPECTED,
-					myProfilenpreferencesexpectedjson);
-			ProfileandPreferencespage.clickOndisclaimerlink(myProfilenpreferencesexpectedjson);
-			System.out.println("profilenpreferencesExpectedJson---->" + myProfilenpreferencesexpectedjson);
+		try
+		{
+		JSONObject profilenpreferencesActualJson = ProfileandPreferencespage.ProfileandPreferencesPageJson;
+		loginScenario.saveBean(ProfnPrefCommonConstants.MY_PROFILE_PREFERENCES_ACTUAL, profilenpreferencesActualJson);
+		System.out.println("profilenpreferencesActualJson---->" + profilenpreferencesActualJson);
+		System.out.println(userName);
+		// Get expected data
+					String fileName = userName;
+					String directory = CommonConstants.PROFILE_AND_PREFERNCES_PAGE_DIRECTORY;
+					JSONObject myProfilenpreferencesexpectedjson = MRScenario.readExpectedJson(fileName,directory);
+					loginScenario.saveBean(ProfnPrefCommonConstants.MY_PROFILE_PREFERENCES_EXPECTED,
+							myProfilenpreferencesexpectedjson);
+					ProfileandPreferencespage.clickOndisclaimerlink(myProfilenpreferencesexpectedjson);
+					System.out.println("profilenpreferencesExpectedJson---->" + myProfilenpreferencesexpectedjson);
 
-			/*
-			 * if (profilenpreferencesActualJson != null &&
-			 * myProfilenpreferencesexpectedjson != null) {
-			 * JSONAssert.assertEquals(myProfilenpreferencesexpectedjson,
-			 * profilenpreferencesActualJson, true); }
-			 */
+					/*if (profilenpreferencesActualJson != null && myProfilenpreferencesexpectedjson != null) 
+					{
+						JSONAssert.assertEquals(myProfilenpreferencesexpectedjson, profilenpreferencesActualJson, true);
+					}*/
 
-		} catch (Exception e) {
-			e.printStackTrace();
+				} 
+		catch (Exception e) {
+					e.printStackTrace();
+				}
 		}
-	}
-
+	
+	
 	@Then("^the user validates the need help section")
-	public void uservalidatesneedhelpsection() {
-		pages.member.ulayer.ProfileandPreferencesPage ProfileandPreferencespage = (pages.member.ulayer.ProfileandPreferencesPage) getLoginScenario()
-				.getBean(PageConstants.PROFILE_AND_PREFERENCES_PAGE);
-
-		ProfileandPreferencespage.validateneedhelpheader();
-
+	public void uservalidatesneedhelpsection()
+	{
+	pages.member.ulayer.ProfileandPreferencesPage ProfileandPreferencespage = (pages.member.ulayer.ProfileandPreferencesPage) getLoginScenario()
+			.getBean(PageConstants.PROFILE_AND_PREFERENCES_PAGE);
+	
+	ProfileandPreferencespage.validateneedhelpheader();
+	
 	}
-
+	
 	@Then("^the user validates permanent address section")
-	public void uservalidatespermanentaddresssection() {
-		pages.member.ulayer.ProfileandPreferencesPage ProfileandPreferencespage = (pages.member.ulayer.ProfileandPreferencesPage) getLoginScenario()
-				.getBean(PageConstants.PROFILE_AND_PREFERENCES_PAGE);
-
-		ProfileandPreferencespage.validatepermanentaddress();
-
+	public void uservalidatespermanentaddresssection()
+	{
+	pages.member.ulayer.ProfileandPreferencesPage ProfileandPreferencespage = (pages.member.ulayer.ProfileandPreferencesPage) getLoginScenario()
+			.getBean(PageConstants.PROFILE_AND_PREFERENCES_PAGE);
+	
+	ProfileandPreferencespage.validatepermanentaddress();
+	
 	}
-
+	
 	@Then("^the user clicks on contact us then contact us page should come")
-	public void uservalidatescontactuslinkpermanentadress() {
-		pages.member.ulayer.ProfileandPreferencesPage ProfileandPreferencespage = (pages.member.ulayer.ProfileandPreferencesPage) getLoginScenario()
-				.getBean(PageConstants.PROFILE_AND_PREFERENCES_PAGE);
-
-		ProfileandPreferencespage.validatecontactuslink();
-
+	public void uservalidatescontactuslinkpermanentadress()
+	{
+	pages.member.ulayer.ProfileandPreferencesPage ProfileandPreferencespage = (pages.member.ulayer.ProfileandPreferencesPage) getLoginScenario()
+			.getBean(PageConstants.PROFILE_AND_PREFERENCES_PAGE);
+	
+	ProfileandPreferencespage.validatecontactuslink();
+	
 	}
-
+	
 	@Then("^the user clicks on edit button")
-	public void userclickemailedit() {
-		pages.member.ulayer.ProfileandPreferencesPage ProfileandPreferencespage = (pages.member.ulayer.ProfileandPreferencesPage) getLoginScenario()
-				.getBean(PageConstants.PROFILE_AND_PREFERENCES_PAGE);
-
-		ProfileandPreferencespage.validateEmail();
-	}
-
+	public void userclickemailedit()
+	{
+			pages.member.ulayer.ProfileandPreferencesPage ProfileandPreferencespage = (pages.member.ulayer.ProfileandPreferencesPage) getLoginScenario()
+					.getBean(PageConstants.PROFILE_AND_PREFERENCES_PAGE);
+			
+			ProfileandPreferencespage.validateEmail();
+     }
+	
 	@Then("^the user clicks on save without filling both fields then the user should see red mandatory message")
-	public void uservalidatemandatorymessage() {
+	public void uservalidatemandatorymessage()
+	{
 		pages.member.ulayer.ProfileandPreferencesPage ProfileandPreferencespage = (pages.member.ulayer.ProfileandPreferencesPage) getLoginScenario()
 				.getBean(PageConstants.PROFILE_AND_PREFERENCES_PAGE);
-
+		
 		ProfileandPreferencespage.emailblankfieldsvalidation();
-
+		
 	}
-
+	
+	
 	@Then("^the user fill new email address and click save then user should see new updated email on page")
-	public void uservalidatesemailsavefunctionality() {
+	public void uservalidatesemailsavefunctionality() 
+	{
 		pages.member.ulayer.ProfileandPreferencesPage ProfileandPreferencespage = (pages.member.ulayer.ProfileandPreferencesPage) getLoginScenario()
 				.getBean(PageConstants.PROFILE_AND_PREFERENCES_PAGE);
-
+		
 		ProfileandPreferencespage.validateemailsavefunctionality();
 	}
+	
 
 	@Then("^the user fill invalid email and clicks on save button then the user should see error message for invalid email")
-	public void uservalidatesinvalidemailmessage() {
+	public void uservalidatesinvalidemailmessage() 
+	{
 		pages.member.ulayer.ProfileandPreferencesPage ProfileandPreferencespage = (pages.member.ulayer.ProfileandPreferencesPage) getLoginScenario()
 				.getBean(PageConstants.PROFILE_AND_PREFERENCES_PAGE);
-
+		
 		ProfileandPreferencespage.validateinvalidemailerrormessage();
 
 	}
-
+	
 	@Then("^the user fill different email id in confirm email box from new email address then error message should come")
-	public void uservalidatesdifferentemail() {
+	public void uservalidatesdifferentemail() 
+	{
 		pages.member.ulayer.ProfileandPreferencesPage ProfileandPreferencespage = (pages.member.ulayer.ProfileandPreferencesPage) getLoginScenario()
 				.getBean(PageConstants.PROFILE_AND_PREFERENCES_PAGE);
-
+		
 		ProfileandPreferencespage.validateduplicateerrormessage();
 	}
-
 	@Then("^the user validates the Phone section")
 	public void UserValidatesPhoneSection() {
 		pages.member.ulayer.ProfileandPreferencesPage ProfileandPreferencespage = (pages.member.ulayer.ProfileandPreferencesPage) getLoginScenario()
@@ -349,111 +362,48 @@ public class ProfileandPreferencesAARPStepDefinition {
 	}
 
 	@Then("^the user validates Communication Preferences section")
-	public void uservalidatescommunicationpreferncessection() {
+	public void uservalidatescommunicationpreferncessection() 
+	{
 		pages.member.ulayer.ProfileandPreferencesPage ProfileandPreferencespage = (pages.member.ulayer.ProfileandPreferencesPage) getLoginScenario()
 				.getBean(PageConstants.PROFILE_AND_PREFERENCES_PAGE);
-
+		
 		ProfileandPreferencespage.validatecommunicationpreferences();
 
 	}
-
+	
 	@Then("^the user validates Go paperless button and on clicking button go green page should come")
-	public void uservalidatesgogreenpagerouting() {
+	public void uservalidatesgogreenpagerouting() 
+	{
 		pages.member.ulayer.ProfileandPreferencesPage ProfileandPreferencespage = (pages.member.ulayer.ProfileandPreferencesPage) getLoginScenario()
 				.getBean(PageConstants.PROFILE_AND_PREFERENCES_PAGE);
-
+		
 		ProfileandPreferencespage.validategogreenbutton();
 	}
-
-	@Then("^the user validates headers on green page")
-	public void uservalidatesgogreenheader() {
+	
+	@Then("^the user validates headers on green page") 
+	public void uservalidatesgogreenheader() 
+	{
 		pages.member.ulayer.ProfileandPreferencesPage ProfileandPreferencespage = (pages.member.ulayer.ProfileandPreferencesPage) getLoginScenario()
 				.getBean(PageConstants.PROFILE_AND_PREFERENCES_PAGE);
-
+		
 		ProfileandPreferencespage.validateheader();
 	}
-
-	@Then("^the user validates on clicking Profilenpreferences arrow user should route to Profile and Preferences page")
-	public void uservalidatespnplinkatthetop() {
+	
+	@Then("^the user validates on clicking Profilenpreferences arrow user should route to Profile and Preferences page") 
+	public void uservalidatespnplinkatthetop() 
+	{
 		pages.member.ulayer.ProfileandPreferencesPage ProfileandPreferencespage = (pages.member.ulayer.ProfileandPreferencesPage) getLoginScenario()
 				.getBean(PageConstants.PROFILE_AND_PREFERENCES_PAGE);
-
+		
 		ProfileandPreferencespage.validatepnparrowlink();
 	}
 	
-
-	@Then("^the user validates the presence of Go Paperless button")
-	public void UserValidateGoPaperlessbutton() {
-		pages.member.ulayer.ProfileandPreferencesPage ProfilePreferencesPage = (pages.member.ulayer.ProfileandPreferencesPage) getLoginScenario()
-				.getBean(PageConstants.PROFILE_AND_PREFERENCES_PAGE);
-
-		ProfilePreferencesPage.validateGoPaperlessbutton();
-
-	}
-	@Then("^the user validates the presence of Plan Name")
-	public void UserValidatePlanName() {
-		pages.member.ulayer.ProfileandPreferencesPage ProfilePreferencesPage = (pages.member.ulayer.ProfileandPreferencesPage) getLoginScenario()
-				.getBean(PageConstants.PROFILE_AND_PREFERENCES_PAGE);
-
-		ProfilePreferencesPage.validatePlanName();
-
-	}
-	@Then("^the user validates the presence of Communication prefernces header")
-	public void UserValidatescommunicationpreferencesheader() {
-		pages.member.ulayer.ProfileandPreferencesPage ProfilePreferencesPage = (pages.member.ulayer.ProfileandPreferencesPage) getLoginScenario()
-				.getBean(PageConstants.PROFILE_AND_PREFERENCES_PAGE);
-
-		ProfilePreferencesPage.validatecommunicationpreferencesheader();
-
-	}
-	@Then("^the user validates the presence of Back to Profile and Preferences links")
-	public void UserValidatesBacktoPNPlink() {
-		pages.member.ulayer.ProfileandPreferencesPage ProfilePreferencesPage = (pages.member.ulayer.ProfileandPreferencesPage) getLoginScenario()
-				.getBean(PageConstants.PROFILE_AND_PREFERENCES_PAGE);
-		try {
-			ProfilePreferencesPage.validateBacktoPNPlink();
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
-	}
-
-	
-	@Then("^the user validates the Note section")
-	public void UserValidatesNoteSection() {
-		pages.member.ulayer.ProfileandPreferencesPage ProfilePreferencesPage = (pages.member.ulayer.ProfileandPreferencesPage) getLoginScenario()
-				.getBean(PageConstants.PROFILE_AND_PREFERENCES_PAGE);
-		ProfilePreferencesPage.validateNoteSection();
-
-	}
-	
-	@Then("^the user validates the I have read checkbox and check it")
-	public void UserValidatesCheckbox() {
-		pages.member.ulayer.ProfileandPreferencesPage ProfilePreferencesPage = (pages.member.ulayer.ProfileandPreferencesPage) getLoginScenario()
-				.getBean(PageConstants.PROFILE_AND_PREFERENCES_PAGE);
-
-		ProfilePreferencesPage.validateCheckbox();
-
-	}
-	
-	@Then("^the user validates the Save Preferences Button")
-	public void UserValidatesSavePreferences() {
-		pages.member.ulayer.ProfileandPreferencesPage ProfilePreferencesPage = (pages.member.ulayer.ProfileandPreferencesPage) getLoginScenario()
-				.getBean(PageConstants.PROFILE_AND_PREFERENCES_PAGE);
-
-		ProfilePreferencesPage.validateSavePreferences();
-
-	}
 	
 	
-	@Then("^the user validates the Go Green Header")
-	public void UserValidatesGoGreenHeader() {
-		pages.member.ulayer.ProfileandPreferencesPage ProfilePreferencesPage = (pages.member.ulayer.ProfileandPreferencesPage) getLoginScenario()
-				.getBean(PageConstants.PROFILE_AND_PREFERENCES_PAGE);
-
-		ProfilePreferencesPage.validateGoGreenHeader();
-
-	}
-
+	
+	
+	
 }
+
+
+
