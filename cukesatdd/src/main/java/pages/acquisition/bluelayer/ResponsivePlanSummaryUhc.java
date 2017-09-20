@@ -639,10 +639,10 @@ public void comparePlanslnk(){
 		}
 		 return new ResponsivePlanDetailsUhc(driver);
 		 }
-		 /*if(planName.contains("F") || planName.contains("G")){
+		 if(planName.equalsIgnoreCase("Plan F") || planName.contains("Plan G")){
 			 driver.findElement(By.xpath("//h2[text()='"+planName+"']/parent::a/parent::div/following-sibling::div[2]/div/a")).click();
 			 return new ResponsivePlanDetailsUhc(driver);
-		 }*/if(planName.contains("PDP")){
+		 }if(planName.contains("PDP")){
 			 driver.findElement(By.xpath("//*[contains(text(),'"+planName+"')]/parent::div/following-sibling::div[1]/div/a[2]")).click();
 			 return new ResponsivePlanDetailsUhc(driver);
 		 }if(planName.contains("SNP")){
