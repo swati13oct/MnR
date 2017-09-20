@@ -22,7 +22,7 @@ public class TeamCLoginUlayer extends UhcDriver {
 		//private static String PAGE_URL = MRConstants.AARPM_URL;
 		//BL url
 		
-		private static String PAGE_URL = MRConstants.TeamC_VPP_PAGE_UHC_URL;
+		private static String PAGE_URL = MRConstants.TeamC_VPP_PAGE_AARPM_URL;
 
 		@FindBy(id = "fd_memberSignInButton")
 		private WebElement loginIn;

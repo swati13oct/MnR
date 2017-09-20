@@ -226,7 +226,9 @@ public static String CAMPAIGN_PAGE_URL1 = "https://www."+MRScenario.environment+
   
   public static String EOB_DIRECT_URL = "https://member."+MRScenario.environment+"-aarpmedicareplans.uhc.com/home/eobsearch.html";
   
-  public static String TeamC_VPP_PAGE_UHC_URL = "https://www."+MRScenario.environment+"-uhcmedicaresolutions.uhc.com";
+  public static String TeamC_UHC_VPP_URL = "https://www."+MRScenario.environment+"-uhcmedicaresolutions.uhc.com";
+  
+  public static String TeamC_VPP_PAGE_AARPM_URL = "https://www."+MRScenario.environment+"-aarpmedicareplans.uhc.com";
   
   public static final String Connector_model_url1 = "https://www."+MRScenario.environment+"-uhcmedicaresolutions.uhc.com/health-plans/medicare-advantage-plans/available-plans.html?WT.mc_id=897509&zipcode=32337&county=320&state=10&originatingSite=https%3A%2F%2Fwww.myuhcplans.com%2Foptions&subdomain=options";
   

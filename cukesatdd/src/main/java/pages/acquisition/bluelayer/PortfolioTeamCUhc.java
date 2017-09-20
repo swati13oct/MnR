@@ -18,7 +18,7 @@ public class PortfolioTeamCUhc extends UhcDriver {
 	private WebElement zipCodeField;
 	
 	
-	private static String PAGE_URL = MRConstants.TeamC_VPP_PAGE_UHC_URL;
+	private static String PAGE_URL = MRConstants.TeamC_UHC_VPP_URL;
 
 	public PortfolioTeamCUhc(WebDriver driver) {
 		super(driver);
