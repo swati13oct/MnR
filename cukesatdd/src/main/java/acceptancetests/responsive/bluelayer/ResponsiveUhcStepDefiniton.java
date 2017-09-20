@@ -855,11 +855,21 @@ public class ResponsiveUhcStepDefiniton {
 	}
 	
 	@And("^the user validates benefits table$")
-	public void user_validates_beneifts_table(){		 
+	public void user_validates_beneifts_table(DataTable givenAttributes){	
+		List<DataTableRow> memberAttributesRow = givenAttributes
+				.getGherkinRows();
+		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells()
+					.get(0), memberAttributesRow.get(i).getCells().get(1));
+		}
+
+		String drugCostActual = memberAttributesMap.get("Drug Cost");
 		ResponsivePlanSummaryUhc planSummaryPage = (ResponsivePlanSummaryUhc) getLoginScenario().getBean(PageConstants.RESPONSIVE_PLAN_SUMMARY_PAGE_UHC);
 		String planType = (String) getLoginScenario().getBean(VPPCommonConstants.PLAN_TYPE);
 		String planName = (String) getLoginScenario().getBean(VPPCommonConstants.PLAN_NAME);
-		planSummaryPage.validateBenefitsTableAfterAddingDrug(planType, planName);
+		planSummaryPage.validateBenefitsTableAfterAddingDrug(planType, planName, drugCostActual);
 	}
 	
 	@And("^the user validates plan costs$")

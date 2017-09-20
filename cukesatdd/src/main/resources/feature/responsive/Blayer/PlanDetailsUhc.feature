@@ -31,7 +31,7 @@ Examples:
 		|zipCode|county						 |planType |planName					   |
 		|90210  |Los Angeles County|MA       |AARP MedicareComplete SecureHorizons Plan 1 (HMO)  |
 		
-@rightRail		
+		
 Scenario Outline: To validate need more information
 Given the user is on the vpp portfolio page
 Then the user performs plan search using zipcode

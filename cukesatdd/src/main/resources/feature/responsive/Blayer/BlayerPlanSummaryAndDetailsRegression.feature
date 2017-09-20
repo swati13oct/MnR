@@ -12,11 +12,12 @@ Then the user navigates to DCE and adds a drug
 |Plan Name|<planName>|
 |Drug Name|<drugName>|
 And the user validates benefits table
+|Drug Cost|<drugCost>|
  Examples:
-		|zipCode|county						 |planType | planName                                           |drugName|
-		|90210  |Los Angeles County|MAPD       |AARP MedicareComplete SecureHorizons Plan 1 (HMO) |lipitor |
-		|33012  |Miami-Dade County |SNP        | Preferred Special Care Miami-Dade (HMO SNP)      |lipitor |
-		|33012  |Miami-Dade County |PDP        | AARP MedicareRx Preferred (PDP)                  |lipitor |
+		|zipCode|county						 |planType | planName                                           |drugName| drugCost |
+		|90210  |Los Angeles County|MAPD       |AARP MedicareComplete SecureHorizons Plan 1 (HMO) |lipitor | $4,040.64|
+	#	|33012  |Miami-Dade County |SNP        | Preferred Special Care Miami-Dade (HMO SNP)      |lipitor | $4,052.64|
+	#	|33012  |Miami-Dade County |PDP        | AARP MedicareRx Preferred (PDP)                  |lipitor | $4,040.64|
 		
 		
 		
@@ -71,7 +72,7 @@ Examples:
 		|zipCode|county						 |planType |planName					   |
 		|33012  |Los Angeles County|SNP      |Miami-Dade County    |
 
-@US656550 @sprint3 @rightRail		
+@US656550 @sprint3 		
 Scenario Outline: To validate plan count from portfolio page
 Given the user is on the vpp portfolio page
 Then the user performs plan search using zipcode
