@@ -43,6 +43,12 @@ public class OrderplanmaterialsPage extends UhcDriver {
 	@FindBy(id = "eft-id")
 	private WebElement EFTbrochureField;
 
+	@FindBy(xpath = "//*[contains(text(), 'Your request cannot be processed at this time. For help, please contact Customer Servic')]")
+	private WebElement SHIPerrorMsg;
+	
+	@FindBy(xpath = "//*[contains(text(), 'Please select one of the items above')]")
+	private WebElement NoSelectionErrorMsg;
+
 	@FindBy(id = "ppe-id")
 	private WebElement premiumPayment;
 
@@ -130,7 +136,8 @@ public class OrderplanmaterialsPage extends UhcDriver {
 		
 	}
 	public boolean ValidateErrorMessage(){
-		if (driver.findElement(By.xpath("//*[contains(text(), 'Please select one of the items above')]")).isDisplayed()){
+		
+		if (NoSelectionErrorMsg.isDisplayed()){
 			System.out.println("*************Error Message Displayed displayed for Order materials Page***************");
 			return true;
 		}
@@ -140,7 +147,8 @@ public class OrderplanmaterialsPage extends UhcDriver {
 		
 	}
 	public boolean ValidateSHIPErrorMessage(){
-		if (driver.findElement(By.xpath("//*[contains(text(), 'Your request cannot be processed at this time. For help, please contact Customer Servic')]")).isDisplayed()){
+		
+		if (SHIPerrorMsg.isDisplayed()){
 			System.out.println("*************Error Message Displayed displayed for SHIP invalid Selection in Order materials Page***************");
 			return true;
 		}
@@ -202,11 +210,6 @@ public class OrderplanmaterialsPage extends UhcDriver {
 		if (option.contains("Certificate of Insurance")) {
 			certificateInsurance.click();
 		}
-
-/*		if (submitButton.getTagName() == "button"){
-			System.out.print("Submit Button enabled");
-		}
-*/		submitButton.submit();
 		submitButton.click();
 
 		/*

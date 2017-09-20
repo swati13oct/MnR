@@ -190,13 +190,19 @@ public class OrderPlanMaterialsAarpStepDefinition {
 		if (planMaterialConfirmationPage != null) {
 			getLoginScenario().saveBean(PageConstants.PLAN_MATERIALS_CONFIRMATION_PAGE,
 					planMaterialConfirmationPage);
-			System.out.print("Order Plan Material Confirmation Page not displayed");
+			System.out.print("Order Plan Material Confirmation Page displayed");
 			//Assert.assertTrue(true);
 /*			planMaterialConfirmationActualJson = planMaterialConfirmationPage.planMaterialsConfirmationJson;
 			getLoginScenario().saveBean(
 					OrderPlanMaterialsCommonConstants.PLAN_MATERIALS_CONFIRMATION_ACTUAL,
 					planMaterialConfirmationActualJson);
 */
+		}
+		else{
+			getLoginScenario().saveBean(PageConstants.ORDER_PLAN_MATERIALS_PAGE,
+					orderPlanMaterialsPage);
+			System.out.print("Order Plan Material Confirmation Page not displayed");
+			
 		}
 		
 		
@@ -309,10 +315,14 @@ public class OrderPlanMaterialsAarpStepDefinition {
 		
 		if(planMaterialConfirmationpage == null){
 			System.out.println("In Order Materials Page");
+			getLoginScenario().saveBean(PageConstants.ORDER_PLAN_MATERIALS_PAGE,
+					orderPlanMaterialsPage);
+			
 			Assert.assertTrue(true);
 		}
-		else
+		else{
 			Assert.fail("Fail : navigages to Order Confirmation page");
+		}
 	}
 
 	@Then("^the user validates error message in Order Materials page$")
