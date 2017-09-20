@@ -304,7 +304,12 @@ public class PlanDetailsPage extends UhcDriver {
 	}
 
 	public boolean validateCompareBoxMessage() {
-		CommonUtility.waitForPageLoad(driver, compareChkBox, 20);
+		try {
+			Thread.sleep(10000);
+		} catch (InterruptedException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 		compareChkBox.click();
 		try {
 			Thread.sleep(1000);

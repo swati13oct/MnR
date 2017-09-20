@@ -140,7 +140,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	@FindBy(xpath = ".//*[@id='plan-list-1']/div/div[3]/div/div[3]/div[3]/div/div/span[3]")
 	private WebElement maChkboxMessage3;
 	
-	@FindBy(xpath=".//*[@id='plan-list-1']/div/div[3]/div/div[1]/div[3]/div/div/span[3]/a")
+	@FindBy(xpath=".//*[@id='plan-list-1']//a[@class='compare-link']")
 	private WebElement compareLink;
 	
 	@FindBy(className = "switchPlanYear")
