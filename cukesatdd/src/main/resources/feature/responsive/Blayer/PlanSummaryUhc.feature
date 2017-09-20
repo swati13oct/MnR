@@ -104,7 +104,7 @@ And the user validate the Blue banner and plan year toggle
 |Plan Name  |<planName>|
 Examples:
 |zipCode|  county         | planType   | planName                                     | curentPeriod | currentYear | futureYear | 
-|02210  | Suffolk County  | SNP        |UnitedHealthcare Senior Care Options (HMO SNP)| AEP        | 2016        | 2017       | 
+|02210  | Suffolk County  | SNP        |UnitedHealthcare Senior Care Options (HMO SNP)| AEP        | 2017        | 2018       | 
 #|02210  | Suffolk County  | MA         |AARP MedicareComplete Plan 2 (HMO)            | AEP        | 2016        | 2017       | 
 
 @rightRail		
@@ -244,11 +244,11 @@ And the user validates benefit table
   | Prescription Drugs  | <prescriptionDrug>| 
 Examples:
 |zipCode|county          |planType | planName                                            |monthlypremium | primarycare |  specialist       |referralRequired| prescriptionDrug |
-|33012 |Miami-Dade County| snp     |UnitedHealthcare Dual Complete RP (Regional PPO SNP)  |  $29.10       |$0           |  20              | No             |  25  |
+|33012 |Miami-Dade County| snp     |UnitedHealthcare Dual Complete RP (Regional PPO SNP)  |  $19.80      |$0           |  19              | No             |  25  |
 
 
 @benefittablema
-Scenario Outline: To validate plan count from portfolio page
+Scenario Outline: To validate benefit table
 Given the user is on the vpp portfolio page
 Then the user performs plan search using zipcode
               | Zip Code |<zipCode>|
@@ -265,7 +265,7 @@ And the user validates benefit table for ma
   | Prescription Drugs  | <prescriptionDrug>| 
 Examples:
 |zipCode|county          |planType | planName                                            |monthlypremium | primarycare |  specialist       |referralRequired| prescriptionDrug |
-|85901 | Navajo County   |  ma     |UnitedHealthcare MedicareDirect Rx (PFFS)             |   $52         | $25         |  $50             |  No            |   $2 |
+|85901 | Navajo County   |  ma     |UnitedHealthcare MedicareDirect Rx (PFFS)            |   $60        | $25         |  $50             |  No            |   $4 |
 
 
 @learnmore

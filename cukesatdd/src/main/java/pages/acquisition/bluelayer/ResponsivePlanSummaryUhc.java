@@ -481,12 +481,12 @@ public void disclaimerText(){
 
 public ResponsivePlanSummaryUhc viewPlanSummary(String planType) {
 //	JavascriptExecutor js = (JavascriptExecutor)driver;
-	try {
+	/*try {
 		Thread.sleep(4000);
 	} catch (InterruptedException e) {
 		// TODO Auto-generated catch block
 		e.printStackTrace();
-	}	
+	}*/	
 	if (planType.equalsIgnoreCase("PDP")) {
 		viewPdpPlans.click();
 		return new ResponsivePlanSummaryUhc(driver);
@@ -498,7 +498,7 @@ public ResponsivePlanSummaryUhc viewPlanSummary(String planType) {
 		return new ResponsivePlanSummaryUhc(driver);
 			}else if(planType.equalsIgnoreCase("MS")){
 		           showMsPlans.click();
-		    if(msHeaderTitle.isDisplayed()){
+		    if(driver.getTitle().equals("UnitedHealthcare Medicare Solutions | AARP Medicare Supplement Plans")){
 		    	return new ResponsivePlanSummaryUhc(driver);
 		    }else{
 		    	System.out.println("MS plans header not displayed");

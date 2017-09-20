@@ -174,7 +174,7 @@ And the user validates benefit table for ma
   | Prescription Drugs  | <prescriptionDrug>| 
 Examples:
 |zipCode|county          |planType | planName                                            |monthlypremium | primarycare |  specialist       |referralRequired| prescriptionDrug |
-|85901 | Navajo County   |  ma     |UnitedHealthcare MedicareDirect Rx (PFFS)             |   $52         | $25         |  $50             |  No            |   $2 |		
+|85901 | Navajo County   |  ma     |UnitedHealthcare MedicareDirect Rx (PFFS)            |   $60        | $25         |  $50             |  No            |   $4 |
 
 @US646136 @learnmore
 Scenario Outline: To validate learnmore
