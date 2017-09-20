@@ -15,8 +15,8 @@ import cucumber.junit.Cucumber;
 @Cucumber.Options(glue = { "atdd.framework","acceptancetests.ordermaterials.ulayer" }, 
 		features = { "feature/ordermaterials/ulayer" }, 
 		format = {
-				"pretty", "html:reports/test-report","json:target/cucumber.json"}, tags ={"@ValidateHeaderTabs"})
-//@ValidateHeaderTabs,@ValidateErrorMessage
+				"pretty", "html:reports/test-report","json:target/cucumber.json"}, tags ={"@ValidateHeaderTabs,@ValidateErrorMessage,@ValidateSHIPErrorMessage"})
+//@ValidateHeaderTabs,@ValidateErrorMessage,@ValidateSHIPErrorMessage
 public class RunMRAtddTestOrderPlanMaterials {
 	
 	

@@ -127,6 +127,10 @@ public class AccountHomePage extends UhcDriver {
 
 	@FindBy(linkText = "Order plan materials")
 	private WebElement orderPlanMaterials;
+	
+	
+	@FindBy(linkText = "Go to Pharmacy Locator page")
+	private WebElement PharmacyLocatorLink;
 
 	@FindBy(id = "gogreenmeter")
 	private WebElement goGreenMeterIndicator;
@@ -407,9 +411,15 @@ public class AccountHomePage extends UhcDriver {
 	}
 	
 	public PharmacySearchPage navigateToPharmacyLocator() {
-		driver.manage().timeouts().implicitlyWait(400, TimeUnit.SECONDS);
-		driver.navigate().to("https://member.team-a-aarpmedicareplans.uhc.com/content/aarpm/home/pharmacy_search.html#/Pharmacy-Search-English");
-		driver.manage().timeouts().implicitlyWait(400, TimeUnit.SECONDS);
+		driver.manage().timeouts().implicitlyWait(1000, TimeUnit.SECONDS);
+		CommonUtility.checkPageIsReady(driver);
+		PharmacyLocatorLink.click();
+		driver.manage().timeouts().implicitlyWait(1000, TimeUnit.SECONDS);
+		CommonUtility.checkPageIsReady(driver);
+		
+		if (driver.findElement(By.xpath("//*[contains(text(), 'Locate a Pharmacy')]")).isDisplayed()){
+			return new PharmacySearchPage(driver);
+		}
 		/*pharmacyLocator.click();
 		if (driver.getTitle().equalsIgnoreCase(
 				"AARP Medicare Plans | Pharmacy Directory")) {
@@ -569,15 +579,21 @@ public class AccountHomePage extends UhcDriver {
 		//myMenuLinkAarp.click();
 		
 		CommonUtility.checkPageIsReady(driver);
+		
 		OrderPlanMaterialslnk.click();
 		CommonUtility.checkPageIsReady(driver);
-		if (driver.getTitle().equalsIgnoreCase(
+		driver.manage().timeouts().implicitlyWait(1000, TimeUnit.SECONDS);
+		if (driver.findElement(By.xpath("//*[contains(text(), 'Order Plan Mate')]")).isDisplayed()){
+			return new OrderplanmaterialsPage(driver);
+
+		}
+
+/*		if (driver.getTitle().equalsIgnoreCase(
 				"AARP Medicare Plans | Order Plan Materials") || (driver.getTitle().equalsIgnoreCase("Order Plan Materials"))) {
 			return new OrderplanmaterialsPage(driver);
 		}
-		else{
+*/		
 		return null;
-	}
 	}
 
 	public MyPreferencesPage clicksOnGoGreenIcon() {

@@ -9,6 +9,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
+import acceptancetests.atdd.util.CommonUtility;
 import atdd.framework.UhcDriver;
 import junit.framework.Assert;
 
@@ -45,7 +46,7 @@ public class OrderplanmaterialsPage extends UhcDriver {
 	@FindBy(id = "ppe-id")
 	private WebElement premiumPayment;
 
-	@FindBy(id = "couponBook-id")
+	@FindBy(xpath = "//*[@id='shipRadio']/div[4]/div")
 	private WebElement couponBook;
 
 	@FindBy(id = "medicareHospital-id")
@@ -61,7 +62,7 @@ public class OrderplanmaterialsPage extends UhcDriver {
 	//private WebElement planField;
 
 	
-	@FindBy(xpath = "//button")
+	@FindBy(xpath = "//button[@class = 'btn btn-primary select-item-submit']")
 	private WebElement submitButton;
 	
 	//@FindBy(className = "orderplancontsec")
@@ -138,8 +139,20 @@ public class OrderplanmaterialsPage extends UhcDriver {
 			return false;}
 		
 	}
+	public boolean ValidateSHIPErrorMessage(){
+		if (driver.findElement(By.xpath("//*[contains(text(), 'Your request cannot be processed at this time. For help, please contact Customer Servic')]")).isDisplayed()){
+			System.out.println("*************Error Message Displayed displayed for SHIP invalid Selection in Order materials Page***************");
+			return true;
+		}
+		else{ 
+			System.out.println("************Error message not displayed for SHIP invalid Selection - Order materials Page***************");
+			return false;}
+		
+	}
 	
 	public PlanMaterialConfirmationPage selectsOption(String option) {
+		
+		CommonUtility.checkPageIsReady(driver);
 
 		if (option.contains("Member Materials") || option.contains("Welcome Guide")) {
 			memberMaterialsfield.submit();
@@ -162,7 +175,14 @@ public class OrderplanmaterialsPage extends UhcDriver {
 		}
 
 		if (option.contains("Coupon Book")) {
+			System.out.println("*************Selecting Coupon Book Radio***************");
+
 			couponBook.click();
+			
+			if(!couponBook.isSelected()){
+				System.out.println("*************NOT ABLE to SELECT Coupon Book Radio***************");
+				
+			}
 		}
 		
 		if (option.contains("None")) {
@@ -183,6 +203,10 @@ public class OrderplanmaterialsPage extends UhcDriver {
 			certificateInsurance.click();
 		}
 
+/*		if (submitButton.getTagName() == "button"){
+			System.out.print("Submit Button enabled");
+		}
+*/		submitButton.submit();
 		submitButton.click();
 
 		/*
@@ -198,7 +222,7 @@ public class OrderplanmaterialsPage extends UhcDriver {
 		if (driver.findElement(By.className("orderplanmaterials")).getText()
 				.contains("The following documents have been ordered")) {
 			return new PlanMaterialConfirmationPage(driver);
-		} else
+		} 
 			return null;
 		
 		

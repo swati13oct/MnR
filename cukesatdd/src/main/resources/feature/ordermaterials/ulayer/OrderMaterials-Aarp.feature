@@ -113,4 +113,16 @@ Examples:
     Examples: 
       	| planType | comboPlans |
      		| MA       | MA,HIP     |
+
+@ValidateSHIPErrorMessage
+ Scenario Outline: Verify Aarp Order Materials Page Error Message
+    Given registered AMP member with following attributes
+      | Plan Type   | <planType>   |
+    When the user views order materials in AARP site
+    And the user selects an option from the orderp list in AARP site
+	| Option | <option> |
+    Then the user validates error message for SHIP invalid selection in Order Materials page
     
+    Examples: 
+      	| planType | option 			|
+     		| SHIP     | Coupon Book  |
