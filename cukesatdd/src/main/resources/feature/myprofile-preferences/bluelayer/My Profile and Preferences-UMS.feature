@@ -125,8 +125,8 @@ Feature: To test My Profile & Preferences flow in UMS site
     Examples: 
       | planType |
       # | PDP     |
-      | MAPD     |
-      | MA       |
+        | MAPD     |
+      #| MA       |
 
   @ValidateEmail
   Scenario Outline: To verify Email section in UMS site
@@ -138,7 +138,7 @@ Feature: To test My Profile & Preferences flow in UMS site
     Examples: 
       | planType |
       | MAPD     |
-      | MA       |
+      #| MA       |
 
   @PasswordEdit
   Scenario Outline: To verify the edit functionality in Account Profile section in UMS site
@@ -221,7 +221,7 @@ Feature: To test My Profile & Preferences flow in UMS site
       | <planType> |
     When the user navigates to Profile and Preferences page
     Then the user validates permanent address section
-    And the user clicks on contact us then contact us page should come
+    #And the user clicks on contact us then contact us page should come
 
     Examples: 
       | planType |
@@ -242,8 +242,8 @@ Feature: To test My Profile & Preferences flow in UMS site
     Examples: 
       | planType |
       #| PDP      |
-      #| MAPD     |
-      | MA       |
+      | MAPD     |
+      #| MA       |
 
   @PhoneEdit
   Scenario Outline: To verify Phone Edit Functionality
@@ -258,8 +258,8 @@ Feature: To test My Profile & Preferences flow in UMS site
 
     Examples: 
       | planType |
-      #| MAPD     |
-      | MA       |
+      | MAPD     |
+      #| MA       |
 
   @TemporaryAddress
   Scenario Outline: To verify Temporary adrress and Edit Functionality
@@ -267,15 +267,15 @@ Feature: To test My Profile & Preferences flow in UMS site
       | <planType> |
     Then the user navigates to Profile and Preferences page
     Then the user validates the temporary address section
-    Then the user clicks on the edit link and  validates the fieldsand Buttons of temp address section
+    Then the user validates the fields and Buttons of temp address section
     Then the user checks the Edit Button on the top changes to Cancel Button
-    Then the user validates the functionality of save Button in Temporary adrress section
+    #Then the user validates the functionality of save Button in Temporary adrress section
     Then the user validates the functionality of Cancel Button In Temporary adrress section
 
     Examples: 
-      | planType |
-      #| MAPD     |
-      | MA       |
+       | planType |
+       | MAPD     |
+      #| MA       |
 
   @GoGreen
   Scenario Outline: To verify Go Green page

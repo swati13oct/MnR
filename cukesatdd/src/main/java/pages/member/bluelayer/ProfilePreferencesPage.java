@@ -45,22 +45,19 @@ public class ProfilePreferencesPage extends UhcDriver {
 	@FindBy(xpath = "//*[@id='tab-1']//div[1]//div//p[2]//text()")
 	private WebElement memberIdtext;
 
-	@FindBy(xpath = "//*[@id='profilePreferencesApp']//div[1]//div//section//div//div[2]//div//div//div//div//div[1]//div//span[1]")
+	@FindBy(xpath = ".//*[@id='profilePreferencesController']/div[1]/div[1]/div/section/div/div[2]/div/div/div/div/div[1]/div/span[2]")
 	private WebElement Username;
 
-	@FindBy(xpath = "//*[@id='profilePreferencesApp']//div[1]//div//section//div//div[2]//div//div//div//div//div[1]//div//span[2]")
+	@FindBy(xpath = ".//*[@id='profilePreferencesController']/div[1]/div[1]/div/section/div/div[2]/div/div/div/div/div[1]/div/span[1]/p")
 	private WebElement Usernametext;
 
-	@FindBy(xpath = "//*[@id='profilePreferencesApp']//div[1]//div//section//div//div[2]//div//div//div//div//div[2]//div//div//span[1]")
+	@FindBy(xpath = "/.//*[@id='password']/div/div/span[2]")
 	private WebElement Password;
 
-	@FindBy(xpath = "//*[@id='profilePreferencesApp']//div[1]//div//section//div//div[2]//div//div//div//div//div[2]//div//div//span[2]")
+	@FindBy(xpath = ".//*[@id='password']/div/div/span[1]/p")
 	private WebElement Passwordtext;
 
-	@FindBy(xpath = "//*[@id='profilePreferencesApp']//div[1]//div//section//div//div[2]//div//div//div//div//div[2]//a")
-	private WebElement EditLink;
-
-	@FindBy(xpath = "//*[@id='Artwork']")
+    @FindBy(id="Artwork")
 	private WebElement EditButton;
 
 	@FindBy(xpath = ".//*[@id='tab-1']/div[3]/div[1]/div/div[1]/div/div/div/div[1]/div/div/div[1]/p")
@@ -99,10 +96,10 @@ public class ProfilePreferencesPage extends UhcDriver {
 	@FindBy(id = "updateEmail")
 	private WebElement SaveEmailButton;
 
-	@FindBy(xpath = ".//*[@id='tab-1']/div[3]/div[1]/div/div[1]/div/div/div/div[1]/div/div/div[1]/div/div/div/div/div/a[2]")
+	@FindBy(xpath = ".//*[@id='email-form']/div[3]/div/a")
 	private WebElement CanceEmaillButton;
 
-	@FindBy(xpath = ".//*[@id='tab-1']/div[3]/div[1]/div/div[1]/div/div/div/div[1]/div/div/div[1]/div/div/div/div/div/a[1]")
+	@FindBy(xpath = ".//*[@id='email']/div[1]/div/div/div/div/div/a[1]")
 	private WebElement EmailEditbutton;
 
 	@FindBy(id = "emailNew-error")
@@ -143,9 +140,12 @@ public class ProfilePreferencesPage extends UhcDriver {
 	@FindBy(xpath = ".//*[@id='tab-1']/div[3]/div[2]/h3")
 	private WebElement communicationpreferencesheader;
 
-	@FindBy(xpath = ".//*[@id='tab-1']/div[3]/div[2]/div/div/div/div/div[2]/a")
+	@FindBy(xpath = ".//*[@id='communicationAddress']/div[2]/a")
 	private WebElement gopaperlessbutton;
-
+	
+	@FindBy(id="communicationAddress")
+	private WebElement communicationpreferncessection;
+	
 	@FindBy(xpath = "html/body/div[3]/div/div[1]/div/main/div[1]/section/div/div[1]/div/div/div[1]/img")
 	private WebElement gogreenleaf;
 
@@ -158,26 +158,25 @@ public class ProfilePreferencesPage extends UhcDriver {
 	@FindBy(xpath = "html/body/div[3]/div/div[1]/div/header/div/div/div/div/div/div/a")
 	private WebElement Profilenprefernceslink;
 
-	@FindBy(xpath = "//*[@id='tab-1']/div[3]/div[1]/div/div[2]/div/div/div/div[1]/div/div/div[1]/p")
-	private WebElement PhoneHeader;
-	@FindBy(xpath = "//*[@id='tab-1']/div[3]/div[1]/div/div[2]/div/div/div/div[1]/div/div/div[1]/div/div/div/div/div/a[1]")
+	@FindBy(id="phone")
+	private WebElement Phonesection;
+	
+	@FindBy(xpath = ".//*[@id='phone']/div[1]/div/div/div/div/div/a[1]")
 	private WebElement PhoneEditButton;
 
-	@FindBy(xpath = "//*[@id='tab-1']/div[3]/div[1]/div/div[2]/div/div/div/div[1]/div/div/div[1]/div/div/div/div/div/a[1]/svg")
-	private WebElement PhoneEditLink;
-
-	@FindBy(xpath = "//*[@id='tab-1']/div[3]/div[1]/div/div[2]/div/div/div/div[1]/div/div/div[2]/div[1]/div[1]/div/span[1]")
+    @FindBy(xpath = "//*[@id='tab-1']/div[3]/div[1]/div/div[2]/div/div/div/div[1]/div/div/div[2]/div[1]/div[1]/div/span[1]")
 	private WebElement Daytimephone;
-	@FindBy(xpath = "//*[@id='tab-1']/div[3]/div[1]/div/div[2]/div/div/div/div[1]/div/div/div[2]/div[1]/div[2]/div/span[1]")
-	private WebElement EveningPhone;
+	
+	@FindBy(id="phone-form")
+	private WebElement PhoneForm;
 
-	@FindBy(xpath = "//*[@id='phone-form']/div[3]/div/button/span")
+	@FindBy(xpath = ".//*[@id='phone-form']/div[3]/div/button")
 	private WebElement PhoneSaveButton;
 
 	@FindBy(xpath = "//*[@id='phone-form']/div[3]/div/a")
 	private WebElement PhoneCancelButton;
 
-	@FindBy(xpath = "//*[@id='tab-1']/div[3]/div[1]/div/div[2]/div/div/div/div[1]/div/div/div[1]/div/div/div/div/div/a[2]")
+	@FindBy(xpath = ".//*[@id='phone']/div[1]/div/div/div/div/div/a[2]")
 	private WebElement PhoneTopCancelButton;
 
 	@FindBy(id = "daytimePhone")
@@ -188,11 +187,12 @@ public class ProfilePreferencesPage extends UhcDriver {
 
 	@FindBy(xpath = "//*[@id='temporaryAddress']/div[1]/p")
 	private WebElement tempAddressHeader;
-	@FindBy(xpath = "//*[@id='temporaryAddress']/div[1]/a[1]")
+	
+	@FindBy(xpath = ".//*[@id='temporaryAddress']/div[2]/div[1]/div/div/a")
 	private WebElement tempEditButton;
 
-	@FindBy(id = "altStreet")
-	private WebElement StreetAddress;
+	@FindBy(id="temporaryAddress")
+	private WebElement Edittemporaryaddressform;
 
 	@FindBy(id = "altStreet2")
 	private WebElement StreetAddress2;
@@ -227,10 +227,10 @@ public class ProfilePreferencesPage extends UhcDriver {
 	@FindBy(xpath = "//*[@id='address-1-form']/fieldset/div[7]/div/button/span")
 	private WebElement SaveButtontempAddress;
 
-	@FindBy(xpath = "//*[@id='address-1-form']/fieldset/div[7]/div/a")
+	@FindBy(xpath = ".//*[@id='address-1-form']/fieldset/div[7]/div/a")
 	private WebElement CancelButtontempAddress;
 
-	@FindBy(xpath = "//*[@id='temporaryAddress']/div[1]/a[2]")
+	@FindBy(xpath = ".//*[@id='temporaryAddress']/div[1]/a[2]")
 	private WebElement CancelButtontoptempAddress;
 
 	@FindBy(xpath = ("//*[contains(text(), 'Go Paperless')]"))
@@ -344,7 +344,6 @@ public class ProfilePreferencesPage extends UhcDriver {
 		validate(Usernametext);
 		validate(Password);
 		validate(Passwordtext);
-		validate(EditLink);
 		validate(EditButton);
 
 	}
@@ -352,12 +351,13 @@ public class ProfilePreferencesPage extends UhcDriver {
 	public void validateEmail() {
 		validateNew(EmailLabel);
 		validateNew(EmailAddressLabel);
+		validateNew(Emailform);
 
 	}
 
 	public void validateAccountEdit(String password2) {
 
-		EditLink.click();
+		EditButton.click();
 		CurrentPassword.sendKeys(password2);
 		NewPassword.sendKeys(password2 + "1");
 		ConfirmPassword.sendKeys(password2 + "1");
@@ -542,6 +542,7 @@ public class ProfilePreferencesPage extends UhcDriver {
 	public void validatecommunicationpreferences() {
 		validate(communicationpreferencesheader);
 		validate(gopaperlessbutton);
+		validateNew(communicationpreferncessection);
 	}
 
 	public GoGreenPage validategogreenbutton() {
@@ -572,21 +573,20 @@ public class ProfilePreferencesPage extends UhcDriver {
 
 	public void validatePhoneElements() {
 
-		validateNew(PhoneHeader);
+		validateNew(Phonesection);
 		validateNew(PhoneEditButton);
 		// validateNew(PhoneEditLink);
-		validateNew(Daytimephone);
-		validateNew(EveningPhone);
-
-	}
+		
+}
 
 	public void validatePhoneEditElements() {
 		PhoneEditButton.click();
-		validateNew(EveningTimePhoneTextField);
+		validateNew(PhoneForm);
+		/*validateNew(EveningTimePhoneTextField);
 		validateNew(DaytimePhoneTextField);
 		validateNew(PhoneTopCancelButton);
 		validateNew(PhoneCancelButton);
-		validateNew(PhoneSaveButton);
+		validateNew(PhoneSaveButton);*/
 	}
 
 	public void validatePhoneCancel() {
@@ -638,7 +638,7 @@ public class ProfilePreferencesPage extends UhcDriver {
 	public void validatetempaddressEditElements() {
 		// TODO Auto-generated method stub'
 		tempEditButton.click();
-		validateNew(StreetAddress);
+		validateNew(Edittemporaryaddressform);
 		validateNew(StreetAddress2);
 		validateNew(City);
 		validateNew(State);

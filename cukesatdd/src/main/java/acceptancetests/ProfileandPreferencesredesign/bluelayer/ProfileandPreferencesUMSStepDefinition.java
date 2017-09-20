@@ -390,7 +390,7 @@ public class ProfileandPreferencesUMSStepDefinition {
 
 	}
 
-	@Then("^the user clicks on the edit link and  validates the fieldsand Buttons of temp address section")
+	@Then("^the user validates the fields and Buttons of temp address section")
 	public void UserClicksEdittempaddressSection() {
 		ProfilePreferencesPage ProfilePreferencesPage = (pages.member.bluelayer.ProfilePreferencesPage) getLoginScenario()
 				.getBean(PageConstants.ProfilePreferencesPage);

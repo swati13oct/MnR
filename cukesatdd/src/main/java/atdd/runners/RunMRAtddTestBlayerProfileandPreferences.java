@@ -15,8 +15,7 @@ import cucumber.junit.Cucumber;
 
 @Cucumber.Options(glue = { "atdd.framework", "acceptancetests.ProfileandPreferencesredesign.bluelayer" }, features = {
 		"feature/myprofile-preferences/bluelayer" }, format = { "pretty", "html:reports/test-report",
-				"json:target/cucumber.json" }, tags = { "@GoGreen"})
+				"json:target/cucumber.json" }, tags = { "@ValidatePlanNamemembernameIDAccountSectionUMS,@ValidateEmail,@PermanentAddress,@CommunicationPreferences,@PhoneEdit,@TemporaryAddress"})
 public class RunMRAtddTestBlayerProfileandPreferences
 {
-
 }
