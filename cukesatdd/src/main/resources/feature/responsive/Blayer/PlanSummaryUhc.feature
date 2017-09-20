@@ -149,7 +149,7 @@ Examples:
 		|33012  |Los Angeles County|SNP      |Miami-Dade County    |
 		
 @rightRail		
-Scenario Outline: To validate plan count from portfolio page
+Scenario Outline: To validate email widget
 Given the user is on the vpp portfolio page
 Then the user performs plan search using zipcode
               | Zip Code |<zipCode>|
@@ -269,7 +269,7 @@ Examples:
 
 
 @learnmore
-Scenario Outline: To validate plan count from portfolio page
+Scenario Outline: To validate learn more button
 Given the user is on the vpp portfolio page
 Then the user performs plan search using zipcode
               | Zip Code |<zipCode>|
@@ -499,7 +499,7 @@ Examples:
 
 
 	
-@US638058
+
 Scenario Outline: Plan Summary DCE integration
 Given the user is on the vpp portfolio page
 Then the user performs plan search using zipcode
