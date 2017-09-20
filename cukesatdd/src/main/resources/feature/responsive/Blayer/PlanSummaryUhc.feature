@@ -104,7 +104,7 @@ And the user validate the Blue banner and plan year toggle
 |Plan Name  |<planName>|
 Examples:
 |zipCode|  county         | planType   | planName                                     | curentPeriod | currentYear | futureYear | 
-|02210  | Suffolk County  | SNP        |UnitedHealthcare Senior Care Options (HMO SNP)| AEP        | 2016        | 2017       | 
+|02210  | Suffolk County  | SNP        |UnitedHealthcare Senior Care Options (HMO SNP)| AEP        | 2017        | 2018       | 
 #|02210  | Suffolk County  | MA         |AARP MedicareComplete Plan 2 (HMO)            | AEP        | 2016        | 2017       | 
 
 @rightRail		

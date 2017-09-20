@@ -498,7 +498,7 @@ public ResponsivePlanSummaryUhc viewPlanSummary(String planType) {
 		return new ResponsivePlanSummaryUhc(driver);
 			}else if(planType.equalsIgnoreCase("MS")){
 		           showMsPlans.click();
-		    if(msHeaderTitle.isDisplayed()){
+		    if(driver.getTitle().equals("UnitedHealthcare Medicare Solutions | AARP Medicare Supplement Plans")){
 		    	return new ResponsivePlanSummaryUhc(driver);
 		    }else{
 		    	System.out.println("MS plans header not displayed");
