@@ -180,6 +180,7 @@ public class DCEAcqAarpStepDefinition {
 	public void navigateToPlanDetailsPage(){
 		DrugCostEstimatorPage dce = (DrugCostEstimatorPage) getLoginScenario().getBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE);
 		PlanDetailsPage plandetailspage = dce.clickOnReturnLink();
+		
 		if(plandetailspage!=null){
 			if(plandetailspage.validateCompareBoxMessage())
 				Assert.assertTrue(true);

@@ -1041,7 +1041,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 
 	public DrugCostEstimatorPage navigateToDCE(String plantype) {
 		try {
-			Thread.sleep(5000);
+			Thread.sleep(10000);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -1070,7 +1070,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 
 	public DrugCostEstimatorPage navigateToDCEAfterDrugAdded(String plantype) {
 		try {
-			Thread.sleep(5000);
+			Thread.sleep(10000);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

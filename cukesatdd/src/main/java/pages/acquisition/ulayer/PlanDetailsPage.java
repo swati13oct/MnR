@@ -9,6 +9,7 @@ import java.util.List;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
@@ -71,7 +72,7 @@ public class PlanDetailsPage extends UhcDriver {
     @FindBy(xpath = "//*[@id='yourDruglist']/div[2]/table/tbody/tr[4]/td/div[1]/p[1]")
     private WebElement drugListPharmacyName;
 	
-	@FindBy(id = "backToplans")
+	@FindBy(linkText = "Back to all plans")
 	private WebElement backToAllPlans;
 	
 	@FindBy(id="medicalbenefits")
@@ -167,7 +168,7 @@ public class PlanDetailsPage extends UhcDriver {
 	return null;
 		
 	}
-
+	
 	public void validatePDFLinks() {
 		// TODO Auto-generated method stub
 		if(pdfLink!=null)
@@ -304,12 +305,9 @@ public class PlanDetailsPage extends UhcDriver {
 	}
 
 	public boolean validateCompareBoxMessage() {
-		try {
-			Thread.sleep(10000);
-		} catch (InterruptedException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
+		JavascriptExecutor je = ((JavascriptExecutor) driver);
+		je.executeScript("arguments[0].scrollIntoView(true);",compareChkBox);
+		CommonUtility.waitForPageLoad(driver, drugBenefitsSection, 20);
 		compareChkBox.click();
 		try {
 			Thread.sleep(1000);

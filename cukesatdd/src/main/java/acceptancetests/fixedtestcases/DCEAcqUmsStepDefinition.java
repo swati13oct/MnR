@@ -88,7 +88,7 @@ public class DCEAcqUmsStepDefinition {
 		}
 	}
 	
-	@And("^I choose the 2017 plan and go to DCE page$")
+	@And("^I choose the plan and go to DCE page$")
 	public void choosing2017Plan(DataTable attributes){
 		List<DataTableRow> memberAttributesRow = attributes
 				.getGherkinRows();
@@ -101,7 +101,7 @@ public class DCEAcqUmsStepDefinition {
 
 		String plantype = memberAttributesMap.get("Plan Type");
 		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) loginScenario.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
-		plansummaryPage.choose2017Plans();
+		//plansummaryPage.choose2017Plans();
 		DrugCostEstimatorPage dce = plansummaryPage.navigateToDCE(plantype);
 		if(dce!=null){
 			loginScenario.saveBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE, dce);
