@@ -1719,8 +1719,13 @@ public void comparePlanslnk(){
 			}
 			
 			public ResponsivePlanSummaryUhc addDrug(String drugName){
-				 
-				driver.findElement(By.xpath("//*[contains(text(),'+ADD A DRUG')]")).click();
+				 try {
+					Thread.sleep(3000);
+				} catch (InterruptedException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				driver.findElement(By.xpath("html/body/div[4]/div[4]/div/div/div/div/div[2]/main/div[2]/div/div[2]/div[1]/div/div/div[2]/div/div/div/div/div/div/div/div[1]/div/div/div[2]/div/div/section")).sendKeys(Keys.ENTER);
 				driver.findElement(By.id("drug-search-input")).sendKeys(drugName);
 				 
 				driver.findElement(By.id("drug-search-button")).click();
