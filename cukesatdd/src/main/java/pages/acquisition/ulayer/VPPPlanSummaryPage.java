@@ -717,7 +717,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 			}
 
 		} else if (planType.equalsIgnoreCase("PDP")) {
-			ElementData elementData = new ElementData("linkText", "View more details");
+			ElementData elementData = new ElementData("id", "viewmoredetlinkpdp");
 			WebElement element = getViewPlanDetailsElement(pdpPlanElement, elementData, planName);
 			if (element != null) {
 				element.click();

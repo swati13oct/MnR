@@ -134,7 +134,7 @@ public class VppUmsStepDefinition {
 		VPPPlanSummaryPage vppPlanSummaryPage = (VPPPlanSummaryPage) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 
-		PlanDetailsPage vppPlanDetailsPage = vppPlanSummaryPage.clickViewDetails();
+		PlanDetailsPage vppPlanDetailsPage = vppPlanSummaryPage.navigateToPlanDetails(planName);
 		if (vppPlanDetailsPage != null) {
 			getLoginScenario().saveBean(PageConstants.VPP_PLAN_DETAILS_PAGE,
 					vppPlanDetailsPage);

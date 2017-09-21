@@ -66,7 +66,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 
 
 	//@FindBy(xpath ="//div[@id='maplans_container']/div[3]/div/div/div/div[@class='ng-scope']")
-	@FindBy(xpath = "//div[@id='maplans_container']")
+	@FindBy(xpath = "//div[@class='module-plan-overview module swiper-slide ng-scope']")
 	List<WebElement> maPlanElement;
 
 	@FindBy(xpath = "//div[@id='plan-list-1']/div/div[1]/div/h2")
@@ -133,6 +133,9 @@ public class VPPPlanSummaryPage extends UhcDriver {
 
 	@FindBy(xpath=".//*[@id='plan-list-1']/div/div[2]/div/div[3]/div[3]/div/div/span[1]/label")
 	private WebElement compareChkBox3;
+	
+	@FindBy(xpath=".//*[@id='plan-list-1']/div/div[3]/div/div[4]/div[3]/div/div/span[1]/label")
+	private WebElement compareChkBox4;
 
 	@FindBy(xpath="//div[@data-ng-repeat='plan in maplans'][1]//div[contains(@id,'showcompare')][1]/div[@class='compareHeading']/p[1]/b")
 	private WebElement comparePopUpTxt1;
@@ -370,14 +373,14 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		System.out.println("******");
 		System.out.println(planName);
 		if (planName.contains("HMO")) {
-			ElementData elementData = new ElementData("id", "viewDetailsMA");
+			ElementData elementData = new ElementData("id", "viewmoredetlinkmapd");
 			WebElement element = getViewPlanDetailsElement(maPlanElement, elementData, planName);
 			if (element != null) {
 				element.click();
 			}
 			System.out.println(driver.getCurrentUrl());
 		} else if (planName.contains("PDP")) {
-			ElementData elementData = new ElementData("id", "viewDetailsPDP");
+			ElementData elementData = new ElementData("id", "viewmoredetlinkpdp");
 			WebElement element = getViewPlanDetailsElement(pdpPlanElement,
 					elementData, planName);
 			System.out.println(element.getText());
@@ -941,7 +944,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	}
 
 	public boolean verifyCompareCheckBoxesAreUnchecked(){
-		if(!compareChkBox3.isSelected())
+		if(!compareChkBox4.isSelected())
 			return true;
 		return false;
 
@@ -965,7 +968,8 @@ public class VPPPlanSummaryPage extends UhcDriver {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		compareChkBox3.click();
+		compareChkBox4.click();
+			
 	}
 	public boolean validatepassportData() {
 		try {
@@ -1003,7 +1007,8 @@ public class VPPPlanSummaryPage extends UhcDriver {
 
 
 	public PlanDetailsPage clickViewDetails() {
-		viewMAPlanDetailsLink3.click();
+		List<WebElement> viewPlansLinks = driver.findElements(By.id("viewmoredetlinkma"));
+		viewPlansLinks.get(3).click();
 		if(getTitle().equalsIgnoreCase("Our Medicare Plan Types | UnitedHealthcare®"))
 			return new PlanDetailsPage(driver);
 		return null;
