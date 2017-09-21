@@ -25,6 +25,7 @@ import acceptancetests.atdd.data.ElementData;
 import acceptancetests.atdd.data.PageData;
 import acceptancetests.atdd.util.CommonUtility;
 import atdd.framework.UhcDriver;
+import pages.acquisition.bluelayer.EnrollPlanInfoPage;
 import pages.acquisition.ulayer.DrugCostEstimatorPage;
 
 /**
@@ -90,7 +91,10 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	
 	@FindBy(id = "medicalinsursectionheading")
 	private WebElement pageHeading;
-
+	
+	@FindBy(xpath =".//*[@id='step1Desc']/p")
+	private WebElement step1Desc; 
+	
 	@FindBy(id = "editDrugMA")
 	private WebElement editDrugListLink;
 	
@@ -106,6 +110,14 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	@FindBys(value = { @FindBy(xpath = "//div[@id='providerResultsContainer']/div") })
 	private List<WebElement> providerNameList;
 	
+	@FindBy(xpath="//div[contains(@ng-repeat,'plan in planModel.maPlans')]")
+	List<WebElement> maPlans;
+	
+	@FindBy(xpath = "//div[@class='module-closed-enrollment-alert']/span/a")
+	private WebElement viewPlansYearLink;
+	
+	@FindBy(xpath="//div[contains(@ng-repeat,'plan in planModel.pdpPlans')]")
+	List<WebElement> pdpPlans;
 	
 	@FindBy(id = "allplanssise")
 	private WebElement allPlansSize;
@@ -673,37 +685,96 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	}
 	public IntroductionInformationPage clicksOnEnrollInplanLink(String planName) {
 		 
-		int pdpValue = Integer.parseInt(pdpPlansNumber.getText());
-		int maValue = Integer.parseInt(maPlansNumber.getText());
 		
 		if (planName.contains("HMO")) {
-			System.out.println("Entered the plan");
-			for(int i=1; i<=maValue; i++){
-				WebElement maPlanElement= driver.findElement(By.xpath(".//*[@id='plan-list-1']/div/div[2]/div/div["+i+"]"));
-				if (maPlanElement.getText().contains(planName)) {
-					ElementData elementData = new ElementData("linkText", "Enroll in plan");//("id", "enrollMA");
-					System.out.println("***Element Data is: "+elementData);
-					findChildElement(elementData, maPlanElement).click();
-					System.out.println("Clicked on the Enroll Link");
-					break;
+			for(WebElement plan : maPlans){
+				if (plan.getText().contains(planName)) {
+					ElementData elementData = new ElementData("id", "enrollMAButton");
+					if(findChildElement(elementData, plan).isDisplayed()){
+						findChildElement(elementData, plan).click();
+						break;
+					}else{
+						if(viewPlansYearLink.isDisplayed()){
+							viewPlansYearLink.click();
+							try {
+								Thread.sleep(2000);
+							} catch (InterruptedException e) {
+								// TODO Auto-generated catch block
+								e.printStackTrace();
+							}
+							viewPlanSummary("MA");
+							try {
+								Thread.sleep(2000);
+							} catch (InterruptedException e) {
+								// TODO Auto-generated catch block
+								e.printStackTrace();
+							}
+							for (WebElement newPlan : maPlans) {
+								if (newPlan.getText().contains(planName)) {
+									ElementData newelementData = new ElementData("id", "enrollMAButton");
+									findChildElement(newelementData, newPlan).click();
+									break;
+								}
+							}
+							break;
+						}
+					}
 				}
 				
 			}
-		} else if (planName.contains("PDP")) {
-			for(int i=1; i<=pdpValue; i++){
-				WebElement pdpPlanElement= driver.findElement(By.xpath(".//*[@id='plan-list-3']/div/div[2]/div/div["+i+"]"));
-				if (pdpPlanElement.getText().contains(planName)) {
-					ElementData elementData = new ElementData("linkText", "Enroll in plan");//("id", "enrollPDP"); // TODO:
-					System.out.println("***Element Data is: "+elementData);													// Re-check
-					findChildElement(elementData, pdpPlanElement).click();
-					System.out.println("Clicked on the Enroll Link");
-					break;
+		} if (planName.contains("PDP")) {
+			for (WebElement plan : pdpPlans) {
+				if (plan.getText().contains(planName)) {
+					ElementData elementData = new ElementData("id", "enrollPDPButton"); // TODO:
+					// Re-check
+					if(findChildElement(elementData, plan).isDisplayed()){
+						findChildElement(elementData, plan).click();
+						break;
+					}else{
+
+						if(viewPlansYearLink.isDisplayed()){
+							viewPlansYearLink.click();
+							try {
+								Thread.sleep(2000);
+							} catch (InterruptedException e) {
+								// TODO Auto-generated catch block
+								e.printStackTrace();
+							}
+							viewPlanSummary("PDP");
+							try {
+								Thread.sleep(2000);
+							} catch (InterruptedException e) {
+								// TODO Auto-generated catch block
+								e.printStackTrace();
+							}
+							for (WebElement newPlan : pdpPlans) {
+								if (newPlan.getText().contains(planName)) {
+									ElementData newelementData = new ElementData("id", "enrollPDPButton");
+									findChildElement(newelementData, newPlan).click();
+									break;
+								}
+							}
+							break;
+						}
+					
+					}
 				}
-				
 			}
 			
 		}
-		return new IntroductionInformationPage(driver);
+		try {
+			Thread.sleep(10000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}	
+		if (step1Desc.getText().equalsIgnoreCase(
+				"You have chosen to enroll in")) {
+			return new IntroductionInformationPage(driver);
+		}else{
+			return null;
+		}
+		
 	}
 	
 	public PlanDetailsPage navigateToPlanDetails(String planName, String planType) {
