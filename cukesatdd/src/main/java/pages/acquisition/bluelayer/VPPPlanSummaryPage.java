@@ -69,8 +69,9 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	@FindBy(xpath = "//div[@id='maplans_container']")
 	List<WebElement> maPlanElement;
 
-	@FindBy(xpath = "//div[@id='plan-list-1']/div/div[1]/div/div/h2")
+	@FindBy(xpath = "//div[@id='plan-list-1']/div/div[1]/div/h2")
 	WebElement maPlanHeadingText;
+	
 
 	@FindBy(xpath = "//div[@id='maplans_container']/h1/span")
 	WebElement maPlanHeadingYear;
@@ -79,7 +80,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	List<WebElement> maPlans;
 
 
-	@FindBy(xpath = "//div[@id='plan-list-3']/div/div[1]/div/div/h2")
+	@FindBy(xpath = "//div[@id='plan-list-3']/div/div[1]/div/h2")
 	WebElement pdpPlanHeadingText;
 
 	@FindBy(xpath = "//div[@id='pdpplans_container']/h1/span")
@@ -90,7 +91,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 
 	@FindBy(xpath = ".//*[@id='site-wrapper']/div[4]/div/div[1]/div/div/div/div/div[1]/div/div/div[1]/div[2]/div/div[2]/div[1]/div")
 	private WebElement viewPlans;
-	
+
 	@FindBy(xpath = ".//*[@id='site-wrapper']/div[4]/div/div/div/div/div/div/div[1]/div/div/div[1]/div[2]/div/div[2]/div[3]")
 	private WebElement viewPDPPlans;
 
@@ -105,7 +106,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 
 	@FindBy(xpath =".//*[@id='pdpplans_container']")
 	List<WebElement> pdpPlanElement;
-	
+
 	@FindBy(xpath =".//*[@id='viewDetailsMA']")
 	private WebElement viewDetailsBtnMA;
 
@@ -129,7 +130,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 
 	@FindBy(css="#maplans_container .compareHeading>p")
 	private WebElement compareUpto3PlansPopup;
-	
+
 	@FindBy(xpath=".//*[@id='plan-list-1']/div/div[2]/div/div[3]/div[3]/div/div/span[1]/label")
 	private WebElement compareChkBox3;
 
@@ -159,16 +160,16 @@ public class VPPPlanSummaryPage extends UhcDriver {
 
 	@FindBy(xpath = "//div[@class='plan-overview-wrapper']/div[2]/div[4]/div/span[1]/span")
 	private WebElement msnPlansCount;
-	
+
 	@FindBy(xpath = ".//*[@id='site-wrapper']/div[4]/div/div/div/div/div/div/div[1]/div/div/div[2]/div/div/div/span/a")
 	private WebElement view2017Plans;
 
 	@FindBy(className = "planYear")
 	WebElement planYear;
-	
+
 	@FindBy(xpath = ".//*[@id='plan-list-1']/div/div[2]/div/div[3]/div[2]/div/div[3]")
 	private WebElement viewMAPlanDetailsLink3;
-	
+
 	@FindBy(xpath=".//*[@class='action-btn getStarted']")
 	private WebElement GetStarted;
 
@@ -187,8 +188,8 @@ public class VPPPlanSummaryPage extends UhcDriver {
 
 	//@FindBy(xpath=".//*[contains(@ng-bind-html,'buttonText')  and contains(text(),'Save')]")
 	//private WebElement Savebtn;
-	
-	
+
+
 	@FindBy(xpath="//div[contains(@class,'first')]//div[@class='hidden-phone']/button[not(contains(@class,'hidden'))]")
 	private WebElement Savebtn;
 
@@ -199,15 +200,18 @@ public class VPPPlanSummaryPage extends UhcDriver {
 
 	@FindBy(xpath=".//*[@class='action-btn negative' and @type='submit']")
 	private WebElement Checkcoverage;
-	
+
 	@FindBy(xpath="//*[@id='physicians_info']")
 	private WebElement provider;
 
 	@FindBy(className = "planType_info")
 	WebElement planHeadingText;
-	
+
 	@FindBy(xpath=".//*[@id='viewmoredetlinkpdp']")
 	WebElement viewDetailsPDP;
+
+	@FindBy(xpath = "//div[@class='module-closed-enrollment-alert']/span/a")
+	private WebElement viewPlansYearLink;
 
 	private PageData vppPlanSummary;
 
@@ -272,11 +276,15 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		Calendar calender = Calendar.getInstance();
 		int year = calender.get(Calendar.YEAR);
 		if(planType.equals("MAPD") || planType.equals("MA") ){
-			String planHeading = maPlanHeadingText.getText();
-			System.out.println(planHeading);
-			if(!planHeading.equals("Medicare Advantage Plans")){
-				flag = false;
+			String planHeading = null;
+			if(maPlanHeadingText.isDisplayed()){
+				planHeading = maPlanHeadingText.getText();
+				System.out.println(planHeading);
+				if(!planHeading.contains("Medicare Advantage Plans")){
+					flag = false;
+				}
 			}
+			
 			planCount = Integer.valueOf(maPlansCount.getText());
 			for(int i=0;i<planCount;i++){
 				if(maPlans.get(i).getText().length()==0){
@@ -285,10 +293,13 @@ public class VPPPlanSummaryPage extends UhcDriver {
 			}
 
 		}else if(planType.equals("PDP")){
-			String planHeading = pdpPlanHeadingText.getText();
-			System.out.println(planHeading);
-			if(!planHeading.equals("Medicare Prescription Drug Plans")){
-				flag = false;
+			String planHeading = null;
+			if(pdpPlanHeadingText.isDisplayed()){
+				planHeading = pdpPlanHeadingText.getText();
+				System.out.println(planHeading);
+				if(!planHeading.contains("Medicare Prescription Drug Plans")){
+					flag = false;
+				}
 			}
 			planCount = Integer.valueOf(pdpPlansCount.getText());
 			for(int i=0;i<planCount;i++){
@@ -603,7 +614,35 @@ public class VPPPlanSummaryPage extends UhcDriver {
 			for (WebElement plan : maPlans) {
 				if (plan.getText().contains(planName)) {
 					ElementData elementData = new ElementData("id", "enrollMAButton");
-					findChildElement(elementData, plan).click();
+					if(findChildElement(elementData, plan).isDisplayed()){
+						findChildElement(elementData, plan).click();
+						break;
+					}else{
+						if(viewPlansYearLink.isDisplayed()){
+							viewPlansYearLink.click();
+							try {
+								Thread.sleep(2000);
+							} catch (InterruptedException e) {
+								// TODO Auto-generated catch block
+								e.printStackTrace();
+							}
+							viewPlanSummary("MA");
+							try {
+								Thread.sleep(2000);
+							} catch (InterruptedException e) {
+								// TODO Auto-generated catch block
+								e.printStackTrace();
+							}
+							for (WebElement newPlan : maPlans) {
+								if (newPlan.getText().contains(planName)) {
+									ElementData newelementData = new ElementData("id", "enrollMAButton");
+									findChildElement(newelementData, newPlan).click();
+									break;
+								}
+							}
+							break;
+						}
+					}
 				}
 			}
 		}
@@ -612,17 +651,47 @@ public class VPPPlanSummaryPage extends UhcDriver {
 				if (plan.getText().contains(planName)) {
 					ElementData elementData = new ElementData("id", "enrollPDPButton"); // TODO:
 					// Re-check
-					findChildElement(elementData, plan).click();
+					if(findChildElement(elementData, plan).isDisplayed()){
+						findChildElement(elementData, plan).click();
+						break;
+					}else{
+
+						if(viewPlansYearLink.isDisplayed()){
+							viewPlansYearLink.click();
+							try {
+								Thread.sleep(2000);
+							} catch (InterruptedException e) {
+								// TODO Auto-generated catch block
+								e.printStackTrace();
+							}
+							viewPlanSummary("PDP");
+							try {
+								Thread.sleep(2000);
+							} catch (InterruptedException e) {
+								// TODO Auto-generated catch block
+								e.printStackTrace();
+							}
+							for (WebElement newPlan : pdpPlans) {
+								if (newPlan.getText().contains(planName)) {
+									ElementData newelementData = new ElementData("id", "enrollPDPButton");
+									findChildElement(newelementData, newPlan).click();
+									break;
+								}
+							}
+							break;
+						}
+					
+					}
 				}
 			}
 		}
-				try {
+		try {
 			Thread.sleep(10000);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+
 		for( int i = 0; i<10; i++){
 			if (pageHeading.getText().equalsIgnoreCase(
 					"You Have Chosen to Enroll in the Following Plan")) {
@@ -698,7 +767,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		// TODO Auto-generated method stub
 		return null;
 	}
-	
+
 	public VPPPlanSummaryPage clicksOnIsProviderCoveredA(String planName) {
 		if (planName.contains("HMO")) {
 			for (WebElement plan : maPlanElement) {
@@ -718,11 +787,11 @@ public class VPPPlanSummaryPage extends UhcDriver {
 				}
 			}
 		}
-	/*	if (driver.getTitle().equalsIgnoreCase(
+		/*	if (driver.getTitle().equalsIgnoreCase(
 				"Welcome")) { 
 			return new Rallytool_Page(driver);
 		}*/
-		
+
 		String mainwindow=driver.getWindowHandle();
 
 		Set<String> allWindowHandles = driver.getWindowHandles();
@@ -753,7 +822,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		Physician.click();
 
 		waitforElement(Savebtn);
-		
+
 		JavascriptExecutor js = (JavascriptExecutor)driver;
 		js.executeScript("arguments[0].click();", Savebtn);
 
@@ -767,18 +836,18 @@ public class VPPPlanSummaryPage extends UhcDriver {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+
 		waitforElement(Checkcoverage);
 		CommonUtility.waitForPageLoad(driver, Checkcoverage, 10);
 		Checkcoverage.click();
 		driver.switchTo().window(mainwindow);
-  
+
 		return new VPPPlanSummaryPage(driver);
-		
-		
+
+
 	}
-	
-	
+
+
 	public boolean providerinfo()
 	{
 		String providerinfo=provider.getText();
@@ -792,11 +861,11 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	public boolean providerinfo(String planName)
 	{
 		String providerinfo=provider.getText();
-		
+
 		WebElement ProviderSearchLink1 = driver.findElement
-					(By.xpath("//div[contains(text(),'"+planName+"')]/following::p[contains(text(),'covered')][1]"));
+				(By.xpath("//div[contains(text(),'"+planName+"')]/following::p[contains(text(),'covered')][1]"));
 		String mproviderinfo=ProviderSearchLink1.getText();
-        System.out.println(mproviderinfo);
+		System.out.println(mproviderinfo);
 		if(providerinfo.contains("1 providers covered"))
 		{
 			return true;
@@ -872,12 +941,10 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	}
 
 	public boolean verifyCompareCheckBoxesAreUnchecked(){
-		List<WebElement> compareChkBoxes = driver.findElements(By.xpath(".//*[@id='plan-list-1']//div[contains(@class,'compare-box')]"));	
-
-		if(!compareChkBoxes.get(0).isSelected())
+		if(!compareChkBox3.isSelected())
 			return true;
 		return false;
-		
+
 	}
 
 	public void UncheckAndVerifyCompareChkBox(){
@@ -898,9 +965,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		List<WebElement> compareChkBoxes = driver.findElements(By.xpath(".//*[@id='plan-list-1']//div[contains(@class,'compare-box')]"));	
-
-		compareChkBoxes.get(0).click();
+		compareChkBox3.click();
 	}
 	public boolean validatepassportData() {
 		try {
@@ -924,10 +989,10 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		return true;
 
 	}
-	
+
 	@FindBy(linkText = "Change location")
 	private WebElement changeLocationBtn;            
-	
+
 	public boolean validateVPPPlanSummaryPage(){
 		boolean flag = false;
 		if(validate(viewPlans)&&validate(viewPDPPlans)&&validate(changeLocationBtn))
@@ -935,11 +1000,10 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		return flag;
 	}
 
-	
+
 
 	public PlanDetailsPage clickViewDetails() {
-		List<WebElement> maPlanDetailsLinks = driver.findElements(By.id("viewmoredetlinkmapd"));
-		maPlanDetailsLinks.get(2).click();
+		viewMAPlanDetailsLink3.click();
 		if(getTitle().equalsIgnoreCase("Our Medicare Plan Types | UnitedHealthcare®"))
 			return new PlanDetailsPage(driver);
 		return null;
@@ -960,9 +1024,9 @@ public class VPPPlanSummaryPage extends UhcDriver {
 			e.printStackTrace();
 		}
 		viewPlans.click();
-		
+
 	}
-	
+
 	public void clickOnPDPPlans(){
 		try {
 			Thread.sleep(5000);
@@ -990,7 +1054,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 			viewPDPPlans.click();
 			List<WebElement> view2017PDPPlans = driver.findElements(By.id("pdpDrugCostEstimatorLink"));
 			view2017PDPPlans.get(0).click();
-			
+
 		}
 		try {
 			Thread.sleep(3000);
@@ -1001,9 +1065,9 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		if(currentUrl().contains("/estimate-drug-costs.html#/drug-cost-estimator"))
 			return new DrugCostEstimatorPage(driver);
 		return null;
-		
+
 	}
-	
+
 	public DrugCostEstimatorPage navigateToDCEAfterDrugAdded(String plantype) {
 		try {
 			Thread.sleep(5000);
@@ -1019,7 +1083,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 			viewPDPPlans.click();
 			List<WebElement> view2017PDPPlans = driver.findElements(By.linkText("Edit drug list"));
 			view2017PDPPlans.get(0).click();
-			
+
 		}
 		try {
 			Thread.sleep(3000);
@@ -1030,7 +1094,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		if(currentUrl().contains("/estimate-drug-costs.html#/drug-cost-estimator"))
 			return new DrugCostEstimatorPage(driver);
 		return null;
-		
+
 	}
 
 	public void choose2017Plans() {
@@ -1051,9 +1115,9 @@ public class VPPPlanSummaryPage extends UhcDriver {
 			}
 			viewPlans.click();
 		}	
-		
+
 	}
-	
+
 }
 
 
