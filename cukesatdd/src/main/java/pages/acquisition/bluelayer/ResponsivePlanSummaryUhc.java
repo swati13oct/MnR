@@ -1719,27 +1719,12 @@ public void comparePlanslnk(){
 			}
 			
 			public ResponsivePlanSummaryUhc addDrug(String drugName){
-				try {
-					Thread.sleep(6000);
-				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
+				 
 				driver.findElement(By.xpath("//*[contains(text(),'+ADD A DRUG')]")).click();
 				driver.findElement(By.id("drug-search-input")).sendKeys(drugName);
-				try {
-					Thread.sleep(5000);
-				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
+				 
 				driver.findElement(By.id("drug-search-button")).click();
-				try {
-					Thread.sleep(3000);
-				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
+				 
 				driver.findElement(By.id("drug-alt-search-button")).click();
 				try {
 					Thread.sleep(2000);
