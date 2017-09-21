@@ -209,9 +209,9 @@ public class MRConstants {
 
   public static final String UHCM_MEMBER_URL = "https://member."+MRScenario.environment+"-uhcmedicaresolutions.uhc.com/guest/home.html";
   
-  public static final String UHCM_MOBILE_TEAM_C_URL = "https://member."+MRScenario.environment+"-uhcmedicaresolutions.uhc.com/mobile/guest/login.html";
+  public static final String UHCM_MOBILE_TEAM_C_URL = "https://member."+MRScenario.TeamCEnvironment+"-uhcmedicaresolutions.uhc.com/mobile/guest/login.html";
   
-  public static final String AARP_MOBILE_TEAM_C_URL = "https://member."+MRScenario.environment+"-aarpmedicareplans.uhc.com/mobile/guest/login.html";
+  public static final String AARP_MOBILE_TEAM_C_URL = "https://member."+MRScenario.TeamCEnvironment+"-aarpmedicareplans.uhc.com/mobile/guest/login.html";
   public static final String PORTFOLIO_PAGE_URL = "https://www."+MRScenario.environment+"-aarpmedicareplans.uhc.com/health-plans.html";
   
   public static final String AARP_PORTFOLIO_URL = "https://www."+MRScenario.environment+"-aarpmedicareplans.uhc.com/health-plans.html";
@@ -226,9 +226,9 @@ public static String CAMPAIGN_PAGE_URL1 = "https://www."+MRScenario.environment+
   
   public static String EOB_DIRECT_URL = "https://member."+MRScenario.environment+"-aarpmedicareplans.uhc.com/home/eobsearch.html";
   
-  public static String TeamC_UHC_VPP_URL = "https://www."+MRScenario.environment+"-uhcmedicaresolutions.uhc.com";
+  public static String TeamC_UHC_VPP_URL = "https://www."+MRScenario.TeamCEnvironment+"-uhcmedicaresolutions.uhc.com";
   
-  public static String TeamC_VPP_PAGE_AARPM_URL = "https://www."+MRScenario.environment+"-aarpmedicareplans.uhc.com";
+  public static String TeamC_VPP_PAGE_AARPM_URL = "https://www."+MRScenario.TeamCEnvironment+"-aarpmedicareplans.uhc.com";
   
   public static final String Connector_model_url1 = "https://www."+MRScenario.environment+"-uhcmedicaresolutions.uhc.com/health-plans/medicare-advantage-plans/available-plans.html?WT.mc_id=897509&zipcode=32337&county=320&state=10&originatingSite=https%3A%2F%2Fwww.myuhcplans.com%2Foptions&subdomain=options";
   
