@@ -109,7 +109,7 @@ Feature: To test My Profile & Preferences in AARP site
       | planType |
      #| PDP     |
       | MAPD     |
-     #| MA       |
+      | MA       |
      #|SHIP      |
       
       
@@ -123,10 +123,9 @@ Feature: To test My Profile & Preferences in AARP site
 
        Examples: 
       | planType |
-    #| PDP     |
+     #| PDP     |
       | MAPD     |
-      #| MA       |
-      
+      | MA       |
    @PasswordEdit
   Scenario Outline: To verify the edit functionality in Account Profile section in AARP site
     Given registered member with following details for Profile and Preferences flow
@@ -140,7 +139,7 @@ Feature: To test My Profile & Preferences in AARP site
       | planType |
      #| PDP      |
       | MAPD     |
-     #| MA       |
+      | MA       |
      
     @PasswordEdit1
      Scenario Outline: To verify the edit functionality in Account Profile section in AARP site
@@ -192,7 +191,6 @@ Feature: To test My Profile & Preferences in AARP site
     Given registered member with following details for Profile and Preferences flow
       | <planType> |
     When the user navigates to Profile and Preferences page
-    Then the user validates disclaimer link and on clicking disclaimer link it should expand and on again clicking it should collapse
     And the user validates the need help section
     And the user validates see more ways to contact us section 
     And the user validates on clicking contact us link it should route to contact us page
@@ -215,7 +213,7 @@ Feature: To test My Profile & Preferences in AARP site
       | planType |
      #| PDP      |
       | MAPD     |
-     #| MA       |  
+      | MA       |
       
       
       @PhoneEdit
@@ -248,7 +246,7 @@ Feature: To test My Profile & Preferences in AARP site
       | planType |
      #| PDP      |
       | MAPD     |
-     #| MA       |
+      | MA       |
       
       
       
