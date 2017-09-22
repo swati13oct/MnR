@@ -944,7 +944,9 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	}
 
 	public boolean verifyCompareCheckBoxesAreUnchecked(){
-		if(!compareChkBox4.isSelected())
+		List<WebElement> compareChkBoxes = driver.findElements(By.xpath(".//*[@id='plan-list-1']//div[contains(@class,'compare-box')]"));	
+
+		if(!compareChkBoxes.get(1).isSelected())
 			return true;
 		return false;
 
@@ -968,7 +970,9 @@ public class VPPPlanSummaryPage extends UhcDriver {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		compareChkBox4.click();
+		List<WebElement> allMAPlans = driver.findElements(By.xpath(".//*[@id='plan-list-1']//div[contains(@class,'compare-box')]"));	
+
+		allMAPlans.get(1).click();
 			
 	}
 	public boolean validatepassportData() {
