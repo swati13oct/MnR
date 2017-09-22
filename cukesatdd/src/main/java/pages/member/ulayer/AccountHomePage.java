@@ -583,7 +583,7 @@ public class AccountHomePage extends UhcDriver {
 		OrderPlanMaterialslnk.click();
 		CommonUtility.checkPageIsReady(driver);
 		driver.manage().timeouts().implicitlyWait(1000, TimeUnit.SECONDS);
-		if (driver.findElement(By.xpath("//*[contains(text(), 'Order Plan Mate')]")).isDisplayed()){
+		if (driver.findElement(By.xpath("//*[contains(text(), 'Order Plan Materials')]")).isDisplayed()){
 			return new OrderplanmaterialsPage(driver);
 
 		}
