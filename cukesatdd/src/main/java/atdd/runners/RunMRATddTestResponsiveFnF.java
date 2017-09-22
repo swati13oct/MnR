@@ -7,7 +7,7 @@ import cucumber.junit.Cucumber;
 @Cucumber.Options(glue = { "atdd.framework","acceptancetests.responsive.bluelayer" }, 
 		features = { "feature/responsive/Blayer" }, 
 		format = {
-		"pretty", "html:reports/test-report","json:target/cucumberprint5.json" }, tags ={"@US638058, @planCount, @planhighlights, @rightRail , @enrollPlan ,@suplementPlan , @enrollnowforsnpnotdisplayed , @Benefittable, @Benefittablema , @Learnmore, @F100686"})
+		"pretty", "html:reports/test-report","json:target/cucumberprint5.json" }, tags ={"@rightRail, @US657089, @US657296,  @US646136, @US670704, @US670869, @US638058"})
 public class RunMRATddTestResponsiveFnF {
 	
 	

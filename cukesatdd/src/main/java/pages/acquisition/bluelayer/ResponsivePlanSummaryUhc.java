@@ -1718,96 +1718,82 @@ public void comparePlanslnk(){
 				return null;
 			}
 			
-			public ResponsivePlanSummaryUhc addDrug(String drugName){
-				 try {
-					Thread.sleep(3000);
-				} catch (InterruptedException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
-				 driver.findElement(By.cssSelector("div#add-drug>section")).click();
-				 try {
-						Thread.sleep(3000);
-					} catch (InterruptedException e1) {
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
-					}
-				 driver.findElement(By.id("drug-search-input")).sendKeys(drugName);
-				 try {
-						Thread.sleep(3000);
-					} catch (InterruptedException e1) {
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
-					}
-				driver.findElement(By.id("drug-search-button")).click();
-				 try {
-						Thread.sleep(3000);
-					} catch (InterruptedException e1) {
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
-					}
-				driver.findElement(By.id("drug-alt-search-button")).click();
-				try {
-					Thread.sleep(2000);
-				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-				driver.findElement(By.id("drug-dosage-button")).click();
-				try {
-					Thread.sleep(3000);
-				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-				driver.findElement(By.id("save-drug-button")).click();
-				try {
-					Thread.sleep(3000);
-				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-				driver.findElement(By.xpath("//*[contains(text(),'NEXT: SELECT PHARMACY')]")).click();
-				try {
-					Thread.sleep(3000);
-				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-				driver.findElement(By.xpath("//li[1]/div[1]/div[2]/button[@class='cta-button secondary select-pharmacy']")).click();
-				try {
-					Thread.sleep(6000);
-				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-				driver.findElement(By.xpath("//*[contains(text(),'NEXT:VIEW COSTS')]")).sendKeys(Keys.ENTER);;
-				try {
-					Thread.sleep(3000);
-				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-				pharmacyDetails = driver.findElement(By.xpath("//*[text()='Pharmacy123']/parent::a/following-sibling::div")).getText();
-				try {
-					Thread.sleep(3000);
-				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-				drugCost = driver.findElement(By.xpath("//*[text()='Costs']/parent::div/p")).getText();
-				System.out.println(pharmacyDetails + "------------" + drugCost);	
-				
-				driver.findElement(By.xpath("//*[text()='See other plans']")).click();
-				try {
-					Thread.sleep(3000);
-				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-				return new ResponsivePlanSummaryUhc(driver);
- 				 
-			}
+            public ResponsivePlanSummaryUhc addDrug(String drugName){
+                try {
+                       Thread.sleep(5000);
+                } catch (InterruptedException e1) {
+                       // TODO Auto-generated catch block
+                       e1.printStackTrace();
+                }
+                
+                driver.findElement(By.cssSelector("div#add-drug>section")).click();
+                driver.findElement(By.id("drug-search-input")).sendKeys(drugName);
+                
+                driver.findElement(By.id("drug-search-button")).click();
+                
+                driver.findElement(By.id("drug-alt-search-button")).click();
+                try {
+                       Thread.sleep(2000);
+                } catch (InterruptedException e) {
+                       // TODO Auto-generated catch block
+                       e.printStackTrace();
+                }
+                driver.findElement(By.id("drug-dosage-button")).click();
+                try {
+                       Thread.sleep(3000);
+                } catch (InterruptedException e) {
+                       // TODO Auto-generated catch block
+                       e.printStackTrace();
+                }
+                driver.findElement(By.id("save-drug-button")).click();
+                try {
+                       Thread.sleep(3000);
+                } catch (InterruptedException e) {
+                       // TODO Auto-generated catch block
+                       e.printStackTrace();
+                }
+                driver.findElement(By.xpath("//a[contains(text(),'NEXT:')]")).click();
+                try {
+                       Thread.sleep(10000);
+                } catch (InterruptedException e) {
+                       // TODO Auto-generated catch block
+                       e.printStackTrace();
+                }
+                driver.findElement(By.xpath("//li[1]/div[1]/div[2]/button[@class='cta-button secondary select-pharmacy']")).click();
+                try {
+                       Thread.sleep(6000);
+                } catch (InterruptedException e) {
+                       // TODO Auto-generated catch block
+                       e.printStackTrace();
+                }
+                driver.findElement(By.xpath("//button[contains(text(),'NEXT: VIEW COSTS')]")).click();
+                try {
+                       Thread.sleep(6000);
+                } catch (InterruptedException e) {
+                       // TODO Auto-generated catch block
+                       e.printStackTrace();
+                }
+                pharmacyDetails = driver.findElement(By.cssSelector("div#acqsummary .pharmacy-container div#selectedPharmacyInfoId>p:first-child")).getText();
+                try {
+                       Thread.sleep(3000);
+                } catch (InterruptedException e) {
+                       // TODO Auto-generated catch block
+                       e.printStackTrace();
+                }
+                drugCost = driver.findElement(By.xpath("//*[text()='Costs']/parent::div/p")).getText();
+                System.out.println(pharmacyDetails + "------------" + drugCost);     
+                
+                driver.findElement(By.xpath("//*[text()='See other plans']")).click();
+                try {
+                       Thread.sleep(3000);
+                } catch (InterruptedException e) {
+                       // TODO Auto-generated catch block
+                       e.printStackTrace();
+                }
+                return new ResponsivePlanSummaryUhc(driver);
+                
+          }
+
 			public ResponsivePlanSummaryUhc validateBenefitsTableAfterAddingDrug(String planType, String planName, String drugCostExpected){
 			System.out.println(planType);
 				String drugCostActual=null;
