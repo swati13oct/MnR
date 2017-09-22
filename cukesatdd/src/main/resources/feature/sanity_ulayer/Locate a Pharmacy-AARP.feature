@@ -3,7 +3,7 @@ Feature: To test pharmacy search page functionality in AARP ULayer
 
 	@sanity
   Scenario Outline: To verify pharmacy search functionality for 2017 in AARP ULayer
-    Given the user is on the AARP Medicare Site landing page
+    Given user is on the AARP Medicare Site landing page
     Then the user navigates to pharmacy search page in AARP Site
     And enter zipcode
       | Zipcode | <zipcode> |
@@ -17,9 +17,10 @@ Feature: To test pharmacy search page functionality in AARP ULayer
     Examples: 
       | year | zipcode | planName                                          |
       | 2017 |   90210 | AARP MedicareComplete SecureHorizons Plan 1 (HMO) |
-
+	
+	#@sanity
   Scenario Outline: To verify pharmacy search functionality for 2018 in AARP ULayer
-     Given the user is on the AARP Medicare Site landing page
+     Given user is on the AARP Medicare Site landing page
     Then the user navigates to pharmacy search page in AARP Site
     And Select a year from the available list displayed
       | Year | <year> |

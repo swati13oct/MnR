@@ -1,5 +1,5 @@
-@vppaarp
-Feature: To test plan summary in AARP site
+@VPP-DCE-ULayer
+Feature: VPP-DCE - ULayer
 
 Scenario Outline: Verify plan summary in AARP site
 Given the user is on the AARP medicare site landing page

@@ -11,6 +11,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.FindBys;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.Select;
 
 import acceptancetests.atdd.util.CommonUtility;
 import atdd.framework.UhcDriver;
@@ -71,6 +72,9 @@ public class PDPEnrollementGuidePage extends UhcDriver{
 	
 	@FindBys(value = { @FindBy(xpath = "//select[@id='oneTimeAddress.stateCode']/option") })
 	private List<WebElement> stateCodeDropDown;
+	
+	@FindBy(id="oneTimeAddress.stateCode")
+	private WebElement stateDrpDown;
 	
 	@FindBy(id = "oneTimeAddress.zipCode")
 	private WebElement zipCodeField;

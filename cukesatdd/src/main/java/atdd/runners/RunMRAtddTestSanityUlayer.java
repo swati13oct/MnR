@@ -23,14 +23,14 @@ import org.junit.runner.RunWith;
 import cucumber.junit.Cucumber;
 
 /**
- * This class is used to invoke automated tests for the Sign In feature 
- * in Jarvis. 
+ * 
+ * @author bnaveen4
  *
- * @author gladiatorsqa
  */
+
 @RunWith(Cucumber.class)
 @Cucumber.Options(glue = { "atdd.framework", "acceptancetests.sanity.ulayer" }, features = { "feature/sanity_ulayer" }, format = {
-		"pretty", "html:reports/test-report" ,"json:target/cucumber.json"}, tags = { "@sanity" })
+		"pretty", "html:reports/test-report" ,"json:target/RunMRAtddTestSanityUlayer-cucumber.json"}, tags = { "@sanity" })
 public class RunMRAtddTestSanityUlayer {
 
 }

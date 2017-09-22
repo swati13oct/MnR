@@ -44,5 +44,17 @@ public class VPPCommonConstants {
 	public static final String LAST_NAME = "lastname";
 
 	public static final String EMAIL_ADDRESS = "emailaddress";
+	
+	public static final String MONTHLYPREMIUM = "monthlypremium";
+
+	public static final String PRIMARYCARE = "primarycare";
+
+	public static final String SPECIALIST = "specialist";
+
+	public static final String REQUIREDREFERRAL = "requiredreferral";
+
+	public static final String PRESCRIPTIONDRUG = "prescriptiondrug";
+
+	public static final String PLAN_TYPE_CRITERIA = "urlType";
 
 }

@@ -1,7 +1,7 @@
 /**
  * 
  */
-package acceptancetests.pharmacylocator.ulayer;
+package acceptancetests.sanity.ulayer;
 
 import gherkin.formatter.model.DataTableRow;
 
@@ -43,8 +43,8 @@ public class PharmacyLocatorAarpStepDefinition {
 		return loginScenario;
 	}
 
-	@Given("^the user is on the AARP Medicare Site landing page$")
-	public void user_on_aarp_medicare_site_landing_page() {
+	@Given("^user is on the AARP Medicare Site landing page$")
+	public void aarp_medicare_site_landing_page() {
 		WebDriver wd = getLoginScenario().getWebDriver();
 		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
 
@@ -73,6 +73,22 @@ public class PharmacyLocatorAarpStepDefinition {
 		}
 
 	}
+	
+	 @And("^Select a Plan from the available plans list displayed$")
+	    public void select_a_plan_from_the_available_plans_list_displayed(DataTable givenAttributes){
+			// get test variables
+			List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+			Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
+			for (int i = 0; i < memberAttributesRow.size(); i++) {
+			    memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0), memberAttributesRow.get(i).getCells().get(1));
+			}
+		
+			// get parameter username and password
+			String planName = memberAttributesMap.get("PlanName");
+			PharmacySearchPage pharmacySearchPage = (PharmacySearchPage) getLoginScenario().getBean(PageConstants.PHARMACY_SEARCH_PAGE);
+			PharmacyResultPage pharmacySearchResultsPage = pharmacySearchPage.selectAPlan(planName);
+			getLoginScenario().saveBean(PageConstants.PHARMACY_RESULTS_PAGE, pharmacySearchResultsPage);
+	    }
 	
 	@When("^the user navigates to pharmacy search page in UMS Site$")
 	public void user_views_pharmacy_locator_UMS() {
@@ -302,22 +318,6 @@ public class PharmacyLocatorAarpStepDefinition {
 		}
 		
 	}
-	
-	 @And("^Select a Plan from the available plans list displayed$")
-	    public void select_a_plan_from_the_available_plans_list_displayed(DataTable givenAttributes){
-			// get test variables
-			List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
-			Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
-			for (int i = 0; i < memberAttributesRow.size(); i++) {
-			    memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0), memberAttributesRow.get(i).getCells().get(1));
-			}
-		
-			// get parameter username and password
-			String planName = memberAttributesMap.get("PlanName");
-			PharmacySearchPage pharmacySearchPage = (PharmacySearchPage) getLoginScenario().getBean(PageConstants.PHARMACY_SEARCH_PAGE);
-			PharmacyResultPage pharmacySearchResultsPage = pharmacySearchPage.selectAPlan(planName);
-			getLoginScenario().saveBean(PageConstants.PHARMACY_RESULTS_PAGE, pharmacySearchResultsPage);
-	    }
 	
 	
 	@Then("^the user validates the available pharmacies page in AARP site$")

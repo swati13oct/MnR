@@ -1,7 +1,7 @@
 @pdpInquiryKit
 Feature: To test PDP inquiry flow in AARP site
 
-	@sanity
+  @sanity
   Scenario Outline: To verify PDP inquiry flow in AARP site
     Given the user is on the AARP Medicare Site landing page
     When the user navigates to Request More Help and Information page under pdp section in AARP Site
@@ -27,4 +27,4 @@ Feature: To test PDP inquiry flow in AARP site
 
     Examples: 
       | planName                  | firstName | lastName | dob        | relationShip                    | emailAddress | confirmEmailAddress | emailUpdates | gender | medicare   | addressLine1 | addressLine2 | city       | state | zipCode | dayTimePhNumber |
-      | Symphonix Value Rx (PDP)2 | FirstName | LastName | 01/01/1990 | Self - I have a Medicare number | test@uhc.com | test@uhc.com        | Yes          | Male   | 111111111A | California   | California   | California | TEXAS |   73301 | 111-111-1111    |
+      | Symphonix Value Rx (PDP)2 | FirstName | LastName | 01/01/1990 | Self - I have a Medicare number | test@uhc.com | test@uhc.com        | Yes          | Male   | 111111111A | California   | California   | California | TX    |   73301 | 111-111-1111    |

@@ -30,7 +30,7 @@ import cucumber.junit.Cucumber;
  */
 @RunWith(Cucumber.class)
 @Cucumber.Options(glue = { "atdd.framework", "acceptancetests.sanity.blayer" }, features = { "feature/sanity_blayer" }, format = {
-		"pretty", "html:reports/test-report" ,"json:target/cucumber.json"}, tags = { "@sanity" })
+		"pretty", "html:reports/test-report" ,"json:target/RunMRAtddTestSanityBlayer-cucumber.json"}, tags = { "@sanity" })
 public class RunMRAtddTestSanityBlayer {
 
 }
