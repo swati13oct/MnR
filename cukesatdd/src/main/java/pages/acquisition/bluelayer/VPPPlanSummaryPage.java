@@ -149,7 +149,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	@FindBy(xpath = "//div[@id='maplans_container']/div[3]/div/div[2]/div[1]/div/div[1]/div[1]/div/div[1]/div[2]/table/tbody/tr/td[3]/div/div[2]/div[3]/div[1]/p/a")
 	private WebElement MaProviderLink;
 
-	@FindBy(xpath = "//div[@class='plan-overview-wrapper']/div[1]/span/h2")
+	@FindBy(xpath = "//div[@class='plan-overview-wrapper']/div[1]/h2")
 	private WebElement allPlansSize;
 
 	@FindBy(xpath = "//div[@class='plan-overview-wrapper']/div[2]/div[1]/div/span[1]/span")
