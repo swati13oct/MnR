@@ -31,13 +31,13 @@ public class OrderplanmaterialsPage extends UhcDriver {
 	@FindBy(xpath = "//a[contains(text(), 'Medicare Supplement Insurance Plan')]")
 	private WebElement MedSuppPlanTab;
 	
-	@FindBy(id = "member-materials")
+	@FindBy(xpath = "//*[@id='notShipRadio']/div[1]/div")
 	private WebElement memberMaterialsfield;
 
-	@FindBy(id = "replacement-id")
+	@FindBy(xpath = "//*[@id='notShipRadio']/div[2]/div")
 	private WebElement replacementIdField;
 	
-	@FindBy(id = "member-id-card")
+	@FindBy(xpath = "//*[@id='shipRadio']/div[1]/div")
 	private WebElement MemberIDcardField;
 	
 	@FindBy(id = "eft-id")
@@ -117,13 +117,34 @@ public class OrderplanmaterialsPage extends UhcDriver {
 			MedSuppPlanTab.click();
 			Assert.assertTrue("Cant navigate to Med Supp PlanTab Plan Tab", MemberIDcardField.isDisplayed());
 			System.out.println("*************Displaying SHIP - Med Supp Plan Tab Plan Tab **********");
-			
 		}
 		else{
 			System.out.println("Invalid Plan Type / Plan Type not found");
 		}	
 	}
-
+	
+	@SuppressWarnings("deprecation")
+	public void ValidateOptions(String PlanType){
+		
+		if (PlanType.contains("MA") || PlanType.contains("MAPD") || PlanType.contains("PDP")) {
+			if (validate(memberMaterialsfield) && validate(replacementIdField) ){
+				Assert.assertTrue(true);
+				System.out.println("*************Displaying Order Plan Material Options for "+PlanType+ "**********");
+			}
+		}
+		else if (PlanType.contains("HIP") || PlanType.contains("MedSupp")) {
+			if (validate(MemberIDcardField) && validate(EFTbrochureField) && validate(premiumPayment) && validate(couponBook) && validate(claimsEnvelope) && validate(certificateInsurance) && validate(medicareHospital) ){
+				Assert.assertTrue(true);
+				System.out.println("*************Displaying Order Plan Material Options for "+PlanType+ "**********");
+			}
+		}
+		else{
+			Assert.fail();
+			System.out.println("Invalid Plan Type / Plan Type not found");
+		}	
+	}
+	
+	
 	public boolean ValidateHeader(){
 		if (driver.findElement(By.xpath("//h1[@class='h4 margin-none']")).isDisplayed() && driver.findElement(By.xpath("//h2[@class='h3 medium margin-large']")).isDisplayed()){
 			System.out.println("*************Header Text and Subtext displayed for Order materials Page***************");
@@ -162,34 +183,56 @@ public class OrderplanmaterialsPage extends UhcDriver {
 		
 		CommonUtility.checkPageIsReady(driver);
 
-		if (option.contains("Member Materials") || option.contains("Welcome Guide")) {
-			memberMaterialsfield.submit();
+		if (option.contains("Member Materials") || option.contains("Welcome Guide") || option.contains("Welcome kit")) {
+			System.out.println("*************Selecting Member materials Radio***************");
+			memberMaterialsfield.click();
+			if(!memberMaterialsfield.isEnabled()){
+				System.out.println("*************NOT ABLE to SELECT Member materials Radio***************");
+				
+			}
+
 		}
 		
 		if (option.contains("Replacement ID card")) {
+			System.out.println("*************Selecting Replacement ID card Radio***************");
 			replacementIdField.click();
+			if(!replacementIdField.isEnabled()){
+				System.out.println("*************NOT ABLE to SELECT Replacement ID card Radio***************");
+			}
 		}
 		
-//		if (option.contains("Welcome")) {
-//			MemberIDcardField.click();
-//		}
+		if (option.contains("Member ID Card")) {
+			System.out.println("*************Selecting Member ID Card Radio***************");
+			MemberIDcardField.click();
+			if(!MemberIDcardField.isEnabled()){
+				System.out.println("*************NOT ABLE to SELECT Member ID Card Radio***************");
+			}
+
+		}
 
 		if (option.contains("Electronic Funds Transfer (EFT) Brochure")) {
+			System.out.println("*************Selecting Electronic Funds Transfer (EFT) Brochure Radio***************");
 			EFTbrochureField.click();
+			if(!EFTbrochureField.isEnabled()){
+				System.out.println("*************NOT ABLE to SELECT Electronic Funds Transfer (EFT) Brochure Radio***************");
+			}
+
 		}
 
 		if (option.contains("Premium Payment Envelopes")) {
+			System.out.println("*************Selecting Premium Payment Envelopes Radio***************");
 			premiumPayment.click();
+			if(!premiumPayment.isEnabled()){
+				System.out.println("*************NOT ABLE to SELECT Premium Payment Envelopes Radio***************");
+			}
+
 		}
 
 		if (option.contains("Coupon Book")) {
 			System.out.println("*************Selecting Coupon Book Radio***************");
-
 			couponBook.click();
-			
-			if(!couponBook.isSelected()){
+			if(!couponBook.isEnabled()){
 				System.out.println("*************NOT ABLE to SELECT Coupon Book Radio***************");
-				
 			}
 		}
 		
@@ -204,11 +247,21 @@ public class OrderplanmaterialsPage extends UhcDriver {
 		 * shipDocumentStateCodeId.sendKeys(statecode); }
 		 */
 		if (option.contains("Claims Envelope")) {
+			System.out.println("*************Selecting Claims Envelope Radio***************");
 			claimsEnvelope.click();
+			if(!claimsEnvelope.isEnabled()){
+				System.out.println("*************NOT ABLE to SELECT Claims Envelope Radio***************");
+			}
+
 		}
 
 		if (option.contains("Certificate of Insurance")) {
+			System.out.println("*************Selecting Certificate of Insurance Radio***************");
 			certificateInsurance.click();
+			if(!certificateInsurance.isEnabled()){
+				System.out.println("*************NOT ABLE to SELECT Certificate of Insurance Radio***************");
+			}
+
 		}
 		submitButton.click();
 

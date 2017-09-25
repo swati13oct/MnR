@@ -1,5 +1,7 @@
 @ordermaterials
 Feature:To test order materials in AARP site
+
+@MAPSOrdermaterials
 Scenario Outline:Verify order materials in AARP site for federal type plan members
 Given registered AMP member with following attributes
 	| Plan Type | <planType> |
@@ -9,21 +11,22 @@ And the user selects an option from the orderp list in AARP site
 Then the user validates the plan materials under plan document section in AARP site
 Examples:   
         | planType      |  option          |
-#       | MA            | Member Materials | 
-#	| MAPD          |   Welcome kit    | 	    
+       | MA            | Member Materials | 
+			| MAPD          |   Welcome kit    | 	    
         | PDP           |  Welcome Guide   |
  
-#Scenario Outline:Verify order materials in AARP site for ship type plan members
-#Given registered AMP member with following attributes
-#	| Plan Type | <planType> |
-#When the user views order materials in AARP site
-#And the user selects an option from the orderp list in AARP site
-#| Option | <option> |
-#| State Ccode|<statecode>|
-#Then the user validates the plan materials under plan document section in AARP site
-#Examples:   
-#             | planType      |  option                            | statecode |
-#             | MS            |Medicare Select Hospital Directory  | PENNSYLVANIA |
+ @SHIPOrderMaterials
+Scenario Outline:Verify order materials in AARP site for ship type plan members
+Given registered AMP member with following attributes
+	| Plan Type | <planType> |
+When the user views order materials in AARP site
+And the user selects an option from the orderp list in AARP site
+| Option | <option> |
+Then the user validates the plan materials under plan document section in AARP site
+Examples:   
+            | planType      |  option    |  
+            | SHIP          |Coupon Book  | 
+
 
 @radiobuttonpdpind
 Scenario Outline:Verify order materials in AARP site for federal type plan members
@@ -101,7 +104,22 @@ Examples:
      		| MAPD		 | MAPD,HIP		|
       	| PDP			 | PDP,MedSupp|
  
+ @ValidateOrderMaterialOptions
+ Scenario Outline: Verify Order Plan Material Options - All Combo Plan Types
+    Given registered AMP member with following attributes
+      | Plan Type   | <planType>   |
+    When the user views order materials in AARP site
+    Then user navigates to Order Materials page for all Plans
+      | Combo Plans | <comboPlans> |
+    And user validates all Order material Options for the plantype
+      | Combo Plans | <comboPlans> |
 
+    Examples: 
+      	| planType | comboPlans |
+     		| MA       | MA,HIP     |
+     		| MAPD		 | MAPD,HIP		|
+      	| PDP			 | PDP,MedSupp|
+      	
 @ValidateErrorMessage
  Scenario Outline: Verify Aarp Order Materials Page Error Message
     Given registered AMP member with following attributes
@@ -115,7 +133,7 @@ Examples:
      		| MA       | MA,HIP     |
 
 @ValidateSHIPErrorMessage
- Scenario Outline: Verify Aarp Order Materials Page Error Message
+ Scenario Outline: Verify SHIP Invalid selection Order Materials Page Error Message
     Given registered AMP member with following attributes
       | Plan Type   | <planType>   |
     When the user views order materials in AARP site
