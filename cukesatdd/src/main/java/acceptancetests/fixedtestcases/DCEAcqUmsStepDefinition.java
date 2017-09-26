@@ -89,7 +89,7 @@ public class DCEAcqUmsStepDefinition {
 	}
 	
 	@And("^I choose the plan and go to DCE page$")
-	public void choosing2017Plan(DataTable attributes){
+	public void choosePlanandGoToDCE(DataTable attributes){
 		List<DataTableRow> memberAttributesRow = attributes
 				.getGherkinRows();
 		Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
@@ -102,6 +102,26 @@ public class DCEAcqUmsStepDefinition {
 		String plantype = memberAttributesMap.get("Plan Type");
 		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) loginScenario.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 		//plansummaryPage.choose2017Plans();
+		DrugCostEstimatorPage dce = plansummaryPage.navigateToDCE(plantype);
+		if(dce!=null){
+			loginScenario.saveBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE, dce);
+		}
+	}
+	
+	@And("^I choose the 2017 plan and go to DCE page$")
+	public void choosing2017Plan(DataTable attributes){
+		List<DataTableRow> memberAttributesRow = attributes
+				.getGherkinRows();
+		Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells()
+					.get(0), memberAttributesRow.get(i).getCells().get(1));
+		}
+
+		String plantype = memberAttributesMap.get("Plan Type");
+		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) loginScenario.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		plansummaryPage.choose2017Plans();
 		DrugCostEstimatorPage dce = plansummaryPage.navigateToDCE(plantype);
 		if(dce!=null){
 			loginScenario.saveBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE, dce);

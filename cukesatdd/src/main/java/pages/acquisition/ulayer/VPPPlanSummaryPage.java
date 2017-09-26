@@ -64,7 +64,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	@FindBy(xpath = "//div[@class='overview-tabs module-tabs-tabs']/div[3]//span[@class='trigger-closed']")
 	private WebElement pdpPlansViewLink;
 
-	@FindBy(xpath = "//div[@class='overview-main']/span/h2")
+	@FindBy(xpath = "//div[@class='overview-main']/h2")
 	private WebElement vppTop;
 	
 	@FindBy(xpath = "//div[@class='maplans_planbutton']/div[2]/div[2]/div[2]")
@@ -702,7 +702,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 								// TODO Auto-generated catch block
 								e.printStackTrace();
 							}
-							viewPlanSummary("MA");
+							//viewPlanSummary("MA");
 							try {
 								Thread.sleep(2000);
 							} catch (InterruptedException e) {
@@ -768,8 +768,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}	
-		if (step1Desc.getText().equalsIgnoreCase(
-				"You have chosen to enroll in")) {
+		if (driver.getCurrentUrl().contains("aarp-medicare-complete-online-application.html")){
 			return new IntroductionInformationPage(driver);
 		}else{
 			return null;
