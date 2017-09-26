@@ -146,7 +146,7 @@ public class ProfilePreferencesPage extends UhcDriver {
 	@FindBy(id="communicationAddress")
 	private WebElement communicationpreferncessection;
 	
-	@FindBy(xpath = "html/body/div[3]/div/div[1]/div/main/div[1]/section/div/div[1]/div/div/div[1]/img")
+	@FindBy(xpath = "html/body/div[5]/div[1]/div[1]/div[2]/main/div[1]/section/div/div[1]/div/div/div[1]/img")
 	private WebElement gogreenleaf;
 
 	@FindBy(xpath = "html/body/div[3]/div/div[1]/div/main/div[1]/section/div/div[1]/div/div/div[2]")
@@ -698,13 +698,18 @@ public class ProfilePreferencesPage extends UhcDriver {
 
 	}
 
-	public void validateBacktoPNPlink() throws InterruptedException {
+	public ProfilePreferencesPage validateBacktoPNPlink() throws InterruptedException {
 
 		validateNew(backLink1);
 		backLink1.click();
 		goPaperlessButton.click();
 		validateNew(backLink2);
 		backLink2.click();
+		if (driver.getTitle().equalsIgnoreCase("profileandpreferences")) {
+			System.out.println("Pass");
+			return new ProfilePreferencesPage(driver);
+		}
+		return null;
 
 	}
 

@@ -175,7 +175,7 @@ public class ProfileandPreferencesPage extends UhcDriver {
 	@FindBy(xpath = ".//*[@id='communicationAddress']/div[2]/a")
 	private WebElement gopaperlessbutton;
 
-	@FindBy(xpath = "html/body/div[5]/div[1]/div/div[1]/main/div[1]/section/div/div[1]/div/div/div[1]/img")
+	@FindBy(xpath = "html/body/div[5]/div[1]/div[1]/div[2]/main/div[1]/section/div/div[1]/div/div/div[1]/img")
 	private WebElement gogreenleaf;
 
 	@FindBy(xpath = "html/body/div[5]/div[1]/div/div[1]/main/div[1]/section/div/div[1]/div/div/div[2]")
@@ -472,9 +472,9 @@ public class ProfileandPreferencesPage extends UhcDriver {
 			System.out.println(table_data);
 			Assert.assertEquals(myProfilenpreferencesexpectedjson.get("3rdline"), table_data);
 			// to validate paid Date
-			finalPath = Disclaimerlinkcontent_xpath + "/p[4]";
-			table_data = driver.findElement(By.xpath(finalPath)).getText();
-			System.out.println(table_data);
+			//finalPath = Disclaimerlinkcontent_xpath + "/p[4]";
+			//table_data = driver.findElement(By.xpath(finalPath)).getText();
+			//System.out.println(table_data);
 			Assert.assertEquals(myProfilenpreferencesexpectedjson.get("4thline"), table_data);
 
 			Disclaimerlink.click();
