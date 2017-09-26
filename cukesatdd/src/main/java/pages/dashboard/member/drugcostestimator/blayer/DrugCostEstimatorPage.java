@@ -304,6 +304,7 @@ public class DrugCostEstimatorPage extends UhcDriver {
 		}
 
 		driver.get(NewDCEUrl);
+		driver.manage().window().maximize();
 
 		// try{
 		// Alert alert = driver.switchTo().alert();
@@ -522,7 +523,7 @@ public class DrugCostEstimatorPage extends UhcDriver {
 	public void selectRadius() {
 		int index = 5;
 		Select options = new Select(milesSelection);
-		options.selectByIndex(index);
+		//options.selectByIndex(index);
 		// options.getAllSelectedOptions();
 	}
 

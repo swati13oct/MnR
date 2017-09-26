@@ -633,7 +633,7 @@ public class DrugCostEstimatorPage extends UhcDriver {
 	public void selectRadius() {
 		int index = 5;
 		Select options = new Select(milesSelection);
-		options.selectByIndex(index);
+		//options.selectByIndex(index);
 		// options.getAllSelectedOptions();
 	}
 

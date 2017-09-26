@@ -32,7 +32,7 @@ Examples:
  | planType  | memberType  |
  | MAPD       |IndividualDCEmember |
 
-#@drug_cost_estimatorstep3
+#@drug_cost_estimator3
 #Scenario Outline: Pharmacy saver results
 #Given I am a registered member using the new M&R member portal on a desktop computer
 #| Plan Type   | <planType>   |
@@ -47,7 +47,7 @@ Examples:
 #| MA     |Group_non_pharmacy_saver |
 
  
-@drug_cost_estimatorstep4
+@drug_cost_estimator4
 Scenario Outline: Pharmacy saver results
 Given I am a registered member using the new M&R member portal on a desktop computer
 | Plan Type   | <planType>   |
