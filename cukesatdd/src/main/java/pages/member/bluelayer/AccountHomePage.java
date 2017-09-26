@@ -229,7 +229,7 @@ public class AccountHomePage extends UhcDriver {
 	@FindBy(xpath = "//span[text()='SUBMIT ORDER']")
 	private WebElement submitOrderbtn;
 	
-	@FindBy(xpath = "html/body/div[2]/div/div/main/div/section[1]/div/div/div/form/button")
+	@FindBy(xpath = "//button[@class = 'btn btn-primary select-item-submit']")
 	private WebElement submitLink;
 	
 	@FindBy(xpath="//a[contains(text(),'Go to order-plan-materials')]")
@@ -1130,7 +1130,7 @@ public FormsandresourcesPage navigateToMydocumentUmsPage() {
 		
 		CommonUtility.checkPageIsReady(driver);
 		if (driver.getTitle().equalsIgnoreCase(
-				"AARP Medicare Plans | Order Plan Materials") || (driver.getTitle().equalsIgnoreCase("Order Plan Materials"))) {
+				"AARP Medicare Plans | Order Plan Materials") || (driver.getTitle().equalsIgnoreCase("Order Plan Material"))) {
 			return new OrderplanmaterialsPage(driver);
 		}
 		else{

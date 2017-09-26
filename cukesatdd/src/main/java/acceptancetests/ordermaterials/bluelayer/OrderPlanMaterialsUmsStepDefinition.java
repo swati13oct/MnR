@@ -80,7 +80,7 @@ public class OrderPlanMaterialsUmsStepDefinition {
 				.getUMSMemberWithDesiredAttributes(desiredAttributes);
 		String userName = null;
 		String pwd = null;
-		/*if (loginCreds == null) {
+		if (loginCreds == null) {
 			// no match found
 			System.out.println("Member Type data could not be setup !!!");
 			Assert.fail("unable to find a " + desiredAttributes + " member");
@@ -92,18 +92,18 @@ public class OrderPlanMaterialsUmsStepDefinition {
 			getLoginScenario()
 					.saveBean(LoginCommonConstants.USERNAME, userName);
 			getLoginScenario().saveBean(LoginCommonConstants.PASSWORD, pwd);
-		}*/
+		}
 
 		/*  Temp Code Username, PWD hardcoded */
 		
-		userName = "q3_sep_grp329";
+/*		userName = "q3_sep_grp329";
 		pwd = "Password@1";
 		System.out.println("User is..." + userName);
 		System.out.println("Password is..." + pwd);
 		getLoginScenario()
 				.saveBean(LoginCommonConstants.USERNAME, userName);
 		getLoginScenario().saveBean(LoginCommonConstants.PASSWORD, pwd);
-		
+*/		
 		
 		
 		WebDriver wd = getLoginScenario().getWebDriver();
