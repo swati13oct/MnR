@@ -22,6 +22,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import pages.member.ulayer.AccountHomePage;
 import pages.member.ulayer.LoginPage;
 import pages.member.ulayer.MultipleEmailAddressNewPage;
+import pages.member.ulayer.NewEmailAddressPage;
 import pages.member.ulayer.PersonalIdentityUlayerPage;
 import pages.member.ulayer.TerminatedHomePage;
 import acceptancetests.atdd.data.CommonConstants;
@@ -239,6 +240,22 @@ public class LoginAarpStepDefinition {
 
 	}
 	
+	@Then("^the User clicks moves to test harness page and clicks on go to No Email Address Page$")
+	public void Move_To_TestHarness_and_gotoNoEmailAddress() {
+
+		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario()
+				.getBean(PageConstants.ACCOUNT_HOME_PAGE);
+		NewEmailAddressPage NewEmailPage = accountHomePage.navigateToNoEmailTestHarness();
+		 if(NewEmailPage !=null){
+		    	getLoginScenario().saveBean(PageConstants.NEW_EMAIL_ADDRESS,
+		    			NewEmailPage);
+				Assert.assertTrue(true);
+			} else {
+				Assert.fail("Multiple Email page not found");
+			}
+
+	}
+	
 	
 	@Then("^User selects different mail option and validates the confirmation page$")
 	public void EmailMultipleAddress_validation() throws InterruptedException {
@@ -257,7 +274,7 @@ public class LoginAarpStepDefinition {
 	}
 	
 	@Then("^User selects Radio button for available mail address option and validates the confirmation page$")
-	public void EmailSelctOption_validation() throws InterruptedException {
+	public void EmailSelectOption_validation() throws InterruptedException {
 
 		MultipleEmailAddressNewPage MEANewPage = (MultipleEmailAddressNewPage) getLoginScenario()
 				.getBean(PageConstants.MULTIPLE_EMAIL_ADDRESS);
@@ -265,6 +282,25 @@ public class LoginAarpStepDefinition {
 	    if(MultipleEmailPageConfirmation!=null){
 	    	getLoginScenario().saveBean(PageConstants.MULTIPLE_EMAIL_CONFIRMATION,
 	    			MultipleEmailPageConfirmation);
+			Assert.assertTrue(true);
+		} else {
+			Assert.fail("Multiple Email page not found");
+		}
+         
+	}
+	
+	
+	
+	
+	@Then("^User enters new email address and validates the confirmation page$")
+	public void EmailEnterNew_validation() throws InterruptedException {
+
+		NewEmailAddressPage NEANewPage = (NewEmailAddressPage) getLoginScenario()
+				.getBean(PageConstants.NEW_EMAIL_ADDRESS);
+	    AccountHomePage NewEmailPageConfirmation = NEANewPage.EnterNewMail();
+	    if(NewEmailPageConfirmation!=null){
+	    	getLoginScenario().saveBean(PageConstants.NEW_EMAIL_ADDRESS_CONFIRMATION,
+	    			NewEmailPageConfirmation);
 			Assert.assertTrue(true);
 		} else {
 			Assert.fail("Multiple Email page not found");

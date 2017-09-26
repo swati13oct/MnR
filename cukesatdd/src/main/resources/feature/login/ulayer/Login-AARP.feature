@@ -115,7 +115,7 @@ Examples:
 
 @US621820
 Scenario Outline: Verify confirmation page for different Email option selected button
-Given the user is on the AARP Ulayer site login page
+Given the user is on the AARP medicare site login page
 When the user logs in with a registered AMP with following details in AARP site
 	| Plan Type 1        | <planType1>    |
 Then the User clicks moves to test harness page and clicks on go to Multiple Email Address Page
@@ -128,7 +128,7 @@ Examples:
 
 @US621796
 Scenario Outline: Verify confirmation page for different Email option selected button
-Given the user is on the AARP Ulayer site login page
+Given the user is on the AARP medicare site login page
 When the user logs in with a registered AMP with following details in AARP site
 	| Plan Type 1        | <planType1>    |
 Then the User clicks moves to test harness page and clicks on go to Multiple Email Address Page
@@ -137,7 +137,6 @@ Then User selects Radio button for available mail address option and validates t
 Examples:
    | planType1 |
    | COMBO |
-
 
 
 @US621839
@@ -154,12 +153,12 @@ Given the user is on the multipleEmailAddressPage and enters does not enters sam
 
 @US620213
 Scenario Outline: Verify confirmation page for No email address page
-Given the user is on the AARP Ulayer site login page
+Given the user is on the AARP medicare site login page
 When the user logs in with a registered AMP with following details in AARP site
 	| Plan Type 1        | <planType1>    |
-Then the User clicks moves to test harness page and clicks on go to Multiple Email Address Page
-Then User selects Radio button for available mail address option and validates the confirmation page
+Then the User clicks moves to test harness page and clicks on go to No Email Address Page
+Then User enters new email address and validates the confirmation page
 
 Examples:
    | planType1 |
-   | COMBO |
+   | MAPD |

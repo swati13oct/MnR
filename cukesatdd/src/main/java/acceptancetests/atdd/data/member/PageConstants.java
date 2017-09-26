@@ -198,5 +198,9 @@ public class PageConstants {
 	public static final String MULTIPLE_EMAIL_ADDRESS = "multipleEmailAddress";
 	
 	public static final String MULTIPLE_EMAIL_CONFIRMATION = "multipleEmailConfirmation";
+	
+	public static final String NEW_EMAIL_ADDRESS = "newEmailAddress";
+	
+	public static final String NEW_EMAIL_ADDRESS_CONFIRMATION = "newEmailAddressConfirmation";
 
 }

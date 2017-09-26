@@ -1,22 +1,17 @@
 package pages.member.ulayer;
 
-import org.json.JSONObject;
-import org.openqa.selenium.Alert;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
 import acceptancetests.atdd.data.MRConstants;
-import acceptancetests.atdd.data.PageData;
-import atdd.framework.MRScenario;
 import atdd.framework.UhcDriver;
-import pages.dashboard.eob.EOBPage;
 
-public class MultipleEmailAddressNewPage extends UhcDriver{	
+public class NewEmailAddressPage extends UhcDriver{	
 
 	
-	private static String PAGE_URL = MRConstants.TeamC_MultipleEmail_address_URL;
+  //private static String PAGE_URL = MRConstants.TeamC_NewEmail_address_URL;
 	
 		@FindBy(xpath = ".//*[@id='email-modal-form']/div/button")
 		private WebElement ContinueButton;
@@ -58,7 +53,7 @@ public class MultipleEmailAddressNewPage extends UhcDriver{
 		private WebElement ContinueButton1;
 
 
-		public MultipleEmailAddressNewPage(WebDriver driver) {
+		public NewEmailAddressPage(WebDriver driver) {
 			super(driver);
 			PageFactory.initElements(driver, this);
 			openAndValidate();
@@ -67,70 +62,19 @@ public class MultipleEmailAddressNewPage extends UhcDriver{
 
 		@Override
 		public void openAndValidate() {
-			start(PAGE_URL);
-		}
-
-		
-		public AccountHomePage ClickOnContinue()
-		{
-			ContinueButton.click();
-			if(Error1.getText().contains("required")){				
-				return new AccountHomePage(driver);
-			}
-			return null;
+			//start(PAGE_URL);
 		}
 		
-		public AccountHomePage EnterInvalidMail() throws InterruptedException
-		{
-			UseDifferentEmailAddressButton.click();
-			Thread.sleep(1000);
-			New_Mail.sendKeys("asdf");
-			ContinueButton.click();
-			if(Valid_email_error.getText().contains("Valid Email Address")){				
-				return new AccountHomePage(driver);
-			}
-			return null;
-		}
-		
-		public AccountHomePage ConfirmMailIssue() throws InterruptedException
-		{
-			UseDifferentEmailAddressButton.click();
-			Thread.sleep(1000);
-			New_Mail.sendKeys("asdf@asd.com");
-			Confirm_New_Mail.sendKeys("asdf");
-			ContinueButton.click();
-			if(Email_confirm_error.getText().contains("exact value again")){				
-				return new AccountHomePage(driver);
-			}
-			return null;
-		}
-		
-		public AccountHomePage SelectDifferentEmailAddress() throws InterruptedException
-		{
-			Thread.sleep(7000);
-			UseDifferentMailAddressLink.click();
-			New_Mail.sendKeys("abc@tst.com");
-			Confirm_New_Mail.sendKeys("abc@tst.com");
-			ContinueButton.click();
-			Thread.sleep(10000);
-			if(driver.getTitle().equalsIgnoreCase("AARP Medicare Plans | My Account Home")){
-		        return new AccountHomePage(driver);
-				}
-			return null;
-		}
-		
-		public AccountHomePage SelectEmailfromOption() throws InterruptedException
+		public AccountHomePage EnterNewMail() throws InterruptedException
 		{
 			Thread.sleep(5000);
-			SecondOption.click();
-			ContinueButton.click();
+			newEmail.sendKeys("test@optum.com");
+			ConfirmNewEmail.sendKeys("test@optum.com");
+			ContinueButton1.click();
 			Thread.sleep(5000);
 			if(driver.getTitle().equalsIgnoreCase("AARP Medicare Plans | My Account Home")){
 		        return new AccountHomePage(driver);
 				}
 			return null;
 		}
-		
-		
-		
 }

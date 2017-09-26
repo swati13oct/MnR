@@ -157,6 +157,9 @@ public class AccountHomePage extends UhcDriver {
 	@FindBy(xpath = ".//*[@id='emailOption.label']/strong")
 	private WebElement MultipleEmailAddressMessage;
 	
+	@FindBy(linkText = "Go to NoEmail Address page")
+	private WebElement NoEmailAddressLink;	
+	
 	private PageData myAccountHome;
 	
 	private static String EOB_DIRECT_URL = MRConstants.EOB_DIRECT_URL;
@@ -640,6 +643,17 @@ public class AccountHomePage extends UhcDriver {
  			MultiEmailAddressLink.click();
  			 Assert.assertTrue(driver.getTitle().equalsIgnoreCase("Multiple Email Address"));
  			 return new MultipleEmailAddressNewPage(driver);
+		}
+		return null;
+	}
+	
+	
+	public NewEmailAddressPage navigateToNoEmailTestHarness(){
+		driver.navigate().to("https://member.team-c-aarpmedicareplans.uhc.com/home/testharness.html");
+ 		if(driver.getTitle().equalsIgnoreCase("testharness")){
+ 			NoEmailAddressLink.click();
+ 			 Assert.assertTrue(driver.getTitle().equalsIgnoreCase("No Email Address"));
+ 			 return new NewEmailAddressPage(driver);
 		}
 		return null;
 	}
