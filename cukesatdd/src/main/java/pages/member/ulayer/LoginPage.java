@@ -40,7 +40,7 @@ public class LoginPage extends UhcDriver {
 	@FindBy(id = "loginPOPUPpass")
 	private WebElement passwordField;
 
-	@FindBy(xpath = "//div[@class='fd_userPassSection']/button")
+	@FindBy(xpath = ".//*[@id='fd_signInPanel']/div[2]/div[4]/button")
 	private WebElement signInButton;
 
 	@FindBy(linkText = "Forgot your username or password?")
