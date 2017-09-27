@@ -3,6 +3,7 @@ package acceptancetests.ProfileandPreferencesredesign.ulayer;
 import gherkin.formatter.model.DataTableRow;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -11,6 +12,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import org.apache.commons.io.FileUtils;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.junit.Assert;
@@ -18,8 +20,10 @@ import org.openqa.selenium.WebDriver;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.openqa.selenium.By;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
 
-
+import pages.member.bluelayer.ProfilePreferencesPage;
 import pages.member.ulayer.AccountHomePage;
 import pages.member.ulayer.LoginPage2;
 
@@ -398,7 +402,85 @@ public class ProfileandPreferencesAARPStepDefinition {
 		ProfileandPreferencespage.validatepnparrowlink();
 	}
 	
+
+	@Then("^the user validates the presence of Go Paperless button")
+	public void UserValidateGoPaperlessbutton() {
+		
+		
+		pages.member.ulayer.ProfileandPreferencesPage ProfileandPreferencespage = (pages.member.ulayer.ProfileandPreferencesPage) getLoginScenario()
+				.getBean(PageConstants.PROFILE_AND_PREFERENCES_PAGE);
+		
+		ProfileandPreferencespage.validateGoPaperlessbutton();
+
+	}
+	@Then("^the user validates the presence of Plan Name")
+	public void UserValidatePlanName() {
+		pages.member.ulayer.ProfileandPreferencesPage ProfileandPreferencespage = (pages.member.ulayer.ProfileandPreferencesPage) getLoginScenario()
+				.getBean(PageConstants.PROFILE_AND_PREFERENCES_PAGE);
+		
+		ProfileandPreferencespage.validatePlanName();
+
+	}
+	@Then("^the user validates the presence of Communication preferences header")
+	public void UserValidatescommunicationpreferencesheader() {
+		pages.member.ulayer.ProfileandPreferencesPage ProfileandPreferencespage = (pages.member.ulayer.ProfileandPreferencesPage) getLoginScenario()
+				.getBean(PageConstants.PROFILE_AND_PREFERENCES_PAGE);
+		
+		ProfileandPreferencespage.validatecommunicationpreferencesheader();
+
+	}
+	@Then("^the user validates the presence of Back to Profile and Preferences links")
+	public void UserValidatesBacktoPNPlink() {
+		pages.member.ulayer.ProfileandPreferencesPage ProfileandPreferencespage = (pages.member.ulayer.ProfileandPreferencesPage) getLoginScenario()
+				.getBean(PageConstants.PROFILE_AND_PREFERENCES_PAGE);
+
+		try {
+			ProfileandPreferencespage.validateBacktoPNPlink();
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+	}
+
 	
+	@Then("^the user validates the Note section")
+	public void UserValidatesNoteSection() {
+		pages.member.ulayer.ProfileandPreferencesPage ProfileandPreferencespage = (pages.member.ulayer.ProfileandPreferencesPage) getLoginScenario()
+				.getBean(PageConstants.PROFILE_AND_PREFERENCES_PAGE);
+
+		ProfileandPreferencespage.validateNoteSection();
+
+	}
+	
+	@Then("^the user validates the I have read checkbox and check it")
+	public void UserValidatesCheckbox() {
+		pages.member.ulayer.ProfileandPreferencesPage ProfileandPreferencespage = (pages.member.ulayer.ProfileandPreferencesPage) getLoginScenario()
+				.getBean(PageConstants.PROFILE_AND_PREFERENCES_PAGE);
+
+		ProfileandPreferencespage.validateCheckbox();
+
+	}
+	
+	@Then("^the user validates the Save Preferences Button")
+	public void UserValidatesSavePreferences() 
+	{
+		pages.member.ulayer.ProfileandPreferencesPage ProfileandPreferencespage = (pages.member.ulayer.ProfileandPreferencesPage) getLoginScenario()
+				.getBean(PageConstants.PROFILE_AND_PREFERENCES_PAGE);
+
+		ProfileandPreferencespage.validateSavePreferences();
+
+	}
+	
+	
+	@Then("^the user validates the Go Green Header")
+	public void UserValidatesGoGreenHeader() {
+		pages.member.ulayer.ProfileandPreferencesPage ProfileandPreferencespage = (pages.member.ulayer.ProfileandPreferencesPage) getLoginScenario()
+				.getBean(PageConstants.PROFILE_AND_PREFERENCES_PAGE);
+
+		ProfileandPreferencespage.validateGoGreenHeader();
+
+	}
 	
 	
 	

@@ -195,7 +195,7 @@ public class AccountHomePage extends UhcDriver {
 	@FindBy(linkText = "Go to benefits and coverage page page")
 	private WebElement BnClink2;
 
-	@FindBy(linkText = "Go to profile-and-preferences page")
+	@FindBy(linkText = "Go to redesign my profile and preferences page")
 	private WebElement ProfileandPrefLink;
 	
 

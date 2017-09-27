@@ -3,13 +3,19 @@
  */
 package pages.member.ulayer;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
+import org.apache.commons.io.FileUtils;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.openqa.selenium.By;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -172,7 +178,7 @@ public class ProfileandPreferencesPage extends UhcDriver {
 	@FindBy(xpath = ".//*[@id='tab-1']/div[3]/div[2]/h3")
 	private WebElement communicationpreferencesheader;
 
-	@FindBy(xpath = ".//*[@id='communicationAddress']/div[2]/a")
+	@FindBy(xpath = ".//*[@id='communicationAddressCardHeight']/div[2]/a")
 	private WebElement gopaperlessbutton;
 
 	@FindBy(xpath = "html/body/div[5]/div[1]/div[1]/div[2]/main/div[1]/section/div/div[1]/div/div/div[1]/img")
@@ -186,6 +192,36 @@ public class ProfileandPreferencesPage extends UhcDriver {
 
 	@FindBy(xpath = "html/body/div[5]/div[1]/div/div[1]/header/div/div/div/div/div/div/a")
 	private WebElement Profilenprefernceslink;
+	
+	@FindBy(xpath = ".//*[@id='mail-preferences-selector']/div/div/div/div/div[1]/p")
+	private WebElement planNameGoGreen;
+
+	@FindBy(xpath = "html/body/div[5]/div[1]/div[1]/div/div[1]/div/div/div/div/div/div/h1")
+	private WebElement communicationPreferences;
+
+	@FindBy(xpath = "html/body/div[5]/div[1]/div[1]/div/div[1]/div/div/div/div/div/div/a")
+	private WebElement backLink1;
+
+	@FindBy(xpath = "html/body/div[5]/div[1]/div[1]/div/div[2]/div/div/div/div/a")
+	private WebElement backLink2;
+
+	@FindBy(xpath = "html/body/div[5]/div[1]/div[1]/div/div[2]/section/div/div[3]/div/p")
+	private WebElement NoteSection;
+
+	@FindBy(xpath = ".//*[@id='preferences-form']/div/div[1]/div[4]/div/label")
+	private WebElement iHavereadCheckbox;
+
+	@FindBy(id = "save-prefs-btn")
+	private WebElement savePreferencesButton;
+
+	@FindBy(linkText = "Edit Preferences")
+	private WebElement EditPreferenceButton;
+
+	@FindBy(xpath = "html/body/div[5]/div[1]/div[1]/div/div[2]/section/div/div[1]/div/div/div[2]/h2")
+	private WebElement GoGreenHeader;
+
+	@FindBy(xpath = "html/body/div[5]/div[1]/div[1]/div/div[2]/section/div/div[1]/div/div/div[2]/p")
+	private WebElement GoGreenText;
 
 	public static final String Disclaimerlinkcontent_xpath = ".//*[@id='collapseDisclaimer']";
 
@@ -253,6 +289,8 @@ public class ProfileandPreferencesPage extends UhcDriver {
 		return profilenpreferencesExpectedJson;
 
 	}
+	
+	
 
 	public void validatePlanNameMemberidandName() {
 
@@ -274,6 +312,15 @@ public class ProfileandPreferencesPage extends UhcDriver {
 
 		validate(EditLink);
 		System.out.println("Edit link is " + EditLink.isDisplayed());
+		File src= ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
+		try {
+			FileUtils.copyFile(src, new File("C:\\Users\\njain112\\error2.png"));
+			}
+         catch (IOException e)
+		{
+		System.out.println(e.getMessage());
+
+	    }
 
 	}
 
@@ -281,6 +328,14 @@ public class ProfileandPreferencesPage extends UhcDriver {
 		validateNew(EmailLabel);
 		validateNew(EmailAddressLabel);
 		validateNew(EmailEditbutton);
+		File src= ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
+		try {
+			FileUtils.copyFile(src, new File("C:\\Users\\njain112\\error3.png"));
+			}
+         catch (IOException e)
+		{
+		System.out.println(e.getMessage());
+        }
 	}
 		
 		
@@ -296,6 +351,14 @@ public class ProfileandPreferencesPage extends UhcDriver {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		File src= ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
+		try {
+			FileUtils.copyFile(src, new File("C:\\Users\\njain112\\error4.png"));
+			}
+         catch (IOException e)
+		{
+		System.out.println(e.getMessage());
+        }
 		if (email.getText().equals("nikitajain5@gmail.com")) {
 			System.out.println("The element" + email.getText() + "is found");
 			return true;
@@ -303,6 +366,7 @@ public class ProfileandPreferencesPage extends UhcDriver {
 			Assert.fail("The element " + email.getText() + "is not found");
 		}
 		return false;
+		
 	}
 
 	public boolean emailblankfieldsvalidation() {
@@ -328,6 +392,14 @@ public class ProfileandPreferencesPage extends UhcDriver {
 		} else {
 			Assert.fail("The element " + mandatorymessage.getText() + "is not found");
 		}
+		File src= ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
+		try {
+			FileUtils.copyFile(src, new File("C:\\Users\\njain112\\error5.png"));
+			}
+         catch (IOException e)
+		{
+		System.out.println(e.getMessage());
+        }
 		return false;
 	}
 
@@ -353,6 +425,14 @@ public class ProfileandPreferencesPage extends UhcDriver {
 		}
 
 		CanceEmaillButton.click();
+		File src= ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
+		try {
+			FileUtils.copyFile(src, new File("C:\\Users\\njain112\\error6.png"));
+			}
+         catch (IOException e)
+		{
+		System.out.println(e.getMessage());
+        }
 	}
 
 	public boolean validateduplicateerrormessage() {
@@ -371,6 +451,14 @@ public class ProfileandPreferencesPage extends UhcDriver {
 		} else {
 			Assert.fail("The element " + emailerrormessage.getText() + "is not found");
 		}
+		File src= ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
+		try {
+			FileUtils.copyFile(src, new File("C:\\Users\\njain112\\error7.png"));
+			}
+         catch (IOException e)
+		{
+		System.out.println(e.getMessage());
+        }
 		return false;
 	}
 
@@ -379,6 +467,14 @@ public class ProfileandPreferencesPage extends UhcDriver {
 		validateNew(Emailform);
 		validateNew(email);
 		System.out.println(email.getText());
+		File src= ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
+		try {
+			FileUtils.copyFile(src, new File("C:\\Users\\njain112\\error8.png"));
+			}
+         catch (IOException e)
+		{
+		System.out.println(e.getMessage());
+        }
 	}
 
 	public void validateAccountEdit(String password2) {
@@ -395,6 +491,14 @@ public class ProfileandPreferencesPage extends UhcDriver {
 			e.printStackTrace();
 		}
 		Assert.assertTrue("Button displayed", Password.isDisplayed());
+		File src= ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
+		try {
+			FileUtils.copyFile(src, new File("C:\\Users\\njain112\\error9.png"));
+			}
+         catch (IOException e)
+		{
+		System.out.println(e.getMessage());
+        }
 
 	}
 
@@ -587,6 +691,101 @@ public class ProfileandPreferencesPage extends UhcDriver {
 			return new ProfilePreferencesPage(driver);
 		}
 		return null;
+	}
+	public void validateGoPaperlessbutton() {
+		// TODO Auto-generated method stub
+		validateNew(gopaperlessbutton);
+		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+	}
+
+	public void validatePlanName() {
+		gopaperlessbutton.click();
+
+		validateNew(planNameGoGreen);
+		File src= ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
+		try {
+			FileUtils.copyFile(src, new File("C:\\Users\\njain112\\error10.png"));
+			}
+         catch (IOException e)
+		{
+		System.out.println(e.getMessage());
+
+	    }
+	}
+
+	public void validatecommunicationpreferencesheader() {
+
+		validateNew(communicationPreferences);
+		if (communicationPreferences.isDisplayed()) {
+			String cp = communicationPreferences.getText();
+
+			System.out.println(cp);
+			Assert.assertTrue(cp.equalsIgnoreCase("Communication Preferences"));
+		}
+		File src= ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
+		try {
+			FileUtils.copyFile(src, new File("C:\\Users\\njain112\\error11.png"));
+			}
+         catch (IOException e)
+		{
+		System.out.println(e.getMessage());
+
+	    }
+
+	}
+
+	public ProfilePreferencesPage validateBacktoPNPlink() throws InterruptedException {
+
+		validateNew(backLink1);
+		backLink1.click();
+		gopaperlessbutton.click();
+		validateNew(backLink2);
+		backLink2.click();
+		if (driver.getTitle().equalsIgnoreCase("profileandpreferences")) {
+			System.out.println("Pass");
+			return new ProfilePreferencesPage(driver);
+		}
+		return null;
+
+	}
+
+	public void validateNoteSection() {
+		gopaperlessbutton.click();
+		validateNew(NoteSection);
+		String noteContentActual = NoteSection.getText();
+		String noteContentExpected = "Note: it may take up to two mail cycles for your updated delivery preferences to take effect. Your mailing cycle-the length of time between documents-varies by document. When the paper mailings stop, you will receive an email notification alerting you that a new document has been posted to your online account.";
+		Assert.assertTrue(noteContentActual.equalsIgnoreCase(noteContentExpected));
+
+	}
+
+	public void validateCheckbox() {
+		// TODO Auto-generated method stub
+		validateNew(iHavereadCheckbox);
+		iHavereadCheckbox.click();
+	}
+
+	public void validateSavePreferences() {
+		// TODO Auto-generated method stub
+		validateNew(savePreferencesButton);
+		if (iHavereadCheckbox.isSelected()) {
+			savePreferencesButton.click();
+			validateNew(EditPreferenceButton);
+		}
+
+	}
+
+	public void validateGoGreenHeader() {
+		validateNew(GoGreenHeader);
+		validateNew(GoGreenText);
+
+		if (GoGreenText.isDisplayed())
+
+		{
+			String GoGreenContentActual = GoGreenText.getText();
+			String GoGreenContentExpected = "Select the plan materials you want to sign up for paperless delivery per the terms and conditions below.";
+
+			Assert.assertTrue(GoGreenContentActual.equalsIgnoreCase(GoGreenContentExpected));
+		}
 	}
 
 }

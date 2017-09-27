@@ -249,6 +249,28 @@ Feature: To test My Profile & Preferences in AARP site
       | MA       |
       
       
+   @GoGreen
+    Scenario Outline: To verify Go Green page
+    Given registered member with following details for Profile and Preferences flow
+      | <planType> |
+    Then the user navigates to Profile and Preferences page
+    Then the user validates the presence of Go Paperless button
+    Then the user validates the presence of Plan Name
+    Then the user validates the presence of Communication preferences header
+    Then the user validates the presence of Back to Profile and Preferences links
+    Then the user validates the Note section
+    Then the user validates the I have read checkbox and check it
+    Then the user validates the Save Preferences Button
+    Then the user validates the Go Green Header
+    
+    
+    
+     Examples: 
+      | planType |
+     #| MAPD     |
+     #| MA       |
+      |SHIP      |
+      
       
      
       
