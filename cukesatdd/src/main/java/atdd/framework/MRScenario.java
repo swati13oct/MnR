@@ -871,7 +871,7 @@ public class MRScenario {
                     webDriver = new FirefoxDriver(ffBinary, firefoxProfile);
                     webDriver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
             }
-   */ 	   
+*/    	   
     	 
     	   										/****PhantomJS*******/
     	   

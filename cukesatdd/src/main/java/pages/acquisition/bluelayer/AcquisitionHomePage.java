@@ -98,7 +98,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	@FindBy(className = "fd_myPlans")
 	private WebElement myPlansTab;
 
-	@FindBy(linkText = "pharmacy")
+	@FindBy(id = "Find a pharmacy near you")
 	private WebElement pharmacyLink;
 	
 	@FindBy(id = "ghn_lnk_2")
@@ -650,7 +650,11 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	}
 
 	public PharmacySearchPage navigateToPharmacyLocator() {
+		//Navigate to Request more help under MA plans under Our Plans.
+		driver.navigate().to("https://www.awe-test-a-uhcmedicaresolutions.uhc.com/health-plans/medicare-advantage-plans/request-information.html");
+		//Click on Find a Pharmacy near you.
 		pharmacyLink.click();
+		CommonUtility.checkPageIsReady(driver);
 		if (driver.getTitle().equalsIgnoreCase(
 				"Locate a Pharmacy | UnitedHealthcare®")) {
 			return new PharmacySearchPage(driver);
