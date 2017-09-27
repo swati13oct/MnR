@@ -312,15 +312,7 @@ public class ProfileandPreferencesPage extends UhcDriver {
 
 		validate(EditLink);
 		System.out.println("Edit link is " + EditLink.isDisplayed());
-		File src= ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
-		try {
-			FileUtils.copyFile(src, new File("C:\\Users\\njain112\\error2.png"));
-			}
-         catch (IOException e)
-		{
-		System.out.println(e.getMessage());
-
-	    }
+		
 
 	}
 
@@ -328,14 +320,7 @@ public class ProfileandPreferencesPage extends UhcDriver {
 		validateNew(EmailLabel);
 		validateNew(EmailAddressLabel);
 		validateNew(EmailEditbutton);
-		File src= ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
-		try {
-			FileUtils.copyFile(src, new File("C:\\Users\\njain112\\error3.png"));
-			}
-         catch (IOException e)
-		{
-		System.out.println(e.getMessage());
-        }
+		
 	}
 		
 		
@@ -392,14 +377,7 @@ public class ProfileandPreferencesPage extends UhcDriver {
 		} else {
 			Assert.fail("The element " + mandatorymessage.getText() + "is not found");
 		}
-		File src= ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
-		try {
-			FileUtils.copyFile(src, new File("C:\\Users\\njain112\\error5.png"));
-			}
-         catch (IOException e)
-		{
-		System.out.println(e.getMessage());
-        }
+		
 		return false;
 	}
 
@@ -425,14 +403,7 @@ public class ProfileandPreferencesPage extends UhcDriver {
 		}
 
 		CanceEmaillButton.click();
-		File src= ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
-		try {
-			FileUtils.copyFile(src, new File("C:\\Users\\njain112\\error6.png"));
-			}
-         catch (IOException e)
-		{
-		System.out.println(e.getMessage());
-        }
+		
 	}
 
 	public boolean validateduplicateerrormessage() {
@@ -451,14 +422,7 @@ public class ProfileandPreferencesPage extends UhcDriver {
 		} else {
 			Assert.fail("The element " + emailerrormessage.getText() + "is not found");
 		}
-		File src= ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
-		try {
-			FileUtils.copyFile(src, new File("C:\\Users\\njain112\\error7.png"));
-			}
-         catch (IOException e)
-		{
-		System.out.println(e.getMessage());
-        }
+		
 		return false;
 	}
 
@@ -467,14 +431,8 @@ public class ProfileandPreferencesPage extends UhcDriver {
 		validateNew(Emailform);
 		validateNew(email);
 		System.out.println(email.getText());
-		File src= ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
-		try {
-			FileUtils.copyFile(src, new File("C:\\Users\\njain112\\error8.png"));
-			}
-         catch (IOException e)
-		{
-		System.out.println(e.getMessage());
-        }
+		
+	
 	}
 
 	public void validateAccountEdit(String password2) {
@@ -491,14 +449,7 @@ public class ProfileandPreferencesPage extends UhcDriver {
 			e.printStackTrace();
 		}
 		Assert.assertTrue("Button displayed", Password.isDisplayed());
-		File src= ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
-		try {
-			FileUtils.copyFile(src, new File("C:\\Users\\njain112\\error9.png"));
-			}
-         catch (IOException e)
-		{
-		System.out.println(e.getMessage());
-        }
+		
 
 	}
 
@@ -722,15 +673,7 @@ public class ProfileandPreferencesPage extends UhcDriver {
 			System.out.println(cp);
 			Assert.assertTrue(cp.equalsIgnoreCase("Communication Preferences"));
 		}
-		File src= ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
-		try {
-			FileUtils.copyFile(src, new File("C:\\Users\\njain112\\error11.png"));
-			}
-         catch (IOException e)
-		{
-		System.out.println(e.getMessage());
-
-	    }
+		
 
 	}
 
@@ -741,6 +684,7 @@ public class ProfileandPreferencesPage extends UhcDriver {
 		gopaperlessbutton.click();
 		validateNew(backLink2);
 		backLink2.click();
+		
 		if (driver.getTitle().equalsIgnoreCase("profileandpreferences")) {
 			System.out.println("Pass");
 			return new ProfilePreferencesPage(driver);
