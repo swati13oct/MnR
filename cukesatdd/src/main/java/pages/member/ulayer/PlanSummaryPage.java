@@ -35,7 +35,10 @@ public class PlanSummaryPage extends UhcDriver {
 	@FindBy(id = "disclosure_link")
 	private WebElement logOut;
 	
-	@FindBy(xpath = ".//*[@id='plan_box']")
+	//@FindBy(xpath = ".//*[@id='plan_box']")
+	//private WebElement claimsPlanBox;
+	
+	@FindBy(id = "plan_box")
 	private WebElement claimsPlanBox;
 	
 	@FindBy(xpath = ".//*[@id='plan_box']/div[1]/div[2]/div/p[1]")
@@ -44,11 +47,20 @@ public class PlanSummaryPage extends UhcDriver {
 	@FindBy(xpath = ".//*[@id='plan_box']/div[1]/div[2]/div/p[2]/a")
 	private WebElement medClaimsBtn;
 	
-	@FindBy(xpath = ".//*[@id='plan_box']/div/div[2]/div/p[2]/a")
+	//@FindBy(xpath = ".//*[@id='plan_box']/div/div[2]/div/p[2]/a")
+	//private WebElement drugClaimsBtn;
+	
+	
+	@FindBy(className="shipviewclaims")
 	private WebElement drugClaimsBtn;
 	
-	@FindBy(xpath = ".//*[@id='main_content']/div[1]/div[2]/div/div[3]/div[1]/div[2]/div/h3")
+	
+	//@FindBy(xpath = ".//*[@id='main_content']/div[1]/div[2]/div/div[3]/div[1]/div[2]/div/h3")
+	//private WebElement claimSectionHeading;
+	
+	@FindBy(xpath="//div[@id='main_content']//h3[contains(.,'Claim Activity')]")
 	private WebElement claimSectionHeading;
+	
 
 	private PageData planSummary;
 

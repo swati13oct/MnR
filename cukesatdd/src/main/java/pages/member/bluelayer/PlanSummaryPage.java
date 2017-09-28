@@ -36,16 +36,29 @@ public class PlanSummaryPage extends UhcDriver {
 	@FindBy(linkText = "addaplan")
 	private WebElement addaplanlink;
 	
-	@FindBy(xpath = ".//*[@id='plan_box']/div[1]/div[2]/div/p[2]/a")
+	//@FindBy(xpath = ".//*[@id='plan_box']/div[1]/div[2]/div/p[2]/a")
+	//private WebElement searchMedClaimsBtn;
+	
+	
+	
+	@FindBy(id = "btn_viewclaims")
 	private WebElement searchMedClaimsBtn;
 	
-	@FindBy(xpath = ".//*[@id='plan_box']/div[2]/div[2]/div/p[2]/a")
+	//@FindBy(xpath = ".//*[@id='plan_box']/div[2]/div[2]/div/p[2]/a")
+	//private WebElement searchDrugClaimsBtn;
+	
+	
+	
+	@FindBy(id = "btn_viewclaims1")
 	private WebElement searchDrugClaimsBtn;
 
 	@FindBy(xpath = "//div[@id='main_content']/div[2]/div/div[2]/div/div[2]/div/div[2]/div/h3")
 	private WebElement planInformationHeading;
 
-	@FindBy(xpath = "//div[@id='main_content']/div[2]/div/div[2]/div/div[3]/div/div[2]/div/h3")
+	//@FindBy(xpath = "//div[@id='main_content']/div[2]/div/div[2]/div/div[3]/div/div[2]/div/h3")
+	//private WebElement claimSectionHeading;
+	
+	@FindBy(xpath="//div[@id='main_content']//h3[contains(.,'Claim Activity')]")
 	private WebElement claimSectionHeading;
 	
 	@FindBy(xpath = "/html/body/div[6]/div/div/table/tbody/tr[5]/td/div[2]/div/div[2]/div[2]/div[2]/div/div[160]/div[2]/div[1]/div[2]/div/div[3]/div[2]/div[2]/div/div/p/a")
@@ -57,7 +70,10 @@ public class PlanSummaryPage extends UhcDriver {
 	@FindBy(id = "disclosure_link")
 	private WebElement logOut;
 	
-	@FindBy(xpath = ".//*[@id='plan_box']")
+	//@FindBy(xpath = ".//*[@id='plan_box']")
+	//private WebElement claimsPlanBox;
+	
+	@FindBy(id = "plan_box")
 	private WebElement claimsPlanBox;
 	
 	private PageData planSummary;

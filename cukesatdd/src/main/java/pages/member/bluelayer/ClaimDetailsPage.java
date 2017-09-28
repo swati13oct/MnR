@@ -40,10 +40,20 @@ public class ClaimDetailsPage extends UhcDriver {
 	@FindBy(id = "drugclaimdetail")
 	private WebElement servicesChargesSection;
 
-	@FindBy(xpath = ".//*[@id='drugclaimdetail']")
+	//@FindBy(xpath = ".//*[@id='drugclaimdetail']")
+	//private WebElement drugclaimdetailbox;
+	
+	
+	
+	@FindBy(id = "drugclaimdetail")
 	private WebElement drugclaimdetailbox;
 	
-	@FindBy(xpath = ".//*[@id='medicaldetailsinner']")
+ //@FindBy(xpath = ".//*[@id='medicaldetailsinner']")
+	//private WebElement medDetailsInnerBox;
+	
+	
+	
+	@FindBy(id = "medicaldetailsinner")
 	private WebElement medDetailsInnerBox;
 	
 	@FindBy(xpath = ".//*[@id='medicaldetailsouter']/div[2]/a")
