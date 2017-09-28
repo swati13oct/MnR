@@ -151,6 +151,7 @@ Given the user is on the multipleEmailAddressPage and enters invalid email addre
 Scenario: Verify Error messages in aarp member site for multiple Email address page
 Given the user is on the multipleEmailAddressPage and enters does not enters same email address
 
+#@US620138 is also covered
 @US620213
 Scenario Outline: Verify confirmation page for No email address page
 Given the user is on the AARP medicare site login page
