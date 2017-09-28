@@ -28,6 +28,7 @@ import pages.member.ulayer.OneTimePaymentsPage;
 import pages.member.ulayer.PaymentHistoryPage;
 import pages.member.ulayer.PaymentsOverview;
 import pages.member.ulayer.ReviewOneTimePaymentsPage;
+import pages.member.ulayer.TeamCLoginUlayerPayments;
 import pages.member.ulayer.TeamHLoginUlayer;
 import pages.member.ulayer.TestHarness;
 import acceptancetests.atdd.data.CommonConstants;
@@ -338,6 +339,16 @@ public class OneTimePaymentAarpStepDefintion {
 		getLoginScenario().saveBean(PageConstants.LOGIN_PAGE, THloginPage);
 	}
 	
+	@Given("^the user is on the Team-C AARP medicare site login page$")
+	public void user_TeamClogin_page()
+	{
+		WebDriver wd = getLoginScenario().getWebDriver();
+		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
+
+		TeamCLoginUlayerPayments THloginPage = new TeamCLoginUlayerPayments(wd);
+		getLoginScenario().saveBean(PageConstants.LOGIN_PAGE, THloginPage);
+	}
+	
 	@Given("^the user is on the AARP medicare site login page and has already done one time payment for the day$")
 	public void user_Payment_done()
 	{
@@ -473,11 +484,11 @@ public class OneTimePaymentAarpStepDefintion {
 					accountHomePage);
 			Assert.assertTrue(true);
 			JSONObject accountHomeActualJson = accountHomePage.accountHomeJson;
-			/*getLoginScenario().saveBean(
+			getLoginScenario().saveBean(
 					LoginCommonConstants.ACCOUNT_HOME_ACTUAL,
 					accountHomeActualJson);
 			
-			 Get expected data 
+			/* Get expected data 
 			Map<String, JSONObject> expectedDataMap = loginScenario
 					.getExpectedJson(userName);
 			JSONObject accountHomeExpectedJson = accountHomePage
@@ -485,6 +496,64 @@ public class OneTimePaymentAarpStepDefintion {
 			getLoginScenario().saveBean(LoginCommonConstants.ACCOUNT_HOME_EXPECTED,
 					accountHomeExpectedJson);*/
 	
+	
+	}
+
+	}
+	
+	
+	@When("^the user logs in TeamC with a registered AMP with following details in AARP site$")
+	public void user_logs_inTeamC(DataTable memberAttributes) throws InterruptedException
+	{
+		/* Reading the given attribute from feature file */
+		List<DataTableRow> memberAttributesRow = memberAttributes
+				.getGherkinRows();
+		Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells()
+					.get(0), memberAttributesRow.get(i).getCells().get(1));
+		}
+
+		Set<String> memberAttributesKeySet = memberAttributesMap.keySet();
+		List<String> desiredAttributes = new ArrayList<String>();
+		for (Iterator<String> iterator = memberAttributesKeySet.iterator(); iterator
+				.hasNext();) {
+			{
+				String key = iterator.next();
+				desiredAttributes.add(memberAttributesMap.get(key));
+			}
+
+		}
+		System.out.println("desiredAttributes.." + desiredAttributes);
+
+		Map<String,String> loginCreds = loginScenario
+				.getAMPMemberWithDesiredAttributes(desiredAttributes);
+		
+		String userName = null;
+		String pwd = null;
+		if (loginCreds == null) {
+			// no match found
+			System.out.println("Member Type data could not be setup !!!");
+			Assert.fail("unable to find a "+ desiredAttributes + " member");
+		} else {
+			userName = loginCreds.get("user");
+			pwd = loginCreds.get("pwd");
+			System.out.println("User is..." + userName);
+			System.out.println("Password is..." + pwd );
+			getLoginScenario().saveBean(LoginCommonConstants.USERNAME, userName);
+			getLoginScenario().saveBean(LoginCommonConstants.PASSWORD, pwd);
+		}
+		
+		TeamCLoginUlayerPayments loginPage = (TeamCLoginUlayerPayments)getLoginScenario().getBean(PageConstants.LOGIN_PAGE);
+		AccountHomePage accountHomePage = (AccountHomePage) loginPage.loginWith(userName, pwd);
+		Thread.sleep(25000);
+		
+		if (accountHomePage != null) {
+			getLoginScenario().saveBean(PageConstants.ACCOUNT_HOME_PAGE,
+					accountHomePage);
+			/*Assert.assertTrue(true);
+			JSONObject accountHomeActualJson = accountHomePage.accountHomeJson;	*/	
 	
 	}
 
@@ -520,6 +589,23 @@ public class OneTimePaymentAarpStepDefintion {
 		
 	}*/
 	
+	
+	@And("^the user navigates to Team-c TestHarness Page$")
+	public void user_navigates_to_TeamC_TestHarness_page()
+	{
+		AccountHomePage accountHomePage = (AccountHomePage)getLoginScenario().getBean(PageConstants.ACCOUNT_HOME_PAGE);
+		TestHarness testHarness = accountHomePage.navigateToTeamCTestHarnesspage();
+		if(testHarness!= null){
+			getLoginScenario().saveBean(PageConstants.TEST_HARNESS_PAGE,
+					testHarness);
+			Assert.assertTrue(true);
+		} else {
+			Assert.fail("Test Harness page not found");
+		}
+		
+	}
+	
+	
 	@And("^the user navigates to PaymentOverview Page$")
 	public void user_navigates_to_PaymentOverview_Page()
 	{
@@ -551,6 +637,23 @@ public class OneTimePaymentAarpStepDefintion {
 	}
 	
 	
+	@And("^the user navigates to TeamCPaymentOverview Page$")
+	public void user_navigates_to_TeamCPaymentOverview_Page()
+	{
+		TestHarness testHarness = (TestHarness)getLoginScenario().getBean(PageConstants.TEST_HARNESS_PAGE);
+		PaymentsOverview paymentsOverview = testHarness.navigateToTeamCPaymentOverview();
+		if(paymentsOverview!= null){
+			getLoginScenario().saveBean(PageConstants.PAYMENT_OVERVIEW,
+					paymentsOverview);
+			Assert.assertTrue(true);
+		} else {
+			Assert.fail("Payment Overview page not found");
+		}
+		
+	}
+	
+	
+	
 	@And("^the user navigates to One Time Payments page$")
 	public void user_navigates_to_one_time_payments()
 	{
@@ -566,7 +669,7 @@ public class OneTimePaymentAarpStepDefintion {
 		
 	}
 	
-	@And("^the user navigates to Team H One Time Payments page$")
+/*	@And("^the user navigates to Team H One Time Payments page$")
 	public void user_navigates_to_TeamH_one_time_payments()
 	{
 		PaymentsOverview accountHomePage = (PaymentsOverview)getLoginScenario().getBean(PageConstants.PAYMENT_OVERVIEW);
@@ -579,7 +682,40 @@ public class OneTimePaymentAarpStepDefintion {
 			Assert.fail("one time payments dashboard page not found");
 		}
 		
+	}*/
+	
+	
+	@And("^user lands on payment overview page validates the tabs for combo members$")
+	public void user_validates_Tabs()
+	{
+		PaymentsOverview accountHomePage = (PaymentsOverview)getLoginScenario().getBean(PageConstants.PAYMENT_OVERVIEW);
+		OneTimePaymentsPage oneTimePaymentsPage = accountHomePage.navigateToOneTimePaymentpage();
+		if(oneTimePaymentsPage!= null){
+			getLoginScenario().saveBean(PageConstants.ONE_TIME_PAYMENTS_DASHBOARD,
+					oneTimePaymentsPage);
+			Assert.assertTrue(true);
+		} else {
+			Assert.fail("one time payments dashboard page not found");
+		}
+		
 	}
+	
+	
+	@And("^the user navigates to Team H One Time Payments page$")
+	public void user_validates_TeamH_Payment_overview()
+	{
+		PaymentsOverview accountHomePage = (PaymentsOverview)getLoginScenario().getBean(PageConstants.PAYMENT_OVERVIEW);
+		OneTimePaymentsPage oneTimePaymentsPage = accountHomePage.navigateToOneTimePaymentpage();
+		if(oneTimePaymentsPage!= null){
+			getLoginScenario().saveBean(PageConstants.ONE_TIME_PAYMENTS_DASHBOARD,
+					oneTimePaymentsPage);
+			Assert.assertTrue(true);
+		} else {
+			Assert.fail("one time payments dashboard page not found");
+		}
+		
+	}
+	
 	
 	@And("^the user enters details and click on continue button on One Time Payments Page for Dashboard$")
 	public void user_clicks_and_navigates_to_Review_page() throws InterruptedException

@@ -19,6 +19,9 @@ public class TestHarness extends UhcDriver{
 	@FindBy(linkText="Go to payment page page")
 	private WebElement TeamHPaymentPage;
 	
+	@FindBy(linkText="Go to payment link page")
+	private WebElement TeamCPaymentPage;
+	
 	public TestHarness(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
@@ -43,6 +46,15 @@ public class TestHarness extends UhcDriver{
 	{
 		if(TeamHPaymentPage.isEnabled()){
 			TeamHPaymentPage.click();
+			return new PaymentsOverview(driver);
+		}
+		return null;
+	}
+	
+	public PaymentsOverview navigateToTeamCPaymentOverview()
+	{
+		if(TeamCPaymentPage.isEnabled()){
+			TeamCPaymentPage.click();
 			return new PaymentsOverview(driver);
 		}
 		return null;

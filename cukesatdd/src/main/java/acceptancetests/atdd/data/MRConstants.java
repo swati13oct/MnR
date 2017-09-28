@@ -236,9 +236,10 @@ public static String CAMPAIGN_PAGE_URL1 = "https://www."+MRScenario.environment+
   
   public static final String TeamH_BLayer_Member_URL = "https://member.team-h-uhcmedicaresolutions.uhc.com";
   
-  public static String TeamC_MultipleEmail_address_URL = "https://member."+MRScenario.TeamCEnvironment+"-uhcmedicaresolutions.uhc.com/content/dashboard/guest/multipleemailaddress.html";
+  public static String TeamC_MultipleEmail_address_URL = "https://member."+MRScenario.TeamCEnvironment+"-aarpmedicareplans.uhc.com/content/dashboard/guest/multipleemailaddress.html";
   
-  public static String TeamC_NewEmail_address_URL = "https://member."+MRScenario.TeamCEnvironment+"-uhcmedicaresolutions.uhc.com/content/dashboard/guest/no-email-address.html";
+  public static String TeamC_NewEmail_address_URL = "https://member."+MRScenario.TeamCEnvironment+"-aarpmedicareplans.uhc.com/content/dashboard/guest/no-email-address.html";
   
-  
+  public static final String TeamC_ULayer_Member_URL = "https://member."+MRScenario.environment+"-aarpmedicareplans.uhc.com";
 }
+

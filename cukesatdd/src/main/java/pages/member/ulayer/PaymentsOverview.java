@@ -27,6 +27,12 @@ public class PaymentsOverview extends UhcDriver{
 	@FindBy(xpath=".//*[@id='paymentHistoryApp']/div/div/div/div/div[1]/p")
 	private WebElement ErrorMessage;
 	
+	@FindBy(xpath="//*[@id='50129808']/a")	
+	private WebElement Tab1;
+	
+	@FindBy(xpath="//*[@id='22976826']/a")
+	private WebElement Tab2;
+	
 	public PaymentsOverview(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
@@ -54,6 +60,16 @@ public class PaymentsOverview extends UhcDriver{
 	{
 		if(OneTimePaymentButton.isEnabled()){
 			OneTimePaymentButton.click();
+			return new OneTimePaymentsPage(driver);
+		}
+		return null;
+	}
+	
+	public OneTimePaymentsPage TabValidation()
+	{
+		if(Tab1.isEnabled() && Tab2.isEnabled()){
+			Tab1.click();
+			Tab2.click();
 			return new OneTimePaymentsPage(driver);
 		}
 		return null;
