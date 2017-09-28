@@ -1,10 +1,12 @@
 package pages.dashboard.acquisition;
 
 import org.junit.Assert;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+
 
 import acceptancetests.atdd.data.MRConstants;
 import atdd.framework.UhcDriver;
@@ -39,16 +41,29 @@ public class RegistrationInformationPage extends UhcDriver {
 	private WebElement memberid;
 
 	/** The month field. */
-	@FindBy(id = "date-mm")
+	@FindBy(xpath = "//*[@id='register-form']/div[1]/div/div/div/fieldset/fieldset/div/div[1]/span/span[1]/span")
 	private WebElement monthToEnter;
-
+	
+	@FindBy(className = "select2-search__field")
+	private WebElement monthToEnterText;
+	
+	@FindBy(id = "select2-date-mm-results")
+	private WebElement monthresults;
+	
+	
 	/** The date field. */
-	@FindBy(id = "date-dd")
+	@FindBy(xpath = "//*[@id='register-form']/div[1]/div/div/div/fieldset/fieldset/div/div[2]/span/span[1]/span")
 	private WebElement dayToEnter;
+		
+	@FindBy(id = "select2-date-dd-results")
+	private WebElement dateresults;
 
 	/** The year field. */
-	@FindBy(id = "date-yyyy")
+	@FindBy(xpath = "//*[@id='register-form']/div[1]/div/div/div/fieldset/fieldset/div/div[3]/span/span[1]/span")
 	private WebElement yearToEnter;
+	
+	@FindBy(id = "select2-date-yyyy-results")
+	private WebElement yearresults;
 
 	/** The cancel button. */
 	@FindBy(className = "btn btn--secondary")
@@ -318,24 +333,36 @@ public class RegistrationInformationPage extends UhcDriver {
 	}
 
 	/**
-	 * Enter month.
+	 * Select month.
+	 */
+	/*public void selEnterMonth(String s) {
+		dropdown1.selectByValue("s");
+	}*/
+     
+	/**
+	 * Enter day.
 	 */
 	public void enterMonth(String month) {
-		sendkeys(monthToEnter, month);
+		sendkeys(monthToEnterText, month);
 	}
-
 	/**
 	 * @return the month to enter
 	 */
 	public WebElement getEnterMonth() {
 		return monthToEnter;
 	}
-
+  
 	/**
-	 * Enter day.
+	 * @return the month to enter
 	 */
-	public void enterDay(String day) {
-		sendkeys(dayToEnter, day);
+	public WebElement getEnterMonthText() {
+		return monthToEnterText;
+	}
+	
+	public void clickMonthresults()
+	{
+		monthresults.click();
+		
 	}
 
 	/**
@@ -343,13 +370,19 @@ public class RegistrationInformationPage extends UhcDriver {
 	 */
 	public WebElement getEnterDay() {
 		return dayToEnter;
-	}
-
+	}  
+	 
 	/**
-	 * Enter year.
+	 * Select day.
 	 */
-	public void enterYear(String year) {
-		sendkeys(yearToEnter, year);
+	/*public void selEnterDay(String s) {
+		dropdown2.selectByValue("s");
+	}*/
+		
+	public void clickDayResults()
+	{
+		dateresults.click();
+		
 	}
 
 	/**
@@ -357,8 +390,21 @@ public class RegistrationInformationPage extends UhcDriver {
 	 */
 	public WebElement getEnterYear() {
 		return yearToEnter;
+	}  
+	/***
+	 * 
+	 * select year
+	 */
+	/*public void selEnterYear(String s) {
+		dropdown3.selectByValue("s");
+	}*/
+	
+   
+	public void clickYearResults()
+	{
+		yearresults.click();
+		
 	}
-
 	/**
 	 * Click the continue button
 	 */
@@ -592,9 +638,9 @@ public class RegistrationInformationPage extends UhcDriver {
 	public void openAndValidate() {
 		start(PAGE_URL);
 		validate(memberid);
-		validate(monthToEnter);
+/*		validate(monthToEnter);
 		validate(dayToEnter);
-		validate(yearToEnter);
+		validate(yearToEnter);*/
 		{
 			validate(nextButton);
 

@@ -9,6 +9,9 @@ import java.util.Map;
 import junit.framework.Assert;
 
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.ui.Select;
+import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import pages.dashboard.acquisition.RegistrationInformationPage;
@@ -76,7 +79,7 @@ public class RegistrationDashboardStepDefinition {
 	}
 
 	@When("^member enter date of birth in the date of birth dropdown$")
-	public void enterDate(DataTable givenAttributes) {
+	public void enterDate(DataTable givenAttributes) throws InterruptedException {
 		// get test variables
 		List<DataTableRow> memberAttributesRow = givenAttributes
 				.getGherkinRows();
@@ -101,10 +104,23 @@ public class RegistrationDashboardStepDefinition {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	     
+	     
+		registrationInformationPage.getEnterMonth().click();
 		registrationInformationPage.enterMonth(month);
-		registrationInformationPage.enterDay(day);
-		registrationInformationPage.enterYear(year);
-
+		Thread.sleep(1000);
+		registrationInformationPage.clickMonthresults();
+		
+		registrationInformationPage.getEnterDay().click();
+		registrationInformationPage.enterMonth(day);
+		Thread.sleep(1000);
+		registrationInformationPage.clickDayResults();
+		
+		registrationInformationPage.getEnterYear().click();
+		registrationInformationPage.enterMonth(year);
+		Thread.sleep(1000);
+		registrationInformationPage.clickYearResults();
+		
 	}
 
 	@When("^member click Next$")

@@ -81,14 +81,15 @@ Feature: To test registration flow in redesign portal
       # | MEDICA      | 914429086    | 08-28-1927  |
      # | SHIP/MED SUPP     | 356357672-11 | 03-01-1949  |
      # | SHIP 50-64        | 378564935-11 | 12-01-1956  |
-      #| SHIP 50-64 + MA   | 861622172    | 07-27-1940  |
+       #team-h and devc
+      | SHIP 50-64 + MA   | 861622172    | 07-27-1940  |
      # | SHIP 50-64 + MA   | 861622172-11 | 07-27-1940  |
      # | SHIP 50-64 + MAPD | 805816168    | 01-26-1934  |
      # | SHIP 50-64 + MAPD | 805816168-11 | 01-26-1934  |
      # | SHIP 50-64 + PDP  | 9809909891   | 10-13-1927  |
      # | SHIP 50-64 + PDP  | 980990989-11 | 10-13-1927  |
-     #team-h and devc 
-     | PDP               | 9809909891   | 10-13-1927  |
+    
+    # | PDP               | 9809909891   | 10-13-1927  |
 
   Scenario Outline: To verify registration inactive or terminated member error page
     Given the member is on registration page of new portal part of redesign
