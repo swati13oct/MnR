@@ -111,7 +111,7 @@ public class LoginPage extends UhcDriver {
 		else if (currentUrl().contains("terminated-plan.html")) {
 			return new TerminatedHomePage(driver); 
 		}
-		return null;
+		return new AccountHomePage(driver);
 	}
 
 	public LoginAssistancePage navigateToLoginAssistance() {
