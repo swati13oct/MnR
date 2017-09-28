@@ -106,7 +106,7 @@ Given registered UHC member for order plan materials with following attributes
 	| Plan Type    | <planType>   |
 	| Member Type  | <memberType> | 
 When the user views order materials in UHC site
-And the user validate radio button validation in UHC site
+And the user validate radio button for MA member in UHC site
 
 Examples:
   | planType   | memberType     | 

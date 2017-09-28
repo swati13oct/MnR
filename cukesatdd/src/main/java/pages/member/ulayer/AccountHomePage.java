@@ -269,7 +269,10 @@ public class AccountHomePage extends UhcDriver {
 		String fileName = CommonConstants.ACCOUNT_HOME_PAGE_DATA;
 		myAccountHome = CommonUtility.readPageData(fileName,
 				CommonConstants.PAGE_OBJECT_DIRECTORY_ULAYER_MEMBER);
-		openAndValidate();
+		if(!currentUrl().contains("/testharness.html"))
+		{
+			openAndValidate();
+		}
 	}
 
 	public PlanBenefitsCoveragePage navigateToBnC() {
@@ -417,14 +420,15 @@ public class AccountHomePage extends UhcDriver {
 		driver.manage().timeouts().implicitlyWait(1000, TimeUnit.SECONDS);
 		CommonUtility.checkPageIsReady(driver);
 		
-		if (driver.findElement(By.xpath("//*[contains(text(), 'Locate a Pharmacy')]")).isDisplayed()){
+/*		if (driver.findElement(By.xpath("//*[contains(text(), 'Locate a Pharmacy')]")).isDisplayed()){
 			return new PharmacySearchPage(driver);
 		}
-		/*pharmacyLocator.click();
+		pharmacyLocator.click();*/
 		if (driver.getTitle().equalsIgnoreCase(
-				"AARP Medicare Plans | Pharmacy Directory")) {
+				"AARP Medicare Plans | Pharmacy Directory") || driver.getTitle().equalsIgnoreCase(
+						"Locate a Pharmacy")) {
 			return new PharmacySearchPage(driver);
-		}*/
+		}
 		return null;
 	}
 
@@ -519,11 +523,11 @@ public class AccountHomePage extends UhcDriver {
 
 	@Override
 	public void openAndValidate() {
-		/*validate(benefitsLink);
+		validate(benefitsLink);
 		validate(phrTab);
 		// validate(formsAndResourcesLink);
 		validate(benefitsLink);
-		validate(logOut);*/
+		validate(logOut);
 
 		JSONObject jsonObject = new JSONObject();
 		for (String key : myAccountHome.getExpectedData().keySet()) {
