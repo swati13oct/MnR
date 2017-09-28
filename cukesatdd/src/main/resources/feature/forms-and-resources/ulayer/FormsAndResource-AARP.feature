@@ -66,12 +66,14 @@ Examples:
 | MAPD	   |
 
 @mercuryMyDocuments
-Scenario Outline:To verify passport pdfs displayed in forms and resources in AARP site
+Scenario Outline:To verify Mercury Mydocuemts  pdfs displayed in My Documents page in AARP site
 Given registered member for forms and resources in AARP Site
 	| Plan Type      |<planType> |
+	|Test Data Type  |<mydoc>    |
 When the user view forms and resources in AARP site
+And the user navigating to the My Documents page in AARP site
 Then the user validates My Documents section and clicks on the link in AARP site
 Examples:
 
-| planType |
-| PDP     |
+| planType | mydoc      |
+| MAPD     |mydocuments|
