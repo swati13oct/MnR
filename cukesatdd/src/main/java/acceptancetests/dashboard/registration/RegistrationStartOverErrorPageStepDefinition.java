@@ -39,17 +39,17 @@ public class RegistrationStartOverErrorPageStepDefinition {
 		RegistrationInformationPage registrationInformationPage = (RegistrationInformationPage) 
 				getLoginScenario().getBean(PageConstants.REGISTRATION_INFORMATION_PAGE);
 		Assert.assertTrue(registrationInformationPage.getMemberID().getAttribute("value").isEmpty());
-		Assert.assertTrue(registrationInformationPage.getEnterDay().getAttribute("value").isEmpty());
+		/*Assert.assertTrue(registrationInformationPage.getEnterDay().getAttribute("value").isEmpty());
 		Assert.assertTrue(registrationInformationPage.getEnterMonth().getAttribute("value").isEmpty());
 		Assert.assertTrue(registrationInformationPage.getEnterYear().getAttribute("value").isEmpty());
-
+   */
 	}
 
 	@When("^member click on username and password help link on existing member page$")
 	public void clickUsernameAndPasswordHelpLink() {
 		RegistrationInformationPage registrationInformationPage = (RegistrationInformationPage) 
 				getLoginScenario().getBean(PageConstants.REGISTRATION_INFORMATION_PAGE);
-		registrationInformationPage.clickSignInWithExistingLink();
+		registrationInformationPage.clickUserNameAndPasswordLink();
 	}
 
 	@Then("^the member navigate to the username and password help page$")
@@ -62,7 +62,7 @@ public class RegistrationStartOverErrorPageStepDefinition {
 	public void clickSignInLink() {
 		RegistrationInformationPage registrationInformationPage = (RegistrationInformationPage) 
 				getLoginScenario().getBean(PageConstants.REGISTRATION_INFORMATION_PAGE);
-		registrationInformationPage.clickUserNameAndPasswordLink();
+		registrationInformationPage.clickSignInWithExistingLink();
 	}
 
 	@Then("^the member navigate to the Sign in page$")
