@@ -16,6 +16,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.FindBys;
 import org.openqa.selenium.support.PageFactory;
 
+
 import acceptancetests.atdd.data.CommonConstants;
 import acceptancetests.atdd.data.ElementData;
 import acceptancetests.atdd.data.PageData;
@@ -123,8 +124,9 @@ public class PharmacySearchPage extends UhcDriver {
 
 	@FindBy(xpath = "//div[@class='pharmacy-search-resultParsys']/div/div/div[1]/div/div[2]/div/ul[@class='map-toggle']")
 	WebElement mapToggleElement;
-
-	@FindBy(xpath = "//div[@class='pharmacy-search-resultParsys']/div/div/div[1]/div/div[2]/div/div[@class='collapse-wrapper']/div")
+	
+	@FindBy(id="collapseMap")
+	//@FindBy(xpath = "//div[@class='pharmacy-search-resultParsys']/div/div/div[1]/div/div[2]/div/div[@class='collapse-wrapper']/div")
 	WebElement mapView;
 
 	@FindBy(xpath = "//div[@class='pharmacy-search-resultParsys']/div/div/div[1]/div/div[2]/div/ul[@class='pharmacy-list']")
@@ -135,6 +137,7 @@ public class PharmacySearchPage extends UhcDriver {
 
 	@FindBy(linkText = "VIEW RESULT AS PDF")
 	WebElement resultAsPDF;
+
 
 	private PageData locatePharmacy;
 
@@ -493,5 +496,4 @@ public class PharmacySearchPage extends UhcDriver {
 		}
 	
 	}
-
 }
