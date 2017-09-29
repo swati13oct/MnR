@@ -362,8 +362,18 @@ public class ResponsivePlanDetailsUhc extends UhcDriver {
 				 Assert.fail();
 			 }
 		 }if(optionalDental.equals("true")){
+			 try {
+				Thread.sleep(4000);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
 			 if(optionalDentalPlanCost.isDisplayed()){
 				 optionalDentalPlanCost.click();
+				 try {
+						Thread.sleep(4000);
+					} catch (InterruptedException e) {
+						e.printStackTrace();
+					}
 				 if(optionalDentalDollarValue.getText().equals(estimateAnnualCost.getText())){
 					 System.out.println("Estimate annual value displayed correctly for optional dental");
 				 }else{

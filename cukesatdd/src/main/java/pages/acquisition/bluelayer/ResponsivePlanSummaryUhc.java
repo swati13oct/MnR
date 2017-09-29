@@ -1759,14 +1759,14 @@ public void comparePlanslnk(){
 				}
 				driver.findElement(By.xpath("//li[1]/div[1]/div[2]/button[@class='cta-button secondary select-pharmacy']")).click();
 				try {
-					Thread.sleep(6000);
+					Thread.sleep(15000);
 				} catch (InterruptedException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 				driver.findElement(By.xpath("//button[contains(text(),'NEXT: VIEW COSTS')]")).click();
 				try {
-					Thread.sleep(6000);
+					Thread.sleep(15000);
 				} catch (InterruptedException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
