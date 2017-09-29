@@ -295,6 +295,6 @@ Feature: To test My Profile & Preferences flow in UMS site
     
      Examples: 
       | planType |
-      #| MAPD     |
+      | MAPD     |
       | MA       |
     
