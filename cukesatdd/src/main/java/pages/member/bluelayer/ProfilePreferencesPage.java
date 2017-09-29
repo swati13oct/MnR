@@ -140,25 +140,10 @@ public class ProfilePreferencesPage extends UhcDriver {
 	@FindBy(xpath = ".//*[@id='tab-1']/div[3]/div[2]/h3")
 	private WebElement communicationpreferencesheader;
 
-	@FindBy(xpath = ".//*[@id='communicationAddress']/div[2]/a")
-	private WebElement gopaperlessbutton;
-	
-	@FindBy(id="communicationAddress")
+    @FindBy(id="communicationAddress")
 	private WebElement communicationpreferncessection;
-	
-	@FindBy(xpath = "html/body/div[5]/div[1]/div[1]/div[2]/main/div[1]/section/div/div[1]/div/div/div[1]/img")
-	private WebElement gogreenleaf;
 
-	@FindBy(xpath = "html/body/div[3]/div/div[1]/div/main/div[1]/section/div/div[1]/div/div/div[2]")
-	private WebElement goggreenheader;
-
-	@FindBy(xpath = "html/body/div[3]/div/div[1]/div/header/div/div/div/div/div/div/h1")
-	private WebElement communicationheader;
-
-	@FindBy(xpath = "html/body/div[3]/div/div[1]/div/header/div/div/div/div/div/div/a")
-	private WebElement Profilenprefernceslink;
-
-	@FindBy(id="phone")
+    @FindBy(id="phone")
 	private WebElement Phonesection;
 	
 	@FindBy(xpath = ".//*[@id='phone']/div[1]/div/div/div/div/div/a[1]")
@@ -233,25 +218,37 @@ public class ProfilePreferencesPage extends UhcDriver {
 	@FindBy(xpath = ".//*[@id='temporaryAddress']/div[1]/a[2]")
 	private WebElement CancelButtontoptempAddress;
 
-	@FindBy(xpath = ("//*[contains(text(), 'Go Paperless')]"))
-	private WebElement goPaperlessButton;
+	@FindBy(className = "atdd-gopaperless")
+	private WebElement gopaperlessbutton;
 
-	@FindBy(xpath = "//*[@id='mail-preferences-selector']/div/div/div/div/div[1]/p")
+	@FindBy(className = "atdd-go-green-img")
+	private WebElement gogreenleaf;
+
+	@FindBy(className = "atdd-goGreenHeader")
+	private WebElement goggreenheader;
+
+	@FindBy(className = "atdd-section-heading")
+	private WebElement communicationheader;
+
+	@FindBy(className = "atdd-page-header")
+	private WebElement Profilenprefernceslink;
+	
+	@FindBy(className = "atdd-plan-name")
 	private WebElement planNameGoGreen;
 
-	@FindBy(xpath = "/html/body/div[4]/div/div[1]/div/header/div/div/div/div/div/div/h1")
+	@FindBy(className = "atdd-section-heading")
 	private WebElement communicationPreferences;
 
-	@FindBy(xpath = "/html/body/div[4]/div/div[1]/div/header/div/div/div/div/div/div/a")
+	@FindBy(className = "atdd-page-header")
 	private WebElement backLink1;
 
-	@FindBy(xpath = "/html/body/div[4]/div/div[1]/div/main/div[1]/div/div/div/div/a")
+	@FindBy(xpath = "html/body/div[5]/div[1]/div[1]/div[1]/div/div/div/div[2]/div/div/div/div/a")
 	private WebElement backLink2;
 
-	@FindBy(xpath = "/html/body/div[4]/div/div[1]/div/main/div[1]/section/div/div[3]/div/p")
+	@FindBy(className = "atdd-notes")
 	private WebElement NoteSection;
 
-	@FindBy(xpath = "//*[@id='preferences-form']/div/div[1]/div[4]/div/label")
+	@FindBy(className = "atdd-checkbox-label")
 	private WebElement iHavereadCheckbox;
 
 	@FindBy(id = "save-prefs-btn")
@@ -260,13 +257,13 @@ public class ProfilePreferencesPage extends UhcDriver {
 	@FindBy(linkText = "Edit Preferences")
 	private WebElement EditPreferenceButton;
 
-	@FindBy(xpath = "/html/body/div[4]/div[1]/div[1]/div/main/div[1]/section/div/div[1]/div/div/div[2]/h2")
+	@FindBy(className = "atdd-goGreenHeader")
 	private WebElement GoGreenHeader;
 
-	@FindBy(xpath = "/html/body/div[4]/div[1]/div[1]/div/main/div[1]/section/div/div[1]/div/div/div[2]/p")
+	@FindBy(className = "atdd-goGreensubHeader")
 	private WebElement GoGreenText;
-
-	public PageData ProfileandPreferences;
+    
+    public PageData ProfileandPreferences;
 
 	public JSONObject ProfileandPreferencesPageJson;
 
@@ -676,12 +673,12 @@ public class ProfilePreferencesPage extends UhcDriver {
 
 	public void validateGoPaperlessbutton() {
 		// TODO Auto-generated method stub
-		validateNew(goPaperlessButton);
+		validateNew(gopaperlessbutton);
 		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 	}
 
 	public void validatePlanName() {
-		goPaperlessButton.click();
+		gopaperlessbutton.click();
 
 		validateNew(planNameGoGreen);
 	}
@@ -702,7 +699,7 @@ public class ProfilePreferencesPage extends UhcDriver {
 
 		validateNew(backLink1);
 		backLink1.click();
-		goPaperlessButton.click();
+		gopaperlessbutton.click();
 		validateNew(backLink2);
 		backLink2.click();
 		if (driver.getTitle().equalsIgnoreCase("profileandpreferences")) {
@@ -714,7 +711,7 @@ public class ProfilePreferencesPage extends UhcDriver {
 	}
 
 	public void validateNoteSection() {
-		goPaperlessButton.click();
+		gopaperlessbutton.click();
 		validateNew(NoteSection);
 		String noteContentActual = NoteSection.getText();
 		String noteContentExpected = "Note: it may take up to two mail cycles for your updated delivery preferences to take effect. Your mailing cycle-the length of time between documents-varies by document. When the paper mailings stop, you will receive an email notification alerting you that a new document has been posted to your online account.";
@@ -728,7 +725,8 @@ public class ProfilePreferencesPage extends UhcDriver {
 		iHavereadCheckbox.click();
 	}
 
-	public void validateSavePreferences() {
+	public void validateSavePreferences() 
+	{
 		// TODO Auto-generated method stub
 		validateNew(savePreferencesButton);
 		if (iHavereadCheckbox.isSelected()) {
