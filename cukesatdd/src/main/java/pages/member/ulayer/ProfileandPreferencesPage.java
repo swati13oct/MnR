@@ -194,7 +194,7 @@ public class ProfileandPreferencesPage extends UhcDriver {
 	@FindBy(className = "atdd-go-green-img")
 	private WebElement gogreenleaf;
 
-	@FindBy(className = "atdd-need-help")
+	@FindBy(className = "atdd-goGreenHeader")
 	private WebElement goggreenheader;
 
 	@FindBy(className = "atdd-section-heading")
