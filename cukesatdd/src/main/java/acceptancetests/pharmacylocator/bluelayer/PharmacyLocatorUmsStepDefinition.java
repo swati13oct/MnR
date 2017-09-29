@@ -475,6 +475,17 @@ public class PharmacyLocatorUmsStepDefinition {
 		} 
 	}
 
+	@When("^the user validate more information content based on plan type in UHC Site$")
+	public void the_user_validate_more_information_content_based_on_plan_type_in_UHC_Site() {
+		PharmacySearchPage pharmacySearchPage = (PharmacySearchPage) getLoginScenario()
+				.getBean(PageConstants.PHARMACY_SEARCH_PAGE);
+		boolean present = pharmacySearchPage.validateMoreInfo();
+		if (present) {
+			System.out.println("@@@@@@@@@ Able to find More Info Link @@@@@@@@@");
+			Assert.assertTrue("@@@@@@@@@ More Info Link is not displayed @@@@@@@@@",present);
+		} 
+	}
+
 }
 	
 	

@@ -162,10 +162,6 @@ When the user navigates to pharmacy search page in UMS Site
       | zipcode | distance | county      | year | planName                        |
       |   90210 |       15 | Los Angeles | 2017 | AARP MedicareRx Walgreens (PDP) |
 
- 
-    Examples: 
-      | zipcode | distance | county      | year | planName                                          |
-      |   90210 |       15 | Los Angeles | 2017 | AARP MedicareComplete SecureHorizons Plan 1 (HMO) |
 
   @chatPDPplantype
   Scenario Outline: To verify chat window for PDP plantype for pharmacies in UHC site

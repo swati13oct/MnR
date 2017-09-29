@@ -54,6 +54,7 @@ import org.springframework.ldap.core.DistinguishedName;
 import org.springframework.stereotype.Component;
 
 import acceptancetests.atdd.data.CommonConstants;
+import acceptancetests.atdd.data.MRConstants;
 
 
 /**
@@ -536,6 +537,7 @@ public class MRScenario {
               for (String key : prop.stringPropertyNames()) {
                      String value = prop.getProperty(key);
                      props.put(key, value);
+                     
               }
               return props;
        }
@@ -865,14 +867,14 @@ public class MRScenario {
     	   								/****FIrefox Browser******/
            
 /*           if (null == webDriver) {
-                    File pathToBinary = new File("C:/Tools/FF/firefox.exe");
+                    File pathToBinary = new File("C:/Program Files (x86)/Mozilla Firefox/firefox.exe");
                     FirefoxBinary ffBinary = new FirefoxBinary(pathToBinary);
                     FirefoxProfile firefoxProfile = new FirefoxProfile();
                     webDriver = new FirefoxDriver(ffBinary, firefoxProfile);
                     webDriver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
             }
     	   
-   */ 	 
+ */   	 
     	   										/****PhantomJS*******/
     	   
              String browser = (null == System.getProperty(CommonConstants.JENKINS_BROWSER)

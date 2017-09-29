@@ -126,7 +126,13 @@ public class PharmacySearchPage extends UhcDriver {
 	
 	@FindBy(xpath = ".//*[@id='site-wrapper']/div[4]/div/div/div/div/div/main/div/div[4]/div/div[4]/div[1]/div[1]")
 	private WebElement TFNwidget;
-
+	
+	@FindBy(xpath = "//*[@id='site-wrapper']//*[@class = 'col-md-12']/a")
+	private WebElement MoreInfo;
+	
+	@FindBy(xpath = "//*[@class = 'moreinformation parsys']")
+	private WebElement MoreInfoText;
+	
 	public PharmacySearchPage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
@@ -326,23 +332,23 @@ public class PharmacySearchPage extends UhcDriver {
 	}
 	
 	public PharmacySearchPage selectYear() {
-		
-		Select dropDown = new Select(planYearDropDown);		
-		try {
-			Thread.sleep(10000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		dropDown.selectByValue("1");
-		try {
-			Thread.sleep(10000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		if (planYearDropDown.isDisplayed()){
+			Select dropDown = new Select(planYearDropDown);		
+			try {
+				Thread.sleep(10000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			dropDown.selectByValue("1");
+			try {
+				Thread.sleep(10000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 		return new PharmacySearchPage(driver);
-
 	}
 	
 	public PharmacySearchPage navigateToPharmacySearchResult() {
@@ -435,6 +441,22 @@ public class PharmacySearchPage extends UhcDriver {
 		boolean present;
 		try {
 		validate(TFNwidget);
+		present = true;
+		} catch (NoSuchElementException e) {
+		present = false;
+		}
+		return present;
+	}
+
+	public boolean validateMoreInfo() {
+		boolean present;
+		try {
+		validate(MoreInfo);
+		MoreInfo.click();
+		if (MoreInfoText.isDisplayed()){
+			System.out.println("******************More Info Content Text is displayed*******************");
+			
+		}
 		present = true;
 		} catch (NoSuchElementException e) {
 		present = false;

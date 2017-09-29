@@ -145,9 +145,12 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	private static String UMS_ACQISITION_PAGE_URL = MRConstants.UHC_URL;
 
 	public AcquisitionHomePage(WebDriver driver) {
+		
 		super(driver);
 		PageFactory.initElements(driver, this);
 		openAndValidate();
+        System.out.println("Using properties for environment ...."
+                + UMS_ACQISITION_PAGE_URL);
 	}
 
 	public GetStartedPage navigateToPrescriptionDrug() {
