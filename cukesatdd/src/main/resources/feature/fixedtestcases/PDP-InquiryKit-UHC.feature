@@ -1,6 +1,6 @@
 @pdpInquiryKit
 @fixedTestCaseTest
-Feature:To test PDP inquiry flow in UHC site
+Feature:Tier-2.5-To test PDP inquiry flow in UHC site
 @pdpInquiryKitUHC
 Scenario Outline:To verify PDP inquiry flow in UHC site
 Given the user is on the UHC acquisition Site home page

@@ -1,6 +1,6 @@
 @fixedTestCaseTest
 @enrollInPlanulayer
-Feature: To test enroll in plan on AARP site
+Feature:Tier-1.12-To test enroll in plan on AARP site
 @OLE_MA
 Scenario Outline: Verify enroll in plan in AARP site for federal plan type member  for MA or MAPD plan
 Given the user is on AARP medicare site landing page

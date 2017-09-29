@@ -1,6 +1,6 @@
 @fixedTestCaseTest
 @agentAppointment
-Feature: To test request an appointment with an agent flow in UHC site
+Feature:Tier-1.5-To test request an appointment with an agent flow in UHC site
 @ebrc-UHC
 Scenario Outline: Verify request an appointment with an agent flow in UHC site
 Given the user is on the UHCM site landing page

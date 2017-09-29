@@ -1,6 +1,6 @@
 @fixedTestCaseTest_work_in_progress
 @claims
-Feature:To test the drug claims summary and details flow in AARP site
+Feature:Tier1.3-To test the drug claims summary and details flow in AARP site
 @drugClaimsUlayer
 Scenario Outline:Verify the drug claim summary and details for selected time period
 Given the user is on the AARP login page

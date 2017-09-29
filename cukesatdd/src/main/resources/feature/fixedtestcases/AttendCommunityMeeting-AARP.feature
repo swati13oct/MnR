@@ -1,6 +1,6 @@
 @attendCommunity
 @fixedTestCaseTest
-Feature: To test attend community meeting flow in AARP site
+Feature:Tier-1.13-To test attend community meeting flow in AARP site
 @communityMeeting_AARP
 Scenario Outline: Verify attend community meeting flow in AARP site
 Given the user is on the AARP acquisition site home page

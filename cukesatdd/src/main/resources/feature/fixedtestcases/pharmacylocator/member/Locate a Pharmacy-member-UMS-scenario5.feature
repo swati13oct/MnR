@@ -1,6 +1,6 @@
 @fixedTestCaseTest
 @memberpharmacylocatorblayerscenario5
-Feature:To test Locate a Pharmacy tool in UMS site for all pharmacy types for default zipcode in UMS site-test5
+Feature:Tier-1.20.5-To test Locate a Pharmacy tool in UMS site for all pharmacy types for default zipcode in UMS site-test5
 Scenario Outline:To verify espanol and chinese contents
 Given registered member to verify locate a pharmacy in UMS Site
 	| Plan Type    | <plantype>   |

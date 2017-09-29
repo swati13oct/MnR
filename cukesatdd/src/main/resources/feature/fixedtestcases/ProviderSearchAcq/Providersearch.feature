@@ -1,6 +1,6 @@
 
 @BlayerProviderSearch
-Feature: To test Provider Search Flow  in UMS site
+Feature:Tier-1.15-To test Provider Search Flow  in UMS site
 Scenario Outline: Verify Provider Search  in UMS site
 Given the user is on UMS medicare acquisition site landing page
 When the user performs plan search using following information in the UMS site
