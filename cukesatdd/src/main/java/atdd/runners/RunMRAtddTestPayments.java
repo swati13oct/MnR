@@ -12,10 +12,10 @@ import cucumber.junit.Cucumber;
  *
  */
 @RunWith(Cucumber.class)
-@Cucumber.Options(glue = { "atdd.framework","acceptancetests.AutomaticPayments.ulayer" }, 
-		features = { "feature/payments/AutomaticPayment/ulayer" }, 
+@Cucumber.Options(glue = { "atdd.framework","acceptancetests.payments.ulayer.onetimepayment" }, 
+		features = { "feature/payments/OneTimePayment/ulayer" }, 
 		format = {
-		"pretty", "html:reports/test-report" }, tags ={"@TeamH,@TeamHError"})
+		"pretty", "html:reports/test-report" }, tags ={"@US735645"})
 public class RunMRAtddTestPayments {
 
 }

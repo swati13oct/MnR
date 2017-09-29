@@ -14,7 +14,7 @@ import cucumber.junit.Cucumber;
 @Cucumber.Options(glue = { "atdd.framework","acceptancetests.login.ulayer" }, 
 		features = { "feature/login/ulayer" }, 
 		format = {
-		"pretty", "html:reports/test-report","json:target/cucumber.json" }, tags ={"@US621820"})
+		"pretty", "html:reports/test-report","json:target/cucumber.json" }, tags ={"@US620213"})
 
 public class RunMRAtddTestLogin {
 	

@@ -33,6 +33,16 @@ public class PaymentsOverview extends UhcDriver{
 	@FindBy(xpath="//*[@id='22976826']/a")
 	private WebElement Tab2;
 	
+	@FindBy(xpath="//*[@id='paymentCustomSearch']/div/span/div/div[2]/div[1]/label")
+	private WebElement PaidCheckbox;
+	
+	@FindBy(xpath="//*[@id='paymentCustomSearch']/div/span/div/div[2]/div[2]/label")
+	private WebElement UnPaidCheckbox;
+	
+	@FindBy(xpath="//*[@id='paymentHistoryApp']/div[1]/div/div/div/div[2]")
+	private WebElement Payments_status_Error;
+	
+	
 	public PaymentsOverview(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
@@ -92,6 +102,24 @@ public class PaymentsOverview extends UhcDriver{
 		}
 		return null;
 	}
+	
+	
+	public PaymentsOverview UnselectPaidUnpaidCheck() throws InterruptedException
+	{
+		Thread.sleep(2000);
+		JavascriptExecutor jse = (JavascriptExecutor)driver;
+		jse.executeScript("window.scrollBy(0,400)", "");
+		System.out.println("Scrolled Down");
+		Thread.sleep(2000);
+		PaidCheckbox.click();
+		UnPaidCheckbox.click();
+		
+		if(Payments_status_Error.getText().contains("Select Paid, Unpaid or both for the payment status you want to view")){
+			return new PaymentsOverview(driver);
+		}
+		return null;
+	}
+	
 	
 	public PaymentsOverview VerifyErrorMessage()
 	{		

@@ -700,6 +700,21 @@ public class OneTimePaymentAarpStepDefintion {
 		
 	}
 	
+	@And("^user unchecks paid and unpaid checkbox and validates the result$")
+	public void user_validates_paid_unpaid_results() throws InterruptedException
+	{
+		PaymentsOverview accountHomePage = (PaymentsOverview)getLoginScenario().getBean(PageConstants.PAYMENT_OVERVIEW);
+		PaymentsOverview oneTimePaymentsPage = accountHomePage.UnselectPaidUnpaidCheck();
+		if(oneTimePaymentsPage!= null){
+			getLoginScenario().saveBean(PageConstants.ONE_TIME_PAYMENTS_DASHBOARD,
+					oneTimePaymentsPage);
+			Assert.assertTrue(true);
+		} else {
+			Assert.fail("issue with paid unpaid checkbox");
+		}
+		
+	}
+	
 	
 	@And("^the user navigates to Team H One Time Payments page$")
 	public void user_validates_TeamH_Payment_overview()
