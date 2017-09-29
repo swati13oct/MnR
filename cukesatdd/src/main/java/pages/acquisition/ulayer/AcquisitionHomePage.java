@@ -521,7 +521,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	public PharmacySearchPage navigateToPharmacyLocator() {
 		driver.get(MRConstants.AARP_MA_REQUEST_MORE_HELP_AND_INFORMATION_URL);
 		try {
-			Thread.sleep(5000);
+			Thread.sleep(10000);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
