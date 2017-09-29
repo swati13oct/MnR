@@ -88,25 +88,6 @@ public class DCEAcqUmsStepDefinition {
 		}
 	}
 	
-	@And("^I choose the plan and go to DCE page$")
-	public void choosePlanandGoToDCE(DataTable attributes){
-		List<DataTableRow> memberAttributesRow = attributes
-				.getGherkinRows();
-		Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
-		for (int i = 0; i < memberAttributesRow.size(); i++) {
-
-			memberAttributesMap.put(memberAttributesRow.get(i).getCells()
-					.get(0), memberAttributesRow.get(i).getCells().get(1));
-		}
-
-		String plantype = memberAttributesMap.get("Plan Type");
-		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) loginScenario.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
-		//plansummaryPage.choose2017Plans();
-		DrugCostEstimatorPage dce = plansummaryPage.navigateToDCE(plantype);
-		if(dce!=null){
-			loginScenario.saveBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE, dce);
-		}
-	}
 	
 	@And("^I choose the 2017 plan and go to DCE page$")
 	public void choosing2017Plan(DataTable attributes){
@@ -121,7 +102,12 @@ public class DCEAcqUmsStepDefinition {
 
 		String plantype = memberAttributesMap.get("Plan Type");
 		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) loginScenario.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
-		plansummaryPage.choose2017Plans();
+		boolean yearBtnVppPageExists = plansummaryPage.yearBtnExists();
+		loginScenario.saveBean(CommonConstants.YEAR_BUTTON_VPPPAGE, yearBtnVppPageExists);
+		plansummaryPage.clickOnViewPlans(plantype);
+		if(yearBtnVppPageExists){
+			plansummaryPage.choose2017Plans();
+		}
 		DrugCostEstimatorPage dce = plansummaryPage.navigateToDCE(plantype);
 		if(dce!=null){
 			loginScenario.saveBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE, dce);
@@ -141,6 +127,7 @@ public class DCEAcqUmsStepDefinition {
 
 		String plantype = memberAttributesMap.get("Plan Type");
 		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) loginScenario.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		plansummaryPage.clickOnViewPlans(plantype);
 		DrugCostEstimatorPage dce = plansummaryPage.navigateToDCE(plantype);
 		if(dce!=null){
 			loginScenario.saveBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE, dce);
@@ -214,10 +201,13 @@ public class DCEAcqUmsStepDefinition {
 	@Then("^I validate pharmacy saver pharmacy type is displayed$")
 	public void validatePharmacySaverPharmacy(){
 		DrugCostEstimatorPage dce =  (DrugCostEstimatorPage) loginScenario.getBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE);
-		if(dce.verifyPharmacySaverExists()){
-			Assert.assertTrue(true);
-		}else
-			Assert.fail("Error in validating that the pharmacy retail pharmacy type exists");
+		boolean isYear2017 = (Boolean)loginScenario.getBean(CommonConstants.YEAR_BUTTON_VPPPAGE);
+		if(isYear2017){
+			if(dce.verifyPharmacySaverExists()){
+				Assert.assertTrue(true);
+			}else
+				Assert.fail("Error in validating that the pharmacy retail pharmacy type exists");
+		}
 	}
 	
 	@When("^I select the first pharmacy on there$")

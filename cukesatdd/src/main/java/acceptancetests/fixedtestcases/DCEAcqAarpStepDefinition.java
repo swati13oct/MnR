@@ -223,8 +223,15 @@ public class DCEAcqAarpStepDefinition {
 		String radius = memberAttributesMap.get("Radius");
 		
 		DrugCostEstimatorPage dce = (DrugCostEstimatorPage) getLoginScenario().getBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE);
-		dce.switchYear();		
-		dce.pharmacyInformation(zipcode,radius);
+		boolean yearBtnExists = dce.yearBtnExists();
+		if(yearBtnExists){
+			dce.switchYear();		
+			dce.pharmacyInformation(zipcode,radius);
+			if(!dce.isPharmacyStillSelected())
+				Assert.assertTrue(true);
+			else
+				Assert.fail("The pharmacy is still selected. It shouldn't be there.");
+		}
 		
 	}
 	

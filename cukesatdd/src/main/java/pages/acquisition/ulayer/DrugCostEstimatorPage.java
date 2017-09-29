@@ -356,7 +356,7 @@ public class DrugCostEstimatorPage extends UhcDriver {
 	@FindBy(xpath = "//div[@id='total_drugsavings']/div[2]/a")
 	public WebElement editDrugListLink;
 	
-	@FindBy(id = "generic-drug-switch-btn-0")
+	@FindBy(xpath = ".//*[@id='generic-drug-switch-btn-0']")
 	private WebElement switchNowBtn;
 	
 	@FindBy(id="switchToGenericBtnId")
@@ -1693,6 +1693,18 @@ public class DrugCostEstimatorPage extends UhcDriver {
 	public void switchYear(){
 		btn2017.click();
 		
+	}
+	
+	public boolean yearBtnExists(){
+		if(validate(btn2017))
+			return true;
+		return false;
+	}
+	
+	public boolean isPharmacyStillSelected(){
+		if(validate(selectedPharmSection))
+			return true;
+		return false;
 	}
 
 }

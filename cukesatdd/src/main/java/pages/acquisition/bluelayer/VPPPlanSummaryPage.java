@@ -1045,10 +1045,8 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		}
 		viewPDPPlans.click();
 	}
-
-
-
-	public DrugCostEstimatorPage navigateToDCE(String plantype) {
+	
+	public void clickOnViewPlans(String plantype) {
 		try {
 			Thread.sleep(10000);
 		} catch (InterruptedException e) {
@@ -1057,10 +1055,18 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		}
 		if(plantype.equals("MA")||plantype.equals("MAPD")){
 			viewPlans.click();
+		}else
+			viewPDPPlans.click();
+
+	}
+
+	public DrugCostEstimatorPage navigateToDCE(String plantype) {
+		if(plantype.equals("MA")||plantype.equals("MAPD")){
+			//viewPlans.click();
 			List<WebElement> view2017Plans = driver.findElements(By.id("maDCELink"));
 			view2017Plans.get(0).click();
 		}else{
-			viewPDPPlans.click();
+			//viewPDPPlans.click();
 			List<WebElement> view2017PDPPlans = driver.findElements(By.id("pdpDrugCostEstimatorLink"));
 			view2017PDPPlans.get(0).click();
 
@@ -1122,9 +1128,15 @@ public class VPPPlanSummaryPage extends UhcDriver {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			viewPlans.click();
+			//viewPlans.click();
 		}	
 
+	}
+
+	public boolean yearBtnExists() {
+		if(validate(view2017Plans))
+			return true;
+		return false;
 	}
 
 }
