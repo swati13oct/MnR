@@ -252,12 +252,11 @@ Feature: To test My Profile & Preferences in AARP site
       Then the user navigates to Profile and Preferences page
     Then the user validates Communication Preferences section
     And the user validates Go paperless button and on clicking button go green page should come
-    And the user validates headers on green page 
     And the user validates on clicking Profilenpreferences arrow user should route to Profile and Preferences page
       Examples: 
       | planType |
      #| PDP      |
-      | MAPD     |
+     #| MAPD     |
       | MA       |
       
       
@@ -281,6 +280,7 @@ Feature: To test My Profile & Preferences in AARP site
       | planType |
       | MAPD     |
       | MA       |
+      |PDP       |
      #|SHIP      |
       
       
