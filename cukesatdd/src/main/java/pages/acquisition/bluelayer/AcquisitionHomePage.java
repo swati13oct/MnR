@@ -656,11 +656,16 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		
 		driver.get(MRConstants.UHC_MA_REQUEST_MORE_HELP_AND_INFORMATION_URL);
 		try {
-			Thread.sleep(5000);
+			Thread.sleep(10000);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
 		pharmacyLink.click();
+		try {
+			Thread.sleep(10000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
 		if (driver.getTitle().equalsIgnoreCase(
 				"Locate a Pharmacy | UnitedHealthcare®")) {
 			return new PharmacySearchPage(driver);
