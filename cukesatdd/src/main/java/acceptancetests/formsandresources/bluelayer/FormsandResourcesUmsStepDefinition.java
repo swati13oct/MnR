@@ -433,8 +433,8 @@ public class FormsandResourcesUmsStepDefinition {
 		}	
 	}
 	
-	@When("^the user view forms and resources in AARP site$")
-	public void views_forms_resources_aarp_site() {
+	@When("^the user view forms and resources page in UMS site$")
+	public void views_forms_resources_UMS_site() {
 		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario()
 				.getBean(PageConstants.ACCOUNT_HOME_PAGE);
 		FormsandresourcesPage formsAndResourcesPage = accountHomePage
