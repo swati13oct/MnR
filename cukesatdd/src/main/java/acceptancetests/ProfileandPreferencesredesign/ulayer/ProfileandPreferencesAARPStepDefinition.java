@@ -148,7 +148,7 @@ public class ProfileandPreferencesAARPStepDefinition {
 		pages.member.ulayer.ProfileandPreferencesPage ProfileandPreferencespage = (pages.member.ulayer.ProfileandPreferencesPage) getLoginScenario()
 				.getBean(PageConstants.PROFILE_AND_PREFERENCES_PAGE);
 
-		ProfileandPreferencespage.validateEmail();
+		//ProfileandPreferencespage.validateEmail();
 		ProfileandPreferencespage.validateeditform();
 	
 	}
@@ -252,6 +252,7 @@ public class ProfileandPreferencesAARPStepDefinition {
 	
 	}
 	
+	
 	@Then("^the user validates permanent address section")
 	public void uservalidatespermanentaddresssection()
 	{
@@ -261,6 +262,17 @@ public class ProfileandPreferencesAARPStepDefinition {
 	ProfileandPreferencespage.validatepermanentaddress();
 	
 	}
+	
+	@Then("^the user validates permanent address section pdp")
+	public void uservalidatespermanentaddresssectionpdp()
+	{
+	pages.member.ulayer.ProfileandPreferencesPage ProfileandPreferencespage = (pages.member.ulayer.ProfileandPreferencesPage) getLoginScenario()
+			.getBean(PageConstants.PROFILE_AND_PREFERENCES_PAGE);
+	
+	ProfileandPreferencespage.validatepermanentaddresspdp();
+	
+	}
+	
 	
 	@Then("^the user clicks on contact us then contact us page should come")
 	public void uservalidatescontactuslinkpermanentadress()

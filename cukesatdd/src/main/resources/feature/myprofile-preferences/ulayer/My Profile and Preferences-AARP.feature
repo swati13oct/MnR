@@ -107,7 +107,7 @@ Feature: To test My Profile & Preferences in AARP site
 
        Examples: 
       | planType |
-     #| PDP     |
+      | PDP     |
       | MAPD     |
       | MA       |
      #|SHIP      |
@@ -123,9 +123,10 @@ Feature: To test My Profile & Preferences in AARP site
 
        Examples: 
       | planType |
-     #| PDP     |
+       | PDP     |
       | MAPD     |
       | MA       |
+      
    @PasswordEdit
   Scenario Outline: To verify the edit functionality in Account Profile section in AARP site
     Given registered member with following details for Profile and Preferences flow
@@ -193,7 +194,7 @@ Feature: To test My Profile & Preferences in AARP site
     When the user navigates to Profile and Preferences page
     And the user validates the need help section
     And the user validates see more ways to contact us section 
-    And the user validates on clicking contact us link it should route to contact us page
+    #And the user validates on clicking contact us link it should route to contact us page
     
      Examples: 
       | planType |
@@ -211,9 +212,20 @@ Feature: To test My Profile & Preferences in AARP site
     
     Examples: 
       | planType |
-     #| PDP      |
       | MAPD     |
       | MA       |
+      
+    @PermanentAddressPDP
+    Scenario Outline: To verify the edit functionality in Account Profile section in AARP site
+    Given registered member with following details for Profile and Preferences flow
+      | <planType> |
+    When the user navigates to Profile and Preferences page
+    Then the user validates permanent address section pdp
+    #And the user clicks on contact us then contact us page should come
+    
+    Examples: 
+      | planType |
+      | PDP      |
       
       
       @PhoneEdit
@@ -222,10 +234,10 @@ Feature: To test My Profile & Preferences in AARP site
       | <planType> |
       Then the user navigates to Profile and Preferences page
       Then the user validates the Phone section
-      Then the user Clicks on the the Edit Link and validates the elements
-      Then the user checks the Edit Button changes to Cancel Button
-      Then the user validates the functionality of save Button in Phoneeditsection 
-      Then the user validates the functionality of Cancel Button In phoneeditSection
+      #Then the user Clicks on the the Edit Link and validates the elements
+      #Then the user checks the Edit Button changes to Cancel Button
+      #Then the user validates the functionality of save Button in Phoneeditsection 
+      #Then the user validates the functionality of Cancel Button In phoneeditSection
       
 
     Examples: 
@@ -249,7 +261,7 @@ Feature: To test My Profile & Preferences in AARP site
       | MA       |
       
       
-   @GoGreen
+    @GoGreen
     Scenario Outline: To verify Go Green page
     Given registered member with following details for Profile and Preferences flow
       | <planType> |
@@ -267,9 +279,9 @@ Feature: To test My Profile & Preferences in AARP site
     
      Examples: 
       | planType |
-     #| MAPD     |
-     #| MA       |
-      |SHIP      |
+      | MAPD     |
+      | MA       |
+     #|SHIP      |
       
       
      

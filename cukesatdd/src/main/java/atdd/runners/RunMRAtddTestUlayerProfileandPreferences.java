@@ -11,8 +11,8 @@ import cucumber.junit.Cucumber;
 
 @RunWith(Cucumber.class)
 @Cucumber.Options(glue = { "atdd.framework", "acceptancetests.ProfileandPreferencesredesign.ulayer" }, features = {
-		"feature/myprofile-preferences/ulayer" }, format = { "pretty", "html:reports/test-report",
-				"json:target/cucumber.json" }, tags = {"@GoGreen,@CommunicationPreferences,@ValidatePlanNamemembernameIDAccountSectionAARP,@ValidateEmail,@PermanentAddress"})
+		"feature/myprofile-preferences/ulayer" }, format = {"pretty", "html:reports/test-report",
+				"json:target/cucumber.json" }, tags = {"@PermanentAddress,@PermanentAddressPDP,@ValidatePlanNamemembernameIDAccountSectionAARP,@ValidateEmail,@PermanentAddress,@CommunicationPreferences,@GoGreen"})
 public class RunMRAtddTestUlayerProfileandPreferences
 {
 }
