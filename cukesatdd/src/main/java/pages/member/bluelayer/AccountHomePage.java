@@ -1125,9 +1125,11 @@ public FormsandresourcesPage navigateToMydocumentUmsPage() {
 	}
 	
 	public OrderplanmaterialsPage navigateToLinkOrderPlanMaterialsPage() {
-		
+
+		driver.manage().timeouts().implicitlyWait(600, TimeUnit.SECONDS);
+		CommonUtility.checkPageIsReady(driver);
 		OrderPlanMaterialslnk.click();
-		
+
 		CommonUtility.checkPageIsReady(driver);
 		if (driver.getTitle().equalsIgnoreCase(
 				"AARP Medicare Plans | Order Plan Materials") || (driver.getTitle().equalsIgnoreCase("Order Plan Material"))) {
