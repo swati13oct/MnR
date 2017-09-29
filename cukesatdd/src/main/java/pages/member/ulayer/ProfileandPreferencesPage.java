@@ -132,10 +132,10 @@ public class ProfileandPreferencesPage extends UhcDriver {
 	@FindBy(id = "updateEmail")
 	private WebElement SaveEmailButton;
 
-	@FindBy(id = "permanenetCardHeight")
+	@FindBy(id = "permanenet")
 	private WebElement permanentaddress;
 	
-	@FindBy(id = "permanenet")
+	@FindBy(id = "permanenetCardHeight")
 	private WebElement permanentaddresspdp;
 
 	@FindBy(xpath = ".//*[@id='permanenet']/div[2]/p/a")
