@@ -612,7 +612,7 @@ public class MRScenario {
 					"saucelabs")) {
 				DesiredCapabilities capabilities = DesiredCapabilities
 						.firefox();
-				capabilities.setCapability("platform", "Windows XP");
+				capabilities.setCapability("platform", "Windows 7");
 				capabilities.setCapability("version", "45.0");
 				capabilities.setCapability("parent-tunnel", "sauce_admin");
 				capabilities.setCapability("tunnelIdentifier",
