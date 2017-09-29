@@ -218,7 +218,7 @@ public class ProfilePreferencesPage extends UhcDriver {
 	@FindBy(xpath = ".//*[@id='temporaryAddress']/div[1]/a[2]")
 	private WebElement CancelButtontoptempAddress;
 
-	@FindBy(className = "atdd-gopaperless")
+	@FindBy(linkText = "GO PAPERLESS")
 	private WebElement gopaperlessbutton;
 
 	@FindBy(className = "atdd-go-green-img")
@@ -233,7 +233,7 @@ public class ProfilePreferencesPage extends UhcDriver {
 	@FindBy(className = "atdd-page-header")
 	private WebElement Profilenprefernceslink;
 	
-	@FindBy(className = "atdd-plan-name")
+	@FindBy(xpath = ".//*[@id='mail-preferences-selector']/div/div/div/div/div[1]/p")
 	private WebElement planNameGoGreen;
 
 	@FindBy(className = "atdd-section-heading")
