@@ -4,7 +4,7 @@ Scenario Outline:Verify order plan materials in UHC site for federal members
 Given registered UHC member for order plan materials with following attributes 
 	| Plan Type    | <planType>   |
 	| Member Type  | <memberType> | 
-When the user navigates to order plan materials through mymenu tab in UHC site
+When the user views order materials in UHC site
 And the user selects an option from the order plan material list in UHC site
 	| Option | <option> |
 Then the user validates the plan materials under plan document section in UHC site
@@ -39,7 +39,7 @@ Scenario Outline:Verify order plan materials in UHC site for federal members
 Given registered UHC member for order plan materials with following attributes 
 	| Plan Type    | <planType>   |
 	| Member Type  | <memberType> | 
-When the user navigates to order plan materials through mymenu tab in UHC site
+When the user views order materials in UHC site
 Examples:
   	 | planType   | memberType     | option              |
    # | MA         |  Individual    | Member Materials    | 
