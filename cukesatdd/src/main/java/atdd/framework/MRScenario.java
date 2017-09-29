@@ -986,21 +986,25 @@ public class MRScenario {
 				} catch (MalformedURLException e) {
 					Assert.fail("Invalid Sauce URL: [" + URL + "]");
 				}
-				return webDriver;
 			}
-
 		}
-		return webDriver;
+				return webDriver;
+			
+		
+		  /*if (null == webDriver) {              
+	           File pathToBinary = new File("C:\\Program Files (x86)\\Google\\Chrome\\Application\\Chrome.exe");
+	           Map<String, Object> chromeOptions = new HashMap<String, Object>();
+	           chromeOptions.put("binary", pathToBinary);
+	           DesiredCapabilities capabilities = DesiredCapabilities.chrome();
+	           capabilities.setCapability(ChromeOptions.CAPABILITY, chromeOptions);
+	           System.setProperty("webdriver.chrome.driver","C:\\Users\\njain112\\Videos\\chromedriver.exe");
+	           webDriver = new ChromeDriver();
+	       }
+	           return webDriver;*/
 
-		/*
-		 * if (null == webDriver) { File pathToBinary = new
-		 * File("C:/Mozilla Firefox/firefox.exe"); FirefoxBinary ffBinary = new
-		 * FirefoxBinary(pathToBinary); FirefoxProfile firefoxProfile = new
-		 * FirefoxProfile(); webDriver = new FirefoxDriver(ffBinary,
-		 * firefoxProfile); webDriver.manage().timeouts().implicitlyWait(60,
-		 * TimeUnit.SECONDS);
-		 */
-	}
+	}    
+
+	
 
 	public static void keyEvent(WebDriver driver) {
 		// TODO Auto-generated method stub
