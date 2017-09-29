@@ -1367,9 +1367,9 @@ public void comparePlanslnk(){
 				public void validateBenefitTable(String monthlypremium,
 						String primarycare, String specialist,
 						String referralRequired, String prescriptionDrug, String planType, String planName) {
-					System.out.println(driver.findElement(By.xpath("//*[contains(text(),'"+planName+"')]/parent::div/following-sibling::div[1]/div/div/div[@class='snpbenefittable']/ul/li[1]/span")).getText());
+					System.out.println(driver.findElement(By.xpath("//table[@class='plan-detail-table']//tr[1]/td[4]/strong")).getText().trim());
 					System.out.println(monthlypremium);	
-						if(monthlypremium.equals(driver.findElement(By.xpath("//*[contains(text(),'"+planName+"')]/parent::div/following-sibling::div[1]/div/div/div[@class='snpbenefittable']/ul/li[1]/span")).getText()))
+						if(monthlypremium.equals(driver.findElement(By.xpath("//table[@class='plan-detail-table']//tr[1]/td[4]/strong")).getText().trim()))
 							 {
 								 System.out.println("Monthly premium is displayed");
 								 Assert.assertTrue(true);
@@ -1378,7 +1378,8 @@ public void comparePlanslnk(){
 							 {
 								 Assert.fail("Error in monthly premium");
 							 }
-						System.out.println(primarycare);
+				}
+						/*System.out.println(primarycare);
 						     System.out.println(driver.findElement(By.xpath("//*[contains(text(),'"+planName+"')]/parent::div/following-sibling::div[1]/div/div/div[@class='snpbenefittable']/ul/li[2]/span")).getText());
 							 
 						     if((driver.findElement(By.xpath("//*[contains(text(),'"+planName+"')]/parent::div/following-sibling::div[1]/div/div/div[@class='snpbenefittable']/ul/li[3]/span")).getText()).contains(specialist))
@@ -1424,7 +1425,7 @@ public void comparePlanslnk(){
 							 
 						
 					
-				}
+				}*/
 				
 				public void learnmore_button(String planName){
 					if (planName.contains("UnitedHealthcare")) {
@@ -1717,7 +1718,7 @@ public void comparePlanslnk(){
 			
 			public ResponsivePlanSummaryUhc addDrug(String drugName){
 				 try {
-					Thread.sleep(5000);
+					Thread.sleep(10000);
 				} catch (InterruptedException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();

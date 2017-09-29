@@ -18,7 +18,7 @@ Feature: To test pharmacy search page functionality in AARP ULayer
       | year | zipcode | planName                                          |
       | 2017 |   90210 | AARP MedicareComplete SecureHorizons Plan 1 (HMO) |
 	
-	#@sanity
+	
   Scenario Outline: To verify pharmacy search functionality for 2018 in AARP ULayer
      Given user is on the AARP Medicare Site landing page
     Then the user navigates to pharmacy search page in AARP Site

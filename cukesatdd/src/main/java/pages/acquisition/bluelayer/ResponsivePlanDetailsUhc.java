@@ -31,7 +31,7 @@ public class ResponsivePlanDetailsUhc extends UhcDriver {
 	private WebElement optionalDentalBoxHeader;
 	
 	
-	@FindBy(xpath="//div[1][@class='riders-box']/p[3]/b")
+	@FindBy(xpath="//tr[@class='optionalServicesPlanCosts']//td[@ng-show='dentalCheckBoxSelected']//strong[2]")
 	private WebElement optionalDentalDollarValue;
 	
 	@FindBy(xpath="//div[1][@class='riders-box']/label")
@@ -43,7 +43,7 @@ public class ResponsivePlanDetailsUhc extends UhcDriver {
 	@FindBy(xpath="//div[2][@class='riders-box']/label")
 	private WebElement highOptionalDentalCheckBox;
 	
-	@FindBy(xpath="	//div[2][@class='riders-box']/p[3]/b")
+	@FindBy(xpath="//tr[@class='optionalServicesPlanCosts']//td[@ng-show='highDentalCheckBoxSelected']//strong[2]")
 	private WebElement highOptionalDentalDollarValue;
 		
 	@FindBy(xpath="//span[@class='title' and text()='Plan Costs']")
@@ -98,7 +98,7 @@ public class ResponsivePlanDetailsUhc extends UhcDriver {
     @FindBy (xpath="//p[text()='Drug Costs from Formulary']/following-sibling::a")
     private WebElement planCostDrugLink;
     
-    @FindBy (xpath="//span[@class='totalmorethanzero']/strong")
+    @FindBy (xpath="//tr[@class='totals']//span[not (@class='ng-hide')]/strong")
     private WebElement estimateAnnualCost;
     
     @FindBy (xpath="//p[text()='High Option Dental']")
