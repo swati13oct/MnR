@@ -213,7 +213,7 @@ Feature: To test My Profile & Preferences in AARP site
     Examples: 
       | planType |
       | MAPD     |
-      | MA       |
+     #| MA       |
       
     @PermanentAddressPDP
     Scenario Outline: To verify the edit functionality in Account Profile section in AARP site
