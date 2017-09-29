@@ -58,7 +58,7 @@ public class PDPEnrollementGuidePage extends UhcDriver{
 	@FindBy(id = "medicareNumber")
 	private WebElement medicareNumberField;
 	
-	@FindBy(id="planGuide3")
+	@FindBy(id="planGuide1")
 	private WebElement chkBoxPlanName;
 	
 	@FindBy(id = "oneTimeAddress.addressLine1")
