@@ -123,7 +123,7 @@ Feature: To test My Profile & Preferences in AARP site
 
        Examples: 
       | planType |
-       | PDP     |
+      | PDP      |
       | MAPD     |
       | MA       |
       
