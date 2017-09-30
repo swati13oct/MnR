@@ -4,6 +4,7 @@ package pages.acquisition.bluelayer;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -98,7 +99,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	@FindBy(className = "fd_myPlans")
 	private WebElement myPlansTab;
 
-	@FindBy(id = "Find a pharmacy near you")
+	@FindBy(xpath = "//*[@id = 'Find a pharmacy near you']")
 	private WebElement pharmacyLink;
 	
 	@FindBy(id = "ghn_lnk_2")
@@ -656,6 +657,13 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		//Navigate to Request more help under MA plans under Our Plans.
 		driver.navigate().to("https://www.awe-test-a-uhcmedicaresolutions.uhc.com/health-plans/medicare-advantage-plans/request-information.html");
 		//Click on Find a Pharmacy near you.
+		//driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+
+		driver.navigate().refresh();
+
+		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+		CommonUtility.checkPageIsReady(driver);
+
 		pharmacyLink.click();
 		CommonUtility.checkPageIsReady(driver);
 		if (driver.getTitle().equalsIgnoreCase(

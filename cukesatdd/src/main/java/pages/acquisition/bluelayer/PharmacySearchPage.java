@@ -190,7 +190,12 @@ public class PharmacySearchPage extends UhcDriver {
 		Select select = new Select(planType);	
 		select.selectByVisibleText(planName);
 		driver.manage().timeouts().implicitlyWait(100, TimeUnit.SECONDS);
-		return new PharmacySearchPage(driver);
+		if (planType.getText() == planName){
+			return new PharmacySearchPage(driver);
+
+		}
+		else
+		return null;
 	}
 
 	public PharmacyResultPage searchesPharmacy() {
@@ -265,7 +270,8 @@ public class PharmacySearchPage extends UhcDriver {
 	}
 	
 	public PharmacyResultPage ValidateShowOnMapResult() {
-		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+		driver.manage().timeouts().implicitlyWait(300, TimeUnit.SECONDS);
+		CommonUtility.checkPageIsReady(driver);
 		showonmap.click();
 		if (driver.getTitle().equalsIgnoreCase(
 				"Member Claims")) {
@@ -333,6 +339,7 @@ public class PharmacySearchPage extends UhcDriver {
 	
 	public PharmacySearchPage selectYear() {
 		if (planYearDropDown.isDisplayed()){
+			System.out.println("@@@@@@@@@ Year Dropdown Displayed @@@@@@@@");
 			Select dropDown = new Select(planYearDropDown);		
 			try {
 				Thread.sleep(10000);

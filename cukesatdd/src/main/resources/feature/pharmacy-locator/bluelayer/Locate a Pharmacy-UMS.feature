@@ -63,21 +63,21 @@ When the user navigates to pharmacy search page in UMS Site
       | zipcode | distance | county      | year | planName                                          |
       |   90210 |       15 | Los Angeles | 2018 | AARP MedicareComplete SecureHorizons Plan 1 (HMO) |
 
-  @showonmap
-  Scenario Outline: To verify pharmacy locator showmap in UHC site
-Given the user is on the UMS Medicare Site landing page
-When the user navigates to pharmacy search page in UMS Site
-    And the user enters following details for pharmacy search in UHC Site
-      | Zip Code | <zipcode>  |
-      | Distance | <distance> |
-    And the user chooses the year and a plan from dropdown in UHC site
-      | Year      | <year>     |
-      | Plan Name | <planName> |
-    Then the user click on show on map link in UHC Site
+#  @showonmap
+#  Scenario Outline: To verify pharmacy locator showmap in UHC site
+#Given the user is on the UMS Medicare Site landing page
+#When the user navigates to pharmacy search page in UMS Site
+#    And the user enters following details for pharmacy search in UHC Site
+#      | Zip Code | <zipcode>  |
+#      | Distance | <distance> |
+#    And the user chooses the year and a plan from dropdown in UHC site
+#      | Year      | <year>     |
+#      | Plan Name | <planName> |
+#    Then the user click on show on map link in UHC Site
 
-    Examples: 
-      | zipcode | distance | county      | year | planName                                          |
-      |   90210 |       15 | Los Angeles | 2017 | AARP MedicareComplete SecureHorizons Plan 1 (HMO) |
+#    Examples: 
+#      | zipcode | distance | county      | year | planName                                          |
+#      |   90210 |       15 | Los Angeles | 2017 | AARP MedicareComplete SecureHorizons Plan 1 (HMO) |
 
   @resultpdf
   Scenario Outline: To verify pharmacy locator pdf results in UHC site
