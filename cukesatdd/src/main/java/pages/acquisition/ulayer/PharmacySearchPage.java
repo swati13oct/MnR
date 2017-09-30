@@ -84,7 +84,7 @@ public class PharmacySearchPage extends UhcDriver {
 	@FindBy(id = "plan-type")
 	private WebElement planType;
 	
-	@FindBy(xpath = "(//*[contains(text(),'Show on Map')])[1]")
+	@FindBy(xpath = "//*[@id='site-wrapper']/div[4]/div/div/div/div/main/div/div/div/div[1]/div/div[2]/div/ul[2]/li[2]/div/div[3]/div/div/a[1]")
 	private WebElement showonmap;
 	
 	@FindBy(xpath = "//a[contains(text(),'VIEW RESULT AS PDF')]")
@@ -251,7 +251,7 @@ public class PharmacySearchPage extends UhcDriver {
 	}
 	
 	public PharmacyResultPage ValidateShowOnMapResult() {
-		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+		driver.manage().timeouts().implicitlyWait(300, TimeUnit.SECONDS);
 		showonmap.click();
 		if (driver.getTitle().equalsIgnoreCase(
 				"Member Claims")) {
@@ -318,20 +318,22 @@ public class PharmacySearchPage extends UhcDriver {
 	}
 	
 	public PharmacySearchPage selectYear() {
-		
-		Select dropDown = new Select(planYearDropDown);		
-		try {
-			Thread.sleep(10000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		dropDown.selectByValue("1");
-		try {
-			Thread.sleep(10000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		if (planYearDropDown.isDisplayed()){
+			Select dropDown = new Select(planYearDropDown);		
+			try {
+				Thread.sleep(10000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			dropDown.selectByValue("1");
+			try {
+				Thread.sleep(10000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+
 		}
 		return new PharmacySearchPage(driver);
 

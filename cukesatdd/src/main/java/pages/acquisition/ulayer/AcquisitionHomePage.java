@@ -306,6 +306,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		if (!(currentUrl().contains("aarpmedicareplans"))) {
 			start(AARP_ACQISITION_PAGE_URL);
 		}
+		System.out.println("Using properties for environment ....: "+ AARP_ACQISITION_PAGE_URL+"..........");
 		validate(navigationSectionHomeLink);
 		validate(navigationSectionOurPlansLink);
 		validate(navigationSectionMedicareEducationLink);

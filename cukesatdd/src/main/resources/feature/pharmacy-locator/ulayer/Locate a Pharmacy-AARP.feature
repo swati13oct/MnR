@@ -77,19 +77,20 @@ Feature: To test Locate a Pharmacy in acqusition flow AARP site
       | zipcode | distance | county      |
       |   90210 |       15 | Los Angeles |
 
-  @planType
-  Scenario Outline: To verify plantype in pharmacy locator page in AARP site
-    Given the user is on the AARP Medicare Site landing page
-    When the user navigates to Request more info page
-    When the user navigates to pharmacy search page in AARP Site
-    And the user enters following details for pharmacy search in AARP Site
-      | Zip Code    | <zipcode>  |
-      | Distance    | <distance> |
-      | County Name | <county>   |
-    And the user chooses the year and a plan from dropdown in AARP site
-      | Year      | <year>     |
-      | Plan Name | <planName> |
-    Then the user click on view search PDF link in AARP Site
+#View as PDF has been removed for Sep 2017 release
+#  @planType
+#  Scenario Outline: To verify plantype in pharmacy locator page in AARP site
+#    Given the user is on the AARP Medicare Site landing page
+#    When the user navigates to Request more info page
+#    When the user navigates to pharmacy search page in AARP Site
+#    And the user enters following details for pharmacy search in AARP Site
+#      | Zip Code    | <zipcode>  |
+#      | Distance    | <distance> |
+#      | County Name | <county>   |
+#    And the user chooses the year and a plan from dropdown in AARP site
+#      | Year      | <year>     |
+#      | Plan Name | <planName> |
+#    Then the user click on view search PDF link in AARP Site
 
     Examples: 
       | zipcode | distance | county      | year | planName                                          |
@@ -112,39 +113,39 @@ Feature: To test Locate a Pharmacy in acqusition flow AARP site
       | zipcode | distance | county      | year | planName                                          |
       |   90210 |       15 | Los Angeles | 2017 | AARP MedicareComplete SecureHorizons Plan 1 (HMO) |
 
-  @showonmap
-  Scenario Outline: To verify pharmacy locator showmap in AARP site
-    Given the user is on the AARP Medicare Site landing page
-    When the user navigates to Request more info page
-    When the user navigates to pharmacy search page in AARP Site
-    And the user enters following details for pharmacy search in AARP Site
-      | Zip Code | <zipcode>  |
-      | Distance | <distance> |
-    And the user chooses the year and a plan from dropdown in AARP site
-      | Year      | <year>     |
-      | Plan Name | <planName> |
-    Then the user click on show on map link in AARP Site
+#  @showonmap
+#  Scenario Outline: To verify pharmacy locator showmap in AARP site
+#    Given the user is on the AARP Medicare Site landing page
+#    When the user navigates to Request more info page
+#    When the user navigates to pharmacy search page in AARP Site
+#    And the user enters following details for pharmacy search in AARP Site
+##      | Zip Code | <zipcode>  |
+#      | Distance | <distance> |
+#    And the user chooses the year and a plan from dropdown in AARP site
+#      | Year      | <year>     |
+#      | Plan Name | <planName> |
+#    Then the user click on show on map link in AARP Site
 
-    Examples: 
-      | zipcode | distance | county      | year | planName                                          |
-      |   90210 |       15 | Los Angeles | 2017 | AARP MedicareComplete SecureHorizons Plan 1 (HMO) |
+#    Examples: 
+#      | zipcode | distance | county      | year | planName                                          |
+#      |   90210 |       15 | Los Angeles | 2017 | AARP MedicareComplete SecureHorizons Plan 1 (HMO) |
 
-  @resultpdf
-  Scenario Outline: To verify pharmacy locator pdf results in AARP site
-    Given the user is on the AARP Medicare Site landing page
-    When the user navigates to Request more info page
-    When the user navigates to pharmacy search page in AARP Site
-    And the user enters following details for pharmacy search in AARP Site
-      | Zip Code | <zipcode>  |
-      | Distance | <distance> |
-    And the user chooses the year and a plan from dropdown in AARP site
-      | Year      | <year>     |
-      | Plan Name | <planName> |
-    Then the user click on view search PDF link in AARP Site
-
-    Examples: 
-      | zipcode | distance | county      | year | planName                                          |
-      |   90210 |       15 | Los Angeles | 2017 | AARP MedicareComplete SecureHorizons Plan 1 (HMO) |
+#  @resultpdf
+#  Scenario Outline: To verify pharmacy locator pdf results in AARP site
+#    Given the user is on the AARP Medicare Site landing page
+#    When the user navigates to Request more info page
+#    When the user navigates to pharmacy search page in AARP Site
+#    And the user enters following details for pharmacy search in AARP Site
+#      | Zip Code | <zipcode>  |
+#      | Distance | <distance> |
+#    And the user chooses the year and a plan from dropdown in AARP site
+#      | Year      | <year>     |
+#      | Plan Name | <planName> |
+#    Then the user click on view search PDF link in AARP Site
+#
+#    Examples: 
+#      | zipcode | distance | county      | year | planName                                          |
+#      |   90210 |       15 | Los Angeles | 2017 | AARP MedicareComplete SecureHorizons Plan 1 (HMO) |
 
 #  @googlemap
 #  Scenario Outline: To verify google maps for pharmacies in AARP site
@@ -380,23 +381,26 @@ Feature: To test Locate a Pharmacy in acqusition flow AARP site
       | zipcode | distance | county      | year | planName                                          |
       |   90210 |       15 | Los Angeles | 2017 | AARP MedicareComplete SecureHorizons Plan 1 (HMO) |
 
-  @resultpdfpharmacysaver
-  Scenario Outline: To verify pharmacy locator pdf results in AARP site
-    Given the user is on the AARP Medicare Site landing page
-    When the user navigates to Request more info page
-    When the user navigates to pharmacy search page in AARP Site
-    And the user enters following details for pharmacy search in AARP Site
-      | Zip Code | <zipcode>  |
-      | Distance | <distance> |
-    And the user chooses the year and a plan from dropdown in AARP site
-      | Year      | <year>     |
-      | Plan Name | <planName> |
-    And the user searches for pharmacy search results available in AARP site
-    Then the user click on view search PDF link in AARP Site
 
-    Examples: 
-      | zipcode | distance | county      | year | planName                                          |
-      |   90210 |       15 | Los Angeles | 2017 | AARP MedicareComplete SecureHorizons Plan 1 (HMO) |
+# View as PDF has been removed for Sep 2017 Release
+  #@resultpdfpharmacysaver
+  #Scenario Outline: To verify pharmacy locator pdf results in AARP site
+  #  Given the user is on the AARP Medicare Site landing page
+  # When the user navigates to Request more info page
+  #  When the user navigates to pharmacy search page in AARP Site
+  #  And the user enters following details for pharmacy search in AARP Site
+  #    | Zip Code | <zipcode>  |
+  #    | Distance | <distance> |
+  #  And the user chooses the year and a plan from dropdown in AARP site
+  #    | Year      | <year>     |
+  #    | Plan Name | <planName> |
+  #  And the user searches for pharmacy search results available in AARP site
+  #  Then the user click on view search PDF link in AARP Site
+
+#   Examples: 
+#    | zipcode | distance | county      | year | planName                                          |
+#      |   90210 |       15 | Los Angeles | 2017 | AARP MedicareComplete SecureHorizons Plan 1 (HMO) |
+
 
   @moreinfopharmacysaver
   Scenario Outline: To verify moreinfo for pharmacy saver plantype in AARP site
