@@ -23,7 +23,7 @@ import org.skyscreamer.jsonassert.JSONAssert;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import pages.redesign.UlayerHomePage;
-import pages.member.ulayer.LoginPage;
+import pages.redesign.UlayerLoginPage;
 import pages.redesign.OrderplanmaterialsPage;
 import pages.redesign.PlanMaterialConfirmationPage;
 import acceptancetests.atdd.data.CommonConstants;
@@ -40,7 +40,7 @@ import cucumber.annotation.en.When;
 import cucumber.table.DataTable;
 
 /**
- * @author pperugu
+ * @author sdwaraka
  *
  */
 public class OrderPlanMaterialsAarpStepDefinition {
@@ -111,7 +111,7 @@ public class OrderPlanMaterialsAarpStepDefinition {
 		WebDriver wd = getLoginScenario().getWebDriver();
 		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
 		JSONObject accountHomeActualJson = null;
-		LoginPage loginPage = new LoginPage(wd);
+		UlayerLoginPage loginPage = new UlayerLoginPage(wd);
 
 		UlayerHomePage accountHomePage = (UlayerHomePage)loginPage.loginWith(userName, pwd);
 		
@@ -238,27 +238,6 @@ public class OrderPlanMaterialsAarpStepDefinition {
 		OrderplanmaterialsPage orderPlanMaterialsPage =  accountHomePage.navigateToOrderPlanMaterialsAarpPage();
 	}
 	
-	@And("^the user validate radio button for Federal member in AARP site$")
-	public void validate_radio_button_pdp_in_AARP_site() {
-		UlayerHomePage accountHomePage = (UlayerHomePage) getLoginScenario()
-				.getBean(PageConstants.ACCOUNT_HOME_PAGE);
-		OrderplanmaterialsPage orderPlanMaterialsPage = (OrderplanmaterialsPage) getLoginScenario().getBean(PageConstants.ORDER_PLAN_MATERIALS_PAGE);
-		System.out.println("**************Plan Tab to to Select is : PDP+++++++++++++");
-		
-		orderPlanMaterialsPage.navigatePlanTabs("MA");
-
-		orderPlanMaterialsPage = orderPlanMaterialsPage
-				.navigateToValidateRadioButtonInAarpPage();
-	}
-	
-	@Then("^the user validate radio button and click on submit button for PDP member in AARP site$")
-	public void validate_radio_and_submit_button_pdp_in_AARP_site() {
-		OrderplanmaterialsPage orderPlanMaterialsPage = (OrderplanmaterialsPage) getLoginScenario().getBean(PageConstants.ORDER_PLAN_MATERIALS_PAGE);
-		orderPlanMaterialsPage = orderPlanMaterialsPage
-				.navigateToValidateRadioAndSubmitButtonInAarpPage();
-	}
-
-
 
 	@And("^the user validate order additional material and click to add other order additional material in AARP site$")
 	public void validate_add_order_additional_material_for_pdp_in_AARP_site() {

@@ -20,7 +20,7 @@ import acceptancetests.claims.data.ClaimsCommonConstants;
 import atdd.framework.UhcDriver;
 
 /**
- * @author pperugu
+ * @author sdwaraka
  *
  */
 public class MedicalClaimSummaryPage extends UhcDriver {

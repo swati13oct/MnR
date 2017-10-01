@@ -30,20 +30,7 @@ Then the user validates the plan materials under plan document section in AARP s
 Examples:   
             | planType      |  option    |  
             | SHIP          |Coupon Book  | 
-
-
-# Already covered in @MAPSOrdermaterials
-#@radiobuttonpdpind
-#Scenario Outline:Verify order materials in AARP site for federal type plan members
-#Given registered AMP member with following attributes
-#	| Plan Type | <planType> |
-#When the user views order plan materials in AARP site
-#And the user validate radio button for Federal member in AARP site
-
-#Examples:   
-#        | planType      |  
-#        | MA           | 
-        
+       
 @radiobuttonvalidationpdpindi
 Scenario Outline:Verify order materials in AARP site for pdp members
 Given registered AMP member with following attributes

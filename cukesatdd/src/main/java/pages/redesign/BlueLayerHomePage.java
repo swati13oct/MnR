@@ -3,42 +3,40 @@
  */
 package pages.redesign;
 
-import java.util.ArrayList;
-import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 import java.util.NoSuchElementException;
 import java.util.concurrent.TimeUnit;
 
-import org.joda.time.DateTime;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.junit.Assert;
+import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
-import org.openqa.selenium.Cookie;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
-import org.openqa.selenium.support.ui.WebDriverWait;
-import org.springframework.beans.factory.annotation.Autowired;
 
+import pages.member.bluelayer.OrderplanmaterialsPage;
+import pages.mypcp.SignInPage;
+import pages.member.bluelayer.ContactUsPage;
 import acceptancetests.atdd.data.CommonConstants;
 import acceptancetests.atdd.data.PageData;
 import acceptancetests.atdd.util.CommonUtility;
+import acceptancetests.login.data.LoginCommonConstants;
 import atdd.framework.MRScenario;
 import atdd.framework.UhcDriver;
-import pages.redesign.PlanBenefitsCoveragePage;
-import pages.redesign.*;
+
 
 /**
  * @author sdwaraka
+ *
  */
 
-@SuppressWarnings("unused")
-public class UlayerHomePage extends UhcDriver {
+public class BlueLayerHomePage extends UhcDriver {
 
 
 	@FindBy(xpath = "//a[contains(text(), 'Go to Claims')]")
@@ -77,24 +75,39 @@ public class UlayerHomePage extends UhcDriver {
 	private WebElement orderplanHeadertxt;
 	
 	
-	private PageData myAccountHome;
-
-	public JSONObject accountHomeJson;
 
 	private PageData browserCheckData;
 
 	private JSONObject browserCheckJson;
+	
+	private PageData myAccountHome;
 
-	public UlayerHomePage(WebDriver driver) {
+	public JSONObject accountHomeJson;
+
+	public BlueLayerHomePage(WebDriver driver,String category) {
 		super(driver);
 		PageFactory.initElements(driver, this);
-		String fileName = CommonConstants.ACCOUNT_HOME_PAGE_DATA;
-		myAccountHome = CommonUtility.readPageData(fileName,
-				CommonConstants.PAGE_OBJECT_DIRECTORY_ULAYER_MEMBER);
-		if(!currentUrl().contains("/testharness.html"))
+		if(category.equalsIgnoreCase("Individual"))
 		{
-			openAndValidate();
+			String fileName = CommonConstants.ACCOUNT_HOME_PAGE_INDIVIDUAL_DATA;
+			myAccountHome = CommonUtility.readPageData(fileName,
+					CommonConstants.PAGE_OBJECT_DIRECTORY_BLUELAYER_MEMBER);
 		}
+		else
+		{
+			String fileName = CommonConstants.ACCOUNT_HOME_PAGE_DATA;
+			myAccountHome = CommonUtility.readPageData(fileName,
+					CommonConstants.PAGE_OBJECT_DIRECTORY_BLUELAYER_MEMBER);
+		}
+		
+		openAndValidate();
+	}
+
+	public BlueLayerHomePage(WebDriver driver) {
+		super(driver);
+		PageFactory.initElements(driver, this);
+		
+//		openAndValidate();
 	}
 
 	public PaymentHistoryPage navigateToPayments() {
@@ -183,18 +196,6 @@ public class UlayerHomePage extends UhcDriver {
 		}
 	}
 
-	public PlanBenefitsCoveragePage navigateToBenefitsAndCoverage() {
-		EOBsearchLink.click();
-		CommonUtility.checkPageIsReady(driver);
-		//benefitsAndCoverageLink.click();
-		if (driver.getTitle().equalsIgnoreCase(
-				"AARP Medicare Plans | Plan Benefits and Coverage") || driver.getTitle().equalsIgnoreCase("Explanation of Benefits (EOB)")) {
-			return new PlanBenefitsCoveragePage(driver);
-		} 
-		else {
-			return null;
-		}
-	}
 
 	@Override
 	public void openAndValidate() {
@@ -205,11 +206,15 @@ public class UlayerHomePage extends UhcDriver {
 
 	}
 
+
 	public JSONObject getExpectedData(Map<String, JSONObject> expectedDataMap) {
-		
+
+		JSONObject globalExpectedJson = expectedDataMap
+				.get(CommonConstants.GLOBAL);
 		JSONObject accountHomeExpectedJson = expectedDataMap
 				.get(CommonConstants.MY_ACCOUNT_HOME);
-		
+		accountHomeExpectedJson = CommonUtility.mergeJson(
+				accountHomeExpectedJson, globalExpectedJson);
 		return accountHomeExpectedJson;
 	}
 
@@ -307,5 +312,5 @@ public class UlayerHomePage extends UhcDriver {
 			System.out.println("order plan header text is not displayed");
 		return null;
 	}
-
+	
 }

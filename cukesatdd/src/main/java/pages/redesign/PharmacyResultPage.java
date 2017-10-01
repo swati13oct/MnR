@@ -20,7 +20,7 @@ import acceptancetests.atdd.util.CommonUtility;
 import atdd.framework.UhcDriver;
 
 /**
- * @author pperugu
+ * @author sdwaraka
  *
  */
 public class PharmacyResultPage extends UhcDriver {

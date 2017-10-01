@@ -23,15 +23,15 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.skyscreamer.jsonassert.JSONAssert;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import pages.member.ulayer.AccountHomePage;
-import pages.member.ulayer.ContactUsPage;
-import pages.member.ulayer.LoginPage;
-import pages.member.ulayer.MedicalClaimSummaryPage;
-import pages.member.ulayer.MyProfilesPage;
-import pages.member.ulayer.OrderplanmaterialsPage;
-import pages.member.ulayer.PaymentHistoryPage;
-import pages.member.ulayer.PlanBenefitsCoveragePage;
-import pages.member.ulayer.PlanMaterialConfirmationPage;
+import pages.redesign.UlayerHomePage;
+import pages.redesign.ContactUsPage;
+import pages.redesign.UlayerLoginPage;
+import pages.redesign.MedicalClaimSummaryPage;
+import pages.redesign.MyProfilesPage;
+import pages.redesign.OrderplanmaterialsPage;
+import pages.redesign.PaymentHistoryPage;
+import pages.redesign.PlanBenefitsCoveragePage;
+import pages.redesign.PlanMaterialConfirmationPage;
 import acceptancetests.atdd.data.CommonConstants;
 import acceptancetests.atdd.data.member.PageConstants;
 import acceptancetests.claims.data.ClaimsCommonConstants;
@@ -46,7 +46,7 @@ import cucumber.annotation.en.When;
 import cucumber.table.DataTable;
 
 /**
-* @author pperugu
+* @author sdwaraka
 *
 */
 public class ShipPlansStepDefinition {
@@ -111,9 +111,9 @@ public class ShipPlansStepDefinition {
 		WebDriver wd = getLoginScenario().getWebDriver();
 		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
 		JSONObject accountHomeActualJson = null;
-		LoginPage loginPage = new LoginPage(wd);
+		UlayerLoginPage loginPage = new UlayerLoginPage(wd);
 
-		AccountHomePage accountHomePage = (AccountHomePage)loginPage.loginWith(userName, pwd);
+		UlayerHomePage accountHomePage = (UlayerHomePage)loginPage.loginWith(userName, pwd);
 		
 		 getLoginScenario().saveBean(PageConstants.ACCOUNT_HOME_PAGE,accountHomePage);
 		
@@ -158,7 +158,7 @@ public class ShipPlansStepDefinition {
 		System.out.println("Page Name"+PageName);
 		//switch(PageName){
 		if (PageName.equalsIgnoreCase("Claims")){
-			AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario()
+			UlayerHomePage accountHomePage = (UlayerHomePage) getLoginScenario()
 					.getBean(PageConstants.ACCOUNT_HOME_PAGE);
 			MedicalClaimSummaryPage medicalClaimssummaryPage = accountHomePage.navigateToMedicalClaimsSummary();
 			if (medicalClaimssummaryPage != null) {
@@ -172,13 +172,13 @@ public class ShipPlansStepDefinition {
 			}
 		}
 		else if (PageName.equalsIgnoreCase("EOB")){
-			AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario()
+			UlayerHomePage accountHomePage = (UlayerHomePage) getLoginScenario()
 					.getBean(PageConstants.ACCOUNT_HOME_PAGE);
-			PlanBenefitsCoveragePage planBenefitsCoverageage = accountHomePage.navigateToBenefitsAndCoverage();
-			if (planBenefitsCoverageage != null) {
+			PlanBenefitsCoveragePage planBenefitsCoverage = accountHomePage.navigateToBenefitsAndCoverage();
+			if (planBenefitsCoverage != null) {
 				System.out.println("EOB page Loaded");
 				getLoginScenario().saveBean(PageConstants.BENEFITS_AND_COVERAGE_PAGE,
-						planBenefitsCoverageage);
+						planBenefitsCoverage);
 				Assert.assertTrue(true);
 			}
 			else {
@@ -186,7 +186,7 @@ public class ShipPlansStepDefinition {
 			}
 		}
 		else if (PageName.equalsIgnoreCase("Profile")){
-			AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario()
+			UlayerHomePage accountHomePage = (UlayerHomePage) getLoginScenario()
 					.getBean(PageConstants.ACCOUNT_HOME_PAGE);
 			MyProfilesPage myProfilepage = accountHomePage.navigateToProfAndPref();
 			if (myProfilepage != null) {
@@ -200,7 +200,7 @@ public class ShipPlansStepDefinition {
 			}
 		}
 		else if (PageName.equalsIgnoreCase("Payment")){
-			AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario()
+			UlayerHomePage accountHomePage = (UlayerHomePage) getLoginScenario()
 					.getBean(PageConstants.ACCOUNT_HOME_PAGE);
 			PaymentHistoryPage paymentHistorypage = accountHomePage.navigateToPayments();
 			if (paymentHistorypage != null) {
@@ -214,7 +214,7 @@ public class ShipPlansStepDefinition {
 			}
 		}
 		else if (PageName.equalsIgnoreCase("ContactUs")){
-			AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario()
+			UlayerHomePage accountHomePage = (UlayerHomePage) getLoginScenario()
 					.getBean(PageConstants.ACCOUNT_HOME_PAGE);
 			ContactUsPage contactUspage = accountHomePage.navigatesToContactUsPage();
 			if (contactUspage != null) {

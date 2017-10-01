@@ -16,7 +16,7 @@ import atdd.framework.UhcDriver;
 import junit.framework.Assert;
 
 /**
- * @author pperugu
+ * @author sdwaraka
  *
  */
 public class OrderplanmaterialsPage extends UhcDriver {
@@ -295,22 +295,7 @@ public class OrderplanmaterialsPage extends UhcDriver {
 		
 	}
 	
-	public OrderplanmaterialsPage navigateToValidateRadioButtonInAarpPage() {
-		memberMaterialsfield.click();
-		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
-		replacementIdField.click();
-		return null;
-	}
 	
-	public OrderplanmaterialsPage navigateToValidateRadioAndSubmitButtonInAarpPage() {
-		driver.manage().timeouts().implicitlyWait(600, TimeUnit.SECONDS);
-		radioidLink.click();
-		driver.manage().timeouts().implicitlyWait(600, TimeUnit.SECONDS);
-		submitButton.click();
-				return null;
-	}
-
-
 	public String getOrderPlanMaterialsContent() {
 		return OrderPlanMaterialsSection.getText();
 	}
