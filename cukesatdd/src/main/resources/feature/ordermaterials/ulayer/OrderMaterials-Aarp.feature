@@ -8,6 +8,8 @@ Given registered AMP member with following attributes
 When the user views order materials in AARP site
 And the user selects an option from the orderp list in AARP site
 	| Option | <option> |
+		| Plan Type | <planType> |
+	
 Then the user validates the plan materials under plan document section in AARP site
 Examples:   
         | planType      |  option          |
@@ -22,22 +24,25 @@ Given registered AMP member with following attributes
 When the user views order materials in AARP site
 And the user selects an option from the orderp list in AARP site
 | Option | <option> |
+	| Plan Type | <planType> |
+
 Then the user validates the plan materials under plan document section in AARP site
 Examples:   
             | planType      |  option    |  
             | SHIP          |Coupon Book  | 
 
 
-@radiobuttonpdpind
-Scenario Outline:Verify order materials in AARP site for federal type plan members
-Given registered AMP member with following attributes
-	| Plan Type | <planType> |
-When the user views order plan materials in AARP site
-And the user validate radio button for PDP member in AARP site
+# Already covered in @MAPSOrdermaterials
+#@radiobuttonpdpind
+#Scenario Outline:Verify order materials in AARP site for federal type plan members
+#Given registered AMP member with following attributes
+#	| Plan Type | <planType> |
+#When the user views order plan materials in AARP site
+#And the user validate radio button for Federal member in AARP site
 
-Examples:   
-        | planType      |  
-        | PDP           | 
+#Examples:   
+#        | planType      |  
+#        | MA           | 
         
 @radiobuttonvalidationpdpindi
 Scenario Outline:Verify order materials in AARP site for pdp members
@@ -139,6 +144,7 @@ Examples:
     When the user views order materials in AARP site
     And the user selects an option from the orderp list in AARP site
 	| Option | <option> |
+	| Plan Type | <planType> |
     Then the user validates error message for SHIP invalid selection in Order Materials page
     
     Examples: 

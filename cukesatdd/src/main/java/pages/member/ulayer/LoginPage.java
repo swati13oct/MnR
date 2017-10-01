@@ -13,6 +13,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
 import pages.acquisition.ulayer.LoginAssistancePage;
+import pages.redesign.UlayerHomePage;
 import acceptancetests.atdd.data.CommonConstants;
 import acceptancetests.atdd.data.MRConstants;
 import acceptancetests.atdd.data.PageData;
@@ -82,6 +83,9 @@ public class LoginPage extends UhcDriver {
 
 		{
 			return new AccountHomePage(driver);
+		}
+		else if (currentUrl().contains("home/testharness.html")){
+			return new UlayerHomePage(driver);
 		}
 		else if (currentUrl().contains("terminated-plan.html")) {
 			return new TerminatedHomePage(driver); 

@@ -22,10 +22,10 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.skyscreamer.jsonassert.JSONAssert;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import pages.member.ulayer.AccountHomePage;
+import pages.redesign.UlayerHomePage;
 import pages.member.ulayer.LoginPage;
-import pages.member.ulayer.OrderplanmaterialsPage;
-import pages.member.ulayer.PlanMaterialConfirmationPage;
+import pages.redesign.OrderplanmaterialsPage;
+import pages.redesign.PlanMaterialConfirmationPage;
 import acceptancetests.atdd.data.CommonConstants;
 import acceptancetests.atdd.data.member.PageConstants;
 import acceptancetests.claims.data.ClaimsCommonConstants;
@@ -113,7 +113,7 @@ public class OrderPlanMaterialsAarpStepDefinition {
 		JSONObject accountHomeActualJson = null;
 		LoginPage loginPage = new LoginPage(wd);
 
-		AccountHomePage accountHomePage = (AccountHomePage)loginPage.loginWith(userName, pwd);
+		UlayerHomePage accountHomePage = (UlayerHomePage)loginPage.loginWith(userName, pwd);
 		
 		 getLoginScenario().saveBean(PageConstants.ACCOUNT_HOME_PAGE,accountHomePage);
 		
@@ -146,7 +146,7 @@ public class OrderPlanMaterialsAarpStepDefinition {
 	
 	@When("^the user views order materials in AARP site$")
 	public void views_order_materials_in_Ums_site() {
-		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario()
+		UlayerHomePage accountHomePage = (UlayerHomePage) getLoginScenario()
 				.getBean(PageConstants.ACCOUNT_HOME_PAGE);
 		OrderplanmaterialsPage orderPlanMaterialsPage = accountHomePage
 				.navigateToOrderPlanMaterialsAarpPage();
@@ -172,8 +172,13 @@ public class OrderPlanMaterialsAarpStepDefinition {
 			givenAttributesMap.put(givenAttributesRow.get(i).getCells().get(0),
 					givenAttributesRow.get(i).getCells().get(1));
 		}
+		String plantype = givenAttributesMap.get("Plan Type");
 		String option = givenAttributesMap.get("Option");
-				
+		
+		System.out.println("**************Plan Tab to to Select is : "+plantype+"+++++++++++++");
+		if (plantype.contains("MA") || plantype.contains("MAPD") || plantype.contains("PDP")){
+			orderPlanMaterialsPage.navigatePlanTabs(plantype);
+		}
 		System.out.println("**************Radio Option to Select is : "+option+"+++++++++++++");
 		PlanMaterialConfirmationPage planMaterialConfirmationPage = orderPlanMaterialsPage.selectsOption(option);
 		
@@ -228,25 +233,28 @@ public class OrderPlanMaterialsAarpStepDefinition {
 	
 	@When("^the user views order plan materials in AARP site$")
 	public void views_order_plan_materials_in_AARP_site() {
-		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario()
+		UlayerHomePage accountHomePage = (UlayerHomePage) getLoginScenario()
 				.getBean(PageConstants.ACCOUNT_HOME_PAGE);
-		OrderplanmaterialsPage orderPlanMaterialsPage = accountHomePage
-				.navigateToLinkOrderPlanMaterialsAarpPage();
+		OrderplanmaterialsPage orderPlanMaterialsPage =  accountHomePage.navigateToOrderPlanMaterialsAarpPage();
 	}
 	
-	@And("^the user validate radio button for PDP member in AARP site$")
+	@And("^the user validate radio button for Federal member in AARP site$")
 	public void validate_radio_button_pdp_in_AARP_site() {
-		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario()
+		UlayerHomePage accountHomePage = (UlayerHomePage) getLoginScenario()
 				.getBean(PageConstants.ACCOUNT_HOME_PAGE);
-		OrderplanmaterialsPage orderPlanMaterialsPage = accountHomePage
+		OrderplanmaterialsPage orderPlanMaterialsPage = (OrderplanmaterialsPage) getLoginScenario().getBean(PageConstants.ORDER_PLAN_MATERIALS_PAGE);
+		System.out.println("**************Plan Tab to to Select is : PDP+++++++++++++");
+		
+		orderPlanMaterialsPage.navigatePlanTabs("MA");
+
+		orderPlanMaterialsPage = orderPlanMaterialsPage
 				.navigateToValidateRadioButtonInAarpPage();
 	}
 	
 	@Then("^the user validate radio button and click on submit button for PDP member in AARP site$")
 	public void validate_radio_and_submit_button_pdp_in_AARP_site() {
-		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario()
-				.getBean(PageConstants.ACCOUNT_HOME_PAGE);
-		OrderplanmaterialsPage orderPlanMaterialsPage = accountHomePage
+		OrderplanmaterialsPage orderPlanMaterialsPage = (OrderplanmaterialsPage) getLoginScenario().getBean(PageConstants.ORDER_PLAN_MATERIALS_PAGE);
+		orderPlanMaterialsPage = orderPlanMaterialsPage
 				.navigateToValidateRadioAndSubmitButtonInAarpPage();
 	}
 
@@ -254,26 +262,23 @@ public class OrderPlanMaterialsAarpStepDefinition {
 
 	@And("^the user validate order additional material and click to add other order additional material in AARP site$")
 	public void validate_add_order_additional_material_for_pdp_in_AARP_site() {
-		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario()
+		UlayerHomePage accountHomePage = (UlayerHomePage) getLoginScenario()
 				.getBean(PageConstants.ACCOUNT_HOME_PAGE);
-		OrderplanmaterialsPage orderPlanMaterialsPage = accountHomePage
-				.navigateToValidateOrderConfirmationInAarpPage();
+		OrderplanmaterialsPage orderPlanMaterialsPage = accountHomePage.navigateToOrderPlanMaterialsAarpPage();
 	}
 	
 	@Then("^the user verify need help component in AARP site$")
 	public void validate_needhelp_component(){
-		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario()
+		UlayerHomePage accountHomePage = (UlayerHomePage) getLoginScenario()
 				.getBean(PageConstants.ACCOUNT_HOME_PAGE);
-		OrderplanmaterialsPage orderPlanMaterialsPage = accountHomePage
-				.verifyneedHelpcomponent();
+		OrderplanmaterialsPage orderPlanMaterialsPage = accountHomePage.navigateToOrderPlanMaterialsAarpPage();
 	}
 	
 	@Then("^the user verify header and sub text in order materials page in AARP site$")
 	public void verify_headerandsubtext_in_orderplanmaterial_page(){
-		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario()
+		UlayerHomePage accountHomePage = (UlayerHomePage) getLoginScenario()
 				.getBean(PageConstants.ACCOUNT_HOME_PAGE);
-	OrderplanmaterialsPage orderPlanMaterialsPage = accountHomePage
-			.verifyHeaderTextandSubtext();
+	OrderplanmaterialsPage orderPlanMaterialsPage = accountHomePage.navigateToOrderPlanMaterialsAarpPage();
     }
 	
 	@Then("^user navigates to Order Materials page for all Plans$")
