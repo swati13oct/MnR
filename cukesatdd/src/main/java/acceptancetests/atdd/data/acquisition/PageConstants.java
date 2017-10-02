@@ -20,6 +20,10 @@ public class PageConstants {
 	public static final String SELECT_GENERIC_PAGE = "selectGenericPage";
 
 	public static final String PHARMACY_SEARCH_PAGE = "pharmacySearchPage";
+	
+	public static final String UHCRETIREE_PHARMACY_RESULTS_PAGE = "pharmacyResultsPage";
+	
+	public static final String UHCRETIREE_PHARMACY_SEARCH_PAGE = "uhcRetireepharmacylocatorPage";
 
 	public static final String HEALTH_PLANS_PAGE = "healthPlansPage";
 

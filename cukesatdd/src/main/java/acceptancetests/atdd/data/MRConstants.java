@@ -34,7 +34,7 @@ public class MRConstants {
 	
 	public static final String UHC_PLANPREVIEW_URL= "https://www."+MRScenario.environment+"-uhcmedicaresolutions.uhc.com/plan-preview.html";
 
-	public static final String UHCRETIREE_URL = "https://www."+MRScenario.environment+"-uhcretiree.uhc.com/";
+	public static final String UHCRETIREE_URL = "https://www.awe-"+MRScenario.environment+"-uhcretiree.uhc.com/";
 	
 	public static final String VERIZON_PROVIDER_PAGE_URL = "https://www."+MRScenario.environment+"-uhcretiree.uhc.com/verizon/find_a_provider.html";
 	
