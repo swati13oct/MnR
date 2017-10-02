@@ -4,6 +4,7 @@
 package pages.redesign;
 
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -16,6 +17,7 @@ import acceptancetests.atdd.data.CommonConstants;
 import acceptancetests.atdd.data.PageData;
 import acceptancetests.atdd.util.CommonUtility;
 import atdd.framework.UhcDriver;
+import pages.redesign.OrderplanmaterialsPage;
 
 /**
  * @author sdwaraka
@@ -29,6 +31,10 @@ public class PlanMaterialConfirmationPage extends UhcDriver {
 	private PageData planMaterials;
 	
 	public JSONObject planMaterialsConfirmationJson;
+	
+	@FindBy(xpath = "//section[1]/div/div/div/a")
+	private WebElement addordermaterialLink;
+
 	
 	public PlanMaterialConfirmationPage(WebDriver driver){
 		super(driver);
@@ -44,13 +50,24 @@ public class PlanMaterialConfirmationPage extends UhcDriver {
 		
 	}
 
+	public OrderplanmaterialsPage navigateToValidateOrderConfirmationInRedesignPage() {
+		driver.manage().timeouts().implicitlyWait(600, TimeUnit.SECONDS);
+		addordermaterialLink.click();
+		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+		if(driver.getTitle().equalsIgnoreCase("Order Plan Materials")){
+			return new OrderplanmaterialsPage(driver);
+		}
+	
+		return null;
+	}
+
 
 	@Override
 	public void openAndValidate() {
 		
 		validate(logOut);
 		
-		JSONObject jsonObject = new JSONObject();
+/*		JSONObject jsonObject = new JSONObject();
 		for (String key : planMaterials.getExpectedData().keySet()) {
 			WebElement element = findElement(planMaterials.getExpectedData().get(key));
 			validate(element);
@@ -65,7 +82,7 @@ public class PlanMaterialConfirmationPage extends UhcDriver {
 		planMaterialsConfirmationJson = jsonObject;
 		
 		System.out.println("planMaterialsConfirmationJson----->"+planMaterialsConfirmationJson);
-		
+		*/
 	}
 
 	public JSONObject getExpectedData(Map<String, JSONObject> expectedDataMap) {

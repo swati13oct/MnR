@@ -5,17 +5,17 @@ Given registered UHC member for order plan materials with following attributes
 	| Plan Type    | <planType>   |
 	| Member Type  | <memberType> | 
 When the user views order materials in UHC site
-And the user selects an option from the order plan material list in UHC site
-	| Option | <option> |
+And the user selects an option from the order list in UHC site
+| Option | <option> |
 Then the user validates the plan materials under plan document section in UHC site
 Examples:
      | planType   | memberType     | option              |
-   # | MA         |  Individual    | Member Materials    | 
-   # | MAPD       |  Individual    | Replacement ID card |
-   # | MA         | Group          | Replacement ID card |   
-   # | MAPD       | Group          | Member Materials    |
+    | MA         |  Individual    | Member Materials    | 
+    | MAPD       |  Individual    | Replacement ID card |
+    | MA         | Group          | Replacement ID card |   
+    | MAPD       | Group          | Member Materials    |
    # | SSUP       | Group          | Replacement ID card |
-   # | PDP        | Group          | Member Materials    |
+    | PDP        | Group          | Member Materials    |
 
  
  
@@ -56,11 +56,13 @@ Given registered UHC member for order plan materials with following attributes
 	| Plan Type    | <planType>   |
 	| Member Type  | <memberType> | 
 When the user views order materials in UHC site
-And the user validate radio button for ma and ssup in UHC site
+And the user selects an option from the orderp list in Redesign site
+	| Option | <option> |
+		| Plan Type | <planType> |
 
 Examples:
-  | planType   | memberType     | 
-  | MA         |  Group         | 
+  | planType   | memberType     | option 		|
+  | MA         |  Group         |  Member Materials   |
   
 @radiobuttonpdpgroup
 Scenario Outline:Verify order plan materials in UHC site for PDP member
@@ -68,11 +70,13 @@ Given registered UHC member for order plan materials with following attributes
 	| Plan Type    | <planType>   |
 	| Member Type  | <memberType> | 
 When the user views order materials in UHC site
-And the user validate radio button for PDP member in UHC site
+And the user selects an option from the orderp list in Redesign site
+	| Option | <option> |
+		| Plan Type | <planType> |
 
 Examples:
-  | planType   | memberType     | 
-  | PDP         |  Group         | 
+  | planType   | memberType     | option 		|
+  | PDP         |  Group         |  Welcome Guide   |
   
  
 @radiobuttonmaindiv
@@ -81,11 +85,13 @@ Given registered UHC member for order plan materials with following attributes
 	| Plan Type    | <planType>   |
 	| Member Type  | <memberType> | 
 When the user views order materials in UHC site
-And the user validate radio button for MA member in UHC site
+And the user selects an option from the orderp list in Redesign site
+	| Option | <option> |
+		| Plan Type | <planType> |
 
 Examples:
-  | planType   | memberType     | 
-  | MA         |  Individual         | 
+  | planType   | memberType    | option 		|
+  | MA         |  Individual   | Member Materials | 
      
      
 @radiobuttonmapdssrdgroup
@@ -94,11 +100,13 @@ Given registered UHC member for order plan materials with following attributes
 	| Plan Type    | <planType>   |
 	| Member Type  | <memberType> | 
 When the user views order materials in UHC site
-And the user validate radio button for MAPD and SSRD member in UHC site
+And the user selects an option from the orderp list in Redesign site
+	| Option | <option> |
+		| Plan Type | <planType> |
 
 Examples:
-  | planType   | memberType     | 
-  | MAPD       |  Group         |
+  | planType   | memberType     | option 		|
+  | MAPD       |  Group         | Welcome kit    |
   
 @US627227
 Scenario Outline:Verify Submit Order Button and Radio Dial Validations in order plan materials in UHC site
@@ -106,11 +114,13 @@ Given registered UHC member for order plan materials with following attributes
 	| Plan Type    | <planType>   |
 	| Member Type  | <memberType> | 
 When the user views order materials in UHC site
-And the user validate radio button for MA member in UHC site
+And the user selects an option from the orderp list in Redesign site
+	| Option | <option> |
+		| Plan Type | <planType> |
 
 Examples:
-  | planType   | memberType     | 
-  | MA         |  Individual    | 
+  | planType   | memberType     | option |
+  | MA         |  Individual    | Member Materials | 
   
 @radiobuttonmapdindi
 Scenario Outline:Verify order plan materials in UHC site for MAPD member
@@ -118,11 +128,13 @@ Given registered UHC member for order plan materials with following attributes
 	| Plan Type    | <planType>   |
 	| Member Type  | <memberType> | 
 When the user views order materials in UHC site
-And the user validate radio button for MAPD member in UHC site
+And the user selects an option from the orderp list in Redesign site
+	| Option | <option> |
+		| Plan Type | <planType> |
 
 Examples:
-  | planType   | memberType     | 
-  | MAPD       |  Individual    |
+  | planType   | memberType     | option |
+  | MAPD         |  Individual    | Welcome kit    |
   
   
 @radiobuttonvalidationmaandssup
@@ -131,12 +143,14 @@ Given registered UHC member for order plan materials with following attributes
 	| Plan Type    | <planType>   |
 	| Member Type  | <memberType> | 
 When the user views order materials in UHC site
-Then the user validate radio button and click on submit button for MA and SSUP member in UHC site
-And the user validate order additional material and click to add other order additional material in UHC site 
+And the user selects an option from the orderp list in Redesign site
+	| Option | <option> |
+		| Plan Type | <planType> |
+And the user validate order additional material and click to add other order additional material in Order Confirmation Page 
 
 Examples:
-  | planType   | memberType     | 
-  | MA         |  Group         |
+  | planType   | memberType    | option 		|
+  | MA         |  Group   | Member Materials | 
   
   
 @radiobuttonvalidationpdpgrp
@@ -145,12 +159,14 @@ Given registered UHC member for order plan materials with following attributes
 	| Plan Type    | <planType>   |
 	| Member Type  | <memberType> | 
 When the user views order materials in UHC site
-Then the user validate radio button and click on submit button for PDP member in UHC site
-And the user validate order additional material and click to add other order additional material in UHC site 
+And the user selects an option from the orderp list in Redesign site
+	| Option | <option> |
+		| Plan Type | <planType> |
+And the user validate order additional material and click to add other order additional material in Order Confirmation Page 
 
 Examples:
-  | planType   | memberType     | 
-  | PDP         |  Group         |
+  | planType   | memberType    | option 		|
+  | PDP         |  Group   | Welcome Guide | 
   
   
 @radiobuttonvalidationmapdandmaindi
@@ -159,12 +175,14 @@ Given registered UHC member for order plan materials with following attributes
 	| Plan Type    | <planType>   |
 	| Member Type  | <memberType> | 
 When the user views order materials in UHC site
-Then the user validate radio button and click on submit button for MAPD and MA member in UHC site
-And the user validate order additional material and click to add other order additional material in UHC site 
+And the user selects an option from the orderp list in Redesign site
+	| Option | <option> |
+		| Plan Type | <planType> |
+And the user validate order additional material and click to add other order additional material in Order Confirmation Page 
 
 Examples:
-  | planType   | memberType     | 
-  | MAPD       |  Individual         |
+  | planType   | memberType    | option 		|
+  | MAPD         |  Group   | Welcome kit | 
   
   
 @radiobuttonvalidationmapdandssrdgrp
@@ -173,12 +191,14 @@ Given registered UHC member for order plan materials with following attributes
 	| Plan Type    | <planType>   |
 	| Member Type  | <memberType> | 
 When the user views order materials in UHC site
-Then the user validate radio button and click on submit button for MAPD and SSRD member in UHC site
-And the user validate order additional material and click to add other order additional material in UHC site 
+And the user selects an option from the orderp list in Redesign site
+	| Option | <option> |
+		| Plan Type | <planType> |
+And the user validate order additional material and click to add other order additional material in Order Confirmation Page 
 
 Examples:
-  | planType   | memberType     | 
-  | MAPD       |  Group         |
+  | planType   | memberType    | option 		|
+  | MAPD         |  Group   | Welcome kit | 
 
   
  @PDPgroupComboValidateHeaderandTabs

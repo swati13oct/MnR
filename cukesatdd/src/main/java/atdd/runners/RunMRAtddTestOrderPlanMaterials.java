@@ -15,12 +15,8 @@ import cucumber.junit.Cucumber;
 @Cucumber.Options(glue = { "atdd.framework","acceptancetests.ordermaterials.ulayer" }, 
 		features = { "feature/ordermaterials/ulayer" }, 
 		format = {
-				"pretty", "html:reports/test-report","json:target/cucumber.json"}, tags ={"@MAPSOrdermaterials,@SHIPOrderMaterials,@ValidateHeaderTabs,@ValidateOrderMaterialOptions,@ValidateErrorMessage,@ValidateSHIPErrorMessage"})
-//@ValidateHeaderTabs,@ValidateErrorMessage,@ValidateSHIPErrorMessage
-//@comboConfirmationPage,@needhelpcomponent,@radiobuttonvalidationpdpindi
-
-//@MAPSOrdermaterials,@SHIPOrderMaterials,@ValidateHeaderTabs, @ValidateOrderMaterialOptions,@ValidateErrorMessage,@ValidateSHIPErrorMessage
-//@MAPSOrdermaterials,@SHIPOrderMaterials,@radiobuttonpdpind,@radiobuttonvalidationpdpindi,@comboConfirmationPage
+				"pretty", "html:reports/test-report","json:target/cucumber.json"}, tags ={"@MAPSOrdermaterials,@SHIPOrderMaterials,@ConfirmationPage,@ValidateHeaderTabs,@ValidateOrderMaterialOptions,@ValidateErrorMessage,@ValidateSHIPErrorMessage"})
+//@MAPSOrdermaterials,@SHIPOrderMaterials,@ConfirmationPage,@ValidateHeaderTabs,@ValidateOrderMaterialOptions,@ValidateErrorMessage,@ValidateSHIPErrorMessage
 public class RunMRAtddTestOrderPlanMaterials {
 	
 	

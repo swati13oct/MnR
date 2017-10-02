@@ -3,6 +3,7 @@
  */
 package pages.redesign;
 
+import java.util.NoSuchElementException;
 import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
@@ -72,7 +73,9 @@ public class OrderplanmaterialsPage extends UhcDriver {
 	@FindBy(xpath = "//p[contains(text(),'Replacement ID card')]")
 	private WebElement radioidLink;
 
-
+	@FindBy(xpath="//h3[contains(text(),'Technical Support') or contains(text(),'Plan Support')]/ancestor::div[@class='col-md-4']")
+	private WebElement needhelpcomponent;
+	
 	//@FindBy(id = "memberPlanList")
 	//private WebElement planField;
 
@@ -98,38 +101,60 @@ public class OrderplanmaterialsPage extends UhcDriver {
 	}
 	
 	@SuppressWarnings("deprecation")
-	public void navigatePlanTabs(String PlanType){
+	public boolean navigatePlanTabs(String PlanType){
 		
 		if (PlanType.contains("MA") || PlanType.contains("MAPD")) {
-		validate(MAPlanTab);
-			MAPlanTab.click();
-			Assert.assertTrue("Cant navigate to MA / MAPD Plan Tab", memberMaterialsfield.isDisplayed());
-			System.out.println("*************Displaying Medicare Advantage Plan Tab **********");
+			if (validate(MAPlanTab)){
+				MAPlanTab.click();
+				Assert.assertTrue("Cant navigate to MA / MAPD Plan Tab", memberMaterialsfield.isDisplayed());
+				System.out.println("*************Displaying Medicare Advantage Plan Tab **********");
+				return true;
+			}
 		}
 		
+/*		else if (PlanType.contains("SHIP")) {
+			if (validate(HIPplanTab)){
+				HIPplanTab.click();
+				Assert.assertTrue("Cant navigate to HIP Plan Tab", MemberIDcardField.isDisplayed());
+				System.out.println("*************Displaying SHIP - HIP Plan Tab **********");
+				return true;
+			}
+			else if (validate(MedSuppPlanTab)){
+				MedSuppPlanTab.click();
+				Assert.assertTrue("Cant navigate to Med Supp PlanTab Plan Tab", MemberIDcardField.isDisplayed());
+				System.out.println("*************Displaying SHIP - Med Supp Plan Tab Plan Tab **********");
+				return true;
+			}
+		}
+*/
 		else if (PlanType.contains("HIP")) {
-			validate(HIPplanTab);
-			HIPplanTab.click();
-			Assert.assertTrue("Cant navigate to HIP Plan Tab", MemberIDcardField.isDisplayed());
-			System.out.println("*************Displaying SHIP - HIP Plan Tab **********");
+			if (validate(HIPplanTab)){
+				HIPplanTab.click();
+				Assert.assertTrue("Cant navigate to HIP Plan Tab", MemberIDcardField.isDisplayed());
+				System.out.println("*************Displaying SHIP - HIP Plan Tab **********");
+				return true;
+			}
 			
 		}
 		else if (PlanType.contains("PDP")) {
-			validate(PDPPlanTab);
-			PDPPlanTab.click();
-			Assert.assertTrue("Cant navigate to PDP Plan Tab", memberMaterialsfield.isDisplayed());
-			System.out.println("*************Displaying PDP Plan Tab **********");
+			if (validate(PDPPlanTab)){
+				PDPPlanTab.click();
+				Assert.assertTrue("Cant navigate to PDP Plan Tab", memberMaterialsfield.isDisplayed());
+				System.out.println("*************Displaying PDP Plan Tab **********");
+				return true;
+			}
 			
 		}
 		else if (PlanType.contains("MedSupp")) {
-			validate(MedSuppPlanTab);
-			MedSuppPlanTab.click();
-			Assert.assertTrue("Cant navigate to Med Supp PlanTab Plan Tab", MemberIDcardField.isDisplayed());
-			System.out.println("*************Displaying SHIP - Med Supp Plan Tab Plan Tab **********");
+			if (validate(MedSuppPlanTab)){
+				MedSuppPlanTab.click();
+				Assert.assertTrue("Cant navigate to Med Supp PlanTab Plan Tab", MemberIDcardField.isDisplayed());
+				System.out.println("*************Displaying SHIP - Med Supp Plan Tab Plan Tab **********");
+				return true;
+			}
 		}
-		else{
-			System.out.println("Invalid Plan Type / Plan Type not found");
-		}	
+		System.out.println("@@@@@@@@@@@@ Invalid Plan Type / Plan Tab not found @@@@@@@@@@@@@@");
+		return false;
 	}
 	
 	@SuppressWarnings("deprecation")
@@ -291,10 +316,24 @@ public class OrderplanmaterialsPage extends UhcDriver {
 			return new PlanMaterialConfirmationPage(driver);
 		} 
 			return null;
-		
-		
 	}
 	
+	public OrderplanmaterialsPage verifyneedHelpcomponent(){
+		boolean present;
+		try{
+			validate(needhelpcomponent);
+			present=true;
+		}catch(NoSuchElementException e)
+		{
+			present=false;
+		}
+		if(present)
+		System.out.println("Able to find needhelp component");
+		else
+			System.out.println("No needhelp component is displayed");
+		return null;
+	}
+
 	
 	public String getOrderPlanMaterialsContent() {
 		return OrderPlanMaterialsSection.getText();

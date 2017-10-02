@@ -20,7 +20,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
 
-import pages.member.bluelayer.OrderplanmaterialsPage;
+import pages.redesign.OrderplanmaterialsPage;
 import pages.mypcp.SignInPage;
 import pages.member.bluelayer.ContactUsPage;
 import acceptancetests.atdd.data.CommonConstants;
@@ -53,7 +53,8 @@ public class BlueLayerHomePage extends UhcDriver {
 	
 	@FindBy(xpath = "//a[contains(text(), 'Go to Contact Us')]")
 	private WebElement GoToContactUsLnk;
-	@FindBy(linkText = "Go to Pharmacy Locator page")
+	
+	@FindBy(linkText = "Go to Pharmacy Search page")
 	private WebElement PharmacyLocatorLink;
 
 	
@@ -65,7 +66,7 @@ public class BlueLayerHomePage extends UhcDriver {
 	@FindBy(xpath = "//section[1]/div/div/div/a")
 	private WebElement addordermaterialLink;
 	
-	@FindBy(xpath="//a[contains(text(),'Go to Order plan materials')]")
+	@FindBy(linkText="Go to order-plan-materials-dashboard(Uhcm-Group) page")
 	private WebElement OrderPlanMaterialslnk;
 	
 	@FindBy(xpath="//h3[contains(text(),'Technical Support') or contains(text(),'Plan Support')]/ancestor::div[@class='col-md-4']")
@@ -123,13 +124,15 @@ public class BlueLayerHomePage extends UhcDriver {
 		}
 	}
 
-	public OrderplanmaterialsPage navigateToLinkOrderPlanMaterialsAarpPage() {
+	public OrderplanmaterialsPage navigateToLinkOrderPlanMaterialsPage() {
 		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+		CommonUtility.checkPageIsReady(driver);
 		OrderPlanMaterialslnk.click();
-		if(driver.getTitle().equalsIgnoreCase("Order Plan Materials")){
+		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+		CommonUtility.checkPageIsReady(driver);
+		if(driver.getTitle().equalsIgnoreCase("Order Plan Material")){
 			return new OrderplanmaterialsPage(driver);
 		}
-	
 		return null;
 	}
 
@@ -238,27 +241,6 @@ public class BlueLayerHomePage extends UhcDriver {
 		return accountHomeExpectedJson;
 	}
 
-	public OrderplanmaterialsPage navigateToOrderPlanMaterialsAarpPage() {
-
-		//myMenuLinkAarp.click();
-		
-		CommonUtility.checkPageIsReady(driver);
-		
-		OrderPlanMaterialslnk.click();
-		CommonUtility.checkPageIsReady(driver);
-		driver.manage().timeouts().implicitlyWait(1000, TimeUnit.SECONDS);
-		if (driver.findElement(By.xpath("//*[contains(text(), 'Order Plan Materials')]")).isDisplayed()){
-			return new OrderplanmaterialsPage(driver);
-
-		}
-
-/*		if (driver.getTitle().equalsIgnoreCase(
-				"AARP Medicare Plans | Order Plan Materials") || (driver.getTitle().equalsIgnoreCase("Order Plan Materials"))) {
-			return new OrderplanmaterialsPage(driver);
-		}
-*/		
-		return null;
-	}
 
 	public ContactUsPage navigatesToContactUsPage() {
 		
@@ -274,13 +256,7 @@ public class BlueLayerHomePage extends UhcDriver {
 		}
 	}
 
-	public OrderplanmaterialsPage navigateToValidateOrderConfirmationInAarpPage() {
-		driver.manage().timeouts().implicitlyWait(600, TimeUnit.SECONDS);
-		addordermaterialLink.click();
-		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
-		return null;
-	}
-	
+
 	public OrderplanmaterialsPage verifyneedHelpcomponent(){
 		boolean present;
 		try{
@@ -297,20 +273,5 @@ public class BlueLayerHomePage extends UhcDriver {
 		return null;
 	}
 	
-	public OrderplanmaterialsPage verifyHeaderTextandSubtext(){
-		boolean present;
-		try{
-			validate(orderplanHeadertxt);
-			present=true;
-		}catch(NoSuchElementException e)
-		{
-			present=false;
-		}
-		if(present)
-		System.out.println("@@@@@ Able to find order plan header text @@@@@");
-		else
-			System.out.println("order plan header text is not displayed");
-		return null;
-	}
 	
 }

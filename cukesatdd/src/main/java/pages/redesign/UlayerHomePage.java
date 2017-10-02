@@ -233,7 +233,7 @@ public class UlayerHomePage extends UhcDriver {
 		return accountHomeExpectedJson;
 	}
 
-	public OrderplanmaterialsPage navigateToOrderPlanMaterialsAarpPage() {
+	public OrderplanmaterialsPage navigateToOrderPlanMaterialsPage() {
 
 		//myMenuLinkAarp.click();
 		
