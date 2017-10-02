@@ -18,6 +18,6 @@ import cucumber.junit.Cucumber;
 		format = {
 				"pretty", "html:reports/test-report","json:target/cucumber.json"}, tags ={"@drugtransistion,@privacypolicy,@appeals,@udrugtrasition,@memberright,@seasonalflu,@termofuse,@medicaltherapy,@pharmacymail,@disenrollment,@medicationtherapy,@coverageappealspdp,@coverageappealsmapd,@preferedmailbenefit,@lowertierdruglearnmore"})
 public class RunMRAtddTestFormsandResources {
-
+//@drugtransistion,@privacypolicy,@appeals,@udrugtrasition,@memberright,@seasonalflu,@termofuse,@medicaltherapy,@pharmacymail,@disenrollment,@medicationtherapy,@coverageappealspdp,@coverageappealsmapd,@preferedmailbenefit,@lowertierdruglearnmore
 }
 

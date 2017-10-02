@@ -214,6 +214,19 @@ public class AccountHomePage extends UhcDriver {
 	@FindBy(xpath = "//*[@id='row2link2']/p/a")
 	private WebElement privacypolicyLink;
 	
+	@FindBy(xpath = "//area[@href='javascript:clWin()'][@alt = 'close']")
+	private WebElement FeedbackModal;
+
+	
+	@FindBy(xpath = "//*[@classname='gogreen_reminerbot']/following-sibling::a")
+	private WebElement GoGreenPopUp;
+
+	@FindBy(id = "emailOption1")
+	private WebElement EmailPopUp;
+	
+	@FindBy(xpath = "//*[@id='gogreenlogin_box']/div[4]/div/div/a")
+	private WebElement EmailPopupSaveChanges;
+	
 	@FindBy(xpath = "//a[2]/span['DOWNLOAD']")
 	private WebElement downloadLink;
 		
@@ -547,7 +560,29 @@ public class AccountHomePage extends UhcDriver {
 		accountHomeJson = jsonObject;
 		
 		System.out.println("accountHomeJson----->"+accountHomeJson);
+		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+		CommonUtility.checkPageIsReady(driver);
+		try{
+			FeedbackModal.click();
+		}
+		catch (Exception e) {
+		}
+		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 
+		try{
+			EmailPopUp.click();
+			EmailPopupSaveChanges.click();
+		}
+		catch (Exception e) {
+		}
+		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+		try{
+			closeGogreenPopup();
+		}
+		catch (Exception e) {
+		}
+		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+		CommonUtility.checkPageIsReady(driver);
 	}
 
 	public JSONObject getExpectedData(Map<String, JSONObject> expectedDataMap) {
@@ -855,6 +890,9 @@ public class AccountHomePage extends UhcDriver {
 
 	public FormsandresourcesPage navigateToPrivacyPolicyAarpPage() {
 		// TODO Auto-generated method stub
+		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+		CommonUtility.checkPageIsReady(driver);
+		
 		privacypolicyLink.click();	
 		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 		return null;
@@ -897,6 +935,7 @@ public class AccountHomePage extends UhcDriver {
 	}
 
 	public FormsandresourcesPage navigateToTermsOfUseAarpPage() {
+
 		termsofuseLink.click();	
 		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 		return null;

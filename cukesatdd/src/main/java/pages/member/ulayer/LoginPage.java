@@ -111,7 +111,7 @@ public class LoginPage extends UhcDriver {
 	public void openAndValidate() {
 		start(PAGE_URL);
 		validate(loginIn);
-
+		System.out.println("@@@@@@@@@  Test ENV and URL  :  "+PAGE_URL+"  @@@@@@@@@");
 	}
 
 	public JSONObject getBrowserCheck() {
