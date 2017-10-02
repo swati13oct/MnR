@@ -113,7 +113,7 @@ public class AccountHomePage extends UhcDriver {
 	private WebElement createPdfLink;
 	
 	//@FindBy(xpath = "html/body/div[2]/div[1]/p/a[2]")
-	@FindBy(xpath = "html/body/div[2]/div/div[1]/header/div/div/div/div/div/div/p/a[2]")	
+	@FindBy(xpath = "html/body/div[3]/div/div[1]/header/div/div/div/div/div/div/p/a[2]")	
 	private WebElement backToPreviousPage;
 	
 	@FindBy(xpath = "//span[contains(.,'Print temporary ID card')]")
@@ -214,7 +214,7 @@ public class AccountHomePage extends UhcDriver {
 	@FindBy(xpath = "//*[@id='row2link2']/p/a")
 	private WebElement privacypolicyLink;
 	
-	@FindBy(xpath = "html/body/div[2]/div/div/header/div/div/div/div/div/div/a/p")
+	@FindBy(xpath = "html/body/div[3]/div/div/header/div/div/div/div/div/div/a/p")
 	private WebElement backtopreviouspageLink;
 	
 	@FindBy(xpath = "//label[@for='member-materials']")
@@ -266,7 +266,7 @@ public class AccountHomePage extends UhcDriver {
 		super(driver);
 		PageFactory.initElements(driver, this);
 		
-//		openAndValidate();
+		//openAndValidate();
 	}
 
 	public String getMyPlans() {
@@ -415,13 +415,14 @@ public class AccountHomePage extends UhcDriver {
 	{
 		
 	}
-			System.out.println("title  "+driver.getTitle());
+	return new AccountHomePage(driver);
+/*			System.out.println("title  "+driver.getTitle());
 		if(driver.getTitle().equalsIgnoreCase("My Benefits & Coverage")){
 			return new AccountHomePage(driver);
 			}
 			return null;
 
-	}
+*/	}
 	
 	public AccountHomePage navigateToPCPContactUSPage(){
 		driver.navigate().to("https://www."+MRScenario.environment+"-mypcpmedicare.uhc.com/content/mypcp/guest/acc-contact-us.html");
@@ -1180,14 +1181,15 @@ public FormsandresourcesPage navigateToMydocumentUmsPage() {
 	}
 
 	public OrderplanmaterialsPage navigateToValidateOrderAdditionalMaterialPage() {
-		driver.manage().timeouts().implicitlyWait(600, TimeUnit.SECONDS);
+//		driver.manage().timeouts().implicitlyWait(600, TimeUnit.SECONDS);
 		addordermaterialLink.click();
-		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
-		return null;
+		driver.manage().timeouts().implicitlyWait(300, TimeUnit.SECONDS);
+		CommonUtility.checkPageIsReady(driver);
+		return new OrderplanmaterialsPage(driver);
 	}
 	
 	public AccountHomePage navigateToUHCDisclaimerPage(){
-		driver.navigate().to("https://member."+MRScenario.environment+"-uhcmedicaresolutions.uhc.com/content/uhcm/guest/newdisclaimers.html.html");
+		driver.navigate().to("https://member."+MRScenario.environment+"-uhcmedicaresolutions.uhc.com/content/uhcm/guest/newdisclaimers.html");
 	try{
 		Alert alert = driver.switchTo().alert();
 		alert.accept();

@@ -575,7 +575,7 @@ Examples:
 | MAPD     | Group    |
 | MA     | Group    |
 #| PDP      | Group    |
-| SSUP     | Group    |
+#| SSUP     | Group    |
 
 @hospital       
 Scenario Outline: Verify benefits and coverage in UMS site for mapd and ma non lis with hospital visits

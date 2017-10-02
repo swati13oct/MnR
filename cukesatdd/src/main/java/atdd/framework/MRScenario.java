@@ -866,15 +866,15 @@ public class MRScenario {
     	   
     	   								/****FIrefox Browser******/
            
-/*           if (null == webDriver) {
-                    File pathToBinary = new File("C:/Program Files (x86)/Mozilla Firefox/firefox.exe");
+ /*          if (null == webDriver) {
+                    File pathToBinary = new File("C:/Tools/FF/firefox.exe");
                     FirefoxBinary ffBinary = new FirefoxBinary(pathToBinary);
                     FirefoxProfile firefoxProfile = new FirefoxProfile();
                     webDriver = new FirefoxDriver(ffBinary, firefoxProfile);
                     webDriver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
             }
-*/    	   
-    	 
+    	   
+*/    	 
     	   										/****PhantomJS*******/
     	   
              String browser = (null == System.getProperty(CommonConstants.JENKINS_BROWSER)

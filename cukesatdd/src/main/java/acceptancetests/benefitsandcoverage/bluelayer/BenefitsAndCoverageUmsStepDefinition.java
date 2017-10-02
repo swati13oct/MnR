@@ -190,6 +190,10 @@ public class BenefitsAndCoverageUmsStepDefinition {
 			getLoginScenario().saveBean(PageConstants.ACCOUNT_HOME_PAGE,
 					accountHomePage);
 		}
+		else{
+			System.out.println("********** Account Home Page for Bluelayer member not displayed *************");
+			Assert.fail();
+		}
 
 
 	}

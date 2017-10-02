@@ -74,7 +74,7 @@ public class BenefitsCoveragePage extends UhcDriver {
 		String fileName = CommonConstants.BENEFITS_AND_COVERAGE_MAPD_LIS_NONUS_PAGE_DATA;
 		//benefitsAndCoverage = CommonUtility.readPageData(fileName,
 				//CommonConstants.PAGE_OBJECT_DIRECTORY_BLUELAYER_MEMBER);
-		openAndValidate();
+		//openAndValidate();
 	}
 
 	public JSONObject getExpectedData(Map<String, JSONObject> expectedDataMap) {
