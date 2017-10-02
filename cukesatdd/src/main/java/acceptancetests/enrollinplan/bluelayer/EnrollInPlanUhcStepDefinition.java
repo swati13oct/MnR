@@ -3,6 +3,7 @@ package acceptancetests.enrollinplan.bluelayer;
 import gherkin.formatter.model.DataTableRow;
 
 import java.io.File;
+import java.net.URI;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -10,8 +11,10 @@ import java.util.Map;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.junit.Assert;
+import org.openqa.selenium.By;
 import org.openqa.selenium.NoAlertPresentException;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.skyscreamer.jsonassert.JSONAssert;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -57,7 +60,7 @@ public class EnrollInPlanUhcStepDefinition {
                 WebDriver wd = getLoginScenario().getWebDriver();
 
                 AcquisitionHomePage aquisitionhomepage = new AcquisitionHomePage(wd);
-
+                wd.get("https://www.awe-test-a-uhcmedicaresolutions.uhc.com");
                 getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
                 getLoginScenario().saveBean(PageConstants.ACQUISITION_HOME_PAGE,
                                 aquisitionhomepage);
@@ -133,7 +136,28 @@ public class EnrollInPlanUhcStepDefinition {
                 VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
                                 .getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
                 plansummaryPage = plansummaryPage.viewPlanSummary(plantype);
-
+                WebDriver wd = getLoginScenario().getWebDriver();
+                List<WebElement> view2017Plans = wd.findElements(By.linkText("View 2017 Plans"));
+        		if(view2017Plans.size()>0){
+        			if(view2017Plans.get(0).isDisplayed()){
+        				view2017Plans.get(0).click();
+        				try {
+							Thread.sleep(2000);
+						} catch (InterruptedException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+        				
+        			}
+        		}
+        		
+        		
+        		try {
+					Thread.sleep(10000);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
                 if (plansummaryPage != null) {
                         getLoginScenario().saveBean(PageConstants.VPP_PLAN_SUMMARY_PAGE,
                                         plansummaryPage);
