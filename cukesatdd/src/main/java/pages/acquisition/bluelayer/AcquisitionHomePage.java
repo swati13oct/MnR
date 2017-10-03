@@ -1049,7 +1049,19 @@ public class AcquisitionHomePage extends GlobalWebElements {
 					}
 					return null;
 				}
-
+				
+				public VPPPlanSummaryPage navigateToVpp(String zipcode)
+				{
+					
+					sendkeys(zipCodeField, zipcode);
+					viewPlansButton.click();
+					
+					if (getTitle().equalsIgnoreCase(
+							"Our Medicare Plan Types | UnitedHealthcare®")) {
+						return new VPPPlanSummaryPage(driver);
+					}
+					return null;
+				}
 
 }
 

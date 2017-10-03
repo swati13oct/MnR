@@ -850,7 +850,7 @@ public class CommonConstants {
 	
 	public static final String DEVICE_VERSION = "DeviceVersion";
 
-	
+	public static final String YEAR_BUTTON_VPPPAGE = "yearBtnVppPageExists";
 	
 	
 	

@@ -1178,6 +1178,18 @@ public class AcquisitionHomePage extends GlobalWebElements {
 
 	}
 
+	public VPPPlanSummaryPage navigateToVpp(String zipcode)
+	{
+		sendkeys(zipCodeField, zipcode);
+		viewPlansButton.click();
+		
+		if (getTitle().equalsIgnoreCase(
+				"Our Medicare Plans | AARP® Medicare Plans From UnitedHealthcare®")) {
+			return new VPPPlanSummaryPage(driver);
+		}
+		return null;
+	}
+	
 	public Object pickatopic(String picktopic) {
 
 		selectSelectBoxIt.click();

@@ -175,10 +175,10 @@ public class VPPAarpPlanSummaryPage extends UhcDriver {
 
 		}
 		CommonUtility.checkPageIsReady(driver);
-		if (driver.getTitle().equalsIgnoreCase("Plan Details | AARP® Medicare Plans from UnitedHealthcare®")
+		/*if (driver.getTitle().equalsIgnoreCase("Plan Details | AARP® Medicare Plans from UnitedHealthcare®")
 				|| driver.getTitle().equalsIgnoreCase("Plan Detail")) {
 			return new PlanDetailsPage(driver,planType);
-		}
+		}*/
 
 		return null;
 	}

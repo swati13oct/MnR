@@ -7,22 +7,25 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.junit.Assert;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.FindBys;
 import org.openqa.selenium.support.PageFactory;
 
-import pages.mobile.acquisition.ulayer.VPPRequestSendEmailPage;
 import acceptancetests.atdd.data.CommonConstants;
 import acceptancetests.atdd.data.ElementData;
 import acceptancetests.atdd.data.PageData;
 import acceptancetests.atdd.util.CommonUtility;
 import atdd.framework.UhcDriver;
+import pages.acquisition.dce.ulayer.DrugCostEstimatorPage;
+import pages.mobile.acquisition.ulayer.VPPRequestSendEmailPage;
 
 /**
  * @author pjaising
@@ -76,6 +79,20 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	@FindBys(value = { @FindBy(xpath = "//div[@id='providerResultsContainer']/div") })
 	private List<WebElement> providerNameList;
 	
+	@FindBy(xpath = ".//*[@id='site-wrapper']/div[4]/div/div[1]/div/div/div/div/div[1]/div/div/div[1]/div[2]/div/div[2]/div[1]/div")
+	private WebElement viewPlans;
+	
+	@FindBy(xpath = ".//*[@id='site-wrapper']/div[4]/div/div/div/div/div/div/div[1]/div/div/div[1]/div[2]/div/div[2]/div[3]")
+	private WebElement viewPDPPlans;
+	
+	@FindBy(xpath = ".//*[@id='plan-list-1']/div/div[3]/div/div[1]/div[3]/div/div/span[3]")
+	private WebElement maChkboxMessage1;
+	
+	@FindBy(xpath = ".//*[@id='plan-list-1']/div/div[3]/div/div[2]/div[3]/div/div/span[3]")
+	private WebElement maChkboxMessage2;
+	
+	@FindBy(xpath = ".//*[@id='plan-list-1']/div/div[3]/div/div[3]/div[3]/div/div/span[3]")
+	private WebElement maChkboxMessage3;
 	
 	@FindBy(id = "allplanssise")
 	private WebElement allPlansSize;
@@ -195,24 +212,19 @@ public class VPPPlanSummaryPage extends UhcDriver {
 
 	}
 
-	public PlanDetailsPage navigateToPlanDetails(String planName,
-			String planType) {
-		
-		if (planType.equalsIgnoreCase("MA")
-				|| planType.equalsIgnoreCase("MAPD")) {
-			ElementData elementData = new ElementData("id", "viewDetailsMA");
-			WebElement element = getViewPlanDetailsElement(maPlanElement,
-					elementData, planName);
+	public PlanDetailsPage navigateToPlanDetails(String planName, String planType) {
+
+		if (planType.equalsIgnoreCase("MA") || planType.equalsIgnoreCase("MAPD")) {
+			ElementData elementData = new ElementData("id", "viewmoredetlinkmapd");
+			WebElement element = getViewPlanDetailsElement(maPlanElement, elementData, planName);
 			if (element != null) {
 				element.click();
 
 			}
 
 		} else if (planType.equalsIgnoreCase("PDP")) {
-			ElementData elementData = new ElementData("id", "viewDetails"
-					+ planType);
-			WebElement element = getViewPlanDetailsElement(pdpPlanElement,
-					elementData, planName);
+			ElementData elementData = new ElementData("id", "viewmoredetlinkpdp");
+			WebElement element = getViewPlanDetailsElement(pdpPlanElement, elementData, planName);
 			if (element != null) {
 				element.click();
 
@@ -220,9 +232,9 @@ public class VPPPlanSummaryPage extends UhcDriver {
 
 		}
 		CommonUtility.checkPageIsReady(driver);
-		if (driver.getTitle().equalsIgnoreCase("Plan Details | AARP® Medicare Plans from UnitedHealthcare®")
+		if (driver.getTitle().equalsIgnoreCase("Our Medicare Plans | AARP® Medicare Plans from UnitedHealthcare®")
 				|| driver.getTitle().equalsIgnoreCase("Plan Detail")) {
-			return new PlanDetailsPage(driver,planType);
+			return new PlanDetailsPage(driver);
 		}
 
 		return null;
@@ -748,7 +760,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		return true;
 
 	}
-	public PlanDetailsPage navigateToPlanDetails(String planName) {
+	/*public PlanDetailsPage navigateToPlanDetails(String planName) {
 
 	
 		if (planName.contains("HMO")) {
@@ -780,12 +792,23 @@ public class VPPPlanSummaryPage extends UhcDriver {
 			return new PlanDetailsPage(driver, planName);
 		}
 		return null;
-	}
+	}*/
 	
 	public VPPRequestSendEmailPage createVPPRequestSendEmailPage(){
 		return new VPPRequestSendEmailPage(driver);
 	}
 
+	public void clickonViewPlans() {
+		try {
+			Thread.sleep(5000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		viewPlans.click();
+		
+	}
+	
 	public boolean getSpecificPlanInfo(String planName) {
 		WebElement element = null;
 		if (planName.contains("HMO")) {
@@ -920,6 +943,35 @@ public class VPPPlanSummaryPage extends UhcDriver {
 			}
 
 		}
+	}
+	
+	public DrugCostEstimatorPage navigateToDCE(String plantype) {
+		try {
+			Thread.sleep(3000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		if(plantype.equals("MA")||plantype.equals("MAPD")){
+			viewPlans.click();
+			List<WebElement> view2017Plans = driver.findElements(By.id("maDCELink"));
+			view2017Plans.get(0).click();
+		}else{
+			viewPDPPlans.click();
+			List<WebElement> view2017PDPPlans = driver.findElements(By.id("pdpDrugCostEstimatorLink"));
+			view2017PDPPlans.get(0).click();
+			
+		}
+		try {
+			Thread.sleep(3000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		if(currentUrl().contains("/estimate-drug-costs.html#/drug-cost-estimator"))
+			return new DrugCostEstimatorPage(driver);
+		return null;
+		
 	}
 }
 

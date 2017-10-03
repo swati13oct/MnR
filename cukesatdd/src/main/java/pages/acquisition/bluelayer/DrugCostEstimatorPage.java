@@ -1,15 +1,12 @@
-package pages.acquisition.dce.ulayer;
+package pages.acquisition.bluelayer;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.junit.Assert;
-import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
-import org.openqa.selenium.NoAlertPresentException;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -1712,4 +1709,31 @@ public class DrugCostEstimatorPage extends UhcDriver {
 			return true;
 		return false;
 	}
+	
+	public boolean verifyPharmacyRetailExists(){
+		if(validate(pharmacy_retail_type))
+			return true;
+		return false;
+	}
+
+
+	public boolean verifyPharmacySaverExists() {
+		if(validate(rbPharmacySaver))
+			return true;
+		return false;
+	}
+	
+	public AcquisitionHomePage clickOnReturnLnk() {
+		returnLink.click();	
+		try {
+			Thread.sleep(3000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		if(currentUrl().contains("https://www.awe-test-a-uhcmedicaresolutions.uhc.com/"))
+			return new AcquisitionHomePage(driver);
+		return null;
+	}
+	
 }
