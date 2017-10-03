@@ -7,6 +7,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.junit.Assert;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -359,7 +360,7 @@ public class DrugCostEstimatorPage extends UhcDriver {
 	@FindBy(xpath = "//div[@id='total_drugsavings']/div[2]/a")
 	public WebElement editDrugListLink;
 	
-	@FindBy(xpath = ".//*[@id='generic-drug-switch-btn-0']")
+	@FindBy(id = "generic-drug-switch-btn-0")
 	private WebElement switchNowBtn;
 	
 	@FindBy(id="switchToGenericBtnId")
@@ -1274,7 +1275,8 @@ public class DrugCostEstimatorPage extends UhcDriver {
 		Thread.sleep(5000);
 		String brandedCost = costText.getText();
 		System.out.println(brandedCost);
-		switchNowBtn.click();
+		JavascriptExecutor js = (JavascriptExecutor)driver;
+		js.executeScript("arguments[0].click();", switchNowBtn);
 		Thread.sleep(8000);
 		updateBtn.click();
 		Thread.sleep(8000);
