@@ -1,6 +1,6 @@
 @fixedTestCaseTest
 @eob
-Feature:Tier-1.22-To test EOB flows under forms and resources in UMS site
+Feature:22-Tier-1.22-To test EOB flows under forms and resources in UMS site
 @medEOBblayer
 Scenario Outline:To verify Medical EOB for forms and resources flow in UMS site
 Given registered UMS with following details for EOB flow

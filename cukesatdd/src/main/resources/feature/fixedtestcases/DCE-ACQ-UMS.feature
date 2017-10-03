@@ -1,5 +1,5 @@
 @acq_drug_cost_estimator_blayer
-Feature:Tier-1.26-Drug Cost Estimator (DCE) - To test DCE flows on UMS acq site
+Feature:24-Tier-1.24-Drug Cost Estimator (DCE) - To test DCE flows on UMS acq site
 
 @acq_drug_cost_estimator_blayer_flow
 Scenario Outline: To verify DCE flow from Blayer home page

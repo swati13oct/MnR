@@ -1,6 +1,6 @@
 @agentAppointment
 @fixedTestCaseTest
-Feature:Tier-1.6-To test request an appointment with an agent flow in AARP site
+Feature:6-Tier-1.6-To test request an appointment with an agent flow in AARP site
 @ebrc-AARP
 Scenario Outline: Verify request an appointment with an agent flow in AARP site
 Given the user is on the AARP acquisition site landing page

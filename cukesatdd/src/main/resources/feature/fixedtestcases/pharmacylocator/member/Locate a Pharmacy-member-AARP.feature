@@ -1,6 +1,6 @@
 @fixedTestCaseTest
 @memberpharmacylocatorulayer
-Feature:Tier-1.19-To test Locate a Pharmacy tool in AARP site for all pharmacy types for default zipcode in AARP site
+Feature:19-Tier-1.19-To test Locate a Pharmacy tool in AARP site for all pharmacy types for default zipcode in AARP site
 Scenario Outline:To verify all available pharmacies for default zipcode in AARP site
 Given registered member to verify locate a pharmacy in AARP Site
 	| <planType> |

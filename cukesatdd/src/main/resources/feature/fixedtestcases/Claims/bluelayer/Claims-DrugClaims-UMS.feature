@@ -1,6 +1,6 @@
 @fixedTestCaseTest_work_in_progress
 @claims
-Feature:Tier1.1-To test the drug claims summary and details flow in UMS site
+Feature:1-Tier1.1-To test the drug claims summary and details flow in UMS site
 @drugClaimsBlayer
 Scenario Outline:Verify the drug claim summary and details for selected time period
 Given the user is on the UHC site login page

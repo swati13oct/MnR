@@ -1,6 +1,6 @@
 @fixedTestCaseTest
 @Registration
-Feature:Tier-1.8-To test registration flow in AARP site
+Feature:8-Tier-1.8-To test registration flow in AARP site
 Scenario Outline:To verify registration for federal member without perks in AARP site
 Given the user is on registration page of AARP site 
 	|	User Name	|	<userName>	|

@@ -1,7 +1,7 @@
 @fixedTestCaseTest
 @globalfooter
 @globalfooterAARP
-Feature:Tier-2.4-To test global footer links in AARP site
+Feature:28-Tier-2.4-To test global footer links in AARP site
 Scenario:To verify links displayed in the global footer of AARP site
 Given user is on acquisition home page of AARP Site
 When user accesses global footer of the AARP Medicare Plans home page 

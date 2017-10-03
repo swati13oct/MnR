@@ -1,6 +1,6 @@
 @fixedTestCaseTest
 @Registration
-Feature:Tier-1.7-To test registration flow in UMS site	
+Feature:7-Tier-1.7-To test registration flow in UMS site	
 Scenario Outline:To Verify registration for individual or group members in UMS site
 Given the user is on registration page of UMS site
 	|	User Name	|	<userName>	| 
