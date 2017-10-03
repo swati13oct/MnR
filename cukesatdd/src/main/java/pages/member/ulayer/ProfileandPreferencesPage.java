@@ -233,6 +233,20 @@ public class ProfileandPreferencesPage extends UhcDriver {
 	@FindBy(className = "atdd-goGreensubHeader")
 	private WebElement GoGreenText;
 
+	@FindBy(xpath = "/html/body/div[5]/div[1]/div[2]/div/div[2]/section/div/div[1]/div/h2")
+	private WebElement NeedhelpShip;
+
+	@FindBy(xpath = "/html/body/div[5]/div[1]/div[2]/div/div[2]/section/div/div[2]/div/div/div[1]/div/div/div/div/h3")
+	private WebElement TechnicalSupportShip;
+
+	@FindBy(xpath = "/html/body/div[5]/div[1]/div[2]/div/div[2]/section/div/div[2]/div/div/div[3]/div/div/div/div/h3")
+	private WebElement GeneralQuestionShip;
+
+	@FindBy(xpath = "/html/body/div[5]/div[1]/div[2]/div/div[2]/section/div/div[2]/div/div/div[4]/div/div/div/div/h3")
+	private WebElement ClaimsSupportShip;
+
+	@FindBy(linkText = "contact us")
+	private WebElement contactUslink;
 	public static final String Disclaimerlinkcontent_xpath = ".//*[@id='collapseDisclaimer']";
 
 	public PageData ProfileandPreferences;
@@ -735,6 +749,29 @@ public class ProfileandPreferencesPage extends UhcDriver {
 
 			Assert.assertTrue(GoGreenContentActual.equalsIgnoreCase(GoGreenContentExpected));
 		}
+	}
+	
+	public void validateneedhelpheaderShip() {
+		validateNew(NeedhelpShip);
+		validateNew(TechnicalSupportShip);
+		validateNew(GeneralQuestionShip);
+		validateNew(ClaimsSupportShip);
+	}
+
+	public void validateContactUsNeedHelp() {
+		validateNew(Seemorewaystext);
+		// TODO Auto-generated method stub
+	}
+
+	public ContactUsPage contactUslinkShip() {
+		validate(contactUslink);
+		contactUslink.click();
+		System.out.println("Title is " + getTitle());
+		if (getTitle().equalsIgnoreCase("AARP Medicare Plans | Contact Us")) {
+			return new ContactUsPage(driver);
+		}
+		return null;
+		// TODO Auto-generated method stub
 	}
 
 }

@@ -493,6 +493,31 @@ public class ProfileandPreferencesAARPStepDefinition {
 		ProfileandPreferencespage.validateGoGreenHeader();
 
 	}
+	@Then("^the user validates the need help section for ship")
+	public void uservalidatesneedhelpsectionShip() {
+		pages.member.ulayer.ProfileandPreferencesPage ProfileandPreferencespage = (pages.member.ulayer.ProfileandPreferencesPage) getLoginScenario()
+				.getBean(PageConstants.PROFILE_AND_PREFERENCES_PAGE);
+
+		ProfileandPreferencespage.validateneedhelpheaderShip();
+
+	}
+	@Then("^the user validates see more ways to contact us section for ship")
+	public void uservalidatesseeMoreWaysShip() {
+		pages.member.ulayer.ProfileandPreferencesPage ProfileandPreferencespage = (pages.member.ulayer.ProfileandPreferencesPage) getLoginScenario()
+				.getBean(PageConstants.PROFILE_AND_PREFERENCES_PAGE);
+
+		ProfileandPreferencespage.validateContactUsNeedHelp();
+
+	}
+	@Then("^the user validates on clicking contact us link it should route to contact us page for ship member")
+	public void uservalidatescontactus() {
+		pages.member.ulayer.ProfileandPreferencesPage ProfileandPreferencespage = (pages.member.ulayer.ProfileandPreferencesPage) getLoginScenario()
+				.getBean(PageConstants.PROFILE_AND_PREFERENCES_PAGE);
+
+
+		ProfileandPreferencespage.contactUslinkShip();
+	}
+	
 	
 	
 	
