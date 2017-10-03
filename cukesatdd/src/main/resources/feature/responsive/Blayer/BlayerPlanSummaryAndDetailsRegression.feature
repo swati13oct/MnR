@@ -239,7 +239,7 @@ Examples:
 		|90210  |Los Angeles County|MA       |AARP MedicareComplete SecureHorizons Plan 1 (HMO)  |
 		
 @US670704 @rightRail		@sprint4
-Scenario Outline: To validate plan count from portfolio page
+Scenario Outline: To validate email widget on plan details pages
 Given the user is on the vpp portfolio page
 Then the user performs plan search using zipcode
               | Zip Code |<zipCode>|
