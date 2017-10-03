@@ -124,12 +124,12 @@ Examples:
 		|33012  |Miami-Dade County   |snp       |								
 		
 @US657296 @sprint3
-Scenario Outline: To validate plan count from portfolio page 
+Scenario Outline: To validate enroll in plan popup
 Given the user is on the vpp portfolio page 
 Then the user performs plan search using zipcode 
 | Zip Code |<zipCode>|
 | County   |<county> |
-Then user validates plan count for all plan types on plan summary page in AARP
+#Then user validates plan count for all plan types on plan summary page in AARP
 Then the user navigates to the following plan type
 | PlanType | <planType> |
 And User validate Enroll now button is not displayed for SNP plans
@@ -155,7 +155,7 @@ And the user validates benefit table
   | Prescription Drugs   | <prescriptionDrug>| 
 Examples:
 |zipCode|county          |planType | planName                                            |monthlypremium | primarycare |  specialist       |referralRequired| prescriptionDrug |
-|33012 |Miami-Dade County| snp     |UnitedHealthcare Dual Complete RP (Regional PPO SNP) |  $29.10       |$0           |  20              | No             |  25  |
+|33012 |Miami-Dade County| snp     |UnitedHealthcare Dual Complete RP (Regional PPO SNP) |  $19.80       |$0           |  19              | No             |  25  |
 
 @US657296 @benefittablema
 Scenario Outline: To validate plan count from portfolio page

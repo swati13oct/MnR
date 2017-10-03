@@ -495,7 +495,7 @@ public ResponsivePlanSummaryUhc viewPlanSummary(String planType) {
 			System.out.println("inside MA");
 			//viewMaPlans.click();
 			viewMAPlans.click();
-		return new ResponsivePlanSummaryUhc(driver);
+		return new ResponsivePlanSummaryUhc(driver);		 
 			}else if(planType.equalsIgnoreCase("MS")){
 		           showMsPlans.click();
 		    if(driver.getTitle().equals("UnitedHealthcare Medicare Solutions | AARP Medicare Supplement Plans")){
@@ -1288,6 +1288,12 @@ public void comparePlanslnk(){
  				}*/
 				
 				public void validatePlanCount(String planType){
+					try {
+						Thread.sleep(5000);
+					} catch (InterruptedException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
 					List<WebElement> planCardNumber = driver.findElements(By.xpath("//div[@class='"+planType+"benefittable']"
 							+ "/parent::div/parent::div"));
 					 
@@ -1720,13 +1726,20 @@ public void comparePlanslnk(){
 			
             public ResponsivePlanSummaryUhc addDrug(String drugName){
                 try {
-                       Thread.sleep(5000);
+                       Thread.sleep(10000);
                 } catch (InterruptedException e1) {
                        // TODO Auto-generated catch block
                        e1.printStackTrace();
                 }
                 
-                driver.findElement(By.cssSelector("div#add-drug>section")).click();
+                //driver.findElement(By.cssSelector("div#add-drug>section")).click();
+                driver.findElement(By.xpath("//*[contains(text(),' +ADD A DRUG')]")).click();
+                try {
+                    Thread.sleep(3000);
+             } catch (InterruptedException e1) {
+                    // TODO Auto-generated catch block
+                    e1.printStackTrace();
+             }
                 driver.findElement(By.id("drug-search-input")).sendKeys(drugName);
                 
                 driver.findElement(By.id("drug-search-button")).click();
@@ -1766,7 +1779,7 @@ public void comparePlanslnk(){
                        // TODO Auto-generated catch block
                        e.printStackTrace();
                 }
-                driver.findElement(By.xpath("//button[contains(text(),'NEXT: VIEW COSTS')]")).click();
+                driver.findElement(By.xpath("//button[contains(text(),'NEXT:VIEW COSTS')]")).click();
                 try {
                        Thread.sleep(6000);
                 } catch (InterruptedException e) {
