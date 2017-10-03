@@ -165,7 +165,7 @@ public class AccountHomePage extends UhcDriver {
 	@FindBy(linkText = "Go to redesign benefits and coverage page")
 	private WebElement BnClink;
 
-	@FindBy(linkText = "Go to redesign my profile and preferences page")
+	@FindBy(linkText = "Go to profile page")
 	private WebElement ProfileandPrefLink;
 
 	private PageData myAccountHome;
@@ -650,7 +650,7 @@ public class AccountHomePage extends UhcDriver {
 		// driver.manage().timeouts().implicitlyWait(40, TimeUnit.SECONDS);
 		System.out.println(driver.getTitle());
 
-		if (driver.getTitle().equalsIgnoreCase("profileandpreferences")) {
+		if (driver.getTitle().equalsIgnoreCase("Profile")) {
 			 System.out.println("Pass");
 			return new ProfilePreferencesPage(driver);
 		}

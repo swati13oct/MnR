@@ -518,6 +518,51 @@ public class ProfileandPreferencesAARPStepDefinition {
 		ProfileandPreferencespage.contactUslinkShip();
 	}
 	
+	@Then("^the user validates the temporary address section")
+	public void tempaddress() {
+		pages.member.ulayer.ProfileandPreferencesPage ProfileandPreferencespage = (pages.member.ulayer.ProfileandPreferencesPage) getLoginScenario()
+				.getBean(PageConstants.PROFILE_AND_PREFERENCES_PAGE);
+
+		ProfileandPreferencespage.validatetempaddressElements();
+
+	}
+
+	@Then("^the user validates the fields and Buttons of temp address section")
+	public void UserClicksEdittempaddressSection() {
+		pages.member.ulayer.ProfileandPreferencesPage ProfileandPreferencespage = (pages.member.ulayer.ProfileandPreferencesPage) getLoginScenario()
+				.getBean(PageConstants.PROFILE_AND_PREFERENCES_PAGE);
+
+		ProfileandPreferencespage.validatetempaddressEditElements();
+
+	}
+
+	@Then("^the user checks the Edit Button on the top changes to Cancel Button")
+	public void UserChecksTopCancelButton() {
+		pages.member.ulayer.ProfileandPreferencesPage ProfileandPreferencespage = (pages.member.ulayer.ProfileandPreferencesPage) getLoginScenario()
+				.getBean(PageConstants.PROFILE_AND_PREFERENCES_PAGE);
+
+		ProfileandPreferencespage.validateTempAddressTopCancelElement();
+
+	}
+
+	@Then("^the user validates the functionality of save Button in Temporary adrress section")
+	public void UserValidatestempaddressSaveButton() {
+		pages.member.ulayer.ProfileandPreferencesPage ProfileandPreferencespage = (pages.member.ulayer.ProfileandPreferencesPage) getLoginScenario()
+				.getBean(PageConstants.PROFILE_AND_PREFERENCES_PAGE);
+
+		ProfileandPreferencespage.validatetempaddressSave();
+
+	}
+
+	@Then("^the user validates the functionality of Cancel Button In Temporary adrress section")
+	public void UserValidatestempaddressCancelButton() {
+		pages.member.ulayer.ProfileandPreferencesPage ProfileandPreferencespage = (pages.member.ulayer.ProfileandPreferencesPage) getLoginScenario()
+				.getBean(PageConstants.PROFILE_AND_PREFERENCES_PAGE);
+
+		ProfileandPreferencespage.validatetempaddressCancel();
+
+	}
+	
 	
 	
 	

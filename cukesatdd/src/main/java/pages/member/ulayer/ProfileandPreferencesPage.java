@@ -5,6 +5,7 @@ package pages.member.ulayer;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
@@ -20,6 +21,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.junit.Assert;
 
 import acceptancetests.atdd.data.CommonConstants;
@@ -247,6 +250,59 @@ public class ProfileandPreferencesPage extends UhcDriver {
 
 	@FindBy(linkText = "contact us")
 	private WebElement contactUslink;
+	
+	
+	@FindBy(xpath = "//*[@id='temporaryAddress']/div[1]/p")
+	private WebElement tempAddressHeader;
+
+	@FindBy(xpath = ".//*[@id='temporaryAddress']/div[2]/div[1]/div/div/a")
+	private WebElement tempEditButton;
+
+	@FindBy(id = "temporaryAddress")
+	private WebElement Edittemporaryaddressform;
+
+	@FindBy(id = "altStreet")
+	private WebElement StreetAddress;
+
+	@FindBy(id = "altStreet2")
+	private WebElement StreetAddress2;
+
+	@FindBy(id = "altCity")
+	private WebElement City;
+
+	@FindBy(id = "altState")
+	private WebElement State;
+
+	@FindBy(id = "altZip")
+	private WebElement Zip;
+
+	@FindBy(id = "startDateMM")
+	private WebElement startDateMM;
+
+	@FindBy(id = "startDateDD")
+	private WebElement startDateDD;
+
+	@FindBy(id = "startDateYYYY")
+	private WebElement startDateYr;
+
+	@FindBy(id = "endDateMM")
+	private WebElement endDateMM;
+
+	@FindBy(id = "endDateDD")
+	private WebElement endDateDD;
+
+	@FindBy(id = "endDateYYYY")
+	private WebElement endDateYYYY;
+
+	@FindBy(xpath = "//*[@id='address-1-form']/fieldset/div[7]/div/button/span")
+	private WebElement SaveButtontempAddress;
+
+	@FindBy(xpath = ".//*[@id='address-1-form']/fieldset/div[7]/div/a")
+	private WebElement CancelButtontempAddress;
+
+	@FindBy(xpath = ".//*[@id='temporaryAddress']/div[1]/a[2]")
+	private WebElement CancelButtontoptempAddress;
+
 	public static final String Disclaimerlinkcontent_xpath = ".//*[@id='collapseDisclaimer']";
 
 	public PageData ProfileandPreferences;
@@ -773,5 +829,78 @@ public class ProfileandPreferencesPage extends UhcDriver {
 		return null;
 		// TODO Auto-generated method stub
 	}
+	
+	public void validatetempaddressElements() {
+
+		validateNew(tempAddressHeader);
+		validateNew(tempEditButton);
+
+	}
+
+	public void validatetempaddressEditElements() {
+		// TODO Auto-generated method stub'
+		tempEditButton.click();
+		validateNew(Edittemporaryaddressform);
+		validateNew(StreetAddress2);
+		validateNew(City);
+		validateNew(State);
+		validateNew(Zip);
+		validateNew(startDateMM);
+		validateNew(startDateDD);
+		validateNew(startDateYr);
+		validateNew(endDateMM);
+		validateNew(endDateDD);
+		validateNew(endDateYYYY);
+		validateNew(SaveButtontempAddress);
+		validateNew(CancelButtontempAddress);
+		validateNew(CancelButtontoptempAddress);
+
+	}
+
+	public void validateTempAddressTopCancelElement() {
+		Assert.assertTrue(CancelButtontoptempAddress.getText().equalsIgnoreCase("CANCEL"));
+
+	}
+
+	public void validatetempaddressSave() {
+
+		HashMap<String, String> Address_det = read_excel("AddressDetails.xls", 0);
+		StreetAddress.clear();
+		StreetAddress.sendKeys(Address_det.get("Street_value"));
+		StreetAddress2.clear();
+		StreetAddress2.sendKeys(Address_det.get("StreetAddress2"));
+		City.clear();
+		City.sendKeys(Address_det.get("City"));
+		State.sendKeys(Address_det.get("State"));
+		Zip.clear();
+		Zip.sendKeys(Address_det.get("Zip"));
+		startDateMM.sendKeys(Address_det.get("startDateMM"));
+		startDateDD.sendKeys(Address_det.get("startDateDD"));
+		startDateYr.sendKeys(Address_det.get("StreetAddress2"));
+		endDateMM.sendKeys(Address_det.get("endDateMM"));
+		endDateDD.sendKeys(Address_det.get("endDateDD"));
+		endDateYYYY.sendKeys(Address_det.get("endDateYYYY"));
+		System.out.println("Clicking the save button");
+		SaveButtontempAddress.click();
+
+	}
+
+	public void validatetempaddressCancel() {
+		WebDriverWait wait = new WebDriverWait(driver, 10);
+		wait.until(ExpectedConditions.elementToBeClickable(tempEditButton));
+		System.out.println("temp button is being clicked");
+			tempEditButton.click();
+			
+			CancelButtontempAddress.click();
+			if (EveningTimePhoneTextField.isDisplayed()) {
+
+				Assert.fail();
+			}
+
+	}
+
+	
+	
+	
 
 }

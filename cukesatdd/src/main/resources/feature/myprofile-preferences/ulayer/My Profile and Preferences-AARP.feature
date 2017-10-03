@@ -299,6 +299,22 @@ Feature: To test My Profile & Preferences in AARP site
       #| MAPD     |
        | MA       |
       
+      
+  @Temporaryaddress
+  Scenario Outline: To verify Temporary adrress and Edit Functionality
+    Given registered member with following details for Profile and Preferences flow
+      | <planType> |
+    Then the user navigates to Profile and Preferences page
+    Then the user validates the temporary address section
+    Then the user validates the fields and Buttons of temp address section
+    Then the user checks the Edit Button on the top changes to Cancel Button
+    Then the user validates the functionality of save Button in Temporary adrress section
+    Then the user validates the functionality of Cancel Button In Temporary adrress section
+
+    Examples: 
+       | planType |
+      # | MAPD     |
+      | MA       |
      
       
       

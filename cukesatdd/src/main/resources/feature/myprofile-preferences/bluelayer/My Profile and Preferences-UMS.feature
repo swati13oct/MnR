@@ -269,7 +269,7 @@ Feature: To test My Profile & Preferences flow in UMS site
     Then the user validates the temporary address section
     Then the user validates the fields and Buttons of temp address section
     Then the user checks the Edit Button on the top changes to Cancel Button
-    #Then the user validates the functionality of save Button in Temporary adrress section
+    Then the user validates the functionality of save Button in Temporary adrress section
     Then the user validates the functionality of Cancel Button In Temporary adrress section
 
     Examples: 
@@ -297,4 +297,6 @@ Feature: To test My Profile & Preferences flow in UMS site
       | planType |
       | MAPD     |
       | MA       |
+    
+    
     

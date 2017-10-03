@@ -132,7 +132,7 @@ public class ProfileandPreferencesUMSStepDefinition {
 				.getBean(PageConstants.ProfilePreferencesPage);
 
 		if (ProfilePreferencesPage == null) {
-			System.out.println(" Variable is NULL");
+			System.out.println("Variable is NULL");
 		}
 		ProfilePreferencesPage.validatePlanNameMemberidNameAcountProfile();
 
