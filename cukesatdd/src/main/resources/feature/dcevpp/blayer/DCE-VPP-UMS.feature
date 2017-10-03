@@ -58,7 +58,7 @@ Scenario Outline: To test Preferred Retail pharmacy type is there for Walgreens 
 Given the user is on blayer medicare acq site landing page
 When I access the vpp page using below zipcode on ums site
 	| Zip Code    | <zipcode>  |
-And I access the DCE tool
+And I choose the 2017 plan and go to DCE page
 	|Plan Type | <plantype> |
 And I have added a drug to my drug list on ums site
 	|Drug|<drug>|

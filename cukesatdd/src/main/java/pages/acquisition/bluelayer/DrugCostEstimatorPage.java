@@ -1274,11 +1274,10 @@ public class DrugCostEstimatorPage extends UhcDriver {
 		Thread.sleep(5000);
 		String brandedCost = costText.getText();
 		System.out.println(brandedCost);
-		if(switchNowBtn.isDisplayed())
-			switchNowBtn.click();
-		Thread.sleep(3000);
+		switchNowBtn.click();
+		Thread.sleep(8000);
 		updateBtn.click();
-		Thread.sleep(6000);
+		Thread.sleep(8000);
 		String genericCost = costText.getText();System.out.println(genericCost);
 		if(brandedCost.equals(genericCost))
 			Assert.fail("Error in calculating costs after switching to generic");

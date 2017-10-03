@@ -50,6 +50,9 @@ public class AcquisitionHomePage extends GlobalWebElements {
 
 	@FindBy(id = "cta-zipcode")
 	private WebElement zipCodeField;
+	
+	@FindBy(css="a.toggle-plan-year.ng-binding")
+	private WebElement view2017Plans;
 
 	@FindBy(id = "zipcodebtn")
 	private WebElement viewPlansButton;

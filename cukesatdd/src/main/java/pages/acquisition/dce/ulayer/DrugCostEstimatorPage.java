@@ -362,7 +362,7 @@ public class DrugCostEstimatorPage extends UhcDriver {
 	@FindBy(xpath = "//div[@id='total_drugsavings']/div[2]/a")
 	public WebElement editDrugListLink;
 	
-	@FindBy(xpath = ".//*[@id='generic-drug-switch-btn-0']")
+	@FindBy(id = "generic-drug-switch-btn-0")
 	private WebElement switchNowBtn;
 	
 	@FindBy(id="switchToGenericBtnId")
@@ -1277,9 +1277,9 @@ public class DrugCostEstimatorPage extends UhcDriver {
 		Thread.sleep(5000);
 		String brandedCost = costText.getText();
 		System.out.println(brandedCost);
-		if(switchNowBtn.isDisplayed())
-			switchNowBtn.click();
-		Thread.sleep(3000);
+		Thread.sleep(4000);
+		switchNowBtn.click();
+		Thread.sleep(8000);
 		updateBtn.click();
 		Thread.sleep(6000);
 		String genericCost = costText.getText();System.out.println(genericCost);
