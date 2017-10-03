@@ -27,7 +27,7 @@ public class AddNewDrugModal extends UhcDriver {
 	public WebElement searchButton;
 
 
-	@FindBy(xpath = "//header[@class='add-drug-slide-header']/span[contains(text(),'ADD A NEW DRUG')]")
+	@FindBy(xpath = "//header[@class='add-drug-slide-header']/span[contains(text(),'Add a new drug')]")
 	public WebElement addNewDrugHeading;
 
 	@FindBy(xpath = "//a[text()='Cancel']")
@@ -94,7 +94,9 @@ public class AddNewDrugModal extends UhcDriver {
 		//drugsearchinput.click();
 		drugsearchinput.sendKeys(DrugName);
 		Thread.sleep(3000);
-		searchButton.click();     
+		searchButton.click();
+		waitforElement(continueButton);
+		continueButton.click();
 		//if (driver.getTitle().equalsIgnoreCase("ADD A NEW DRUG")) {
 			return new AddDrugDetails(driver);
 		//}
