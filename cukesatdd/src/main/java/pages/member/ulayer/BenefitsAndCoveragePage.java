@@ -71,7 +71,7 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 	@FindBy(className = "btn_repalceRider_atdd ")
 	private WebElement replacceRiderPopupButton;
 
-	@FindBy(xpath = "//span[contains(.,'keyboard_arrow_down')]")
+	@FindBy(xpath = "/html/body/div[5]/div/div/div[1]/div[3]/div/div/div/div/a")
 	private WebElement disclaimersLink;
 
 	@FindBy(xpath = "//a[contains(.,'contact us')]")
@@ -188,6 +188,33 @@ public class BenefitsAndCoveragePage extends UhcDriver {
     
     @FindBy(xpath = "//*[@id='planBenefitsApp']/section/div/div[2]/div[4]/span[2]")
     private WebElement Monthly_Premium;
+    
+    @FindBy(className = "atdd-need-help")
+	private WebElement NeedhelpShip;
+
+	@FindBy(className = "atdd-tech-header")
+	private WebElement TechnicalSupportShip;
+
+	@FindBy(className = "atdd-general-header")
+	private WebElement GeneralQuestionShip;
+
+	@FindBy(className = "atdd-claims-header")
+	private WebElement ClaimsSupportShip;
+
+	@FindBy(linkText = "contact us")
+	private WebElement contactUslink;
+	
+	@FindBy(className = "margin-none")
+	private WebElement Seemorewaystext;
+	
+    @FindBy(xpath = ".//*[@id='plan_benefit_documents']/section/div/div[2]/div/form/span[1]")
+    private WebElement view_label;
+    
+    @FindBy(xpath = ".//*[@id='plan_benefit_documents']/section/div/div[2]/div/form/span[2]")
+    private WebElement documents_label;
+
+	
+	
 	public static final String learnmorelinktiertext_xpath = ".//*[@id='collapseTiers']";
 	public static final String learnmorelinkstagetext_xpath = ".//*[@id='collapseStages']";
 
@@ -393,7 +420,7 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 
 	public void clickOnDisclaimers() {
 		// TODO Auto-generated method stub
-		validate(disclaimersLink);
+		validateNew(disclaimersLink);
 		disclaimersLink.click();
 		try {
 			Thread.sleep(10000);
@@ -406,6 +433,8 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 	public ContactUsPage navigatesToContactUsPage() {
 
 		contactUsLink.click();
+		
+		System.out.println("title is "+getTitle());
 		if (getTitle().equalsIgnoreCase("AARP Medicare Plans | Contact Us")) {
 			return new ContactUsPage(driver);
 		}
@@ -425,16 +454,18 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 	}
 
 	public void validate_langdropdown_first_selection() {
-		// WebElement langdropdown;
-		validate(langdropdown);
-		if (langdropdown.isDisplayed()) {
-			Select langdropdwn = new Select(langdropdown);
-			if (langdropdwn.getFirstSelectedOption().getText().equals("ENGLISH")) {
-				Assert.assertTrue(true);
-			} else
-				Assert.fail("Issue in English selection");
-		} else
-			Assert.fail("Plan year dropdown not displayed");
+		if (langdropdown.isDisplayed())
+		{
+		    Select langdropdwn = new Select(langdropdown);
+		if (langdropdwn.getFirstSelectedOption().getText().equals("ENGLISH"))
+		{
+		Assert.assertTrue(true);
+		}
+		else
+		Assert.fail("Issue in English selection");
+		}
+		else
+		Assert.fail("Plan year dropdown not displayed");
 
 	}
 
@@ -681,6 +712,38 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 	validateNew(Monthly_Premium);
 
 		
+	}
+	
+	public void validateneedhelpheaderShip() {
+		validateNew(NeedhelpShip);
+		validateNew(TechnicalSupportShip);
+		validateNew(GeneralQuestionShip);
+		validateNew(ClaimsSupportShip);
+	}
+
+	public void validateContactUsNeedHelp() {
+		validateNew(Seemorewaystext);
+
+	}
+
+	public void  contactUslinkShip() {
+		validate(contactUslink);
+		contactUslink.click();
+		System.out.println("Title is " + getTitle());
+		
+			Assert.assertTrue(getTitle().equalsIgnoreCase("Contact Us"));
+		
+	
+		
+	}
+	public boolean getview_label() 
+	{
+	 return validateNew(view_label);
+	 }
+
+	public boolean getdocuments_label() 
+	{
+	 return validateNew(documents_label);
 	}
 
 }

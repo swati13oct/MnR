@@ -951,33 +951,9 @@ Feature: To test plan benefits and Coverage on AARP site for Federal members
     Examples: 
       | planType | copayCategory |
       | MAPD     | NON LIS       |
+      
+      
 
-  #Data Used: DentalPlatinumLis2
-  @needHelpjenkins
-  Scenario Outline: Verify Need Help section is in place on Benefits and Coverage page
-    Given registered member with following details logins in the member portal 
-      | Plan Type      | <planType>      |
-      | Copay Category | <copayCategory> |
-    When the user navigates to Benefits and coverage page
-    And the user validates the content on benefits and coverage page
-
-    Examples: 
-      | planType | copayCategory |
-      | MAPD     | NON LIS       |
-
-  #Data Used: DentalPlatinumLis2
-  @disclaimers
-  Scenario Outline: Verify Disclaimers section is in place on Benefits and Coverage page
-    Given registered member with following details logins in the member portal 
-      | Plan Type      | <planType>      |
-      | Copay Category | <copayCategory> |
-    When the user navigates to Benefits and coverage page
-    And the user clicks on Disclaimers link
-    And the user validates the content on benefits and coverage page
-
-    Examples: 
-      | planType | copayCategory |
-      | MAPD     | NON LIS       |
 
   @needHelpContactUs
   Scenario Outline: Verify Need Help section is in place on Benefits and Coverage page
@@ -1085,3 +1061,41 @@ Feature: To test plan benefits and Coverage on AARP site for Federal members
     Examples: 
       | planType | memberType |
       | MAPD     | LIS        |
+      
+      
+  @needHelpShip
+  Scenario Outline: Verify Need Help section is in place on Benefits and Coverage page
+    Given registered member with following details logins in the member portal 
+      | Plan Type      | <planType>      |
+    When the user navigates to Benefits and coverage page
+    And  the user validates the need help section for ship
+    And the user validates see more ways to contact us section for ship
+   # And the user validates the disclaimer link
+    And the user validates on clicking contact us link it should route to contact us page for ship member
+    
+
+    Examples: 
+      | planType | 
+      | MA    |
+      
+      
+
+@validatePdfsectionindividual
+    Scenario Outline: Verify PDF section is in place on Benefits and Coverage page
+    Given registered member with following details logins in the member portal 
+      | Plan Type      | <planType>  |
+      | Member Type    | <memberType>|
+      | Copay Category | <copayCategory>|
+    Then the user navigates to Benefits and coverage page
+    And the user validates view and document label
+    And the user validates the language dropdown and the value displayed by default and selects new value in dropdown successfully
+ 
+     Examples:
+      
+      | planType|  memberType  | copayCategory |
+      | MAPD    |  Individual  |  NON LIS      | 
+     # | MA      |  Individual  |  LIS 1        |
+      #| PDP     |  Individual  |  NON LIS      |
+      
+      
+

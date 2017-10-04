@@ -849,7 +849,7 @@ Examples:
     Then the user navigates to Benefits and coverage page
     And the user validates the content on benefits and coverage page
     And the user validates view and document label
-    And the user validates the language dropdown and the value displayed by default and selects new value in dropdown successfully$")
+    And the user validates the language dropdown and the value displayed by default and selects new value in dropdown successfully
  
      Examples:
       

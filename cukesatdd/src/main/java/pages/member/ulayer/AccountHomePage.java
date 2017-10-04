@@ -189,7 +189,7 @@ public class AccountHomePage extends UhcDriver {
 	@FindBy(xpath = "//*[@id='secureMessagingApp']/a")
 	private WebElement envelopeId;
 	
-	@FindBy(linkText = "Go to redesign benefits and coverage page")
+	@FindBy(linkText = "Go to benefits and coverage page")
 	private WebElement BnClink;
 	
 	@FindBy(linkText = "Go to benefits and coverage page page")
@@ -768,7 +768,7 @@ public FormsandresourcesPage navigateToMydocumentAarpPage() {
 		}
 		//driver.manage().timeouts().implicitlyWait(40, TimeUnit.SECONDS);
 		System.out.println(driver.getTitle());
-	 if(driver.getTitle().equalsIgnoreCase("Benefits And Coverage Page")){
+	 if(driver.getTitle().equalsIgnoreCase("Benefits Overview")){
 	        return new BenefitsAndCoveragePage(driver);
 		}
 		return null;
@@ -782,7 +782,7 @@ public FormsandresourcesPage navigateToMydocumentAarpPage() {
 			driver.navigate().to(PAGE_URL);
 			BnClink.click();
 			System.out.println("On the page :" + driver.getTitle());
-			if(driver.getTitle().equalsIgnoreCase("Benefits And Coverage Page Redesign")){
+			if(driver.getTitle().equalsIgnoreCase("Benefits Overview")){
 			        return new BenefitsAndCoveragePage(driver);
 			}
 			return null;

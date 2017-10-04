@@ -26,6 +26,7 @@ import pages.member.ulayer.BenefitsAndCoveragePage;
 import pages.member.ulayer.ContactUsPage;
 import pages.member.ulayer.FormsandresourcesPage;
 import pages.member.ulayer.LoginPage;
+import pages.member.ulayer.LoginPage2;
 import pages.member.ulayer.PlanBenefitsCoveragePage;
 import acceptancetests.atdd.data.CommonConstants;
 import acceptancetests.atdd.data.member.PageConstants;
@@ -59,7 +60,7 @@ public class PlanBenefitsAndCoverageAarpStepDefinition {
 		return loginScenario;
 	}
 
-	@Given("^registered AMP with following details for plan benefits and coverage flow in AARP site$")
+	@Given("^registered member with following details logins in the member portal$")
 	public void login_with_member(DataTable memberAttributes) {
 
 		/* Reading the given attribute from feature file */
@@ -67,7 +68,8 @@ public class PlanBenefitsAndCoverageAarpStepDefinition {
 		Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
 		for (int i = 0; i < memberAttributesRow.size(); i++) {
 
-			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0), memberAttributesRow.get(i).getCells().get(1));
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+					memberAttributesRow.get(i).getCells().get(1));
 		}
 
 		Set<String> memberAttributesKeySet = memberAttributesMap.keySet();
@@ -90,8 +92,8 @@ public class PlanBenefitsAndCoverageAarpStepDefinition {
 			System.out.println("Member Type data could not be setup !!!");
 			Assert.fail("unable to find a " + desiredAttributes + " member");
 		} else {
-			this.userName=userName = loginCreds.get("user");
-			pwd = loginCreds.get("pwd");			
+			this.userName = userName = loginCreds.get("user");
+			pwd = loginCreds.get("pwd");
 			System.out.println("User is..." + userName);
 			System.out.println("Password is..." + pwd);
 			getLoginScenario().saveBean(LoginCommonConstants.USERNAME, userName);
@@ -99,30 +101,35 @@ public class PlanBenefitsAndCoverageAarpStepDefinition {
 		}
 
 		WebDriver wd = getLoginScenario().getWebDriver();
-		//wd.manage().window().maximize();
-		LoginPage loginPage = new LoginPage(wd);
-		AccountHomePage accountHomePage = (AccountHomePage) loginPage.loginWith(userName, pwd);
-		JSONObject accountHomeActualJson = null;
 
-		/*Get expected data*/
-		Map<String,JSONObject> expectedDataMap = loginScenario.getExpectedJson(userName);
-		JSONObject accountHomeExpectedJson = accountHomePage.getExpectedData(expectedDataMap);
+		LoginPage2 loginPage = new LoginPage2(wd);
+		AccountHomePage accountHomePage = (AccountHomePage) loginPage.loginWith(userName, pwd);
 
 		if (accountHomePage != null) {
 			getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
-			getLoginScenario().saveBean(PageConstants.ACCOUNT_HOME_PAGE,accountHomePage);
-			Assert.assertTrue(true);
-			accountHomeActualJson = accountHomePage.accountHomeJson;
+			getLoginScenario().saveBean(PageConstants.ACCOUNT_HOME_PAGE, accountHomePage);
 		}
+		// JSONObject accountHomeActualJson = null;
 
-		try {
-			JSONAssert.assertEquals(accountHomeExpectedJson,accountHomeActualJson, true);
-		} catch (JSONException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
-		getLoginScenario().saveBean(CommonConstants.EXPECTED_DATA_MAP,expectedDataMap);
+		/* Get expected data */
+		/*
+		 * Map<String,JSONObject> expectedDataMap =
+		 * loginScenario.getExpectedJson(userName); JSONObject
+		 * accountHomeExpectedJson =
+		 * accountHomePage.getExpectedData(expectedDataMap);
+		 * 
+		 * if (accountHomePage != null) {
+		 * 
+		 * accountHomePage); Assert.assertTrue(true); accountHomeActualJson =
+		 * accountHomePage.accountHomeJson; }
+		 * 
+		 * try { JSONAssert.assertEquals(accountHomeExpectedJson,
+		 * accountHomeActualJson, true); } catch (JSONException e) { // TODO
+		 * Auto-generated catch block e.printStackTrace(); }
+		 * 
+		 * getLoginScenario().saveBean(CommonConstants.EXPECTED_DATA_MAP,
+		 * expectedDataMap);
+		 */
 
 	}
 	
@@ -252,21 +259,38 @@ public class PlanBenefitsAndCoverageAarpStepDefinition {
 
 	}
 
-	@When("^the user navigates to plan benefits and coverage in AARP site$")
+	@When("^the user navigates to Benefits and coverage page$")
 	public void views_benefits_and_Coverage() {
-		Map<String, JSONObject> expectedDataMap = (Map<String, JSONObject>) getLoginScenario().getBean(
-				CommonConstants.EXPECTED_DATA_MAP);
 		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstants.ACCOUNT_HOME_PAGE);
-		PlanBenefitsCoveragePage bncPage = accountHomePage.navigateToBnC();
-		JSONObject benefitsExpectedJson = bncPage.getExpectedData(expectedDataMap);
-		getLoginScenario().saveBean(PlanBenefitsAndCoverageCommonConstants.PLAN_BENEFITS_EXPECTED, benefitsExpectedJson);
-		JSONObject benefitsActualJson = bncPage.planBenefitsCoverageJson;
-		System.out.println("benefitsExpectedJson---->" + benefitsExpectedJson);
-		System.out.println("benefitsActualJson---->" + benefitsActualJson);
-		getLoginScenario().saveBean(PlanBenefitsAndCoverageCommonConstants.PLAN_BENEFITS_ACTUAL, benefitsActualJson);
-		getLoginScenario().saveBean(PageConstants.BENEFITS_AND_COVERAGE_PAGE, bncPage);
+		BenefitsAndCoveragePage bncPage = accountHomePage.navigatesToBandCpage();
 
-		getLoginScenario().saveBean(PageConstants.BENEFITS_AND_COVERAGE_PAGE, bncPage);
+		if (bncPage != null) {
+	
+			getLoginScenario().saveBean(PageConstants.BENEFITS_AND_COVERAGE_PAGE, bncPage);
+		}
+		
+		if (bncPage == null)
+		{
+			System.out.println(" Variable is NULL" );
+		}
+
+		/*if (bncPage != null) {
+			// Get actual data
+			JSONObject actualJsonObj = bncPage.benefitsandcoverageJson;
+			loginScenario.saveBean(PlanBenefitsAndCoverageCommonConstants.BENEFITS_AND_COVERAGE_ACTUAL, actualJsonObj);
+			getLoginScenario().saveBean(PageConstants.BENEFITS_COVERAGE_PAGE, bncPage);
+			System.out.println("Benefits and coverage actual ==============>" + actualJsonObj.toString());
+			// Get expected data
+			String fileName = this.userName;
+			String directory = CommonConstants.BENEFITS_AND_COVERAGE_PAGE_DIRECTORY;
+			JSONObject benefitsandcoverageExectedJson = MRScenario.readExpectedJson(fileName, directory);
+			loginScenario.saveBean(PlanBenefitsAndCoverageCommonConstants.BENEFITS_AND_COVERAGE_EXPECTED,
+					benefitsandcoverageExectedJson);
+			System.out.println(
+					"Benefits and coverage expected ==============>" + benefitsandcoverageExectedJson.toString());
+		}*/
+		
+	
 
 	}
 
@@ -533,13 +557,7 @@ public class PlanBenefitsAndCoverageAarpStepDefinition {
 				PageConstants.BENEFITS_COVERAGE_PAGE);
 		benefitsCoveragePage.validateReplaceRiderPopup();
 	}
-	
-	@Then("^the user clicks on Disclaimers link$")
-	public void the_user_clicks_on_Disclaimers_link() {
-		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario().getBean(
-				PageConstants.BENEFITS_COVERAGE_PAGE);
-		benefitsCoveragePage.clickOnDisclaimers();
-	}
+
 
 	@When("^the user navigates to contact us page in AARP site$")
 	public void the_user_navigates_to_contact_us_page_in_AARP_site() {
@@ -611,24 +629,7 @@ public class PlanBenefitsAndCoverageAarpStepDefinition {
 				PageConstants.BENEFITS_COVERAGE_PAGE);
 		benefitsCoveragePage.validatelabels();
 	}
-	
-	@And("^the user validates the language dropdown and the value displayed by default$")
-	public void validate_languagedropdown(DataTable givenAttributes)
-	{
-		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario().getBean(
-				PageConstants.BENEFITS_COVERAGE_PAGE);
-		benefitsCoveragePage.validate_langdropdown_first_selection();
-		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
-		Map<String, String> memberAttributesMap = new HashMap<String, String>();
-		for (int i = 0; i < memberAttributesRow.size(); i++) {
 
-			memberAttributesMap.put(memberAttributesRow.get(i).getCells()
-					.get(0), memberAttributesRow.get(i).getCells().get(1));
-		}
-		String language = memberAttributesMap.get("Language");
-		getLoginScenario().saveBean(PlanBenefitsAndCoverageCommonConstants.Language,language);
-		benefitsCoveragePage.validate_langdropdown_select(language);
-	}
 	@And("^the user validates the Vas section on benefits and coverage page$")
 	public void validate_VAS_section()
 	{
@@ -787,4 +788,74 @@ public class PlanBenefitsAndCoverageAarpStepDefinition {
 		wd.quit();
 	}*/
 	
+	
+	@And("the user validates plan overview section")
+	public void user_validate_planOverview() {
+		BenefitsAndCoveragePage benefitsnCoveragepage = (BenefitsAndCoveragePage) getLoginScenario()
+				.getBean(PageConstants.BENEFITS_AND_COVERAGE_PAGE);
+
+		benefitsnCoveragepage.validatePlanOverview();
+	}
+	@Then("^the user validates the need help section for ship")
+	public void uservalidatesneedhelpsectionShip() {
+		BenefitsAndCoveragePage benefitsnCoveragepage = (BenefitsAndCoveragePage) getLoginScenario()
+				.getBean(PageConstants.BENEFITS_AND_COVERAGE_PAGE);
+
+		benefitsnCoveragepage.validateneedhelpheaderShip();
+
+	}
+	@Then("^the user validates see more ways to contact us section for ship")
+	public void uservalidatesseeMoreWaysShip() {
+		BenefitsAndCoveragePage benefitsnCoveragepage = (BenefitsAndCoveragePage) getLoginScenario()
+				.getBean(PageConstants.BENEFITS_AND_COVERAGE_PAGE);
+
+		benefitsnCoveragepage.validateContactUsNeedHelp();
+
+	}
+	@Then("^the user validates on clicking contact us link it should route to contact us page for ship member")
+	public void uservalidatescontactus() {
+		BenefitsAndCoveragePage benefitsnCoveragepage = (BenefitsAndCoveragePage) getLoginScenario()
+				.getBean(PageConstants.BENEFITS_AND_COVERAGE_PAGE);
+
+		benefitsnCoveragepage.contactUslinkShip();
+	}
+
+	@Then("^the user validates the disclaimer link$")
+	public void the_user_clicks_on_Disclaimers_link() {
+		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario().getBean(
+				PageConstants.BENEFITS_COVERAGE_PAGE);
+		benefitsCoveragePage.clickOnDisclaimers();
+	}
+	
+	
+	
+	@And("^the user validates view and document label$")
+	public void user_validates_view_and_document_label() {
+		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario()
+				.getBean(PageConstants.BENEFITS_COVERAGE_PAGE);
+
+		benefitsCoveragePage.getdocuments_label();
+		benefitsCoveragePage.getview_label();
+
+	}
+
+	@And("^the user validates the language dropdown and the value displayed by default and selects new value in dropdown successfully$")
+	public void validate_languagedropdown(DataTable givenAttributes)
+	{
+		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario().getBean(
+				PageConstants.BENEFITS_COVERAGE_PAGE);
+		benefitsCoveragePage.validate_langdropdown_first_selection();
+		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells()
+					.get(0), memberAttributesRow.get(i).getCells().get(1));
+		}
+		String language = memberAttributesMap.get("Language");
+		getLoginScenario().saveBean(PlanBenefitsAndCoverageCommonConstants.Language,language);
+		benefitsCoveragePage.validate_langdropdown_select(language);
+	}
+
+
 	}
