@@ -7,4 +7,4 @@ Given load the AARP Ulayer medicare acquisition site page url
 
 Examples:
 |url|
-|http://awe-stage-aarpmedicareplans.uhc.com//|
+|http://www.ci-aarpmedicareplans.uhc.com//|

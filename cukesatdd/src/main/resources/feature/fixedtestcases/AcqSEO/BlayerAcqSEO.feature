@@ -7,7 +7,7 @@ Given load the UMS Blayer medicare solutions acquisition site page url
 
 Examples:
 |url|
-|http://awe-stage-uhcmedicaresolutions.uhc.com//|
+|http://www.ci-uhcmedicaresolutions.uhc.com//|
 
 
 
