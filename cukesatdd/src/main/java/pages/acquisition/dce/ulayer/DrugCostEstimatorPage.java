@@ -398,7 +398,7 @@ public class DrugCostEstimatorPage extends UhcDriver {
 		addDrug.click();
 		System.out.println("Current Page title :: " + driver.getTitle());
 
-		if (driver.getTitle().equalsIgnoreCase("estimate-drug-costs")) {
+		if (driver.getTitle().equalsIgnoreCase("estimate-drug-costs") || driver.getTitle().equalsIgnoreCase("Medicare Plan Drug Costs | AARP® Medicare Plans from UnitedHealthcare®")) {
 
 			return new AddNewDrugModal(driver);
 		}

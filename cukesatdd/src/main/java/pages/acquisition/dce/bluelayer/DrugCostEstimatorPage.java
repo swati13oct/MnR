@@ -416,7 +416,7 @@ public class DrugCostEstimatorPage extends UhcDriver {
 		addDrug.click();
 		System.out.println("Current Page title :: " + driver.getTitle());
 
-		if (driver.getTitle().equalsIgnoreCase("estimate-drug-costs")) {
+		if (driver.getTitle().equalsIgnoreCase("estimate-drug-costs") || driver.getTitle().equalsIgnoreCase("Medicare Plan Drug Costs | AARP® Medicare Plans from UnitedHealthcare®")) {
 
 			return new AddNewDrugModal(driver);
 		}
@@ -916,6 +916,7 @@ public class DrugCostEstimatorPage extends UhcDriver {
 public void navigateFromStep2ToStep3() throws InterruptedException {
 		WebElement nextViewCosts = driver.findElement(By.xpath(".//*[@id='drugspharmacy']/div[3]/div[1]/div/button[2]"));
 		waitforElement(nextViewCosts);
+		Thread.sleep(1000);
 		nextViewCosts.click();
 		Thread.sleep(10000);
 	}

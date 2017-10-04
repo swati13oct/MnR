@@ -5,7 +5,9 @@ import java.util.List;
 import java.util.Map;
 
 import org.junit.Assert;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import acceptancetests.atdd.data.CommonConstants;
@@ -68,7 +70,7 @@ public class EnrollInPlanAarpStepDefinition {
 		WebDriver wd = getLoginScenario().getWebDriver();
 
 		AcquisitionHomePage aquisitionhomepage = new AcquisitionHomePage(wd);
-
+		wd.get("https://www.awe-test-a-aarpmedicareplans.uhc.com");
 		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
 		getLoginScenario().saveBean(PageConstants.ACQUISITION_HOME_PAGE,
 				aquisitionhomepage);
@@ -122,6 +124,20 @@ public class EnrollInPlanAarpStepDefinition {
 		VPPPlanSummaryPage plansummaryPage = new VPPPlanSummaryPage(wd);//VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
 		getLoginScenario().saveBean(PageConstants.VPP_PLAN_SUMMARY_PAGE,wd);
 		plansummaryPage = plansummaryPage.viewPlanSummary(plantype);
+		  // WebDriver wd = getLoginScenario().getWebDriver();
+           List<WebElement> view2017Plans = wd.findElements(By.linkText("View 2017 Plans"));
+   		if(view2017Plans.size()>0){
+   			if(view2017Plans.get(0).isDisplayed()){
+   				view2017Plans.get(0).click();
+   				try {
+						Thread.sleep(2000);
+					} catch (InterruptedException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+   				
+   			}
+   		}
 
 		if (plansummaryPage != null) {
 			getLoginScenario().saveBean(PageConstants.VPP_PLAN_SUMMARY_PAGE,

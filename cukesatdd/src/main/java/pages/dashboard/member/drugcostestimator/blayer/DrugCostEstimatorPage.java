@@ -210,7 +210,7 @@ public class DrugCostEstimatorPage extends UhcDriver {
 	@FindBy(id = "mail-service-type")
 	public WebElement lbPreferredMailService;
 
-	@FindBy(xpath = ".//*[@id='pharmacyTabId']/div/p[2]")
+	@FindBy(xpath = ".//*[@id='pharmacyTabId']/a")
 	public WebElement step2Pharmacy;
 
 	@FindBy(xpath = ".//*[@id='total_drugsavings']/div[2]/a")
@@ -283,7 +283,7 @@ public class DrugCostEstimatorPage extends UhcDriver {
 		Thread.sleep(5000);
 		waitforElement(addDrug);
 		addDrug.click();
-		addDrug.click();
+		//addDrug.click();
 		System.out.println("Current Page title :: " + driver.getTitle());
 
 		if (driver.getTitle().equalsIgnoreCase("drugcostestimatoracquisition") || driver.getTitle().equalsIgnoreCase("Drug Cost Estimator")) {
@@ -381,8 +381,9 @@ public class DrugCostEstimatorPage extends UhcDriver {
 	}
 
 	public void navigateToStep2() throws InterruptedException {
-		waitforElement(step2);
-		step2.click();
+		//waitforElement(step2Pharmacy);
+		Thread.sleep(10000);
+		step2Pharmacy.click();
 		Thread.sleep(10000);
 		waitforElement(pharmacy_form);
 
