@@ -283,7 +283,7 @@ public class DrugCostEstimatorPage extends UhcDriver {
 		Thread.sleep(5000);
 		waitforElement(addDrug);
 		addDrug.click();
-		//addDrug.click();
+		addDrug.click();
 		System.out.println("Current Page title :: " + driver.getTitle());
 
 		if (driver.getTitle().equalsIgnoreCase("drugcostestimatoracquisition") || driver.getTitle().equalsIgnoreCase("Drug Cost Estimator")) {

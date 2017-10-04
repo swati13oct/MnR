@@ -409,7 +409,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		if (planName.contains("HMO") || planName.contains("PPO")) {
 			System.out.println("Entered the plan");
 			for(int i=1; i<=maValue; i++){
-				WebElement maPlanElement= driver.findElement(By.xpath(".//*[@id='plan-list-1']/div/div[2]/div/div["+i+"]"));
+				WebElement maPlanElement= driver.findElement(By.xpath(".//*[@id='plan-list-1']/div/div[3]/div/div["+i+"]"));
 				if (maPlanElement.getText().contains(planName)) {
 					ElementData elementData = new ElementData("linkText", "Enroll in plan");//("id", "enrollMA");
 					System.out.println("***Element Data is: "+elementData);
@@ -421,7 +421,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 			}
 		} else if (planName.contains("PDP")) {
 			for(int i=1; i<=pdpValue; i++){	
-				WebElement pdpPlanElement= driver.findElement(By.xpath(".//*[@id='plan-list-3']/div/div[2]/div/div["+i+"]"));
+				WebElement pdpPlanElement= driver.findElement(By.xpath(".//*[@id='plan-list-3']/div/div[3]/div/div["+i+"]"));
 				if (pdpPlanElement.getText().contains(planName)) {
 					ElementData elementData = new ElementData("linkText", "Enroll in plan");//("id", "enrollPDP"); // TODO:
 					System.out.println("***Element Data is: "+elementData);													// Re-check
