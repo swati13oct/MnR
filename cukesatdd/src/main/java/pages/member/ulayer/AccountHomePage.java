@@ -598,11 +598,11 @@ public class AccountHomePage extends UhcDriver {
 	public pages.dashboard.member.ulayer.ClaimSummarypage navigateToClaimsSummaryPage() {
 		// TODO Auto-generated method stub
 		//String url = "https://member.team-b-aarpmedicareplans.uhc.com/home/claims.html";
-		String testharnessUrl = "https://member." +MRScenario.environment+"-aarpmedicareplans.uhc.com/content/aarpm/home/testharness.html";
+		String testharnessUrl = "https://member." +MRScenario.environment+"-aarpmedicareplans.uhc.com/home/testharness.html";
 		driver.get(testharnessUrl);
 		if (MRScenario.environment.equalsIgnoreCase("team-h")) {
-			CommonUtility.waitForPageLoad(driver, driver.findElement(By.linkText("Go to Claims Redesign page")), 60); 	
-			driver.findElement(By.linkText("Go to Claims Redesign page")).click();
+			CommonUtility.waitForPageLoad(driver, driver.findElement(By.linkText("Go to Claims page")), 60); 	
+			driver.findElement(By.linkText("Go to Claims page")).click();
 		}
 		
 		else if (MRScenario.environment.equalsIgnoreCase("team-b")) {
