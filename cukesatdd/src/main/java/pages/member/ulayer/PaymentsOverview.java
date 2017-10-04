@@ -39,7 +39,7 @@ public class PaymentsOverview extends UhcDriver{
 	@FindBy(xpath="//*[@id='paymentCustomSearch']/div/span/div/div[2]/div[2]/label")
 	private WebElement UnPaidCheckbox;
 	
-	@FindBy(xpath="//*[@id='paymentHistoryApp']/div[1]/div/div/div/div[2]")
+	@FindBy(xpath="//*[@id='paymentHistoryApp']/div[1]/div/div/div/div[3]")	              
 	private WebElement Payments_status_Error;
 	
 	
@@ -117,7 +117,8 @@ public class PaymentsOverview extends UhcDriver{
 		Thread.sleep(2000);
 		PaidCheckbox.click();
 		UnPaidCheckbox.click();
-		
+		Thread.sleep(2000);
+		System.out.println(Payments_status_Error.getText());
 		if(Payments_status_Error.getText().contains("Select Paid, Unpaid or both for the payment status you want to view")){
 			return new PaymentsOverview(driver);
 		}
