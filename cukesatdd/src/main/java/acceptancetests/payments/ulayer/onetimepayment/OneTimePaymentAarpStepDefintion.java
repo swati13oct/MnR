@@ -574,7 +574,7 @@ public class OneTimePaymentAarpStepDefintion {
 		
 	}
 	
-/*	@And("^the user navigates to Team-h TestHarness Page$")
+	@And("^the user navigates to Team-h TestHarness Page$")
 	public void user_navigates_to_TeamHTestHarness_page()
 	{
 		AccountHomePage accountHomePage = (AccountHomePage)getLoginScenario().getBean(PageConstants.ACCOUNT_HOME_PAGE);
@@ -587,7 +587,7 @@ public class OneTimePaymentAarpStepDefintion {
 			Assert.fail("Test Harness page not found");
 		}
 		
-	}*/
+	}
 	
 	
 	@And("^the user navigates to Team-c TestHarness Page$")
@@ -686,7 +686,7 @@ public class OneTimePaymentAarpStepDefintion {
 	
 	
 	@And("^user lands on payment overview page validates the tabs for combo members$")
-	public void user_validates_Tabs()
+	public void user_validates_Tabs() throws InterruptedException
 	{
 		PaymentsOverview accountHomePage = (PaymentsOverview)getLoginScenario().getBean(PageConstants.PAYMENT_OVERVIEW);
 		OneTimePaymentsPage oneTimePaymentsPage = accountHomePage.navigateToOneTimePaymentpage();
@@ -717,7 +717,7 @@ public class OneTimePaymentAarpStepDefintion {
 	
 	
 	@And("^the user navigates to Team H One Time Payments page$")
-	public void user_validates_TeamH_Payment_overview()
+	public void user_validates_TeamH_Payment_overview() throws InterruptedException
 	{
 		PaymentsOverview accountHomePage = (PaymentsOverview)getLoginScenario().getBean(PageConstants.PAYMENT_OVERVIEW);
 		OneTimePaymentsPage oneTimePaymentsPage = accountHomePage.navigateToOneTimePaymentpage();

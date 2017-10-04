@@ -16,7 +16,7 @@ public class TestHarness extends UhcDriver{
 	@FindBy(linkText="Go to Payments page")
 	private WebElement PaymentPage;
 	
-	@FindBy(linkText="Go to payment page page")
+	@FindBy(linkText="Go to Payments page")
 	private WebElement TeamHPaymentPage;
 	
 	@FindBy(linkText="Go to payment link page")

@@ -66,8 +66,12 @@ public class PaymentsOverview extends UhcDriver{
 		return null;
 	}
 	
-	public OneTimePaymentsPage navigateToOneTimePaymentpage()
+	public OneTimePaymentsPage navigateToOneTimePaymentpage() throws InterruptedException
 	{
+		Thread.sleep(7500);
+		JavascriptExecutor jse = (JavascriptExecutor)driver;
+		jse.executeScript("window.scrollBy(0,200)", "");
+		Thread.sleep(1000);
 		if(OneTimePaymentButton.isEnabled()){
 			OneTimePaymentButton.click();
 			return new OneTimePaymentsPage(driver);

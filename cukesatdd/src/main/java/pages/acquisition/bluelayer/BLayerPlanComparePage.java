@@ -15,7 +15,7 @@ import pages.acquisition.bluelayer.ResponsivePlanSummaryUhc;
 
 public class BLayerPlanComparePage extends UhcDriver {
 	
-	@FindBy(xpath = ".//*[@id='plan-list-1']/div/div[3]/div/div[1]/div[3]/div/div/span[1]/label")
+	@FindBy(xpath = ".//*[@id='plan-list-1']/div/div[3]/div/div[1]/div[3]/div/div/span[1]/label")	               
 	private WebElement Plan2HMO;
 	
 	@FindBy(xpath = ".//*[@id='plan-list-1']/div/div[3]/div/div[2]/div[3]/div/div/span[1]/label")
@@ -24,7 +24,7 @@ public class BLayerPlanComparePage extends UhcDriver {
 /*	@FindBy(xpath = ".//*[@id='plan-list-1']/div/div[2]/div/div[2]/div[3]/div/div/span[3]/a")
 	private WebElement ComparePlansLink;*/
 	
-	@FindBy(linkText = "Compare plans")
+	@FindBy(xpath = "//*[@id='plan-list-1']/div/div[3]/div/div[2]/div[3]/div/div/span[3]/a")
 	private WebElement ComparePlansLink;
 	/*
 	@FindBy(xpath = ".//*[@id='plan-list-1']/div/div[2]/div/div[1]/div[3]/div/div/span[3]/a")
@@ -100,14 +100,15 @@ public class BLayerPlanComparePage extends UhcDriver {
 		
 		Thread.sleep(7000);
 		JavascriptExecutor jse = (JavascriptExecutor)driver;
-		jse.executeScript("window.scrollBy(0,100)", "");
+		jse.executeScript("window.scrollBy(0,700)", "");
+		Thread.sleep(2000);
 		Plan2HMO.click();		
-		jse.executeScript("window.scrollBy(0,300)", "");
+		jse.executeScript("window.scrollBy(0,600)", "");
 		Plan1HMO.click();
-		jse.executeScript("window.scrollBy(0,300)", "");
-		Thread.sleep(1000);
-		ComparePlansLink.click();
+		//jse.executeScript("window.scrollBy(0,200)", "");
 		Thread.sleep(5000);
+		ComparePlansLink.click();
+		Thread.sleep(6000);
 		 if(driver.getTitle().contains("Our Medicare Plan Types")){
 			 return new BLayerPlanComparePage(driver);
 		 }
