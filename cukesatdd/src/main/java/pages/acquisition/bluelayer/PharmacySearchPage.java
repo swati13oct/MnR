@@ -86,7 +86,7 @@ public class PharmacySearchPage extends UhcDriver {
 	@FindBy(id = "plan-type")
 	private WebElement planType;
 	
-	@FindBy(xpath = "(//*[contains(text(),'Show on Map')])[1]")
+	@FindBy(xpath = "(//*[@class='pharmacy-list-links']//a)[1]")
 	private WebElement showonmap;
 	
 	@FindBy(xpath = "//a[contains(text(),'VIEW RESULT AS PDF')]")

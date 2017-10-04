@@ -866,7 +866,7 @@ public class MRScenario {
     	   
     	   								/****FIrefox Browser******/
            
- /*          if (null == webDriver) {
+/*           if (null == webDriver) {
                     File pathToBinary = new File("C:/Tools/FF/firefox.exe");
                     FirefoxBinary ffBinary = new FirefoxBinary(pathToBinary);
                     FirefoxProfile firefoxProfile = new FirefoxProfile();
