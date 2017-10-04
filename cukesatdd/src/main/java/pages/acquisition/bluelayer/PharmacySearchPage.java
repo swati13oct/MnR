@@ -373,8 +373,6 @@ public class PharmacySearchPage extends UhcDriver {
 		}
 		else
 		{
-			System.out.println("****************Pharmacy Search Page not Loaded*************************");
-			System.out.println("****************Pharmacy Search Page not Loaded*************************");
 			return null;
 		}
 	}

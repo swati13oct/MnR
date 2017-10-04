@@ -401,11 +401,11 @@ public class PharmacyLocatorUmsStepDefinition {
 				.getBean(PageConstants.PHARMACY_SEARCH_PAGE);
 		pharmacySearchPage = pharmacySearchPage.navigateToPharmacySearchResult();
 		
-		/*if (pharmacySearchPage != null) {
+		if (pharmacySearchPage != null) {
 			getLoginScenario().saveBean(PageConstants.PHARMACY_SEARCH_PAGE,
 					pharmacySearchPage);
 			Assert.assertTrue(true);
-		} else {
+		}/* else {
 			Assert.fail("Failed to load Pharmacy search page");
 		}*/
     	
