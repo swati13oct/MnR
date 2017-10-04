@@ -149,6 +149,12 @@ public class ResponsiveUhcStepDefiniton {
 				.getBean(PageConstants.RESPONSIVE_PLAN_SUMMARY_PAGE_UHC);	
 
 		ResponsivePlanSummaryUhc vppPlan =	plansummaryPage.viewPlanSummary(planType);
+		try {
+			Thread.sleep(6000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		if(vppPlan!=null){
 			getLoginScenario().saveBean(PageConstants.RESPONSIVE_PLAN_SUMMARY_PAGE_UHC, vppPlan);
 		}else{

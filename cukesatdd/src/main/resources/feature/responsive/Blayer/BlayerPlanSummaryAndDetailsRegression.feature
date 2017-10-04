@@ -157,7 +157,7 @@ Examples:
 |zipCode|county          |planType | planName                                            |monthlypremium | primarycare |  specialist       |referralRequired| prescriptionDrug |
 |33012 |Miami-Dade County| snp     |UnitedHealthcare Dual Complete RP (Regional PPO SNP) |  $19.80       |$0           |  19              | No             |  25  |
 
-@US657296 @benefittablema
+@US657296 @benefittablema @test
 Scenario Outline: To validate plan count from portfolio page
 Given the user is on the vpp portfolio page
 Then the user performs plan search using zipcode

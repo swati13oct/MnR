@@ -480,13 +480,12 @@ public void disclaimerText(){
 }
 
 public ResponsivePlanSummaryUhc viewPlanSummary(String planType) {
-//	JavascriptExecutor js = (JavascriptExecutor)driver;
-	/*try {
+ 	try {
 		Thread.sleep(4000);
 	} catch (InterruptedException e) {
 		// TODO Auto-generated catch block
 		e.printStackTrace();
-	}*/	
+	}
 	if (planType.equalsIgnoreCase("PDP")) {
 		viewPdpPlans.click();
 		return new ResponsivePlanSummaryUhc(driver);
@@ -588,6 +587,12 @@ public void comparePlanslnk(){
 	 }
 	 
 	 public ResponsivePlanDetailsUhc viewPlanDetails(String planName){
+		 try {
+			Thread.sleep(7000);
+		} catch (InterruptedException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 		/*int i=0;
 		 List<WebElement> plans = driver.findElements(By.xpath("//h2[contains(text(),'AARP')]"));
 		 System.out.println("PLANS SIZE :: "+plans.size());
@@ -1289,7 +1294,7 @@ public void comparePlanslnk(){
 				
 				public void validatePlanCount(String planType){
 					try {
-						Thread.sleep(5000);
+						Thread.sleep(10000);
 					} catch (InterruptedException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
