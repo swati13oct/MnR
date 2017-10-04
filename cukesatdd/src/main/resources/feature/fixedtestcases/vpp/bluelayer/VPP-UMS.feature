@@ -1,6 +1,6 @@
 @fixedTestCaseTest
 @vppBlayer
-Feature:9-Tier-1.9-To test plan summary in vpp flow UMS site
+Feature:1.09-To test plan summary in vpp flow UMS site
 @planDetailsUMS
 Scenario Outline: Verify plan details in UMS site 
 Given the user is on the uhcmedicaresolutions site landing page

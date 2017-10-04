@@ -1,6 +1,6 @@
 @fixedTestCaseTest
 @vppUlayer
-Feature:10-Tier-1.10-To test plan summary in vpp flow AARP site
+Feature:1.10-To test plan summary in vpp flow AARP site
 Scenario Outline: Verify plan summary in AARP site
 Given the user is on AARP medicare acquisition site landing page
 When the user performs plan search using following information in the AARP site

@@ -1,6 +1,6 @@
 @fixedTestCaseTest
 @eob
-Feature:21-Tier-1.21-To test EOB flows under forms and resources in AARP site
+Feature:1.21-To test EOB flows under forms and resources in AARP site
 @medEOBUlayer
 Scenario Outline:To verify Medical EOB in forms and resoutces flow in AARP site
 Given registered AMP with following details for EOB flow

@@ -1,6 +1,6 @@
 @fixedTestCaseTest
 @claims
-Feature:4-Tier-1.4-To test the medical claims summary and details flow in AARP site
+Feature:1.04-To test the medical claims summary and details flow in AARP site
 @medClaimsUlayer
 Scenario Outline:Verify the medical claim summary  and details for selected time period in AARP site
 Given the user is on the AARPM site login page

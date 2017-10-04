@@ -1,6 +1,6 @@
 @pdpInquiryKit
 @fixedTestCaseTest
-Feature:30-Tier-2.6-To test PDP inquiry flow in AARP site
+Feature:2.06-To test PDP inquiry flow in AARP site
 @pdpInquiryKitAARP
 Scenario Outline:To verify PDP inquiry flow in AARP site
 Given the user is on the AARP acquisition Site home page

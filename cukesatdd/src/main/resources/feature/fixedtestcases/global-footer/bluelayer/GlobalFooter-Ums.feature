@@ -1,7 +1,7 @@
 @fixedTestCaseTest
 @globalfooter
 @globalfooterUMS
-Feature:27-Tier-2.3-To test Global Footer links in UMS site
+Feature:2.03-To test Global Footer links in UMS site
 Scenario:To verify links displayed in Global footer section in UMS site
 Given the user is on the UHC Medicaresolutions Site
 When user accesses global footer UHC Medicaresolutions Site

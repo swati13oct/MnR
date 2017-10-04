@@ -1,6 +1,6 @@
 @fixedTestCaseTest
 @AcqProviderSearchUlayer
-Feature:16-Tier-1.16-To test Provider Search Flow  in AARP site
+Feature:1.16-To test Provider Search Flow  in AARP site
 Scenario Outline: Verify Provider Search  in AARP site
 Given the user is on AARP Ulayer medicare acquisition site landing page
 When the user performs plan search using following information in the Ulayer AARP site
