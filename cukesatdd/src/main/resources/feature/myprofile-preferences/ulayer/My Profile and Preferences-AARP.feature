@@ -115,7 +115,7 @@ Feature: To test My Profile & Preferences in AARP site
       
       
   @ValidateEmail
-  Scenario Outline: To verify Email section in AARP site
+   Scenario Outline: To verify Email section in AARP site
     Given registered member with following details for Profile and Preferences flow
       | <planType> |
     When the user navigates to Profile and Preferences page
@@ -128,7 +128,7 @@ Feature: To test My Profile & Preferences in AARP site
       | MA       |
       
    @PasswordEdit
-  Scenario Outline: To verify the edit functionality in Account Profile section in AARP site
+   Scenario Outline: To verify the edit functionality in Account Profile section in AARP site
     Given registered member with following details for Profile and Preferences flow
       | <planType> |
     When the user navigates to Profile and Preferences page
@@ -187,8 +187,8 @@ Feature: To test My Profile & Preferences in AARP site
      #| MA       |
       
       
-     @Needhelp
-     Scenario Outline: To verify the edit functionality in Account Profile section in AARP site
+    @Needhelp
+    Scenario Outline: To verify the edit functionality in Account Profile section in AARP site
     Given registered member with following details for Profile and Preferences flow
       | <planType> |
     When the user navigates to Profile and Preferences page
@@ -226,6 +226,22 @@ Feature: To test My Profile & Preferences in AARP site
     Examples: 
       | planType |
       | PDP      |
+      
+     @Temporaryaddress
+    Scenario Outline: To verify Temporary adrress and Edit Functionality
+    Given registered member with following details for Profile and Preferences flow
+      | <planType> |
+    Then the user navigates to Profile and Preferences page
+    Then the user validates the temporary address section
+    Then the user validates the fields and Buttons of temp address section
+    Then the user checks the Edit Button on the top changes to Cancel Button
+    #Then the user validates the functionality of save Button in Temporary adrress section
+    Then the user validates the functionality of Cancel Button In Temporary adrress section
+
+    Examples: 
+       | planType |
+       | MAPD     |
+      #| MA       |
       
       
       @PhoneEdit
@@ -280,41 +296,10 @@ Feature: To test My Profile & Preferences in AARP site
       | planType |
       | MAPD     |
       | MA       |
-      |PDP       |
+     #|PDP       |
      #|SHIP      |
       
       
-   @NeedhelpShip
-  Scenario Outline: To verify the needhelp functionality in Account Profile section in AARP site
-    Given registered member with following details for Profile and Preferences flow
-      | <planType> |
-    When the user navigates to Profile and Preferences page
-    Then the user validates the need help section for ship
-    And the user validates see more ways to contact us section for ship
-    And the user validates on clicking contact us link it should route to contact us page for ship member
-
-    Examples: 
-      | planType |
-      #| PDP      |
-      #| MAPD     |
-       | MA       |
-      
-      
-  @Temporaryaddress
-  Scenario Outline: To verify Temporary adrress and Edit Functionality
-    Given registered member with following details for Profile and Preferences flow
-      | <planType> |
-    Then the user navigates to Profile and Preferences page
-    Then the user validates the temporary address section
-    Then the user validates the fields and Buttons of temp address section
-    Then the user checks the Edit Button on the top changes to Cancel Button
-    Then the user validates the functionality of save Button in Temporary adrress section
-    Then the user validates the functionality of Cancel Button In Temporary adrress section
-
-    Examples: 
-       | planType |
-      # | MAPD     |
-      | MA       |
      
       
       

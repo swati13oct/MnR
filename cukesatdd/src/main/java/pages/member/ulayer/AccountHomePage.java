@@ -768,7 +768,7 @@ public FormsandresourcesPage navigateToMydocumentAarpPage() {
 		}
 		//driver.manage().timeouts().implicitlyWait(40, TimeUnit.SECONDS);
 		System.out.println(driver.getTitle());
-	 if(driver.getTitle().equalsIgnoreCase("Benefits Overview")){
+	 if(driver.getTitle().equalsIgnoreCase("Benefits And Coverage Page")){
 	        return new BenefitsAndCoveragePage(driver);
 		}
 		return null;

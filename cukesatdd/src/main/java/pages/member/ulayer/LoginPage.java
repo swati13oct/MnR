@@ -98,16 +98,12 @@ public class LoginPage extends UhcDriver {
             
 		
 
-		if (MRScenario.environment.equals("dev-c")) {
+		if (MRScenario.environment.equals("team-d")) {
 
 			Alert alert = driver.switchTo().alert();
-			        alert.accept();
-			        Alert alert1 = driver.switchTo().alert();
-			        alert1.accept();
-			   /*     Alert alert2 = driver.switchTo().alert();
-			        alert2.accept();
-			        Alert alert3 = driver.switchTo().alert();
-			        alert3.accept();*/
+			alert.accept();
+			Alert alert1 = driver.switchTo().alert();
+			alert1.accept();
 			        }
 
 		if(currentUrl().contains("home/my-account-home.html"))

@@ -207,39 +207,6 @@ public class ProfileandPreferencesAARPStepDefinition {
 		ProfileandPreferencespage.clickcontactUslink();
 	}
 	
-	@Then("^the user validates disclaimer link and on clicking disclaimer link it should expand and on again clicking it should collapse")
-	public void uservalidatesdisclaimerlink()
-	{
-		pages.member.ulayer.ProfileandPreferencesPage ProfileandPreferencespage = (pages.member.ulayer.ProfileandPreferencesPage) getLoginScenario()
-				.getBean(PageConstants.PROFILE_AND_PREFERENCES_PAGE);
-		
-		
-		String userName = (String) getLoginScenario().getBean(LoginCommonConstants.USERNAME);
-		try
-		{
-		JSONObject profilenpreferencesActualJson = ProfileandPreferencespage.ProfileandPreferencesPageJson;
-		loginScenario.saveBean(ProfnPrefCommonConstants.MY_PROFILE_PREFERENCES_ACTUAL, profilenpreferencesActualJson);
-		System.out.println("profilenpreferencesActualJson---->" + profilenpreferencesActualJson);
-		System.out.println(userName);
-		// Get expected data
-					String fileName = userName;
-					String directory = CommonConstants.PROFILE_AND_PREFERNCES_PAGE_DIRECTORY;
-					JSONObject myProfilenpreferencesexpectedjson = MRScenario.readExpectedJson(fileName,directory);
-					loginScenario.saveBean(ProfnPrefCommonConstants.MY_PROFILE_PREFERENCES_EXPECTED,
-							myProfilenpreferencesexpectedjson);
-					ProfileandPreferencespage.clickOndisclaimerlink(myProfilenpreferencesexpectedjson);
-					System.out.println("profilenpreferencesExpectedJson---->" + myProfilenpreferencesexpectedjson);
-
-					/*if (profilenpreferencesActualJson != null && myProfilenpreferencesexpectedjson != null) 
-					{
-						JSONAssert.assertEquals(myProfilenpreferencesexpectedjson, profilenpreferencesActualJson, true);
-					}*/
-
-				} 
-		catch (Exception e) {
-					e.printStackTrace();
-				}
-		}
 	
 	
 	@Then("^the user validates the need help section")
@@ -446,12 +413,8 @@ public class ProfileandPreferencesAARPStepDefinition {
 		pages.member.ulayer.ProfileandPreferencesPage ProfileandPreferencespage = (pages.member.ulayer.ProfileandPreferencesPage) getLoginScenario()
 				.getBean(PageConstants.PROFILE_AND_PREFERENCES_PAGE);
 
-		try {
 			ProfileandPreferencespage.validateBacktoPNPlink();
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		
 
 	}
 
@@ -492,30 +455,6 @@ public class ProfileandPreferencesAARPStepDefinition {
 
 		ProfileandPreferencespage.validateGoGreenHeader();
 
-	}
-	@Then("^the user validates the need help section for ship")
-	public void uservalidatesneedhelpsectionShip() {
-		pages.member.ulayer.ProfileandPreferencesPage ProfileandPreferencespage = (pages.member.ulayer.ProfileandPreferencesPage) getLoginScenario()
-				.getBean(PageConstants.PROFILE_AND_PREFERENCES_PAGE);
-
-		ProfileandPreferencespage.validateneedhelpheaderShip();
-
-	}
-	@Then("^the user validates see more ways to contact us section for ship")
-	public void uservalidatesseeMoreWaysShip() {
-		pages.member.ulayer.ProfileandPreferencesPage ProfileandPreferencespage = (pages.member.ulayer.ProfileandPreferencesPage) getLoginScenario()
-				.getBean(PageConstants.PROFILE_AND_PREFERENCES_PAGE);
-
-		ProfileandPreferencespage.validateContactUsNeedHelp();
-
-	}
-	@Then("^the user validates on clicking contact us link it should route to contact us page for ship member")
-	public void uservalidatescontactus() {
-		pages.member.ulayer.ProfileandPreferencesPage ProfileandPreferencespage = (pages.member.ulayer.ProfileandPreferencesPage) getLoginScenario()
-				.getBean(PageConstants.PROFILE_AND_PREFERENCES_PAGE);
-
-
-		ProfileandPreferencespage.contactUslinkShip();
 	}
 	
 	@Then("^the user validates the temporary address section")
