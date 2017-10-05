@@ -673,7 +673,12 @@ public class ProfilePreferencesPage extends UhcDriver {
 
 	public void validateGoPaperlessbutton() {
 		// TODO Auto-generated method stub
-		validateNew(gopaperlessbutton);
+		try {
+			Thread.sleep(20000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}validateNew(gopaperlessbutton);
 		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 	}
 
