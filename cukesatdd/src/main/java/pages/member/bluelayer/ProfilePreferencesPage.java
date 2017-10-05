@@ -67,7 +67,7 @@ public class ProfilePreferencesPage extends UhcDriver {
 	@FindBy(xpath = ".//*[@id='tab-1']/div[3]/div[1]/div/div[1]/div/div/div/div[1]/div/div/div[2]/div[1]/div/div/span[1]/p")
 	private WebElement EmailAddressLabel;
 
-	@FindBy(xpath = ".//*[@id='tab-1']/div[3]/div[1]/div/div[1]/div/div/div/div[1]/div/div")
+	@FindBy(id = "email")
 	private WebElement Emailform;
 
 	@FindBy(id = "profileemailaddress")
@@ -338,8 +338,8 @@ public class ProfilePreferencesPage extends UhcDriver {
 		validate(memberId);
 		validate(memberName);
 		// ValidateAccount Profile
-		validate(Username);
-		validate(Usernametext);
+		//validate(Username);
+		//validate(Usernametext);
 		validate(Password);
 		validate(Passwordtext);
 		validate(EditButton);

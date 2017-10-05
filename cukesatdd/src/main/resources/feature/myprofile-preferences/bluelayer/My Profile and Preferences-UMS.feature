@@ -126,19 +126,19 @@ Feature: To test My Profile & Preferences flow in UMS site
       | planType |
         | Group  |
         | MAPD   |
-      #| MA      |
+        | MA     |
 
   @ValidateEmail
   Scenario Outline: To verify Email section in UMS site
     Given registered member with following details for Profile and Preferences flow
       | <planType> |
-    Then the user navigates to Profile and Preferences page
+    Then the user navigates to Profile page
     Then the user validates the Email section in UMS site
 
     Examples: 
       | planType |
       | MAPD     |
-      #| MA       |
+     #| MA       |
 
   @PasswordEdit
   Scenario Outline: To verify the edit functionality in Account Profile section in UMS site
