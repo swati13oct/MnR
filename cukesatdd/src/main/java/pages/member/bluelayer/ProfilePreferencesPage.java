@@ -233,7 +233,7 @@ public class ProfilePreferencesPage extends UhcDriver {
 	@FindBy(className = "atdd-page-header")
 	private WebElement Profilenprefernceslink;
 	
-	@FindBy(xpath = ".//*[@id='mail-preferences-selector']/div/div/div/div/div[1]/p")
+	@FindBy(id  = "mail-preferences-selector")
 	private WebElement planNameGoGreen;
 
 	@FindBy(className = "atdd-section-heading")
