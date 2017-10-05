@@ -11,6 +11,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.junit.Assert;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -167,6 +168,9 @@ public class AccountHomePage extends UhcDriver {
 
 	@FindBy(linkText = "Go to preference page")
 	private WebElement ProfileandPrefLink;
+	
+	@FindBy(linkText = "Go to profile page")
+	private WebElement ProfileLink;
 
 	private PageData myAccountHome;
 
@@ -656,5 +660,33 @@ public class AccountHomePage extends UhcDriver {
 
 		return null;
 	}
+	
+	public pages.member.bluelayer.ProfilePreferencesPage navigateDirectToProfilePage() {
+		driver.navigate().to(PAGE_URL);
+		System.out.println(driver.getTitle());
+		ProfileLink.click();
+		try {
+			Thread.sleep(30000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		System.out.println(driver.getTitle());
+
+		if (driver.getTitle().equalsIgnoreCase("Profile")) {
+			 System.out.println("Pass!");
+			return new ProfilePreferencesPage(driver);
+		}
+		JavascriptExecutor jse = (JavascriptExecutor)driver;
+		jse.executeScript("window.scrollBy(0,200)", "");
+		try {
+			Thread.sleep(30000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+	}
+
 
 }
