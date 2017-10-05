@@ -121,7 +121,7 @@ public class ProfileandPreferencesUMSStepDefinition {
 			getLoginScenario().saveBean(PageConstants.ProfilePreferencesPage, ProfilePreferencesPage);
 		}
 		if (ProfilePreferencesPage == null) {
-			System.out.println(" Variable is NULL");
+			System.out.println(" Variable is NULL!");
 
 		}
 	}

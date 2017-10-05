@@ -637,7 +637,7 @@ public class AccountHomePage extends UhcDriver {
 		return null;
 	}
 
-	public pages.member.bluelayer.ProfilePreferencesPage navigateDirectToProfilePreferencesPage() {
+	public pages.member.bluelayer.ProfilePreferencesPage navigateDirectToPreferencesPage() {
 		driver.navigate().to(PAGE_URL);
 		System.out.println(driver.getTitle());
 		ProfileandPrefLink.click();
@@ -650,7 +650,7 @@ public class AccountHomePage extends UhcDriver {
 		System.out.println(driver.getTitle());
 
 		if (driver.getTitle().equalsIgnoreCase("Preferences")) {
-			 System.out.println("Pass");
+			 System.out.println("Pass!");
 			return new ProfilePreferencesPage(driver);
 		}
 
