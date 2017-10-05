@@ -243,7 +243,7 @@ public class ProfilePreferencesPage extends UhcDriver {
 	@FindBy(className = "atdd-page-header")
 	private WebElement backLink1;
 
-	@FindBy(xpath = "html/body/div[3]/div[3]/div[1]/div[1]/div/div[2]/div/div/div/div/a")
+	@FindBy(xpath = "html/body/div[3]/div[3]/div[2]/div[1]/div/div[2]/div/div/div/div/a")
 	private WebElement backLink2;
 
 	@FindBy(className = "atdd-notes")
