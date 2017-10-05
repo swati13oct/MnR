@@ -269,7 +269,7 @@ Feature: To test My Profile & Preferences flow in UMS site
     Then the user validates the temporary address section
     Then the user validates the fields and Buttons of temp address section
     Then the user checks the Edit Button on the top changes to Cancel Button
-    Then the user validates the functionality of save Button in Temporary adrress section
+    #Then the user validates the functionality of save Button in Temporary adrress section
     Then the user validates the functionality of Cancel Button In Temporary adrress section
 
     Examples: 
@@ -277,14 +277,14 @@ Feature: To test My Profile & Preferences flow in UMS site
        | MAPD     |
       #| MA       |
 
-  @GoGreen
-  Scenario Outline: To verify Go Green page
+    @GoGreen
+    Scenario Outline: To verify Go Green page
     Given registered member with following details for Profile and Preferences flow
       | <planType> |
     Then the user navigates to Profile and Preferences page
     Then the user validates the presence of Go Paperless button
     Then the user validates the presence of Plan Name
-    Then the user validates the presence of Communication prefernces header
+    Then the user validates the presence of Communication preferences header
     Then the user validates the presence of Back to Profile and Preferences links
     Then the user validates the Note section
     Then the user validates the I have read checkbox and check it
@@ -296,7 +296,4 @@ Feature: To test My Profile & Preferences flow in UMS site
      Examples: 
       | planType |
       | MAPD     |
-      | MA       |
-    
-    
-    
+      #| MA       |

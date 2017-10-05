@@ -162,7 +162,7 @@ public class AccountHomePage extends UhcDriver {
 	@FindBy(linkText = "Date")
 	private WebElement dateLink;
 
-	@FindBy(linkText = "Go to redesign benefits and coverage page")
+	@FindBy(linkText = "Go to benefits and coverage page")
 	private WebElement BnClink;
 
 	@FindBy(linkText = "Go to profile page")
@@ -631,7 +631,7 @@ public class AccountHomePage extends UhcDriver {
 		}
 		// driver.manage().timeouts().implicitlyWait(40, TimeUnit.SECONDS);
 		System.out.println(driver.getTitle());
-		if (driver.getTitle().equalsIgnoreCase("Benefits And Coverage Page Redesign")) {
+		if (driver.getTitle().equalsIgnoreCase("Benefits Overview")) {
 			return new BenefitsAndCoveragePage(driver);
 		}
 		return null;
@@ -647,7 +647,6 @@ public class AccountHomePage extends UhcDriver {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		// driver.manage().timeouts().implicitlyWait(40, TimeUnit.SECONDS);
 		System.out.println(driver.getTitle());
 
 		if (driver.getTitle().equalsIgnoreCase("Profile")) {

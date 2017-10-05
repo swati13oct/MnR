@@ -114,6 +114,12 @@ public class LoginPage2 extends UhcDriver {
 			alert.accept();
 			Alert alert1 = driver.switchTo().alert();
 			alert1.accept();
+			try {
+				Thread.sleep(30000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		
 			/*
 			 * Alert alert2 = driver.switchTo().alert(); alert2.accept(); Alert

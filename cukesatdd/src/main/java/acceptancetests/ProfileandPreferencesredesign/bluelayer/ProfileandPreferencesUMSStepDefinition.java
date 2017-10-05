@@ -117,7 +117,7 @@ public class ProfileandPreferencesUMSStepDefinition {
 		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstants.ACCOUNT_HOME_PAGE);
 		ProfilePreferencesPage ProfilePreferencesPage = accountHomePage.navigateDirectToProfilePreferencesPage();
 
-		if (ProfilePreferencesPage != null) {
+		if (ProfilePreferencesPage!= null) {
 			getLoginScenario().saveBean(PageConstants.ProfilePreferencesPage, ProfilePreferencesPage);
 		}
 		if (ProfilePreferencesPage == null) {
@@ -132,7 +132,7 @@ public class ProfileandPreferencesUMSStepDefinition {
 				.getBean(PageConstants.ProfilePreferencesPage);
 
 		if (ProfilePreferencesPage == null) {
-			System.out.println("Variable is NULL");
+			System.out.println(" Variable is NULL");
 		}
 		ProfilePreferencesPage.validatePlanNameMemberidNameAcountProfile();
 
@@ -444,7 +444,7 @@ public class ProfileandPreferencesUMSStepDefinition {
 		ProfilePreferencesPage.validatePlanName();
 
 	}
-	@Then("^the user validates the presence of Communication prefernces header")
+	@Then("^the user validates the presence of Communication preferences header")
 	public void UserValidatescommunicationpreferencesheader() {
 		ProfilePreferencesPage ProfilePreferencesPage = (pages.member.bluelayer.ProfilePreferencesPage) getLoginScenario()
 				.getBean(PageConstants.ProfilePreferencesPage);
@@ -457,12 +457,9 @@ public class ProfileandPreferencesUMSStepDefinition {
 		ProfilePreferencesPage ProfilePreferencesPage = (pages.member.bluelayer.ProfilePreferencesPage) getLoginScenario()
 				.getBean(PageConstants.ProfilePreferencesPage);
 
-		try {
+		
 			ProfilePreferencesPage.validateBacktoPNPlink();
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		
 
 	}
 
