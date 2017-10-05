@@ -294,9 +294,9 @@ Feature: To test My Profile & Preferences in AARP site
     
      Examples: 
       | planType |
-      | MAPD     |
-      | MA       |
-     #|PDP       |
+      #| MAPD     |
+      #| MA       |
+       |PDP       |
      #|SHIP      |
       
       
