@@ -685,7 +685,7 @@ public class ProfilePreferencesPage extends UhcDriver {
 
 
 	public void validatePlanName() {
-		gopaperlessbutton.click();
+		
 		try {
 			Thread.sleep(20000);
 		} catch (InterruptedException e) {
