@@ -119,14 +119,14 @@ Feature: To test My Profile & Preferences flow in UMS site
   Scenario Outline: To verify Plan Name, Member name, Member ID and account section in UMS site
     Given registered member with following details for Profile and Preferences flow
       | <planType> |
-    Then the user navigates to Profile and Preferences page
+    Then the user navigates to Profile page
     Then the user validates the Plan Name, Member name, Member ID and account section in UMS site
 
     Examples: 
       | planType |
-      # | PDP     |
-        | MAPD     |
-      #| MA       |
+        | Group  |
+        | MAPD   |
+      #| MA      |
 
   @ValidateEmail
   Scenario Outline: To verify Email section in UMS site
@@ -204,29 +204,29 @@ Feature: To test My Profile & Preferences flow in UMS site
     Given registered member with following details for Profile and Preferences flow
       | <planType> |
     When the user navigates to Profile and Preferences page
-    Then the user validates disclaimer link and on clicking disclaimer link it should expand and on again clicking it should collapse
     And the user validates the need help section
     And the user validates see more ways to contact us section
-    And the user validates on clicking contact us link it should route to contact us page
+    #And the user validates on clicking contact us link it should route to contact us page
 
     Examples: 
       | planType |
       #| PDP      |
-      #| MAPD     |
-      | MA       |
+       | MAPD     |
+       | Group    |
 
   @PermanentAddress
   Scenario Outline: To verify the edit functionality in Account Profile section in UMS site
     Given registered member with following details for Profile and Preferences flow
       | <planType> |
-    When the user navigates to Profile and Preferences page
+    When the user navigates to Profile page
     Then the user validates permanent address section
     #And the user clicks on contact us then contact us page should come
 
     Examples: 
       | planType |
-      #| PDP      |
+     #| PDP      |
       | MAPD     |
+      | Group    |
 
   #| MA       |
   @CommunicationPreferences

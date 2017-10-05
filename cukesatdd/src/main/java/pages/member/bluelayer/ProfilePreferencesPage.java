@@ -12,6 +12,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -111,27 +112,27 @@ public class ProfilePreferencesPage extends UhcDriver {
 	@FindBy(xpath = "//*[@id='tab-1']/div[2]/div[1]/div/div[1]/div[1]/div/div/div/div[2]/div[2]/div/div/span[2]")
 	private WebElement EmailValue;
 
-	@FindBy(className = "margin-none")
+	@FindBy(xpath = "html/body/div[5]/div[1]/div[2]/div/div[2]/section/div/div[3]/div/p")
 	private WebElement Seemorewaystext;
 
 	@FindBy(className = "lowercase")
 	private WebElement contactUs;
 
-	@FindBy(xpath = "html/body/div[4]/div/div[2]/section/div/div[1]/div/h2")
+	@FindBy(className = "atdd-need-help")
 	private WebElement NeedHelpHeader;
 
 	@FindBy(xpath = "html/body/div[5]/div/div/div/div/a")
 	private WebElement Disclaimerlink;
 
-	@FindBy(xpath = "html/body/div[4]/div/div[2]/section/div/div[2]/div/div/div[1]/div/div")
+	@FindBy(xpath = "html/body/div[5]/div[1]/div[2]/div/div[2]/section/div/div[2]/div/div/div[1]/div/div")
 	private WebElement Technicalsupportsection;
 
-	@FindBy(xpath = "html/body/div[4]/div/div[2]/section/div/div[2]/div/div/div[2]/div/div")
+	@FindBy(xpath = "html/body/div[5]/div[1]/div[2]/div/div[2]/section/div/div[2]/div/div/div[2]/div/div")
 	private WebElement PlanSupportsection;
 
 	public static final String Disclaimerlinkcontent_xpath = ".//*[@id='collapseDisclaimer']";
 
-	@FindBy(xpath = ".//*[@id='tab-1']/div[3]/div[1]/div/div[1]/div/div/div/div[2]/div[1]/div")
+	@FindBy(id = "permanenet")
 	private WebElement permanentaddress;
 
 	@FindBy(className = "text-link")
@@ -242,7 +243,7 @@ public class ProfilePreferencesPage extends UhcDriver {
 	@FindBy(className = "atdd-page-header")
 	private WebElement backLink1;
 
-	@FindBy(xpath = "html/body/div[5]/div[1]/div[1]/div[1]/div/div/div/div[2]/div/div/div/div/a")
+	@FindBy(xpath = "html/body/div[3]/div[3]/div[1]/div[1]/div/div[2]/div/div/div/div/a")
 	private WebElement backLink2;
 
 	@FindBy(className = "atdd-notes")
@@ -520,6 +521,14 @@ public class ProfilePreferencesPage extends UhcDriver {
 	}
 
 	public void validatepermanentaddress() {
+		JavascriptExecutor jse = (JavascriptExecutor)driver;
+		jse.executeScript("window.scrollBy(0,400)", "");
+		try {
+			Thread.sleep(30000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		validate(permanentaddress);
 
 	}
@@ -755,10 +764,10 @@ public class ProfilePreferencesPage extends UhcDriver {
 	public void validateSavePreferences() {
 		// TODO Auto-generated method stub
 		validateNew(savePreferencesButton);
-		if (iHavereadCheckbox.isSelected()) {
+		/*if (iHavereadCheckbox.isSelected()) {
 			savePreferencesButton.click();
 			validateNew(EditPreferenceButton);
-		}
+		}*/
 
 	}
 

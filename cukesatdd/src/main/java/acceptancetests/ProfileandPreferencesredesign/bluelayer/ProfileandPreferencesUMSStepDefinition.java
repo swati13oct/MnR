@@ -125,7 +125,25 @@ public class ProfileandPreferencesUMSStepDefinition {
 
 		}
 	}
+	
+	
+	@Then("^the user navigates to Profile page")
+	public void user_navigate_toProfilepage() {
+		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstants.ACCOUNT_HOME_PAGE);
+		ProfilePreferencesPage ProfilePreferencesPage = accountHomePage.navigateDirectToProfilePage();
 
+		if (ProfilePreferencesPage!= null) {
+			getLoginScenario().saveBean(PageConstants.ProfilePreferencesPage, ProfilePreferencesPage);
+		}
+		if (ProfilePreferencesPage == null) {
+			System.out.println(" Variable is NULL!");
+
+		}
+	}
+	
+	
+	
+	
 	@And("^the user validates the Plan Name, Member name, Member ID and account section in UMS site")
 	public void user_Validates_FED_PROFILE_MEMBERNAME_ID_AccountProfile() {
 		ProfilePreferencesPage ProfilePreferencesPage = (ProfilePreferencesPage) getLoginScenario()

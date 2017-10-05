@@ -110,10 +110,10 @@ public class LoginPage2 extends UhcDriver {
 
 		if (MRScenario.environment.equals("team-c") || MRScenario.environment.equals("team-d")) {
 
-			Alert alert = driver.switchTo().alert();
+			/*Alert alert = driver.switchTo().alert();
 			alert.accept();
 			Alert alert1 = driver.switchTo().alert();
-			alert1.accept();
+			alert1.accept();*/
 			try {
 				Thread.sleep(30000);
 			} catch (InterruptedException e) {
