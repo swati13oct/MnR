@@ -283,7 +283,7 @@ Feature: To test My Profile & Preferences flow in UMS site
       | <planType> |
     Then the user navigates to Profile and Preferences page
     #Then the user validates the presence of Go Paperless button
-    Then the user validates the presence of Plan Name
+    #Then the user validates the presence of Plan Name
     Then the user validates the presence of Communication preferences header
     Then the user validates the presence of Back to Profile and Preferences links
     Then the user validates the Note section
