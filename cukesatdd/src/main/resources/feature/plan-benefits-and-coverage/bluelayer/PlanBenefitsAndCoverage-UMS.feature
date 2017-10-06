@@ -1018,7 +1018,7 @@ Examples:
     | planType|  memberType  | copayCategory |
     | MAPD    |  Individual  |   LIS 1       |
     | MAPD    |  Group       |   LIS 3       |
-    | PDP     |  Group       |   LIS 2       |  
+   
     
       
     
