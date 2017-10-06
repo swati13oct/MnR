@@ -170,7 +170,10 @@ public class LoginPage2 extends UhcDriver {
 			e.printStackTrace();
 		}
 
-		if (currentUrl().contains("home/my-account-home.html") && category.equalsIgnoreCase("Group")
+		 if (currentUrl().contains("home/my-account-home.html")) {
+			 return new AccountHomePage(driver);
+		}
+		 else if (currentUrl().contains("home/my-account-home.html") && category.equalsIgnoreCase("Group")
 				|| currentUrl().contains("/guest/home.html"))
 
 		{

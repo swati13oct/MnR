@@ -974,18 +974,22 @@ Examples:
     And the user validates headers on Bnc page for indi members
      Examples: 
     | planType|
-    | MAPD    |
+    #| MAPD    |
+    | MA     |
+    
      
        @BncHeadersGroup
      Scenario Outline: Verify that Page Headers are in place on Benefits and Coverage page
     Given registered member with following details logins in the member portal 
-       | Plan Type      | <planType>     |
+        | Plan Type      | <planType>  |
+      | Member Type    | <memberType>|
+      | Copay Category | <copayCategory>|
     Then the user navigates to Benefits and coverage page
     And the user validates headers on Bnc page for group members
     
      Examples: 
-    | planType|
-    | MAPD    |
+  | planType|  memberType  | copayCategory |
+  | PDP     |  Group       |  NON LIS      | 
       
       
           @PlanOverviewNonLis
