@@ -857,5 +857,27 @@ public class PlanBenefitsAndCoverageAarpStepDefinition {
 		benefitsCoveragePage.validate_langdropdown_select(language);
 	}
 
+	@And("the user validates plan overview section for lis member")
+	public void user_validate_planOverviewLis() {
+		BenefitsAndCoveragePage benefitsnCoveragepage = (BenefitsAndCoveragePage) getLoginScenario()
+				.getBean(PageConstants.BENEFITS_AND_COVERAGE_PAGE);
+
+		benefitsnCoveragepage.validatePlanOverviewLis();
+	}
+	@And("the user validates plan overview section for shipmember")
+	public void user_validate_planOverviewShip() {
+		BenefitsAndCoveragePage benefitsnCoveragepage = (BenefitsAndCoveragePage) getLoginScenario()
+				.getBean(PageConstants.BENEFITS_AND_COVERAGE_PAGE);
+
+		benefitsnCoveragepage.validatePlanOverviewShip();
+	}
+	@And("the user validates headers on Bnc page for ship members")
+	public void user_validate_Headers_Group() {
+	BenefitsAndCoveragePage benefitsnCoveragepage = (BenefitsAndCoveragePage) getLoginScenario()
+			.getBean(PageConstants.BENEFITS_AND_COVERAGE_PAGE);
+	benefitsnCoveragepage.validateHeadersShip();
+	}
+
+
 
 	}

@@ -1098,4 +1098,53 @@ Feature: To test plan benefits and Coverage on AARP site for Federal members
       #| PDP     |  Individual  |  NON LIS      |
       
       
+                @BenefitsSummaryShip
+     Scenario Outline: Verify that Page Headers are in place on Benefits and Coverage page
+    Given registered member with following details logins in the member portal 
+       | Plan Type      | <planType>     |
+    Then the user navigates to Benefits and coverage page
+    And the user validates headers on Bnc page for ship members
+    
+     Examples: 
+    | planType|
+    | SHIP    |
+      
+            
+      @PlanOverviewLis
+  Scenario Outline: Verify that Plan overview section is visible on Benefits and coverage page
+    Given registered member with following details logins in the member portal 
+      | Plan Type      | <planType>      |
+      | Copay Category | <copayCategory> |
+    When the user navigates to Benefits and coverage page
+    And the user validates plan overview section for lis member
+
+    Examples: 
+      | planType | copayCategory |
+      | MAPD     | LIS2           |
+     
+     
+      @PlanOverviewShip
+  Scenario Outline: Verify that Plan overview section is visible on Benefits and coverage page
+    Given registered member with following details logins in the member portal 
+      | Plan Type   | <planType>   |
+    When the user navigates to Benefits and coverage page
+    And the user validates plan overview section for shipmember
+
+    Examples: 
+      | planType | 
+      | SHIP     | 
+      
+      
+      @PlanOverviewNonLis
+  Scenario Outline: Verify that Plan overview section is visible on Benefits and coverage page
+    Given registered member with following details logins in the member portal 
+      | Plan Type   | <planType>   |
+    When the user navigates to Benefits and coverage page
+    And the user validates plan overview section
+
+    Examples: 
+      | planType | 
+      | MAPD     | 
+      
+      
 

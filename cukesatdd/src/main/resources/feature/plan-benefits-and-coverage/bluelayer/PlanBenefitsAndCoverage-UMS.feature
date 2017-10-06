@@ -965,6 +965,64 @@ Examples:
       
     
       
+       
+    @BncHeadersIndividual
+     Scenario Outline: Verify that Page Headers are in place on Benefits and Coverage page
+    Given registered member with following details logins in the member portal 
+       | Plan Type      | <planType>     |
+    Then the user navigates to Benefits and coverage page
+    And the user validates headers on Bnc page for indi members
+     Examples: 
+    | planType|
+    | MAPD    |
+     
+       @BncHeadersGroup
+     Scenario Outline: Verify that Page Headers are in place on Benefits and Coverage page
+    Given registered member with following details logins in the member portal 
+       | Plan Type      | <planType>     |
+    Then the user navigates to Benefits and coverage page
+    And the user validates headers on Bnc page for group members
+    
+     Examples: 
+    | planType|
+    | MAPD    |
+      
+      
+          @PlanOverviewNonLis
+    Scenario Outline: Verify that Plan Overview  is in place on Benefits and Coverage page for Non LIS Members
+    Given registered member with following details logins in the member portal 
+      | Plan Type      | <planType>  |
+      | Member Type    | <memberType>|
+      | Copay Category | <copayCategory>|
+    Then the user navigates to Benefits and coverage page
+    And the user validates plan overview section 
+
+    Examples: 
+      | planType|  memberType  | copayCategory |
+      #| MAPD    |  Individual  |  NON LIS      |
+      #| PDP     |  Individual  |  NON LIS      |  
+      #| MA      |  Individual  |  NON LIS      |
+      #| MAPD    |  Group       |  NON LIS      |
+      | PDP     |  Group       |  NON LIS      |  
+      
+      @PlanOverviewLis
+    Scenario Outline: Verify that Plan Overview is in place on Benefits and Coverage page for LIS Members
+    Given registered member with following details logins in the member portal 
+       | Plan Type      | <planType>     |
+      | Member Type    | <memberType>|
+      | Copay Category | <copayCategory>|
+    Then the user navigates to Benefits and coverage page
+    And the user validates plan overview section for a Lis member
+
+    Examples: 
+    | planType|  memberType  | copayCategory |
+    | MAPD    |  Individual  |   LIS 1       |
+    | MAPD    |  Group       |   LIS 3       |
+    | PDP     |  Group       |   LIS 2       |  
+    
+      
+    
+      
       
       
   

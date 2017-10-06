@@ -941,5 +941,30 @@ public class BenefitsAndCoverageUmsStepDefinition {
 				.getBean(PageConstants.BENEFITS_COVERAGE_PAGE);
 		benefitsCoveragePage.validatePlanOverview();
 	}
+	
+	
+	
+	
+	@And("the user validates plan overview section for Lis Members")
+	public void user_validate_planOverviewLis() {
+		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario()
+				.getBean(PageConstants.BENEFITS_COVERAGE_PAGE);
+		benefitsCoveragePage.validatePlanOverviewLis();
+	}
+	
+	@And("the user validates headers on Bnc page for indi members")
+	public void user_validate_Headers() {
+		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario()
+				.getBean(PageConstants.BENEFITS_COVERAGE_PAGE);
+		benefitsCoveragePage.validateHeaders();
+	}
+	
+@And("the user validates headers on Bnc page for group members")
+	public void user_validate_Headers_Group() {
+		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario()
+				.getBean(PageConstants.BENEFITS_COVERAGE_PAGE);
+		benefitsCoveragePage.validateHeadersGroup();
+	}	
+
 
 }

@@ -142,6 +142,9 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 
 	@FindBy(xpath = "//*[@id='planBenefitsApp']/div[2]/div[1]/div/h1")
 	private WebElement BenefitsSummaryHeader;
+	
+
+
 
 	@FindBy(xpath = "//*[@id='planBenefitsApp']/div[2]/div[3]/div/div/div/header/span")
 	private WebElement ParticipatingHospitalStays1;
@@ -212,7 +215,12 @@ public class BenefitsAndCoveragePage extends UhcDriver {
     
     @FindBy(xpath = ".//*[@id='plan_benefit_documents']/section/div/div[2]/div/form/span[2]")
     private WebElement documents_label;
+    @FindBy(xpath = "//*[@id='planBenefitsApp']/section/div/div[2]/div[2]/div[1]/div/div[1]/div/span")
+	private WebElement ExtraHelp;
 
+
+	@FindBy(xpath = "//*[@id='planBenefitsApp']/div[2]/div[2]/div/p")
+	private WebElement BenefitSummaryText;
 	
 	
 	public static final String learnmorelinktiertext_xpath = ".//*[@id='collapseTiers']";
@@ -745,5 +753,39 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 	{
 	 return validateNew(documents_label);
 	}
+	public void validatePlanOverviewLis() {
+		// TODO Auto-generated method stub
+
+		validateNew(planName);
+		validateNew(nameLabel);
+		validateNew(memberID);
+		validateNew(effective_Date);
+		validateNew(Monthly_Premium);
+		validateNew(ExtraHelp);
+
+	}
+
+	public void validatePlanOverviewShip() {
+		// TODO Auto-generated method stub
+
+		validateNew(planName);
+		validateNew(nameLabel);
+		validateNew(memberID);
+		validateNew(effective_Date);
+
+	}
+
+	public void validateHeadersShip() {
+		// TODO Auto-generated method stub
+
+		validateNew(BenefitsSummaryHeader);
+		validateNew(BenefitSummaryText);
+		String BSExpected = "Below is a summary of your plan benefits. For more information, call 1-800-523-5800 (TTY 711), or check your Certificate of Insurance. Your Certificate of Insurance is your insurance contract and provides all of the terms and conditions of your insurance coverage. It includes benefit descriptions, definitions, exclusions and limitations of your coverage.";
+		String BSActual = BenefitSummaryText.getText();
+		Assert.assertTrue(BSExpected.equalsIgnoreCase(BSActual));
+
+	}
+	
+	
 
 }

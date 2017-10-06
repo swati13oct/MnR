@@ -150,6 +150,29 @@ public class BenefitsAndCoveragePage extends UhcDriver {
     private WebElement Monthly_Premium;
     
     
+	@FindBy(xpath = "//*[@id='planBenefitsApp']/section/div/div[2]/div[2]/div[1]/div/div[1]/div/span")
+	private WebElement ExtraHelp;
+
+	@FindBy(className = "atdd-benefitssummary-headertitle")
+	private WebElement BenefitsSummaryHeader;
+
+	@FindBy(className = "atdd-benefitssummary-subheadertitle")
+	private WebElement Copayscoinsuranceheader;
+
+	@FindBy(className = "atdd-hospitalvisits-title")
+	private WebElement HospitalVisits;
+
+	@FindBy(className = "atdd-emergencycare-title")
+	private WebElement EmergencyHeader;
+
+	@FindBy(className = "atdd-ambulance-title")
+	private WebElement AmbulanceHeader;
+
+	@FindBy(className = "atdd-officevisits-title")
+	private WebElement OfficeVisits;
+
+	@FindBy(className = "atdd-outpatientsurgery-title")
+	private WebElement OutpatientSurgeryCenter;
     
     
  
@@ -666,17 +689,45 @@ public void validateWaystoSave()
 
 public void validatePlanOverview() {
 	// TODO Auto-generated method stub
-	
 
-validateNew(planName);
-validateNew(nameLabel);
-validateNew(memberID);
-validateNew(effective_Date);
-validateNew(Monthly_Premium);
+	validateNew(planName);
+	validateNew(nameLabel);
+	validateNew(memberID);
+	validateNew(effective_Date);
+	validateNew(Monthly_Premium);
 
-	
 }
 
+public void validatePlanOverviewLis() {
+	validateNew(planName);
+	validateNew(nameLabel);
+	validateNew(memberID);
+	validateNew(effective_Date);
+	validateNew(Monthly_Premium);
+	validateNew(ExtraHelp);
+
+}
+
+public void validateHeaders() {
+	validateNew(BenefitsSummaryHeader);
+	validateNew(Copayscoinsuranceheader);
+	validateNew(HospitalVisits);
+	validateNew(OfficeVisits);
+	validateNew(OutpatientSurgeryCenter);
+
+
+}
+
+public void validateHeadersGroup() {
+	validateNew(BenefitsSummaryHeader);
+	validateNew(Copayscoinsuranceheader);
+	validateNew(EmergencyHeader);
+	validateNew(AmbulanceHeader);
+	validateNew(HospitalVisits);
+	validateNew(OfficeVisits);
+	validateNew(OutpatientSurgeryCenter);
+
+}
 
 }
 
