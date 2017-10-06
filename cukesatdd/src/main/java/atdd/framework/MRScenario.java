@@ -567,6 +567,7 @@ public class MRScenario {
 		for (String key : prop.stringPropertyNames()) {
 			String value = prop.getProperty(key);
 			props.put(key, value);
+			System.out.println("Key :"+key+ "value :"+value);
 		}
 		return props;
 	}
