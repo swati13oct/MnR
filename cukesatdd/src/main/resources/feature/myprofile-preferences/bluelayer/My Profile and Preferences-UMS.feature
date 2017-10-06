@@ -216,7 +216,7 @@ Feature: To test My Profile & Preferences flow in UMS site
     Examples: 
         | planType |
         | Group  |
-        | MAPD   |
+       #| MAPD   |
         | MA     |
         |GroupMA |
         |GroupPDP|
