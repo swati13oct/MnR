@@ -758,7 +758,7 @@ public class ProfilePreferencesPage extends UhcDriver {
 	public void validateCheckbox() {
 		// TODO Auto-generated method stub
 		validateNew(iHavereadCheckbox);
-		iHavereadCheckbox.click();
+		//iHavereadCheckbox.click();
 	}
 
 	public void validateSavePreferences() {
