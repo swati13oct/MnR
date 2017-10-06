@@ -112,10 +112,10 @@ public class ProfilePreferencesPage extends UhcDriver {
 	@FindBy(xpath = "//*[@id='tab-1']/div[2]/div[1]/div/div[1]/div[1]/div/div/div/div[2]/div[2]/div/div/span[2]")
 	private WebElement EmailValue;
 
-	@FindBy(xpath = "html/body/div[5]/div[1]/div[2]/div/div[2]/section/div/div[3]/div/p")
+	@FindBy(xpath = "html/body/div[3]/div[3]/div[1]/div[2]/div/div[2]/section/div/div[3]/div/p")
 	private WebElement Seemorewaystext;
 
-	@FindBy(className = "lowercase")
+	@FindBy(className = "atdd-contact-us")
 	private WebElement contactUs;
 
 	@FindBy(className = "atdd-need-help")
@@ -124,10 +124,10 @@ public class ProfilePreferencesPage extends UhcDriver {
 	@FindBy(xpath = "html/body/div[5]/div/div/div/div/a")
 	private WebElement Disclaimerlink;
 
-	@FindBy(xpath = "html/body/div[5]/div[1]/div[2]/div/div[2]/section/div/div[2]/div/div/div[1]/div/div")
+	@FindBy(xpath = "html/body/div[3]/div[3]/div[1]/div[2]/div/div[2]/section/div/div[2]/div/div/div[1]/div/div")
 	private WebElement Technicalsupportsection;
 
-	@FindBy(xpath = "html/body/div[5]/div[1]/div[2]/div/div[2]/section/div/div[2]/div/div/div[2]/div/div")
+	@FindBy(xpath = "html/body/div[3]/div[3]/div[1]/div[2]/div/div[2]/section/div/div[2]/div/div/div[2]/div/div")
 	private WebElement PlanSupportsection;
 
 	public static final String Disclaimerlinkcontent_xpath = ".//*[@id='collapseDisclaimer']";
@@ -469,13 +469,16 @@ public class ProfilePreferencesPage extends UhcDriver {
 		validate(Seemorewaystext);
 	}
 
-	public ContactUsPage clickcontactUslink() {
+	public boolean clickcontactUslink() {
 		validate(contactUs);
 		contactUs.click();
-		if (getTitle().equalsIgnoreCase("AARP Medicare Plans | Contact Us")) {
-			return new ContactUsPage(driver);
+		if (driver.getCurrentUrl().contains("content/uhcm/home/contact.html#/contact-us-two")) {
+			return true;
+		} else {
+			Assert.fail("The element " + contactuslink.getText() + "is not found");
 		}
-		return null;
+		return false;
+		
 	}
 
 	public void validateneedhelpheader() {
