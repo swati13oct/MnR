@@ -974,8 +974,8 @@ Examples:
     And the user validates headers on Bnc page for indi members
      Examples: 
     | planType|
-    #| MAPD    |
-    | MA     |
+    | MAPD    |
+   #| MA    |
     
      
        @BncHeadersGroup
