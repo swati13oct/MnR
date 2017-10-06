@@ -537,7 +537,7 @@ public class ProfilePreferencesPage extends UhcDriver {
 		validate(contactuslink);
 		contactuslink.click();
 
-		if (driver.getCurrentUrl().contains("team-d-aarpmedicareplans.uhc.com/home/contact-us.html")) {
+		if (driver.getCurrentUrl().contains("content/uhcm/home/contact.html#/contact-us-two")) {
 			return true;
 		} else {
 			Assert.fail("The element " + contactuslink.getText() + "is not found");
@@ -758,7 +758,7 @@ public class ProfilePreferencesPage extends UhcDriver {
 	public void validateCheckbox() {
 		// TODO Auto-generated method stub
 		validateNew(iHavereadCheckbox);
-		//iHavereadCheckbox.click();
+		iHavereadCheckbox.click();
 	}
 
 	public void validateSavePreferences() {

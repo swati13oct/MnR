@@ -130,8 +130,8 @@ Feature: To test My Profile & Preferences flow in UMS site
       |GroupMA |
       |GroupPDP|
 
-  @ValidateEmail
-  Scenario Outline: To verify Email section in UMS site
+    @ValidateEmail
+    Scenario Outline: To verify Email section in UMS site
     Given registered member with following details for Profile and Preferences flow
       | <planType> |
     Then the user navigates to Profile page
@@ -214,26 +214,30 @@ Feature: To test My Profile & Preferences flow in UMS site
     #And the user validates on clicking contact us link it should route to contact us page
 
     Examples: 
-      | planType |
-      #| PDP      |
-       | MAPD     |
-       | Group    |
-
+        | planType |
+        | Group  |
+        | MAPD   |
+        | MA     |
+        |GroupMA |
+        |GroupPDP|
+        
   @PermanentAddress
   Scenario Outline: To verify the edit functionality in Account Profile section in UMS site
     Given registered member with following details for Profile and Preferences flow
       | <planType> |
     When the user navigates to Profile page
     Then the user validates permanent address section
-    #And the user clicks on contact us then contact us page should come
+    And the user clicks on contact us then contact us page should come
 
     Examples: 
-      | planType |
-     #| PDP      |
-      | MAPD     |
-      | Group    |
+        | planType |
+        | Group  |
+        | MAPD   |
+        | MA     |
+        |GroupMA |
+        |GroupPDP|
 
-  #| MA       |
+  
   @CommunicationPreferences
   Scenario Outline: To verify Go green in UMS site
     Given registered member with following details for Profile and Preferences flow
