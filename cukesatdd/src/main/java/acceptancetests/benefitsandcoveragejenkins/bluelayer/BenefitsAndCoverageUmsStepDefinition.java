@@ -94,7 +94,7 @@ public class BenefitsAndCoverageUmsStepDefinition {
 		}
 
 		WebDriver wd = getLoginScenario().getWebDriver();
-		MRScenario.keyEvent(wd);
+		//MRScenario.keyEvent(wd);
 
 		LoginPage2 loginPage = new LoginPage2(wd);
 		AccountHomePage accountHomePage = (AccountHomePage) loginPage.loginWith(userName, pwd, category);
@@ -139,7 +139,7 @@ public class BenefitsAndCoverageUmsStepDefinition {
 			getLoginScenario().saveBean(PageConstants.BENEFITS_COVERAGE_PAGE, benefitsCoveragePage);
 
 			// Get actual data
-
+/*
 			JSONObject actualJsonObj = benefitsCoveragePage.benefitsandcoverageJson;
 			loginScenario.saveBean(PlanBenefitsAndCoverageCommonConstants.BENEFITS_AND_COVERAGE_ACTUAL, actualJsonObj);
 			System.out.println("Benefits and coverage actual ==============>" + actualJsonObj.toString());
@@ -152,7 +152,7 @@ public class BenefitsAndCoverageUmsStepDefinition {
 			System.out.println(
 					"Benefits and coverage expected ==============>" + benefitsandcoverageExectedJson.toString());
 			loginScenario.saveBean(PlanBenefitsAndCoverageCommonConstants.BENEFITS_AND_COVERAGE_EXPECTED,
-					benefitsandcoverageExectedJson);
+					benefitsandcoverageExectedJson);*/
 		}
 	}
 

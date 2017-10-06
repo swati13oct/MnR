@@ -226,10 +226,10 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 	
 	public void openAndValidate() {
 
-		JSONObject jsonObject = new JSONObject();
+		/*JSONObject jsonObject = new JSONObject();
 		for (String key : benefitsCoverage.getExpectedData().keySet()) {
 			List<WebElement> elements = findElements(benefitsCoverage.getExpectedData().get(key));
-			/*if (elements.size() == 1) {
+			if (elements.size() == 1) {
 				validate(elements.get(0));
 				try {
 					jsonObject.put(key, elements.get(0).getText());
@@ -238,7 +238,7 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-			} else if (elements.size() > 1) {*/
+			} else if (elements.size() > 1) {
 				JSONArray jsonArray = new JSONArray();
 				for (WebElement element : elements) {
 
@@ -266,7 +266,7 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 		benefitsandcoverageJson = jsonObject;
 
 		System.out.println("BenefitsCoverageJson----->" + benefitsandcoverageJson);
-		
+		*/
 	}
 	
 	
