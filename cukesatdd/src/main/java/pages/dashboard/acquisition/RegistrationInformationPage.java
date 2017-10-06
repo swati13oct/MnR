@@ -184,7 +184,7 @@ public class RegistrationInformationPage extends UhcDriver {
 	private WebElement additionalInfoHeader;
 
 	/** The PFFS member Id error message */
-	@FindBy(id = "pffsMemberErrorMsg")
+	@FindBy(xpath = ".//*[@id='errorPffsMember']/p")
 	private WebElement pffsErrorMessage;
 
 	/** Multiple Plans **/
