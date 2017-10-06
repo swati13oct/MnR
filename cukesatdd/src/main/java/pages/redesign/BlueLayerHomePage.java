@@ -45,8 +45,11 @@ public class BlueLayerHomePage extends UhcDriver {
 	@FindBy(xpath = "//a[contains(text(), 'Go to EOB Search')]")
 	private WebElement EOBsearchLink;
 	
-	@FindBy(xpath = "//a[contains(text(), 'Go to MyProfile ')]")
+	@FindBy(xpath = "//a[contains(text(), 'Go to My Profile')]")
 	private WebElement MyProfileLink;
+
+	@FindBy(xpath = "//*[@id='profilePreferencesController']//h1")
+	private WebElement MyProfilePageHeader;
 
 	@FindBy(xpath = "//a[contains(text(), 'Go to Payments')]")
 	private WebElement GoToPaymentsLink;
@@ -139,16 +142,14 @@ public class BlueLayerHomePage extends UhcDriver {
 
 	public MyProfilesPage navigateToProfAndPref() {
 
-		MyProfileLink.click();
+		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 		CommonUtility.checkPageIsReady(driver);
-		/*profAndPrefLink.click();
-		CommonUtility.waitForPageLoad(driver, myProfilePageHeading, 25);
-		Cookie ck = driver.manage().getCookieNamed("green");
-		System.out.println("Cooke Name ::: " + ck.getName());
-		System.out.println("Cooke value ::: " + ck.getValue());*/
-		if (driver.getTitle().equalsIgnoreCase(
-				"AARP Medicare Plans | My Personal Profile") || driver.getTitle().equalsIgnoreCase(
-						"My Profile & Preferences")) {
+
+		MyProfileLink.click();
+		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+
+		CommonUtility.checkPageIsReady(driver);
+		if (MyProfilePageHeader.isDisplayed()) {
 			return new MyProfilesPage(driver);
 		}
 		else{

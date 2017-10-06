@@ -3,6 +3,8 @@
  */
 package pages.redesign;
 
+import java.util.concurrent.TimeUnit;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.openqa.selenium.Alert;
@@ -72,6 +74,8 @@ public class UlayerLoginPage extends UhcDriver {
 		alert.accept();
 		Alert alert1 = driver.switchTo().alert();
 		alert1.accept();
+		driver.manage().timeouts().implicitlyWait(300, TimeUnit.SECONDS);
+		CommonUtility.checkPageIsReady(driver);
 		if (currentUrl().contains("home/testharness.html")){
 			System.out.println("@@@@@@@@@@@@ Ulayer Test-Harness Home Page Displayed @@@@@@@@@@@@");
 			return new UlayerHomePage(driver);

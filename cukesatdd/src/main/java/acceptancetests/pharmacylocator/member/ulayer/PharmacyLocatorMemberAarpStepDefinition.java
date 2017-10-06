@@ -6,9 +6,11 @@ package acceptancetests.pharmacylocator.member.ulayer;
 import gherkin.formatter.model.DataTableRow;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -17,14 +19,15 @@ import org.openqa.selenium.WebDriver;
 import org.skyscreamer.jsonassert.JSONAssert;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import pages.member.ulayer.AccountHomePage;
-import pages.member.ulayer.LoginPage;
-import pages.member.ulayer.PharmacyResultPage;
-import pages.member.ulayer.PharmacySearchPage;
+import pages.redesign.UlayerHomePage;
+import pages.redesign.UlayerLoginPage;
+import pages.redesign.PharmacySearchPage;
+import pages.redesign.PharmacyResultPage;
 import acceptancetests.atdd.data.CommonConstants;
 import acceptancetests.atdd.data.member.PageConstants;
 import acceptancetests.login.data.LoginCommonConstants;
 import acceptancetests.benefitsandcoverage.data.PlanBenefitsAndCoverageCommonConstants;
+import acceptancetests.claims.data.ClaimsCommonConstants;
 import acceptancetests.pharmacylocator.data.PharmacySearchCommonConstants;
 import atdd.framework.MRScenario;
 import cucumber.annotation.en.And;
@@ -49,11 +52,38 @@ public class PharmacyLocatorMemberAarpStepDefinition {
 	@Given("^registered member to verify locate a pharmacy in AARP Site$")
 	public void registered_member_located_pharmacy_aarp(
 			DataTable memberAttributes) {
+		
 		/* Reading the given attribute from feature file */
-		List<List<String>> dataTable = memberAttributes.raw();
+		List<DataTableRow> memberAttributesRow = memberAttributes
+				.getGherkinRows();
+		Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells()
+					.get(0), memberAttributesRow.get(i).getCells().get(1));
+		}
+		String planType = memberAttributesMap.get("Plan Type");
+		String businessType = null;
+		if (planType.equalsIgnoreCase("MA")
+				|| planType.equalsIgnoreCase("MAPD")
+				|| planType.equalsIgnoreCase("PDP")) {
+			businessType = "GOVT";
+		} else {
+			businessType = "SHIP";
+		}
+		getLoginScenario().saveBean(ClaimsCommonConstants.BUSINESS_TYPE,
+				businessType);
+
+		Set<String> memberAttributesKeySet = memberAttributesMap.keySet();
 		List<String> desiredAttributes = new ArrayList<String>();
-		for (List<String> data : dataTable) {
-			desiredAttributes.add(data.get(0));
+		for (Iterator<String> iterator = memberAttributesKeySet.iterator(); iterator
+				.hasNext();) {
+			{
+				String key = iterator.next();
+				if (!memberAttributesMap.get(key).isEmpty()) {
+					desiredAttributes.add(memberAttributesMap.get(key));
+				}
+			}
 		}
 		System.out.println("desiredAttributes.." + desiredAttributes);
 		Map<String, String> loginCreds = loginScenario
@@ -71,14 +101,21 @@ public class PharmacyLocatorMemberAarpStepDefinition {
 			System.out.println("User is..." + userName);
 			System.out.println("Password is..." + pwd);
 			getLoginScenario()
-			.saveBean(LoginCommonConstants.USERNAME, userName);
+					.saveBean(LoginCommonConstants.USERNAME, userName);
 			getLoginScenario().saveBean(LoginCommonConstants.PASSWORD, pwd);
 		}
 
 		WebDriver wd = getLoginScenario().getWebDriver();
 
-		LoginPage loginPage = new LoginPage(wd);
-		AccountHomePage accountHomePage = (AccountHomePage)loginPage.loginWith(userName, pwd);
+		
+		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
+		JSONObject accountHomeActualJson = null;
+		UlayerLoginPage loginPage = new UlayerLoginPage(wd);
+
+		UlayerLoginPage accountHomePage = (UlayerLoginPage)loginPage.loginWith(userName, pwd);
+		
+//		 getLoginScenario().saveBean(PageConstants.ACCOUNT_HOME_PAGE,accountHomePage);
+		
 		//JSONObject accountHomeActualJson = null;
 		 
 		/* Get expected data */
@@ -91,8 +128,13 @@ public class PharmacyLocatorMemberAarpStepDefinition {
 			getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
 			getLoginScenario().saveBean(PageConstants.ACCOUNT_HOME_PAGE,
 					accountHomePage);
+			System.out.println("********* Ulayer Test Harness Page DIsplayed **************");
 			/*Assert.assertTrue(true);
 			accountHomeActualJson = accountHomePage.accountHomeJson;*/
+		}
+		else {
+			System.out.println("@@@@@@@ ULayer Test Harness Home page not Displayed @@@@@@@");
+			Assert.fail();
 		}
 		/*try {
 			JSONAssert.assertEquals(accountHomeExpectedJson,
@@ -107,26 +149,39 @@ public class PharmacyLocatorMemberAarpStepDefinition {
 
 	@When("^the user navigates to pharmacy search page in AARP site$")
 	public void user_views_pharmacy_locator_aarp() {
-		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario()
+		UlayerHomePage accountHomePage = (UlayerHomePage) getLoginScenario()
 				.getBean(PageConstants.ACCOUNT_HOME_PAGE);
-		PharmacySearchPage pharmacySearchPage = accountHomePage
-				.navigateToPharmacyLocator();
-		/*if (pharmacySearchPage != null) {
+		PharmacySearchPage pharmacySearchPage = accountHomePage.navigateToPharmacyLocator();
+		if (pharmacySearchPage != null) {
 			getLoginScenario().saveBean(PageConstants.PHARMACY_SEARCH_PAGE,
 					pharmacySearchPage);
 			Assert.assertTrue(true);
 		} else {
 			Assert.fail("Failed to load Pharmacy search page");
-		}*/
+		}
 	}
 
 	@And("^the user enters distance details in AARP site$")
 	public void user_enters_distance_details_aarp(DataTable zipAttributes) {
+		
 		List<DataTableRow> zipAttributesRow = zipAttributes.getGherkinRows();
-		String distance = zipAttributesRow.get(0).getCells().get(0);
+		Map<String, String> zipAttributesMap = new LinkedHashMap<String, String>();
+		for (int i = 0; i < zipAttributesRow.size(); i++) {
 
+			zipAttributesMap.put(zipAttributesRow.get(i).getCells().get(0),
+					zipAttributesRow.get(i).getCells().get(1));
+		}
+		String distance = zipAttributesMap.get("Distance");
+		getLoginScenario().saveBean(PharmacySearchCommonConstants.DISTANCE,
+				distance);
+	
+		
+		/*List<DataTableRow> zipAttributesRow = zipAttributes.getGherkinRows();
+		String distance = zipAttributesRow.get(0).getCells().get(1);
+*/
 		PharmacySearchPage pharmacySearchPage = (PharmacySearchPage) getLoginScenario()
 				.getBean(PageConstants.PHARMACY_SEARCH_PAGE);
+		System.out.println("Select Distance from Dropdown : "+distance);
 		pharmacySearchPage = pharmacySearchPage.enterDistanceDetails(distance);
 		if (pharmacySearchPage != null) {
 			getLoginScenario().saveBean(PageConstants.PHARMACY_SEARCH_PAGE,
@@ -188,7 +243,7 @@ public class PharmacyLocatorMemberAarpStepDefinition {
 		pharmacyResultPage.logOut();
 	}
 
-	@And("^the user selects \"Show pharmacies for these services\" in AARP Site$")
+/*	@And("^the user selects \"Show pharmacies for these services\" in AARP Site$")
 	public void user_selects_pharmacy_type_aarp_site(
 			DataTable pharmacyAttributes) {
 		List<DataTableRow> pharmacyAttributesRow = pharmacyAttributes
@@ -203,7 +258,7 @@ public class PharmacyLocatorMemberAarpStepDefinition {
 				pharmacySearchAarpPage);
 
 	}
-
+*/
 	@And("^the user enters zipcode and distance details for AARP Site$")
 	public void user_enters_zipcode_distance_details_aarp(
 			DataTable zipAttributes) {			
@@ -462,10 +517,9 @@ public class PharmacyLocatorMemberAarpStepDefinition {
 	
 	@And("^the user validate filter and tooltip is available in AARP site$")
 	public void user_views_filter_and_tooltip_available_aarp() {
-		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario()
+		UlayerHomePage accountHomePage = (UlayerHomePage) getLoginScenario()
 				.getBean(PageConstants.ACCOUNT_HOME_PAGE);
-		PharmacySearchPage pharmacySearchPage = accountHomePage
-				.navigateToFilterAndTooltipResult();		
+//		PharmacySearchPage pharmacySearchPage = accountHomePage.navigateToFilterAndTooltipResult();		
 	}
 	
 	@Then("^the user validates the content on pharmacy search page$")

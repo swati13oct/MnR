@@ -5,6 +5,7 @@ package pages.redesign;
 
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -21,144 +22,122 @@ import atdd.framework.UhcDriver;
 
 public class MyProfilesPage extends UhcDriver{
 	
-   @FindBy(className = "shipmyplans_tab")
-   private WebElement myProfilesTab;
-   
-   @FindBy(className = "shipmyprefers_tab")
-   private WebElement myPrefTab;
-   
-   @FindBy(id = "currentPasswordVerify")
-	private WebElement currentPasswordField;
+	//h1[@class="h4 margin-none"]
+		
+	@FindBy(className = "h4 margin-none")
+	private WebElement myProfileHeader;
 	
-	@FindBy(id = "countrySelect")
-	private WebElement selectCountry;
-	
-	@FindBy(id = "stateSelect")
-	private WebElement selectState;
+	//Edit email link
+	@FindBy(xpath = "//a[@class = 'edit-btn edit-btn-email']")
+	private WebElement EditEmailLink;
 
-	@FindBy(id = "password")
-	private WebElement passwordField;
+	//Edit email modal UI Elements	
+	@FindBy(id = "emailNew")
+	private WebElement NewEmailTextBx;
 
-	@FindBy(id = "passwordVerify")
-	private WebElement passwordVerifyField;
+	@FindBy(id = "emailNewConfirm")
+	private WebElement ConfirmEmailTextBx;
+	
+	@FindBy(id = "updateEmail")
+	private WebElement EmailSaveButton;
+	
+	@FindBy(xpath = "//*[@id='email-form']//a")
+	private WebElement EmailCancelButton;
+	
+	//Edit email error messages - Text changes, error lement is same
+	@FindBy(id = "emailNew-error")
+	private WebElement NewEmailErrorMsg;
 
-	@FindBy(xpath = "//div[@class='overflowprofile']/div[3]/div[2]/ul/li[2]/input")
-	private WebElement emailField;
+	@FindBy(id = "emailNewConfirm-error")
+	private WebElement ConfirmEmailErrorMsg;
+	
+	
+	//Add mailing/ Alternate address Link
+	@FindBy(xpath = "//*[@id='temporaryAddress']//a[@class='add-address-btn']")
+	private WebElement AddTempAddressLnk;
 
-	@FindBy(xpath = "//div[@class='overflowprofile']/div[3]/div[2]/ul/li[4]/input")
-	private WebElement emailVerifyField;
 	
-	@FindBy(xpath = "//form[@id='editProfileForm']/div[2]/div[2]/div[3]/div[2]/div[1]/a")
-	private WebElement planProfileEditLink;
+	//Add mailing Address modal UI Elements
+	@FindBy(id = "altStreet")
+	private WebElement TempAddressLine1;
 	
-	@FindBy(xpath = "//form[@id='editProfileForm']/div[2]/div[2]/div[4]/div[2]/div[1]/a")
-	private WebElement alternateAddressEditLink;
+	@FindBy(id = "altStreet2")
+	private WebElement TempAddressLine2;
+	
+	@FindBy(id = "altCity")
+	private WebElement TempAddressCity;
+	
+	@FindBy(id = "altState")
+	private WebElement TempAddressStateDropDown;
+	
+	@FindBy(id = "altZip")
+	private WebElement TempAddressZip;
+	
+	@FindBy(id = "startDateMM")
+	private WebElement StartDate_MonDropDown;
+	
+	@FindBy(id = "startDateDD")
+	private WebElement StartDate_DayDropDown;
+	
+	@FindBy(id = "startDateYYYY")
+	private WebElement StartDate_YearDropDown;
 
-	@FindBy(xpath = "//div[@class='editLink']")
-	private List<WebElement> editLink;
+	@FindBy(id = "endDateMM")
+	private WebElement EndDate_MonDropDown;
+	
+	@FindBy(id = "endDateDD")
+	private WebElement EndDate_DayDropDown;
+	
+	@FindBy(id = "endDateYYYY")
+	private WebElement EndDate_YearDropDown;
+	
+	@FindBy(xpath = "//*[@id='address-temporary-form']//button")
+	private WebElement TempAddressSaveButton;
+	
+	@FindBy(xpath = "//*[@id='address-temporary-form']/fieldset//a")
+	private WebElement TempAddressCancelLink;
+	
+	//Temporary Address Error Messages
+	
+	@FindBy(id = "temporaryStreet-error")
+	private WebElement NoStreetAddError;
 
-	@FindBy(xpath = "//div[@class='accProMidBg']")
-	private WebElement accountInfo;
+	@FindBy(id = "temporaryStreet1-error")
+	private WebElement StreetAddFormatError;
 
-	@FindBy(linkText = "save")
-	private WebElement saveButton;
+	@FindBy(id = "temporaryStreet2-error")
+	private WebElement StreetAdd2FormatError;
+	
+	@FindBy(id = "temporaryCity-error")
+	private WebElement NoCityError;
 
-	@FindBy(xpath = "//div[@class='myProSubCntMidBg']")
-	private WebElement planProfileInfo;
+	@FindBy(id = "temporaryState-error")
+	private WebElement NoStateError;
 
-	@FindBy(id = "temporaryAddress.addressLine1")
-	private WebElement tempAddress1Field;
+	@FindBy(id = "temporaryZip-error")
+	private WebElement NoZipcodeError;
+
+	@FindBy(id = "temporaryEndDateisEarlierThenStartDate-error")
+	private WebElement ZipStateMismatch;
 	
-	@FindBy(id = "temporaryAddress.addressLine2")
-	private WebElement tempAddress2Field;
+	@FindBy(id = "temporaryStartDate-error")
+	private WebElement NoStartDateError;
+
+	@FindBy(id = "temporaryEndDate-error")
+	private WebElement NoEndDateError;
+
+	@FindBy(id = "temporaryEndDateisEarlierThenStartDate-error")
+	private WebElement EndDateEarlierStartDate;
+
+	@FindBy(xpath = "//*[@id='temporaryEndDateisGreaterThan6Months-error']/p")
+	private WebElement EndDate6monthsError;
 	
-	@FindBy(id = "temporaryAddress.city")
-	private WebElement cityField;
+	@FindBy(id = "temporaryStreet2-error")
+	private WebElement StreetAdd2Error;
 	
-	@FindBy(id = "temporaryAddress.zipCode")
-	private WebElement zipCodeField;
-	
-	@FindBy(id = "temporaryAddress.startDate.month")
-	private WebElement tempAddStartDateMonthField;
-	
-	@FindBy(id = "temporaryAddress.startDate.day")
-	private WebElement tempAddStartDateDayField;
-	
-	@FindBy(id = "temporaryAddress.startDate.year")
-	private WebElement tempAddStartDateYearField;
-	
-	@FindBy(id = "temporaryAddress.stopDate.month")
-	private WebElement tempAddStopDateMonthField;
-	
-	@FindBy(id = "temporaryAddress.stopDate.day")
-	private WebElement tempAddStopDateDayField;
-	
-	@FindBy(id = "temporaryAddress.stopDate.year")
-	private WebElement tempAddStopDateYearField;
-	
-	@FindBy(id = "permanentAddress.addressLine1")
-	private WebElement addressLine1Field;
-	
-	@FindBy(id = "permanentAddress.addressLine2")
-	private WebElement addressLine2Field;
-	
-	@FindBy(id = "dayPhone.areaCode")
-	private WebElement areaCodeField;
-	
-	@FindBy(id = "dayPhone.numberPrefix")
-	private WebElement numberPrefixField;
-	
-	@FindBy(id = "dayPhone.number")
-	private WebElement numberField;
-	
-	@FindBy(id = "eveningPhone.areaCode")
-	private WebElement areaCodeEveningField;
-	
-	@FindBy(id = "eveningPhone.numberPrefix")
-	private WebElement numberPrefixEveningField;
-	
-	@FindBy(id = "eveningPhone.number")
-	private WebElement numberEveningField;
-	
-	@FindBy(css = "div.accountProfile.margin_bot_5px > div.accProMidBg > div.editLink > a")
-	private WebElement mailingAddressEditLink;
-	
-	@FindBy(id = "mailingAddress.addressLine1")
-	private WebElement mailingAddress1;
-	
-	@FindBy(id = "mailingAddress.city")
-	private WebElement mailingAddresscity;
-	
-	@FindBy(id = "mailingAddress.addressLine2")
-	private WebElement mailingAddress2;
-	
-	@FindBy(id = "mailingAddress.zipCode")
-	private WebElement mailingAddZip;
-	
-	@FindBy(id = "mailingAddress.startDate.month")
-	private WebElement mailingAddStartDateMonth;
-	
-	@FindBy(id = "mailingAddress.startDate.day")
-	private WebElement mailingAddStartDateDay;
-	
-	@FindBy(id = "mailingAddress.startDate.year")
-	private WebElement mailingAddStartDateYear;
-	
-	@FindBy(id = "mailingAddress.stopDate.month")
-	private WebElement mailingAddStopDateMonth;
-	
-	@FindBy(id = "mailingAddress.stopDate.day")
-	private WebElement mailingAddStopDateDay;
-	
-	@FindBy(id = "mailingAddress.stopDate.year")
-	private WebElement mailingAddStopDateYear;
-	
-	@FindBy(xpath = "//div[@class='myProfileMid']/div/form/div/div/div/div[2]/div/div[2]/h3")
-	private WebElement preferencesPageHeading;
-	
-	@FindBy(id = "disclosure_link")
-	private WebElement logOut;
-	
+
+
+
 	private PageData myProfiles;
 
 	public JSONObject myProfilesJson;
@@ -169,183 +148,8 @@ public class MyProfilesPage extends UhcDriver{
 		String fileName = CommonConstants.MY_PROFILES_PAGE_DATA;
 		myProfiles = CommonUtility.readPageData(fileName,
 				CommonConstants.PAGE_OBJECT_DIRECTORY_ULAYER_MEMBER);
-		//openAndValidate();
+//	openAndValidate();
 	}
-/*
-	public MyPreferencesPage navigateToMyPrefTab() {
-		myPrefTab.click();
-		CommonUtility.waitForPageLoad(driver, preferencesPageHeading, 10);
-		if(currentUrl().contains("my-preferences"))
-		{
-			return new MyPreferencesPage(driver);
-		}
-		return null;
-	}
-*/	
-	public void logOut() {
-		logOut.click();
-
-	}	
-	
-	public String getAccountInfo() {
-		return accountInfo.getText();
-
-	}
-
-	public String getPlanProfileInfo() {
-		return planProfileInfo.getText();
-	}
-
-	public void editProfile(Map<String, String> profileAttributesMap) {
-		WebElement accountInfoElement = editLink.get(0);
-		accountInfoElement.findElement(By.linkText("Edit")).click();
-		currentPasswordField.click();
-		currentPasswordField.clear();
-		currentPasswordField.sendKeys(profileAttributesMap
-				.get("Current password"));
-		passwordField.click();
-		passwordField.clear();
-		passwordField.sendKeys(profileAttributesMap.get("New password"));
-		passwordVerifyField.click();
-		passwordVerifyField.clear();
-		passwordVerifyField.sendKeys(profileAttributesMap
-				.get("Confirm password"));
-		emailField.click();
-		emailField.clear();
-		emailField.sendKeys(profileAttributesMap.get("New email address"));
-		emailVerifyField.click();
-		emailVerifyField.clear();
-		emailVerifyField.sendKeys(profileAttributesMap
-				.get("Confirm email address"));
-		saveButton.click();
-		System.out.println("accountEdited");
-
-	}
-
-	public void editPlanProfile(Map<String, String> profileAttributesMap) {
-		planProfileEditLink.click();
-		addressLine1Field.click();
-		addressLine1Field.clear();
-		addressLine1Field.sendKeys(profileAttributesMap.get("Street address"));
-		addressLine2Field.click();
-		addressLine2Field.clear();
-		addressLine2Field.sendKeys(profileAttributesMap.get("Street address2"));		
-		areaCodeField.click();
-		areaCodeField.clear();
-		areaCodeField.sendKeys(profileAttributesMap.get("Daytime phone").split("-")[0]);
-		numberPrefixField.click();
-		numberPrefixField.clear();
-		numberPrefixField.sendKeys(profileAttributesMap.get("Daytime phone").split("-")[1]);
-		numberField.click();
-		numberField.clear();
-		numberField.sendKeys(profileAttributesMap.get("Daytime phone").split("-")[2]);
-		areaCodeEveningField.click();
-		areaCodeEveningField.clear();
-		areaCodeEveningField.sendKeys(profileAttributesMap.get("Evening phone").split("-")[0]);
-		numberPrefixEveningField.click();
-		numberPrefixEveningField.clear();
-		numberPrefixEveningField.sendKeys(profileAttributesMap.get("Evening phone").split("-")[1]);
-		numberEveningField.click();
-		numberEveningField.clear();
-		numberEveningField.sendKeys(profileAttributesMap.get("Evening phone").split("-")[2]);
-		saveButton.click();
-	}
-
-	public void editAlternateAddress(Map<String, String> profileAttributesMap) {
-		alternateAddressEditLink.click();
-		tempAddress1Field.click();
-		tempAddress1Field.clear();
-		tempAddress1Field.sendKeys(profileAttributesMap.get("Street address"));
-		tempAddress2Field.click();
-		tempAddress2Field.clear();
-		tempAddress2Field.sendKeys(profileAttributesMap.get("Street address2"));
-		cityField.click();
-		cityField.clear();
-		cityField.sendKeys(profileAttributesMap.get("City"));
-		selectState.click();
-		selectState.sendKeys(profileAttributesMap.get("State"));
-		zipCodeField.click();
-		zipCodeField.clear();
-		zipCodeField.sendKeys(profileAttributesMap.get("Zip Code"));
-		selectCountry.click();
-		selectCountry.sendKeys(profileAttributesMap.get("Country"));
-		/*String countryXPath = "countrySelect/*[. = '"+profileAttributesMap.get("Country")+"']";
-		WebElement countryElement = driver.findElement(By.xpath(countryXPath));
-		if (!countryElement.isSelected()) {
-			countryElement.click();
-        }*/
-		tempAddStartDateMonthField.clear();
-		tempAddStartDateMonthField.clear();
-		tempAddStartDateMonthField.sendKeys(profileAttributesMap.get("Start Date").split("-")[0]);
-		tempAddStopDateDayField.clear();
-		tempAddStopDateDayField.clear();
-		tempAddStopDateDayField.sendKeys(profileAttributesMap.get("Start Date").split("-")[1]);
-		tempAddStopDateYearField.clear();
-		tempAddStopDateYearField.clear();
-		tempAddStopDateYearField.sendKeys(profileAttributesMap.get("Start Date").split("-")[2]);
-		tempAddStopDateMonthField.clear();
-		tempAddStopDateMonthField.clear();
-		tempAddStopDateMonthField.sendKeys(profileAttributesMap.get("End Date").split("-")[0]);
-		tempAddStopDateDayField.clear();
-		tempAddStopDateDayField.clear();
-		tempAddStopDateDayField.sendKeys(profileAttributesMap.get("End Date").split("-")[1]);
-		tempAddStopDateYearField.clear();
-		tempAddStopDateYearField.clear();
-		tempAddStopDateYearField.sendKeys(profileAttributesMap.get("End Date").split("-")[2]);
-		saveButton.click();
-	}
-
-	public void editMailingAddress(Map<String, String> profileAttributesMap) {
-
-		mailingAddressEditLink.click();
-		mailingAddress1.click();
-		mailingAddress1.clear();
-		mailingAddress1.sendKeys(profileAttributesMap.get("Street address"));
-		mailingAddress2.click();
-		mailingAddress2.clear();
-		mailingAddress2.sendKeys(profileAttributesMap.get("Street address2"));
-		mailingAddresscity.click();
-		mailingAddresscity.clear();
-		mailingAddresscity.sendKeys(profileAttributesMap.get("City"));
-		/*String stateXPath = "stateSelect/*[. = '"+profileAttributesMap.get("State")+"']";
-		WebElement stateElement  = driver.findElement(By.xpath(stateXPath));
-		if (!stateElement.isSelected()) {
-			stateElement.click();
-        }*/
-		selectState.click();
-		selectState.sendKeys(profileAttributesMap.get("State"));
-		mailingAddZip.click();
-		mailingAddZip.clear();
-		mailingAddZip.sendKeys(profileAttributesMap.get("Zip Code"));
-		/*String countryXPath = "countrySelect/*[. = '"+profileAttributesMap.get("Country")+"']";
-		WebElement countryElement = driver.findElement(By.xpath(countryXPath));
-		if (!countryElement.isSelected()) {
-			countryElement.click();
-        }*/
-		
-		selectCountry.click();
-		selectCountry.sendKeys(profileAttributesMap.get("Country"));
-		mailingAddStartDateMonth.clear();
-		mailingAddStartDateMonth.clear();
-		mailingAddStartDateMonth.sendKeys(profileAttributesMap.get("Start Date").split("-")[0]);
-		mailingAddStartDateDay.clear();
-		mailingAddStartDateDay.clear();
-		mailingAddStartDateDay.sendKeys(profileAttributesMap.get("Start Date").split("-")[1]);
-		mailingAddStartDateYear.clear();
-		mailingAddStartDateYear.clear();
-		mailingAddStartDateYear.sendKeys(profileAttributesMap.get("Start Date").split("-")[2]);
-		mailingAddStopDateMonth.clear();
-		mailingAddStopDateMonth.clear();
-		mailingAddStopDateMonth.sendKeys(profileAttributesMap.get("End Date").split("-")[0]);
-		mailingAddStopDateDay.clear();
-		mailingAddStopDateDay.clear();
-		mailingAddStopDateDay.sendKeys(profileAttributesMap.get("End Date").split("-")[1]);
-		mailingAddStopDateYear.clear();
-		mailingAddStopDateYear.clear();
-		mailingAddStopDateYear.sendKeys(profileAttributesMap.get("End Date").split("-")[2]);
-		saveButton.click();		
-	}
-
 
 	public boolean Validate_Single_Tab_SHIP(){
 		List<WebElement> PlanTabs = driver.findElements(By.xpath("//a[contains(text(),'Supplemental  Insurance Plans')]"));
@@ -360,28 +164,12 @@ public class MyProfilesPage extends UhcDriver{
 
 	@Override
 	public void openAndValidate() {
-		//validate(logOut);
-
-		JSONObject jsonObject = new JSONObject();
-		for (String key : myProfiles.getExpectedData().keySet()) {
-			WebElement element = findElement(myProfiles.getExpectedData()
-					.get(key));
-			if (element != null) {
-				validate(element);
-				try {
-					jsonObject.put(key, element.getText());
-				} catch (JSONException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-			}
-		}
-		myProfilesJson = jsonObject;
 		
-		System.out.println("myProfilesJson----->"+myProfilesJson);
+		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+		validate(myProfileHeader);
 		
+		System.out.println("******** Page Header Displayed : "+myProfileHeader.getText()+"********");
 	}
-
 
 	public JSONObject getExpectedData(Map<String, JSONObject> expectedDataMap) {
 		JSONObject globalExpectedJson = expectedDataMap
@@ -393,5 +181,140 @@ public class MyProfilesPage extends UhcDriver{
 		return myProfilesPageExpectedJson;
 	}
 
+	public boolean ValidateEmailErrorMessages(){
+		
+		boolean flag;
+		
+		EditEmailLink.click();
+		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+		if (!validate(NewEmailTextBx)){
+			System.out.println("@@@@@@@  Edit Email Modal is not Displayed  @@@@@@@");
+			return false;
+		}
+		System.out.println("******** VALIDATING ERROR MESSAGE FOR NO EMAIL ENTERED **********");
+		EmailSaveButton.click();
+		if (NewEmailErrorMsg.getText().contentEquals("New email address is a required field.") 
+				&& ConfirmEmailErrorMsg.getText().contentEquals("Confirm email address is a required field.")){
+			System.out.println("******* Error message for New Email not provided is Displayed : "+NewEmailErrorMsg.getText()+" ********");
+			System.out.println("******* Error message for Confirm Email not proveded is Displayed : "+ConfirmEmailErrorMsg.getText()+" ********");
+			flag = true;
+		}
+		else{
+			System.out.println("******* Error message for No Email Entered for New and Confirm Emil Fields is Not Displayed : ********");
+			flag = false;
+		}
+		
+		System.out.println("******** VALIDATING ERROR MESSAGE FOR INVALID EMAIL ENTERED **********");
+		NewEmailTextBx.sendKeys("uhc@optum");
+		EmailSaveButton.click();
+		if (NewEmailErrorMsg.getText().contentEquals("Enter your email address like this: yourname@emailprovider.com")){
+			System.out.println("******* Error message for Incorrect New Email Format Displayed : "+NewEmailErrorMsg.getText()+" ********");
+			flag = true;
+		}
+		else{
+			System.out.println("******* Error message for Incorrect New Email Format is Not Displayed : ********");
+			flag = false;
+		}
+		ConfirmEmailTextBx.sendKeys("uhc@optum");
+		EmailSaveButton.click();
+		if (ConfirmEmailErrorMsg.getText().contentEquals("Enter your email address like this: yourname@emailprovider.com")){
+			System.out.println("******* Error message for Incorrect Confirm Email Format Displayed : "+ConfirmEmailTextBx.getText()+" ********");
+			flag = true;
+		}
+		else{
+			System.out.println("******* Error message for Incorrect New Email Format is Not Displayed : ********");
+			flag = false;
+		}
+
+		System.out.println("******** Validating Error Message for Email Mismatch in Email provided for New and Confirm Email **********");
+		NewEmailTextBx.sendKeys("uhcmnrportals@gmail.com");
+		ConfirmEmailTextBx.sendKeys("uhcmnrportals1@gmail.com");
+		EmailSaveButton.click();
+		if (ConfirmEmailErrorMsg.getText().contentEquals("Your email confirmation and email address do not match.")){
+			System.out.println("******* Error message for Mismatch in email is displayed : "+ConfirmEmailErrorMsg.getText()+" ********");
+			flag = true;
+		}
+		else{
+			System.out.println("******* Error message for Mismatch in email is Not Displayed : ********");
+			flag = false;
+		}
+		return flag;
+	}
+	
+	public boolean ValidateTempAddressErrorMessages(){
+		boolean flag = true;
+		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+		CommonUtility.checkPageIsReady(driver);
+
+		AddTempAddressLnk.click();
+		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+		CommonUtility.checkPageIsReady(driver);
+		if (!validate(TempAddressLine1)){
+			System.out.println("@@@@@@ Add Temporary Address Modal is Not Displayed @@@@@@");
+			return false;
+		}
+		
+		System.out.println("******** VALIDATING ERROR MESSAGE FOR ALL MANDATORY FIELDS **********");
+		TempAddressSaveButton.click();
+		if (NoStreetAddError.getText().contentEquals("Street address is a required field. ")) {
+			System.out.println("******* Error message for Temporary Address Street not provided is Displayed : "+NoStreetAddError.getText()+" ********");
+			flag = true;
+		}
+		else{
+			System.out.println("******* Error message for Temporary Address Street not provided is Not Displayed : ********");
+			flag = false;
+		}
+
+		if (NoCityError.getText().contentEquals("City is a required field.")) {
+			System.out.println("******* Error message for City not provided is Displayed : "+NoCityError.getText()+" ********");
+			flag = true;
+		}
+		else{
+			System.out.println("******* Error message for City not provided is Not Displayed : ********");
+			flag = false;
+		}
+		
+		if (NoStateError.getText().contentEquals("State is a required field.")) {
+			System.out.println("******* Error message for State not provided is Displayed : "+NoStateError.getText()+" ********");
+			flag = true;
+		}
+		else{
+			System.out.println("******* Error message for State not provided is Not Displayed : ********");
+			flag = false;
+		}
+
+		TempAddressZip.clear();
+		TempAddressSaveButton.click();
+		if (NoZipcodeError.getText().contentEquals("ZipCode is a required field.")) {
+			System.out.println("******* Error message for Zipcode not provided is Displayed : "+NoZipcodeError.getText()+" ********");
+			flag = true;
+		}
+		else{
+			System.out.println("******* Error message for Zipcode not provided is Not Displayed : ********");
+			flag = false;
+		}
+		
+		if (NoStartDateError.getText().contentEquals("Start date is a required fields.")) {
+			System.out.println("******* Error message for Start date not provided is Displayed : "+NoStartDateError.getText()+" ********");
+			flag = true;
+		}
+		else{
+			System.out.println("******* Error message for Start Date not provided is Not Displayed : ********");
+			flag = false;
+		}
+		if (NoEndDateError.getText().contentEquals("Start date and End date are required fields.")) {
+			System.out.println("******* Error message for End Date not provided is Displayed : "+NoEndDateError.getText()+" ********");
+			flag = true;
+		}
+		else{
+			System.out.println("******* Error message for End Date not provided is Not Displayed : ********");
+			flag = false;
+		}
+
+		System.out.println("******** VALIDATING ERROR MESSAGE FOR ACCEPTED CHARS IN STREET FIELDS **********");
+		
+		return flag;
+		
+	}
 
 }

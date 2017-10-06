@@ -1,11 +1,11 @@
-@pharmacylocator
+#@pharmacylocator
 Feature:To test Locate a Pharmacy tool in AARP site
 Scenario Outline:To verify all available pharmacies for default zipcode in AARP site
 Given registered member to verify locate a pharmacy in AARP Site
-	| <planType> |
+	| Plan Type | <planType> |
 When the user navigates to pharmacy search page in AARP site
 And the user enters distance details in AARP site
-	| <distance>  |
+	| Distance | <distance>  |
 And the user searches for pharmacies available in AARP site
 Then the user validates the pharmacies available in AARP site
 
@@ -16,10 +16,10 @@ Examples:
 	  
 Scenario Outline:To verify pharmacies displayed for particular pharamcy type for default zipcode in AARP site
 Given registered member to verify locate a pharmacy in AARP Site
-	| <planType> |
+| Plan Type	| <planType> |
 When the user navigates to pharmacy search page in AARP site
 And the user enters distance details in AARP site
-	| <distance>  |
+| Distance	| <distance>  |
 And the user selects "Show pharmacies for these services" in AARP Site
 	| <pharmacyType> |
 And the user searches for pharmacy available in AARP Site
@@ -33,20 +33,20 @@ Examples:
 
 Scenario Outline:To verify all available pharmacies for particular zipcode and plan name in AARP site
 Given registered member to verify locate a pharmacy in AARP Site
-	| <plantype> |
+| Plan Type	| <plantype> |
 When the user navigates to pharmacy search page in AARP site
 And the user clicks chinese in AARP Site 
 And the user enters zipcode and distance details for AARP Site
-    | Zip Code    | 90210  |
-	| Distance    |25 |
-	| County      | |
+    | Zip Code    | <zipcode>  |
+	| Distance    | <distance> |
+	| County      | <countyname> |
 And the user chooses a plan from dropdown in AARP site
-	| planName |AARP MedicareRx Walgreens (PDP)|
+	| Plan Name | <planName> |
 And the user clicks create pdf in AARP Site
 And the user searches for pharmacy available in AARP Site
 Then the user validates the pharmacies available in AARP Site
 Examples:
-	| plantype | zipCode | countyName    | distance |  planName			|
+	| plantype | zipcode | countyname    | distance |  planName			|
 	| PDP      | 80002   | Adams County  |	25   |  AARP MedicareRx Preferred (PDP) |
 #	| PDP      | 80001   |		     |	25   |  AARP MedicareRx Preferred (PDP) |
 #	| MAPD	   | 80002   |		     |	25   |  AARP MedicareRx Preferred (PDP) |
@@ -56,16 +56,16 @@ Examples:
 	  
 Scenario Outline:To verify pharmacies displayed for particular zipcode, plan name and  pharmacy type in AARP site
 Given registered member to verify locate a pharmacy in AARP Site
-	| <plantype> |
+| Plan Type	| <plantype> |
 When the user navigates to pharmacy search page in AARP site
 And the user enters zipcode and distance details for AARP Site
         | Zip Code    | <zipCode>   |
 	| Distance    | <distance>  |
 	| County      | <countyName>|
 And the user chooses a plan from dropdown in AARP site
-	| <planName>  |
+| Plan Name	| <planName>  |
 And the user selects "Show pharmacies for these services" in AARP Site
-	| <pharmacyType> |
+| Pharmacy Type	| <pharmacyType> |
 And the user searches for pharmacy available in AARP Site
 Then the user validates the pharmacies available in AARP Site
 
@@ -78,13 +78,13 @@ Examples:
 @pharmacylocator
 Scenario Outline:To verify pharmacies displayed based on contract and PBP in AARP site
 Given registered member to verify locate a pharmacy in AARP Site
-	| <plantype> |
+| Plan Type	| <plantype> |
 When the user navigates to pharmacy search page in AARP site
 And the user chooses the year and a plan from dropdown in AARP site
     |  Year     | <year> |
 	| Plan Name | <planName>  |
 And the user hovers over the tooltip in AARP Site
-	| <pharmacyType> |
+| Pharmacy Type	| <pharmacyType> |
 And the user searches for pharmacies available in AARP site
 Then the user validates the pharmacies available in AARP site
 
@@ -96,7 +96,7 @@ Examples:
 @pharmacysearch
 Scenario Outline:To verify pharmacies displayed based on MAPD and PDP in AARP site
 Given registered member to verify locate a pharmacy in AARP Site
-	| <plantype> |
+	| Plan Type | <plantype> |
 When the user navigates to pharmacy search page in AARP site
 #And the user searches for pharmaciy search results available in AARP site
 Then the user validates the content on pharmacy search page
@@ -108,7 +108,7 @@ Examples:
 @pharmacysearchresult
 Scenario Outline:To verify pharmacies displayed based on MAPD and PDP in AARP site
 Given registered member to verify locate a pharmacy in AARP Site
-	| <plantype> |
+| Plan Type	| <plantype> |
 When the user navigates to pharmacy search page in AARP site
 And the user searches for pharmaciy search results available in AARP site
 
@@ -119,7 +119,7 @@ Examples:
 @pharmacyshowmap
 Scenario Outline:To verify pharmacies displayed based on MAPD and PDP in AARP site
 Given registered member to verify locate a pharmacy in AARP Site
-	| <plantype> |
+| Plan Type	| <plantype> |
 When the user navigates to pharmacy search page in AARP site
 And the user searches for show on map available in AARP site
 
@@ -131,7 +131,7 @@ Examples:
 @pharmacymultilang
 Scenario Outline:To verify pharmacies displayed based on MAPD and PDP in AARP site
 Given registered member to verify locate a pharmacy in AARP Site
-	| <plantype> |
+| Plan Type	| <plantype> |
 When the user navigates to pharmacy search page in AARP site
 And the user validate multiple language dropdown available in AARP site
 
@@ -142,7 +142,7 @@ Examples:
 @pharmacyresultpdf
 Scenario Outline:To verify pharmacies displayed based on MAPD and PDP in AARP site
 Given registered member to verify locate a pharmacy in AARP Site
-	| <plantype> |
+| Plan Type	| <plantype> |
 When the user navigates to pharmacy search page in AARP site
 And the user searches for view result as pdf available in AARP site
 
@@ -155,7 +155,7 @@ Examples:
 @pharmacyprpnwidget
 Scenario Outline:To verify pharmacies displayed based on MAPD and PDP in AARP site
 Given registered member to verify locate a pharmacy in AARP Site
-	| <plantype> |
+| Plan Type	| <plantype> |
 When the user navigates to pharmacy search page in AARP site
 Then the user validates the PRPN widget available in AARP site
 
@@ -166,7 +166,7 @@ Examples:
 @pharmacynonaep
 Scenario Outline:To verify pharmacies displayed based on MAPD and PDP in AARP site
 Given registered member to verify locate a pharmacy in AARP Site
-	| <plantype> |
+| Plan Type	| <plantype> |
 When the user navigates to pharmacy search page in AARP site
 And the user validates Non AEP plan year and type in pharmaciy search results available in AARP site
 
@@ -177,7 +177,7 @@ Examples:
 @pharmacyaep
 Scenario Outline:To verify pharmacies displayed based on MAPD and PDP in AARP site
 Given registered member to verify locate a pharmacy in AARP Site
-	| <plantype> |
+| Plan Type	| <plantype> |
 When the user navigates to pharmacy search page in AARP site
 And the user validates AEP plan year and type in pharmaciy search results available in AARP site
 
@@ -188,7 +188,7 @@ Examples:
 @pharmacysearchandballon
 Scenario Outline:To verify pharmacies displayed based on MAPD and PDP in AARP site
 Given registered member to verify locate a pharmacy in AARP Site
-	| <plantype> |
+| Plan Type	| <plantype> |
 When the user navigates to pharmacy search page in AARP site
 And the user validates the PRPN search result and red balloon marker available in AARP site
 
