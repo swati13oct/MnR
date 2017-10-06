@@ -14,6 +14,7 @@ import cucumber.junit.Cucumber;
 		features = { "feature/registrationMemberRedesign" }, 
 		format = {
 				"pretty", "html:reports/test-report","json:target/RunJarvisCloaking-cucumber.json"  }, tags ={"@registrationStepTwo"})
+
 public class RunMRAtddTestRegistrationStepTwoDashboard {
 
 }
