@@ -1,12 +1,7 @@
-/**
- * 
- */
 package pages.member.bluelayer;
-
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
-
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.junit.Assert;
@@ -17,10 +12,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
-
 import pages.member.bluelayer.OrderplanmaterialsPage;
 import pages.member.bluelayer.ContactUsPage;
-
 import acceptancetests.atdd.data.CommonConstants;
 import acceptancetests.atdd.data.MRConstants;
 import acceptancetests.atdd.data.PageData;
@@ -176,19 +169,7 @@ public class AccountHomePage extends UhcDriver {
 
 	public JSONObject accountHomeJson;
 
-	/*
-	 * public AccountHomePage(WebDriver driver,String category) { super(driver);
-	 * PageFactory.initElements(driver, this);
-	 * if(category.equalsIgnoreCase("Individual")) { String fileName =
-	 * CommonConstants.ACCOUNT_HOME_PAGE_INDIVIDUAL_DATA; myAccountHome =
-	 * CommonUtility.readPageData(fileName,
-	 * CommonConstants.PAGE_OBJECT_DIRECTORY_BLUELAYER_MEMBER); } else { String
-	 * fileName = CommonConstants.ACCOUNT_HOME_PAGE_DATA; myAccountHome =
-	 * CommonUtility.readPageData(fileName,
-	 * CommonConstants.PAGE_OBJECT_DIRECTORY_BLUELAYER_MEMBER); }
-	 * 
-	 * openAndValidate(); }
-	 */
+
 
 	public AccountHomePage(WebDriver driver) {
 		super(driver);

@@ -764,7 +764,7 @@ Examples:
     Scenario Outline: Verify Need Help section is in place on Benefits and Coverage page
     Given registered member with following details logins in the member portal 
       | Plan Type      | <planType>  |
-    When the user navigates to Benefits and coverage page
+    When the user navigates to Benefits coverage page
     And the user validates the content on benefits and coverage page
     And the user validates contactus section
     And the user validates Needhelp header and disclaimer link
