@@ -537,7 +537,7 @@ public class DrugCostEstimatorPage extends UhcDriver {
 		validate(step2PharmacyTab);
 		validate(zipcodeInput);
 		validate(milesSelection);
-		step2PharmacyTab.click();
+		step2.click();
 		//sendkeys(zipcodeInput, zipcode); // not sure what webelement to use
 		//SearchLink.click();
 		// Select options = new Select(milesSelection);
