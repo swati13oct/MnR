@@ -573,7 +573,7 @@ public class ProfilePreferencesPage extends UhcDriver {
 
 	public ProfilePreferencesPage validatepnparrowlink() {
 		Profilenprefernceslink.click();
-		if (driver.getTitle().equalsIgnoreCase("profileandpreferences")) {
+		if (driver.getTitle().equalsIgnoreCase("profile")) {
 			System.out.println("Pass");
 			return new ProfilePreferencesPage(driver);
 		}

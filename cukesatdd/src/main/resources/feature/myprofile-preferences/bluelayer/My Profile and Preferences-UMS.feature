@@ -245,14 +245,15 @@ Feature: To test My Profile & Preferences flow in UMS site
     When the user navigates to Profile and Preferences page
     Then the user validates Communication Preferences section
     And the user validates Go paperless button and on clicking button go green page should come
-    And the user validates headers on green page
     And the user validates on clicking Profilenpreferences arrow user should route to Profile and Preferences page
 
     Examples: 
-      | planType |
-      #| PDP      |
-      | MAPD     |
-      #| MA       |
+        | planType |
+        | Group  |
+        | MAPD   |
+        | MA     |
+        |GroupMA |
+        |GroupPDP|
 
   @PhoneEdit
   Scenario Outline: To verify Phone Edit Functionality
