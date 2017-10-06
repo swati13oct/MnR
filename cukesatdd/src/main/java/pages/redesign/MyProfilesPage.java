@@ -3,6 +3,9 @@ package pages.redesign;
  * @author sdwaraka
  */
 
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
@@ -14,11 +17,13 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.Select;
 
 import acceptancetests.atdd.data.CommonConstants;
 import acceptancetests.atdd.data.PageData;
 import acceptancetests.atdd.util.CommonUtility;
 import atdd.framework.UhcDriver;
+import junit.framework.Assert;
 
 public class MyProfilesPage extends UhcDriver{
 	
@@ -117,7 +122,7 @@ public class MyProfilesPage extends UhcDriver{
 	@FindBy(id = "temporaryZip-error")
 	private WebElement NoZipcodeError;
 
-	@FindBy(id = "temporaryEndDateisEarlierThenStartDate-error")
+	@FindBy(id = "temporaryZipmismatch-error")
 	private WebElement ZipStateMismatch;
 	
 	@FindBy(id = "temporaryStartDate-error")
@@ -135,6 +140,46 @@ public class MyProfilesPage extends UhcDriver{
 	@FindBy(id = "temporaryStreet2-error")
 	private WebElement StreetAdd2Error;
 	
+	//Password, Ph No Modal Elements
+	
+	@FindBy(xpath = ".//*[@id='password']/a")
+	private WebElement editPasswordlnk;
+	
+	@FindBy(id ="passwordOld")
+	private WebElement currentpassword;
+	
+	@FindBy(id="passwordNew")
+	private WebElement newpassword;
+	
+	@FindBy(id="passwordNewConfirm")
+	private WebElement confirmpassword;
+	
+	@FindBy(id="passwordNewConfirm-error")
+	private WebElement diffpassworderr;
+	
+	@FindBy(xpath="(.//*[@id='passwordNew-error'])[3]")
+	private WebElement incorrectFormatPswdErrorMsg;
+	
+	@FindBy(xpath="(.//*[@id='passwordNew-error'])[2]")
+	private WebElement newPassError;
+	
+	@FindBy(xpath="(.//*[@id='passwordNewConfirm-error'])[2]")
+	private WebElement confPassError;
+	
+	@FindBy(id="updatePassword")
+	private WebElement saveButtonPwd;
+	
+	@FindBy(xpath="(.//a[contains(text(),'Edit')])[2]")
+	private WebElement editphonelnk;
+	
+	@FindBy(id="daytimePhone")
+	private WebElement daytimephone;
+	
+	@FindBy(id="daytimePhone-error")
+	private WebElement phoneerrormessage;
+	
+	@FindBy(xpath="(.//*[contains(text(),'Save')])[2]")
+	private WebElement phonesavebtn;
 
 
 
@@ -244,13 +289,22 @@ public class MyProfilesPage extends UhcDriver{
 		return flag;
 	}
 	
-	public boolean ValidateTempAddressErrorMessages(){
+	public boolean ValidateAddTempAddressModal(){
 		boolean flag = true;
 		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 		CommonUtility.checkPageIsReady(driver);
-
+		//Clicking Add Temp Address link.
 		AddTempAddressLnk.click();
 		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+		CommonUtility.checkPageIsReady(driver);
+		if (!validate(TempAddressLine1)){
+			System.out.println("@@@@@@ Add Temporary Address Modal is Not Displayed @@@@@@");
+			flag = false;
+		}
+		return flag;
+	}
+	public boolean ValidateTempAddressMandatoryFieldsErrorMessages(){
+		boolean flag = true;
 		CommonUtility.checkPageIsReady(driver);
 		if (!validate(TempAddressLine1)){
 			System.out.println("@@@@@@ Add Temporary Address Modal is Not Displayed @@@@@@");
@@ -296,7 +350,6 @@ public class MyProfilesPage extends UhcDriver{
 			System.out.println("******* Error message for Zipcode not provided is Not Displayed : ********");
 			flag = false;
 		}
-		
 		if (NoStartDateError.getText().contentEquals("Start date is a required fields.")) {
 			System.out.println("******* Error message for Start date not provided is Displayed : "+NoStartDateError.getText()+" ********");
 			flag = true;
@@ -313,11 +366,192 @@ public class MyProfilesPage extends UhcDriver{
 			System.out.println("******* Error message for End Date not provided is Not Displayed : ********");
 			flag = false;
 		}
-
+		return flag;
+	}
+	
+	public boolean ValidateSpecialCharsStreetFieldsErrorMessages(){
+		boolean flag = true;
 		System.out.println("******** VALIDATING ERROR MESSAGE FOR ACCEPTED CHARS IN STREET FIELDS **********");
+		CommonUtility.checkPageIsReady(driver);
+		String[] AcceptedChars = {".", "-", "/", "'", "#", " "};
+		for(String checkChar: AcceptedChars){
+			System.out.println("******* Validating following Char is accepted for Street Address Fields  :  "+checkChar+" ********");
+			TempAddressLine1.clear();
+			TempAddressLine2.clear();
+			TempAddressLine1.sendKeys("12"+checkChar+"ab");
+			TempAddressLine2.sendKeys("12"+checkChar+"ab");
+			TempAddressSaveButton.click();
+			if(validate(StreetAddFormatError) || validate(StreetAdd2FormatError)){
+				flag = false;
+				System.out.println("*****Street Address Not ACCEPTING the following Allowed Special Char  :"+checkChar+"  ********");
+			}
+			else
+			{
+				flag = true;
+				System.out.println("*****Street Address accepting the following Allowed Special Char  :"+checkChar+"  ********");
+			}
+		}
+		String[] InvalidChars = {",", "@", "(", ")", "_", "&"};
+		for(String checkChar: InvalidChars){
+			System.out.println("******* Validating following Char is NOT ACCEPTED for Street Address Fields  :  "+checkChar+" ********");
+			TempAddressLine1.clear();
+			TempAddressLine2.clear();
+			TempAddressLine1.sendKeys("12"+checkChar+"ab");
+			TempAddressLine2.sendKeys("12"+checkChar+"ab");
+			TempAddressSaveButton.click();
+			if(StreetAddFormatError.isDisplayed() && StreetAdd2FormatError.isDisplayed()){
+				flag = true;
+				System.out.println("*****Street Address Displaying error for Invalid Special Char  :"+checkChar+"  ********");
+			}
+			else{
+				flag = false;
+				System.out.println("*****Street Address NOT Displaying error for Invalid Special Char  :"+checkChar+"  ********");
+			}
+		}
 		
 		return flag;
+	}
+	
+	public boolean ValidateZipcodeMismatchError(){
+		Boolean flag = true;
+		TempAddressZip.clear();
+		TempAddressZip.sendKeys("07920");
+		System.out.println("******* Validating if ZipCode Mismatch Error is Displayed ********");
+		Select StateNames = new Select(TempAddressStateDropDown);
+		StateNames.selectByVisibleText("California");
+		TempAddressSaveButton.click();
+		System.out.println("/*******State : CA ******/");
+		System.out.println("/*******ZipCode : 07920 ********/");
+		if(ZipStateMismatch.isDisplayed()){
+			flag = true;
+			System.out.println("******* ZipCode and State Mismatch error is Displayed ********");
+		}
+		else{
+			flag = false;
+			System.out.println("******* ZipCode and State Mismatch error is **NOT** Displayed ********");
+		}
+		StateNames.selectByValue("NJ");
+		TempAddressSaveButton.click();
+		System.out.println("/*******State : NJ******/");
+		System.out.println("/*******ZipCode : 07920 ********/");
+		if(validate(ZipStateMismatch)){
+			flag = false;
+			System.out.println("******* ZipCode and State Mismatch error is Displayed - No ZipCode Mismatch ********");
+		}
+		else{
+			flag = true;
+			System.out.println("******* No Mismatch in ZipCode and State Selection - No Error Dispalyed ********");
+		}
+		return flag;
+	}
+	
+	public boolean ValidateEndDateErrorMessages(){
+		boolean flag=true;
+		System.out.println("******* Validating if END DATE Error MEssages are Displayed ********");
+		
+		Select StartMonth = new Select(StartDate_MonDropDown);
+		Select StartDay = new Select(StartDate_DayDropDown);
+		Select StartYear = new Select(StartDate_YearDropDown);
+		
+		Select EndMonth = new Select(EndDate_MonDropDown);
+		Select EndDay = new Select(EndDate_DayDropDown);
+		Select EndYear = new Select(EndDate_YearDropDown);
+
+		StartMonth.selectByVisibleText("01");
+		StartDay.selectByVisibleText("01");
+		StartYear.selectByVisibleText("2018");
+
+		EndMonth.selectByVisibleText("01");
+		EndDay.selectByVisibleText("01");
+		EndYear.selectByVisibleText("2017");
+
+		TempAddressSaveButton.click();
+		System.out.println("/*******Start Date : 01/01/2018 ******/");
+		System.out.println("/*******End Date : 01/01/2017 ********/");
+		
+		if(EndDateEarlierStartDate.isDisplayed()){
+			flag = true;
+			System.out.println("******* End Date Earlier Than Start Date error is Displayed ********");
+		}
+		else{
+			flag = false;
+			System.out.println("******* End Date Earlier Than Start Date error is **NOT** Displayed ********");
+		}
+
+		StartMonth.selectByVisibleText("01");
+		StartDay.selectByVisibleText("01");
+		StartYear.selectByVisibleText("2017");
+
+		EndMonth.selectByVisibleText("10");
+		EndDay.selectByVisibleText("01");
+		EndYear.selectByVisibleText("2018");
+
+		TempAddressSaveButton.click();
+		System.out.println("/*******Start Date : 01/01/2017 ******/");
+		System.out.println("/*******End Date : 10/01/2018 ********/");
+		
+		String CurrentDate = new SimpleDateFormat("MM/dd/yyyy").format(Calendar.getInstance().getTime());
+		System.out.println("/*******Current Date : "+CurrentDate+" ********/");
+
+		if(EndDate6monthsError.isDisplayed()){
+			flag = true;
+			System.out.println("******* End Date is More than 6 months after Current Date error is Displayed ********");
+		}
+		else{
+			flag = false;
+			System.out.println("******* End Date is More than 6 months after Current Date error is **NOT** Displayed ********");
+		}
+
+		return flag;
+	}
+	
+	
+	
+	
+	
+	/*
+	 * Code added By Praveen
+	 * Code to Verify Password, Ph No error Messages
+	 * 
+	 */
+	
+	public void editPasswordVerifyBlankPasswordErrorMsg(String currentPassword,String newPassError, String confPassError){
+		editPasswordlnk.click();
+		currentpassword.sendKeys(currentPassword);
+		saveButtonPwd.click();
+		if(!(this.newPassError.getText().trim().equals(newPassError)&&this.confPassError.getText().trim().equals(confPassError)))
+			Assert.fail("Blank Password Error Messages are not correct");		
 		
 	}
+	
+	public void diffPasswordErrorMsg(String currentPassword, String newPassword, String confirmnewPassword){
+		editPasswordlnk.click();
+		currentpassword.sendKeys(currentPassword);
+		newpassword.sendKeys(newPassword);
+		confirmpassword.sendKeys(confirmnewPassword);
+		saveButtonPwd.click();
+		if(!(diffpassworderr.isDisplayed()))
+			Assert.fail("Different error Password Messages are not correct");		
+		
+	}
+	
+	public void incorrectFormatPasswordErrormsg(String currentPassword, String newPassword, String incorrectformatErrorMsg){
+		editPasswordlnk.click();
+		currentpassword.sendKeys(currentPassword);
+		newpassword.sendKeys(newPassword);
+		saveButtonPwd.click();
+		if(!(incorrectFormatPswdErrorMsg.getText().trim().equals(incorrectformatErrorMsg)))
+			Assert.fail("incorrect format error message are not correct");		
+		
+	}
+	
+	public void phonemumberErrorMessage(String daytimephonenumber, String phoneerrormsg){
+		editphonelnk.click();
+		daytimephone.clear();
+		daytimephone.sendKeys(daytimephonenumber);
+		phonesavebtn.click();		
+		if(!(this.phoneerrormessage.getText().trim().equals(phoneerrormsg)))
+			Assert.fail("Phone number error message is not being displayed");
+		}
 
 }

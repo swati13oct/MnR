@@ -47,3 +47,60 @@ Examples:
             | planType    | memberType |
             | MA          | Individual |
 
+@blankpassworderrormessage
+Scenario Outline:To verify profile and preference blank password error messages in AARP site
+Given registered AMP member with following attributes
+	| Plan Type | <plantype> |
+When the user Navigates to AARP Member Redesign My Profile and Preferences page
+Then the user edits password in preference page in AARP Site
+	 | Current password | <currentpassword>    |
+	 | New pass Error Msg | <newpasserrormsg> |
+	 | Conf Pass Error Msg | <confpasserrormsg>  |
+	 	 
+Examples:
+	| plantype | currentpassword | newpasserrormsg        |confpasserrormsg       |
+	| MAPD      | Password@1     |Enter your new password.|This field is required.|
+	#| MAPD      | Password@1     | Password@2  | Password@3      |
+	#| MAPD      | Password@1     | Password&2  | Password@2      |
+	#| MAPD      | Password@1     |Password@1   | Password@1      |
+	
+@phoneerrormessage
+Scenario Outline:To verify profile and preference phone error messages in AARP site
+Given registered AMP member with following attributes
+	| Plan Type | <plantype> |
+When the user Navigates to AARP Member Redesign My Profile and Preferences page
+Then the user validate phone number error messages
+   |day time phone number | <daytimephonenumber> |
+   |Phone error message | <phoneerrormsg> |
+Examples:
+	| plantype |daytimephonenumber |phoneerrormsg																		|
+	| MAPD     |aaaa               |Enter your phone number like this: 111-111-1111 |
+	
+
+@diffpassworderrormessage
+Scenario Outline:To verify profile and preference different password error messages in AARP site
+Given registered AMP member with following attributes
+	| Plan Type | <plantype> |
+When the user Navigates to AARP Member Redesign My Profile and Preferences page
+Then the user verify diff password error msg in preference page in AARP Site
+	 | Current password | <currentpassword>    |
+	 | New password   | <newpassword> |
+	 |Confirm Password | <confirmpassword> |
+	 
+Examples:
+	| plantype | currentpassword |newpassword | confirmpassword | 
+	| MAPD      | Password@1     | Password@2  | Password@3     |
+	
+@incorrectpasswordformaterrormessage
+Scenario Outline:To verify profile and preference incorrect format password error messages in AARP site
+Given registered AMP member with following attributes
+	| Plan Type | <plantype> |
+When the user Navigates to AARP Member Redesign My Profile and Preferences page
+Then the user verify incorrect format password error msg in preference page in AARP Site
+	 | Current password | <currentpassword>    |
+	 | New password   | <newpassword> |
+	 |Incorrect Format ErrMsg | <incorrectformatErrorMsg> |
+	 
+Examples:
+	| plantype | currentpassword |newpassword | incorrectformatErrorMsg 													 |
+	| MAPD      | Password@1     | Password&2 | Your password needs to follow a set of guidelines. |

@@ -20,5 +20,5 @@ import cucumber.junit.Cucumber;
 
 public class RunMRAtddTestMyProfPrefErrorMsgs {
 	//@MyProfileErrorMessages,@EditEmailErrorMessagesAARP,@TempAltAddressErrorMessagesAARP,@EditEmailErrorMessagesUMS, @TempAltAddressErrorMessagesUMS
-	
+	//@blankpassworderrormessage,@phoneerrormessage,@diffpassworderrormessage,@incorrectpasswordformaterrormessage
 }
