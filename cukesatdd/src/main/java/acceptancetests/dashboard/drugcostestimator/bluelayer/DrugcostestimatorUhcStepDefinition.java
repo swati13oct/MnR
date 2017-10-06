@@ -153,9 +153,13 @@ public class DrugcostestimatorUhcStepDefinition {
 		String category = (String) getLoginScenario().getBean(LoginCommonConstants.CATOGERY);
 		WebDriver wd = (WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
 		LoginPage loginPage = new LoginPage(wd);
+		loginPage.loginToTestHarness();
 		getLoginScenario().saveBean(PageConstants.LOGIN_PAGE, loginPage);
-		AccountHomePage accountHomePage = (AccountHomePage) loginPage.loginWith(userName, pwd,category);
+		AccountHomePage accountHomePage = (AccountHomePage) loginPage.thloginWith(userName, pwd,category);
 		getLoginScenario().saveBean(PageConstants.ACCOUNT_HOME_PAGE, accountHomePage);
+		
+		
+		
 	}
 
 	@When("^I use the DCE tool to enter one or more drugs to my drug list$")

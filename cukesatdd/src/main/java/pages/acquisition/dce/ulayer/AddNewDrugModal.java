@@ -55,9 +55,9 @@ public class AddNewDrugModal extends UhcDriver {
 	public AddNewDrugModal(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
-		CommonUtility.waitForPageLoad(driver, addNewDrugHeading, 10);
-		String fileName = CommonConstants.ADD_NEW_DRUG_PAGE_DATA;
-		addnewdrug = CommonUtility.readPageData(fileName, CommonConstants.PAGE_OBJECT_DIRECTORY_DCE_MEMBER);
+		//CommonUtility.waitForPageLoad(driver, addNewDrugHeading, 10);
+		//String fileName = CommonConstants.ADD_NEW_DRUG_PAGE_DATA;
+		//addnewdrug = CommonUtility.readPageData(fileName, CommonConstants.PAGE_OBJECT_DIRECTORY_DCE_MEMBER);
 		//openAndValidate();
 	}
 	@Override

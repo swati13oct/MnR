@@ -1,7 +1,7 @@
 @acq_drug_cost_estimator
 Feature:Drug Cost Estimator (DCE) - HTML/CSS - Drug List - Edit/Delete Functionality
 
-@acq_drug_cost_estimator_switch_to_generic1
+@acq_drug_cost_estimator_switch_to_generic_home_flow
 Scenario Outline: As a prospective member using redesigned DCE tool on the M&R portal site on either a desktop or mobile device, I want to be able to choose a generic option if it is available from my Drug List and see any cost savings associated with it if I have selected a pharmacy so I can save on the cost of my prescription drugs.
 Given the user is on AARP medicare site landing page
 When I access the acquisition DCE tool from home page
@@ -20,7 +20,7 @@ Examples:
  | drug |
  |lipitor|
  
-@acq_drug_cost_estimator_switch_to_generic
+@acq_drug_cost_estimator_switch_to_generic_vpp_flow
 Scenario Outline: As a prospective member using redesigned DCE tool on the M&R portal site on either a desktop or mobile device, I want to be able to choose a generic option if it is available from my Drug List and see any cost savings associated with it if I have selected a pharmacy so I can save on the cost of my prescription drugs.
 Given the user is on AARP medicare site landing page
 When I access the acquisition DCE tool from vpp page using below zipcode

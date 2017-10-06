@@ -33,6 +33,8 @@ public class LoginPage extends UhcDriver {
 
 	private static String PAGE_URL = MRConstants.UHCM_URL;
 	
+	private static String PAGE_URL_TEST_HARNESS = MRConstants.UHCM_URL_TEAMB_TESTHARNESS;
+	
 
 	//@FindBy(xpath = "//button[@id='fd_memberSignInButton' or @id='accessURAccountBTN']")
 	@FindBy(id = "fd_memberSignInButton")
@@ -58,16 +60,25 @@ public class LoginPage extends UhcDriver {
 
 	@FindBy(id = "usercheckbox")
 	private WebElement userNameCheckBox;
+	
+	@FindBy(id = "username")
+	private WebElement thUserName;
+	
+	@FindBy(id = "password")
+	private WebElement thPassword;
+	
+	@FindBy(id = "sign-in-btn")
+	private WebElement thSignIn;
 
 	private PageData browserCheckData;
 
 	private JSONObject browserCheckJson;
-
+	
 
 	public LoginPage(WebDriver driver) {		
 		super(driver);
 		PageFactory.initElements(driver, this);
-		openAndValidate();
+		//openAndValidate();
 	}
 
 	public Object loginWith(String username, String password, String category) {
@@ -184,5 +195,65 @@ public class LoginPage extends UhcDriver {
 	    } 
 
 	} 
+		
+	public void loginTo(){
+		PageFactory.initElements(driver, this);
+		openAndValidate();
+	}
+	
+	public void loginToTestHarness(){
+		start(PAGE_URL_TEST_HARNESS);
+		validate(thUserName);
+		validate(thPassword);
+		validate(thSignIn);
+	}
+	
+	public Object thloginWith(String username, String password, String category) {
+		//driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+		/*WebElement loginInEle= this.driver.findElement(By.id("fd_memberSignInButton"));
+		loginInEle.click();*/
+		sendkeys(thUserName, username);
+		sendkeys(thPassword, password);
+		thSignIn.click();
+
+		
+		if (MRScenario.environment.equals("dev-a") || MRScenario.environment.equals("team-a")) {
+			while (!isAlertPresent());
+        }
+
+
+		if (MRScenario.environment.equals("dev-a"))  {
+
+			while (!isAlertPresent());
+		}
+		if ( MRScenario.environment.equals("team-c") || MRScenario.environment.equals("team-b")) {
+			
+			Alert alert = driver.switchTo().alert();
+	        alert.accept();
+	        //Alert alert1 = driver.switchTo().alert();
+	        //alert1.accept();
+	        } 
+		
+		try {
+			Thread.sleep(10000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		if(currentUrl().contains("home/my-account-home.html") && category.equalsIgnoreCase("Group") || currentUrl().contains("/guest/home.html") || currentUrl().contains("/login.html"))
+
+		{
+			return new AccountHomePage(driver,category);
+		}
+		else if(currentUrl().contains("home/my-account-home.html") && category.equalsIgnoreCase("Individual") || currentUrl().contains("/login.html") ) {
+			return new AccountHomePage(driver, category);
+		}
+		else if (currentUrl().contains("terminated-plan.html")) {
+			return new TerminatedHomePage(driver);
+		}
+		return null;
+	}
+
 
 }

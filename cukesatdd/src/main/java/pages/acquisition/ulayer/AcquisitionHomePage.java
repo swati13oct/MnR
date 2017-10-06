@@ -20,6 +20,7 @@ import acceptancetests.atdd.data.CommonConstants;
 import acceptancetests.atdd.data.MRConstants;
 import acceptancetests.atdd.data.PageData;
 import acceptancetests.atdd.util.CommonUtility;
+import atdd.framework.MRScenario;
 
 /**
  * @author pperugu
@@ -199,6 +200,8 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	private WebElement healthcenterslink;
 
 	private static String AARP_ACQISITION_PAGE_URL = MRConstants.AARP_URL;
+	
+	private static String AARP_ACQISITION_PAGE_URL_TEST_A = MRConstants.AARP_URL_TEST_A;
 
 	private PageData globalFooter;
 	private PageData browserCheckData;
@@ -290,8 +293,10 @@ public class AcquisitionHomePage extends GlobalWebElements {
 
 	@Override
 	public void openAndValidate() {
-		if (!(currentUrl().contains("aarpmedicareplans"))) {
+		if (!(currentUrl().contains("aarpmedicareplans")) && (MRScenario.environment == "team-b")) {
 			start(AARP_ACQISITION_PAGE_URL);
+		}else if (!(currentUrl().contains("aarpmedicareplans")) && (MRScenario.environment.equals("test-a"))) {
+			start(AARP_ACQISITION_PAGE_URL_TEST_A);
 		}
 		validate(navigationSectionHomeLink);
 		validate(navigationSectionOurPlansLink);

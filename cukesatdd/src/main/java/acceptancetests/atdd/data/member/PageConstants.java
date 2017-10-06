@@ -188,4 +188,6 @@ public class PageConstants {
 	public static final String USERNAME_PASSWORD_ASSISTANCE_PAGE = "usernamePasswordAssistancePage";
 	
 	public static final String NEW_REGISTRATION_PAGE = "newregistrationpage";
+	
+	public static final String MEM_REDESIGN_ACCOUNT_HOME_PAGE = "memberRedesignAccountHomePage";
 }

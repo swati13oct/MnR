@@ -30,7 +30,7 @@ public class DrugCostEstimatorPage extends UhcDriver {
 		super(driver);
 		PageFactory.initElements(driver, this);
 		// CommonUtility.waitForPageLoad(driver, SaveDrugPage, 10);
-		String fileName = CommonConstants.SAVE_DRUG_PAGE_DATA;
+		//String fileName = CommonConstants.SAVE_DRUG_PAGE_DATA;
 		// savedrugpage = CommonUtility.readPageData(fileName,
 		// CommonConstants.PAGE_OBJECT_DIRECTORY_BLAYER_MEMBER);
 		// openAndValidate();
@@ -44,10 +44,12 @@ public class DrugCostEstimatorPage extends UhcDriver {
 	@FindBy(id = "add-drug")
 	public WebElement addDrug;
 
-	@FindBy(xpath = "//p[contains(text(),'STEP2:')]/following-sibling::span[p[contains(text(),'Pharmacy')]]")
+	//@FindBy(xpath = "//p[contains(text(),'STEP2:')]/following-sibling::span[p[contains(text(),'Pharmacy')]]")
+	@FindBy(id = "pharmacyTabId")
 	public WebElement step2;
 
-	@FindBy(xpath = "//p[contains(text(),'STEP1:')]/following-sibling::span[p[contains(text(),'Drugs')]]")
+	//@FindBy(xpath = "//p[contains(text(),'STEP1:')]/following-sibling::span[p[contains(text(),'Drugs')]]")
+	@FindBy(id = "drugsTabId")
 	public WebElement step1;
 
 	@FindBy(id = "pharmacy-form")
@@ -196,7 +198,8 @@ public class DrugCostEstimatorPage extends UhcDriver {
 	@FindBy(id = "total_pharmacysavings")
 	public WebElement left_rail_pharmacy_saving;
 
-	@FindBy(xpath = "//p[contains(text(),'STEP3:')]/following-sibling::span[p[contains(text(),'Summary')]]")
+	//@FindBy(xpath = "//p[contains(text(),'STEP3:')]/following-sibling::span[p[contains(text(),'Summary')]]")
+	@FindBy(id = "costsTabId")
 	public WebElement step3;
 
 	@FindBy(id = "total_annauldeductible")
@@ -364,6 +367,9 @@ public class DrugCostEstimatorPage extends UhcDriver {
 
 	@FindBy(id = "descOrderPharmacySortId")
 	public WebElement ZtoAtab;
+	
+	@FindBy(xpath = ".//*[@id='drugspharmacy']/div[3]/div[1]/div/button[1]")
+	public WebElement previousEnterYourDrugs;
 
 	@Override
 	public void openAndValidate() {
@@ -504,6 +510,10 @@ public class DrugCostEstimatorPage extends UhcDriver {
 	public void backwardToStep1() {
 		step1.click();
 	}
+	
+	public void BacktoEnterYourDrugs(){
+		previousEnterYourDrugs.click();
+	}
 
 	public void validatePharmacyForm() {
 		Assert.assertTrue(pharmacyform.isDisplayed());
@@ -517,7 +527,6 @@ public class DrugCostEstimatorPage extends UhcDriver {
 		validate(step2PharmacyTab);
 		validate(zipcodeInput);
 		validate(milesSelection);
-		step2PharmacyTab.click();
 		sendkeys(zipcodeInput, zipcode); // not sure what webelement to use
 		SearchLink.click();
 		// Select options = new Select(milesSelection);
