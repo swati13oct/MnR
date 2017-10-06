@@ -123,10 +123,12 @@ Feature: To test My Profile & Preferences flow in UMS site
     Then the user validates the Plan Name, Member name, Member ID and account section in UMS site
 
     Examples: 
-      | planType |
-        | Group  |
-        | MAPD   |
-        | MA     |
+      | planType|
+      | Group  |
+      | MAPD   |
+      | MA     |
+      |GroupMA |
+      |GroupPDP|
 
   @ValidateEmail
   Scenario Outline: To verify Email section in UMS site
@@ -136,10 +138,12 @@ Feature: To test My Profile & Preferences flow in UMS site
     Then the user validates the Email section in UMS site
 
     Examples: 
-        | planType |
+        | planType|
         | Group  |
         | MAPD   |
         | MA     |
+        |GroupMA |
+        |GroupPDP|
 
   @PasswordEdit
   Scenario Outline: To verify the edit functionality in Account Profile section in UMS site
