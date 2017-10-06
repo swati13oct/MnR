@@ -945,7 +945,7 @@ public class BenefitsAndCoverageUmsStepDefinition {
 	
 	
 	
-	@And("the user validates plan overview section for Lis Members")
+	@And("the user validates plan overview section for a Lis member")
 	public void user_validate_planOverviewLis() {
 		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario()
 				.getBean(PageConstants.BENEFITS_COVERAGE_PAGE);
