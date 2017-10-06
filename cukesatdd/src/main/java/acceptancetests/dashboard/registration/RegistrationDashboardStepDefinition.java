@@ -435,8 +435,7 @@ public class RegistrationDashboardStepDefinition {
 		RegistrationInformationPage registrationInformationPage = (RegistrationInformationPage) getLoginScenario()
 				.getBean(PageConstants.REGISTRATION_INFORMATION_PAGE);
 		registrationInformationPage.getpffsError().isDisplayed();
-		Assert.assertTrue(registrationInformationPage.getpffsError().toString()
-				.contains("pffsMember"));
+		Assert.assertTrue(registrationInformationPage.getpffsError().toString().contains("errorPffsMember"));
 
 	}
 	
