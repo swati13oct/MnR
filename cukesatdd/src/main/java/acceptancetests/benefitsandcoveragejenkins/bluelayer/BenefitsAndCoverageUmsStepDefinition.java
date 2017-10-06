@@ -130,7 +130,7 @@ public class BenefitsAndCoverageUmsStepDefinition {
 	}
 
 	@Then("^the user navigates to Benefits and coverage page$")
-	public void user_views_BenefitsAndCoveragejenkins() {
+	public void user_views_BenefitsAndCoveragejenkins1() {
 
 		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstants.ACCOUNT_HOME_PAGE);
 		BenefitsAndCoveragePage benefitsCoveragePage = accountHomePage.navigateDirectToBnCPag();
@@ -257,34 +257,33 @@ public class BenefitsAndCoverageUmsStepDefinition {
 
 	}
 
-	@When("^the user navigates to plan benefits and Coverage in UMS site$")
-	public void navigates_benefits_and_Coverage() {
+	@Then("^the user navigates to Benefits coverage page$")
+	public void user_views_BenefitsAndCoveragejenkins() {
+
 		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstants.ACCOUNT_HOME_PAGE);
-		BenefitsCoveragePage benefitsCoveragePage = accountHomePage.navigateToBnC();
+		BenefitsAndCoveragePage benefitsCoveragePage = accountHomePage.navigateDirectToBnCPag();
 
-		/* Get expected data */
-		JSONObject benefitsAndCoverageActualJson = null;
-		@SuppressWarnings("unchecked")
-		Map<String, JSONObject> expectedDataMap = (Map<String, JSONObject>) getLoginScenario()
-				.getBean(CommonConstants.EXPECTED_DATA_MAP);
-		JSONObject benefitsAndCoverageExpectedJson = benefitsCoveragePage.getExpectedData(expectedDataMap);
-		getLoginScenario().saveBean(PlanBenefitsAndCoverageCommonConstants.PLAN_BENEFITS_EXPECTED,
-				benefitsAndCoverageExpectedJson);
-
-		/* Actual data */
 		if (benefitsCoveragePage != null) {
 			getLoginScenario().saveBean(PageConstants.BENEFITS_AND_COVERAGE_PAGE, benefitsCoveragePage);
-			/*
-			 * Assert.assertTrue(true); benefitsAndCoverageActualJson =
-			 * benefitsCoveragePage.benefitsAndCoverageJson;
-			 */
+
+			// Get actual data
+
+			JSONObject actualJsonObj = benefitsCoveragePage.benefitsandcoverageJson;
+			loginScenario.saveBean(PlanBenefitsAndCoverageCommonConstants.BENEFITS_AND_COVERAGE_ACTUAL, actualJsonObj);
+			System.out.println("Benefits and coverage actual ==============>" + actualJsonObj.toString());
+			// Get expected data
+			String fileName = this.userName;
+			String directory = CommonConstants.BENEFITS_AND_COVERAGE_PAGE_BLAYER_DIRECTORY;
+			JSONObject benefitsandcoverageExectedJson = MRScenario.readExpectedJson(fileName, directory);
+			loginScenario.saveBean(PlanBenefitsAndCoverageCommonConstants.BENEFITS_AND_COVERAGE_EXPECTED,
+					benefitsandcoverageExectedJson);
+			System.out.println(
+					"Benefits and coverage expected ==============>" + benefitsandcoverageExectedJson.toString());
+			loginScenario.saveBean(PlanBenefitsAndCoverageCommonConstants.BENEFITS_AND_COVERAGE_EXPECTED,
+					benefitsandcoverageExectedJson);
 		}
-		/*
-		 * getLoginScenario().saveBean(
-		 * PlanBenefitsAndCoverageCommonConstants.PLAN_BENEFITS_ACTUAL,
-		 * benefitsAndCoverageActualJson);
-		 */
 	}
+
 
 	@When("^the user navigates to benefits and coverage page under my plans in UMS site$")
 	public void navigates_benefits_and_Coverage_UMS() {
@@ -621,12 +620,13 @@ public class BenefitsAndCoverageUmsStepDefinition {
 
 	}
 
-	@Then("^the user validates Needhelp header and disclaimer header")
+	@Then("^the user validates Needhelp header and disclaimer link")
 	public void validateneedhelpheader() {
 		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario()
 				.getBean(PageConstants.BENEFITS_AND_COVERAGE_PAGE);
 		benefitsCoveragePage.validateNeedhelpheader();
 	}
+
 
 	@Then("^the user validates Plan Documents section")
 	public void validateContentOnBenefitsAndCoveragePage1() {
@@ -662,14 +662,16 @@ public class BenefitsAndCoverageUmsStepDefinition {
 		benefitsCoveragePage.validatecontactussection();
 	}
 
+
 	@Then("^the user clicks on Disclaimers link$")
 	public void the_user_clicks_on_Disclaimers_link() {
 		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario()
-				.getBean(PageConstants.BENEFITS_COVERAGE_PAGE);
+				.getBean(PageConstants.BENEFITS_AND_COVERAGE_PAGE);
 		JSONObject benefitsandcoverageExectedJson = (JSONObject) loginScenario
 				.getBean(PlanBenefitsAndCoverageCommonConstants.BENEFITS_AND_COVERAGE_EXPECTED);
 		benefitsCoveragePage.clickOnDisclaimers(benefitsandcoverageExectedJson);
 	}
+
 
 	@Then("^the user view mydocument in UMS site$")
 	public void views_mydocument_ums_site() {

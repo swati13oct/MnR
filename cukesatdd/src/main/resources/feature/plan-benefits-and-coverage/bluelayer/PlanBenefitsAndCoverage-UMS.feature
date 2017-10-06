@@ -764,15 +764,16 @@ Examples:
     Scenario Outline: Verify Need Help section is in place on Benefits and Coverage page
     Given registered member with following details logins in the member portal 
       | Plan Type      | <planType>  |
-      | Member Type     | <memberType>|
-      | Copay Category | <copayCategory>|
     When the user navigates to Benefits and coverage page
     And the user validates the content on benefits and coverage page
-    And the user validates Needhelp header
+    And the user validates contactus section
+    And the user validates Needhelp header and disclaimer link
+    And the user clicks on Disclaimers link
+    
+    Examples: 
+      | planType | 
+      | MA       |
 
-   Examples: 
-      | planType | memberType| copayCategory |
-      | MAPD     | Group     |     NON LIS   |
 
 @contactussection
     Scenario Outline: Verify Need Help section is in place on Benefits and Coverage pageR
