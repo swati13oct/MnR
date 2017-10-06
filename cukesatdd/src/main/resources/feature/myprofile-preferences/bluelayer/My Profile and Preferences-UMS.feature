@@ -299,3 +299,5 @@ Feature: To test My Profile & Preferences flow in UMS site
       | Group  |
       | MAPD   |
       | MA     |
+      |GroupMA |
+      |GroupPDP|
