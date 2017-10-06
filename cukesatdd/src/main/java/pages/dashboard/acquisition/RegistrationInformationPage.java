@@ -279,9 +279,26 @@ public class RegistrationInformationPage extends UhcDriver {
 	@FindBy(id = "continue-btn")
 	private WebElement createAccountConfirmRegistration;
 	
-	/** create Account Confirm Registration */
+	/** create Account Confirm Registration 
 	@FindBy(id = "accountConfirmation")
-	private WebElement accountConfirmation;
+	private WebElement accountConfirmation;*/
+	
+	/*create account error messages*/
+	@FindBy(id = "errorInvalidUsername")
+	private WebElement incorrectusernamemessage;
+	
+	@FindBy(id = "errorInvalidPassword")
+	private WebElement incorrectpasswordmessage;
+	
+	@FindBy(id = "password-confirm-error")
+	private WebElement confirmpasswordmessage;
+	
+	@FindBy(id = "errorInvalidEmail")
+	private WebElement incorrectemailmessage;
+	
+	@FindBy(id = "errorMismatchEmail")
+	private WebElement incorrectconfirmemailmessage;
+	
 
 	public RegistrationInformationPage(WebDriver driver) {
 		super(driver);
@@ -779,7 +796,37 @@ public class RegistrationInformationPage extends UhcDriver {
 	}
 	
 	public WebElement getAccountConfirmation() {
-		return accountConfirmation;
+		return createAccountConfirmRegistration;
 	}
 	
+	/*create account error messages functions*/
+	
+	public WebElement getincorrectusernameError()
+	{
+	return incorrectpasswordmessage;	
+	}
+	
+	public WebElement getincorrectpasswordError()
+	{
+		return incorrectpasswordmessage;
+		
+	}
+	
+	public WebElement getconfirmpassworderrormessage()
+	{
+		return confirmpasswordmessage;
+			
+	}
+	
+	public WebElement getemailerrormessage()
+	{
+		return incorrectemailmessage;
+		
+	}
+	
+	public WebElement getconfirmEmailError()
+	{
+		return incorrectconfirmemailmessage;
+		
+	}
 }

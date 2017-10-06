@@ -146,7 +146,7 @@ public class RegistrationDashboardStepDefinition {
 	}
 
 	@Then("^Verify correct plan name is displayed$")
-	public void verifyRegistrationPlanInformation(DataTable givenAttributes) {
+	public void verifyRegistrationPlanInformation(DataTable givenAttributes) throws InterruptedException {
 		// get test variables
 		List<DataTableRow> memberAttributesRow = givenAttributes
 				.getGherkinRows();
@@ -166,6 +166,7 @@ public class RegistrationDashboardStepDefinition {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		Thread.sleep(1000);
 		String actualPlanName = registrationInformationPage.getPlanName().getText();
 		System.out.println(actualPlanName);
 		Assert.assertEquals(expectedPlanName, actualPlanName);
@@ -467,7 +468,7 @@ public class RegistrationDashboardStepDefinition {
 		registrationInformationPage.enterConfirmEmailToCreateAccount(confirmEmail);
 	}
 	
-		@And("^click in confirm registration and account confirmation screen appears$")
+	/*	@And("^click in confirm registration and account confirmation screen appears$")
 		public void getAccountConfirmationScreen(){
 			RegistrationInformationPage registrationInformationPage = (RegistrationInformationPage) getLoginScenario()
 					.getBean(PageConstants.REGISTRATION_INFORMATION_PAGE);
@@ -478,8 +479,8 @@ public class RegistrationDashboardStepDefinition {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			Assert.assertEquals(true, registrationInformationPage.getAccountConfirmation().isDisplayed());
+		 registrationInformationPage.getAccountConfirmation().click();
 			
-		}
+		}*/
 
 }
