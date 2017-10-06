@@ -184,9 +184,12 @@ public class MyProfilesPage extends UhcDriver{
 	public boolean ValidateEmailErrorMessages(){
 		
 		boolean flag;
-		
+		driver.navigate().refresh();
+		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+		CommonUtility.checkPageIsReady(driver);
 		EditEmailLink.click();
 		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+		CommonUtility.checkPageIsReady(driver);
 		if (!validate(NewEmailTextBx)){
 			System.out.println("@@@@@@@  Edit Email Modal is not Displayed  @@@@@@@");
 			return false;

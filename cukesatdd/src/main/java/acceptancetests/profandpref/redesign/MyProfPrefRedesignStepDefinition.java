@@ -170,8 +170,9 @@ public class MyProfPrefRedesignStepDefinition {
 	@Then("^the user Validates all Error Messages for Edit Email scenarios$")
 	public void the_user_Validates_all_Error_Messages_for_Edit_Email_scenarios() {
 		MyProfilesPage myProfilepage = (MyProfilesPage) getLoginScenario().getBean(PageConstants.PROF_AND_PREF_PAGE);
+		boolean flag = myProfilepage.ValidateEmailErrorMessages();
 
-		if (myProfilepage.ValidateEmailErrorMessages()) {
+		if (flag) {
 			System.out.println("*********Edit Email Scenarios Error Messages Displayed**********");
 			Assert.assertTrue(true);
 		} else {

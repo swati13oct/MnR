@@ -19,6 +19,6 @@ import cucumber.junit.Cucumber;
 				"pretty", "html:reports/test-report","json:target/cucumber.json"}, tags ={"@MyProfileErrorMessages"})
 
 public class RunMRAtddTestMyProfPrefErrorMsgs {
-	//@MyProfileErrorMessages,@TempAltAddressErrorMessagesAARP
+	//@MyProfileErrorMessages,@EditEmailErrorMessagesAARP,@TempAltAddressErrorMessagesAARP,@EditEmailErrorMessagesUMS, @TempAltAddressErrorMessagesUMS
 	
 }

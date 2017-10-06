@@ -46,7 +46,7 @@ public class UlayerHomePage extends UhcDriver {
 	@FindBy(xpath = "//a[contains(text(), 'Go to EOB Search')]")
 	private WebElement EOBsearchLink;
 
-	@FindBy(xpath = "//a[contains(text(), 'Go to MyProfile ')]")
+	@FindBy(xpath = "//a[contains(text(), 'Go to My Profile and Preferences_Redesign')]")
 	private WebElement MyProfileLink;
 
 	@FindBy(xpath = "//*[@id='profilePreferencesController']//h1")
@@ -117,11 +117,10 @@ public class UlayerHomePage extends UhcDriver {
 	}
 
 	public MyProfilesPage navigateToProfAndPref() {
-		// My Profile Link not pointing to the correct html.
-		// MyProfileLink.click();
-		driver.navigate()
+		MyProfileLink.click();
+/*		driver.navigate()
 				.to("https://member.team-a-aarpmedicareplans.uhc.com//content/aarpm/home/profileandpreferences.html");
-		CommonUtility.checkPageIsReady(driver);
+*/		CommonUtility.checkPageIsReady(driver);
 		if (MyProfilePageHeader.isDisplayed()) {
 
 			System.out.println("@@@@  My Profile and Preferences Page is Displayed  @@@@");
