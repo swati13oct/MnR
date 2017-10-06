@@ -128,6 +128,7 @@ public class MRScenario {
 		browser = props.get("browser");
 		/* Set acqusisition and member urls */
 		environment = props.get("Environment");
+		System.out.println("Environment selected1 : "+environment);
 
 		/* Set up DB */
 		Connection con = getDBConnection(props);
@@ -933,7 +934,7 @@ public class MRScenario {
 
 		String agent = (null == System.getProperty(CommonConstants.JENKINS_BROWSER_AGENT_STRING)
 				? props.get(CommonConstants.DESKTOP_BROWSER_AGENT_STRING) : System.getProperty(CommonConstants.JENKINS_BROWSER_AGENT_STRING));
-
+		System.out.println("Environment selected 2 : "+environment);
 
 		if (browser.equalsIgnoreCase(CommonConstants.JENKINS_BROWSER_PHANTOMJS)) {
 			System.out.println("PHANTOMJS Agent: " + agent);
@@ -1020,6 +1021,7 @@ public class MRScenario {
 				return webDriver;
 			}else if (browser.equalsIgnoreCase(CommonConstants.SAUCE_BROWSER_WEB)) {
 				System.out.println("Execution is Going to Start on SauceLabs Web.....!!!!!");
+				System.out.println("Environment selected 3 : "+environment);
 				DesiredCapabilities capabilities = null;
 				if(browserName.equalsIgnoreCase("firefox")){
 					//System.out.println("Inside firefox");
