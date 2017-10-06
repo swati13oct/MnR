@@ -60,7 +60,7 @@ public class BLayerPlanComparePage extends UhcDriver {
 	@FindBy(xpath = ".//*[@id='fixTable']/tbody/tr[25]/td[2]/span")
 	private WebElement AnnualDeductibleValue;	
 
-	@FindBy(linkText="Enter drug information")
+	@FindBy(linkText="Estimate drug costs")
 	private WebElement DCEText;
 	
 	@FindBy(linkText="Look up your doctor")

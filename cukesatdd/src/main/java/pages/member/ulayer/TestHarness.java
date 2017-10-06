@@ -2,6 +2,7 @@ package pages.member.ulayer;
 
 import java.util.Map;
 
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -42,8 +43,11 @@ public class TestHarness extends UhcDriver{
 		return null;
 	}
 	
-	public PaymentsOverview navigateToTeamHPaymentOverview()
+	public PaymentsOverview navigateToTeamHPaymentOverview() throws InterruptedException
 	{
+		JavascriptExecutor jse = (JavascriptExecutor)driver;
+		jse.executeScript("window.scrollBy(0,450)", "");
+		Thread.sleep(5000);
 		if(TeamHPaymentPage.isEnabled()){
 			TeamHPaymentPage.click();
 			return new PaymentsOverview(driver);

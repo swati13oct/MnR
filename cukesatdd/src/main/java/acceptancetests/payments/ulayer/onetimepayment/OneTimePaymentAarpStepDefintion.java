@@ -622,7 +622,7 @@ public class OneTimePaymentAarpStepDefintion {
 	}
 	
 	@And("^the user navigates to TeamHPaymentOverview Page$")
-	public void user_navigates_to_TeamHPaymentOverview_Page()
+	public void user_navigates_to_TeamHPaymentOverview_Page() throws InterruptedException
 	{
 		TestHarness testHarness = (TestHarness)getLoginScenario().getBean(PageConstants.TEST_HARNESS_PAGE);
 		PaymentsOverview paymentsOverview = testHarness.navigateToTeamHPaymentOverview();

@@ -39,7 +39,7 @@ public class ResponsivePlanSummaryUhc extends UhcDriver{
 		@FindBy(xpath = "//div[@class='tab plancountheight'][1]")
 		private WebElement viewMaPlans;
 		
-		@FindBy(xpath = ".//*[@id='site-wrapper']/div[4]/div/div/div/div/div/div/div[1]/div/div/div[1]/div[2]/div/div[2]/div[1]")
+		@FindBy(xpath = "//*[@id='site-wrapper']/div[4]/div/div[1]/div/div/div/div/div[1]/div/div/div[1]/div[2]/div/div[2]/div[1]/div/span[3]")                
 		private WebElement viewMAPlans;
 		
 		@FindBy(xpath = "//*[@class='ng-valid ng-dirty']/span/div[1]/p")
