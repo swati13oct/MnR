@@ -5,10 +5,6 @@ import org.junit.runner.RunWith;
 import cucumber.junit.Cucumber;
 import atdd.runners.RunAtddCustomerRunner;
 
-/**
- * @author akapoo18
- *
- */
 
 @RunWith(RunAtddCustomerRunner.class)
 
