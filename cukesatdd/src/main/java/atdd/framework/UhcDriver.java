@@ -51,7 +51,7 @@ import org.apache.poi.ss.usermodel.Workbook;
  */
 public abstract class UhcDriver {
 
-	public WebDriver driver;
+	public static WebDriver driver;
 
 	public void start(String url) {
 		driver.get(url);
