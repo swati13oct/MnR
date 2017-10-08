@@ -39,7 +39,7 @@ public class ExecutionListener extends RunListener {
 		WebDriver driver1 = new Augmenter().augment(UhcDriver.driver);
 		File file  = (File) ((TakesScreenshot)driver1).getScreenshotAs(OutputType.FILE);
 		try {
-			FileUtils.copyFile(file, new File("./"+GetDate()+"_Pass/"+GetTimeStampValue()+".jpg"));
+			FileUtils.copyFile(file, new File("./Screenshots/"+GetDate()+"_Pass/"+GetTimeStampValue()+".jpg"));
 		} catch (IOException e) {
 
 			e.printStackTrace();
@@ -53,7 +53,7 @@ public class ExecutionListener extends RunListener {
 		WebDriver driver1 = new Augmenter().augment(UhcDriver.driver);
 		File file  = (File) ((TakesScreenshot)driver1).getScreenshotAs(OutputType.FILE);
 		try {
-			FileUtils.copyFile(file, new File("./"+GetDate()+"_Fail/"+GetTimeStampValue()+".jpg"));
+			FileUtils.copyFile(file, new File("./Screenshots/"+GetDate()+"_Fail/"+GetTimeStampValue()+".jpg"));
 		} catch (IOException e) {
 
 			e.printStackTrace();
