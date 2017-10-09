@@ -993,7 +993,7 @@ Examples:
   | PDP     |  Group       |  NON LIS      | 
       
       
-          @PlanOverviewNonLis
+  @PlanOverviewNonLis
     Scenario Outline: Verify that Plan Overview  is in place on Benefits and Coverage page for Non LIS Members
     Given registered member with following details logins in the member portal 
       | Plan Type      | <planType>  |
