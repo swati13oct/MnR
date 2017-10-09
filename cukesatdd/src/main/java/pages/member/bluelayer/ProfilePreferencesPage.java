@@ -219,7 +219,7 @@ public class ProfilePreferencesPage extends UhcDriver {
 	@FindBy(xpath = ".//*[@id='temporaryAddress']/div[1]/a[2]")
 	private WebElement CancelButtontoptempAddress;
 
-	@FindBy(className = "atdd-gopaperless")
+	@FindBy(xpath = ".//*[@id='communicationAddress']/div[2]/a")
 	private WebElement gopaperlessbutton;
 
 	@FindBy(className = "atdd-go-green-img")
@@ -572,13 +572,26 @@ public class ProfilePreferencesPage extends UhcDriver {
 	}
 
 	public ProfilePreferencesPage validatepnparrowlink() {
+		try {
+			Thread.sleep(20000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		Profilenprefernceslink.click();
-		if (driver.getTitle().equalsIgnoreCase("profile")) {
+		try {
+			Thread.sleep(20000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		if (driver.getTitle().equalsIgnoreCase("profileandpreferences")) {
 			System.out.println("Pass");
 			return new ProfilePreferencesPage(driver);
 		}
 		return null;
 	}
+	
 
 	public void validatePhoneElements() {
 
