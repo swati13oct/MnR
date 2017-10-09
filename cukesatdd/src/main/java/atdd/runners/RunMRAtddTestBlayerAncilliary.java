@@ -16,5 +16,5 @@ import cucumber.junit.Cucumber;
 		features = {"feature/plan-benefits-and-coverage/bluelayer" }, 
 		format = {
 		"pretty", "html:reports/test-report","json:target/cucumber.json"}, tags ={"@Ancillarysecjenkins"})
-public class RunMRAtddTestBlayerNeedHelp {
+public class RunMRAtddTestBlayerAncilliary {
 }
