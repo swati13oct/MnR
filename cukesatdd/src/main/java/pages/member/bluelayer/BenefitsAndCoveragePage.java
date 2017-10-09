@@ -150,7 +150,7 @@ public class BenefitsAndCoveragePage extends UhcDriver {
     private WebElement effective_Date;
     
     
-    @FindBy(xpath = "//*[@id='planBenefitsApp']/section/div/div[2]/div[4]/span[2]")
+    @FindBy(className = "atdd-benefitsoverview-monthlypremium-label")
     private WebElement Monthly_Premium;
     
     
@@ -725,7 +725,7 @@ public void validatePlanOverviewLis() {
 	validateNew(memberID);
 	validateNew(effective_Date);
 	validateNew(Monthly_Premium);
-	validateNew(ExtraHelp);
+	//validateNew(ExtraHelp);
 
 }
 
