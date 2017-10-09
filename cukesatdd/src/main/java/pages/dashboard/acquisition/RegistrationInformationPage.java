@@ -803,7 +803,7 @@ public class RegistrationInformationPage extends UhcDriver {
 	
 	public WebElement getincorrectusernameError()
 	{
-	return incorrectpasswordmessage;	
+	return incorrectusernamemessage;	
 	}
 	
 	public WebElement getincorrectpasswordError()

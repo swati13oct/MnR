@@ -16,9 +16,9 @@ Feature: To test registration flow in redesign portal
       | CREATE_ACCOUNT_CONFIRM_PASSWORD | <confirmPassword> |
       | CREATE_ACCOUNT_EMAIL            | <email>           |
       | CREATE_ACCOUNT_CONFIRM_EMAIL    | <confirmEmail>    |
-    And click in confirm registration and account confirmation screen appears
+    And click on confirm registration 
 
     Examples: 
       #dev-c and team-h
       | Plantype | planMemberId | dateOfBirth | planname                                       | membername      | userName   | password   | confirmPassword | email          | confirmEmail   |
-      | PDP      |    829072104 | 09-03-1942  | UnitedHealthcare MedicareComplete Plan 1 (HMO) | DFADC BBCBEFCEE | Username@1 | Password@1 | Password@1      | member@uhc.com | member@uhc.com |
+      | PDP      |    949291584 | 02-17-1952  | Preferred Choice Palm Beach (HMO) | ECCFF BFACFDAFA| Username@1 | Password@1 | Password@1      | member@uhc.com | member@uhc.com |
