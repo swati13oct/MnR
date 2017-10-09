@@ -860,23 +860,24 @@ Examples:
       | PDP     |  Individual  |  NON LIS      |
       
  @Ancillarysecjenkins
-    Scenario Outline: Verify PDF section is in place on Benefits and Coverage page
+   Scenario Outline: Verify Ancilliary section is in place on Benefits and Coverage page
     Given registered member with following details logins in the member portal 
       | Plan Type      | <planType>  |
-      | Member Type    | <memberType>|
-      | Copay Category | <copayCategory>|
-    Then the user navigates to Benefits and coverage page
+    When the user navigates to Benefits coverage page
     And the user validates the content on benefits and coverage page
     Then the user validates Header section
     Then the user validates Hearing section
     Then the user validates the Hearing Aid section
     Then the user validates the Vision section
-    Then the user validates the Dental section 
+    Then the user validates the Dental section
+    Then the user validates chiropractic section
+    
      Examples: 
-      | planType | memberType| copayCategory |
-      | MAPD     | Group     |     NON LIS   |
-      | PDP      | Group     |     NON LIS   |
-      ##MAPD_Group_113_nonlis
+      | planType | 
+      | Group    | 
+      #| GroupPDP | 
+      | GroupMA  |
+     
       
    @drugcopaysectionnonlis
     Scenario Outline: Verify PDF section is in place on Benefits and Coverage page
