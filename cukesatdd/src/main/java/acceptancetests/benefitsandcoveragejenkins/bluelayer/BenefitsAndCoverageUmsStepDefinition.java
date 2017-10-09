@@ -781,7 +781,7 @@ public class BenefitsAndCoverageUmsStepDefinition {
 	@Then("^the user validates Hearing section$")
 	public void user_validates__Hearing_section() {
 		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario()
-				.getBean(PageConstants.BENEFITS_COVERAGE_PAGE);
+				.getBean(PageConstants.BENEFITS_AND_COVERAGE_PAGE);
 		benefitsCoveragePage.HearingSection();
 
 	}
@@ -790,32 +790,40 @@ public class BenefitsAndCoverageUmsStepDefinition {
 	public void user_validates__Hearing_Aid_section() {
 
 		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario()
-				.getBean(PageConstants.BENEFITS_COVERAGE_PAGE);
+				.getBean(PageConstants.BENEFITS_AND_COVERAGE_PAGE);
 		benefitsCoveragePage.HearingAid();
 	}
 
 	@And("^the user validates the Vision section$")
 	public void user_validates__Vision_section() {
 		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario()
-				.getBean(PageConstants.BENEFITS_COVERAGE_PAGE);
+				.getBean(PageConstants.BENEFITS_AND_COVERAGE_PAGE);
 		benefitsCoveragePage.Vision();
 	}
 
 	@And("^the user validates the Dental section$")
 	public void user_validates__Dental_section() {
 		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario()
-				.getBean(PageConstants.BENEFITS_COVERAGE_PAGE);
+				.getBean(PageConstants.BENEFITS_AND_COVERAGE_PAGE);
 		benefitsCoveragePage.Dental();
 	}
 
 	@And("^the user validates Header section$")
 	public void user_validates__Header_section() {
 		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario()
-				.getBean(PageConstants.BENEFITS_COVERAGE_PAGE);
+				.getBean(PageConstants.BENEFITS_AND_COVERAGE_PAGE);
 		benefitsCoveragePage.Header();
 
 	}
 
+	
+	@And("^the user validates chiropractic section$")
+	public void user_validates__chiropractic_section() {
+		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario()
+				.getBean(PageConstants.BENEFITS_AND_COVERAGE_PAGE);
+		benefitsCoveragePage.chiropracticsection();
+	}
+	
 	@And("^the user validates plandocumentsection and Drug coverage header and text under the section")
 	public void user_validates__drugcoverage_section() {
 		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario()

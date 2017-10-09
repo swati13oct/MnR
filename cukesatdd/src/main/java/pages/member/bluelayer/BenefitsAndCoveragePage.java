@@ -12,6 +12,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.junit.Assert;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -50,7 +51,7 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 	@FindBy(xpath="//*[@id='_content_uhcm_home_my-plans_benefits-and-coverage-page_jcr_content_overview_needhelp_tfnParplansource_teaser']/div/section/div/div[3]/div/p")
 	private WebElement Contactussection;
 	
-	@FindBy(xpath = "//span[contains(.,'keyboard_arrow_down')]")
+	@FindBy(className = "material-icons")
 	private WebElement disclaimersLink;
 
         @FindBy(xpath = ".//*[@id='plan_benefit_documents']/section/div/div[1]/div")
@@ -59,20 +60,23 @@ public class BenefitsAndCoveragePage extends UhcDriver {
         @FindBy(xpath = ".//*[@id='lang-select-2']")
 	private WebElement langdropdown;
     
-        @FindBy(xpath = ".//*[@id='ancillary_benefits']/div[2]/div[1]/div")
+        @FindBy(xpath = ".//*[@id='ancillary']/div[2]/div[1]/div")
 	private WebElement Hearingsection;
     
-        @FindBy(xpath = ".//*[@id='ancillary_benefits']/div[2]/div[2]/div")
+        @FindBy(xpath = ".//*[@id='ancillary']/div[2]/div[2]/div/div/div")
 	private WebElement Hearingaid;
     
-        @FindBy(xpath = ".//*[@id='ancillary_benefits']/div[3]/div[1]/div")
+        @FindBy(xpath = ".//*[@id='ancillary']/div[2]/div[3]/div[1]/div")
 	private WebElement Visionsection;
     
-        @FindBy(xpath = ".//*[@id='ancillary_benefits']/div[3]/div[2]/div")
+        @FindBy(xpath = ".//*[@id='ancillary']/div[2]/div[3]/div[2]/div")
 	private WebElement Dentalsection;
     
-    @FindBy(xpath = ".//*[@id='ancillary_benefits']/div[1]/div")
-	private WebElement Headersection; 
+    @FindBy(xpath = ".//*[@id='ancillary']/div[1]/div")
+	private WebElement Headersection;
+    
+    @FindBy(xpath = ".//*[@id='ancillary']/div[2]/div[4]/div/div")
+    private WebElement chiropracticsection;
     
     @FindBy(xpath = ".//*[@id='drug-copays-and-discounts']/section/div[2]/div[5]/div/span/div/div/div/div/h3/span")
     private WebElement DrugCoveragetext;
@@ -226,10 +230,10 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 	
 	public void openAndValidate() {
 
-		/*JSONObject jsonObject = new JSONObject();
+		JSONObject jsonObject = new JSONObject();
 		for (String key : benefitsCoverage.getExpectedData().keySet()) {
 			List<WebElement> elements = findElements(benefitsCoverage.getExpectedData().get(key));
-			if (elements.size() == 1) {
+			/*if (elements.size() == 1) {
 				validate(elements.get(0));
 				try {
 					jsonObject.put(key, elements.get(0).getText());
@@ -238,11 +242,11 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-			} else if (elements.size() > 1) {
+			} else if (elements.size() > 1) {*/
 				JSONArray jsonArray = new JSONArray();
 				for (WebElement element : elements) {
 
-					validate(element);
+					//validate(element);
 					try {
 						JSONObject jsonObjectForArray = new JSONObject();
 						jsonObjectForArray.put(benefitsCoverage.getExpectedData().get(key).getElementName(),
@@ -266,7 +270,7 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 		benefitsandcoverageJson = jsonObject;
 
 		System.out.println("BenefitsCoverageJson----->" + benefitsandcoverageJson);
-		*/
+		
 	}
 	
 	
@@ -274,6 +278,14 @@ public void validateNeedhelpheader(){
 		
 		try {
 			validate(NeedHelpHeader);
+			JavascriptExecutor jse = (JavascriptExecutor)driver;
+			jse.executeScript("window.scrollBy(0,400)", "");
+			try {
+				Thread.sleep(30000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			validate(disclaimersLink);
 		    System.out.println("text"+ disclaimersLink.getText());
 		} catch (Exception e) {
@@ -441,6 +453,15 @@ public void Header() {
 
 	try {
 		validate(Headersection);
+	} catch (Exception e) {
+		System.out.println("Elements is not found ...");
+	}
+}
+
+public void chiropracticsection() {
+
+	try {
+		validate(chiropracticsection);
 	} catch (Exception e) {
 		System.out.println("Elements is not found ...");
 	}
