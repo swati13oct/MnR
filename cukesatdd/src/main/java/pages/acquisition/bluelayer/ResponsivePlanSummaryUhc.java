@@ -514,7 +514,7 @@ public ResponsivePlanSummaryUhc viewPlanSummary(String planType) {
 public BLayerPlanComparePage TeamCviewPlanSummary(String planType) {
 //	JavascriptExecutor js = (JavascriptExecutor)driver;
 	try {
-		Thread.sleep(4000);
+		Thread.sleep(7000);
 	} catch (InterruptedException e) {
 		// TODO Auto-generated catch block
 		e.printStackTrace();

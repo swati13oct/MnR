@@ -9,13 +9,16 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
 import atdd.framework.UhcDriver;
 import pages.acquisition.bluelayer.PlanSelectorPage;
 import pages.acquisition.bluelayer.ResponsivePlanSummaryUhc;
 
 public class BLayerPlanComparePage extends UhcDriver {
 	
-	@FindBy(xpath = ".//*[@id='plan-list-1']/div/div[3]/div/div[1]/div[3]/div/div/span[1]/label")	               
+	@FindBy(xpath = ".//*[@id='plan-list-1']/div/div[3]/div/div[1]/div[3]/div/div/span[1]/label")	                 
 	private WebElement Plan2HMO;
 	
 	@FindBy(xpath = ".//*[@id='plan-list-1']/div/div[3]/div/div[2]/div[3]/div/div/span[1]/label")
@@ -100,9 +103,10 @@ public class BLayerPlanComparePage extends UhcDriver {
 		
 		Thread.sleep(7000);
 		JavascriptExecutor jse = (JavascriptExecutor)driver;
-		jse.executeScript("window.scrollBy(0,700)", "");
-		Thread.sleep(2000);
-		Plan2HMO.click();		
+		jse.executeScript("window.scrollBy(0,700)", "");		
+		WebDriverWait wait = new WebDriverWait(driver, 10);		 
+		WebElement element = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@id='plan-list-1']/div/div[3]/div/div[1]/div[3]/div/div/span[1]/label")));
+		element.click();		
 		jse.executeScript("window.scrollBy(0,600)", "");
 		Plan1HMO.click();
 		//jse.executeScript("window.scrollBy(0,200)", "");
