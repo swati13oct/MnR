@@ -21,13 +21,13 @@ public class BLayerPlanComparePage extends UhcDriver {
 	@FindBy(xpath = ".//*[@id='plan-list-1']/div/div[3]/div/div[1]/div[3]/div/div/span[1]/label")	                 
 	private WebElement Plan2HMO;
 	
-	@FindBy(xpath = ".//*[@id='plan-list-1']/div/div[3]/div/div[2]/div[3]/div/div/span[1]/label")
+	@FindBy(xpath = "//*[@id='plan-list-1']/div/div[2]/div/div[2]/div[3]/div/div/span[1]/label")	                  
 	private WebElement Plan1HMO;
 	
 /*	@FindBy(xpath = ".//*[@id='plan-list-1']/div/div[2]/div/div[2]/div[3]/div/div/span[3]/a")
 	private WebElement ComparePlansLink;*/
 	
-	@FindBy(xpath = "//*[@id='plan-list-1']/div/div[3]/div/div[2]/div[3]/div/div/span[3]/a")
+	@FindBy(xpath = " //*[@id='plan-list-1']/div/div[2]/div/div[2]/div[3]/div/div/span[3]/a")	               
 	private WebElement ComparePlansLink;
 	/*
 	@FindBy(xpath = ".//*[@id='plan-list-1']/div/div[2]/div/div[1]/div[3]/div/div/span[3]/a")
@@ -105,7 +105,7 @@ public class BLayerPlanComparePage extends UhcDriver {
 		JavascriptExecutor jse = (JavascriptExecutor)driver;
 		jse.executeScript("window.scrollBy(0,700)", "");		
 		WebDriverWait wait = new WebDriverWait(driver, 10);		 
-		WebElement element = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@id='plan-list-1']/div/div[3]/div/div[1]/div[3]/div/div/span[1]/label")));
+		WebElement element = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@id='plan-list-1']/div/div[2]/div/div[1]/div[3]/div/div/span[1]/label")));
 		element.click();		
 		jse.executeScript("window.scrollBy(0,600)", "");
 		Plan1HMO.click();
