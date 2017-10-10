@@ -977,10 +977,10 @@ Examples:
      Examples: 
     | planType|
     | MAPD    |
-   #| MA    |
+    | MA    |
     
      
-       @BncHeadersGroup
+      @BncHeadersGroup
      Scenario Outline: Verify that Page Headers are in place on Benefits and Coverage page
     Given registered member with following details logins in the member portal 
         | Plan Type      | <planType>  |
@@ -1005,11 +1005,10 @@ Examples:
 
     Examples: 
       | planType|  memberType  | copayCategory |
-      #| MAPD    |  Individual  |  NON LIS      |
-      #| PDP     |  Individual  |  NON LIS      |  
+      | MAPD    |  Individual  |  NON LIS      | 
       #| MA      |  Individual  |  NON LIS      |
-      #| MAPD    |  Group       |  NON LIS      |
-      | PDP     |  Group       |  NON LIS      |  
+     | MAPD    |  Group       |  NON LIS      |
+     | PDP     |  Group       |  NON LIS      |  
       
       @PlanOverviewLis
     Scenario Outline: Verify that Plan Overview is in place on Benefits and Coverage page for LIS Members
@@ -1037,8 +1036,7 @@ Examples:
       Examples: 
     | planType|
     | MAPD    |
-   # | PDP     |
-   # | MA       |
+    | MA      |
    
     
     
