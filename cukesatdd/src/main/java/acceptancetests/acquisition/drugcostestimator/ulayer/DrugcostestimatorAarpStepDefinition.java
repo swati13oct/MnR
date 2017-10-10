@@ -957,8 +957,8 @@ public class DrugcostestimatorAarpStepDefinition {
 		dce.navigateToStep2();
 		dce.populateZipCode("90210");
 		dce.validatePharmacySelected();
-		//dce.backwardToStep1();
-		dce.BacktoEnterYourDrugs();
+		dce.backwardToStep1();
+		//dce.BacktoEnterYourDrugs();
 	}
 	
 	@Then("^I will see a SWITCH NOW link in the drug tile with a pharmacy savings cost value$")

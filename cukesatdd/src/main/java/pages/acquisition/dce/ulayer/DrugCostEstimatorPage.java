@@ -9,6 +9,7 @@ import org.json.JSONObject;
 import org.junit.Assert;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.NoAlertPresentException;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
@@ -51,6 +52,10 @@ public class DrugCostEstimatorPage extends UhcDriver {
 	//@FindBy(xpath = "//p[contains(text(),'STEP1:')]/following-sibling::span[p[contains(text(),'Drugs')]]")
 	@FindBy(id = "drugsTabId")
 	public WebElement step1;
+	
+	
+	@FindBy(xpath = ".//*[@id='drugsTabId']/a/span/p")
+	public WebElement step1DrugsTab;
 
 	@FindBy(id = "pharmacy-form")
 	public WebElement pharmacyform;
@@ -341,7 +346,9 @@ public class DrugCostEstimatorPage extends UhcDriver {
 	@FindBy(id = "zipcodebtn")
 	public WebElement zipcodeFindPlans;
 
-	@FindBy(xpath = ".//*[@id='site-wrapper']/div[4]/div/div[1]/div[1]/div/div/div[1]/div/div/div[1]/div[2]/div/div[2]/div[1]/div/span[3]")
+	
+	//@FindBy(xpath = ".//*[@id='site-wrapper']/div[4]/div/div[1]/div[1]/div/div/div[1]/div/div/div[1]/div[2]/div/div[2]/div[1]/div/span[3]")
+	@FindBy(xpath = ".//*[@id='site-wrapper']/div[4]/div/div/div/div/div/div/div[1]/div/div/div[1]/div[2]/div/div[2]/div[1]/div/span[3]")
 	public WebElement viewPlans;
 
 	@FindBy(xpath = "//nav/ul[@class='uhc-pagination']/li[1]")
@@ -508,7 +515,16 @@ public class DrugCostEstimatorPage extends UhcDriver {
 	}
 
 	public void backwardToStep1() {
-		step1.click();
+		JavascriptExecutor jse = (JavascriptExecutor)driver;
+		jse.executeScript("scroll(315, 0)");
+		try {
+			Thread.sleep(3000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		step1DrugsTab.click();
+		System.out.println("step 1 click");
 	}
 	
 	public void BacktoEnterYourDrugs(){
@@ -689,6 +705,9 @@ public class DrugCostEstimatorPage extends UhcDriver {
 
 		rbtn.isDisplayed();
 		if (!rbtn.isSelected()) {
+			JavascriptExecutor jse = (JavascriptExecutor)driver;
+			jse.executeScript("scroll(316, 0)");
+			Thread.sleep(3000);
 			rbtn.click();
 			System.out.println("RBTN " + pharmacy + " >> Selected");
 		} else {
@@ -1238,6 +1257,12 @@ public class DrugCostEstimatorPage extends UhcDriver {
 	}
 
 	public void validateSwitchNowLink() {
+		try {
+			Thread.sleep(3000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		int drugscount = getDrugsCount();
 		if (drugscount > 0) {
 			WebElement switchNowLink = driver.findElement(By.id("generic-drug-switch-btn-" + (drugscount - 1)));
@@ -1337,7 +1362,7 @@ public class DrugCostEstimatorPage extends UhcDriver {
 	}
 
 	public void validateStep1Item() {
-		validateintroductorytext();
+		//validateintroductorytext();
 		Assert.assertTrue("returnLink is not present", returnLink.isDisplayed());
 		Assert.assertTrue("description text is not present", description.isDisplayed());
 		Assert.assertTrue("step1 text is not present", step1.isDisplayed());
@@ -1425,7 +1450,7 @@ public class DrugCostEstimatorPage extends UhcDriver {
 
 		viewPlans.click();
 		Thread.sleep(10000);
-		List<WebElement> enterDrugInformation = driver.findElements(By.linkText("Edit drug list"));
+		List<WebElement> enterDrugInformation = driver.findElements(By.linkText("Enter drug information"));
 		enterDrugInformation.get(0).click();
 		Thread.sleep(1000);
 

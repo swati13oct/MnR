@@ -14,7 +14,7 @@ import cucumber.junit.Cucumber;
 @Cucumber.Options(glue = { "atdd.framework","acceptancetests.acquisition.drugcostestimator.ulayer" }, 
 		features = { "feature/dceacquisition/ULayer" }, 
 		format = {
-		"pretty", "html:reports/test-report","json:target/cucumber.json" }, tags ={"@acq_drug_cost_estimator_switch_to_generic_home_flow"})
+		"pretty", "html:reports/test-report","json:target/cucumber.json" }, tags ={"@acq_drug_cost_estimator_switch_to_generic_home_flow,@acq_drug_cost_estimator_ulayer_flow,@acq_drug_cost_estimator_switch_to_generic_vpp_flow,@acq_drug_cost_estimator_disclaimer"})
 public class RunMRAtddTestAcquisitionDCEUlayer {
 //
 }

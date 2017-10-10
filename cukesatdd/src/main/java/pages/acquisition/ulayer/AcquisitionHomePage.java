@@ -293,10 +293,8 @@ public class AcquisitionHomePage extends GlobalWebElements {
 
 	@Override
 	public void openAndValidate() {
-		if (!(currentUrl().contains("aarpmedicareplans")) && (MRScenario.environment == "team-b")) {
+		if (!(currentUrl().contains("aarpmedicareplans"))) {
 			start(AARP_ACQISITION_PAGE_URL);
-		}else if (!(currentUrl().contains("aarpmedicareplans")) && (MRScenario.environment.equals("test-a"))) {
-			start(AARP_ACQISITION_PAGE_URL_TEST_A);
 		}
 		validate(navigationSectionHomeLink);
 		validate(navigationSectionOurPlansLink);
