@@ -649,7 +649,7 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 		validateNew(nameLabel);
 		validateNew(memberID);
 		validateNew(effective_Date);
-		validateNew(Monthly_Premium);
+		//validateNew(Monthly_Premium);
 
 	}
 
