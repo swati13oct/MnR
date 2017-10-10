@@ -88,6 +88,8 @@ public class UlayerLoginPage extends UhcDriver {
 	@Override
 	public void openAndValidate() {
 		start(PAGE_URL);
+		driver.navigate().to("https://member.team-a-aarpmedicareplans.uhc.com/content/aarpm/home/testharness.html");
+		CommonUtility.checkPageIsReady(driver);
 		validate(loginIn);
 		System.out.println("@@@@@@@@@@@@@  Test Environment and URL  : "+PAGE_URL+"@@@@@@@@@@@@@@@@@@@@@@@");
 	}

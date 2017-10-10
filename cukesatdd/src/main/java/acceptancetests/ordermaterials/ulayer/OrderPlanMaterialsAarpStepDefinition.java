@@ -114,9 +114,13 @@ public class OrderPlanMaterialsAarpStepDefinition {
 		UlayerLoginPage loginPage = new UlayerLoginPage(wd);
 
 		UlayerHomePage accountHomePage = (UlayerHomePage)loginPage.loginWith(userName, pwd);
-		
-		 getLoginScenario().saveBean(PageConstants.ACCOUNT_HOME_PAGE,accountHomePage);
-		
+		if (accountHomePage != null) {
+			 getLoginScenario().saveBean(PageConstants.ACCOUNT_HOME_PAGE,accountHomePage);
+			Assert.assertTrue(true);
+		}
+		else {
+			Assert.fail("***** Error in loading  Test Harness Account Landing Page *****");
+		}
 
 		/* Get expected data */
 		/*Map<String, JSONObject> expectedDataMap = loginScenario
