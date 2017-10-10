@@ -976,5 +976,18 @@ public class BenefitsAndCoverageUmsStepDefinition {
 		benefitsCoveragePage.validateHeadersGroup();
 	}	
 
+@And("the user validates the Primarycare Provider section")
+public void user_validate_PrimaryCareProv() {
+	BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario()
+			.getBean(PageConstants.BENEFITS_COVERAGE_PAGE);
+	benefitsCoveragePage.validatePrimaryCareProvider();
+}	
+
+@And("the user validates the Primarycare Provider section for Group")
+public void user_validate_PrimaryCareProvForHmo() {
+	BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario()
+			.getBean(PageConstants.BENEFITS_COVERAGE_PAGE);
+	benefitsCoveragePage.validatePrimaryCareProviderForGroup();
+}	
 
 }

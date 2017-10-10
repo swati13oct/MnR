@@ -40,7 +40,7 @@ And the user validates following Preferred Mail Service Pharmacy Drug Costs deta
   | Tier Preferred Mail Service Pharmacy Catastrophic Coverage |
   |  Annual Deductible                                         |
 And the user validates Covered Drugs in plan benefits and Coverage
-	|Medicare Part D Annual Deductible |
+	|Medi Part D Annual Deductible |
 And the user validates plan benefits highlights
 And the user validates following Resources and Plan Materials Details
   | Summary of Benefits_English                   |
@@ -1024,11 +1024,43 @@ Examples:
     | planType|  memberType  | copayCategory |
     | MAPD    |  Individual  |   LIS 1       |
     | MAPD    |  Group       |   LIS 3       |
+    
+    
+
+   @PrimaryCareProviderIndi
+    Scenario Outline: Verify the Promary Care provider  is in place on Benefits and Coverage page
+    Given registered member with following details logins in the member portal 
+       | Plan Type      | <planType>     |
+    Then the user navigates to Benefits and coverage page    
+    And the user validates the Primarycare Provider section
+    
+      Examples: 
+    | planType|
+    | MAPD    |
+   # | PDP     |
+   # | MA       |
+   
+    
+    
+   @PrimaryCareProviderGroup
+    Scenario Outline: Verify the Promary Care provider  is in place on Benefits and Coverage page
+    Given registered member with following details logins in the member portal 
+    | Plan Type          | <planType>   |
+| Member Type				 | <Member Type>	  |
+| Plan Name					 | <plan Name>		  |
+    Then the user navigates to Benefits and coverage page    
+    And the user validates the Primarycare Provider section for Group
+    Examples:
+        |planType  |Member Type     | plan Name |
+        | MAPD     | Group				 | HMO       |
+        | MAPD     | Group				 | PPO       |
+        | MA     | Group					 | HMO       |    
+        | MA     | Group					 | PPO       |
+    
    
     
       
-    
-      
+ 
       
       
   
