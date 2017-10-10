@@ -18,22 +18,22 @@ import pages.acquisition.bluelayer.ResponsivePlanSummaryUhc;
 
 public class BLayerPlanComparePage extends UhcDriver {
 	
-	@FindBy(xpath = ".//*[@id='plan-list-1']/div/div[3]/div/div[1]/div[3]/div/div/span[1]/label")	                 
+	@FindBy(xpath = "//*[@id='plan-list-1']/div/div[3]/div/div[1]/div[3]/div/div/span[1]/label")	                  
 	private WebElement Plan2HMO;
 	
-	@FindBy(xpath = "//*[@id='plan-list-1']/div/div[2]/div/div[2]/div[3]/div/div/span[1]/label")	                  
+	@FindBy(xpath = "//*[@id='plan-list-1']/div/div[3]/div/div[2]/div[3]/div/div/span[1]/label")	                 
 	private WebElement Plan1HMO;
 	
 /*	@FindBy(xpath = ".//*[@id='plan-list-1']/div/div[2]/div/div[2]/div[3]/div/div/span[3]/a")
 	private WebElement ComparePlansLink;*/
 	
-	@FindBy(xpath = " //*[@id='plan-list-1']/div/div[2]/div/div[2]/div[3]/div/div/span[3]/a")	               
+	@FindBy(xpath = "//*[@id='plan-list-1']/div/div[3]/div/div[2]/div[3]/div/div/span[3]/a")	              
 	private WebElement ComparePlansLink;
 	/*
 	@FindBy(xpath = ".//*[@id='plan-list-1']/div/div[2]/div/div[1]/div[3]/div/div/span[3]/a")
 	private WebElement ComparePlanLink;	*/
 	
-	@FindBy(linkText = "Compare plans")
+	@FindBy(xpath = "//*[@id='plan-list-1']/div/div[3]/div/div[2]/div[3]/div/div/span[3]/a")	                 
 	private WebElement ComparePlanLink;
 	
 	@FindBy(xpath = ".//*[@id='site-wrapper']/div[4]/div/div/div/div/div/div/div/div/div[1]/div[1]/div/div[1]/a")
@@ -63,7 +63,7 @@ public class BLayerPlanComparePage extends UhcDriver {
 	@FindBy(xpath = ".//*[@id='fixTable']/tbody/tr[25]/td[2]/span")
 	private WebElement AnnualDeductibleValue;	
 
-	@FindBy(linkText="Estimate drug costs")
+	@FindBy(linkText="Enter drug information")
 	private WebElement DCEText;
 	
 	@FindBy(linkText="Look up your doctor")
@@ -104,9 +104,10 @@ public class BLayerPlanComparePage extends UhcDriver {
 		Thread.sleep(7000);
 		JavascriptExecutor jse = (JavascriptExecutor)driver;
 		jse.executeScript("window.scrollBy(0,700)", "");		
-		WebDriverWait wait = new WebDriverWait(driver, 10);		 
-		WebElement element = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@id='plan-list-1']/div/div[2]/div/div[1]/div[3]/div/div/span[1]/label")));
-		element.click();		
+		/*WebDriverWait wait = new WebDriverWait(driver, 15);		 
+		WebElement element = wait.until(ExpectedConditions.elementToBeClickable(Plan2HMO));*/
+		Thread.sleep(2000);
+		Plan2HMO.click();		
 		jse.executeScript("window.scrollBy(0,600)", "");
 		Plan1HMO.click();
 		//jse.executeScript("window.scrollBy(0,200)", "");
@@ -123,9 +124,15 @@ public class BLayerPlanComparePage extends UhcDriver {
 	
 public BLayerPlanComparePage SelectThePlan() throws InterruptedException {
 		
-		Thread.sleep(3000);
-		Plan2HMO.click();		
-		Thread.sleep(1000);
+		Thread.sleep(7000);
+		JavascriptExecutor jse = (JavascriptExecutor)driver;
+		jse.executeScript("window.scrollBy(0,650)", "");
+		Thread.sleep(2000);
+		Plan2HMO.click();	
+		jse.executeScript("window.scrollBy(0,650)", "");
+		/*Thread.sleep(2000);
+		Plan1HMO.click();*/
+		Thread.sleep(2000);
 		ComparePlanLink.click();
 		Thread.sleep(5000);
 		 if(driver.getTitle().contains("Our Medicare Plan Types")){
@@ -226,7 +233,7 @@ public BLayerPlanComparePage SelectThePlan() throws InterruptedException {
 		JavascriptExecutor jse = (JavascriptExecutor)driver;
 		jse.executeScript("window.scrollBy(0,350)", "");		
 		Thread.sleep(1000);		
-		if(InPatientHospitalStay.getText().contains("Copay per day")){
+		if(InPatientHospitalStay.getText().contains("Copay per day") || InPatientHospitalStay.getText().contains("Covered") ){
 			 return new BLayerPlanComparePage(driver);
 		 }
 		 return null;
