@@ -380,6 +380,20 @@ public class PlanDetailsPage extends UhcDriver{
 				return true;
 			return false;
 		}
+
+		public boolean validate2PlansAdded() {
+			clickCompareBox();
+			try {
+				Thread.sleep(2000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+			if(compareBoxMessage.getText().contains("2 plans added"))
+				return true;
+			return false;
+		}
 }
 
 

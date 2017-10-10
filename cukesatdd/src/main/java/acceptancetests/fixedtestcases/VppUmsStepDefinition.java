@@ -196,6 +196,15 @@ public class VppUmsStepDefinition {
 			Assert.fail("Error in validating the compare checkbox message and/or link");
 	}
 	
+	@Then("^the user clicks on add to compare box and validates that info shows 2 plans added$")
+	public void I_check_compare_box_and_verify_2_plans(){
+		PlanDetailsPage plandetailspage = (PlanDetailsPage) loginScenario.getBean(PageConstants.VPP_PLAN_DETAILS_PAGE);
+		if(plandetailspage.validate2PlansAdded()){
+			Assert.assertTrue(true);
+		}else
+			Assert.fail("Error in validating the compare checkbox message and/or link");
+	}
+	
 	@Then("^I uncheck and recheck the compare box and verify the message and link exists$")
 	public void verifyPlanDetailsPage(){
 		PlanDetailsPage plandetailspage = (PlanDetailsPage) loginScenario.getBean(PageConstants.VPP_PLAN_DETAILS_PAGE);

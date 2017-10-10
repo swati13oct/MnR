@@ -51,3 +51,18 @@ Then I check compare box and verify right info is shown
 Examples:
 |zipcode| 
 |33012 |
+
+@defect1363
+Scenario Outline: To test two plans are added when clicked on compare plans on Plan details page
+Given the user is on the uhcmedicaresolutions site landing page
+When I access the vpp page
+	|Zip Code| <zipcode> |
+When user views plans of the below plan type in UMS site
+	| Plan Type | <plantype> |
+And the user view plan details of the above selected plan in UMS site and validates 
+	| Plan Name | <planName> |
+Then the user clicks on add to compare box and validates that info shows 2 plans added
+
+Examples:
+|zipcode| planName | plantype |
+|33012 | AARP MedicareComplete Choice Plan 2 (Regional PPO) | MAPD |
