@@ -148,7 +148,7 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 	@FindBy(xpath = "//*[@id='planBenefitsApp']/section/div/div[2]/div[4]/span[2]")
 	private WebElement Monthly_Premium;
 
-	@FindBy(xpath = "//*[@id='planBenefitsApp']/section/div/div[2]/div[2]/div[1]/div/div[1]/div/span")
+	@FindBy(className = "atdd-benefitsoverview-extrahelplevel-ma-label")
 	private WebElement ExtraHelp;
 
 	@FindBy(className = "atdd-benefitssummary-headertitle")
@@ -659,7 +659,7 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 		validateNew(memberID);
 		validateNew(effective_Date);
 		//validateNew(Monthly_Premium);
-		// validateNew(ExtraHelp);
+		 validateNew(ExtraHelp);
 
 	}
 

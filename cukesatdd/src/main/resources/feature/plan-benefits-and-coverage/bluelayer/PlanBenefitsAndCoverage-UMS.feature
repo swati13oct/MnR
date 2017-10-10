@@ -964,9 +964,7 @@ Examples:
       | planType|  memberType  | 
       | MAPD    |  Group       | 
       
-      
-    
-      
+ 
        
     @BncHeadersIndividual
      Scenario Outline: Verify that Page Headers are in place on Benefits and Coverage page
@@ -980,7 +978,7 @@ Examples:
     | MA    |
     
      
-      @BncHeadersGroup
+     @BncHeadersGroup
      Scenario Outline: Verify that Page Headers are in place on Benefits and Coverage page
     Given registered member with following details logins in the member portal 
         | Plan Type      | <planType>  |
@@ -991,7 +989,8 @@ Examples:
     
      Examples: 
   | planType|  memberType  | copayCategory |
-  | PDP     |  Group       |  NON LIS      | 
+  | PDP     |  Group       |  NON LIS      |
+  | MAPD    |  Group       |  NON LIS      | 
       
       
   @PlanOverviewNonLis
