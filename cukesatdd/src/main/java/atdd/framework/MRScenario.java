@@ -508,8 +508,8 @@ public class MRScenario {
        private static Map<String, String> getProperties() {
               Map<String, String> props = new HashMap<String, String>();
               Properties prop = new Properties();
-              //String propertiesFileToPick = System.getProperty("environment");
-              String propertiesFileToPick = "team-a";
+              String propertiesFileToPick = System.getProperty("environment");
+              //String propertiesFileToPick = "team-a";
               String webdriverpickup = System.getProperty("webdriver_browser");
               System.out.println("************* test which webdriver is picked up  **********"+webdriverpickup);
               System.out.println("Using properties for environment ...."
@@ -524,8 +524,8 @@ public class MRScenario {
               // Read properties from classpath
               StringBuffer propertyFilePath = new StringBuffer(
                            CommonConstants.PROPERTY_FILE_FOLDER);
-              propertyFilePath.append("/").append(propertiesFileToPick).append("/").append(configPropertyName!=null?configPropertyName:CommonConstants.PROPERTY_FILE_NAME);
-           //   .append(CommonConstants.PROPERTY_FILE_NAME);
+              //propertyFilePath.append("/").append(propertiesFileToPick).append("/").append(configPropertyName!=null?configPropertyName:CommonConstants.PROPERTY_FILE_NAME);
+              propertyFilePath.append("/").append(propertiesFileToPick).append("/").append(CommonConstants.PROPERTY_FILE_NAME);
               System.out.println("********** property file path is **************: "+ propertyFilePath);
               InputStream is = ClassLoader.class.getResourceAsStream(propertyFilePath
                            .toString());
@@ -537,7 +537,7 @@ public class MRScenario {
               for (String key : prop.stringPropertyNames()) {
                      String value = prop.getProperty(key);
                      props.put(key, value);
-                     
+                     //System.out.println("Key :"+key+ "value :"+value);
               }
               return props;
        }
