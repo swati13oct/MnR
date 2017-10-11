@@ -437,6 +437,45 @@ public class RegistrationDashboardStepDefinition {
 
                 }
                 
+                @Then("the member validate member id required error message$")
+            	public void memberIdErrorMessage(){
+            		RegistrationInformationPage registrationInformationPage = (RegistrationInformationPage) getLoginScenario()
+            				.getBean(PageConstants.REGISTRATION_INFORMATION_PAGE);
+            		registrationInformationPage.getmemberidError().isDisplayed();
+            		Assert.assertTrue(registrationInformationPage.getmemberidError().toString().contains("errorMemberId"));
+            		
+            	
+            	}
+            	
+            	
+            	@Then("the member validate dob required error message$")
+            	public void dobBlankErrorMessage(){
+            		RegistrationInformationPage registrationInformationPage = (RegistrationInformationPage) getLoginScenario()
+            				.getBean(PageConstants.REGISTRATION_INFORMATION_PAGE);
+            		registrationInformationPage.getdobError().isDisplayed();
+            		Assert.assertTrue(registrationInformationPage.getdobError().toString().contains("errorDob"));
+            		
+      
+            	}	
+            	
+            	@Then("the member validate dob fields 13 years or younger error message$")
+            		public void dobYoungerAgeErrorMessage(){
+            		RegistrationInformationPage registrationInformationPage = (RegistrationInformationPage) getLoginScenario()
+            				.getBean(PageConstants.REGISTRATION_INFORMATION_PAGE);
+            		registrationInformationPage.getdobYoungerAgeError().isDisplayed();
+            		Assert.assertTrue(registrationInformationPage.getdobYoungerAgeError().toString().contains("errorAge"));
+            		
+            	}
+            @Then("the member validate snp error message$")
+            	public void snpErrorMessage(){
+            		RegistrationInformationPage registrationInformationPage = (RegistrationInformationPage) getLoginScenario()
+            				.getBean(PageConstants.REGISTRATION_INFORMATION_PAGE);
+            		registrationInformationPage.getsnpError().isDisplayed();
+            		Assert.assertTrue(registrationInformationPage.getsnpError().toString().contains("errorSnp"));
+
+            	}
+
+                
                 
                 @And("The member land on create account enters the valid data to create account$")
                 public void enterCreateAccountData(DataTable givenAttributes) {

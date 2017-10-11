@@ -306,6 +306,24 @@ public class RegistrationInformationPage extends UhcDriver {
 	@FindBy(id = "errorMismatchEmail")
 	private WebElement incorrectconfirmemailmessage;
 	
+	@FindBy(id = "errorMemberIdBlank")
+	private WebElement memberIdErrorMessage;
+	
+	@FindBy(id = "errorDobBlank")
+	private WebElement dobErrorMessage;
+
+	
+	/** The snp error message */
+	@FindBy(id = "errorSnpMember")
+	private WebElement snpErrorMessage;
+	
+	/** The dob younger age error message */
+	@FindBy(id = "errorAgeLessThan13")
+	private WebElement dobYoungerAgeMessage;
+
+
+
+	
 
 	public RegistrationInformationPage(WebDriver driver) {
 		super(driver);
@@ -848,6 +866,26 @@ public class RegistrationInformationPage extends UhcDriver {
 		
 	}
 	
+	public WebElement getmemberidError() {
+		return memberIdErrorMessage;
+	}
+	
+	public WebElement getdobError() {
+		return dobErrorMessage;
+		
+	}
+	
+
+	public WebElement getsnpError() {
+		return snpErrorMessage;
+	}
+	
+	public WebElement getdobYoungerAgeError() {
+		return dobYoungerAgeMessage;
+	}
+
+	
+	
 
 
 /**
@@ -864,4 +902,11 @@ public class RegistrationInformationPage extends UhcDriver {
          }
      });
     }
-}
+
+
+	
+
+
+} 
+
+
