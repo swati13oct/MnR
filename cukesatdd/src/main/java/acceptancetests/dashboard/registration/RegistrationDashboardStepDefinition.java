@@ -276,16 +276,11 @@ public class RegistrationDashboardStepDefinition {
                 }
 
                 @When("^member clicks on next button$")
-                public void member_clicks_on_next_button() {
+                public void member_clicks_on_next_button() throws InterruptedException {
                                 RegistrationInformationPage registrationInformationPage = (RegistrationInformationPage) getLoginScenario()
                                                                 .getBean(PageConstants.REGISTRATION_INFORMATION_PAGE);
                                 registrationInformationPage.clickNext();
-                                try {
-                                                Thread.sleep(5000);
-                                } catch (InterruptedException e) {
-                                                // TODO Auto-generated catch block
-                                                e.printStackTrace();
-                                }
+                                Thread.sleep(5000);
                 }
 
                 @Then("^the member navigate to the create account page$")
