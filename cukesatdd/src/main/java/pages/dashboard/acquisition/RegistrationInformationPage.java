@@ -6,7 +6,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-
+import org.openqa.selenium.support.ui.ExpectedCondition;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import acceptancetests.atdd.data.MRConstants;
 import atdd.framework.UhcDriver;
@@ -284,13 +285,19 @@ public class RegistrationInformationPage extends UhcDriver {
 	private WebElement accountConfirmation;*/
 	
 	/*create account error messages*/
+	@FindBy(id = "errorBlankUsername")
+	private WebElement blankusernamemessage;
+	
 	@FindBy(id = "errorInvalidUsername")
 	private WebElement incorrectusernamemessage;
+	
+	@FindBy(id = "errorBlankPassword")
+	private WebElement blankpasswordmessage;
 	
 	@FindBy(id = "errorInvalidPassword")
 	private WebElement incorrectpasswordmessage;
 	
-	@FindBy(id = "password-confirm-error")
+	@FindBy(id = "errorMismatchPassword")
 	private WebElement confirmpasswordmessage;
 	
 	@FindBy(id = "errorInvalidEmail")
@@ -801,9 +808,20 @@ public class RegistrationInformationPage extends UhcDriver {
 	
 	/*create account error messages functions*/
 	
+	public WebElement getblankusernameError()
+	{
+	return blankusernamemessage;	
+	}
+	
+	
 	public WebElement getincorrectusernameError()
 	{
 	return incorrectusernamemessage;	
+	}
+	
+	public WebElement getblankpasswordError()
+	{
+	return blankpasswordmessage;	
 	}
 	
 	public WebElement getincorrectpasswordError()
@@ -829,4 +847,21 @@ public class RegistrationInformationPage extends UhcDriver {
 		return incorrectconfirmemailmessage;
 		
 	}
+	
+
+
+/**
+     * Wait for page to load
+     */
+    public void waitForCreatePageAccountPage() {
+     WebDriverWait wait = new WebDriverWait(this.driver, 50);
+     wait.until(new ExpectedCondition<Boolean>() {
+         public Boolean apply(WebDriver driver) {
+     if (createAccountConfirmRegistration.isDisplayed())
+         return true;
+     else
+         return false;
+         }
+     });
+    }
 }

@@ -25,7 +25,7 @@ import acceptancetests.atdd.data.acquisition.PageConstants;
 import atdd.framework.MRScenario;
 
 /**
- * @author akuma103
+ * @author sarora29
  * 
  */
 
@@ -47,73 +47,100 @@ public class RegistrationDashboardCreateAccountErrorsStepDefinition {
 
 	}
 
-	@Then("^error message for blank and incorrect username field appears$")
+	@Then("^error message for blank username field appears$")
 	public void usernameblankerrormessage() throws InterruptedException {
 	  	// navigate to registration page
 		RegistrationInformationPage registrationInformationPage = (RegistrationInformationPage) 
 				getLoginScenario().getBean(PageConstants.REGISTRATION_INFORMATION_PAGE);
-		Thread.sleep(1000);
+		Thread.sleep(5000);
+		
+		registrationInformationPage.getblankusernameError().isDisplayed();
+		Thread.sleep(2000);
+		Assert.assertTrue(registrationInformationPage.getblankusernameError().getText().contains("username"));
+
+	}
+	
+	@Then("^error message for incorrect username field appears$")
+	public void usernameincorrecterrormessage() throws InterruptedException {
+	  	// navigate to registration page
+		RegistrationInformationPage registrationInformationPage = (RegistrationInformationPage) 
+				getLoginScenario().getBean(PageConstants.REGISTRATION_INFORMATION_PAGE);
+		Thread.sleep(5000);
+		
 		registrationInformationPage.getincorrectusernameError().isDisplayed();
+		Thread.sleep(2000);
 		Assert.assertTrue(registrationInformationPage.getincorrectusernameError().getText().contains("Username"));
 
 	}
 	
 	
 	@Then("^error message for username not unique appears$")
-	public void usernamenotuniqueerrormessage() {
+	public void usernamenotuniqueerrormessage() throws InterruptedException {
 	  	// navigate to registration page
 		RegistrationInformationPage registrationInformationPage = (RegistrationInformationPage) 
 				getLoginScenario().getBean(PageConstants.REGISTRATION_INFORMATION_PAGE);
+		Thread.sleep(5000);
 		registrationInformationPage.getincorrectusernameError().isDisplayed();
+		Thread.sleep(5000);
 		Assert.assertTrue(registrationInformationPage.getincorrectusernameError().getText().contains("Username"));
 
 	}
 	
 	@Then("^error message for blank password field appears$")
-	public void passwordblankerrormessage() {
+	public void passwordblankerrormessage() throws InterruptedException {
 	  	// navigate to registration page
 		RegistrationInformationPage registrationInformationPage = (RegistrationInformationPage) 
 				getLoginScenario().getBean(PageConstants.REGISTRATION_INFORMATION_PAGE);
-		registrationInformationPage.getincorrectpasswordError().isDisplayed();
-		Assert.assertTrue(registrationInformationPage.getincorrectpasswordError().getText().contains("Password"));
+		Thread.sleep(5000);
+		registrationInformationPage.getblankpasswordError().isDisplayed();
+		Thread.sleep(5000);
+		Assert.assertTrue(registrationInformationPage.getblankpasswordError().getText().contains("password"));
 	}
 	
 	@Then("^error message for incorrect password field appears$")
-	public void passwordincorrecterrormessage() {
+	public void passwordincorrecterrormessage() throws InterruptedException {
 	  	// navigate to registration page
 		RegistrationInformationPage registrationInformationPage = (RegistrationInformationPage) 
 				getLoginScenario().getBean(PageConstants.REGISTRATION_INFORMATION_PAGE);
+		Thread.sleep(2000);
 		registrationInformationPage.getincorrectpasswordError().isDisplayed();
+		Thread.sleep(5000);
 		Assert.assertTrue(registrationInformationPage.getincorrectpasswordError().getText().contains("Password"));
 	}
 	
 	
 	@Then("^error message for confirm password field appears$")
-	public void confirmpassworderrormessage() {
+	public void confirmpassworderrormessage() throws InterruptedException {
 	  	// navigate to registration page
 		RegistrationInformationPage registrationInformationPage = (RegistrationInformationPage) 
 				getLoginScenario().getBean(PageConstants.REGISTRATION_INFORMATION_PAGE);
+		Thread.sleep(5000);
 		registrationInformationPage.getconfirmpassworderrormessage().isDisplayed();
+		Thread.sleep(5000);
 		Assert.assertTrue(registrationInformationPage.getconfirmpassworderrormessage().getText().contains("Your password and password confirmation"));
 	}
 	
 	@Then("^error message for confirm email field appears$")
-	public void confirmemailerrormessage() {
+	public void confirmemailerrormessage() throws InterruptedException {
 	  	// navigate to registration page
 		RegistrationInformationPage registrationInformationPage = (RegistrationInformationPage) 
 				getLoginScenario().getBean(PageConstants.REGISTRATION_INFORMATION_PAGE);
+		Thread.sleep(5000);
 		registrationInformationPage.getconfirmEmailError().isDisplayed();
-		Assert.assertTrue(registrationInformationPage.getconfirmEmailError().getText().contains("Enter your email address like this"));
+		Thread.sleep(5000);
+		Assert.assertTrue(registrationInformationPage.getconfirmEmailError().getText().contains("Your email confirmation and email address"));
 
 	}
 	
 	@Then("^error message for email field appears$")
-	public void emailerrormessage() {
+	public void emailerrormessage() throws InterruptedException {
 	  	// navigate to registration page
 		RegistrationInformationPage registrationInformationPage = (RegistrationInformationPage) 
 				getLoginScenario().getBean(PageConstants.REGISTRATION_INFORMATION_PAGE);
+		Thread.sleep(5000);
 		registrationInformationPage.getemailerrormessage().isDisplayed();
-		Assert.assertTrue(registrationInformationPage.getemailerrormessage().getText().contains("email and email confirmation"));
+		Thread.sleep(5000);
+		Assert.assertTrue(registrationInformationPage.getemailerrormessage().getText().contains("Enter your email address like this:"));
 
 	}
 
