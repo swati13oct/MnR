@@ -75,16 +75,19 @@ public class RegistrationStartOverErrorPageStepDefinition {
 	public void clickStartOverLinkFutureEffectivePage() throws InterruptedException {
 		RegistrationInformationPage registrationInformationPage = (RegistrationInformationPage) 
 				getLoginScenario().getBean(PageConstants.REGISTRATION_INFORMATION_PAGE);
-		Thread.sleep(1000);
+		Thread.sleep(2000);
 		registrationInformationPage.clickFutureStartOver();
+		Thread.sleep(5000);
 
 	}
 	
 	@When("^member click on start over link on inactive or terminated error page$")
-	public void clickStartOverLinkInactiveTerminatedPage() {
+	public void clickStartOverLinkInactiveTerminatedPage() throws InterruptedException {
 		RegistrationInformationPage registrationInformationPage = (RegistrationInformationPage) 
 				getLoginScenario().getBean(PageConstants.REGISTRATION_INFORMATION_PAGE);
+		Thread.sleep(2000);
 		registrationInformationPage.clickInactiveStartOver();
+		Thread.sleep(2000);
 	}
 	
 	@When("^member click on start over link on member not found error page$")
