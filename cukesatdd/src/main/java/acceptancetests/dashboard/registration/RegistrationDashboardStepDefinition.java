@@ -391,18 +391,20 @@ public class RegistrationDashboardStepDefinition {
                 }
 
                 @Then("^the member validate inactive or terminated error message$")
-                public void inactiveTerminatedErrorMessage() {
+                public void inactiveTerminatedErrorMessage() throws InterruptedException {
                                 RegistrationInformationPage registrationInformationPage = (RegistrationInformationPage) getLoginScenario()
                                                                 .getBean(PageConstants.REGISTRATION_INFORMATION_PAGE);
+                                Thread.sleep(5000);
                                 registrationInformationPage.getInactiveTerminatedError().isDisplayed();
                                 Assert.assertTrue(registrationInformationPage
                                                                 .getInactiveTerminatedError().toString().contains("inactive"));
                 }
 
                 @Then("^the member validate future effective error message$")
-                public void futureEffectiveErrorMessage() {
+                public void futureEffectiveErrorMessage() throws InterruptedException {
                                 RegistrationInformationPage registrationInformationPage = (RegistrationInformationPage) getLoginScenario()
                                                                 .getBean(PageConstants.REGISTRATION_INFORMATION_PAGE);
+                                Thread.sleep(2000);
                                 registrationInformationPage.getFutureEffectiveError().isDisplayed();
                                 Assert.assertTrue(registrationInformationPage.getFutureEffectiveError()
                                                                 .toString().contains("future"));
