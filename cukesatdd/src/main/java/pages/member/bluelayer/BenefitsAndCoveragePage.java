@@ -186,6 +186,17 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 	@FindBy( xpath= "//*[@id='planBenefitsApp']/div/div[1]/div[6]/div/div/h2/p")
 	private WebElement PrimaryCareProviderHeaderHMO;
 
+	
+	@FindBy( xpath= "//*[@id='planBenefitsApp']/div/div[1]/div[5]/div/div[1]/div/h2/div")
+	private WebElement OutOfPocketHeader ;
+	@FindBy( xpath= "//*[@id='planBenefitsApp']/div/div[1]/div[5]/div/div[2]/div[1]/div/header/span")
+	private WebElement IN_NETWORKHeader ;
+	@FindBy( xpath= "//*[@id='planBenefitsApp']/div/div[1]/div[5]/div/div[2]/div[2]/div/header/span")
+	private WebElement OUTOFNETWORKHeader ;
+	
+	@FindBy( xpath= "//*[@id='planBenefitsApp']/section/div/div[2]/div[4]/button")
+	private WebElement MakePaymentButton ;
+	
 	public static final String learnmorestagetext_xpath = ".//*[@id='collapseStages']";
 
 	public static final String learnmorelinktiertext_xpath = ".//*[@id='collapseTiers']";
@@ -650,6 +661,7 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 		validateNew(memberID);
 		validateNew(effective_Date);
 		//validateNew(Monthly_Premium);
+		validateNew(MakePaymentButton);
 
 	}
 
@@ -660,6 +672,7 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 		validateNew(effective_Date);
 		//validateNew(Monthly_Premium);
 		 validateNew(ExtraHelp);
+		 validateNew(MakePaymentButton);
 
 	}
 
@@ -697,6 +710,14 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 	
 		validateNew(PrimaryCareProviderHeaderHMO);
 		
+		
+	}
+
+	public void validateOutOfPocketMaximum() {
+		// TODO Auto-generated method stub
+		validateNew(OutOfPocketHeader);
+		validateNew(IN_NETWORKHeader);
+		validateNew(OUTOFNETWORKHeader);
 		
 	}
 

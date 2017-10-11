@@ -1054,6 +1054,24 @@ Examples:
         | MA     | Group					 | HMO       |    
         | MA     | Group					 | PPO       |
     
+    
+    
+     @OutOfPocketMaximum
+       Scenario Outline: Verify that Page Headers are in place on Benefits and Coverage page
+    Given registered member with following details logins in the member portal 
+       | Plan Type      | <planType>     |
+    Then the user navigates to Benefits and coverage page
+      And the user validates the OutOfPocketMaximum Section
+      
+     Examples: 
+    | planType |
+    | MAPD     |
+    | GroupMA  |
+    | GroupPDP |  
+   
+    
+      
+      
    
     
       

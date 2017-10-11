@@ -985,6 +985,14 @@ public void user_validate_PrimaryCareProvForHmo() {
 	BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario()
 			.getBean(PageConstants.BENEFITS_COVERAGE_PAGE);
 	benefitsCoveragePage.validatePrimaryCareProviderForGroup();
+}
+
+@And("the user validates the OutOfPocketMaximum Section")
+public void user_validate_OutOfPocketMaximum() {
+	BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario()
+			.getBean(PageConstants.BENEFITS_COVERAGE_PAGE);
+	benefitsCoveragePage.validateOutOfPocketMaximum();
 }	
+
 
 }
