@@ -13,6 +13,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.junit.Assert;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -71,9 +72,6 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 	@FindBy(className = "btn_repalceRider_atdd ")
 	private WebElement replacceRiderPopupButton;
 
-	@FindBy(xpath = "/html/body/div[5]/div/div/div[1]/div[3]/div/div/div/div/a")
-	private WebElement disclaimersLink;
-
 	@FindBy(xpath = "//a[contains(.,'contact us')]")
 	private WebElement contactUsLink;
 
@@ -85,15 +83,6 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 
 	@FindBy(xpath = ".//*[@id='planBenefitsApp']/section/div/div[2]/div/form/span[2]")
 	private WebElement pdfsectiondocumentlabel;
-
-	@FindBy(xpath = ".//*[@id='planBenefitsApp']/div")
-	private WebElement vassection;
-
-	@FindBy(xpath = ".//*[@id='planBenefitsApp']/div/div/div/div/div[2]/a")
-	private WebElement learnmorebutton;
-
-	@FindBy(xpath = ".//*[@id='drug-copays-and-discounts']/section/div[1]/div/div/h2")
-	private WebElement Header;
 
 	@FindBy(xpath = ".//*[@id='drug-copays-and-discounts']/section/div[1]/div/div/h2")
 	private WebElement DrugCopayHeader;
@@ -203,12 +192,6 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 
 	@FindBy(className = "atdd-claims-header")
 	private WebElement ClaimsSupportShip;
-
-	@FindBy(linkText = "contact us")
-	private WebElement contactUslink;
-	
-	@FindBy(className = "margin-none")
-	private WebElement Seemorewaystext;
 	
     @FindBy(xpath = ".//*[@id='plan_benefit_documents']/section/div/div[2]/div/form/span[1]")
     private WebElement view_label;
@@ -224,6 +207,46 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 	
 	@FindBy( xpath= "//*[@id='planBenefitsApp']/section/div/div[2]/div[4]/button")
 	private WebElement MakePaymentButton ;
+	
+	@FindBy(className = "atdd-contact-us")
+	private WebElement contactUslink;
+	
+	@FindBy(className = "margin-none")
+	private WebElement Seemorewaystext;
+	
+	@FindBy(className = "atdd-need-help")
+	private WebElement NeedHelpHeader;
+
+	@FindBy(className = "margin-none")
+	private WebElement Contactussection;
+
+	@FindBy(className = "atdd-needhelp-disclaimer-text")
+	private WebElement disclaimersLink;
+
+public static final String disclaimertextarea_xpath = "//*[@id='collapseDisclaimer']";
+
+        @FindBy(className = "atdd-bnc-handimg")
+	private WebElement handimage;
+	
+	@FindBy(className = "atdd-bnc-discountsubtitle")
+	private WebElement textdiscountservices;
+	
+	@FindBy(className = "atdd-bnc-specialdscnt-desc")
+	private WebElement textdiscountservices1;
+	
+	@FindBy(className = "atdd-bnc-discounttitle")
+	private WebElement headerdiscountservices;
+
+	@FindBy(xpath = ".//*[@id='planBenefitsApp']/div/div/div/div/div/div[2]")
+	private WebElement vassection;
+
+	@FindBy(className = "atdd-bnc-discntlearnmorimg")
+	private WebElement learnmorebutton;
+
+
+	@FindBy(xpath = ".//*[@id='drug-copays-and-discounts']/section/div[1]/div/div/h2")
+	private WebElement Header;
+
 	
 	
 	public static final String learnmorelinktiertext_xpath = ".//*[@id='collapseTiers']";
@@ -485,34 +508,6 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 		langdropdwn.selectByVisibleText(language);
 	}
 
-	public void vasSection() {
-
-		try {
-			validate(vassection);
-		} catch (Exception e) {
-			System.out.println("Elements is not found ...");
-		}
-	}
-
-	public void clickOnLearnMore() {
-		// TODO Auto-generated method stub
-		validate(learnmorebutton);
-		learnmorebutton.click();
-		try {
-			Thread.sleep(10000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
-
-	public ValueAddedServicepage navigateToValueAddService() {
-		// learnmorebutton.click();
-		if (this.driver.getTitle().equalsIgnoreCase("My Benefits & Coverage")) {
-			return new ValueAddedServicepage(driver);
-		}
-		return null;
-	}
 
 	public void Validate_dce_Section() {
 
@@ -791,6 +786,87 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 
 	}
 	
+	public void validateNeedhelpheader() {
+
+		try {
+			validate(NeedHelpHeader);
+			JavascriptExecutor jse = (JavascriptExecutor) driver;
+			jse.executeScript("window.scrollBy(0,400)", "");
+			try {
+				Thread.sleep(30000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			validate(disclaimersLink);
+			System.out.println("text" + disclaimersLink.getText());
+		} catch (Exception e) {
+			System.out.println("Elements is not found ...");
+		}
+	}
+
+
+	public void validatecontactussection() {
+	
+			if (Contactussection.getText().contains("See more ways to contact us")) {
+				System.out.println("contactus section is coming ");
+				Assert.assertTrue(true);
+			} else
+			{
+				Assert.fail("Contactussection.getText() >>>>>>" + Contactussection.getText());
+			} 
+		
+	}
+
+public void vasSection() {
+
+	
+	validate(textdiscountservices);
+	validate(textdiscountservices1);
+	validate(headerdiscountservices);	
+	}
+	
+	public void handimage() {
+
+	validate(handimage);
+		
+	}
+	
+	public void learnmorebutton() {
+
+		validate(learnmorebutton);
+			
+		}
+
+	public ValueAddedServicepage clickOnLearnMore() {
+		// TODO Auto-generated method stub
+		validate(learnmorebutton);
+		learnmorebutton.click();
+		try {
+			Thread.sleep(10000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		if (this.driver.getTitle().equalsIgnoreCase("Value Added Services")) {
+			System.out.println(driver.getTitle());
+			return new ValueAddedServicepage(driver);
+			
+		}
+		return null;
+		
+	}
+
+	public ValueAddedServicepage navigateToValueAddService() {
+		validate(learnmorebutton);
+		learnmorebutton.click();
+		if (this.driver.getTitle().equalsIgnoreCase("Value Added Services")) {
+			System.out.println(driver.getTitle());
+			return new ValueAddedServicepage(driver);
+		}
+		return null;
+	
 	
 
+}
 }

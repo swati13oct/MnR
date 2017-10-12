@@ -1146,5 +1146,114 @@ Feature: To test plan benefits and Coverage on AARP site for Federal members
       | planType | 
       | MAPD     | 
       
+      @needHelpFederal
+    Scenario Outline: Verify Need Help section is in place on Benefits and Coverage page
+    Given registered member with following details logins in the member portal 
+      | Plan Type   | <planType>   |
+    When the user navigates to Benefits and coverage page
+    And the user validates the content on benefits and coverage page
+    And the user validates contactus section
+    And the user validates Needhelp header and disclaimer link
+    And the user clicks on Disclaimers link
+    
+    Examples: 
+      | planType | 
+      | MA       |   
+      
+  @needHelpShipBnC
+  Scenario Outline: Verify Need Help section is in place on Benefits and Coverage page
+    Given registered member with following details logins in the member portal 
+      | Plan Type      | <planType>      |
+    When the user navigates to Benefits and coverage page
+    And  the user validates the need help section for ship
+    And the user validates see more ways to contact us section for ship
+   #And the user validates the disclaimer link
+    And the user validates on clicking contact us link it should route to contact us page for ship member
+    
+
+    Examples: 
+      | planType | 
+      | EHIP     |
+      
+   @needHelpShipVAS
+  Scenario Outline: Verify Need Help section is in place on Benefits and Coverage page
+    Given registered member with following details logins in the member portal 
+      | Plan Type      | <planType>      |
+    When the user navigates to Benefits and coverage page
+    And  the user validate Value Add Service page
+    And  the user validates the need help section for ship
+    And the user validates see more ways to contact us section for ship
+    And the user validates on clicking contact us link it should route to contact us page for ship member
+    
+    Examples: 
+      | planType | 
+      | EHIP     |     
+
+
+    @discountandservices
+    Scenario Outline: Verify that DisocuntServices section is visible on Benefits and coverage page
+    Given registered member with following details logins in the member portal 
+      | Plan Type   | <planType>   |
+    When the user navigates to Benefits and coverage page
+    And the user validates hand image under discount and services section
+    And the user validates the Vas section on benefits and coverage page
+    And the user validates and clicks on Learn More button 
+
+    Examples: 
+      | planType | 
+      | SHIPTX   |
+      | SHIPMO   | 
+      | EHIP     |
+      
+    @VAS1
+    Scenario Outline: Verify that DisocuntServices section is visible on Benefits and coverage page
+    Given registered member with following details logins in the member portal 
+      | Plan Type   | <planType>   |
+    When the user navigates to Benefits and coverage page
+    And the user validate Value Add Service page
+    And the user validate header and text 
+    And the user validates sections for NurseHealthLine,DIME2,MyCarePath,SilverSneakers,VisionDiscount
+    And the user validates view more link
+    And when the user clicks on view more link link should expand and disclaimer link should be visible
+    And the user validates MAIN CTA button
+     
+    
+     Examples: 
+      | planType | 
+      | SHIPTX   |
+      
+      
+     @VAS2
+     Scenario Outline: Verify that DisocuntServices section is visible on Benefits and coverage page
+    Given registered member with following details logins in the member portal 
+      | Plan Type   | <planType>   |
+    When the user navigates to Benefits and coverage page
+    And the user validate Value Add Service page
+    And the user validate header and text 
+    And the user validates sections for AtyourBest
+    And the user validates view more link
+    And when the user clicks on view more link link should expand and disclaimer link should be visible
+    And the user validates MAIN CTA button
+    
+     Examples: 
+      | planType | 
+      | SHIPMO   |
+      
+     @VAS3
+    Scenario Outline: Verify that DisocuntServices section is visible on Benefits and coverage page
+    Given registered member with following details logins in the member portal 
+      | Plan Type   | <planType>   |
+    When the user navigates to Benefits and coverage page
+    And the user validate Value Add Service page
+    And the user validate header and text 
+    And the user validates sections for Provideyourdiscount
+    And the user validates view more link
+    And when the user clicks on view more link link should expand and disclaimer link should be visible
+    And the user validates MAIN CTA button
+    
+     Examples: 
+      | planType | 
+      | EHIP     |
+      
       
 
