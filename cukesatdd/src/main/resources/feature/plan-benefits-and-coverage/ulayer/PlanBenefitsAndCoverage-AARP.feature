@@ -1098,7 +1098,7 @@ Feature: To test plan benefits and Coverage on AARP site for Federal members
       #| PDP     |  Individual  |  NON LIS      |
       
       
-                @BenefitsSummaryShip
+      @BenefitsSummaryShip
      Scenario Outline: Verify that Page Headers are in place on Benefits and Coverage page
     Given registered member with following details logins in the member portal 
        | Plan Type      | <planType>     |

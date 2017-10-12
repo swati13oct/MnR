@@ -215,12 +215,15 @@ public class BenefitsAndCoveragePage extends UhcDriver {
     
     @FindBy(xpath = ".//*[@id='plan_benefit_documents']/section/div/div[2]/div/form/span[2]")
     private WebElement documents_label;
+    
     @FindBy(xpath = "//*[@id='planBenefitsApp']/section/div/div[2]/div[2]/div[1]/div/div[1]/div/span")
 	private WebElement ExtraHelp;
-
-
+    
 	@FindBy(xpath = "//*[@id='planBenefitsApp']/div[2]/div[2]/div/p")
 	private WebElement BenefitSummaryText;
+	
+	@FindBy( xpath= "//*[@id='planBenefitsApp']/section/div/div[2]/div[4]/button")
+	private WebElement MakePaymentButton ;
 	
 	
 	public static final String learnmorelinktiertext_xpath = ".//*[@id='collapseTiers']";
@@ -718,7 +721,7 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 	validateNew(memberID);
 	validateNew(effective_Date);
 	validateNew(Monthly_Premium);
-
+	validateNew(MakePaymentButton);
 		
 	}
 	
@@ -762,6 +765,8 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 		validateNew(effective_Date);
 		validateNew(Monthly_Premium);
 		validateNew(ExtraHelp);
+		validateNew(MakePaymentButton);
+
 
 	}
 
