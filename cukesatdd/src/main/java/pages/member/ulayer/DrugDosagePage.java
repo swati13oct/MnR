@@ -47,14 +47,20 @@ public class DrugDosagePage extends UhcDriver {
 	@FindBy(linkText = "continue")
 	WebElement continueButton;
 	
-	@FindBy(xpath = ".//*[@id='dce.member']/div/div[3]/div/div/div[1]/div[1]/div[1]")
+	@FindBy(xpath = ".//*[@id='dceMemberUlayer']/div/div[1]/div[1]/h3[1]")
     private WebElement manageDrugTab;
     
-    @FindBy(xpath = ".//*[@id='dce.member']/div/div[3]/div/div/div[1]/div[1]/div[2]")
+    @FindBy(xpath = ".//*[@id='dceMemberUlayer']/div/div[1]/div[1]/h3[2]")
     private WebElement selectPharmacyTab;
     
-    @FindBy(xpath = ".//*[@id='dce.member']/div/div[3]/div/div/div[1]/div[1]/div[3]")
+    @FindBy(xpath = ".//*[@id='dceMemberUlayer']/div/div[1]/div[1]/h3[3]")
     private WebElement viewDrugCostsTab;
+    
+    @FindBy(xpath = ".//*[@id='dceMemberUlayer']/div/div[1]/span[1]/a")
+    private WebElement addADiffDrugLink;
+    
+    @FindBy(xpath = ".//*[@id='dceMemberUlayer']/div/div[1]/div[5]/p")
+    private WebElement selectDosage; 
     
     @FindBy(xpath = ".//*[@id='dce.member']/div/div[3]/div/div/div[1]/div[9]/div/a")
     private WebElement cancelAndGoBackLink;
@@ -153,7 +159,7 @@ public class DrugDosagePage extends UhcDriver {
 	}
     
     public boolean validateDrugDosagePage(){
-    	if(validate(manageDrugTab)&&validate(selectPharmacyTab)&&validate(viewDrugCostsTab)&&validate(continueButton)&&validate(cancelAndGoBackLink))
+    	if(selectDosage.getText().contains("Select dosage")&&validate(continueButton)&&validate(addADiffDrugLink))
     		return true;
     	else
     		return false;

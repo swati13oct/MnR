@@ -53,16 +53,16 @@ public class ManageDrugPage extends UhcDriver {
 	@FindBy(xpath = "//div[@id='dce.member']/div/div[6]/div/div/form/div/div/div/div[2]/p")
 	private WebElement pharmacyPageHeading;
 
-	@FindBy(xpath = "//div[@id='dce.member']/div/div[5]/div/div/div/div/div[2]")
+	@FindBy(xpath = ".//*[@id='dceMemberUlayer']/div/div[1]/div[1]/div[2]")
 	WebElement pharmacyTab;
 
 	@FindBy(id = "disclosure_link")
 	private WebElement logOut;
 	
-	@FindBy(xpath = ".//*[@id='dce.member']/div/div[5]/div/div/div[1]/div[1]/div[3]")
+	@FindBy(xpath = ".//*[@id='dceMemberUlayer']/div/div[1]/div[1]/div[3]")
 	private WebElement viewDrugCostTab;
 	
-	@FindBy(xpath = ".//*[@id='dce.member']/div/div[5]/div/div/div[1]/div[1]/div[1]")
+	@FindBy(xpath = ".//*[@id='dceMemberUlayer']/div/div[1]/div[1]/div[1]")
 	private WebElement drugListTab;
 	
 	@FindBy(xpath = ".//*[@id='dce.member']/div/div[5]/div/div/div[1]/div[2]/div[4]/div/div")
@@ -77,7 +77,9 @@ public class ManageDrugPage extends UhcDriver {
 	@FindBys(value = { @FindBy(name = "typeofdrug") })
 	private List<WebElement> genericDrugs;
 	
-
+	@FindBy(xpath = ".//*[@id='dceMemberUlayer']/div/div[1]/div[2]/div[3]/span/select")
+	private WebElement plans;
+	
 	@FindBy(linkText = "select a pharmacy")
 	private WebElement continueButton;
 	
@@ -326,6 +328,18 @@ public class ManageDrugPage extends UhcDriver {
 		return null;
 	}
 	
+	
+	public boolean validateManageDrugPage(){
+		try {
+			Thread.sleep(4000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		if(validate(pharmacyTab)&&validate(viewDrugCostTab)&& validate(drugListTab))
+			return true;
+		return false;
+	}
 	public boolean validateDrugListSection(){
 		boolean flag = false;
 		try {
@@ -334,7 +348,7 @@ public class ManageDrugPage extends UhcDriver {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		if(validate(addDrugLink)&&validate(viewDrugCostTab)&&validate(pharmacyTab)&&validate(drugListTab))
+		if(validate(addDrugLink)&&validate(viewDrugCostTab)&&validate(pharmacyTab)&&validate(drugListTab)&&validate(plans))
 			flag = true;
 		return flag;
 	}
@@ -344,6 +358,28 @@ public class ManageDrugPage extends UhcDriver {
 			return true;
 		else
 			return false;
+	}
+	
+	
+	public boolean verifyPlans() {
+		System.out.println(plans.getText());
+		if(plans.getText().contains("AARP"))
+			return true;
+		return false;
+	}
+	@FindBy(xpath = ".//*[@id='dceMemberUlayer']/div/div[1]/div[2]/div[4]/a/span")
+	private WebElement continueBtn;
+	
+	public void enterPlanDetails(String plan) {
+		try {
+			Thread.sleep(4000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		plans.click();
+		plans.sendKeys(plan);
+		continueBtn.click();
 	}
 
 

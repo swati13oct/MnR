@@ -162,11 +162,11 @@ public class ClaimSummaryPage extends UhcDriver {
 
 	public ClaimSummaryPage searchDrugClaimsByPeriod(
 			Map<String, String> timeAttributesMap) {
-
+		CommonUtility.waitForPageLoad(driver, showClaimHistoryButton, 35);
 		String claimPeriod = timeAttributesMap.get("Claim Period");
 		searchRange.click();
 		searchRange.sendKeys(claimPeriod);
-
+		
 		CommonUtility.checkPageIsReady(driver);
 		showClaimHistoryButton.click();
 

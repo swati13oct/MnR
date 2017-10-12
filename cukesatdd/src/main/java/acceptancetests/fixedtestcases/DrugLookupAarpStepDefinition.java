@@ -100,6 +100,16 @@ public class DrugLookupAarpStepDefinition {
 		}
 
 	}
+	
+	@And("^the user selects the plan and clicks on continue$")
+	public void selectPlan(DataTable memberAttributes){
+		List<DataTableRow> memberAttributesRow = memberAttributes
+				.getGherkinRows();
+		String planname = memberAttributesRow.get(0).getCells().get(1);
+		ManageDrugPage manageDrugPage = (ManageDrugPage) getLoginScenario()
+				.getBean(PageConstants.MANAGE_DRUG_PAGE);
+		manageDrugPage.enterPlanDetails(planname);
+	}
 
 	@When("^the user navigates to drug search in AARP site$")
 	public void attemp_to_view_drug_details() {
@@ -110,7 +120,7 @@ public class DrugLookupAarpStepDefinition {
 		if (manageDrugPage != null) {
 			getLoginScenario().saveBean(PageConstants.MANAGE_DRUG_PAGE,
 					manageDrugPage);
-			if(manageDrugPage.validateDrugListSection()){
+			if(manageDrugPage.validateManageDrugPage()){
 				Assert.assertTrue(true);System.out.println("PASSED1");
 			}else
 				Assert.fail("Error in validating the Manage Drug Page");
@@ -170,7 +180,7 @@ public class DrugLookupAarpStepDefinition {
 		Object pageObject = drugDosagePage.selectDosage(dosageAttributesMap);
 		getLoginScenario().saveBean(DceCommonConstants.DOSAGE_ATTRIBUTES_MAP,
 				dosageAttributesMap);
-
+		String drugDosage = dosageAttributesRow.get(0).getCells().get(1);
 		if (pageObject.getClass().getName().contains("LowCostOptPage")) {
 
 			LowCostOptPage lowCostOptionsPage = (LowCostOptPage) pageObject;
@@ -178,7 +188,7 @@ public class DrugLookupAarpStepDefinition {
 			if (lowCostOptionsPage != null) {
 				getLoginScenario().saveBean(PageConstants.LOW_COST_OPT_PAGE,
 						lowCostOptionsPage);
-				if(lowCostOptionsPage.validateLowCostSection()){
+				if(lowCostOptionsPage.validateLowCostSection(drugDosage)){
 					Assert.assertTrue(true);System.out.println("low cost PASSED");
 					
 					if (!drugType.equalsIgnoreCase("null") && null != drugType) {
@@ -322,6 +332,16 @@ public class DrugLookupAarpStepDefinition {
 		viewDrugCostPage.editDrugList();
 		viewDrugCostPage.logOut();
 
+	}
+	
+	@Then("^the user checks and verifies that the plans shown are AARP plans$")
+	public void user_checks_and_verifies_plans(){
+		ManageDrugPage manageDrugPage = (ManageDrugPage) getLoginScenario()
+				.getBean(PageConstants.MANAGE_DRUG_PAGE);
+		if(manageDrugPage.verifyPlans()){
+			Assert.assertTrue(true);
+		}else
+			Assert.fail("Error in validating that plans are AARP plans");
 	}
 
 

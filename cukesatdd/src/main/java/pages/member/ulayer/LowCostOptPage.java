@@ -29,7 +29,7 @@ public class LowCostOptPage extends UhcDriver {
 	@FindBys(value = { @FindBy(name = "typeofdrug") })
 	private List<WebElement> genericDrugs;
 	
-	@FindBy(xpath = ".//*[@id='dce.member']/div/div[4]/div/div/div[1]/p[2]")
+	@FindBy(xpath = ".//*[@id='dceMemberUlayer']/div/div[1]/p[1]")
 	private WebElement genericDrug;
 	
 	@FindBy(xpath = ".//*[@id='dce.member']/div/div[4]/div/div/div[1]/p[1]/span/a")
@@ -127,9 +127,9 @@ public class LowCostOptPage extends UhcDriver {
 		return lowCostOptionsExpectedJson;
 	}
 	
-	public boolean validateLowCostSection(){
+	public boolean validateLowCostSection(String drugdosage){
 		boolean flag = false;
-		if(validate(genericDrug)&&validate(continueButton)&&validate(editLink)&&validate(manageDrugTab)&&validate(selectPharmacyTab)&&validate(viewDrugCostsTab))
+		if(genericDrug.getText().contains(drugdosage)&&validate(continueButton)&&validate(editLink))
 			flag = true;
 		return flag;
 	}

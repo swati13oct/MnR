@@ -51,6 +51,9 @@ public class PlanSummaryPage extends UhcDriver {
 	
 	@FindBy(id = "btn_viewclaims1")
 	private WebElement searchDrugClaimsBtn;
+	
+	@FindBy(id = "btn_searchallclaims1")
+	private WebElement searchAllClaimsBtn;
 
 	@FindBy(xpath = "//div[@id='main_content']/div[2]/div/div[2]/div/div[2]/div/div[2]/div/h3")
 	private WebElement planInformationHeading;
@@ -267,8 +270,8 @@ public class PlanSummaryPage extends UhcDriver {
 		return null;
 	}
 	public ClaimSummaryPage navigateToDrugClaimsSummary() {
-
-		searchDrugClaimsBtn.click();
+		CommonUtility.waitForPageLoad(driver, searchAllClaimsBtn, 25);
+		searchAllClaimsBtn.click();
 		if (getTitle().equalsIgnoreCase(
 				"UnitedHealthcare Medicare Solutions | Claims")) {
 				return new ClaimSummaryPage(driver);
