@@ -78,7 +78,7 @@ public class LoginPage extends UhcDriver {
 	public LoginPage(WebDriver driver) {		
 		super(driver);
 		PageFactory.initElements(driver, this);
-		//openAndValidate();
+		openAndValidate();
 	}
 
 	public Object loginWith(String username, String password, String category) {
