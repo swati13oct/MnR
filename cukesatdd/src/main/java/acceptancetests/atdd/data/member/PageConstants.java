@@ -202,5 +202,9 @@ public class PageConstants {
 	public static final String NEW_EMAIL_ADDRESS = "newEmailAddress";
 	
 	public static final String NEW_EMAIL_ADDRESS_CONFIRMATION = "newEmailAddressConfirmation";
+	
+	public static final String EOB_Page = "eobPage";
+	
+	public static final String DeepLink_Page = "deepLinkPage";
 
 }
