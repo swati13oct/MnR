@@ -168,12 +168,14 @@ public BLayerPlanComparePage SelectThePlan() throws InterruptedException {
 		JavascriptExecutor jse = (JavascriptExecutor)driver;
 		jse.executeScript("window.scrollBy(0,650)", "");
 		Thread.sleep(2000);
-		Plan2HMO.click();	
+		//Plan2HMO.click();	
+		Plan2HMO2.click();
 		jse.executeScript("window.scrollBy(0,650)", "");
 		/*Thread.sleep(2000);
 		Plan1HMO.click();*/
 		Thread.sleep(2000);
-		ComparePlanLink.click();
+		//ComparePlanLink.click();
+		ComparePlansLink1.click();
 		Thread.sleep(5000);
 		 if(driver.getTitle().contains("Our Medicare Plan Types")){
 			 return new BLayerPlanComparePage(driver);
