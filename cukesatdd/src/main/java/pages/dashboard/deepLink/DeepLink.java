@@ -68,8 +68,8 @@ public class DeepLink extends UhcDriver{
 			Assert.assertTrue(true);
  		}else {
  			System.out.println("desire page not displayed "+deepLinkPage);
- 			Assert.fail();
-		}
+ 			Assert.assertFalse(driver.getTitle(), false);
+ 		}
 		return null;
 	}
 }
