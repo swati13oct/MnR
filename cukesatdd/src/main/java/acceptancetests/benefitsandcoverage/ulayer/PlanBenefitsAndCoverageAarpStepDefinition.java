@@ -631,17 +631,7 @@ public class PlanBenefitsAndCoverageAarpStepDefinition {
 	}
 
 	
-	@And("^the user validate Value Add Service page$")
-	public void validate_Value_Add_page()
-	{
-		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario().getBean(
-				PageConstants.BENEFITS_COVERAGE_PAGE);
-		ValueAddedServicepage valueaddedservices= benefitsCoveragePage.navigateToValueAddService();
-		if (valueaddedservices!= null) {
-		getLoginScenario().saveBean(PageConstants.VALUE_ADDED_SERVICES, valueaddedservices);
-		}
- }
-	
+
 	@And("^the user validates Nurse Health line section$")
 	public void validate_nurse_health_line()
 	{
@@ -955,6 +945,15 @@ public class PlanBenefitsAndCoverageAarpStepDefinition {
 	benefitsnCoveragepage.validateHeadersShip();
 	}
 
-
+	@And("^the user validate Value Add Service page$")
+	public void validate_Value_Add_page()
+	{
+		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario().getBean(
+				PageConstants.BENEFITS_AND_COVERAGE_PAGE);
+		ValueAddedServicepage valueaddedservices= benefitsCoveragePage.navigateToValueAddService();
+		if (valueaddedservices!= null) {
+		getLoginScenario().saveBean(PageConstants.VALUE_ADDED_SERVICES, valueaddedservices);
+		}
+ }
 
 	}

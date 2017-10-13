@@ -217,16 +217,19 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 	@FindBy(xpath = "//*[@id='planBenefitsApp']/section/div/div[2]/div[4]/button")
 	private WebElement MakePaymentButton;
 
-	@FindBy(className = "atdd-contact-us")
+	@FindBy(xpath = ".//*[@id='planBenefitsApp']/div/div/div/div/div/div[2]/a")
+	private WebElement learnmorebutton;
+
+        @FindBy(className = "atdd-contact-us")
 	private WebElement contactUslink;
-
-	@FindBy(className = "margin-none")
+	
+	@FindBy(xpath = "html/body/div[2]/div[3]/div/div[2]/div[1]/div[2]/section/div/div[3]/div/p")
 	private WebElement Seemorewaystext;
-
+	
 	@FindBy(className = "atdd-need-help")
 	private WebElement NeedHelpHeader;
 
-	@FindBy(className = "margin-none")
+	@FindBy(xpath = "html/body/div[2]/div[3]/div/div[2]/div[1]/div[2]/section/div/div[3]/div/p")
 	private WebElement Contactussection;
 
 	@FindBy(className = "atdd-needhelp-disclaimer-text")
@@ -249,8 +252,6 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 	@FindBy(xpath = ".//*[@id='planBenefitsApp']/div/div/div/div/div/div[2]")
 	private WebElement vassection;
 
-	@FindBy(className = "atdd-bnc-discntlearnmorimg")
-	private WebElement learnmorebutton;
 
 	@FindBy(xpath = ".//*[@id='drug-copays-and-discounts']/section/div[1]/div/div/h2")
 	private WebElement Header;
@@ -444,17 +445,7 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 		return null;
 	}
 
-	public void clickOnDisclaimers() {
-		// TODO Auto-generated method stub
-		validateNew(disclaimersLink);
-		disclaimersLink.click();
-		try {
-			Thread.sleep(10000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
+
 
 	public ContactUsPage navigatesToContactUsPage() {
 
@@ -802,24 +793,7 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 
 	}
 
-	public ValueAddedServicepage clickOnLearnMore() {
-		// TODO Auto-generated method stub
-		validate(learnmorebutton);
-		learnmorebutton.click();
-		try {
-			Thread.sleep(10000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		if (this.driver.getTitle().equalsIgnoreCase("Value Added Services")) {
-			System.out.println(driver.getTitle());
-			return new ValueAddedServicepage(driver);
 
-		}
-		return null;
-
-	}
 
 	public ValueAddedServicepage navigateToValueAddService() {
 		validate(learnmorebutton);
@@ -839,6 +813,48 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 		validateNew(OfficeVisits);
 		validateNew(OutpatientSurgeryCenter);
 
+	}
+	
+	public void clickOnDisclaimers() {
+		// TODO Auto-generated method stub
+		JavascriptExecutor jse = (JavascriptExecutor) driver;
+		jse.executeScript("window.scrollBy(0,3000)", "");
+		validateNew(disclaimersLink);
+		disclaimersLink.click();
+		try {
+			Thread.sleep(10000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
+
+public ValueAddedServicepage clickOnLearnMore() {
+		// TODO Auto-generated method stub
+		try {
+			Thread.sleep(10000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		JavascriptExecutor jse = (JavascriptExecutor) driver;
+		jse.executeScript("window.scrollBy(0,1500)", "");
+		validate(learnmorebutton);
+		learnmorebutton.click();
+		try {
+			Thread.sleep(10000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		if (this.driver.getTitle().equalsIgnoreCase("Value Added Services")) {
+			System.out.println(driver.getTitle());
+			return new ValueAddedServicepage(driver);
+			
+		}
+		return null;
+		
 	}
 
 }

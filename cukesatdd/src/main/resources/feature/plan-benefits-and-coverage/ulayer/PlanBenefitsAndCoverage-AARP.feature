@@ -940,35 +940,7 @@ Feature: To test plan benefits and Coverage on AARP site for Federal members
       | planType | copayCategory |
       | MAPD     | NON LIS       |
 
-  @needHelp
-  Scenario Outline: Verify Need Help section is in place on Benefits and Coverage page
-    Given registered member with following details logins in the member portal 
-      | Plan Type      | <planType>      |
-      | Copay Category | <copayCategory> |
-    When the user navigates to Benefits and coverage page
-    And the user validates the content on benefits and coverage page
-
-    Examples: 
-      | planType | copayCategory |
-      | MAPD     | NON LIS       |
-      
-      
-
-
-  @needHelpContactUs
-  Scenario Outline: Verify Need Help section is in place on Benefits and Coverage page
-    Given registered member with following details logins in the member portal 
-      | Plan Type      | <planType>      |
-      | Copay Category | <copayCategory> |
-    When the user navigates to Benefits and coverage page
-    And the user validates the content on benefits and coverage page
-    When the user navigates to contact us page in AARP site
-    Then the user validates the contact us page in AARP site
-
-    Examples: 
-      | planType | copayCategory |
-      | MAPD     | NON LIS       |
-
+  
   @validatePdfsection
   Scenario Outline: Verify PDF section is in place on Benefits and Coverage page
     Given registered member with following details logins in the member portal 
@@ -1055,20 +1027,7 @@ Feature: To test plan benefits and Coverage on AARP site for Federal members
       | MAPD     | LIS        |
       
       
-  @needHelpShip
-  Scenario Outline: Verify Need Help section is in place on Benefits and Coverage page
-    Given registered member with following details logins in the member portal 
-      | Plan Type      | <planType>      |
-    When the user navigates to Benefits and coverage page
-    And  the user validates the need help section for ship
-    And the user validates see more ways to contact us section for ship
-   # And the user validates the disclaimer link
-    And the user validates on clicking contact us link it should route to contact us page for ship member
-    
 
-    Examples: 
-      | planType | 
-      | MA    |
       
       
 
@@ -1128,19 +1087,21 @@ Feature: To test plan benefits and Coverage on AARP site for Federal members
       | planType | 
       | MAPD     | 
       
-      @needHelpFederal
+ @needHelpFederal
     Scenario Outline: Verify Need Help section is in place on Benefits and Coverage page
     Given registered member with following details logins in the member portal 
       | Plan Type   | <planType>   |
     When the user navigates to Benefits and coverage page
-    And the user validates the content on benefits and coverage page
-    And the user validates contactus section
+    #And the user validates the content on benefits and coverage page
     And the user validates Needhelp header and disclaimer link
-    And the user clicks on Disclaimers link
+    And the user validates the disclaimer link
+    And the user validates contactus section
     
     Examples: 
       | planType | 
-      | MA       |   
+      | MA       |
+      | MAPD     |
+      | PDP      |   
       
   @needHelpShipBnC
   Scenario Outline: Verify Need Help section is in place on Benefits and Coverage page
@@ -1149,13 +1110,16 @@ Feature: To test plan benefits and Coverage on AARP site for Federal members
     When the user navigates to Benefits and coverage page
     And  the user validates the need help section for ship
     And the user validates see more ways to contact us section for ship
-   #And the user validates the disclaimer link
+    And the user validates the disclaimer link
     And the user validates on clicking contact us link it should route to contact us page for ship member
     
 
     Examples: 
       | planType | 
       | EHIP     |
+      | SHIPMO   |
+      | SHIPTX   |
+      | HIP      |
       
    @needHelpShipVAS
   Scenario Outline: Verify Need Help section is in place on Benefits and Coverage page
@@ -1169,7 +1133,10 @@ Feature: To test plan benefits and Coverage on AARP site for Federal members
     
     Examples: 
       | planType | 
-      | EHIP     |     
+      | EHIP     |
+      | SHIPMO   |
+      | SHIPTX   | 
+      | HIP      |    
 
 
     @discountandservices
@@ -1186,6 +1153,7 @@ Feature: To test plan benefits and Coverage on AARP site for Federal members
       | SHIPTX   |
       | SHIPMO   | 
       | EHIP     |
+      | HIP      |
       
     @VAS1
     Scenario Outline: Verify that DisocuntServices section is visible on Benefits and coverage page
@@ -1194,9 +1162,9 @@ Feature: To test plan benefits and Coverage on AARP site for Federal members
     When the user navigates to Benefits and coverage page
     And the user validate Value Add Service page
     And the user validate header and text 
-    And the user validates sections for NurseHealthLine,DIME2,MyCarePath,SilverSneakers,VisionDiscount
+    #And the user validates sections for NurseHealthLine,DIME2,MyCarePath,SilverSneakers,VisionDiscount
     And the user validates view more link
-    And when the user clicks on view more link link should expand and disclaimer link should be visible
+    #And when the user clicks on view more link link should expand and disclaimer link should be visible
     And the user validates MAIN CTA button
      
     
