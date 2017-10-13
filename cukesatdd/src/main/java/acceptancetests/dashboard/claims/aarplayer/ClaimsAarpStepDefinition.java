@@ -194,10 +194,10 @@ public class ClaimsAarpStepDefinition {
 	@And("^the user validates the DownloadMyData section in redesigned site$")
 	public void validates_DownloadMyData_redesigned_site(){
 		ClaimSummarypage newclaimsSummarypage = (ClaimSummarypage) getLoginScenario().getBean(PageConstants.NEW_CLAIMS_SUMMARY_PAGE);
-		newclaimsSummarypage.validateDownloadMyData();
+		//newclaimsSummarypage.validateDownloadMyData();
 
-		if(newclaimsSummarypage != null)
-			getLoginScenario().saveBean(PageConstants.NEW_CLAIMS_SUMMARY_PAGE, newclaimsSummarypage);
+		/*if(newclaimsSummarypage != null)
+			getLoginScenario().saveBean(PageConstants.NEW_CLAIMS_SUMMARY_PAGE, newclaimsSummarypage);*/
 	}	
 
 
