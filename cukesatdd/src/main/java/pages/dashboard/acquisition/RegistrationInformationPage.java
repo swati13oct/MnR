@@ -2,6 +2,7 @@ package pages.dashboard.acquisition;
 
 import org.junit.Assert;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -849,7 +850,13 @@ public class RegistrationInformationPage extends UhcDriver {
 	}
 	
 
-
+	/**
+     * Function to scroll page
+     */
+    public void scroll(){
+     JavascriptExecutor jse = (JavascriptExecutor)driver;
+     jse.executeScript("window.scrollBy(0,350)", "");
+    }
 /**
      * Wait for page to load
      */
