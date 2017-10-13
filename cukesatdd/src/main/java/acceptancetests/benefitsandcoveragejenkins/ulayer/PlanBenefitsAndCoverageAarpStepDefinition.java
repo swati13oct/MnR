@@ -630,17 +630,7 @@ public class PlanBenefitsAndCoverageAarpStepDefinition {
 
 	}
 
-	@Then("^the user validates Benefits summary in AARP site$")
-	public void the_user_validates_Benefits_Summary_in_AARP_site()
 
-	{
-
-		BenefitsAndCoveragePage benefitsnCoveragepage = (BenefitsAndCoveragePage) getLoginScenario()
-				.getBean(PageConstants.BENEFITS_AND_COVERAGE_PAGE);
-
-		benefitsnCoveragepage.ValidateBenefitSummary();
-
-	}
 
 	@And("the user validates plan overview section")
 	public void user_validate_planOverview() {

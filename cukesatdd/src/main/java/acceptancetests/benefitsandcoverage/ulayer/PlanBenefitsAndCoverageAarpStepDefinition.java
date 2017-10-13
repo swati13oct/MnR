@@ -857,13 +857,7 @@ public class PlanBenefitsAndCoverageAarpStepDefinition {
 
 		benefitsnCoveragepage.validatePlanOverviewShip();
 	}
-	@And("the user validates headers on Bnc page for ship members")
-	public void user_validate_Headers_Group() {
-	BenefitsAndCoveragePage benefitsnCoveragepage = (BenefitsAndCoveragePage) getLoginScenario()
-			.getBean(PageConstants.BENEFITS_AND_COVERAGE_PAGE);
-	benefitsnCoveragepage.validateHeadersShip();
-	}
-
+	
 
 	
 	@Then("^the user validates Needhelp header and disclaimer link")
@@ -944,5 +938,23 @@ public class PlanBenefitsAndCoverageAarpStepDefinition {
 				PageConstants.VALUE_ADDED_SERVICES);
 		valueaddedservices.validatemainctabutton();
 	}
+	
+	
+	@And("the user validates headers on Bnc page for indi members")
+	public void user_validate_Headers() {
+		BenefitsAndCoveragePage benefitsnCoveragepage = (BenefitsAndCoveragePage) getLoginScenario()
+				.getBean(PageConstants.BENEFITS_AND_COVERAGE_PAGE);;
+				benefitsnCoveragepage.validateHeaders();
+	}
+	
+	
+	@And("the user validates headers on Bnc page for ship members")
+	public void user_validate_Headers_Group() {
+	BenefitsAndCoveragePage benefitsnCoveragepage = (BenefitsAndCoveragePage) getLoginScenario()
+			.getBean(PageConstants.BENEFITS_AND_COVERAGE_PAGE);
+	benefitsnCoveragepage.validateHeadersShip();
+	}
+
+
 
 	}

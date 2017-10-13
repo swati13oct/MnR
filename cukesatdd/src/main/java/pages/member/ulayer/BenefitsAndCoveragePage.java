@@ -38,7 +38,6 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 
 	public JSONObject benefitsandcoverageJson;
 
-
 	@FindBy(xpath = "//*[@id='planBenefitsApp']/div/div/div[2]/div[1]/div/div[2]/div[1]/span")
 	private WebElement memberId;
 
@@ -129,11 +128,26 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 	@FindBy(id = "mapdPageLis")
 	private WebElement RetailDrugCost_Table;
 
-	@FindBy(xpath = "//*[@id='planBenefitsApp']/div[2]/div[1]/div/h1")
+	@FindBy(className = "atdd-benefitssummary-headertitle")
 	private WebElement BenefitsSummaryHeader;
-	
 
+	@FindBy(className = "atdd-benefitssummary-subheadertitle")
+	private WebElement Copayscoinsuranceheader;
 
+	@FindBy(className = "atdd-hospitalvisits-title")
+	private WebElement HospitalVisits;
+
+	@FindBy(className = "atdd-emergencycare-title")
+	private WebElement EmergencyHeader;
+
+	@FindBy(className = "atdd-ambulance-title")
+	private WebElement AmbulanceHeader;
+
+	@FindBy(className = "atdd-officevisits-title")
+	private WebElement OfficeVisits;
+
+	@FindBy(className = "atdd-outpatientsurgery-title")
+	private WebElement OutpatientSurgeryCenter;
 
 	@FindBy(xpath = "//*[@id='planBenefitsApp']/div[2]/div[3]/div/div/div/header/span")
 	private WebElement ParticipatingHospitalStays1;
@@ -162,26 +176,22 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 	@FindBy(xpath = "//*[@id='planBenefitsApp']/div[2]/div[11]/div/div/div/header/span")
 	private WebElement EmergencyCare;
 
-	
-	
-	 
-    @FindBy(xpath="//*[@id='planBenefitsApp']/section/div/div[1]/div/div/div/div/h1")
+	@FindBy(xpath = "//*[@id='planBenefitsApp']/section/div/div[1]/div/div/div/div/h1")
 	private WebElement planName;
-	
-    @FindBy(xpath = "//*[@id='planBenefitsApp']/section/div/div[2]/div[1]/div/div[1]/div[1]/span")
-    private WebElement nameLabel;
 
-    @FindBy(xpath = "//*[@id='planBenefitsApp']/section/div/div[2]/div[1]/div/div[2]/div[1]/span")
-    private WebElement memberID;
+	@FindBy(xpath = "//*[@id='planBenefitsApp']/section/div/div[2]/div[1]/div/div[1]/div[1]/span")
+	private WebElement nameLabel;
 
-    @FindBy(xpath = "//*[@id='planBenefitsApp']/section/div/div[2]/div[1]/div/div[3]/div[1]/span")
-    private WebElement effective_Date;
-    
-    
-    @FindBy(xpath = "//*[@id='planBenefitsApp']/section/div/div[2]/div[4]/span[2]")
-    private WebElement Monthly_Premium;
-    
-    @FindBy(className = "atdd-need-help")
+	@FindBy(xpath = "//*[@id='planBenefitsApp']/section/div/div[2]/div[1]/div/div[2]/div[1]/span")
+	private WebElement memberID;
+
+	@FindBy(xpath = "//*[@id='planBenefitsApp']/section/div/div[2]/div[1]/div/div[3]/div[1]/span")
+	private WebElement effective_Date;
+
+	@FindBy(xpath = "//*[@id='planBenefitsApp']/section/div/div[2]/div[4]/span[2]")
+	private WebElement Monthly_Premium;
+
+	@FindBy(className = "atdd-need-help")
 	private WebElement NeedhelpShip;
 
 	@FindBy(className = "atdd-tech-header")
@@ -192,28 +202,27 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 
 	@FindBy(className = "atdd-claims-header")
 	private WebElement ClaimsSupportShip;
-	
-    @FindBy(xpath = ".//*[@id='plan_benefit_documents']/section/div/div[2]/div/form/span[1]")
-    private WebElement view_label;
-    
-    @FindBy(xpath = ".//*[@id='plan_benefit_documents']/section/div/div[2]/div/form/span[2]")
-    private WebElement documents_label;
-    
-    @FindBy(xpath = "//*[@id='planBenefitsApp']/section/div/div[2]/div[2]/div[1]/div/div[1]/div/span")
+
+	@FindBy(xpath = ".//*[@id='plan_benefit_documents']/section/div/div[2]/div/form/span[1]")
+	private WebElement view_label;
+
+	@FindBy(xpath = ".//*[@id='plan_benefit_documents']/section/div/div[2]/div/form/span[2]")
+	private WebElement documents_label;
+
+	@FindBy(xpath = "//*[@id='planBenefitsApp']/section/div/div[2]/div[2]/div[1]/div/div[1]/div/span")
 	private WebElement ExtraHelp;
-    
-	@FindBy(xpath = "//*[@id='planBenefitsApp']/div[2]/div[2]/div/p")
-	private WebElement BenefitSummaryText;
-	
-	@FindBy( xpath= "//*[@id='planBenefitsApp']/section/div/div[2]/div[4]/button")
-	private WebElement MakePaymentButton ;
-	
+
+
+
+	@FindBy(xpath = "//*[@id='planBenefitsApp']/section/div/div[2]/div[4]/button")
+	private WebElement MakePaymentButton;
+
 	@FindBy(className = "atdd-contact-us")
 	private WebElement contactUslink;
-	
+
 	@FindBy(className = "margin-none")
 	private WebElement Seemorewaystext;
-	
+
 	@FindBy(className = "atdd-need-help")
 	private WebElement NeedHelpHeader;
 
@@ -223,17 +232,17 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 	@FindBy(className = "atdd-needhelp-disclaimer-text")
 	private WebElement disclaimersLink;
 
-public static final String disclaimertextarea_xpath = "//*[@id='collapseDisclaimer']";
+	public static final String disclaimertextarea_xpath = "//*[@id='collapseDisclaimer']";
 
-        @FindBy(className = "atdd-bnc-handimg")
+	@FindBy(className = "atdd-bnc-handimg")
 	private WebElement handimage;
-	
+
 	@FindBy(className = "atdd-bnc-discountsubtitle")
 	private WebElement textdiscountservices;
-	
+
 	@FindBy(className = "atdd-bnc-specialdscnt-desc")
 	private WebElement textdiscountservices1;
-	
+
 	@FindBy(className = "atdd-bnc-discounttitle")
 	private WebElement headerdiscountservices;
 
@@ -243,12 +252,9 @@ public static final String disclaimertextarea_xpath = "//*[@id='collapseDisclaim
 	@FindBy(className = "atdd-bnc-discntlearnmorimg")
 	private WebElement learnmorebutton;
 
-
 	@FindBy(xpath = ".//*[@id='drug-copays-and-discounts']/section/div[1]/div/div/h2")
 	private WebElement Header;
 
-	
-	
 	public static final String learnmorelinktiertext_xpath = ".//*[@id='collapseTiers']";
 	public static final String learnmorelinkstagetext_xpath = ".//*[@id='collapseStages']";
 
@@ -292,46 +298,32 @@ public static final String disclaimertextarea_xpath = "//*[@id='collapseDisclaim
 	@Override
 	public void openAndValidate() {
 
-		/*JSONObject jsonObject = new JSONObject();
-		for (String key : benefitsCoverage.getExpectedData().keySet()) {
-			List<WebElement> elements = findElements(benefitsCoverage.getExpectedData().get(key));
-			if (elements.size() == 1) {
-				validate(elements.get(0));
-				try {
-					jsonObject.put(key, elements.get(0).getText());
-				} catch (JSONException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-			} else if (elements.size() > 1) {
-				JSONArray jsonArray = new JSONArray();
-				for (WebElement element : elements) {
-
-					validate(element);
-					try {
-						JSONObject jsonObjectForArray = new JSONObject();
-						jsonObjectForArray.put(benefitsCoverage.getExpectedData().get(key).getElementName(),
-								element.getText());
-						jsonArray.put(jsonObjectForArray);
-					} catch (JSONException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
-				}
-				try {
-					jsonObject.put(key, jsonArray);
-				} catch (JSONException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-
-			}
-
-		}
-		benefitsandcoverageJson = jsonObject;
-
-		System.out.println("BenefitsCoverageJson----->" + benefitsandcoverageJson);
-*/
+		/*
+		 * JSONObject jsonObject = new JSONObject(); for (String key :
+		 * benefitsCoverage.getExpectedData().keySet()) { List<WebElement>
+		 * elements = findElements(benefitsCoverage.getExpectedData().get(key));
+		 * if (elements.size() == 1) { validate(elements.get(0)); try {
+		 * jsonObject.put(key, elements.get(0).getText()); } catch
+		 * (JSONException e) { // TODO Auto-generated catch block
+		 * e.printStackTrace(); } } else if (elements.size() > 1) { JSONArray
+		 * jsonArray = new JSONArray(); for (WebElement element : elements) {
+		 * 
+		 * validate(element); try { JSONObject jsonObjectForArray = new
+		 * JSONObject();
+		 * jsonObjectForArray.put(benefitsCoverage.getExpectedData().get(key).
+		 * getElementName(), element.getText());
+		 * jsonArray.put(jsonObjectForArray); } catch (JSONException e) { //
+		 * TODO Auto-generated catch block e.printStackTrace(); } } try {
+		 * jsonObject.put(key, jsonArray); } catch (JSONException e) { // TODO
+		 * Auto-generated catch block e.printStackTrace(); }
+		 * 
+		 * }
+		 * 
+		 * } benefitsandcoverageJson = jsonObject;
+		 * 
+		 * System.out.println("BenefitsCoverageJson----->" +
+		 * benefitsandcoverageJson);
+		 */
 	}
 
 	public void navigateToRallySearchWindow() {
@@ -467,8 +459,8 @@ public static final String disclaimertextarea_xpath = "//*[@id='collapseDisclaim
 	public ContactUsPage navigatesToContactUsPage() {
 
 		contactUsLink.click();
-		
-		System.out.println("title is "+getTitle());
+
+		System.out.println("title is " + getTitle());
 		if (getTitle().equalsIgnoreCase("AARP Medicare Plans | Contact Us")) {
 			return new ContactUsPage(driver);
 		}
@@ -488,18 +480,14 @@ public static final String disclaimertextarea_xpath = "//*[@id='collapseDisclaim
 	}
 
 	public void validate_langdropdown_first_selection() {
-		if (langdropdown.isDisplayed())
-		{
-		    Select langdropdwn = new Select(langdropdown);
-		if (langdropdwn.getFirstSelectedOption().getText().equals("ENGLISH"))
-		{
-		Assert.assertTrue(true);
-		}
-		else
-		Assert.fail("Issue in English selection");
-		}
-		else
-		Assert.fail("Plan year dropdown not displayed");
+		if (langdropdown.isDisplayed()) {
+			Select langdropdwn = new Select(langdropdown);
+			if (langdropdwn.getFirstSelectedOption().getText().equals("ENGLISH")) {
+				Assert.assertTrue(true);
+			} else
+				Assert.fail("Issue in English selection");
+		} else
+			Assert.fail("Plan year dropdown not displayed");
 
 	}
 
@@ -507,7 +495,6 @@ public static final String disclaimertextarea_xpath = "//*[@id='collapseDisclaim
 		Select langdropdwn = new Select(langdropdown);
 		langdropdwn.selectByVisibleText(language);
 	}
-
 
 	public void Validate_dce_Section() {
 
@@ -685,35 +672,19 @@ public static final String disclaimertextarea_xpath = "//*[@id='collapseDisclaim
 
 	}
 
-	public void ValidateBenefitSummary() {
 
-		validateNew(BenefitsSummaryHeader);
-		validateNew(ParticipatingHospitalStays1);
-		validateNew(ParticipatingHospitalStays2);
-		validateNew(TravelBenefitHeader);
-		validateNew(BloodPackedRedBloodCellsPartA);
-		validateNew(SkilledNursingFacilityStays);
-		validateNew(HospiceCare);
-		validateNew(MedicalCare);
-		validateNew(BloodPackedRedBloodCellsPartB);
-		validateNew(EmergencyCare);
-
-
-	}
-	
 	public void validatePlanOverview() {
 		// TODO Auto-generated method stub
-		
 
-	validateNew(planName);
-	validateNew(nameLabel);
-	validateNew(memberID);
-	validateNew(effective_Date);
-	//validateNew(Monthly_Premium);
-	//validateNew(MakePaymentButton);
-		
+		validateNew(planName);
+		validateNew(nameLabel);
+		validateNew(memberID);
+		validateNew(effective_Date);
+		// validateNew(Monthly_Premium);
+		// validateNew(MakePaymentButton);
+
 	}
-	
+
 	public void validateneedhelpheaderShip() {
 		validateNew(NeedhelpShip);
 		validateNew(TechnicalSupportShip);
@@ -726,25 +697,23 @@ public static final String disclaimertextarea_xpath = "//*[@id='collapseDisclaim
 
 	}
 
-	public void  contactUslinkShip() {
+	public void contactUslinkShip() {
 		validate(contactUslink);
 		contactUslink.click();
 		System.out.println("Title is " + getTitle());
-		
-			Assert.assertTrue(getTitle().equalsIgnoreCase("Contact Us"));
-		
-	
-		
-	}
-	public boolean getview_label() 
-	{
-	 return validateNew(view_label);
-	 }
 
-	public boolean getdocuments_label() 
-	{
-	 return validateNew(documents_label);
+		Assert.assertTrue(getTitle().equalsIgnoreCase("Contact Us"));
+
 	}
+
+	public boolean getview_label() {
+		return validateNew(view_label);
+	}
+
+	public boolean getdocuments_label() {
+		return validateNew(documents_label);
+	}
+
 	public void validatePlanOverviewLis() {
 		// TODO Auto-generated method stub
 
@@ -752,10 +721,9 @@ public static final String disclaimertextarea_xpath = "//*[@id='collapseDisclaim
 		validateNew(nameLabel);
 		validateNew(memberID);
 		validateNew(effective_Date);
-		//validateNew(Monthly_Premium);
+		// validateNew(Monthly_Premium);
 		validateNew(ExtraHelp);
-		//validateNew(MakePaymentButton);
-
+		// validateNew(MakePaymentButton);
 
 	}
 
@@ -773,13 +741,18 @@ public static final String disclaimertextarea_xpath = "//*[@id='collapseDisclaim
 		// TODO Auto-generated method stub
 
 		validateNew(BenefitsSummaryHeader);
-		validateNew(BenefitSummaryText);
-		String BSExpected = "Below is a summary of your plan benefits. For more information, call 1-800-523-5800 (TTY 711), or check your Certificate of Insurance. Your Certificate of Insurance is your insurance contract and provides all of the terms and conditions of your insurance coverage. It includes benefit descriptions, definitions, exclusions and limitations of your coverage.";
-		String BSActual = BenefitSummaryText.getText();
-		Assert.assertTrue(BSExpected.equalsIgnoreCase(BSActual));
+		validateNew(ParticipatingHospitalStays1);
+		validateNew(ParticipatingHospitalStays2);
+		validateNew(TravelBenefitHeader);
+		validateNew(BloodPackedRedBloodCellsPartA);
+		validateNew(SkilledNursingFacilityStays);
+		validateNew(HospiceCare);
+		validateNew(MedicalCare);
+		validateNew(BloodPackedRedBloodCellsPartB);
+		validateNew(EmergencyCare);
 
 	}
-	
+
 	public void validateNeedhelpheader() {
 
 		try {
@@ -799,38 +772,35 @@ public static final String disclaimertextarea_xpath = "//*[@id='collapseDisclaim
 		}
 	}
 
-
 	public void validatecontactussection() {
-	
-			if (Contactussection.getText().contains("See more ways to contact us")) {
-				System.out.println("contactus section is coming ");
-				Assert.assertTrue(true);
-			} else
-			{
-				Assert.fail("Contactussection.getText() >>>>>>" + Contactussection.getText());
-			} 
-		
+
+		if (Contactussection.getText().contains("See more ways to contact us")) {
+			System.out.println("contactus section is coming ");
+			Assert.assertTrue(true);
+		} else {
+			Assert.fail("Contactussection.getText() >>>>>>" + Contactussection.getText());
+		}
+
 	}
 
-public void vasSection() {
+	public void vasSection() {
 
-	
-	validate(textdiscountservices);
-	validate(textdiscountservices1);
-	validate(headerdiscountservices);	
+		validate(textdiscountservices);
+		validate(textdiscountservices1);
+		validate(headerdiscountservices);
 	}
-	
+
 	public void handimage() {
 
-	validate(handimage);
-		
+		validate(handimage);
+
 	}
-	
+
 	public void learnmorebutton() {
 
 		validate(learnmorebutton);
-			
-		}
+
+	}
 
 	public ValueAddedServicepage clickOnLearnMore() {
 		// TODO Auto-generated method stub
@@ -845,10 +815,10 @@ public void vasSection() {
 		if (this.driver.getTitle().equalsIgnoreCase("Value Added Services")) {
 			System.out.println(driver.getTitle());
 			return new ValueAddedServicepage(driver);
-			
+
 		}
 		return null;
-		
+
 	}
 
 	public ValueAddedServicepage navigateToValueAddService() {
@@ -859,8 +829,16 @@ public void vasSection() {
 			return new ValueAddedServicepage(driver);
 		}
 		return null;
-	
-	
 
-}
+	}
+
+	public void validateHeaders() {
+		validateNew(BenefitsSummaryHeader);
+		validateNew(Copayscoinsuranceheader);
+		validateNew(HospitalVisits);
+		validateNew(OfficeVisits);
+		validateNew(OutpatientSurgeryCenter);
+
+	}
+
 }
