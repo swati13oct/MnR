@@ -33,8 +33,7 @@ import pages.dashboard.member.ulayer.ClaimSummarypage;
 
 public class ValueAddedServicepage extends UhcDriver {
 
-	
-	@FindBy(id= "Nursehealth")
+	@FindBy(className= "atdd-vas-nurselineimage")
 	private WebElement nurseHealthLine;
 	
 	@FindBy(id = "silverSneaker")
@@ -45,6 +44,28 @@ public class ValueAddedServicepage extends UhcDriver {
 	
 	@FindBy(id = "visionDiscount")
 	private WebElement visionDiscount;
+	
+	@FindBy(className = "atdd-vas-title")
+	private WebElement vasheader; 
+	
+	@FindBy(className = "atdd-vas-subtitle")
+	private WebElement vastext;
+	
+	@FindBy(className = "atdd-vas-descrptiontext")
+	private WebElement vastext2;
+	
+	@FindBy(className = "atdd-vas-viewmorlnk")
+	private WebElement viewmore;
+	
+	@FindBy(className = "atdd-vas-maincta-button")
+	private WebElement maincta;
+	
+	@FindBy(id="collapseLargeCard1")
+	private WebElement viewlinkexpand;
+	
+	@FindBy(id=".//*[@id='collapseLargeCard1']/div/div[1]/div/div/div/a")
+	private WebElement disclaimers;
+	
 	//private PageData valueAddedservicePage; 
 
 	public ValueAddedServicepage(WebDriver driver) {
@@ -69,6 +90,34 @@ public class ValueAddedServicepage extends UhcDriver {
 		// TODO Auto-generated method stub
 		validate(visionDiscount);
 	}
+	
+	public void validatevasheadertext() {
+		// TODO Auto-generated method stub
+		validate(vasheader);
+		validate(vastext);
+		validate(vastext2);
+	}
+	
+	public void validateviewmorelink() {
+		// TODO Auto-generated method stub
+		validate(viewmore);
+		
+	}
+	
+	public void validatemainctabutton() {
+		// TODO Auto-generated method stub
+		validate(maincta);
+	}
+	
+	public void validateviewmorelinkexpand() {
+		// TODO Auto-generated method stub
+		viewmore.click();
+		validate(viewlinkexpand);
+		validate(disclaimers);
+		disclaimers.click();
+	}
+	
+	
 	public void openAndValidate(){
 		
 	}
