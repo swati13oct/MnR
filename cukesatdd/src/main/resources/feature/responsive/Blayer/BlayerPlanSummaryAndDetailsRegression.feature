@@ -107,7 +107,7 @@ Examples:
 |02210  | Suffolk County  | SNP        |UnitedHealthcare Senior Care Options (HMO SNP)| AEP        | 2016        | 2017       | 
 #|02210  | Suffolk County  | MA         |AARP MedicareComplete Plan 2 (HMO)            | AEP        | 2016        | 2017       | 
 
-@US657089 @planSummary @sprint3
+@US657089 @planSummary @sprint3 @workingScripts
 Scenario Outline: To validate plan count from portfolio page
 Given the user is on the vpp portfolio page
 Then the user performs plan search using zipcode
@@ -121,9 +121,9 @@ Examples:
 		|zipCode|county						   |planType  | 
 		|90210  |Los Angeles County  |ma        |
 		|90210  |Los Angeles County  |pdp       |
-		|33012  |Miami-Dade County   |snp       |								
+	#	|33012  |Miami-Dade County   |snp       |								
 		
-@US657296 @sprint3
+@US657296 @sprint3 @workingScripts
 Scenario Outline: To validate enroll in plan popup
 Given the user is on the vpp portfolio page 
 Then the user performs plan search using zipcode 
@@ -134,7 +134,7 @@ Then the user navigates to the following plan type
 | PlanType | <planType> |
 And User validate Enroll now button is not displayed for SNP plans
 Examples:
-		|zipCode|county						   |planType  | 
+		|zipCode|county						   |planType   | 
 		|33012  |Miami-Dade County   |SNP        |
 		
 @US646136 @sprint3 @snpPlanCard		
@@ -192,8 +192,8 @@ Examples:
 |zipCode|county          |planType | planName                                            |  
 |33012 |Miami-Dade County| snp     |UnitedHealthcare Dual Complete RP (Regional PPO SNP)  |  
 
-@US670704 @rightRail	@sprint4	
-Scenario Outline: To validate Need a step back from right rail
+@US670704 @rightRail	@sprint4	@workingScripts
+Scenario Outline: To validate Need a step back from right rail on plan details
 Given the user is on the vpp portfolio page
 Then the user performs plan search using zipcode
               | Zip Code |<zipCode>|
@@ -208,8 +208,8 @@ Examples:
 		|90210  |Los Angeles County|MA       |AARP MedicareComplete SecureHorizons Plan 1 (HMO)  |
 				
 
-@US670704 @rightRail @sprint4
-Scenario Outline: To validate chat now widget
+@US670704 @rightRail @sprint4 @workingScripts
+Scenario Outline: To validate chat now widget on plan details
 Given the user is on the vpp portfolio page
 Then the user performs plan search using zipcode
               | Zip Code |<zipCode>|
@@ -223,8 +223,8 @@ Examples:
 		|zipCode|county						 |planType |planName					   |
 		|90210  |Los Angeles County|MA       |AARP MedicareComplete SecureHorizons Plan 1 (HMO)  |
 		
-@US670704  @rightRail	 @sprint4	
-Scenario Outline: To validate need more information
+@US670704  @rightRail	 @sprint4	@workingScripts
+Scenario Outline: To validate need more informationon on plan details
 Given the user is on the vpp portfolio page
 Then the user performs plan search using zipcode
               | Zip Code |<zipCode>|
@@ -238,7 +238,7 @@ Examples:
 		|zipCode|county						 |planType |planName					   |
 		|90210  |Los Angeles County|MA       |AARP MedicareComplete SecureHorizons Plan 1 (HMO)  |
 		
-@US670704 @rightRail		@sprint4
+@US670704 @rightRail		@sprint4 @workingScripts
 Scenario Outline: To validate email widget on plan details pages
 Given the user is on the vpp portfolio page
 Then the user performs plan search using zipcode
@@ -257,8 +257,8 @@ Examples:
 		|zipCode|county            |planType	|planName																						|  firstname  | lastname  | emailaddress |
 		|90210  |Los Angeles County|MA        |AARP MedicareComplete SecureHorizons Plan 1 (HMO)  |	 Eva        | Zhong     |weixin.zhong@optum.com|
  
-@US670717 @providerSearch @sprint4
- Scenario Outline: To validate need more information
+@US670717 @providerSearch @sprint4 @workingScripts
+ Scenario Outline: To validate need more information on plan details
 Given the user is on the vpp portfolio page
 Then the user performs plan search using zipcode
               | Zip Code |<zipCode>|
@@ -272,7 +272,7 @@ Examples:
 		|zipCode|county						 |planType  |planName					   |
 		|90210  |Los Angeles County|MA        |AARP MedicareComplete SecureHorizons Plan 1 (HMO)  |
 		
-@US646140 @connectormodel @sprint5
+@US646140 @connectormodel @sprint5 
 Scenario Outline: To validate plan count from portfolio page
 Given user navigated to connector model page
 	|PlanTypeCriteria|<planTypeCriteria>|
@@ -298,7 +298,7 @@ Examples:
 		|zipCode|county						 |planType  |planName					                                  |
    	|90210  |Los Angeles County|MA        |AARP MedicareComplete SecureHorizons Essential (HMO)  |	
    	
-@US674467 @optionalServices @sprint5
+@US674467 @optionalServices @sprint5 @workingScripts
 Scenario Outline: To validate optional services
 Given the user is on the vpp portfolio page
 Then the user performs plan search using zipcode
@@ -313,10 +313,12 @@ And user validates optional services
 |High Optional Dental|<highOptionalDental>|
 Examples:
 		|zipCode|county						 |planType   |planName					                                    |optionalDenatl|highOptionalDental|
-   	|90210  |Los Angeles County|MA         |AARP MedicareComplete SecureHorizons Plan 1 (HMO)     |true          |true| 		
+   	|90210  |Los Angeles County|MA         |AARP MedicareComplete SecureHorizons Plan 1 (HMO)     |true          |true| 
+   	|90210  |Los Angeles County|MA         |AARP MedicareComplete SecureHorizons Plan 2 (HMO)     |true          |true| 
+    			
  
  
- @US674468 @sprint5 @fnfUS674468
+ @US674468 @sprint5 @fnfUS674468 @notWorking
  Scenario Outline: To validate plan costs on plan details page
 Given the user is on the vpp portfolio page
 Then the user performs plan search using zipcode
@@ -390,4 +392,118 @@ And the user validates header and footer
 Examples:
 		|zipCode|county						     |planType   |planName  |
 		|99501  |Anchorage Municipality|MS         |Plan F    |
-		|99501  |Anchorage Municipality|MS         |Plan G    |			
+		|99501  |Anchorage Municipality|MS         |Plan G    |		
+		
+@workingScripts
+Scenario Outline: To validate plan count from portfolio page
+Given the user is on the vpp portfolio page
+Then the user performs plan search using zipcode
+              | Zip Code |<zipCode>|
+              | County   |<county> |
+Then user validates plan count for all plan types on plan summary page in AARP site
+Then the user navigates to the following plan type
+| PlanType | <planType> |
+#Then user validates county name on plan summary page
+Examples:
+|zipCode|county          |planType |
+|33012 |Miami-Dade County| SNP     |
+
+
+@workingScripts
+Scenario Outline: To validate plan count from portfolio page
+Given the user is on the vpp portfolio page
+Then the user performs plan search using zipcode
+              | Zip Code |<zipCode>|
+              | County   |<county> |
+Then the user navigates to the following plan type
+| PlanType | <planType> |
+And User click on Enroll in plan link on plan detail page
+|PlanName|planName|
+Examples:
+|zipCode|county          |planType |planName|
+|33012 |Miami-Dade County| MA     |Preferred Choice Dade (HMO) |
+
+@workingScripts
+Scenario Outline: To validate plan count from portfolio page
+Given the user is on the vpp portfolio page
+Then the user performs plan search using zipcode
+              | Zip Code |<zipCode>|
+              | County   |<county> |
+Then user validates plan count for all plan types on plan summary page in AARP site
+Then the user navigates to the following plan type
+| PlanType | <planType> |
+Then the user click on Is my Provider Covered link of SNP plans and validate Rally Connect Get Started page
+| Plan Name | <planName> |
+| Plan Type | <plantype> |
+Examples:
+|zipCode|  county         | planType  | planName                   |
+|02210  | Suffolk County  | SNP        |UnitedHealthcare Senior Care Options (HMO SNP)|	
+
+
+@workingScripts
+Scenario Outline: To validate enroll now button not displayed for SNP
+Given the user is on the vpp portfolio page
+Then the user performs plan search using zipcode
+              | Zip Code |<zipCode>|
+              | County   |<county> |
+Then user validates plan count for all plan types on plan summary page in AARP site
+Then the user navigates to the following plan type
+| PlanType | <planType> |
+And User validate Enroll now button is not displayed for SNP plans
+Examples:
+|zipCode|county          |planType | planName                                            |monthlypremium | primarycare |  specialist       |referralRequired| prescriptionDrug |
+|33012 |Miami-Dade County| snp     |UnitedHealthcare Dual Complete RP (Regional PPO SNP)  |  $29.10       |$0           |  20              | No             |  25  |	
+
+
+@workingScripts
+Scenario Outline: To validate benefit table for PFFS
+Given the user is on the vpp portfolio page
+Then the user performs plan search using zipcode
+              | Zip Code |<zipCode>|
+              | County   |<county> |
+Then user validates plan count for all plan types on plan summary page in AARP site
+Then the user navigates to the following plan type
+| PlanType | <planType> |
+And the user validates benefit table for ma
+  | Plan Name            | <planName>        |
+  | MonthlyPremium		|<monthlypremium>   |
+  | PCP	                | <primarycare>		        |
+  | Specialist          | <specialist>	    |
+  | ReferralRequired    |<referralRequired>	| 
+  | Prescription Drugs  | <prescriptionDrug>| 
+Examples:
+|zipCode|county          |planType | planName                                            |monthlypremium | primarycare |  specialist       |referralRequired| prescriptionDrug |
+|85901 | Navajo County   |  ma     |UnitedHealthcare MedicareDirect Rx (PFFS)            |   $60        | $25         |  $50             |  No            |   $4 |
+
+Scenario Outline: To validate learn more button
+Given the user is on the vpp portfolio page
+Then the user performs plan search using zipcode
+              | Zip Code |<zipCode>|
+              | County   |<county> |
+Then user validates plan count for all plan types on plan summary page in AARP site
+Then the user navigates to the following plan type
+| PlanType | <planType> |
+And the user validate learn more button
+| Plan Name| <planName> |
+Examples:
+|zipCode|county          |planType | planName                                            |monthlypremium | primarycare |  specialist       |referralRequired| prescriptionDrug |
+|33012 |Miami-Dade County| snp     |UnitedHealthcare Dual Complete RP (Regional PPO SNP)  |  $29.10       |$0           |  20              | No             |  25  |
+
+@workingScripts
+Scenario Outline: To validate enroll now link
+Given the user is on the vpp portfolio page
+Then the user performs plan search using zipcode
+              | Zip Code |<zipCode>|
+              | County   |<county> |
+Then the user navigates to the following plan type
+| PlanType | <planType> |
+And the user validates enroll now link
+|PlanName  |<planName>|
+
+Examples:
+    |zipCode|county						 |planType | planName |
+		|90210  |Los Angeles County| MA      |AARP MedicareComplete SecureHorizons Plan 1 (HMO) |
+	#	|33012  |Miami-Dade County | snp     |UnitedHealthcare Dual Complete RP (Regional PPO SNP)  |
+		|10002  |Miami-Dade County | PDP     |AARP MedicareRx Walgreens (PDP) |
+    |90210  |Los Angeles County| MA      |AARP MedicareComplete SecureHorizons Plan 2 (HMO) |
+		|90210  |Los Angeles County| PDP     |AARP MedicareRx Preferred (PDP)  |

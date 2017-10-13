@@ -20,6 +20,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import acceptancetests.atdd.data.CommonConstants;
 import acceptancetests.atdd.data.ElementData;
@@ -480,23 +482,21 @@ public void disclaimerText(){
 }
 
 public ResponsivePlanSummaryUhc viewPlanSummary(String planType) {
- 	try {
-		Thread.sleep(4000);
-	} catch (InterruptedException e) {
-		// TODO Auto-generated catch block
-		e.printStackTrace();
-	}
+	WebDriverWait wait = new WebDriverWait(driver, 90);
 	if (planType.equalsIgnoreCase("PDP")) {
+		wait.until(ExpectedConditions.elementToBeClickable(viewPdpPlans));
 		viewPdpPlans.click();
 		return new ResponsivePlanSummaryUhc(driver);
 			} else if (planType.equalsIgnoreCase("MA")
 			|| planType.equalsIgnoreCase("MAPD")) {
+			wait.until(ExpectedConditions.elementToBeClickable(viewMAPlans));
 			System.out.println("inside MA");
 			//viewMaPlans.click();
 			viewMAPlans.click();
 		return new ResponsivePlanSummaryUhc(driver);		 
 			}else if(planType.equalsIgnoreCase("MS")){
-		           showMsPlans.click();
+				wait.until(ExpectedConditions.elementToBeClickable(showMsPlans));
+		         showMsPlans.click();
 		    if(driver.getTitle().equals("UnitedHealthcare Medicare Solutions | AARP Medicare Supplement Plans")){
 		    	return new ResponsivePlanSummaryUhc(driver);
 		    }else{
@@ -504,6 +504,7 @@ public ResponsivePlanSummaryUhc viewPlanSummary(String planType) {
 		    	Assert.fail();
 		    }
 		}else if(planType.equalsIgnoreCase("SNP")){
+			wait.until(ExpectedConditions.elementToBeClickable(viewSnpPlans));
 			viewSnpPlans.click();
 	return new ResponsivePlanSummaryUhc(driver);
 	}
@@ -571,6 +572,8 @@ public void comparePlanslnk(){
 	}
 	
 	 public void planCountOnPlanCard(){
+	    WebDriverWait wait = new WebDriverWait(driver, 90);
+		wait.until(ExpectedConditions.elementToBeClickable(viewMAPlans));
 		 System.out.println(planCountList.size());
 		 System.out.println(planIndexList.size());
 		   for(int i=0;i<=planCountList.size();i++){
@@ -587,53 +590,11 @@ public void comparePlanslnk(){
 	 }
 	 
 	 public ResponsivePlanDetailsUhc viewPlanDetails(String planName){
-		 try {
-			Thread.sleep(7000);
-		} catch (InterruptedException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
-		/*int i=0;
-		 List<WebElement> plans = driver.findElements(By.xpath("//h2[contains(text(),'AARP')]"));
-		 System.out.println("PLANS SIZE :: "+plans.size());
-		 String xpath="View more details";  
-		 List<WebElement> viewMoreLnks = driver.findElements(By.linkText(xpath));
-		 
-		 System.out.println("VIEW MORE LINKS SIZE"+viewMoreLnks.size());
-		 for(WebElement plan : plans){
-			 System.out.println(plan.getText());
-			 if(plan.getText().equalsIgnoreCase(planName)){			 
-				 plan.click();
-				 if(driver.getTitle().equalsIgnoreCase("Our Medicare Plans | AARP® Medicare Plans from UnitedHealthcare®")){
-					 return new ResponsivePlanDetailsUhc(driver);
-				 }
-				 break;
-			 }
-			 i++;
+		 driver.manage().timeouts().implicitlyWait(40, TimeUnit.SECONDS);
+		 if(planName.contains("PDP")){
+			 driver.findElement(By.xpath("//*[contains(text(),'"+planName+"')]/parent::div/following-sibling::div[1]/div/a[2]")).click();
+			 return new ResponsivePlanDetailsUhc(driver);
 		 }
-		 return null;*/
-		 /*List<WebElement> plans = driver.findElements(By.xpath("//h2[contains(text(),'AARP')][1]"));
-         System.out.println("PLANS SIZE :: "+plans.size());
-         String xpath="//a[@class='view-more-link']";  
-          List<WebElement> viewMoreLnks = driver.findElements(By.xpath(xpath));            
-          System.out.println("VIEW MORE LINKS SIZE"+viewMoreLnks.size());     
-         for(int i=0; i<plans.size();i++){
-                if(plans.get(i).getText().equalsIgnoreCase(planName)){
-                      viewMoreLnks.get(i).click();
-                      if(driver.getTitle().equalsIgnoreCase("plans")){
-                             try {
-                                    Thread.sleep(5000);
-                             } catch (InterruptedException e) {
-                                    // TODO Auto-generated catch block
-                                    e.printStackTrace();
-                             }
-                             return new ResponsivePlanDetailsUhc(driver);
-                      }
-                      break;
-                }
-         }*/
-		 
-		 //SNP PATH- //*[contains(text(),'UnitedHealthcare Dual Complete RP (Regional PPO SNP) ')]/parent::div/following-sibling::div[1]/div/a
 		 if(planName.contains("AARP")){
 		 driver.findElement(By.xpath("//*[contains(text(),'"+planName+"')]/parent::div/parent::div/following-sibling::div[1]/div/div[3]/a")).click();
 		 try {
@@ -646,9 +607,6 @@ public void comparePlanslnk(){
 		 }
 		 if(planName.equalsIgnoreCase("Plan F") || planName.contains("Plan G")){
 			 driver.findElement(By.xpath("//h2[text()='"+planName+"']/parent::a/parent::div/following-sibling::div[2]/div/a")).click();
-			 return new ResponsivePlanDetailsUhc(driver);
-		 }if(planName.contains("PDP")){
-			 driver.findElement(By.xpath("//*[contains(text(),'"+planName+"')]/parent::div/following-sibling::div[1]/div/a[2]")).click();
 			 return new ResponsivePlanDetailsUhc(driver);
 		 }if(planName.contains("SNP")){
 			 driver.findElement(By.xpath("//*[contains(text(),'"+planName+"')]/parent::div/following-sibling::div[1]/div/a[2]")).click();
@@ -1593,12 +1551,7 @@ public void comparePlanslnk(){
 				String pageTitle = driver.getTitle();
 				System.out.println(pageTitle);
 				changeLoationLink.click();	
-				try {
-					Thread.sleep(3000);
-				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
+				driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 				System.out.println(driver.getTitle());
 				if(!driver.getTitle().equals(pageTitle)){
 					System.out.println("plan is not displayed"); 
