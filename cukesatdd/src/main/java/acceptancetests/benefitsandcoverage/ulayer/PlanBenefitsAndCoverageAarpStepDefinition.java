@@ -799,7 +799,7 @@ public class PlanBenefitsAndCoverageAarpStepDefinition {
 	@Then("^the user validates the disclaimer link$")
 	public void the_user_clicks_on_Disclaimers_link() {
 		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario().getBean(
-				PageConstants.BENEFITS_COVERAGE_PAGE);
+				PageConstants.BENEFITS_AND_COVERAGE_PAGE);
 		benefitsCoveragePage.clickOnDisclaimers();
 	}
 	
