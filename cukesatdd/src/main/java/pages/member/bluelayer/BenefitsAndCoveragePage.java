@@ -42,17 +42,17 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 
 	@FindBy(xpath = "//*[@id='planBenefitsApp']/div/div/div[2]/div[1]/div/div[4]/div[1]/span")
 	private WebElement effectiveDate;
-
+	
 	@FindBy(className = "atdd-contact-us")
 	private WebElement contactUslink;
 	
-	@FindBy(className = "margin-none")
+	@FindBy(xpath = "html/body/div[2]/div[3]/div/div[2]/div[1]/div[2]/section/div/div[3]/div/p")
 	private WebElement Seemorewaystext;
-
+	
 	@FindBy(className = "atdd-need-help")
 	private WebElement NeedHelpHeader;
 
-	@FindBy(className = "margin-none")
+	@FindBy(xpath = "html/body/div[2]/div[3]/div/div[2]/div[1]/div[2]/section/div/div[3]/div/p")
 	private WebElement Contactussection;
 
 	@FindBy(className = "atdd-needhelp-disclaimer-text")
@@ -151,10 +151,10 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 	@FindBy(xpath = "//*[@id='planBenefitsApp']/section/div/div[2]/div[1]/div/div[3]/div[1]/span")
 	private WebElement effective_Date;
 
-	@FindBy(xpath = "//*[@id='planBenefitsApp']/section/div/div[2]/div[4]/span[2]")
+	@FindBy(className = "atdd-benefitsoverview-monthlypremium-label")
 	private WebElement Monthly_Premium;
 
-	@FindBy(className = "atdd-benefitsoverview-extrahelplevel-ma-label")
+	@FindBy(xpath = "//*[@id='planBenefitsApp']/section/div/div[2]/div[2]/div[1]/div/div[1]/div/span")
 	private WebElement ExtraHelp;
 
 	@FindBy(className = "atdd-benefitssummary-headertitle")
@@ -192,17 +192,6 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 	@FindBy( xpath= "//*[@id='planBenefitsApp']/div/div[1]/div[6]/div/div/h2/p")
 	private WebElement PrimaryCareProviderHeaderHMO;
 
-	
-	@FindBy( xpath= "//*[@id='planBenefitsApp']/div/div[1]/div[5]/div/div[1]/div/h2/div")
-	private WebElement OutOfPocketHeader ;
-	@FindBy( xpath= "//*[@id='planBenefitsApp']/div/div[1]/div[5]/div/div[2]/div[1]/div/header/span")
-	private WebElement IN_NETWORKHeader ;
-	@FindBy( xpath= "//*[@id='planBenefitsApp']/div/div[1]/div[5]/div/div[2]/div[2]/div/header/span")
-	private WebElement OUTOFNETWORKHeader ;
-	
-	@FindBy( xpath= "//*[@id='planBenefitsApp']/section/div/div[2]/div[4]/button")
-	private WebElement MakePaymentButton ;
-	
 	public static final String learnmorestagetext_xpath = ".//*[@id='collapseStages']";
 
 	public static final String learnmorelinktiertext_xpath = ".//*[@id='collapseTiers']";
@@ -289,25 +278,6 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 
 	}
 
-	public void validateNeedhelpheader() {
-
-		try {
-			validate(NeedHelpHeader);
-			JavascriptExecutor jse = (JavascriptExecutor) driver;
-			jse.executeScript("window.scrollBy(0,400)", "");
-			try {
-				Thread.sleep(30000);
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			validate(disclaimersLink);
-			System.out.println("text" + disclaimersLink.getText());
-		} catch (Exception e) {
-			System.out.println("Elements is not found ...");
-		}
-	}
-
 	public void PlanDocumentssection() {
 
 		try {
@@ -316,19 +286,40 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 			System.out.println("Elements is not found ...");
 		}
 	}
+	
+	public void validateNeedhelpheader() {
 
-	public boolean validatecontactussection() {
-		try {
+		JavascriptExecutor jse = (JavascriptExecutor) driver;
+		jse.executeScript("window.scrollBy(0,3000)", "");
+			validate(NeedHelpHeader);
+			
+			
+	}
+
+
+	public void validatecontactussection() {
+	
 			if (Contactussection.getText().contains("See more ways to contact us")) {
 				System.out.println("contactus section is coming ");
-			} else {
-				System.out.println("Contactussection.getText() >>>>>>   " + Contactussection.getText());
-			}
-		} catch (Exception e) {
-			return false;
-		}
-		return true;
+				Assert.assertTrue(true);
+			} else
+			{
+				Assert.fail("Contactussection.getText() >>>>>>" + Contactussection.getText());
+			} 
+		
 	}
+	
+	public void  contactUslink() {
+		validate(contactUslink);
+		contactUslink.click();
+		System.out.println("Title is " + getTitle());
+		
+			Assert.assertTrue(getTitle().equalsIgnoreCase("Contact Us"));
+		
+	
+		
+	}
+
 
 	public void clickOnDisclaimers(JSONObject benefitsandcoverageExectedJson) {
 		// TODO Auto-generated method stub
@@ -363,6 +354,21 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 			e.printStackTrace();
 		}
 	}
+	
+	public void clickOnDisclaimers() {
+		// TODO Auto-generated method stub
+		JavascriptExecutor jse = (JavascriptExecutor) driver;
+		jse.executeScript("window.scrollBy(0,3000)", "");
+		validateNew(disclaimersLink);
+		disclaimersLink.click();
+		try {
+			Thread.sleep(10000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
 
 	public boolean getview_label() {
 		return validate(view_label);
@@ -666,8 +672,7 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 		validateNew(nameLabel);
 		validateNew(memberID);
 		validateNew(effective_Date);
-		//validateNew(Monthly_Premium);
-		//validateNew(MakePaymentButton);
+		validateNew(Monthly_Premium);
 
 	}
 
@@ -676,9 +681,8 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 		validateNew(nameLabel);
 		validateNew(memberID);
 		validateNew(effective_Date);
-		//validateNew(Monthly_Premium);
-		 validateNew(ExtraHelp);
-		// validateNew(MakePaymentButton);
+		validateNew(Monthly_Premium);
+		// validateNew(ExtraHelp);
 
 	}
 
@@ -716,14 +720,6 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 	
 		validateNew(PrimaryCareProviderHeaderHMO);
 		
-		
-	}
-
-	public void validateOutOfPocketMaximum() {
-		// TODO Auto-generated method stub
-		validateNew(OutOfPocketHeader);
-		validateNew(IN_NETWORKHeader);
-		validateNew(OUTOFNETWORKHeader);
 		
 	}
 

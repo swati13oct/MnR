@@ -691,6 +691,12 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 	public void contactUslinkShip() {
 		validate(contactUslink);
 		contactUslink.click();
+		try {
+			Thread.sleep(20000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		System.out.println("Title is " + getTitle());
 
 		Assert.assertTrue(getTitle().equalsIgnoreCase("Contact Us"));

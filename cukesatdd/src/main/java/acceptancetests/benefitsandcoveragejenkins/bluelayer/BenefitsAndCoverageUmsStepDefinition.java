@@ -620,12 +620,7 @@ public class BenefitsAndCoverageUmsStepDefinition {
 
 	}
 
-	@Then("^the user validates Needhelp header and disclaimer link")
-	public void validateneedhelpheader() {
-		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario()
-				.getBean(PageConstants.BENEFITS_AND_COVERAGE_PAGE);
-		benefitsCoveragePage.validateNeedhelpheader();
-	}
+	
 
 
 	@Then("^the user validates Plan Documents section")
@@ -655,11 +650,20 @@ public class BenefitsAndCoverageUmsStepDefinition {
 	}
 
 	// }
+	
+	@Then("^the user validates Needhelp header and disclaimer link")
+	public void validateneedhelpheader() {
+		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario()
+				.getBean(PageConstants.BENEFITS_AND_COVERAGE_PAGE);
+		benefitsCoveragePage.validateNeedhelpheader();
+	}
+	
 	@Then("^the user validates contactus section")
 	public void validatecontactussection() {
 		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario()
 				.getBean(PageConstants.BENEFITS_AND_COVERAGE_PAGE);
 		benefitsCoveragePage.validatecontactussection();
+		benefitsCoveragePage.contactUslink();
 	}
 
 
@@ -667,9 +671,7 @@ public class BenefitsAndCoverageUmsStepDefinition {
 	public void the_user_clicks_on_Disclaimers_link() {
 		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario()
 				.getBean(PageConstants.BENEFITS_AND_COVERAGE_PAGE);
-		JSONObject benefitsandcoverageExectedJson = (JSONObject) loginScenario
-				.getBean(PlanBenefitsAndCoverageCommonConstants.BENEFITS_AND_COVERAGE_EXPECTED);
-		benefitsCoveragePage.clickOnDisclaimers(benefitsandcoverageExectedJson);
+		benefitsCoveragePage.clickOnDisclaimers();
 	}
 
 
@@ -951,7 +953,10 @@ public class BenefitsAndCoverageUmsStepDefinition {
 				.getBean(PageConstants.BENEFITS_COVERAGE_PAGE);
 		benefitsCoveragePage.validatePlanOverview();
 	}
-
+	
+	
+	
+	
 	@And("the user validates plan overview section for a Lis member")
 	public void user_validate_planOverviewLis() {
 		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario()
@@ -985,14 +990,6 @@ public void user_validate_PrimaryCareProvForHmo() {
 	BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario()
 			.getBean(PageConstants.BENEFITS_COVERAGE_PAGE);
 	benefitsCoveragePage.validatePrimaryCareProviderForGroup();
-}
-
-@And("the user validates the OutOfPocketMaximum Section")
-public void user_validate_OutOfPocketMaximum() {
-	BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario()
-			.getBean(PageConstants.BENEFITS_COVERAGE_PAGE);
-	benefitsCoveragePage.validateOutOfPocketMaximum();
 }	
-
 
 }
