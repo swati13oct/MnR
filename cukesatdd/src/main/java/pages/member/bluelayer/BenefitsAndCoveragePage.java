@@ -43,13 +43,19 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 	@FindBy(xpath = "//*[@id='planBenefitsApp']/div/div/div[2]/div[1]/div/div[4]/div[1]/span")
 	private WebElement effectiveDate;
 
-	@FindBy(xpath = "//*[@id='_content_uhcm_home_my-plans_benefits-and-coverage-page_jcr_content_overview_needhelp_tfnParplansource_teaser']/div/section/div/div[1]/div/h2")
+	@FindBy(className = "atdd-contact-us")
+	private WebElement contactUslink;
+	
+	@FindBy(className = "margin-none")
+	private WebElement Seemorewaystext;
+
+	@FindBy(className = "atdd-need-help")
 	private WebElement NeedHelpHeader;
 
-	@FindBy(xpath = "//*[@id='_content_uhcm_home_my-plans_benefits-and-coverage-page_jcr_content_overview_needhelp_tfnParplansource_teaser']/div/section/div/div[3]/div/p")
+	@FindBy(className = "margin-none")
 	private WebElement Contactussection;
 
-	@FindBy(className = "material-icons")
+	@FindBy(className = "atdd-needhelp-disclaimer-text")
 	private WebElement disclaimersLink;
 
 	@FindBy(xpath = ".//*[@id='plan_benefit_documents']/section/div/div[1]/div")

@@ -630,20 +630,6 @@ public class PlanBenefitsAndCoverageAarpStepDefinition {
 		benefitsCoveragePage.validatelabels();
 	}
 
-	@And("^the user validates the Vas section on benefits and coverage page$")
-	public void validate_VAS_section()
-	{
-		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario().getBean(
-				PageConstants.BENEFITS_COVERAGE_PAGE);
-		benefitsCoveragePage.vasSection();
-	}
-	@And("^the user clicks on Learn More button$")
-	public void click_learn_section()
-	{
-		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario().getBean(
-				PageConstants.BENEFITS_COVERAGE_PAGE);
-		benefitsCoveragePage.clickOnLearnMore();
-	}
 	
 	@And("^the user validate Value Add Service page$")
 	public void validate_Value_Add_page()
@@ -879,5 +865,84 @@ public class PlanBenefitsAndCoverageAarpStepDefinition {
 	}
 
 
+	
+	@Then("^the user validates Needhelp header and disclaimer link")
+	public void validateneedhelpheader() {
+		BenefitsAndCoveragePage benefitsnCoveragepage = (BenefitsAndCoveragePage) getLoginScenario()
+				.getBean(PageConstants.BENEFITS_AND_COVERAGE_PAGE);
+
+		benefitsnCoveragepage.validateNeedhelpheader();
+		
+	}
+	
+	@Then("^the user validates contactus section")
+	public void validatecontactussection() {
+		BenefitsAndCoveragePage benefitsnCoveragepage = (BenefitsAndCoveragePage) getLoginScenario()
+				.getBean(PageConstants.BENEFITS_AND_COVERAGE_PAGE);
+
+		benefitsnCoveragepage.validatecontactussection();
+		benefitsnCoveragepage.contactUslinkShip();
+	}
+@And("^the user validate header and text$")
+	public void validate_header_text()
+	{
+		ValueAddedServicepage valueaddedservices = (ValueAddedServicepage) getLoginScenario().getBean(
+				PageConstants.VALUE_ADDED_SERVICES);
+		valueaddedservices.validatevasheadertext();
+	}
+	
+@And("^the user validates the Vas section on benefits and coverage page$")
+	public void validate_VAS_section()
+	{
+		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario().getBean(
+				PageConstants.BENEFITS_AND_COVERAGE_PAGE);
+		benefitsCoveragePage.vasSection();
+	}
+	
+	
+	@And("^the user validates hand image under discount and services section$")
+	public void validate_hand_image()
+	{
+		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario().getBean(
+				PageConstants.BENEFITS_AND_COVERAGE_PAGE);
+		benefitsCoveragePage.handimage();
+	}
+	
+	@And("^the user validates and clicks on Learn More button$")
+	public void click_learn_section()
+	{
+		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario().getBean(
+				PageConstants.BENEFITS_AND_COVERAGE_PAGE);
+		ValueAddedServicepage valueaddedservices= benefitsCoveragePage.clickOnLearnMore();
+		if (valueaddedservices!= null) {
+		getLoginScenario().saveBean(PageConstants.VALUE_ADDED_SERVICES, valueaddedservices);
+		}
+		
+	}
+	
+
+	@And("^the user validates view more link$")
+	public void validate_viewmorelink()
+	{
+		ValueAddedServicepage valueaddedservices = (ValueAddedServicepage) getLoginScenario().getBean(
+				PageConstants.VALUE_ADDED_SERVICES);
+		valueaddedservices.validateviewmorelink();
+	}
+	
+	@And("^when the user clicks on view more link link should expand$")
+	public void validate_viewmorelinkexpand()
+	{
+		ValueAddedServicepage valueaddedservices = (ValueAddedServicepage) getLoginScenario().getBean(
+				PageConstants.VALUE_ADDED_SERVICES);
+		valueaddedservices.validateviewmorelinkexpand();
+	}
+	
+	@And("^the user validates MAIN CTA button$")
+	public void validate_maincta()
+	{
+		ValueAddedServicepage valueaddedservices = (ValueAddedServicepage) getLoginScenario().getBean(
+				PageConstants.VALUE_ADDED_SERVICES);
+		valueaddedservices.validatemainctabutton();
+	}
 
 	}
