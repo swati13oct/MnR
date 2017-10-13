@@ -1,6 +1,7 @@
 package pages.acquisition.bluelayer;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 
 import org.junit.Assert;
 import org.openqa.selenium.By;
@@ -18,20 +19,23 @@ import pages.acquisition.bluelayer.ResponsivePlanSummaryUhc;
 
 public class BLayerPlanComparePage extends UhcDriver {
 	
-	@FindBy(xpath = "//*[@id='plan-list-1']/div/div[3]/div/div[1]/div[3]/div/div/span[1]/label")	                  
+	@FindBy(xpath = "//*[@id='plan-list-1']/div/div[3]/div/div[1]/div[3]/div/div/span[1]/label")	                
 	private WebElement Plan2HMO;
+	
+	@FindBy(xpath = "//*[@id='plan-list-1']/div/div[2]/div/div[1]/div[3]/div/div/span[1]/label")	                
+	private WebElement Plan2HMO2;
 	
 	@FindBy(xpath = "//*[@id='plan-list-1']/div/div[3]/div/div[2]/div[3]/div/div/span[1]/label")	                 
 	private WebElement Plan1HMO;
 	
-/*	@FindBy(xpath = ".//*[@id='plan-list-1']/div/div[2]/div/div[2]/div[3]/div/div/span[3]/a")
-	private WebElement ComparePlansLink;*/
+	@FindBy(xpath = "//*[@id='plan-list-1']/div/div[2]/div/div[2]/div[3]/div/div/span[1]/label")	                 
+	private WebElement Plan1HMO1;
 	
 	@FindBy(xpath = "//*[@id='plan-list-1']/div/div[3]/div/div[2]/div[3]/div/div/span[3]/a")	              
-	private WebElement ComparePlansLink;
-	/*
-	@FindBy(xpath = ".//*[@id='plan-list-1']/div/div[2]/div/div[1]/div[3]/div/div/span[3]/a")
-	private WebElement ComparePlanLink;	*/
+	private WebElement ComparePlansLink;	
+	
+	@FindBy(xpath = "//*[@id='plan-list-1']/div/div[2]/div/div[2]/div[3]/div/div/span[3]/a")	                  
+	private WebElement ComparePlansLink1;	
 	
 	@FindBy(xpath = "//*[@id='plan-list-1']/div/div[3]/div/div[2]/div[3]/div/div/span[3]/a")	                 
 	private WebElement ComparePlanLink;
@@ -107,12 +111,48 @@ public class BLayerPlanComparePage extends UhcDriver {
 		/*WebDriverWait wait = new WebDriverWait(driver, 15);		 
 		WebElement element = wait.until(ExpectedConditions.elementToBeClickable(Plan2HMO));*/
 		Thread.sleep(2000);
-		Plan2HMO.click();		
-		jse.executeScript("window.scrollBy(0,600)", "");
-		Plan1HMO.click();
+		
+		/*boolean isElement1Present = true;
+		boolean isElement2Present = true;
+		boolean isElement3Present = true;
+		
+		try{       
+			Plan2HMO.click();    
+		}catch (NoSuchElementException e){
+		    isElement1Present = false;
+		}
+		if(isElement1Present == false)
+		{
+			Plan2HMO2.click();		
+		}*/
+		Plan2HMO2.click();
+		jse.executeScript("window.scrollBy(0,600)", "");		
+		Thread.sleep(2000);
+		
+		/*try{       
+			Plan1HMO.click();    
+		}catch (NoSuchElementException e){
+		    isElement2Present = false;
+		}
+		if(isElement2Present == false)
+		{
+			Plan1HMO1.click();		
+		}		*/
+		
+		Plan1HMO1.click();
 		//jse.executeScript("window.scrollBy(0,200)", "");
-		Thread.sleep(5000);
-		ComparePlansLink.click();
+		Thread.sleep(3000);
+		/*try{       
+			ComparePlansLink.click();    
+		}catch (NoSuchElementException e){
+		    isElement3Present = false;
+		}
+		if(isElement3Present == false)
+		{
+			ComparePlansLink1.click();		
+		}		*/
+		ComparePlansLink1.click();
+		
 		Thread.sleep(6000);
 		 if(driver.getTitle().contains("Our Medicare Plan Types")){
 			 return new BLayerPlanComparePage(driver);
@@ -128,12 +168,14 @@ public BLayerPlanComparePage SelectThePlan() throws InterruptedException {
 		JavascriptExecutor jse = (JavascriptExecutor)driver;
 		jse.executeScript("window.scrollBy(0,650)", "");
 		Thread.sleep(2000);
-		Plan2HMO.click();	
+		//Plan2HMO.click();	
+		Plan2HMO2.click();
 		jse.executeScript("window.scrollBy(0,650)", "");
 		/*Thread.sleep(2000);
 		Plan1HMO.click();*/
 		Thread.sleep(2000);
-		ComparePlanLink.click();
+		//ComparePlanLink.click();
+		ComparePlansLink1.click();
 		Thread.sleep(5000);
 		 if(driver.getTitle().contains("Our Medicare Plan Types")){
 			 return new BLayerPlanComparePage(driver);
