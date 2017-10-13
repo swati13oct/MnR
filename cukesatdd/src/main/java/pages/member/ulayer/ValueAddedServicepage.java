@@ -66,7 +66,8 @@ public class ValueAddedServicepage extends UhcDriver {
 	@FindBy(id=".//*[@id='collapseLargeCard1']/div/div[1]/div/div/div/a")
 	private WebElement disclaimers;
 	
-	//private PageData valueAddedservicePage; 
+	//private PageData valueAddedservicePage;
+// TODO Auto-generated method stub 
 
 	public ValueAddedServicepage(WebDriver driver) {
 		super(driver);
