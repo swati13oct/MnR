@@ -41,7 +41,7 @@ import cucumber.api.DataTable;
  * 
  * 
  */
-public class EstimateCostsUmsStepDefinition {
+public class DrugLookupUmsStepDefinition {
 
 	@Autowired
 	MRScenario loginScenario;
@@ -278,24 +278,16 @@ public class EstimateCostsUmsStepDefinition {
 		ManageDrugPage manageDrugPage = (ManageDrugPage) getLoginScenario()
 				.getBean(PageConstants.MANAGE_DRUG_PAGE);
 		SelectPharmacyPage selectPharmacyPage = manageDrugPage
-				.navigateToPharmacyPage(category);
+				.navigateToPharmacyPage();
 
 		if (selectPharmacyPage != null) {
+			selectPharmacyPage = selectPharmacyPage.selectTypeDistance(
+					pharmacyType, distance);
 			getLoginScenario().saveBean(PageConstants.SELECT_PHARMACY_PAGE,
 					selectPharmacyPage);
 			Assert.assertTrue(true);
 		}
-
-		/* Selecting pharmacyType and distance */
-		selectPharmacyPage = selectPharmacyPage.selectTypeDistance(
-				pharmacyType, distance, category);
-
-		if (selectPharmacyPage != null) {
-			getLoginScenario().saveBean(PageConstants.SELECT_PHARMACY_PAGE,
-					selectPharmacyPage);
-			Assert.assertTrue(true);
-
-		}
+		
 	}
 
 	@And("^the user selects a pharmacy from the given list in UMS site$")
@@ -308,7 +300,7 @@ public class EstimateCostsUmsStepDefinition {
 		SelectPharmacyPage selectPharmacyPage = (SelectPharmacyPage) getLoginScenario()
 				.getBean(PageConstants.SELECT_PHARMACY_PAGE);
 		ViewDrugCostPage viewDrugCostPage = selectPharmacyPage.selectPharmacy(
-				pharmacyName, category);
+				pharmacyName);
 		if (selectPharmacyPage != null) {
 		getLoginScenario().saveBean(PageConstants.SELECT_PHARMACY_PAGE,
 				selectPharmacyPage);

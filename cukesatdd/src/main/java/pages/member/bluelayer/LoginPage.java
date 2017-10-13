@@ -120,10 +120,10 @@ public class LoginPage extends UhcDriver {
 			System.out.println("Alert is not displayed");
 		}
 
-		if(currentUrl().contains("home/my-account-home.html") && category.equalsIgnoreCase("Group") || currentUrl().contains("/guest/home.html") || currentUrl().contains("/login.html"))
+		if(currentUrl().contains("home/my-account-home.html") || currentUrl().contains("/guest/home.html") || currentUrl().contains("/login.html"))
 
 		{
-			return new AccountHomePage(driver,category);
+			return new AccountHomePage(driver);
 		}
 		else if(currentUrl().contains("home/my-account-home.html") && category.equalsIgnoreCase("Individual") || currentUrl().contains("/login.html") ) {
 			return new AccountHomePage(driver, category);

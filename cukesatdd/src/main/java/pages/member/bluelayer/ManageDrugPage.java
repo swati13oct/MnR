@@ -27,16 +27,19 @@ import atdd.framework.UhcDriver;
  */
 public class ManageDrugPage extends UhcDriver {
 
-	@FindBy(linkText = "add a drug")
+	@FindBy(xpath = ".//*[@id='dceMemberUlayer']/div/div[1]/div[2]/div[5]/a[1]/span")
 	private WebElement addDrugLink;
+	
+	@FindBy(xpath = ".//*[@id='dceMemberUlayer']/div/div[1]/div[2]/div[5]/a[2]/span")
+	private WebElement selectPharmacyBtn;
 
 	@FindBy(linkText = "Delete")
 	private WebElement deleteLink;
 
-	@FindBy(xpath = "//div[@id='dce.member']/div/div[5]/div/div/form/div/div/div[1]/div[2]/p")
+	@FindBy(xpath = ".//*[@id='dceMemberUlayer']/div/div[1]/div[2]/p")
 	private WebElement pharmacyHeading;
 
-	@FindBy(xpath = "//div[@id='dce.member']/div/div[4]/div/div/div/div/div[2]")
+	@FindBy(xpath = ".//*[@id='dceMemberUlayer']/div/div[1]/div[1]/h3[2]")
 	private WebElement searchPharmacyTab;
 
 	@FindBy(name = "drugname")
@@ -263,25 +266,23 @@ public class ManageDrugPage extends UhcDriver {
 			return null;
 
 	}
-	public SelectPharmacyPage navigateToPharmacyPage(String category) {
+	public SelectPharmacyPage navigateToPharmacyPage() {
 
-		searchPharmacyTab.click();
+		selectPharmacyBtn.click();
 		try {
 			Thread.sleep(5000);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		if (pharmacyHeading.getText().contains("select a pharmacy") && category.equalsIgnoreCase(CommonConstants.GROUP)) {
-			return new SelectPharmacyPage(driver,category);
-		}
-		else if(pharmacyHeading.getText().contains("select a pharmacy"))
-		{
+		
+		if(pharmacyHeading.getText().contains("Please select a pharmacy"))
 			return new SelectPharmacyPage(driver);
-		}
+		
 		return null;
 
 	}
+	
 	public boolean validateDrugListSection(){
 		boolean flag = false;
 		try {
@@ -290,11 +291,8 @@ public class ManageDrugPage extends UhcDriver {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		for(int i=1; i<=3; i++){                               
-			WebElement tabElement= driver.findElement(By.xpath(".//*[@id='dce.member']/div/div[4]/div/div/div[1]/div[1]/div["+i+"]"));
-			System.out.println("Element "+i+": "+tabElement.getText());
-		}
-		if(validate(addDrugLink)&&validate(viewDrugCostTab)&&validate(searchPharmacyTab)&&validate(drugListTab))
+	
+		if(validate(addDrugLink)&&validate(selectPharmacyBtn))
 			flag = true;
 		return flag;
 	}
@@ -304,6 +302,15 @@ public class ManageDrugPage extends UhcDriver {
 			return true;
 		else
 			return false;
+	}
+
+	public ViewDrugCostPage navigateToViewDrugCostPage() {
+		viewDrugCostButton.click();
+		if (driver.getTitle().equalsIgnoreCase("Drug Cost Estimator")) {
+			return new ViewDrugCostPage(driver);
+		}
+		return null;
+
 	}
 
 }

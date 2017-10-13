@@ -73,7 +73,7 @@ public class SelectPharmacyPage extends UhcDriver {
 		System.out.println("filename"+fileName);
 		selectPharmacy = CommonUtility.readPageData(fileName,
 				CommonConstants.PAGE_OBJECT_DIRECTORY_BLUELAYER_MEMBER);
-		openAndValidate();
+		//openAndValidate();
 	}
 
 	public SelectPharmacyPage(WebDriver driver, String category) {
@@ -87,7 +87,7 @@ public class SelectPharmacyPage extends UhcDriver {
 	}
 
 	public SelectPharmacyPage selectTypeDistance(String pharmacyType,
-			String distance, String category) {
+			String distance) {
 
 		List<WebElement> pharmacies = pharmacyOptions.findElements(By
 				.tagName("input"));
@@ -102,16 +102,13 @@ public class SelectPharmacyPage extends UhcDriver {
 
 		select(distances, distance);
 
-		if (pharmacyHeading.getText().contains("select a pharmacy") && category.equalsIgnoreCase(CommonConstants.GROUP)) {
-			return new SelectPharmacyPage(driver,category);
-		}
-		else if(pharmacyHeading.getText().contains("select a pharmacy")){
+		 if(pharmacyHeading.getText().contains("select a pharmacy")){
 			return new SelectPharmacyPage(driver);
 		}
 		return null;
 	}
 
-	public ViewDrugCostPage selectPharmacy(String pharmacyName, String category) {
+	public ViewDrugCostPage selectPharmacy(String pharmacyName) {
 
 		CommonUtility.waitForPageLoad(driver, pharmacyTable,CommonConstants.TIMEOUT_30);
 		List<WebElement> pharmacyRows = pharmacyTable.findElements(By
@@ -145,13 +142,9 @@ public class SelectPharmacyPage extends UhcDriver {
 						e.printStackTrace();
 					}
 				}
-
-				if(category.equalsIgnoreCase(CommonConstants.GROUP)){
-					return new ViewDrugCostPage(driver,category);
-				}
-				else{
+				
 					return new ViewDrugCostPage(driver);
-				}
+				
 
 			}
 		}

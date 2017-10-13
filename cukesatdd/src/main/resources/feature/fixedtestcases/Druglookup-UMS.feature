@@ -1,6 +1,6 @@
-@druglookup1
-Feature: To test estimate drug cost flow in UMS site
-@dceBlayer
+@druglookupUms
+Feature: 1.26-DCE (Member) To test drug search on UMS site
+
 Scenario Outline: Verify drug cost information in UMS site
 Given registered UHC member with following details for estimate drug cost
 	| Plan Type   | <planType> |
@@ -26,4 +26,4 @@ Then user will validate the view Drug cost page in UMS site
 		| Drug Dosage    | <drugDosage>    |
 Examples:
 		| planType  |  memberType    | drugInitials | drugName     | drugDosage             | drugQuantity | drugFrequency  | packages                          | lowCostOpt    | pharmacyType                | distance       | pharmacyName                     | planYear |
-		| MAPD      | Individual      |   lipi       | Lipistart      | Lipistart POW       | 1          | Every 1 month  | 400.0GM Can(sold in a package of 1) | Generic	     | Standard Network Pharmacy   | 15 miles       | CVS PHARMACY 		           | 2016     |
+		| MAPD      | COSMOS_dce      |   lipi       | Lipistart      | Lipistart POW       | 1          | Every 1 month  | 400.0GM Can(sold in a package of 1) | Generic	     | Standard Network Pharmacy   | 15 miles       | CVS PHARMACY 		           | 2016     |

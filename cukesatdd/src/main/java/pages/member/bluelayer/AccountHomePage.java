@@ -319,8 +319,7 @@ private WebElement searchforproviderlinkinClaimsPage;
 	public AccountHomePage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
-		System.out.println("Validation: ");validate(searchMedicalClaims);
-		openAndValidate();
+//		openAndValidate();
 	}
 
 	public String getMyPlans() {
