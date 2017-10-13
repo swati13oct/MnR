@@ -341,12 +341,20 @@ public class VPPPlanSummaryPage extends UhcDriver {
 
 
 	public VPPPlanSummaryPage viewPlanSummary(String planType) {
+		try {
+			Thread.sleep(8000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		if (planType.equalsIgnoreCase("PDP")) {
 			showPdpPlans.click();
 			//validate(hidePdpPlans);
 		} else if (planType.equalsIgnoreCase("MA")
 				|| planType.equalsIgnoreCase("MAPD")) {
+			System.out.println("before showMaPlans click");
 			showMaPlans.click();
+			System.out.println("after showMaPlans click");
 			//validate(hideMaPlans);
 		} else if (planType.equalsIgnoreCase("MS")) {
 			showMsPlans.click();
@@ -444,7 +452,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		if (planName.contains("HMO")) {
 			System.out.println("Entered the plan");
 			for(int i=1; i<=maValue; i++){
-				WebElement maPlanElement= driver.findElement(By.xpath(".//*[@id='plan-list-1']/div/div[3]/div/div["+i+"]"));
+				WebElement maPlanElement= driver.findElement(By.xpath(".//*[@id='plan-list-1']/div/div[2]/div/div["+i+"]"));
 				String maPlanText = maPlanElement.getText();
 				System.out.println("MA Plan text "+ maPlanText);
 				if (maPlanText.contains(planName)) {

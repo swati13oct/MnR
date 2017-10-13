@@ -1,7 +1,7 @@
 @member_redesign
 Feature:Header/Navigation for Member Site Redesign
 
-@member_redesign_header
+@member_redesign_header_ums
 Scenario Outline:As an authenticated member on the new Member site, I want to check the L1 and L2 tabs and its navigation.
 Given I am a authenticated member on the member redesign site
 | Plan Type   | <planType>   |
