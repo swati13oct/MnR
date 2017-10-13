@@ -698,12 +698,6 @@ public static final String disclaimertextarea_xpath = "//*[@id='collapseDisclaim
 		validateNew(BloodPackedRedBloodCellsPartB);
 		validateNew(EmergencyCare);
 
-		try {
-			Thread.sleep(10000);
-		} catch (InterruptedException e) {
-			System.out.println("Inside catch");
-			e.printStackTrace();
-		}
 
 	}
 	
@@ -716,7 +710,7 @@ public static final String disclaimertextarea_xpath = "//*[@id='collapseDisclaim
 	validateNew(memberID);
 	validateNew(effective_Date);
 	//validateNew(Monthly_Premium);
-	validateNew(MakePaymentButton);
+	//validateNew(MakePaymentButton);
 		
 	}
 	
@@ -760,7 +754,7 @@ public static final String disclaimertextarea_xpath = "//*[@id='collapseDisclaim
 		validateNew(effective_Date);
 		//validateNew(Monthly_Premium);
 		validateNew(ExtraHelp);
-		validateNew(MakePaymentButton);
+		//validateNew(MakePaymentButton);
 
 
 	}

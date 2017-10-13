@@ -667,7 +667,7 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 		validateNew(memberID);
 		validateNew(effective_Date);
 		//validateNew(Monthly_Premium);
-		validateNew(MakePaymentButton);
+		//validateNew(MakePaymentButton);
 
 	}
 
@@ -678,7 +678,7 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 		validateNew(effective_Date);
 		//validateNew(Monthly_Premium);
 		 validateNew(ExtraHelp);
-		 validateNew(MakePaymentButton);
+		// validateNew(MakePaymentButton);
 
 	}
 
