@@ -19,17 +19,19 @@ import pages.acquisition.bluelayer.ResponsivePlanSummaryUhc;
 
 public class BLayerPlanComparePage extends UhcDriver {
 	
-	@FindBy(xpath = "//*[@id='plan-list-1']/div/div[3]/div/div[1]/div[3]/div/div/span[1]/label")	                
+//	@FindBy(xpath = "//*[@id='plan-list-1']/div/div[3]/div/div[1]/div[3]/div/div/span[1]/label")
+	@FindBy(xpath = "(//label[contains(text(),'Add to compare')])[2]")
 	private WebElement Plan2HMO;
 	
-	@FindBy(xpath = "//*[@id='plan-list-1']/div/div[2]/div/div[1]/div[3]/div/div/span[1]/label")	                
-	private WebElement Plan2HMO2;
+//	@FindBy(xpath = "//*[@id='plan-list-1']/div/div[2]/div/div[1]/div[3]/div/div/span[1]/label")	                
+//	private WebElement Plan2HMO2;
 	
-	@FindBy(xpath = "//*[@id='plan-list-1']/div/div[3]/div/div[2]/div[3]/div/div/span[1]/label")	                 
+//	@FindBy(xpath = "//*[@id='plan-list-1']/div/div[3]/div/div[2]/div[3]/div/div/span[1]/label")
+	@FindBy(xpath = "(//label[contains(text(),'Add to compare')])[1]")
 	private WebElement Plan1HMO;
 	
-	@FindBy(xpath = "//*[@id='plan-list-1']/div/div[2]/div/div[2]/div[3]/div/div/span[1]/label")	                 
-	private WebElement Plan1HMO1;
+//	@FindBy(xpath = "//*[@id='plan-list-1']/div/div[2]/div/div[2]/div[3]/div/div/span[1]/label")	                 
+//	private WebElement Plan1HMO1;
 	
 	@FindBy(xpath = "//*[@id='plan-list-1']/div/div[3]/div/div[2]/div[3]/div/div/span[3]/a")	              
 	private WebElement ComparePlansLink;	
@@ -125,7 +127,7 @@ public class BLayerPlanComparePage extends UhcDriver {
 		{
 			Plan2HMO2.click();		
 		}*/
-		Plan2HMO2.click();
+		Plan2HMO.click();
 		jse.executeScript("window.scrollBy(0,600)", "");		
 		Thread.sleep(2000);
 		
@@ -139,7 +141,7 @@ public class BLayerPlanComparePage extends UhcDriver {
 			Plan1HMO1.click();		
 		}		*/
 		
-		Plan1HMO1.click();
+		Plan1HMO.click();
 		//jse.executeScript("window.scrollBy(0,200)", "");
 		Thread.sleep(3000);
 		/*try{       
@@ -169,7 +171,7 @@ public BLayerPlanComparePage SelectThePlan() throws InterruptedException {
 		jse.executeScript("window.scrollBy(0,650)", "");
 		Thread.sleep(2000);
 		//Plan2HMO.click();	
-		Plan2HMO2.click();
+		Plan2HMO.click();
 		jse.executeScript("window.scrollBy(0,650)", "");
 		/*Thread.sleep(2000);
 		Plan1HMO.click();*/
