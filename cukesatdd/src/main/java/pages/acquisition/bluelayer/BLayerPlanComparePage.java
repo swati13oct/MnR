@@ -144,7 +144,7 @@ public class BLayerPlanComparePage extends UhcDriver {
 		
 		Plan1HMO.click();
 		//jse.executeScript("window.scrollBy(0,200)", "");
-		Thread.sleep(3000);
+		Thread.sleep(10000);
 		/*try{       
 			ComparePlansLink.click();    
 		}catch (NoSuchElementException e){
@@ -176,7 +176,7 @@ public BLayerPlanComparePage SelectThePlan() throws InterruptedException {
 		jse.executeScript("window.scrollBy(0,650)", "");
 		/*Thread.sleep(2000);
 		Plan1HMO.click();*/
-		Thread.sleep(4000);
+		Thread.sleep(10000);
 		//ComparePlanLink.click();
 		ComparePlansLink.click();
 		Thread.sleep(5000);
