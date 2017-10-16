@@ -33,9 +33,9 @@ public class BLayerPlanComparePage extends UhcDriver {
 //	@FindBy(xpath = "//*[@id='plan-list-1']/div/div[2]/div/div[2]/div[3]/div/div/span[1]/label")	                 
 //	private WebElement Plan1HMO1;
 	
-	@FindBy(xpath = "//*[@id='plan-list-1']/div/div[2]/div/div[2]/div[3]/div/div/span[3]/a")
-//	@FindBy(xpath = "(.//a[contains(text(),'Compare plans')])[2]")
-	private WebElement ComparePlansLink;	
+//	@FindBy(xpath = "//*[@id='plan-list-1']/div/div[2]/div/div[2]/div[3]/div/div/span[3]/a")
+	@FindBy(xpath = "(//a[@class='compare-link'])[11]")
+	private WebElement ComparePlansLink;
 	
 //	@FindBy(xpath = "//*[@id='plan-list-1']/div/div[3]/div/div[2]/div[3]/div/div/span[3]/a")	                  
 //	private WebElement ComparePlansLink1;	
