@@ -6,8 +6,8 @@ Given registered AMP user with following attributes for drug search
       | <planType> |   
       | <category> |           		
 When the user navigates to drug search in AARP site	
-And the user selects the plan and clicks on continue
-	 |Plan Name | <planName> |
+#And the user selects the plan and clicks on continue
+#	 |Plan Name | <planName> |
 And the user search the drug with drugInitials in AARP site
       | <drugInitials> |
 And the user selects drugName in the drug list in AARP site

@@ -273,8 +273,6 @@ public class DrugLookupUmsStepDefinition {
 		getLoginScenario().saveBean(DceCommonConstants.PHARMACYTYPE, pharmacyType);
 		String distance = pharmacyAttributesMap.get("Distance");
 
-		String category = (String) getLoginScenario().getBean(
-				DceCommonConstants.CATEGORY);
 		ManageDrugPage manageDrugPage = (ManageDrugPage) getLoginScenario()
 				.getBean(PageConstants.MANAGE_DRUG_PAGE);
 		SelectPharmacyPage selectPharmacyPage = manageDrugPage
@@ -293,14 +291,13 @@ public class DrugLookupUmsStepDefinition {
 	@And("^the user selects a pharmacy from the given list in UMS site$")
 	public void user_selects_pharmacies(DataTable pharmacyNameAttribute) {
 
-		String pharmacyName = pharmacyNameAttribute.getGherkinRows().get(0)
-				.getCells().get(0);
-		String category = (String) getLoginScenario().getBean(
-				DceCommonConstants.CATEGORY);
+		String zipcode = pharmacyNameAttribute.getGherkinRows().get(1)
+				.getCells().get(1);
 		SelectPharmacyPage selectPharmacyPage = (SelectPharmacyPage) getLoginScenario()
 				.getBean(PageConstants.SELECT_PHARMACY_PAGE);
-		ViewDrugCostPage viewDrugCostPage = selectPharmacyPage.selectPharmacy(
-				pharmacyName);
+		selectPharmacyPage.changeZipcode(zipcode);
+		selectPharmacyPage.selectPharmacy();
+		ViewDrugCostPage viewDrugCostPage = selectPharmacyPage.navigateToStep3();
 		if (selectPharmacyPage != null) {
 		getLoginScenario().saveBean(PageConstants.SELECT_PHARMACY_PAGE,
 				selectPharmacyPage);

@@ -266,6 +266,9 @@ public class ManageDrugPage extends UhcDriver {
 			return null;
 
 	}
+	@FindBy(xpath = ".//*[@id='dceMemberUlayer']/div/div[1]/div[2]/div[2]/div[1]/input")
+	private WebElement standardradiobtn;
+	
 	public SelectPharmacyPage navigateToPharmacyPage() {
 
 		selectPharmacyBtn.click();
@@ -276,7 +279,7 @@ public class ManageDrugPage extends UhcDriver {
 			e.printStackTrace();
 		}
 		
-		if(pharmacyHeading.getText().contains("Please select a pharmacy"))
+		if(validate(standardradiobtn))
 			return new SelectPharmacyPage(driver);
 		
 		return null;

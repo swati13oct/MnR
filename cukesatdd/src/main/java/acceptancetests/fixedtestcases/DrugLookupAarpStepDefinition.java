@@ -277,34 +277,28 @@ public class DrugLookupAarpStepDefinition {
 				.navigateToPharmacyPage();		
 
 		if (selectPharmacyPage != null) {
+			selectPharmacyPage = selectPharmacyPage.selectTypeDistance(
+					pharmacyType, distance);
 			getLoginScenario().saveBean(PageConstants.SELECT_PHARMACY_PAGE,
 					selectPharmacyPage);
 			Assert.assertTrue(true);
 			
 		}		
-		/* Selecting pharmacyType and distance */
-		selectPharmacyPage = selectPharmacyPage.selectTypeDistance(
-				pharmacyType, distance);
-		
-		if (selectPharmacyPage != null) {
-			getLoginScenario().saveBean(PageConstants.SELECT_PHARMACY_PAGE,
-					selectPharmacyPage);
-			Assert.assertTrue(true);
-		}
 
 	}
 
 	@And("^the user selects a pharmacy from the list of pharmacies in AARP site$")
 	public void user_selects_pharmacies(DataTable pharmacyNameAttribute) {
-		String pharmacyName = pharmacyNameAttribute.getGherkinRows().get(0)
-				.getCells().get(0);
+		String zipcode = pharmacyNameAttribute.getGherkinRows().get(0)
+				.getCells().get(1);
 
 		String planType = (String) getLoginScenario().getBean(
 				CommonConstants.PLAN_TYPE);
 		SelectPharmacyPage selectPharmacyPage = (SelectPharmacyPage) getLoginScenario()
 				.getBean(PageConstants.SELECT_PHARMACY_PAGE);
-		ViewDrugCostPage viewDrugCostPage = selectPharmacyPage.selectPharmacy(
-				pharmacyName,planType);		
+		selectPharmacyPage.changeZipcode(zipcode);
+		selectPharmacyPage.selectPharmacy();
+		ViewDrugCostPage viewDrugCostPage = selectPharmacyPage.navigateToStep3();	
 
 		
 		if (viewDrugCostPage != null) {

@@ -17,13 +17,13 @@ And the user selects the following drug dosage information in UMS site
 		| Packages       | <packages>      |
 #And the user selects the low cost options in UMS site
 #		| <lowCostOpt> |
-And the user selects the pharmacy type and the distance in UMS site
+And the user selects the pharmacy type and the distance in UMS site	
 		| Pharmacy Type | <pharmacyType> |
 		| Distance      | <distance>     |
 And the user selects a pharmacy from the given list in UMS site
- 		| <pharmacyName> |
+ 		| Zipcode     | <zipcode> |
 Then user will validate the view Drug cost page in UMS site
 		| Drug Dosage    | <drugDosage>    |
 Examples:
-		| planType  |  memberType    | drugInitials | drugName     | drugDosage             | drugQuantity | drugFrequency  | packages                          | lowCostOpt    | pharmacyType                | distance       | pharmacyName                     | planYear |
-		| MAPD      | COSMOS_dce      |   lipi       | Lipistart      | Lipistart POW       | 1          | Every 1 month  | 400.0GM Can(sold in a package of 1) | Generic	     | Standard Network Pharmacy   | 15 miles       | CVS PHARMACY 		           | 2016     |
+		| planType  |  memberType    | drugInitials | drugName     | drugDosage             | drugQuantity | drugFrequency  | packages                          | lowCostOpt    | pharmacyType                | distance       | zipcode                     | planYear |
+		| MAPD      | COSMOS_dce      |   lipi       | Lipistart      | Lipistart POW       | 1          | Every 1 month  | 400.0GM Can(sold in a package of 1) | Generic	     | Standard Network Pharmacy   | 15 miles       | 90210 		           | 2016     |

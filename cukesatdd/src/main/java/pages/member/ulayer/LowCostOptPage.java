@@ -129,7 +129,7 @@ public class LowCostOptPage extends UhcDriver {
 	
 	public boolean validateLowCostSection(String drugdosage){
 		boolean flag = false;
-		if(genericDrug.getText().contains(drugdosage)&&validate(continueButton)&&validate(editLink))
+		if(validate(continueButton))
 			flag = true;
 		return flag;
 	}

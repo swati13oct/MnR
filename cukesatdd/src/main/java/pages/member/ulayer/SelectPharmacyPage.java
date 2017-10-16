@@ -17,6 +17,7 @@ import acceptancetests.atdd.data.CommonConstants;
 import acceptancetests.atdd.data.PageData;
 import acceptancetests.atdd.util.CommonUtility;
 import atdd.framework.UhcDriver;
+import pages.member.ulayer.ViewDrugCostPage;
 
 /**
  * @author pagarwa5
@@ -115,14 +116,14 @@ public class SelectPharmacyPage extends UhcDriver {
 					if(validate(planYear2017)){
 						planYear2017.click();
 					}
-					return new ViewDrugCostPage(driver,planType);
+					return new ViewDrugCostPage(driver);
 
 				} else {
 					viewDrugCostTab2.click();
 					if(validate(planYear2017)){
 						planYear2017.click();
 					}
-					return new ViewDrugCostPage(driver,planType);
+					return new ViewDrugCostPage(driver);
 				}
 
 			}
@@ -216,6 +217,49 @@ public class SelectPharmacyPage extends UhcDriver {
 		
 		System.out.println("selectPharmacyJson----->"+selectPharmacyJson);
 
+	}
+	@FindBy(xpath = ".//*[@id='dceMemberUlayer']/div/div[1]/div[2]/div[2]/div[5]/a[1]")
+	private WebElement zipcodeLink;
+	
+	@FindBy(xpath = ".//*[@id='dceMemberUlayer']/div/div[1]/div[2]/div[2]/div[5]/a[2]/span")
+	private WebElement enterZipBtn;
+	
+	@FindBy(xpath = ".//*[@id='dceMemberUlayer']/div/div[1]/div[2]/div[2]/div[5]/span[3]/input")
+	private WebElement zipcodeField;
+	
+	@FindBy(xpath = ".//*[@id='dceMemberUlayer']/div/div[1]/div[2]/div[2]/div[7]/table/tbody/tr[2]/td[5]/a/span")
+	private WebElement select_first_btn;
+	
+	@FindBy(xpath = ".//*[@id='dceMemberUlayer']/div/div[1]/div[2]/div[5]/a[3]/span")
+	private WebElement viewDrugCostBtn;
+	
+	@FindBy(xpath = ".//*[@id='dceMemberUlayer']/div/div[1]/div[3]/div[2]/table/tbody/tr[2]/td[1]")
+	private WebElement descBox;
+	
+	public void selectPharmacy(){
+		if(select_first_btn.isDisplayed())
+			select_first_btn.click();
+	}
+	
+	public ViewDrugCostPage navigateToStep3(){
+		viewDrugCostBtn.click();
+		if(descBox.getText().contains("Total estimated annual drug costs"))
+			return new ViewDrugCostPage(driver);
+		return null;
+	}
+	
+	public void changeZipcode(String zipcode) {
+		zipcodeLink.click();
+		zipcodeField.click();
+		zipcodeField.sendKeys(zipcode);
+		enterZipBtn.click();
+		try {
+			Thread.sleep(3000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 	}
 
 }

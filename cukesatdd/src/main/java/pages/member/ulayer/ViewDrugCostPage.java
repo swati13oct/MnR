@@ -46,20 +46,12 @@ public class ViewDrugCostPage extends UhcDriver {
 
 	public JSONObject viewDrugCostJson;
 
-	public ViewDrugCostPage(WebDriver driver, String planType) {
+	public ViewDrugCostPage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
-		CommonUtility.waitForPageLoad(driver, drugCostContent, CommonConstants.TIMEOUT_30);
-		String fileName = null;
-		if (planType.equalsIgnoreCase("PDP")) {
-			fileName = CommonConstants.VIEW_DRUG_COST_PDP_PAGE_DATA;
-		}
-		if (planType.equalsIgnoreCase("MAPD")) {
-			fileName = CommonConstants.VIEW_DRUG_COST_MAPD_PAGE_DATA;
-		}
-		viewDrugCost = CommonUtility.readPageData(fileName,
-				CommonConstants.PAGE_OBJECT_DIRECTORY_ULAYER_MEMBER);
-		openAndValidate();
+		
+	
+		//openAndValidate();
 	}
 
 	public ManageDrugPage editDrugList() {

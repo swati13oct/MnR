@@ -59,6 +59,9 @@ public class SelectPharmacyPage extends UhcDriver {
 	@FindBy(linkText = "select")
 	private WebElement selectPharmacyButton;
 	
+	@FindBy(xpath = ".//*[@id='dceMemberUlayer']/div/div[1]/div[2]/div[5]/a[3]/span")
+	private WebElement viewDrugCostBtn;
+	
 	@FindBy(xpath = "//*[@id='dceMemberUlayer']/div/div[1]/div[3]/div[2]/table/tbody/tr[2]/td[3]/div")
 	private WebElement drugCostsValue;
 	
@@ -149,6 +152,45 @@ public class SelectPharmacyPage extends UhcDriver {
 			}
 		}
 		return null;
+	}
+	@FindBy(xpath = ".//*[@id='dceMemberUlayer']/div/div[1]/div[2]/div[2]/div[5]/a[1]")
+	private WebElement zipcodeLink;
+	
+	@FindBy(xpath = ".//*[@id='dceMemberUlayer']/div/div[1]/div[2]/div[2]/div[5]/a[2]/span")
+	private WebElement enterZipBtn;
+	
+	@FindBy(xpath = ".//*[@id='dceMemberUlayer']/div/div[1]/div[2]/div[2]/div[5]/span[3]/input")
+	private WebElement zipcodeField;
+	
+	@FindBy(xpath = ".//*[@id='dceMemberUlayer']/div/div[1]/div[2]/div[2]/div[7]/table/tbody/tr[2]/td[5]/a/span")
+	private WebElement select_first_btn;
+	
+	public void selectPharmacy(){
+		if(select_first_btn.isDisplayed())
+			select_first_btn.click();
+	}
+	@FindBy(xpath = ".//*[@id='dceMemberUlayer']/div/div[1]/div[3]/div[2]/table/tbody/tr[2]/td[1]")
+	private WebElement descBox;
+	
+	public ViewDrugCostPage navigateToStep3(){
+		viewDrugCostBtn.click();
+		if(descBox.getText().contains("Total estimated annual drug costs"))
+			return new ViewDrugCostPage(driver);
+		return null;
+	}
+	public void changeZipcode(String zipcode){
+		zipcodeLink.click();
+		zipcodeField.click();
+		zipcodeField.sendKeys(zipcode);
+		enterZipBtn.click();
+		try {
+			Thread.sleep(3000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
 	}
 
 

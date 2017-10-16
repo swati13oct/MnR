@@ -28,8 +28,11 @@ import atdd.framework.UhcDriver;
  */
 public class ManageDrugPage extends UhcDriver {
 
-	@FindBy(linkText = "add a drug")
+	@FindBy(xpath = ".//*[@id='dceMemberUlayer']/div/div[1]/div[2]/div[5]/a[1]/span")
 	private WebElement addDrugLink;
+	
+	@FindBy(xpath = ".//*[@id='dceMemberUlayer']/div/div[1]/div[2]/div[5]/a[2]/span")
+	private WebElement selectPharmacyBtn;
 
 	@FindBy(linkText = "Delete")
 	private WebElement deleteLink;
@@ -49,13 +52,15 @@ public class ManageDrugPage extends UhcDriver {
 	@FindBy(xpath = "//div[@id='dce.member']/div/div[3]/div/div/div/div[5]/p")
 	private WebElement dosagePageText;
 	
-
+	@FindBy(xpath = ".//*[@id='dceMemberUlayer']/div/div[1]/div[2]/div[2]/div[1]/input")
+	private WebElement standardRadioBtn;
+	
 	@FindBy(xpath = "//div[@id='dce.member']/div/div[6]/div/div/form/div/div/div/div[2]/p")
 	private WebElement pharmacyPageHeading;
 
 	@FindBy(xpath = ".//*[@id='dceMemberUlayer']/div/div[1]/div[1]/div[2]")
 	WebElement pharmacyTab;
-
+	
 	@FindBy(id = "disclosure_link")
 	private WebElement logOut;
 	
@@ -143,7 +148,7 @@ public class ManageDrugPage extends UhcDriver {
 	public ViewDrugCostPage navigateToViewDrugCostPage() {
 		viewDrugCostButton.click();
 		if (driver.getTitle().equalsIgnoreCase("Drug Lookup")) {
-			return new ViewDrugCostPage(driver,null);
+			return new ViewDrugCostPage(driver);
 		} else {
 			return null;
 		}
@@ -164,18 +169,18 @@ public class ManageDrugPage extends UhcDriver {
 	}
 
 	public SelectPharmacyPage navigateToPharmacyPage() {
-		if(!pharmacyPageHeading.getText().contains("select a pharmacy")){
-			pharmacyTab.click();
+		
+			selectPharmacyBtn.click();
 			try {
 				Thread.sleep(5000);
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-		}
-		if (pharmacyPageHeading.getText().contains("select a pharmacy")) {
+		if (validate(standardRadioBtn)) 
 			return new SelectPharmacyPage(driver);
-		}
+		
+		
 		return null;
 
 	}
@@ -336,7 +341,7 @@ public class ManageDrugPage extends UhcDriver {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		if(validate(pharmacyTab)&&validate(viewDrugCostTab)&& validate(drugListTab))
+		if(validate(addDrugLink)&&validate(selectPharmacyBtn))
 			return true;
 		return false;
 	}
