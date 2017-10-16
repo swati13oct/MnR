@@ -55,7 +55,7 @@ public class ProfilePreferencesPage extends UhcDriver {
 	@FindBy(xpath = "/.//*[@id='password']/div/div/span[2]")
 	private WebElement Password;
 
-	@FindBy(xpath = ".//*[@id='password']/div/div/span[1]/p")
+	@FindBy(xpath = ".//*[@id='password']/div/div/span[1]/b")
 	private WebElement Passwordtext;
 
     @FindBy(id="Artwork")
@@ -112,7 +112,7 @@ public class ProfilePreferencesPage extends UhcDriver {
 	@FindBy(xpath = "//*[@id='tab-1']/div[2]/div[1]/div/div[1]/div[1]/div/div/div/div[2]/div[2]/div/div/span[2]")
 	private WebElement EmailValue;
 
-	@FindBy(xpath = "html/body/div[3]/div[3]/div[1]/div[2]/div/div[2]/section/div/div[3]/div/p")
+	@FindBy(className = "margin-none")
 	private WebElement Seemorewaystext;
 
 	@FindBy(className = "atdd-contact-us")
@@ -124,10 +124,10 @@ public class ProfilePreferencesPage extends UhcDriver {
 	@FindBy(xpath = "html/body/div[5]/div/div/div/div/a")
 	private WebElement Disclaimerlink;
 
-	@FindBy(xpath = "html/body/div[3]/div[3]/div[1]/div[2]/div/div[2]/section/div/div[2]/div/div/div[1]/div/div")
+	@FindBy(className = "atdd-techsupport-block")
 	private WebElement Technicalsupportsection;
 
-	@FindBy(xpath = "html/body/div[3]/div[3]/div[1]/div[2]/div/div[2]/section/div/div[2]/div/div/div[2]/div/div")
+	@FindBy(className = "atdd-plansupport-block")
 	private WebElement PlanSupportsection;
 
 	public static final String Disclaimerlinkcontent_xpath = ".//*[@id='collapseDisclaimer']";
