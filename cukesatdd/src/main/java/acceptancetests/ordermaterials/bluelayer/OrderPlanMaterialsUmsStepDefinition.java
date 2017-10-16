@@ -21,7 +21,9 @@ import org.skyscreamer.jsonassert.JSONAssert;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import pages.redesign.BlueLayerHomePage;
-import pages.redesign.BlueLayerLoginPage;
+import pages.redesign.RedesignLoginPage;
+//import pages.redesign.BlueLayerLoginPage;
+
 import pages.redesign.OrderplanmaterialsPage;
 import pages.redesign.PlanMaterialConfirmationPage;
 import acceptancetests.atdd.data.CommonConstants;
@@ -98,7 +100,7 @@ public class OrderPlanMaterialsUmsStepDefinition {
 		
 		WebDriver wd = getLoginScenario().getWebDriver();
 
-		BlueLayerLoginPage loginPage = new BlueLayerLoginPage(wd);
+		RedesignLoginPage loginPage = new RedesignLoginPage(wd);
 		BlueLayerHomePage accountHomePage = (BlueLayerHomePage)loginPage.loginWith(userName, pwd, category);
 		//JSONObject accountHomeActualJson = null;
 		
@@ -188,6 +190,7 @@ public class OrderPlanMaterialsUmsStepDefinition {
 		
 			getLoginScenario().saveBean(PageConstants.ORDER_PLAN_MATERIALS_PAGE,
 					orderPlanMaterialsPage);
+			System.out.println("@@@@ Order Plan Materials Page is Loaded @@@@");
 			Assert.assertTrue(true);
 		}
 		else {

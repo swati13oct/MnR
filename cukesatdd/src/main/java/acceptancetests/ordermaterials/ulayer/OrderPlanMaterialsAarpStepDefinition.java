@@ -26,6 +26,7 @@ import pages.redesign.UlayerHomePage;
 import pages.redesign.UlayerLoginPage;
 import pages.redesign.OrderplanmaterialsPage;
 import pages.redesign.PlanMaterialConfirmationPage;
+import pages.redesign.RedesignLoginPage;
 import acceptancetests.atdd.data.CommonConstants;
 import acceptancetests.atdd.data.member.PageConstants;
 import acceptancetests.claims.data.ClaimsCommonConstants;
@@ -111,7 +112,7 @@ public class OrderPlanMaterialsAarpStepDefinition {
 		WebDriver wd = getLoginScenario().getWebDriver();
 		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
 		JSONObject accountHomeActualJson = null;
-		UlayerLoginPage loginPage = new UlayerLoginPage(wd);
+		RedesignLoginPage loginPage = new RedesignLoginPage(wd);
 
 		UlayerHomePage accountHomePage = (UlayerHomePage)loginPage.loginWith(userName, pwd);
 		if (accountHomePage != null) {
@@ -119,33 +120,8 @@ public class OrderPlanMaterialsAarpStepDefinition {
 			Assert.assertTrue(true);
 		}
 		else {
-			Assert.fail("***** Error in loading  Test Harness Account Landing Page *****");
+			Assert.fail("***** Error in loading  Redesign Account Landing Page *****");
 		}
-
-		/* Get expected data */
-		/*Map<String, JSONObject> expectedDataMap = loginScenario
-				.getExpectedJson(userName);
-		JSONObject accountHomeExpectedJson = accountHomePage
-				.getExpectedData(expectedDataMap);
-
-		if (accountHomePage != null) {
-			getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
-			getLoginScenario().saveBean(PageConstants.ACCOUNT_HOME_PAGE,
-					accountHomePage);
-			Assert.assertTrue(true);
-			accountHomeActualJson = accountHomePage.accountHomeJson;
-		}
-
-		try {
-			JSONAssert.assertEquals(accountHomeExpectedJson,
-					accountHomeActualJson, true);
-		} catch (JSONException e) {
-			e.printStackTrace();
-		}
-
-		getLoginScenario().saveBean(CommonConstants.EXPECTED_DATA_MAP,
-				expectedDataMap);*/
-
 	}
 	
 	@When("^the user views order materials in Member Redesign Order Materials page$")

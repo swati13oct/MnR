@@ -18,11 +18,11 @@ import cucumber.junit.Cucumber;
 		features = { "feature/pharmacy-locator/member/ulayer" }, 
 		format = {
 				"pretty", "html:reports/test-report","json:target/cucumber.json"}, 
-		tags ={"@pharmacylocator,@pharmacysearch,@pharmacysearchresult,@pharmacyshowmap,@pharmacymultilang,@pharmacyprpnwidget,@pharmacynonaep,@pharmacyaep,@pharmacysearchandballon"})
+		tags ={"@PharmacyFilters,@PharmacyDistance"})
 
 
 
-
+//@pharmacylocator,@pharmacysearch,@pharmacysearchresult,@pharmacyshowmap,@pharmacymultilang,@pharmacyprpnwidget,@pharmacynonaep,@pharmacyaep,@pharmacysearchandballon
 //@pharmacylocator,@pharmacysearch,@pharmacysearchresult,@pharmacyshowmap,@pharmacymultilang,@pharmacyprpnwidget,@pharmacynonaep,@pharmacyaep,@pharmacysearchandballon,
 
 //

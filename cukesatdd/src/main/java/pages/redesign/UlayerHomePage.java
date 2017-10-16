@@ -66,7 +66,7 @@ public class UlayerHomePage extends UhcDriver {
 	@FindBy(xpath = "//section[1]/div/div/div/a")
 	private WebElement addordermaterialLink;
 
-	@FindBy(xpath = "//a[contains(text(),'Go to Order plan materials')]")
+	@FindBy(xpath = "//a[contains(text(),'Go to Order ')]")
 	private WebElement OrderPlanMaterialslnk;
 
 	@FindBy(xpath = "//h3[contains(text(),'Technical Support') or contains(text(),'Plan Support')]/ancestor::div[@class='col-md-4']")
@@ -213,22 +213,15 @@ public class UlayerHomePage extends UhcDriver {
 
 		// myMenuLinkAarp.click();
 
+		driver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
 		CommonUtility.checkPageIsReady(driver);
 
 		OrderPlanMaterialslnk.click();
 		CommonUtility.checkPageIsReady(driver);
 		driver.manage().timeouts().implicitlyWait(1000, TimeUnit.SECONDS);
-		if (driver.findElement(By.xpath("//*[contains(text(), 'Order Plan Materials')]")).isDisplayed()) {
+		if (orderplanHeadertxt.isDisplayed()) {
 			return new OrderplanmaterialsPage(driver);
-
 		}
-
-		/*
-		 * if (driver.getTitle().equalsIgnoreCase(
-		 * "AARP Medicare Plans | Order Plan Materials") ||
-		 * (driver.getTitle().equalsIgnoreCase("Order Plan Materials"))) {
-		 * return new OrderplanmaterialsPage(driver); }
-		 */
 		return null;
 	}
 

@@ -1,5 +1,7 @@
 #@pharmacylocator
 Feature:To test Locate a Pharmacy tool in AARP site
+
+@PharmacyDistance
 Scenario Outline:To verify all available pharmacies for default zipcode in AARP site
 Given registered member to verify locate a pharmacy in AARP Site
 	| Plan Type | <planType> |
@@ -12,8 +14,9 @@ Then the user validates the pharmacies available in AARP site
 Examples:
 	| planType | distance |
 	| PDP      | 25       |
-#	| MAPD	   | 2        |
-	  
+	| MAPD	   | 2        |
+
+@PharmacyFilters
 Scenario Outline:To verify pharmacies displayed for particular pharamcy type for default zipcode in AARP site
 Given registered member to verify locate a pharmacy in AARP Site
 | Plan Type	| <planType> |

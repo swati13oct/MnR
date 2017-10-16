@@ -69,7 +69,8 @@ public class BlueLayerHomePage extends UhcDriver {
 	@FindBy(xpath = "//section[1]/div/div/div/a")
 	private WebElement addordermaterialLink;
 	
-	@FindBy(linkText="Go to order-plan-materials-dashboard(Uhcm-Group) page")
+	//@FindBy(linkText="Go to Order Materials page")
+	@FindBy(xpath ="//a[contains(text(),'Go to Order ')]")
 	private WebElement OrderPlanMaterialslnk;
 	
 	@FindBy(xpath="//h3[contains(text(),'Technical Support') or contains(text(),'Plan Support')]/ancestor::div[@class='col-md-4']")
@@ -128,12 +129,12 @@ public class BlueLayerHomePage extends UhcDriver {
 	}
 
 	public OrderplanmaterialsPage navigateToLinkOrderPlanMaterialsPage() {
-		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+		driver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
 		CommonUtility.checkPageIsReady(driver);
 		OrderPlanMaterialslnk.click();
-		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+		driver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
 		CommonUtility.checkPageIsReady(driver);
-		if(driver.getTitle().equalsIgnoreCase("Order Plan Material")){
+		if(orderplanHeadertxt.isDisplayed()){
 			return new OrderplanmaterialsPage(driver);
 		}
 		return null;

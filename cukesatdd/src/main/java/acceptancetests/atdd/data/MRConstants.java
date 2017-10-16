@@ -17,6 +17,7 @@ public class MRConstants {
 	public static final String AARPM_URL_RESEDIGN = "https://member."+MRScenario.environment+"-aarpmedicareplans.uhc.com/#?target=test-harness";
 	public static final String UHCM_URL_REDESIGN = "https://member."+MRScenario.environment+"-uhcmedicaresolutions.uhc.com/content/uhcm/home//testharness.html";
 	
+	public static final String MEDICARE_UHC_REDESIGN = "https://"+MRScenario.environment+"-medicare.uhc.com/medicare/login/overview.html?testharness=true";
 	
 	//public static final String UHCM_URL = "https://member."+MRScenario.environment+"-uhcmedicaresolutions.uhc.com/content/uhcm/home//testharness.html";
 	

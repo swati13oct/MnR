@@ -112,7 +112,7 @@ public class PharmacyLocatorMemberAarpStepDefinition {
 		JSONObject accountHomeActualJson = null;
 		UlayerLoginPage loginPage = new UlayerLoginPage(wd);
 
-		UlayerLoginPage accountHomePage = (UlayerLoginPage)loginPage.loginWith(userName, pwd);
+		UlayerHomePage accountHomePage = (UlayerHomePage)loginPage.loginWith(userName, pwd);
 		
 //		 getLoginScenario().saveBean(PageConstants.ACCOUNT_HOME_PAGE,accountHomePage);
 		
