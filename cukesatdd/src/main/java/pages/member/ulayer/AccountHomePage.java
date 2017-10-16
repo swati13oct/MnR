@@ -611,7 +611,7 @@ public class AccountHomePage extends UhcDriver {
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
-		if (driver.getTitle().equals("Contact Us")) {
+		if (driver.getTitle().trim().equals("Overview")) {
 			return new pages.member.ulayer.ContactUsPage(driver);
 		}
 		return null;

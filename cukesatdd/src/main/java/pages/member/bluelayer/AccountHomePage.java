@@ -661,7 +661,7 @@ public FormsandresourcesPage navigateToMydocumentUmsPage() {
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 		}
-		if (driver.getTitle().equals("Contact Us")) {
+		if (driver.getTitle().trim().equals("Overview")) {
 			return new pages.member.bluelayer.ContactUsPage(driver);
 
 		}
