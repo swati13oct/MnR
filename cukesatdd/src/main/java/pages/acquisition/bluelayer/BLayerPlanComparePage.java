@@ -176,7 +176,7 @@ public BLayerPlanComparePage SelectThePlan() throws InterruptedException {
 		jse.executeScript("window.scrollBy(0,650)", "");
 		/*Thread.sleep(2000);
 		Plan1HMO.click();*/
-		Thread.sleep(2000);
+		Thread.sleep(4000);
 		//ComparePlanLink.click();
 		ComparePlansLink.click();
 		Thread.sleep(5000);
