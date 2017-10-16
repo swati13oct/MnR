@@ -7,6 +7,7 @@ import java.util.List;
 
 import junit.framework.Assert;
 
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -157,6 +158,9 @@ public class PharmacySearchPage extends UhcDriver {
 	@FindBy(xpath = "//div[@class='pharmacy-search-resultParsys']/div/div/div[1]/div/div[2]/div/ul[@class='pharmacy-list']/li")
 	List<WebElement> pharmacyListItems;
 	
+	@FindBys(value = { @FindBy(xpath = "//ul[1][@class='filter-list']/li/label") })
+	private List<WebElement> pharmacyTypesandServices;
+	
 	public JSONObject availablePharmaciesJson;
 	
 	public JSONObject locatePharmacyJson;
@@ -298,6 +302,39 @@ public class PharmacySearchPage extends UhcDriver {
 		return new PharmacySearchPage(driver);
 
 	}
+	
+	
+public PharmacySearchPage selectPharmacyandServices(String pharmacytype) {
+		
+		
+		
+		for (WebElement webElement : pharmacyTypesandServices) {
+			try {
+				Thread.sleep(2000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			if (webElement.getText().contains(pharmacytype)) {
+				try {
+					Thread.sleep(4000);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				 //driver.findElement(By.linkText(webElement.getText())).click();;
+				System.out.println(webElement.getText());
+				waitforElement(webElement);
+				 webElement.click();
+				break;
+			}
+		}
+	
+			return new PharmacySearchPage(driver);
+  
+	}
+	
+	
 
 	public PharmacyResultPage searchSelectingPharmacyTypes(
 			String[] pharmacyTypeArray) {
@@ -507,6 +544,12 @@ public class PharmacySearchPage extends UhcDriver {
 	}
 	
 	public boolean validatePharmacyResults(){
+		try {
+			Thread.sleep(10000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		boolean flag = true;
 		System.out.println(pharmacyCount.getText());
 		if(pharmacyCount.getText().split(" ")[0].equals("") || Integer.parseInt(pharmacyCount.getText().split(" ")[0])==0)

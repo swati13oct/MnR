@@ -10,6 +10,7 @@ import junit.framework.Assert;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -97,6 +98,11 @@ public class PharmacySearchPage extends UhcDriver {
 
 	@FindBys(value = { @FindBy(xpath = "//ul[@id='pharm_services']/li") })
 	private List<WebElement> pharmacyTypesCheckboxes;
+	
+	
+	
+	@FindBys(value = { @FindBy(xpath = "//ul[1][@class='filter-list']/li/label") })
+	private List<WebElement> pharmacyTypesandServices;
 
 	@FindBy(xpath = "//form[@id='searchCriteria']/div[3]/h3")
 	private WebElement narrowYourSearchContent;
@@ -137,7 +143,9 @@ public class PharmacySearchPage extends UhcDriver {
 
 	@FindBy(linkText = "VIEW RESULT AS PDF")
 	WebElement resultAsPDF;
-
+	
+	@FindBy(xpath = "//*[@id='15ec5a30-0a71-4aaa-b7df-074986ec97a9_toolTip']/parent::p")
+	WebElement standardNetworkPharmacy;
 
 	private PageData locatePharmacy;
 
@@ -246,6 +254,38 @@ public class PharmacySearchPage extends UhcDriver {
 		return null;
 	}
 
+	
+	public PharmacySearchPage selectPharmacyandServices(String pharmacytype) {
+		
+		
+		
+		for (WebElement webElement : pharmacyTypesandServices) {
+			try {
+				Thread.sleep(2000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			if (webElement.getText().contains(pharmacytype)) {
+				try {
+					Thread.sleep(4000);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				 //driver.findElement(By.linkText(webElement.getText())).click();;
+				System.out.println(webElement.getText());
+				waitforElement(webElement);
+				 webElement.click();
+				break;
+			}
+		}
+	
+			return new PharmacySearchPage(driver);
+  
+	}
+	
+	
 	public PharmacySearchPage selectLanguage(String langName) {
 		selectFromDropDown(langList, langName);
 
@@ -441,7 +481,7 @@ public class PharmacySearchPage extends UhcDriver {
 
 	public boolean validatePharmacyResults(){
 		try {
-			Thread.sleep(5000);
+			Thread.sleep(10000);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

@@ -140,6 +140,44 @@ public class PharmacyLocatorUmsStepDefinition {
 
 	}
 
+	@Then("^the user chooses the Pharmacy Type blayer$")
+	public void the_user_chooses_the_pharmacy_type_blayer(DataTable pharmacyTypeAttribute){
+		
+		String PharmacyType = pharmacyTypeAttribute.getGherkinRows().get(0).getCells()
+				.get(0);
+		PharmacySearchPage pharmacySearchPage = (PharmacySearchPage) getLoginScenario()
+				.getBean(PageConstants.PHARMACY_SEARCH_PAGE);
+		pharmacySearchPage = pharmacySearchPage.selectPharmacyandServices(PharmacyType);
+		
+		if (pharmacySearchPage != null) {
+			getLoginScenario().saveBean(PageConstants.PHARMACY_SEARCH_PAGE,
+					pharmacySearchPage);			 
+		} else {
+			Assert.fail("Failed to load Pharmacy search page");
+		}
+		
+	}
+	
+	@Then("^the user chooses the Service Type blayer$")
+	public void the_user_chooses_the_service_type_blayer(DataTable serviceTypeAttribute){
+		
+		String serviceType = serviceTypeAttribute.getGherkinRows().get(0).getCells()
+				.get(0);
+		PharmacySearchPage pharmacySearchPage = (PharmacySearchPage) getLoginScenario()
+				.getBean(PageConstants.PHARMACY_SEARCH_PAGE);
+		pharmacySearchPage = pharmacySearchPage.selectPharmacyandServices(serviceType);
+		
+		if (pharmacySearchPage != null) {
+			getLoginScenario().saveBean(PageConstants.PHARMACY_SEARCH_PAGE,
+					pharmacySearchPage);			 
+		} else {
+			Assert.fail("Failed to load Pharmacy search page");
+		}
+		
+		
+	}
+	
+	
 	@And("^the user searches available pharmacies by selecting \"Show pharmacies for ALL types\"$")
 	public void user_selects_show_pharmacy_for_all_pharmacy_types_ums() {
 		PharmacySearchPage pharmacySearchPage = (PharmacySearchPage) getLoginScenario()
