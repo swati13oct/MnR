@@ -112,7 +112,7 @@ public class ProfilePreferencesPage extends UhcDriver {
 	@FindBy(xpath = "//*[@id='tab-1']/div[2]/div[1]/div/div[1]/div[1]/div/div/div/div[2]/div[2]/div/div/span[2]")
 	private WebElement EmailValue;
 
-	@FindBy(className = "margin-none")
+	@FindBy(xpath= "html/body/div[2]/div[3]/div/div[2]/div[1]/div[2]/section/div/div[3]/div/p")
 	private WebElement Seemorewaystext;
 
 	@FindBy(className = "atdd-contact-us")
