@@ -33,11 +33,12 @@ public class BLayerPlanComparePage extends UhcDriver {
 //	@FindBy(xpath = "//*[@id='plan-list-1']/div/div[2]/div/div[2]/div[3]/div/div/span[1]/label")	                 
 //	private WebElement Plan1HMO1;
 	
-	@FindBy(xpath = "//*[@id='plan-list-1']/div/div[3]/div/div[2]/div[3]/div/div/span[3]/a")	              
+//	@FindBy(xpath = "//*[@id='plan-list-1']/div/div[3]/div/div[2]/div[3]/div/div/span[3]/a")
+	@FindBy(xpath = "(.//a[contains(text(),'Compare plans')])[1]")
 	private WebElement ComparePlansLink;	
 	
-	@FindBy(xpath = "//*[@id='plan-list-1']/div/div[2]/div/div[2]/div[3]/div/div/span[3]/a")	                  
-	private WebElement ComparePlansLink1;	
+//	@FindBy(xpath = "//*[@id='plan-list-1']/div/div[2]/div/div[2]/div[3]/div/div/span[3]/a")	                  
+//	private WebElement ComparePlansLink1;	
 	
 	@FindBy(xpath = "//*[@id='plan-list-1']/div/div[3]/div/div[2]/div[3]/div/div/span[3]/a")	                 
 	private WebElement ComparePlanLink;
@@ -153,7 +154,7 @@ public class BLayerPlanComparePage extends UhcDriver {
 		{
 			ComparePlansLink1.click();		
 		}		*/
-		ComparePlansLink1.click();
+		ComparePlansLink.click();
 		
 		Thread.sleep(6000);
 		 if(driver.getTitle().contains("Our Medicare Plan Types")){
@@ -177,7 +178,7 @@ public BLayerPlanComparePage SelectThePlan() throws InterruptedException {
 		Plan1HMO.click();*/
 		Thread.sleep(2000);
 		//ComparePlanLink.click();
-		ComparePlansLink1.click();
+		ComparePlansLink.click();
 		Thread.sleep(5000);
 		 if(driver.getTitle().contains("Our Medicare Plan Types")){
 			 return new BLayerPlanComparePage(driver);
