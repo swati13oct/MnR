@@ -1,7 +1,7 @@
 @eob
 Feature:To test EOB on Dashboard page
 
-@workingOn
+@fixed
 Scenario Outline: To verify mobile responsive for all plans on EOB page
 Given registered AMP with for EOB flow
 	| Plan Type      |<planType>  |
@@ -13,11 +13,12 @@ Then the user navigates to EOB page and validates the page
  |From Date |<fromDate>   |
  |To Date   |<toDate>     |
 Examples:
-	| planType  | memberType           | eobTypeData       | fromDate   | toDate     |dateRange       |
-	| MAPD-NICE | q3_sep_ulayer028     | Medical           | 12/12/2007 | 12/12/2008 |Last 6 months   |
-	| MA-NICE   | q3_sep_ulayer193     | Medical           | 12/12/2007 | 12/12/2008 |Last 6 months   |
+	| planType    | memberType           | eobTypeData       | fromDate   | toDate     |dateRange       |
+	| MAPD-COSMOS | q3_sep_ulayer561     | Medical           | 12/12/2007 | 12/12/2008 |Last 6 months   |
+	| MAPD-NICE   | q3_sep_ulayer028     | Medical           | 12/12/2007 | 12/12/2008 |Last 6 months   |
+	| MA-NICE     | q3_sep_ulayer193     | Medical           | 12/12/2007 | 12/12/2008 |Last 6 months   |
 @F85974
-@anilesh
+@fixed
 Scenario Outline: To verify mobile responsive for all plans on EOB page
 Given registered AMP with for EOB flow
 	| Plan Type      |<planType>  |
@@ -29,13 +30,13 @@ Then the user navigates to EOB page and validates the page
  |From Date |<fromDate>   |
  |To Date   |<toDate>     |
 Examples:
-	| planType   | memberType   | eobTypeData       | fromDate   | toDate     |dateRange       |
-	#| MAPD       | q3_sep_combo012      | Medical           | 12/12/2007 | 12/12/2008 |Last 6 months   |
- 	| PDP        | q3_sep_ulayer293      | Medical           | 12/12/2007 | 12/12/2008 |Last 6 months   |
+	| planType     | memberType            | eobTypeData       | fromDate   | toDate     |dateRange       |
+	| MAPD-COSMO   | q3_sep_ulayer561      | Medical           | 12/12/2007 | 12/12/2008 |Last 6 months   |
+ 	| PDP          | q3_sep_ulayer293      | Medical           | 12/12/2007 | 12/12/2008 |Last 6 months   |
  	#| Combo      | withEOB      | Medical           | 12/12/2007 | 12/12/2008 |Last 6 months   |	
  	#| Ship       | withEOB      | Medical           | 12/12/2007 | 12/12/2008 |Last 3-6 Months   |	
  
-@F85974
+#@workingOn
 Scenario Outline: To verify mobile responsive for all plans on EOB page
 Given registered AMP with for EOB flow
 	| Plan Type      |<planType>  |
@@ -48,8 +49,8 @@ Then the user navigates to EOB page and validates the page
  |To Date   |<toDate>     |
 Examples:
 	| planType  | memberType   | eobTypeData       | fromDate   | toDate     |dateRange       |
- 	| Combo     | withEOB      | Medical           | 12/12/2007 | 12/12/2008 |Last 6 months   |
- 	| MA  			| withEOB      | Medical           | 12/12/2007 | 12/12/2008 |Last 6 Months   |
+ 	#| Combo     | withEOB      | Medical           | 12/12/2007 | 12/12/2008 |Last 6 months   |
+ 	| MA  			| withEOB      | Medical           | 12/12/2007 | 12/12/2008 |Last 6 months   |
  	
  	@F85974
 Scenario Outline: To verify mobile responsive for all plans on EOB page
@@ -81,7 +82,7 @@ Examples:
 	| planType  | memberType   | eobTypeData       | fromDate   | toDate     |dateRange       |
  	| MA  | withEOB      | Medical           | 12/12/2007 | 12/12/2008 |Last 6 Months   |
  	
-@F85974passed	
+@workingOn	
 Scenario Outline: To verify How to read a medical EOB PDF
 Given registered AMP with for EOB flow
 	| Plan Type      |<planType>  |
@@ -90,10 +91,10 @@ Then the user navigates to EOB page
 And the user validates how to read medical eob PDF
  	Examples:
 	| planType  | memberType   |
-	| MAPD      | withEOB      |
-	| MA        | withEOB      |	
+	| MAPD      | q3_sep_ulayer561      |
+	 
 
-@F85974passed
+@notWorking
 Scenario Outline: To verify mobile responsive for all plans on EOB page
 Given registered AMP with for EOB flow
        | Plan Type      |<planType>  |
@@ -125,9 +126,9 @@ Then the user navigates to EOB page and validates the page
 Examples:
        | planType  | memberType   | eobTypeData       | fromDate   | toDate     |dateRange1       |dateRange2 |dateRange3 |dateRange4 |
       #|Ship      | withEOB      | Medical           | 01/01/2016 | 04/01/2017 |Last 90 Days  |  Last 3-6 Months |Last 6-12 Months|Last 12-18 Months| 
-      | MA      |  withEOB     | Medical           | 01/01/2016 | 04/01/2017 |Last 90 Days  |  Last 6 Months  | Last 12 Months  | Last 18 Months |
-      | MAPD      |  withEOB     | Medical           | 01/01/2016 | 04/01/2017 |Last 90 Days  |  Last 6 Months  | Last 12 Months  | Last 18 Months |  
-      #| PDP      |  withEOB     | Medical           | 01/01/2016 | 04/01/2017 |Last 90 Days  |  Last 6 Months  | Last 12 Months  | Last 18 Months |   
+      #| MA        |  withEOB     | Medical           | 01/01/2016 | 04/01/2017 |Last 90 Days  |  Last 6 Months  | Last 12 Months  | Last 18 Months |
+      | MAPD      |  q3_sep_ulayer561     | Medical           | 01/01/2016 | 04/01/2017 |Last 90 days  |  Last 6 months  | Last 12 months  | Last 18 months |  
+      | PDP       |  q3_sep_ulayer293     | Medical           | 01/01/2016 | 04/01/2017 |Last 90 days  |  Last 6 months  | Last 12 months  | Last 18 months |  
 
 @F85974passed 	
 Scenario Outline: To verify EOB result list
@@ -147,7 +148,7 @@ And the user validates EOB statments displayed
  	#| PDP     | withEOB      | Prescription      |12/12/2007 | 12/12/2008 | Last 18 Months |
  	#| Ship    | withEOB      | Medical           |12/12/2007 | 12/12/2008 | Last 12-18 Months |
  
-@F85974passed	
+@notWorking	
 Scenario Outline: To validate EOB Type Drop-Down (UI) - MAPD
 Given registered AMP with for EOB flow
 	| Plan Type      |<planType>  |
@@ -158,7 +159,7 @@ And the user validates EOB type and Date Range for MAPD
 |Date Range| <dateRange>|
 Examples:
 | planType  | memberType   | eobTypeData      |  
-| MAPD     | withEOB      | Medical           |
+| MAPD     | q3_sep_ulayer561      | Medical           |
 
 @F85974passed	
 Scenario Outline: To verify How to read a medical EOB PDF
@@ -287,7 +288,7 @@ Examples:
        | planType  | memberType   | eobTypeData        | fromDate   | toDate     |   dateRange    | 
        | MAPD       | withEOB      | Medical           | 2016/01/01 | 2017/04/01 | Custom Search  |   
        
-@US819098
+@fixed
 Scenario Outline: Allowed Domains – Authors need ability to define messages and domains for leaving member sites (ATDD)
 Given registered AMP with for EOB flow
 	| Plan Type      |<planType>  |

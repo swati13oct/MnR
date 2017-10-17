@@ -7,15 +7,16 @@ import org.junit.runner.RunWith;
 
 import cucumber.junit.Cucumber;
 
-/**	
- * @author pagarwa5
+/**
+ * 
+ * @author apriyad4
  *
  */
 @RunWith(Cucumber.class)
 @Cucumber.Options(glue = { "atdd.framework","acceptancetests.dashboard.eob" }, 
 		features = { "feature/dashboard/eob" }, 
 		format = { 
-		"pretty", "html:reports/test-report","json:target/cucumber.json" }, tags ={"@US819098"})
+		"pretty", "html:reports/test-report","json:target/cucumber.json" }, tags ={"@fixed"})
 public class RunMRAtddTestEob {
 
 }
