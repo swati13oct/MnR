@@ -102,6 +102,7 @@ public class FormsandResourcesUmsStepDefinition {
 		WebDriver wd = getLoginScenario().getWebDriver();
 
 		LoginPage loginPage = new LoginPage(wd);
+		loginPage.loginTo();
 		AccountHomePage accountHomePage = (AccountHomePage)loginPage.loginWith(userName, pwd, category);
 		//JSONObject accountHomeActualJson = null;
 

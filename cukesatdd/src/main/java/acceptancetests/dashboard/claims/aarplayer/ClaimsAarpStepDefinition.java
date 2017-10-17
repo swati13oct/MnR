@@ -96,7 +96,10 @@ public class ClaimsAarpStepDefinition {
 			getLoginScenario().saveBean(LoginCommonConstants.PASSWORD, pwd);			
 		}
 		WebDriver wd = getLoginScenario().getWebDriver();
+		
 		LoginPage loginPage = new LoginPage(wd);
+		loginPage.loginTo();
+		
 
 		AccountHomePage accountHomePage = (AccountHomePage) loginPage.loginWith(userName, pwd);
 

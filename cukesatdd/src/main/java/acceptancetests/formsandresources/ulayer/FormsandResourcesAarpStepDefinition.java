@@ -109,6 +109,7 @@ public class FormsandResourcesAarpStepDefinition {
 		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
 
 		LoginPage loginPage = new LoginPage(wd);
+		loginPage.loginTo();
 		AccountHomePage accountHomePage = (AccountHomePage) loginPage.loginWith(userName, pwd);
 		//JSONObject accountHomeActualJson = null;
 
