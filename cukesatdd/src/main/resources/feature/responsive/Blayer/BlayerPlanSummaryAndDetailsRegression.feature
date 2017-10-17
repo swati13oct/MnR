@@ -107,7 +107,7 @@ Examples:
 |02210  | Suffolk County  | SNP        |UnitedHealthcare Senior Care Options (HMO SNP)| AEP        | 2016        | 2017       | 
 #|02210  | Suffolk County  | MA         |AARP MedicareComplete Plan 2 (HMO)            | AEP        | 2016        | 2017       | 
 
-@US657089 @planSummary @sprint3 @workingScripts
+@requirementChange
 Scenario Outline: To validate plan count from portfolio page
 Given the user is on the vpp portfolio page
 Then the user performs plan search using zipcode
@@ -137,7 +137,7 @@ Examples:
 		|zipCode|county						   |planType   | 
 		|33012  |Miami-Dade County   |SNP        |
 		
-@US646136 @sprint3 @snpPlanCard		
+@requirementChange	
 Scenario Outline: To validate plan benefits table
 Given the user is on the vpp portfolio page
 Then the user performs plan search using zipcode
