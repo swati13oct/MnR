@@ -17,5 +17,5 @@ Then the user validates the available pharmacies page in AARP site
 Examples:
 	| zipcode     | distance  | county       |  planName 			               	  |  plantype|
 	| 80002       | 25 miles     | Adams County      | AARP MedicareComplete SecureHorizons Plan 1 (HMO)  | MA |
-	| 80002       | 15 miles     | Adams County      | AARP MedicareComplete SecureHorizons Plan 1 (HMO)  | MA |
+	#| 80002       | 15 miles     | Adams County      | AARP MedicareComplete SecureHorizons Plan 1 (HMO)  | MA |
 	
