@@ -1,11 +1,11 @@
 @eob
 Feature:To test EOB on Dashboard page
-@F85974
 
+@workingOn
 Scenario Outline: To verify mobile responsive for all plans on EOB page
 Given registered AMP with for EOB flow
 	| Plan Type      |<planType>  |
-	| Member Type    |<memberType>|
+	| Member Type    |<memberType>|	
 Then the user navigates to EOB page and validates the page
  |Date Range|<dateRange>  |
  |Plan Type |<planType>   |
@@ -13,9 +13,11 @@ Then the user navigates to EOB page and validates the page
  |From Date |<fromDate>   |
  |To Date   |<toDate>     |
 Examples:
-	| planType  | memberType   | eobTypeData       | fromDate   | toDate     |dateRange       |
-	| MAPD      | withEOB      | Medical           | 12/12/2007 | 12/12/2008 |Last 6 Months   |
+	| planType  | memberType           | eobTypeData       | fromDate   | toDate     |dateRange       |
+	| MAPD-NICE | q3_sep_ulayer028     | Medical           | 12/12/2007 | 12/12/2008 |Last 6 months   |
+	| MA-NICE   | q3_sep_ulayer193     | Medical           | 12/12/2007 | 12/12/2008 |Last 6 months   |
 @F85974
+@anilesh
 Scenario Outline: To verify mobile responsive for all plans on EOB page
 Given registered AMP with for EOB flow
 	| Plan Type      |<planType>  |
@@ -27,8 +29,11 @@ Then the user navigates to EOB page and validates the page
  |From Date |<fromDate>   |
  |To Date   |<toDate>     |
 Examples:
-	| planType  | memberType   | eobTypeData       | fromDate   | toDate     |dateRange       |
- 	| PDP      | withEOB      | Medical           | 12/12/2007 | 12/12/2008 |Last 6 Months   |	
+	| planType   | memberType   | eobTypeData       | fromDate   | toDate     |dateRange       |
+	#| MAPD       | q3_sep_combo012      | Medical           | 12/12/2007 | 12/12/2008 |Last 6 months   |
+ 	| PDP        | q3_sep_ulayer293      | Medical           | 12/12/2007 | 12/12/2008 |Last 6 months   |
+ 	#| Combo      | withEOB      | Medical           | 12/12/2007 | 12/12/2008 |Last 6 months   |	
+ 	#| Ship       | withEOB      | Medical           | 12/12/2007 | 12/12/2008 |Last 3-6 Months   |	
  
 @F85974
 Scenario Outline: To verify mobile responsive for all plans on EOB page
@@ -43,7 +48,8 @@ Then the user navigates to EOB page and validates the page
  |To Date   |<toDate>     |
 Examples:
 	| planType  | memberType   | eobTypeData       | fromDate   | toDate     |dateRange       |
- 	| Combo      | withEOB      | Medical           | 12/12/2007 | 12/12/2008 |Last 6 Months   |
+ 	| Combo     | withEOB      | Medical           | 12/12/2007 | 12/12/2008 |Last 6 months   |
+ 	| MA  			| withEOB      | Medical           | 12/12/2007 | 12/12/2008 |Last 6 Months   |
  	
  	@F85974
 Scenario Outline: To verify mobile responsive for all plans on EOB page
@@ -279,6 +285,17 @@ And the user validates pagination functionality
 
 Examples:
        | planType  | memberType   | eobTypeData        | fromDate   | toDate     |   dateRange    | 
-       | MAPD       | withEOB      | Medical           | 2016/01/01 | 2017/04/01 | Custom Search  |      
+       | MAPD       | withEOB      | Medical           | 2016/01/01 | 2017/04/01 | Custom Search  |   
        
+@US819098
+Scenario Outline: Allowed Domains – Authors need ability to define messages and domains for leaving member sites (ATDD)
+Given registered AMP with for EOB flow
+	| Plan Type      |<planType>  |
+	| Member Type    |<memberType>|
+Then the user navigates to EOB page 
+Then the user validates site leaving pop up         
+Examples:
+       | planType  | memberType        |  
+       | MA-NICE   | q3_sep_ulayer193  | 
+       | MAPD-NICE | q3_sep_ulayer028  |    
        	
