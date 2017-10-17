@@ -523,14 +523,14 @@ public class ContactUsPage extends UhcDriver{
 			System.out.println("send a req  is displayed");
 			sendArequest.click();
 			try {
-				Thread.sleep(5000);
+				Thread.sleep(8000);
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			Select dropdown = new Select(driver.findElement(By.id("call-question-about")));
 			System.out.println("dropdown" +dropdown);
-			dropdown.getFirstSelectedOption().click();
+			/*dropdown.getFirstSelectedOption().click();*/
 			dropdown.selectByVisibleText("Benefits");
 			try {
 				Thread.sleep(5000);
@@ -538,7 +538,6 @@ public class ContactUsPage extends UhcDriver{
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			dropdown.selectByVisibleText("Other");
 			try {
 				Thread.sleep(5000);
 			} catch (InterruptedException e) {
@@ -573,8 +572,6 @@ public class ContactUsPage extends UhcDriver{
 			}
 			Select dropdown = new Select(driver.findElement(By.id("call-question-about")));
 			System.out.println("dropdown" +dropdown);
-			dropdown.getFirstSelectedOption().click();
-			dropdown.selectByVisibleText("Benefits");
 			try {
 				Thread.sleep(5000);
 			} catch (InterruptedException e) {

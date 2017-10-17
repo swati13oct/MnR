@@ -105,7 +105,7 @@ public class ContactUsPage extends UhcDriver{
 	@FindBy(css="div.field.ask-question-message.field-has-error div.field-input label#message-email-error.error")
 	private WebElement questionAboutEmailErrorMsg;
 	
-	@FindBy(xpath="//div[contains(@class,'parsys request-email')]/div[not (contains(@class,'ng-hide'))][3]//span[contains(@class,'green')]")
+	@FindBy(xpath="//div[contains(@class,'parsys request-email')]/div[not (contains(@class,'ng-hide'))][3]//span[contains(@class,'green')]/p")
 	private WebElement requestReceivedMessageHeader;
 	
 	@FindBy(xpath="//div[contains(@class,'parsys request-email')]/div[not (contains(@class,'ng-hide'))][3]//div[contains(@class,'message-block-body')]/p[2]")
