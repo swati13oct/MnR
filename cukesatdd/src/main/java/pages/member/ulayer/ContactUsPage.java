@@ -82,7 +82,7 @@ public class ContactUsPage extends UhcDriver{
 	@FindBy(xpath = "//div[contains(@class,'parsys click-to-call')]/div/div[not (contains(@class,'ng-hide'))]//a[@id='call-btn']")
 	private WebElement sendArequest;
 	
-	@FindBy(xpath = "//*[@id='call-submit']/span")
+	@FindBy(xpath = "//div[contains(@class,'click-to-call')]/div/div[3]//form//button[@id='call-submit']")
 	private WebElement requestCall;;
 	
 	
@@ -92,7 +92,7 @@ public class ContactUsPage extends UhcDriver{
 	@FindBy(xpath = "//*[@id='call-question-about'] ")
 	private WebElement other;
 	
-	@FindBy(xpath = "//*[@id='call-cancel'] ")
+	@FindBy(xpath = "//div[contains(@class,'click-to-call')]/div/div[3]//form//a[@id='call-cancel']")
 	private WebElement callCancel;
 	
 	@FindBy(xpath = "//div[contains(@class,'parsys click-to-call')]/div/div[not (contains(@class,'ng-hide'))]//div[@class='message-block--full-width success margin-none']")
@@ -578,7 +578,7 @@ public class ContactUsPage extends UhcDriver{
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			driver.findElement(By.id("call-number")).sendKeys("9023456121");
+			driver.findElement(By.xpath("//div[contains(@class,'click-to-call')]/div/div[3]//form//input[@id='call-number']")).sendKeys("9023456121");
 			requestCall.click();
 			try {
 				Thread.sleep(5000);
