@@ -599,6 +599,7 @@ public class AccountHomePage extends UhcDriver {
 		// TODO Auto-generated method stub
 		//String url = "https://member.team-b-aarpmedicareplans.uhc.com/home/claims.html";
 		String testharnessUrl = "https://member." +MRScenario.environment+"-aarpmedicareplans.uhc.com/home/testharness.html";
+		//String testharnessUrl = "https://member.team-b-aarpmedicareplans.uhc.com/content/medicare/member/testharness.html";
 		driver.get(testharnessUrl);
 		if (MRScenario.environment.equalsIgnoreCase("team-h")) {
 			CommonUtility.waitForPageLoad(driver, driver.findElement(By.xpath("//a[text()='Go to Claims page']")), 60); 	
@@ -607,9 +608,11 @@ public class AccountHomePage extends UhcDriver {
 		
 		else if (MRScenario.environment.equalsIgnoreCase("team-b")) {
 			
-			CommonUtility.waitForPageLoad(driver, driver.findElement(By.linkText("Go to Claims Link page")), 60); 	
-			driver.findElement(By.linkText("Go to Claims Link page")).click();
+			CommonUtility.waitForPageLoad(driver, driver.findElement(By.xpath("//a[text()='Go to Claims Link page']")), 60); 	
+			driver.findElement(By.xpath("//a[text()='Go to Claims Link page']")).click();
 		}
+		
+		
 		
 		else 
 		{

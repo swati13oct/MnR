@@ -128,6 +128,8 @@ public class ClaimSummarypage extends UhcDriver{
 
 	@FindBy (id="custom-to")
 	private WebElement to;
+	@FindBy (xpath = ".//*[@id='errorMsg']/div/p")
+	private WebElement rxErrorMsg;
 
 
 	public ClaimSummarypage(WebDriver driver) {
@@ -382,6 +384,12 @@ public class ClaimSummarypage extends UhcDriver{
 			System.out.println("Downlaod my data button is not displayed ");
 
 		}
+	}
+	
+	public boolean validateRxReachexMaxClaimsErrorMsg() {
+
+		return rxErrorMsg.isDisplayed();
+
 	}
 }
 

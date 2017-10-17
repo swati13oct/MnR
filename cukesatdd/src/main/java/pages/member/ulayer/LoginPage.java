@@ -19,8 +19,8 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import pages.acquisition.ulayer.LoginAssistancePage;
-import pages.member.bluelayer.AccountHomePage;
-import pages.member.bluelayer.TerminatedHomePage;
+import pages.member.ulayer.AccountHomePage;
+import pages.member.ulayer.AccountHomePage;
 import acceptancetests.atdd.data.CommonConstants;
 import acceptancetests.atdd.data.MRConstants;
 import acceptancetests.atdd.data.PageData;
@@ -78,7 +78,7 @@ public class LoginPage extends UhcDriver {
 	public LoginPage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
-		//openAndValidate();
+		openAndValidate();
 	}
 
 	public Object loginWith(String username, String password) {
@@ -130,7 +130,7 @@ public class LoginPage extends UhcDriver {
 		if(currentUrl().contains("home/my-account-home.html"))
 
 		{
-			return new AccountHomePage(driver);
+			return new pages.member.ulayer.AccountHomePage(driver);
 		}
 		else if (currentUrl().contains("terminated-plan.html")) {
 			return new TerminatedHomePage(driver); 
@@ -273,10 +273,10 @@ public class LoginPage extends UhcDriver {
 		if(currentUrl().contains("home/my-account-home.html") && category.equalsIgnoreCase("Group") || currentUrl().contains("/guest/home.html") || currentUrl().contains("/login.html"))
 
 		{
-			return new AccountHomePage(driver,category);
+			return new AccountHomePage(driver);
 		}
 		else if(currentUrl().contains("home/my-account-home.html") && category.equalsIgnoreCase("Individual") || currentUrl().contains("/login.html") ) {
-			return new AccountHomePage(driver, category);
+			return new AccountHomePage(driver);
 		}
 		else if (currentUrl().contains("terminated-plan.html")) {
 			return new TerminatedHomePage(driver);

@@ -449,6 +449,15 @@ public class ClaimsAarpStepDefinition {
 		Assert.assertTrue(claimDetailspage.validateDetailsLearnmoreaboutsectionDetails());	
 
 	}
+	
+	@Then("^The User can able to see Drug Claims History: Reached Maximum Claim Results Error$")
+	public void validateMaxRxclaimsResultError(){
+		
+		ClaimSummarypage claimSummarypage = (ClaimSummarypage) getLoginScenario().getBean(PageConstants.NEW_CLAIMS_SUMMARY_PAGE);
+
+		Assert.assertTrue(claimSummarypage.validateRxReachexMaxClaimsErrorMsg());
+
+	}
 
 
 

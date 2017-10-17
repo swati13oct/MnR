@@ -166,18 +166,35 @@ And I validate the Claims Total in claims details page in AARP site
       | planType |claimPeriod    |
       | MA       |Last 24 Months |
       | MAPD     |Last 24 Months |
-     
+     #| SHIP     |Last 24 Months |
 @ClaimsDetailsSHIP
 Scenario Outline: To Verify Learn more section on Claims Details Page
 Given I am an AARP member on the redesigned site
       | Plan Type | <planType> |
-When I navigate to the Claim Details page in AARP site
-Then I validate the Learn more section in claims details page in AARP site
-And the user validates the header in claims details in AARP site
-And the user validates the EOB section in claims details page in AARP site
-And I validate the Claims Table in claims details page in AARP site
+When I navigate to the claims Summary page in redesigned site
+And the user search claims for the following claim period in AARP site
+	| Claim Period | <claimPeriod> |
+Then user validates the claims displayed based on the selection in redesigned site
+And  I navigate to the Claim Details page in AARP site
+Then I validate the Claims Table in claims details page in AARP site
 And I validate the Claims Total in claims details page in AARP site
  Examples: 
-      | planType |
-      | SHIP     |
-      
+      | planType |claimPeriod    |
+      | SHIP     |Last 24 Months |
+ 
+ 
+ 
+ @MaxClaimsResultsError
+Scenario Outline: To Verify the Drug Claims History: Reached Maximum Claim Results Error
+# This Scenario can only execute when max claims indicator as true
+ Given I am an AARP member on the redesigned site
+      | Plan Type | <planType> |
+When I navigate to the claims Summary page in redesigned site
+And the user search claims for the following claim period in AARP site
+	| Claim Period | <claimPeriod> | 
+Then The User can able to see Drug Claims History: Reached Maximum Claim Results Error
+ Examples:
+ |planType  | claimPeriod      | domain  |
+ | PDP      |   Last 24 Months | NA      |
+ 
+ 
