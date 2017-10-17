@@ -37,7 +37,7 @@ public class ContactUsPage extends UhcDriver{
 	@FindBy(id = "addAnotherPlanLink")
 	private WebElement addPlan;
 	
-	@FindBy(xpath="//div[contains(@class,'parsys request-email')]/div[not (contains(@class,'ng-hide'))][3]//a[@id='question-btn']")
+	@FindBy(xpath="//div[contains(@class,'parsys request-email')]/div[not (contains(@class,'ng-hide'))][2]//a[@id='question-btn']")
 	private WebElement fillOutFormButton;	
 	
 	@FindBy(xpath="//div[contains(@class,'parsys request-email')]/div[not (contains(@class,'ng-hide'))][3]//a[@id='question-cancel']")
@@ -47,29 +47,29 @@ public class ContactUsPage extends UhcDriver{
 	private WebElement questionAbout;
 	
 	
-	@FindBy(xpath="//div[contains(@class,'parsys request-email')]/div[not (contains(@class,'ng-hide'))][3]//textarea[@id='question-message']")
+	@FindBy(xpath="//div[contains(@class,'parsys request-email')]/div[not (contains(@class,'ng-hide'))][2]//textarea[@id='question-message']")
 	private WebElement questionMessage;
 	
-	@FindBy(xpath="//div[contains(@class,'parsys request-email')]/div[not (contains(@class,'ng-hide'))][3]//button[@id='question-submit']")
+	@FindBy(xpath="//div[contains(@class,'parsys request-email')]/div[not (contains(@class,'ng-hide'))][2]//button[@id='question-submit']")
 	private WebElement questionSubmit;
 	
 	
-	@FindBy(xpath="//div[contains(@class,'parsys request-email')]/div[not (contains(@class,'ng-hide'))][3]//a[@id='add-alt-email']")
+	@FindBy(xpath="//div[contains(@class,'parsys request-email')]/div[not (contains(@class,'ng-hide'))][2]//a[@id='add-alt-email']")
 	private WebElement addAlternativeEmail;
 	
-	@FindBy(xpath="//div[contains(@class,'parsys request-email')]/div[not (contains(@class,'ng-hide'))][3]//input[@id='question-alt-email']")
+	@FindBy(xpath="//div[contains(@class,'parsys request-email')]/div[not (contains(@class,'ng-hide'))][2]//input[@id='question-alt-email']")
 	private WebElement alternativeEmailAddress;
 	
-	@FindBy(xpath="//div[contains(@class,'parsys request-email')]/div[not (contains(@class,'ng-hide'))][3]//input[@id='question-alt-email-confirm']")
+	@FindBy(xpath="//div[contains(@class,'parsys request-email')]/div[not (contains(@class,'ng-hide'))][2]//input[@id='question-alt-email-confirm']")
 	private WebElement confirmEmailAddress;
 	
-	@FindBy(xpath="//div[contains(@class,'parsys request-email')]/div[not (contains(@class,'ng-hide'))][3]//a[@id='add-alt-phone']")
+	@FindBy(xpath="//div[contains(@class,'parsys request-email')]/div[not (contains(@class,'ng-hide'))][2]//a[@id='add-alt-phone']")
 	private WebElement addAlternativePhneNumberLink;
 	
-	@FindBy(xpath="//div[contains(@class,'parsys request-email')]/div[not (contains(@class,'ng-hide'))][3]//input[@id='question-alt-phone']")
+	@FindBy(xpath="//div[contains(@class,'parsys request-email')]/div[not (contains(@class,'ng-hide'))][2]//input[@id='question-alt-phone']")
 	private WebElement alternativePhneNumber;
 	
-	@FindBy(xpath="//div[contains(@class,'parsys request-email')]/div[not (contains(@class,'ng-hide'))][3]//input[@id='question-alt-phone-confirm']")	
+	@FindBy(xpath="//div[contains(@class,'parsys request-email')]/div[not (contains(@class,'ng-hide'))][2]//input[@id='question-alt-phone-confirm']")	
 	private WebElement confirmAlternativePhneNumber;
 	
 	@FindBy(xpath="/html/body/div[2]/div/div/div/div[5]/div/div/div[2]/div/div[1]/div/div/div/div/div/div[2]/div[3]/div[1]")	
@@ -105,10 +105,10 @@ public class ContactUsPage extends UhcDriver{
 	@FindBy(css="div.field.ask-question-message.field-has-error div.field-input label#message-email-error.error")
 	private WebElement questionAboutEmailErrorMsg;
 	
-	@FindBy(xpath="//div[contains(@class,'parsys request-email')]/div[not (contains(@class,'ng-hide'))][3]//span[contains(@class,'green')]/p")
+	@FindBy(xpath="//div[contains(@class,'parsys request-email')]/div[not (contains(@class,'ng-hide'))][2]//span[contains(@class,'color-green-dark bold')]")
 	private WebElement requestReceivedMessageHeader;
 	
-	@FindBy(xpath="//div[contains(@class,'parsys request-email')]/div[not (contains(@class,'ng-hide'))][3]//div[contains(@class,'message-block-body')]/p[2]")
+	@FindBy(xpath="//div[contains(@class,'parsys request-email')]/div[not (contains(@class,'ng-hide'))][2]//div[contains(@class,'message-block-body')]/p")
 	private WebElement thankYouMessage;
 	
 	
@@ -343,7 +343,7 @@ public class ContactUsPage extends UhcDriver{
 				e.printStackTrace();
 			}
 			Select dropdown = new Select(driver.findElement(By.xpath("//div[contains(@class,'parsys request-email')]"
-					+ "/div[not (contains(@class,'ng-hide'))][3]//select[@id='question-about']")));
+					+ "/div[not (contains(@class,'ng-hide'))][2]//select[@id='question-about']")));
 			System.out.println("dropdown" +dropdown);
 			dropdown.getFirstSelectedOption().click();
 			dropdown.selectByVisibleText("Payment Information");
