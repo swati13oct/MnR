@@ -391,7 +391,7 @@ public class ContactUsPage extends UhcDriver{
 			Select dropdown = new Select(driver.findElement(By.xpath("//div[contains(@class,'parsys request-email')]"
 					+ "/div[not (contains(@class,'ng-hide'))][2]//select[@id='question-about']")));
 			System.out.println("dropdown" +dropdown);
-			dropdown.selectByVisibleText("Billing Information");
+			dropdown.selectByVisibleText("Payment Information");
 			try {
 				Thread.sleep(5000);
 			} catch (InterruptedException e) {
@@ -442,7 +442,7 @@ public class ContactUsPage extends UhcDriver{
 					+ "/div[not (contains(@class,'ng-hide'))][2]//select[@id='question-about']")));
 			System.out.println("dropdown" +dropdown);
 			dropdown.getFirstSelectedOption().click();
-			dropdown.selectByVisibleText("Billing Information");
+			dropdown.selectByVisibleText("Payment Information");
 			try {
 				Thread.sleep(5000);
 			} catch (InterruptedException e) {
@@ -488,7 +488,7 @@ public class ContactUsPage extends UhcDriver{
 					+ "/div[not (contains(@class,'ng-hide'))][2]//select[@id='question-about']")));
 			System.out.println("dropdown" +dropdown);
 			dropdown.getFirstSelectedOption().click();
-			dropdown.selectByVisibleText("Billing Information");
+			dropdown.selectByVisibleText("Payment Information");
 			try {
 				Thread.sleep(5000);
 			} catch (InterruptedException e) {
@@ -536,7 +536,7 @@ public class ContactUsPage extends UhcDriver{
 					+ "/div[not (contains(@class,'ng-hide'))][2]//select[@id='question-about']")));
 			//System.out.println("dropdown" +dropdown);
 			dropdown.getFirstSelectedOption().click();
-			dropdown.selectByVisibleText("Billing Information");
+			dropdown.selectByVisibleText("Payment Information");
 			try {
 				Thread.sleep(5000);
 			} catch (InterruptedException e) {
@@ -593,7 +593,7 @@ public class ContactUsPage extends UhcDriver{
 					+ "/div[not (contains(@class,'ng-hide'))][2]//select[@id='question-about']")));
 			System.out.println("dropdown" +dropdown);
 			dropdown.getFirstSelectedOption().click();
-			dropdown.selectByVisibleText("Billing Information");
+			dropdown.selectByVisibleText("Payment Information");
 			try {
 				Thread.sleep(5000);
 			} catch (InterruptedException e) {
