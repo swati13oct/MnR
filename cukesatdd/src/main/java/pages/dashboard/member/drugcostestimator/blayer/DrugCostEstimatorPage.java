@@ -9,6 +9,7 @@ import org.json.JSONObject;
 import org.junit.Assert;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.NoAlertPresentException;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
@@ -296,13 +297,15 @@ public class DrugCostEstimatorPage extends UhcDriver {
 
 		String Current_url = driver.getCurrentUrl();
 		String NewDCEUrl;
-
+		
 		if (driver.getCurrentUrl().contains("aarpmedicareplans")) {
 			//NewDCEUrl = "https://member.team-b-aarpmedicareplans.uhc.com/content/dashboard/home/drug-cost-estimator.html";
 			NewDCEUrl = "https://member.team-b-aarpmedicareplans.uhc.com/content/medicare/member/drug-lookup/overview.html";
-		} else {
+		} else if (driver.getCurrentUrl().contains("uhcmedicaresolutions")){
 			//NewDCEUrl = "https://member.team-b-uhcmedicaresolutions.uhc.com/content/dashboard/home/drug-cost-estimator.html";
 			NewDCEUrl = "https://member.team-b-uhcmedicaresolutions.uhc.com/content/medicare/member/drug-lookup/overview.html";
+		}else{
+			NewDCEUrl = "https://team-h-medicare.uhc.com/content/medicare/member/drug-lookup/overview.html";
 		}
 
 		driver.get(NewDCEUrl);
@@ -847,12 +850,15 @@ public class DrugCostEstimatorPage extends UhcDriver {
 //			WebElement deleteDrug = driver.findElement(By.xpath(deleteDrugXpath));
 //			deleteDrug.click();
 //			deleteDrug();
-			
+
 			String deleteDrugXpath = ".//*[@id='drugdetails']/div[2]/div["+drugCount+"]/div/div/section/ul/li[2]/a";
 			WebElement deleteDrug = driver.findElement(By.xpath(deleteDrugXpath));
+			((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView();", deleteDrug);
 			
 			deleteDrug.click();
+			System.out.println("drug deleted");
 			WebElement deleteButtonXpath = driver.findElement(By.xpath(".//*[@id='drugModal']/div/div/div[2]/div/section/div/button[2]"));
+			System.out.println("drug delete button");
 			waitforElement(deleteButtonXpath);
 			deleteButtonXpath.click();
 			drugCount--;

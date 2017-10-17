@@ -35,6 +35,8 @@ public class LoginPage extends UhcDriver {
 	
 	private static String PAGE_URL_TEST_HARNESS = MRConstants.UHCM_URL_TEAMB_TESTHARNESS;
 	
+	private static String PAGE_URL_TEAM_H_TEST_HARNESS = MRConstants.TEAMH_URL_TESTHARNES;
+	
 
 	//@FindBy(xpath = "//button[@id='fd_memberSignInButton' or @id='accessURAccountBTN']")
 	@FindBy(id = "fd_memberSignInButton")
@@ -201,8 +203,15 @@ public class LoginPage extends UhcDriver {
 		openAndValidate();
 	}
 	
-	public void loginToTestHarness(){
+	public void loginToTeambTestHarness(){
 		start(PAGE_URL_TEST_HARNESS);
+		validate(thUserName);
+		validate(thPassword);
+		validate(thSignIn);
+	}
+	
+	public void loginToTeamhTestHarness(){
+		start(PAGE_URL_TEAM_H_TEST_HARNESS);
 		validate(thUserName);
 		validate(thPassword);
 		validate(thSignIn);
@@ -226,7 +235,7 @@ public class LoginPage extends UhcDriver {
 
 			while (!isAlertPresent());
 		}
-		if ( MRScenario.environment.equals("team-c") || MRScenario.environment.equals("team-b")) {
+		if ( MRScenario.environment.equals("team-c") || MRScenario.environment.equals("team-b") ||  MRScenario.environment.equals("team-h")) {
 			
 			Alert alert = driver.switchTo().alert();
 	        alert.accept();
@@ -235,7 +244,7 @@ public class LoginPage extends UhcDriver {
 	        } 
 		
 		try {
-			Thread.sleep(10000);
+			Thread.sleep(30000);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

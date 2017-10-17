@@ -37,7 +37,9 @@ public class LoginPage extends UhcDriver {
 	// Page URL
 	private static String PAGE_URL = MRConstants.AARPM_URL;
 	
-	private static String PAGE_URL_TEST_HARNESS = MRConstants.UHCM_URL_TEAMB_TESTHARNESS;
+	private static String PAGE_URL_TEST_HARNESS = MRConstants.AARPM_URL_TEAMB_TESTHARNESS;
+	
+	private static String PAGE_URL_TEAM_H_TEST_HARNESS = MRConstants.TEAMH_URL_TESTHARNES;
 
 	@FindBy(id = "fd_memberSignInButton")
 	private WebElement loginIn;
@@ -221,8 +223,15 @@ public class LoginPage extends UhcDriver {
 		openAndValidate();
 	}
 	
-	public void loginToTestHarness(){
+	public void loginToTeambTestHarness(){
 		start(PAGE_URL_TEST_HARNESS);
+		validate(thUserName);
+		validate(thPassword);
+		validate(thSignIn);
+	}
+	
+	public void loginToTeamhTestHarness(){
+		start(PAGE_URL_TEAM_H_TEST_HARNESS);
 		validate(thUserName);
 		validate(thPassword);
 		validate(thSignIn);

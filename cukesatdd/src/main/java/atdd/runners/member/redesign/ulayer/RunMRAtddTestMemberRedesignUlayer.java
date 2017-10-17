@@ -10,7 +10,7 @@ import cucumber.junit.Cucumber;
 @Cucumber.Options(glue = { "atdd.framework","acceptancetests.member.redesign.ulayer" }, 
 		features = { "feature/member-redesign/ulayer" }, 
 		format = {
-		"pretty", "html:reports/test-report","json:target/cucumber.json" }, tags ={"@drug_cost_estimator1"})
+		"pretty", "html:reports/test-report","json:target/cucumber.json" }, tags ={"@member_redesign"})
 
 
 public class RunMRAtddTestMemberRedesignUlayer {
