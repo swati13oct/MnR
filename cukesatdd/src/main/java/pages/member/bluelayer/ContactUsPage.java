@@ -466,7 +466,7 @@ public class ContactUsPage extends UhcDriver{
 			}
 			String alternativeerrorMessage=alternativemessageEmailError.getText();
 			System.out.println("alternativeerrorMessage::" +alternativeerrorMessage);
-			Assert.assertTrue("Email address not valid", alternativeerrorMessage.equalsIgnoreCase("Email Address Not valid"));
+			Assert.assertTrue("Email address not valid", alternativeerrorMessage.equalsIgnoreCase("Enter your email address like this: yourname@emailprovider.com"));
 		
 	}else
 	{
@@ -513,7 +513,7 @@ public class ContactUsPage extends UhcDriver{
 			}
 			String confirmErrMessage=confirmMsgEmailError.getText();		
 			 System.out.println("confirmErrMessage;;" + confirmErrMessage);
-			 Assert.assertTrue("Please enter same email id", confirmErrMessage.equalsIgnoreCase("Please enter same email id"));
+			 Assert.assertTrue("Please enter same email id", confirmErrMessage.equalsIgnoreCase("Your email confirmation and email address do not match."));
 			
 			
 	}else
@@ -558,7 +558,7 @@ public class ContactUsPage extends UhcDriver{
 			}
 			String invalidPhnenumerErrmsg = invalidPhneErrorMsg.getText();
 			System.out.println("invalidPhnenumerErrmsg::" +invalidPhnenumerErrmsg);
-			Assert.assertTrue("Phone number is not valid", invalidPhnenumerErrmsg.equals("Phone number is not valid"));
+			Assert.assertTrue("Phone number is not valid", invalidPhnenumerErrmsg.equals("Enter phone number like this: 111-111-1111."));
 			confirmAlternativePhneNumber.sendKeys("789");
 			jsClick(driver.findElement(By.xpath("//div[contains(@class,'parsys request-email')]/div[not (contains(@class,'ng-hide'))][2]//input[@id='question-alt-email']/preceding::p[1]")));
 			driver.findElement(By.xpath
@@ -570,7 +570,7 @@ public class ContactUsPage extends UhcDriver{
 				e.printStackTrace();
 			}
 			String confirmPhoneErrmsg = confirmPhneErrorMsg.getText();
-			Assert.assertTrue("Please enter same Number", confirmPhoneErrmsg.equals("Please enter same Number"));
+			Assert.assertTrue("Please enter same Number", confirmPhoneErrmsg.equals("Enter a value that matches the value above."));
 			
 	}else
 	{
@@ -603,7 +603,7 @@ public class ContactUsPage extends UhcDriver{
 			questionMessage.sendKeys("hhh");
 			questionMessage.clear();
 			String questionErrorMessage=questionEmailmessageError.getText();
-			 Assert.assertTrue("Please dont leave it blank", questionErrorMessage.equalsIgnoreCase("Please dont leave it blank"));
+			 Assert.assertTrue("Please dont leave it blank", questionErrorMessage.equalsIgnoreCase("Enter a question or comment."));
 			 //Assert.assertTrue("Please enter same email id", confirmErrMessage.equalsIgnoreCase("Please enter same email id"));
 		
 		
