@@ -5,7 +5,9 @@ import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import org.junit.Assert;
+import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -46,17 +48,27 @@ public class EOBPage extends UhcDriver{
 	@FindBy(xpath="//*[contains(text(),'Watch Video')]")
 	private WebElement readEOBVideo;
 	
+	@FindBy(id="adobesitelink")
+	private WebElement adobeWebsiteLink;
+	
+	@FindBy(id="proceedbtn")
+	private WebElement siteLeavingProceedButton;
+	
+	@FindBy(id="cancelbtn")
+	private WebElement siteLeavingCancelButton;
+	
 	private static String EOB_DIRECT_URL = MRConstants.EOB_DIRECT_URL;
 	
 	public EOBPage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
+		openAndValidate();
  	}
 
 	@Override
 	public void openAndValidate() {
 		// TODO Auto-generated method stub
-		
+		//
 	}
 	
 	public EOBPage selectDateRange(String dateRange, String planType, String eobTypeData){
@@ -288,6 +300,70 @@ public class EOBPage extends UhcDriver{
 		
  		}else{
 			System.out.println("HOW TO READ YOUR MONTHLY MEDICAL EXPLANATION OF BENEFITS (VIDEO) link not displayed");
+			Assert.fail();
+		}
+		return null;
+	}
+	
+	public EOBPage loginToDashboardPage(String userName){
+		start(EOB_DIRECT_URL);
+		driver.manage().timeouts().implicitlyWait(20,TimeUnit.SECONDS) ;
+		System.out.println(userName);
+		driver.findElement(By.id("username")).sendKeys(userName);
+		driver.findElement(By.id("password")).sendKeys("Password@1");
+		driver.findElement(By.id("sign-in-btn")).click();
+		try{
+			Alert alert = driver.switchTo().alert();
+			alert.accept();
+			/*Alert alert1 = driver.switchTo().alert();
+			alert1.accept();*/
+			}catch(Exception e)		{
+				System.out.println("No Such alert displayed");
+			}
+		
+		return new EOBPage(driver);
+	}
+	
+	public EOBPage navigateDirectToEOBPag(){
+		driver.manage().timeouts().implicitlyWait(40,TimeUnit.SECONDS);
+		driver.findElement(By.xpath("//*[text()='Go to EOB Search page']")).click();
+		if(driver.getTitle().equalsIgnoreCase("EOB Search")){
+        return new EOBPage(driver);
+		}
+		return null;
+	}
+	
+	public EOBPage validateSiteLeaveingPopUP(){
+		driver.manage().timeouts().implicitlyWait(20,TimeUnit.SECONDS);
+		String eobPageTitle = driver.getTitle();
+		System.out.println(eobPageTitle);
+		//adobeWebsiteLink.click();
+		JavascriptExecutor js = (JavascriptExecutor)driver;
+		js.executeScript("arguments[0].click();", adobeWebsiteLink);
+		validate(siteLeavingProceedButton);
+		validate(siteLeavingCancelButton);
+		
+		//now click cancel and validate any element on page
+		siteLeavingCancelButton.click();
+		validate(adobeWebsiteLink);
+		
+		//now again validate site leaving popup
+		js.executeScript("arguments[0].click();", adobeWebsiteLink);
+		validate(siteLeavingProceedButton);
+		validate(siteLeavingCancelButton);
+		
+		//now click on proceed and validate new tab opens
+		siteLeavingProceedButton.click();
+		switchToNewTab();
+		driver.manage().timeouts().implicitlyWait(20,TimeUnit.SECONDS);
+		
+		//capture next page title
+		String pageTitle = driver.getTitle();
+		System.out.println(pageTitle);
+		if(pageTitle!=null && pageTitle!=eobPageTitle){
+			System.out.println("Site leaving popup validated and working fine");
+		}else{
+			System.out.println("Site leaving popup validated and working fine");
 			Assert.fail();
 		}
 		return null;
