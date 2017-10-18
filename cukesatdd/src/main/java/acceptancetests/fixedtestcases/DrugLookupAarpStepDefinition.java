@@ -292,11 +292,8 @@ public class DrugLookupAarpStepDefinition {
 		String zipcode = pharmacyNameAttribute.getGherkinRows().get(0)
 				.getCells().get(1);
 
-		String planType = (String) getLoginScenario().getBean(
-				CommonConstants.PLAN_TYPE);
 		SelectPharmacyPage selectPharmacyPage = (SelectPharmacyPage) getLoginScenario()
 				.getBean(PageConstants.SELECT_PHARMACY_PAGE);
-		selectPharmacyPage.changeZipcode(zipcode);
 		selectPharmacyPage.selectPharmacy();
 		ViewDrugCostPage viewDrugCostPage = selectPharmacyPage.navigateToStep3();	
 

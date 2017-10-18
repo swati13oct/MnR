@@ -22,13 +22,13 @@ And the user search for pharmacies using the following information in AARP site
 	  | Pharmacy Type | <pharmacyType> |
 	  | Distance      | <distance>     |
 And the user selects a pharmacy from the list of pharmacies in AARP site
-      | <pharmacyName> |
+      | Zipcode |  <zipcode> |
 Then the user validates drug cost page in AARP site
 		| Drug Dosage    | <drugDosage>    |
 		
 Examples:
-		| planType | category    	| 			planName				|drugInitials | drugName     | drugDosage          | drugQuantity | drugFrequency  | packages       | drugType    | pharmacyType                | distance | pharmacyName        |
-		| MAPD     | COSMOS_dce1	| AARP MedicareComplete Plan 1 (HMO)| lipi        | Lipitor      | Lipitor TAB 10MG    | 30           | Every 1 month  | null           | Brand            | Standard Network Pharmacy   | 15 miles | Brockie Pharmatech   |
+		| planType | category    	| 			planName				|drugInitials | drugName     | drugDosage          | drugQuantity | drugFrequency  | packages       | drugType    | pharmacyType                | distance | zipcode        |
+		| MAPD     | COSMOS_dce1	| AARP MedicareComplete Plan 1 (HMO)| lipi        | Lipitor      | Lipitor TAB 10MG    | 30           | Every 1 month  | null           | Brand            | Standard Network Pharmacy   | 15 miles | 90210   |
 
 @dcePlans	    
 Scenario Outline: Verify DCE plans are showing AARP plans and not UHC plans

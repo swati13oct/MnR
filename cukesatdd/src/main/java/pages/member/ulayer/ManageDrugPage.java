@@ -58,7 +58,7 @@ public class ManageDrugPage extends UhcDriver {
 	@FindBy(xpath = "//div[@id='dce.member']/div/div[6]/div/div/form/div/div/div/div[2]/p")
 	private WebElement pharmacyPageHeading;
 
-	@FindBy(xpath = ".//*[@id='dceMemberUlayer']/div/div[1]/div[1]/div[2]")
+	@FindBy(xpath = ".//*[@id='dceMemberUlayer']/div/div[1]/div[1]/h3[2]")
 	WebElement pharmacyTab;
 	
 	@FindBy(id = "disclosure_link")
@@ -170,7 +170,7 @@ public class ManageDrugPage extends UhcDriver {
 
 	public SelectPharmacyPage navigateToPharmacyPage() {
 		
-			selectPharmacyBtn.click();
+		pharmacyTab.click();
 			try {
 				Thread.sleep(5000);
 			} catch (InterruptedException e) {
@@ -341,7 +341,7 @@ public class ManageDrugPage extends UhcDriver {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		if(validate(addDrugLink)&&validate(selectPharmacyBtn))
+		if(validate(addDrugLink)&&validate(pharmacyTab))
 			return true;
 		return false;
 	}

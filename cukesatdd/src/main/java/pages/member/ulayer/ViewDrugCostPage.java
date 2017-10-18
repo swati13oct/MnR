@@ -33,7 +33,7 @@ public class ViewDrugCostPage extends UhcDriver {
 	@FindBy(linkText = "Delete")
 	private WebElement deleteLink;
 	
-	@FindBy(xpath = ".//*[@id='dce.member']/div/div[7]/div/div/div/div/div[1]/div[3]/div[3]/table/tbody/tr[8]/td[1]")
+	@FindBy(xpath = ".//*[@id='dceMemberUlayer']/div/div[1]/div[3]/div[3]/table/tbody/tr[7]/td[1]")
 	private WebElement drugInfoBox;
 	
 	@FindBy(linkText ="Edit pharmacy")
@@ -116,8 +116,7 @@ public class ViewDrugCostPage extends UhcDriver {
 	
 	public boolean validateViewDrugPage(String dosage) {
 		CommonUtility.waitForPageLoad(driver, editLink, CommonConstants.TIMEOUT_30);
-		System.out.println("text: " +drugInfoBox.getText()); System.out.println("dosage: "+dosage);
-		if(validate(descriptionTable)&&(drugInfoBox.getText().contains(dosage)) && validate(editLink)&&validate(editPharmacyLink))
+		if((drugInfoBox.getText().contains(dosage)) && validate(editLink))
 			return true;
 		else 
 			return false;

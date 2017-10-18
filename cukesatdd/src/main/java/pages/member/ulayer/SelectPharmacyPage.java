@@ -56,6 +56,24 @@ public class SelectPharmacyPage extends UhcDriver {
 	@FindBy(linkText = "select")
 	private WebElement selectPharmacyButton;
 	
+	@FindBy(xpath = ".//*[@id='dceMemberUlayer']/div/div[1]/div[2]/div[2]/div[5]/a[1]")
+	private WebElement zipcodeLink;
+	
+	@FindBy(xpath = ".//*[@id='dceMemberUlayer']/div/div[1]/div[2]/div[2]/div[5]/a[2]/span")
+	private WebElement enterZipBtn;
+	
+	@FindBy(xpath = ".//*[@id='dceMemberUlayer']/div/div[1]/div[2]/div[2]/div[5]/span[3]/input")
+	private WebElement zipcodeField;
+	
+	@FindBy(xpath = ".//*[@id='dceMemberUlayer']/div/div[1]/div[2]/div[2]/div[7]/table/tbody/tr[2]/td[5]/a/span")
+	private WebElement select_first_btn;
+	
+	@FindBy(xpath = ".//*[@id='dceMemberUlayer']/div/div[1]/div[2]/div[5]/a[3]/span")
+	private WebElement viewDrugCostBtn;
+	
+	@FindBy(xpath = ".//*[@id='dceMemberUlayer']/div/div[1]/div[3]/div[3]/table/tbody/tr[2]/td[1]")
+	private WebElement descBox;
+	
 	@FindBy(xpath = "/html/body/div[7]/div/div/table/tbody/tr[5]/td/div[4]/div/div[6]/div[1]/div[3]/div/div/div/div[7]/div/div/div/div/div[1]/div[3]/div[2]/span[6]/span[2]/strong/span[2]")
 	private WebElement planYear2017;
 
@@ -218,25 +236,14 @@ public class SelectPharmacyPage extends UhcDriver {
 		System.out.println("selectPharmacyJson----->"+selectPharmacyJson);
 
 	}
-	@FindBy(xpath = ".//*[@id='dceMemberUlayer']/div/div[1]/div[2]/div[2]/div[5]/a[1]")
-	private WebElement zipcodeLink;
-	
-	@FindBy(xpath = ".//*[@id='dceMemberUlayer']/div/div[1]/div[2]/div[2]/div[5]/a[2]/span")
-	private WebElement enterZipBtn;
-	
-	@FindBy(xpath = ".//*[@id='dceMemberUlayer']/div/div[1]/div[2]/div[2]/div[5]/span[3]/input")
-	private WebElement zipcodeField;
-	
-	@FindBy(xpath = ".//*[@id='dceMemberUlayer']/div/div[1]/div[2]/div[2]/div[7]/table/tbody/tr[2]/td[5]/a/span")
-	private WebElement select_first_btn;
-	
-	@FindBy(xpath = ".//*[@id='dceMemberUlayer']/div/div[1]/div[2]/div[5]/a[3]/span")
-	private WebElement viewDrugCostBtn;
-	
-	@FindBy(xpath = ".//*[@id='dceMemberUlayer']/div/div[1]/div[3]/div[2]/table/tbody/tr[2]/td[1]")
-	private WebElement descBox;
 	
 	public void selectPharmacy(){
+		try {
+			Thread.sleep(3000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		if(select_first_btn.isDisplayed())
 			select_first_btn.click();
 	}
@@ -254,7 +261,7 @@ public class SelectPharmacyPage extends UhcDriver {
 		zipcodeField.sendKeys(zipcode);
 		enterZipBtn.click();
 		try {
-			Thread.sleep(3000);
+			Thread.sleep(5000);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
