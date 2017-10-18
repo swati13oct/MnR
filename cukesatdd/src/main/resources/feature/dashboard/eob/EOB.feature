@@ -82,7 +82,7 @@ Examples:
 	| planType  | memberType   | eobTypeData       | fromDate   | toDate     |dateRange       |
  	| MA  | withEOB      | Medical           | 12/12/2007 | 12/12/2008 |Last 6 Months   |
  	
-@workingOn	
+ 	
 Scenario Outline: To verify How to read a medical EOB PDF
 Given registered AMP with for EOB flow
 	| Plan Type      |<planType>  |
@@ -227,7 +227,7 @@ And the user validates EOB statments displayed
  	#| PDP     | withEOB      | Prescription      |12/12/2007 | 12/12/2008 | Last 18 Months |
  	#| Ship    | withEOB      | Medical           |12/12/2007 | 12/12/2008 | Last 12-18 Months |
  
-@F85974passed	
+@F85974passed	@workingOn
 Scenario Outline: To validate EOB Type Drop-Down (UI) - MAPD
 Given registered AMP with for EOB flow
 	| Plan Type      |<planType>  |
@@ -240,24 +240,23 @@ Examples:
 | planType  | memberType   | eobTypeData      |  
 | MAPD     | GroupwithEOB      | Medical           |
 
-@F101852 @EOBVideos
+@F101852 @EOBVideos @needMemberWithEOB
 Scenario Outline: To verify How to read a medical EOB Videos
 Given registered AMP with for EOB flow
 	| Plan Type      |<planType>  |
 	| Member Type    |<memberType>|
 Then the user navigates to EOB page
-And the user validates How to read your Medical EOB video
+Then the user validates How to read your Medical EOB video
  	Examples:
 	| planType  | memberType   |
-	| MAPD      | withEOBVideo      |
+	| MAPD      | rx_eob_001      |
 	#| MA        | withEOBVideo      |
 	
-@EOBSepsprint1
+@EOBSepsprint1 @fixed
 Scenario Outline: To validate EOB Type Drop-Down
 Given registered AMP with for EOB flow
 	| Plan Type      |<planType>  |
 	| Member Type    |<memberType>|
-Then the user navigates to EOB page
 Then the user navigates to EOB page and validates the page
 |Date Range|<dateRange>  |
 |Plan Type |<planType>   |
@@ -267,11 +266,11 @@ Then the user navigates to EOB page and validates the page
 
 Examples:
        | planType  | memberType   | eobTypeData        | fromDate   | toDate     |   dateRange    | 
-       | MAPD       | withEOB      | Medical           | 2016/01/01 | 2017/04/01 | Custom Search  |
- | MA         | withEOB      | Medical           | 2016/01/01 | 2017/04/01 | Custom Search  |
-       | PDP       | withEOB      | Medical           | 2016/01/01 | 2017/04/01 | Custom Search  |
-       | Ship      | withEOB      | Medical           | 2016/01/01 | 2017/04/01 | Custom Search  |
- @EOBSepsprint1
+       | MAPD       | q3_sep_ulayer561      | Medical           | 2016/01/01 | 2017/04/01 | Custom Search  |
+ 			 #| MA         | withEOB      | Medical           | 2016/01/01 | 2017/04/01 | Custom Search  |
+       #| PDP       | withEOB      | Medical           | 2016/01/01 | 2017/04/01 | Custom Search  |
+      # | Ship      | withEOB      | Medical           | 2016/01/01 | 2017/04/01 | Custom Search  |
+ @EOBSepsprint1 @fixed
 Scenario Outline: To validate EOB PAgination
 Given registered AMP with for EOB flow
 	| Plan Type      |<planType>  |
@@ -285,8 +284,8 @@ And the user validates pagination functionality
 |To Date   |<toDate>     |      
 
 Examples:
-       | planType  | memberType   | eobTypeData        | fromDate   | toDate     |   dateRange    | 
-       | MAPD       | withEOB      | Medical           | 2016/01/01 | 2017/04/01 | Custom Search  |   
+       | planType  | memberType   				| eobTypeData        | fromDate   | toDate     |   dateRange    | 
+       | MAPD      | q3_sep_ulayer561     | Medical           | 2016/01/01 | 2017/04/01 | Custom Search  |   
        
 @fixed
 Scenario Outline: Allowed Domains – Authors need ability to define messages and domains for leaving member sites (ATDD)
