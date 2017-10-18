@@ -123,7 +123,7 @@ Examples:
 		|90210  |Los Angeles County  |pdp       |
 	#	|33012  |Miami-Dade County   |snp       |								
 		
-@US657296 @sprint3 @workingScripts
+@US657296 @sprint3 @workingScripts @demo
 Scenario Outline: To validate enroll in plan popup
 Given the user is on the vpp portfolio page 
 Then the user performs plan search using zipcode 

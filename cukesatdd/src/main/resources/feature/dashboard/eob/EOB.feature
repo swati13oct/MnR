@@ -1,7 +1,7 @@
 @eob
 Feature:To test EOB on Dashboard page
 
-@fixed
+@fixed @demo
 Scenario Outline: To verify mobile responsive for all plans on EOB page
 Given registered AMP with for EOB flow
 	| Plan Type      |<planType>  |
