@@ -462,7 +462,30 @@ public class ClaimsAarpStepDefinition {
 
 	}
 
+@Then("^the user should be able to see the SHIP Date Range Greater Than 24-Months Error$")
+public void validateDateRangeErrorSHIP(){
+	
+	ClaimSummarypage claimSummarypage = (ClaimSummarypage) getLoginScenario().getBean(PageConstants.NEW_CLAIMS_SUMMARY_PAGE);
+	//.Assert.assertTrue(claimSummarypage.validateShipGreaterThan24MonthsErrorMsg());
+	claimSummarypage.validateShipGreaterThan24MonthsErrorMsg();
+	
+	
+}
+@Then("^the user should be able to see the FED Date Range Greater Than 24-Months Error$")
+public void validateDateRangeErrorMsgFED(){
+	ClaimSummarypage claimSummarypage = (ClaimSummarypage) getLoginScenario().getBean(PageConstants.NEW_CLAIMS_SUMMARY_PAGE);
+	//.Assert.assertTrue(claimSummarypage.validateShipGreaterThan24MonthsErrorMsg());
+	claimSummarypage.validateFedGreaterThan24MonthsErrorMsg();
+	
+}
 
+@Then("^the user should be able to see the from date is greater than to date error message$")
+public void validateToDateErrorMessage(){
+	ClaimSummarypage claimSummarypage = (ClaimSummarypage) getLoginScenario().getBean(PageConstants.NEW_CLAIMS_SUMMARY_PAGE);
+	//.Assert.assertTrue(claimSummarypage.validateShipGreaterThan24MonthsErrorMsg());
+	claimSummarypage.validatefromDateLaterThanToDateError();
+	
+}
 
 
 }

@@ -198,3 +198,58 @@ Then The User can able to see Drug Claims History: Reached Maximum Claim Results
  | PDP      |   Last 24 Months | NA      |
  
  
+@shipDateRangeGreaterThan24MonthsErrmsg
+Scenario Outline: To Verify the SHIP Date Range Greater Than 24-Months Error
+Given I am an AARP member on the redesigned site
+      | Plan Type | <planType> |
+When I navigate to the claims Summary page in redesigned site
+And the user search claims for the following claim period in AARP site
+	| Claim Period | <claimPeriod> | 
+And the user search claims for the following time interval in redesigned site
+	| Claims To Date   | <claimToDate>   |
+	| Claims From Date | <claimFromDate>  |
+Then the user should be able to see the SHIP Date Range Greater Than 24-Months Error
+
+Examples:
+ |planType  | claimPeriod      | domain  |claimToDate |claimFromDate |
+ | SHIP     |   Custom Search  | NA      | 10/10/2017 |06/14/2012    |
+ 
+ 
+@govtDateRangeGreaterThan24MonthsErrmsg
+Scenario Outline: To Verify the FED Date Range Greater Than 24-Months Error
+Given I am an AARP member on the redesigned site
+      | Plan Type | <planType> |
+When I navigate to the claims Summary page in redesigned site
+And the user search claims for the following claim period in AARP site
+	| Claim Period | <claimPeriod> | 
+And the user search claims for the following time interval in redesigned site
+	| Claims To Date   | <claimToDate>   |
+	| Claims From Date | <claimFromDate>  |
+Then the user should be able to see the FED Date Range Greater Than 24-Months Error
+
+Examples:
+ |planType  | claimPeriod      | claimToDate | claimFromDate |
+ | MAPD     |   Custom Search  |  10/10/2017 | 06/14/2012    |
+ 
+ @fromdatGreaterThanToDate
+Scenario Outline: To Verify the SHIP Date Range Greater Than 24-Months Error
+Given I am an AARP member on the redesigned site
+      | Plan Type | <planType> |
+When I navigate to the claims Summary page in redesigned site
+And the user search claims for the following claim period in AARP site
+	| Claim Period | <claimPeriod> | 
+And the user search claims for the following time interval in redesigned site
+	| Claims To Date   | <claimToDate>   |
+	| Claims From Date | <claimFromDate>  |
+Then the user should be able to see the from date is greater than to date error message
+
+Examples:
+ |planType  | claimPeriod      | claimToDate | claimFromDate |
+ | MAPD     |   Custom Search  |  10/10/2017 | 10/11/2017    |
+	 
+	 
+	 
+	 
+	 
+ 
+ 
