@@ -834,4 +834,5 @@ public class CommonConstants {
 	public static final String ANDROIDPROPERTY_FILE_NAME = "config_andr_web.properties";
 	public static final String CHROMEPROPERTY_FILE_NAME = "config_chrome_web.properties";
 	public static final String SAFARIPROPERTY_FILE_NAME = "config_safari_web.properties";
+	public static final String IEPROPERTY_FILE_NAME = "config_ie_web.properties";
 }
