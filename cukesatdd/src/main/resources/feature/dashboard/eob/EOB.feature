@@ -15,8 +15,8 @@ Then the user navigates to EOB page and validates the page
 Examples:
 	| planType    | memberType           | eobTypeData       | fromDate   | toDate     |dateRange       |
 	| MAPD-COSMOS | q3_sep_ulayer561     | Medical           | 12/12/2007 | 12/12/2008 |Last 6 months   |
-	| MAPD-NICE   | q3_sep_ulayer028     | Medical           | 12/12/2007 | 12/12/2008 |Last 6 months   |
-	| MA-NICE     | q3_sep_ulayer193     | Medical           | 12/12/2007 | 12/12/2008 |Last 6 months   |
+#	| MAPD-NICE   | q3_sep_ulayer028     | Medical           | 12/12/2007 | 12/12/2008 |Last 6 months   |
+#	| MA-NICE     | q3_sep_ulayer193     | Medical           | 12/12/2007 | 12/12/2008 |Last 6 months   |
 @F85974
 @fixed
 Scenario Outline: To verify mobile responsive for all plans on EOB page
