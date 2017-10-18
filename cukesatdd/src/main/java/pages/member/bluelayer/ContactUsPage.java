@@ -89,17 +89,17 @@ public class ContactUsPage extends UhcDriver{
 	private WebElement questionEmailmessageError;
 	
 
-	@FindBy(xpath="//div[contains(@class,'parsys request-email')]/div[not (contains(@class,'ng-hide'))][3]//input[@id='question-alt-email']/following::label[@id='message-email-error'][1]")
+	@FindBy(xpath="//div[contains(@class,'parsys request-email')]/div[not (contains(@class,'ng-hide'))][2]//input[@id='question-alt-email']/following::label[@id='message-email-error'][1]")
 	private WebElement alternativemessageEmailError;
 	
 	
-	@FindBy(xpath="//div[contains(@class,'parsys request-email')]/div[not (contains(@class,'ng-hide'))][3]//input[@id='question-alt-email-confirm']/following::label[@id='message-email-error'][1]")
+	@FindBy(xpath="//div[contains(@class,'parsys request-email')]/div[not (contains(@class,'ng-hide'))][2]//input[@id='question-alt-email-confirm']/following::label[@id='message-email-error'][1]")
 	private WebElement confirmMsgEmailError;
 	
-	@FindBy(xpath="//div[contains(@class,'parsys request-email')]/div[not (contains(@class,'ng-hide'))][3]//input[@id='question-alt-phone']/following::label[@id='message-email-error'][1]")
+	@FindBy(xpath="//div[contains(@class,'parsys request-email')]/div[not (contains(@class,'ng-hide'))][2]//input[@id='question-alt-phone']/following::label[@id='message-email-error'][1]")
 	private WebElement invalidPhneErrorMsg;
 	
-	@FindBy(xpath="//div[contains(@class,'parsys request-email')]/div[not (contains(@class,'ng-hide'))][3]//input[@id='question-alt-phone-confirm']/following::label[@id='message-email-error'][1]")
+	@FindBy(xpath="//div[contains(@class,'parsys request-email')]/div[not (contains(@class,'ng-hide'))][2]//input[@id='question-alt-phone-confirm']/following::label[@id='message-email-error'][1]")
 	private WebElement confirmPhneErrorMsg;
 	
 	@FindBy(css="div.field.ask-question-message.field-has-error div.field-input label#message-email-error.error")
