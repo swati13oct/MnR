@@ -99,7 +99,7 @@ public class ContactUsPage extends UhcDriver{
 	@FindBy(xpath="//div[contains(@class,'parsys request-email')]/div[not (contains(@class,'ng-hide'))][2]//input[@id='question-alt-phone']/following::label[@id='message-email-error'][1]")
 	private WebElement invalidPhneErrorMsg;
 	
-	@FindBy(xpath="//div[contains(@class,'parsys request-email')]/div[not (contains(@class,'ng-hide'))][2]//input[@id='question-alt-phone-confirm']/following::label[@id='message-email-error'][1]")
+	@FindBy(xpath="//div[contains(@class,'parsys request-email')]/div[not (contains(@class,'ng-hide'))][2]//input[@id='question-alt-phone-confirm']/following::label[@id='message-email-error'][2]")
 	private WebElement confirmPhneErrorMsg;
 	
 	@FindBy(css="div.field.ask-question-message.field-has-error div.field-input label#message-email-error.error")
@@ -513,7 +513,7 @@ public class ContactUsPage extends UhcDriver{
 			}
 			String confirmErrMessage=confirmMsgEmailError.getText();		
 			 System.out.println("confirmErrMessage;;" + confirmErrMessage);
-			 Assert.assertTrue("Please enter same email id", confirmErrMessage.equalsIgnoreCase("Your email confirmation and email address do not match."));
+			 Assert.assertTrue("Please enter same email id", confirmErrMessage.equalsIgnoreCase("This Field is Required."));
 			
 			
 	}else
@@ -564,7 +564,7 @@ public class ContactUsPage extends UhcDriver{
 			driver.findElement(By.xpath
 					("//div[contains(@class,'parsys request-email')]/div[not (contains(@class,'ng-hide'))][2]//input[@id='question-alt-email']/preceding::p[1]")).click();
 			try {
-				Thread.sleep(3000);
+				Thread.sleep(5000);
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
