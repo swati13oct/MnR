@@ -1012,7 +1012,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 
 	public PlanDetailsPage clickViewDetails() {
 		List<WebElement> viewPlansLinks = driver.findElements(By.id("viewmoredetlinkma"));
-		viewPlansLinks.get(3).click();
+		viewPlansLinks.get(2).click();
 		if(getTitle().equalsIgnoreCase("Our Medicare Plan Types | UnitedHealthcare®"))
 			return new PlanDetailsPage(driver);
 		return null;
