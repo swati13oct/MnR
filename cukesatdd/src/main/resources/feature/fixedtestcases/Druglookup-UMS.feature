@@ -1,5 +1,5 @@
 @druglookupUms
-Feature: 1.26-DCE (Member) To test drug search on UMS site
+Feature: 1.26-VBF-Member-DCE (Member) To test drug search on UMS site
 
 Scenario Outline: Verify drug cost information in UMS site
 Given registered UHC member with following details for estimate drug cost

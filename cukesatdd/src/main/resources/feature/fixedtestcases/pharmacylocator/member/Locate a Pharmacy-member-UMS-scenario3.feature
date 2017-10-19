@@ -1,6 +1,6 @@
 @fixedTestCaseTest
 @memberpharmacylocatorblayerscenario3
-Feature:1.20.3-To test Locate a Pharmacy tool in UMS site for all pharmacy types for default zipcode in UMS site-test3
+Feature:1.20.3-VBF-Member-To test Locate a Pharmacy tool in UMS site for all pharmacy types for default zipcode in UMS site-test3
 Scenario Outline:To verify available pharmacies for particular zipcode in UMS site
 Given registered member to verify locate a pharmacy in UMS Site
 	| Plan Type    | <plantype>   |

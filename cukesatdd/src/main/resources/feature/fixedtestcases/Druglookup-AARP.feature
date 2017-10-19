@@ -1,5 +1,5 @@
 @druglookup
-Feature: 1.25-DCE (Member) To test drug search on AARP site
+Feature: 1.25-VBF-Member-DCE (Member) To test drug search on AARP site
 @dceUlayer
 Scenario Outline: Verify drug search in AARP site for a member
 Given registered AMP user with following attributes for drug search

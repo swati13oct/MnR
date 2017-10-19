@@ -1,6 +1,6 @@
 @fixedTestCaseTest
 @claims
-Feature:1.02-To test the medical claims summary and details flow in UMS site
+Feature:1.02-VBF-Member-To test the medical claims summary and details flow in UMS site
 @medClaimsBlayer
 Scenario Outline:Verify the medical claim summary  and details for selected time period in UMS site
 Given the user is on the UHCM site login page

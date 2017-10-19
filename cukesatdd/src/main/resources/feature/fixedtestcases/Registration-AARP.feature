@@ -1,6 +1,6 @@
 @fixedTestCaseTest
 @Registration
-Feature:1.08-To test registration flow in AARP site
+Feature:1.08-VBF-Member-To test registration flow in AARP site
 Scenario Outline:To verify registration for federal member without perks in AARP site
 Given the user is on registration page of AARP site 
 	|	User Name	|	<userName>	|
