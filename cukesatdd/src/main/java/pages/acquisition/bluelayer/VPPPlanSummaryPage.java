@@ -69,7 +69,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	@FindBy(xpath = "//div[@class='module-plan-overview module swiper-slide ng-scope']")
 	List<WebElement> maPlanElement;
 
-	@FindBy(xpath = "//div[@id='plan-list-1']/div/div[1]/div/h2")
+	@FindBy(xpath = "//div[@id='plan-list-1']/div/div[1]/div/div/h2")
 	WebElement maPlanHeadingText;
 	
 
@@ -80,7 +80,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	List<WebElement> maPlans;
 
 
-	@FindBy(xpath = "//div[@id='plan-list-3']/div/div[1]/div/h2")
+	@FindBy(xpath = "//div[@id='plan-list-3']/div/div[1]/div/div/h2")
 	WebElement pdpPlanHeadingText;
 
 	@FindBy(xpath = "//div[@id='pdpplans_container']/h1/span")
