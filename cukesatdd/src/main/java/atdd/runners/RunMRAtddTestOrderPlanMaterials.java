@@ -15,9 +15,15 @@ import cucumber.junit.Cucumber;
 @Cucumber.Options(glue = { "atdd.framework","acceptancetests.ordermaterials.ulayer" }, 
 		features = { "feature/ordermaterials/ulayer" }, 
 		format = {
-				"pretty", "html:reports/test-report","json:target/cucumber.json"}, tags ={"@MAPSOrdermaterials,@SHIPOrderMaterials,@ConfirmationPage,@ValidateHeaderTabs,@ValidateOrderMaterialOptions,@ValidateErrorMessage,@ValidateSHIPErrorMessage"})
-//@MAPSOrdermaterials,@SHIPOrderMaterials,@ConfirmationPage,@ValidateHeaderTabs,@ValidateOrderMaterialOptions,@ValidateErrorMessage,@ValidateSHIPErrorMessage
-public class RunMRAtddTestOrderPlanMaterials {
+				"pretty", "html:reports/test-report","json:target/cucumber.json"}, tags ={"@MAPSOrdermaterials,@SHIPOrderMaterials,"
++ "@ConfirmationPage,@ValidateHeaderTabs,@ValidateOrderMaterialOptions,@ValidateErrorMessage,"
++ "@ValidateSHIPErrorMessage"})
+
+
+/*@MAPSOrdermaterials,@SHIPOrderMaterials,"
++ "@ConfirmationPage,@ValidateHeaderTabs,@ValidateOrderMaterialOptions,@ValidateErrorMessage,"
++ "@ValidateSHIPErrorMessage
+*/public class RunMRAtddTestOrderPlanMaterials {
 	
 	
 }

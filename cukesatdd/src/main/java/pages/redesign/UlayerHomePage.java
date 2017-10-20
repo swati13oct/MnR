@@ -49,7 +49,7 @@ public class UlayerHomePage extends UhcDriver {
 	@FindBy(xpath = "//a[contains(text(), 'Go to My Profile and Preferences_Redesign')]")
 	private WebElement MyProfileLink;
 
-	@FindBy(xpath = "//*[@id='profilePreferencesController']//h1")
+	@FindBy(xpath = "//h1[contains(text(), 'My Profile and Preferences')]")
 	private WebElement MyProfilePageHeader;
 
 	@FindBy(xpath = "//a[contains(text(), 'Go to Payments')]")
@@ -183,6 +183,7 @@ public class UlayerHomePage extends UhcDriver {
 
 	@Override
 	public void openAndValidate() {
+		CommonUtility.checkPageIsReady(driver);
 		validate(OrderPlanMaterialslnk);
 		validate(GoToContactUsLnk);
 		// validate(formsAndResourcesLink);
@@ -213,12 +214,12 @@ public class UlayerHomePage extends UhcDriver {
 
 		// myMenuLinkAarp.click();
 
-		driver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
+		driver.manage().timeouts().implicitlyWait(120, TimeUnit.SECONDS);
 		CommonUtility.checkPageIsReady(driver);
 
 		OrderPlanMaterialslnk.click();
 		CommonUtility.checkPageIsReady(driver);
-		driver.manage().timeouts().implicitlyWait(1000, TimeUnit.SECONDS);
+		driver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
 		if (orderplanHeadertxt.isDisplayed()) {
 			return new OrderplanmaterialsPage(driver);
 		}

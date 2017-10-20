@@ -1,4 +1,4 @@
-package acceptancetests.profandpref.redesign;
+package acceptancetests.gogreen.redesign;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -32,7 +32,7 @@ import pages.redesign.OrderplanmaterialsPage;
 import pages.redesign.UlayerHomePage;
 import pages.redesign.UlayerLoginPage;
 
-public class MyProfPrefRedesignStepDefinition {
+public class MyGoGreenPageStepDefinition {
 
 	@Autowired
 	MRScenario loginScenario;
@@ -84,14 +84,6 @@ public class MyProfPrefRedesignStepDefinition {
 					.saveBean(LoginCommonConstants.USERNAME, userName);
 			getLoginScenario().saveBean(LoginCommonConstants.PASSWORD, pwd);
 		}
-
-
-
-		 
-		/*Hardcoding Username and Pwd 
-		String userName = "q3_sep_ulayer029";
-		String pwd = "Password@1";
-*/
 		getLoginScenario().saveBean(LoginCommonConstants.USERNAME, userName);
 		getLoginScenario().saveBean(LoginCommonConstants.PASSWORD, pwd);
 
@@ -152,13 +144,6 @@ public class MyProfPrefRedesignStepDefinition {
 			getLoginScenario().saveBean(LoginCommonConstants.PASSWORD, pwd);
 		}
 
-		
-		
-
-/*		String userName = "q3_sep_grp028";
-		String pwd = "Password@1";
-		String category = "Group";
-*/
 		getLoginScenario().saveBean(LoginCommonConstants.USERNAME, userName);
 		getLoginScenario().saveBean(LoginCommonConstants.PASSWORD, pwd);
 
@@ -217,143 +202,10 @@ public class MyProfPrefRedesignStepDefinition {
 
 	}
 
-
-	@Then("^the user Validates all Error Messages for Edit Email scenarios$")
-	public void the_user_Validates_all_Error_Messages_for_Edit_Email_scenarios() {
-		MyProfilesPage myProfilepage = (MyProfilesPage) getLoginScenario().getBean(PageConstants.PROF_AND_PREF_PAGE);
-		boolean flag = myProfilepage.ValidateEmailErrorMessages();
-
-		if (flag) {
-			System.out.println("*********Edit Email Scenarios Error Messages Displayed**********");
-			Assert.assertTrue(true);
-		} else {
-			System.out.println("**********Edit Email Scenarios Error Messages is NOT Displayed***********");
-			Assert.fail();
-		}
-	}
-
-	@Then("^the user Validates all Error Messages for Alt/Temp Address scenarios$")
-	public void the_user_Validates_all_Error_Messages_for_Alt_Temp_Address_scenarios() {
-		MyProfilesPage myProfilepage = (MyProfilesPage) getLoginScenario().getBean(PageConstants.PROF_AND_PREF_PAGE);
-		boolean flag = myProfilepage.ValidateAddTempAddressModal();
-		if (flag) {
-			System.out.println("******* Add Alternate/Temp Address Modal is Displayed *********");
-			Assert.assertTrue(true);
-		} else {
-			System.out.println("******* Add Alternate/Temp Address Modal is not Displayed *********");
-			Assert.fail();
-		}
-		
-		flag = myProfilepage.ValidateTempAddressMandatoryFieldsErrorMessages();
-		if (flag) {
-			System.out.println("******* Alternate/Temp Address Mandatory Fileds Error Messages are Displayed *********");
-			Assert.assertTrue(true);
-		} else {
-			System.out.println("******* Alternate/Temp Address Mandatory Fileds Error Messages are not Displayed *********");
-			Assert.fail();
-		}
-		flag = myProfilepage.ValidateSpecialCharsStreetFieldsErrorMessages();
-		if (flag) {
-			System.out.println("******* Street Address Fields Error Messages are Displayed *********");
-			System.out.println("******* Street Address Fields accepting Allowed Chars *********");
-
-			Assert.assertTrue(true);
-		} else {
-			System.out.println("******* Alternate/Temp Address Error Messages are not Displayed *********");
-			System.out.println("******* Street Address Fields NOT accepting Allowed Chars *********");
-			Assert.fail();
-		}
-
-		flag = myProfilepage.ValidateZipcodeMismatchError();
-		if (flag) {
-			System.out.println("******* ZipCode Mismatch Error Messages are Displayed *********");
-			Assert.assertTrue(true);
-		} else {
-			System.out.println("******* ZipCode Mismatch Error Messages are not Displayed *********");
-			Assert.fail();
-		}
-		flag = myProfilepage.ValidateEndDateErrorMessages();
-		if (flag) {
-			System.out.println("******* Incorrect End Date Error Messages are Displayed *********");
-			Assert.assertTrue(true);
-		} else {
-			System.out.println("******* Incorrect End Date Error Messages are not Displayed *********");
-			Assert.fail();
-		}
-	}
-	
-	
-	/*
-	 * Code Added By Praveen for Ph No and Password Error Messages
-	 * 
-	 */
-	@Then("^the user edits password in preference page in AARP Site$")
-	public void user_edits_password(DataTable profileAttributes) {
-		List<DataTableRow> profileAttributesRow = profileAttributes
-				.getGherkinRows();
-		Map<String, String> profileAttributesMap = new LinkedHashMap<String, String>();
-		for (int i = 0; i < profileAttributesRow.size(); i++) {
-
-			profileAttributesMap.put(profileAttributesRow.get(i).getCells()
-					.get(0), profileAttributesRow.get(i).getCells().get(1));
-		}
-		MyProfilesPage profAndPrefPage = (MyProfilesPage) getLoginScenario()
-				.getBean(PageConstants.PROF_AND_PREF_PAGE);
-		profAndPrefPage.editPasswordVerifyBlankPasswordErrorMsg(profileAttributesMap.get("Current password") ,profileAttributesMap.get("New pass Error Msg"), profileAttributesMap.get("Conf Pass Error Msg"));
-
-	}
-	
-	@Then("^the user verify diff password error msg in preference page in AARP Site$")
-	public void user_verify_diff_password_error_msg(DataTable profileAttributes){
-		List<DataTableRow> profileAttributesRow = profileAttributes
-				.getGherkinRows();
-		Map<String, String> profileAttributesMap = new LinkedHashMap<String, String>();
-		for (int i = 0; i < profileAttributesRow.size(); i++) {
-
-			profileAttributesMap.put(profileAttributesRow.get(i).getCells()
-					.get(0), profileAttributesRow.get(i).getCells().get(1));
-		}
-		MyProfilesPage profAndPrefPage = (MyProfilesPage) getLoginScenario()
-				.getBean(PageConstants.PROF_AND_PREF_PAGE);
-		profAndPrefPage.diffPasswordErrorMsg(profileAttributesMap.get("Current password") ,profileAttributesMap.get("New password") ,profileAttributesMap.get("Confirm Password"));
-	}
-	
-	@Then("^the user verify incorrect format password error msg in preference page in AARP Site$")
-	public void user_verify_incorrect_format_error_msg(DataTable profileAttributes){
-		List<DataTableRow> profileAttributesRow = profileAttributes
-				.getGherkinRows();
-		Map<String, String> profileAttributesMap = new LinkedHashMap<String, String>();
-		for (int i = 0; i < profileAttributesRow.size(); i++) {
-
-			profileAttributesMap.put(profileAttributesRow.get(i).getCells()
-					.get(0), profileAttributesRow.get(i).getCells().get(1));
-		}
-		MyProfilesPage profAndPrefPage = (MyProfilesPage) getLoginScenario()
-				.getBean(PageConstants.PROF_AND_PREF_PAGE);
-		profAndPrefPage.incorrectFormatPasswordErrormsg(profileAttributesMap.get("Current password") ,profileAttributesMap.get("New password"), profileAttributesMap.get("Incorrect Format ErrMsg"));
-		
-	}
-
-	@Then("^the user validate phone number error messages$")
-	public void user_validate_phone_number_error_messages(DataTable profileAttributes){
-		List<DataTableRow> profileAttributesRow = profileAttributes
-				.getGherkinRows();
-		Map<String, String> profileAttributesMap = new LinkedHashMap<String, String>();
-		for (int i = 0; i < profileAttributesRow.size(); i++) {
-
-			profileAttributesMap.put(profileAttributesRow.get(i).getCells()
-					.get(0), profileAttributesRow.get(i).getCells().get(1));
-		}
-		MyProfilesPage profAndPrefPage = (MyProfilesPage) getLoginScenario()
-				.getBean(PageConstants.PROF_AND_PREF_PAGE);
-		profAndPrefPage.phonemumberErrorMessage(profileAttributesMap.get("day time phone number") ,profileAttributesMap.get("Phone error message"));
-		}
-	
 	@Then("^the user Validates Single Tab for all SHIP Plans$")
 	public void the_user_Validates_Single_Tab_for_all_SHIP_Plans() {
-		MyProfilesPage profAndPrefPage = (MyProfilesPage) getLoginScenario()
-				.getBean(PageConstants.PROF_AND_PREF_PAGE);
-		if(profAndPrefPage.Validate_Single_Tab_SHIP() ){
+		GoGreenPreferencesPage goGreenPage = (GoGreenPreferencesPage) getLoginScenario().getBean(PageConstants.MY_PREFERENCES_PAGE);
+		if(goGreenPage.Validate_Single_Tab_SHIP() ){
 			System.out.println("**********Single Tab displayed for all SHIP Plans");
 			Assert.assertTrue(true);
 		}
@@ -361,16 +213,14 @@ public class MyProfPrefRedesignStepDefinition {
 			System.out.println("**********Single Tab NOT displayed for all SHIP Plans");
 			Assert.fail();
 			}
-
 	}
 
 	@Then("^the user Validates Separate PHIP tab$")
 	public void the_user_Validates_Separate_PHIP_Tab() {
-		MyProfilesPage profAndPrefPage = (MyProfilesPage) getLoginScenario()
-				.getBean(PageConstants.PROF_AND_PREF_PAGE);
+		GoGreenPreferencesPage goGreenPage = (GoGreenPreferencesPage) getLoginScenario().getBean(PageConstants.MY_PREFERENCES_PAGE);
 		String PlanType = "PHIP";
 		System.out.println("********** Plan Tab to Validate :"+PlanType+"*********");
-		Boolean Flag = profAndPrefPage.navigatePlanTabs(PlanType);
+		Boolean Flag = goGreenPage.navigatePlanTabs(PlanType);
 		if(Flag){
 			System.out.println("********** Separate PHIP Tab is Displayed **********");
 			Assert.assertTrue(true);
@@ -384,9 +234,7 @@ public class MyProfPrefRedesignStepDefinition {
 
 	@Then("^user navigates to Tabs for all Plan Types$")
 	public void user_navigates_Plan_Tabs(DataTable givenAttributes) {
-
-		MyProfilesPage profAndPrefPage = (MyProfilesPage) getLoginScenario()
-				.getBean(PageConstants.PROF_AND_PREF_PAGE);
+		GoGreenPreferencesPage goGreenPage = (GoGreenPreferencesPage) getLoginScenario().getBean(PageConstants.MY_PREFERENCES_PAGE);
 		List<DataTableRow> givenAttributesRow = givenAttributes
 				.getGherkinRows();
 		Map<String, String> givenAttributesMap = new HashMap<String, String>();
@@ -397,7 +245,7 @@ public class MyProfPrefRedesignStepDefinition {
 		String PlanTypes = givenAttributesMap.get("Combo Plans");
 		String[] Plans= PlanTypes.split(",");
 		for(String currentPlan: Plans){
-			boolean TabPresent = profAndPrefPage.navigatePlanTabs(currentPlan);
+			boolean TabPresent = goGreenPage.navigatePlanTabs(currentPlan);
 			if(!TabPresent){
 				System.out.println("Plan Tab not displayed "+currentPlan);
 				Assert.fail("***** Plan Tab not displayed "+currentPlan+"*****");

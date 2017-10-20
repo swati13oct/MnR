@@ -32,7 +32,7 @@ public class PlanMaterialConfirmationPage extends UhcDriver {
 	
 	public JSONObject planMaterialsConfirmationJson;
 	
-	@FindBy(xpath = "//section[1]/div/div/div/a")
+	@FindBy(id="additionalMaterialsText")
 	private WebElement addordermaterialLink;
 
 	
@@ -65,7 +65,7 @@ public class PlanMaterialConfirmationPage extends UhcDriver {
 	@Override
 	public void openAndValidate() {
 		
-		validate(logOut);
+		validate(addordermaterialLink);
 		
 /*		JSONObject jsonObject = new JSONObject();
 		for (String key : planMaterials.getExpectedData().keySet()) {

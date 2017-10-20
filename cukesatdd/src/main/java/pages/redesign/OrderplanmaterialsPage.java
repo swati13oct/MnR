@@ -34,6 +34,9 @@ public class OrderplanmaterialsPage extends UhcDriver {
 	@FindBy(xpath = "//a[contains(text(), 'Medicare Supplement Insurance Plan')]")
 	private WebElement MedSuppPlanTab;
 	
+	@FindBy(xpath = "//a[contains(text(), 'Senior Supplement Plan')]")
+	private WebElement SrSuppTab;
+
 	@FindBy(xpath = "//*[@id='notShipRadio']/div[1]/div")
 	private WebElement memberMaterialsfield;
 
@@ -80,8 +83,11 @@ public class OrderplanmaterialsPage extends UhcDriver {
 	//private WebElement planField;
 
 	
-	@FindBy(xpath = "//button[@class = 'btn btn-primary select-item-submit']")
+	@FindBy(id="submit-order-materials")
 	private WebElement submitButton;
+	
+	@FindBy(id="additionalMaterialsText")
+	private WebElement OrderConfirmation_addordermaterialLink;
 	
 	//@FindBy(className = "orderplancontsec")
 	@FindBy(className = "orderplanmaterials")
@@ -106,31 +112,35 @@ public class OrderplanmaterialsPage extends UhcDriver {
 		if (PlanType.contains("MA") || PlanType.contains("MAPD")) {
 			if (validate(MAPlanTab)){
 				MAPlanTab.click();
-				Assert.assertTrue("Cant navigate to MA / MAPD Plan Tab", memberMaterialsfield.isDisplayed());
+				//Assert.assertTrue("Cant navigate to MA / MAPD Plan Tab", memberMaterialsfield.isDisplayed());
 				System.out.println("*************Displaying Medicare Advantage Plan Tab **********");
 				return true;
 			}
 		}
 		
-/*		else if (PlanType.contains("SHIP")) {
-			if (validate(HIPplanTab)){
-				HIPplanTab.click();
-				Assert.assertTrue("Cant navigate to HIP Plan Tab", MemberIDcardField.isDisplayed());
-				System.out.println("*************Displaying SHIP - HIP Plan Tab **********");
-				return true;
-			}
-			else if (validate(MedSuppPlanTab)){
+		else if (PlanType.contains("SHIP")) {
+			if (validate(MedSuppPlanTab)){
 				MedSuppPlanTab.click();
-				Assert.assertTrue("Cant navigate to Med Supp PlanTab Plan Tab", MemberIDcardField.isDisplayed());
+				//Assert.assertTrue("Cant navigate to Med Supp PlanTab Plan Tab", MemberIDcardField.isDisplayed());
 				System.out.println("*************Displaying SHIP - Med Supp Plan Tab Plan Tab **********");
 				return true;
 			}
+			else if (validate(HIPplanTab)){
+				HIPplanTab.click();
+				//Assert.assertTrue("Cant navigate to HIP Plan Tab", MemberIDcardField.isDisplayed());
+				System.out.println("*************Displaying SHIP - HIP Plan Tab **********");
+				return true;
+			}
+			else {
+				System.out.println("*************No SHIP Plans available for this Member **********");
+				return false;
+			}
 		}
-*/
+
 		else if (PlanType.contains("HIP")) {
 			if (validate(HIPplanTab)){
 				HIPplanTab.click();
-				Assert.assertTrue("Cant navigate to HIP Plan Tab", MemberIDcardField.isDisplayed());
+				//Assert.assertTrue("Cant navigate to HIP Plan Tab", MemberIDcardField.isDisplayed());
 				System.out.println("*************Displaying SHIP - HIP Plan Tab **********");
 				return true;
 			}
@@ -139,7 +149,7 @@ public class OrderplanmaterialsPage extends UhcDriver {
 		else if (PlanType.contains("PDP")) {
 			if (validate(PDPPlanTab)){
 				PDPPlanTab.click();
-				Assert.assertTrue("Cant navigate to PDP Plan Tab", memberMaterialsfield.isDisplayed());
+				//Assert.assertTrue("Cant navigate to PDP Plan Tab", memberMaterialsfield.isDisplayed());
 				System.out.println("*************Displaying PDP Plan Tab **********");
 				return true;
 			}
@@ -148,11 +158,20 @@ public class OrderplanmaterialsPage extends UhcDriver {
 		else if (PlanType.contains("MedSupp")) {
 			if (validate(MedSuppPlanTab)){
 				MedSuppPlanTab.click();
-				Assert.assertTrue("Cant navigate to Med Supp PlanTab Plan Tab", MemberIDcardField.isDisplayed());
+				//Assert.assertTrue("Cant navigate to Med Supp PlanTab Plan Tab", MemberIDcardField.isDisplayed());
 				System.out.println("*************Displaying SHIP - Med Supp Plan Tab Plan Tab **********");
 				return true;
 			}
 		}
+		else if (PlanType.contains("SSUP")) {
+			if (validate(SrSuppTab)){
+				SrSuppTab.click();
+				//Assert.assertTrue("Cant navigate to Med Supp PlanTab Plan Tab", MemberIDcardField.isDisplayed());
+				System.out.println("*************Displaying SHIP - Med Supp Plan Tab Plan Tab **********");
+				return true;
+			}
+		}
+
 		System.out.println("@@@@@@@@@@@@ Invalid Plan Type / Plan Tab not found @@@@@@@@@@@@@@");
 		return false;
 	}
@@ -191,7 +210,7 @@ public class OrderplanmaterialsPage extends UhcDriver {
 		
 	}
 	public boolean ValidateErrorMessage(){
-		
+		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 		if (NoSelectionErrorMsg.isDisplayed()){
 			System.out.println("*************Error Message Displayed displayed for Order materials Page***************");
 			System.out.println("*************Error Message : "+NoSelectionErrorMsg.getText()+" ***************");
@@ -301,18 +320,11 @@ public class OrderplanmaterialsPage extends UhcDriver {
 		}
 		submitButton.click();
 
-		/*
-		 * if (driver.findElement(By.className("orderplanconttext")).getText()
-		 
-				.contains("Plan Materials Order Confirmation")) {
-			return new PlanMaterialConfirmationPage(driver);
-		} else
+		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+		if(submitButton.isDisplayed()){
 			return null;
-		*/
-		
-		
-		if (driver.findElement(By.className("orderplanmaterials")).getText()
-				.contains("The following documents have been ordered")) {
+		}
+		else if (validate(OrderConfirmation_addordermaterialLink)) {
 			return new PlanMaterialConfirmationPage(driver);
 		} 
 			return null;

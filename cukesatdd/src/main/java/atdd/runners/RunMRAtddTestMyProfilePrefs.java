@@ -8,7 +8,7 @@ import cucumber.junit.Cucumber;
 /**
  * 
  * @author sdwaraka
- * Runner file for testing Error Messages Features in My Profile and Preferences page in Redesign site.
+ * Runner file for testing Features in My Profile Page and Preferences page in Redesign site.
  *
  */
 
@@ -16,9 +16,12 @@ import cucumber.junit.Cucumber;
 @Cucumber.Options(glue = { "atdd.framework","acceptancetests.profandpref.redesign" }, 
 		features = { "feature/myprofile-preferences/redesign/" }, 
 		format = {
-				"pretty", "html:reports/test-report","json:target/cucumber.json"}, tags ={"@MyProfileErrorMessages"})
+				"pretty", "html:reports/test-report","json:target/cucumber.json"}, tags ={"@ValidateSHIPsingleTab,@ValidatePHIPtab,@ValidateComboTabsUHCPlans"})
 
-public class RunMRAtddTestMyProfPrefErrorMsgs {
+public class RunMRAtddTestMyProfilePrefs {
+	
+	//@MyProfilePreferencePage,@ValidateSHIPsingleTab,@ValidatePHIPtab,@ValidateComboTabsAARPPlans,@ValidateComboTabsUHCPlans
+	
 	//@MyProfileErrorMessages,@EditEmailErrorMessagesAARP,@TempAltAddressErrorMessagesAARP,@EditEmailErrorMessagesUMS, @TempAltAddressErrorMessagesUMS
 	//@blankpassworderrormessage,@phoneerrormessage,@diffpassworderrormessage,@incorrectpasswordformaterrormessage
 }

@@ -155,11 +155,14 @@ public class OrderPlanMaterialsAarpStepDefinition {
 		String plantype = givenAttributesMap.get("Plan Type");
 		String option = givenAttributesMap.get("Option");
 		
-		if (!plantype.contentEquals("SHIP")){
+/*		if (!plantype.contentEquals("SHIP")){
 			System.out.println("**************Plan Tab to to Select is : "+plantype+"+++++++++++++");
 			boolean TabPresent = orderPlanMaterialsPage.navigatePlanTabs(plantype);
 		}
-	
+*/	
+		System.out.println("**************Plan Tab to to Select is : "+plantype+"+++++++++++++");
+		boolean TabPresent = orderPlanMaterialsPage.navigatePlanTabs(plantype);
+
 		System.out.println("**************Radio Option to Select is : "+option+"+++++++++++++");
 		PlanMaterialConfirmationPage planMaterialConfirmationPage = orderPlanMaterialsPage.selectsOption(option);
 		if (planMaterialConfirmationPage != null) {

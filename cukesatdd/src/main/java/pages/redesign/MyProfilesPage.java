@@ -32,6 +32,30 @@ public class MyProfilesPage extends UhcDriver{
 	@FindBy(className = "h4 margin-none")
 	private WebElement myProfileHeader;
 	
+	@FindBy(xpath = "//*[@id='communicationAddress']//a")
+	private WebElement GoGreenButton;
+	
+	@FindBy(xpath = "//*[@class = 'h3 medium margin-small atdd-goGreenHeader']")
+	private WebElement myPreferencesHeader;
+	
+	@FindBy(xpath = "//a[contains(text(), 'Medicare Advantage Plan')]")
+	private WebElement MAPlanTab;
+
+	@FindBy(xpath = "//a[contains(text(), 'Hospital Indemnity')]")
+	private WebElement HIPplanTab;
+	
+	@FindBy(xpath = "//a[contains(text(), 'Medicare Prescription Drug Plan')]")
+	private WebElement PDPPlanTab;
+
+	@FindBy(xpath = "//a[contains(text(), 'Medicare Supplement Insurance Plan')]")
+	private WebElement MedSuppPlanTab;
+	
+	@FindBy(xpath = "//a[contains(text(), 'Senior Supplement Plan')]")
+	private WebElement SrSuppTab;
+
+	@FindBy(xpath="//a[contains(text(),'Personal Health Insurance')]")
+	private WebElement PHIPtab;
+
 	//Edit email link
 	@FindBy(xpath = "//a[@class = 'edit-btn edit-btn-email']")
 	private WebElement EditEmailLink;
@@ -180,8 +204,6 @@ public class MyProfilesPage extends UhcDriver{
 	
 	@FindBy(xpath="(.//*[contains(text(),'Save')])[2]")
 	private WebElement phonesavebtn;
-
-
 
 	private PageData myProfiles;
 
@@ -505,16 +527,7 @@ public class MyProfilesPage extends UhcDriver{
 		return flag;
 	}
 	
-	
-	
-	
-	
-	/*
-	 * Code added By Praveen
-	 * Code to Verify Password, Ph No error Messages
-	 * 
-	 */
-	
+		
 	public void editPasswordVerifyBlankPasswordErrorMsg(String currentPassword,String newPassError, String confPassError){
 		editPasswordlnk.click();
 		currentpassword.sendKeys(currentPassword);
@@ -554,4 +567,86 @@ public class MyProfilesPage extends UhcDriver{
 			Assert.fail("Phone number error message is not being displayed");
 		}
 
+	//@SuppressWarnings("deprecation")
+	public boolean navigatePlanTabs(String PlanType){
+		
+		System.out.println("Plan Type : "+PlanType);
+		
+		if (PlanType.contentEquals("MA") || PlanType.contentEquals("MAPD")) {
+			if (validate(MAPlanTab)){
+				MAPlanTab.click();
+				System.out.println("*************Displaying Medicare Advantage Plan Tab **********");
+				return true;
+			}
+		}
+		else if (PlanType.contentEquals("PHIP")) {
+			if (validate(PHIPtab)){
+				PHIPtab.click();
+				System.out.println("*************Displaying Personal Health Insurance Plan Tab **********");
+				System.out.println("Plan Name Displayed is : "+driver.findElement(By.xpath("//*[@id='tab-1']/div[1]//h2")).getText());
+				return true;
+			}
+		}
+
+		
+		else if (PlanType.contentEquals("SHIP")) {
+			if (validate(MedSuppPlanTab)){
+				MedSuppPlanTab.click();
+				System.out.println("*************Displaying SHIP - Med Supp Plan Tab Plan Tab **********");
+				return true;
+			}
+			else if (validate(HIPplanTab)){
+				HIPplanTab.click();
+				System.out.println("*************Displaying SHIP - HIP Plan Tab **********");
+				return true;
+			}
+			else {
+				System.out.println("*************No SHIP Plans available for this Member **********");
+				return false;
+			}
+		}
+		else if (PlanType.contentEquals("HIP")) {
+			if (validate(HIPplanTab)){
+				HIPplanTab.click();
+				System.out.println("*************Displaying SHIP - HIP Plan Tab **********");
+				return true;
+			}
+		}
+		else if (PlanType.contentEquals("PDP")) {
+			if (validate(PDPPlanTab)){
+				PDPPlanTab.click();
+				System.out.println("*************Displaying PDP Plan Tab **********");
+				return true;
+			}
+		}
+		else if (PlanType.contentEquals("MedSupp")) {
+			if (validate(MedSuppPlanTab)){
+				MedSuppPlanTab.click();
+				System.out.println("*************Displaying SHIP - Med Supp Plan Tab Plan Tab **********");
+				return true;
+			}
+		}
+		else if (PlanType.contentEquals("SSUP")) {
+			if (validate(SrSuppTab)){
+				SrSuppTab.click();
+				System.out.println("*************Displaying Senior Supplement Plan Tab **********");
+				return true;
+			}
+		}
+		
+		System.out.println("@@@@@@@@@@@@ Invalid Plan Type / Plan Tab not found @@@@@@@@@@@@@@");
+		return false;
+	}
+	
+	public GoGreenPreferencesPage NavigateTo_GoGreen_MyPreferences_Page(){
+		
+		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+		GoGreenButton.click();
+		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+		CommonUtility.checkPageIsReady(driver);
+		if (validate(myPreferencesHeader)){
+			return new GoGreenPreferencesPage(driver);
+		}
+		return null;
+	}
 }
