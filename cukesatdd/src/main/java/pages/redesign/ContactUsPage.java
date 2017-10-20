@@ -24,12 +24,12 @@ import atdd.framework.UhcDriver;
  *
  */
 public class ContactUsPage extends UhcDriver{
-
-	@FindBy(id = "disclosure_link")
-	private WebElement logOut;
 	
-	@FindBy(xpath="//*[@id='secureWidget']/div[1]")
-	private WebElement securewidget;
+	@FindBy(xpath = "//h1[contains(text(), 'Explanation of Benefits')]")
+	private WebElement ContactUsPageHeader;
+
+	@FindBy(xpath = "//a[contains(text(), '(Terminated)')]")
+	private List<WebElement> TerminatedTabs;
 	
 	private PageData contactUs;
 	
@@ -60,80 +60,27 @@ public class ContactUsPage extends UhcDriver{
 		}
 	}
 
-
 	@Override
 	public void openAndValidate() {
-		JSONObject jsonObject = new JSONObject();
-		for (String key : contactUs.getExpectedData().keySet()) {
-			WebElement element = findElement(contactUs.getExpectedData()
-					.get(key));
-			if (element != null) {
-				if(validate(element)){
-				try {
-					jsonObject.put(key, element.getText());
-				} catch (JSONException e) {
-					e.printStackTrace();
-				}
-				}
-			}
+		if(validate(ContactUsPageHeader)){
+			System.out.println("Explanation of Benefits PAGE is LOADED");
 		}
-		contactUsJson = jsonObject;
-		
-	}
+		else{
+			System.out.println("Explanation of Benefits is NOT LOADED");
+		}
 
-	public JSONObject getExpectedData(Map<String, JSONObject> expectedDataMap) {
-
-		JSONObject globalExpectedJson = expectedDataMap
-				.get(CommonConstants.GLOBAL);
-		JSONObject contactUsExpectedJson = expectedDataMap
-				.get(CommonConstants.CONTACT_US);
-		contactUsExpectedJson = CommonUtility.mergeJson(
-				contactUsExpectedJson, globalExpectedJson);
-		return contactUsExpectedJson;
 	}
 	
-	public void validatesecureemail()
-	{
-		if (securewidget.isDisplayed())
-		{
-			System.out.println("Secure widget is displayed");
-		}
-		else
-		{
-			System.out.println("Secure widget is not  displayed");
-		}
-	}
+	public boolean Validate_Terminated_Tab(){
+		
+		if(!TerminatedTabs.isEmpty()){
+			System.out.println("Terminated Tabs for the following Plans are Displayed");
 
-	public JSONObject getsecurewidget() {
-		String fileName = CommonConstants.AARPM_SECURE_EMAIL_DATA;
-		secureemailwidgetData = CommonUtility.readPageData(fileName,
-				CommonConstants.PAGE_OBJECT_DIRECTORY_ULAYER_MEMBER);
-
-		JSONObject jsonObject = new JSONObject();
-		for (String key : secureemailwidgetData.getExpectedData().keySet()) {
-			WebElement element = findElement(secureemailwidgetData.getExpectedData()
-					.get(key));
-			if (element != null) {
-				if (validate(element)) {
-					try {
-						jsonObject.put(key, element.getText());
-					} catch (JSONException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
-				}
+			for(WebElement TerminatedPlan: TerminatedTabs){
+				System.out.println(TerminatedPlan.getText());
 			}
+			return true;
 		}
-		secureemailwidgetDataJson = jsonObject;
-
-		return secureemailwidgetDataJson;
+		return false;
 	}
-
-
-
-	public void logOut() {
-		logOut.click();
-
-	}
-
 }

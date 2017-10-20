@@ -30,7 +30,7 @@ import acceptancetests.atdd.data.PageData;
 import acceptancetests.atdd.util.CommonUtility;
 import atdd.framework.MRScenario;
 import atdd.framework.UhcDriver;
-import pages.redesign.PlanBenefitsCoveragePage;
+import pages.redesign.EoBSearchPage;
 import pages.redesign.*;
 
 /**
@@ -43,8 +43,15 @@ public class UlayerHomePage extends UhcDriver {
 	@FindBy(xpath = "//a[contains(text(), 'Go to Claims')]")
 	private WebElement ClaimsLink;
 
+	@FindBy(xpath = "//h1[contains(text(), 'My Claims')]")
+	private WebElement ClaimsPageHeader;
+
 	@FindBy(xpath = "//a[contains(text(), 'Go to EOB Search')]")
 	private WebElement EOBsearchLink;
+	
+	@FindBy(xpath = "//h1[contains(text(), 'Explanation of Benefits')]")
+	private WebElement EOBPageHeader;
+
 
 	@FindBy(xpath = "//a[contains(text(), 'Go to My Profile and Preferences_Redesign')]")
 	private WebElement MyProfileLink;
@@ -137,12 +144,6 @@ public class UlayerHomePage extends UhcDriver {
 		PharmacyLocatorLink.click();
 		driver.manage().timeouts().implicitlyWait(1000, TimeUnit.SECONDS);
 		CommonUtility.checkPageIsReady(driver);
-
-		/*
-		 * if (driver.findElement(By.xpath(
-		 * "//*[contains(text(), 'Locate a Pharmacy')]")).isDisplayed()){ return
-		 * new PharmacySearchPage(driver); } pharmacyLocator.click();
-		 */
 		if (driver.getTitle().equalsIgnoreCase("AARP Medicare Plans | Pharmacy Directory")
 				|| driver.getTitle().equalsIgnoreCase("Locate a Pharmacy")) {
 			return new PharmacySearchPage(driver);
@@ -152,16 +153,11 @@ public class UlayerHomePage extends UhcDriver {
 
 	public MedicalClaimSummaryPage navigateToMedicalClaimsSummary() {
 		ClaimsLink.click();
-		CommonUtility.checkPageIsReady(driver);
-		// searchMedicalClaims.click();
 		System.out.println("Claims link clicked");
+		driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
+		CommonUtility.checkPageIsReady(driver);
 
-		/*
-		 * if (ClaimsLink.isDisplayed()){ ClaimsLink.click(); } else{
-		 * 
-		 * }
-		 */
-		if (driver.getTitle().equalsIgnoreCase("Claims")) {
+		if (validate(ClaimsPageHeader)) {
 			System.out.println("Claims Page loaded");
 			return new MedicalClaimSummaryPage(driver);
 		} else {
@@ -169,13 +165,15 @@ public class UlayerHomePage extends UhcDriver {
 		}
 	}
 
-	public PlanBenefitsCoveragePage navigateToBenefitsAndCoverage() {
+	public EoBSearchPage navigateToBenefitsAndCoverage() {
 		EOBsearchLink.click();
+		System.out.println("EOB link clicked");
+		driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
 		CommonUtility.checkPageIsReady(driver);
-		// benefitsAndCoverageLink.click();
-		if (driver.getTitle().equalsIgnoreCase("AARP Medicare Plans | Plan Benefits and Coverage")
-				|| driver.getTitle().equalsIgnoreCase("Explanation of Benefits (EOB)")) {
-			return new PlanBenefitsCoveragePage(driver);
+
+		if (validate(EOBPageHeader)) {
+			System.out.println("EOB Page loaded");
+			return new EoBSearchPage(driver);
 		} else {
 			return null;
 		}
@@ -229,10 +227,9 @@ public class UlayerHomePage extends UhcDriver {
 	public ContactUsPage navigatesToContactUsPage() {
 
 		GoToContactUsLnk.click();
-		// contactUsLink.click();
+		driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
 		CommonUtility.checkPageIsReady(driver);
-		if (getTitle().equalsIgnoreCase("AARP Medicare Plans | Contact Us")
-				|| getTitle().equalsIgnoreCase("Contact Us")) {
+		if (driver.findElement(By.xpath("//div[@ng-controller='contactUsCtrl']")).isDisplayed()){
 			return new ContactUsPage(driver);
 		} else {
 			return null;

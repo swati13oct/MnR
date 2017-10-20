@@ -29,7 +29,7 @@ public class MyProfilesPage extends UhcDriver{
 	
 	//h1[@class="h4 margin-none"]
 		
-	@FindBy(className = "h4 margin-none")
+	@FindBy(xpath = "//h1[contains(text(), 'My Profile')]")
 	private WebElement myProfileHeader;
 	
 	@FindBy(xpath = "//*[@id='communicationAddress']//a")
@@ -648,5 +648,22 @@ public class MyProfilesPage extends UhcDriver{
 			return new GoGreenPreferencesPage(driver);
 		}
 		return null;
+	}
+	
+	public boolean Validate_NoDisplay_TerminatedTabs(){
+		List<WebElement> PlanTabs = driver.findElements(By.xpath("//a[contains(text(),'(Terminated)')]"));
+		System.out.println("No of tabs: "+PlanTabs.size());
+		
+		if(PlanTabs.size() == 0 ){
+			System.out.println("Terminated Tabs are NOT Displayed for My Profile and Preferences");
+
+			return true;
+		}
+		System.out.println("Terminated Tabs are Displayed for My Profile and Preferences for the following Plan Types");
+
+		for(WebElement TerminatedPlan: PlanTabs){
+			System.out.println(TerminatedPlan.getText());
+		}
+		return false;
 	}
 }

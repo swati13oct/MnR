@@ -34,6 +34,10 @@ public class GoGreenPreferencesPage extends UhcDriver{
 	
 	@FindBy(xpath = "//*[@href = '/content/aarpm/home/profileandpreferences.html']")
 	private WebElement GoToProfilePageLink;
+	
+	@FindBy(className = "h4 margin-none")
+	private WebElement myProfileHeader;
+
 
 	@FindBy(id = "save-prefs-btn")
 	private WebElement SavePreferencesButton;
@@ -177,7 +181,31 @@ public class GoGreenPreferencesPage extends UhcDriver{
 		return false;
 	}
 	
-	public void NavigateTo_GoGreen_MyPreferences_Page(){
-		//GoGreenPreferencesPage
+	public boolean Validate_NoDisplay_TerminatedTabs(){
+		List<WebElement> PlanTabs = driver.findElements(By.xpath("//a[contains(text(),'(Terminated)')]"));
+		System.out.println("No of tabs: "+PlanTabs.size());
+		
+		if(PlanTabs.size() == 0 ){
+			System.out.println("Terminated Tabs are NOT Displayed for Go Green Page");
+
+			return true;
+		}
+		System.out.println("Terminated Tabs are Displayed for Go Green Page for the following Plan Types");
+
+		for(WebElement TerminatedPlan: PlanTabs){
+			System.out.println(TerminatedPlan.getText());
+		}
+		return false;
+	}
+	
+	public MyProfilesPage NavigateTo_MyProfilePreferences_Page(){
+		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+		GoToProfilePageLink.click();
+		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+		CommonUtility.checkPageIsReady(driver);
+		if (validate(myProfileHeader)){
+			return new MyProfilesPage(driver);
+		}
+		return null;
 	}
 }
