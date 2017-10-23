@@ -64,7 +64,7 @@ public class ResponsiveUhcStepDefiniton {
 
 
 	@Then("^the user performs plan search TeamC using zipcode$")
-	public void user_planSearch_TeamC_with_zipcode(DataTable givenAttributes){
+	public void user_planSearch_TeamC_with_zipcode(DataTable givenAttributes) throws InterruptedException{
 		List<DataTableRow> memberAttributesRow = givenAttributes
 				.getGherkinRows();
 		Map<String, String> memberAttributesMap = new HashMap<String, String>();
