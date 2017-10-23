@@ -223,7 +223,7 @@ public BLayerPlanComparePage SelectThePlan() throws InterruptedException {
 		JavascriptExecutor jse = (JavascriptExecutor)driver;
 		jse.executeScript("window.scrollBy(0,350)", "");		
 		Thread.sleep(1000);		
-		if(InPatientHospitalStay.getText().contains("Copay per day")){
+		if(InPatientHospitalStay.getText().contains("Copay per day") || InPatientHospitalStay.getText().contains("Covered") ){
 			 return new BLayerPlanComparePage(driver);
 		 }
 		 return null;
