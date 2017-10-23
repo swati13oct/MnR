@@ -36,9 +36,6 @@ And the user chooses a plan from dropdown in UMS Site
 Then the user validates the available pharmacies page in UMS site
 When the user selects a language from dropdown in UMS Site
 	| <languageName> |
-Then the user should see county popup in UMS site
-When the user selects the county in UMS site
-	| <county>	|
 Then the user should see choose a plan in UMS site
 	
 Examples:

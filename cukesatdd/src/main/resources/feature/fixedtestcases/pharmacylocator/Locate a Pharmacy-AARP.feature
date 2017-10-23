@@ -33,9 +33,6 @@ And the user chooses a plan from dropdown in AARP Site
 Then the user validates the available pharmacies page in AARP site
 When the user selects a language from dropdown in AARP Site
 	| <languageName> |
-Then the user should see county popup in AARP site
-When the user selects the county in AARP site
-	| <county>	|
 Then the user should see choose a plan in AARP site
 
 Examples:
