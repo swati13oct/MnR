@@ -64,7 +64,8 @@ public class UlayerHomePage extends UhcDriver {
 
 	@FindBy(xpath = "//a[contains(text(), 'Go to Contact Us')]")
 	private WebElement GoToContactUsLnk;
-	@FindBy(linkText = "Go to Pharmacy Locator page")
+	
+	@FindBy(xpath = "//a[contains(text(), 'Go to Pharmacy Locator')]")
 	private WebElement PharmacyLocatorLink;
 
 	@FindBy(linkText = "Back to previous page")
@@ -139,10 +140,10 @@ public class UlayerHomePage extends UhcDriver {
 	}
 
 	public PharmacySearchPage navigateToPharmacyLocator() {
-		driver.manage().timeouts().implicitlyWait(1000, TimeUnit.SECONDS);
+		driver.manage().timeouts().implicitlyWait(100, TimeUnit.SECONDS);
 		CommonUtility.checkPageIsReady(driver);
 		PharmacyLocatorLink.click();
-		driver.manage().timeouts().implicitlyWait(1000, TimeUnit.SECONDS);
+		driver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
 		CommonUtility.checkPageIsReady(driver);
 		if (driver.getTitle().equalsIgnoreCase("AARP Medicare Plans | Pharmacy Directory")
 				|| driver.getTitle().equalsIgnoreCase("Locate a Pharmacy")) {

@@ -321,7 +321,7 @@ public class OrderplanmaterialsPage extends UhcDriver {
 		submitButton.click();
 
 		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
-		if(submitButton.isDisplayed()){
+		if(validate(submitButton)){
 			return null;
 		}
 		else if (validate(OrderConfirmation_addordermaterialLink)) {

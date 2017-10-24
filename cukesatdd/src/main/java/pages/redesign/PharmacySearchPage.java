@@ -30,7 +30,7 @@ public class PharmacySearchPage extends UhcDriver{
 	@FindBy(id = "zipcode-button")
 	private WebElement searchbtn;
 
-	@FindBy(id = "showresults")
+	@FindBy(id = "distance")
 	private WebElement distanceField;
 
 	@FindBy(id = "zipcode-button")
@@ -62,8 +62,16 @@ public class PharmacySearchPage extends UhcDriver{
 
 	@FindBys(value = { @FindBy(xpath = "//select/option") })
 	private List<WebElement> distanceDropDown;
+	
+	
+	@FindBy(xpath = "//*[@class='pharmacy-info']")
+	private List<WebElement> PharmacyResultList;
+	
+	@FindBy(xpath = "//span[@ng-show = 'showPharmacyCount']")
+	private WebElement PharmacyFoundCount;
+	
 
-	@FindBys(value = { @FindBy(xpath = "//ul[@id='pharm_services']/li") })
+/*	@FindBys(value = { @FindBy(xpath = "//ul[@id='pharm_services']/li") })
 	private List<WebElement> pharmacyTypesCheckboxes;
 
 	@FindBy(xpath = "//form[@id='searchCriteria']/div[3]/h3")
@@ -75,7 +83,7 @@ public class PharmacySearchPage extends UhcDriver{
 	@FindBy(id = "services")
 	private WebElement pharmacyTypeSelectionRadioButton;
 	
-	@FindBy(xpath = "//*[@class='filter-list']")
+*/	@FindBy(xpath = "//*[@class='filter-list']")
 	private WebElement pharmacyTypes;
 	
 	@FindBy(xpath = "//*[@class='filter-list']/li[1]")
@@ -144,28 +152,15 @@ public class PharmacySearchPage extends UhcDriver{
 	public PharmacySearchPage enterDistanceDetails(String distance) {
 
 		Select select = new Select(distanceField);	
-		select.selectByVisibleText(distance);
-		driver.manage().timeouts().implicitlyWait(100, TimeUnit.SECONDS);
+		String DistanceSelection = distance+" miles";
+		select.selectByVisibleText(DistanceSelection);
+		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 		CommonUtility.checkPageIsReady(driver);
-		if(distanceField.getText() == distance)
+		if(distanceField.getText().contains(distance))
 		{
 			return new PharmacySearchPage(driver);
 		}
 		return null;
-
-		/*	if(countyPopOut.isDisplayed())
-		{
-			String county  = zipAttributesMap.get("County");
-			List<WebElement> countyList =  selectcountytable.findElements(By.tagName("tr"));
-
-		    for (WebElement webElement : countyList) {
-		    	if(webElement.getText().contains(county))
-		    	{
-		    		webElement.click();
-		    		break;
-		    	}
-			}
-		}*/
 
 	}
 	public PharmacySearchPage enterZipDistanceDetails(String zipcode,
@@ -229,13 +224,20 @@ public class PharmacySearchPage extends UhcDriver{
 	}
 
 	public PharmacyResultPage searchesPharmacy() {
-
-		searchPharmaciesButton.click();
+		
 		CommonUtility.checkPageIsReady(driver);
-		if(driver.getTitle().equalsIgnoreCase("AARP Medicare Plans | Pharmacy Directory"))
-		{
+
+		int PharmacyCount = PharmacyResultList.size();
+
+		if(PharmacyCount>0){
+			System.out.println("No of Pharmacies Displayed in Pharmacy Result Page 1 : "+PharmacyCount);
+			System.out.println("Total Pharmacy Count : "+PharmacyFoundCount.getText());
+
 			return new PharmacyResultPage(driver);
+
 		}
+		System.out.println("Pharmacy Result Not displayed  - Pharmacy Count =  "+PharmacyCount);
+		
 		return null;
 
 	}
@@ -246,7 +248,7 @@ public class PharmacySearchPage extends UhcDriver{
 
 		String[] pharmacyTypeArray = givenPharmacyTypes.split(",");
 		CommonUtility.checkPageIsReady(driver);
-		pharmacyTypeSelectionRadioButton.click();
+		//pharmacyTypeSelectionRadioButton.click();
 
 		List<WebElement> pharmacyTypesCheckboxes = pharmacyTypes.findElements(By.tagName("li"));
 		for(String pharmacyType : pharmacyTypeArray )
