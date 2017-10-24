@@ -87,7 +87,7 @@ public class RedesignLoginPage extends UhcDriver {
 			Alert alert = driver.switchTo().alert();
 	        alert.accept();
 	        }
-		driver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
+		driver.manage().timeouts().implicitlyWait(120, TimeUnit.SECONDS);
 		CommonUtility.checkPageIsReady(driver);
 				
 		if(currentUrl().contains("/testharness.html") && category.equalsIgnoreCase("Group") ) {
@@ -113,7 +113,7 @@ public class RedesignLoginPage extends UhcDriver {
 			Alert alert = driver.switchTo().alert();
 	        alert.accept();
 	        }
-		driver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
+		driver.manage().timeouts().implicitlyWait(120, TimeUnit.SECONDS);
 		CommonUtility.checkPageIsReady(driver);
 		if (currentUrl().contains("/testharness.html")){
 			System.out.println("@@@@@@@@@@@@ Redesign Home Page Displayed for ULayer Member@@@@@@@@@@@@");

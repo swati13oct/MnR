@@ -16,8 +16,8 @@ Feature: To test order materials in Redesign site
     Examples: 
       | planType | memberType |option           |
       | MA       | Individual  |Member Materials |
-#      | MAPD     | Individual  |Welcome kit      |
-#      | PDP      | Individual  |Welcome Guide    |
+      | MAPD     | Individual  |Welcome kit      |
+      | PDP      | Individual  |Welcome Guide    |
 
   @SHIPOrderMaterials
   Scenario Outline: Verify order materials in Redesign site for ship type plan members
