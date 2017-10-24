@@ -628,6 +628,14 @@ public class AccountHomePage extends UhcDriver {
       System.out.println(driver.getTitle());
 
 		if (driver.getTitle().equalsIgnoreCase("Claims")) {
+			
+			
+			try {
+				Thread.sleep(20000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		
 			CommonUtility.waitForPageLoad(driver, driver.findElement(By.xpath("//select[@id='document-date']")), 90); 
 			return new pages.dashboard.member.ulayer.ClaimSummarypage(driver);
