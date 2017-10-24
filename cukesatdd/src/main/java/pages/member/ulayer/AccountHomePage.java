@@ -14,6 +14,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.Cookie;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.By.ByXPath;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
@@ -627,6 +628,8 @@ public class AccountHomePage extends UhcDriver {
       System.out.println(driver.getTitle());
 
 		if (driver.getTitle().equalsIgnoreCase("Claims")) {
+		
+			CommonUtility.waitForPageLoad(driver, driver.findElement(By.xpath("//select[@id='document-date']")), 90); 
 			return new pages.dashboard.member.ulayer.ClaimSummarypage(driver);
 
 		}
