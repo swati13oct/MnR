@@ -638,6 +638,12 @@ public class AccountHomePage extends UhcDriver {
 			}
 		
 			CommonUtility.waitForPageLoad(driver, driver.findElement(By.xpath("//select[@id='document-date']")), 90); 
+			
+			if (driver.findElement(By.xpath("//a[contains(.,'Medicare Advantage Plan')]")) !=null) {
+				
+				driver.findElement(By.xpath("//a[contains(.,'Medicare Advantage Plan')]")).click();			
+				
+			}
 			return new pages.dashboard.member.ulayer.ClaimSummarypage(driver);
 
 		}
