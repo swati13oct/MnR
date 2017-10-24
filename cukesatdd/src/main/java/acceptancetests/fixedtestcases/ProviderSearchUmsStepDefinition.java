@@ -125,7 +125,7 @@ public class ProviderSearchUmsStepDefinition {
 		getLoginScenario().saveBean(VPPCommonConstants.PLAN_NAME, planName);
 		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario().getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 		
-		plansummaryPage.clicksOnIsProviderCoveredA(planName);
+		plansummaryPage.clicksOnIsProviderCoveredB(planName);
 		getLoginScenario().saveBean(PageConstants.VPP_PLAN_SUMMARY_PAGE,
 				plansummaryPage);
 	

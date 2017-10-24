@@ -7,6 +7,7 @@ import java.util.Calendar;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Set;
+import java.util.concurrent.TimeUnit;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -23,8 +24,6 @@ import org.openqa.selenium.support.PageFactory;
 
 import pages.acquisition.bluelayer.EnrollPlanInfoPage;
 import pages.acquisition.uhcretiree.Rallytool_Page;
-
-
 import acceptancetests.atdd.data.CommonConstants;
 import acceptancetests.atdd.data.ElementData;
 import acceptancetests.atdd.data.PageData;
@@ -215,6 +214,9 @@ public class VPPPlanSummaryPage extends UhcDriver {
 
 	@FindBy(xpath = "//div[@class='module-closed-enrollment-alert']/span/a")
 	private WebElement viewPlansYearLink;
+	
+	@FindBy(xpath = ".//*[@class='swiper-container']")
+	List<WebElement> maPlanElement1;
 
 	private PageData vppPlanSummary;
 
@@ -770,10 +772,91 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		// TODO Auto-generated method stub
 		return null;
 	}
+	
+	public VPPPlanSummaryPage clicksOnIsProviderCoveredB(String planName) {
+		if (planName.contains("HMO")) {
+			driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+			for (WebElement plan : maPlanElement1) {
+				if (plan.getText().contains(planName)) {
+					//ElementData elementData = new ElementData("id",
+						//	"doctorCoverMA");
+
+					//ElementData elementData = new ElementData("xpath",
+						
+//"//*[contains(text(),'Is my provider covered in my ZIP code/county')]");
+					//driver.findElement(By.xpath("//*[contains(text(),'Is my provider covered ')]")).click();
+
+					//driver.findElement(By.xpath("//*[@id='plan-list-1']/div/div[2]/div/div[1]/div[2]/div/div[1]/div[1]/a")).click();
+
+					//findChildElement(elementData, plan).click();
+					
+					WebElement ProviderSearchLink = driver.findElement(By.xpath("//h2[contains(text(),'"+planName+"')]/following::a[contains(text(),'Is')][1]"));
+					System.out.println(ProviderSearchLink.getText());
+					ProviderSearchLink.click();
+
+					
+				}
+			}
+		}
+		
+		String mainwindow=driver.getWindowHandle();
+
+		Set<String> allWindowHandles = driver.getWindowHandles();
+		for (String currentWindowHandle : allWindowHandles) {
+
+
+			if (!currentWindowHandle.equals(mainwindow)) {
+				driver.switchTo().window(currentWindowHandle);
+
+
+			}
+		}
+
+		driver.manage().window().maximize();
+		waitforElement(GetStarted);
+		GetStarted.click();
+		
+		
+       
+		waitforElement(People);
+		
+		System.out.println("Rally tool started");
+		People.click();
+				
+		
+		
+		waitforElement(Primary);
+		
+		
+
+		Primary.click();
+
+		waitforElement(Physician);
+		
+
+		Physician.click();
+
+		waitforElement(Savebtn);
+		
+		//Savebtn.click();
+		JavascriptExecutor js = (JavascriptExecutor)driver;
+		js.executeScript("arguments[0].click();", Savebtn);
+		waitforElement(Viewsavebtn);
+		
+		Viewsavebtn.click();
+	
+		waitforElement(Checkcoverage);
+		
+		Checkcoverage.click();
+		driver.switchTo().window(mainwindow);
+
+		
+		return new VPPPlanSummaryPage(driver);
+	}
 
 	public VPPPlanSummaryPage clicksOnIsProviderCoveredA(String planName) {
 		if (planName.contains("HMO")) {
-			for (WebElement plan : maPlanElement) {
+			for (WebElement plan : maPlanElement1) {
 				if (plan.getText().contains(planName)) {
 					ElementData elementData = new ElementData("id",
 							"doctorCoverMA");
@@ -790,10 +873,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 				}
 			}
 		}
-		/*	if (driver.getTitle().equalsIgnoreCase(
-				"Welcome")) { 
-			return new Rallytool_Page(driver);
-		}*/
+		
 
 		String mainwindow=driver.getWindowHandle();
 
@@ -863,13 +943,13 @@ public class VPPPlanSummaryPage extends UhcDriver {
 
 	public boolean providerinfo(String planName)
 	{
-		String providerinfo=provider.getText();
-
+		//String providerinfo=provider.getText();
+		
 		WebElement ProviderSearchLink1 = driver.findElement
-				(By.xpath("//div[contains(text(),'"+planName+"')]/following::p[contains(text(),'covered')][1]"));
+				(By.xpath("//h2[contains(text(),'"+planName+"')]/following::span[contains(text(),'covered')][1]"));
 		String mproviderinfo=ProviderSearchLink1.getText();
-		System.out.println(mproviderinfo);
-		if(providerinfo.contains("1 providers covered"))
+        System.out.println(mproviderinfo);
+		if(mproviderinfo.contains("1 providers covered"))
 		{
 			return true;
 		}

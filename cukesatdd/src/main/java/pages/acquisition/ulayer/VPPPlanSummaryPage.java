@@ -442,7 +442,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 				(By.xpath("//h2[contains(text(),'"+planName+"')]/following::span[contains(text(),'covered')][1]"));
 		String mproviderinfo=ProviderSearchLink1.getText();
         System.out.println(mproviderinfo);
-		if(providerinfo.contains("1 providers covered"))
+		if(mproviderinfo.contains("1 providers covered"))
 		{
 			return true;
 		}
