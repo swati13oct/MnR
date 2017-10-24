@@ -31,40 +31,43 @@ import pages.member.ulayer.ContactUsPage;
  */
 public class ProfilePreferencesPage extends UhcDriver {
 
-	@FindBy(xpath = "//*[@id='tab-1']//div[1]//div//h2")
+	@FindBy(className = "atdd-profile-planname")
 	private WebElement planName;
 
-	@FindBy(xpath = "//*[@id='tab-1']//div[1]//div/p[1]//span")
+	@FindBy(className = "atdd-profile-membername")
 	private WebElement memberName;
 
-	@FindBy(xpath = "//*[@id='tab-1']//div[1]//div//p[1]//text()")
-	private WebElement memberNameText;
-
-	@FindBy(xpath = "//*[@id='tab-1']//div[1]//div//p[2]//span")
+	@FindBy(className = "atdd-profile-membernumber")
 	private WebElement memberId;
 
 	@FindBy(xpath = "//*[@id='tab-1']//div[1]//div//p[2]//text()")
 	private WebElement memberIdtext;
 
-	@FindBy(xpath = ".//*[@id='profilePreferencesController']/div[1]/div[1]/div/section/div/div[2]/div/div/div/div/div[1]/div/span[2]")
+	@FindBy(xpath = ".//*[@id='profilePreferencesController']/div[1]/div/div/section/div/div[3]/div/div/div/div/div/div[1]/div/span[1]/p")
 	private WebElement Username;
 
-	@FindBy(xpath = ".//*[@id='profilePreferencesController']/div[1]/div[1]/div/section/div/div[2]/div/div/div/div/div[1]/div/span[1]/p")
+	@FindBy(xpath = ".//*[@id='profilePreferencesController']/div[1]/div/div/section/div/div[3]/div/div/div/div/div/div[1]/div/span[2]")
 	private WebElement Usernametext;
 
-	@FindBy(xpath = "/.//*[@id='password']/div/div/span[2]")
+	@FindBy(xpath = ".//*[@id='password']/div/div/span[1]/p")
 	private WebElement Password;
 
-	@FindBy(xpath = ".//*[@id='password']/div/div/span[1]/b")
+	@FindBy(xpath = ".//*[@id='password']/div/div/span[2]")
 	private WebElement Passwordtext;
 
     @FindBy(id="Artwork")
 	private WebElement EditButton;
-
-	@FindBy(xpath = ".//*[@id='tab-1']/div[3]/div[1]/div/div[1]/div/div/div/div[1]/div/div/div[1]/p")
+    
+    @FindBy(id="password-form")
+	private WebElement Editform;
+    
+    @FindBy(id = "passwordOld-error")
+	private WebElement passworderrormessage;
+    
+	@FindBy(xpath = ".//*[@id='email']/div[1]/p")
 	private WebElement EmailLabel;
 
-	@FindBy(xpath = ".//*[@id='email']/div[3]/div[1]/div/div/span[1]/b")
+	@FindBy(xpath = ".//*[@id='email']/div[3]/div[1]/div/div/span[1]")
 	private WebElement EmailAddressLabel;
 
 	@FindBy(id = "email")
@@ -82,10 +85,10 @@ public class ProfilePreferencesPage extends UhcDriver {
 	@FindBy(id = "passwordNewConfirm")
 	private WebElement ConfirmPassword;
 
-	@FindBy(xpath = "//*[@id='updatePassword']/span")
+	@FindBy(id = "updatePassword")
 	private WebElement SaveButton;
 
-	@FindBy(xpath = "//*[@id='password-form']/div[4]/div/a")
+	@FindBy(className = "cancel-btn")
 	private WebElement CancelButton;
 
 	@FindBy(id = "emailNew")
@@ -100,7 +103,7 @@ public class ProfilePreferencesPage extends UhcDriver {
 	@FindBy(xpath = ".//*[@id='email-form']/div[3]/div/a")
 	private WebElement CanceEmaillButton;
 
-	@FindBy(xpath = ".//*[@id='email']/div[1]/div/div/div/div/div/a[1]")
+	@FindBy(className = "edit-btn-email")
 	private WebElement EmailEditbutton;
 
 	@FindBy(id = "emailNew-error")
@@ -109,10 +112,10 @@ public class ProfilePreferencesPage extends UhcDriver {
 	@FindBy(id = "emailNewConfirm-error")
 	private WebElement emailerrormessage;
 
-	@FindBy(xpath = "//*[@id='tab-1']/div[2]/div[1]/div/div[1]/div[1]/div/div/div/div[2]/div[2]/div/div/span[2]")
+	@FindBy(id = "profileemailaddress")
 	private WebElement EmailValue;
 
-	@FindBy(xpath= "html/body/div[2]/div[3]/div/div[2]/div[1]/div[2]/section/div/div[3]/div/p")
+	@FindBy(className = "margin-none")
 	private WebElement Seemorewaystext;
 
 	@FindBy(className = "atdd-contact-us")
@@ -138,7 +141,7 @@ public class ProfilePreferencesPage extends UhcDriver {
 	@FindBy(className = "text-link")
 	private WebElement contactuslink;
 
-	@FindBy(xpath = ".//*[@id='tab-1']/div[3]/div[2]/h3")
+	@FindBy(className = "atdd-profile-communicationpreference")
 	private WebElement communicationpreferencesheader;
 
     @FindBy(id="communicationAddress")
@@ -338,8 +341,8 @@ public class ProfilePreferencesPage extends UhcDriver {
 		validate(memberId);
 		validate(memberName);
 		// ValidateAccount Profile
-		//validate(Username);
-		//validate(Usernametext);
+		validate(Username);
+		validate(Usernametext);
 		validate(Password);
 		validate(Passwordtext);
 		validate(EditButton);
@@ -350,12 +353,14 @@ public class ProfilePreferencesPage extends UhcDriver {
 		validateNew(EmailLabel);
 		validateNew(EmailAddressLabel);
 		validateNew(Emailform);
+		validateNew(email);
 
 	}
 
 	public void validateAccountEdit(String password2) {
 
 		EditButton.click();
+		validate(Editform);
 		CurrentPassword.sendKeys(password2);
 		NewPassword.sendKeys(password2 + "1");
 		ConfirmPassword.sendKeys(password2 + "1");
@@ -371,12 +376,44 @@ public class ProfilePreferencesPage extends UhcDriver {
 		validateNew(ConfirmPassword);
 		validateNew(SaveButton);
 		validateNew(CancelButton);
+		EditButton.click();
 
 	}
 
+	
+	public boolean validateSavebuttonclick() {
+		try {
+			Thread.sleep(30000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		SaveButton.click();
+		if (passworderrormessage.getText().contentEquals("This field is required")) {
+			System.out.println("The element" + passworderrormessage.getText() + "is found");
+			return true;
+		} else {
+			Assert.fail("The element " + passworderrormessage.getText() + "is not found");
+		}
+		return false;
+	}
 	public void validateCancelButton() {
-		// EditLink.click();
+		
+		try {
+			Thread.sleep(30000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
 		CancelButton.click();
+		try {
+			Thread.sleep(30000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		Assert.assertTrue("Button is present", Password.isDisplayed());
 	}
 
@@ -396,6 +433,12 @@ public class ProfilePreferencesPage extends UhcDriver {
 
 	public boolean emailblankfieldsvalidation() {
 		EmailEditbutton.click();
+		try {
+			Thread.sleep(20000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		SaveEmailButton.click();
 		if (mandatorymessage.getText().contentEquals("This field is required.")) {
 			System.out.println("The element" + mandatorymessage.getText() + "is found");
@@ -407,9 +450,8 @@ public class ProfilePreferencesPage extends UhcDriver {
 	}
 
 	public boolean validateemailsavefunctionality() {
-		EmailEditbutton.click();
-		NewEmail.sendKeys("nikitajain3@gmail.com");
-		emailConfirm.sendKeys("nikitajain3@gmail.com");
+		NewEmail.sendKeys("nikitajain4@gmail.com");
+		emailConfirm.sendKeys("nikitajain4@gmail.com");
 		SaveEmailButton.click();
 		try {
 			Thread.sleep(20000);
@@ -417,7 +459,7 @@ public class ProfilePreferencesPage extends UhcDriver {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		if (email.getText().equals("nikitajain3@gmail.com")) {
+		if (email.getText().equals("nikitajain4@gmail.com")) {
 			System.out.println("The element" + email.getText() + "is found");
 			return true;
 		} else {
@@ -430,7 +472,7 @@ public class ProfilePreferencesPage extends UhcDriver {
 		EmailEditbutton.click();
 		NewEmail.sendKeys("nikitajain");
 		SaveEmailButton.click();
-		if (mandatorymessage.getText().contentEquals("Please enter a valid email Address.")) {
+		if (mandatorymessage.getText().contentEquals("Please enter a valid email Address")) {
 			System.out.println("The element" + mandatorymessage.getText() + "is found");
 		} else {
 			Assert.fail("The element " + mandatorymessage.getText() + "is not found");
@@ -466,13 +508,21 @@ public class ProfilePreferencesPage extends UhcDriver {
 	}
 
 	public void validateseemorewaystext() {
+		JavascriptExecutor jse = (JavascriptExecutor) driver;
+		jse.executeScript("window.scrollBy(0,4000)", "");
 		validate(Seemorewaystext);
 	}
 
 	public boolean clickcontactUslink() {
 		validate(contactUs);
 		contactUs.click();
-		if (driver.getCurrentUrl().contains("content/uhcm/home/contact.html#/contact-us-two")) {
+		try {
+			Thread.sleep(20000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		if (driver.getCurrentUrl().contains("/content/uhcm/home/contact.html")) {
 			return true;
 		} else {
 			Assert.fail("The element " + contactuslink.getText() + "is not found");
@@ -539,8 +589,13 @@ public class ProfilePreferencesPage extends UhcDriver {
 	public boolean validatecontactuslink() {
 		validate(contactuslink);
 		contactuslink.click();
-
-		if (driver.getCurrentUrl().contains("content/uhcm/home/contact.html#/contact-us-two")) {
+		try {
+			Thread.sleep(20000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		if (driver.getCurrentUrl().contains("content/uhcm/home/contact.html")) {
 			return true;
 		} else {
 			Assert.fail("The element " + contactuslink.getText() + "is not found");

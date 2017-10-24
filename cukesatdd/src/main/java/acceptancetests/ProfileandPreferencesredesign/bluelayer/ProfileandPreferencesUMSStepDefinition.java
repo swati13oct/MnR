@@ -115,7 +115,7 @@ public class ProfileandPreferencesUMSStepDefinition {
 	@Then("^the user navigates to Profile and Preferences page")
 	public void user_navigate_toProfileandPreferencespage() {
 		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstants.ACCOUNT_HOME_PAGE);
-		ProfilePreferencesPage ProfilePreferencesPage = accountHomePage.navigateDirectToPreferencesPage();
+		ProfilePreferencesPage ProfilePreferencesPage = accountHomePage.navigateDirectToProfilePage();
 
 		if (ProfilePreferencesPage!= null) {
 			getLoginScenario().saveBean(PageConstants.ProfilePreferencesPage, ProfilePreferencesPage);
@@ -186,10 +186,9 @@ public class ProfileandPreferencesUMSStepDefinition {
 
 	@Then("^the user clicks on save button without filling current and new password and the red mandatory message should come")
 	public void UserValidatesclickingbutton() {
-		pages.member.ulayer.ProfileandPreferencesPage ProfileandPreferencespage = (pages.member.ulayer.ProfileandPreferencesPage) getLoginScenario()
-				.getBean(PageConstants.PROFILE_AND_PREFERENCES_PAGE);
-
-		ProfileandPreferencespage.validateSavebuttonclick();
+		ProfilePreferencesPage ProfilePreferencesPage = (ProfilePreferencesPage) getLoginScenario()
+				.getBean(PageConstants.ProfilePreferencesPage);
+		ProfilePreferencesPage.validateSavebuttonclick();
 	}
 
 	@Then("^the user validates the functionality of Cancel Button")

@@ -128,7 +128,7 @@ Feature: To test My Profile & Preferences flow in UMS site
       | MAPD   |
       | MA     |
       |GroupMA |
-      |GroupPDP|
+      #|GroupPDP|
 
     @ValidateEmail
     Scenario Outline: To verify Email section in UMS site
@@ -151,15 +151,18 @@ Feature: To test My Profile & Preferences flow in UMS site
       | <planType> |
     When the user navigates to Profile and Preferences page
     Then the user validates the elements on clicking the edit link
-    Then the user validates the functionality of save Button
+    #Then the user validates the functionality of save Button
     Then the user validates the functionality of Cancel Button
 
-    Examples: 
-      | planType |
-      #| PDP      |
-      | MAPD     |
+      Examples: 
+        | planType|
+        | Group  |
+        | MAPD   |
+        | MA     |
+        |GroupMA |
+        #|GroupPDP|
 
-  #| MA       |
+
   @PasswordEdit1
   Scenario Outline: To verify the edit functionality in Account Profile section in UMS site
     Given registered member with following details for Profile and Preferences flow
@@ -168,12 +171,14 @@ Feature: To test My Profile & Preferences flow in UMS site
     Then the user validates the elements on clicking the edit link
     Then the user clicks on save button without filling current and new password and the red mandatory message should come
 
-    Examples: 
-      | planType |
-      #| PDP      |
-      | MAPD     |
+   Examples: 
+        | planType|
+        | Group  |
+        | MAPD   |
+        | MA     |
+        |GroupMA |
+        #|GroupPDP|
 
-  #| MA       |
   @EmailEdit1
   Scenario Outline: To verify Email section in AARP site
     Given registered member with following details for Profile and Preferences flow
@@ -184,11 +189,14 @@ Feature: To test My Profile & Preferences flow in UMS site
     Then the user fill new email address and click save then user should see new updated email on page
 
     Examples: 
-      | planType |
-      #| PDP      |
-      | MAPD     |
+        | planType|
+        | Group  |
+        | MAPD   |
+        | MA     |
+        |GroupMA |
+        #|GroupPDP|
 
-  #| MA       |
+
   @EmailEdit2
   Scenario Outline: To verify Email section in in UMS site
     Given registered member with following details for Profile and Preferences flow
@@ -199,9 +207,12 @@ Feature: To test My Profile & Preferences flow in UMS site
     Then the user fill different email id in confirm email box from new email address then error message should come
 
     Examples: 
-      | planType |
-      #| PDP      |
-      | MAPD     |
+        | planType|
+        | Group  |
+        | MAPD   |
+        | MA     |
+        |GroupMA |
+       #|GroupPDP|
 
   #| MA       |
   @Needhelp
@@ -216,10 +227,10 @@ Feature: To test My Profile & Preferences flow in UMS site
     Examples: 
         | planType |
         | Group  |
-       #| MAPD   |
+        | MAPD   |
         | MA     |
         |GroupMA |
-        |GroupPDP|
+       #|GroupPDP|
         
   @PermanentAddress
   Scenario Outline: To verify the edit functionality in Account Profile section in UMS site
@@ -235,7 +246,7 @@ Feature: To test My Profile & Preferences flow in UMS site
         | MAPD   |
         | MA     |
         |GroupMA |
-        |GroupPDP|
+       #|GroupPDP|
 
   
   @CommunicationPreferences
@@ -253,7 +264,7 @@ Feature: To test My Profile & Preferences flow in UMS site
         | MAPD   |
         | MA     |
         |GroupMA |
-        |GroupPDP|
+       #|GroupPDP|
 
   @PhoneEdit
   Scenario Outline: To verify Phone Edit Functionality
