@@ -174,7 +174,7 @@ public class ResponsivePlanSummary extends UhcDriver{
 		    @FindBy (xpath=".//*[@id='fixTable']/tbody/tr[3]/td[4]")
 		    private WebElement outofpocket2;
 		    
-		   // @FindBy(xpath="//*[@class='title' and contains(text(),'Medicare Advantage Plans')]")
+		   // @FindBy(xpath="(.//span[contains(text(),'View Plans')][@class='trigger-closed'])[1]")
 		    @FindBy(xpath=". //*[@id='site-wrapper']/div[4]/div/div[1]/div/div/div/div/div[1]/div/div[2]/div[1]/div[2]/div/div[2]/div[1]/div/span[3]")
 		    private WebElement showMaPlans;
 			
