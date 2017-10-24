@@ -128,7 +128,7 @@ Feature: To test My Profile & Preferences flow in UMS site
       | MAPD   |
       | MA     |
       |GroupMA |
-      #|GroupPDP|
+     #|GroupPDP|
 
     @ValidateEmail
     Scenario Outline: To verify Email section in UMS site
@@ -179,6 +179,40 @@ Feature: To test My Profile & Preferences flow in UMS site
         |GroupMA |
         #|GroupPDP|
 
+
+  @PasswordEdit2
+  Scenario Outline: To verify the edit functionality in Account Profile section in UMS site
+    Given registered member with following details for Profile and Preferences flow
+      | <planType> |
+    When the user navigates to Profile and Preferences page
+    Then the user validates the elements on clicking the edit link
+    Then the user enters invalid password in new password field and clicks save button and the user should see expected error message - Password does not meet requirements
+    
+   Examples: 
+        | planType|
+        | Group  |
+        | MAPD   |
+        | MA     |
+        |GroupMA |
+       #|GroupPDP|
+        
+   @PasswordEdit3
+  Scenario Outline: To verify the edit functionality in Account Profile section in UMS site
+    Given registered member with following details for Profile and Preferences flow
+      | <planType> |
+    When the user navigates to Profile and Preferences page
+    Then the user validates the elements on clicking the edit link
+    Then the user enters different password in confirm password field and clicks save button and the user should see expected error message - Please enter the same value again
+
+   Examples: 
+        | planType|
+        | Group  |
+        | MAPD   |
+        | MA     |
+        |GroupMA |
+       #|GroupPDP|
+        
+        
   @EmailEdit1
   Scenario Outline: To verify Email section in AARP site
     Given registered member with following details for Profile and Preferences flow

@@ -43,13 +43,13 @@ public class ProfilePreferencesPage extends UhcDriver {
 	@FindBy(xpath = "//*[@id='tab-1']//div[1]//div//p[2]//text()")
 	private WebElement memberIdtext;
 
-	@FindBy(xpath = ".//*[@id='profilePreferencesController']/div[1]/div/div/section/div/div[3]/div/div/div/div/div/div[1]/div/span[1]/p")
+	@FindBy(xpath = ".//*[@id='profilePreferencesController']/div[1]/div/div/section/div/div[3]/div/div/div/div/div/div[1]/div/span[1]")
 	private WebElement Username;
 
 	@FindBy(xpath = ".//*[@id='profilePreferencesController']/div[1]/div/div/section/div/div[3]/div/div/div/div/div/div[1]/div/span[2]")
 	private WebElement Usernametext;
 
-	@FindBy(xpath = ".//*[@id='password']/div/div/span[1]/p")
+	@FindBy(xpath = ".//*[@id='password']/div/div/span[1]")
 	private WebElement Password;
 
 	@FindBy(xpath = ".//*[@id='password']/div/div/span[2]")
@@ -63,6 +63,12 @@ public class ProfilePreferencesPage extends UhcDriver {
     
     @FindBy(id = "passwordOld-error")
 	private WebElement passworderrormessage;
+    
+    @FindBy(id = "passwordNew-error")
+	private WebElement passworderrormessage2;
+    
+    @FindBy(id = "passwordNewConfirm-error")
+	private WebElement passworderrormessage3;
     
 	@FindBy(xpath = ".//*[@id='email']/div[1]/p")
 	private WebElement EmailLabel;
@@ -370,15 +376,19 @@ public class ProfilePreferencesPage extends UhcDriver {
 
 	public void validateAccountEditElements() {
 		// TODO Auto-generated method stub
-
-		validateNew(CurrentPassword);
-		validateNew(NewPassword);
-		validateNew(ConfirmPassword);
-		validateNew(SaveButton);
-		validateNew(CancelButton);
 		EditButton.click();
-
-	}
+		try {
+			Thread.sleep(30000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		validate(CurrentPassword);
+		validate(NewPassword);
+		validate(ConfirmPassword);
+		validate(SaveButton);
+		validate(CancelButton);
+        }
 
 	
 	public boolean validateSavebuttonclick() {
@@ -390,7 +400,7 @@ public class ProfilePreferencesPage extends UhcDriver {
 		}
 
 		SaveButton.click();
-		if (passworderrormessage.getText().contentEquals("This field is required")) {
+		if (passworderrormessage.getText().contentEquals("This field is required.")) {
 			System.out.println("The element" + passworderrormessage.getText() + "is found");
 			return true;
 		} else {
@@ -398,6 +408,48 @@ public class ProfilePreferencesPage extends UhcDriver {
 		}
 		return false;
 	}
+	
+	public boolean invalidpasswordvalidation()
+	{
+		//EditButton.click();
+		NewPassword.sendKeys("Passw");
+		try {
+			Thread.sleep(30000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		SaveButton.click();
+		if (passworderrormessage2.getText().contentEquals("Password does not meet requirements.")) {
+			System.out.println("The element" + passworderrormessage2.getText() + "is found");
+			return true;
+		} else {
+			Assert.fail("The element " + passworderrormessage2.getText() + "is not found");
+		}
+		return false;
+	}
+	
+	public boolean invalidpasswordvalidation2()
+	{
+		//EditButton.click();
+		NewPassword.sendKeys("Password@1");
+		ConfirmPassword.sendKeys("Password@2");
+		try {
+			Thread.sleep(30000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		SaveButton.click();
+		if (passworderrormessage3.getText().contentEquals("Please enter the same value again.")) {
+			System.out.println("The element" + passworderrormessage3.getText() + "is found");
+			return true;
+		} else {
+			Assert.fail("The element " + passworderrormessage3.getText() + "is not found");
+		}
+		return false;
+	}
+	
 	public void validateCancelButton() {
 		
 		try {
@@ -416,6 +468,8 @@ public class ProfilePreferencesPage extends UhcDriver {
 		}
 		Assert.assertTrue("Button is present", Password.isDisplayed());
 	}
+	
+	
 
 	public void validateEmailEditElements() {
 
@@ -472,7 +526,7 @@ public class ProfilePreferencesPage extends UhcDriver {
 		EmailEditbutton.click();
 		NewEmail.sendKeys("nikitajain");
 		SaveEmailButton.click();
-		if (mandatorymessage.getText().contentEquals("Please enter a valid email Address")) {
+		if (mandatorymessage.getText().contentEquals("Please enter a valid email Address.")) {
 			System.out.println("The element" + mandatorymessage.getText() + "is found");
 		} else {
 			Assert.fail("The element " + mandatorymessage.getText() + "is not found");
@@ -483,6 +537,7 @@ public class ProfilePreferencesPage extends UhcDriver {
 
 	public boolean validateduplicateerrormessage() {
 		EmailEditbutton.click();
+		NewEmail.sendKeys("nikitajain4@gmail.com");
 		emailConfirm.sendKeys("nikitajain4@gmal.com");
 		SaveEmailButton.click();
 		if (emailerrormessage.getText().contentEquals("Please enter the same value again.")) {

@@ -199,6 +199,26 @@ public class ProfileandPreferencesUMSStepDefinition {
 		ProfilePreferencesPage.validateCancelButton();
 
 	}
+	
+	
+	@Then("^the user enters invalid password in new password field and clicks save button and the user should see expected error message - Password does not meet requirements")
+	public void UserValidatesinvalidpassword() {
+		ProfilePreferencesPage ProfilePreferencesPage = (ProfilePreferencesPage) getLoginScenario()
+				.getBean(PageConstants.ProfilePreferencesPage);
+
+		ProfilePreferencesPage.invalidpasswordvalidation();
+
+	}
+	
+	@Then("^the user enters different password in confirm password field and clicks save button and the user should see expected error message - Please enter the same value again")
+	public void UserValidatesinvalidpassword2() {
+		ProfilePreferencesPage ProfilePreferencesPage = (ProfilePreferencesPage) getLoginScenario()
+				.getBean(PageConstants.ProfilePreferencesPage);
+
+		ProfilePreferencesPage.invalidpasswordvalidation2();
+
+	}
+	
 
 	@Then("^the user validates see more ways to contact us section")
 	public void Uservalidatesneedhelpsection() {
