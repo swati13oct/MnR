@@ -114,14 +114,11 @@ public class MedicalClaimsAarpStepDefinition {
 			getLoginScenario().saveBean(LoginCommonConstants.PASSWORD, pwd);
 		}
 
-		WebDriver wd = getLoginScenario().getWebDriver();
-		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
-
-		LoginPage loginPage = new LoginPage(wd);
+		LoginPage loginPage = (LoginPage) getLoginScenario().getBean(PageConstants.LOGIN_PAGE);
 		AccountHomePage accountHomePage = (AccountHomePage) loginPage.loginWith(userName, pwd);
 
 		if (accountHomePage != null) {
-			getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
+			
 			getLoginScenario().saveBean(PageConstants.ACCOUNT_HOME_PAGE,
 					accountHomePage);
 			if(accountHomePage.validateAccountHome())

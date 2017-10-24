@@ -138,9 +138,7 @@ public class DrugClaimsAarpStepDefinition {
 		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario()
 				.getBean(PageConstants.ACCOUNT_HOME_PAGE);
 		
-		PlanSummaryPage planSummaryPage = new PlanSummaryPage(wd);
-		getLoginScenario().saveBean(PageConstants.PLAN_SUMMARY_PAGE,wd);
-		planSummaryPage = accountHomePage.navigateToPlanSummary();
+		PlanSummaryPage planSummaryPage = accountHomePage.navigateToPlanSummary();
 		
 		if(planSummaryPage!=null){
 			getLoginScenario().saveBean(PageConstants.PLAN_SUMMARY_PAGE, planSummaryPage);

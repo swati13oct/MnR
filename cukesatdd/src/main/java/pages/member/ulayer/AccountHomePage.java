@@ -182,76 +182,73 @@ public class AccountHomePage extends UhcDriver {
 	
 
 	
-@FindBy(xpath="//a[contains(text(),'Provider search')]")
-private WebElement providerSearchinPanelNavigation;
+	@FindBy(xpath="//a[contains(text(),'Provider search')]")
+	private WebElement providerSearchinPanelNavigation;
 
-@FindBy(xpath="//a[contains(text(),'Medical Explanation of Benefits (EOB)')]")
-private WebElement medicalEOBLinkInPanelNavigation;
-@FindBy(id="zipCode")
-private WebElement zipCode;
-
-
+	@FindBy(xpath="//a[contains(text(),'Medical Explanation of Benefits (EOB)')]")
+	private WebElement medicalEOBLinkInPanelNavigation;
+	@FindBy(id="zipCode")
+	private WebElement zipCode;
 
 
 
 
-@FindBy(xpath="//a[@class='searchforproviders margin_top_5px']")
-private WebElement medicalEOBproviderlink;
-
-@FindBy(linkText = "Benefits and Coverage") 
-private WebElement benefitsAndCoveragelink;
 
 
-//@FindBy(xpath="//a[contains(text(),'Search for a provider')]")
-//private WebElement providerlinkinPCPSection;
+	@FindBy(xpath="//a[@class='searchforproviders margin_top_5px']")
+	private WebElement medicalEOBproviderlink;
+	
+	@FindBy(linkText = "Benefits and Coverage") 
+	private WebElement benefitsAndCoveragelink;
+	
+	
+	//@FindBy(xpath="//a[contains(text(),'Search for a provider')]")
+	//private WebElement providerlinkinPCPSection;
+	
+	@FindBy(xpath="(//p/a[text()='Search for a provider'])[2]")
+	private WebElement providerlinkinPCPSection;
+	
+	@FindBy(css="li#accountdetails>a")
+	private WebElement accountHome;
+	
+	@FindBy(xpath="(//div[@class='widgetbuttonmid']/span)[1]")
+	private WebElement searchLinkinClaimsPage;
+	
+	
+	@FindBy(id = "phr_widget_3")
+	private WebElement showLink;
+	
+	
+	@FindBy(xpath="//div[@class='phr_greybox_mid']/p[contains(text(),'Looking for a doctor')]/following-sibling::p/a")
+	private WebElement providerSearchinPHPage;
+	
+	//@FindBy(xpath="//*[@id='phr_widget_3_box']/div[233]/p[2]/a")
+	//private WebElement providerSearchinPHPage1;
+	
+	
+	@FindBy(xpath="//div[@class='phr_greybox_mid']/p[contains(text(),'Need to find a facility?')]/following-sibling::p/a")
+	private WebElement providerSearchinPHPage1;
+	
+	@FindBy(linkText = "Claims")
+	private WebElement claimsLink;
+	
+	
+	@FindBy(xpath ="(//a[contains(@href,'my-plans/forms-and-resources')])[4]")
+	private WebElement FormsandResourcesLinkn;
+	
+	@FindBy(xpath="//a[contains(text(),'search for providers')]")
+	private WebElement searchforproviderlinkinClaimsPage;
 
-@FindBy(xpath="(//p/a[text()='Search for a provider'])[2]")
-private WebElement providerlinkinPCPSection;
-
-@FindBy(css="li#accountdetails>a")
-private WebElement accountHome;
-
-@FindBy(xpath="(//div[@class='widgetbuttonmid']/span)[1]")
-private WebElement searchLinkinClaimsPage;
-
-
-@FindBy(id = "phr_widget_3")
-private WebElement showLink;
-
-
-@FindBy(xpath="//div[@class='phr_greybox_mid']/p[contains(text(),'Looking for a doctor')]/following-sibling::p/a")
-private WebElement providerSearchinPHPage;
-
-//@FindBy(xpath="//*[@id='phr_widget_3_box']/div[233]/p[2]/a")
-//private WebElement providerSearchinPHPage1;
-
-
-@FindBy(xpath="//div[@class='phr_greybox_mid']/p[contains(text(),'Need to find a facility?')]/following-sibling::p/a")
-private WebElement providerSearchinPHPage1;
-
-@FindBy(linkText = "Claims")
-private WebElement claimsLink;
-
-
-@FindBy(xpath ="(//a[contains(@href,'my-plans/forms-and-resources')])[4]")
-private WebElement FormsandResourcesLinkn;
-
-@FindBy(xpath="//a[contains(text(),'search for providers')]")
-private WebElement searchforproviderlinkinClaimsPage;
-
-  @FindBy(xpath="//*[@id='btn_searchforaprovider']")
-  private WebElement providerLink;
-  
-  @FindBy(xpath="//a[@class='searchforproviders margin_top_5px']")
-	private WebElement searchProviderinFormsandResourcePage;
+	  @FindBy(xpath="//*[@id='btn_searchforaprovider']")
+	  private WebElement providerLink;
+	  
+	  @FindBy(xpath="//a[@class='searchforproviders margin_top_5px']")
+		private WebElement searchProviderinFormsandResourcePage;
 	
 	
 	
 	@FindBy(xpath="//span[text()='search providers']")
 	private WebElement searchProviderLinkinFormsandResourcePage;
-	
-
-
 	
 	private PageData myAccountHome;
 
@@ -271,6 +268,7 @@ private WebElement searchforproviderlinkinClaimsPage;
 		myAccountHome = CommonUtility.readPageData(fileName,
 				CommonConstants.PAGE_OBJECT_DIRECTORY_ULAYER_MEMBER);
 		openAndValidate();
+		
 	}
 
 	public PlanBenefitsCoveragePage navigateToBnC() {
@@ -281,7 +279,7 @@ private WebElement searchforproviderlinkinClaimsPage;
 		} else
 			return null;
 	}
-	
+
 	
 	public PlanBenefitsCoveragePage navigateToBenefitsAndCoverage() {
 		benefitsAndCoverageLink.click();
@@ -526,6 +524,12 @@ driver.switchTo().window(mainwindow);
 	public PlanSummaryPage navigateToPlanSummary() {
 
 		myPlansTab.click();
+		try {
+			Thread.sleep(6000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		if (driver.getTitle().equalsIgnoreCase(
 				"AARP Medicare Plans | Plan Summary")) {
 			return new PlanSummaryPage(driver);

@@ -9,6 +9,7 @@ import org.json.JSONObject;
 import org.junit.Assert;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.NoAlertPresentException;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
@@ -1271,9 +1272,8 @@ public class DrugCostEstimatorPage extends UhcDriver {
 		Thread.sleep(5000);
 		String brandedCost = costText.getText();
 		System.out.println(brandedCost);
-		if(switchNowBtn.isDisplayed())
-			switchNowBtn.click();
-		Thread.sleep(3000);
+		JavascriptExecutor js = (JavascriptExecutor)driver;
+		js.executeScript("arguments[0].click();", switchNowBtn);
 		updateBtn.click();
 		Thread.sleep(6000);
 		String genericCost = costText.getText();System.out.println(genericCost);
