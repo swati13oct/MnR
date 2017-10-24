@@ -483,7 +483,7 @@ public class ProfilePreferencesPage extends UhcDriver {
 
 	public boolean validateduplicateerrormessage() {
 		EmailEditbutton.click();
-		emailConfirm.sendKeys("nikit");
+		emailConfirm.sendKeys("nikitajain4@gmal.com");
 		SaveEmailButton.click();
 		if (emailerrormessage.getText().contentEquals("Please enter the same value again.")) {
 			System.out.println("The element" + emailerrormessage.getText() + "is found");

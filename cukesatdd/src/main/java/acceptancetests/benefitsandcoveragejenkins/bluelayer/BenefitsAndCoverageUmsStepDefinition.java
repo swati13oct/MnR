@@ -268,7 +268,7 @@ public class BenefitsAndCoverageUmsStepDefinition {
 
 			// Get actual data
 
-			JSONObject actualJsonObj = benefitsCoveragePage.benefitsandcoverageJson;
+			/*JSONObject actualJsonObj = benefitsCoveragePage.benefitsandcoverageJson;
 			loginScenario.saveBean(PlanBenefitsAndCoverageCommonConstants.BENEFITS_AND_COVERAGE_ACTUAL, actualJsonObj);
 			System.out.println("Benefits and coverage actual ==============>" + actualJsonObj.toString());
 			// Get expected data
@@ -280,7 +280,7 @@ public class BenefitsAndCoverageUmsStepDefinition {
 			System.out.println(
 					"Benefits and coverage expected ==============>" + benefitsandcoverageExectedJson.toString());
 			loginScenario.saveBean(PlanBenefitsAndCoverageCommonConstants.BENEFITS_AND_COVERAGE_EXPECTED,
-					benefitsandcoverageExectedJson);
+					benefitsandcoverageExectedJson);*/
 		}
 	}
 
@@ -634,11 +634,9 @@ public class BenefitsAndCoverageUmsStepDefinition {
 	public void validatecontentonbnc() {
 		try {
 
-			JSONObject actual = (JSONObject) loginScenario
-					.getBean(PlanBenefitsAndCoverageCommonConstants.BENEFITS_AND_COVERAGE_ACTUAL);
+			//JSONObject actual = (JSONObject) loginScenario.getBean(PlanBenefitsAndCoverageCommonConstants.BENEFITS_AND_COVERAGE_ACTUAL);
 
-			JSONObject expected = (JSONObject) loginScenario
-					.getBean(PlanBenefitsAndCoverageCommonConstants.BENEFITS_AND_COVERAGE_EXPECTED);
+			//JSONObject expected = (JSONObject) loginScenario.getBean(PlanBenefitsAndCoverageCommonConstants.BENEFITS_AND_COVERAGE_EXPECTED);
 
 			// if(actual!=null && expected !=null){
 			// JSONAssert.assertEquals(expected, actual, true);
