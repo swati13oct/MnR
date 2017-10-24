@@ -943,8 +943,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 
 	public boolean providerinfo(String planName)
 	{
-		//String providerinfo=provider.getText();
-		
+				
 		WebElement ProviderSearchLink1 = driver.findElement
 				(By.xpath("//h2[contains(text(),'"+planName+"')]/following::span[contains(text(),'covered')][1]"));
 		String mproviderinfo=ProviderSearchLink1.getText();

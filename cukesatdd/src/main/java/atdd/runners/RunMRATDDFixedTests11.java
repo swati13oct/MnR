@@ -18,5 +18,5 @@ import cucumber.api.CucumberOptions;
 @CucumberOptions(glue = { "atdd.framework", "acceptancetests.fixedtestcases" }, features = { "src/main/resources/feature/fixedtestcases" }, plugin = {
 		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDFixedTests11.json" }, tags = { "@AcqProviderSearchUlayer,@BlayerProviderSearch" })
 public class RunMRATDDFixedTests11 {
-
+ 
 }
