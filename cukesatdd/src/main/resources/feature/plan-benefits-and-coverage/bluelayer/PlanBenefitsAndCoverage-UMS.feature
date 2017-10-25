@@ -779,22 +779,25 @@ Examples:
       | MAPD     |  
 
       
-  @validatePdfsectiongroupenglish
+   @validatePdfsectiongroupenglish
       Scenario Outline: Verify PDF section is in place on Benefits and     Coverage page
     Given registered member with following details logins in the member portal 
       | Plan Type      | <planType>  |
-
+      | Member Type    | <memberType>|
+      | Copay Category | <copayCategory>|
     Then the user navigates to Benefits and coverage page
     And the user validates the content on benefits and coverage page
     And the user validates view and document label
     And the user validates the language dropdown and the value displayed by default should be English
    
-     Examples:
-      
-      | planType|  
-      | MAPD    |  
-      | MA      |  
-      | PDP     |  
+     Examples: 
+       | planType|  memberType  | copayCategory |
+       | PDP     |  Group       |  NON LIS      |
+       | MAPD    |  Group       |  NON LIS      |
+       | MA      |  Group       |  NON LIS      | 
+       | MAPD    |  Group       |   LIS 3       |
+       | MA      |  Group       |   LIS 1       |
+       | PDP     |  Group       |   LIS 3       |   
   
 
 
@@ -809,10 +812,14 @@ Examples:
     And the user validates view and document label
     And the user validates spanish and chinese should not display in dropdown
  
-     Examples:
-      
-      | planType|  memberType  | 
-      | MAPD    |  Group       |   
+     Examples: 
+       | planType|  memberType  | copayCategory |
+       | PDP     |  Group       |  NON LIS      |
+       | MAPD    |  Group       |  NON LIS      |
+       | MA      |  Group       |  NON LIS      | 
+       | MAPD    |  Group       |   LIS 3       |
+       | MA      |  Group       |   LIS 1       |
+       | PDP     |  Group       |   LIS 3       |     
 
  @validatePdfsectionindividual
     Scenario Outline: Verify PDF section is in place on Benefits and     Coverage page
@@ -824,13 +831,23 @@ Examples:
     And the user validates the content on benefits and coverage page
     And the user validates view and document label
     And the user validates the language dropdown and the value displayed by default and selects new value in dropdown successfully
- 
-     Examples:
+       | Language | <language> |
+       
+    Examples:
       
-      | planType|  memberType  | copayCategory |
-      | MAPD    |  Individual  |  NON LIS      | 
-      | MA      |  Individual  |  LIS 1        |
-      | PDP     |  Individual  |  NON LIS      |
+      | planType|  memberType  | copayCategory | language |
+      | MAPD    |  Individual  |   LIS 1       | SPANISH  |
+      | MA      |  Individual  |   LIS 1       | CHINESE  |
+      | MAPD    |  Individual  |  NON LIS      | SPANISH  |
+      | MA      |  Individual  |  NON LIS      | CHINESE  |
+      | MAPD    |  Individual  |   LIS 1       | CHINESE  |
+      | MA      |  Individual  |   LIS 1       | SPANISH  |
+      | MAPD    |  Individual  |  NON LIS      | CHINESE  |
+      | MA      |  Individual  |  NON LIS      | SPANISH  |
+      | MAPD    |  Individual  |   LIS 1       | ENGLISH  |
+      | MA      |  Individual  |   LIS 1       | ENGLISH  |
+      | MAPD    |  Individual  |  NON LIS      | ENGLISH  |
+      | MA      |  Individual  |  NON LIS      | ENGLISH  |
       
  @Ancillarysecjenkins
    Scenario Outline: Verify Ancilliary section is in place on Benefits and Coverage page
@@ -869,7 +886,7 @@ Examples:
     And the user validates Look Up Drugs button should be visible
     And the user validates text for the Locate a Pharmacy section
     And the user validates Locate a Pharmacy button should be visible
-    #And the user should see drug copay and discount table
+    And the user should see drug copay and discount table
     Examples: 
        | planType|  memberType  | copayCategory |
        | PDP     |  Group       |  NON LIS      |
@@ -896,29 +913,13 @@ Examples:
     And the user validates Look Up Drugs button should be visible
     And the user validates text for the Locate a Pharmacy section
     And the user validates Locate a Pharmacy button should be visible
-    #And the user should see drug copay and discount table
+    And the user should see retail drug copay and discount table
     Examples: 
       | planType|  memberType  | copayCategory |
       | MAPD    |  Individual  |   LIS 1       |
       | MAPD    |  Group       |   LIS 3       |
       | PDP     |  Group       |   LIS 3       |
-      
-      
-
-    @drugcosttablesectiongroupmemberlis
-    Scenario Outline: Verify that drug cost table  is in place on Benefits and Coverage page for LIS Members
-    Given registered member with following details logins in the member portal 
-      | Plan Type      | <planType>     |
-      | Member Type    | <memberType>|
-      | Copay Category | <copayCategory>|
-    Then the user navigates to Benefits and coverage page
-    And the user view the Drug Copays & Discounts header 
-    And the user should see drug cost table for Lis members
-    Examples: 
-      | planType|  memberType  | copayCategory|
-      | PDP     |  Group       |  LIS         |
-     # | MAPD    |  Group       |  LIS 1       |
-      
+           
       
       
     @PlanOverview
