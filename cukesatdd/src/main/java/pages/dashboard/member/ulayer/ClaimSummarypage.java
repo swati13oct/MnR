@@ -3,6 +3,7 @@ import java.security.PublicKey;
 import java.util.List;
 import java.util.Map;
 
+import org.junit.internal.runners.statements.Fail;
 import org.omg.CORBA.PUBLIC_MEMBER;
 import org.openqa.selenium.By;
 /**
@@ -120,8 +121,10 @@ public class ClaimSummarypage extends UhcDriver{
 	@FindBy (xpath = "//a[contains(text(),'CANCEL')]")
 	private WebElement cancelButtonDownloadPopUp;
 
-	@FindBy (xpath="//button")
+	//@FindBy (xpath="(//button[@class="btn btn--primary margin-none"])[1]")
+	@FindBy (xpath ="(//*[text()='Search'])[1]")
 	private WebElement searchButton;
+	
 
 	@FindBy (id="custom-from")
 	private WebElement from;
@@ -130,6 +133,16 @@ public class ClaimSummarypage extends UhcDriver{
 	private WebElement to;
 	@FindBy (xpath = ".//*[@id='errorMsg']/div/p")
 	private WebElement rxErrorMsg;
+	
+	@FindBy (css = ".ng-scope>p>span")
+	private WebElement shipDateRangeErrMsg;
+	
+	@FindBy (css = ".color-red.semi-bold>p>span")
+	private WebElement fedDateRangeErrMsg;
+	
+	@FindBy (css = ".color-red.semi-bold>p>span")
+	private WebElement fromDateLaterThanToDateError;
+	
 
 
 	public ClaimSummarypage(WebDriver driver) {
@@ -391,7 +404,35 @@ public class ClaimSummarypage extends UhcDriver{
 		return rxErrorMsg.isDisplayed();
 
 	}
+	
+
+	public void validateShipGreaterThan24MonthsErrorMsg() {
+		if (!shipDateRangeErrMsg.isDisplayed())
+		Assert.fail(shipDateRangeErrMsg + "is not being displayed");
+
+		// shipDateRangeErrMsg.isDisplayed();
+
+	}
+	
+	public void validateFedGreaterThan24MonthsErrorMsg() {
+		
+		if(!fedDateRangeErrMsg.isDisplayed())
+			Assert.fail(fedDateRangeErrMsg +"Is not being displayed");
+		
+	}
+	
+	public void  validatefromDateLaterThanToDateError() {
+		
+		
+		if(!fromDateLaterThanToDateError.isDisplayed())
+			Assert.fail(fromDateLaterThanToDateError + "is not beind dsiplayed");
+		
+	}
+	
+	
 }
+
+
 
 
 

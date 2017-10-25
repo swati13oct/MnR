@@ -1028,7 +1028,7 @@ public class MRScenario {
 					//System.out.println("Inside firefox");
 					capabilities = DesiredCapabilities.firefox();
 					capabilities.setCapability("platform", "Windows 7");
-					capabilities.setCapability("version", "48");
+					capabilities.setCapability("version", "43");
 					capabilities.setCapability("idleTimeout", 180);
 				}else if(browserName.equalsIgnoreCase("IE")){
 					capabilities = DesiredCapabilities.internetExplorer();
