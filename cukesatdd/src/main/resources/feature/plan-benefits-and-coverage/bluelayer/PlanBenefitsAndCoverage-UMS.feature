@@ -875,9 +875,7 @@ Examples:
        | PDP     |  Group       |  NON LIS      |
        | MAPD    |  Group       |  NON LIS      |
        | MAPD    |  Individual  |  NON LIS      |
-       | MA      |  Individual  |  NON LIS      |
-       | MA      |  Group       |  NON LIS      |
-
+       
       
     @drugcopaysectionlis
     Scenario Outline: Verify PDF section is in place on Benefits and Coverage page
@@ -902,9 +900,7 @@ Examples:
     Examples: 
       | planType|  memberType  | copayCategory |
       | MAPD    |  Individual  |   LIS 1       |
-      | MA      |  Individual  |   LIS 1       |
       | MAPD    |  Group       |   LIS 3       |
-      | MA      |  Group       |   LIS 1       |
       | PDP     |  Group       |   LIS 3       |
       
       
