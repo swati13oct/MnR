@@ -298,6 +298,9 @@ public class DrugCostEstimatorPage extends UhcDriver {
 		String Current_url = driver.getCurrentUrl();
 		String NewDCEUrl;
 		
+		/*WebElement dcelink = driver.findElement(By.linkText("Estimate Drug Costs"));
+		System.out.println("dce link");
+		dcelink.click();*/
 		if (driver.getCurrentUrl().contains("aarpmedicareplans")) {
 			//NewDCEUrl = "https://member.team-b-aarpmedicareplans.uhc.com/content/dashboard/home/drug-cost-estimator.html";
 			NewDCEUrl = "https://member.team-b-aarpmedicareplans.uhc.com/content/medicare/member/drug-lookup/overview.html";
@@ -305,7 +308,7 @@ public class DrugCostEstimatorPage extends UhcDriver {
 			//NewDCEUrl = "https://member.team-b-uhcmedicaresolutions.uhc.com/content/dashboard/home/drug-cost-estimator.html";
 			NewDCEUrl = "https://member.team-b-uhcmedicaresolutions.uhc.com/content/medicare/member/drug-lookup/overview.html";
 		}else{
-			NewDCEUrl = "https://team-h-medicare.uhc.com/content/medicare/member/drug-lookup/overview.html";
+			NewDCEUrl = "https://team-h-werally.uhc.com/retiree/member/drug-lookup/overview.html#/drug-cost-estimator";
 		}
 
 		driver.get(NewDCEUrl);

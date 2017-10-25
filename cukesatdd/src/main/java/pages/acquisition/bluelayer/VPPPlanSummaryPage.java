@@ -13,6 +13,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.junit.Assert;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
@@ -222,9 +223,12 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	}
 
 	public VPPPlanSummaryPage viewPlanSummary(String planType) {
+		JavascriptExecutor jse = (JavascriptExecutor)driver;
 		if (planType.equalsIgnoreCase("PDP")) {
 			showPdpPlans.click();
 		} else if (planType.equalsIgnoreCase("MA") || planType.equalsIgnoreCase("MAPD")) {
+			((JavascriptExecutor) driver).executeScript(
+	                "arguments[0].scrollIntoView();", showMaPlans);
 			showMaPlans.click();
 		} else if (planType.equalsIgnoreCase("SNP")) {
 			showSnpPlans.click();

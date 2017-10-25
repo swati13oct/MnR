@@ -1,6 +1,9 @@
 package pages.memberredesign.bluelayer;
 
+import java.util.List;
+
 import org.junit.Assert;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -16,7 +19,7 @@ public class AccountHomePage extends UhcDriver {
 	@FindBy(id = "home")
 	private WebElement home;
 	
-	@FindBy(id = "findcarecost")
+	@FindBy(linkText = "FIND CARE & COSTS")
 	private WebElement findCareCost;
 	
 	@FindBy(id = "claims")
@@ -101,6 +104,12 @@ public class AccountHomePage extends UhcDriver {
 	public void validateClaimsL2Tabs(){
 		if(claims.isDisplayed()){
 			claims.click();
+			try {
+				Thread.sleep(3000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			Assert.assertTrue("claimSummary is not displayed", claimSummary.isDisplayed());
 			Assert.assertTrue("explainationOfBenefits is not displayed", explainationOfBenefits.isDisplayed());
 		}
@@ -110,6 +119,12 @@ public class AccountHomePage extends UhcDriver {
 		waitforElement(coverageBenefits);
 		if(coverageBenefits.isDisplayed()){
 			coverageBenefits.click();
+			try {
+				Thread.sleep(5000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			Assert.assertTrue("benefitsSummary is not displayed", benefitsSummary.isDisplayed());
 			Assert.assertTrue("formsAndResources is not displayed", formsAndResources.isDisplayed());
 			Assert.assertTrue("orderMaterials is not displayed", orderMaterials.isDisplayed());
