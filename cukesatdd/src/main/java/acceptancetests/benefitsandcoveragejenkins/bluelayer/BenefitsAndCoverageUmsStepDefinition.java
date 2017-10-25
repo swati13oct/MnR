@@ -884,8 +884,8 @@ public class BenefitsAndCoverageUmsStepDefinition {
 	 @And("^the user validates dropdown selection functionality") 
 	 public void user_validate_dropdwonvalues() 
 	 { BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage)getLoginScenario().getBean( PageConstants.BENEFITS_AND_COVERAGE_PAGE);
-	  JSONObject benefitsandcoverageExectedJson=(JSONObject)loginScenario.getBean(PlanBenefitsAndCoverageCommonConstants.BENEFITS_AND_COVERAGE_EXPECTED);
-	  benefitsCoveragePage.validate_drugcostdropdownoptions(benefitsandcoverageExectedJson);
+	  //JSONObject benefitsandcoverageExectedJson=(JSONObject)loginScenario.getBean(PlanBenefitsAndCoverageCommonConstants.BENEFITS_AND_COVERAGE_EXPECTED);
+	  benefitsCoveragePage.validate_drugcostdropdownoptions();
 	  }
 	 
 

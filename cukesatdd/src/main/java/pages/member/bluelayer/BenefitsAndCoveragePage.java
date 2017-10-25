@@ -523,19 +523,41 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 
 	}
 
-	public void validate_drugcostdropdownoptions(JSONObject benefitsandcoverageExectedJson)
+	public void validate_drugcostdropdownoptions()
 
 	{
-		try {
-			validate(DrugCostDropdown);
-			validate(Pharmacycontent);
-			Assert.assertEquals("true or not", benefitsandcoverageExectedJson.get("drugcostdropdown"),
-					benefitsandcoverageJson.get("drugcostdropdown"));
-		} catch (JSONException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		if (DrugCostDropdown.isDisplayed()) {
+			List<String> listActual = new ArrayList<String>();
+			Select dropdown = new Select(DrugCostDropdown);
+			List<WebElement> webElements = dropdown.getOptions();
+			for (WebElement element : webElements) {
+                    if (element.getText().equals("Standard Retail Pharmacy") )
+                    {
+                    	Assert.assertTrue("The element" + element.getText() +"should display" , true);;
+					
+					System.out.println("The element " + element.getText() + "should not display");
+				} 
+                    else if (element.getText().equals("Preferred Mail Service Pharmacy") )
+                    	 {
+                    	Assert.assertTrue("The element" + element.getText() +"should display" , true);;
+					
+					System.out.println("The element " + element.getText() + "should not display");
+				} 
+                    else if (element.getText().equals("Preferred Retail Pharmacy")) 
+                   	 {
+                   	Assert.assertTrue("The element" + element.getText() +"should display" , true);;
+					
+					System.out.println("The element " + element.getText() + "should not display");
+				} 
+                    else
+                    {
+                    
+					Assert.fail();
+				}
+			}
 		}
 	}
+
 
 	public void validate_learnmoreaboutlink() {
 		validate(Learnmoretierslink);
