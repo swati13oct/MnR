@@ -21,7 +21,7 @@ import atdd.framework.UhcDriver;
 
 public class ViewDrugCostPage extends UhcDriver {
 
-	@FindBy(linkText = "Edit")
+	@FindBy(xpath = ".//*[@id='dceMemberUlayer']/div/div[1]/div[3]/div[3]/table/tbody/tr[7]/td[1]/p/a")
 	private WebElement editLink;
 
 	@FindBy(className = "viewDrugCost")
@@ -33,7 +33,7 @@ public class ViewDrugCostPage extends UhcDriver {
 	@FindBy(linkText = "Delete")
 	private WebElement deleteLink;
 	
-	@FindBy(xpath = ".//*[@id='dceMemberUlayer']/div/div[1]/div[3]/div[3]")
+	@FindBy(className= "borderLeft drugdosage ng-binding")
 	private WebElement descBox;
 	
 	@FindBy(linkText ="Edit pharmacy")
@@ -55,6 +55,7 @@ public class ViewDrugCostPage extends UhcDriver {
 	}
 
 	public ManageDrugPage editDrugList() {
+		CommonUtility.waitForPageLoad(driver, editLink, 30);
 		editLink.click();
 		try {
 			Thread.sleep(5000);
@@ -64,7 +65,7 @@ public class ViewDrugCostPage extends UhcDriver {
 		}
 		deleteLink.click();
 		System.out.println("Deleted drug from list");
-		if (driver.getTitle().equalsIgnoreCase("Drug Cost Estimator")) {
+		if (driver.getTitle().equalsIgnoreCase("Drug Lookup")) {
 			return new ManageDrugPage(driver);
 		} else {
 			return null;

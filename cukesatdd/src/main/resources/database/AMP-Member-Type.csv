@@ -3,7 +3,7 @@ ATDD_ULAYER_PDP_01/Password@1,PDP,
 q3_sep_ulayer004/Password@1,MAPD,Nice_med
 ATDD_ULAYER_PDP_DRUGCLAIMS_01/Password@1,PDP,drug,
 q3_sep_ulayer172/Password@1,MA,cosmos_eob
-q3_sep_rxulayer003/Password@1,PDP,rx_eob,
+ATDD_ULAYER_PDP_RX_EOB_01/Password@1,PDP,rx_eob,
 q3_sep_ulayer155/Password@1,MAPD-PHR,
 q3_sep_ulayer213/Password@1,MAPD,COSMOS_dce1,
 ATDD_q2_jun_ulayer225/Password@1,MAPD,COSMOS_dce2,

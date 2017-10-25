@@ -7,6 +7,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -32,7 +33,7 @@ public class SelectPharmacyPage extends UhcDriver {
 	@FindBy(xpath = "//div[@id='dce.member']/div/div[4]/div/div/div[1]/div[1]/div[2]")
 	WebElement  selectPharmacyTab;
 	
-	@FindBy(xpath = "//div[@id='dce.member']/div/div[4]/div/div/div[1]/div[1]/div[3]")
+	@FindBy(xpath = ".//*[@id='dceMemberUlayer']/div/div[1]/div[1]/h3[3]")
 	WebElement viewDrugCostTab1;
 
 	@FindBy(xpath = "//div[@id='dce.member']/div/div[5]/div/div/form/div/div/div[1]/div[1]/div[3]")
@@ -173,7 +174,8 @@ public class SelectPharmacyPage extends UhcDriver {
 	private WebElement descBox;
 	
 	public ViewDrugCostPage navigateToStep3(){
-		viewDrugCostBtn.click();
+		JavascriptExecutor js = (JavascriptExecutor)driver;
+		js.executeScript("arguments[0].click();", viewDrugCostTab1);
 		if(descBox.getText().contains("Total estimated annual drug costs"))
 			return new ViewDrugCostPage(driver);
 		return null;

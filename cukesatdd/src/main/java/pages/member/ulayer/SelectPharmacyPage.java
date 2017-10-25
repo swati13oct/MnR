@@ -7,6 +7,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -249,7 +250,9 @@ public class SelectPharmacyPage extends UhcDriver {
 	}
 	
 	public ViewDrugCostPage navigateToStep3(){
-		viewDrugCostBtn.click();
+		JavascriptExecutor js = (JavascriptExecutor)driver;
+		js.executeScript("arguments[0].click();", viewDrugCostBtn);
+		//viewDrugCostBtn.click();
 		if(descBox.getText().contains("Total estimated annual drug costs"))
 			return new ViewDrugCostPage(driver);
 		return null;

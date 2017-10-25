@@ -3,6 +3,6 @@ ATDD_BLAYER_MAPD_IND_01/Password@1,MAPD,Individual,
 ATDD_BLAYER_MAPD_IND_MEDCLAIMS_01/Password@1,MAPD,Individual,Nice_med,
 q3_sep_blayer001/Password@1,MAPD,Individual,Drug,
 q3_sep_blayer002/Password@1,MAPD,Individual,Med_EOB
-q3_sep_rxblayerind003/Password@1,MAPD,Individual,rx_Eob,
+q3_sep_rxblayer015/Password@1,MAPD,Individual,rx_Eob,
 q3_sep_blayer149/Password@1,MAPD-PHR,Individual,
-q3_sep_blayer123/Password@1,MAPD,COSMOS_dce,
+ATDD_q2_jun_blayer123/Password@1,MAPD,COSMOS_dce,
