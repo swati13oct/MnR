@@ -82,46 +82,46 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 	@FindBy(xpath = ".//*[@id='ancillary']/div[2]/div[4]/div/div")
 	private WebElement chiropracticsection;
 
-	@FindBy(xpath = ".//*[@id='drug-copays-and-discounts']/section/div[2]/div[5]/div/span/div/div/div/div/h3/span")
+	@FindBy(xpath = ".//*[@id='drug-benefits']/div/section/div[6]/div/span/div/div/div/div/p")
 	private WebElement DrugCoveragetext;
 
-	@FindBy(xpath = ".//*[@id='drug-copays-and-discounts']/section/div[2]/div[5]/div/span/div/div/div/div/p")
+	@FindBy(xpath = ".//*[@id='drug-benefits']/div/section/div[6]/div/span/div/div/div/div/h3/span")
 	private WebElement DrugCoverageHeader;
 
-	@FindBy(xpath = ".//*[@id='drug-copays-and-discounts']/section/div[2]/div[6]/div[1]/div/div/div/div/p")
+	@FindBy(xpath = ".//*[@id='drug-benefits']/div/section/div[7]/div[1]/div/div/div/div/p")
 	private WebElement LookupDrugstext;
 
-	@FindBy(xpath = ".//*[@id='drug-copays-and-discounts']/section/div[2]/div[6]/div[1]/a")
+	@FindBy(xpath = ".//*[@id='drug-benefits']/div/section/div[7]/div[1]/a")
 	private WebElement LookUpDrugsButton;
 
-	@FindBy(xpath = ".//*[@id='drug-copays-and-discounts']/section/div[1]/div/div/div/div/div/div/h2")
+	@FindBy(xpath = ".//*[@id='drug-benefits']/div/section/div[1]/div/div/div/div/div/div/h2")
 	private WebElement DrugCopayHeader;
 
-	@FindBy(xpath = ".//*[@id='drug-copays-and-discounts']/section/div[1]/div/div/div/div/div/div/p")
+	@FindBy(xpath = ".//*[@id='drug-benefits']/div/section/div[1]/div/div/div/div/div/div/p")
 	private WebElement DrugCopayText;
 
 	@FindBy(id = "drug-costs")
 	private WebElement DrugCostDropdown;
 
-	@FindBy(xpath = ".//*[@id='drug-copays-and-discounts']/section/div[2]/div[1]/div")
+	@FindBy(xpath = ".//*[@id='drug-benefits']/div/section/div[2]/div/div")
 	private WebElement DrugCostheaderandtext;
 
-	@FindBy(xpath = ".//*[@id='drug-copays-and-discounts']/section/div[2]/div[2]/div/div/div[2]/p[2]")
+	@FindBy(xpath = ".//*[@id='drug-benefits']/div/section/div[3]/div/div/div[2]/p")
 	private WebElement Pharmacycontent;
 
 	@FindBy(xpath = ".//*[@id='waystosave']/div/div/div[1]/div/h1")
 	private WebElement TextWaystoSave;
 
-	@FindBy(xpath = ".//*[@id='drug-copays-and-discounts']/section/div[2]/div[3]/div/div/div/div/div[1]/div/a")
+	@FindBy(xpath = ".//*[@id='drug-benefits']/div/section/div[4]/div/div/div/div/div[1]/div/a")
 	private WebElement Learnmoretierslink;
 
-	@FindBy(xpath = ".//*[@id='drug-copays-and-discounts']/section/div[2]/div[3]/div/div/div/div/div[2]/div/a")
+	@FindBy(xpath = ".//*[@id='drug-benefits']/div/section/div[4]/div/div/div/div/div[2]/div/a")
 	private WebElement Learnmorestagelink;
 
-	@FindBy(xpath = ".//*[@id='drug-copays-and-discounts']/section/div[2]/div[6]/div[2]/div/div/div/div/p")
+	@FindBy(xpath = ".//*[@id='drug-benefits']/div/section/div[7]/div[2]/div/div/div/div/p")
 	private WebElement locateapharmacysection;
 
-	@FindBy(xpath = ".//*[@id='drug-copays-and-discounts']/section/div[2]/div[6]/div[2]/a")
+	@FindBy(xpath = ".//*[@id='drug-benefits']/div/section/div[7]/div[2]/a")
 	private WebElement locateapharmacybutton;
 
 	@FindBy(id = "mapdPageNonLis")
@@ -129,6 +129,7 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 
 	@FindBy(id = "mapdPageLis")
 	private WebElement RetailDrugCost_Table;
+
 
 	@FindBy(id = "waystosave")
 	private WebElement waysToSave;

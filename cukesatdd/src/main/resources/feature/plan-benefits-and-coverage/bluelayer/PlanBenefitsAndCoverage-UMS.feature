@@ -853,35 +853,36 @@ Examples:
      
       
    @drugcopaysectionnonlis
-    Scenario Outline: Verify PDF section is in place on Benefits and Coverage page
+   Scenario Outline: Verify Drug Cost section is in place on Benefits and Coverage page
     Given registered member with following details logins in the member portal 
       | Plan Type      | <planType>     |
       | Member Type    | <memberType>|
       | Copay Category | <copayCategory>|
-    Then the user navigates to Benefits and coverage page
+    When the user navigates to Benefits coverage page
     And the user validates the content on benefits and coverage page
     And the user view the Drug Copays & Discounts header 
     And the user validates the Learn More section link for stage and tier
+    And the user validates dropdown selection functionality
     #And the user validates the user click on the link it expands and when user clicks it again it should collapse
-    And the user validates plandocumentsection and Drug coverage header and text under the section
+    And the user validates Drug coverage header and text under the section
     And the user validates text for the Look Up Drugs section
     And the user validates Look Up Drugs button should be visible
     And the user validates text for the Locate a Pharmacy section
     And the user validates Locate a Pharmacy button should be visible
     #And the user should see drug copay and discount table
     Examples: 
-      | planType|  memberType  | copayCategory |
-      | PDP     |  Group       |  NON LIS      |
-      | MAPD    |  Group       |  NON LIS      |
-      | MAPD    |  Individual  |  NON LIS      |
-      ##q3_sep_blayer001
-      ##q3_sep_grp285
-      ##q3_sep_grp004
+       | planType|  memberType  | copayCategory |
+       | PDP     |  Group       |  NON LIS      |
+       | MAPD    |  Group       |  NON LIS      |
+       | MAPD    |  Individual  |  NON LIS      |
+       | MA      |  Individual  |  NON LIS      |
+       | MA      |  Group       |  NON LIS      |
+
       
     @drugcopaysectionlis
     Scenario Outline: Verify PDF section is in place on Benefits and Coverage page
     Given registered member with following details logins in the member portal 
-      | Plan Type      | <planType>     |
+       | Plan Type      | <planType>     |
       | Member Type    | <memberType>|
       | Copay Category | <copayCategory>|
     Then the user navigates to Benefits and coverage page
@@ -891,7 +892,8 @@ Examples:
     And the user validates the Learn More section link for stage
     And the user validates tier link should not display 
     #And the user validates the user click on the link it expands and when user clicks it again it should collapse
-    And the user validates plandocumentsection and Drug coverage header and text under the section
+    And the user validates dropdown selection functionality
+    And the user validates Drug coverage header and text under the section
     And the user validates text for the Look Up Drugs section
     And the user validates Look Up Drugs button should be visible
     And the user validates text for the Locate a Pharmacy section
@@ -900,11 +902,10 @@ Examples:
     Examples: 
       | planType|  memberType  | copayCategory |
       | MAPD    |  Individual  |   LIS 1       |
+      | MA      |  Individual  |   LIS 1       |
       | MAPD    |  Group       |   LIS 3       |
-      | PDP     |  Group       |   LIS 2       |     
-      ##q3_sep_blayer006
-      ##q3_sep_grp271
-      ##q3_sep_grp324
+      | MA      |  Group       |   LIS 1       |
+      | PDP     |  Group       |   LIS 3       |
       
       
 
