@@ -120,13 +120,9 @@ public class DrugLookupAarpStepDefinition {
 		if (manageDrugPage != null) {
 			getLoginScenario().saveBean(PageConstants.MANAGE_DRUG_PAGE,
 					manageDrugPage);
-			if(manageDrugPage.validateManageDrugPage()){
-				Assert.assertTrue(true);System.out.println("PASSED1");
-			}else
-				Assert.fail("Error in validating the Manage Drug Page");
 		}
 	}
-
+	
 	@When("^the user search the drug with drugInitials in AARP site$")
 	public void user_validated_drugInformation(DataTable givenAttributes) throws JSONException {
 		String drugInitials = givenAttributes.getGherkinRows().get(0)

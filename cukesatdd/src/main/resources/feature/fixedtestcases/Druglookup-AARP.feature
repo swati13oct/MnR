@@ -6,8 +6,8 @@ Given registered AMP user with following attributes for drug search
       | <planType> |   
       | <category> |           		
 When the user navigates to drug search in AARP site	
-#And the user selects the plan and clicks on continue
-#	 |Plan Name | <planName> |
+And the user selects the plan and clicks on continue
+	 |Plan Name | <planName> |
 And the user search the drug with drugInitials in AARP site
       | <drugInitials> |
 And the user selects drugName in the drug list in AARP site
@@ -28,7 +28,7 @@ Then the user validates drug cost page in AARP site
 		
 Examples:
 		| planType | category    	| 			planName				|drugInitials | drugName     | drugDosage          | drugQuantity | drugFrequency  | packages       | drugType    | pharmacyType                | distance | zipcode        |
-		| MAPD     | COSMOS_dce1	| AARP MedicareComplete Plan 1 (HMO)| lipi        | Lipitor      | Lipitor TAB 10MG    | 30           | Every 1 month  | null           | Brand            | Standard Network Pharmacy   | 15 miles | 90210   |
+		| MAPD     | COSMOS_dce2	| AARP MedicareComplete Plan 1 (HMO)| lipi        | Lipitor      | Lipitor TAB 10MG    | 30           | Every 1 month  | null           | Brand            | Standard Network Pharmacy   | 15 miles | 90210   |
 
 @dcePlans	    
 Scenario Outline: Verify DCE plans are showing AARP plans and not UHC plans

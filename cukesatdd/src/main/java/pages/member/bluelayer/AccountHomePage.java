@@ -549,10 +549,8 @@ public void FormsandResourcesLinkinPlanSummaryPageBlayer()
 
 	public PlanSummaryPage navigateToPlanSummary() {
 
-		List<WebElement> planNameLink = driver.findElements(By.xpath(".//*[@id='plan_box']/div/div[2]/div/p/a"));
-
-		planNameLink.get(0).click();
-		//myPlansTab.click();
+	
+		myPlansTab.click();
 
 		CommonUtility.checkPageIsReady(driver);
 		if (getTitle().equalsIgnoreCase(

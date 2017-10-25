@@ -290,10 +290,10 @@ public class DrugClaimSummaryPage extends UhcDriver {
 	}
 
 	public DrugClaimSummaryPage searchDrugClaimsByPeriod(String claimPeriod) {
-
+		CommonUtility.waitForPageLoad(driver, searchbutton,CommonConstants.TIMEOUT_30);
 		selectFromDropDown(searchRangeList, claimPeriod);
 		searchbutton.click();
-		CommonUtility.waitForPageLoad(driver, searchbutton,CommonConstants.TIMEOUT_30);
+		
 		if (driver.getTitle().equalsIgnoreCase("Claims")) {
 			return new DrugClaimSummaryPage(driver);
 		}

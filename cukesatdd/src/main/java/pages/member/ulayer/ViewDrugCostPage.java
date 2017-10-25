@@ -115,7 +115,12 @@ public class ViewDrugCostPage extends UhcDriver {
 	}
 	
 	public boolean validateViewDrugPage(String dosage) {
-		CommonUtility.waitForPageLoad(driver, editLink, CommonConstants.TIMEOUT_30);
+		try {
+			Thread.sleep(4000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		if((descBox.getText().contains(dosage)))
 			return true;
 		else 
