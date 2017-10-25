@@ -1,43 +1,32 @@
-package acceptancetests.contactus.ulayer.redesign;
+package acceptancetests.redesign.contactUs;
 
 
 
-import java.io.File;
-import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.json.JSONException;
-import org.json.JSONObject;
 import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
-import org.skyscreamer.jsonassert.JSONAssert;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import acceptancetests.atdd.data.CommonConstants;
 import acceptancetests.atdd.data.member.PageConstants;
-import acceptancetests.contactus.data.ContactUsCommonConstants;
-import acceptancetests.login.data.LoginCommonConstants;
 import atdd.framework.MRScenario;
-import cucumber.annotation.After;
 import cucumber.annotation.en.And;
 import cucumber.annotation.en.Given;
 import cucumber.annotation.en.Then;
 import cucumber.annotation.en.When;
 import cucumber.table.DataTable;
 import gherkin.formatter.model.DataTableRow;
-import pages.dashboard.member.ulayer.ClaimSummarypage;
+import pages.member.redesign.ContactUsPage;
 import pages.member.redesign.NewLoginPage;
 import pages.member.redesign.TestHarnessPage;
-import pages.member.ulayer.AccountHomePage;
-import pages.member.ulayer.ContactUsPage;
-import pages.member.ulayer.LoginPage;
-public class ContactUSRedesignAarpStepDefinition {
+
+public class ContactusRedesignStepDefinition {
 	/**
 	 * 
 	 */
-
 		@Autowired
 		MRScenario loginScenario;
 
@@ -46,10 +35,9 @@ public class ContactUSRedesignAarpStepDefinition {
 		}
 		
 		@Given("^registered UMS member with following attributes$")
-		public void ulayer_registered_member_with_following_attributes(
-				DataTable memberAttributes) {
+		public void registered_member_orderplanmaterials_ums(DataTable givenAttributes) {
 
-			List<DataTableRow> memberAttributesRow = memberAttributes.getGherkinRows();
+			List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
 			Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
 			for (int i = 0; i < memberAttributesRow.size(); i++) {
 			    memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0), memberAttributesRow.get(i).getCells().get(1));
@@ -76,33 +64,161 @@ public class ContactUSRedesignAarpStepDefinition {
 			getLoginScenario().saveBean(PageConstants.TEST_HARNESS_PAGE,
 					testHarnessPage);
 		}
-
-		/*@When("^the user navigates to redesign contact us page in AARP site$")
-		public void views_order_materials_in_redesignUms_site() {
-			AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario()
-					.getBean(PageConstants.ACCOUNT_HOME_PAGE);
-			ContactUsPage contactUsPage = accountHomePage
-					.navigatesToContactUsPage();
-			if (contactUsPage != null) {
-
-				getLoginScenario().saveBean(PageConstants.CONTACT_US_PAGE,
-						contactUsPage);
-
-			}
-
-		}*/
 		
-		
-		
-		@When("^the user validates the contact us redesign  page in AARP site$")
+		@When("^the user navigates to contact us page in UHC site$")
 		public void validates_contactUs_Redesign_Page() {
 			
 			TestHarnessPage testHarnessPage = (TestHarnessPage) getLoginScenario().getBean(PageConstants.TEST_HARNESS_PAGE);
 			
-			/*ContactUsPage contactUsPage = testHarnessPage.navigateToUlayerContactUsPage();
+			ContactUsPage contactUsPage = testHarnessPage.navigateToContactUsPage();
 			if(contactUsPage != null)				
 				getLoginScenario().saveBean(PageConstants.CONTACT_US_PAGE,
-						contactUsPage);*/
+						contactUsPage);
+		}
+		
+		@Then("^user validates secure email widget UI in redesign contact us page$")
+		public void user_validates_email_widget_UIPage()
+		{
+			ContactUsPage contactusPage=(ContactUsPage)getLoginScenario().getBean(PageConstants.CONTACT_US_PAGE);
+			
+			contactusPage.validateSendUaQuestionWidget();
+			
+			if(contactusPage != null)				
+				getLoginScenario().saveBean(PageConstants.CONTACT_US_PAGE,
+						contactusPage);
+			
+		}
+		
+		
+		
+		@Then("^user validates Group secure email widget  in redesign contact us page$")
+		public void user_validates_email_widget_func()
+		{
+			ContactUsPage contactusPage=(ContactUsPage)getLoginScenario().getBean(PageConstants.CONTACT_US_PAGE);
+			
+			contactusPage.validateSendUsaQuestionWidgetfunctionality();
+			
+			if(contactusPage != null)				
+				getLoginScenario().saveBean(PageConstants.CONTACT_US_PAGE,
+						contactusPage);
+			
+		}
+		@Then("^user validates cancel click on Group secure email widget  in redesign contact us page$")
+		public void user_validates_email_widget_Cancel_Click()
+		{
+			ContactUsPage contactusPage=(ContactUsPage)getLoginScenario().getBean(PageConstants.CONTACT_US_PAGE);
+			
+			contactusPage.validateSendUaQuestionWidgetCancelClick();
+			
+			if(contactusPage != null)				
+				getLoginScenario().saveBean(PageConstants.CONTACT_US_PAGE,
+						contactusPage);
+			
+		}
+		
+		
+		@Then("^user clicks on submit question by selecting Finding a Physician option in redesign contact us page$")
+		public void user_clicks_submit_question()
+		{
+			ContactUsPage contactusPage=(ContactUsPage)getLoginScenario().getBean(PageConstants.CONTACT_US_PAGE);
+			
+			contactusPage.submitQuestionClick();
+			
+			if(contactusPage != null)				
+				getLoginScenario().saveBean(PageConstants.CONTACT_US_PAGE,
+						contactusPage);
+			
+		}
+		
+		@Then("^user clicks on submit question by selecting Billing Information option in redesign contact us page$")
+		public void user_clicks_submit_question_using_Billing_info()
+		{
+			ContactUsPage contactusPage=(ContactUsPage)getLoginScenario().getBean(PageConstants.CONTACT_US_PAGE);
+			
+			contactusPage.submitQuestionClick_by_BillingInfo_option();
+			 
+			if(contactusPage != null)				
+				getLoginScenario().saveBean(PageConstants.CONTACT_US_PAGE,
+						contactusPage);
+			
+		}
+		
+		@Then("^user enters invalidate alternative email ID in sendUS A question widget$")
+		public void email_Validations()
+		{
+			ContactUsPage contactusPage=(ContactUsPage)getLoginScenario().getBean(PageConstants.CONTACT_US_PAGE);
+			
+			contactusPage.sendUsQuestion_Field_Validations();
+			
+			if(contactusPage != null)				
+				getLoginScenario().saveBean(PageConstants.CONTACT_US_PAGE,
+						contactusPage);
+			
+		}
+		
+		@Then("^user enters invalidate Confirm email ID in sendUS A question widget$")
+		public void invalidate_confirmEmailValidations()
+		{
+			ContactUsPage contactusPage=(ContactUsPage)getLoginScenario().getBean(PageConstants.CONTACT_US_PAGE);
+			
+			contactusPage.sendUsQuestion_confirmEmailID_Validations();
+			
+			if(contactusPage != null)				
+				getLoginScenario().saveBean(PageConstants.CONTACT_US_PAGE,
+						contactusPage);
+			
+		}
+		
+		@Then("^user enters blank text  in sendUS A question  message widget$")
+		public void invalidate_blankEmailMsgValidations()
+		{
+			ContactUsPage contactusPage=(ContactUsPage)getLoginScenario().getBean(PageConstants.CONTACT_US_PAGE);
+			
+			contactusPage.sendUsQuestion_blankText_Message_Validations();
+			
+			if(contactusPage != null)				
+				getLoginScenario().saveBean(PageConstants.CONTACT_US_PAGE,
+						contactusPage);
+			
+		}
+
+		@And("^UI should be replaced by a confirmation display$")
+		public void UI_should_be_replaced_by_a_confirmation_display(){
+			
+			ContactUsPage contactusPage=(ContactUsPage)getLoginScenario().getBean(PageConstants.CONTACT_US_PAGE);
+			
+			String expectedMessage = "Thank you. We value your input, and will be happy to answer your questions."
+				+ " A Customer Service representative will review your question and respond to you shortly.";
+			
+			contactusPage.validateThankYouMessage(expectedMessage);
+			
+			if(contactusPage != null)				
+				getLoginScenario().saveBean(PageConstants.CONTACT_US_PAGE,
+						contactusPage);
+		}
+		
+		@Then("^user enters invalid phone number  in sendUS A question widget$")
+		public void alternative_email_idError_Validations()
+		{
+			ContactUsPage contactusPage=(ContactUsPage)getLoginScenario().getBean(PageConstants.CONTACT_US_PAGE);
+			
+			contactusPage.sendUsQuestion_invalid_PhoneNumber_Validations();
+			
+			if(contactusPage != null)				
+				getLoginScenario().saveBean(PageConstants.CONTACT_US_PAGE,
+						contactusPage);
+			
+		}
+
+		/*@When("^the user validates the contact us redesign  page in AARP site$")
+		public void validates_contactUs_Redesign_Page() {
+			
+			TestHarnessPage testHarnessPage = (TestHarnessPage) getLoginScenario().getBean(PageConstants.TEST_HARNESS_PAGE);
+			
+			ContactUsPage contactUsPage = testHarnessPage.navigateToUlayerContactUsPage();
+			if(contactUsPage != null)				
+				getLoginScenario().saveBean(PageConstants.CONTACT_US_PAGE,
+						contactUsPage);
 		}
 		
 		@Then("^user validates secure email widget UI in redesign contact us page$")
@@ -125,7 +241,7 @@ public class ContactUSRedesignAarpStepDefinition {
 				getLoginScenario().saveBean(PageConstants.CONTACT_US_PAGE,
 						contactusPage);
 			
-		}
+		}*/
 		
 		@Then("^user validates secure email widget functionality using Email Address on File radio button$")
 		public void user_validates_email_widget_func_byEmailAddress_Radio_button()
@@ -240,6 +356,7 @@ public class ContactUSRedesignAarpStepDefinition {
 						contactusPage);
 			
 		}
+
 
 		
 

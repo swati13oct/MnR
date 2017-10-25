@@ -142,9 +142,13 @@ public class LoginPage extends UhcDriver {
 
 	@Override
 	public void openAndValidate() {
-		start(PAGE_URL);
-		validate(loginIn);
-
+		if(MRScenario.environment.equals("team-e")){
+			start(MRConstants.NEW_REDESIGN_URL);
+			
+		}else{
+			start(PAGE_URL);
+			validate(loginIn);
+		}
 	}
 
 	public JSONObject getBrowserCheck() {
