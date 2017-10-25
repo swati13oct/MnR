@@ -1096,7 +1096,6 @@ public class MRScenario {
 			}
 		}
 		return webDriver;
-
 	}
 
 	public WebDriver getIEDriver() {
