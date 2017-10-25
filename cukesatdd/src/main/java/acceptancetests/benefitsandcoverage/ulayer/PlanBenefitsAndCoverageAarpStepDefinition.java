@@ -554,7 +554,7 @@ public class PlanBenefitsAndCoverageAarpStepDefinition {
 	@Then("^Replace rider popup appears and clicks Replace Rider button$")
 	public void Replace_rider_popup_appears_and_clicks_Replace_Rider_button() throws Exception {
 		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario().getBean(
-				PageConstants.BENEFITS_COVERAGE_PAGE);
+				PageConstants.BENEFITS_AND_COVERAGE_PAGE);
 		benefitsCoveragePage.validateReplaceRiderPopup();
 	}
 
@@ -562,7 +562,7 @@ public class PlanBenefitsAndCoverageAarpStepDefinition {
 	@When("^the user navigates to contact us page in AARP site$")
 	public void the_user_navigates_to_contact_us_page_in_AARP_site() {
 		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario().getBean(
-				PageConstants.BENEFITS_COVERAGE_PAGE);
+				PageConstants.BENEFITS_AND_COVERAGE_PAGE);
 		ContactUsPage contactUsPage = benefitsCoveragePage
 				.navigatesToContactUsPage();
 		if (contactUsPage != null) {
@@ -626,7 +626,7 @@ public class PlanBenefitsAndCoverageAarpStepDefinition {
 	public void validate_labels()
 	{
 		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario().getBean(
-				PageConstants.BENEFITS_COVERAGE_PAGE);
+				PageConstants.BENEFITS_AND_COVERAGE_PAGE);
 		benefitsCoveragePage.validatelabels();
 	}
 
@@ -666,7 +666,7 @@ public class PlanBenefitsAndCoverageAarpStepDefinition {
 	public void validate_DCE_section()
 	{
 		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario().getBean(
-				PageConstants.BENEFITS_COVERAGE_PAGE);
+				PageConstants.BENEFITS_AND_COVERAGE_PAGE);
 		benefitsCoveragePage.Validate_dce_Section();
 	}
 	
@@ -674,14 +674,14 @@ public class PlanBenefitsAndCoverageAarpStepDefinition {
 	public void validate_drugcopayheaderntext()
 	{
 		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario().getBean(
-				PageConstants.BENEFITS_COVERAGE_PAGE);
+				PageConstants.BENEFITS_AND_COVERAGE_PAGE);
 		benefitsCoveragePage.validatedrugcoverageheaderandtext();
 	}
 	@Then("^the user validates the Locate Pharmacy section$")
 	public void validate_Locate_pharmacy_section()
 	{
 		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario().getBean(
-				PageConstants.BENEFITS_COVERAGE_PAGE);
+				PageConstants.BENEFITS_AND_COVERAGE_PAGE);
 		benefitsCoveragePage.ValidatelocatephrmacySection();
 	}
 	
@@ -689,7 +689,7 @@ public class PlanBenefitsAndCoverageAarpStepDefinition {
 	public void validate_Lookup_drug_section()
 	{
 		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario().getBean(
-				PageConstants.BENEFITS_COVERAGE_PAGE);
+				PageConstants.BENEFITS_AND_COVERAGE_PAGE);
 		benefitsCoveragePage.LookupDrugbutton();
 	}
 	
@@ -697,7 +697,7 @@ public class PlanBenefitsAndCoverageAarpStepDefinition {
 	public void validate_Drug_coverage_section()
 	{
 		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario().getBean(
-				PageConstants.BENEFITS_COVERAGE_PAGE);
+				PageConstants.BENEFITS_AND_COVERAGE_PAGE);
 		benefitsCoveragePage.validatedrugcoverageheaderandtext();
 	}
 	
@@ -705,7 +705,7 @@ public class PlanBenefitsAndCoverageAarpStepDefinition {
 	public void validate_Learnmore_link_section()
 	{
 		   BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario().getBean(
-		  				PageConstants.BENEFITS_COVERAGE_PAGE);
+		  				PageConstants.BENEFITS_AND_COVERAGE_PAGE);
 		benefitsCoveragePage.validateLearnmoreLink();
 	}
 	
@@ -713,56 +713,98 @@ public class PlanBenefitsAndCoverageAarpStepDefinition {
 	   public void user_validate_linksworking()
 	   {
 		   BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario().getBean(
-	  				PageConstants.BENEFITS_COVERAGE_PAGE);
+	  				PageConstants.BENEFITS_AND_COVERAGE_PAGE);
 		   JSONObject benefitsandcoverageExectedJson=(JSONObject) loginScenario.getBean(PlanBenefitsAndCoverageCommonConstants.BENEFITS_AND_COVERAGE_EXPECTED);
 		  //benefitsCoveragePage.clickOnLearnmoreaboutlinktier(benefitsandcoverageExectedJson);
 		   //benefitsCoveragePage.clickOnLearnmoreaboutlinkstage(benefitsandcoverageExectedJson);
 	   }
+
+         @Then("^the user validates dropdown selection functionality$")
+	 public void user_validate_dropdwonvalues()
+	   {
+	   	   BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario().getBean(
+	   				PageConstants.BENEFITS_AND_COVERAGE_PAGE);
+	   	//JSONObject benefitsandcoverageExectedJson=(JSONObject) loginScenario.getBean(PlanBenefitsAndCoverageCommonConstants.BENEFITS_AND_COVERAGE_EXPECTED);
+	   	benefitsCoveragePage.validate_drugcostdropdownoptions();
+	   }
+
 	@Then("^the user validates the Drug Header section$")
 	public void validate_DrugHeader_section()
 	{
 		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario().getBean(
-				PageConstants.BENEFITS_COVERAGE_PAGE);
+				PageConstants.BENEFITS_AND_COVERAGE_PAGE);
 		benefitsCoveragePage.Validate_drugheader_section();
+	}
+
+        @And("the drugcost dropdown should not display")
+	public void user_validate_dropdownshouldnotdisplay() {
+		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario()
+				.getBean(PageConstants.BENEFITS_AND_COVERAGE_PAGE);
+		benefitsCoveragePage.validate_dropdownnotdisplay();
+	}
+
+        @Then("^the user validates the Learn More link and click on arrow$")
+	public void validate_Learnmore_link_section()
+	{
+		   BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario().getBean(
+		  				PageConstants.BENEFITS_AND_COVERAGE_PAGE);
+		benefitsCoveragePage.validateLearnmoreLink();
 	}
 	
 	@Then("^the user validates the Drug cost Header and text$")
 	public void validate_DrugCost_section()
 	{
 		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario().getBean(
-				PageConstants.BENEFITS_COVERAGE_PAGE);
+				PageConstants.BENEFITS_AND_COVERAGE_PAGE);
 		benefitsCoveragePage.validate_drugcostheaderntext();
+	}
+
+       	@Then("^the user validates the Learn More section link for stage$")
+	public void validate_learnmorelink_stage()
+	{
+		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario().getBean(
+				PageConstants.BENEFITS_AND_COVERAGE_PAGE);
+		benefitsCoveragePage.validateLearnmoreLinkstage();
+	}
+	
+	@Then("^the user validates tier link should not display$")
+	public void validate_learnmorelink_tiernotdispplayforlis()
+	{
+		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario().getBean(
+				PageConstants.BENEFITS_AND_COVERAGE_PAGE);
+		benefitsCoveragePage.validate_tierlinknotdisplay();
+	}
+
+        @Then("^the user validates the Learn More link and click on arrow$")
+	public void validate_Learnmore_link_section()
+	{
+		   BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario().getBean(
+		  				PageConstants.BENEFITS_AND_COVERAGE_PAGE);
+		benefitsCoveragePage.validateLearnmoreLink();
+	}
+ 
+        @And("the user should see drug copay and discount table")
+	public void user_validate_drugcopaydiscounttable() {
+		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario().getBean(
+   				PageConstants.BENEFITS_AND_COVERAGE_PAGE);
+		benefitsCoveragePage.validatedrugcopaytable();
 	}
 	/*
 	@And("^the user validates the content under the Drug Cost section$")
 	public void validate_Content_drugcost_section()
 	{
 		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario().getBean(
-				PageConstants.BENEFITS_COVERAGE_PAGE);
+				PageConstants.BENEFITS_AND_COVERAGE_PAGE);
 		benefitsCoveragePage.vasSection();
 	}*/
 	
-	@Then("^the user validates first select option selected should be Preferred Retail Pharmacy$")
-	public void validate_Pharmacy_dropdown_section()
-	{
+	
+	@And("the user should see retail drug copay and discount table")
+	public void user_validate_retaildrugcopaydiscounttable() {
 		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario().getBean(
-				PageConstants.BENEFITS_COVERAGE_PAGE);
-		benefitsCoveragePage.validate_preselectedPharmacy();
+   				PageConstants.BENEFITS_AND_COVERAGE_PAGE);
+		benefitsCoveragePage.ValidateDrugCostTableMAPD();
 	}
-	@Then("^the user validates dropdown should show three values$")
-	   public void user_validate_dropdwonvalues()
-	   {
-	   	   BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario().getBean(
-	   				PageConstants.BENEFITS_COVERAGE_PAGE);
-	   	JSONObject benefitsandcoverageExectedJson=(JSONObject) loginScenario.getBean(PlanBenefitsAndCoverageCommonConstants.BENEFITS_AND_COVERAGE_EXPECTED);
-	   	benefitsCoveragePage.validate_drugcostdropdownoptions(benefitsandcoverageExectedJson);
-	   }
-	/*@After
-	public void tearDown() {
-
-		WebDriver wd = (WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
-		wd.quit();
-	}*/
 	
 	
 	@And("the user validates plan overview section")
@@ -808,7 +850,7 @@ public class PlanBenefitsAndCoverageAarpStepDefinition {
 	@And("^the user validates view and document label$")
 	public void user_validates_view_and_document_label() {
 		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario()
-				.getBean(PageConstants.BENEFITS_COVERAGE_PAGE);
+				.getBean(PageConstants.BENEFITS_AND_COVERAGE_PAGE);
 
 		benefitsCoveragePage.getdocuments_label();
 		benefitsCoveragePage.getview_label();
@@ -819,7 +861,7 @@ public class PlanBenefitsAndCoverageAarpStepDefinition {
 	public void validate_languagedropdown(DataTable givenAttributes)
 	{
 		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario().getBean(
-				PageConstants.BENEFITS_COVERAGE_PAGE);
+				PageConstants.BENEFITS_AND_COVERAGE_PAGE);
 		benefitsCoveragePage.validate_langdropdown_first_selection();
 		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
 		Map<String, String> memberAttributesMap = new HashMap<String, String>();

@@ -2,12 +2,18 @@ q3_sep_ulayer494/Password@1,MAPD,LIS2
 testgogreen001/Password@1,MAPD,Individual
 TESTDATARIDER1/Password@1,MAPD,LIS3
 q1_apr_ulayer095/Password@1,MAPD,LIS
-q3_sep_ulayer019/Password@1,MAPD,,
-q3_sep_ulayer193/Password@1,MA,,
+q4_dec_aarp001/Password@1,MAPD,,
+q4_dec_aarp004/Password@1,MA,,
 q3_sep_ship078/Password@1,SHIP,,
 q3_sep_ulayer381/Password@1,PDP,,
 q3_sep_ship022/Password@1,EHIP,,
 q3_sep_ship122/Password@1,SHIPTX,,
 q3_sep_ship152/Password@1,SHIPMO,,
 q3_sep_ship021/Password@1,HIP,,
+q4_dec_aarp448/Password@1,MAPD,Individual,LIS 1
+q4_dec_aarp169/Password@1,MA,Individual,LIS 1
+q4_dec_aarp308/Password@1,PDP,Individual,LIS 4
+q4_dec_aarp102/Password@1,MAPD,Individual,NON LIS
+q4_dec_aarp188/Password@1,MA,Individual,NON LIS
+q4_dec_aarp384/Password@1,PDP,Individual,NON LIS
 

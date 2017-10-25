@@ -941,77 +941,85 @@ Feature: To test plan benefits and Coverage on AARP site for Federal members
       | MAPD     | NON LIS       |
 
   
-  @validatePdfsection
-  Scenario Outline: Verify PDF section is in place on Benefits and Coverage page
+  @validatePdfsectionindividual
+    Scenario Outline: Verify PDF section is in place on Benefits and Coverage page
     Given registered member with following details logins in the member portal 
-      | Plan Type | <planType> |
-    When the user navigates to Benefits and coverage page
+      | Plan Type      | <planType>  |
+      | Member Type    | <memberType>|
+      | Copay Category | <copayCategory>|
+    Then the user navigates to Benefits and coverage page
     And the user validates the content on benefits and coverage page
-    And the user validates view and documents label
-    And the user validates the language dropdown and the value displayed by default
-      | Language | <language> |
-    And the user selects new value in dropdown successfully
-
-    Examples: 
-      | planType | language |
-      | SHIP     | SPANISH  |
-      | SHIP     | CHINESE  |
-
-  @validatePdfsectionjenkins
-  Scenario Outline: Verify PDF section is in place on Benefits and Coverage page
-    Given registered member with following details logins in the member portal 
-      | Plan Type | <planType> |
-    When the user navigates to Benefits and coverage page
-    And the user validates the content on benefits and coverage page
-    And the user validates view and documents label
+    And the user validates view and document label
     And the user validates the language dropdown and the value displayed by default and selects new value in dropdown successfully
-      | Language | <language> |
+       | Language | <language> |
+       
+    Examples:
+      
+      | planType|  memberType  | copayCategory | language |
+      | MAPD    |  Individual  |   LIS 1       | SPANISH  |
+      | MA      |  Individual  |   LIS 1       | CHINESE  |
+      | MAPD    |  Individual  |  NON LIS      | SPANISH  |
+      | MA      |  Individual  |  NON LIS      | CHINESE  |
+      | MAPD    |  Individual  |   LIS 1       | CHINESE  |
+      | PDP     |  Individual  |   LIS 4       | SPANISH  |
+      | MAPD    |  Individual  |  NON LIS      | CHINESE  |
+      | MA      |  Individual  |  NON LIS      | SPANISH  |
+      | MAPD    |  Individual  |   LIS 1       | ENGLISH  |
+      | MA      |  Individual  |   LIS 1       | ENGLISH  |
+      | MAPD    |  Individual  |  NON LIS      | ENGLISH  |
+      | MA      |  Individual  |  NON LIS      | ENGLISH  |
+      
 
+
+   @drugcopaysectionnonlis
+   Scenario Outline: Verify DCE section is in place on Benefits and Coverage page
+   Given registered member with following details logins in the member portal 
+      | Plan Type      | <planType>  |
+      | Member Type    | <memberType>|
+      | Copay Category | <copayCategory>|
+    ##When the user view forms and resources in AARP site
+    Then the user navigates to Benefits and coverage page
+    And the user validates the content on benefits and coverage page
+    Then the user validates the Drug Header section
+    Then the user validates the Drug cost Header and text
+    Then the user validates dropdown selection functionality
+    Then the user validates the Locate Pharmacy section
+    Then the user validates the Look Up Drugs button
+    Then the user validates the Drug Coverage  section
+    Then the user validates the Learn More link and click on arrow
+    #And the user validates the user click on the link it expands and when user clicks it again it should collapse
+    And the user should see drug copay and discount table
     Examples: 
-      | planType | language |
-      | SHIP     | SPANISH  |
-      | SHIP     | CHINESE  |
-
-
-
-  ##TESTAPRIL001
- @drugcopaysectionnonlis
-  Scenario Outline: Verify DCE section is in place on Benefits and Coverage page
-    Given registered member with following details logins in the member portal 
-      | Plan Type      | <planType>      |
-      | Copay Category | <copayCategory> |
+      | planType|  memberType  | copayCategory |
+      | MAPD    |  Individual  |  NON LIS      |   
+      | PDP     |  Individual  |  NON LIS      |    
+      
+      
+   @drugcopaysectionlis
+   Scenario Outline: Verify DCE section is in place on Benefits and Coverage page
+  Given registered member with following details logins in the member portal 
+      | Plan Type      | <planType>  |
+      | Member Type    | <memberType>|
+      | Copay Category | <copayCategory>|
     ##When the user view forms and resources in AARP site
     Then the user navigates to Benefits and coverage page
     And the user validates the content on benefits and coverage page
     And the user validates Header section
     Then the user validates the Drug Header section
     Then the user validates the Drug cost Header and text
-    #Then the user validates first select option selected should be Preferred Retail Pharmacy
-    Then the user validates dropdown should show three values
+    Then the drugcost dropdown should not display
     Then the user validates the Locate Pharmacy section
     Then the user validates the Look Up Drugs button
     Then the user validates the Drug Coverage  section
+     And the user validates the Learn More section link for stage
+    And the user validates tier link should not display 
     Then the user validates the Learn More link and click on arrow
-
-    #Then the user validates the user click on the link it expands and when user clicks it again it should collapse
+    #And the user validates the user click on the link it expands and when user clicks it again it should collapse
+    And the user should see retail drug copay and discount table
     Examples: 
-      | planType | copayCategory |
-      | MAPD     | NON LIS       |
-
-  ##q3_sep_ulayer068
-  @drugcosttablesectiongroupmemberlis 
-  Scenario Outline: To validate the drug copay table in benefits and coverage page in AARP site
-    Given registered member with following details logins in the member portal  
-      | Plan Type      | <planType>      |
-      | Copay Category | <copayCategory> |
-    When the user navigates to Benefits and coverage page
-    Then the user validates drugcost  table  in AARP site for mapd member
-
-    Examples: 
-      | planType | copayCategory |
-      | MAPD     | LIS           |
-
-
+      | planType|  memberType  | copayCategory |
+      | MAPD    |  Individual  |  LIS 1        |   
+      | PDP     |  Individual  |  LIS 4        |
 
       
   @PlanOverview
@@ -1026,32 +1034,8 @@ Feature: To test plan benefits and Coverage on AARP site for Federal members
       | planType | memberType |
       | MAPD     | LIS        |
       
-      
-
-      
-      
-
-@validatePdfsectionindividual
-    Scenario Outline: Verify PDF section is in place on Benefits and Coverage page
-    Given registered member with following details logins in the member portal 
-      | Plan Type      | <planType>  |
-      | Member Type    | <memberType>|
-      | Copay Category | <copayCategory>|
-    Then the user navigates to Benefits and coverage page
-    And the user validates view and document label
-    And the user validates the language dropdown and the value displayed by default and selects new value in dropdown successfully
- 
-     Examples:
-      
-      | planType|  memberType  | copayCategory |
-      | MAPD    |  Individual  |  NON LIS      | 
-     # | MA      |  Individual  |  LIS 1        |
-      #| PDP     |  Individual  |  NON LIS      |
-      
-      
-
-            
-      @PlanOverviewLis
+         
+  @PlanOverviewLis
   Scenario Outline: Verify that Plan overview section is visible on Benefits and coverage page
     Given registered member with following details logins in the member portal 
       | Plan Type      | <planType>      |
