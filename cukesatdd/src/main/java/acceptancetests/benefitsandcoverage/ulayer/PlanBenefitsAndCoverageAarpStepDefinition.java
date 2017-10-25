@@ -737,14 +737,7 @@ public class PlanBenefitsAndCoverageAarpStepDefinition {
 		benefitsCoveragePage.validate_dropdownnotdisplay();
 	}
 
-        @Then("^the user validates the Learn More link and click on arrow$")
-	public void validate_Learnmore_link_section()
-	{
-		   BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario().getBean(
-		  				PageConstants.BENEFITS_AND_COVERAGE_PAGE);
-		benefitsCoveragePage.validateLearnmoreLink();
-	}
-	
+       
 	@Then("^the user validates the Drug cost Header and text$")
 	public void validate_DrugCost_section()
 	{
