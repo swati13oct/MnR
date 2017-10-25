@@ -3,6 +3,7 @@
  */
 package pages.member.ulayer;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -99,7 +100,7 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 	private WebElement locateapharmacybutton;
 
 	@FindBy(xpath = ".//*[@id='drug-benefits']/div/section/div[6]/div/span/div/div/div/div/p")
-	private WebElement DrugCoveragetext;
+	private WebElement DrugCoverageText;
 
 	@FindBy(xpath = ".//*[@id='drug-benefits']/div/section/div[6]/div/span/div/div/div/div/h3/span")
 	private WebElement DrugCoverageHeader;
@@ -517,20 +518,14 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 
 	public void ValidatelocatephrmacySection() {
 
-		try {
-			validate(PharmacyLocator);
-		} catch (Exception e) {
-			System.out.println("Elements is not found ...");
-		}
+		validate(locateapharmacysection);
+		validate(locateapharmacybutton);
 	}
 
 	public void LookupDrugbutton() {
 
-		try {
-			validate(LookupDrug);
-		} catch (Exception e) {
-			System.out.println("Elements is not found ...");
-		}
+		validate(LookupDrugstext);
+                validate(LookUpDrugsButton);
 	}
 
        public void validatedrugcopaytable() {

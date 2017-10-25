@@ -701,13 +701,7 @@ public class PlanBenefitsAndCoverageAarpStepDefinition {
 		benefitsCoveragePage.validatedrugcoverageheaderandtext();
 	}
 	
-	@Then("^the user validates the Learn More link and click on arrow$")
-	public void validate_Learnmore_link_section()
-	{
-		   BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario().getBean(
-		  				PageConstants.BENEFITS_AND_COVERAGE_PAGE);
-		benefitsCoveragePage.validateLearnmoreLink();
-	}
+
 	
 	@And("^the user validates the user click on the link it expands and when user clicks it again it should collapse")
 	   public void user_validate_linksworking()
