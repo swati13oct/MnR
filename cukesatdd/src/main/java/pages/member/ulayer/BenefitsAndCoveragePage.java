@@ -874,14 +874,14 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 	public ValueAddedServicepage navigateToValueAddService() {
 		validate(learnmorebutton);
 		try {
-			Thread.sleep(10000);
+			Thread.sleep(30000);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		learnmorebutton.click();
 		try {
-			Thread.sleep(10000);
+			Thread.sleep(30000);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
