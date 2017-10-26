@@ -88,6 +88,12 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 	@FindBy(xpath = ".//*[@id='drug-benefits']/div/section/div[6]/div/span/div/div/div/div/h3/span")
 	private WebElement DrugCoverageHeader;
 
+        @FindBy(xpath = ".//*[@id='drug-benefits']/div/section/div[1]/div/div/div/div[2]/div/div/h2")
+	private WebElement lisDrugCopayHeader;
+
+	@FindBy(xpath = ".//*[@id='drug-benefits']/div/section/div[1]/div/div/div/div[2]/div/div/p")
+	private WebElement lisDrugCopayText;
+
 	@FindBy(xpath = ".//*[@id='drug-benefits']/div/section/div[7]/div[1]/div/div/div/div/p")
 	private WebElement LookupDrugstext;
 
@@ -663,6 +669,13 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 
 			Learnmorestagelink.click();*/
 		
+	}
+
+
+        public void validate_lisdrugcopayheaderntext() {
+		validate(lisDrugCopayHeader);
+		validate(lisDrugCopayText);
+
 	}
 
 

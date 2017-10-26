@@ -900,25 +900,19 @@ Examples:
        | Plan Type      | <planType>     |
       | Member Type    | <memberType>|
       | Copay Category | <copayCategory>|
-    Then the user navigates to Benefits and coverage page
+    Then the user navigates to Benefits coverage page
     And the user validates the content on benefits and coverage page
-    And the user view the Drug Copays & Discounts header 
+    And the user view the LIS Drug Copays & Discounts header
     And the drugcost dropdown should not display
     And the user validates the Learn More section link for stage
     And the user validates tier link should not display 
-    And the user validates the user click on the link it expands and when user clicks it again it should collapse
-    And the user validates dropdown selection functionality
-    And the user validates Drug coverage header and text under the section
-    And the user validates text for the Look Up Drugs section
-    And the user validates Look Up Drugs button should be visible
-    And the user validates text for the Locate a Pharmacy section
-    And the user validates Locate a Pharmacy button should be visible
-    And the user should see retail drug copay and discount table
+    #And the user validates the user click on the link it expands and when user clicks it again it should collapse
+
     Examples: 
       | planType|  memberType  | copayCategory |
       | MAPD    |  Individual  |   LIS 1       |
       | MAPD    |  Group       |   LIS 3       |
-      | PDP     |  Group       |   LIS 3       |
+      | PDP     |  Group       |   LIS 3       | 
            
       
       

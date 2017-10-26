@@ -853,6 +853,13 @@ public class BenefitsAndCoverageUmsStepDefinition {
 
 	}
 
+        @And("the user view the LIS Drug Copays & Discounts header")
+	public void user_validate_lisdrugcopaydiscounttable() {
+		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario()
+				.getBean(PageConstants.BENEFITS_AND_COVERAGE_PAGE);
+		benefitsCoveragePage.validate_lisdrugcopayheaderntext();
+	}
+
 	@And("^the user view the Drug Cost header and text")
 	public void user_view_drugcostheaderandtext() {
 		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario()
