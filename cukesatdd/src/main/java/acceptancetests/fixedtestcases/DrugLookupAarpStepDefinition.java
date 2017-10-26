@@ -316,7 +316,7 @@ public class DrugLookupAarpStepDefinition {
 			//}else
 				//Assert.fail("Error in validating the View Drug Cost Page");
 		}
-		//viewDrugCostPage.editDrugList();
+		viewDrugCostPage.editDrugList();
 		viewDrugCostPage.logOut();
 
 	}

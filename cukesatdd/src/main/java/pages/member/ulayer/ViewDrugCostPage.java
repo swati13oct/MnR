@@ -9,6 +9,7 @@ import java.util.Map;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -21,7 +22,7 @@ import atdd.framework.UhcDriver;
 
 public class ViewDrugCostPage extends UhcDriver {
 
-	@FindBy(xpath = ".//*[@id='dceMemberUlayer']/div/div[1]/div[3]/div[3]/table/tbody/tr[7]/td[1]/p/a")
+	@FindBy(xpath = "//table[@class='viewDrugCost']//td[@class='borderLeft_color druglistedit']/p/a")
 	private WebElement editLink;
 
 	@FindBy(className = "viewDrugCost")
@@ -55,8 +56,14 @@ public class ViewDrugCostPage extends UhcDriver {
 	}
 
 	public ManageDrugPage editDrugList() {
-		CommonUtility.waitForPageLoad(driver, editLink, 30);
-		editLink.click();
+		try {
+			Thread.sleep(4000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		JavascriptExecutor js = (JavascriptExecutor)driver;
+		js.executeScript("arguments[0].click();", editLink);
 		try {
 			Thread.sleep(5000);
 		} catch (InterruptedException e) {
