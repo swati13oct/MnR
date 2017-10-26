@@ -864,7 +864,7 @@ Examples:
     
      Examples: 
       | planType | 
-      | Group    | 
+      | GroupMAPD| 
      #| GroupPDP | 
       | GroupMA  |
      
