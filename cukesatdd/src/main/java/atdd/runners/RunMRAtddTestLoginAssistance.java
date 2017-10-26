@@ -16,6 +16,7 @@ import cucumber.junit.Cucumber;
 		features = { "feature/login-assistance/ulayer" }, 
 		format = {
 		"pretty", "html:reports/test-report" }, tags ={"@LoginAssistanceErrorMessages"})
+//US738867
 public class RunMRAtddTestLoginAssistance {
 
 }

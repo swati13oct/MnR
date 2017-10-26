@@ -6,9 +6,12 @@ package acceptancetests.loginassistance.ulayer;
 import gherkin.formatter.model.DataTableRow;
 
 import java.io.File;
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -25,6 +28,7 @@ import pages.member.ulayer.LoginAssistanceConfirmationJava;
 import pages.member.ulayer.LoginPage;
 import pages.member.ulayer.PersonalIdentificationPageNew;
 import pages.member.ulayer.PersonalIdentityUlayerPage;
+import pages.member.ulayer.UNPWAssistancePage;
 import acceptancetests.atdd.data.CommonConstants;
 import acceptancetests.atdd.data.acquisition.PageConstants;
 import acceptancetests.loginassistance.data.LoginAssistanceCommonConstants;
@@ -64,6 +68,57 @@ public class LoginAssistanceAarpStepDefintion {
 		} else {
 			Assert.fail("Error loading LoginAssistance page");
 		}
+
+	}
+	@When("^select username and password$")
+	public void user_pwd_select() throws InterruptedException {
+//		LoginPage loginPage = (LoginPage) getLoginScenario()
+//				.getBean(PageConstants.LOGIN_PAGE);
+		
+//		UNPWAssistancePage unpwassPage = (UNPWAssistancePage) getLoginScenario()
+//				.getBean(PageConstants.LOGIN_ASSISTANCE_PAGE);
+		UNPWAssistancePage unpwassPage = new UNPWAssistancePage((WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER));
+		unpwassPage.UNPWinfoMissing();
+		if (unpwassPage != null) {
+			getLoginScenario().saveBean(PageConstants.UNPWAssistancePage,
+					unpwassPage);
+		}
+
+	}
+
+	@Then("^confirmation page need to be displayed$")
+	public void login_validation(DataTable memberAttributes) throws InterruptedException {
+
+		/* Reading the given attribute from feature file */
+		List<DataTableRow> memberAttributesRow = memberAttributes
+				.getGherkinRows();
+		Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells()
+					.get(0), memberAttributesRow.get(i).getCells().get(1).toString());
+		}
+
+		Set<String> memberAttributesKeySet = memberAttributesMap.keySet();
+		List<String> desiredAttributes = new ArrayList<String>();
+		for (Iterator<String> iterator = memberAttributesKeySet.iterator(); iterator
+				.hasNext();) {
+			{
+				String key = iterator.next();
+				desiredAttributes.add(memberAttributesMap.get(key.toString()));
+			}
+
+		}
+
+		UNPWAssistancePage unpwassPage = (UNPWAssistancePage) getLoginScenario()
+				.getBean(PageConstants.UNPWAssistancePage);
+//		UNPWAssistancePage unpwassPage = new UNPWAssistancePage((WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER));
+		unpwassPage.FillDetails(memberAttributesMap.get("memID"),
+				memberAttributesMap.get("DBmm"),
+				memberAttributesMap.get("DBdd"),
+				memberAttributesMap.get("DOByyyy"),
+				memberAttributesMap.get("LastName"),
+				memberAttributesMap.get("zipcd"));
 
 	}
 	

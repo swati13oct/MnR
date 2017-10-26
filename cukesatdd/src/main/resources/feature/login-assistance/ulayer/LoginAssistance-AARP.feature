@@ -70,6 +70,21 @@ Given user is on Identity Assistance page and clicks cancel then user should be 
 Scenario: Verify Error messages on Ulayer Personal Identification page
 Given user is on Identity Assistance page, moves to PI page and validates error messages
 
+  @US738867,@Spartans
+  Scenario Outline: Fetch Username and Password on missing
+    Given user navigates to login assistance page from member AARP site
+    When select username and password
+    Then confirmation page need to be displayed
+      | memID    | <memberID> |
+      | DBmm     | <DOBmm>    |
+      | DBdd     | <DOBdd>    |
+      | DOByyyy  | <DOByr>    |
+      | LastName | <lstname>  |
+      | zipcd    | <zip>      |
+
+    Examples: 
+      | memberID  | DOBmm | DOBdd | DOByr | lstname | zip   |
+      | 861622172 |     7 |    21 |  1940 | EBAEA   | 27713 |
 
 
 

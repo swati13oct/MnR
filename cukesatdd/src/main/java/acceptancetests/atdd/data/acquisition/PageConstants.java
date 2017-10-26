@@ -369,5 +369,6 @@ public class PageConstants {
 	public static final String TeamC_FootNotes_Section = "TeamCFootNotesSection";
 	
 	public static final String SamePage = "SamePage";
-
+	
+	public static final String UNPWAssistancePage = "UNPWassPge";
 }

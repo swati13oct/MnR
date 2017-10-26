@@ -242,6 +242,8 @@ public static String CAMPAIGN_PAGE_URL1 = "https://www."+MRScenario.environment+
 
   public static String TeamC_UndeliverableEmail_address_URL = "https://member."+MRScenario.TeamCEnvironment+"-aarpmedicareplans.uhc.com/content/dashboard/guest/undeliverable-email-address.html";
   
+  public static String TeamC_UNPWAssistancePage_URL = "https://member."+MRScenario.TeamCEnvironment+"-aarpmedicareplans.uhc.com/content/medicare/login/reset.html#/start";
+  
   public static String TeamC_NewEmail_address_URL = "https://member."+MRScenario.TeamCEnvironment+"-aarpmedicareplans.uhc.com/content/dashboard/guest/no-email-address.html";
   
   public static final String TeamC_ULayer_Member_URL = "https://member."+MRScenario.environment+"-aarpmedicareplans.uhc.com";
