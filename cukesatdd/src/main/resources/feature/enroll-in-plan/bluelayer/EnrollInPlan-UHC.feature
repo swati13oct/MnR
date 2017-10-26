@@ -84,7 +84,7 @@ Then the user validates the enrollment application confimation in UHC site
     
   Examples:
   |zipcode |countyName   | planType   | planName                           |firstName|middleInitial|lastName|birthDate  |selectedGender        | medicareClaimNumber|hospitalEffectiveDate        |medicalEffectiveDate        |address    |  city          | apartment |mainPhoneNumber |otherPhoneNumber| emailAddress   | confirmEmailAddress | languagePreference |
-  |78006   |Comal County | PDP         |AARP MedicareRx Preferred (PDP)    | First   |  m          |  last  |01/01/1940 |  Male                | 111-11-1111-A      |07/01/1988                   |07/01/1988                  |1234            | Colorado    | UHG       |9999911111      |1111199999      | test@uhc.com   | test@uhc.com        |  English           |
+  |78006   |Comal County | PDP         |AARP MedicareRx Preferred (PDP)    | First   |  m          |  last  |01/01/1940 |  Male                | 111-22-2222-A      |07/01/1988                   |07/01/1988                  |1234            | Colorado    | UHG       |9999911111      |1111199999      | test@uhc.com   | test@uhc.com        |  English           |
      
     
     

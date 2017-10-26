@@ -16,6 +16,8 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import com.thoughtworks.selenium.webdriven.commands.WaitForCondition;
+
 import pages.acquisition.bluelayer.LoginAssistancePage;
 import acceptancetests.atdd.data.CommonConstants;
 import acceptancetests.atdd.data.MRConstants;
@@ -235,13 +237,30 @@ public class LoginPage extends UhcDriver {
 
 			while (!isAlertPresent());
 		}
-		if ( MRScenario.environment.equals("team-c") || MRScenario.environment.equals("team-b") ||  MRScenario.environment.equals("team-h")) {
+		if ( MRScenario.environment.equals("team-c") || MRScenario.environment.equals("team-b")) {
 			
 			Alert alert = driver.switchTo().alert();
 	        alert.accept();
 	        //Alert alert1 = driver.switchTo().alert();
 	        //alert1.accept();
 	        } 
+		if (MRScenario.environment.equals("team-h")) {
+
+			Alert alert = driver.switchTo().alert();
+			alert.accept();
+			// Alert alert1 = driver.switchTo().alert();
+			// alert1.accept();
+			
+			while(!(currentUrl().contains("https://member.int.uhc.com"))){
+				 try {
+						Thread.sleep(5000);
+						System.out.println("wait more.......");
+					} catch (InterruptedException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+			 }
+		}
 		
 		try {
 			Thread.sleep(30000);
@@ -249,6 +268,10 @@ public class LoginPage extends UhcDriver {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		 
+			 
+		 
+		
 
 		if(currentUrl().contains("home/my-account-home.html") && category.equalsIgnoreCase("Group") || currentUrl().contains("/guest/home.html") || currentUrl().contains("/login.html"))
 
@@ -262,6 +285,11 @@ public class LoginPage extends UhcDriver {
 			return new TerminatedHomePage(driver);
 		}
 		return null;
+	}
+
+	private void While(boolean b) {
+		// TODO Auto-generated method stub
+		
 	}
 
 

@@ -355,8 +355,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		}
 		System.out.println("----1---" +driver.getTitle());
 		if (driver.getTitle().equalsIgnoreCase(
-				"Our Medicare Plan Types | UnitedHealthcare®") || driver.getTitle().equalsIgnoreCase(
-						"plans")) {
+				"Our Medicare Plan Types | UnitedHealthcare®") || driver.getTitle().equalsIgnoreCase("plans") || driver.getTitle().equalsIgnoreCase("Overview")) {
 			System.out.println("----2---");
 			return new VPPPlanSummaryPage(driver);
 		}
