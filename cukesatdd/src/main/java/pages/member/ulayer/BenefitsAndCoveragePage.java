@@ -879,6 +879,8 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+                JavascriptExecutor jse = (JavascriptExecutor) driver;
+		jse.executeScript("window.scrollBy(0,3000)", "");
 		learnmorebutton.click();
 		try {
 			Thread.sleep(30000);
@@ -921,7 +923,7 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 public ValueAddedServicepage clickOnLearnMore() {
 		// TODO Auto-generated method stub
 		try {
-			Thread.sleep(10000);
+			Thread.sleep(20000);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -931,7 +933,7 @@ public ValueAddedServicepage clickOnLearnMore() {
 		validate(learnmorebutton);
 		learnmorebutton.click();
 		try {
-			Thread.sleep(10000);
+			Thread.sleep(20000);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
