@@ -536,6 +536,12 @@ public void FormsandResourcesLinkinPlanSummaryPageBlayer()
 	public ManageDrugPage navigateToEstimateCost(String category) {
 		List<WebElement> estimateCost = driver.findElements(By.xpath(".//*[@id='_content_campaigns_uhcm_home-myresources-main_home-myresources-main_jcr_content_par_teaser_2']/div/div[2]/a"));
 		System.out.println("estimateCost size"+estimateCost.size());
+		try {
+			Thread.sleep(4000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		estimateCost.get(0).click();
 		if (getTitle().equalsIgnoreCase("Drug Cost Estimator") && category.equalsIgnoreCase(CommonConstants.GROUP)) {
 			return new ManageDrugPage(driver,category);

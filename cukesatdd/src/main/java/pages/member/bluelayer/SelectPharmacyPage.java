@@ -92,7 +92,7 @@ public class SelectPharmacyPage extends UhcDriver {
 
 	public SelectPharmacyPage selectTypeDistance(String pharmacyType,
 			String distance) {
-
+		((JavascriptExecutor) driver).executeScript("scroll(0, -250);");
 		List<WebElement> pharmacies = pharmacyOptions.findElements(By
 				.tagName("input"));
 		for (WebElement pharmacy : pharmacies) {
@@ -181,7 +181,15 @@ public class SelectPharmacyPage extends UhcDriver {
 		return null;
 	}
 	public void changeZipcode(String zipcode){
-		zipcodeLink.click();
+		
+		try {
+			Thread.sleep(3000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		JavascriptExecutor js = (JavascriptExecutor)driver;
+		js.executeScript("arguments[0].click();", zipcodeLink);
 		zipcodeField.click();
 		zipcodeField.sendKeys(zipcode);
 		enterZipBtn.click();
