@@ -914,10 +914,9 @@ public class BenefitsAndCoverageUmsStepDefinition {
 	public void user_validate_linksworking() {
 		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario()
 				.getBean(PageConstants.BENEFITS_AND_COVERAGE_PAGE);
-		JSONObject benefitsandcoverageExectedJson = (JSONObject) loginScenario
-				.getBean(PlanBenefitsAndCoverageCommonConstants.BENEFITS_AND_COVERAGE_EXPECTED);
-		benefitsCoveragePage.clickOnLearnmoreaboutlinkstage(benefitsandcoverageExectedJson);
-		benefitsCoveragePage.clickOnLearnmoreaboutlinktier(benefitsandcoverageExectedJson);
+		//JSONObject benefitsandcoverageExectedJson = (JSONObject) loginScenario.getBean(PlanBenefitsAndCoverageCommonConstants.BENEFITS_AND_COVERAGE_EXPECTED);
+		benefitsCoveragePage.clickOnLearnmoreaboutlinkstage();
+		benefitsCoveragePage.clickOnLearnmoreaboutlinktier();
 	}
 
 	@And("the user should see drug copay and discount table")

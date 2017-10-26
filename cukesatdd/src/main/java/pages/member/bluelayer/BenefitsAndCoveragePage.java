@@ -571,61 +571,54 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 
 	}
 
-	public void clickOnLearnmoreaboutlinktier(JSONObject benefitsandcoverageExectedJson) {
+	public void clickOnLearnmoreaboutlinktier() {
 		// TODO Auto-generated method stub
+			Learnmoretierslink.click();
 		try {
 			Thread.sleep(30000);
 		} catch (InterruptedException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
-		Learnmoretierslink.click();
-		try {
-			Thread.sleep(30000);
-		} catch (InterruptedException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
-		// Thread.sleep(15000);
+		
 		String finalPath;
 		String table_data;
-
-		// validate(disclaimertextarea_xpath);
-		try {
-			finalPath = learnmorelinktiertext_xpath + "/p[1]";
+		
+			finalPath = learnmorelinktiertext_xpath+"/div/div[4]/div/div/p[1]";
 			table_data = driver.findElement(By.xpath(finalPath)).getText();
 			System.out.println(table_data);
-			Assert.assertEquals(benefitsandcoverageExectedJson.get("1stLinetier"), table_data);
+			Assert.assertEquals("Tier 1 Drugs", table_data);
 			// to validate amount Billed
-			finalPath = learnmorelinktiertext_xpath + "/p[2]";
+			finalPath = learnmorelinktiertext_xpath+"/div/div[4]/div/div/p[2]";
 			table_data = driver.findElement(By.xpath(finalPath)).getText();
 			System.out.println(table_data);
-			Assert.assertEquals(benefitsandcoverageExectedJson.get("2ndLinetier"), table_data);
+			Assert.assertEquals("Nulla ea veniam nostrud reprehenderit eiusmod excepteur adipisicing nulla cupidatat cupidatat. Excepteur amet exercitation minim sint nulla occaecat dolor anim duis proident ad ea voluptate do enim consequat ea.", table_data);
 			// to validate amount Paid
-			finalPath = learnmorelinktiertext_xpath + "/p[3]";
+			finalPath = learnmorelinktiertext_xpath+"/div/div[4]/div/div/p[3]";
 			table_data = driver.findElement(By.xpath(finalPath)).getText();
 			System.out.println(table_data);
-			Assert.assertEquals(benefitsandcoverageExectedJson.get("3rdLinetier"), table_data);
+			Assert.assertEquals("Tier 2 Drugs", table_data);
 			// to validate paid Date
-			finalPath = learnmorelinktiertext_xpath + "/p[5]";
+			finalPath = learnmorelinktiertext_xpath+"/div/div[4]/div/div/p[5]";
 			table_data = driver.findElement(By.xpath(finalPath)).getText();
 			System.out.println(table_data);
-			Assert.assertEquals(benefitsandcoverageExectedJson.get("4thLinetier"), table_data);
-			finalPath = learnmorelinktiertext_xpath + "/p[7]";
+			Assert.assertEquals("Tier 3 Drugs", table_data);
+			finalPath = learnmorelinktiertext_xpath+"/div/div[4]/div/div/p[7]";
 			table_data = driver.findElement(By.xpath(finalPath)).getText();
 			System.out.println(table_data);
-			Assert.assertEquals(benefitsandcoverageExectedJson.get("5thLinetier"), table_data);
-			finalPath = learnmorelinktiertext_xpath + "/p[9]";
+			Assert.assertEquals("Tier 4 Drugs", table_data);
+			finalPath = learnmorelinktiertext_xpath+"/div/div[4]/div/div/p[9]";
 			table_data = driver.findElement(By.xpath(finalPath)).getText();
 			System.out.println(table_data);
-			Assert.assertEquals(benefitsandcoverageExectedJson.get("6thLinetier"), table_data);
+			Assert.assertEquals("Tier 5 Drugs", table_data);
+			
 			Learnmoretierslink.click();
-		} catch (JSONException e) {
-			e.printStackTrace();
-		}
+			
+		
+		 
 	}
 
-	public void clickOnLearnmoreaboutlinkstage(JSONObject benefitsandcoverageExectedJson) {
+	public void clickOnLearnmoreaboutlinkstage() {
 		// TODO Auto-generated method stub
 
 		Learnmorestagelink.click();
@@ -639,37 +632,36 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 		String finalPath;
 		String table_data;
 
-		try {
-			finalPath = learnmorestagetext_xpath + "/p[1]";
+		
+			finalPath = learnmorestagetext_xpath+"/div/div[1]/div/div/p[3]/b";
 			table_data = driver.findElement(By.xpath(finalPath)).getText();
 			System.out.println(table_data);
-			Assert.assertEquals(benefitsandcoverageExectedJson.get("1stLinestage"), table_data);
+			Assert.assertEquals("Annual Deductible Stage", table_data);
 			// to validate amount Billed
-			finalPath = learnmorestagetext_xpath + "/p[3]";
+			finalPath = learnmorestagetext_xpath+"/div/div[1]/div/div/p[5]/b";
 			table_data = driver.findElement(By.xpath(finalPath)).getText();
 			System.out.println(table_data);
-			Assert.assertEquals(benefitsandcoverageExectedJson.get("2thLinestage"), table_data);
+			Assert.assertEquals("Initial Coverage Stage", table_data);
 			// to validate amount Paid
-			finalPath = learnmorestagetext_xpath + "/p[5]";
+			finalPath = learnmorestagetext_xpath+"/div/div[1]/div/div/p[7]/b";
 			table_data = driver.findElement(By.xpath(finalPath)).getText();
 			System.out.println(table_data);
-			Assert.assertEquals(benefitsandcoverageExectedJson.get("3rdLinestage"), table_data);
+			Assert.assertEquals("Coverage Gap Stage", table_data);
 			// to validate paid Date
-			finalPath = learnmorestagetext_xpath + "/p[7]";
+			finalPath = learnmorestagetext_xpath+"/div/div[1]/div/div/p[9]/b";
 			table_data = driver.findElement(By.xpath(finalPath)).getText();
 			System.out.println(table_data);
-			Assert.assertEquals(benefitsandcoverageExectedJson.get("4thLinestage"), table_data);
+			Assert.assertEquals("Catastrophic Coverage Stage", table_data);
 
 			Learnmorestagelink.click();
-		} catch (JSONException e) {
-			e.printStackTrace();
-		}
+		
 	}
+
 
 	public void validatedrugcopaytable() {
 		// Select langdropdwn = new Select(langdropdown);
 
-		validate(drugcopaytable);
+		//validate(drugcopaytable);
 
 	}
 

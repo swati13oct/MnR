@@ -880,7 +880,7 @@ Examples:
     And the user view the Drug Copays & Discounts header 
     And the user validates the Learn More section link for stage and tier
     And the user validates dropdown selection functionality
-    #And the user validates the user click on the link it expands and when user clicks it again it should collapse
+    And the user validates the user click on the link it expands and when user clicks it again it should collapse
     And the user validates Drug coverage header and text under the section
     And the user validates text for the Look Up Drugs section
     And the user validates Look Up Drugs button should be visible
@@ -892,7 +892,7 @@ Examples:
        | PDP     |  Group       |  NON LIS      |
        | MAPD    |  Group       |  NON LIS      |
        | MAPD    |  Individual  |  NON LIS      |
-       
+
       
     @drugcopaysectionlis
     Scenario Outline: Verify PDF section is in place on Benefits and Coverage page
@@ -906,7 +906,7 @@ Examples:
     And the drugcost dropdown should not display
     And the user validates the Learn More section link for stage
     And the user validates tier link should not display 
-    #And the user validates the user click on the link it expands and when user clicks it again it should collapse
+    And the user validates the user click on the link it expands and when user clicks it again it should collapse
     And the user validates dropdown selection functionality
     And the user validates Drug coverage header and text under the section
     And the user validates text for the Look Up Drugs section
