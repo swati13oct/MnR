@@ -582,7 +582,7 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 	public void clickOnLearnmoreaboutlinktier() {
 		// TODO Auto-generated method stub
 			Learnmoretierslink.click();
-		try {
+		/*try {
 			Thread.sleep(30000);
 		} catch (InterruptedException e1) {
 			// TODO Auto-generated catch block
@@ -620,7 +620,7 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 			System.out.println(table_data);
 			Assert.assertEquals("Tier 5 Drugs", table_data);
 			
-			Learnmoretierslink.click();
+			Learnmoretierslink.click();*/
 			
 		
 		 
@@ -630,7 +630,7 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 		// TODO Auto-generated method stub
 
 		Learnmorestagelink.click();
-		try {
+		/*try {
 			Thread.sleep(30000);
 		} catch (InterruptedException e1) {
 			// TODO Auto-generated catch block
@@ -661,7 +661,7 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 			System.out.println(table_data);
 			Assert.assertEquals("Catastrophic Coverage Stage", table_data);
 
-			Learnmorestagelink.click();
+			Learnmorestagelink.click();*/
 		
 	}
 
