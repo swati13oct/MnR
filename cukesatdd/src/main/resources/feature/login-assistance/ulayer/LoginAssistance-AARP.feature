@@ -70,7 +70,7 @@ Given user is on Identity Assistance page and clicks cancel then user should be 
 Scenario: Verify Error messages on Ulayer Personal Identification page
 Given user is on Identity Assistance page, moves to PI page and validates error messages
 
-  @US738867,@Spartans
+  @US738867 @spartans
   Scenario Outline: Fetch Username and Password on missing
     Given user navigates to login assistance page from member AARP site
     When select username and password
