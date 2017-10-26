@@ -86,7 +86,7 @@ public class NewRegistrationPage extends UhcDriver {
 			Thread.sleep(10000);
 			driver.findElement(By.id("continue-btn")).click();
 			waitforElement(passwordField);
-			Thread.sleep(6000);
+			Thread.sleep(10000);
 			GoGreenSplashPage goGreenSplashPage = new GoGreenSplashPage(driver);
 			if(currentUrl().contains("GoGreenSplashPage.html"))
 			{
