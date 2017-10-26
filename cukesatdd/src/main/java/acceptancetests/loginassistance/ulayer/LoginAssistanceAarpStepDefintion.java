@@ -28,7 +28,7 @@ import pages.member.ulayer.LoginAssistanceConfirmationJava;
 import pages.member.ulayer.LoginPage;
 import pages.member.ulayer.PersonalIdentificationPageNew;
 import pages.member.ulayer.PersonalIdentityUlayerPage;
-import pages.member.ulayer.UNPWAssistancePage;
+//import pages.member.ulayer.UNPWAssistancePage;
 import acceptancetests.atdd.data.CommonConstants;
 import acceptancetests.atdd.data.acquisition.PageConstants;
 import acceptancetests.loginassistance.data.LoginAssistanceCommonConstants;
@@ -70,7 +70,7 @@ public class LoginAssistanceAarpStepDefintion {
 		}
 
 	}
-	@When("^select username and password$")
+	/*@When("^select username and password$")
 	public void user_pwd_select() throws InterruptedException {
 //		LoginPage loginPage = (LoginPage) getLoginScenario()
 //				.getBean(PageConstants.LOGIN_PAGE);
@@ -84,7 +84,7 @@ public class LoginAssistanceAarpStepDefintion {
 					unpwassPage);
 		}
 
-	}
+	}*/
 
 	@Then("^confirmation page need to be displayed$")
 	public void login_validation(DataTable memberAttributes) throws InterruptedException {
@@ -108,9 +108,9 @@ public class LoginAssistanceAarpStepDefintion {
 				desiredAttributes.add(memberAttributesMap.get(key.toString()));
 			}
 
-		}
+		}}
 
-		UNPWAssistancePage unpwassPage = (UNPWAssistancePage) getLoginScenario()
+	/*	UNPWAssistancePage unpwassPage = (UNPWAssistancePage) getLoginScenario()
 				.getBean(PageConstants.UNPWAssistancePage);
 //		UNPWAssistancePage unpwassPage = new UNPWAssistancePage((WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER));
 		unpwassPage.FillDetails(memberAttributesMap.get("memID"),
@@ -121,7 +121,7 @@ public class LoginAssistanceAarpStepDefintion {
 				memberAttributesMap.get("zipcd"));
 
 	}
-	
+	*/
 	@Given("^user is on AssistanceConfirmationPage and moves to Sign in Page$")
 	public void AssistanceConfirmationPage() throws InterruptedException {
 		System.out.println("In Method");

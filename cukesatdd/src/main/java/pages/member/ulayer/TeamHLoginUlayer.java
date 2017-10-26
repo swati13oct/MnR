@@ -24,13 +24,13 @@ public class TeamHLoginUlayer extends UhcDriver{
 	@FindBy(id = "fd_memberSignInButton")
 	private WebElement loginIn;
 
-	@FindBy(id = "loginPOPUPuser")
+	@FindBy(id = "username")
 	private WebElement userNameField;
 
-	@FindBy(id = "loginPOPUPpass")
+	@FindBy(id = "password")
 	private WebElement passwordField;
 
-	@FindBy(xpath = ".//*[@id='fd_signInPanel']/div[2]/div[4]/button")
+	@FindBy(id="sign-in-btn")
 	private WebElement signInButton;
 	
 	private PageData browserCheckData;
@@ -47,7 +47,7 @@ public class TeamHLoginUlayer extends UhcDriver{
 	
 
 	public Object loginWith(String username, String password) {
-		loginIn.click();	
+		//loginIn.click();	
 		sendkeys(userNameField,username);
 		sendkeys(passwordField,password);
 		signInButton.click();
@@ -69,7 +69,7 @@ public class TeamHLoginUlayer extends UhcDriver{
 			}*/
 		}else          
 		
-		if(currentUrl().contains("home/my-account-home.html"))
+		if(currentUrl().contains("member/testharness.html"))
 
 		{
 			return new AccountHomePage(driver);

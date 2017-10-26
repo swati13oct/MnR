@@ -234,7 +234,7 @@ public static String CAMPAIGN_PAGE_URL1 = "https://www."+MRScenario.environment+
   
   public static final String Connector_model_url1 = "https://www."+MRScenario.environment+"-uhcmedicaresolutions.uhc.com/health-plans/medicare-advantage-plans/available-plans.html?WT.mc_id=897509&zipcode=32337&county=320&state=10&originatingSite=https%3A%2F%2Fwww.myuhcplans.com%2Foptions&subdomain=options";
   
-  public static final String TeamH_ULayer_Member_URL = "https://member.team-h-aarpmedicareplans.uhc.com";
+  public static final String TeamH_ULayer_Member_URL = "https://team-h-medicare.uhc.com/medicare/login/overview.html?testharness=true";
   
   public static final String TeamH_BLayer_Member_URL = "https://member.team-h-uhcmedicaresolutions.uhc.com";
   
@@ -242,14 +242,14 @@ public static String CAMPAIGN_PAGE_URL1 = "https://www."+MRScenario.environment+
 
   public static String TeamC_UndeliverableEmail_address_URL = "https://member."+MRScenario.TeamCEnvironment+"-aarpmedicareplans.uhc.com/content/dashboard/guest/undeliverable-email-address.html";
   
-  public static String TeamC_UNPWAssistancePage_URL = "https://member."+MRScenario.TeamCEnvironment+"-aarpmedicareplans.uhc.com/content/medicare/login/reset.html#/start";
-  
   public static String TeamC_NewEmail_address_URL = "https://member."+MRScenario.TeamCEnvironment+"-aarpmedicareplans.uhc.com/content/dashboard/guest/no-email-address.html";
   
   public static final String TeamC_ULayer_Member_URL = "https://member."+MRScenario.environment+"-aarpmedicareplans.uhc.com";
   									
   public static final String DEEPLINK_URL = "https://"+MRScenario.environment+"-medicare.uhc.com/login.html?TARGET=SMSR";
 
-  public static String MEMBER_AUTH = "https://www."+MRScenario.environment+"-generic.uhc.com/content/dashboard/guest/memberauth.html#/memberAuthLogin";
+public static final String MEMBER_AUTH = null;
+
+public static final String TeamC_UNPWAssistancePage_URL = "https://member.team-h-uhcmedicaresolutions.uhc.com";
 }
 
