@@ -527,6 +527,12 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 
 	{
 		if (DrugCostDropdown.isDisplayed()) {
+                try {
+			Thread.sleep(30000);
+		} catch (InterruptedException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 			List<String> listActual = new ArrayList<String>();
 			Select dropdown = new Select(DrugCostDropdown);
 			List<WebElement> webElements = dropdown.getOptions();
