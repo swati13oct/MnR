@@ -1,7 +1,6 @@
-@velocityDashers
+@goGreen
 Feature: To test go green splash save preferences
 	
-	@goGreen
   Scenario Outline: Verify go green splash page
   Given I am a Federal member on the member redesign registration page
   | MemberId | <memberId> |
@@ -16,7 +15,6 @@ Feature: To test go green splash save preferences
   | 003072377-1 |  | 07/10/1930 |
   | 374578451-11 |  | 03/01/1949 |
   
-  @goGreen
   Scenario Outline: Verify go green splash page for COMBO member
     Given I am a Federal member on the member redesign registration page
       | MemberId | <memberId> |
@@ -30,7 +28,6 @@ Feature: To test go green splash save preferences
       | memberId    |  | dob        |
       | 972430828-1 |  | 18/03/1942 |
   
-  @goGreen    
   Scenario Outline: Verify go green splash page
     Given I am a Federal member on the member redesign registration page
       | MemberId | <memberId> |
