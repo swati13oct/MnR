@@ -1,5 +1,5 @@
 @goGreen
-Feature: To test go green splash save preferences
+Feature: To test go green splash page
 
   Scenario Outline: Verify go green splash page
     Given I am a Federal member on the member redesign registration page
@@ -28,7 +28,7 @@ Feature: To test go green splash save preferences
       | memberId    |  | dob        |
       | 972430828-1 |  | 18/03/1942 |
 
-  Scenario Outline: Verify go green splash page
+  Scenario Outline: Verify go green splash error message on page
     Given I am a Federal member on the member redesign registration page
       | MemberId | <memberId> |
       | DOB      | <dob>      |

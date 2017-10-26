@@ -77,7 +77,11 @@ public class NewRegistrationPage extends UhcDriver {
 			JavascriptExecutor js = (JavascriptExecutor) driver;
 			sendkeys(memberIdField, memberId);
 			driver.findElement(By.xpath("//span[@id='select2-date-mm-container']/following::span[1]")).click();
-			driver.findElement(By.xpath("//ul[@id='select2-date-mm-results']//li[(@class='select2-results__option') and text()='"+strMonth+"']")).click();
+			if(strMonth!="01")
+				driver.findElement(By.xpath("//ul[@id='select2-date-mm-results']//li[(@class='select2-results__option') and text()='"+strMonth+"']")).click();
+			else
+				driver.findElement(By.xpath("//ul[@id='select2-date-mm-results']//li[(@class='select2-results__option select2-results__option--highlighted')]")).click();
+			
 			driver.findElement(By.xpath("//span[@id='select2-date-dd-container']/following::span[1]")).click();
 			driver.findElement(By.xpath("//ul[@id='select2-date-dd-results']//li[(@class='select2-results__option') and text()='"+strDate+"']")).click();
 			driver.findElement(By.xpath("//span[@id='select2-date-yyyy-container']/following::span[1]")).click();
