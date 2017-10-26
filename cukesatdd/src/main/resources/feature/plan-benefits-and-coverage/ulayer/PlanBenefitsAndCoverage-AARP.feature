@@ -1150,7 +1150,6 @@ Feature: To test plan benefits and Coverage on AARP site for Federal members
     
      Examples: 
       | planType | 
-      | planType | 
       | SHIPTX   |
       | SHIPMO   | 
       | EHIP     |
