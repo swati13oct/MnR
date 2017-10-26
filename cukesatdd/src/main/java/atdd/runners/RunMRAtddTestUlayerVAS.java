@@ -15,6 +15,6 @@ import cucumber.junit.Cucumber;
 @Cucumber.Options(glue = { "atdd.framework","acceptancetests.benefitsandcoverage.ulayer"}, 
 		features = {"feature/plan-benefits-and-coverage/ulayer" }, 
 		format = {
-		"pretty", "html:reports/test-report","json:target/cucumber.json"}, tags ={"@VAS1,@VAS3"})
+		"pretty", "html:reports/test-report","json:target/cucumber.json"}, tags ={"@VAS1"})
 public class RunMRAtddTestUlayerVAS {
 }

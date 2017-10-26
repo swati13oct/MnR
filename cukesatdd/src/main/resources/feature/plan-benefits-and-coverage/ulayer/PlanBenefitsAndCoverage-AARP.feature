@@ -1144,16 +1144,17 @@ Feature: To test plan benefits and Coverage on AARP site for Federal members
     Given registered member with following details logins in the member portal 
       | Plan Type   | <planType>   |
     When the user navigates to Benefits and coverage page
-    And the user validate Value Add Service page
-    And the user validate header and text 
-    And the user validates view more link
-    And when the user clicks on view more link link should expand and disclaimer link should be visible and clickable
-    And the user validates MAIN CTA button
-     
+    And the user validates hand image under discount and services section
+    And the user validates the Vas section on benefits and coverage page
+    And the user validates learnmorebutton on Bnc page for ship members
     
      Examples: 
       | planType | 
+      | planType | 
       | SHIPTX   |
+      | SHIPMO   | 
+      | EHIP     |
+      | HIP      |
       
       
      @VAS2

@@ -985,4 +985,11 @@ public class PlanBenefitsAndCoverageAarpStepDefinition {
 		}
  }
 
+        @And("the user validates learnmorebutton on Bnc page for ship members")
+	public void user_validate_learnmorebutton() {
+	BenefitsAndCoveragePage benefitsnCoveragepage = (BenefitsAndCoveragePage) getLoginScenario()
+			.getBean(PageConstants.BENEFITS_AND_COVERAGE_PAGE);
+	benefitsnCoveragepage.learnmorebutton();
+	}
+
 	}
