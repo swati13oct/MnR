@@ -62,7 +62,7 @@ public class NewLoginPage extends UhcDriver {
 			sendkeys(passwordField,password);
 			btnSignIn.click();
 			Thread.sleep(4000);
-			if (MRScenario.environment.equals("team-e")){
+			if (MRScenario.environment.equals("team-e") || MRScenario.environment.equals("team-h")){
 					Alert alert2 = driver.switchTo().alert();
 					alert2.accept();
 			}
