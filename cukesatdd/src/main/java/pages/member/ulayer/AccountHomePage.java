@@ -12,6 +12,7 @@ import org.json.JSONObject;
 import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Cookie;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.By.ByXPath;
@@ -182,10 +183,10 @@ public class AccountHomePage extends UhcDriver {
 
 	@FindBy(linkText = "Date")
 	private WebElement dateLink;
-	
+
 	@FindBy(xpath = "//div[@class='claim-results']//table[not (contains(@class,'ng-hide'))]//tbody//tr[2]//a[text()='MORE INFO']")
 	private WebElement claimstablemoreinfolink;
-	
+
 	@FindBy (css = ".claimDetTableMainSection")
 	private WebElement claimDetTableMainSection;
 
@@ -597,7 +598,7 @@ public class AccountHomePage extends UhcDriver {
 	}
 
 	public pages.dashboard.member.ulayer.ClaimSummarypage navigateToClaimsSummaryPage() {
-		// TODO Auto-generated method stub
+		
 		//String url = "https://member.team-b-aarpmedicareplans.uhc.com/home/claims.html";
 		String testharnessUrl = "https://member." +MRScenario.environment+"-aarpmedicareplans.uhc.com/home/testharness.html";
 		//String testharnessUrl = "https://member.team-b-aarpmedicareplans.uhc.com/content/medicare/member/testharness.html";
@@ -606,46 +607,38 @@ public class AccountHomePage extends UhcDriver {
 			CommonUtility.waitForPageLoad(driver, driver.findElement(By.xpath("//a[text()='Go to Claims page']")), 60); 	
 			driver.findElement(By.xpath("//a[text()='Go to Claims page']")).click();
 		}
-		
+
 		else if (MRScenario.environment.equalsIgnoreCase("team-b")) {
-			
+
 			CommonUtility.waitForPageLoad(driver, driver.findElement(By.xpath("//a[text()='Go to Claims Link page']")), 60); 	
 			driver.findElement(By.xpath("//a[text()='Go to Claims Link page']")).click();
 		}
-		
-		
-		
 		else 
 		{
-		System.out.println("This script is only intended to be run using test harness on team-b or team-h. Update condition for your own environment");	
+			System.out.println("This script is only intended to be run using test harness on team-b or team-h. Update condition for your own environment");	
 		}
-		//driver.findElement(By.xpath("//a[contains(.,'Go to Claims Link page')]")).click();
-		
-		/*
-		 * try { Thread.sleep(1000); } catch (InterruptedException e) { // TODO
-		 * Auto-generated catch block e.printStackTrace(); }
-		 */
-      System.out.println(driver.getTitle());
+		System.out.println(driver.getTitle());
 
 		if (driver.getTitle().equalsIgnoreCase("Claims")) {
-			
-			
 			try {
-				Thread.sleep(20000);
+				Thread.sleep(10000);
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-		
-			CommonUtility.waitForPageLoad(driver, driver.findElement(By.xpath("//select[@id='document-date']")), 90); 
-			
-			if (driver.findElement(By.xpath("//a[contains(.,'Medicare Advantage Plan')]")) !=null) {
-				
-				driver.findElement(By.xpath("//a[contains(.,'Medicare Advantage Plan')]")).click();	
-				
-				return new pages.dashboard.member.ulayer.ClaimSummarypage(driver);	
-			}
-			
+
+			CommonUtility.waitForPageLoad(driver, driver.findElement(By.xpath("//select[@id='document-date']")), 90);
+			{
+				try {
+					driver.findElement(By.xpath("//a[contains(.,'Medicare Advantage Plan')]")).isDisplayed();
+					driver.findElement(By.xpath("//a[contains(.,'Medicare Advantage Plan')]")).click();	
+					return new pages.dashboard.member.ulayer.ClaimSummarypage(driver);	
+
+				} catch (NoSuchElementException e) {
+					return new pages.dashboard.member.ulayer.ClaimSummarypage(driver);	
+					// TODO: handle exception
+				}	
+			}		
 
 		}
 		return null;
@@ -655,7 +648,7 @@ public class AccountHomePage extends UhcDriver {
 		CommonUtility.waitForPageLoad(driver, claimstablemoreinfolink, 60);
 		claimstablemoreinfolink.click();
 		CommonUtility.waitForPageLoad(driver, claimDetTableMainSection, 30);
-		
+
 		//driver.findElement(By.xpath("//a[contains(text(),'MORE INFO')]")).click();
 		/*
 		 * try { Thread.sleep(1000); } catch (InterruptedException e) { // TODO
