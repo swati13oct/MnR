@@ -526,7 +526,9 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 	public void validate_drugcostdropdownoptions()
 
 	{
-		if (DrugCostDropdown.isDisplayed()) {
+	    validate(DrugCostDropdown);
+               
+            /*if (DrugCostDropdown.isDisplayed()) {
                 try {
 			Thread.sleep(30000);
 		} catch (InterruptedException e1) {
@@ -561,7 +563,7 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 					Assert.fail();
 				}
 			}
-		}
+		}*/
 	}
 
 
