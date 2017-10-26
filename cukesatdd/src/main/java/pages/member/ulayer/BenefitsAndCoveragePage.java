@@ -873,7 +873,19 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 
 	public ValueAddedServicepage navigateToValueAddService() {
 		validate(learnmorebutton);
+		try {
+			Thread.sleep(10000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		learnmorebutton.click();
+		try {
+			Thread.sleep(10000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		if (this.driver.getTitle().equalsIgnoreCase("Value Added Services")) {
 			System.out.println(driver.getTitle());
 			return new ValueAddedServicepage(driver);

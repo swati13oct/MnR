@@ -123,12 +123,12 @@ Feature: To test My Profile & Preferences flow in UMS site
     Then the user validates the Plan Name, Member name, Member ID and account section in UMS site
 
     Examples: 
-      | planType|
-      | Group  |
-      | MAPD   |
-      | MA     |
-      |GroupMA |
-     #|GroupPDP|
+         | planType|
+         | GroupMAPD|
+         | MAPD     |
+         | MA       |
+         |GroupMA   |
+         |GroupPDP  |
 
     @ValidateEmail
     Scenario Outline: To verify Email section in UMS site
@@ -139,11 +139,12 @@ Feature: To test My Profile & Preferences flow in UMS site
 
     Examples: 
         | planType|
-        | Group  |
-        | MAPD   |
-        | MA     |
-        |GroupMA |
-        |GroupPDP|
+         | GroupMAPD|
+         | MAPD     |
+         | MA       |
+         |GroupMA   |
+         |GroupPDP  |
+
 
   @PasswordEdit
   Scenario Outline: To verify the edit functionality in Account Profile section in UMS site
@@ -155,12 +156,13 @@ Feature: To test My Profile & Preferences flow in UMS site
     Then the user validates the functionality of Cancel Button
 
       Examples: 
-        | planType|
-        | Group  |
-        | MAPD   |
-        | MA     |
-        |GroupMA |
-        #|GroupPDP|
+         | planType|
+         | GroupMAPD|
+         | MAPD     |
+         | MA       |
+         |GroupMA   |
+         |GroupPDP  |
+
 
 
   @PasswordEdit1
@@ -172,12 +174,13 @@ Feature: To test My Profile & Preferences flow in UMS site
     Then the user clicks on save button without filling current and new password and the red mandatory message should come
 
    Examples: 
-        | planType|
-        | Group  |
-        | MAPD   |
-        | MA     |
-        |GroupMA |
-        #|GroupPDP|
+         | planType|
+         | GroupMAPD|
+         | MAPD     |
+         | MA       |
+         |GroupMA   |
+         |GroupPDP  |
+
 
 
   @PasswordEdit2
@@ -189,12 +192,13 @@ Feature: To test My Profile & Preferences flow in UMS site
     Then the user enters invalid password in new password field and clicks save button and the user should see expected error message - Password does not meet requirements
     
    Examples: 
-        | planType|
-        | Group  |
-        | MAPD   |
-        | MA     |
-        |GroupMA |
-       #|GroupPDP|
+         | planType|
+         | GroupMAPD|
+         | MAPD     |
+         | MA       |
+         |GroupMA   |
+         |GroupPDP  |
+
         
    @PasswordEdit3
   Scenario Outline: To verify the edit functionality in Account Profile section in UMS site
@@ -205,12 +209,13 @@ Feature: To test My Profile & Preferences flow in UMS site
     Then the user enters different password in confirm password field and clicks save button and the user should see expected error message - Please enter the same value again
 
    Examples: 
-        | planType|
-        | Group  |
-        | MAPD   |
-        | MA     |
-        |GroupMA |
-       #|GroupPDP|
+         | planType|
+         | GroupMAPD|
+         | MAPD     |
+         | MA       |
+         |GroupMA   |
+         |GroupPDP  |
+
         
         
   @EmailEdit1
@@ -224,11 +229,12 @@ Feature: To test My Profile & Preferences flow in UMS site
 
     Examples: 
         | planType|
-        | Group  |
-        | MAPD   |
-        | MA     |
-        |GroupMA |
-        #|GroupPDP|
+         | GroupMAPD|
+         | MAPD     |
+         | MA       |
+         |GroupMA   |
+         |GroupPDP  |
+
 
 
   @EmailEdit2
@@ -242,11 +248,12 @@ Feature: To test My Profile & Preferences flow in UMS site
 
     Examples: 
         | planType|
-        | Group  |
-        | MAPD   |
-        | MA     |
-        |GroupMA |
-       #|GroupPDP|
+         | GroupMAPD|
+         | MAPD     |
+         | MA       |
+         |GroupMA   |
+         |GroupPDP  |
+
 
   #| MA       |
   @Needhelp
@@ -259,12 +266,13 @@ Feature: To test My Profile & Preferences flow in UMS site
     And the user validates on clicking contact us link it should route to contact us page
 
     Examples: 
-        | planType |
-        | Group  |
-        | MAPD   |
-        | MA     |
-        |GroupMA |
-       #|GroupPDP|
+        | planType|
+         | GroupMAPD|
+         | MAPD     |
+         | MA       |
+         |GroupMA   |
+         |GroupPDP  |
+
         
   @PermanentAddress
   Scenario Outline: To verify the edit functionality in Account Profile section in UMS site
@@ -275,12 +283,13 @@ Feature: To test My Profile & Preferences flow in UMS site
     And the user clicks on contact us then contact us page should come
 
     Examples: 
-        | planType |
-        | Group  |
-        | MAPD   |
-        | MA     |
-        |GroupMA |
-       #|GroupPDP|
+         | planType|
+         | GroupMAPD|
+         | MAPD     |
+         | MA       |
+         |GroupMA   |
+         |GroupPDP  |
+
 
   
   @CommunicationPreferences
@@ -290,15 +299,15 @@ Feature: To test My Profile & Preferences flow in UMS site
     When the user navigates to Profile and Preferences page
     Then the user validates Communication Preferences section
     And the user validates Go paperless button and on clicking button go green page should come
-    And the user validates on clicking Profilenpreferences arrow user should route to Profile and Preferences page
+    #And the user validates on clicking Profilenpreferences arrow user should route to Profile and Preferences page
 
     Examples: 
-        | planType |
-        | Group  |
-        | MAPD   |
-        | MA     |
-        |GroupMA |
-       #|GroupPDP|
+         | planType |
+         | GroupMAPD|
+        #| MAPD     |
+         | MA       |
+         |GroupMA   |
+         |GroupPDP  |
 
   @PhoneEdit
   Scenario Outline: To verify Phone Edit Functionality

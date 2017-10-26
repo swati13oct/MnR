@@ -1146,9 +1146,8 @@ Feature: To test plan benefits and Coverage on AARP site for Federal members
     When the user navigates to Benefits and coverage page
     And the user validate Value Add Service page
     And the user validate header and text 
-    #And the user validates sections for NurseHealthLine,DIME2,MyCarePath,SilverSneakers,VisionDiscount
     And the user validates view more link
-    #And when the user clicks on view more link link should expand and disclaimer link should be visible
+    And when the user clicks on view more link link should expand and disclaimer link should be visible and clickable
     And the user validates MAIN CTA button
      
     
@@ -1164,9 +1163,8 @@ Feature: To test plan benefits and Coverage on AARP site for Federal members
     When the user navigates to Benefits and coverage page
     And the user validate Value Add Service page
     And the user validate header and text 
-    And the user validates sections for AtyourBest
-    And the user validates view more link
-    And when the user clicks on view more link link should expand and disclaimer link should be visible
+    #And the user validates view more link
+    #And when the user clicks on view more link link should expand and disclaimer link should be visible and clickable
     And the user validates MAIN CTA button
     
      Examples: 
@@ -1180,15 +1178,14 @@ Feature: To test plan benefits and Coverage on AARP site for Federal members
     When the user navigates to Benefits and coverage page
     And the user validate Value Add Service page
     And the user validate header and text 
-    And the user validates sections for Provideyourdiscount
-    And the user validates view more link
-    And when the user clicks on view more link link should expand and disclaimer link should be visible
+    #And the user validates sections for Provideyourdiscount
+    And when the user clicks on view more link link should expand and disclaimer link should be visible and clickable
+    #And when the user clicks on view more link link should expand and disclaimer link should be visible
     And the user validates MAIN CTA button
     
      Examples: 
       | planType | 
       | EHIP     |
-      
       
       
    @BenefitsSummaryShip

@@ -12,6 +12,7 @@ import org.json.JSONObject;
 import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Cookie;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
@@ -63,11 +64,10 @@ public class ValueAddedServicepage extends UhcDriver {
 	@FindBy(id="collapseLargeCard1")
 	private WebElement viewlinkexpand;
 	
-	@FindBy(id=".//*[@id='collapseLargeCard1']/div/div[1]/div/div/div/a")
+	@FindBy(xpath=".//*[@id='collapseLargeCard1']/div/div[1]/div/div/div/a")
 	private WebElement disclaimers;
 	
-	//private PageData valueAddedservicePage;
-// TODO Auto-generated method stub 
+	//private PageData valueAddedservicePage; 
 
 	public ValueAddedServicepage(WebDriver driver) {
 		super(driver);
@@ -101,7 +101,16 @@ public class ValueAddedServicepage extends UhcDriver {
 	
 	public void validateviewmorelink() {
 		// TODO Auto-generated method stub
+		try {
+			Thread.sleep(10000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		JavascriptExecutor jse = (JavascriptExecutor) driver;
+		jse.executeScript("window.scrollBy(0,100)", "");
 		validate(viewmore);
+		
 		
 	}
 	
@@ -113,7 +122,27 @@ public class ValueAddedServicepage extends UhcDriver {
 	public void validateviewmorelinkexpand() {
 		// TODO Auto-generated method stub
 		viewmore.click();
+		try {
+			Thread.sleep(10000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		validate(viewlinkexpand);
+		try {
+			Thread.sleep(10000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		JavascriptExecutor jse = (JavascriptExecutor) driver;
+		jse.executeScript("window.scrollBy(0,1000)", "");
+		try {
+			Thread.sleep(10000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		validate(disclaimers);
 		disclaimers.click();
 	}
