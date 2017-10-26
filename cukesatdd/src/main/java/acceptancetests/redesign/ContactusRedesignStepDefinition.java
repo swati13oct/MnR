@@ -1,4 +1,4 @@
-package acceptancetests.redesign.contactUs;
+package acceptancetests.redesign;
 
 
 

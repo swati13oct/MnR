@@ -18,6 +18,10 @@ public class MRConstants {
 
 	public static final String AARPM_URL = "https://member."+MRScenario.environment+"-aarpmedicareplans.uhc.com/guest/login.html";
 	public static final String NEW_REDESIGN_URL = "https://"+MRScenario.environment+"-medicare.uhc.com/medicare/login/overview.html?testharness=true";
+	public static final String NEW_REDESIGN_REGISTRATION_URL = "https://"+MRScenario.environment+"-medicare.uhc.com/content/medicare/member-registration.html#/memberRegistration";
+	
+	public static final String GO_GREEN_SPLASH_URL = "https://"+MRScenario.environment+"-medicare.uhc.com/content/medicare/Registration-GoGreenSplashPage.html";
+
 	public static final String BNCURL = "https://member."+MRScenario.environment+"-aarpmedicareplans.uhc.com/guest/login.html?TARGET=SMSR/home/my-plans/benefits-and-coverage-page.html";
 	public static final String UHCM_URL = "https://member.awe-"+MRScenario.environment+"-uhcmedicaresolutions.uhc.com/guest/login.html";
 	public static final String UHCM_TEAM_E_URL = "https://member."+MRScenario.environment+"-uhcmedicaresolutions.uhc.com";

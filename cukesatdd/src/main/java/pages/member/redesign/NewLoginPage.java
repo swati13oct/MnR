@@ -66,7 +66,7 @@ public class NewLoginPage extends UhcDriver {
 					Alert alert2 = driver.switchTo().alert();
 					alert2.accept();
 			}
-			Thread.sleep(25000);
+			Thread.sleep(35000);
 		}catch (InterruptedException e) {
 				e.printStackTrace();
 			}

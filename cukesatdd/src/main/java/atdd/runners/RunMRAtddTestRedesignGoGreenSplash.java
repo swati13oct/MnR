@@ -6,9 +6,9 @@ import cucumber.junit.Cucumber;
 
 @RunWith(Cucumber.class)
 @Cucumber.Options(glue = { "atdd.framework","acceptancetests.redesign" }, 
-		features = { "feature/re-design" }, 
-		format = {"pretty", "html:reports/test-report","json:target/cucumber.json"}, tags ={"@velocityDashers"})
-public class RunMRAtddTestRedesignContactUs {
+		features = { "feature/re-design"}, 
+		format = {"pretty", "html:reports/test-report","json:target/cucumber.json"}, tags ={"@goGreen"})
+public class RunMRAtddTestRedesignGoGreenSplash {
 
 }
 
