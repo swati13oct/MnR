@@ -773,7 +773,7 @@ Examples:
     Examples: 
       | planType | 
       | MA       |  
-      | Group    | 
+      | GroupMAPD| 
       | GroupPDP | 
       | GroupMA  | 
       | MAPD     |  
