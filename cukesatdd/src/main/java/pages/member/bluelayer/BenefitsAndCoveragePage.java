@@ -333,7 +333,25 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 	}
 	
 		public void  contactUslink() {
+                try {
+			Thread.sleep(20000);
+		        } 
+                        catch (InterruptedException e) 
+                        {
+			// TODO Auto-generated catch block
+                       // TODO Auto-generated catch block
+			e.printStackTrace();
+		        }
 		validate(contactUslink);
+                try {
+			Thread.sleep(20000);
+		        } 
+                        catch (InterruptedException e) 
+                        {
+			// TODO Auto-generated catch block
+                       // TODO Auto-generated catch block
+			e.printStackTrace();
+		        }
 		contactUslink.click();
 		
 		try {

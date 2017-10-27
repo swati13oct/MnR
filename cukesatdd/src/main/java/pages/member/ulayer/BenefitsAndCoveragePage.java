@@ -242,7 +242,7 @@ public class BenefitsAndCoveragePage extends UhcDriver {
         @FindBy(className = "atdd-contact-us")
 	private WebElement contactUslink;
 	
-	@FindBy(xpath = "html/body/div[2]/div[3]/div/div[2]/div[1]/div[2]/section/div/div[3]/div/p")
+	@FindBy(xpath = "html/body/div[2]/div[4]/div[1]/div[2]/section[2]/div/div[3]/div/p")
 	private WebElement Seemorewaystext;
 	
 	@FindBy(className = "atdd-need-help")
@@ -762,13 +762,24 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 	}
 
 	public void validateContactUsNeedHelp() {
+         try {
+			Thread.sleep(30000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		validateNew(Seemorewaystext);
 
 	}
 
 	public void contactUslinkShip() {
+                try {
+			Thread.sleep(30000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		validate(contactUslink);
-		
 		contactUslink.click();
 		try {
 			Thread.sleep(30000);
