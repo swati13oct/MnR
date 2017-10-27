@@ -1,4 +1,4 @@
-@futureEffectivePlanError
+@futureEffectivePlanError @Gladiators
 Feature: To test links present on future Effective Plan page
 
   Scenario Outline: To verify member is navigated to the personal Information page

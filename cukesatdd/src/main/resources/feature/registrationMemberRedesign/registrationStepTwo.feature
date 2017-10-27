@@ -1,4 +1,4 @@
-@registrationStepTwo
+@registrationStepTwo @Gladiators
 Feature: To test registration step 2 flow in redesign portal
 
   Scenario Outline: To verify member with no additional plan is navigated to Create Account after clicking next button on Plan Information
@@ -25,6 +25,4 @@ Feature: To test registration step 2 flow in redesign portal
     Examples:
     #dev-c and team-h 
       | Plantype | planMemberId | dateOfBirth | planname                        | membername     |
-      | PCP     | 949291584    | 02-17-1952  | Preferred Choice Palm Beach (HMO)| ECCFF BFACFDAFA |
-
-  
+      | MAPD COSMOS     | 930096952    | 08-05-1950  | AARP MedicareComplete Choice (PPO)| AAEDBF DAADCDAFA |

@@ -142,7 +142,9 @@ public class RegistrationDashboardStepDefinition {
                 public void RegistrationPlanInformation() {
                                 RegistrationInformationPage registrationInformationPage = (RegistrationInformationPage) getLoginScenario()
                                                                 .getBean(PageConstants.REGISTRATION_INFORMATION_PAGE);
+                                
                                 // Assert.assertTrue(registrationInformationPage.currentUrl().contains("memberRegistration-Step2"));
+                                registrationInformationPage.waitForPlanInformationPage();
                                 registrationInformationPage.getStepTwoText().isDisplayed();
                 }
 
@@ -279,8 +281,9 @@ public class RegistrationDashboardStepDefinition {
                 public void member_clicks_on_next_button() throws InterruptedException {
                                 RegistrationInformationPage registrationInformationPage = (RegistrationInformationPage) getLoginScenario()
                                                                 .getBean(PageConstants.REGISTRATION_INFORMATION_PAGE);
+                                Thread.sleep(8000);
                                 registrationInformationPage.clickNext();
-                                Thread.sleep(5000);
+                              //  Thread.sleep(7000);
                 }
 
                 @Then("^the member navigate to the create account page$")
@@ -354,7 +357,7 @@ public class RegistrationDashboardStepDefinition {
 
                 @Then("^the member navigate to additional information section$")
                 public void VerifyAdditionInformtionSeaction() {
-                                RegistrationInformationPage registrationInformationPage = (RegistrationInformationPage) getLoginScenario()
+                               RegistrationInformationPage registrationInformationPage = (RegistrationInformationPage) getLoginScenario()
                                                                 .getBean(PageConstants.REGISTRATION_INFORMATION_PAGE);
                                 registrationInformationPage.getAdditionalInfoHeader().isEnabled();
                 }
@@ -412,7 +415,7 @@ public class RegistrationDashboardStepDefinition {
                 }
 
                 @Then("^the member validate member not found error message$")
-                public void memberNotFoundErrorMessage() {
+               public void memberNotFoundErrorMessage() {
                                 RegistrationInformationPage registrationInformationPage = (RegistrationInformationPage) getLoginScenario()
                                                                 .getBean(PageConstants.REGISTRATION_INFORMATION_PAGE);
                                 registrationInformationPage.getmemberNotFoundError().isDisplayed();
@@ -436,45 +439,6 @@ public class RegistrationDashboardStepDefinition {
                                 Assert.assertTrue(registrationInformationPage.getpffsError().toString().contains("errorPffsMember"));
 
                 }
-                
-                @Then("the member validate member id required error message$")
-            	public void memberIdErrorMessage(){
-            		RegistrationInformationPage registrationInformationPage = (RegistrationInformationPage) getLoginScenario()
-            				.getBean(PageConstants.REGISTRATION_INFORMATION_PAGE);
-            		registrationInformationPage.getmemberidError().isDisplayed();
-            		Assert.assertTrue(registrationInformationPage.getmemberidError().toString().contains("errorMemberId"));
-            		
-            	
-            	}
-            	
-            	
-            	@Then("the member validate dob required error message$")
-            	public void dobBlankErrorMessage(){
-            		RegistrationInformationPage registrationInformationPage = (RegistrationInformationPage) getLoginScenario()
-            				.getBean(PageConstants.REGISTRATION_INFORMATION_PAGE);
-            		registrationInformationPage.getdobError().isDisplayed();
-            		Assert.assertTrue(registrationInformationPage.getdobError().toString().contains("errorDob"));
-            		
-      
-            	}	
-            	
-            	@Then("the member validate dob fields 13 years or younger error message$")
-            		public void dobYoungerAgeErrorMessage(){
-            		RegistrationInformationPage registrationInformationPage = (RegistrationInformationPage) getLoginScenario()
-            				.getBean(PageConstants.REGISTRATION_INFORMATION_PAGE);
-            		registrationInformationPage.getdobYoungerAgeError().isDisplayed();
-            		Assert.assertTrue(registrationInformationPage.getdobYoungerAgeError().toString().contains("errorAge"));
-            		
-            	}
-            @Then("the member validate snp error message$")
-            	public void snpErrorMessage(){
-            		RegistrationInformationPage registrationInformationPage = (RegistrationInformationPage) getLoginScenario()
-            				.getBean(PageConstants.REGISTRATION_INFORMATION_PAGE);
-            		registrationInformationPage.getsnpError().isDisplayed();
-            		Assert.assertTrue(registrationInformationPage.getsnpError().toString().contains("errorSnp"));
-
-            	}
-
                 
                 
                 @And("The member land on create account enters the valid data to create account$")
@@ -521,3 +485,4 @@ public class RegistrationDashboardStepDefinition {
                                 }*/
 
 }
+

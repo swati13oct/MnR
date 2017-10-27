@@ -1,4 +1,4 @@
-@memberInfoNotFoundError
+@memberInfoNotFoundError @Gladiators
 Feature: To test links present on member Info Not Found Error page
 
   Scenario Outline: To verify member is navigated to the personal Information page

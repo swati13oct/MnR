@@ -1,4 +1,4 @@
-@inactiveTerminatedPlanError
+@inactiveTerminatedPlanError @Gladiators
 Feature: To test links present on inactive Terminated Plan page
 
   Scenario Outline: To verify member is navigated to the personal Information page

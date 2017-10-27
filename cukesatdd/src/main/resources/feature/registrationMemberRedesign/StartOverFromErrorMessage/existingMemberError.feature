@@ -1,4 +1,4 @@
-@existingMemberErrorPage
+@existingMemberErrorPage @Gladiators
 Feature: To test Start Over link present on existing member error page
 
   Scenario Outline: To verify member is navigated to the personal Information page on clicking start over link
@@ -38,8 +38,8 @@ Feature: To test Start Over link present on existing member error page
      # | 002776817    | 10-07-1943  |
       #team-h member 
       | 914429086    | 08-28-1927  |
- # Scenario Outline: To verify member is navigated to the sign In page
- #   Given the member is on registration page of new portal part of redesign
+# Scenario Outline: To verify member is navigated to the sign In page
+#   Given the member is on registration page of new portal part of redesign
   #  When the member enter the member ID into Member ID field
   #   | Plan Member ID | <planMemberId> |
   #  And member enter date of birth in the date of birth dropdown

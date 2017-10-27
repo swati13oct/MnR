@@ -1,4 +1,4 @@
-@pffsMemberErrorPage
+@pffsMemberErrorPage @Gladiators
 
 Feature: To validate pffs error on the registration page
 
