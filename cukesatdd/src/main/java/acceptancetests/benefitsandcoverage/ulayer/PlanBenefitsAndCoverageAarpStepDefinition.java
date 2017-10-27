@@ -974,6 +974,14 @@ public class PlanBenefitsAndCoverageAarpStepDefinition {
 	benefitsnCoveragepage.validateHeadersShip();
 	}
 
+	@And("the user validates the Primarycare Provider section")
+	public void user_validate_PrimaryCareProv() {
+		BenefitsAndCoveragePage benefitsnCoveragepage = (BenefitsAndCoveragePage) getLoginScenario()
+				.getBean(PageConstants.BENEFITS_AND_COVERAGE_PAGE);
+		benefitsnCoveragepage.validatePrimaryCareProvider();
+	}	
+	
+	
 	@And("^the user validate Value Add Service page$")
 	public void validate_Value_Add_page()
 	{

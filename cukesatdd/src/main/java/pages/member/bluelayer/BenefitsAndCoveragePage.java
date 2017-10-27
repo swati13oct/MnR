@@ -185,8 +185,7 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 	@FindBy(className = "atdd-outpatientsurgery-title")
 	private WebElement OutpatientSurgeryCenter;
 
-	@FindBy(xpath = "//*[@id='planBenefitsApp']/div/div[1]/div[6]/div/div[1]/div/h2/p")
-	private WebElement PrimaryCareProviderHeader;
+	
 	@FindBy(xpath = "//*[@id='planBenefitsApp']/div/div[1]/div[6]/div/div[2]/div[1]/div/header/span")
 	private WebElement YourPrimaryCareProvider;
 	@FindBy(className = "changepcp-atdd")
@@ -196,8 +195,14 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 	@FindBy(className = "start-search-atdd")
 	private WebElement StartSearch;
 	
-	@FindBy( xpath= "//*[@id='planBenefitsApp']/div/div[1]/div[6]/div/div/h2/p")
+	@FindBy(className = "atdd-bncsummary-primarycareprvdrheader")
+	private WebElement PrimaryCareProviderHeader;
+
+
+   @FindBy(className= "atdd-bncsummary-primarycareprvdrheader")
 	private WebElement PrimaryCareProviderHeaderHMO;
+	
+	
 
 	public static final String learnmorestagetext_xpath = ".//*[@id='collapseStages']";
 
