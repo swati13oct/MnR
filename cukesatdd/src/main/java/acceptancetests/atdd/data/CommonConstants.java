@@ -68,15 +68,9 @@ public class CommonConstants {
 	public static final String IE_BROWSER = "IE";
 	public static final String MOBILE_BROWSER = "MOBILE";
 	
-	public static final String SAUCE_BROWSER_WEB = "SAUCE_BROWSER_WEB";
-	public static final String SAUCE_BROWSER_MOBILE = "SAUCE_BROWSER_MOBILE";
 	
 	public static final String BROWSER_NAME = "BROWSER_NAME";
 	public static final String DEVICE_VERSION = "DeviceVersion";
-	
-	public static final String PLATFORM_VERSION = "PlatformVersion";
-	
-	public static final String PLATFORM_NAME = "PlatformName";
 	
 	public static final String DESKTOP_WEBDRIVER = "WebDriver";
 	
@@ -849,8 +843,17 @@ public class CommonConstants {
 	public static final String NEW_CLAIM_DETAILS_PAGE_DATA = "newClaimDetailsPage.json";
 
 	public static final String NEW_CLAIM_SUMMARY_PAGE_DATA = "newClaimsSummaryPage.json";
+	public static final String SAUCE_BROWSER_WEB = "SAUCE_BROWSER_WEB";
 
+	public static final String SAUCE_BROWSER_MOBILE = "SAUCE_BROWSER_MOBILE";
+	public static final String PERFECTO = "PERFECTO";
+    
+	public static final String PLATFORM_VERSION = "PlatformVersion";
 	
+	public static final String PLATFORM_NAME = "PlatformName";
+	
+
+	public static final String YEAR_BUTTON_VPPPAGE = "yearBtnVppPageExists";
 	
 	
 	

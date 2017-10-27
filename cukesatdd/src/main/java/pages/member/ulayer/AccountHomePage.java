@@ -24,6 +24,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.openqa.selenium.support.ui.Select;
 
 import acceptancetests.atdd.data.CommonConstants;
+import acceptancetests.atdd.data.MRConstants;
 import acceptancetests.atdd.data.PageData;
 import acceptancetests.atdd.util.CommonUtility;
 import atdd.framework.MRScenario;
@@ -608,6 +609,21 @@ public class AccountHomePage extends UhcDriver {
 		}
 		return null;
 	}
+	public pages.member.ulayer.ContactUsPage navigateToContactusRedesignPage() {
+		// TODO Auto-generated method stub
+		//String url = "https://member.team-e-aarpmedicareplans.uhc.com/content/aarpm/home/contact.html";
+		driver.get(MRConstants.REDESIGN_AARPM_URL);
+		try {
+			Thread.sleep(10000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		if (driver.getTitle().trim().equals("Overview")) {
+			return new pages.member.ulayer.ContactUsPage(driver);
+		}
+		return null;
+	}
+
 
 	public pages.dashboard.member.ulayer.ClaimDetailsPage navigateToClaimDetailsPage() {
 		//String url = "https://member.team-b-aarpmedicareplans.uhc.com/home/claims.html#/claims-Detail";

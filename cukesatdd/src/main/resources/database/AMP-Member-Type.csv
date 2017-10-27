@@ -106,4 +106,13 @@ q1_feb_combo031/Password@1,PDP,Individual_pharmacy_retail,,
 q1_feb_ulayer001/Password@1,MAPD,Individual_pharmacy_saver,,
 DentalUlayer260/Password@1,MAPD,LIS2,,
 DentalPlatinumLis2/Password@1,MAPD,NON LIS,,
+<<<<<<< HEAD
+q2_jun_ulayer175/Password@1,MA,Individual,
+q2_jun_ulayer171/Password@1,MA,Individual,
+q2_jun_ulayer172/Password@1,MA,Individual,
+q2_jun_ulayer175/Password@1,MA,Individual,mobile,
+q2_jun_ulayer171/Password@1,MA,Individual,mobile,
+q2_jun_ulayer172/Password@1,MA,Individual,mobile,
+=======
 q2_jun_ulayer002/Password@1,MAPDSaver,
+>>>>>>> remotes/origin/develop

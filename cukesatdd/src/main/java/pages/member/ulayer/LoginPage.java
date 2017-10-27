@@ -32,6 +32,7 @@ public class LoginPage extends UhcDriver {
 
 	// Page URL
 	private static String PAGE_URL = MRConstants.AARPM_URL;
+	private static String REDESIGN_PAGE_URL = MRConstants.REDESIGN_AARPM_URL;
 
 	@FindBy(id = "fd_memberSignInButton")
 	private WebElement loginIn;
@@ -70,9 +71,13 @@ public class LoginPage extends UhcDriver {
 		sendkeys(passwordField,password);
 		signInButton.click();
 
-		
+		try {
+			Thread.sleep(6000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
 
-		if (MRScenario.environment.equals("awe-dev-b") || MRScenario.environment.equals("dev-a") || MRScenario.environment.equals("dev-c") || MRScenario.environment.equals("team-b") || MRScenario.environment.equals("team-a") || MRScenario.environment.equals("team-c")) {
+		if (MRScenario.environment.equals("awe-dev-b") || MRScenario.environment.equals("dev-a") || MRScenario.environment.equals("dev-c") || MRScenario.environment.equals("team-b") || MRScenario.environment.equals("team-a") || MRScenario.environment.equals("team-c") || MRScenario.environment.equals("team-e")) {
 
 			while(isAlertPresent(driver));
 					
@@ -137,9 +142,13 @@ public class LoginPage extends UhcDriver {
 
 	@Override
 	public void openAndValidate() {
-		start(PAGE_URL);
-		validate(loginIn);
-
+		if(MRScenario.environment.equals("team-e")){
+			start(MRConstants.NEW_REDESIGN_URL);
+			
+		}else{
+			start(PAGE_URL);
+			validate(loginIn);
+		}
 	}
 
 	public JSONObject getBrowserCheck() {

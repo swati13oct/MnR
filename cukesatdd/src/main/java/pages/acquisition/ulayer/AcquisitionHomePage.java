@@ -123,7 +123,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	@FindBy(id = "medicareTitle")
 	private WebElement medicareTitleText;
 
-	@FindBy(linkText = "pharmacy")
+	@FindBy(id = "Find a pharmacy near you")
 	private WebElement pharmacyLink;
 
 	@FindBys(value = { @FindBy(xpath = "//table[@id='selectcountytable']/tbody/tr/td") })
@@ -156,8 +156,11 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	@FindBy(xpath = "//div[@id='insuranceplan_nav']/div/div[3]/ul/li/a/span")
 	private WebElement pdpVppLink;
 
-	@FindBy(xpath = "//div[@id='subnav_2']/div/div/div/div/div[2]/p[2]/a/span")
+	@FindBy(css = "a#atdd_mpd_plans>span")
 	private WebElement pdp_moreHelpInfoLink;
+	
+	@FindBy(xpath="//div[@class='reque_help_list']/p[2]/a")
+	private WebElement pdp_moreHelpLink;
 
 	@FindBy(xpath = "//div[@id='subnav_2']/div/div/div/div/div[1]/p[2]/a/span")
 	private WebElement ma_moreHelpInfoLink;
@@ -516,8 +519,14 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	}
 
 	public PharmacySearchPage navigateToPharmacyLocator() {
+		driver.get(MRConstants.AARP_MA_REQUEST_MORE_HELP_AND_INFORMATION_URL);
+		try {
+			Thread.sleep(10000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
 		pharmacyLink.click();
-		if (getTitle().equalsIgnoreCase("Find a Pharmacy | AARP® Medicare Plans from UnitedHealthcare®")) {
+		if (getTitle().equalsIgnoreCase("Locate a Pharmacy | UnitedHealthcare®")) {
 			return new PharmacySearchPage(driver);
 
 		}
@@ -825,10 +834,13 @@ public class AcquisitionHomePage extends GlobalWebElements {
 
 	public PDPRequestHelpAndInformationPage navigateToPDPMoreHelpAndInfo() {
 
-		Actions actions = new Actions(driver);
-		actions.moveToElement(ourPlansHoverLink);
-		actions.moveToElement(pdp_moreHelpInfoLink);
-		actions.click().build().perform();
+		driver.get(MRConstants.AARP_PDP_REQUEST_MORE_HELP_AND_INFORMATION_URL);
+		
+		try {
+			Thread.sleep(4000);
+		}catch (InterruptedException e) {
+			e.printStackTrace();
+		}
 
 		if (currentUrl().contains("prescription-drug-plans/request-information.html")) {
 			return new PDPRequestHelpAndInformationPage(driver);
@@ -1166,6 +1178,18 @@ public class AcquisitionHomePage extends GlobalWebElements {
 
 	}
 
+	public VPPPlanSummaryPage navigateToVpp(String zipcode)
+	{
+		sendkeys(zipCodeField, zipcode);
+		viewPlansButton.click();
+		
+		if (getTitle().equalsIgnoreCase(
+				"Our Medicare Plans | AARP® Medicare Plans From UnitedHealthcare®")) {
+			return new VPPPlanSummaryPage(driver);
+		}
+		return null;
+	}
+	
 	public Object pickatopic(String picktopic) {
 
 		selectSelectBoxIt.click();
