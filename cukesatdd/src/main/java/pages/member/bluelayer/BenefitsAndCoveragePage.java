@@ -55,6 +55,8 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 	@FindBy(xpath = "html/body/div[2]/div[4]/div[1]/div[2]/section[2]/div/div[3]/div/p")
 	private WebElement Contactussection;
 
+        //private WebElement Contactussection;
+
 	@FindBy(className = "atdd-needhelp-disclaimer-text")
 	private WebElement disclaimersLink;
 
@@ -317,6 +319,7 @@ public class BenefitsAndCoveragePage extends UhcDriver {
                         catch (InterruptedException e) 
                         {
 			// TODO Auto-generated catch block
+                       // TODO Auto-generated catch block
 			e.printStackTrace();
 		        }
 	                if (Contactussection.getText().contains("See more ways to contact us")) {
