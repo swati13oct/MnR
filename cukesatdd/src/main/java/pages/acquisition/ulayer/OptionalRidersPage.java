@@ -95,5 +95,16 @@ public class OptionalRidersPage extends UhcDriver{
 				return new ProposedEffectiveDatePage(driver);
 			
 		}
-
+		
+		
+		@FindBy(xpath = ".//*[@id='optriderInfo']/p")
+		private WebElement optHeader;
+		
+		public boolean validateOptionalRidersPage(){
+			boolean flag = false;
+			if(validate(optHeader)&&validate(optionalridersprevious)&&validate(optionalriderssaveandcontinue)&&
+			validate(optionalriderscancelregristration))//&&validate(optno))
+				flag = true;
+			return flag;
+		}
 }

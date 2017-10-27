@@ -1,5 +1,7 @@
-@enrollInPlan
-Feature: To test enroll in plan on AARP site 	 
+
+@enrollInPlanulayer
+Feature: To test enroll in plan on AARP site
+@OLE_MA
 Scenario Outline: Verify enroll in plan in AARP site for federal plan type member  for MA or MAPD plan
 Given the user is on AARP medicare site landing page
 When user performs plan search using following information in AARP site
@@ -36,15 +38,16 @@ And the user select yes for Special Election Period
      | Plan Type        | <planType> |
      | SEP1 			| <sep1> 			|
 	 | SEP2 			| <sep2> 			|
-	 | SEP4 			| <sep4>			|
+	 | SEP3 			| <sep3>			|
+	 | SEP4 			| <sep4> 			|
 	 | SEP5 			| <sep5> 			|
 	 | SEP6 			| <sep6> 			|
-	 | SEP7 			| <sep7> 			|
-	 | SEP8 			| <sep8> 			|
-	 | SEP9 			| <sep9> 			|
+#	 | SEP8 			| <sep8> 			|
+#	 | SEP9 			| <sep9> 			|
 	 | SEPOther 		| <sepOther> 		|
 	 | SEPDate1 		| <sepDate1> 		|
 	 | SEPDate2 		| <sepDate2> 		|
+	 | SEPDate4			| <sepDate4>        |
 	 | SEPDate5 		| <sepDate5> 		|
 	 | SEPDate6 		| <sepDate6> 		|
 	 | SEPOtherReason	| <sepOtherReason>  |
@@ -88,19 +91,20 @@ And the user fill following information in optional Riders step in AARP site
                | optradiooption                                            | <optradiooption>                                                                       |
 And the user navigates to proposed effective date page
 And the user selects proposed effective date
-     |EffectiveDate     | <effectiveDate>   |
 | Plan Type | <planType> |
 And the user navigates to review and submit application step in AARP site
+| Plan Type | <planType> |
 And the user reviews the information on review and submit application step in AARP site
 | Plan Type | <planType> |
 |agreeStmtUnderstanding|<agreeStmtUnderstanding>|
 |authRepresent| <authRepresent>|
 Then the user navigates to Confirmation Page
-And the user clicks on print this page button
+#And the user clicks on print this page button
 Examples:
-|zipcode |countyName          | planType | planName                                                     |firstName|middleInitial|lastName| medicareClaimNumber|hospitalEffectiveDate |  medicalEffectiveDate  | emailAddress |mainPhoneNumber | otherPhoneNumber |birthDate         |selectedGender |languagePreference |address |  city    | apartment |sep1|sep2|sep4|sep5|sep6|sep7|sep8|sep9|sepOther| sepDate1 | sepDate2    | sepDate5  | sepDate6    |sepOtherReason|esrdradiooption |pdcradiooption |pdchealthinsurname|pdcgroupidnumber|pdcmemberidnumber|ltcradiooption |ltcname|ltcstreetaddr|ltcapt|ltccity|ltcphonenum |ltcdatemoved|medicaidradiooption|medicaidnum|othradiooption |othnameofhealthinsur|othgroupid|othmemberid|planpaymentoption|optradiooption|effectiveDate|agreeStmtUnderstanding|authRepresent|
-|90210   |Los Angeles County  | MA       |AARP MedicareComplete SecureHorizons Plan 1 (HMO)| First   |  m          |  last  | 112-11-1117-A      |07/01/1988            |      07/01/1988        | test@uhc.com | 999-991-1111   | 999-991-1111     | 12-20-1950       |Male           |Spanish            |1234    | Colorado | UHG       |No  |Yes |No  |No  |No  |No  |No  |No  |No      | 02/15/2016| 02/15/2016 |02/15/2016 | 02/15/2016  |Test          |No              |Yes            | abc               |abc            |123              |Yes            |first  |123          |1     |abc    |666-666-6666|12-20-1982  |Yes                |12         |Yes            |insurname           |12        |13246      |Yes               |Yes            |07-01-2016   |Agree|Agree|
-@fixedTestCaseOLE
+|zipcode |countyName          | planType | planName                                                     |firstName|middleInitial|lastName| medicareClaimNumber|hospitalEffectiveDate |  medicalEffectiveDate  | emailAddress |mainPhoneNumber | otherPhoneNumber |birthDate         |selectedGender |languagePreference |address |  city    | apartment |sep1|sep2|sep3|sep4|sep5|sep6|sepOther| sepDate1 | sepDate2    |  sepDate4 | sepDate5  | sepDate6    |sepOtherReason|esrdradiooption |pdcradiooption |pdchealthinsurname|pdcgroupidnumber|pdcmemberidnumber|ltcradiooption |ltcname|ltcstreetaddr|ltcapt|ltccity|ltcphonenum |ltcdatemoved|medicaidradiooption|medicaidnum|othradiooption |othnameofhealthinsur|othgroupid|othmemberid|planpaymentoption|optradiooption|agreeStmtUnderstanding|authRepresent|
+|90210   |Los Angeles County  | MA       |AARP MedicareComplete SecureHorizons Plan 1 (HMO)             | abcdef   |  m          |  dfghi  | 122-21-1127-A      |08/01/1988            |      08/01/1988        | bhavana.pilli@optum.com | 999-991-2222   | 999-991-2222     | 11-20-1950       |Male           |Spanish            |1234    | Colorado | UHG       |No  |Yes |No  |No  |No  |No  |No      | 02/15/2016| 02/15/2016 |02/15/2016 |02/15/2016 | 02/15/2016  |Test          |No              |Yes            | abc               |abc            |123              |Yes            |first  |123          |1     |abc    |666-666-6666|12-20-1982  |Yes                |12         |Yes            |insurname           |12        |13246      |Yes               |Yes          |Agree                 |Agree|
+
+@OLE_PDP
 Scenario Outline: Verify enroll in plan in AARP site for federal plan type member  PDP member
 Given the user is on AARP medicare site landing page
 When user performs plan search using following information in AARP site
@@ -171,16 +175,16 @@ And the user fill following information in plan payment options step in AARP sit
   | planpaymentoption |<planpaymentoption>|
 And the user navigates to proposed effective date page
 And the user selects proposed effective date
-     |EffectiveDate     | <effectiveDate>   |
 | Plan Type | <planType> |
 And the user navigates to review and submit application step in AARP site
+| Plan Type | <planType> |
 And the user reviews the information on review and submit application step in AARP site
 | Plan Type | <planType> |
 |agreeStmtUnderstanding|<agreeStmtUnderstanding>|
 |authRepresent| <authRepresent>|  
 Then the user navigates to Confirmation Page
-And the user clicks on print this page button
+#And the user clicks on print this page button
 Examples:
-|zipcode |countyName          | planType  | planName                       |firstName|middleInitial|lastName| medicareClaimNumber|hospitalEffectiveDate |  medicalEffectiveDate  | emailAddress |mainPhoneNumber | otherPhoneNumber |birthDate    |selectedGender |languagePreference |address |  city    | apartment |sep1|sep2|sep4|sep5|sep6|sep7|sep8|sep9|sepOther| sepDate1 | sepDate2    | sepDate5  | sepDate6    |sepOtherReason |esrdradiooption |pdcradiooption |pdchealthinsurname|pdcgroupidnumber|pdcmemberidnumber|ltcradiooption |ltcname|ltcstreetaddr|ltcapt|ltccity|ltcphonenum |ltcdatemoved|planpaymentoption|effectiveDate|agreeStmtUnderstanding|authRepresent|
-|90210   |Los Angeles County  | PDP       |AARP MedicareRx Preferred (PDP) | First   |  m          |  last  | 112-11-1117-A      |07/01/1988            |      07/01/1988        | test@uhc.com | 999-991-1111   | 999-991-1111     | 12-20-1950  |Male           |Spanish            |1234    | Colorado | UHG       |No  |Yes |No  |No  |No  |No  |No  |No  |No      | 02/15/2016| 02/15/2016 |02/15/2016 | 02/15/2016  |Test           |No              |Yes            | abc              |abc             |123              |Yes            |first  |123          |1     |abc    |666-666-6666|12-20-1982   |  No            |10-01-2016   |Agree|Agree|
-	 
+|zipcode |countyName          | planType  | planName                       |firstName|middleInitial|lastName| medicareClaimNumber|hospitalEffectiveDate |  medicalEffectiveDate  | emailAddress |mainPhoneNumber | otherPhoneNumber |birthDate    |selectedGender |languagePreference |address |  city    | apartment |sep1|sep2|sep4|sep5|sep6|sep7|sep8|sep9|sepOther| sepDate1 | sepDate2    | sepDate5  | sepDate6    |sepOtherReason |esrdradiooption |pdcradiooption |pdchealthinsurname|pdcgroupidnumber|pdcmemberidnumber|ltcradiooption |ltcname|ltcstreetaddr|ltcapt|ltccity|ltcphonenum |ltcdatemoved|planpaymentoption|agreeStmtUnderstanding|authRepresent|
+#|90210   |Los Angeles County  | PDP       |AARP MedicareRx Preferred (PDP) | First   |  m          |  last  | 112-11-1117-A      |07/01/1988            |      07/01/1988        | test@uhc.com | 999-991-1111   | 999-991-1111     | 12-20-1950  |Male           |Spanish            |1234    | Colorado | UHG       |No  |Yes |No  |No  |No  |No  |No  |No  |No      | 02/15/2016| 02/15/2016 |02/15/2016 | 02/15/2016  |Test           |No              |Yes            | abc              |abc             |123              |Yes            |first  |123          |1     |abc    |666-666-6666|12-20-1982   |  No           |Agree|Agree|
+

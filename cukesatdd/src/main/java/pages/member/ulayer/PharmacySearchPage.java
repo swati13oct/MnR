@@ -6,6 +6,7 @@ package pages.member.ulayer;
 import java.util.List;
 import java.util.Map;
 
+import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -15,13 +16,14 @@ import org.openqa.selenium.support.ui.Select;
 
 import acceptancetests.atdd.util.CommonUtility;
 import atdd.framework.UhcDriver;
+import acceptancetests.atdd.data.MRConstants;
 
 /**
  * @author pperugu
  *
  */
 public class PharmacySearchPage extends UhcDriver{
-
+	
 	@FindBy(id = "zipCode")
 	private WebElement zipcodeField;
 
@@ -69,7 +71,7 @@ public class PharmacySearchPage extends UhcDriver{
 	
 	@FindBy(xpath = "//*[@id='subPageLeft']/div[2]/div[2]/div[2]/div/h3[2]/a")
 	private WebElement createPdfLink;
-
+	
 	public PharmacySearchPage(WebDriver driver){
 		super(driver);
 		PageFactory.initElements(driver, this);
@@ -274,5 +276,6 @@ public class PharmacySearchPage extends UhcDriver{
 		System.out.println("CreatePdf clicked");
 		return new PharmacySearchPage(driver);
 	}
+	
 
 }

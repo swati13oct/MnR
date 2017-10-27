@@ -2,6 +2,7 @@ package pages.member.ulayer;
 
 import java.util.List;
 
+import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -14,8 +15,15 @@ import acceptancetests.atdd.util.CommonUtility;
 import atdd.framework.UhcDriver;
 
 public class EstimateYourDrugCostPage extends UhcDriver {
+	
+	@FindBy(xpath = ".//*[@id='dceMemberUlayer']/div/div[1]/div[2]/div[2]/span")
+	private WebElement yearToogle; 
+	
+	@FindBy(xpath = ".//*[@id='dceMemberUlayer']/div/div[1]/div[2]/div[2]/span/strong/span[1]")
+	private WebElement currentYear;
+	
 	@FindBy(className = "y2015")
-	private WebElement planYear2017;
+	private WebElement nextYear;
 	
 	@FindBy(xpath = "/html/body/div[7]/div/div/table/tbody/tr[5]/td/div[4]/div/div[6]/div[1]/div[3]/div/div/div/div[1]/div/div/div[1]/div[2]/div[2]/span/strong/span[1]")
 	private WebElement planYear2016;
@@ -36,9 +44,11 @@ public class EstimateYourDrugCostPage extends UhcDriver {
 	public ManageDrugPage continueToSearchDrug(String planYear, String planName) {
 		validate(continueToManageDrugList);
 		
-		if (validate(planYear2017)){		
+		if (validate(yearToogle)){		
 			if (planYear.equals("2017")){
-				planYear2017.click();
+				currentYear.click();
+			}else{
+				nextYear.click();
 			}
 			try {
 				Thread.sleep(5000);
@@ -58,7 +68,10 @@ public class EstimateYourDrugCostPage extends UhcDriver {
 			
 			continueToManageDrugList.click();
 		} else {
-			System.out.println("Did not find 2017 button");}
+			System.out.println("Did not find plan year button");
+			Assert.assertTrue("Server date is not changed", false);
+			
+		}
 			if (driver.getTitle().equalsIgnoreCase("Drug Lookup")) {
 				return new ManageDrugPage(driver);
 			} else {

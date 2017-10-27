@@ -65,14 +65,13 @@ And the user chooses a plan from dropdown in AARP site
 And the user clicks create pdf in AARP Site
 And the user searches for pharmacy available in AARP Site
 Then the user validates the pharmacies available in AARP Site
-
-Examples:
-	| plantype | zipCode | countyName    | distance |  planName			|
-	| PDP      | 80002   | Adams County  |	25   |  AARP MedicareRx Preferred (PDP) |
+#Examples:
+#	| plantype | zipCode | countyName    | distance |  planName			|
+#	| PDP      | 80002   | Adams County  |	25   |  AARP MedicareRx Preferred (PDP) |
 #	| PDP      | 80001   |		     |	25   |  AARP MedicareRx Preferred (PDP) |
 #	| MAPD	   | 80002   |		     |	25   |  AARP MedicareRx Preferred (PDP) |
 And the user enters zipcode and distance details for AARP Site
-        | Zip Code    | <zipCode>   |
+    | Zip Code    | <zipCode>   |
 	| Distance    | <distance>  |
 	| County      | <countyName>|
 And the user chooses a plan from dropdown in AARP site
@@ -124,3 +123,15 @@ Then the user validates the pharmacies available in AARP site
 Examples:
 	| plantype | year |  planName			                | pharmacyType						     |
 	| PDP      | 2016 |  AARP MedicareRx Saver Plus (PDP)   | Preferred Retail Pharmacy Network      | 
+
+	
+@changeTeambDate
+Scenario Outline:To change team-b environment date to view 2018 plan year.
+Given the user lands on teamb time admin page
+Then user resets the date to the given value
+ | Date | <date> |
+ 
+ Examples:
+ |date|
+ | 10/01/2017 10:01 |
+	
