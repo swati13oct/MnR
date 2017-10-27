@@ -1225,4 +1225,18 @@ Feature: To test plan benefits and Coverage on AARP site for Federal members
     | planType|
     | SHIP    |
       
+      
+      
+   @PrimaryCareProviderIndi
+    Scenario Outline: Verify the Promary Care provider  is in place on Benefits and Coverage page
+    Given registered member with following details logins in the member portal 
+       | Plan Type      | <planType>     |
+    Then the user navigates to Benefits and coverage page    
+    And the user validates the Primarycare Provider section
+    
+      Examples: 
+    | planType|
+    | MAPD    |
+   # | PDP     |
+   # | MA       |
 

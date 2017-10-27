@@ -158,6 +158,17 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 
 	@FindBy(className = "atdd-outpatientsurgery-title")
 	private WebElement OutpatientSurgeryCenter;
+	
+	@FindBy(xpath = "//*[@id='planBenefitsApp']/div/div[1]/div[6]/div/div[1]/div/h2/p")
+	private WebElement PrimaryCareProviderHeader;
+	@FindBy(xpath = "//*[@id='planBenefitsApp']/div/div[1]/div[6]/div/div[2]/div[1]/div/header/span")
+	private WebElement YourPrimaryCareProvider;
+	@FindBy(className = "changepcp-atdd")
+	private WebElement ChangeYourPcpButton;
+	@FindBy(xpath = "//*[@id='planBenefitsApp']/div/div[1]/div[6]/div/div[2]/div[2]/div")
+	private WebElement SearchforaPhysician;
+	@FindBy(className = "start-search-atdd")
+	private WebElement StartSearch;
 
 	@FindBy(xpath = "//*[@id='planBenefitsApp']/div[2]/div[3]/div/div/div/header/span")
 	private WebElement ParticipatingHospitalStays1;
@@ -818,6 +829,16 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 
 	}
 
+	
+	public void validatePrimaryCareProvider() {
+		// TODO Auto-generated method stub
+		validateNew(PrimaryCareProviderHeader);
+		validateNew(YourPrimaryCareProvider);
+		validateNew(ChangeYourPcpButton);
+		validateNew(SearchforaPhysician);
+		validateNew(StartSearch);
+		
+	}
 	public void validateNeedhelpheader() {
 
 		try {
@@ -950,5 +971,7 @@ public ValueAddedServicepage clickOnLearnMore() {
 		return null;
 		
 	}
+
+
 
 }
