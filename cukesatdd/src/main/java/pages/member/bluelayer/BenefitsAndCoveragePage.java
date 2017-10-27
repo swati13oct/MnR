@@ -190,16 +190,18 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 	
 	@FindBy(xpath = "//*[@id='planBenefitsApp']/div/div[1]/div[6]/div/div[2]/div[1]/div/header/span")
 	private WebElement YourPrimaryCareProvider;
+	
 	@FindBy(className = "changepcp-atdd")
 	private WebElement ChangeYourPcpButton;
+	
 	@FindBy(xpath = "//*[@id='planBenefitsApp']/div/div[1]/div[6]/div/div[2]/div[2]/div")
 	private WebElement SearchforaPhysician;
+	
 	@FindBy(className = "start-search-atdd")
 	private WebElement StartSearch;
 	
 	@FindBy(className = "atdd-bncsummary-primarycareprvdrheader")
 	private WebElement PrimaryCareProviderHeader;
-
 
    @FindBy(className= "atdd-bncsummary-primarycareprvdrheader")
 	private WebElement PrimaryCareProviderHeaderHMO;
