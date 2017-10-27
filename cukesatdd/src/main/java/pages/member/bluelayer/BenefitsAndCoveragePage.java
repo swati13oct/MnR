@@ -203,6 +203,16 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 
    @FindBy(className= "atdd-bncsummary-primarycareprvdrheader")
 	private WebElement PrimaryCareProviderHeaderHMO;
+   
+   @FindBy(xpath= "//*[@id='planBenefitsApp']/div[1]/div/div[4]/div/div[1]/div/div/div/div/div/h3/span")
+ 	private WebElement OutofPocketMaximum;
+   
+   @FindBy(className = "atdd-innetwrk-title")
+ 	private WebElement INNETWORK;
+
+  @FindBy(className= "atdd-outnetwrktitle")
+ 	private WebElement OUTOFNETWORK;
+    
 	
 	
 
@@ -808,6 +818,14 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 	
 		validateNew(PrimaryCareProviderHeaderHMO);
 		
+		
+	}
+	
+	public void validateOutofPocketMax() {
+		
+		validateNew(OutofPocketMaximum);
+		validateNew(INNETWORK);
+		validateNew(OUTOFNETWORK);
 		
 	}
 
