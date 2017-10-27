@@ -441,7 +441,7 @@ public class ProfilePreferencesPage extends UhcDriver {
 			e.printStackTrace();
 		}
 		SaveButton.click();
-		if (passworderrormessage3.getText().contentEquals("Please enter the same value again.")) {
+		if (passworderrormessage3.getText().contentEquals("Please Enter the same value again.")) {
 			System.out.println("The element" + passworderrormessage3.getText() + "is found");
 			return true;
 		} else {
@@ -565,6 +565,12 @@ public class ProfilePreferencesPage extends UhcDriver {
 	public void validateseemorewaystext() {
 		JavascriptExecutor jse = (JavascriptExecutor) driver;
 		jse.executeScript("window.scrollBy(0,4000)", "");
+                try {
+			Thread.sleep(20000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		validate(Seemorewaystext);
 	}
 
