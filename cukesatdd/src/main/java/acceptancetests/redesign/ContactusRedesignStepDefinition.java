@@ -76,8 +76,8 @@ public class ContactusRedesignStepDefinition {
 						contactUsPage);
 		}
 		
-		@Then("^user validates secure email widget UI in redesign contact us page$")
-		public void user_validates_email_widget_UIPage()
+		@Then("^user validates secure email widget in contact us page$")
+		public void user_validateSendUaQuestionWidget_UIPage()
 		{
 			ContactUsPage contactusPage=(ContactUsPage)getLoginScenario().getBean(PageConstants.CONTACT_US_PAGE);
 			
@@ -210,19 +210,19 @@ public class ContactusRedesignStepDefinition {
 			
 		}
 
-		/*@When("^the user validates the contact us redesign  page in AARP site$")
-		public void validates_contactUs_Redesign_Page() {
+		@When("^the user validates the contact us redesign  page in AARP site$")
+		public void the_user_validates_the_contact_us_redesign_page_in_AARP_site() {
 			
 			TestHarnessPage testHarnessPage = (TestHarnessPage) getLoginScenario().getBean(PageConstants.TEST_HARNESS_PAGE);
 			
-			ContactUsPage contactUsPage = testHarnessPage.navigateToUlayerContactUsPage();
+			ContactUsPage contactUsPage = testHarnessPage.navigateToContactUsPage();
 			if(contactUsPage != null)				
 				getLoginScenario().saveBean(PageConstants.CONTACT_US_PAGE,
 						contactUsPage);
 		}
 		
 		@Then("^user validates secure email widget UI in redesign contact us page$")
-		public void user_validates_email_widget_UIPage()
+		public void user_validates_secure_email_widget_UI_in_redesign_contact_us_page()
 		{
 			ContactUsPage contactus=(ContactUsPage)getLoginScenario().getBean(PageConstants.CONTACT_US_PAGE);
 			
@@ -230,8 +230,8 @@ public class ContactusRedesignStepDefinition {
 			
 		}
 		
-		@Then("^user validates secure email widget functionality in redesign contact us page$")
-		public void user_validates_email_widget_func()
+		@Then("^user validates secure email widget in redesign contact us page$")
+		public void user_validates_secure_email_widget_functionality_in_redesign_contact_us_page()
 		{
 			ContactUsPage contactusPage=(ContactUsPage)getLoginScenario().getBean(PageConstants.CONTACT_US_PAGE);
 			
@@ -241,7 +241,7 @@ public class ContactusRedesignStepDefinition {
 				getLoginScenario().saveBean(PageConstants.CONTACT_US_PAGE,
 						contactusPage);
 			
-		}*/
+		}
 		
 		@Then("^user validates secure email widget functionality using Email Address on File radio button$")
 		public void user_validates_email_widget_func_byEmailAddress_Radio_button()

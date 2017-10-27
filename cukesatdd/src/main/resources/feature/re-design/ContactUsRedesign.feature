@@ -192,7 +192,7 @@ Feature: To test Send us a question Widget and Click to call functionality in co
       | Password    | <password>   |
       | Member Type | <memberType> |
     When the user validates the contact us redesign  page in AARP site
-    Then user validates secure email widget functionality in redesign contact us page
+    Then user validates secure email widget in contact us page
 
     Examples: 
       | userName       |  | password   | memberType |
