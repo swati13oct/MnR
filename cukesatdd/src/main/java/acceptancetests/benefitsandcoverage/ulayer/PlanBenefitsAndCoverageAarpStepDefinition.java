@@ -980,7 +980,12 @@ public class PlanBenefitsAndCoverageAarpStepDefinition {
 				.getBean(PageConstants.BENEFITS_AND_COVERAGE_PAGE);
 		benefitsnCoveragepage.validatePrimaryCareProvider();
 	}	
-	
+	@And("the user validates the Out of Pocket Max section")
+	public void user_validate_OutofPocket() {
+		BenefitsAndCoveragePage benefitsnCoveragepage = (BenefitsAndCoveragePage) getLoginScenario()
+				.getBean(PageConstants.BENEFITS_AND_COVERAGE_PAGE);
+		benefitsnCoveragepage.validateOutofPocketMax();
+	}
 	
 	@And("^the user validate Value Add Service page$")
 	public void validate_Value_Add_page()
@@ -999,5 +1004,7 @@ public class PlanBenefitsAndCoverageAarpStepDefinition {
 			.getBean(PageConstants.BENEFITS_AND_COVERAGE_PAGE);
 	benefitsnCoveragepage.learnmorebutton();
 	}
+        
+        
 
 	}

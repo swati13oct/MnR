@@ -241,6 +241,16 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 
 	@FindBy(xpath = ".//*[@id='planBenefitsApp']/div/div/div/div/div/div[2]/a")
 	private WebElement learnmorebutton;
+	
+	
+	 @FindBy(xpath= "//*[@id='planBenefitsApp']/div[1]/div/div[4]/div/div[1]/div/div/div/div/div/h3/span")
+	 	private WebElement OutofPocketMaximum;
+	   
+ @FindBy(className = "atdd-innetwrk-title")
+	 	private WebElement INNETWORK;
+
+	  @FindBy(className= "atdd-outnetwrktitle")
+	 	private WebElement OUTOFNETWORK;
 
         @FindBy(className = "atdd-contact-us")
 	private WebElement contactUslink;
@@ -985,6 +995,13 @@ public ValueAddedServicepage clickOnLearnMore() {
 		return null;
 		
 	}
+
+public void validateOutofPocketMax() {
+	// TODO Auto-generated method stub
+	validateNew(OutofPocketMaximum);
+	validateNew(INNETWORK);
+	validateNew(OUTOFNETWORK);
+}
 
 
 

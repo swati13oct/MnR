@@ -1239,4 +1239,20 @@ Feature: To test plan benefits and Coverage on AARP site for Federal members
     | MAPD    |
    # | PDP     |
    # | MA       |
+   
+        @OutOfPocketMax
+    Scenario Outline: Verify the out of pocket section is in place on Benefits and Coverage page
+    Given registered member with following details logins in the member portal 
+       | Plan Type      | <planType>     |
+    Then the user navigates to Benefits and coverage page    
+    And the user validates the Out of Pocket Max section
+    
+      Examples: 
+    | planType|
+    | MAPD    |
+   # | PDP     |
+   # | MA       |
+   
+    
+   
 

@@ -824,7 +824,6 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 	}
 	
 	public void validateOutofPocketMax() {
-		
 		validateNew(OutofPocketMaximum);
 		validateNew(INNETWORK);
 		validateNew(OUTOFNETWORK);

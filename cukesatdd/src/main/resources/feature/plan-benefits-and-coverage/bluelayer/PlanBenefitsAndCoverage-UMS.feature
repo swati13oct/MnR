@@ -1028,7 +1028,7 @@ Examples:
  
       
        @OutOfPocketMax
-    Scenario Outline: Verify the Promary Care provider  is in place on Benefits and Coverage page
+    Scenario Outline: Verify the out of pocket section is in place on Benefits and Coverage page
     Given registered member with following details logins in the member portal 
        | Plan Type      | <planType>     |
     Then the user navigates to Benefits and coverage page    
