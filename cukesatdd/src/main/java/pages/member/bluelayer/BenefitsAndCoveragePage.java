@@ -520,6 +520,18 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 	}
 
 	public void validate_dropdownnotdisplay() {
+                try {
+			Thread.sleep(30000);
+		} catch (InterruptedException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		if (DrugCostDropdown.isDisplayed()) {
+			Assert.fail("The element" + DrugCostDropdown.getText() + "should not display");
+			System.out.println("The element " + DrugCostDropdown.getText() + "should not display");
+		} else {
+			Assert.assertTrue(true);
+		}
 		if (DrugCostDropdown.isDisplayed()) {
 			Assert.fail("The element" + DrugCostDropdown.getText() + "should not display");
 			System.out.println("The element " + DrugCostDropdown.getText() + "should not display");
