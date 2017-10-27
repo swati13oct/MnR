@@ -92,6 +92,16 @@ public class MRScenario {
 	private static final String DIRECTORY = "/src/main/resources/";
 	public static int count = 0;
 
+	
+	public static final String USERNAME = "ucpadmin";
+	
+	public static final String ACCESS_KEY = "2817affd-616e-4c96-819e-4583348d7b37";
+
+	
+	//public static final String USERNAME = System.getenv("SAUCE_USERNAME");
+	//public static final String ACCESS_KEY = System.getenv("SAUCE_ACCESS_KEY");
+
+	
 	public void saveBean(String id, Object object) {
 		scenarioObjectMap.put(id, object);
 	}
@@ -884,54 +894,57 @@ public class MRScenario {
 	 * two lines to your config file: 
 	 * 
 	 *  WebDriver=PHANTOMJS
-      * BrowserPathToBinary=C:\\Apps\\phantomjs-2.1.1-windows\\bin\\phantomjs.exe
-      * 
-      * or for Fire Fox:
-      * 
-      * WebDriver=FIREFOX
-      * BrowserPathToBinary=C:\\Program Files (x86)\\Mozilla Firefox\\firefox.exe
-      * 
-      * Of course your path to the binary will be different.
-      * 
-      * PhantomJS supports mimicking browsers.  By changing the agentString, one can spoof
-      * a browser type for example, this is a desktop string:
-      * 
-      * Mozilla/5.0 (Windows NT 6.0) AppleWebKit/535.1 (KHTML, like Gecko) Chrome/13.0.782.41 Safari/535.1
-      * 
-      * Using this string causes PhantomJS to act like a desktop browser and will access desktop versions of websites.
-      * This is a mobile string:
-      * 
-      * Mozilla/5.0 (Linux; U; Android 2.3.3; en-us; LG-LU3000 Build/GRI40) AppleWebKit/533.1 (KHTML, like Gecko) Version/4.0 Mobile Safari/533.1
-      * 
-      * Using this string makes PhantomJS identfy itself as a mobile browser (on a mobile device) and will allow you to use the mobile versions
-      * of websites.
-      * 
-      * By default, When a job is run in Jenkins, the values defines in Jenkins will override values in the config file, but will not change them.  If you 
-      * look at the Jenkins job, it specifies a browser type and it should be PhantomJS.
-      * Anything else may be a problem.
-      */
-	
+	 * BrowserPathToBinary=C:\\Apps\\phantomjs-2.1.1-windows\\bin\\phantomjs.exe
+	 * 
+	 * or for Fire Fox:
+	 * 
+	 * WebDriver=FIREFOX
+	 * BrowserPathToBinary=C:\\Program Files (x86)\\Mozilla Firefox\\firefox.exe
+	 * 
+	 * Of course your path to the binary will be different.
+	 * 
+	 * PhantomJS supports mimicking browsers.  By changing the agentString, one can spoof
+	 * a browser type for example, this is a desktop string:
+	 * 
+	 * Mozilla/5.0 (Windows NT 6.0) AppleWebKit/535.1 (KHTML, like Gecko) Chrome/13.0.782.41 Safari/535.1
+	 * 
+	 * Using this string causes PhantomJS to act like a desktop browser and will access desktop versions of websites.
+	 * This is a mobile string:
+	 * 
+	 * Mozilla/5.0 (Linux; U; Android 2.3.3; en-us; LG-LU3000 Build/GRI40) AppleWebKit/533.1 (KHTML, like Gecko) Version/4.0 Mobile Safari/533.1
+	 * 
+	 * Using this string makes PhantomJS identfy itself as a mobile browser (on a mobile device) and will allow you to use the mobile versions
+	 * of websites.
+	 * 
+	 * By default, When a job is run in Jenkins, the values defines in Jenkins will override values in the config file, but will not change them.  If you 
+	 * look at the Jenkins job, it specifies a browser type and it should be PhantomJS.
+	 * Anything else may be a problem.
+	 */
+
 	public WebDriver getWebDriver() {
 
-        //Is system propery exists defining JENKINS_BROWSER, we're running in JENKINS and
+		//Is system propery exists defining JENKINS_BROWSER, we're running in JENKINS and
 		//will prefer those browser properties.
 		String browser = (null == System.getProperty(CommonConstants.JENKINS_BROWSER)
 				? props.get(CommonConstants.DESKTOP_WEBDRIVER) : System.getProperty(CommonConstants.JENKINS_BROWSER));
-		
-		
+
+		String browserName = (null == System.getProperty(CommonConstants.BROWSER_NAME)
+				? props.get("BrowserName") : System.getProperty(CommonConstants.BROWSER_NAME));
+
+
 		String agent = (null == System.getProperty(CommonConstants.JENKINS_BROWSER_AGENT_STRING)
 				? props.get(CommonConstants.DESKTOP_BROWSER_AGENT_STRING) : System.getProperty(CommonConstants.JENKINS_BROWSER_AGENT_STRING));
-		
-		
+
+
 		if (browser.equalsIgnoreCase(CommonConstants.JENKINS_BROWSER_PHANTOMJS)) {
 			System.out.println("PHANTOMJS Agent: " + agent);
 		}
-		
+
 		// Again, Jenkins takes precedent. 
 		String pathToBinary = (null == System.getProperty("phantomjs") ? props.get("BrowserPathToBinary")
 				: System.getProperty("phantomjs"));
-		
-		
+
+
 		System.out.println("getWebDriver: returning driver for " + browser);
 		// if webDriver is null, create one, otherwise send the existing one
 		// back.
@@ -939,9 +952,14 @@ public class MRScenario {
 		// take screenshots at the end.
 		if (null == webDriver) {
 			System.out.println("New WebDriver CREATED");
+<<<<<<< HEAD
 			String browserName =props.get("BrowserName");
 			System.out.println("browserName:: " +browserName);
 			
+=======
+
+
+>>>>>>> remotes/origin/develop
 			// Choose your browser based on name. The name value is what is in
 			// CommonConstants.
 			// If the browser isn't configured (null) or it's set to HTMLUNIT,
@@ -971,7 +989,7 @@ public class MRScenario {
 				caps.setJavascriptEnabled(true);
 				caps.setCapability(PhantomJSDriverService.PHANTOMJS_CLI_ARGS,
 						new String[] { "--web-security=no", "--ignore-ssl-errors=yes", "--ssl-protocol=any" });
-				
+
 				//end from jarvis
 				webDriver = new PhantomJSDriver(caps);
 				webDriver.manage().window().setSize(new Dimension(1400,1000));
@@ -1010,6 +1028,7 @@ public class MRScenario {
 				return webDriver;
 			}else if (browser.equalsIgnoreCase(CommonConstants.SAUCE_BROWSER_WEB)) {
 				System.out.println("Execution is Going to Start on SauceLabs Web.....!!!!!");
+<<<<<<< HEAD
                 DesiredCapabilities capabilities = null;
                 if(browserName.equalsIgnoreCase("firefox")){
                 	System.out.println("Inside firefox");
@@ -1116,10 +1135,84 @@ public class MRScenario {
  	              }
                      return webDriver;
 		}
+=======
+				DesiredCapabilities capabilities = null;
+				if(browserName.equalsIgnoreCase("firefox")){
+					//System.out.println("Inside firefox");
+					capabilities = DesiredCapabilities.firefox();
+					capabilities.setCapability("platform", "Windows 7");
+					capabilities.setCapability("version", "48");
+					capabilities.setCapability("idleTimeout", 180);
+				}else if(browserName.equalsIgnoreCase("IE")){
+					capabilities = DesiredCapabilities.internetExplorer();
+					capabilities.setCapability("platform", "Windows 7");
+					capabilities.setCapability("version", "11.0");
+					capabilities.setCapability("screenResolution", "1024x768");
+				}else if(browserName.equalsIgnoreCase("chrome")){
+					System.out.println("Inside chrome");
+					capabilities = DesiredCapabilities.chrome();
+					capabilities.setCapability("platform", "Windows 7");
+					capabilities.setCapability("version", "52.0");
+					capabilities.setCapability("screenResolution", "800x600");
+				}
+				capabilities.setCapability("autoAcceptsAlerts", true);
+				capabilities.setCapability("parent-tunnel", "sauce_admin");
+				capabilities.setCapability("tunnelIdentifier", "OptumSharedTunnel-Prd");
+				capabilities.setCapability("build", System.getenv("JOB_NAME") + "__" + System.getenv("RUNNER_NUMBER"));
+				String URL = "http://" + USERNAME + ":" + ACCESS_KEY + "@ondemand.saucelabs.com:80/wd/hub";
+				String jobName = "MnR test Execution of [" +System.getProperty("test")  +":] - Using " + capabilities.getBrowserName() + " in  " + environment +" environment";
+				capabilities.setCapability("name", jobName);
+				if (USERNAME == null || ACCESS_KEY == null) {
+					Assert.fail(
+							"Missing value for environment variable(s) SAUCE_USERNAME or SAUCE_ACCESS_KEY.  Check environment configuration and try again");
+				}
+				try {
+					webDriver = new RemoteWebDriver(new URL(URL), capabilities);
+				} catch (MalformedURLException e) {
+					Assert.fail("Invalid Sauce URL: [" + URL + "]");
+				}
+				return webDriver;
+			}
+			//https://wiki.saucelabs.com/display/DOCS/Platform+Configurator#/
+			else if (browser.equalsIgnoreCase(CommonConstants.SAUCE_BROWSER_MOBILE)){
+				System.out.println("Execution is Going to Start on SauceLabs Mobile.....!!!!!");
+				DesiredCapabilities capabilities = null;
+				if(browserName.equalsIgnoreCase("Safari")){
+					capabilities = DesiredCapabilities.iphone();
+				}else{
+					capabilities = DesiredCapabilities.android();
+				}
+				System.out.println(props.get(CommonConstants.DEVICE_VERSION)+" "+props.get(CommonConstants.DEVICE_NAME)+" "
+						+""+props.get(CommonConstants.PLATFORM_VERSION)+" "+props.get(CommonConstants.PLATFORM_NAME)+" "+browserName);
+				capabilities.setCapability("appiumVersion", props.get(CommonConstants.DEVICE_VERSION));
+				capabilities.setCapability("deviceName",props.get(CommonConstants.DEVICE_NAME));
+				capabilities.setCapability("deviceOrientation", "portrait");
+				capabilities.setCapability("browserName", browserName);
+				capabilities.setCapability("platformVersion", props.get(CommonConstants.PLATFORM_VERSION));
+				capabilities.setCapability("platformName",props.get(CommonConstants.PLATFORM_NAME));        		    
+				capabilities.setCapability("autoAcceptsAlerts", true);
+				capabilities.setCapability("parent-tunnel", "sauce_admin");
+				capabilities.setCapability("tunnelIdentifier", "OptumSharedTunnel-Prd");
+				String USERNAME = "apriyad4";
+				String ACCESS_KEY = "6e1345f1-80ea-4863-8573-187bf3151ac0";
+				String URL = "http://" + USERNAME + ":" + ACCESS_KEY + "@ondemand.saucelabs.com:80/wd/hub";
+				if (USERNAME == null || ACCESS_KEY == null) {
+					Assert.fail(
+							"Missing value for environment variable(s) SAUCE_USERNAME or SAUCE_ACCESS_KEY.  Check environment configuration and try again");
+				}
+				try {
+					webDriver = new RemoteWebDriver(new URL(URL), capabilities);
+				} catch (MalformedURLException e) {
+					Assert.fail("Invalid Sauce URL: [" + URL + "]");
+				}
+				return webDriver;
+			}
+>>>>>>> remotes/origin/develop
 		}
 		return webDriver;
 	}
 
+<<<<<<< HEAD
 	 /**
      * Fills the deivce Id from config.properties file
      * @param deviceId
@@ -1135,6 +1228,8 @@ public class MRScenario {
    	 return devices.get(deviceName);
     }
 
+=======
+>>>>>>> remotes/origin/develop
 	public WebDriver getIEDriver() {
 		System.setProperty("webdriver.ie.driver",
 				"C:/Users/pgupta15/Downloads/IEDriverServer_x64_2.27.0/IEDriverServer.exe");

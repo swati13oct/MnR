@@ -385,6 +385,6 @@ public class PageConstants {
 	
 	public static final String RESPONSIVE_PLAN_SUMMARY_PAGE_UHC = "vppPlan";
 
-	
+	public static final String REGISTRATION_INFORMATION_PAGE = "RegistrationInformationPage";
 
 }

@@ -321,19 +321,19 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		sendkeys(zipCodeField, zipcode);
 		
 		viewPlansButton.click();
-		try {
-			if (countyModal.isDisplayed()) {
-				for (WebElement county : countyRows) {
-					if (county.getText().equalsIgnoreCase(countyName)) {
-						county.click();
-						break;
-					}
-
-				}
-			}
-		} catch (Exception e) {
-			System.out.println("county box not found");
-		}
+//		try {
+//			if (countyModal.isDisplayed()) {
+//				for (WebElement county : countyRows) {
+//					if (county.getText().equalsIgnoreCase(countyName)) {
+//						county.click();
+//						break;
+//					}
+//
+//				}
+//			}
+//		} catch (Exception e) {
+//			System.out.println("county box not found");
+//		}
 
 		if (getTitle()
 				.contains(
@@ -346,19 +346,19 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	public VPPPlanSummaryPage searchPlansForLearnFindPlans(String zipcode, String countyName) {
 		sendkeys(learnzipCodeField, zipcode);
 		learnfindPlansButton.click();
-		try {
-			if (countyModal.isDisplayed()) {
-				for (WebElement county : countyRows) {
-					if (county.getText().equalsIgnoreCase(countyName)) {
-						county.click();
-						break;
-					}
-
-				}
-			}
-		} catch (Exception e) {
-			System.out.println("county box not found");
-		}
+//		try {
+//			if (countyModal.isDisplayed()) {
+//				for (WebElement county : countyRows) {
+//					if (county.getText().equalsIgnoreCase(countyName)) {
+//						county.click();
+//						break;
+//					}
+//
+//				}
+//			}
+//		} catch (Exception e) {
+//			System.out.println("county box not found");
+//		}
 		if (getTitle().equalsIgnoreCase(PageTitleConstants.ULAYER_PLAN_SUMMARY_PAGE_TITLE)) {
 			return new VPPPlanSummaryPage(driver);
 		}

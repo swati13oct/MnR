@@ -62,10 +62,10 @@ public class IntroductionInformationPage extends UhcDriver{
 	public IntroductionInformationPage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
-		String fileName = CommonConstants.INTRODUCTION_INFORMATION_PAGE_DATA;
-		introductionInformation = CommonUtility.readPageData(fileName,
-				CommonConstants.PAGE_OBJECT_DIRECTORY_ULAYER_ACQ);
-		openAndValidate();
+//		String fileName = CommonConstants.INTRODUCTION_INFORMATION_PAGE_DATA;
+//		introductionInformation = CommonUtility.readPageData(fileName,
+//				CommonConstants.PAGE_OBJECT_DIRECTORY_ULAYER_ACQ);
+//		openAndValidate();
 	}
 
 	@Override
@@ -143,5 +143,17 @@ public class IntroductionInformationPage extends UhcDriver{
 			e.printStackTrace();
 		}
         return new BeneficiaryInformationPage(driver);
+	}
+	
+	@FindBy(id = "beginOnlineEnrollmentBtn")
+	private WebElement beginOnlineEnrBtn;
+	
+	public boolean validateIntroPage(){
+		boolean flag = false;
+		if(validate(firstNameField) && validate(middleInitialField) && validate(lastNameField) &&validate(claimNumberField) &&
+		   validate(partAStartDateField)&&validate(partBStartDateField)&&validate(viewEnrollDisclaimer) && !validate(beginOnlineEnrBtn)){
+			flag = true;
+		}
+		return flag;
 	}
 }
