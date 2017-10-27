@@ -1,6 +1,7 @@
-@goGreen
+@velocityDashers
 Feature: To test go green splash page
 
+  @goGreen
   Scenario Outline: Verify go green splash page
     Given I am a Federal member on the member redesign registration page
       | MemberId | <memberId> |
@@ -15,6 +16,7 @@ Feature: To test go green splash page
       | 003072377-1  |  | 07/10/1930 |
       | 374578451-11 |  | 03/01/1949 |
 
+  @goGreen
   Scenario Outline: Verify go green splash page for COMBO member
     Given I am a Federal member on the member redesign registration page
       | MemberId | <memberId> |
@@ -28,6 +30,7 @@ Feature: To test go green splash page
       | memberId    |  | dob        |
       | 972430828-1 |  | 18/03/1942 |
 
+  @goGreen
   Scenario Outline: Verify plan name on Go Green splash page for Texas ERS member
     Given I am a Federal member on the member redesign registration page
       | MemberId | <memberId> |
@@ -38,10 +41,11 @@ Feature: To test go green splash page
 
     Examples: 
       | memberId     |  | dob        | planName                                             |
-      #| 018840597-1  |  | 02/24/1937 | HealthSelectSM Medicare RX (PDP)                     |
+      | 018840597-1  |  | 02/24/1937 | HealthSelectSM Medicare RX (PDP)                     |
       | 003072377-1  |  | 07/10/1930 | AARP MedicareComplete SecureHorizons Essential (HMO) |
       | 374578451-11 |  | 03/01/1949 | AARP MEDICARE SUPPLEMENT PLAN                        |
 
+  @goGreen
   Scenario Outline: Verify go green splash error message on page
     Given I am a Federal member on the member redesign registration page
       | MemberId | <memberId> |
