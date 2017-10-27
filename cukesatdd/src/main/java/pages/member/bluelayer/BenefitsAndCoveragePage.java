@@ -46,7 +46,7 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 	@FindBy(className = "atdd-contact-us")
 	private WebElement contactUslink;
 	
-	@FindBy(xpath = "html/body/div[2]/div[3]/div/div[2]/div[1]/div[2]/section/div/div[3]/div/p")
+	@FindBy(xpath = "html/body/div[2]/div[4]/div[1]/div[2]/section[2]/div/div[3]/div/p")
 	private WebElement Seemorewaystext;
 	
 	@FindBy(className = "atdd-need-help")
@@ -304,9 +304,17 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 	}
 
 
-	public void validatecontactussection() {
-	
-			if (Contactussection.getText().contains("See more ways to contact us")) {
+	public void validatecontactussection() 
+        {
+                        try {
+			Thread.sleep(20000);
+		        } 
+                        catch (InterruptedException e) 
+                        {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		        }
+	                if (Contactussection.getText().contains("See more ways to contact us")) {
 				System.out.println("contactus section is coming ");
 				Assert.assertTrue(true);
 			} else
@@ -319,13 +327,14 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 		public void  contactUslink() {
 		validate(contactUslink);
 		contactUslink.click();
-		System.out.println("Title is " + getTitle());
+		
 		try {
 			Thread.sleep(20000);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+            System.out.println("Title is " + getTitle());
 	    Assert.assertTrue(getTitle().equalsIgnoreCase("Contact Us"));
 		
 	

@@ -222,9 +222,7 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 	@FindBy(xpath = "//*[@id='planBenefitsApp']/section/div/div[2]/div[2]/div[1]/div/div[1]/div/span")
 	private WebElement ExtraHelp;
 
-
-
-	@FindBy(xpath = "//*[@id='planBenefitsApp']/section/div/div[2]/div[4]/button")
+        @FindBy(xpath = "//*[@id='planBenefitsApp']/section/div/div[2]/div[4]/button")
 	private WebElement MakePaymentButton;
 
 	@FindBy(xpath = ".//*[@id='planBenefitsApp']/div/div/div/div/div/div[2]/a")
@@ -239,7 +237,7 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 	@FindBy(className = "atdd-need-help")
 	private WebElement NeedHelpHeader;
 
-	@FindBy(xpath = "html/body/div[2]/div[3]/div/div[2]/div[1]/div[2]/section/div/div[3]/div/p")
+	@FindBy(xpath = "html/body/div[2]/div[4]/div[1]/div[2]/section[2]/div/div[3]/div/p")
 	private WebElement Contactussection;
 
 	@FindBy(className = "atdd-needhelp-disclaimer-text")
@@ -841,6 +839,12 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 
 	public void validatecontactussection() {
 
+                try {
+				Thread.sleep(30000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		if (Contactussection.getText().contains("See more ways to contact us")) {
 			System.out.println("contactus section is coming ");
 			Assert.assertTrue(true);
