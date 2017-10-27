@@ -29,13 +29,9 @@ public class MRConstants {
 	public static final String REDESIGN_UHCM_URL = "https://member."+MRScenario.environment+"-uhcmedicaresolutions.uhc.com/content/medicare/member/contact-us/overview.html";
 	
 	//public static final String AARP_URL = "https://www.awe-"+MRScenario.environment+"-aarpmedicareplans.uhc.com/";
-<<<<<<< HEAD
-	public static final String AARP_URL = "https://www.awe-"+MRScenario.environment+"-aarpmedicareplans.uhc.com/";
 	
 	public static final String AARP_PDP_REQUEST_MORE_HELP_AND_INFORMATION_URL = "https://www.awe-"+MRScenario.environment+"-aarpmedicareplans.uhc.com/health-plans/prescription-drug-plans/request-information.html";
-=======
 	public static final String AARP_URL = "https://www."+MRScenario.environment+"-aarpmedicareplans.uhc.com/";
->>>>>>> remotes/origin/develop
 
 	public static final String AARP_MA_REQUEST_MORE_HELP_AND_INFORMATION_URL = "https://www.awe-"+MRScenario.environment+"-aarpmedicareplans.uhc.com/health-plans/medicare-advantage-plans/request-information.html";
 	

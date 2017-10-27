@@ -952,14 +952,9 @@ public class MRScenario {
 		// take screenshots at the end.
 		if (null == webDriver) {
 			System.out.println("New WebDriver CREATED");
-<<<<<<< HEAD
-			String browserName =props.get("BrowserName");
-			System.out.println("browserName:: " +browserName);
+			/*String browserName =props.get("BrowserName");
+			System.out.println("browserName:: " +browserName);*/
 			
-=======
-
-
->>>>>>> remotes/origin/develop
 			// Choose your browser based on name. The name value is what is in
 			// CommonConstants.
 			// If the browser isn't configured (null) or it's set to HTMLUNIT,
@@ -1028,7 +1023,6 @@ public class MRScenario {
 				return webDriver;
 			}else if (browser.equalsIgnoreCase(CommonConstants.SAUCE_BROWSER_WEB)) {
 				System.out.println("Execution is Going to Start on SauceLabs Web.....!!!!!");
-<<<<<<< HEAD
                 DesiredCapabilities capabilities = null;
                 if(browserName.equalsIgnoreCase("firefox")){
                 	System.out.println("Inside firefox");
@@ -1135,7 +1129,6 @@ public class MRScenario {
  	              }
                      return webDriver;
 		}
-=======
 				DesiredCapabilities capabilities = null;
 				if(browserName.equalsIgnoreCase("firefox")){
 					//System.out.println("Inside firefox");
@@ -1207,12 +1200,9 @@ public class MRScenario {
 				}
 				return webDriver;
 			}
->>>>>>> remotes/origin/develop
-		}
 		return webDriver;
-	}
+		}
 
-<<<<<<< HEAD
 	 /**
      * Fills the deivce Id from config.properties file
      * @param deviceId
@@ -1228,8 +1218,6 @@ public class MRScenario {
    	 return devices.get(deviceName);
     }
 
-=======
->>>>>>> remotes/origin/develop
 	public WebDriver getIEDriver() {
 		System.setProperty("webdriver.ie.driver",
 				"C:/Users/pgupta15/Downloads/IEDriverServer_x64_2.27.0/IEDriverServer.exe");

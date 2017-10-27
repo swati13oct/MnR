@@ -966,7 +966,6 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		}
 	}
 	
-<<<<<<< HEAD
 	public DrugCostEstimatorPage navigateToDCE(String plantype) {
 		try {
 			Thread.sleep(3000);
@@ -993,8 +992,8 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		if(currentUrl().contains("/estimate-drug-costs.html#/drug-cost-estimator"))
 			return new DrugCostEstimatorPage(driver);
 		return null;
+}
 		
-=======
 	public boolean validateVPPPlanSummaryPage() {
 
 		validate(vppTop);
@@ -1012,7 +1011,6 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		}
 		return false;
 
->>>>>>> remotes/origin/develop
 	}
 }
 
