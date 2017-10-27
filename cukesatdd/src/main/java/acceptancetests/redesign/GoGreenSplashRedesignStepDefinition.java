@@ -127,5 +127,25 @@ public class GoGreenSplashRedesignStepDefinition {
 				getLoginScenario().saveBean(PageConstants.GO_GREEN_SPLASH_PAGE,
 						goGreenSplashPage);
 		}
+		
+		@And("^validate the plan name$")
+		public void validate_the_plan_name(DataTable givenAttributes)
+		{
+			List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+			Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
+			for (int i = 0; i < memberAttributesRow.size(); i++) {
+			    memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0), memberAttributesRow.get(i).getCells().get(1));
+			}
+			// get parameter username and password
+			String planName = memberAttributesMap.get("PlanName");
+			
+			GoGreenSplashPage goGreenSplashPage = (GoGreenSplashPage) getLoginScenario().getBean(PageConstants.GO_GREEN_SPLASH_PAGE);
+			
+			goGreenSplashPage.validatePlanName(planName);
+			
+			if(goGreenSplashPage != null)				
+				getLoginScenario().saveBean(PageConstants.GO_GREEN_SPLASH_PAGE,
+						goGreenSplashPage);
+		}
 	}
 

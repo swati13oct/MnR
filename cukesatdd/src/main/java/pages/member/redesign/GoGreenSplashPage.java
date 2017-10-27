@@ -98,6 +98,10 @@ public class GoGreenSplashPage extends UhcDriver{
 		btnSavePreferences.click();
 	}
 	
+	public void validatePlanName(String planName){
+		Assert.assertEquals(planName.toLowerCase(),planNameHeading.getText().trim().toLowerCase());
+	}
+	
 	public void validateConfirmationMessage(){
 		waitforElement(successMessageHeading);
 		Assert.assertEquals("Your preferences have been updated",successMessageHeading.getText().trim());
