@@ -79,8 +79,7 @@ public class UNPWAssistancePage extends UhcDriver {
 	}
 
 	public UNPWAssistancePage UNPWinfoMissing() throws InterruptedException {
-		driver.navigate()
-				.to("https://member.team-c-aarpmedicareplans.uhc.com/content/medicare/login/reset.html#/start");
+
 		Thread.sleep(3000);
 		if (!UsenameBtn.isDisplayed()) {
 			Assert.fail("Username and password page not displayed!");
@@ -92,34 +91,32 @@ public class UNPWAssistancePage extends UhcDriver {
 	public UNPWAssistancePage FillDetails(String MemID, String DBmm,
 			String DBdd, String DByyyy, String LstName, String ZP)
 			throws InterruptedException {
-		driver.navigate()
-				.to("https://member.team-c-aarpmedicareplans.uhc.com/content/medicare/login/reset.html#/start");
+
 		Thread.sleep(3000);
 		UsenameBtn.click();
 		pwdBtn.click();
 		Thread.sleep(3000);
-		
-		JavascriptExecutor jse = (JavascriptExecutor) driver; 
+
+		JavascriptExecutor jse = (JavascriptExecutor) driver;
 		jse.executeScript("arguments[0].click();", ContinueButton);
-	//	ContinueButton.submit();
+		// ContinueButton.submit();
 		Thread.sleep(5000);
 
 		if (!MemberID.isDisplayed()) {
 			Assert.fail("Username and password page not displayed!");
 			return null;
 		}
-		
 
 		MemberID.sendKeys(MemID);
 
-//		Select DBmnth = new Select(DOBmm);
-//		DBmnth.selectByIndex(Integer.parseInt(DBmm));
-//
-//		Select DBday = new Select(DOBdd);
-//		DBday.selectByValue(DBdd);
-//
-//		Select DByr = new Select(DOByyyy);
-//		DByr.selectByVisibleText(DByyyy);
+		// Select DBmnth = new Select(DOBmm);
+		// DBmnth.selectByIndex(Integer.parseInt(DBmm));
+		//
+		// Select DBday = new Select(DOBdd);
+		// DBday.selectByValue(DBdd);
+		//
+		// Select DByr = new Select(DOByyyy);
+		// DByr.selectByVisibleText(DByyyy);
 
 		LastName.sendKeys(LstName);
 		ZIP.sendKeys(ZP);
@@ -130,11 +127,11 @@ public class UNPWAssistancePage extends UhcDriver {
 			Assert.fail("member details need to be filled");
 			return null;
 		}
-		
-//		if (!(BackSignInPage.isDisplayed())) {
-//			Assert.fail("Member details are incorrect!");
-//			return null;
-//		}
+
+		// if (!(BackSignInPage.isDisplayed())) {
+		// Assert.fail("Member details are incorrect!");
+		// return null;
+		// }
 		return new UNPWAssistancePage(driver);
 
 	}
