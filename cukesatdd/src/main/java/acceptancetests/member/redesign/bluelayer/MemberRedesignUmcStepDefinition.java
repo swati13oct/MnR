@@ -22,7 +22,7 @@ import cucumber.table.DataTable;
 import gherkin.formatter.model.DataTableRow;
 import pages.dashboard.member.drugcostestimator.blayer.DrugCostEstimatorPage;
 import pages.memberredesign.bluelayer.AccountHomePage;
-import pages.member.bluelayer.LoginPage;
+import pages.memberredesign.bluelayer.LoginPage;
 
 public class MemberRedesignUmcStepDefinition {
 	
