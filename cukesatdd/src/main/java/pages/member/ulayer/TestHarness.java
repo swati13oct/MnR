@@ -18,10 +18,12 @@ public class TestHarness extends UhcDriver{
 	private WebElement PaymentPage;
 	
 	/*@FindBy(linkText="Go to Payments page")
-	private WebElement TeamHPaymentPage;*/
+	private WebElement TeamHPaymentPage;*/	
+	/*@FindBy(xpath="/html/body/div[2]/div[3]/div[2]/div/table/tbody/tr[8]/td[2]/a") 
+	private WebElement TeamHPaymentPage;*/	
 	
-	@FindBy(xpath="/html/body/div[2]/div[3]/div[2]/div/table/tbody/tr[8]/td[2]/a") 
-	private WebElement TeamHPaymentPage;	
+	@FindBy(xpath=".//table[@class='componentTable']/tbody/tr[8]/td[2]") 
+	private WebElement TeamHPaymentPage;
 	
 	@FindBy(linkText="Go to payment link page")
 	private WebElement TeamCPaymentPage;

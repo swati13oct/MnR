@@ -34,9 +34,11 @@ public class OneTimePaymentPageSubmitted extends UhcDriver{
 	//@FindBy(xpath=".//*[@id='generatePdf']/div[1]/div/div/div[8]/div[2]/span")
 	private WebElement MemberName;
 	
-	@FindBy(xpath=".//*[contains(text(),'Payment Date')]/following-sibling::div/span")
-	private WebElement TimeStamp;
+	/*@FindBy(xpath=".//*[contains(text(),'Payment Date')]/following-sibling::div/span")
+	private WebElement TimeStamp;*/
 	
+	@FindBy(xpath="//*[@id='generatePdf']//div[@class='table-body-row'][2]/div[@class='table-body-cell'][2]")
+	private WebElement TimeStamp;
 	
 	public OneTimePaymentPageSubmitted(WebDriver driver) {
 		super(driver);
@@ -88,7 +90,7 @@ public class OneTimePaymentPageSubmitted extends UhcDriver{
 		System.out.println("System Time Stamp is : "+date1);
 		Thread.sleep(2000);
 		System.out.println("OTP Page submitted Timestamp is: "+TimeStamp.getText());
-		if(TimeStamp.getText().equals(date1)){	
+		if(TimeStamp.getText().contains(date1)){	
 			System.out.println("Timestamp matched");
 			return new OneTimePaymentPageSubmitted(driver);
 		}
