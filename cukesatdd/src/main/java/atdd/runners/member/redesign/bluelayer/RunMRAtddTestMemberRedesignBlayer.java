@@ -11,7 +11,7 @@ import cucumber.junit.Cucumber;
 @Cucumber.Options(glue = { "atdd.framework","acceptancetests.member.redesign.bluelayer" }, 
 		features = { "feature/member-redesign/bluelayer" }, 
 		format = {
-		"pretty", "html:reports/test-report","json:target/cucumber.json" }, tags ={"@member_redesign"})
+		"pretty", "html:reports/test-report","json:target/cucumber.json" }, tags ={"@member_redesign_header_ums"})
 
 
 public class RunMRAtddTestMemberRedesignBlayer {
