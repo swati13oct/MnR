@@ -894,8 +894,10 @@ public class MRScenario {
                  capabilities.setCapability("autoAcceptsAlerts", true);
                  capabilities.setCapability("parent-tunnel", "sauce_admin");
                  capabilities.setCapability("tunnelIdentifier", "OptumSharedTunnel-Prd");
-                 String USERNAME = "apriyad4";
-                 String ACCESS_KEY = "6e1345f1-80ea-4863-8573-187bf3151ac0";
+                 /*String USERNAME = "apriyad4";
+                 String ACCESS_KEY = "6e1345f1-80ea-4863-8573-187bf3151ac0";*/
+                 String USERNAME = "ucpadmin";
+                 String ACCESS_KEY = "2817affd-616e-4c96-819e-4583348d7b37";
                  String URL = "http://" + USERNAME + ":" + ACCESS_KEY + "@ondemand.saucelabs.com:80/wd/hub";
                  String jobName = "MnR test Execution of [" +System.getProperty("test")  +":] - Using " + capabilities.getBrowserName() + " in  " + environment +" environment";
              	 capabilities.setCapability("name", jobName);
@@ -935,8 +937,8 @@ public class MRScenario {
                  capabilities.setCapability("tunnelIdentifier", "OptumSharedTunnel-Prd");
                  String jobName = "MnR test Execution of [" +System.getProperty("test")  +":] - Using " + capabilities.getBrowserName() + " in  " + environment +" environment";
              	 capabilities.setCapability("name", jobName);
-                 String USERNAME = "apriyad4";
-                 String ACCESS_KEY = "6e1345f1-80ea-4863-8573-187bf3151ac0";
+                 String USERNAME = "ucpadmin";
+                 String ACCESS_KEY = "2817affd-616e-4c96-819e-4583348d7b37";
                      String URL = "http://" + USERNAME + ":" + ACCESS_KEY + "@ondemand.saucelabs.com:80/wd/hub";
                      if (USERNAME == null || ACCESS_KEY == null) {
                             Assert.fail(
