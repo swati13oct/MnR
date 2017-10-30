@@ -1,4 +1,4 @@
-@memb1
+@memberAuth
 Feature: To test Member Auth Dashboard page.	
 
 @memb
