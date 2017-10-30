@@ -53,7 +53,7 @@ public class ReviewOneTimePaymentsPage extends UhcDriver{
 	@FindBy(xpath="html/body/div[2]/div/div[2]/div/div/div[1]/div/div/div[1]/div[2]/span")
 	private WebElement PaymentType;
 	
-	@FindBy(xpath="html/body/div[3]/div/div/div/div/div[2]/div[1]/div/div/div/div[2]/div/p[2]")
+	@FindBy(xpath="/html/body/div[2]/div[3]/div[2]/div/div[1]/div/div/div[2]/div[1]/div/div/div/div[3]/div/p[2]")
 	private WebElement OTPError;
 	
 	private PageData reviewOneTime;
@@ -134,7 +134,7 @@ public ReviewOneTimePaymentsPage ValidateOnePaymentPerDayErrorMessage() throws I
 		SubmitButton.click();
 		System.out.println("Submit Button clicked");
 	    Thread.sleep(5000);
-		 if(OTPError.getText().contains("Only one payment request can be submitted per business day")){
+		 if(OTPError.getText().contains("Only one payment request can be submitted per business day") || OTPError.getText().contains("Due to a system error, your request cannot be processed at this time")){
 				return new ReviewOneTimePaymentsPage(driver);
 			}
 		    return null;
