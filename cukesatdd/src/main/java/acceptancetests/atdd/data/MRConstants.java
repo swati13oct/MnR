@@ -248,7 +248,7 @@ public static String CAMPAIGN_PAGE_URL1 = "https://www."+MRScenario.environment+
   									
   public static final String DEEPLINK_URL = "https://"+MRScenario.environment+"-medicare.uhc.com/login.html?TARGET=SMSR";
 
-public static final String MEMBER_AUTH = null;
+public static final String MEMBER_AUTH = "https://"+MRScenario.environment+"-generic.uhc.com/content/dashboard/guest/memberauth.html#/memberAuthLogin";
 
 public static final String TeamC_UNPWAssistancePage_URL = "https://member.team-c-aarpmedicareplans.uhc.com/content/medicare/login/reset.html#/start";
 }

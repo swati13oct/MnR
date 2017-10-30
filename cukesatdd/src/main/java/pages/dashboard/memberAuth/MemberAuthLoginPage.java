@@ -25,7 +25,7 @@ public class MemberAuthLoginPage extends UhcDriver {
 	@FindBy(id="find_searchbtn")
 	private WebElement search;
 	
-	@FindBy(xpath =".//*[@id='memAuthLoginBox']/fieldset/span[2]")
+	@FindBy(xpath ="//*[@id='memAuthLoginBox']/fieldset/span[2]")
 	private WebElement unpswdIncorrecterrormsg;
 	
 	private static String MEMBER_AUTH = MRConstants.MEMBER_AUTH;
@@ -69,7 +69,6 @@ public class MemberAuthLoginPage extends UhcDriver {
 						Assert.fail("Error message mismatch");	
 			
 		}
-		driver.close();
 		//if(!(this.unpswdIncorrecterrormsg.getText().trim().contains(Errormessage)))
 			
 	}
