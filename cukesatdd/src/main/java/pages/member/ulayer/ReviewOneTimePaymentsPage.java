@@ -110,11 +110,13 @@ public class ReviewOneTimePaymentsPage extends UhcDriver{
 		Thread.sleep(2000);		
 		Legalcheckbox.click();
 		System.out.println("Checkbox clicked");		
-		Thread.sleep(1000);
+		Thread.sleep(2000);
+		JavascriptExecutor jse = (JavascriptExecutor)driver;
+		jse.executeScript("window.scrollBy(0,100)", "");
 		SubmitButton.click();
 		System.out.println("Submit Button clicked");
 	    Thread.sleep(5000);
-		 if(driver.getTitle().equalsIgnoreCase("My Benefits & Coverage") || driver.getTitle().equalsIgnoreCase("onetimepayments") ){
+		 if(driver.getTitle().equalsIgnoreCase("overview") || driver.getTitle().equalsIgnoreCase("onetimepayments") ){
 				return new OneTimePaymentPageSubmitted(driver);
 			}
 		    return null;
@@ -125,7 +127,9 @@ public ReviewOneTimePaymentsPage ValidateOnePaymentPerDayErrorMessage() throws I
 		
 		Thread.sleep(5000);		
 		Legalcheckbox.click();
-		System.out.println("Checkbox clicked");		
+		System.out.println("Checkbox clicked");	
+		JavascriptExecutor jse = (JavascriptExecutor)driver;
+		jse.executeScript("window.scrollBy(0,100)", "");
 		Thread.sleep(3000);
 		SubmitButton.click();
 		System.out.println("Submit Button clicked");

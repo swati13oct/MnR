@@ -1,26 +1,17 @@
 package pages.member.ulayer;
 
 import org.junit.Assert;
-import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.Select;
+
 
 import acceptancetests.atdd.data.MRConstants;
 import atdd.framework.UhcDriver;
 
-public class UNPWAssistancePage extends UhcDriver {
-
-	public UNPWAssistancePage(WebDriver driver) {
-		super(driver);
-		PageFactory.initElements(driver, this);
-		openAndValidate();
-	}
-
-	private static String PAGE_URL = MRConstants.TeamC_UNPWAssistancePage_URL;
+public class UNPWAssistancePage extends UhcDriver {		
 
 	@FindBy(xpath = ".//label[@for='select-username']")
 	private WebElement UsenameBtn;
@@ -72,7 +63,15 @@ public class UNPWAssistancePage extends UhcDriver {
 
 	@FindBy(linkText = "Back to Sign in Page")
 	private WebElement BackSignInPage;
+	
+	private static String PAGE_URL = MRConstants.TeamC_UNPWAssistancePage_URL;
 
+	public UNPWAssistancePage(WebDriver driver) {
+		super(driver);
+		PageFactory.initElements(driver, this);
+		openAndValidate();
+	}
+	
 	@Override
 	public void openAndValidate() {
 		start(PAGE_URL);
