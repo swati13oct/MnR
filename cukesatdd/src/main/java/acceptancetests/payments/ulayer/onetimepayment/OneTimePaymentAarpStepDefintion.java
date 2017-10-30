@@ -433,7 +433,7 @@ public class OneTimePaymentAarpStepDefintion {
 	}
 	
 	@When("^the user logs in TeamH with a registered AMP with following details in AARP site$")
-	public void user_logs_inTeamH(DataTable memberAttributes)
+	public void user_logs_inTeamH(DataTable memberAttributes) throws InterruptedException
 	{
 		/* Reading the given attribute from feature file */
 		List<DataTableRow> memberAttributesRow = memberAttributes
@@ -476,17 +476,18 @@ public class OneTimePaymentAarpStepDefintion {
 		}
 		
 		TeamHLoginUlayer loginPage = (TeamHLoginUlayer)getLoginScenario().getBean(PageConstants.LOGIN_PAGE);
-		AccountHomePage accountHomePage = (AccountHomePage) loginPage.loginWith(userName, pwd);
+		TestHarness TestHarn = (TestHarness) loginPage.loginWith(userName, pwd);
+		//AccountHomePage accountHomePage = (AccountHomePage) loginPage.loginWith(userName, pwd);
 		
 		
-		if (accountHomePage != null) {
-			getLoginScenario().saveBean(PageConstants.ACCOUNT_HOME_PAGE,
-					accountHomePage);
+		if (TestHarn != null) {
+			getLoginScenario().saveBean(PageConstants.TEST_HARNESS_PAGE,
+					TestHarn);
 			Assert.assertTrue(true);
-			JSONObject accountHomeActualJson = accountHomePage.accountHomeJson;
+			/*JSONObject accountHomeActualJson = TestHarn.accountHomeJson;
 			getLoginScenario().saveBean(
 					LoginCommonConstants.ACCOUNT_HOME_ACTUAL,
-					accountHomeActualJson);
+					accountHomeActualJson);*/
 			
 			/* Get expected data 
 			Map<String, JSONObject> expectedDataMap = loginScenario
@@ -624,7 +625,7 @@ public class OneTimePaymentAarpStepDefintion {
 	@And("^the user navigates to TeamHPaymentOverview Page$")
 	public void user_navigates_to_TeamHPaymentOverview_Page() throws InterruptedException
 	{
-		TestHarness testHarness = (TestHarness)getLoginScenario().getBean(PageConstants.ACCOUNT_HOME_PAGE);
+		TestHarness testHarness = (TestHarness)getLoginScenario().getBean(PageConstants.TEST_HARNESS_PAGE);
 		PaymentsOverview paymentsOverview = testHarness.navigateToTeamHPaymentOverview();
 		if(paymentsOverview!= null){
 			getLoginScenario().saveBean(PageConstants.PAYMENT_OVERVIEW,

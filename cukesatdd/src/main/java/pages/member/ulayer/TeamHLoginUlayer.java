@@ -46,7 +46,7 @@ public class TeamHLoginUlayer extends UhcDriver{
 
 	
 
-	public Object loginWith(String username, String password) {
+	public Object loginWith(String username, String password) throws InterruptedException {
 		//loginIn.click();	
 		sendkeys(userNameField,username);
 		sendkeys(passwordField,password);
@@ -54,8 +54,9 @@ public class TeamHLoginUlayer extends UhcDriver{
 		System.out.println("Sign In clicked");
 		
 
-		if(MRScenario.TeamCEnvironment.equals("team-h")) {
+		 
 			try{
+			System.out.println();
 			Alert alert = driver.switchTo().alert();
 			alert.accept();
 			Alert alert1 = driver.switchTo().alert();
@@ -67,12 +68,12 @@ public class TeamHLoginUlayer extends UhcDriver{
 				Alert alert2 = driver.switchTo().alert();
 				alert2.accept();
 			}*/
-		}else          
-		
+		          
+		Thread.sleep(15000);
 		if(currentUrl().contains("member/testharness.html"))
 
 		{
-			return new AccountHomePage(driver);
+			return new TestHarness(driver);
 		}
 		else if (currentUrl().contains("terminated-plan.html")) {
 			return new TerminatedHomePage(driver); 

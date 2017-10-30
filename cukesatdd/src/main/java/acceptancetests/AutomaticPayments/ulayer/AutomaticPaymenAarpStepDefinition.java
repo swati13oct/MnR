@@ -151,7 +151,7 @@ public class AutomaticPaymenAarpStepDefinition {
 	
 	
 	@When("^the user logs in TeamH with a registered AMP with following details in AARP site$")
-	public void user_logs_inTeamH(DataTable memberAttributes)
+	public void user_logs_inTeamH(DataTable memberAttributes) throws InterruptedException
 	{
 		/* Reading the given attribute from feature file */
 		List<DataTableRow> memberAttributesRow = memberAttributes

@@ -17,8 +17,11 @@ public class TestHarness extends UhcDriver{
 	@FindBy(linkText="Go to Payments page")
 	private WebElement PaymentPage;
 	
-	@FindBy(linkText="Go to Payments page")
-	private WebElement TeamHPaymentPage;
+	/*@FindBy(linkText="Go to Payments page")
+	private WebElement TeamHPaymentPage;*/
+	
+	@FindBy(xpath="/html/body/div[2]/div[3]/div[2]/div/table/tbody/tr[8]/td[2]/a") 
+	private WebElement TeamHPaymentPage;	
 	
 	@FindBy(linkText="Go to payment link page")
 	private WebElement TeamCPaymentPage;
@@ -45,6 +48,7 @@ public class TestHarness extends UhcDriver{
 	
 	public PaymentsOverview navigateToTeamHPaymentOverview() throws InterruptedException
 	{
+		Thread.sleep(3000);
 		JavascriptExecutor jse = (JavascriptExecutor)driver;
 		jse.executeScript("window.scrollBy(0,450)", "");
 		Thread.sleep(5000);
