@@ -116,7 +116,7 @@ Feature: To validate the new changes related to claims page on the member redesi
       | MAPD     |
       | PDP      |
    
-@claimsSummaryFED
+@claimsSummaryFED @transformers 
 Scenario Outline: To validate the claims present for the Federal member on claims sumamry page for AARP site
 Given I am an AARP member on the redesigned site
       | Plan Type | <planType> |
@@ -135,8 +135,8 @@ Examples:
 | planType | claimPeriod      | domain  |
 | MA       |   Last 24 Months | NICE    |
 | MAPD     |   Last 24 Months | COSMOS    |
-
-@claimsSummarySHIP
+ 
+@claimsSummarySHIP @transformers
 Scenario Outline: To validate the claims present for the SHIP member on claims sumamry page for AARP site
 Given I am an AARP member on the redesigned site 
 	 | Plan Type | <planType> | 
@@ -151,7 +151,7 @@ Examples:
 | planType | claimPeriod       | domain |
 | SHIP     | Last 24 Months    |  NA    |
 
-@claimsDetailsTableFED
+@claimsDetailsTableFED @transformers
 Scenario Outline: To Verify Claim Table on Claims Details Page
 Given I am an AARP member on the redesigned site
       | Plan Type | <planType> |
@@ -167,7 +167,7 @@ And I validate the Claims Total in claims details page in AARP site
       | MA       |Last 24 Months |
       | MAPD     |Last 24 Months |
      #| SHIP     |Last 24 Months |
-@ClaimsDetailsSHIP
+@ClaimsDetailsSHIP @transformers
 Scenario Outline: To Verify Learn more section on Claims Details Page
 Given I am an AARP member on the redesigned site
       | Plan Type | <planType> |
