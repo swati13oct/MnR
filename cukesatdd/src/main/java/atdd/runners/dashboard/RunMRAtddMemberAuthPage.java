@@ -14,7 +14,7 @@ import cucumber.junit.Cucumber;
 @Cucumber.Options(glue = { "atdd.framework","acceptancetests.dashboard.memberAuth" }, 
 		features = { "feature/dashboard/memberAuth" }, 
 		format = {
-		"pretty", "html:reports/test-report","RunMRAtddMemberAuthPage-json:target/cucumber.json" }, tags ={"@memberAuth"})
+		"pretty", "html:reports/test-report","json:target/cucumber.json" }, tags ={"@memberAuth"})
 public class RunMRAtddMemberAuthPage {
 
 }
