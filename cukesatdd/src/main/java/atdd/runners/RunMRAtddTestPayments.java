@@ -15,7 +15,7 @@ import cucumber.junit.Cucumber;
 @Cucumber.Options(glue = { "atdd.framework","acceptancetests.payments.ulayer.onetimepayment" }, 
 		features = { "feature/payments/OneTimePayment/ulayer" }, 
 		format = {
-		"pretty", "html:reports/test-report" }, tags ={"@US735645"})
+		"pretty", "html:reports/test-report","json:target/cucumber.json" }, tags ={"@US735645"})
 public class RunMRAtddTestPayments {
 
 }
