@@ -53,7 +53,10 @@ public class ReviewOneTimePaymentsPage extends UhcDriver{
 	@FindBy(xpath="html/body/div[2]/div/div[2]/div/div/div[1]/div/div/div[1]/div[2]/span")
 	private WebElement PaymentType;
 	
-	@FindBy(xpath="/html/body/div[2]/div[3]/div[2]/div/div[1]/div/div/div[2]/div[1]/div/div/div/div[3]/div/p[2]")
+	/*@FindBy(xpath="/html/body/div[2]/div[3]/div[2]/div/div[1]/div/div/div[2]/div[1]/div/div/div/div[3]/div/p[2]")	               
+	private WebElement OTPError;*/
+	
+	@FindBy(xpath="//div[@class='payments']//div[@class='col-md-12']//div[@class='ng-scope'][3]/div/p[2]")	               
 	private WebElement OTPError;
 	
 	private PageData reviewOneTime;

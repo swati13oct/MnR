@@ -15,7 +15,7 @@ import pages.member.bluelayer.ConfirmOneTimePaymentPage;
 
 public class PaymentsOverview extends UhcDriver{
 
-	@FindBy(id = "onetimepayment")
+	@FindBy(xpath="//div[@class='margin-small']//a[@id='onetimepayment']")
 	private WebElement OneTimePaymentButton;
 	
 	@FindBy(id = "setupautopayment")
@@ -68,10 +68,10 @@ public class PaymentsOverview extends UhcDriver{
 	
 	public OneTimePaymentsPage navigateToOneTimePaymentpage() throws InterruptedException
 	{
-		Thread.sleep(7500);
+		Thread.sleep(8000);
 		JavascriptExecutor jse = (JavascriptExecutor)driver;
-		jse.executeScript("window.scrollBy(0,200)", "");
-		Thread.sleep(1000);
+		jse.executeScript("window.scrollBy(0,125)", "");
+		Thread.sleep(5000);
 		if(OneTimePaymentButton.isEnabled()){
 			OneTimePaymentButton.click();
 			return new OneTimePaymentsPage(driver);
