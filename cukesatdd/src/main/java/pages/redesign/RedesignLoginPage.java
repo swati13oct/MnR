@@ -32,7 +32,8 @@ public class RedesignLoginPage extends UhcDriver {
 
 	private static String PAGE_URL = MRConstants.MEDICARE_UHC_REDESIGN;
 	
-
+	@FindBy(xpath = "//area[@href='javascript:clWin()'][@alt = 'close']")
+	private WebElement FeedbackModal;
 
 	@FindBy(id = "username")
 	private WebElement userNameField;
@@ -83,14 +84,31 @@ public class RedesignLoginPage extends UhcDriver {
 	        alert1.accept();
 	        }
 		if ( MRScenario.environment.equals("team-h") || MRScenario.environment.equals("team-a")) {
+			try{
+				Alert alert = driver.switchTo().alert();
+				alert.accept();
+			}
+			catch(Throwable e) {
+				System.out.println("Alert isn't present!!");
+			} 
+		        }
 			
-			Alert alert = driver.switchTo().alert();
-	        alert.accept();
-	        }
-		driver.manage().timeouts().implicitlyWait(120, TimeUnit.SECONDS);
+		driver.manage().timeouts().implicitlyWait(100, TimeUnit.SECONDS);
 		CommonUtility.checkPageIsReady(driver);
-				
-		if(currentUrl().contains("/testharness.html") && category.equalsIgnoreCase("Group") ) {
+/*		try{
+			FeedbackModal.click();
+			System.out.println("FeedBack Modal Present");
+			if (validate(FeedbackModal)){
+				System.out.println("FeedBack Modal NOT CLOSING - Close button is clicked");
+			}
+			System.out.println("FeedBack Modal Closed");
+		}
+		catch (Exception e) {
+			System.out.println("FeedBack Modal NOT Present");
+
+		}
+		driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
+*/		if(currentUrl().contains("/testharness.html") && category.equalsIgnoreCase("Group") ) {
 			System.out.println("@@@@@@@@@@@@ Redesign Home Page Displayed for BlueLayer Member@@@@@@@@@@@@");
 			return new BlueLayerHomePage(driver, category);
 		}
@@ -109,13 +127,30 @@ public class RedesignLoginPage extends UhcDriver {
 		System.out.println(signInButton.isEnabled());
 		signInButton.click();
 		if ( MRScenario.environment.equals("team-h") || MRScenario.environment.equals("team-a")) {
-			
-			Alert alert = driver.switchTo().alert();
-	        alert.accept();
-	        }
-		driver.manage().timeouts().implicitlyWait(120, TimeUnit.SECONDS);
-		CommonUtility.checkPageIsReady(driver);
-		if (currentUrl().contains("/testharness.html")){
+			try{
+				Alert alert = driver.switchTo().alert();
+				alert.accept();
+			}
+			catch(Throwable e) {
+				System.out.println("Alert isn't present!!");
+			} 
+		}
+		
+	driver.manage().timeouts().implicitlyWait(100, TimeUnit.SECONDS);
+	CommonUtility.checkPageIsReady(driver);
+/*	try{
+		FeedbackModal.click();
+		System.out.println("FeedBack Modal Present");
+		if (validate(FeedbackModal)){
+			System.out.println("FeedBack Modal NOT CLOSING - Close button is clicked");
+		}
+		System.out.println("FeedBack Modal Closed");
+	}
+	catch (Exception e) {
+		System.out.println("FeedBack Modal NOT Present");
+	}
+	driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
+*/		if (currentUrl().contains("/testharness.html")){
 			System.out.println("@@@@@@@@@@@@ Redesign Home Page Displayed for ULayer Member@@@@@@@@@@@@");
 			return new UlayerHomePage(driver);
 		}

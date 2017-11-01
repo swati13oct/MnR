@@ -109,7 +109,7 @@ public class OrderplanmaterialsPage extends UhcDriver {
 	@SuppressWarnings("deprecation")
 	public boolean navigatePlanTabs(String PlanType){
 		
-		if (PlanType.contains("MA") || PlanType.contains("MAPD")) {
+		if (PlanType.contentEquals("MA") || PlanType.contentEquals("MAPD")) {
 			if (validate(MAPlanTab)){
 				MAPlanTab.click();
 				//Assert.assertTrue("Cant navigate to MA / MAPD Plan Tab", memberMaterialsfield.isDisplayed());
@@ -118,7 +118,7 @@ public class OrderplanmaterialsPage extends UhcDriver {
 			}
 		}
 		
-		else if (PlanType.contains("SHIP")) {
+		else if (PlanType.contentEquals("SHIP")) {
 			if (validate(MedSuppPlanTab)){
 				MedSuppPlanTab.click();
 				//Assert.assertTrue("Cant navigate to Med Supp PlanTab Plan Tab", MemberIDcardField.isDisplayed());
@@ -137,7 +137,7 @@ public class OrderplanmaterialsPage extends UhcDriver {
 			}
 		}
 
-		else if (PlanType.contains("HIP")) {
+		else if (PlanType.contentEquals("HIP")) {
 			if (validate(HIPplanTab)){
 				HIPplanTab.click();
 				//Assert.assertTrue("Cant navigate to HIP Plan Tab", MemberIDcardField.isDisplayed());
@@ -146,7 +146,7 @@ public class OrderplanmaterialsPage extends UhcDriver {
 			}
 			
 		}
-		else if (PlanType.contains("PDP")) {
+		else if (PlanType.contentEquals("PDP")) {
 			if (validate(PDPPlanTab)){
 				PDPPlanTab.click();
 				//Assert.assertTrue("Cant navigate to PDP Plan Tab", memberMaterialsfield.isDisplayed());
@@ -155,7 +155,7 @@ public class OrderplanmaterialsPage extends UhcDriver {
 			}
 			
 		}
-		else if (PlanType.contains("MedSupp")) {
+		else if (PlanType.contentEquals("MedSupp")) {
 			if (validate(MedSuppPlanTab)){
 				MedSuppPlanTab.click();
 				//Assert.assertTrue("Cant navigate to Med Supp PlanTab Plan Tab", MemberIDcardField.isDisplayed());
@@ -163,11 +163,11 @@ public class OrderplanmaterialsPage extends UhcDriver {
 				return true;
 			}
 		}
-		else if (PlanType.contains("SSUP")) {
+		else if (PlanType.contentEquals("SSUP")) {
 			if (validate(SrSuppTab)){
 				SrSuppTab.click();
 				//Assert.assertTrue("Cant navigate to Med Supp PlanTab Plan Tab", MemberIDcardField.isDisplayed());
-				System.out.println("*************Displaying SHIP - Med Supp Plan Tab Plan Tab **********");
+				System.out.println("*************Displaying UHC Senior Supplement Plan Tab **********");
 				return true;
 			}
 		}
@@ -179,13 +179,13 @@ public class OrderplanmaterialsPage extends UhcDriver {
 	@SuppressWarnings("deprecation")
 	public void ValidateOptions(String PlanType){
 		
-		if (PlanType.contains("MA") || PlanType.contains("MAPD") || PlanType.contains("PDP")) {
+		if (PlanType.contentEquals("MA") || PlanType.contentEquals("MAPD") || PlanType.contentEquals("PDP")) {
 			if (validate(memberMaterialsfield) && validate(replacementIdField) ){
 				Assert.assertTrue(true);
 				System.out.println("*************Displaying Order Plan Material Options for "+PlanType+ "**********");
 			}
 		}
-		else if (PlanType.contains("HIP") || PlanType.contains("MedSupp")) {
+		else if (PlanType.contentEquals("HIP") || PlanType.contentEquals("MedSupp")) {
 			if (validate(MemberIDcardField) && validate(EFTbrochureField) && validate(premiumPayment) && validate(couponBook) && validate(claimsEnvelope) && validate(certificateInsurance) && validate(medicareHospital) ){
 				Assert.assertTrue(true);
 				System.out.println("*************Displaying Order Plan Material Options for "+PlanType+ "**********");
@@ -210,7 +210,7 @@ public class OrderplanmaterialsPage extends UhcDriver {
 		
 	}
 	public boolean ValidateErrorMessage(){
-		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+		driver.manage().timeouts().implicitlyWait(40, TimeUnit.SECONDS);
 		if (NoSelectionErrorMsg.isDisplayed()){
 			System.out.println("*************Error Message Displayed displayed for Order materials Page***************");
 			System.out.println("*************Error Message : "+NoSelectionErrorMsg.getText()+" ***************");

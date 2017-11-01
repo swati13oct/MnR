@@ -42,6 +42,13 @@ public class BlueLayerHomePage extends UhcDriver {
 	@FindBy(xpath = "//a[contains(text(), 'Go to Claims')]")
 	private WebElement ClaimsLink;
 	
+	@FindBy(xpath = "//h1[contains(text(), 'My Claims')]")
+	private WebElement ClaimsPageHeader;
+
+	@FindBy(xpath = "//h1[contains(text(), 'Explanation of Benefits')]")
+	private WebElement EOBPageHeader;
+
+	
 	@FindBy(xpath = "//a[contains(text(), 'Go to EOB Search')]")
 	private WebElement EOBsearchLink;
 	
@@ -117,93 +124,82 @@ public class BlueLayerHomePage extends UhcDriver {
 
 	public PaymentHistoryPage navigateToPayments() {
 
+		driver.navigate().to("https://"+MRScenario.environment+"-medicare.uhc.com/content/medicare/member/payments/overview.html");
+/*		
 		GoToPaymentsLink.click();
-		CommonUtility.checkPageIsReady(driver);
-		//paymentsLink.click();
-		if (driver.getTitle().equalsIgnoreCase("Premium Payment History") || driver.getTitle().equalsIgnoreCase("payments-overview")) {
+*/		CommonUtility.checkPageIsReady(driver);
+		// paymentsLink.click();
+		if (driver.getTitle().equalsIgnoreCase("Premium Payment History")
+				|| driver.getTitle().equalsIgnoreCase("payments-overview")) {
 			return new PaymentHistoryPage(driver);
-		} 
-		else{
+		} else {
 			return null;
 		}
-	}
-
-	public OrderplanmaterialsPage navigateToLinkOrderPlanMaterialsPage() {
-		driver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
-		CommonUtility.checkPageIsReady(driver);
-		OrderPlanMaterialslnk.click();
-		driver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
-		CommonUtility.checkPageIsReady(driver);
-		if(orderplanHeadertxt.isDisplayed()){
-			return new OrderplanmaterialsPage(driver);
-		}
-		return null;
 	}
 
 
 	public MyProfilesPage navigateToProfAndPref() {
 
-		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
-		CommonUtility.checkPageIsReady(driver);
-
-		MyProfileLink.click();
-		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
-
+		//MyProfileLink.click();
+		driver.navigate().to("https://"+MRScenario.environment+"-medicare.uhc.com/content/medicare/member/account/profile.html");
+		
 		CommonUtility.checkPageIsReady(driver);
 		if (MyProfilePageHeader.isDisplayed()) {
+
+			System.out.println("@@@@  My Profile and Preferences Page is Displayed  @@@@");
 			return new MyProfilesPage(driver);
-		}
-		else{
+		} else {
 			return null;
 		}
 
 	}
 
-	
 	public PharmacySearchPage navigateToPharmacyLocator() {
-		driver.manage().timeouts().implicitlyWait(1000, TimeUnit.SECONDS);
+/*		driver.manage().timeouts().implicitlyWait(100, TimeUnit.SECONDS);
 		CommonUtility.checkPageIsReady(driver);
 		PharmacyLocatorLink.click();
-		driver.manage().timeouts().implicitlyWait(1000, TimeUnit.SECONDS);
-		CommonUtility.checkPageIsReady(driver);
+*/		
+		driver.navigate().to("https://"+MRScenario.environment+"-medicare.uhc.com/content/medicare/member/pharmacy-locator/overview.html#/Pharmacy-Search-English");
 		
-/*		if (driver.findElement(By.xpath("//*[contains(text(), 'Locate a Pharmacy')]")).isDisplayed()){
-			return new PharmacySearchPage(driver);
-		}
-		pharmacyLocator.click();*/
-		if (driver.getTitle().equalsIgnoreCase(
-				"AARP Medicare Plans | Pharmacy Directory") || driver.getTitle().equalsIgnoreCase(
-						"Locate a Pharmacy")) {
+		CommonUtility.checkPageIsReady(driver);
+		if (driver.getTitle().equalsIgnoreCase("AARP Medicare Plans | Pharmacy Directory")
+				|| driver.getTitle().equalsIgnoreCase("Locate a Pharmacy")) {
 			return new PharmacySearchPage(driver);
 		}
 		return null;
 	}
 
-
 	public MedicalClaimSummaryPage navigateToMedicalClaimsSummary() {
-		ClaimsLink.click();
+		//ClaimsLink.click();
+		
+		driver.navigate().to("https://"+MRScenario.environment+"-medicare.uhc.com/content/medicare/member/claims.html#/overview");
 		CommonUtility.checkPageIsReady(driver);
-		//searchMedicalClaims.click();
-		System.out.println("Claims link clicked");
-
-		/*if (ClaimsLink.isDisplayed()){
-			ClaimsLink.click();
-		}
-		else{
-			
-		}*/
-		if (driver.getTitle().equalsIgnoreCase("Claims")) {
+		if (validate(ClaimsPageHeader)) {
 			System.out.println("Claims Page loaded");
 			return new MedicalClaimSummaryPage(driver);
-		}
-		else{
+		} else {
 			return null;
 		}
 	}
 
+	public EoBSearchPage navigateToBenefitsAndCoverage() {
+		driver.navigate().to("https://"+MRScenario.environment+"-medicare.uhc.com/content/medicare/member/eob.html");
+		//EOBsearchLink.click();
+
+		CommonUtility.checkPageIsReady(driver);
+
+		if (validate(EOBPageHeader)) {
+			System.out.println("EOB Page loaded");
+			return new EoBSearchPage(driver);
+		} else {
+			return null;
+		}
+	}
 
 	@Override
 	public void openAndValidate() {
+		CommonUtility.checkPageIsReady(driver);
+
 		validate(OrderPlanMaterialslnk);
 		validate(GoToContactUsLnk);
 		// validate(formsAndResourcesLink);
@@ -211,49 +207,43 @@ public class BlueLayerHomePage extends UhcDriver {
 
 	}
 
-
 	public JSONObject getExpectedData(Map<String, JSONObject> expectedDataMap) {
 
-		JSONObject globalExpectedJson = expectedDataMap
-				.get(CommonConstants.GLOBAL);
-		JSONObject accountHomeExpectedJson = expectedDataMap
-				.get(CommonConstants.MY_ACCOUNT_HOME);
-		accountHomeExpectedJson = CommonUtility.mergeJson(
-				accountHomeExpectedJson, globalExpectedJson);
+		JSONObject accountHomeExpectedJson = expectedDataMap.get(CommonConstants.MY_ACCOUNT_HOME);
+
 		return accountHomeExpectedJson;
 	}
 
-	public JSONObject getAdditionalPlanExpectedData(
-			Map<String, JSONObject> expectedDataMap) {
+	public JSONObject getAdditionalPlanExpectedData(Map<String, JSONObject> expectedDataMap) {
 
-		JSONObject globalExpectedJson = expectedDataMap
-				.get(CommonConstants.GLOBAL);
-		JSONObject addPlanExpectedJson = expectedDataMap
-				.get(CommonConstants.ADD_PLAN);
-		JSONObject accountHomeExpectedJson = expectedDataMap
-				.get(CommonConstants.MY_ACCOUNT_HOME);
-		JSONObject accountHomeComboExpectedJson = expectedDataMap
-				.get(CommonConstants.MY_ACCOUNT_HOME_COMBO);
-		accountHomeExpectedJson = CommonUtility.mergeJson(
-				accountHomeExpectedJson, globalExpectedJson);
-		accountHomeExpectedJson = CommonUtility.mergeJson(
-				accountHomeExpectedJson, addPlanExpectedJson);
-		accountHomeExpectedJson = CommonUtility.mergeJson(
-				accountHomeExpectedJson, accountHomeComboExpectedJson);
+		JSONObject globalExpectedJson = expectedDataMap.get(CommonConstants.GLOBAL);
+		JSONObject addPlanExpectedJson = expectedDataMap.get(CommonConstants.ADD_PLAN);
+		JSONObject accountHomeExpectedJson = expectedDataMap.get(CommonConstants.MY_ACCOUNT_HOME);
+		JSONObject accountHomeComboExpectedJson = expectedDataMap.get(CommonConstants.MY_ACCOUNT_HOME_COMBO);
+		accountHomeExpectedJson = CommonUtility.mergeJson(accountHomeExpectedJson, globalExpectedJson);
+		accountHomeExpectedJson = CommonUtility.mergeJson(accountHomeExpectedJson, addPlanExpectedJson);
+		accountHomeExpectedJson = CommonUtility.mergeJson(accountHomeExpectedJson, accountHomeComboExpectedJson);
 		return accountHomeExpectedJson;
 	}
 
+	public OrderplanmaterialsPage navigateToOrderPlanMaterialsPage() {
+		driver.navigate().to("https://"+MRScenario.environment+"-medicare.uhc.com/content/medicare/member/order-materials/overview.html");
+		//OrderPlanMaterialslnk.click();
+		CommonUtility.checkPageIsReady(driver);
+		if (orderplanHeadertxt.isDisplayed()) {
+			return new OrderplanmaterialsPage(driver);
+		}
+		return null;
+	}
 
 	public ContactUsPage navigatesToContactUsPage() {
-		
-		GoToContactUsLnk.click();
-		//contactUsLink.click();
+
+		//GoToContactUsLnk.click();
+		driver.navigate().to("https://"+MRScenario.environment+"-medicare.uhc.com/content/medicare/member/contact-us/overview.html#/contact-us-two");
 		CommonUtility.checkPageIsReady(driver);
-		if(getTitle().equalsIgnoreCase("AARP Medicare Plans | Contact Us") || getTitle().equalsIgnoreCase("Contact Us"))
-		{
+		if (driver.findElement(By.xpath("//div[@ng-controller='contactUsCtrl']")).isDisplayed()){
 			return new ContactUsPage(driver);
-		}
-		else{
+		} else {
 			return null;
 		}
 	}

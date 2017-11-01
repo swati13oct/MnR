@@ -15,9 +15,8 @@ import cucumber.junit.Cucumber;
 @Cucumber.Options(glue = { "atdd.framework","acceptancetests.ordermaterials.bluelayer" }, 
 		features = { "feature/ordermaterials/bluelayer" }, 
 		format = {
-				"pretty", "html:reports/test-report","json:target/cucumber.json"}, tags ={"@radiobuttonmassup,@radiobuttonpdpgroup,@radiobuttonmaindiv,@radiobuttonmapdssrdgroup,@US627227,@radiobuttonmapdindi,@radiobuttonvalidationmaandssup,@radiobuttonvalidationpdpgrp,@radiobuttonvalidationmapdandmaindi,@radiobuttonvalidationmapdandssrdgrp,@PDPgroupComboValidateHeaderandTabs"})
+				"pretty", "html:reports/test-report","json:target/cucumber.json"}, tags ={"@TeamPredators,@ordermaterials"})
 
 public class RunMRAtddTestOrderPlanMaterialsBLayer {
 	
-//@radiobuttonmassup,@radiobuttonpdpgroup,@radiobuttonmaindiv,@radiobuttonmapdssrdgroup,@US627227,@radiobuttonmapdindi,@radiobuttonvalidationmaandssup,@radiobuttonvalidationpdpgrp,@radiobuttonvalidationmapdandmaindi,@radiobuttonvalidationmapdandssrdgrp,@PDPgroupComboValidateHeaderandTabs
 }

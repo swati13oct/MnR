@@ -20,7 +20,7 @@ import cucumber.junit.Cucumber;
 				"pretty", "html:reports/test-report","json:target/cucumber.json"}, 
 		tags ={"@pharmacylocator"})
 //@plmapd,@errormessages
-//@multicounty,@languageselection,@planType,@zipcodeEntry,@showonmap,@resultpdf,@plmapd,@plpdp,@MAplantype,@Widgets,@moreinfoPDPplantype,@moreinfoMAplantype,@chatPDPplantype,@chatMAplantype,@TFNPDPplantype,@TFNMAplantype,@pharmacysaverwidget,@Pharmacylist,@chineselanguage,@spanishlanguage,@resultpdfpharmacysaver,@moreinfopharmacysaver,@redballonpharmacysaver,@tooltippharmacysaver,@errormessages"})
+//@multicounty,@languageselection,@planType,@zipcodeEntry,@showonmap,@resultpdf,@plmapd,@plpdp,@MAplantype,@Widgets,@moreinfoPDPplantype,@moreinfoMAplantype,@chatPDPplantype,@chatMAplantype,@TFNPDPplantype,@TFNMAplantype,@pharmacysaverwidget,@Pharmacylist,@chineselanguage,@spanishlanguage,@moreinfopharmacysaver,@redballonpharmacysaver,@tooltippharmacysaver,@errormessages"})
 //@pharmacylocator
 
 //

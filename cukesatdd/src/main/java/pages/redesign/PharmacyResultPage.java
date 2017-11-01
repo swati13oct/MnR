@@ -5,10 +5,12 @@ package pages.redesign;
 
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -27,6 +29,12 @@ public class PharmacyResultPage extends UhcDriver {
 
 	@FindBy(id = "disclosure_link")
 	private WebElement logOut;
+	
+	@FindBy(xpath = "//*[@class='pharmacy-info']")
+	private List<WebElement> PharmacyResultList;
+
+	@FindBy(xpath = "//span[@ng-show = 'showPharmacyCount']")
+	private WebElement PharmacyFoundCount;
 
 	private PageData pharmacyResult;
 
@@ -102,4 +110,7 @@ public class PharmacyResultPage extends UhcDriver {
 				pharmacyResultExpectedJson, globalExpectedJson);
 		return pharmacyResultExpectedJson;
 	}
+	
+	
+
 }

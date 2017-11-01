@@ -184,7 +184,7 @@ public class OrderPlanMaterialsUmsStepDefinition {
 	@When("^the user views order materials in UHC site$")
 	public void views_order_plan_materials_in_Ums_site() {
 		BlueLayerHomePage accountHomePage = (BlueLayerHomePage) getLoginScenario().getBean(PageConstants.ACCOUNT_HOME_PAGE);
-		OrderplanmaterialsPage orderPlanMaterialsPage = accountHomePage.navigateToLinkOrderPlanMaterialsPage();
+		OrderplanmaterialsPage orderPlanMaterialsPage = accountHomePage.navigateToOrderPlanMaterialsPage();
 	
 		if (orderPlanMaterialsPage != null) {
 		

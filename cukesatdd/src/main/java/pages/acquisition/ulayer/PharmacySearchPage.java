@@ -113,10 +113,10 @@ public class PharmacySearchPage extends UhcDriver {
 	@FindBy(xpath = ".//*[@id='pharmacy-saver']")
 	private WebElement multilangfilter;
 
-	@FindBy(xpath="//*[contains(text(), 'There were errors in the information ')]")
+	@FindBy(xpath="//*[contains(text(), 'Please enter ZIP code')]")
 	private WebElement noZipcode;
 	
-	@FindBy(xpath="//*[contains(text(), 'ZIP code must be numeric, and contain 5 ')]")
+	@FindBy(xpath="//*[contains(text(), 'Please enter your ZIP code as 5 numbers like this: 12345')]")
 	private WebElement invalidZip;
 
 
@@ -261,7 +261,7 @@ public class PharmacySearchPage extends UhcDriver {
 	}
 
 	public PharmacyResultPage ValidateSearchPdfResult() {
-		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+		driver.manage().timeouts().implicitlyWait(80, TimeUnit.SECONDS);
 		
 		if (viewsearchpdf.isDisplayed())
 		{
@@ -394,6 +394,7 @@ public class PharmacySearchPage extends UhcDriver {
     
     public PharmacySearchPage verifyPharmacyErrormessages(){
     	boolean present;
+    	driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
     	try{
     	validate(noZipcode);
     	validate(invalidZip);

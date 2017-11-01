@@ -39,6 +39,7 @@ import pages.redesign.*;
 
 @SuppressWarnings("unused")
 public class UlayerHomePage extends UhcDriver {
+	
 
 	@FindBy(xpath = "//a[contains(text(), 'Go to Claims')]")
 	private WebElement ClaimsLink;
@@ -103,8 +104,10 @@ public class UlayerHomePage extends UhcDriver {
 
 	public PaymentHistoryPage navigateToPayments() {
 
+		driver.navigate().to("https://"+MRScenario.environment+"-medicare.uhc.com/content/medicare/member/payments/overview.html");
+/*		
 		GoToPaymentsLink.click();
-		CommonUtility.checkPageIsReady(driver);
+*/		CommonUtility.checkPageIsReady(driver);
 		// paymentsLink.click();
 		if (driver.getTitle().equalsIgnoreCase("Premium Payment History")
 				|| driver.getTitle().equalsIgnoreCase("payments-overview")) {
@@ -114,21 +117,13 @@ public class UlayerHomePage extends UhcDriver {
 		}
 	}
 
-	public OrderplanmaterialsPage navigateToLinkOrderPlanMaterialsAarpPage() {
-		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
-		OrderPlanMaterialslnk.click();
-		if (driver.getTitle().equalsIgnoreCase("Order Plan Materials")) {
-			return new OrderplanmaterialsPage(driver);
-		}
-
-		return null;
-	}
 
 	public MyProfilesPage navigateToProfAndPref() {
-		MyProfileLink.click();
-/*		driver.navigate()
-				.to("https://member.team-a-aarpmedicareplans.uhc.com//content/aarpm/home/profileandpreferences.html");
-*/		CommonUtility.checkPageIsReady(driver);
+
+		//MyProfileLink.click();
+		driver.navigate().to("https://"+MRScenario.environment+"-medicare.uhc.com/content/medicare/member/account/profile.html");
+		
+		CommonUtility.checkPageIsReady(driver);
 		if (MyProfilePageHeader.isDisplayed()) {
 
 			System.out.println("@@@@  My Profile and Preferences Page is Displayed  @@@@");
@@ -139,11 +134,13 @@ public class UlayerHomePage extends UhcDriver {
 
 	}
 
-	public PharmacySearchPage navigateToPharmacyLocator() {
-		driver.manage().timeouts().implicitlyWait(100, TimeUnit.SECONDS);
+	public PharmacySearchPage navigateToPharmacyLocator() throws InterruptedException {
+/*		driver.manage().timeouts().implicitlyWait(100, TimeUnit.SECONDS);
 		CommonUtility.checkPageIsReady(driver);
 		PharmacyLocatorLink.click();
-		driver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
+*/		
+		driver.navigate().to("https://"+MRScenario.environment+"-medicare.uhc.com/content/medicare/member/pharmacy-locator/overview.html#/Pharmacy-Search-English");
+		Thread.sleep(3000);
 		CommonUtility.checkPageIsReady(driver);
 		if (driver.getTitle().equalsIgnoreCase("AARP Medicare Plans | Pharmacy Directory")
 				|| driver.getTitle().equalsIgnoreCase("Locate a Pharmacy")) {
@@ -153,11 +150,10 @@ public class UlayerHomePage extends UhcDriver {
 	}
 
 	public MedicalClaimSummaryPage navigateToMedicalClaimsSummary() {
-		ClaimsLink.click();
-		System.out.println("Claims link clicked");
-		driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
+		//ClaimsLink.click();
+		
+		driver.navigate().to("https://"+MRScenario.environment+"-medicare.uhc.com/content/medicare/member/claims.html#/overview");
 		CommonUtility.checkPageIsReady(driver);
-
 		if (validate(ClaimsPageHeader)) {
 			System.out.println("Claims Page loaded");
 			return new MedicalClaimSummaryPage(driver);
@@ -167,9 +163,9 @@ public class UlayerHomePage extends UhcDriver {
 	}
 
 	public EoBSearchPage navigateToBenefitsAndCoverage() {
-		EOBsearchLink.click();
-		System.out.println("EOB link clicked");
-		driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
+		driver.navigate().to("https://"+MRScenario.environment+"-medicare.uhc.com/content/medicare/member/eob.html");
+		//EOBsearchLink.click();
+
 		CommonUtility.checkPageIsReady(driver);
 
 		if (validate(EOBPageHeader)) {
@@ -183,6 +179,7 @@ public class UlayerHomePage extends UhcDriver {
 	@Override
 	public void openAndValidate() {
 		CommonUtility.checkPageIsReady(driver);
+
 		validate(OrderPlanMaterialslnk);
 		validate(GoToContactUsLnk);
 		// validate(formsAndResourcesLink);
@@ -210,15 +207,9 @@ public class UlayerHomePage extends UhcDriver {
 	}
 
 	public OrderplanmaterialsPage navigateToOrderPlanMaterialsPage() {
-
-		// myMenuLinkAarp.click();
-
-		driver.manage().timeouts().implicitlyWait(120, TimeUnit.SECONDS);
+		driver.navigate().to("https://"+MRScenario.environment+"-medicare.uhc.com/content/medicare/member/order-materials/overview.html");
+		//OrderPlanMaterialslnk.click();
 		CommonUtility.checkPageIsReady(driver);
-
-		OrderPlanMaterialslnk.click();
-		CommonUtility.checkPageIsReady(driver);
-		driver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
 		if (orderplanHeadertxt.isDisplayed()) {
 			return new OrderplanmaterialsPage(driver);
 		}
@@ -227,8 +218,8 @@ public class UlayerHomePage extends UhcDriver {
 
 	public ContactUsPage navigatesToContactUsPage() {
 
-		GoToContactUsLnk.click();
-		driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
+		//GoToContactUsLnk.click();
+		driver.navigate().to("https://"+MRScenario.environment+"-medicare.uhc.com/content/medicare/member/contact-us/overview.html#/contact-us-two");
 		CommonUtility.checkPageIsReady(driver);
 		if (driver.findElement(By.xpath("//div[@ng-controller='contactUsCtrl']")).isDisplayed()){
 			return new ContactUsPage(driver);

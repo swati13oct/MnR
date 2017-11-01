@@ -16,7 +16,7 @@ Feature: To test order materials in Redesign site
     Examples: 
       | planType | memberType |option           |
       | MA       | Individual  |Member Materials |
-      | MAPD     | Individual  |Welcome kit      |
+      | MAPD     | Individual  |Member Materials      |
       | PDP      | Individual  |Welcome Guide    |
 
   @SHIPOrderMaterials
@@ -31,7 +31,7 @@ Feature: To test order materials in Redesign site
 
     Examples: 
       | planType | memberType | option      |
-      | SHIP     | Individual  | Coupon Book |
+      | SHIP     | PDPwithMedSupp  | Coupon Book |
 
   @ConfirmationPage
   Scenario Outline: Verify order materials confirmation page in Redesign site
@@ -48,21 +48,21 @@ Feature: To test order materials in Redesign site
     Examples: 
       | planType | memberType | option           |
       | MA       |  Individual | Member Materials |
-      | MAPD     | Individual  | Welcome kit      |
+      | MAPD     | Individual  | Member Materials      |
       | PDP      |  Individual | Welcome Guide    |
 
-  @needhelpcomponent
-  Scenario Outline: Verify need help component in Redesign site
-    Given registered AMP member with following attributes
-      | Plan Type | <planType> |
-      | Member Type  | <memberType> |
+#  @needhelpcomponent
+#  Scenario Outline: Verify need help component in Redesign site
+#    Given registered AMP member with following attributes
+#      | Plan Type | <planType> |
+#      | Member Type  | <memberType> |
       
-    When the user views order materials in Member Redesign Order Materials page
-    Then the user verify need help component in Redesign site
+#    When the user views order materials in Member Redesign Order Materials page
+#    Then the user verify need help component in Redesign site
 
-    Examples: 
-      | planType | memberType |
-      | MA       | Individual |
+#    Examples: 
+#      | planType | memberType |
+#      | MA       | Individual |
 
   @ValidateHeaderTabs
   Scenario Outline: Verify Aarp Order Materials Page Header - All Combo Plan Types
@@ -76,9 +76,9 @@ Feature: To test order materials in Redesign site
 
     Examples: 
             | planType  | memberType | comboPlans |
-            | MA        | MAwithMedSupp | MA,MedSupp |
-            | MAPD			| MAPDwithHIP | MAPD,HIP |
-            | PDP			| PDPwithMedSupp | PDP,MedSupp |
+#            | MA        | MAwithMedSupp | MA,MedSupp |
+#            | MAPD			| MAPDwithHIP | MAPD,HIP |
+            | 	SHIP		| PDPwithMedSupp | PDP,MedSupp |
 
   @ValidateOrderMaterialOptions
   Scenario Outline: Verify Order Plan Material Options - All Combo Plan Types
@@ -126,4 +126,4 @@ Feature: To test order materials in Redesign site
 
     Examples: 
       | planType | option      | memberType |
-      | SHIP     | Coupon Book | Individual |
+      | SHIP     | Coupon Book | PDPwithMedSupp |
