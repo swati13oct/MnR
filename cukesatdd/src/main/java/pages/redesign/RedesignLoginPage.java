@@ -95,7 +95,7 @@ public class RedesignLoginPage extends UhcDriver {
 			
 		driver.manage().timeouts().implicitlyWait(100, TimeUnit.SECONDS);
 		CommonUtility.checkPageIsReady(driver);
-/*		try{
+		try{
 			FeedbackModal.click();
 			System.out.println("FeedBack Modal Present");
 			if (validate(FeedbackModal)){
@@ -108,7 +108,7 @@ public class RedesignLoginPage extends UhcDriver {
 
 		}
 		driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
-*/		if(currentUrl().contains("/testharness.html") && category.equalsIgnoreCase("Group") ) {
+		if(currentUrl().contains("/testharness.html") && category.equalsIgnoreCase("Group") ) {
 			System.out.println("@@@@@@@@@@@@ Redesign Home Page Displayed for BlueLayer Member@@@@@@@@@@@@");
 			return new BlueLayerHomePage(driver, category);
 		}
@@ -138,7 +138,7 @@ public class RedesignLoginPage extends UhcDriver {
 		
 	driver.manage().timeouts().implicitlyWait(100, TimeUnit.SECONDS);
 	CommonUtility.checkPageIsReady(driver);
-/*	try{
+	try{
 		FeedbackModal.click();
 		System.out.println("FeedBack Modal Present");
 		if (validate(FeedbackModal)){
@@ -150,7 +150,7 @@ public class RedesignLoginPage extends UhcDriver {
 		System.out.println("FeedBack Modal NOT Present");
 	}
 	driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
-*/		if (currentUrl().contains("/testharness.html")){
+		if (currentUrl().contains("/testharness.html")){
 			System.out.println("@@@@@@@@@@@@ Redesign Home Page Displayed for ULayer Member@@@@@@@@@@@@");
 			return new UlayerHomePage(driver);
 		}

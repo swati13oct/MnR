@@ -181,18 +181,18 @@ public class OrderPlanMaterialsAarpStepDefinition {
 	public void validate_add_order_additional_material_for_pdp_in_Redesign_site() {
 		PlanMaterialConfirmationPage planMaterialConfirmationPage = (PlanMaterialConfirmationPage) getLoginScenario()
 				.getBean(PageConstants.PLAN_MATERIALS_CONFIRMATION_PAGE);
+		OrderplanmaterialsPage orderPlanMaterialsPage = (OrderplanmaterialsPage) getLoginScenario().getBean(PageConstants.ORDER_PLAN_MATERIALS_PAGE);
+		boolean flag = true;
 		if (planMaterialConfirmationPage == null){
 			System.out.println("@@@@@@@@@@  Order Material Failed  @@@@@@@@@@");
+			flag = orderPlanMaterialsPage.ValidateErrorMessage();
 			Assert.fail("Order Plan Materials Submission Failed. Confirmation page not displayed");
 		}
-		else{
-			System.out.println("@@@@@@@@@@  Order Material Confirmation Displayed  @@@@@@@@@@");
 
-		OrderplanmaterialsPage orderPlanMaterialsPage = planMaterialConfirmationPage.navigateToValidateOrderConfirmationInRedesignPage();
+		System.out.println("@@@@@@@@@@  Order Material Confirmation Displayed  @@@@@@@@@@");
+
+		orderPlanMaterialsPage = planMaterialConfirmationPage.navigateToValidateOrderConfirmationInRedesignPage();
 		Assert.assertTrue(true);
-
-		}
-
 	}
 	
 	@Then("^the user verify need help component in Redesign site$")

@@ -7,6 +7,7 @@ import java.util.NoSuchElementException;
 import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -53,8 +54,8 @@ public class OrderplanmaterialsPage extends UhcDriver {
 	private WebElement SHIPerrorMsg;
 	
 	@FindBy(id = "order-materials-error")
-	private WebElement NoSelectionErrorMsg;
-
+	private WebElement OrderMaterialsErrorMsg;
+	
 	@FindBy(id = "ppe-id")
 	private WebElement premiumPayment;
 
@@ -85,6 +86,9 @@ public class OrderplanmaterialsPage extends UhcDriver {
 	
 	@FindBy(id="submit-order-materials")
 	private WebElement submitButton;
+	
+	@FindBy(xpath = "//*[contains(text(),'Plan Materials Order Confirmation')]")
+	private WebElement OrderConfirmationHeader;
 	
 	@FindBy(id="additionalMaterialsText")
 	private WebElement OrderConfirmation_addordermaterialLink;
@@ -211,16 +215,16 @@ public class OrderplanmaterialsPage extends UhcDriver {
 	}
 	public boolean ValidateErrorMessage(){
 		driver.manage().timeouts().implicitlyWait(40, TimeUnit.SECONDS);
-		if (NoSelectionErrorMsg.isDisplayed()){
+		if (OrderMaterialsErrorMsg.isDisplayed()){
 			System.out.println("*************Error Message Displayed displayed for Order materials Page***************");
-			System.out.println("*************Error Message : "+NoSelectionErrorMsg.getText()+" ***************");
+			System.out.println("*************Error Message : "+OrderMaterialsErrorMsg.getText()+" ***************");
 			return true;
 		}
 		else{ 
 			System.out.println("************Error message not displayed for Order materials Page***************");
 			return false;}
-		
 	}
+
 	public boolean ValidateSHIPErrorMessage(){
 		
 		if (SHIPerrorMsg.isDisplayed()){
@@ -318,13 +322,20 @@ public class OrderplanmaterialsPage extends UhcDriver {
 			}
 
 		}
-		submitButton.click();
+		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+		
+		//submitButton.submit();
+		if(validate(submitButton)){
+			
+			JavascriptExecutor js = (JavascriptExecutor)driver;
+			js.executeScript("arguments[0].click();", submitButton); 
+			System.out.println("****** Submit Button Clicked ********");
+		}
 
 		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
-		if(validate(submitButton)){
-			return null;
-		}
-		if (validate(OrderConfirmation_addordermaterialLink)) {
+		CommonUtility.checkPageIsReady(driver);
+		if (validate(OrderConfirmationHeader) || validate(OrderConfirmation_addordermaterialLink)) {
+			System.out.println("@@@@ Opder Plan Material COnfirmation Page is Displayed @@@@");
 			return new PlanMaterialConfirmationPage(driver);
 		} 
 			return null;
