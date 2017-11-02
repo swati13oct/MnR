@@ -110,12 +110,15 @@ public class ReviewOneTimePaymentsPage extends UhcDriver{
 	
 	public OneTimePaymentPageSubmitted navigateToOTPSubmittedPage() throws InterruptedException {
 		
-		Thread.sleep(2000);		
+		Thread.sleep(2000);	
+		JavascriptExecutor jse = (JavascriptExecutor)driver;
+		jse.executeScript("window.scrollBy(0,300)", "");
+		Thread.sleep(2000);
 		Legalcheckbox.click();
 		System.out.println("Checkbox clicked");		
+		Thread.sleep(2000);		
+		jse.executeScript("window.scrollBy(0,250)", "");
 		Thread.sleep(2000);
-		JavascriptExecutor jse = (JavascriptExecutor)driver;
-		jse.executeScript("window.scrollBy(0,100)", "");
 		SubmitButton.click();
 		System.out.println("Submit Button clicked");
 	    Thread.sleep(5000);
@@ -128,15 +131,18 @@ public class ReviewOneTimePaymentsPage extends UhcDriver{
 	
 public ReviewOneTimePaymentsPage ValidateOnePaymentPerDayErrorMessage() throws InterruptedException {
 		
-		Thread.sleep(5000);		
-		Legalcheckbox.click();
-		System.out.println("Checkbox clicked");	
-		JavascriptExecutor jse = (JavascriptExecutor)driver;
-		jse.executeScript("window.scrollBy(0,100)", "");
-		Thread.sleep(3000);
-		SubmitButton.click();
-		System.out.println("Submit Button clicked");
-	    Thread.sleep(5000);
+	    Thread.sleep(2000);	
+	    JavascriptExecutor jse = (JavascriptExecutor)driver;
+	    jse.executeScript("window.scrollBy(0,300)", "");
+	    Thread.sleep(2000);
+	    Legalcheckbox.click();
+	    System.out.println("Checkbox clicked");		
+	    Thread.sleep(2000);		
+	    jse.executeScript("window.scrollBy(0,250)", "");
+	    Thread.sleep(2000);
+	    SubmitButton.click();
+	    System.out.println("Submit Button clicked");
+        Thread.sleep(5000);
 		 if(OTPError.getText().contains("Only one payment request can be submitted per business day") || OTPError.getText().contains("Due to a system error, your request cannot be processed at this time")){
 				return new ReviewOneTimePaymentsPage(driver);
 			}

@@ -69,7 +69,7 @@ public class TeamHLoginUlayer extends UhcDriver{
 				alert2.accept();
 			}*/
 		          
-		Thread.sleep(15000);
+		Thread.sleep(20000);
 		if(currentUrl().contains("member/testharness.html"))
 
 		{

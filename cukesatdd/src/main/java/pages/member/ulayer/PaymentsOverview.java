@@ -70,7 +70,7 @@ public class PaymentsOverview extends UhcDriver{
 	{
 		Thread.sleep(8000);
 		JavascriptExecutor jse = (JavascriptExecutor)driver;
-		jse.executeScript("window.scrollBy(0,125)", "");
+		jse.executeScript("window.scrollBy(0,100)", "");
 		Thread.sleep(5000);
 		if(OneTimePaymentButton.isEnabled()){
 			OneTimePaymentButton.click();

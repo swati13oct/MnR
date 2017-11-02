@@ -5,6 +5,7 @@ package pages.member.ulayer;
 
 import java.util.Map;
 
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -117,7 +118,12 @@ public class OneTimePaymentsPage extends UhcDriver{
 		confirmAccountNumberField.sendKeys("1234");
 		firstNameField.sendKeys("Test");
 		lastNameField.sendKeys("MA");
+		Thread.sleep(1000);
 		electronicSignatureCheck.click();
+		Thread.sleep(2000);
+		JavascriptExecutor jse = (JavascriptExecutor)driver;
+		jse.executeScript("window.scrollBy(0,150)", "");
+		Thread.sleep(5000);
 		reviewContinue.click();
 		Thread.sleep(2000);
 		if(driver.getTitle().equalsIgnoreCase("overview") || driver.getTitle().equalsIgnoreCase("onetimepayments")){

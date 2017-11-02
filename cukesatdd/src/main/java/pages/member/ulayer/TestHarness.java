@@ -22,7 +22,7 @@ public class TestHarness extends UhcDriver{
 	/*@FindBy(xpath="/html/body/div[2]/div[3]/div[2]/div/table/tbody/tr[8]/td[2]/a") 
 	private WebElement TeamHPaymentPage;*/	
 	
-	@FindBy(xpath=".//table[@class='componentTable']/tbody/tr[8]/td[2]") 
+	@FindBy(xpath="//table[@class='componentTable']/tbody/tr[8]/td[2]/a")                  
 	private WebElement TeamHPaymentPage;
 	
 	@FindBy(linkText="Go to payment link page")
@@ -52,7 +52,7 @@ public class TestHarness extends UhcDriver{
 	{
 		Thread.sleep(3000);
 		JavascriptExecutor jse = (JavascriptExecutor)driver;
-		jse.executeScript("window.scrollBy(0,450)", "");
+		jse.executeScript("window.scrollBy(0,350)", "");
 		Thread.sleep(5000);
 		if(TeamHPaymentPage.isEnabled()){
 			TeamHPaymentPage.click();
