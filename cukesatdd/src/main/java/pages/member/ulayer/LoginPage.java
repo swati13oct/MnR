@@ -81,6 +81,9 @@ public class LoginPage extends UhcDriver {
 				alert2.accept();
 			}*/
 
+		}else if(MRScenario.environment.equals("ci")){
+			Alert alert = driver.switchTo().alert();
+			alert.accept();
 		}
 		/*
 		if ( MRScenario.environment.equals("dev-a") || MRScenario.environment.equals("dev-c")
