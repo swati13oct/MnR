@@ -141,10 +141,13 @@ public class OrderPlanMaterialsUmsStepDefinition {
 				.getBean(PageConstants.PLAN_MATERIALS_CONFIRMATION_PAGE);
 		if (planMaterialConfirmationPage == null){
 			System.out.println("@@@@@@@@@@  Order Material Failed  @@@@@@@@@@");
-			Assert.assertTrue(true);
+			Assert.fail("Order Plan Materials Submission Failed. Confirmation page not displayed");
 		}
 		else{
+			System.out.println("@@@@@@@@@@  Order Material Confirmation Displayed  @@@@@@@@@@");
+
 		OrderplanmaterialsPage orderPlanMaterialsPage = planMaterialConfirmationPage.navigateToValidateOrderConfirmationInRedesignPage();
+		Assert.assertTrue(true);
 		}
 	}
 

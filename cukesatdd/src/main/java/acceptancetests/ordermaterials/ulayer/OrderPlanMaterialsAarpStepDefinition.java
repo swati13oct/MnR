@@ -183,10 +183,14 @@ public class OrderPlanMaterialsAarpStepDefinition {
 				.getBean(PageConstants.PLAN_MATERIALS_CONFIRMATION_PAGE);
 		if (planMaterialConfirmationPage == null){
 			System.out.println("@@@@@@@@@@  Order Material Failed  @@@@@@@@@@");
-			Assert.assertTrue(true);
+			Assert.fail("Order Plan Materials Submission Failed. Confirmation page not displayed");
 		}
 		else{
+			System.out.println("@@@@@@@@@@  Order Material Confirmation Displayed  @@@@@@@@@@");
+
 		OrderplanmaterialsPage orderPlanMaterialsPage = planMaterialConfirmationPage.navigateToValidateOrderConfirmationInRedesignPage();
+		Assert.assertTrue(true);
+
 		}
 
 	}
@@ -269,7 +273,7 @@ public class OrderPlanMaterialsAarpStepDefinition {
 			Assert.assertTrue(true);
 		}
 		else{
-			Assert.fail("Fail : navigages to Order Confirmation page");
+			Assert.fail("Fail : navigates to Order Confirmation page");
 		}
 	}
 

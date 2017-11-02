@@ -324,7 +324,7 @@ public class OrderplanmaterialsPage extends UhcDriver {
 		if(validate(submitButton)){
 			return null;
 		}
-		else if (validate(OrderConfirmation_addordermaterialLink)) {
+		if (validate(OrderConfirmation_addordermaterialLink)) {
 			return new PlanMaterialConfirmationPage(driver);
 		} 
 			return null;
