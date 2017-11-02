@@ -14,8 +14,8 @@ Then the user navigates to EOB page and validates the page
  |To Date   |<toDate>     |
 Examples:
 	| planType    | memberType           | eobTypeData       | fromDate   | toDate     |dateRange       |
-	| MAPD-COSMOS | q3_sep_ulayer561     | Medical           | 12/12/2007 | 12/12/2008 |Last 6 months   |
-#	| MAPD-NICE   | q3_sep_ulayer028     | Medical           | 12/12/2007 | 12/12/2008 |Last 6 months   |
+	| MAPD-COSMOS | q4_dec_aarp018       | Medical           | 12/12/2007 | 12/12/2008 |Last 6 months   |
+ #	| MAPD-NICE   | q3_sep_ulayer028     | Medical           | 12/12/2007 | 12/12/2008 |Last 6 months   |
 #	| MA-NICE     | q3_sep_ulayer193     | Medical           | 12/12/2007 | 12/12/2008 |Last 6 months   |
 @F85974
 @fixed
@@ -31,8 +31,8 @@ Then the user navigates to EOB page and validates the page
  |To Date   |<toDate>     |
 Examples:
 	| planType     | memberType            | eobTypeData       | fromDate   | toDate     |dateRange       |
-	| MAPD-COSMO   | q3_sep_ulayer561      | Medical           | 12/12/2007 | 12/12/2008 |Last 6 months   |
- 	| PDP          | q3_sep_ulayer293      | Medical           | 12/12/2007 | 12/12/2008 |Last 6 months   |
+	| MAPD-COSMO   | q4_dec_aarp018      | Medical           | 12/12/2007 | 12/12/2008 |Last 6 months   |
+ 	| PDP          | q4_dec_aarp288      | Medical           | 12/12/2007 | 12/12/2008 |Last 6 months   |
  	#| Combo      | withEOB      | Medical           | 12/12/2007 | 12/12/2008 |Last 6 months   |	
  	#| Ship       | withEOB      | Medical           | 12/12/2007 | 12/12/2008 |Last 3-6 Months   |	
  
@@ -266,7 +266,7 @@ Then the user navigates to EOB page and validates the page
 
 Examples:
        | planType  | memberType   | eobTypeData        | fromDate   | toDate     |   dateRange    | 
-       | MAPD       | q3_sep_ulayer561      | Medical           | 2016/01/01 | 2017/04/01 | Custom Search  |
+       | MAPD       | q4_dec_aarp018      | Medical           | 2016/01/01 | 2017/04/01 | Custom Search  |
  			 #| MA         | withEOB      | Medical           | 2016/01/01 | 2017/04/01 | Custom Search  |
        #| PDP       | withEOB      | Medical           | 2016/01/01 | 2017/04/01 | Custom Search  |
       # | Ship      | withEOB      | Medical           | 2016/01/01 | 2017/04/01 | Custom Search  |
@@ -285,7 +285,7 @@ And the user validates pagination functionality
 
 Examples:
        | planType  | memberType   				| eobTypeData        | fromDate   | toDate     |   dateRange    | 
-       | MAPD      | q3_sep_ulayer561     | Medical           | 2016/01/01 | 2017/04/01 | Custom Search  |   
+       | MAPD      | q4_dec_aarp018     | Medical           | 2016/01/01 | 2017/04/01 | Custom Search  |   
        
 @fixed
 Scenario Outline: Allowed Domains – Authors need ability to define messages and domains for leaving member sites (ATDD)
@@ -296,6 +296,6 @@ Then the user navigates to EOB page
 Then the user validates site leaving pop up         
 Examples:
        | planType  | memberType        |  
-       | MA-NICE   | q3_sep_ulayer193  | 
-       | MAPD-NICE | q3_sep_ulayer028  |    
+    #   | MA-NICE   | q3_sep_ulayer193  | 
+       | MAPD  | q4_dec_aarp018  |    
        	
