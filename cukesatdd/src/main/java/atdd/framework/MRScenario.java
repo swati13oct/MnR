@@ -68,6 +68,7 @@ public class MRScenario {
 
 	private static Map<String, Map<String, JSONObject>> expectedDataMapBluelayer = new LinkedHashMap<String, Map<String, JSONObject>>();
 	public static String environment;
+	public static String domain;
 
 	private static final String DIRECTORY = "/src/main/resources/";
 
@@ -116,6 +117,11 @@ public class MRScenario {
 		/* Set acqusisition and member urls */
 		environment = props.get("Environment");
 		
+		if(props.containsKey("Domain")) {
+			domain = props.get("Domain");
+		} else {
+			domain = null;
+		}
 		
 		
 		// Setting permission to the scripts , so that jenkins server can access
