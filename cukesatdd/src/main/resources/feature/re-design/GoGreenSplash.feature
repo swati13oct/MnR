@@ -1,4 +1,4 @@
-@velocityDashers
+@goGreen
 Feature: To test go green splash page
 
   @goGreen
