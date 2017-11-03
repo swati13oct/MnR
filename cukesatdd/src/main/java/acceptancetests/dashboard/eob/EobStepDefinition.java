@@ -38,76 +38,6 @@ public class EobStepDefinition {
 	public MRScenario getLoginScenario() {
 		return loginScenario;
 	}
-
-//	@Given("^registered AMP with for EOB flow$")
-//	public void registered_AMP_with_attribute_eob_aarp(
-//			DataTable memberAttributes) {
-//		/* Reading the given attribute from feature file */
-//		/* Reading the given attribute from feature file */
-//        List<DataTableRow> memberAttributesRow = memberAttributes
-//                     .getGherkinRows();
-//        Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
-//        for (int i = 0; i < memberAttributesRow.size(); i++) {
-//
-//               memberAttributesMap.put(memberAttributesRow.get(i).getCells()
-//                            .get(0), memberAttributesRow.get(i).getCells().get(1));
-//        }
-//        String planType = memberAttributesMap.get("Plan Type");
-//        String businessType = null;
-//        if (planType.equalsIgnoreCase("MA")
-//                     || planType.equalsIgnoreCase("MAPD")
-//                     || planType.equalsIgnoreCase("PDP")) {
-//               businessType = "GOVT";
-//        } else {
-//               businessType = "SHIP";
-//        }
-//        getLoginScenario().saveBean(ClaimsCommonConstants.BUSINESS_TYPE,
-//                     businessType);
-//
-//        Set<String> memberAttributesKeySet = memberAttributesMap.keySet();
-//        List<String> desiredAttributes = new ArrayList<String>();
-//        for (Iterator<String> iterator = memberAttributesKeySet.iterator(); iterator
-//                     .hasNext();) {
-//               {
-//                     String key = iterator.next();
-//                     if (!memberAttributesMap.get(key).isEmpty()) {
-//                            desiredAttributes.add(memberAttributesMap.get(key));
-//                     }
-//               }
-//        }
-//        System.out.println("desiredAttributes.." + desiredAttributes);
-//        Map<String, String> loginCreds = loginScenario
-//                     .getAMPMemberWithDesiredAttributes(desiredAttributes);
-//
-//        String userName = null;
-//        String pwd = null;
-//        if (loginCreds == null) {
-//               // no match found
-//               System.out.println("Member Type data could not be setup !!!");
-//               Assert.fail("unable to find a " + desiredAttributes + " member");
-//        } else {
-//               userName = loginCreds.get("user");
-//               pwd = loginCreds.get("pwd");
-//               System.out.println("User is..." + userName);
-//               System.out.println("Password is..." + pwd);
-//               getLoginScenario()
-//                            .saveBean(LoginCommonConstants.USERNAME, userName);
-//               getLoginScenario().saveBean(LoginCommonConstants.PASSWORD, pwd);
-//        }
-//
-//        WebDriver wd = getLoginScenario().getWebDriver();
-//        getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
-//        //JSONObject accountHomeActualJson = null;
-//       LoginPage loginPage = new LoginPage(wd);
-//
-//        AccountHomePage accountHomePage = (AccountHomePage)loginPage.loginWith(userName, pwd);
-//        if (accountHomePage != null) {
-//               getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
-//               getLoginScenario().saveBean(PageConstants.ACCOUNT_HOME_PAGE,
-//                            accountHomePage);
-//        }
-//
-// 	}
 	
 	@Given("^registered AMP with for EOB flow$")
 	public void registered_AMP_with_attribute_eob_aarp(DataTable givenAttributes){
@@ -166,6 +96,12 @@ public class EobStepDefinition {
  	@Then("^the user navigates to EOB page$")
 	public void the_user_navigates_to_EOB_page() {
 		EOBPage eobPage =  (EOBPage) getLoginScenario().getBean(PageConstants.EOB_Page);
+		try {
+			Thread.sleep(10000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		eobPage.navigateDirectToEOBPag();
 		if(eobPage!=null){
 			getLoginScenario().saveBean(PageConstants.MEDICAL_EOB_PAGE,
@@ -232,6 +168,24 @@ public class EobStepDefinition {
 	public void user_validates_site_leaving_poup(){
 		EOBPage eobPage =  (EOBPage) getLoginScenario().getBean(PageConstants.EOB_Page);
         eobPage.validateSiteLeaveingPopUP();
+	}
+	
+	@And("^the user slects the desired date range$")
+	public void user_selects_date_range(DataTable givenAttributes){
+		List<DataTableRow> memberAttributesRow = givenAttributes
+				.getGherkinRows();
+		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells()
+					.get(0), memberAttributesRow.get(i).getCells().get(1));
+		}
+
+		String dateRange = memberAttributesMap.get("Date Range");
+		String planType  = memberAttributesMap.get("Plan Type");
+		String eobTypeData   = memberAttributesMap.get("EOB Type");
+		EOBPage eobPage =  (EOBPage) getLoginScenario().getBean(PageConstants.EOB_Page);
+		eobPage.selectDateRange(dateRange, planType, eobTypeData);
 	}
 	
 	@After

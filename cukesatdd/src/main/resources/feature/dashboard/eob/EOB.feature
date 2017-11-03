@@ -10,7 +10,9 @@ Then the user navigates to EOB page
 Then the user validates site leaving pop up         
 Examples:
        | planType  | memberType        |  
-       | MAPD      | q4_dec_uhc002  	 |    
+       | MAPD      | q4_dec_uhc002  	 | 
+       | PDP			 | q4_dec_aarp292		 |
+       | MA				 | q4_dec_aarp507	   |   
  			  
 @workingOn
 Scenario Outline: To validate EOB Type Drop-Down
@@ -23,9 +25,38 @@ Then the user validates EOB type and Date Range for MAPD
  
 Examples:
        | planType  | memberType              |  
-       | MAPD      | q4_dec_uhc002		       |
+       | MAPD      | q4_dec_aarp441		       |
+
+@eobPdf       
+Scenario Outline: To verify How to read a medical EOB PDF
+Given registered AMP with for EOB flow
+	| Plan Type      |<planType>  |
+	| Member Type    |<memberType>|
+Then the user navigates to EOB page
+And the user slects the desired date range
+  | Plan Type      |<planType>  |
+  | Date Range     |<dateRange> |
+  | EOB Type			 |<eobType>|
+And the user validates how to read medical eob PDF
+ 	Examples:
+	| planType  | memberType        |dateRange			| eobType |
+	| MAPD      | q4_dec_uhc002     |18 Months		  | Medical |
        
        
- 			 
+ @validateEOBStatements      
+ Scenario Outline: To verify How to read a medical EOB PDF
+Given registered AMP with for EOB flow
+	| Plan Type      |<planType>  |
+	| Member Type    |<memberType>|
+Then the user navigates to EOB page	
+And the user slects the desired date range
+  | Plan Type      |<planType>  |
+  | Date Range     |<dateRange> |
+  | EOB Type			 |<eobType>|
+Then the user validates EOB statments displayed 	
+Examples:
+	| planType  | memberType        |dateRange			| eobType |
+	| MAPD      | q4_dec_uhc002     |Last 18 months | Medical |
+	
        
      	
