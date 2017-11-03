@@ -60,10 +60,9 @@ public class DeepLink extends UhcDriver{
 		return new DeepLink(driver);
 	}
 	
-	public DeepLink validateDeepLinkPage(String deepLinkPage){
-		WebDriverWait wait = new WebDriverWait(driver, 90);
-		wait.until(ExpectedConditions.elementToBeClickable(By.id("home")));
-		if(driver.getTitle().equals(deepLinkPage)){
+	public DeepLink validateDeepLinkPage(String deepLinkPage, String deepLinkUrl){
+ 		driver.manage().timeouts().implicitlyWait(20,TimeUnit.SECONDS) ;
+		if(driver.getCurrentUrl().equals(DEEPLINK_URL+deepLinkUrl)){
 			System.out.println("desire page displayed  "+deepLinkPage);
 			Assert.assertTrue(true);
  		}else {

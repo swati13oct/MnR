@@ -207,4 +207,5 @@ public class PageConstants {
 	
 	public static final String DeepLink_Page = "deepLinkPage";
 
+	public static final String DeepLink_url = "deepLinkUrl";
 }

@@ -37,6 +37,8 @@ public class DeepLinkStepDefinition {
 			}
 
  		String deepLinkURL = memberAttributesMap.get("DeepLinkURL");
+ 		
+ 		getLoginScenario().saveBean(PageConstants.DeepLink_url, deepLinkURL);
 
 		WebDriver wd = getLoginScenario().getWebDriver();
         getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
@@ -64,7 +66,8 @@ public class DeepLinkStepDefinition {
 			String deepLinkPage = memberAttributesMap.get("DeepLinkPage");
 			String userName = memberAttributesMap.get("UserName");
 			DeepLink deepLinkPag = (DeepLink) getLoginScenario().getBean(PageConstants.DeepLink_Page);
+			String deepLinkUrl = (String) getLoginScenario().getBean(PageConstants.DeepLink_url);
 			deepLinkPag.loginToDashboardPage(userName);
-			deepLinkPag.validateDeepLinkPage(deepLinkPage);
+			deepLinkPag.validateDeepLinkPage(deepLinkPage, deepLinkUrl);
  	}
 }

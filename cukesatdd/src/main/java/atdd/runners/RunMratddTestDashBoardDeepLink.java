@@ -8,7 +8,7 @@ import cucumber.junit.Cucumber;
 @Cucumber.Options(glue = { "atdd.framework","acceptancetests.dashboard.deepLink" }, 
 		features = { "feature/dashboard" }, 
 		format = {
-		"pretty", "html:reports/test-report","json:target/cucumberprint5.json" }, tags ={"@F118429"})
+		"pretty", "html:reports/test-report","json:target/cucumberprint5.json" }, tags ={"@healthline"})
 
 public class RunMratddTestDashBoardDeepLink {
 

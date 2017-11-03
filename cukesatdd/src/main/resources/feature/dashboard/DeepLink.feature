@@ -129,3 +129,29 @@ Examples:
 |Provider Search                |q3_sep_grp002  |/Member/provider-search.html|
 
 # *************** NON - HEALTHLINE ***********************************************
+
+@healthline
+Scenario Outline: Deep Links - Registered Users ( Health Line )
+Given I am an registered user and clicks on deeplink
+|DeepLinkURL    |<deepLinkURL>|
+And then upon successful sign-in, directed to the desired page
+|DeepLinkPage   |<deepLinkPage>|
+|UserName       |<userName>|
+Examples:
+|deepLinkPage				|userName         |deepLinkURL                   |
+
+|na									|q4_dec_aarp531		|/home/my-health-and-wellness.html?srclink=roadtripreunion|
+|na									|q4_dec_aarp531		|/Healthlineu/health/hra/senior-survey?cont=1#survey/s9/p010|
+|na									|q4_dec_uhc159		|/Healthline/health/health-wellness-dashboard |
+|na									|q4_dec_aarp531 	|/Healthlineu/health/health-wellness-dashboard|
+|na									|q4_dec_uhc159		|/Healthline/health/hra/healthriskassessment|
+|na									|q4_dec_aarp531		|/Healthlineu/health/hra/healthriskassessment|
+|na									|q4_dec_uhc159		|/Healthline/visualizeyou|
+|na									|q4_dec_aarp531		|/Healthlineu/visualizeyou|
+|na									|q4_dec_uhc159		|/Healthline/health/health-wellness-learning|
+|na									|q4_dec_aarp531		|/Healthlineu/health/health-wellness-learning|
+|na									|q4_dec_uhc159		|/Healthline/health/health-wellness-lifestyle|
+|na									|q4_dec_aarp531		|/Healthlineu/health/health-wellness-lifestyle|
+|na									|q4_dec_uhc159		|/Healthline/health/health-wellness-rewards|
+|na									|q4_dec_aarp531		|/Healthlineu/health/health-wellness-rewards|
+ 
