@@ -87,8 +87,14 @@ public class EobStepDefinition {
 
  	     //Pass the direct URL to validate the page
 		EOBPage eobPage =  (EOBPage) getLoginScenario().getBean(PageConstants.EOB_Page);
-		eobPage.navigateDirectToEOBPag();
-		eobPage.selectDateRange(dateRange, planType, eobTypeData);
+		//eobPage.navigateDirectToEOBPag();
+		try {
+			Thread.sleep(4300);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		//eobPage.selectDateRange(dateRange, planType, eobTypeData);
 		if(eobPage!=null){
 			System.out.println("user is on EOB page");
 		} 
