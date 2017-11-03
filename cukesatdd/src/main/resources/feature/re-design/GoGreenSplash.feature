@@ -13,8 +13,8 @@ Feature: To test go green splash page
 
     Examples: 
       | memberId     |  | dob        |
-      | 003072377-1  |  | 07/10/1930 |
-      | 316454846-11 |  | 01/08/1945 |
+      | 000343946-1  |  | 15/09/1941 |
+      | 316454846-11 |  | 08/01/1945 |
       | 960450657-1  |  | 21/08/1942 |
 
   @goGreen
@@ -44,7 +44,7 @@ Feature: To test go green splash page
       | memberId     |  | dob        | planName                                        |
       | 018873498-1  |  | 28/11/1951 | HealthSelectSM Medicare RX (PDP)                |
       | 000343946-1  |  | 15/09/1941 | UnitedHealthcare Group Medicare Advantage (HMO) |
-      | 316454846-11 |  | 01/08/1945 | AARP MEDICARE SUPPLEMENT PLAN                   |
+      | 316454846-11 |  | 08/01/1945 | AARP MEDICARE SUPPLEMENT PLAN                   |
 
   @goGreen
   Scenario Outline: Verify go green splash error message on page
@@ -57,4 +57,4 @@ Feature: To test go green splash page
 
     Examples: 
       | memberId    |  | dob        |
-      | 003072377-1 |  | 07/10/1930 |
+      | 000343946-1 |  | 15/09/1941 |
