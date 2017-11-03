@@ -255,7 +255,22 @@ Then the user lands on OneTime Payment Submitted Page and validates Timestamp
 Examples:
 	| planType |
 	| FED      |
-	
+
+
+@TeamHAuto
+Scenario Outline: Verify the Timestamp on Automatic Payment Submitted page
+Given the user is on the Team-H AARP medicare site login page
+When the user logs in TeamH with a registered AMP with following details in AARP site
+	| Plan Type   | <planType>  |
+And the user navigates to TeamHPaymentOverview Page
+And the user navigates to Team H Automatic Payments page
+And the user enters details and click on continue button on Automatic Payments Page for Dashboard
+And user lands on Review One time Payments Page and navigates to OTP Submitted Page
+Then the user lands on OneTime Payment Submitted Page and validates Timestamp
+
+Examples:
+	| planType |
+	| FED      |	
 
 @TeamHError
 Scenario Outline: Verify the Timestamp on OneTime Payment Submitted page

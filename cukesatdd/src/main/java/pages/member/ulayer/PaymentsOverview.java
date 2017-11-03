@@ -18,7 +18,7 @@ public class PaymentsOverview extends UhcDriver{
 	@FindBy(xpath="//div[@class='margin-small']//a[@id='onetimepayment']")
 	private WebElement OneTimePaymentButton;
 	
-	@FindBy(id = "setupautopayment")
+	@FindBy(xpath = "//div[@id='paymentOverviewApp']//span[@class='payment-method-btn'][2]/a")
 	private WebElement AutomaticPaymentButton;
 	
 	@FindBy(xpath=".//*[@id='customFields']/div[3]/button")
@@ -74,6 +74,20 @@ public class PaymentsOverview extends UhcDriver{
 		Thread.sleep(5000);
 		if(OneTimePaymentButton.isEnabled()){
 			OneTimePaymentButton.click();
+			return new OneTimePaymentsPage(driver);
+		}
+		return null;
+	}
+	
+	
+	public OneTimePaymentsPage navigateToAutoPaymentpage() throws InterruptedException
+	{
+		Thread.sleep(8000);
+		JavascriptExecutor jse = (JavascriptExecutor)driver;
+		jse.executeScript("window.scrollBy(0,100)", "");
+		Thread.sleep(5000);
+		if(AutomaticPaymentButton.isEnabled()){
+			AutomaticPaymentButton.click();
 			return new OneTimePaymentsPage(driver);
 		}
 		return null;
