@@ -87,14 +87,8 @@ public class EobStepDefinition {
 
  	     //Pass the direct URL to validate the page
 		EOBPage eobPage =  (EOBPage) getLoginScenario().getBean(PageConstants.EOB_Page);
-		//eobPage.navigateDirectToEOBPag();
-		try {
-			Thread.sleep(4300);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		//eobPage.selectDateRange(dateRange, planType, eobTypeData);
+		eobPage.navigateDirectToEOBPag();		 
+		eobPage.selectDateRange(dateRange, planType, eobTypeData);
 		if(eobPage!=null){
 			System.out.println("user is on EOB page");
 		} 
@@ -117,24 +111,12 @@ public class EobStepDefinition {
 	@And("^the user validates how to read medical eob PDF$")
 	public void the_user_validates_how_to_read_medical_eob_PDF() {
 		EOBPage eobPage = (EOBPage) getLoginScenario().getBean(PageConstants.MEDICAL_EOB_PAGE);
-		/*eobPage.validateReadPDF();*/
-		try {
-			Thread.sleep(5600);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		eobPage.validateReadPDF();		 
 	}
 	@Then("^the user validates EOB statments displayed$")
 	public void the_user_validates_EOB_statments_displayed() {
 		EOBPage eobPage = (EOBPage) getLoginScenario().getBean(PageConstants.MEDICAL_EOB_PAGE);
-       // eobPage.validateEachEOBonUI();
-		try {
-			Thread.sleep(5400);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+        eobPage.validateEachEOBonUI();		 
 	}
 	
 	@Then("^the user validates EOB type and Date Range for MAPD$")
@@ -148,15 +130,9 @@ public class EobStepDefinition {
 					.get(0), memberAttributesRow.get(i).getCells().get(1));
 		}
 		String planType  = memberAttributesMap.get("Plan Type");
-		/*EOBPage eobPage = (EOBPage) getLoginScenario().getBean(PageConstants.MEDICAL_EOB_PAGE);
+		EOBPage eobPage = (EOBPage) getLoginScenario().getBean(PageConstants.MEDICAL_EOB_PAGE);
         System.out.println(planType);
-		eobPage.validateDropDowns(planType)*/;
-		try {
-			Thread.sleep(4600);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		eobPage.validateDropDowns(planType);		 
 	}
 	@And("^the user validates How to read your Medical EOB video$")
 	public void the_user_validates_how_to_read_medical_eob_Video() {
@@ -180,12 +156,6 @@ public class EobStepDefinition {
 		String eobTypeData = memberAttributesMap.get("EOB Type");
 		String fromDate = memberAttributesMap.get("From Date");
 		String toDate = memberAttributesMap.get("To Date");
-		try {
-			Thread.sleep(5000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 	}
 	
 	
@@ -209,14 +179,8 @@ public class EobStepDefinition {
 		String dateRange = memberAttributesMap.get("Date Range");
 		String planType  = memberAttributesMap.get("Plan Type");
 		String eobTypeData   = memberAttributesMap.get("EOB Type");
-		/*EOBPage eobPage =  (EOBPage) getLoginScenario().getBean(PageConstants.EOB_Page);
-		eobPage.selectDateRange(dateRange, planType, eobTypeData);*/
-		try {
-			Thread.sleep(7121);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		EOBPage eobPage =  (EOBPage) getLoginScenario().getBean(PageConstants.EOB_Page);
+		eobPage.selectDateRange(dateRange, planType, eobTypeData);
 	}
 	
 	@After
