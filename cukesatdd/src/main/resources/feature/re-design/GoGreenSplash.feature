@@ -14,7 +14,8 @@ Feature: To test go green splash page
     Examples: 
       | memberId     |  | dob        |
       | 003072377-1  |  | 07/10/1930 |
-      | 374578451-11 |  | 03/01/1949 |
+      | 316454846-11 |  | 01/08/1945 |
+      | 960450657-1  |  | 21/08/1942 |
 
   @goGreen
   Scenario Outline: Verify go green splash page for COMBO member
@@ -40,10 +41,10 @@ Feature: To test go green splash page
       | PlanName | <planName> |
 
     Examples: 
-      | memberId     |  | dob        | planName                                             |
-      | 018840597-1  |  | 02/24/1937 | HealthSelectSM Medicare RX (PDP)                     |
-      | 003072377-1  |  | 07/10/1930 | AARP MedicareComplete SecureHorizons Essential (HMO) |
-      | 374578451-11 |  | 03/01/1949 | AARP MEDICARE SUPPLEMENT PLAN                        |
+      | memberId     |  | dob        | planName                                        |
+      | 018873498-1  |  | 28/11/1951 | HealthSelectSM Medicare RX (PDP)                |
+      | 000343946-1  |  | 15/09/1941 | UnitedHealthcare Group Medicare Advantage (HMO) |
+      | 316454846-11 |  | 01/08/1945 | AARP MEDICARE SUPPLEMENT PLAN                   |
 
   @goGreen
   Scenario Outline: Verify go green splash error message on page
