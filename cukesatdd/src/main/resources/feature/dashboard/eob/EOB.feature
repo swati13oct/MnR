@@ -40,7 +40,7 @@ And the user slects the desired date range
 And the user validates how to read medical eob PDF
  	Examples:
 	| planType  | memberType        |dateRange			| eobType |
-	| MAPD      | q4_dec_uhc002     |18 Months		  | Medical |
+	| MAPD      | q4_dec_uhc002     |Last 18 months		  | Medical |
        
        
  @validateEOBStatements      
