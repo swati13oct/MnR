@@ -42,6 +42,11 @@ And the user validates how to read medical eob PDF
  	Examples:
 	| planType  | memberType        |dateRange			| eobType |
 	| MAPD      | q4_dec_uhc002     |Last 18 months		  | Medical |
+	| MAPD      | q4_dec_uhc002     |Last 6 months		  | Medical |
+	| MAPD      | q4_dec_uhc002     |Last 18 months		  | Prescription |
+	| MAPD      | q4_dec_uhc002     |Last 90 days 		  | Prescription |
+	
+	
        
        
  @validateEOBStatements      
@@ -59,6 +64,11 @@ Examples:
 	| planType  | memberType        |dateRange			| eobType |
 	| MAPD      | q4_dec_uhc002     |Last 18 months | Medical |
 	| PDP	      | q3_sep_rxulayer001     |Last 18 months | Medical |
+	| MAPD      | q4_dec_uhc002     |Last 6 months | Medical |
+	| PDP	      | q3_sep_rxulayer001     |Last 6 months | Medical |
+	| MAPD      | q4_dec_uhc002     |Last 18 months | Prescription |
+	| PDP	      | q3_sep_rxulayer001     |Last 90 days | Medical |
+ 
 	
        
 Scenario Outline: To verify EOB result list
@@ -105,7 +115,8 @@ Examples:
       | planType  | memberType   | eobTypeData       | fromDate   | toDate     |dateRange1       |dateRange2 |dateRange3 |dateRange4 |
       | MA        |  q4_dec_aarp507        | Medical           | 01/01/2016 | 04/01/2017 |Last 90 Days  |  Last 6 Months  | Last 12 Months  | Last 18 Months |
       | MAPD      |  q4_dec_uhc002		     | Medical           | 01/01/2016 | 04/01/2017 |Last 90 days  |  Last 6 months  | Last 12 months  | Last 18 months |  
-      | PDP       |  q4_dec_aarp292        | Medical           | 01/01/2016 | 04/01/2017 |Last 90 days  |  Last 6 months  | Last 12 months  | Last 18 months |  
+      | PDP       |  q4_dec_aarp292        | Medical           | 01/01/2016 | 04/01/2017 |Last 90 days  |  Last 6 months  | Last 12 months  | Last 18 months |
+        
 
  	
  	
