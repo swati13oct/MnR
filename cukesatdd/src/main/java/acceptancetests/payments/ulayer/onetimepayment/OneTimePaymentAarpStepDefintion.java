@@ -732,12 +732,42 @@ public class OneTimePaymentAarpStepDefintion {
 		
 	}
 	
+	@And("^the user navigates to Team H Automatic Payments page$")
+	public void user_validates_TeamHAuto_Payment_overview() throws InterruptedException
+	{
+		PaymentsOverview accountHomePage = (PaymentsOverview)getLoginScenario().getBean(PageConstants.PAYMENT_OVERVIEW);
+		OneTimePaymentsPage oneTimePaymentsPage = accountHomePage.navigateToAutoPaymentpage();
+		if(oneTimePaymentsPage!= null){
+			getLoginScenario().saveBean(PageConstants.AUTOMATIC_PAYMENTS_DASHBOARD,
+					oneTimePaymentsPage);
+			Assert.assertTrue(true);
+		} else {
+			Assert.fail("one time payments dashboard page not found");
+		}
+		
+	}
+	
 	
 	@And("^the user enters details and click on continue button on One Time Payments Page for Dashboard$")
 	public void user_clicks_and_navigates_to_Review_page() throws InterruptedException
 	{
 		OneTimePaymentsPage oneTimePaymentsPage = (OneTimePaymentsPage)getLoginScenario().getBean(PageConstants.ONE_TIME_PAYMENTS_DASHBOARD);
 		ReviewOneTimePaymentsPage reviewOneTimePaymentsPage = oneTimePaymentsPage.enterInfoAndContinue();
+		if(reviewOneTimePaymentsPage != null){
+			getLoginScenario().saveBean(PageConstants.REVIEW_ONE_TIME_PAYMENTS_DASHBOARD,
+					reviewOneTimePaymentsPage);
+			Assert.assertTrue(true);
+		}else {
+			Assert.fail("one time payments dashboard page not found");
+		}		
+	}
+	
+	
+	@And("^the user enters details and click on continue button on Automatic Payments Page for Dashboard$")
+	public void user_clicks_AutoPay_and_navigates_to_Review_page() throws InterruptedException
+	{
+		OneTimePaymentsPage oneTimePaymentsPage = (OneTimePaymentsPage)getLoginScenario().getBean(PageConstants.AUTOMATIC_PAYMENTS_DASHBOARD);
+		ReviewOneTimePaymentsPage reviewOneTimePaymentsPage = oneTimePaymentsPage.AutoenterInfoAndContinue();
 		if(reviewOneTimePaymentsPage != null){
 			getLoginScenario().saveBean(PageConstants.REVIEW_ONE_TIME_PAYMENTS_DASHBOARD,
 					reviewOneTimePaymentsPage);

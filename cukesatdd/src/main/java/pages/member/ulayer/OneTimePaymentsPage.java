@@ -42,12 +42,13 @@ public class OneTimePaymentsPage extends UhcDriver{
 	private WebElement firstNameField;
 	
 	@FindBy(id = "last-name")
-	private WebElement lastNameField;
-	
+	private WebElement lastNameField;	
 	
 	@FindBy(id = "review-continue")
-	private WebElement reviewContinue;
+	private WebElement reviewContinue;	
 	
+	@FindBy(xpath = "//div[@class='longform__row']//div[@class='margin-medium']/a[2]")
+	private WebElement AutoreviewContinue;
 
 	@FindBy(className = "error-count")
 	private WebElement ErrorMessageChkbox;
@@ -55,9 +56,11 @@ public class OneTimePaymentsPage extends UhcDriver{
 	@FindBy(xpath ="//*[text()='cancel ']")
 	private WebElement onetimecancelbtn;
 
-	
 	@FindBy(xpath="//div[@id='atdd_electronicsignature_label']/div/fieldset/label")
 	private WebElement electronicSignatureCheck;
+	
+	@FindBy(xpath="//fieldset[@class='checkbox-block margin-small']/label")
+	private WebElement AutoEsignaturecheck;	
 	
 	@FindBy(xpath="//*[text()='Edit Payment Information']") 
 	 private WebElement editPaymentInfo; 
@@ -125,6 +128,30 @@ public class OneTimePaymentsPage extends UhcDriver{
 		jse.executeScript("window.scrollBy(0,150)", "");
 		Thread.sleep(5000);
 		reviewContinue.click();
+		Thread.sleep(2000);
+		if(driver.getTitle().equalsIgnoreCase("overview") || driver.getTitle().equalsIgnoreCase("onetimepayments")){
+			return new ReviewOneTimePaymentsPage(driver);
+		}
+		return null;
+	}
+	
+	
+	
+	public ReviewOneTimePaymentsPage AutoenterInfoAndContinue() throws InterruptedException {
+		Thread.sleep(6000);		
+		routingNumberField.sendKeys("123123000");
+		confirmRoutingNumberField.sendKeys("123123000");
+		accountNumberField.sendKeys("1234");
+		confirmAccountNumberField.sendKeys("1234");
+		firstNameField.sendKeys("Test");
+		lastNameField.sendKeys("MA");
+		Thread.sleep(1000);
+		AutoEsignaturecheck.click();
+		Thread.sleep(2000);
+		JavascriptExecutor jse = (JavascriptExecutor)driver;
+		jse.executeScript("window.scrollBy(0,150)", "");
+		Thread.sleep(5000);
+		AutoreviewContinue.click();
 		Thread.sleep(2000);
 		if(driver.getTitle().equalsIgnoreCase("overview") || driver.getTitle().equalsIgnoreCase("onetimepayments")){
 			return new ReviewOneTimePaymentsPage(driver);
