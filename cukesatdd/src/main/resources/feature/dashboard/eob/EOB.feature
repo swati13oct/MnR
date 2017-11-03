@@ -10,7 +10,7 @@ Then the user navigates to EOB page
 Then the user validates site leaving pop up         
 Examples:
        | planType  | memberType        |  
-       | MAPD      | q4_dec_aarp018  	 |    
+       | MAPD      | q4_dec_uhc002  	 |    
  			  
 @workingOn
 Scenario Outline: To validate EOB Type Drop-Down
@@ -23,7 +23,9 @@ Then the user validates EOB type and Date Range for MAPD
  
 Examples:
        | planType  | memberType              |  
-       | MAPD      | q4_dec_aarp018		       |
+       | MAPD      | q4_dec_uhc002		       |
+       
+       
  			 
        
      	
