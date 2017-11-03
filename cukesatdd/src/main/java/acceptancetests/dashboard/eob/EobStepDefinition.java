@@ -130,6 +130,7 @@ public class EobStepDefinition {
 			e.printStackTrace();
 		}
 	}
+	
 	@Then("^the user validates EOB type and Date Range for MAPD$")
 	public void the_user_validates_EOB_type_and_Date_Range_for_MAPD(DataTable givenAttributes) {
 		List<DataTableRow> memberAttributesRow = givenAttributes
