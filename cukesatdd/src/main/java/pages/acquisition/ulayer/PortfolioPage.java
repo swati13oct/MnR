@@ -29,7 +29,7 @@ public class PortfolioPage extends UhcDriver {
 	@FindBy(linkText = "Look up a ZIP code")
 	private WebElement lookupZipcodeLink;
 
-	@FindBy(id = "zipcode")
+	@FindBy(id = "cta-zipcode")
 	private WebElement zipCodeField;
 
 	@FindBy(id = "goBtn")
@@ -255,19 +255,19 @@ public class PortfolioPage extends UhcDriver {
 		return element;
 	}
 
-public ResponsivePlanSummary searchPlans(String zipcode, String CountyName) {
+public ResponsivePlanSummary searchPlans(String zipcode, String CountyName) throws InterruptedException {
 	    driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 //	    WebDriverWait wait = new WebDriverWait(driver, 40);
 //	    WebElement element = wait.until(ExpectedConditions.elementToBeClickable(By.id("zipcode")));
 	    
 	    
 	    
-//	    WebElement element =findNoSuchElement(By.id("zipcode"));
-	    
-	//    sendkeys(element, zipcode);
-	//    element.sendKeys(Keys.ENTER);
+	    JavascriptExecutor jse = (JavascriptExecutor)driver;
+		jse.executeScript("window.scrollBy(0,100)", "");
+		Thread.sleep(2000);
 	    sendkeys(zipCodeField, zipcode);
 	    zipCodeField.sendKeys(Keys.ENTER);
+	    System.out.println("zipcode entered");
 	    //remove thread once page is stable
 	    try {
 			Thread.sleep(10000);
@@ -276,7 +276,7 @@ public ResponsivePlanSummary searchPlans(String zipcode, String CountyName) {
 			e.printStackTrace();
 		}
 	    
-	    List<WebElement> countyActuals = driver.findElements(By.xpath("//a[@class='ng-binding ng-pristine ng-valid']"));
+	   /* List<WebElement> countyActuals = driver.findElements(By.xpath("//a[@class='ng-binding ng-pristine ng-valid']"));
 	    System.out.println(countyActuals.size());
 	    
 	    for(int i=0; i<=countyActuals.size()-1;i++){
@@ -287,8 +287,9 @@ public ResponsivePlanSummary searchPlans(String zipcode, String CountyName) {
 	    		countyActuals.get(i).click();
 	    		break;
 	    	}
-	    }
+	    }*/
 		if (driver.getTitle().equalsIgnoreCase(PageTitleConstants.ULAYER_PLAN_SUMMARY_PAGE_TITLE) || driver.getTitle().equalsIgnoreCase("plans")) {
+			System.out.println("Title matched");
 			return new ResponsivePlanSummary(driver);
 		} 
 		return null;

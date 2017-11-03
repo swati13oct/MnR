@@ -52,7 +52,7 @@ public class ResponsiveStepDefiniton {
 	}
 	
 	@Then("^the user performs plan serach using zipcode$")
-	public void user_planSearch_with_zipcode(DataTable givenAttributes){
+	public void user_planSearch_with_zipcode(DataTable givenAttributes) throws InterruptedException{
 		List<DataTableRow> memberAttributesRow = givenAttributes
 				.getGherkinRows();
 		Map<String, String> memberAttributesMap = new HashMap<String, String>();
@@ -69,6 +69,7 @@ public class ResponsiveStepDefiniton {
 		PortfolioPage portfolioPage = (PortfolioPage) getLoginScenario()
 				.getBean(PageConstants. PORTFOLIO_PAGE);
 		ResponsivePlanSummary vppPlan = portfolioPage.searchPlans(zipcode, county);
+		System.out.println("Zipcode and county enterd");
 		if(vppPlan!=null){
 			getLoginScenario().saveBean(PageConstants.RESPONSIVE_PLAN_SUMMARY_PAGE, vppPlan);
 		}else{
