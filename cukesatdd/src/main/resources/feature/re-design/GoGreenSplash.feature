@@ -1,7 +1,7 @@
 @goGreen
 Feature: To test go green splash page
 
-  Scenario Outline: Verify go green splash page
+  Scenario Outline: Verify go green splash page and validate confirmation message
     Given I am a Federal member on the member redesign registration page
       | MemberId | <memberId> |
       | DOB      | <dob>      |
@@ -13,8 +13,8 @@ Feature: To test go green splash page
     Examples: 
       | memberId     |  | dob        |
       | 000343946-1  |  | 15/09/1941 |
-      | 316454846-11 |  | 08/01/1945 |
-      | 960450657-1  |  | 21/08/1942 |
+      | 349898423-11 |  | 01/08/1945 |
+      | 951938997-1  |  | 28/01/1943 |
 
   Scenario Outline: Verify go green splash page for COMBO member
     Given I am a Federal member on the member redesign registration page
@@ -41,7 +41,7 @@ Feature: To test go green splash page
       | memberId     |  | dob        | planName                                        |
       | 018873498-1  |  | 28/11/1951 | HealthSelectSM Medicare RX (PDP)                |
       | 000343946-1  |  | 15/09/1941 | UnitedHealthcare Group Medicare Advantage (HMO) |
-      | 316454846-11 |  | 08/01/1945 | AARP MEDICARE SUPPLEMENT PLAN                   |
+      | 349898423-11 |  | 01/08/1945 | AARP EXTENDED BASIC MEDICARE SUPPLEMENT PLAN    |
 
   Scenario Outline: Verify go green splash error message on page
     Given I am a Federal member on the member redesign registration page
