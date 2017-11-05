@@ -334,14 +334,6 @@ public class ContactUsPage extends UhcDriver{
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			fillOutFormButton.click();
-			try {
-				Thread.sleep(5000);
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			
 		}
 		else
 		{

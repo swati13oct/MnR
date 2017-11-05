@@ -14,7 +14,6 @@ Feature: To test go green splash page
       | memberId     |  | dob        |
       | 000343946-1  |  | 15/09/1941 |
       | 349898423-11 |  | 01/08/1945 |
-      | 951938997-1  |  | 28/01/1943 |
 
   Scenario Outline: Verify go green splash page for COMBO member
     Given I am a Federal member on the member redesign registration page
