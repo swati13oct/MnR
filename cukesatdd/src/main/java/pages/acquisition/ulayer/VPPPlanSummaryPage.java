@@ -20,12 +20,14 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.FindBys;
 import org.openqa.selenium.support.PageFactory;
 
+import com.itextpdf.text.log.SysoCounter;
+
 import acceptancetests.atdd.data.CommonConstants;
 import acceptancetests.atdd.data.ElementData;
 import acceptancetests.atdd.data.PageData;
 import acceptancetests.atdd.util.CommonUtility;
 import atdd.framework.UhcDriver;
-import pages.acquisition.bluelayer.EnrollPlanInfoPage;
+
 import pages.acquisition.ulayer.DrugCostEstimatorPage;
 
 /**
@@ -230,8 +232,29 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	@FindBy(name = "emailWidgetForm")
 	private WebElement emailWidgetForm;
 	
+	//@FindBy(xpath="(//a[text()='View plan and drug coverage details'])[2]")
+	//@FindBy(xpath="//*[@id='plan-list-1']/div/div[2]/div/div[1]/div[2]/div/div[3]")
+	//private WebElement viewplananddrugcoveragedetails ;
 	
-
+	@FindBy(xpath="//div[@class='tab-contents']/span[Contains(text(),'Optional Services (Riders)')]")
+	private WebElement optionalServices ;
+	
+	@FindBy(xpath="(//a[contains(text(),'Is my provider covered for one of these Medicare plans?')])[1]")
+	private WebElement providerSearchLink;
+	
+	@FindBy(xpath="(//a[text()='View plan and drug coverage details'])[1]")
+	private WebElement viewplananddrugcoveragedetails;
+	
+	@FindBy(xpath="(//div[contains(@class,'mabenefittable')]/ul)[1]/li")
+	private List<WebElement> benefitsTable;
+	
+	@FindBys(value = { @FindBy(xpath = "//*[@id='detailTabs']/div[1]/a") })
+	private List<WebElement> planDetailsPageTabs;
+	
+	@FindBy(xpath="//*[@id='planCosts']/div[1]/table/tbody/tr")
+	private List<WebElement> planCostColumn;
+	
+	
 	private PageData vppPlanSummary;
 
 	public JSONObject vppPlanSummaryJson;
@@ -254,7 +277,84 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		openAndValidate();
 
 	}
+	
+	public VPPPlanSummaryPage validatePlanCard()
+	{
+		
+		
+		
+		validate(viewplananddrugcoveragedetails);
+		
+		for(int i=0;i<benefitsTable.size();i++)
+		{
+			validate(benefitsTable.get(i));
+		}
+		
+		
+		
+		return new VPPPlanSummaryPage(driver);
+		
+	}
 
+	public VPPPlanSummaryPage clickOnviewplanandDrugLink()
+	{
+	
+		try {
+			Thread.sleep(2000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		JavascriptExecutor js = (JavascriptExecutor)driver;
+		js.executeScript("arguments[0].click();", viewplananddrugcoveragedetails);
+		//viewplananddrugcoveragedetails.click();
+		return new VPPPlanSummaryPage(driver);
+	}
+	
+	public VPPPlanSummaryPage selectTabs() {
+		
+		
+		
+		for (WebElement webElement : planDetailsPageTabs) {
+			try {
+				Thread.sleep(2000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			System.out.println(webElement.getText());
+			webElement.click();
+			
+		}
+
+			return new VPPPlanSummaryPage(driver);
+
+	}
+	
+	public VPPPlanSummaryPage validateAllFields()
+
+	{
+		
+		
+		
+		
+		return new VPPPlanSummaryPage(driver);
+	}
+	
+	public VPPPlanSummaryPage clickOnOptionalServicesLink()
+	{
+		
+		
+		try {
+			Thread.sleep(2000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		optionalServices.click();
+		return new VPPPlanSummaryPage(driver);
+	}
 	
 
 	private WebElement getViewPlanDetailsElement(

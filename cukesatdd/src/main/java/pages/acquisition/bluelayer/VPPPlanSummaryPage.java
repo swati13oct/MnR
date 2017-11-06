@@ -19,6 +19,7 @@ import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.FindBys;
 import org.openqa.selenium.support.PageFactory;
 
 import pages.acquisition.bluelayer.EnrollPlanInfoPage;
@@ -215,7 +216,32 @@ public class VPPPlanSummaryPage extends UhcDriver {
 
 	@FindBy(xpath = "//div[@class='module-closed-enrollment-alert']/span/a")
 	private WebElement viewPlansYearLink;
-
+	
+	@FindBy(xpath="(//a[contains(text(),'View plan and drug coverage details')])[1]")
+	private WebElement viewPlansAndDrugCoverageDetails;
+	
+	@FindBys(value = { @FindBy(xpath = "//*[@id='detailTabs']/div[1]/a") })
+	private List<WebElement> planDetailsPageTabs;
+	
+	@FindBy(xpath="//h4[contains(text(),'Need Help')]")
+	private WebElement NeedHelp;
+	
+	@FindBy(xpath="//h5[contains(text(),'Meet with an Agent')]")
+	private WebElement MeetAnAgent;
+   
+	@FindBy(xpath="//h4[contains(text(),'Need more Information?')]")
+	private WebElement NeedMoreInformation;
+	
+	@FindBy(xpath="//h4[contains(text(),'Need a Step Back?')]")
+	private WebElement NeedStepBack;
+	
+	@FindBy(xpath="//h4[contains(text(),'Get Email Updates')]")
+	private WebElement GetEmailUpdates;
+	
+	@FindBy(xpath="//*[@id='medicalBenefits']/div[1]/table/tbody/tr")
+	private List<WebElement> medicalColumn;
+	
+	
 	private PageData vppPlanSummary;
 
 	public JSONObject vppPlanSummaryJson;
@@ -226,6 +252,66 @@ public class VPPPlanSummaryPage extends UhcDriver {
 
 		//openAndValidate();
 	}
+
+
+
+public VPPPlanSummaryPage clickOnViewPlansAndCoverageLink()
+{
+	viewPlansAndDrugCoverageDetails.click();
+	
+	try {
+		Thread.sleep(2000);
+	} catch (InterruptedException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
+	
+	
+	return new VPPPlanSummaryPage(driver);
+}
+
+
+public VPPPlanSummaryPage validateRightRail()
+{
+	validate(NeedHelp);
+	validate(MeetAnAgent);
+	validate(NeedMoreInformation);
+	validate(NeedStepBack);
+	validate(GetEmailUpdates);
+	
+	return new VPPPlanSummaryPage(driver);
+}
+
+public VPPPlanSummaryPage selectTabs() {
+	
+	
+	
+	for (WebElement webElement : planDetailsPageTabs) {
+		try {
+			Thread.sleep(2000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		System.out.println(webElement.getText());
+		webElement.click();
+		
+	}
+
+		return new VPPPlanSummaryPage(driver);
+
+}
+
+public VPPPlanSummaryPage validateAllFields()
+
+{
+	for(int i=1;i<medicalColumn.size();i++){
+		System.out.println(medicalColumn.get(i).findElement(By.xpath(".//td[2]/p")).getText());
+			validate(medicalColumn.get(i).findElement(By.xpath(".//td[2]/p")));
+	}
+	
+	return new VPPPlanSummaryPage(driver);
+}
 
 
 

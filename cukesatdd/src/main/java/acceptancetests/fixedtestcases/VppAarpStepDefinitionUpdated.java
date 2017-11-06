@@ -216,6 +216,42 @@ public class VppAarpStepDefinitionUpdated {
 
 	}
 	
+	
+	@Then("^the user click on viewplananddrugcoverage details$")
+	public void user_click_on_viewplanandcoverage_details() {
+	
+		VPPPlanSummaryPage planSummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+          planSummaryPage.clickOnviewplanandDrugLink();
+          if (planSummaryPage != null) {
+  			getLoginScenario().saveBean(PageConstants.VPP_PLAN_SUMMARY_PAGE,
+  					planSummaryPage);
+  		} else {
+  			Assert.fail("Error Loading VPP plan summary page");
+  		}
+  		
+
+	}
+	
+	@Then("^the user click on optionalservices tab$")
+	public void user_click_on_optionalservices_tab() {
+	
+		VPPPlanSummaryPage planSummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+          planSummaryPage.clickOnOptionalServicesLink();
+          if (planSummaryPage != null) {
+  			getLoginScenario().saveBean(PageConstants.VPP_PLAN_SUMMARY_PAGE,
+  					planSummaryPage);
+  		} else {
+  			Assert.fail("Error Loading VPP plan summary page");
+  		}
+  		
+
+	}
+	
+	
+	
+	
 /*	@After("@fixedTestCaseTest")
 	public void tearDown() {
 		WebDriver wd = (WebDriver) getLoginScenario().getBean(
