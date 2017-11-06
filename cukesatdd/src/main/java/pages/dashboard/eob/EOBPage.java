@@ -12,7 +12,9 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import acceptancetests.atdd.data.MRConstants;
 import acceptancetests.atdd.util.CommonUtility;
@@ -26,6 +28,9 @@ public class EOBPage extends UhcDriver{
 	
 	@FindBy(id="date-range-1")
 	private WebElement eobMonthDateRange;
+	
+	@FindBy(id="date-range")
+	private WebElement eobMonthDateRangeSHIP;
 	
 	@FindBy(id="custom-from2")
 	private WebElement fromDateInputBox;
@@ -59,6 +64,24 @@ public class EOBPage extends UhcDriver{
 	
 	@FindBy(xpath=".//*[@id='IPEinvL']/map/area[2]")
 	private WebElement iPerceptionPopUp;
+	
+	@FindBy(xpath = "//a[contains(text(), 'Medicare Advantage Plan')]")
+	private WebElement MAPlanTab;
+
+	@FindBy(xpath = "//a[contains(text(), 'Hospital Indemnity')]")
+	private WebElement HIPplanTab;
+	
+	@FindBy(xpath = "//a[contains(text(), 'Medicare Prescription Drug Plan')]")
+	private WebElement PDPPlanTab;
+
+	@FindBy(xpath = "//a[contains(text(), 'Medicare Supplement Insurance Plan')]")
+	private WebElement MedSuppPlanTab;
+	
+	@FindBy(xpath = "//a[contains(text(), 'Supplemental  Insurance Plans')]")
+	private WebElement SuppTab;
+	
+	@FindBy(xpath = "//*[text()='Go to EOB Search page']")
+	private WebElement eobLink;
 	
 	private static String EOB_DIRECT_URL = MRConstants.EOB_DIRECT_URL;
 	
@@ -212,12 +235,23 @@ public class EOBPage extends UhcDriver{
 						Assert.fail();
 					}
 				}
-			}else{
+			}
+		}
+			/*else{
 				System.out.println("First Element of dropdown not displayed correctly");
 				Assert.fail();
-			}
-			Select selectDate = new Select(eobMonthDateRange);
-			WebElement firstInDateDropDown = selectDate.getFirstSelectedOption();
+			}*/
+		Select selectDate;
+		WebElement firstInDateDropDown;
+		if(planType.equals("SHIP") || planType.equals("SSUP") || planType.equals("HIP")){
+			selectDate = new Select(eobMonthDateRangeSHIP);
+			firstInDateDropDown = selectDate.getFirstSelectedOption();
+		}else{
+			selectDate = new Select(eobMonthDateRange);
+			firstInDateDropDown = selectDate.getFirstSelectedOption();
+		}
+			/*Select selectDate = new Select(eobMonthDateRange);
+			WebElement firstInDateDropDown = selectDate.getFirstSelectedOption();*/
 			if(firstInDateDropDown.getText().equals("Last 90 Days")){
 				System.out.println("First element Date Range dropdown displayed correctly "+ firstInDateDropDown.getText());
 				List<WebElement> dateDropDownOptions = selectDate.getOptions();
@@ -255,13 +289,21 @@ public class EOBPage extends UhcDriver{
 					}	
 					return new EOBPage(driver);
 				}
-			}else{
+		
+			else{
+				System.out.println("First element Date Range dropdown not displayed correctly ");
+				Assert.fail();
+			}
+			return null;
+		}
+	//	}
+			/*else{
 				System.out.println("First element Date Range dropdown not displayed correctly ");
 				Assert.fail();
 			}
  		
-		return null;
-	}
+		return null;*/
+//	}
 	public void validateDateRangeContentDisplayed(String dateRangeValue){
 		/*CommonUtility.waitForPageLoad(driver, eobDetailsHeader, 20 );
 		if(eobDetailsHeader.getText().contains(dateRangeValue)){
@@ -299,32 +341,27 @@ public class EOBPage extends UhcDriver{
 		driver.findElement(By.id("username")).sendKeys(userName);
 		driver.findElement(By.id("password")).sendKeys("Password@1");
 		driver.findElement(By.id("sign-in-btn")).click();
-		try{
-			Alert alert = driver.switchTo().alert();
-			alert.accept();
-			/*Alert alert1 = driver.switchTo().alert();
-			alert1.accept();*/
-			}catch(Exception e)		{
-				System.out.println("No Such alert displayed");
-			}
  		return new EOBPage(driver);
 	}
 	
 	public EOBPage navigateDirectToEOBPag(){
-		try {
+		WebDriverWait wait = new WebDriverWait(driver, 20);
+		wait.until(ExpectedConditions.elementToBeClickable(eobLink));
+		validate(eobLink);
+		/*try {
 			Thread.sleep(6000);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
+		}*/
 	//	if(driver.getTitle().equalsIgnoreCase("Test Harness")){
-			try{
+		/*	try{
 				if (iPerceptionPopUp.isDisplayed()) {
 					iPerceptionPopUp.click();
 				}
 			}catch(Exception e)		{
 				System.out.println("iPerception Pop Up not displayed");
-			}
+			}*/
 		/*JavascriptExecutor js = (JavascriptExecutor)driver;
 		js.executeScript("arguments[0].click();", By.xpath("//*[text()='Go to EOB Search page']"));*/
  		 driver.findElement(By.xpath("//*[text()='Go to EOB Search page']")).click();
@@ -368,6 +405,74 @@ public class EOBPage extends UhcDriver{
 			Assert.fail();
 		}
 		return null;
+	}
+	
+	public boolean navigatePlanTabs(String PlanType){	
+		if (PlanType.contentEquals("MA") || PlanType.contentEquals("MAPD")) {
+			if (validate(MAPlanTab)){
+				MAPlanTab.click();
+				//Assert.assertTrue("Cant navigate to MA / MAPD Plan Tab", memberMaterialsfield.isDisplayed());
+				System.out.println("*************Displaying Medicare Advantage Plan Tab **********");
+				return true;
+			}
+		}
+		
+		else if (PlanType.contentEquals("SHIP")) {
+			if (validate(MedSuppPlanTab)){
+				MedSuppPlanTab.click();
+				//Assert.assertTrue("Cant navigate to Med Supp PlanTab Plan Tab", MemberIDcardField.isDisplayed());
+				System.out.println("*************Displaying SHIP - Med Supp Plan Tab Plan Tab **********");
+				return true;
+			}
+			else if (validate(HIPplanTab)){
+				HIPplanTab.click();
+				//Assert.assertTrue("Cant navigate to HIP Plan Tab", MemberIDcardField.isDisplayed());
+				System.out.println("*************Displaying SHIP - HIP Plan Tab **********");
+				return true;
+			}
+			else {
+				System.out.println("*************No SHIP Plans available for this Member **********");
+				return false;
+			}
+		}
+
+		else if (PlanType.contentEquals("HIP")) {
+			if (validate(HIPplanTab)){
+				HIPplanTab.click();
+				//Assert.assertTrue("Cant navigate to HIP Plan Tab", MemberIDcardField.isDisplayed());
+				System.out.println("*************Displaying SHIP - HIP Plan Tab **********");
+				return true;
+			}
+			
+		}
+		else if (PlanType.contentEquals("PDP")) {
+			if (validate(PDPPlanTab)){
+				PDPPlanTab.click();
+				//Assert.assertTrue("Cant navigate to PDP Plan Tab", memberMaterialsfield.isDisplayed());
+				System.out.println("*************Displaying PDP Plan Tab **********");
+				return true;
+			}
+			
+		}
+		else if (PlanType.contentEquals("MedSupp")) {
+			if (validate(MedSuppPlanTab)){
+				MedSuppPlanTab.click();
+				//Assert.assertTrue("Cant navigate to Med Supp PlanTab Plan Tab", MemberIDcardField.isDisplayed());
+				System.out.println("*************Displaying SHIP - Med Supp Plan Tab Plan Tab **********");
+				return true;
+			}
+		}
+		else if (PlanType.contentEquals("SSUP")) {
+			if (validate(SuppTab)){
+				SuppTab.click();
+				//Assert.assertTrue("Cant navigate to Med Supp PlanTab Plan Tab", MemberIDcardField.isDisplayed());
+				System.out.println("*************Displaying UHC Senior Supplement Plan Tab **********");
+				return true;
+			}
+		}
+
+		System.out.println("@@@@@@@@@@@@ Invalid Plan Type / Plan Tab not found @@@@@@@@@@@@@@");
+		return false;
 	}
 }
  

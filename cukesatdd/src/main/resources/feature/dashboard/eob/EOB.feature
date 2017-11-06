@@ -118,8 +118,16 @@ Examples:
       | MAPD      |  q4_dec_uhc002		     | Medical           | 01/01/2016 | 04/01/2017 |Last 90 days  |  Last 6 months  | Last 12 months  | Last 18 months |  
       | PDP       |  q4_dec_aarp292        | Medical           | 01/01/2016 | 04/01/2017 |Last 90 days  |  Last 6 months  | Last 12 months  | Last 18 months |
         
-
- 	
- 	
- 	
-     	
+@comboTab
+Scenario Outline: To verify different plan types under combo tabs
+Given registered AMP with for EOB flow
+       | Member Type    |<memberType>|
+And the user navigates to EOB page  
+Then the user validates content displayed on EOB page
+       | Plan Type      |<planType>  |       
+Examples: 
+| planType    | memberType   					 | 
+| MA          | q4_dec_combo015        |
+|	SSUP				|	q4_dec_combo015        |
+|	HIP					| q4_dec_ship020				 |
+| MAPD				|	q4_dec_ship020				 | 	

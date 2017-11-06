@@ -52,7 +52,7 @@ public class EobStepDefinition {
 			.get(0), memberAttributesRow.get(i).getCells().get(1));
 		}
 
-		String userName = memberAttributesMap.get("Member Type");
+		String userName = memberAttributesMap.get("Member Type");	
 		WebDriver wd = getLoginScenario().getWebDriver();
         getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
         
@@ -90,18 +90,13 @@ public class EobStepDefinition {
 		eobPage.navigateDirectToEOBPag();		 
 		eobPage.selectDateRange(dateRange, planType, eobTypeData);
 		if(eobPage!=null){
+			getLoginScenario().saveBean(PageConstants.EOB_Page, eobPage);
 			System.out.println("user is on EOB page");
 		} 
 	}
  	@Then("^the user navigates to EOB page$")
 	public void the_user_navigates_to_EOB_page() {
 		EOBPage eobPage =  (EOBPage) getLoginScenario().getBean(PageConstants.EOB_Page);
-		try {
-			Thread.sleep(10000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 		eobPage.navigateDirectToEOBPag();
 		if(eobPage!=null){
 			getLoginScenario().saveBean(PageConstants.MEDICAL_EOB_PAGE,
@@ -181,6 +176,24 @@ public class EobStepDefinition {
 		String eobTypeData   = memberAttributesMap.get("EOB Type");
 		EOBPage eobPage =  (EOBPage) getLoginScenario().getBean(PageConstants.EOB_Page);
 		eobPage.selectDateRange(dateRange, planType, eobTypeData);
+	}
+	
+	@Then("^the user validates content displayed on EOB page$")
+	public void user_validates_content_displayed_on_EOB_page(DataTable givenAttributes){
+		List<DataTableRow> memberAttributesRow = givenAttributes
+				.getGherkinRows();
+		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells()
+					.get(0), memberAttributesRow.get(i).getCells().get(1));
+		}
+		String planType = memberAttributesMap.get("Plan Type");
+ 		EOBPage eobPage = (EOBPage) getLoginScenario().getBean(PageConstants.EOB_Page);
+ 		
+ 		eobPage.navigatePlanTabs(planType);
+ 		eobPage.validateDropDowns(planType);
+		
 	}
 	
 	@After
