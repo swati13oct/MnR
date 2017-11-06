@@ -127,14 +127,14 @@ public class ResponsivePlanSummary extends UhcDriver{
 		    private WebElement comparePlans;
 		    
 		   // @FindBy(xpath="(.//*[text()='View details'])[1]")
-		    @FindBy(xpath=".//*[@id='topRowCopy']/div/div[1]/div/a[1]")
+		    @FindBy(xpath="//*[@id='innerdiv']/a[1]")
 		    private WebElement viewDetails;
 		    
 			@FindBy(xpath=".//*[text()='Back to all plans']")
 			private WebElement backtoallPlans;
 		    
 		   // @FindBy(xpath="(.//*[@class='remove-button'])[1]")
-		    @FindBy(xpath=".//*[@id='topRowCopy']/div/div[1]/span")
+		    @FindBy(xpath="//*[@id='topRowCopy']/div[2]/div[1]//span[@class='remove-button']")
 		    private WebElement removePlanlnk;
 		    
 		    //@FindBy(xpath="(.//*[@class='remove-button'])[2]")
@@ -204,7 +204,7 @@ public class ResponsivePlanSummary extends UhcDriver{
 			// .//*[@id='fixTable']/tbody/tr[22]/td[6]/span[1]/strong
 			
 //Optional Services
-			@FindBy (xpath="//*[@id='fixTable']/tbody/tr[11]/td[1]/p")
+			@FindBy (xpath="//*[@id='fixTable']/tbody/tr[18]/td[1]/p")
 		    private WebElement optionalDental;
 			
 			@FindBy (xpath="//*[@id='fixTable']/tbody/tr[11]/td[2]/div[1]/div/strong")
