@@ -123,7 +123,8 @@ public class ResponsivePlanSummary extends UhcDriver{
 		    @FindBy(id="compare-plan-5")
 		    private WebElement chkBoxAddtoCompare5;
 		    
-		    @FindBy(xpath="(//*[text()='Compare plans'])[8]")
+		    //@FindBy(xpath="//*[@id='plan-list-1']//div[@class='swiper-container']/div/div[4]//div[@class='content-secondary']//div[@class='compare-box']/span[4]/a")		  
+		    @FindBy(xpath="(//a[contains(text(), 'Compare plans')])[8]")
 		    private WebElement comparePlans;
 		    
 		   // @FindBy(xpath="(.//*[text()='View details'])[1]")
@@ -379,7 +380,7 @@ private JSONObject getActualJsonObject(String fileName, String planName, List<We
 	return null;
 }
 
-public void selectAddToCompareCheckboxes()  {
+public void selectAddToCompareCheckboxes() throws InterruptedException  {
 	
 	JavascriptExecutor js = (JavascriptExecutor)driver;
 	try {
@@ -387,10 +388,21 @@ public void selectAddToCompareCheckboxes()  {
 	} catch (InterruptedException e) {
 		e.printStackTrace();
 	}
+	js.executeScript("window.scrollBy(0,550)", "");
+	Thread.sleep(2000);
 	js.executeScript("arguments[0].click();", chkBoxAddtoCompare1);
+	js.executeScript("window.scrollBy(0,450)", "");
+	Thread.sleep(2000);
 	js.executeScript("arguments[0].click();", chkBoxAddtoCompare2);
+	js.executeScript("window.scrollBy(0,450)", "");
+	Thread.sleep(2000);
 	js.executeScript("arguments[0].click();", chkBoxAddtoCompare3);
+	js.executeScript("window.scrollBy(0,550)", "");
+	Thread.sleep(2000);
 	js.executeScript("arguments[0].click();", chkBoxAddtoCompare4);
+	js.executeScript("window.scrollBy(0,250)", "");
+	Thread.sleep(2000);
+	
 	
 }
 
@@ -458,9 +470,12 @@ public ResponsivePlanSummary viewPlanSummary(String planType) {
 public void comparePlanslnk() throws InterruptedException{
 	
 	driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS); 
+	JavascriptExecutor js = (JavascriptExecutor)driver;
+	js.executeScript("window.scrollBy(0,150)");
+	Thread.sleep(2000);
 	 boolean link = comparePlans.isEnabled(); 
 	 System.out.println(link); 
-	 Thread.sleep(5000);
+	 Thread.sleep(3000);
 	 comparePlans.click(); 
 	 validate(comparePlans); 
 	
