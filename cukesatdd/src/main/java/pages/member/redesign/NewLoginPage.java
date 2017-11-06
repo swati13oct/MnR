@@ -73,12 +73,12 @@ public class NewLoginPage extends UhcDriver {
 			Thread.sleep(5000);
             if (iPerceptionPopUp.isDisplayed()) {
                 iPerceptionPopUp.click();
-                System.out.println("iPerception Pop Up not displayed");
+                System.out.println("iPerception Pop Up displayed");
          }
 		Thread.sleep(20000);
 		}catch (InterruptedException e) {
 				e.printStackTrace();
-			}
+		}
 		if(currentUrl().contains("member/testharness.html"))
 		{
 			return new TestHarnessPage(driver);
