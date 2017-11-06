@@ -48,6 +48,10 @@ public class NewLoginPage extends UhcDriver {
 
 	@FindBy(id = "usercheckbox")
 	private WebElement userNameCheckBox;
+	
+	@FindBy(xpath=".//*[@id='IPEinvL']/map/area[2]")
+    private WebElement iPerceptionPopUp;
+
 
 	public NewLoginPage(WebDriver driver) {
 		super(driver);
@@ -66,11 +70,15 @@ public class NewLoginPage extends UhcDriver {
 					Alert alert2 = driver.switchTo().alert();
 					alert2.accept();
 			}
-			Thread.sleep(35000);
+			Thread.sleep(5000);
+            if (iPerceptionPopUp.isDisplayed()) {
+                iPerceptionPopUp.click();
+                System.out.println("iPerception Pop Up not displayed");
+         }
+		Thread.sleep(20000);
 		}catch (InterruptedException e) {
 				e.printStackTrace();
 			}
-
 		if(currentUrl().contains("member/testharness.html"))
 		{
 			return new TestHarnessPage(driver);
