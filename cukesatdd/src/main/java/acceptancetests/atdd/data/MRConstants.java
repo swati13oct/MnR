@@ -212,10 +212,6 @@ public class MRConstants {
   public static final String AARP_MOBILE_TEAM_C_URL = "https://member."+MRScenario.environment+"-aarpmedicareplans." + getDomain() + "/mobile/guest/login.html";
 	
 	public static String getDomain() {
-		if (MRScenario.domain == null || MRScenario.domain.equals("")) {
-			return "uhc.com";
-		} else {
-			return (MRScenario.environment.equals("team-ci") || MRScenario.environment.equals("team-ci2")) ? MRScenario.domain : "uhc.com";	
-		}
+		return (MRScenario.domain == null || MRScenario.domain.equals("")) ? "uhc.com" : MRScenario.domain;
 	}
 }
