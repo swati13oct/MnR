@@ -127,7 +127,32 @@ Then the user validates content displayed on EOB page
        | Plan Type      |<planType>  |       
 Examples: 
 | planType    | memberType   					 | 
-| MA          | q4_dec_combo015        |
-|	SSUP				|	q4_dec_combo015        |
-|	HIP					| q4_dec_ship020				 |
-| MAPD				|	q4_dec_ship020				 | 	
+#| MA          | q4_dec_combo015        |
+#|	SSUP				|	q4_dec_combo015        |
+#|	HIP					| q4_dec_ship020				 |
+#| MAPD				|	q4_dec_ship020				 | 
+#| PDP					| q4_dec_combo026				 |
+#|	SHIP				| q4_dec_combo026				 |
+#Peehip
+| MA					| q4_dec_grp036					 |
+| PDP					| q4_dec_grp036          |
+
+#failing
+|	PDP					|	q4_dec_aarp002          |
+
+| PDP					| q4_dec_ship072          |
+|	SSUP				| q4_dec_ship072          | 
+@noComboTab
+Scenario Outline: To verify different plan types under combo tabs
+Given registered AMP with for EOB flow
+       | Member Type    |<memberType>|
+And the user navigates to EOB page  
+Then the user validates content displayed on EOB page without combo tabs
+       | Plan Type      |<planType>  |
+Examples: 
+| planType    | memberType   					 |
+#WELLS FARGO
+| PDP					| q4_dec_grp039          |  
+
+             
+	
