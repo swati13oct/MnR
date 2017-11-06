@@ -80,7 +80,6 @@ public class LoginPage extends UhcDriver {
 				Alert alert2 = driver.switchTo().alert();
 				alert2.accept();
 			}*/
-
 		}
 		/*
 		if ( MRScenario.environment.equals("dev-a") || MRScenario.environment.equals("dev-c")
