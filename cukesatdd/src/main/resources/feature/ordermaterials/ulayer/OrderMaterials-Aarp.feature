@@ -3,21 +3,22 @@
 
 Feature: To test order materials in Redesign site
 
-  @MAPSOrdermaterials
-  Scenario Outline: Verify order materials in Redesign site for federal type plan members
-    Given registered AMP member with following attributes
-      | Plan Type | <planType> |
-      | Member Type  | <memberType> |
-    When the user views order materials in Member Redesign Order Materials page
-    And the user selects an option from the orderp list in Redesign site
-      | Option    | <option>   |
-      | Plan Type | <planType> |
+# Not needed, covered in Confirmatiob Page Scenario
+#  @MAPSOrdermaterials
+#  Scenario Outline: Verify order materials in Redesign site for federal type plan members
+#    Given registered AMP member with following attributes
+#      | Plan Type | <planType> |
+#      | Member Type  | <memberType> |
+##    When the user views order materials in Member Redesign Order Materials page
+#    And the user selects an option from the orderp list in Redesign site
+#      | Option    | <option>   |
+#      | Plan Type | <planType> |
 
-    Examples: 
-      | planType | memberType |option           |
-      | MA       | Individual  |Member Materials |
-      | MAPD     | Individual  |Member Materials      |
-      | PDP      | Individual  |Welcome Guide    |
+#    Examples: 
+#      | planType | memberType |option           |
+#      | MA       | Individual  |Member Materials |
+#      | MAPD     | Individual  |Member Materials      |
+#      | PDP      | Individual  |Welcome Guide    |
 
   @SHIPOrderMaterials
   Scenario Outline: Verify order materials in Redesign site for ship type plan members
@@ -97,6 +98,8 @@ Feature: To test order materials in Redesign site
             | MA        | Individual | MA |
             | MAPD			| Individual | MAPD |
             | PDP			| Individual | PDP |
+            | SHIP     | PDPwithMedSupp | SHIP |
+            
 
   @ValidateErrorMessage
   Scenario Outline: Verify Aarp Order Materials Page Error Message

@@ -46,6 +46,10 @@ public class PharmacySearchPage extends UhcDriver{
 
 	@FindBy(id = "plan-type")
 	private WebElement PlanNameDropDown;
+
+	@FindBy(id = "plan-year")
+	private WebElement planYearDropDown;	
+
 	
 	@FindBy(xpath = "(//*[@id='lang-select']//option)[1]")
 	private WebElement SpanishLanguage;
@@ -204,6 +208,17 @@ public class PharmacySearchPage extends UhcDriver{
 		searchbtn.click();
 		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 		System.out.println("*****Zipcode entered******"+zipcode);
+
+		if(planYearDropDown.isEnabled()){
+			Select PlanYear = new Select(planYearDropDown);
+			PlanYear.selectByVisibleText("2017");
+			System.out.println("Plan Year Selected is : "+planYearDropDown.getText());
+			driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+			CommonUtility.checkPageIsReady(driver);
+			Select PlanSelect = new Select(PlanNameDropDown);
+			PlanSelect.selectByIndex(0);
+			System.out.println("Plan Selected is : "+PlanNameDropDown.getText());
+		}
 		if(distanceDropDownField.getText().contains(distance) || zipcodeField.getText().contains(zipcode))
 		{
 			return new PharmacySearchPage(driver);

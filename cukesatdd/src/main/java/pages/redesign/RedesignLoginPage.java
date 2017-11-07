@@ -93,7 +93,7 @@ public class RedesignLoginPage extends UhcDriver {
 			} 
 		        }
 			
-		driver.manage().timeouts().implicitlyWait(100, TimeUnit.SECONDS);
+		driver.manage().timeouts().implicitlyWait(40, TimeUnit.SECONDS);
 		CommonUtility.checkPageIsReady(driver);
 		try{
 			FeedbackModal.click();
@@ -102,12 +102,12 @@ public class RedesignLoginPage extends UhcDriver {
 				System.out.println("FeedBack Modal NOT CLOSING - Close button is clicked");
 			}
 			System.out.println("FeedBack Modal Closed");
+			driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
 		}
 		catch (Exception e) {
 			System.out.println("FeedBack Modal NOT Present");
 
 		}
-		driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
 		if(currentUrl().contains("/testharness.html") && category.equalsIgnoreCase("Group") ) {
 			System.out.println("@@@@@@@@@@@@ Redesign Home Page Displayed for BlueLayer Member@@@@@@@@@@@@");
 			return new BlueLayerHomePage(driver, category);
@@ -136,7 +136,7 @@ public class RedesignLoginPage extends UhcDriver {
 			} 
 		}
 		
-	driver.manage().timeouts().implicitlyWait(100, TimeUnit.SECONDS);
+	driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
 	CommonUtility.checkPageIsReady(driver);
 	try{
 		FeedbackModal.click();
@@ -145,6 +145,7 @@ public class RedesignLoginPage extends UhcDriver {
 			System.out.println("FeedBack Modal NOT CLOSING - Close button is clicked");
 		}
 		System.out.println("FeedBack Modal Closed");
+		//driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
 	}
 	catch (Exception e) {
 		System.out.println("FeedBack Modal NOT Present");

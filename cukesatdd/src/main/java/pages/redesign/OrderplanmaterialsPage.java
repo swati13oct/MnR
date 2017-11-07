@@ -38,16 +38,16 @@ public class OrderplanmaterialsPage extends UhcDriver {
 	@FindBy(xpath = "//a[contains(text(), 'Senior Supplement Plan')]")
 	private WebElement SrSuppTab;
 
-	@FindBy(xpath = "//*[@id='notShipRadio']/div[1]/div")
+	@FindBy(xpath = "//*[@id = 'member-materials']/..")
 	private WebElement memberMaterialsfield;
 
-	@FindBy(xpath = "//*[@id='notShipRadio']/div[2]/div")
+	@FindBy(xpath = "//*[@id='replacement-id']/..")
 	private WebElement replacementIdField;
 	
-	@FindBy(xpath = "//*[@id='shipRadio']/div[1]/div")
+	@FindBy(xpath = "//*[@id='member-id-card']/..")
 	private WebElement MemberIDcardField;
 	
-	@FindBy(id = "eft-id")
+	@FindBy(xpath = "//*[@id='eft-id']/..")
 	private WebElement EFTbrochureField;
 
 	@FindBy(id = "order-materials-error")
@@ -56,19 +56,22 @@ public class OrderplanmaterialsPage extends UhcDriver {
 	@FindBy(id = "order-materials-error")
 	private WebElement OrderMaterialsErrorMsg;
 	
-	@FindBy(id = "ppe-id")
+	@FindBy(xpath = "//*[@id = 'ppe-id']/..")
 	private WebElement premiumPayment;
 
-	@FindBy(xpath = "//*[@id='shipRadio']/div[4]/div")
+	@FindBy(xpath = "//*[@id = 'couponBook-id']/..")
 	private WebElement couponBook;
 
-	@FindBy(id = "medicareHospital-id")
+/*	@FindBy(xpath = "//*[@id='shipRadio']/div[3]/div")
+	private WebElement couponBook;
+*/	
+	@FindBy(xpath = "//*[@id = 'medicareHospital-id']/..")
 	private WebElement medicareHospital;
 
-	@FindBy(id = "claimsEnvelope-id")
+	@FindBy(xpath = "//*[@id = 'claimsEnvelope-id']/..")
 	private WebElement claimsEnvelope;
 
-	@FindBy(id = "coi-id")
+	@FindBy(xpath = "//*[@id = 'coi-id']/..")
 	private WebElement certificateInsurance;
 	
 	@FindBy(xpath = "//label[@for='member-materials']")
@@ -186,19 +189,29 @@ public class OrderplanmaterialsPage extends UhcDriver {
 		if (PlanType.contentEquals("MA") || PlanType.contentEquals("MAPD") || PlanType.contentEquals("PDP")) {
 			if (validate(memberMaterialsfield) && validate(replacementIdField) ){
 				Assert.assertTrue(true);
-				System.out.println("*************Displaying Order Plan Material Options for "+PlanType+ "**********");
+				System.out.println("*************Displaying All Order Plan Material Options for "+PlanType+ "**********");
+			}
+			else{
+				System.out.println("************* All Order Plan Material Options are NOT DISPLAYED for "+PlanType+ "**********");
+				Assert.fail();
+				
 			}
 		}
-		else if (PlanType.contentEquals("HIP") || PlanType.contentEquals("MedSupp")) {
-			if (validate(MemberIDcardField) && validate(EFTbrochureField) && validate(premiumPayment) && validate(couponBook) && validate(claimsEnvelope) && validate(certificateInsurance) && validate(medicareHospital) ){
+		else if (PlanType.contentEquals("HIP") || PlanType.contentEquals("MedSupp") ||PlanType.contentEquals("SHIP")) {
+			if (validate(MemberIDcardField) && validate(EFTbrochureField) && validate(couponBook) && validate(claimsEnvelope) && validate(certificateInsurance) && validate(medicareHospital) ){
 				Assert.assertTrue(true);
-				System.out.println("*************Displaying Order Plan Material Options for "+PlanType+ "**********");
+				System.out.println("*************Displaying All Order Plan Material Options for "+PlanType+ "**********");
+			}
+			else{
+				System.out.println("*************All Order Plan Material Options are NOT DISPLAYED for "+PlanType+ "**********");
+				Assert.fail();
+
 			}
 		}
 		else{
-			Assert.fail();
 			System.out.println("Invalid Plan Type / Plan Type not found");
-		}	
+			Assert.fail();
+		}
 	}
 	
 	
@@ -228,13 +241,19 @@ public class OrderplanmaterialsPage extends UhcDriver {
 	public boolean ValidateSHIPErrorMessage(){
 		
 		if (SHIPerrorMsg.isDisplayed()){
+			if(SHIPerrorMsg.getText().contains("Your request cannot be processed at this time. For help, please contact Customer Service")){
 			System.out.println("*************Error Message Displayed displayed for SHIP invalid Selection in Order materials Page***************");
 			System.out.println("*************Error Message : "+SHIPerrorMsg.getText()+"***************");
 			return true;
+			}
+			else
+				System.out.println("************Error message not displayed for SHIP invalid Selection - Order materials Page***************");
+				return false;
+
 		}
-		else{ 
+		else
 			System.out.println("************Error message not displayed for SHIP invalid Selection - Order materials Page***************");
-			return false;}
+			return false;
 		
 	}
 	

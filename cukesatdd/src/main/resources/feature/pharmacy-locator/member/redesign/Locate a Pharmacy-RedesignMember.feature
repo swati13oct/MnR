@@ -14,7 +14,7 @@ Then the user validates the pharmacies available in Redesign site
 
 Examples:
 	| planType | memberType | distance |
-#	| PDP      | Individual  |  25       |
+	| PDP      | Individual  |  25       |
 	| MAPD	   | Individual  |   10      |
 
 @PharmacyFilters
@@ -31,8 +31,7 @@ Then the user validates the pharmacies available in Redesign site
 
 Examples:
 	| planType | memberType | distance | pharmacyType							|
-#	| PDP      | Individual  | 25       |	Open 24 hours,Long-term care,Standard Network Pharmacy (90-day) |
-	| MAPD	   | Individual  | 25        | Open 24 hours |
+	| PDP      | Individual  | 25       |	Open 24 hours |
 	| MAPD	   | Individual  | 25        | Long-term care |
 	| MAPD	   | Individual  | 25        | Standard Network Pharmacy (90-day) |
 
@@ -50,6 +49,7 @@ Then the user validates the pharmacies available in Redesign site
 
     Examples: 
     | planType | memberType  | zipcode | distance | 
+    | PDP 		 | Individual  |  90210  |  15			|
     | MAPD	   | Individual  |   90210 |       15 | 
 
    @Validateshowonmap
@@ -62,7 +62,8 @@ Then the user Validates show on map link in Redesign Site
 
      Examples: 
     | planType | memberType  | 
-    | MAPD	   | Individual  | 
+    | PDP  		 | Individual	 |
+#    | MAPD	   | Individual  | 
 
 # VIEW as PDF LInk not working / Not Available
 #       @ValidateViewAsPDF
