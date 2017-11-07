@@ -15,6 +15,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import acceptancetests.atdd.data.MRConstants;
 import atdd.framework.MRScenario;
@@ -66,7 +68,7 @@ public class NewRegistrationPage extends UhcDriver {
 
 	
 	public Object registerWith(String memberId, String dob) {
-			
+		WebDriverWait wait = new WebDriverWait(driver,30);	
 		try{
 			
 			String str[] = dob.split("/");
@@ -74,7 +76,7 @@ public class NewRegistrationPage extends UhcDriver {
 			String strMonth = str[1];
 			String strYear = str[2];
 			
-			JavascriptExecutor js = (JavascriptExecutor) driver;
+			wait.until(ExpectedConditions.visibilityOf(memberIdField));
 			sendkeys(memberIdField, memberId);
 			driver.findElement(By.xpath("//span[@id='select2-date-mm-container']/following::span[1]")).click();
 			if(!strMonth.equals("01"))
