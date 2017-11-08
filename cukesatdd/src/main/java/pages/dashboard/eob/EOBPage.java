@@ -8,6 +8,7 @@ import org.junit.Assert;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -22,122 +23,134 @@ import atdd.framework.UhcDriver;
 
 
 public class EOBPage extends UhcDriver{
-	
+
 	@FindBy(id="eob-type")
 	private WebElement eobType;
-	
+
 	@FindBy(id="date-range-1")
 	private WebElement eobMonthDateRange;
-	
+
 	@FindBy(id="date-range")
 	private WebElement eobMonthDateRangeSHIP;
-	
+
 	@FindBy(id="custom-from2")
 	private WebElement fromDateInputBox;
-	
+
 	@FindBy(id="custom-to1")
 	private WebElement toDateInputBox;
-	
+
 	@FindBy(className="btn custom-date-search-btn")
 	private WebElement searchButton;
-	
+
 	@FindBy(xpath="//*[contains(text(),'Learn More About My Medical EOB')]")
 	private WebElement learnMoreLink;
-	
+
 	@FindBy(xpath="//*[contains(text(),'How to read your Medical EOB ')]")
 	private WebElement readMedicalEOB;
-	
+
 	@FindBy(xpath=".//*[@id='error-results']/div[1]/div/h2/span[3]")
 	private WebElement eobDetailsHeader;
-	
+
 	@FindBy(xpath="//*[contains(text(),'Watch Video')]")
 	private WebElement readEOBVideo;
-	
+
 	@FindBy(id="adobesitelink")
 	private WebElement adobeWebsiteLink;
-	
+
 	@FindBy(id="proceedbtn")
 	private WebElement siteLeavingProceedButton;
-	
+
 	@FindBy(id="cancelbtn")
 	private WebElement siteLeavingCancelButton;
-	
+
 	@FindBy(xpath=".//*[@id='IPEinvL']/map/area[2]")
 	private WebElement iPerceptionPopUp;
-	
+
 	@FindBy(xpath = "//a[contains(text(), 'Medicare Advantage Plan')]")
 	private WebElement MAPlanTab;
 
 	@FindBy(xpath = "//a[contains(text(), 'Hospital Indemnity')]")
 	private WebElement HIPplanTab;
-	
+
 	@FindBy(xpath = "//a[contains(text(), 'Medicare Prescription Drug Plan')]")
 	private WebElement PDPPlanTab;
 
 	@FindBy(xpath = "//a[contains(text(), 'Medicare Supplement Insurance Plan')]")
 	private WebElement MedSuppPlanTab;
-	
+
 	@FindBy(xpath = "//a[contains(text(), 'Supplemental  Insurance Plans')]")
 	private WebElement SuppTab;
-	
+
 	@FindBy(xpath = "//*[text()='Go to EOB Search page']")
 	private WebElement eobLink;
 	
-	private static String EOB_DIRECT_URL = MRConstants.EOB_DIRECT_URL;
+	@FindBy(id="toDatepicker")
+	private WebElement toDate;
 	
+	@FindBy(id="fromDatepicker")
+	private WebElement fromDate;	
+	
+	@FindBy(xpath="//*[@class='btn btn--primary' and text()='Search']")
+	private WebElement customSearchButton;
+	
+	private static String EOB_DIRECT_URL = MRConstants.EOB_DIRECT_URL;
+
 	public EOBPage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
 		openAndValidate();
- 	}
+	}
 
 	@Override
 	public void openAndValidate() {
 		// TODO Auto-generated method stub
 		//
 	}
-	
+
 	public EOBPage selectDateRange(String dateRange, String planType, String eobTypeData){
-		driver.manage().timeouts().implicitlyWait(40,TimeUnit.SECONDS);
+        validate(eobMonthDateRange);	
 		if(planType.equalsIgnoreCase("MAPD")){
 			Select select = new Select(eobType);
-			select.selectByValue(eobTypeData);			
+			select.selectByValue(eobTypeData);
+			System.out.println(eobTypeData);		 
 		}
-		Select select = new Select(eobMonthDateRange);	
-		select.selectByVisibleText(dateRange);
-		return new EOBPage(driver);
+		Select select = new Select(eobMonthDateRange);
+		System.out.println(dateRange);
+		select.selectByValue(dateRange);
+		validateDateRangeContentDisplayed(dateRange);
+ 		return new EOBPage(driver);
 	}
 	public EOBPage validateEOBStatements(String dateRange,String planType,String eobTypeData, String fromDate, String toDate){
 		//	selectDateRange(dateRange, memberType, eobTypeData);		
-			if(dateRange.contains("Custom")){
-				fromDateInputBox.clear();
-		        fromDateInputBox.click();
-				fromDateInputBox.sendKeys(fromDate);
-				toDateInputBox.clear();
-				toDateInputBox.click();
-				toDateInputBox.sendKeys(toDate);
-				searchButton.click();
-			}
-			//Check number of EOBs displayed
-			//validate arrow
+		if(dateRange.contains("Custom")){
+			fromDateInputBox.clear();
+			fromDateInputBox.click();
+			fromDateInputBox.sendKeys(fromDate);
+			toDateInputBox.clear();
+			toDateInputBox.click();
+			toDateInputBox.sendKeys(toDate);
+			searchButton.click();
+		}
+		//Check number of EOBs displayed
+		//validate arrow
 		//	validatePageToggle();
-			
-			//insert Learn More link validation
-					
-	 		//EOBs list validation on UI
-			
-	 		try{
-		    List<WebElement> listOfEOBs = driver.findElements(By.xpath("//a[@href='#' and contains(text(),'EOB Statement')]"));
+
+		//insert Learn More link validation
+
+		//EOBs list validation on UI
+
+		try{
+			List<WebElement> listOfEOBs = driver.findElements(By.xpath("//a[@href='#' and contains(text(),'EOB Statement')]"));
 			if(listOfEOBs.size()>=0){
 				System.out.println("Number of EOBs displayed for " + dateRange + " is " + listOfEOBs.size());
-				
+
 			}		 
-			}catch(Exception e){
-				System.out.println("No EOBs displayed");
-			}		
-			 
-			return new EOBPage(driver);
-		}
+		}catch(Exception e){
+			System.out.println("No EOBs displayed");
+		}		
+
+		return new EOBPage(driver);
+	}
 	public EOBPage validateReadPDF(){
 		learnMoreLink.click();
 		if(readMedicalEOB.isDisplayed()){
@@ -159,10 +172,10 @@ public class EOBPage extends UhcDriver{
 			driver.switchTo().window(tabs.get(1));
 			System.out.println(driver.getTitle());
 			if (driver.getTitle().contains("How_to_read_Medical_EOB.pdf")) {
-		    System.out.println("PDF successfully displayed");
-			return new EOBPage(driver);
+				System.out.println("PDF successfully displayed");
+				return new EOBPage(driver);
 			}
- 		}else{
+		}else{
 			System.out.println("Read Medical EOB PDF not displayed");
 			Assert.fail();
 		}
@@ -170,23 +183,23 @@ public class EOBPage extends UhcDriver{
 	}
 	public EOBPage validateEachEOBonUI(){
 		// this method validates size/date/link displayed on UI for each EOB
-		 List<WebElement> listOfEOBs = driver.findElements(By.xpath("//*[contains(text(),'EOB Statement')]"));
-		 List<WebElement> pdfIcon = driver.findElements(By.xpath("//*[contains(text(),'EOB Statement')]/img")); 
-		 List<WebElement> fileType = driver.findElements(By.xpath("//*[contains(text(),'EOB Statement')]/span"));
-		 List<WebElement> datesDisplayed = driver.findElements(By.xpath("//*[contains(text(),'EOB Statement')]/following-sibling::p"));
-   		 if(listOfEOBs.size()==pdfIcon.size()&& listOfEOBs.size()== fileType.size() &&
-				 listOfEOBs.size()==datesDisplayed.size()){
-  				 driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS); 
-				 // Code optimization required for same logic
-				 for(int i=0; i<=pdfIcon.size()-1;i++){
-					 if(pdfIcon.get(i).isDisplayed()){			 
-						 System.out.println(pdfIcon.get(i).getAttribute("alt")+" icon at "+(i+1)+" displayed correctly");
-					 }else{
-						 System.out.println("Icon "+(i+1)+" not displayed");
-						 Assert.fail();
- 				     }
-				   }
-				 /*for(int i=0; i<=fileType.size()-1;i++){
+		List<WebElement> listOfEOBs = driver.findElements(By.xpath("//*[contains(text(),'EOB Statement')]"));
+		List<WebElement> pdfIcon = driver.findElements(By.xpath("//*[contains(text(),'EOB Statement')]/img")); 
+		List<WebElement> fileType = driver.findElements(By.xpath("//*[contains(text(),'EOB Statement')]/span"));
+		List<WebElement> datesDisplayed = driver.findElements(By.xpath("//*[contains(text(),'EOB Statement')]/following-sibling::p"));
+		if(listOfEOBs.size()==pdfIcon.size()&& listOfEOBs.size()== fileType.size() &&
+				listOfEOBs.size()==datesDisplayed.size()){
+			driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS); 
+			// Code optimization required for same logic
+			for(int i=0; i<=pdfIcon.size()-1;i++){
+				if(pdfIcon.get(i).isDisplayed()){			 
+					System.out.println(pdfIcon.get(i).getAttribute("alt")+" icon at "+(i+1)+" displayed correctly");
+				}else{
+					System.out.println("Icon "+(i+1)+" not displayed");
+					Assert.fail();
+				}
+			}
+			/*for(int i=0; i<=fileType.size()-1;i++){
 					 if(fileType.get(i).isDisplayed()){			 
 						 System.out.println(fileType.get(i).getText()+" size at "+(i+1)+" displayed correctly");
 						 if(fileType.get(i).getText().contains("kb") 
@@ -204,7 +217,7 @@ public class EOBPage extends UhcDriver{
 						 System.out.println("Size at "+(i+1)+" not displayed");
 						 Assert.fail();
  				     }
-				   
+
 				 for(int i=0; i<=datesDisplayed.size()-1;i++){
 					 if(datesDisplayed.get(i).isDisplayed()){			 
 						 System.out.println(datesDisplayed.get(i).getText()+" for PDF at "+(i+1)+" displayed correctly");
@@ -213,15 +226,16 @@ public class EOBPage extends UhcDriver{
 						 Assert.fail();
  				     }
 				   }*/
-				 return new EOBPage(driver);
- 			 }else{
-				 System.out.println("Count of PDFs and EOB doesn't match");
-				 Assert.fail();
-			 }
-		 	return null;
+			return new EOBPage(driver);
+		}else{
+			System.out.println("Count of PDFs and EOB doesn't match");
+			Assert.fail();
 		}
+		return null;
+	}
 	public EOBPage validateDropDowns(String planType){
 		if(planType.equals("MAPD")){
+			validate(eobType);
 			Select select = new Select(eobType);
 			List<WebElement> eobTypeOptions = select.getOptions();
 			WebElement firstInDropDown = select.getFirstSelectedOption();
@@ -236,11 +250,15 @@ public class EOBPage extends UhcDriver{
 					}
 				}
 			}
-		}
-			/*else{
-				System.out.println("First Element of dropdown not displayed correctly");
+		}else{
+			if(validate(eobType)){
+				System.out.println("EOB tab is displayed for non MAPD plan");
 				Assert.fail();
-			}*/
+			}else{
+				System.out.println("EOB Type tab not displayed --- passed");
+			}
+		}
+		 
 		Select selectDate;
 		WebElement firstInDateDropDown;
 		if(planType.equals("SHIP") || planType.equals("SSUP") || planType.equals("HIP")){
@@ -250,68 +268,62 @@ public class EOBPage extends UhcDriver{
 			selectDate = new Select(eobMonthDateRange);
 			firstInDateDropDown = selectDate.getFirstSelectedOption();
 		}
-			/*Select selectDate = new Select(eobMonthDateRange);
-			WebElement firstInDateDropDown = selectDate.getFirstSelectedOption();*/
-			if(firstInDateDropDown.getText().equals("Last 90 Days")){
-				System.out.println("First element Date Range dropdown displayed correctly "+ firstInDateDropDown.getText());
-				List<WebElement> dateDropDownOptions = selectDate.getOptions();
-				for(WebElement dateRange : dateDropDownOptions){
- 					String dateRangeValue = dateRange.getText();
- 					System.out.println("Date Range Value Captured " + dateRangeValue);
-	 			   if(dateRangeValue.equals("Last 90 days")){
-	 					System.out.println("First Value of dropdown displayed correclty "+dateRangeValue);
-	 					validateDateRangeContentDisplayed(dateRangeValue);	
-	 			   }else if(dateRangeValue.equals("Last 6 months")){
- 						System.out.println("Second Value of dropdown displayed correclty "+dateRangeValue);
-  						selectDateRange(dateRangeValue, planType, "Medical");
-  						validateDateRangeContentDisplayed(dateRangeValue);
- 					}else if(dateRangeValue.equals("Last 12 months")){
- 						System.out.println("Third Value of dropdown displayed correclty "+dateRangeValue);
- 						selectDateRange(dateRangeValue, planType, "Medical");
- 						validateDateRangeContentDisplayed(dateRangeValue);
- 					}else if(dateRangeValue.equals("Last 18 months")){
- 						System.out.println("Fourth Value of dropdown displayed correclty "+dateRangeValue);
- 						selectDateRange(dateRangeValue, planType, "Medical");
- 						validateDateRangeContentDisplayed(dateRangeValue);
- 					}else if(dateRangeValue.equals("Custom Search")){
- 						System.out.println("Last Value of dropdown displayed correclty "+dateRangeValue);
- 						selectDateRange(dateRangeValue, planType, "Medical");
- 						if(!planType.equals("Ship")){
-							System.out.println("Values are displayed correctly for "+planType);
- 							}else{
-							System.out.println("For ship member value displayed incorrectly");
-							Assert.fail();
-						}
- 					} else if(dateRange.equals(null)){
- 						System.out.println("all/none of the values displayed corectly");
+		if(firstInDateDropDown.getText().equals("Last 90 Days")){
+			System.out.println("First element Date Range dropdown displayed correctly "+ firstInDateDropDown.getText());
+			List<WebElement> dateDropDownOptions = selectDate.getOptions();
+			for(WebElement dateRange : dateDropDownOptions){
+				String dateRangeValue = dateRange.getText();
+				System.out.println("Date Range Value Captured " + dateRangeValue);
+				if(dateRangeValue.equals("Last 90 days")){
+					System.out.println("First Value of dropdown displayed correclty "+dateRangeValue);
+					validateDateRangeContentDisplayed(dateRangeValue);	
+				}else if(dateRangeValue.equals("Last 6 months")){
+					System.out.println("Second Value of dropdown displayed correclty "+dateRangeValue);
+					selectDateRange(dateRangeValue, planType, "Medical");
+					validateDateRangeContentDisplayed(dateRangeValue);
+				}else if(dateRangeValue.equals("Last 12 months")){
+					System.out.println("Third Value of dropdown displayed correclty "+dateRangeValue);
+					selectDateRange(dateRangeValue, planType, "Medical");
+					validateDateRangeContentDisplayed(dateRangeValue);
+				}else if(dateRangeValue.equals("Last 18 months")){
+					System.out.println("Fourth Value of dropdown displayed correclty "+dateRangeValue);
+					selectDateRange(dateRangeValue, planType, "Medical");
+					validateDateRangeContentDisplayed(dateRangeValue);
+				}else if(dateRangeValue.equals("Custom Search")){
+					System.out.println("Last Value of dropdown displayed correclty "+dateRangeValue);
+					selectDateRange(dateRangeValue, planType, "Medical");
+					if(!planType.equals("Ship")){
+						System.out.println("Values are displayed correctly for "+planType);
+					}else{
+						System.out.println("For ship member value displayed incorrectly");
 						Assert.fail();
- 					}
-					}	
-					return new EOBPage(driver);
+					}
+				} else if(dateRange.equals(null)){
+					System.out.println("all/none of the values displayed corectly");
+					Assert.fail();
 				}
-		
-			else{
-				System.out.println("First element Date Range dropdown not displayed correctly ");
-				Assert.fail();
-			}
-			return null;
+			}	
+			return new EOBPage(driver);
 		}
-	//	}
-			/*else{
-				System.out.println("First element Date Range dropdown not displayed correctly ");
-				Assert.fail();
-			}
- 		
-		return null;*/
-//	}
+
+		else{
+			System.out.println("First element Date Range dropdown not displayed correctly ");
+			Assert.fail();
+		}		
+		return null;
+	}
+	
 	public void validateDateRangeContentDisplayed(String dateRangeValue){
-		/*CommonUtility.waitForPageLoad(driver, eobDetailsHeader, 20 );
+	if(dateRangeValue.contains("custom")){
+		
+	}else{
 		if(eobDetailsHeader.getText().contains(dateRangeValue)){
 			System.out.println(dateRangeValue+" displayed correctly");
 		}else{
 			System.out.println("Desired value not displayed correctly for EOB statement header");
 			Assert.fail();
-		}*/
+		}
+	}	
 	}
 	public EOBPage validateEobVideo(){
 		learnMoreLink.click();
@@ -325,14 +337,14 @@ public class EOBPage extends UhcDriver{
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-		
- 		}else{
+
+		}else{
 			System.out.println("HOW TO READ YOUR MONTHLY MEDICAL EXPLANATION OF BENEFITS (VIDEO) link not displayed");
 			Assert.fail();
 		}
 		return null;
 	}
-	
+
 	public EOBPage loginToDashboardPage(String userName){
 		start(EOB_DIRECT_URL);
 		driver.manage().timeouts().implicitlyWait(40,TimeUnit.SECONDS) ;
@@ -341,36 +353,26 @@ public class EOBPage extends UhcDriver{
 		driver.findElement(By.id("username")).sendKeys(userName);
 		driver.findElement(By.id("password")).sendKeys("Password@1");
 		driver.findElement(By.id("sign-in-btn")).click();
- 		return new EOBPage(driver);
+		return new EOBPage(driver);
 	}
-	
+
 	public EOBPage navigateDirectToEOBPag(){
 		WebDriverWait wait = new WebDriverWait(driver, 20);
 		wait.until(ExpectedConditions.elementToBeClickable(eobLink));
+		try{
+			if (iPerceptionPopUp.isDisplayed()) {
+				iPerceptionPopUp.click();
+			}
+		}catch(Exception e)        {
+			System.out.println("iPerception Pop Up not displayed");
+		}
+
 		validate(eobLink);
-		/*try {
-			Thread.sleep(6000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}*/
-	//	if(driver.getTitle().equalsIgnoreCase("Test Harness")){
-		/*	try{
-				if (iPerceptionPopUp.isDisplayed()) {
-					iPerceptionPopUp.click();
-				}
-			}catch(Exception e)		{
-				System.out.println("iPerception Pop Up not displayed");
-			}*/
-		/*JavascriptExecutor js = (JavascriptExecutor)driver;
-		js.executeScript("arguments[0].click();", By.xpath("//*[text()='Go to EOB Search page']"));*/
- 		 driver.findElement(By.xpath("//*[text()='Go to EOB Search page']")).click();
-		 
-         return new EOBPage(driver);
-	//	}
-		//return null;
+		driver.findElement(By.xpath("//*[text()='Go to EOB Search page']")).click();
+
+		return new EOBPage(driver);
 	}
-	
+
 	public EOBPage validateSiteLeaveingPopUP(){
 		driver.manage().timeouts().implicitlyWait(20,TimeUnit.SECONDS);
 		String eobPageTitle = driver.getTitle();
@@ -380,21 +382,21 @@ public class EOBPage extends UhcDriver{
 		js.executeScript("arguments[0].click();", adobeWebsiteLink);
 		validate(siteLeavingProceedButton);
 		validate(siteLeavingCancelButton);
-		
+
 		//now click cancel and validate any element on page
 		siteLeavingCancelButton.click();
 		validate(adobeWebsiteLink);
-		
+
 		//now again validate site leaving popup
 		js.executeScript("arguments[0].click();", adobeWebsiteLink);
 		validate(siteLeavingProceedButton);
 		validate(siteLeavingCancelButton);
-		
+
 		//now click on proceed and validate new tab opens
 		siteLeavingProceedButton.click();
 		switchToNewTab();
 		driver.manage().timeouts().implicitlyWait(20,TimeUnit.SECONDS);
-		
+
 		//capture next page title
 		String pageTitle = driver.getTitle();
 		System.out.println(pageTitle);
@@ -406,7 +408,7 @@ public class EOBPage extends UhcDriver{
 		}
 		return null;
 	}
-	
+
 	public boolean navigatePlanTabs(String PlanType){	
 		if (PlanType.contentEquals("MA") || PlanType.contentEquals("MAPD")) {
 			if (validate(MAPlanTab)){
@@ -416,7 +418,7 @@ public class EOBPage extends UhcDriver{
 				return true;
 			}
 		}
-		
+
 		else if (PlanType.contentEquals("SHIP")) {
 			if (validate(MedSuppPlanTab)){
 				MedSuppPlanTab.click();
@@ -443,7 +445,7 @@ public class EOBPage extends UhcDriver{
 				System.out.println("*************Displaying SHIP - HIP Plan Tab **********");
 				return true;
 			}
-			
+
 		}
 		else if (PlanType.contentEquals("PDP")) {
 			if (validate(PDPPlanTab)){
@@ -452,7 +454,7 @@ public class EOBPage extends UhcDriver{
 				System.out.println("*************Displaying PDP Plan Tab **********");
 				return true;
 			}
-			
+
 		}
 		else if (PlanType.contentEquals("MedSupp")) {
 			if (validate(MedSuppPlanTab)){
@@ -474,5 +476,19 @@ public class EOBPage extends UhcDriver{
 		System.out.println("@@@@@@@@@@@@ Invalid Plan Type / Plan Tab not found @@@@@@@@@@@@@@");
 		return false;
 	}
+	
+	public EOBPage enterCustomSearchDate(String fromDateValue, String toDateValue){
+		validate(toDate);
+		validate(fromDate);
+		validate(customSearchButton);
+		
+        fromDate.sendKeys(fromDateValue);
+        toDate.sendKeys(toDateValue);
+        
+        customSearchButton.click();
+        
+		return null;
+	}
+	
 }
- 
+

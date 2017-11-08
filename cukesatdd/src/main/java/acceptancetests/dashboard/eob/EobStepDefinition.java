@@ -211,6 +211,26 @@ public class EobStepDefinition {
   		eobPage.validateDropDowns(planType);
 	}
 	
+	
+	@And("^the user selects the desired date range$")
+	public void user_selects_the_desired_date_range(DataTable givenAttributes){
+		List<DataTableRow> memberAttributesRow = givenAttributes
+				.getGherkinRows();
+		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells()
+					.get(0), memberAttributesRow.get(i).getCells().get(1));
+		}
+		String planType = memberAttributesMap.get("Plan Type");
+		String eobTypeData = memberAttributesMap.get("EOB Type");
+		String dateRange = memberAttributesMap.get("Date Range");
+
+		EOBPage eobPage =  (EOBPage) getLoginScenario().getBean(PageConstants.EOB_Page);
+		eobPage.selectDateRange(dateRange, planType, eobTypeData);
+		
+	}
+	
 	@After
 	public void tearDown() {
 

@@ -42,10 +42,10 @@ And the user slects the desired date range
 And the user validates how to read medical eob PDF
  	Examples:
 	| planType  | memberType        |dateRange			| eobType |
-	| MAPD      | q4_dec_uhc002     |Last 18 months		  | Medical |
-	| MAPD      | q4_dec_uhc002     |Last 6 months		  | Medical |
-	| MAPD      | q4_dec_uhc002     |Last 18 months		  | Prescription |
-	| MAPD      | q4_dec_uhc002     |Last 90 days 		  | Prescription |
+	| MAPD      | q4_dec_uhc002     |18 Months		  | Medical |
+	| MAPD      | q4_dec_uhc002     |6 Months		  | Medical |
+	| MAPD      | q4_dec_uhc002     |18 Months		  | Prescription Drug |
+	| MAPD      | q4_dec_uhc002     |90 Days 		  | Prescription Drug |
 	
 	
        
@@ -63,12 +63,12 @@ And the user slects the desired date range
 Then the user validates EOB statments displayed 	
 Examples:
 	| planType  | memberType        |dateRange			| eobType |
-	| MAPD      | q4_dec_uhc002     |Last 18 months | Medical |
-	| PDP	      | q3_sep_rxulayer001     |Last 18 months | Medical |
-	| MAPD      | q4_dec_uhc002     |Last 6 months | Medical |
-	| PDP	      | q3_sep_rxulayer001     |Last 6 months | Medical |
-	| MAPD      | q4_dec_uhc002     |Last 18 months | Prescription |
-	| PDP	      | q3_sep_rxulayer001     |Last 90 days | Medical |
+	| MAPD      | q4_dec_uhc002     |18 Months | Medical |
+	| PDP	      | q3_sep_rxulayer001     |18 Months | Medical |
+	| MAPD      | q4_dec_uhc002     |6 Months | Medical |
+	| PDP	      | q3_sep_rxulayer001     |6 Months | Medical |
+	| MAPD      | q4_dec_uhc002     |Last 18 Months | Prescription Drug |
+	| PDP	      | q3_sep_rxulayer001     |90 Days | Medical |
  
 	
        
@@ -80,8 +80,8 @@ Then the user navigates to EOB page
 And the user validates EOB statments displayed
 	Examples:
 	| planType  | memberType   				| eobTypeData       | fromDate   | toDate     |dateRange       |
- 	| PDP      | q3_sep_rxulayer001  | Medical           | 12/12/2007 | 12/12/2008 |Last 6 months   |
-  | MAPD       | q4_dec_uhc002			  | Medical           | 12/12/2007 | 12/12/2008 |Last 6 months   |
+ 	| PDP      | q3_sep_rxulayer001  | Medical           | 12/12/2007 | 12/12/2008 |6 Months   |
+  | MAPD       | q4_dec_uhc002			  | Medical           | 12/12/2007 | 12/12/2008 |6 Months   |
 
 @new
  Scenario Outline: To verify mobile responsive for all plans on EOB page
@@ -114,9 +114,10 @@ Then the user navigates to EOB page and validates the page
 |To Date   |<toDate>     |
 Examples:
       | planType  | memberType   | eobTypeData       | fromDate   | toDate     |dateRange1       |dateRange2 |dateRange3 |dateRange4 |
-      | MA        |  q4_dec_aarp507        | Medical           | 01/01/2016 | 04/01/2017 |Last 90 Days  |  Last 6 Months  | Last 12 Months  | Last 18 Months |
-      | MAPD      |  q4_dec_uhc002		     | Medical           | 01/01/2016 | 04/01/2017 |Last 90 days  |  Last 6 months  | Last 12 months  | Last 18 months |  
-      | PDP       |  q4_dec_aarp292        | Medical           | 01/01/2016 | 04/01/2017 |Last 90 days  |  Last 6 months  | Last 12 months  | Last 18 months |
+      | MA        |  q4_dec_aarp507        | Medical           | 01/01/2016 | 04/01/2017 |Last 90 Days  |  6 Months  | 12 Months  | 18 Months |
+      | MAPD      |  q4_dec_uhc002		     | Medical           | 01/01/2016 | 04/01/2017 |Last 90 Days  |  6 Months  | 12 Months  | 18 Months | 
+      | PDP       |  q4_dec_aarp292        | Medical           | 01/01/2016 | 04/01/2017 |Last 90 Days  |  6 Months  | 12 Months  | 18 Months |
+       | MAPD      |  q4_dec_grp074		     | Prescription Drug    | 01/01/2016 | 04/01/2017 |Last 90 Days  |  6 Months  | 12 Months  | 18 Months |  
         
 @comboTab
 Scenario Outline: To verify different plan types under combo tabs
@@ -127,12 +128,12 @@ Then the user validates content displayed on EOB page
        | Plan Type      |<planType>  |       
 Examples: 
 | planType    | memberType   					 | 
-#| MA          | q4_dec_combo015        |
-#|	SSUP				|	q4_dec_combo015        |
-#|	HIP					| q4_dec_ship020				 |
-#| MAPD				|	q4_dec_ship020				 | 
-#| PDP					| q4_dec_combo026				 |
-#|	SHIP				| q4_dec_combo026				 |
+| MA          | q4_dec_combo015        |
+|	SSUP				|	q4_dec_combo015        |
+|	HIP					| q4_dec_ship020				 |
+| MAPD				|	q4_dec_ship020				 | 
+| PDP					| q4_dec_combo026				 |
+|	SHIP				| q4_dec_combo026				 |
 #Peehip
 | MA					| q4_dec_grp036					 |
 | PDP					| q4_dec_grp036          |
@@ -142,6 +143,7 @@ Examples:
 
 | PDP					| q4_dec_ship072          |
 |	SSUP				| q4_dec_ship072          | 
+
 @noComboTab
 Scenario Outline: To verify different plan types under combo tabs
 Given registered AMP with for EOB flow
@@ -154,5 +156,44 @@ Examples:
 #WELLS FARGO
 | PDP					| q4_dec_grp039          |  
 
-             
-	
+|	MAPD				|	q4_dec_grp074					 |
+
+@noComboTabNew
+Scenario Outline: To verify different plan types under non combo tabs
+Given registered AMP with for EOB flow
+       | Member Type    |<memberType>|
+And the user navigates to EOB page  
+And the user selects the desired date range
+		| Plan Type      |<planType>  |
+		|EOB Type				 |<eobTypeData>|
+		|Date Range			 |<dateRange>|
+
+
+Examples:
+| planType    | memberType   					 |eobTypeData				|dateRange			|
+#5 	EOBS
+#|	MAPD				|	q4_dec_grp074					 |Prescription Drug |12 Months  	 |
+#|	MAPD				|	q4_dec_grp074					 |Prescription Drug |18 Months  	 |
+#|	MAPD				|	q4_dec_grp074					 |Prescription Drug |6 Months  	   |
+#|	MAPD				|	q4_dec_grp074					 |Prescription Drug |custom-search |
+
+# =========== B Layer Group =======================================================================
+ |	MA				|	q4_dec_grp181					 |na |12 Months |
+ |	MA				|	q4_dec_grp181					 |na |18 Months|
+ |	MA				|	q4_dec_grp181					 |na |6 Months |
+ |	MA				|	q4_dec_grp181					 |na |custom-search |
+ # 2 EOBs displayed
+ |	PDP				|	q4_dec_grp273					 |na |12 Months |
+ |	PDP	  		|	q4_dec_grp273					 |na |18 Months|
+ |	PDP	  		|	q4_dec_grp273					 |na |6 Months |
+ |	PDP  			|	q4_dec_grp273					 |na |custom-search |
+ 
+ #=====================================================================================================
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
