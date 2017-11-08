@@ -222,7 +222,7 @@ public class ResponsiveStepDefiniton {
 	}
 	
 	@And("^the user click back to all plans in AARP site")
-	public void the_user_clic_backtoallplan(){
+	public void the_user_clic_backtoallplan() throws InterruptedException{
 		ResponsivePlanSummary planSummary = (ResponsivePlanSummary) getLoginScenario()
 				.getBean(PageConstants.RESPONSIVE_PLAN_SUMMARY_PAGE);
 		planSummary.backtoAllPlans();	
@@ -333,7 +333,7 @@ public class ResponsiveStepDefiniton {
 	}
 	
 	@And("^the user verify disclaimer text for MA/MAPD plan for plan compare page in AARP site")
-	public void the_user_verify_disclaimer_text(){
+	public void the_user_verify_disclaimer_text() throws InterruptedException{
 		ResponsivePlanSummary planSummary = (ResponsivePlanSummary) getLoginScenario()
 				.getBean(PageConstants.RESPONSIVE_PLAN_SUMMARY_PAGE);
 	planSummary.disclaimerText();

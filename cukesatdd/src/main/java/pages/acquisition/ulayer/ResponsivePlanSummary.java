@@ -124,14 +124,14 @@ public class ResponsivePlanSummary extends UhcDriver{
 		    private WebElement chkBoxAddtoCompare5;
 		    
 		    //@FindBy(xpath="//*[@id='plan-list-1']//div[@class='swiper-container']/div/div[4]//div[@class='content-secondary']//div[@class='compare-box']/span[4]/a")		  
-		    @FindBy(xpath="(//a[contains(text(), 'Compare plans')])[8]")
+		    @FindBy(xpath="//div[contains(@class,'module-plan-overview module')][1]//span[@class='max-added-text show']/a[@class='compare-link']")
 		    private WebElement comparePlans;
 		    
 		   // @FindBy(xpath="(.//*[text()='View details'])[1]")
 		    @FindBy(xpath="//*[@id='innerdiv']/a[1]")
 		    private WebElement viewDetails;
 		    
-			@FindBy(xpath=".//*[text()='Back to all plans']")
+			@FindBy(xpath="//a[@id='backtoplansummarypage']")
 			private WebElement backtoallPlans;
 		    
 		   // @FindBy(xpath="(.//*[@class='remove-button'])[1]")
@@ -146,7 +146,7 @@ public class ResponsivePlanSummary extends UhcDriver{
 		    @FindBy(xpath=".//*[@id='fixTable']/tbody/tr[33]/td/p")
 		    private WebElement footNote;
 		    
-		    @FindBy(xpath=".//*[@class='parbase planscompare section']/div[2]")
+		    @FindBy(xpath=".//*[@id='site-wrapper']/div[4]/div/div[1]/div/div/div/div/div/div/div/div[2]/div[3]/p[1]")
 		    private WebElement disclaimerTxt;
 		    
 		    @FindBy(xpath=".//*[text()='2017 AARP MedicareComplete SecureHorizons Plan 1 (HMO)']")
@@ -403,20 +403,19 @@ public void selectAddToCompareCheckboxes() throws InterruptedException  {
 	js.executeScript("window.scrollBy(0,250)", "");
 	Thread.sleep(2000);
 	
-	
 }
 
 
 
 public void viewdetailslnk() throws InterruptedException{
-	Thread.sleep(3000);
+	Thread.sleep(9000);
 	viewDetails.click();
 	validate(viewDetails);
 	
 }
 
 public void removePlanlnk() throws InterruptedException{
-	Thread.sleep(3000);
+	Thread.sleep(9000);
 	removePlanlnk.click();
 	validate(removePlanlnk);
 }
@@ -432,12 +431,16 @@ public void footNoteSection() throws InterruptedException{
 	System.out.println(txt);
 }
 
-public void backtoAllPlans(){
+public void backtoAllPlans() throws InterruptedException{
+	Thread.sleep(9000);
 	backtoallPlans.click();
 }
 
 
-public void disclaimerText(){
+public void disclaimerText() throws InterruptedException{
+	JavascriptExecutor js = (JavascriptExecutor)driver;
+	js.executeScript("window.scrollBy(0,650)", "");
+	Thread.sleep(8000);
 	String disclaimertxt = disclaimerTxt.getText();
 	System.out.println(disclaimertxt);
 }
@@ -475,9 +478,10 @@ public void comparePlanslnk() throws InterruptedException{
 	Thread.sleep(2000);
 	 boolean link = comparePlans.isEnabled(); 
 	 System.out.println(link); 
-	 Thread.sleep(3000);
-	 comparePlans.click(); 
+	 Thread.sleep(8000);
 	 validate(comparePlans); 
+	 comparePlans.click(); 
+	
 	
 }
 	
