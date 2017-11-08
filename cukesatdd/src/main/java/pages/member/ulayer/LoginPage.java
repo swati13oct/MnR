@@ -74,6 +74,10 @@ public class LoginPage extends UhcDriver {
 	
 	@FindBy(id = "sign-in-btn")
 	private WebElement thSignIn;
+	
+	@FindBy(xpath=".//*[@id='IPEinvL']/map/area[2]")
+    private WebElement iPerceptionPopUp;
+
 
 
 
@@ -298,9 +302,22 @@ public class LoginPage extends UhcDriver {
 	public Object teamhloginWith(String username, String password) {
 		sendkeys(thUserName, username);
 		sendkeys(thPassword, password);
-		thSignIn.click();		
+		thSignIn.click();
+		try {
+			Thread.sleep(10000);
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
 				
-				
+		try{
+			//CommonUtility.waitForPageLoad(driver, iPerceptionPopUp, 90);
+            if (iPerceptionPopUp.isDisplayed()) {
+                  iPerceptionPopUp.click();
+            }
+     }catch(Exception e)        {
+            System.out.println("iPerception Pop Up not displayed");
+     }
+
 				if(currentUrl().contains("testharness.html"))
 
 				{
