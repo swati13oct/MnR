@@ -210,8 +210,7 @@ public class EobStepDefinition {
  		EOBPage eobPage = (EOBPage) getLoginScenario().getBean(PageConstants.EOB_Page);
   		eobPage.validateDropDowns(planType);
 	}
-	
-	
+		
 	@And("^the user selects the desired date range$")
 	public void user_selects_the_desired_date_range(DataTable givenAttributes){
 		List<DataTableRow> memberAttributesRow = givenAttributes

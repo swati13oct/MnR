@@ -472,7 +472,6 @@ public class EOBPage extends UhcDriver{
 				return true;
 			}
 		}
-
 		System.out.println("@@@@@@@@@@@@ Invalid Plan Type / Plan Tab not found @@@@@@@@@@@@@@");
 		return false;
 	}

@@ -13,7 +13,8 @@ Examples:
        | MAPD      | q4_dec_uhc002  	 | 
        | PDP			 | q4_dec_aarp292		 |
        | MA				 | q4_dec_aarp507	   |   
- 			  
+
+			  
 @workingOn
 Scenario Outline: To validate EOB Type Drop-Down
 Given registered AMP with for EOB flow
