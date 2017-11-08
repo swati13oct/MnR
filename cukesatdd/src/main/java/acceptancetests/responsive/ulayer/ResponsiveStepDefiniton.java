@@ -320,7 +320,7 @@ public class ResponsiveStepDefiniton {
 		ResponsivePlanSummary planSummary = (ResponsivePlanSummary) getLoginScenario()
 				.getBean(PageConstants.RESPONSIVE_PLAN_SUMMARY_PAGE);
 		planSummary.removePlanlnk();
-		planSummary.removePlanlnk1();
+		//planSummary.removePlanlnk1();
 				
 	}
 	

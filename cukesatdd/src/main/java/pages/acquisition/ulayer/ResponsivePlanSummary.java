@@ -208,19 +208,19 @@ public class ResponsivePlanSummary extends UhcDriver{
 			@FindBy (xpath="//*[@id='fixTable']/tbody/tr[18]/td[1]/p")
 		    private WebElement optionalDental;
 			
-			@FindBy (xpath="//*[@id='fixTable']/tbody/tr[11]/td[2]/div[1]/div/strong")
+			@FindBy (xpath=".//*[@id='fixTable']/tbody/tr[18]/td[2]/div[1]/div[1]/div/strong")
 		    private WebElement optionalDental1;
 			
-			@FindBy (xpath="//*[@id='fixTable']/tbody/tr[11]/td[4]/div[1]/div/strong")
+			@FindBy (xpath=".//*[@id='fixTable']/tbody/tr[18]/td[3]/div[1]/div[1]/div/strong")
 		    private WebElement optionalDental2;
 			
-			@FindBy (xpath="//*[@id='fixTable']/tbody/tr[12]/td[1]/p")
+			@FindBy (xpath=".//*[@id='fixTable']/tbody/tr[19]/td[1]/p")
 		    private WebElement highOptionDental;
 			
-			@FindBy (xpath="//*[@id='fixTable']/tbody/tr[12]/td[2]/div[2]/div/strong")
+			@FindBy (xpath=".//*[@id='fixTable']/tbody/tr[19]/td[2]/div[1]/div[2]/div/strong")
 		    private WebElement highOptionDental1;
 			
-			@FindBy (xpath="//*[@id='fixTable']/tbody/tr[12]/td[4]/div[2]/div/strong")
+			@FindBy (xpath=".//*[@id='fixTable']/tbody/tr[19]/td[3]/div[1]/div[2]/div/strong")
 		    private WebElement highOptionDental2;
 			
 //Plan Costs
