@@ -390,10 +390,13 @@ public void selectAddToCompareCheckboxes() throws InterruptedException  {
 	}
 	validate (chkBoxAddtoCompare1);
 	chkBoxAddtoCompare1.click();
+	Thread.sleep(10000);
 	validate (chkBoxAddtoCompare2);
 	chkBoxAddtoCompare2.click();
+	Thread.sleep(10000);
 	validate (chkBoxAddtoCompare3);
 	chkBoxAddtoCompare3.click();
+	Thread.sleep(10000);
 	validate (chkBoxAddtoCompare4);
 	chkBoxAddtoCompare4.click();
 	
