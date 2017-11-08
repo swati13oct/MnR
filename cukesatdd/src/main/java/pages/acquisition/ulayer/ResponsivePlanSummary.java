@@ -108,19 +108,19 @@ public class ResponsivePlanSummary extends UhcDriver{
 		/*@FindBy(xpath="//html/body/div[4]/div[2]/div[1]/div/div/div/div/div[1]/div/div/div/div[2]/div/div[2]/div[1]/div/span[1]")
 		private WebElement showMaPlans;*/
 	
-		 @FindBy(id="compare-plan-1")
+		 @FindBy(xpath="(//*[contains(text(),'Add to compare')])[1]")
 		    private WebElement chkBoxAddtoCompare1;
 		    
-		 @FindBy(id="compare-plan-2")
+		 @FindBy(xpath="(//*[contains(text(),'Add to compare')])[2]")
 		    private WebElement chkBoxAddtoCompare2;
 		    
-		 @FindBy(id="compare-plan-3")
+		 @FindBy(xpath="(//*[contains(text(),'Add to compare')])[3]")
 		  private WebElement chkBoxAddtoCompare3;
 		    
-		    @FindBy(id="compare-plan-4")
+		    @FindBy(xpath="(//*[contains(text(),'Add to compare')])[4]")
 		    private WebElement chkBoxAddtoCompare4;
 		    
-		    @FindBy(id="compare-plan-5")
+		    @FindBy(xpath="(//*[contains(text(),'Add to compare')])[5]")
 		    private WebElement chkBoxAddtoCompare5;
 		    
 		    //@FindBy(xpath="//*[@id='plan-list-1']//div[@class='swiper-container']/div/div[4]//div[@class='content-secondary']//div[@class='compare-box']/span[4]/a")		  
@@ -128,7 +128,7 @@ public class ResponsivePlanSummary extends UhcDriver{
 		    private WebElement comparePlans;
 		    
 		   // @FindBy(xpath="(.//*[text()='View details'])[1]")
-		    @FindBy(xpath="//*[@id='innerdiv']/a[1]")
+		    @FindBy(xpath="(//a[@class='view-more-link'])[1]")
 		    private WebElement viewDetails;
 		    
 			@FindBy(xpath="//a[@id='backtoplansummarypage']")
@@ -388,20 +388,14 @@ public void selectAddToCompareCheckboxes() throws InterruptedException  {
 	} catch (InterruptedException e) {
 		e.printStackTrace();
 	}
-	js.executeScript("window.scrollBy(0,550)", "");
-	Thread.sleep(2000);
-	js.executeScript("arguments[0].click();", chkBoxAddtoCompare1);
-	js.executeScript("window.scrollBy(0,450)", "");
-	Thread.sleep(2000);
-	js.executeScript("arguments[0].click();", chkBoxAddtoCompare2);
-	js.executeScript("window.scrollBy(0,450)", "");
-	Thread.sleep(2000);
-	js.executeScript("arguments[0].click();", chkBoxAddtoCompare3);
-	js.executeScript("window.scrollBy(0,550)", "");
-	Thread.sleep(2000);
-	js.executeScript("arguments[0].click();", chkBoxAddtoCompare4);
-	js.executeScript("window.scrollBy(0,250)", "");
-	Thread.sleep(2000);
+	validate (chkBoxAddtoCompare1);
+	chkBoxAddtoCompare1.click();
+	validate (chkBoxAddtoCompare2);
+	chkBoxAddtoCompare2.click();
+	validate (chkBoxAddtoCompare3);
+	chkBoxAddtoCompare3.click();
+	validate (chkBoxAddtoCompare4);
+	chkBoxAddtoCompare4.click();
 	
 }
 
