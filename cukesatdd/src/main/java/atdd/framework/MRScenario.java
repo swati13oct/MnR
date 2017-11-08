@@ -881,7 +881,7 @@ public class MRScenario {
                       System.out.println("Inside firefox");
                  capabilities = DesiredCapabilities.firefox();
                  capabilities.setCapability("platform", "Windows 7");
-                 capabilities.setCapability("version", "48");
+                 capabilities.setCapability("version", "45");
                  }if(browserName.equals("IE")){
                 	 capabilities = DesiredCapabilities.internetExplorer();
                 	 capabilities.setCapability("platform", "Windows 7");
@@ -898,7 +898,7 @@ public class MRScenario {
                  String ACCESS_KEY = "6e1345f1-80ea-4863-8573-187bf3151ac0";*/
                  String USERNAME = "ucpadmin";
                  String ACCESS_KEY = "2817affd-616e-4c96-819e-4583348d7b37";
-                 /*String USERNAME = "pdas101";
+                /* String USERNAME = "pdas101";
                  String ACCESS_KEY = "7b410de4-e6b2-4af6-98fc-2758bceba3f0";*/
                  String URL = "http://" + USERNAME + ":" + ACCESS_KEY + "@ondemand.saucelabs.com:80/wd/hub";
                  String jobName = "MnR test Execution of [" +System.getProperty("test")  +":] - Using " + capabilities.getBrowserName() + " in  " + environment +" environment";
@@ -941,7 +941,7 @@ public class MRScenario {
              	 capabilities.setCapability("name", jobName);
                  String USERNAME = "ucpadmin";
                  String ACCESS_KEY = "2817affd-616e-4c96-819e-4583348d7b37";
-             	/* String USERNAME = "pdas101";
+             	 /*String USERNAME = "pdas101";
                  String ACCESS_KEY = "7b410de4-e6b2-4af6-98fc-2758bceba3f0";*/
                      String URL = "http://" + USERNAME + ":" + ACCESS_KEY + "@ondemand.saucelabs.com:80/wd/hub";
                      if (USERNAME == null || ACCESS_KEY == null) {
