@@ -3,6 +3,7 @@
  */
 package acceptancetests.fixedtestcases;
 
+import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -56,7 +57,12 @@ public class ssllabsStepDefintion {
 	@Then("^the user sees response for AARP site$")
 	public void the_user_sees_response_for_AARP_site(DataTable arg1)
 	{
-	}
+		WebDriver wd = (WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
+		if (wd.findElement(By.xpath("//*[@id='rating']/div[1]")).isDisplayed()) {
+		Assert.assertTrue(true);
+	} else {
+		Assert.fail("Failed to load Overall Rating ");
+	}}
 	
 	@Given("^the user is on the ssllabs site home page for UHC$")
 	public void the_user_is_on_the_ssllabs_site_home_page_for_UHC()
@@ -86,8 +92,14 @@ public class ssllabsStepDefintion {
 	
 	@Then("^the user sees response for UHC site$")
 	public void the_user_sees_response_for_UHC_site(DataTable arg1)
-	{	
+	{
+		WebDriver wd = (WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
+		if (wd.findElement(By.xpath("//*[@id='rating']/div[1]")).isDisplayed()) {
+		Assert.assertTrue(true);
+	} else {
+		Assert.fail("Failed to load Overall Rating");
+		
 	}
-	}
+	}}
 	
 	
