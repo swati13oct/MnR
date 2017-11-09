@@ -143,7 +143,7 @@ public class ResponsivePlanSummary extends UhcDriver{
 		    private WebElement removePlanlnk1;
 		    
 		    //@FindBy(xpath=".//*[@id='fixTable']/tbody/tr[24]/td/p")
-		    @FindBy(xpath=".//*[@id='fixTable']/tbody/tr[33]/td/p")
+		    @FindBy(xpath=".//*[@id='fixTable']/tbody/tr[30]/td/p")
 		    private WebElement footNote;
 		    
 		    @FindBy(xpath=".//*[@id='site-wrapper']/div[4]/div/div[1]/div/div/div/div/div/div/div/div[2]/div[3]/p[1]")
@@ -156,23 +156,23 @@ public class ResponsivePlanSummary extends UhcDriver{
 //Medical Benefits
 		    
 		    //@FindBy (xpath=".//*[@id='fixTable']/tbody/tr[2]/td[2]")
-		    @FindBy (xpath=".//*[@id='fixTable']/tbody/tr[2]/td[2]/div")
+		    @FindBy (xpath="//table[@id='fixTable']//p[text()='Monthly Premium']/following::td[1]/div/div")
 		    private WebElement monthlypremium1;
 		    
 		   //@FindBy (xpath= ".//*[@id='fixTable']/tbody/tr[2]/td[4]")
-		    @FindBy(xpath= ".//*[@id='fixTable']/tbody/tr[2]/td[4]/div")
+		    @FindBy(xpath= "//table[@id='fixTable']//p[text()='Monthly Premium']/following::td[2]/div/div")
 		    private WebElement monthlypremium2;
 		    
-		    @FindBy (xpath= ".//*[@id='fixTable']/tbody/tr[3]/td[1]/p")
+		    @FindBy (xpath= "//table[@id='fixTable']//p[text()='Annual Out of Pocket Maximum']")
 		    private WebElement outofpocketmaximum;
 		    
-		    @FindBy (xpath=".//*[@id='fixTable']/tbody/tr[2]/td[1]/p")
+		    @FindBy (xpath="//table[@id='fixTable']//p[text()='Monthly Premium']")
 		    private WebElement monthlypremium;
 		    
-		    @FindBy (xpath=".//*[@id='fixTable']/tbody/tr[3]/td[2]")
+		    @FindBy (xpath="//table[@id='fixTable']//p[text()='Annual Out of Pocket Maximum']/following::td[1]/div/div")
 		    private WebElement outofpocket1;
 		    
-		    @FindBy (xpath=".//*[@id='fixTable']/tbody/tr[3]/td[4]")
+		    @FindBy (xpath="//table[@id='fixTable']//p[text()='Annual Out of Pocket Maximum']/following::td[2]/div/div")
 		    private WebElement outofpocket2;
 		    
 		    @FindBy(xpath="(.//span[contains(text(),'View Plans')][@class='trigger-closed'])[1]")
@@ -182,14 +182,14 @@ public class ResponsivePlanSummary extends UhcDriver{
 			@FindBy(xpath="//*[contains(text(),'Medicare Prescription')]/following-sibling::span[2]")
 			private WebElement showPdpPlans;
 			
-			//prescription drug benefits
+//prescription drug benefits
 			@FindBy (xpath="//*[@id='fixTable']/tbody/tr[16]/td[1]/p")
 		    private WebElement deductible;
 			
-			@FindBy (xpath="//*[@id='fixTable']/tbody/tr[16]/td[2]/span")
+			@FindBy (xpath=".//*[@id='fixTable']/tbody/tr[22]/td[2]/div[1]/span[1]/strong")
 		    private WebElement deductible1;
 			
-			@FindBy (xpath="//*[@id='fixTable']/tbody/tr[16]/td[10]/span")
+			@FindBy (xpath=".//*[@id='fixTable']/tbody/tr[22]/td[3]/div[1]/span[1]/strong")
 		    private WebElement deductible2;
 			
 			//@FindBy (xpath="//*[@id='fixTable']/tbody/tr[17]/td[1]/p")
@@ -225,22 +225,22 @@ public class ResponsivePlanSummary extends UhcDriver{
 			
 //Plan Costs
 			//@FindBy(xpath="//*[@id='fixTable']/tbody/tr[22]/td[1]/p")
-			@FindBy (xpath=".//*[@id='fixTable']/tbody/tr[29]/td[1]/p/span")
+			@FindBy (xpath=".//*[@id='firstwidth']/p/span")
 		    private WebElement planPremium;
 			
-			@FindBy (xpath="//*[@id='fixTable']/tbody/tr[22]/td[2]/strong[1]")
+			@FindBy (xpath=".//*[@id='divisionwidth']/div[1]/strong[1]")
 		    private WebElement planPremium1;
 			
-			@FindBy (xpath="//*[@id='fixTable']/tbody/tr[22]/td[4]/strong[1]")
+			@FindBy (xpath=".//*[@id='divisionwidth']/div[1]/strong[1]")
 		    private WebElement planPremium2;
 			
-			@FindBy (xpath="//*[@id='fixTable']/tbody/tr[24]/td[1]/p")
+			@FindBy (xpath="//table[@id='fixTable']//p[text()='Medical Benefits']")
 		    private WebElement medicalBenefits;
 			
-			@FindBy (xpath="//*[@id='fixTable']/tbody/tr[24]/td[2]/strong[1]")
+			@FindBy (xpath="//table[@id='fixTable']//p[text()='Medical Benefits']/following::td[1]/div/strong")
 		    private WebElement medicalBenefits1;
 			
-			@FindBy (xpath="//*[@id='fixTable']/tbody/tr[24]/td[4]/strong[1]")
+			@FindBy (xpath="//table[@id='fixTable']//p[text()='Medical Benefits']/following::td[2]/div/strong")
 		    private WebElement medicalBenefits2;
 			
 		@FindBy	(xpath="//span[@class='remove-plan-text show']/p")

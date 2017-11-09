@@ -268,7 +268,7 @@ Feature: To vefify mobile responsive
 
     Examples: 
       | zipCode | county             | planType | planName1                                         | planName2                                         | mpPlan1 | mpPlan2 | oopPlan1           | oopPlan2           |
-      |   90210 | Los Angeles County | MA       | AARP MedicareComplete SecureHorizons Plan 1 (HMO) | AARP MedicareComplete SecureHorizons Plan 2 (HMO) | $0      | $0      | In-Network: $4,600 | In-Network: $2,000 |
+      |   90210 | Los Angeles County | MA       | AARP MedicareComplete SecureHorizons Plan 1 (HMO) | AARP MedicareComplete SecureHorizons Plan 2 (HMO) | $0      | $0      | In-Network: $3,400  | In-Network: $2,800  |
 
   @backtoAllPlans
   Scenario Outline: To validate Add to Compare Checboxes
@@ -630,7 +630,7 @@ Feature: To vefify mobile responsive
 
     Examples: 
       | zipCode | county             | planType | deducPlan1 | deducPlan2 | tier1Plan1 | tier1Plan2 |
-      |   90210 | Los Angeles County | MA       | $0         | $0         | $4 co-pay  | $0 co-pay  |
+      |   90210 | Los Angeles County | MA       | $0         | $0         | $4 co-pay  | $4 co-pay  |
 
   @OptionalServices
   Scenario Outline: To validate Optional Services in compare page
