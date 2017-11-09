@@ -49,11 +49,16 @@ public class AttendCommunityMeetingAarpStepDefinition {
 	public void the_user_on_aarp_medicaresolutions_Site() {
 		WebDriver wd = getLoginScenario().getWebDriver();
 
-		AcquisitionHomePage aquisitionhomepage = new AcquisitionHomePage(wd);
+		AcquisitionHomePage acquisitionhomepage = new AcquisitionHomePage(wd);
 
 		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
-		getLoginScenario().saveBean(PageConstants.ACQUISITION_HOME_PAGE,
-				aquisitionhomepage);
+		if(acquisitionhomepage!=null){
+			if(acquisitionhomepage.validateAllElementsOnPage())
+				getLoginScenario().saveBean(PageConstants.ACQUISITION_HOME_PAGE,
+						acquisitionhomepage);
+			else
+				Assert.fail("Page Loading error: not able to validate the elements on the page");
+		}
 	}
 	
 	@When("^the user navigates to request more help and information page in AARP site and validates$")
@@ -63,14 +68,18 @@ public class AttendCommunityMeetingAarpStepDefinition {
 		RequestHelpAndInformationPage requestHelpAndInformationPage = aquisitionhomepage.navigateToMaMoreHelpAndInfo();
 		
 		if(requestHelpAndInformationPage!=null){
-			getLoginScenario().saveBean(PageConstants.REQUEST_MORE_HELP_INFORMATION_PAGE, requestHelpAndInformationPage);
-			if(requestHelpAndInformationPage.validateUhcLink())
-				Assert.assertTrue(true);
-			else
-				Assert.fail("Error in validating the Uhc community link");
+			if(requestHelpAndInformationPage.validateHelpandInfoPage()){
+				getLoginScenario().saveBean(PageConstants.REQUEST_MORE_HELP_INFORMATION_PAGE, requestHelpAndInformationPage);
+				if(requestHelpAndInformationPage.validateUhcLink())
+					Assert.assertTrue(true);
+				else
+					Assert.fail("Error in validating the Uhc community link");
+			}else
+				Assert.fail("Page Loading Error: not able to validate the elements on the page");
 		}else
-			Assert.fail("Error in loading the Request Help and Info Page");
-	}
+			Assert.fail("Page Loading error: null exception");
+	}	
+	
 	
 	
 
