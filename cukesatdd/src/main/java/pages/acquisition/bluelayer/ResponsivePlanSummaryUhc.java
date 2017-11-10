@@ -485,6 +485,11 @@ public void disclaimerText(){
 
 public ResponsivePlanSummaryUhc viewPlanSummary(String planType) {
 	WebDriverWait wait = new WebDriverWait(driver, 90);
+	try{
+	driver.findElement(By.xpath(".//*[@id='58']"));
+	}catch(Exception e){
+		System.out.println("help widget not displayed");
+	}
 	if (planType.equalsIgnoreCase("PDP")) {
 		wait.until(ExpectedConditions.elementToBeClickable(viewPdpPlans));
 		viewPdpPlans.click();
