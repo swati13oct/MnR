@@ -61,7 +61,7 @@ public class ssllabsStepDefintion {
 		if (wd.findElement(By.xpath("//*[@id='rating']/div[1]")).isDisplayed()) {
 		Assert.assertTrue(true);
 	} else {
-		Assert.fail("Failed to load Overall Rating ");
+		Assert.fail("500- Page Loading Error");
 	}}
 	
 	@Given("^the user is on the ssllabs site home page for UHC$")
@@ -97,7 +97,7 @@ public class ssllabsStepDefintion {
 		if (wd.findElement(By.xpath("//*[@id='rating']/div[1]")).isDisplayed()) {
 		Assert.assertTrue(true);
 	} else {
-		Assert.fail("Failed to load Overall Rating");
+		Assert.fail("500-Page Loading Error");
 		
 	}
 	}}
