@@ -178,12 +178,12 @@ public class EOBPage extends UhcDriver{
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}		
-			driver.switchTo().window(tabs.get(1));
+			/*driver.switchTo().window(tabs.get(1));
 			System.out.println(driver.getTitle());
 			if (driver.getTitle().contains("How_to_read_Medical_EOB.pdf")) {
 				System.out.println("PDF successfully displayed");
 				return new EOBPage(driver);
-			}
+			}*/
 		}else{
 			System.out.println("Read Medical EOB Video Page not displayed");
 			Assert.fail();
