@@ -881,7 +881,7 @@ public class MRScenario {
                       System.out.println("Inside firefox");
                  capabilities = DesiredCapabilities.firefox();
                  capabilities.setCapability("platform", "Windows 7");
-                 capabilities.setCapability("version", "48");
+                 capabilities.setCapability("version", "45");
                  }if(browserName.equals("IE")){
                 	 capabilities = DesiredCapabilities.internetExplorer();
                 	 capabilities.setCapability("platform", "Windows 7");
