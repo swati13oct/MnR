@@ -252,6 +252,9 @@ public class DrugCostEstimatorPage extends UhcDriver {
 
 	@FindBy(className = "pharmacy-container")
 	public WebElement selectedPharmacy;
+	
+	@FindBy(xpath = ".//*[@id='drugsTabId']/a")
+	public WebElement step1DrugTab;
 
 	@Override
 	public void openAndValidate() {
@@ -301,6 +304,13 @@ public class DrugCostEstimatorPage extends UhcDriver {
 		/*WebElement dcelink = driver.findElement(By.linkText("Estimate Drug Costs"));
 		System.out.println("dce link");
 		dcelink.click();*/
+		//Go to DCE page
+		
+/*		WebElement dcelink = driver.findElement(By.xpath("html/body/div[2]/div[4]/div[3]/div[1]/div/table/tbody/tr[11]/td[2]/a"));
+		JavascriptExecutor js = (JavascriptExecutor)driver;
+		js.executeScript("arguments[0].click();", dcelink); */
+		System.out.println("dce link");
+		//dcelink.click();
 		if (driver.getCurrentUrl().contains("aarpmedicareplans")) {
 			//NewDCEUrl = "https://member.team-b-aarpmedicareplans.uhc.com/content/dashboard/home/drug-cost-estimator.html";
 			NewDCEUrl = "https://member.team-b-aarpmedicareplans.uhc.com/content/medicare/member/drug-lookup/overview.html";
@@ -308,7 +318,8 @@ public class DrugCostEstimatorPage extends UhcDriver {
 			//NewDCEUrl = "https://member.team-b-uhcmedicaresolutions.uhc.com/content/dashboard/home/drug-cost-estimator.html";
 			NewDCEUrl = "https://member.team-b-uhcmedicaresolutions.uhc.com/content/medicare/member/drug-lookup/overview.html";
 		}else{
-			NewDCEUrl = "https://team-h-werally.uhc.com/retiree/member/drug-lookup/overview.html#/drug-cost-estimator";
+			NewDCEUrl = "https://team-h-werally.uhc.com/content/medicare/member/drug-lookup/overview.html#/drug-cost-estimator";
+			//           https://team-h-werally.uhc.com/content/medicare/member/drug-lookup/overview.html
 		}
 
 		driver.get(NewDCEUrl);
@@ -398,7 +409,7 @@ public class DrugCostEstimatorPage extends UhcDriver {
 	}
 
 	public void backwardToStep1() {
-		step1.click();
+		step1DrugTab.click();
 	}
 
 	public void validatePharmacyForm() {

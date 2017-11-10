@@ -13,7 +13,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import acceptancetests.atdd.data.MRConstants;
 import atdd.framework.MRScenario;
 import atdd.framework.UhcDriver;
-import pages.member.bluelayer.AccountHomePage;
+import pages.memberredesign.bluelayer.AccountHomePage;
 import pages.member.bluelayer.TerminatedHomePage;
 
 public class LoginPage extends UhcDriver {
@@ -30,6 +30,9 @@ public class LoginPage extends UhcDriver {
 
 	@FindBy(id = "sign-in-btn")
 	private WebElement thSignIn;
+	
+	@FindBy(xpath = "//area[@href='javascript:clWin()'][@alt = 'close']")
+	private WebElement FeedbackModal;
 
 	public LoginPage(WebDriver driver) {
 		super(driver);
@@ -66,14 +69,12 @@ public class LoginPage extends UhcDriver {
 		thSignIn.click();
 
 		if (MRScenario.environment.equals("dev-a") || MRScenario.environment.equals("team-a")) {
-			while (!isAlertPresent())
-				;
+			while (!isAlertPresent());
 		}
 
 		if (MRScenario.environment.equals("dev-a")) {
 
-			while (!isAlertPresent())
-				;
+			while (!isAlertPresent());
 		}
 		if (MRScenario.environment.equals("team-c") || MRScenario.environment.equals("team-b")) {
 
@@ -89,7 +90,8 @@ public class LoginPage extends UhcDriver {
 			// Alert alert1 = driver.switchTo().alert();
 			// alert1.accept();
 
-			while (!(currentUrl().contains("https://member.int.uhc.com"))) {
+			//while (!(currentUrl().contains("https://member.int.uhc.com"))) {
+			while (!(currentUrl().contains("team-h-werally.uhc.com"))) {
 				try {
 					Thread.sleep(5000);
 					System.out.println("wait more.......");
@@ -98,10 +100,11 @@ public class LoginPage extends UhcDriver {
 					e.printStackTrace();
 				}
 			}
+			
 		}
 
 		try {
-			Thread.sleep(30000);
+			Thread.sleep(50000);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -111,14 +114,29 @@ public class LoginPage extends UhcDriver {
 				|| currentUrl().contains("/guest/home.html") || currentUrl().contains("/login.html"))
 
 		{
-			return new AccountHomePage(driver, category);
+			return new AccountHomePage(driver);
 		} else if (currentUrl().contains("home/my-account-home.html") && category.equalsIgnoreCase("Individual")
 				|| currentUrl().contains("/login.html")) {
-			return new AccountHomePage(driver, category);
+			return new AccountHomePage(driver);
 		} else if (currentUrl().contains("terminated-plan.html")) {
 			return new TerminatedHomePage(driver);
 		}
-		return null;
+		checkModelPopup();
+		return new AccountHomePage(driver);
+	}
+	
+	public void checkModelPopup() {
+		try {
+			FeedbackModal.click();
+			System.out.println("FeedBack Modal Present");
+			if (validate(FeedbackModal)) {
+				System.out.println("FeedBack Modal NOT CLOSING - Close button is clicked");
+			}
+			System.out.println("FeedBack Modal Closed");
+		} catch (Exception e) {
+			System.out.println("FeedBack Modal NOT Present");
+
+		}
 	}
 
 	public boolean isAlertPresent() {

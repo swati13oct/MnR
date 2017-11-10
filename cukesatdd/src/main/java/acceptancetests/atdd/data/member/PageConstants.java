@@ -190,4 +190,6 @@ public class PageConstants {
 	public static final String NEW_REGISTRATION_PAGE = "newregistrationpage";
 	
 	public static final String MEM_REDESIGN_ACCOUNT_HOME_PAGE = "memberRedesignAccountHomePage";
+	
+	public static final String MEM_REDESIGN_HEALTH_AND_WELLNESS_PAGE = "memberRedesignHealthAndWellnessPage";
 }

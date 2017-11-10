@@ -250,8 +250,8 @@ public class LoginPage extends UhcDriver {
 			//alert.accept();
 			// Alert alert1 = driver.switchTo().alert();
 			// alert1.accept();
-			
-			while(!(currentUrl().contains("https://member.int.uhc.com"))){
+			//while(!(currentUrl().contains("https://member.int.uhc.com"))){
+			while(!(currentUrl().contains("team-h-werally.uhc.com"))){
 				 try {
 						Thread.sleep(5000);
 						System.out.println("wait more.......");

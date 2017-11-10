@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.junit.Assert;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -54,12 +55,49 @@ public class AccountHomePage extends UhcDriver {
 	
 	@FindBy(id = "Account/Profile")
 	private WebElement accountProfile;
-	
-	//menuL1
+
 	@FindBy(className = "menuL1")
 	private WebElement header;
 	
+	@FindBy(className = "footerContainer")
+	private WebElement footerSection;
+	
+	@FindBy(xpath = "//area[@href='javascript:clWin()'][@alt = 'close']")
+	private WebElement FeedbackModal;
+	
+	@FindBy(linkText = "Help & Contact Us")
+	private WebElement helpnContactUs;
+	
+	@FindBy(linkText = "Legal Notices & Disclosures")
+	private WebElement legalNotices;
+	
+	@FindBy(linkText = "ACCOUNT SETTINGS")
+	private WebElement accountnSettings;
+	
+	@FindBy(linkText = "SAVED")
+	private WebElement saved;
+	
+	@FindBy(linkText = "LOG OUT")
+	private WebElement logout;
+	
+	@FindBy(linkText = "About UnitedHealthcare")
+	private WebElement aboutUHC;
+	
+	@FindBy(linkText = "Legal Disclosures")
+	private WebElement legalDisclosures;
+	
+	@FindBy(linkText = "Privacy policy")
+	private WebElement privacyPolicy;
+	
+	@FindBy(linkText = "Terms of use")
+	private WebElement termsOfUse;
 
+	@FindBy(linkText = "Language Assistance | Non-Discrimination Notice")
+	private WebElement languageAssistanceEnglish;
+	
+	@FindBy(linkText = "Asistencia de idiomas | Aviso de no discriminacion")
+	private WebElement languageAssistanceSpanish;
+	
 	public AccountHomePage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
@@ -208,6 +246,78 @@ public class AccountHomePage extends UhcDriver {
 	
 	public void validateAccountProfile(){
 		//Assert.assertTrue("Account/Profile tab is not displayed", accountProfile.isDisplayed());
+	}
+	
+	public void validateFooterSection(){
+		JavascriptExecutor jse = (JavascriptExecutor) driver; 
+		jse.executeScript("window.scrollBy(0,document.body.scrollHeight || document.documentElement.scrollHeight)", "");
+		Assert.assertTrue("Footer section is not displayed", footerSection.isDisplayed());
+	}
+	
+	public void validateMemberSupport(){
+		List<WebElement> footerColumn = driver.findElements(By.id("memberSupportID"));
+		System.out.println(footerColumn.size());
+		String memberSupportText = footerColumn.get(0).getText();
+		Assert.assertTrue("Member Support is not displayed", memberSupportText.contains("Member Support"));
+		Assert.assertTrue("Help & Contact Us link is not displayed", memberSupportText.contains("Help & Contact Us"));
+		Assert.assertTrue("Legal Notices & Disclosures link is not displayed", memberSupportText.contains("Legal Notices & Disclosures"));
+		Assert.assertTrue("Help & Contact Us link is not clickable", helpnContactUs.isDisplayed());
+		Assert.assertTrue("legal notices and disclaimer link is not clickable", legalNotices.isDisplayed());
+		validateMemberSupportFooterLinks();
+	}
+	
+	public void validateMemberSupportFooterLinks(){
+		List<WebElement> footerlinksColumn = driver.findElements(By.id("footerLinksID"));
+		System.out.println(footerlinksColumn.size());
+		String memberSupportFooterLinkText = footerlinksColumn.get(0).getText();
+		//System.out.println(memberSupportFooterLinkText);
+		Assert.assertTrue("About link is not displayed", aboutUHC.isDisplayed());
+		Assert.assertTrue("Legal Disclosures link is not displayed", legalDisclosures.isDisplayed());
+		Assert.assertTrue("Privacy Policy link is not displayed", privacyPolicy.isDisplayed());
+		Assert.assertTrue("Terms of Use link is not displayed", termsOfUse.isDisplayed());
+	}
+	
+	public void validateQuickLinksFooterLinks(){
+		List<WebElement> footerlinksColumn = driver.findElements(By.id("footerLinksID"));
+		System.out.println(footerlinksColumn.size());
+		String quickLinksFooterLinkText = footerlinksColumn.get(1).getText();
+		//System.out.println(quickLinksFooterLinkText);
+		Assert.assertTrue("Language Assistance english link is not displayed", languageAssistanceEnglish.isDisplayed());
+		Assert.assertTrue("Language Assistance Spanish is not displayed", languageAssistanceSpanish.isDisplayed());
+		
+	}
+	
+	public void validateQuickLinks(){
+		List<WebElement> footerColumn = driver.findElements(By.id("memberSupportID"));
+		System.out.println(footerColumn.size());
+		String quickLinksText = footerColumn.get(1).getText();
+		System.out.println(quickLinksText);
+		Assert.assertTrue("Quick Links is not displayed", quickLinksText.contains("Quick Links"));
+		Assert.assertTrue("Account and settings link is not displayed", quickLinksText.contains("ACCOUNT SETTINGS"));
+		Assert.assertTrue("Saved is not displayed", quickLinksText.contains("SAVED"));
+		Assert.assertTrue("Logout link is not displayed", quickLinksText.contains("LOG OUT"));
+		Assert.assertTrue("Account and Settings link is not clickable", accountnSettings.isDisplayed());
+		Assert.assertTrue("Saved link is not clickable", saved.isDisplayed());
+		Assert.assertTrue("Logout link is not clickable", logout.isDisplayed());
+		validateQuickLinksFooterLinks();
+	}
+	
+	public void checkModelPopup() {
+		try {
+			FeedbackModal.click();
+			System.out.println("FeedBack Modal Present");
+			if (validate(FeedbackModal)) {
+				System.out.println("FeedBack Modal NOT CLOSING - Close button is clicked");
+			}
+			System.out.println("FeedBack Modal Closed");
+		} catch (Exception e) {
+			System.out.println("FeedBack Modal NOT Present");
+
+		}
+	}
+	
+	public void validateSavedLink(){
+		Assert.assertTrue("Saved link is not clickable", saved.isDisplayed());
 	}
 	
 	

@@ -665,7 +665,7 @@ public class MRScenario {
 		Set<String> keySetUms = umsRegistrationDataMap.keySet();
 		for (String umsKey : keySetUms) {
 			if(umsKey.equalsIgnoreCase("q1_feb_grp043")){
-				System.out.println("stop at here 1...........................");
+				//System.out.println("stop at here 1...........................");
 			}
 			Map<String, JSONObject> umsObjectMap = new HashMap<String, JSONObject>();
 			for (int i = 0; i < CommonConstants.PAGES_BLUELAYER.length; i++) {
@@ -678,7 +678,7 @@ public class MRScenario {
 				}
 			}
 			if (!umsObjectMap.isEmpty())
-				System.out.println("stop at here 2...........................");
+				//System.out.println("stop at here 2...........................");
 			expectedDataMapBluelayer.put(umsKey, umsObjectMap);
 		}
 
@@ -822,8 +822,7 @@ public class MRScenario {
 			stream = new FileInputStream(parentDirectory + DIRECTORY
 					+ directory + fileName);
 		} catch (FileNotFoundException e) {
-			System.out.println("FILE NOT FOUND: " + parentDirectory + DIRECTORY
-					+ directory + fileName);
+			//System.out.println("FILE NOT FOUND: " + parentDirectory + DIRECTORY+ directory + fileName);
 			return jsonObject;
 		}
 
@@ -921,7 +920,7 @@ public class MRScenario {
 	 * look at the Jenkins job, it specifies a browser type and it should be PhantomJS.
 	 * Anything else may be a problem.
 	 */
-
+	
 	public WebDriver getWebDriver() {
 
 		//Is system propery exists defining JENKINS_BROWSER, we're running in JENKINS and
