@@ -22,7 +22,7 @@ public class MRConstants {
 	public static final String UHCM_URL_TEAMB_TESTHARNESS = "https://member."+MRScenario.environment+"-uhcmedicaresolutions.uhc.com/content/medicare/login/overview.html?testharness=true" ;
 	public static final String AARPM_URL_TEAMB_TESTHARNESS= "https://member."+MRScenario.environment+"-aarpmedicareplans.uhc.com/content/medicare/login/overview.html?testharness=true";
 	//public static final String AARP_URL = "https://www.awe-"+MRScenario.environment+"-aarpmedicareplans.uhc.com/";
-	public static final String TEAMH_URL_TESTHARNES ="https://"+MRScenario.environment+"-werally.uhc.com/";
+	public static final String TEAMH_URL_TESTHARNES ="https://"+MRScenario.environment+"-werally.uhc.com/medicare/login/overview.html?testharness=true";
 	public static final String AARP_URL = "https://www."+MRScenario.environment+"-aarpmedicareplans.uhc.com/";
 	public static final String AARP_URL_TEST_A = "https://www.awe-"+MRScenario.environment+"-aarpmedicareplans.uhc.com/";
 
