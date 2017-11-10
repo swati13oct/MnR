@@ -48,6 +48,9 @@ public class EOBPage extends UhcDriver{
 	@FindBy(xpath="//*[contains(text(),'How to read your Medical EOB ')]")
 	private WebElement readMedicalEOB;
 
+	@FindBy(xpath="//*[@id='collapseEOB']/ul/li/a")
+	private WebElement eobVideoBox;
+	
 	@FindBy(xpath=".//*[@id='error-results']/div[1]/div/h2/span[3]")
 	private WebElement eobDetailsHeader;
 
@@ -92,6 +95,12 @@ public class EOBPage extends UhcDriver{
 	
 	@FindBy(xpath="//*[@class='btn btn--primary' and text()='Search']")
 	private WebElement customSearchButton;
+	
+	@FindBy(xpath="//*[@class='bold number-title ng-binding']")
+	private WebElement eobCount;
+		
+	@FindBy(xpath="//i[@class='rightarrow']")
+	private WebElement nextPageArrow;
 	
 	private static String EOB_DIRECT_URL = MRConstants.EOB_DIRECT_URL;
 
@@ -153,9 +162,9 @@ public class EOBPage extends UhcDriver{
 	}
 	public EOBPage validateReadPDF(){
 		learnMoreLink.click();
-		if(readMedicalEOB.isDisplayed()){
-			System.out.println("Read medical EOB pDF link displayed correctly");
-			readMedicalEOB.click();
+		if(eobVideoBox.isDisplayed()){
+			System.out.println("Read medical EOB Video Box link displayed correctly");
+			eobVideoBox.click();
 			try {
 				Thread.sleep(5000);
 			} catch (InterruptedException e) {
@@ -176,7 +185,7 @@ public class EOBPage extends UhcDriver{
 				return new EOBPage(driver);
 			}
 		}else{
-			System.out.println("Read Medical EOB PDF not displayed");
+			System.out.println("Read Medical EOB Video Page not displayed");
 			Assert.fail();
 		}
 		return null;
@@ -314,7 +323,7 @@ public class EOBPage extends UhcDriver{
 	}
 	
 	public void validateDateRangeContentDisplayed(String dateRangeValue){
-	if(dateRangeValue.contains("custom")){
+	/*if(dateRangeValue.contains("custom")){
 		
 	}else{
 		if(eobDetailsHeader.getText().contains(dateRangeValue)){
@@ -323,7 +332,7 @@ public class EOBPage extends UhcDriver{
 			System.out.println("Desired value not displayed correctly for EOB statement header");
 			Assert.fail();
 		}
-	}	
+	}	*/
 	}
 	public EOBPage validateEobVideo(){
 		learnMoreLink.click();
@@ -357,8 +366,8 @@ public class EOBPage extends UhcDriver{
 	}
 
 	public EOBPage navigateDirectToEOBPag(){
-		WebDriverWait wait = new WebDriverWait(driver, 20);
-		wait.until(ExpectedConditions.elementToBeClickable(eobLink));
+		/*WebDriverWait wait = new WebDriverWait(driver, 10);
+		wait.until(ExpectedConditions.elementToBeClickable(eobLink));*/
 		try{
 			if (iPerceptionPopUp.isDisplayed()) {
 				iPerceptionPopUp.click();
@@ -489,5 +498,46 @@ public class EOBPage extends UhcDriver{
 		return null;
 	}
 	
-}
+	public EOBPage validateEOBStatements(){
+		System.out.println(eobCount.getText());
+		int eobCountInt = Integer.parseInt(eobCount.getText());
+		System.out.println(eobCountInt);
+		numberOfPageDisplayed(eobCountInt);
+		for(int i=0; i<eobCountInt; i++){
+			if(driver.findElement(By.id("eoblist"+i)).isDisplayed()){
+				System.out.println("EOB at" +i + " displayed correctly" );
+				System.out.println(i%9);
+				if(i%9==0 && i!=0){
+					System.out.println("user clicks on next page arrow button");
+					i=0;
+					nextPageArrow.click();
+					break;
+				}
+			}else{
+				System.out.println("EOB at "+ i +"not displayed");
+				Assert.fail();
+			}
+		}
+		return null;
+	}
+	
+	public int numberOfPageDisplayed(int eobCount){
+		float pageCount;
+		int numberOfPageDisplayed;
+		pageCount = eobCount/9;
+		System.out.println(pageCount);
+ 		numberOfPageDisplayed = (int)pageCount;
+		if(numberOfPageDisplayed<1){
+			System.out.println(numberOfPageDisplayed + "Page displayed for EOBs");
+		}else{
+			numberOfPageDisplayed+=1;
+			System.out.println(numberOfPageDisplayed + "Page displayed for EOBs");
+		}
+		return numberOfPageDisplayed;
+	}
+	
+	public void validatePaginationText(){
+		
+	}
+ }
 
