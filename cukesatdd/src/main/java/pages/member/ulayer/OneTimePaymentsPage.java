@@ -20,7 +20,7 @@ import atdd.framework.UhcDriver;
 public class OneTimePaymentsPage extends UhcDriver{
 	
 		
-	@FindBy(xpath="//div[@id='atdd_otheramount_label']/label")
+	@FindBy(xpath="//*[@id='atdd_otheramount_label']/label")
 	private WebElement otherAmountRadio;
 	
 	@FindBy(id = "other-amount-number")
@@ -112,6 +112,9 @@ public class OneTimePaymentsPage extends UhcDriver{
 
 	public ReviewOneTimePaymentsPage enterInfoAndContinue() throws InterruptedException {
 		Thread.sleep(6000);
+		JavascriptExecutor jse = (JavascriptExecutor)driver;
+		jse.executeScript("window.scrollBy(0,100)", "");
+		Thread.sleep(2000);
 		otherAmountRadio.click();
 		Thread.sleep(2000);
 		otherAmountNumber.sendKeys("56.00");
@@ -123,8 +126,7 @@ public class OneTimePaymentsPage extends UhcDriver{
 		lastNameField.sendKeys("MA");
 		Thread.sleep(1000);
 		electronicSignatureCheck.click();
-		Thread.sleep(2000);
-		JavascriptExecutor jse = (JavascriptExecutor)driver;
+		Thread.sleep(2000);		
 		jse.executeScript("window.scrollBy(0,150)", "");
 		Thread.sleep(5000);
 		reviewContinue.click();
