@@ -49,6 +49,12 @@ public class HealthAndWellness  extends UhcDriver {
 	public void clickHealthnWellnessTab(){
 		if(healthAndWellness.isDisplayed()){
 			healthAndWellness.click();
+			try {
+				Thread.sleep(50000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 	}
 	
@@ -62,6 +68,12 @@ public class HealthAndWellness  extends UhcDriver {
 	public void clickLifestyleTab(){
 		if(lifestyleTab.isDisplayed()){
 			lifestyleTab.click();
+			try {
+				Thread.sleep(50000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 	}
 	
@@ -72,6 +84,12 @@ public class HealthAndWellness  extends UhcDriver {
 	public void clickLearningTab(){
 		if(learningTab.isDisplayed()){
 			learningTab.click();
+			try {
+				Thread.sleep(50000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 	}
 	
