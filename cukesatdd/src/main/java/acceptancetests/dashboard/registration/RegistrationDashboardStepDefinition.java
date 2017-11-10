@@ -52,7 +52,7 @@ public class RegistrationDashboardStepDefinition {
 	}
 
 	@When("^the member enter the member ID into Member ID field$")
-	public void enterMemberID(DataTable givenAttributes) {
+	public void enterMemberID(DataTable givenAttributes) throws InterruptedException {
 		// get test variables
 		List<DataTableRow> memberAttributesRow = givenAttributes
 				.getGherkinRows();
@@ -61,7 +61,7 @@ public class RegistrationDashboardStepDefinition {
 			memberAttributesMap.put(memberAttributesRow.get(i).getCells()
 					.get(0), memberAttributesRow.get(i).getCells().get(1));
 		}
-
+         Thread.sleep(1000);
 		// get member ID
 		String memberId = memberAttributesMap.get("Plan Member ID");
 		// navigate to registration page
