@@ -4,6 +4,7 @@
 package pages.member.ulayer;
 
 
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -40,6 +41,8 @@ public class LoginPage extends UhcDriver {
 	private static String PAGE_URL_TEST_HARNESS = MRConstants.AARPM_URL_TEAMB_TESTHARNESS;
 	
 	private static String PAGE_URL_TEAM_H_TEST_HARNESS = MRConstants.TEAMH_URL_TESTHARNES;
+	private static String PAGE_URL_TEAM_MEDICARE_TESTHARNESS = MRConstants.TEAM_MEDICARE_TESTHARNESS;
+	
 
 	@FindBy(id = "fd_memberSignInButton")
 	private WebElement loginIn;
@@ -71,6 +74,10 @@ public class LoginPage extends UhcDriver {
 	
 	@FindBy(id = "sign-in-btn")
 	private WebElement thSignIn;
+	
+	@FindBy(xpath=".//*[@id='IPEinvL']/map/area[2]")
+    private WebElement iPerceptionPopUp;
+
 
 
 
@@ -237,6 +244,14 @@ public class LoginPage extends UhcDriver {
 		validate(thSignIn);
 	}
 	
+	public void navigateToTeamMedicareTestHarness(){
+		start(PAGE_URL_TEAM_MEDICARE_TESTHARNESS);
+		System.out.println("User is on Medicare Test harness page");
+		//validate(thUserName);
+		//validate(thPassword);
+		//validate(thSignIn);
+	}
+	
 	public Object thloginWith(String username, String password, String category) {
 		//driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 		/*WebElement loginInEle= this.driver.findElement(By.id("fd_memberSignInButton"));
@@ -255,7 +270,7 @@ public class LoginPage extends UhcDriver {
 
 			while (!isAlertPresent());
 		}
-		if ( MRScenario.environment.equals("team-c") || MRScenario.environment.equals("team-b")) {
+		if ( MRScenario.environment.equals("team-c") || MRScenario.environment.equals("team-b") ) {
 			
 			Alert alert = driver.switchTo().alert();
 	        alert.accept();
@@ -283,4 +298,39 @@ public class LoginPage extends UhcDriver {
 		}
 		return null;
 	}
+	
+	public Object teamhloginWith(String username, String password) {
+		sendkeys(thUserName, username);
+		sendkeys(thPassword, password);
+		thSignIn.click();
+		try {
+			Thread.sleep(10000);
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+				
+		try{
+			//CommonUtility.waitForPageLoad(driver, iPerceptionPopUp, 90);
+            if (iPerceptionPopUp.isDisplayed()) {
+                  iPerceptionPopUp.click();
+            }
+     }catch(Exception e)        {
+            System.out.println("iPerception Pop Up not displayed");
+     }
+
+				if(currentUrl().contains("testharness.html"))
+
+				{
+					return new AccountHomePage(driver);
+				}
+				else if(currentUrl().contains("home/my-account-home.html")  || currentUrl().contains("/login.html") ) {
+					return new AccountHomePage(driver);
+				}
+				else if (currentUrl().contains("terminated-plan.html")) {
+					return new TerminatedHomePage(driver);
+				}
+				
+				return null;
+	}
+
 }

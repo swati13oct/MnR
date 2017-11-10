@@ -920,7 +920,7 @@ public class MRScenario {
 	 * look at the Jenkins job, it specifies a browser type and it should be PhantomJS.
 	 * Anything else may be a problem.
 	 */
-	/*
+	
 	public WebDriver getWebDriver() {
 
 		//Is system propery exists defining JENKINS_BROWSER, we're running in JENKINS and
@@ -1095,19 +1095,7 @@ public class MRScenario {
 			}
 		}
 		return webDriver;
-	}*/
-
-	public WebDriver getWebDriver() {
-		if (null == webDriver) {
-			File pathToBinary = new File("C:/bhavana/FF29 V1/firefox.exe");
-			FirefoxBinary ffBinary = new FirefoxBinary(pathToBinary);
-			FirefoxProfile firefoxProfile = new FirefoxProfile();
-			webDriver = new FirefoxDriver(ffBinary, firefoxProfile);
-			webDriver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
-		}
-		return webDriver;
-
-	} 
+	}
 
 	public WebDriver getIEDriver() {
 		System.setProperty("webdriver.ie.driver",

@@ -22,7 +22,6 @@ import org.openqa.selenium.support.PageFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
 
-
 import org.openqa.selenium.support.ui.Select;
 
 import acceptancetests.atdd.data.CommonConstants;
@@ -30,6 +29,7 @@ import acceptancetests.atdd.data.PageData;
 import acceptancetests.atdd.util.CommonUtility;
 import atdd.framework.MRScenario;
 import atdd.framework.UhcDriver;
+
 import pages.dashboard.member.ulayer.ClaimSummarypage;
 
 /**
@@ -598,18 +598,16 @@ public class AccountHomePage extends UhcDriver {
 	}
 
 	public pages.dashboard.member.ulayer.ClaimSummarypage navigateToClaimsSummaryPage() {
-		
-		//String url = "https://member.team-b-aarpmedicareplans.uhc.com/home/claims.html";
-		String testharnessUrl = "https://member." +MRScenario.environment+"-aarpmedicareplans.uhc.com/home/testharness.html";
-		//String testharnessUrl = "https://member.team-b-aarpmedicareplans.uhc.com/content/medicare/member/testharness.html";
-		driver.get(testharnessUrl);
+
 		if (MRScenario.environment.equalsIgnoreCase("team-h")) {
-			CommonUtility.waitForPageLoad(driver, driver.findElement(By.xpath("//a[text()='Go to Claims page']")), 60); 	
+			System.out.println("Go to claims link is present "+driver.findElement(By.xpath("//a[text()='Go to Claims page']")).isDisplayed());
 			driver.findElement(By.xpath("//a[text()='Go to Claims page']")).click();
+			//CommonUtility.waitForPageLoad(driver, driver.findElement(By.cssSelector("#document-date")), 60);
 		}
 
 		else if (MRScenario.environment.equalsIgnoreCase("team-b")) {
-
+			String testharnessUrl = "https://member." +MRScenario.environment+"-aarpmedicareplans.uhc.com/home/testharness.html";
+			driver.get(testharnessUrl);
 			CommonUtility.waitForPageLoad(driver, driver.findElement(By.xpath("//a[text()='Go to Claims Link page']")), 60); 	
 			driver.findElement(By.xpath("//a[text()='Go to Claims Link page']")).click();
 		}
@@ -627,9 +625,14 @@ public class AccountHomePage extends UhcDriver {
 				e.printStackTrace();
 			}
 
-			CommonUtility.waitForPageLoad(driver, driver.findElement(By.xpath("//select[@id='document-date']")), 90);
+			CommonUtility.waitForPageLoad(driver, driver.findElement(By.xpath("//select[@id='document-date']")), 60);
 			{
 				try {
+					/*if(MRScenario.USERNAME.contains("ship"))
+					{
+						driver.findElement(By.xpath("//a[contains(.,'Medicare Supplimet insurence Plan')]")).isDisplayed();
+						driver.findElement(By.xpath("//a[contains(.,'Medicare Advantage Plan')]")).click();	
+					}else */
 					driver.findElement(By.xpath("//a[contains(.,'Medicare Advantage Plan')]")).isDisplayed();
 					driver.findElement(By.xpath("//a[contains(.,'Medicare Advantage Plan')]")).click();	
 					return new pages.dashboard.member.ulayer.ClaimSummarypage(driver);	
@@ -641,7 +644,7 @@ public class AccountHomePage extends UhcDriver {
 			}		
 
 		}
-		return null;
+		return new ClaimSummarypage(driver);
 	}
 
 	public pages.dashboard.member.ulayer.ClaimDetailsPage navigateToClaimDetailsPage() {
