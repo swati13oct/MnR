@@ -520,6 +520,7 @@ public class EOBPage extends UhcDriver{
 		}
 		return null;
 	}
+
 	
 	public int numberOfPageDisplayed(int eobCount){
 		float pageCount;

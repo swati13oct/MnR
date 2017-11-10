@@ -228,8 +228,7 @@ public class EobStepDefinition {
 		EOBPage eobPage =  (EOBPage) getLoginScenario().getBean(PageConstants.EOB_Page);
 		eobPage.selectDateRange(dateRange, planType, eobTypeData);
 		
-	}
-	
+	}	
 	@Then("^the user validates EOB count$")
 	public void user_validated_EOB_Count(){
 		 
