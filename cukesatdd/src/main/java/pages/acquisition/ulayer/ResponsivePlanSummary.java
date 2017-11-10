@@ -186,21 +186,21 @@ public class ResponsivePlanSummary extends UhcDriver{
 			@FindBy (xpath="//*[@id='fixTable']/tbody/tr[16]/td[1]/p")
 		    private WebElement deductible;
 			
-			@FindBy (xpath=".//*[@class='compare-table plan-detail-table']/tbody/tr[21]/td[2]/div[1]/span")
+			@FindBy (xpath="//*[contains(text(),'Annual Prescription Deductible')]/parent::td[1]/parent::tr/td[2]/div[1]/span")
 		    private WebElement deductible1;
 			
-			@FindBy (xpath=".//*[@class='compare-table plan-detail-table']/tbody/tr[21]/td[3]/div[1]/span")
+			@FindBy (xpath="//*[contains(text(),'Annual Prescription Deductible')]/parent::td[1]/parent::tr/td[3]/div[1]/span")
 		    private WebElement deductible2;
 			
 			//@FindBy (xpath="//*[@id='fixTable']/tbody/tr[17]/td[1]/p")
-			@FindBy (xpath=".//*[@class='compare-table plan-detail-table']/tbody/tr[22]/td[2]/div[1]/span[1]/strong")
+			@FindBy (xpath="//*[contains(text(),'Tier 1: Preferred Generic Drugs')]/parent::td[1]/parent::tr/td[2]/div[1]/span[1]/strong")
 		    private WebElement tier1value;			
 			
-			@FindBy (xpath=".//*[@class='compare-table plan-detail-table']/tbody/tr[25]/td[2]/span[1]/strong")
+			@FindBy (xpath="//*[contains(text(),'Tier 1: Preferred Generic Drugs')]/parent::td[1]/parent::tr/td[3]/div[1]/span[1]/strong")
 		    private WebElement tier1value1;
 			// .//*[@id='fixTable']/tbody/tr[17]/td[2]/span[1]/strong
 			
-			@FindBy (xpath=".//*[@class='compare-table plan-detail-table']/tbody/tr[25]/td[5]/span[1]/strong")
+			@FindBy (xpath="//*[contains(text(),'Tier 1: Preferred Generic Drugs')]/parent::td[1]/parent::tr/td[3]/div[1]/span[1]/strong")
 		    private WebElement tier1value2;
 			// .//*[@id='fixTable']/tbody/tr[22]/td[6]/span[1]/strong
 			
