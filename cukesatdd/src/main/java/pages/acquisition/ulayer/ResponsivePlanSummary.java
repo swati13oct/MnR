@@ -225,22 +225,22 @@ public class ResponsivePlanSummary extends UhcDriver{
 			
 //Plan Costs
 			//@FindBy(xpath="//*[@id='fixTable']/tbody/tr[22]/td[1]/p")
-			@FindBy (xpath=".//*[@id='firstwidth']/p/span")
+			@FindBy (xpath="//table[(@id='fixTable')]//span[contains(text(),'Plan Premium')]")
 		    private WebElement planPremium;
 			
-			@FindBy (xpath=".//*[@id='divisionwidth']/div[1]/strong[1]")
+			@FindBy (xpath="//table[(@id='fixTable')]//span[contains(text(),'Plan Premium')]/following::strong[1]")
 		    private WebElement planPremium1;
 			
-			@FindBy (xpath=".//*[@id='divisionwidth']/div[1]/strong[1]")
+			@FindBy (xpath="//table[(@id='fixTable')]//span[contains(text(),'Plan Premium')]/following::strong[3]")
 		    private WebElement planPremium2;
 			
-			@FindBy (xpath="//table[@id='fixTable']//p[text()='Medical Benefits']")
+			@FindBy (xpath="//table[(@id='fixTable')]//p[contains(text(),'Medical Benefits')]")
 		    private WebElement medicalBenefits;
 			
-			@FindBy (xpath="//table[@id='fixTable']//p[text()='Medical Benefits']/following::td[1]/div/strong")
+			@FindBy (xpath="//table[(@id='fixTable')]//p[contains(text(),'Medical Benefits')]/following::strong[1]")
 		    private WebElement medicalBenefits1;
 			
-			@FindBy (xpath="//table[@id='fixTable']//p[text()='Medical Benefits']/following::td[2]/div/strong")
+			@FindBy (xpath="//table[(@id='fixTable')]//p[contains(text(),'Medical Benefits')]/following::strong[2]")
 		    private WebElement medicalBenefits2;
 			
 		@FindBy	(xpath="//span[@class='remove-plan-text show']/p")
@@ -895,7 +895,7 @@ public void comparePlanslnk() throws InterruptedException{
 				 }
 				 if(medicalBenefits.getText().equals("Medical Benefits"))
 				 {
-					 if(medBen1.equals(medicalBenefits1.getText()))
+					 if(medicalBenefits1.getText().contains(medBen1))
 					 {
 						 System.out.println("Medical Benefits is verified for plan 1");
 						 Assert.assertTrue(true);
@@ -904,7 +904,7 @@ public void comparePlanslnk() throws InterruptedException{
 					 {
 						 Assert.fail("Error in displaying Medical Benefits value for plan 1");
 					 }
-					 if(medBen2.equals(medicalBenefits2.getText()))
+					 if(medicalBenefits2.getText().contains(medBen2))
 					 {
 						 System.out.println("Medical Benefits is verified for plan 2");
 						 Assert.assertTrue(true);
