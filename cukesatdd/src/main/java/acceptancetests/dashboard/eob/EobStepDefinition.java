@@ -230,6 +230,13 @@ public class EobStepDefinition {
 		
 	}
 	
+	@Then("^the user validates EOB count$")
+	public void user_validated_EOB_Count(){
+		 
+		EOBPage eobPage =  (EOBPage) getLoginScenario().getBean(PageConstants.EOB_Page);
+		eobPage.validateEOBStatements();
+	}
+	
 	@After
 	public void tearDown() {
 
