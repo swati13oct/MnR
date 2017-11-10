@@ -499,7 +499,10 @@ public ResponsivePlanSummaryUhc viewPlanSummary(String planType) {
 			wait.until(ExpectedConditions.elementToBeClickable(viewMAPlans));
 			System.out.println("inside MA");
 			//viewMaPlans.click();
-			viewMAPlans.click();
+			//viewMAPlans.click();
+			JavascriptExecutor js = (JavascriptExecutor)driver;
+			js.executeScript("arguments[0].click();", viewMAPlans);
+
 		return new ResponsivePlanSummaryUhc(driver);		 
 			}else if(planType.equalsIgnoreCase("MS")){
 				wait.until(ExpectedConditions.elementToBeClickable(showMsPlans));
