@@ -22,7 +22,7 @@ public class TestHarness extends UhcDriver{
 	/*@FindBy(xpath="/html/body/div[2]/div[3]/div[2]/div/table/tbody/tr[8]/td[2]/a") 
 	private WebElement TeamHPaymentPage;*/	
 	
-	@FindBy(xpath="//table[@class='componentTable']/tbody/tr[8]/td[2]/a")                  
+	@FindBy(xpath="//table[@class='componentTable']/tbody/tr[9]/td[2]/a")                  
 	private WebElement TeamHPaymentPage;
 	
 	@FindBy(linkText="Go to payment link page")
