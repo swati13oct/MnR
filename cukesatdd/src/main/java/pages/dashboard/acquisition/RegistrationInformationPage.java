@@ -955,6 +955,20 @@ public class RegistrationInformationPage extends UhcDriver {
 		return goToMyAccountHomeButton;
 	}
 	
+	   /**
+     * Wait for page to load
+     */
+    public void waitForPlanInformationPage() {
+    	WebDriverWait wait = new WebDriverWait(this.driver, 70);
+    	wait.until(new ExpectedCondition<Boolean>() {
+    	    public Boolean apply(WebDriver driver) {
+    		if (nextButton.isDisplayed())
+    		    return true;
+    		else
+    		    return false;
+    	    }
+    	});
+    }
 	
 	
     /**
@@ -991,10 +1005,12 @@ public class RegistrationInformationPage extends UhcDriver {
     
 	/**
      * Function to scroll page
+	 * @throws InterruptedException 
      */
-    public void scroll(){
+    public void scroll() {
     	JavascriptExecutor jse = (JavascriptExecutor)driver;
     	jse.executeScript("window.scrollBy(0,350)", "");
+    	
     }
 	
 }

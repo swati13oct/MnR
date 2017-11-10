@@ -39,7 +39,7 @@ public class RegistrationDashboardCreateAccountErrorsStepDefinition {
                 }
                 
                 @And("^click on confirm registration$")
-                public void clickonconfirmregistration() {
+                public void clickonconfirmregistration() throws InterruptedException {
                                 // navigate to registration page
                                 RegistrationInformationPage registrationInformationPage = (RegistrationInformationPage) 
                                                                 getLoginScenario().getBean(PageConstants.REGISTRATION_INFORMATION_PAGE);

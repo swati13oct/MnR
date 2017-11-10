@@ -1,4 +1,4 @@
-@futureEffectivePlanError 
+@futureEffectivePlanError @Gladiators
 Feature: To test links present on future Effective Plan page
 
   Scenario Outline: To verify member is navigated to the personal Information page
@@ -18,4 +18,4 @@ Feature: To test links present on future Effective Plan page
      # | 0184295991   | 10-25-1963  |
      # | 399492182-11 | 12-01-1956  |
      #team-h 
-      | 910748506-1    | 07-25-1935  |
+      | 968085825    | 07-22-1930  |

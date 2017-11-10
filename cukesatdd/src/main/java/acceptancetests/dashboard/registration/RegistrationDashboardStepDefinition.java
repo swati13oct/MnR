@@ -122,7 +122,7 @@ public class RegistrationDashboardStepDefinition {
 	}
 
 	@When("^member click Next$")
-	public void clickNext() {
+	public void clickNext() throws InterruptedException {
 		RegistrationInformationPage registrationInformationPage = (RegistrationInformationPage) getLoginScenario()
 				.getBean(PageConstants.REGISTRATION_INFORMATION_PAGE);
 		registrationInformationPage.scroll();
@@ -141,6 +141,7 @@ public class RegistrationDashboardStepDefinition {
 		RegistrationInformationPage registrationInformationPage = (RegistrationInformationPage) getLoginScenario()
 				.getBean(PageConstants.REGISTRATION_INFORMATION_PAGE);
 		// Assert.assertTrue(registrationInformationPage.currentUrl().contains("memberRegistration-Step2"));
+		registrationInformationPage.waitForPlanInformationPage();
 		registrationInformationPage.getStepTwoText().isDisplayed();
 	}
 
@@ -277,9 +278,10 @@ public class RegistrationDashboardStepDefinition {
 	public void member_clicks_on_next_button() throws InterruptedException {
 		RegistrationInformationPage registrationInformationPage = (RegistrationInformationPage) getLoginScenario()
 				.getBean(PageConstants.REGISTRATION_INFORMATION_PAGE);
+		
 		Thread.sleep(2000);
 		registrationInformationPage.scroll();
-		Thread.sleep(2000);
+		Thread.sleep(4000);
 		registrationInformationPage.clickNext();
 		try {
 			Thread.sleep(5000);
@@ -411,7 +413,7 @@ public class RegistrationDashboardStepDefinition {
 				.getBean(PageConstants.REGISTRATION_INFORMATION_PAGE);
 		registrationInformationPage.getFutureEffectiveError().isDisplayed();
 		Assert.assertTrue(registrationInformationPage.getFutureEffectiveError()
-				.toString().contains("future"));
+				.toString().contains("Plan is not yet effective"));
 
 	}
 
@@ -443,7 +445,7 @@ public class RegistrationDashboardStepDefinition {
 	
 	
 	@And("The member land on create account enters the valid data to create account$")
-	public void enterCreateAccountData(DataTable givenAttributes) {
+	public void enterCreateAccountData(DataTable givenAttributes) throws InterruptedException {
 		
 		
 		RegistrationInformationPage registrationInformationPage = (RegistrationInformationPage) getLoginScenario()
