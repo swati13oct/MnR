@@ -20,19 +20,20 @@ Feature: To test order materials in Redesign site
 #      | MAPD     | Individual  |Member Materials      |
 #      | PDP      | Individual  |Welcome Guide    |
 
-  @SHIPOrderMaterials
-  Scenario Outline: Verify order materials in Redesign site for ship type plan members
-    Given registered AMP member with following attributes
-      | Plan Type | <planType> |
-      | Member Type  | <memberType> |
-    When the user views order materials in Member Redesign Order Materials page
-    And the user selects an option from the orderp list in Redesign site
-      | Option    | <option>   |
-      | Plan Type | <planType> |
+# Covered in Validate All Options and submit and Confirm Order
+#  @SHIPOrderMaterials
+#  Scenario Outline: Verify order materials in Redesign site for ship type plan members
+#    Given registered AMP member with following attributes
+#      | Plan Type | <planType> |
+#      | Member Type  | <memberType> |
+#    When the user views order materials in Member Redesign Order Materials page
+#    And the user selects an option from the orderp list in Redesign site
+#      | Option    | <option>   |
+#      | Plan Type | <planType> |
 
-    Examples: 
-      | planType | memberType | option      |
-      | SHIP     | PDPwithMedSupp  | Coupon Book |
+#    Examples: 
+#      | planType | memberType | option      |
+#      | SHIP     | Individual  | Coupon Book |
 
   @ConfirmationPage
   Scenario Outline: Verify order materials confirmation page in Redesign site
@@ -51,6 +52,8 @@ Feature: To test order materials in Redesign site
       | MA       |  Individual | Member Materials |
       | MAPD     | Individual  | Member Materials      |
       | PDP      |  Individual | Welcome Guide    |
+      | SHIP     | Individual  | Member ID Card |
+      
 
 #  @needhelpcomponent
 #  Scenario Outline: Verify need help component in Redesign site
@@ -77,9 +80,9 @@ Feature: To test order materials in Redesign site
 
     Examples: 
             | planType  | memberType | comboPlans |
-#            | MA        | MAwithMedSupp | MA,MedSupp |
-#            | MAPD			| MAPDwithHIP | MAPD,HIP |
-            | 	SHIP		| PDPwithMedSupp | PDP,MedSupp |
+            | MA        | MAwithMedSupp | MA,MedSupp |
+            | MAPD			| MAPDwithHIP | MAPD,HIP |
+            | 	PDP		| PDPwithMedSupp | PDP,MedSupp |
 
   @ValidateOrderMaterialOptions
   Scenario Outline: Verify Order Plan Material Options - All Combo Plan Types
@@ -98,7 +101,7 @@ Feature: To test order materials in Redesign site
             | MA        | Individual | MA |
             | MAPD			| Individual | MAPD |
             | PDP			| Individual | PDP |
-            | SHIP     | PDPwithMedSupp | SHIP |
+            | SHIP     | Individual | SHIP |
             
 
   @ValidateErrorMessage
@@ -129,4 +132,4 @@ Feature: To test order materials in Redesign site
 
     Examples: 
       | planType | option      | memberType |
-      | SHIP     | Coupon Book | PDPwithMedSupp |
+      | SHIP     | Coupon Book | Individual |

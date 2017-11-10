@@ -103,6 +103,8 @@ public class PharmacySearchPage extends UhcDriver{
 	}
 
 	public PharmacySearchPage enterDistanceDetails(String distance) {
+		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+		CommonUtility.checkPageIsReady(driver);
 
 		Select select = new Select(distanceDropDownField);	
 		String DistanceSelection = distance+" miles";
@@ -192,7 +194,9 @@ public class PharmacySearchPage extends UhcDriver{
 	
 	
 	public PharmacySearchPage enterDistanceZipDetails(String distance, String zipcode) throws InterruptedException {
-		
+		driver.manage().timeouts().implicitlyWait(40, TimeUnit.SECONDS);
+		CommonUtility.checkPageIsReady(driver);
+
 		Select select = new Select(distanceDropDownField);	
 		String DistanceSelection = distance+" miles";
 		select.selectByVisibleText(DistanceSelection);
@@ -212,8 +216,11 @@ public class PharmacySearchPage extends UhcDriver{
 		if(planYearDropDown.isEnabled()){
 			Select PlanYear = new Select(planYearDropDown);
 			PlanYear.selectByVisibleText("2017");
-			System.out.println("Plan Year Selected is : "+planYearDropDown.getText());
 			driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+			CommonUtility.checkPageIsReady(driver);
+
+			System.out.println("Plan Year Selected is : "+planYearDropDown.getText());
+			driver.manage().timeouts().implicitlyWait(50, TimeUnit.SECONDS);
 			CommonUtility.checkPageIsReady(driver);
 			Select PlanSelect = new Select(PlanNameDropDown);
 			PlanSelect.selectByIndex(0);
@@ -227,7 +234,7 @@ public class PharmacySearchPage extends UhcDriver{
 	}
 	
 	public PharmacyResultPage ValidateShowOnMapLinks() {
-		driver.manage().timeouts().implicitlyWait(300, TimeUnit.SECONDS);
+		driver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
 		int showonmapCount = showonmap.size();
 		if(showonmapCount>0){
 			System.out.println("Show on Map Links are Displayed");
@@ -253,7 +260,9 @@ public class PharmacySearchPage extends UhcDriver{
 	}
 	
 	public PharmacyResultPage validateMoreInfoContent() {
-		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+		driver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
+		CommonUtility.checkPageIsReady(driver);
+
 		moreInfoLink.click();
 		if (moreInfoText.isDisplayed()) {
 			return new PharmacyResultPage(driver);
@@ -299,13 +308,18 @@ public class PharmacySearchPage extends UhcDriver{
 	}
 
 	public PharmacySearchPage clickChinese(){
+		driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
+		CommonUtility.checkPageIsReady(driver);
+
 		chineseLanguage.click();
 		System.out.println("Chinese language selected");   
 		driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
 		return new PharmacySearchPage(driver);
 	}
 	public PharmacySearchPage selectspanLanguage(){
-		
+		driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
+		CommonUtility.checkPageIsReady(driver);
+
 		SpanishLanguage.click();
 		System.out.println("Spanish language selected"); 
 		driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
