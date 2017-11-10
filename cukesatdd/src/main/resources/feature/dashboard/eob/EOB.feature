@@ -14,22 +14,22 @@ Examples:
        | MA				 | q4_dec_aarp507	   |   
 
 
-@eobPdf        @workingFine
-Scenario Outline: To verify How to read your medical EOB
-Given registered AMP with for EOB flow
-	| Plan Type      |<planType>  |
-	| Member Type    |<memberType>|
-Then the user navigates to EOB page
-And the user slects the desired date range
-  | Plan Type      |<planType>  |
-  | Date Range     |<dateRange> |
-  | EOB Type			 |<eobType>|
-And the user validates how to read medical eob PDF
- 	Examples:
+#@eobPdf        @workingFine
+#Scenario Outline: To verify How to read your medical EOB
+#Given registered AMP with for EOB flow
+	#| Plan Type      |<planType>  |
+	#| Member Type    |<memberType>|
+#Then the user navigates to EOB page
+#And the user slects the desired date range
+ # | Plan Type      |<planType>  |
+ # | Date Range     |<dateRange> |
+ # | EOB Type			 |<eobType>|
+#And the user validates how to read medical eob PDF
+ #	Examples:
  	#Member should have EOBs for the specified date range
-	| planType  | memberType        |dateRange			| eobType |
-	| MAPD      | q4_dec_grp074     |18 Months		  | Medical |
-	| MAPD      | q4_dec_grp074     |12 Months		  | Medical |
+	#| planType  | memberType        |dateRange			| eobType |
+	#| MAPD      | q4_dec_grp074     |18 Months		  | Medical |
+#	| MAPD      | q4_dec_grp074     |12 Months		  | Medical |
 	      
        
  @validateEOBStatements      
