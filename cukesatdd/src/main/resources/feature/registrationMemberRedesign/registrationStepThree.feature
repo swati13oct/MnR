@@ -1,4 +1,4 @@
-@registrationStepThree
+@registrationStepThree   @Gladiators
 Feature: To test registration flow in redesign portal
 
   Scenario Outline: To verify member with no additional plan is navigated to Create Account after clicking next button on Plan Information

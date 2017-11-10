@@ -1,4 +1,4 @@
-@stepOneMemberErrorPage
+@stepOneMemberErrorPage  @Gladiators
 
 Feature: To validate member errors on the registration page
 

@@ -1,4 +1,4 @@
-@registrationRedesign @Gladiators
+@registrationRedesign 
 Feature: To test registration flow in redesign portal
 
   Scenario Outline: To verify member is navigated to the registeration plan Information page

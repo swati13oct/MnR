@@ -43,7 +43,7 @@ public class RegistrationInformationPage extends UhcDriver {
 	private WebElement memberid;
 
 	/** The month field. */
-	@FindBy(xpath = "//*[@id='register-form']/div[1]/div/div/div/fieldset/fieldset/div/div[1]/span/span[1]/span")
+	@FindBy(xpath = ".//*[@id='register-form']/div[1]/div/div/div/fieldset/fieldset/div/div[1]/span/span[1]/span")
 	private WebElement monthToEnter;
 	
 	@FindBy(className = "select2-search__field")
@@ -54,14 +54,14 @@ public class RegistrationInformationPage extends UhcDriver {
 	
 	
 	/** The date field. */
-	@FindBy(xpath = "//*[@id='register-form']/div[1]/div/div/div/fieldset/fieldset/div/div[2]/span/span[1]/span")
+	@FindBy(xpath = ".//*[@id='register-form']/div[1]/div/div/div/fieldset/fieldset/div/div[2]/span/span[1]/span")
 	private WebElement dayToEnter;
 		
 	@FindBy(id = "select2-date-dd-results")
 	private WebElement dateresults;
 
 	/** The year field. */
-	@FindBy(xpath = "//*[@id='register-form']/div[1]/div/div/div/fieldset/fieldset/div/div[3]/span/span[1]/span")
+	@FindBy(xpath = ".//*[@id='register-form']/div[1]/div/div/div/fieldset/fieldset/div/div[3]/span/span[1]/span")
 	private WebElement yearToEnter;
 	
 	@FindBy(id = "select2-date-yyyy-results")
@@ -961,7 +961,7 @@ public class RegistrationInformationPage extends UhcDriver {
      * Wait for page to load
      */
     public void waitForCreatePageAccountPage() {
-    	WebDriverWait wait = new WebDriverWait(this.driver, 50);
+    	WebDriverWait wait = new WebDriverWait(this.driver, 60);
     	wait.until(new ExpectedCondition<Boolean>() {
     	    public Boolean apply(WebDriver driver) {
     		if (createAccountConfirmRegistration.isDisplayed())

@@ -102,18 +102,18 @@ public class RegistrationDashboardStepDefinition {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-	     
-	     
+		registrationInformationPage.scroll();
+		Thread.sleep(2000);
 		registrationInformationPage.getEnterMonth().click();
 		registrationInformationPage.enterMonth(month);
 		Thread.sleep(1000);
 		registrationInformationPage.clickMonthresults();
-		
+		Thread.sleep(2000);
 		registrationInformationPage.getEnterDay().click();
 		registrationInformationPage.enterMonth(day);
 		Thread.sleep(1000);
 		registrationInformationPage.clickDayResults();
-		
+		Thread.sleep(2000);
 		registrationInformationPage.getEnterYear().click();
 		registrationInformationPage.enterMonth(year);
 		Thread.sleep(1000);
@@ -125,6 +125,7 @@ public class RegistrationDashboardStepDefinition {
 	public void clickNext() {
 		RegistrationInformationPage registrationInformationPage = (RegistrationInformationPage) getLoginScenario()
 				.getBean(PageConstants.REGISTRATION_INFORMATION_PAGE);
+		registrationInformationPage.scroll();
 		registrationInformationPage.clickNext();
 
 		try {
@@ -273,9 +274,12 @@ public class RegistrationDashboardStepDefinition {
 	}
 
 	@When("^member clicks on next button$")
-	public void member_clicks_on_next_button() {
+	public void member_clicks_on_next_button() throws InterruptedException {
 		RegistrationInformationPage registrationInformationPage = (RegistrationInformationPage) getLoginScenario()
 				.getBean(PageConstants.REGISTRATION_INFORMATION_PAGE);
+		Thread.sleep(2000);
+		registrationInformationPage.scroll();
+		Thread.sleep(2000);
 		registrationInformationPage.clickNext();
 		try {
 			Thread.sleep(5000);
@@ -461,6 +465,7 @@ public class RegistrationDashboardStepDefinition {
 		registrationInformationPage.waitForCreatePageAccountPage();
 		registrationInformationPage.enterUserNameToCreateAccount(userName);
 		registrationInformationPage.enterPasswordToCreateAccount(password);
+		registrationInformationPage.scroll();
 		registrationInformationPage.enterConfirmPasswordToCreateAccount(confirmPassword);
 		registrationInformationPage.enterEmailToCreateAccount(email);
 		registrationInformationPage.enterConfirmEmailToCreateAccount(confirmEmail);

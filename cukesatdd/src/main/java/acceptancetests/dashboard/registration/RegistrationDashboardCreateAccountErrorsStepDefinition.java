@@ -43,6 +43,7 @@ public class RegistrationDashboardCreateAccountErrorsStepDefinition {
                                 // navigate to registration page
                                 RegistrationInformationPage registrationInformationPage = (RegistrationInformationPage) 
                                                                 getLoginScenario().getBean(PageConstants.REGISTRATION_INFORMATION_PAGE);
+                                registrationInformationPage.scroll();
                                 registrationInformationPage.getAccountConfirmation().click();
 
                 }
