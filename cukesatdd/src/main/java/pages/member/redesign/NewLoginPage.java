@@ -71,7 +71,7 @@ public class NewLoginPage extends UhcDriver {
 					alert2.accept();
 			}
 			Thread.sleep(5000);
-            if (iPerceptionPopUp.isDisplayed()) {
+            if (validate(iPerceptionPopUp)) {
                 iPerceptionPopUp.click();
                 System.out.println("iPerception Pop Up displayed");
          }
