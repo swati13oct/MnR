@@ -65,12 +65,12 @@ public class NewLoginPage extends UhcDriver {
 			sendkeys(userNameField,username);
 			sendkeys(passwordField,password);
 			btnSignIn.click();
-			Thread.sleep(4000);
+			Thread.sleep(25000);
 			if (MRScenario.environment.equals("team-e")/* || MRScenario.environment.equals("team-h")*/){
 					Alert alert2 = driver.switchTo().alert();
 					alert2.accept();
 			}
-			Thread.sleep(25000);
+			Thread.sleep(5000);
             if (validate(iPerceptionPopUp)) {
                 iPerceptionPopUp.click();
                 System.out.println("iPerception Pop Up displayed");
