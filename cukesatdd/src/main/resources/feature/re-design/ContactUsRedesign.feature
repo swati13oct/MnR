@@ -12,7 +12,7 @@ Feature: To test Send us a question Widget and Click to call functionality in co
 
     Examples: 
       | userName      |  | password   | memberType |
-      | q4_dec_grp363 |  | Password@1 | Group      |
+      | q4_dec_grp140 |  | Password@1 | Group      |
 
   #US634972
   Scenario Outline: Verify Send us a question Widget section in contact us redesign page which covers 1,3,4
@@ -25,7 +25,7 @@ Feature: To test Send us a question Widget and Click to call functionality in co
 
     Examples: 
       | userName      |  | password   | memberType |
-      | q4_dec_grp363 |  | Password@1 | Group      |
+      | q4_dec_grp140 |  | Password@1 | Group      |
 
   Scenario Outline: Verify cancel click on Group secure email widget  in redesign contact us page
     Given registered UMS member with following attributes
@@ -37,7 +37,7 @@ Feature: To test Send us a question Widget and Click to call functionality in co
 
     Examples: 
       | userName      |  | password   | memberType |
-      | q4_dec_grp363 |  | Password@1 | Group      |
+      | q4_dec_grp140 |  | Password@1 | Group      |
 
   Scenario Outline: Verify user clicks on submit question by selecting Finding a Physician option in redesign contact us page
     Given registered UMS member with following attributes
@@ -49,7 +49,7 @@ Feature: To test Send us a question Widget and Click to call functionality in co
 
     Examples: 
       | userName      |  | password   | memberType |
-      | q4_dec_grp363 |  | Password@1 | Group      |
+      | q4_dec_grp140 |  | Password@1 | Group      |
 
   #US634977
   Scenario Outline: Verify Send us a question Widget section in contact us redesign page
@@ -62,7 +62,7 @@ Feature: To test Send us a question Widget and Click to call functionality in co
 
     Examples: 
       | userName      |  | password   | memberType |
-      | q4_dec_grp363 |  | Password@1 | Group      |
+      | q4_dec_grp140 |  | Password@1 | Group      |
 
   Scenario Outline: routing to appropriate department after clicking submit question button by  selecting Physician option  in contact us redesign page
     Given registered UMS member with following attributes
@@ -74,7 +74,7 @@ Feature: To test Send us a question Widget and Click to call functionality in co
 
     Examples: 
       | userName      |  | password   | memberType |
-      | q4_dec_grp363 |  | Password@1 | Group      |
+      | q4_dec_grp140 |  | Password@1 | Group      |
 
   Scenario Outline: routing to appropriate department after clicking submit question button by  selecting Billing Information option  in contact us redesign page
     Given registered UMS member with following attributes
@@ -86,7 +86,7 @@ Feature: To test Send us a question Widget and Click to call functionality in co
 
     Examples: 
       | userName      |  | password   | memberType |
-      | q4_dec_grp363 |  | Password@1 | Group      |
+      | q4_dec_grp140 |  | Password@1 | Group      |
 
   #Scenario Outline: validating emailIds in contact us redesign page
     #Given registered UMS member with following attributes
@@ -98,7 +98,7 @@ Feature: To test Send us a question Widget and Click to call functionality in co
 #
     #Examples: 
       #| userName      |  | password   | memberType |
-      #| q4_dec_grp363 |  | Password@1 | Group      |
+      #| q4_dec_grp140 |  | Password@1 | Group      |
 
   #Scenario Outline: validate user enters invalidate Confirm email ID in sendUS A question widget in contact us redesign page
     #Given registered UMS member with following attributes
@@ -110,7 +110,7 @@ Feature: To test Send us a question Widget and Click to call functionality in co
 #
     #Examples: 
       #| userName      |  | password   | memberType |
-      #| q4_dec_grp363 |  | Password@1 | Group      |
+      #| q4_dec_grp140 |  | Password@1 | Group      |
 
   #Scenario Outline: validateuser enters invalidate alternative email ID in sendUS A question widget in contact us redesign page
     #Given registered UMS member with following attributes
@@ -122,7 +122,7 @@ Feature: To test Send us a question Widget and Click to call functionality in co
 #
     #Examples: 
       #| userName      |  | password   | memberType |
-      #| q4_dec_grp363 |  | Password@1 | Group      |
+      #| q4_dec_grp140 |  | Password@1 | Group      |
 #
   #Scenario Outline: validate user enters invalidate Confirm email ID in sendUS A question widget in contact us redesign page
     #Given registered UMS member with following attributes
@@ -134,7 +134,7 @@ Feature: To test Send us a question Widget and Click to call functionality in co
 #
     #Examples: 
       #| userName      |  | password   | memberType |
-      #| q4_dec_grp363 |  | Password@1 | Group      |
+      #| q4_dec_grp140 |  | Password@1 | Group      |
 
   Scenario Outline: validate user enters blank text  in sendUS A question  message widget in contact us redesign page
     Given registered UMS member with following attributes
@@ -146,7 +146,7 @@ Feature: To test Send us a question Widget and Click to call functionality in co
 
     Examples: 
       | userName      |  | password   | memberType |
-      | q4_dec_grp363 |  | Password@1 | Group      |
+      | q4_dec_grp140 |  | Password@1 | Group      |
 
   Scenario Outline: validate user enters invalid phone number  in sendUS A question widget in contact us redesign page
     Given registered UMS member with following attributes
@@ -158,7 +158,7 @@ Feature: To test Send us a question Widget and Click to call functionality in co
 
     Examples: 
       | userName      |  | password   | memberType |
-      | q4_dec_grp363 |  | Password@1 | Group      |
+      | q4_dec_grp140 |  | Password@1 | Group      |
 
   #US635973
   #Scenario Outline: Verify Group Email Widget Confirm Request in contact us redesign page
@@ -172,7 +172,7 @@ Feature: To test Send us a question Widget and Click to call functionality in co
 #
     #Examples: 
       #| userName      |  | password   | memberType |
-      #| q4_dec_grp363 |  | Password@1 | Group      |
+      #| q4_dec_grp140 |  | Password@1 | Group      |
 
   Scenario Outline: Verify secureEmail Widget page section in contact us redesign page for not opted in aarp member of  AARP site covers scenario 1,2,5,6,7
     Given registered UMS member with following attributes

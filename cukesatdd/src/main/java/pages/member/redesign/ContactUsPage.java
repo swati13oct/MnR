@@ -103,7 +103,7 @@ public class ContactUsPage extends UhcDriver{
 	@FindBy(xpath = "//div[contains(@class,'parsys click-to-call')]/div/div[not (contains(@class,'ng-hide'))]//div[@class='message-block--full-width success margin-none']")
 	private WebElement reqConfirmation;
 	
-	@FindBy(xpath="//h2/p[text()='Website Technical Support']")
+	@FindBy(xpath="//header//h1")
 	private WebElement heading;
 	
 	@FindBy(id = "addAnotherPlanLink")
