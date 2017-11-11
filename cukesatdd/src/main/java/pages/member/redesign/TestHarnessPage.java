@@ -21,7 +21,7 @@ public class TestHarnessPage extends UhcDriver {
 	@FindBy(xpath="//a[text()='Go to Contact Us page']")
 	private WebElement linkContactUs;
 	
-	@FindBy(xpath="//h2/p[text()='Website Technical Support']")
+	@FindBy(xpath="//header//h1")
 	private WebElement heading;
 	
 	@FindBy(xpath=".//*[@id='IPEinvL']/map/area[2]")
