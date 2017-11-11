@@ -24,6 +24,9 @@ public class TestHarnessPage extends UhcDriver {
 	@FindBy(xpath="//h2/p[text()='Website Technical Support']")
 	private WebElement heading;
 	
+	@FindBy(xpath=".//*[@id='IPEinvL']/map/area[2]")
+    private WebElement iPerceptionPopUp;
+	
 	public TestHarnessPage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
@@ -31,6 +34,10 @@ public class TestHarnessPage extends UhcDriver {
 	}
 
 	public ContactUsPage navigateToContactUsPage() {
+		if (validate(iPerceptionPopUp)) {
+            iPerceptionPopUp.click();
+            System.out.println("iPerception Pop Up displayed");
+		}
 		linkContactUs.click();
 		CommonUtility.waitForPageLoad(driver, heading, 10);
 		if(driver.getTitle().equalsIgnoreCase("Overview"))

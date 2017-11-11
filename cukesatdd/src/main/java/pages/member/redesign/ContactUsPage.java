@@ -81,6 +81,9 @@ public class ContactUsPage extends UhcDriver{
 	@FindBy(xpath = "//div[contains(@class,'parsys click-to-call')]/div/div[not (contains(@class,'ng-hide'))]//div[@class='card-header']/p[1]")
 	private WebElement haveUsCallYou;
 	
+	@FindBy(xpath="//div[contains(@class,'click-to-call')][1]/div[1]//div[@class='card-slide']/a")
+	private WebElement memberAuthRequestACall;
+	
 	@FindBy(xpath = "//div[contains(@class,'parsys click-to-call')]/div/div[not (contains(@class,'ng-hide'))]//a[@id='call-btn']")
 	private WebElement sendArequest;
 	
@@ -109,6 +112,9 @@ public class ContactUsPage extends UhcDriver{
 	@FindBy(xpath="//div[contains(@class,'request-email')]/div[not (contains(@class,'ng-hide'))][2]//a[@id='question-btn']")
 	private WebElement fillOutFormButton;	
 	
+	@FindBy(xpath="//div[contains(@class,'request-email')]/div[not (contains(@class,'ng-hide'))]//a[@id='question-btn']")
+	private WebElement memberAuth_fillOutFormButton;
+	
 	@FindBy(xpath="//div[contains(@class,'request-email')]/div[not (contains(@class,'ng-hide'))][2]//a[@id='question-cancel']")
 	private WebElement questionCancelLink;
 	
@@ -122,6 +128,8 @@ public class ContactUsPage extends UhcDriver{
 	@FindBy(xpath="//div[contains(@class,'request-email')]/div[not (contains(@class,'ng-hide'))][2]//button[@id='question-submit']")
 	private WebElement questionSubmit;
 	
+	@FindBy(xpath="//div[contains(@class,'request-email')]/div[not (contains(@class,'ng-hide'))]//button[@id='question-submit']")
+	private WebElement memberauth_questionSubmit;
 	
 	@FindBy(xpath="//div[contains(@class,'request-email')]/div[not (contains(@class,'ng-hide'))][2]//a[@id='add-alt-email']")
 	private WebElement addAlternativeEmail;
@@ -183,6 +191,11 @@ public class ContactUsPage extends UhcDriver{
 	@FindBy(css="h2.plan.margin-large>span")
 	private WebElement pdpHeader;
 	
+	@FindBy(css="div>div.alert-message")
+	private WebElement memberAuthMessage;	
+	
+	@FindBy(xpath="//div[contains(@class,'request-email')]/div[not (contains(@class,'ng-hide'))]//div[contains(@class,'message-block-body')][1]//h3")
+	private WebElement memberAuthNotAuthorizedToSendUsQuestionMessage;
 	
 	private PageData contactUs;
 
@@ -195,7 +208,7 @@ public class ContactUsPage extends UhcDriver{
 	public ContactUsPage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
-		//CommonUtility.waitForPageLoad(driver, addPlan, CommonConstants.TIMEOUT_30);
+		CommonUtility.waitForPageLoad(driver, heading, CommonConstants.TIMEOUT_30);
 		openAndValidate();
 		
 	}
@@ -1141,5 +1154,32 @@ public class ContactUsPage extends UhcDriver{
 		
 		return flag;
 	}
+	
+	public String getDisclaimerTextForMemberAuth(){
+		return memberAuthMessage.getText().trim();
+	}
 
+	public String getMemberAuthNotAuthorizedToSendUsQuestionMessage(){
+		try {
+			Thread.sleep(35000);
+			memberAuth_fillOutFormButton.click();
+			Thread.sleep(3000);
+			memberauth_questionSubmit.click();
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		return memberAuthNotAuthorizedToSendUsQuestionMessage.getText().trim();
+	}
+	
+	public String getMemberAuthNotAuthorizedToRequestACallMessage(){
+		try {
+			Thread.sleep(15000);
+			memberAuth_fillOutFormButton.click();
+			Thread.sleep(3000);
+			memberauth_questionSubmit.click();
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		return memberAuthNotAuthorizedToSendUsQuestionMessage.getText().trim();
+	}
 }
