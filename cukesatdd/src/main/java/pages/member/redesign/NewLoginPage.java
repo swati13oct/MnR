@@ -65,7 +65,7 @@ public class NewLoginPage extends UhcDriver {
 			sendkeys(userNameField,username);
 			sendkeys(passwordField,password);
 			btnSignIn.click();
-			Thread.sleep(25000);
+			Thread.sleep(40000);
 			if (MRScenario.environment.equals("team-e")/* || MRScenario.environment.equals("team-h")*/){
 					Alert alert2 = driver.switchTo().alert();
 					alert2.accept();
