@@ -133,7 +133,7 @@ And the user validates the DownloadMyData section in redesigned site
 
 Examples:
 | planType | claimPeriod      | domain  |
-| MA       |   Last 24 Months | COSMOS  |
+| MA       |   Last 24 Months | NICE    |
 | MAPD     |   Last 24 Months | NICE    |
  
 @claimsSummarySHIP @transformers
