@@ -409,7 +409,7 @@ public class RegistrationDashboardStepDefinition {
 				.getBean(PageConstants.REGISTRATION_INFORMATION_PAGE);
 		registrationInformationPage.getFutureEffectiveError().isDisplayed();
 		Assert.assertTrue(registrationInformationPage.getFutureEffectiveError()
-				.toString().contains("Plan is not yet effective"));
+				.toString().contains("future"));
 
 	}
 
