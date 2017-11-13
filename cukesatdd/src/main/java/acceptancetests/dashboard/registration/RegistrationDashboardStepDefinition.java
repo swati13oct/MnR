@@ -61,7 +61,7 @@ public class RegistrationDashboardStepDefinition {
 			memberAttributesMap.put(memberAttributesRow.get(i).getCells()
 					.get(0), memberAttributesRow.get(i).getCells().get(1));
 		}
-         Thread.sleep(1000);
+        
 		// get member ID
 		String memberId = memberAttributesMap.get("Plan Member ID");
 		// navigate to registration page
@@ -102,6 +102,7 @@ public class RegistrationDashboardStepDefinition {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		Thread.sleep(2000);
 		registrationInformationPage.scroll();
 		Thread.sleep(2000);
 		registrationInformationPage.getEnterMonth().click();
