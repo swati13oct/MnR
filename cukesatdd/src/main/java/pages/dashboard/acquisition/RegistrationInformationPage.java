@@ -134,7 +134,7 @@ public class RegistrationInformationPage extends UhcDriver {
 	private WebElement existingStartOverLink;
 
 	/** The Start over link on future Effective Plan error page. */
-	@FindBy(id = "startOver_future_Effective_Plan_error")
+	@FindBy(xpath = ".//*[@id='future_Effective_Plan_error']/div[1]/div/div/div[1]/h3")
 	private WebElement futureStartOverLink;
 
 	/** The Start over link on inactive terminated Plan error page. */
