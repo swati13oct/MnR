@@ -81,7 +81,7 @@ public class RegistrationStartOverErrorPageStepDefinition {
                                 Thread.sleep(2000);
                                 registrationInformationPage.scroll();
                                 registrationInformationPage.clickFutureStartOver();
-                                Thread.sleep(5000);
+                                Thread.sleep(3000);
 
                 }
                 

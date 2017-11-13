@@ -603,9 +603,11 @@ public class RegistrationInformationPage extends UhcDriver {
 
 	/**
 	 * Click the future Start Over link
+	 * @throws InterruptedException 
 	 */
-	public void clickFutureStartOver() {
+	public void clickFutureStartOver() throws InterruptedException {
 		futureStartOverLink.click();
+		Thread.sleep(1000);
 	}
 
 	/**
