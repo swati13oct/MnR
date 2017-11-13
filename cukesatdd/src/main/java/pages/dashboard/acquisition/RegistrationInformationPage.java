@@ -39,7 +39,7 @@ public class RegistrationInformationPage extends UhcDriver {
 	 */
 
 	/** The member id field. */
-	@FindBy(id = "member-id")
+	@FindBy(xpath = ".//*[@id='member-id']")
 	private WebElement memberid;
 
 	/** The month field. */
