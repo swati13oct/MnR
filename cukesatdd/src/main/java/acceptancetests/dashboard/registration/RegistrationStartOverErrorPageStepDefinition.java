@@ -40,7 +40,7 @@ public class RegistrationStartOverErrorPageStepDefinition {
                 public void previousInformationNotRetained() throws InterruptedException {
                                 RegistrationInformationPage registrationInformationPage = (RegistrationInformationPage) 
                                                                 getLoginScenario().getBean(PageConstants.REGISTRATION_INFORMATION_PAGE);
-                                Thread.sleep(6000);
+                                Thread.sleep(2000);
                                 Assert.assertTrue(registrationInformationPage.getMemberID().getAttribute("value").isEmpty());
                                 /*Assert.assertTrue(registrationInformationPage.getEnterDay().getAttribute("value").isEmpty());
                                 Assert.assertTrue(registrationInformationPage.getEnterMonth().getAttribute("value").isEmpty());
