@@ -625,7 +625,7 @@ public class AccountHomePage extends UhcDriver {
 				e.printStackTrace();
 			}
 
-			CommonUtility.waitForPageLoad(driver, driver.findElement(By.xpath("//select[@id='document-date']")), 60);
+			//CommonUtility.waitForPageLoad(driver, driver.findElement(By.xpath("//select[@id='document-date']")), 60);
 			{
 				try {
 					
