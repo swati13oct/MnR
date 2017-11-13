@@ -1252,6 +1252,18 @@ Feature: To test plan benefits and Coverage on AARP site for Federal members
     | MAPD    |
    # | PDP     |
    # | MA       |
+
+    @Dummy
+     Scenario Outline: Verify that Page Headers are in place on Benefits and Coverage page
+    Given registered member with following details logins in the member portal 
+       | Plan Type      | <planType>     |
+    Then the user validates elements on account home page
+    Then the user clicks on profile and preferences and profile page should come
+     
+     Examples: 
+    | planType|
+    | MAPD    |
+    | MA      |
    
     
    

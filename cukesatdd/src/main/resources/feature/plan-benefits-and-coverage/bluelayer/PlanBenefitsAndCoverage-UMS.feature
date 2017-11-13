@@ -945,7 +945,7 @@ Examples:
    #| MA    |
     
      
-       @BncHeadersGroup
+     @BncHeadersGroup
      Scenario Outline: Verify that Page Headers are in place on Benefits and Coverage page
     Given registered member with following details logins in the member portal 
         | Plan Type      | <planType>  |
@@ -976,7 +976,7 @@ Examples:
       #| MAPD    |  Group       |  NON LIS      |
       | PDP     |  Group       |  NON LIS      |  
       
-      @PlanOverviewLis
+    @PlanOverviewLis
     Scenario Outline: Verify that Plan Overview is in place on Benefits and Coverage page for LIS Members
     Given registered member with following details logins in the member portal 
        | Plan Type      | <planType>     |
@@ -1027,7 +1027,7 @@ Examples:
       
  
       
-       @OutOfPocketMax
+      @OutOfPocketMax
     Scenario Outline: Verify the out of pocket section is in place on Benefits and Coverage page
     Given registered member with following details logins in the member portal 
        | Plan Type      | <planType>     |

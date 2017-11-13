@@ -192,11 +192,23 @@ public class AccountHomePage extends UhcDriver {
 	@FindBy(linkText = "Go to benefits and coverage page")
 	private WebElement BnClink;
 	
-	@FindBy(linkText = "Go to benefits and coverage page page")
+	@FindBy(linkText = "Go to benefits and coverage page")
 	private WebElement BnClink2;
 
 	@FindBy(linkText = "Go to profile page")
 	private WebElement ProfileandPrefLink;
+	
+	@FindBy(id = "plan_box")
+	private WebElement planbox;
+	
+	@FindBy(id = "welcomeText")
+	private WebElement welcomeText;
+	
+	@FindBy(xpath= ".//*[@id='fd_myMenu']/a")
+	private WebElement fd_myMenu;
+	
+	@FindBy(id = "disclosure_link")
+	private WebElement ProfilenPrefernces;
 	
 
 	public JSONObject accountHomeJson;
@@ -809,6 +821,31 @@ public FormsandresourcesPage navigateToMydocumentAarpPage() {
 			return null;
 			
 		
+			
+		}
+		
+		public void validateelements()
+		{
+			validate(planbox);
+			validate(welcomeText);
+			validate(fd_myMenu);
+		}
+		
+		public ProfileandPreferencesPage validatemymenufunctionality()
+		{
+			//fd_myMenu.click();
+			ProfilenPrefernces.click();
+			try {
+				Thread.sleep(30000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			if(driver.getTitle().equalsIgnoreCase("AARP Medicare Plans | My Personal Profile")){
+				 System.out.println("Pass");
+			        return new pages.member.ulayer.ProfileandPreferencesPage(driver);
+				}
+				return null;
 			
 		}
 		

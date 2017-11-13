@@ -266,12 +266,12 @@ Feature: To test My Profile & Preferences flow in UMS site
     And the user validates on clicking contact us link it should route to contact us page
 
     Examples: 
-        | planType|
-         | GroupMAPD|
+         | planType|
+         #| GroupMAPD|
          | MAPD     |
-         | MA       |
-         |GroupMA   |
-         |GroupPDP  |
+         #| MA       |
+         #|GroupMA   |
+         #|GroupPDP  |
 
         
   @PermanentAddress
@@ -309,8 +309,8 @@ Feature: To test My Profile & Preferences flow in UMS site
          |GroupMA   |
          |GroupPDP  |
 
-  @PhoneEdit
-  Scenario Outline: To verify Phone Edit Functionality
+ @PhoneEdit
+    Scenario Outline: To verify Phone Edit Functionality
     Given registered member with following details for Profile and Preferences flow
       | <planType> |
     Then the user navigates to Profile and Preferences page
@@ -321,9 +321,12 @@ Feature: To test My Profile & Preferences flow in UMS site
     Then the user validates the functionality of Cancel Button In phoneeditSection
 
     Examples: 
-      | planType |
-      | MAPD     |
-      #| MA       |
+         | planType|
+         | GroupMAPD|
+         | MAPD     |
+         | MA       |
+         |GroupMA   |
+         |GroupPDP  |
 
   @Temporaryaddress
   Scenario Outline: To verify Temporary adrress and Edit Functionality
