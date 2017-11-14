@@ -9,7 +9,7 @@ Then the user navigates to EOB page
 Then the user validates site leaving pop up         
 Examples:
        | planType  | memberType        |  
-       | MAPD      | q4_dec_uhc002  	 | 
+       | MAPD      | q4_dec_uhc001   	 | 
        | PDP			 | q4_dec_aarp292		 |
        | MA				 | q4_dec_aarp507	   |   
 
