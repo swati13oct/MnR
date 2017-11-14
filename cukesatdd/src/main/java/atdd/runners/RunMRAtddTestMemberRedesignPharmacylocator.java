@@ -18,7 +18,7 @@ import cucumber.junit.Cucumber;
 		features = { "feature/pharmacy-locator/member/redesign" }, 
 		format = {
 				"pretty", "html:reports/test-report","json:target/cucumber.json"}, 
-		tags ={"@TeamPredators,@pharmacylocator"})
+		tags ={"@zipcodeEntry"})
 
 //@TeamPredators,@pharmacylocator
 //@PharmacyDistanceDefaultZip,@PharmacyFilters,@zipcodeEntry,@Validateshowonmap,@ValidateMoreInfoMAPD,@ValidateMoreInfoPDP,@ValidateChineseLanguage,@ValidateSpanishLanguage,@ZipCodeErrorMessages

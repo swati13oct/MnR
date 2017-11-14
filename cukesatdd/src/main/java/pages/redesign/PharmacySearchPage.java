@@ -25,6 +25,9 @@ import pages.redesign.PharmacyResultPage;
  *
  */
 public class PharmacySearchPage extends UhcDriver{
+	
+	@FindBy(xpath = "//h1[contains(text(), 'Locate a Pharmacy')]")
+	private WebElement PharmacyLocatorPageHeader;
 
 	@FindBy(id = "zipcodeTxt")
 	private WebElement zipcodeField;
@@ -98,7 +101,10 @@ public class PharmacySearchPage extends UhcDriver{
 		super(driver);
 		PageFactory.initElements(driver, this);
 		CommonUtility.checkPageIsReady(driver);
-
+/*		if(validate(PharmacyLocatorPageHeader)){
+			
+		}
+*/		
 		openAndValidate();
 	}
 
@@ -194,7 +200,8 @@ public class PharmacySearchPage extends UhcDriver{
 	
 	
 	public PharmacySearchPage enterDistanceZipDetails(String distance, String zipcode) throws InterruptedException {
-		driver.manage().timeouts().implicitlyWait(40, TimeUnit.SECONDS);
+
+		driver.manage().timeouts().implicitlyWait(70, TimeUnit.SECONDS);
 		CommonUtility.checkPageIsReady(driver);
 
 		Select select = new Select(distanceDropDownField);	
@@ -205,22 +212,25 @@ public class PharmacySearchPage extends UhcDriver{
 		zipcodeField.clear();
 /*		driver.manage().timeouts().implicitlyWait(100, TimeUnit.SECONDS);
 		CommonUtility.checkPageIsReady(driver);
-*/		Thread.sleep(6000);
+*/		
+		driver.manage().timeouts().implicitlyWait(70, TimeUnit.SECONDS);
 		sendkeys(zipcodeField, zipcode);
 		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 		CommonUtility.checkPageIsReady(driver);
 		searchbtn.click();
-		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+		driver.manage().timeouts().implicitlyWait(70, TimeUnit.SECONDS);
 		System.out.println("*****Zipcode entered******"+zipcode);
 
 		if(planYearDropDown.isEnabled()){
 			Select PlanYear = new Select(planYearDropDown);
-			PlanYear.selectByVisibleText("2017");
+			PlanYear.selectByVisibleText("2018");
 			driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 			CommonUtility.checkPageIsReady(driver);
 
 			System.out.println("Plan Year Selected is : "+planYearDropDown.getText());
-			driver.manage().timeouts().implicitlyWait(50, TimeUnit.SECONDS);
+			driver.manage().timeouts().implicitlyWait(70, TimeUnit.SECONDS);
+		}
+		if(PlanNameDropDown.isEnabled()){
 			CommonUtility.checkPageIsReady(driver);
 			Select PlanSelect = new Select(PlanNameDropDown);
 			PlanSelect.selectByIndex(0);

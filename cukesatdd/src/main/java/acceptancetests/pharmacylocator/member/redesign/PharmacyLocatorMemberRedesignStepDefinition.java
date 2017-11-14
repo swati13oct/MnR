@@ -223,7 +223,7 @@ public class PharmacyLocatorMemberRedesignStepDefinition {
 		PharmacySearchPage pharmacySearchPage = (PharmacySearchPage) getLoginScenario()
 				.getBean(PageConstants.PHARMACY_SEARCH_PAGE);
 		System.out.println("Zip Code is"+zipcode);
-		System.out.println("Zip Code is"+distance);
+		System.out.println("Distance is"+distance);
 
 		pharmacySearchPage = pharmacySearchPage.enterDistanceZipDetails(distance, zipcode);
 

@@ -49,8 +49,8 @@ Then the user validates the pharmacies available in Redesign site
 
     Examples: 
     | planType | memberType  | zipcode | distance | 
-    | PDP 		 | Individual  |  90210  |  15			|
-    | MAPD	   | Individual  |   90210 |       15 | 
+    | PDP 		 | Individual  |  10980  |  15			|
+    | MAPD	   | Individual  |   10980 |       15 | 
 
    @Validateshowonmap
    Scenario Outline: To verify pharmacy locator showmap in Redesign site

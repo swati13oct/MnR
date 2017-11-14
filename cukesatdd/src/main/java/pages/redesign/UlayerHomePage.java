@@ -69,6 +69,9 @@ public class UlayerHomePage extends UhcDriver {
 	@FindBy(xpath = "//a[contains(text(), 'Go to Pharmacy Locator')]")
 	private WebElement PharmacyLocatorLink;
 
+	@FindBy(xpath = "//h1[contains(text(), 'Locate a Pharmacy')]")
+	private WebElement PharmacyLocatorPageHeader;
+
 	@FindBy(linkText = "Back to previous page")
 	private WebElement backTopreviouspageLink;
 
@@ -83,6 +86,8 @@ public class UlayerHomePage extends UhcDriver {
 
 	@FindBy(xpath = "//h1[@class='h4 margin-none']")
 	private WebElement orderplanHeadertxt;
+	
+	
 
 	private PageData myAccountHome;
 
@@ -139,11 +144,10 @@ public class UlayerHomePage extends UhcDriver {
 		CommonUtility.checkPageIsReady(driver);
 		PharmacyLocatorLink.click();
 */		
-		driver.navigate().to("https://"+MRScenario.environment+"-medicare.uhc.com/content/medicare/member/pharmacy-locator/overview.html#/Pharmacy-Search-English");
-		Thread.sleep(3000);
+ 		driver.navigate().to("https://"+MRScenario.environment+"-medicare.uhc.com/content/medicare/member/pharmacy-locator/overview.html#/Pharmacy-Search-English");
+		Thread.sleep(8000);
 		CommonUtility.checkPageIsReady(driver);
-		if (driver.getTitle().equalsIgnoreCase("AARP Medicare Plans | Pharmacy Directory")
-				|| driver.getTitle().equalsIgnoreCase("Locate a Pharmacy")) {
+		if (validate(PharmacyLocatorPageHeader)) {
 			return new PharmacySearchPage(driver);
 		}
 		return null;
