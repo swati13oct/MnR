@@ -16,7 +16,7 @@ import cucumber.api.CucumberOptions;
 @RunWith(ExtendedCucumber.class)
 @ExtendedCucumberOptions(retryCount=2,screenShotSize="", screenShotLocation="/screenshots/",jsonReport = "target/cucumber-RunMRATDDFixedTests15.json",detailedReport = true, detailedAggregatedReport = true, overviewReport = true, toPDF = true, outputFolder = "target/RunMRATDDFixedTests15")
 @CucumberOptions(glue = { "atdd.framework", "acceptancetests.fixedtestcases" }, features = { "src/main/resources/feature/fixedtestcases" }, plugin = {
-		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDFixedTests15.json" }, tags = { "@globalfooter,@attendCommunity,@AcqSEO,@druglookup,@druglookupUms,@acq_drug_cost_estimator,@acq_drug_cost_estimator_blayer" })
+		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDFixedTests15.json" }, tags = { "@globalfooter,@attendCommunity,@AcqSEO,@druglookup,@druglookupUms,@acq_drug_cost_estimator,@acq_drug_cost_estimator_blayer,@ssllabs" })
 public class RunMRATDDFixedTests15 {
 
 }
