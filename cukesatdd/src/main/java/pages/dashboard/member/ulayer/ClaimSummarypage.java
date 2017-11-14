@@ -348,7 +348,7 @@ public class ClaimSummarypage extends UhcDriver{
 			
 			Select dropdown = new Select(driver.findElement(By.xpath("//div[@class='medical-claims']//h2[@ng-bind-html='planName']/parent::div//*[@id='document-date']")));
 			
-			dropdown.deselectByVisibleText(claimPeriod);
+			dropdown.selectByVisibleText(claimPeriod);
 			//CommonUtility.waitForPageLoad(driver, last24months, 60);
 			//last24months.click();
 			/*Select claimsFrom = new Select(viewClaimsFrom);
