@@ -1,5 +1,7 @@
 package pages.member.ulayer;
 
+import java.util.NoSuchElementException;
+
 import org.junit.Assert;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
@@ -7,11 +9,10 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-
 import acceptancetests.atdd.data.MRConstants;
 import atdd.framework.UhcDriver;
 
-public class UNPWAssistancePage extends UhcDriver {		
+public class UNPWAssistancePage extends UhcDriver {
 
 	@FindBy(xpath = ".//label[@for='select-username']")
 	private WebElement UsenameBtn;
@@ -63,7 +64,7 @@ public class UNPWAssistancePage extends UhcDriver {
 
 	@FindBy(linkText = "Back to Sign in Page")
 	private WebElement BackSignInPage;
-	
+
 	private static String PAGE_URL = MRConstants.TeamC_UNPWAssistancePage_URL;
 
 	public UNPWAssistancePage(WebDriver driver) {
@@ -71,7 +72,7 @@ public class UNPWAssistancePage extends UhcDriver {
 		PageFactory.initElements(driver, this);
 		openAndValidate();
 	}
-	
+
 	@Override
 	public void openAndValidate() {
 		start(PAGE_URL);
@@ -121,16 +122,32 @@ public class UNPWAssistancePage extends UhcDriver {
 		ZIP.sendKeys(ZP);
 
 		ContinueButton.click();
+
 		Thread.sleep(5000);
-		if (!(ErrorinPage.isDisplayed())) {
-			Assert.fail("member details need to be filled");
-			return null;
+
+		boolean flag;
+		try {
+			flag = ErrorinPage.isDisplayed();
+		} catch (Exception e) {
+			flag = false;
 		}
 
-		 if (!(BackSignInPage.isDisplayed())) {
-		 Assert.fail("Member details are incorrect!");
-		 return null;
-		 }
+		if (!(flag)) {
+
+			try {
+				flag = BackSignInPage.isDisplayed();
+			} catch (Exception e) {
+				flag = false;
+			}
+
+			if (flag) {
+				System.out.println("email will be triggered");
+			} else {
+				Assert.fail("something went wrong / Member details are incorrect!");
+				return null;
+			}
+		}
+
 		return new UNPWAssistancePage(driver);
 
 	}
