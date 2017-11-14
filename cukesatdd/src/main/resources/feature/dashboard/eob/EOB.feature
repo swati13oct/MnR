@@ -47,8 +47,7 @@ Examples:
 	| planType  | memberType        |dateRange			| eobType |
 	| MAPD      | q4_dec_uhc001     |12 Months		  | Medical |
 	 
- 
-	
+ 	
   @eobCoutn    
 Scenario Outline: To verify EOB result list
 Given registered AMP with for EOB flow
