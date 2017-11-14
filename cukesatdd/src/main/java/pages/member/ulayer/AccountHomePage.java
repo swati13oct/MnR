@@ -625,16 +625,15 @@ public class AccountHomePage extends UhcDriver {
 				e.printStackTrace();
 			}
 
-			CommonUtility.waitForPageLoad(driver, driver.findElement(By.xpath("//select[@id='document-date']")), 60);
+			//CommonUtility.waitForPageLoad(driver, driver.findElement(By.xpath("//select[@id='document-date']")), 60);
 			{
 				try {
-					/*if(MRScenario.USERNAME.contains("ship"))
+					
 					{
-						driver.findElement(By.xpath("//a[contains(.,'Medicare Supplimet insurence Plan')]")).isDisplayed();
-						driver.findElement(By.xpath("//a[contains(.,'Medicare Advantage Plan')]")).click();	
-					}else */
-					driver.findElement(By.xpath("//a[contains(.,'Medicare Advantage Plan')]")).isDisplayed();
-					driver.findElement(By.xpath("//a[contains(.,'Medicare Advantage Plan')]")).click();	
+						driver.findElement(By.xpath("//a[contains(.,'Medicare Advantage Plan')]")).isDisplayed();
+						driver.findElement(By.xpath("//a[contains(.,'Medicare Advantage Plan')]")).click();
+					}
+					
 					return new pages.dashboard.member.ulayer.ClaimSummarypage(driver);	
 
 				} catch (NoSuchElementException e) {
