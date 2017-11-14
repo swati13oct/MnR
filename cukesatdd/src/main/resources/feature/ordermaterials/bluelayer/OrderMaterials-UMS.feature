@@ -41,16 +41,16 @@ Feature: To test order plan materials flow in UHC site
       | PDP      | Group      | Welcome Guide |
       | MAPD     | Group      | Member Materials |
 
-  @PDPgroupComboValidateHeaderandTabs
-  Scenario Outline: Verify UHC Aarp Order Materials Page Header - All  Plan Types for Group Members
-    Given registered UHC member for order plan materials with following attributes
-      | Plan Type   | <planType>   |
-      | Member Type | <memberType> |
-    When the user views order materials in UHC site
-    Then user navigates to Order Materials page for all Plans
-      | Combo Plans | <comboPlans> |
-    And user Validates Page Header and Sub-Header text
+#  @PDPgroupComboValidateHeaderandTabs
+#  Scenario Outline: Verify UHC Aarp Order Materials Page Header - All  Plan Types for Group Members
+#    Given registered UHC member for order plan materials with following attributes
+#      | Plan Type   | <planType>   |
+#      | Member Type | <memberType> |
+#    When the user views order materials in UHC site
+#    Then user navigates to Order Materials page for all Plans
+#      | Combo Plans | <comboPlans> |
+#    And user Validates Page Header and Sub-Header text
 
-    Examples: 
-      | planType | memberType | comboPlans |
-      | PDPwithSSUP      | Group      | PDP,SSUP   |
+#    Examples: 
+#      | planType | memberType | comboPlans |
+#      | PDPwithSSUP      | Group      | PDP,SSUP   |
