@@ -122,7 +122,6 @@ public class UNPWAssistancePage extends UhcDriver {
 		ZIP.sendKeys(ZP);
 
 		ContinueButton.click();
-
 		Thread.sleep(5000);
 
 		boolean flag;
