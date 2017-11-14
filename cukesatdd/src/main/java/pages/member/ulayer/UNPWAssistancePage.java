@@ -127,10 +127,10 @@ public class UNPWAssistancePage extends UhcDriver {
 			return null;
 		}
 
-		// if (!(BackSignInPage.isDisplayed())) {
-		// Assert.fail("Member details are incorrect!");
-		// return null;
-		// }
+		 if (!(BackSignInPage.isDisplayed())) {
+		 Assert.fail("Member details are incorrect!");
+		 return null;
+		 }
 		return new UNPWAssistancePage(driver);
 
 	}
