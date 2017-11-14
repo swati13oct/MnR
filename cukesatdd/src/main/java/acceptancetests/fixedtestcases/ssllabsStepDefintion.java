@@ -47,7 +47,7 @@ public class ssllabsStepDefintion {
 		WebDriver wd = (WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
 		wd.findElement(By.xpath("//div[@class='submitBox']/center/form/table/tbody/tr[1]/td[3]/input")).click();	
 		try {
-			Thread.sleep(30000);
+			Thread.sleep(45000);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -83,7 +83,7 @@ public class ssllabsStepDefintion {
 		WebDriver wd = (WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
 		wd.findElement(By.xpath("//div[@class='submitBox']/center/form/table/tbody/tr[1]/td[3]/input")).click();
 		try {
-			Thread.sleep(30000);
+			Thread.sleep(45000);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
