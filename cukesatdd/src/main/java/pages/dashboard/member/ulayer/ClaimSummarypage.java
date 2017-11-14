@@ -340,16 +340,15 @@ public class ClaimSummarypage extends UhcDriver{
 			catch (InterruptedException e) {
 				
 				
-				// TODO Auto-generated catch block e.printStackTrace();
+				// TODO Auto-generated catch block 
+				e.printStackTrace();
 				}
 			
-			waitforElement(driver.findElement(By.id("document-date")));
+			waitforElement(driver.findElement(By.xpath("//div[@class='medical-claims']//h2[@ng-bind-html='planName']/parent::div//*[@id='document-date']")));
 			
-			Select dropdown = new Select(driver.findElement(By.id("document-date")));
+			Select dropdown = new Select(driver.findElement(By.xpath("//div[@class='medical-claims']//h2[@ng-bind-html='planName']/parent::div//*[@id='document-date']")));
 			
-			dropdown.selectByVisibleText("Last 24 months");
-			
-			
+			dropdown.deselectByVisibleText(claimPeriod);
 			//CommonUtility.waitForPageLoad(driver, last24months, 60);
 			//last24months.click();
 			/*Select claimsFrom = new Select(viewClaimsFrom);
