@@ -45,7 +45,7 @@ And the user slects the desired date range
 Then the user validates EOB statments displayed 	
 Examples:
 	| planType  | memberType        |dateRange			| eobType |
-	| MAPD      | q4_dec_grp074     |12 Months		  | Medical |
+	| MAPD      | q4_dec_uhc001     |12 Months		  | Medical |
 	 
  
 	
