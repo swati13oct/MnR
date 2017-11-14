@@ -84,7 +84,7 @@ Given user is on Identity Assistance page, moves to PI page and validates error 
 
     Examples: 
       | memberID  | DOBmm | DOBdd | DOByr | lstname | zip   |
-      | 861622172 |     7 |    21 |  1940 | EBAEA   | 27713 |
+      | 905142635 |     7 |    31 |  1950 | BFCACDF   | 17401 |
       | test |     7 |    21 |  1940 | EBAEA   | 27713 |
       | 861622172 |     7 |    21 |  1940 | 12345   | 27713 |
       | 861622172 |     7 |    21 |  1940 | EBAEA   | abcde |
