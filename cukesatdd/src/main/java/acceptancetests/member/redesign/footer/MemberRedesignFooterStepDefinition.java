@@ -91,7 +91,7 @@ public class MemberRedesignFooterStepDefinition {
 		String category = (String) getLoginScenario().getBean(LoginCommonConstants.CATOGERY);
 		WebDriver wd = (WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
 		LoginPage loginPage = new LoginPage(wd);
-		loginPage.loginToTeamhTestHarness();
+		loginPage.loginToStageTestHarness();;
 		getLoginScenario().saveBean(PageConstants.LOGIN_PAGE, loginPage);
 		AccountHomePage accountHomePage = (AccountHomePage) loginPage.thloginWith(userName, pwd,category);
 		getLoginScenario().saveBean(PageConstants.MEM_REDESIGN_ACCOUNT_HOME_PAGE, accountHomePage);
@@ -113,6 +113,7 @@ public class MemberRedesignFooterStepDefinition {
 	public void I_am_on_the_member_page_then_I_should_be_able_to_see_the_footer_sections() {
 	    // Express the Regexp above with the code you wish you had
 		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstants.MEM_REDESIGN_ACCOUNT_HOME_PAGE);
+		accountHomePage.checkModelPopup();
 		accountHomePage.validateClaimsL2Tabs();
 		accountHomePage.checkModelPopup();
 		accountHomePage.validateFooterSection();

@@ -21,6 +21,7 @@ import org.openqa.selenium.support.ui.Select;
 import acceptancetests.atdd.data.CommonConstants;
 import acceptancetests.atdd.data.PageData;
 import acceptancetests.atdd.util.CommonUtility;
+import atdd.framework.MRScenario;
 import atdd.framework.UhcDriver;
 
 public class DrugCostEstimatorPage extends UhcDriver {
@@ -299,8 +300,8 @@ public class DrugCostEstimatorPage extends UhcDriver {
 	public void changeUrlToNewDCEPage() throws InterruptedException {
 
 		String Current_url = driver.getCurrentUrl();
-		String NewDCEUrl;
-		
+		String NewDCEUrl = "https://member.team-b-uhcmedicaresolutions.uhc.com/content/medicare/member/drug-lookup/overview.html";
+		String evironment = MRScenario.environment;
 		/*WebElement dcelink = driver.findElement(By.linkText("Estimate Drug Costs"));
 		System.out.println("dce link");
 		dcelink.click();*/
@@ -317,9 +318,11 @@ public class DrugCostEstimatorPage extends UhcDriver {
 		} else if (driver.getCurrentUrl().contains("uhcmedicaresolutions")){
 			//NewDCEUrl = "https://member.team-b-uhcmedicaresolutions.uhc.com/content/dashboard/home/drug-cost-estimator.html";
 			NewDCEUrl = "https://member.team-b-uhcmedicaresolutions.uhc.com/content/medicare/member/drug-lookup/overview.html";
-		}else{
+		}else if(evironment.equals("team-h")){
 			NewDCEUrl = "https://team-h-werally.uhc.com/content/medicare/member/drug-lookup/overview.html#/drug-cost-estimator";
 			//           https://team-h-werally.uhc.com/content/medicare/member/drug-lookup/overview.html
+		}else if(evironment.equals("stage")){
+			NewDCEUrl = "https://stage-medicare.uhc.com/content/medicare/member/drug-lookup/overview.html#/drug-cost-estimator";
 		}
 
 		driver.get(NewDCEUrl);
@@ -339,7 +342,12 @@ public class DrugCostEstimatorPage extends UhcDriver {
 		// // TODO Auto-generated catch block
 		// e.printStackTrace();
 		// }
-
+		WebElement loadingImage = driver.findElement(By.className("loading-dialog"));
+		System.out.println("loading image isdisplayed"+loadingImage.isDisplayed());
+		while(loadingImage.isDisplayed()){
+			System.out.println("DCE is loading");
+			Thread.sleep(5000);
+		}
 		Thread.sleep(15000);
 	}
 

@@ -24,6 +24,8 @@ public class MRConstants {
 	//public static final String AARP_URL = "https://www.awe-"+MRScenario.environment+"-aarpmedicareplans.uhc.com/";
 
 	public static final String TEAMH_URL_TESTHARNES ="https://"+MRScenario.environment+"-werally.uhc.com/medicare/login/overview.html?testharness=true";
+	
+	public static final String STAGE_URL_TESTHARNES ="https://"+MRScenario.environment+"-medicare.uhc.com/?testharness=true";
 
 	public static final String TEAM_MEDICARE_TESTHARNESS="https://"+MRScenario.environment+"-medicare.uhc.com/login/overview.html?testharness=true";
 

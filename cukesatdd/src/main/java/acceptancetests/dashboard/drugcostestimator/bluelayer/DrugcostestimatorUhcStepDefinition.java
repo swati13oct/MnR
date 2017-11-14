@@ -25,8 +25,9 @@ import pages.dashboard.member.drugcostestimator.blayer.AddDrugDetails;
 import pages.dashboard.member.drugcostestimator.blayer.AddNewDrugModal;
 import pages.dashboard.member.drugcostestimator.blayer.DrugCostEstimatorPage;
 import pages.dashboard.member.drugcostestimator.blayer.SavingsOppurtunity;
-import pages.member.bluelayer.AccountHomePage;
-import pages.member.bluelayer.LoginPage;
+//import pages.member.bluelayer.AccountHomePage;
+import pages.memberredesign.bluelayer.AccountHomePage;
+import pages.memberredesign.bluelayer.LoginPage;
 import pages.mobile.member.blayer.BenefitsSummaryPage;
 
 public class DrugcostestimatorUhcStepDefinition {
@@ -153,7 +154,7 @@ public class DrugcostestimatorUhcStepDefinition {
 		String category = (String) getLoginScenario().getBean(LoginCommonConstants.CATOGERY);
 		WebDriver wd = (WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
 		LoginPage loginPage = new LoginPage(wd);
-		loginPage.loginToTeamhTestHarness();
+		loginPage.loginToStageTestHarness();
 		getLoginScenario().saveBean(PageConstants.LOGIN_PAGE, loginPage);
 		AccountHomePage accountHomePage = (AccountHomePage) loginPage.thloginWith(userName, pwd,category);
 		getLoginScenario().saveBean(PageConstants.ACCOUNT_HOME_PAGE, accountHomePage);
