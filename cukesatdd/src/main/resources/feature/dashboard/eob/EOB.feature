@@ -48,7 +48,7 @@ Examples:
 	| MAPD      | q4_dec_uhc001     |12 Months		  | Medical |
 	 
  	
-  @eobCoutn    
+  @eobCoutn    @EOBSep
 Scenario Outline: To verify EOB result list
 Given registered AMP with for EOB flow
 	| Plan Type      |<planType>  |
@@ -104,7 +104,7 @@ Examples:
 
 |	MAPD				|	q4_dec_grp074					 |
 
-@noComboTabNew
+@noComboTabNew @EOBSep
 Scenario Outline: To verify different plan types under non combo tabs
 Given registered AMP with for EOB flow
        | Member Type    |<memberType>|
