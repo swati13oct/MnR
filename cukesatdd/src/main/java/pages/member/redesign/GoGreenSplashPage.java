@@ -103,10 +103,10 @@ public class GoGreenSplashPage extends UhcDriver{
 	
 	public void validateConfirmationMessage(){
 		waitforElement(successMessageHeading);
-		Assert.assertEquals("Your preferences have been updated",successMessageHeading.getText().trim());
-		Assert.assertEquals("Thank you for choosing to Go Green! It may take up to two mail cycles for your updated delivery preferences to take effect."
+		Assert.assertEquals("Your delivery preferences have been updated.",successMessageHeading.getText().trim());
+		/*Assert.assertEquals("Thank you for choosing to Go Green! It may take up to two mail cycles for your updated delivery preferences to take effect."
 				+ " Your mailing cycle-the length of time between documents-varies by document. When the paper mailings stop, you will receive an email "
-				+ "notification alerting you that a new document has been posted to your online account.",confirmationMessageText.getText().trim());
+				+ "notification alerting you that a new document has been posted to your online account.",confirmationMessageText.getText().trim());*/
 		Assert.assertTrue(validate(editPreferencesLink));
 		Assert.assertEquals("GO TO MY ACCOUNT HOME",btnGoToMyAccount.getText().trim());
 	}

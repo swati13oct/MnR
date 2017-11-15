@@ -28,6 +28,7 @@ Feature: To test go green splash page
   #|   008532606 |  | 04/10/1951 |
   #|   018358177 |  | 20/11/1960 |
   #| 349898423-11 |  | 01/08/1945 |
+  
   Scenario Outline: Verify go green splash page for COMBO member
     Given I am a Federal member on the member redesign registration page
       | MemberId        | <memberId>        |
@@ -43,8 +44,8 @@ Feature: To test go green splash page
     Then the user validates confirmation message on go green confirmation page
 
     Examples: 
-      | memberId    | dob        | username             | password   | confirmpassword | email                   | confirmemail            |
-      | 972430828-1 | 18/03/1942 | go_green_Combo_VD_01 | Password@1 | Password@1      | uhcmnrportals@gmail.com | uhcmnrportals@gmail.com |
+      | memberId     | dob        | username             | password   | confirmpassword | email                   | confirmemail            |
+      | 349898423-11 | 01/08/1945 | go_green_Combo_VD_01 | Password@1 | Password@1      | uhcmnrportals@gmail.com | uhcmnrportals@gmail.com |
 
   #Scenario Outline: Verify plan name on Go Green splash page for Texas ERS member
   #Given I am a Federal member on the member redesign registration page
@@ -59,7 +60,6 @@ Feature: To test go green splash page
   #| 018873498-1 |  | 28/11/1951 | HealthSelectSM Medicare RX (PDP)                |
   #| 000343946-1 |  | 15/09/1941 | UnitedHealthcare Group Medicare Advantage (HMO) |
   #| 349898423-11 |  | 01/08/1945 | AARP EXTENDED BASIC MEDICARE SUPPLEMENT PLAN    |
-  
   Scenario Outline: Verify go green splash error message on page
     Given I am a Federal member on the member redesign registration page
       | MemberId        | <memberId>        |
