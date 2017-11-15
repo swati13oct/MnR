@@ -41,7 +41,7 @@ public class RegistrationConfirmationPage extends UhcDriver {
 		if(validate(btnGotoHomePage)){
 			try {
 				btnGotoHomePage.click();
-				Thread.sleep(10000);
+				Thread.sleep(20000);
 				return new GoGreenSplashPage(driver);
 			} catch (InterruptedException e) {
 				e.printStackTrace();
