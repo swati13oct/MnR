@@ -81,12 +81,11 @@ Examples:
 | PDP					| q4_dec_combo026				 |
 |	SHIP				| q4_dec_combo026				 |
 #Peehip
-| MA					| q4_dec_grp036					 |
-| PDP					| q4_dec_grp036          |
+| MA					| q4_dec_combo006					 |
+| HIP					| q4_dec_combo006          |
 
 #failing
-|	PDP					|	q4_dec_aarp002          |
-
+ 
 | PDP					| q4_dec_ship072          |
 |	SSUP				| q4_dec_ship072          | 
 
