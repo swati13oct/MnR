@@ -123,7 +123,7 @@ public class NewRegistrationPage extends UhcDriver {
 			driver.findElement(By.xpath("//span[@id='select2-date-yyyy-container']/following::span[1]")).click();
 			driver.findElement(By.xpath("//ul[@id='select2-date-yyyy-results']//li[(@class='select2-results__option') and text()='"+strYear+"']")).click();
 			btnNext.click();
-			Thread.sleep(10000);
+			Thread.sleep(15000);
 			driver.findElement(By.id("continue-btn")).click();
 			waitforElement(passwordField);
 			sendkeys(txtUsername, username);
@@ -132,7 +132,7 @@ public class NewRegistrationPage extends UhcDriver {
 			sendkeys(emailAddress, email);
 			sendkeys(confrmEmailAddress, confirmEmail);
 			driver.findElement(By.id("continue-btn")).click();
-			Thread.sleep(15000);
+			Thread.sleep(20000);
 			if(currentUrl().contains("memberRegistration-Confirm"))
 			{
 				return new RegistrationConfirmationPage(driver);
