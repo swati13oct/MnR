@@ -81,7 +81,7 @@ public class ContactusRedesignStepDefinition {
 		{
 			ContactUsPage contactusPage=(ContactUsPage)getLoginScenario().getBean(PageConstants.CONTACT_US_PAGE);
 			
-			contactusPage.validateSendUaQuestionWidget();
+			contactusPage.validateEmailWidgetfunctionality();
 			
 			if(contactusPage != null)				
 				getLoginScenario().saveBean(PageConstants.CONTACT_US_PAGE,

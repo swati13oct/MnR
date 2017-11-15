@@ -6,7 +6,6 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -19,11 +18,10 @@ import cucumber.annotation.en.Then;
 import cucumber.annotation.en.When;
 import cucumber.table.DataTable;
 import gherkin.formatter.model.DataTableRow;
-import pages.member.redesign.ContactUsPage;
+import pages.member.redesign.DeregisterPage;
 import pages.member.redesign.GoGreenSplashPage;
-import pages.member.redesign.NewLoginPage;
 import pages.member.redesign.NewRegistrationPage;
-import pages.member.redesign.TestHarnessPage;
+import pages.member.redesign.RegistrationConfirmationPage;
 
 public class GoGreenSplashRedesignStepDefinition {
 	/**
@@ -40,19 +38,25 @@ public class GoGreenSplashRedesignStepDefinition {
 		public void i_am_a_Federal_member_on_the_member_redesign_registration_page(DataTable givenAttributes) {
 
 			List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
-			Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
+			Map<String, String> registrationData = new LinkedHashMap<String, String>();
 			for (int i = 0; i < memberAttributesRow.size(); i++) {
-			    memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0), memberAttributesRow.get(i).getCells().get(1));
+				registrationData.put(memberAttributesRow.get(i).getCells().get(0), memberAttributesRow.get(i).getCells().get(1));
 			}
-			// get parameter username and password
-			String memberId = memberAttributesMap.get("MemberId");
-			String dob = memberAttributesMap.get("DOB");
+			
+			String username = registrationData.get("Username");
+			
 			WebDriver wd = getLoginScenario().getWebDriver();
 			getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
-
+			
+			// deregister the user for subsequent registration
+	    	DeregisterPage deregisterPage = new DeregisterPage(wd);
+	    	deregisterPage.deregisterUser(username);
+	    	
 			NewRegistrationPage registrationPage = new NewRegistrationPage(wd);
 			
-			GoGreenSplashPage goGreenSplashPage = (GoGreenSplashPage) registrationPage.registerWith(memberId, dob);
+			RegistrationConfirmationPage registerConfirmationPage = (RegistrationConfirmationPage) registrationPage.registerWith(registrationData);
+			
+			GoGreenSplashPage goGreenSplashPage = (GoGreenSplashPage) registerConfirmationPage.goToHomePage();
 
 			getLoginScenario().saveBean(PageConstants.GO_GREEN_SPLASH_PAGE,goGreenSplashPage);
 		}

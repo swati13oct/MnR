@@ -76,7 +76,6 @@ public class GoGreenSplashPage extends UhcDriver{
 
 	@Override
 	public void openAndValidate() {
-		start(MRConstants.GO_GREEN_SPLASH_URL);
 		waitforElement(paperlessPreferences);
 		validate(btnSavePreferences);
 		if(driver.findElements(By.xpath("//div[contains(@class,'preferences-wrapper')]/div[@class='ng-scope']"))!=null){
@@ -86,7 +85,7 @@ public class GoGreenSplashPage extends UhcDriver{
 		}
 		validate(planNameHeading);
 		Assert.assertEquals("Paperless Preferences", paperlessPreferencesHeading.getText().trim());
-		Assert.assertEquals("Go Green: Paperless Document Delivery", goGreenHeading.getText().trim());
+		//Assert.assertEquals("Go Green: Paperless Document Delivery", goGreenHeading.getText().trim());
 	}
 	
 	public void selectpaperlessprefereneces(){
