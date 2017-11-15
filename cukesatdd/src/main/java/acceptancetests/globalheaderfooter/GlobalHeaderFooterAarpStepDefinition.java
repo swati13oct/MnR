@@ -95,7 +95,7 @@ public class GlobalHeaderFooterAarpStepDefinition {
 	}
 	
 	@And("^user clicks on Aboutus link from footer of the AARP Medicare Plans home page$")
-	public void click_aboutus() {
+	public void click_aboutus() throws InterruptedException {
 		AcquisitionHomePage aquisitionhomepage  = (AcquisitionHomePage) getLoginScenario()
 				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
 		AboutUsAARPPage aboutUsAARPPage = aquisitionhomepage.aboutUsFooterClick();
