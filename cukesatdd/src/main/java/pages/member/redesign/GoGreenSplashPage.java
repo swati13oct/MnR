@@ -84,7 +84,7 @@ public class GoGreenSplashPage extends UhcDriver{
 			}
 		}
 		validate(planNameHeading);
-		Assert.assertEquals("Paperless Preferences", paperlessPreferencesHeading.getText().trim());
+		Assert.assertTrue(paperlessPreferencesHeading.getText().trim().contains("Paperless Preferences"));
 		//Assert.assertEquals("Go Green: Paperless Document Delivery", goGreenHeading.getText().trim());
 	}
 	
