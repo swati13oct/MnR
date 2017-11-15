@@ -129,10 +129,10 @@ Examples:
  |	MA				|	q4_dec_grp181					 |na |6 Months |
  |	MA				|	q4_dec_grp181					 |na |custom-search |
  # 2 EOBs displayed
- |	PDP				|	q4_dec_grp273					 |na |12 Months |
- |	PDP	  		|	q4_dec_grp273					 |na |18 Months|
- |	PDP	  		|	q4_dec_grp273					 |na |6 Months |
- |	PDP  			|	q4_dec_grp273					 |na |custom-search |
+ |	PDP				|	q4_dec_aarp327					 |na |12 Months |
+ |	PDP	  		|	q4_dec_aarp327					 |na |18 Months|
+ |	PDP	  		|	q4_dec_aarp327					 |na |6 Months |
+ |	PDP  			|	q4_dec_aarp327					 |na |custom-search |
  
  #=====================================================================================================
  
