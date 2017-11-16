@@ -87,9 +87,11 @@ public class ContactUsPage extends UhcDriver{
 	@FindBy(xpath = "//div[contains(@class,'parsys click-to-call')]/div/div[not (contains(@class,'ng-hide'))]//a[@id='call-btn']")
 	private WebElement sendArequest;
 	
-	@FindBy(xpath = "//div[contains(@class,'click-to-call')]/div/div[3]//form//button[@id='call-submit']")
-	private WebElement requestCall;;
+	@FindBy(xpath = "//div[contains(@class,'click-to-call')]/div[not (contains(@class,'ng-hide'))][1]//a[@id='call-btn']")
+	private WebElement requestACall;;
 	
+	@FindBy(xpath = "//div[contains(@class,'click-to-call')]/div[not (contains(@class,'ng-hide'))][1]//button[@id='call-submit']")
+	private WebElement requestCall;
 	
 	@FindBy(xpath = "/*[@id='call-question-about'] ")
 	private WebElement contactoption;
@@ -97,10 +99,10 @@ public class ContactUsPage extends UhcDriver{
 	@FindBy(xpath = "//*[@id='call-question-about'] ")
 	private WebElement other;
 	
-	@FindBy(xpath = "//div[contains(@class,'click-to-call')]/div/div[3]//form//a[@id='call-cancel']")
+	@FindBy(xpath = "//div[contains(@class,'click-to-call')]/div[not (contains(@class,'ng-hide'))][1]//button/following-sibling::a")
 	private WebElement callCancel;
 	
-	@FindBy(xpath = "//div[contains(@class,'parsys click-to-call')]/div/div[not (contains(@class,'ng-hide'))]//div[@class='message-block--full-width success margin-none']")
+	@FindBy(xpath = "//div[contains(@class,'click-to-call')]/div[not (contains(@class,'ng-hide'))][1]//div[@class='message-block--full-width success margin-none']")
 	private WebElement reqConfirmation;
 	
 	@FindBy(xpath="//header//h1")
@@ -1006,22 +1008,15 @@ public class ContactUsPage extends UhcDriver{
 	
 	public void validates_clickToCall_widget()
 	{
-		if (haveUsCallYou.isDisplayed())
-		{
-			System.out.println("haveUsCallYou widget is displayed");
-		}
-		else
-		{
-			System.out.println("haveUsCallYou widget is not  displayed");
-		}
+		Assert.assertTrue("Request a call widget is displayed", requestACall.isDisplayed());
 	}
 	
 	public void sendAreqclick()
 	{
-		if (sendArequest.isDisplayed())
+		if (requestACall.isDisplayed())
 		{
-			System.out.println("send a req  is displayed");
-			sendArequest.click();
+			System.out.println("Request a Call is displayed");
+			requestACall.click();
 			try {
 				Thread.sleep(8000);
 			} catch (InterruptedException e) {
@@ -1060,10 +1055,10 @@ public class ContactUsPage extends UhcDriver{
 	
 	public void reqCallclickConformation()
 	{
-		if (sendArequest.isDisplayed())
+		if (requestACall.isDisplayed())
 		{
 			System.out.println("send a req  is displayed");
-			sendArequest.click();
+			requestACall.click();
 			try {
 				Thread.sleep(5000);
 			} catch (InterruptedException e) {
@@ -1078,7 +1073,7 @@ public class ContactUsPage extends UhcDriver{
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			driver.findElement(By.xpath("//div[contains(@class,'click-to-call')]/div/div[3]//form//input[@id='call-number']")).sendKeys("9023456121");
+			driver.findElement(By.xpath("//div[contains(@class,'click-to-call')]/div[not (contains(@class,'ng-hide'))][1]//input[@id='call-number']")).sendKeys("9023456121");
 			requestCall.click();
 			try {
 				Thread.sleep(5000);
