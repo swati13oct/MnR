@@ -24,8 +24,8 @@ import acceptancetests.login.data.LoginCommonConstants;
 import atdd.framework.MRScenario;
 import atdd.framework.UhcDriver;
 
-/**
- * @author pperugu
+/**@author bnaveen4
+ * 
  *
  */
 public class GoGreenSplashPage extends UhcDriver{

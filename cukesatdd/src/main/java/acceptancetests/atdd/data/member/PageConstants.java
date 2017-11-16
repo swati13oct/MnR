@@ -15,6 +15,8 @@ public class PageConstants {
 	
 	public static final String GO_GREEN_SPLASH_PAGE = "gogreensplashpage";
 	
+	public static final String PREFERENCES_PAGE = "preferencespage";
+	
 	public static final String MEMBER_AUTHS_SEARCH_PAGE = "memberSearchPage";
 	
 	public static final String MEMBER_AUTH_INFORMATION_PAGE = "memberInformationPage";

@@ -132,7 +132,7 @@ public class NewRegistrationPage extends UhcDriver {
 			sendkeys(emailAddress, email);
 			sendkeys(confrmEmailAddress, confirmEmail);
 			driver.findElement(By.id("continue-btn")).click();
-			Thread.sleep(20000);
+			Thread.sleep(30000);
 			if(currentUrl().contains("memberRegistration-Confirm"))
 			{
 				return new RegistrationConfirmationPage(driver);

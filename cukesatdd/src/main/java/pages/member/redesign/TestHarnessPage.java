@@ -27,6 +27,10 @@ public class TestHarnessPage extends UhcDriver {
 	@FindBy(xpath=".//*[@id='IPEinvL']/map/area[2]")
     private WebElement iPerceptionPopUp;
 	
+	@FindBy(xpath="//a[text()='Go to preferences page']")
+	private WebElement linkPreferences;
+	
+	
 	public TestHarnessPage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
@@ -46,9 +50,28 @@ public class TestHarnessPage extends UhcDriver {
 		}
 		return null;
 	}
+	
+	public PreferencesPage navigateToPreferencesPage() {
+		if (validate(iPerceptionPopUp)) {
+            iPerceptionPopUp.click();
+            System.out.println("iPerception Pop Up displayed");
+		}
+		linkPreferences.click();
+		try {
+			Thread.sleep(5000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		if(driver.getTitle().equalsIgnoreCase("Preferences"))
+		{
+			return new PreferencesPage(driver);
+		}
+		return null;
+	}
 
 	@Override
 	public void openAndValidate() {
 		validate(linkContactUs);
+		validate(linkPreferences);
 	}
 }
