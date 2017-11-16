@@ -81,6 +81,7 @@ public class PreferencesPage extends UhcDriver{
 	}
 	
 	public void selectpaperlessprefereneces(){
+		chkBox = driver.findElement(By.xpath("//div[contains(@class,'parsys overview')]/div[not (contains(@class,'ng-hide'))][1]//input[@id='goPaperless0']"));
 		chkBox.click();
 	}
 	
