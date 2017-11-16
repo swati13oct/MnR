@@ -903,6 +903,7 @@ public class DrugCostEstimatorPage extends UhcDriver {
 	}
 
 	public void navigateToStep3() throws InterruptedException {
+		Thread.sleep(6000);
 		waitforElement(step3);
 		step3.click();
 		Thread.sleep(10000);
