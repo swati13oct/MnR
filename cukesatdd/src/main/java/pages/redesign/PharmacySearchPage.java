@@ -128,7 +128,7 @@ public class PharmacySearchPage extends UhcDriver{
 
 	public PharmacyResultPage searchesPharmacy() {
 		
-		driver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
+		driver.manage().timeouts().implicitlyWait(120, TimeUnit.SECONDS);
 		CommonUtility.checkPageIsReady(driver);
 
 		int PharmacyCount = PharmacyResultList.size();
@@ -201,27 +201,29 @@ public class PharmacySearchPage extends UhcDriver{
 	
 	public PharmacySearchPage enterDistanceZipDetails(String distance, String zipcode) throws InterruptedException {
 
-		driver.manage().timeouts().implicitlyWait(70, TimeUnit.SECONDS);
+		driver.manage().timeouts().implicitlyWait(120, TimeUnit.SECONDS);
+		Thread.sleep(50000);
 		CommonUtility.checkPageIsReady(driver);
 
 		Select select = new Select(distanceDropDownField);	
 		String DistanceSelection = distance+" miles";
 		select.selectByVisibleText(DistanceSelection);
-		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+/*		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 		CommonUtility.checkPageIsReady(driver);
 		zipcodeField.clear();
-/*		driver.manage().timeouts().implicitlyWait(100, TimeUnit.SECONDS);
+*/		Thread.sleep(50000);
+		driver.manage().timeouts().implicitlyWait(100, TimeUnit.SECONDS);
 		CommonUtility.checkPageIsReady(driver);
-*/		
-		driver.manage().timeouts().implicitlyWait(70, TimeUnit.SECONDS);
+		
+//		driver.manage().timeouts().implicitlyWait(70, TimeUnit.SECONDS);
 		sendkeys(zipcodeField, zipcode);
 		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 		CommonUtility.checkPageIsReady(driver);
 		searchbtn.click();
 		driver.manage().timeouts().implicitlyWait(70, TimeUnit.SECONDS);
 		System.out.println("*****Zipcode entered******"+zipcode);
-
-		if(planYearDropDown.isEnabled()){
+/*
+		if(validate(planYearDropDown)){
 			Select PlanYear = new Select(planYearDropDown);
 			PlanYear.selectByVisibleText("2018");
 			driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
@@ -230,13 +232,13 @@ public class PharmacySearchPage extends UhcDriver{
 			System.out.println("Plan Year Selected is : "+planYearDropDown.getText());
 			driver.manage().timeouts().implicitlyWait(70, TimeUnit.SECONDS);
 		}
-		if(PlanNameDropDown.isEnabled()){
+		if(validate(PlanNameDropDown)){
 			CommonUtility.checkPageIsReady(driver);
 			Select PlanSelect = new Select(PlanNameDropDown);
-			PlanSelect.selectByIndex(0);
-			System.out.println("Plan Selected is : "+PlanNameDropDown.getText());
+			PlanSelect.selectByIndex(1);
+			System.out.println("Plan Name Dropdown is enabled. Plan Selected is : "+PlanNameDropDown.getText());
 		}
-		if(distanceDropDownField.getText().contains(distance) || zipcodeField.getText().contains(zipcode))
+*/		if(distanceDropDownField.getText().contains(distance) || zipcodeField.getText().contains(zipcode))
 		{
 			return new PharmacySearchPage(driver);
 		}
@@ -244,7 +246,8 @@ public class PharmacySearchPage extends UhcDriver{
 	}
 	
 	public PharmacyResultPage ValidateShowOnMapLinks() {
-		driver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
+		driver.manage().timeouts().implicitlyWait(160, TimeUnit.SECONDS);
+		CommonUtility.checkPageIsReady(driver);
 		int showonmapCount = showonmap.size();
 		if(showonmapCount>0){
 			System.out.println("Show on Map Links are Displayed");
