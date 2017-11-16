@@ -329,8 +329,8 @@ Feature: To test Send us a question Widget and Click to call functionality in co
     Then user validates sendUS A question Widget in redesign contact us page
 
     Examples: 
-      | userName        |  | password   | memberType |
-      | q4_dec_combo024 |  | Password@1 | Federal    |
+      | userName      |  | password   | memberType |
+      | q4_dec_grp140 |  | Password@1 | Federal    |
   #Scenario Outline: Verify sendUs A Question Widget page for PDP display section in contact us redesign page
     #Given registered UMS member with following attributes
       #| UserName    | <userName>   |
