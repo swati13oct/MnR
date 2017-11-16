@@ -47,7 +47,7 @@ public class GoGreenSplashRedesignStepDefinition {
 			    memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0), memberAttributesRow.get(i).getCells().get(1));
 			}
 			// get parameter username and password
-			String userName = memberAttributesMap.get("UserName");
+			String userName = memberAttributesMap.get("Username");
 			String passWord = memberAttributesMap.get("Password");
 			System.out.println("User is..." + userName);
 			System.out.println("Password is..." + passWord);
