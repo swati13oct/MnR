@@ -28,32 +28,22 @@ import atdd.framework.UhcDriver;
  * @author pjaising
  *
  */
-public class NewLoginPage extends UhcDriver {
+public class MemberAuthLoginPage extends UhcDriver {
 
 	// Page URL
 	private static String PAGE_URL = MRConstants.AARPM_URL;
 	private static String REDESIGN_PAGE_URL = MRConstants.REDESIGN_AARPM_URL;
 
-	@FindBy(id = "sign-in-btn")
-	private WebElement btnSignIn;
+	@FindBy(id = "find_searchbtn")
+	private WebElement btnLogin;
 
-	@FindBy(id = "username")
+	@FindBy(id = "loginusername")
 	private WebElement userNameField;
 
-	@FindBy(id = "password")
+	@FindBy(id = "loginpassword")
 	private WebElement passwordField;
 
-	@FindBy(linkText = "Forgot your username or password?")
-	private WebElement forgotUsernamePasswordLink;
-
-	@FindBy(id = "usercheckbox")
-	private WebElement userNameCheckBox;
-	
-	@FindBy(xpath=".//*[@id='IPEinvL']/map/area[2]")
-    private WebElement iPerceptionPopUp;
-
-
-	public NewLoginPage(WebDriver driver) {
+	public MemberAuthLoginPage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
 		openAndValidate();
@@ -64,43 +54,20 @@ public class NewLoginPage extends UhcDriver {
 		try{
 			sendkeys(userNameField,username);
 			sendkeys(passwordField,password);
-			btnSignIn.click();
-			Thread.sleep(40000);
-			if (MRScenario.environment.equals("team-e")/* || MRScenario.environment.equals("team-h")*/){
-					Alert alert2 = driver.switchTo().alert();
-					alert2.accept();
-			}
-			Thread.sleep(5000);
-            if (validate(iPerceptionPopUp)) {
-                iPerceptionPopUp.click();
-                System.out.println("iPerception Pop Up displayed");
-         }
-		Thread.sleep(20000);
+			btnLogin.click();
+			Thread.sleep(10000);
 		}catch (InterruptedException e) {
 				e.printStackTrace();
 		}
-		if(currentUrl().contains("member/testharness.html"))
+		if(currentUrl().contains("memberauth.html"))
 		{
-			return new TestHarnessPage(driver);
+			return new MemberSearchPage(driver);
 		}
 		return null;
 	}
 	@Override
 	public void openAndValidate() {
-		start(MRConstants.NEW_REDESIGN_URL);
-		validate(btnSignIn);
-	}
-
-	public static boolean isAlertPresent(WebDriver wd) {
-		try {
-			Alert alert = wd.switchTo().alert();
-			alert.dismiss();
-			return true;
-		} catch (NoAlertPresentException e) {
-			return false;
-		} catch (UnsupportedCommandException e) {
-			System.out.println("WebDriver doesn't support switchTo() method");
-			return false;
-		}
+		start(MRConstants.MEMBER_AUTH_REDESIGN_LOGIN_URL);
+		validate(btnLogin);
 	}
 }

@@ -3,6 +3,7 @@
  */
 package acceptancetests.atdd.data;
 
+
 import atdd.framework.MRScenario;
 
 /**
@@ -17,8 +18,14 @@ public class MRConstants {
 	//public static final String UHCM_URL = "https://member."+MRScenario.environment+"-uhcmedicaresolutions.uhc.com/guest/home.html";
 
 	public static final String AARPM_URL = "https://member."+MRScenario.environment+"-aarpmedicareplans.uhc.com/guest/login.html";
-	public static final String NEW_REDESIGN_URL = "https://"+MRScenario.environment+"-medicare.uhc.com/medicare/login/overview.html?testharness=true";
+	public static final String NEW_REDESIGN_URL = "https://"+MRScenario.environment+"-medicare.uhc.com/login/overview.html?testharness=true";
+	public static final String MEMBER_AUTH_REDESIGN_LOGIN_URL = "https://"+MRScenario.environment+"-medicare.uhc.com/content/dashboard/guest/memberauth.html#/memberAuthLogin";
 	public static final String NEW_REDESIGN_REGISTRATION_URL = "https://"+MRScenario.environment+"-medicare.uhc.com/content/medicare/member-registration.html#/memberRegistration";
+	
+	public static final String NEW_REDESIGN_STAGE_REGISTRATION_URL = "https://stage-medicare.uhc.com/medicare/member-registration.html#/get-started";
+	
+	/** The Stage de-registration url. */
+    public static String DEREGISTER_STAGE_URL = "https://apsrs0261.uhc.com:9443/PartDPortalWeb/deregister.jsp";
 	
 	public static final String GO_GREEN_SPLASH_URL = "https://"+MRScenario.environment+"-medicare.uhc.com/content/medicare/Registration-GoGreenSplashPage.html";
 
