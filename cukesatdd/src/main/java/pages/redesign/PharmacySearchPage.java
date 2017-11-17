@@ -78,7 +78,7 @@ public class PharmacySearchPage extends UhcDriver{
 	@FindBy(xpath = "(//*[@id='lang-select']//option)[1]")
 	private WebElement espanolLink;
 	
-	@FindBy(xpath = "(//*[contains(text(),'Show on Map')])")
+	@FindBy(xpath = "(//*[contains(text(),'SHOW ON MAP')])")
 	private List<WebElement> showonmap;
 	
 	@FindBy(xpath = "//a[contains(text(),'VIEW RESULT AS PDF')]")
@@ -249,8 +249,13 @@ public class PharmacySearchPage extends UhcDriver{
 		driver.manage().timeouts().implicitlyWait(160, TimeUnit.SECONDS);
 		CommonUtility.checkPageIsReady(driver);
 		int showonmapCount = showonmap.size();
-		if(showonmapCount>0){
-			System.out.println("Show on Map Links are Displayed");
+		int PharmacyCount = PharmacyResultList.size();
+
+		System.out.println(" No of SHOW ON MAP Links displayed : "+showonmapCount);
+		System.out.println(" No of Pharmacy Results displayed : "+showonmapCount);
+
+		if(showonmapCount==PharmacyCount){
+			System.out.println("Show on Map Links are Displayed for all Displayed Pharmacy Results");
 
 			return new PharmacyResultPage(driver);
 		}
