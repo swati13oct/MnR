@@ -57,7 +57,7 @@ public class ClaimSummarypage extends UhcDriver{
 	@FindBy(xpath = "//div[2]/section/div/div/div/form/fieldset/div/div/div[2]/div/select/option[@value='6 months']")
 	private WebElement last6Months;
 	
-	@FindBy (xpath = "//option[@value='24 months']")
+	@FindBy (xpath = "//div[@class='medical-claims']//h2[@ng-bind-html='planName']/parent::div//*[@id='document-date']//option[contains(@value,'24 months')]")
 	private WebElement last24months;
 	
 	@FindBy(xpath="//div[normalize-space()='Prescription Drug']")
@@ -110,13 +110,13 @@ public class ClaimSummarypage extends UhcDriver{
 	@FindBy (xpath=".//*[@id='table-medical']/div[2]/div[2]/div/a")
 	private WebElement learnmorePdp;
 
-	@FindBy (xpath="//img[@alt='Blue Button']")
+	@FindBy (xpath=".//a[@class='downloadMyDataLink']")
 	private WebElement downloadmydatabutton;
 
 	@FindBy (xpath="//button[contains(.,'Proceed')]")
 	private WebElement proceedbutton;
 
-	@FindBy (xpath=".//*[@id='differentProviderClaims']/div/div")
+	@FindBy (xpath=".//*[@id='siteleaving-popup-overlay']")
 	private WebElement proceedToDownloadPopUp;
 
 	@FindBy(id="replace-current-rider")
@@ -346,11 +346,11 @@ public class ClaimSummarypage extends UhcDriver{
 			
 			waitforElement(driver.findElement(By.xpath("//div[@class='medical-claims']//h2[@ng-bind-html='planName']/parent::div//*[@id='document-date']")));
 			
-			Select dropdown = new Select(driver.findElement(By.xpath("//div[@class='medical-claims']//h2[@ng-bind-html='planName']/parent::div//*[@id='document-date']")));
+			//Select dropdown = new Select(driver.findElement(By.xpath("//div[@class='medical-claims']//h2[@ng-bind-html='planName']/parent::div//*[@id='document-date']//option[contains(@value,'24 months')]")));
 			
-			dropdown.selectByVisibleText(claimPeriod);
+			//dropdown.selectByIndex(4);
 			//CommonUtility.waitForPageLoad(driver, last24months, 60);
-			//last24months.click();
+			last24months.click();
 			/*Select claimsFrom = new Select(viewClaimsFrom);
 			claimsFrom.selectByValue("24 months");*/
 		}
@@ -383,7 +383,7 @@ public class ClaimSummarypage extends UhcDriver{
 			waitforElement(proceedToDownloadPopUp);
 			System.out.println("Proceed button is displayed ===>"+(proceedToDownloadPopUp.isDisplayed()));
 			proceedToDownloadPopUp.click();
-			if(proceedToDownloadPopUp.isDisplayed()){
+			/*if(proceedToDownloadPopUp.isDisplayed()){
 				proceedButtonDownloadPopUp.click();
 				System.out.println("Proceed button functionality is working as expected");
 			}
@@ -392,7 +392,7 @@ public class ClaimSummarypage extends UhcDriver{
 			if(driver.getTitle().contains("Claims")){
 				System.out.println("Cancel button functionality is working as expected");
 			}
-
+*/
 
 		}
 		else 

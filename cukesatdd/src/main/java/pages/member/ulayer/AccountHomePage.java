@@ -606,10 +606,12 @@ public class AccountHomePage extends UhcDriver {
 		}
 
 		else if (MRScenario.environment.equalsIgnoreCase("team-b")) {
-			String testharnessUrl = "https://member." +MRScenario.environment+"-aarpmedicareplans.uhc.com/home/testharness.html";
+			System.out.println("Go to claims link is present "+driver.findElement(By.xpath("//a[text()='Go to Claims page']")).isDisplayed());
+			driver.findElement(By.xpath("//a[text()='Go to Claims page']")).click();
+			/*String testharnessUrl = "https://member." +MRScenario.environment+"-aarpmedicareplans.uhc.com/home/testharness.html";
 			driver.get(testharnessUrl);
 			CommonUtility.waitForPageLoad(driver, driver.findElement(By.xpath("//a[text()='Go to Claims Link page']")), 60); 	
-			driver.findElement(By.xpath("//a[text()='Go to Claims Link page']")).click();
+			driver.findElement(By.xpath("//a[text()='Go to Claims Link page']")).click();*/
 		}
 		else 
 		{

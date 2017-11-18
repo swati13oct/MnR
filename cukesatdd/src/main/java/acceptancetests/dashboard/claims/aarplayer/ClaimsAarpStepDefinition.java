@@ -99,7 +99,7 @@ public class ClaimsAarpStepDefinition {
 
 		LoginPage loginPage = new LoginPage(wd);
 		//loginPage.loginTo();
-		if(MRScenario.environment.contentEquals("team-h"))
+		if(MRScenario.environment.contentEquals("team-b"))
 		{
 			loginPage.navigateToTeamMedicareTestHarness();
 			//loginPage.teamhloginWith(userName, pwd);
