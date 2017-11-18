@@ -310,7 +310,7 @@ public class LoginPage extends UhcDriver {
 		}
 				
 		try{
-			//CommonUtility.waitForPageLoad(driver, iPerceptionPopUp, 90);
+			CommonUtility.waitForPageLoad(driver, iPerceptionPopUp, 90);
             if (iPerceptionPopUp.isDisplayed()) {
                   iPerceptionPopUp.click();
             }
