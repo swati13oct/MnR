@@ -254,7 +254,7 @@ public class PharmacyLocatorMemberRedesignStepDefinition {
 	}
 
 	@Then("^the user Validates view search PDF link in Redesign Site$")
-	public void user_views_search_pdf_result_AARP() {
+	public void user_views_search_pdf_result_AARP() throws InterruptedException {
 		PharmacySearchPage pharmacySearchPage = (PharmacySearchPage) getLoginScenario()
 				.getBean(PageConstants.PHARMACY_SEARCH_PAGE);
 		PharmacyResultPage pharmacyResultPage = pharmacySearchPage
@@ -283,6 +283,32 @@ public class PharmacyLocatorMemberRedesignStepDefinition {
 		}
 		else{
 			Assert.fail("More Info Disclaimer is NOT Displayed");
+		}
+	}
+
+
+	@And("^the user validates more information content for Limited Access Disclaimer$")
+	public void user_validate_limited_access_disclaimer(DataTable zipAttributes) {
+		
+		List<DataTableRow> zipAttributesRow = zipAttributes.getGherkinRows();
+		Map<String, String> zipAttributesMap = new LinkedHashMap<String, String>();
+		for (int i = 0; i < zipAttributesRow.size(); i++) {
+
+			zipAttributesMap.put(zipAttributesRow.get(i).getCells().get(0),
+					zipAttributesRow.get(i).getCells().get(1));
+		}
+		String DisclaimerText = zipAttributesMap.get("Disclaimer Text");
+		PharmacySearchPage pharmacySearchPage = (PharmacySearchPage) getLoginScenario()
+				.getBean(PageConstants.PHARMACY_SEARCH_PAGE);
+		PharmacyResultPage pharmacyResultPage = pharmacySearchPage.validateLimitedAccessDisclaimer(DisclaimerText);
+		if (pharmacyResultPage != null) {
+			getLoginScenario().saveBean(PageConstants.PHARMACY_RESULT_PAGE,
+					pharmacyResultPage);
+			Assert.assertTrue(true);
+			System.out.println("Limited Access Disclaimer is Displayed");
+		}
+		else{
+			Assert.fail("Limited Access Disclaimer is NOT Displayed");
 		}
 	}
 

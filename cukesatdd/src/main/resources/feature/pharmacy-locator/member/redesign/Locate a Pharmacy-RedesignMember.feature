@@ -65,7 +65,7 @@ Then the user Validates show on map link in Redesign Site
     | PDP  		 | Individual	 |
 #    | MAPD	   | Individual  | 
 
-# VIEW as PDF LInk not working / Not Available
+
 #       @ValidateViewAsPDF
 #   Scenario Outline: To verify pharmacy locator View As PDF in Redesign site
 #Given registered member to verify locate a pharmacy in Redesign Site
@@ -74,9 +74,9 @@ Then the user Validates show on map link in Redesign Site
 #When the user navigates to pharmacy search page in Redesign site
 #Then the user Validates view search PDF link in Redesign Site
 
-#     Examples: 
-#    | planType | memberType  |
-#    | MAPD	   | Individual  | 
+ #    Examples: 
+ #   | planType | memberType  |
+ #   | MAPD	   | Individual  | 
   
         @ValidateMoreInfoMAPD
    Scenario Outline: To verify pharmacy locator More Info Disclaimers for MAPD in Redesign site
@@ -102,6 +102,24 @@ Then the user validate more information content based on plan type in Redesign S
     | planType | memberType | 
     | PDP	   | Individual  |  
 
+ @ValidateMoreInfoPlanSpecific
+    Scenario Outline: To verify pharmacy locator More Info Limited Access Disclaimers for Specific Plans
+Given registered member to verify locate a pharmacy in Redesign Site
+| Plan Type	| <planType> |
+  | Member Type  | <memberType> |
+When the user navigates to pharmacy search page in Redesign site
+Then the user validates more information content for Limited Access Disclaimer
+  | Disclaimer Text  | <DisclaimerText> |
+
+ Examples: 
+    | planType 	| memberType 		| DisclaimerText | 
+    | PDP	   		| SymphonixRx  | pharmacy network offers limited access to pharmacies with preferred cost sharing in rural Montana, Nebraska, North Dakota, South Dakota and Wyoming. The lower costs advertised in our plan materials for these pharmacies may not be available at the pharmacy you use. For up-to-date information about our network pharmacies, including pharmacies with preferred cost sharing, please call   |
+    | PDP	   		| WalgreensRx  |  pharmacy network offers limited access to pharmacies with preferred cost sharing in urban North Dakota and West Virginia, suburban California, Hawaii, Maine, Maryland, New York, North Dakota, Pennsylvania, West Virginia, and rural Alaska, Arkansas, Hawaii, Idaho, Iowa, Kansas, Kentucky, Maine, Minnesota, Mississippi, Missouri, Montana, Nebraska, New York, Oklahoma, Pennsylvania, South Dakota, Texas, Vermont, Virginia, West Virginia and Wyoming. There are an extremely limited number of preferred cost share pharmacies in urban Vermont and rural North Dakota. The lower costs advertised in our plan materials for these pharmacies may not be available at the pharmacy you use |
+    | PDP	   		| MedicareRxSaverPlus |  pharmacy network offers limited access to pharmacies with preferred cost sharing in rural Montana, Nebraska, North Dakota, South Dakota and Wyoming. The lower costs advertised in our plan materials for these pharmacies may not be available at the pharmacy you use. For up-to-date information about our network pharmacies, including pharmacies with preferred cost sharing |  
+    | PDP	   		| MedicareRxPreferred  | pharmacy network offers limited access to pharmacies with preferred cost sharing in rural Montana, Nebraska, North Dakota, South Dakota and Wyoming. The lower costs advertised in our plan materials for these pharmacies may not be available at the pharmacy you use. For up-to-date information about our network pharmacies, including pharmacies with preferred cost sharing  |
+    
+
+ 
  
 #         @ValidateChatWindowMAPD
 #   Scenario Outline: To verify pharmacy Chat Window for MAPD in Redesign site

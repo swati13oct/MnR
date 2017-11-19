@@ -55,18 +55,18 @@ Feature: To test order materials in Redesign site
       | SHIP     | Individual  | Member ID Card |
       
 
-#  @needhelpcomponent
-#  Scenario Outline: Verify need help component in Redesign site
-#    Given registered AMP member with following attributes
-#      | Plan Type | <planType> |
-#      | Member Type  | <memberType> |
-      
-#    When the user views order materials in Member Redesign Order Materials page
-#    Then the user verify need help component in Redesign site
+  @needhelpcomponent
+  Scenario Outline: Verify need help component in Redesign site
+    Given registered AMP member with following attributes
+      | Plan Type | <planType> |
+      | Member Type  | <memberType> |
+     
+    When the user views order materials in Member Redesign Order Materials page
+    Then the user verify need help component in Redesign site
 
-#    Examples: 
-#      | planType | memberType |
-#      | MA       | Individual |
+    Examples: 
+      | planType | memberType |
+      | MA       | Individual |
 
   @ValidateHeaderTabs
   Scenario Outline: Verify Aarp Order Materials Page Header - All Combo Plan Types

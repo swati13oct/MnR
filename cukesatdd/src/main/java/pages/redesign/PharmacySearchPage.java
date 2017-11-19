@@ -262,18 +262,32 @@ public class PharmacySearchPage extends UhcDriver{
 		return null;
 	}
 
-	public PharmacyResultPage ValidateSearchPdfResult() {
-		driver.manage().timeouts().implicitlyWait(80, TimeUnit.SECONDS);
+	public PharmacyResultPage ValidateSearchPdfResult() throws InterruptedException {
+		
+		driver.manage().timeouts().implicitlyWait(160, TimeUnit.SECONDS);
+		//Thread.sleep(160000);
+		CommonUtility.checkPageIsReady(driver);
 		
 		if (viewsearchpdf.isDisplayed())
 		{
 			viewsearchpdf.click();
+			driver.manage().timeouts().implicitlyWait(200, TimeUnit.SECONDS);
+			//Thread.sleep(200000);
+
+			CommonUtility.checkPageIsReady(driver);
+
+			if (driver.getTitle().equalsIgnoreCase(
+					"pharmacyDirectory.pdf")) {
+				return new PharmacyResultPage(driver);
+				
 			}
-		if (driver.getTitle().equalsIgnoreCase(
-				"pharmacyDirectory.pdf")) {
-			return new PharmacyResultPage(driver);
-			
-		}
+			else{
+				System.out.println("Pharmacy Results PDF Page  is not opening");
+				return null;
+			}
+			}
+		System.out.println("View Results as PDF link is NOT DISPLAYED");
+
 		return null;
 	}
 	
@@ -288,6 +302,17 @@ public class PharmacySearchPage extends UhcDriver{
 		return null;
 	}
 	
+	public PharmacyResultPage validateLimitedAccessDisclaimer(String DisclaimerText) {
+		driver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
+		CommonUtility.checkPageIsReady(driver);
+		moreInfoLink.click();
+		
+		if (moreInfoText.getText().contains(DisclaimerText)) {
+			return new PharmacyResultPage(driver);
+		}
+		return null;
+	}
+
 	public PharmacyResultPage validateChatWidget() {
 		boolean present;
 		try {
