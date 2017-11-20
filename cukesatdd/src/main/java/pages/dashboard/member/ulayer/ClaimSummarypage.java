@@ -245,7 +245,7 @@ public class ClaimSummarypage extends UhcDriver{
 			System.out.println("for MAPD NICE prescription drug EOB's are displayed ===>"+ (PrescriptionEobText.isDisplayed()));
 			return PrescriptionEobText.isDisplayed();
 		}
-		else if (domain.equals("NICE")&&plantype.equals("MA"))
+		else if ((domain.equals("NICE")&&plantype.equals("MA")) || (domain.equals("COSMOS")&&plantype.equals("MA")))
 		{
 			System.out.println("for MA medical Eob is diplayed ====>"+ (medicalEobText.isDisplayed()));
 			return medicalEobText.isDisplayed();
@@ -367,10 +367,12 @@ public class ClaimSummarypage extends UhcDriver{
 		}
 		if(claimsTableMedical.isDisplayed() || claimsTablePrescriptionDrug.isDisplayed() || claimsTableSHIP.isDisplayed()){
 			System.out.println("!!!!!!!!! Able to find the claims table !!!!!!!!!");
+			
 		}	
 		else
 		{
 			System.out.println("!!!!!!!!! NOT Able to find the claim table !!!!!!!!!");
+		Assert.fail();
 		}
 	}
 
