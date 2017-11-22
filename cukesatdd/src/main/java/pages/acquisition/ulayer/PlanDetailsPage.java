@@ -308,7 +308,7 @@ public class PlanDetailsPage extends UhcDriver {
 		JavascriptExecutor je = ((JavascriptExecutor) driver);
 		je.executeScript("arguments[0].scrollIntoView(true);",compareChkBox);
 		CommonUtility.waitForPageLoad(driver, drugBenefitsSection, 20);
-		compareChkBox.click();
+		je.executeScript("arguments[0].click();",compareChkBox);
 		try {
 			Thread.sleep(1000);
 		} catch (InterruptedException e) {

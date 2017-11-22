@@ -38,7 +38,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	private WebElement myPlansTab;
 
 	@FindBy(id = "dce")
-	private WebElement enterYourDrugListButton;
+	private WebElement getStartedButton;
 
 	@FindBy(id = "learnfindplanBtn")
 	private WebElement learnfindPlansButton;
@@ -292,7 +292,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		validate(navigationSectionOurPlansLink);
 		validate(navigationSectionMedicareEducationLink);
 		validate(navigationSectionEnterSearch);
-		validate(enterYourDrugListButton);
+		validate(getStartedButton);
 
 		validate(zipCodeField);
 		validate(viewPlansButton);
@@ -879,6 +879,19 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		}
 		
 		return flag;
+	}
+	
+	public boolean validateSomeElementsOnPage(){
+		if(validate(zipCodeField)&&validate(findPlansButton)&&validate(lookzip))
+			return true; //if all three
+		return false;
+		
+	}
+	
+	public boolean validateAllElementsOnPage(){
+		if(!validate(zipCodeField)&&!validate(findPlansButton)&&!validate(lookzip))
+			return false; //if all three elements return false for validation then this condition passes due to ! and returns false meaning all three elements were not found on page
+		return true;
 	}
 
 

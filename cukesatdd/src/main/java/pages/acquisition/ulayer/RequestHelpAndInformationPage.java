@@ -20,12 +20,15 @@ import atdd.framework.UhcDriver;
  */
 public class RequestHelpAndInformationPage extends UhcDriver {
 	
-    
+	
 	@FindBy(xpath =".//*[@id='subPageLeft']/div/div/div/div[2]/div/div[1]/p[2]/a")
 	private WebElement ma_requestAgentAppointmentLink;
          
 	@FindBy(xpath =".//*[@id='subPageLeft']/div/div/div/div[2]/div/div[1]/p[3]/a")
 	private WebElement findUnitedHealthcareLink;
+	
+	@FindBy(xpath =".//*[@id='medicareTitle']/h1")
+	private WebElement headerText;
 	
 	public RequestHelpAndInformationPage(WebDriver driver) {
 		super(driver);
@@ -64,9 +67,9 @@ public class RequestHelpAndInformationPage extends UhcDriver {
 	}
 	
 	public boolean validateHelpandInfoPage(){
-		if(validate(ma_requestAgentAppointmentLink)&&validate(findUnitedHealthcareLink))
-			return true;
-		return false;
+		if(!validate(ma_requestAgentAppointmentLink)&&!validate(findUnitedHealthcareLink)&&!headerText.getText().contains("Request More Information About Medicare Advantage Plans"))
+			return false;
+		return true;
 	}
 	
 	public boolean validateUhcLink(){
