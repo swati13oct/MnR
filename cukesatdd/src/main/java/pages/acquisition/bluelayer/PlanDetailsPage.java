@@ -8,10 +8,13 @@ import java.util.List;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import pages.acquisition.uhcretiree.Rallytool_Page;
 import pages.acquisition.bluelayer.VPPPlanSummaryPage;
@@ -339,11 +342,16 @@ public class PlanDetailsPage extends UhcDriver{
     }
 	
 	    public boolean validatePlanDetailsPage(){
+	    	WebDriverWait wait = new WebDriverWait(driver, 45000);
+	    	
+	    	backToPlansBtn = wait.until(ExpectedConditions.visibilityOfElementLocated(By.linkText("Back to all plans")));
+	    	isMyDoctorCoveredLink = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(".//*[@id='po7link']")));
+	    	medBenefitsSection = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(".//*[@id='medicalBenefits']")));
+	    	
 			boolean flag = false;
 			if(validate(backToPlansBtn)&&validate(isMyDoctorCoveredLink)&&
 					medBenefitsSection.getText().contains("Monthly Premium")){
-				flag =true;
-				
+				flag = true;
 			}
 			return flag;
 		}

@@ -21,6 +21,9 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.Wait;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import pages.acquisition.bluelayer.EnrollPlanInfoPage;
 import pages.acquisition.uhcretiree.Rallytool_Page;
@@ -448,15 +451,17 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	}
 
 	public VPPPlanSummaryPage viewPlanSummary(String planType) {
+		WebDriverWait wait = new WebDriverWait(driver, 45000);
+		
 		if (planType.equalsIgnoreCase("PDP")) {
-			viewPDPPlans.click();
+			wait.until(ExpectedConditions.elementToBeClickable(By.xpath(".//*[@id='site-wrapper']/div[4]/div/div/div/div/div/div/div[1]/div/div/div[1]/div[2]/div/div[2]/div[3]/div/span[3]"))).click();
 		} else if (planType.equalsIgnoreCase("MA")
 				|| planType.equalsIgnoreCase("MAPD")) {
-			viewPlans.click();
+			wait.until(ExpectedConditions.elementToBeClickable(By.xpath(".//*[@id='site-wrapper']/div[4]/div/div/div/div/div/div/div[1]/div/div/div[1]/div[2]/div/div[2]/div[1]/div/span[3]"))).click();
 		} else if (planType.equalsIgnoreCase("SNP")) {
-			showSnpPlans.click();
+			wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//div[@class='snpplans_planbutton']/div[2]/div[2]/div"))).click();
 		} else {
-			showMsPlans.click();
+			wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//div[@class='medsupplans_planbutton']/div[2]/div[1]/a"))).click();
 		}
 		return new VPPPlanSummaryPage(driver, planType);
 	}
@@ -1081,7 +1086,18 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	private WebElement changeLocationBtn;            
 
 	public boolean validateVPPPlanSummaryPage(){
+		WebDriverWait wait = new WebDriverWait(driver, 45000);
 		boolean flag = false;
+		viewPlans = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(".//*[@id='site-wrapper']/div[4]/div/div/div/div/div/div/div[1]/div/div/div[1]/div[2]/div/div[2]/div[1]/div/span[3]")));
+		viewPDPPlans = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(".//*[@id='site-wrapper']/div[4]/div/div/div/div/div/div/div[1]/div/div/div[1]/div[2]/div/div[2]/div[3]/div/span[3]")));
+		changeLocationBtn = wait.until(ExpectedConditions.visibilityOfElementLocated(By.linkText("Change location")));
+		
+//		try {
+//			Thread.sleep(45000);
+//		} catch (InterruptedException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
 		if(validate(viewPlans)&&validate(viewPDPPlans)&&validate(changeLocationBtn))
 			flag = true;
 		return flag;
@@ -1219,8 +1235,3 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	}
 
 }
-
-
-
-
-
