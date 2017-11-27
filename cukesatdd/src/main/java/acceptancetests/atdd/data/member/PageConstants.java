@@ -123,7 +123,7 @@ public class PageConstants {
 
 	public static final String ACQUISITION_HOME_PAGE = "acquisitionhomepage";
 
-	
+	public static final String MEM_AUTH_PAGE = "memAuthPage";
 
 	public static final String VPP_PLAN_SUMMARY_PAGE = "plansummaryPage";
 
