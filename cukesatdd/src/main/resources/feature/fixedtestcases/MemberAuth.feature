@@ -13,5 +13,5 @@ Then the user puts in the username and navigates to rally and validates
 	
 Examples:
 	| username 	  | password  | member |
-	| qavgogine   | qavgogine | q4_dec_uhc012 |
+	| qavgogine   | qavgogine | q4_dec_uhc203 |
 	

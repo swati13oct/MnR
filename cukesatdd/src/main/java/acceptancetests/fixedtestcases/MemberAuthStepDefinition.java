@@ -4,6 +4,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -69,6 +70,12 @@ public class MemberAuthStepDefinition {
 		MemberAuthPage memAuthPage = (MemberAuthPage) getLoginScenario().getBean(PageConstants.MEM_AUTH_PAGE);
 		memAuthPage.searchMember(user);
 		MemberRedesignPage mrPage = (MemberRedesignPage) memAuthPage.navigateToRally();
+		if(mrPage!=null){
+			if(mrPage.validateRallyPage())
+				Assert.assertTrue(true);
+			else
+				Assert.fail("Error in hitting the member redesign page");
+		}
 	}
 	
 	

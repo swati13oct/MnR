@@ -43,6 +43,8 @@ public class MemberAuthPage extends UhcDriver {
 	@FindBy(xpath = "html/body/div[4]/div/div/div[3]/div/div[3]/div/a[1]")
 	private WebElement logMeAsMemberBtn;
 	
+	
+	
 	public MemberAuthPage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
@@ -83,6 +85,7 @@ public class MemberAuthPage extends UhcDriver {
 	}
 	
 	public MemberRedesignPage navigateToRally(){
+		driver.manage().window().maximize();
 		memberUsernameLink.click();
 		try {
 			Thread.sleep(2000);
