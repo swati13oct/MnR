@@ -74,6 +74,12 @@ public class MemberAuthPage extends UhcDriver {
 	}
 	
 	public void searchMember(String user){
+		try {
+			Thread.sleep(5000);
+		} catch (InterruptedException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 		username.sendKeys(user);
 		searchBtn.click();
 		try {
