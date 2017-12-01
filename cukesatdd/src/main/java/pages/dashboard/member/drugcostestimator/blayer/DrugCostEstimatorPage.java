@@ -317,9 +317,13 @@ public class DrugCostEstimatorPage extends UhcDriver {
 			NewDCEUrl = "https://member.team-b-aarpmedicareplans.uhc.com/content/medicare/member/drug-lookup/overview.html";
 		} else if (driver.getCurrentUrl().contains("uhcmedicaresolutions")){
 			//NewDCEUrl = "https://member.team-b-uhcmedicaresolutions.uhc.com/content/dashboard/home/drug-cost-estimator.html";
-			NewDCEUrl = "https://member.team-b-uhcmedicaresolutions.uhc.com/content/medicare/member/drug-lookup/overview.html";
+			//NewDCEUrl = "https://member.team-b-uhcmedicaresolutions.uhc.com/content/medicare/member/drug-lookup/overview.html";
+			NewDCEUrl = "https://team-b-medicare.uhc.com/content/medicare/member/drug-lookup/overview.html#/drug-cost-estimator";
+		}else if(evironment.equals("team-b")){
+			NewDCEUrl = "https://team-b-medicare.uhc.com/content/medicare/member/drug-lookup/overview.html#/drug-cost-estimator";
 		}else if(evironment.equals("team-h")){
-			NewDCEUrl = "https://team-h-werally.uhc.com/content/medicare/member/drug-lookup/overview.html#/drug-cost-estimator";
+			NewDCEUrl = "https://team-h-medicare.uhc.com/member/drug-lookup/overview.html#/drug-cost-estimator";
+			//"https://team-h-werally.uhc.com/content/medicare/member/drug-lookup/overview.html#/drug-cost-estimator";
 			//           https://team-h-werally.uhc.com/content/medicare/member/drug-lookup/overview.html
 		}else if(evironment.equals("stage")){
 			NewDCEUrl = "https://stage-medicare.uhc.com/content/medicare/member/drug-lookup/overview.html#/drug-cost-estimator";
@@ -327,7 +331,7 @@ public class DrugCostEstimatorPage extends UhcDriver {
 
 		driver.get(NewDCEUrl);
 		driver.manage().window().maximize();
-
+		Thread.sleep(3000);
 		// try{
 		// Alert alert = driver.switchTo().alert();
 		// alert.accept();
@@ -342,12 +346,19 @@ public class DrugCostEstimatorPage extends UhcDriver {
 		// // TODO Auto-generated catch block
 		// e.printStackTrace();
 		// }
-		WebElement loadingImage = driver.findElement(By.className("loading-dialog"));
-		System.out.println("loading image isdisplayed"+loadingImage.isDisplayed());
-		while(loadingImage.isDisplayed()){
-			System.out.println("DCE is loading");
-			Thread.sleep(5000);
+		try {
+			WebElement loadingImage = driver.findElement(By.className("loading-dialog"));
+			System.out.println("loading image isdisplayed" + loadingImage.isDisplayed());
+			while (loadingImage.isDisplayed()) {
+				System.out.println("DCE is loading");
+				Thread.sleep(5000);
+			}
+
+		} catch (Exception e) {
+			System.out.println("No loading image");
+			Thread.sleep(15000);
 		}
+		
 		Thread.sleep(15000);
 	}
 

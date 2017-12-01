@@ -13,14 +13,17 @@ public class HealthAndWellness  extends UhcDriver {
 	@FindBy(linkText = "Health & Wellness")
 	private WebElement rallyHealthAndWellness;
 	
-	@FindBy(id = "healthwellness")
+	@FindBy(id = "healthwellness_3")
 	private WebElement healthAndWellness;
 	
-	@FindBy(id = "lifestyle")
+	@FindBy(id = "lifestyle_desk1")
 	private WebElement lifestyleTab;
 	
-	@FindBy(id = "learning")
+	@FindBy(id = "learning_desk1")
 	private WebElement learningTab;
+	
+	@FindBy(id = "rewards_desk")
+	private WebElement rewardsTab;
 	
 	@FindBy(xpath = ".//*[@id='hl-hw-buckets']/div/div[1]/a/img")
 	private WebElement lifestyleIcon;

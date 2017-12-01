@@ -196,7 +196,8 @@ public class MemberRedesignHeaderStepDefinition {
 	@Then("^I should be able to see and use the Premium Payments tab$")
 	public void I_should_be_able_to_see_and_use_the_Premium_Payments_tab() {
 	    // Express the Regexp above with the code you wish you had
-
+		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstants.MEM_REDESIGN_ACCOUNT_HOME_PAGE);
+		accountHomePage.clickPremiumPayment();
 	}
 
 	@Then("^upon clicking the Premium Payments tab I should navigate to the Premium Payments Overview Page$")
