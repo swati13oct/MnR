@@ -75,7 +75,7 @@ public class LoginPage extends UhcDriver {
 	@FindBy(id = "sign-in-btn")
 	private WebElement thSignIn;
 	
-	@FindBy(xpath=".//*[@id='IPEinvL']/map/area[2]")
+	@FindBy(xpath=".//*[@id='IPEinvL']/map/area[1]")
     private WebElement iPerceptionPopUp;
 
 
@@ -311,7 +311,8 @@ public class LoginPage extends UhcDriver {
 				
 		try{
 			//CommonUtility.waitForPageLoad(driver, iPerceptionPopUp, 90);
-            if (iPerceptionPopUp.isDisplayed()) {
+            if (validate(iPerceptionPopUp)) {
+            	System.out.println("iPerceptionPopUp is Displayed");
                   iPerceptionPopUp.click();
             }
      }catch(Exception e)        {

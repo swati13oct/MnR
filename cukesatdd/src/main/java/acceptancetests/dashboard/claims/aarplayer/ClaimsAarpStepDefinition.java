@@ -98,8 +98,8 @@ public class ClaimsAarpStepDefinition {
 		WebDriver wd = getLoginScenario().getWebDriver();
 
 		LoginPage loginPage = new LoginPage(wd);
-		//loginPage.loginTo();
-		if(MRScenario.environment.contentEquals("team-h"))
+		
+		
 		{
 			loginPage.navigateToTeamMedicareTestHarness();
 			//loginPage.teamhloginWith(userName, pwd);
@@ -109,13 +109,13 @@ public class ClaimsAarpStepDefinition {
 			getLoginScenario().saveBean(PageConstants.ACCOUNT_HOME_PAGE,accountHomePage);
 			Assert.assertTrue(true);
 		}
-		else {
+		/*else {
 			loginPage.loginTo();
 			AccountHomePage accountHomePage = (AccountHomePage) loginPage.loginWith(userName, pwd);
 			getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
 			getLoginScenario().saveBean(PageConstants.ACCOUNT_HOME_PAGE,accountHomePage);
 			Assert.assertTrue(true);
-		}
+		}*/
 
 	}
 
