@@ -47,11 +47,11 @@ public class PlanSummaryPage extends UhcDriver {
 	@FindBy(xpath = ".//*[@id='plan_box']/div[1]/div[2]/div/p[2]/a")
 	private WebElement medClaimsBtn;
 	
-	@FindBy(className = "shipviewclaims")
+	@FindBy(xpath =".//*[@id='plan_box']//a[@class='shipsearchall']")
 	private WebElement medicalClaimsBtn;
 	
 	
-	@FindBy(className="shipsearchall")
+	@FindBy(xpath =".//*[@id='plan_box']//a[@class='shipviewclaims']")
 	private WebElement drugClaimsBtn;
 	
 	
@@ -182,6 +182,12 @@ public class PlanSummaryPage extends UhcDriver {
 	public DrugClaimSummaryPage navigateToDrugClaimsSummary() {
 
 		drugClaimsBtn.click();
+		try {
+			Thread.sleep(5000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		if (getTitle().equalsIgnoreCase(
 				"Claims")) {
 				return new DrugClaimSummaryPage(driver);

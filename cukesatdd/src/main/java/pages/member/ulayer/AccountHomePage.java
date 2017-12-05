@@ -660,25 +660,6 @@ driver.switchTo().window(mainwindow);
 		validate(benefitsLink);
 		validate(logOut);
 
-		JSONObject jsonObject = new JSONObject();
-		for (String key : myAccountHome.getExpectedData().keySet()) {
-			WebElement element = findElement(myAccountHome.getExpectedData()
-					.get(key));
-			if (element != null) {
-				if(validate(element)){
-				try {
-					jsonObject.put(key, element.getText());
-				} catch (JSONException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-				}
-			}
-		}
-		accountHomeJson = jsonObject;
-		
-		System.out.println("accountHomeJson----->"+accountHomeJson);
-
 	}
 
 	public JSONObject getExpectedData(Map<String, JSONObject> expectedDataMap) {

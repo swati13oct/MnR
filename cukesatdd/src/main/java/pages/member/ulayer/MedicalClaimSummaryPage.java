@@ -496,44 +496,7 @@ public class MedicalClaimSummaryPage extends UhcDriver {
 	@Override
 	public void openAndValidate() {
 
-		JSONObject jsonObject = new JSONObject();
-		for (String key : medicalClaimsSummary.getExpectedData().keySet()) {
-			List<WebElement> elements = findElements(medicalClaimsSummary
-					.getExpectedData().get(key));
-			if (elements.size() == 1) {
-				if (validate(elements.get(0))) {
-					try {
-						jsonObject.put(key, elements.get(0).getText());
-					} catch (JSONException e) {
-						e.printStackTrace();
-					}
-				}
-			} else if (elements.size() > 1) {
-				JSONArray jsonArray = new JSONArray();
-				for (WebElement element : elements) {
-
-					validate(element);
-					try {
-						JSONObject jsonObjectForArray = new JSONObject();
-						jsonObjectForArray.put(medicalClaimsSummary
-								.getExpectedData().get(key).getElementName(),
-								element.getText());
-						jsonArray.put(jsonObjectForArray);
-					} catch (JSONException e) {
-						e.printStackTrace();
-					}
-				}
-				try {
-					jsonObject.put(key, jsonArray);
-				} catch (JSONException e) {
-					e.printStackTrace();
-				}
-
-			}
-
-		}
-		medicalClaimsSummaryJson = jsonObject;
-		System.out.println("medicalClaimsSummaryJson----->"+medicalClaimsSummaryJson);
+		
 
 	}
 

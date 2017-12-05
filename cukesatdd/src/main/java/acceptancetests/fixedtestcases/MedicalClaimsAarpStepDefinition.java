@@ -121,6 +121,8 @@ public class MedicalClaimsAarpStepDefinition {
 			
 			getLoginScenario().saveBean(PageConstants.ACCOUNT_HOME_PAGE,
 					accountHomePage);
+			if(accountHomePage.validateGogreenPopup())
+				accountHomePage.closeGogreenPopup();
 			if(accountHomePage.validateAccountHome())
 				Assert.assertTrue(true);
 			else

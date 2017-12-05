@@ -41,7 +41,7 @@ public class PlanSummaryPage extends UhcDriver {
 	
 	
 	
-	@FindBy(id = "btn_viewclaims")
+	@FindBy(id = "btn_searchallclaims")
 	private WebElement searchMedClaimsBtn;
 	
 	//@FindBy(xpath = ".//*[@id='plan_box']/div[2]/div[2]/div/p[2]/a")
@@ -52,7 +52,7 @@ public class PlanSummaryPage extends UhcDriver {
 	@FindBy(id = "btn_viewclaims1")
 	private WebElement searchDrugClaimsBtn;
 	
-	@FindBy(id = "btn_searchallclaims1")
+	@FindBy(id = "btn_searchallclaims")
 	private WebElement searchAllClaimsBtn;
 
 	@FindBy(xpath = "//div[@id='main_content']/div[2]/div/div[2]/div/div[2]/div/div[2]/div/h3")

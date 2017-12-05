@@ -101,11 +101,13 @@ public class LoginPage extends UhcDriver {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		try{
-			if(alertClosebutton.isDisplayed())
-				alertClosebutton.click();
-		} catch (Exception e) {
-			System.out.println("Alert is not displayed");
+		if(alertClosebutton!=null) {
+			try{
+				if(alertClosebutton.isDisplayed())
+					alertClosebutton.click();
+			} catch (Exception e) {
+				System.out.println("Alert is not displayed");
+			}
 		}
 		if(currentUrl().contains("home/my-account-home.html"))
 

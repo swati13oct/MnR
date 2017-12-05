@@ -362,46 +362,6 @@ public class ClaimSummaryPage extends UhcDriver {
 
 		validate(showClaimHistoryButton);
 
-		JSONObject jsonObject = new JSONObject();
-		for (String key : claimsSummary.getExpectedData().keySet()) {
-			List<WebElement> elements = findElements(claimsSummary
-					.getExpectedData().get(key));
-			if (elements.size() == 1) {
-				if (elementFound(elements.get(0))) {
-					try {
-						jsonObject.put(key, elements.get(0).getText());
-					} catch (JSONException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
-				}
-			} else if (elements.size() > 1) {
-				JSONArray jsonArray = new JSONArray();
-				for (WebElement element : elements) {
-					validate(element);
-					try {
-						JSONObject jsonObjectForArray = new JSONObject();
-						jsonObjectForArray.put(claimsSummary.getExpectedData()
-								.get(key).getElementName(), element.getText());
-						jsonArray.put(jsonObjectForArray);
-					} catch (JSONException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
-				}
-				try {
-					jsonObject.put(key, jsonArray);
-				} catch (JSONException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-
-			}
-
-		}
-		claimSummaryJson = jsonObject;
-		
-		System.out.println("claimSummaryJson----->"+claimSummaryJson);
 
 	}
 	

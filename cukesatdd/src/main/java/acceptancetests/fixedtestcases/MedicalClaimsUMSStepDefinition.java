@@ -120,13 +120,10 @@ public class MedicalClaimsUMSStepDefinition {
 	
 	@When("^the user navigates to plan summary page in UMS site and validates$")
 	public void user_navigates_to_plan_summary_ums() {
-		WebDriver wd = (WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
 		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario()
 				.getBean(PageConstants.ACCOUNT_HOME_PAGE);
 		
-		PlanSummaryPage planSummaryPage = new PlanSummaryPage(wd);
-		getLoginScenario().saveBean(PageConstants.PLAN_SUMMARY_PAGE,wd);
-		planSummaryPage = accountHomePage.navigateToPlanSummary();
+		PlanSummaryPage planSummaryPage = (PlanSummaryPage) accountHomePage.navigateToPlanSummary();
 		
 		if(planSummaryPage!=null){
 			getLoginScenario().saveBean(PageConstants.PLAN_SUMMARY_PAGE, planSummaryPage);
@@ -141,14 +138,11 @@ public class MedicalClaimsUMSStepDefinition {
 
 	@When("^the user navigates to claim summary page in UMS site$")
 	public void user_views_claim_summary_ums() {
-		WebDriver wd = (WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
+		
 		PlanSummaryPage planSummaryPage = (PlanSummaryPage) getLoginScenario()
 				.getBean(PageConstants.PLAN_SUMMARY_PAGE);
 		
-		ClaimSummaryPage claimSummaryPage = new ClaimSummaryPage(wd);
-		getLoginScenario().saveBean(PageConstants.CLAIM_SUMMARY_PAGE,wd);
-		
-		claimSummaryPage = planSummaryPage.navigateToMedicalClaimsSummary();
+		ClaimSummaryPage claimSummaryPage  = (ClaimSummaryPage) planSummaryPage.navigateToMedicalClaimsSummary();
 		if (claimSummaryPage != null) {
 			getLoginScenario().saveBean(PageConstants.CLAIM_SUMMARY_PAGE,
 					claimSummaryPage);
