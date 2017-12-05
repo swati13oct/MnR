@@ -827,12 +827,15 @@ driver.switchTo().window(mainwindow);
 	
 	public boolean validateGogreenPopup(){
 		boolean flag=false;
-		try {
-			flag= validate(gogreenPopup);
-			return flag;
-		} catch (Exception e) {
-			return flag;
-		}		
+		if(gogreenPopup!=null) {
+			try {
+				flag= validate(gogreenPopup);
+				return flag;
+			} catch (Exception e) {
+				return flag;
+			}	
+		}
+		return flag;
 	}
 	
 	public void closeGogreenPopup(){

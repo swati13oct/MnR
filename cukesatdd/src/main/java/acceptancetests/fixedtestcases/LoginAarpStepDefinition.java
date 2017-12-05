@@ -105,17 +105,7 @@ public class LoginAarpStepDefinition {
 			getLoginScenario().saveBean(PageConstants.ACCOUNT_HOME_PAGE,
 					accountHomePage);
 			Assert.assertTrue(true);
-			JSONObject accountHomeActualJson = accountHomePage.accountHomeJson;
-			getLoginScenario().saveBean(
-					LoginCommonConstants.ACCOUNT_HOME_ACTUAL,
-					accountHomeActualJson);
 			
-			/* Get expected data */
-			Map<String, JSONObject> expectedDataMap = loginScenario.getExpectedJson(userName);
-			//JSONObject accountHomeExpectedJson = accountHomePage.getExpectedData(expectedDataMap);
-			//getLoginScenario().saveBean(LoginCommonConstants.ACCOUNT_HOME_EXPECTED,accountHomeExpectedJson);
-			getLoginScenario().saveBean(CommonConstants.EXPECTED_DATA_MAP, expectedDataMap);
-	
 	}
 
 	}
@@ -192,17 +182,14 @@ public class LoginAarpStepDefinition {
 
 		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario()
 				.getBean(PageConstants.ACCOUNT_HOME_PAGE);
-		JSONObject accountHomeActual = (JSONObject) getLoginScenario().getBean(
-				LoginCommonConstants.ACCOUNT_HOME_ACTUAL);
-		JSONObject accountHomeExpected = (JSONObject) getLoginScenario()
-				.getBean(LoginCommonConstants.ACCOUNT_HOME_EXPECTED);
-		try {
-			JSONAssert.assertEquals(accountHomeExpected, accountHomeActual,
-					true);
-		} catch (JSONException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		if(accountHomePage.validateGogreenPopup())
+			accountHomePage.closeGogreenPopup();
+		
+		if(accountHomePage.validateAccountHome())
+			Assert.assertTrue(true);
+		else
+			Assert.fail("Login failed, could not validate the account home page");
+		
 		accountHomePage.logOut();
 
 	}

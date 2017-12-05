@@ -102,44 +102,22 @@ public class LoginUmsStepDefinition {
 		AccountHomePage accountHomePage = (AccountHomePage)loginPage.loginWith(userName, pwd, category);
 		
 		
-		
-		JSONObject accountHomeActualJson =  null;
 		if (accountHomePage != null) {
 			getLoginScenario().saveBean(PageConstants.ACCOUNT_HOME_PAGE, accountHomePage);
-			accountHomeActualJson = accountHomePage.accountHomeJson;
-			getLoginScenario().saveBean(LoginCommonConstants.ACCOUNT_HOME_ACTUAL, accountHomeActualJson);
-			
-			/*Get expected data*/
-			//Map<String,JSONObject> expectedDataMap = loginScenario.getExpectedJson(userName);
-			//JSONObject accountHomeExpectedJson = accountHomePage.getExpectedData(expectedDataMap);
-			//getLoginScenario().saveBean(LoginCommonConstants.ACCOUNT_HOME_EXPECTED, accountHomeExpectedJson);
-			//getLoginScenario().saveBean(CommonConstants.EXPECTED_DATA_MAP, expectedDataMap);
+		
 		}
-		
-		
-
-		
 
 	}
 	
-	@Then("^the user validates plan and member details after login in UHC site$")
+	@Then("^the user validates account home page$")
 	public void login_validation() {
 		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario()
 				.getBean(PageConstants.ACCOUNT_HOME_PAGE);
-		JSONObject accountHomeActual = (JSONObject) getLoginScenario().getBean(
-				LoginCommonConstants.ACCOUNT_HOME_ACTUAL);
-		JSONObject accountHomeExpected = (JSONObject) getLoginScenario()
-				.getBean(LoginCommonConstants.ACCOUNT_HOME_EXPECTED);
-		System.out.println("accountHomeActual=====>"
-				+ accountHomeActual.toString());
-		/*System.out.println("accountHomeExpected======>"
-		//		+ accountHomeExpected.toString());
-		try {
-			JSONAssert.assertEquals(accountHomeExpected, accountHomeActual,false);
-		} catch (JSONException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}*/
+		
+		if(accountHomePage.validateAccountHome())
+			Assert.assertTrue(true);
+		else
+			Assert.fail("Login failed. Error in validating the account home page");
 		accountHomePage.logOut();
 	}
 

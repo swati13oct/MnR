@@ -1,4 +1,5 @@
-@fixedTestCase
+@fixedTestCaseTest
+@loginAarp
 Feature: To test Login on AARP site 
 Scenario Outline: Verify login in AARP site 
 Given the user is on the AARP medicare site login page
