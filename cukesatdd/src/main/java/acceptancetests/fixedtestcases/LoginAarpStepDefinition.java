@@ -44,7 +44,7 @@ public class LoginAarpStepDefinition {
 		return loginScenario;
 	}
 
-	@Given("^the user is on the AARP medicare site login page$")
+	@Given("^the user is on the AARP site login page$")
 	public void user_login_page()
 	{
 		WebDriver wd = getLoginScenario().getWebDriver();
@@ -177,7 +177,7 @@ public class LoginAarpStepDefinition {
 
 	}
 
-	@Then("^the user validates plan and member details after login in AARP site$")
+	@Then("^the user validates account home page$")
 	public void login_validation() {
 
 		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario()

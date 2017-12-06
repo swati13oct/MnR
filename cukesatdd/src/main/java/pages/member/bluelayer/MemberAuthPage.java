@@ -37,7 +37,7 @@ public class MemberAuthPage extends UhcDriver {
 	@FindBy(xpath = ".//*[@id='memAuthLoginBox']/div/div/div/div/div[2]/form/div[1]/button")
 	private WebElement searchBtn;
 	
-	@FindBy(xpath = ".//*[@id='memAuthLoginBox']/div/div/div/div/div[2]/div/table/tbody/tr[2]/td[1]/a")
+	@FindBy(xpath = ".//*[@id='memAuthLoginBox']//table[@class='resultsTable']//a[@class='ng-binding']")
 	private WebElement memberUsernameLink;
 	
 	@FindBy(xpath = "html/body/div[4]/div/div/div[3]/div/div[3]/div/a[1]")
@@ -83,7 +83,7 @@ public class MemberAuthPage extends UhcDriver {
 		username.sendKeys(user);
 		searchBtn.click();
 		try {
-			Thread.sleep(4000);
+			Thread.sleep(6000);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
