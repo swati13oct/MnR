@@ -270,7 +270,7 @@ public class AccountHomePage extends UhcDriver {
 		openAndValidate();
 		
 	}
-
+	
 	public PlanBenefitsCoveragePage navigateToBnC() {
 		benefitsLink.click();
 		if (driver.getTitle().equalsIgnoreCase(
@@ -302,7 +302,7 @@ public class AccountHomePage extends UhcDriver {
 
 	public void logOut() {
 		logOut.click();
-
+		
 	}
 
 
@@ -820,7 +820,13 @@ driver.switchTo().window(mainwindow);
 	}
 	
 	public void closeGogreenPopup(){
-		gogreenPopupClose.click();
+		String winHandleBefore = driver.getWindowHandle();
+		for(String winHandle : driver.getWindowHandles()){
+		    driver.switchTo().window(winHandle);
+		}
+		//gogreenPopupClose.click();
+		driver.close();
+		driver.switchTo().window(winHandleBefore);
 	}
 	
 

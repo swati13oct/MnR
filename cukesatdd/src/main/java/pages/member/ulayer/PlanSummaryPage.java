@@ -47,7 +47,7 @@ public class PlanSummaryPage extends UhcDriver {
 	@FindBy(xpath = ".//*[@id='plan_box']/div[1]/div[2]/div/p[2]/a")
 	private WebElement medClaimsBtn;
 	
-	@FindBy(xpath =".//*[@id='plan_box']//a[@class='shipsearchall']")
+	@FindBy(xpath =".//*[@id='plan_box']//a[@class='shipviewclaims']")
 	private WebElement medicalClaimsBtn;
 	
 	

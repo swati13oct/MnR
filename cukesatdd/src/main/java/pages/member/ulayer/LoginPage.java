@@ -45,6 +45,12 @@ public class LoginPage extends UhcDriver {
 
 	@FindBy(linkText = "Forgot your username or password?")
 	private WebElement forgotUsernamePasswordLink;
+	
+	@FindBy(xpath = "//*[@id='gogreenlogin_box']/div[4]/div")
+	private WebElement gogreenPopup;
+	
+	@FindBy(xpath = "//*[@id='gogreenlogin_box']/div[4]/div/a")
+	private WebElement gogreenPopupClose;
 
 	@FindBy(id = "usercheckbox")
 	private WebElement userNameCheckBox;
@@ -109,6 +115,7 @@ public class LoginPage extends UhcDriver {
 				System.out.println("Alert is not displayed");
 			}
 		}
+		
 		if(currentUrl().contains("home/my-account-home.html"))
 
 		{

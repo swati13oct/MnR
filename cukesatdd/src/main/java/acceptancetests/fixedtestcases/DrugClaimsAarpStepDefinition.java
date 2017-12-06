@@ -114,16 +114,13 @@ public class DrugClaimsAarpStepDefinition {
 				getLoginScenario().saveBean(LoginCommonConstants.PASSWORD, pwd);
 			}
 
-			WebDriver wd = getLoginScenario().getWebDriver();
-			getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
-
-			LoginPage loginPage = new LoginPage(wd);
-			AccountHomePage accountHomePage = (AccountHomePage) loginPage.loginWith(userName, pwd);
-
+			LoginPage loginpage = (LoginPage) getLoginScenario().getBean(PageConstants.LOGIN_PAGE);
+			AccountHomePage accountHomePage = (AccountHomePage) loginpage.loginWith(userName, pwd);
+			
 			if (accountHomePage != null) {
-				getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
 				getLoginScenario().saveBean(PageConstants.ACCOUNT_HOME_PAGE,
 						accountHomePage);
+				
 				if(accountHomePage.validateAccountHome())
 					Assert.assertTrue(true);
 				else
@@ -134,7 +131,7 @@ public class DrugClaimsAarpStepDefinition {
 		}
 	@When("^the user navigates to plan summary page and validates claims info$")
 	public void user_navigates_to_plan_summary_ums() {
-		WebDriver wd = (WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
+		
 		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario()
 				.getBean(PageConstants.ACCOUNT_HOME_PAGE);
 		
