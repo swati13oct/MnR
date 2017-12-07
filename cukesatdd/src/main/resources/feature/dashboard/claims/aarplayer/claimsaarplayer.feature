@@ -134,8 +134,8 @@ And the user validates the DownloadMyData section in redesigned site
 
 Examples:
 | planType | claimPeriod      | domain  | claimssystem |
-| MA       |   Last 24 Months | COSMOS  |COSMOSCLAIMS  |
-| MAPD     |   Last 24 Months | NICE    | NICECLAIMS   |
+| MAPD     |   Last 24 Months | COSMOS  |COSMOSCLAIMS  |
+| MA       |   Last 24 Months | NICE    | NICECLAIMS   |
  
 @claimsSummarySHIP @transformers
 Scenario Outline: To validate the claims present for the SHIP member on claims sumamry page for AARP site
