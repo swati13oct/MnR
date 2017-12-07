@@ -599,13 +599,14 @@ public class AccountHomePage extends UhcDriver {
 
 	public pages.dashboard.member.ulayer.ClaimSummarypage navigateToClaimsSummaryPage() {
 
-		if (MRScenario.environment.equalsIgnoreCase("team-h")) {
+		if (MRScenario.environment.equalsIgnoreCase("team-h") || MRScenario.environment.equalsIgnoreCase("stage")) {
 			System.out.println("Go to claims link is present "+driver.findElement(By.xpath("//a[text()='Go to Claims page']")).isDisplayed());
 			driver.findElement(By.xpath("//a[text()='Go to Claims page']")).click();
 			//CommonUtility.waitForPageLoad(driver, driver.findElement(By.cssSelector("#document-date")), 60);
 		}
 
 		else if (MRScenario.environment.equalsIgnoreCase("team-b")) {
+			
 			System.out.println("Go to claims link is present "+driver.findElement(By.xpath("//a[text()='Go to Claims page']")).isDisplayed());
 			driver.findElement(By.xpath("//a[text()='Go to Claims page']")).click();
 			/*String testharnessUrl = "https://member." +MRScenario.environment+"-aarpmedicareplans.uhc.com/home/testharness.html";
