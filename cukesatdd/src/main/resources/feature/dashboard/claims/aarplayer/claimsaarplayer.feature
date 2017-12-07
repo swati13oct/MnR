@@ -134,13 +134,14 @@ And the user validates the DownloadMyData section in redesigned site
 
 Examples:
 | planType | claimPeriod      | domain  | claimssystem |
-| MA       |   Last 24 Months | COSMOS  |COSMOSCLAIMS  |
-| MAPD     |   Last 24 Months | NICE    | NICECLAIMS   |
+| MAPD     |   Last 24 Months | COSMOS  |COSMOSCLAIMS  |
+| MA       |   Last 24 Months | NICE    | NICECLAIMS   |
  
 @claimsSummarySHIP @transformers
 Scenario Outline: To validate the claims present for the SHIP member on claims sumamry page for AARP site
 Given I am an AARP member on the redesigned site 
 	 | Plan Type | <planType> | 
+	 |Test Data Type  |<claimssystem>    |
 When I navigate to the claims Summary page in redesigned site
 And the user search claims for the following claim period in AARP site
 	| Claim Period | <claimPeriod> | 
@@ -149,13 +150,14 @@ And the user validates the EOB section based on domain in redesigned site
 	| Domain | <domain> |
 
 Examples:
-| planType | claimPeriod       | domain |
-| SHIP     | Last 24 Months    |  NA    |
+| planType | claimPeriod       | domain |claimssystem | 
+| SHIP     | Last 24 Months    |  NA    |SHIPCALIMS |
 
 @claimsDetailsTableFED @transformers
 Scenario Outline: To Verify Claim Table on Claims Details Page
 Given I am an AARP member on the redesigned site
       | Plan Type | <planType> |
+      |Test Data Type  |<claimssystem>    |
 When I navigate to the claims Summary page in redesigned site
 And the user search claims for the following claim period in AARP site
 	| Claim Period | <claimPeriod> |
@@ -164,9 +166,9 @@ And  I navigate to the Claim Details page in AARP site
 Then I validate the Claims Table in claims details page in AARP site
 And I validate the Claims Total in claims details page in AARP site
  Examples: 
-      | planType |claimPeriod    |
-      | MA       |Last 24 Months |
-      #| MAPD     |Last 24 Months |
+      | planType |claimPeriod    |claimssystem |
+      | MA       |Last 24 Months |NICECLAIMS   |
+      | MAPD     |Last 24 Months |COSMOSCLAIMS |
      #| SHIP     |Last 24 Months |
 @ClaimsDetailsSHIP @transformers
 Scenario Outline: To Verify Learn more section on Claims Details Page

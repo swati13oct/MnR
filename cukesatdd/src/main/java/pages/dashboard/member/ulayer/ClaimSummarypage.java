@@ -245,10 +245,15 @@ public class ClaimSummarypage extends UhcDriver{
 			System.out.println("for MAPD NICE prescription drug EOB's are displayed ===>"+ (PrescriptionEobText.isDisplayed()));
 			return PrescriptionEobText.isDisplayed();
 		}
-		else if ((domain.equals("NICE")&&plantype.equals("MA")) || (domain.equals("COSMOS")&&plantype.equals("MA")))
+		else if ( (domain.equals("COSMOS")&&plantype.equals("MA")))
 		{
 			System.out.println("for MA medical Eob is diplayed ====>"+ (medicalEobText.isDisplayed()));
 			return medicalEobText.isDisplayed();
+		}
+		else if ((domain.equals("NICE")&&plantype.equals("MA")))
+		{
+			System.out.println("Medical EOB is not Displayed for MA NICE member");
+			return true;
 		}
 		//SHIP CLAIMS EOB
 		else if ((domain.equals("NA") && plantype.equals("SHIP"))){
