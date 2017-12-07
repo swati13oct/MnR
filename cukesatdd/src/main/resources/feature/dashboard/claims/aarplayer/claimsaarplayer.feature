@@ -156,6 +156,7 @@ Examples:
 Scenario Outline: To Verify Claim Table on Claims Details Page
 Given I am an AARP member on the redesigned site
       | Plan Type | <planType> |
+      |Test Data Type  |<claimssystem>    |
 When I navigate to the claims Summary page in redesigned site
 And the user search claims for the following claim period in AARP site
 	| Claim Period | <claimPeriod> |
@@ -164,8 +165,8 @@ And  I navigate to the Claim Details page in AARP site
 Then I validate the Claims Table in claims details page in AARP site
 And I validate the Claims Total in claims details page in AARP site
  Examples: 
-      | planType |claimPeriod    |
-      | MA       |Last 24 Months |
+      | planType |claimPeriod    |claimssystem |
+      | MA       |Last 24 Months |NICECLAIMS   |
       #| MAPD     |Last 24 Months |
      #| SHIP     |Last 24 Months |
 @ClaimsDetailsSHIP @transformers
