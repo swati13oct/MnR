@@ -109,7 +109,7 @@ public class LoginUmsStepDefinition {
 
 	}
 	
-	@Then("^the user validates account home page$")
+	@Then("^the user validates account home page for uhc$")
 	public void login_validation() {
 		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario()
 				.getBean(PageConstants.ACCOUNT_HOME_PAGE);

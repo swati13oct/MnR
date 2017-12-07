@@ -44,7 +44,7 @@ public class LoginAarpStepDefinition {
 		return loginScenario;
 	}
 
-	@Given("^the user is on the AARP site login page$")
+	@Given("^the user is on the login page for ulayer$")
 	public void user_login_page()
 	{
 		WebDriver wd = getLoginScenario().getWebDriver();
@@ -177,13 +177,11 @@ public class LoginAarpStepDefinition {
 
 	}
 
-	@Then("^the user validates account home page$")
+	@Then("^the user validates account home page for aarp$")
 	public void login_validation() {
 
 		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario()
 				.getBean(PageConstants.ACCOUNT_HOME_PAGE);
-		if(accountHomePage.validateGogreenPopup())
-			accountHomePage.closeGogreenPopup();
 		
 		if(accountHomePage.validateAccountHome())
 			Assert.assertTrue(true);
