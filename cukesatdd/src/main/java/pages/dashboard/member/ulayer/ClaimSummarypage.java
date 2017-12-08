@@ -356,6 +356,14 @@ public class ClaimSummarypage extends UhcDriver{
 			//dropdown.selectByIndex(4);
 			//CommonUtility.waitForPageLoad(driver, last24months, 60);
 			last24months.click();
+			try { Thread.sleep(10000); } 
+			catch (InterruptedException e) {
+				
+				
+				// TODO Auto-generated catch block 
+				e.printStackTrace();
+				}
+			
 			/*Select claimsFrom = new Select(viewClaimsFrom);
 			claimsFrom.selectByValue("24 months");*/
 		}
