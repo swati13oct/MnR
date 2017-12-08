@@ -251,5 +251,8 @@ public static String CAMPAIGN_PAGE_URL1 = "https://www."+MRScenario.environment+
 public static final String MEMBER_AUTH = "https://"+MRScenario.environment+"-generic.uhc.com/content/dashboard/guest/memberauth.html#/memberAuthLogin";
 
 public static final String TeamC_UNPWAssistancePage_URL = "https://member.team-c-aarpmedicareplans.uhc.com/content/medicare/login/reset.html#/start";
+
+public static final String Stage_UNPWAssistancePage_URL = "https://stage-medicare.uhc.com/content/medicare/login/reset.html#/start";
+
 }
 
