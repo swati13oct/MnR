@@ -342,9 +342,7 @@ public class ClaimSummarypage extends UhcDriver{
 			
 			
 			try { Thread.sleep(10000); } 
-			catch (InterruptedException e) {
-				
-				
+			catch (InterruptedException e) {						
 				// TODO Auto-generated catch block 
 				e.printStackTrace();
 				}
@@ -357,8 +355,7 @@ public class ClaimSummarypage extends UhcDriver{
 			//CommonUtility.waitForPageLoad(driver, last24months, 60);
 			last24months.click();
 			try { Thread.sleep(10000); } 
-			catch (InterruptedException e) {
-				
+			catch (InterruptedException e) {			
 				
 				// TODO Auto-generated catch block 
 				e.printStackTrace();
