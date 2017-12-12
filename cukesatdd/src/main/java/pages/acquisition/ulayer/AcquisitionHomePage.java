@@ -20,6 +20,7 @@ import acceptancetests.atdd.data.CommonConstants;
 import acceptancetests.atdd.data.MRConstants;
 import acceptancetests.atdd.data.PageData;
 import acceptancetests.atdd.util.CommonUtility;
+import atdd.framework.MRScenario;
 import pages.acquisition.ulayer.VPPPlanSummaryPage;
 
 /**
@@ -211,6 +212,8 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	private WebElement healthcenterslink;
 
 	private static String AARP_ACQISITION_PAGE_URL = MRConstants.AARP_URL;
+	
+	private static String AARP_ACQISITION_OFFLINE_PAGE_URL = MRConstants.AARP_URL_OFFLINE;
 
 	private PageData globalFooter;
 	private PageData browserCheckData;
@@ -285,7 +288,9 @@ public class AcquisitionHomePage extends GlobalWebElements {
 
 	@Override
 	public void openAndValidate() {
-		if (!(currentUrl().contains("aarpmedicareplans"))) {
+		if (MRScenario.environment.equals("offline")) {
+			start(AARP_ACQISITION_OFFLINE_PAGE_URL);
+		}else{
 			start(AARP_ACQISITION_PAGE_URL);
 		}
 		validate(navigationSectionHomeLink);

@@ -16,6 +16,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.FindBys;
 import org.openqa.selenium.support.PageFactory;
 
+
 //import pages.member.bluelayer.AccountHomePage;
 import acceptancetests.atdd.data.CommonConstants;
 import acceptancetests.atdd.data.MRConstants;
@@ -24,6 +25,7 @@ import acceptancetests.atdd.util.CommonUtility;
 //import pages.acquisition.ulayer.MaViewPlansAndPricingPage;
 //import pages.acquisition.ulayer.MsViewPlansAndPricingPage;
 //import pages.acquisition.ulayer.PdpViewPlansAndPricingPage;
+import atdd.framework.MRScenario;
 
 public class AcquisitionHomePage extends GlobalWebElements {
 
@@ -155,6 +157,8 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	private PageData cobrowseData;
 	public JSONObject cobrowseJson;
 	private static String UMS_ACQISITION_PAGE_URL = MRConstants.UHC_URL;
+	private static String UMS_ACQISITION_OFFLINE_PAGE_URL = MRConstants.UHC_URL_OFFLINE;
+	
 
 	public AcquisitionHomePage(WebDriver driver) {
 		super(driver);
@@ -344,7 +348,12 @@ public class AcquisitionHomePage extends GlobalWebElements {
 
 	@Override
 	public void openAndValidate() {
-		start(UMS_ACQISITION_PAGE_URL);
+		if ( MRScenario.environment.equals("offline")) {
+			start(UMS_ACQISITION_OFFLINE_PAGE_URL);
+		}else{
+			start(UMS_ACQISITION_PAGE_URL);
+		}
+		
 		validate(navigationSectionHomeLink);
 		validate(navigationSectionOurPlansLink);
 		validate(navigationSectionmedicareEducationLink);

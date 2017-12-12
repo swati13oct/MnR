@@ -36,6 +36,8 @@ public class LoginPage extends UhcDriver {
 
 
 	private static String PAGE_URL = MRConstants.UHCM_URL;
+	
+	private static String PAGE_URL_OFFLINE = MRConstants.UHCM_URL;
 
 
 	//@FindBy(xpath = "//button[@id='fd_memberSignInButton' or @id='accessURAccountBTN']")
@@ -137,7 +139,11 @@ public class LoginPage extends UhcDriver {
 
 	@Override
 	public void openAndValidate() {
-		start(PAGE_URL);
+		if (( MRScenario.environment.equals("offline"))) {
+			start(PAGE_URL_OFFLINE);
+		}else{
+			start(PAGE_URL);
+		}
 		validate(loginIn);
 
 	}

@@ -1,7 +1,7 @@
 @fixedTestCaseTest
 @vppUlayer
 Feature:1.10-VBF-Acq-To test plan summary in vpp flow AARP site
-@vppPlanSummaryUlayer
+@vppUlayerSmoke
 Scenario Outline: Verify plan summary in AARP site
 Given the user is on AARP medicare acquisition site landing page
 When the user performs plan search using following information in the AARP site

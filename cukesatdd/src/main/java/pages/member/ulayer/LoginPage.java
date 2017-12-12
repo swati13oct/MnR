@@ -27,7 +27,8 @@ public class LoginPage extends UhcDriver {
 
 	// Page URL
 	private static String PAGE_URL = MRConstants.AARPM_URL;
-
+	private static String PAGE_URL_OFFLINE = MRConstants.AARPM_URL_OFFLINE;
+	
 	@FindBy(id = "fd_memberSignInButton")
 	private WebElement loginIn;
 
@@ -143,8 +144,11 @@ public class LoginPage extends UhcDriver {
 
 	@Override
 	public void openAndValidate() {
-		start(PAGE_URL);
-		validate(loginIn);
+		if (( MRScenario.environment.equals("offline"))) {
+			start(PAGE_URL_OFFLINE);
+		}else{
+			start(PAGE_URL);
+		}
 
 	}
 
