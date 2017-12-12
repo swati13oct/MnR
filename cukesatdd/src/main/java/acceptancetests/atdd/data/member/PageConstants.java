@@ -194,4 +194,10 @@ public class PageConstants {
 	public static final String NEW_CLAIM_DETAILS_PAGE = "newClaimDetailsPage";
 	
 	public static final String TIME_ADMIN_PAGE = "timeAdminPage";
+	
+	public static final String EOB_Page = "eobPage";
+	
+	public static final String DeepLink_Page = "deepLinkPage";
+
+	public static final String DeepLink_url = "deepLinkUrl";
 }
