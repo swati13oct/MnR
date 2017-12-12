@@ -8,6 +8,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.Select;
 
 import acceptancetests.atdd.data.MRConstants;
 import atdd.framework.UhcDriver;
@@ -62,7 +63,7 @@ public class UNPWAssistancePage extends UhcDriver {
 	@FindBy(xpath = ".//button[@class='btn']")
 	private WebElement ContinueButton;
 
-	@FindBy(linkText = "Back to Sign in Page")
+	@FindBy(linkText = "BACK TO SIGN IN PAGE")
 	private WebElement BackSignInPage;
 
 	private static String PAGE_URL = MRConstants.Stage_UNPWAssistancePage_URL;
@@ -110,9 +111,13 @@ public class UNPWAssistancePage extends UhcDriver {
 
 		MemberID.sendKeys(MemID);
 
-		// Select DBmnth = new Select(DOBmm);
-		// DBmnth.selectByIndex(Integer.parseInt(DBmm));
-		//
+		DOBmm.sendKeys(DBmm);
+		DOBdd.sendKeys(DBdd);
+		DOByyyy.sendKeys(DByyyy);
+		
+//		 Select DBmnth = new Select(DOBmm);
+//		 DBmnth.selectByIndex(Integer.parseInt(DBmm));
+		
 		// Select DBday = new Select(DOBdd);
 		// DBday.selectByValue(DBdd);
 		//
