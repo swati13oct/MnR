@@ -1,5 +1,6 @@
 @fixedTestCaseTest
 @loginAarp
+@loginAarpSmoke
 Feature: To test Login on AARP site 
 Scenario Outline: Verify login in AARP site 
 Given the user is on the login page for ulayer

@@ -1,5 +1,6 @@
 @fixedTestCaseTest
 @loginUhc
+@loginUHCSmoke
 Feature: To test Login on UHC site 
 Scenario Outline: Verify login in UHC site 
 Given the user is on the UHC site login page
