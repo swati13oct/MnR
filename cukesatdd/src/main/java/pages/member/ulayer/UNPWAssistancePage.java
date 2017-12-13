@@ -151,10 +151,16 @@ public class UNPWAssistancePage extends UhcDriver {
 			} catch (Exception e) {
 				flag = false;
 			}
+			boolean MemNotFoundErrFlag;
+			try {
+				MemNotFoundErrFlag = MemNotFoundErr.isDisplayed();
+			} catch (Exception e) {
+				MemNotFoundErrFlag = false;
+			}
 
 			if (flag) {
 				System.out.println("Email will be triggered");
-			} else if (MemNotFoundErr.isDisplayed()) {
+			} else if (MemNotFoundErrFlag) {
 				System.out.println("Member not found!");
 			} else {
 				Assert.fail("something went wrong / Member details are incorrect!");
