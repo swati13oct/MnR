@@ -82,6 +82,8 @@ Feature: To test Login Assistance flow on AARP site
     Examples: 
       | memberID  | DOBmm | DOBdd | DOByr | lstname | zip   |
       | 905142635 |    07 |    31 |  1950 | BFCACDF | 17401 |
+      | 861622172 |    07 |    21 |  1940 | EBAEA   | 17401 |
       | test      |    07 |    21 |  1940 | EBAEA   | 27713 |
       | 861622172 |    07 |    21 |  1940 |   12345 | 27713 |
       | 861622172 |    07 |    21 |  1940 | EBAEA   | abcde |
+      | 905142635 |    0@ |    31 |  1950 | BFCACDF | 17401 |

@@ -66,8 +66,12 @@ public class UNPWAssistancePage extends UhcDriver {
 	@FindBy(linkText = "BACK TO SIGN IN PAGE")
 	private WebElement BackSignInPage;
 
+	@FindBy(xpath = ".//div[@class='field error']")
+	private WebElement MemNotFoundErr;
+
 	private static String PAGE_URL = MRConstants.Stage_UNPWAssistancePage_URL;
-//	private static String PAGE_URL = TeamC_UNPWAssistancePage_URL;
+
+	// private static String PAGE_URL = TeamC_UNPWAssistancePage_URL;
 
 	public UNPWAssistancePage(WebDriver driver) {
 		super(driver);
@@ -80,44 +84,39 @@ public class UNPWAssistancePage extends UhcDriver {
 		start(PAGE_URL);
 	}
 
-	public UNPWAssistancePage UNPWinfoMissing() throws InterruptedException {
+	public void UNPWinfoMissing() throws InterruptedException {
 
 		Thread.sleep(3000);
 		if (!UsenameBtn.isDisplayed()) {
 			Assert.fail("Username and password page not displayed!");
-			return null;
 		}
-		return new UNPWAssistancePage(driver);
-	}
-
-	public UNPWAssistancePage FillDetails(String MemID, String DBmm,
-			String DBdd, String DByyyy, String LstName, String ZP)
-			throws InterruptedException {
-
-		Thread.sleep(3000);
 		UsenameBtn.click();
 		pwdBtn.click();
 		Thread.sleep(3000);
 
 		JavascriptExecutor jse = (JavascriptExecutor) driver;
 		jse.executeScript("arguments[0].click();", ContinueButton);
-		// ContinueButton.submit();
 		Thread.sleep(5000);
 
 		if (!MemberID.isDisplayed()) {
 			Assert.fail("Username and password page not displayed!");
-			return null;
+
 		}
+	}
+
+	public void FillDetails(String MemID, String DBmm, String DBdd,
+			String DByyyy, String LstName, String ZP)
+			throws InterruptedException {
 
 		MemberID.sendKeys(MemID);
 
 		DOBmm.sendKeys(DBmm);
 		DOBdd.sendKeys(DBdd);
 		DOByyyy.sendKeys(DByyyy);
-		
-//		 Select DBmnth = new Select(DOBmm);
-//		 DBmnth.selectByIndex(Integer.parseInt(DBmm));
-		
+
+		// Select DBmnth = new Select(DOBmm);
+		// DBmnth.selectByIndex(Integer.parseInt(DBmm));
+
 		// Select DBday = new Select(DOBdd);
 		// DBday.selectByValue(DBdd);
 		//
@@ -128,9 +127,17 @@ public class UNPWAssistancePage extends UhcDriver {
 		ZIP.sendKeys(ZP);
 
 		ContinueButton.click();
-		Thread.sleep(5000);
+		JavascriptExecutor jse = (JavascriptExecutor) driver;
+		// Page refresh
+		boolean DriverReadyState = false;
+		while (DriverReadyState == false) {
+			DriverReadyState = jse.executeScript("return document.readyState")
+					.equals("complete");
+			Thread.sleep(2000);
+		}
 
-		boolean flag;
+		boolean flag = false;
+
 		try {
 			flag = ErrorinPage.isDisplayed();
 		} catch (Exception e) {
@@ -146,15 +153,14 @@ public class UNPWAssistancePage extends UhcDriver {
 			}
 
 			if (flag) {
-				System.out.println("email will be triggered");
+				System.out.println("Email will be triggered");
+			} else if (MemNotFoundErr.isDisplayed()) {
+				System.out.println("Member not found!");
 			} else {
 				Assert.fail("something went wrong / Member details are incorrect!");
-				return null;
 			}
-		}
 
-		return new UNPWAssistancePage(driver);
-
+		} else
+			System.out.println("Member details contains errors!");
 	}
-
 }
