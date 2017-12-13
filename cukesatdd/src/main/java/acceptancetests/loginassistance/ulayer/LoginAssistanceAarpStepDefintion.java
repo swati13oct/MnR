@@ -4,6 +4,14 @@
 package acceptancetests.loginassistance.ulayer;
 
 import gherkin.formatter.model.DataTableRow;
+import pages.acquisition.ulayer.LoginAssistancePage;
+import pages.acquisition.ulayer.LoginAssitanceMessagePage;
+import pages.acquisition.ulayer.PersonalIdentificationPage;
+import pages.member.ulayer.LoginAssistanceConfirmationJava;
+import pages.member.ulayer.LoginPage;
+import pages.member.ulayer.PersonalIdentificationPageNew;
+import pages.member.ulayer.PersonalIdentityUlayerPage;
+import pages.member.ulayer.UNPWAssistancePage;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -20,17 +28,8 @@ import org.openqa.selenium.WebDriver;
 import org.skyscreamer.jsonassert.JSONAssert;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import pages.acquisition.ulayer.LoginAssistancePage;
-import pages.acquisition.ulayer.LoginAssitanceMessagePage;
-import pages.acquisition.ulayer.PersonalIdentificationPage;
-import pages.member.ulayer.LoginAssistanceConfirmationJava;
-//import pages.member.ulayer.LoginAssistanceConfirmationJava;
-import pages.member.ulayer.LoginPage;
-import pages.member.ulayer.PersonalIdentificationPageNew;
-import pages.member.ulayer.PersonalIdentityUlayerPage;
-import pages.member.ulayer.UNPWAssistancePage;
 import acceptancetests.atdd.data.CommonConstants;
-import acceptancetests.atdd.data.acquisition.PageConstants;
+import acceptancetests.atdd.data.member.PageConstants;
 import acceptancetests.loginassistance.data.LoginAssistanceCommonConstants;
 import atdd.framework.MRScenario;
 import cucumber.annotation.After;
@@ -261,7 +260,7 @@ public class LoginAssistanceAarpStepDefintion {
 
 	}
 
-	@When("^the user selects the username or password checkbox in AARP site$")
+	/*@When("^the user selects the username or password checkbox in AARP site$")
 	public void user_selects_username_password_checkbox_aarp(DataTable attribute) {
 		String[] choiceSelected = attribute.getGherkinRows().get(0).getCells()
 				.get(0).split(",");
@@ -279,7 +278,7 @@ public class LoginAssistanceAarpStepDefintion {
 			Assert.fail("Error loading personalIdentification page");
 		}
 	}
-
+*/
 	@And("^the user enters the below member details in personal information page in AARP site$")
 	public void user_enters_member_details_personal_infortmation_aarp(
 			DataTable personalAttributes) {
@@ -293,7 +292,7 @@ public class LoginAssistanceAarpStepDefintion {
 					.get(0), personalAttributesRow.get(i).getCells().get(1));
 		}
 
-		PersonalIdentificationPage personalIdentificationPage = (PersonalIdentificationPage) getLoginScenario()
+		/*PersonalIdentificationPage personalIdentificationPage = (PersonalIdentificationPage) getLoginScenario()
 				.getBean(PageConstants.PERSONAL_IDENTIFICATION_PAGE);
 		LoginAssitanceMessagePage loginAssitanceMessagePage = personalIdentificationPage
 				.enterPersonalDetails(personalAttributesMap);
@@ -304,7 +303,7 @@ public class LoginAssistanceAarpStepDefintion {
 			Assert.assertTrue(true);
 		} else {
 			Assert.fail("Error loading loginAssitanceMessage page");
-		}
+		}*/
 
 	}
 
@@ -312,9 +311,9 @@ public class LoginAssistanceAarpStepDefintion {
 	public void user_validates_successfully_mail_sent_message_aarp() {
 		LoginAssitanceMessagePage loginAssitanceMessagePage = (LoginAssitanceMessagePage) getLoginScenario()
 				.getBean(PageConstants.LOGIN_ASSISTANCE_MESSAGE_PAGE);
-		JSONObject loginAssistanceMessageActual = loginAssitanceMessagePage.loginAssistanceMessageJson;
+		/*JSONObject loginAssistanceMessageActual = loginAssitanceMessagePage.loginAssistanceMessageJson;
 
-		/* Get expected data */
+		 Get expected data 
 		String fileName = LoginAssistanceCommonConstants.LOGIN_ASSISTANCE_FLOW;
 		String directory = CommonConstants.ACQUISITION_EXPECTED_DIRECTORY
 				+ File.separator + CommonConstants.SITE_BLUELAYER
@@ -335,7 +334,7 @@ public class LoginAssistanceAarpStepDefintion {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
+*/
 	}
 
 	@And("^the user clicks continue button without entering anything$")

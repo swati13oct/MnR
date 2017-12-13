@@ -70,10 +70,10 @@ public class TeamHLoginUlayer extends UhcDriver{
 			}*/
 		          
 		Thread.sleep(20000);
-		if(currentUrl().contains("member/testharness.html"))
+		if(currentUrl().contains("/dashboard"))
 
 		{
-			return new TestHarness(driver);
+			return new RallyDashboard(driver);
 		}
 		else if (currentUrl().contains("terminated-plan.html")) {
 			return new TerminatedHomePage(driver); 

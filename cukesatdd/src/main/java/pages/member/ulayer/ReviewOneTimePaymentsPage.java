@@ -47,7 +47,7 @@ public class ReviewOneTimePaymentsPage extends UhcDriver{
 	private WebElement Legalcheckbox;
 	
 	//@FindBy(xpath="/html/body/div[2]/div/div/div/div/div/div/div[2]/div[3]/div/div/div/button")
-	@FindBy(xpath="//button[contains(text(), 'Authorize monthly Payments')][1]")
+	@FindBy(xpath="//button[contains(text(), 'Submit Payment')][1]")
 	private WebElement SubmitButton;
 	
 	@FindBy(xpath="html/body/div[2]/div/div[2]/div/div/div[1]/div/div/div[1]/div[2]/span")

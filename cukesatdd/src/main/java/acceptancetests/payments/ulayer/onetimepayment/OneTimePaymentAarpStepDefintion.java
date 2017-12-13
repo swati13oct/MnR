@@ -27,6 +27,7 @@ import pages.member.ulayer.OneTimePaymentSuccessPage;
 import pages.member.ulayer.OneTimePaymentsPage;
 import pages.member.ulayer.PaymentHistoryPage;
 import pages.member.ulayer.PaymentsOverview;
+import pages.member.ulayer.RallyDashboard;
 import pages.member.ulayer.ReviewOneTimePaymentsPage;
 import pages.member.ulayer.TeamCLoginUlayerPayments;
 import pages.member.ulayer.TeamHLoginUlayer;
@@ -476,13 +477,15 @@ public class OneTimePaymentAarpStepDefintion {
 		}
 		
 		TeamHLoginUlayer loginPage = (TeamHLoginUlayer)getLoginScenario().getBean(PageConstants.LOGIN_PAGE);
-		TestHarness TestHarn = (TestHarness) loginPage.loginWith(userName, pwd);
+		//TestHarness TestHarn = (TestHarness) loginPage.loginWith(userName, pwd);
 		//AccountHomePage accountHomePage = (AccountHomePage) loginPage.loginWith(userName, pwd);
 		
+		RallyDashboard RallyDB = (RallyDashboard) loginPage.loginWith(userName, pwd);
 		
-		if (TestHarn != null) {
-			getLoginScenario().saveBean(PageConstants.TEST_HARNESS_PAGE,
-					TestHarn);
+		
+		if (RallyDB != null) {
+			getLoginScenario().saveBean(PageConstants.Rally_Dashboard,
+					RallyDB);
 			Assert.assertTrue(true);
 			/*JSONObject accountHomeActualJson = TestHarn.accountHomeJson;
 			getLoginScenario().saveBean(
@@ -622,11 +625,14 @@ public class OneTimePaymentAarpStepDefintion {
 		
 	}
 	
-	@And("^the user navigates to TeamHPaymentOverview Page$")
+	@And("^the user navigates to Stage PaymentOverview Page$")
 	public void user_navigates_to_TeamHPaymentOverview_Page() throws InterruptedException
 	{
-		TestHarness testHarness = (TestHarness)getLoginScenario().getBean(PageConstants.TEST_HARNESS_PAGE);
-		PaymentsOverview paymentsOverview = testHarness.navigateToTeamHPaymentOverview();
+		//TestHarness testHarness = (TestHarness)getLoginScenario().getBean(PageConstants.TEST_HARNESS_PAGE);
+		Thread.sleep(20000);
+		RallyDashboard RDB = (RallyDashboard)getLoginScenario().getBean(PageConstants.Rally_Dashboard );
+		PaymentsOverview paymentsOverview = RDB.navigateToPaymentOverview();
+		Thread.sleep(2000);
 		if(paymentsOverview!= null){
 			getLoginScenario().saveBean(PageConstants.PAYMENT_OVERVIEW,
 					paymentsOverview);

@@ -246,7 +246,7 @@ Scenario Outline: Verify the Timestamp on OneTime Payment Submitted page
 Given the user is on the Team-H AARP medicare site login page
 When the user logs in TeamH with a registered AMP with following details in AARP site
 	| Plan Type   | <planType>  |
-And the user navigates to TeamHPaymentOverview Page
+And the user navigates to Stage PaymentOverview Page
 And the user navigates to Team H One Time Payments page
 And the user enters details and click on continue button on One Time Payments Page for Dashboard
 And user lands on Review One time Payments Page and navigates to OTP Submitted Page

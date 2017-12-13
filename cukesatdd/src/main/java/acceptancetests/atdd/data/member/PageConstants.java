@@ -26,6 +26,8 @@ public class PageConstants {
 	public static final String BENEFITS_SUMMARY_PAGE = "benefitsSummaryPage";
 	
 	public static final String TEST_HARNESS_PAGE = "TestHarnessPage";
+	
+	public static final String Rally_Dashboard = "RallyDashboard";
 
 	public static final String REGISTRATION_SUCCESS_PAGE = "registrationSuccessPage";
 
@@ -208,4 +210,16 @@ public class PageConstants {
 	public static final String DeepLink_Page = "deepLinkPage";
 
 	public static final String DeepLink_url = "deepLinkUrl";
+
+	public static final String UNPWAssistancePage = null;
+
+	public static final String SignIN_Page = null;
+
+	public static final String LOGIN_ASSISTANCE_PAGE = null;
+
+	public static final String PERSONAL_IDENTIFICATION_PAGE = null;
+
+	public static final String LOGIN_ASSISTANCE_MESSAGE_PAGE = null;
+
+	public static final String Error_Message = null;
 }
