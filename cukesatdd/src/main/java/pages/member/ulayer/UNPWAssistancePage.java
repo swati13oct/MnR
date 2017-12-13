@@ -133,7 +133,7 @@ public class UNPWAssistancePage extends UhcDriver {
 		while (DriverReadyState == false) {
 			DriverReadyState = jse.executeScript("return document.readyState")
 					.equals("complete");
-			Thread.sleep(2000);
+			Thread.sleep(8000);
 		}
 
 		boolean flag = false;
