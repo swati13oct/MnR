@@ -127,14 +127,7 @@ public class UNPWAssistancePage extends UhcDriver {
 		ZIP.sendKeys(ZP);
 
 		ContinueButton.click();
-		JavascriptExecutor jse = (JavascriptExecutor) driver;
-		// Page refresh
-		boolean DriverReadyState = false;
-		while (DriverReadyState == false) {
-			DriverReadyState = jse.executeScript("return document.readyState")
-					.equals("complete");
-			Thread.sleep(8000);
-		}
+		Thread.sleep(10000);
 
 		boolean flag = false;
 
