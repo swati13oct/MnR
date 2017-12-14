@@ -1,6 +1,6 @@
 @eobFnF
 Feature:To test EOB on Dashboard page
-@fixed
+@fixed 
 Scenario Outline: Allowed Domains – Authors need ability to define messages and domains for leaving member sites (ATDD)
 Given registered AMP with for EOB flow
 	| Plan Type      |<planType>  |
@@ -9,7 +9,7 @@ Then the user navigates to EOB page
 Then the user validates site leaving pop up         
 Examples:
        | planType  | memberType        |  
-       | MAPD      | q4_dec_uhc001   	 | 
+       | MAPD      | q4_dec_uhc002   	 | 
        | PDP			 | q4_dec_aarp292		 |
        | MA				 | q4_dec_aarp507	   |   
 
