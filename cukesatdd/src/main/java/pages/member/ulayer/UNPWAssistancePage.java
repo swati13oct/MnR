@@ -86,7 +86,7 @@ public class UNPWAssistancePage extends UhcDriver {
 
 	public void UNPWinfoMissing() throws InterruptedException {
 
-		Thread.sleep(3000);
+		Thread.sleep(8000);
 		if (!UsenameBtn.isDisplayed()) {
 			Assert.fail("Username and password page not displayed!");
 		}
