@@ -157,17 +157,19 @@ public class ClaimsAarpStepDefinition {
 			urlAttributesMap .put(timeAttributesRow.get(i).getCells()
 					.get(0), timeAttributesRow.get(i).getCells().get(1));
 		}
+		
 
 		System.out.println(urlAttributesMap.get("Claim Period"));
 		String s=urlAttributesMap.get("Claim Period");
-
+		String planType = urlAttributesMap.get("Plan Type");
+		
 		//String claimPeriod = timeAttributesRow.get(0).getCells().get(0);
 		//String s = urlAttributesMap.get(key)
 		//System.out.println(claimPeriod);
 
 		ClaimSummarypage newClaimsSummaryPage = (ClaimSummarypage) getLoginScenario().getBean(PageConstants.NEW_CLAIMS_SUMMARY_PAGE);
 
-		newClaimsSummaryPage.searchClaimsByTimePeriod("s");
+		newClaimsSummaryPage.searchClaimsByTimePeriod(planType,s);
 
 		if(newClaimsSummaryPage != null)
 			getLoginScenario().saveBean(PageConstants.NEW_CLAIMS_SUMMARY_PAGE, newClaimsSummaryPage);

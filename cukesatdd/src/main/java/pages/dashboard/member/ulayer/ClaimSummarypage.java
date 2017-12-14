@@ -101,7 +101,7 @@ public class ClaimSummarypage extends UhcDriver{
 	@FindBy (xpath = "//div[@class='parsys summaryParsys']/div/div[not (contains(@class,'ng-hide'))][1]//p[text()='Prescription Drug EOB']/following::a[contains(@class,'btn btn--secondary')][1]")
 	private WebElement PrescriptionEobText;
 	
-	@FindBy (xpath="//a[contains(.,'Ship EOBSEARCH YOUR HISTORY')]")
+	@FindBy (xpath="//span[text()='Ship EOB']/parent::a")
 	private WebElement ShipClaimsEobText;
 
 	@FindBy (xpath=".//*[@id='table-medical']/div[2]/div[1]/div/a")
@@ -335,27 +335,40 @@ public class ClaimSummarypage extends UhcDriver{
 		}
 	}
 	
-	public void searchClaimsByTimePeriod(String claimPeriod) {
+	public void searchClaimsByTimePeriod(String planType,String claimPeriod) {
 		System.out.println("The title of the page is-------->"+driver.getTitle());
 		System.out.println("The URL of the page is---------->"+driver.getCurrentUrl());
 		if(driver.getTitle().equalsIgnoreCase("Claims")){
 			
 			
 			try { Thread.sleep(10000); } 
-			catch (InterruptedException e) {
-				
-				
+			catch (InterruptedException e) {						
 				// TODO Auto-generated catch block 
 				e.printStackTrace();
 				}
 			
-			waitforElement(driver.findElement(By.xpath("//div[@class='medical-claims']//h2[@ng-bind-html='planName']/parent::div//*[@id='document-date']")));
+			if(planType.contains("SHIP")){
+				System.out.println(planType+"SHIP plan type last 24 moths is going to select");
+						
+				last24months = driver.findElement(By.xpath("//div[@class='medical-claims shipCompSection']//div//*[@id='document-date']//option[contains(@value,'24 months')]"));
+			
+			}else{
+				
+				last24months = driver.findElement(By.xpath("//div[@class='medical-claims']//h2[@ng-bind-html='planName']/parent::div//*[@id='document-date']//option[contains(@value,'24 months')]"));
+							}
 			
 			//Select dropdown = new Select(driver.findElement(By.xpath("//div[@class='medical-claims']//h2[@ng-bind-html='planName']/parent::div//*[@id='document-date']//option[contains(@value,'24 months')]")));
 			
 			//dropdown.selectByIndex(4);
 			//CommonUtility.waitForPageLoad(driver, last24months, 60);
 			last24months.click();
+			try { Thread.sleep(10000); } 
+			catch (InterruptedException e) {			
+				
+				// TODO Auto-generated catch block 
+				e.printStackTrace();
+				}
+			
 			/*Select claimsFrom = new Select(viewClaimsFrom);
 			claimsFrom.selectByValue("24 months");*/
 		}
