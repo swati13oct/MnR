@@ -50,6 +50,9 @@ public class AcquisitionHomePage extends GlobalWebElements {
 
 	@FindBy(id = "cta-zipcode")
 	private WebElement zipCodeField;
+	
+	@FindBy(css="a.toggle-plan-year.ng-binding")
+	private WebElement view2017Plans;
 
 	@FindBy(id = "zipcodebtn")
 	private WebElement viewPlansButton;
@@ -97,7 +100,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	@FindBy(className = "fd_myPlans")
 	private WebElement myPlansTab;
 
-	@FindBy(linkText = "pharmacy")
+	@FindBy(id = "Find a pharmacy near you")
 	private WebElement pharmacyLink;
 	
 	@FindBy(id = "ghn_lnk_2")
@@ -652,7 +655,23 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	}
 
 	public PharmacySearchPage navigateToPharmacyLocator() {
+		/*Actions actions = new Actions(driver);
+		actions.moveToElement(ourPlansHoverLink);
+		actions.moveToElement(ma_moreHelpInfoLink);
+		actions.click().build().perform();*/
+		
+		driver.get(MRConstants.UHC_MA_REQUEST_MORE_HELP_AND_INFORMATION_URL);
+		try {
+			Thread.sleep(10000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
 		pharmacyLink.click();
+		try {
+			Thread.sleep(10000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
 		if (driver.getTitle().equalsIgnoreCase(
 				"Locate a Pharmacy | UnitedHealthcare®")) {
 			return new PharmacySearchPage(driver);
@@ -1036,7 +1055,19 @@ public class AcquisitionHomePage extends GlobalWebElements {
 					}
 					return null;
 				}
-
+				
+				public VPPPlanSummaryPage navigateToVpp(String zipcode)
+				{
+					
+					sendkeys(zipCodeField, zipcode);
+					viewPlansButton.click();
+					
+					if (getTitle().equalsIgnoreCase(
+							"Our Medicare Plan Types | UnitedHealthcare®")) {
+						return new VPPPlanSummaryPage(driver);
+					}
+					return null;
+				}
 
 }
 

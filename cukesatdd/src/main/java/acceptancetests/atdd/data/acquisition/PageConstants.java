@@ -20,6 +20,10 @@ public class PageConstants {
 	public static final String SELECT_GENERIC_PAGE = "selectGenericPage";
 
 	public static final String PHARMACY_SEARCH_PAGE = "pharmacySearchPage";
+	
+	public static final String UHCRETIREE_PHARMACY_RESULTS_PAGE = "pharmacyResultsPage";
+	
+	public static final String UHCRETIREE_PHARMACY_SEARCH_PAGE = "uhcRetireepharmacylocatorPage";
 
 	public static final String HEALTH_PLANS_PAGE = "healthPlansPage";
 
@@ -62,6 +66,8 @@ public class PageConstants {
 	public static final String ZIP_LOOK_UP_HOME_PAGE = "zipcodeLookuphomePage";
 
 	public static final String ZIP_SELECTION_HOME_PAGE = "zipcodeSelectionhomePage";
+	
+	public static final String DRUG_COST_ESTIMATOR_PAGE = "drugCostEstimatorPage";
 
 	public static final String OUR_PLANS_PAGE = "ourPlansPage";
 
@@ -359,6 +365,9 @@ public class PageConstants {
     public static final String RESPONSIVE_PLAN_SUMMARY_PAGE = "responsivePlanSummaryPage";
 	
 	public static final String RESPONSIVE_DETAILS_PAGE = "responsiveDetailsPage";
+	
+	public static final String RESPONSIVE_DETAILS_UHC_PAGE = "responsiveDetailsUHCPage";
+
 
 	public static final String NOKIA_HOME_PAGE = "nokiahomepages";
 	
@@ -369,6 +378,12 @@ public class PageConstants {
 	public static final String NONCUSTOM_HOME_PAGE = "noncustom";
 
 	public static final String UNIVERSITYOFMISSOURI_HOME_PAGE = "UniversityofMissouri";
+	
+	public static final String PORTFOLIO_PAGE_UHC = "ourPlans";
+	
+	public static final String PORTFOLIO_PAGE_AARP = "ourPlans";
+	
+	public static final String RESPONSIVE_PLAN_SUMMARY_PAGE_UHC = "vppPlan";
 
 	public static final String REGISTRATION_INFORMATION_PAGE = "RegistrationInformationPage";
 

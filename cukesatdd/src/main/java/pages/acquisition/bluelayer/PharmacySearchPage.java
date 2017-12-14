@@ -15,6 +15,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.FindBys;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.Select;
 
 import acceptancetests.atdd.data.CommonConstants;
 import acceptancetests.atdd.data.ElementData;
@@ -91,6 +92,51 @@ public class PharmacySearchPage extends UhcDriver {
 
 	@FindBy(className = "rowBorder")
 	List<WebElement> pharmacyRows;
+	
+	@FindBy(id = "zipcodeTxt")
+    private WebElement txtZipCode;
+
+    @FindBy(id = "plan-year")
+    private WebElement drpYear;
+
+    @FindBy(id = "address")
+    private WebElement txtAddress;
+
+    @FindBy(id = "city")
+    private WebElement txtCity;
+
+    @FindBy(id = "addErr")
+    private WebElement addressErrorMsg;
+
+    @FindBy(id = "cityErr")
+    private WebElement cityErrorMsg;
+
+    @FindBy(css = "a.lookupzip_btn")
+    private WebElement btnLookUpZipCode;
+
+   /* @FindBy(xpath = "//button")
+    private WebElement btnContinue;*/
+
+    @FindBy(css = ".errorRedColor>div>ul>li")
+    private WebElement zipCodeError;
+
+    @FindBy(id = "state_select")
+    private WebElement drpState;
+
+    @FindBy(id = "plan-type")
+    private WebElement drpPlan;
+
+    @FindBy(css = "#zipcode-button>span")
+    private WebElement btnContinue;
+    
+    @FindBy(id="distance")
+    private WebElement drpDistance;
+    
+    @FindBy(xpath="//span[contains(text(),'Standard Network Pharmacy')]")
+    private WebElement txtStandardNetworkPharmacy;
+    
+    @FindBy(xpath="//span[contains(text(),'Preferred Pharmacy')]")
+    private WebElement txtPreferredPharmacy;
 	
 	public JSONObject availablePharmaciesJson;
 	
@@ -255,107 +301,8 @@ public class PharmacySearchPage extends UhcDriver {
 	
 	@Override
 	public void openAndValidate() {
-
-		JSONObject jsonObject = new JSONObject();
-		for (String key : pharmacies.getExpectedData().keySet()) {
-			List<WebElement> elements = findElements(pharmacies
-					.getExpectedData().get(key));
-			if (elements.equals(pharmacyRows)) {
-				JSONArray pharmacyInfoJsonArray = new JSONArray();
-				if (elements.size() == 1) {
-					if (validate(elements.get(0))) {
-						JSONObject pharmacyInfoObject = new JSONObject();
-						for (String pharmacyInfoKey : pharmacyInfo
-								.getExpectedData().keySet()) {
-							WebElement drugInforElement = findChildElement(
-									pharmacyInfo.getExpectedData().get(
-											pharmacyInfoKey), elements.get(0));
-							try {
-								pharmacyInfoObject.put(pharmacyInfoKey,
-										drugInforElement.getText());
-							} catch (JSONException e) {
-								// TODO Auto-generated catch block
-								e.printStackTrace();
-							}
-						}
-						pharmacyInfoJsonArray.put(pharmacyInfoObject);
-						try {
-							jsonObject.put(key, pharmacyInfoJsonArray);
-						} catch (JSONException e) {
-							// TODO Auto-generated catch block
-							e.printStackTrace();
-						}
-					}
-				} else if (elements.size() > 1) {
-					for (WebElement element : elements) {
-						if (validate(element)) {
-							JSONObject drugInforObject = new JSONObject();
-							for (String drugInfoKey : pharmacyInfo
-									.getExpectedData().keySet()) {
-								WebElement drugInforElement = findChildElement(
-										pharmacyInfo.getExpectedData().get(
-												drugInfoKey), element);
-								try {
-									drugInforObject.put(drugInfoKey,
-											drugInforElement.getText());
-								} catch (JSONException e) {
-									// TODO Auto-generated catch block
-									e.printStackTrace();
-								}
-							}
-							pharmacyInfoJsonArray.put(drugInforObject);
-						}
-					}
-					try {
-						jsonObject.put(key, pharmacyInfoJsonArray);
-					} catch (JSONException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
-				}
-			} else {
-				if (elements.size() == 1) {
-					if (validate(elements.get(0))) {
-						try {
-							jsonObject.put(key, elements.get(0).getText());
-						} catch (JSONException e) {
-							// TODO Auto-generated catch block
-							e.printStackTrace();
-						}
-					}
-				} else if (elements.size() > 1) {
-					JSONArray jsonArray = new JSONArray();
-					for (WebElement element : elements) {
-
-						if (validate(element)) {
-							try {
-								JSONObject jsonObjectForArray = new JSONObject();
-								jsonObjectForArray.put(pharmacies
-										.getExpectedData().get(key)
-										.getElementName(), element.getText());
-								jsonArray.put(jsonObjectForArray);
-							} catch (JSONException e) {
-								// TODO Auto-generated catch block
-								e.printStackTrace();
-							}
-						}
-					}
-					try {
-						jsonObject.put(key, jsonArray);
-					} catch (JSONException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
-
-				}
-
-			}
-
-		}
-		availablePharmaciesJson = jsonObject;
-		System.out.println("availablePharmaciesJson----->"
-				+ availablePharmaciesJson);
-
+		validate(txtZipCode);
+		validate(drpYear);
 	}
 
 	public JSONObject getExpectedData(String fileName, String directory) {
@@ -368,6 +315,46 @@ public class PharmacySearchPage extends UhcDriver {
 
 		return pharmacyTable.getText();
 	}
+	
+	public void enterZipCode(String zipCode) {
+		txtZipCode.clear();
+		txtZipCode.sendKeys(zipCode);
+	    }
+
+	    public void selectState(String state) {
+
+		Select selectState = new Select(drpState);
+		selectState.selectByVisibleText(state);
+	    }
+
+	    public void fillFieldsToFindZipCode(String address, String city, String state) {
+		txtAddress.sendKeys(address);
+		txtCity.sendKeys(city);
+		selectState(state);
+	    }
+
+	    public PharmacyResultPage clickOnContinue() {
+		btnContinue.click();
+		return new PharmacyResultPage(driver);
+	    }
+
+	    public PharmacyResultPage selectAPlan(String planName) {
+		Select selectPlan = new Select(drpPlan);
+		selectPlan.selectByVisibleText(planName);
+		try {
+			Thread.sleep(5000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		return new PharmacyResultPage(driver);
+	    }
+	    
+	    public void selectAYear(String year) {
+	    	Select selectPlan = new Select(drpYear);
+	    	if(year.equals("2017")){
+	    		selectPlan.selectByValue("1");
+	    	}
+	    }
 	
 
 }

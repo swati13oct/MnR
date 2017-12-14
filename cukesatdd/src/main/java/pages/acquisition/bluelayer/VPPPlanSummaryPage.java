@@ -3,33 +3,30 @@
  */
 package pages.acquisition.bluelayer;
 
-import java.util.List;
-import java.util.Set;
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
+import java.util.Set;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.junit.Assert;
 import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.NoSuchElementException;
+import org.openqa.selenium.JavascriptExecutor;import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-import pages.acquisition.bluelayer.EnrollPlanInfoPage;
-
-import pages.acquisition.uhcretiree.Rallytool_Page;
-import pages.acquisition.ulayer.AcquisitionHomePage;
 import acceptancetests.atdd.data.CommonConstants;
 import acceptancetests.atdd.data.ElementData;
 import acceptancetests.atdd.data.PageData;
 import acceptancetests.atdd.util.CommonUtility;
 import atdd.framework.UhcDriver;
+import pages.acquisition.uhcretiree.Rallytool_Page;
+import pages.acquisition.ulayer.AcquisitionHomePage;
 
 /**
  * @author pagarwa5
@@ -108,12 +105,33 @@ public class VPPPlanSummaryPage extends UhcDriver {
 
 	@FindBy(xpath = "//div[@id='maplans_container']/div[3]/div/div[2]/div[1]/div/div[1]/div[1]/div/div[1]/div[2]/table/tbody/tr/td[3]/div/div[2]/div[3]/div[1]/p/a")
 	private WebElement MaProviderLink;
+	
+	@FindBy(xpath="//div[contains(@ng-repeat,'plan in planModel.pdpPlans')]")
+	List<WebElement> pdpPlans;
+
+	@FindBy(xpath = ".//*[@id='site-wrapper']/div[4]/div/div[1]/div/div/div/div/div[1]/div/div/div[1]/div[2]/div/div[2]/div[1]/div")
+	private WebElement viewPlans;
+
+	@FindBy(xpath = ".//*[@id='site-wrapper']/div[4]/div/div/div/div/div/div/div[1]/div/div/div[1]/div[2]/div/div[2]/div[3]")
+	private WebElement viewPDPPlans;
+
+	@FindBy(xpath = "//div[@id='snpplans_container']/h1/span[2]")
+	WebElement msnPlanHeadingText;
+
+	@FindBy(xpath = "//div[@id='snpplans_container']/h1/span")
+	WebElement msnPlanHeadingYear;
+
+	@FindBy(xpath="//div[@data-ng-repeat='plan in snpplans']")
+	List<WebElement> msnPlans;
 
 	@FindBy(xpath = ".//*[@id='_pac_logo']")
 	private WebElement reactiveButton;
 
 	@FindBy(xpath = ".//*[@id='CloseBtn']")
 	private WebElement reactiveCloseButton;
+	
+	@FindBy(xpath = ".//*[@id='site-wrapper']/div[4]/div/div/div/div/div/div/div[1]/div/div/div[2]/div/div/div/span/a")
+	private WebElement view2017Plans;
 	
 	@FindBy(xpath = ".//*[@id='_pac_helpbutton']")
 	private WebElement proactiveButton;
@@ -666,5 +684,95 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		driver.switchTo().window(MainWindow);
 		return null;
 	}
+	
+	public boolean yearBtnExists() {
+		if(validate(view2017Plans))
+			return true;
+		return false;
+	}
+	
+	public void clickOnViewPlans(String plantype) {
+		try {
+			Thread.sleep(10000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		if(plantype.equals("MA")||plantype.equals("MAPD")){
+			viewPlans.click();
+		}else
+			viewPDPPlans.click();
 
+	}
+
+	public void choose2017Plans() {
+		viewPlans.click();
+		try {
+			Thread.sleep(2000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		if(view2017Plans!=null){
+			view2017Plans.click();
+			try {
+				Thread.sleep(2000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			//viewPlans.click();
+		}	
+
+	}
+	public DrugCostEstimatorPage navigateToDCE(String plantype) {
+		if(plantype.equals("MA")||plantype.equals("MAPD")){
+			//viewPlans.click();
+			List<WebElement> view2017Plans = driver.findElements(By.id("maDCELink"));
+			view2017Plans.get(0).click();
+		}else{
+			//viewPDPPlans.click();
+			List<WebElement> view2017PDPPlans = driver.findElements(By.id("pdpDrugCostEstimatorLink"));
+			view2017PDPPlans.get(0).click();
+
+		}
+		try {
+			Thread.sleep(3000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		if(currentUrl().contains("/estimate-drug-costs.html#/drug-cost-estimator"))
+			return new DrugCostEstimatorPage(driver);
+		return null;
+
+	}
+	public DrugCostEstimatorPage navigateToDCEAfterDrugAdded(String plantype) {
+		try {
+			Thread.sleep(10000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		if(plantype.equals("MA")||plantype.equals("MAPD")){
+			viewPlans.click();
+			List<WebElement> view2017Plans = driver.findElements(By.linkText("Edit drug list"));
+			view2017Plans.get(0).click();
+		}else{
+			viewPDPPlans.click();
+			List<WebElement> view2017PDPPlans = driver.findElements(By.linkText("Edit drug list"));
+			view2017PDPPlans.get(0).click();
+
+		}
+		try {
+			Thread.sleep(3000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		if(currentUrl().contains("/estimate-drug-costs.html#/drug-cost-estimator"))
+			return new DrugCostEstimatorPage(driver);
+		return null;
+
+	}
 }

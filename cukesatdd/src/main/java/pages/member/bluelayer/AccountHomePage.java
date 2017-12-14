@@ -19,6 +19,7 @@ import org.openqa.selenium.support.ui.Select;
 import pages.member.bluelayer.OrderplanmaterialsPage;
 import pages.member.bluelayer.ContactUsPage;
 import acceptancetests.atdd.data.CommonConstants;
+import acceptancetests.atdd.data.MRConstants;
 import acceptancetests.atdd.data.PageData;
 import acceptancetests.atdd.util.CommonUtility;
 import acceptancetests.login.data.LoginCommonConstants;
@@ -649,6 +650,22 @@ public FormsandresourcesPage navigateToMydocumentUmsPage() {
 		}
 		return null;
 	}
+	
+	public pages.member.bluelayer.ContactUsPage navigateToContactusRedesignPage() {
+		// TODO Auto-generated method stub
+		//String url = "https://member.team-e-uhcmedicaresolutions.uhc.com/content/uhcm/home/contact.html";
+		System.out.println(MRConstants.REDESIGN_UHCM_URL);
+		driver.get(MRConstants.REDESIGN_UHCM_URL);
+		try {
+			Thread.sleep(15000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+		}
+		if (driver.getTitle().trim().equals("Overview")) {
+			return new pages.member.bluelayer.ContactUsPage(driver);
 
+		}
+		return null;
+	}
 }
 

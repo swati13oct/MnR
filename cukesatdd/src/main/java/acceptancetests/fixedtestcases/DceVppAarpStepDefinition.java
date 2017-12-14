@@ -1035,7 +1035,7 @@ public class DceVppAarpStepDefinition {
 	public void ways_to_save() {
 		PlanDetailsPage vppPlanDetailsPage = (PlanDetailsPage) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_DETAILS_PAGE);
-		ManageDrugPage manageDrugPage = vppPlanDetailsPage.showWaysToSave();
+		ManageDrugPage manageDrugPage = /*vppPlanDetailsPage.showWaysToSave()*/null;
 
 		/* Get Actual Json */
 		JSONObject manageDrugActualJson = manageDrugPage.manageDrugJson;

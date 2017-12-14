@@ -3,6 +3,10 @@
  */
 package acceptancetests.pdpenquirykit.ulayer;
 
+/**
+ * 
+ */
+
 import gherkin.formatter.model.DataTableRow;
 
 import java.io.File;
@@ -146,16 +150,5 @@ public class PDPEnquiryKitAarpStepDefintion {
 		}
 
 	}
-	
-	
-	@After
-	public void tearDown() {
-
-		WebDriver wd = (WebDriver) getLoginScenario().getBean(
-				CommonConstants.WEBDRIVER);
-		wd.quit();
-		getLoginScenario().flushBeans();
-	}
-
 	
 }

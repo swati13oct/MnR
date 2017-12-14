@@ -1,5 +1,5 @@
 @planSummaryPage
-Feature: To vefify mobile responsive 
+Feature: To vefify Plan Summary and DCE flow 
  
 Scenario Outline: To validate plan highlights and provider searh link
 Given the user is on the vpp portfolio page
