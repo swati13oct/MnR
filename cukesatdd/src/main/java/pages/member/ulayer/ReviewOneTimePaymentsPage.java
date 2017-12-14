@@ -47,6 +47,9 @@ public class ReviewOneTimePaymentsPage extends UhcDriver{
 	private WebElement Legalcheckbox;
 	
 	//@FindBy(xpath="/html/body/div[2]/div/div/div/div/div/div/div[2]/div[3]/div/div/div/button")
+	@FindBy(xpath="//button[contains(text(), 'Authorize Payments')][1]")
+	private WebElement RecurringSubmitButton;
+	
 	@FindBy(xpath="//button[contains(text(), 'Submit Payment')][1]")
 	private WebElement SubmitButton;
 	
@@ -120,6 +123,27 @@ public class ReviewOneTimePaymentsPage extends UhcDriver{
 		jse.executeScript("window.scrollBy(0,300)", "");
 		Thread.sleep(2000);
 		SubmitButton.click();
+		System.out.println("Submit Button clicked");
+	    Thread.sleep(5000);
+		 if(driver.getTitle().equalsIgnoreCase("overview") || driver.getTitle().equalsIgnoreCase("onetimepayments") ){
+				return new OneTimePaymentPageSubmitted(driver);
+			}
+		    return null;
+	}
+	
+	
+public OneTimePaymentPageSubmitted navigateToReviewSubmittedPage() throws InterruptedException {
+		
+		Thread.sleep(2000);	
+		JavascriptExecutor jse = (JavascriptExecutor)driver;
+		jse.executeScript("window.scrollBy(0,300)", "");
+		Thread.sleep(2000);
+		Legalcheckbox.click();
+		System.out.println("Checkbox clicked");		
+		Thread.sleep(2000);		
+		jse.executeScript("window.scrollBy(0,300)", "");
+		Thread.sleep(2000);
+		RecurringSubmitButton.click();
 		System.out.println("Submit Button clicked");
 	    Thread.sleep(5000);
 		 if(driver.getTitle().equalsIgnoreCase("overview") || driver.getTitle().equalsIgnoreCase("onetimepayments") ){

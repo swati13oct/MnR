@@ -16,7 +16,7 @@ import cucumber.junit.Cucumber;
 		features = { "feature/payments/OneTimePayment/ulayer" }, 
 		format = {
 
-		"pretty", "html:reports/test-report" }, tags ={"@TeamHActual"})
+		"pretty", "html:reports/test-report" }, tags ={"@TeamHActual,@TeamHAuto,@TeamHError"})
 public class RunMRAtddTestPayments {
 
 }

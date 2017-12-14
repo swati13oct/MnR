@@ -21,6 +21,9 @@ public class PaymentsOverview extends UhcDriver{
 	@FindBy(xpath = "//div[@id='paymentOverviewApp']//span[@class='payment-method-btn'][2]/a")
 	private WebElement AutomaticPaymentButton;
 	
+	@FindBy(xpath = "//*[@id='editAutomaticPaymentsModal']/div/div/div[3]/a[1]/span")
+	private WebElement SetUpNewAutoPayment;	
+	
 	@FindBy(xpath=".//*[@id='customFields']/div[3]/button")
 	private WebElement SearchButton;
 	
@@ -88,6 +91,8 @@ public class PaymentsOverview extends UhcDriver{
 		Thread.sleep(5000);
 		if(AutomaticPaymentButton.isEnabled()){
 			AutomaticPaymentButton.click();
+			Thread.sleep(2000);
+			SetUpNewAutoPayment.click();
 			return new OneTimePaymentsPage(driver);
 		}
 		return null;

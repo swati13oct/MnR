@@ -787,7 +787,7 @@ public class OneTimePaymentAarpStepDefintion {
 	public void Review_OneTime_Payment_Navigation_to_OTPSubmitted() throws InterruptedException
 	{
 		ReviewOneTimePaymentsPage reviewOneTimePaymentsPage = (ReviewOneTimePaymentsPage)getLoginScenario().getBean(PageConstants.REVIEW_ONE_TIME_PAYMENTS_DASHBOARD);
-		OneTimePaymentPageSubmitted OTPSubmitted = reviewOneTimePaymentsPage.navigateToOTPSubmittedPage();
+		OneTimePaymentPageSubmitted OTPSubmitted = reviewOneTimePaymentsPage.navigateToReviewSubmittedPage();
 		Thread.sleep(1000);
 		if(OTPSubmitted != null){
 			getLoginScenario().saveBean(PageConstants.CONFIRM_ONE_TIME_PAYMENT_PAGE,
