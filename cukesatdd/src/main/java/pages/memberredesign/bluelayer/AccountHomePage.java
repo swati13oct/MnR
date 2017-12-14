@@ -71,13 +71,13 @@ public class AccountHomePage extends UhcDriver {
 	@FindBy(linkText = "Legal Notices & Disclosures")
 	private WebElement legalNotices;
 	
-	@FindBy(linkText = "ACCOUNT SETTINGS")
+	@FindBy(linkText = "Account Settings")
 	private WebElement accountnSettings;
 	
-	@FindBy(linkText = "SAVED")
+	@FindBy(linkText = "Saved")
 	private WebElement saved;
 	
-	@FindBy(linkText = "LOG OUT")
+	@FindBy(linkText = "Logout")
 	private WebElement logout;
 	
 	@FindBy(linkText = "About UnitedHealthcare")
