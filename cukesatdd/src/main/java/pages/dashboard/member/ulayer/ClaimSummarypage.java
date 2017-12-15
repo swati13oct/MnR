@@ -3,6 +3,7 @@ import java.security.PublicKey;
 import java.util.List;
 import java.util.Map;
 
+import org.junit.internal.runners.statements.Fail;
 import org.omg.CORBA.PUBLIC_MEMBER;
 import org.openqa.selenium.By;
 /**
@@ -38,7 +39,7 @@ public class ClaimSummarypage extends UhcDriver{
 	@FindBy(xpath=".//*[@class='claimsearch section']/div[1]//h1")
 	private WebElement myCaimsText;
 
-	@FindBy(xpath = "//html/head/title")
+	@FindBy(css = ".claim-results")
 	private WebElement ClaimsSummaryPage;
 
 	@FindBy(xpath=".//h2[contains(.,'Plan Name Lorem Ipsum')]")
@@ -56,7 +57,7 @@ public class ClaimSummarypage extends UhcDriver{
 	@FindBy(xpath = "//div[2]/section/div/div/div/form/fieldset/div/div/div[2]/div/select/option[@value='6 months']")
 	private WebElement last6Months;
 	
-	@FindBy (xpath = "//option[@value='24 months']")
+	@FindBy (xpath = "//div[@class='medical-claims']//h2[@ng-bind-html='planName']/parent::div//*[@id='document-date']//option[contains(@value,'24 months')]")
 	private WebElement last24months;
 	
 	@FindBy(xpath="//div[normalize-space()='Prescription Drug']")
@@ -90,13 +91,17 @@ public class ClaimSummarypage extends UhcDriver{
 	@FindBy (xpath=".//*[@id='summaryview']/div/div/main/div/div[2]/section/div/div/div[2]/div/div/ul")
 	private WebElement claimsTablePagination;
 
-	@FindBy (xpath="//div[not (contains(@class,'ng-hide')) and contains(@ng-show,'AEM')]//div[@id='ma_mapd']//a")
+	//@FindBy (xpath="//div[not (contains(@class,'ng-hide')) and contains(@ng-show,'AEM')]//div[@id='ma_mapd']//a")
+	//@FindBy (xpath="//div[@class='parsys summaryParsys']/div/div[not (contains(@class,'ng-hide'))][1]//a[contains(@class,'btn btn--secondary')]")
+	@FindBy (xpath = "//div[@class='parsys summaryParsys']/div/div[not (contains(@class,'ng-hide'))][1]//span[text()='Medical EOB']/parent::a[contains(@class,'btn btn--secondary')]")
 	private WebElement medicalEobText;
 
-	@FindBy (xpath="//div[not (contains(@class,'ng-hide')) and contains(@ng-show,'AEM')]//div[@id='pdp_mapd']//a")
+	//@FindBy (xpath="//div[not (contains(@class,'ng-hide')) and contains(@ng-show,'AEM')]//div[@id='pdp_mapd']//a")
+	//@FindBy (xpath = "//div[@class='parsys summaryParsys']/div/div[not (contains(@class,'ng-hide'))][1]//a[contains(@class,'btn btn--secondary')]")
+	@FindBy (xpath = "//div[@class='parsys summaryParsys']/div/div[not (contains(@class,'ng-hide'))][1]//p[text()='Prescription Drug EOB']/following::a[contains(@class,'btn btn--secondary')][1]")
 	private WebElement PrescriptionEobText;
 	
-	@FindBy (xpath="//a[contains(.,'Ship EOBSEARCH YOUR HISTORY')]")
+	@FindBy (xpath="//span[text()='Ship EOB']/parent::a")
 	private WebElement ShipClaimsEobText;
 
 	@FindBy (xpath=".//*[@id='table-medical']/div[2]/div[1]/div/a")
@@ -105,13 +110,13 @@ public class ClaimSummarypage extends UhcDriver{
 	@FindBy (xpath=".//*[@id='table-medical']/div[2]/div[2]/div/a")
 	private WebElement learnmorePdp;
 
-	@FindBy (xpath="//img[@alt='Blue Button']")
+	@FindBy (xpath=".//a[@class='downloadMyDataLink']")
 	private WebElement downloadmydatabutton;
 
 	@FindBy (xpath="//button[contains(.,'Proceed')]")
 	private WebElement proceedbutton;
 
-	@FindBy (xpath=".//*[@id='differentProviderClaims']/div/div")
+	@FindBy (xpath=".//*[@id='siteleaving-popup-overlay']")
 	private WebElement proceedToDownloadPopUp;
 
 	@FindBy(id="replace-current-rider")
@@ -120,14 +125,28 @@ public class ClaimSummarypage extends UhcDriver{
 	@FindBy (xpath = "//a[contains(text(),'CANCEL')]")
 	private WebElement cancelButtonDownloadPopUp;
 
-	@FindBy (xpath="//button")
+	//@FindBy (xpath="(//button[@class="btn btn--primary margin-none"])[1]")
+	@FindBy (xpath ="(//*[text()='Search'])[1]")
 	private WebElement searchButton;
+	
 
 	@FindBy (id="custom-from")
 	private WebElement from;
 
 	@FindBy (id="custom-to")
 	private WebElement to;
+	@FindBy (xpath = ".//*[@id='errorMsg']/div/p")
+	private WebElement rxErrorMsg;
+	
+	@FindBy (css = ".ng-scope>p>span")
+	private WebElement shipDateRangeErrMsg;
+	
+	@FindBy (css = ".color-red.semi-bold>p>span")
+	private WebElement fedDateRangeErrMsg;
+	
+	@FindBy (css = ".color-red.semi-bold>p>span")
+	private WebElement fromDateLaterThanToDateError;
+	
 
 
 	public ClaimSummarypage(WebDriver driver) {
@@ -226,10 +245,15 @@ public class ClaimSummarypage extends UhcDriver{
 			System.out.println("for MAPD NICE prescription drug EOB's are displayed ===>"+ (PrescriptionEobText.isDisplayed()));
 			return PrescriptionEobText.isDisplayed();
 		}
-		else if (domain.equals("NICE")&&plantype.equals("MA"))
+		else if ( (domain.equals("COSMOS")&&plantype.equals("MA")))
 		{
 			System.out.println("for MA medical Eob is diplayed ====>"+ (medicalEobText.isDisplayed()));
 			return medicalEobText.isDisplayed();
+		}
+		else if ((domain.equals("NICE")&&plantype.equals("MA")))
+		{
+			System.out.println("Medical EOB is not Displayed for MA NICE member");
+			return true;
 		}
 		//SHIP CLAIMS EOB
 		else if ((domain.equals("NA") && plantype.equals("SHIP"))){
@@ -311,18 +335,40 @@ public class ClaimSummarypage extends UhcDriver{
 		}
 	}
 	
-	public void searchClaimsByTimePeriod(String claimPeriod) {
+	public void searchClaimsByTimePeriod(String planType,String claimPeriod) {
 		System.out.println("The title of the page is-------->"+driver.getTitle());
 		System.out.println("The URL of the page is---------->"+driver.getCurrentUrl());
 		if(driver.getTitle().equalsIgnoreCase("Claims")){
 			
-			Select dropdown = new Select(driver.findElement(By.id("document-date")));
 			
-			dropdown.selectByVisibleText("Last 24 months");
+			try { Thread.sleep(10000); } 
+			catch (InterruptedException e) {						
+				// TODO Auto-generated catch block 
+				e.printStackTrace();
+				}
 			
+			if(planType.contains("SHIP")){
+				System.out.println(planType+"SHIP plan type last 24 moths is going to select");
+						
+				last24months = driver.findElement(By.xpath("//div[@class='medical-claims shipCompSection']//div//*[@id='document-date']//option[contains(@value,'24 months')]"));
 			
+			}else{
+				
+				last24months = driver.findElement(By.xpath("//div[@class='medical-claims']//h2[@ng-bind-html='planName']/parent::div//*[@id='document-date']//option[contains(@value,'24 months')]"));
+							}
+			
+			//Select dropdown = new Select(driver.findElement(By.xpath("//div[@class='medical-claims']//h2[@ng-bind-html='planName']/parent::div//*[@id='document-date']//option[contains(@value,'24 months')]")));
+			
+			//dropdown.selectByIndex(4);
 			//CommonUtility.waitForPageLoad(driver, last24months, 60);
-			//last24months.click();
+			last24months.click();
+			try { Thread.sleep(10000); } 
+			catch (InterruptedException e) {			
+				
+				// TODO Auto-generated catch block 
+				e.printStackTrace();
+				}
+			
 			/*Select claimsFrom = new Select(viewClaimsFrom);
 			claimsFrom.selectByValue("24 months");*/
 		}
@@ -330,9 +376,22 @@ public class ClaimSummarypage extends UhcDriver{
 
 	public void validateClaimsTable() {
 		CommonUtility.waitForPageLoad(driver, ClaimsSummaryPage,60);
+		
+		try {
+			Thread.sleep(5000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		if(claimsTableMedical.isDisplayed() || claimsTablePrescriptionDrug.isDisplayed() || claimsTableSHIP.isDisplayed()){
 			System.out.println("!!!!!!!!! Able to find the claims table !!!!!!!!!");
-		}		
+			
+		}	
+		else
+		{
+			System.out.println("!!!!!!!!! NOT Able to find the claim table !!!!!!!!!");
+		Assert.fail();
+		}
 	}
 
 	public void validateDownloadMyData() {
@@ -344,7 +403,7 @@ public class ClaimSummarypage extends UhcDriver{
 			waitforElement(proceedToDownloadPopUp);
 			System.out.println("Proceed button is displayed ===>"+(proceedToDownloadPopUp.isDisplayed()));
 			proceedToDownloadPopUp.click();
-			if(proceedToDownloadPopUp.isDisplayed()){
+			/*if(proceedToDownloadPopUp.isDisplayed()){
 				proceedButtonDownloadPopUp.click();
 				System.out.println("Proceed button functionality is working as expected");
 			}
@@ -353,7 +412,7 @@ public class ClaimSummarypage extends UhcDriver{
 			if(driver.getTitle().contains("Claims")){
 				System.out.println("Cancel button functionality is working as expected");
 			}
-
+*/
 
 		}
 		else 
@@ -362,7 +421,41 @@ public class ClaimSummarypage extends UhcDriver{
 
 		}
 	}
+	
+	public boolean validateRxReachexMaxClaimsErrorMsg() {
+
+		return rxErrorMsg.isDisplayed();
+
+	}
+	
+
+	public void validateShipGreaterThan24MonthsErrorMsg() {
+		if (!shipDateRangeErrMsg.isDisplayed())
+		Assert.fail(shipDateRangeErrMsg + "is not being displayed");
+
+		// shipDateRangeErrMsg.isDisplayed();
+
+	}
+	
+	public void validateFedGreaterThan24MonthsErrorMsg() {
+		
+		if(!fedDateRangeErrMsg.isDisplayed())
+			Assert.fail(fedDateRangeErrMsg +"Is not being displayed");
+		
+	}
+	
+	public void  validatefromDateLaterThanToDateError() {
+		
+		
+		if(!fromDateLaterThanToDateError.isDisplayed())
+			Assert.fail(fromDateLaterThanToDateError + "is not beind dsiplayed");
+		
+	}
+	
+	
 }
+
+
 
 
 

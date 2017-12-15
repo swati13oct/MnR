@@ -40,7 +40,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.junit.Assert;
 import org.openqa.selenium.Dimension;
-import org.openqa.selenium.Platform;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -51,13 +50,13 @@ import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.phantomjs.PhantomJSDriver;
 import org.openqa.selenium.phantomjs.PhantomJSDriverService;
-import org.openqa.selenium.remote.CapabilityType;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.springframework.ldap.core.DistinguishedName;
 import org.springframework.stereotype.Component;
 
 import acceptancetests.atdd.data.CommonConstants;
+
 
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.WebClient;
@@ -129,6 +128,7 @@ public class MRScenario {
 		browser = props.get("browser");
 		/* Set acqusisition and member urls */
 		environment = props.get("Environment");
+		System.out.println("Environment selected1 : "+environment);
 
 		/* Set up DB */
 		Connection con = getDBConnection(props);
@@ -567,6 +567,7 @@ public class MRScenario {
 		for (String key : prop.stringPropertyNames()) {
 			String value = prop.getProperty(key);
 			props.put(key, value);
+			System.out.println("Key :"+key+ "value :"+value);
 		}
 		return props;
 	}
@@ -664,7 +665,7 @@ public class MRScenario {
 		Set<String> keySetUms = umsRegistrationDataMap.keySet();
 		for (String umsKey : keySetUms) {
 			if(umsKey.equalsIgnoreCase("q1_feb_grp043")){
-				System.out.println("stop at here 1...........................");
+				//System.out.println("stop at here 1...........................");
 			}
 			Map<String, JSONObject> umsObjectMap = new HashMap<String, JSONObject>();
 			for (int i = 0; i < CommonConstants.PAGES_BLUELAYER.length; i++) {
@@ -677,7 +678,7 @@ public class MRScenario {
 				}
 			}
 			if (!umsObjectMap.isEmpty())
-				System.out.println("stop at here 2...........................");
+				//System.out.println("stop at here 2...........................");
 			expectedDataMapBluelayer.put(umsKey, umsObjectMap);
 		}
 
@@ -821,8 +822,7 @@ public class MRScenario {
 			stream = new FileInputStream(parentDirectory + DIRECTORY
 					+ directory + fileName);
 		} catch (FileNotFoundException e) {
-			System.out.println("FILE NOT FOUND: " + parentDirectory + DIRECTORY
-					+ directory + fileName);
+			//System.out.println("FILE NOT FOUND: " + parentDirectory + DIRECTORY+ directory + fileName);
 			return jsonObject;
 		}
 
@@ -920,7 +920,7 @@ public class MRScenario {
 	 * look at the Jenkins job, it specifies a browser type and it should be PhantomJS.
 	 * Anything else may be a problem.
 	 */
-
+	
 	public WebDriver getWebDriver() {
 
 		//Is system propery exists defining JENKINS_BROWSER, we're running in JENKINS and
@@ -934,7 +934,7 @@ public class MRScenario {
 
 		String agent = (null == System.getProperty(CommonConstants.JENKINS_BROWSER_AGENT_STRING)
 				? props.get(CommonConstants.DESKTOP_BROWSER_AGENT_STRING) : System.getProperty(CommonConstants.JENKINS_BROWSER_AGENT_STRING));
-
+		System.out.println("Environment selected 2 : "+environment);
 
 		if (browser.equalsIgnoreCase(CommonConstants.JENKINS_BROWSER_PHANTOMJS)) {
 			System.out.println("PHANTOMJS Agent: " + agent);
@@ -952,9 +952,8 @@ public class MRScenario {
 		// take screenshots at the end.
 		if (null == webDriver) {
 			System.out.println("New WebDriver CREATED");
-			/*String browserName =props.get("BrowserName");
-			System.out.println("browserName:: " +browserName);*/
-			
+
+
 			// Choose your browser based on name. The name value is what is in
 			// CommonConstants.
 			// If the browser isn't configured (null) or it's set to HTMLUNIT,
@@ -998,7 +997,6 @@ public class MRScenario {
 			} else if (browser.equalsIgnoreCase(CommonConstants.CHROME_BROWSER)) {
 				Map<String, Object> chromeOptions = new HashMap<String, Object>();
 				chromeOptions.put("binary", pathToBinary);
-				System.setProperty("webdriver.chrome.driver",pathToBinary);
 				DesiredCapabilities capabilities = DesiredCapabilities.chrome();
 				capabilities.setCapability(ChromeOptions.CAPABILITY, chromeOptions);
 				webDriver = new ChromeDriver(capabilities);
@@ -1023,130 +1021,81 @@ public class MRScenario {
 				return webDriver;
 			}else if (browser.equalsIgnoreCase(CommonConstants.SAUCE_BROWSER_WEB)) {
 				System.out.println("Execution is Going to Start on SauceLabs Web.....!!!!!");
-                DesiredCapabilities capabilities = null;
-                if(browserName.equalsIgnoreCase("firefox")){
-                	System.out.println("Inside firefox");
-                capabilities = DesiredCapabilities.firefox();
-                capabilities.setCapability("platform", "Windows 7");
-                capabilities.setCapability("version", "43");
-                capabilities.setCapability("idleTimeout", 180);
-                }else if(browserName.equalsIgnoreCase("IE")){
-                	capabilities = DesiredCapabilities.internetExplorer();
-                	capabilities.setCapability("platform", "Windows 7");
-                	capabilities.setCapability("version", "11.0");
-                	capabilities.setCapability("screenResolution", "1024x768");
-                }else if(browserName.equalsIgnoreCase("chrome")){
-                	System.out.println("Inside chrome");
-                	capabilities = DesiredCapabilities.chrome();
-                	capabilities.setCapability("platform", "Windows 7");
-                	capabilities.setCapability("version", "52.0");
-                	capabilities.setCapability("screenResolution", "800x600");
-                }
-                capabilities.setCapability("autoAcceptsAlerts", true);
-                capabilities.setCapability("parent-tunnel", "sauce_admin");
-                capabilities.setCapability("tunnelIdentifier", "OptumSharedTunnel-Prd");
-                String SAUCE_USERNAME = props.get("SAUCE_USERNAME");
-	            String SAUCE_ACCESS_KEY = props.get("SAUCE_ACCESS_KEY");
-                //String URL = "http://" + USERNAME + ":" + ACCESS_KEY + "@ondemand.saucelabs.com:80/wd/hub";
-                String URL = "http://" + SAUCE_USERNAME + ":" + SAUCE_ACCESS_KEY + "@ondemand.saucelabs.com:80/wd/hub";
-                if (SAUCE_USERNAME == null || SAUCE_ACCESS_KEY == null) {
-                       Assert.fail(
-                                     "Missing value for environment variable(s) SAUCE_USERNAME or SAUCE_ACCESS_KEY.  Check environment configuration and try again");
-                }
-                try {
-                       webDriver = new RemoteWebDriver(new URL(URL), capabilities);
-                } catch (MalformedURLException e) {
-                       Assert.fail("Invalid Sauce URL: [" + URL + "]");
-                }
-                return webDriver;
- 			}
-			/*SauceLabs Mobile
-			URL to check the capabilities - //https://wiki.saucelabs.com/display/DOCS/Platform+Configurator#/ */
- 			else if (browser.equalsIgnoreCase(CommonConstants.SAUCE_BROWSER_MOBILE)){
- 				System.out.println("Execution is Going to Start on SauceLabs Mobile.....!!!!!");
-                 DesiredCapabilities capabilities = null;
-                if(browserName.equalsIgnoreCase("Safari")){
-                	capabilities = DesiredCapabilities.iphone();
-                }else{
-                	capabilities = DesiredCapabilities.android();
-                }
-                System.out.println(props.get(CommonConstants.DEVICE_VERSION)+" "+props.get(CommonConstants.DEVICE_NAME)+" "
-                		+""+props.get(CommonConstants.PLATFORM_VERSION)+" "+props.get(CommonConstants.PLATFORM_NAME)+" "+browserName);
-                capabilities.setCapability("appiumVersion", "1.6.4");
-                capabilities.setCapability("deviceName","Samsung Galaxy S4 Emulator");
-                capabilities.setCapability("deviceOrientation", "portrait");
-                capabilities.setCapability("browserName", "Browser");
-                capabilities.setCapability("platformVersion", "4.4");
-                capabilities.setCapability("platformName","Android");    
-                capabilities.setCapability("autoAcceptsAlerts", true);
-                capabilities.setCapability("parent-tunnel", "sauce_admin");
-                capabilities.setCapability("tunnelIdentifier", "OptumSharedTunnel-Prd");
-                String SAUCE_USERNAME = props.get("SAUCE_USERNAME");
-	            String SAUCE_ACCESS_KEY = props.get("SAUCE_ACCESS_KEY");
-                //String URL = "http://" + USERNAME + ":" + ACCESS_KEY + "@ondemand.saucelabs.com:80/wd/hub";
-                String URL = "http://" + SAUCE_USERNAME + ":" + SAUCE_ACCESS_KEY + "@ondemand.saucelabs.com:80/wd/hub";
-                if (SAUCE_USERNAME == null || SAUCE_ACCESS_KEY == null) {
-                       Assert.fail(
-                                     "Missing value for environment variable(s) SAUCE_USERNAME or SAUCE_ACCESS_KEY.  Check environment configuration and try again");
-                }
-                    try {
-                           webDriver = new RemoteWebDriver(new URL(URL), capabilities);
-                    } catch (MalformedURLException e) {
-                           Assert.fail("Invalid Sauce URL: [" + URL + "]");
-                    }
-                    return webDriver;
- 			}else if (browser.equalsIgnoreCase(CommonConstants.PERFECTO)) {
- 	              DesiredCapabilities capabilities = null;
- 	              String host = props.get("PERFECTO_HOST");
- 	              String perfectoUserNAme = props.get("PERFECTO_USERNAME");
- 	              String PerfectoPassword = props.get("PERFECTO_PASSWORD");
- 	              String URL = "https://" + host + "/nexperience/perfectomobile/wd/hub";
- 	              String perfectoBrowserName = "mobileOS";
- 	              String deviceID;
- 	              if (perfectoUserNAme == null || PerfectoPassword == null) {
- 	                     Assert.fail(
- 	                                  "Missing value for environment variable(s) cloudUser or cloudPw.  Check environment configuration and try again");
- 	              }
- 	              	 deviceID = getDeviceId(props.get("DeviceName"));
-                     capabilities = new DesiredCapabilities(perfectoBrowserName, "", Platform.ANY);
-
-                  // define credentials for the CQ Lab connection
-                     capabilities.setCapability("user", perfectoUserNAme);
-                     capabilities.setCapability("password", PerfectoPassword);
-                     capabilities.setCapability(CapabilityType.ACCEPT_SSL_CERTS, true);
-                     capabilities.setCapability("outputReport", false);
-                     capabilities.setCapability("outputVideo", false);
-                     // Selecting Device By Device Id
-                     capabilities.setCapability("deviceName", deviceID);
-                     
-                     try {
-                  	   webDriver = new RemoteWebDriver(new URL(URL), capabilities);
- 	                     
-                  	   webDriver.manage().deleteAllCookies();
- 	                     
- 	              } catch (MalformedURLException e) {
- 	            	  Assert.fail("Invalid Perfecto URL: [" + URL + "]"+ e);
- 	              }
-                     return webDriver;
-		}
-		}
-			return webDriver;
+				System.out.println("Environment selected 3 : "+environment);
+				DesiredCapabilities capabilities = null;
+				if(browserName.equalsIgnoreCase("firefox")){
+					//System.out.println("Inside firefox");
+					capabilities = DesiredCapabilities.firefox();
+					capabilities.setCapability("platform", "Windows 7");
+					capabilities.setCapability("version", "43");
+					capabilities.setCapability("idleTimeout", 180);
+				}else if(browserName.equalsIgnoreCase("IE")){
+					capabilities = DesiredCapabilities.internetExplorer();
+					capabilities.setCapability("platform", "Windows 7");
+					capabilities.setCapability("version", "11.0");
+					capabilities.setCapability("screenResolution", "1024x768");
+				}else if(browserName.equalsIgnoreCase("chrome")){
+					System.out.println("Inside chrome");
+					capabilities = DesiredCapabilities.chrome();
+					capabilities.setCapability("platform", "Windows 7");
+					capabilities.setCapability("version", "52.0");
+					capabilities.setCapability("screenResolution", "800x600");
+				}
+				capabilities.setCapability("autoAcceptsAlerts", true);
+				capabilities.setCapability("parent-tunnel", "sauce_admin");
+				capabilities.setCapability("tunnelIdentifier", "OptumSharedTunnel-Prd");
+				capabilities.setCapability("build", System.getenv("JOB_NAME") + "__" + System.getenv("RUNNER_NUMBER"));
+				String URL = "http://" + USERNAME + ":" + ACCESS_KEY + "@ondemand.saucelabs.com:80/wd/hub";
+				String jobName = "MnR test Execution of [" +System.getProperty("test")  +":] - Using " + capabilities.getBrowserName() + " in  " + environment +" environment";
+				capabilities.setCapability("name", jobName);
+				if (USERNAME == null || ACCESS_KEY == null) {
+					Assert.fail(
+							"Missing value for environment variable(s) SAUCE_USERNAME or SAUCE_ACCESS_KEY.  Check environment configuration and try again");
+				}
+				try {
+					webDriver = new RemoteWebDriver(new URL(URL), capabilities);
+				} catch (MalformedURLException e) {
+					Assert.fail("Invalid Sauce URL: [" + URL + "]");
+				}
+				return webDriver;
 			}
-
-	 /**
-     * Fills the deivce Id from config.properties file
-     * @param deviceId
-     * @return
-     */
-    public String getDeviceId(String deviceName){
-   	 Map<String ,String> devices = new HashMap<String, String>();
-   	 devices.put("iPadMini3", props.get("iPadMini3"));
-   	 devices.put("iphone_6", props.get("iphone_6"));
-   	 devices.put("iphone6Plus", props.get("iphone6Plus"));
-   	 devices.put("SAMSUNG_TAB", props.get("SAMSUNG_TAB"));
-   	 devices.put("SAMSUNG_MOBILE", props.get("SAMSUNG_MOBILE"));
-   	 return devices.get(deviceName);
-    }
+			//https://wiki.saucelabs.com/display/DOCS/Platform+Configurator#/
+			else if (browser.equalsIgnoreCase(CommonConstants.SAUCE_BROWSER_MOBILE)){
+				System.out.println("Execution is Going to Start on SauceLabs Mobile.....!!!!!");
+				DesiredCapabilities capabilities = null;
+				if(browserName.equalsIgnoreCase("Safari")){
+					capabilities = DesiredCapabilities.iphone();
+				}else{
+					capabilities = DesiredCapabilities.android();
+				}
+				System.out.println(props.get(CommonConstants.DEVICE_VERSION)+" "+props.get(CommonConstants.DEVICE_NAME)+" "
+						+""+props.get(CommonConstants.PLATFORM_VERSION)+" "+props.get(CommonConstants.PLATFORM_NAME)+" "+browserName);
+				capabilities.setCapability("appiumVersion", props.get(CommonConstants.DEVICE_VERSION));
+				capabilities.setCapability("deviceName",props.get(CommonConstants.DEVICE_NAME));
+				capabilities.setCapability("deviceOrientation", "portrait");
+				capabilities.setCapability("browserName", browserName);
+				capabilities.setCapability("platformVersion", props.get(CommonConstants.PLATFORM_VERSION));
+				capabilities.setCapability("platformName",props.get(CommonConstants.PLATFORM_NAME));        		    
+				capabilities.setCapability("autoAcceptsAlerts", true);
+				capabilities.setCapability("parent-tunnel", "sauce_admin");
+				capabilities.setCapability("tunnelIdentifier", "OptumSharedTunnel-Prd");
+				String USERNAME = "apriyad4";
+				String ACCESS_KEY = "6e1345f1-80ea-4863-8573-187bf3151ac0";
+				String URL = "http://" + USERNAME + ":" + ACCESS_KEY + "@ondemand.saucelabs.com:80/wd/hub";
+				if (USERNAME == null || ACCESS_KEY == null) {
+					Assert.fail(
+							"Missing value for environment variable(s) SAUCE_USERNAME or SAUCE_ACCESS_KEY.  Check environment configuration and try again");
+				}
+				try {
+					webDriver = new RemoteWebDriver(new URL(URL), capabilities);
+				} catch (MalformedURLException e) {
+					Assert.fail("Invalid Sauce URL: [" + URL + "]");
+				}
+				return webDriver;
+			}
+		}
+		return webDriver;
+	}
 
 	public WebDriver getIEDriver() {
 		System.setProperty("webdriver.ie.driver",
@@ -1181,7 +1130,7 @@ public class MRScenario {
 
 	public void nullifyWebDriver() {
 		if (null != webDriver) {
-			webDriver.quit();
+			webDriver.close();
 			webDriver = null;
 		}
 
