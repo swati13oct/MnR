@@ -94,7 +94,7 @@ public class BeneficiaryInformationPage extends UhcDriver{
         @FindBy(id = "enrollmentNext")
         private WebElement enrollmentNext;
         
-        @FindBy(xpath = "//div[@class='enrollment_content']/div[2]/form/h2")
+        @FindBy(xpath = ".//*[@id='enrollmentMAForm']/h3")
         private WebElement pageHeading;
         
         private PageData beneficiaryInformation;

@@ -7,11 +7,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import org.json.JSONException;
-import org.json.JSONObject;
 import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
-import org.skyscreamer.jsonassert.JSONAssert;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import acceptancetests.atdd.data.CommonConstants;
@@ -20,7 +17,7 @@ import acceptancetests.login.data.LoginCommonConstants;
 import atdd.framework.MRScenario;
 import cucumber.annotation.en.And;
 import cucumber.annotation.en.Given;
-import cucumber.annotation.en.Then;
+import cucumber.annotation.en.Then; 
 import cucumber.annotation.en.When;
 import cucumber.table.DataTable;
 import gherkin.formatter.model.DataTableRow;
@@ -28,8 +25,9 @@ import pages.dashboard.member.drugcostestimator.blayer.AddDrugDetails;
 import pages.dashboard.member.drugcostestimator.blayer.AddNewDrugModal;
 import pages.dashboard.member.drugcostestimator.blayer.DrugCostEstimatorPage;
 import pages.dashboard.member.drugcostestimator.blayer.SavingsOppurtunity;
-import pages.member.bluelayer.AccountHomePage;
-import pages.member.bluelayer.LoginPage;
+//import pages.member.bluelayer.AccountHomePage;
+import pages.memberredesign.bluelayer.AccountHomePage;
+import pages.memberredesign.bluelayer.LoginPage;
 import pages.mobile.member.blayer.BenefitsSummaryPage;
 
 public class DrugcostestimatorUhcStepDefinition {
@@ -156,9 +154,13 @@ public class DrugcostestimatorUhcStepDefinition {
 		String category = (String) getLoginScenario().getBean(LoginCommonConstants.CATOGERY);
 		WebDriver wd = (WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
 		LoginPage loginPage = new LoginPage(wd);
+		loginPage.loginToStageTestHarness();
 		getLoginScenario().saveBean(PageConstants.LOGIN_PAGE, loginPage);
-		AccountHomePage accountHomePage = (AccountHomePage) loginPage.loginWith(userName, pwd,category);
+		AccountHomePage accountHomePage = (AccountHomePage) loginPage.thloginWith(userName, pwd,category);
 		getLoginScenario().saveBean(PageConstants.ACCOUNT_HOME_PAGE, accountHomePage);
+		
+		
+		
 	}
 
 	@When("^I use the DCE tool to enter one or more drugs to my drug list$")
@@ -253,7 +255,7 @@ public class DrugcostestimatorUhcStepDefinition {
 	public void i_should_be_able_to_move_forward_backward() throws InterruptedException{
 		DrugCostEstimatorPage dce = (DrugCostEstimatorPage) getLoginScenario().getBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE);
 		//dce.navigateToStep2();
-		dce.validatePharmacyForm();
+		//dce.validatePharmacyForm();
 		dce.backwardToStep1();
 		dce.navigateToStep2();
 	}
@@ -1063,7 +1065,7 @@ public class DrugcostestimatorUhcStepDefinition {
 		DrugCostEstimatorPage dce = (DrugCostEstimatorPage) getLoginScenario()
 				.getBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE);
 		//dce.navigateToStep2();
-		dce.isPharmacySelected();
+		dce.validatePharmacySelected();
 	}
 	
 	@And("^I have selected pharmacy$")

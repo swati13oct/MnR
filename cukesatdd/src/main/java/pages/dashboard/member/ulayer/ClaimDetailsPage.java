@@ -72,9 +72,12 @@ public class ClaimDetailsPage extends UhcDriver{
 	@FindBy (xpath="//*[@id='learnmorePDP']")
 	private WebElement learnmorePDP;
 	
+	@FindBy(css = ".claimDetTableMainSection")
+	public WebElement claimDetTableMainSection;
+	
 	//@FindBy(className = "claimdettable")
-	@FindBy(xpath = "//html/body/div[3]/div/div/div/div/main/div/div[2]/div/div/div[2]/div[3]/div/div/div")
-	public WebElement claimsTable;
+	@FindBy(css = ".claimsTotalTable")
+	public WebElement claimstotalTable;
 	
 	//@FindBy(id = "learnmoretoggleship")
 	@FindBy(xpath = ".//*[@id='learnmoredetailstoggle']/p")
@@ -195,7 +198,7 @@ public class ClaimDetailsPage extends UhcDriver{
 
 	@SuppressWarnings("deprecation")
 	public void validateClaimsTableInDetailsPage() {
-		if(claimsTable.isDisplayed()){
+		if(claimDetTableMainSection.isDisplayed()){
 			Assert.assertTrue(true);
 		}
 			else{
@@ -245,7 +248,7 @@ public class ClaimDetailsPage extends UhcDriver{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		if(claimsTotalSHIP.isDisplayed() || claimsTotalFED.isDisplayed()){
+		if(claimstotalTable.isDisplayed()){
 			Assert.assertTrue(true);			
 		}
 		else{

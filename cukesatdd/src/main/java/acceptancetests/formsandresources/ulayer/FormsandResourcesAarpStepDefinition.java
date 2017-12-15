@@ -109,6 +109,7 @@ public class FormsandResourcesAarpStepDefinition {
 		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
 
 		LoginPage loginPage = new LoginPage(wd);
+		loginPage.loginTo();
 		AccountHomePage accountHomePage = (AccountHomePage) loginPage.loginWith(userName, pwd);
 		//JSONObject accountHomeActualJson = null;
 
@@ -168,12 +169,27 @@ public class FormsandResourcesAarpStepDefinition {
 				formsAndResourcesActualJson);*/
 	}
 
+	@And("^the user navigating to the My Documents page in AARP site$")
+	public void NavigateToMyDocuemtsPage(){
+		FormsandresourcesPage formsandresourcesAarpPage = (FormsandresourcesPage) getLoginScenario()
+				.getBean(PageConstants.FORMS_AND_RESOURCES_PAGE);
+		formsandresourcesAarpPage.clickOnviewmydocsLink();
+		formsandresourcesAarpPage.validateMyDocsSection();
+		
+		
+		
+		if (formsandresourcesAarpPage != null) {
+			getLoginScenario().saveBean(PageConstants.FORMS_AND_RESOURCES_PAGE,
+					formsandresourcesAarpPage);
+		}
+	}
 	@Then("^the user validates My Documents section and clicks on the link in AARP site$")
 	public void validates_My_Documents_AARP(){
 		FormsandresourcesPage formsandresourcesAarpPage = (FormsandresourcesPage) getLoginScenario()
 				.getBean(PageConstants.FORMS_AND_RESOURCES_PAGE);
-		formsandresourcesAarpPage.validateMyDocsSection();
-		formsandresourcesAarpPage.clickOnviewmydocsLink();
+		formsandresourcesAarpPage.selectLast24Months();
+		formsandresourcesAarpPage.validateMyDocumentsTable();
+		
 		if (formsandresourcesAarpPage != null) {
 			getLoginScenario().saveBean(PageConstants.FORMS_AND_RESOURCES_PAGE,
 					formsandresourcesAarpPage);
@@ -272,13 +288,13 @@ public class FormsandResourcesAarpStepDefinition {
 	}
 
 
-	@After
+	/*@After
 	public void tearDown() {
 
 		WebDriver wd = (WebDriver) getLoginScenario().getBean(
 				CommonConstants.WEBDRIVER);
 		wd.quit();
 		getLoginScenario().flushBeans();
-	}
+	}*/
 
 }
