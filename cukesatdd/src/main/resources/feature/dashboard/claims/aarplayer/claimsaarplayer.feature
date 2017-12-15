@@ -163,6 +163,7 @@ Feature: To validate the new changes related to claims page on the member redesi
       | Test Data Type | <claimssystem> |
     When I navigate to the claims Summary page in redesigned site
     And the user search claims for the following claim period in AARP site
+      | Plan Type    | <planType>    |
       | Claim Period | <claimPeriod> |
     Then user validates the claims displayed based on the selection in redesigned site
     And I navigate to the Claim Details page in AARP site
