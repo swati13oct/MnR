@@ -13,11 +13,9 @@ import cucumber.junit.Cucumber;
  */
 
 @RunWith(Cucumber.class)
-@Cucumber.Options(glue = { "atdd.framework","acceptancetests.formsandresources.ulayer" }, 
-		features = { "feature/forms-and-resources/ulayer" }, 
-		format = {
-				"pretty", "html:reports/test-report","json:target/cucumber.json"}, tags ={"@drugtransistion,@privacypolicy,@appeals,@udrugtrasition,@memberright,@seasonalflu,@termofuse,@medicaltherapy,@pharmacymail,@disenrollment,@medicationtherapy,@coverageappealspdp,@coverageappealsmapd,@preferedmailbenefit,@lowertierdruglearnmore"})
-public class RunMRAtddTestFormsandResources {
+@Cucumber.Options(glue = { "atdd.framework","acceptancetests.formsandresources"}, 
+		features = { "feature/forms-and-resources"},		format = {
+				"pretty", "html:reports/test-report","json:target/cucumber.json"}, tags ={"@mercuryMyDocuments,@drugtransistion,@privacypolicy,@appeals,@udrugtrasition,@memberright,@seasonalflu,@termofuse,@medicaltherapy,@pharmacymail,@disenrollment,@medicationtherapy,@coverageappealspdp,@coverageappealsmapd,@preferedmailbenefit,@lowertierdruglearnmore"})public class RunMRAtddTestFormsandResources {
 //@drugtransistion,@privacypolicy,@appeals,@udrugtrasition,@memberright,@seasonalflu,@termofuse,@medicaltherapy,@pharmacymail,@disenrollment,@medicationtherapy,@coverageappealspdp,@coverageappealsmapd,@preferedmailbenefit,@lowertierdruglearnmore
 }
 

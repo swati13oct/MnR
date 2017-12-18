@@ -32,6 +32,7 @@ import acceptancetests.benefitsandcoverage.data.PlanBenefitsAndCoverageCommonCon
 import acceptancetests.formsandresources.data.FnRCommonConstants;
 import acceptancetests.login.data.LoginCommonConstants;
 import atdd.framework.MRScenario;
+import cucumber.annotation.en.And;
 import cucumber.annotation.en.Given;
 import cucumber.annotation.en.Then;
 import cucumber.annotation.en.When;
@@ -102,6 +103,7 @@ public class FormsandResourcesUmsStepDefinition {
 		WebDriver wd = getLoginScenario().getWebDriver();
 
 		LoginPage loginPage = new LoginPage(wd);
+		loginPage.loginTo();
 		AccountHomePage accountHomePage = (AccountHomePage)loginPage.loginWith(userName, pwd, category);
 		//JSONObject accountHomeActualJson = null;
 
@@ -166,8 +168,9 @@ public class FormsandResourcesUmsStepDefinition {
 	public void validates_My_Documents_ums(){
 		FormsandresourcesPage formsandresourcesPage = (FormsandresourcesPage) getLoginScenario()
 				.getBean(PageConstants.FORMS_AND_RESOURCES_PAGE);
-		formsandresourcesPage.validateMyDocumentsSection();
-		formsandresourcesPage.clickOnViewotherdocLink();
+		formsandresourcesPage.selectLast24Months();
+		formsandresourcesPage.validateMyDocumentsTable();
+		//formsandresourcesPage.logOut();
 		if (formsandresourcesPage != null) {
 			getLoginScenario().saveBean(PageConstants.FORMS_AND_RESOURCES_PAGE,
 					formsandresourcesPage);
@@ -436,8 +439,36 @@ public class FormsandResourcesUmsStepDefinition {
 		FormsandresourcesPage formsAndResourcesPage = accountHomePage
 				.navigateToMyPersonalHealthrecord();
 	}
-	
-	@Then("the user view prefered mail service pharmacy benefit in UMS site$")
+@When("^the user view forms and resources page in UMS site$")
+	public void views_forms_resources_UMS_site() {
+		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario()
+				.getBean(PageConstants.ACCOUNT_HOME_PAGE);
+		FormsandresourcesPage formsAndResourcesPage = accountHomePage
+				.navigateToFormsandResourcePage();
+
+			if (formsAndResourcesPage != null) {
+			getLoginScenario().saveBean(PageConstants.FORMS_AND_RESOURCES_PAGE,
+					formsAndResourcesPage);			
+		}		
+	}
+
+	@And("^the user navigating to the My Documents page in UMS site$")
+	public void NavigateToMyDocuemtsPage(){
+		FormsandresourcesPage formsAndResourcesPage = (FormsandresourcesPage) getLoginScenario()
+				.getBean(PageConstants.FORMS_AND_RESOURCES_PAGE);
+		//AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstants.ACCOUNT_HOME_PAGE);
+		//FormsandresourcesPage formsAndResourcesPage = accountHomePage.navigateToFormsandResourcePage();
+		formsAndResourcesPage.clickOnviewmydocsLink();
+		formsAndResourcesPage.validateMyDocsSection();
+		
+		
+		
+		if (formsAndResourcesPage != null) {
+			getLoginScenario().saveBean(PageConstants.FORMS_AND_RESOURCES_PAGE,
+					formsAndResourcesPage);
+		}
+	}
+@Then("the user view prefered mail service pharmacy benefit in UMS site$")
 	public void views_prefered_pharmacy_benefit_Ums_site() {
 		/*AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario()
 				.getBean(PageConstants.ACCOUNT_HOME_PAGE);
@@ -837,7 +868,4 @@ public class FormsandResourcesUmsStepDefinition {
 			e.printStackTrace();
 		}
 	}
-
-
-	
-	}
+}

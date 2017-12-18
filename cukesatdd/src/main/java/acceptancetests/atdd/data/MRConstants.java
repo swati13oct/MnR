@@ -35,7 +35,8 @@ public class MRConstants {
 	public static final String UHCM_TEAM_E_URL = "https://member."+MRScenario.environment+"-uhcmedicaresolutions.uhc.com";
 	public static final String REDESIGN_AARPM_URL = "https://member."+MRScenario.environment+"-aarpmedicareplans.uhc.com/content/medicare/member/contact-us/overview.html";
 	public static final String REDESIGN_UHCM_URL = "https://member."+MRScenario.environment+"-uhcmedicaresolutions.uhc.com/content/medicare/member/contact-us/overview.html";
-	
+	public static final String UHCM_URL_TEAMB_TESTHARNESS = "https://member."+MRScenario.environment+"-uhcmedicaresolutions.uhc.com/content/medicare/login/overview.html?testharness=true" ;
+	public static final String AARPM_URL_TEAMB_TESTHARNESS= "https://member."+MRScenario.environment+"-aarpmedicareplans.uhc.com/content/medicare/login/overview.html?testharness=true";
 	public static final String AARPM_URL_RESEDIGN = "https://member."+MRScenario.environment+"-aarpmedicareplans.uhc.com/#?target=test-harness";
 	public static final String UHCM_URL_REDESIGN = "https://member."+MRScenario.environment+"-uhcmedicaresolutions.uhc.com/content/uhcm/home//testharness.html";
 	
@@ -44,9 +45,17 @@ public class MRConstants {
 	//public static final String UHCM_URL = "https://member."+MRScenario.environment+"-uhcmedicaresolutions.uhc.com/content/uhcm/home//testharness.html";
 	
 	//public static final String AARP_URL = "https://www.awe-"+MRScenario.environment+"-aarpmedicareplans.uhc.com/";
+
+	public static final String TEAMH_URL_TESTHARNES ="https://"+MRScenario.environment+"-werally.uhc.com/medicare/login/overview.html?testharness=true";
+	
+	public static final String STAGE_URL_TESTHARNES ="https://"+MRScenario.environment+"-medicare.uhc.com/?testharness=true";
+
+	public static final String TEAM_MEDICARE_TESTHARNESS="https://"+MRScenario.environment+"-medicare.uhc.com/login/overview.html?testharness=true";
+
 	
 	public static final String AARP_PDP_REQUEST_MORE_HELP_AND_INFORMATION_URL = "https://www.awe-"+MRScenario.environment+"-aarpmedicareplans.uhc.com/health-plans/prescription-drug-plans/request-information.html";
 	public static final String AARP_URL = "https://www."+MRScenario.environment+"-aarpmedicareplans.uhc.com/";
+public static final String AARP_URL_TEST_A = "https://www.awe-"+MRScenario.environment+"-aarpmedicareplans.uhc.com/";
 	public static final String AARP_MA_REQUEST_MORE_HELP_AND_INFORMATION_URL = "https://www.awe-"+MRScenario.environment+"-aarpmedicareplans.uhc.com/health-plans/medicare-advantage-plans/request-information.html";
 	
 	public static final String AARP_PLANPREVIEW_URL= "https://www."+MRScenario.environment+"-aarpmedicareplans.uhc.com/plan-preview.html";
@@ -268,6 +277,7 @@ public static final String WELLSFARGO_HOME_PAGE_URL = "https://www."+MRScenario.
 
 public static final String TEAMB_TIME_ADMIN_PAGE_URL = "http://apsrt0245.uhc.com:9083/DCERestWAR/dcerest/timeAdmin";
 
+public static final String SIGN_IN_URL = "https://member.team-b-aarpmedicareplans.uhc.com/content/dashboard/guest/signin.html";
 public static String EOB_DIRECT_URL = "https://"+MRScenario.environment+"-medicare.uhc.com/?testharness=true";
 	
 	  public static String CAMPAIGN_PAGE_URL1 = "https://www."+MRScenario.environment+"-aarpmedicareplans.uhc.com/health-plans/medicare-advantage-plans/available-plans.html?msg=nonzero&lang=sp&zipcode=90003&WT.mc_id=832467";

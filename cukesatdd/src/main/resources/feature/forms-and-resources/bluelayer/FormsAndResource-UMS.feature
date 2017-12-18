@@ -109,11 +109,15 @@ Scenario Outline:To verify my documents page in UMS site
 Given registered member for forms and resources in UMS Site
 	| Plan Type   | <planType>   |
 	| Member Type | <memberType> | 
-When the user navigates to forms and resources in UMS site
+	|Test Data Type  |<mydoc>    |
+When the user view forms and resources page in UMS site
+And the user navigating to the My Documents page in UMS site
 Then the user validates My Documents section and clicks on the link in UMS site
 Examples:
-| planType | memberType  |
-| PDP      | Group       |@pharmacybenefit
+
+| planType | memberType  |mydoc      |
+| MAPD     |    Group    |mydocuments|
+@pharmacybenefit
 Scenario Outline: Verify forms and resource content for members in ums site
 Given registered member for forms and resources in UMS Site
 	| Plan Type      |<planType> |

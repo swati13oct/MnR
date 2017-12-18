@@ -96,21 +96,34 @@ public class ClaimsAarpStepDefinition {
 			getLoginScenario().saveBean(LoginCommonConstants.PASSWORD, pwd);			
 		}
 		WebDriver wd = getLoginScenario().getWebDriver();
+
 		LoginPage loginPage = new LoginPage(wd);
-
-		AccountHomePage accountHomePage = (AccountHomePage) loginPage.loginWith(userName, pwd);
-
-		if (accountHomePage != null) {
+		
+		
+		{
+			loginPage.navigateToTeamMedicareTestHarness();
+			//loginPage.teamhloginWith(userName, pwd);
+			getLoginScenario().saveBean(PageConstants.LOGIN_PAGE, loginPage);
+			AccountHomePage accountHomePage = (AccountHomePage) loginPage.teamhloginWith(userName, pwd);
 			getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
 			getLoginScenario().saveBean(PageConstants.ACCOUNT_HOME_PAGE,accountHomePage);
 			Assert.assertTrue(true);
 		}
+		/*else {
+			loginPage.loginTo();
+			AccountHomePage accountHomePage = (AccountHomePage) loginPage.loginWith(userName, pwd);
+			getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
+			getLoginScenario().saveBean(PageConstants.ACCOUNT_HOME_PAGE,accountHomePage);
+			Assert.assertTrue(true);
+		}*/
+
 	}
 
 	@When("^I navigate to the claims Summary page in redesigned site$")
 	public void navigate_Claims_Summary_redesigned(){
 		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstants.ACCOUNT_HOME_PAGE);
 		ClaimSummarypage newClaimsSummaryPage = accountHomePage.navigateToClaimsSummaryPage();
+		
 
 		if(newClaimsSummaryPage != null)
 			getLoginScenario().saveBean(PageConstants.NEW_CLAIMS_SUMMARY_PAGE, newClaimsSummaryPage);
@@ -141,20 +154,22 @@ public class ClaimsAarpStepDefinition {
 
 		for (int i = 0; i < timeAttributesRow.size(); i++) {
 
-		urlAttributesMap .put(timeAttributesRow.get(i).getCells()
-		.get(0), timeAttributesRow.get(i).getCells().get(1));
+			urlAttributesMap .put(timeAttributesRow.get(i).getCells()
+					.get(0), timeAttributesRow.get(i).getCells().get(1));
 		}
 		
+
 		System.out.println(urlAttributesMap.get("Claim Period"));
 		String s=urlAttributesMap.get("Claim Period");
+		String planType = urlAttributesMap.get("Plan Type");
 		
 		//String claimPeriod = timeAttributesRow.get(0).getCells().get(0);
 		//String s = urlAttributesMap.get(key)
 		//System.out.println(claimPeriod);
 
 		ClaimSummarypage newClaimsSummaryPage = (ClaimSummarypage) getLoginScenario().getBean(PageConstants.NEW_CLAIMS_SUMMARY_PAGE);
-		
-		newClaimsSummaryPage.searchClaimsByTimePeriod("s");
+
+		newClaimsSummaryPage.searchClaimsByTimePeriod(planType,s);
 
 		if(newClaimsSummaryPage != null)
 			getLoginScenario().saveBean(PageConstants.NEW_CLAIMS_SUMMARY_PAGE, newClaimsSummaryPage);
@@ -346,13 +361,13 @@ public class ClaimsAarpStepDefinition {
 		ClaimDetailsPage claimDetailspage = (ClaimDetailsPage) getLoginScenario().getBean(PageConstants.NEW_CLAIM_DETAILS_PAGE);
 		claimDetailspage.validateClaimsTableInDetailsPage();
 	}
-	
+
 	@And("^I validate the Claims Total in claims details page in AARP site$")
 	public void validate_claims_total_AARP(){
 		ClaimDetailsPage claimDetailspage = (ClaimDetailsPage) getLoginScenario().getBean(PageConstants.NEW_CLAIM_DETAILS_PAGE);
 		claimDetailspage.validateClaimsTotalInDetailsPage();
 	}
-	
+
 	/*@Then("^I can view a claim search back button in Claims Details page in AARP site$")
 	public void validate_claim_search_button()
 	{
@@ -361,7 +376,7 @@ public class ClaimsAarpStepDefinition {
 		Assert.assertTrue(claimDetailspage.validateClaimSearch());
 	}*/
 
-	
+
 
 	@And("^A Page Header in Claims Details page in AARP site$")
 	public void validate_the_details_header()
@@ -450,7 +465,39 @@ public class ClaimsAarpStepDefinition {
 
 	}
 
+	@Then("^The User can able to see Drug Claims History: Reached Maximum Claim Results Error$")
+	public void validateMaxRxclaimsResultError(){
 
+		ClaimSummarypage claimSummarypage = (ClaimSummarypage) getLoginScenario().getBean(PageConstants.NEW_CLAIMS_SUMMARY_PAGE);
+
+		Assert.assertTrue(claimSummarypage.validateRxReachexMaxClaimsErrorMsg());
+
+	}
+
+	@Then("^the user should be able to see the SHIP Date Range Greater Than 24-Months Error$")
+	public void validateDateRangeErrorSHIP(){
+
+		ClaimSummarypage claimSummarypage = (ClaimSummarypage) getLoginScenario().getBean(PageConstants.NEW_CLAIMS_SUMMARY_PAGE);
+		//.Assert.assertTrue(claimSummarypage.validateShipGreaterThan24MonthsErrorMsg());
+		claimSummarypage.validateShipGreaterThan24MonthsErrorMsg();
+
+
+	}
+	@Then("^the user should be able to see the FED Date Range Greater Than 24-Months Error$")
+	public void validateDateRangeErrorMsgFED(){
+		ClaimSummarypage claimSummarypage = (ClaimSummarypage) getLoginScenario().getBean(PageConstants.NEW_CLAIMS_SUMMARY_PAGE);
+		//.Assert.assertTrue(claimSummarypage.validateShipGreaterThan24MonthsErrorMsg());
+		claimSummarypage.validateFedGreaterThan24MonthsErrorMsg();
+
+	}
+
+	@Then("^the user should be able to see the from date is greater than to date error message$")
+	public void validateToDateErrorMessage(){
+		ClaimSummarypage claimSummarypage = (ClaimSummarypage) getLoginScenario().getBean(PageConstants.NEW_CLAIMS_SUMMARY_PAGE);
+		//.Assert.assertTrue(claimSummarypage.validateShipGreaterThan24MonthsErrorMsg());
+		claimSummarypage.validatefromDateLaterThanToDateError();
+
+	}
 
 
 }

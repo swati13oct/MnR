@@ -16,6 +16,8 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import com.thoughtworks.selenium.webdriven.commands.WaitForCondition;
+
 import pages.acquisition.bluelayer.LoginAssistancePage;
 import acceptancetests.atdd.data.CommonConstants;
 import acceptancetests.atdd.data.MRConstants;
@@ -33,6 +35,10 @@ public class LoginPage extends UhcDriver {
 
 	private static String PAGE_URL = MRConstants.UHCM_URL;
 	private static String UHCM_PAGE_URL = MRConstants.UHCM_TEAM_E_URL;
+	
+	private static String PAGE_URL_TEST_HARNESS = MRConstants.UHCM_URL_TEAMB_TESTHARNESS;
+	
+	private static String PAGE_URL_TEAM_H_TEST_HARNESS = MRConstants.TEAMH_URL_TESTHARNES;
 	
 
 	//@FindBy(xpath = "//button[@id='fd_memberSignInButton' or @id='accessURAccountBTN']")
@@ -61,11 +67,20 @@ public class LoginPage extends UhcDriver {
 
 	@FindBy(id = "usercheckbox")
 	private WebElement userNameCheckBox;
+	
+	@FindBy(id = "username")
+	private WebElement thUserName;
+	
+	@FindBy(id = "password")
+	private WebElement thPassword;
+	
+	@FindBy(id = "sign-in-btn")
+	private WebElement thSignIn;
 
 	private PageData browserCheckData;
 
 	private JSONObject browserCheckJson;
-
+	
 
 	public LoginPage(WebDriver driver) {		
 		super(driver);
@@ -94,13 +109,13 @@ System.out.println(signInButton.isEnabled());
 
 			while (!isAlertPresent());
 		}
-		/*if ( MRScenario.environment.equals("team-c") || MRScenario.environment.equals("team-b")) {
+		if ( MRScenario.environment.equals("team-c") || MRScenario.environment.equals("team-b")) {
 			
 			Alert alert = driver.switchTo().alert();
 	        alert.accept();
 	        Alert alert1 = driver.switchTo().alert();
 	        alert1.accept();
-	        } */
+	        } 
 		
 		try {
 			Thread.sleep(10000);
@@ -208,5 +223,98 @@ System.out.println(signInButton.isEnabled());
 	    } 
 
 	} 
+		
+	public void loginTo(){
+		PageFactory.initElements(driver, this);
+		openAndValidate();
+	}
+	
+	public void loginToTeambTestHarness(){
+		start(PAGE_URL_TEST_HARNESS);
+		validate(thUserName);
+		validate(thPassword);
+		validate(thSignIn);
+	}
+	
+	public void loginToTeamhTestHarness(){
+		start(PAGE_URL_TEAM_H_TEST_HARNESS);
+		validate(thUserName);
+		validate(thPassword);
+		validate(thSignIn);
+	}
+	
+	public Object thloginWith(String username, String password, String category) {
+		//driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+		/*WebElement loginInEle= this.driver.findElement(By.id("fd_memberSignInButton"));
+		loginInEle.click();*/
+		sendkeys(thUserName, username);
+		sendkeys(thPassword, password);
+		thSignIn.click();
+
+		
+		if (MRScenario.environment.equals("dev-a") || MRScenario.environment.equals("team-a")) {
+			while (!isAlertPresent());
+        }
+
+
+		if (MRScenario.environment.equals("dev-a"))  {
+
+			while (!isAlertPresent());
+		}
+		if ( MRScenario.environment.equals("team-c") || MRScenario.environment.equals("team-b")) {
+			
+			Alert alert = driver.switchTo().alert();
+	        alert.accept();
+	        //Alert alert1 = driver.switchTo().alert();
+	        //alert1.accept();
+	        } 
+		if (MRScenario.environment.equals("team-h")) {
+
+			//Alert alert = driver.switchTo().alert();
+			//alert.accept();
+			// Alert alert1 = driver.switchTo().alert();
+			// alert1.accept();
+			//while(!(currentUrl().contains("https://member.int.uhc.com"))){
+			while(!(currentUrl().contains("team-h-werally.uhc.com"))){
+				 try {
+						Thread.sleep(5000);
+						System.out.println("wait more.......");
+					} catch (InterruptedException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+			 }
+		}
+		
+		try {
+			Thread.sleep(30000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		 
+			 
+		 
+		
+
+		if(currentUrl().contains("home/my-account-home.html") && category.equalsIgnoreCase("Group") || currentUrl().contains("/guest/home.html") || currentUrl().contains("/login.html"))
+
+		{
+			return new AccountHomePage(driver,category);
+		}
+		else if(currentUrl().contains("home/my-account-home.html") && category.equalsIgnoreCase("Individual") || currentUrl().contains("/login.html") ) {
+			return new AccountHomePage(driver, category);
+		}
+		else if (currentUrl().contains("terminated-plan.html")) {
+			return new TerminatedHomePage(driver);
+		}
+		return null;
+	}
+
+	private void While(boolean b) {
+		// TODO Auto-generated method stub
+		
+	}
+
 
 }

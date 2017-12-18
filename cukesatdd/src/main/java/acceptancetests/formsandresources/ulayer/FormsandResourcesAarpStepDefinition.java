@@ -110,8 +110,8 @@ public class FormsandResourcesAarpStepDefinition {
 		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
 
 		LoginPage loginPage = new LoginPage(wd);
-		AccountHomePage accountHomePage = (AccountHomePage)loginPage.loginWith(userName, pwd);
-		//JSONObject accountHomeActualJson = null;
+loginPage.loginTo();
+		AccountHomePage accountHomePage = (AccountHomePage) loginPage.loginWith(userName, pwd);		//JSONObject accountHomeActualJson = null;
 				/* Get expected data */
 		/*Map<String, JSONObject> expectedDataMap = loginScenario
 				.getExpectedJson(userName);
@@ -168,12 +168,27 @@ public class FormsandResourcesAarpStepDefinition {
 				formsAndResourcesActualJson);*/
 	}
 
+	@And("^the user navigating to the My Documents page in AARP site$")
+	public void NavigateToMyDocuemtsPage(){
+		FormsandresourcesPage formsandresourcesAarpPage = (FormsandresourcesPage) getLoginScenario()
+				.getBean(PageConstants.FORMS_AND_RESOURCES_PAGE);
+		formsandresourcesAarpPage.clickOnviewmydocsLink();
+		formsandresourcesAarpPage.validateMyDocsSection();
+		
+		
+		
+		if (formsandresourcesAarpPage != null) {
+			getLoginScenario().saveBean(PageConstants.FORMS_AND_RESOURCES_PAGE,
+					formsandresourcesAarpPage);
+		}
+	}
 	@Then("^the user validates My Documents section and clicks on the link in AARP site$")
 	public void validates_My_Documents_AARP(){
 		FormsandresourcesPage formsandresourcesAarpPage = (FormsandresourcesPage) getLoginScenario()
 				.getBean(PageConstants.FORMS_AND_RESOURCES_PAGE);
-		formsandresourcesAarpPage.validateMyDocsSection();
-		formsandresourcesAarpPage.clickOnviewmydocsLink();
+		formsandresourcesAarpPage.selectLast24Months();
+		formsandresourcesAarpPage.validateMyDocumentsTable();
+		
 		if (formsandresourcesAarpPage != null) {
 			getLoginScenario().saveBean(PageConstants.FORMS_AND_RESOURCES_PAGE,
 					formsandresourcesAarpPage);
@@ -330,9 +345,8 @@ public class FormsandResourcesAarpStepDefinition {
 		}
 		
 
-	}
-	
-	@Then("^the user validate download link in AARP site$")
+/*@After
+	public void tearDown() {}@Then("^the user validate download link in AARP site$")
 	public void views_validate_download_aarp_site() {
 		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario()
 				.getBean(PageConstants.ACCOUNT_HOME_PAGE);
@@ -355,7 +369,6 @@ public class FormsandResourcesAarpStepDefinition {
 		FormsandresourcesPage formsAndResourcesPage = accountHomePage
 				.navigateToBackToPreviousAarpPage();
 	}
-
 	
 	
 	@Then("^the user view member right responsibilities in AARP site$")
@@ -641,5 +654,5 @@ public class FormsandResourcesAarpStepDefinition {
 		wd.quit();
 		getLoginScenario().flushBeans();
 	}*/
-
+	}
 }

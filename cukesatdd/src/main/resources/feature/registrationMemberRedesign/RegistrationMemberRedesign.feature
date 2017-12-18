@@ -1,8 +1,10 @@
 @registrationRedesign
 Feature: To test registration flow in redesign portal
 
+
   Scenario Outline: To verify member is navigated to the registeration plan Information page
-    Given the member is on registration page of new portal part of redesign
+    Given the member is on sign in page
+    And User click on the register button
     When the member enter the member ID into Member ID field
       | Plan Member ID | <planMemberId> |
     And member enter date of birth in the date of birth dropdown
@@ -153,3 +155,5 @@ Feature: To test registration flow in redesign portal
     Examples: 
       | planMemberId | dateOfBirth |
       | 897948810    | 10-09-1946  |
+      
+ 

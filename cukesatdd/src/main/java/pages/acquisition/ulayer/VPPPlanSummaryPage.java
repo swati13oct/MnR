@@ -47,9 +47,7 @@ private WebElement PassportFlyerPDF;
 	@FindBy(xpath = "(.//*[@class='trigger-closed'])[2]")
 	private WebElement showMsPlans;
 	
-
-	@FindBy(xpath = "(.//*[@class='trigger-closed'])[3]")	private WebElement showPdpPlans;
-	
+	@FindBy(xpath = "(.//*[@class='trigger-closed'])[3]")	private WebElement showPdpPlans;	
 	@FindBy(xpath = "//div[@class='pdpplans_planbutton']/div[2]/div[2]/div[2]")
 	private WebElement hidePdpPlans;
 
@@ -355,12 +353,20 @@ return plan;
 
 
 	public VPPPlanSummaryPage viewPlanSummary(String planType) {
+		try {
+			Thread.sleep(8000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		if (planType.equalsIgnoreCase("PDP")) {
 			showPdpPlans.click();
 			//validate(hidePdpPlans);
 		} else if (planType.equalsIgnoreCase("MA")
 				|| planType.equalsIgnoreCase("MAPD")) {
+			System.out.println("before showMaPlans click");
 			showMaPlans.click();
+			System.out.println("after showMaPlans click");
 			//validate(hideMaPlans);
 		} else if (planType.equalsIgnoreCase("MS")) {
 			showMsPlans.click();
@@ -439,6 +445,18 @@ return plan;
 	}
 
 
+	public IntroductionInformationPage clicksOnEnrollIn(String planName) {
+		List<WebElement> enrolInPlan = driver.findElements(By.id("enrollMAButton"));
+		System.out.println("enroll size "+enrolInPlan.size());
+		System.out.println("enrol text 0"+enrolInPlan.get(0).getText());
+		System.out.println("enrol text 1"+enrolInPlan.get(1).getText());
+		System.out.println("enrol text"+enrolInPlan.get(0).isDisplayed());
+		if(enrolInPlan.size() > 0 ){
+			enrolInPlan.get(0).click();
+		}
+		return new IntroductionInformationPage(driver);
+	}
+	
 	public IntroductionInformationPage clicksOnEnrollInplanLink(String planName) { 
 		int pdpValue = Integer.parseInt(pdpPlansNumber.getText());
 		int maValue = Integer.parseInt(maPlansNumber.getText());
@@ -447,8 +465,10 @@ return plan;
 			System.out.println("Entered the plan");
 			for(int i=1; i<=maValue; i++){
 				WebElement maPlanElement= driver.findElement(By.xpath(".//*[@id='plan-list-1']/div/div[2]/div/div["+i+"]"));
-				if (maPlanElement.getText().contains(planName)) {
-					ElementData elementData = new ElementData("linkText", "Enroll in plan");//("id", "enrollMA");
+				String maPlanText = maPlanElement.getText();
+				System.out.println("MA Plan text "+ maPlanText);
+				if (maPlanText.contains(planName)) {
+					ElementData elementData = new ElementData("id", "enrollMAButton");//("id", "enrollMA");
 					System.out.println("***Element Data is: "+elementData);
 					findChildElement(elementData, maPlanElement).click();
 					System.out.println("Clicked on the Enroll Link");

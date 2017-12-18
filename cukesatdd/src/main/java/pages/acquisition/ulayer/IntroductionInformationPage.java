@@ -149,6 +149,13 @@ public class IntroductionInformationPage extends UhcDriver{
 	private WebElement beginOnlineEnrBtn;
 	
 	public boolean validateIntroPage(){
+		try {
+			Thread.sleep(5000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 		boolean flag = false;
 		if(validate(firstNameField) && validate(middleInitialField) && validate(lastNameField) &&validate(claimNumberField) &&
 		   validate(partAStartDateField)&&validate(partBStartDateField)&&validate(viewEnrollDisclaimer) && !validate(beginOnlineEnrBtn)){

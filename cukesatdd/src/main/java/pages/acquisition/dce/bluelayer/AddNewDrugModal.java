@@ -94,6 +94,8 @@ public class AddNewDrugModal extends UhcDriver {
 		//drugsearchinput.click();
 		drugsearchinput.sendKeys(DrugName);
 		searchButton.click();     
+		waitforElement(continueButton);
+		continueButton.click();
 		//if (driver.getTitle().equalsIgnoreCase("ADD A NEW DRUG")) {
 			return new AddDrugDetails(driver);
 		//}

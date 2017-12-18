@@ -360,10 +360,12 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		} catch (Exception e) {
 			System.out.println("county box not found");
 		}
+		System.out.println("----1---" +driver.getTitle());
 		if (driver.getTitle().equalsIgnoreCase(
-				"Our Medicare Plan Types | UnitedHealthcare®") || driver.getTitle().equalsIgnoreCase("plans")) {
-			return new VPPPlanSummaryPage(driver);
+			"Our Medicare Plan Types | UnitedHealthcare®") || driver.getTitle().equalsIgnoreCase("plans") || driver.getTitle().equalsIgnoreCase("Overview")) {
+			System.out.println("----2---");			return new VPPPlanSummaryPage(driver);
 		}
+		System.out.println("----3---");
 		return null;
 	}
 
