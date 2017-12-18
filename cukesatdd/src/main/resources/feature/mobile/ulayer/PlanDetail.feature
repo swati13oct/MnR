@@ -61,3 +61,23 @@ And the user view skilled facility benefit
 Examples:
 | planType |
 | SHIP     |
+
+Scenario Outline: Verify LIS deductible on My Drug Benefits 
+Given the user is on the AARP medicare site login page
+When the user logs in with a registered Ship member with following details in AARP site
+ | Plan Type           | <planType>       |
+ | Deductible Type     | <deductibleType> |
+ | Copay Category      | <copayCategory>  | 
+ | Tier type           | <tierType>       |
+And validates annual deductible on plan details page
+ |Annual Deductible|<annualDeductible>|
+ 
+Examples:
+          |planType  |deductibleType      |copayCategory|tierType   |annualDeductible| 
+          |PDP       |withDeductible      |LIS 4        |NA         | 123            |       
+          |PDP       |noDeductible        |LIS 4        |NA         | 123            |       
+          |MAPD      |noDeductible        |LIS 4        |NA         | 123            |     
+          |MAPD      |withDeductible      |LIS 4        |AllTier    | 123            |     
+          |MAPD      |withDeductible      |LIS 4        |Tier 3/4/5 | 123            |     
+          |MAPD      |withDeductible      |LIS 4        |Tier 4/5   | 123            |
+          |PDP       |Walgreen            |LIS 4        |NA         | 123            |      

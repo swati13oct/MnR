@@ -1,6 +1,7 @@
-{
-"maPlanCount":"4 Plans",
-"pdpPlanCount":"2 Plans",
-"zipCodeDisplayed":"90210",
-"countyDisplayed":"Los Angeles County"
+{  
+   "msPlanCount":"7",
+   "vppSummary":"We should have 15 plans available in 90210 Los Angeles County",
+   "pdpPlanCount":"4",
+   "maPlanCount":"4",
+   "changeLocationLink":"Change Location"
 }

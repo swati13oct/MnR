@@ -3,19 +3,23 @@
 "expectedData":{
 "maPlanCount":{
 "identifier":"xpath",
-"elementName":"//div[@class='maplans_planbutton']/div[1]/p"
+"elementName":"//*[@class='title' and contains(text(),'Medicare Advantage')]/span"
+},
+"msPlanCount":{
+"identifier":"xpath",
+"elementName":"//*[@class='title' and contains(text(),'Medicare Supplement Insurance')]/span"
 },
 "pdpPlanCount":{
 "identifier":"xpath",
-"elementName":"//div[@class='pdpplans_planbutton']/div[1]/p"
+"elementName":"//*[@class='title' and contains(text(),'Medicare Prescription')]/span"
 },
-"zipCodeDisplayed":{
-"identifier":"id",
-"elementName":"zipcode"
+"vppSummary":{
+"identifier":"xpath",
+"elementName":"//h2[contains(text(),'We have')]"
 },
-"countyDisplayed":{
-"identifier":"id",
-"elementName":"county"
+"changeLocationLink":{
+"identifier":"linkText",
+"elementName":"Change Location"
 }
 }
 }

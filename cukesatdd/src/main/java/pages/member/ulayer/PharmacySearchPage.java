@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
+import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -17,6 +18,7 @@ import org.openqa.selenium.support.ui.Select;
 
 import acceptancetests.atdd.util.CommonUtility;
 import atdd.framework.UhcDriver;
+import acceptancetests.atdd.data.MRConstants;
 
 /**
  * @author pperugu
@@ -24,6 +26,7 @@ import atdd.framework.UhcDriver;
  */
 public class PharmacySearchPage extends UhcDriver{
 
+	
 	@FindBy(id = "zipcodeTxt")
 	private WebElement zipcodeField;
 	
@@ -131,7 +134,7 @@ public class PharmacySearchPage extends UhcDriver{
 	
 	@FindBy(xpath = ".//*[@id='pharmacy-saver']")
 	private WebElement multilangfilter;
-
+	
 	
 	public PharmacySearchPage(WebDriver driver){
 		super(driver);
@@ -380,5 +383,6 @@ public class PharmacySearchPage extends UhcDriver{
 		System.out.println("CreatePdf clicked");
 		return new PharmacySearchPage(driver);
 	}
+	
 
 }

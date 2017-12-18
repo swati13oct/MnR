@@ -453,7 +453,7 @@ public class ResponsiveStepDefeniton {
 
         String urlType = memberAttributesMap.get("Campaign Page");
         System.out.println(urlType);
- ResponsivePlanSummary ourPlans = new ResponsivePlanSummary(wd, urlType);
+        ResponsivePlanSummary ourPlans = new ResponsivePlanSummary(wd, urlType);
    
         getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
         getLoginScenario().saveBean(PageConstants. RESPONSIVE_PLAN_SUMMARY_PAGE, ourPlans);

@@ -3,9 +3,12 @@
  */
 package pages.member.bluelayer;
 
+import java.util.concurrent.TimeUnit;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.openqa.selenium.Alert;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -29,19 +32,29 @@ public class LoginPage extends UhcDriver {
 
 
 	private static String PAGE_URL = MRConstants.UHCM_URL;
+	private static String UHCM_PAGE_URL = MRConstants.UHCM_TEAM_E_URL;
 	
 
+	//@FindBy(xpath = "//button[@id='fd_memberSignInButton' or @id='accessURAccountBTN']")
 	@FindBy(id = "fd_memberSignInButton")
 	private WebElement loginIn;
 
-	@FindBy(id = "loginPOPUPuser")
+	
+	@FindBy(xpath = "//*[@id='loginPOPUPuser']")
 	private WebElement userNameField;
+	
 
-	@FindBy(id = "loginPOPUPpass")
+	//@FindBy(id = "loginPOPUPpass")
+	@FindBy(xpath = "//*[@id='loginPOPUPpass']")
 	private WebElement passwordField;
 
-	@FindBy(xpath = "//div[@class='fd_userPassSection']/button")
+	//@FindBy(xpath = "//div[@class='fd_userPassSection']/button")
+	@FindBy(xpath = "//*[@id='accessURAccountBTN']")
 	private WebElement signInButton;
+	
+	@FindBy(xpath = "//*[@id='fd_signInPanel']/div[2]/div[4]/button")
+	private WebElement signInNewButton;
+	
 
 	@FindBy(linkText = "Forgot your username or password?")
 	private WebElement forgotUsernamePasswordLink;
@@ -54,42 +67,54 @@ public class LoginPage extends UhcDriver {
 	private JSONObject browserCheckJson;
 
 
-	public LoginPage(WebDriver driver) {
+	public LoginPage(WebDriver driver) {		
 		super(driver);
 		PageFactory.initElements(driver, this);
 		openAndValidate();
 	}
 
 	public Object loginWith(String username, String password, String category) {
+		//driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+		/*WebElement loginInEle= this.driver.findElement(By.id("fd_memberSignInButton"));
+		loginInEle.click();*/
 		loginIn.click();
+		System.out.println(username);
+		System.out.println(password);
 		sendkeys(userNameField, username);
 		sendkeys(passwordField, password);
-		System.out.println(signInButton.isEnabled());
+System.out.println(signInButton.isEnabled());
 		signInButton.click();
-
 		
-		if (MRScenario.environment.equals("dev-a") || MRScenario.environment.equals("team-a")) {
+		if (MRScenario.environment.equals("dev-a") || MRScenario.environment.equals("team-a") ) {
 			while (!isAlertPresent());
         }
 
 
-		if (MRScenario.environment.equals("dev-a") || MRScenario.environment.equals("team-b")) {
+		if (MRScenario.environment.equals("dev-a"))  {
 
 			while (!isAlertPresent());
 		}
-		if ( MRScenario.environment.equals("team-c")) {
+		/*if ( MRScenario.environment.equals("team-c") || MRScenario.environment.equals("team-b")) {
 			
 			Alert alert = driver.switchTo().alert();
 	        alert.accept();
 	        Alert alert1 = driver.switchTo().alert();
 	        alert1.accept();
-	        }
+	        } */
+		
+		try {
+			Thread.sleep(10000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
-		if(currentUrl().contains("home/my-account-home.html") && category.equalsIgnoreCase("Group"))
+		if(currentUrl().contains("home/my-account-home.html") && category.equalsIgnoreCase("Group") || currentUrl().contains("/guest/home.html") || currentUrl().contains("/login.html"))
+
 		{
 			return new AccountHomePage(driver,category);
 		}
-		else if(currentUrl().contains("home/my-account-home.html") && category.equalsIgnoreCase("Individual") ) {
+		else if(currentUrl().contains("home/my-account-home.html") && category.equalsIgnoreCase("Individual") || currentUrl().contains("/login.html") ) {
 			return new AccountHomePage(driver, category);
 		}
 		else if(currentUrl().contains("home/testharness.html") && category.equalsIgnoreCase("Group") ) {
@@ -107,7 +132,12 @@ public class LoginPage extends UhcDriver {
 
 	@Override
 	public void openAndValidate() {
-		start(PAGE_URL);
+		if(MRScenario.environment.equals("team-e") || MRScenario.environment.equals("team-h")){
+			start(UHCM_PAGE_URL);
+		}else{
+			start(PAGE_URL);
+		}
+		
 		validate(loginIn);
 		System.out.println("@@@@@@@@@@@@@  Test Environment and URL  : "+PAGE_URL+"@@@@@@@@@@@@@@@@@@@@@@@");
 

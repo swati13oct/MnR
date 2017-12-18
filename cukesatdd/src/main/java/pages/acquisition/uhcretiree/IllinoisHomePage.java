@@ -25,6 +25,9 @@ public class IllinoisHomePage extends UhcDriver {
 	
 	private WebElement illinoisfindaprovidertab;
 	
+	@FindBy(xpath="//*[@id='main']/div/div[1]/div/div[3]/div[2]/div[8]/div/div/div[1]/a/span")
+    private WebElement getstartedbutton;
+	
 	
 	private static String ILLINOIS_HOME_PAGE_URL= MRConstants.ILLINOIS_HOME_PAGE_URL;
 	
@@ -63,6 +66,20 @@ public class IllinoisHomePage extends UhcDriver {
 		
 		
 		// TODO Auto-generated method stub
+		return null;
+	}
+	
+	public SalesforceSitePage clickgetstarted() {
+		// TODO Auto-generated method stub
+		
+		validate(getstartedbutton);
+		getstartedbutton.click();
+		
+		if(driver.getTitle().equalsIgnoreCase("Problem loading page"))
+		{
+			return new SalesforceSitePage(driver);
+		}
+		
 		return null;
 	}
 

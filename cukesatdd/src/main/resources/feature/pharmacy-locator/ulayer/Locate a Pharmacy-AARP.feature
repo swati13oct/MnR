@@ -1,8 +1,39 @@
 @TeamPredators
 @pharmacylocator
 Feature: To test Locate a Pharmacy in acqusition flow AARP site
+@sanity
+  Scenario Outline: To verify pharmacy search functionality for 2017 in AARP ULayer
+    Given the user is on the AARP Medicare Site landing page
+    Then the user navigates to pharmacy search page in AARP Site
+    And enter zipcode
+      | Zipcode | <zipcode> |
+    And Select a year from the available list displayed
+      | Year | <year> |
+    And Select a Plan from the available plans list displayed
+      | PlanName | <planName> |
+    And validate pharmacy search results
+    And validate pharmacy saver
 
-  @multicounty
+
+    Examples: 
+      | year | zipcode | planName                                          |
+      | 2017 |   90210 | AARP MedicareComplete SecureHorizons Plan 1 (HMO) |
+
+  Scenario Outline: To verify pharmacy search functionality for 2018 in AARP ULayer
+     Given the user is on the AARP Medicare Site landing page
+    Then the user navigates to pharmacy search page in AARP Site
+    And Select a year from the available list displayed
+      | Year | <year> |
+    And enter zipcode
+      | Zipcode | <zipcode> |
+    And Select a Plan from the available plans list displayed
+      | PlanName | <planName> |
+    And validate pharmacy search results
+    And validate Standard Network pharmacy
+
+ Examples: 
+      | year | zipcode | planName                                          |
+      | 2018 |   90210 | AARP MedicareComplete SecureHorizons Plan 1 (HMO) | @multicounty
   Scenario Outline: To verify pharmacy locator multi county lookup modal in AARP site
     Given the user is on the AARP Medicare Site landing page
     When the user navigates to Request more info page
@@ -12,12 +43,13 @@ Feature: To test Locate a Pharmacy in acqusition flow AARP site
       | Distance    | <distance> |
       | County Name | <county>   |
 
+
+
+
+
     Examples: 
       | zipcode | distance | county       |
-      |   80002 |       15 | Adams County |
-
-
-  @zipcodeEntry
+      |   80002 |       15 | Adams County |@zipcodeEntry
   Scenario Outline: To verify pharmacy locator zipcode entry in AARP site
     Given the user is on the AARP Medicare Site landing page
     When the user navigates to Request more info page

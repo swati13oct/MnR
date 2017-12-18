@@ -224,9 +224,9 @@ public class ManageDrugPage extends UhcDriver {
               if (currentUrl().contains("health-plans.html")) {
                      return new VPPPlanSummaryPage(driver);
               }
-              if (currentUrl().contains("plan-detail.html")) {
+              /*if (currentUrl().contains("plan-detail.html")) {
                      return new PlanDetailsPage(driver,planType);
-              }
+              }*/
               
               
               return null;

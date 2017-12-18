@@ -63,7 +63,18 @@ public class PlanBenefitsCoveragePage extends UhcDriver {
 	@FindBy(xpath="//*[@id='planBenefitsApp']/div/div/div[2]/div[1]/div/div[4]/div[1]/span")
 	private WebElement effectiveDate;
 	
+	@FindBy(xpath="//a[contains(text(),'Passport Flyer') and contains(text(),'PDF')]")
+	private WebElement passportFlyerPdf;
+	
+	
+	public void verifyPassportFlyerPdf(){
+		try {
+		validate(passportFlyerPdf);
 
+		} catch (Exception e) {
+			System.out.println("PASSPORT PDF NOT FOUND ...");
+		}
+	}
 
 
 

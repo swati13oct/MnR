@@ -1,0 +1,35 @@
+@pharmacylocator
+Feature: To test pharmacy search page functionality in UHC Blue Layer
+
+	@sanity
+  Scenario Outline: To verify pharmacy search functionality for 2017 in UHC Blue Layer
+    Given the user is on the UMS Medicare Site landing page
+    Then the user navigates to pharmacy search page in UMS Site
+    And enter zipcode
+      | Zipcode | <zipcode> |
+    And Select a year from the available list displayed
+      | Year | <year> |
+    And Select a Plan from the available plans list displayed
+      | PlanName | <planName> |
+    And validate pharmacy search results
+    And validate pharmacy saver
+
+    Examples: 
+      | year | zipcode | planName                                          |
+      | 2017 |   90210 | AARP MedicareComplete SecureHorizons Plan 1 (HMO) |
+
+  Scenario Outline: To verify pharmacy search functionality for 2018 in UHC Blue Layer
+     Given the user is on the UMS Medicare Site landing page
+    Then the user navigates to pharmacy search page in UMS Site
+    And Select a year from the available list displayed
+      | Year | <year> |
+    And enter zipcode
+      | Zipcode | <zipcode> |
+    And Select a Plan from the available plans list displayed
+      | PlanName | <planName> |
+    And validate pharmacy search results
+    And validate Standard Network pharmacy
+
+    Examples: 
+      | year | zipcode | planName                                          |
+      | 2018 |   90210 | AARP MedicareComplete SecureHorizons Plan 1 (HMO) |

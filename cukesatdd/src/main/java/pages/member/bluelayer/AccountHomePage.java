@@ -23,6 +23,7 @@ import pages.member.bluelayer.OrderplanmaterialsPage;
 import pages.mypcp.SignInPage;
 import pages.member.bluelayer.ContactUsPage;
 import acceptancetests.atdd.data.CommonConstants;
+import acceptancetests.atdd.data.MRConstants;
 import acceptancetests.atdd.data.PageData;
 import acceptancetests.atdd.util.CommonUtility;
 import acceptancetests.login.data.LoginCommonConstants;
@@ -147,8 +148,14 @@ public class AccountHomePage extends UhcDriver {
 	@FindBy(linkText = "Back to previous page")
 	private WebElement backTopreviouspageLink;
 	
+
+	@FindBy(xpath = "//html/body/title")
+	private WebElement newClaimsPageHeading;
+	
+
 	@FindBy(linkText = "View/Download")
 	private WebElement viewanddownloadLink;
+
 	
 	@FindBy(xpath = "//*[@id='myDocuments']/div/div[2]/div/p[2]/ul/li[4]/a")
 	private WebElement paginationLink;
@@ -667,7 +674,7 @@ public class AccountHomePage extends UhcDriver {
 		return null;
 	}
 public ContactUsPage navigatesToContactUsPage() {
-		
+	//	this.waitforElement(contactUsLink);
 		contactUsLink.click();
 		if(getTitle().equalsIgnoreCase("UnitedHealthcare Medicare Solutions | Contact Us"))
 		{
@@ -951,7 +958,41 @@ public FormsandresourcesPage navigateToMydocumentUmsPage() {
 		return null;
 	}
 
-	public PharmacySearchPage navigateTomultipleLanguageDropdownResultsearch() {
+public pages.dashboard.member.blayer.ClaimsSummary navigateToClaimsSummaryPage() {
+		// TODO Auto-generated method stub
+		String url = "https://member.team-b-aarpmedicareplans.uhc.com/guest/mirumclaims.html";
+		driver.get(url);
+		try {
+			Thread.sleep(10000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		
+		if (driver.getTitle().equals("My Benefits & Coverage")) {
+			return new  pages.dashboard.member.blayer.ClaimsSummary(driver);
+		}
+		return null;
+	}
+	
+	public pages.member.bluelayer.ContactUsPage navigateToContactusRedesignPage() {
+		// TODO Auto-generated method stub
+		//String url = "https://member.team-e-uhcmedicaresolutions.uhc.com/content/uhcm/home/contact.html";
+		System.out.println(MRConstants.REDESIGN_UHCM_URL);
+		driver.get(MRConstants.REDESIGN_UHCM_URL);
+		try {
+			Thread.sleep(15000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+		}
+		if (driver.getTitle().trim().equals("Overview")) {
+			return new pages.member.bluelayer.ContactUsPage(driver);
+
+		}
+		return null;
+	}
+public PharmacySearchPage navigateTomultipleLanguageDropdownResultsearch() {
 		driver.manage().timeouts().implicitlyWait(400, TimeUnit.SECONDS);
 		/*Select select = new  Select(driver.findElement(By.id("lang-select")));
 		select.selectByVisibleText("español");*/

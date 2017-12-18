@@ -18,5 +18,11 @@ public class PaymentCommonConstants {
 	public static final String SETUP_PAYMENT_SUCCESS_ACTUAL = "setupRecPaymentSuccessActualJson";
 	public static final String CLAIM_SUMMARY_EXPECTED = "claimSummaryExpected";
 	public static final String CLAIM_SUMMARY_ACTUAL = "claimSummaryActual";
+	public static final String ONE_TIME_PAYMENTS_FLOW_NAME = "onetimepayments";
+	public static final String AUTOMATIC_PAYMENTS_FLOW_NAME = "automaticpayment";
+	public static final String ONE_TIME_PAYMENTS_ACTUAL = "onetimepaymentsactual";
+	public static final String AUTOMATIC_PAYMENTS_ACTUAL = "automaticpaymentsactual";
+	public static final String ONE_TIME_PAYMENTS_EXPECTED = "onetimepaymentsexpected";
+	public static final String AUTOMATIC_PAYMENTS_EXPECTED = "automaticpaymentsexpected";
 
 }

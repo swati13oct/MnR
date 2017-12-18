@@ -116,9 +116,9 @@ public class FormsandResourcesUmsStepDefinition {
 			getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
 			getLoginScenario().saveBean(PageConstants.ACCOUNT_HOME_PAGE,
 					accountHomePage);
-			/*Assert.assertTrue(true);
-			accountHomeActualJson = accountHomePage.accountHomeJson;*/
+			Assert.assertTrue(true);
 		}
+			//accountHomeActualJson = accountHomePage.accountHomeJson;		}
 
 		/*try {
 			JSONAssert.assertEquals(accountHomeExpectedJson,
@@ -148,18 +148,31 @@ public class FormsandResourcesUmsStepDefinition {
 				.getExpectedData(expectedDataMap);
 		getLoginScenario().saveBean(
 				FnRCommonConstants.FORMS_AND_RESOURCES_EXPECTED,
-				formsAndResourcesExpectedJson);
+				formsAndResourcesExpectedJson);*/
 		
-		 Actual data 
+		// Actual data 
 		if (formsAndResourcesPage != null) {
 			getLoginScenario().saveBean(PageConstants.FORMS_AND_RESOURCES_PAGE,
 					formsAndResourcesPage);
-		Assert.assertTrue(true);
-			formsAndResourcesActualJson = formsAndResourcesPage.formsAndResourcesJson;
+		/*Assert.assertTrue(true);
+			formsAndResourcesActualJson = formsAndResourcesPage.formsAndResourcesJson;*/
 		}
-		getLoginScenario().saveBean(
+		/*getLoginScenario().saveBean(
 				FnRCommonConstants.FORMS_AND_RESOURCES_ACTUAL,
 				formsAndResourcesActualJson);*/
+	}
+	
+	@Then("^the user validates My Documents section and clicks on the link in UMS site$")
+	public void validates_My_Documents_ums(){
+		FormsandresourcesPage formsandresourcesPage = (FormsandresourcesPage) getLoginScenario()
+				.getBean(PageConstants.FORMS_AND_RESOURCES_PAGE);
+		formsandresourcesPage.validateMyDocumentsSection();
+		formsandresourcesPage.clickOnViewotherdocLink();
+		if (formsandresourcesPage != null) {
+			getLoginScenario().saveBean(PageConstants.FORMS_AND_RESOURCES_PAGE,
+					formsandresourcesPage);
+		}
+		
 	}
 
 	
@@ -374,8 +387,49 @@ public class FormsandResourcesUmsStepDefinition {
 			e.printStackTrace();
 		}
 	}
+@Then("^validates that add plans tab is not available$")
+	public void validates_that_add_plans_tab_is_not_available() {
+		System.out.println("-----add plans validation started--------");
+		FormsandresourcesPage formsAndResources = (FormsandresourcesPage) getLoginScenario().getBean(PageConstants.FORMS_AND_RESOURCES_PAGE);
+		boolean linkToValidate = formsAndResources.validateAddPlanLink();
+		System.out.println(PageConstants.FORMS_AND_RESOURCES_PAGE);
+		try{
+		if(linkToValidate!=true){
+			System.out.println("---------Scenario Passed successfully--------");
+			Assert.assertTrue(true);
+		}else{
+			System.out.println("---------Sceanrio Failed due to presence of link-------");
+			Assert.fail();
+		}
+		}catch(Exception e){
+			Assert.fail();
+		}
+		System.out.println("-----add plans validation ended----------");
+	}
+
+
+	@Then("^I will be able access a PDF flyer in  English,Spanish or Chinese that explains passport benefits when a plan has this feature$")
+	public void I_will_be_able_access_a_PDF_flyer_spanish() {
+		WebDriver wd = getLoginScenario().getWebDriver();
+		FormsandresourcesPage formsandresourcesPage = new FormsandresourcesPage(wd);
+		formsandresourcesPage.verifyPassportFlyer();
+		formsandresourcesPage.verifyPassportFlyerSpanish();
+	}
 	
-	@When("^the user navigates to my personal health record in UMS site$")
+	@Then("^the user validates preferred mail order benefit pdfs in plan materials and formsandresources section in UMS site")
+	public void validates_plan_prescriptionmaterials_plan_document_section_ums() {
+		FormsandresourcesPage formsAndResourcesPage = (FormsandresourcesPage) getLoginScenario()
+				.getBean(PageConstants.FORMS_AND_RESOURCES_PAGE);
+
+		String preferredMailOrderFlag=formsAndResourcesPage.validatePrescriptionmailorderBenefitPdfs();
+	
+		//Validations 
+		try {
+			JSONAssert.assertEquals(preferredMailOrderFlag,"true", true);
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}	
+	}@When("^the user navigates to my personal health record in UMS site$")
 	public void views_my_personal_health_record_Ums_site() {
 		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario()
 				.getBean(PageConstants.ACCOUNT_HOME_PAGE);
@@ -786,5 +840,4 @@ public class FormsandResourcesUmsStepDefinition {
 
 
 	
-	
-}
+	}

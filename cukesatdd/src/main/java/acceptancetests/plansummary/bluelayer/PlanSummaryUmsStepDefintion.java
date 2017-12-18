@@ -276,8 +276,25 @@ public class PlanSummaryUmsStepDefintion {
 			}else{
 				Assert.assertTrue(false);
  }
+			
+			
 }
-	 @Given("^the user is on the vpp portfolio page$")
+@Then("the user validate add a plan link is not displayed for albama memeber$")
+	 
+	 public void user_validates_addaplan_link()
+	    {PlanSummaryPage planSummaryPage = (PlanSummaryPage) getLoginScenario().getBean(PageConstants.PLAN_SUMMARY_PAGE);
+
+			
+			boolean flagValue=planSummaryPage.validateaddaplanlink();
+			if(!flagValue){
+				System.out.println("add a plan link is not displayed");
+				Assert.assertTrue(true);
+ 			}else{
+ 				System.out.println("add a plan link is displayed");
+				Assert.assertTrue(false);
+ 			}	
+ }
+@Given("^the user is on the vpp portfolio page$")
      public void user_on_aarp_ourPlans_page(){
              WebDriver wd = getLoginScenario().getWebDriver();
              PlanSummaryPage ourPlans = new PlanSummaryPage(wd);
@@ -310,14 +327,8 @@ public class PlanSummaryUmsStepDefintion {
                      Assert.fail();
              }
      }*/
-	 
-	 
-	 
-	 
-	 
-	 
-	 
 }
+
 
 
 

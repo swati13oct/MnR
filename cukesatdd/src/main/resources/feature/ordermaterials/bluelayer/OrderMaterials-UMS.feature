@@ -13,8 +13,32 @@ Feature: To test order plan materials flow in UHC site
   #    | Option    | <option>   |
   #    | Plan Type | <planType> |
 
-  #  Examples: 
-  #    | planType | memberType | option           |
+Scenario Outline:Verify order plan materials in UHC site for federal members
+Given registered UHC member for order plan materials with following attributes 
+	| Plan Type    | <planType>   |
+	| Member Type  | <memberType> | 
+When the user navigates to order plan materials through mymenu tab in UHC site
+Examples:
+  	 | planType   | memberType     | option              |
+   # | MA         |  Individual    | Member Materials    | 
+     | MAPD       |  Individual    | Replacement ID card |
+   # | MA         | Group          | Replacement ID card |   
+   # | MAPD       | Group          | Member Materials    |
+   # | SSUP       | Group          | Replacement ID card |
+   # | PDP        | Group          | Member Materials    |
+   
+Scenario Outline:Verify order plan materials in UHC site for federal members
+Given registered UHC member for order plan materials with following attributes 
+	| Plan Type    | <planType>   |
+	| Member Type  | <memberType> | 
+	| Group Type    | <groupType> |
+When the user navigates to order plan materials through mymenu tab in UHC site
+Then the user validates add plan link on order and beneefits page
+ 
+Examples:
+     | planType   | memberType     | groupType              |
+     | MAPD       | Group          | ALPEEHIP               |
+     | MA				  | Group    			 | ALPEEHIP               |  #    | planType | memberType | option           |
   #    | MA       | Individual | Member Materials |
   #    | MAPD     | Individual | Member Materials |
   #    | MA       | Group      | Member Materials |

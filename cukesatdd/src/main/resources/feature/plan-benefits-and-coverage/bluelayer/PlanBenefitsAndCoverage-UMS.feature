@@ -577,6 +577,7 @@ Examples:
 #| PDP      | Group    |
 #| SSUP     | Group    |
 
+
 @hospital       
 Scenario Outline: Verify benefits and coverage in UMS site for mapd and ma non lis with hospital visits
 Given registered UHC with following details for plan benefits and coverage flow in UMS site
@@ -737,4 +738,126 @@ When the user clicks on uhc disclaimer page back to previous page
 
 
 
+@bncfnf
+Scenario Outline:To verify Add Plan link not available on plan and benefits page for members in UMS site
+Given registered member to login in UMS site
+	| Plan Type   | <planType>   |
+	| Member Type | <memberType> |
+	| Group Type   | <groupType>  |
+When the user navigates to benefits and coverage page under my plans in UMS site
+Then validates that add plans tab is not available
 
+Examples:
+
+| planType | memberType | groupType |
+| MAPD     | Group      | ALPEEHIP  |
+#| MA			 | Group	  	| ALPEEHIP  |
+
+
+
+@US463479
+
+Scenario Outline: To verify pdfs displayed in forms and resources in UMS site
+
+Given registered member to login in UMS site
+	| Plan Type   | <planType>   |
+	| Member Type | <memberType> |
+When the user navigates to benefits and coverage page under my plans in UMS site
+Then I will be able access a PDF flyer in  English,Spanish or Chinese that explains passport benefits when a plan has this feature
+
+Examples:
+
+| planType | memberType  |
+| MA       |Individual |
+| MAPD     |Individual |
+
+Scenario Outline: Verify benefits and coverage in AARP site for G01 Ship member
+Given registered AMP with following details for plan benefits and coverage flow in AARP site
+| Plan Type          | <planType>                | 
+| Plan Group         | <planGroup>               |
+And the user navigates to plan benefits and coverage and validates summary left row for G01      
+|Sequence Ref Num 1-4  |<sequenceRefNum1-4>  |
+|Sequence Ref Num 5    |<sequenceRefNum5>    |
+|Sequence Ref Num 6-8  |<sequenceRefNum6-8>  |
+|Sequence Ref Num 9    |<sequenceRefNum9>    |
+|Sequence Ref Num 10   |<sequenceRefNum10>   |
+|Sequence Ref Num 11-12|<sequenceRefNum11-12>|
+|Sequence Ref Num 13   |<sequenceRefNum13>   |
+And the user navigates to plan benefits and coverage and validates summary right row for G01
+|Benefit Text 1 |<benefitText1>  |
+|Benefit Text 2 |<benefitText2>  |
+|Benefit Text 3 |<benefitText3>  |
+|Benefit Text 4 |<benefitText4>  |
+|Benefit Text 5 |<benefitText5>  |
+|Benefit Text 6 |<benefitText6>  |
+|Benefit Text 7 |<benefitText7>  |
+|Benefit Text 8 |<benefitText8>  |
+|Benefit Text 9 |<benefitText9>  |
+|Benefit Text 10|<benefitText10> |
+|Benefit Text 11|<benefitText11> |
+|Benefit Text 12|<benefitText12> |
+|Benefit Text 13|<benefitText13> |
+
+Examples:
+|planType  |planGroup|sequenceRefNum1-4|sequenceRefNum5                              |sequenceRefNum6-8             |sequenceRefNum9 |sequenceRefNum10                             |sequenceRefNum11-12  |sequenceRefNum13                   |benefitText1    |benefitText2     |benefitText3           |benefitText4            |benefitText5                    |benefitText6|benefitText11                        |benefitText12         |benefitText13                |
+| SHIP     | G01     |Hospital stays   |Blood or packed red blood cells under Part A |Skilled nursing facility stays|Hospice care    |Blood or packed red blood cells under Part B |Medical care                          |Emergency care in foreign countries|For days 1 - 60 |For days 61 - 90 |For days 91 and beyond |For days 91 and greater | will pay Medicare Part A costs |Since Medicare covers days 1 - 20 |For days 21 - 100 |Must follow a hospital stay |Hospice Care and Respite Care |Medicare Part B costs not covered |20% of the Medicare-eligibleexpense |Part B Excess charge  | $250 emergency medical care |
+
+@needHelpums
+    Scenario Outline: Verify Need Help section is in place on Benefits and Coverage page
+    Given registered UHC with following details for plan benefits and coverage flow in UMS site
+      | Plan Type      | <planType>  |
+      | Member Type     | <memberType>|
+      | Copay Category | <copayCategory>|
+    When the user view forms and resources in UMS site
+    Then the user view benefits and coverage in UMS site
+    And the user validates the content on benefits and coverage page
+    And the user validates Needhelp header
+
+   Examples: 
+      | planType | memberType| copayCategory |
+      | MAPD     | Group     |     NON LIS   |
+
+@contactussection
+    Scenario Outline: Verify Need Help section is in place on Benefits and Coverage pageR
+    Given registered UHC with following details for plan benefits and coverage flow in UMS site
+      | Plan Type      | <planType>  |
+      | Member Type     | <memberType>|
+      | Copay Category | <copayCategory>|
+    When the user view forms and resources in UMS site
+    Then the user view benefits and coverage in UMS site     
+    And the user validates contactus section
+    
+    Examples: 
+      | planType | memberType| copayCategory |
+      | MAPD     | Group     |     NON LIS   |
+      
+@disclaimersection
+    Scenario Outline: Verify Need Help section is in place on Benefits and Coverage page
+    Given registered UHC with following details for plan benefits and coverage flow in UMS site
+      | Plan Type      | <planType>  |
+      | Member Type     | <memberType>|
+      | Copay Category | <copayCategory>|
+    When the user view forms and resources in UMS site
+    Then the user view benefits and coverage in UMS site
+    And the user validates Needhelp header and disclaimer header
+    
+    
+    Examples: 
+      | planType | memberType| copayCategory |
+      | MAPD     | Group     |     NON LIS   |
+
+@plandocument
+    Scenario Outline: Plan Documents section is in place on Benefits and Coverage page
+    Given registered UHC with following details for plan benefits and coverage flow in UMS site
+      | Plan Type      | <planType>  |
+      | Member Type     | <memberType>|
+      | Copay Category | <copayCategory>|
+    When the user view forms and resources in UMS site
+    Then the user view benefits and coverage in UMS site
+    And the user validates the content on benefits and coverage page
+    And the user validates Plan Documents section
+    
+    Examples: 
+      | planType | memberType| copayCategory |
+      | MAPD     | Group     |     NON LIS   |
+      ##member used :q1_apr_grp_015

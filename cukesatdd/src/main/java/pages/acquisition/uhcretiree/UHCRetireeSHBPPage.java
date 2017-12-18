@@ -32,6 +32,9 @@ public class UHCRetireeSHBPPage extends UhcDriver {
 	@FindBy(xpath=".//*[@id='cq-imagebutton-jsp-/content/gr/en/shbp/header/jcr:content/parsys/textbgimage/parsys/imagebutton_1']")
 	private WebElement clickproviderslink;
 	
+	@FindBy(xpath="//*[@id='main']/div/div[1]/div/div[3]/div[2]/div[8]/div/div/div[1]/a/span")
+    private WebElement getstartedbutton;
+	
 	private static String UHCRETIREE_ACQISITION_SHBP_PAGE_URL = MRConstants.UHCRETIREE_SHBP_PAGE;
 	
 	
@@ -72,6 +75,20 @@ public class UHCRetireeSHBPPage extends UhcDriver {
 	
 		}
 		// TODO Auto-generated method stub
+		return null;
+	}
+	
+	public SalesforceSitePage clickgetstarted() {
+		// TODO Auto-generated method stub
+		
+		validate(getstartedbutton);
+		getstartedbutton.click();
+		
+		if(driver.getTitle().equalsIgnoreCase("Problem loading page"))
+		{
+			return new SalesforceSitePage(driver);
+		}
+		
 		return null;
 	}
 	

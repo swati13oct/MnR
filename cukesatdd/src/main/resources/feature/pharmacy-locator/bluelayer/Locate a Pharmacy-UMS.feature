@@ -1,8 +1,5 @@
 @pharmacylocator
-Feature:To test Locate a Pharmacy in acqusition flow UMS site
-
-
-  @multicounty
+Feature:To test Locate a Pharmacy in acqusition flow UMS site@multicounty
   Scenario Outline: To verify pharmacy locator multi county lookup modal in UHC site
 Given the user is on the UMS Medicare Site landing page
 When the user navigates to pharmacy search page in UMS Site
@@ -10,12 +7,50 @@ When the user navigates to pharmacy search page in UMS Site
       | Zip Code    | <zipcode>  |
       | Distance    | <distance> |
       | County Name | <county>   |
-
-    Examples: 
+Examples: 
       | zipcode | distance | county       |
-      |   80002 |       15 | Adams County |
-
-  @languageselection
+      |   80002 |       15 | Adams County |@sanity
+  Scenario Outline: To verify pharmacy search functionality for 2017 in UHC Blue Layer
+    Given the user is on the UMS Medicare Site landing page
+    Then the user navigates to pharmacy search page in UMS Site
+    And enter zipcode
+      | Zipcode | <zipcode> |
+    And Select a year from the available list displayed
+      | Year | <year> |
+    And Select a Plan from the available plans list displayed
+      | PlanName | <planName> |
+    And validate pharmacy search results
+    And validate pharmacy saver
+  Examples: 
+      | year | zipcode | planName                                          |
+      | 2017 |   90210 | AARP MedicareComplete SecureHorizons Plan 1 (HMO) | 
+Scenario Outline: To verify pharmacy search functionality for 2018 in UHC Blue Layer
+     Given the user is on the UMS Medicare Site landing page
+    Then the user navigates to pharmacy search page in UMS Site
+    And Select a year from the available list displayed
+      | Year | <year> |
+    And enter zipcode
+      | Zipcode | <zipcode> |
+    And Select a Plan from the available plans list displayed
+      | PlanName | <planName> |
+    And validate pharmacy search results
+    And validate Standard Network pharmacy    Examples: 
+      | year | zipcode | planName                                          |
+      | 2018 |   90210 | AARP MedicareComplete SecureHorizons Plan 1 (HMO) |
+Scenario Outline: To verify pharmacy search functionality for 2018 in UHC Blue Layer
+     Given the user is on the UMS Medicare Site landing page
+    Then the user navigates to pharmacy search page in UMS Site
+    And Select a year from the available list displayed
+      | Year | <year> |
+    And enter zipcode
+      | Zipcode | <zipcode> |
+    And Select a Plan from the available plans list displayed
+      | PlanName | <planName> |
+    And validate pharmacy search results
+    And validate Standard Network pharmacy
+ Examples: 
+      | year | zipcode | planName                                          |
+      | 2018 |   90210 | AARP MedicareComplete SecureHorizons Plan 1 (HMO) |@languageselection
   Scenario Outline: To verify pharmacy locator language in UHC site
 Given the user is on the UMS Medicare Site landing page
 When the user navigates to pharmacy search page in UMS Site
@@ -23,13 +58,10 @@ When the user navigates to pharmacy search page in UMS Site
       | Zip Code    | <zipcode>  |
       | Distance    | <distance> |
       | County Name | <county>   |
-    Then the user validate multiple language dropdown menu in UHC site
-
-    Examples: 
+    Then the user validate multiple language dropdown menu in UHC site   Examples: 
       | zipcode | distance | county      |
       |   90210 |       15 | Los Angeles |
-
-  @planType
+@planType
   Scenario Outline: To verify plantype in pharmacy locator page in UHC site
 Given the user is on the UMS Medicare Site landing page
 When the user navigates to pharmacy search page in UMS Site
@@ -374,5 +406,3 @@ When the user navigates to pharmacy search page in UMS Site
       | zipcode | distance | county      | year | planName                                          |
       |   90210 |       15 | Los Angeles | 2017 | AARP MedicareComplete SecureHorizons Plan 1 (HMO) |
 
-
-	

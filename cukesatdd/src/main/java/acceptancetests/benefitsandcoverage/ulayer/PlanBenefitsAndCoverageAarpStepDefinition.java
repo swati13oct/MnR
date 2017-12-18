@@ -22,12 +22,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import pages.member.ulayer.AccountHomePage;
 import pages.member.ulayer.BenefitsAndCoveragePage;
+import pages.member.ulayer.ContactUsPage;
 import pages.member.ulayer.FormsandresourcesPage;
 import pages.member.ulayer.LoginPage;
 import pages.member.ulayer.PlanBenefitsCoveragePage;
 import acceptancetests.atdd.data.CommonConstants;
 import acceptancetests.atdd.data.member.PageConstants;
 import acceptancetests.benefitsandcoverage.data.PlanBenefitsAndCoverageCommonConstants;
+import acceptancetests.contactus.data.ContactUsCommonConstants;
 import acceptancetests.formsandresources.data.FnRCommonConstants;
 import acceptancetests.login.data.LoginCommonConstants;
 import atdd.framework.MRScenario;
@@ -95,7 +97,7 @@ public class PlanBenefitsAndCoverageAarpStepDefinition {
 		}
 
 		WebDriver wd = getLoginScenario().getWebDriver();
-
+		//wd.manage().window().maximize();
 		LoginPage loginPage = new LoginPage(wd);
 		AccountHomePage accountHomePage = (AccountHomePage) loginPage.loginWith(userName, pwd);
 		JSONObject accountHomeActualJson = null;
@@ -398,15 +400,10 @@ public class PlanBenefitsAndCoverageAarpStepDefinition {
 					fileName, directory);
 			loginScenario.saveBean(PlanBenefitsAndCoverageCommonConstants.BENEFITS_AND_COVERAGE_EXPECTED, benefitsandcoverageExectedJson);
 			System.out.println("Benefits and coverage expected ==============>"+benefitsandcoverageExectedJson.toString());
-			
-			
-			
 		}
-		
-
 	}
 
-	@Then("^the user validates the content on benefits and coverage page")
+//	@Then("^the user validates the content on benefits and coverage page")
 	public void validateContentOnBenefitsAndCoveragePage() {
 		
 		try {
@@ -467,87 +464,105 @@ public class PlanBenefitsAndCoverageAarpStepDefinition {
 	public void user_clicks_on_start_search_button() {
 		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario().getBean(
 				PageConstants.BENEFITS_COVERAGE_PAGE);
-		benefitsCoveragePage.navigateToRallySearchWindow();		
+		benefitsCoveragePage.navigateToRallySearchWindow();	
 	}
 	
 	@And("^the user clicks on the change your pcp button on benefits and coverage page$")
 	public void user_clicks_on_change_your_pcp_button() {
 		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario().getBean(
 				PageConstants.BENEFITS_COVERAGE_PAGE);
-		benefitsCoveragePage.navigateToContactUsPage();		
-	}
-	@And("^the user navigates to plan benefits and coverage and validates summary left row for G01$")
-	public  void check_left_row_sequence_for_G01(DataTable sequenceAttribute){	
-		System.out.println("-----left row validation stated------");
-		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstants.ACCOUNT_HOME_PAGE);
-		PlanBenefitsCoveragePage bncPage = accountHomePage.navigateToBnC();
-		bncPage.validateSequenceOfPlanBenefitsAndCoverageSummaryLeftRow(sequenceAttribute);
-		System.out.println("----left row validation completed-----");
-	}
-	@And("^the user navigates to plan benefits and coverage and validates summary right row for G01$")
-	public  void check_right_row_sequence_for_G01(DataTable sequenceAttribute){	
-		System.out.println("-----right row validation started-----");
-		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstants.ACCOUNT_HOME_PAGE);
-		PlanBenefitsCoveragePage bncPage = accountHomePage.navigateToBnC();
-		bncPage.validateSequenceOfPlanBenefitsAndCoverageSummaryRightRow(sequenceAttribute);
-		System.out.println("----right row validation ended--------");
+		benefitsCoveragePage.navigateToContactUsPage();
 	}
 	
-	@Then("^the user view mydocument in AARP site$")
-	public void views_mydocument_aarp_site() {
-		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstants.ACCOUNT_HOME_PAGE);
+	@When("^user clicks on Add Rider button$")
+	public void user_clicks_on_Add_Rider_button() {
+		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario().getBean(
+				PageConstants.BENEFITS_COVERAGE_PAGE);
+		benefitsCoveragePage.clickOnAddRider();
+	}
+	
+	@Then("^Add rider popup appears and clicks Add Rider button$")
+	public void Add_rider_popup_appears_and_clicks_Add_Rider_button() throws Exception {
+		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario().getBean(
+				PageConstants.BENEFITS_COVERAGE_PAGE);
+		benefitsCoveragePage.validateAddRiderPopup();
+	}
+	
+	@When("^user clicks on Remove This Rider button$")
+	public void user_clicks_on_Remove_This_Rider_button() {
+		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario().getBean(
+				PageConstants.BENEFITS_COVERAGE_PAGE);
+		benefitsCoveragePage.clickOnRemoveRider();
+	}
+
+	@Then("^Add rider popup appears and clicks Remove This Rider button$")
+	public void Add_rider_popup_appears_and_clicks_Remove_This_Rider_button() throws Exception {
+		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario().getBean(
+				PageConstants.BENEFITS_COVERAGE_PAGE);
+		benefitsCoveragePage.validateRemoveRiderPopup();
+	}
+	
+	@Then("^Replace rider popup appears and clicks Replace Rider button$")
+	public void Replace_rider_popup_appears_and_clicks_Replace_Rider_button() throws Exception {
+		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario().getBean(
+				PageConstants.BENEFITS_COVERAGE_PAGE);
+		benefitsCoveragePage.validateReplaceRiderPopup();
+	}
+	
+	@Then("^the user clicks on Disclaimers link$")
+	public void the_user_clicks_on_Disclaimers_link() {
+		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario().getBean(
+				PageConstants.BENEFITS_COVERAGE_PAGE);
+		benefitsCoveragePage.clickOnDisclaimers();
+	}
+
+	@When("^the user navigates to contact us page in AARP site$")
+	public void the_user_navigates_to_contact_us_page_in_AARP_site() {
+		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario().getBean(
+				PageConstants.BENEFITS_COVERAGE_PAGE);
+		ContactUsPage contactUsPage = benefitsCoveragePage
+				.navigatesToContactUsPage();
+		if (contactUsPage != null) {
+
+			/* Get expected data */
+		@SuppressWarnings("unchecked")
+			Map<String, JSONObject> expectedDataMap = (Map<String, JSONObject>) getLoginScenario()
+			.getBean(CommonConstants.EXPECTED_DATA_MAP);
+			JSONObject contactUsExpectedJson = contactUsPage.getExpectedData(expectedDataMap);
+			getLoginScenario().saveBean(ContactUsCommonConstants.CONTACT_US_EXPECTED_JSON,
+					contactUsExpectedJson);
+			
+			/* Get actual data */
+			JSONObject contactUsActualJson = contactUsPage.contactUsJson;
+			getLoginScenario().saveBean(ContactUsCommonConstants.CONTACT_US_ACTUAL_JSON,
+					contactUsActualJson); 
+
+			getLoginScenario().saveBean(PageConstants.CONTACT_US_PAGE,
+					contactUsPage);
+
+		}
+
+	}
+
+	@Then("^the user validates the contact us page in AARP site$")
+	public void validates_plan_materials_plan_document_section_ums() {
+		ContactUsPage contactUsPage = (ContactUsPage) getLoginScenario()
+				.getBean(PageConstants.CONTACT_US_PAGE);
+
+		JSONObject contactUsExpectedJson = (JSONObject) getLoginScenario().getBean(ContactUsCommonConstants.CONTACT_US_EXPECTED_JSON);
+		JSONObject contactUsActualJson = (JSONObject) getLoginScenario().getBean(ContactUsCommonConstants.CONTACT_US_ACTUAL_JSON);
 		
-		FormsandresourcesPage formsAndResourcesPage = accountHomePage.navigateToMydocumentAarpPage();
-	}
+		System.out.println("Contact Us actual ==============>"+contactUsActualJson.toString());
+		System.out.println("Contact Us expected ==============>"+contactUsExpectedJson.toString());
 	
-	@Then("^the user validates the content on mydocument page$")
-	public void views_mydoument_validation_aarp_site() {
 		try {
-			
-			JSONObject actual=(JSONObject) loginScenario.getBean(PlanBenefitsAndCoverageCommonConstants.MYDOCUMENT_ACTUAL);
-			
-			JSONObject expected=(JSONObject) loginScenario.getBean(PlanBenefitsAndCoverageCommonConstants.MYDOCUMENT_EXPECTED);
-			
-			if(actual!=null && expected !=null){
-				JSONAssert.assertEquals(expected, actual, true);
-			}			
-			
-		} catch (Exception e) {
+			JSONAssert.assertEquals(contactUsExpectedJson, contactUsActualJson,true);
+		} catch (JSONException e) {
 			e.printStackTrace();
 		}
 	}
-	
-	@Then("^the user validates the backtopreviouspage link on mydocument page in AARP site$")
-	public void view_back_to_previous_link_validation_aarp_site(){
-		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstants.ACCOUNT_HOME_PAGE);
-		 
-		FormsandresourcesPage formsAndResourcesPage = accountHomePage.navigatebackToformsandresourcesAarpPage();
 
-	}
-	
-	@Then("^the user validates the pagination link on mydocument page$")
-	public void view_pagination_link_validation_aarp_site(){
-		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstants.ACCOUNT_HOME_PAGE);
-		 
-		FormsandresourcesPage formsAndResourcesPage = accountHomePage.navigateTopaginationAarpPage();
 
-	}
-	
-	@Then("^the user validates the view/download link on mydocument page$")
-	public void view_download_link_validation_aarp_site(){
-		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstants.ACCOUNT_HOME_PAGE);
-		 
-		FormsandresourcesPage formsAndResourcesPage = accountHomePage.navigateToviewdowloadlinkAarpPage();
-
-	}
-	
-	@Then("^the user validates the custom search on mydocument page$")
-	public void view_custom_search_aarp_site(){
-		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstants.ACCOUNT_HOME_PAGE);
-		
-		FormsandresourcesPage formsAndResourcesPage = accountHomePage.navigateTocustomersearchlinkAarpPage();		
-		
-	}
 
 	@Then("^the user validates the sorting link on mydocument page$")
 	public void view_sorting_search_aarp_site(){
@@ -555,14 +570,19 @@ public class PlanBenefitsAndCoverageAarpStepDefinition {
 		
 		FormsandresourcesPage formsAndResourcesPage = accountHomePage.navigateTosortingsearchlinkAarpPage();		
 		
-	}
-	
 
-	
-	@After
+		WebDriver wd = (WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
+		if(wd!=null){
+			wd.quit();
+		}
+
+
+	}
+
+	/*@After
 	public void tearDown() {
 
 		WebDriver wd = (WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
 		wd.quit();
-	}
+	}*/
 }

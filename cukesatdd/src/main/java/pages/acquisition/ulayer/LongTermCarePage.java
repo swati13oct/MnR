@@ -67,13 +67,17 @@ public class LongTermCarePage extends UhcDriver{
 		openAndValidate();
 	}
 
+	@FindBy(id="ltcInfo")
+	private WebElement ltcHeader;
 
 
 	@Override
 	public void openAndValidate() {
 		validate(longtermcareno);
 		validate(longtermcaredyes);
-		
+		validate(ltcHeader);
+		validate(longtermcaredsaveandcontinue);
+		validate(longtermcaredcancelregistration);
 		JSONObject jsonObject = new JSONObject();
 		for (String key : longtermcareInformation.getExpectedData().keySet()) {
 			WebElement element = findElement(longtermcareInformation.getExpectedData()
@@ -132,5 +136,15 @@ public class LongTermCarePage extends UhcDriver{
 		
 	}
 		
+	/*@FindBy(id="ltcInfo")
+	private WebElement ltcHeader;*/
+	
+	public boolean validateLTCPage(){
+		boolean flag = false;
+		if(validate(ltcHeader)&&validate(longtermcareno)&&validate(longtermcaredyes)&&validate(longtermcaredsaveandcontinue)&&validate(longtermcaredcancelregistration))
+			flag = true;
+		return flag;
+	}
+	
 	}
 

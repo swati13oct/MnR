@@ -27,39 +27,39 @@ import atdd.framework.UhcDriver;
  */
 public class PortfolioPageUhc extends UhcDriver {
 
-        @FindBy(linkText = "Look up a ZIP code")
-        private WebElement lookupZipcodeLink;
+	@FindBy(linkText = "Look up a ZIP code")
+	private WebElement lookupZipcodeLink;
 
-        /*@FindBy(id = "zipcode")
-        private WebElement zipCodeField;*/
-        @FindBy(xpath = "//button[@class='zip-button']/preceding-sibling::input[@id='zipcode']")
-        private WebElement zipCodeField;
-        //button[@class='zip-button']/preceding-sibling::input[@id='zipcode']
-        @FindBy(id = "goBtn")
-        private WebElement goButton;
+	/*@FindBy(id = "zipcode")
+	private WebElement zipCodeField;*/
+	@FindBy(xpath = "//button[@class='zip-button']/preceding-sibling::input[@id='zipcode']")
+	private WebElement zipCodeField;
+	//button[@class='zip-button']/preceding-sibling::input[@id='zipcode']
+	@FindBy(id = "goBtn")
+	private WebElement goButton;
 
-        @FindBy(id = "nav-zipcode")
-        private WebElement zipfield;
+	@FindBy(id = "nav-zipcode")
+	private WebElement zipfield;
 
-        @FindBy(xpath = "//*[@id='zipLookup']/p/a")
-        private WebElement LookUpZipCode;
+	@FindBy(xpath = "//*[@id='zipLookup']/p/a")
+	private WebElement LookUpZipCode;
 
-        @FindBy(xpath = "//div[@id='subnav_2']/div/div/div[2]/form/span/span")
-        private WebElement errormessage;
+	@FindBy(xpath = "//div[@id='subnav_2']/div/div/div[2]/form/span/span")
+	private WebElement errormessage;
 
-        @FindBy(id = "ghn_lnk_2")
-        private WebElement OurPlansLink;
+	@FindBy(id = "ghn_lnk_2")
+	private WebElement OurPlansLink;
 
-        @FindBy(id = "subnav_2")
-        public static WebElement ourPlansDropdown;
+	@FindBy(id = "subnav_2")
+	public static WebElement ourPlansDropdown;
 
-        @FindBy(xpath = "//div[@id='subnav_2']/div/div/div[2]/form/span/button")
-        public WebElement findPlansButton;
-        
-        @FindBy(xpath="//*[@class='zipcode_text ng-pristine ng-valid ng-valid-maxlength']")
-        public WebElement zipCodeInput;
-        
-        @FindBy(linkText="Search by Address")
+	@FindBy(xpath = "//div[@id='subnav_2']/div/div/div[2]/form/span/button")
+	public WebElement findPlansButton;
+	
+	@FindBy(xpath="//*[@class='zipcode_text ng-pristine ng-valid ng-valid-maxlength']")
+	public WebElement zipCodeInput;
+	
+	@FindBy(linkText="Search by Address")
     private WebElement searchbyaddresslink;
     
     @FindBy(id="address")
@@ -73,7 +73,7 @@ public class PortfolioPageUhc extends UhcDriver {
 
    // @FindBy(xpath="html/body/div[4]/div[2]/div[1]/div/div/div/div/div[1]/div/div/div/div[2]/div/div/form/button")
     @FindBy(className="zip-button")
-        private WebElement Findplansbuttonportfolio;
+	private WebElement Findplansbuttonportfolio;
     
     @FindBy(id="compare-plan-1")
     private WebElement chkBoxAddtoCompare1;
@@ -98,130 +98,130 @@ public class PortfolioPageUhc extends UhcDriver {
    
    
 
-        //private static String PAGE_URL = MRConstants.AARP_OUR_PLANS_URL;
-        private static String PAGE_URL = MRConstants.PORTFOLIO_PAGE_UHC_URL;
+	//private static String PAGE_URL = MRConstants.AARP_OUR_PLANS_URL;
+	private static String PAGE_URL = MRConstants.PORTFOLIO_PAGE_UHC_URL;
 
-        public PortfolioPageUhc(WebDriver driver) {
-                super(driver);
-                PageFactory.initElements(driver, this);
-                openAndValidate();
-        }
+	public PortfolioPageUhc(WebDriver driver) {
+		super(driver);
+		PageFactory.initElements(driver, this);
+		openAndValidate();
+	}
 
-        public ZipcodeLookupPage looksupforZipcodes() {
-                 if (driver instanceof JavascriptExecutor) {
-                    JavascriptExecutor js = (JavascriptExecutor)driver;
-                    js.executeScript("arguments[0].click();", lookupZipcodeLink);
-                } 
-                else {
-                        lookupZipcodeLink.click();
-                }
+	public ZipcodeLookupPage looksupforZipcodes() {
+		 if (driver instanceof JavascriptExecutor) {
+	            JavascriptExecutor js = (JavascriptExecutor)driver;
+	            js.executeScript("arguments[0].click();", lookupZipcodeLink);
+	        } 
+	        else {
+	        	lookupZipcodeLink.click();
+	        }
 
-                //lookupZipcodeLink.click();
-                if (driver
-                                .getTitle()
-                                .equalsIgnoreCase(
-                                                "Our Medicare Plan Types | AARP® Medicare Plans from UnitedHealthcare®")) {
-                        return new ZipcodeLookupPage(driver);
-                }
-                return null;
+		//lookupZipcodeLink.click();
+		if (driver
+				.getTitle()
+				.equalsIgnoreCase(
+						"Our Medicare Plan Types | AARP® Medicare Plans from UnitedHealthcare®")) {
+			return new ZipcodeLookupPage(driver);
+		}
+		return null;
 
-        }
+	}
 
-        @Override
-        public void openAndValidate() {
-                start(PAGE_URL);
-        }
+	@Override
+	public void openAndValidate() {
+		start(PAGE_URL);
+	}
 
-        public void hoverourplanslink() {
+	public void hoverourplanslink() {
 
-                validate(OurPlansLink);
-                Actions action = new Actions(driver);
-                action.moveToElement(OurPlansLink).build().perform();
-                validate(OurPlansLink);
-        }
-        
-        public void selectAddToCompareCheckboxes() throws InterruptedException {
-                //driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-                //waitforElement(selectAddToCompareCheckbox);
-                //System.out.println(chkBoxAddtoCompare1.isEnabled());
-                
-                try {
-                        Thread.sleep(10000);
-                } catch (InterruptedException e) {
-                        e.printStackTrace();
-                }
-                JavascriptExecutor js = (JavascriptExecutor)driver;
-                Thread.sleep(10000);
-                js.executeScript("arguments[0].click();", chkBoxAddtoCompare1);
-                js.executeScript("arguments[0].click();", chkBoxAddtoCompare2);
-                js.executeScript("arguments[0].click();", chkBoxAddtoCompare3);
-                js.executeScript("arguments[0].click();", chkBoxAddtoCompare4);
-                
-                //selectAddToCompareCheckbox.click();
-                validate(onePlanAdded);
-                /*selectAddToCompareCheckbox2.click();
-                validate(twoPlanAdded);*/                
-                
-        }
-        
-        
-        
-        
-        
-        
+		validate(OurPlansLink);
+		Actions action = new Actions(driver);
+		action.moveToElement(OurPlansLink).build().perform();
+		validate(OurPlansLink);
+	}
+	
+	public void selectAddToCompareCheckboxes() throws InterruptedException {
+		//driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+		//waitforElement(selectAddToCompareCheckbox);
+		//System.out.println(chkBoxAddtoCompare1.isEnabled());
+		
+		try {
+			Thread.sleep(10000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		JavascriptExecutor js = (JavascriptExecutor)driver;
+		Thread.sleep(10000);
+		js.executeScript("arguments[0].click();", chkBoxAddtoCompare1);
+		js.executeScript("arguments[0].click();", chkBoxAddtoCompare2);
+		js.executeScript("arguments[0].click();", chkBoxAddtoCompare3);
+		js.executeScript("arguments[0].click();", chkBoxAddtoCompare4);
+		
+		//selectAddToCompareCheckbox.click();
+		validate(onePlanAdded);
+		/*selectAddToCompareCheckbox2.click();
+		validate(twoPlanAdded);*/		
+		
+	}
+	
+	
+	
+	
+	
+	
 
-        public Boolean findplansbuttonclick2() {
+	public Boolean findplansbuttonclick2() {
 
-                hoverourplanslink();
-                validate(findPlansButton);
-                findPlansButton.click();
-                validate(findPlansButton);
+		hoverourplanslink();
+		validate(findPlansButton);
+		findPlansButton.click();
+		validate(findPlansButton);
 
-                return validate(errormessage);
+		return validate(errormessage);
 
-        }
+	}
 
-        public AcquisitionHomePage ErrorMessage() {
-                validate(errormessage);
-                Actions action = new Actions(driver);
-                action.moveToElement(errormessage);
+	public AcquisitionHomePage ErrorMessage() {
+		validate(errormessage);
+		Actions action = new Actions(driver);
+		action.moveToElement(errormessage);
 
-                validate(errormessage);
-                return null;
-        }
+		validate(errormessage);
+		return null;
+	}
 
-        public Boolean clicktextfield() {
+	public Boolean clicktextfield() {
 
-                hoverourplanslink();
+		hoverourplanslink();
 
-                validate(zipfield);
-                zipfield.click();
-                zipfield.sendKeys("9001");
-                validate(findPlansButton);
-                findPlansButton.click();
-                return validate(errormessage);
-        }
+		validate(zipfield);
+		zipfield.click();
+		zipfield.sendKeys("9001");
+		validate(findPlansButton);
+		findPlansButton.click();
+		return validate(errormessage);
+	}
 
-        public AcquisitionHomePage errormessage() {
-                validate(errormessage);
-                Actions action = new Actions(driver);
-                action.moveToElement(errormessage);
+	public AcquisitionHomePage errormessage() {
+		validate(errormessage);
+		Actions action = new Actions(driver);
+		action.moveToElement(errormessage);
 
-                validate(errormessage);
-                return null;
-        }
+		validate(errormessage);
+		return null;
+	}
 
-        public Boolean correctzipcode() {
+	public Boolean correctzipcode() {
 
-                hoverourplanslink();
+		hoverourplanslink();
 
-                validate(zipfield);
-                zipfield.click();
-                zipfield.sendKeys("90010");
-                return null;
-        }
-        
-        public void searchbyaddressclick() {
+		validate(zipfield);
+		zipfield.click();
+		zipfield.sendKeys("90010");
+		return null;
+	}
+	
+	public void searchbyaddressclick() {
         
         validate(searchbyaddresslink);
         searchbyaddresslink.click();
@@ -236,68 +236,66 @@ public class PortfolioPageUhc extends UhcDriver {
         /*Select sel = new Select(selectDropDown);
         sel.selectByValue("AL");*/
         try {
-                        Thread.sleep(9000);
-                } catch (InterruptedException e) {
-                        // TODO Auto-generated catch block
-                        e.printStackTrace();
-                }            
+			Thread.sleep(9000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}            
  }
  
  public WebElement findNoSuchElement(By locator) {
-                WebElement element = null;
-                FluentWait<WebDriver> wait = new WebDriverWait(driver,60).ignoring(NoSuchElementException.class)
-                                .withTimeout(60, TimeUnit.SECONDS);
-                try {
-                        element = wait.until(ExpectedConditions
-                                        .visibilityOfElementLocated(locator));
-                } catch (NoSuchElementException e) {
-                        e.getStackTrace();
-                        System.out.println("******************************** "+e.getCause().getMessage());
-                        return element;
-                }
-                return element;
-        }
+		WebElement element = null;
+		FluentWait<WebDriver> wait = new WebDriverWait(driver,60).ignoring(NoSuchElementException.class)
+				.withTimeout(60, TimeUnit.SECONDS);
+		try {
+			element = wait.until(ExpectedConditions
+					.visibilityOfElementLocated(locator));
+		} catch (NoSuchElementException e) {
+			e.getStackTrace();
+			System.out.println("******************************** "+e.getCause().getMessage());
+			return element;
+		}
+		return element;
+	}
 
 public ResponsivePlanSummaryUhc searchPlans(String zipcode, String CountyName) {
-//            driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
-//            WebDriverWait wait = new WebDriverWait(driver, 40);
-//            WebElement element = wait.until(ExpectedConditions.elementToBeClickable(By.id("zipcode")));
-            
-            
-            
-//            WebElement element =findNoSuchElement(By.id("zipcode"));
-            
-        //    sendkeys(element, zipcode);
-        //    element.sendKeys(Keys.ENTER);
-            
-            //sendkeys(zipCodeField, zipcode);
-            zipCodeField.sendKeys(zipcode);
-            zipCodeField.sendKeys(Keys.ENTER);
-            //remove thread once page is stable
-            try {
+//	    driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+//	    WebDriverWait wait = new WebDriverWait(driver, 40);
+//	    WebElement element = wait.until(ExpectedConditions.elementToBeClickable(By.id("zipcode")));
+	    
+	    
+	    
+//	    WebElement element =findNoSuchElement(By.id("zipcode"));
+	    
+	//    sendkeys(element, zipcode);
+	//    element.sendKeys(Keys.ENTER);
+	    
+	    //sendkeys(zipCodeField, zipcode);
+	    zipCodeField.sendKeys(zipcode);
+	    zipCodeField.sendKeys(Keys.ENTER);
+	    //remove thread once page is stable
+try {
                         Thread.sleep(10000);
                 } catch (InterruptedException e) {
                         // TODO Auto-generated catch block
                         e.printStackTrace();
                 }
-            
-            List<WebElement> countyActuals = driver.findElements(By.xpath("//a[@class='ng-binding ng-pristine ng-valid']"));
-            System.out.println(countyActuals.size());
-            
-            for(int i=0; i<=countyActuals.size()-1;i++){
-                    System.out.println(CountyName);
-                    if(countyActuals.get(i).getText().equals(CountyName)){
-                            System.out.println(CountyName);
-                            System.out.println(countyActuals.get(i).getText());
-                            countyActuals.get(i).click();
-                            break;
-                    }
-            }
-                if (driver.getTitle().equalsIgnoreCase("Our Medicare Plans | AARP® Medicare Plans from UnitedHealthcare®") || driver.getTitle().equalsIgnoreCase("plans")){
-                        return new ResponsivePlanSummaryUhc(driver);
-                } 
-                return null;
-        
+	    List<WebElement> countyActuals = driver.findElements(By.xpath("//a[@class='ng-binding ng-pristine ng-valid']"));
+	    System.out.println(countyActuals.size());	    
+	    for(int i=0; i<=countyActuals.size()-1;i++){
+	    	System.out.println(CountyName);
+	    	if(countyActuals.get(i).getText().equals(CountyName)){
+	    		System.out.println(CountyName);
+	    		System.out.println(countyActuals.get(i).getText());
+	    		countyActuals.get(i).click();
+	    		break;
+	    	}
+	    }
+		if (driver.getTitle().contains("Our Medicare Plan Types | UnitedHealthcare")) {
+			return new ResponsivePlanSummaryUhc(driver);
+		} 
+		return null;
+	
 }
 
 

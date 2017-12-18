@@ -51,6 +51,18 @@ public class CommonConstants {
 	
 	public static final String NEW_PAYMENT_HISTORY_EXPECTED_JSON = "newPaymentHistoryexpectedJSON";
 	
+	public static final String SAUCE_BROWSER_WEB = "SAUCE_BROWSER_WEB";
+
+	public static final String SAUCE_BROWSER_MOBILE = "SAUCE_BROWSER_MOBILE";
+    public static final String DEVICE_NAME = "DeviceName";
+	
+	public static final String PLATFORM_VERSION = "PlatformVersion";
+	
+	public static final String PLATFORM_NAME = "PlatformName";
+	
+	public static final String DEVICE_VERSION = "DeviceVersion";
+
+	
 	
 
 

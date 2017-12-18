@@ -147,7 +147,7 @@ public class ContactUsUmsStepDefinition {
 
 	}
 	
-	@And("^user validates secure email sign in widget$")
+//	@And("^user validates secure email sign in widget$")
 	public void user_validates_secure_email_widget()
 	{
 		ContactUsPage contactus=(ContactUsPage)getLoginScenario().getBean(PageConstants.CONTACT_US_PAGE);
@@ -181,6 +181,19 @@ public class ContactUsUmsStepDefinition {
 		
 	}
 
-
-
+	@Then("^user validates add plan link for PEEHIP member$")
+	public void validates_addPlanLink() {
+		ContactUsPage contactUsPage = (ContactUsPage) getLoginScenario()
+				.getBean(PageConstants.CONTACT_US_PAGE);
+		
+		Boolean addPlanFlag = contactUsPage.IsAddPlanLinkAvailable();
+		
+		if(!addPlanFlag){
+			Assert.assertTrue(true);
+			
+		}
+		else{
+	    	Assert.fail("add plan link is present for PEEHIP member");
+	    } 	
+	}
 }

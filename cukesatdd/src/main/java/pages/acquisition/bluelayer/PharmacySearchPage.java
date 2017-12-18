@@ -20,7 +20,7 @@ import acceptancetests.atdd.data.ElementData;
 import acceptancetests.atdd.util.CommonUtility;
 import atdd.framework.UhcDriver;
 import junit.framework.Assert;
-import pages.acquisition.ulayer.PharmacyResultPage;
+import pages.acquisition.bluelayer.PharmacyResultPage;
 
 
 /**
@@ -100,6 +100,9 @@ public class PharmacySearchPage extends UhcDriver {
 	
 	@FindBy(id = "plan-year")
 	private WebElement planYearDropDown;	
+	
+	@FindBy(id = "zipcodeTxt")
+    private WebElement txtZipCode;
 
 	//@FindBy(xpath = ".//*[@for='pharmacy-saver']")
 	@FindBy(xpath = "//a[@class='h5 filter-button bold color-blue-link margin-none']")
@@ -133,12 +136,23 @@ public class PharmacySearchPage extends UhcDriver {
 	@FindBy(xpath = "//*[@class = 'moreinformation parsys']")
 	private WebElement MoreInfoText;
 	
+	@FindBy(id = "plan-year")
+    private WebElement drpYear;
+	
+	@FindBy(css = "#zipcode-button>span")
+    private WebElement btnContinue;
+	
 	public PharmacySearchPage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
 		openAndValidate();
 	}
 
+	public void enterZipCode(String zipCode) {
+		txtZipCode.clear();
+		txtZipCode.sendKeys(zipCode);
+	}
+	    
 	public PharmacySearchPage enterZipDistanceDetails(String zipcode,
 			String distance, String county) {
 		
@@ -468,8 +482,17 @@ public class PharmacySearchPage extends UhcDriver {
 		}
 		return present;
 	}
-
+	public void selectAYear(String year) {
+    	Select selectPlan = new Select(drpYear);
+    	if(year.equals("2017")){
+    		selectPlan.selectByValue("1");
+    	}
+    }
 	
+	 public PharmacyResultPage clickOnContinue() {
+         btnContinue.click();
+         return new PharmacyResultPage(driver);
+     }
 
 }
 

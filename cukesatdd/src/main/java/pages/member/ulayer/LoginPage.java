@@ -3,10 +3,14 @@
  */
 package pages.member.ulayer;
 
+
 import org.json.JSONException;
 import org.json.JSONObject;
+
 import org.openqa.selenium.Alert;
+import org.openqa.selenium.NoAlertPresentException;
 import org.openqa.selenium.UnhandledAlertException;
+import org.openqa.selenium.UnsupportedCommandException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -29,6 +33,7 @@ public class LoginPage extends UhcDriver {
 
 	// Page URL
 	private static String PAGE_URL = MRConstants.AARPM_URL;
+	private static String REDESIGN_PAGE_URL = MRConstants.REDESIGN_AARPM_URL;
 
 	@FindBy(id = "fd_memberSignInButton")
 	private WebElement loginIn;
@@ -67,18 +72,33 @@ public class LoginPage extends UhcDriver {
 		sendkeys(passwordField,password);
 		System.out.println(signInButton.isEnabled());
 		signInButton.click();
-		
 
-		if (MRScenario.environment.equals("awe-dev-b") || MRScenario.environment.equals("dev-a") || MRScenario.environment.equals("dev-c") || MRScenario.environment.equals("team-b") || MRScenario.environment.equals("team-a") || MRScenario.environment.equals("team-c")) {
+		try {
+			Thread.sleep(6000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
 
-			Alert alert = driver.switchTo().alert();
-			alert.accept();
-			Alert alert1 = driver.switchTo().alert();
-			alert1.accept();
+		if (MRScenario.environment.equals("awe-dev-b") || MRScenario.environment.equals("dev-a") || MRScenario.environment.equals("dev-c") || MRScenario.environment.equals("team-b") || MRScenario.environment.equals("team-a") || MRScenario.environment.equals("team-c") || MRScenario.environment.equals("team-e")) {
+
+			while(isAlertPresent(driver));
 			
 		}
 
 		
+
+		if (MRScenario.environment.equals("dev-c")) {
+
+			Alert alert = driver.switchTo().alert();
+			        alert.accept();
+			        Alert alert1 = driver.switchTo().alert();
+			        alert1.accept();
+			   /*     Alert alert2 = driver.switchTo().alert();
+			        alert2.accept();
+			        Alert alert3 = driver.switchTo().alert();
+			        alert3.accept();*/
+			        }
+
 		if(currentUrl().contains("home/my-account-home.html"))
 
 		{
@@ -109,10 +129,13 @@ public class LoginPage extends UhcDriver {
 
 	@Override
 	public void openAndValidate() {
-		start(PAGE_URL);
-		validate(loginIn);
-		System.out.println("@@@@@@@@@  Test ENV and URL  :  "+PAGE_URL+"  @@@@@@@@@");
-	}
+if(MRScenario.environment.equals("team-e")){
+			start(MRConstants.NEW_REDESIGN_URL);
+			
+		}else{
+			start(PAGE_URL);
+			validate(loginIn);
+		}	}
 
 	public JSONObject getBrowserCheck() {
 		String fileName = CommonConstants.AARPM_BROWSER_CHECK_DATA;
@@ -138,5 +161,18 @@ public class LoginPage extends UhcDriver {
 
 		return browserCheckJson;
 
+	}
+	
+	public static boolean isAlertPresent(WebDriver wd) {
+		try {
+			Alert alert = wd.switchTo().alert();
+			alert.dismiss();
+			return true;
+		} catch (NoAlertPresentException e) {
+			return false;
+		} catch (UnsupportedCommandException e) {
+			System.out.println("WebDriver doesn't support switchTo() method");
+			return false;
+		}
 	}
 }

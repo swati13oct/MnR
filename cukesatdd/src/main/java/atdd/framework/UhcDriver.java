@@ -11,6 +11,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Cookie;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -101,6 +102,7 @@ public abstract class UhcDriver {
 
 	public boolean validate(WebElement element) {
 		try {
+		//	this.waitforElement(element);
 			if (element.isDisplayed()) {
 				System.out.println("Element found!!!!");
 				return true;
@@ -111,6 +113,7 @@ public abstract class UhcDriver {
 			System.out.println("Exception: Element not found/not visible");
 
 		}
+		System.out.println(driver.getCurrentUrl()+"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
 		return false;
 	}
 
@@ -118,7 +121,7 @@ public abstract class UhcDriver {
 		WebElement element = null;
 		try {
 			if (elementData.getIdentifier().equalsIgnoreCase("id")) {
-				driver.manage().timeouts().implicitlyWait(1, TimeUnit.SECONDS);
+				driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
 				element = driver
 						.findElement(By.id(elementData.getElementName()));
 			} else if (elementData.getIdentifier()
@@ -191,6 +194,11 @@ public abstract class UhcDriver {
 		}
 	}
 
+	public void jsClick(WebElement element){
+		JavascriptExecutor js = (JavascriptExecutor)driver;
+		js.executeScript("arguments[0].click();", element);
+	}
+	
 	public List<WebElement> findChildElements(ElementData elementData,
 			WebElement parentElement) {
 		List<WebElement> element = null;

@@ -35,6 +35,7 @@ import cucumber.annotation.en.And;
 import cucumber.annotation.en.Given;
 import cucumber.annotation.en.Then;
 import cucumber.annotation.en.When;
+import cucumber.runtime.PendingException;
 import cucumber.table.DataTable;
 
 /**
@@ -1500,6 +1501,7 @@ public class VppUmsStepDefinition {
 		
 		plansummaryPage.viewPlanSummary(planType);
 	}
+
 	@When("^the user performs plan search  in UMS site$")
 	public void zipcode_details_in_UMS(DataTable givenAttributes) {
 
@@ -1584,9 +1586,7 @@ public class VppUmsStepDefinition {
 					vppPlanDetailsPage);
 			
 		}
-	}*/
-	
-	@Then("^the user validates the passport availability$")
+}*/	@Then("^the user validates the passport availability$")
 	public void user_validates_passport_details() {
 		try
 		{
@@ -1606,8 +1606,14 @@ public class VppUmsStepDefinition {
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 		boolean flagvalue=vppPlanSummaryPage.validatepassportData();
 	}
-	
-	@And("^the user validate PDP plan cards in UMS site$")
+@When("^user clicks on yes button on proactive chat$")
+	public void user_clicks_on_yes_button_on_proactive_chat() {
+		VPPPlanSummaryPage vppPlanSummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		vppPlanSummaryPage.clickProactiveChat();
+	}
+
+@And("^the user validate PDP plan cards in UMS site$")
 	public void user_validate_pdp_plancards(){
 		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
@@ -1627,6 +1633,25 @@ public class VppUmsStepDefinition {
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 		plansummaryPage = plansummaryPage.enrollNowbtn();
 	}
+	@Then("^the proactive chat should display$")
+	public void the_proactive_chat_should_display() throws Exception {
+		VPPPlanSummaryPage vppPlanSummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		vppPlanSummaryPage.validateProactiveChat();
+	}
+	
+	@Then("^user clicks on Chat Now button$")
+	public void user_clicks_on_Chat_Now_button() {
+		VPPPlanSummaryPage vppPlanSummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		vppPlanSummaryPage.clickReactiveChat();
+	}
+	
+	@Then("^the reactive chat should display$")
+	public void the_reactive_chat_should_display() throws Exception {
+		VPPPlanSummaryPage vppPlanSummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		vppPlanSummaryPage.validateReactiveChat();
+	}
 
-		
 }

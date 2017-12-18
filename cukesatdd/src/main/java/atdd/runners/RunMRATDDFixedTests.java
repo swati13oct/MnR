@@ -14,7 +14,7 @@ import cucumber.junit.Cucumber;
 @Cucumber.Options(glue = { "atdd.framework","acceptancetests.fixedtestcases" }, 
 		features = { "feature/fixedtestcases" }, 
 		format = {
-		"pretty", "html:reports/test-report","json:target/cucumber.json"}, tags ={"@fixedTestCase"})
+		"pretty", "html:reports/test-report","json:target/cucumber.json"}, tags ={"@fixedTestCaseTest"})
 public class RunMRATDDFixedTests {
 
 }
