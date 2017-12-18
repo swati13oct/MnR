@@ -1,7 +1,8 @@
 package atdd.mobile.runners;
 
-import cucumber.junit.Cucumber;
 import org.junit.runner.RunWith;
+
+import cucumber.junit.Cucumber;
 
 /**
  * Created by ayifru on 9/7/2016.

@@ -21,6 +21,7 @@ import pages.member.ulayer.AccountHomePage;
 import pages.member.ulayer.LoginPage;
 import pages.member.ulayer.PharmacyResultPage;
 import pages.member.ulayer.PharmacySearchPage;
+import pages.member.ulayer.TimeAdminPage;
 import acceptancetests.atdd.data.CommonConstants;
 import acceptancetests.atdd.data.member.PageConstants;
 import acceptancetests.login.data.LoginCommonConstants;
@@ -325,5 +326,28 @@ public class PharmacyLocatorMemberAarpStepDefinition {
 				.getBean(PageConstants.PHARMACY_SEARCH_PAGE);
 		pharmacySearchAarpPage = pharmacySearchAarpPage.hoverOverToolTip(pharmacyType);
 	}
+	
+	@Given("^the user lands on teamb time admin page$")
+	public void the_user_lands_on_teamb_time_admin_page(){
+		WebDriver wd = getLoginScenario().getWebDriver();
+		//PharmacySearchPage pharmacySearchAarpPage = new PharmacySearchPage(driver);
+		
+		TimeAdminPage timeAdminPage = new TimeAdminPage(wd);
+		
+		getLoginScenario().saveBean(PageConstants.TIME_ADMIN_PAGE,
+				timeAdminPage);
+		
+	}
+	
+	@And("^user resets the date to the given value$")
+	public void  user_resets_the_date_to_the_given_value(DataTable resetDateAttributes){
+		List<DataTableRow> resetDateAttributesRow = resetDateAttributes.getGherkinRows();
+		String resetDate = resetDateAttributesRow.get(0).getCells().get(1);
+		
+		TimeAdminPage timeAdminPage = (TimeAdminPage) getLoginScenario()
+				.getBean(PageConstants.TIME_ADMIN_PAGE);
+		timeAdminPage.changeDate(resetDate);
+	}
+	
 
 }

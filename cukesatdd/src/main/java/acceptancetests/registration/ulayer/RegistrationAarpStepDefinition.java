@@ -302,7 +302,5 @@ public class RegistrationAarpStepDefinition {
 			e.printStackTrace();
 		}
 	}
-	
-	
 
 }

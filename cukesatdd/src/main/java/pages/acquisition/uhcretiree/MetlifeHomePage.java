@@ -40,6 +40,9 @@ public class MetlifeHomePage extends UhcDriver{
 	
 	private WebElement metlifefindaprovidertab;
 	
+	@FindBy(xpath="//*[@id='main']/div/div[1]/div/div[3]/div[2]/div[8]/div/div/div[1]/a/span")
+    private WebElement getstartedbutton;
+	
 	private static String METLIFE_HOME_PAGE_URL= MRConstants.METLIFE_HOME_PAGE_URL;
 	
 	public Rallytool_Page metlifehomepageproviderclick() {
@@ -69,10 +72,21 @@ public class MetlifeHomePage extends UhcDriver{
 		   
 		   
 		   return null;
-		
-		
-		
 	
 	   }
+	   
+	   public SalesforceSitePage clickgetstarted() {
+			// TODO Auto-generated method stub
+			
+			validate(getstartedbutton);
+			getstartedbutton.click();
+			
+			if(driver.getTitle().equalsIgnoreCase("Problem loading page"))
+			{
+				return new SalesforceSitePage(driver);
+			}
+			
+			return null;
+		}
 
 }

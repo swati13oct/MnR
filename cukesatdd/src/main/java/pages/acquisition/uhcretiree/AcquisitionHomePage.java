@@ -34,6 +34,9 @@ public class AcquisitionHomePage extends UhcDriver {
 		validate(prescriptionsLink);
 	}
 
+	@FindBy(linkText="Pharmacy information")
+	private WebElement pharmacyLocator;
+	
 	@FindBy(linkText = "Look up prescription drugs")
 	private WebElement prescriptionsLink;
 
@@ -62,6 +65,15 @@ public class AcquisitionHomePage extends UhcDriver {
 		openAndValidate();
 	}
 
+	/**
+	 * Navigate to pharmacy Locator Page
+	 * @return
+	 */
+	public UhcRetireePharmacyLocatorPage navigateToPharmacyLocator(){
+		pharmacyLocator.click();
+		return new UhcRetireePharmacyLocatorPage(driver);
+	}
+	
 	public SelectFormularyPage prescriptionsDrugLink() {
 
 		try {

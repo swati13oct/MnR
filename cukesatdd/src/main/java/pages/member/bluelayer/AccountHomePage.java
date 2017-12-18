@@ -57,7 +57,7 @@ public class AccountHomePage extends UhcDriver {
 	@FindBy(linkText = "Premium payment information")
 	private WebElement paymentsLink;
 
-	@FindBy(xpath = "//*[@id='footer']/ul/li[1]/div[2]/div[2]/a/span")
+	@FindBy(xpath = ".//span[contains(text(),'get forms & resources')]")
 	private WebElement formsAndResourcesLink;
 
 	@FindBy(linkText = "My Profile & Preferences")
@@ -603,9 +603,25 @@ public class AccountHomePage extends UhcDriver {
 		}
 		return null;
 	}
+	
+	public pages.member.bluelayer.ContactUsPage navigateToContactusRedesignPage() {
+		// TODO Auto-generated method stub
+		//String url = "https://member.team-e-uhcmedicaresolutions.uhc.com/content/uhcm/home/contact.html";
+		System.out.println(MRConstants.REDESIGN_UHCM_URL);
+		driver.get(MRConstants.REDESIGN_UHCM_URL);
+		try {
+			Thread.sleep(15000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+		}
+		if (driver.getTitle().trim().equals("Overview")) {
+			return new pages.member.bluelayer.ContactUsPage(driver);
 
-	public BenefitsAndCoveragePage navigateDirectToBnCPag() {
+}
+		return null;
+	}
 
+public BenefitsAndCoveragePage navigateDirectToBnCPag() {
 		driver.navigate().to(PAGE_URL);
 		BnClink.click();
 		try {

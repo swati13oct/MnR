@@ -10,6 +10,18 @@ package acceptancetests.atdd.data.member;
 public class PageConstants {
 
 	public static final String ACCOUNT_HOME_PAGE = "accountHomePage";
+	
+	public static final String TEST_HARNESS_PAGE = "testHarnessPage";
+	
+	public static final String GO_GREEN_SPLASH_PAGE = "gogreensplashpage";
+	
+	public static final String PREFERENCES_PAGE = "preferencespage";
+	
+	public static final String MEMBER_AUTHS_SEARCH_PAGE = "memberSearchPage";
+	
+	public static final String MEMBER_AUTH_INFORMATION_PAGE = "memberInformationPage";
+	
+	public static final String NEW_REGISTRATION_PAGE = "newRegistrationPage";
 
 	public static final String PLAN_CONFIRMATION_PAGE = "planConfirmationPage";
 
@@ -184,7 +196,26 @@ public class PageConstants {
 	public static final String DASHBOARD_PAYMENT_HISTORY_PAGE = "dashboardPaymentOverview";
 
 	public static final String NEW_CLAIMS_SUMMARY_PAGE = "newClaimsSummaryPage";
+	
+	public static final String NEW_CLAIM_DETAILS_PAGE = "newClaimDetailsPage";
+	
+	public static final String TIME_ADMIN_PAGE = "timeAdminPage";
 
-	public static final String ProfilePreferencesPage = "ProfilePreferencesPage";	
+public static final String ProfilePreferencesPage = "ProfilePreferencesPage";	
+public static final String EOB_Page = "eobPage";
+	
+	public static final String DeepLink_Page = "deepLinkPage";
+	
+	public static final String DeepLink_url= "deepLinkUrl";
 
+	public static final String NEW_SIGN_PAGE = "sign_Page";
+	
+	public static final String USERNAME_PASSWORD_ASSISTANCE_PAGE = "usernamePasswordAssistancePage";
+	
+	//duplicate variable as in develop branch so rename it to something else
+	//public static final String NEW_REGISTRATION_PAGE = "newregistrationpage";
+	
+	public static final String MEM_REDESIGN_ACCOUNT_HOME_PAGE = "memberRedesignAccountHomePage";
+	
+	public static final String MEM_REDESIGN_HEALTH_AND_WELLNESS_PAGE = "memberRedesignHealthAndWellnessPage";
 }

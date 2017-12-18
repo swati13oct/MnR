@@ -12,10 +12,10 @@ import cucumber.junit.Cucumber;
  *
  */
 @RunWith(Cucumber.class)
-@Cucumber.Options(glue = { "atdd.framework","acceptancetests.enrollinplan.ulayer" }, 
+@Cucumber.Options(glue = { "atdd.framework","acceptancetests.enrollinplan" }, 
 		features = { "feature/enroll-in-plan" }, 
 		format = {
-		"pretty", "html:reports/test-report" }, tags ={"@enrollInPlan"})
+		"pretty", "html:reports/test-report" }, tags ={"@OLEBlayerMapd"})
 public class RunMRAtddTestEnrollInPlan {
 
 }

@@ -7,6 +7,7 @@ import org.junit.runner.RunWith;
 
 import cucumber.junit.Cucumber;
 
+
 /**
  * @author pjaising
  *
@@ -15,7 +16,7 @@ import cucumber.junit.Cucumber;
 @Cucumber.Options(glue = { "atdd.framework","acceptancetests.mobile.pharmacylocator.ulayer" }, 
 features = { "feature/mobile/ulayer/pharmacylocator" }, 
 format = {
-"pretty", "html:reports/test-report" }, tags ={"@pharmacyLocator"})
+"pretty", "html:reports/test-report","json:target/cucumber.json" }, tags ={"@pharmacyLocator"})
 public class RunMRAtddPharmacyLocator {
 
 }

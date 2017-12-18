@@ -24,7 +24,7 @@ public class ReviewApplicationPage extends UhcDriver{
         @FindBy(id = "enrollmentNext")
         private WebElement enrollmentNext;
 
-        @FindBy(xpath = "//div[@class='enrollment_content']/div[2]/form/h2")
+        @FindBy(xpath = ".//*[@id='enrollmentMAForm']/h3")
         private WebElement pageHeading;
                 
         private PageData reviewApplication;
@@ -34,7 +34,7 @@ public class ReviewApplicationPage extends UhcDriver{
         public ReviewApplicationPage(WebDriver driver, String planName) {
                 super(driver);
                 PageFactory.initElements(driver, this);
-                if(planName.contains("HMO")){
+                if(planName.contains("HMO")|| planName.contains("PPO")){
                 String fileName = CommonConstants.MA_REVIEW_APPLICATION_PAGE_DATA;
                 reviewApplication = CommonUtility.readPageData(fileName,
                                 CommonConstants.PAGE_OBJECT_DIRECTORY_ULAYER_ACQ);
@@ -45,7 +45,7 @@ public class ReviewApplicationPage extends UhcDriver{
                                         CommonConstants.PAGE_OBJECT_DIRECTORY_ULAYER_ACQ);
                         }
                 
-                openAndValidate();
+                //openAndValidate();
         }
 
         @Override

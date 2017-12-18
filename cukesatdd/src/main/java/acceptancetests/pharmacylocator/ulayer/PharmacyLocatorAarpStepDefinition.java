@@ -44,7 +44,7 @@ public class PharmacyLocatorAarpStepDefinition {
 	}
 
 	@Given("^the user is on the AARP Medicare Site landing page$")
-	public void registered_member_located_pharmacy_aarp() {
+	public void user_on_aarp_medicare_site_landing_page() {
 		WebDriver wd = getLoginScenario().getWebDriver();
 		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
 
@@ -73,6 +73,83 @@ public class PharmacyLocatorAarpStepDefinition {
 		}
 
 	}
+	
+	@When("^the user navigates to pharmacy search page in UMS Site$")
+	public void user_views_pharmacy_locator_UMS() {
+		AcquisitionHomePage acqusitionHomePage = (AcquisitionHomePage) getLoginScenario()
+				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+		PharmacySearchPage pharmacySearchPage = acqusitionHomePage
+				.navigateToPharmacyLocator();
+
+		if (pharmacySearchPage != null) {
+			getLoginScenario().saveBean(PageConstants.PHARMACY_SEARCH_PAGE,
+					pharmacySearchPage);
+			Assert.assertTrue(true);
+		} else {
+			Assert.fail("Failed to load Pharmacy search page");
+		}
+
+	}
+	
+	@And("^Select a year from the available list displayed$")
+    public void select_a_year_from_the_available_list_displayed(DataTable givenAttributes){
+		// get test variables
+		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+		    memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0), memberAttributesRow.get(i).getCells().get(1));
+		}
+	
+		// get parameter username and password
+		String year = memberAttributesMap.get("Year");
+		PharmacySearchPage pharmacySearchPage = (PharmacySearchPage) getLoginScenario().getBean(PageConstants.PHARMACY_SEARCH_PAGE);
+		pharmacySearchPage.selectAYear(year);
+		getLoginScenario().saveBean(PageConstants.PHARMACY_SEARCH_PAGE, pharmacySearchPage);
+    }
+    @And("^enter zipcode$")
+    public void enter_a_zipcode(DataTable givenAttributes){
+		// get test variables
+		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+		    memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0), memberAttributesRow.get(i).getCells().get(1));
+		}
+	
+		// get parameter username and password
+		String zipcode = memberAttributesMap.get("Zipcode");
+		PharmacySearchPage pharmacySearchPage = (PharmacySearchPage) getLoginScenario().getBean(PageConstants.PHARMACY_SEARCH_PAGE);
+		pharmacySearchPage.enterZipCode(zipcode);
+		pharmacySearchPage.clickOnContinue();
+		getLoginScenario().saveBean(PageConstants.PHARMACY_SEARCH_PAGE, pharmacySearchPage);
+    }
+    
+    @And("^validate pharmacy search results$")
+    public void validatePharmacySearchResults() {
+
+    	PharmacyResultPage pharmacySearchResultsPage = (PharmacyResultPage) getLoginScenario().getBean(PageConstants.PHARMACY_RESULTS_PAGE);
+	try {
+	    Thread.sleep(8000);
+	} catch (InterruptedException e) {
+	    // TODO Auto-generated catch block
+	    e.printStackTrace();
+	}
+	pharmacySearchResultsPage.validatePharmacySearchResults();
+    }
+    
+    @And("^validate pharmacy saver$")
+    public void validatePharmacySaverInResults() {
+
+    	PharmacyResultPage pharmacySearchResultsPage = (PharmacyResultPage) getLoginScenario().getBean(PageConstants.PHARMACY_RESULTS_PAGE);
+	pharmacySearchResultsPage.validatePharmacySaverInResults();
+    }
+    
+    @And("^validate Standard Network pharmacy$")
+    public void validateStandardNetworkInResults() {
+
+    	PharmacyResultPage pharmacySearchResultsPage = (PharmacyResultPage) getLoginScenario().getBean(PageConstants.PHARMACY_RESULTS_PAGE);
+	pharmacySearchResultsPage.validateStandardNetworkInResults();
+    }
+    
 
 	@And("^the user enters following details for pharmacy search in AARP Site$")
 	public void user_enters_zipcode_distance_details_aarp(DataTable zipAttributes) {
@@ -140,8 +217,7 @@ public class PharmacyLocatorAarpStepDefinition {
 		String planName = (String) getLoginScenario().getBean(
 				PharmacySearchCommonConstants.PLAN_NAME);
 
-		PharmacyResultPage pharmacyResultPage = pharmacySearchPage
-				.showAllPharmacies();
+		PharmacyResultPage pharmacyResultPage = pharmacySearchPage.showAllPharmacies();
 
 		if (pharmacyResultPage != null) {
 			getLoginScenario().saveBean(PageConstants.PHARMACY_RESULTS_PAGE,
@@ -226,6 +302,22 @@ public class PharmacyLocatorAarpStepDefinition {
 		}
 		
 	}
+	
+	 @And("^Select a Plan from the available plans list displayed$")
+	    public void select_a_plan_from_the_available_plans_list_displayed(DataTable givenAttributes){
+			// get test variables
+			List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+			Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
+			for (int i = 0; i < memberAttributesRow.size(); i++) {
+			    memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0), memberAttributesRow.get(i).getCells().get(1));
+			}
+		
+			// get parameter username and password
+			String planName = memberAttributesMap.get("PlanName");
+			PharmacySearchPage pharmacySearchPage = (PharmacySearchPage) getLoginScenario().getBean(PageConstants.PHARMACY_SEARCH_PAGE);
+			PharmacyResultPage pharmacySearchResultsPage = pharmacySearchPage.selectAPlan(planName);
+			getLoginScenario().saveBean(PageConstants.PHARMACY_RESULTS_PAGE, pharmacySearchResultsPage);
+	    }
 	
 	
 	@Then("^the user validates the available pharmacies page in AARP site$")

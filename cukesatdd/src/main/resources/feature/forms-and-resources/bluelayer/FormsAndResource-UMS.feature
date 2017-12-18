@@ -105,4 +105,16 @@ Examples:
 #| planType | memberType  |
 #| MAPD     |Individual |
 
+@mercuryMyDocuments
+Scenario Outline:To verify my documents page in UMS site
+Given registered member for forms and resources in UMS Site
+	| Plan Type   | <planType>   |
+	| Member Type | <memberType> | 
+	|Test Data Type  |<mydoc>    |
+When the user view forms and resources page in UMS site
+And the user navigating to the My Documents page in UMS site
+Then the user validates My Documents section and clicks on the link in UMS site
+Examples:
 
+| planType | memberType  |mydoc      |
+| MAPD     |    Group    |mydocuments|

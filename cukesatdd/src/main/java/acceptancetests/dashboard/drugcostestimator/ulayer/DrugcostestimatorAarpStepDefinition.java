@@ -24,6 +24,7 @@ import cucumber.annotation.en.Then;
 import cucumber.annotation.en.When;
 import cucumber.table.DataTable;
 import gherkin.formatter.model.DataTableRow;
+import pages.acquisition.ulayer.AcquisitionHomePage;
 import pages.dashboard.member.drugcostestimator.blayer.AddDrugDetails;
 import pages.dashboard.member.drugcostestimator.blayer.AddNewDrugModal;
 import pages.dashboard.member.drugcostestimator.blayer.DrugCostEstimatorPage;
@@ -92,6 +93,20 @@ public class DrugcostestimatorAarpStepDefinition {
 		getLoginScenario().saveBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE, dce);
 
 	}
+	
+	
+	@Given("^the user is on AARP medicare site landing page$")
+	public void the_user_is_on_AARP_medicare_site_landing_page() {
+		System.out.println("AARP given");
+		WebDriver wd = getLoginScenario().getWebDriver();
+
+		AcquisitionHomePage aquisitionhomepage = new AcquisitionHomePage(wd);
+
+		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
+		getLoginScenario().saveBean(PageConstants.ACQUISITION_HOME_PAGE,
+				aquisitionhomepage);
+	}
+	
 	@Given("^I am an AARP member on the Dashboard site SmartPhone$")
 	public void i_am_an_uhc_individual_member_on_the_dashboard_site_smartphone(DataTable memberAttributes) {
 		List<DataTableRow> memberAttributesRow = memberAttributes.getGherkinRows();
@@ -251,7 +266,7 @@ public class DrugcostestimatorAarpStepDefinition {
 		dce.navigateToStep2();
 	}
 	@And("^I should see Drug List as an active tab in the DCE tool upon click$")
-	public void i_should_see_drug_list_as_active(){
+	public void i_should_see_drug_list_as_active() throws InterruptedException{
 		DrugCostEstimatorPage dce = (DrugCostEstimatorPage) getLoginScenario().getBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE);
 		dce.changeUrlToNewDCEPage();
 	}
@@ -322,7 +337,7 @@ public class DrugcostestimatorAarpStepDefinition {
 	}*/
 
 	@And("^the user selects the pharmacy tab information like miles, zipcode and pharmacy type$")
-	public void navigate_drugcostestimator_pharmacytab(DataTable memberAttributes) {
+	public void navigate_drugcostestimator_pharmacytab(DataTable memberAttributes) throws InterruptedException {
 		List<DataTableRow> memberAttributesRow = memberAttributes
 				.getGherkinRows();
 		Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
@@ -405,7 +420,7 @@ public class DrugcostestimatorAarpStepDefinition {
 
 
 	@When("^I access the page containing the DCE tool$")
-	public void I_access_the_page_containing_the_DCE_tool() {
+	public void I_access_the_page_containing_the_DCE_tool() throws InterruptedException {
 
 		WebDriver wd = (WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
 
@@ -522,7 +537,7 @@ public class DrugcostestimatorAarpStepDefinition {
 		adddrugdetails.selectDosage(dosage);
 		adddrugdetails.selectQnty(quantity);
 		adddrugdetails.selectFrequency(frequency);
-		adddrugdetails.continueAddDrugDetails();
+		adddrugdetails.continueAddDrugDetailsMod();
 
 	}
 
@@ -557,11 +572,11 @@ public class DrugcostestimatorAarpStepDefinition {
 		adddrugdetails.selectDosage(dosage);
 		adddrugdetails.selectQnty(quantity);
 		adddrugdetails.selectFrequency(frequency);
-		adddrugdetails.continueAddDrugDetails();
+		SavingsOppurtunity savingsOppurtunity = adddrugdetails.continueAddDrugDetailsModal();
 
 
 		// Saving Opportunity Details
-		SavingsOppurtunity savingsOppurtunity = new SavingsOppurtunity(wd);
+		//SavingsOppurtunity savingsOppurtunity = new SavingsOppurtunity(wd);
 		savingsOppurtunity.savedrugbutton();
 
 	}
@@ -750,6 +765,94 @@ public class DrugcostestimatorAarpStepDefinition {
 		String pharmacy_type = memberAttributesRow.get(0).getCells().get(1);
 		DrugCostEstimatorPage dce = (DrugCostEstimatorPage) getLoginScenario().getBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE);
 		dce.validate_pharmacy_type_not_present(pharmacy_type);
+	}
+	
+	@When("^I select the first pharmacy from the list$")
+	public void I_select_the_first_pharmacy_from_the_list() throws InterruptedException {
+		DrugCostEstimatorPage dce = (DrugCostEstimatorPage) getLoginScenario().getBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE);
+		dce.select_first_pharmacy_result();
+	}
+
+	@Then("^I should see Total cost in cost summary section$")
+	public void I_should_see_Total_cost_in_cost_summary_section(DataTable data) {
+	    
+		List<DataTableRow> memberAttributesRow = data.getGherkinRows();
+		String total_cost = memberAttributesRow.get(0).getCells().get(1);
+		DrugCostEstimatorPage dce = (DrugCostEstimatorPage) getLoginScenario().getBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE);
+		dce.verify_summary_cost(total_cost);
+	}
+
+	@Then("^I should see total cost saving in cost summary section$")
+	public void I_should_see_total_cost_saving_in_cost_summary_section(DataTable data) throws InterruptedException {
+		List<DataTableRow> memberAttributesRow = data.getGherkinRows();
+		String total_saving = memberAttributesRow.get(0).getCells().get(1);
+		DrugCostEstimatorPage dce = (DrugCostEstimatorPage) getLoginScenario().getBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE);
+		dce.verify_summary_saving(total_saving);
+	    
+	}
+
+	@Then("^I navigate to step3 page$")
+	public void I_navigate_to_step_page() throws InterruptedException {
+		DrugCostEstimatorPage dce = (DrugCostEstimatorPage) getLoginScenario().getBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE);
+		dce.navigateToStep3();
+	   
+	}
+
+	@Then("^I should see Total cost on left rail$")
+	public void I_should_see_Total_cost_on_left_rail(DataTable data) throws InterruptedException {
+		List<DataTableRow> memberAttributesRow = data.getGherkinRows();
+		String total_cost = memberAttributesRow.get(0).getCells().get(1);
+		DrugCostEstimatorPage dce = (DrugCostEstimatorPage) getLoginScenario().getBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE);
+		dce.verify_leftrail_cost(total_cost);
+	}
+
+	@Then("^I should see total cost saving on left rail$")
+	public void I_should_see_total_cost_saving_on_left_rail(DataTable data) {
+		List<DataTableRow> memberAttributesRow = data.getGherkinRows();
+		String total_saving = memberAttributesRow.get(0).getCells().get(1);
+		DrugCostEstimatorPage dce = (DrugCostEstimatorPage) getLoginScenario().getBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE);
+		dce.verify_leftrail_saving(total_saving);
+	   
+	}
+
+	@Then("^I should see drug cost saving on left rail$")
+	public void I_should_see_drug_cost_saving_on_left_rail(DataTable data) {
+		List<DataTableRow> memberAttributesRow = data.getGherkinRows();
+		String total_saving = memberAttributesRow.get(0).getCells().get(1);
+		DrugCostEstimatorPage dce = (DrugCostEstimatorPage) getLoginScenario().getBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE);
+		dce.verify_leftrail_drug_saving(total_saving);
+	}
+
+	@Then("^I should see pharmacy cost saving on left rail$")
+	public void I_should_see_pharmacy_cost_saving_on_left_rail(DataTable data) {
+		List<DataTableRow> memberAttributesRow = data.getGherkinRows();
+		String pharmacy_saving = memberAttributesRow.get(0).getCells().get(1);
+		DrugCostEstimatorPage dce = (DrugCostEstimatorPage) getLoginScenario().getBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE);
+		dce.verify_leftrail_pharmacy_saving(pharmacy_saving); 
+	}
+
+	@Then("^I should see amount deductible on left rail$")
+	public void I_should_see_amount_deductible_on_left_rail(DataTable data) {
+		List<DataTableRow> memberAttributesRow = data.getGherkinRows();
+		String deductible = memberAttributesRow.get(0).getCells().get(1);
+		DrugCostEstimatorPage dce = (DrugCostEstimatorPage) getLoginScenario().getBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE);
+		dce.verify_deductible(deductible);
+	}
+	
+	@Then("^I delete the existing drug if present$")
+	public void I_delete_the_existing_drug_if_present() throws InterruptedException {
+		DrugCostEstimatorPage dce = (DrugCostEstimatorPage) getLoginScenario().getBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE);
+		//Thread.sleep(10000);
+		dce.delete_all_drugs();
+	}
+	
+	@When("^I access the DCE tool$")
+	public void I_access_the_DCE_tool() throws InterruptedException {
+		WebDriver wd = (WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
+
+		DrugCostEstimatorPage dce = new DrugCostEstimatorPage(wd);
+		dce.navigateToDCETool();
+		dce.addDrug("lipitor");
 	}
 	
 }

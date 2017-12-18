@@ -1,43 +1,35 @@
 @pharmacylocator
-Feature:To test Locate a Pharmacy in acqusition flow AARP site
-Scenario Outline:To verify available pharmacies in AARP site
-Given the user is on the AARP Medicare Site landing page
-When the user navigates to pharmacy search page in AARP Site
-And the user enters following details for pharmacy search in AARP Site
-	| Zip Code	| <zipcode>	|
-	| Distance	| <distance>	|
-	| County Name	| <county>	|
-And the user chooses a plan from dropdown in AARP Site
-	| <planName> |
-And the user searches available pharmacies by selecting "Show pharmacies for ALL types" in AARP site
-Then the user validates the available pharmacies page in AARP site
+Feature: To test pharmacy search page functionality in AARP ULayer
 
-Examples:
-	| zipcode     | distance  | county       |  planName 			               	  | 
-	| 80002       | 25        | Adams County      | AARP MedicareComplete SecureHorizons Plan 1 (HMO)  | 
-#	| 78006       | 2        | Bexar County      | AARP MedicareRx Preferred (PDP)                    | 
-#        | 80002       | 2        | Adams County      | AARP MedicareComplete SecureHorizons Plan 2 (HMO)  | 
-#	| 78006       | 2        | Bexar County      | AARP MedicareRx Saver Plus (PDP)                   | 
+	@sanity
+  Scenario Outline: To verify pharmacy search functionality for 2017 in AARP ULayer
+    Given the user is on the AARP Medicare Site landing page
+    Then the user navigates to pharmacy search page in AARP Site
+    And enter zipcode
+      | Zipcode | <zipcode> |
+    And Select a year from the available list displayed
+      | Year | <year> |
+    And Select a Plan from the available plans list displayed
+      | PlanName | <planName> |
+    And validate pharmacy search results
+    And validate pharmacy saver
 
+    Examples: 
+      | year | zipcode | planName                                          |
+      | 2017 |   90210 | AARP MedicareComplete SecureHorizons Plan 1 (HMO) |
 
+  Scenario Outline: To verify pharmacy search functionality for 2018 in AARP ULayer
+     Given the user is on the AARP Medicare Site landing page
+    Then the user navigates to pharmacy search page in AARP Site
+    And Select a year from the available list displayed
+      | Year | <year> |
+    And enter zipcode
+      | Zipcode | <zipcode> |
+    And Select a Plan from the available plans list displayed
+      | PlanName | <planName> |
+    And validate pharmacy search results
+    And validate Standard Network pharmacy
 
-
-Scenario Outline:To verify available pharmacies for particular pharmacy types in AARP site
-Given the user is on the AARP Medicare Site landing page
-When the user navigates to pharmacy search page in AARP Site
-And the user enters following details for pharmacy search in AARP Site
-	| Zip Code	| <zipcode>	|
-	| Distance	| <distance>	|
-	| County Name	| <county>	|
-And the user chooses a plan from dropdown in AARP Site
-	| <planName> |
-And the user searches available pharmacies by selecting "Show pharmacies for these services." in AARP site
-	| <pharmacytype> |
-Then the user validates the available pharmacies page in AARP site
-
-Examples:
-	| zipcode     | distance  | county       |  planName 			                 	  | pharmacytype				|
-	| 80002       | 25        | Adams County      | AARP MedicareComplete SecureHorizons Plan 1 (HMO)  |  Standard Network Pharmacy,Open 24 hours	|
-#	| 78006       | 2        | Bexar County      | AARP MedicareRx Preferred (PDP)                    |  Open 24 hours				|
- #       | 80002       | 2        | Adams County      | AARP MedicareComplete SecureHorizons Plan 2 (HMO)  |  Pharmacy Saver™ Program			|
-#	| 78006       | 2        | Bexar County      | AARP MedicareRx Saver Plus (PDP)                   |  Open 24 hours				|
+    Examples: 
+      | year | zipcode | planName                                          |
+      | 2018 |   90210 | AARP MedicareComplete SecureHorizons Plan 1 (HMO) |

@@ -14,6 +14,7 @@ Examples:
  | planType  | memberType  | zipcode| radius|
  | MA       |Individual | | 90002 | 25miles |
 
+@US425298_desktop
 Scenario Outline: To Verify MR portal members using DCE on a desktop device will be able to edit their drug list to add drugs up to a total of 25, subtract drugs, change dosages, change packaging and change frequency at any time while using the tool
 Given I am a registered member using the new M&R member portal on a desktop computer
 | Plan Type   | <planType>   |
@@ -22,13 +23,12 @@ When the above plantype user logs in UMS Site Desktop
 And I should see Drug List as an active tab in the DCE tool upon click
 And I should be able to add up to 25 drugs to my drug list
 |drug|
-|lipitor|
-
 And I should have the ability to advance to the next step in the DCE flow after successfully creating a drug list with at least one drug 
 Examples:
  | planType  | memberType  |
- | MA       |Individual |
+ | MAPD      |IndividualDCEmember |
  
+ #US425298_02
 Scenario Outline: To Verify MR portal members using DCE enter at least four characters of the drug name
 Given I am a registered member using the new M&R member portal on a desktop computer
 | Plan Type   | <planType>   |
@@ -48,8 +48,9 @@ And the modal should refresh to the next step in the flow if I select one of the
 
 Examples:
  | planType  | memberType  |
- | MA       |Individual |
+ | MAPD       |IndividualDCEmember |
  
+ #@US425298_03
 Scenario Outline: To Verify MR portal members using DCE see a default system error message
 Given I am a registered member using the new M&R member portal on a desktop computer
 | Plan Type   | <planType>   |
@@ -66,6 +67,7 @@ Examples:
  | planType  | memberType  |
  | MA       |Individual |
  
+ #@467875
 Scenario Outline: To Verify MR portal members using DCE on a desktop device will be able to edit drugs
 Given I am a registered member using the new M&R member portal on a desktop computer
 | Plan Type   | <planType>   |
@@ -79,22 +81,22 @@ And I should be able to change those options at any time
 And I should have the ability to advance to the next step in the flow
 Examples:
  | planType  | memberType  |
- | MA       |Individual |
+ | MAPD      |IndividualDCEmember |
 	
+#@US502131
 Scenario Outline: To Verify MR portal members using DCE on a desktop device , Pharmacy search tab validation
 Given I am a registered member using the new M&R member portal on a desktop computer
 | Plan Type   | <planType>   |
 | Member Type	  | <memberType> |
 When the above plantype user logs in UMS Site Desktop
 Then I should see the Pharmacy search tab as a clickable element within the DCE tool
-|drug|
-|Lipistart|
 And I should be able to move forward or backward in the tool flow 
 Examples:
  | planType  | memberType  |
- | MA       |Individual |
+ | MAPD       |IndividualDCEmember |
  
  #---------------------------------------------------------------------
+ @drug_cost_estimator11
 Scenario Outline: To Verify MR portal members using DCE on a desktop device will be able to edit their drug list , subtract drugs, change dosages, change packaging and change frequency at any time while using the tool
 Given I am a registered member using the new M&R member portal on a desktop computer
 | Plan Type   | <planType>   |
@@ -116,7 +118,7 @@ When I edit the drug with Dosage and Quantity and frequency
 |EditDosage|<editdosage>|
 |EditQuantity|<editquantity>|
 |EditFrequency|<editfrequency>|
-Then I should see drug with Dosage and Quantity and frequency added to the list
+Then I should validate drug with Dosage and Quantity and frequency edited to the list
 |EditDosage|<editdosage>|
 |EditQuantity|<editquantity>|
 |EditFrequency|<editfrequency>|
@@ -127,7 +129,7 @@ Then I should not see the drug with Dosage in the list
  
 Examples:
  | planType |memberType |drug|dosage|quantity|frequency|editdosage|editquantity|editfrequency|
- | MAPD     |Individual |Lipitor|Lipitor TAB 10MG|30|Every 1 month|Lipitor TAB 20MG|60|Every 3 months|
+ | MAPD     |IndividualDCEmember |Lipitor|Lipitor TAB 10MG|30|Every 1 month|Lipitor TAB 10MG|60|Every 3 months|
  
  #----------------------------------------------------------
 Scenario Outline: To Verify MR portal members using DCE on a Mobile device will be able to edit their drug list , subtract drugs, change dosages, change packaging and change frequency at any time while using the tool
@@ -162,7 +164,7 @@ Then I should not see the drug with Dosage in the list
  
 Examples:
  | planType |memberType |drug|dosage|quantity|frequency|editdosage|editquantity|editfrequency|
- | MAPD     |Individual |Lipitor|Lipitor TAB 10MG|30|Every 1 month|Lipitor TAB 20MG|60|Every 3 months|
+ | MAPD     |IndividualDCEmember |Lipitor|Lipitor TAB 10MG|30|Every 1 month|Lipitor TAB 20MG|60|Every 3 months|
  
  
 #------------------------------------------------------------ 
@@ -443,11 +445,11 @@ And I should see pharmacy saver pharmacies in results
 
  Examples:
 | planType | memberType| zipcode| radius|pharmacytype|
-| MAPD     |Individual | 06450  | 25 miles|Pharmacy Saver|
+| MAPD     |IndividualDCEmember | 06450  | 25 miles|Pharmacy Saver|
 
 
 #----------------------------------
-#q1_feb_grp011  001620498-1 
+#q1_apr_grp010   #001620498-1 
 
 @drug_cost_estimatorstep5
 Scenario Outline: Pharmacy saver results
@@ -462,7 +464,7 @@ Then I should not see pharmacy saver radio button under pharmacy type
 
  Examples:
 | planType | memberType|
-| MA     |Individual_non_pharmacy_saver |
+| MA     |Group_non_pharmacy_saver |
  
  
  
@@ -513,7 +515,7 @@ Then I should not see pharmacy button radio button under pharmacy type
 
 
 #-----------------------------------------
-#q1_feb_blayer016 926485538-1  US425354
+#q1_apr_blayer015 926485538-1  US425354
 
 @drug_cost_estimator_with_mail_service
 Scenario Outline: To Verify MR portal members using DCE on a desktop device, will have preferred mail services option available depending on its member type.
@@ -549,6 +551,178 @@ Then I should not see preferred mail service radio button under pharmacy type
 
 Examples:
  | planType  | memberType  |
- | MAPD      |GroupPEEHIPwithoutMailService |
+ | MAPD      |ALPEEHIP|
  
+ 
+@drug_cost_estimator_savings
+Scenario Outline: M&R portal members using DCE on a desktop device will be able to see their calculated drug cost savings options after entering at least one or more drugs to their drug list and selecting a pharmacy.
+Given I am a registered member using the new M&R member portal on a desktop computer
+	| Plan Type   | <planType>   |
+	| Member Type	  | <memberType> |
+When the above plantype user logs in UMS Site Desktop
+And I use the DCE tool to enter one or more drugs to my drug list and complete the flow
+ 	|Drug|<drug1>|
+And I navigate to step2 page and I have selected a pharmacy
+And I navigate to step3 page
+Then I should be able to view the section on the left rail regarding drug cost saving with the link 
+And I should be able to click on the link to go back to step 1
+Examples: 
+	|planType | memberType | drug1 |
+	|MAPD     | Individual_savings | Lipitor |  
+ 
+ 
+#------------------------------------------
+ #q1_feb_blayer023  US419083 
+ 
+ @drug_cost_estimator_with_cost_savings
+Scenario Outline: To Verify MR portal members using DCE on a desktop device, I want to be able to see the estimated cost savings that are available to me after I have entered one or more drugs on my drug list and have selected a pharmacy so I can be aware of my potential savings if I were to select a different drug or pharmacy.
+Given I am a registered member using the new M&R member portal on a desktop computer
+| Plan Type   | <planType>   |
+| Member Type	  | <memberType> |
+When the above plantype user logs in UMS Site Desktop
+And I access the page containing the DCE tool
+And I add lipitor generic and branded drug
+And I navigate to step2 page
+And I select first pharmacy from standard network pharmacy type
+And I navigate to step3 page
+Then I should see that total estimated annual drug costs in summary section matches with left rail value
+|totalAnnualDrugCost | <totalAnnualDrugCost> |
+And I should see that total available savings in summary section matches with left rail value
+|totalAvailableSavings | <totalAvailableSavings> |
+And I should see this value for drug cost savings by switching to generics
+|drugSavings | <drugSavings> |
+And I should see this value for pharmacy cost savings by switching to recommended pharmacies
+|pharmacySavings | <pharmacySavings> |
+And I should see this value for initial coverage stage, Coverage Gap stage, Catastrophic Coverage Stage
+|drugCoverage | <drugCoverage> |
+And I should be able to switch to drugs or pharmacy that the tool has recommended
+ 
+ Examples:
+ | planType| memberType|totalAnnualDrugCost|totalAvailableSavings|drugSavings|pharmacySavings|drugCoverage|
+ | MAPD|IndividualwithCostSavings|$3,562.56|$3,539.20|Save $3,514.56|Save $24.64|$294.88|
+ 
+ 
+  @drug_cost_estimator_with_cost_savings_smart_phone
+Scenario Outline: To Verify MR portal members using DCE on a desktop device, I want to be able to see the estimated cost savings that are available to me after I have entered one or more drugs on my drug list and have selected a pharmacy so I can be aware of my potential savings if I were to select a different drug or pharmacy.
+Given I am an UHC Individual member on the Dashboard site SmartPhone
+| Plan Type   | <planType>   |
+| Member Type	  | <memberType> |
+When plantype user logs in mobile in UHC Site
+And I access the page containing the DCE tool
+And I add lipitor generic and branded drug
+And I navigate to step2 page
+And I select first pharmacy from standard network pharmacy type
+And I navigate to step3 page
+Then I should see that total estimated annual drug costs in summary section matches with left rail value
+|totalAnnualDrugCost | <totalAnnualDrugCost> |
+And I should see that total available savings in summary section matches with left rail value
+|totalAvailableSavings | <totalAvailableSavings> |
+And I should see this value for drug cost savings by switching to generics
+|drugSavings | <drugSavings> |
+And I should see this value for pharmacy cost savings by switching to recommended pharmacies
+|pharmacySavings | <pharmacySavings> |
+And I should see this value for initial coverage stage, Coverage Gap stage, Catastrophic Coverage Stage
+|drugCoverage | <drugCoverage> |
+And I should be able to switch to drugs or pharmacy that the tool has recommended
+ 
+ Examples:
+ | planType| memberType|totalAnnualDrugCost|totalAvailableSavings|drugSavings|pharmacySavings|drugCoverage|
+ | MAPD|IndividualwithCostSavings|$3,562.56|$3,539.20|Save $3,514.56|Save $24.64|$294.88|
+ 
+ #-------------------------------------
+ #q1_apr_grp357   US419083
+ 
+ @drug_cost_estimator_without_drug_cost_savings
+Scenario Outline: To Verify MR portal members using DCE on a desktop device, I want to be able to see the estimated cost savings that are available to me after I have entered one or more generic drugs on my drug list and have selected a pharmacy so I can be aware of my potential savings and will not be able select different drug as drug savings are not present.
+Given I am a registered member using the new M&R member portal on a desktop computer
+| Plan Type   | <planType>   |
+| Member Type	  | <memberType> |
+When the above plantype user logs in UMS Site Desktop
+And I access the page containing the DCE tool
+And I add lipitor generic drug
+And I navigate to step2 page
+And I select first pharmacy from standard network pharmacy type
+And I navigate to step3 page
+Then I should not see drug savings and be unable to switch the drugs
+
+Examples:
+ | planType| memberType|
+ | MAPD|IndividualDCEmember|
+ 
+ 
+  #--------------------------------
+ #MAPD Grp q1_apr_grp008
+ 
+ @drug_cost_estimatorlearnmore_home_delivery
+Scenario Outline: To Verify Members who have access to mail service should be able to see dynamic content related to their plan when using the Pharmacy Search functionality of the DCE tool and selecting the mail service option
+Given I am a registered member using the new M&R member portal on a desktop computer
+| Plan Type   | <planType>   |
+| Member Type	  | <memberType> |
+When the above plantype user logs in UMS Site Desktop
+And I access the page containing the DCE tool
+And I delete the existing drug if present
+When I add the drug with Dosage and Quantity and frequency to the list
+|Drug|Lipitor|
+|Dosage|Lipitor TAB 10MG|
+|Quantity|60|
+|Frequency|Every 1 month|
+And I navigate to step2 page
+And I select the pharmacy type
+|Pharmacy Type|Preferred Mail Service|
+And I select the Preferred Mail Service Pharmacy from the pharmacy result if not selected
+And I click Learn more about starting home delivery link
+Then I should see user plan content
+|Plan|<plan>|
+
+Examples:
+ | planType|memberType|plan|
+ | MAPD|Group_Inc1|MAPD GROUP CURRENT YEAR|
+ 
+ #-----------------------------------------------------------------
+ #MAPD Grp q1_apr_grp091 (918084105-1, DOB - 1946-03-03)  US529088
+ 
+@drug_cost_estimator_switch_to_generic_case_1
+Scenario Outline: To Verify MR portal members using DCE on a desktop device, I want to be able to switch from branded to generic drug, given that no pharmacy is selected and it suggests the user with an appropriate save money message.
+Given I am a registered member using the new M&R member portal on a desktop computer
+| Plan Type   | <planType>   |
+| Member Type	  | <memberType> |
+When the above plantype user logs in UMS Site Desktop
+And I access the page containing the DCE tool
+And I have added a drug to my drug list and a generic equivalent is available for the drug I have selected
+ 	|Drug|<drug>|
+And I have not yet selected pharmacy
+Then I should be presented the option to switch to the generic option
+And I will see a SWITCH NOW link in the drug tile with appropriate save message
+And I will see a modal appear upon clicking on SWITCH NOW
+And when I click on the button to accept the generic
+Then the drug name will automatically update within the Drug List
+
+Examples:
+ | planType| memberType| drug |
+ | MAPD|Individualwithoutpharmacy|lipitor|
+ 
+ 
+  #---------------------------------------------
+ #MAPD Grp q1_apr_grp357(971691002-1 / DOB- 5/29/1945)  US529088
+ 
+# @drug_cost_estimator_switch_to_generic_case_2
+Scenario Outline: To Verify MR portal members using DCE on a desktop device, I want to be able to switch from branded to generic drug, given that a pharmacy is selected and it suggests the user with an appropriate save money message and cost savings are also updated
+Given I am a registered member using the new M&R member portal on a desktop computer
+| Plan Type   | <planType>   |
+| Member Type	  | <memberType> |
+When the above plantype user logs in UMS Site Desktop
+And I access the page containing the DCE tool
+And I have added a drug to my drug list and a generic equivalent is available for the drug I have selected
+ 	|Drug|<drug>|
+And I have selected pharmacy
+Then I should be presented the option to switch to the generic option
+And I will see a SWITCH NOW link in the drug tile with a pharmacy savings cost value
+And I will see a modal appear upon clicking on SWITCH NOW 
+And when I click on the button to accept the generic
+Then the drug name will automatically update within the Drug List
+And any cost savings will be applied to my total cost savings in Step3
+
+Examples:
+ | planType| memberType| drug |
+ | MAPD|IndividualDCEmember|lipitor|
  

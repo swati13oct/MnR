@@ -63,6 +63,6 @@ When the user registers with dob and memberId in UMS site
 Then the user navigate to error page
 Then the user validate error message
 
-Examples:
+Examples: 
 	 | planMemberId | dateOfBirth |
 	 | 016999628    | 02-19-1946  |
