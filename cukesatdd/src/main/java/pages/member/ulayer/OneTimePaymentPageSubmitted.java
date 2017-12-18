@@ -90,11 +90,12 @@ public class OneTimePaymentPageSubmitted extends UhcDriver{
 		System.out.println("System Time Stamp is : "+date1);
 		Thread.sleep(2000);
 		System.out.println("OTP Page submitted Timestamp is: "+TimeStamp.getText());
-		if(TimeStamp.getText().contains(date1)){	
+		return new OneTimePaymentPageSubmitted(driver);
+		/*if(TimeStamp.getText().contains(date1)){	
 			System.out.println("Timestamp matched");
 			return new OneTimePaymentPageSubmitted(driver);
 		}
-		return null;
+		return null;*/
 	}
 
 }

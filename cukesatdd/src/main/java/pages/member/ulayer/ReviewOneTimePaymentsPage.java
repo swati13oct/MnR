@@ -142,7 +142,7 @@ public OneTimePaymentPageSubmitted navigateToReviewSubmittedPage() throws Interr
 		System.out.println("Checkbox clicked");		
 		Thread.sleep(2000);		
 		jse.executeScript("window.scrollBy(0,300)", "");
-		Thread.sleep(2000);
+		Thread.sleep(5000);
 		RecurringSubmitButton.click();
 		System.out.println("Submit Button clicked");
 	    Thread.sleep(5000);

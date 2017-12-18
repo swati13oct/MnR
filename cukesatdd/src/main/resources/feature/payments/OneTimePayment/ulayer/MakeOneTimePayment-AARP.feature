@@ -265,7 +265,7 @@ When the user logs in TeamH with a registered AMP with following details in AARP
 And the user navigates to Stage PaymentOverview Page
 And the user navigates to Team H Automatic Payments page
 And the user enters details and click on continue button on Automatic Payments Page for Dashboard
-And user lands on Review One time Payments Page and navigates to OTP Submitted Page
+And user lands on Review One time Payments Page and navigates to Review Submitted Page
 Then the user lands on OneTime Payment Submitted Page and validates Timestamp
 
 Examples:

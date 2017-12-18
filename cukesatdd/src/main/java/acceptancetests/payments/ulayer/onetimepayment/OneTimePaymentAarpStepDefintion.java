@@ -787,7 +787,7 @@ public class OneTimePaymentAarpStepDefintion {
 	public void Review_OneTime_Payment_Navigation_to_OTPSubmitted() throws InterruptedException
 	{
 		ReviewOneTimePaymentsPage reviewOneTimePaymentsPage = (ReviewOneTimePaymentsPage)getLoginScenario().getBean(PageConstants.REVIEW_ONE_TIME_PAYMENTS_DASHBOARD);
-		OneTimePaymentPageSubmitted OTPSubmitted = reviewOneTimePaymentsPage.navigateToReviewSubmittedPage();
+		OneTimePaymentPageSubmitted OTPSubmitted = reviewOneTimePaymentsPage.navigateToOTPSubmittedPage();
 		Thread.sleep(1000);
 		if(OTPSubmitted != null){
 			getLoginScenario().saveBean(PageConstants.CONFIRM_ONE_TIME_PAYMENT_PAGE,
@@ -798,6 +798,21 @@ public class OneTimePaymentAarpStepDefintion {
 		}		
 	}
 
+	
+	@And("^user lands on Review One time Payments Page and navigates to Review Submitted Page$")
+	public void Review_OneTime_Payment_Navigation_to_ReviewSubmitted() throws InterruptedException
+	{
+		ReviewOneTimePaymentsPage reviewOneTimePaymentsPage = (ReviewOneTimePaymentsPage)getLoginScenario().getBean(PageConstants.REVIEW_ONE_TIME_PAYMENTS_DASHBOARD);
+		OneTimePaymentPageSubmitted OTPSubmitted = reviewOneTimePaymentsPage.navigateToReviewSubmittedPage();
+		Thread.sleep(1000);
+		if(OTPSubmitted != null){
+			getLoginScenario().saveBean(PageConstants.CONFIRM_ONE_TIME_PAYMENT_PAGE,
+					OTPSubmitted);
+			Assert.assertTrue(true);
+		}else {
+			Assert.fail("OTP Submitted page not found");
+		}		
+	}
 	
 	@Then("^user lands on Review One time Payments Page and validates one payment per day error message$")
 	public void One_Payment_Per_Day_Error() throws InterruptedException
