@@ -1,7 +1,7 @@
 @member_redesign_H&W
 Feature:Header/Navigation for Member Site Redesign
 
-@member_redesign_H&W
+@member_redesign_H&W @IncrediblesH&W
 Scenario Outline:As an authenticated member on the new Member site, I want to check health and wellness and its Lifestyle, Learning and Rewards tabs
 Given I am a authenticated member on the member redesign site
 | Plan Type   | <planType>   |

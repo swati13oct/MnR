@@ -1,7 +1,7 @@
 @member_redesign_footer
 Feature:Footer for Member Site Redesign
 
-@member_redesign_footer
+@member_redesign_footer @IncrediblesFooter
 Scenario Outline:As an authenticated member on the new Member site, I want to check Footer section.
 Given I am a authenticated member on the member redesign site
 | Plan Type   | <planType>   |

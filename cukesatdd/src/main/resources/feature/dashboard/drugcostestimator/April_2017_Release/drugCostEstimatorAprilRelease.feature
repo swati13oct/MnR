@@ -20,7 +20,7 @@ Examples:
  
  
 #@US502131
-@drug_cost_estimator2
+@drug_cost_estimator2 @IncrediblesDCE1
 Scenario Outline: To Verify MR portal members using DCE on a desktop device , Pharmacy search tab validation
 Given I am a registered member using the new M&R member portal on a desktop computer
 | Plan Type   | <planType>   |
@@ -47,7 +47,7 @@ Examples:
 #| MA     |Group_non_pharmacy_saver |
 
  
-@drug_cost_estimator4
+@drug_cost_estimator4 @IncrediblesDCE2
 Scenario Outline: Pharmacy saver results
 Given I am a registered member using the new M&R member portal on a desktop computer
 | Plan Type   | <planType>   |
@@ -100,7 +100,7 @@ Examples:
  #-----------------------------------------------------------------
  #MAPD Grp q1_apr_grp091 (918084105-1, DOB - 1946-03-03)  US529088
  
-@drug_cost_estimator_switch_to_generic_case_1
+@drug_cost_estimator_switch_to_generic_case_1 @IncrediblesDCE3
 Scenario Outline: To Verify MR portal members using DCE on a desktop device, I want to be able to switch from branded to generic drug, given that no pharmacy is selected and it suggests the user with an appropriate save money message.
 Given I am a registered member using the new M&R member portal on a desktop computer
 | Plan Type   | <planType>   |
@@ -124,7 +124,7 @@ Examples:
   #---------------------------------------------
  #MAPD Grp q1_apr_grp357(971691002-1 / DOB- 5/29/1945)  US529088
  
-@drug_cost_estimator_switch_to_generic_case_2
+@drug_cost_estimator_switch_to_generic_case_2 @IncrediblesDCE4
 Scenario Outline: To Verify MR portal members using DCE on a desktop device, I want to be able to switch from branded to generic drug, given that a pharmacy is selected and it suggests the user with an appropriate save money message and cost savings are also updated
 Given I am a registered member using the new M&R member portal on a desktop computer
 | Plan Type   | <planType>   |
