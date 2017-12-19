@@ -124,7 +124,7 @@ public class ResponsivePlanSummary extends UhcDriver{
 		    private WebElement chkBoxAddtoCompare5;
 		    
 		    //@FindBy(xpath="//*[@id='plan-list-1']//div[@class='swiper-container']/div/div[4]//div[@class='content-secondary']//div[@class='compare-box']/span[4]/a")		  
-		    @FindBy(xpath="//div[contains(@class,'module-plan-overview module')][1]//span[@class='max-added-text show']/a[@class='compare-link']")
+		    @FindBy(xpath="//*[@id='plan-list-1']/div/div[2]/div/div[4]/div[3]/div/div/span[4]/a")
 		    private WebElement comparePlans;
 		    
 		   // @FindBy(xpath="(.//*[text()='View details'])[1]")
@@ -208,19 +208,19 @@ public class ResponsivePlanSummary extends UhcDriver{
 			@FindBy (xpath="//*[@id='fixTable']/tbody/tr[18]/td[1]/p")
 		    private WebElement optionalDental;
 			
-			@FindBy (xpath=".//*[@id='fixTable']/tbody/tr[18]/td[2]/div[1]/div[1]/div/strong")
+			@FindBy (xpath=".//*[@id='fixTable']/tbody/tr[18]/td[2]/div[1]/div[2]/div/strong")			              
 		    private WebElement optionalDental1;
 			
-			@FindBy (xpath=".//*[@id='fixTable']/tbody/tr[18]/td[3]/div[1]/div[1]/div/strong")
+			@FindBy (xpath="//*[@id='fixTable']/tbody/tr[18]/td[3]/div[1]/div[1]/div/strong")
 		    private WebElement optionalDental2;
 			
 			@FindBy (xpath=".//*[@id='fixTable']/tbody/tr[19]/td[1]/p")
 		    private WebElement highOptionDental;
 			
-			@FindBy (xpath=".//*[@id='fixTable']/tbody/tr[19]/td[2]/div[1]/div[2]/div/strong")
+			@FindBy (xpath="//*[@id='fixTable']/tbody/tr[19]/td[2]/div[1]/div[1]/div/strong")
 		    private WebElement highOptionDental1;
 			
-			@FindBy (xpath=".//*[@id='fixTable']/tbody/tr[19]/td[3]/div[1]/div[2]/div/strong")
+			@FindBy (xpath="//*[@id='fixTable']/tbody/tr[19]/td[3]/div[1]/div[2]/div/strong")
 		    private WebElement highOptionDental2;
 			
 //Plan Costs
@@ -388,15 +388,23 @@ public void selectAddToCompareCheckboxes() throws InterruptedException  {
 	} catch (InterruptedException e) {
 		e.printStackTrace();
 	}
+	JavascriptExecutor jse = (JavascriptExecutor)driver;
+	jse.executeScript("window.scrollBy(0,550)", "");
 	validate (chkBoxAddtoCompare1);
 	chkBoxAddtoCompare1.click();
-	Thread.sleep(10000);
+	Thread.sleep(1000);
+	jse.executeScript("window.scrollBy(0,750)", "");
+	Thread.sleep(1000);	
 	validate (chkBoxAddtoCompare2);
 	chkBoxAddtoCompare2.click();
-	Thread.sleep(10000);
+	Thread.sleep(1000);
+	jse.executeScript("window.scrollBy(0,750)", "");
+	Thread.sleep(1000);
 	validate (chkBoxAddtoCompare3);
 	chkBoxAddtoCompare3.click();
-	Thread.sleep(10000);
+	Thread.sleep(2000);
+	jse.executeScript("window.scrollBy(0,750)", "");
+	Thread.sleep(1000);
 	validate (chkBoxAddtoCompare4);
 	chkBoxAddtoCompare4.click();
 	

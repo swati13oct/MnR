@@ -270,7 +270,7 @@ Then the user lands on OneTime Payment Submitted Page and validates Timestamp
 
 Examples:
 	| planType |
-	| FED      |	
+	| AARP     |	
 
 @TeamHError
 Scenario Outline: Verify the Timestamp on OneTime Payment Submitted page
