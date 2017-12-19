@@ -43,10 +43,8 @@ public class RegistrationDashboardStepDefinition {
 		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
 
 		// create registration context
-		RegistrationInformationPage registrationInformationPage = new RegistrationInformationPage(
-				wd);
-		getLoginScenario().saveBean(
-				PageConstants.REGISTRATION_INFORMATION_PAGE,
+		RegistrationInformationPage registrationInformationPage = new RegistrationInformationPage(wd);
+		getLoginScenario().saveBean(PageConstants.REGISTRATION_INFORMATION_PAGE,
 				registrationInformationPage);
 
 	}
@@ -67,8 +65,9 @@ public class RegistrationDashboardStepDefinition {
 		// navigate to registration page
 		RegistrationInformationPage registrationInformationPage = (RegistrationInformationPage) getLoginScenario()
 				.getBean(PageConstants.REGISTRATION_INFORMATION_PAGE);
-	/**	registrationInformationPage.scroll();*/
-		Thread.sleep(5000);
+		Thread.sleep(2000);
+		registrationInformationPage.scroll();
+		
 		registrationInformationPage.enterMemberID(memberId);
 	}
 
