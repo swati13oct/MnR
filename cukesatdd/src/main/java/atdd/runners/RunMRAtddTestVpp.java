@@ -11,10 +11,10 @@ import cucumber.junit.Cucumber;
  *
  */
 @RunWith(Cucumber.class)
-@Cucumber.Options(glue = { "atdd.framework","acceptancetests.vpp.Ulayer" }, 
-		features = { "feature/vpp/Ulayer" }, 
+@Cucumber.Options(glue = { "atdd.framework","acceptancetests.vpp.ulayer" }, 
+		features = { "feature/vpp/ulayer" }, 
 		format = {
-		"pretty", "html:reports/test-report","json:target/cucumber.json"}, tags ={"@VPPPlanLinks"})
+				"pretty", "html:reports/test-report","json:target/cucumber.json" }, tags ={"@AEP"})
 
 public class RunMRAtddTestVpp {
 	

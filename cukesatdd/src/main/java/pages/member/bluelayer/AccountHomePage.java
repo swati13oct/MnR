@@ -5,6 +5,7 @@ import java.util.concurrent.TimeUnit;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.junit.Assert;
+import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
@@ -13,18 +14,21 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
 import pages.member.bluelayer.OrderplanmaterialsPage;
+import pages.mypcp.SignInPage;
 import pages.member.bluelayer.ContactUsPage;
 import acceptancetests.atdd.data.CommonConstants;
 import acceptancetests.atdd.data.MRConstants;
 import acceptancetests.atdd.data.PageData;
 import acceptancetests.atdd.util.CommonUtility;
 import acceptancetests.login.data.LoginCommonConstants;
+import atdd.framework.MRScenario;
 import atdd.framework.UhcDriver;
 
 /**
  * @author pagarwa5
  *
  */
+
 public class AccountHomePage extends UhcDriver {
 
 	@FindBy(css = "a.fd_myPersonalHealthRecord")
@@ -102,9 +106,12 @@ public class AccountHomePage extends UhcDriver {
 	@FindBy(xpath = "//*[@id='medicareTitle']/p/a[2]") // Story 261070
 	private WebElement chineseLink;
 
-	@FindBy(xpath = "////*[@id='subPageLeft']/div[2]/div[2]/h3[2]/a")
+	@FindBy(xpath = "//*[@id='subPageLeft']/div[2]/div[2]/h3[2]/a")
 	private WebElement createPdfLink;
-
+	//@FindBy(xpath = "html/body/div[2]/div[1]/p/a[2]")
+	@FindBy(xpath = "html/body/div[3]/div/div[1]/header/div/div/div/div/div/div/p/a[2]")	
+	private WebElement backToPreviousPage;
+	
 	@FindBy(xpath = "//span[contains(.,'Print temporary ID card')]")
 	private WebElement viewIDCard;
 
@@ -161,10 +168,83 @@ public class AccountHomePage extends UhcDriver {
 
 	@FindBy(linkText = "Go to preference page")
 	private WebElement ProfileandPrefLink;
-	
 	@FindBy(linkText = "Go to profile page")
 	private WebElement ProfileLink;
 
+@FindBy(xpath = "//*[@id='saver-checkbox']/label")
+	private WebElement filterLink;
+	
+	@FindBy(xpath = "//fieldset[1]/ul/li[1]/label")
+	private WebElement pharmacyfilterLink;
+	
+	@FindBy(xpath = "//*[@id='_content_pharmacy_en_uhc_jcr_content_pharmacylocator_par_teaser']")
+	private WebElement widgetLink;
+	
+	@FindBy(xpath = "//a[contains(text(),'Get Directions')]")
+	private WebElement getdirectionLink;
+	
+	@FindBy(xpath = "//a[contains(text(),'More Information')]")
+	private WebElement moreinformationLink;
+	
+	@FindBy(xpath = "//*[@id='pharmacySaverPharmacyTooltip']/svg/path")
+	private WebElement tooltipLink;
+	
+	@FindBy(xpath = "//*[@id='healthrecord']/a")
+	private WebElement myHealthRecordLink;
+	
+	@FindBy(xpath = "(.//a)[2]")
+	private WebElement disclaimerbackToPreviousPage;
+	
+	@FindBy(xpath = "(.//a)[2]")
+	private WebElement contactusPagebackToPreviousPage;
+	
+	@FindBy(xpath = "(.//a)[2]")
+	private WebElement pcpContactUsPagebackToPreviousPage;
+	
+	@FindBy(xpath = "(.//a)[1]")
+	private WebElement aboutUsPagebackToPreviousPage;
+	
+	@FindBy(xpath = "(.//a)[1]")
+	private WebElement aboutUsPCPPagebackToPreviousPage;
+	
+	@FindBy(xpath = "(.//a)[2]") 
+	private WebElement uhcdisclaimerbackToPreviousPage; 
+
+		
+	@FindBy(xpath = "//*[@id='phr_widget_7_box']/div[9]/p/a")
+	private WebElement preferdPharmacyBenefitLink;
+	
+	@FindBy(xpath = "//*[@id='_content_campaigns_uhcm_formsresources-main_formsresources-main_jcr_content_par_teaser']/div/div[1]/div[2]/div[1]/div/div[1]/p[3]/a[1]")
+	private WebElement appointRepresentativeLink;
+	
+	@FindBy(xpath = "//*[@id='row2link2']/p/a")
+	private WebElement privacypolicyLink;
+	
+	@FindBy(xpath = "html/body/div[3]/div/div/header/div/div/div/div/div/div/a/p")
+	private WebElement backtopreviouspageLink;
+	
+	@FindBy(xpath = "//label[@for='member-materials']")
+	private WebElement radiokitLink;
+	
+	@FindBy(xpath = "//p[contains(text(),'Replacement ID card')]")
+	private WebElement radioidLink;
+	
+	@FindBy(xpath = "//label[@id='order-materials-error']")
+	private WebElement radiodialValidation;
+	
+	@FindBy(xpath = "//span[text()='SUBMIT ORDER']")
+	private WebElement submitOrderbtn;
+	
+	@FindBy(xpath = "//button[@class = 'btn btn-primary select-item-submit']")
+	private WebElement submitLink;
+	
+	@FindBy(xpath="//a[contains(text(),'Go to order-plan-materials')]")
+	private WebElement OrderPlanMaterialslnk;
+	
+	@FindBy(xpath = "//section[1]/div/div/div/a")
+	//@FindBy(linkText = "ORDER ADDITIONAL MATERIALS")
+	private WebElement addordermaterialLink;
+	
 	private PageData myAccountHome;
 
 	public JSONObject accountHomeJson;
@@ -176,7 +256,7 @@ public class AccountHomePage extends UhcDriver {
 		PageFactory.initElements(driver, this);
 		String fileName = CommonConstants.ACCOUNT_HOME_PAGE_DATA;
 		myAccountHome = CommonUtility.readPageData(fileName, CommonConstants.PAGE_OBJECT_DIRECTORY_BLUELAYER_MEMBER);
-		openAndValidate();
+		//openAndValidate();
 	}
 
 	public String getMyPlans() {
@@ -198,7 +278,20 @@ public class AccountHomePage extends UhcDriver {
 		} else
 			return null;
 	}
-
+	
+	public BenefitsCoveragePage backToPreviousPage(){
+		backToPreviousPage.click();
+		String title = driver.getTitle().toString();
+		System.out.println(title);
+		if (title.equalsIgnoreCase("UnitedHealthcare Medicare Solutions | Home")) {
+			return new BenefitsCoveragePage(driver);
+		}
+		else
+		return null;
+		
+	}
+	
+	
 	public ManageDrugPage navigateToEstimateCost(String category) {
 
 		estimateCostLink.click();
@@ -235,20 +328,247 @@ public class AccountHomePage extends UhcDriver {
 
 	public FormsandresourcesPage navigateToFormsandResourcePage() {
 
-		formsAndResourcesLink.click();
+		driver.navigate().to("https://member.team-a-uhcmedicaresolutions.uhc.com/content/uhcm/home/my-plans/forms-and-resources.html");
 
 		if (getTitle().equalsIgnoreCase("UnitedHealthcare Medicare Solutions | Forms and Resources")) {
 			return new FormsandresourcesPage(driver);
 		} else
-
+			return null;	
+	}
+	
+	public AccountHomePage navigateToTermsandConditions(){
+		driver.navigate().to("https://member."+MRScenario.environment+"-uhcmedicaresolutions.uhc.com/content/uhcm/guest/noacc-terms-and-conditions.html");
+	try{
+		Alert alert = driver.switchTo().alert();
+		alert.accept();
+	}
+		
+	catch(Exception e)
+	{
+		
+	}
+			System.out.println("title  "+driver.getTitle());
+		if(driver.getTitle().equalsIgnoreCase("My Benefits & Coverage")){
+			return new AccountHomePage(driver);
+			}
 			return null;
 
 	}
+	
+	/*public AccountHomePage navigateToDisclaimerPage(){
+		driver.navigate().to("https://member."+MRScenario.environment+"-uhcmedicaresolutions.uhc.com/content/mypcp/guest/noacc-disclaimers.html");
+	try{
+		Alert alert = driver.switchTo().alert();
+		alert.accept();
+	}
+		
+	catch(Exception e)
+	{
+		
+	}
+			System.out.println("title  "+driver.getTitle());
+		if(driver.getTitle().equalsIgnoreCase("My Benefits & Coverage")){
+			return new AccountHomePage(driver);
+			}
+			return null;
 
+	}
+	
+	public SignInPage disclaimerbackToPreviousPage(){
+		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+		JavascriptExecutor ex  = (JavascriptExecutor)driver;
+		ex.executeScript("args[0].click();", disclaimerbackToPreviousPage);
+		disclaimerbackToPreviousPage.click();
+		if (driver.getTitle().equalsIgnoreCase("UnitedHealthcare Medicare Solutions | Sign In")) {
+			return new SignInPage(driver);
+		}
+		return null;
+		if (title.equalsIgnoreCase("UnitedHealthcare Medicare Solutions | Sign In")) {
+			return new BenefitsCoveragePage(driver);
+		}
+		else
+		return null;
+		
+		
+	}*/
+	
+	public AccountHomePage navigateToDisclaimerPage(){
+		driver.navigate().to("https://member."+MRScenario.environment+"-uhcmedicaresolutions.uhc.com/content/mypcp/guest/noacc-disclaimers.html");
+	try{
+		Alert alert = driver.switchTo().alert();
+		alert.accept();
+	}
+		
+	catch(Exception e)
+	{
+		
+	}
+	return new AccountHomePage(driver);
+/*			System.out.println("title  "+driver.getTitle());
+		if(driver.getTitle().equalsIgnoreCase("My Benefits & Coverage")){
+			return new AccountHomePage(driver);
+			}
+			return null;
+
+*/	}
+	
+	public AccountHomePage navigateToPCPContactUSPage(){
+		driver.navigate().to("https://www."+MRScenario.environment+"-mypcpmedicare.uhc.com/content/mypcp/guest/acc-contact-us.html");
+		
+	try{
+		Alert alert = driver.switchTo().alert();
+		alert.accept();
+	}
+		
+	catch(Exception e)
+	{
+		
+	}
+			System.out.println("title  "+driver.getTitle());
+		if(driver.getTitle().equalsIgnoreCase("My Benefits & Coverage")){
+			return new AccountHomePage(driver);
+			}
+			return null;
+
+	}
+	
+	
+	
+	public AccountHomePage navigateToPCPABoutUSPage(){
+		driver.navigate().to("https://www."+MRScenario.environment+"-mypcpmedicare.uhc.com/content/uhcm/guest/about-us0.html");
+	try{
+		Alert alert = driver.switchTo().alert();
+		alert.accept();
+	}
+		
+	catch(Exception e)
+	{
+		
+	}
+			System.out.println("title  "+driver.getTitle());
+		if(driver.getTitle().equalsIgnoreCase("My Benefits & Coverage")){
+			return new AccountHomePage(driver);
+			}
+			return null;
+
+	}
+	
+	
+	public AccountHomePage navigateToContactUSPage(){
+		driver.navigate().to("https://member."+MRScenario.environment+"-uhcmedicaresolutions.uhc.com/content/uhcm/guest/contact-us-accordion.html");
+	try{
+		Alert alert = driver.switchTo().alert();
+		alert.accept();
+	}
+		
+	catch(Exception e)
+	{
+		
+	}
+			System.out.println("title  "+driver.getTitle());
+		if(driver.getTitle().equalsIgnoreCase("My Benefits & Coverage")){
+			return new AccountHomePage(driver);
+			}
+			return null;
+
+	}
+	
+	
+	
+	public SignInPage disclaimerbackToPreviousPage(){
+		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+		/*JavascriptExecutor ex  = (JavascriptExecutor)driver;
+		ex.executeScript("args[0].click();", disclaimerbackToPreviousPage);*/
+		disclaimerbackToPreviousPage.click();
+		if (driver.getTitle().equalsIgnoreCase("UnitedHealthcare Medicare Solutions | Sign In")) {
+			return new SignInPage(driver);
+		}
+		return null;
+		/*if (title.equalsIgnoreCase("UnitedHealthcare Medicare Solutions | Sign In")) {
+			return new BenefitsCoveragePage(driver);
+		}
+		else
+		return null;*/
+		
+		
+	}
+	
+	public SignInPage pcpContactUspagebackToPreviousPage(){
+		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+		/*JavascriptExecutor ex  = (JavascriptExecutor)driver;
+		ex.executeScript("args[0].click();", disclaimerbackToPreviousPage);*/
+		pcpContactUsPagebackToPreviousPage.click();
+		if (driver.getTitle().equalsIgnoreCase("UnitedHealthcare Medicare Solutions | Sign In")) {
+			return new SignInPage(driver);
+		}
+		return null;
+		/*if (title.equalsIgnoreCase("UnitedHealthcare Medicare Solutions | Sign In")) {
+			return new BenefitsCoveragePage(driver);
+		}
+		else
+		return null;*/
+		
+		
+	}
+	
+	public SignInPage aboutUspagebackToPreviousPage(){
+		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+		/*JavascriptExecutor ex  = (JavascriptExecutor)driver;
+		ex.executeScript("args[0].click();", disclaimerbackToPreviousPage);*/
+		aboutUsPagebackToPreviousPage.click();
+		if (driver.getTitle().equalsIgnoreCase("UnitedHealthcare Medicare Solutions | Home")) {
+			return new SignInPage(driver);
+		}
+		return null;
+		/*if (title.equalsIgnoreCase("UnitedHealthcare Medicare Solutions | Sign In")) {
+			return new BenefitsCoveragePage(driver);
+		}
+		else
+		return null;*/
+		
+		
+	}
+	
+	public SignInPage aboutUsPCPpagebackToPreviousPage(){
+		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+		/*JavascriptExecutor ex  = (JavascriptExecutor)driver;
+		ex.executeScript("args[0].click();", disclaimerbackToPreviousPage);*/
+		aboutUsPCPPagebackToPreviousPage.click();
+		if (driver.getTitle().equalsIgnoreCase("UnitedHealthcare Medicare Solutions | Sign In")) {
+			return new SignInPage(driver);
+		}
+		return null;
+		/*if (title.equalsIgnoreCase("UnitedHealthcare Medicare Solutions | Sign In")) {
+			return new BenefitsCoveragePage(driver);
+		}
+		else
+		return null;*/
+		
+		
+	}
+	
+	public SignInPage contactusPagebackToPreviousPage(){
+		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+		/*JavascriptExecutor ex  = (JavascriptExecutor)driver;
+		ex.executeScript("args[0].click();", disclaimerbackToPreviousPage);*/
+		contactusPagebackToPreviousPage.click();
+		if (driver.getTitle().equalsIgnoreCase("UnitedHealthcare Medicare Solutions | Home")) {
+			return new SignInPage(driver);
+		}
+		return null;
+		/*if (title.equalsIgnoreCase("UnitedHealthcare Medicare Solutions | Sign In")) {
+			return new BenefitsCoveragePage(driver);
+		}
+		else
+		return null;*/
+		
+		
+	}
+	
+	
 	public PlanSummaryPage navigateToPlanSummary() {
 
 		myPlansTab.click();
-
 		CommonUtility.checkPageIsReady(driver);
 		if (getTitle().equalsIgnoreCase("UnitedHealthcare Medicare Solutions | Plan Summary")) {
 			return new PlanSummaryPage(driver);
@@ -258,12 +578,14 @@ public class AccountHomePage extends UhcDriver {
 	}
 
 	public PharmacySearchPage navigateToPharmacyLocator() {
-
-		pharmacyLocator.click();
+		driver.manage().timeouts().implicitlyWait(300, TimeUnit.SECONDS);
+		driver.navigate().to("https://member.team-a-uhcmedicaresolutions.uhc.com/content/uhcm/home/pharmacy_search.html.html#/Pharmacy-Search-English");
+		driver.manage().timeouts().implicitlyWait(400, TimeUnit.SECONDS);
+		/*pharmacyLocator.click();
 		CommonUtility.waitForPageLoad(driver, pharmacyLocatorHeading, CommonConstants.TIMEOUT_30);
 		if (getTitle().equalsIgnoreCase("UnitedHealthcare Medicare Solutions | Pharmacy Directory")) {
 			return new PharmacySearchPage(driver);
-		}
+		}*/
 		return null;
 	}
 
@@ -587,7 +909,12 @@ public class AccountHomePage extends UhcDriver {
 		return null;
 	}
 
-	public pages.dashboard.member.blayer.ClaimsSummary navigateToClaimsSummaryPage() {
+public PharmacySearchPage navigateToPharmacyLocatorSearchResults() {
+		filterLink.click();
+		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+		return null;
+	}
+public pages.dashboard.member.blayer.ClaimsSummary navigateToClaimsSummaryPage() {
 		// TODO Auto-generated method stub
 		String url = "https://member.team-b-aarpmedicareplans.uhc.com/guest/mirumclaims.html";
 		driver.get(url);
@@ -638,52 +965,162 @@ public BenefitsAndCoveragePage navigateDirectToBnCPag() {
 		return null;
 	}
 
-	public pages.member.bluelayer.ProfilePreferencesPage navigateDirectToPreferencesPage() {
-		driver.navigate().to(PAGE_URL);
-		System.out.println(driver.getTitle());
-		ProfileandPrefLink.click();
-		try {
-			Thread.sleep(30000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		System.out.println(driver.getTitle());
-
-		if (driver.getTitle().equalsIgnoreCase("Preferences")) {
-			 System.out.println("Pass!");
-			return new ProfilePreferencesPage(driver);
-		}
-
+public PharmacySearchPage navigateTomultipleLanguageDropdownResultsearch() {
+		driver.manage().timeouts().implicitlyWait(400, TimeUnit.SECONDS);
+		/*Select select = new  Select(driver.findElement(By.id("lang-select")));
+		select.selectByVisibleText("español");*/
+		//((JavascriptExecutor) driver).executeScript("return document.getElementById('lang-select').selectedIndex = '" + "español" + "'");
+		driver.findElement(By.xpath("//select[@id='lang-select']/option[1]")).click();
+		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 		return null;
 	}
-	
-	public pages.member.bluelayer.ProfilePreferencesPage navigateDirectToProfilePage() {
-		driver.navigate().to(PAGE_URL);
-		System.out.println(driver.getTitle());
-		ProfileLink.click();
-		try {
-			Thread.sleep(30000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		System.out.println(driver.getTitle());
+public AccountHomePage navigateToUHCDisclaimerPage(){
+    driver.navigate().to("https://member."+MRScenario.environment+"-uhcmedicaresolutions.uhc.com/content/uhcm/guest/newdisclaimers.html");
+try{
+    Alert alert = driver.switchTo().alert();
+    alert.accept();
+}
+    
+catch(Exception e)
+{
+    
+}
+            System.out.println("title  "+driver.getTitle());
+    if(driver.getTitle().equalsIgnoreCase("newdisclaimers")){
+            return new AccountHomePage(driver);
+            }
+            return null;
 
-		if (driver.getTitle().equalsIgnoreCase("Profile")) {
-			 System.out.println("Pass!");
-			return new ProfilePreferencesPage(driver);
-		}
-		JavascriptExecutor jse = (JavascriptExecutor)driver;
-		jse.executeScript("window.scrollBy(0,200)", "");
-		try {
-			Thread.sleep(30000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return null;
-	}
+}
 
+public AccountHomePage navigateToAboutUSPage() {
+    driver.navigate().to("https://member."+MRScenario.environment+"-uhcmedicaresolutions.uhc.com/content/uhcm/guest/about-us0.html");
+    try{
+            Alert alert = driver.switchTo().alert();
+            alert.accept();
+    }
+            
+    catch(Exception e)
+    {
+            
+    }
+                    System.out.println("title  "+driver.getTitle());
+            if(driver.getTitle().equalsIgnoreCase("My Benefits & Coverage")){
+                    return new AccountHomePage(driver);
+                    }
+                    return null;
+    
+}
 
+public FormsandresourcesPage navigateToPrescriptionDrugProcesssUms() {
+    driver.navigate().to("https://member.team-a-uhcmedicaresolutions.uhc.com/content/uhcm/home/my-plans/forms-and-resources/new-prescription-drug-transition-process-mapd.html");
+    driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+    return null;
+}
+public FormsandresourcesPage navigateToPrescriptionDrugEobUms() {
+    driver.navigate().to("https://member.team-a-uhcmedicaresolutions.uhc.com/content/uhcm/home/my-plans/claims/explanation-of-benefits-pdp0.html");
+    driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+    return null;
+}
+
+public FormsandresourcesPage navigateToMyPersonalHealthrecord() {
+        myHealthRecordLink.click();
+        driver.manage().timeouts().implicitlyWait(400, TimeUnit.SECONDS);
+        return null;
+}
+
+public FormsandresourcesPage navigateToAppointRepresentative() {
+    driver.manage().timeouts().implicitlyWait(400, TimeUnit.SECONDS);
+    //appointRepresentativeLink.click();
+    driver.navigate().to("https://member.team-a-uhcmedicaresolutions.uhc.com/content/uhcm/home/my-plans/forms-and-resources/appeals-and-grievances-ma.html");
+    driver.manage().timeouts().implicitlyWait(400, TimeUnit.SECONDS);
+    return null;
+}
+
+public FormsandresourcesPage navigateToprivacypolicyUms() {
+    driver.manage().timeouts().implicitlyWait(400, TimeUnit.SECONDS);
+    privacypolicyLink.click();
+    driver.manage().timeouts().implicitlyWait(400, TimeUnit.SECONDS);
+    return null;
+}
+public FormsandresourcesPage navigateToMemberRightResp() {
+    driver.navigate().to("https://member.team-a-uhcmedicaresolutions.uhc.com/content/uhcm/home/my-plans/forms-and-resources/member-rights-and-responsibilities-noaccordion-ma.html");
+    driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+    return null;
+}
+
+public FormsandresourcesPage navigateToappealsandgrievancesUms() {
+    driver.navigate().to("https://member.team-a-uhcmedicaresolutions.uhc.com/content/uhcm/home/my-plans/forms-and-resources/acc-appeals-and-grievances-ma.html");
+    driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+    return null;
+}
+
+public FormsandresourcesPage navigateToBackToPreviousPage() {
+    backtopreviouspageLink.click();
+    driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+    return null;
+}
+
+public FormsandresourcesPage navigateToMedicalTherapyProgUms() {
+    driver.navigate().to("https://member.team-a-uhcmedicaresolutions.uhc.com/content/uhcm/home/my-plans/forms-and-resources/acc-appeals-and-grievances-ma.html");
+    driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+    return null;
+}
+
+public FormsandresourcesPage navigateToSeasonFluInfoUms() {
+    driver.navigate().to("https://member.team-a-uhcmedicaresolutions.uhc.com/content/uhcm/home/my-plans/forms-and-resources/season-flu-shot-info0.html");
+    driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+    return null;
+}
+
+public FormsandresourcesPage navigateToPrescriptionDrugTransitionUms() {
+    driver.navigate().to("https://member.team-a-uhcmedicaresolutions.uhc.com/content/uhcm/home/my-plans/forms-and-resources/acc-prescription-drug-transition-process-pdp.html");
+    driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+    return null;
+}
+
+public FormsandresourcesPage navigateToDisenrollmentRightsUms() {
+    driver.navigate().to("https://member.team-a-uhcmedicaresolutions.uhc.com/content/uhcm/home/my-plans/forms-and-resources/disenrollmentRightsResponsibilitiesPDPacc.html");
+    driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+    return null;
+}
+
+public FormsandresourcesPage navigateToPreferredMailServiceUms() {
+    driver.navigate().to("https://member.team-a-uhcmedicaresolutions.uhc.com/content/uhcm/home/my-plans/mail-service-pharmacy-acc-pdp.html");
+    driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+    return null;
+}
+
+public FormsandresourcesPage navigateToMedicaTherapymanagementtsUms() {
+    driver.navigate().to("https://member.team-a-uhcmedicaresolutions.uhc.com/content/uhcm/home/my-plans/forms-and-resources/medication-therapy-mgmt-noaccordion-mapd.html");
+    driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+    return null;
+}
+
+public pages.member.bluelayer.ProfilePreferencesPage navigateDirectToProfilePage() {
+    driver.navigate().to(PAGE_URL);
+    System.out.println(driver.getTitle());
+    ProfileLink.click();
+    try {
+            Thread.sleep(30000);
+    } catch (InterruptedException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+    }
+    System.out.println(driver.getTitle());
+
+    if (driver.getTitle().equalsIgnoreCase("Profile")) {
+             System.out.println("Pass!");
+            return new ProfilePreferencesPage(driver);
+    }
+    JavascriptExecutor jse = (JavascriptExecutor)driver;
+    jse.executeScript("window.scrollBy(0,200)", "");
+    try {
+            Thread.sleep(30000);
+    } catch (InterruptedException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+    }
+    return null;
+}
 }

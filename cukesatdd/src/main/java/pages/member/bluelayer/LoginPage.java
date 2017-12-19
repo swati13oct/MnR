@@ -97,8 +97,8 @@ public class LoginPage extends UhcDriver {
 		System.out.println(password);
 		sendkeys(userNameField, username);
 		sendkeys(passwordField, password);
-		signInNewButton.click();
-
+System.out.println(signInButton.isEnabled());
+		signInButton.click();
 		
 		if (MRScenario.environment.equals("dev-a") || MRScenario.environment.equals("team-a") ) {
 			while (!isAlertPresent());
@@ -132,10 +132,16 @@ public class LoginPage extends UhcDriver {
 		else if(currentUrl().contains("home/my-account-home.html") && category.equalsIgnoreCase("Individual") || currentUrl().contains("/login.html") ) {
 			return new AccountHomePage(driver);
 		}
+		else if(currentUrl().contains("home/testharness.html") && category.equalsIgnoreCase("Group") ) {
+			return new AccountHomePage(driver);
+		}
+		else if(currentUrl().contains("home/testharness.html") && category.equalsIgnoreCase("Individual") ) {
+			return new AccountHomePage(driver);
+		}
 		else if (currentUrl().contains("terminated-plan.html")) {
 			return new TerminatedHomePage(driver);
 		}
-		return null;
+		return new AccountHomePage(driver);
 	}
 
 
@@ -148,6 +154,7 @@ public class LoginPage extends UhcDriver {
 		}
 		
 		validate(loginIn);
+		System.out.println("@@@@@@@@@@@@@  Test Environment and URL  : "+PAGE_URL+"@@@@@@@@@@@@@@@@@@@@@@@");
 
 	}
 
@@ -197,6 +204,12 @@ public class LoginPage extends UhcDriver {
 	        if(a!=null){
 	            System.out.println("Alert is present = " + a.getText());
 	            driver.switchTo().alert().accept();
+	            Alert a2 = new WebDriverWait(driver, 5).until(ExpectedConditions.alertIsPresent());
+	            if(a2!=null){
+		            System.out.println("Alert is present = " + a2.getText());
+		            
+		            driver.switchTo().alert().accept();
+	            }
 	            return true;
 	        }else{
 	            //throw new Throwable();

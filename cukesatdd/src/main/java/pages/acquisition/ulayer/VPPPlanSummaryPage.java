@@ -26,7 +26,6 @@ import acceptancetests.atdd.util.CommonUtility;
 import atdd.framework.UhcDriver;
 import pages.acquisition.dce.ulayer.DrugCostEstimatorPage;
 import pages.mobile.acquisition.ulayer.VPPRequestSendEmailPage;
-
 /**
  * @author pjaising
  *
@@ -34,24 +33,21 @@ import pages.mobile.acquisition.ulayer.VPPRequestSendEmailPage;
 public class VPPPlanSummaryPage extends UhcDriver {
 
 	@FindBy(xpath = "//a[text()='Passport Flyer (PDF)']")
-	private WebElement PassportFlyerPDF;
-					
-	@FindBy(xpath = ".//*[@id='site-wrapper']/div[4]/div/div[1]/div/div/div/div/div[1]/div/div/div[1]/div[2]/div/div[2]/div[1]/div/span[3]")
-	private WebElement showMaPlans;
+private WebElement PassportFlyerPDF;
+
 	
 	@FindBy(xpath = "//div[@class='maplans_planbutton']/div[2]/div[2]/div[2]")
 	private WebElement hideMaPlans;
-
 	@FindBy(xpath = "//div[@class='planValues']")
 	private WebElement vppplansummarypage;
+	
+	@FindBy(xpath = "(.//*[@class='trigger-closed'])[1]")
+	private WebElement showMaPlans;
 
-	@FindBy(xpath = "//div[@class='medsupplans_planbutton']/div[2]/div/a")
+	@FindBy(xpath = "(.//*[@class='trigger-closed'])[2]")
 	private WebElement showMsPlans;
 	
-					//.//*[@id='site-wrapper']/div[4]/div/div[1]/div/div/div/div/div[1]/div/div/div[1]/div[2]/div/div[2]/div[3]/div/span[3]
-	@FindBy(xpath = ".//*[@id='site-wrapper']/div[4]/div/div[1]/div/div/div/div/div[1]/div/div/div[1]/div[2]/div/div[2]/div[3]/div/span[3]")
-	private WebElement showPdpPlans;
-	
+	@FindBy(xpath = "(.//*[@class='trigger-closed'])[3]")	private WebElement showPdpPlans;	
 	@FindBy(xpath = "//div[@class='pdpplans_planbutton']/div[2]/div[2]/div[2]")
 	private WebElement hidePdpPlans;
 
@@ -148,14 +144,20 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	private WebElement PDPEnrolllink;
 
 	
-	@FindBy (xpath=".//div[@id='maplans_container']/div[3]/div[1]/div/div[1]/div[1]/div/div[1]/div[3]/div/div/span[2]/a")
-	private WebElement MAEnrolllink;
+	@FindBy (xpath=".//*[@id='plan-list-1']/div/div[3]/div/div[1]/div[3]/div/a")
+	private WebElement MAPDEnrolllink;
 	
 	@FindBy (xpath=".//*[@id='next']")
 	private WebElement stayOnthisPopup;
 	
 	@FindBy(name = "emailWidgetForm")
 	private WebElement emailWidgetForm;
+	
+	@FindBy(xpath = "(.//*[contains(text(),'View')])[12]")
+	private WebElement planYear;
+	
+	@FindBy(xpath = "(//span[contains(text(),'Enroll in plan')])[1]")
+	private WebElement enrollNowbtn;
 
 	@FindBy(xpath = ".//*[@id='_pac_logo']")
 	private WebElement reactiveButton;
@@ -274,15 +276,14 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		for (WebElement plan : planElement) {
 			if (plan.getText().contains(planName)) {
 
-				return plan;
+return plan;
 
 			}
 		}
 		return null;
 	}
 
-	@Override
-	public void openAndValidate() {
+	@Override	public void openAndValidate() {
 		validate(showMaPlans);
 		validate(showMsPlans);
 		validate(showPdpPlans);
@@ -739,14 +740,14 @@ public class VPPPlanSummaryPage extends UhcDriver {
 			return true;
 			}
 		}
-		else if(plantype.equals("MA"))
+		else if(plantype.equals("MAPD"))
 		{
-			if(validate(MAEnrolllink))
+			if(validate(MAPDEnrolllink))
 			{
-			MAEnrolllink.click();
+				MAPDEnrolllink.click();
 			driver.navigate().back();
 			togglePlan();
-			MAEnrolllink.click();
+			MAPDEnrolllink.click();
 			driver.navigate().back();
 			return true;
 			}
@@ -768,14 +769,14 @@ public class VPPPlanSummaryPage extends UhcDriver {
 			for (WebElement plan : pdpPlanElement) {
 			if (plan.getText().contains(planName)) {
 			ElementData elementData = new ElementData("id",
-			"enterDrugPDP"); // TODO Re-check
+			"pdpDrugCostEstimatorLink"); // TODO Re-check
 			findChildElement(elementData, plan).click();
 			}
 			}
 			}
 			
 			if (driver.getTitle().equalsIgnoreCase(
-			"Our Medicare Plan Types | AARP® Medicare Plans from UnitedHealthcare®")) {
+			"Our Medicare Plan Types | AARP® Medicare Plans from UnitedHealthcare®") || driver.getTitle().equalsIgnoreCase("estimate-drug-costs")) {
 			return new GetStartedPage(driver);
 			}
 		
@@ -837,11 +838,24 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		return null;
 	}*/
 	
+	public VPPPlanSummaryPage planYear() throws InterruptedException{
+		planYear.click();
+		Thread.sleep(10000);
+		showMaPlans.click();
+		return null;
+		
+	}
+	
 	public VPPRequestSendEmailPage createVPPRequestSendEmailPage(){
 		return new VPPRequestSendEmailPage(driver);
 	}
 
-	public void clickonViewPlans() {
+public VPPPlanSummaryPage enrollNowbtn(){
+		enrollNowbtn.click();
+		if(driver.getTitle().equalsIgnoreCase("Medicare Advantage Enrollment | AARP® Medicare Plans from UnitedHealthcare®"))		
+		System.out.println("Online enrollment tool launched");
+		return null;
+	}public void clickonViewPlans() {
 		try {
 			Thread.sleep(5000);
 		} catch (InterruptedException e) {
@@ -858,7 +872,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 			//ElementData elementData = new ElementData("id", "viewDetailsMA");
 			 element = getSpecificPlanSummary(maPlanElement, planName);
 
-		} else if (planName.contains("PDP")) {
+} else if (planName.contains("PDP")) {
 			//ElementData elementData = new ElementData("id", "viewDetailsPDP");
 			 element = getSpecificPlanSummary(pdpPlanElement, planName);
 		} 
@@ -1014,7 +1028,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		if(currentUrl().contains("/estimate-drug-costs.html#/drug-cost-estimator"))
 			return new DrugCostEstimatorPage(driver);
 		return null;
-}
+	}
 		
 	public boolean validateVPPPlanSummaryPage() {
 

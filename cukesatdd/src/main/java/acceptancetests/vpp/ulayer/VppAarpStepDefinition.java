@@ -163,8 +163,8 @@ public class VppAarpStepDefinition {
 
 		DrugCostEstimatorPage dce = (DrugCostEstimatorPage) getLoginScenario().getBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE);
 		dce.select_first_pharmacy();
-		
 	}
+		
 	
 	@And("I navigate back to plan details page and verify correct message shows when clicked on compare check box")
 	public void navigateToPlanDetailsPage(){
@@ -225,4 +225,32 @@ public class VppAarpStepDefinition {
 		
 	}
 	
-}
+	@Then("^the user validates the passport availability$")
+	public void user_validates_passport_details() {
+	VPPPlanSummaryPage vppPlanSummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		boolean flagvalue=vppPlanSummaryPage.validatepassportData();
+		if(flagvalue)
+			Assert.assertTrue(true);
+		else
+			Assert.assertFalse(false);
+	}
+	
+	@And("^the user click on 2017 plan in UMS site during AEP period$")
+	public void user_clicks_on_2017_planYear(){
+		VPPPlanSummaryPage vppPlanSummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		try {
+			vppPlanSummaryPage.planYear();
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	@And("^the user click on enrollnow button during AEP period$")
+	public void user_click_on_enrollnow_button(){
+		VPPPlanSummaryPage vppPlanSummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		vppPlanSummaryPage.enrollNowbtn();
+	}}

@@ -10,7 +10,7 @@ import acceptancetests.atdd.data.ulayer.Page;
  *
  */
 public class CommonConstants {
-
+	
 	public static final String FLOW_NAME = "registration/planconfirmation";
 
 	public static final String REG_FAILURE_FLOW_NAME = "registration/registrationfailure";
@@ -20,6 +20,14 @@ public class CommonConstants {
 	public static final String PROPERTY_FILE_FOLDER = "/config";
 
 	public static final String PROPERTY_FILE_NAME = "config.properties";
+	
+	public static final String ANDROIDPROPERTY_FILE_NAME = "config_andr.properties";
+    
+    public static final String FIREFOXPROPERTY_FILE_NAME = "config_ff.properties";        
+    
+    public static final String CHROMEPROPERTY_FILE_NAME = "config_chrome.properties";
+    
+    public static final String SAFARIPROPERTY_FILE_NAME = "config_safari.properties";
 
 	public static final String DEFAULT_ENVIRONMENT_CI = "ci";
 
@@ -846,8 +854,7 @@ public class CommonConstants {
 	public static final String DCEstimator = "DCEstimator.json";
 	public static final String SWITCH_GENERIC="switchgeneric.json";
 
-	public static final String NEW_CLAIM_DETAILS_PAGE_DATA = "newClaimDetailsPage.json";
-
+public static final String NEW_CLAIM_DETAILS_PAGE_DATA = "newClaimDetailsPage.json";
 	public static final String NEW_CLAIM_SUMMARY_PAGE_DATA = "newClaimsSummaryPage.json";
 
 	public static final String PERFECTO = "PERFECTO";
@@ -859,6 +866,5 @@ public class CommonConstants {
 
 	public static final String YEAR_BUTTON_VPPPAGE = "yearBtnVppPageExists";
 	
-	
-	
 }
+	

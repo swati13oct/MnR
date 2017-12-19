@@ -29,7 +29,10 @@ import pages.dashboard.member.blayer.DrugCostEstimatorPage;
 import pages.member.ulayer.Rallytool_Page;
 import pages.mobile.acquisition.ulayer.VPPAarpNeedAStepBackWidget;
 import pages.mobile.acquisition.ulayer.VPPAarpNeedHelpWidgetPage;
-
+import acceptancetests.enrollinplan.bluelayer.EnrollInPlanUhcStepDefinition;
+import acceptancetests.planName.bluelayer.PlanNamesStepDefinition;
+import pages.acquisition.ulayer.VPPPlanSummaryPage;
+import pages.mobile.acquisition.ulayer.VPPRequestSendEmailPage;
 public class ResponsivePlanSummaryUhc extends UhcDriver{
 	
 	//US504467
@@ -279,6 +282,9 @@ public class ResponsivePlanSummaryUhc extends UhcDriver{
 		
 		@FindBy(className="footer")
 		private WebElement footerElement;
+
+ @FindBy(xpath = "(//*[@id='enrollMAButton']/span)[1]")
+            	private WebElement enrollNowbtn;
 		
 			private static String CAMPAIGN_URL_1 = MRConstants.CAMPAIGN_PAGE_URL1;
 			
@@ -1829,4 +1835,14 @@ public void comparePlanslnk(){
  					}	
 				return null;
 			}
-			}
+			
+			 public VPPPlanSummaryPage enrollNowbtn(){
+             	driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+         		enrollNowbtn.click();
+         		if(driver.getTitle().equalsIgnoreCase("Medicare Advantage Enrollment | AARP® Medicare Plans from UnitedHealthcare®"))		
+         		System.out.println("Online enrollment tool launched");
+         		driver.navigate().back();
+         		System.out.println("Back to plan summary page");
+         		return null;
+         	}
+}

@@ -38,10 +38,9 @@ public class VPPCommonConstants {
 	public static final String TOGGLEPLANFLAG = "togglePlanFlag";
 	
 	public static final String VPP_PLAN_DOC_PDF_EXPECTED = "planDocsPDFExpectedJson";
-	
-	public static final String FIRST_NAME = "firstname";
+public static final String FIRST_NAME = "firstname";
 
-	public static final String LAST_NAME = "lastname";
+public static final String LAST_NAME = "lastname";
 
 	public static final String EMAIL_ADDRESS = "emailaddress";
 	
@@ -55,6 +54,4 @@ public class VPPCommonConstants {
 
 	public static final String PRESCRIPTIONDRUG = "prescriptiondrug";
 
-	public static final String PLAN_TYPE_CRITERIA = "urlType";
-
-}
+	public static final String PLAN_TYPE_CRITERIA = "urlType";}

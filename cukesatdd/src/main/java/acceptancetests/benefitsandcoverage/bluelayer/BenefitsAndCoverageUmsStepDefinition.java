@@ -14,10 +14,18 @@ import java.util.Set;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.junit.Assert;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.WebDriver;
 import org.skyscreamer.jsonassert.JSONAssert;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.openqa.selenium.By;
+import gherkin.formatter.model.DataTableRow;
+import pages.member.bluelayer.AccountHomePage;
+import pages.member.bluelayer.BenefitsAndCoveragePage;
+import pages.member.bluelayer.BenefitsCoveragePage;
+import pages.member.bluelayer.FormsandresourcesPage;
+import pages.member.bluelayer.LoginPage;
 
 import pages.member.bluelayer.AccountHomePage;
 import pages.member.bluelayer.BenefitsCoveragePage;
@@ -25,6 +33,7 @@ import pages.member.bluelayer.LoginPage;
 import pages.member.bluelayer.BenefitsAndCoveragePage;
 import pages.member.bluelayer.FormsandresourcesPage;
 import pages.member.ulayer.PlanBenefitsCoveragePage;
+import pages.mypcp.SignInPage;
 import acceptancetests.atdd.data.CommonConstants;
 import acceptancetests.atdd.data.member.PageConstants;
 import acceptancetests.benefitsandcoverage.data.PlanBenefitsAndCoverageCommonConstants;
@@ -183,6 +192,10 @@ public class BenefitsAndCoverageUmsStepDefinition {
 			getLoginScenario().saveBean(PageConstants.ACCOUNT_HOME_PAGE,
 					accountHomePage);
 		}
+		else{
+			System.out.println("********** Account Home Page for Bluelayer member not displayed *************");
+			Assert.fail();
+		}
 
 
 	}
@@ -286,7 +299,49 @@ public class BenefitsAndCoverageUmsStepDefinition {
 
 	}
 	
+	@Given("^the user lands on the guest UHC medicare site login page$")
+	public void user_lands_on_ums_site(){
+		WebDriver wd = getLoginScenario().getWebDriver();
+		
 
+		AccountHomePage accountHomePage1 = new AccountHomePage(wd);
+		getLoginScenario().saveBean(PageConstants.ACCOUNT_HOME_PAGE,
+				accountHomePage1);
+		accountHomePage1.navigateToTermsandConditions();
+		
+		
+	}
+	
+	
+	
+	@When("^the user clicks on back to previous page$")
+	public void user_clicks_backToPreviousPage(){
+		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario()
+				.getBean(PageConstants.ACCOUNT_HOME_PAGE);
+		accountHomePage.backToPreviousPage();
+	}
+	
+	@Given("^the user lands on the guest PCP medicare site login page$")
+	public void user_lands_on_pcp_site(){
+		WebDriver wd = getLoginScenario().getWebDriver();
+
+		AccountHomePage accountHomePage1 = new AccountHomePage(wd);
+	
+		AccountHomePage accountHomePage2 =accountHomePage1.navigateToDisclaimerPage();
+		getLoginScenario().saveBean(PageConstants.MYPCP_DISCLAIMER_PAGE,
+				accountHomePage2);
+		
+		
+	}
+	
+	@When("^the user clicks on disclaimer page back to previous page$")
+	public void user_clicks_disclaimerbackToPreviousPage(){
+		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario()
+				.getBean(PageConstants.MYPCP_DISCLAIMER_PAGE);
+		accountHomePage.disclaimerbackToPreviousPage();
+	}
+	
+	
 	@Then("^the user validates plan and member details after login in UHC site$")
 	public void login_validation() {
 		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario()
@@ -753,8 +808,97 @@ public class BenefitsAndCoverageUmsStepDefinition {
 		FormsandresourcesPage formsAndResourcesPage = accountHomePage.navigateTosortingsearchlinkUmsPage();
 	}
 
-@And("^the user validates view and document label$")
-	public void user_validates_view_and_document_label()
+
+
+@Given("^the user lands on the contactus page in PCP site$")
+public void user_lands_on_pcpcontactus_page(){
+	WebDriver wd = getLoginScenario().getWebDriver();
+
+	AccountHomePage accountHomePage1 = new AccountHomePage(wd);
+
+	AccountHomePage accountHomePage2 =accountHomePage1.navigateToPCPContactUSPage();
+	getLoginScenario().saveBean(PageConstants.MYPCP_CONTACT_US_PAGE,
+			accountHomePage2);
+
+
+
+
+
+	
+}
+
+@When("^the user clicks on pcp aboutus page back to previous page$")
+public void user_clicks_PCPaboutus_pagebackToPreviousPage(){
+	AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario()
+			.getBean(PageConstants.MYPCP_ABOUT_US_PAGE);
+	accountHomePage.aboutUsPCPpagebackToPreviousPage();
+}
+
+
+
+
+@Given("^the user lands on the aboutus page in UMS site$")
+public void user_lands_on_aboutus_page(){
+	WebDriver wd = getLoginScenario().getWebDriver();
+
+	AccountHomePage accountHomePage1 = new AccountHomePage(wd);
+
+	AccountHomePage accountHomePage2 =accountHomePage1.navigateToAboutUSPage();
+	getLoginScenario().saveBean(PageConstants.ABOUT_US_PAGE,
+			accountHomePage2);
+	
+	
+}
+
+@When("^the user clicks on pcp contactus page back to previous page$")
+public void user_clicks_pcpContactUSpagebackToPreviousPage(){
+	AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario()
+			.getBean(PageConstants.MYPCP_CONTACT_US_PAGE);
+	accountHomePage.pcpContactUspagebackToPreviousPage();
+}
+
+@Given("^the user lands on the contactus page in UMS site$")
+public void user_lands_on_contactus_page(){
+	WebDriver wd = getLoginScenario().getWebDriver();
+
+	AccountHomePage accountHomePage1 = new AccountHomePage(wd);
+
+	AccountHomePage accountHomePage2 =accountHomePage1.navigateToContactUSPage();
+	getLoginScenario().saveBean(PageConstants.CONTACT_US_PAGE,
+			accountHomePage2);
+	
+	
+}
+
+@When("^the user clicks on contactus page back to previous page$")
+public void user_clicks_contactusPagebackToPreviousPage(){
+	AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario()
+			.getBean(PageConstants.CONTACT_US_PAGE);
+	accountHomePage.contactusPagebackToPreviousPage();
+}
+
+@Given("^the user lands on the disclaimer UHC site login page$")
+public void user_lands_on_uhc_site(){
+	WebDriver wd = getLoginScenario().getWebDriver();
+
+	AccountHomePage accountHomePage1 = new AccountHomePage(wd);
+
+	AccountHomePage accountHomePage2 =accountHomePage1.navigateToUHCDisclaimerPage();
+	getLoginScenario().saveBean(PageConstants.MYUHC_DISCLAIMER_PAGE,
+			accountHomePage2);
+	
+	}
+
+
+@When("^the user clicks on uhc disclaimer page back to previous page$")
+public void user_clicks_uhc_disclaimerbackToPreviousPage(){
+	AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario()
+			.getBean(PageConstants.MYUHC_DISCLAIMER_PAGE);
+	accountHomePage.disclaimerbackToPreviousPage();
+}
+
+
+public void user_validates_view_and_document_label()
 	{
 		BenefitsAndCoveragePage benefitsnCoveragepage = (BenefitsAndCoveragePage) getLoginScenario()
 				.getBean(PageConstants.BENEFITS_AND_COVERAGE_PAGE);
@@ -823,7 +967,11 @@ public class BenefitsAndCoverageUmsStepDefinition {
  /* @Then("^the user view the Drug Copays & Discounts header ")
 	
 
+
+
+
 }
+
 
 @Then("^the user view the Drug Copays & Discounts header ")
 {
@@ -872,15 +1020,9 @@ public void user_validates_lookupdrugsbuuton()
 			.getBean(PageConstants.BENEFITS_AND_COVERAGE_PAGE);
 	benefitsnCoveragepage.validatelookupdrugsbutton();
 }
+
+
+
 }
-
-/*@Then("^the user validates text for the Locate a Pharmacy section")
-{
-}
-
-@Then("^the user validates Locate a Pharmacy button should be visible")
-{
-}*/
-
 	
 
