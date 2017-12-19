@@ -79,7 +79,7 @@ public class RegistrationStartOverErrorPageStepDefinition {
                                 RegistrationInformationPage registrationInformationPage = (RegistrationInformationPage) 
                                                                 getLoginScenario().getBean(PageConstants.REGISTRATION_INFORMATION_PAGE);
                                 Thread.sleep(2000);
-                                registrationInformationPage.scroll();
+                                
                                 registrationInformationPage.clickFutureStartOver();
                                 Thread.sleep(1000);
 
@@ -90,7 +90,7 @@ public class RegistrationStartOverErrorPageStepDefinition {
                                 RegistrationInformationPage registrationInformationPage = (RegistrationInformationPage) 
                                                                 getLoginScenario().getBean(PageConstants.REGISTRATION_INFORMATION_PAGE);
                                 Thread.sleep(2000);
-                                registrationInformationPage.scroll();
+                                
                                 registrationInformationPage.clickInactiveStartOver();
                                 Thread.sleep(2000);
                 }

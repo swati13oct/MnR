@@ -1,6 +1,8 @@
 package pages.dashboard.acquisition;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -39,33 +41,41 @@ public class RegistrationInformationPage extends UhcDriver {
 	 */
 
 	/** The member id field. */
-	@FindBy(xpath = ".//*[@id='member-id']")
+	@FindBy(id = "member-id")
 	private WebElement memberid;
 
 	/** The month field. */
-	@FindBy(xpath = ".//*[@id='register-form']/div[1]/div/div/div/fieldset/fieldset/div/div[1]/span/span[1]/span")
+	@FindBy(id = "month-dropdown")
 	private WebElement monthToEnter;
 	
-	@FindBy(className = "select2-search__field")
+	@FindBy(id = "date-mm-textfield")
 	private WebElement monthToEnterText;
 	
-	@FindBy(id = "select2-date-mm-results")
-	private WebElement monthresults;
+	/**@FindBy(id = "secb-result-fpyl-02")
+	private WebElement monthresults;*/
 	
 	
 	/** The date field. */
-	@FindBy(xpath = ".//*[@id='register-form']/div[1]/div/div/div/fieldset/fieldset/div/div[2]/span/span[1]/span")
+	@FindBy(id = "date-dropdown")
 	private WebElement dayToEnter;
+	
+	@FindBy(id = "date-dd-textfield")
+	private WebElement dateToEnterText;
 		
-	@FindBy(id = "select2-date-dd-results")
-	private WebElement dateresults;
+	/**@FindBy(id = "select2-date-dd-results")
+	private WebElement dateresults;*/
 
 	/** The year field. */
-	@FindBy(xpath = ".//*[@id='register-form']/div[1]/div/div/div/fieldset/fieldset/div/div[3]/span/span[1]/span")
+	
+	/** The date field. */
+	@FindBy(id = "year-dropdown")
 	private WebElement yearToEnter;
 	
-	@FindBy(id = "select2-date-yyyy-results")
-	private WebElement yearresults;
+	@FindBy(id = "date-yyyy-textfield")
+	private WebElement yearToEnterText;
+	
+	/*@FindBy(id = "select2-date-yyyy-results")
+	private WebElement yearresults;*/
 
 	/** The cancel button. */
 	@FindBy(className = "btn btn--secondary")
@@ -400,16 +410,9 @@ public class RegistrationInformationPage extends UhcDriver {
 	public WebElement getMemberID() {
 		return memberid;
 	}
-
-	/**
-	 * Select month.
-	 */
-	/*public void selEnterMonth(String s) {
-		dropdown1.selectByValue("s");
-	}*/
      
 	/**
-	 * Enter day.
+	 * Enter month.
 	 */
 	public void enterMonth(String month) {
 		sendkeys(monthToEnterText, month);
@@ -424,54 +427,53 @@ public class RegistrationInformationPage extends UhcDriver {
 	/**
 	 * @return the month to enter
 	 */
-	public WebElement getEnterMonthText() {
+/*	public WebElement getEnterMonthText() {
 		return monthToEnterText;
-	}
+	}*/
 	
-	public void clickMonthresults()
+	public void pressEnterMonth()
 	{
-		monthresults.click();
+		monthToEnterText.sendKeys(Keys.ENTER);
 		
 	}
 
+	 /* Enter day.*/
+	
 	/**
 	 * @return the day to enter
 	 */
 	public WebElement getEnterDay() {
 		return dayToEnter;
-	}  
+	}
 	 
-	/**
-	 * Select day.
-	 */
-	/*public void selEnterDay(String s) {
-		dropdown2.selectByValue("s");
-	}*/
-		
-	public void clickDayResults()
+	public void enterDay(String day) {
+		sendkeys(dateToEnterText, day);
+	} 
+	 
+	public void pressEnterDay()
 	{
-		dateresults.click();
+		dateToEnterText.sendKeys(Keys.ENTER);
 		
 	}
-
+  
+	/*
+	 * enter year
+	 */
+	
 	/**
-	 * @return the year to enter
+	 * @return the month to enter
 	 */
 	public WebElement getEnterYear() {
 		return yearToEnter;
-	}  
-	/***
-	 * 
-	 * select year
-	 */
-	/*public void selEnterYear(String s) {
-		dropdown3.selectByValue("s");
-	}*/
+	}
 	
-   
-	public void clickYearResults()
+	public void enterYear(String year) {
+		sendkeys(yearToEnterText, year);
+	} 
+
+	public void pressEnterYear()
 	{
-		yearresults.click();
+		yearToEnterText.sendKeys(Keys.ENTER);
 		
 	}
 	/**

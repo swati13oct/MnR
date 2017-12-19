@@ -67,7 +67,8 @@ public class RegistrationDashboardStepDefinition {
 		// navigate to registration page
 		RegistrationInformationPage registrationInformationPage = (RegistrationInformationPage) getLoginScenario()
 				.getBean(PageConstants.REGISTRATION_INFORMATION_PAGE);
-		Thread.sleep(2000);
+		registrationInformationPage.scroll();
+		Thread.sleep(4000);
 		registrationInformationPage.enterMemberID(memberId);
 	}
 
@@ -97,23 +98,24 @@ public class RegistrationDashboardStepDefinition {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		Thread.sleep(2000);
-		registrationInformationPage.scroll();
+		
+		
 		Thread.sleep(2000);
 		registrationInformationPage.getEnterMonth().click();
 		registrationInformationPage.enterMonth(month);
 		Thread.sleep(1000);
-		registrationInformationPage.clickMonthresults();
-		Thread.sleep(2000);
-		registrationInformationPage.getEnterDay().click();
-		registrationInformationPage.enterMonth(day);
+		registrationInformationPage.pressEnterMonth();
 		Thread.sleep(1000);
-		registrationInformationPage.clickDayResults();
+		registrationInformationPage.getEnterDay().click();
+		registrationInformationPage.enterDay(day);
+		Thread.sleep(2000);
+		registrationInformationPage.pressEnterDay();
 		Thread.sleep(2000);
 		registrationInformationPage.getEnterYear().click();
-		registrationInformationPage.enterMonth(year);
+		registrationInformationPage.enterYear(year);
 		Thread.sleep(1000);
-		registrationInformationPage.clickYearResults();
+		registrationInformationPage.pressEnterYear();
+		
 		
 	}
 

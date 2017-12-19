@@ -246,4 +246,7 @@ public static final String WELLSFARGO_HOME_PAGE_URL = "https://www."+MRScenario.
 public static final String BLUE_LAYER_TEST_HARNESS_LINK = "https://member."+MRScenario.environment+"-uhcmedicaresolutions.uhc.com/content/uhcm/home/testharness.html";
 public static final String TEAMB_TIME_ADMIN_PAGE_URL = "http://apsrt0245.uhc.com:9083/DCERestWAR/dcerest/timeAdmin";
 public static final String U_LAYER_TEST_HARNESS_LINK = "https://member."+MRScenario.environment+"-aarpmedicareplans.uhc.com/content/aarpm/home/testharness.html";
+public static final String TESTHARNESSLOGINPAGE = "https://member."+MRScenario.environment+"-aarpmedicareplans.uhc.com/content/aarpm/home/testharness.html";
+public static final String SIGNINPAGE_MEMREDESIGN = "https://"+MRScenario.environment+"-medicare.uhc.com/";
+//stage
 }

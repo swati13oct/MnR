@@ -2,7 +2,7 @@
 Feature: To validate forms and resources page in dashboard site
 #Scenarios written for blue layer - Later will be modified to dashboard once dashboard site is set up
   Scenario Outline: 
-    Given registered member lands on forms and resources in member blue Layer Site
+    Given registered member lands on forms and resources on member redesign Site
     When member click on member sign in link
     And the member enters userId and member enter password
       | USER_ID  | <userId>   |
