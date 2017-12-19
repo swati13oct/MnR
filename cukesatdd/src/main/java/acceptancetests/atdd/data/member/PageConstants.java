@@ -154,7 +154,6 @@ public class PageConstants {
 	public static final String RALLY_TOOL_PAGE = "rallytool";
 
 	public static final String ACQUISITION_HOME_PAGE = "acquisitionhomepage";
-
 	
 
 	public static final String VPP_PLAN_SUMMARY_PAGE = "plansummaryPage";
@@ -173,6 +172,10 @@ public class PageConstants {
 	
 	public static final String MYPCP_SIGN_IN_PAGE = "pcpSignInPage";
 	
+	public static final String MYPCP_DISCLAIMER_PAGE = "pcpDisclaimerPage";
+	
+	public static final String MYUHC_DISCLAIMER_PAGE = "uhcDisclaimerPage";	
+	
 	public static final String MYPCP_ABOUT_US_PAGE = "pcpAboutUsPage";
 	
 	public static final String MYPCP_CONTACT_US_PAGE = "pcpContactUsPage";
@@ -188,6 +191,10 @@ public class PageConstants {
 	public static final String REGISTRATION_ERROR_PAGE = "regErrorPage";
 
 	public static final String DASHBOARD_PAYMENT_HISTORY_PAGE = "dashboardPaymentOverview";
+	
+	public static final String AARP_DISCLAIMER_PAGE = "disclaimerpage";
+	
+	public static final String ABOUT_US_PAGE = "aboutus";
 
 	public static final String NEW_CLAIMS_SUMMARY_PAGE = "newClaimsSummaryPage";	
 	
@@ -211,4 +218,5 @@ public class PageConstants {
 	public static final String MEM_REDESIGN_ACCOUNT_HOME_PAGE = "memberRedesignAccountHomePage";
 	
 	public static final String MEM_REDESIGN_HEALTH_AND_WELLNESS_PAGE = "memberRedesignHealthAndWellnessPage";
+
 }

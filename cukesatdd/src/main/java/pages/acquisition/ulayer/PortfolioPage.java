@@ -1,3 +1,7 @@
+
+
+
+
 package pages.acquisition.ulayer;
 
 import java.util.List;
@@ -72,6 +76,26 @@ public class PortfolioPage extends UhcDriver {
    // @FindBy(xpath="html/body/div[4]/div[2]/div[1]/div/div/div/div/div[1]/div/div/div/div[2]/div/div/form/button")
     @FindBy(className="zip-button")
 	private WebElement Findplansbuttonportfolio;
+
+@FindBy(id="compare-plan-1")
+    private WebElement chkBoxAddtoCompare1;
+    
+    @FindBy(id="compare-plan-2")
+    private WebElement chkBoxAddtoCompare2;
+    
+    @FindBy(id="compare-plan-3")
+    private WebElement chkBoxAddtoCompare3;
+    
+    @FindBy(id="compare-plan-4")
+    private WebElement chkBoxAddtoCompare4;
+    
+   
+    
+    @FindBy(className="single-added-text show")
+    private WebElement onePlanAdded;
+    
+    @FindBy(className="multiple-added-text show")
+    private WebElement twoPlanAdded;
 
 	//private static String PAGE_URL = MRConstants.AARP_OUR_PLANS_URL;
 	private static String PAGE_URL = MRConstants.PORTFOLIO_PAGE_URL;
@@ -250,3 +274,50 @@ public class PortfolioPage extends UhcDriver {
 
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

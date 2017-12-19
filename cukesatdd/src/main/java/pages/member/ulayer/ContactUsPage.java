@@ -120,9 +120,21 @@ public class ContactUsPage extends UhcDriver{
 		String fileName = CommonConstants.CONTACT_US_PAGE_DATA;
 		contactUs = CommonUtility.readPageData(fileName,
 				CommonConstants.PAGE_OBJECT_DIRECTORY_ULAYER_MEMBER);
-		openAndValidate();
+		//openAndValidate();
 		
 	}
+	
+	public boolean Validate_Single_Tab_SHIP(){
+		List<WebElement> PlanTabs = driver.findElements(By.xpath("//a[contains(text(),'Supplemental  Insurance Plans')]"));
+		System.out.println("No of tabs: "+PlanTabs.size());
+		if(PlanTabs.size()>1){
+			return false;
+		}
+		else{
+			return true;
+		}
+	}
+
 
 	@Override
 	public void openAndValidate() {

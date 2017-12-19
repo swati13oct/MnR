@@ -10,10 +10,9 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import atdd.framework.UhcDriver;
+import atdd.framework.UhcDriver;
 import pages.acquisition.bluelayer.PlanSelectorPage;
-import pages.acquisition.bluelayer.ResponsivePlanSummaryUhc;
-
-public class BLayerPlanComparePage extends UhcDriver {
+import pages.acquisition.bluelayer.ResponsivePlanSummaryUhc;public class BLayerPlanComparePage extends UhcDriver {
 	
 	@FindBy(xpath = ".//*[@id='plan-list-1']/div/div[3]/div/div[1]/div[3]/div/div/span[1]/label")
 	private WebElement Plan2HMO;
@@ -251,5 +250,3 @@ public BLayerPlanComparePage SelectThePlan() throws InterruptedException {
 	}
 	
 } 
-
-

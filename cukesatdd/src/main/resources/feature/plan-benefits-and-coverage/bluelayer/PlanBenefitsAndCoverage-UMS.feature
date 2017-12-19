@@ -575,7 +575,7 @@ Examples:
 | MAPD     | Group    |
 | MA     | Group    |
 #| PDP      | Group    |
-| SSUP     | Group    |
+#| SSUP     | Group    |
 
 
 @hospital       
@@ -695,6 +695,45 @@ Then the user validates the content on mydocument page
 Examples:
         |planType  |Member Type     |
         |MAPD        |Individual    | 
+        
+@termsandConditions        
+Scenario: Verify Terms and Conditions in ums site
+Given the user lands on the guest UHC medicare site login page
+When the user clicks on back to previous page
+
+@disclaimerpage       
+Scenario: Verify disclaimer text page in PCP medicare site
+Given the user lands on the guest PCP medicare site login page
+When the user clicks on disclaimer page back to previous page
+
+@contactus
+Scenario: Verify contactus page in UMS site
+Given the user lands on the contactus page in UMS site
+When the user clicks on contactus page back to previous page
+
+@PCPcontactus
+Scenario: Verify PCP contactus page in PCP site
+Given the user lands on the contactus page in PCP site
+When the user clicks on pcp contactus page back to previous page
+
+@PCPaboutus
+Scenario: Verify PCP aboutus page in PCP site
+Given the user lands on the aboutus page in PCP site
+When the user clicks on pcp aboutus page back to previous page
+
+@aboutus
+Scenario: Verify aboutus page in UMS site
+Given the user lands on the aboutus page in UMS site
+When the user clicks on aboutus page back to previous page
+
+@UHCdisclaimerpage       
+Scenario: Verify disclaimer text page in UHC site
+Given the user lands on the disclaimer UHC site login page
+When the user clicks on uhc disclaimer page back to previous page
+
+
+
+
 
 
 
