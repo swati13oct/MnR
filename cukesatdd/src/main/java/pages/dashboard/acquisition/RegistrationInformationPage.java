@@ -1013,7 +1013,7 @@ public class RegistrationInformationPage extends UhcDriver {
      */
     public void scroll() {
     	JavascriptExecutor jse = (JavascriptExecutor)driver;
-    	jse.executeScript("window.scrollBy(0,350)", "");
+    	jse.executeScript("window.scrollBy(0,200)", "");
     	
     }
 	
