@@ -100,7 +100,7 @@ public class DashBoardFormsAndResourcesStepDefinition {
 	
 	@And("^click on the forms and resource link and navigate to forms and resource page$")
 	public void clickOnFormAndResourcesLink() {
-		FormsAndResourcesPage formsAndResourcesPage = (FormsAndResourcesPage) getLoginScenario().getBean(PageConstants.DASHBOARD_FORMS_AND_RESOURCES_PAGE);
+		RallyDashboard formsAndResourcesPage = (FormsAndResourcesPage) getLoginScenario().getBean(PageConstants.DASHBOARD_FORMS_AND_RESOURCES_PAGE);
 		formsAndResourcesPage.clickonFormsAndResourcesLinkOnTestHarness();
 	}
 	
@@ -156,6 +156,111 @@ public class DashBoardFormsAndResourcesStepDefinition {
 					.get(0), memberAttributesRow.get(i).getCells().get(1));
 		}
 		String renewMagazine = memberAttributesMap.get("RENEW_MAGAZINE_SECTION");
+		String isRenewMagazineVisible = isButtonVisible(formsAndResourcesPage.getRenewMagazineSection()) ?"YES": "NO";
+		Assert.assertEquals(renewMagazine, isRenewMagazineVisible);
+		
+	}
+	
+	@Then("^validate plan materials section$")
+	public void validatePlanMaterialSection(DataTable givenAttributes) {
+		FormsAndResourcesPage formsAndResourcesPage = (FormsAndResourcesPage) getLoginScenario().getBean(PageConstants.DASHBOARD_FORMS_AND_RESOURCES_PAGE);
+		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells()
+					.get(0), memberAttributesRow.get(i).getCells().get(1));
+		}
+		String  = memberAttributesMap.get("RENEW_MAGAZINE_SECTION");
+		String isRenewMagazineVisible = isButtonVisible(formsAndResourcesPage.getRenewMagazineSection()) ?"YES": "NO";
+		Assert.assertEquals(renewMagazine, isRenewMagazineVisible);
+		
+	}
+	
+	@And("^click on the order plan materials and view temporary id card link$")
+	public void clicklinksonplanmaterials(DataTable givenAttributes) {
+		FormsAndResourcesPage formsAndResourcesPage = (FormsAndResourcesPage) getLoginScenario().getBean(PageConstants.DASHBOARD_FORMS_AND_RESOURCES_PAGE);
+		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells()
+					.get(0), memberAttributesRow.get(i).getCells().get(1));
+		}
+		String renewMagazine = memberAttributesMap.get("RENEW_MAGAZINE_SECTION");
+		String isRenewMagazineVisible = isButtonVisible(formsAndResourcesPage.getRenewMagazineSection()) ?"YES": "NO";
+		Assert.assertEquals(renewMagazine, isRenewMagazineVisible);
+		
+	}
+	
+	@Then("^validate that english is default language in dropdown$")
+	public void validatePlanMaterialSection(DataTable givenAttributes) {
+		FormsAndResourcesPage formsAndResourcesPage = (FormsAndResourcesPage) getLoginScenario().getBean(PageConstants.DASHBOARD_FORMS_AND_RESOURCES_PAGE);
+		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells()
+					.get(0), memberAttributesRow.get(i).getCells().get(1));
+		}
+		String  = memberAttributesMap.get("RENEW_MAGAZINE_SECTION");
+		String isRenewMagazineVisible = isButtonVisible(formsAndResourcesPage.getRenewMagazineSection()) ?"YES": "NO";
+		Assert.assertEquals(renewMagazine, isRenewMagazineVisible);
+		
+	}
+	
+	@Then("^validate the anoc section$")
+	public void validatePlanMaterialSection(DataTable givenAttributes) {
+		FormsAndResourcesPage formsAndResourcesPage = (FormsAndResourcesPage) getLoginScenario().getBean(PageConstants.DASHBOARD_FORMS_AND_RESOURCES_PAGE);
+		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells()
+					.get(0), memberAttributesRow.get(i).getCells().get(1));
+		}
+		String  anocsection = memberAttributesMap.get("ANOCSECTION");
+		String isANOCSECTIONVisible = isButtonVisible(formsAndResourcesPage.getANOCSection()) ?"YES": "NO";
+		Assert.assertEquals(renewMagazine, isRenewMagazineVisible);
+		
+	}
+	
+	@And("^change the language in the language dropdown$")
+	public void validatePlanMaterialSection(DataTable givenAttributes) {
+		FormsAndResourcesPage formsAndResourcesPage = (FormsAndResourcesPage) getLoginScenario().getBean(PageConstants.DASHBOARD_FORMS_AND_RESOURCES_PAGE);
+		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells()
+					.get(0), memberAttributesRow.get(i).getCells().get(1));
+		}
+		String  = memberAttributesMap.get("RENEW_MAGAZINE_SECTION");
+		String isRenewMagazineVisible = isButtonVisible(formsAndResourcesPage.getRenewMagazineSection()) ?"YES": "NO";
+		Assert.assertEquals(renewMagazine, isRenewMagazineVisible);
+		
+	}
+  
+	@Then("^validate the annual directories section$")
+	public void validatePlanMaterialSection(DataTable givenAttributes) {
+		FormsAndResourcesPage formsAndResourcesPage = (FormsAndResourcesPage) getLoginScenario().getBean(PageConstants.DASHBOARD_FORMS_AND_RESOURCES_PAGE);
+		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells()
+					.get(0), memberAttributesRow.get(i).getCells().get(1));
+		}
+		String  = memberAttributesMap.get("RENEW_MAGAZINE_SECTION");
+		String isRenewMagazineVisible = isButtonVisible(formsAndResourcesPage.getRenewMagazineSection()) ?"YES": "NO";
+		Assert.assertEquals(renewMagazine, isRenewMagazineVisible);
+		
+	}
+	
+	@And("^validate that the forms and resources section is displayed$")
+	public void validateFNRSection(DataTable givenAttributes) {
+		FormsAndResourcesPage formsAndResourcesPage = (FormsAndResourcesPage) getLoginScenario().getBean(PageConstants.DASHBOARD_FORMS_AND_RESOURCES_PAGE);
+		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells()
+					.get(0), memberAttributesRow.get(i).getCells().get(1));
+		}
+		String  = memberAttributesMap.get("RENEW_MAGAZINE_SECTION");
 		String isRenewMagazineVisible = isButtonVisible(formsAndResourcesPage.getRenewMagazineSection()) ?"YES": "NO";
 		Assert.assertEquals(renewMagazine, isRenewMagazineVisible);
 		
