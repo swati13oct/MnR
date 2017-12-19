@@ -16,7 +16,7 @@ import pages.acquisition.bluelayer.ResponsivePlanSummaryUhc;
 public class BLayerPlanComparePage extends UhcDriver {
 	
 //	@FindBy(xpath = ".//*[@id='plan-list-1']/div/div[3]/div/div[1]/div[3]/div/div/span[1]/label")
-	@FindBy(xpath = "(.//label[contains(text(),'Add to compare')])[2]")
+	@FindBy(xpath = "(.//label[contains(text(),'Add to compare')])[1]")
 	private WebElement Plan2HMO;
 	
 //	@FindBy(xpath = ".//*[@id='plan-list-1']/div/div[3]/div/div[2]/div[3]/div/div/span[1]/label")
@@ -26,13 +26,14 @@ public class BLayerPlanComparePage extends UhcDriver {
 /*	@FindBy(xpath = ".//*[@id='plan-list-1']/div/div[2]/div/div[2]/div[3]/div/div/span[3]/a")
 	private WebElement ComparePlansLink;*/
 	
-	@FindBy(linkText = "Compare plans")
+	//@FindBy(linkText = "Compare plans")
+	@FindBy(xpath = "//*[@id='plan-list-1']/div/div[2]/div/div[2]/div[3]/div/div/span[3]/a")
 	private WebElement ComparePlansLink;
 	/*
 	@FindBy(xpath = ".//*[@id='plan-list-1']/div/div[2]/div/div[1]/div[3]/div/div/span[3]/a")
 	private WebElement ComparePlanLink;	*/
 	
-	@FindBy(linkText = "Compare plans")
+	@FindBy(xpath = "//*[@id='plan-list-1']/div/div[2]/div/div[1]/div[3]/div/div/span[3]/a")
 	private WebElement ComparePlanLink;
 	
 	@FindBy(xpath = ".//*[@id='site-wrapper']/div[4]/div/div/div/div/div/div/div/div/div[1]/div[1]/div/div[1]/a")
@@ -62,7 +63,7 @@ public class BLayerPlanComparePage extends UhcDriver {
 	@FindBy(xpath = ".//*[@id='fixTable']/tbody/tr[25]/td[2]/span")
 	private WebElement AnnualDeductibleValue;	
 
-	@FindBy(linkText="Enter drug information")
+	@FindBy(linkText="Estimate drug costs")
 	private WebElement DCEText;
 	
 	@FindBy(linkText="Look up your doctor")
@@ -77,13 +78,13 @@ public class BLayerPlanComparePage extends UhcDriver {
 	@FindBy(xpath=".//*[@id='fixTable']/tbody/tr[7]/td[2]/div/div/span[1]")
 	private WebElement InPatientHospitalStay;
 	
-	@FindBy(xpath="//*[@id='fixTable']/tbody/tr[8]/td[3]/div[1]/div/span[2]/sup")
+	@FindBy(xpath="//*[@id='fixTable']/tbody/tr[8]/td[2]/div[1]/div/span[2]/sup")
 	private WebElement Superscript;
 
 	@FindBy(id="8075b5b6-838a-4c09-822f-ef18ce42baab_toolTip")
 	private WebElement toolTip;
 	
-	@FindBy(xpath="//*[@id='fixTable']/tbody/tr[8]/td[3]/div[1]/div/span[1]")
+	@FindBy(xpath="//*[@id='fixTable']/tbody/tr[8]/td[2]/div[1]/div/span[1]")
 	private WebElement TierValue;
 	
 	public BLayerPlanComparePage(WebDriver driver) {
@@ -102,12 +103,14 @@ public class BLayerPlanComparePage extends UhcDriver {
 		
 		Thread.sleep(7000);
 		JavascriptExecutor jse = (JavascriptExecutor)driver;
-		jse.executeScript("window.scrollBy(0,100)", "");
-		Plan2HMO.click();		
-		jse.executeScript("window.scrollBy(0,300)", "");
-		Plan1HMO.click();
-		jse.executeScript("window.scrollBy(0,300)", "");
+		jse.executeScript("window.scrollBy(0,550)", "");
+		Thread.sleep(2000);
+		Plan2HMO.click();	
 		Thread.sleep(1000);
+		jse.executeScript("window.scrollBy(0,750)", "");
+		Thread.sleep(1000);
+		Plan1HMO.click();
+		Thread.sleep(1000);			
 		ComparePlansLink.click();
 		Thread.sleep(5000);
 		 if(driver.getTitle().contains("Our Medicare Plan Types")){
@@ -120,8 +123,13 @@ public class BLayerPlanComparePage extends UhcDriver {
 	
 public BLayerPlanComparePage SelectThePlan() throws InterruptedException {
 		
-		Thread.sleep(3000);
-		Plan2HMO.click();		
+		Thread.sleep(5000);
+		JavascriptExecutor jse = (JavascriptExecutor)driver;
+		jse.executeScript("window.scrollBy(0,550)", "");
+		Thread.sleep(2000);
+		Plan2HMO.click();			
+		Thread.sleep(1000);
+		jse.executeScript("window.scrollBy(0,100)", "");
 		Thread.sleep(1000);
 		ComparePlanLink.click();
 		Thread.sleep(5000);
@@ -244,9 +252,11 @@ public BLayerPlanComparePage SelectThePlan() throws InterruptedException {
 	public BLayerPlanComparePage OutPatientValidation() throws InterruptedException {
 		Thread.sleep(7000);				
 		JavascriptExecutor jse = (JavascriptExecutor)driver;
-		jse.executeScript("window.scrollBy(0,200)", "");		
-		Thread.sleep(1000);		
-		if(Superscript.getText().trim().contentEquals("2") && TierValue.getText().contains("Tier 2")){
+		jse.executeScript("window.scrollBy(0,250)", "");		
+		Thread.sleep(1000);	
+		System.out.println(Superscript.getText());
+		if(Superscript.getText().trim().contentEquals("2") && TierValue.getText().contains("Tier 2")){			
+			System.out.println("Content matched");
 			 return new BLayerPlanComparePage(driver);
 		 }
 		 return null;

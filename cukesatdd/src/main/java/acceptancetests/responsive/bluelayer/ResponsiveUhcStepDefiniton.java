@@ -163,7 +163,7 @@ public class ResponsiveUhcStepDefiniton {
 	}
 
 	@Then("^the user navigates to the TeamC plan type$")
-	public void planType_details_in_TeamC_aarp_site(DataTable givenAttributes) {
+	public void planType_details_in_TeamC_aarp_site(DataTable givenAttributes) throws InterruptedException {
 		
 		WebDriver wd = getLoginScenario().getWebDriver();
 		wd.navigate().refresh();

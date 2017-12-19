@@ -34,6 +34,7 @@ public abstract class UhcDriver {
 		System.out.println("**************** "+driver.getCurrentUrl());
 		driver.get(url);
 		System.out.println("++++++++++++++++ "+driver.getCurrentUrl());
+		//driver.manage().window().maximize();
 	}
 
 	public UhcDriver(WebDriver driver) {

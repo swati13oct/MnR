@@ -3,6 +3,7 @@ package pages.acquisition.bluelayer;
 import java.util.List;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -28,10 +29,14 @@ public class PortfolioTeamCUhc extends UhcDriver {
 	@Override
 	public void openAndValidate() {
 		start(PAGE_URL);
+		
 	}
 
 	public ResponsivePlanSummaryUhc searchPlans(String zipcode, String County) throws InterruptedException {
 		Thread.sleep(5000);
+		JavascriptExecutor jse = (JavascriptExecutor)driver;
+		jse.executeScript("window.scrollBy(0,100)", "");
+		Thread.sleep(2000);
 		sendkeys(zipCodeField, zipcode);
 		zipCodeField.sendKeys(Keys.ENTER);
 		// remove thread once page is stable
