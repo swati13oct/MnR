@@ -3,13 +3,12 @@
  */
 package pages.member.ulayer;
 
-import java.util.List;
-import java.util.Map;
+import java.util.List;import java.util.Map;
 
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
+import org.junit.Assert;
+import org.openqa.selenium.By; import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
@@ -105,16 +104,24 @@ public class ContactUsPage extends UhcDriver{
 	private JSONObject secureemailwidgetDataJson;
 	
 	public JSONObject contactUsJson;
+	@FindBy(xpath="//*[@id='secureWidget']/div[2]/p[4]/a/span")
+	private WebElement getstartedlink;
 	
+	@FindBy(xpath="//*[@id='modelContent']/div[1]")
+	private WebElement emialUslink;
+	
+	
+	@FindBy(xpath="//*[@id='contActButton']")
+	private WebElement continuelink;
+	
+	@FindBy(css="#secureWidget")
+	private WebElement securewidgetlink;
 	@FindBy(xpath="//*[@id='question-btn']")
 	private WebElement fillOutFormButton;	
 	
 	@FindBy(css="h2.plan.margin-large>span")
 	private WebElement pdpHeader;	
-	
-	
-	
-	public ContactUsPage(WebDriver driver) {
+		public ContactUsPage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
 		String fileName = CommonConstants.CONTACT_US_PAGE_DATA;
@@ -172,14 +179,28 @@ public class ContactUsPage extends UhcDriver{
 		if (securewidget.isDisplayed())
 		{
 			System.out.println("Secure widget is displayed");
+			Assert.assertTrue("Secure Email widget is displayed", securewidget.isDisplayed());
+			
 		}
 		else
 		{
 			System.out.println("Secure widget is not  displayed");
 		}
 	}
+public void secureEmailWidgetDisplayed(){
+		
+			Assert.assertTrue("Secure Email widget is displayed", securewidget.isDisplayed());
+			
+		
+	}
 	
-	public void validateEmailWidgetSection()
+	public void secureEmailWidgetNonDisplayedCheck(){
+			/*Assert.assertEquals("display: block;", securewidgetlink.getAttribute("style"));*/
+		
+			Assert.assertTrue("Secure Email widget not displayed", !securewidget.isDisplayed());
+			
+	}
+public void validateEmailWidgetSection()
 	{
 		if (getStartedButton.isDisplayed())
 		{
@@ -626,9 +647,7 @@ public class ContactUsPage extends UhcDriver{
 		{
 			System.out.println("send us Question is not  displayed");
 		}
-	}
-
-	public JSONObject getsecurewidget() {
+	}	public JSONObject getsecurewidget() {
 		String fileName = CommonConstants.AARPM_SECURE_EMAIL_DATA;
 		secureemailwidgetData = CommonUtility.readPageData(fileName,
 				CommonConstants.PAGE_OBJECT_DIRECTORY_ULAYER_MEMBER);

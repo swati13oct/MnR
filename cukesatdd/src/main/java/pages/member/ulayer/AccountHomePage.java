@@ -38,12 +38,17 @@ import atdd.framework.UhcDriver;
 
 import pages.dashboard.member.ulayer.ClaimSummarypage;
 
+import pages.member.ulayer.BenefitsAndCoveragePage;
+
 /**
  * @author pjaising
  */
 
 public class AccountHomePage extends UhcDriver {
 
+	// Page URL
+    private static String PAGE_URL = MRConstants.TESTHARNESSU_URL;
+    //private static String PAGE_URL = MRConstants.TESTHARNESS_URL;
 	@FindBy(className = "fd_myPlans")
 	private WebElement myPlansTab;
 
@@ -208,7 +213,8 @@ public class AccountHomePage extends UhcDriver {
 
 	@FindBy(linkText = "Date")
 	private WebElement dateLink;
-@FindBy(xpath = "//*[@id='saver-checkbox']/label")
+	
+	@FindBy(xpath = "//*[@id='saver-checkbox']/label")
 	private WebElement filterLink;
 	
 	@FindBy(xpath = "//a[contains(@href,'pharmacyDirectory')]")
@@ -230,12 +236,49 @@ public class AccountHomePage extends UhcDriver {
 	private WebElement FeedbackModal;
 
 @FindBy(xpath = "//div[@class='claim-results']//table[not (contains(@class,'ng-hide'))]//tbody//tr[2]//a[text()='MORE INFO']")
-	private WebElement claimstablemoreinfolink;
+private WebElement claimstablemoreinfolink;
+
+	@FindBy(xpath = "//*[@id='secureMessagingApp']/a")
+	private WebElement envelopeId;
+	
+	@FindBy(linkText = "Go to benefits and coverage page")
+	private WebElement BnClink;
+	
+	@FindBy(linkText = "Go to benefits and coverage page")
+	private WebElement BnClink2;
+	
+	@FindBy(linkText = "Go to profile page")
+	private WebElement ProfileandPrefLink;
+
+
+
+
+
+
+
+
+
+
+
+
+	
 
 	@FindBy (css = ".claimDetTableMainSection")
-	private WebElement claimDetTableMainSection;@FindBy(xpath = "//*[@classname='gogreen_reminerbot']/following-sibling::a")
-	private WebElement GoGreenPopUp;
+	private WebElement claimDetTableMainSection;
+	
+	@FindBy(id = "plan_box")
+    private WebElement planbox;
 
+		@FindBy(id = "welcomeText")
+	private WebElement welcomeText;
+	
+	@FindBy(xpath= ".//*[@id='fd_myMenu']/a")
+	private WebElement fd_myMenu;
+	
+	@FindBy(id = "disclosure_link")
+	private WebElement ProfilenPrefernces;
+	
+	
 	@FindBy(id = "emailOption1")
 	private WebElement EmailPopUp;
 	
@@ -294,11 +337,10 @@ public class AccountHomePage extends UhcDriver {
 		PageFactory.initElements(driver, this);
 		String fileName = CommonConstants.ACCOUNT_HOME_PAGE_DATA;
 		myAccountHome = CommonUtility.readPageData(fileName, CommonConstants.PAGE_OBJECT_DIRECTORY_ULAYER_MEMBER);
-		if(!currentUrl().contains("/testharness.html"))
+if(!currentUrl().contains("/testharness.html"))
 		{
 			openAndValidate();
-		}
-	}
+		}	}
 
 	public PlanBenefitsCoveragePage navigateToBnC() {
 		benefitsLink.click();
@@ -332,6 +374,13 @@ if (driver.getTitle().equalsIgnoreCase(
 	public void logOut() {
 		logOut.click();
 
+	}
+	
+	public void validateEnvelope(){
+		System.out.println("under validate Envelope");
+		validate(envelopeId);
+		
+		
 	}
 
 	public PaymentHistoryPage navigateToPayments() {
@@ -940,36 +989,134 @@ public void validateDrugsPreferredMailOderLink() {
 			System.out.println("Drug Preferred Mail Service Link is not displaying in footer");
 		}
 	}
+	
+	
+		public BenefitsAndCoveragePage navigatesToBandCpage() {
+			driver.navigate().to(PAGE_URL);
+			BnClink.click();
+			System.out.println("On the page :" + driver.getTitle());
+			if(driver.getTitle().equalsIgnoreCase("Benefits Overview")){
+			        return new BenefitsAndCoveragePage(driver);
+			}
+			return null;
 
-	public Object validateLoginPageElements() {
+		}
+	public BenefitsAndCoveragePage navigateDirectToBnCPag()
+	{
+		driver.navigate().to(PAGE_URL);
+		BnClink.click();
+		try {
+			Thread.sleep(30000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		//driver.manage().timeouts().implicitlyWait(40, TimeUnit.SECONDS);
+		System.out.println(driver.getTitle());
+	 if(driver.getTitle().equalsIgnoreCase("Benefits And Coverage Page Redesign")){
+	        return new BenefitsAndCoveragePage(driver);
+		}
+		return null;
+		}
+	
+	public BenefitsAndCoveragePage navigateDirectToBnCPage()
+	{
+		driver.navigate().to(PAGE_URL);
+		BnClink2.click();
+		try {
+			Thread.sleep(30000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		//driver.manage().timeouts().implicitlyWait(40, TimeUnit.SECONDS);
+		System.out.println(driver.getTitle());
+	 if(driver.getTitle().equalsIgnoreCase("Benefits And Coverage Page")){
+	        return new BenefitsAndCoveragePage(driver);
+		}
+		return null;
+		}
+	
+	
+   
+	
 
-		validate(myPlansTab);
-		validate(profAndPrefLink);
-		validate(contactUsLink);
-		validate(phrTab);
-		validate(benefitsLink);
-		validate(logOut);
-		validate(paymentsLink);
-		validate(formsAndResourcesLink);
-		validate(benefitsAndCoverageLink);
-		validate(pharmacyLocator);
-		validate(medicalProviders);
-		validate(myMenuNavigator);
-		validate(viewIDCard);
-		validate(drugLookupLink);
-		validate(searchClaimsHistory);
-		validate(myPlansTab);
-		validate(myPlansTab);
-		validate(myPlansTab);
-		validate(myPlansTab);
-		validate(myPlansTab);
-		validate(myPlansTab);
-		validate(myPlansTab);
-		validate(myPlansTab);
-
-		if (currentUrl().contains("home/my-account-home.html"))
-
+		public pages.member.ulayer.ProfileandPreferencesPage navigateDirectToProfileandPreferencesPage() {
+			driver.navigate().to(PAGE_URL);
+			ProfileandPrefLink.click();
+			try {
+				Thread.sleep(30000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			//driver.manage().timeouts().implicitlyWait(40, TimeUnit.SECONDS);
+			System.out.println(driver.getTitle());
+			
+			
+		 if(driver.getTitle().equalsIgnoreCase("Profile")){
+			 System.out.println("Pass");
+		        return new pages.member.ulayer.ProfileandPreferencesPage(driver);
+			}
+			return null;
+			
+		
+			
+		}
+		
+		public void validateelements()
 		{
+			validate(planbox);
+			validate(welcomeText);
+			validate(fd_myMenu);
+		}
+		
+		public ProfileandPreferencesPage validatemymenufunctionality()
+		{
+			//fd_myMenu.click();
+			ProfilenPrefernces.click();
+			try {
+				Thread.sleep(30000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			if(driver.getTitle().equalsIgnoreCase("AARP Medicare Plans | My Personal Profile")){
+				 System.out.println("Pass");
+			        return new pages.member.ulayer.ProfileandPreferencesPage(driver);
+				}
+				return null;
+			
+		}
+		
+		public Object validateLoginPageElements() {
+
+
+			validate(myPlansTab);
+					validate(profAndPrefLink);
+					validate(contactUsLink);
+					validate(phrTab);
+					validate(benefitsLink);
+					validate(logOut);
+					validate(paymentsLink);
+					validate(formsAndResourcesLink);
+					validate(benefitsAndCoverageLink);
+					validate(pharmacyLocator);
+					validate(medicalProviders);
+					validate(myMenuNavigator);
+					validate(viewIDCard);
+					validate(drugLookupLink);
+					validate(searchClaimsHistory);
+					validate(myPlansTab);
+					validate(myPlansTab);
+					validate(myPlansTab);
+					validate(myPlansTab);
+					validate(myPlansTab);
+					validate(myPlansTab);
+					validate(myPlansTab);
+					validate(myPlansTab);
+				
+		if(currentUrl().contains("home/my-account-home.html")){		
 			return new AccountHomePage(driver);
 		} else if (currentUrl().contains("terminated-plan.html")) {
 			return new TerminatedHomePage(driver);

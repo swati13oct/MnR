@@ -21,5 +21,8 @@ public class ProfnPrefCommonConstants {
 	public static final String AFTER_UPDATE = "afterUpdate";
 
 	public static final String MY_PREFERENCES_BEFORE_UPDATE_EXPECTED = "myPreferencesBeforeUpdateExpectedJson";
+	
+	public static final String MY_PROFILE_PREFERENCES_EXPECTED = "myProfilenpreferencesexpectedjson";
 
+	public static final String MY_PROFILE_PREFERENCES_ACTUAL = "myProfilenpreferencesactualjson";
 }

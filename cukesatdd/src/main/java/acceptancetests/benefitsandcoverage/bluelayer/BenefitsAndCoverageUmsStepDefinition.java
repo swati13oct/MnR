@@ -4,6 +4,7 @@ import gherkin.formatter.model.DataTableRow;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -39,6 +40,7 @@ import acceptancetests.benefitsandcoverage.data.PlanBenefitsAndCoverageCommonCon
 import acceptancetests.formsandresources.data.FnRCommonConstants;
 import acceptancetests.login.data.LoginCommonConstants;
 import atdd.framework.MRScenario;
+import cucumber.annotation.en.And;
 import cucumber.annotation.en.Given;
 import cucumber.annotation.en.Then;
 import cucumber.annotation.en.When;
@@ -246,6 +248,21 @@ public class BenefitsAndCoverageUmsStepDefinition {
 		}
 	}
 
+
+@When("^the user navigates to benefits and coverage page under my plans in UMS site$")
+	public void navigates_benefits_and_Coverage_UMS1() {
+		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario()
+				.getBean(PageConstants.ACCOUNT_HOME_PAGE);
+		BenefitsCoveragePage benefitsCoveragePage = accountHomePage
+				.navigateToBnC();
+
+		if (benefitsCoveragePage != null) {
+			getLoginScenario().saveBean(
+					PageConstants.BENEFITS_AND_COVERAGE_PAGE,
+					benefitsCoveragePage);
+
+		}
+}
 
 	@Then("^the user validates plan benefits and coverage details in UMS site$")
 	public void details_validation(DataTable attributes) {
@@ -791,6 +808,8 @@ public class BenefitsAndCoverageUmsStepDefinition {
 		FormsandresourcesPage formsAndResourcesPage = accountHomePage.navigateTosortingsearchlinkUmsPage();
 	}
 
+
+
 @Given("^the user lands on the contactus page in PCP site$")
 public void user_lands_on_pcpcontactus_page(){
 	WebDriver wd = getLoginScenario().getWebDriver();
@@ -800,28 +819,11 @@ public void user_lands_on_pcpcontactus_page(){
 	AccountHomePage accountHomePage2 =accountHomePage1.navigateToPCPContactUSPage();
 	getLoginScenario().saveBean(PageConstants.MYPCP_CONTACT_US_PAGE,
 			accountHomePage2);
-	
-	
-}
 
 
-@When("^the user clicks on aboutus page back to previous page$")
-public void user_clicks_aboutus_pagebackToPreviousPage(){
-	AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario()
-			.getBean(PageConstants.ABOUT_US_PAGE);
-	accountHomePage.aboutUspagebackToPreviousPage();
-}
 
-@Given("^the user lands on the aboutus page in PCP site$")
-public void user_lands_on_PCPaboutus_page(){
-	WebDriver wd = getLoginScenario().getWebDriver();
 
-	AccountHomePage accountHomePage1 = new AccountHomePage(wd);
 
-	AccountHomePage accountHomePage2 =accountHomePage1.navigateToPCPABoutUSPage();
-	getLoginScenario().saveBean(PageConstants.MYPCP_ABOUT_US_PAGE,
-			accountHomePage2);
-	
 	
 }
 
@@ -896,8 +898,130 @@ public void user_clicks_uhc_disclaimerbackToPreviousPage(){
 }
 
 
+public void user_validates_view_and_document_label()
+	{
+		BenefitsAndCoveragePage benefitsnCoveragepage = (BenefitsAndCoveragePage) getLoginScenario()
+				.getBean(PageConstants.BENEFITS_AND_COVERAGE_PAGE);
+		
+		
+	//benefitsncoveragepage.getdocuments_label();
+		//benefitsncoveragepage.getview_label();
+		
+	}
+	@And("^the user validates the language dropdown and the value displayed by default$")
+	public void validate_languagedropdown(DataTable givenAttributes)
+	{
+		BenefitsAndCoveragePage benefitsnCoveragepage = (BenefitsAndCoveragePage) getLoginScenario()
+				.getBean(PageConstants.BENEFITS_AND_COVERAGE_PAGE);
+		benefitsnCoveragepage.validate_langdropdown_first_selection();
+	List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+	Map<String, String> memberAttributesMap = new HashMap<String, String>();
+	for (int i = 0; i < memberAttributesRow.size(); i++) {
 
+	memberAttributesMap.put(memberAttributesRow.get(i).getCells()
+	.get(0), memberAttributesRow.get(i).getCells().get(1));
+	}
+	String language = memberAttributesMap.get("Language");
+	getLoginScenario().saveBean(PlanBenefitsAndCoverageCommonConstants.Language,language);
+	benefitsnCoveragepage.validate_langdropdown_select(language);
+	}
 	
+	@Then("^the user validates Hearing section$")
+	public void user_validates__Hearing_section()
+	{
+		BenefitsAndCoveragePage benefitsnCoveragepage = (BenefitsAndCoveragePage) getLoginScenario()
+				.getBean(PageConstants.BENEFITS_AND_COVERAGE_PAGE);
+		benefitsnCoveragepage.HearingSection();
+	
+              }
+	@And("^the user validates the Hearing Aid section$")
+	public void user_validates__Hearing_Aid_section()
+	{
+		BenefitsAndCoveragePage benefitsnCoveragepage = (BenefitsAndCoveragePage) getLoginScenario()
+				.getBean(PageConstants.BENEFITS_AND_COVERAGE_PAGE);
+		benefitsnCoveragepage.HearingAid();
+         }
+	@And("^the user validates the Vision section$")
+	public void user_validates__Vision_section()
+	{
+		BenefitsAndCoveragePage benefitsnCoveragepage = (BenefitsAndCoveragePage) getLoginScenario()
+				.getBean(PageConstants.BENEFITS_AND_COVERAGE_PAGE);
+		benefitsnCoveragepage.Vision();
+            }
+	@And("^the user validates the Dental section$")
+	public void user_validates__Dental_section()
+	{
+		BenefitsAndCoveragePage benefitsnCoveragepage = (BenefitsAndCoveragePage) getLoginScenario()
+				.getBean(PageConstants.BENEFITS_AND_COVERAGE_PAGE);
+		benefitsnCoveragepage.Dental();
+              }	
+	@Then("^the user validates Header section$")
+	public void user_validates__Header_section()
+	{
+		BenefitsAndCoveragePage benefitsnCoveragepage = (BenefitsAndCoveragePage) getLoginScenario()
+				.getBean(PageConstants.BENEFITS_AND_COVERAGE_PAGE);
+		benefitsnCoveragepage.Header();
+	
+    }	
+
+ /* @Then("^the user view the Drug Copays & Discounts header ")
+	
+
+
+
+
+}
+
+
+@Then("^the user view the Drug Copays & Discounts header ")
+{
+}
+
+@Then("^the user validates first select option selected should be Preferred Retail Pharmacy")
+{
+}
+
+@Then("^the user validates dropdown should show 3 values")
+{
+}
+
+@Then("^the user validates the text under dropdown should be updated according to value selected in dropdown")
+{
+}
+
+@Then("^the user validates the Learn More section link for stage and tier")
+{
+}
+
+@Then("^the user validates the user click on the link it expands and when user clicks it again it should collapse")
+{
+}*/
+
+@Then("^the user validates Drug coverage header and text under the section")
+	public void user_validates__drugcoverage_section()
+	{
+		BenefitsAndCoveragePage benefitsnCoveragepage = (BenefitsAndCoveragePage) getLoginScenario()
+				.getBean(PageConstants.BENEFITS_AND_COVERAGE_PAGE);
+		benefitsnCoveragepage.validatedrugcoverageheaderandtext();
+}
+
+@Then("^the user validates text for the Look Up Drugs section")
+public void user_validates__lookupdrugs_section()
+{
+	BenefitsAndCoveragePage benefitsnCoveragepage = (BenefitsAndCoveragePage) getLoginScenario()
+			.getBean(PageConstants.BENEFITS_AND_COVERAGE_PAGE);
+	benefitsnCoveragepage.validate_lookupdrugstext();
+}
+
+@Then("^the user validates Look Up Drugs button should be visible")
+public void user_validates_lookupdrugsbuuton()
+{
+	BenefitsAndCoveragePage benefitsnCoveragepage = (BenefitsAndCoveragePage) getLoginScenario()
+			.getBean(PageConstants.BENEFITS_AND_COVERAGE_PAGE);
+	benefitsnCoveragepage.validatelookupdrugsbutton();
+}
+
+
 
 }
 	

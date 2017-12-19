@@ -120,6 +120,27 @@
 	"disclaimersSection":{
 		"identifier":"xpath",
 		"elementName":"html/body/div[3]/div/div[3]/div[2]/div/div/div"
-		}	
+
+	},	
+        "vasSection":{
+		"identifier":"xpath",
+		"elementName":".//*[@id='planBenefitsApp']/div"
+		},	
+        "nurseHealthLine":{
+		"identifier":"xpath",
+		"elementName":"Nursehealth"
+		},
+        "SilverSneaker":{
+		"identifier":"id",
+		"elementName":"silverSneaker"
+		},
+        "mycarePath":{
+		"identifier":"id",
+		"elementName":"mycarePath"
+	        },
+        "visionDiscount":{
+		"identifier":"id",
+		"elementName":"visionDiscount"
+		}			
 }
 }

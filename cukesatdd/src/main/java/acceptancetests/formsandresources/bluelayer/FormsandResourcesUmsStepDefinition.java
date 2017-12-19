@@ -779,8 +779,7 @@ public class FormsandResourcesUmsStepDefinition {
 	public void views_prescription_drug_process_transition_Ums_site() {
 		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario()
 				.getBean(PageConstants.ACCOUNT_HOME_PAGE);
-		FormsandresourcesPage formsAndResourcesPage = accountHomePage
-				.navigateToPrescriptionDrugProcesssUms();
+		FormsandresourcesPage formsAndResourcesPage = accountHomePage.navigateToPrescriptionDrugProcesssUms();
 	}
 
 

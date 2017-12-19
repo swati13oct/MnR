@@ -73,6 +73,10 @@ public class PageConstants {
 	
 	public static final String BENEFITS_COVERAGE_PAGE = "benefitsCoveragePage";
 
+	public static final String PROFILE_AND_PREFERENCES_PAGE = "ProfileandPreferencesPage";
+
+	//public static final String PROFILEANDPREFERENCES_PAGE = "ProfilePreferencesPage";
+	
 	public static final String ORDER_PLAN_MATERIALS_PAGE = "orderplanmaterialsPage";
 
 	public static final String PLAN_MATERIALS_CONFIRMATION_PAGE = "planMaterialConfirmationPage";
@@ -136,7 +140,9 @@ public class PageConstants {
 	public static final String HEALTH_AND_WELLNESS_PAGE = "healthAndWellnessPage";
 
 	public static final String CONTACT_US_PAGE = "contactUsPage";
-
+	
+	public static final String VALUE_ADDED_SERVICES = "valueaddedservices";
+	
 	public static final String PLAN_COMPARE_PAGE = "planComparePage";
 	
 	
@@ -196,13 +202,14 @@ public class PageConstants {
 	
 	public static final String ABOUT_US_PAGE = "aboutus";
 
-	public static final String NEW_CLAIMS_SUMMARY_PAGE = "newClaimsSummaryPage";	
+	public static final String NEW_CLAIMS_SUMMARY_PAGE = "newClaimsSummaryPage";
 	
 	public static final String NEW_CLAIM_DETAILS_PAGE = "newClaimDetailsPage";
 	
 	public static final String TIME_ADMIN_PAGE = "timeAdminPage";
 
-	public static final String EOB_Page = "eobPage";
+public static final String ProfilePreferencesPage = "ProfilePreferencesPage";	
+public static final String EOB_Page = "eobPage";
 	
 	public static final String DeepLink_Page = "deepLinkPage";
 	

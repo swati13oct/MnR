@@ -127,16 +127,16 @@ System.out.println(signInButton.isEnabled());
 		if(currentUrl().contains("home/my-account-home.html") && category.equalsIgnoreCase("Group") || currentUrl().contains("/guest/home.html") || currentUrl().contains("/login.html"))
 
 		{
-			return new AccountHomePage(driver,category);
+			return new AccountHomePage(driver);
 		}
 		else if(currentUrl().contains("home/my-account-home.html") && category.equalsIgnoreCase("Individual") || currentUrl().contains("/login.html") ) {
-			return new AccountHomePage(driver, category);
+			return new AccountHomePage(driver);
 		}
 		else if(currentUrl().contains("home/testharness.html") && category.equalsIgnoreCase("Group") ) {
-			return new AccountHomePage(driver, category);
+			return new AccountHomePage(driver);
 		}
 		else if(currentUrl().contains("home/testharness.html") && category.equalsIgnoreCase("Individual") ) {
-			return new AccountHomePage(driver, category);
+			return new AccountHomePage(driver);
 		}
 		else if (currentUrl().contains("terminated-plan.html")) {
 			return new TerminatedHomePage(driver);
@@ -300,10 +300,10 @@ System.out.println(signInButton.isEnabled());
 		if(currentUrl().contains("home/my-account-home.html") && category.equalsIgnoreCase("Group") || currentUrl().contains("/guest/home.html") || currentUrl().contains("/login.html"))
 
 		{
-			return new AccountHomePage(driver,category);
+			return new AccountHomePage(driver);
 		}
 		else if(currentUrl().contains("home/my-account-home.html") && category.equalsIgnoreCase("Individual") || currentUrl().contains("/login.html") ) {
-			return new AccountHomePage(driver, category);
+			return new AccountHomePage(driver);
 		}
 		else if (currentUrl().contains("terminated-plan.html")) {
 			return new TerminatedHomePage(driver);
