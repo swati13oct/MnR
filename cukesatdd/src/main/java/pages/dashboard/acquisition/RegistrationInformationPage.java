@@ -89,6 +89,26 @@ public class RegistrationInformationPage extends UhcDriver {
 	private static String PAGE_URL = MRConstants.REDESIGN_REGISTRATION_URL;
 
 	/**
+	 * Step one error message
+	 */
+	
+	/** Member Id field is left blank */
+	@FindBy(id = "errorMemberIdBlank")
+	private WebElement memberIdBlank;
+
+	/** DOB field is left blank */
+	@FindBy(id = "errorDobBlank")
+	private WebElement dobBlank;
+
+	/** Age is less then 13 year error message */
+	@FindBy(id = "errorAgeLessThan13")
+	private WebElement ageLessError;
+
+	/** SNP plan not able to register error message */
+	@FindBy(id = "errorSnpMember")
+	private WebElement snpError;
+	
+	/**
 	 * Additional personal Information section
 	 */
 
@@ -400,8 +420,8 @@ public class RegistrationInformationPage extends UhcDriver {
 	/**
 	 * Enter member ID.
 	 */
-	public void enterMemberID(String memberId) {
-		sendkeys(memberid, memberId);
+	public void enterMemberID(String memberID) {
+		sendkeys(memberid, memberID);
 	}
 
 	/**
@@ -560,6 +580,40 @@ public class RegistrationInformationPage extends UhcDriver {
 		sendkeys(medicareID, medicare_id);
 	}
 
+	/**
+	 * Functions to verify step one error message
+	 */
+	
+	/**
+	 * @return the member id blank error message
+	 */
+	public WebElement getMemberIdBlankError() {
+		return memberIdBlank;
+	}
+	
+	
+	/**
+	 * @return the date of birth blank error message
+	 */
+	public WebElement getDobBlankError() {
+		return dobBlank;
+	}
+	
+	
+	/**
+	 * @return the age is less than 13 years error message
+	 */
+	public WebElement getAgeLessError() {
+		return ageLessError;
+	}
+	
+	/**
+	 * @return the SNP member not allowed to register error message
+	 */
+	public WebElement getSnpMemberError() {
+		return snpError;
+	}
+	
 	/**
 	 * Functions to verify the Error message pages
 	 */

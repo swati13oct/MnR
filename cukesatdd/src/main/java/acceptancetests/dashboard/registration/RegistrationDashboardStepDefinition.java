@@ -65,7 +65,7 @@ public class RegistrationDashboardStepDefinition {
 		// navigate to registration page
 		RegistrationInformationPage registrationInformationPage = (RegistrationInformationPage) getLoginScenario()
 				.getBean(PageConstants.REGISTRATION_INFORMATION_PAGE);
-		
+		registrationInformationPage.waitForRegistrationInformationPage();
 		registrationInformationPage.enterMemberID(memberId);
 	}
 
@@ -187,7 +187,9 @@ public class RegistrationDashboardStepDefinition {
 		String actualmemberId = registrationInformationPage.getMemberNumber()
 				.getText();
 		// System.out.println("actual member id is" +actualmemberId);
-		Assert.assertEquals(expectedmemberId, actualmemberId);
+		//Assert.assertEquals(expectedmemberId, actualmemberId);
+		
+		Assert.assertTrue(actualmemberId.contains(expectedmemberId));
 	}
 
 	@And("^correct Member name value is displayed$")
@@ -549,6 +551,34 @@ public class RegistrationDashboardStepDefinition {
 		Assert.assertEquals(ExpectedEmail,actualEmail);
 		Assert.assertEquals(expectedDateOfBirth,actualDateOfBirth);
 		
+	}
+	
+	@Then("^the member validate member id required error message$")
+	public void memberIdRequiredErrorMessage() {
+			RegistrationInformationPage registrationInformationPage = (RegistrationInformationPage) getLoginScenario()
+					.getBean(PageConstants.REGISTRATION_INFORMATION_PAGE);
+			registrationInformationPage.getMemberIdBlankError();			
+	}
+
+	@Then("^the member validate dob required error message$")
+	public void dobRequiredErrorMessage() {
+			RegistrationInformationPage registrationInformationPage = (RegistrationInformationPage) getLoginScenario()
+					.getBean(PageConstants.REGISTRATION_INFORMATION_PAGE);
+			registrationInformationPage.getDobBlankError();
+	}
+
+	@Then("^the member validate dob fields thirteen years or younger error message$")
+	public void ageLessThanThirteen() {
+			RegistrationInformationPage registrationInformationPage = (RegistrationInformationPage) getLoginScenario()
+					.getBean(PageConstants.REGISTRATION_INFORMATION_PAGE);
+			registrationInformationPage.getAgeLessError();
+	}
+
+	@Then("^the member validate snp error message$")
+	public void snpRequiredErrorMessage() {
+			RegistrationInformationPage registrationInformationPage = (RegistrationInformationPage) getLoginScenario()
+					.getBean(PageConstants.REGISTRATION_INFORMATION_PAGE);
+			registrationInformationPage.getSnpMemberError();
 	}
 
 }

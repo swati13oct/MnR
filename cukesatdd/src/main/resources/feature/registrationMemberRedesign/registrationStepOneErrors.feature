@@ -30,14 +30,14 @@ Examples:
     
     
    
-Scenario Outline: To verify registration dob fields 13 years or younger error message
+Scenario Outline: To verify registration dob fields thirteen years or younger error message
 Given the member is on registration page of new portal part of redesign
 When the member enter the member ID into Member ID field
 | Plan Member ID | <planMemberId> |
 And member enter date of birth in the date of birth dropdown
 | Date of birth | <dateOfBirth> |
 When member click Next
-Then the member validate dob fields 13 years or younger error message
+Then the member validate dob fields thirteen years or younger error message
     
 Examples: 
 | planMemberId | dateOfBirth |
