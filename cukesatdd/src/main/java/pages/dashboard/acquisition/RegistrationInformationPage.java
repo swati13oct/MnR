@@ -78,7 +78,7 @@ public class RegistrationInformationPage extends UhcDriver {
 	private WebElement yearresults;*/
 
 	/** The cancel button. */
-	@FindBy(className = "btn btn--secondary")
+	@FindBy(xpath= ".//*[@id='register-form']/div[3]/div/div/a[1]")
 	private WebElement cancelButton;
 
 	/** The next button. */
@@ -966,7 +966,7 @@ public class RegistrationInformationPage extends UhcDriver {
     	WebDriverWait wait = new WebDriverWait(this.driver, 10);
     	wait.until(new ExpectedCondition<Boolean>() {
     	    public Boolean apply(WebDriver driver) {
-    		if (cancelButton.isDisplayed())
+    		if (monthToEnter.isDisplayed())
     		    return true;
     		else
     		    return false;
