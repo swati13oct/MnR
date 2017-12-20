@@ -2,6 +2,7 @@ package pages.acquisition.ulayer;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -201,6 +202,18 @@ public class AcquisitionHomePage extends GlobalWebElements {
 
 	@FindBy(xpath = "//*[@id='subnav_4']/div/div/div[1]/div[1]/div[1]/h3/a/span")
 	private WebElement healthcenterslink;
+	
+	@FindBy(xpath = ".//*[@id='Find a pharmacy near you']")
+	private WebElement findapharmacylink;
+	
+	@FindBy(xpath = ".//a[@class='display-block collapse-expand collapsed']")
+	private WebElement moreInfoLink;
+	
+	@FindBy(xpath = ".//*[@id='site-wrapper']/div[4]/div/div/div/div/div/main/div/div[4]/div/div[4]/div[1]/div[2]")
+	private WebElement chatwidget;
+	
+	@FindBy(xpath = ".//*[@id='site-wrapper']/div[4]/div/div/div/div/div/main/div/div[4]/div/div[4]/div[1]/div[1]")
+	private WebElement TFNwidget;
 
 	private static String AARP_ACQISITION_PAGE_URL = MRConstants.AARP_URL;
 	
@@ -299,6 +312,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		if (!(currentUrl().contains("aarpmedicareplans"))) {
 			start(AARP_ACQISITION_PAGE_URL);
 		}
+		System.out.println("Using properties for environment ....: "+ AARP_ACQISITION_PAGE_URL+"..........");
 		validate(navigationSectionHomeLink);
 		validate(navigationSectionOurPlansLink);
 		validate(navigationSectionMedicareEducationLink);
@@ -520,8 +534,9 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		}
 		return null;
 	}
+	
 
-	public PharmacySearchPage navigateToPharmacyLocator() {
+public PharmacySearchPage navigateToPharmacyLocator() {
 		driver.get(MRConstants.AARP_MA_REQUEST_MORE_HELP_AND_INFORMATION_URL);
 		try {
 			Thread.sleep(10000);
@@ -530,8 +545,8 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		}
 		pharmacyLink.click();
 		if (getTitle().equalsIgnoreCase("Locate a Pharmacy | UnitedHealthcare®")) {
-			return new PharmacySearchPage(driver);
-
+			System.out.println();			return new PharmacySearchPage(driver);
+			
 		}
 		return null;
 	}
@@ -1280,7 +1295,66 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		}
 		return null;
 	}
+	
+	public PharmacySearchPage navigateToRequestMoreHelp() {
+		//driver.navigate().to("https://www.team-a-aarpmedicareplans.uhc.com/health-plans/medicare-advantage-plans/request-information.html");
+		driver.navigate().to("https://www.awe-test-a-aarpmedicareplans.uhc.com/health-plans/medicare-advantage-plans/request-information.html");if (getTitle().equalsIgnoreCase("Request MA Plan Information | AARP Medicare Plans from UnitedHealthcare")) {
+			return new PharmacySearchPage(driver);
 
+		}
+		return null;
+	}
+	
+	public PharmacyResultPage navigateToRequestMoreHelpForPdp() {
+		//driver.navigate().to("https://www.team-a-aarpmedicareplans.uhc.com/health-plans/prescription-drug-plans/request-information.html");
+		driver.navigate().to("https://www.awe-test-a-aarpmedicareplans.uhc.com/health-plans/prescription-drug-plans/request-information.html");
+		if (getTitle().equalsIgnoreCase("More Help & Information - Medicare Part D Plans | AARP® Medicare Plans from UnitedHealthcare")) {
+			return new PharmacyResultPage(driver);
+		}
+		return null;
+	}
+
+	public PharmacyResultPage validateMoreInfoContent() {
+		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+		moreInfoLink.click();
+		if (getTitle().equalsIgnoreCase("Find a Pharmacy |Medicare Plans from UnitedHealthcare")) {
+			return new PharmacyResultPage(driver);
+		}
+		return null;
+	}
+	
+
+	public PharmacyResultPage validateChatWidget() {
+		boolean present;
+		try {
+		validate(chatwidget);
+		present = true;
+		} catch (NoSuchElementException e) {
+		present = false;
+		}
+
+	if(present)
+		System.out.println("@@@@@@@@@ Able to find Chat widget @@@@@@@@@");
+		else
+		System.out.println("@@@@@@@@@ No Chat widget @@@@@@@@@");
+		return null;		
+	}
+
+	public PharmacyResultPage validateTfnWidget() {
+		boolean present;
+		try {
+		validate(TFNwidget);
+		present = true;
+		} catch (NoSuchElementException e) {
+		present = false;
+		}
+
+	if(present)
+		System.out.println("@@@@@@@@@ Able to find TFN widget @@@@@@@@@");
+		else
+		System.out.println("@@@@@@@@@ No TFN widget @@@@@@@@@");
+		return null;
+	}
 
 
 

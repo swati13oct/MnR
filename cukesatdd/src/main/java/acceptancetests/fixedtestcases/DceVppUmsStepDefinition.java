@@ -1,15 +1,22 @@
 package acceptancetests.fixedtestcases;
 
+import java.io.File;
+import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
+import org.skyscreamer.jsonassert.JSONAssert;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import acceptancetests.atdd.data.CommonConstants;
 import acceptancetests.atdd.data.acquisition.PageConstants;
+import acceptancetests.dce.data.DceCommonConstants;
+import acceptancetests.vpp.data.VPPCommonConstants;
 import atdd.framework.MRScenario;
 import cucumber.annotation.en.And;
 import cucumber.annotation.en.Given;
@@ -19,6 +26,7 @@ import cucumber.table.DataTable;
 import gherkin.formatter.model.DataTableRow;
 import pages.acquisition.bluelayer.AcquisitionHomePage;
 import pages.acquisition.bluelayer.DrugCostEstimatorPage;
+import pages.acquisition.bluelayer.PlanDetailsPage;
 import pages.acquisition.bluelayer.VPPPlanSummaryPage;
 
 /**
@@ -248,6 +256,175 @@ public class DceVppUmsStepDefinition {
 	public void I_switch_to_generic_drug_and_validate() throws InterruptedException{
 		DrugCostEstimatorPage dce = (DrugCostEstimatorPage) getLoginScenario().getBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE);
 		dce.clickSwitchNow();
+	}
+
+@And("^the user validates the plan summary for the below plan in UMS site$")
+	public void user_validates_plan_summary_ums(DataTable planAttributes) {
+		List<DataTableRow> givenAttributesRow = planAttributes.getGherkinRows();
+		Map<String, String> givenAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < givenAttributesRow.size(); i++) {
+
+			givenAttributesMap.put(givenAttributesRow.get(i).getCells().get(0),
+					givenAttributesRow.get(i).getCells().get(1));
+		}
+
+		String planName = givenAttributesMap.get("Plan Name");
+		getLoginScenario().saveBean(VPPCommonConstants.PLAN_NAME, planName);
+		VPPPlanSummaryPage planSummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		/* get actual data for a particular plan */
+		/*JSONObject planSummaryActualJson = planSummaryPage
+				.getPlanSummaryActualData(planName);
+		System.out
+		.println("planSummaryActualJson---->" + planSummaryActualJson);*/
+		/* Get expected data */
+		String fileName = planName;
+		String zipcode = (String) getLoginScenario().getBean(
+				DceCommonConstants.ZIPCODE);
+		String county = (String) getLoginScenario().getBean(
+				DceCommonConstants.COUNTY_NAME);
+		String drugWithDosage = (String) getLoginScenario().getBean(
+				DceCommonConstants.DRUG_WITH_DOSAGE);
+		if (drugWithDosage.contains("/")) {
+			drugWithDosage = drugWithDosage.replaceAll("/", "_");
+		}
+		String pharmacyName = null;
+		String pharmacyType = (String) getLoginScenario().getBean(
+				DceCommonConstants.PHARMACY_TYPE);
+		if (!pharmacyType.equalsIgnoreCase("Preferred Mail Service Pharmacy")) {
+			pharmacyName = (String) getLoginScenario().getBean(
+					DceCommonConstants.PHARMACY_NAME);
+		} else {
+			pharmacyName = pharmacyType;
+		}
+		String directory = CommonConstants.ACQUISITION_EXPECTED_DIRECTORY
+				+ File.separator + CommonConstants.SITE_BLUELAYER
+				+ File.separator + VPPCommonConstants.VPP_PLAN_FLOW_NAME
+				+ File.separator + zipcode + File.separator + county
+				+ File.separator + drugWithDosage + File.separator
+				+ pharmacyName + File.separator;
+		JSONObject planSummaryExpectedJson = MRScenario.readExpectedJson(
+				fileName, directory);
+		System.out.println("planSummaryExpectedJson---->"
+				+ planSummaryExpectedJson);
+		/*try {
+			JSONAssert.assertEquals(planSummaryExpectedJson,
+					planSummaryActualJson, true);
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}*/
+
+	}
+
+	@When("^the user view plan details of the above selected plan in UMS site$")
+	public void user_views_plandetails_selected_plan_ums() {
+		String planName = (String) getLoginScenario().getBean(
+				VPPCommonConstants.PLAN_NAME);
+		String planType = (String) getLoginScenario().getBean(
+				VPPCommonConstants.PLAN_TYPE);
+		String zipcode = (String) getLoginScenario().getBean(
+				DceCommonConstants.ZIPCODE);
+		String county = (String) getLoginScenario().getBean(
+				DceCommonConstants.COUNTY_NAME);
+		VPPPlanSummaryPage vppPlanSummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+
+		PlanDetailsPage vppPlanDetailsPage = vppPlanSummaryPage
+				.navigateToPlanDetails(planName);
+		if (vppPlanDetailsPage != null) {
+			getLoginScenario().saveBean(PageConstants.VPP_PLAN_DETAILS_PAGE,
+					vppPlanDetailsPage);
+			/* Get actual data */
+			JSONObject planDetailsActualJson = vppPlanDetailsPage.vppPlanDetailsJson;
+			System.out.println("planDetailsActualJson---->"
+					+ planDetailsActualJson);
+			getLoginScenario().saveBean(
+					VPPCommonConstants.VPP_PLAN_DETAIL_ACTUAL,
+					planDetailsActualJson);
+
+			/* Get expected data */
+			String fileName = planName;
+			String drugWithDosage = (String) getLoginScenario().getBean(
+					DceCommonConstants.DRUG_WITH_DOSAGE);
+			if (drugWithDosage.contains("/")) {
+				drugWithDosage = drugWithDosage.replaceAll("/", "_");
+			}
+			String pharmacyName = null;
+			String pharmacyType = (String) getLoginScenario().getBean(
+					DceCommonConstants.PHARMACY_TYPE);
+			if (!pharmacyType
+					.equalsIgnoreCase("Preferred Mail Service Pharmacy")) {
+				pharmacyName = (String) getLoginScenario().getBean(
+						DceCommonConstants.PHARMACY_NAME);
+			} else {
+				pharmacyName = pharmacyType;
+			}
+			String directory = CommonConstants.ACQUISITION_EXPECTED_DIRECTORY
+					+ File.separator + CommonConstants.SITE_BLUELAYER
+					+ File.separator
+					+ VPPCommonConstants.VPP_PLAN_DETAILS_FLOW_NAME
+					+ File.separator + zipcode + File.separator + county
+					+ File.separator + drugWithDosage + File.separator
+					+ pharmacyName + File.separator;
+			JSONObject planDetailsExpectedJson = MRScenario.readExpectedJson(
+					fileName, directory);
+			getLoginScenario().saveBean(
+					VPPCommonConstants.VPP_PLAN_DETAIL_EXPECTED,
+					planDetailsExpectedJson);
+
+		}
+	}
+
+	@Then("^the user view plan details of the selected plan in UMS site$")
+	public void view_plan_details_ums(DataTable planAttributes){
+		List<DataTableRow> givenAttributesRow = planAttributes.getGherkinRows();
+		Map<String, String> givenAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < givenAttributesRow.size(); i++) {
+
+			givenAttributesMap.put(givenAttributesRow.get(i).getCells().get(0),
+					givenAttributesRow.get(i).getCells().get(1));
+		}
+		String planName = givenAttributesMap.get("Plan Name");
+		getLoginScenario().saveBean(VPPCommonConstants.PLAN_NAME, planName);		
+		String planType = (String) getLoginScenario().getBean(
+				VPPCommonConstants.PLAN_TYPE);
+		String errorMessage = givenAttributesMap.get("Error Message");
+
+		VPPPlanSummaryPage vppPlanSummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+
+		PlanDetailsPage vppPlanDetailsPage = vppPlanSummaryPage
+				.navigateToPlanDetails(planName);
+		vppPlanDetailsPage.validateDrugList(planName, errorMessage);
+		vppPlanDetailsPage.validatePlanCost(planName);
+
+		if (vppPlanDetailsPage != null) {
+			getLoginScenario().saveBean(PageConstants.VPP_PLAN_DETAILS_PAGE,
+					vppPlanDetailsPage);
+		}
+
+	}
+
+
+	@Then("^the user validates the details of the selected plan in UMS site$")
+	public void user_validates_details_selected_plan_ums() {
+		JSONObject planDetailsActualJson = (JSONObject) getLoginScenario()
+				.getBean(VPPCommonConstants.VPP_PLAN_DETAIL_ACTUAL);
+		JSONObject planDetailsExpectedJson = (JSONObject) getLoginScenario()
+				.getBean(VPPCommonConstants.VPP_PLAN_DETAIL_EXPECTED);
+
+		System.out
+		.println("planDetailsActualJson---->" + planDetailsActualJson);
+		System.out.println("planDetailsExpectedJson---->"
+				+ planDetailsExpectedJson);
+		try {
+			JSONAssert.assertEquals(planDetailsExpectedJson,
+					planDetailsActualJson, true);
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 }

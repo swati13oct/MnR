@@ -3,6 +3,7 @@ package pages.acquisition.ulayer;
 /*@author pagarwa5*/
 
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -38,6 +39,9 @@ public class AddDrugPage extends UhcDriver {
 	
 	@FindBy(xpath="//div[@class='tabsHead']/div")
 	WebElement manageDrugTab;
+	
+	@FindBy(xpath=".//*[@id='add-drug']/section")
+	WebElement addaDrug;
 
 	private PageData drugList;
 
@@ -140,6 +144,12 @@ public class AddDrugPage extends UhcDriver {
 		selectPharmacyTab.click();
 		manageDrugTab.click();
 		validate(drugSearchBox);
+	}
+	
+	public void addDrug(){
+		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+		addaDrug.click();
+		System.out.println("Add a new drug popup should appear");
 	}
 
 }

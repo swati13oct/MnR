@@ -7,6 +7,7 @@ import gherkin.formatter.model.DataTableRow;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -25,7 +26,9 @@ import pages.member.ulayer.BenefitsAndCoveragePage;
 import pages.member.ulayer.ContactUsPage;
 import pages.member.ulayer.FormsandresourcesPage;
 import pages.member.ulayer.LoginPage;
+import pages.member.ulayer.LoginPage2;
 import pages.member.ulayer.PlanBenefitsCoveragePage;
+import pages.member.ulayer.ProfileandPreferencesPage;
 import acceptancetests.atdd.data.CommonConstants;
 import acceptancetests.atdd.data.member.PageConstants;
 import acceptancetests.benefitsandcoverage.data.PlanBenefitsAndCoverageCommonConstants;
@@ -39,6 +42,7 @@ import cucumber.annotation.en.Given;
 import cucumber.annotation.en.Then;
 import cucumber.annotation.en.When;
 import cucumber.table.DataTable;
+import pages.member.ulayer.ValueAddedServicepage;
 
 /**
  * @author pagarwa5
@@ -57,7 +61,7 @@ public class PlanBenefitsAndCoverageAarpStepDefinition {
 		return loginScenario;
 	}
 
-	@Given("^registered AMP with following details for plan benefits and coverage flow in AARP site$")
+	@Given("^registered member with following details logins in the member portal$")
 	public void login_with_member(DataTable memberAttributes) {
 
 		/* Reading the given attribute from feature file */
@@ -65,7 +69,8 @@ public class PlanBenefitsAndCoverageAarpStepDefinition {
 		Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
 		for (int i = 0; i < memberAttributesRow.size(); i++) {
 
-			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0), memberAttributesRow.get(i).getCells().get(1));
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+					memberAttributesRow.get(i).getCells().get(1));
 		}
 
 		Set<String> memberAttributesKeySet = memberAttributesMap.keySet();
@@ -88,8 +93,8 @@ public class PlanBenefitsAndCoverageAarpStepDefinition {
 			System.out.println("Member Type data could not be setup !!!");
 			Assert.fail("unable to find a " + desiredAttributes + " member");
 		} else {
-			this.userName=userName = loginCreds.get("user");
-			pwd = loginCreds.get("pwd");			
+			this.userName = userName = loginCreds.get("user");
+			pwd = loginCreds.get("pwd");
 			System.out.println("User is..." + userName);
 			System.out.println("Password is..." + pwd);
 			getLoginScenario().saveBean(LoginCommonConstants.USERNAME, userName);
@@ -97,30 +102,35 @@ public class PlanBenefitsAndCoverageAarpStepDefinition {
 		}
 
 		WebDriver wd = getLoginScenario().getWebDriver();
-		//wd.manage().window().maximize();
-		LoginPage loginPage = new LoginPage(wd);
-		AccountHomePage accountHomePage = (AccountHomePage) loginPage.loginWith(userName, pwd);
-		JSONObject accountHomeActualJson = null;
 
-		/*Get expected data*/
-		Map<String,JSONObject> expectedDataMap = loginScenario.getExpectedJson(userName);
-		JSONObject accountHomeExpectedJson = accountHomePage.getExpectedData(expectedDataMap);
+		LoginPage2 loginPage = new LoginPage2(wd);
+		AccountHomePage accountHomePage = (AccountHomePage) loginPage.loginWith(userName, pwd);
 
 		if (accountHomePage != null) {
 			getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
-			getLoginScenario().saveBean(PageConstants.ACCOUNT_HOME_PAGE,accountHomePage);
-			Assert.assertTrue(true);
-			accountHomeActualJson = accountHomePage.accountHomeJson;
+			getLoginScenario().saveBean(PageConstants.ACCOUNT_HOME_PAGE, accountHomePage);
 		}
+		// JSONObject accountHomeActualJson = null;
 
-		try {
-			JSONAssert.assertEquals(accountHomeExpectedJson,accountHomeActualJson, true);
-		} catch (JSONException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
-		getLoginScenario().saveBean(CommonConstants.EXPECTED_DATA_MAP,expectedDataMap);
+		/* Get expected data */
+		/*
+		 * Map<String,JSONObject> expectedDataMap =
+		 * loginScenario.getExpectedJson(userName); JSONObject
+		 * accountHomeExpectedJson =
+		 * accountHomePage.getExpectedData(expectedDataMap);
+		 * 
+		 * if (accountHomePage != null) {
+		 * 
+		 * accountHomePage); Assert.assertTrue(true); accountHomeActualJson =
+		 * accountHomePage.accountHomeJson; }
+		 * 
+		 * try { JSONAssert.assertEquals(accountHomeExpectedJson,
+		 * accountHomeActualJson, true); } catch (JSONException e) { // TODO
+		 * Auto-generated catch block e.printStackTrace(); }
+		 * 
+		 * getLoginScenario().saveBean(CommonConstants.EXPECTED_DATA_MAP,
+		 * expectedDataMap);
+		 */
 
 	}
 	
@@ -250,21 +260,38 @@ public class PlanBenefitsAndCoverageAarpStepDefinition {
 
 	}
 
-	@When("^the user navigates to plan benefits and coverage in AARP site$")
+	@When("^the user navigates to Benefits and coverage page$")
 	public void views_benefits_and_Coverage() {
-		Map<String, JSONObject> expectedDataMap = (Map<String, JSONObject>) getLoginScenario().getBean(
-				CommonConstants.EXPECTED_DATA_MAP);
 		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstants.ACCOUNT_HOME_PAGE);
-		PlanBenefitsCoveragePage bncPage = accountHomePage.navigateToBnC();
-		JSONObject benefitsExpectedJson = bncPage.getExpectedData(expectedDataMap);
-		getLoginScenario().saveBean(PlanBenefitsAndCoverageCommonConstants.PLAN_BENEFITS_EXPECTED, benefitsExpectedJson);
-		JSONObject benefitsActualJson = bncPage.planBenefitsCoverageJson;
-		System.out.println("benefitsExpectedJson---->" + benefitsExpectedJson);
-		System.out.println("benefitsActualJson---->" + benefitsActualJson);
-		getLoginScenario().saveBean(PlanBenefitsAndCoverageCommonConstants.PLAN_BENEFITS_ACTUAL, benefitsActualJson);
-		getLoginScenario().saveBean(PageConstants.BENEFITS_AND_COVERAGE_PAGE, bncPage);
+		BenefitsAndCoveragePage bncPage = accountHomePage.navigatesToBandCpage();
 
-		getLoginScenario().saveBean(PageConstants.BENEFITS_AND_COVERAGE_PAGE, bncPage);
+		if (bncPage != null) {
+	
+			getLoginScenario().saveBean(PageConstants.BENEFITS_AND_COVERAGE_PAGE, bncPage);
+		}
+		
+		if (bncPage == null)
+		{
+			System.out.println(" Variable is NULL" );
+		}
+
+		/*if (bncPage != null) {
+			// Get actual data
+			JSONObject actualJsonObj = bncPage.benefitsandcoverageJson;
+			loginScenario.saveBean(PlanBenefitsAndCoverageCommonConstants.BENEFITS_AND_COVERAGE_ACTUAL, actualJsonObj);
+			getLoginScenario().saveBean(PageConstants.BENEFITS_COVERAGE_PAGE, bncPage);
+			System.out.println("Benefits and coverage actual ==============>" + actualJsonObj.toString());
+			// Get expected data
+			String fileName = this.userName;
+			String directory = CommonConstants.BENEFITS_AND_COVERAGE_PAGE_DIRECTORY;
+			JSONObject benefitsandcoverageExectedJson = MRScenario.readExpectedJson(fileName, directory);
+			loginScenario.saveBean(PlanBenefitsAndCoverageCommonConstants.BENEFITS_AND_COVERAGE_EXPECTED,
+					benefitsandcoverageExectedJson);
+			System.out.println(
+					"Benefits and coverage expected ==============>" + benefitsandcoverageExectedJson.toString());
+		}*/
+		
+	
 
 	}
 
@@ -402,7 +429,30 @@ public class PlanBenefitsAndCoverageAarpStepDefinition {
 			System.out.println("Benefits and coverage expected ==============>"+benefitsandcoverageExectedJson.toString());
 		}
 	}
+@Then("^the user view benefits and coverage in AARP site$")
+	public void user_views_BenefitsAndCoverages() {
 
+		AccountHomePage accounthomepage = (AccountHomePage) getLoginScenario().getBean(
+				PageConstants.ACCOUNT_HOME_PAGE);
+
+		BenefitsAndCoveragePage benefitsCoveragePage = accounthomepage
+				.navigatesToBandCpage();
+		
+		if(benefitsCoveragePage!=null){
+			//Get actual data
+			JSONObject actualJsonObj=benefitsCoveragePage.benefitsandcoverageJson;
+			loginScenario.saveBean(PlanBenefitsAndCoverageCommonConstants.BENEFITS_AND_COVERAGE_ACTUAL, actualJsonObj);	
+			getLoginScenario().saveBean(PageConstants.BENEFITS_COVERAGE_PAGE, benefitsCoveragePage);
+			System.out.println("Benefits and coverage actual ==============>"+actualJsonObj.toString());
+			// Get expected data 
+			String fileName = this.userName;
+			String directory = CommonConstants.BENEFITS_AND_COVERAGE_PAGE_DIRECTORY;					
+			JSONObject benefitsandcoverageExectedJson = MRScenario.readExpectedJson(
+					fileName, directory);
+			loginScenario.saveBean(PlanBenefitsAndCoverageCommonConstants.BENEFITS_AND_COVERAGE_EXPECTED, benefitsandcoverageExectedJson);
+			System.out.println("Benefits and coverage expected ==============>"+benefitsandcoverageExectedJson.toString());
+		}
+	}
 //	@Then("^the user validates the content on benefits and coverage page")
 	public void validateContentOnBenefitsAndCoveragePage() {
 		
@@ -508,13 +558,7 @@ public class PlanBenefitsAndCoverageAarpStepDefinition {
 				PageConstants.BENEFITS_COVERAGE_PAGE);
 		benefitsCoveragePage.validateReplaceRiderPopup();
 	}
-	
-	@Then("^the user clicks on Disclaimers link$")
-	public void the_user_clicks_on_Disclaimers_link() {
-		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario().getBean(
-				PageConstants.BENEFITS_COVERAGE_PAGE);
-		benefitsCoveragePage.clickOnDisclaimers();
-	}
+
 
 	@When("^the user navigates to contact us page in AARP site$")
 	public void the_user_navigates_to_contact_us_page_in_AARP_site() {
@@ -579,10 +623,379 @@ public class PlanBenefitsAndCoverageAarpStepDefinition {
 
 	}
 
-	/*@After
-	public void tearDown() {
+	@And("^the user validates view and documents label$")
+	public void validate_labels()
+	{
+		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario().getBean(
+				PageConstants.BENEFITS_COVERAGE_PAGE);
+		benefitsCoveragePage.validatelabels();
+	}
 
-		WebDriver wd = (WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
-		wd.quit();
-	}*/
-}
+	
+
+	@And("^the user validates Nurse Health line section$")
+	public void validate_nurse_health_line()
+	{
+		ValueAddedServicepage valueaddedservices = (ValueAddedServicepage) getLoginScenario().getBean(
+				PageConstants.VALUE_ADDED_SERVICES);
+		valueaddedservices.validatenurseHealthLine();
+	}
+	
+
+	@And("^the user validates SilverSneaker section$")
+	public void validate_silversneaker_section()
+	{
+		ValueAddedServicepage valueaddedservices = (ValueAddedServicepage) getLoginScenario().getBean(
+				PageConstants.VALUE_ADDED_SERVICES);
+		valueaddedservices.validatesilverSneaker();
+	}
+	@And("^the user validates My Care Path section$")
+	public void validate_my_care_path()
+	{
+		ValueAddedServicepage valueaddedservices = (ValueAddedServicepage) getLoginScenario().getBean(
+				PageConstants.VALUE_ADDED_SERVICES);
+		valueaddedservices.validatemyCarePath();
+	}
+	@And("^the user validates Vision Discount program section$")
+	public void validate_vision_discount_program()
+	{
+		ValueAddedServicepage valueaddedservices = (ValueAddedServicepage) getLoginScenario().getBean(
+				PageConstants.VALUE_ADDED_SERVICES);
+		valueaddedservices.validatevisionDiscount();
+	}
+	@Then("^the user validates Header section$")
+	public void validate_DCE_section()
+	{
+		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario().getBean(
+				PageConstants.BENEFITS_AND_COVERAGE_PAGE);
+		benefitsCoveragePage.Validate_dce_Section();
+	}
+	
+	@Then("^the user view the Drug Copays & Discounts header$")
+	public void validate_drugcopayheaderntext()
+	{
+		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario().getBean(
+				PageConstants.BENEFITS_AND_COVERAGE_PAGE);
+		benefitsCoveragePage.validatedrugcoverageheaderandtext();
+	}
+	@Then("^the user validates the Locate Pharmacy section$")
+	public void validate_Locate_pharmacy_section()
+	{
+		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario().getBean(
+				PageConstants.BENEFITS_AND_COVERAGE_PAGE);
+		benefitsCoveragePage.ValidatelocatephrmacySection();
+	}
+	
+	@Then("^the user validates the Look Up Drugs button$")
+	public void validate_Lookup_drug_section()
+	{
+		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario().getBean(
+				PageConstants.BENEFITS_AND_COVERAGE_PAGE);
+		benefitsCoveragePage.LookupDrugbutton();
+	}
+	
+	@Then("^the user validates the Drug Coverage  section$")
+	public void validate_Drug_coverage_section()
+	{
+		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario().getBean(
+				PageConstants.BENEFITS_AND_COVERAGE_PAGE);
+		benefitsCoveragePage.validatedrugcoverageheaderandtext();
+	}
+	
+	@Then("^the user validates the Learn More section link for stage$")
+	public void validate_learnmorelink_stage()
+	{
+		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario().getBean(
+				PageConstants.BENEFITS_AND_COVERAGE_PAGE);
+		benefitsCoveragePage.validateLearnmoreLinkstage();
+	}
+	
+	@Then("^the user validates tier link should not display$")
+	public void validate_learnmorelink_tiernotdispplayforlis()
+	{
+		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario().getBean(
+				PageConstants.BENEFITS_AND_COVERAGE_PAGE);
+		benefitsCoveragePage.validate_tierlinknotdisplay();
+	}
+	
+	@Then("^the user validates the Learn More link and click on arrow$")
+	public void validate_Learnmore_link_section()
+	{
+		   BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario().getBean(
+		  				PageConstants.BENEFITS_AND_COVERAGE_PAGE);
+		benefitsCoveragePage.validateLearnmoreLink();
+	}
+	
+	@And("^the user validates the user click on the link it expands and when user clicks it again it should collapse")
+	   public void user_validate_linksworking()
+	   {
+		   BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario().getBean(
+	  				PageConstants.BENEFITS_AND_COVERAGE_PAGE);
+		   JSONObject benefitsandcoverageExectedJson=(JSONObject) loginScenario.getBean(PlanBenefitsAndCoverageCommonConstants.BENEFITS_AND_COVERAGE_EXPECTED);
+		  benefitsCoveragePage.clickOnLearnmoreaboutlinktier(benefitsandcoverageExectedJson);
+		   benefitsCoveragePage.clickOnLearnmoreaboutlinkstage(benefitsandcoverageExectedJson);
+	   }
+	@Then("^the user validates the Drug Header section$")
+	public void validate_DrugHeader_section()
+	{
+		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario().getBean(
+				PageConstants.BENEFITS_AND_COVERAGE_PAGE);
+		benefitsCoveragePage.Validate_drugheader_section();
+	}
+	
+	@Then("^the user validates the Drug cost Header and text$")
+	public void validate_DrugCost_section()
+	{
+		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario().getBean(
+				PageConstants.BENEFITS_AND_COVERAGE_PAGE);
+		benefitsCoveragePage.validate_drugcostheaderntext();
+	}
+
+	@Then("^the user validates dropdown selection functionality$")
+	   public void user_validate_dropdwonvalues()
+	   {
+	   	   BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario().getBean(
+	   				PageConstants.BENEFITS_AND_COVERAGE_PAGE);
+	   	//JSONObject benefitsandcoverageExectedJson=(JSONObject) loginScenario.getBean(PlanBenefitsAndCoverageCommonConstants.BENEFITS_AND_COVERAGE_EXPECTED);
+	   	benefitsCoveragePage.validate_drugcostdropdownoptions();
+	   }
+
+	@And("the user should see drug copay and discount table")
+	public void user_validate_drugcopaydiscounttable() {
+		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario().getBean(
+   				PageConstants.BENEFITS_AND_COVERAGE_PAGE);
+		benefitsCoveragePage.validatedrugcopaytable();
+	}
+	
+	@And("the user should see retail drug copay and discount table")
+	public void user_validate_retaildrugcopaydiscounttable() {
+		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario().getBean(
+   				PageConstants.BENEFITS_AND_COVERAGE_PAGE);
+		benefitsCoveragePage.ValidateDrugCostTableMAPD();
+	}
+	
+	
+	@And("the user validates plan overview section")
+	public void user_validate_planOverview() {
+		BenefitsAndCoveragePage benefitsnCoveragepage = (BenefitsAndCoveragePage) getLoginScenario()
+				.getBean(PageConstants.BENEFITS_AND_COVERAGE_PAGE);
+
+		benefitsnCoveragepage.validatePlanOverview();
+	}
+	@Then("^the user validates the need help section for ship")
+	public void uservalidatesneedhelpsectionShip() {
+		BenefitsAndCoveragePage benefitsnCoveragepage = (BenefitsAndCoveragePage) getLoginScenario()
+				.getBean(PageConstants.BENEFITS_AND_COVERAGE_PAGE);
+
+		benefitsnCoveragepage.validateneedhelpheaderShip();
+
+	}
+	@Then("^the user validates see more ways to contact us section for ship")
+	public void uservalidatesseeMoreWaysShip() {
+		BenefitsAndCoveragePage benefitsnCoveragepage = (BenefitsAndCoveragePage) getLoginScenario()
+				.getBean(PageConstants.BENEFITS_AND_COVERAGE_PAGE);
+
+		benefitsnCoveragepage.validateContactUsNeedHelp();
+
+	}
+	@Then("^the user validates on clicking contact us link it should route to contact us page for ship member")
+	public void uservalidatescontactus() {
+		BenefitsAndCoveragePage benefitsnCoveragepage = (BenefitsAndCoveragePage) getLoginScenario()
+				.getBean(PageConstants.BENEFITS_AND_COVERAGE_PAGE);
+
+		benefitsnCoveragepage.contactUslinkShip();
+	}
+
+	@Then("^the user validates the disclaimer link$")
+	public void the_user_clicks_on_Disclaimers_link() {
+		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario().getBean(
+				PageConstants.BENEFITS_AND_COVERAGE_PAGE);
+		benefitsCoveragePage.clickOnDisclaimers();
+	}
+	
+	
+	
+	@And("^the user validates view and document label$")
+	public void user_validates_view_and_document_label() {
+		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario()
+				.getBean(PageConstants.BENEFITS_AND_COVERAGE_PAGE);
+
+		benefitsCoveragePage.getdocuments_label();
+		benefitsCoveragePage.getview_label();
+
+	}
+	
+	@And("the drugcost dropdown should not display")
+	public void user_validate_dropdownshouldnotdisplay() {
+		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario()
+				.getBean(PageConstants.BENEFITS_AND_COVERAGE_PAGE);
+		benefitsCoveragePage.validate_dropdownnotdisplay();
+	}
+
+	@And("^the user validates the language dropdown and the value displayed by default and selects new value in dropdown successfully$")
+	public void validate_languagedropdown(DataTable givenAttributes)
+	{
+		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario().getBean(
+				PageConstants.BENEFITS_AND_COVERAGE_PAGE);
+		benefitsCoveragePage.validate_langdropdown_first_selection();
+		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells()
+					.get(0), memberAttributesRow.get(i).getCells().get(1));
+		}
+		String language = memberAttributesMap.get("Language");
+		getLoginScenario().saveBean(PlanBenefitsAndCoverageCommonConstants.Language,language);
+		benefitsCoveragePage.validate_langdropdown_select(language);
+	}
+
+	@And("the user validates plan overview section for lis member")
+	public void user_validate_planOverviewLis() {
+		BenefitsAndCoveragePage benefitsnCoveragepage = (BenefitsAndCoveragePage) getLoginScenario()
+				.getBean(PageConstants.BENEFITS_AND_COVERAGE_PAGE);
+
+		benefitsnCoveragepage.validatePlanOverviewLis();
+	}
+	@And("the user validates plan overview section for shipmember")
+	public void user_validate_planOverviewShip() {
+		BenefitsAndCoveragePage benefitsnCoveragepage = (BenefitsAndCoveragePage) getLoginScenario()
+				.getBean(PageConstants.BENEFITS_AND_COVERAGE_PAGE);
+
+		benefitsnCoveragepage.validatePlanOverviewShip();
+	}
+	
+
+	
+	@Then("^the user validates Needhelp header and disclaimer link")
+	public void validateneedhelpheader() {
+		BenefitsAndCoveragePage benefitsnCoveragepage = (BenefitsAndCoveragePage) getLoginScenario()
+				.getBean(PageConstants.BENEFITS_AND_COVERAGE_PAGE);
+
+		benefitsnCoveragepage.validateNeedhelpheader();
+		
+	}
+	
+	@Then("^the user validates contactus section")
+	public void validatecontactussection() {
+		BenefitsAndCoveragePage benefitsnCoveragepage = (BenefitsAndCoveragePage) getLoginScenario()
+				.getBean(PageConstants.BENEFITS_AND_COVERAGE_PAGE);
+
+		benefitsnCoveragepage.validatecontactussection();
+		benefitsnCoveragepage.contactUslinkShip();
+	}
+@And("^the user validate header and text$")
+	public void validate_header_text()
+	{
+		ValueAddedServicepage valueaddedservices = (ValueAddedServicepage) getLoginScenario().getBean(
+				PageConstants.VALUE_ADDED_SERVICES);
+		valueaddedservices.validatevasheadertext();
+	}
+	
+@And("^the user validates the Vas section on benefits and coverage page$")
+	public void validate_VAS_section()
+	{
+		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario().getBean(
+				PageConstants.BENEFITS_AND_COVERAGE_PAGE);
+		benefitsCoveragePage.vasSection();
+	}
+	
+	
+	@And("^the user validates hand image under discount and services section$")
+	public void validate_hand_image()
+	{
+		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario().getBean(
+				PageConstants.BENEFITS_AND_COVERAGE_PAGE);
+		benefitsCoveragePage.handimage();
+	}
+	
+	@And("^the user validates value added services page$")
+	public void click_learn_section()
+	{
+		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario().getBean(
+				PageConstants.BENEFITS_AND_COVERAGE_PAGE);
+		ValueAddedServicepage valueaddedservices= benefitsCoveragePage.clickOnLearnMore();
+		if (valueaddedservices!= null) {
+		getLoginScenario().saveBean(PageConstants.VALUE_ADDED_SERVICES, valueaddedservices);
+		}
+		
+	}
+	
+
+	@And("^the user validates view more link$")
+	public void validate_viewmorelink()
+	{
+		ValueAddedServicepage valueaddedservices = (ValueAddedServicepage) getLoginScenario().getBean(
+				PageConstants.VALUE_ADDED_SERVICES);
+		valueaddedservices.validateviewmorelink();
+	}
+	
+	@And("^when the user clicks on view more link link should expand and disclaimer link should be visible and clickable$")
+	public void validate_viewmorelinkexpand()
+	{
+		ValueAddedServicepage valueaddedservices = (ValueAddedServicepage) getLoginScenario().getBean(
+				PageConstants.VALUE_ADDED_SERVICES);
+		valueaddedservices.validateviewmorelinkexpand();
+	}
+	
+	@And("^the user validates MAIN CTA button$")
+	public void validate_maincta()
+	{
+		ValueAddedServicepage valueaddedservices = (ValueAddedServicepage) getLoginScenario().getBean(
+				PageConstants.VALUE_ADDED_SERVICES);
+		valueaddedservices.validatemainctabutton();
+	}
+	
+	
+	@And("the user validates headers on Bnc page for indi members")
+	public void user_validate_Headers() {
+		BenefitsAndCoveragePage benefitsnCoveragepage = (BenefitsAndCoveragePage) getLoginScenario()
+				.getBean(PageConstants.BENEFITS_AND_COVERAGE_PAGE);;
+				benefitsnCoveragepage.validateHeaders();
+	}
+	
+	
+	@And("the user validates headers on Bnc page for ship members")
+	public void user_validate_Headers_Group() {
+	BenefitsAndCoveragePage benefitsnCoveragepage = (BenefitsAndCoveragePage) getLoginScenario()
+			.getBean(PageConstants.BENEFITS_AND_COVERAGE_PAGE);
+	benefitsnCoveragepage.validateHeadersShip();
+	}
+
+	@And("^the user validate Value Add Service page$")
+	public void validate_Value_Add_page()
+	{
+		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario().getBean(
+				PageConstants.BENEFITS_AND_COVERAGE_PAGE);
+		ValueAddedServicepage valueaddedservices= benefitsCoveragePage.navigateToValueAddService();
+		if (valueaddedservices!= null) {
+		getLoginScenario().saveBean(PageConstants.VALUE_ADDED_SERVICES, valueaddedservices);
+		}
+ }
+	
+	@And("the user validates learnmorebutton on Bnc page for ship members")
+	public void user_validate_learnmorebutton() {
+	BenefitsAndCoveragePage benefitsnCoveragepage = (BenefitsAndCoveragePage) getLoginScenario()
+			.getBean(PageConstants.BENEFITS_AND_COVERAGE_PAGE);
+	benefitsnCoveragepage.learnmorebutton();
+	}
+	
+	@And("the user validates elements on account home page")
+	public void user_validate_accounhomepage() {
+		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstants.ACCOUNT_HOME_PAGE);
+		accountHomePage.validateelements();
+	}
+	
+	@And("the user clicks on profile and preferences and profile page should come")
+	public void user_validate_mymenuandprofileandprefernecs() {
+		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstants.ACCOUNT_HOME_PAGE);
+		ProfileandPreferencesPage profile = accountHomePage.validatemymenufunctionality();
+	}
+	
+	
+	
+
+	
+	
+
+	}

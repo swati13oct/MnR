@@ -4,6 +4,7 @@ package pages.acquisition.bluelayer;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -27,6 +28,7 @@ import pages.acquisition.bluelayer.RequestHelpAndInformationPage;
 import pages.acquisition.ulayer.MaViewPlansAndPricingPage;
 import pages.acquisition.ulayer.MsViewPlansAndPricingPage;
 import pages.acquisition.ulayer.PdpViewPlansAndPricingPage;
+import pages.acquisition.bluelayer.PharmacySearchPage;
 
 public class AcquisitionHomePage extends GlobalWebElements {
 
@@ -100,8 +102,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	@FindBy(className = "fd_myPlans")
 	private WebElement myPlansTab;
 
-	@FindBy(id = "Find a pharmacy near you")
-	private WebElement pharmacyLink;
+@FindBy(id = "Find a pharmacy near you")	private WebElement pharmacyLink;
 	
 	@FindBy(id = "ghn_lnk_2")
 	private WebElement ourPlans;
@@ -147,9 +148,12 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	private static String UMS_ACQISITION_PAGE_URL = MRConstants.UHC_URL;
 
 	public AcquisitionHomePage(WebDriver driver) {
+		
 		super(driver);
 		PageFactory.initElements(driver, this);
 		openAndValidate();
+        System.out.println("Using properties for environment ...."
+                + UMS_ACQISITION_PAGE_URL);
 	}
 
 	public GetStartedPage navigateToPrescriptionDrug() {
@@ -358,9 +362,8 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		}
 		System.out.println("----1---" +driver.getTitle());
 		if (driver.getTitle().equalsIgnoreCase(
-				"Our Medicare Plan Types | UnitedHealthcare®") || driver.getTitle().equalsIgnoreCase("plans") || driver.getTitle().equalsIgnoreCase("Overview")) {
-			System.out.println("----2---");
-			return new VPPPlanSummaryPage(driver);
+			"Our Medicare Plan Types | UnitedHealthcare®") || driver.getTitle().equalsIgnoreCase("plans") || driver.getTitle().equalsIgnoreCase("Overview")) {
+			System.out.println("----2---");			return new VPPPlanSummaryPage(driver);
 		}
 		System.out.println("----3---");
 		return null;
@@ -383,8 +386,8 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		} catch (Exception e) {
 			System.out.println("county box not found");
 		}
-		if (getTitle().equalsIgnoreCase(
-				"Our Medicare Plan Types | UnitedHealthcare®")) {
+		System.out.println(driver.getTitle());
+		if (driver.getTitle().equalsIgnoreCase("Our Medicare Plan Types | UnitedHealthcare®")||driver.getTitle().equalsIgnoreCase("plans")) {
 			return new VPPPlanSummaryPage(driver);
 		}
 		return null;
@@ -655,7 +658,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	}
 
 	public PharmacySearchPage navigateToPharmacyLocator() {
-		/*Actions actions = new Actions(driver);
+/*Actions actions = new Actions(driver);
 		actions.moveToElement(ourPlansHoverLink);
 		actions.moveToElement(ma_moreHelpInfoLink);
 		actions.click().build().perform();*/
@@ -665,9 +668,8 @@ public class AcquisitionHomePage extends GlobalWebElements {
 			Thread.sleep(10000);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
-		}
-		pharmacyLink.click();
-		try {
+		}		pharmacyLink.click();
+try {
 			Thread.sleep(10000);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
@@ -1055,8 +1057,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 					}
 					return null;
 				}
-				
-				public VPPPlanSummaryPage navigateToVpp(String zipcode)
+public VPPPlanSummaryPage navigateToVpp(String zipcode)
 				{
 					
 					sendkeys(zipCodeField, zipcode);
@@ -1068,7 +1069,13 @@ public class AcquisitionHomePage extends GlobalWebElements {
 					}
 					return null;
 				}
-
+public PharmacySearchPage navigateToRequestMoreHelp() {
+					driver.navigate().to("https://www.team-a-uhcmedicaresolutions.uhc.com/health-plans/medicare-advantage-plans/request-information.html");
+					if (getTitle().equalsIgnoreCase("Request Information about Medicare Advantage Plans | UnitedHealthcare®")) {
+						return new PharmacySearchPage(driver);
+}
+					return null;
+				}
 }
 
 		

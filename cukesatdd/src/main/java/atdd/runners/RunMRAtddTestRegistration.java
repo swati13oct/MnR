@@ -12,10 +12,10 @@ import cucumber.junit.Cucumber;
  *
  */
 @RunWith(Cucumber.class)
-@Cucumber.Options(glue = { "atdd.framework","acceptancetests.registration.bluelayer" }, 
-		features = { "feature/registration/bluelayer" }, 
+@Cucumber.Options(glue = { "atdd.framework","acceptancetests.registration.ulayer" }, 
+		features = { "feature/registration/ulayer" }, 
 		format = {
-		"pretty", "html:reports/test-report","json:target/cucumber.json",  }, tags ={"@aarpOnBluelayer"})
+		"pretty", "html:reports/test-report","json:target/cucumber.json",  }, tags ={"@uhcgrouponaarp"})
 public class RunMRAtddTestRegistration {
 
 }

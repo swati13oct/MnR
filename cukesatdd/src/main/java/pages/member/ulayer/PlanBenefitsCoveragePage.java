@@ -81,11 +81,11 @@ public class PlanBenefitsCoveragePage extends UhcDriver {
 	public PlanBenefitsCoveragePage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
-		CommonUtility.waitForPageLoad(driver, planBenefitsContent, CommonConstants.TIMEOUT_30);
+		//CommonUtility.waitForPageLoad(driver, planBenefitsContent, CommonConstants.TIMEOUT_30);
 		String fileName = CommonConstants.BENEFITS_AND_COVERAGE_PDP_NONLIS_NONUS_PAGE_DATA;
 		planBenefitsCoverage = CommonUtility.readPageData(fileName,
 				CommonConstants.PAGE_OBJECT_DIRECTORY_ULAYER_MEMBER);
-		openAndValidate();
+		//openAndValidate();
 	}
 
 	public void logOut() {
@@ -359,6 +359,18 @@ public class PlanBenefitsCoveragePage extends UhcDriver {
 		
 		
 	}
+	
+	public boolean Validate_Single_Tab_SHIP(){
+		List<WebElement> PlanTabs = driver.findElements(By.xpath("//a[contains(text(),'Supplemental  Insurance Plans')]"));
+		System.out.println("No of tabs: "+PlanTabs.size());
+		if(PlanTabs.size()>1){
+			return false;
+		}
+		else{
+			return true;
+		}
+	}
+
 	
 	/*public PharmacySearchPage navigateToPharmacyLocator() {
 

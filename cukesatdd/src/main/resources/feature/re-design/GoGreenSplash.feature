@@ -1,4 +1,4 @@
-@velocityDashers
+@goGreen
 Feature: To test go green splash page
 
   Scenario Outline: Verify go green splash page and validate confirmation message

@@ -20,9 +20,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import pages.acquisition.ulayer.LoginAssistancePage;
-import pages.member.ulayer.AccountHomePage;
-import pages.member.ulayer.AccountHomePage;
-import acceptancetests.atdd.data.CommonConstants;
+import pages.redesign.UlayerHomePage;import pages.member.ulayer.AccountHomePage;import acceptancetests.atdd.data.CommonConstants;
 import acceptancetests.atdd.data.MRConstants;
 import acceptancetests.atdd.data.PageData;
 import acceptancetests.atdd.util.CommonUtility;
@@ -91,6 +89,7 @@ public class LoginPage extends UhcDriver {
 		loginIn.click();	
 		sendkeys(userNameField,username);
 		sendkeys(passwordField,password);
+		System.out.println(signInButton.isEnabled());
 		signInButton.click();
 
 		try {
@@ -102,39 +101,17 @@ public class LoginPage extends UhcDriver {
 		if (MRScenario.environment.equals("awe-dev-b") || MRScenario.environment.equals("dev-a") || MRScenario.environment.equals("dev-c") || MRScenario.environment.equals("team-b") || MRScenario.environment.equals("team-a") || MRScenario.environment.equals("team-c") || MRScenario.environment.equals("team-e")) {
 
 			while(isAlertPresent(driver));
-					
-			/*if (!(MRScenario.environment.equals("awe-dev-b") || MRScenario.environment.equals("dev-c") || MRScenario.environment.equals("team-b"))){
-				Alert alert2 = driver.switchTo().alert();
-				alert2.accept();
-			}*/
 			
 		}
-/*
-		if ( MRScenario.environment.equals("dev-a") || MRScenario.environment.equals("dev-c")
-		|| MRScenario.environment.equals("team-a")) {
-		Alert alert = driver.switchTo().alert();
-        alert.accept();
-        Alert alert1 = driver.switchTo().alert();
-        alert1.accept();        
-        	if (!MRScenario.environment.equals("dev-c")){
-        		Alert alert2 = driver.switchTo().alert();
-        		alert2.accept();
- 			}
 
- 		}*/
-            
 		
 
-		if (MRScenario.environment.equals("dev-c")) {
+		if (MRScenario.environment.equals("team-d")) {
 
 			Alert alert = driver.switchTo().alert();
-			        alert.accept();
-			        Alert alert1 = driver.switchTo().alert();
-			        alert1.accept();
-			   /*     Alert alert2 = driver.switchTo().alert();
-			        alert2.accept();
-			        Alert alert3 = driver.switchTo().alert();
-			        alert3.accept();*/
+			alert.accept();
+			Alert alert1 = driver.switchTo().alert();
+			alert1.accept();
 			        }
 
 		if(currentUrl().contains("home/my-account-home.html"))
@@ -142,10 +119,13 @@ public class LoginPage extends UhcDriver {
 		{
 			return new pages.member.ulayer.AccountHomePage(driver);
 		}
+		else if (currentUrl().contains("home/testharness.html")){
+			return new UlayerHomePage(driver);
+		}
 		else if (currentUrl().contains("terminated-plan.html")) {
 			return new TerminatedHomePage(driver); 
 		}
-		return null;
+			return new AccountHomePage(driver);
 	}
 
 	public LoginAssistancePage navigateToLoginAssistance() {
@@ -164,14 +144,13 @@ public class LoginPage extends UhcDriver {
 
 	@Override
 	public void openAndValidate() {
-		if(MRScenario.environment.equals("team-e")){
+if(MRScenario.environment.equals("team-e")){
 			start(MRConstants.NEW_REDESIGN_URL);
 			
 		}else{
 			start(PAGE_URL);
 			validate(loginIn);
-		}
-	}
+		}	}
 
 	public JSONObject getBrowserCheck() {
 		String fileName = CommonConstants.AARPM_BROWSER_CHECK_DATA;

@@ -145,7 +145,7 @@ Then the user validate registration error message of AARP site
 
 Examples:
 	 | planMemberId | dateOfBirth |
-	 | 925606181    | 05-27-1938  |
+	 | 958753413    | 12-27-1944  |
 	 
 	 
 	 

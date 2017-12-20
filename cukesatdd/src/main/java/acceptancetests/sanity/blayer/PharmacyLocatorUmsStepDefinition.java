@@ -132,7 +132,7 @@ public class PharmacyLocatorUmsStepDefinition {
 	pharmacySearchResultsPage.validateStandardNetworkInResults();
     }
     
-    @And("^Select a Plan from the available plans list displayed$")
+   /* @And("^Select a Plan from the available plans list displayed$")
     public void select_a_plan_from_the_available_plans_list_displayed(DataTable givenAttributes){
 		// get test variables
 		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
@@ -146,7 +146,7 @@ public class PharmacyLocatorUmsStepDefinition {
 		PharmacySearchPage pharmacySearchPage = (PharmacySearchPage) getLoginScenario().getBean(PageConstants.PHARMACY_SEARCH_PAGE);
 		PharmacyResultPage pharmacySearchResultsPage = pharmacySearchPage.selectAPlan(planName);
 		getLoginScenario().saveBean(PageConstants.PHARMACY_RESULTS_PAGE, pharmacySearchResultsPage);
-    }
+    }*/
     
 
 	@And("^the user enters following details for pharmacy search in UMS Site$")

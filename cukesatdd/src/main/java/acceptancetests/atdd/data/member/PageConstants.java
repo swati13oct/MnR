@@ -73,6 +73,10 @@ public class PageConstants {
 	
 	public static final String BENEFITS_COVERAGE_PAGE = "benefitsCoveragePage";
 
+	public static final String PROFILE_AND_PREFERENCES_PAGE = "ProfileandPreferencesPage";
+
+	//public static final String PROFILEANDPREFERENCES_PAGE = "ProfilePreferencesPage";
+	
 	public static final String ORDER_PLAN_MATERIALS_PAGE = "orderplanmaterialsPage";
 
 	public static final String PLAN_MATERIALS_CONFIRMATION_PAGE = "planMaterialConfirmationPage";
@@ -136,7 +140,9 @@ public class PageConstants {
 	public static final String HEALTH_AND_WELLNESS_PAGE = "healthAndWellnessPage";
 
 	public static final String CONTACT_US_PAGE = "contactUsPage";
-
+	
+	public static final String VALUE_ADDED_SERVICES = "valueaddedservices";
+	
 	public static final String PLAN_COMPARE_PAGE = "planComparePage";
 	
 	
@@ -154,7 +160,6 @@ public class PageConstants {
 	public static final String RALLY_TOOL_PAGE = "rallytool";
 
 	public static final String ACQUISITION_HOME_PAGE = "acquisitionhomepage";
-
 	
 
 	public static final String VPP_PLAN_SUMMARY_PAGE = "plansummaryPage";
@@ -173,6 +178,10 @@ public class PageConstants {
 	
 	public static final String MYPCP_SIGN_IN_PAGE = "pcpSignInPage";
 	
+	public static final String MYPCP_DISCLAIMER_PAGE = "pcpDisclaimerPage";
+	
+	public static final String MYUHC_DISCLAIMER_PAGE = "uhcDisclaimerPage";	
+	
 	public static final String MYPCP_ABOUT_US_PAGE = "pcpAboutUsPage";
 	
 	public static final String MYPCP_CONTACT_US_PAGE = "pcpContactUsPage";
@@ -188,14 +197,19 @@ public class PageConstants {
 	public static final String REGISTRATION_ERROR_PAGE = "regErrorPage";
 
 	public static final String DASHBOARD_PAYMENT_HISTORY_PAGE = "dashboardPaymentOverview";
+	
+	public static final String AARP_DISCLAIMER_PAGE = "disclaimerpage";
+	
+	public static final String ABOUT_US_PAGE = "aboutus";
 
-	public static final String NEW_CLAIMS_SUMMARY_PAGE = "newClaimsSummaryPage";	
+	public static final String NEW_CLAIMS_SUMMARY_PAGE = "newClaimsSummaryPage";
 	
 	public static final String NEW_CLAIM_DETAILS_PAGE = "newClaimDetailsPage";
 	
 	public static final String TIME_ADMIN_PAGE = "timeAdminPage";
 
-	public static final String EOB_Page = "eobPage";
+public static final String ProfilePreferencesPage = "ProfilePreferencesPage";	
+public static final String EOB_Page = "eobPage";
 	
 	public static final String DeepLink_Page = "deepLinkPage";
 	
@@ -211,4 +225,5 @@ public class PageConstants {
 	public static final String MEM_REDESIGN_ACCOUNT_HOME_PAGE = "memberRedesignAccountHomePage";
 	
 	public static final String MEM_REDESIGN_HEALTH_AND_WELLNESS_PAGE = "memberRedesignHealthAndWellnessPage";
+
 }

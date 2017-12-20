@@ -1,19 +1,27 @@
-q3_sep_grp092,MAPD,Group,mydocuments
-Dec_group_154/Password@1,,,
-albama_april_ma_001/Password@1,MA,Individual,
-Dec_group_154/Password@1,,,
-albama_april_ma_001/Password@1,MA,Individual,
-q1_apr_grp042/Password@1,MAPD,ALPEEHIP,
-q1_feb_grp043/Password@1,MAPD,Group,
-q3_sep_blayer018/Password@1,MA,IndividualwithMailService,
-q1_apr_blayer010/Password@1,MA,Individual_non_pharmacy_saver,
-q1_apr_grp010/Password@1,MA,Group_non_pharmacy_saver,
-q1_feb_ulayer125/Password@1,MAPD,Individual_dce_flow_pharmacy_saver_cost,
-q1_feb_combo031/Password@1,PDP,Individual_pharmacy_retail,
-q1_feb_ulayer001/Password@1,MAPD,Individual_pharmacy_saver,
-q1_apr_blayer033/Password@1,MAPD,Individual_savings,
-q1_apr_blayer022/Password@1,MAPD,IndividualwithCostSavings,
-q4_dec_uhc034/Password@1,MAPD,IndividualDCEmember,
-q4_dec_uhc160/Password@1,MAPD,Individualwithoutpharmacy,
-q1_apr_grp008/Password@1,MAPD,Group_Inc1,
-Reward_bl_005/Password@5,MAPD,RewardsMember,
+q4_dec_uhc021/Password@1,MAPD,Individual,LIS 1
+q4_dec_uhc137/Password@1,MA,Individual,LIS 1
+
+q4_dec_grp286/Password@1,PDP,Group,LIS 3
+q4_dec_grp055/Password@1,MA,Group,LIS 1
+q4_dec_grp004/Password@1,MAPD,Group,HMO
+q4_dec_grp025/Password@1,MAPD,Group,PPO
+q4_dec_grp014/Password@1,MA,Group,HMO
+q4_dec_grp015/Password@1,MA,Group,PPO
+q4_dec_uhc145/Password@1,MA,Individual,NON LIS
+q4_dec_uhc008/Password@1,MAPD,Individual,NON LIS
+q4_dec_grp011/Password@1,MAPD,Group,NON LIS
+q4_dec_grp010/Password@1,MA,Group,NON LIS
+q4_dec_grp382/Password@1,PDP,Group,NON LIS
+q4_dec_uhc009/Password@1,MAPD,,
+q4_dec_grp253/Password@1,GroupMAPD,,
+q4_dec_grp010/Password@1,GroupMA,,
+q4_dec_uhc145/Password@1,MA,,
+q4_dec_grp382/Password@1,GroupPDP,,
+q4_dec_grp140/Password@1,MAPD,Group,LIS 3
+
+
+
+
+
+
+

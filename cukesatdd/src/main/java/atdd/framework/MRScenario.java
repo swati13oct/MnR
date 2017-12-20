@@ -28,6 +28,9 @@ import java.util.Map.Entry;
 import java.util.Properties;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
+import java.awt.AWTException;
+import java.awt.Robot;
+import java.awt.event.KeyEvent;
 
 import javax.naming.Context;
 import javax.naming.Name;
@@ -40,6 +43,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.junit.Assert;
 import org.openqa.selenium.Dimension;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -48,6 +52,8 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxProfile;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
+import org.openqa.selenium.interactions.Action;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.phantomjs.PhantomJSDriver;
 import org.openqa.selenium.phantomjs.PhantomJSDriverService;
 import org.openqa.selenium.remote.DesiredCapabilities;
@@ -56,7 +62,6 @@ import org.springframework.ldap.core.DistinguishedName;
 import org.springframework.stereotype.Component;
 
 import acceptancetests.atdd.data.CommonConstants;
-
 
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.WebClient;
@@ -91,16 +96,6 @@ public class MRScenario {
 	private static final String DIRECTORY = "/src/main/resources/";
 	public static int count = 0;
 
-	
-	public static final String USERNAME = "ucpadmin";
-	
-	public static final String ACCESS_KEY = "2817affd-616e-4c96-819e-4583348d7b37";
-
-	
-	//public static final String USERNAME = System.getenv("SAUCE_USERNAME");
-	//public static final String ACCESS_KEY = System.getenv("SAUCE_ACCESS_KEY");
-
-	
 	public void saveBean(String id, Object object) {
 		scenarioObjectMap.put(id, object);
 	}
@@ -128,7 +123,6 @@ public class MRScenario {
 		browser = props.get("browser");
 		/* Set acqusisition and member urls */
 		environment = props.get("Environment");
-		System.out.println("Environment selected1 : "+environment);
 
 		/* Set up DB */
 		Connection con = getDBConnection(props);
@@ -144,15 +138,12 @@ public class MRScenario {
 		String defaultSchema = props.get(CommonConstants.DB_SCHEMA);
 
 		try {
-			InputStream memberTypeStream = ClassLoader.class
-					.getResourceAsStream("/database/AMP-Member-Type.csv");
-			memberAmpTypeReader = new BufferedReader(new InputStreamReader(
-					memberTypeStream));
+			InputStream memberTypeStream = ClassLoader.class.getResourceAsStream("/database/AMP-Member-Type.csv");
+			memberAmpTypeReader = new BufferedReader(new InputStreamReader(memberTypeStream));
 			while ((line = memberAmpTypeReader.readLine()) != null) {
 				// use comma as separator
 				String[] memberAttributes = line.split(cvsSplitBy);
-				List<String> attrList = Arrays.asList(memberAttributes)
-						.subList(1, memberAttributes.length);
+				List<String> attrList = Arrays.asList(memberAttributes).subList(1, memberAttributes.length);
 				String userName = null;
 				if (memberAttributes[0].contains("/")) {
 					String[] memberAttributArr = memberAttributes[0].split("/");
@@ -186,15 +177,12 @@ public class MRScenario {
 
 			}
 
-			InputStream memberTypeStream1 = ClassLoader.class
-					.getResourceAsStream("/database/UMS-Member-Type.csv");
-			memberUmsTypeReader = new BufferedReader(new InputStreamReader(
-					memberTypeStream1));
+			InputStream memberTypeStream1 = ClassLoader.class.getResourceAsStream("/database/UMS-Member-Type.csv");
+			memberUmsTypeReader = new BufferedReader(new InputStreamReader(memberTypeStream1));
 			while ((line = memberUmsTypeReader.readLine()) != null) {
 				// use comma as separator
 				String[] memberAttributes = line.split(cvsSplitBy);
-				List<String> attrList = Arrays.asList(memberAttributes)
-						.subList(1, memberAttributes.length);
+				List<String> attrList = Arrays.asList(memberAttributes).subList(1, memberAttributes.length);
 				String userName = null;
 				if (memberAttributes[0].contains("/")) {
 					String[] memberAttributArr = memberAttributes[0].split("/");
@@ -229,13 +217,11 @@ public class MRScenario {
 			}
 			InputStream ampMemberTypeStream = ClassLoader.class
 					.getResourceAsStream("/database/AMP-Registration-data.csv");
-			BufferedReader registermemberReader = new BufferedReader(
-					new InputStreamReader(ampMemberTypeStream));
+			BufferedReader registermemberReader = new BufferedReader(new InputStreamReader(ampMemberTypeStream));
 			while ((line = registermemberReader.readLine()) != null) {
 				// use comma as separator
 				String[] memberAttributes = line.split(cvsSplitBy);
-				List<String> attrList = Arrays.asList(memberAttributes)
-						.subList(1, memberAttributes.length);
+				List<String> attrList = Arrays.asList(memberAttributes).subList(1, memberAttributes.length);
 				String userName = memberAttributes[0];
 				ampRegistrationDataMap.put(userName, attrList);
 
@@ -243,13 +229,11 @@ public class MRScenario {
 
 			InputStream umsMemberTypeStream = ClassLoader.class
 					.getResourceAsStream("/database/UMS-Registration-data.csv");
-			BufferedReader umsRegistermemberReader = new BufferedReader(
-					new InputStreamReader(umsMemberTypeStream));
+			BufferedReader umsRegistermemberReader = new BufferedReader(new InputStreamReader(umsMemberTypeStream));
 			while ((line = umsRegistermemberReader.readLine()) != null) {
 				// use comma as separator
 				String[] memberAttributes = line.split(cvsSplitBy);
-				List<String> attrList = Arrays.asList(memberAttributes)
-						.subList(1, memberAttributes.length);
+				List<String> attrList = Arrays.asList(memberAttributes).subList(1, memberAttributes.length);
 				String userName = memberAttributes[0];
 				umsRegistrationDataMap.put(userName, attrList);
 
@@ -289,14 +273,12 @@ public class MRScenario {
 
 	}
 
-	private static boolean checkMemberFound(String userName, Connection con,
-			DirContext ctx, String defaultSchema) {
+	private static boolean checkMemberFound(String userName, Connection con, DirContext ctx, String defaultSchema) {
 		Statement stmt;
 		ResultSet rs = null;
 		try {
 			stmt = con.createStatement();
-			String query = "select * from " + defaultSchema
-					+ ".PORTAL_USER where USER_NAME='" + userName + "'";
+			String query = "select * from " + defaultSchema + ".PORTAL_USER where USER_NAME='" + userName + "'";
 			System.out.println("query--->" + query);
 			rs = stmt.executeQuery(query);
 		} catch (SQLException e) {
@@ -332,14 +314,10 @@ public class MRScenario {
 
 	private static DirContext getLdapContext(Map<String, String> props) {
 		Hashtable<String, String> env = new Hashtable<String, String>();
-		env.put(Context.INITIAL_CONTEXT_FACTORY,
-				"com.sun.jndi.ldap.LdapCtxFactory");
-		env.put(Context.PROVIDER_URL, props.get(CommonConstants.LDAP_URL)
-				+ props.get(CommonConstants.LDAP_BASE));
-		env.put(Context.SECURITY_PRINCIPAL,
-				props.get(CommonConstants.LDAP_USER));
-		env.put(Context.SECURITY_CREDENTIALS,
-				props.get(CommonConstants.LDAP_PASSWORD));
+		env.put(Context.INITIAL_CONTEXT_FACTORY, "com.sun.jndi.ldap.LdapCtxFactory");
+		env.put(Context.PROVIDER_URL, props.get(CommonConstants.LDAP_URL) + props.get(CommonConstants.LDAP_BASE));
+		env.put(Context.SECURITY_PRINCIPAL, props.get(CommonConstants.LDAP_USER));
+		env.put(Context.SECURITY_CREDENTIALS, props.get(CommonConstants.LDAP_PASSWORD));
 		DirContext ctx = null;
 		try {
 			ctx = new InitialDirContext(env);
@@ -360,10 +338,8 @@ public class MRScenario {
 		}
 		Connection connection = null;
 		try {
-			connection = DriverManager.getConnection(
-					props.get(CommonConstants.DB_URL),
-					props.get(CommonConstants.DB_USERNAME),
-					props.get(CommonConstants.DB_PASSWORD));
+			connection = DriverManager.getConnection(props.get(CommonConstants.DB_URL),
+					props.get(CommonConstants.DB_USERNAME), props.get(CommonConstants.DB_PASSWORD));
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -392,8 +368,7 @@ public class MRScenario {
 
 			try {
 				stmt = con.createStatement();
-				String query = "select * from " + defaultSchema
-						+ ".PORTAL_USER where USER_NAME='" + userName + "'";
+				String query = "select * from " + defaultSchema + ".PORTAL_USER where USER_NAME='" + userName + "'";
 				System.out.println("query--->" + query);
 				rs = stmt.executeQuery(query);
 			} catch (SQLException e) {
@@ -413,37 +388,30 @@ public class MRScenario {
 				/* Checking in LDAP */
 				if (user != null) {
 					ctx.unbind(buildUserDistinguishedName(userName));
-					System.out.println("USERNAME " + userName
-							+ " removed from LDAP");
+					System.out.println("USERNAME " + userName + " removed from LDAP");
 
 				} else {
-					System.out.println("member not found in ldap :: USERNAME "
-							+ userName + " NOT REGISTERED");
+					System.out.println("member not found in ldap :: USERNAME " + userName + " NOT REGISTERED");
 				}
 
 				/* Checking in DataBase */
 				if (rs.next()) {
 					stmt = con.createStatement();
 
-					String query = "DELETE FROM "
-							+ defaultSchema
+					String query = "DELETE FROM " + defaultSchema
 							+ ".PORTAL_USER_ACCOUNT where PORTAL_USER_ID in (select PORTAL_USER_ID from "
-							+ defaultSchema + ".PORTAL_USER where USER_NAME='"
-							+ userName + "')";
-					String query1 = "DELETE FROM " + defaultSchema
-							+ ".PORTAL_USER where USER_NAME='" + userName + "'";
+							+ defaultSchema + ".PORTAL_USER where USER_NAME='" + userName + "')";
+					String query1 = "DELETE FROM " + defaultSchema + ".PORTAL_USER where USER_NAME='" + userName + "'";
 					System.out.println("query--->" + query);
 					rs = stmt.executeQuery(query);
 					System.out.println("query--->" + query1);
 					rs = stmt.executeQuery(query1);
 
-					System.out.println("USERNAME " + userName
-							+ " :: deleted from PORTAL_USER table");
+					System.out.println("USERNAME " + userName + " :: deleted from PORTAL_USER table");
 
 				} else {
 
-					System.out.println("USERNAME " + userName
-							+ " :: member not found in database");
+					System.out.println("USERNAME " + userName + " :: member not found in database");
 				}
 
 			} catch (SQLException e) {
@@ -459,8 +427,7 @@ public class MRScenario {
 		for (String userName : ampRegistrationDataMap.keySet()) {
 			try {
 				stmt = con.createStatement();
-				String query = "select * from " + defaultSchema
-						+ ".PORTAL_USER where USER_NAME='" + userName + "'";
+				String query = "select * from " + defaultSchema + ".PORTAL_USER where USER_NAME='" + userName + "'";
 				System.out.println("query--->" + query);
 				rs = stmt.executeQuery(query);
 			} catch (SQLException e) {
@@ -480,37 +447,30 @@ public class MRScenario {
 				/* Checking in LDAP */
 				if (user != null) {
 					ctx.unbind(buildUserDistinguishedName(userName));
-					System.out.println("USERNAME " + userName
-							+ " removed from LDAP");
+					System.out.println("USERNAME " + userName + " removed from LDAP");
 
 				} else {
-					System.out.println("member not found in ldap :: USERNAME "
-							+ userName + " NOT REGISTERED");
+					System.out.println("member not found in ldap :: USERNAME " + userName + " NOT REGISTERED");
 				}
 
 				/* Checking in DataBase */
 				if (rs.next()) {
 					stmt = con.createStatement();
 
-					String query = "DELETE FROM "
-							+ defaultSchema
+					String query = "DELETE FROM " + defaultSchema
 							+ ".PORTAL_USER_ACCOUNT where PORTAL_USER_ID in (select PORTAL_USER_ID from "
-							+ defaultSchema + ".PORTAL_USER where USER_NAME='"
-							+ userName + "')";
-					String query1 = "DELETE FROM " + defaultSchema
-							+ ".PORTAL_USER where USER_NAME='" + userName + "'";
+							+ defaultSchema + ".PORTAL_USER where USER_NAME='" + userName + "')";
+					String query1 = "DELETE FROM " + defaultSchema + ".PORTAL_USER where USER_NAME='" + userName + "'";
 					System.out.println("query--->" + query);
 					rs = stmt.executeQuery(query);
 					System.out.println("query--->" + query1);
 					rs = stmt.executeQuery(query1);
 
-					System.out.println("USERNAME " + userName
-							+ " :: deleted from PORTAL_USER table");
+					System.out.println("USERNAME " + userName + " :: deleted from PORTAL_USER table");
 
 				} else {
 
-					System.out.println("USERNAME " + userName
-							+ " :: member not found in database");
+					System.out.println("USERNAME " + userName + " :: member not found in database");
 				}
 
 			} catch (SQLException e) {
@@ -544,21 +504,16 @@ public class MRScenario {
 		Map<String, String> props = new HashMap<String, String>();
 		Properties prop = new Properties();
 		String propertiesFileToPick = System.getProperty("environment");
-		//String propertiesFileToPick = "team-b";
-		System.out.println("Using properties for environment ...."
-				+ propertiesFileToPick);
+		System.out.println("Using properties for environment ...." + propertiesFileToPick);
 		if (StringUtils.isBlank(propertiesFileToPick)) {
-			System.out
-			.println("Using CI as default since environment was not passed in !!!");
+			System.out.println("Using CI as default since environment was not passed in !!!");
 			propertiesFileToPick = CommonConstants.DEFAULT_ENVIRONMENT_CI;
 		}
 		// Read properties from classpath
-		StringBuffer propertyFilePath = new StringBuffer(
-				CommonConstants.PROPERTY_FILE_FOLDER);
+		StringBuffer propertyFilePath = new StringBuffer(CommonConstants.PROPERTY_FILE_FOLDER);
 		propertyFilePath.append("/").append(propertiesFileToPick).append("/")
-		.append(CommonConstants.PROPERTY_FILE_NAME);
-		InputStream is = ClassLoader.class.getResourceAsStream(propertyFilePath
-				.toString());
+				.append(CommonConstants.PROPERTY_FILE_NAME);
+		InputStream is = ClassLoader.class.getResourceAsStream(propertyFilePath.toString());
 		try {
 			prop.load(is);
 		} catch (IOException e) {
@@ -567,7 +522,6 @@ public class MRScenario {
 		for (String key : prop.stringPropertyNames()) {
 			String value = prop.getProperty(key);
 			props.put(key, value);
-			System.out.println("Key :"+key+ "value :"+value);
 		}
 		return props;
 	}
@@ -578,11 +532,9 @@ public class MRScenario {
 		return dn;
 	}
 
-	public Map<String, String> getAMPMemberWithDesiredAttributes(
-			List<String> desiredAttributes) {
+	public Map<String, String> getAMPMemberWithDesiredAttributes(List<String> desiredAttributes) {
 		Map<String, String> loginCreds = new HashMap<String, String>();
-		for (Entry<String, List<String>> currEntry : ampMemberAttributesMap
-				.entrySet()) {
+		for (Entry<String, List<String>> currEntry : ampMemberAttributesMap.entrySet()) {
 			if (currEntry.getValue().equals(desiredAttributes)) {
 				if (currEntry.getKey().contains("/")) {
 					String[] keyArr = currEntry.getKey().split("/");
@@ -601,11 +553,9 @@ public class MRScenario {
 		return null;
 	}
 
-	public Map<String, String> getUMSMemberWithDesiredAttributes(
-			List<String> desiredAttributes) {
+	public Map<String, String> getUMSMemberWithDesiredAttributes(List<String> desiredAttributes) {
 		Map<String, String> loginCreds = new HashMap<String, String>();
-		for (Entry<String, List<String>> currEntry : umsMemberAttributesMap
-				.entrySet()) {
+		for (Entry<String, List<String>> currEntry : umsMemberAttributesMap.entrySet()) {
 			if (currEntry.getValue().equals(desiredAttributes)) {
 				if (currEntry.getKey().contains("/")) {
 					String[] keyArr = currEntry.getKey().split("/");
@@ -634,11 +584,9 @@ public class MRScenario {
 			}
 			Map<String, JSONObject> ampObjectMap = new HashMap<String, JSONObject>();
 			for (int i = 0; i < CommonConstants.PAGES.length; i++) {
-				JSONObject jsonObject = readExpectedJson(ampKey,
-						CommonConstants.PAGES[i].getDirectory());
+				JSONObject jsonObject = readExpectedJson(ampKey, CommonConstants.PAGES[i].getDirectory());
 				if (jsonObject != null) {
-					ampObjectMap.put(CommonConstants.PAGES[i].getPageName(),
-							jsonObject);
+					ampObjectMap.put(CommonConstants.PAGES[i].getPageName(), jsonObject);
 				}
 			}
 			if (!ampObjectMap.isEmpty())
@@ -651,11 +599,9 @@ public class MRScenario {
 		for (String ampKey : keySetAmp) {
 			Map<String, JSONObject> ampObjectMap = new HashMap<String, JSONObject>();
 			for (int i = 0; i < CommonConstants.PAGES.length; i++) {
-				JSONObject jsonObject = readExpectedJson(ampKey,
-						CommonConstants.PAGES[i].getDirectory());
+				JSONObject jsonObject = readExpectedJson(ampKey, CommonConstants.PAGES[i].getDirectory());
 				if (jsonObject != null) {
-					ampObjectMap.put(CommonConstants.PAGES[i].getPageName(),
-							jsonObject);
+					ampObjectMap.put(CommonConstants.PAGES[i].getPageName(), jsonObject);
 				}
 			}
 			if (!ampObjectMap.isEmpty())
@@ -664,21 +610,18 @@ public class MRScenario {
 
 		Set<String> keySetUms = umsRegistrationDataMap.keySet();
 		for (String umsKey : keySetUms) {
-			if(umsKey.equalsIgnoreCase("q1_feb_grp043")){
-				//System.out.println("stop at here 1...........................");
+			if (umsKey.equalsIgnoreCase("q1_feb_grp043")) {
+				System.out.println("stop at here 1...........................");
 			}
 			Map<String, JSONObject> umsObjectMap = new HashMap<String, JSONObject>();
 			for (int i = 0; i < CommonConstants.PAGES_BLUELAYER.length; i++) {
-				JSONObject jsonObject = readExpectedJson(umsKey,
-						CommonConstants.PAGES_BLUELAYER[i].getDirectory());
+				JSONObject jsonObject = readExpectedJson(umsKey, CommonConstants.PAGES_BLUELAYER[i].getDirectory());
 				if (jsonObject != null) {
-					umsObjectMap.put(
-							CommonConstants.PAGES_BLUELAYER[i].getPageName(),
-							jsonObject);
+					umsObjectMap.put(CommonConstants.PAGES_BLUELAYER[i].getPageName(), jsonObject);
 				}
 			}
 			if (!umsObjectMap.isEmpty())
-				//System.out.println("stop at here 2...........................");
+				System.out.println("stop at here 2...........................");
 			expectedDataMapBluelayer.put(umsKey, umsObjectMap);
 		}
 
@@ -691,12 +634,9 @@ public class MRScenario {
 			}
 			Map<String, JSONObject> umsObjectMap = new HashMap<String, JSONObject>();
 			for (int i = 0; i < CommonConstants.PAGES_BLUELAYER.length; i++) {
-				JSONObject jsonObject = readExpectedJson(umsKey,
-						CommonConstants.PAGES_BLUELAYER[i].getDirectory());
+				JSONObject jsonObject = readExpectedJson(umsKey, CommonConstants.PAGES_BLUELAYER[i].getDirectory());
 				if (jsonObject != null) {
-					umsObjectMap.put(
-							CommonConstants.PAGES_BLUELAYER[i].getPageName(),
-							jsonObject);
+					umsObjectMap.put(CommonConstants.PAGES_BLUELAYER[i].getPageName(), jsonObject);
 				}
 			}
 			if (!umsObjectMap.isEmpty())
@@ -707,23 +647,18 @@ public class MRScenario {
 		Set<String> registrationAmpKeySet = ampRegistrationDataMap.keySet();
 		for (String registrationKey : registrationAmpKeySet) {
 			if (ampRegistrationDataMap.get(registrationKey).size() > 2) {
-				List<String> value = ampRegistrationDataMap
-						.get(registrationKey);
+				List<String> value = ampRegistrationDataMap.get(registrationKey);
 				List<String> subValue = value.subList(1, 3);
 				if (!subValue.isEmpty()) {
-					String[] key = { value.get(0) + "_" + value.get(1),
-							subValue.get(1) + "_" + subValue.get(0) };
+					String[] key = { value.get(0) + "_" + value.get(1), subValue.get(1) + "_" + subValue.get(0) };
 					for (int j = 0; j < key.length; j++) {
 						Map<String, JSONObject> pageObjectMap = new HashMap<String, JSONObject>();
 						for (int i = 0; i < CommonConstants.PAGES_REGISTRATION_ULAYER.length; i++) {
-							JSONObject jsonObject = readExpectedJson(
-									key[j],
-									CommonConstants.PAGES_REGISTRATION_ULAYER[i]
-											.getDirectory());
+							JSONObject jsonObject = readExpectedJson(key[j],
+									CommonConstants.PAGES_REGISTRATION_ULAYER[i].getDirectory());
 							if (jsonObject != null) {
-								pageObjectMap
-								.put(CommonConstants.PAGES_REGISTRATION_ULAYER[i]
-										.getPageName(), jsonObject);
+								pageObjectMap.put(CommonConstants.PAGES_REGISTRATION_ULAYER[i].getPageName(),
+										jsonObject);
 							}
 
 						}
@@ -732,18 +667,14 @@ public class MRScenario {
 					}
 				}
 			} else {
-				String key = ampRegistrationDataMap.get(registrationKey).get(0)
-						+ "_"
+				String key = ampRegistrationDataMap.get(registrationKey).get(0) + "_"
 						+ ampRegistrationDataMap.get(registrationKey).get(1);
 				Map<String, JSONObject> pageObjectMap = new HashMap<String, JSONObject>();
 				for (int i = 0; i < CommonConstants.PAGES_REGISTRATION_ULAYER.length; i++) {
 					JSONObject jsonObject = readExpectedJson(key,
-							CommonConstants.PAGES_REGISTRATION_ULAYER[i]
-									.getDirectory());
+							CommonConstants.PAGES_REGISTRATION_ULAYER[i].getDirectory());
 					if (jsonObject != null) {
-						pageObjectMap.put(
-								CommonConstants.PAGES_REGISTRATION_ULAYER[i]
-										.getPageName(), jsonObject);
+						pageObjectMap.put(CommonConstants.PAGES_REGISTRATION_ULAYER[i].getPageName(), jsonObject);
 					}
 
 				}
@@ -756,23 +687,18 @@ public class MRScenario {
 		Set<String> registrationUmsKeySet = umsRegistrationDataMap.keySet();
 		for (String registrationKey : registrationUmsKeySet) {
 			if (umsRegistrationDataMap.get(registrationKey).size() > 2) {
-				List<String> value = umsRegistrationDataMap
-						.get(registrationKey);
+				List<String> value = umsRegistrationDataMap.get(registrationKey);
 				List<String> subValue = value.subList(1, 3);
 				if (!subValue.isEmpty()) {
-					String[] key = { value.get(0) + "_" + value.get(1),
-							subValue.get(1) + "_" + subValue.get(0) };
+					String[] key = { value.get(0) + "_" + value.get(1), subValue.get(1) + "_" + subValue.get(0) };
 					for (int j = 0; j < key.length; j++) {
 						Map<String, JSONObject> pageObjectMap = new HashMap<String, JSONObject>();
 						for (int i = 0; i < CommonConstants.PAGES_REGISTRATION_BLUELAYER.length; i++) {
-							JSONObject jsonObject = readExpectedJson(
-									key[j],
-									CommonConstants.PAGES_REGISTRATION_BLUELAYER[i]
-											.getDirectory());
+							JSONObject jsonObject = readExpectedJson(key[j],
+									CommonConstants.PAGES_REGISTRATION_BLUELAYER[i].getDirectory());
 							if (jsonObject != null) {
-								pageObjectMap
-								.put(CommonConstants.PAGES_REGISTRATION_BLUELAYER[i]
-										.getPageName(), jsonObject);
+								pageObjectMap.put(CommonConstants.PAGES_REGISTRATION_BLUELAYER[i].getPageName(),
+										jsonObject);
 							}
 
 						}
@@ -781,18 +707,14 @@ public class MRScenario {
 					}
 				}
 			} else {
-				String key = umsRegistrationDataMap.get(registrationKey).get(0)
-						+ "_"
+				String key = umsRegistrationDataMap.get(registrationKey).get(0) + "_"
 						+ umsRegistrationDataMap.get(registrationKey).get(1);
 				Map<String, JSONObject> pageObjectMap = new HashMap<String, JSONObject>();
 				for (int i = 0; i < CommonConstants.PAGES_REGISTRATION_BLUELAYER.length; i++) {
 					JSONObject jsonObject = readExpectedJson(key,
-							CommonConstants.PAGES_REGISTRATION_BLUELAYER[i]
-									.getDirectory());
+							CommonConstants.PAGES_REGISTRATION_BLUELAYER[i].getDirectory());
 					if (jsonObject != null) {
-						pageObjectMap.put(
-								CommonConstants.PAGES_REGISTRATION_BLUELAYER[i]
-										.getPageName(), jsonObject);
+						pageObjectMap.put(CommonConstants.PAGES_REGISTRATION_BLUELAYER[i].getPageName(), jsonObject);
 					}
 
 				}
@@ -819,10 +741,9 @@ public class MRScenario {
 		}
 		FileInputStream stream = null;
 		try {
-			stream = new FileInputStream(parentDirectory + DIRECTORY
-					+ directory + fileName);
+			stream = new FileInputStream(parentDirectory + DIRECTORY + directory + fileName);
 		} catch (FileNotFoundException e) {
-			//System.out.println("FILE NOT FOUND: " + parentDirectory + DIRECTORY+ directory + fileName);
+			System.out.println("FILE NOT FOUND: " + parentDirectory + DIRECTORY + directory + fileName);
 			return jsonObject;
 		}
 
@@ -860,20 +781,18 @@ public class MRScenario {
 				jsonObject = new JSONObject(response);
 			}
 		} catch (JSONException e) {
-			System.out.println("EMPTY RESPONSE: " + parentDirectory + DIRECTORY
-					+ directory + fileName);
+			System.out.println("EMPTY RESPONSE: " + parentDirectory + DIRECTORY + directory + fileName);
 			e.printStackTrace();
 		}
 
-		//		if (fileName.equalsIgnoreCase("DentalPlatinumLis2.json")) {
-		//			System.out.println("===>File:" + parentDirectory + DIRECTORY
-		//					+ directory + fileName + "Value => " + jsonObject);
-		//		}
+		// if (fileName.equalsIgnoreCase("DentalPlatinumLis2.json")) {
+		// System.out.println("===>File:" + parentDirectory + DIRECTORY
+		// + directory + fileName + "Value => " + jsonObject);
+		// }
 		return jsonObject;
 	}
 
 	public Map<String, JSONObject> getExpectedJson(String user) {
-
 
 		if (null != user && expectedDataMapUlayer.containsKey(user)) {
 			return expectedDataMapUlayer.get(user);
@@ -890,60 +809,70 @@ public class MRScenario {
 	}
 
 	/**
-	 * Set values in your config file to use the various web browsers. Add the following 
-	 * two lines to your config file: 
+	 * Set values in your config file to use the various web browsers. Add the
+	 * following two lines to your config file:
 	 * 
-	 *  WebDriver=PHANTOMJS
+	 * WebDriver=PHANTOMJS
 	 * BrowserPathToBinary=C:\\Apps\\phantomjs-2.1.1-windows\\bin\\phantomjs.exe
 	 * 
 	 * or for Fire Fox:
 	 * 
-	 * WebDriver=FIREFOX
-	 * BrowserPathToBinary=C:\\Program Files (x86)\\Mozilla Firefox\\firefox.exe
+	 * WebDriver=FIREFOX BrowserPathToBinary=C:\\Program Files (x86)\\Mozilla
+	 * Firefox\\firefox.exe
 	 * 
 	 * Of course your path to the binary will be different.
 	 * 
-	 * PhantomJS supports mimicking browsers.  By changing the agentString, one can spoof
-	 * a browser type for example, this is a desktop string:
+	 * PhantomJS supports mimicking browsers. By changing the agentString, one
+	 * can spoof a browser type for example, this is a desktop string:
 	 * 
-	 * Mozilla/5.0 (Windows NT 6.0) AppleWebKit/535.1 (KHTML, like Gecko) Chrome/13.0.782.41 Safari/535.1
+	 * Mozilla/5.0 (Windows NT 6.0) AppleWebKit/535.1 (KHTML, like Gecko)
+	 * Chrome/13.0.782.41 Safari/535.1
 	 * 
-	 * Using this string causes PhantomJS to act like a desktop browser and will access desktop versions of websites.
-	 * This is a mobile string:
+	 * Using this string causes PhantomJS to act like a desktop browser and will
+	 * access desktop versions of websites. This is a mobile string:
 	 * 
-	 * Mozilla/5.0 (Linux; U; Android 2.3.3; en-us; LG-LU3000 Build/GRI40) AppleWebKit/533.1 (KHTML, like Gecko) Version/4.0 Mobile Safari/533.1
+	 * Mozilla/5.0 (Linux; U; Android 2.3.3; en-us; LG-LU3000 Build/GRI40)
+	 * AppleWebKit/533.1 (KHTML, like Gecko) Version/4.0 Mobile Safari/533.1
 	 * 
-	 * Using this string makes PhantomJS identfy itself as a mobile browser (on a mobile device) and will allow you to use the mobile versions
-	 * of websites.
+	 * Using this string makes PhantomJS identfy itself as a mobile browser (on
+	 * a mobile device) and will allow you to use the mobile versions of
+	 * websites.
 	 * 
-	 * By default, When a job is run in Jenkins, the values defines in Jenkins will override values in the config file, but will not change them.  If you 
-	 * look at the Jenkins job, it specifies a browser type and it should be PhantomJS.
-	 * Anything else may be a problem.
+	 * By default, When a job is run in Jenkins, the values defines in Jenkins
+	 * will override values in the config file, but will not change them. If you
+	 * look at the Jenkins job, it specifies a browser type and it should be
+	 * PhantomJS. Anything else may be a problem.
 	 */
-	
 	public WebDriver getWebDriver() {
 
-		//Is system propery exists defining JENKINS_BROWSER, we're running in JENKINS and
-		//will prefer those browser properties.
-		String browser = (null == System.getProperty(CommonConstants.JENKINS_BROWSER)
-				? props.get(CommonConstants.DESKTOP_WEBDRIVER) : System.getProperty(CommonConstants.JENKINS_BROWSER));
+		// !!!!! ATTENTION !!!!!
+		/// If you're changing this code to get a browser to work the you're
+		// doing it wrong
+		// You should be able to configure a browser in whatever
+		// config.preoperties file
+		// you're using. You shouldn't have to change code.
 
-		String browserName = (null == System.getProperty(CommonConstants.BROWSER_NAME)
-				? props.get("BrowserName") : System.getProperty(CommonConstants.BROWSER_NAME));
+		// Is system propery exists defining JENKINS_BROWSER, we're running in
+		// JENKINS and
+		// will prefer those browser properties.
+		String browser = (null == System.getProperty(CommonConstants.JENKINS_BROWSER_PHANTOMJS)
+				? props.get(CommonConstants.DESKTOP_WEBDRIVER)
+				: System.getProperty(CommonConstants.JENKINS_BROWSER_PHANTOMJS));
 
+		String browserName = (null == System.getProperty(CommonConstants.BROWSER_NAME) ? props.get("BrowserName")
+				: System.getProperty(CommonConstants.BROWSER_NAME));
 
 		String agent = (null == System.getProperty(CommonConstants.JENKINS_BROWSER_AGENT_STRING)
-				? props.get(CommonConstants.DESKTOP_BROWSER_AGENT_STRING) : System.getProperty(CommonConstants.JENKINS_BROWSER_AGENT_STRING));
-		System.out.println("Environment selected 2 : "+environment);
+				? props.get(CommonConstants.DESKTOP_BROWSER_AGENT_STRING)
+				: System.getProperty(CommonConstants.JENKINS_BROWSER_AGENT_STRING));
 
 		if (browser.equalsIgnoreCase(CommonConstants.JENKINS_BROWSER_PHANTOMJS)) {
 			System.out.println("PHANTOMJS Agent: " + agent);
 		}
 
-		// Again, Jenkins takes precedent. 
+		// Again, Jenkins takes precedent.
 		String pathToBinary = (null == System.getProperty("phantomjs") ? props.get("BrowserPathToBinary")
 				: System.getProperty("phantomjs"));
-
 
 		System.out.println("getWebDriver: returning driver for " + browser);
 		// if webDriver is null, create one, otherwise send the existing one
@@ -953,7 +882,6 @@ public class MRScenario {
 		if (null == webDriver) {
 			System.out.println("New WebDriver CREATED");
 
-
 			// Choose your browser based on name. The name value is what is in
 			// CommonConstants.
 			// If the browser isn't configured (null) or it's set to HTMLUNIT,
@@ -962,7 +890,7 @@ public class MRScenario {
 			// the default
 			if (null == browser || browser.equalsIgnoreCase(CommonConstants.HTMLUNIT_BROWSER)) {
 				// use the HtmlUnit Driver
-				HtmlUnitDriver htmlUnitDriver = new HtmlUnitDriver(BrowserVersion.BEST_SUPPORTED) {
+				HtmlUnitDriver htmlUnitDriver = new HtmlUnitDriver(BrowserVersion.getDefault()) {
 					@Override
 					protected WebClient modifyWebClient(WebClient client) {
 						client.getOptions().setThrowExceptionOnScriptError(false);
@@ -978,35 +906,38 @@ public class MRScenario {
 				// otherwise if we have a Jenkins browser defined, we use it.
 				DesiredCapabilities caps = new DesiredCapabilities();
 				caps.setCapability(PhantomJSDriverService.PHANTOMJS_EXECUTABLE_PATH_PROPERTY, pathToBinary);
-				//from Jarvis
-				caps.setCapability(PhantomJSDriverService.PHANTOMJS_PAGE_SETTINGS_PREFIX + "userAgent", agent);
+				// from Jarvis
+				// caps.setCapability(PhantomJSDriverService.PHANTOMJS_PAGE_SETTINGS_PREFIX
+				// + "userAgent", agent);
 				caps.setJavascriptEnabled(true);
 				caps.setCapability(PhantomJSDriverService.PHANTOMJS_CLI_ARGS,
 						new String[] { "--web-security=no", "--ignore-ssl-errors=yes", "--ssl-protocol=any" });
 
-				//end from jarvis
+				// end from jarvis
 				webDriver = new PhantomJSDriver(caps);
-				webDriver.manage().window().setSize(new Dimension(1400,1000));
-				webDriver.manage().timeouts().pageLoadTimeout(200,TimeUnit.SECONDS);
+				webDriver.manage().window().setSize(new Dimension(1400, 1000));
+				webDriver.manage().timeouts().pageLoadTimeout(200, TimeUnit.SECONDS);
 			} else if (browser.equalsIgnoreCase(CommonConstants.FIREFOX_BROWSER)) {
 				FirefoxBinary ffBinary = new FirefoxBinary(new File(pathToBinary));
 				FirefoxProfile firefoxProfile = new FirefoxProfile();
 				webDriver = new FirefoxDriver(ffBinary, firefoxProfile);
 				webDriver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
-				webDriver.manage().window().maximize();
 			} else if (browser.equalsIgnoreCase(CommonConstants.CHROME_BROWSER)) {
 				Map<String, Object> chromeOptions = new HashMap<String, Object>();
 				chromeOptions.put("binary", pathToBinary);
 				DesiredCapabilities capabilities = DesiredCapabilities.chrome();
 				capabilities.setCapability(ChromeOptions.CAPABILITY, chromeOptions);
-				webDriver = new ChromeDriver(capabilities);
+				System.setProperty("webdriver.chrome.driver", props.get(CommonConstants.CHROME_DRIVER));
+				WebDriver webDriver = new ChromeDriver();
+				return webDriver;
+
 			} else if (browser.equalsIgnoreCase(CommonConstants.IE_BROWSER)) {
-				System.setProperty("webdriver.ie.driver",
-						pathToBinary);
+				System.setProperty("webdriver.ie.driver", pathToBinary);
 				DesiredCapabilities ieCaps = DesiredCapabilities.internetExplorer();
 				ieCaps.setCapability(InternetExplorerDriver.INTRODUCE_FLAKINESS_BY_IGNORING_SECURITY_DOMAINS, true);
 				webDriver = new InternetExplorerDriver(ieCaps);
 				webDriver.manage().window().maximize();
+
 				return webDriver;
 			} else if (browser.equalsIgnoreCase(CommonConstants.MOBILE_BROWSER)) {
 				Map<String, String> mobileEmulation = new HashMap<String, String>();
@@ -1019,22 +950,21 @@ public class MRScenario {
 				System.setProperty("webdriver.chrome.driver", props.get(CommonConstants.CHROME_DRIVER));
 				webDriver = new ChromeDriver(capabilities);
 				return webDriver;
-			}else if (browser.equalsIgnoreCase(CommonConstants.SAUCE_BROWSER_WEB)) {
+			} else if (browser.equalsIgnoreCase(CommonConstants.SAUCE_BROWSER_WEB)) {
 				System.out.println("Execution is Going to Start on SauceLabs Web.....!!!!!");
-				System.out.println("Environment selected 3 : "+environment);
 				DesiredCapabilities capabilities = null;
-				if(browserName.equalsIgnoreCase("firefox")){
-					//System.out.println("Inside firefox");
+				if (browserName.equalsIgnoreCase("firefox")) {
+					System.out.println("Inside firefox");
 					capabilities = DesiredCapabilities.firefox();
 					capabilities.setCapability("platform", "Windows 7");
-					capabilities.setCapability("version", "43");
+					capabilities.setCapability("version", "48");
 					capabilities.setCapability("idleTimeout", 180);
-				}else if(browserName.equalsIgnoreCase("IE")){
+				} else if (browserName.equalsIgnoreCase("IE")) {
 					capabilities = DesiredCapabilities.internetExplorer();
 					capabilities.setCapability("platform", "Windows 7");
 					capabilities.setCapability("version", "11.0");
 					capabilities.setCapability("screenResolution", "1024x768");
-				}else if(browserName.equalsIgnoreCase("chrome")){
+				} else if (browserName.equalsIgnoreCase("chrome")) {
 					System.out.println("Inside chrome");
 					capabilities = DesiredCapabilities.chrome();
 					capabilities.setCapability("platform", "Windows 7");
@@ -1044,43 +974,8 @@ public class MRScenario {
 				capabilities.setCapability("autoAcceptsAlerts", true);
 				capabilities.setCapability("parent-tunnel", "sauce_admin");
 				capabilities.setCapability("tunnelIdentifier", "OptumSharedTunnel-Prd");
-				capabilities.setCapability("build", System.getenv("JOB_NAME") + "__" + System.getenv("RUNNER_NUMBER"));
-				String URL = "http://" + USERNAME + ":" + ACCESS_KEY + "@ondemand.saucelabs.com:80/wd/hub";
-				String jobName = "MnR test Execution of [" +System.getProperty("test")  +":] - Using " + capabilities.getBrowserName() + " in  " + environment +" environment";
-				capabilities.setCapability("name", jobName);
-				if (USERNAME == null || ACCESS_KEY == null) {
-					Assert.fail(
-							"Missing value for environment variable(s) SAUCE_USERNAME or SAUCE_ACCESS_KEY.  Check environment configuration and try again");
-				}
-				try {
-					webDriver = new RemoteWebDriver(new URL(URL), capabilities);
-				} catch (MalformedURLException e) {
-					Assert.fail("Invalid Sauce URL: [" + URL + "]");
-				}
-				return webDriver;
-			}
-			//https://wiki.saucelabs.com/display/DOCS/Platform+Configurator#/
-			else if (browser.equalsIgnoreCase(CommonConstants.SAUCE_BROWSER_MOBILE)){
-				System.out.println("Execution is Going to Start on SauceLabs Mobile.....!!!!!");
-				DesiredCapabilities capabilities = null;
-				if(browserName.equalsIgnoreCase("Safari")){
-					capabilities = DesiredCapabilities.iphone();
-				}else{
-					capabilities = DesiredCapabilities.android();
-				}
-				System.out.println(props.get(CommonConstants.DEVICE_VERSION)+" "+props.get(CommonConstants.DEVICE_NAME)+" "
-						+""+props.get(CommonConstants.PLATFORM_VERSION)+" "+props.get(CommonConstants.PLATFORM_NAME)+" "+browserName);
-				capabilities.setCapability("appiumVersion", props.get(CommonConstants.DEVICE_VERSION));
-				capabilities.setCapability("deviceName",props.get(CommonConstants.DEVICE_NAME));
-				capabilities.setCapability("deviceOrientation", "portrait");
-				capabilities.setCapability("browserName", browserName);
-				capabilities.setCapability("platformVersion", props.get(CommonConstants.PLATFORM_VERSION));
-				capabilities.setCapability("platformName",props.get(CommonConstants.PLATFORM_NAME));        		    
-				capabilities.setCapability("autoAcceptsAlerts", true);
-				capabilities.setCapability("parent-tunnel", "sauce_admin");
-				capabilities.setCapability("tunnelIdentifier", "OptumSharedTunnel-Prd");
-				String USERNAME = "apriyad4";
-				String ACCESS_KEY = "6e1345f1-80ea-4863-8573-187bf3151ac0";
+				String USERNAME = "njain112";
+				String ACCESS_KEY = "13284fe0-5132-4a64-8558-1ddfa10b32e8";
 				String URL = "http://" + USERNAME + ":" + ACCESS_KEY + "@ondemand.saucelabs.com:80/wd/hub";
 				if (USERNAME == null || ACCESS_KEY == null) {
 					Assert.fail(
@@ -1091,19 +986,58 @@ public class MRScenario {
 				} catch (MalformedURLException e) {
 					Assert.fail("Invalid Sauce URL: [" + URL + "]");
 				}
-				return webDriver;
 			}
 		}
-		return webDriver;
+				return webDriver;
+			
+		
+		  /*if (null == webDriver) {              
+	           File pathToBinary = new File("C:\\Program Files (x86)\\Google\\Chrome\\Application\\Chrome.exe");
+	           Map<String, Object> chromeOptions = new HashMap<String, Object>();
+	           chromeOptions.put("binary", pathToBinary);
+	           DesiredCapabilities capabilities = DesiredCapabilities.chrome();
+	           capabilities.setCapability(ChromeOptions.CAPABILITY, chromeOptions);
+	           System.setProperty("webdriver.chrome.driver","C:\\Users\\njain112\\Videos\\chromedriver.exe");
+	           webDriver = new ChromeDriver();
+	       }
+	           return webDriver;*/
+
+	}    
+
+	
+
+	public static void keyEvent(WebDriver driver) {
+		// TODO Auto-generated method stub
+
+		try {
+			Actions Builder = new Actions(driver);
+
+			Actions pressingEnter = Builder.keyDown(Keys.ENTER);
+			pressingEnter.perform();
+
+			// rb.keyPress(KeyEvent.VK_ENTER);
+			// rb.keyRelease(KeyEvent.VK_ENTER);
+
+			System.out.println("Pressing enter");
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
 	}
+
+	/*
+	 * 
+	 * webDriver = new FirefoxDriver();
+	 * webDriver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
+	 */
+	// return webDriver;
 
 	public WebDriver getIEDriver() {
 		System.setProperty("webdriver.ie.driver",
 				"C:/Users/pgupta15/Downloads/IEDriverServer_x64_2.27.0/IEDriverServer.exe");
 		DesiredCapabilities ieCaps = DesiredCapabilities.internetExplorer();
-		ieCaps.setCapability(
-				InternetExplorerDriver.INTRODUCE_FLAKINESS_BY_IGNORING_SECURITY_DOMAINS,
-				true);
+		ieCaps.setCapability(InternetExplorerDriver.INTRODUCE_FLAKINESS_BY_IGNORING_SECURITY_DOMAINS, true);
 		webDriver = new InternetExplorerDriver(ieCaps);
 		webDriver.manage().window().maximize();
 		return webDriver;
@@ -1114,16 +1048,13 @@ public class MRScenario {
 	 */
 	public WebDriver getMobileWebDriver() {
 		Map<String, String> mobileEmulation = new HashMap<String, String>();
-		mobileEmulation.put("deviceName",
-				props.get(CommonConstants.DEVICE_NAME));
+		mobileEmulation.put("deviceName", props.get(CommonConstants.DEVICE_NAME));
 		Map<String, Object> chromeOptions = new HashMap<String, Object>();
 		chromeOptions.put("mobileEmulation", mobileEmulation);
 		DesiredCapabilities capabilities = DesiredCapabilities.chrome();
-		capabilities.setCapability("chrome.switches",
-				Arrays.asList("--start-maximized"));
+		capabilities.setCapability("chrome.switches", Arrays.asList("--start-maximized"));
 		capabilities.setCapability(ChromeOptions.CAPABILITY, chromeOptions);
-		System.setProperty("webdriver.chrome.driver",
-				props.get(CommonConstants.CHROME_DRIVER));
+		System.setProperty("webdriver.chrome.driver", props.get(CommonConstants.CHROME_DRIVER));
 		webDriver = new ChromeDriver(capabilities);
 		return webDriver;
 	}
