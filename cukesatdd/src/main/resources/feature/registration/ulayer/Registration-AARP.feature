@@ -133,3 +133,19 @@ Then the user validate registration error message of AARP site
 Examples:
 	 | planMemberId | dateOfBirth |
 	 | 951498845    | 08-12-1945  |
+	 
+@uhcgrouponaarp
+Scenario Outline: To verify registration negative scenarios in AARP site
+Given the user is on registration page of AARP site 
+When the user registers with dob and memberId in AARP site
+	| Plan Member ID         | <planMemberId> |	
+	| Date of birth          | <dateOfBirth>  |
+Then the user navigate to registration error page of AARP site
+Then the user validate registration error message of AARP site
+
+Examples:
+	 | planMemberId | dateOfBirth |
+	 | 958753413    | 12-27-1944  |
+	 
+	 
+	 

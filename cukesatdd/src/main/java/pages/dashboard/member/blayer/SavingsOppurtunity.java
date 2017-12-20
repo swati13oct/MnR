@@ -15,6 +15,8 @@ import acceptancetests.atdd.data.CommonConstants;
 import acceptancetests.atdd.data.PageData;
 import acceptancetests.atdd.util.CommonUtility;
 import atdd.framework.UhcDriver;
+
+//DEPRICATED CLASS
 public class SavingsOppurtunity extends UhcDriver{
 	
 	private PageData switchgeneric;
@@ -29,7 +31,7 @@ public class SavingsOppurtunity extends UhcDriver{
 	public WebElement savedrugbutton;
 	
 	
-	@FindBy(xpath="/html/body/div[2]/div[3]/div/div/div/div/div/div[3]/div/table/tbody/tr")
+	@FindBy(xpath="//header[@class='add-drug-slide-header']/span[contains(text(),' SAVINGS OPPORTUNITY')]")
 	public WebElement SwitchGenericPage;
 	
 	public SavingsOppurtunity(WebDriver driver) {
@@ -68,7 +70,9 @@ public class SavingsOppurtunity extends UhcDriver{
 
 		return newPaymentHistoryExpectedJson;
 	}
-	public void savedrugbutton() {
+	public void savedrugbutton() throws InterruptedException {
+		Thread.sleep(10000);
+		waitforElement(savedrugbutton);
 		savedrugbutton.click();
 		// TODO Auto-generated method stub
 		

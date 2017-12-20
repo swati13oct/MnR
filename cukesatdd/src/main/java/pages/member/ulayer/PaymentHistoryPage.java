@@ -3,10 +3,12 @@
  */
 package pages.member.ulayer;
 
+import java.util.List;
 import java.util.Map;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -82,11 +84,11 @@ public class PaymentHistoryPage extends UhcDriver{
 	public PaymentHistoryPage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
-		CommonUtility.waitForPageLoad(driver, paymenthistorypage, CommonConstants.TIMEOUT_30);
+		//CommonUtility.waitForPageLoad(driver, paymenthistorypage, CommonConstants.TIMEOUT_30);
 		String fileName = CommonConstants.PAYMENT_HISTORY_PAGE_DATA;
 		paymentHistory = CommonUtility.readPageData(fileName,
 				CommonConstants.PAGE_OBJECT_DIRECTORY_ULAYER_MEMBER);
-		openAndValidate();
+		//openAndValidate();
 	}
 
 	public void getSearchClick()
@@ -201,6 +203,17 @@ public class PaymentHistoryPage extends UhcDriver{
 			return new SetupAutoPaymentPage(driver);
 		}
 		return null;
+	}
+
+	public boolean Validate_Single_Tab_SHIP(){
+		List<WebElement> PlanTabs = driver.findElements(By.xpath("//a[contains(text(),'Supplemental  Insurance Plans')]"));
+		System.out.println("No of tabs: "+PlanTabs.size());
+		if(PlanTabs.size()>1){
+			return false;
+		}
+		else{
+			return true;
+		}
 	}
 
 	@Override

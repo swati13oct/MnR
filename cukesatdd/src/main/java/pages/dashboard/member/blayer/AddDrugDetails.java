@@ -3,6 +3,7 @@ import java.util.Map;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -32,7 +33,10 @@ public class AddDrugDetails extends UhcDriver {
 
 	@FindBy(id = "quantity")
 	public WebElement quantityField;
-
+	
+	@FindBy(id = "drug-alt-back-button")
+	public WebElement backToSearchBtn;
+	
 	@FindBy(id = "frequency")
 	public WebElement selectYourFrequencyDropdown;
 	public AddDrugDetails(WebDriver driver) {
@@ -78,6 +82,7 @@ public class AddDrugDetails extends UhcDriver {
 	}
 
 	public void selectQnty(String qnty){
+		waitforElement(quantityField);
 		sendkeys(quantityField, qnty);
 	}
 
@@ -87,8 +92,15 @@ public class AddDrugDetails extends UhcDriver {
 	}
 
 	public void continueAddDrugDetails(){
+		waitforElement(continueButton);
 		continueButton.click();
 	}
-
+	public AddNewDrugModal backToSeach(){
+		backToSearchBtn.click();
+		return new AddNewDrugModal(driver);
+	}
+	public void validateThePage(){
+		Assert.assertTrue(AddDrugDetailsPage.isDisplayed());
+	}
 
 }

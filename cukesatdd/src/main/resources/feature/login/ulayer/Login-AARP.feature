@@ -10,7 +10,7 @@ Examples:
 	| planType |
 	| MAPD     |
 #	| MA       |
-	| PDP      |
+#	| PDP      |
 #	| MS       |
 #	| HIP      |
 	
@@ -99,8 +99,6 @@ Then the user validates plan and member details after login in AARP site
 Examples:
    | planType1 | planType2 |
 #   | PDP       | HIP       |
-#   | MA        | HIP       |
-
 
 Scenario Outline: Verify Error messages in aarp member site for combo members
 Given the user is on the AARP Ulayer site login page
@@ -162,4 +160,70 @@ Then User enters new email address and validates the confirmation page
 
 Examples:
    | planType1 |
-   | MAPD |
+   | MAPD |Scenario Outline: verify menu details after login in AARP site 
+Given the user is on the AARP medicare site login page
+When the user logs in with a registered AMP with following details in AARP site
+	| Plan Type   | <planType>  |
+	| Menu Link   | <menuLink>  |
+Then the user validates the preferred Mail service link in menu details
+
+Examples:
+	| planType |  menuLink                   |
+	| PDP      |  Preferred Mail Service Link|
+	
+	
+Scenario Outline: verify Quick links from footer after login in AARP site 
+Given the user is on the AARP medicare site login page
+When the user logs in with a registered AMP with following details in AARP site
+	| Plan Type   | <planType>  |
+	| Menu Link   | <menuLink>  |
+Then the user validates the order drugs from your preferred Mail Service pharmacy link in AARP site
+
+Examples:
+	| planType |  menuLink                   |
+	| PDP      |  Preferred Mail Service Link|
+
+Scenario Outline: Verify envelop icon on  AARP site 
+Given the user is on the AARP medicare site login page
+When the user logs in with a registered AMP with following details in AARP site
+	| Plan Type   | <planType>  |
+Then the user validates envelop icon on  member details page after login in AARP site
+
+Examples:
+	| planType |
+#	| MAPD     |
+#	| MA       |
+	| PDP      |
+#	| MS       |
+#	| HIP      |
+
+## For secure email validation
+Scenario Outline: Validate secure email widget for the user
+Given the user is on the AARP medicare site login page
+When the user logs in with a registered AMP with following details in AARP site
+	| Plan Type   | <planType>  |
+Then the user validates secure email widget display on  contact US page after login in AARP site
+
+
+Examples:
+	| planType |
+#	| MAPD     |
+#	| MA       |
+	| PDP      |
+#	| MS       |
+#	| HIP      |
+
+Scenario Outline: Validate secure email widget for the user 
+Given the user is on the AARP medicare site login page
+When the user logs in with a registered AMP with following details in AARP site
+	| Plan Type   | <planType>  |
+Then the user validates secure email widget non display  on  contact US page after login in AARP site
+
+
+Examples:
+	| planType |
+#	| MAPD     |
+#	| MA       |
+	| PDP      |
+#	| MS       |
+#	| HIP      |

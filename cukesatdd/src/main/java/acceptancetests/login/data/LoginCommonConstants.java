@@ -11,7 +11,7 @@ public class LoginCommonConstants {
 
 	public static final String USERNAME = "username";
 
-	public static final String PASSWORD ="password";
+	public static final String PASSWORD ="Password";
 	
 	public static final String AARPM_SITE_ID ="aarpm";
 	
@@ -42,6 +42,8 @@ public class LoginCommonConstants {
 	public static final String MEMBER_BENEFITS_AND_COVERAGE = "benefitsandcoverage";
 
 	public static final String RALLY_SSO = "rallySSO";
+
+	public static final String PLANTYPE = "planType";
 	
 	public static String PLAN_NAME;
 	

@@ -2,6 +2,7 @@ package pages.acquisition.ulayer;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -20,6 +21,7 @@ import acceptancetests.atdd.data.CommonConstants;
 import acceptancetests.atdd.data.MRConstants;
 import acceptancetests.atdd.data.PageData;
 import acceptancetests.atdd.util.CommonUtility;
+import atdd.framework.MRScenario;
 
 /**
  * @author pperugu
@@ -123,7 +125,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	@FindBy(id = "medicareTitle")
 	private WebElement medicareTitleText;
 
-	@FindBy(linkText = "pharmacy")
+	@FindBy(id = "Find a pharmacy near you")
 	private WebElement pharmacyLink;
 
 	@FindBys(value = { @FindBy(xpath = "//table[@id='selectcountytable']/tbody/tr/td") })
@@ -156,8 +158,11 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	@FindBy(xpath = "//div[@id='insuranceplan_nav']/div/div[3]/ul/li/a/span")
 	private WebElement pdpVppLink;
 
-	@FindBy(xpath = "//div[@id='subnav_2']/div/div/div/div/div[2]/p[2]/a/span")
+	@FindBy(css = "a#atdd_mpd_plans>span")
 	private WebElement pdp_moreHelpInfoLink;
+	
+	@FindBy(xpath="//div[@class='reque_help_list']/p[2]/a")
+	private WebElement pdp_moreHelpLink;
 
 	@FindBy(xpath = "//div[@id='subnav_2']/div/div/div/div/div[1]/p[2]/a/span")
 	private WebElement ma_moreHelpInfoLink;
@@ -197,8 +202,22 @@ public class AcquisitionHomePage extends GlobalWebElements {
 
 	@FindBy(xpath = "//*[@id='subnav_4']/div/div/div[1]/div[1]/div[1]/h3/a/span")
 	private WebElement healthcenterslink;
+	
+	@FindBy(xpath = ".//*[@id='Find a pharmacy near you']")
+	private WebElement findapharmacylink;
+	
+	@FindBy(xpath = ".//a[@class='display-block collapse-expand collapsed']")
+	private WebElement moreInfoLink;
+	
+	@FindBy(xpath = ".//*[@id='site-wrapper']/div[4]/div/div/div/div/div/main/div/div[4]/div/div[4]/div[1]/div[2]")
+	private WebElement chatwidget;
+	
+	@FindBy(xpath = ".//*[@id='site-wrapper']/div[4]/div/div/div/div/div/main/div/div[4]/div/div[4]/div[1]/div[1]")
+	private WebElement TFNwidget;
 
 	private static String AARP_ACQISITION_PAGE_URL = MRConstants.AARP_URL;
+	
+	private static String AARP_ACQISITION_PAGE_URL_TEST_A = MRConstants.AARP_URL_TEST_A;
 
 	private PageData globalFooter;
 	private PageData browserCheckData;
@@ -293,6 +312,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		if (!(currentUrl().contains("aarpmedicareplans"))) {
 			start(AARP_ACQISITION_PAGE_URL);
 		}
+		System.out.println("Using properties for environment ....: "+ AARP_ACQISITION_PAGE_URL+"..........");
 		validate(navigationSectionHomeLink);
 		validate(navigationSectionOurPlansLink);
 		validate(navigationSectionMedicareEducationLink);
@@ -318,21 +338,23 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		sendkeys(zipCodeField, zipcode);
 		
 		viewPlansButton.click();
-		try {
-			if (countyModal.isDisplayed()) {
-				for (WebElement county : countyRows) {
-					if (county.getText().equalsIgnoreCase(countyName)) {
-						county.click();
-						break;
-					}
+//		try {
+//			if (countyModal.isDisplayed()) {
+//				for (WebElement county : countyRows) {
+//					if (county.getText().equalsIgnoreCase(countyName)) {
+//						county.click();
+//						break;
+//					}
+//
+//				}
+//			}
+//		} catch (Exception e) {
+//			System.out.println("county box not found");
+//		}
 
-				}
-			}
-		} catch (Exception e) {
-			System.out.println("county box not found");
-		}
-		
-		if (driver.getTitle().equalsIgnoreCase(PageTitleConstants.ULAYER_PLAN_SUMMARY_PAGE_TITLE)) {
+		if (getTitle()
+				.contains(
+						"Our Medicare Plans")) {
 			return new VPPPlanSummaryPage(driver);
 		}
 		return null;
@@ -341,19 +363,19 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	public VPPPlanSummaryPage searchPlansForLearnFindPlans(String zipcode, String countyName) {
 		sendkeys(learnzipCodeField, zipcode);
 		learnfindPlansButton.click();
-		try {
-			if (countyModal.isDisplayed()) {
-				for (WebElement county : countyRows) {
-					if (county.getText().equalsIgnoreCase(countyName)) {
-						county.click();
-						break;
-					}
-
-				}
-			}
-		} catch (Exception e) {
-			System.out.println("county box not found");
-		}
+//		try {
+//			if (countyModal.isDisplayed()) {
+//				for (WebElement county : countyRows) {
+//					if (county.getText().equalsIgnoreCase(countyName)) {
+//						county.click();
+//						break;
+//					}
+//
+//				}
+//			}
+//		} catch (Exception e) {
+//			System.out.println("county box not found");
+//		}
 		if (getTitle().equalsIgnoreCase(PageTitleConstants.ULAYER_PLAN_SUMMARY_PAGE_TITLE)) {
 			return new VPPPlanSummaryPage(driver);
 		}
@@ -513,12 +535,19 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		}
 		return null;
 	}
+	
 
-	public PharmacySearchPage navigateToPharmacyLocator() {
+public PharmacySearchPage navigateToPharmacyLocator() {
+		driver.get(MRConstants.AARP_MA_REQUEST_MORE_HELP_AND_INFORMATION_URL);
+		try {
+			Thread.sleep(10000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
 		pharmacyLink.click();
-		if (getTitle().equalsIgnoreCase("Find a Pharmacy | AARP® Medicare Plans from UnitedHealthcare®")) {
-			return new PharmacySearchPage(driver);
-
+		if (getTitle().equalsIgnoreCase("Locate a Pharmacy | UnitedHealthcare®")) {
+			System.out.println();			return new PharmacySearchPage(driver);
+			
 		}
 		return null;
 	}
@@ -824,10 +853,13 @@ public class AcquisitionHomePage extends GlobalWebElements {
 
 	public PDPRequestHelpAndInformationPage navigateToPDPMoreHelpAndInfo() {
 
-		Actions actions = new Actions(driver);
-		actions.moveToElement(ourPlansHoverLink);
-		actions.moveToElement(pdp_moreHelpInfoLink);
-		actions.click().build().perform();
+		driver.get(MRConstants.AARP_PDP_REQUEST_MORE_HELP_AND_INFORMATION_URL);
+		
+		try {
+			Thread.sleep(4000);
+		}catch (InterruptedException e) {
+			e.printStackTrace();
+		}
 
 		if (currentUrl().contains("prescription-drug-plans/request-information.html")) {
 			return new PDPRequestHelpAndInformationPage(driver);
@@ -1165,6 +1197,18 @@ public class AcquisitionHomePage extends GlobalWebElements {
 
 	}
 
+	public VPPPlanSummaryPage navigateToVpp(String zipcode)
+	{
+		sendkeys(zipCodeField, zipcode);
+		viewPlansButton.click();
+		
+		if (getTitle().equalsIgnoreCase(
+				"Our Medicare Plans | AARP® Medicare Plans From UnitedHealthcare®")) {
+			return new VPPPlanSummaryPage(driver);
+		}
+		return null;
+	}
+	
 	public Object pickatopic(String picktopic) {
 
 		selectSelectBoxIt.click();
@@ -1252,7 +1296,66 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		}
 		return null;
 	}
+	
+	public PharmacySearchPage navigateToRequestMoreHelp() {
+		//driver.navigate().to("https://www.team-a-aarpmedicareplans.uhc.com/health-plans/medicare-advantage-plans/request-information.html");
+		driver.navigate().to("https://www.awe-test-a-aarpmedicareplans.uhc.com/health-plans/medicare-advantage-plans/request-information.html");if (getTitle().equalsIgnoreCase("Request MA Plan Information | AARP Medicare Plans from UnitedHealthcare")) {
+			return new PharmacySearchPage(driver);
 
+		}
+		return null;
+	}
+	
+	public PharmacyResultPage navigateToRequestMoreHelpForPdp() {
+		//driver.navigate().to("https://www.team-a-aarpmedicareplans.uhc.com/health-plans/prescription-drug-plans/request-information.html");
+		driver.navigate().to("https://www.awe-test-a-aarpmedicareplans.uhc.com/health-plans/prescription-drug-plans/request-information.html");
+		if (getTitle().equalsIgnoreCase("More Help & Information - Medicare Part D Plans | AARP® Medicare Plans from UnitedHealthcare")) {
+			return new PharmacyResultPage(driver);
+		}
+		return null;
+	}
+
+	public PharmacyResultPage validateMoreInfoContent() {
+		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+		moreInfoLink.click();
+		if (getTitle().equalsIgnoreCase("Find a Pharmacy |Medicare Plans from UnitedHealthcare")) {
+			return new PharmacyResultPage(driver);
+		}
+		return null;
+	}
+	
+
+	public PharmacyResultPage validateChatWidget() {
+		boolean present;
+		try {
+		validate(chatwidget);
+		present = true;
+		} catch (NoSuchElementException e) {
+		present = false;
+		}
+
+	if(present)
+		System.out.println("@@@@@@@@@ Able to find Chat widget @@@@@@@@@");
+		else
+		System.out.println("@@@@@@@@@ No Chat widget @@@@@@@@@");
+		return null;		
+	}
+
+	public PharmacyResultPage validateTfnWidget() {
+		boolean present;
+		try {
+		validate(TFNwidget);
+		present = true;
+		} catch (NoSuchElementException e) {
+		present = false;
+		}
+
+	if(present)
+		System.out.println("@@@@@@@@@ Able to find TFN widget @@@@@@@@@");
+		else
+		System.out.println("@@@@@@@@@ No TFN widget @@@@@@@@@");
+		return null;
+	}
 
 
 

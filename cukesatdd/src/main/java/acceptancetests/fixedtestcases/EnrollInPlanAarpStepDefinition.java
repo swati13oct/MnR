@@ -44,6 +44,8 @@ import acceptancetests.atdd.util.CommonUtility;
 import acceptancetests.enrollinplan.data.EnrollInPlanCommonConstants;
 import acceptancetests.vpp.data.VPPCommonConstants;
 import atdd.framework.MRScenario;
+import cucumber.annotation.After;
+import cucumber.annotation.Before;
 import cucumber.annotation.en.And;
 import cucumber.annotation.en.Given;
 import cucumber.annotation.en.Then;
@@ -64,29 +66,20 @@ public class EnrollInPlanAarpStepDefinition {
 	public MRScenario getLoginScenario() {
 		return loginScenario;
 	}
-/*
-	@Before
+
+	@Before("@fixedTestCase")
 	public void setup(){
 		
-		  Format(MM-DD-YYYY) Pre-AEP Test 
+		/*  Format(MM-DD-YYYY) Pre-AEP Test */ 
 		 
 		String date = "09-30-2016";
 		CommonUtility.changeMRRestTime(getLoginScenario(), date);
 		CommonUtility.changePartDTime(getLoginScenario(), date);
 	}
-	*/
+	
 	
 	@Given("^the user is on AARP medicare site landing page$")
 	public void the_user_on_UHC_Medicaresolutions_Site() {
-		
-		/*Changing date to AEP period*/
-		
-		/* Format(MM-DD-YYYY) Pre-AEP Test */
-		String date = "09-30-2016";
-		CommonUtility.changeMRRestTime(getLoginScenario(), date);
-		CommonUtility.changePartDTime(getLoginScenario(), date);
-		
-		/*Date change logic ends*/
 		
 		WebDriver wd = getLoginScenario().getWebDriver();
 
@@ -1099,7 +1092,7 @@ public class EnrollInPlanAarpStepDefinition {
 		ProposedEffectiveDatePage proposedEffectiveDatePage = (ProposedEffectiveDatePage) getLoginScenario()
 				.getBean(PageConstants.PROPOSED_EFFECTIVE_DATE_PAGE);
 		
-		proposedEffectiveDatePage.selectTheDate(pedAttributesMap);
+		proposedEffectiveDatePage.selectTheDate();
 		 String plantype = pedAttributesMap.get("Plan Type");
 		 ReviewAndSubmitPage revSubmitPage = proposedEffectiveDatePage.clickOnSaveAndContinue(plantype);
 		getLoginScenario().saveBean(PageConstants.PROPOSED_EFFECTIVE_DATE_PAGE,	proposedEffectiveDatePage);
@@ -1629,7 +1622,8 @@ public class EnrollInPlanAarpStepDefinition {
 		}*/
 
 	}
-/*	@After
+	
+	@After("@fixedTestCase")
 	public void tearDown() {
 		WebDriver wd = (WebDriver) getLoginScenario().getBean(
 				CommonConstants.WEBDRIVER);
@@ -1638,7 +1632,7 @@ public class EnrollInPlanAarpStepDefinition {
 		
 		CommonUtility.resetMRRestTime(getLoginScenario());
 		CommonUtility.resetPartDTime(getLoginScenario());
-	}*/
+	}
 
 	public static boolean isAlertPresent(FirefoxDriver wd) {
 		try {

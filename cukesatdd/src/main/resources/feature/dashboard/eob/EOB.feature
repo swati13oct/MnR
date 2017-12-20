@@ -1,4 +1,4 @@
-@eobFnF
+@eob
 Feature:To test EOB on Dashboard page
 @fixed 
 Scenario Outline: Allowed Domains – Authors need ability to define messages and domains for leaving member sites (ATDD)

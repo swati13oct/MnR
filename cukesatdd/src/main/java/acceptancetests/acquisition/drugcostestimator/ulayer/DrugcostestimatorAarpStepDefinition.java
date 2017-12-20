@@ -190,7 +190,7 @@ public class DrugcostestimatorAarpStepDefinition {
 
 
 	@Then("^I should be able to edit that list by either adding drugs up to a total of 25 or subtracting drugs at any time while using the tool$")
-	public void i_navigate_edit_drugs() {
+	public void i_navigate_edit_drugs() throws InterruptedException {
 		WebDriver wd = (WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
 
 
@@ -848,23 +848,43 @@ public class DrugcostestimatorAarpStepDefinition {
 		dce.deleteAllDrugs();
 	}
 	
-	@When("^I access the acquisition DCE tool$")
-	public void I_access_the_DCE_tool() throws InterruptedException {
+	@When("^I access the acquisition DCE tool from home page$")
+	public void I_access_the_DCE_tool_home_page() throws InterruptedException {
 		WebDriver wd = (WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
 
 		DrugCostEstimatorPage dce = new DrugCostEstimatorPage(wd);
-		dce.navigateToDCETool();
+		dce.navigateToDCEToolFromHome();;
+	}
+	
+	@When("^I access the acquisition DCE tool from vpp page using below zipcode$")
+	public void I_access_the_DCE_tool_vpp_page(DataTable memberAttributes) throws InterruptedException {
+		List<DataTableRow> memberAttributesRow = memberAttributes
+				.getGherkinRows();
+		Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells()
+					.get(0), memberAttributesRow.get(i).getCells().get(1));
+		}
+
+		String zipcode = memberAttributesMap.get("Zip Code");
+		
+		WebDriver wd = (WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
+
+		DrugCostEstimatorPage dce = new DrugCostEstimatorPage(wd);
+		dce.navigateToDCEToolFromvpp(zipcode);
 	}
 	
 	@And("^I have added a drug to my drug list and a generic equivalent is available for the drug I have selected$")
 	public void I_have_added_a_drug_to_my_drug_list_and_a_generic_equivalent_is_available_for_the_drug_I_have_selected(DataTable data) throws InterruptedException{
 		List<DataTableRow> memberAttributesRow = data.getGherkinRows();
 		String drug = memberAttributesRow.get(0).getCells().get(1);
-
-		WebDriver wd = (WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
-
-		DrugCostEstimatorPage dce = new DrugCostEstimatorPage(wd);
-		dce.deleteAllDrugs();
+        System.out.println("drug------------"  + drug);
+		//WebDriver wd = (WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
+		DrugCostEstimatorPage dce = (DrugCostEstimatorPage) getLoginScenario()
+				.getBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE);
+		//DrugCostEstimatorPage dce = new DrugCostEstimatorPage(wd);
+		//dce.deleteAllDrugs();
 		dce.addDrug(drug);
 	}
 	
@@ -908,10 +928,37 @@ public class DrugcostestimatorAarpStepDefinition {
 	}
 
 	@And("^I have selected pharmacy$")
-	public void I_have_selected_pharmacy(){
+	public void I_have_selected_pharmacy() throws InterruptedException{
 		DrugCostEstimatorPage dce = (DrugCostEstimatorPage) getLoginScenario()
 				.getBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE);
+		dce.navigateToStep2();
+		//dce.populateZipCode("90210");
+		dce.selectPharmacyType("Standard Network");
+		dce.select_first_pharmacy();
+		dce.backwardToStep1();
+	}
+	
+	@And("^I have selected pharmacy in generic flow$")
+	public void I_have_selected_pharmacy_generic_flow() throws InterruptedException{
+		DrugCostEstimatorPage dce = (DrugCostEstimatorPage) getLoginScenario()
+				.getBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE);
+		dce.navigateToStep2();
+		dce.populateZipCode("90210");
+		dce.selectPharmacyType("Available");
+		dce.select_first_pharmacy();
+		dce.backwardToStep1();
+	}
+	
+	@When("^I have not yet selected pharmacy$")
+	public void I_have_not_yet_selected_pharmacy() throws InterruptedException {
+	    
+		DrugCostEstimatorPage dce = (DrugCostEstimatorPage) getLoginScenario()
+				.getBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE);
+		dce.navigateToStep2();
+		dce.populateZipCode("90210");
 		dce.validatePharmacySelected();
+		dce.backwardToStep1();
+		//dce.BacktoEnterYourDrugs();
 	}
 	
 	@Then("^I will see a SWITCH NOW link in the drug tile with a pharmacy savings cost value$")
@@ -994,21 +1041,21 @@ public class DrugcostestimatorAarpStepDefinition {
 		dce.validateSummary();
 	}
 
-	@And("^user validates the Drugs link$")
+	@And("^user validates the functionality of Drugs link$")
 	public void validate_Drugs_AARP(){
 		DrugCostEstimatorPage dce = (DrugCostEstimatorPage) getLoginScenario()
 				.getBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE);
 		dce.validateDrugs();
 	}
 
-	@And("^user validates the Pharmacy link$")
+	@And("^user validates the functionality of Pharmacy link$")
 	public void validate_Pharmacy_AARP(){
 		DrugCostEstimatorPage dce = (DrugCostEstimatorPage) getLoginScenario()
 				.getBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE);
 		dce.validatePharmacy();
 	}
 
-	@And("^user validates the Costs link$")
+	@And("^user validates the Costs link and functionality of Return to Plans button$")
 	public void validate_Costs_AARP(){
 		DrugCostEstimatorPage dce = (DrugCostEstimatorPage) getLoginScenario()
 				.getBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE);
@@ -1047,6 +1094,62 @@ public class DrugcostestimatorAarpStepDefinition {
 				.getBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE);
 		dce.validateMultiCountyPopup(zipCode, county);
 	}
+	
+	@Then("^I should see pharmacy list in nearest order$")
+	public void I_should_see_pharmacy_list_in_nearest_order() throws InterruptedException {
+		DrugCostEstimatorPage dce = (DrugCostEstimatorPage) getLoginScenario()
+				.getBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE);
+		dce.validateNearestPharOrder();
+	}
 
+	@Then("^I should see map icons with index$")
+	public void I_should_see_map_icons_with_index() {
+		DrugCostEstimatorPage dce = (DrugCostEstimatorPage) getLoginScenario()
+				.getBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE);
+		dce.validateMapIcon();   
+	}
+
+	@When("^I click on AtoZ tab$")
+	public void I_click_on_AtoZ_tab() {
+		DrugCostEstimatorPage dce = (DrugCostEstimatorPage) getLoginScenario()
+				.getBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE);
+		dce.clickAtoZtab();
+	}
+
+	@Then("^I should see pharmacy in AtoZ order$")
+	public void I_should_see_pharmacy_in_AtoZ_order() {
+		DrugCostEstimatorPage dce = (DrugCostEstimatorPage) getLoginScenario()
+				.getBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE);
+		dce.validateAtoZorder();
+	}
+
+	@When("^I click on ZtoA tab$")
+	public void I_click_on_ZtoA_tab() {
+		DrugCostEstimatorPage dce = (DrugCostEstimatorPage) getLoginScenario()
+				.getBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE);
+		dce.clickZtoAtab();
+	}
+
+	@Then("^I should see pharmacy in ZtoA order$")
+	public void I_should_see_pharmacy_in_ZtoA_order() {
+		DrugCostEstimatorPage dce = (DrugCostEstimatorPage) getLoginScenario()
+				.getBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE);
+		dce.validateZtoAorder();
+	}
+
+	@Then("^I should see Pagination under pharmacy list$")
+	public void I_should_see_Pagination_under_pharmacy_list() {
+		DrugCostEstimatorPage dce = (DrugCostEstimatorPage) getLoginScenario()
+				.getBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE);
+		dce.validatePaginationPresent();
+	}
+
+	@Then("^I should able to move right and left using pagination$")
+	public void I_should_able_to_move_right_and_left_using_pagination() throws InterruptedException {
+		DrugCostEstimatorPage dce = (DrugCostEstimatorPage) getLoginScenario()
+				.getBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE);  
+		dce.validatePagination();          		
+	}
+	
 }
 

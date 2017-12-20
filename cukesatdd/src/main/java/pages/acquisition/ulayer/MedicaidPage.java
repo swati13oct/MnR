@@ -106,4 +106,15 @@ public class MedicaidPage extends UhcDriver{
 			return new PlanPaymentOptions(driver);
 		
 	}
+	
+	@FindBy(xpath = ".//*[@id='medicaidInfo']/p")
+	private WebElement medicaidHeader;
+	
+	public boolean validateMedicadePage(){
+		boolean flag = false;
+		if(validate(medicaidHeader)&&validate(medicaidprevious)&&validate(medicaidsaveandcontinue)&&validate(medicaiddno)&&
+		validate(medicaiddyes)&&validate(medicaidcancleregistration))
+			flag = true;
+		return flag;
+	}
    }

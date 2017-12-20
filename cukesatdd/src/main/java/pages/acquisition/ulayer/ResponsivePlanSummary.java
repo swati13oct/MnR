@@ -36,12 +36,26 @@ public class ResponsivePlanSummary extends UhcDriver{
 		@FindBy(xpath = "//div[@class='tab'][1]")
 		private WebElement viewMaPlans;
 		
+		@FindBy(xpath = "(.//*[contains(text(),'View')])[12]")
+        private WebElement planYear;
+    
+		@FindBy(xpath = "(//*[@id='enrollMAButton']/span)[1]")
+        private WebElement enrollNowbtn;
+		
+		 @FindBy(xpath ="(.//*[@id='pdpDrugCostEstimatorLink'])[1]")
+         private WebElement enterDrugInformationlnk;
+		
+		 @FindBy(xpath = "(//a[contains(text(),'Enter drug information')])[1]")
+         private WebElement enterDrugMAInformationlnk;
+		
 		@FindBy(xpath = "//*[@class='ng-valid ng-dirty']/span/div[1]/p")
 		private WebElement errorMessageincorrect;
 		
 		@FindBy(xpath = "//*[@id='zip-form']/span/div[1]/p")
 		private WebElement errorMessageincorrect2;
 		
+		@FindBy(xpath=".//*[@id='add-drug']/section")
+           WebElement addaDrug;
 		
 		//@FindBy(id = "zipcode")
 		@FindBy(xpath = "//*[@id='zipcode']")
@@ -1099,6 +1113,81 @@ public void comparePlanslnk() throws InterruptedException{
 					}
 					
 				}
+				
+				public AddDrugPage addDrug(){
+                    driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+                    addaDrug.click();
+                    System.out.println("Add a new drug popup should appear");
+                    return new AddDrugPage(driver);
+            }
+				
+				public VPPPlanSummaryPage clicksOnEnterDrugInformationLink(String planName) {
+                    if (planName.contains("HMO")) {
+                            driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+                            enterDrugMAInformationlnk.click();
+                            System.out.println("MA Estimate drog cost page is displayed");
+                            
+                            /*for (WebElement plan : maPlanElement) {
+                            if (plan.getText().contains(planName)) {
+                            ElementData elementData = new ElementData("id",
+                            "enterDrugMA");
+                            findChildElement(elementData, plan).click();
+                            }
+                            }*/
+                            }
+                            if (planName.contains("PDP")) {
+                                    enterDrugInformationlnk.click();
+                                    System.out.println("Estimate drug cost page is displayed");
+                            /*for (WebElement plan : pdpPlanElement) {
+                            if (plan.getText().contains(planName)) {
+                            ElementData elementData = new ElementData("id",
+                            "pdpDrugCostEstimatorLink"); // TODO Re-check
+                            findChildElement(elementData, plan).click();
+                            }
+                            }*/
+                                    
+                            }
+                            
+                            if (driver.getTitle().equalsIgnoreCase(
+                            "Our Medicare Plan Types | AARP® Medicare Plans from UnitedHealthcare®") || driver.getTitle().equalsIgnoreCase("estimate-drug-costs")) {
+                            return new VPPPlanSummaryPage(driver);
+                            }
+                    
+            
+                    return null;
+            }
 					
-				}
+				 public VPPPlanSummaryPage planYear() throws InterruptedException{
+                     Thread.sleep(10000);
+                     planYear.click();
+                         //showMaPlans.click();
+                         return null;
+                         
+                 }
+				 public VPPPlanSummaryPage enrollNowbtn(){
+                     driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+                         enrollNowbtn.click();
+                         if(driver.getTitle().equalsIgnoreCase("Medicare Advantage Enrollment | AARP® Medicare Plans from UnitedHealthcare®"))                
+                         System.out.println("Online enrollment tool launched");
+                         driver.navigate().back();
+                         System.out.println("Back to plan summary page");
+                         return null;
+                 }
+				 
+				 public VPPPlanSummaryPage verifyEnrollNowbtn2017(){
+                     
+                     //List<WebElement> webElements =driver.findElements(By.xpath("(.//*[@class='segment-title']/div"));
+                     
+                 try{
+                         if(enrollNowbtn.isDisplayed())
+                                 Assert.fail("Enroll now button should not display");
+                         
+                         Assert.assertTrue("Enroll now button did not display", true);
+                 }
+                 catch(Exception e){
+                         Assert.assertTrue("Enroll now button did not display", true);
+                 }
+                 return null;
+         }
+}
 			 

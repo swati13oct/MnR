@@ -1,0 +1,13 @@
+{
+"url":null,
+"expectedData":{
+"SwitchGenericPage":{
+"identifier":"xpath",
+"elementName":"//header[@class='add-drug-slide-header']/span[contains(text(),'SAVINGS OPPORTUNITY')]"
+},
+"savedrugbutton":{
+"identifier":"id",
+"elementName":"save-drug-button"
+}
+}
+}

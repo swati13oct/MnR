@@ -50,5 +50,17 @@ When the user navigates to plan summary page under my plans in UMS site
 Then the user validate add a plan link is not displayed for albama memeber
 Examples:
  | planType | memberType   |
-# | MAPD       | Group |
-# |  MA         | Group |
+@PDPplancard
+Scenario Outline: To validate need more information
+Given the user is on the vpp portfolio page
+Then the user performs plan search using zipcode
+              | Zip Code |<zipCode>|
+              | County   |<county> |
+Then the user navigates to the following plan type
+| PlanType | <planType> |        
+Then the user navigates to pan details page
+|Plan Name| <planName>|        
+And the user navigated back using back to all plans
+Examples:
+                |zipCode|county                                                 |planType  |planName                                           |
+                |90210  |Los Angeles County|MA        |AARP MedicareComplete SecureHorizons Plan 1 (HMO)  |        

@@ -10,12 +10,24 @@ package acceptancetests.atdd.data.member;
 public class PageConstants {
 
 	public static final String ACCOUNT_HOME_PAGE = "accountHomePage";
-	
-	public static final String CUSTOM_RANGE = "customRange";
+public static final String CUSTOM_RANGE = "customRange";
 	
 	public static final String DATE_ERROR_MESSAGE = "dateErrorMessage";
 	
 	public static final String ONE_PAYMENT_PER_DAY_ERROR_MESSAGE = "onePaymentPerDayErrorMessage";
+
+
+	public static final String TEST_HARNESS_PAGE = "testHarnessPage";
+	
+	public static final String GO_GREEN_SPLASH_PAGE = "gogreensplashpage";
+	
+	public static final String PREFERENCES_PAGE = "preferencespage";
+	
+	public static final String MEMBER_AUTHS_SEARCH_PAGE = "memberSearchPage";
+	
+	public static final String MEMBER_AUTH_INFORMATION_PAGE = "memberInformationPage";
+	
+	public static final String NEW_REGISTRATION_PAGE = "newRegistrationPage";
 
 	public static final String TIMESTAMP = "TimeStamp";
 	
@@ -25,7 +37,6 @@ public class PageConstants {
 	
 	public static final String BENEFITS_SUMMARY_PAGE = "benefitsSummaryPage";
 	
-	public static final String TEST_HARNESS_PAGE = "TestHarnessPage";
 	
 	public static final String Rally_Dashboard = "RallyDashboard";
 
@@ -79,6 +90,10 @@ public class PageConstants {
 	
 	public static final String BENEFITS_COVERAGE_PAGE = "benefitsCoveragePage";
 
+	public static final String PROFILE_AND_PREFERENCES_PAGE = "ProfileandPreferencesPage";
+
+	//public static final String PROFILEANDPREFERENCES_PAGE = "ProfilePreferencesPage";
+	
 	public static final String ORDER_PLAN_MATERIALS_PAGE = "orderplanmaterialsPage";
 
 	public static final String PLAN_MATERIALS_CONFIRMATION_PAGE = "planMaterialConfirmationPage";
@@ -126,7 +141,7 @@ public class PageConstants {
 	public static final String MANAGE_DRUG_PAGE = "estimateCostPage";
 
 	public static final String ADD_DRUG_PAGE = "addDrugPage";
-
+	
 	public static final String PHARMACY_TYPES = "pharmacyTypeArray";
 
 	public static final String REGISTRATION_HOME_PAGE = "registrationHomePage";
@@ -138,7 +153,9 @@ public class PageConstants {
 	public static final String HEALTH_AND_WELLNESS_PAGE = "healthAndWellnessPage";
 
 	public static final String CONTACT_US_PAGE = "contactUsPage";
-
+	
+	public static final String VALUE_ADDED_SERVICES = "valueaddedservices";
+	
 	public static final String PLAN_COMPARE_PAGE = "planComparePage";
 	
 	public static final String PAYMENT_OVERVIEW = "PaymentOverview";
@@ -156,7 +173,6 @@ public class PageConstants {
 	public static final String RALLY_TOOL_PAGE = "rallytool";
 
 	public static final String ACQUISITION_HOME_PAGE = "acquisitionhomepage";
-
 	
 
 	public static final String VPP_PLAN_SUMMARY_PAGE = "plansummaryPage";
@@ -175,6 +191,10 @@ public class PageConstants {
 	
 	public static final String MYPCP_SIGN_IN_PAGE = "pcpSignInPage";
 	
+	public static final String MYPCP_DISCLAIMER_PAGE = "pcpDisclaimerPage";
+	
+	public static final String MYUHC_DISCLAIMER_PAGE = "uhcDisclaimerPage";	
+	
 	public static final String MYPCP_ABOUT_US_PAGE = "pcpAboutUsPage";
 	
 	public static final String MYPCP_CONTACT_US_PAGE = "pcpContactUsPage";
@@ -189,7 +209,12 @@ public class PageConstants {
 
 	public static final String REGISTRATION_ERROR_PAGE = "regErrorPage";
 
-	public static final String DASHBOARD_PAYMENT_HISTORY_PAGE = "dashboardPaymentOverview";	
+	public static final String DASHBOARD_PAYMENT_HISTORY_PAGE = "dashboardPaymentOverview";
+	
+	public static final String AARP_DISCLAIMER_PAGE = "disclaimerpage";
+	
+	public static final String ABOUT_US_PAGE = "aboutus";
+	 public static final String NEW_CLAIM_DETAILS_PAGE = "newClaimDetailsPage";
 	
 	public static final String DRUG_COST_ESTIMATOR_PAGE = "drugcostestimatorPage";
 	
@@ -209,7 +234,6 @@ public class PageConstants {
 	
 	public static final String DeepLink_Page = "deepLinkPage";
 
-	public static final String DeepLink_url = "deepLinkUrl";
 
 	public static final String UNPWAssistancePage = null;
 
@@ -222,4 +246,18 @@ public class PageConstants {
 	public static final String LOGIN_ASSISTANCE_MESSAGE_PAGE = null;
 
 	public static final String Error_Message = null;
+
+	public static final String MEM_REDESIGN_ACCOUNT_HOME_PAGE = "memberRedesignAccountHomePage";
+	
+	public static final String USERNAME_PASSWORD_ASSISTANCE_PAGE = "usernamePasswordAssistancePage";
+	
+	public static final String MEM_REDESIGN_HEALTH_AND_WELLNESS_PAGE = "memberRedesignHealthAndWellnessPage";
+	
+	public static final String NEW_CLAIMS_SUMMARY_PAGE = "newClaimsSummaryPage";
+	
+	public static final String NEW_SIGN_PAGE = "sign_Page";
+	
+	  public static final String DeepLink_url= "deepLinkUrl";
+	  
+	  public static final String TIME_ADMIN_PAGE = "timeAdminPage";
 }
