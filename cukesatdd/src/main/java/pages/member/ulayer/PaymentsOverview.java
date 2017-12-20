@@ -45,6 +45,9 @@ public class PaymentsOverview extends UhcDriver{
 	@FindBy(xpath="//*[@id='paymentHistoryApp']/div[1]/div/div/div/div[3]")	              
 	private WebElement Payments_status_Error;
 	
+	@FindBy(xpath="//*[@id='IPEinvL']/map/area[3]")	              
+	private WebElement Popup;
+	
 	
 	public PaymentsOverview(WebDriver driver) {
 		super(driver);
@@ -72,6 +75,11 @@ public class PaymentsOverview extends UhcDriver{
 	public OneTimePaymentsPage navigateToOneTimePaymentpage() throws InterruptedException
 	{
 		Thread.sleep(8000);
+		if(Popup.isDisplayed())
+		{
+			Popup.click();
+		}
+		Thread.sleep(2000);
 		JavascriptExecutor jse = (JavascriptExecutor)driver;
 		jse.executeScript("window.scrollBy(0,100)", "");
 		Thread.sleep(5000);

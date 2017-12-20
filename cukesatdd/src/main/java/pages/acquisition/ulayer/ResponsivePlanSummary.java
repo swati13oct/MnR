@@ -389,7 +389,7 @@ public void selectAddToCompareCheckboxes() throws InterruptedException  {
 		e.printStackTrace();
 	}
 	JavascriptExecutor jse = (JavascriptExecutor)driver;
-	jse.executeScript("window.scrollBy(0,550)", "");
+	jse.executeScript("window.scrollBy(0,600)", "");
 	validate (chkBoxAddtoCompare1);
 	chkBoxAddtoCompare1.click();
 	Thread.sleep(1000);
