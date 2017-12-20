@@ -400,8 +400,8 @@ public class RegistrationInformationPage extends UhcDriver {
 	/**
 	 * Enter member ID.
 	 */
-	public void enterMemberID(String memberID) {
-		sendkeys(memberid, memberID);
+	public void enterMemberID(String memberId) {
+		sendkeys(memberid, memberId);
 	}
 
 	/**
