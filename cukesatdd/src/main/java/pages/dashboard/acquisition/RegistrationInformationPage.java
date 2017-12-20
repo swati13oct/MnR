@@ -957,7 +957,22 @@ public class RegistrationInformationPage extends UhcDriver {
 	 */
 	public WebElement getGoToMyAccountButton() {
 		return goToMyAccountHomeButton;
-	}
+	}   
+	
+	  /**
+     * Wait for page to load
+     */
+    public void waitForRegistrationInformationPage() {
+    	WebDriverWait wait = new WebDriverWait(this.driver, 50);
+    	wait.until(new ExpectedCondition<Boolean>() {
+    	    public Boolean apply(WebDriver driver) {
+    		if (nextButton.isDisplayed())
+    		    return true;
+    		else
+    		    return false;
+    	    }
+    	});
+    }
 	
 	   /**
      * Wait for page to load
