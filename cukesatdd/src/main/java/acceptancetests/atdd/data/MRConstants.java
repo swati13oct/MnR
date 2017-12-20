@@ -172,7 +172,7 @@ public class MRConstants {
                 public static final String TEAM_G_DEREGISTER_URL = "http://partd-teamg.ose.optum.com/PartDPortalWeb/deregister.jsp";
                 
                 /** Registration URL for Member Redesign */
-                public static final String REDESIGN_REGISTRATION_URL = "https://"+MRScenario.environment+"-medicare.uhc.com/medicare/member-registration.html";
+                public static final String REDESIGN_REGISTRATION_URL = "https://"+MRScenario.environment+"-medicare.uhc.com/medicare/member-registration.html#/get-started";
 
                 /** DeRegister URL for team-h */
                 public static final String TEAM_H_DEREGISTER_URL = "http://partd-teamh.ose.optum.com/PartDPortalWeb/deregister.jsp";

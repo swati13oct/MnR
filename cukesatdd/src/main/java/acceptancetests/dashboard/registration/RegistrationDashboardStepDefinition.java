@@ -65,8 +65,7 @@ public class RegistrationDashboardStepDefinition {
 		// navigate to registration page
 		RegistrationInformationPage registrationInformationPage = (RegistrationInformationPage) getLoginScenario()
 				.getBean(PageConstants.REGISTRATION_INFORMATION_PAGE);
-		registrationInformationPage.waitForRegistrationInformationPage();
-		registrationInformationPage.scroll();
+		
 		registrationInformationPage.enterMemberID(memberId);
 	}
 
