@@ -78,14 +78,17 @@ public class PaymentsOverview extends UhcDriver{
 		if(Popup.isDisplayed())
 		{
 			Popup.click();
+			Thread.sleep(2000);
 		}
-		Thread.sleep(2000);
+		else
+		{
 		JavascriptExecutor jse = (JavascriptExecutor)driver;
 		jse.executeScript("window.scrollBy(0,100)", "");
 		Thread.sleep(5000);
 		if(OneTimePaymentButton.isEnabled()){
 			OneTimePaymentButton.click();
 			return new OneTimePaymentsPage(driver);
+		}
 		}
 		return null;
 	}
