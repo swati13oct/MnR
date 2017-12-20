@@ -75,13 +75,13 @@ public class PaymentsOverview extends UhcDriver{
 	public OneTimePaymentsPage navigateToOneTimePaymentpage() throws InterruptedException
 	{
 		Thread.sleep(8000);
-		if(Popup.isDisplayed())
+		/*if(Popup.isDisplayed())
 		{
 			Popup.click();
 			Thread.sleep(2000);
 		}
 		else
-		{
+		{*/
 		JavascriptExecutor jse = (JavascriptExecutor)driver;
 		jse.executeScript("window.scrollBy(0,100)", "");
 		Thread.sleep(5000);
@@ -89,7 +89,7 @@ public class PaymentsOverview extends UhcDriver{
 			OneTimePaymentButton.click();
 			return new OneTimePaymentsPage(driver);
 		}
-		}
+		//}
 		return null;
 	}
 	
@@ -103,7 +103,7 @@ public class PaymentsOverview extends UhcDriver{
 		if(AutomaticPaymentButton.isEnabled()){
 			AutomaticPaymentButton.click();
 			Thread.sleep(2000);
-			SetUpNewAutoPayment.click();
+			//SetUpNewAutoPayment.click();
 			return new OneTimePaymentsPage(driver);
 		}
 		return null;
