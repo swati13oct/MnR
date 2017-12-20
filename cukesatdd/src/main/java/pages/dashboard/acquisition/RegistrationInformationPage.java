@@ -963,7 +963,7 @@ public class RegistrationInformationPage extends UhcDriver {
      * Wait for page to load
      */
     public void waitForRegistrationInformationPage() {
-    	WebDriverWait wait = new WebDriverWait(this.driver, 70);
+    	WebDriverWait wait = new WebDriverWait(this.driver, 1000);
     	wait.until(new ExpectedCondition<Boolean>() {
     	    public Boolean apply(WebDriver driver) {
     		if (nextButton.isDisplayed())
