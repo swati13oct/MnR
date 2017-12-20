@@ -44,8 +44,7 @@ public class PersonalIdentificationPage extends UhcDriver{
 	private WebElement continueField;
 	
 	@FindBy(xpath = "//div[@id='passwordChangeInfoDiv']/div/p/strong")
-	private WebElement pageHeading;
-	
+	private WebElement pageHeading;	
 	
 	
 	public PersonalIdentificationPage(WebDriver driver) {
@@ -88,10 +87,23 @@ public class PersonalIdentificationPage extends UhcDriver{
 		sendkeys(zipCodeField, zipcode);
 		
 		continueField.click();
-		if(pageHeading.getText().equalsIgnoreCase("Check your email.")){
+		//if(pageHeading.getText().equalsIgnoreCase("Check your email.")){
+		if(driver.getTitle().equalsIgnoreCase("AARP Medicare Plans |Username and Password Assistance")){
 			return new LoginAssitanceMessagePage(driver);
 		}
 		return null;
 	}
+	
+	public LoginAssitanceMessagePage ContinueWithoutEnteringAnything()
+	{
+		continueField.click();
+		if(driver.getTitle().equalsIgnoreCase("AARP Medicare Plans |Username and Password Assistance")){
+			return new LoginAssitanceMessagePage(driver);
+		}
+		return null;
+	}
+	
+	
+	
 
 }

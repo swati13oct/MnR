@@ -134,7 +134,7 @@ public class VPPRequestSendEmailPage extends UhcDriver {
 			System.out.println("submitEmailButton not found");
 		}*/
 		submitEmailButton.click();
-		submitEmailButton.click();
+		//submitEmailButton.click();
 		//validate the pop displayed
 		if(popupHeader.getText().contains("Your changes have been submitted")){
 	}else{

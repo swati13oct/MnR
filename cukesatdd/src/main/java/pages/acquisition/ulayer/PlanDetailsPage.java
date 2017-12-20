@@ -118,11 +118,24 @@ public class PlanDetailsPage extends UhcDriver {
 	
 	public JSONObject planDocPDFAcqJson;
 
-	public PlanDetailsPage(WebDriver driver) {
-		super(driver);
-		PageFactory.initElements(driver, this);
-		openAndValidate();
-	}
+	 public PlanDetailsPage(WebDriver driver, String planType) {
+         super(driver);
+         PageFactory.initElements(driver, this);
+         CommonUtility.waitForPageLoad(driver, plandetails, CommonConstants.TIMEOUT_30);
+         String fileName = null;
+         if(planType.equalsIgnoreCase("MA")||planType.equalsIgnoreCase("MAPD"))
+         {
+                 fileName = "maplandetails.json";
+         }
+         else
+         {
+                 fileName = planType.toLowerCase()+"plandetails.json";
+         }
+
+         vppPlanDetails = CommonUtility.readPageData(fileName,
+                         CommonConstants.PAGE_OBJECT_DIRECTORY_ULAYER_ACQ);
+         openAndValidate();
+ }
 
 	public String getContent() {
 		return plandetails.getText();

@@ -22,6 +22,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import pages.member.ulayer.AccountHomePage;
 import pages.member.ulayer.ContactUsPage;
 import pages.member.ulayer.LoginPage;
+import pages.member.ulayer.MultipleEmailAddressNewPage;
+import pages.member.ulayer.NewEmailAddressPage;
+import pages.member.ulayer.PersonalIdentityUlayerPage;
 import pages.member.ulayer.TerminatedHomePage;
 import acceptancetests.atdd.data.CommonConstants;
 import acceptancetests.atdd.data.member.PageConstants;
@@ -54,6 +57,16 @@ public class LoginAarpStepDefinition {
 		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
 
 		LoginPage loginPage = new LoginPage(wd);
+		getLoginScenario().saveBean(PageConstants.LOGIN_PAGE, loginPage);
+	}
+	
+	@Given("^the user is on the AARP Ulayer site login page$")
+	public void user_Ulayer_login_page()
+	{
+		WebDriver wd = getLoginScenario().getWebDriver();
+		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
+
+		PersonalIdentityUlayerPage loginPage = new PersonalIdentityUlayerPage(wd);
 		getLoginScenario().saveBean(PageConstants.LOGIN_PAGE, loginPage);
 	}
 	
@@ -107,19 +120,19 @@ public class LoginAarpStepDefinition {
 		if (accountHomePage != null) {
 			getLoginScenario().saveBean(PageConstants.ACCOUNT_HOME_PAGE,
 					accountHomePage);
-			Assert.assertTrue(true);
+			/*Assert.assertTrue(true);
 			JSONObject accountHomeActualJson = accountHomePage.accountHomeJson;
 			getLoginScenario().saveBean(
 					LoginCommonConstants.ACCOUNT_HOME_ACTUAL,
 					accountHomeActualJson);
 			
-			/* Get expected data */
+			 Get expected data 
 			Map<String, JSONObject> expectedDataMap = loginScenario
 					.getExpectedJson(userName);
 			JSONObject accountHomeExpectedJson = accountHomePage
 					.getExpectedData(expectedDataMap);
 			getLoginScenario().saveBean(LoginCommonConstants.ACCOUNT_HOME_EXPECTED,
-					accountHomeExpectedJson);
+					accountHomeExpectedJson);*/
 	
 	
 	}
@@ -316,6 +329,108 @@ public class LoginAarpStepDefinition {
 		accountHomePage.logOut();
 
 	}
+	
+	@Then("^the User clicks moves to test harness page and clicks on go to Multiple Email Address Page$")
+	public void Move_To_TestHarness_and_goMultipleEmailAddress() {
+
+		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario()
+				.getBean(PageConstants.ACCOUNT_HOME_PAGE);
+		MultipleEmailAddressNewPage MultipleEmailPage = accountHomePage.navigateToMultipleEmailTestHarness();
+		 if(MultipleEmailPage!=null){
+		    	getLoginScenario().saveBean(PageConstants.MULTIPLE_EMAIL_ADDRESS,
+		    			MultipleEmailPage);
+				Assert.assertTrue(true);
+			} else {
+				Assert.fail("Multiple Email page not found");
+			}
+
+	}
+	
+	@Then("^the User clicks moves to test harness page and clicks on go to No Email Address Page$")
+	public void Move_To_TestHarness_and_gotoNoEmailAddress() {
+
+		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario()
+				.getBean(PageConstants.ACCOUNT_HOME_PAGE);
+		NewEmailAddressPage NewEmailPage = accountHomePage.navigateToNoEmailTestHarness();
+		 if(NewEmailPage !=null){
+		    	getLoginScenario().saveBean(PageConstants.NEW_EMAIL_ADDRESS,
+		    			NewEmailPage);
+				Assert.assertTrue(true);
+			} else {
+				Assert.fail("Multiple Email page not found");
+			}
+
+	}
+	
+	
+	@Then("^User selects different mail option and validates the confirmation page$")
+	public void EmailMultipleAddress_validation() throws InterruptedException {
+
+		MultipleEmailAddressNewPage MEANewPage = (MultipleEmailAddressNewPage) getLoginScenario()
+				.getBean(PageConstants.MULTIPLE_EMAIL_ADDRESS);
+	    AccountHomePage MultipleEmailPageConfirmation = MEANewPage.SelectDifferentEmailAddress();
+	    if(MultipleEmailPageConfirmation!=null){
+	    	getLoginScenario().saveBean(PageConstants.MULTIPLE_EMAIL_CONFIRMATION,
+	    			MultipleEmailPageConfirmation);
+			Assert.assertTrue(true);
+		} else {
+			Assert.fail("Multiple Email page not found");
+		}
+         
+	}
+	
+	@Then("^User selects Radio button for available mail address option and validates the confirmation page$")
+	public void EmailSelectOption_validation() throws InterruptedException {
+
+		MultipleEmailAddressNewPage MEANewPage = (MultipleEmailAddressNewPage) getLoginScenario()
+				.getBean(PageConstants.MULTIPLE_EMAIL_ADDRESS);
+	    AccountHomePage MultipleEmailPageConfirmation = MEANewPage.SelectEmailfromOption();
+	    if(MultipleEmailPageConfirmation!=null){
+	    	getLoginScenario().saveBean(PageConstants.MULTIPLE_EMAIL_CONFIRMATION,
+	    			MultipleEmailPageConfirmation);
+			Assert.assertTrue(true);
+		} else {
+			Assert.fail("Multiple Email page not found");
+		}
+         
+	}
+	
+	
+	
+	
+	@Then("^User enters new email address and validates the confirmation page$")
+	public void EmailEnterNew_validation() throws InterruptedException {
+
+		NewEmailAddressPage NEANewPage = (NewEmailAddressPage) getLoginScenario()
+				.getBean(PageConstants.NEW_EMAIL_ADDRESS);
+	    AccountHomePage NewEmailPageConfirmation = NEANewPage.EnterNewMail();
+	    if(NewEmailPageConfirmation!=null){
+	    	getLoginScenario().saveBean(PageConstants.NEW_EMAIL_ADDRESS_CONFIRMATION,
+	    			NewEmailPageConfirmation);
+			Assert.assertTrue(true);
+		} else {
+			Assert.fail("Multiple Email page not found");
+		}
+         
+	}
+	
+	
+	
+	@Then("^the user validates multiple email address page$")
+	public void EmailMultipleAddresses_validation() throws InterruptedException {
+
+		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario()
+				.getBean(PageConstants.ACCOUNT_HOME_PAGE);
+	    AccountHomePage MultipleEmailPage = accountHomePage.ValidateMultipleEmailAddress();
+	    if(MultipleEmailPage!=null){
+	    	getLoginScenario().saveBean(PageConstants.MULTIPLE_EMAIL_ADDRESS,
+	    			MultipleEmailPage);
+			Assert.assertTrue(true);
+		} else {
+			Assert.fail("Multiple Email page not found");
+		}
+         
+	}
 
 	@Then("^the user validates terminated plan details$")
 	public void login_terminate_validation() {
@@ -351,30 +466,62 @@ public class LoginAarpStepDefinition {
 		accountHomePage.logOut();
 
 	}
-
-	@Then("^the user validates the order drugs from your preferred Mail Service pharmacy link in AARP site$")
+@Then("^the user validates the order drugs from your preferred Mail Service pharmacy link in AARP site$")
 	public void user_validates_order_drugs_from_your_preferred_Mail_Service_pharmacy_link() {
 
 
 		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario()
 				.getBean(PageConstants.ACCOUNT_HOME_PAGE);
-		
 		accountHomePage.validateDrugsPreferredMailOderLink();
 		accountHomePage.logOut();
+}
+@Given("^the user is on the multipleEmailAddressPage and clicks on continue$")
+	public void Multiple_Email_address()
+	{
+		WebDriver wd = getLoginScenario().getWebDriver();
+		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
 
-	}
+
 
 	
+		MultipleEmailAddressNewPage loginPage = new MultipleEmailAddressNewPage(wd);
+		getLoginScenario().saveBean(PageConstants.LOGIN_PAGE, loginPage);
+		AccountHomePage accountHomePage = loginPage.ClickOnContinue();
+	}
+	
+	@Given("^the user is on the multipleEmailAddressPage and enters invalid email address$")
+	public void Invallid_Email_address() throws InterruptedException
+	{
+		WebDriver wd = getLoginScenario().getWebDriver();
+		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
 
-	/*@After
-	public void tearDown() {
+		MultipleEmailAddressNewPage loginPage = new MultipleEmailAddressNewPage(wd);
+		getLoginScenario().saveBean(PageConstants.LOGIN_PAGE, loginPage);
+		AccountHomePage accountHomePage = loginPage.EnterInvalidMail();
+	}
+	
+	@Given("^the user is on the multipleEmailAddressPage and enters does not enters same email address$")
+	public void NotMatching_Email_address() throws InterruptedException
+	{
+		WebDriver wd = getLoginScenario().getWebDriver();
+		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
+
+		MultipleEmailAddressNewPage loginPage = new MultipleEmailAddressNewPage(wd);
+		getLoginScenario().saveBean(PageConstants.LOGIN_PAGE, loginPage);
+		AccountHomePage accountHomePage = loginPage.ConfirmMailIssue();
+	}
+	
+
+		public void tearDown() {
 		
 		WebDriver wd = (WebDriver) getLoginScenario().getBean(
 				CommonConstants.WEBDRIVER);
 		// wd.close();
-		wd.quit();
+		if(wd!=null){
+			wd.quit();
+		}
 		getLoginScenario().flushBeans();
 		
-	}*/
+	}
 
 }

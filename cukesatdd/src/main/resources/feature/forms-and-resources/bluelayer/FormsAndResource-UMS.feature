@@ -63,21 +63,22 @@ Examples:
 
 | planType | memberType |
 #| MA	   | Group |
- | MAPD	   | Group |
+# | MAPD	   | Group |
 #| SSUP		| Group |
 #| SSRD		| Group |
+@formsandresourcesfnf
+ Scenario Outline: Verify add plan tab on forms and resources page
+ Given registered member for forms and resources in UMS Site
+	| Plan Type      |<planType>   |
+	| Member Type		 |<memberType> |
+  	| Group Type     |<groupType>  |
+When the user navigates to forms and resources in UMS site
+Then validates that add plans tab is not available
 
 #Scenario Outline: Verify add plan tab on forms and resources page
-#Given registered member for forms and resources in UMS Site
-#	| Plan Type      |<planType>   |
-#	| Member Type		 |<memberType> |
-#	| Group Type     |<groupType>  |
-#When the user navigates to forms and resources in UMS site
-#Then validates that add plans tab is not available
-
-#Examples:
-#  | planType | memberType | groupType |
-#  | MAPD     | Group      | ALPEEHIP  |
+Examples:
+  | planType | memberType | groupType |
+  | MAPD     | Group      | ALPEEHIP  |
 #  | MA			 | Group      | ALPEEHIP  |
 
 #@US463479

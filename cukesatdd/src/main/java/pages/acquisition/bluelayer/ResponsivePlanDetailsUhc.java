@@ -31,7 +31,7 @@ public class ResponsivePlanDetailsUhc extends UhcDriver {
 	private WebElement optionalDentalBoxHeader;
 	
 	
-	@FindBy(xpath="//tr[@class='optionalServicesPlanCosts']//td[@ng-show='dentalCheckBoxSelected']//strong[2]")
+	@FindBy(xpath="//div[1][@class='riders-box']/p[3]/b")
 	private WebElement optionalDentalDollarValue;
 	
 	@FindBy(xpath="//div[1][@class='riders-box']/label")
@@ -43,7 +43,7 @@ public class ResponsivePlanDetailsUhc extends UhcDriver {
 	@FindBy(xpath="//div[2][@class='riders-box']/label")
 	private WebElement highOptionalDentalCheckBox;
 	
-	@FindBy(xpath="//tr[@class='optionalServicesPlanCosts']//td[@ng-show='highDentalCheckBoxSelected']//strong[2]")
+	@FindBy(xpath="	//div[2][@class='riders-box']/p[3]/b")
 	private WebElement highOptionalDentalDollarValue;
 		
 	@FindBy(xpath="//span[@class='title' and text()='Plan Costs']")
@@ -98,15 +98,20 @@ public class ResponsivePlanDetailsUhc extends UhcDriver {
     @FindBy (xpath="//p[text()='Drug Costs from Formulary']/following-sibling::a")
     private WebElement planCostDrugLink;
     
-    @FindBy (xpath="//tr[@class='totals']//span[not (@class='ng-hide')]/strong")
+    @FindBy (xpath=".//*[@id='planCosts']/div[1]/table/tbody/tr[9]/td/span[4]/strong")
     private WebElement estimateAnnualCost;
     
     @FindBy (xpath="//p[text()='High Option Dental']")
     private WebElement highOptionPlanCost;
     
-    @FindBy (xpath="//p[text()='High Option Dental']")
+    @FindBy (xpath="//p[text()='Optional Dental']")
     private WebElement optionalDentalPlanCost;
-  
+    
+    @FindBy (xpath=".//*[@id='planCosts']/div[1]/table/tbody/tr[8]/td[2]/strong[2]")
+    private WebElement highOptionalDentalDollarValueOnPlanCostPage;
+    
+    @FindBy (xpath=".//*[@id='planCosts']/div[1]/table/tbody/tr[8]/td[3]/strong[2]")
+    private WebElement optionalDentalDollarValueOnPlanCost;
   
     String drugCost=null;
 	
@@ -350,7 +355,7 @@ public class ResponsivePlanDetailsUhc extends UhcDriver {
 		 if(highOptionalDental.equals("true")){
 			 if(highOptionPlanCost.isDisplayed()){
 				 highOptionPlanCost.click();
-				 if(highOptionalDentalDollarValue.getText().equals(estimateAnnualCost.getText())){
+				 if(highOptionalDentalDollarValueOnPlanCostPage.getText().equals(estimateAnnualCost.getText())){
 					 System.out.println("Estimate annual value displayed correctly for high optional dental");
 				 }else{
 					 System.out.println("Estimate annual value not displayed correctly for high optional dental");
@@ -362,19 +367,9 @@ public class ResponsivePlanDetailsUhc extends UhcDriver {
 				 Assert.fail();
 			 }
 		 }if(optionalDental.equals("true")){
-			 try {
-				Thread.sleep(4000);
-			} catch (InterruptedException e) {
-				e.printStackTrace();
-			}
 			 if(optionalDentalPlanCost.isDisplayed()){
 				 optionalDentalPlanCost.click();
-				 try {
-						Thread.sleep(4000);
-					} catch (InterruptedException e) {
-						e.printStackTrace();
-					}
-				 if(optionalDentalDollarValue.getText().equals(estimateAnnualCost.getText())){
+				 if(optionalDentalDollarValueOnPlanCost.getText().equals(estimateAnnualCost.getText())){
 					 System.out.println("Estimate annual value displayed correctly for optional dental");
 				 }else{
 					 System.out.println("Estimate annual value not displayed correctly for optional dental");

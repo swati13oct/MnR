@@ -20,7 +20,7 @@
 "accountHolderName":{
 "identifier":"xpath",
 "elementName":"(.//*[@class='bold ng-binding'])[4]"
-}
+},
 "memberid":{
 "identifier":"xpath",
 "elementName":"(.//*[@class='bold ng-binding'])[5]"
@@ -29,5 +29,4 @@
 "identifier":"xpath",
 "elementName":"(.//*[@class='bold ng-binding'])[6]"
 },
-}
-}
+

@@ -181,6 +181,7 @@ public class FormsandresourcesPage extends UhcDriver {
 				.get(CommonConstants.GLOBAL);
 		JSONObject formsAndResourcesExpectedJson = expectedDataMap
 				.get(CommonConstants.FORMS_AND_RESOURCES);
+		System.out.println(expectedDataMap.size()+" expected mapsize ********************************"+formsAndResourcesExpectedJson.toString());
 		formsAndResourcesExpectedJson = CommonUtility.mergeJson(
 				formsAndResourcesExpectedJson, globalExpectedJson);
 		return formsAndResourcesExpectedJson;
@@ -195,7 +196,7 @@ public class FormsandresourcesPage extends UhcDriver {
 		for (String key : formsAndResources.getExpectedData().keySet()) {
 			WebElement element = findElement(formsAndResources
 					.getExpectedData().get(key));
-			if(validate(element)){
+			if(element!=null && validate(element)){
 				try {
 					jsonObject.put(key, element.getText());
 				} catch (JSONException e) {

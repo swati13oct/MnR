@@ -195,7 +195,7 @@ public class BenefitsAndCoverageUmsStepDefinition {
 		}
 
 		WebDriver wd = getLoginScenario().getWebDriver();
-		MRScenario.keyEvent(wd);
+		//MRScenario.keyEvent(wd);
 
 		LoginPage2 loginPage = new LoginPage2(wd);
 
