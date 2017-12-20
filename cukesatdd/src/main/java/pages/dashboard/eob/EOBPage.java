@@ -84,7 +84,7 @@ public class EOBPage extends UhcDriver{
 	@FindBy(xpath = "//a[contains(text(), 'Supplemental  Insurance Plans')]")
 	private WebElement SuppTab;
 
-	@FindBy(xpath = "//*[text()='Go to EOB Search page']")
+	@FindBy(xpath = "//a[contains(text(),'EOB Search')]")
 	private WebElement eobLink;
 	
 	@FindBy(id="toDatepicker")
@@ -377,8 +377,7 @@ public class EOBPage extends UhcDriver{
 		}
 
 		validate(eobLink);
-		driver.findElement(By.xpath("//*[text()='Go to EOB Search page']")).click();
-
+        eobLink.click();
 		return new EOBPage(driver);
 	}
 

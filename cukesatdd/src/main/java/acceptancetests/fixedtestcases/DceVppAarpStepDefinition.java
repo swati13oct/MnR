@@ -738,7 +738,7 @@ public class DceVppAarpStepDefinition {
 	}
 
 	@When("^the user views plans of the below plan type in the AARP site$")
-	public void user_performs_planSearch_in_aarp_site(DataTable givenAttributes) {
+	public void user_performs_planSearch_in_aarp_site(DataTable givenAttributes) throws InterruptedException {
 		List<DataTableRow> givenAttributesRow = givenAttributes
 				.getGherkinRows();
 		Map<String, String> givenAttributesMap = new HashMap<String, String>();
@@ -796,7 +796,7 @@ public class DceVppAarpStepDefinition {
 	}
 
 	@And("^the user selects the plan in AARP site$")
-	public void user_selects_plan(DataTable givenAttributes) {
+	public void user_selects_plan(DataTable givenAttributes) throws InterruptedException {
 		List<DataTableRow> givenAttributesRow = givenAttributes
 				.getGherkinRows();
 		Map<String, String> givenAttributesMap = new HashMap<String, String>();

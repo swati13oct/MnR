@@ -59,7 +59,7 @@ public class ResponsiveStepDefeniton {
         }
         
         @Then("^the user performs plan serach using zipcode$")
-        public void user_planSearch_with_zipcode(DataTable givenAttributes){
+        public void user_planSearch_with_zipcode(DataTable givenAttributes) throws InterruptedException{
                 List<DataTableRow> memberAttributesRow = givenAttributes
                                 .getGherkinRows();
                 Map<String, String> memberAttributesMap = new HashMap<String, String>();
@@ -228,7 +228,7 @@ public class ResponsiveStepDefeniton {
         }
         
         @And("^the user click back to all plans in AARP site")
-        public void the_user_clic_backtoallplan(){
+        public void the_user_clic_backtoallplan() throws InterruptedException{
                 ResponsivePlanSummary planSummary = (ResponsivePlanSummary) getLoginScenario()
                                 .getBean(PageConstants.RESPONSIVE_PLAN_SUMMARY_PAGE);
                 planSummary.backtoAllPlans();        
@@ -647,8 +647,7 @@ public class ResponsiveStepDefeniton {
             		getLoginScenario().saveBean(VPPCommonConstants.PLAN_NAME, planName);
             		ResponsivePlanSummary planSummaryPage = (ResponsivePlanSummary) getLoginScenario()
             				.getBean(PageConstants.RESPONSIVE_PLAN_SUMMARY_PAGE);
-            		VPPPlanSummaryPage getStartedPage = planSummaryPage 			
-            				.clicksOnEnterDrugInformationLink(planName);
+            		VPPPlanSummaryPage getStartedPage = planSummaryPage.clicksOnEnterDrugInformationLink(planName);
             		try {
             			Thread.sleep(10000);
             		} catch (InterruptedException e) {

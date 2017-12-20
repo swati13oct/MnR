@@ -121,7 +121,7 @@ public class RallytoolAarpStepDefinition {
 	}
 	
 	@Then("^click on Is my Provider Covered link of MA/MAPD plans for next year plan and switch back and validate Rally Connect Get Started page$")
-	public void clicks_on_Provider_link_next_year(DataTable givenAttributes)
+	public void clicks_on_Provider_link_next_year(DataTable givenAttributes) throws InterruptedException
 	{	
 		//WebDriver wd = getLoginScenario().getWebDriver();
 		List<DataTableRow> memberAttributesRow = givenAttributes

@@ -226,34 +226,37 @@ private WebElement PassportFlyerPDF;
 
 	}
 
-	public PlanDetailsPage navigateToPlanDetails(String planName, String planType) {
+	 public PlanDetailsPage navigateToPlanDetails(String planName) {
 
-		if (planType.equalsIgnoreCase("MA") || planType.equalsIgnoreCase("MAPD")) {
-			ElementData elementData = new ElementData("id", "viewmoredetlinkmapd");
-			WebElement element = getViewPlanDetailsElement(maPlanElement, elementData, planName);
-			if (element != null) {
-				element.click();
+         if (planName.contains("HMO")) {
+                 ElementData elementData = new ElementData("id", "viewDetailsMA");
+                 WebElement element = getViewPlanDetailsElement(maPlanElement, elementData, planName);
+                 if (element != null) {
+                         element.click();
+                 }
 
-			}
+         } else if (planName.contains("PDP")) {
+                 ElementData elementData = new ElementData("id", "viewDetailsPDP");
+                 WebElement element = getViewPlanDetailsElement(pdpPlanElement, elementData, planName);
+                 if (element != null) {
+                         element.click();
+                 }
+         } else if (planName.contains("Regional PPO")) {
+                 ElementData elementData = new ElementData("id", "viewDetailsMA");
+                 WebElement element = getViewPlanDetailsElement(maPlanElement, elementData, planName);
+                 if (element != null) {
+                         element.click();
+                 }
 
-		} else if (planType.equalsIgnoreCase("PDP")) {
-			ElementData elementData = new ElementData("id", "viewmoredetlinkpdp");
-			WebElement element = getViewPlanDetailsElement(pdpPlanElement, elementData, planName);
-			if (element != null) {
-				element.click();
-
-			}
-
-		}
-		CommonUtility.checkPageIsReady(driver);
-		if (driver.getTitle().equalsIgnoreCase("Our Medicare Plans | AARP® Medicare Plans from UnitedHealthcare®")
-				|| driver.getTitle().equalsIgnoreCase("Plan Detail")) {
-			return new PlanDetailsPage(driver);
-		}
-
-		return null;
-	}
-
+         }
+         CommonUtility.checkPageIsReady(driver);
+         if (driver.getTitle().equalsIgnoreCase("Medicare Advantage Plan Details | | UnitedHealthcare®")
+                         || driver.getTitle().equalsIgnoreCase("Medicare Special Needs Plan Details | UnitedHealthcare®")
+                         || driver.getTitle().equalsIgnoreCase("Medicare Prescription Drug Plan Details | UnitedHealthcare®")) {
+                 return new PlanDetailsPage(driver, planName);
+         }
+         return null;
+ }
 	private WebElement getViewPlanDetailsElement(
 			List<WebElement> planElement, ElementData elementData,
 			String planName) {
@@ -351,8 +354,7 @@ return plan;
 	return validatePopup;
 }
 
-
-	public VPPPlanSummaryPage viewPlanSummary(String planType) {
+public VPPPlanSummaryPage viewPlanSummary(String planType) throws InterruptedException {
 		try {
 			Thread.sleep(8000);
 		} catch (InterruptedException e) {
@@ -365,6 +367,7 @@ return plan;
 		} else if (planType.equalsIgnoreCase("MA")
 				|| planType.equalsIgnoreCase("MAPD")) {
 			System.out.println("before showMaPlans click");
+			Thread.sleep(3000);
 			showMaPlans.click();
 			System.out.println("after showMaPlans click");
 			//validate(hideMaPlans);
@@ -1048,6 +1051,35 @@ public VPPPlanSummaryPage enrollNowbtn(){
 		return false;
 
 	}
+	
+	public PlanDetailsPage navigateToPlanDetails(String planName, String planType) {
+
+        if (planType.equalsIgnoreCase("MA") || planType.equalsIgnoreCase("MAPD")) {
+                ElementData elementData = new ElementData("id", "viewmoredetlinkmapd");
+                WebElement element = getViewPlanDetailsElement(maPlanElement, elementData, planName);
+                if (element != null) {
+                        element.click();
+
+                }
+
+        } else if (planType.equalsIgnoreCase("PDP")) {
+                ElementData elementData = new ElementData("id", "viewmoredetlinkpdp");
+                WebElement element = getViewPlanDetailsElement(pdpPlanElement, elementData, planName);
+                if (element != null) {
+                        element.click();
+
+                }
+
+        }
+        CommonUtility.checkPageIsReady(driver);
+        if (driver.getTitle().equalsIgnoreCase("Our Medicare Plans | AARP® Medicare Plans from UnitedHealthcare®")
+                        || driver.getTitle().equalsIgnoreCase("Plan Detail")) {
+        	 return new PlanDetailsPage(driver, planType);
+        }
+
+        return null;
+}
+
 }
 
 

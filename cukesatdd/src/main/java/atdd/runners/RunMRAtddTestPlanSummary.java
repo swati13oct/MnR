@@ -12,10 +12,10 @@ import cucumber.junit.Cucumber;
  *
  */
 @RunWith(Cucumber.class)
-@Cucumber.Options(glue = { "atdd.framework","acceptancetests.plansummary.bluelayer" }, 
-		features = { "feature/plan-summary/bluelayer" }, 
+@Cucumber.Options(glue = { "atdd.framework","acceptancetests.plansummary" }, 
+		features = { "feature/plan-summary" }, 
 		format = {
-		"pretty", "html:reports/test-report" }, tags ={"@plansummarymail"})
+		"pretty", "html:reports/test-report","json:target/cucumber.json"}, tags ={"@albamafnf"})
 public class RunMRAtddTestPlanSummary {
 
 }

@@ -651,7 +651,9 @@ loginPage.loginTo();
 
 		WebDriver wd = (WebDriver) getLoginScenario().getBean(
 				CommonConstants.WEBDRIVER);
-		wd.quit();
+		if(wd!=null){
+			wd.quit();
+		}
 		getLoginScenario().flushBeans();
 	}*/
 	}

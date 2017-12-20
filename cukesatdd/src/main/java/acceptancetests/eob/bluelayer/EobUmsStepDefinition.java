@@ -311,7 +311,9 @@ public class EobUmsStepDefinition {
 	public void tearDown() {
 
 		WebDriver wd = (WebDriver) getLoginScenario().getBean("webDriver");
+		if(wd!=null){
 		wd.quit();
+		}
 	}
 
 }

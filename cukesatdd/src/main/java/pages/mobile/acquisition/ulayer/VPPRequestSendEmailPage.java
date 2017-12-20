@@ -44,7 +44,7 @@ public class VPPRequestSendEmailPage extends UhcDriver {
 	@FindBy(xpath="//*[@class='modal-title']/h3")
 	private WebElement popupHeader;
 	
-	@FindBy(xpath="//*[@class='modal-content']/p")
+	@FindBy(xpath="//div[@class='uhc-modal-content']/p")
 	private WebElement popupMessage;
 	
 	@FindBy(xpath="//a[@class='cta-button close-modal']")
