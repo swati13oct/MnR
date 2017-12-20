@@ -836,6 +836,12 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 	
 	public void validateBnCPag()
 	   {
+		try {
+			Thread.sleep(20000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		validateNew(planName1);
 	   }
 
