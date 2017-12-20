@@ -966,7 +966,7 @@ public class RegistrationInformationPage extends UhcDriver {
     	WebDriverWait wait = new WebDriverWait(this.driver, 10);
     	wait.until(new ExpectedCondition<Boolean>() {
     	    public Boolean apply(WebDriver driver) {
-    		if (nextButton.isDisplayed())
+    		if (cancelButton.isDisplayed())
     		    return true;
     		else
     		    return false;
