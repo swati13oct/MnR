@@ -818,35 +818,32 @@ Examples:
       | MAPD     |  
 
       
-   @validatePdfsectiongroupenglish
+   @CodeMonkeysvalidatePdfsectiongroupenglish
       Scenario Outline: Verify PDF section is in place on Benefits and     Coverage page
     Given registered member with following details logins in the member portal 
       | Plan Type      | <planType>  |
       | Member Type    | <memberType>|
       | Copay Category | <copayCategory>|
-    Then the user navigates to Benefits and coverage page
+    Then the user goes to dashbard BnC
     And the user validates the content on benefits and coverage page
     And the user validates view and document label
     And the user validates the language dropdown and the value displayed by default should be English
    
      Examples: 
        | planType|  memberType  | copayCategory |
-       | PDP     |  Group       |  NON LIS      |
+       | PDP     |  Group       |  NON LIS      | 
        | MAPD    |  Group       |  NON LIS      |
-       | MA      |  Group       |  NON LIS      | 
-       | MAPD    |  Group       |   LIS 3       |
-       | MA      |  Group       |   LIS 1       |
-       | PDP     |  Group       |   LIS 3       |   
+       | MA      |  Group       |  NON LIS      |
   
 
 
- @validatePdfsectiongroupspanishchinese
+ @CodeMonkeysvalidatePdfsectiongroupspanishchinese
     Scenario Outline: Verify PDF section is in place on Benefits and Coverage page
     Given registered member with following details logins in the member portal 
       | Plan Type      | <planType>  |
       | Member Type    | <memberType>|
       | Copay Category | <copayCategory>|
-    Then the user navigates to Benefits and coverage page
+    Then the user goes to dashbard BnC
     And the user validates the content on benefits and coverage page
     And the user validates view and document label
     And the user validates spanish and chinese should not display in dropdown
@@ -855,18 +852,15 @@ Examples:
        | planType|  memberType  | copayCategory |
        | PDP     |  Group       |  NON LIS      |
        | MAPD    |  Group       |  NON LIS      |
-       | MA      |  Group       |  NON LIS      | 
-       | MAPD    |  Group       |   LIS 3       |
-       | MA      |  Group       |   LIS 1       |
-       | PDP     |  Group       |   LIS 3       |     
+       | MA      |  Group       |  NON LIS      |    
 
- @validatePdfsectionindividual
+ @CodeMonkeysvalidatePdfsectionindividual
     Scenario Outline: Verify PDF section is in place on Benefits and     Coverage page
     Given registered member with following details logins in the member portal 
       | Plan Type      | <planType>  |
       | Member Type    | <memberType>|
       | Copay Category | <copayCategory>|
-    Then the user navigates to Benefits and coverage page
+    Then the user goes to dashbard BnC
     And the user validates the content on benefits and coverage page
     And the user validates view and document label
     And the user validates the language dropdown and the value displayed by default and selects new value in dropdown successfully
@@ -878,17 +872,10 @@ Examples:
       | MAPD    |  Individual  |   LIS 1       | SPANISH  |
       | MA      |  Individual  |   LIS 1       | CHINESE  |
       | MAPD    |  Individual  |  NON LIS      | SPANISH  |
-      | MA      |  Individual  |  NON LIS      | CHINESE  |
-      | MAPD    |  Individual  |   LIS 1       | CHINESE  |
-      | MA      |  Individual  |   LIS 1       | SPANISH  |
-      | MAPD    |  Individual  |  NON LIS      | CHINESE  |
-      | MA      |  Individual  |  NON LIS      | SPANISH  |
-      | MAPD    |  Individual  |   LIS 1       | ENGLISH  |
-      | MA      |  Individual  |   LIS 1       | ENGLISH  |
-      | MAPD    |  Individual  |  NON LIS      | ENGLISH  |
-      | MA      |  Individual  |  NON LIS      | ENGLISH  |
+      | PDP     |  Individual  |  NON LIS      | CHINESE  |
+      | PDP     |  Individual  |   LIS 4       | CHINESE  |
       
- @Ancillarysecjenkins
+ @CodeMonkeysAncillarysecjenkins
    Scenario Outline: Verify Ancilliary section is in place on Benefits and Coverage page
     Given registered member with following details logins in the member portal 
       | Plan Type      | <planType>  |
@@ -1076,6 +1063,19 @@ Examples:
       Examples: 
     | planType|
     | MAPD    |
+   # | PDP     |
+   # | MA       |
+   
+    
+    @Dummy
+    Scenario Outline: Verify dummy is in place on Benefits and Coverage page
+    Given registered member with following details logins in the member portal 
+       | Plan Type      | <planType>     |
+    Then the user goes to dashbard BnC
+    
+      Examples: 
+    | planType|
+    | GroupMAPD|
    # | PDP     |
    # | MA       |
    

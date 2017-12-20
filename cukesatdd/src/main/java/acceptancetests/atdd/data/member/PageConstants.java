@@ -11,6 +11,8 @@ public class PageConstants {
 
 	public static final String ACCOUNT_HOME_PAGE = "accountHomePage";
 	
+	public static final String DASHBOARD_PAGE = "dashboardPage";
+	
 	public static final String TEST_HARNESS_PAGE = "testHarnessPage";
 	
 	public static final String GO_GREEN_SPLASH_PAGE = "gogreensplashpage";

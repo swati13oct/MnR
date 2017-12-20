@@ -43,6 +43,9 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 	@FindBy(xpath = "//*[@id='planBenefitsApp']/div/div/div[2]/div[1]/div/div[4]/div[1]/span")
 	private WebElement effectiveDate;
 	
+	 @FindBy(xpath = ".//*[@id='planBenefitsApp']/section/div/div[1]/div/div/div/div/h1")
+	 private WebElement planName1;
+	
 	@FindBy(className = "atdd-contact-us")
 	private WebElement contactUslink;
 	
@@ -63,7 +66,7 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 	@FindBy(xpath = ".//*[@id='plan_benefit_documents']/section/div/div[1]/div")
 	private WebElement planBenefitsDocuments;
 
-	@FindBy(xpath = ".//*[@id='lang-select-2']")
+	@FindBy(id = "lang-select-2")
 	private WebElement langdropdown;
 
 	@FindBy(xpath = ".//*[@id='ancillary']/div[2]/div[1]/div")
@@ -142,10 +145,10 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 	@FindBy(id = "waystosave")
 	private WebElement waysToSave;
 
-	@FindBy(xpath = ".//*[@id='plan_benefit_documents']/section/div/div[2]/div/form/span[1]")
+	@FindBy(xpath = ".//*[@id='plan_benefit_documents']/section[2]/div/div[2]/div/form/span[1]")
 	private WebElement view_label;
 
-	@FindBy(xpath = ".//*[@id='plan_benefit_documents']/section/div/div[2]/div/form/span[2]")
+	@FindBy(className = "atdd-document-text")
 	private WebElement documents_label;
 
 	@FindBy(xpath = "//*[@id='planBenefitsApp']/section/div/div[1]/div/div/div/div/h1")
@@ -460,6 +463,7 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 		if (langdropdown.isDisplayed()) {
 			Select langdropdwn = new Select(langdropdown);
 			if (langdropdwn.getFirstSelectedOption().getText().equals("ENGLISH")) {
+				System.out.println("Text"+langdropdwn.getFirstSelectedOption().getText());
 				Assert.assertTrue(true);
 			} else
 				Assert.fail("Issue in English selection");
@@ -829,5 +833,10 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 		validateNew(OUTOFNETWORK);
 		
 	}
+	
+	public void validateBnCPag()
+	   {
+		validateNew(planName1);
+	   }
 
 }

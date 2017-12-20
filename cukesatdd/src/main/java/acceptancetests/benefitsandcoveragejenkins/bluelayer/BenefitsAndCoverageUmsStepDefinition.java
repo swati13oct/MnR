@@ -21,6 +21,7 @@ import org.openqa.selenium.By;
 
 import pages.member.bluelayer.AccountHomePage;
 import pages.member.bluelayer.BenefitsCoveragePage;
+import pages.member.bluelayer.DashboardPage;
 import pages.member.bluelayer.LoginPage;
 import pages.member.bluelayer.BenefitsAndCoveragePage;
 import pages.member.bluelayer.FormsandresourcesPage;
@@ -97,11 +98,18 @@ public class BenefitsAndCoverageUmsStepDefinition {
 		//MRScenario.keyEvent(wd);
 
 		LoginPage2 loginPage = new LoginPage2(wd);
-		AccountHomePage accountHomePage = (AccountHomePage) loginPage.loginWith(userName, pwd, category);
-
-		if (accountHomePage != null) {
+		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) loginPage.loginWith(userName, pwd, category);
+		
+		try {
+			Thread.sleep(30000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		if (benefitsCoveragePage!= null) {
+			System.out.println("test");
 			getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
-			getLoginScenario().saveBean(PageConstants.ACCOUNT_HOME_PAGE, accountHomePage);
+			getLoginScenario().saveBean(PageConstants.BENEFITS_COVERAGE_PAGE, benefitsCoveragePage);
 		}
 
 		// JSONObject accountHomeActualJson = null;
@@ -125,10 +133,22 @@ public class BenefitsAndCoverageUmsStepDefinition {
 		 * 
 		 * getLoginScenario().saveBean(CommonConstants.EXPECTED_DATA_MAP,
 		 * expectedDataMap);
+
 		 */
 
 	}
+	
+	
+	
+	@Then("^the user goes to dashbard BnC$")
+	public void user_views_BenefitsAndCoveragedashboard() {
+		
+		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario().getBean(PageConstants.BENEFITS_COVERAGE_PAGE);
+		benefitsCoveragePage.validateBnCPag();
 
+		
+	}
+	
 	@Then("^the user navigates to Benefits and coverage page$")
 	public void user_views_BenefitsAndCoveragejenkins1() {
 

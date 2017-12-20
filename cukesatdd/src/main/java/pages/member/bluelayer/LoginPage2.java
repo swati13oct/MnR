@@ -32,17 +32,21 @@ public class LoginPage2 extends UhcDriver {
 
 	// Page URL
 	private static String PAGE_URL = MRConstants.BNCBURL;
+	 
+	private static String PAGE_URL2 = MRConstants.Dashboard_URL;
 
 	@FindBy(id = "fd_memberSignInButton")
 	private WebElement loginIn;
 
-	@FindBy(id = "loginPOPUPuser")
+	@FindBy(id="username")
 	private WebElement userNameField;
-	
-	
-	@FindBy(id = "loginPOPUPpass")
+
+	@FindBy(id="password")
 	private WebElement passwordField;
-	
+
+	@FindBy(id="sign-in-btn")
+	private WebElement signInButton;
+
 	//MOB
 	@FindBy(id = "loginSTANDuser")
 	private WebElement usernameMob;
@@ -53,9 +57,6 @@ public class LoginPage2 extends UhcDriver {
 	
 	@FindBy(id = "accessURAccountBTN")
 	private WebElement Signin;
-	
-	@FindBy(xpath = "//div[@class='fd_userPassSection']/button")
-	private WebElement signInButton;
 
 	// @FindBy(linkText = "Forgot your username or password?")
 	// private WebElement forgotUsernamePasswordLink;
@@ -139,8 +140,7 @@ public class LoginPage2 extends UhcDriver {
 
 	public Object loginWith(String username, String password, String category) {
 		// driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
-		WebElement loginInEle = this.driver.findElement(By.id("fd_memberSignInButton"));
-		loginInEle.click();
+		
 		sendkeys(userNameField, username);
 		sendkeys(passwordField, password);
 		signInButton.click();
@@ -155,32 +155,26 @@ public class LoginPage2 extends UhcDriver {
 			while (!isAlertPresent(driver))
 				;
 		}
-		if (MRScenario.environment.equals("team-c") || MRScenario.environment.equals("team-d")) {
+		if (MRScenario.environment.equals("team-c") || MRScenario.environment.equals("stage")) {
 
-			Alert alert = driver.switchTo().alert();
+			/*Alert alert = driver.switchTo().alert();
 			alert.accept();
 			Alert alert1 = driver.switchTo().alert();
-			alert1.accept();
+			alert1.accept();*/
 		}
 
 		try {
-			Thread.sleep(10000);
+			Thread.sleep(30000);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
-		 if (currentUrl().contains("home/my-account-home.html")) {
-			 return new AccountHomePage(driver);
-		}
-		 else if (currentUrl().contains("home/my-account-home.html") && category.equalsIgnoreCase("Group")
-				|| currentUrl().contains("/guest/home.html"))
-
+		if (currentUrl().contains("benefits/overview.html?deeplink=true")) {
+			 System.out.println("Test");
+			 return new BenefitsAndCoveragePage(driver);
+		} else if (currentUrl().contains("terminated-plan.html")) 
 		{
-			return new AccountHomePage(driver);
-		} else if (currentUrl().contains("home/my-account-home.html") && category.equalsIgnoreCase("Individual")) {
-			return new AccountHomePage(driver);
-		} else if (currentUrl().contains("terminated-plan.html")) {
 			return new TerminatedHomePage(driver);
 		}
 		return null;
@@ -188,8 +182,8 @@ public class LoginPage2 extends UhcDriver {
 
 	@Override
 	public void openAndValidate() {
-		start(PAGE_URL);
-		validate(loginIn);
+		start(PAGE_URL2);
+		//validate(loginIn);
 
 	}
 
