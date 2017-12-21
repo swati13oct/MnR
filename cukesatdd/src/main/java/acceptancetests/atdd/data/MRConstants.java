@@ -1,8 +1,4 @@
-/**
- * 
- */
 package acceptancetests.atdd.data;
-
 
 import atdd.framework.MRScenario;
 
@@ -280,7 +276,7 @@ private static final String UMS_PLANPREVIEW_URL = null;
   
   public static final String UHCM_MOBILE_TEAM_C_URL = "https://member."+MRScenario.TeamCEnvironment+"-uhcmedicaresolutions.uhc.com/mobile/guest/login.html";
   
-  public static final String AARP_MOBILE_TEAM_C_URL = "https://member."+MRScenario.TeamCEnvironment+"-aarpmedicareplans.uhc.com/mobile/guest/login.html";
+  //public static final String AARP_MOBILE_TEAM_C_URL = "https://member."+MRScenario.TeamCEnvironment+"-aarpmedicareplans.uhc.com/mobile/guest/login.html";
   public static final String PORTFOLIO_PAGE_URL = "https://www."+MRScenario.environment+"-aarpmedicareplans.uhc.com";
   
   public static final String AARP_PORTFOLIO_URL = "https://www."+MRScenario.environment+"-aarpmedicareplans.uhc.com/health-plans.html";
@@ -305,11 +301,11 @@ public static String CAMPAIGN_PAGE_URL1 = "https://www."+MRScenario.environment+
   
   public static final String TeamH_BLayer_Member_URL = "https://stage-medicare.uhc.com/";
   
-  public static String TeamC_MultipleEmail_address_URL = "https://member."+MRScenario.TeamCEnvironment+"-aarpmedicareplans.uhc.com/content/dashboard/guest/multipleemailaddress.html";
+ public static String TeamC_MultipleEmail_address_URL = "https://member."+MRScenario.TeamCEnvironment+"-aarpmedicareplans.uhc.com/content/dashboard/guest/multipleemailaddress.html";
 
-  public static String TeamC_UndeliverableEmail_address_URL = "https://member."+MRScenario.TeamCEnvironment+"-aarpmedicareplans.uhc.com/content/dashboard/guest/undeliverable-email-address.html";
+  //public static String TeamC_UndeliverableEmail_address_URL = "https://member."+MRScenario.TeamCEnvironment+"-aarpmedicareplans.uhc.com/content/dashboard/guest/undeliverable-email-address.html";
   
-  public static String TeamC_NewEmail_address_URL = "https://member."+MRScenario.TeamCEnvironment+"-aarpmedicareplans.uhc.com/content/dashboard/guest/no-email-address.html";
+//  public static String TeamC_NewEmail_address_URL = "https://member."+MRScenario.TeamCEnvironment+"-aarpmedicareplans.uhc.com/content/dashboard/guest/no-email-address.html";
   
   public static final String TeamC_ULayer_Member_URL = "https://member."+MRScenario.environment+"-aarpmedicareplans.uhc.com";
   									
