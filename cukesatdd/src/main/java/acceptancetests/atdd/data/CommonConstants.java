@@ -20,7 +20,11 @@ public class CommonConstants {
 	public static final String PROPERTY_FILE_FOLDER = "/config";
 
 	public static final String PROPERTY_FILE_NAME = "config.properties";
+	public static final String ANDROIDPROPERTY_WEB_FILE_NAME = "config_andr_web.properties";
 	
+	
+	
+		
 	public static final String ANDROIDPROPERTY_FILE_NAME = "config_andr.properties";
     
     public static final String FIREFOXPROPERTY_FILE_NAME = "config_ff.properties";        
@@ -28,7 +32,6 @@ public class CommonConstants {
     public static final String CHROMEPROPERTY_FILE_NAME = "config_chrome.properties";
     
     public static final String SAFARIPROPERTY_FILE_NAME = "config_safari.properties";
-
 	public static final String DEFAULT_ENVIRONMENT_CI = "ci";
 
 	public static final String UID = "uid";
@@ -52,9 +55,7 @@ public class CommonConstants {
 	public static final String WEBDRIVER = "webDriver";
 
 	public static final String DEVICE_NAME = "DeviceName";
-	
-	//Browser Drivers for WebDriver
-	public static final String CHROME_DRIVER = "ChromeDriver";
+public static final String CHROME_DRIVER = "ChromeDriver";
 	
 	/*
 	 * This parm is set in Jenkins and should evaluate to null when running 
@@ -201,6 +202,7 @@ public class CommonConstants {
 					CommonConstants.DASHBOARD_DRUGCOSTESTIMATOR_DIRECTORY),
 			new Page(CommonConstants.ADD_DRUG_DETAILS,
 			CommonConstants.DASHBOARD_DRUGCOSTESTIMATOR_DIRECTORY)
+			
 	};
 
 	public static final String BENEFITS_SUMMARY_DIRECTORY = "/jsonresponse/mobile/member/ulayer/benefits-summary/";
@@ -863,8 +865,25 @@ public static final String NEW_CLAIM_DETAILS_PAGE_DATA = "newClaimDetailsPage.js
 	
 	public static final String PLATFORM_NAME = "PlatformName";
 	
-
-	public static final String YEAR_BUTTON_VPPPAGE = "yearBtnVppPageExists";
+public static final String ANDROIDPROPERTY_MOBILE_FILE_NAME = "config_andr_mobile.properties";
 	
+	public static final String FIREFOXPROPERTY_WEB_FILE_NAME = "config_ff_web.properties";	
+	
+	public static final String FIREFOXPROPERTY_MOBILE_FILE_NAME = "config_ff_mobile.properties";
+	
+	public static final String CHROMEPROPERTY_WEB_FILE_NAME = "config_chrome_web.properties";
+	
+	public static final String CHROMEPROPERTY_MOBILE_FILE_NAME = "config_chrome_mobile.properties";
+	
+	public static final String SAFARIPROPERTY_WEB_FILE_NAME = "config_safari_web.properties";
+	
+	public static final String SAFARIPROPERTY_MOBILE_FILE_NAME = "config_safari_mobile.properties";
+	
+	public static final String IEPROPERTY_WEB_FILE_NAME = "config_ie_web.properties";
+	
+	public static final String IEPROPERTY_MOBILE_FILE_NAME = "config_ie_mobile.properties";
+	
+	public static final String IEPROPERTY_FILE_NAME = "config_ie_web.properties";
+	public static final String YEAR_BUTTON_VPPPAGE = "yearBtnVppPageExists";
 }
 	

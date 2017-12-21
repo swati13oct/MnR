@@ -524,8 +524,9 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		return homePageDisclaimerHideJson;
 	}
 
-	public AboutUsAARPPage aboutUsFooterClick() {
+	public AboutUsAARPPage aboutUsFooterClick() throws InterruptedException {
 		validate(GlobalWebElements.footerAboutUsLink);
+		Thread.sleep(3000);
 		GlobalWebElements.footerAboutUsLink.click();
 		validate(GlobalWebElements.footerAboutUsLink);
 

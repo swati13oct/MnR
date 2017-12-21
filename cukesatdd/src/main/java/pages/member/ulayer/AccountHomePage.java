@@ -1,10 +1,11 @@
+
 /**
  * 
  */
 package pages.member.ulayer;
 
+
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.Map;
 import java.util.NoSuchElementException;
 import java.util.concurrent.TimeUnit;
@@ -15,7 +16,6 @@ import org.json.JSONObject;
 import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Cookie;
-
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.By.ByXPath;
@@ -27,17 +27,16 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.springframework.beans.factory.annotation.Autowired;
-
 import org.openqa.selenium.support.ui.Select;
+
 import acceptancetests.atdd.data.CommonConstants;
 import acceptancetests.atdd.data.MRConstants;
 import acceptancetests.atdd.data.PageData;
 import acceptancetests.atdd.util.CommonUtility;
 import atdd.framework.MRScenario;
 import atdd.framework.UhcDriver;
-
+import pages.dashboard.eob.EOBPage;
 import pages.dashboard.member.ulayer.ClaimSummarypage;
-
 import pages.member.ulayer.BenefitsAndCoveragePage;
 
 /**
@@ -54,6 +53,15 @@ public class AccountHomePage extends UhcDriver {
 
 	@FindBy(linkText = "My Profile & Preferences")
 	private WebElement profAndPrefLink;
+	
+	 @FindBy(xpath = "//*[@id='row2link2']/p/a")
+     private WebElement privacypolicyLink;
+	
+	@FindBy(xpath = "//form/fieldset[1]/ul/li[2]/label")
+    private WebElement pharmacyfilterLink;
+	
+	 @FindBy(xpath = "//area[@href='javascript:clWin()'][@alt = 'close']")
+     private WebElement FeedbackModal;
 
 	@FindBy(linkText = "Contact Us")
 	private WebElement contactUsLink;
@@ -160,6 +168,9 @@ public class AccountHomePage extends UhcDriver {
 	@FindBy(linkText = "Compare 2017 Plans")
 	private WebElement planCompareLink;
 
+	@FindBy(linkText = "Go to MultiEmail Address page")
+	private WebElement MultiEmailAddressLink;	
+	
 	@FindBy(xpath = "//div[@class='prefermain_mid mapd_div']/div/h3")
 	private WebElement planCompareHeader;
 
@@ -186,7 +197,6 @@ public class AccountHomePage extends UhcDriver {
 
 	@FindBy(xpath = "//*[@id='gogreenlogin_box']/div[4]/div/a")
 	private WebElement gogreenPopupClose;
-
 	@FindBy(xpath = "//*[@id='paymentOverviewApp']/div[1]/div/div/div/h1")
 	private WebElement paymentsHeading;
 
@@ -214,6 +224,18 @@ public class AccountHomePage extends UhcDriver {
 	@FindBy(linkText = "Date")
 	private WebElement dateLink;
 	
+@FindBy(id = "onetimepayment")
+	private WebElement OTPButton;
+	
+	@FindBy(id = "setupautopayment")
+	private WebElement AutomaticPaymentButton;
+	
+	@FindBy(xpath = ".//*[@id='emailOption.label']/strong")
+	private WebElement MultipleEmailAddressMessage;
+	
+	@FindBy(linkText = "Go to NoEmail Address page")
+	private WebElement NoEmailAddressLink;	
+	
 	@FindBy(xpath = "//*[@id='saver-checkbox']/label")
 	private WebElement filterLink;
 	
@@ -225,16 +247,10 @@ public class AccountHomePage extends UhcDriver {
 		
 	@FindBy(xpath = "//*[@id='_content_pharmacy_en_uhc_jcr_content_pharmacylocator_par_teaser']")
 	private WebElement widgetLink;
-	
-	@FindBy(xpath = "//form/fieldset[1]/ul/li[2]/label")
-	private WebElement pharmacyfilterLink;
-	
-	@FindBy(xpath = "//*[@id='row2link2']/p/a")
-	private WebElement privacypolicyLink;
-	
-	@FindBy(xpath = "//area[@href='javascript:clWin()'][@alt = 'close']")
-	private WebElement FeedbackModal;
 
+	
+	private static String EOB_DIRECT_URL = MRConstants.EOB_DIRECT_URL;
+	
 @FindBy(xpath = "//div[@class='claim-results']//table[not (contains(@class,'ng-hide'))]//tbody//tr[2]//a[text()='MORE INFO']")
 private WebElement claimstablemoreinfolink;
 
@@ -480,8 +496,6 @@ if (driver.getTitle().equalsIgnoreCase(
 		driver.manage().timeouts().implicitlyWait(1000, TimeUnit.SECONDS);
 		CommonUtility.checkPageIsReady(driver);
 		PharmacyLocatorLink.click();
-		driver.manage().timeouts().implicitlyWait(1000, TimeUnit.SECONDS);
-		CommonUtility.checkPageIsReady(driver);
 		
 /*		if (driver.findElement(By.xpath("//*[contains(text(), 'Locate a Pharmacy')]")).isDisplayed()){
 			return new PharmacySearchPage(driver);
@@ -790,10 +804,8 @@ else{
 	}
 
 	public OneTimePaymentsPage navigateToOneTimePaymentsPage() {
-		driver.navigate().to("https://member." + MRScenario.environment
-				+ "-aarpmedicareplans.uhc.com/content/dashboard/home/one-time-payments.html");
-		System.out.println("title  " + driver.getTitle());
-		if (driver.getTitle().equalsIgnoreCase("one-time-payments")) {
+		OTPButton.click();
+		if(driver.getTitle().equalsIgnoreCase("payments-client") || driver.getTitle().equalsIgnoreCase("onetimepayments")){
 			return new OneTimePaymentsPage(driver);
 		}
 		return null;
@@ -810,16 +822,87 @@ else{
 	}
 
 	public AutomaticPaymentsPage navigateToAutomaticPaymentsPage() {
-		driver.navigate().to("https://member." + MRScenario.environment
-				+ "-aarpmedicareplans.uhc.com/content/dashboard/home/automatic-payments.html");
-		System.out.println("title  " + driver.getTitle());
-		if (driver.getTitle().equalsIgnoreCase("Automatic Payments")) {
+			AutomaticPaymentButton.click();
 			return new AutomaticPaymentsPage(driver);
+		
+		
+	}
+	
+	public TestHarness navigateToTestHarnesspage() {
+		driver.navigate().to("https://member."+MRScenario.environment+"-aarpmedicareplans.uhc.com/home/testharness.html");
+		System.out.println("title  "+driver.getTitle());
+		if(driver.getTitle().equalsIgnoreCase("testharness")){
+			return new TestHarness(driver);
 		}
 		return null;
 	}
+	
+    public TestHarness navigateToTeamHTestHarnesspage() {
+		driver.navigate().to("https://member.team-h-aarpmedicareplans.uhc.com/home/testharness.html");
+		System.out.println("title  "+driver.getTitle());
+		if(driver.getTitle().equalsIgnoreCase("testharness")){
+			return new TestHarness(driver);
+		}
+		return null;
+	}
+    
+    public TestHarness navigateToTeamCTestHarnesspage() {
+		driver.navigate().to("https://member.team-c-aarpmedicareplans.uhc.com/home/testharness.html");
+		System.out.println("title  "+driver.getTitle());
+		if(driver.getTitle().equalsIgnoreCase("testharness")){
+			return new TestHarness(driver);
+		}
+		return null;
+	}
+	
+	public MedicalEobPage navigateDirectToEOBPage(){
+		driver.navigate().to(EOB_DIRECT_URL);
+ 		if(driver.getTitle().equalsIgnoreCase("Member Claims")){
+        return new MedicalEobPage(driver);
+		}
+		return null;
+	}
+public pages.dashboard.member.ulayer.ClaimSummarypage navigateToClaimsSummaryPage() {
 
-	public pages.dashboard.member.ulayer.ClaimSummarypage navigateToClaimsSummaryPage() {
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 		if (MRScenario.environment.equalsIgnoreCase("team-h") || MRScenario.environment.equalsIgnoreCase("stage")) {
 			System.out.println("Go to claims link is present "+driver.findElement(By.xpath("//a[text()='Go to Claims page']")).isDisplayed());
@@ -1338,4 +1421,38 @@ public void validateDrugsPreferredMailOderLink() {
 		else
 			System.out.println("order plan header text is not displayed");
 		return null;
-	}}
+	}
+	
+	public MultipleEmailAddressNewPage navigateToMultipleEmailTestHarness(){
+        driver.navigate().to("https://member.team-c-aarpmedicareplans.uhc.com/home/testharness.html");
+         if(driver.getTitle().equalsIgnoreCase("testharness")){
+                 MultiEmailAddressLink.click();
+                  Assert.assertTrue(driver.getTitle().equalsIgnoreCase("Multiple Email Address"));
+                  return new MultipleEmailAddressNewPage(driver);
+        }
+        return null;
+}
+	
+	public NewEmailAddressPage navigateToNoEmailTestHarness(){
+        driver.navigate().to("https://member.team-c-aarpmedicareplans.uhc.com/home/testharness.html");
+         if(driver.getTitle().equalsIgnoreCase("testharness")){
+                 NoEmailAddressLink.click();
+                  Assert.assertTrue(driver.getTitle().equalsIgnoreCase("No Email Address"));
+                  return new NewEmailAddressPage(driver);
+        }
+		return null;
+	}
+         
+         /*method showing error--need to be fixed in team branch*/
+     public AccountHomePage ValidateMultipleEmailAddress() throws InterruptedException {
+             Thread.sleep(10000);
+              if(MultipleEmailAddressMessage.getText().equalsIgnoreCase("Which email address would you like to use?")){
+            	  return new AccountHomePage(driver);
+             }
+             return null;
+     }
+     
+     
+
+
+}

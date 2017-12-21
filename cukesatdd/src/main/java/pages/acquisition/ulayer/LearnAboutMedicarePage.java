@@ -12,7 +12,7 @@ import acceptancetests.atdd.data.CommonConstants;
 import acceptancetests.atdd.data.PageData;
 import acceptancetests.atdd.util.CommonUtility;
 
-import com.thoughtworks.selenium.webdriven.commands.WaitForPageToLoad;
+
 
 public class LearnAboutMedicarePage extends GlobalWebElements {
 	@FindBy(className = "bullet_list")

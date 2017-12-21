@@ -10,9 +10,11 @@ package acceptancetests.atdd.data.member;
 public class PageConstants {
 
 	public static final String ACCOUNT_HOME_PAGE = "accountHomePage";
+public static final String CUSTOM_RANGE = "customRange";
 	
-	public static final String DASHBOARD_PAGE = "dashboardPage";
+public static final String DASHBOARD_PAGE = "dashboardPage";public static final String DATE_ERROR_MESSAGE = "dateErrorMessage";
 	
+	public static final String ONE_PAYMENT_PER_DAY_ERROR_MESSAGE = "onePaymentPerDayErrorMessage";
 	public static final String TEST_HARNESS_PAGE = "testHarnessPage";
 	
 	public static final String GO_GREEN_SPLASH_PAGE = "gogreensplashpage";
@@ -25,12 +27,16 @@ public class PageConstants {
 	
 	public static final String NEW_REGISTRATION_PAGE = "newRegistrationPage";
 
+	public static final String TIMESTAMP = "TimeStamp";
+	
 	public static final String PLAN_CONFIRMATION_PAGE = "planConfirmationPage";
 
 	public static final String CREATE_ACCOUNT_PAGE = "createAccountPage";
 	
 	public static final String BENEFITS_SUMMARY_PAGE = "benefitsSummaryPage";
 	
+	
+	public static final String Rally_Dashboard = "RallyDashboard";
 
 	public static final String REGISTRATION_SUCCESS_PAGE = "registrationSuccessPage";
 
@@ -56,7 +62,14 @@ public class PageConstants {
 
 	public static final String MY_PREF_PAGE = "myPrefPage";
 
-
+	public static final String PDF_LINK = "PDFLink";
+	
+	public static final String PAYMENT_AMOUNT = "PaymentAmount";
+	
+	public static final String PAYMENT_TYPE = "PaymentType";
+	
+	public static final String MEMBER_NAME = "MemberName";
+	
 	public static final String CLAIM_SUMMARY_PAGE = "claimSummaryPage";
 
 	public static final String CLAIM_DETAILS_PAGE = "claimDetailPage";
@@ -126,14 +139,10 @@ public class PageConstants {
 	public static final String MANAGE_DRUG_PAGE = "estimateCostPage";
 
 	public static final String ADD_DRUG_PAGE = "addDrugPage";
-	public static final String ADD_DRUG_DETAILS = "addDrugDetails";
-	public static final String SAVING_OPPORTUNITY = "savingopportunity";
-
-
+	
 	public static final String PHARMACY_TYPES = "pharmacyTypeArray";
 
 	public static final String REGISTRATION_HOME_PAGE = "registrationHomePage";
-	public static final String DRUG_COST_ESTIMATOR_PAGE = "drugcostestimatorPage";
 
 	public static final String PASSWORD_ASSISTANCE_PAGE = "passwordAssistancePage";
 
@@ -147,7 +156,7 @@ public class PageConstants {
 	
 	public static final String PLAN_COMPARE_PAGE = "planComparePage";
 	
-	
+	public static final String PAYMENT_OVERVIEW = "PaymentOverview";
 	
 	public static final String ONE_TIME_PAYMENTS_DASHBOARD = "onetimePaymentsPageDashboard";
 	
@@ -203,29 +212,50 @@ public class PageConstants {
 	public static final String AARP_DISCLAIMER_PAGE = "disclaimerpage";
 	
 	public static final String ABOUT_US_PAGE = "aboutus";
-
-	public static final String NEW_CLAIMS_SUMMARY_PAGE = "newClaimsSummaryPage";
+	 public static final String NEW_CLAIM_DETAILS_PAGE = "newClaimDetailsPage";
 	
-	public static final String NEW_CLAIM_DETAILS_PAGE = "newClaimDetailsPage";
+	public static final String DRUG_COST_ESTIMATOR_PAGE = "drugcostestimatorPage";
 	
-	public static final String TIME_ADMIN_PAGE = "timeAdminPage";
-
-public static final String ProfilePreferencesPage = "ProfilePreferencesPage";	
-public static final String EOB_Page = "eobPage";
+	public static final String ADD_DRUG_DETAILS = "addDrugDetails";
+	
+	public static final String SAVING_OPPORTUNITY = "savingopportunity";
+	
+	public static final String MULTIPLE_EMAIL_ADDRESS = "multipleEmailAddress";
+	
+	public static final String MULTIPLE_EMAIL_CONFIRMATION = "multipleEmailConfirmation";
+	
+	public static final String NEW_EMAIL_ADDRESS = "newEmailAddress";
+	
+	public static final String NEW_EMAIL_ADDRESS_CONFIRMATION = "newEmailAddressConfirmation";
+	
+	public static final String EOB_Page = "eobPage";
 	
 	public static final String DeepLink_Page = "deepLinkPage";
-	
-	public static final String DeepLink_url= "deepLinkUrl";
 
-	public static final String NEW_SIGN_PAGE = "sign_Page";
+
+	public static final String UNPWAssistancePage = null;
+
+	public static final String SignIN_Page = null;
+
+	public static final String LOGIN_ASSISTANCE_PAGE = null;
+
+	public static final String PERSONAL_IDENTIFICATION_PAGE = null;
+
+	public static final String LOGIN_ASSISTANCE_MESSAGE_PAGE = null;
+
+	public static final String Error_Message = null;
+
+	public static final String MEM_REDESIGN_ACCOUNT_HOME_PAGE = "memberRedesignAccountHomePage";
 	
 	public static final String USERNAME_PASSWORD_ASSISTANCE_PAGE = "usernamePasswordAssistancePage";
 	
-	//duplicate variable as in develop branch so rename it to something else
-	//public static final String NEW_REGISTRATION_PAGE = "newregistrationpage";
-	
-	public static final String MEM_REDESIGN_ACCOUNT_HOME_PAGE = "memberRedesignAccountHomePage";
-	
 	public static final String MEM_REDESIGN_HEALTH_AND_WELLNESS_PAGE = "memberRedesignHealthAndWellnessPage";
-
+	
+	public static final String NEW_CLAIMS_SUMMARY_PAGE = "newClaimsSummaryPage";
+	
+	public static final String NEW_SIGN_PAGE = "sign_Page";
+	
+	  public static final String DeepLink_url= "deepLinkUrl";
+	  
+	  public static final String TIME_ADMIN_PAGE = "timeAdminPage";
 }

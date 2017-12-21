@@ -1,5 +1,7 @@
 package pages.acquisition.bluelayer;
 
+import static org.junit.Assert.fail;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
@@ -18,28 +20,30 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import acceptancetests.atdd.data.CommonConstants;
 import acceptancetests.atdd.data.ElementData;
 import acceptancetests.atdd.data.MRConstants;
 import acceptancetests.atdd.data.PageData;
 import acceptancetests.atdd.util.CommonUtility;
+import acceptancetests.enrollinplan.bluelayer.EnrollInPlanUhcStepDefinition;
+// import acceptancetests.planName.bluelayer.PlanNamesStepDefinition;
 import atdd.framework.UhcDriver;
+import pages.acquisition.ulayer.ResponsivePlanDetails;
 import pages.dashboard.member.blayer.DrugCostEstimatorPage;
 import pages.member.ulayer.Rallytool_Page;
-import pages.mobile.acquisition.ulayer.VPPAarpNeedAStepBackWidget;
-import pages.mobile.acquisition.ulayer.VPPAarpNeedHelpWidgetPage;
-import acceptancetests.enrollinplan.bluelayer.EnrollInPlanUhcStepDefinition;
-import acceptancetests.planName.bluelayer.PlanNamesStepDefinition;
-import pages.acquisition.ulayer.VPPPlanSummaryPage;
-import pages.mobile.acquisition.ulayer.VPPRequestSendEmailPage;
+
 public class ResponsivePlanSummaryUhc extends UhcDriver{
 	
 	//US504467
 		@FindBy(xpath = "//div[@class='tab plancountheight'][1]")
 		private WebElement viewMaPlans;
 		
-		@FindBy(xpath = ".//*[@id='site-wrapper']/div[4]/div/div/div/div/div/div/div[1]/div/div/div[1]/div[2]/div/div[2]/div[1]")
+//		@FindBy(xpath = "//*[@id='site-wrapper']/div[4]/div/div[1]/div/div/div/div/div[1]/div/div/div[1]/div[2]/div/div[2]/div[1]/div/span[3]")                
+		//@FindBy(xpath = "(.//a[@id='change-location']//following::span[contains(text(),'View Plans')][@class='trigger-closed'])[1]")
+		@FindBy(xpath = "//span[@class='title' and contains(text(),'Medicare Advantage Plans')]")
 		private WebElement viewMAPlans;
 		
 		@FindBy(xpath = "//*[@class='ng-valid ng-dirty']/span/div[1]/p")
@@ -282,9 +286,6 @@ public class ResponsivePlanSummaryUhc extends UhcDriver{
 		
 		@FindBy(className="footer")
 		private WebElement footerElement;
-
- @FindBy(xpath = "(//*[@id='enrollMAButton']/span)[1]")
-            	private WebElement enrollNowbtn;
 		
 			private static String CAMPAIGN_URL_1 = MRConstants.CAMPAIGN_PAGE_URL1;
 			
@@ -483,31 +484,43 @@ public void disclaimerText(){
 }
 
 public ResponsivePlanSummaryUhc viewPlanSummary(String planType) {
-//	JavascriptExecutor js = (JavascriptExecutor)driver;
-	/*try {
-		Thread.sleep(4000);
-	} catch (InterruptedException e) {
-		// TODO Auto-generated catch block
-		e.printStackTrace();
-	}*/	
+	WebDriverWait wait = new WebDriverWait(driver, 90);
+	try{
+	driver.findElement(By.xpath(".//*[@id='58']"));
+	}catch(Exception e){
+		System.out.println("help widget not displayed");
+	}
 	if (planType.equalsIgnoreCase("PDP")) {
+		wait.until(ExpectedConditions.elementToBeClickable(viewPdpPlans));
 		viewPdpPlans.click();
 		return new ResponsivePlanSummaryUhc(driver);
 			} else if (planType.equalsIgnoreCase("MA")
 			|| planType.equalsIgnoreCase("MAPD")) {
+			wait.until(ExpectedConditions.elementToBeClickable(viewMAPlans));
 			System.out.println("inside MA");
 			//viewMaPlans.click();
-			viewMAPlans.click();
-		return new ResponsivePlanSummaryUhc(driver);
+			//viewMAPlans.click();
+			JavascriptExecutor js = (JavascriptExecutor)driver;
+			js.executeScript("arguments[0].click();", viewMAPlans);
+
+		return new ResponsivePlanSummaryUhc(driver);		 
 			}else if(planType.equalsIgnoreCase("MS")){
-		           showMsPlans.click();
+				wait.until(ExpectedConditions.elementToBeClickable(showMsPlans));
+		         showMsPlans.click();
+		         try {
+					Thread.sleep(3000);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 		    if(driver.getTitle().equals("UnitedHealthcare Medicare Solutions | AARP Medicare Supplement Plans")){
-		    	return new ResponsivePlanSummaryUhc(driver);
+ 		    	return new ResponsivePlanSummaryUhc(driver);
 		    }else{
 		    	System.out.println("MS plans header not displayed");
 		    	Assert.fail();
 		    }
 		}else if(planType.equalsIgnoreCase("SNP")){
+			wait.until(ExpectedConditions.elementToBeClickable(viewSnpPlans));
 			viewSnpPlans.click();
 	return new ResponsivePlanSummaryUhc(driver);
 	}
@@ -515,14 +528,11 @@ public ResponsivePlanSummaryUhc viewPlanSummary(String planType) {
 }
 	
 
-public BLayerPlanComparePage TeamCviewPlanSummary(String planType) {
+public BLayerPlanComparePage TeamCviewPlanSummary(String planType) throws InterruptedException {
 //	JavascriptExecutor js = (JavascriptExecutor)driver;
-	try {
-		Thread.sleep(4000);
-	} catch (InterruptedException e) {
-		// TODO Auto-generated catch block
-		e.printStackTrace();
-	}	
+	
+		
+	Thread.sleep(5000);
 	if (planType.equalsIgnoreCase("PDP")) {
 		viewPdpPlans.click();
 		return new BLayerPlanComparePage(driver);
@@ -575,6 +585,8 @@ public void comparePlanslnk(){
 	}
 	
 	 public void planCountOnPlanCard(){
+	    WebDriverWait wait = new WebDriverWait(driver, 90);
+		wait.until(ExpectedConditions.elementToBeClickable(viewMAPlans));
 		 System.out.println(planCountList.size());
 		 System.out.println(planIndexList.size());
 		   for(int i=0;i<=planCountList.size();i++){
@@ -591,47 +603,11 @@ public void comparePlanslnk(){
 	 }
 	 
 	 public ResponsivePlanDetailsUhc viewPlanDetails(String planName){
-		/*int i=0;
-		 List<WebElement> plans = driver.findElements(By.xpath("//h2[contains(text(),'AARP')]"));
-		 System.out.println("PLANS SIZE :: "+plans.size());
-		 String xpath="View more details";  
-		 List<WebElement> viewMoreLnks = driver.findElements(By.linkText(xpath));
-		 
-		 System.out.println("VIEW MORE LINKS SIZE"+viewMoreLnks.size());
-		 for(WebElement plan : plans){
-			 System.out.println(plan.getText());
-			 if(plan.getText().equalsIgnoreCase(planName)){			 
-				 plan.click();
-				 if(driver.getTitle().equalsIgnoreCase("Our Medicare Plans | AARP® Medicare Plans from UnitedHealthcare®")){
-					 return new ResponsivePlanDetailsUhc(driver);
-				 }
-				 break;
-			 }
-			 i++;
+		 driver.manage().timeouts().implicitlyWait(40, TimeUnit.SECONDS);
+		 if(planName.contains("PDP")){
+			 driver.findElement(By.xpath("//*[contains(text(),'"+planName+"')]/parent::div/following-sibling::div[1]/div/a[2]")).click();
+			 return new ResponsivePlanDetailsUhc(driver);
 		 }
-		 return null;*/
-		 /*List<WebElement> plans = driver.findElements(By.xpath("//h2[contains(text(),'AARP')][1]"));
-         System.out.println("PLANS SIZE :: "+plans.size());
-         String xpath="//a[@class='view-more-link']";  
-          List<WebElement> viewMoreLnks = driver.findElements(By.xpath(xpath));            
-          System.out.println("VIEW MORE LINKS SIZE"+viewMoreLnks.size());     
-         for(int i=0; i<plans.size();i++){
-                if(plans.get(i).getText().equalsIgnoreCase(planName)){
-                      viewMoreLnks.get(i).click();
-                      if(driver.getTitle().equalsIgnoreCase("plans")){
-                             try {
-                                    Thread.sleep(5000);
-                             } catch (InterruptedException e) {
-                                    // TODO Auto-generated catch block
-                                    e.printStackTrace();
-                             }
-                             return new ResponsivePlanDetailsUhc(driver);
-                      }
-                      break;
-                }
-         }*/
-		 
-		 //SNP PATH- //*[contains(text(),'UnitedHealthcare Dual Complete RP (Regional PPO SNP) ')]/parent::div/following-sibling::div[1]/div/a
 		 if(planName.contains("AARP")){
 		 driver.findElement(By.xpath("//*[contains(text(),'"+planName+"')]/parent::div/parent::div/following-sibling::div[1]/div/div[3]/a")).click();
 		 try {
@@ -644,9 +620,6 @@ public void comparePlanslnk(){
 		 }
 		 if(planName.equalsIgnoreCase("Plan F") || planName.contains("Plan G")){
 			 driver.findElement(By.xpath("//h2[text()='"+planName+"']/parent::a/parent::div/following-sibling::div[2]/div/a")).click();
-			 return new ResponsivePlanDetailsUhc(driver);
-		 }if(planName.contains("PDP")){
-			 driver.findElement(By.xpath("//*[contains(text(),'"+planName+"')]/parent::div/following-sibling::div[1]/div/a[2]")).click();
 			 return new ResponsivePlanDetailsUhc(driver);
 		 }if(planName.contains("SNP")){
 			 driver.findElement(By.xpath("//*[contains(text(),'"+planName+"')]/parent::div/following-sibling::div[1]/div/a[2]")).click();
@@ -1291,6 +1264,12 @@ public void comparePlanslnk(){
  				}*/
 				
 				public void validatePlanCount(String planType){
+					try {
+						Thread.sleep(10000);
+					} catch (InterruptedException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
 					List<WebElement> planCardNumber = driver.findElements(By.xpath("//div[@class='"+planType+"benefittable']"
 							+ "/parent::div/parent::div"));
 					 
@@ -1373,9 +1352,9 @@ public void comparePlanslnk(){
 				public void validateBenefitTable(String monthlypremium,
 						String primarycare, String specialist,
 						String referralRequired, String prescriptionDrug, String planType, String planName) {
-					System.out.println(driver.findElement(By.xpath("//table[@class='plan-detail-table']//tr[1]/td[4]/strong")).getText().trim());
+					System.out.println(driver.findElement(By.xpath("//*[contains(text(),'"+planName+"')]/parent::div/following-sibling::div[1]/div/div/div[@class='snpbenefittable']/ul/li[1]/span")).getText());
 					System.out.println(monthlypremium);	
-						if(monthlypremium.equals(driver.findElement(By.xpath("//table[@class='plan-detail-table']//tr[1]/td[4]/strong")).getText().trim()))
+						if(monthlypremium.equals(driver.findElement(By.xpath("//*[contains(text(),'"+planName+"')]/parent::div/following-sibling::div[1]/div/div/div[@class='snpbenefittable']/ul/li[1]/span")).getText()))
 							 {
 								 System.out.println("Monthly premium is displayed");
 								 Assert.assertTrue(true);
@@ -1384,8 +1363,7 @@ public void comparePlanslnk(){
 							 {
 								 Assert.fail("Error in monthly premium");
 							 }
-				}
-						/*System.out.println(primarycare);
+						System.out.println(primarycare);
 						     System.out.println(driver.findElement(By.xpath("//*[contains(text(),'"+planName+"')]/parent::div/following-sibling::div[1]/div/div/div[@class='snpbenefittable']/ul/li[2]/span")).getText());
 							 
 						     if((driver.findElement(By.xpath("//*[contains(text(),'"+planName+"')]/parent::div/following-sibling::div[1]/div/div/div[@class='snpbenefittable']/ul/li[3]/span")).getText()).contains(specialist))
@@ -1431,7 +1409,7 @@ public void comparePlanslnk(){
 							 
 						
 					
-				}*/
+				}
 				
 				public void learnmore_button(String planName){
 					if (planName.contains("UnitedHealthcare")) {
@@ -1586,12 +1564,7 @@ public void comparePlanslnk(){
 				String pageTitle = driver.getTitle();
 				System.out.println(pageTitle);
 				changeLoationLink.click();	
-				try {
-					Thread.sleep(3000);
-				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
+				driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 				System.out.println(driver.getTitle());
 				if(!driver.getTitle().equals(pageTitle)){
 					System.out.println("plan is not displayed"); 
@@ -1722,81 +1695,89 @@ public void comparePlanslnk(){
 				return null;
 			}
 			
-			public ResponsivePlanSummaryUhc addDrug(String drugName){
-				 try {
-					Thread.sleep(10000);
-				} catch (InterruptedException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
-				
-				driver.findElement(By.cssSelector("div#add-drug>section")).click();
-				driver.findElement(By.id("drug-search-input")).sendKeys(drugName);
-				 
-				driver.findElement(By.id("drug-search-button")).click();
-				 
-				driver.findElement(By.id("drug-alt-search-button")).click();
-				try {
-					Thread.sleep(2000);
-				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-				driver.findElement(By.id("drug-dosage-button")).click();
-				try {
-					Thread.sleep(3000);
-				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-				driver.findElement(By.id("save-drug-button")).click();
-				try {
-					Thread.sleep(3000);
-				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-				driver.findElement(By.xpath("//a[contains(text(),'NEXT:')]")).click();
-				try {
-					Thread.sleep(10000);
-				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-				driver.findElement(By.xpath("//li[1]/div[1]/div[2]/button[@class='cta-button secondary select-pharmacy']")).click();
-				try {
-					Thread.sleep(15000);
-				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-				driver.findElement(By.xpath("//button[contains(text(),'NEXT: VIEW COSTS')]")).click();
-				try {
-					Thread.sleep(15000);
-				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-				pharmacyDetails = driver.findElement(By.cssSelector("div#acqsummary .pharmacy-container div#selectedPharmacyInfoId>p:first-child")).getText();
-				try {
-					Thread.sleep(3000);
-				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-				drugCost = driver.findElement(By.xpath("//*[text()='Costs']/parent::div/p")).getText();
-				System.out.println(pharmacyDetails + "------------" + drugCost);	
-				
-				driver.findElement(By.xpath("//*[text()='See other plans']")).click();
-				try {
-					Thread.sleep(3000);
-				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-				return new ResponsivePlanSummaryUhc(driver);
- 				 
-			}
+            public ResponsivePlanSummaryUhc addDrug(String drugName){
+                try {
+                       Thread.sleep(10000);
+                } catch (InterruptedException e1) {
+                       // TODO Auto-generated catch block
+                       e1.printStackTrace();
+                }
+                
+                //driver.findElement(By.cssSelector("div#add-drug>section")).click();
+                driver.findElement(By.xpath("//*[contains(text(),' +ADD A DRUG')]")).click();
+                try {
+                    Thread.sleep(3000);
+             } catch (InterruptedException e1) {
+                    // TODO Auto-generated catch block
+                    e1.printStackTrace();
+             }
+                driver.findElement(By.id("drug-search-input")).sendKeys(drugName);
+                
+                driver.findElement(By.id("drug-search-button")).click();
+                
+                driver.findElement(By.id("drug-alt-search-button")).click();
+                try {
+                       Thread.sleep(2000);
+                } catch (InterruptedException e) {
+                       // TODO Auto-generated catch block
+                       e.printStackTrace();
+                }
+                driver.findElement(By.id("drug-dosage-button")).click();
+                try {
+                       Thread.sleep(3000);
+                } catch (InterruptedException e) {
+                       // TODO Auto-generated catch block
+                       e.printStackTrace();
+                }
+                driver.findElement(By.id("save-drug-button")).click();
+                try {
+                       Thread.sleep(3000);
+                } catch (InterruptedException e) {
+                       // TODO Auto-generated catch block
+                       e.printStackTrace();
+                }
+                driver.findElement(By.xpath("//a[contains(text(),'NEXT:')]")).click();
+                try {
+                       Thread.sleep(10000);
+                } catch (InterruptedException e) {
+                       // TODO Auto-generated catch block
+                       e.printStackTrace();
+                }
+                driver.findElement(By.xpath("//li[1]/div[1]/div[2]/button[@class='cta-button secondary select-pharmacy']")).click();
+                try {
+                       Thread.sleep(6000);
+                } catch (InterruptedException e) {
+                       // TODO Auto-generated catch block
+                       e.printStackTrace();
+                }
+                driver.findElement(By.xpath("//button[contains(text(),'NEXT:VIEW COSTS')]")).click();
+                try {
+                       Thread.sleep(6000);
+                } catch (InterruptedException e) {
+                       // TODO Auto-generated catch block
+                       e.printStackTrace();
+                }
+                pharmacyDetails = driver.findElement(By.cssSelector("div#acqsummary .pharmacy-container div#selectedPharmacyInfoId>p:first-child")).getText();
+                try {
+                       Thread.sleep(3000);
+                } catch (InterruptedException e) {
+                       // TODO Auto-generated catch block
+                       e.printStackTrace();
+                }
+                drugCost = driver.findElement(By.xpath("//*[text()='Costs']/parent::div/p")).getText();
+                System.out.println(pharmacyDetails + "------------" + drugCost);     
+                
+                driver.findElement(By.xpath("//*[text()='See other plans']")).click();
+                try {
+                       Thread.sleep(3000);
+                } catch (InterruptedException e) {
+                       // TODO Auto-generated catch block
+                       e.printStackTrace();
+                }
+                return new ResponsivePlanSummaryUhc(driver);
+                
+          }
+
 			public ResponsivePlanSummaryUhc validateBenefitsTableAfterAddingDrug(String planType, String planName, String drugCostExpected){
 			System.out.println(planType);
 				String drugCostActual=null;
@@ -1836,13 +1817,5 @@ public void comparePlanslnk(){
 				return null;
 			}
 			
-			 public VPPPlanSummaryPage enrollNowbtn(){
-             	driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
-         		enrollNowbtn.click();
-         		if(driver.getTitle().equalsIgnoreCase("Medicare Advantage Enrollment | AARP® Medicare Plans from UnitedHealthcare®"))		
-         		System.out.println("Online enrollment tool launched");
-         		driver.navigate().back();
-         		System.out.println("Back to plan summary page");
-         		return null;
-         	}
-}
+			
+			}
