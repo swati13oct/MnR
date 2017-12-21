@@ -333,7 +333,7 @@ public class AutomaticPaymenAarpStepDefinition {
 	public void user_navigates_to_automatic_payments_from_paymentsOverview() throws InterruptedException
 	{
 		PaymentsOverview paymentsOverview = (PaymentsOverview)getLoginScenario().getBean(PageConstants.PAYMENT_OVERVIEW);
-		AutomaticPaymentsPage automaticPaymentsPage = paymentsOverview.navigateToAutomaticPaymentpage();
+		OneTimePaymentsPage automaticPaymentsPage = paymentsOverview.navigateToComboTabPaymentpage();
 		if(automaticPaymentsPage!= null){
 			getLoginScenario().saveBean(PageConstants.AUTOMATIC_PAYMENTS_DASHBOARD,
 					automaticPaymentsPage);

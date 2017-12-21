@@ -65,12 +65,13 @@ public class PaymentsOverview extends UhcDriver{
 		validate(AutomaticPaymentButton);
 	}	
 	
-	public AutomaticPaymentsPage navigateToAutomaticPaymentpage() throws InterruptedException
+	public OneTimePaymentsPage navigateToComboTabPaymentpage() throws InterruptedException
 	{
-		Thread.sleep(5000);
+		Thread.sleep(8000);
+		
 		if(AutomaticPaymentButton.isEnabled()){
 			AutomaticPaymentButton.click();
-			return new AutomaticPaymentsPage(driver);
+			return new OneTimePaymentsPage(driver);
 		}
 		return null;
 	}
