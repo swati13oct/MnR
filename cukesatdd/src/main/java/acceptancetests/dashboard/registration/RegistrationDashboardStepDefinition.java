@@ -11,8 +11,8 @@ import junit.framework.Assert;
 import org.openqa.selenium.WebDriver;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import pages.dashboard.acquisition.DeregisterPage;
-import pages.dashboard.acquisition.RegistrationInformationPage;
+import pages.acquisition.ulayer.AboutUsAARPPage; import pages.dashboard.acquisition.DeregisterPage;import pages.dashboard.acquisition.RegistrationInformationPage;
+import pages.dashboard.member.ulayer.MemberNewSignInPage;
 import cucumber.annotation.en.And;
 import cucumber.annotation.en.Given;
 import cucumber.annotation.en.Then;
@@ -28,9 +28,24 @@ import atdd.framework.MRScenario;
  */
 
 public class RegistrationDashboardStepDefinition {
+	 @Autowired
+     MRScenario loginScenario;
+                
+                @Given("^the member is on Registration page$")
+                public void SigninPage() {
+                                // navigate to Sign in page
+                                WebDriver wd = getLoginScenario().getWebDriver();
+                                getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
+                                
 
-	@Autowired
-	MRScenario loginScenario;
+                                //create registration context
+                                RegistrationInformationPage registrationInformationPage = new RegistrationInformationPage(wd);
+                                getLoginScenario().saveBean(PageConstants.REGISTRATION_INFORMATION_PAGE, registrationInformationPage);
+                }
+                
+                
+                
+
 
 	public MRScenario getLoginScenario() {
 		return loginScenario;

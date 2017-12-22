@@ -15,6 +15,8 @@ public class RallyDashboard extends UhcDriver{
 	@FindBy(linkText="VIEW DOCUMENTS & RESOURCES")
 	private WebElement DOCUMENTSRESOURCES;
 	
+	@FindBy(xpath="//*[@class='fluid-nav ng-scope']/div/div/a[5]")
+    private WebElement PremiumPaymentsLink;	
 
 	public RallyDashboard(WebDriver driver) {
 		super(driver);
@@ -34,5 +36,15 @@ public class RallyDashboard extends UhcDriver{
 		
 	}
  
- 
+	
+	public PaymentsOverview navigateToPaymentOverview() throws InterruptedException
+	{
+		Thread.sleep(15000);
+		if(PremiumPaymentsLink.isEnabled()){
+			PremiumPaymentsLink.click();
+			return new PaymentsOverview(driver);
+		}
+		return null;
+	}
+
 }

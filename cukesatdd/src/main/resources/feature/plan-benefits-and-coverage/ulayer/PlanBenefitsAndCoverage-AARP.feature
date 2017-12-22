@@ -330,6 +330,8 @@ Feature: To test plan benefits and Coverage on AARP site for Federal members
   #| MAPD	   | 1      |false          | AllTier     |
   #| MAPD	   | 1      |false          | SplitTier   |
   #| MAPD	   | 1      |false           | NoTier     |
+  
+  
   @MAProviderT
   Scenario Outline: To validate the office and hospital visits in benefits and coverage page in AARP site for MA member
     Given registered member to login in AARP site
@@ -600,11 +602,10 @@ Feature: To test plan benefits and Coverage on AARP site for Federal members
       | MAPD     | LIS 4         |
 
   Scenario Outline: Verify benefits and coverage in AARP site for mapd lis 4 provider tiering with office visits no tier
-    Given registered AMP with following details for plan benefits and coverage flow in AARP site
+    Given registered member with following details logins in the member portal 
       | Plan Type      | <planType>      |
       | Copay Category | <copayCategory> |
-    When the user view forms and resources in AARP site
-    Then the user view benefits and coverage in AARP site
+    When the user navigates to Benefits and coverage page
     And the user validates the content on benefits and coverage page
 
     Examples: 
@@ -612,11 +613,10 @@ Feature: To test plan benefits and Coverage on AARP site for Federal members
       | MAPD     | LIS 4         |
 
   Scenario Outline: Verify benefits and coverage in AARP site for mapd lis 4 provider tiering with office visits all tier
-    Given registered AMP with following details for plan benefits and coverage flow in AARP site
+    Given registered member with following details logins in the member portal 
       | Plan Type      | <planType>      |
       | Copay Category | <copayCategory> |
-    When the user view forms and resources in AARP site
-    Then the user view benefits and coverage in AARP site
+    When the user navigates to Benefits and coverage page
     And the user validates the content on benefits and coverage page
 
     Examples: 
@@ -624,37 +624,34 @@ Feature: To test plan benefits and Coverage on AARP site for Federal members
       | MAPD     | LIS 4         |
 
   Scenario Outline: Verify benefits and coverage in AARP site for mapd lis 4 provider tiering with office visits split tier
-    Given registered AMP with following details for plan benefits and coverage flow in AARP site
+    Given registered member with following details logins in the member portal 
       | Plan Type      | <planType>      |
       | Copay Category | <copayCategory> |
-    When the user view forms and resources in AARP site
-    Then the user view benefits and coverage in AARP site
+    When the user navigates to Benefits and coverage page
     And the user validates the content on benefits and coverage page
 
     Examples: 
       | planType | copayCategory |
       | MAPD     | LIS 4         |
 
+  @pcp
   Scenario Outline: To verify the benefits and coverage page for MA and MAPD member in AARP site
-    Given registered member for forms and resources in AARP Site
-      | <planType> |
-    When the user view forms and resources in AARP site
-    Then the user view benefits and coverage in AARP site
+    Given registered member with following details logins in the member portal 
+      | Plan Type      | <planType>      |
+      | Copay Category | <copayCategory> |
+    When the user navigates to Benefits and coverage page
     And the user validates the content on benefits and coverage page
     And the user clicks on the start search button on benefits and coverage page
     And the user clicks on the change your pcp button on benefits and coverage page
 
     Examples: 
-      | planType |       |
-      | MA       |       |
-      | MAPD     |       |
-      | MAPD     | LIS 4 |
+      | planType | copayCategory |
+      | MAPD     | LIS3          |
 
   Scenario Outline: Verify benefits and coverage in AARP site for SHIP (Medicare Supplement + Riders)
-    Given registered AMP with following details for plan benefits and coverage flow in AARP site
+    Given registered member with following details logins in the member portal 
       | Plan Type | <planType> |
-    When the user view forms and resources in AARP site
-    Then the user view benefits and coverage in AARP site
+    When the user navigates to Benefits and coverage page
     And the user validates the content on benefits and coverage page
 
     Examples: 
@@ -662,10 +659,9 @@ Feature: To test plan benefits and Coverage on AARP site for Federal members
       | MAPD     |
 
   Scenario Outline: Verify benefits and coverage in AARP site for SHIP (Medicare Supplement)
-    Given registered AMP with following details for plan benefits and coverage flow in AARP site
+    Given registered member with following details logins in the member portal 
       | Plan Type | <planType> |
-    When the user view forms and resources in AARP site
-    Then the user view benefits and coverage in AARP site
+    When the user navigates to Benefits and coverage page
     And the user validates the content on benefits and coverage page
 
     Examples: 
@@ -673,10 +669,9 @@ Feature: To test plan benefits and Coverage on AARP site for Federal members
       | MAPD     |
 
   Scenario Outline: Verify benefits and coverage in AARP site for SHIP (HAP)
-    Given registered AMP with following details for plan benefits and coverage flow in AARP site
+    Given registered member with following details logins in the member portal 
       | Plan Type | <planType> |
-    When the user view forms and resources in AARP site
-    Then the user view benefits and coverage in AARP site
+    When the user navigates to Benefits and coverage page
     And the user validates the content on benefits and coverage page
 
     Examples: 
@@ -684,10 +679,9 @@ Feature: To test plan benefits and Coverage on AARP site for Federal members
       | MAPD     |
 
   Scenario Outline: Verify benefits and coverage in AARP site for SHIP (HIP)
-    Given registered AMP with following details for plan benefits and coverage flow in AARP site
+    Given registered member with following details logins in the member portal 
       | Plan Type | <planType> |
-    When the user view forms and resources in AARP site
-    Then the user view benefits and coverage in AARP site
+    When the user navigates to Benefits and coverage page
     And the user validates the content on benefits and coverage page
 
     Examples: 
@@ -695,10 +689,9 @@ Feature: To test plan benefits and Coverage on AARP site for Federal members
       | MAPD     |
 
   Scenario Outline: Verify benefits and coverage in AARP site for SHIP (EPHIP)
-    Given registered AMP with following details for plan benefits and coverage flow in AARP site
+    Given registered member with following details logins in the member portal 
       | Plan Type | <planType> |
-    When the user view forms and resources in AARP site
-    Then the user view benefits and coverage in AARP site
+    When the user navigates to Benefits and coverage page
     And the user validates the content on benefits and coverage page
 
     Examples: 
@@ -706,10 +699,9 @@ Feature: To test plan benefits and Coverage on AARP site for Federal members
       | MAPD     |
 
   Scenario Outline: Verify benefits and coverage in AARP site for SHIP (MAP)
-    Given registered AMP with following details for plan benefits and coverage flow in AARP site
+    Given registered member with following details logins in the member portal 
       | Plan Type | <planType> |
-    When the user view forms and resources in AARP site
-    Then the user view benefits and coverage in AARP site
+    When the user navigates to Benefits and coverage page
     And the user validates the content on benefits and coverage page
 
     Examples: 
@@ -718,11 +710,10 @@ Feature: To test plan benefits and Coverage on AARP site for Federal members
       | MAPD     | LIS 4 |
 
   Scenario Outline: Verify riders on benefits and coverage in AARP site for MAPD Non Lis member
-    Given registered AMP with following details for plan benefits and coverage flow in AARP site
+    Given registered member with following details logins in the member portal
       | Plan Type      | <planType>      |
       | Copay Category | <copayCategory> |
-    When the user view forms and resources in AARP site
-    Then the user view benefits and coverage in AARP site
+    When the user navigates to Benefits and coverage page
     And the user validates the content on benefits and coverage page
 
     Examples: 
@@ -734,11 +725,10 @@ Feature: To test plan benefits and Coverage on AARP site for Federal members
       | MAPD     | LIS 4         |
 
   Scenario Outline: Verify Federal Active Riders Dental 260 on benefits and coverage in AARP site for MAPD Non Lis member
-    Given registered AMP with following details for plan benefits and coverage flow in AARP site
+    Given registered member with following details logins in the member portal 
       | Plan Type      | <planType>      |
       | Copay Category | <copayCategory> |
-    When the user view forms and resources in AARP site
-    Then the user view benefits and coverage in AARP site
+    When the user navigates to Benefits and coverage page
     And the user validates the content on benefits and coverage page
 
     Examples: 
@@ -746,11 +736,10 @@ Feature: To test plan benefits and Coverage on AARP site for Federal members
       | MAPD     | NON LIS       |
 
   Scenario Outline: Verify Federal Active Riders Dental Platinum on benefits and coverage in AARP site for MAPD Non Lis member
-    Given registered AMP with following details for plan benefits and coverage flow in AARP site
+    Given registered member with following details logins in the member portal 
       | Plan Type      | <planType>      |
       | Copay Category | <copayCategory> |
-    When the user view forms and resources in AARP site
-    Then the user view benefits and coverage in AARP site
+    When the user navigates to Benefits and coverage page
     And the user validates the content on benefits and coverage page
 
     Examples: 
@@ -758,11 +747,10 @@ Feature: To test plan benefits and Coverage on AARP site for Federal members
       | MAPD     | NON LIS       |
 
   Scenario Outline: Verify Federal Active Riders Optional Dental on benefits and coverage in AARP site for MAPD Non Lis member
-    Given registered AMP with following details for plan benefits and coverage flow in AARP site
+    Given registered member with following details logins in the member portal 
       | Plan Type      | <planType>      |
       | Copay Category | <copayCategory> |
-    When the user view forms and resources in AARP site
-    Then the user view benefits and coverage in AARP site
+    When the user navigates to Benefits and coverage page
     And the user validates the content on benefits and coverage page
 
     Examples: 
@@ -770,11 +758,10 @@ Feature: To test plan benefits and Coverage on AARP site for Federal members
       | MAPD     | NON LIS       |
 
   Scenario Outline: Verify Federal Available Riders Optional Dental on benefits and coverage in AARP site for MAPD Non Lis member
-    Given registered AMP with following details for plan benefits and coverage flow in AARP site
+    Given registered member with following details logins in the member portal 
       | Plan Type      | <planType>      |
       | Copay Category | <copayCategory> |
-    When the user view forms and resources in AARP site
-    Then the user view benefits and coverage in AARP site
+    When the user navigates to Benefits and coverage page
     And the user validates the content on benefits and coverage page
     When user clicks on Add Rider button
     Then Add rider popup appears and clicks Add Rider button
@@ -785,10 +772,10 @@ Feature: To test plan benefits and Coverage on AARP site for Federal members
 
   @availableRiders
   Scenario Outline: Verify Federal Available Riders Dental Platinum on benefits and coverage in AARP site for MAPD Lis 2 member
-    Given registered AMP with following details for plan benefits and coverage flow in AARP site
+    Given registered member with following details logins in the member portal 
       | Plan Type      | <planType>      |
       | Copay Category | <copayCategory> |
-    When the user view jenkins benefits and coverage in AARP site
+    When the user navigates to Benefits and coverage page
     And the user validates the content on benefits and coverage page
     When user clicks on Add Rider button
     Then Add rider popup appears and clicks Add Rider button
@@ -796,69 +783,68 @@ Feature: To test plan benefits and Coverage on AARP site for Federal members
     Examples: 
       | planType | copayCategory |
       | MAPD     | NON LIS       |
-      
-   @availableRiders1
+
+  @availableRiders1jenkins
   Scenario Outline: Verify Federal Available Riders Dental Platinum on benefits and coverage in AARP site for MAPD Lis 2 member
-    Given registered AMP with following details for plan benefits and coverage flow in AARP site
+    Given registered member with following details logins in the member portal 
       | Plan Type      | <planType>      |
       | Copay Category | <copayCategory> |
     #When the user view forms and resources in AARP site
-    Then the user view benefits and coverage in AARP site
+    Then the user navigates to Benefits and coverage page
     And the user validates the content on benefits and coverage page
     When user clicks on Add Rider button
     Then Add rider popup appears and clicks Add Rider button
 
     Examples: 
       | planType | copayCategory |
-      | MAPD     | NON LIS       |
+      | MAPD     | NON LIS1      |
 
+  #q1_apr_ulayer_015
   Scenario Outline: Verify Federal Optional Dental on benefits and coverage in AARP site
-    Given registered AMP with following details for plan benefits and coverage flow in AARP site
+    Given registered member with following details logins in the member portal 
       | Plan Type | <planType> |
-    When the user view forms and resources in AARP site
-    Then the user view benefits and coverage in AARP site
+    When the user navigates to Benefits and coverage page
     And the user validates Available riders in AARP site
 
     Examples: 
       | planType |
       | MA       |
 
-  @activeRider
+  @activeRiderjenkins
   Scenario Outline: Verify Federal Active Riders Fitness on benefits and coverage in AARP site for MAPD Non Lis member
-    Given registered AMP with following details for plan benefits and coverage flow in AARP site
+    Given registered member with following details logins in the member portal 
       | Plan Type      | <planType>      |
       | Copay Category | <copayCategory> |
-    When the user view forms and resources in AARP site
-    Then the user view benefits and coverage in AARP site
+    When the user navigates to Benefits and coverage page
     And the user validates the content on benefits and coverage page
     When user clicks on Remove This Rider button
-    Then Add rider popup appears and clicks Remove This Rider button
+    Then Remove rider popup appears and clicks Remove This Rider button
 
     Examples: 
       | planType | copayCategory |
       | MAPD     | NON LIS       |
-      
+
+  #TESTNONLISSPLIT1
   @activeRider3
   Scenario Outline: Verify Federal Active Riders Fitness on benefits and coverage in AARP site for MAPD Non Lis member
-    Given registered AMP with following details for plan benefits and coverage flow in AARP site
+    Given registered member with following details logins in the member portal 
       | Plan Type      | <planType>      |
       | Copay Category | <copayCategory> |
-    When the user view jenkins benefits and coverage in AARP site
+    When the user navigates to Benefits and coverage page
     And the user validates the content on benefits and coverage page
     Then user clicks on Remove This Rider button
-    #Then Add rider popup appears and clicks Remove This Rider button
+    Then Add rider popup appears and clicks Remove This Rider button
 
     Examples: 
       | planType | copayCategory |
-      | MAPD     | LIS2       |
+      | MAPD     | LIS2          |
 
   @availablehighOptionRiders
   Scenario Outline: Verify Federal Available High Optional Dental riders on benefits and coverage in AARP site for MAPD Lis 2 member
-    Given registered AMP with following details for plan benefits and coverage flow in AARP site
+    Given registered member with following details logins in the member portal 
       | Plan Type      | <planType>      |
       | Copay Category | <copayCategory> |
-    When the user view forms and resources in AARP site
-    Then the user view benefits and coverage in AARP site
+    When the user navigates to Benefits and coverage page
     And the user validates the content on benefits and coverage page
     When user clicks on Add Rider button
     Then Add rider popup appears and clicks Add Rider button
@@ -866,57 +852,58 @@ Feature: To test plan benefits and Coverage on AARP site for Federal members
     Examples: 
       | planType | copayCategory |
       | MAPD     | NON LIS       |
-#Data Used: q1_feb_ulayer072
- 
+
+  #Data Used: q1_feb_ulayer072
   @availablehighOptionRidersjenkins
   Scenario Outline: Verify Federal Available High Optional Dental riders on benefits and coverage in AARP site for MAPD Lis 2 member
-    Given registered AMP with following details for plan benefits and coverage flow in AARP site
+    Given registered member with following details logins in the member portal 
       | Plan Type      | <planType>      |
       | Copay Category | <copayCategory> |
-    When the user view jenkins benefits and coverage in AARP site
+    When the user navigates to Benefits and coverage pagee
     And the user validates the content on benefits and coverage page
     Then user clicks on Add Rider button
-    #Then Add rider popup appears and clicks Add Rider button
-
-    Examples: 
-      | planType | copayCategory |
-      | MAPD     | LIS3          |
-
-  @availableRider
-  Scenario Outline: Verify Federal Available  Dental Platinum  riders on benefits and coverage in AARP site for  MAPD member
-    Given registered AMP with following details for plan benefits and coverage flow in AARP site
-      | Plan Type      | <planType>      |
-      | Copay Category | <copayCategory> |
-    When the user view jenkins benefits and coverage in AARP site
-    And the user validates the content on benefits and coverage page
-    #When user clicks on Add Rider button
-    #Then Add rider popup appears and clicks Add Rider button
+    Then Add rider popup appears and clicks Add Rider button
 
     Examples: 
       | planType | copayCategory |
       | MAPD     | NON LIS       |
-      
-  @availableRider3
-  Scenario Outline: Verify Federal Available  Dental 260  riders on benefits and coverage in AARP site for  MAPD member
-    Given registered AMP with following details for plan benefits and coverage flow in AARP site
+
+  #q1_apr_ulayer020
+  @availableRider
+  Scenario Outline: Verify Federal Available  Dental Platinum  riders on benefits and coverage in AARP site for  MAPD member
+    Given registered member with following details logins in the member portal 
       | Plan Type      | <planType>      |
       | Copay Category | <copayCategory> |
-    When the user view jenkins benefits and coverage in AARP site
+    When the user navigates to Benefits and coverage page
+    And the user validates the content on benefits and coverage page
+
+    #When user clicks on Add Rider button
+    #Then Add rider popup appears and clicks Add Rider button
+    Examples: 
+      | planType | copayCategory |
+      | MAPD     | NON LIS       |
+
+  @availableRider3jenkins
+  Scenario Outline: Verify Federal Available  Dental 260  riders on benefits and coverage in AARP site for  MAPD member
+    Given registered member with following details logins in the member portal 
+      | Plan Type      | <planType>      |
+      | Copay Category | <copayCategory> |
+    When the user navigates to Benefits and coverage page
     And the user validates the content on benefits and coverage page
     Then user clicks on Add Rider button
-    #Then Add rider popup appears and clicks Add Rider button
 
+    #Then Add rider popup appears and clicks Add Rider button
     Examples: 
       | planType | copayCategory |
       | MAPD     | LIS2          |
 
+  #q2_jun_ulayer058
   @availableRider2
   Scenario Outline: Verify Federal Available  Fitness riders on benefits and coverage in AARP site for  MAPD member
-    Given registered AMP with following details for plan benefits and coverage flow in AARP site
+    Given registered member with following details logins in the member portal 
       | Plan Type      | <planType>      |
       | Copay Category | <copayCategory> |
-    When the user view forms and resources in AARP site
-    Then the user view benefits and coverage in AARP site
+    When the user navigates to Benefits and coverage page
     And the user validates the content on benefits and coverage page
     When user clicks on Add Rider button
     Then Add rider popup appears and clicks Add Rider button
@@ -927,11 +914,10 @@ Feature: To test plan benefits and Coverage on AARP site for Federal members
 
   @replaceRider
   Scenario Outline: Verify Replace Rider Pop Up for Federal Available Dental Platinum Riders
-    Given registered AMP with following details for plan benefits and coverage flow in AARP site
+    Given registered member with following details logins in the member portal 
       | Plan Type      | <planType>      |
       | Copay Category | <copayCategory> |
-    When the user view forms and resources in AARP site
-    Then the user view benefits and coverage in AARP site
+    When the user navigates to Benefits and coverage page
     And the user validates the content on benefits and coverage page
     When user clicks on Add Rider button
     Then Replace rider popup appears and clicks Replace Rider button
@@ -940,13 +926,12 @@ Feature: To test plan benefits and Coverage on AARP site for Federal members
       | planType | copayCategory |
       | MAPD     | NON LIS       |
 
-  @pendingRider1
+  @pendingRider1jenkins
   Scenario Outline: Verify Federal Pending Fitness riders on benefits and coverage in AARP site for  MAPD member
-    Given registered AMP with following details for plan benefits and coverage flow in AARP site
+    Given registered member with following details logins in the member portal 
       | Plan Type      | <planType>      |
       | Copay Category | <copayCategory> |
-    When the user view forms and resources in AARP site
-    Then the user view benefits and coverage in AARP site
+    When the user navigates to Benefits and coverage page
     And the user validates the content on benefits and coverage page
     When user clicks on Add Rider button
     Then Add rider popup appears and clicks Add Rider button
@@ -955,58 +940,331 @@ Feature: To test plan benefits and Coverage on AARP site for Federal members
       | planType | copayCategory |
       | MAPD     | NON LIS       |
 
-  @needHelp
+  
+  @validatePdfsectionindividual
+    Scenario Outline: Verify PDF section is in place on Benefits and Coverage page
+    Given registered member with following details logins in the member portal 
+      | Plan Type      | <planType>  |
+      | Member Type    | <memberType>|
+      | Copay Category | <copayCategory>|
+    Then the user navigates to Benefits and coverage page
+    And the user validates the content on benefits and coverage page
+    And the user validates view and document label
+    And the user validates the language dropdown and the value displayed by default and selects new value in dropdown successfully
+       | Language | <language> |
+       
+    Examples:
+      
+      | planType|  memberType  | copayCategory | language |
+      | MAPD    |  Individual  |   LIS 1       | SPANISH  |
+      | MA      |  Individual  |   LIS 1       | CHINESE  |
+      | MAPD    |  Individual  |  NON LIS      | SPANISH  |
+      | MA      |  Individual  |  NON LIS      | CHINESE  |
+      | MAPD    |  Individual  |   LIS 1       | CHINESE  |
+      | PDP     |  Individual  |   LIS 4       | SPANISH  |
+      | MAPD    |  Individual  |  NON LIS      | CHINESE  |
+      | MA      |  Individual  |  NON LIS      | SPANISH  |
+      | MAPD    |  Individual  |   LIS 1       | ENGLISH  |
+      | MA      |  Individual  |   LIS 1       | ENGLISH  |
+      | MAPD    |  Individual  |  NON LIS      | ENGLISH  |
+      | MA      |  Individual  |  NON LIS      | ENGLISH  |
+      
+
+
+   @drugcopaysectionnonlis
+   Scenario Outline: Verify DCE section is in place on Benefits and Coverage page
+   Given registered member with following details logins in the member portal 
+      | Plan Type      | <planType>  |
+      | Member Type    | <memberType>|
+      | Copay Category | <copayCategory>|
+    ##When the user view forms and resources in AARP site
+    Then the user navigates to Benefits and coverage page
+    And the user validates the content on benefits and coverage page
+    Then the user validates the Drug Header section
+    Then the user validates the Drug cost Header and text
+    Then the user validates dropdown selection functionality
+    Then the user validates the Locate Pharmacy section
+    Then the user validates the Look Up Drugs button
+    Then the user validates the Drug Coverage  section
+    Then the user validates the Learn More link and click on arrow
+    #And the user validates the user click on the link it expands and when user clicks it again it should collapse
+    And the user should see drug copay and discount table
+    Examples: 
+      | planType|  memberType  | copayCategory |
+      | MAPD    |  Individual  |  NON LIS      |   
+      | PDP     |  Individual  |  NON LIS      |    
+      
+      
+   @drugcopaysectionlis
+   Scenario Outline: Verify DCE section is in place on Benefits and Coverage page
+  Given registered member with following details logins in the member portal 
+      | Plan Type      | <planType>  |
+      | Member Type    | <memberType>|
+      | Copay Category | <copayCategory>|
+    ##When the user view forms and resources in AARP site
+    Then the user navigates to Benefits and coverage page
+    And the user validates the content on benefits and coverage page
+    And the user validates Header section
+    Then the user validates the Drug Header section
+    Then the user validates the Drug cost Header and text
+    Then the drugcost dropdown should not display
+    Then the user validates the Locate Pharmacy section
+    Then the user validates the Look Up Drugs button
+    Then the user validates the Drug Coverage  section
+     And the user validates the Learn More section link for stage
+    And the user validates tier link should not display 
+    Then the user validates the Learn More link and click on arrow
+    #And the user validates the user click on the link it expands and when user clicks it again it should collapse
+    And the user should see retail drug copay and discount table
+    Examples: 
+      | planType|  memberType  | copayCategory |
+      | MAPD    |  Individual  |  LIS 1        |   
+      | PDP     |  Individual  |  LIS 4        |
+
+      
+  @PlanOverview
+  Scenario Outline: Verify that Plan overview section is visible on Benefits and coverage page
+    Given registered member with following details logins in the member portal 
+      | Plan Type   | <planType>   |
+      | Member Type | <memberType> |
+    When the user navigates to Benefits and coverage page
+    And the user validates plan overview section
+
+    Examples: 
+      | planType | memberType |
+      | MAPD     | LIS        |
+      
+         
+  @PlanOverviewLis
+  Scenario Outline: Verify that Plan overview section is visible on Benefits and coverage page
+    Given registered member with following details logins in the member portal 
+      | Plan Type      | <planType>      |
+      | Copay Category | <copayCategory> |
+    When the user navigates to Benefits and coverage page
+    And the user validates plan overview section for lis member
+
+    Examples: 
+      | planType | copayCategory |
+      | MAPD     | LIS2           |
+     
+     
+      @PlanOverviewShip
+  Scenario Outline: Verify that Plan overview section is visible on Benefits and coverage page
+    Given registered member with following details logins in the member portal 
+      | Plan Type   | <planType>   |
+    When the user navigates to Benefits and coverage page
+    And the user validates plan overview section for shipmember
+
+    Examples: 
+      | planType | 
+      | SHIP     | 
+      
+      
+      @PlanOverviewNonLis
+  Scenario Outline: Verify that Plan overview section is visible on Benefits and coverage page
+    Given registered member with following details logins in the member portal 
+      | Plan Type   | <planType>   |
+    When the user navigates to Benefits and coverage page
+    And the user validates plan overview section
+
+    Examples: 
+      | planType | 
+      | MAPD     | 
+      
+ @needHelpFederal
+    Scenario Outline: Verify Need Help section is in place on Benefits and Coverage page
+    Given registered member with following details logins in the member portal 
+      | Plan Type   | <planType>   |
+    When the user navigates to Benefits and coverage page
+    #And the user validates the content on benefits and coverage page
+    And the user validates Needhelp header and disclaimer link
+    And the user validates the disclaimer link
+    And the user validates contactus section
+    
+    Examples: 
+      | planType | 
+      | MA       |
+      | MAPD     |
+      | PDP      |   
+      
+  @needHelpShipBnC
   Scenario Outline: Verify Need Help section is in place on Benefits and Coverage page
-    Given registered AMP with following details for plan benefits and coverage flow in AARP site
+    Given registered member with following details logins in the member portal 
       | Plan Type      | <planType>      |
-      | Copay Category | <copayCategory> |
-    When the user view forms and resources in AARP site
-    Then the user view benefits and coverage in AARP site
-    And the user validates the content on benefits and coverage page
+    When the user navigates to Benefits and coverage page
+    And  the user validates the need help section for ship
+    And the user validates see more ways to contact us section for ship
+    And the user validates the disclaimer link
+    And the user validates on clicking contact us link it should route to contact us page for ship member
+    
 
     Examples: 
-      | planType | copayCategory |
-      | MAPD     | NON LIS       |
-#Data Used: DentalPlatinumLis2
-
-@needHelp1
+      | planType | 
+      | EHIP     |
+      | SHIPMO   |
+      | SHIPTX   |
+      | HIP      |
+      
+   @needHelpShipVAS
   Scenario Outline: Verify Need Help section is in place on Benefits and Coverage page
-    Given registered AMP with following details for plan benefits and coverage flow in AARP site
+    Given registered member with following details logins in the member portal 
       | Plan Type      | <planType>      |
-      | Copay Category | <copayCategory> |
-    When the user view jenkins benefits and coverage in AARP site
-    And the user validates the content on benefits and coverage page
+    When the user navigates to Benefits and coverage page
+    And  the user validate Value Add Service page
+    And  the user validates the need help section for ship
+    And the user validates see more ways to contact us section for ship
+    And the user validates on clicking contact us link it should route to contact us page for ship member
+    
+    Examples: 
+      | planType | 
+      | EHIP     |
+      | SHIPMO   |
+      | SHIPTX   | 
+      | HIP      |    
+
+
+    @discountandservices
+    Scenario Outline: Verify that DisocuntServices section is visible on Benefits and coverage page
+    Given registered member with following details logins in the member portal 
+      | Plan Type   | <planType>   |
+    When the user navigates to Benefits and coverage page
+    And the user validates hand image under discount and services section
+    And the user validates the Vas section on benefits and coverage page
+    And the user validates and clicks on Learn More button 
 
     Examples: 
-      | planType | copayCategory |
-      | MAPD     | NON LIS       |
-#Data Used: DentalPlatinumLis2
+      | planType | 
+      | SHIPTX   |
+      | SHIPMO   | 
+      | EHIP     |
+      | HIP      |
+      
+    @VAS1
+    Scenario Outline: Verify that DisocuntServices section is visible on Benefits and coverage page
+    Given registered member with following details logins in the member portal 
+      | Plan Type   | <planType>   |
+    When the user navigates to Benefits and coverage page
+    And the user validates hand image under discount and services section
+    And the user validates the Vas section on benefits and coverage page
+    And the user validates learnmorebutton on Bnc page for ship members
+    
+     Examples: 
+      | planType | 
+      | SHIPTX   |
+      | SHIPMO   | 
+      | EHIP     |
+      | HIP      |
+      
+      
+     @VAS2
+     Scenario Outline: Verify that DisocuntServices section is visible on Benefits and coverage page
+    Given registered member with following details logins in the member portal 
+      | Plan Type   | <planType>   |
+    When the user navigates to Benefits and coverage page
+    And the user validate Value Add Service page
+    And the user validate header and text 
+    #And the user validates view more link
+    #And when the user clicks on view more link link should expand and disclaimer link should be visible and clickable
+    And the user validates MAIN CTA button
+    
+     Examples: 
+      | planType | 
+      | SHIPMO   |
+      
+     @VAS3
+    Scenario Outline: Verify that DisocuntServices section is visible on Benefits and coverage page
+    Given registered member with following details logins in the member portal 
+      | Plan Type   | <planType>   |
+    When the user navigates to Benefits and coverage page
+    And the user validate Value Add Service page
+    And the user validate header and text 
+    #And the user validates sections for Provideyourdiscount
+    And when the user clicks on view more link link should expand and disclaimer link should be visible and clickable
+    #And when the user clicks on view more link link should expand and disclaimer link should be visible
+    And the user validates MAIN CTA button
+    
+     Examples: 
+      | planType | 
+      | EHIP     |
+      
+      
+   @BenefitsSummaryShip
+     Scenario Outline: Verify that Page Headers are in place on Benefits and Coverage page
+    Given registered member with following details logins in the member portal 
+       | Plan Type      | <planType>     |
+    Then the user navigates to Benefits and coverage page
+    And the user validates headers on Bnc page for ship members
+    
+     Examples: 
+    | planType|
+    | SHIP    |
+    
+    
+    
+      @BncHeadersIndividual
+     Scenario Outline: Verify that Page Headers are in place on Benefits and Coverage page
+    Given registered member with following details logins in the member portal 
+       | Plan Type      | <planType>     |
+    Then the user navigates to Benefits and coverage page
+    And the user validates headers on Bnc page for indi members
+     Examples: 
+    | planType|
+    | MAPD    |
+    | MA    |
+    | PDP    |
+    
+     
+     @BncHeadersShip
+     Scenario Outline: Verify that Page Headers are in place on Benefits and Coverage page
+    Given registered member with following details logins in the member portal 
+        | Plan Type      | <planType>  |
+    Then the user navigates to Benefits and coverage page
+    And the user validates headers on Bnc page for ship members
+    
+   Examples: 
+    | planType|
+    | SHIP    |
+      
+      
+      
+   @PrimaryCareProviderIndi
+    Scenario Outline: Verify the Promary Care provider  is in place on Benefits and Coverage page
+    Given registered member with following details logins in the member portal 
+       | Plan Type      | <planType>     |
+    Then the user navigates to Benefits and coverage page    
+    And the user validates the Primarycare Provider section
+    
+      Examples: 
+    | planType|
+    | MAPD    |
+   # | PDP     |
+   # | MA       |
+   
+        @OutOfPocketMax
+    Scenario Outline: Verify the out of pocket section is in place on Benefits and Coverage page
+    Given registered member with following details logins in the member portal 
+       | Plan Type      | <planType>     |
+    Then the user navigates to Benefits and coverage page    
+    And the user validates the Out of Pocket Max section
+    
+      Examples: 
+    | planType|
+    | MAPD    |
+   # | PDP     |
+   # | MA       |
 
-  @disclaimers
-  Scenario Outline: Verify Disclaimers section is in place on Benefits and Coverage page
-    Given registered AMP with following details for plan benefits and coverage flow in AARP site
-      | Plan Type      | <planType>      |
-      | Copay Category | <copayCategory> |
-    When the user view forms and resources in AARP site
-    Then the user view benefits and coverage in AARP site
-    And the user clicks on Disclaimers link
-    And the user validates the content on benefits and coverage page
+    @Dummy
+    Scenario Outline: Verify that Page Headers are in place on Benefits and Coverage page
+    Given registered member with following details logins in the member portal 
+       | Plan Type      | <planType>     |
+    Then the user validates elements on account home page
+    Then the user clicks on profile and preferences and profile page should come
+     
+     Examples: 
+    | planType|
+    | MAPD    |
+    | MA      |
+   
+    
+   
 
-    Examples: 
-      | planType | copayCategory |
-      | MAPD     | NON LIS       |
-
-  @needHelpContactUs
-  Scenario Outline: Verify Need Help section is in place on Benefits and Coverage page
-    Given registered AMP with following details for plan benefits and coverage flow in AARP site
-      | Plan Type      | <planType>      |
-      | Copay Category | <copayCategory> |
-    When the user view forms and resources in AARP site
-    Then the user view benefits and coverage in AARP site
-    And the user validates the content on benefits and coverage page
-    When the user navigates to contact us page in AARP site
-    Then the user validates the contact us page in AARP site
-
-    Examples: 
-      | planType | copayCategory |
-      | MAPD     | NON LIS       |

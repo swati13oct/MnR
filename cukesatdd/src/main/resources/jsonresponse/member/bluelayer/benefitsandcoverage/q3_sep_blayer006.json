@@ -1,0 +1,14 @@
+{"inNetwork":"IN-NETWORK\n$6,700.00\nSection heading tool tip copy goes here. Lorem ipsum medical copays are like a type of cost sharing lorem ipsum. Coinsurance is a percentage of cost sharing lorem ipsum...","planName":"UnitedHealthcare MedicareComplete Choice Plan 1 (Regional PPO)","memberName":"","outOfNetwork":"OUT-OF-NETWORK\n$10,000.00 Combined\nSection heading tool tip copy goes here. Lorem ipsum medical copays are like a type of cost sharing lorem ipsum. Coinsurance is a percentage of cost sharing lorem ipsum...","planVision":"OFFICE VISITS\nPrimary Care Physician: $10.00\nSpecialist:\n$45.00","planHeader":[{".//*[@id='planBenefitsApp']/div[1]/div":"UnitedHealthcare MedicareComplete Choice Plan 1 (Regional PPO)\nMEDICARE ADVANTAGE PRESCRIPTION DRUG COVERAGE\nName: DBDFA CAEFDD\nMember ID: 951049992-00\nGroup ID: 50500\nEffective Date: 01/01/2017\n\n\nMonthly Premium:\nNot Available"},{".//*[@id='planBenefitsApp']/div[1]/div":"Benefits Summary"}],"DrugCoverageHeader":"Drug Coverage","DrugCoverageText":"Covered drugs in your plan include most generic and commonly used brand name drugs covered by Medicare Part D. You pay no more than 58% of the total cost for generic drugs or 45% of the total cost for brand name drugs, for any drug tier during the coverage gap.","officeVisit":"OFFICE VISITS\nPrimary Care Physician: $10.00\nSpecialist:\n$45.00","outPatientSurgery":"20.00%","planDental":"HOSPITAL VISITS\nInpatient Visits\n$395.00 Copay per day: days 1 - 4/$0.00 Copay per day: days 5 - 90\ndays 1 - 4 : $395.00\ndays 5 - 90 : $0.00\nOutpatient Visits\n20.00%-20.00% coinsurance","LookupDrugstext":"Search drugs by name to find tier listings and drug costs with your plan\nLOOK UP DRUGS","disclaimerheader":[{"//span[contains(.,'keyboard_arrow_down')]":"keyboard_arrow_down"},{"//span[contains(.,'keyboard_arrow_down')]":"keyboard_arrow_down"}],"memberId":"951049992-00",
+"hospitalVisit":"HOSPITAL VISITS\nInpatient Visits\n$395.00 Copay per day: days 1 - 4/$0.00 Copay per day: days 5 - 90\ndays 1 - 4 : $395.00\ndays 5 - 90 : $0.00\nOutpatient Visits\n20.00%-20.00% coinsurance",
+"1stLinetier":"Tier 1 Drugs",
+"2ndLinetier":"Nulla ea veniam nostrud reprehenderit eiusmod excepteur adipisicing nulla cupidatat cupidatat. Excepteur amet exercitation minim sint nulla occaecat dolor anim duis proident ad ea voluptate do enim consequat ea.",
+"3rdLinetier":"Tier 2 Drugs",
+"4thLinetier":"Tier 3 Drugs",
+"5thLinetier":"Tier 4 Drugs",
+"6thLinetier":"Tier 5 Drugs",
+"1stLinestage":"Annual Deductible Stage",
+"2thLinestage":"Initial Coverage Stage",
+"3rdLinestage":"Coverage Gap Stage",
+"4thLinestage":"Catastrophic Coverage Stage",
+"drugcostdropdown":[{"drug-costs":"Preferred Retail Pharmacy\nStandard Retail Pharmacy\nPreferred Mail Service Pharmacy"}]
+}

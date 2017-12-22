@@ -9,9 +9,6 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.thoughtworks.selenium.Wait.WaitTimedOutException;
-import com.thoughtworks.selenium.webdriven.commands.WaitForPageToLoad;
-
 import pages.acquisition.uhcretiree.AcquisitionHomePage;
 import pages.acquisition.uhcretiree.AlcatelLucentFindProviderPage;
 import pages.acquisition.uhcretiree.AlcatelLucentHomePage;

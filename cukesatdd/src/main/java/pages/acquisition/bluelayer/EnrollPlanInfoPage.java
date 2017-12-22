@@ -74,7 +74,7 @@ public class EnrollPlanInfoPage extends UhcDriver{
         public PlanInformationPage continuesEnrollment(String planName) {
                 
                 continueEnrollmentButton.click();
-                if(driver.getTitle().equalsIgnoreCase("Medicare Advantage Plan Enrollment Information | AARP® Medicare Plans from UnitedHealthcare®") || driver.getTitle().equalsIgnoreCase("Medicare Prescription Drug Plan Enrollment | AARP® Medicare Plans from UnitedHealthcare®")){
+                if(driver.getTitle().equalsIgnoreCase("Medicare Advantage Plan Enrollment Information | AARP® Medicare Plans from UnitedHealthcare®") || driver.getTitle().equalsIgnoreCase("Medicare Prescription Drug Plan Enrollment | AARP® Medicare Plans from UnitedHealthcare®") || driver.getTitle().equalsIgnoreCase("Medicare Advantage Plan Enrollment Information | UnitedHealthcare®")){
                         return new PlanInformationPage(driver,planName);
                 }
                 return null;

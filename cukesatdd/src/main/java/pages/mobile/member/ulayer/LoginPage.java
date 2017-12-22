@@ -57,8 +57,8 @@ public class LoginPage extends UhcDriver{
 
 	@Override
 	public void openAndValidate() {
-		if(MRScenario.environment.equals("team-c")){
-			PAGE_URL=MRConstants.AARP_MOBILE_TEAM_C_URL;
+		if(MRScenario.environment.equals("team-e") || MRScenario.environment.equals("team-c")){
+			PAGE_URL=MRConstants.AARP_MOBILE_TEAM_URL;
 		}
 		start(PAGE_URL);
 		validate(userNameField);
@@ -88,9 +88,20 @@ public class LoginPage extends UhcDriver{
 			Alert alert1 = driver.switchTo().alert();
 			alert1.accept();
 		}
-		if(currentUrl().contains("mobile/home/my-benefit-summary.html"))
+		if(currentUrl().contains("mobile/home/my-benefit-summary.html") || currentUrl().contains("mobile/login.html"))
 		{
 			return new BenefitsSummaryPage(driver);
+		}
+		return null;
+	}
+	
+	public pages.mobile.member.ulayer.ContactUsPage navigateToContactusRedesignPage() {
+		// TODO Auto-generated method stub
+		String url = "https://member.team-e-aarpmedicareplans.uhc.com/content/aarpm/home/contact.html";
+		driver.get(url);
+		if (driver.getTitle().equals("Contact Us")) {
+			return new pages.mobile.member.ulayer.ContactUsPage(driver);
+
 		}
 		return null;
 	}

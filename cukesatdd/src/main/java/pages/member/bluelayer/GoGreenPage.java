@@ -44,7 +44,7 @@ public class GoGreenPage extends UhcDriver {
 		String fileName = CommonConstants.MY_PROFILES_PAGE_DATA;
 		goGreen = CommonUtility.readPageData(fileName,
 				CommonConstants.PAGE_OBJECT_DIRECTORY_BLUELAYER_MEMBER);
-		openAndValidate();
+		//openAndValidate();
 	}
 
 	@Override

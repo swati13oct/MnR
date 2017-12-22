@@ -237,7 +237,18 @@ public class BenefitsSummaryPage extends UhcDriver{
 		}
 		return null;
 	}
+	
+	public pages.mobile.member.ulayer.ContactUsPage navigateToContactusRedesignPage() {
+		// TODO Auto-generated method stub
+		String url = "https://member.team-e-aarpmedicareplans.uhc.com/content/aarpm/home/contact.html";
+		driver.get(url);
+		if (driver.getTitle().equals("Contact Us")) {
+			return new pages.mobile.member.ulayer.ContactUsPage(driver);
 
+		}
+		return null;
+	}
+	
 
 
 	public BenefitDetailsPage clickviewdrugdetails() {

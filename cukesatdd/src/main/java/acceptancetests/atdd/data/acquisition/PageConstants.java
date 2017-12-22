@@ -10,6 +10,10 @@ package acceptancetests.atdd.data.acquisition;
  *
  */
 public class PageConstants {
+	
+	public static final String SignIN_Page = "signinpage";
+	
+	public static final String Error_Message = "errorMessage";
 
 	public static final String ESTIMATE_DRUG_COST_PAGE = "estimateDrugCostPage";
 
@@ -20,6 +24,10 @@ public class PageConstants {
 	public static final String SELECT_GENERIC_PAGE = "selectGenericPage";
 
 	public static final String PHARMACY_SEARCH_PAGE = "pharmacySearchPage";
+	
+	public static final String UHCRETIREE_PHARMACY_RESULTS_PAGE = "pharmacyResultsPage";
+	
+	public static final String UHCRETIREE_PHARMACY_SEARCH_PAGE = "uhcRetireepharmacylocatorPage";
 
 	public static final String HEALTH_PLANS_PAGE = "healthPlansPage";
 
@@ -62,6 +70,8 @@ public class PageConstants {
 	public static final String ZIP_LOOK_UP_HOME_PAGE = "zipcodeLookuphomePage";
 
 	public static final String ZIP_SELECTION_HOME_PAGE = "zipcodeSelectionhomePage";
+	
+	public static final String DRUG_COST_ESTIMATOR_PAGE = "drugCostEstimatorPage";
 
 	public static final String OUR_PLANS_PAGE = "ourPlansPage";
 
@@ -353,25 +363,33 @@ public class PageConstants {
 	public static final String LOGIN_ASSISTANCE_PERSONAL_IDENTIFICATION_ERROR_SCENARIO = "personalIdentificationErrorActualJson";
 
 	public static final String VPP_REQUEST_SEND_EMAIL_PAGE = "vppRequestSendEmailPage";
-
+	
 	public static final String PORTFOLIO_PAGE = "portfoliopage";
 	
     public static final String RESPONSIVE_PLAN_SUMMARY_PAGE = "responsivePlanSummaryPage";
 	
 	public static final String RESPONSIVE_DETAILS_PAGE = "responsiveDetailsPage";
-
-	public static final String NOKIA_HOME_PAGE = "nokiahomepages";
 	
+	public static final String RESPONSIVE_DETAILS_UHC_PAGE = "responsiveDetailsUHCPage";
+public static final String PORTFOLIO_PAGE_UHC = "ourPlans";
+
+	public static final String RESPONSIVE_PLAN_SUMMARY_PAGE_UHC = "vppPlan";
+	
+	public static final String TeamC_Plan_Compare_Page = "TeamCPlanComparePage";
+	
+	public static final String TeamC_FootNotes_Section = "TeamCFootNotesSection";
+	
+	public static final String SamePage = "SamePage";
+	
+	public static final String UNPWAssistancePage = "UNPWassPge";
 	public static final String EATON_HOME_PAGE = "eatonhomepages";
-
 	public static final String Salesforce_PAGE = "salesforce";
-
-	public static final String NONCUSTOM_HOME_PAGE = "noncustom";
-
-	public static final String UNIVERSITYOFMISSOURI_HOME_PAGE = "UniversityofMissouri";
+public static final String NOKIA_HOME_PAGE = "nokiahomepages";
+public static final String UNIVERSITYOFMISSOURI_HOME_PAGE = "UniversityofMissouri";
 
 	public static final String REGISTRATION_INFORMATION_PAGE = "RegistrationInformationPage";
 	
 	public static final String DASHBOARD_FORMS_AND_RESOURCES_PAGE = "DashBoardFormsAndResourcesPage";
 
+	public static final String NONCUSTOM_HOME_PAGE = "noncustom";
 }
