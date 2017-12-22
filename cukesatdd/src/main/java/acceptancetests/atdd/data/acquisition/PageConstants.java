@@ -384,9 +384,12 @@ public static final String PORTFOLIO_PAGE_UHC = "ourPlans";
 	public static final String UNPWAssistancePage = "UNPWassPge";
 	public static final String EATON_HOME_PAGE = "eatonhomepages";
 	public static final String Salesforce_PAGE = "salesforce";
-	public static final String NOKIA_HOME_PAGE = "nokiahomepages";
-	   public static final String NONCUSTOM_HOME_PAGE = "noncustom";
-	   public static final String UNIVERSITYOFMISSOURI_HOME_PAGE = "UniversityofMissouri";
-	   
-	   public static final String REGISTRATION_INFORMATION_PAGE = "RegistrationInformationPage";
+public static final String NOKIA_HOME_PAGE = "nokiahomepages";
+public static final String UNIVERSITYOFMISSOURI_HOME_PAGE = "UniversityofMissouri";
+
+	public static final String REGISTRATION_INFORMATION_PAGE = "RegistrationInformationPage";
+	
+	public static final String DASHBOARD_FORMS_AND_RESOURCES_PAGE = "DashBoardFormsAndResourcesPage";
+
+	public static final String NONCUSTOM_HOME_PAGE = "noncustom";
 }
