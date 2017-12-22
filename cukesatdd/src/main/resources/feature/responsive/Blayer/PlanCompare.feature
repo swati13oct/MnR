@@ -15,3 +15,5 @@ And the user selects plan to compare and validates header and footer
 Examples:
 		|zipCode|county						 |planType |firstPlan|secondPlan|
 		|35004  |St. Clair County  |MS       |plan-A	 |plan-G		|
+		|35006  |Walker County	   |MS       |plan-A	 |plan-G		|
+		|36925  |Sumter County		 |MS       |plan-A	 |plan-G		|
