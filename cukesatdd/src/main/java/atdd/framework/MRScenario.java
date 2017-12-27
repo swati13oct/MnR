@@ -870,7 +870,7 @@ public class MRScenario {
 			System.out.println("PHANTOMJS Agent: " + agent);
 		}
 
-		// Again, Jenkins takes precedent.
+		// Again, Jenkins takes precedent test.
 		String pathToBinary = (null == System.getProperty("phantomjs") ? props.get("BrowserPathToBinary")
 				: System.getProperty("phantomjs"));
 

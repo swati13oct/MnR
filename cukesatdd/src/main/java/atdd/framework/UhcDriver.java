@@ -55,6 +55,7 @@ public abstract class UhcDriver {
 	public static WebDriver driver;
 
 	public void start(String url) {
+		System.out.println(getTitle());
 		driver.get(url);
 	}
 
