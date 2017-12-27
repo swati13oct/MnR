@@ -55,10 +55,8 @@ public abstract class UhcDriver {
 	public static WebDriver driver;
 
 	public void start(String url) {
-		System.out.println("**************** "+driver.getCurrentUrl());
+		System.out.println(getTitle());
 		driver.get(url);
-		System.out.println("++++++++++++++++ "+driver.getCurrentUrl());
-		//driver.manage().window().maximize();
 	}
 
 	public UhcDriver(WebDriver driver) {
@@ -142,8 +140,7 @@ public abstract class UhcDriver {
 
 		// this.waitforElement(element);
 		try {
-		//	this.waitforElement(element);
-Thread.sleep(3000);			if (element.isDisplayed()) {
+			if (element.isDisplayed()) {
 
 				Actions actions = new Actions(driver);
 				actions.moveToElement(element);
@@ -153,9 +150,10 @@ Thread.sleep(3000);			if (element.isDisplayed()) {
 			}
 		} catch (Exception e) {
 
-	Assert.fail("The element " + element.getText() + "is not  found");
+			Assert.fail("The element " + element.getText() + "is not  found");
 
-		}		return false;
+		}
+		return false;
 	}
 
 	public WebElement findElement(ElementData elementData) {
@@ -305,7 +303,6 @@ public void jsClick(WebElement element){
 	}
 
 	public String currentUrl() {
-		System.out.println("******************"+driver.getCurrentUrl());
 		return driver.getCurrentUrl();
 	}
 
