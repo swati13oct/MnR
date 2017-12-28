@@ -55,7 +55,7 @@ public class PaymentsOverview extends UhcDriver{
 	public PaymentsOverview(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
-		openAndValidate();
+		//openAndValidate();
 	}
 	
 
