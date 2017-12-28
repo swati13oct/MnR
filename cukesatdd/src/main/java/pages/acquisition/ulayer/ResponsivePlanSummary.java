@@ -110,7 +110,8 @@ public class ResponsivePlanSummary extends UhcDriver{
 		@FindBy(xpath="//*[@class='tab active' and contains(text(),'Medicare Advantage Plans')]/div[1]/span[3]")
 		private WebElement showMaPlansNotClickable;
 		
-		@FindBy(xpath = "//*[@class='tab med-supp']/div[1]/span[3]")
+		//@FindBy(xpath = "//*[@class='tab med-supp']/div[1]/span[3]")
+		@FindBy(xpath = "(//*[@id='site-wrapper']//div[@class='content-section']//div[@class='parbase vppClient section']//div[@class='parsys planCountPar']//div[@class='tab-contents']/span[@class='trigger-closed'])[1]")
 		private WebElement showMsPlans;
 		
 		@FindBy(xpath="//*[contains(text(),'Start Plan Selector')]")
@@ -277,7 +278,7 @@ public class ResponsivePlanSummary extends UhcDriver{
 
 		String fileName = CommonConstants.VPP_PLAN_SUMMARY_PAGE_DATA;
 		vppPlanSummary = CommonUtility.readPageData(fileName, CommonConstants.PAGE_OBJECT_DIRECTORY_ULAYER_ACQ);
-		openAndValidate();
+		//openAndValidate();
 	}
 	public ResponsivePlanSummary(WebDriver driver, String url) {
 		super(driver);
@@ -429,14 +430,14 @@ public void selectAddToCompareCheckboxes() throws InterruptedException  {
 public void viewdetailslnk() throws InterruptedException{
 	Thread.sleep(9000);
 	viewDetails.click();
-	validate(viewDetails);
+	//validate(viewDetails);
 	
 }
 
 public void removePlanlnk() throws InterruptedException{
 	Thread.sleep(9000);
 	removePlanlnk.click();
-	validate(removePlanlnk);
+	//validate(removePlanlnk);
 }
 
 public void removePlanlnk1() throws InterruptedException{
