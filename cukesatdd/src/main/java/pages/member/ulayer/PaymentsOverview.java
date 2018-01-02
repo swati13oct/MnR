@@ -15,7 +15,7 @@ import pages.member.bluelayer.ConfirmOneTimePaymentPage;
 
 public class PaymentsOverview extends UhcDriver{
 
-	@FindBy(xpath="//div[@class='margin-small']//a[@id='onetimepayment']")
+	@FindBy(xpath="(//div[@class='margin-small']//a[@id='onetimepayment'])[2]")
 	private WebElement OneTimePaymentButton;
 	
 	@FindBy(xpath = "//div[@id='paymentOverviewApp']//span[@class='payment-method-btn'][2]/a")
@@ -78,19 +78,19 @@ public class PaymentsOverview extends UhcDriver{
 	
 	public OneTimePaymentsPage navigateToOneTimePaymentpage() throws InterruptedException
 	{
-		Thread.sleep(8000);
+		Thread.sleep(12000);
 		try{
 		if(Popup.isDisplayed())	
 			Popup.click();		
-		Thread.sleep(2000);
+		Thread.sleep(4000);
 		}
 		catch(Exception e)
 		{
 			System.out.println("Pop up handled");
 		}
 		JavascriptExecutor jse = (JavascriptExecutor)driver;
-		jse.executeScript("window.scrollBy(0,100)", "");
-		Thread.sleep(5000);
+		jse.executeScript("window.scrollBy(0,50)", "");
+		Thread.sleep(3000);
 		if(OneTimePaymentButton.isEnabled()){
 			OneTimePaymentButton.click();
 			return new OneTimePaymentsPage(driver);
@@ -124,7 +124,7 @@ public class PaymentsOverview extends UhcDriver{
 		return null;
 	}
 	
-	public OneTimePaymentsPage TabValidation()
+	public OneTimePaymentsPage TabValidation() throws InterruptedException
 	{
 		if(Tab1.isEnabled() && Tab2.isEnabled()){
 			Tab1.click();

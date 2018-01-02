@@ -803,7 +803,7 @@ else{
 		gogreenPopupClose.click();
 	}
 
-	public OneTimePaymentsPage navigateToOneTimePaymentsPage() {
+	public OneTimePaymentsPage navigateToOneTimePaymentsPage() throws InterruptedException {
 		OTPButton.click();
 		if(driver.getTitle().equalsIgnoreCase("payments-client") || driver.getTitle().equalsIgnoreCase("onetimepayments")){
 			return new OneTimePaymentsPage(driver);

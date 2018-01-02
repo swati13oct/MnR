@@ -20,7 +20,7 @@ import atdd.framework.UhcDriver;
 public class OneTimePaymentsPage extends UhcDriver{
 	
 		
-	@FindBy(xpath="//*[@id='atdd_otheramount_label']/label")
+	@FindBy(xpath="//*[@id='atdd_otheramount_label']")
 	private WebElement otherAmountRadio;
 	
 	@FindBy(id = "other-amount-number")
@@ -89,14 +89,15 @@ public class OneTimePaymentsPage extends UhcDriver{
 	@FindBy(id = "other-amount-number")
 	private WebElement amountToBePaidField;
 
-	public OneTimePaymentsPage(WebDriver driver) {
+	public OneTimePaymentsPage(WebDriver driver) throws InterruptedException {
 		super(driver);
 		PageFactory.initElements(driver, this);
-		//openAndValidate();
+		openAndValidate();
 	}
 
 	@Override
-	public void openAndValidate() {
+	public void openAndValidate() throws InterruptedException {
+		Thread.sleep(3000);
 		validate(otherAmountRadio);
 		validate(otherAmountNumber);
 		validate(routingNumberField);
