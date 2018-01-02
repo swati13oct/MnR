@@ -13,6 +13,8 @@ import atdd.framework.MRScenario;
 
 public class MRConstants {
 	
+	public static final String Dashboard_URL ="https://"+MRScenario.environment+"-medicare.uhc.com/";
+	
 	public static final String Dashboar_URL = "https://"+MRScenario.environment+"-medicare.uhc.com/?testharness=true ";
 
 	
@@ -317,6 +319,8 @@ public static final String MEMBER_AUTH = "https://"+MRScenario.environment+"-gen
 public static final String TeamC_UNPWAssistancePage_URL = "https://member.team-c-aarpmedicareplans.uhc.com/content/medicare/login/reset.html#/start";
 
 public static final String Stage_UNPWAssistancePage_URL = "https://stage-medicare.uhc.com/content/medicare/login/reset.html#/start";
+
+
 
 }
 
