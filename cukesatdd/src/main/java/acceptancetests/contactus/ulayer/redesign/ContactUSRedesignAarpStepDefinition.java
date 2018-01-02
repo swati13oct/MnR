@@ -28,6 +28,8 @@ import cucumber.annotation.en.When;
 import cucumber.table.DataTable;
 import gherkin.formatter.model.DataTableRow;
 import pages.dashboard.member.ulayer.ClaimSummarypage;
+import pages.member.redesign.NewLoginPage;
+import pages.member.redesign.TestHarnessPage;
 import pages.member.ulayer.AccountHomePage;
 import pages.member.ulayer.ContactUsPage;
 import pages.member.ulayer.LoginPage;
@@ -47,32 +49,6 @@ public class ContactUSRedesignAarpStepDefinition {
 		public void ulayer_registered_member_with_following_attributes(
 				DataTable memberAttributes) {
 
-			/* Reading the given attribute from feature file */
-			/*List<List<String>> dataTable = memberAttributes.raw();
-			List<String> desiredAttributes = new ArrayList<String>();
-
-			for (List<String> data : dataTable) {
-				desiredAttributes.add(data.get(0));
-			}
-			System.out.println("desiredAttributes.." + desiredAttributes);
-			Map<String, String> loginCreds = loginScenario
-					.getAMPMemberWithDesiredAttributes(desiredAttributes);
-
-			String userName = "";
-			String pwd = "";
-			if (loginCreds == null) {
-				// no match found
-				System.out.println("Member Type data could not be setup !!!");
-				Assert.fail("unable to find a " + desiredAttributes + " member");
-			} else {
-				userName = loginCreds.get("user");
-				pwd = loginCreds.get("pwd");
-				System.out.println("User is..." + userName);
-				System.out.println("Password is..." + pwd);
-				getLoginScenario()
-				.saveBean(LoginCommonConstants.USERNAME, userName);
-				getLoginScenario().saveBean(LoginCommonConstants.PASSWORD, pwd);
-			} */
 			List<DataTableRow> memberAttributesRow = memberAttributes.getGherkinRows();
 			Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
 			for (int i = 0; i < memberAttributesRow.size(); i++) {
@@ -87,18 +63,18 @@ public class ContactUSRedesignAarpStepDefinition {
 			WebDriver wd = getLoginScenario().getWebDriver();
 			getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
 
-			LoginPage loginPage = new LoginPage(wd);
-			AccountHomePage accountHomePage = (AccountHomePage) loginPage.loginWith(userName, passWord);
+			NewLoginPage loginPage = new NewLoginPage(wd);
+			
+			TestHarnessPage testHarnessPage = (TestHarnessPage) loginPage.loginWith(userName, passWord);
 
-
-			if (accountHomePage != null) {
+			if (testHarnessPage != null) {
 				getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
-				getLoginScenario().saveBean(PageConstants.ACCOUNT_HOME_PAGE,accountHomePage);
+				getLoginScenario().saveBean(PageConstants.TEST_HARNESS_PAGE,testHarnessPage);
 				Assert.assertTrue(true);
 			}
 			
-			getLoginScenario().saveBean(PageConstants.ACCOUNT_HOME_PAGE,
-					accountHomePage);
+			getLoginScenario().saveBean(PageConstants.TEST_HARNESS_PAGE,
+					testHarnessPage);
 		}
 
 		/*@When("^the user navigates to redesign contact us page in AARP site$")
@@ -121,12 +97,12 @@ public class ContactUSRedesignAarpStepDefinition {
 		@When("^the user validates the contact us redesign  page in AARP site$")
 		public void validates_contactUs_Redesign_Page() {
 			
-			AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstants.ACCOUNT_HOME_PAGE);
+			TestHarnessPage testHarnessPage = (TestHarnessPage) getLoginScenario().getBean(PageConstants.TEST_HARNESS_PAGE);
 			
-			ContactUsPage contactUsPage = accountHomePage.navigateToContactusRedesignPage();
+			/*ContactUsPage contactUsPage = testHarnessPage.navigateToUlayerContactUsPage();
 			if(contactUsPage != null)				
 				getLoginScenario().saveBean(PageConstants.CONTACT_US_PAGE,
-						contactUsPage);
+						contactUsPage);*/
 		}
 		
 		@Then("^user validates secure email widget UI in redesign contact us page$")

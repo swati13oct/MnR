@@ -1,5 +1,6 @@
 package atdd.framework;
 
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
@@ -46,20 +47,13 @@ import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxBinary;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxProfile;
-import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
-import org.openqa.selenium.phantomjs.PhantomJSDriver;
-import org.openqa.selenium.phantomjs.PhantomJSDriverService;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.springframework.ldap.core.DistinguishedName;
 import org.springframework.stereotype.Component;
-
 import acceptancetests.atdd.data.CommonConstants;
 
-
-import com.gargoylesoftware.htmlunit.BrowserVersion;
-import com.gargoylesoftware.htmlunit.WebClient;
 
 /**
  * 
@@ -86,7 +80,7 @@ public class MRScenario {
 
 	private static Map<String, String> props = new HashMap<String, String>();
 
-	public static String environment, browser;
+	public static String environment, browser, TeamCEnvironment;
 
 	private static final String DIRECTORY = "/src/main/resources/";
 	public static int count = 0;
@@ -961,7 +955,7 @@ public class MRScenario {
 			// the default
 			if (null == browser || browser.equalsIgnoreCase(CommonConstants.HTMLUNIT_BROWSER)) {
 				// use the HtmlUnit Driver
-				HtmlUnitDriver htmlUnitDriver = new HtmlUnitDriver(BrowserVersion.BEST_SUPPORTED) {
+				/*HtmlUnitDriver htmlUnitDriver = new HtmlUnitDriver(BrowserVersion.BEST_SUPPORTED) {
 					@Override
 					protected WebClient modifyWebClient(WebClient client) {
 						client.getOptions().setThrowExceptionOnScriptError(false);
@@ -972,10 +966,10 @@ public class MRScenario {
 
 				webDriver = htmlUnitDriver;
 				webDriver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
-				webDriver.manage().window().maximize();
+				webDriver.manage().window().maximize();*/
 			} else if (browser.equalsIgnoreCase(CommonConstants.JENKINS_BROWSER_PHANTOMJS)) {
 				// otherwise if we have a Jenkins browser defined, we use it.
-				DesiredCapabilities caps = new DesiredCapabilities();
+				/*DesiredCapabilities caps = new DesiredCapabilities();
 				caps.setCapability(PhantomJSDriverService.PHANTOMJS_EXECUTABLE_PATH_PROPERTY, pathToBinary);
 				//from Jarvis
 				caps.setCapability(PhantomJSDriverService.PHANTOMJS_PAGE_SETTINGS_PREFIX + "userAgent", agent);
@@ -986,7 +980,7 @@ public class MRScenario {
 				//end from jarvis
 				webDriver = new PhantomJSDriver(caps);
 				webDriver.manage().window().setSize(new Dimension(1400,1000));
-				webDriver.manage().timeouts().pageLoadTimeout(200,TimeUnit.SECONDS);
+				webDriver.manage().timeouts().pageLoadTimeout(200,TimeUnit.SECONDS); */
 			} else if (browser.equalsIgnoreCase(CommonConstants.FIREFOX_BROWSER)) {
 				FirefoxBinary ffBinary = new FirefoxBinary(new File(pathToBinary));
 				FirefoxProfile firefoxProfile = new FirefoxProfile();

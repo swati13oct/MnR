@@ -16,7 +16,7 @@ import acceptancetests.atdd.util.CommonUtility;
  * @author pjaising
  *
  */
-public class TerminatedHomePage {
+public class TerminatedHomePage{
 	
 
 	

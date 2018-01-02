@@ -10,6 +10,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.junit.Assert;
 import org.openqa.selenium.By;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -31,45 +32,49 @@ public class ContactUsPage extends UhcDriver{
 	@FindBy(id = "disclosure_link")
 	private WebElement logOut;
 	
+	@FindBy(xpath="//h2/p[text()='Website Technical Support']")
+	private WebElement heading;
+	
 	@FindBy(xpath="//*[@id='secureWidget']/div[1]")
 	private WebElement securewidget;
 	
 	@FindBy(id = "addAnotherPlanLink")
 	private WebElement addPlan;
 	
-	@FindBy(xpath="//div[contains(@class,'parsys request-email')]/div[not (contains(@class,'ng-hide'))][3]//a[@id='question-btn']")
-	private WebElement fillOutFormButton;	
-	
-	@FindBy(xpath="//div[contains(@class,'parsys request-email')]/div[not (contains(@class,'ng-hide'))][3]//a[@id='question-cancel']")
+	@FindBy(css="#secureWidget")
+	private WebElement securewidgetlink;
+	@FindBy(xpath="//div[contains(@class,'request-email')]/div[not (contains(@class,'ng-hide'))][2]//a[@id='question-btn']")
+	private WebElement fillOutFormButton;		
+	@FindBy(xpath="//div[contains(@class,'request-email')]/div[not (contains(@class,'ng-hide'))][2]//a[@id='question-cancel']")
 	private WebElement questionCancelLink;
 	
-	@FindBy(xpath="//*[@id='question-about']")
+@FindBy(xpath="//*[@id='question-about']")
 	private WebElement questionAbout;
 	
 	
-	@FindBy(xpath="//div[contains(@class,'parsys request-email')]/div[not (contains(@class,'ng-hide'))][3]//textarea[@id='question-message']")
+	@FindBy(xpath="//div[contains(@class,'request-email')]/div[not (contains(@class,'ng-hide'))][2]//textarea[@id='question-message']")
 	private WebElement questionMessage;
 	
-	@FindBy(xpath="//div[contains(@class,'parsys request-email')]/div[not (contains(@class,'ng-hide'))][3]//button[@id='question-submit']")
+	@FindBy(xpath="//div[contains(@class,'request-email')]/div[not (contains(@class,'ng-hide'))][2]//button[@id='question-submit']")
 	private WebElement questionSubmit;
 	
 	
-	@FindBy(xpath="//div[contains(@class,'parsys request-email')]/div[not (contains(@class,'ng-hide'))][3]//a[@id='add-alt-email']")
+	@FindBy(xpath="//div[contains(@class,'request-email')]/div[not (contains(@class,'ng-hide'))][2]//a[@id='add-alt-email']")
 	private WebElement addAlternativeEmail;
 	
-	@FindBy(xpath="//div[contains(@class,'parsys request-email')]/div[not (contains(@class,'ng-hide'))][3]//input[@id='question-alt-email']")
+	@FindBy(xpath="//div[contains(@class,'request-email')]/div[not (contains(@class,'ng-hide'))][2]//input[@id='question-alt-email']")
 	private WebElement alternativeEmailAddress;
 	
-	@FindBy(xpath="//div[contains(@class,'parsys request-email')]/div[not (contains(@class,'ng-hide'))][3]//input[@id='question-alt-email-confirm']")
+	@FindBy(xpath="//div[contains(@class,'request-email')]/div[not (contains(@class,'ng-hide'))][2]//input[@id='question-alt-email-confirm']")
 	private WebElement confirmEmailAddress;
 	
-	@FindBy(xpath="//div[contains(@class,'parsys request-email')]/div[not (contains(@class,'ng-hide'))][3]//a[@id='add-alt-phone']")
+	@FindBy(xpath="//div[contains(@class,'request-email')]/div[not (contains(@class,'ng-hide'))][2]//a[@id='add-alt-phone']")
 	private WebElement addAlternativePhneNumberLink;
 	
-	@FindBy(xpath="//div[contains(@class,'parsys request-email')]/div[not (contains(@class,'ng-hide'))][3]//input[@id='question-alt-phone']")
+	@FindBy(xpath="//div[contains(@class,'request-email')]/div[not (contains(@class,'ng-hide'))][2]//input[@id='question-alt-phone']")
 	private WebElement alternativePhneNumber;
 	
-	@FindBy(xpath="//div[contains(@class,'parsys request-email')]/div[not (contains(@class,'ng-hide'))][3]//input[@id='question-alt-phone-confirm']")	
+	@FindBy(xpath="//div[contains(@class,'request-email')]/div[not (contains(@class,'ng-hide'))][2]//input[@id='question-alt-phone-confirm']")	
 	private WebElement confirmAlternativePhneNumber;
 	
 	@FindBy(xpath="/html/body/div[2]/div/div/div/div[5]/div/div/div[2]/div/div[1]/div/div/div/div/div/div[2]/div[3]/div[1]")	
@@ -89,30 +94,28 @@ public class ContactUsPage extends UhcDriver{
 	private WebElement questionEmailmessageError;
 	
 
-	@FindBy(xpath="//div[contains(@class,'parsys request-email')]/div[not (contains(@class,'ng-hide'))][3]//input[@id='question-alt-email']/following::label[@id='message-email-error'][1]")
+	@FindBy(xpath="//div[contains(@class,'request-email')]/div[not (contains(@class,'ng-hide'))][2]//input[@id='question-alt-email']/following::label[@id='message-email-error'][1]")
 	private WebElement alternativemessageEmailError;
 	
 	
-	@FindBy(xpath="//div[contains(@class,'parsys request-email')]/div[not (contains(@class,'ng-hide'))][3]//input[@id='question-alt-email-confirm']/following::label[@id='message-email-error'][1]")
+	@FindBy(xpath="//div[contains(@class,'request-email')]/div[not (contains(@class,'ng-hide'))][2]//input[@id='question-alt-email-confirm']/following::label[@id='message-email-error'][1]")
 	private WebElement confirmMsgEmailError;
 	
-	@FindBy(xpath="//div[contains(@class,'parsys request-email')]/div[not (contains(@class,'ng-hide'))][3]//input[@id='question-alt-phone']/following::label[@id='message-email-error'][1]")
+	@FindBy(xpath="//div[contains(@class,'request-email')]/div[not (contains(@class,'ng-hide'))][2]//input[@id='question-alt-phone']/following::label[@id='message-email-error'][1]")
 	private WebElement invalidPhneErrorMsg;
 	
-	@FindBy(xpath="//div[contains(@class,'parsys request-email')]/div[not (contains(@class,'ng-hide'))][3]//input[@id='question-alt-phone-confirm']/following::label[@id='message-email-error'][1]")
+	@FindBy(xpath="//div[contains(@class,'request-email')]/div[not (contains(@class,'ng-hide'))][2]//input[@id='question-alt-phone-confirm']/following::label[@id='message-email-error'][2]")
 	private WebElement confirmPhneErrorMsg;
 	
 	@FindBy(css="div.field.ask-question-message.field-has-error div.field-input label#message-email-error.error")
 	private WebElement questionAboutEmailErrorMsg;
 	
-	@FindBy(xpath="//div[contains(@class,'parsys request-email')]/div[not (contains(@class,'ng-hide'))][3]//span[contains(@class,'green')]")
+	@FindBy(xpath="//div[contains(@class,'request-email')]/div[not (contains(@class,'ng-hide'))][2]//span[contains(@class,'color-green-dark bold')]")
 	private WebElement requestReceivedMessageHeader;
 	
-	@FindBy(xpath="//div[contains(@class,'parsys request-email')]/div[not (contains(@class,'ng-hide'))][3]//div[contains(@class,'message-block-body')]/p[2]")
+	@FindBy(xpath="//div[contains(@class,'request-email')]/div[not (contains(@class,'ng-hide'))][2]//div[contains(@class,'message-block-body')]/p")
 	private WebElement thankYouMessage;
-	
-	
-	private PageData contactUs;
+		private PageData contactUs;
 
 	public JSONObject contactUsJson;
 	
@@ -130,9 +133,7 @@ public class ContactUsPage extends UhcDriver{
 
 	@Override
 	public void openAndValidate() {
-
-		/*validate(addPlan);
-		validate(logOut);*/
+		validate(heading);
 	}
 
 	public JSONObject getExpectedData(Map<String, JSONObject> expectedDataMap) {
@@ -199,14 +200,47 @@ public class ContactUsPage extends UhcDriver{
 
 		return secureemailwidgetDataJson;
 	}
+	public void secureEmailWidgetDisplayed(){
+		
+		Assert.assertTrue("Secure Email widget is displayed", securewidget.isDisplayed());
+		
+	}
+public void secureEmailWidgetNonDisplayedCheck(){
+		/*Assert.assertEquals("display: block;", securewidgetlink.getAttribute("style"));*/
+
+
 	
-	public void validateThankYouMessage(String expectedMessage){
+
+
+
+		Assert.assertTrue("Secure Email widget not displayed", !securewidget.isDisplayed());
+		
+}
+	
+public void secureEmailWidgetNonDisplayedCheckfrEmployers(){
+	/*Assert.assertEquals("display: block;", securewidgetlink.getAttribute("style"));*/
+	try{
+		if(!securewidget.isDisplayed()){
+			Assert.assertTrue("Secure widget is not  displayed for Employers", !securewidget.isDisplayed());
+			
+		}
+	}catch(NoSuchElementException se){
+		/*Assert.fail("Secure widget is not  displayed for Employers");*/
+	}
+	
+	
+	System.out.println("Secure widget is not  displayed for Employers");
+}
+public void validateThankYouMessage(String expectedMessage){
 		
 		Assert.assertEquals("Your Request has Been Received", requestReceivedMessageHeader.getText().trim());
 		Assert.assertEquals(expectedMessage, thankYouMessage.getText().trim());
 		
 	}
 	
+
+
+
 	public void validateSendUaQuestionWidget()
 	{
 		if (fillOutFormButton.isDisplayed())
@@ -342,8 +376,8 @@ public class ContactUsPage extends UhcDriver{
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			Select dropdown = new Select(driver.findElement(By.xpath("//div[contains(@class,'parsys request-email')]"
-					+ "/div[not (contains(@class,'ng-hide'))][3]//select[@id='question-about']")));
+			Select dropdown = new Select(driver.findElement(By.xpath("//div[contains(@class,'request-email')]"
+					+ "/div[not (contains(@class,'ng-hide'))][2]//select[@id='question-about']")));
 			System.out.println("dropdown" +dropdown);
 			dropdown.getFirstSelectedOption().click();
 			dropdown.selectByVisibleText("Payment Information");
@@ -388,11 +422,10 @@ public class ContactUsPage extends UhcDriver{
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			Select dropdown = new Select(driver.findElement(By.xpath("//div[contains(@class,'parsys request-email')]"
-					+ "/div[not (contains(@class,'ng-hide'))][3]//select[@id='question-about']")));
+			Select dropdown = new Select(driver.findElement(By.xpath("//div[contains(@class,'request-email')]"
+					+ "/div[not (contains(@class,'ng-hide'))][2]//select[@id='question-about']")));
 			System.out.println("dropdown" +dropdown);
-			dropdown.getFirstSelectedOption().click();
-			dropdown.selectByVisibleText("Billing Information");
+			dropdown.selectByVisibleText("Payment Information");
 			try {
 				Thread.sleep(5000);
 			} catch (InterruptedException e) {
@@ -439,11 +472,11 @@ public class ContactUsPage extends UhcDriver{
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			Select dropdown = new Select(driver.findElement(By.xpath("//div[contains(@class,'parsys request-email')]"
-					+ "/div[not (contains(@class,'ng-hide'))][3]//select[@id='question-about']")));
+			Select dropdown = new Select(driver.findElement(By.xpath("//div[contains(@class,'request-email')]"
+					+ "/div[not (contains(@class,'ng-hide'))][2]//select[@id='question-about']")));
 			System.out.println("dropdown" +dropdown);
 			dropdown.getFirstSelectedOption().click();
-			dropdown.selectByVisibleText("Billing Information");
+			dropdown.selectByVisibleText("Payment Information");
 			try {
 				Thread.sleep(5000);
 			} catch (InterruptedException e) {
@@ -456,9 +489,9 @@ public class ContactUsPage extends UhcDriver{
 			alternativeEmailAddress.sendKeys("abc");
 			//confirmEmailAddress.sendKeys("");
 			alternativeEmailAddress.click();
-			jsClick(driver.findElement(By.xpath("//div[contains(@class,'parsys request-email')]/div[not (contains(@class,'ng-hide'))][3]//input[@id='question-alt-email']/preceding::p[1]")));
+			jsClick(driver.findElement(By.xpath("//div[contains(@class,'request-email')]/div[not (contains(@class,'ng-hide'))][2]//input[@id='question-alt-email']/preceding::p[1]")));
 			driver.findElement(By.xpath
-					("//div[contains(@class,'parsys request-email')]/div[not (contains(@class,'ng-hide'))][3]//input[@id='question-alt-email']/preceding::p[1]")).click();
+					("//div[contains(@class,'request-email')]/div[not (contains(@class,'ng-hide'))][2]//input[@id='question-alt-email']/preceding::p[1]")).click();
 			try {
 				Thread.sleep(5000);
 			} catch (InterruptedException e) {
@@ -467,7 +500,7 @@ public class ContactUsPage extends UhcDriver{
 			}
 			String alternativeerrorMessage=alternativemessageEmailError.getText();
 			System.out.println("alternativeerrorMessage::" +alternativeerrorMessage);
-			Assert.assertTrue("Email address not valid", alternativeerrorMessage.equalsIgnoreCase("Email Address Not valid"));
+			Assert.assertTrue("Email address not valid", alternativeerrorMessage.equalsIgnoreCase("Enter your email address like this: yourname@emailprovider.com"));
 		
 	}else
 	{
@@ -485,11 +518,11 @@ public class ContactUsPage extends UhcDriver{
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			Select dropdown = new Select(driver.findElement(By.xpath("//div[contains(@class,'parsys request-email')]"
-					+ "/div[not (contains(@class,'ng-hide'))][3]//select[@id='question-about']")));
+			Select dropdown = new Select(driver.findElement(By.xpath("//div[contains(@class,'request-email')]"
+					+ "/div[not (contains(@class,'ng-hide'))][2]//select[@id='question-about']")));
 			System.out.println("dropdown" +dropdown);
 			dropdown.getFirstSelectedOption().click();
-			dropdown.selectByVisibleText("Billing Information");
+			dropdown.selectByVisibleText("Payment Information");
 			try {
 				Thread.sleep(5000);
 			} catch (InterruptedException e) {
@@ -503,9 +536,9 @@ public class ContactUsPage extends UhcDriver{
 			confirmEmailAddress.sendKeys("xyz");
 			confirmEmailAddress.clear();
 			confirmEmailAddress.click();
-			jsClick(driver.findElement(By.xpath("//div[contains(@class,'parsys request-email')]/div[not (contains(@class,'ng-hide'))][3]//input[@id='question-alt-email']/preceding::p[1]")));
+			jsClick(driver.findElement(By.xpath("//div[contains(@class,'request-email')]/div[not (contains(@class,'ng-hide'))][2]//input[@id='question-alt-email']/preceding::p[1]")));
 			driver.findElement(By.xpath
-					("//div[contains(@class,'parsys request-email')]/div[not (contains(@class,'ng-hide'))][3]//input[@id='question-alt-email']/preceding::p[1]")).click();
+					("//div[contains(@class,'request-email')]/div[not (contains(@class,'ng-hide'))][2]//input[@id='question-alt-email']/preceding::p[1]")).click();
 			try {
 				Thread.sleep(5000);
 			} catch (InterruptedException e) {
@@ -514,7 +547,7 @@ public class ContactUsPage extends UhcDriver{
 			}
 			String confirmErrMessage=confirmMsgEmailError.getText();		
 			 System.out.println("confirmErrMessage;;" + confirmErrMessage);
-			 Assert.assertTrue("Please enter same email id", confirmErrMessage.equalsIgnoreCase("Please enter same email id"));
+			 Assert.assertTrue("Please enter same email id", confirmErrMessage.equalsIgnoreCase("This Field is Required."));
 			
 			
 	}else
@@ -533,11 +566,11 @@ public class ContactUsPage extends UhcDriver{
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			Select dropdown = new Select(driver.findElement(By.xpath("//div[contains(@class,'parsys request-email')]"
-					+ "/div[not (contains(@class,'ng-hide'))][3]//select[@id='question-about']")));
+			Select dropdown = new Select(driver.findElement(By.xpath("//div[contains(@class,'request-email')]"
+					+ "/div[not (contains(@class,'ng-hide'))][2]//select[@id='question-about']")));
 			//System.out.println("dropdown" +dropdown);
 			dropdown.getFirstSelectedOption().click();
-			dropdown.selectByVisibleText("Billing Information");
+			dropdown.selectByVisibleText("Payment Information");
 			try {
 				Thread.sleep(5000);
 			} catch (InterruptedException e) {
@@ -548,9 +581,9 @@ public class ContactUsPage extends UhcDriver{
 			addAlternativePhneNumberLink.click();
 			alternativePhneNumber.sendKeys("123");
 			alternativePhneNumber.click();
-			jsClick(driver.findElement(By.xpath("//div[contains(@class,'parsys request-email')]/div[not (contains(@class,'ng-hide'))][3]//input[@id='question-alt-email']/preceding::p[1]")));
+			jsClick(driver.findElement(By.xpath("//div[contains(@class,'request-email')]/div[not (contains(@class,'ng-hide'))][2]//input[@id='question-alt-email']/preceding::p[1]")));
 			driver.findElement(By.xpath
-					("//div[contains(@class,'parsys request-email')]/div[not (contains(@class,'ng-hide'))][3]//input[@id='question-alt-email']/preceding::p[1]")).click();
+					("//div[contains(@class,'request-email')]/div[not (contains(@class,'ng-hide'))][2]//input[@id='question-alt-email']/preceding::p[1]")).click();
 			try {
 				Thread.sleep(5000);
 			} catch (InterruptedException e) {
@@ -559,19 +592,19 @@ public class ContactUsPage extends UhcDriver{
 			}
 			String invalidPhnenumerErrmsg = invalidPhneErrorMsg.getText();
 			System.out.println("invalidPhnenumerErrmsg::" +invalidPhnenumerErrmsg);
-			Assert.assertTrue("Phone number is not valid", invalidPhnenumerErrmsg.equals("Phone number is not valid"));
+			Assert.assertTrue("Phone number is not valid", invalidPhnenumerErrmsg.equals("Enter phone number like this: 111-111-1111."));
 			confirmAlternativePhneNumber.sendKeys("789");
-			jsClick(driver.findElement(By.xpath("//div[contains(@class,'parsys request-email')]/div[not (contains(@class,'ng-hide'))][3]//input[@id='question-alt-email']/preceding::p[1]")));
+			jsClick(driver.findElement(By.xpath("//div[contains(@class,'request-email')]/div[not (contains(@class,'ng-hide'))][2]//input[@id='question-alt-email']/preceding::p[1]")));
 			driver.findElement(By.xpath
-					("//div[contains(@class,'parsys request-email')]/div[not (contains(@class,'ng-hide'))][3]//input[@id='question-alt-email']/preceding::p[1]")).click();
+					("//div[contains(@class,'request-email')]/div[not (contains(@class,'ng-hide'))][2]//input[@id='question-alt-email']/preceding::p[1]")).click();
 			try {
-				Thread.sleep(3000);
+				Thread.sleep(5000);
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			String confirmPhoneErrmsg = confirmPhneErrorMsg.getText();
-			Assert.assertTrue("Please enter same Number", confirmPhoneErrmsg.equals("Please enter same Number"));
+			Assert.assertTrue("Please enter same Number", confirmPhoneErrmsg.equals("Enter a value that matches the value above."));
 			
 	}else
 	{
@@ -590,11 +623,11 @@ public class ContactUsPage extends UhcDriver{
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			Select dropdown = new Select(driver.findElement(By.xpath("//div[contains(@class,'parsys request-email')]"
-					+ "/div[not (contains(@class,'ng-hide'))][3]//select[@id='question-about']")));
+			Select dropdown = new Select(driver.findElement(By.xpath("//div[contains(@class,'request-email')]"
+					+ "/div[not (contains(@class,'ng-hide'))][2]//select[@id='question-about']")));
 			System.out.println("dropdown" +dropdown);
 			dropdown.getFirstSelectedOption().click();
-			dropdown.selectByVisibleText("Billing Information");
+			dropdown.selectByVisibleText("Payment Information");
 			try {
 				Thread.sleep(5000);
 			} catch (InterruptedException e) {
@@ -604,7 +637,7 @@ public class ContactUsPage extends UhcDriver{
 			questionMessage.sendKeys("hhh");
 			questionMessage.clear();
 			String questionErrorMessage=questionEmailmessageError.getText();
-			 Assert.assertTrue("Please dont leave it blank", questionErrorMessage.equalsIgnoreCase("Please dont leave it blank"));
+			 Assert.assertTrue("Please dont leave it blank", questionErrorMessage.equalsIgnoreCase("Enter a question or comment."));
 			 //Assert.assertTrue("Please enter same email id", confirmErrMessage.equalsIgnoreCase("Please enter same email id"));
 		
 		

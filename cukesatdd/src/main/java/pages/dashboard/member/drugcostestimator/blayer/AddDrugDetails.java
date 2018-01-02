@@ -103,7 +103,7 @@ public class AddDrugDetails extends UhcDriver {
 	public SavingsOppurtunity continueAddDrugDetailsModal() throws InterruptedException{
 		waitforElement(continueButton);
 		continueButton.click();
-		continueButton.click();
+		//continueButton.click();
 		Thread.sleep(12000);
 		return new SavingsOppurtunity(driver);
 		}

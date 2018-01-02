@@ -10,7 +10,7 @@ import acceptancetests.atdd.data.ulayer.Page;
  *
  */
 public class CommonConstants {
-
+	
 	public static final String FLOW_NAME = "registration/planconfirmation";
 
 	public static final String REG_FAILURE_FLOW_NAME = "registration/registrationfailure";
@@ -20,7 +20,18 @@ public class CommonConstants {
 	public static final String PROPERTY_FILE_FOLDER = "/config";
 
 	public static final String PROPERTY_FILE_NAME = "config.properties";
-
+	public static final String ANDROIDPROPERTY_WEB_FILE_NAME = "config_andr_web.properties";
+	
+	
+	
+		
+	public static final String ANDROIDPROPERTY_FILE_NAME = "config_andr.properties";
+    
+    public static final String FIREFOXPROPERTY_FILE_NAME = "config_ff.properties";        
+    
+    public static final String CHROMEPROPERTY_FILE_NAME = "config_chrome.properties";
+    
+    public static final String SAFARIPROPERTY_FILE_NAME = "config_safari.properties";
 	public static final String DEFAULT_ENVIRONMENT_CI = "ci";
 
 	public static final String UID = "uid";
@@ -44,15 +55,15 @@ public class CommonConstants {
 	public static final String WEBDRIVER = "webDriver";
 
 	public static final String DEVICE_NAME = "DeviceName";
-	
-	//Browser Drivers for WebDriver
-	public static final String CHROME_DRIVER = "ChromeDriver";
+public static final String CHROME_DRIVER = "ChromeDriver";
 	
 	/*
 	 * This parm is set in Jenkins and should evaluate to null when running 
 	 * in a desktop environment.
 	 */
 	public static final String JENKINS_BROWSER = "JENKINS_BROWSER";
+	
+	public static final String BROWSER_NAME = "BROWSER_NAME";
 	
 	//The following identify the browser to the website.   DESKTOP_BROWSER_AGENT_STRING is from 
 	//the config file, JENKINS_BROWSER_AGENT_STRING is a SYSTEM parameter set in Jenkins.
@@ -68,16 +79,12 @@ public class CommonConstants {
 	public static final String IE_BROWSER = "IE";
 	public static final String MOBILE_BROWSER = "MOBILE";
 	
-	public static final String SAUCE_BROWSER_WEB = "SAUCE_BROWSER_WEB";
+
+	public static final String DEVICE_VERSION = "DeviceVersion";public static final String SAUCE_BROWSER_WEB = "SAUCE_BROWSER_WEB";
+
 	public static final String SAUCE_BROWSER_MOBILE = "SAUCE_BROWSER_MOBILE";
-	
-	public static final String BROWSER_NAME = "BROWSER_NAME";
-	public static final String DEVICE_VERSION = "DeviceVersion";
-	
-	public static final String PLATFORM_VERSION = "PlatformVersion";
-	
-	public static final String PLATFORM_NAME = "PlatformName";
-	
+
+
 	public static final String DESKTOP_WEBDRIVER = "WebDriver";
 	
 	public static final String PLAN_BENEFITS_AND_COVERAGE = "planBenefitsAndCoverage";
@@ -86,11 +93,13 @@ public class CommonConstants {
 
 	public static final String BENEFITS_AND_COVERAGE_PAGE_DATA = "benefitsandcoveragelisnonlis.json";
 	
+	public static final String PROFILE_AND_PREFERENCES_REDESIGN_PAGE_DATA = "profilenpreferencesredesign.json";
 	
+	public static final String PROFILE_AND_PREFERNCES_PAGE_DIRECTORY = "/jsonresponse/member/ulayer/profilesandprefereneces/";
+	
+	public static final String PROFILE_AND_PREFERENCES_PAGE_DATA = "ProfileandPreferenceslisnonlis.json";
 
 	public static final String BENEFITS_AND_COVERAGE_PAGE_DIRECTORY = "/jsonresponse/member/ulayer/benefitsandcoverage/";
-
-	
 
 	public static final String BENEFITS_AND_COVERAGE_DIRECTORY = "/jsonresponse/member/ulayer/planbenefitsandcoverage/";
 
@@ -193,6 +202,7 @@ public class CommonConstants {
 					CommonConstants.DASHBOARD_DRUGCOSTESTIMATOR_DIRECTORY),
 			new Page(CommonConstants.ADD_DRUG_DETAILS,
 			CommonConstants.DASHBOARD_DRUGCOSTESTIMATOR_DIRECTORY)
+			
 	};
 
 	public static final String BENEFITS_SUMMARY_DIRECTORY = "/jsonresponse/mobile/member/ulayer/benefits-summary/";
@@ -846,22 +856,34 @@ public class CommonConstants {
 	public static final String DCEstimator = "DCEstimator.json";
 	public static final String SWITCH_GENERIC="switchgeneric.json";
 
-	public static final String NEW_CLAIM_DETAILS_PAGE_DATA = "newClaimDetailsPage.json";
-
+public static final String NEW_CLAIM_DETAILS_PAGE_DATA = "newClaimDetailsPage.json";
 	public static final String NEW_CLAIM_SUMMARY_PAGE_DATA = "newClaimsSummaryPage.json";
-	public static final String SAUCE_BROWSER_WEB = "SAUCE_BROWSER_WEB";
 
-	public static final String SAUCE_BROWSER_MOBILE = "SAUCE_BROWSER_MOBILE";
 	public static final String PERFECTO = "PERFECTO";
     
 	public static final String PLATFORM_VERSION = "PlatformVersion";
 	
 	public static final String PLATFORM_NAME = "PlatformName";
 	
-	public static final String DEVICE_VERSION = "DeviceVersion";
-
+public static final String ANDROIDPROPERTY_MOBILE_FILE_NAME = "config_andr_mobile.properties";
 	
+	public static final String FIREFOXPROPERTY_WEB_FILE_NAME = "config_ff_web.properties";	
 	
+	public static final String FIREFOXPROPERTY_MOBILE_FILE_NAME = "config_ff_mobile.properties";
 	
+	public static final String CHROMEPROPERTY_WEB_FILE_NAME = "config_chrome_web.properties";
 	
+	public static final String CHROMEPROPERTY_MOBILE_FILE_NAME = "config_chrome_mobile.properties";
+	
+	public static final String SAFARIPROPERTY_WEB_FILE_NAME = "config_safari_web.properties";
+	
+	public static final String SAFARIPROPERTY_MOBILE_FILE_NAME = "config_safari_mobile.properties";
+	
+	public static final String IEPROPERTY_WEB_FILE_NAME = "config_ie_web.properties";
+	
+	public static final String IEPROPERTY_MOBILE_FILE_NAME = "config_ie_mobile.properties";
+	
+	public static final String IEPROPERTY_FILE_NAME = "config_ie_web.properties";
+	public static final String YEAR_BUTTON_VPPPAGE = "yearBtnVppPageExists";
 }
+	

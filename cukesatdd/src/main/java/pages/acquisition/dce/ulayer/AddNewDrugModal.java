@@ -27,7 +27,7 @@ public class AddNewDrugModal extends UhcDriver {
 	public WebElement searchButton;
 
 
-	@FindBy(xpath = "//header[@class='add-drug-slide-header']/span[contains(text(),'ADD A NEW DRUG')]")
+	@FindBy(xpath = "//header[@class='add-drug-slide-header']/span[contains(text(),'Add a new drug')]")
 	public WebElement addNewDrugHeading;
 
 	@FindBy(xpath = "//a[text()='Cancel']")
@@ -55,9 +55,9 @@ public class AddNewDrugModal extends UhcDriver {
 	public AddNewDrugModal(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
-		CommonUtility.waitForPageLoad(driver, addNewDrugHeading, 10);
-		String fileName = CommonConstants.ADD_NEW_DRUG_PAGE_DATA;
-		addnewdrug = CommonUtility.readPageData(fileName, CommonConstants.PAGE_OBJECT_DIRECTORY_DCE_MEMBER);
+		//CommonUtility.waitForPageLoad(driver, addNewDrugHeading, 10);
+		//String fileName = CommonConstants.ADD_NEW_DRUG_PAGE_DATA;
+		//addnewdrug = CommonUtility.readPageData(fileName, CommonConstants.PAGE_OBJECT_DIRECTORY_DCE_MEMBER);
 		//openAndValidate();
 	}
 	@Override
@@ -94,7 +94,9 @@ public class AddNewDrugModal extends UhcDriver {
 		//drugsearchinput.click();
 		drugsearchinput.sendKeys(DrugName);
 		Thread.sleep(3000);
-		searchButton.click();     
+		searchButton.click();
+		waitforElement(continueButton);
+		continueButton.click();
 		//if (driver.getTitle().equalsIgnoreCase("ADD A NEW DRUG")) {
 			return new AddDrugDetails(driver);
 		//}
@@ -103,6 +105,7 @@ public class AddNewDrugModal extends UhcDriver {
 	
 	public void typeDrugName(String DrugName) {
 		drugsearchinput.sendKeys(DrugName);
+		searchButton.click();
 	}
 	public AddDrugDetails selectDrug(String drugname){
 		String xpath = "//label[contains(text(),'"+drugname+"')]/parent::div/input[contains(@id,'drugs-')]";

@@ -9,8 +9,7 @@ import java.util.List;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.openqa.selenium.NoSuchElementException;
-import org.openqa.selenium.TimeoutException;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -20,6 +19,7 @@ import acceptancetests.atdd.data.CommonConstants;
 import acceptancetests.atdd.data.PageData;
 import acceptancetests.atdd.util.CommonUtility;
 import atdd.framework.UhcDriver;
+import pages.acquisition.dce.ulayer.DrugCostEstimatorPage;
 
 /**
  * @author gumeshna
@@ -33,8 +33,8 @@ public class PlanDetailsPage extends UhcDriver {
 	@FindBy(id = "learnmorebtnDetails")
 	private WebElement waysToSaveLink;
 
-	@FindBy(xpath="//*[@id='enrollDetails']/span")
-	private WebElement enrollinaPlan;
+	@FindBy(xpath=".//*[@id='highlights']/div/a")
+	private WebElement enrollInPlanBtn;
 
 	@FindBy(xpath = "//*[@id='detailplanNameBox']/div/div/div/span/h3")
 	private WebElement planName;
@@ -52,10 +52,15 @@ public class PlanDetailsPage extends UhcDriver {
 	private WebElement planCost3;
 	
 	@FindBy(xpath = "//*[@id='planCost']/table/tbody/tr[4]/td/div[3]/span[1]")
-      
-	
 	//*[@id='planCost']/table/tbody/tr[4]/td/div[3]/span[1]
 	private WebElement planCost4;
+	
+	@FindBy(xpath = ".//*[@id='highlights']/div/div/span[1]/label")
+	private WebElement compareChkBox;
+	
+	@FindBy(xpath = ".//*[@id='highlights']/div/div/span[2]/span")
+	private WebElement compareMessageBox;
+
 
        @FindBy(id = "yourDceInitial")
 	private WebElement enterDrugInfoLink;
@@ -66,9 +71,41 @@ public class PlanDetailsPage extends UhcDriver {
     @FindBy(xpath = "//*[@id='yourDruglist']/div[2]/table/tbody/tr[4]/td/div[1]/p[1]")
     private WebElement drugListPharmacyName;
 	
-	
-	@FindBy(id = "backToplans")
+	@FindBy(linkText = "Back to all plans")
 	private WebElement backToAllPlans;
+	
+	@FindBy(id="medicalbenefits")
+	private WebElement medBenefitsTab;
+	
+	@FindBy(xpath="//*[@id='detail-0']/div/div/div[1]")
+	private WebElement medBenefitsSection;
+	
+	@FindBy(xpath="//*[@id='detail-0']/div/div/div[2]")
+	private WebElement addBenefitsSection;
+
+	@FindBy(id = "prescriptiondrug")
+    private WebElement presDrugTab;
+	
+	@FindBy(xpath=".//*[@id='drugBenefits']")
+	private WebElement drugBenefitsSection;
+	
+	@FindBy(xpath=".//*[@id='DrugListDetails']")
+	private WebElement drugListEditBtn;
+	
+	@FindBy(id = "estimateYourDrugsLink")
+	private WebElement estimateDrugBtn;
+	
+	@FindBy(xpath="//*[@id='detailTabs']/div[1]/a[1]")
+	private WebElement optRidersTab;
+	
+	@FindBy(xpath=".//*[@id='optionalRiders']")
+	private WebElement optRiderSection;
+	
+	@FindBy(id="plancosts")
+	private WebElement planCostsTab;
+	
+	@FindBy(id="planCosts")
+	private WebElement planCostsSection;
 	
 	private PageData vppPlanDetails;
 
@@ -81,47 +118,24 @@ public class PlanDetailsPage extends UhcDriver {
 	
 	public JSONObject planDocPDFAcqJson;
 
-	public PlanDetailsPage(WebDriver driver, String planType) {
-		super(driver);
-		PageFactory.initElements(driver, this);
-		CommonUtility.waitForPageLoad(driver, plandetails, CommonConstants.TIMEOUT_30);
-		String fileName = null;
-		if(planType.equalsIgnoreCase("MA")||planType.equalsIgnoreCase("MAPD"))
-		{
-			fileName = "maplandetails.json";
-		}
-		else
-		{
-			fileName = planType.toLowerCase()+"plandetails.json";
-		}
+	 public PlanDetailsPage(WebDriver driver, String planType) {
+         super(driver);
+         PageFactory.initElements(driver, this);
+         CommonUtility.waitForPageLoad(driver, plandetails, CommonConstants.TIMEOUT_30);
+         String fileName = null;
+         if(planType.equalsIgnoreCase("MA")||planType.equalsIgnoreCase("MAPD"))
+         {
+                 fileName = "maplandetails.json";
+         }
+         else
+         {
+                 fileName = planType.toLowerCase()+"plandetails.json";
+         }
 
-		vppPlanDetails = CommonUtility.readPageData(fileName,
-				CommonConstants.PAGE_OBJECT_DIRECTORY_ULAYER_ACQ);
-		openAndValidate();
-	}
-
-	public ManageDrugPage showWaysToSave(){
-		waysToSaveLink.click();
-		try{
-			if(waysToSaveLink.isDisplayed()){
-				CommonUtility.waitForElementToDisappear(driver, waysToSaveLink,
-						CommonConstants.TIMEOUT_30);
-			}
-		} catch (NoSuchElementException e) {
-			System.out.println("waysToSaveLink not found");
-		} catch (TimeoutException ex) {
-			System.out.println("waysToSaveLink not found");
-		} catch (Exception e) {
-			System.out.println("waysToSaveLink not found");
-		}
-		if (currentUrl().contains("manageDrugList")) {
-			return new ManageDrugPage(driver);
-		} else {
-			return null;
-		}
-
-
-	}
+         vppPlanDetails = CommonUtility.readPageData(fileName,
+                         CommonConstants.PAGE_OBJECT_DIRECTORY_ULAYER_ACQ);
+         openAndValidate();
+ }
 
 	public String getContent() {
 		return plandetails.getText();
@@ -132,61 +146,18 @@ public class PlanDetailsPage extends UhcDriver {
 		return null;
 	}
 
-	public AddDrugPage navigateToWTSPage() {
-		// TODO write implementation of the method
-		return null;
-	}
 
 	@Override
 	public void openAndValidate() {
-		validate(plandetails);
-		validate(waysToSaveLink);
-		JSONObject jsonObject = new JSONObject();
-		for (String key : vppPlanDetails.getExpectedData().keySet()) {
-			List<WebElement> elements = findElements(vppPlanDetails.getExpectedData()
-					.get(key));
-			if (elements.size() == 1) {
-				validate(elements.get(0));
-				try {
-					jsonObject.put(key, elements.get(0).getText());
-				} catch (JSONException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-			} else if (elements.size() > 1) {
-				JSONArray jsonArray = new JSONArray();
-				for (WebElement element : elements) {
-
-					validate(element);
-					try {
-						JSONObject jsonObjectForArray = new JSONObject();
-						jsonObjectForArray.put(key, element.getText());
-						jsonArray.put(jsonObjectForArray);
-					} catch (JSONException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
-				}
-				try {
-					jsonObject.put(key, jsonArray);
-				} catch (JSONException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-
-			}
-
-		}
-		vppPlanDetailsJson = jsonObject;
-		System.out.println("vppPlanDetailsJson------>" + vppPlanDetailsJson);
-
-
-
+		validate(medBenefitsTab);
+		validate(presDrugTab);
+		validate(planCostsTab);
+		
 	}
 
 	public PlanInformationPage navigatetoenrollinplanlink(String planName)
 	{
-		enrollinaPlan.click();
+		enrollInPlanBtn.click();
 		System.out.println(driver.getTitle());
 		if (driver.getTitle().equalsIgnoreCase("AARP Medicare Complete Online Application") || driver.getTitle().equalsIgnoreCase("AARP Medicarerx Online Application")|| driver.getTitle().equalsIgnoreCase("Enrollment Information"))
 		{
@@ -209,7 +180,7 @@ public class PlanDetailsPage extends UhcDriver {
 	return null;
 		
 	}
-
+	
 	public void validatePDFLinks() {
 		// TODO Auto-generated method stub
 		if(pdfLink!=null)
@@ -313,15 +284,53 @@ public class PlanDetailsPage extends UhcDriver {
         
         
     }
+    
+    public boolean validatePlanDetailsPage(){
+		
+		if(validate(medBenefitsTab)&&validate(presDrugTab)&&validate(planCostsTab)&&
+				medBenefitsSection.getText().contains("Monthly Premium"))
+			return true;
+		return false;
+			
+	}
+    
 
-	public GetStartedPage clicksOnEnterDrugInformationLink() {
-		enterDrugInfoLink.click();
+	public DrugCostEstimatorPage navigateToDCE() {
 
-		if (currentUrl().contains("/estimate-drug-costs")) {
-			return new GetStartedPage(driver);
+		try {
+			Thread.sleep(2000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
+		presDrugTab.click();
+		estimateDrugBtn.click();
+		try {
+			Thread.sleep(4000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		if(currentUrl().contains("/estimate-drug-costs.html"))
+			return new DrugCostEstimatorPage(driver);
 		return null;
-	}   	
+	}
+
+	public boolean validateCompareBoxMessage() {
+		JavascriptExecutor je = ((JavascriptExecutor) driver);
+		je.executeScript("arguments[0].scrollIntoView(true);",compareChkBox);
+		CommonUtility.waitForPageLoad(driver, drugBenefitsSection, 20);
+		compareChkBox.click();
+		try {
+			Thread.sleep(1000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		if(compareMessageBox.getText().contains("2 plans added") && compareMessageBox.getText().contains("Compare plans") )
+			return true;
+		return false;
+	}
 
 
 

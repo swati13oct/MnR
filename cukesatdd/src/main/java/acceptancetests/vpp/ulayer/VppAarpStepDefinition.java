@@ -91,7 +91,7 @@ public class VppAarpStepDefinition {
 			getLoginScenario().saveBean(PageConstants.VPP_PLAN_SUMMARY_PAGE,
 					plansummaryPage);
 			/* Get expected data */
-			/*String fileName = "vppPlanSummary";
+			String fileName = "vppPlanSummary";
 			String directory = CommonConstants.ACQUISITION_EXPECTED_DIRECTORY
 					+ File.separator + CommonConstants.SITE_ULAYER
 					+ File.separator + VPPCommonConstants.VPP_PLAN_FLOW_NAME
@@ -103,16 +103,16 @@ public class VppAarpStepDefinition {
 					VPPCommonConstants.VPP_PLAN_SUMMARY_EXPECTED,
 					planSummaryExpectedJson);
 
-			 Get actual data 
+			/* Get actual data */
 			JSONObject planSummaryActualJson = plansummaryPage.vppPlanSummaryJson;
 			getLoginScenario().saveBean(
 					VPPCommonConstants.VPP_PLAN_SUMMARY_ACTUAL,
-					planSummaryActualJson);*/
+					planSummaryActualJson);
 		}
 	}
 
 	@And("^the user views plans of the below plan type in AARP site$")
-	public void user_performs_planSearch_in_aarp_site(DataTable givenAttributes) {
+	public void user_performs_planSearch_in_aarp_site(DataTable givenAttributes) throws InterruptedException {
 		List<DataTableRow> givenAttributesRow = givenAttributes
 				.getGherkinRows();
 		Map<String, String> givenAttributesMap = new HashMap<String, String>();
@@ -165,7 +165,7 @@ public class VppAarpStepDefinition {
 /*------- */
 	
 	@And("^the user selects the plan in AARP site$")
-	public void user_selects_plan(DataTable givenAttributes){
+	public void user_selects_plan(DataTable givenAttributes) throws InterruptedException{
 		List<DataTableRow> givenAttributesRow = givenAttributes
 				.getGherkinRows();
 		Map<String, String> givenAttributesMap = new HashMap<String, String>();
@@ -1186,7 +1186,7 @@ System.out.println("planSummaryExpectedJson---->"
 	}
 	
 	@When("^the user views plans of the below plan type in AARP site during AEP$")
-	public void user_performs_planSearch_in_aarp_site_aep(DataTable givenAttributes) {
+	public void user_performs_planSearch_in_aarp_site_aep(DataTable givenAttributes) throws InterruptedException {
 		List<DataTableRow> givenAttributesRow = givenAttributes
 				.getGherkinRows();
 		Map<String, String> givenAttributesMap = new HashMap<String, String>();
@@ -1425,7 +1425,7 @@ System.out.println("planSummaryExpectedJson---->"
 	}
 
 	@Then ("^user select MA/MAPD/PDP plans on plan summary page using following information during AEP period$")
-	public void click_on_showplans(DataTable givenAttributes) {
+	public void click_on_showplans(DataTable givenAttributes) throws InterruptedException {
 		VPPPlanSummaryPage plansummary = (VPPPlanSummaryPage) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 		List<DataTableRow> memberAttributesRow = givenAttributes
@@ -1488,7 +1488,7 @@ System.out.println("planSummaryExpectedJson---->"
 	}
 	
 	@When("^the user navigates to the following plan type$")
-	public void planType_details_in_aarp_site(DataTable givenAttributes) {
+	public void planType_details_in_aarp_site(DataTable givenAttributes) throws InterruptedException {
 
 		List<DataTableRow> memberAttributesRow = givenAttributes
 				.getGherkinRows();
@@ -1536,7 +1536,7 @@ System.out.println("planSummaryExpectedJson---->"
 			
 	}
 	@When("user views plans of the below plan in aarp site$")
-	public void user_performs_planSearch_UMS_site(DataTable givenAttributes) {
+	public void user_performs_planSearch_UMS_site(DataTable givenAttributes) throws InterruptedException {
 		List<DataTableRow> givenAttributesRow = givenAttributes
 				.getGherkinRows();
 		Map<String, String> givenAttributesMap = new HashMap<String, String>();
@@ -1659,7 +1659,7 @@ System.out.println("planSummaryExpectedJson---->"
 	public void user_clicks_on_Chat_Now_button() {
 		VPPPlanSummaryPage vppPlanSummaryPage = (VPPPlanSummaryPage) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
-		 vppPlanSummaryPage.clickReactiveChat();
+		vppPlanSummaryPage.clickReactiveChat();
 	}
 	
 	@Then("^the reactive chat should display$")
@@ -1667,27 +1667,5 @@ System.out.println("planSummaryExpectedJson---->"
 		VPPPlanSummaryPage vppPlanSummaryPage = (VPPPlanSummaryPage) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 		vppPlanSummaryPage.validateReactiveChat();
-	}
-
-@And("^the user validates the view plan details link displayed for the selected plan$")
-	public void validates_planDetails_links_AARP(DataTable givenAttributes){
-		List<DataTableRow> memberAttributesRow = givenAttributes
-				.getGherkinRows();
-		Map<String, String> memberAttributesMap = new HashMap<String, String>();
-		for (int i = 0; i < memberAttributesRow.size(); i++) {
-
-			memberAttributesMap.put(memberAttributesRow.get(i).getCells()
-					.get(0), memberAttributesRow.get(i).getCells().get(1));
-		}
-
-		String planName = memberAttributesMap.get("Plan Name");
-		getLoginScenario().saveBean(VPPCommonConstants.PLAN_NAME, planName);
-		
-		String planType = (String) getLoginScenario().getBean(VPPCommonConstants.PLAN_TYPE);
-
-		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
-				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);	
-		
-		plansummaryPage.validateViewPlanDetailsLink(planType,planName);
 	}
 }

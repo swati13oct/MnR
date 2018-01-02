@@ -288,6 +288,7 @@ public class MyProfilesPage extends UhcDriver {
 		for (String key : myProfiles.getExpectedData().keySet()) {
 			WebElement element = findElement(myProfiles.getExpectedData().get(
 					key));
+			if(element!=null){
 			validate(element);
 			try {
 				jsonObject.put(key, element.getText());
@@ -295,6 +296,7 @@ public class MyProfilesPage extends UhcDriver {
 
 			} catch (JSONException e) {
 				e.printStackTrace();
+			}
 			}
 
 		}

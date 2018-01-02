@@ -22,12 +22,13 @@ import gherkin.formatter.model.DataTableRow;
 import pages.member.bluelayer.AccountHomePage;
 import pages.member.bluelayer.ContactUsPage;
 import pages.member.bluelayer.LoginPage;
+import pages.member.redesign.NewLoginPage;
+import pages.member.redesign.TestHarnessPage;
 
 public class ContactUSRedesignUmsStepDefinition {
 	/**
 	 * 
 	 */
-
 		@Autowired
 		MRScenario loginScenario;
 
@@ -36,35 +37,8 @@ public class ContactUSRedesignUmsStepDefinition {
 		}
 		
 		@Given("^registered UMS member with following attributes$")
-		public void registered_member_orderplanmaterials_ums(
-				DataTable givenAttributes) {
+		public void registered_member_orderplanmaterials_ums(DataTable givenAttributes) {
 
-			/* Reading the given attribute from feature file */
-			/*List<List<String>> dataTable = memberAttributes.raw();
-			List<String> desiredAttributes = new ArrayList<String>();
-
-			for (List<String> data : dataTable) {
-				desiredAttributes.add(data.get(1));
-			}
-			System.out.println("desiredAttributes.." + desiredAttributes);
-			Map<String, String> loginCreds = loginScenario
-					.getUMSMemberWithDesiredAttributes(desiredAttributes);
-
-			String userName = "";
-			String pwd = "";
-			if (loginCreds == null) {
-				// no match found
-				System.out.println("Member Type data could not be setup !!!");
-				Assert.fail("unable to find a " + desiredAttributes + " member");
-			} else {
-				userName = loginCreds.get("user");
-				pwd = loginCreds.get("pwd");
-				System.out.println("User is..." + userName);
-				System.out.println("Password is..." + pwd);
-				getLoginScenario()
-				.saveBean(LoginCommonConstants.USERNAME, userName);
-				getLoginScenario().saveBean(LoginCommonConstants.PASSWORD, pwd);
-			}*/
 			List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
 			Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
 			for (int i = 0; i < memberAttributesRow.size(); i++) {
@@ -74,59 +48,34 @@ public class ContactUSRedesignUmsStepDefinition {
 			String userName = memberAttributesMap.get("UserName");
 			String passWord = memberAttributesMap.get("Password");
 			String category = memberAttributesMap.get("Member Type");
-			
-		WebDriver wd = getLoginScenario().getWebDriver();
+			System.out.println("User is..." + userName);
+			System.out.println("Password is..." + passWord);
+			WebDriver wd = getLoginScenario().getWebDriver();
 			getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
 
-			LoginPage loginPage = new LoginPage(wd);
-			AccountHomePage accountHomePage = (AccountHomePage) loginPage.loginWith(userName, passWord,category);
-			if (accountHomePage != null) {
-				getLoginScenario().saveBean(PageConstants.ACCOUNT_HOME_PAGE,
-						accountHomePage);
-				Assert.assertTrue(true);
-				getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
-			} 
+			NewLoginPage loginPage = new NewLoginPage(wd);
+			
+			TestHarnessPage testHarnessPage = (TestHarnessPage) loginPage.loginWith(userName, passWord);
 
-			if (accountHomePage != null) {
+			if (testHarnessPage != null) {
 				getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
-				getLoginScenario().saveBean(PageConstants.ACCOUNT_HOME_PAGE,accountHomePage);
+				getLoginScenario().saveBean(PageConstants.TEST_HARNESS_PAGE,testHarnessPage);
 				Assert.assertTrue(true);
 			}
 			
-			getLoginScenario().saveBean(PageConstants.ACCOUNT_HOME_PAGE,
-					accountHomePage);
-
-			
+			getLoginScenario().saveBean(PageConstants.TEST_HARNESS_PAGE,
+					testHarnessPage);
 		}
-		
-		
-
-		/*@When("^the user navigates to redesign contact us page in AARP site$")
-		public void views_order_materials_in_redesignUms_site() {
-			AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario()
-					.getBean(PageConstants.ACCOUNT_HOME_PAGE);
-			ContactUsPage contactUsPage = accountHomePage
-					.navigatesToContactUsPage();
-			if (contactUsPage != null) {
-
-				getLoginScenario().saveBean(PageConstants.CONTACT_US_PAGE,
-						contactUsPage);
-
-			}
-
-		}*/
-		
-		
 		
 		@When("^the user navigates to contact us page in UHC site$")
 		public void validates_contactUs_Redesign_Page() {
 			
-			AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstants.ACCOUNT_HOME_PAGE);
+			TestHarnessPage testHarnessPage = (TestHarnessPage) getLoginScenario().getBean(PageConstants.TEST_HARNESS_PAGE);
 			
-			ContactUsPage contactUsPage = accountHomePage.navigateToContactusRedesignPage();
+			/*ContactUsPage contactUsPage = testHarnessPage.navigateToContactUsPage();
 			if(contactUsPage != null)				
 				getLoginScenario().saveBean(PageConstants.CONTACT_US_PAGE,
-						contactUsPage);
+						contactUsPage);*/
 		}
 		
 		@Then("^user validates secure email widget UI in redesign contact us page$")

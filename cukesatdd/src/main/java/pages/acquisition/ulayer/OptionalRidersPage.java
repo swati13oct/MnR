@@ -101,6 +101,12 @@ public class OptionalRidersPage extends UhcDriver{
 		private WebElement optHeader;
 		
 		public boolean validateOptionalRidersPage(){
+			try {
+				Thread.sleep(5000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			boolean flag = false;
 			if(validate(optHeader)&&validate(optionalridersprevious)&&validate(optionalriderssaveandcontinue)&&
 			validate(optionalriderscancelregristration))//&&validate(optno))

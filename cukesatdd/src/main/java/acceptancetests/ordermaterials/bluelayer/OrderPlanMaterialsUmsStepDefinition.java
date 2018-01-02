@@ -20,10 +20,12 @@ import org.openqa.selenium.WebDriver;
 import org.skyscreamer.jsonassert.JSONAssert;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import pages.member.bluelayer.AccountHomePage;
-import pages.member.bluelayer.LoginPage;
-import pages.member.bluelayer.OrderplanmaterialsPage;
-import pages.member.bluelayer.PlanMaterialConfirmationPage;
+import pages.redesign.BlueLayerHomePage;
+import pages.redesign.RedesignLoginPage;
+//import pages.redesign.BlueLayerLoginPage;
+
+import pages.redesign.OrderplanmaterialsPage;
+import pages.redesign.PlanMaterialConfirmationPage;
 import acceptancetests.atdd.data.CommonConstants;
 import acceptancetests.atdd.data.member.PageConstants;
 import acceptancetests.login.data.LoginCommonConstants;
@@ -94,27 +96,29 @@ public class OrderPlanMaterialsUmsStepDefinition {
 			getLoginScenario().saveBean(LoginCommonConstants.PASSWORD, pwd);
 		}
 
+		
+		
 		WebDriver wd = getLoginScenario().getWebDriver();
 
-		LoginPage loginPage = new LoginPage(wd);
-		AccountHomePage accountHomePage = (AccountHomePage)loginPage.loginWith(userName, pwd, category);
-		JSONObject accountHomeActualJson = null;
+		RedesignLoginPage loginPage = new RedesignLoginPage(wd);
+		BlueLayerHomePage accountHomePage = (BlueLayerHomePage)loginPage.loginWith(userName, pwd, category);
+		//JSONObject accountHomeActualJson = null;
 		
 		/* Get expected data */
-		Map<String, JSONObject> expectedDataMap = loginScenario
+		/*Map<String, JSONObject> expectedDataMap = loginScenario
 				.getExpectedJson(userName);
 		JSONObject accountHomeExpectedJson = accountHomePage
-				.getExpectedData(expectedDataMap);
+				.getExpectedData(expectedDataMap);*/
 
 		/* get actual data */
 		if (accountHomePage != null) {
 			getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
 			getLoginScenario().saveBean(PageConstants.ACCOUNT_HOME_PAGE,
 					accountHomePage);
-			Assert.assertTrue(true);
-			accountHomeActualJson = accountHomePage.accountHomeJson;
+			/*Assert.assertTrue(true);
+			accountHomeActualJson = accountHomePage.accountHomeJson;*/
 		}
-		System.out.println("accountHomeActualJson====>"
+		/*System.out.println("accountHomeActualJson====>"
 				+ accountHomeActualJson.toString());
 		System.out.println("accountHomeExpectedJson====>"
 				+ accountHomeExpectedJson.toString());
@@ -127,32 +131,35 @@ public class OrderPlanMaterialsUmsStepDefinition {
 		}
 
 		getLoginScenario().saveBean(CommonConstants.EXPECTED_DATA_MAP,
-				expectedDataMap);
+				expectedDataMap);*/
 
 	}
 
-	@When("^the user navigates to order plan materials through mymenu tab in UHC site$")
-	public void views_order_materials_in_Ums_site() {
-		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario()
-				.getBean(PageConstants.ACCOUNT_HOME_PAGE);
-		OrderplanmaterialsPage orderPlanMaterialsPage = accountHomePage
-				.navigateToOrderPlanMaterialsPage();
-		if (orderPlanMaterialsPage != null) {
-			getLoginScenario().saveBean(
-					PageConstants.ORDER_PLAN_MATERIALS_PAGE,
-					orderPlanMaterialsPage);
-			Assert.assertTrue(true);
-		} else {
-			Assert.fail("Error in loading  orderPlanMaterialsPage");
+	@And("^the user validate order additional material and click to add other order additional material in Order Confirmation Page$")
+	public void validate_add_order_additional_material_for_pdp_in_Redesign_site() {
+		PlanMaterialConfirmationPage planMaterialConfirmationPage = (PlanMaterialConfirmationPage) getLoginScenario()
+				.getBean(PageConstants.PLAN_MATERIALS_CONFIRMATION_PAGE);
+		OrderplanmaterialsPage orderPlanMaterialsPage = (OrderplanmaterialsPage) getLoginScenario().getBean(PageConstants.ORDER_PLAN_MATERIALS_PAGE);
+		boolean flag = true;
+		if (planMaterialConfirmationPage == null){
+			System.out.println("@@@@@@@@@@  Order Material Failed  @@@@@@@@@@");
+			flag = orderPlanMaterialsPage.ValidateErrorMessage();
+			Assert.fail("Order Plan Materials Submission Failed. Confirmation page not displayed");
+		}
+		else{
+			System.out.println("@@@@@@@@@@  Order Material Confirmation Displayed  @@@@@@@@@@");
+
+		orderPlanMaterialsPage = planMaterialConfirmationPage.navigateToValidateOrderConfirmationInRedesignPage();
+		Assert.assertTrue(true);
 		}
 	}
 
-	@And("^the user selects an option from the order plan material list in UHC site$")
-	public void user_selects_member_materials(DataTable givenAttributes) {
 
-		OrderplanmaterialsPage orderPlanMaterialsPage = (OrderplanmaterialsPage) getLoginScenario()
-				.getBean(PageConstants.ORDER_PLAN_MATERIALS_PAGE);
+	@And("^the user selects an option from the orderp list in Redesign site$")
+	public void user_selects_Options_Multiple_Plan_member_materials(DataTable givenAttributes) {
 
+		OrderplanmaterialsPage orderPlanMaterialsPage = (OrderplanmaterialsPage) getLoginScenario().getBean(PageConstants.ORDER_PLAN_MATERIALS_PAGE);
+		
 		List<DataTableRow> givenAttributesRow = givenAttributes
 				.getGherkinRows();
 		Map<String, String> givenAttributesMap = new HashMap<String, String>();
@@ -160,63 +167,81 @@ public class OrderPlanMaterialsUmsStepDefinition {
 			givenAttributesMap.put(givenAttributesRow.get(i).getCells().get(0),
 					givenAttributesRow.get(i).getCells().get(1));
 		}
+		String plantype = givenAttributesMap.get("Plan Type");
 		String option = givenAttributesMap.get("Option");
-
-		PlanMaterialConfirmationPage planMaterialConfirmationPage = orderPlanMaterialsPage
-				.selectsOption(option);
-
-		/* Get expected data */
-		@SuppressWarnings("unchecked")
-		Map<String, JSONObject> expectedDataMap = (Map<String, JSONObject>) getLoginScenario()
-				.getBean(CommonConstants.EXPECTED_DATA_MAP);
-		JSONObject planMaterialConfirmationExpectedJson = planMaterialConfirmationPage
-				.getExpectedData(expectedDataMap);
-		getLoginScenario()
-				.saveBean(
-						OrderPlanMaterialsCommonConstants.PLAN_MATERIALS_CONFIRMATION_EXPECTED,
-						planMaterialConfirmationExpectedJson);
-
-		// get actual data
-		JSONObject planMaterialConfirmationActualJson = null;
+		
+			System.out.println("**************Plan Tab to to Select is : "+plantype+"+++++++++++++");
+			boolean TabPresent = orderPlanMaterialsPage.navigatePlanTabs(plantype);
+		
+		System.out.println("**************Radio Option to Select is : "+option+"+++++++++++++");
+		PlanMaterialConfirmationPage planMaterialConfirmationPage = orderPlanMaterialsPage.selectsOption(option);
 		if (planMaterialConfirmationPage != null) {
-			getLoginScenario().saveBean(
-					PageConstants.PLAN_MATERIALS_CONFIRMATION_PAGE,
+			getLoginScenario().saveBean(PageConstants.PLAN_MATERIALS_CONFIRMATION_PAGE,
 					planMaterialConfirmationPage);
-			Assert.assertTrue(true);
-			planMaterialConfirmationActualJson = planMaterialConfirmationPage.planMaterialsConfirmationJson;
-			getLoginScenario()
-					.saveBean(
-							OrderPlanMaterialsCommonConstants.PLAN_MATERIALS_CONFIRMATION_ACTUAL,
-							planMaterialConfirmationActualJson);
+			System.out.print("Order Plan Material Confirmation Page displayed");
 		}
-
-	}
-
-	@Then("^the user validates the plan materials under plan document section in UHC site$")
-	public void validates_plan_materials_plan_document_section_ums() {
-		PlanMaterialConfirmationPage planMaterialConfirmationPage = (PlanMaterialConfirmationPage) getLoginScenario()
-				.getBean(PageConstants.PLAN_MATERIALS_CONFIRMATION_PAGE);
-
-		JSONObject planMaterialsConfirmationActualJson = (JSONObject) getLoginScenario()
-				.getBean(OrderPlanMaterialsCommonConstants.PLAN_MATERIALS_CONFIRMATION_ACTUAL);
-		JSONObject planMaterialsConfirmationExpectedJson = (JSONObject) getLoginScenario()
-				.getBean(OrderPlanMaterialsCommonConstants.PLAN_MATERIALS_CONFIRMATION_EXPECTED);
-
-		System.out.println("planMaterialsConfirmationActualJson=====>"
-				+ planMaterialsConfirmationActualJson.toString());
-		System.out.println("planMaterialsConfirmationExpectedJson=====>"
-				+ planMaterialsConfirmationExpectedJson.toString());
-		try {
-			JSONAssert.assertEquals(planMaterialsConfirmationExpectedJson,
-					planMaterialsConfirmationActualJson, true);
-		} catch (JSONException e) {
-			e.printStackTrace();
+		else{
+			getLoginScenario().saveBean(PageConstants.ORDER_PLAN_MATERIALS_PAGE,
+					orderPlanMaterialsPage);
+			System.out.print("Order Plan Material Confirmation Page not displayed");
 		}
-		planMaterialConfirmationPage.logOut();
-
 	}
 	
-	@Then("^the user validates add plan link on order and beneefits page$")
+	@When("^the user views order materials in UHC site$")
+	public void views_order_plan_materials_in_Ums_site() {
+		BlueLayerHomePage accountHomePage = (BlueLayerHomePage) getLoginScenario().getBean(PageConstants.ACCOUNT_HOME_PAGE);
+		OrderplanmaterialsPage orderPlanMaterialsPage = accountHomePage.navigateToOrderPlanMaterialsPage();
+	
+		if (orderPlanMaterialsPage != null) {
+		
+			getLoginScenario().saveBean(PageConstants.ORDER_PLAN_MATERIALS_PAGE,
+					orderPlanMaterialsPage);
+			System.out.println("@@@@ Order Plan Materials Page is Loaded @@@@");
+			Assert.assertTrue(true);
+		}
+		else {
+			Assert.fail("Error in loading  orderPlanMaterialsPage");
+		}
+		
+	}
+	
+	
+	@Then("^user navigates to Order Materials page for all Plans$")
+	public void user_navigates_Plan_Tabs(DataTable givenAttributes) {
+
+		OrderplanmaterialsPage orderPlanMaterialsPage = (OrderplanmaterialsPage) getLoginScenario().getBean(PageConstants.ORDER_PLAN_MATERIALS_PAGE);
+		
+		List<DataTableRow> givenAttributesRow = givenAttributes
+				.getGherkinRows();
+		Map<String, String> givenAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < givenAttributesRow.size(); i++) {
+			givenAttributesMap.put(givenAttributesRow.get(i).getCells().get(0),
+					givenAttributesRow.get(i).getCells().get(1));
+		}
+		String PlanTypes = givenAttributesMap.get("Combo Plans");
+		String[] Plans= PlanTypes.split(",");
+		for(String currentPlan: Plans){
+			boolean TabPresent = orderPlanMaterialsPage.navigatePlanTabs(currentPlan);
+			if(!TabPresent){
+				System.out.println("Plan Tab not displayed "+currentPlan);
+			}
+
+			if(!orderPlanMaterialsPage.ValidateHeader()){
+				System.out.println("Header Text and Subtext not displayed for "+currentPlan);
+			}
+		}
+		
+	}
+@And("^user Validates Page Header and Sub-Header text$")
+	public void user_validates_orderMaterialsHeader(){
+		OrderplanmaterialsPage orderPlanMaterialsPage = (OrderplanmaterialsPage) getLoginScenario().getBean(PageConstants.ORDER_PLAN_MATERIALS_PAGE);
+		if(!orderPlanMaterialsPage.ValidateHeader()){
+			System.out.println("Header Text and Subtext not displayed for Order materials Page");
+		}
+		
+	}
+
+@Then("^the user validates add plan link on order and beneefits page$")
 	public void the_user_validates_add_plan_link_on_order_and_beneefits_page() {
 	     System.out.println("-----------Order Plan Material page validation started------------");
 	     OrderplanmaterialsPage orderPlanMaterialPage = (OrderplanmaterialsPage) getLoginScenario()
@@ -235,5 +260,7 @@ public class OrderPlanMaterialsUmsStepDefinition {
 	 		}
 	     System.out.println("-----------Order Plan Material page validation ended--------------");
 	}
+
+	
 
 }

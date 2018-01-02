@@ -3,13 +3,12 @@
  */
 package pages.member.ulayer;
 
-import java.util.List;
-import java.util.Map;
+import java.util.List;import java.util.Map;
 
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
+import org.junit.Assert;
+import org.openqa.selenium.By; import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
@@ -82,7 +81,7 @@ public class ContactUsPage extends UhcDriver{
 	@FindBy(xpath = "//div[contains(@class,'parsys click-to-call')]/div/div[not (contains(@class,'ng-hide'))]//a[@id='call-btn']")
 	private WebElement sendArequest;
 	
-	@FindBy(xpath = "//*[@id='call-submit']/span")
+	@FindBy(xpath = "//div[contains(@class,'click-to-call')]/div/div[3]//form//button[@id='call-submit']")
 	private WebElement requestCall;;
 	
 	
@@ -92,7 +91,7 @@ public class ContactUsPage extends UhcDriver{
 	@FindBy(xpath = "//*[@id='call-question-about'] ")
 	private WebElement other;
 	
-	@FindBy(xpath = "//*[@id='call-cancel'] ")
+	@FindBy(xpath = "//div[contains(@class,'click-to-call')]/div/div[3]//form//a[@id='call-cancel']")
 	private WebElement callCancel;
 	
 	@FindBy(xpath = "//div[contains(@class,'parsys click-to-call')]/div/div[not (contains(@class,'ng-hide'))]//div[@class='message-block--full-width success margin-none']")
@@ -105,24 +104,44 @@ public class ContactUsPage extends UhcDriver{
 	private JSONObject secureemailwidgetDataJson;
 	
 	public JSONObject contactUsJson;
+	@FindBy(xpath="//*[@id='secureWidget']/div[2]/p[4]/a/span")
+	private WebElement getstartedlink;
 	
+	@FindBy(xpath="//*[@id='modelContent']/div[1]")
+	private WebElement emialUslink;
+	
+	
+	@FindBy(xpath="//*[@id='contActButton']")
+	private WebElement continuelink;
+	
+	@FindBy(css="#secureWidget")
+	private WebElement securewidgetlink;
 	@FindBy(xpath="//*[@id='question-btn']")
 	private WebElement fillOutFormButton;	
 	
 	@FindBy(css="h2.plan.margin-large>span")
 	private WebElement pdpHeader;	
-	
-	
-	
-	public ContactUsPage(WebDriver driver) {
+		public ContactUsPage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
 		String fileName = CommonConstants.CONTACT_US_PAGE_DATA;
 		contactUs = CommonUtility.readPageData(fileName,
 				CommonConstants.PAGE_OBJECT_DIRECTORY_ULAYER_MEMBER);
-		openAndValidate();
+		//openAndValidate();
 		
 	}
+	
+	public boolean Validate_Single_Tab_SHIP(){
+		List<WebElement> PlanTabs = driver.findElements(By.xpath("//a[contains(text(),'Supplemental  Insurance Plans')]"));
+		System.out.println("No of tabs: "+PlanTabs.size());
+		if(PlanTabs.size()>1){
+			return false;
+		}
+		else{
+			return true;
+		}
+	}
+
 
 	@Override
 	public void openAndValidate() {
@@ -160,14 +179,28 @@ public class ContactUsPage extends UhcDriver{
 		if (securewidget.isDisplayed())
 		{
 			System.out.println("Secure widget is displayed");
+			Assert.assertTrue("Secure Email widget is displayed", securewidget.isDisplayed());
+			
 		}
 		else
 		{
 			System.out.println("Secure widget is not  displayed");
 		}
 	}
+public void secureEmailWidgetDisplayed(){
+		
+			Assert.assertTrue("Secure Email widget is displayed", securewidget.isDisplayed());
+			
+		
+	}
 	
-	public void validateEmailWidgetSection()
+	public void secureEmailWidgetNonDisplayedCheck(){
+			/*Assert.assertEquals("display: block;", securewidgetlink.getAttribute("style"));*/
+		
+			Assert.assertTrue("Secure Email widget not displayed", !securewidget.isDisplayed());
+			
+	}
+public void validateEmailWidgetSection()
 	{
 		if (getStartedButton.isDisplayed())
 		{
@@ -523,14 +556,14 @@ public class ContactUsPage extends UhcDriver{
 			System.out.println("send a req  is displayed");
 			sendArequest.click();
 			try {
-				Thread.sleep(5000);
+				Thread.sleep(8000);
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			Select dropdown = new Select(driver.findElement(By.id("call-question-about")));
 			System.out.println("dropdown" +dropdown);
-			dropdown.getFirstSelectedOption().click();
+			/*dropdown.getFirstSelectedOption().click();*/
 			dropdown.selectByVisibleText("Benefits");
 			try {
 				Thread.sleep(5000);
@@ -538,7 +571,6 @@ public class ContactUsPage extends UhcDriver{
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			dropdown.selectByVisibleText("Other");
 			try {
 				Thread.sleep(5000);
 			} catch (InterruptedException e) {
@@ -573,15 +605,13 @@ public class ContactUsPage extends UhcDriver{
 			}
 			Select dropdown = new Select(driver.findElement(By.id("call-question-about")));
 			System.out.println("dropdown" +dropdown);
-			dropdown.getFirstSelectedOption().click();
-			dropdown.selectByVisibleText("Benefits");
 			try {
 				Thread.sleep(5000);
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			driver.findElement(By.id("call-number")).sendKeys("9023456121");
+			driver.findElement(By.xpath("//div[contains(@class,'click-to-call')]/div/div[3]//form//input[@id='call-number']")).sendKeys("9023456121");
 			requestCall.click();
 			try {
 				Thread.sleep(5000);
@@ -617,9 +647,7 @@ public class ContactUsPage extends UhcDriver{
 		{
 			System.out.println("send us Question is not  displayed");
 		}
-	}
-
-	public JSONObject getsecurewidget() {
+	}	public JSONObject getsecurewidget() {
 		String fileName = CommonConstants.AARPM_SECURE_EMAIL_DATA;
 		secureemailwidgetData = CommonUtility.readPageData(fileName,
 				CommonConstants.PAGE_OBJECT_DIRECTORY_ULAYER_MEMBER);
