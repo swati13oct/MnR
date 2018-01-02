@@ -535,7 +535,7 @@ public BLayerPlanComparePage TeamCviewPlanSummary(String planType) throws Interr
 //	JavascriptExecutor js = (JavascriptExecutor)driver;
 	
 		
-	Thread.sleep(5000);
+	Thread.sleep(9000);
 	if (planType.equalsIgnoreCase("PDP")) {
 		viewPdpPlans.click();
 		return new BLayerPlanComparePage(driver);
