@@ -1,6 +1,7 @@
 package acceptancetests.dashboard.claims.aarplayer;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -132,18 +133,32 @@ public class ClaimsAarpStepDefinition {
 		if(newClaimsSummaryPage != null)
 			getLoginScenario().saveBean(PageConstants.NEW_CLAIMS_SUMMARY_PAGE, newClaimsSummaryPage);
 	}
-	
+
 	@And("^the user search claims for the following claim period in AARP site$")
 	public void search_claims_period_redesigned_site(DataTable timeAttributes){
 		List<DataTableRow> timeAttributesRow = timeAttributes.getGherkinRows();
-		String claimPeriod = timeAttributesRow.get(0).getCells().get(0);
+		Map<String, String> urlAttributesMap = new HashMap<String, String>();
+
+		for (int i = 0; i < timeAttributesRow.size(); i++) {
+
+		urlAttributesMap .put(timeAttributesRow.get(i).getCells()
+		.get(0), timeAttributesRow.get(i).getCells().get(1));
+		}
 		
+		System.out.println(urlAttributesMap.get("Claim Period"));
+		String s=urlAttributesMap.get("Claim Period");
+		
+		//String claimPeriod = timeAttributesRow.get(0).getCells().get(0);
+		//String s = urlAttributesMap.get(key)
+		//System.out.println(claimPeriod);
+
 		ClaimSummarypage newClaimsSummaryPage = (ClaimSummarypage) getLoginScenario().getBean(PageConstants.NEW_CLAIMS_SUMMARY_PAGE);
-		newClaimsSummaryPage.searchClaimsByTimePeriod(claimPeriod);
+		
+		newClaimsSummaryPage.searchClaimsByTimePeriod("s");
 
 		if(newClaimsSummaryPage != null)
 			getLoginScenario().saveBean(PageConstants.NEW_CLAIMS_SUMMARY_PAGE, newClaimsSummaryPage);
-		
+
 	}
 
 
@@ -156,12 +171,12 @@ public class ClaimsAarpStepDefinition {
 			getLoginScenario().saveBean(PageConstants.NEW_CLAIMS_SUMMARY_PAGE, newClaimsSummaryPage);
 
 	}
-	
+
 	@And("^the user validates the EOB section based on domain in redesigned site$")
 	public void validates_EOB_redesigned_site(DataTable memberAttributes){
 		List<DataTableRow> memberAttributesRow = memberAttributes
 				.getGherkinRows();
-		
+
 		for (int i = 0; i < memberAttributesRow.size(); i++) {
 
 			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0), memberAttributesRow.get(i).getCells().get(1));
@@ -171,20 +186,20 @@ public class ClaimsAarpStepDefinition {
 
 		ClaimSummarypage newclaimsSummarypage = (ClaimSummarypage) getLoginScenario().getBean(PageConstants.NEW_CLAIMS_SUMMARY_PAGE);
 		newclaimsSummarypage.validateEobfordifferentDomainType(domain, planType);
-		
+
 		if(newclaimsSummarypage != null)
 			getLoginScenario().saveBean(PageConstants.NEW_CLAIMS_SUMMARY_PAGE, newclaimsSummarypage);
 	}
-	
+
 	@And("^the user validates the DownloadMyData section in redesigned site$")
 	public void validates_DownloadMyData_redesigned_site(){
 		ClaimSummarypage newclaimsSummarypage = (ClaimSummarypage) getLoginScenario().getBean(PageConstants.NEW_CLAIMS_SUMMARY_PAGE);
 		newclaimsSummarypage.validateDownloadMyData();
-		
+
 		if(newclaimsSummarypage != null)
 			getLoginScenario().saveBean(PageConstants.NEW_CLAIMS_SUMMARY_PAGE, newclaimsSummarypage);
 	}	
-	
+
 
 	@When("^I navigate to the Claims Summary page in AARP site$")	
 	public void i_navigate_to_member_redesign_claims_page(){
@@ -309,22 +324,44 @@ public class ClaimsAarpStepDefinition {
 	@Then("^I validate the Learn more section in claims details page in AARP site$")
 	public void validate_Learn_More_details_AARP(){
 		ClaimDetailsPage claimDetailspage = (ClaimDetailsPage) getLoginScenario().getBean(PageConstants.NEW_CLAIM_DETAILS_PAGE);
-		claimDetailspage.validateLearnMoreInDetailsPage();
-		
+		claimDetailspage.validateLearnMoreInDetailsPage();		
 	}
-	@Then("^I can view a claim search back button in Claims Details page in AARP site$")
+
+	@And("^the user validates the header in claims details in AARP site$")
+	public void validate_header_claims_details_AARP(){
+		ClaimDetailsPage claimDetailspage = (ClaimDetailsPage) getLoginScenario().getBean(PageConstants.NEW_CLAIM_DETAILS_PAGE);
+		claimDetailspage.validateClaimSearch();
+		claimDetailspage.validateHeader();
+		claimDetailspage.clickOnEOB();		
+	}
+
+	@And("^the user validates the EOB section in claims details page in AARP site$")
+	public void validates_EOB_claimsDetails_AARP(){
+		ClaimDetailsPage claimDetailspage = (ClaimDetailsPage) getLoginScenario().getBean(PageConstants.NEW_CLAIM_DETAILS_PAGE);
+		claimDetailspage.validateEOB();
+	}
+
+	@And("^I validate the Claims Table in claims details page in AARP site$")
+	public void validate_claimsTable_claimsDetails_AARP(){
+		ClaimDetailsPage claimDetailspage = (ClaimDetailsPage) getLoginScenario().getBean(PageConstants.NEW_CLAIM_DETAILS_PAGE);
+		claimDetailspage.validateClaimsTableInDetailsPage();
+	}
+	
+	@And("^I validate the Claims Total in claims details page in AARP site$")
+	public void validate_claims_total_AARP(){
+		ClaimDetailsPage claimDetailspage = (ClaimDetailsPage) getLoginScenario().getBean(PageConstants.NEW_CLAIM_DETAILS_PAGE);
+		claimDetailspage.validateClaimsTotalInDetailsPage();
+	}
+	
+	/*@Then("^I can view a claim search back button in Claims Details page in AARP site$")
 	public void validate_claim_search_button()
 	{
 		ClaimDetailsPage claimDetailspage = (ClaimDetailsPage) getLoginScenario().getBean(PageConstants.NEW_CLAIM_DETAILS_PAGE);
 
 		Assert.assertTrue(claimDetailspage.validateClaimSearch());
-	}
+	}*/
+
 	
-	@Then("^I validate the Claims Table in claims details page in AARP site$")
-	public void validate_claimsTable_claimsDetails_AARP(){
-		ClaimDetailsPage claimDetailspage = (ClaimDetailsPage) getLoginScenario().getBean(PageConstants.NEW_CLAIM_DETAILS_PAGE);
-		claimDetailspage.validateClaimsTableInDetailsPage();
-	}
 
 	@And("^A Page Header in Claims Details page in AARP site$")
 	public void validate_the_details_header()
