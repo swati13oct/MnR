@@ -24,6 +24,7 @@ import acceptancetests.atdd.data.MRConstants;
 import acceptancetests.atdd.data.PageData;
 import acceptancetests.atdd.util.CommonUtility;
 import atdd.framework.UhcDriver;
+import pages.acquisition.bluelayer.PlanComparePage;
 import pages.member.ulayer.Rallytool_Page;
 import pages.mobile.acquisition.ulayer.VPPAarpNeedAStepBackWidget;
 import pages.mobile.acquisition.ulayer.VPPAarpNeedHelpWidgetPage;
@@ -110,8 +111,8 @@ public class ResponsivePlanSummary extends UhcDriver{
 		@FindBy(xpath="//*[@class='tab active' and contains(text(),'Medicare Advantage Plans')]/div[1]/span[3]")
 		private WebElement showMaPlansNotClickable;
 		
-		//@FindBy(xpath = "//*[@class='tab med-supp']/div[1]/span[3]")
-		@FindBy(xpath = "(//*[@id='site-wrapper']//div[@class='content-section']//div[@class='parbase vppClient section']//div[@class='parsys planCountPar']//div[@class='tab-contents']/span[@class='trigger-closed'])[1]")
+		@FindBy(xpath = "//div[@class='tab med-supp plancountheight']/div")
+		//@FindBy(xpath = "(//*[@id='site-wrapper']//div[@class='content-section']//div[@class='parbase vppClient section']//div[@class='parsys planCountPar']//div[@class='tab-contents']/span[@class='trigger-closed'])[1]")
 		private WebElement showMsPlans;
 		
 		@FindBy(xpath="//*[contains(text(),'Start Plan Selector')]")
@@ -1190,5 +1191,17 @@ public void comparePlanslnk() throws InterruptedException{
                  }
                  return null;
          }
+				 
+				 public PlanComparePage navigateToPlanCompare(String planName){
+						driver.findElement(By.xpath("//*[@id='compare-"+planName+"']/parent::span/following-sibling::p")).click();
+							return new PlanComparePage(driver);
+					
+					}
+					
+					 public void selectPlanstoCompare(String planName){
+						 driver.findElement(By.xpath("//*[@id='compare-"+planName+"']/parent::span")).click();
+		 				 System.out.println("========="+planName+" is selected to compare===========");
+						 }
+					 
 }
 			 
