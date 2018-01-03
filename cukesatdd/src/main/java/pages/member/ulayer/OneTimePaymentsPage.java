@@ -92,7 +92,7 @@ public class OneTimePaymentsPage extends UhcDriver{
 	public OneTimePaymentsPage(WebDriver driver) throws InterruptedException {
 		super(driver);
 		PageFactory.initElements(driver, this);
-		openAndValidate();
+		//openAndValidate();
 	}
 
 	@Override

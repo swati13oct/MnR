@@ -118,7 +118,14 @@ public class PaymentsOverview extends UhcDriver{
 		if(AutomaticPaymentButton.isEnabled()){
 			AutomaticPaymentButton.click();
 			Thread.sleep(2000);
-			//SetUpNewAutoPayment.click();
+			try{
+				if(SetUpNewAutoPayment.isDisplayed())
+					SetUpNewAutoPayment.click();	
+			}catch(Exception e)
+			{
+				System.out.println("Edit payment Pop up Handled");
+			}
+			
 			return new OneTimePaymentsPage(driver);
 		}
 		return null;
