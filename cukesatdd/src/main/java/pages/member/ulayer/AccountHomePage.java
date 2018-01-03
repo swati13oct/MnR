@@ -938,7 +938,7 @@ public pages.dashboard.member.ulayer.ClaimSummarypage navigateToClaimsSummaryPag
 				try {
 					
 					{
-						driver.findElement(By.xpath("//a[contains(.,'Medicare Advantage Plan')]")).isDisplayed();
+						//driver.findElement(By.xpath("//a[contains(.,'Medicare Advantage Plan')]")).isDisplayed();
 						driver.findElement(By.xpath("//a[contains(.,'Medicare Advantage Plan')]")).click();
 					}
 					
