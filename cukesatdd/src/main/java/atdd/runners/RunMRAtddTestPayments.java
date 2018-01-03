@@ -1,6 +1,3 @@
-/**
- * 
- */
 package atdd.runners;
 
 import org.junit.runner.RunWith;
@@ -15,8 +12,8 @@ import cucumber.junit.Cucumber;
 @Cucumber.Options(glue = { "atdd.framework","acceptancetests.payments.ulayer.onetimepayment" }, 
 		features = { "feature/payments/OneTimePayment/ulayer" }, 
 		format = {
+		"pretty", "html:reports/test-report","json:target/cucumber.json"}, tags ={"@TeamHActual,@TeamHAuto,@TeamHError"})
 
-		"pretty", "html:reports/test-report" }, tags ={"@TeamHActual,@TeamHAuto,@TeamHError"})
 public class RunMRAtddTestPayments {
 
 }
