@@ -934,7 +934,7 @@ public pages.dashboard.member.ulayer.ClaimSummarypage navigateToClaimsSummaryPag
 			}
 
 			//CommonUtility.waitForPageLoad(driver, driver.findElement(By.xpath("//select[@id='document-date']")), 60);
-			{
+			/*{
 				try {
 					
 					{
@@ -948,7 +948,7 @@ public pages.dashboard.member.ulayer.ClaimSummarypage navigateToClaimsSummaryPag
 					return new pages.dashboard.member.ulayer.ClaimSummarypage(driver);	
 					// TODO: handle exception
 				}	
-			}		
+			}		*/
 
 		}
 		return new ClaimSummarypage(driver);
