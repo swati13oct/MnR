@@ -15,6 +15,7 @@ public class MRConstants {
 	
 	public static final String Dashboar_URL = "https://"+MRScenario.environment+"-medicare.uhc.com/?testharness=true ";
 
+	public static final String Dashboard_URL ="https://"+MRScenario.environment+"-medicare.uhc.com/";
 	
 	public static final String Assistance_Confirmation_URL = "https://member."+MRScenario.environment+"-aarpmedicareplans.uhc.com/content/dashboard/guest/unpwclient.html#/assistanceconfirmation";
 
