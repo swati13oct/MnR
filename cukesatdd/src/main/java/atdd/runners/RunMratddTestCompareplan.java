@@ -6,7 +6,7 @@ import cucumber.junit.Cucumber;
 
 
 @RunWith(Cucumber.class)
-@Cucumber.Options(glue = { "atdd.framework","acceptancetests.responsive.Ulayer" }, 
+@Cucumber.Options(glue = { "atdd.framework","acceptancetests.responsive.ulayer" }, 
 		features = { "feature/responsive/Ulayer" }, 
 		format = {
 		"pretty", "html:reports/test-report","json:target/cucumberprint5.json" }, tags ={"@planCompareFnF"})
