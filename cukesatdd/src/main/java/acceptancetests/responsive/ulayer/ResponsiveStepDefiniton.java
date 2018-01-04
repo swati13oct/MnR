@@ -23,6 +23,7 @@ import cucumber.annotation.en.Then;
 import cucumber.annotation.en.When;
 import cucumber.table.DataTable;
 import gherkin.formatter.model.DataTableRow;
+import pages.acquisition.bluelayer.PlanComparePage;
 import pages.acquisition.ulayer.AddDrugPage;
 import pages.acquisition.ulayer.GetStartedPage;
 import pages.acquisition.ulayer.ManageDrugPage;
@@ -898,7 +899,28 @@ public class ResponsiveStepDefiniton {
                 
             }
         	
+        	    @And("^the user selects plan to compare and validates header and footer$")
+        		public void validate_header_and_footer(DataTable givenAttributes){
+        			List<DataTableRow> memberAttributesRow = givenAttributes
+        					.getGherkinRows();
+        			Map<String, String> memberAttributesMap = new HashMap<String, String>();
+        			for (int i = 0; i < memberAttributesRow.size(); i++) {
 
+        				memberAttributesMap.put(memberAttributesRow.get(i).getCells()
+        						.get(0), memberAttributesRow.get(i).getCells().get(1));
+        			}
+
+        			String firstPlan = memberAttributesMap.get("First Plan Name");
+        			System.out.println(firstPlan);
+        			String secondPlan = memberAttributesMap.get("Second Plan Name");
+        			System.out.println(secondPlan);
+        			ResponsivePlanSummary plansummaryPage = (ResponsivePlanSummary) getLoginScenario()
+        					.getBean(PageConstants.RESPONSIVE_PLAN_SUMMARY_PAGE);
+        			plansummaryPage.selectPlanstoCompare(firstPlan);
+        			plansummaryPage.selectPlanstoCompare(secondPlan);
+        			PlanComparePage planComparePage = plansummaryPage.navigateToPlanCompare(secondPlan);
+        			planComparePage.validateHaderAndFooter();
+        		}
                 
             	
 
