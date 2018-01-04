@@ -217,6 +217,15 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 
   @FindBy(className= "atdd-outnetwrktitle")
  	private WebElement OUTOFNETWORK;
+
+  @FindBy(xpath = "//button[@id='dropdown-toggle--1']/span[contains(text(),'Profile')]")
+  private WebElement accountToggleDropdown;
+
+  @FindBy(xpath = "//a[@class='dropdown-option' and contains(text(),'Account Settings')]")
+  private WebElement accountSettingOption;
+  
+  @FindBy(className = "atdd-gopaperless")
+  private WebElement gopaperlessbutton;
     
 	
 	
@@ -844,5 +853,27 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 		}
 		validateNew(planName1);
 	   }
+
+     public pages.member.bluelayer.ProfilePreferencesPage navigateDirectToProfilePagee() {
+        System.out.println(driver.getTitle());
+        accountToggleDropdown.click();
+        validate(accountSettingOption);
+        accountSettingOption.click();
+        try {
+               Thread.sleep(30000);
+        } catch (InterruptedException e) {
+               // TODO Auto-generated catch block
+               e.printStackTrace();
+        }
+        System.out.println(driver.getTitle());
+
+        if (driver.getTitle().equalsIgnoreCase("Profile")) {
+               System.out.println("Pass!");
+               return new ProfilePreferencesPage(driver);
+        }
+        gopaperlessbutton.click();
+        return null;
+        
+	}
 
 }

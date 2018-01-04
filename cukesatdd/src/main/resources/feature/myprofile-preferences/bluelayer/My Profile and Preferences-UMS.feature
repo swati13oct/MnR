@@ -116,4 +116,19 @@ Examples:
 		#| MAPD     | INDIVIDUAL |
 		| MAPD       | Group |
 
+@CodeMonkeysPrefrencessave
+Scenario Outline: To verify prefernecs save Functionality
+Given registered member with following details logins in the member portal 
+      | Plan Type      | <planType>s  |
+      | Member Type    | <memberType>|
+      | Copay Category | <copayCategory>|
+Then the user goes to dashbard BnC
+Then the user goes to dashbard PnP
+Then the user able to save preferences
+Examples: 
+       | planType|  memberType  | copayCategory |
+       | PDP     |  Group       |  NON LIS      | 
+       | MAPD    |  Group       |  NON LIS      |
+       | MA      |  Group       |  NON LIS      |
+
 

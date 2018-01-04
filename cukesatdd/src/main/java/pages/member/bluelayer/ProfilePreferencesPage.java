@@ -916,7 +916,7 @@ public class ProfilePreferencesPage extends UhcDriver {
 			Assert.assertTrue(GoGreenContentActual.equalsIgnoreCase(GoGreenContentExpected));
 		}
 	}
-
+	
 	public void savefunctionality()
 	{
 		
