@@ -39,67 +39,114 @@ import pages.mobile.acquisition.ulayer.VPPAarpNeedHelpWidgetPage;
 import pages.mobile.acquisition.ulayer.VPPNeedMoreInformationWidget;
 import pages.mobile.acquisition.ulayer.VPPRequestSendEmailPage;
 
-public class ResponsiveStepDefeniton {
+public class ResponsiveStepDefiniton {
 
-        @Autowired
-        MRScenario loginScenario;
+	@Autowired
+	MRScenario loginScenario;
 
-        public MRScenario getLoginScenario() {
-                return loginScenario;
-        }
-        
-        
-        @Given("^the user is on the vpp portfolio page$")
-        public void user_on_aarp_ourPlans_page(){
-                WebDriver wd = getLoginScenario().getWebDriver();
-                PortfolioPage ourPlans = new PortfolioPage(wd);
-                
-                getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
-                getLoginScenario().saveBean(PageConstants. PORTFOLIO_PAGE, ourPlans);
-        }
-        
-        @Then("^the user performs plan serach using zipcode$")
-        public void user_planSearch_with_zipcode(DataTable givenAttributes) throws InterruptedException{
-                List<DataTableRow> memberAttributesRow = givenAttributes
-                                .getGherkinRows();
-                Map<String, String> memberAttributesMap = new HashMap<String, String>();
-                for (int i = 0; i < memberAttributesRow.size(); i++) {
+	public MRScenario getLoginScenario() {
+		return loginScenario;
+	}
+	
 
-                        memberAttributesMap.put(memberAttributesRow.get(i).getCells()
-                                        .get(0), memberAttributesRow.get(i).getCells().get(1));
-                }
+	@Given("^the user is on the vpp portfolio page$")
+    public void user_on_aarp_ourPlans_page(){
+            WebDriver wd = getLoginScenario().getWebDriver();
+            PortfolioPage ourPlans = new PortfolioPage(wd);
+            
+            getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
+            getLoginScenario().saveBean(PageConstants. PORTFOLIO_PAGE, ourPlans);
+    }
+    
+    @Then("^the user performs plan serach using zipcode$")
+    public void user_planSearch_with_zipcode(DataTable givenAttributes) throws InterruptedException{
+            List<DataTableRow> memberAttributesRow = givenAttributes
+                            .getGherkinRows();
+            Map<String, String> memberAttributesMap = new HashMap<String, String>();
+            for (int i = 0; i < memberAttributesRow.size(); i++) {
 
-                String zipcode = memberAttributesMap.get("Zip Code");
-                getLoginScenario().saveBean(VPPCommonConstants.ZIPCODE, zipcode);
-                String county = memberAttributesMap.get("County");
-                getLoginScenario().saveBean(VPPCommonConstants.COUNTY, county);
-                PortfolioPage portfolioPage = (PortfolioPage) getLoginScenario()
-                                .getBean(PageConstants. PORTFOLIO_PAGE);
-                ResponsivePlanSummary vppPlan = portfolioPage.searchPlans(zipcode, county);
-                if(vppPlan!=null){
-                        getLoginScenario().saveBean(PageConstants.RESPONSIVE_PLAN_SUMMARY_PAGE, vppPlan);
-                }else{
-                        Assert.fail();
-                }
-        }
-        
-        @Then("^user validate error message for invalid zipcode for change location$")
-        public void user_validates_invalidZipcode(DataTable givenAttributes){
-                List<DataTableRow> memberAttributesRow = givenAttributes
-                                .getGherkinRows();
-                Map<String, String> memberAttributesMap = new HashMap<String, String>();
-                for (int i = 0; i < memberAttributesRow.size(); i++) {
+                    memberAttributesMap.put(memberAttributesRow.get(i).getCells()
+                                    .get(0), memberAttributesRow.get(i).getCells().get(1));
+            }
 
-                        memberAttributesMap.put(memberAttributesRow.get(i).getCells()
-                                        .get(0), memberAttributesRow.get(i).getCells().get(1));
-                }
+            String zipcode = memberAttributesMap.get("Zip Code");
+            getLoginScenario().saveBean(VPPCommonConstants.ZIPCODE, zipcode);
+            String county = memberAttributesMap.get("County");
+            getLoginScenario().saveBean(VPPCommonConstants.COUNTY, county);
+            PortfolioPage portfolioPage = (PortfolioPage) getLoginScenario()
+                            .getBean(PageConstants. PORTFOLIO_PAGE);
+            ResponsivePlanSummary vppPlan = portfolioPage.searchPlans(zipcode, county);
+            if(vppPlan!=null){
+                    getLoginScenario().saveBean(PageConstants.RESPONSIVE_PLAN_SUMMARY_PAGE, vppPlan);
+            }else{
+                    Assert.fail();
+            }
+    }
+    
+    @Then("^user validate error message for invalid zipcode for change location$")
+    public void user_validates_invalidZipcode(DataTable givenAttributes){
+            List<DataTableRow> memberAttributesRow = givenAttributes
+                            .getGherkinRows();
+            Map<String, String> memberAttributesMap = new HashMap<String, String>();
+            for (int i = 0; i < memberAttributesRow.size(); i++) {
 
-                String zipcode = memberAttributesMap.get("Zip Code");
-                getLoginScenario().saveBean(VPPCommonConstants.ZIPCODE, zipcode);
+                    memberAttributesMap.put(memberAttributesRow.get(i).getCells()
+                                    .get(0), memberAttributesRow.get(i).getCells().get(1));
+            }
 
-                 Assert.assertTrue(true);
-        }
-        
+            String zipcode = memberAttributesMap.get("Zip Code");
+            getLoginScenario().saveBean(VPPCommonConstants.ZIPCODE, zipcode);
+
+             Assert.assertTrue(true);
+    }
+    
+	
+	
+
+	
+	
+	
+
+	@And ("^the user enter information to Get Email Update widget and submit in AARP site$")
+	public void vpp_user_request_send_email(DataTable personalAttributes) {
+		List<DataTableRow> personalAttributesRow = personalAttributes.getGherkinRows();
+		Map<String, String> personalAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < personalAttributesRow.size(); i++) {
+			personalAttributesMap.put(personalAttributesRow.get(i).getCells()
+					.get(0), personalAttributesRow.get(i).getCells().get(1));
+		}
+		String firstName = personalAttributesMap.get("First Name");
+		String lastName = personalAttributesMap.get("Last Name");
+		String emailAddress =personalAttributesMap.get("Email Address");
+		getLoginScenario().saveBean(VPPCommonConstants.FIRST_NAME, firstName);
+		getLoginScenario().saveBean(VPPCommonConstants.LAST_NAME, lastName);
+		getLoginScenario().saveBean(VPPCommonConstants.EMAIL_ADDRESS, emailAddress);		
+		VPPRequestSendEmailPage requestSendEmailPage= (VPPRequestSendEmailPage)getLoginScenario()
+				.getBean(PageConstants.VPP_REQUEST_SEND_EMAIL_PAGE);
+		requestSendEmailPage.sendEmailByClickSummbitButtonOnEmailWidget(firstName, lastName, emailAddress);	
+	}
+	
+	/*@And("^the user validates the medical benefits tab,Prescription Drug Benefits tab,Optional Services tab on Plan details page$")
+	public void the_user_navigates_to_plan_details_page(DataTable givenAttributes) {
+		ResponsivePlanSummary plansummaryPage = (ResponsivePlanSummary) getLoginScenario()
+				.getBean(PageConstants.RESPONSIVE_PLAN_SUMMARY_PAGE);
+		List<DataTableRow> memberAttributesRow = givenAttributes 
+				.getGherkinRows();
+		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells()
+					.get(0), memberAttributesRow.get(i).getCells().get(1));
+		}
+
+		String planName = memberAttributesMap.get("Plan Name");
+		System.out.println(planName);
+		getLoginScenario().saveBean(VPPCommonConstants.PLAN_NAME, planName);
+ 		ResponsivePlanDetails planDetails =  plansummaryPage.viewPlanDetails(planName);
+ 		getLoginScenario().saveBean(PageConstants.RESPONSIVE_DETAILS_PAGE, planDetails);
+ 	}*/
+	 
+		
         @And("^verifies the zipcode on VPP page$")
         public void user_validates_VPPPage(){
                  VPPPlanSummaryPage vppPlan= (VPPPlanSummaryPage) getLoginScenario()
@@ -852,28 +899,7 @@ public class ResponsiveStepDefeniton {
             }
         	
 
-        	    @And("^the user selects plan to compare and validates header and footer$")
-        		public void validate_header_and_footer(DataTable givenAttributes){
-        			List<DataTableRow> memberAttributesRow = givenAttributes
-        					.getGherkinRows();
-        			Map<String, String> memberAttributesMap = new HashMap<String, String>();
-        			for (int i = 0; i < memberAttributesRow.size(); i++) {
-
-        				memberAttributesMap.put(memberAttributesRow.get(i).getCells()
-        						.get(0), memberAttributesRow.get(i).getCells().get(1));
-        			}
-
-        			String firstPlan = memberAttributesMap.get("First Plan Name");
-        			System.out.println(firstPlan);
-        			String secondPlan = memberAttributesMap.get("Second Plan Name");
-        			System.out.println(secondPlan);
-        			ResponsivePlanSummary plansummaryPage = (ResponsivePlanSummary) getLoginScenario()
-        					.getBean(PageConstants.RESPONSIVE_PLAN_SUMMARY_PAGE);
-        			plansummaryPage.selectPlanstoCompare(firstPlan);
-        			plansummaryPage.selectPlanstoCompare(secondPlan);
-        			PlanComparePage planComparePage = plansummaryPage.navigateToPlanCompare(secondPlan);
-        			planComparePage.validateHaderAndFooter();
-        		}
-
+                
             	
-        }
+
+	}
