@@ -916,4 +916,30 @@ public class ProfilePreferencesPage extends UhcDriver {
 			Assert.assertTrue(GoGreenContentActual.equalsIgnoreCase(GoGreenContentExpected));
 		}
 	}
+
+	public void savefunctionality()
+	{
+		
+		List<WebElement> oRadioButton = driver.findElements(By.name("187"));
+		boolean bValue = false;
+		bValue = oRadioButton.get(0).isSelected();
+		if(bValue == true){
+			// This will select Second radio button, if the first radio button is selected by default
+			oRadioButton.get(1).click();
+		}else{
+			// If the first radio button is not selected by default, the first will be selected
+			oRadioButton.get(0).click();
+		}
+		iHavereadCheckbox.click();
+		try {
+			Thread.sleep(20000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+
+		savePreferencesButton.click();
+		
+		}
 }
