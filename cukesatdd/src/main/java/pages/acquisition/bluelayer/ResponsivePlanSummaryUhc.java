@@ -269,6 +269,9 @@ public class ResponsivePlanSummaryUhc extends UhcDriver{
 			@FindBy(xpath="//div[@class='tab plancountheight active']/div/span/span")
             private WebElement planCount;
 			
+			@FindBy(xpath="//a[@class='cta-button secondary value-added-services']")
+            private WebElement vasButton;
+			
 			/*@FindBy(xpath="//div[@class='tab plancountheight'][1]/div/span/span")
             private WebElement maPlanCount;
 			
@@ -1826,8 +1829,16 @@ public void comparePlanslnk(){
 			
 			}
 			
+			
 			 public void selectPlanstoCompare(String planName){
 				 driver.findElement(By.xpath("//*[@id='compare-"+planName+"']/parent::span")).click();
  				 System.out.println("========="+planName+" is selected to compare===========");
 				 }
+			 
+			 public VASPage navigateToBLayerVASPage(){
+				 vasButton.click();
+ 				 return new VASPage(driver);
+				
+				}
+			 
 			 }
