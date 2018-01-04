@@ -419,7 +419,7 @@ public void selectAddToCompareCheckboxes() throws InterruptedException  {
 	validate (chkBoxAddtoCompare3);
 	chkBoxAddtoCompare3.click();
 	Thread.sleep(2000);
-	jse.executeScript("window.scrollBy(0,750)", "");
+	jse.executeScript("window.scrollBy(0,600)", "");
 	Thread.sleep(1000);
 	validate (chkBoxAddtoCompare4);
 	chkBoxAddtoCompare4.click();
@@ -460,7 +460,7 @@ public void backtoAllPlans() throws InterruptedException{
 
 public void disclaimerText() throws InterruptedException{
 	JavascriptExecutor js = (JavascriptExecutor)driver;
-	js.executeScript("window.scrollBy(0,650)", "");
+	js.executeScript("window.scrollBy(0,750)", "");
 	Thread.sleep(8000);
 	String disclaimertxt = disclaimerTxt.getText();
 	System.out.println(disclaimertxt);

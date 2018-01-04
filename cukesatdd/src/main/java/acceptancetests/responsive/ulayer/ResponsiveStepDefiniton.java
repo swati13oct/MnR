@@ -4,7 +4,6 @@ import java.io.File;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.junit.Assert;
@@ -35,6 +34,7 @@ import pages.acquisition.ulayer.SelectDosagePage;
 import pages.acquisition.ulayer.SelectGenericPage;
 import pages.acquisition.ulayer.SelectPharmacyPage;
 import pages.acquisition.ulayer.VPPPlanSummaryPage;
+
 import pages.mobile.acquisition.ulayer.VPPAarpNeedAStepBackWidget;
 import pages.mobile.acquisition.ulayer.VPPAarpNeedHelpWidgetPage;
 import pages.mobile.acquisition.ulayer.VPPNeedMoreInformationWidget;
@@ -387,10 +387,10 @@ public class ResponsiveStepDefiniton {
         }
         
         @And("^the user verify disclaimer text for MA/MAPD plan for plan compare page in AARP site")
-        public void the_user_verify_disclaimer_text(){
+        public void the_user_verify_disclaimer_text() throws InterruptedException{
                 ResponsivePlanSummary planSummary = (ResponsivePlanSummary) getLoginScenario()
                                 .getBean(PageConstants.RESPONSIVE_PLAN_SUMMARY_PAGE);
-//                planSummary.disclaimerText();
+                planSummary.disclaimerText();
                 
         }
         
@@ -921,6 +921,7 @@ public class ResponsiveStepDefiniton {
         			PlanComparePage planComparePage = plansummaryPage.navigateToPlanCompare(secondPlan);
         			planComparePage.validateHaderAndFooter();
         		}
+                
                 
             	
 
