@@ -128,12 +128,16 @@ public abstract class UhcDriver {
 	public boolean validate(WebElement element) {
 
 		// this.waitforElement(element);
+		try {
+			if (element.isDisplayed()) {
+				System.out.println("Element found!!!!");
+				return true;
+			} else {
+				System.out.println("Element not found/not visible");
+			}
+		} catch (Exception e) {
+			System.out.println("Exception: Element not found/not visible");
 
-		if (element.isDisplayed()) {
-			System.out.println("The element" + element.getText() + "is found");
-			return true;
-		} else {
-			Assert.fail("The element " + element.getText() + "is not found");
 		}
 		return false;
 	}

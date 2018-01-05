@@ -258,7 +258,7 @@ public static String DEREGISTER_STAGE_URL = "https://apsrs0261.uhc.com:9443/Part
 	
 	public static final String SIGN_IN_URL = "https://member.team-b-aarpmedicareplans.uhc.com/content/dashboard/guest/signin.html";
 
-	public static final String MEDICARE_UHC_REDESIGN = "https://"+MRScenario.environment+"-medicare.uhc.com/medicare/login/overview.html?testharness=true";
+	public static final String MEDICARE_UHC_REDESIGN = "https://"+MRScenario.environment+"-medicare.uhc.com";
   
 	     public static final String UHCM_URL_REDESIGN = "https://member."+MRScenario.environment+"-uhcmedicaresolutions.uhc.com/content/uhcm/home//testharness.html";
 

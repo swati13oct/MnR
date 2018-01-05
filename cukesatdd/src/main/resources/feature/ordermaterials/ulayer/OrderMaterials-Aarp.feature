@@ -49,8 +49,8 @@ Feature: To test order materials in Redesign site
 
     Examples: 
       | planType | memberType | option           |
-      | MA       |  Individual | Member Materials |
-      | MAPD     | Individual  | Member Materials      |
+      | MA       |  Individual | Replacement ID card |
+      | MAPD     | Individual  | Replacement ID card      |
       | PDP      |  Individual | Welcome Guide    |
       | SHIP     | Individual  | Member ID Card |
       

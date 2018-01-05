@@ -104,7 +104,7 @@ public class UlayerHomePage extends UhcDriver {
 		myAccountHome = CommonUtility.readPageData(fileName, CommonConstants.PAGE_OBJECT_DIRECTORY_ULAYER_MEMBER);
 		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 		CommonUtility.checkPageIsReady(driver);
-		openAndValidate();
+		//openAndValidate();
 	}
 
 	public PaymentHistoryPage navigateToPayments() {

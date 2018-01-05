@@ -49,6 +49,16 @@ public class RedesignLoginPage extends UhcDriver {
 
 	@FindBy(id = "usercheckbox")
 	private WebElement userNameCheckBox;
+	
+	@FindBy(id = "new-email")
+	private WebElement NewEmailTxtBox;
+
+	@FindBy(id = "new-email-confirm")
+	private WebElement ConfirmNewEmailTxtBox;
+	
+	@FindBy(xpath = "//*[@id='email-modal-form']//button")
+	private WebElement NewEmailContinueBtn;
+
 
 	private PageData browserCheckData;
 
@@ -93,8 +103,20 @@ public class RedesignLoginPage extends UhcDriver {
 			} 
 		        }
 			
-		driver.manage().timeouts().implicitlyWait(40, TimeUnit.SECONDS);
+		driver.manage().timeouts().implicitlyWait(50, TimeUnit.SECONDS);
 		CommonUtility.checkPageIsReady(driver);
+		try{
+			NewEmailTxtBox.sendKeys("uhcmnrportals@gmail.com");
+			ConfirmNewEmailTxtBox.sendKeys("uhcmnrportals@gmail.com");
+			System.out.println("@@@@@@@@@@@@ Enter New Email Page Displayed for ULayer Member@@@@@@@@@@@@");
+			NewEmailContinueBtn.click();
+			driver.manage().timeouts().implicitlyWait(50, TimeUnit.SECONDS);
+			CommonUtility.checkPageIsReady(driver);
+		}
+		catch (Exception e) {
+			System.out.println("New Email Page NOT Present");
+		}
+
 		try{
 			FeedbackModal.click();
 			System.out.println("FeedBack Modal Present");
@@ -108,15 +130,19 @@ public class RedesignLoginPage extends UhcDriver {
 			System.out.println("FeedBack Modal NOT Present");
 
 		}
-		if(currentUrl().contains("/testharness.html") && category.equalsIgnoreCase("Group") ) {
+/*		if(currentUrl().contains("/testharness.html") && category.equalsIgnoreCase("Group") ) {
 			System.out.println("@@@@@@@@@@@@ Redesign Home Page Displayed for BlueLayer Member@@@@@@@@@@@@");
 			return new BlueLayerHomePage(driver, category);
 		}
 		else if(currentUrl().contains("/testharness.html") && category.equalsIgnoreCase("Individual") ) {
 			System.out.println("@@@@@@@@@@@@ Redesign Home Page Displayed for BlueLayer Member@@@@@@@@@@@@");
 			return new BlueLayerHomePage(driver, category);
+		}*/
+		if(currentUrl().contains("/dashboard")) {
+			System.out.println("@@@@@@@@@@@@ Rally Dashboard Page Displayed for BlueLayer Member@@@@@@@@@@@@");
+			return new BlueLayerHomePage(driver, category);
 		}
-		System.out.println("@@@@@@@@@@@@ Redesign Home Page Displayed is NOT DISPLAYED @@@@@@@@@@@@");
+		System.out.println("@@@@@@@@@@@@ Rally Dashboard Page is NOT DISPLAYED @@@@@@@@@@@@");
 
 		return null;
 	}
@@ -136,30 +162,47 @@ public class RedesignLoginPage extends UhcDriver {
 			} 
 		}
 		
-	driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
-	CommonUtility.checkPageIsReady(driver);
-	try{
-		FeedbackModal.click();
-		System.out.println("FeedBack Modal Present");
-		if (validate(FeedbackModal)){
-			System.out.println("FeedBack Modal NOT CLOSING - Close button is clicked");
+		driver.manage().timeouts().implicitlyWait(50, TimeUnit.SECONDS);
+		CommonUtility.checkPageIsReady(driver);
+		try{
+			NewEmailTxtBox.sendKeys("uhcmnrportals@gmail.com");
+			ConfirmNewEmailTxtBox.sendKeys("uhcmnrportals@gmail.com");
+			System.out.println("@@@@@@@@@@@@ Enter New Email Page Displayed for ULayer Member@@@@@@@@@@@@");
+			NewEmailContinueBtn.click();
+			driver.manage().timeouts().implicitlyWait(50, TimeUnit.SECONDS);
+			CommonUtility.checkPageIsReady(driver);
 		}
-		System.out.println("FeedBack Modal Closed");
-		//driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
-	}
-	catch (Exception e) {
-		System.out.println("FeedBack Modal NOT Present");
-	}
-	driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
-		if (currentUrl().contains("/testharness.html")){
+		catch (Exception e) {
+			System.out.println("New Email Page NOT Present");
+		}
+
+		try{
+			FeedbackModal.click();
+			System.out.println("FeedBack Modal Present");
+			if (validate(FeedbackModal)){
+				System.out.println("FeedBack Modal NOT CLOSING - Close button is clicked");
+			}
+			System.out.println("FeedBack Modal Closed");
+			driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
+		}
+		catch (Exception e) {
+			System.out.println("FeedBack Modal NOT Present");
+
+		}
+
+/*		if (currentUrl().contains("/testharness.html")){
 			System.out.println("@@@@@@@@@@@@ Redesign Home Page Displayed for ULayer Member@@@@@@@@@@@@");
 			return new UlayerHomePage(driver);
 		}
-		System.out.println("@@@@@@@@@@@@ Redesign Home Page Displayed is NOT DISPLAYED @@@@@@@@@@@@");
+*/		
 
+	if (currentUrl().contains("/dashboard")){
+			System.out.println("@@@@@@@@@@@@ Rally Dashboard Page Displayed for ULayer Member@@@@@@@@@@@@");
+			return new UlayerHomePage(driver);
+		}
+		System.out.println("@@@@@@@@@@@@ Rally Dashboard Page is NOT DISPLAYED @@@@@@@@@@@@");
 		return null;
 	}
-
 
 	@Override
 	public void openAndValidate() {

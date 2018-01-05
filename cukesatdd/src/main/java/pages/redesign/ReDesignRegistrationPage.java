@@ -7,6 +7,7 @@ package pages.redesign;
 import java.text.SimpleDateFormat;
 import java.util.LinkedHashMap;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
@@ -45,13 +46,13 @@ public class ReDesignRegistrationPage extends UhcDriver {
 	@FindBy(id = "password")
 	private WebElement passwordField;
 	
-	@FindBy(id="month-dropdown")
+	@FindBy(id="date-mm")
 	private WebElement month;
 	
-	@FindBy(id="date-dropdown")
+	@FindBy(id="date-dd")
 	private WebElement date;
 	
-	@FindBy(id="year-dropdown")
+	@FindBy(id="date-yyyy")
 	private WebElement year;
 	
 	@FindBy(id="continue-btn")
@@ -97,6 +98,8 @@ public class ReDesignRegistrationPage extends UhcDriver {
 	public ReDesignRegistrationPage SetServerDate(String ServerDate_MilliSeconds){
 		
 		start(SetServerDate_URL+ServerDate_MilliSeconds);
+		driver.navigate().refresh();
+		driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
 		return new ReDesignRegistrationPage(driver);
 	}
 	
@@ -110,17 +113,30 @@ public class ReDesignRegistrationPage extends UhcDriver {
 	}
 	
 	public ReDesignRegistrationPage Enter_MemberNo_DOB(String MemberNo, String DOB){
+		
+		
 		String[] DateOfBirth= DOB.split("/");
-		
-		
+		System.out.println("The memberNo is : "+MemberNo);
+		System.out.println("The DOB is : "+DOB);
+
+		if(validate(memberIdField)){
+			memberIdField.sendKeys(MemberNo);
+			}
+		driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
 		Select Month = new Select(month);
+		driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
+
 		Select Day = new Select(date);
+		driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
+
 		Select Year = new Select(year);
+		driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
 		
 		Month.selectByVisibleText(DateOfBirth[0]);
 		Day.selectByVisibleText(DateOfBirth[1]);
 		Year.selectByVisibleText(DateOfBirth[2]);
 		ContinueBtn.click();
+		driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
 		
 		if(validate(MedicareIDField)){
 			return new ReDesignRegistrationPage(driver);

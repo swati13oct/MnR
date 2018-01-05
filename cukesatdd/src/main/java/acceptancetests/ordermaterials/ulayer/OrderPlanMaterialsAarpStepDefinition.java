@@ -298,9 +298,7 @@ public class OrderPlanMaterialsAarpStepDefinition {
 	/*@After
 	public void tearDown() {
 		WebDriver wd = (WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
-		if(wd!=null){
-			wd.quit();
-		}
+		wd.quit();
 		getLoginScenario().flushBeans();
 	}*/
 

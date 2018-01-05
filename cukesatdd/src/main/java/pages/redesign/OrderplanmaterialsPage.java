@@ -22,6 +22,9 @@ import junit.framework.Assert;
  *
  */
 public class OrderplanmaterialsPage extends UhcDriver {
+
+	@FindBy(xpath = "//area[@href='javascript:clWin()'][@alt = 'close']")
+	private WebElement FeedbackModal;
 	
 	@FindBy(xpath = "//a[contains(text(), 'Medicare Advantage Plan')]")
 	private WebElement MAPlanTab;
@@ -107,15 +110,24 @@ public class OrderplanmaterialsPage extends UhcDriver {
 	@FindBy(id = "disclosure_link")
 	private WebElement logOut;
 
-	 @FindBy(id="addAnotherPlanLink")
-     private WebElement addPlansTab;
-      
-     @FindBy(className="selected")
-     private WebElement orderMaterial;
-     
 	public OrderplanmaterialsPage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
+		driver.manage().timeouts().implicitlyWait(80, TimeUnit.SECONDS);
+		CommonUtility.checkPageIsReady(driver);
+		try{
+			FeedbackModal.click();
+			System.out.println("FeedBack Modal Present");
+			if (validate(FeedbackModal)){
+				System.out.println("FeedBack Modal NOT CLOSING - Close button is clicked");
+			}
+			System.out.println("FeedBack Modal Closed");
+			driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
+		}
+		catch (Exception e) {
+			System.out.println("FeedBack Modal NOT Present");
+
+		}
 		//openAndValidate();
 	}
 	
@@ -398,29 +410,5 @@ public class OrderplanmaterialsPage extends UhcDriver {
 		validate(memberMaterialsfield);
 		validate(logOut);
 	}
-	
-	public boolean validateAddPlanLink(){
-        boolean flag = false;
-        try{
-        waitforElement(orderMaterial);        
-        if(orderMaterial.getText().equals("Order Materials")){
-        if(addPlansTab.isDisplayed()){
-                System.out.println(addPlansTab.getText()+" is displayed, hence scenario failed");
-                //Assert.assertTrue(flag);
-                flag=true;
-                return flag;
-        }else{
-                System.out.println("addPlansTab is not displayed");
-                //Assert.fail();!
-                return flag;
-        }
-        }}
-        catch(Exception e){
-                System.out.println("Exception failing - element not visible");
-                //Assert.fail();
-        }
-        return flag;
-}
-
 
 }
