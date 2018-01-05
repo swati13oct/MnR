@@ -4,6 +4,7 @@ import java.io.File;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.junit.Assert;
@@ -23,6 +24,8 @@ import cucumber.annotation.en.When;
 import cucumber.table.DataTable;
 import gherkin.formatter.model.DataTableRow;
 import pages.acquisition.bluelayer.PlanComparePage;
+import pages.acquisition.bluelayer.ResponsivePlanSummaryUhc;
+import pages.acquisition.bluelayer.VASPage;
 import pages.acquisition.ulayer.AddDrugPage;
 import pages.acquisition.ulayer.GetStartedPage;
 import pages.acquisition.ulayer.ManageDrugPage;
@@ -33,8 +36,8 @@ import pages.acquisition.ulayer.ResponsivePlanSummary;
 import pages.acquisition.ulayer.SelectDosagePage;
 import pages.acquisition.ulayer.SelectGenericPage;
 import pages.acquisition.ulayer.SelectPharmacyPage;
+import pages.acquisition.ulayer.ULayerVASPage;
 import pages.acquisition.ulayer.VPPPlanSummaryPage;
-
 import pages.mobile.acquisition.ulayer.VPPAarpNeedAStepBackWidget;
 import pages.mobile.acquisition.ulayer.VPPAarpNeedHelpWidgetPage;
 import pages.mobile.acquisition.ulayer.VPPNeedMoreInformationWidget;
@@ -923,6 +926,27 @@ public class ResponsiveStepDefiniton {
         		}
                 
                 
-            	
+        	    @And("^the user selects U Layer VAS Page and validates header and footer$")
+        		public void validate_ULayerVASPage_header_and_footer(DataTable givenAttributes){
+        			List<DataTableRow> memberAttributesRow = givenAttributes
+        					.getGherkinRows();
+        			Map<String, String> memberAttributesMap = new HashMap<String, String>();
+        			for (int i = 0; i < memberAttributesRow.size(); i++) {
+
+        				memberAttributesMap.put(memberAttributesRow.get(i).getCells()
+        						.get(0), memberAttributesRow.get(i).getCells().get(1));
+        			}
+
+        			String firstPlan = memberAttributesMap.get("First Plan Name");
+        			System.out.println(firstPlan);
+        			String secondPlan = memberAttributesMap.get("Second Plan Name");
+        			System.out.println(secondPlan);
+        			ResponsivePlanSummary plansummaryPage = (ResponsivePlanSummary) getLoginScenario()
+        					.getBean(PageConstants.RESPONSIVE_PLAN_SUMMARY_PAGE);
+        			plansummaryPage.selectPlanstoCompare(firstPlan);
+        			plansummaryPage.selectPlanstoCompare(secondPlan);
+        			ULayerVASPage vasPage = plansummaryPage.navigateToULayerVASPage();
+        			vasPage.validateHaderAndFooter();
+        		}
 
 	}

@@ -25,6 +25,7 @@ import acceptancetests.atdd.data.PageData;
 import acceptancetests.atdd.util.CommonUtility;
 import atdd.framework.UhcDriver;
 import pages.acquisition.bluelayer.PlanComparePage;
+import pages.acquisition.bluelayer.VASPage;
 import pages.member.ulayer.Rallytool_Page;
 import pages.mobile.acquisition.ulayer.VPPAarpNeedAStepBackWidget;
 import pages.mobile.acquisition.ulayer.VPPAarpNeedHelpWidgetPage;
@@ -120,6 +121,9 @@ public class ResponsivePlanSummary extends UhcDriver{
 		
 		@FindBy(className="errmsgcolor")
 		private WebElement errmsgcolor;
+		
+		@FindBy(xpath="//a[@class='cta-button secondary value-added-services']")
+        private WebElement vasButton;
 		
 		/*@FindBy(xpath="//html/body/div[4]/div[2]/div[1]/div/div/div/div/div[1]/div/div/div/div[2]/div/div[2]/div[1]/div/span[1]")
 		private WebElement showMaPlans;*/
@@ -1203,5 +1207,8 @@ public void comparePlanslnk() throws InterruptedException{
 		 				 System.out.println("========="+planName+" is selected to compare===========");
 						 }
 					 
+					 public ULayerVASPage navigateToULayerVASPage(){
+						 vasButton.click();
+		 				 return new ULayerVASPage(driver);
 }
-			 
+}			 
