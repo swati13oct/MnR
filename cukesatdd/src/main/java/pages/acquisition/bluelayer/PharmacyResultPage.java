@@ -174,10 +174,10 @@ public class PharmacyResultPage extends UhcDriver{
 			servicesTooltip.click();
 			String expectedTooltip = "";
 			if(planName.contains("PDP"))
-				expectedTooltip = "Preferred Retail Pharmacy â€“ Preferred retail pharmacies may help you save money on your prescription co-pays. "
+				expectedTooltip = "Preferred Retail Pharmacy – Preferred retail pharmacies may help you save money on your prescription co-pays. "
 						+ "UnitedHealthcare has worked with many retail pharmacies to help you get the savings you've been looking for.";
 			else
-				expectedTooltip = "Pharmacy Saverâ„¢ Program - Pharmacy Saver is a cost "
+				expectedTooltip = "Pharmacy Saver™ Program - Pharmacy Saver is a cost "
 						+ "savings prescription drug program available to our plan members. "
 						+ "UnitedHealthcare has worked with many of our network pharmacies to offer even lower prices on"
 						+ " many common prescription drugs.";

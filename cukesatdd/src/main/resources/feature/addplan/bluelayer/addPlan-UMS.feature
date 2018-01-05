@@ -26,3 +26,4 @@ Then the user validates the plan names of both the plan added in UHC site
 Examples:
 	| planMemberId  | dateOfBirth | userName        | password    | confirmPassword | email                    | confirmEmail             | newPlanMemberId   |
 	| 0177005471    | 03-22-1932  | apr_blgroup270  | Password@1  | Password@1      | UHCMNRPORTALS@GMAIL.COM  | UHCMNRPORTALS@GMAIL.COM  | 975134087         |
+	| 0177005471    | 03-22-1932  | apr_blgroup270  | Password@1  | Password@1      | UHCMNRPORTALS@GMAIL.COM  | UHCMNRPORTALS@GMAIL.COM  | 975134087         |

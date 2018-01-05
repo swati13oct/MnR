@@ -100,8 +100,8 @@ public class PlanSummaryPage extends UhcDriver {
 		super(driver);
 		PageFactory.initElements(driver, this);
 		String fileName = CommonConstants.PLAN_SUMMARY_PAGE_DATA;
-		CommonUtility.waitForPageLoad(driver, planInformationHeading,CommonConstants.TIMEOUT_30);
-		CommonUtility.waitForPageLoad(driver, claimSectionHeading,CommonConstants.TIMEOUT_30);
+		CommonUtility.waitForPageLoad(driver, planInformationHeading,10);
+		CommonUtility.waitForPageLoad(driver, claimSectionHeading,10);
 		planSummary = CommonUtility.readPageData(fileName,
 				CommonConstants.PAGE_OBJECT_DIRECTORY_BLUELAYER_MEMBER);
 		openAndValidate();

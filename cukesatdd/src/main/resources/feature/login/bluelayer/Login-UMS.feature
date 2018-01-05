@@ -11,8 +11,6 @@ Examples:
 	| planType | memberType |
 #	| MA       | Individual |
 #	| MA       | Group      |
-	| MAPD     | Individual |
-#	| MAPD     | Group      |
 #	| PDP      | Group      |
 
 Scenario Outline: Verify login in UHC site for group plan member 
@@ -32,9 +30,6 @@ Examples:
  #    | PDP      |
  #   | SSUP     |
  #   | SSRD     |
-
-
-
 
 Scenario Outline: Verify login in UHC site for a terminated member less than 12 months
 Given registered UHC member with following attributes
@@ -119,32 +114,92 @@ Then the user validates temp id card pop up after login in UHC site
 
 Examples:
 	| planType | memberType |
-	| MAPD     | Individual |
+#	| MAPD     | Individual |
 	
 	
-@login
-Feature: To test Login on UMS site 
-Scenario Outline:To verify login in UHC site
+@albamafnf
+Scenario Outline:To verify add a plan link is not displayed for albama member
 Given the user is on the UHC medicare site login page
-When the user logs in with a registered UMP with following details in UHC site
+Given registered member to login in UMS site
+ 	| Plan Type    | <plantype>   |
+	| Member Type  | <memberType> |
+Then the user validate add a plan link is not displayed for albama memeber
+Examples:
+	| plantype | memberType |
+Scenario Outline:To verify secure Email widget in UHC site
+Given the user is on the UHC medicare site login page
+When the user logs in with a registered UMP with following details in UHC site for secure Email Widget
 	| Plan Type   | <planType>   |
 	| Member Type | <memberType> |
-Then verify that the tabs are displayed
-And verify that links are displayed
-And click on plan name link and my Plans-Summary page should be displayed
-And click on back button in the browser and Home page should be displayed
-And validate provider search not displayed for PDP and for other member, click on search for providers button and Provider search modal window should be displayed 
-And click on back button in the browser and Home page should be displayed
-And click on Drug lookup-estimate costs button and estimate my drug costs page should be displayed
-And click on back button in the browser and Home page should be displayed
-And click on locate a pharmacy button and Locate a pharmacy page should be displayed
-And click on back button in the browser and Home page should be displayed
-And click on View Personal Health Record button and My Personal Health Record page should be displayed
-And click on back button in the browser and Home page should be displayed
-And click on View Health & Wellness button and My Health and Wellness page should be displayed
-And click on back button in the browser and Home page should be displayed
+Then the user validates secure email widget display on  contact US page after login in UHC Member site
 
 Examples:
 	| planType | memberType |
-	| PDP	   | Group		|
-	| MA       | Individual |
+#	| MA       | Individual |
+#	| MA       | Group      |
+#	| MAPD     | Individual |
+	| MAPD     | Group      |
+#	| PDP      | Group      |
+
+Scenario Outline:To verify secure Email widget  in UHC site
+Given the user is on the UHC medicare site login page
+When the user logs in with a registered UMP with following details in UHC site for secure Email Widget
+	| Plan Type   | <planType>   |
+	| Member Type | <memberType> |
+Then the user validates secure email widget non display  on  contact US page after login in UHC Member site
+
+Examples:
+	| planType | memberType |
+#	| MA       | Individual |
+#	| MA       | Group      |
+#	| MAPD     | Individual |
+	| MAPD     | Group      |
+#	| PDP      | Group      |
+
+
+Scenario Outline:To verify secure Email widget in UHC site
+Given the user is on the UHC medicare site login page
+When the user logs in with a registered UMP with following details in UHC site for secure Email Widget
+	| Plan Type   | <planType>   |
+	| Member Type | <memberType> |
+Then the user validates secure email widget non display  on  contact US page after login in UHC Member site for the Employers who doesnot have access to SecureEmail Widget
+
+
+Examples:
+	| planType | memberType |
+#	| MA       | Individual |
+#	| MA       | Group      |
+#	| MAPD     | Individual |
+	| MAPD     | Group      |
+#	| PDP      | Group      |
+
+Scenario Outline:To verify secure Email widget in UHC site
+Given the user is on the UHC medicare site login page
+When the user logs in with a registered UMP with following details in UHC site for secure Email Widget
+	| Plan Type   | <planType>   |
+	| Member Type | <memberType> |
+Then the user validates secure email widget display on  contact US page after login in UHC Member site
+
+Examples:
+	| planType | memberType |
+#	| MA       | Individual |
+#	| MA       | Group      |
+#	| MAPD     | Individual |
+	| MAPD     | Group      |
+#	| PDP      | Group      |
+
+Scenario Outline:To verify secure Email widget  in UHC site
+Given the user is on the UHC medicare site login page
+When the user logs in with a registered UMP with following details in UHC site for secure Email Widget
+	| Plan Type   | <planType>   |
+	| Member Type | <memberType> |
+Then the user validates secure email widget non display  on  contact US page after login in UHC Member site
+
+Examples:
+	| planType | memberType |
+#	| MA       | Individual |
+#	| MA       | Group      |
+#	| MAPD     | Individual |
+	| MAPD     | Group      |
+#	| PDP      | Group      |
+

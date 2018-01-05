@@ -27,6 +27,7 @@ import acceptancetests.atdd.util.CommonUtility;
 import atdd.framework.UhcDriver;
 import pages.acquisition.bluelayer.EnrollPlanInfoPage;
 import pages.acquisition.ulayer.DrugCostEstimatorPage;
+import pages.mobile.acquisition.ulayer.VPPRequestSendEmailPage;
 
 /**
  * @author 
@@ -894,6 +895,11 @@ public class VPPPlanSummaryPage extends UhcDriver {
 			return new DrugCostEstimatorPage(driver);
 		return null;
 		
+	}
+
+	public VPPRequestSendEmailPage createVPPRequestSendEmailPage() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 	
 

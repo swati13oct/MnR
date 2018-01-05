@@ -320,4 +320,41 @@ And the user validates the passport availability
 	
 Examples:
 	| zipcode |  plantype | planName                                               |
-       	| 06001   |   MA      | UnitedHealthcare MedicareComplete Plan 3 (HMO)         |
+
+@PDPplancard       	
+Scenario Outline: Validate PDP plancards for plansummary page in UMS site 
+Given the user is on the uhcmedicaresolutions site landing page
+When the user performs plan search using following information in UMS site
+	| Zip Code    | <zipcode>|
+	| County Name |<county> |
+#Then user validates plan count for all plan types on plan summary page in UMS site
+When user views plans of the below plan type in UMS site
+	| Plan Type | <plantype> |
+And the user validates the plan summary for the below plan in UMS site
+	| Plan Name | <planName> |
+And the user validate PDP plan cards in UMS site
+	
+Examples:
+	| zipcode | county             			 | plantype | planName                                                |
+	| 90210    | Los Angeles County      | PDP      | AARP MedicareRx Preferred (PDP)                         |
+	
+@US627331(AEP)     	
+Scenario Outline: Validate PDP plancards for plansummary page in UMS site 
+Given the user is on the uhcmedicaresolutions site landing page
+When the user performs plan search using following information in UMS site
+	| Zip Code    | <zipcode>|
+	| County Name |<county> |
+When user views plans of the below plan type in UMS site
+	| Plan Type | <plantype> |
+And the user validates the plan summary for the below plan in UMS site
+	| Plan Name | <planName> |
+And the user click on 2017 plan in UMS site during AEP period
+And the user click on enrollnow button
+	
+Examples:
+	| zipcode | county             			 | plantype | planName                                                |
+	| 90210    | Los Angeles County      | MAPD     | AARP MedicareComplete SecureHorizons Plan 1 (HMO)      |
+	
+	
+
+	

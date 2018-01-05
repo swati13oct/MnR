@@ -81,7 +81,7 @@ Examples:
 
 
 
-
+@claimsfnf
 Scenario Outline:Verify the medical claim summary  and details for selected time period in UMS site
 Given the registered UHC with following attributes in UMS site for medical claims
 	| Plan Type   | <planType>   |
@@ -90,6 +90,19 @@ When the user navigates to claim summary page in UMS site
 Examples:
 	| planType | memberType | 
 #	| MA       | Individual |  
-	| MAPD     | Individual |  
-#	| MAPD     | Group      |   
+#	| MAPD     | Individual |  
+	| MAPD     | Group      |   
 #	| MA       | Group      | 
+
+
+@albama
+Scenario Outline:Verify add a plan link is not displayed for albama members on claim summary page
+Given registered member to login in UMS site
+| Plan Type   | <planType>   |
+| Member Type | <memberType>  |
+When the user navigates to claim summary page in UMS site
+Then user validate add a plan link is not displayed for albama members
+Examples:
+| planType | memberType | 
+#| MAPD       | Group | 
+#| MA         | Group |

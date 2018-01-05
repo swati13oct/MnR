@@ -6,6 +6,7 @@ import java.util.Map;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -132,14 +133,14 @@ public class MedicalClaimSummaryPage extends UhcDriver {
 
 	public MedicalClaimSummaryPage(WebDriver driver) {
 		super(driver);
-		PageFactory.initElements(driver, this);
+		/*PageFactory.initElements(driver, this);
 	/*	CommonUtility.waitForPageLoad(driver, searchResultMessage, CommonConstants.TIMEOUT_30);
 		CommonUtility.waitForPageLoad(driver, customResultMessage, CommonConstants.TIMEOUT_30);
 		CommonUtility.waitForPageLoad(driver, noClaimsFoundMessage, CommonConstants.TIMEOUT_30);*/
 		String fileName = CommonConstants.MEDICAL_CLAIMS_SUMMARY_PAGE_DATA;
 		medicalClaimsSummary = CommonUtility.readPageData(fileName,
 				CommonConstants.PAGE_OBJECT_DIRECTORY_ULAYER_MEMBER);
-		openAndValidate();
+		//openAndValidate();
 	}
 
 	public MedicalClaimSummaryPage searchClaimsByPeriod(
@@ -545,6 +546,17 @@ public class MedicalClaimSummaryPage extends UhcDriver {
 			return new MedicalClaimDetailsPage(driver);
 		}
 		return null;
+	}
+	
+	public boolean Validate_Single_Tab_SHIP(){
+		List<WebElement> PlanTabs = driver.findElements(By.xpath("//a[contains(text(),'Supplemental  Insurance Plans')]"));
+		System.out.println("No of tabs: "+PlanTabs.size());
+		if(PlanTabs.size()>1){
+			return false;
+		}
+		else{
+			return true;
+		}
 	}
 
 	public String getRxNumber() {

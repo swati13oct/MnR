@@ -66,8 +66,11 @@ public class LongTermCarePage extends UhcDriver{
 
 		openAndValidate();
 	}
+
+
 	@FindBy(id="ltcInfo")
 	private WebElement ltcHeader;
+
 
 	@Override
 	public void openAndValidate() {
@@ -143,5 +146,5 @@ public class LongTermCarePage extends UhcDriver{
 			flag = true;
 		return flag;
 	}
-}
 
+}

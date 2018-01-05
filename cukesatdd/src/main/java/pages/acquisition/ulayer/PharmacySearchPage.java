@@ -4,7 +4,10 @@
 package pages.acquisition.ulayer;
 
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
+import org.openqa.selenium.By;
+import org.openqa.selenium.NoSuchElementException;
 import junit.framework.Assert;
 
 import org.json.JSONException;
@@ -16,6 +19,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.FindBys;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.Select;
 
 
 import acceptancetests.atdd.data.CommonConstants;
@@ -23,6 +27,8 @@ import acceptancetests.atdd.data.ElementData;
 import acceptancetests.atdd.data.PageData;
 import acceptancetests.atdd.util.CommonUtility;
 import atdd.framework.UhcDriver;
+import pages.acquisition.ulayer.PharmacyResultPage;
+import junit.framework.Assert;
 
 /**
  * @author pagarwa5
@@ -32,11 +38,14 @@ public class PharmacySearchPage extends UhcDriver {
 
 	@FindBy(id = "zipcodeTxt")
 	private WebElement zipcodeField;
+	
+	@FindBy(id = "zipcode-button")
+	private WebElement searchbtn;
 
 	@FindBy(id = "distance")
 	private WebElement distanceField;
 
-	@FindBy(id = "continue")
+	@FindBy(id = "zipcode-button")
 	private WebElement continueField;
 
 	@FindBy(id = "zipcode-button")
@@ -51,6 +60,15 @@ public class PharmacySearchPage extends UhcDriver {
 	@FindBy(id = "selectcountytable")
 	private WebElement selectcountytable;
 
+	@FindBy(id = "zipcodeTxt")
+    private WebElement txtZipCode;
+
+    @FindBy(id = "address")
+    private WebElement txtAddress;
+
+    @FindBy(id = "city")
+    private WebElement txtCity;
+	
 	@FindBy(id = "plan")
 	private WebElement planNameDropDown;
 
@@ -110,8 +128,71 @@ public class PharmacySearchPage extends UhcDriver {
 	@FindBy(xpath = "//div[@id='medicareTitle']/h1")
 	private WebElement pharmacyResultHeader;
 
+	@FindBy(id = "state_select")
+    private WebElement drpState;
+
+    @FindBy(id = "plan-type")
+    private WebElement drpPlan;
+    
+    @FindBy(id = "plan-year")
+    private WebElement drpYear;
+
+    @FindBy(css = "#zipcode-button>span")
+    private WebElement btnContinue;
+    
+    @FindBy(id="distance")
+    private WebElement drpDistance;
+    
+    @FindBy(xpath="//span[contains(text(),'Standard Network Pharmacy')]")
+    private WebElement txtStandardNetworkPharmacy;
+    
+    @FindBy(xpath="//span[contains(text(),'Preferred Pharmacy')]")
+    private WebElement txtPreferredPharmacy;
+	
 	@FindBy(id = "services")
 	private WebElement pharmacyTypeSelectionRadioButton;
+	
+	@FindBy(xpath = "(//*[@id='lang-select']//option)[1]")
+	private WebElement language;
+	
+	@FindBy(id = "plan-type")
+	private WebElement planType;
+	
+	@FindBy(xpath = "//*[@id='site-wrapper']/div[4]/div/div/div/div/main/div/div/div/div[1]/div/div[2]/div/ul[2]/li[2]/div/div[3]/div/div/a[1]")
+	private WebElement showonmap;
+	
+	@FindBy(xpath = "//a[contains(text(),'VIEW RESULT AS PDF')]")
+	private WebElement viewsearchpdf;
+	
+	@FindBy(xpath = "(.//*[@id='subPageRight']/div[2]/div[2]/ul/li[3]/a")
+    private WebElement pharmacyloc;
+	
+	@FindBy(xpath = "//h2[contains(text(),'Pharmacy Saver offers prescriptions as low as $XX.XX')]")
+	private WebElement pharmacySaverWidget;
+	
+	@FindBy(id = "plan-year")
+	private WebElement planYearDropDown;	
+
+	//@FindBy(xpath = ".//*[@for='pharmacy-saver']")
+	@FindBy(xpath = "//a[@class='h5 filter-button bold color-blue-link margin-none']")
+	private WebElement filterLink;
+	
+	
+	@FindBy(xpath = "(//*[@id='lang-select']//option)[2]")
+	private WebElement chineseLink;
+	
+	@FindBy(xpath = ".//*[@tabindex='0']")
+	private WebElement toolTip;
+	
+	@FindBy(xpath = ".//*[@id='pharmacy-saver']")
+	private WebElement multilangfilter;
+
+	@FindBy(xpath="//*[contains(text(), 'Please enter ZIP code')]")
+	private WebElement noZipcode;
+	
+	@FindBy(xpath="//*[contains(text(), 'Please enter your ZIP code as 5 numbers like this: 12345')]")
+	private WebElement invalidZip;
+
 
 	@FindBy(xpath = "//div[contains(@class,'callus')]")
 	WebElement customercare;
@@ -179,9 +260,14 @@ public class PharmacySearchPage extends UhcDriver {
 
 	public PharmacySearchPage enterZipDistanceDetails(String zipcode,
 			String distance, String county) {
-
+		
+		//driver.findElement(By.id("zipcodeTxt")).sendKeys("90210");
 		sendkeys(zipcodeField, zipcode);
-		selectFromDropDown(distanceDropDown, distance);
+		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+		
+		searchbtn.click();
+		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+		System.out.println("*****Zipcode, distance and County details are entered******");
 
 		zipcodeSearchButton.click();
 		try {
@@ -234,9 +320,13 @@ public class PharmacySearchPage extends UhcDriver {
 				"Find a Pharmacy | AARP® Medicare Plans from UnitedHealthcare®")) {
 			return new PharmacySearchPage(driver);
 		}
-		return null;
+		else {
+			return null;
+		}
+		
 	}
 
+	//selectFromDropDown(planNamesList, planName);
 	public PharmacySearchPage selectsPlanName(String planName) {
 		selectFromDropDown(planNamesList, planName);
 
@@ -251,7 +341,13 @@ public class PharmacySearchPage extends UhcDriver {
 				"Locate a Pharmacy | UnitedHealthcare®")) {
 			return new PharmacySearchPage(driver);
 		}
-		return null;
+		
+		driver.manage().timeouts().implicitlyWait(5000, TimeUnit.SECONDS);
+		
+		Select select = new Select(planType);	
+		select.selectByVisibleText(planName);
+		driver.manage().timeouts().implicitlyWait(100, TimeUnit.SECONDS);
+		return new PharmacySearchPage(driver);
 	}
 
 	
@@ -336,6 +432,17 @@ public class PharmacySearchPage extends UhcDriver {
 		}
 		return null;
 	}
+	
+	public PharmacySearchPage selectspanLanguage(){
+			
+		language.click();
+		if (driver.getTitle().equalsIgnoreCase(
+				"Member Claims")) {
+			return new PharmacySearchPage(driver);
+		}
+
+		return null;
+	}
 
 	public PharmacySearchPage showParticularService() {
 		particularServices.click();
@@ -381,6 +488,45 @@ public class PharmacySearchPage extends UhcDriver {
 
 
 	}
+	
+	public PharmacyResultPage clickOnContinue() {
+		btnContinue.click();
+		return new PharmacyResultPage(driver);
+	    }
+
+	    public PharmacyResultPage selectAPlan(String planName) {
+		Select selectPlan = new Select(drpPlan);
+		selectPlan.selectByVisibleText(planName);
+		try {
+			Thread.sleep(5000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		return new PharmacyResultPage(driver);
+	    }
+	    
+	    public void selectAYear(String year) {
+	    	Select selectPlan = new Select(drpYear);
+	    	if(year.equals("2017")){
+	    		selectPlan.selectByValue("1");
+	    	}
+	    }
+	    public void enterZipCode(String zipCode) {
+			txtZipCode.clear();
+			txtZipCode.sendKeys(zipCode);
+		    }
+
+		    public void selectState(String state) {
+
+			Select selectState = new Select(drpState);
+			selectState.selectByVisibleText(state);
+		    }
+
+		    public void fillFieldsToFindZipCode(String address, String city, String state) {
+			txtAddress.sendKeys(address);
+			txtCity.sendKeys(city);
+			selectState(state);
+		    }
 
 	public PharmacyResultPage searchSelectingPharmacyTypes(
 			String[] pharmacyTypeArray) {
@@ -416,6 +562,34 @@ public class PharmacySearchPage extends UhcDriver {
 		return null;
 
 	}
+public PharmacyResultPage ValidateShowOnMapResult() {
+		driver.manage().timeouts().implicitlyWait(300, TimeUnit.SECONDS);
+		showonmap.click();
+		if (driver.getTitle().equalsIgnoreCase(
+				"Member Claims")) {
+			return new PharmacyResultPage(driver);
+		}
+		return null;
+	}
+	public PharmacyResultPage ValidateSearchPdfResult() {
+		driver.manage().timeouts().implicitlyWait(80, TimeUnit.SECONDS);
+		
+		if (viewsearchpdf.isDisplayed())
+		{
+			viewsearchpdf.click();
+			}
+		if (driver.getTitle().equalsIgnoreCase(
+				"pharmacyDirectory.pdf")) {
+			return new PharmacyResultPage(driver);
+			
+		}
+		return null;
+	}
+	
+	public PharmacySearchPage ValidateSearchResultMapd() {
+        driver.navigate().to("https://www.aarpmedicareplans.com/health-plans/medicare-advantage-plans/medicare-enrollment.html");
+        return null;
+ }
 
 	@SuppressWarnings("deprecation")
 	public void validateDefaultChooseaPlanSection(){

@@ -113,6 +113,10 @@ public class CommonConstants {
 	public static final String  PAYMENT_HISTORY_BLUELAYER_DIRECTORY_MOBILE ="/jsonresponse/mobile/member/bluelayer/payment-history/";
 	
 	public static final String  DASHBOARD_PAYMENT_HISTORY_ULAYER_DIRECTORY_MOBILE ="/jsonresponse/mobile/member/ulayer/payment-history/";
+
+	private static final String DASHBOARD_DRUGCOSTESTIMATOR_DIRECTORY = "/jsonresponse/member/dashboard/drugcostestimator/";
+
+	public static final String ADD_DRUG_DETAILS = "adddrugdetails";
 	
 	public static final Page[] PAGES = { new Page(CommonConstants.GLOBAL, CommonConstants.GLOBAL_DIRECTORY),
 			new Page(CommonConstants.MY_ACCOUNT_HOME, CommonConstants.MY_ACCOUNT_HOME_DIRECTORY),
@@ -159,7 +163,12 @@ public class CommonConstants {
 			new Page(CommonConstants.PLAN_COMPARE, CommonConstants.PLAN_COMPARE_ULAYER_DIRECTORY),
 			new Page(CommonConstants.ADD_PLAN_CONFIRMATION, CommonConstants.ADD_PLAN_CONFIRMATION_ULAYER_DIRECTORY),
 			new Page(CommonConstants.PAYMENT_HISTORY_MOBILE,
-					CommonConstants.DASHBOARD_PAYMENT_HISTORY_ULAYER_DIRECTORY_MOBILE)
+					CommonConstants.DASHBOARD_PAYMENT_HISTORY_ULAYER_DIRECTORY_MOBILE),
+			new Page(CommonConstants.ADD_DRUG_DETAILS,
+					CommonConstants.DASHBOARD_DRUGCOSTESTIMATOR_DIRECTORY),
+					new Page(CommonConstants.ADD_NEW_DRUG_MODAL,
+                            CommonConstants.DASHBOARD_DRUGCOSTESTIMATOR_DIRECTORY),
+
 	};
 
 	public static final String BENEFITS_SUMMARY_DIRECTORY = "/jsonresponse/mobile/member/ulayer/benefits-summary/";
@@ -790,4 +799,36 @@ public class CommonConstants {
 	public static final String NEW_PAYMENT_HISTORY_ACTUAL_JSON = "newPaymentHistoryActualJSON";
 	public static final String NEW_PAYMENT_HISTORY_EXPECTED_JSON = "newPaymentHistoryexpectedJSON";
 
+	public static final String PROFILE_AND_PREFERENCES_REDESIGN_PAGE_DATA = "profilenpreferencesredesign.json";
+	
+	 public static final String REVIEW_AUTOMATIC_PAGE_DATA = "reviewautomaticactual.json";
+	 
+	 public static final String REVIEW_ONE_TIME_PAGE_DATA = "reviewonetimeactual.json";
+	 
+	 public static final String SAVE_DRUG_PAGE_DATA="savedrugpagedata.json";
+	 
+	 public static final String DCEstimator = "DCEstimator.json";
+	 
+	 public static final String ADD_DRUG_DETAILS_PAGE_DATA = "adddrugdetailspagedata.json";
+	 
+	 public static final String PAGE_OBJECT_DIRECTORY_DCE_MEMBER = "/page-objects/member/dashboard/drugcostestimator/";
+	 
+	 public static final String ADD_NEW_DRUG_PAGE_DATA = "addnewdrugpagedata.json";
+	 
+	 public static final String SWITCH_GENERIC_PAGE_DATA = "switchgenericpagedata.json";
+	 
+	 public static final String NEW_CLAIM_DETAILS_PAGE_DATA = "newClaimDetailsPage.json";
+	 
+	 public static final String SWITCH_GENERIC="switchgeneric.json";
+	 
+	 public static final String ADD_NEW_DRUG_MODAL = "addnewdrugmodal";
+	 
+	 public static final String PROFILE_AND_PREFERNCES_PAGE_DIRECTORY = "/jsonresponse/member/ulayer/profilesandprefereneces/";
+
+	public static final String FORMS_AND_RESOURCES_ACTUAL = null;
+
+	public static final String BENEFITS_AND_COVERAGE = "benefitsandcoverage" ;
+	
+
+	
 }

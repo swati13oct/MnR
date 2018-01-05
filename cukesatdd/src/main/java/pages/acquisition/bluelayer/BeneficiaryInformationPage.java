@@ -185,6 +185,7 @@ public class BeneficiaryInformationPage extends UhcDriver{
         public void entersPersonalInformation(
                         Map<String, String> personalAttributesMap) {
                 
+
 	        	String firstName = personalAttributesMap.get("First Name");
 	            String middleName = personalAttributesMap.get("Middle Initial");
 	            String lastName = personalAttributesMap.get("Last Name");

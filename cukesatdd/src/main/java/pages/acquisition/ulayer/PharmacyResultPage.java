@@ -8,6 +8,7 @@ import java.util.List;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -29,6 +30,27 @@ public class PharmacyResultPage extends UhcDriver{
 	
 	@FindBy(id ="disclosure_link")
 	private WebElement logOut;
+	
+	@FindBy(xpath = "//h1")
+    private WebElement pharmacySearchResultsHeading;
+
+    @FindBy(xpath = "//h4")
+    private WebElement pharmacyForPlanHeading;
+
+    @FindBy(css = "h2.h4.color-blue.medium.pharmacy-count")
+    private WebElement pharmacySearchResultsText;
+    
+    @FindBy(xpath="//ul[@class='pharmacy-list']//p[contains(text(),'Saver')][1]")
+    private WebElement pharmacySaverService;
+    
+    @FindBy(xpath="//ul[@class='pharmacy-list']//li[1]//p[contains(text(),'Standard')][1]")
+    private WebElement standardNetworkService;
+    
+    @FindBy(css = "table#searchResultsTable tbody div#pharmacyservices li:first-child")
+    private WebElement firstPharmacyService;
+
+    @FindBy(css = "//table[@id='searchResultsTable']//tbody//td[1]/div/div")
+    private WebElement firstPharmacyServiceBalloonColour;
 	
 	public JSONObject pharmacyResultJson;
 	
@@ -67,46 +89,7 @@ public class PharmacyResultPage extends UhcDriver{
 	@Override
 	public void openAndValidate() {
 
-		JSONObject jsonObject = new JSONObject();
-		for (String key : pharmacyResult.getExpectedData().keySet()) {
-			List<WebElement> elements = findElements(pharmacyResult
-					.getExpectedData().get(key));
-			if (elements.size() == 1) {
-				validate(elements.get(0));
-				try {
-					jsonObject.put(key, elements.get(0).getText());
-				} catch (JSONException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-			} else if (elements.size() > 1) {
-				JSONArray jsonArray = new JSONArray();
-				for (WebElement element : elements) {
-
-					validate(element);
-					try {
-						JSONObject jsonObjectForArray = new JSONObject();
-						jsonObjectForArray.put(pharmacyResult.getExpectedData()
-								.get(key).getElementName(), element.getText());
-						jsonArray.put(jsonObjectForArray);
-					} catch (JSONException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
-				}
-				try {
-					jsonObject.put(key, jsonArray);
-				} catch (JSONException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-
-			}
-
-		}
-		pharmacyResultJson = jsonObject;
-
-		
+		Assert.assertTrue(pharmacySearchResultsHeading.isDisplayed());
 	}
 	public boolean validatePharmacyResultpage(JSONObject jsonObject, String zipcode, String planName){
 		boolean flag = true;

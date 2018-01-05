@@ -195,6 +195,9 @@ public class AcquisitionHomePage extends GlobalWebElements {
 
 	@FindBy(id = "provider")
 	private WebElement po7Link;
+	
+	 @FindBy(id = "dce")
+     private WebElement enterYourDrugListButton;
 
 	@FindBy(xpath = "//*[@id='ghn_lnk_4']")
 	private WebElement hoverhealthandwellnesslink;
@@ -899,5 +902,12 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		return true;
 	}
 
+	public GetStartedPage navigateToPrescriptionDrug() {
+        enterYourDrugListButton.click();
+        if (getTitle().equalsIgnoreCase("Our Medicare Plan Types | AARP® Medicare Plans from UnitedHealthcare®")) {
+                return new GetStartedPage(driver);
+        } else {
+                return null;
+        }
 
-}
+}}

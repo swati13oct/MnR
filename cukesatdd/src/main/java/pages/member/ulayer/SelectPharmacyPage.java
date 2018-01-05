@@ -77,7 +77,17 @@ public class SelectPharmacyPage extends UhcDriver {
 	
 	@FindBy(xpath = "/html/body/div[7]/div/div/table/tbody/tr[5]/td/div[4]/div/div[6]/div[1]/div[3]/div/div/div/div[7]/div/div/div/div/div[1]/div[3]/div[2]/span[6]/span[2]/strong/span[2]")
 	private WebElement planYear2017;
+	
+	@FindBy(xpath = ".//*[@id='dceMemberUlayer']/div/div[1]/div[2]/div[2]/div[3]/div[1]/p")
+	private WebElement pharmacySaverPharmacieslb;
+	
+	@FindBy(xpath = ".//*[@id='dceMemberUlayer']/div/div[1]/div[2]/div[2]/div[10]/div[5]/div/div[1]/div/p")
+	private WebElement pharmacySaverDisclaimer;
 
+	@FindBy(xpath = ".//*[@id='dceMemberUlayer']/div/div[1]/div[2]/div[2]/div[3]/div[1]/span[3]/div")
+	private WebElement pharmacySaver_SaverMessage;
+	
+	
 	private PageData selectPharmacy;
 
 	public JSONObject selectPharmacyJson;
@@ -238,6 +248,21 @@ public class SelectPharmacyPage extends UhcDriver {
 
 	}
 	
+	public boolean isPharmacySaveRadioButtonPresent(){
+		
+		if(pharmacySaverPharmacieslb.isDisplayed()){
+			return true;
+		}else{
+			return false;
+		}
+		
+	}
+	
+	public void refreshDrugLookupPage() throws InterruptedException {
+		driver.navigate().refresh();
+		Thread.sleep(5000);
+	}
+	
 	public void selectPharmacy(){
 		try {
 			Thread.sleep(3000);
@@ -270,6 +295,26 @@ public class SelectPharmacyPage extends UhcDriver {
 			e.printStackTrace();
 		}
 		
+	}
+
+	public boolean isPharmacySaverDisclaimerDisplayed() {
+
+		if (pharmacySaverDisclaimer.isDisplayed()) {
+			return true;
+		} else {
+			return false;
+		}
+
+	}
+	
+	public boolean isPharmacySaver_SaverMessagePresent() {
+
+		if (pharmacySaver_SaverMessage.isDisplayed()) {
+			return true;
+		} else {
+			return false;
+		}
+
 	}
 
 }

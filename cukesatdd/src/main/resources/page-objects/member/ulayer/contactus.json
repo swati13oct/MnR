@@ -19,7 +19,7 @@
 },
 "customerService":{
 "identifier":"xpath",
-"elementName":"//div[@id='_content_aarpm_home_contact-us_jcr_content_comParsys_teaser']/div/div/div/div/div[2]/ul/li[1]/div"
+"elementName":".//*[@id='test']/li[1]/div/div[1]/p"
 },
 "customerServiceMailingAddress":{
 "identifier":"xpath",

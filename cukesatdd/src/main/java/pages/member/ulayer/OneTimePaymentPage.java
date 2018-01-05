@@ -115,9 +115,8 @@ public class OneTimePaymentPage extends UhcDriver{
 		}
 		return null;
 		
-	}
-
-
+	}	
+	
 	@Override
 	public void openAndValidate() {
 		

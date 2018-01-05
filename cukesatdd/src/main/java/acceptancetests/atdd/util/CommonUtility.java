@@ -94,7 +94,7 @@ public class CommonUtility {
 	}
 
 	public static void waitForPageLoad(WebDriver driver, WebElement element, long timeout) {
-
+		
 		WebDriverWait wait = new WebDriverWait(driver, timeout);
 		try {
 			WebElement elementExpected = wait.until(ExpectedConditions.visibilityOf(element));
