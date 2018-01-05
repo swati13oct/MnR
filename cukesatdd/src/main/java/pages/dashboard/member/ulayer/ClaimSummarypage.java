@@ -147,6 +147,9 @@ public class ClaimSummarypage extends UhcDriver{
 	@FindBy (css = ".color-red.semi-bold>p>span")
 	private WebElement fromDateLaterThanToDateError;
 	
+	@FindBy (xpath= "//*[@id='profileTabHeader']//div[@class='tabs-desktop']//li")
+	private List<WebElement> comboTabsOnclaimsPage;
+	
 
 
 	public ClaimSummarypage(WebDriver driver) {
@@ -374,7 +377,7 @@ public class ClaimSummarypage extends UhcDriver{
 		}
 	}
 
-	public void validateClaimsTable() {
+	public boolean validateClaimsTable() {
 		CommonUtility.waitForPageLoad(driver, ClaimsSummaryPage,60);
 		
 		try {
@@ -385,13 +388,15 @@ public class ClaimSummarypage extends UhcDriver{
 		}
 		if(claimsTableMedical.isDisplayed() || claimsTablePrescriptionDrug.isDisplayed() || claimsTableSHIP.isDisplayed()){
 			System.out.println("!!!!!!!!! Able to find the claims table !!!!!!!!!");
-			
+			return true;
 		}	
 		else
 		{
 			System.out.println("!!!!!!!!! NOT Able to find the claim table !!!!!!!!!");
 		Assert.fail();
+		return false;
 		}
+		
 	}
 
 	public void validateDownloadMyData() {
@@ -452,6 +457,39 @@ public class ClaimSummarypage extends UhcDriver{
 		
 	}
 	
+	public ClaimSummarypage comboTabSelection(){
+		//List<WebElement> comboTabsCount = comboTabsOnclaimsPage;
+		
+		for (WebElement webElement : comboTabsOnclaimsPage) {
+            System.out.println(webElement.getText());
+            webElement.click();
+            try {
+				Thread.sleep(10000);
+				last24months = driver.findElement(By.xpath("//div[@class='medical-claims']//h2[@ng-bind-html='planName']/parent::div//*[@id='document-date']//option[contains(@value,'24 months')]"));
+				last24months.click();
+				validateClaimsTable();
+				if (validateClaimsTable() == true)
+					break;			
+				
+			} catch (InterruptedException e) {
+				
+				last24months = driver.findElement(By.xpath("//div[@class='medical-claims shipCompSection']//div//*[@id='document-date']//option[contains(@value,'24 months')]"));
+				last24months.click();
+				validateClaimsTable();
+				if (validateClaimsTable() == true)
+					break;
+				
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}    
+                       
+        }
+		return new ClaimSummarypage(driver);
+		
+		
+		
+		
+	}
 	
 }
 

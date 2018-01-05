@@ -36,10 +36,10 @@ public class LoginPage extends UhcDriver {
 	// Page URL
 	private static String PAGE_URL = MRConstants.AARPM_URL;
 	private static String REDESIGN_PAGE_URL = MRConstants.REDESIGN_AARPM_URL;	private static String PAGE_URL_TEST_HARNESS = MRConstants.AARPM_URL_TEAMB_TESTHARNESS;
-	
+
 	private static String PAGE_URL_TEAM_H_TEST_HARNESS = MRConstants.TEAMH_URL_TESTHARNES;
 	private static String PAGE_URL_TEAM_MEDICARE_TESTHARNESS = MRConstants.TEAM_MEDICARE_TESTHARNESS;
-	
+
 
 	@FindBy(id = "fd_memberSignInButton")
 	private WebElement loginIn;
@@ -62,18 +62,18 @@ public class LoginPage extends UhcDriver {
 	private PageData browserCheckData;
 
 	private JSONObject browserCheckJson;
-	
+
 	@FindBy(id = "username")
 	private WebElement thUserName;
-	
+
 	@FindBy(id = "password")
 	private WebElement thPassword;
-	
+
 	@FindBy(id = "sign-in-btn")
 	private WebElement thSignIn;
-	
+
 	@FindBy(xpath=".//*[@id='IPEinvL']/map/area[1]")
-    private WebElement iPerceptionPopUp;
+	private WebElement iPerceptionPopUp;
 
 
 
@@ -101,10 +101,10 @@ public class LoginPage extends UhcDriver {
 		if (MRScenario.environment.equals("awe-dev-b") || MRScenario.environment.equals("dev-a") || MRScenario.environment.equals("dev-c") || MRScenario.environment.equals("team-b") || MRScenario.environment.equals("team-a") || MRScenario.environment.equals("team-c") || MRScenario.environment.equals("team-e")) {
 
 			while(isAlertPresent(driver));
-			
+
 		}
 
-		
+
 
 		if (MRScenario.environment.equals("team-d")) {
 
@@ -112,7 +112,7 @@ public class LoginPage extends UhcDriver {
 			alert.accept();
 			Alert alert1 = driver.switchTo().alert();
 			alert1.accept();
-			        }
+		}
 
 		if(currentUrl().contains("home/my-account-home.html"))
 
@@ -125,7 +125,7 @@ public class LoginPage extends UhcDriver {
 		else if (currentUrl().contains("terminated-plan.html")) {
 			return new TerminatedHomePage(driver); 
 		}
-			return new AccountHomePage(driver);
+		return new AccountHomePage(driver);
 	}
 
 	public LoginAssistancePage navigateToLoginAssistance() {
@@ -144,9 +144,9 @@ public class LoginPage extends UhcDriver {
 
 	@Override
 	public void openAndValidate() {
-if(MRScenario.environment.equals("team-e")){
+		if(MRScenario.environment.equals("team-e")){
 			start(MRConstants.NEW_REDESIGN_URL);
-			
+
 		}else{
 			start(PAGE_URL);
 			validate(loginIn);
@@ -177,7 +177,7 @@ if(MRScenario.environment.equals("team-e")){
 		return browserCheckJson;
 
 	}
-	
+
 	public static boolean isAlertPresent(WebDriver wd) {
 		try {
 			Alert alert = wd.switchTo().alert();
@@ -190,46 +190,46 @@ if(MRScenario.environment.equals("team-e")){
 			return false;
 		}
 	}
-	
+
 	public boolean isAlertPresent(){ 
-	    try{ 
-	        Alert a = new WebDriverWait(driver, 5).until(ExpectedConditions.alertIsPresent());
-	        if(a!=null){
-	            System.out.println("Alert is present = " + a.getText());
-	            driver.switchTo().alert().accept();
-	            return true;
-	        }else{
-	            //throw new Throwable();
-	        	System.out.println("alert is not present 1");
-	        	return false;
-	        }
-	    } 
-	    catch (Throwable e) {
-	        System.err.println("Alert isn't present!!");
-	        return false; 
-	    } 
+		try{ 
+			Alert a = new WebDriverWait(driver, 5).until(ExpectedConditions.alertIsPresent());
+			if(a!=null){
+				System.out.println("Alert is present = " + a.getText());
+				driver.switchTo().alert().accept();
+				return true;
+			}else{
+				//throw new Throwable();
+				System.out.println("alert is not present 1");
+				return false;
+			}
+		} 
+		catch (Throwable e) {
+			System.err.println("Alert isn't present!!");
+			return false; 
+		} 
 
 	} 
-	
+
 	public void loginTo(){
 		PageFactory.initElements(driver, this);
 		openAndValidate();
 	}
-	
+
 	public void loginToTeambTestHarness(){
 		start(PAGE_URL_TEST_HARNESS);
 		validate(thUserName);
 		validate(thPassword);
 		validate(thSignIn);
 	}
-	
+
 	public void loginToTeamhTestHarness(){
 		start(PAGE_URL_TEAM_H_TEST_HARNESS);
 		validate(thUserName);
 		validate(thPassword);
 		validate(thSignIn);
 	}
-	
+
 	public void navigateToTeamMedicareTestHarness(){
 		start(PAGE_URL_TEAM_MEDICARE_TESTHARNESS);
 		System.out.println("User is on Medicare Test harness page");
@@ -237,7 +237,7 @@ if(MRScenario.environment.equals("team-e")){
 		//validate(thPassword);
 		//validate(thSignIn);
 	}
-	
+
 	public Object thloginWith(String username, String password, String category) {
 		//driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 		/*WebElement loginInEle= this.driver.findElement(By.id("fd_memberSignInButton"));
@@ -246,10 +246,10 @@ if(MRScenario.environment.equals("team-e")){
 		sendkeys(thPassword, password);
 		thSignIn.click();
 
-		
+
 		if (MRScenario.environment.equals("dev-a") || MRScenario.environment.equals("team-a")) {
 			while (!isAlertPresent());
-        }
+		}
 
 
 		if (MRScenario.environment.equals("dev-a"))  {
@@ -257,13 +257,13 @@ if(MRScenario.environment.equals("team-e")){
 			while (!isAlertPresent());
 		}
 		if ( MRScenario.environment.equals("team-c") || MRScenario.environment.equals("team-b") ) {
-			
+
 			Alert alert = driver.switchTo().alert();
-	        alert.accept();
-	        //Alert alert1 = driver.switchTo().alert();
-	        //alert1.accept();
-	        } 
-		
+			alert.accept();
+			//Alert alert1 = driver.switchTo().alert();
+			//alert1.accept();
+		} 
+
 		try {
 			Thread.sleep(10000);
 		} catch (InterruptedException e) {
@@ -284,40 +284,48 @@ if(MRScenario.environment.equals("team-e")){
 		}
 		return null;
 	}
-	
+
 	public Object teamhloginWith(String username, String password) {
 		sendkeys(thUserName, username);
 		sendkeys(thPassword, password);
 		thSignIn.click();
+		if (MRScenario.environment.equals("team-b") ) {
+
+			Alert alert = driver.switchTo().alert();
+			alert.accept();
+			//Alert alert1 = driver.switchTo().alert();
+			//alert1.accept();
+		} 
+
 		try {
 			Thread.sleep(10000);
 		} catch (Exception e) {
 			// TODO: handle exception
 		}
-				
+
 		try{
 			//CommonUtility.waitForPageLoad(driver, iPerceptionPopUp, 90);
-            if (validate(iPerceptionPopUp)) {
-            	System.out.println("iPerceptionPopUp is Displayed");
-                  iPerceptionPopUp.click();
-            }
-     }catch(Exception e)        {
-            System.out.println("iPerception Pop Up not displayed");
-     }
+			if (validate(iPerceptionPopUp)) {
+				System.out.println("iPerceptionPopUp is Displayed");
+				iPerceptionPopUp.click();
+			}
+		}catch(Exception e)        {
+			System.out.println("iPerception Pop Up not displayed");
+		}
 
-				if(currentUrl().contains("testharness.html"))
+		if(currentUrl().contains("testharness.html"))
 
-				{
-					return new AccountHomePage(driver);
-				}
-				else if(currentUrl().contains("home/my-account-home.html")  || currentUrl().contains("/login.html") ) {
-					return new AccountHomePage(driver);
-				}
-				else if (currentUrl().contains("terminated-plan.html")) {
-					return new TerminatedHomePage(driver);
-				}
-				
-				return null;
+		{
+			return new AccountHomePage(driver);
+		}
+		else if(currentUrl().contains("home/my-account-home.html")  || currentUrl().contains("/login.html") ) {
+			return new AccountHomePage(driver);
+		}
+		else if (currentUrl().contains("terminated-plan.html")) {
+			return new TerminatedHomePage(driver);
+		}
+
+		return null;
 	}
 
 }

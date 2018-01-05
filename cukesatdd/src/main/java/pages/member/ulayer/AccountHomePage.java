@@ -4,7 +4,6 @@
  */
 package pages.member.ulayer;
 
-
 import java.util.ArrayList;
 import java.util.Map;
 import java.util.NoSuchElementException;
@@ -38,6 +37,7 @@ import atdd.framework.UhcDriver;
 import pages.dashboard.eob.EOBPage;
 import pages.dashboard.member.ulayer.ClaimSummarypage;
 import pages.member.ulayer.BenefitsAndCoveragePage;
+
 
 /**
  * @author pjaising
@@ -864,46 +864,6 @@ else{
 	}
 public pages.dashboard.member.ulayer.ClaimSummarypage navigateToClaimsSummaryPage() {
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 		if (MRScenario.environment.equalsIgnoreCase("team-h") || MRScenario.environment.equalsIgnoreCase("stage")) {
 			System.out.println("Go to claims link is present "+driver.findElement(By.xpath("//a[text()='Go to Claims page']")).isDisplayed());
 			driver.findElement(By.xpath("//a[text()='Go to Claims page']")).click();
@@ -911,9 +871,28 @@ public pages.dashboard.member.ulayer.ClaimSummarypage navigateToClaimsSummaryPag
 		}
 
 		else if (MRScenario.environment.equalsIgnoreCase("team-b")) {
+			try {
+				Thread.sleep(30000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			
 			System.out.println("Go to claims link is present "+driver.findElement(By.xpath("//a[text()='Go to Claims page']")).isDisplayed());
+			try {
+				Thread.sleep(10000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
 			driver.findElement(By.xpath("//a[text()='Go to Claims page']")).click();
+			try {
+				Thread.sleep(10000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			/*String testharnessUrl = "https://member." +MRScenario.environment+"-aarpmedicareplans.uhc.com/home/testharness.html";
 			driver.get(testharnessUrl);
 			CommonUtility.waitForPageLoad(driver, driver.findElement(By.xpath("//a[text()='Go to Claims Link page']")), 60); 	
@@ -931,6 +910,17 @@ public pages.dashboard.member.ulayer.ClaimSummarypage navigateToClaimsSummaryPag
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
+			}
+			
+			try {
+				ClaimSummarypage comboTab = new ClaimSummarypage(driver).comboTabSelection();
+				comboTab.comboTabSelection();
+				
+				
+				
+				
+			} catch (Exception e) {
+				// TODO: handle exception
 			}
 
 			//CommonUtility.waitForPageLoad(driver, driver.findElement(By.xpath("//select[@id='document-date']")), 60);
@@ -953,6 +943,11 @@ public pages.dashboard.member.ulayer.ClaimSummarypage navigateToClaimsSummaryPag
 		}
 		return new ClaimSummarypage(driver);
 	}
+	/*private void comboTabSelection() {
+	// TODO Auto-generated method stub
+	
+}*/
+
 	public pages.member.ulayer.ContactUsPage navigateToContactusRedesignPage() {
 		// TODO Auto-generated method stub
 		//String url = "https://member.team-e-aarpmedicareplans.uhc.com/content/aarpm/home/contact.html";
