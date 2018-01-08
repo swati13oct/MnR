@@ -130,5 +130,24 @@ Examples:
        | PDP     |  Group       |  NON LIS      | 
        | MAPD    |  Group       |  NON LIS      |
        | MA      |  Group       |  NON LIS      |
+       
+       
+       #| MA       |
+  @Needhelp
+  Scenario Outline: To verify the edit functionality in Account Profile section in UMS site
+    Given registered member with following details for Profile and Preferences flow
+      | <planType> |
+    When the user navigates to Profile and Preferences page
+    And the user validates the need help section
+    And the user validates see more ways to contact us section
+    And the user validates on clicking contact us link it should route to contact us page
+
+    Examples: 
+         | planType|
+         | MAPD     |
+        #  | MA       |
+         # |PDP       |
+         # |SHIP      |
+       
 
 

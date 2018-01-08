@@ -122,20 +122,63 @@ public abstract class UhcDriver {
 		}
 
 	}
+	
+	
+	
+	public boolean scrollToView(WebElement element) {
 
-	public boolean validate(WebElement element) {
+		//CM code
+	        try {
+	         
+	         JavascriptExecutor js = (JavascriptExecutor)driver;
+	     js.executeScript("arguments[0].scrollIntoView();", element);
+	     } catch (Exception e) {
 
-		// this.waitforElement(element);
-
-		if (element.isDisplayed()) {
-			System.out.println("The element" + element.getText() + "is found");
-			return true;
-		} else {
-			Assert.fail("The element " + element.getText() + "is not found");
+	            Assert.fail("The element " + element.getText() + "is not  found");
+	         return false;
+	     }
+	     
+	        return true;
 		}
-		return false;
-	}
 
+	
+	public boolean validate(WebElement element) {
+		/*try {
+		if (element.isDisplayed()) {
+		System.out.println("Element found!!!!");
+		return true;
+		} else {
+		System.out.println("Element not found/not visible");
+		}
+		} catch (Exception e) {
+		System.out.println("Exception: Element not found/not visible");
+
+		}
+		return false;*/
+
+		//CM code
+		scrollToView(element);
+		JavascriptExecutor jse = (JavascriptExecutor)driver;
+		jse.executeScript("window.scrollBy(0,-50)", "");
+	        try {
+	         waitforElement(element);
+	            if (element.isDisplayed()) {
+
+	                   Actions actions = new Actions(driver);
+	                   actions.moveToElement(element);
+	                   actions.perform();
+	                   Assert.assertTrue("@@@The element " + element.getText() + "is found@@@", element.isDisplayed());
+	                   //System.out.println("@@@The element " + element.getText() + "is found@@@");
+	            }
+	     } catch (Exception e) {
+
+	            Assert.fail("The element " + element.getText() + "is not  found");
+	         return false;
+	     }
+	     
+	        return true;
+		}
+	
 	public boolean validateNew(WebElement element) {
 
 		// this.waitforElement(element);

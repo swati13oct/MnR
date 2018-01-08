@@ -219,7 +219,7 @@ public static String DEREGISTER_STAGE_URL = "https://apsrs0261.uhc.com:9443/Part
     public static final String BNCBURL = "https://member." + MRScenario.environment + "-uhcmedicaresolutions.uhc.com/";
     
     public static final String Dashboard_URL = "https://" + MRScenario.environment + "-medicare.uhc.com/?TARGET=SMSR/member/benefits/overview.html%3fdeeplink=true";
-    
+    public static final String Dashboard_URL1 = "https://" + MRScenario.environment + "-medicare.uhc.com/";
     
     public static final String TEAMH_URL_TESTHARNES ="https://"+MRScenario.environment+"-werally.uhc.com/medicare/login/overview.html?testharness=true";
     
