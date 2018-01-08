@@ -32,20 +32,20 @@ Examples:
 #	| MAPD      | q4_dec_grp074     |12 Months		  | Medical |
 	      
        
- @validateEOBStatements      
- Scenario Outline: To verify How to read a medical EOB PDF
-Given registered AMP with for EOB flow
-	| Plan Type      |<planType>  |
-	| Member Type    |<memberType>|
-Then the user navigates to EOB page	
-And the user slects the desired date range
-  | Plan Type      |<planType>  |
-  | Date Range     |<dateRange> |
-  | EOB Type			 |<eobType>|
-Then the user validates EOB statments displayed 	
-Examples:
-	| planType  | memberType        |dateRange			| eobType |
-	| MAPD      | q4_dec_aarp159    |12 Months		  | Medical |
+# @validateEOBStatements      
+ #Scenario Outline: To verify How to read a medical EOB PDF
+#Given registered AMP with for EOB flow
+#	| Plan Type      |<planType>  |
+#	| Member Type    |<memberType>|
+#Then the user navigates to EOB page	
+#And the user slects the desired date range
+#  | Plan Type      |<planType>  |
+#  | Date Range     |<dateRange> |
+#  | EOB Type			 |<eobType>|
+#Then the user validates EOB statments displayed 	
+#Examples:
+#	| planType  | memberType        |dateRange			| eobType |
+#	| MAPD      | q4_dec_aarp159    |12 Months		  | Medical |
 	 
  	
   @eobCoutn    @EOBSep
@@ -65,21 +65,21 @@ Then the user validates EOB count
 
 
  
-@comboTab
-Scenario Outline: To verify different plan types under combo tabs
-Given registered AMP with for EOB flow
-       | Member Type    |<memberType>|
-And the user navigates to EOB page  
-Then the user validates content displayed on EOB page
-       | Plan Type      |<planType>  |       
-Examples: 
-| planType    | memberType   					 | 
-| MA          | q4_dec_combo015        |
-|	SSUP				|	q4_dec_combo015        |
-|	HIP					| q4_dec_ship012				 |
-| MAPD				|	q4_dec_ship012				 | 
-| PDP					| q4_dec_combo026				 |
-|	SHIP				| q4_dec_combo026				 |
+#@comboTab
+#Scenario Outline: To verify different plan types under combo tabs
+#Given registered AMP with for EOB flow
+#       | Member Type    |<memberType>|
+#And the user navigates to EOB page  
+#Then the user validates content displayed on EOB page
+ #      | Plan Type      |<planType>  |       
+#Examples: 
+#| planType    | memberType   					 | 
+#| MA          | q4_dec_combo015        |
+#|	SSUP				|	q4_dec_combo015        |
+#|	HIP					| q4_dec_ship012				 |
+#| MAPD				|	q4_dec_ship012				 | 
+#| PDP					| q4_dec_combo026				 |
+#|	SHIP				| q4_dec_combo026				 |
 #Peehip
 #| MA					| q4_dec_combo022					 |
 #| HIP					| q4_dec_combo022          |
@@ -118,7 +118,7 @@ Examples:
 | planType    | memberType   					 |eobTypeData				|dateRange			|
 #5 	EOBS
 |	MAPD				|	q4_dec_grp074					 |Prescription Drug |12 Months  	 |
-|	MAPD				|	q4_dec_grp074					 |Prescription Drug |18 Months  	 |
+#|	MAPD				|	q4_dec_grp074					 |Prescription Drug |18 Months  	 |
 |	MAPD				|	q4_dec_grp074					 |Prescription Drug |6 Months  	   |
 |	MAPD				|	q4_dec_grp074					 |Prescription Drug |custom-search |
 
@@ -130,7 +130,7 @@ Examples:
  # 2 EOBs displayed
  |	PDP				|	q4_dec_aarp327					 |na |12 Months |
  |	PDP	  		|	q4_dec_aarp327					 |na |18 Months|
- |	PDP	  		|	q4_dec_aarp327					 |na |6 Months |
+ #|	PDP	  		|	q4_dec_aarp327					 |na |6 Months |
  #|	PDP  			|	q4_dec_aarp327					 |na |custom-search |
  
  #=====================================================================================================
