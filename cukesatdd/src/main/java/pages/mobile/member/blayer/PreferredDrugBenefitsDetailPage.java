@@ -32,9 +32,6 @@ public class PreferredDrugBenefitsDetailPage extends UhcDriver{
 	@FindBy(xpath = "//div[@id='preferred']//div[@class='carousel-next clickable']")
 	private WebElement nextarrow;
 	
-	@FindBy(css="div#preferred h2")
-	private WebElement planName;
-	
 	@FindBy(xpath="//div[@id='preferred']//div[@class='drug__benefits__mobile constrain-mobile mobile-only']//div[2]//th")
 	private WebElement txtInitialCoverage;
 	
@@ -116,7 +113,7 @@ public class PreferredDrugBenefitsDetailPage extends UhcDriver{
 
 	public JSONObject getExpectedData(Map<String, JSONObject> expectedDataMap) {
 		JSONObject benefitsDetailExpectedJson = expectedDataMap
-				.get(acceptancetests.atdd.mobile.data.CommonConstants.BENEFITS_DETAIL_PAGE_DATA);
+				.get(acceptancetests.atdd.data.CommonConstants.BENEFITS_DETAIL);
 		
 		return benefitsDetailExpectedJson;
 	}
@@ -158,14 +155,11 @@ public class PreferredDrugBenefitsDetailPage extends UhcDriver{
 		// TODO Auto-generated catch block
 		e.printStackTrace();
 		}
+
+
 		// TODO Auto-generated method stub
 
 		}
-	
-	public WebElement getPlanName(){
-		validate(planName);
-		return planName;
-	}
 	
 	@SuppressWarnings("deprecation")
 	public void validateInitialCoverageStage(){

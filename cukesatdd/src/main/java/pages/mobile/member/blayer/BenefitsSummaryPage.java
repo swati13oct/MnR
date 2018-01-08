@@ -20,14 +20,17 @@ import org.openqa.selenium.support.PageFactory;
 import acceptancetests.atdd.data.PageData;
 import acceptancetests.atdd.mobile.data.CommonConstants;
 import acceptancetests.atdd.util.CommonUtility;
+import atdd.framework.UhcDriver;
 import pages.dashboard.member.blayer.PaymentHistoryPage;
+import pages.mobile.member.blayer.MyDrugBenefitDetailsPage;
+import pages.mobile.member.blayer.MyPlanBenefitDetailsPage;
 
 /**
  * @author pnampall
  *
  */
 
-public class BenefitsSummaryPage extends PharmacyLocator{
+public class BenefitsSummaryPage extends UhcDriver{
 	
 	@FindBy(xpath = "//a[text()='Set Up Automatic Payments']")
 	private WebElement setupAutomaticPayments;
@@ -318,24 +321,8 @@ public class BenefitsSummaryPage extends PharmacyLocator{
 	}
 
 	 
-	 public void validatePharmacyPage(){
-		 filterButton.click();
-		 if(mailServiceRadioCheckbox.isDisplayed()){
-			 System.out.println("---------------Failed due to presence of mail service checkbox-------");
-	         Assert.fail();	 
-		 }
-		 if(mailServiceRadioText.isDisplayed()){
-			 System.out.println("--------------Failed due to presence of mail service tet--------------");
-			 Assert.fail();
-		 }
-		 toolTip.click();
-		 if(toolTipMailServiceContent.isDisplayed()){
-			 System.out.println("--------------Failed due to presence of mail service in tool tip-----------------");
-			 Assert.fail();
-		 }
 		 
-	 }
-	public JSONObject getBrowserCheck() {
+	 public JSONObject getBrowserCheck() {
 	
 		String fileName = CommonConstants.MOBILE_BROWSER_CHECK_DATA_BLUELAYER;
 		browserCheckData = CommonUtility.readPageData(fileName,

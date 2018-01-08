@@ -758,20 +758,20 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 	public void validatePlanOverview() {
 		// TODO Auto-generated method stub
 
-		validateNew(planName);
-		validateNew(nameLabel);
-		validateNew(memberID);
-		validateNew(effective_Date);
-		// validateNew(Monthly_Premium);
-		// validateNew(MakePaymentButton);
+		validate(planName);
+		validate(nameLabel);
+		validate(memberID);
+		validate(effective_Date);
+		// validate(Monthly_Premium);
+		// validate(MakePaymentButton);
 
 	}
 
 	public void validateneedhelpheaderShip() {
-		validateNew(NeedhelpShip);
-		validateNew(TechnicalSupportShip);
-		validateNew(GeneralQuestionShip);
-		validateNew(ClaimsSupportShip);
+		validate(NeedhelpShip);
+		validate(TechnicalSupportShip);
+		validate(GeneralQuestionShip);
+		validate(ClaimsSupportShip);
 	}
 
 	public void validateContactUsNeedHelp() {
@@ -781,7 +781,7 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		validateNew(Seemorewaystext);
+		validate(Seemorewaystext);
 
 	}
 
@@ -807,60 +807,60 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 	}
 
 	public boolean getview_label() {
-		return validateNew(view_label);
+		return validate(view_label);
 	}
 
 	public boolean getdocuments_label() {
-		return validateNew(documents_label);
+		return validate(documents_label);
 	}
 
 	public void validatePlanOverviewLis() {
 		// TODO Auto-generated method stub
 
-		validateNew(planName);
-		validateNew(nameLabel);
-		validateNew(memberID);
-		validateNew(effective_Date);
-		// validateNew(Monthly_Premium);
-		validateNew(ExtraHelp);
-		// validateNew(MakePaymentButton);
+		validate(planName);
+		validate(nameLabel);
+		validate(memberID);
+		validate(effective_Date);
+		// validate(Monthly_Premium);
+		validate(ExtraHelp);
+		// validate(MakePaymentButton);
 
 	}
 
 	public void validatePlanOverviewShip() {
 		// TODO Auto-generated method stub
 
-		validateNew(planName);
-		validateNew(nameLabel);
-		validateNew(memberID);
-		validateNew(effective_Date);
+		validate(planName);
+		validate(nameLabel);
+		validate(memberID);
+		validate(effective_Date);
 
 	}
 
 	public void validateHeadersShip() {
 		// TODO Auto-generated method stub
 
-		validateNew(BenefitsSummaryHeader);
-		validateNew(ParticipatingHospitalStays1);
-		validateNew(ParticipatingHospitalStays2);
-		validateNew(TravelBenefitHeader);
-		validateNew(BloodPackedRedBloodCellsPartA);
-		validateNew(SkilledNursingFacilityStays);
-		validateNew(HospiceCare);
-		validateNew(MedicalCare);
-		validateNew(BloodPackedRedBloodCellsPartB);
-		validateNew(EmergencyCare);
+		validate(BenefitsSummaryHeader);
+		validate(ParticipatingHospitalStays1);
+		validate(ParticipatingHospitalStays2);
+		validate(TravelBenefitHeader);
+		validate(BloodPackedRedBloodCellsPartA);
+		validate(SkilledNursingFacilityStays);
+		validate(HospiceCare);
+		validate(MedicalCare);
+		validate(BloodPackedRedBloodCellsPartB);
+		validate(EmergencyCare);
 
 	}
 
 	
 	public void validatePrimaryCareProvider() {
 		// TODO Auto-generated method stub
-		validateNew(PrimaryCareProviderHeader);
-		validateNew(YourPrimaryCareProvider);
-		validateNew(ChangeYourPcpButton);
-		validateNew(SearchforaPhysician);
-		validateNew(StartSearch);
+		validate(PrimaryCareProviderHeader);
+		validate(YourPrimaryCareProvider);
+		validate(ChangeYourPcpButton);
+		validate(SearchforaPhysician);
+		validate(StartSearch);
 		
 	}
 	public void validateNeedhelpheader() {
@@ -946,11 +946,11 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 	}
 
 	public void validateHeaders() {
-		validateNew(BenefitsSummaryHeader);
-		validateNew(Copayscoinsuranceheader);
-		validateNew(HospitalVisits);
-		validateNew(OfficeVisits);
-		validateNew(OutpatientSurgeryCenter);
+		validate(BenefitsSummaryHeader);
+		validate(Copayscoinsuranceheader);
+		validate(HospitalVisits);
+		validate(OfficeVisits);
+		validate(OutpatientSurgeryCenter);
 
 	}
 	
@@ -958,7 +958,7 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 		// TODO Auto-generated method stub
 		JavascriptExecutor jse = (JavascriptExecutor) driver;
 		jse.executeScript("window.scrollBy(0,3000)", "");
-		validateNew(disclaimersLink);
+		validate(disclaimersLink);
 		disclaimersLink.click();
 		try {
 			Thread.sleep(10000);
@@ -998,9 +998,9 @@ public ValueAddedServicepage clickOnLearnMore() {
 
 public void validateOutofPocketMax() {
 	// TODO Auto-generated method stub
-	validateNew(OutofPocketMaximum);
-	validateNew(INNETWORK);
-	validateNew(OUTOFNETWORK);
+	validate(OutofPocketMaximum);
+	validate(INNETWORK);
+	validate(OUTOFNETWORK);
 }
 
 

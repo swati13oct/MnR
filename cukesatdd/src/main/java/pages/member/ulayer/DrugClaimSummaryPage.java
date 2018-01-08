@@ -9,6 +9,7 @@ import org.json.JSONObject;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.FindBys;
 import org.openqa.selenium.support.PageFactory;
 
 import acceptancetests.atdd.data.CommonConstants;
@@ -42,6 +43,9 @@ public class DrugClaimSummaryPage extends UhcDriver {
 
 	@FindBy(id = "searchRange")
 	private WebElement searchRange;
+	
+	@FindBys(value = { @FindBy(xpath = "//select[@id='searchRange']/option") })
+	private List<WebElement> searchRangeList;
 
 	@FindBy(id = "shipfromMonth")
 	private WebElement shipfromMonth;
@@ -102,6 +106,30 @@ public class DrugClaimSummaryPage extends UhcDriver {
 
 	@FindBy(id = "radioDrug")
 	private WebElement radioDrug;
+	
+	@FindBy(xpath = ".//*[@id='columnsort0']/table/tbody/tr/td[1]/p/b")
+	private WebElement dateFilled;
+	
+	@FindBy(xpath = ".//*[@id='columnsort1']/table/tbody/tr/td[1]/p/b")
+	private WebElement rxNumber;
+	
+	@FindBy(xpath = ".//*[@id='columnsort2']/table/tbody/tr/td[1]/p/b")
+	private WebElement medication;
+	
+	@FindBy(xpath = ".//*[@id='columnsort3']/table/tbody/tr/td[1]/p/b")
+	private WebElement pharmacy;
+	
+	@FindBy(xpath = ".//*[@id='columnsort4']/table/tbody/tr/td[1]/p/b")
+	private WebElement memberHasPaid;
+	
+	@FindBy(xpath = ".//*[@id='columnsort5']/table/tbody/tr/td[1]/p/b")
+	private WebElement planHasPaid;
+	
+	@FindBy(xpath = ".//*[@id='columnsort5']/table/tbody/tr/td[1]/p/b")
+	private WebElement otherPayments;
+	
+	@FindBy(xpath = ".//*[@id='searchResultMsg']/p")
+	private WebElement searchResultMsg;
 
 	private PageData drugClaimsSummary;
 
@@ -111,14 +139,10 @@ public class DrugClaimSummaryPage extends UhcDriver {
 		super(driver);
 		PageFactory.initElements(driver, this);
 		// TODO: Finally we should wait only for one element
-		CommonUtility.waitForPageLoad(driver, drugClaimsPageheading,CommonConstants.TIMEOUT_30);
-		CommonUtility.waitForPageLoad(driver, searchResultMessage,CommonConstants.TIMEOUT_30);
-		CommonUtility.waitForPageLoad(driver, customResultMessage, CommonConstants.TIMEOUT_30);
-		CommonUtility.waitForPageLoad(driver, noClaimsFoundMessage, CommonConstants.TIMEOUT_30);
-		String fileName = CommonConstants.DRUG_CLAIMS_SUMMARY_PAGE_DATA;
+		/*String fileName = CommonConstants.DRUG_CLAIMS_SUMMARY_PAGE_DATA;
 		drugClaimsSummary = CommonUtility.readPageData(fileName,
 				CommonConstants.PAGE_OBJECT_DIRECTORY_ULAYER_MEMBER);
-		openAndValidate();
+		openAndValidate();*/
 	}
 
 	/*
@@ -266,11 +290,16 @@ public class DrugClaimSummaryPage extends UhcDriver {
 	}
 
 	public DrugClaimSummaryPage searchDrugClaimsByPeriod(String claimPeriod) {
-
-		searchRange.click();
-		searchRange.sendKeys(claimPeriod);
 		CommonUtility.waitForPageLoad(driver, searchbutton,CommonConstants.TIMEOUT_30);
+		try {
+			Thread.sleep(6000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		selectFromDropDown(searchRangeList, claimPeriod);
 		searchbutton.click();
+		
 		if (driver.getTitle().equalsIgnoreCase("Claims")) {
 			return new DrugClaimSummaryPage(driver);
 		}
@@ -468,6 +497,23 @@ public class DrugClaimSummaryPage extends UhcDriver {
 		claimSummaryExpectedJson = CommonUtility.mergeJson(
 				claimSummaryExpectedJson, globalExpectedJson);
 		return claimSummaryExpectedJson;
+	}
+	
+	public boolean validateRxClaims() {
+		boolean flag = false;
+		try {
+			Thread.sleep(6000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		if(validate(dateFilled)&&validate(rxNumber)&&validate(medication)&&validate(pharmacy)&&validate(memberHasPaid)
+				&&validate(planHasPaid)&&validate(otherPayments)&&validate(searchResultMsg)){
+			flag = true;
+			
+		}else
+			System.out.println("Could not verify the Med Claims elements");
+		return flag;
 	}
 
 }

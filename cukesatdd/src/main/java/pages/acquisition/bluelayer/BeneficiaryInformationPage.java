@@ -37,10 +37,10 @@ public class BeneficiaryInformationPage extends UhcDriver{
         @FindBy(id = "enrollment.medicareBeneficiary.person.dob.strDate")
         private WebElement dateOfBirthField;
         
-        @FindBy(id = "enrollment.medicareBeneficiary.person.gender1")
+        @FindBy(id = "enrollment.medicareBeneficiary.person.gender2")
         private WebElement maleRadioButton;
         
-        @FindBy(id = "enrollment.medicareBeneficiary.person.gender2")
+        @FindBy(id = "enrollment.medicareBeneficiary.person.gender1")
         private WebElement femaleRadioButton;
         
         @FindBy(id = "enrollment.medicareBeneficiary.medicareClaimNumber")
@@ -94,7 +94,7 @@ public class BeneficiaryInformationPage extends UhcDriver{
         @FindBy(id = "enrollmentNext")
         private WebElement enrollmentNext;
         
-        @FindBy(xpath = ".//*[@id='enrollmentMAForm']/h3")
+        @FindBy(xpath = "//div[@class='enrollment_content']/div[2]/form/h3")
         private WebElement pageHeading;
         
         private PageData beneficiaryInformation;
@@ -106,12 +106,30 @@ public class BeneficiaryInformationPage extends UhcDriver{
                 PageFactory.initElements(driver, this);
                 String fileName = CommonConstants.BENEFICIARY_INFORMATION_PAGE_DATA;
                 beneficiaryInformation = CommonUtility.readPageData(fileName,
-                                CommonConstants.PAGE_OBJECT_DIRECTORY_ULAYER_ACQ);
+                                CommonConstants.PAGE_OBJECT_DIRECTORY_BLUELAYER_ACQ);
                 
 
                 openAndValidate();
         }
-
+        public boolean validateBeneficiaryPage(JSONObject beneficiaryObject, String planName, String zipCountInfo){
+    		boolean flag = true;
+    		try {
+				System.out.println(beneficiaryObject.get("planName"));
+				if(!beneficiaryObject.get("planName").toString().contains(planName))
+	    			flag = false;
+				if(!beneficiaryObject.get("zipCountyInfo").toString().equals(zipCountInfo))
+					flag = false;
+				if(!beneficiaryObject.get("premium").toString().contains("$"))
+					flag = false;
+				
+			} catch (JSONException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+    		
+    		
+    		return flag;
+        }
         @Override
         public void openAndValidate() {
                 
@@ -137,15 +155,16 @@ public class BeneficiaryInformationPage extends UhcDriver{
                 validate(confirmEmailAddressField);
                 validate(languagePreferenceField);
                 validate(enrollmentNext);
-
                 
                 JSONObject jsonObject = new JSONObject();
                 for (String key : beneficiaryInformation.getExpectedData().keySet()) {
                         WebElement element = findElement(beneficiaryInformation.getExpectedData()
                                         .get(key));
+                        System.out.println("key:"+key);
                         if (element != null) {
                                 if (validate(element)) {
                                         try {
+                                        		
                                                 jsonObject.put(key, element.getText());
                                         } catch (JSONException e) {
                                                 // TODO Auto-generated catch block
@@ -156,19 +175,23 @@ public class BeneficiaryInformationPage extends UhcDriver{
 
                 }
                 beneficiaryInformationJson = jsonObject;
-
-                
         }
 
+        public JSONObject getBeneficiaryActualData() { 
+        	
+        	return beneficiaryInformationJson;
+        	
+        }
         public void entersPersonalInformation(
                         Map<String, String> personalAttributesMap) {
                 
-                String firstName = personalAttributesMap.get("First Name");
-                String middleName = personalAttributesMap.get("Middle Initial");
-                String lastName = personalAttributesMap.get("Last Name");
-                String dob = personalAttributesMap.get("Birth Date").replaceAll("[/-]", "");
-                String gender = personalAttributesMap.get("Gender");
-                String medicareClaimNumber = personalAttributesMap.get("Medicare Claim Number").replaceAll("-", "");
+
+	        	String firstName = personalAttributesMap.get("First Name");
+	            String middleName = personalAttributesMap.get("Middle Initial");
+	            String lastName = personalAttributesMap.get("Last Name");
+	            String dob = personalAttributesMap.get("Birth Date").replaceAll("[/-]", "");
+	            String gender = personalAttributesMap.get("Gender");
+	            String medicareClaimNumber = personalAttributesMap.get("Medicare Claim Number").replaceAll("-", "");
                 String partAStartDate = personalAttributesMap.get("Hospital (Part A) Effective Date").replaceAll("[/-]", "");
                 String partBStartDate = personalAttributesMap.get("Medical (Part B) Effective Date").replaceAll("[/-]", "");
                 String address = personalAttributesMap.get("Address");

@@ -1,6 +1,8 @@
 package pages.acquisition.ulayer;
 
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 import org.json.JSONException;
@@ -29,6 +31,7 @@ import acceptancetests.atdd.data.CommonConstants;
 import acceptancetests.atdd.data.PageData;
 import acceptancetests.atdd.util.CommonUtility;
 import atdd.framework.UhcDriver;
+import gherkin.formatter.model.DataTableRow;
 
 public class SpecialElectionPeriodPage extends UhcDriver {
 	@FindBy(xpath = "//*[@id='enrollment-step-1-part-1']/div[1]/div/div[2]/fieldset/span[1]/label")
@@ -56,19 +59,19 @@ public class SpecialElectionPeriodPage extends UhcDriver {
 
 	//@FindBy(id="extraHelpPayinglabel")
 	@FindBy(xpath = "//*[@id='extraHelpPayinglabel']")
-	private WebElement checkBoxFour;
+	private WebElement checkBoxThree; //checkBoxFour;
 
 	//@FindBy(id="notEligibleforExtrahelplabel")
 	@FindBy(xpath = "//*[@id='notEligibleforExtrahelplabel']")
-	private WebElement checkBoxFive;
+	private WebElement checkBoxFour; //checkBoxFive;
 
 	//@FindBy(id="movingIntoLongTermCarelabel")
 	@FindBy(xpath = "//*[@id='movingIntoLongTermCarelabel']")
-	private WebElement checkBoxSixA;
+	private WebElement checkBoxFive; //checkBoxSixA;
 	
 	//@FindBy(id="movingOutOfLongTermCarelabel")
 	@FindBy(xpath = "//*[@id='movingOutOfLongTermCarelabel']")
-	private WebElement checkBoxSixB;
+	private WebElement checkBoxSix; //checkBoxSixB;
 
 	//@FindBy(id="medicareMEdicaidOrStateHelplabel")
 	@FindBy(xpath = "//*[@id='medicareMEdicaidOrStateHelplabel']")
@@ -91,23 +94,23 @@ public class SpecialElectionPeriodPage extends UhcDriver {
 	private WebElement enterDateOne;
 
 	//@FindBy(id="sepDate-field-1")
-	@FindBy(xpath = "//*[@id='sepDate-field-1']")
+	@FindBy(xpath = ".//*[@id='sepDate-field-1']")
 	private WebElement enterDateTwo;
 
 	//@FindBy(id="sepDate-field-3")
-	@FindBy(xpath = "//*[@id='sepDate-field-3']")
-	private WebElement enterDateFive;
+	@FindBy(xpath = ".//*[@id='sepDate-field-3']")
+	private WebElement enterDateThree;
 
 	//@FindBy(id="sepDate-field-4")
-	@FindBy(xpath = "//*[@id='sepDate-field-4']")
-	private WebElement enterDateSixA;
+	@FindBy(xpath = ".//*[@id='sepDate-field-4']")
+	private WebElement enterDateFour;
 
 	//@FindBy(id="sepDate-field-5")
-	@FindBy(xpath = "//*[@id='sepDate-field-5']")
-	private WebElement enterDateSixB;
+	@FindBy(xpath = ".//*[@id='sepDate-field-5']")
+	private WebElement enterDateFive;
 
 	//@FindBy(id="se-11-other-9")
-	@FindBy(xpath = "//*[@id='sepDate-field-9']")
+	@FindBy(xpath = ".//*[@id='se-11-other-6']")//*[@id='sepDate-field-9']")
 	private WebElement enterReason;
 
 
@@ -133,18 +136,18 @@ public class SpecialElectionPeriodPage extends UhcDriver {
 		validate(previous);
 		validate(checkBoxOne);
 		validate(checkBoxTwo);
+		validate(checkBoxThree);
 		validate(checkBoxFour);
-		validate(checkBoxFive);
-		validate(checkBoxSixA);
-		validate(checkBoxSixB);
+		//validate(checkBoxSixA);
+		//validate(checkBoxSixB);
 		validate(checkBoxSeven);
 		validate(checkBoxEight);
 		validate(checkBoxNine);
 		validate(enterDateOne);
 		validate(enterDateTwo);
 		validate(enterDateFive);
-		validate(enterDateSixA);
-		validate(enterDateSixB);
+		//validate(enterDateSixA);
+		//validate(enterDateSixB);
 		validate(enterReason);	
 		
 		JSONObject jsonObject = new JSONObject();
@@ -176,8 +179,13 @@ public class SpecialElectionPeriodPage extends UhcDriver {
 
 	public void yesForSEPQuestion(Map<String, String> SEPAttributesMap) {
 		yes.click();
-		String a = SEPAttributesMap.get("SEP1");
-		if (SEPAttributesMap.get("SEP1").equalsIgnoreCase("yes"))
+		
+		for(int i = 0; i<7; i++){
+			List<String> l = new ArrayList<String>(SEPAttributesMap.keySet());
+			if (SEPAttributesMap.get(l.get(i)).equalsIgnoreCase("yes"))
+				selectQuestions(l.get(i),SEPAttributesMap);
+		}
+		/*if (SEPAttributesMap.get("SEP1").equalsIgnoreCase("yes"))
 			selectFirstQuestion(SEPAttributesMap.get("SEPDate1"));
 		else if (SEPAttributesMap.get("SEP2").equalsIgnoreCase("yes"))
 			selectSecondQuestion(SEPAttributesMap.get("SEPDate2"));
@@ -194,7 +202,7 @@ public class SpecialElectionPeriodPage extends UhcDriver {
 		else if (SEPAttributesMap.get("SEP9").equalsIgnoreCase("yes"))
 			selectNinthQuestion();
 		else if (SEPAttributesMap.get("SEPOther").equalsIgnoreCase("yes"))
-			selectOther(SEPAttributesMap.get("SEPOtherReason"));
+			selectOther(SEPAttributesMap.get("SEPOtherReason"));*/
 
 		//clickOnSaveAndContinue();
 	}
@@ -228,13 +236,13 @@ public class SpecialElectionPeriodPage extends UhcDriver {
 	}
 
 	public void selectSixthQuestion(String date) {
-		checkBoxSixA.click();
-		checkBoxSixB.click();
+		//checkBoxSixA.click();
+		//checkBoxSixB.click();
 		String[] Date = date.split(",");
 		String startDate = Date[0];
 		String endDate = Date[1];
-		enterDateSixA.sendKeys(startDate);
-		enterDateSixB.sendKeys(endDate);
+		//enterDateSixA.sendKeys(startDate);
+		//enterDateSixB.sendKeys(endDate);
 	}
 
 	public void selectSeventhQuestion() {
@@ -280,7 +288,6 @@ public class SpecialElectionPeriodPage extends UhcDriver {
 	
 			return new PrescriptionDrugCoveragePage(driver);
 	}
-	
 	@FindBy(xpath = ".//*[@id='enrollment-step-1-part-1']/div[1]/div/div[1]/h2")
 	private WebElement sepHeader;
 	
@@ -289,5 +296,44 @@ public class SpecialElectionPeriodPage extends UhcDriver {
 		if(validate(sepHeader)&&validate(yes)&&validate(no)&&validate(saveAndContinue))
 			flag = true;
 		return flag;
+	}
+	public void selectQuestions(String s,Map<String, String> SEPAttributesMap){
+		WebElement tempElement = null, textBoxElement = null ;
+		String text = "";
+		if (s .equalsIgnoreCase("SEP1")){
+			tempElement = checkBoxOne;
+			textBoxElement = enterDateOne;
+			text = SEPAttributesMap.get("SEPDate1");
+		}else if (s.equalsIgnoreCase("SEP2")){
+			tempElement = checkBoxTwo;
+			textBoxElement = enterDateTwo;
+			text = SEPAttributesMap.get("SEPDate2");
+		}else if (s .equalsIgnoreCase("SEP3")){
+			tempElement = checkBoxThree;
+			selectFourthQuestion();
+		}else if (s .equalsIgnoreCase("SEP4")){
+			tempElement = checkBoxFour;
+			textBoxElement = enterDateThree;
+			text = SEPAttributesMap.get("SEPDate4");
+		}else if (s .equalsIgnoreCase("SEP5")){
+			tempElement = checkBoxFive;
+			textBoxElement = enterDateFour;
+			text = SEPAttributesMap.get("SEPDate5");
+		}else if (s .equalsIgnoreCase("SEP6")){
+			tempElement = checkBoxSix;
+			textBoxElement = enterDateFive;
+			text = SEPAttributesMap.get("SEPDate6");
+		}else if (s .equalsIgnoreCase("SEPOther")){
+			tempElement = checkBoxOther;
+			textBoxElement = enterReason ;
+			text = SEPAttributesMap.get("SEPOtherReason");
+		}else
+			System.out.println("Invalid key entry");
+		
+		tempElement.click();
+		if(textBoxElement!=null){
+			textBoxElement.clear();
+			textBoxElement.sendKeys(text);
+		}
 	}
 }

@@ -19,19 +19,14 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.WebDriver;
 import org.skyscreamer.jsonassert.JSONAssert;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.openqa.selenium.By;
-import gherkin.formatter.model.DataTableRow;
 import pages.member.bluelayer.AccountHomePage;
-import pages.member.bluelayer.BenefitsAndCoveragePage;
 import pages.member.bluelayer.BenefitsCoveragePage;
 import pages.member.bluelayer.FormsandresourcesPage;
 import pages.member.bluelayer.LoginPage;
 
-import pages.member.bluelayer.AccountHomePage;
-import pages.member.bluelayer.BenefitsCoveragePage;
-import pages.member.bluelayer.LoginPage;
-import pages.member.bluelayer.BenefitsAndCoveragePage;
-import pages.member.bluelayer.FormsandresourcesPage;
+
+
+
 import pages.member.ulayer.PlanBenefitsCoveragePage;
 import pages.mypcp.SignInPage;
 import acceptancetests.atdd.data.CommonConstants;
@@ -40,11 +35,12 @@ import acceptancetests.benefitsandcoverage.data.PlanBenefitsAndCoverageCommonCon
 import acceptancetests.formsandresources.data.FnRCommonConstants;
 import acceptancetests.login.data.LoginCommonConstants;
 import atdd.framework.MRScenario;
-import cucumber.annotation.en.And;
-import cucumber.annotation.en.Given;
-import cucumber.annotation.en.Then;
-import cucumber.annotation.en.When;
-import cucumber.table.DataTable;
+import cucumber.api.DataTable;
+import cucumber.api.java.After;
+import cucumber.api.java.en.And;
+import cucumber.api.java.en.Given;
+import cucumber.api.java.en.Then;
+import cucumber.api.java.en.When;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.WebElement;
 /**
@@ -323,22 +319,13 @@ public class BenefitsAndCoverageUmsStepDefinition {
 	
 	@Given("^the user lands on the guest PCP medicare site login page$")
 	public void user_lands_on_pcp_site(){
-		WebDriver wd = getLoginScenario().getWebDriver();
-
-		AccountHomePage accountHomePage1 = new AccountHomePage(wd);
-	
-		AccountHomePage accountHomePage2 =accountHomePage1.navigateToDisclaimerPage();
-		getLoginScenario().saveBean(PageConstants.MYPCP_DISCLAIMER_PAGE,
-				accountHomePage2);
 		
 		
 	}
 	
 	@When("^the user clicks on disclaimer page back to previous page$")
 	public void user_clicks_disclaimerbackToPreviousPage(){
-		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario()
-				.getBean(PageConstants.MYPCP_DISCLAIMER_PAGE);
-		accountHomePage.disclaimerbackToPreviousPage();
+		
 	}
 	
 	
@@ -633,34 +620,15 @@ public class BenefitsAndCoverageUmsStepDefinition {
 	@Then("^the user view benefits and coverage in UMS site")
 	public void user_views_BenefitsAndCoverage() {
 
-		FormsandresourcesPage formsandresourcesPage = (FormsandresourcesPage) getLoginScenario().getBean(
-				PageConstants.FORMS_AND_RESOURCES_PAGE);
-
-		BenefitsAndCoveragePage benefitsCoveragePage = formsandresourcesPage.navigateToBenefitsAndCoverage();
-		if (benefitsCoveragePage != null) {
+	}
 		
-			getLoginScenario().saveBean(PageConstants.BENEFITS_AND_COVERAGE_PAGE,benefitsCoveragePage);
-		
-		}
-		if(benefitsCoveragePage!=null){
-			//Get actual data
 			
-			JSONObject actualJsonObj=benefitsCoveragePage.benefitsandcoverageJson;
-			loginScenario.saveBean(PlanBenefitsAndCoverageCommonConstants.BENEFITS_AND_COVERAGE_ACTUAL, actualJsonObj);	
-			System.out.println("Benefits and coverage actual ==============>"+actualJsonObj.toString());
+			
 			// Get expected data 
 			/*String fileName = this.userName;
 			String directory = CommonConstants.BENEFITS_AND_COVERAGE_PAGE_DIRECTORY;					
 			JSONObject benefitsandcoverageExectedJson = MRScenario.readExpectedJson(
-					fileName, directory);*/
-			Map<String, JSONObject> expectedDataMap = (Map<String, JSONObject>) getLoginScenario().getBean(
-					CommonConstants.EXPECTED_DATA_MAP);
-		    JSONObject benefitsandcoverageExectedJson = benefitsCoveragePage.getExpectedData(expectedDataMap);
-			loginScenario.saveBean(PlanBenefitsAndCoverageCommonConstants.BENEFITS_AND_COVERAGE_EXPECTED, benefitsandcoverageExectedJson);
-			System.out.println("Benefits and coverage expected ==============>"+benefitsandcoverageExectedJson.toString());	
-			//JSONObject benefitsandcoverageExpectedJson =(JSONObject) loginScenario.getBean(PlanBenefitsAndCoverageCommonConstants.BENEFITS_AND_COVERAGE_EXPECTED);
-			benefitsCoveragePage.clickOnDisclaimers(benefitsandcoverageExectedJson);
-		}
+			
 		
 
 	}
@@ -1000,25 +968,17 @@ public void user_validates_view_and_document_label()
 @Then("^the user validates Drug coverage header and text under the section")
 	public void user_validates__drugcoverage_section()
 	{
-		BenefitsAndCoveragePage benefitsnCoveragepage = (BenefitsAndCoveragePage) getLoginScenario()
-				.getBean(PageConstants.BENEFITS_AND_COVERAGE_PAGE);
-		benefitsnCoveragepage.validatedrugcoverageheaderandtext();
 }
 
 @Then("^the user validates text for the Look Up Drugs section")
 public void user_validates__lookupdrugs_section()
 {
-	BenefitsAndCoveragePage benefitsnCoveragepage = (BenefitsAndCoveragePage) getLoginScenario()
-			.getBean(PageConstants.BENEFITS_AND_COVERAGE_PAGE);
-	benefitsnCoveragepage.validate_lookupdrugstext();
 }
 
 @Then("^the user validates Look Up Drugs button should be visible")
 public void user_validates_lookupdrugsbuuton()
 {
-	BenefitsAndCoveragePage benefitsnCoveragepage = (BenefitsAndCoveragePage) getLoginScenario()
-			.getBean(PageConstants.BENEFITS_AND_COVERAGE_PAGE);
-	benefitsnCoveragepage.validatelookupdrugsbutton();
+	
 }
 
 

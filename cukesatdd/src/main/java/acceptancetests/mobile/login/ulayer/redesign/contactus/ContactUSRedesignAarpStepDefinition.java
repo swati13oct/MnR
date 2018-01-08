@@ -22,12 +22,12 @@ import acceptancetests.atdd.data.CommonConstants;
 import acceptancetests.atdd.data.mobile.member.PageConstants;
 import acceptancetests.mobile.login.data.LoginCommonConstants;
 import atdd.framework.MRScenario;
-import cucumber.annotation.After;
-import cucumber.annotation.en.And;
-import cucumber.annotation.en.Given;
-import cucumber.annotation.en.Then;
-import cucumber.table.DataTable;
-import cucumber.annotation.en.When;
+import cucumber.api.DataTable;
+import cucumber.api.java.After;
+import cucumber.api.java.en.And;
+import cucumber.api.java.en.Given;
+import cucumber.api.java.en.Then;
+import cucumber.api.java.en.When;
 public class ContactUSRedesignAarpStepDefinition {
 	/**
 	 * 
