@@ -28,7 +28,9 @@ import junit.framework.Assert;
 public class MyProfilesPage extends UhcDriver{
 	
 	//h1[@class="h4 margin-none"]
-		
+	@FindBy(xpath = "//area[@href='javascript:clWin()'][@alt = 'close']")
+	private WebElement FeedbackModal;
+	
 	@FindBy(xpath = "//h1[contains(text(), 'My Profile')]")
 	private WebElement myProfileHeader;
 	
@@ -209,12 +211,26 @@ public class MyProfilesPage extends UhcDriver{
 
 	public JSONObject myProfilesJson;
 
-	public MyProfilesPage(WebDriver driver) {
+	public MyProfilesPage(WebDriver driver) throws InterruptedException {
 		super(driver);
 		PageFactory.initElements(driver, this);
 		String fileName = CommonConstants.MY_PROFILES_PAGE_DATA;
 		myProfiles = CommonUtility.readPageData(fileName,
 				CommonConstants.PAGE_OBJECT_DIRECTORY_ULAYER_MEMBER);
+		Thread.sleep(5000);
+		CommonUtility.checkPageIsReady(driver);
+		try{
+			FeedbackModal.click();
+			System.out.println("FeedBack Modal Present");
+			if (validate(FeedbackModal)){
+				System.out.println("FeedBack Modal NOT CLOSING - Close button is clicked");
+			}
+			System.out.println("FeedBack Modal Closed");
+		}
+		catch (Exception e) {
+			System.out.println("FeedBack Modal NOT Present");
+		}
+
 //	openAndValidate();
 	}
 
@@ -230,9 +246,10 @@ public class MyProfilesPage extends UhcDriver{
 	}
 
 	@Override
-	public void openAndValidate() {
+	public void openAndValidate() throws InterruptedException {
 		
-		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+		Thread.sleep(3000);
+		
 		validate(myProfileHeader);
 		
 		System.out.println("******** Page Header Displayed : "+myProfileHeader.getText()+"********");
@@ -248,14 +265,16 @@ public class MyProfilesPage extends UhcDriver{
 		return myProfilesPageExpectedJson;
 	}
 
-	public boolean ValidateEmailErrorMessages(){
+	public boolean ValidateEmailErrorMessages() throws InterruptedException{
 		
 		boolean flag;
 		driver.navigate().refresh();
-		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+		Thread.sleep(3000);
+		
 		CommonUtility.checkPageIsReady(driver);
 		EditEmailLink.click();
-		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+		Thread.sleep(3000);
+		
 		CommonUtility.checkPageIsReady(driver);
 		if (!validate(NewEmailTextBx)){
 			System.out.println("@@@@@@@  Edit Email Modal is not Displayed  @@@@@@@");
@@ -311,13 +330,14 @@ public class MyProfilesPage extends UhcDriver{
 		return flag;
 	}
 	
-	public boolean ValidateAddTempAddressModal(){
+	public boolean ValidateAddTempAddressModal() throws InterruptedException{
 		boolean flag = true;
-		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+		Thread.sleep(3000);
+		
 		CommonUtility.checkPageIsReady(driver);
 		//Clicking Add Temp Address link.
 		AddTempAddressLnk.click();
-		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+		Thread.sleep(3000);
 		CommonUtility.checkPageIsReady(driver);
 		if (!validate(TempAddressLine1)){
 			System.out.println("@@@@@@ Add Temporary Address Modal is Not Displayed @@@@@@");
@@ -638,11 +658,11 @@ public class MyProfilesPage extends UhcDriver{
 		return false;
 	}
 	
-	public GoGreenPreferencesPage NavigateTo_GoGreen_MyPreferences_Page(){
+	public GoGreenPreferencesPage NavigateTo_GoGreen_MyPreferences_Page() throws InterruptedException{
 		
-		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+		Thread.sleep(3000);
 		GoGreenButton.click();
-		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+		Thread.sleep(3000);
 		CommonUtility.checkPageIsReady(driver);
 		if (validate(myPreferencesHeader)){
 			return new GoGreenPreferencesPage(driver);

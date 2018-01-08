@@ -52,7 +52,7 @@ public class OrderPlanMaterialsUmsStepDefinition {
 
 	@Given("^registered UHC member for order plan materials with following attributes$")
 	public void registered_member_orderplanmaterials_aarp(
-			DataTable memberAttributes) {
+			DataTable memberAttributes) throws InterruptedException {
 
 		/* Reading the given attribute from feature file */
 		List<DataTableRow> memberAttributesRow = memberAttributes
@@ -136,7 +136,7 @@ public class OrderPlanMaterialsUmsStepDefinition {
 	}
 
 	@And("^the user validate order additional material and click to add other order additional material in Order Confirmation Page$")
-	public void validate_add_order_additional_material_for_pdp_in_Redesign_site() {
+	public void validate_add_order_additional_material_for_pdp_in_Redesign_site() throws InterruptedException {
 		PlanMaterialConfirmationPage planMaterialConfirmationPage = (PlanMaterialConfirmationPage) getLoginScenario()
 				.getBean(PageConstants.PLAN_MATERIALS_CONFIRMATION_PAGE);
 		OrderplanmaterialsPage orderPlanMaterialsPage = (OrderplanmaterialsPage) getLoginScenario().getBean(PageConstants.ORDER_PLAN_MATERIALS_PAGE);
@@ -156,7 +156,7 @@ public class OrderPlanMaterialsUmsStepDefinition {
 
 
 	@And("^the user selects an option from the orderp list in Redesign site$")
-	public void user_selects_Options_Multiple_Plan_member_materials(DataTable givenAttributes) {
+	public void user_selects_Options_Multiple_Plan_member_materials(DataTable givenAttributes) throws InterruptedException {
 
 		OrderplanmaterialsPage orderPlanMaterialsPage = (OrderplanmaterialsPage) getLoginScenario().getBean(PageConstants.ORDER_PLAN_MATERIALS_PAGE);
 		
@@ -170,10 +170,10 @@ public class OrderPlanMaterialsUmsStepDefinition {
 		String plantype = givenAttributesMap.get("Plan Type");
 		String option = givenAttributesMap.get("Option");
 		
-			System.out.println("**************Plan Tab to to Select is : "+plantype+"+++++++++++++");
+/*			System.out.println("**************Plan Tab to to Select is : "+plantype+"+++++++++++++");
 			boolean TabPresent = orderPlanMaterialsPage.navigatePlanTabs(plantype);
 		
-		System.out.println("**************Radio Option to Select is : "+option+"+++++++++++++");
+*/		System.out.println("**************Radio Option to Select is : "+option+"+++++++++++++");
 		PlanMaterialConfirmationPage planMaterialConfirmationPage = orderPlanMaterialsPage.selectsOption(option);
 		if (planMaterialConfirmationPage != null) {
 			getLoginScenario().saveBean(PageConstants.PLAN_MATERIALS_CONFIRMATION_PAGE,
@@ -188,7 +188,7 @@ public class OrderPlanMaterialsUmsStepDefinition {
 	}
 	
 	@When("^the user views order materials in UHC site$")
-	public void views_order_plan_materials_in_Ums_site() {
+	public void views_order_plan_materials_in_Ums_site() throws InterruptedException {
 		BlueLayerHomePage accountHomePage = (BlueLayerHomePage) getLoginScenario().getBean(PageConstants.ACCOUNT_HOME_PAGE);
 		OrderplanmaterialsPage orderPlanMaterialsPage = accountHomePage.navigateToOrderPlanMaterialsPage();
 	

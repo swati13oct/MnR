@@ -42,7 +42,7 @@ public class MyGoGreenPageStepDefinition {
 	}
 
 	@Given("^registered AMP member with following attributes$")
-	public void registered_AMP_member_with_following_attributes(DataTable memberAttributes) {
+	public void registered_AMP_member_with_following_attributes(DataTable memberAttributes) throws InterruptedException {
 		
 		/* Reading the given attribute from feature file */
 		List<DataTableRow> memberAttributesRow = memberAttributes
@@ -160,7 +160,7 @@ public class MyGoGreenPageStepDefinition {
 
 
 	@When("^the user Navigates to AARP Member Redesign My Profile and Preferences page$")
-	public void the_user_Navigates_to_Member_Redesign_My_Profile_and_Preferences_page() {
+	public void the_user_Navigates_to_Member_Redesign_My_Profile_and_Preferences_page() throws InterruptedException {
 		UlayerHomePage accountHomePage = (UlayerHomePage) getLoginScenario().getBean(PageConstants.ACCOUNT_HOME_PAGE);
 		MyProfilesPage myProfilepage = accountHomePage.navigateToProfAndPref();
 		if (myProfilepage != null) {
@@ -174,7 +174,7 @@ public class MyGoGreenPageStepDefinition {
 	}
 
 	@When("^the user Navigates to BlueLayer Member Redesign My Profile and Preferences page$")
-	public void the_user_Navigates_to_UMS_Member_Redesign_My_Profile_and_Preferences_page() {
+	public void the_user_Navigates_to_UMS_Member_Redesign_My_Profile_and_Preferences_page() throws InterruptedException {
 		BlueLayerHomePage accountHomePage = (BlueLayerHomePage) getLoginScenario().getBean(PageConstants.ACCOUNT_HOME_PAGE);
 		MyProfilesPage myProfilepage = accountHomePage.navigateToProfAndPref();
 		if (myProfilepage != null) {
@@ -189,7 +189,7 @@ public class MyGoGreenPageStepDefinition {
 	
 	
 	@When("^user navigates to Redesign Go Green Page from My Profile Page$")
-	public void the_user_Navigates_to_UMS_Member_Redesign_GoGreen_page() {
+	public void the_user_Navigates_to_UMS_Member_Redesign_GoGreen_page() throws InterruptedException {
 		MyProfilesPage myProfilepage = (MyProfilesPage) getLoginScenario().getBean(PageConstants.PROF_AND_PREF_PAGE);
 		GoGreenPreferencesPage goGreenPage = myProfilepage.NavigateTo_GoGreen_MyPreferences_Page();
 		if (goGreenPage != null) {
@@ -216,7 +216,7 @@ public class MyGoGreenPageStepDefinition {
 	}
 
 	@Then("^the user Validates Separate PHIP tab$")
-	public void the_user_Validates_Separate_PHIP_Tab() {
+	public void the_user_Validates_Separate_PHIP_Tab() throws InterruptedException {
 		GoGreenPreferencesPage goGreenPage = (GoGreenPreferencesPage) getLoginScenario().getBean(PageConstants.MY_PREFERENCES_PAGE);
 		String PlanType = "PHIP";
 		System.out.println("********** Plan Tab to Validate :"+PlanType+"*********");
@@ -233,7 +233,7 @@ public class MyGoGreenPageStepDefinition {
 	}
 
 	@Then("^user navigates to Tabs for all Plan Types$")
-	public void user_navigates_Plan_Tabs(DataTable givenAttributes) {
+	public void user_navigates_Plan_Tabs(DataTable givenAttributes) throws InterruptedException {
 		GoGreenPreferencesPage goGreenPage = (GoGreenPreferencesPage) getLoginScenario().getBean(PageConstants.MY_PREFERENCES_PAGE);
 		List<DataTableRow> givenAttributesRow = givenAttributes
 				.getGherkinRows();

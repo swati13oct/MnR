@@ -15,11 +15,10 @@ import cucumber.junit.Cucumber;
 @Cucumber.Options(glue = { "atdd.framework","acceptancetests.registration.Redesign" }, 
 		features = { "feature/HICN-MBI" }, 
 		format = {
-				"pretty", "html:reports/test-report","json:target/cucumber.json"}, tags ={"@TeamPredators,@ordermaterials"})
+				"pretty", "html:reports/test-report","json:target/cucumber.json"}, tags ={"@TeamPredators,@F108803_HICN_MBI"})
 
 
 public class RunMRAtddTestHICNtoMBI {
 	
-	//,@TeamPredators,@ordermaterials
-	//acceptancetests/registration.Redesign
+	//@TeamPredators,@F108803_HICN_MBI
 }

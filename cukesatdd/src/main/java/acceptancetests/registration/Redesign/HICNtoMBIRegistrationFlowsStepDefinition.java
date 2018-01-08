@@ -33,7 +33,7 @@ public class HICNtoMBIRegistrationFlowsStepDefinition {
 	}
 
 	@Given("^Server Date is set to the following date$")
-	public void Server_Date_is_set_to_the_following_date(DataTable arg1) {
+	public void Server_Date_is_set_to_the_following_date(DataTable arg1) throws InterruptedException {
 		List<DataTableRow> givenAttributesRow = arg1
 				.getGherkinRows();
 		Map<String, String> givenAttributesMap = new HashMap<String, String>();
@@ -57,7 +57,7 @@ public class HICNtoMBIRegistrationFlowsStepDefinition {
 	}
 
 	@Given("^User adds the following details in Registration Page and click on Continue Button$")
-	public void User_adds_the_following_details_in_Registration_Page_and_click_on_Continue_Button(DataTable arg1) {
+	public void User_adds_the_following_details_in_Registration_Page_and_click_on_Continue_Button(DataTable arg1) throws InterruptedException {
 		List<DataTableRow> givenAttributesRow = arg1
 				.getGherkinRows();
 		Map<String, String> givenAttributesMap = new HashMap<String, String>();
@@ -78,8 +78,6 @@ public class HICNtoMBIRegistrationFlowsStepDefinition {
 		else {
 			Assert.fail("***** Error in loading  Additional Information Section : Incorrect Member No or DOB entered *****");
 		}
-
-
 	}
 
 	@When("^User enters Following No in the Member ID field$")
@@ -93,31 +91,99 @@ public class HICNtoMBIRegistrationFlowsStepDefinition {
 		}
 		String Type_MedicareID = givenAttributesMap.get("Identification Type");
 		String Medicar_ID_Value = givenAttributesMap.get("Identification Value");
+		
+		ReDesignRegistrationPage RegistrationPage = (ReDesignRegistrationPage) getLoginScenario().getBean(PageConstants.NEW_REGISTRATION_PAGE);
+
+		System.out.println("The Identification Type for Medicare ID is  : "+Type_MedicareID);
+
+		RegistrationPage = RegistrationPage.Enter_MedicareID(Medicar_ID_Value);
+		if(RegistrationPage!=null){
+			getLoginScenario().saveBean(PageConstants.NEW_REGISTRATION_PAGE,RegistrationPage);
+			Assert.assertTrue(true);
+		}
+		else {
+			Assert.fail("***** Error in loading  Additional Information Section : Incorrect Medicare ID entered *****");
+		}
 	}
 
 	@Then("^Validate that Continue button is enabled$")
 	public void Continue_button_should_be_enabled() {
-		// Express the Regexp above with the code you wish you had
+		ReDesignRegistrationPage RegistrationPage = (ReDesignRegistrationPage) getLoginScenario().getBean(PageConstants.NEW_REGISTRATION_PAGE);
+		boolean Continue_Enabled = true;
+		boolean Flag = RegistrationPage.Validate_ContinueButton(Continue_Enabled);
+		if(Flag == true){
+			getLoginScenario().saveBean(PageConstants.NEW_REGISTRATION_PAGE,RegistrationPage);
+			Assert.assertTrue(true);
+		}
+		else {
+			Assert.fail("***** Continue Button is NOT ENABLED *****");
+		}
 	}
 
 	@Then("^User should successfully navigate to create User Account Page$")
-	public void User_should_successfully_navigate_to_create_User_Account_Page() {
-		// Express the Regexp above with the code you wish you had
+	public void User_should_successfully_navigate_to_create_User_Account_Page() throws InterruptedException {
+		ReDesignRegistrationPage RegistrationPage = (ReDesignRegistrationPage) getLoginScenario().getBean(PageConstants.NEW_REGISTRATION_PAGE);
+		boolean CreateAccountPage_Displayed = true;
+		boolean Flag = RegistrationPage.Validate_CreateAccountPage(CreateAccountPage_Displayed);
+		if(Flag == true){
+			getLoginScenario().saveBean(PageConstants.NEW_REGISTRATION_PAGE,RegistrationPage);
+			Assert.assertTrue(true);
+		}
+		else {
+			Assert.fail("***** Create New Account - Plan Details Page is NOT Displayed *****");
+		}
 	}
 
 	@Then("^Validate that Continue button is Disabled$")
 	public void Continue_button_should_be_Disabled() {
-		// Express the Regexp above with the code you wish you had
+		ReDesignRegistrationPage RegistrationPage = (ReDesignRegistrationPage) getLoginScenario().getBean(PageConstants.NEW_REGISTRATION_PAGE);
+		boolean Continue_Enabled = false;
+		boolean Flag = RegistrationPage.Validate_ContinueButton(Continue_Enabled);
+		if(Flag == true){
+			getLoginScenario().saveBean(PageConstants.NEW_REGISTRATION_PAGE,RegistrationPage);
+			Assert.assertTrue(true);
+		}
+		else {
+			Assert.fail("***** Continue Button is NOT DISABLED *****");
+		}
 	}
 
 	@Then("^User should NOT be able navigate to create User Account Page$")
-	public void User_should_NOT_be_able_navigate_to_create_User_Account_Page() {
-		// Express the Regexp above with the code you wish you had
+	public void User_should_NOT_be_able_navigate_to_create_User_Account_Page() throws InterruptedException {
+		ReDesignRegistrationPage RegistrationPage = (ReDesignRegistrationPage) getLoginScenario().getBean(PageConstants.NEW_REGISTRATION_PAGE);
+		boolean CreateAccountPage_Displayed = false;
+		boolean Flag = RegistrationPage.Validate_CreateAccountPage(CreateAccountPage_Displayed);
+		if(Flag == true){
+			getLoginScenario().saveBean(PageConstants.NEW_REGISTRATION_PAGE,RegistrationPage);
+			Assert.assertTrue(true);
+		}
+		else {
+			Assert.fail("***** Create New Account - Plan Details Page is Displayed *****");
+		}
 	}
 
 	@Then("^The following Error Message should be Displayed$")
-	public void The_following_Error_Message_should_be_Displayed() {
-		// Express the Regexp above with the code you wish you had
+	public void The_following_Error_Message_should_be_Displayed(DataTable arg1) throws InterruptedException {
+		List<DataTableRow> givenAttributesRow = arg1
+				.getGherkinRows();
+		Map<String, String> givenAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < givenAttributesRow.size(); i++) {
+			givenAttributesMap.put(givenAttributesRow.get(i).getCells().get(0),
+					givenAttributesRow.get(i).getCells().get(1));
+		}
+		String ErrorMessage = givenAttributesMap.get("Error Message");
+		ReDesignRegistrationPage RegistrationPage = (ReDesignRegistrationPage) getLoginScenario().getBean(PageConstants.NEW_REGISTRATION_PAGE);
+		boolean Flag = RegistrationPage.Validate_ErrorMessage(ErrorMessage);
+		if(Flag == true){
+			getLoginScenario().saveBean(PageConstants.NEW_REGISTRATION_PAGE,RegistrationPage);
+			Assert.assertTrue(true);
+		}
+		else {
+			Assert.fail("***** ERROR MESSAGE is Not Displayed / Incorrect *****");
+		}
+
+		
+
 	}
 
 }

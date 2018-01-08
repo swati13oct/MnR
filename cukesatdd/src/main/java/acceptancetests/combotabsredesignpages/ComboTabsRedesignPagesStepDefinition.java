@@ -61,7 +61,7 @@ public class ComboTabsRedesignPagesStepDefinition {
 	}
 
 	@Given("^registered Combo Plans member with following attribute$")
-	public void registered_member_with_following_attributes(DataTable memberAttributes) {
+	public void registered_member_with_following_attributes(DataTable memberAttributes) throws InterruptedException {
 		
 		/* Reading the given attribute from feature file */
 		List<DataTableRow> memberAttributesRow = memberAttributes
@@ -121,7 +121,7 @@ public class ComboTabsRedesignPagesStepDefinition {
 	}
 	
 	@When("^the user navigates to mentioned page in Redesign site$")
-	public void views_pages_in_Ums_site(DataTable givenAttributes) {
+	public void views_pages_in_Ums_site(DataTable givenAttributes) throws InterruptedException {
 		
 		List<DataTableRow> givenAttributesRow = givenAttributes
 				.getGherkinRows();

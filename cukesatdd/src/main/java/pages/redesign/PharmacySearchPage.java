@@ -26,6 +26,9 @@ import pages.redesign.PharmacyResultPage;
  */
 public class PharmacySearchPage extends UhcDriver{
 	
+	@FindBy(xpath = "//area[@href='javascript:clWin()'][@alt = 'close']")
+	private WebElement FeedbackModal;
+	
 	@FindBy(xpath = "//h1[contains(text(), 'Locate a Pharmacy')]")
 	private WebElement PharmacyLocatorPageHeader;
 
@@ -97,10 +100,24 @@ public class PharmacySearchPage extends UhcDriver{
 	private WebElement TFNwidget;
 
 
-	public PharmacySearchPage(WebDriver driver){
+	public PharmacySearchPage(WebDriver driver) throws InterruptedException{
 		super(driver);
 		PageFactory.initElements(driver, this);
 		CommonUtility.checkPageIsReady(driver);
+		Thread.sleep(5000);
+		CommonUtility.checkPageIsReady(driver);
+		try{
+			FeedbackModal.click();
+			System.out.println("FeedBack Modal Present");
+			if (validate(FeedbackModal)){
+				System.out.println("FeedBack Modal NOT CLOSING - Close button is clicked");
+			}
+			System.out.println("FeedBack Modal Closed");
+		}
+		catch (Exception e) {
+			System.out.println("FeedBack Modal NOT Present");
+		}
+
 /*		if(validate(PharmacyLocatorPageHeader)){
 			
 		}
@@ -108,14 +125,14 @@ public class PharmacySearchPage extends UhcDriver{
 		openAndValidate();
 	}
 
-	public PharmacySearchPage enterDistanceDetails(String distance) {
-		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+	public PharmacySearchPage enterDistanceDetails(String distance) throws InterruptedException {
+		Thread.sleep(3000);
 		CommonUtility.checkPageIsReady(driver);
 
 		Select select = new Select(distanceDropDownField);	
 		String DistanceSelection = distance+" miles";
 		select.selectByVisibleText(DistanceSelection);
-		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+		Thread.sleep(3000);
 		CommonUtility.checkPageIsReady(driver);
 		if(distanceDropDownField.getText().contains(distance))
 		{
@@ -126,9 +143,9 @@ public class PharmacySearchPage extends UhcDriver{
 	}
 
 
-	public PharmacyResultPage searchesPharmacy() {
+	public PharmacyResultPage searchesPharmacy() throws InterruptedException {
 		
-		driver.manage().timeouts().implicitlyWait(120, TimeUnit.SECONDS);
+		Thread.sleep(20000);
 		CommonUtility.checkPageIsReady(driver);
 
 		int PharmacyCount = PharmacyResultList.size();
@@ -147,7 +164,7 @@ public class PharmacySearchPage extends UhcDriver{
 	}
 
 	public PharmacySearchPage selectsPharmacy(
-			String givenPharmacyTypes) {
+			String givenPharmacyTypes) throws InterruptedException {
 
 
 		String[] pharmacyTypeArray = givenPharmacyTypes.split(",");
@@ -182,12 +199,12 @@ public class PharmacySearchPage extends UhcDriver{
 		validate(continueField);
 	}
 
-	public PharmacySearchPage Select_PlanType_Filter(String PlanType){
+	public PharmacySearchPage Select_PlanType_Filter(String PlanType) throws InterruptedException{
 		
-		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+		Thread.sleep(3000);
 
 		driver.findElement(By.xpath("//*[contains(text(), '"+PlanType+"')]")).click();
-		driver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
+		Thread.sleep(3000);
 		CommonUtility.checkPageIsReady(driver);
 
 		int PharmacyCount = PharmacyResultList.size();
@@ -201,7 +218,6 @@ public class PharmacySearchPage extends UhcDriver{
 	
 	public PharmacySearchPage enterDistanceZipDetails(String distance, String zipcode) throws InterruptedException {
 
-		driver.manage().timeouts().implicitlyWait(120, TimeUnit.SECONDS);
 		Thread.sleep(50000);
 		CommonUtility.checkPageIsReady(driver);
 
@@ -212,15 +228,14 @@ public class PharmacySearchPage extends UhcDriver{
 		CommonUtility.checkPageIsReady(driver);
 		zipcodeField.clear();
 */		Thread.sleep(50000);
-		driver.manage().timeouts().implicitlyWait(100, TimeUnit.SECONDS);
 		CommonUtility.checkPageIsReady(driver);
 		
 //		driver.manage().timeouts().implicitlyWait(70, TimeUnit.SECONDS);
 		sendkeys(zipcodeField, zipcode);
-		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+		Thread.sleep(3000);
 		CommonUtility.checkPageIsReady(driver);
 		searchbtn.click();
-		driver.manage().timeouts().implicitlyWait(70, TimeUnit.SECONDS);
+		Thread.sleep(10000);
 		System.out.println("*****Zipcode entered******"+zipcode);
 /*
 		if(validate(planYearDropDown)){
@@ -245,8 +260,8 @@ public class PharmacySearchPage extends UhcDriver{
 		return null;
 	}
 	
-	public PharmacyResultPage ValidateShowOnMapLinks() {
-		driver.manage().timeouts().implicitlyWait(160, TimeUnit.SECONDS);
+	public PharmacyResultPage ValidateShowOnMapLinks() throws InterruptedException {
+		Thread.sleep(20000);
 		CommonUtility.checkPageIsReady(driver);
 		int showonmapCount = showonmap.size();
 		int PharmacyCount = PharmacyResultList.size();
@@ -264,14 +279,14 @@ public class PharmacySearchPage extends UhcDriver{
 
 	public PharmacyResultPage ValidateSearchPdfResult() throws InterruptedException {
 		
-		driver.manage().timeouts().implicitlyWait(160, TimeUnit.SECONDS);
+		Thread.sleep(10000);
 		//Thread.sleep(160000);
 		CommonUtility.checkPageIsReady(driver);
 		
 		if (viewsearchpdf.isDisplayed())
 		{
 			viewsearchpdf.click();
-			driver.manage().timeouts().implicitlyWait(200, TimeUnit.SECONDS);
+			Thread.sleep(20000);
 			//Thread.sleep(200000);
 
 			CommonUtility.checkPageIsReady(driver);
@@ -291,8 +306,8 @@ public class PharmacySearchPage extends UhcDriver{
 		return null;
 	}
 	
-	public PharmacyResultPage validateMoreInfoContent() {
-		driver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
+	public PharmacyResultPage validateMoreInfoContent() throws InterruptedException {
+		Thread.sleep(6000);
 		CommonUtility.checkPageIsReady(driver);
 
 		moreInfoLink.click();
@@ -302,8 +317,8 @@ public class PharmacySearchPage extends UhcDriver{
 		return null;
 	}
 	
-	public PharmacyResultPage validateLimitedAccessDisclaimer(String DisclaimerText) {
-		driver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
+	public PharmacyResultPage validateLimitedAccessDisclaimer(String DisclaimerText) throws InterruptedException {
+		Thread.sleep(5000);
 		CommonUtility.checkPageIsReady(driver);
 		moreInfoLink.click();
 		
@@ -350,28 +365,28 @@ public class PharmacySearchPage extends UhcDriver{
 		return null;
 	}
 
-	public PharmacySearchPage clickChinese(){
-		driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
+	public PharmacySearchPage clickChinese() throws InterruptedException{
+		Thread.sleep(3000);
 		CommonUtility.checkPageIsReady(driver);
 
 		chineseLanguage.click();
 		System.out.println("Chinese language selected");   
-		driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
+		Thread.sleep(3000);
 		return new PharmacySearchPage(driver);
 	}
-	public PharmacySearchPage selectspanLanguage(){
-		driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
+	public PharmacySearchPage selectspanLanguage() throws InterruptedException{
+		Thread.sleep(3000);
 		CommonUtility.checkPageIsReady(driver);
 
 		SpanishLanguage.click();
 		System.out.println("Spanish language selected"); 
-		driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
+		Thread.sleep(3000);
 		return new PharmacySearchPage(driver);
 	}
 
-    public PharmacyResultPage multilangPharmacySearchResult() {
+    public PharmacyResultPage multilangPharmacySearchResult() throws InterruptedException {
 		
-		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+    	Thread.sleep(3000);
 		System.out.println("Filter text is :*******"+filterLink.getText());
 		if (filterLink.getText().contains("FILTRAR")){
 			System.out.println("Spanish Language Filter displayed");
@@ -383,9 +398,9 @@ public class PharmacySearchPage extends UhcDriver{
 		}
 		return null;
 	}
-    public PharmacySearchPage verifyPharmacyErrormessages(){
+    public PharmacySearchPage verifyPharmacyErrormessages() throws InterruptedException{
     	boolean present;
-    	driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
+    	Thread.sleep(3000);
     	try{
     	validate(noZipcode);
     	validate(invalidZip);

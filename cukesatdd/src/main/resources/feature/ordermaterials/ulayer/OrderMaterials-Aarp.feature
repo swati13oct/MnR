@@ -42,6 +42,9 @@ Feature: To test order materials in Redesign site
       | Member Type  | <memberType> |
       
     When the user views order materials in Member Redesign Order Materials page
+    Then user validates all Order material Options for the plantype
+      | Combo Plans | <planType> |
+    And the user verify need help component in Redesign site
     And the user selects an option from the orderp list in Redesign site
       | Option    | <option>   |
       | Plan Type | <planType> |
@@ -55,18 +58,18 @@ Feature: To test order materials in Redesign site
       | SHIP     | Individual  | Member ID Card |
       
 
-  @needhelpcomponent
-  Scenario Outline: Verify need help component in Redesign site
-    Given registered AMP member with following attributes
-      | Plan Type | <planType> |
-      | Member Type  | <memberType> |
+#  @needhelpcomponent
+#  Scenario Outline: Verify need help component in Redesign site
+#    Given registered AMP member with following attributes
+#      | Plan Type | <planType> |
+#      | Member Type  | <memberType> |
      
-    When the user views order materials in Member Redesign Order Materials page
-    Then the user verify need help component in Redesign site
+#    When the user views order materials in Member Redesign Order Materials page
+#    Then the user verify need help component in Redesign site
 
-    Examples: 
-      | planType | memberType |
-      | MA       | Individual |
+#    Examples: 
+#      | planType | memberType |
+#      | MA       | Individual |
 
   @ValidateHeaderTabs
   Scenario Outline: Verify Aarp Order Materials Page Header - All Combo Plan Types
@@ -84,32 +87,31 @@ Feature: To test order materials in Redesign site
             | MAPD			| MAPDwithHIP | MAPD,HIP |
             | 	PDP		| PDPwithMedSupp | PDP,MedSupp |
 
-  @ValidateOrderMaterialOptions
-  Scenario Outline: Verify Order Plan Material Options - All Combo Plan Types
-    Given registered AMP member with following attributes
-      | Plan Type | <planType> |
-      | Member Type  | <memberType> |
-      
-    When the user views order materials in Member Redesign Order Materials page
-    Then user navigates to Order Materials page for all Plans
-      | Combo Plans | <comboPlans> |
-    And user validates all Order material Options for the plantype
-      | Combo Plans | <comboPlans> |
+#  @ValidateOrderMaterialOptions
+#  Scenario Outline: Verify Order Plan Material Options - All Combo Plan Types
+#    Given registered AMP member with following attributes
+#      | Plan Type | <planType> |
+#      | Member Type  | <memberType> |
+#      
+#    When the user views order materials in Member Redesign Order Materials page
+#    Then user navigates to Order Materials page for all Plans
+#      | Combo Plans | <comboPlans> |
+#    And user validates all Order material Options for the plantype
+#      | Combo Plans | <comboPlans> |
 
-    Examples: 
-            | planType  | memberType | comboPlans |
-            | MA        | Individual | MA |
-            | MAPD			| Individual | MAPD |
-            | PDP			| Individual | PDP |
-            | SHIP     | Individual | SHIP |
+#    Examples: 
+#            | planType  | memberType | comboPlans |
+#            | MA        | Individual | MA |
+#            | MAPD			| Individual | MAPD |
+#            | PDP			| Individual | PDP |
+#            | SHIP     | Individual | SHIP |
             
 
   @ValidateErrorMessage
   Scenario Outline: Verify Aarp Order Materials Page Error Message
     Given registered AMP member with following attributes
       | Plan Type | <planType> |
-            | Member Type  | <memberType> |
-      
+      | Member Type  | <memberType> |
     When the user views order materials in Member Redesign Order Materials page
     And the user click Submit without any selection
     Then the user validates error message in Order Materials page

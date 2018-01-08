@@ -71,7 +71,7 @@ public class RedesignLoginPage extends UhcDriver {
 		openAndValidate();
 	}
 
-	public Object loginWith(String username, String password, String category) {
+	public Object loginWith(String username, String password, String category) throws InterruptedException {
 		sendkeys(userNameField, username);
 		sendkeys(passwordField, password);
 		System.out.println(signInButton.isEnabled());
@@ -103,41 +103,35 @@ public class RedesignLoginPage extends UhcDriver {
 			} 
 		        }
 			
-		driver.manage().timeouts().implicitlyWait(50, TimeUnit.SECONDS);
+		Thread.sleep(15000);
 		CommonUtility.checkPageIsReady(driver);
-		try{
+/*		try{
+			if(validate(NewEmailTxtBox)){
 			NewEmailTxtBox.sendKeys("uhcmnrportals@gmail.com");
 			ConfirmNewEmailTxtBox.sendKeys("uhcmnrportals@gmail.com");
 			System.out.println("@@@@@@@@@@@@ Enter New Email Page Displayed for ULayer Member@@@@@@@@@@@@");
 			NewEmailContinueBtn.click();
-			driver.manage().timeouts().implicitlyWait(50, TimeUnit.SECONDS);
+			Thread.sleep(3000);
 			CommonUtility.checkPageIsReady(driver);
+			}
 		}
 		catch (Exception e) {
 			System.out.println("New Email Page NOT Present");
 		}
 
-		try{
+*/		try{
 			FeedbackModal.click();
 			System.out.println("FeedBack Modal Present");
 			if (validate(FeedbackModal)){
 				System.out.println("FeedBack Modal NOT CLOSING - Close button is clicked");
 			}
 			System.out.println("FeedBack Modal Closed");
-			driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
+			Thread.sleep(3000);
 		}
 		catch (Exception e) {
 			System.out.println("FeedBack Modal NOT Present");
 
 		}
-/*		if(currentUrl().contains("/testharness.html") && category.equalsIgnoreCase("Group") ) {
-			System.out.println("@@@@@@@@@@@@ Redesign Home Page Displayed for BlueLayer Member@@@@@@@@@@@@");
-			return new BlueLayerHomePage(driver, category);
-		}
-		else if(currentUrl().contains("/testharness.html") && category.equalsIgnoreCase("Individual") ) {
-			System.out.println("@@@@@@@@@@@@ Redesign Home Page Displayed for BlueLayer Member@@@@@@@@@@@@");
-			return new BlueLayerHomePage(driver, category);
-		}*/
 		if(currentUrl().contains("/dashboard")) {
 			System.out.println("@@@@@@@@@@@@ Rally Dashboard Page Displayed for BlueLayer Member@@@@@@@@@@@@");
 			return new BlueLayerHomePage(driver, category);
@@ -147,7 +141,7 @@ public class RedesignLoginPage extends UhcDriver {
 		return null;
 	}
 
-	public Object loginWith(String username, String password) {
+	public Object loginWith(String username, String password) throws InterruptedException {
 		sendkeys(userNameField,username);
 		sendkeys(passwordField,password);
 		System.out.println(signInButton.isEnabled());
@@ -162,28 +156,30 @@ public class RedesignLoginPage extends UhcDriver {
 			} 
 		}
 		
-		driver.manage().timeouts().implicitlyWait(50, TimeUnit.SECONDS);
+		Thread.sleep(15000);
 		CommonUtility.checkPageIsReady(driver);
-		try{
+/*		try{
+			if(validate(NewEmailTxtBox)){
 			NewEmailTxtBox.sendKeys("uhcmnrportals@gmail.com");
 			ConfirmNewEmailTxtBox.sendKeys("uhcmnrportals@gmail.com");
 			System.out.println("@@@@@@@@@@@@ Enter New Email Page Displayed for ULayer Member@@@@@@@@@@@@");
 			NewEmailContinueBtn.click();
-			driver.manage().timeouts().implicitlyWait(50, TimeUnit.SECONDS);
+			Thread.sleep(3000);
 			CommonUtility.checkPageIsReady(driver);
+			}
 		}
 		catch (Exception e) {
 			System.out.println("New Email Page NOT Present");
 		}
 
-		try{
+*/		try{
 			FeedbackModal.click();
 			System.out.println("FeedBack Modal Present");
 			if (validate(FeedbackModal)){
 				System.out.println("FeedBack Modal NOT CLOSING - Close button is clicked");
 			}
 			System.out.println("FeedBack Modal Closed");
-			driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
+			Thread.sleep(3000);
 		}
 		catch (Exception e) {
 			System.out.println("FeedBack Modal NOT Present");

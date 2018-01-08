@@ -55,7 +55,7 @@ public class OrderPlanMaterialsAarpStepDefinition {
 
 	@Given("^registered AMP member with following attributes$")
 	public void registered_member_orderplanmaterials_aarp(
-			DataTable memberAttributes) {
+			DataTable memberAttributes) throws InterruptedException {
 
 		/* Reading the given attribute from feature file */
 		List<DataTableRow> memberAttributesRow = memberAttributes
@@ -125,7 +125,7 @@ public class OrderPlanMaterialsAarpStepDefinition {
 	}
 	
 	@When("^the user views order materials in Member Redesign Order Materials page$")
-	public void views_order_materials_in_Ums_site() {
+	public void views_order_materials_in_Ums_site() throws InterruptedException {
 		UlayerHomePage accountHomePage = (UlayerHomePage) getLoginScenario()
 				.getBean(PageConstants.ACCOUNT_HOME_PAGE);
 		OrderplanmaterialsPage orderPlanMaterialsPage = accountHomePage
@@ -141,7 +141,7 @@ public class OrderPlanMaterialsAarpStepDefinition {
 	}
 
 	@And("^the user selects an option from the orderp list in Redesign site$")
-	public void user_selects_member_materials(DataTable givenAttributes) {
+	public void user_selects_member_materials(DataTable givenAttributes) throws InterruptedException {
 
 		OrderplanmaterialsPage orderPlanMaterialsPage = (OrderplanmaterialsPage) getLoginScenario().getBean(PageConstants.ORDER_PLAN_MATERIALS_PAGE);
 		
@@ -159,10 +159,10 @@ public class OrderPlanMaterialsAarpStepDefinition {
 			System.out.println("**************Plan Tab to to Select is : "+plantype+"+++++++++++++");
 			boolean TabPresent = orderPlanMaterialsPage.navigatePlanTabs(plantype);
 		}
-*/	
+	
 		System.out.println("**************Plan Tab to to Select is : "+plantype+"+++++++++++++");
 		boolean TabPresent = orderPlanMaterialsPage.navigatePlanTabs(plantype);
-
+*/
 		System.out.println("**************Radio Option to Select is : "+option+"+++++++++++++");
 		PlanMaterialConfirmationPage planMaterialConfirmationPage = orderPlanMaterialsPage.selectsOption(option);
 		if (planMaterialConfirmationPage != null) {
@@ -178,7 +178,7 @@ public class OrderPlanMaterialsAarpStepDefinition {
 	}
 
 	@And("^the user validate order additional material and click to add other order additional material in Order Confirmation Page$")
-	public void validate_add_order_additional_material_for_pdp_in_Redesign_site() {
+	public void validate_add_order_additional_material_for_pdp_in_Redesign_site() throws InterruptedException {
 		PlanMaterialConfirmationPage planMaterialConfirmationPage = (PlanMaterialConfirmationPage) getLoginScenario()
 				.getBean(PageConstants.PLAN_MATERIALS_CONFIRMATION_PAGE);
 		OrderplanmaterialsPage orderPlanMaterialsPage = (OrderplanmaterialsPage) getLoginScenario().getBean(PageConstants.ORDER_PLAN_MATERIALS_PAGE);
@@ -196,7 +196,7 @@ public class OrderPlanMaterialsAarpStepDefinition {
 	}
 	
 	@Then("^the user verify need help component in Redesign site$")
-	public void validate_needhelp_component(){
+	public void validate_needhelp_component() throws InterruptedException{
 		UlayerHomePage accountHomePage = (UlayerHomePage) getLoginScenario()
 				.getBean(PageConstants.ACCOUNT_HOME_PAGE);
 		OrderplanmaterialsPage orderPlanMaterialsPage = accountHomePage.navigateToOrderPlanMaterialsPage();
@@ -257,7 +257,7 @@ public class OrderPlanMaterialsAarpStepDefinition {
 	}
 	
 	@And("^the user click Submit without any selection$")
-	public void user_submits_with_no_option_selected(){
+	public void user_submits_with_no_option_selected() throws InterruptedException{
 		OrderplanmaterialsPage orderPlanMaterialsPage = (OrderplanmaterialsPage) getLoginScenario().getBean(PageConstants.ORDER_PLAN_MATERIALS_PAGE);
 		PlanMaterialConfirmationPage planMaterialConfirmationpage = orderPlanMaterialsPage.selectsOption("None");
 		
@@ -274,7 +274,7 @@ public class OrderPlanMaterialsAarpStepDefinition {
 	}
 
 	@Then("^the user validates error message in Order Materials page$")
-	public void user_validates_error_message(){
+	public void user_validates_error_message() throws InterruptedException{
 		OrderplanmaterialsPage orderPlanMaterialsPage = (OrderplanmaterialsPage) getLoginScenario().getBean(PageConstants.ORDER_PLAN_MATERIALS_PAGE);
 		
 		if(!orderPlanMaterialsPage.ValidateErrorMessage()){
