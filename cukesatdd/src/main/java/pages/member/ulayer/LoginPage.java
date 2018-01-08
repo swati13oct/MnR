@@ -20,7 +20,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import pages.acquisition.ulayer.LoginAssistancePage;
-import pages.redesign.UlayerHomePage;import pages.member.ulayer.AccountHomePage;import acceptancetests.atdd.data.CommonConstants;
+import pages.member.ulayer.AccountHomePage;import acceptancetests.atdd.data.CommonConstants;
 import acceptancetests.atdd.data.MRConstants;
 import acceptancetests.atdd.data.PageData;
 import acceptancetests.atdd.util.CommonUtility;
@@ -120,7 +120,7 @@ public class LoginPage extends UhcDriver {
 			return new pages.member.ulayer.AccountHomePage(driver);
 		}
 		else if (currentUrl().contains("home/testharness.html")){
-			return new UlayerHomePage(driver);
+			return new Object();
 		}
 		else if (currentUrl().contains("terminated-plan.html")) {
 			return new TerminatedHomePage(driver); 

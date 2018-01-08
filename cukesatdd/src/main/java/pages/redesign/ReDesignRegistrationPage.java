@@ -171,7 +171,7 @@ public class ReDesignRegistrationPage extends UhcDriver {
 	public boolean Validate_CreateAccountPage(boolean createAccountPage_Displayed) throws InterruptedException {
 		
 		ContinueBtn.click();
-		Thread.sleep(5000);
+		Thread.sleep(10000);
 		CommonUtility.checkPageIsReady(driver);
 
 		boolean flag = validate(Step2_Page_PlanDetails);
