@@ -17,6 +17,7 @@ import acceptancetests.atdd.data.PageData;
 import acceptancetests.atdd.util.CommonUtility;
 import atdd.framework.UhcDriver;
 import pages.acquisition.bluelayer.VPPPlanSummaryPage;
+import pages.dashboard.member.drugcostestimator.blayer.AddDrugDetails;
 public class AddNewDrugModal extends UhcDriver {
 
 	private PageData addnewdrug;
@@ -110,6 +111,10 @@ public class AddNewDrugModal extends UhcDriver {
 	
 	public void verifyExceededError(){
 		exceededError.isDisplayed();
+	}
+	public AddDrugDetails continueAddNewDrugModal() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }
 

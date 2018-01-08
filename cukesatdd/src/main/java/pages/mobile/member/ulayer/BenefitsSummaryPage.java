@@ -20,9 +20,9 @@ import acceptancetests.atdd.mobile.data.CommonConstants;
 import acceptancetests.atdd.util.CommonUtility;
 import atdd.framework.UhcDriver;
 import pages.dashboard.member.ulayer.PaymentHistoryPage;
-import pages.mobile.member.blayer.CustomerServicePage;
-import pages.mobile.member.blayer.MyDrugBenefitDetailsPage;
-import pages.mobile.member.blayer.MyPlanBenefitDetailsPage;
+import pages.mobile.member.ulayer.CustomerServicePage;
+import pages.mobile.member.ulayer.MyDrugBenefitDetailsPage;
+import pages.mobile.member.ulayer.MyPlanBenefitDetailsPage;
 
 /**
  * @author pjaising

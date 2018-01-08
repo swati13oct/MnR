@@ -28,13 +28,13 @@ public class DrugDosagePage extends UhcDriver {
 	@FindBys(value = { @FindBy(xpath = "//div[@id='dce.member']/div/div[2]/div/div/div/div[5]/div[4]/div") })
 	private List<WebElement> packagesList;
 	
-	@FindBy(className = "freqBox")
+	@FindBy(xpath = ".//*[@id='dce.member']/div/div[2]/div/div/div[1]/div[8]/p/select")
 	WebElement frequencyBox;
 
 	@FindBy(id = "dce.member")
 	WebElement genericPageText;
 
-	@FindBy(className = "qtyBox")
+	@FindBy(xpath = ".//*[@id='dce.member']/div/div[2]/div/div/div[1]/div[7]/input")
 	WebElement quantityField;
 
 	@FindBy(className = "freqBox")
@@ -105,7 +105,12 @@ public class DrugDosagePage extends UhcDriver {
 		select(frequencyField, drugFrequency);
 
 		continueButton.click();
-		CommonUtility.waitForPageLoad(driver, genericPageText, CommonConstants.TIMEOUT_30);
+		try {
+			Thread.sleep(7000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		if (category.equalsIgnoreCase(CommonConstants.GROUP)) {
 			if (genericPageText.getText().contains(
 					"switching to a generic drug")) {
@@ -191,5 +196,16 @@ public class DrugDosagePage extends UhcDriver {
 				globalExpectedJson);
 		return drugDosageExpectedJson;
 	}
-
+	@FindBy(xpath = ".//*[@id='dce.member']/div/div[2]/div/div/div[1]/span[1]/a")
+	private WebElement addADrugLink;
+	
+	@FindBy(xpath = ".//*[@id='dce.member']/div/div[2]/div/div/div[1]/div[9]/div/a")
+	private WebElement cancelAndGoBackLink;
+	
+	public boolean validateDrugDosageSection(){
+		boolean flag = false;
+		if(validate(addADrugLink)&&validate(cancelAndGoBackLink)&&validate(quantityField)&&validate(frequencyBox)&&validate(continueButton))
+			flag = true;
+		return flag;
+	}
 }

@@ -24,11 +24,12 @@ import acceptancetests.atdd.data.member.PageConstants;
 import acceptancetests.dashboard.claims.data.RedesignClaimsCommonConstants;
 import acceptancetests.login.data.LoginCommonConstants;
 import atdd.framework.MRScenario;
-import cucumber.annotation.en.And;
-import cucumber.annotation.en.Given;
-import cucumber.annotation.en.Then;
-import cucumber.annotation.en.When;
-import cucumber.table.DataTable;
+import cucumber.api.DataTable;
+import cucumber.api.java.After;
+import cucumber.api.java.en.And;
+import cucumber.api.java.en.Given;
+import cucumber.api.java.en.Then;
+import cucumber.api.java.en.When;
 import gherkin.formatter.model.DataTableRow;
 import pages.acquisition.uhcretiree.AcquisitionHomePage;
 import pages.acquisition.uhcretiree.RetireesOfSelectedPlans;
@@ -121,12 +122,12 @@ public class ClaimsAarpStepDefinition {
 
 	@When("^I navigate to the claims Summary page in redesigned site$")
 	public void navigate_Claims_Summary_redesigned(){
-		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstants.ACCOUNT_HOME_PAGE);
+		/*AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstants.ACCOUNT_HOME_PAGE);
 		ClaimSummarypage newClaimsSummaryPage = accountHomePage.navigateToClaimsSummaryPage();
 		
 
 		if(newClaimsSummaryPage != null)
-			getLoginScenario().saveBean(PageConstants.NEW_CLAIMS_SUMMARY_PAGE, newClaimsSummaryPage);
+			getLoginScenario().saveBean(PageConstants.NEW_CLAIMS_SUMMARY_PAGE, newClaimsSummaryPage);*/
 	}
 
 	@And("^the user search claims for the following time interval in redesigned site$")
@@ -218,14 +219,14 @@ public class ClaimsAarpStepDefinition {
 
 	@When("^I navigate to the Claims Summary page in AARP site$")	
 	public void i_navigate_to_member_redesign_claims_page(){
-		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstants.ACCOUNT_HOME_PAGE);
+		/*AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstants.ACCOUNT_HOME_PAGE);
 		ClaimSummarypage newClaimsSummaryPage = accountHomePage.navigateToClaimsSummaryPage();
 		getLoginScenario().saveBean(PageConstants.NEW_CLAIMS_SUMMARY_PAGE, newClaimsSummaryPage);
 		String planType = memberAttributesMap.get("Plan Type");
 		newClaimsSummaryPage.selectRequiredPlanType(planType);
 
 		getLoginScenario().saveBean(PageConstants.NEW_CLAIMS_SUMMARY_PAGE, newClaimsSummaryPage);			
-
+*/
 	}
 	@Then("^I can view a Page Header in Claims Sumamry page in AARP site$")
 	public void validate_the_header()
@@ -330,10 +331,10 @@ public class ClaimsAarpStepDefinition {
 
 	@When("^I navigate to the Claim Details page in AARP site$")	
 	public void i_navigate_to_member_redesign_claim_details_page(){
-		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstants.ACCOUNT_HOME_PAGE);
+		/*AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstants.ACCOUNT_HOME_PAGE);
 		ClaimDetailsPage newClaimDetailsPage = accountHomePage.navigateToClaimDetailsPage();
 		getLoginScenario().saveBean(PageConstants.NEW_CLAIM_DETAILS_PAGE, newClaimDetailsPage);
-
+*/
 	}
 
 	@Then("^I validate the Learn more section in claims details page in AARP site$")

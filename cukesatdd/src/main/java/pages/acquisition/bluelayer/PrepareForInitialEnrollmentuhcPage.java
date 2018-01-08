@@ -15,7 +15,6 @@ import acceptancetests.atdd.data.CommonConstants;
 import acceptancetests.atdd.data.PageData;
 import acceptancetests.atdd.util.CommonUtility;
 import pages.acquisition.bluelayer.GlobalWebElements;
-import pages.acquisition.ulayer.DiscoverMoreResourcesPage;
 
 /**
  * @author rkodumur

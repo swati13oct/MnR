@@ -24,29 +24,32 @@ import atdd.framework.UhcDriver;
  */
 public class RequestAgentAppointmentPage extends UhcDriver{
 	
-	@FindBy(id="first_name")
+	@FindBy(id="ym-first_name")
 	private WebElement firstName;
 	
-	@FindBy(id="last_name")
+	@FindBy(id="ym-last_name")
 	private WebElement lastName;
 	
-	@FindBy(id="address1")
+	@FindBy(id="ym-address1")
 	private WebElement address;
 	
-	@FindBy(id="city")
+	@FindBy(id="ym-city")
 	private WebElement city;
 	
-	@FindBy(id="state")
+	@FindBy(id="ym-state")
 	private WebElement state;
 	
-	@FindBy(id="zip")
+	@FindBy(id="ym-zip")
 	private WebElement zip;
 	
 	@FindBy(id="areacode")
 	private WebElement areacode;
 	
-	@FindBy(id="phone1")
-	private WebElement phone1;
+	@FindBy(id="ym-phone")
+	private WebElement phoneField;
+	
+	@FindBy(id="ym-email")
+	private WebElement email;
 	
 	@FindBy(id="phone2")
 	private WebElement phone2;
@@ -60,7 +63,7 @@ public class RequestAgentAppointmentPage extends UhcDriver{
 	@FindBy(id="confirm_phone2")
 	private WebElement confirmPhone2;
 	
-	@FindBy(xpath="//div[@id='submit-row']/a")
+	@FindBy(xpath=".//*[@id='appointmentform']/fieldset/button")
 	private WebElement requestAppointmentButton;
 
 	public RequestAgentAppointmentPage(WebDriver driver) {
@@ -76,12 +79,7 @@ public class RequestAgentAppointmentPage extends UhcDriver{
 		validate(city);
 		validate(state);
 		validate(zip);
-		validate(areacode);
-		validate(phone1);
-		validate(phone2);
-		validate(confirmAreacode);
-		validate(confirmPhone1);
-		validate(confirmPhone2);
+		validate(phoneField);
 		validate(requestAppointmentButton);
 		
 	}
@@ -92,7 +90,7 @@ public class RequestAgentAppointmentPage extends UhcDriver{
 		sendkeys(lastName, personalDetails.get("Last Name"));
 		sendkeys(address, personalDetails.get("Address"));
 		sendkeys(city, personalDetails.get("City"));
-		ElementData elementData = new ElementData("select:id", "state");
+		ElementData elementData = new ElementData("select:id", "ym-state");
 		List<WebElement> stateOptions = findElements(elementData);
 		for(WebElement element : stateOptions)
 		{
@@ -104,19 +102,20 @@ public class RequestAgentAppointmentPage extends UhcDriver{
 		sendkeys(zip, personalDetails.get("ZipCode"));
 		
 		String phone = personalDetails.get("Phone");
-		if(phone.contains("-"))
+		sendkeys(phoneField, phone);
+		/*if(phone.contains("-"))
 		{
 			String[] phoneNumbers = phone.split("-");
 			
 			sendkeys(areacode, phoneNumbers[0]);
-			sendkeys(phone1, phoneNumbers[1]);
+			sendkeys(phoneField, phoneNumbers[1]);
 			sendkeys(phone2, phoneNumbers[2]);
 			
 			sendkeys(confirmAreacode, phoneNumbers[0]);
 			sendkeys(confirmPhone1, phoneNumbers[1]);
 			sendkeys(confirmPhone2, phoneNumbers[2]);
 			
-		}
+		}*/
 		
 		requestAppointmentButton.click();
 		try {
@@ -137,6 +136,13 @@ public class RequestAgentAppointmentPage extends UhcDriver{
 		}
 		
 		return null;
+	}
+	
+	public boolean validateRequestApptPage(){
+		if(validate(firstName)&&validate(lastName)&&validate(address)&&validate(city)&&
+		validate(state)&&validate(zip)&&validate(phoneField)&&validate(requestAppointmentButton))
+			return true;
+		return false;
 	}
 
 }

@@ -1,32 +1,37 @@
 /**
- * 
+ *
  */
 package pages.acquisition.bluelayer;
 
-import java.util.ArrayList;
-import java.util.Iterator;
+import java.util.Calendar;
 import java.util.List;
+import java.util.ArrayList;
 import java.util.Set;
+import java.util.concurrent.TimeUnit;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.junit.Assert;
 import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;import org.openqa.selenium.NoSuchElementException;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.Wait;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
+import pages.acquisition.bluelayer.EnrollPlanInfoPage;
+import pages.acquisition.uhcretiree.Rallytool_Page;
 import acceptancetests.atdd.data.CommonConstants;
 import acceptancetests.atdd.data.ElementData;
 import acceptancetests.atdd.data.PageData;
 import acceptancetests.atdd.util.CommonUtility;
 import atdd.framework.UhcDriver;
-import pages.acquisition.uhcretiree.Rallytool_Page;
-import pages.acquisition.ulayer.AcquisitionHomePage;
 
 /**
  * @author pagarwa5
@@ -37,18 +42,19 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	@FindBy(xpath = "//a[text()='Passport Flyer (PDF)']")
 	private WebElement PassportFlyerPDF;
 
-	@FindBy(xpath = "(.//*[@class='trigger-closed'])[1]")	private WebElement showMaPlans;
+	@FindBy(xpath = ".//*[@id='maplans2']")
+	private WebElement showMaPlans;
 
-	@FindBy(xpath = "(.//*[@class='trigger-closed'])[3]")
+	@FindBy(xpath = ".//*[@id='pdpplans2']")
 	private WebElement showPdpPlans;
 
-	@FindBy(xpath = "(.//*[@class='trigger-closed'])[2]")
+	@FindBy(xpath = "//div[@class='snpplans_planbutton']/div[2]/div[2]/div")
 	private WebElement showSnpPlans;
 
 	@FindBy(xpath = "//div[@class='medsupplans_planbutton']/div[2]/div[1]/a")
 	private WebElement showMsPlans;
-					
-	@FindBy(xpath = ".//*[@id='chooseplan']/div/div[1]/h3")
+
+	@FindBy(xpath = "//div[@id='chooseplan']/div/div/h3")
 	private WebElement pageHeading;
 
 	@FindBy(xpath = "//div[@id='maplans_container']")
@@ -60,63 +66,35 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	@FindBy(xpath = "//div[@id='snpplans_container']")
 	WebElement snpPlanConatiner;
 
-	// @FindBy(xpath
-	// ="//div[@id='maplans_container']/div[3]/div/div/div/div[@class='ng-scope']")
-	@FindBy(xpath = "//div[@id='maplans_container']")
+
+	//@FindBy(xpath ="//div[@id='maplans_container']/div[3]/div/div/div/div[@class='ng-scope']")
+	@FindBy(xpath = "//div[@class='module-plan-overview module swiper-slide ng-scope']")
 	List<WebElement> maPlanElement;
 
-	@FindBy(xpath = ".//*[@id='pdpplans_container']")
+	@FindBy(xpath = "//div[@id='plan-list-1']/div/div[1]/div/div/h2")
+	WebElement maPlanHeadingText;
 
-	List<WebElement> pdpPlanElement;
 
-	// @FindBy(xpath
-	// ="//div[@id='snpplans_container']/div[2]/div/div/div/div[@class='ng-scope']")
+	@FindBy(xpath = "//div[@id='maplans_container']/h1/span")
+	WebElement maPlanHeadingYear;
 
-	@FindBy(xpath = "//div[@id='snpplans_container']")
-	List<WebElement> snpPlanElement;
+	@FindBy(xpath="//div[contains(@ng-repeat,'plan in planModel.maPlans')]")
+	List<WebElement> maPlans;
 
-	@FindBy(className = "planinf")
-	private WebElement vppplansummarypage;
 
-	@FindBy(id = "editDrugMA")
-	private WebElement editDrugListLink;
+	@FindBy(xpath = "//div[@id='plan-list-3']/div/div[1]/div/div/h2")
+	WebElement pdpPlanHeadingText;
 
-	@FindBy(linkText = "Make an appointment with an agent")
-	private WebElement make_an_appointment_agent;
+	@FindBy(xpath = "//div[@id='pdpplans_container']/h1/span")
+	WebElement pdpPlanHeadingYear;
 
-	@FindBy(css = "#pdpplans_container .planCompareBtn")
-	private WebElement comparePDPPlanChkBox;
+	@FindBy(xpath="//div[contains(@ng-repeat,'plan in planModel.pdpPlans')]")
+	List<WebElement> pdpPlans;
 
-	@FindBy(css = "#maplans_container .compareHeading>p")
-	private WebElement compareUpto3PlansPopup;
-
-	@FindBy(xpath = "//div[@data-ng-repeat='plan in maplans'][1]//span[@class='cpcheckbox']")
-	private WebElement compareChkBox;
-
-	@FindBy(xpath = "//div[@data-ng-repeat='plan in maplans'][1]//div[contains(@id,'showcompare')][1]/div[@class='compareHeading']/p[1]/b")
-	private WebElement comparePopUpTxt1;
-
-	@FindBy(xpath = "//div[@data-ng-repeat='plan in maplans'][1]//div[contains(@id,'showcompare')][1]/div[@class='compareHeading']/p[2]")
-	private WebElement comparePopUpTxt2;
-
-	@FindBy(className = "toggleYear")
-	private WebElement toggleplanYear;
-
-	@FindBy(xpath = "//div[@id='maplans_container']/div[3]/div/div[2]/div[1]/div/div[1]/div[1]/div/div[1]/div[2]/table/tbody/tr/td[3]/div/div[2]/div[3]/div[1]/p/a")
-	private WebElement MaProviderLink;
-@FindBy(xpath="//div[contains(@ng-repeat,'plan in planModel.pdpPlans')]")
-	List<WebElement> pdpPlans;@FindBy(xpath = "(.//*[contains(text(),'View')])[12]")
-	private WebElement planYear;
-	
-	@FindBy(xpath = "(//span[contains(text(),'Enroll in plan')])[1]")
-	private WebElement enrollNowbtn;
-	
-	@FindBy(xpath = ".//*[@id='continueEnrollment']/span")
-	private WebElement onlineEnrollmentlnk;
-	@FindBy(xpath = ".//*[@id='site-wrapper']/div[4]/div/div[1]/div/div/div/div/div[1]/div/div/div[1]/div[2]/div/div[2]/div[1]/div")
+	@FindBy(xpath = ".//*[@id='site-wrapper']/div[4]/div/div/div/div/div/div/div[1]/div/div/div[1]/div[2]/div/div[2]/div[1]/div/span[3]")
 	private WebElement viewPlans;
 
-	@FindBy(xpath = ".//*[@id='site-wrapper']/div[4]/div/div/div/div/div/div/div[1]/div/div/div[1]/div[2]/div/div[2]/div[3]")
+	@FindBy(xpath = ".//*[@id='site-wrapper']/div[4]/div/div/div/div/div/div/div[1]/div/div/div[1]/div[2]/div/div[2]/div[3]/div/span[3]")
 	private WebElement viewPDPPlans;
 
 	@FindBy(xpath = "//div[@id='snpplans_container']/h1/span[2]")
@@ -128,33 +106,120 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	@FindBy(xpath="//div[@data-ng-repeat='plan in snpplans']")
 	List<WebElement> msnPlans;
 
-	@FindBy(xpath = ".//*[@id='_pac_logo']")
-	private WebElement reactiveButton;
+	@FindBy(xpath =".//*[@id='pdpplans_container']")
+	List<WebElement> pdpPlanElement;
 
-	@FindBy(xpath = ".//*[@id='CloseBtn']")
-	private WebElement reactiveCloseButton;
-	
+	@FindBy(xpath =".//*[@id='viewDetailsMA']")
+	private WebElement viewDetailsBtnMA;
+
+	//@FindBy(xpath ="//div[@id='snpplans_container']/div[2]/div/div/div/div[@class='ng-scope']")
+
+	@FindBy(xpath="//div[@id='snpplans_container']")
+	List<WebElement> snpPlanElement;
+
+	@FindBy(className = "planinf")
+	private WebElement vppplansummarypage;
+
+	@FindBy(id = "editDrugMA")
+	private WebElement editDrugListLink;
+
+
+	@FindBy(linkText ="Make an appointment with an agent")
+	private WebElement make_an_appointment_agent;
+
+	@FindBy(css="#pdpplans_container .planCompareBtn")
+	private WebElement comparePDPPlanChkBox;
+
+	@FindBy(css="#maplans_container .compareHeading>p")
+	private WebElement compareUpto3PlansPopup;
+
+	@FindBy(xpath=".//*[@id='plan-list-1']/div/div[2]/div/div[3]/div[3]/div/div/span[1]/label")
+	private WebElement compareChkBox3;
+
+	@FindBy(xpath=".//*[@id='plan-list-1']/div/div[3]/div/div[4]/div[3]/div/div/span[1]/label")
+	private WebElement compareChkBox4;
+
+	@FindBy(xpath="//div[@data-ng-repeat='plan in maplans'][1]//div[contains(@id,'showcompare')][1]/div[@class='compareHeading']/p[1]/b")
+	private WebElement comparePopUpTxt1;
+
+	@FindBy(xpath="//div[@data-ng-repeat='plan in maplans'][1]//div[contains(@id,'showcompare')][1]/div[@class='compareHeading']/p[2]")
+	private WebElement comparePopUpTxt2;
+
+	@FindBy(className = "toggleYear")
+	private WebElement toggleplanYear;
+
+	@FindBy(xpath = "//div[@id='maplans_container']/div[3]/div/div[2]/div[1]/div/div[1]/div[1]/div/div[1]/div[2]/table/tbody/tr/td[3]/div/div[2]/div[3]/div[1]/p/a")
+	private WebElement MaProviderLink;
+
+	@FindBy(xpath = "//div[@class='plan-overview-wrapper']/div[1]/h2")
+	private WebElement allPlansSize;
+
+	@FindBy(xpath = "//div[@class='plan-overview-wrapper']/div[2]/div[1]/div/span[1]/span")
+	private WebElement maPlansCount;
+
+	@FindBy(xpath = "//div[@class='plan-overview-wrapper']/div[2]/div[2]/div/span[1]/span")
+	private WebElement msPlansCount;
+
+	@FindBy(xpath = "//div[@class='plan-overview-wrapper']/div[2]/div[3]/div/span[1]/span")
+	private WebElement pdpPlansCount;
+
+	@FindBy(xpath = "//div[@class='plan-overview-wrapper']/div[2]/div[4]/div/span[1]/span")
+	private WebElement msnPlansCount;
+
 	@FindBy(xpath = ".//*[@id='site-wrapper']/div[4]/div/div/div/div/div/div/div[1]/div/div/div[2]/div/div/div/span/a")
 	private WebElement view2017Plans;
-	
-	@FindBy(xpath = ".//*[@id='_pac_helpbutton']")
-	private WebElement proactiveButton;
 
-	@FindBy(xpath = ".//*[@id='questionDiv']/div[1]/label/span")
-	private WebElement proactiveFirstName;
+	@FindBy(className = "planYear")
+	WebElement planYear;
 
-	@FindBy(xpath = ".//*[@id='questionDiv']/div[2]/label/span")
-	private WebElement proactiveLastName;
+	@FindBy(xpath = ".//*[@id='plan-list-1']/div/div[2]/div/div[3]/div[2]/div/div[3]")
+	private WebElement viewMAPlanDetailsLink3;
 
-	@FindBy(xpath = ".//*[@id='CloseBtn']")
-	private WebElement proactiveCloseButton;
-	
-	@FindBy(xpath = ".//*[@id='site-wrapper']/div[4]/div/div/div/div/div/div/div[1]/div/div/div[1]/div[2]/div/div[2]/div[3]/div/span[1]/span")
-	private WebElement pdpPlansNumber;
-	
-	//				 .//*[@id='site-wrapper']/div[4]/div/div[1]/div/div/div/div/div[1]/div/div/div[1]/div[2]/div/div[2]/div[1]/div/span[1]/span
-	@FindBy(xpath = ".//*[@id='site-wrapper']/div[4]/div/div[1]/div/div/div/div/div[1]/div/div/div[1]/div[2]/div/div[2]/div[1]/div/span[1]/span")
-	private WebElement maPlansNumber;
+	@FindBy(xpath=".//*[@class='action-btn getStarted']")
+	private WebElement GetStarted;
+
+	//@FindBy(xpath="//*[contains(text(),'People')]")
+
+	@FindBy(xpath=".//*[@class='img' and @src='/images/guidedSearch/gs_icn_pro_healthcarepro.svg']")
+	private WebElement People;
+
+
+	//@FindBy(xpath="//*[contains(text(),'Primary Care')]")
+	@FindBy(xpath=".//*[@class='img' and @src='/images/guidedSearch/gs_icn_pro_primarycarephysicians.svg']")
+	private WebElement Primary;
+
+	@FindBy(xpath="//*[contains(text(),'Primary Care Physician (PCP')] ")
+	private WebElement Physician;
+
+	//@FindBy(xpath=".//*[contains(@ng-bind-html,'buttonText')  and contains(text(),'Save')]")
+	//private WebElement Savebtn;
+
+
+	@FindBy(xpath="//div[contains(@class,'first')]//div[@class='hidden-phone']/button[not(contains(@class,'hidden'))]")
+	private WebElement Savebtn;
+
+	//@FindBy(xpath=".//*[@id='label_unsaved_selectedLocation0']")
+
+	@FindBy(xpath="//*[@class='action-btn lt']")
+	private WebElement Viewsavebtn;
+
+	@FindBy(xpath=".//*[@class='action-btn negative' and @type='submit']")
+	private WebElement Checkcoverage;
+
+	@FindBy(xpath="//*[@id='physicians_info']")
+	private WebElement provider;
+
+	@FindBy(className = "planType_info")
+	WebElement planHeadingText;
+
+	@FindBy(xpath=".//*[@id='viewmoredetlinkpdp']")
+	WebElement viewDetailsPDP;
+
+	@FindBy(xpath = "//div[@class='module-closed-enrollment-alert']/span/a")
+	private WebElement viewPlansYearLink;
+
+	@FindBy(xpath = ".//*[@class='swiper-container']")
+	List<WebElement> maPlanElement1;
 
 	private PageData vppPlanSummary;
 
@@ -162,22 +227,26 @@ public class VPPPlanSummaryPage extends UhcDriver {
 
 	public VPPPlanSummaryPage(WebDriver driver) {
 		super(driver);
-		System.out.println("----44---");
 		PageFactory.initElements(driver, this);
-		System.out.println("----444---");
-		//CommonUtility.waitForPageLoad(driver, vppplansummarypage, CommonConstants.TIMEOUT_30);
-		//String fileName = CommonConstants.VPP_PLAN_SUMMARY_PAGE_DATA;
-		//vppPlanSummary = CommonUtility.readPageData(fileName, CommonConstants.PAGE_OBJECT_DIRECTORY_BLUELAYER_ACQ);
-		System.out.println("----4444---");
+
 		//openAndValidate();
 	}
 
+
+
 	public VPPPlanSummaryPage(WebDriver driver, String planType) {
 		super(driver);
+		try {
+			Thread.sleep(30000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		PageFactory.initElements(driver, this);
 
 		String fileName = null;
-		if (planType.equalsIgnoreCase("MA") || planType.equalsIgnoreCase("MAPD")) {
+		if (planType.equalsIgnoreCase("MA")
+				|| planType.equalsIgnoreCase("MAPD")) {
 			fileName = "maplans.json";
 		} else if (planType.equalsIgnoreCase("PDP")) {
 			fileName = "pdpplans.json";
@@ -187,52 +256,189 @@ public class VPPPlanSummaryPage extends UhcDriver {
 			fileName = "msplans.json";
 		}
 
-		vppPlanSummary = CommonUtility.readPageData(fileName, CommonConstants.PAGE_OBJECT_DIRECTORY_BLUELAYER_ACQ);
+		vppPlanSummary = CommonUtility.readPageData(fileName,
+				CommonConstants.PAGE_OBJECT_DIRECTORY_BLUELAYER_ACQ);
 		vppPlanSummaryJson = formJsonObject(vppPlanSummary);
 
 	}
 
+	public boolean validatePlanSummary(){
+		boolean flag = true;
+		int allPlans = Integer.valueOf(allPlansSize.getText().split(" ")[2]);
+		int maPlans = Integer.valueOf(maPlansCount.getText());
+		int msPlans = Integer.valueOf(msPlansCount.getText());
+		int pdpPlans = Integer.valueOf(pdpPlansCount.getText());
+		int msnPlans = Integer.valueOf(msnPlansCount.getText());
+
+		if(!(allPlans == maPlans + msPlans + pdpPlans + msnPlans))
+		{
+			flag = false;
+		}
+
+		return flag;
+	}
+
+	public boolean validateAvailablePlans(String planType){
+		boolean flag = true;
+		int planCount = 0;
+		Calendar calender = Calendar.getInstance();
+		int year = calender.get(Calendar.YEAR);
+		if(planType.equals("MAPD") || planType.equals("MA") ){
+			String planHeading = null;
+			if(maPlanHeadingText.isDisplayed()){
+				planHeading = maPlanHeadingText.getText();
+				System.out.println(planHeading);
+				if(!planHeading.contains("Medicare Advantage Plans")){
+					flag = false;
+				}
+			}
+
+			planCount = Integer.valueOf(maPlansCount.getText());
+			for(int i=0;i<planCount;i++){
+				if(maPlans.get(i).getText().length()==0){
+					flag=false;
+				}
+			}
+
+		}else if(planType.equals("PDP")){
+			String planHeading = null;
+			if(pdpPlanHeadingText.isDisplayed()){
+				planHeading = pdpPlanHeadingText.getText();
+				System.out.println(planHeading);
+				if(!planHeading.contains("Medicare Prescription Drug Plans")){
+					flag = false;
+				}
+			}
+			planCount = Integer.valueOf(pdpPlansCount.getText());
+			for(int i=0;i<planCount;i++){
+				if(pdpPlans.get(i).getText().length()==0){
+					flag=false;
+				}
+			}
+		}else if(planType.equals("SNP")){
+			String planHeading = msnPlanHeadingText.getText();
+			System.out.println(planHeading);
+			if(!planHeading.equals("Medicare Special Needs Plans")){
+				flag = false;
+			}
+			planCount = Integer.valueOf(msnPlansCount.getText());
+			for(int i=0;i<planCount;i++){
+				if(msnPlans.get(i).getText().length()==0){
+					flag=false;
+				}
+			}
+		}else{
+			flag = false;
+		}
+
+		return flag;
+	}
+
+	public boolean validatePlanSummarydetails(String planName){
+		boolean flag = true;
+		String fileName = null;
+		WebElement planContainer = null;
+		if (planName.contains("SNP")) {
+			fileName = "snpplansummary.json";
+			planContainer = snpPlanConatiner;
+		}
+		else if (planName.contains("HMO")) {
+			fileName = "maplansummary.json";
+			planContainer = maPlanConatiner;
+		}
+		else if (planName.contains("PDP")) {
+			fileName = "pdpplansummary.json";
+			planContainer = pdpPlanConatiner;
+		}else if(planName.contains("Regional PPO"))
+		{
+			fileName = "mamultistateplansummary.json";
+			planContainer = maPlanConatiner;
+		}
+
+		vppPlanSummary = CommonUtility.readPageData(fileName,
+				CommonConstants.PAGE_OBJECT_DIRECTORY_BLUELAYER_ACQ);
+		ElementData elementData = new ElementData("className","ng-scope");
+		List<WebElement> planElement = findChildElements(elementData, planContainer);
+		for (WebElement plan : planElement) {
+			if (plan.getText().contains(planName)) {
+				for (String key : vppPlanSummary.getExpectedData().keySet()) {
+					WebElement element = findChildElement(
+							vppPlanSummary.getExpectedData().get(key), plan);
+					System.out.println("Checking for the element : "+key );
+					flag = validate(element);
+					if(!flag){
+						break;
+					}
+				}
+			}
+		}
+		return flag;
+	}
 	public PlanDetailsPage navigateToPlanDetails(String planName) {
-
-		if (planName.contains("HMO")) {
-			ElementData elementData = new ElementData("id", "viewDetailsMA");
+		System.out.println("******");
+		System.out.println(planName);
+		if (planName.contains("HMO") || (planName.contains("Regional PPO"))) {
+			ElementData elementData = new ElementData("id", "viewmoredetlinkmapd");
 			WebElement element = getViewPlanDetailsElement(maPlanElement, elementData, planName);
 			if (element != null) {
 				element.click();
 			}
-
+			System.out.println(driver.getCurrentUrl());
 		} else if (planName.contains("PDP")) {
-			ElementData elementData = new ElementData("id", "viewDetailsPDP");
-			WebElement element = getViewPlanDetailsElement(pdpPlanElement, elementData, planName);
+			ElementData elementData = new ElementData("id", "viewmoredetlinkpdp");
+			WebElement element = getViewPlanDetailsElement(pdpPlanElement,
+					elementData, planName);
+			System.out.println(element.getText());
 			if (element != null) {
 				element.click();
 			}
-		} else if (planName.contains("SNP")) {
+			System.out.println(driver.getCurrentUrl());
+		}
+		else if (planName.contains("SNP")) {
 			ElementData elementData = new ElementData("id", "viewDetailsSNP");
-			WebElement element = getViewPlanDetailsElement(snpPlanElement, elementData, planName);
+			WebElement element = getViewPlanDetailsElement(snpPlanElement,
+					elementData, planName);
 			if (element != null) {
 				element.click();
 			}
-		} else if (planName.contains("Regional PPO")) {
+		}else if (planName.contains("Regional PPO")) {
 			ElementData elementData = new ElementData("id", "viewDetailsMA");
-			WebElement element = getViewPlanDetailsElement(maPlanElement, elementData, planName);
+			WebElement element = getViewPlanDetailsElement(maPlanElement,
+					elementData, planName);
 			if (element != null) {
 				element.click();
 			}
 
 		}
+		try {
+			Thread.sleep(5000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		CommonUtility.checkPageIsReady(driver);
+		System.out.println("Title is :"+driver.getTitle());
+		System.out.println(driver.getCurrentUrl());
 		if (driver.getTitle().equalsIgnoreCase("Medicare Advantage Plan Details | | UnitedHealthcare®")
 				|| driver.getTitle().equalsIgnoreCase("Medicare Special Needs Plan Details | UnitedHealthcare®")
-				|| driver.getTitle().equalsIgnoreCase("Medicare Prescription Drug Plan Details | UnitedHealthcare®")) {
-			return new PlanDetailsPage(driver, planName);
+				|| driver.getTitle().equalsIgnoreCase("Medicare Prescription Drug Plan Details | UnitedHealthcare®")
+				|| driver.getTitle().equalsIgnoreCase("Our Medicare Plan Types | UnitedHealthcare®")) {
+			return new PlanDetailsPage(driver);
 		}
 		return null;
 	}
 
 	private WebElement getViewPlanDetailsElement(List<WebElement> maPlanElement2, ElementData elementData,
 			String planName) {
+		CommonUtility.waitForPageLoad(driver,viewDetailsBtnMA,CommonConstants.TIMEOUT_30);
 		for (WebElement plan : maPlanElement2) {
+			System.out.println(plan.getText());
+			try {
+				Thread.sleep(3000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			if (plan.getText().contains(planName)) {
 
 				WebElement element = findChildElement(elementData, plan);
@@ -245,17 +451,17 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	}
 
 	public VPPPlanSummaryPage viewPlanSummary(String planType) {
-		JavascriptExecutor jse = (JavascriptExecutor)driver;
+		WebDriverWait wait = new WebDriverWait(driver, 45000);
+
 		if (planType.equalsIgnoreCase("PDP")) {
-			showPdpPlans.click();
-		} else if (planType.equalsIgnoreCase("MA") || planType.equalsIgnoreCase("MAPD")) {
-			((JavascriptExecutor) driver).executeScript(
-	                "arguments[0].scrollIntoView();", showMaPlans);
-			showMaPlans.click();
+			wait.until(ExpectedConditions.elementToBeClickable(By.xpath(".//*[@id='site-wrapper']/div[4]/div/div/div/div/div/div/div[1]/div/div/div[1]/div[2]/div/div[2]/div[3]/div/span[3]"))).click();
+		} else if (planType.equalsIgnoreCase("MA")
+				|| planType.equalsIgnoreCase("MAPD")) {
+			wait.until(ExpectedConditions.elementToBeClickable(By.xpath(".//*[@id='site-wrapper']/div[4]/div/div/div/div/div/div/div[1]/div/div/div[1]/div[2]/div/div[2]/div[1]/div/span[3]"))).click();
 		} else if (planType.equalsIgnoreCase("SNP")) {
-			showSnpPlans.click();
+			wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//div[@class='snpplans_planbutton']/div[2]/div[2]/div"))).click();
 		} else {
-			showMsPlans.click();
+			wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//div[@class='medsupplans_planbutton']/div[2]/div[1]/a"))).click();
 		}
 		return new VPPPlanSummaryPage(driver, planType);
 	}
@@ -263,7 +469,8 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	private JSONObject formJsonObject(PageData vppPlanSummary) {
 		JSONObject jsonObject = new JSONObject();
 		for (String key : vppPlanSummary.getExpectedData().keySet()) {
-			List<WebElement> elements = findElements(vppPlanSummary.getExpectedData().get(key));
+			List<WebElement> elements = findElements(vppPlanSummary
+					.getExpectedData().get(key));
 			if (elements.size() == 1) {
 				if (validate(elements.get(0))) {
 					try {
@@ -280,8 +487,9 @@ public class VPPPlanSummaryPage extends UhcDriver {
 					if (validate(element)) {
 						try {
 							JSONObject jsonObjectForArray = new JSONObject();
-							jsonObjectForArray.put(vppPlanSummary.getExpectedData().get(key).getElementName(),
-									element.getText());
+							jsonObjectForArray.put(vppPlanSummary
+									.getExpectedData().get(key)
+									.getElementName(), element.getText());
 							jsonArray.put(jsonObjectForArray);
 						} catch (JSONException e) {
 							// TODO Auto-generated catch block
@@ -303,50 +511,56 @@ public class VPPPlanSummaryPage extends UhcDriver {
 
 	}
 
-	/*@Override
+	@Override
 	public void openAndValidate() {
 		validate(showMaPlans);
 		validate(showMsPlans);
 		validate(showPdpPlans);
 		validate(showSnpPlans);
 		vppPlanSummaryJson = formJsonObject(vppPlanSummary);
-	}*/
-   
-	/*public JSONObject getPlanSummaryActualData(String planName) {
+	}
+
+	public JSONObject getPlanSummaryActualData(String planName) {
 		String fileName = null;
 		if (planName.contains("SNP")) {
 			fileName = "snpplansummary.json";
-			JSONObject jsonObject = getActualJsonObject(fileName, planName, snpPlanConatiner);
+			JSONObject jsonObject = getActualJsonObject(fileName, planName,snpPlanConatiner);
 			return jsonObject;
-		} else if (planName.contains("HMO") || planName.contains("Regional PPO")) {
+		}
+		else if (planName.contains("HMO") || planName.contains("Regional PPO")) {
 			fileName = "maplansummary.json";
-			JSONObject jsonObject = getActualJsonObject(fileName, planName, maPlanConatiner);
+			JSONObject jsonObject = getActualJsonObject(fileName, planName,maPlanConatiner);
 			return jsonObject;
-		} else if (planName.contains("PDP")) {
+		}
+		else if (planName.contains("PDP")) {
 			fileName = "pdpplansummary.json";
-			JSONObject jsonObject = getActualJsonObject(fileName, planName, pdpPlanConatiner);
+			JSONObject jsonObject = getActualJsonObject(fileName, planName,pdpPlanConatiner);
 			return jsonObject;
-		} else if (planName.contains("Regional PPO")) {
+		}else if(planName.contains("Regional PPO"))
+		{
 			fileName = "mamultistateplansummary.json";
-			JSONObject jsonObject = getActualJsonObject(fileName, planName, maPlanConatiner);
+			JSONObject jsonObject = getActualJsonObject(fileName, planName,maPlanConatiner);
 			return jsonObject;
 
 		}
 
+
 		return null;
 	}
-*/
-/*private JSONObject getActualJsonObject(String fileName, String planName,
+
+	private JSONObject getActualJsonObject(String fileName, String planName,
 			WebElement planContainer) {
-		vppPlanSummary = CommonUtility.readPageData(fileName, CommonConstants.PAGE_OBJECT_DIRECTORY_BLUELAYER_ACQ);
-		ElementData elementData = new ElementData("className", "ng-scope");
+
+		vppPlanSummary = CommonUtility.readPageData(fileName,
+				CommonConstants.PAGE_OBJECT_DIRECTORY_BLUELAYER_ACQ);
+		ElementData elementData = new ElementData("className","ng-scope");
 		List<WebElement> planElement = findChildElements(elementData, planContainer);
 		for (WebElement plan : planElement) {
 			if (plan.getText().contains(planName)) {
-
 				JSONObject jsonObject = new JSONObject();
 				for (String key : vppPlanSummary.getExpectedData().keySet()) {
-					WebElement element = findChildElement(vppPlanSummary.getExpectedData().get(key), plan);
+					WebElement element = findChildElement(
+							vppPlanSummary.getExpectedData().get(key), plan);
 					validate(element);
 					try {
 						jsonObject.put(key, element.getText());
@@ -362,12 +576,12 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		}
 		return null;
 
-	}*/
+	}
 
-	/*public String viewplans(String planName) {
+	public String viewplans(String planName) {
 		// TODO Auto-generated method stub
 		return null;
-	}*/
+	}
 
 	public EstimateDrugCostPage navigateToSummaryPage(String planType) {
 		if (planType.equalsIgnoreCase("PDP")) {
@@ -380,7 +594,8 @@ public class VPPPlanSummaryPage extends UhcDriver {
 
 		if (planName.contains("HMO")) {
 			ElementData elementData = new ElementData("id", "editDrugMA");
-			WebElement element = getViewPlanDetailsElement(maPlanElement, elementData, planName);
+			WebElement element = getViewPlanDetailsElement(maPlanElement,
+					elementData, planName);
 			if (element != null) {
 				element.click();
 
@@ -388,7 +603,8 @@ public class VPPPlanSummaryPage extends UhcDriver {
 
 		} else if (planName.contains("PDP")) {
 			ElementData elementData = new ElementData("id", "editDrugMA");
-			WebElement element = getViewPlanDetailsElement(pdpPlanElement, elementData, planName);
+			WebElement element = getViewPlanDetailsElement(pdpPlanElement,
+					elementData, planName);
 			if (element != null) {
 				element.click();
 
@@ -404,80 +620,116 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	}
 
 	public EnrollPlanInfoPage clicksOnEnrollInplanLink(String planName) {
-		/*if (planName.contains("HMO")) {
-			for (WebElement plan : maPlanElement) {
+		if (planName.contains("HMO")) {
+			for (WebElement plan : maPlans) {
 				if (plan.getText().contains(planName)) {
-					ElementData elementData = new ElementData("id", "enrollMA");
-					findChildElement(elementData, plan).click();
+					ElementData elementData = new ElementData("id", "enrollMAButton");
+					if(findChildElement(elementData, plan).isDisplayed()){
+						findChildElement(elementData, plan).click();
+						break;
+					}else{
+						if(viewPlansYearLink.isDisplayed()){
+							viewPlansYearLink.click();
+							try {
+								Thread.sleep(2000);
+							} catch (InterruptedException e) {
+								// TODO Auto-generated catch block
+								e.printStackTrace();
+							}
+							viewPlanSummary("MA");
+							try {
+								Thread.sleep(2000);
+							} catch (InterruptedException e) {
+								// TODO Auto-generated catch block
+								e.printStackTrace();
+							}
+							for (WebElement newPlan : maPlans) {
+								if (newPlan.getText().contains(planName)) {
+									ElementData newelementData = new ElementData("id", "enrollMAButton");
+									findChildElement(newelementData, newPlan).click();
+									break;
+								}
+							}
+							break;
+						}
+					}
 				}
 			}
 		}
 		if (planName.contains("PDP")) {
-			for (WebElement plan : pdpPlanElement) {
+			for (WebElement plan : pdpPlans) {
 				if (plan.getText().contains(planName)) {
-					ElementData elementData = new ElementData("id", "enrollPDP"); // TODO:
-																					// Re-check
-					findChildElement(elementData, plan).click();
+					ElementData elementData = new ElementData("id", "enrollPDPButton"); // TODO:
+					// Re-check
+					if(findChildElement(elementData, plan).isDisplayed()){
+						findChildElement(elementData, plan).click();
+						break;
+					}else{
+
+						if(viewPlansYearLink.isDisplayed()){
+							viewPlansYearLink.click();
+							try {
+								Thread.sleep(2000);
+							} catch (InterruptedException e) {
+								// TODO Auto-generated catch block
+								e.printStackTrace();
+							}
+							viewPlanSummary("PDP");
+							try {
+								Thread.sleep(2000);
+							} catch (InterruptedException e) {
+								// TODO Auto-generated catch block
+								e.printStackTrace();
+							}
+							for (WebElement newPlan : pdpPlans) {
+								if (newPlan.getText().contains(planName)) {
+									ElementData newelementData = new ElementData("id", "enrollPDPButton");
+									findChildElement(newelementData, newPlan).click();
+									break;
+								}
+							}
+							break;
+						}
+
+					}
 				}
 			}
-		}*/
-		
+		}
 		try {
-			Thread.sleep(6000);
+			Thread.sleep(10000);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
-		int pdpValue = Integer.parseInt(pdpPlansNumber.getText());
-		int maValue = Integer.parseInt(maPlansNumber.getText());
-		
-		if (planName.contains("HMO") || planName.contains("PPO")) {
-			System.out.println("Entered the plan");
-			for(int i=1; i<=maValue; i++){
-				WebElement maPlanElement= driver.findElement(By.xpath(".//*[@id='plan-list-1']/div/div[2]/div/div["+i+"]"));
-				if (maPlanElement.getText().contains(planName)) {
-					ElementData elementData = new ElementData("linkText", "Enroll in plan");//("id", "enrollMA");
-					System.out.println("***Element Data is: "+elementData);
-					findChildElement(elementData, maPlanElement).click();
-					System.out.println("Clicked on the Enroll Link");
-					break;
+
+		for( int i = 0; i<10; i++){
+			if (pageHeading.getText().equalsIgnoreCase(
+					"You Have Chosen to Enroll in the Following Plan")) {
+				break;
+			}else{
+				try {
+					Thread.sleep(1000);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
 				}
-				
 			}
-		} else if (planName.contains("PDP")) {
-			for(int i=1; i<=pdpValue; i++){	
-				WebElement pdpPlanElement= driver.findElement(By.xpath(".//*[@id='plan-list-3']/div/div[3]/div/div["+i+"]"));
-				if (pdpPlanElement.getText().contains(planName)) {
-					ElementData elementData = new ElementData("linkText", "Enroll in plan");//("id", "enrollPDP"); // TODO:
-					System.out.println("***Element Data is: "+elementData);													// Re-check
-					findChildElement(elementData, pdpPlanElement).click();
-					System.out.println("Clicked on the Enroll Link");
-					break;
-				}
-				
-			}
-			
 		}
-		
-		try {
-			Thread.sleep(3000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		if (pageHeading.getText().equalsIgnoreCase("You Have Chosen to Enroll in the Following Plan")) {
+		if (pageHeading.getText().equalsIgnoreCase(
+				"You Have Chosen to Enroll in the Following Plan")) {
 			return new EnrollPlanInfoPage(driver);
-		} else {
+		}else{
 			return null;
 		}
+
 	}
 
 	public GetStartedPage clicksOnEnterDrugInformationLink(String planName) {
 		if (planName.contains("HMO")) {
 			for (WebElement plan : maPlanElement) {
 				if (plan.getText().contains(planName)) {
-					ElementData elementData = new ElementData("id", "enterDrugMA");
+					ElementData elementData = new ElementData("id",
+							"enterDrugMA");
 					findChildElement(elementData, plan).click();
 				}
 			}
@@ -485,13 +737,14 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		if (planName.contains("PDP")) {
 			for (WebElement plan : pdpPlanElement) {
 				if (plan.getText().contains(planName)) {
-					ElementData elementData = new ElementData("id", "enterDrugPDP"); // TODO
-																						// Re-check
+					ElementData elementData = new ElementData("id",
+							"enterDrugPDP"); // TODO Re-check
 					findChildElement(elementData, plan).click();
 				}
 			}
 		}
-		if (driver.getTitle().equalsIgnoreCase("Our Medicare Plan Types | UnitedHealthcare®")) {
+		if (driver.getTitle().equalsIgnoreCase(
+				"Our Medicare Plan Types | UnitedHealthcare®")) {
 			return new GetStartedPage(driver);
 		}
 		return null;
@@ -502,7 +755,8 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		if (planName.contains("HMO")) {
 			for (WebElement plan : maPlanElement) {
 				if (plan.getText().contains(planName)) {
-					ElementData elementData = new ElementData("id", "doctorCoverMA");
+					ElementData elementData = new ElementData("id",
+							"doctorCoverMA");
 					findChildElement(elementData, plan).click();
 				}
 			}
@@ -510,25 +764,211 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		if (planName.contains("SNP")) {
 			for (WebElement plan : snpPlanElement) {
 				if (plan.getText().contains(planName)) {
-					ElementData elementData = new ElementData("id", "doctorCoverMA"); // TODO
-																						// Re-check
+					ElementData elementData = new ElementData("id",
+							"doctorCoverMA"); // TODO Re-check
 					findChildElement(elementData, plan).click();
 				}
 			}
 		}
-		if (driver.getTitle().equalsIgnoreCase("Welcome")) {
+		if (driver.getTitle().equalsIgnoreCase(
+				"Welcome")) {
 			return new Rallytool_Page(driver);
 		}
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	public RequestAgentAppointmentPage nagiateToRequetAnAppointmentPage() {
+	public VPPPlanSummaryPage clicksOnIsProviderCoveredB(String planName) {
+		if (planName.contains("HMO")) {
+			driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+			for (WebElement plan : maPlanElement1) {
+				if (plan.getText().contains(planName)) {
+					//ElementData elementData = new ElementData("id",
+						//	"doctorCoverMA");
+
+					//ElementData elementData = new ElementData("xpath",
+
+//"//*[contains(text(),'Is my provider covered in my ZIP code/county')]");
+					//driver.findElement(By.xpath("//*[contains(text(),'Is my provider covered ')]")).click();
+
+					//driver.findElement(By.xpath("//*[@id='plan-list-1']/div/div[2]/div/div[1]/div[2]/div/div[1]/div[1]/a")).click();
+
+					//findChildElement(elementData, plan).click();
+
+					WebElement ProviderSearchLink = driver.findElement(By.xpath("//h2[contains(text(),'"+planName+"')]/following::a[contains(text(),'Is')][1]"));
+					System.out.println(ProviderSearchLink.getText());
+					ProviderSearchLink.click();
+
+
+				}
+			}
+		}
+
+		String mainwindow=driver.getWindowHandle();
+
+		Set<String> allWindowHandles = driver.getWindowHandles();
+		for (String currentWindowHandle : allWindowHandles) {
+
+
+			if (!currentWindowHandle.equals(mainwindow)) {
+				driver.switchTo().window(currentWindowHandle);
+
+
+			}
+		}
+
+		driver.manage().window().maximize();
+		waitforElement(GetStarted);
+		GetStarted.click();
+
+
+
+		waitforElement(People);
+
+		System.out.println("Rally tool started");
+		People.click();
+
+
+
+		waitforElement(Primary);
+
+
+
+		Primary.click();
+
+		waitforElement(Physician);
+
+
+		Physician.click();
+
+		waitforElement(Savebtn);
+
+		//Savebtn.click();
+		JavascriptExecutor js = (JavascriptExecutor)driver;
+		js.executeScript("arguments[0].click();", Savebtn);
+		waitforElement(Viewsavebtn);
+
+		Viewsavebtn.click();
+
+		waitforElement(Checkcoverage);
+
+		Checkcoverage.click();
+		driver.switchTo().window(mainwindow);
+
+
+		return new VPPPlanSummaryPage(driver);
+	}
+
+	public VPPPlanSummaryPage clicksOnIsProviderCoveredA(String planName) {
+		if (planName.contains("HMO")) {
+			for (WebElement plan : maPlanElement1) {
+				if (plan.getText().contains(planName)) {
+					ElementData elementData = new ElementData("id",
+							"doctorCoverMA");
+					findChildElement(elementData, plan).click();
+				}
+			}
+		}
+		if (planName.contains("SNP")) {
+			for (WebElement plan : snpPlanElement) {
+				if (plan.getText().contains(planName)) {
+					ElementData elementData = new ElementData("id",
+							"doctorCoverMA"); // TODO Re-check
+					findChildElement(elementData, plan).click();
+				}
+			}
+		}
+
+
+		String mainwindow=driver.getWindowHandle();
+
+		Set<String> allWindowHandles = driver.getWindowHandles();
+		for (String currentWindowHandle : allWindowHandles) {
+
+
+			if (!currentWindowHandle.equals(mainwindow)) {
+				driver.switchTo().window(currentWindowHandle);
+
+
+			}
+		}
+
+		driver.manage().window().maximize();
+		waitforElement(GetStarted);
+		GetStarted.click();
+
+		waitforElement( People);
+
+		People.click();
+
+		waitforElement(Primary);
+
+		Primary.click();
+
+		waitforElement(Physician);
+
+		Physician.click();
+
+		waitforElement(Savebtn);
+
+		JavascriptExecutor js = (JavascriptExecutor)driver;
+		js.executeScript("arguments[0].click();", Savebtn);
+
+		//Savebtn.click();
+		waitforElement(Viewsavebtn);
+
+		Viewsavebtn.click();
+		try {
+			Thread.sleep(5000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		waitforElement(Checkcoverage);
+		CommonUtility.waitForPageLoad(driver, Checkcoverage, 10);
+		Checkcoverage.click();
+		driver.switchTo().window(mainwindow);
+
+		return new VPPPlanSummaryPage(driver);
+
+
+	}
+
+
+	public boolean providerinfo()
+	{
+		String providerinfo=provider.getText();
+		if(providerinfo.contains("1 providers covered"))
+		{
+			return true;
+		}
+		return false;
+	}
+
+	public boolean providerinfo(String planName)
+	{
+
+		WebElement ProviderSearchLink1 = driver.findElement
+				(By.xpath("//h2[contains(text(),'"+planName+"')]/following::span[contains(text(),'covered')][1]"));
+		String mproviderinfo=ProviderSearchLink1.getText();
+        System.out.println(mproviderinfo);
+		if(mproviderinfo.contains("1 providers covered"))
+		{
+			return true;
+		}
+		return false;
+	}
+
+
+	public RequestAgentAppointmentPage nagiateToRequetAnAppointmentPage()
+	{
 		make_an_appointment_agent.click();
 
 		try {
 			if (make_an_appointment_agent.isDisplayed()) {
-				CommonUtility.waitForElementToDisappear(driver, make_an_appointment_agent, CommonConstants.TIMEOUT_30);
+				CommonUtility.waitForElementToDisappear(driver, make_an_appointment_agent,
+						CommonConstants.TIMEOUT_30);
 			}
 		} catch (NoSuchElementException e) {
 			System.out.println("make_an_appointment_agent not found");
@@ -537,7 +977,8 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		} catch (Exception e) {
 			System.out.println("make_an_appointment_agent not found");
 		}
-		if (currentUrl().contains("medicare-advantage-plans/request-information/agentebrc.html")) {
+		if(currentUrl().contains("medicare-advantage-plans/request-information/agentebrc.html"))
+		{
 			return new RequestAgentAppointmentPage(driver);
 		}
 
@@ -555,6 +996,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		return currentYearFlag;
 	}
 
+
 	public VPPPlanSummaryPage togglePlanYear(String planType) {
 
 		validate(toggleplanYear);
@@ -564,59 +1006,71 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		return new VPPPlanSummaryPage(driver, planType);
 	}
 
-	public void clicksOnMAProviderCoveredLink() {
+	public  void clicksOnMAProviderCoveredLink()
+	{
 		MaProviderLink.click();
 		ArrayList<String> tabs = new ArrayList<String>(driver.getWindowHandles());
 		driver.switchTo().window(tabs.get(0));
 	}
 
 	/**
-	 * This method verifies whether the Compare 3 Plans button is Inactive or
-	 * NOt
+	 * This method verifies whether the Compare 3 Plans button is Inactive or NOt
 	 */
-	public void verifyInactiveCompare3PlansButton() {
+	public void verifyInactiveCompare3PlansButton(){
 		waitforElement(comparePDPPlanChkBox);
 		Assert.assertTrue("FAIL - Compare 3 plans button is not displayed", elementFound(comparePDPPlanChkBox));
 		Assert.assertEquals("true", comparePDPPlanChkBox.getAttribute("readonly"));
 	}
 
-	public void clickAndVerifyCompareUpto3PlansPopup() {
+	public void clickAndVerifyCompareUpto3PlansPopup(){
 		comparePDPPlanChkBox.click();
-		Assert.assertEquals("Compare up to 3 plans Select 2-3 plans that you'd like to compare.",
-				compareUpto3PlansPopup.getText().trim());
+		Assert.assertEquals("Compare up to 3 plans Select 2-3 plans that you'd like to compare.",compareUpto3PlansPopup.getText().trim());
 	}
 
-	public void verifyCompareCheckBoxesAreUnchecked() {
+	public boolean verifyCompareCheckBoxesAreUnchecked(){
+		List<WebElement> compareChkBoxes = driver.findElements(By.xpath(".//*[@id='plan-list-1']//div[contains(@class,'compare-box')]"));
 
-		Assert.assertEquals("compare_checkbox ng-scope ng-pristine ng-valid", compareChkBox.getAttribute("class"));
+		if(!compareChkBoxes.get(1).isSelected())
+			return true;
+		return false;
 
 	}
 
-	public void UncheckAndVerifyCompareChkBox() {
-		compareChkBox.click();
-		Assert.assertEquals("compare_checkbox ng-scope ng-valid ng-dirty", compareChkBox.getAttribute("class"));
+	public void UncheckAndVerifyCompareChkBox(){
+		compareChkBox3.click();
+		Assert.assertEquals("compare_checkbox ng-scope ng-valid ng-dirty", compareChkBox3.getAttribute("class"));
 	}
 
-	public void VerifyComparePopUpText() {
+	public void VerifyComparePopUpText(){
 
-		Assert.assertEquals("Select 1 more plan to compare", comparePopUpTxt1.getText().trim());
-		Assert.assertEquals("Select 2-3 plans that you'd like to compare", comparePopUpTxt2.getText().trim());
+		Assert.assertEquals("Select 1 more plan to compare",comparePopUpTxt1.getText().trim());
+		Assert.assertEquals("Select 2-3 plans that you'd like to compare",comparePopUpTxt2.getText().trim());
 	}
 
-	public void clickCompareChkBox() {
-		waitforElement(compareChkBox);
-		compareChkBox.click();
-	}
+	public void clickCompareChkBox(){
+		try {
+			Thread.sleep(3000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		List<WebElement> allMAPlans = driver.findElements(By.xpath(".//*[@id='plan-list-1']//div[contains(@class,'compare-box')]"));
 
+		allMAPlans.get(1).click();
+
+	}
 	public boolean validatepassportData() {
 		try {
 			Thread.sleep(20000);
 
-			String expectedpassportdata = PassportFlyerPDF.getText();
-			String actualpassportdata = "Passport Flyer (PDF)";
-			if (expectedpassportdata.equalsIgnoreCase(actualpassportdata)) {
+			String expectedpassportdata=PassportFlyerPDF.getText();
+			String actualpassportdata="Passport Flyer (PDF)";
+			if(expectedpassportdata.equalsIgnoreCase(actualpassportdata))
+			{
 				return true;
-			} else {
+			}
+			else
+			{
 				return false;
 			}
 		} catch (Exception e) {
@@ -627,110 +1081,66 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		return true;
 
 	}
-public VPPPlanSummaryPage verifyPDPCards(){
-		List<WebElement> webElements =driver.findElements(By.xpath("(.//*[@class='swiper-wrapper'])[2]/div"));
-		for(int i=0;i<webElements.size();i++){
-			System.out.println(webElements.get(i).findElement(By.xpath(".//h2")).getText());
+
+	@FindBy(linkText = "Change location")
+	private WebElement changeLocationBtn;
+
+	public boolean validateVPPPlanSummaryPage(){
+		WebDriverWait wait = new WebDriverWait(driver, 45000);
+		boolean flag = false;
+		viewPlans = wait.until(ExpectedConditions.elementToBeClickable(By.xpath(".//*[@id='site-wrapper']/div[4]/div/div/div/div/div/div/div[1]/div/div/div[1]/div[2]/div/div[2]/div[1]/div/span[3]")));
+		viewPDPPlans = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(".//*[@id='site-wrapper']/div[4]/div/div/div/div/div/div/div[1]/div/div/div[1]/div[2]/div/div[2]/div[3]/div/span[3]")));
+		changeLocationBtn = wait.until(ExpectedConditions.visibilityOfElementLocated(By.linkText("Change location")));
+
+//		try {
+//			Thread.sleep(45000);
+//		} catch (InterruptedException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+		if(validate(viewPlans)&&validate(viewPDPPlans)&&validate(changeLocationBtn))
+			flag = true;
+		return flag;
+	}
+
+
+
+	public PlanDetailsPage clickViewDetails() {
+		List<WebElement> viewPlansLinks = driver.findElements(By.id("viewmoredetlinkma"));
+		viewPlansLinks.get(3).click();
+		if(getTitle().equalsIgnoreCase("Our Medicare Plan Types | UnitedHealthcare®"))
+			return new PlanDetailsPage(driver);
+		return null;
+	}
+
+	public PlanDetailsPage clickViewDetailsPDP() {
+		viewDetailsPDP.click();
+		if(getTitle().equalsIgnoreCase("Our Medicare Plan Types | UnitedHealthcare®"))
+			return new PlanDetailsPage(driver);
+		return null;
+	}
+
+	public void clickonViewPlans() {
+		try {
+			Thread.sleep(5000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
-		if(webElements.get(0).findElement(By.xpath(".//h2")).getText().equals("AARP MedicareRx Walgreens (PDP)")&&webElements.get(1).findElement(By.xpath(".//h2")).getText().equals("Symphonix Value Rx (PDP)")&&webElements.get(2).findElement(By.xpath(".//h2")).getText().equals("AARP MedicareRx Preferred (PDP)")
-				&& webElements.get(3).findElement(By.xpath(".//h2")).getText().equals("AARP MedicareRx Saver Plus (PDP)")){
-			
+		viewPlans.click();
+
+	}
+
+	public void clickOnPDPPlans(){
+		try {
+			Thread.sleep(5000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
-		else{
-			Assert.fail("Order is not correct");
-		}
-		
-		return null;
-		
-	}
-	
-	public VPPPlanSummaryPage enrollNowbtn(){
-		enrollNowbtn.click();
-		onlineEnrollmentlnk.click();		
-		System.out.println("Online enrollment tool launched");
-		return null;
-	}
-	
-	public VPPPlanSummaryPage planYear(){
-		planYear.click();
-		showMaPlans.click();
-		return null;
-		
+		viewPDPPlans.click();
 	}
 
-	@Override
-	public void openAndValidate() {
-		// TODO Auto-generated method stub
-		
-	}
-	
-	public VPPPlanSummaryPage clickProactiveChat() {
-
-		proactiveButton.click();
-		return null;
-	}
-	
-	public AcquisitionHomePage validateProactiveChat() throws Exception {
-
-		String MainWindow = driver.getWindowHandle();
-
-		Set<String> s1 = driver.getWindowHandles();
-		Iterator<String> i1 = s1.iterator();
-
-		while (i1.hasNext()) {
-			String ChildWindow = i1.next();
-
-			if (!MainWindow.equalsIgnoreCase(ChildWindow)) {
-
-				driver.switchTo().window(ChildWindow);
-				
-				//validate(proactiveFirstName);
-				//validate(proactiveLastName);
-				validate(proactiveCloseButton);
-				Thread.sleep(3000);
-				proactiveCloseButton.click();
-			}
-		}
-		return null;
-	}
-
-	public VPPPlanSummaryPage clickReactiveChat() {
-
-		driver.switchTo().frame(1);
-		reactiveButton.click();
-		return null;
-	}
-
-	public VPPPlanSummaryPage validateReactiveChat() throws Exception {
-
-		String MainWindow = driver.getWindowHandle();
-
-		Set<String> s1 = driver.getWindowHandles();
-		Iterator<String> i1 = s1.iterator();
-
-		while (i1.hasNext()) {
-			String ChildWindow = i1.next();
-
-			if (!MainWindow.equalsIgnoreCase(ChildWindow)) {
-
-				driver.switchTo().window(ChildWindow);
-
-				validate(reactiveCloseButton);
-				Thread.sleep(3000);
-				reactiveCloseButton.click();
-			}
-		}
-
-		driver.switchTo().window(MainWindow);
-		return null;
-	}
-	
-	public boolean yearBtnExists() {
-		if(validate(view2017Plans))
-			return true;
-		return false;
-	}
-	
 	public void clickOnViewPlans(String plantype) {
 		try {
 			Thread.sleep(10000);
@@ -745,26 +1155,6 @@ public VPPPlanSummaryPage verifyPDPCards(){
 
 	}
 
-	public void choose2017Plans() {
-		viewPlans.click();
-		try {
-			Thread.sleep(2000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		if(view2017Plans!=null){
-			view2017Plans.click();
-			try {
-				Thread.sleep(2000);
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			//viewPlans.click();
-		}	
-
-	}
 	public DrugCostEstimatorPage navigateToDCE(String plantype) {
 		if(plantype.equals("MA")||plantype.equals("MAPD")){
 			//viewPlans.click();
@@ -787,6 +1177,7 @@ public VPPPlanSummaryPage verifyPDPCards(){
 		return null;
 
 	}
+
 	public DrugCostEstimatorPage navigateToDCEAfterDrugAdded(String plantype) {
 		try {
 			Thread.sleep(10000);
@@ -815,4 +1206,32 @@ public VPPPlanSummaryPage verifyPDPCards(){
 		return null;
 
 	}
+
+	public void choose2017Plans() {
+		viewPlans.click();
+		try {
+			Thread.sleep(2000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		if(view2017Plans!=null){
+			view2017Plans.click();
+			try {
+				Thread.sleep(2000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			//viewPlans.click();
+		}
+
+	}
+
+	public boolean yearBtnExists() {
+		if(validate(view2017Plans))
+			return true;
+		return false;
+	}
+
 }

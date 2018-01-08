@@ -17,8 +17,8 @@ public class GetStartedPage extends UhcDriver {
 
 	public GetStartedPage(WebDriver driver) {
 		 super(driver);
-	       PageFactory.initElements(driver, this);
-	       openAndValidate();
+	     PageFactory.initElements(driver, this);
+	     openAndValidate();
 	}
 
 	public LocationSearchPage getStarted() {
