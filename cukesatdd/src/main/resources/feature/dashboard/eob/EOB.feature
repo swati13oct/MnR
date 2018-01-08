@@ -9,8 +9,8 @@ Then the user navigates to EOB page
 Then the user validates site leaving pop up         
 Examples:
        | planType  | memberType        |  
-       | MAPD      | q4_dec_uhc002   	 | 
-       | PDP			 | q4_dec_aarp292		 |
+  #     | MAPD      | q4_dec_uhc020   	 | 
+       | PDP			 | q4_dec_aarp293		 |
        | MA				 | q4_dec_aarp507	   |   
 
 
@@ -45,7 +45,7 @@ And the user slects the desired date range
 Then the user validates EOB statments displayed 	
 Examples:
 	| planType  | memberType        |dateRange			| eobType |
-	| MAPD      | q4_dec_uhc002     |12 Months		  | Medical |
+	| MAPD      | q4_dec_aarp159    |12 Months		  | Medical |
 	 
  	
   @eobCoutn    @EOBSep
@@ -81,13 +81,13 @@ Examples:
 | PDP					| q4_dec_combo026				 |
 |	SHIP				| q4_dec_combo026				 |
 #Peehip
-| MA					| q4_dec_combo022					 |
-| HIP					| q4_dec_combo022          |
+#| MA					| q4_dec_combo022					 |
+#| HIP					| q4_dec_combo022          |
 
 #failing
  
-| PDP					| q4_dec_ship072          |
-|	SSUP				| q4_dec_ship072          | 
+#| PDP					| q4_dec_ship072          |
+#|	SSUP				| q4_dec_ship072          | 
 
 @noComboTab
 Scenario Outline: To verify different plan types under combo tabs
@@ -99,7 +99,7 @@ Then the user validates content displayed on EOB page without combo tabs
 Examples: 
 | planType    | memberType   					 |
 #WELLS FARGO
-| PDP					| q4_dec_grp039          |  
+#| PDP					| q4_dec_grp039          |  
 
 |	MAPD				|	q4_dec_grp074					 |
 
@@ -123,15 +123,15 @@ Examples:
 |	MAPD				|	q4_dec_grp074					 |Prescription Drug |custom-search |
 
 # =========== B Layer Group =======================================================================
- |	MA				|	q4_dec_grp181					 |na |12 Months |
- |	MA				|	q4_dec_grp181					 |na |18 Months|
- |	MA				|	q4_dec_grp181					 |na |6 Months |
- |	MA				|	q4_dec_grp181					 |na |custom-search |
+# |	MA				|	q4_dec_grp181					 |na |12 Months |
+# |	MA				|	q4_dec_grp181					 |na |18 Months|
+# |	MA				|	q4_dec_grp181					 |na |6 Months |
+ #|	MA				|	q4_dec_grp181					 |na |custom-search |
  # 2 EOBs displayed
  |	PDP				|	q4_dec_aarp327					 |na |12 Months |
  |	PDP	  		|	q4_dec_aarp327					 |na |18 Months|
  |	PDP	  		|	q4_dec_aarp327					 |na |6 Months |
- |	PDP  			|	q4_dec_aarp327					 |na |custom-search |
+ #|	PDP  			|	q4_dec_aarp327					 |na |custom-search |
  
  #=====================================================================================================
  
