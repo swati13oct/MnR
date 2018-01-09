@@ -12,10 +12,11 @@ import cucumber.junit.Cucumber;
  *
  */
 @RunWith(Cucumber.class)
-@Cucumber.Options(glue = { "atdd.framework","acceptancetests.loginassistance" }, 
-		features = { "feature/login-assistance" }, 
+@Cucumber.Options(glue = { "atdd.framework","acceptancetests.loginassistance.ulayer" }, 
+		features = { "feature/login-assistance/ulayer" }, 
 		format = {
-		"pretty", "html:reports/test-report" }, tags ={"@loginAssistance"})
+		"pretty", "html:reports/test-report","json:target/cucumber.json" }, tags ={"@US738867"})
+//US738867 LoginAssistanceErrorMessages
 public class RunMRAtddTestLoginAssistance {
 
 }

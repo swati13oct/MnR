@@ -7,18 +7,16 @@ import cucumber.junit.Cucumber;
 
 /**
  * 
- * @author sdwaraka
+ * @author schak38
  *
  */
-
 @RunWith(Cucumber.class)
-@Cucumber.Options(glue = { "atdd.framework","acceptancetests.ordermaterials.ulayer" }, 
-		features = { "feature/ordermaterials/ulayer" }, 
+@Cucumber.Options(glue = { "atdd.framework","acceptancetests.ordermaterials" }, 
+		features = { "feature/ordermaterials" }, 
 		format = {
-				"pretty", "html:reports/test-report","json:target/cucumber.json"}, tags ={"@TeamPredators,@ordermaterials"})
-
+		"pretty", "html:reports/test-report","json:target/cucumber.json" }, tags ={"@ordermaterialsfnf"})
 
 public class RunMRAtddTestOrderPlanMaterials {
 	
-	//,@TeamPredators,@ordermaterials
+	
 }

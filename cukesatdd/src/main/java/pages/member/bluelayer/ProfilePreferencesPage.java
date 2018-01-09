@@ -43,10 +43,10 @@ public class ProfilePreferencesPage extends UhcDriver {
 	@FindBy(xpath = "//*[@id='tab-1']//div[1]//div//p[2]//text()")
 	private WebElement memberIdtext;
 
-	@FindBy(xpath = ".//*[@id='profilePreferencesController']/div[1]/div/div/section/div/div[3]/div/div/div/div/div/div[1]/div/span[1]")
+	@FindBy(xpath = "//span[contains(text(),'Username')]")
 	private WebElement Username;
 
-	@FindBy(xpath = ".//*[@id='profilePreferencesController']/div[1]/div/div/section/div/div[3]/div/div/div/div/div/div[1]/div/span[2]")
+	@FindBy(xpath = "//span[contains(text(),'Username')]/following-sibling::span")
 	private WebElement Usernametext;
 
 	@FindBy(xpath = ".//*[@id='password']/div/div/span[1]")
@@ -67,7 +67,7 @@ public class ProfilePreferencesPage extends UhcDriver {
     @FindBy(id = "passwordNew-error")
 	private WebElement passworderrormessage2;
     
-    @FindBy(id = "passwordNewConfirm-error")
+    @FindBy(xpath = "//label[@id='passwordNewConfirm-error']")
 	private WebElement passworderrormessage3;
     
 	@FindBy(xpath = ".//*[@id='email']/div[1]/p")
@@ -400,7 +400,7 @@ public class ProfilePreferencesPage extends UhcDriver {
 		}
 
 		SaveButton.click();
-		if (passworderrormessage.getText().contentEquals("This field is required.")) {
+		if (passworderrormessage.getText().contentEquals("Enter your current password.")) {
 			System.out.println("The element" + passworderrormessage.getText() + "is found");
 			return true;
 		} else {
@@ -441,7 +441,9 @@ public class ProfilePreferencesPage extends UhcDriver {
 			e.printStackTrace();
 		}
 		SaveButton.click();
-		if (passworderrormessage3.getText().contentEquals("Please Enter the same value again.")) {
+		validate(passworderrormessage3);
+		
+		if (passworderrormessage3.getText().contentEquals("Your password and password confirmation do not match.")) {
 			System.out.println("The element" + passworderrormessage3.getText() + "is found");
 			return true;
 		} else {
@@ -574,7 +576,7 @@ public class ProfilePreferencesPage extends UhcDriver {
 		validate(Seemorewaystext);
 	}
 
-	public boolean clickcontactUslink() {
+	public  void clickcontactUslink() {
 		validate(contactUs);
 		contactUs.click();
 		try {
@@ -583,12 +585,14 @@ public class ProfilePreferencesPage extends UhcDriver {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		if (driver.getCurrentUrl().contains("/content/uhcm/home/contact.html")) {
-			return true;
+		
+		System.out.println(driver.getCurrentUrl());
+		if (driver.getCurrentUrl().contains("/member/contact-us/")) {
+			Assert.assertTrue(true);
 		} else {
 			Assert.fail("The element " + contactuslink.getText() + "is not found");
 		}
-		return false;
+		
 		
 	}
 
@@ -656,7 +660,8 @@ public class ProfilePreferencesPage extends UhcDriver {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		if (driver.getCurrentUrl().contains("content/uhcm/home/contact.html")) {
+		if (driver.getCurrentUrl().contains("member/contact-us/")) {
+			System.out.println("Inside here ");
 			return true;
 		} else {
 			Assert.fail("The element " + contactuslink.getText() + "is not found");
@@ -916,4 +921,30 @@ public class ProfilePreferencesPage extends UhcDriver {
 			Assert.assertTrue(GoGreenContentActual.equalsIgnoreCase(GoGreenContentExpected));
 		}
 	}
+	
+	public void savefunctionality()
+	{
+		
+		List<WebElement> oRadioButton = driver.findElements(By.name("187"));
+		boolean bValue = false;
+		bValue = oRadioButton.get(0).isSelected();
+		if(bValue == true){
+			// This will select Second radio button, if the first radio button is selected by default
+			oRadioButton.get(1).click();
+		}else{
+			// If the first radio button is not selected by default, the first will be selected
+			oRadioButton.get(0).click();
+		}
+		iHavereadCheckbox.click();
+		try {
+			Thread.sleep(20000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+
+		savePreferencesButton.click();
+		
+		}
 }

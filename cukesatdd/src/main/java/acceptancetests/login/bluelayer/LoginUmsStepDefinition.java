@@ -366,11 +366,15 @@ public class LoginUmsStepDefinition {
 		WebDriver wd = getLoginScenario().getWebDriver();
 
 		LoginPage loginPage = new LoginPage(wd);
-		TerminatedHomePage terminatedHomePage = (TerminatedHomePage) loginPage.loginWith(userName, pwd,category);
-		if (terminatedHomePage != null) {
+		if(loginPage.loginWith(userName, pwd,category) instanceof TerminatedHomePage){
+			TerminatedHomePage terminatedHomePage = (TerminatedHomePage) loginPage.loginWith(userName, pwd,category);
+			if (terminatedHomePage != null) {
+				getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
+				getLoginScenario().saveBean(PageConstants.TERMINATED_HOME_PAGE,terminatedHomePage);
+		}
+		}
+		else{
 			getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
-			getLoginScenario().saveBean(PageConstants.TERMINATED_HOME_PAGE,
-					terminatedHomePage);
 		}
 		
 	}
@@ -380,19 +384,18 @@ public class LoginUmsStepDefinition {
 	 public void user_validates_addaplan_link()
 	    {
 		 TerminatedHomePage terminatedHomePage = ( TerminatedHomePage) getLoginScenario().getBean(PageConstants.TERMINATED_HOME_PAGE);
-	    
-
-			
+		 if(terminatedHomePage!=null){ 
 			boolean flagValue=terminatedHomePage.validateaddaplanlink();
 			if(!flagValue){
 				System.out.println("add a plan link is not displayed");
 				Assert.assertTrue(true);
 			}else{
 				System.out.println("add a plan link is displayed");
-				Assert.assertTrue(false);
-				
+				Assert.assertTrue(false);				
 			}
+		}
 	    }
+	    
 }
 				
 

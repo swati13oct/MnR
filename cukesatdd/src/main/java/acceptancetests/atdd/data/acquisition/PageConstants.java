@@ -10,6 +10,10 @@ package acceptancetests.atdd.data.acquisition;
  *
  */
 public class PageConstants {
+	
+	public static final String SignIN_Page = "signinpage";
+	
+	public static final String Error_Message = "errorMessage";
 
 	public static final String ESTIMATE_DRUG_COST_PAGE = "estimateDrugCostPage";
 
@@ -360,13 +364,6 @@ public class PageConstants {
 
 	public static final String VPP_REQUEST_SEND_EMAIL_PAGE = "vppRequestSendEmailPage";
 	
-	public static final String TeamC_Plan_Compare_Page = "TeamCPlanComparePage";
-	
-	public static final String TeamC_FootNotes_Section = "TeamCFootNotesSection";
-	
-	
-	
-
 	public static final String PORTFOLIO_PAGE = "portfoliopage";
 	
     public static final String RESPONSIVE_PLAN_SUMMARY_PAGE = "responsivePlanSummaryPage";
@@ -374,28 +371,22 @@ public class PageConstants {
 	public static final String RESPONSIVE_DETAILS_PAGE = "responsiveDetailsPage";
 	
 	public static final String RESPONSIVE_DETAILS_UHC_PAGE = "responsiveDetailsUHCPage";
+public static final String PORTFOLIO_PAGE_UHC = "ourPlans";
 
-
-	public static final String NOKIA_HOME_PAGE = "nokiahomepages";
-	
-	public static final String EATON_HOME_PAGE = "eatonhomepages";
-
-	public static final String Salesforce_PAGE = "salesforce";
-
-	public static final String NONCUSTOM_HOME_PAGE = "noncustom";
-
-	public static final String UNIVERSITYOFMISSOURI_HOME_PAGE = "UniversityofMissouri";
-	
-	public static final String PORTFOLIO_PAGE_UHC = "ourPlans";
-	
-	public static final String PORTFOLIO_PAGE_AARP = "ourPlans";
-	
 	public static final String RESPONSIVE_PLAN_SUMMARY_PAGE_UHC = "vppPlan";
-
-	public static final String REGISTRATION_INFORMATION_PAGE = "RegistrationInformationPage";
-
-	public static final String NEW_SIGN_PAGE = "sign_Page";
 	
-	public static final String USERNAME_PASSWORD_ASSISTANCE_PAGE = "usernamePasswordAssistancePage";
-
+	public static final String TeamC_Plan_Compare_Page = "TeamCPlanComparePage";
+	
+	public static final String TeamC_FootNotes_Section = "TeamCFootNotesSection";
+	
+	public static final String SamePage = "SamePage";
+	
+	public static final String UNPWAssistancePage = "UNPWassPge";
+	public static final String EATON_HOME_PAGE = "eatonhomepages";
+	public static final String Salesforce_PAGE = "salesforce";
+	public static final String NOKIA_HOME_PAGE = "nokiahomepages";
+	   public static final String NONCUSTOM_HOME_PAGE = "noncustom";
+	   public static final String UNIVERSITYOFMISSOURI_HOME_PAGE = "UniversityofMissouri";
+	   
+	   public static final String REGISTRATION_INFORMATION_PAGE = "RegistrationInformationPage";
 }

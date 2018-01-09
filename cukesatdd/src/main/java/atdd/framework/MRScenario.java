@@ -28,9 +28,6 @@ import java.util.Map.Entry;
 import java.util.Properties;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
-import java.awt.AWTException;
-import java.awt.Robot;
-import java.awt.event.KeyEvent;
 
 import javax.naming.Context;
 import javax.naming.Name;
@@ -52,7 +49,6 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxProfile;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
-import org.openqa.selenium.interactions.Action;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.phantomjs.PhantomJSDriver;
 import org.openqa.selenium.phantomjs.PhantomJSDriverService;
@@ -61,10 +57,10 @@ import org.openqa.selenium.remote.RemoteWebDriver;
 import org.springframework.ldap.core.DistinguishedName;
 import org.springframework.stereotype.Component;
 
-import acceptancetests.atdd.data.CommonConstants;
-
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.WebClient;
+
+import acceptancetests.atdd.data.CommonConstants;
 
 /**
  * 
@@ -94,6 +90,8 @@ public class MRScenario {
 	public static String environment, browser;
 
 	private static final String DIRECTORY = "/src/main/resources/";
+
+	public static final String TeamCEnvironment = null;
 	public static int count = 0;
 
 	public void saveBean(String id, Object object) {
@@ -893,7 +891,7 @@ public class MRScenario {
 				HtmlUnitDriver htmlUnitDriver = new HtmlUnitDriver(BrowserVersion.getDefault()) {
 					@Override
 					protected WebClient modifyWebClient(WebClient client) {
-						client.getOptions().setThrowExceptionOnScriptError(false);
+						//client.getOptions().setThrowExceptionOnScriptError(false);
 						return client;
 					}
 				};
@@ -997,7 +995,7 @@ public class MRScenario {
 	           chromeOptions.put("binary", pathToBinary);
 	           DesiredCapabilities capabilities = DesiredCapabilities.chrome();
 	           capabilities.setCapability(ChromeOptions.CAPABILITY, chromeOptions);
-	           System.setProperty("webdriver.chrome.driver","C:\\Users\\njain112\\Videos\\chromedriver.exe");
+	           System.setProperty("webdriver.chrome.driver","C:\\Users\\njain112\\Documents\\Chrome\\chromedriver.exe");
 	           webDriver = new ChromeDriver();
 	       }
 	           return webDriver;*/

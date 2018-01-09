@@ -11,8 +11,6 @@ Examples:
 	| planType | memberType |
 #	| MA       | Individual |
 #	| MA       | Group      |
-	| MAPD     | Individual |
-#	| MAPD     | Group      |
 #	| PDP      | Group      |
 
 Scenario Outline: Verify login in UHC site for group plan member 
@@ -116,10 +114,10 @@ Then the user validates temp id card pop up after login in UHC site
 
 Examples:
 	| planType | memberType |
-	| MAPD     | Individual |
+#	| MAPD     | Individual |
 	
 	
-@albama	
+@albamafnf
 Scenario Outline:To verify add a plan link is not displayed for albama member
 Given the user is on the UHC medicare site login page
 Given registered member to login in UMS site
@@ -128,9 +126,6 @@ Given registered member to login in UMS site
 Then the user validate add a plan link is not displayed for albama memeber
 Examples:
 	| plantype | memberType |
-	| MA       | Group |
-
-
 Scenario Outline:To verify secure Email widget in UHC site
 Given the user is on the UHC medicare site login page
 When the user logs in with a registered UMP with following details in UHC site for secure Email Widget
@@ -178,9 +173,33 @@ Examples:
 	| MAPD     | Group      |
 #	| PDP      | Group      |
 
+Scenario Outline:To verify secure Email widget in UHC site
+Given the user is on the UHC medicare site login page
+When the user logs in with a registered UMP with following details in UHC site for secure Email Widget
+	| Plan Type   | <planType>   |
+	| Member Type | <memberType> |
+Then the user validates secure email widget display on  contact US page after login in UHC Member site
 
+Examples:
+	| planType | memberType |
+#	| MA       | Individual |
+#	| MA       | Group      |
+#	| MAPD     | Individual |
+	| MAPD     | Group      |
+#	| PDP      | Group      |
 
+Scenario Outline:To verify secure Email widget  in UHC site
+Given the user is on the UHC medicare site login page
+When the user logs in with a registered UMP with following details in UHC site for secure Email Widget
+	| Plan Type   | <planType>   |
+	| Member Type | <memberType> |
+Then the user validates secure email widget non display  on  contact US page after login in UHC Member site
 
-
-
+Examples:
+	| planType | memberType |
+#	| MA       | Individual |
+#	| MA       | Group      |
+#	| MAPD     | Individual |
+	| MAPD     | Group      |
+#	| PDP      | Group      |
 

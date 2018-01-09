@@ -1,4 +1,4 @@
-package acceptancetests.payments.ulayer;
+package acceptancetests.payments.ulayer.recurringpayment;
 
 import gherkin.formatter.model.DataTableRow;
 

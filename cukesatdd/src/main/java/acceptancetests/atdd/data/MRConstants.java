@@ -1,8 +1,4 @@
-/**
- * 
- */
 package acceptancetests.atdd.data;
-
 
 import atdd.framework.MRScenario;
 
@@ -12,7 +8,11 @@ import atdd.framework.MRScenario;
  */
 
 public class MRConstants {
+	
+	public static final String Dashboar_URL = "https://"+MRScenario.environment+"-medicare.uhc.com/?testharness=true ";
 
+	
+	public static final String Assistance_Confirmation_URL = "https://member."+MRScenario.environment+"-aarpmedicareplans.uhc.com/content/dashboard/guest/unpwclient.html#/assistanceconfirmation";
 
 	 public static final String MA_PLANS_AND_GRIEVANCES_URL = "https://www." + MRScenario.environment
              + "-uhcmedicaresolutions.uhc.com/health-plans/medicare-advantage-plans/resources-plan-material/ma-medicare-forms/medicare-appeal.html";
@@ -130,18 +130,9 @@ public static final String MAPD_REQUEST_PLAN_URL = "https://www.team-a-aarpmedic
 
 	public static final String BING_SEARCH_ENGINE_URL = "https://www.bing.com";
 
-	public static final String AARPM_MOBILE_URL = "https://member.awe-" + MRScenario.environment
-			+ "-aarpmedicareplans.uhc.com/mobile/guest/login.html";
-
-	public static final String UHCM_MOBILE_URL = "https://member.awe-" + MRScenario.environment
-			+ "-uhcmedicaresolutions.uhc.com/mobile/guest/login.html";
-
-	public static final String MRREST_TIME_ADMIN_URL = "https://" + MRScenario.environment
-			+ "-generic.uhc.com/MRRestWAR/rest/zadmin/time/";
-
-	public static final String PARTD_TIME_ADMIN_URL = "https://" + MRScenario.environment
-			+ "-generic.uhc.com/PartDPortalWeb/rest/zadmin/time/";
-
+	 public static final String MRREST_TIME_ADMIN_URL = "https://"+MRScenario.environment+"-generic.uhc.com/MRRestWAR/rest/zadmin/time/";
+     
+     public static final String PARTD_TIME_ADMIN_URL = "https://"+MRScenario.environment+"-generic.uhc.com/PartDPortalWeb/rest/zadmin/time/";
 	public static final String GENERIC_PORTLET_URL = "https://portal.uhc.com/bConnectedDCE/home.html";
 
 	public static final String UHCRETIREE_OEHWF_URL = "https://www." + MRScenario.environment
@@ -228,7 +219,7 @@ public static String DEREGISTER_STAGE_URL = "https://apsrs0261.uhc.com:9443/Part
     public static final String BNCBURL = "https://member." + MRScenario.environment + "-uhcmedicaresolutions.uhc.com/";
     
     public static final String Dashboard_URL = "https://" + MRScenario.environment + "-medicare.uhc.com/?TARGET=SMSR/member/benefits/overview.html%3fdeeplink=true";
-    
+    public static final String Dashboard_URL1 = "https://" + MRScenario.environment + "-medicare.uhc.com/";
     
     public static final String TEAMH_URL_TESTHARNES ="https://"+MRScenario.environment+"-werally.uhc.com/medicare/login/overview.html?testharness=true";
     
@@ -247,20 +238,8 @@ public static String DEREGISTER_STAGE_URL = "https://apsrs0261.uhc.com:9443/Part
     public static final String REDESIGN_REGISTRATION_URL = "https://www.awe-"+MRScenario.environment+"-uhcmedicaresolutions.uhc.com/content/uhcm/guest/member-registration.html";
     
     
-    private static final String UMS_PLANPREVIEW_URL = null;        
-    
-    public static final String SERVER_DATE_PARTD_PORTAL_WEB = "https://"+MRScenario.environment+"-generic.uhc.com/PartDPortalWeb/jsp/zadmin/timeAdmin.jsp?server=1";
-
-	public static final String SERVER_DATE_MR_REST_WAR = "https://"+MRScenario.environment+"-generic.uhc.com/MRRestWAR/jsp/zadmin/timeAdmin.jsp?server=1";
+  	public static final String AARP_MOBILE_TEAM_URL = "https://member."+MRScenario.environment+"-aarpmedicareplans.uhc.com/mobile/guest/login.html";
 	
-	public static final String UHCM_MEMBER_URL = "https://member."+MRScenario.environment+"-uhcmedicaresolutions.uhc.com/guest/home.html";
-	
-	public static final String UHCM_MOBILE_TEAM_C_URL = "https://member."+MRScenario.environment+"-uhcmedicaresolutions.uhc.com/mobile/guest/login.html";
-	
-	public static final String AARP_MOBILE_TEAM_URL = "https://member."+MRScenario.environment+"-aarpmedicareplans.uhc.com/mobile/guest/login.html";
-	
-	
-	public static final String AARP_PORTFOLIO_URL = "https://www."+MRScenario.environment+"-aarpmedicareplans.uhc.com/health-plans/plans.html";
 	
 	public static final String EATON_HOME_PAGE_URL = "https://www."+MRScenario.environment+"-uhcretiree.uhc.com/eaton/home.html";
 	
@@ -279,20 +258,79 @@ public static String DEREGISTER_STAGE_URL = "https://apsrs0261.uhc.com:9443/Part
 	public static final String SIGN_IN_URL = "https://member.team-b-aarpmedicareplans.uhc.com/content/dashboard/guest/signin.html";
 
 	public static final String MEDICARE_UHC_REDESIGN = "https://"+MRScenario.environment+"-medicare.uhc.com/medicare/login/overview.html?testharness=true";
-	  public static String CAMPAIGN_PAGE_URL1 = "https://www."+MRScenario.environment+"-aarpmedicareplans.uhc.com/health-plans/medicare-advantage-plans/available-plans.html?msg=nonzero&lang=sp&zipcode=90003&WT.mc_id=832467";
   
 	     public static final String UHCM_URL_REDESIGN = "https://member."+MRScenario.environment+"-uhcmedicaresolutions.uhc.com/content/uhcm/home//testharness.html";
-	     
-public static String CAMPAIGN_PAGE_URL2 = "https://www."+MRScenario.environment+"-aarpmedicareplans.uhc.com/health-plans/medicare-advantage-plans/available-plans.html?msg=zero&lang=en&zipcode=02211&WT.mc_id=832467";
-  
-public static final String Connector_model_url1 = "https://www."+MRScenario.environment+"-uhcmedicaresolutions.uhc.com/health-plans/medicare-advantage-plans/available-plans.html?WT.mc_id=897509&zipcode=32337&county=320&state=10&originatingSite=https%3A%2F%2Fwww.myuhcplans.com%2Foptions&subdomain=options";
 
 public static String TeamC_VPP_PAGE_UHC_URL = "https://www."+MRScenario.environment+"-uhcmedicaresolutions.uhc.com";
-
-public static final String PORTFOLIO_PAGE_UHC_URL = "https://www."+MRScenario.environment+"-uhcmedicaresolutions.uhc.com/health-plans.html";
-
-public static final String PORTFOLIO_PAGE_URL = "https://www."+MRScenario.environment+"-aarpmedicareplans.uhc.com/health-plans.html";
-public static String EOB_DIRECT_URL = "https://"+MRScenario.environment+"-medicare.uhc.com/?testharness=true"; 
 public static final String TEAMB_TIME_ADMIN_PAGE_URL = "http://apsrt0245.uhc.com:9083/DCERestWAR/dcerest/timeAdmin";
 
+public static final String AARPM_MOBILE_URL = "https://member.awe-" + MRScenario.environment
++ "-aarpmedicareplans.uhc.com/mobile/guest/login.html";
+private static final String UMS_PLANPREVIEW_URL = null;	
+	
+	public static final String SERVER_DATE_PARTD_PORTAL_WEB = "https://"+MRScenario.environment+"-generic.uhc.com/PartDPortalWeb/jsp/zadmin/timeAdmin.jsp?server=1";
+
+  public static final String SERVER_DATE_MR_REST_WAR = "https://"+MRScenario.environment+"-generic.uhc.com/MRRestWAR/jsp/zadmin/timeAdmin.jsp?server=1";
+
+  public static final String UHCM_MEMBER_URL = "https://member."+MRScenario.environment+"-uhcmedicaresolutions.uhc.com/guest/home.html";
+  
+ // public static final String UHCM_MOBILE_TEAM_C_URL = "https://member."+MRScenario.TeamCEnvironment+"-uhcmedicaresolutions.uhc.com/mobile/guest/login.html";
+  
+  //public static final String AARP_MOBILE_TEAM_C_URL = "https://member."+MRScenario.TeamCEnvironment+"-aarpmedicareplans.uhc.com/mobile/guest/login.html";
+  public static final String PORTFOLIO_PAGE_URL = "https://www."+MRScenario.environment+"-aarpmedicareplans.uhc.com";
+  
+  public static final String AARP_PORTFOLIO_URL = "https://www."+MRScenario.environment+"-aarpmedicareplans.uhc.com/health-plans.html";
+
+  public static final String PORTFOLIO_PAGE_UHC_URL = "https://www."+MRScenario.environment+"-uhcmedicaresolutions.uhc.com/health-plans.html";
+	
+public static String CAMPAIGN_PAGE_URL1 = "https://www."+MRScenario.environment+"-aarpmedicareplans.uhc.com/health-plans/medicare-advantage-plans/available-plans.html?msg=nonzero&lang=sp&zipcode=90003&WT.mc_id=832467";
+  
+  public static String CAMPAIGN_PAGE_URL2 = "https://www."+MRScenario.environment+"-aarpmedicareplans.uhc.com/health-plans/medicare-advantage-plans/available-plans.html?msg=zero&lang=en&zipcode=02211&WT.mc_id=832467";
+  
+  //public static String EOB_DIRECT_URL = "https://member."+MRScenario.environment+"-aarpmedicareplans.uhc.com/home/eobsearch.html";
+
+  public static String EOB_DIRECT_URL = "https://"+MRScenario.environment+"-medicare.uhc.com";
+
+
+
+  
+  //public static String TeamC_UHC_VPP_URL = "https://www."+MRScenario.TeamCEnvironment+"-uhcmedicaresolutions.uhc.com";
+  
+  //public static String TeamC_VPP_PAGE_AARPM_URL = "https://www."+MRScenario.TeamCEnvironment+"-aarpmedicareplans.uhc.com";
+  
+  public static final String Connector_model_url1 = "https://www."+MRScenario.environment+"-uhcmedicaresolutions.uhc.com/health-plans/medicare-advantage-plans/available-plans.html?WT.mc_id=897509&zipcode=32337&county=320&state=10&originatingSite=https%3A%2F%2Fwww.myuhcplans.com%2Foptions&subdomain=options";
+  
+  public static final String TeamH_ULayer_Member_URL = "https://stage-medicare.uhc.com";
+  
+  public static final String TeamH_BLayer_Member_URL = "https://stage-medicare.uhc.com/";
+  
+ //public static String TeamC_MultipleEmail_address_URL = "https://member."+MRScenario.TeamCEnvironment+"-aarpmedicareplans.uhc.com/content/dashboard/guest/multipleemailaddress.html";
+
+  //public static String TeamC_UndeliverableEmail_address_URL = "https://member."+MRScenario.TeamCEnvironment+"-aarpmedicareplans.uhc.com/content/dashboard/guest/undeliverable-email-address.html";
+  
+//  public static String TeamC_NewEmail_address_URL = "https://member."+MRScenario.TeamCEnvironment+"-aarpmedicareplans.uhc.com/content/dashboard/guest/no-email-address.html";
+  
+  public static final String TeamC_ULayer_Member_URL = "https://member."+MRScenario.environment+"-aarpmedicareplans.uhc.com";
+  									
+  public static final String DEEPLINK_URL = "https://"+MRScenario.environment+"-werally.uhc.com/login.html?TARGET=SMSR";
+
+public static final String MEMBER_AUTH = "https://"+MRScenario.environment+"-generic.uhc.com/content/dashboard/guest/memberauth.html#/memberAuthLogin";
+
+public static final String TeamC_UNPWAssistancePage_URL = "https://member.team-c-aarpmedicareplans.uhc.com/content/medicare/login/reset.html#/start";
+
+public static final String Stage_UNPWAssistancePage_URL = "https://stage-medicare.uhc.com/content/medicare/login/reset.html#/start";
+
+
+public static final String UHCM_MOBILE_TEAM_C_URL = null;
+
+
+public static final String TeamC_MultipleEmail_address_URL = null;
+
+
+public static final String TeamC_VPP_PAGE_AARPM_URL = null;
+
+
+public static final String TeamC_UHC_VPP_URL = null;
+
 }
+

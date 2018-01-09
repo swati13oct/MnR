@@ -137,7 +137,7 @@ public class VppUmsStepDefinition {
 		if (plansummaryPage != null) {
 			getLoginScenario().saveBean(PageConstants.VPP_PLAN_SUMMARY_PAGE,
 					plansummaryPage);
-			/* Get expected data */
+			// Get expected data 
 			String fileName = "vppPlanSummary";
 			String directory = CommonConstants.ACQUISITION_EXPECTED_DIRECTORY
 					+ File.separator + CommonConstants.SITE_BLUELAYER
@@ -150,7 +150,7 @@ public class VppUmsStepDefinition {
 					VPPCommonConstants.VPP_PLAN_SUMMARY_EXPECTED,
 					planSummaryExpectedJson);
 
-			/* Get actual data */
+			 //Get actual data 
 			JSONObject planSummaryActualJson = plansummaryPage.vppPlanSummaryJson;
 			getLoginScenario().saveBean(
 					VPPCommonConstants.VPP_PLAN_SUMMARY_ACTUAL,
@@ -374,12 +374,12 @@ public class VppUmsStepDefinition {
 				.getBean(PageConstants.ADD_DRUG_PAGE);
 		addDrugPage.enterDrugInitials(drugInitials);
 
-		/* Get actual Json */
+		// Get actual Json 
 		JSONObject drugListActualJson = addDrugPage.drugListJson;
 		getLoginScenario().saveBean(DceCommonConstants.DRUG_LIST_ACTUAL,
 				drugListActualJson);
 
-		/* Get Expected Json */
+		// Get Expected Json 
 		String fileName = drugInitials;
 		String directory = CommonConstants.ACQUISITION_EXPECTED_DIRECTORY
 				+ File.separator + CommonConstants.SITE_BLUELAYER
@@ -437,12 +437,12 @@ public class VppUmsStepDefinition {
 			getLoginScenario().saveBean(PageConstants.SELECT_DOSAGE_PAGE,
 					selectDosagePage);
 
-			/* Get Actual Data */
+			// Get Actual Data 
 			JSONObject drugDosageActualJson = selectDosagePage.drugDosageJson;
 			getLoginScenario().saveBean(DceCommonConstants.DRUG_DOSAGE_ACTUAL,
 					drugDosageActualJson);
 
-			/* Get Expected Data */
+			// Get Expected Data 
 			String fileName = drugName;
 			String directory = CommonConstants.ACQUISITION_EXPECTED_DIRECTORY
 					+ File.separator + CommonConstants.SITE_BLUELAYER
@@ -566,7 +566,7 @@ public class VppUmsStepDefinition {
 						DceCommonConstants.MANAGE_DRUG_ACTUAL,
 						manageDrugActualJson);
 
-				/* Get Expected data */
+				// Get Expected data 
 				String fileName = drugDosage;
 				String directory = CommonConstants.ACQUISITION_EXPECTED_DIRECTORY
 						+ File.separator
@@ -594,7 +594,7 @@ public class VppUmsStepDefinition {
 						DceCommonConstants.MANAGE_DRUG_ACTUAL,
 						manageDrugActualJson);
 
-				/* Get Expected data */
+				// Get Expected data 
 				@SuppressWarnings("unchecked")
 				Map<String, String> dosageAttributesMap = (Map<String, String>) getLoginScenario()
 				.getBean(DceCommonConstants.DOSAGE_MAP);
@@ -695,13 +695,13 @@ public class VppUmsStepDefinition {
 		if (selectPharmacyPage != null) {
 			getLoginScenario().saveBean(PageConstants.PHARMACY_SEARCH_PAGE,
 					selectPharmacyPage);
-			/* Get Actual Data */
+			// Get Actual Data 
 			JSONObject availablePharmaciesActualJson = selectPharmacyPage.availablePharmaciesJson;
 			getLoginScenario().saveBean(
 					DceCommonConstants.AVAILABLE_PHARMACIES_ACTUAL,
 					availablePharmaciesActualJson);
 
-			/* Get Expected Data */
+			// Get Expected Data 
 			String zipcode = (String) getLoginScenario().getBean(
 					VPPCommonConstants.ZIPCODE);
 			String county = (String) getLoginScenario().getBean(
@@ -783,13 +783,13 @@ public class VppUmsStepDefinition {
 		SelectPharmacyPage updatedPharmacyPage = pharmacySearchPage
 				.searchPharmacies(pharmacyType, distance);
 
-		/* Get Actual Data */
+		// Get Actual Data 
 		JSONObject availablePharmaciesActualJson = updatedPharmacyPage.availablePharmaciesJson;
 		getLoginScenario().saveBean(
 				DceCommonConstants.AVAILABLE_PHARMACIES_ACTUAL,
 				availablePharmaciesActualJson);
 
-		/* Get Expected Data */
+		// Get Expected Data 
 		String zipcode = (String) getLoginScenario().getBean(
 				VPPCommonConstants.ZIPCODE);
 		String county = (String) getLoginScenario().getBean(
@@ -862,12 +862,12 @@ public class VppUmsStepDefinition {
 		if (manageDrugPage != null) {
 			getLoginScenario().saveBean(PageConstants.MANAGE_DRUG_PAGE,
 					manageDrugPage);
-			/* Get Actual Data */
+			// Get Actual Data 
 			JSONObject manageDrugActualJson = manageDrugPage.manageDrugJson;
 			getLoginScenario().saveBean(DceCommonConstants.MANAGE_DRUG_ACTUAL,
 					manageDrugActualJson);
 
-			/* Get Expected Data */
+			// Get Expected Data 
 			String fileName = null;
 			if (!pharmacyType
 					.equalsIgnoreCase("Preferred Mail Service Pharmacy")) {
@@ -958,13 +958,12 @@ public class VppUmsStepDefinition {
 
 		VPPPlanSummaryPage planSummaryPage = (VPPPlanSummaryPage) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
-		/* get actual data for a particular plan */
+		// get actual data for a particular plan 
 		/*JSONObject planSummaryActualJson = planSummaryPage
 				.getPlanSummaryActualData(planName);
 		System.out
 		.println("planSummaryActualJson---->" + planSummaryActualJson);
 
-		 Get expected data 
 
 		String fileName = planName;
 		String zipcode = (String) getLoginScenario().getBean(
@@ -1018,7 +1017,7 @@ public class VppUmsStepDefinition {
 		if (vppPlanDetailsPage != null) {
 			getLoginScenario().saveBean(PageConstants.VPP_PLAN_DETAILS_PAGE,
 					vppPlanDetailsPage);
-			/* Get actual data */
+			// Get actual data 
 			JSONObject planDetailsActualJson = vppPlanDetailsPage.vppPlanDetailsJson;
 			System.out.println("planDetailsActualJson---->"
 					+ planDetailsActualJson);
@@ -1026,7 +1025,7 @@ public class VppUmsStepDefinition {
 					VPPCommonConstants.VPP_PLAN_DETAIL_ACTUAL,
 					planDetailsActualJson);
 
-			/* Get expected data */
+			// Get expected data 
 			String fileName = planName;
 			String directory = CommonConstants.ACQUISITION_EXPECTED_DIRECTORY
 					+ File.separator + CommonConstants.SITE_BLUELAYER
@@ -1111,14 +1110,14 @@ public class VppUmsStepDefinition {
 				.getBean(PageConstants.MANAGE_DRUG_PAGE);
 		String planName = (String) getLoginScenario().getBean(
 				VPPCommonConstants.PLAN_NAME);
-		/*PlanDetailsPage planDetailsPage = manageDrugPage
+		PlanDetailsPage planDetailsPage = manageDrugPage
 				.applieschanges(planName);
 		if (planDetailsPage != null) {
 			getLoginScenario().saveBean(PageConstants.VPP_PLAN_DETAILS_PAGE,
 					planDetailsPage);
 		} else {
 			Assert.fail("Error: loading planDetailsPage");
-		}*/
+		}
 		
 		VPPPlanSummaryPage planSummaryPage = manageDrugPage.applieschanges();
 		if (planSummaryPage != null) {
@@ -1143,7 +1142,7 @@ public class VppUmsStepDefinition {
 		PlanDetailsPage vppPlanDetailsPage = (PlanDetailsPage) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_DETAILS_PAGE);
 		if (vppPlanDetailsPage != null) {
-			/* Get actual data */
+		//	 Get actual data 
 			JSONObject planDetailsActualJson = vppPlanDetailsPage.vppPlanDetailsJson;
 			System.out.println("planDetailsActualJson---->"
 					+ planDetailsActualJson);
@@ -1151,7 +1150,7 @@ public class VppUmsStepDefinition {
 					VPPCommonConstants.VPP_PLAN_DETAIL_ACTUAL,
 					planDetailsActualJson);
 
-			/* Get Expected response */
+			// Get Expected response 
 			String fileName = planName;
 			String drugWithDosage = (String) getLoginScenario().getBean(
 					DceCommonConstants.DRUG_WITH_DOSAGE);
@@ -1182,7 +1181,7 @@ public class VppUmsStepDefinition {
 					VPPCommonConstants.VPP_PLAN_DETAIL_EXPECTED,
 					planDetailsExpectedJson);
 
-			/* Comparision */
+			 //Comparision 
 			try {
 				JSONAssert.assertEquals(planDetailsExpectedJson,
 						planDetailsActualJson, true);
@@ -1223,7 +1222,7 @@ public class VppUmsStepDefinition {
 		if (plansummaryPage != null) {
 			getLoginScenario().saveBean(PageConstants.VPP_PLAN_SUMMARY_PAGE,
 					plansummaryPage);
-			/* Get expected data */
+			// Get expected data 
 			String fileName = "vppPlanSummary";
 			String directory = CommonConstants.ACQUISITION_EXPECTED_DIRECTORY
 					+ File.separator + CommonConstants.SITE_BLUELAYER
@@ -1236,7 +1235,7 @@ public class VppUmsStepDefinition {
 					VPPCommonConstants.VPP_PLAN_SUMMARY_EXPECTED,
 					planSummaryExpectedJson);
 
-			/* Get actual data */
+			 //Get actual data 
 			JSONObject planSummaryActualJson = plansummaryPage.vppPlanSummaryJson;
 			getLoginScenario().saveBean(
 					VPPCommonConstants.VPP_PLAN_SUMMARY_ACTUAL,
@@ -1266,13 +1265,11 @@ public class VppUmsStepDefinition {
 		/*if (plansummaryPage != null) {
 			getLoginScenario().saveBean(PageConstants.VPP_PLAN_SUMMARY_PAGE,
 					plansummaryPage);
-			 Get actual data 
 			JSONObject planSummaryActualJson = plansummaryPage.vppPlanSummaryJson;
 			getLoginScenario().saveBean(
 					VPPCommonConstants.VPP_PLAN_SUMMARY_ACTUAL,
 					planSummaryActualJson);
 
-			 Get expected data 
 			String fileName = null;
 			if (plantype.equalsIgnoreCase("MA")
 					|| plantype.equalsIgnoreCase("MAPD")) {
@@ -1312,11 +1309,10 @@ public class VppUmsStepDefinition {
 		getLoginScenario().saveBean(VPPCommonConstants.PLAN_NAME, planName);
 		VPPPlanSummaryPage planSummaryPage = (VPPPlanSummaryPage) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
-		/* get actual data for a particular plan */
+		// get actual data for a particular plan 
 		/*JSONObject planSummaryActualJson = planSummaryPage
 				.getPlanSummaryActualData(planName);
 
-		 Get expected data 
 		String fileName = planName;
 		String zipcode = (String) getLoginScenario().getBean(
 				VPPCommonConstants.ZIPCODE);
@@ -1363,7 +1359,6 @@ public class VppUmsStepDefinition {
 		if (vppPlanDetailsPage != null) {
 			getLoginScenario().saveBean(PageConstants.VPP_PLAN_DETAILS_PAGE,
 					vppPlanDetailsPage);
-			 Get actual data 
 			JSONObject planDetailsActualJson = vppPlanDetailsPage.vppPlanDetailsJson;
 			System.out.println("planDetailsActualJson---->"
 					+ planDetailsActualJson);
@@ -1371,7 +1366,6 @@ public class VppUmsStepDefinition {
 					VPPCommonConstants.VPP_PLAN_DETAIL_ACTUAL,
 					planDetailsActualJson);
 
-			 Get expected data 
 			String fileName = planName;
 			String directory = CommonConstants.ACQUISITION_EXPECTED_DIRECTORY
 					+ File.separator + CommonConstants.SITE_BLUELAYER
@@ -1412,7 +1406,7 @@ public class VppUmsStepDefinition {
 		JSONObject planDocsPDFActualJson = planDetailsPage.getActualPdfLinksData();
 		System.out.println("planDocsPDFActualJson---->"+planDocsPDFActualJson);
 		
-		/* Get expected data */
+		// Get expected data 
 		String fileName = "plandocumentspdf";
 		String zipcode = (String) getLoginScenario().getBean(
 				VPPCommonConstants.ZIPCODE);
@@ -1557,7 +1551,7 @@ public class VppUmsStepDefinition {
 	}
 			
 
-	/*@When("^the user view plan details of the above selected plan in UMS site$")
+	@When("^the user view plan details of the above selected plan in UMS site$")
 	public void user_views_plandetails_selected_plan_ums(DataTable planAttributes) {
 		List<DataTableRow> givenAttributesRow = planAttributes.getGherkinRows();
 		Map<String, String> givenAttributesMap = new HashMap<String, String>();
@@ -1586,7 +1580,7 @@ public class VppUmsStepDefinition {
 					vppPlanDetailsPage);
 			
 		}
-}*/	@Then("^the user validates the passport availability$")
+	}
 	public void user_validates_passport_details() {
 		try
 		{

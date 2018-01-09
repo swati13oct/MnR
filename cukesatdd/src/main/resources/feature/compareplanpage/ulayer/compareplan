@@ -1,0 +1,5 @@
+@compareplanaarp
+Feature: To verify back to plans link
+Scenario Outline: Verify back to plans link
+Given the user is on the AARP medicare site compare plan page
+Then the user clicks on back to plans link

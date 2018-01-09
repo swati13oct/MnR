@@ -1711,8 +1711,9 @@ sendkeys(zipcodeInput, zipcode); // not sure what webelement to use
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		if(currentUrl().contains("#/details"))
-			return new PlanDetailsPage(driver);
+		if(currentUrl().contains("#/details")){
+			return new PlanDetailsPage(driver,null);
+		}
 		return null;
 	}
 	@FindBy(xpath = ".//*[@id='borderContainer']/div/div[2]/div[2]/button[1]")

@@ -26,7 +26,7 @@ Then the user validates plan and member details on benefits details page in AARP
 
 Examples:
 | planType |
-| PDP		|
+#| PDP		|
 
 
 @Ship
@@ -49,7 +49,7 @@ And user clicks on view detials button Benefit Page for medical care and clicks 
 And the user view medical care benefit
 Examples:
 | planType |
-| SHIP     |
+#| SHIP     |
 
 @Shipskilled
 Scenario Outline: Verify Ship benefit details under Skilled nursing facility stays benefit
@@ -60,7 +60,7 @@ And user clicks on view detials button and click on skilled nursing benefit
 And the user view skilled facility benefit
 Examples:
 | planType |
-| SHIP     |
+#| SHIP     |
 
 Scenario Outline: Verify LIS deductible on My Drug Benefits 
 Given the user is on the AARP medicare site login page
@@ -74,10 +74,26 @@ And validates annual deductible on plan details page
  
 Examples:
           |planType  |deductibleType      |copayCategory|tierType   |annualDeductible| 
-          |PDP       |withDeductible      |LIS 4        |NA         | 123            |       
-          |PDP       |noDeductible        |LIS 4        |NA         | 123            |       
-          |MAPD      |noDeductible        |LIS 4        |NA         | 123            |     
-          |MAPD      |withDeductible      |LIS 4        |AllTier    | 123            |     
-          |MAPD      |withDeductible      |LIS 4        |Tier 3/4/5 | 123            |     
-          |MAPD      |withDeductible      |LIS 4        |Tier 4/5   | 123            |
-          |PDP       |Walgreen            |LIS 4        |NA         | 123            |      
+#          |PDP       |withDeductible      |LIS 4        |NA         | 123            |       
+#          |PDP       |noDeductible        |LIS 4        |NA         | 123            |       
+#          |MAPD      |noDeductible        |LIS 4        |NA         | 123            |     
+#          |MAPD      |withDeductible      |LIS 4        |AllTier    | 123            |     
+#          |MAPD      |withDeductible      |LIS 4        |Tier 3/4/5 | 123            |     
+#          |MAPD      |withDeductible      |LIS 4        |Tier 4/5   | 123            |
+#          |PDP       |Walgreen            |LIS 4        |NA         | 123            |
+
+Scenario Outline: To validate DCE tool on plan details page
+Given the user is on the vpp portfolio page
+When the user performs plan serach using zipcode
+		| Zip Code |<zipCode>|
+		| County   |<county> |
+And the user navigates to the following plan type
+	  | Plan Type | <planType> |
+And the user navigates to plan details page
+    |Plan Name|<planName>|
+Then the user validates DCE tool on plan details page    
+Examples:
+		|zipCode|county            |planType|planName													|
+  	|90210  |Los Angeles County|PDP    |AARP MedicareRx Walgreens (PDP)  |	
+		|90210  |Los Angeles County|MA     |AARP MedicareComplete SecureHorizons Plan 1 (HMO)  |
+      

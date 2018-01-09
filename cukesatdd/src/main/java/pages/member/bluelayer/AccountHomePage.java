@@ -1,4 +1,5 @@
 package pages.member.bluelayer;
+ 
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
@@ -76,7 +77,8 @@ public class AccountHomePage extends UhcDriver {
 	@FindBy(linkText = "medical providers")
 	private WebElement medicalProviders;
 
-	@FindBy(xpath = "//li[@id='fd_myMenu']/a")
+	@FindBy(xpath = "//*[@id='fd_myMenu']/a")	
+	//@FindBy(id = "fd_myMenuDropdown")
 	private WebElement myMenuNavigator;
 
 	@FindBy(linkText = "Prescription drug cost and benefits summary")
@@ -248,7 +250,7 @@ public class AccountHomePage extends UhcDriver {
 	private PageData myAccountHome;
 
 	public JSONObject accountHomeJson;
-
+	
 
 
 	public AccountHomePage(WebDriver driver) {
@@ -329,7 +331,6 @@ public class AccountHomePage extends UhcDriver {
 	public FormsandresourcesPage navigateToFormsandResourcePage() {
 
 		driver.navigate().to("https://member.team-a-uhcmedicaresolutions.uhc.com/content/uhcm/home/my-plans/forms-and-resources.html");
-
 		if (getTitle().equalsIgnoreCase("UnitedHealthcare Medicare Solutions | Forms and Resources")) {
 			return new FormsandresourcesPage(driver);
 		} else
@@ -683,7 +684,6 @@ public class AccountHomePage extends UhcDriver {
 	}
 
 	public OrderplanmaterialsPage navigateToOrderPlanMaterialsPage() {
-
 		myMenuNavigator.click();
 		orderPlanMaterials.click();
 		CommonUtility.checkPageIsReady(driver);
@@ -1117,7 +1117,7 @@ public pages.member.bluelayer.ProfilePreferencesPage navigateDirectToProfilePage
     jse.executeScript("window.scrollBy(0,200)", "");
     try {
             Thread.sleep(30000);
-    } catch (InterruptedException e) {
+    } catch (InterruptedException e) { 
             // TODO Auto-generated catch block
             e.printStackTrace();
     }
