@@ -3,7 +3,6 @@
  */
 package pages.member.ulayer;
 
-
 import java.util.List;
 import java.util.Map;
 
@@ -44,30 +43,7 @@ public class FormsandresourcesPage extends UhcDriver {
 	
 	@FindBy(xpath="//*[@id='benefits']/a")
 	private WebElement benefitsAndCoverageLink;
-    
-	@FindBy(linkText = "Passport Flyer")
-	private WebElement passport_Flyer;
 
-	@FindBy(linkText = "Passport Flyer Spanish")
-	private WebElement passport_Flyer_Spanish;
-	
-	@FindBy(xpath = "//h3[contains(.,'My Documents ')]")
-	private WebElement myDocuments;
-	
-	@FindBy(xpath = "//a[@href='/home/my-plans/forms-and-resources/my-documents.html']")
-	private WebElement viewMyDocsLink;
-	
-	@FindBy(xpath = ".//*[@id='document-date']/option[4]")
-	private WebElement selectLast24Months;
-	
-	@FindBy(css = ".table-responsive.tablewidth.margin-large.ng-scope")
-	private WebElement validateTable;
-	
-	@FindBy(xpath = ".//*[@id='myDocuments']//tr[2]/td[4]")
-	private WebElement viewOrDownloadlink;
-	
-	
-	
 	private PageData planDocsPDF;
 	private PageData formsAndResources;
 
@@ -132,8 +108,6 @@ public class FormsandresourcesPage extends UhcDriver {
 				.get(CommonConstants.GLOBAL);
 		JSONObject formsAndResourcesExpectedJson = expectedDataMap
 				.get(CommonConstants.FORMS_AND_RESOURCES);
-		
-		
 		formsAndResourcesExpectedJson = CommonUtility.mergeJson(
 				formsAndResourcesExpectedJson, globalExpectedJson);
 		return formsAndResourcesExpectedJson;
@@ -253,61 +227,6 @@ public class FormsandresourcesPage extends UhcDriver {
 		} else
 			return null;
 	}
-	
-	public boolean verifyPassportFlyer(){
-		return validate(passport_Flyer);
-		}
-		public boolean verifyPassportFlyerSpanish(){
-		return validate(passport_Flyer_Spanish);
-		}
-
-		public void validateMyDocsSection() {
-			
-			String actualText = myDocuments.getText();
-			if(actualText.equalsIgnoreCase("My Documents"))
-			{
-				System.out.println("My Documents section is present on Forms and resources page");
-			}
-		}
-
-		public void clickOnviewmydocsLink() {			
-			viewMyDocsLink.click();
-			try {
-				Thread.sleep(10000);
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			if(driver.getTitle().equalsIgnoreCase("My Documents"))
-			{
-				System.out.println("Navigated to My Documents page");
-			}
-			
-		
-			
-		} 
-		
-		public void selectLast24Months(){
-			
-			selectLast24Months.click();
-			try {
-				Thread.sleep(15000);
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			
-			
-		}
-		
-		
-		public void validateMyDocumentsTable() {
-			if (validateTable.isDisplayed() && viewOrDownloadlink.isDisplayed())
-					{
-				System.out.println("My Docuemts table and atlease one docuemt got displayed");
-					}
-			
-		}
 	}
 	
 

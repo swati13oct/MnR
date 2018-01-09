@@ -24,6 +24,26 @@
 "contactUsRightRailWidget":{
 "identifier":"xpath",
 "elementName":"//div[@id='subPageRight']/div[4]"
+},
+"mapContainer":{
+"identifier":"className",
+"elementName":"mapContainer"
+},
+"createPDF":{
+"identifier":"linkText",
+"elementName":"Create PDF "
+},
+"pharmacyNameheader":{
+"identifier":"className",
+"elementName":"colPhar1"
+},
+"servicesHeader":{
+"identifier":"className",
+"elementName":"colPhar2"
+},
+"distnaceHeader":{
+"identifier":"className",
+"elementName":"colPhar3"
 }
 }
 }

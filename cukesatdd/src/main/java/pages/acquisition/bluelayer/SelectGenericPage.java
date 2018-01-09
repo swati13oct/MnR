@@ -31,6 +31,9 @@ public class SelectGenericPage extends UhcDriver {
 	@FindBy(className = "genericDrugDetailsSec")
 	WebElement genericDrugSection;
 	
+	@FindBy(xpath = "//p[@class='genericDrugDetailsSec']")
+	private WebElement genericDrugSection2;
+	
 	@FindBy(name = "drug")
 	List<WebElement> drugs;
 	
@@ -42,9 +45,10 @@ public class SelectGenericPage extends UhcDriver {
 		super(driver);
 		CommonUtility.waitForPageLoad(driver, genericDrugSection, CommonConstants.TIMEOUT_30);
 		PageFactory.initElements(driver, this);
-		String fileName = CommonConstants.SELECT_GENERIC_PAGE_DATA;
+/*		String fileName = CommonConstants.SELECT_GENERIC_PAGE_DATA;
 		genericDrug = CommonUtility.readPageData(fileName,
 				CommonConstants.PAGE_OBJECT_DIRECTORY_BLUELAYER_ACQ);
+*/
 		openAndValidate();
 	}
 
@@ -60,8 +64,8 @@ public class SelectGenericPage extends UhcDriver {
 		
 		continueButton.click();
 		try {
-			if (genericDrugSection.isDisplayed()) {
-				CommonUtility.waitForElementToDisappear(driver, genericDrugSection,
+			if (genericDrugSection2.isDisplayed()) {
+				CommonUtility.waitForElementToDisappear(driver, genericDrugSection2,
 						CommonConstants.TIMEOUT_30);
 			}
 		} catch (NoSuchElementException e) {
@@ -88,7 +92,7 @@ public class SelectGenericPage extends UhcDriver {
 	@Override
 	public void openAndValidate() {
 		validate(continueButton);
-		JSONObject jsonObject = new JSONObject();
+/*		JSONObject jsonObject = new JSONObject();
 		for (String key : genericDrug.getExpectedData().keySet()) {
 			List<WebElement> elements = findElements(genericDrug
 					.getExpectedData().get(key));
@@ -134,7 +138,7 @@ public class SelectGenericPage extends UhcDriver {
 		}
 		genericDrugJson = jsonObject;
 		System.out.println("genericDrugJson----->"+genericDrugJson);
-		
+	*/
 		
 	}
 

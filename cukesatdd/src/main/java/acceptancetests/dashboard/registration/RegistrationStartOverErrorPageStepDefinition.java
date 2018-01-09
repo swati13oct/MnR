@@ -5,8 +5,12 @@ import org.junit.Assert;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import pages.dashboard.acquisition.RegistrationInformationPage;
-import cucumber.annotation.en.Then;
-import cucumber.annotation.en.When;
+import cucumber.api.DataTable;
+import cucumber.api.java.After;
+import cucumber.api.java.en.And;
+import cucumber.api.java.en.Given;
+import cucumber.api.java.en.Then;
+import cucumber.api.java.en.When;
 import acceptancetests.atdd.data.acquisition.PageConstants;
 import atdd.framework.MRScenario;
 
@@ -28,9 +32,10 @@ public class RegistrationStartOverErrorPageStepDefinition {
                 }
 
                 @Then("^the member navigate to the personal Information page$")
-                public void navigateToRegistrationPersonalInformationPage() {
+                public void navigateToRegistrationPersonalInformationPage() throws InterruptedException {
                                 RegistrationInformationPage registrationInformationPage = (RegistrationInformationPage) 
                                                                 getLoginScenario().getBean(PageConstants.REGISTRATION_INFORMATION_PAGE);
+                                Thread.sleep(5000);
                                 registrationInformationPage.getStepOneText().isDisplayed();
                                 
 
@@ -40,12 +45,9 @@ public class RegistrationStartOverErrorPageStepDefinition {
                 public void previousInformationNotRetained() throws InterruptedException {
                                 RegistrationInformationPage registrationInformationPage = (RegistrationInformationPage) 
                                                                 getLoginScenario().getBean(PageConstants.REGISTRATION_INFORMATION_PAGE);
-                                Thread.sleep(2000);
-                                Assert.assertTrue(registrationInformationPage.getMemberID().getAttribute("value").isEmpty());
-                                /*Assert.assertTrue(registrationInformationPage.getEnterDay().getAttribute("value").isEmpty());
-                                Assert.assertTrue(registrationInformationPage.getEnterMonth().getAttribute("value").isEmpty());
-                                Assert.assertTrue(registrationInformationPage.getEnterYear().getAttribute("value").isEmpty());
-   */
+                                Thread.sleep(5000);
+                                Assert.assertTrue(registrationInformationPage.getMemberID().getText().isEmpty());
+                                //Assert.assertTrue(registrationInformationPage.getMemberID().getAttribute("value").isEmpty());
                 }
 
                 @When("^member click on username and password help link on existing member page$")
@@ -78,10 +80,10 @@ public class RegistrationStartOverErrorPageStepDefinition {
                 public void clickStartOverLinkFutureEffectivePage() throws InterruptedException {
                                 RegistrationInformationPage registrationInformationPage = (RegistrationInformationPage) 
                                                                 getLoginScenario().getBean(PageConstants.REGISTRATION_INFORMATION_PAGE);
-                                Thread.sleep(2000);
+                                Thread.sleep(5000);
                                 
                                 registrationInformationPage.clickFutureStartOver();
-                                Thread.sleep(1000);
+                                Thread.sleep(2000);
 
                 }
                 
@@ -89,7 +91,7 @@ public class RegistrationStartOverErrorPageStepDefinition {
                 public void clickStartOverLinkInactiveTerminatedPage() throws InterruptedException {
                                 RegistrationInformationPage registrationInformationPage = (RegistrationInformationPage) 
                                                                 getLoginScenario().getBean(PageConstants.REGISTRATION_INFORMATION_PAGE);
-                                Thread.sleep(2000);
+                                Thread.sleep(5000);
                                 
                                 registrationInformationPage.clickInactiveStartOver();
                                 Thread.sleep(2000);

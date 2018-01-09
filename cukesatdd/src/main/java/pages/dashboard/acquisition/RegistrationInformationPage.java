@@ -1,22 +1,18 @@
 package pages.dashboard.acquisition;
 
-import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-
-
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.WebDriverWait;
-
-import acceptancetests.atdd.data.MRConstants;
 import atdd.framework.UhcDriver;
 
 /**
  * @author akuma103
+ * Registration page for redesign
  */
 public class RegistrationInformationPage extends UhcDriver {
 
@@ -86,7 +82,7 @@ public class RegistrationInformationPage extends UhcDriver {
 	private WebElement nextButton;
 
 	/** The direct URL for registration redesign page. */
-	private static String PAGE_URL = MRConstants.REDESIGN_REGISTRATION_URL;
+	//private static String PAGE_URL = MRConstants.REDESIGN_REGISTRATION_URL;
 
 	/**
 	 * Step one error message
@@ -763,7 +759,7 @@ public class RegistrationInformationPage extends UhcDriver {
 
 	@Override
 	public void openAndValidate() {
-		start(PAGE_URL);
+		//start(PAGE_URL);
 		validate(memberid);
 /*		validate(monthToEnter);
 		validate(dayToEnter);
@@ -1020,7 +1016,7 @@ public class RegistrationInformationPage extends UhcDriver {
     	WebDriverWait wait = new WebDriverWait(this.driver, 10);
     	wait.until(new ExpectedCondition<Boolean>() {
     	    public Boolean apply(WebDriver driver) {
-    		if (monthToEnter.isDisplayed())
+    		if (memberid.isDisplayed())
     		    return true;
     		else
     		    return false;
@@ -1086,4 +1082,13 @@ public class RegistrationInformationPage extends UhcDriver {
     	
     }
 	
+	/**
+     * Function to scroll page
+	 * @throws InterruptedException 
+     */
+    public void scrollUp() {
+    	JavascriptExecutor jse = (JavascriptExecutor)driver;
+    	jse.executeScript("window.scrollBy(0,100)", "");
+    	
+    }
 }
