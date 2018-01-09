@@ -43,10 +43,10 @@ public class ProfilePreferencesPage extends UhcDriver {
 	@FindBy(xpath = "//*[@id='tab-1']//div[1]//div//p[2]//text()")
 	private WebElement memberIdtext;
 
-	@FindBy(xpath = ".//*[@id='profilePreferencesController']/div[1]/div/div/section/div/div[3]/div/div/div/div/div/div[1]/div/span[1]")
+	@FindBy(xpath = "//span[contains(text(),'Username')]")
 	private WebElement Username;
 
-	@FindBy(xpath = ".//*[@id='profilePreferencesController']/div[1]/div/div/section/div/div[3]/div/div/div/div/div/div[1]/div/span[2]")
+	@FindBy(xpath = "//span[contains(text(),'Username')]/following-sibling::span")
 	private WebElement Usernametext;
 
 	@FindBy(xpath = ".//*[@id='password']/div/div/span[1]")
@@ -400,7 +400,7 @@ public class ProfilePreferencesPage extends UhcDriver {
 		}
 
 		SaveButton.click();
-		if (passworderrormessage.getText().contentEquals("This field is required.")) {
+		if (passworderrormessage.getText().contentEquals("Enter your current password.")) {
 			System.out.println("The element" + passworderrormessage.getText() + "is found");
 			return true;
 		} else {

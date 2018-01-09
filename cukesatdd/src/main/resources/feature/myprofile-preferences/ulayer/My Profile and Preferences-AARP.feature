@@ -102,7 +102,7 @@ Feature: To test My Profile & Preferences in AARP site
   Scenario Outline: To verify Plan Name, Member name, Member ID and account section in UMS site
     Given registered member with following details for Profile and Preferences flow
       | <planType> |
-    Then the user navigates to Profile page
+    when the user navigates to Profile and Preferences page
     Then the user validates the Plan Name, Member name, Member ID and account section in UMS site
 
     Examples: 
@@ -116,7 +116,7 @@ Feature: To test My Profile & Preferences in AARP site
     Scenario Outline: To verify Email section in UMS site
     Given registered member with following details for Profile and Preferences flow
       | <planType> |
-    Then the user navigates to Profile page
+    Then the user navigates to Profile and Preferences page
     Then the user validates the Email section in UMS site
 
     Examples: 

@@ -133,7 +133,7 @@ Examples:
        
        
        #| MA       |
-  @Needhelp
+  @CMNeedhelp
   Scenario Outline: To verify the edit functionality in Account Profile section in UMS site
     Given registered member with following details for Profile and Preferences flow
       | <planType> |
@@ -145,9 +145,73 @@ Examples:
     Examples: 
          | planType|
          | MAPD     |
-        #  | MA       |
+          | MA       |
          # |PDP       |
          # |SHIP      |
        
+       
+        @CMValidatePlanNamemembernameIDAccountSectionUMS
+  Scenario Outline: To verify Plan Name, Member name, Member ID and account section in UMS site
+    Given registered member with following details for Profile and Preferences flow
+      | <planType> |
+    Then the user navigates to Profile and Preferences page
+    Then the user validates the Plan Name, Member name, Member ID and account section in UMS site
 
+    Examples: 
+         | planType|
+         | MAPD     |
+          | MA       |
+        #  |PDP       |
+         # |SHIP      |
+
+
+  @CMPasswordEdit
+  Scenario Outline: To verify the edit functionality in Account Profile section in UMS site
+    Given registered member with following details for Profile and Preferences flow
+      | <planType> |
+    When the user navigates to Profile and Preferences page
+    Then the user validates the elements on clicking the edit link
+    #Then the user validates the functionality of save Button
+    Then the user validates the functionality of Cancel Button
+
+      Examples: 
+         | planType|
+         | MAPD     |
+          | MA       |
+        #  |PDP       |
+         # |SHIP      |
+          
+          
+            @CMPasswordEdit1
+  Scenario Outline: To verify the edit functionality in Account Profile section in UMS site
+    Given registered member with following details for Profile and Preferences flow
+      | <planType> |
+    When the user navigates to Profile and Preferences page
+    Then the user validates the elements on clicking the edit link
+    Then the user clicks on save button without filling current and new password and the red mandatory message should come
+
+   Examples: 
+         | planType|
+         | MAPD     |
+          | MA       |
+          #|PDP       |
+          #|SHIP      |
+          
+          
+     @CMPasswordEdit3
+  Scenario Outline: To verify the edit functionality in Account Profile section in UMS site
+    Given registered member with following details for Profile and Preferences flow
+      | <planType> |
+    When the user navigates to Profile and Preferences page
+    Then the user validates the elements on clicking the edit link
+    Then the user enters different password in confirm password field and clicks save button and the user should see expected error message - Please enter the same value again
+
+   Examples: 
+         | planType|
+         | MAPD     |
+          | MA       |
+          #|PDP       |
+          #|SHIP      |
+          
+          
 
