@@ -303,7 +303,7 @@ Examples:
   Scenario Outline: To verify the edit functionality in Account Profile section in UMS site
     Given registered member with following details for Profile and Preferences flow
       | <planType> |
-    When the user navigates to Profile page
+    When the user navigates to Profile and Preferences page
     Then the user validates permanent address section
     And the user clicks on contact us then contact us page should come
 
