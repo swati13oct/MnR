@@ -108,9 +108,9 @@ public class GoGreenPreferencesPage extends UhcDriver{
 	}
 
 	@Override
-	public void openAndValidate() throws InterruptedException {
+	public void openAndValidate() {
 		
-		Thread.sleep(3000);
+		//Thread.sleep(3000);
 		
 		validate(myPreferencesHeader);
 		validate(GoToProfilePageLink);
