@@ -13,7 +13,7 @@ import cucumber.junit.Cucumber;
 
 @Cucumber.Options(glue = { "atdd.framework", "acceptancetests.ProfileandPreferencesredesign.bluelayer" }, features = {
 		"feature/myprofile-preferences/bluelayer" }, format = { "pretty", "html:reports/test-report",
-				"json:target/cucumber.json" }, tags = {"@ValidateEmail,@EmailEdit1,@EmailEdit2,@PermanentAddress"})
+				"json:target/cucumber.json" }, tags = {"@CMValidateEmail,@CMEmailEdit1,@CMEmailEdit2,@CMPermanentAddress"})
 public class RunMRAtddTestBlayerAddress
 {
 }

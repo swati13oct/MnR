@@ -496,7 +496,7 @@ public class ProfilePreferencesPage extends UhcDriver {
 			e.printStackTrace();
 		}
 		SaveEmailButton.click();
-		if (mandatorymessage.getText().contentEquals("This field is required.")) {
+		if (mandatorymessage.getText().contentEquals("Enter your email address like this: yourname@emailprovider.com")) {
 			System.out.println("The element" + mandatorymessage.getText() + "is found");
 			return true;
 		} else {
@@ -528,7 +528,7 @@ public class ProfilePreferencesPage extends UhcDriver {
 		EmailEditbutton.click();
 		NewEmail.sendKeys("nikitajain");
 		SaveEmailButton.click();
-		if (mandatorymessage.getText().contentEquals("Please enter a valid email Address.")) {
+		if (mandatorymessage.getText().contentEquals("Enter your email address like this: yourname@emailprovider.com")) {
 			System.out.println("The element" + mandatorymessage.getText() + "is found");
 		} else {
 			Assert.fail("The element " + mandatorymessage.getText() + "is not found");
