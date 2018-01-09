@@ -23,6 +23,8 @@ public static final String CUSTOM_RANGE = "customRange";
 	
 	public static final String PREFERENCES_PAGE = "preferencespage";
 	
+	public static final String PROFILEANDPREFERENCES_PAGE = "Profile&preferencespage";
+	
 	public static final String MEMBER_AUTHS_SEARCH_PAGE = "memberSearchPage";
 	
 	public static final String MEMBER_AUTH_INFORMATION_PAGE = "memberInformationPage";
