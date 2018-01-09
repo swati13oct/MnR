@@ -2,7 +2,8 @@ package atdd.framework;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
-import cucumber.annotation.Before;
+import cucumber.api.java.Before;
+
 
 
 /**
@@ -12,6 +13,7 @@ import cucumber.annotation.Before;
  */
 public class GlobalBeforeHook implements BeforeHook {
 	
+
 	@Autowired 
 	MRScenario globalScenario;
 	
@@ -31,8 +33,7 @@ public class GlobalBeforeHook implements BeforeHook {
 			public void run() {
 				try {
 					
-					globalScenario.removeMember();
-					//TODO:: add de-register logic here 
+					//globalScenario.removeMember();
 				} catch (Exception e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();

@@ -17,7 +17,6 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-import pages.member.bluelayer.SecondPlanWithDocumentsPopupPage;
 import acceptancetests.atdd.data.CommonConstants;
 import acceptancetests.atdd.data.ElementData;
 import acceptancetests.atdd.data.PageData;
@@ -43,28 +42,7 @@ public class ConfirmPlanDetailsPage extends UhcDriver{
 		openAndValidate();
 	}
 
-	public SecondPlanWithDocumentsPopupPage confirm() {
-		addNewPlanButton.click();
-		ElementData elementData = new ElementData("id", "progress");
-		WebElement element = findElement(elementData);
-		
-		if(validate(element))
-		{
-			try
-			{
-			CommonUtility.waitForElementToDisappear(driver, element, 10);
-			
-		} catch (NoSuchElementException e) {
-			System.out.println("closeAndApplyChangesLink not found");
-		} catch (TimeoutException ex) {
-			System.out.println("closeAndApplyChangesLink not found");
-		} catch (Exception e) {
-			System.out.println("closeAndApplyChangesLink not found");
-		}
-		}
-			
-			return new SecondPlanWithDocumentsPopupPage(driver);
-	}
+	
 
 	@Override
 	public void openAndValidate() {

@@ -573,6 +573,11 @@ public class ContactUsPage extends UhcDriver{
 		System.out.println("send us Question is not  displayed");
 	}
 	}
+	private void jsClick(WebElement findElement) {
+		// TODO Auto-generated method stub
+		
+	}
+
 	public void sendUsQuestion_invalid_PhoneNumber_Validations(){
 		if (fillOutFormButton.isDisplayed())
 		{

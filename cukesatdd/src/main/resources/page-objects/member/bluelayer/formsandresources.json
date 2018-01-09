@@ -33,11 +33,6 @@
 "identifier":"xpath",
 "elementName":"//div[@id='_content_campaigns_uhcm_formsresources-main_formsresources-main_jcr_content_par_teaser']/div[1]/div[1]/div[2]/div[1]/div[1]/div[1]/p[7]"
 },
-"preferredmailorderbenefit":
-{
-"identifier":"xpath",
-"elementName":"//a[text()='Prescription Mail Order Form - Preferred Mail Service Pharmacy through OptumRx']"
-},
 "groupId1":
 {
 "identifier":"xpath",

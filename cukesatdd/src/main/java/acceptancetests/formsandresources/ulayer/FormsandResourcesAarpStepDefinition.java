@@ -32,12 +32,12 @@ import acceptancetests.formsandresources.data.FnRCommonConstants;
 import acceptancetests.login.data.LoginCommonConstants;
 import acceptancetests.vpp.data.VPPCommonConstants;
 import atdd.framework.MRScenario;
-import cucumber.annotation.After;
-import cucumber.annotation.en.And;
-import cucumber.annotation.en.Given;
-import cucumber.annotation.en.Then;
-import cucumber.annotation.en.When;
-import cucumber.table.DataTable;
+import cucumber.api.DataTable;
+import cucumber.api.java.After;
+import cucumber.api.java.en.And;
+import cucumber.api.java.en.Given;
+import cucumber.api.java.en.Then;
+import cucumber.api.java.en.When;
 
 /**
  * @author pperugu
@@ -170,29 +170,11 @@ loginPage.loginTo();
 
 	@And("^the user navigating to the My Documents page in AARP site$")
 	public void NavigateToMyDocuemtsPage(){
-		FormsandresourcesPage formsandresourcesAarpPage = (FormsandresourcesPage) getLoginScenario()
-				.getBean(PageConstants.FORMS_AND_RESOURCES_PAGE);
-		formsandresourcesAarpPage.clickOnviewmydocsLink();
-		formsandresourcesAarpPage.validateMyDocsSection();
 		
-		
-		
-		if (formsandresourcesAarpPage != null) {
-			getLoginScenario().saveBean(PageConstants.FORMS_AND_RESOURCES_PAGE,
-					formsandresourcesAarpPage);
-		}
 	}
 	@Then("^the user validates My Documents section and clicks on the link in AARP site$")
 	public void validates_My_Documents_AARP(){
-		FormsandresourcesPage formsandresourcesAarpPage = (FormsandresourcesPage) getLoginScenario()
-				.getBean(PageConstants.FORMS_AND_RESOURCES_PAGE);
-		formsandresourcesAarpPage.selectLast24Months();
-		formsandresourcesAarpPage.validateMyDocumentsTable();
 		
-		if (formsandresourcesAarpPage != null) {
-			getLoginScenario().saveBean(PageConstants.FORMS_AND_RESOURCES_PAGE,
-					formsandresourcesAarpPage);
-		}
 	}
 
 	@Then("^the user validates the plan materials under plan document section$")
@@ -252,17 +234,13 @@ loginPage.loginTo();
 	}
 @Then("^I will be able access a PDF flyer in Englishthat explains passport benefits when a plan has this feature$")
 	public void I_will_be_able_access_a_PDF_flyer() {
-		FormsandresourcesPage formsandresourcesPage = (FormsandresourcesPage) getLoginScenario()
-				.getBean(PageConstants.FORMS_AND_RESOURCES_PAGE);
-		formsandresourcesPage.verifyPassportFlyer();
+		
 	}
 
 
 	@Then("^I will be able access a PDF flyer in Spanish or Chinese that explains passport benefits when a plan has this feature$")
 	public void I_will_be_able_access_a_PDF_flyer_spanish() {
-		FormsandresourcesPage formsandresourcesPage = (FormsandresourcesPage) getLoginScenario()
-				.getBean(PageConstants.FORMS_AND_RESOURCES_PAGE);
-		formsandresourcesPage.verifyPassportFlyer();
+		
 	}
 
 	@Then("^i should see the mail order pdf link$")
@@ -286,18 +264,11 @@ loginPage.loginTo();
 	}
 	@Then("^the user validates prescription drug transistion in AARP site$")
 	public void views_drug_transistion_aarp_site() {
-		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario()
-				.getBean(PageConstants.ACCOUNT_HOME_PAGE);
-		FormsandresourcesPage formsAndResourcesPage = accountHomePage
-				.navigateToPrescriptionDrugAarpPage();
+		
 	}
 	
 	@When("^the user view privacy policy in AARP site$")
 	public void views_privacy_policy_aarp_site() {
-		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario()
-				.getBean(PageConstants.ACCOUNT_HOME_PAGE);
-		FormsandresourcesPage formsAndResourcesPage = accountHomePage
-				.navigateToPrivacyPolicyAarpPage();
 	}
 	
 	@Then("^the user validates privacy policy in AARP site$")
@@ -321,10 +292,7 @@ loginPage.loginTo();
 	
 	@Then("^the user view appeals in AARP site$")
 	public void views_appeals_aarp_site() {
-		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario()
-				.getBean(PageConstants.ACCOUNT_HOME_PAGE);
-		FormsandresourcesPage formsAndResourcesPage = accountHomePage
-				.navigateToappealsAarpPage();
+		
 	}
 	
 	

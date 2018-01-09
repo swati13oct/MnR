@@ -5,20 +5,17 @@ package pages.member.ulayer;
 
 import java.util.List;
 import java.util.Map;
-import java.util.concurrent.TimeUnit;
 
 import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.FindBys;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
 
 import acceptancetests.atdd.util.CommonUtility;
 import atdd.framework.UhcDriver;
-import acceptancetests.atdd.data.MRConstants;
 
 /**
  * @author pperugu
@@ -26,363 +23,303 @@ import acceptancetests.atdd.data.MRConstants;
  */
 public class PharmacySearchPage extends UhcDriver{
 
-	
-	@FindBy(id = "zipcodeTxt")
-	private WebElement zipcodeField;
-	
-	@FindBy(id = "zipcode-button")
-	private WebElement searchbtn;
+        @FindBy(id = "zipCode")
+        private WebElement zipcodeField;
 
-	@FindBy(id = "showresults")
-	private WebElement distanceField;
+        @FindBy(id = "showresults")
+        private WebElement distanceField;
 
-	@FindBy(id = "zipcode-button")
-	private WebElement continueField;
+        @FindBy(id = "continue")
+        private WebElement continueField;
 
-	@FindBy(id = "selectCounty")
-	private WebElement countyPopOut;
+        @FindBy(id = "selectcounty_box")
+        private WebElement countyPopOut;
 
-	@FindBy(id = "selectcountytable")
-	private WebElement selectcountytable;
+        @FindBy(id = "selectcountytable")
+        private WebElement selectcountytable;
 
-	@FindBy(id = "plan")
-	private WebElement planNameDropDown;
+        @FindBy(id = "plan")
+        private WebElement planNameDropDown;
+        
+        @FindBy(xpath ="//select[@id='plan']/option")
+        private List<WebElement> planNameDropDownList;
 
-	@FindBys(value = { @FindBy(xpath = "//select[@id='plan']/option") })
-	private List<WebElement> planNamesList;
+        @FindBy(id = "find_searchbtn")
+        private WebElement searchPharmaciesButton;
 
-	@FindBy(xpath = ".//*[@id='selectZiptable']/tbody[1]/tr//a")
-	private List<WebElement> countyList;
+        @FindBy(id = "pharm_services")
+        private WebElement pharmacyTypes;
 
-	@FindBy(id = "pharmacies")
-	private WebElement allPharmacies;
+        @FindBy(id = "services")
+        private WebElement pharmacyTypeSelectionRadioButton;
 
-	@FindBy(id = "services")
-	private WebElement particularServices;
+        @FindBy(id = "planyear")
+        private WebElement planYearDropDown;
 
-	@FindBy(id = "find_searchbtn")
-	private WebElement searchPharmaciesButton;
+        @FindBy(xpath = "//*[@id='pharm_services']/li[1]")
+        private WebElement pharmacyTypeActual;
 
-	@FindBys(value = { @FindBy(xpath = "//select/option") })
-	private List<WebElement> distanceDropDown;
+        @FindBy(xpath = "//ul[@id='pharm_services']/li/span")
+        private WebElement toolTip;
+        
+        @FindBy(xpath = "//*[@id='medicareTitle']/a[1]")
+        private WebElement espanolLink;
+        
+        @FindBy(xpath = "//*[@id='medicareTitle']/a[2]")   //Story 261070
+        private WebElement chineseLink;
+        
+        @FindBy(xpath = "//*[@id='subPageLeft']/div[2]/div[2]/div[2]/div/h3[2]/a")
+        private WebElement createPdfLink;
+        
+        @FindBy(id = "disclosure_link")
+        private WebElement logOut;
+        
+        @FindBy(xpath = "//div[@id='medicareTitle']/h1")
+        private WebElement locatePharmacyTitle;
 
-	@FindBys(value = { @FindBy(xpath = "//ul[@id='pharm_services']/li") })
-	private List<WebElement> pharmacyTypesCheckboxes;
+        public PharmacySearchPage(WebDriver driver){
+                super(driver);
+                PageFactory.initElements(driver, this);
+                openAndValidate();
+        }
 
-	@FindBy(xpath = "//form[@id='searchCriteria']/div[3]/h3")
-	private WebElement narrowYourSearchContent;
+        public PharmacySearchPage enterDistanceDetails(String distance) {
 
-	@FindBy(xpath = "//div[@id='medicareTitle']/h1")
-	private WebElement pharmacyResultHeader;
-	
-	@FindBy(id = "services")
-	private WebElement pharmacyTypeSelectionRadioButton;
-	
-	@FindBy(xpath = "//*[@class='filter-list']")
-	private WebElement pharmacyTypes;
-	
-	@FindBy(xpath = "//*[@class='filter-list']/li[1]")
-	private WebElement pharmacySaverChkBx;
-	
-	@FindBy(xpath = "//*[@class='filter-list']/li[2]")
-	private WebElement pharmacyPreferredChkBx;
+                distanceField.click();
+                distanceField.sendKeys(distance);
 
-	@FindBy(xpath = "//*[@class='filter-list']/li[3]")
-	private WebElement pharmacyStandardChkBx;
+                continueField.click();
+                CommonUtility.checkPageIsReady(driver);
+                if(driver.getTitle().equalsIgnoreCase("AARP Medicare Plans | Pharmacy Directory"))
+                {
+                        return new PharmacySearchPage(driver);
+                }
+                return null;
 
-	@FindBy(xpath = "//*[@class='filter-list']/li[1]//a")
-	private WebElement pharmacySaverTooltip;
-	
-	@FindBy(xpath = "//*[@class='filter-list']/li[2]//a")
-	private WebElement pharmacyPreferredTooltip;
+                /*        if(countyPopOut.isDisplayed())
+                {
+                        String county  = zipAttributesMap.get("County");
+                        List<WebElement> countyList =  selectcountytable.findElements(By.tagName("tr"));
 
-	@FindBy(xpath = "//*[@class='filter-list']/li[3]//a")
-	private WebElement pharmacyStandardTooltip;
+                    for (WebElement webElement : countyList) {
+                            if(webElement.getText().contains(county))
+                            {
+                                    webElement.click();
+                                    break;
+                            }
+                        }
+                }*/
 
-	
-	@FindBy(xpath = "(//*[@id='lang-select']//option)[1]")
-	private WebElement espanolLink;
-	
-	@FindBy(id = "plan-type")
-	private WebElement planType;
-	
-	@FindBy(xpath = "(//*[contains(text(),'Show on Map')])[1]")
-	private WebElement showonmap;
-	
-	@FindBy(xpath = "//a[contains(text(),'VIEW RESULT AS PDF')]")
-	private WebElement viewsearchpdf;
-	
-	@FindBy(xpath = "(.//*[@id='subPageRight']/div[2]/div[2]/ul/li[3]/a")
-    private WebElement pharmacyloc;
-	
-	@FindBy(xpath = "//h2[contains(text(),'Pharmacy Saver offers prescriptions as low as $XX.XX')]")
-	private WebElement pharmacySaverWidget;
-	
-	@FindBy(id = "plan-year")
-	private WebElement planYearDropDown;	
+        }
 
-	//@FindBy(xpath = ".//*[@for='pharmacy-saver']")
-	@FindBy(xpath = "//a[@class='h5 filter-button bold color-blue-link margin-none']")
-	private WebElement filterLink;
-	
-	
-	@FindBy(xpath = "(//*[@id='lang-select']//option)[2]")
-	private WebElement chineseLink;
-	
-	@FindBy(xpath = "//*[@tabindex='0']")
-	private WebElement toolTip;
-	
-	@FindBy(xpath = ".//*[@id='pharmacy-saver']")
-	private WebElement multilangfilter;
-	
-	
-	public PharmacySearchPage(WebDriver driver){
-		super(driver);
-		PageFactory.initElements(driver, this);
-		CommonUtility.checkPageIsReady(driver);
+        public PharmacySearchPage selectsPlanName(String planName) {
 
-		openAndValidate();
-	}
+        /*        planNameDropDown.click();
+                planNameDropDown.sendKeys(planName);
+                planNameDropDown.click();
+                */
+                try {
+                        Thread.sleep(10000);
+                } catch (InterruptedException e) {
+                        // TODO Auto-generated catch block
+                        e.printStackTrace();
+                }
+                selectFromDropDown(planNameDropDownList, planName);
+                
+                if(driver.getTitle().equalsIgnoreCase("AARP Medicare Plans | Pharmacy Directory"))
+                {
+                        return new PharmacySearchPage(driver);
+                }
+                return null;
 
-	public PharmacySearchPage enterDistanceDetails(String distance) {
+        }
 
-		Select select = new Select(distanceField);	
-		select.selectByVisibleText(distance);
-		driver.manage().timeouts().implicitlyWait(100, TimeUnit.SECONDS);
-		CommonUtility.checkPageIsReady(driver);
-		if(distanceField.getText() == distance)
-		{
-			return new PharmacySearchPage(driver);
-		}
-		return null;
+        public PharmacySearchPage selectTheReqPlan(String planName){
+                Select planDropDown = new Select(planNameDropDown);                
+                planDropDown.selectByValue(planName);
+                return new PharmacySearchPage(driver);
+        }
 
-		/*	if(countyPopOut.isDisplayed())
-		{
-			String county  = zipAttributesMap.get("County");
-			List<WebElement> countyList =  selectcountytable.findElements(By.tagName("tr"));
+        public PharmacyResultPage searchesPharmacy() {
 
-		    for (WebElement webElement : countyList) {
-		    	if(webElement.getText().contains(county))
-		    	{
-		    		webElement.click();
-		    		break;
-		    	}
-			}
-		}*/
+                searchPharmaciesButton.click();
+                CommonUtility.checkPageIsReady(driver);
+                try {
+                        Thread.sleep(10000);
+                } catch (InterruptedException e) {
+                        // TODO Auto-generated catch block
+                        e.printStackTrace();
+                }
+                if(driver.getTitle().equalsIgnoreCase("AARP Medicare Plans | Pharmacy Directory"))
+                {
+                        return new PharmacyResultPage(driver);
+                }
+                return null;
 
-	}
-	public PharmacySearchPage enterZipDistanceDetails(String zipcode,
-			String distance, String county) {
-		
-		//driver.findElement(By.id("zipcodeTxt")).sendKeys("90210");
-		sendkeys(zipcodeField, zipcode);
-		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
-		
-		searchbtn.click();
-		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
-		System.out.println("*****Zipcode, distance and County details are entered******");
+        }
 
-		//selectFromDropDown(distanceDropDown, distance);
-
-		//continueField.click();
-		CommonUtility.checkPageIsReady(driver);
-		if (!planType.isEnabled()) {
-			for (WebElement webElement : countyList) {
-				if (webElement.getText().contains(county)) {
-					webElement.click();
-					break;
-				}
-			}
-		}
-		else{
-			System.out.println("County Popup not displayed");
-		}
-		if (driver.getTitle().equalsIgnoreCase(
-				"Locate a Pharmacy | UnitedHealthcare�")) {
-			return new PharmacySearchPage(driver);
-		}
-		else {
-			return null;
-		}
-		
-	}
-
-	//selectFromDropDown(planNamesList, planName);
-	public PharmacySearchPage selectsPlanName(String planName) {
-/*		try {
-			Thread.sleep(3000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-*/		
-		driver.manage().timeouts().implicitlyWait(5000, TimeUnit.SECONDS);
-		
-		Select select = new Select(planType);	
-		select.selectByVisibleText(planName);
-		driver.manage().timeouts().implicitlyWait(100, TimeUnit.SECONDS);
-		return new PharmacySearchPage(driver);
-	}
+        public PharmacySearchPage selectsPharmacy(
+                        String givenPharmacyTypes) {
 
 
-	public PharmacySearchPage selectTheReqPlan(String planName){
-		Select planDropDown = new Select(planNameDropDown);		
-		planDropDown.selectByValue(planName);
-		return new PharmacySearchPage(driver);
-	}
+                String[] pharmacyTypeArray = givenPharmacyTypes.split(",");
+                CommonUtility.checkPageIsReady(driver);
+                pharmacyTypeSelectionRadioButton.click();
 
-	public PharmacyResultPage searchesPharmacy() {
+                List<WebElement> pharmacyTypesCheckboxes = pharmacyTypes.findElements(By.tagName("li"));
+                for(String pharmacyType : pharmacyTypeArray )
+                {
+                        for(WebElement checkBox : pharmacyTypesCheckboxes)
+                        {
+                                checkBox.getText();
+                                System.out.println(""+checkBox.getText());
+                                if(checkBox.getText().equalsIgnoreCase(pharmacyType))
+                                {
+                                        checkBox.findElement(By.id("pharmacyTypesCheckboxes")).click();
+                                }
+                        }
+                }
+                if(driver.getTitle().equalsIgnoreCase("AARP Medicare Plans | Pharmacy Directory"))
+                {
+                        return new PharmacySearchPage(driver);
+                }
+                return null;
 
-		searchPharmaciesButton.click();
-		CommonUtility.checkPageIsReady(driver);
-		if(driver.getTitle().equalsIgnoreCase("AARP Medicare Plans | Pharmacy Directory"))
-		{
-			return new PharmacyResultPage(driver);
-		}
-		return null;
+        }
 
-	}
+        @Override
+        public void openAndValidate() {
+                validate(zipcodeField);
+                validate(distanceField);
+                validate(continueField);
+                validate(planNameDropDown);
+                validate(searchPharmaciesButton);        
+                validate(espanolLink);
+                validate(chineseLink);
+                validate(createPdfLink); 
+                validate(logOut);
+        }
 
-	public PharmacySearchPage selectsPharmacy(
-			String givenPharmacyTypes) {
+        public PharmacySearchPage enterZipDistanceDetails(
+                        Map<String, String> zipAttributesMap) {
 
+                String zipcode = zipAttributesMap.get("Zip Code");
+                String distance = zipAttributesMap.get("Distance");
 
-		String[] pharmacyTypeArray = givenPharmacyTypes.split(",");
-		CommonUtility.checkPageIsReady(driver);
-		pharmacyTypeSelectionRadioButton.click();
+                try { 
+                        Thread.sleep(15000);
+                } catch (InterruptedException e) {
+                        // TODO Auto-generated catch block
+                        e.printStackTrace();
+                }
+                sendkeys(zipcodeField,zipcode);
 
-		List<WebElement> pharmacyTypesCheckboxes = pharmacyTypes.findElements(By.tagName("li"));
-		for(String pharmacyType : pharmacyTypeArray )
-		{
-			for(WebElement checkBox : pharmacyTypesCheckboxes)
-			{
-				checkBox.getText();
-				System.out.println(""+checkBox.getText());
-				if(checkBox.getText().equalsIgnoreCase(pharmacyType))
-				{
-					checkBox.findElement(By.id("pharmacyTypesCheckboxes")).click();
-				}
-			}
-		}
-		if(driver.getTitle().equalsIgnoreCase("AARP Medicare Plans | Pharmacy Directory"))
-		{
-			return new PharmacySearchPage(driver);
-		}
-		return null;
+                distanceField.click();
+                distanceField.sendKeys(distance);
 
-	}
+                continueField.click();
+                CommonUtility.checkPageIsReady(driver);
 
-	@Override
-	public void openAndValidate() {
-		validate(zipcodeField);
-/*		validate(distanceField);
-		validate(continueField);
-		validate(planNameDropDown);
-		//validate(searchPharmaciesButton);	
-		//validate(espanolLink);
-		//validate(chineseLink);
-		//validate(createPdfLink); 
-*/	}
+                try {
+                
+                if(countyPopOut.isDisplayed())
+                {
+                        String county  = zipAttributesMap.get("County Name");
+                        List<WebElement> countyList =  selectcountytable.findElements(By.tagName("tr"));
 
-	public PharmacySearchPage enterZipDistanceDetails(
-			Map<String, String> zipAttributesMap) {
+                        for (WebElement webElement : countyList) {
+                                if(webElement.getText().contains(county))
+                                {
+                                        webElement.click();
+                                        break;
+                                }
+                        }
+                }
+                }
+                catch (Exception e){
+                        System.out.println("County not exists");                        
+                }
+                if(driver.getTitle().equalsIgnoreCase("AARP Medicare Plans | Pharmacy Directory")) // TODO
+                {
+                        return new PharmacySearchPage(driver);
+                }
+                return null;
+        }
 
-		String zipcode = zipAttributesMap.get("Zip Code");
-		String distance = zipAttributesMap.get("Distance");
+        public PharmacySearchPage selectYear(String year) {
+                try {
+                        Thread.sleep(1000);
+                } catch (InterruptedException e) {
+                        // TODO Auto-generated catch block
+                        e.printStackTrace();
+                }
+                Select dropDown = new Select(planYearDropDown);                
+                try {
+                        Thread.sleep(1000);
+                } catch (InterruptedException e) {
+                        // TODO Auto-generated catch block
+                        e.printStackTrace();
+                }
+                dropDown.selectByValue(year);
+                try {
+                        Thread.sleep(1000);
+                } catch (InterruptedException e) {
+                        // TODO Auto-generated catch block
+                        e.printStackTrace();
+                }
+                continueField.click();
+                return new PharmacySearchPage(driver);
 
-		sendkeys(zipcodeField,zipcode);
+        }
 
-		distanceField.click();
-		distanceField.sendKeys(distance);
-
-		continueField.click();
-		CommonUtility.checkPageIsReady(driver);
-
-		if(countyPopOut.isDisplayed())
-		{
-			String county  = zipAttributesMap.get("County");
-			List<WebElement> countyList =  selectcountytable.findElements(By.tagName("tr"));
-
-			for (WebElement webElement : countyList) {
-				if(webElement.getText().contains(county))
-				{
-					webElement.click();
-					break;
-				}
-			}
-		}
-		if(driver.getTitle().equalsIgnoreCase("AARP Medicare Plans | Pharmacy Directory")) // TODO
-		{
-			return new PharmacySearchPage(driver);
-		}
-		return null;
-	}
-
-	public PharmacySearchPage selectYear(String year) {
-		try {
-			Thread.sleep(1000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		Select dropDown = new Select(planYearDropDown);		
-		try {
-			Thread.sleep(1000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		dropDown.selectByValue(year);
-		try {
-			Thread.sleep(1000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		continueField.click();
-		return new PharmacySearchPage(driver);
-
-	}
-
-	public PharmacySearchPage hoverOverToolTip(String pharmacyType) {
-		
-		if(pharmacyType.contains("Saver")){
-			pharmacySaverTooltip.click();
-			System.out.println("Hovered over the Pharmacy Saver tooltip");
-		}
-		else if(pharmacyType.contains("Preferred")){
-			pharmacyPreferredTooltip.click();
-			System.out.println("Hovered over the Preferred Pharmacy tooltip");
-		}
-		else if(pharmacyType.contains("Standard")){
-			pharmacyStandardTooltip.click();
-			System.out.println("Hovered over the Standard Pharmacy tooltip");
-		}
-		else{
-			System.out.println("***************Verify Pharmacy type. Pharmacy Type not found..***************");
-			return null;
-		}
-		return new PharmacySearchPage(driver);
-	}
-	
-	public PharmacySearchPage clickEspanol(){
-		espanolLink.click();
-		System.out.println("Espanol language selected:");
-		return new PharmacySearchPage(driver);
-	}
-	
-
-	public PharmacySearchPage clickChinese(){
-		chineseLink.click();
-		System.out.println("Chinese language selected");   
-		return new PharmacySearchPage(driver);
-	}
-
-	public PharmacySearchPage clickCreatePdf(){
-		viewsearchpdf.click();
-		System.out.println("CreatePdf clicked");
-		return new PharmacySearchPage(driver);
-	}
-	
+        public PharmacySearchPage hoverOverToolTip(String pharmacyType) {
+                String pharmacyTypeText = pharmacyTypeActual.getText().trim();
+                //if(pharmacyTypeActual.equals(pharmacyType)){
+                        toolTip.click();
+                        try {
+                                Thread.sleep(1000);
+                        } catch (InterruptedException e) {
+                                // TODO Auto-generated catch block
+                                e.printStackTrace();
+                        }                        
+                        System.out.println("Hovered over the tooltip");
+                //}
+                //else{
+                        //System.out.println("Pharmacy type mismatch. Expected----->"+pharmacyType+"----But got----->"+pharmacyTypeText);
+                //}
+                return new PharmacySearchPage(driver);
+        }
+        public PharmacySearchPage clickEspanol(){
+                espanolLink.click();
+                System.out.println("Espanol language selected:");
+                try {
+                        Thread.sleep(5000);
+                } catch (InterruptedException e) {
+                        // TODO Auto-generated catch block
+                        e.printStackTrace();
+                }
+                Assert.assertTrue("Locate pharmacy title displyed incorrectly", !locatePharmacyTitle.getText().equals("Encuentre una Farmacia"));
+                return new PharmacySearchPage(driver);
+        }
+        
+        public PharmacySearchPage clickChinese(){
+                CommonUtility.waitForPageLoad(driver, chineseLink, 5);
+                chineseLink.click();                
+                System.out.println("Chinese language selected");   //Story 261070
+                try {
+                        Thread.sleep(7000);
+                } catch (InterruptedException e) {
+                        // TODO Auto-generated catch block
+                        e.printStackTrace();
+                }
+                Assert.assertTrue("Locate pharmacy title displyed incorrectly", !locatePharmacyTitle.getText().equals("å°æ¾è¥æ¿"));
+                return new PharmacySearchPage(driver);
+        }
+        
+        public PharmacySearchPage clickCreatePdf(){
+                createPdfLink.click();
+                System.out.println("CreatePdf clicked");
+                return new PharmacySearchPage(driver);
+        }
 
 }
