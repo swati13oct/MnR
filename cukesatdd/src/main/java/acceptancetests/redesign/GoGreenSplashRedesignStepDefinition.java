@@ -13,12 +13,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import acceptancetests.atdd.data.CommonConstants;
 import acceptancetests.atdd.data.member.PageConstants;
 import atdd.framework.MRScenario;
-import cucumber.api.DataTable;
-import cucumber.api.java.After;
-import cucumber.api.java.en.And;
-import cucumber.api.java.en.Given;
-import cucumber.api.java.en.Then;
-import cucumber.api.java.en.When;
+import cucumber.annotation.en.And;
+import cucumber.annotation.en.Given;
+import cucumber.annotation.en.Then;
+import cucumber.annotation.en.When;
+import cucumber.table.DataTable;
 import gherkin.formatter.model.DataTableRow;
 import pages.member.redesign.DeregisterPage;
 import pages.member.redesign.GoGreenSplashPage;
@@ -40,7 +39,7 @@ public class GoGreenSplashRedesignStepDefinition {
 		}
 		
 		@Given("^I am a member on the member redesign login page$")
-		public void I_am_a_member_on_the_member_redesign_login_page(DataTable givenAttributes) throws InterruptedException {
+		public void I_am_a_member_on_the_member_redesign_login_page(DataTable givenAttributes) {
 
 			List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
 			Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();

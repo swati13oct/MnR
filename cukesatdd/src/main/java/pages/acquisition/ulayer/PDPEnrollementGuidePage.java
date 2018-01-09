@@ -6,7 +6,6 @@ package pages.acquisition.ulayer;
 import java.util.List;
 import java.util.Map;
 
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -71,12 +70,6 @@ public class PDPEnrollementGuidePage extends UhcDriver{
 	@FindBy(id = "oneTimeAddress.city")
 	private WebElement cityField;
 	
-	@FindBy(xpath=".//*[@id='planGuide1']")
-	private WebElement planGuide1;
-	
-	@FindBy(xpath=".//*[@id='planGuide2']")
-	private WebElement planGuide2;
-	
 	@FindBys(value = { @FindBy(xpath = "//select[@id='oneTimeAddress.stateCode']/option") })
 	private List<WebElement> stateCodeDropDown;
 	
@@ -120,7 +113,7 @@ public class PDPEnrollementGuidePage extends UhcDriver{
 
 	public void entersDetails(Map<String, String> personalAttributesMap) {
 		
-		String planGuide = personalAttributesMap.get("Plan guide");
+		String planName = personalAttributesMap.get("Plan name");
 		String firstName = personalAttributesMap.get("First name");
 		String lastName = personalAttributesMap.get("Last name");
 		String dob = personalAttributesMap.get("Date of Birth");
@@ -137,11 +130,7 @@ public class PDPEnrollementGuidePage extends UhcDriver{
 		String zipCode = personalAttributesMap.get("Zip Code");
 		String dayTimePhNumber = personalAttributesMap.get("Daytime phone number");
 		
-		if(driver.findElement(By.xpath(".//*[@id='planGuideInformation']/div[2]")).getText().contains(planGuide))
-			planGuide1.click();
-		else
-			planGuide2.click();
-			
+		chkBoxPlanName.click();
 		sendkeys(firstNameField, firstName);
 		sendkeys(lastNameField, lastName);
 		sendkeys(birthDateField, dob);

@@ -1,0 +1,28 @@
+{
+"lifestyleLink": "LIFESTYLE",
+"learningLink": "LEARNING",
+"showAllLink": "SHOW ALL",
+ "learningCenters": [
+        {
+            "learningCenters": "Heart Health\nA number of diseases affect the heart such as Coronary artery disease (CAD), heart failure (HF) and heart attack are all types of heart disease."
+        },
+        {
+            "learningCenters": "Dental Health\nDental health refers to all aspects of the health and functions of our mouth especially the teeth and gums. The health of our teeth and mouth are linked to overall health and well-being in a number of ways."
+        },
+        {
+            "learningCenters": "Emotional Health\nGood emotional health is important to overall health. Emotional health issues, such as depression, when left untreated can negatively impact your health and well-being. Learn about emotional health and helpful resources."
+        },
+        {
+            "learningCenters": "Fitness\nFitness level measures your ability to perform physical activity based on multiple factors such as muscle strength, flexibility, endurance, body composition and more. Thirty minutes of low impact activity is recommended daily."
+        },
+        {
+            "learningCenters": "Memory\nMost memory loss occurs as part of the normal aging process. However, memory loss may also occur as a result of severe emotional trauma or due to brain damage following disease or physical trauma."
+        },
+        {
+            "learningCenters": "Cancer\nCancer is the uncontrolled growth of abnormal cells in the body and occurs more often in older adults. In fact, today one out of every six people over the age of 65 has survived cancer, thanks largely to medical advancements."
+        },
+        {
+            "learningCenters": "Arthritis\n50% of adults 65 years or older report having a diagnosis of arthritis. Arthritis is an inflammation of one or more joints, resulting in pain, swelling, stiffness, and limited movement."
+        }
+    ],
+}

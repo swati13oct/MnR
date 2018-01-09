@@ -44,9 +44,9 @@ public class LocationSearchPage extends UhcDriver{
 		}
 		else if(currentUrl().contains("enterZipCode"))
 		{
-			//CountySelectionPage countySelectionPage = new CountySelectionPage(driver);
-			//AddDrugPage addDrugPage = countySelectionPage.selectCounty(county);
-			//return addDrugPage;
+			CountySelectionPage countySelectionPage = new CountySelectionPage(driver);
+			AddDrugPage addDrugPage = countySelectionPage.selectCounty(county);
+			return addDrugPage;
 		}
 		
 		return null;

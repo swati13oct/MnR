@@ -7,7 +7,7 @@
 },
 "annualDeductible": {
 "identifier":"xpath",
-"elementName":".//div[@class='plansumcontent']/p[3]"
+"elementName":".//div[@class='plansumcontent']/p[4]"
 },
 "benefits_prescriptionDrugCost":{
 "identifier":"className",
@@ -26,8 +26,8 @@
 "elementName":"viewDetailsPDP"
 },
 "enrollPlanLink":{
-"identifier":"className",
-"elementName":"enrollinplanBtn"
+"identifier":"id",
+"elementName":"enrollPDP"
 }
 }
 }

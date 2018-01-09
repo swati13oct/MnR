@@ -10,10 +10,12 @@
 
 	<properties>
 		<selenium.version>2.53.0</selenium.version>
-		<cucumber.version>1.2.5</cucumber.version>
+		<cucumber.version>1.0.2</cucumber.version>
 		<project.build.sourceEncoding>ISO-8859-1</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>ISO-8859-1</project.reporting.outputEncoding>
 	</properties>
+<!-- https://mvnrepository.com/artifact/org.seleniumhq.selenium/selenium-java -->
+
 
 	<build>
 		<resources>
@@ -28,7 +30,24 @@
 		</resources>
 
 		<plugins>
-		<plugin>
+ <plugin>
+    <groupId>org.apache.maven.plugins</groupId>
+    <artifactId>maven-surefire-plugin</artifactId>
+    <version>2.19</version>
+    <configuration>
+        <forkCount>5</forkCount>
+        <reuseForks>true</reuseForks>
+        <includes>
+              <!-- <include>**/RunMRATddTestResponsiveUHCVpp</include>  -->
+            <!-- <include>**/RunMRATDDTestRunnerSrint2.java</include>  -->
+        <!--   <include>**/RunMRATDDTestRunnerSrint3.java</include> -->
+           <!--  <include>**/RunMRATDDTestRunnerSrint4.java</include> -->
+          <!--  <include>**/RunMRATDDTestRunnerSrint5.java</include>  -->
+        </includes>       
+    </configuration>
+</plugin> 
+  
+			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
 				<version>3.5.1</version>
@@ -48,63 +67,30 @@
 
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-failsafe-plugin</artifactId>
-				<version>2.20</version>
-				<executions>
-					<execution>
-						<id>acceptance-test</id>
-						<phase>integration-test</phase>
-						<goals>
-							<goal>integration-test</goal>
-						</goals>
-						<configuration>
-							<daemon>true</daemon>
-							<testFailureIgnore>true</testFailureIgnore>
-						</configuration>
-					</execution>
-					<execution>
-						<id>verify</id>
-						<goals>
-							<goal>verify</goal>
-						</goals>
-					</execution>
-				</executions>
- 				<dependencies>
-					<dependency>
-						<groupId>org.apache.maven.surefire</groupId>
-						<artifactId>surefire-junit47</artifactId>
-						<version>2.20</version>
-					</dependency>
-				</dependencies>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<version>2.19.1</version>
 				<configuration>
-					<forkCount>20</forkCount>
-					<reuseForks>true</reuseForks>
 					<testSourceDirectory>${basedir}/src/main/java/</testSourceDirectory>
 					<testClassesDirectory>${project.build.directory}/classes/</testClassesDirectory>
 					<argLine>-Xmx512m -XX:MaxPermSize=512m</argLine>
 					<systemPropertyVariables>
 						<environment>${environment}</environment>
-						<webdriverhost>${webdriverhost}</webdriverhost>
-					</systemPropertyVariables>
+						<webdriver_browser>${webdriver_browser}</webdriver_browser>
+					</systemPropertyVariables> 
 				</configuration>
-				
-			</plugin>
-			<plugin>
-				<groupId>org.codehaus.mojo</groupId>
-				<artifactId>exec-maven-plugin</artifactId>
-				<version>1.1.1</version>
 				<executions>
 					<execution>
-						<id>script-execution</id>
-						<phase>post-integration-test</phase>
+						<id>acceptance-test</id>
+						<phase>integration-test</phase>
 						<goals>
-							<goal>exec</goal>
+							<goal>test</goal>
 						</goals>
+						<configuration>
+							<daemon>true</daemon>
+							<testFailureIgnore>false</testFailureIgnore>
+						</configuration>
 					</execution>
 				</executions>
-				<configuration>
-					<executable>${basedir}/src/main/resources/pdfReportGenerator.sh</executable>
-				</configuration>
 			</plugin>
 		</plugins>
 		<pluginManagement>
@@ -148,23 +134,23 @@
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
-			<version>4.12</version>
+			<version>4.11</version>
 		</dependency>
 
 		<dependency>
 			<groupId>org.springframework</groupId>
-			<artifactId>spring-beans</artifactId>
-			<version>4.3.4.RELEASE</version>
+			<artifactId>org.springframework.beans</artifactId>
+			<version>3.1.1.RELEASE</version>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-context</artifactId>
-			<version>4.3.4.RELEASE</version>
+			<version>3.1.1.RELEASE</version>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-jdbc</artifactId>
-			<version>4.3.4.RELEASE</version>
+			<version>3.1.1.RELEASE</version>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.ldap</groupId>
@@ -184,7 +170,7 @@
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-test</artifactId>
-			<version>4.3.4.RELEASE</version>
+			<version>3.1.1.RELEASE</version>
 		</dependency>
 
 		<dependency>
@@ -216,7 +202,7 @@
 		<dependency>
 			<groupId>info.cukes</groupId>
 			<artifactId>cucumber-junit</artifactId>
-			<version>1.2.4</version>
+			<version>${cucumber.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.apache.httpcomponents</groupId>
@@ -313,37 +299,12 @@
 			<artifactId>jsonassert</artifactId>
 			<version>1.2.3</version>
 		</dependency>
-
-		<dependency>
-		    <groupId>com.googlecode.json-simple</groupId>
-		    <artifactId>json-simple</artifactId>
-		    <version>1.1</version>
-		</dependency>
-
-		<dependency>
-			<groupId>com.github.mkolisnyk</groupId>
-			<artifactId>cucumber-report-generator</artifactId>
-			<version>1.0.8</version>
-		</dependency>
-
-		<dependency>
-			<groupId>com.github.mkolisnyk</groupId>
-			<artifactId>cucumber-reporting-maven-plugin</artifactId>
-			<version>1.0.8</version>
-		</dependency>
-
-		<dependency>
-			<groupId>com.github.mkolisnyk</groupId>
-			<artifactId>cucumber-reports</artifactId>
-			<version>1.0.7</version>
-		</dependency>
+	<dependency>
+    <groupId>org.apache.commons</groupId>
+    <artifactId>commons-lang3</artifactId>
+    <version>3.0</version>
+</dependency>
 		
-		<dependency>
-			<groupId>com.codeborne</groupId>
-			<artifactId>phantomjsdriver</artifactId>
-			<version>1.2.1</version>
-		</dependency>
-
 	</dependencies>
-
+	
 </project>

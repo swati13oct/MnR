@@ -1,0 +1,25 @@
+{
+    "selectedDrugInfo": "Add a Drug: Depo-Provera 150MG Enter different drug\n*Indicates a required field",
+    "quantity": "1",
+    "frequency": [
+        {
+            "frequency": "Every 1 month"
+        },
+        {
+            "frequency": "Every 3 months"
+        }
+    ],
+    "continuebutton": "Continue",
+    "dosages": "Depo-Provera 150MG INJ 150MG/ML",
+    "packages": [
+        {
+            "packages": "1.0ML Syringe(sold in a package of 1)"
+        },
+        {
+            "packages": "1.0ML Vial(sold in a package of 1)"
+        },
+        {
+            "packages": "1.0ML Vial(sold in a package of 25)"
+        }
+    ],
+}

@@ -60,7 +60,7 @@ public class AddDrugPage extends UhcDriver {
 		sendkeys(drugSearchBox, drugInitials);
 		CommonUtility.waitForPageLoad(driver, drugDropDown,
 				CommonConstants.TIMEOUT_40);
-/*		JSONObject jsonObject = new JSONObject();
+		JSONObject jsonObject = new JSONObject();
 		for (String key : drugList.getExpectedData().keySet()) {
 			List<WebElement> elements = findElements(drugList.getExpectedData()
 					.get(key));
@@ -100,26 +100,12 @@ public class AddDrugPage extends UhcDriver {
 		}
 		drugListJson = jsonObject;
 		System.out.println("drugListJson------>" + drugListJson);
-*/		
 	}
-	
-	public boolean validateDrugInitialsSearch(String drugInitials) {
-		String[] dropDownValues = getDrugList().split("\n");
-		boolean flag = true;
-		for(int i=0;i<dropDownValues.length;i++){
-			if (!dropDownValues[i].toLowerCase().contains(drugInitials)){
-				flag=false;
-				break;
-			}
-		}
-		return flag;
-	}
-	
 
 	public String getDrugList() {
 		return drugDropDown.getText();
+
 	}
-	
 
 	public SelectDosagePage selectDrug(String drugName) {
 		ElementData drugElement = new ElementData("xpath",

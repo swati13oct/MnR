@@ -15,12 +15,11 @@ import acceptancetests.atdd.data.CommonConstants;
 import acceptancetests.atdd.data.member.PageConstants;
 import acceptancetests.login.data.LoginCommonConstants;
 import atdd.framework.MRScenario;
-import cucumber.api.DataTable;
-import cucumber.api.java.After;
-import cucumber.api.java.en.And;
-import cucumber.api.java.en.Given;
-import cucumber.api.java.en.Then;
-import cucumber.api.java.en.When;
+import cucumber.annotation.en.And;
+import cucumber.annotation.en.Given;
+import cucumber.annotation.en.Then; 
+import cucumber.annotation.en.When;
+import cucumber.table.DataTable;
 import gherkin.formatter.model.DataTableRow;
 import pages.dashboard.member.drugcostestimator.blayer.AddDrugDetails;
 import pages.dashboard.member.drugcostestimator.blayer.AddNewDrugModal;
@@ -173,7 +172,7 @@ public class DrugcostestimatorUhcStepDefinition {
 
 		DrugCostEstimatorPage dce = new DrugCostEstimatorPage(wd);
 		dce.changeUrlToNewDCEPage();
-		pages.dashboard.member.blayer.AddNewDrugModal addNewDrugModal = dce.clickOnAddDrug();
+		AddNewDrugModal addNewDrugModal = dce.clickOnAddDrug();
 		addNewDrugModal.clickonSearchButton(drug);
 	}
 
@@ -268,7 +267,7 @@ public class DrugcostestimatorUhcStepDefinition {
 	@And("^I should be able to click on Add a Drug$")
 	public void i_should_be_able_to_click_AddDrug() throws InterruptedException{
 		DrugCostEstimatorPage dce = (DrugCostEstimatorPage) getLoginScenario().getBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE);
-		pages.dashboard.member.blayer.AddNewDrugModal addNewDrugModal = dce.clickOnAddDrug();
+		AddNewDrugModal addNewDrugModal = dce.clickOnAddDrug();
 		getLoginScenario().saveBean(PageConstants.ADD_DRUG_PAGE, addNewDrugModal);
 	}
 	@And("^the Add a Drug search modal should launch$")
@@ -466,7 +465,7 @@ public class DrugcostestimatorUhcStepDefinition {
 
 		WebDriver wd = (WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
 		DrugCostEstimatorPage dce = new DrugCostEstimatorPage(wd);
-		pages.dashboard.member.blayer.AddDrugDetails adddrugdetails = dce.navigateToEditDrug(drug);
+		AddDrugDetails adddrugdetails = dce.navigateToEditDrug(drug);
 		adddrugdetails.selectDosage(dosage);
 		adddrugdetails.selectQnty(quantity);
 		adddrugdetails.selectFrequency(frequency);
@@ -545,7 +544,7 @@ public class DrugcostestimatorUhcStepDefinition {
 		DrugCostEstimatorPage dce = new DrugCostEstimatorPage(wd);
 		//dce.changeUrlToNewDCEPage();
 		dce.deleteAllDrugs();
-		pages.dashboard.member.blayer.AddNewDrugModal addNewDrugModal = dce.clickOnAddDrug();
+		AddNewDrugModal addNewDrugModal = dce.clickOnAddDrug();
 		addNewDrugModal.clickonSearchButton(drug);
 
 		//AddDrugDetails addDrugDetails = new AddDrugDetails(wd);
@@ -581,7 +580,7 @@ public class DrugcostestimatorUhcStepDefinition {
 		DrugCostEstimatorPage dce = new DrugCostEstimatorPage(wd);
 		//dce.changeUrlToNewDCEPage();
 		dce.deleteAllDrugs();
-		pages.dashboard.member.blayer.AddNewDrugModal addNewDrugModal = dce.clickOnAddDrug();
+		AddNewDrugModal addNewDrugModal = dce.clickOnAddDrug();
 		addNewDrugModal.clickonSearchButton(drug);
 
 		//AddDrugDetails addDrugDetails = new AddDrugDetails(wd);

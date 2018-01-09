@@ -32,14 +32,13 @@ import acceptancetests.atdd.data.acquisition.PageConstants;
 import acceptancetests.dce.data.DceCommonConstants;
 import acceptancetests.vpp.data.VPPCommonConstants;
 import atdd.framework.MRScenario;
-import cucumber.api.DataTable;
-import cucumber.api.java.After;
-import cucumber.api.java.en.And;
-import cucumber.api.java.en.Given;
-import cucumber.api.java.en.Then;
-import cucumber.api.java.en.When;
-
-
+import cucumber.annotation.After;
+import cucumber.annotation.en.And;
+import cucumber.annotation.en.Given;
+import cucumber.annotation.en.Then;
+import cucumber.annotation.en.When;
+import cucumber.runtime.PendingException;
+import cucumber.table.DataTable;
 
 /** 
  * @author gumeshna
@@ -235,16 +234,16 @@ System.out.println("planSummaryExpectedJson---->"
 					givenAttributesRow.get(i).getCells().get(1));
 		}
 
-/*		String planName = givenAttributesMap.get("Plan Name");
+		String planName = givenAttributesMap.get("Plan Name");
 		getLoginScenario().saveBean(VPPCommonConstants.PLAN_NAME, planName);
 		VPPPlanSummaryPage planSummaryPage = (VPPPlanSummaryPage) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 		/* get actual data for a particular plan */
-/*		JSONObject planSummaryActualJson = planSummaryPage
+		JSONObject planSummaryActualJson = planSummaryPage
 				.getPlanSummaryActualData(planName);
 
 		/* Get expected data */
-/*		String fileName = planName;
+		String fileName = planName;
 		String zipcode = (String) getLoginScenario().getBean(
 				VPPCommonConstants.ZIPCODE);
 		String county = (String) getLoginScenario().getBean(
@@ -266,7 +265,8 @@ System.out.println("planSummaryExpectedJson---->"
 					planSummaryActualJson, true);
 		} catch (JSONException e) {
 			e.printStackTrace();
-		}*/
+		}
+
 	}
 	//----
 	
@@ -288,7 +288,7 @@ System.out.println("planSummaryExpectedJson---->"
 	
 	@And("^the user access the enter drug information link for above selected plan section in AARP site$")
 	public void user_access_the_enter_Drug_information_link_plan_name_ums() {
-/*		String planName = (String) getLoginScenario().getBean(
+		String planName = (String) getLoginScenario().getBean(
 				VPPCommonConstants.PLAN_NAME);
 		VPPPlanSummaryPage planSummaryPage = (VPPPlanSummaryPage) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
@@ -298,12 +298,12 @@ System.out.println("planSummaryExpectedJson---->"
 		if (addDrugPage != null) {
 			getLoginScenario().saveBean(PageConstants.ADD_DRUG_PAGE,
 					addDrugPage);
-		}*/
+		}
 	}
 	
 	@And("^the user selects the enter drug information link for the selected plan in AARP site$")
 	public void user_selects_enter_drug_info_link(DataTable planAttributes){
-/*		List<DataTableRow> givenAttributesRow = planAttributes.getGherkinRows();
+		List<DataTableRow> givenAttributesRow = planAttributes.getGherkinRows();
 		Map<String, String> givenAttributesMap = new HashMap<String, String>();
 		for (int i = 0; i < givenAttributesRow.size(); i++) {
 
@@ -331,7 +331,7 @@ System.out.println("planSummaryExpectedJson---->"
 		if (addDrugPage != null) {
 			getLoginScenario().saveBean(PageConstants.ADD_DRUG_PAGE,
 					addDrugPage);
-		}*/
+		}
 
 	}
 	@And("^the user search the drug using drug initials in AARP site$")
@@ -400,17 +400,17 @@ System.out.println("planSummaryExpectedJson---->"
 		getLoginScenario().saveBean(DceCommonConstants.DRUG_NAME, drugName);
 		AddDrugPage addDrugPage = (AddDrugPage) getLoginScenario().getBean(
 				PageConstants.ADD_DRUG_PAGE);
-		/*SelectDosagePage selectDosagePage = addDrugPage.selectDrug(drugName);
+		SelectDosagePage selectDosagePage = addDrugPage.selectDrug(drugName);
 		if (selectDosagePage != null) {
 
 			getLoginScenario().saveBean(PageConstants.SELECT_DOSAGE_PAGE,
 					selectDosagePage);
 
 			/* Get Actual Data */
-/*			JSONObject drugDosageActualJson = selectDosagePage.drugDosageJson;
+			JSONObject drugDosageActualJson = selectDosagePage.drugDosageJson;
 			getLoginScenario().saveBean(DceCommonConstants.DRUG_DOSAGE_ACTUAL,
 					drugDosageActualJson);
-*/
+
 			/* Get Expected Data */
 			String fileName = drugName;
 			String directory = CommonConstants.ACQUISITION_EXPECTED_DIRECTORY
@@ -425,11 +425,11 @@ System.out.println("planSummaryExpectedJson---->"
 
 		}
 
-	
+	}
 	
 	@And("^the user selects the drug from the dropdown in AARP site$")
 	public void user_selects_drug_dropdown(DataTable drugNameAttributes){
-/*		String drugName = drugNameAttributes.getGherkinRows().get(0).getCells()
+		String drugName = drugNameAttributes.getGherkinRows().get(0).getCells()
 				.get(0);
 
 		getLoginScenario().saveBean(DceCommonConstants.DRUG_NAME, drugName);
@@ -441,7 +441,7 @@ System.out.println("planSummaryExpectedJson---->"
 			getLoginScenario().saveBean(PageConstants.SELECT_DOSAGE_PAGE,
 					selectDosagePage);
 		}
-*/
+
 	}
 
 	@Then("^the user validates the available drug information in AARP site$")
@@ -659,7 +659,7 @@ System.out.println("planSummaryExpectedJson---->"
 	
 	@When("^the user search for pharmacies in dce flow in AARP site$")
 	public void user_performs_paharmacySearch_ums() {
-/*		ManageDrugPage manageDrugPage = (ManageDrugPage) getLoginScenario()
+		ManageDrugPage manageDrugPage = (ManageDrugPage) getLoginScenario()
 				.getBean(PageConstants.MANAGE_DRUG_PAGE);
 		SelectPharmacyPage selectPharmacyPage = manageDrugPage
 				.navigateToPharmacyPage();
@@ -667,13 +667,13 @@ System.out.println("planSummaryExpectedJson---->"
 			getLoginScenario().saveBean(PageConstants.PHARMACY_SEARCH_PAGE,
 					selectPharmacyPage);
 			/* Get Actual Data */
-/*			JSONObject availablePharmaciesActualJson = selectPharmacyPage.availablePharmaciesJson;
+			JSONObject availablePharmaciesActualJson = selectPharmacyPage.availablePharmaciesJson;
 			getLoginScenario().saveBean(
 					DceCommonConstants.AVAILABLE_PHARMACIES_ACTUAL,
 					availablePharmaciesActualJson);
 
 			/* Get Expected Data */
-/*			String zipcode = (String) getLoginScenario().getBean(
+			String zipcode = (String) getLoginScenario().getBean(
 					VPPCommonConstants.ZIPCODE);
 			String county = (String) getLoginScenario().getBean(
 					VPPCommonConstants.COUNTY);
@@ -713,7 +713,7 @@ System.out.println("planSummaryExpectedJson---->"
 		if (selectPharmacyPage != null) {
 			getLoginScenario().saveBean(PageConstants.PHARMACY_SEARCH_PAGE,
 					selectPharmacyPage);
-		}*/		
+		}		
 	}
 	
 	@And("^the user selects the type of pharmacy and distance in AARP site$")
@@ -963,7 +963,7 @@ System.out.println("planSummaryExpectedJson---->"
 	@And("^the user clicks on Enter Provider information link in AARP site$")
 	public void enters_provider_information_aarp(DataTable physicianAttributes) {
 
-/*		String planName = (String) getLoginScenario().getBean(
+		String planName = (String) getLoginScenario().getBean(
 				VPPCommonConstants.PLAN_NAME);
 
 		String physicianSearchCriteria = physicianAttributes.getGherkinRows()
@@ -979,13 +979,13 @@ System.out.println("planSummaryExpectedJson---->"
 				physicianSearchCriteria, physicianName);
 
 		/* get actual data for a particular plan */
-/*		JSONObject planSummaryActualJson = planSummaryPage
+		JSONObject planSummaryActualJson = planSummaryPage
 				.getPlanSummaryActualData(planName);
 		getLoginScenario().saveBean(VPPCommonConstants.VPP_PLAN_SUMMARY_ACTUAL,
 				planSummaryActualJson);
 
 		/* Get expected data */
-/*		String fileName = planName;
+		String fileName = planName;
 		String zipcode = (String) getLoginScenario().getBean(
 				VPPCommonConstants.ZIPCODE);
 		String county = (String) getLoginScenario().getBean(
@@ -1001,7 +1001,7 @@ System.out.println("planSummaryExpectedJson---->"
 		getLoginScenario().saveBean(
 				VPPCommonConstants.VPP_PLAN_SUMMARY_EXPECTED,
 				planSummaryExpectedJson);
-*/
+
 	}
 
 	@Then("^the user validates the plan summary after provider information is added in AARP site$")
@@ -1241,7 +1241,7 @@ System.out.println("planSummaryExpectedJson---->"
 
 	@And("^the user validates the plan summary for the below plan in AARP site during AEP$")
 	public void user_validates_plan_summary_aep(DataTable planAttributes) {
-/*		List<DataTableRow> givenAttributesRow = planAttributes.getGherkinRows();
+		List<DataTableRow> givenAttributesRow = planAttributes.getGherkinRows();
 		Map<String, String> givenAttributesMap = new HashMap<String, String>();
 		for (int i = 0; i < givenAttributesRow.size(); i++) {
 
@@ -1254,11 +1254,11 @@ System.out.println("planSummaryExpectedJson---->"
 		VPPPlanSummaryPage planSummaryPage = (VPPPlanSummaryPage) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 		/* get actual data for a particular plan */
-/*		JSONObject planSummaryActualJson = planSummaryPage
+		JSONObject planSummaryActualJson = planSummaryPage
 				.getPlanSummaryActualData(planName);
 
 		/* Get expected data */
-/*		String fileName = planName;
+		String fileName = planName;
 		String zipcode = (String) getLoginScenario().getBean(
 				VPPCommonConstants.ZIPCODE);
 		String county = (String) getLoginScenario().getBean(
@@ -1283,7 +1283,7 @@ System.out.println("planSummaryExpectedJson---->"
 		} catch (JSONException e) {
 			e.printStackTrace();
 		}
-*/
+
 	}
 
 	@When("^the user view plan details of the above selected plan in AARP site during AEP$")
@@ -1562,7 +1562,7 @@ System.out.println("planSummaryExpectedJson---->"
 
 	@When("^the user view plan details of the above selected plan in aarp site$")
 	public void user_views_plandetails_selected_plan_ums(DataTable planAttributes) {
-/*		List<DataTableRow> givenAttributesRow = planAttributes.getGherkinRows();
+		List<DataTableRow> givenAttributesRow = planAttributes.getGherkinRows();
 		Map<String, String> givenAttributesMap = new HashMap<String, String>();
 		for (int i = 0; i < givenAttributesRow.size(); i++) {
 
@@ -1578,7 +1578,7 @@ System.out.println("planSummaryExpectedJson---->"
 				VPPCommonConstants.ZIPCODE);
 		/*String county = (String) getLoginScenario().getBean(
 				VPPCommonConstants.COUNTY);*/
-/*		VPPPlanSummaryPage vppPlanSummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+		VPPPlanSummaryPage vppPlanSummaryPage = (VPPPlanSummaryPage) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 
 		PlanDetailsPage vppPlanDetailsPage = vppPlanSummaryPage
@@ -1607,8 +1607,8 @@ System.out.println("planSummaryExpectedJson---->"
 			getLoginScenario().saveBean(
 					VPPCommonConstants.VPP_PLAN_DETAIL_EXPECTED,
 					planDetailsExpectedJson);
-
-		}*/
+*/
+		}
 	}
 	@Then("^the user validates the details of the selected plan in aarp site$")
 	public void user_validates_details_selected_plan_ums() {
@@ -1641,7 +1641,7 @@ System.out.println("planSummaryExpectedJson---->"
 			Assert.assertFalse(false);
 	}
 	
-/*	@When("^user clicks on yes button on proactive chat$")
+	@When("^user clicks on yes button on proactive chat$")
 	public void user_clicks_on_yes_button_on_proactive_chat() {
 		VPPPlanSummaryPage vppPlanSummaryPage = (VPPPlanSummaryPage) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
@@ -1668,5 +1668,4 @@ System.out.println("planSummaryExpectedJson---->"
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 		vppPlanSummaryPage.validateReactiveChat();
 	}
-*/	
 }

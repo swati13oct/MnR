@@ -1,0 +1,17 @@
+{
+    "benefitHeaderSummary": "Benefits Summary",
+    "planName": "AARP MedicareComplete (HMO)",
+    "monthlyPremium": "Not Available",
+    "medicalCopayCoinsurance": "Medical copays or coinsurances",
+    "memberId": "006745945-01",
+    "memberName": "TWLSLTIDDL XFUDULA",
+    "effectiveDate": "01/01/2017",
+    "benefitHeaderText": "Section heading tool tip copy goes here. Lorem ipsum medical copays are like a type of cost sharing lorem ipsum. Coinsurance is a percentage of cost sharing lorem ipsum...",
+    "hospitalvisitHeading":"HOSPITAL VISITS\ndays 1 - 90 : $0.00",
+    "outNtwrkText":"N/A\nSection heading tool tip copy goes here. Lorem ipsum medical copays are like a type of cost sharing lorem ipsum. Coinsurance is a percentage of cost sharing lorem ipsum...",
+    "inNtwrkText":"$2,500.00\nSection heading tool tip copy goes here. Lorem ipsum medical copays are like a type of cost sharing lorem ipsum. Coinsurance is a percentage of cost sharing lorem ipsum...",
+    "outNtwrkHeading":"OUT-OF-NETWORK",
+    "oopMaxText":"Section heading tool tip copy goes here. Lorem ipsum medical copays are like a type of cost sharing lorem ipsum. Coinsurance is a percentage of cost sharing lorem ipsum...",
+    "inNtwrkHeading":"IN-NETWORK",
+    "oopMaxHeading":"Out-of-Pocket Maximum",
+}

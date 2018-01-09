@@ -15,15 +15,6 @@ public class LocationSearchPage extends UhcDriver {
 	@FindBy(className = "ZIPCodeBox")
 	WebElement zipCodeField;
 
-	@FindBy(xpath="//div[@ng-show='zipValid']")
-	WebElement errorZIPCodeInvalidText;
-	
-	@FindBy(xpath="//div[@ng-show='noZip']")
-	WebElement errorZIPCodeEmptyText;
-	
-	@FindBy(xpath="//div[@ng-show='nonExistingZIP']")
-	WebElement errorZIPCodeNonExistingText;
-
 	@FindBy(linkText = "Continue")
 	WebElement continueButton;
 
@@ -32,22 +23,9 @@ public class LocationSearchPage extends UhcDriver {
 		PageFactory.initElements(driver, this);
 		openAndValidate();
 	}
-	public void validateZipcodeSearch(String searachData, WebElement erroMsgElement){
-		sendkeys(zipCodeField, searachData);
-		continueButton.click();
-		try {
-			Thread.sleep(1000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		validate(erroMsgElement);
-	}
+
 	public AddDrugPage enterLocation(String zipCode, String county,
 			String planYear) {
-		validateZipcodeSearch("123a",errorZIPCodeInvalidText);
-		validateZipcodeSearch("",errorZIPCodeEmptyText);
-		validateZipcodeSearch("33044",errorZIPCodeNonExistingText);
 		sendkeys(zipCodeField, zipCode);
 		if (null != planYear) {
 			ElementData elementData = new ElementData("xpath",
@@ -56,6 +34,13 @@ public class LocationSearchPage extends UhcDriver {
 			findElement(elementData).click();
 		}
 		continueButton.click();
+
+		try {
+			Thread.sleep(2000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		if (currentUrl().contains("drugSearch")) {
 			return new AddDrugPage(driver);
 		} else if (currentUrl().contains("enterZipCode")) {
@@ -71,19 +56,9 @@ public class LocationSearchPage extends UhcDriver {
 
 	@Override
 	public void openAndValidate() {
-		boolean zipcodeAndcontinueFieldExistence = false;
-		for(int i =0; i<10;i++){
-			zipcodeAndcontinueFieldExistence = validate(zipCodeField) && validate(continueButton);
-			if (zipcodeAndcontinueFieldExistence){
-				break;
-			}else{
-				try {
-					Thread.sleep(1000);
-				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-			}
-		}
+		validate(zipCodeField);
+		validate(continueButton);
+
 	}
+
 }

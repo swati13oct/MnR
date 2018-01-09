@@ -26,7 +26,7 @@ import acceptancetests.atdd.data.ElementData;
 import acceptancetests.atdd.data.PageData;
 import acceptancetests.atdd.util.CommonUtility;
 import atdd.framework.UhcDriver;
-import cucumber.api.DataTable;
+import cucumber.table.DataTable;
 import gherkin.formatter.model.DataTableRow;
 
 /**

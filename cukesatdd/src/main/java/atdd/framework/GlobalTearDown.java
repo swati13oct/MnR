@@ -1,14 +1,16 @@
 package atdd.framework;
 
 
+import java.io.ByteArrayInputStream;
+
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import acceptancetests.atdd.data.CommonConstants;
-import cucumber.api.Scenario;
-import cucumber.api.java.After;
+import atdd.framework.MRScenario;
+import cucumber.annotation.After;
+import cucumber.runtime.ScenarioResult;
 /**
  * This class will take a screen shot of the last screen executed by
  * cucumber and embed it in the report generated.   It will take a screen shot
@@ -42,7 +44,6 @@ public class GlobalTearDown {
 	MRScenario loginScenario;
 
 	public MRScenario getLoginScenario() {
-		
 		return loginScenario;
 	}
 
@@ -51,19 +52,17 @@ public class GlobalTearDown {
 	 * @param scenario
 	 */
 	@After
-	public void tearDown(Scenario scenario) {
+	public void tearDown(ScenarioResult scenario) {
 
-		if(null !=getLoginScenario()  && null!=getLoginScenario().getBean(CommonConstants.WEBDRIVER))
-		{
-		    WebDriver wd  =(WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
-			final byte[] screenshot = ((TakesScreenshot) wd).getScreenshotAs(OutputType.BYTES);
-			
-			//To get the report embedded in the report
-			scenario.embed(screenshot, "image/png");
-			
-			//Clean up the existing webdriver.
-		    wd.quit();
-		}
+		WebDriver wd = getLoginScenario().getWebDriver();
+		final byte[] screenshot = ((TakesScreenshot) wd).getScreenshotAs(OutputType.BYTES);
+		scenario.embed(new ByteArrayInputStream(screenshot), "image/png"); // ... and
+																	// embed it
+																	// in the
+																	// report.
+		//Clean up the existing webdriver.
+		getLoginScenario().flushBeans();
+		getLoginScenario().nullifyWebDriver();
 
 	}
 

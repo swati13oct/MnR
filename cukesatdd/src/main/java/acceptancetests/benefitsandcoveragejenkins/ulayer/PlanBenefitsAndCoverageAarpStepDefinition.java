@@ -35,12 +35,12 @@ import acceptancetests.contactus.data.ContactUsCommonConstants;
 import acceptancetests.formsandresources.data.FnRCommonConstants;
 import acceptancetests.login.data.LoginCommonConstants;
 import atdd.framework.MRScenario;
-import cucumber.api.DataTable;
-import cucumber.api.java.After;
-import cucumber.api.java.en.And;
-import cucumber.api.java.en.Given;
-import cucumber.api.java.en.Then;
-import cucumber.api.java.en.When;
+import cucumber.annotation.After;
+import cucumber.annotation.en.And;
+import cucumber.annotation.en.Given;
+import cucumber.annotation.en.Then;
+import cucumber.annotation.en.When;
+import cucumber.table.DataTable;
 
 /**
  * @author pagarwa5
@@ -134,7 +134,7 @@ public class PlanBenefitsAndCoverageAarpStepDefinition {
 
 	@When("^the user navigates to Benefits and coverage page$")
 	public void user_views_BenefitsAndCoverage() {
-/*
+
 		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstants.ACCOUNT_HOME_PAGE);
 		BenefitsAndCoveragePage bncPage = accountHomePage.navigatesToBandCpage();
 
@@ -153,7 +153,6 @@ public class PlanBenefitsAndCoverageAarpStepDefinition {
 			System.out.println(
 					"Benefits and coverage expected ==============>" + benefitsandcoverageExectedJson.toString());
 		}
-		*/
 	}
 
 	@Given("^registered member for forms and resources in AARP Site$")
@@ -421,7 +420,7 @@ public class PlanBenefitsAndCoverageAarpStepDefinition {
 	@Then("^the user view jenkins benefits and coverage in AARP site")
 	public void user_views_jenkinsBenefitsAndCoverage() {
 
-/*		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstants.ACCOUNT_HOME_PAGE);
+		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstants.ACCOUNT_HOME_PAGE);
 		BenefitsAndCoveragePage benefitsCoveragePage = accountHomePage.navigateDirectToBnCPag();
 
 		if (benefitsCoveragePage != null) {
@@ -444,7 +443,6 @@ public class PlanBenefitsAndCoverageAarpStepDefinition {
 			System.out.println(
 					"Benefits and coverage expected ==============>" + benefitsandcoverageExectedJson.toString());
 		}
-		*/
 	}
 
 	@Then("^the user validates the content on benefits and coverage page")

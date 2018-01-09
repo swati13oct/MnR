@@ -47,7 +47,6 @@ public class OtherHealthInsurancePage extends UhcDriver {
 	@FindBy(id = "othcancel")
 	private WebElement otherhelathinsurancecancelregristration;
 
-	
 	private PageData otherhealthinsuranceInformation;
 
 	public JSONObject otherhealthinsuranceInformationJson;
@@ -100,11 +99,9 @@ public class OtherHealthInsurancePage extends UhcDriver {
 			sendkeys(otherhealthinsurancegroup, othgroupid);
 			sendkeys(otherhealthinsurancememberid, othmemberid);
 		}
+
 	}
-			
-		
-			
-		
+
 	public PrimaryCareProviderPage navigatesToNextStep() {
 		otherhelathinsurancesaveandcontinue.click();
 

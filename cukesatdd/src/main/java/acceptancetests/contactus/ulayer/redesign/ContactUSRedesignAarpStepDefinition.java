@@ -20,12 +20,12 @@ import acceptancetests.atdd.data.member.PageConstants;
 import acceptancetests.contactus.data.ContactUsCommonConstants;
 import acceptancetests.login.data.LoginCommonConstants;
 import atdd.framework.MRScenario;
-import cucumber.api.DataTable;
-import cucumber.api.java.After;
-import cucumber.api.java.en.And;
-import cucumber.api.java.en.Given;
-import cucumber.api.java.en.Then;
-import cucumber.api.java.en.When;
+import cucumber.annotation.After;
+import cucumber.annotation.en.And;
+import cucumber.annotation.en.Given;
+import cucumber.annotation.en.Then;
+import cucumber.annotation.en.When;
+import cucumber.table.DataTable;
 import gherkin.formatter.model.DataTableRow;
 import pages.dashboard.member.ulayer.ClaimSummarypage;
 import pages.member.redesign.NewLoginPage;
@@ -47,7 +47,7 @@ public class ContactUSRedesignAarpStepDefinition {
 		
 		@Given("^registered UMS member with following attributes$")
 		public void ulayer_registered_member_with_following_attributes(
-				DataTable memberAttributes) throws InterruptedException {
+				DataTable memberAttributes) {
 
 			List<DataTableRow> memberAttributesRow = memberAttributes.getGherkinRows();
 			Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();

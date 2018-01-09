@@ -44,8 +44,9 @@ public class EditDrugDetails extends UhcDriver {
 		super(driver);
 		PageFactory.initElements(driver, this);
 		//CommonUtility.waitForPageLoad(driver, addDrugDetailsPage, 10);
-		
-		//openAndValidate();
+		String fileName = CommonConstants.ADD_DRUG_DETAILS_PAGE_DATA;
+		editdrugdetails = CommonUtility.readPageData(fileName, CommonConstants.PAGE_OBJECT_DIRECTORY_DCE_MEMBER);
+		openAndValidate();
 	}
 
 	@Override
@@ -70,12 +71,12 @@ public class EditDrugDetails extends UhcDriver {
 		System.out.println("addnewdrugJson----->" + editdrugdetailsJson);
 	}
 
-	/*public JSONObject getExpectedData(Map<String, JSONObject> expectedDataMap) {
+	public JSONObject getExpectedData(Map<String, JSONObject> expectedDataMap) {
 
 		JSONObject addDrugDetailsPageExpectedJson = expectedDataMap.get(CommonConstants.ADD_DRUG_DETAILS);
 
 		return addDrugDetailsPageExpectedJson;
-	}*/
+	}
 	public void selectDosage(String dosage){
 	
 		WebElement element = driver.findElement(By.xpath("//input[@value='"+dosage+"']/following-sibling::label"));

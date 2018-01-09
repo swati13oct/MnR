@@ -29,12 +29,12 @@ import acceptancetests.enrollinplan.data.EnrollInPlanCommonConstants;
 import acceptancetests.globalfooter.data.AcquistionCommonConstants;
 import acceptancetests.vpp.data.VPPCommonConstants;
 import atdd.framework.MRScenario;
-import cucumber.api.DataTable;
-import cucumber.api.java.After;
-import cucumber.api.java.en.And;
-import cucumber.api.java.en.Given;
-import cucumber.api.java.en.Then;
-import cucumber.api.java.en.When;
+import cucumber.annotation.After;
+import cucumber.annotation.en.And;
+import cucumber.annotation.en.Given;
+import cucumber.annotation.en.Then;
+import cucumber.annotation.en.When;
+import cucumber.table.DataTable;
 
 /**
  * @author pgrover1
@@ -176,7 +176,7 @@ public class EnrollDTMvalidationStepDefinition {
 		}
 	}
 	
-/*	@And("^the user click on enroll link  for the below plan on AARP site$")
+	@And("^the user click on enroll link  for the below plan on AARP site$")
 	public void user_clicks_on_enroll_link(DataTable planAttributes)
 	{
 		String planName = planAttributes.getGherkinRows().get(0).getCells()
@@ -199,7 +199,7 @@ public class EnrollDTMvalidationStepDefinition {
 		
 		getLoginScenario().saveBean(PageConstants.INTRODUCTION_INFORMATION_PAGE,introInformationPage);
 	}
-	*/
+	
 	
 
 	@When("^user accesses global footer of the AARP home page$")

@@ -8,7 +8,7 @@ import org.json.JSONObject;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.FindBy;
+
 import acceptancetests.atdd.data.CommonConstants;
 import acceptancetests.atdd.data.PageData;
 import acceptancetests.atdd.util.CommonUtility;
@@ -23,9 +23,6 @@ public class EnquiryKitConfirmationPage extends UhcDriver{
 	private PageData enquiryKitConfirmation;
 
 	public JSONObject enquiryKitConfirmationJson;
-	
-	@FindBy(xpath = ".//*[@id='medicareTitle']")
-	private WebElement medicareTitle;
 
 	public EnquiryKitConfirmationPage(WebDriver driver) {
 		super(driver);
@@ -59,10 +56,5 @@ public class EnquiryKitConfirmationPage extends UhcDriver{
 		
 	}
 	
-	public boolean validateConfPage(){
-		if(validate(medicareTitle))
-			return true;
-		return false;
-	}
 
 }

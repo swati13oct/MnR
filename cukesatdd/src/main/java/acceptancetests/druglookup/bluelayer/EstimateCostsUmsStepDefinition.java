@@ -30,12 +30,12 @@ import acceptancetests.atdd.data.member.PageConstants;
 import acceptancetests.druglookup.data.DceCommonConstants;
 import acceptancetests.login.data.LoginCommonConstants;
 import atdd.framework.MRScenario;
-import cucumber.api.DataTable;
-import cucumber.api.java.After;
-import cucumber.api.java.en.And;
-import cucumber.api.java.en.Given;
-import cucumber.api.java.en.Then;
-import cucumber.api.java.en.When;
+import cucumber.annotation.After;
+import cucumber.annotation.en.And;
+import cucumber.annotation.en.Given;
+import cucumber.annotation.en.Then;
+import cucumber.annotation.en.When;
+import cucumber.table.DataTable;
 
 /**
  * @author pperugu
@@ -376,7 +376,7 @@ public class EstimateCostsUmsStepDefinition {
 		ManageDrugPage manageDrugPage = (ManageDrugPage) getLoginScenario()
 				.getBean(PageConstants.MANAGE_DRUG_PAGE);
 		SelectPharmacyPage selectPharmacyPage = manageDrugPage
-				.navigateToPharmacyPage();
+				.navigateToPharmacyPage(category);
 
 		/* Get expected data */
 			@SuppressWarnings("unchecked")
@@ -407,7 +407,7 @@ public class EstimateCostsUmsStepDefinition {
 
 		/* Selecting pharmacyType and distance */
 		selectPharmacyPage = selectPharmacyPage.selectTypeDistance(
-				pharmacyType, distance);
+				pharmacyType, distance, category);
 
 		JSONObject updatedPharmacyPageExpectedJson = selectPharmacyPage
 				.getExpectedData(expectedDataMap, pharmacyType, distance);
@@ -443,7 +443,7 @@ public class EstimateCostsUmsStepDefinition {
 		SelectPharmacyPage selectPharmacyPage = (SelectPharmacyPage) getLoginScenario()
 				.getBean(PageConstants.SELECT_PHARMACY_PAGE);
 		ViewDrugCostPage viewDrugCostPage = selectPharmacyPage.selectPharmacy(
-				pharmacyName);
+				pharmacyName, category);
 		if (selectPharmacyPage != null) {
 		getLoginScenario().saveBean(PageConstants.SELECT_PHARMACY_PAGE,
 				selectPharmacyPage);
@@ -898,11 +898,11 @@ public void uservalidate_selects_pharmacy_type_distance(DataTable pharmacyAttrib
 	ManageDrugPage manageDrugPage = (ManageDrugPage) getLoginScenario()
 			.getBean(PageConstants.MANAGE_DRUG_PAGE);
 	SelectPharmacyPage selectPharmacyPage = manageDrugPage
-			.navigateToPharmacyPage();
+			.navigateToPharmacyPage(category);
 	
 	
 	selectPharmacyPage = selectPharmacyPage.selectTypeDistance(
-			pharmacyType, distance);
+			pharmacyType, distance, category);
 	
 
 	/* Get expected data */

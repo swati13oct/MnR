@@ -1,0 +1,41 @@
+{
+"Last 6 Months":{
+"medicalClaimsHeading":"My Medical Claims",
+"searchResultMessage":"You have 5 medical claims from the Last 6 Months. For more information about an individual claim, click on \"More info\" under \"Claim Details\".",
+"oddClaimRow":[
+ 		{
+            "odd": "09/12/2015 - 09/12/2015 ELNESER, SARAH R Physician $568.00 Paid"
+        },
+        {
+            "odd": "08/10/2015 - 08/10/2015 REGIONAL MEDICAL LAB Physician $113.50 Paid"
+        }
+],
+"evenClaimRow":[
+ 		{
+            "even": "10/01/2015 - 10/01/2015 DENSLOW, GARY T Physician $125.00 Paid"
+        },
+        {
+            "even": "08/21/2015 - 08/21/2015 SAINT, RICHARD B Physician $401.00 Paid"
+        },
+        {
+            "even": "08/01/2015 - 08/01/2015 REGIONAL MEDICAL LAB Physician $129.70 Paid"
+        }  
+],
+"tableFooter":"Total\n$ 1337.20"
+},
+"12-11-2015_to_09-01-2015":{
+"medicalClaimsHeading":"My Medical Claims",
+"customResultMessage":"You have 2 medical claims from 09/01/2015 to 12/11/2015. For more information about an individual claim, click on \"More info\" under \"Claim Details\".",
+"oddClaimRow":[
+ 		{
+            "odd": "09/12/2015 - 09/12/2015 ELNESER, SARAH R Physician $568.00 Paid More Info"
+        }
+],
+"evenClaimRow":[
+ 		{
+            "even": "10/01/2015 - 10/01/2015 DENSLOW, GARY T Physician $125.00 Paid More Info"
+        }
+],
+"tableFooter":"Total\n$ 693.00"
+}
+}

@@ -1,0 +1,19 @@
+{
+    "drugOptionsAvailable": [
+        {
+            "autoCompleteDrugs": "Lipichol 540"
+        },
+        {
+            "autoCompleteDrugs": "Lipidshield Plus"
+        },
+        {
+            "autoCompleteDrugs": "Lipistart"
+        },
+        {
+            "autoCompleteDrugs": "Lipitor"
+        },
+        {
+            "autoCompleteDrugs": "Microlipid"
+        }
+    ]
+}

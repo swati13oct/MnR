@@ -13,7 +13,7 @@ import org.openqa.selenium.support.PageFactory;
 import com.google.common.collect.ClassToInstanceMap;
 
 import atdd.framework.UhcDriver;
-//import gherkin.lexer.i18n.EO;
+import gherkin.lexer.i18n.EO;
 
 public class AccountHomePage extends UhcDriver {
 	

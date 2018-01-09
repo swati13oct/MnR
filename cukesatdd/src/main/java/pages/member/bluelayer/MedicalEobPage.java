@@ -8,8 +8,6 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-import acceptancetests.atdd.util.CommonUtility;
-
 /**
  * @author pperugu
  *
@@ -22,7 +20,7 @@ public class MedicalEobPage {
 	@FindBy(className = "shipbtnEobHistory")
 	private WebElement shipbtnEobHistory;
 	
-	@FindBy(xpath = ".//*[@id='eobSearchForm']/div[2]/div[3]/div[2]/table")
+	@FindBy(id = "eobtable")
 	private WebElement eobtable;
 			
 	private WebDriver driver;
@@ -34,7 +32,7 @@ public class MedicalEobPage {
 	}
 
 	public MedicalEobPage searchesMedicalEob(String dateRange) {
-		CommonUtility.waitForPageLoad(driver, eobMonthDateRange, 20);
+		
 		eobMonthDateRange.click();
 		eobMonthDateRange.sendKeys(dateRange);
 		
@@ -46,17 +44,8 @@ public class MedicalEobPage {
 		
 	}
 
-	public boolean medicalEobExists() {
-		CommonUtility.waitForPageLoad(driver, eobtable, 20);
-		try {
-			Thread.sleep(2000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		if(eobtable.getText().contains("My EOB Statements")&&eobtable.getText().contains("Download EOB (PDF)"))
-			return true;
-		return false;
+	public String getMedicalEobContent() {
+		return eobtable.getText();
 	}
 
 }

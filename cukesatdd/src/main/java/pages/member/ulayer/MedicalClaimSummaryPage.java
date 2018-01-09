@@ -102,30 +102,6 @@ public class MedicalClaimSummaryPage extends UhcDriver {
 
 	@FindBy(id = "radioDrug")
 	private WebElement radioDrug;
-	
-	@FindBy(xpath = ".//*[@id='columnsort0']/table/tbody/tr/td[1]/p/b")
-	private WebElement serviceDate;
-	
-	@FindBy(xpath = ".//*[@id='columnsort1']/table/tbody/tr/td[1]/p/b")
-	private WebElement providerName;
-	
-	@FindBy(xpath = ".//*[@id='columnsort2']/table/tbody/tr/td[1]/p/b")
-	private WebElement claimType;
-	
-	@FindBy(xpath = ".//*[@id='columnsort3']/table/tbody/tr/td[1]/p/b")
-	private WebElement charged;
-	
-	@FindBy(xpath = ".//*[@id='columnsort4']/table/tbody/tr/td[1]/p/b")
-	private WebElement claimStatus;
-	
-	@FindBy(xpath = ".//*[@id='columnsort5']/table/tbody/tr/td[1]/p/b")
-	private WebElement claimDetails;
-	
-	@FindBy(xpath = ".//*[@id='claim']/tbody/tr[2]/td[6]/form/input[12]")
-	private WebElement moreInfoLink1;
-	
-	@FindBy(xpath = ".//*[@id='searchResultMsg']/p")
-	private WebElement searchResultMsg;
 
 	private PageData medicalClaimsSummary;
 
@@ -134,7 +110,7 @@ public class MedicalClaimSummaryPage extends UhcDriver {
 	public MedicalClaimSummaryPage(WebDriver driver) {
 		super(driver);
 		/*PageFactory.initElements(driver, this);
-	/*	CommonUtility.waitForPageLoad(driver, searchResultMessage, CommonConstants.TIMEOUT_30);
+		CommonUtility.waitForPageLoad(driver, searchResultMessage, CommonConstants.TIMEOUT_30);
 		CommonUtility.waitForPageLoad(driver, customResultMessage, CommonConstants.TIMEOUT_30);
 		CommonUtility.waitForPageLoad(driver, noClaimsFoundMessage, CommonConstants.TIMEOUT_30);*/
 		String fileName = CommonConstants.MEDICAL_CLAIMS_SUMMARY_PAGE_DATA;
@@ -445,12 +421,7 @@ public class MedicalClaimSummaryPage extends UhcDriver {
 		searchRange.sendKeys(claimPeriod);
 		CommonUtility.waitForPageLoad(driver, searchbutton, CommonConstants.TIMEOUT_30);
 		searchbutton.click();
-		try {
-			Thread.sleep(6000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+
 		if (driver.getTitle().equalsIgnoreCase("Claims")) {
 			return new MedicalClaimSummaryPage(driver);
 		}
@@ -497,7 +468,44 @@ public class MedicalClaimSummaryPage extends UhcDriver {
 	@Override
 	public void openAndValidate() {
 
-		
+		JSONObject jsonObject = new JSONObject();
+		for (String key : medicalClaimsSummary.getExpectedData().keySet()) {
+			List<WebElement> elements = findElements(medicalClaimsSummary
+					.getExpectedData().get(key));
+			if (elements.size() == 1) {
+				if (validate(elements.get(0))) {
+					try {
+						jsonObject.put(key, elements.get(0).getText());
+					} catch (JSONException e) {
+						e.printStackTrace();
+					}
+				}
+			} else if (elements.size() > 1) {
+				JSONArray jsonArray = new JSONArray();
+				for (WebElement element : elements) {
+
+					validate(element);
+					try {
+						JSONObject jsonObjectForArray = new JSONObject();
+						jsonObjectForArray.put(medicalClaimsSummary
+								.getExpectedData().get(key).getElementName(),
+								element.getText());
+						jsonArray.put(jsonObjectForArray);
+					} catch (JSONException e) {
+						e.printStackTrace();
+					}
+				}
+				try {
+					jsonObject.put(key, jsonArray);
+				} catch (JSONException e) {
+					e.printStackTrace();
+				}
+
+			}
+
+		}
+		medicalClaimsSummaryJson = jsonObject;
+		System.out.println("medicalClaimsSummaryJson----->"+medicalClaimsSummaryJson);
 
 	}
 
@@ -562,17 +570,5 @@ public class MedicalClaimSummaryPage extends UhcDriver {
 	public String getRxNumber() {
 		// TODO Auto-generated method stub
 		return null;
-	}
-	
-	public boolean validateClaims(){
-		boolean flag = false;
-		CommonUtility.waitForPageLoad(driver, searchResultMsg, CommonConstants.TIMEOUT_30);
-		if(validate(serviceDate)&&validate(providerName)&&validate(claimType)&&validate(charged)&&validate(claimStatus)
-				&&validate(claimDetails)&&validate(moreInfoLink1)&&validate(searchResultMsg)){
-			flag = true;
-			
-		}else
-			System.out.println("Could not verify the Med Claims elements");
-		return flag;
 	}
 }

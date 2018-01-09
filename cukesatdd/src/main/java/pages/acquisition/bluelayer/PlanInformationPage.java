@@ -30,7 +30,7 @@ public class PlanInformationPage extends UhcDriver {
         @FindBy(id = "enrollmentNext")
         private WebElement enrollmentNext;
         
-        @FindBy(xpath = "//div[@class='enrollment_content']/div[2]/form/h3")
+        @FindBy(xpath = ".//*[@id='enrollmentMAForm']/h3")
         private WebElement pageHeading;
         
         private PageData planInformation;
@@ -40,7 +40,7 @@ public class PlanInformationPage extends UhcDriver {
         public PlanInformationPage(WebDriver driver,String planName) {
                 super(driver);
                 PageFactory.initElements(driver, this);
-                if(planName.contains("HMO"))
+                if(planName.contains("HMO") || planName.contains("PPO") )
                 {
                         String fileName = CommonConstants.MA_PLAN_INFORMATION_PAGE_DATA;
                         planInformation = CommonUtility.readPageData(fileName,
@@ -52,12 +52,14 @@ public class PlanInformationPage extends UhcDriver {
                         planInformation = CommonUtility.readPageData(fileName,
                                         CommonConstants.PAGE_OBJECT_DIRECTORY_ULAYER_ACQ);
                 }
-                openAndValidate();
+                //openAndValidate();
         }
 
         @Override
         public void openAndValidate() {
 
+                validate(noRadioButton);
+                validate(yesRadioButton);
                 validate(enrollmentNext);
                 
                 JSONObject jsonObject = new JSONObject();
@@ -93,8 +95,8 @@ public class PlanInformationPage extends UhcDriver {
 
         public BeneficiaryInformationPage navigateToNextStep() {
                 enrollmentNext.click();
-                if(pageHeading.getText().contains("Beneficiary Information"))
-                {	
+                if(pageHeading.getText().equalsIgnoreCase("Step2: Beneficiary Information"))
+                {
                         return new BeneficiaryInformationPage(driver);
                 }
                 return null;

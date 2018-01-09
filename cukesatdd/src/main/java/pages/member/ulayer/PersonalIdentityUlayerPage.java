@@ -39,7 +39,7 @@ public class PersonalIdentityUlayerPage extends UhcDriver {
 
 	@Override
 	public void openAndValidate() {
-		driver.get("https://member."+MRScenario.environment+"-aarpmedicareplans.uhc.com/content/dashboard/guest/username-and-password-assistance.html#/identityassistance");
+		driver.get("https://member."+MRScenario.TeamCEnvironment+"-aarpmedicareplans.uhc.com/content/dashboard/guest/username-and-password-assistance.html#/identityassistance");
 		}
 	
 	

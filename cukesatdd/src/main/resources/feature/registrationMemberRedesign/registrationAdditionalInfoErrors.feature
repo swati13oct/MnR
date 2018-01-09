@@ -2,8 +2,7 @@
 Feature: To test additional information section in dashboard registration flow
 
   Scenario Outline: To verify member is navigated to plan info in registration Additional Information Section using valid Zip/First/Last name
-    Given the member is on sign in page
-    And User click on the register button
+    Given the member is on registration page of new portal part of redesign
     When the member enter the member ID into Member ID field
       | Plan Member ID | <planMemberId> |
     And member enter date of birth in the date of birth dropdown
@@ -35,8 +34,7 @@ Feature: To test additional information section in dashboard registration flow
 
 
     Scenario Outline: To verify member is navigated to plan info in registration Additional Information Section using Medicare number
-    Given the member is on sign in page
-    And User click on the register button
+    Given the member is on registration page of new portal part of redesign
     When the member enter the member ID into Member ID field
       | Plan Member ID | <planMemberId> |
     And member enter date of birth in the date of birth dropdown
@@ -67,8 +65,7 @@ Feature: To test additional information section in dashboard registration flow
 
 
 Scenario Outline: To verify error message is displayed if incorrect Medicare ID is passed in registration Additional Information Section
-    Given the member is on sign in page
-    And User click on the register button
+    Given the member is on registration page of new portal part of redesign
     When the member enter the member ID into Member ID field
       | Plan Member ID | <planMemberId> |
     And member enter date of birth in the date of birth dropdown
@@ -89,8 +86,7 @@ Scenario Outline: To verify error message is displayed if incorrect Medicare ID 
 
 
   Scenario Outline: To verify error message is displayed if incorrect Zip/First/Last name is passed in registration Additional Information Section
-    Given the member is on sign in page
-    And User click on the register button
+    Given the member is on registration page of new portal part of redesign
     When the member enter the member ID into Member ID field
       | Plan Member ID | <planMemberId> |
     And member enter date of birth in the date of birth dropdown
@@ -112,8 +108,7 @@ Scenario Outline: To verify error message is displayed if incorrect Medicare ID 
      # |   0186083571 | 05-27-1951  |   24523 | CDABDF   | FFACFEAFC |
 
       Scenario Outline: To verify error message is displayed if first name is left blank on registration Additional Information Section
-    Given the member is on sign in page
-    And User click on the register button
+    Given the member is on registration page of new portal part of redesign
     When the member enter the member ID into Member ID field
       | Plan Member ID | <planMemberId> |
     And member enter date of birth in the date of birth dropdown
@@ -136,8 +131,7 @@ Scenario Outline: To verify error message is displayed if incorrect Medicare ID 
      
      
        Scenario Outline: To verify error message is displayed if last name is left blank on registration Additional Information Section
-    Given the member is on sign in page
-    And User click on the register button
+    Given the member is on registration page of new portal part of redesign
     When the member enter the member ID into Member ID field
       | Plan Member ID | <planMemberId> |
     And member enter date of birth in the date of birth dropdown
@@ -159,8 +153,7 @@ Scenario Outline: To verify error message is displayed if incorrect Medicare ID 
       #|   0186083571 | 05-27-1951  |   24524 | CDABDAF   |          |
      
   Scenario Outline: To verify error message is displayed if zip code is left blank on registration Additional Information Section
-    Given the member is on sign in page
-    And User click on the register button
+    Given the member is on registration page of new portal part of redesign
     When the member enter the member ID into Member ID field
       | Plan Member ID | <planMemberId> |
     And member enter date of birth in the date of birth dropdown
@@ -182,8 +175,7 @@ Scenario Outline: To verify error message is displayed if incorrect Medicare ID 
       #|   0186083571 | 05-27-1951  |         | CDABDAF   | FFACFEFC |
      
   Scenario Outline: To verify error message is displayed if only zip code is entered on registration Additional Information Section
-    Given the member is on sign in page
-    And User click on the register button
+    Given the member is on registration page of new portal part of redesign
     When the member enter the member ID into Member ID field
       | Plan Member ID | <planMemberId> |
     And member enter date of birth in the date of birth dropdown
@@ -205,8 +197,7 @@ Scenario Outline: To verify error message is displayed if incorrect Medicare ID 
       |   0186083571 | 05-27-1951  |   24524 |           |          |
 
   Scenario Outline: To verify error message is displayed if only first name is entered on registration Additional Information Section
-    Given the member is on sign in page
-    And User click on the register button
+    Given the member is on registration page of new portal part of redesign
     When the member enter the member ID into Member ID field
       | Plan Member ID | <planMemberId> |
     And member enter date of birth in the date of birth dropdown
@@ -228,8 +219,7 @@ Scenario Outline: To verify error message is displayed if incorrect Medicare ID 
       |   0186083571 | 05-27-1951  |         | CDABDAF   |          |
 
   Scenario Outline: To verify error message is displayed if only last name is entered on registration Additional Information Section
-    Given the member is on sign in page
-    And User click on the register button
+    Given the member is on registration page of new portal part of redesign
     When the member enter the member ID into Member ID field
       | Plan Member ID | <planMemberId> |
     And member enter date of birth in the date of birth dropdown
@@ -251,8 +241,7 @@ Scenario Outline: To verify error message is displayed if incorrect Medicare ID 
       |   0186083571 | 05-27-1951  |         |           | FFACFEFC |
 
   Scenario Outline: To verify error message is displayed if all fields are left blank on registration Additional Information Section
-    Given the member is on sign in page
-    And User click on the register button
+    Given the member is on registration page of new portal part of redesign
     When the member enter the member ID into Member ID field
       | Plan Member ID | <planMemberId> |
     And member enter date of birth in the date of birth dropdown

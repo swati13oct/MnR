@@ -31,12 +31,12 @@ import acceptancetests.atdd.data.acquisition.PageConstants;
 import acceptancetests.dce.data.DceCommonConstants;
 import acceptancetests.vpp.data.VPPCommonConstants;
 import atdd.framework.MRScenario;
-import cucumber.api.DataTable;
-import cucumber.api.java.After;
-import cucumber.api.java.en.And;
-import cucumber.api.java.en.Given;
-import cucumber.api.java.en.Then;
-import cucumber.api.java.en.When;
+import cucumber.annotation.en.And;
+import cucumber.annotation.en.Given;
+import cucumber.annotation.en.Then;
+import cucumber.annotation.en.When;
+import cucumber.runtime.PendingException;
+import cucumber.table.DataTable;
 
 /**
  * @author gumeshna
@@ -1385,7 +1385,7 @@ public class VppUmsStepDefinition {
     
     @When("^user comes back to UMS plan summary page and view current year plan$")
 	public void bacK_to_planSummaryPage() {
-/*		String planType = (String) getLoginScenario().getBean(
+		String planType = (String) getLoginScenario().getBean(
 				VPPCommonConstants.PLAN_TYPE);
 		PlanDetailsPage vppPlanDetailsPage = (PlanDetailsPage) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_DETAILS_PAGE);
@@ -1398,7 +1398,7 @@ public class VppUmsStepDefinition {
 		int currentYear = now.get(Calendar.YEAR);
 		getLoginScenario().saveBean(VPPCommonConstants.YEAR,
 				Integer.toString(currentYear));
-*/	}
+	}
 	@And("^the user validate pdf links on UMS site$")
 	public void validate_Pdf_Links(){
 		PlanDetailsPage planDetailsPage = (PlanDetailsPage) getLoginScenario()
@@ -1600,7 +1600,7 @@ public class VppUmsStepDefinition {
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 		boolean flagvalue=vppPlanSummaryPage.validatepassportData();
 	}
-/*@When("^user clicks on yes button on proactive chat$")
+@When("^user clicks on yes button on proactive chat$")
 	public void user_clicks_on_yes_button_on_proactive_chat() {
 		VPPPlanSummaryPage vppPlanSummaryPage = (VPPPlanSummaryPage) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
@@ -1647,5 +1647,5 @@ public class VppUmsStepDefinition {
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 		vppPlanSummaryPage.validateReactiveChat();
 	}
-*/
+
 }

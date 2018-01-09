@@ -58,8 +58,7 @@ public class CountySelectionPage extends UhcDriver{
 
 	@Override
 	public void openAndValidate() {
-//		validate(continueButton);
-
+		validate(continueButton);
 		for(WebElement county : counties)
 		{
 			validate(county);

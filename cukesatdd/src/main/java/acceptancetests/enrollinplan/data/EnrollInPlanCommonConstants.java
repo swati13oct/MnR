@@ -3,9 +3,6 @@
  */
 package acceptancetests.enrollinplan.data;
 
-import java.util.HashMap;
-import java.util.Map;
-
 /**
  * @author pperugu
  *
@@ -37,19 +34,5 @@ public class EnrollInPlanCommonConstants {
 
 	public static final String ADDITIONAL_INFORMATION = "additionalinformation";
 	public static final String CONFIRMATION = "confirmation";
-	public static final String REVIEW_APPLICATION_BLUE_LAYER = "reviewapplication";
-	
-	public static final String ENROLLER_NAME="enrollerName";
-	public static final String ENROLLER_DOB="enrollerDOB";   
-	public static final String ENROLLER_GENDER="enrollerGender";  
-	public static final String ENROLLER_ADDRESS="enrollerAddress";  
-	public static final String ENROLLER_MCARENUMBER="enrollerMcarenumber";
-	public static final String ENROLLER_PHNUMBER="enrollerPhnumberr";
-	public static final String ENROLLER_EMAILADDRESS="enrollerEmailaddress";
-	public static final String ENROLLER_APARTMENT="enrollerApartment";
-	public static final String ENROLLER_CITY="enrollerCity";
-	public static final String ENROLLER_OTHERPHNUMBER="enrollerOtherPhnumber";
-	public static final String ENROLLER_ADDRESSPREFERENCE="enrollerAddressPreference";
-	public static final String ENROLLER_LANGUAGEPREFERENCE="enrollerLanguagePreference";
-	public static final String HAS_ENROLLED = "hasEnrolled";
+	   public static final String REVIEW_APPLICATION_BLUE_LAYER = "reviewapplication";
 }

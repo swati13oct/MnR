@@ -1,0 +1,17 @@
+{
+   "drugs":[
+      {
+         "selectedDrug":"Lipitor TAB 20MG\nQty 40 Every 3 Months",
+         "switchGenericLink":"Switch to generic",
+         "deleteLink":"Delete",
+         "editLink":"Edit"
+      }
+   ],
+   "planResultsLink":"View plan results",
+   "addDrugHeading":"",
+   "currentPharmacy":[
+      {
+         "bottomPharmacyName":"Current Pharmacy: COSTCO PHARMACY 676\nType: Standard Network Pharmacy Edit Pharmacy"
+      }
+   ]
+}

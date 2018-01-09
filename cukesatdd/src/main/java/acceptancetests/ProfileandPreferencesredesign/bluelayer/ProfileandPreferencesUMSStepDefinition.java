@@ -25,12 +25,12 @@ import acceptancetests.atdd.util.CommonUtility;
 import acceptancetests.login.data.LoginCommonConstants;
 import acceptancetests.profandpref.data.ProfnPrefCommonConstants;
 import atdd.framework.MRScenario;
-import cucumber.api.DataTable;
-import cucumber.api.java.After;
-import cucumber.api.java.en.And;
-import cucumber.api.java.en.Given;
-import cucumber.api.java.en.Then;
-import cucumber.api.java.en.When;
+import cucumber.annotation.After;
+import cucumber.annotation.en.And;
+import cucumber.annotation.en.Given;
+import cucumber.annotation.en.Then;
+import cucumber.annotation.en.When;
+import cucumber.table.DataTable;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.WebElement;
 
@@ -114,7 +114,7 @@ public class ProfileandPreferencesUMSStepDefinition {
 
 	@Then("^the user navigates to Profile and Preferences page")
 	public void user_navigate_toProfileandPreferencespage() {
-/*		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstants.ACCOUNT_HOME_PAGE);
+		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstants.ACCOUNT_HOME_PAGE);
 		ProfilePreferencesPage ProfilePreferencesPage = accountHomePage.navigateDirectToProfilePage();
 
 		if (ProfilePreferencesPage!= null) {
@@ -124,12 +124,12 @@ public class ProfileandPreferencesUMSStepDefinition {
 			System.out.println(" Variable is NULL!");
 
 		}
-*/	}
+	}
 	
 	
 	@Then("^the user navigates to Profile page")
 	public void user_navigate_toProfilepage() {
-/*		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstants.ACCOUNT_HOME_PAGE);
+		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstants.ACCOUNT_HOME_PAGE);
 		ProfilePreferencesPage ProfilePreferencesPage = accountHomePage.navigateDirectToProfilePage();
 
 		if (ProfilePreferencesPage!= null) {
@@ -139,7 +139,7 @@ public class ProfileandPreferencesUMSStepDefinition {
 			System.out.println(" Variable is NULL!");
 
 		}
-*/	}
+	}
 	
 	
 	

@@ -5,7 +5,7 @@
 // Global Variables
 def pom, fullGitCommit, pipelineVersion
 def credentialsId = 'c35e98d4-5b20-4607-854e-ddc6f0fd8ba4'
-def codeHubRepoUrl = 'https://codehub.optum.com/consumer-portals/mratdd.git'
+def codeHubRepoUrl = 'codehub.optum.com/consumer-portals/mratdd.git'
 def gitBranch = "${env.BRANCH_NAME}"
 def mvnParams = "-Dgit.branch=${gitBranch} -Dbuild.number=${env.BUILD_NUMBER} -Dbuild.time=${env.BUILD_TIMESTAMP} -Dgit.url=${codeHubRepoUrl}"
 def pomLocation = "cukesatdd/pom.xml"
@@ -28,8 +28,10 @@ def withJavaAndMaven(Closure closure) {
  */
 def withDockerMavenSlave(Closure closure) {
     withJavaAndMaven {
+        node('docker-maven-slave') {
             unstash 'source'
             closure()
+        }
     }
 }
 
@@ -55,28 +57,23 @@ def withUsernamePasswordCredentials(credentialsId, usernameVariable, passwordVar
  * @param codeHubRepUrl - the CodeHub repository URL
  */
 def performGitCheckout(branch, credentialsId, codeHubRepUrl) {
-	git branch: branch, credentialsId: credentialsId, url: codeHubRepUrl
-}
-/**
-* If this is release or hotfix branch, then replace pipeline version with version from branch name: last 3 digits in yy-majorVersion-hotfixversion format
-*
-* @param gitBranch - git branch
-* return String 
-*/
-def updatePipelineVersion(String gitBranch, String pipelineVersion){
-   def matcher = gitBranch ==~ /(RELEASE|HOTFIX)-\d{1,2}-\d{1,2}-\d{1,2}/
-   echo "updatePipelineVersion matcher: ${matcher}"
-   if(matcher){
-		echo "Branch name matched RELEASE|HOTFIX-yy-d{1,2}-d{1,2}-d{1,2} name pattern pattern."
-		def version = gitBranch.replaceAll(/(RELEASE|HOTFIX)-/,'')
-		version = version.replaceAll(/\-/,".")
-		pipelineVersion = "${version}-${env.BUILD_NUMBER}"
-   } else if (gitBranch=="develop"){
-	   echo "Branch name is develop. Use global Jenkins variable UCP_DEVELOP_RELEASE_VERSION to set version to ${UCP_DEVELOP_RELEASE_VERSION}"
-	   pipelineVersion = "${UCP_DEVELOP_RELEASE_VERSION}-d{env.BUILD_NUMBER}"
-   }
-	echo "New version: ${pipelineVersion}"
-	return pipelineVersion
+    checkout([
+        $class: 'GitSCM',
+        branches: [
+            [
+                name: branch
+            ]
+        ],
+        doGenerateSubmoduleConfigurations: false,
+        extensions: [],
+        submoduleCfg: [],
+        userRemoteConfigs: [
+            [
+                credentialsId: credentialsId,
+                url: "https://${codeHubRepUrl}"
+            ]
+        ]
+    ])
 }
 
 /**
@@ -88,16 +85,42 @@ def updatePipelineVersion(String gitBranch, String pipelineVersion){
 *
 */
 def writeBuildPropertiesFile(String gitBranch, String codeHubRepoUrl, String pipelineVersion){
-	writeFile file: 'build.properties', text: "GIT_BRANCH=${gitBranch}\nSOURCE_BUILD_NUMBER=${env.BUILD_NUMBER}\nSOURCE_GIT_URL=${codeHubRepoUrl}\nSOURCE_JOB_NAME=${env.JOB_NAME}\nSOURCE_JOB_URL=${env.JOB_URL}\nPIPELINE_VERSION=${pipelineVersion}"
-		
-	archiveArtifacts artifacts: 'build.properties', fingerprint: true
-}
+        writeFile file: 'build.properties', text: "GIT_BRANCH=${gitBranch}\nSOURCE_BUILD_NUMBER=${env.BUILD_NUMBER}\nSOURCE_GIT_URL=${codeHubRepoUrl}\nSOURCE_JOB_NAME=${env.JOB_NAME}\nPIPELINE_VERSION=${pipelineVersion}"
+            
+        archiveArtifacts artifacts: 'build.properties', fingerprint: true
+        
+    }
 	
+/**
+ * Enable retry of the closure with user input
+ *
+ * @param retryName - what is being retried
+ * @param closure - the closure to retry
+ */
+def enableRetry(retryName, Closure closure) {
+    timeout(time: 1, unit: 'DAYS') {
+        waitUntil {
+            try {
+                closure()
+                return true
+            } catch(e) {
+                echo "Error: ${e.getMessage()}"
+                try {
+                    input "Retry ${retryName}?"
+                } catch (userClickedAbort) {
+                    // User clicked Abort instead of proceed
+                    throw userClickedAbort
+                }
+                return false
+            }
+        }
+    }
+}	
+
 // Pipeline
-node('docker-maven-slave') {
+node {
 
     stage('GiT Clone') {
-		
         // Checkout source code from CodeHub branch
         performGitCheckout(gitBranch, credentialsId, codeHubRepoUrl)
         stash name: 'source'
@@ -106,14 +129,12 @@ node('docker-maven-slave') {
         pom = readMavenPom file: "${pomLocation}"
         fullGitCommit = sh(returnStdout: true, script: 'git rev-parse HEAD').trim()
         pipelineVersion = "${pom.version}-${env.BUILD_NUMBER}"
-		pipelineVersion = updatePipelineVersion(gitBranch, pipelineVersion)
-		writeBuildPropertiesFile(gitBranch, codeHubRepoUrl, pipelineVersion)		
 
         // Set build display name and description
-		currentBuild.displayName = "#${env.BUILD_NUMBER} - ${pipelineVersion}"
+        currentBuild.displayName = pipelineVersion
         currentBuild.description = "Git commit: ${fullGitCommit.take(6)}"
 
-        echo "Building version: ${env.BUILD_NUMBER} from commit: ${fullGitCommit}"
+        echo "Building version: ${pom.version} from commit: ${fullGitCommit}"
     }
 
     stage ('Build') {
@@ -125,14 +146,20 @@ node('docker-maven-slave') {
         }
 
         echo "Build complete"
-		archiveArtifacts artifacts: '**/target/*.war , **/target/*.ear, **/build/*.zip, **/build_info.txt, **/build.properties', fingerprint: true
     }
-    echo "Build complete"
 	
-	stage('Trigger Downstream TestSuite'){
-		//trigger tests
-		if("${env.BRANCH_NAME}" == "upgradedATDD"){
-            build job: '/atdd/ATDD-DataLoad/', wait: false
+
+	stage('Deploy to Artifactory') {
+			unstash 'source'
+
+			// Deploy artifacts to Artifactory and archive them
+			enableRetry('artifact deployment and archiving') {
+				withUsernamePasswordCredentials(credentialsId, 'MAVEN_USER', 'MAVEN_PASS') {
+					withDockerMavenSlave {
+						sh "mvn -f ${pomLocation} clean deploy -B -Dci.env= -DskipTests -DskipITs ${mvnParams}"
+						archiveArtifacts artifacts: '**/target/*.jar', fingerprint: true							
+					}
+				}
+			}
 		}
 	}
-}

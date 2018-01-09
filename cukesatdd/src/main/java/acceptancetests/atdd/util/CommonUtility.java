@@ -5,10 +5,8 @@ package acceptancetests.atdd.util;
 
 import java.io.File;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.Calendar;
 import java.util.Iterator;
-import java.util.List;
 import java.util.TimeZone;
 
 import org.codehaus.jackson.JsonParseException;
@@ -36,7 +34,7 @@ public class CommonUtility {
 	private static String MRREST_TIME_ADMIN_URL = MRConstants.MRREST_TIME_ADMIN_URL;
 
 	private static String PARTD_TIME_ADMIN_URL = MRConstants.PARTD_TIME_ADMIN_URL;
-	
+
 	public static boolean checkPageIsReady(WebDriver driver) {
 
 		JavascriptExecutor js = (JavascriptExecutor) driver;
@@ -272,144 +270,5 @@ public class CommonUtility {
 		}
 
 		return dtmObject;
-	}
-
-	public static void deRegister(MRScenario mrScenario, String username) {
-
-		if (System.getProperty("environment").equalsIgnoreCase("ci")) {
-			WebDriver driver = mrScenario.getWebDriver();
-			driver.get("http://partdtemp-ci.ose.optum.com/PartDPortalWeb/deregister.jsp");
-			driver.findElement(By.id("tobederegisteruser")).click();
-			driver.findElement(By.id("tobederegisteruser")).sendKeys(username);
-			driver.findElement(By.id("tobederegisteruser")).submit();
-			driver.quit();
-		}
-		if (System.getProperty("environment").equalsIgnoreCase("stage")) {
-			WebDriver driver = mrScenario.getWebDriver();
-			driver.get("http://apsrs0261.uhc.com:9080/PartDPortalWeb/deregister.jsp");
-			driver.findElement(By.id("tobederegisteruser")).click();
-			driver.findElement(By.id("tobederegisteruser")).sendKeys(username);
-			driver.findElement(By.id("tobederegisteruser")).submit();
-			driver.quit();
-		}
-		if (System.getProperty("environment").equalsIgnoreCase("test-a")) {
-			WebDriver driver = mrScenario.getWebDriver();
-			driver.get("http://apsrt0245.uhc.com:9080/PartDPortalWeb/deregister.jsp");
-			driver.findElement(By.id("tobederegisteruser")).click();
-			driver.findElement(By.id("tobederegisteruser")).sendKeys(username);
-			driver.findElement(By.id("tobederegisteruser")).submit();
-			driver.quit();
-		}
-		if (System.getProperty("environment").equalsIgnoreCase("test-b")) {
-			WebDriver driver = mrScenario.getWebDriver();
-			driver.get("http://apsrt0247.uhc.com:9080/PartDPortalWeb/deregister.jsp");
-			driver.findElement(By.id("tobederegisteruser")).click();
-			driver.findElement(By.id("tobederegisteruser")).sendKeys(username);
-			driver.findElement(By.id("tobederegisteruser")).submit();
-			driver.quit();
-		}
-
-	}
-
-	public static void createVersionFile(MRScenario mrScenario) {		
-		if (System.getProperty("environment").equalsIgnoreCase("ci")) {
-			WebDriver wd = mrScenario.getWebDriver();
-			try {
-				int widthMaxLimit = 45;
-				PrintWriter writer = new PrintWriter("target/version.txt",
-						"UTF-8");
-				String headerCol1 = "Artifact Name";
-				String headerLine = headerCol1
-						+ String.format(
-								"%" + (widthMaxLimit - headerCol1.length())
-										+ "s", "") + "Build Number";
-				writer.println(headerLine);
-
-				try {
-					wd.get("https://ci-generic.uhc.com/content/cqartifactsversion.html");
-					List<WebElement> rows = wd
-							.findElements(By
-									.xpath("//table[@id='package_info_table']/tbody/tr"));
-
-					for (WebElement row : rows) {
-						String artifactName = row
-								.findElements(By.tagName("td")).get(0)
-								.getText();
-						String buildNumber = row.findElements(By.tagName("td"))
-								.get(1).getText();
-						row.findElements(By.tagName("td")).get(2).getText();
-						String line = artifactName
-								+ String.format(
-										"%"
-												+ (widthMaxLimit - artifactName
-														.length()) + "s", "")
-								+ buildNumber;
-						writer.println(line);
-					}
-				} catch (Exception e1) {
-					// e1.printStackTrace();
-					String cqAritifacts = "CQ Artifacts";
-					String mrrLine = cqAritifacts
-							+ String.format(
-									"%"
-											+ (widthMaxLimit - cqAritifacts
-													.length()) + "s", "")
-							+ "Failed to load CQ Artifacts Info(Deployment Failed)";
-					writer.println(mrrLine);
-					System.out.println("ERROR getting CQ Artifacts version");
-				}
-				String mrrestAppName = "MRRestWAR";
-				try {
-					wd.get("http://mrrest-ci.ose.optum.com/MRRestWAR/version.jsp");
-
-					String mrrLine = mrrestAppName
-							+ String.format("%"
-									+ (widthMaxLimit - mrrestAppName.length())
-									+ "s", "")
-							+ wd.findElement(
-									By.xpath("//table[@class='outer']/tbody/tr[3]/td[2]"))
-									.getText();
-					writer.println(mrrLine);
-				} catch (Exception e2) {
-					// e.printStackTrace();
-					String mrrLine = mrrestAppName
-							+ String.format("%"
-									+ (widthMaxLimit - mrrestAppName.length())
-									+ "s", "")
-							+ "Failed to load Build Number(Deployment Failed)";
-					writer.println(mrrLine);
-					System.out
-							.println("ERROR getting MRREST application version");
-				}
-				String partdAppName = "PartDPortalWeb";
-				try {
-					wd.get("http://partdtemp-ci.ose.optum.com/PartDPortalWeb/version.jsp");
-					String partDLine = partdAppName
-							+ String.format(
-									"%"
-											+ (widthMaxLimit - partdAppName
-													.length()) + "s", "")
-							+ wd.findElement(
-									By.xpath("//table[@class='outer']/tbody/tr[7]/td[2]"))
-									.getText();
-					writer.println(partDLine);
-				} catch (Exception e3) {
-					// e.printStackTrace();
-					String partDLine = partdAppName
-							+ String.format(
-									"%"
-											+ (widthMaxLimit - partdAppName
-													.length()) + "s", "")
-							+ "Failed to load Build Number(Deployment Failed)";
-					writer.println(partDLine);
-					System.out
-							.println("ERROR getting PartD application version");
-				}
-				writer.close();
-			} catch (Exception e) {
-				System.out.println("ERROR creating version text file");
-			}
-			wd.quit();
-		}
 	}
 }

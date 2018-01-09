@@ -2,10 +2,7 @@ package atdd.runners;
 
 import org.junit.runner.RunWith;
 
-import com.github.mkolisnyk.cucumber.runner.ExtendedCucumber;
-import com.github.mkolisnyk.cucumber.runner.ExtendedCucumberOptions;
-
-import cucumber.api.CucumberOptions;
+import cucumber.junit.Cucumber;
 
 /**
  * 
@@ -13,10 +10,11 @@ import cucumber.api.CucumberOptions;
  *
  */
 
-@RunWith(ExtendedCucumber.class)
-@ExtendedCucumberOptions(screenShotSize="", screenShotLocation="/screenshots/",jsonReport = "target/cucumber.json",detailedReport = true, detailedAggregatedReport = true, overviewReport = true, toPDF = true, outputFolder = "target")
-@CucumberOptions(glue = { "atdd.framework", "acceptancetests.fixedtestcases" }, features = { "src/main/resources/feature/fixedtestcases" }, plugin = {
-		"pretty", "html:reports/test-report", "json:target/cucumber.json" }, tags = { "@enrollInPlanulayer,@pharmacylocatorulayer,@pharmacylocatorblayer,@enrollInPlanblayer,@vppUlayer,@vppBlayer,@AcqProviderSearchUlayer,@BlayerProviderSearch,@AcqSEO,@acq_drug_cost_estimator,@acq_drug_cost_estimator_blayer,@ssllabs,@agentAppointment,@attendCommunity" })
+@RunWith(Cucumber.class)
+@Cucumber.Options(glue = { "atdd.framework","acceptancetests.fixedtestcases" }, 
+		features = { "feature/fixedtestcases" }, 
+		format = {
+		"pretty", "html:reports/test-report","json:target/cucumber.json"}, tags ={"@fixedTestCaseTest"})
 public class RunMRATDDFixedTests {
 
 }

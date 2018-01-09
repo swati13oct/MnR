@@ -119,7 +119,8 @@ public class PrescriptionDrugCoveragePage extends UhcDriver{
 				flag = true;
 			return flag;
 		}
-}
+		
+	}
 		
 	
 

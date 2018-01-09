@@ -1,0 +1,17 @@
+{
+   "applyChangesLink":"Close and apply changes",
+   "drugs":[
+      {
+         "selectedDrug":"atorvastatin calcium TAB 20MG\nQty 40 Every 3 Months",
+         "deleteLink":"Delete",
+         "editLink":"Edit"
+      }
+   ],
+   "annualDrugCost":"Estimated annual drug costs: $0.00   ",
+   "addDrugHeading":"",
+   "currentPharmacy":[
+      {
+         "bottomPharmacyName":"Current Pharmacy: Men's Health Foundation\nType: Standard Network Pharmacy Edit Pharmacy"
+      }
+   ]
+}

@@ -8,18 +8,14 @@ import java.util.List;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
 import pages.acquisition.uhcretiree.Rallytool_Page;
 import pages.acquisition.bluelayer.VPPPlanSummaryPage;
 import acceptancetests.atdd.data.CommonConstants;
-import acceptancetests.atdd.data.ElementData;
 import acceptancetests.atdd.data.PageData;
 import acceptancetests.atdd.util.CommonUtility;
 import atdd.framework.UhcDriver;
@@ -57,7 +53,7 @@ public class PlanDetailsPage extends UhcDriver{
 	private WebElement planCost4;
 	
 
-	@FindBy(xpath = ".//*[@id='site-wrapper']/div[4]/div/div/div/div/div/div/div[1]/div/div/a")
+	@FindBy(id = "backToplans")
 	private WebElement backToAllPlans;
 	
 	@FindBy(xpath = "//*[@id='yourDruglist']/div[2]/table/tbody/tr[3]/td/span[2]")
@@ -66,45 +62,9 @@ public class PlanDetailsPage extends UhcDriver{
     @FindBy(xpath = "//*[@id='yourDruglist']/div[2]/table/tbody/tr[4]/td/div[1]/p[1]")
     private WebElement drugListPharmacyName;
 	
-    @FindBy(xpath = "//*[@id='detailplanNameBox']/div/div/div/span/h3")
-	private WebElement planName;
-    
-    @FindBy(xpath=".//*[@id='medicalBenefits']")
-	private WebElement medBenefitsSection;
-	
-	@FindBy(xpath=".//*[@id='po7link']")
-	private WebElement isMyDoctorCoveredLink;
-	
-	@FindBy(xpath=".//*[@id='additionalBenefits']")
-	private WebElement addBenefitsSection;
 
-	@FindBy(xpath=".//*[@id='drugBenefits']")
-	private WebElement drugCoPaysSection;
-	
-	//@FindBy(xpath=".//*[@id='backToplans']")
-	@FindBy(linkText="Back to all plans")
-	private WebElement backToPlansBtn;
-	
-	@FindBy(xpath=".//*[@id='highlights']/div/a[1]") //*[@id='enrollDetails']")
-	private WebElement enrollInPlanBtn;
-	
-	@FindBy(xpath=".//*[@id='optionalRiders']")
-	private WebElement optRiderSection;
-	
-	@FindBy(xpath=".//*[@id='planCost']")
-	private WebElement planCostsSection;
-	
-	 @FindBy(xpath = ".//*[@id='highlights']/div/div/span[1]/label")
-	 private WebElement compareBox;
-	 
-	 @FindBy(xpath = ".//*[@id='highlights']/div/div/span[2]/span/span")
-	 private WebElement compareBoxMessage;
-	 
-	 @FindBy(xpath = ".//*[@id='highlights']/div/div/span[2]/span")
-	 private WebElement compareBoxMessagePDP;
-	    
-	@FindBy(xpath=".//*[@id='_content_uhcmedicaresolutions_en_health-plans_medicare-advantage-plans_plan-detail_jcr_content_contentPar_plandetails_parsys_plandetailstwocoloum_parsys_teaser']")
-	private WebElement planDocsSection;
+	@FindBy(xpath = "//*[@id='detailplanNameBox']/div/div/div/span/h3")
+	private WebElement planName;
 
 	private PageData vppPlanDetails;
 
@@ -115,10 +75,26 @@ public class PlanDetailsPage extends UhcDriver{
 	public JSONObject planDocPDFAcqJson;
 	
 
-	public PlanDetailsPage(WebDriver driver) {
+	public PlanDetailsPage(WebDriver driver,String planName) {
 		super(driver);
 		PageFactory.initElements(driver, this);
-		//openAndValidate();
+		String fileName = null;
+		if(planName.contains("HMO"))
+		{
+			fileName = "maplandetails.json";
+		}
+		if(planName.contains("PDP"))
+		{
+			fileName = "pdpplandetails.json";
+		}
+		if(planName.contains("SNP"))
+		{
+			fileName = "snpplandetails.json";
+		}
+
+		vppPlanDetails = CommonUtility.readPageData(fileName,
+				CommonConstants.PAGE_OBJECT_DIRECTORY_BLUELAYER_ACQ);
+		openAndValidate();
 	}
 
 	public String getPlanDetails() {
@@ -226,52 +202,15 @@ public class PlanDetailsPage extends UhcDriver{
 
 	} 
 
-	public VPPPlanSummaryPage backtoPlanSummaryPage() {
+	public VPPPlanSummaryPage backtoPlanSummaryPage(String planType) {
 		validate(backToAllPlans);
 		if(backToAllPlans != null){
 		backToAllPlans.click();		
-		return new VPPPlanSummaryPage(driver);
+		return new VPPPlanSummaryPage(driver, planType);
 		}
 		
 	return null;
 		
-	}
-	
-	public boolean validatePlandetails(String planName){
-		boolean flag = true;
-		String fileName = null;
-		if(planName.contains("HMO"))
-		{
-			fileName = "maplandetails.json";
-		}
-		if(planName.contains("PDP"))
-		{
-			fileName = "pdpplandetails.json";
-		}
-		if(planName.contains("SNP"))
-		{
-			fileName = "snpplandetails.json";
-		}
-		ElementData elementData = new ElementData("className", "detailplanNameBg");
-		WebElement detailPlanName = findElement(elementData);
-		System.out.println(detailPlanName.isDisplayed());
-		System.out.println("detailPlanName: "+detailPlanName.getText());
-		
-		vppPlanDetails = CommonUtility.readPageData(fileName,
-				CommonConstants.PAGE_OBJECT_DIRECTORY_BLUELAYER_ACQ);
-		for (String key : vppPlanDetails.getExpectedData().keySet()) {
-			WebElement element = findElement(vppPlanDetails.getExpectedData()
-					.get(key));
-			System.out.println("key : "+key);
-			if (element != null) {
-				System.out.println("element.getText() : "+element.getText());
-				flag = validate(element);
-				if(!flag){
-					break;
-				}
-			}
-		}
-		return flag;
 	}
 	
 	public JSONObject getActualPdfLinksData() {
@@ -341,67 +280,8 @@ public class PlanDetailsPage extends UhcDriver{
         
     }
 	
-	    public boolean validatePlanDetailsPage(){
-	    	WebDriverWait wait = new WebDriverWait(driver, 45000);
-	    	
-	    	backToPlansBtn = wait.until(ExpectedConditions.visibilityOfElementLocated(By.linkText("Back to all plans")));
-	    	isMyDoctorCoveredLink = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(".//*[@id='po7link']")));
-	    	medBenefitsSection = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(".//*[@id='medicalBenefits']")));
-	    	
-			boolean flag = false;
-			if(validate(backToPlansBtn)&&validate(isMyDoctorCoveredLink)&&
-					medBenefitsSection.getText().contains("Monthly Premium")){
-				flag = true;
-			}
-			return flag;
-		}
 
-	   
-		public boolean validateCompareBox() {
-			clickCompareBox();
-			try {
-				Thread.sleep(2000);
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			clickCompareBox();
-			if(compareBoxMessage.getText().contains("plans added") && compareBoxMessage.getText().contains("Compare plans"))
-				return true;
-			return false;
-		}
-		
-		public void clickCompareBox(){
-			compareBox.click();
-		}
-		
-		public boolean validateCompareBoxPDP() {
-			clickCompareBox();
-			try {
-				Thread.sleep(2000);
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			
-			if(compareBoxMessagePDP.getText().contains("1 plan added, please select another plan to continue"))
-				return true;
-			return false;
-		}
 
-		public boolean validate2PlansAdded() {
-			clickCompareBox();
-			try {
-				Thread.sleep(2000);
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			
-			if(compareBoxMessage.getText().contains("2 plans added"))
-				return true;
-			return false;
-		}
 }
 
 

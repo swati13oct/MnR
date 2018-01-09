@@ -1712,7 +1712,7 @@ sendkeys(zipcodeInput, zipcode); // not sure what webelement to use
 			e.printStackTrace();
 		}
 		if(currentUrl().contains("#/details")){
-			return new PlanDetailsPage(driver);
+			return new PlanDetailsPage(driver,null);
 		}
 		return null;
 	}

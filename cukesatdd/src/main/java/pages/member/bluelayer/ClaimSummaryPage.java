@@ -67,52 +67,6 @@ public class ClaimSummaryPage extends UhcDriver {
 	
 	@FindBy(xpath = "//p[@id='linktodrugcostbenefit']/p/a")
 	private WebElement linkexistense;
-	
-	@FindBy(xpath = ".//*[@id='columnsort0']/table/tbody/tr/td[1]/p/b")
-	private WebElement dateFilled;
-	
-	@FindBy(xpath = ".//*[@id='columnsort1']/table/tbody/tr/td[1]/p/b")
-	private WebElement rxNumber;
-	
-	@FindBy(xpath = ".//*[@id='columnsort2']/table/tbody/tr/td[1]/p/b")
-	private WebElement medication;
-	
-	@FindBy(xpath = ".//*[@id='columnsort3']/table/tbody/tr/td[1]/p/b")
-	private WebElement pharmacy;
-	
-	@FindBy(xpath = ".//*[@id='columnsort4']/table/tbody/tr/td[1]/p/b")
-	private WebElement memberHasPaid;
-	
-	@FindBy(xpath = ".//*[@id='columnsort5']/table/tbody/tr/td[1]/p/b")
-	private WebElement planHasPaid;
-	
-	@FindBy(xpath = ".//*[@id='columnsort5']/table/tbody/tr/td[1]/p/b")
-	private WebElement otherPayments;
-	
-	@FindBy(xpath = ".//*[@id='columnsort0']/table/tbody/tr/td[1]/p/b")
-	private WebElement serviceDate;
-	
-	@FindBy(xpath = ".//*[@id='columnsort1']/table/tbody/tr/td[1]/p/b")
-	private WebElement providerName;
-	
-	@FindBy(xpath = ".//*[@id='columnsort2']/table/tbody/tr/td[1]/p/b")
-	private WebElement claimType;
-	
-	@FindBy(xpath = ".//*[@id='columnsort3']/table/tbody/tr/td[1]/p/b")
-	private WebElement charged;
-	
-	@FindBy(xpath = ".//*[@id='columnsort4']/table/tbody/tr/td[1]/p/b")
-	private WebElement claimStatus;
-	
-	@FindBy(xpath = ".//*[@id='columnsort5']/table/tbody/tr/td[1]/p/b")
-	private WebElement claimDetails;
-	
-	@FindBy(xpath = ".//*[@id='claim']/tbody/tr[2]/td[6]/form/input[12]")
-	private WebElement moreInfoLink1;
-	
-	@FindBy(xpath = ".//*[@id='searchResultMsg']/p")
-	private WebElement searchResultMsg;
-
 
 	private PageData claimsSummary;
 
@@ -121,9 +75,7 @@ public class ClaimSummaryPage extends UhcDriver {
 	public ClaimSummaryPage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
-
-		//CommonUtility.waitForPageLoad(driver, showClaimHistoryButton,30);
-
+		CommonUtility.waitForPageLoad(driver, showClaimHistoryButton,30);
 		String fileName = CommonConstants.CLAIM_SUMMARY_PAGE_DATA;
 		claimsSummary = CommonUtility.readPageData(fileName,
 				CommonConstants.PAGE_OBJECT_DIRECTORY_BLUELAYER_MEMBER);
@@ -145,14 +97,7 @@ public class ClaimSummaryPage extends UhcDriver {
 
 		String claimPeriod = timeAttributesMap.get("Claim Period");
 		select(searchRange, claimPeriod);
-		CommonUtility.waitForPageLoad(driver, showClaimHistoryButton, 30);
 		showClaimHistoryButton.click();
-		try {
-			Thread.sleep(5000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 		if (driver.getTitle().equalsIgnoreCase(
 				"UnitedHealthcare Medicare Solutions | Claims")) {
 			return new ClaimSummaryPage(driver);
@@ -162,11 +107,11 @@ public class ClaimSummaryPage extends UhcDriver {
 
 	public ClaimSummaryPage searchDrugClaimsByPeriod(
 			Map<String, String> timeAttributesMap) {
-		CommonUtility.waitForPageLoad(driver, showClaimHistoryButton, 35);
+
 		String claimPeriod = timeAttributesMap.get("Claim Period");
 		searchRange.click();
 		searchRange.sendKeys(claimPeriod);
-		
+
 		CommonUtility.checkPageIsReady(driver);
 		showClaimHistoryButton.click();
 
@@ -274,6 +219,25 @@ public class ClaimSummaryPage extends UhcDriver {
 		return null;
 	}
 
+	public DrugClaimDetailsPage getDrugClaimDetail(String category) {
+
+		drugclaimDetail.click();
+
+		CommonUtility.checkPageIsReady(driver);
+		if (this.driver
+				.getTitle()
+				.equalsIgnoreCase(
+						"UnitedHealthcare Medicare Solutions | Prescription Drug Claim Detail")) {
+			if (category.equalsIgnoreCase("Individual")) {
+				return new DrugClaimDetailsPage(driver, category);
+			} else {
+				return new DrugClaimDetailsPage(driver);
+			}
+		}
+		return null;
+
+	}
+
 	public ClaimSummaryPage searchDrugClaimsByPeriod(
 			Map<String, String> timeAttributesMap, String planCategory) {
 		/*
@@ -362,6 +326,46 @@ public class ClaimSummaryPage extends UhcDriver {
 
 		validate(showClaimHistoryButton);
 
+		JSONObject jsonObject = new JSONObject();
+		for (String key : claimsSummary.getExpectedData().keySet()) {
+			List<WebElement> elements = findElements(claimsSummary
+					.getExpectedData().get(key));
+			if (elements.size() == 1) {
+				if (elementFound(elements.get(0))) {
+					try {
+						jsonObject.put(key, elements.get(0).getText());
+					} catch (JSONException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				}
+			} else if (elements.size() > 1) {
+				JSONArray jsonArray = new JSONArray();
+				for (WebElement element : elements) {
+					validate(element);
+					try {
+						JSONObject jsonObjectForArray = new JSONObject();
+						jsonObjectForArray.put(claimsSummary.getExpectedData()
+								.get(key).getElementName(), element.getText());
+						jsonArray.put(jsonObjectForArray);
+					} catch (JSONException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				}
+				try {
+					jsonObject.put(key, jsonArray);
+				} catch (JSONException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+
+			}
+
+		}
+		claimSummaryJson = jsonObject;
+		
+		System.out.println("claimSummaryJson----->"+claimSummaryJson);
 
 	}
 	
@@ -378,7 +382,19 @@ public class ClaimSummaryPage extends UhcDriver {
 		}
 			return null;
 	}
+	
+	public DrugCostandBenefitSummaryPage navigateToPrescriptionDrugCostPage() {
 
+		linkexistense.click();
+	
+		if (getTitle().equalsIgnoreCase(
+						"UnitedHealthcare Medicare Solutions | Drug Cost and Benefits Summary")) {
+			
+			return new DrugCostandBenefitSummaryPage(driver);
+		}
+
+		return null;
+	}
 
 	public boolean validateaddaplanlink() {
 		
@@ -398,29 +414,9 @@ boolean presentLink =false;
 		// TODO Auto-generated method stub
 		
 	}
-
-
-	public boolean validateClaims(){
-		boolean flag = false;
-		if(validate(serviceDate)&&validate(providerName)&&validate(claimType)&&validate(charged)&&validate(claimStatus)
-				&&validate(claimDetails)&&validate(moreInfoLink1)&&validate(searchResultMsg)){
-			flag = true;
-		}else
-			System.out.println("Could not verify the Med Claims elements");
-		return flag;
-	}
 	
-	public boolean validateRxClaims() {
-		boolean flag = false;
-		if(validate(dateFilled)&&validate(rxNumber)&&validate(medication)&&validate(pharmacy)&&validate(memberHasPaid)
-				&&validate(planHasPaid)&&validate(otherPayments)&&validate(searchResultMsg)){
-			flag = true;
-		}else
-			System.out.println("Could not verify the Med Claims elements");
-		return flag;
-	}
-
-
+	
+	
 	
 	
 	

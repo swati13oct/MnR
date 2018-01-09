@@ -27,7 +27,7 @@ public class AddNewDrugModal extends UhcDriver {
 	public WebElement searchButton;
 
 
-	@FindBy(xpath = "//header[@class='add-drug-slide-header']/span[contains(text(),'ADD A NEW DRUG')]")
+	@FindBy(xpath = "//header[@class='add-drug-slide-header']/span[contains(text(),'Add a new drug')]")
 	public WebElement addNewDrugHeading;
 
 	@FindBy(xpath = "//a[text()='Cancel']")
@@ -55,7 +55,9 @@ public class AddNewDrugModal extends UhcDriver {
 	public AddNewDrugModal(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
-	
+		CommonUtility.waitForPageLoad(driver, addNewDrugHeading, 10);
+		String fileName = CommonConstants.ADD_NEW_DRUG_PAGE_DATA;
+		addnewdrug = CommonUtility.readPageData(fileName, CommonConstants.PAGE_OBJECT_DIRECTORY_DCE_MEMBER);
 		//openAndValidate();
 	}
 	@Override
@@ -82,16 +84,17 @@ public class AddNewDrugModal extends UhcDriver {
 		
 	}
 
-	/*public JSONObject getExpectedData(Map<String, JSONObject> expectedDataMap) {
+	public JSONObject getExpectedData(Map<String, JSONObject> expectedDataMap) {
 
 		JSONObject addnewdrugExpectedJson = expectedDataMap.get(CommonConstants.ADD_NEW_DRUG_MODAL);
 
 		return addnewdrugExpectedJson;
-	}*/
-	public AddDrugDetails clickonSearchButton(String DrugName) {
+	}
+	public AddDrugDetails clickonSearchButton(String DrugName) throws InterruptedException {
 		//drugsearchinput.click();
 		drugsearchinput.sendKeys(DrugName);
-		searchButton.click();     
+		Thread.sleep(3000);
+		searchButton.click();
 		waitforElement(continueButton);
 		continueButton.click();
 		//if (driver.getTitle().equalsIgnoreCase("ADD A NEW DRUG")) {

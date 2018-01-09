@@ -1,0 +1,22 @@
+{
+    "selectedDrugInfo": "Add a Drug: Restasis Enter different drug\n*Indicates a required field",
+    "packages": [
+        {
+            "packages": "Plastic Container of 1.0(sold in a package of 30)"
+        },
+        {
+            "packages": "Plastic Container of 1.0(sold in a package of 60)"
+        }
+    ],
+    "quantity": "1",
+    "frequency": [
+        {
+            "frequency": "Every 1 month"
+        },
+        {
+            "frequency": "Every 3 months"
+        }
+    ],
+    "continuebutton": "Continue",
+    "dosages": "Restasis EMU 0.05%"
+}

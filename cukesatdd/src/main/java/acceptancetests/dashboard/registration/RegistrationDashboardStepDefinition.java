@@ -5,17 +5,20 @@ import gherkin.formatter.model.DataTableRow;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+
 import junit.framework.Assert;
+
 import org.openqa.selenium.WebDriver;
 import org.springframework.beans.factory.annotation.Autowired;
-import pages.dashboard.acquisition.DeregisterPage;
-import pages.dashboard.acquisition.RegistrationInformationPage;
-import pages.member.redesign.NewLoginPage;
-import cucumber.annotation.en.And;
-import cucumber.annotation.en.Given;
-import cucumber.annotation.en.Then;
-import cucumber.annotation.en.When;
-import cucumber.table.DataTable;
+
+import pages.acquisition.ulayer.AboutUsAARPPage; import pages.dashboard.acquisition.DeregisterPage;import pages.dashboard.acquisition.RegistrationInformationPage;
+import pages.dashboard.member.ulayer.MemberNewSignInPage;
+import cucumber.api.DataTable;
+import cucumber.api.java.After;
+import cucumber.api.java.en.And;
+import cucumber.api.java.en.Given;
+import cucumber.api.java.en.Then;
+import cucumber.api.java.en.When;
 import acceptancetests.atdd.data.CommonConstants;
 import acceptancetests.atdd.data.acquisition.PageConstants;
 import atdd.framework.MRScenario;
@@ -25,38 +28,41 @@ import atdd.framework.MRScenario;
  * 
  */
 
-@SuppressWarnings("deprecation")
 public class RegistrationDashboardStepDefinition {
-	
-	
-	@Autowired
-	MRScenario loginScenario;
+	 @Autowired
+     MRScenario loginScenario;
+                
+                @Given("^the member is on Registration page$")
+                public void SigninPage() {
+                                // navigate to Sign in page
+                                WebDriver wd = getLoginScenario().getWebDriver();
+                                getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
+                                
+
+                                //create registration context
+                                RegistrationInformationPage registrationInformationPage = new RegistrationInformationPage(wd);
+                                getLoginScenario().saveBean(PageConstants.REGISTRATION_INFORMATION_PAGE, registrationInformationPage);
+                }
+                
+                
+                
+
 
 	public MRScenario getLoginScenario() {
 		return loginScenario;
 	}
-	
-	@Given("^the member is on sign in page$")
-	public void signInPage() {
-			// init Web Driver
-		    WebDriver wd = getLoginScenario().getWebDriver();
-		    getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
-		  
-		// create Sign In context
-		NewLoginPage newLoginPage = new NewLoginPage(wd);
-		getLoginScenario().saveBean(PageConstants.NEW_LOGIN_PAGE, newLoginPage);
-			
-			
-	}
-	
-	@Given("^User click on the register button$")
-	public void clickRegisterButton() throws InterruptedException {
-		NewLoginPage newLoginPage = (NewLoginPage) getLoginScenario().getBean(PageConstants.NEW_LOGIN_PAGE);
-		Thread.sleep(4000);
-		newLoginPage.navigateToRegistration();
-		
-		RegistrationInformationPage registrationInformationPage = new RegistrationInformationPage(newLoginPage.driver);
-		 getLoginScenario().saveBean(PageConstants.REGISTRATION_INFORMATION_PAGE,registrationInformationPage);
+
+	@Given("^the member is on registration page of new portal part of redesign$")
+	public void navigateToRegistrationRedesignPage() {
+		// navigate to Registration page
+		WebDriver wd = getLoginScenario().getWebDriver();
+		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
+
+		// create registration context
+		RegistrationInformationPage registrationInformationPage = new RegistrationInformationPage(wd);
+		getLoginScenario().saveBean(PageConstants.REGISTRATION_INFORMATION_PAGE,
+				registrationInformationPage);
+
 	}
 
 	@When("^the member enter the member ID into Member ID field$")
@@ -75,10 +81,7 @@ public class RegistrationDashboardStepDefinition {
 		// navigate to registration page
 		RegistrationInformationPage registrationInformationPage = (RegistrationInformationPage) getLoginScenario()
 				.getBean(PageConstants.REGISTRATION_INFORMATION_PAGE);
-		Thread.sleep(3000);
-		registrationInformationPage.scroll();
-		Thread.sleep(2000);
-		//registrationInformationPage.waitForRegistrationInformationPage();
+		registrationInformationPage.waitForRegistrationInformationPage();
 		registrationInformationPage.enterMemberID(memberId);
 	}
 
@@ -109,13 +112,13 @@ public class RegistrationDashboardStepDefinition {
 			e.printStackTrace();
 		}
 		
-		registrationInformationPage.scroll();
+		
 		Thread.sleep(2000);
 		registrationInformationPage.getEnterMonth().click();
 		registrationInformationPage.enterMonth(month);
-		Thread.sleep(2000);
+		Thread.sleep(1000);
 		registrationInformationPage.pressEnterMonth();
-		Thread.sleep(2000);
+		Thread.sleep(1000);
 		registrationInformationPage.getEnterDay().click();
 		registrationInformationPage.enterDay(day);
 		Thread.sleep(2000);
@@ -123,7 +126,7 @@ public class RegistrationDashboardStepDefinition {
 		Thread.sleep(2000);
 		registrationInformationPage.getEnterYear().click();
 		registrationInformationPage.enterYear(year);
-		Thread.sleep(2000);
+		Thread.sleep(1000);
 		registrationInformationPage.pressEnterYear();
 		
 		
@@ -168,7 +171,13 @@ public class RegistrationDashboardStepDefinition {
 		String expectedPlanName = memberAttributesMap.get("Plan name");
 		RegistrationInformationPage registrationInformationPage = (RegistrationInformationPage) getLoginScenario()
 				.getBean(PageConstants.REGISTRATION_INFORMATION_PAGE);
-		Thread.sleep(6000);
+		try {
+			Thread.sleep(1000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		Thread.sleep(1000);
 		String actualPlanName = registrationInformationPage.getPlanName().getText();
 		System.out.println(actualPlanName);
 		Assert.assertEquals(expectedPlanName, actualPlanName);
@@ -310,7 +319,6 @@ public class RegistrationDashboardStepDefinition {
 
 	}
 
-	@SuppressWarnings("deprecation")
 	@Then("^Member ID and Date of birth is prepopulated with previously entered values.$")
 	public void Member_ID_and_Date_of_birth_is_prepopulated_with_previously_entered_values(
 			DataTable givenAttributes) {
@@ -335,7 +343,7 @@ public class RegistrationDashboardStepDefinition {
 		try {
 			Thread.sleep(5000);
 		} catch (InterruptedException e) {
-			
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
@@ -394,7 +402,6 @@ public class RegistrationDashboardStepDefinition {
 
 	}
 
-	@SuppressWarnings("deprecation")
 	@Then("^the member validate existing member error message$")
 	public void existingMemberErrorMessage() {
 		RegistrationInformationPage registrationInformationPage = (RegistrationInformationPage) getLoginScenario()
@@ -404,7 +411,6 @@ public class RegistrationDashboardStepDefinition {
 				.toString().contains("existing"));
 	}
 
-	@SuppressWarnings("deprecation")
 	@Then("^the member validate inactive or terminated error message$")
 	public void inactiveTerminatedErrorMessage() {
 		RegistrationInformationPage registrationInformationPage = (RegistrationInformationPage) getLoginScenario()
@@ -414,7 +420,6 @@ public class RegistrationDashboardStepDefinition {
 				.getInactiveTerminatedError().toString().contains("inactive"));
 	}
 
-	@SuppressWarnings("deprecation")
 	@Then("^the member validate future effective error message$")
 	public void futureEffectiveErrorMessage() {
 		RegistrationInformationPage registrationInformationPage = (RegistrationInformationPage) getLoginScenario()
@@ -425,7 +430,6 @@ public class RegistrationDashboardStepDefinition {
 
 	}
 
-	@SuppressWarnings("deprecation")
 	@Then("^the member validate member not found error message$")
 	public void memberNotFoundErrorMessage() {
 		RegistrationInformationPage registrationInformationPage = (RegistrationInformationPage) getLoginScenario()
@@ -443,7 +447,6 @@ public class RegistrationDashboardStepDefinition {
 
 	}
 
-	@SuppressWarnings("deprecation")
 	@Then("the member validates pffs member error message$")
 	public void pffsMemberErrorMessage() {
 		RegistrationInformationPage registrationInformationPage = (RegistrationInformationPage) getLoginScenario()
@@ -474,9 +477,7 @@ public class RegistrationDashboardStepDefinition {
 		String confirmPassword = memberAttributesMap.get("CREATE_ACCOUNT_CONFIRM_PASSWORD");
 		String email = memberAttributesMap.get("CREATE_ACCOUNT_EMAIL");
 		String confirmEmail = memberAttributesMap.get("CREATE_ACCOUNT_CONFIRM_EMAIL");
-		Thread.sleep(3000);
 		registrationInformationPage.waitForCreatePageAccountPage();
-		Thread.sleep(3000);
 		registrationInformationPage.enterUserNameToCreateAccount(userName);
 		registrationInformationPage.enterPasswordToCreateAccount(password);
 		registrationInformationPage.scroll();
@@ -510,13 +511,12 @@ public class RegistrationDashboardStepDefinition {
     	Thread.sleep(5000);
     	
 		// create registration context
-		NewLoginPage newLoginPage = new NewLoginPage(wd);
-		getLoginScenario().saveBean(PageConstants.NEW_LOGIN_PAGE, newLoginPage);
-		NewLoginPage newloginPage = (NewLoginPage) getLoginScenario().getBean(PageConstants.NEW_LOGIN_PAGE);
-		Thread.sleep(4000);
-		newloginPage.navigateToRegistration();
-		RegistrationInformationPage registrationInformationPage = new RegistrationInformationPage(newLoginPage.driver);
-		getLoginScenario().saveBean(PageConstants.REGISTRATION_INFORMATION_PAGE,registrationInformationPage);
+		RegistrationInformationPage registrationInformationPage = new RegistrationInformationPage(
+				wd);
+		getLoginScenario().saveBean(
+				PageConstants.REGISTRATION_INFORMATION_PAGE,
+				registrationInformationPage);
+
 		}
 
 	@Then("^member lands on account confirmation page$")

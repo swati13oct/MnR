@@ -35,12 +35,11 @@ import  acceptancetests.profandpref.data.ProfnPrefCommonConstants;
 import acceptancetests.formsandresources.data.FnRCommonConstants;
 import acceptancetests.login.data.LoginCommonConstants;
 import atdd.framework.MRScenario;
-import cucumber.api.DataTable;
-import cucumber.api.java.After;
-import cucumber.api.java.en.And;
-import cucumber.api.java.en.Given;
-import cucumber.api.java.en.Then;
-import cucumber.api.java.en.When;
+import cucumber.annotation.en.And;
+import cucumber.annotation.en.Given;
+import cucumber.annotation.en.Then;
+import cucumber.annotation.en.When;
+import cucumber.table.DataTable;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.WebElement;
 
@@ -120,7 +119,7 @@ public class ProfileandPreferencesAARPStepDefinition {
 
 	@Then("^the user navigates to Profile and Preferences page")
 	public void user_navigate_toProfileandPreferencespage() {
-/*		pages.member.ulayer.AccountHomePage accountHomePage = (pages.member.ulayer.AccountHomePage) getLoginScenario()
+		pages.member.ulayer.AccountHomePage accountHomePage = (pages.member.ulayer.AccountHomePage) getLoginScenario()
 				.getBean(PageConstants.ACCOUNT_HOME_PAGE);
 		pages.member.ulayer.ProfileandPreferencesPage ProfileandPreferencespage = accountHomePage
 				.navigateDirectToProfileandPreferencesPage();
@@ -134,7 +133,7 @@ public class ProfileandPreferencesAARPStepDefinition {
 		{
 			System.out.println(" Variable is NULL" );
 		}
-*/	}
+	}
 
 	@Then("^the user validates the Plan Name, Member name, Member ID section in AARP site")
 	public void user_Validates_FED_PROFILE_MEMBERNAME_ID() {

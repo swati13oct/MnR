@@ -173,7 +173,16 @@ public class MyProfilesPage extends UhcDriver {
 		openAndValidate();
 	}
 
-	
+	public MyPrefPage selectMyPref() {
+		myPrefTab.click();
+		if (this.driver.getTitle().equalsIgnoreCase(
+				"UnitedHealthcare Medicare Solutions | Go Green")) {
+			return new MyPrefPage(driver);
+		} else {
+			return null;
+		}
+	}
+
 	public void editProfile(Map<String, String> profileAttributesMap) {
 		WebElement accountInfoElement = editLink.get(0);
 		accountInfoElement.findElement(By.linkText("Edit")).click();

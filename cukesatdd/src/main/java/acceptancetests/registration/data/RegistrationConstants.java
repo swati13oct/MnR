@@ -29,6 +29,4 @@ public class RegistrationConstants {
 	
 	public static final String REG_ERROR_PAGE_ACTUAL = "registrationErrorPageActualJson";
 
-	public static final String USER_NAME = "username";
-
 }

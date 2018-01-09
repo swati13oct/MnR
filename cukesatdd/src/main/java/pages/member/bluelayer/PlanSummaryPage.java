@@ -9,13 +9,13 @@ import java.util.Map;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.junit.Assert;
-import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+
 import pages.member.bluelayer.AddPlanPopUpPage;
 import acceptancetests.atdd.data.CommonConstants;
 import acceptancetests.atdd.data.PageData;
@@ -36,32 +36,14 @@ public class PlanSummaryPage extends UhcDriver {
 	@FindBy(linkText = "addaplan")
 	private WebElement addaplanlink;
 	
-	//@FindBy(xpath = ".//*[@id='plan_box']/div[1]/div[2]/div/p[2]/a")
-	//private WebElement searchMedClaimsBtn;
 	
-	
-	
-	@FindBy(id = "btn_viewclaims")
-	private WebElement searchMedClaimsBtn;
-	
-	//@FindBy(xpath = ".//*[@id='plan_box']/div[2]/div[2]/div/p[2]/a")
-	//private WebElement searchDrugClaimsBtn;
-	
-	
-	
-	@FindBy(id = "btn_viewclaims1")
-	private WebElement searchDrugClaimsBtn;
-	
-	@FindBy(id = "btn_searchallclaims1")
-	private WebElement searchAllClaimsBtn;
+	@FindBy(xpath = "//a[@id='btn_viewdetails']")
+   private WebElement viewDetailsButtons;
 
 	@FindBy(xpath = "//div[@id='main_content']/div[2]/div/div[2]/div/div[2]/div/div[2]/div/h3")
 	private WebElement planInformationHeading;
 
-	//@FindBy(xpath = "//div[@id='main_content']/div[2]/div/div[2]/div/div[3]/div/div[2]/div/h3")
-	//private WebElement claimSectionHeading;
-	
-	@FindBy(xpath="//div[@id='main_content']//h3[contains(.,'Claim Activity')]")
+	@FindBy(xpath = "//div[@id='main_content']/div[2]/div/div[2]/div/div[3]/div/div[2]/div/h3")
 	private WebElement claimSectionHeading;
 	
 	@FindBy(xpath = "/html/body/div[6]/div/div/table/tbody/tr[5]/td/div[2]/div/div[2]/div[2]/div[2]/div/div[160]/div[2]/div[1]/div[2]/div/div[3]/div[2]/div[2]/div/div/p/a")
@@ -73,12 +55,9 @@ public class PlanSummaryPage extends UhcDriver {
 	@FindBy(id = "disclosure_link")
 	private WebElement logOut;
 	
-	//@FindBy(xpath = ".//*[@id='plan_box']")
-	//private WebElement claimsPlanBox;
-	
-	@FindBy(id = "plan_box")
-	private WebElement claimsPlanBox;
-	
+	@FindBy(id="btn_viewdetails")
+	private WebElement viewDetailsButton;
+
 	private PageData planSummary;
 
 	public JSONObject planSummaryJson;
@@ -87,10 +66,8 @@ public class PlanSummaryPage extends UhcDriver {
 		super(driver);
 		PageFactory.initElements(driver, this);
 		String fileName = CommonConstants.PLAN_SUMMARY_PAGE_DATA;
-
-		//CommonUtility.waitForPageLoad(driver, planInformationHeading,CommonConstants.TIMEOUT_30);
-		//CommonUtility.waitForPageLoad(driver, claimSectionHeading,CommonConstants.TIMEOUT_30);
-
+		CommonUtility.waitForPageLoad(driver, planInformationHeading,10);
+		CommonUtility.waitForPageLoad(driver, claimSectionHeading,10);
 		planSummary = CommonUtility.readPageData(fileName,
 				CommonConstants.PAGE_OBJECT_DIRECTORY_BLUELAYER_MEMBER);
 		openAndValidate();
@@ -107,20 +84,30 @@ public class PlanSummaryPage extends UhcDriver {
 		openAndValidate();
 	}
 
-
 	public AddPlanPopUpPage clickAddPlan() {
 		addAnotherPlanLink.click();
 		CommonUtility.checkPageIsReady(driver);
 		return new AddPlanPopUpPage(driver);
 	}
 
-
-
 	public void logOut() {
 		logOut.click();
 
 	}
-
+	public Rallytool_Page clickAndValidateProviderSearch(){
+		  // waitforElement(searchProviderButton);
+		   searchProvider.click();
+		   switchToNewTab();
+		   if(currentUrl().contains("connect.werally.com")){
+			   System.out.println("Rally Tool Launched Sucessfully");
+			   System.out.println("--------------Page Title="+getTitle());
+			   return new Rallytool_Page(driver);
+		   }else{
+			   System.out.println("-------------Failed as rally did not launch in new tab-------------");
+			   Assert.fail();
+			   return null;
+		   }
+	   }
 	@Override
 	public void openAndValidate() {
 		/*
@@ -162,6 +149,14 @@ public class PlanSummaryPage extends UhcDriver {
 	}
 
 
+	public DrugCostandBenefitSummaryPage navigateToViewDetails() {
+		viewdetailbutton.click();
+		if (getTitle().equalsIgnoreCase(
+						"UnitedHealthcare Medicare Solutions | Drug Cost and Benefits Summary")) {
+			return new DrugCostandBenefitSummaryPage(driver);
+		}
+		return null;
+		}
 	public void validatePlanName(){
     	String planName = LoginCommonConstants.PLAN_NAME;
     	System.out.println(planName);
@@ -208,10 +203,10 @@ public class PlanSummaryPage extends UhcDriver {
 		boolean presentLink =false;
 		
 		try {
-		//	if(viewDetailsButtons.isDisplayed()){
+			if(viewDetailsButtons.isDisplayed()){
 				
 				presentLink = true;
-		//	}			  
+			}			  
 			 
 		} catch (NoSuchElementException e) {
 			presentLink = false;
@@ -222,8 +217,24 @@ public class PlanSummaryPage extends UhcDriver {
 		// TODO Auto-generated method stub
 		
 	}
-	
+	public DrugCostandBenefitSummaryPage clickViewDetails() {
+		viewDetailsButton.click();
+		try {
+			Thread.sleep(10000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		if (getTitle().equalsIgnoreCase(
+						"UnitedHealthcare Medicare Solutions | Drug Cost and Benefits Summary")) {
+			System.out.println("entered this method");
+			return new DrugCostandBenefitSummaryPage(driver);
+		}
 
+		return null;
+		
+	}
+	
 	public boolean validateaddaplanlink() {
 		
 	boolean presentLink =false;
@@ -242,44 +253,6 @@ public class PlanSummaryPage extends UhcDriver {
 		// TODO Auto-generated method stub
 		
 	}
-
-	
-
-	public boolean validateClaims() {
-		boolean flag = false;
-		CommonUtility.waitForPageLoad(driver, claimSectionHeading,CommonConstants.TIMEOUT_30);
-		if(validate(claimSectionHeading)&&validate(claimsPlanBox)){
-				flag = true;
-		}
-		return flag;
-	}
-	
-	public ClaimSummaryPage navigateToMedicalClaimsSummary() {
-		
-		searchMedClaimsBtn.click();
-		try {
-			Thread.sleep(2000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		if (getTitle().equalsIgnoreCase(
-				"UnitedHealthcare Medicare Solutions | Claims")) {
-			return new ClaimSummaryPage(driver);
-		}
-		return null;
-	}
-	public ClaimSummaryPage navigateToDrugClaimsSummary() {
-		CommonUtility.waitForPageLoad(driver, searchAllClaimsBtn, 25);
-		searchAllClaimsBtn.click();
-		if (getTitle().equalsIgnoreCase(
-				"UnitedHealthcare Medicare Solutions | Claims")) {
-				return new ClaimSummaryPage(driver);
-		}
-		return null;
-	}
-	
-
 }
 
 

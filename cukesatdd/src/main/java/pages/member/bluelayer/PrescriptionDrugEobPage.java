@@ -47,8 +47,8 @@ public class PrescriptionDrugEobPage extends UhcDriver {
 	@FindBy(className = "shipbtnEobHistory")
 	private WebElement shipbtnEobHistory;
 
-	@FindBy(xpath = ".//*[@id='eobSearchForm']/div[2]/div[2]/div[2]/table")
-	private WebElement eobTable; 
+	@FindBy(id = "eobtable")
+	private WebElement eobtable;
 
 	private PageData prescriptionDrugEob;
 
@@ -58,9 +58,9 @@ public class PrescriptionDrugEobPage extends UhcDriver {
 		super(driver);
 		PageFactory.initElements(driver, this);
 		String fileName = CommonConstants.PRESCRIPTION_DRUG_EOB_PAGE_DATA;
-		/*prescriptionDrugEob = CommonUtility.readPageData(fileName,
-				CommonConstants.PAGE_OBJECT_DIRECTORY_BLUELAYER_MEMBER);*/
-	
+		prescriptionDrugEob = CommonUtility.readPageData(fileName,
+				CommonConstants.PAGE_OBJECT_DIRECTORY_BLUELAYER_MEMBER);
+		openAndValidate();
 	}
 
 	public PrescriptionDrugEobPage searchesPresDrugEob(
@@ -80,7 +80,6 @@ public class PrescriptionDrugEobPage extends UhcDriver {
 		String toDayInput = toDateArray[1];
 		String toYearInput = toDateArray[2];
 
-		CommonUtility.waitForPageLoad(driver, fromMonth, 20);
 		sendkeys(fromMonth, fromMonthInput);
 		sendkeys(fromDay, fromDayInput);
 		sendkeys(fromYear, fromYearInput);
@@ -96,6 +95,9 @@ public class PrescriptionDrugEobPage extends UhcDriver {
 
 	}
 
+	public String getPrescriptionDrugEobContent() {
+		return eobtable.getText();
+	}
 
 	@Override
 	public void openAndValidate() {
@@ -131,19 +133,6 @@ public class PrescriptionDrugEobPage extends UhcDriver {
 	public void logOut() {
 		logOut.click();
 
-	}
-	
-	public boolean validateEOBs(){
-		try {
-			Thread.sleep(4000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		if(eobTable.getText().contains("EOB Date")&&eobTable.getText().contains("My EOB Statements")&&
-				eobTable.getText().contains("Download EOB (PDF)"))
-			return true;
-		return false;
 	}
 
 }

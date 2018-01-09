@@ -7,7 +7,6 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -33,7 +32,7 @@ public class SelectPharmacyPage extends UhcDriver {
 	@FindBy(xpath = "//div[@id='dce.member']/div/div[4]/div/div/div[1]/div[1]/div[2]")
 	WebElement  selectPharmacyTab;
 	
-	@FindBy(xpath = ".//*[@id='dceMemberUlayer']/div/div[1]/div[1]/h3[3]")
+	@FindBy(xpath = "//div[@id='dce.member']/div/div[4]/div/div/div[1]/div[1]/div[3]")
 	WebElement viewDrugCostTab1;
 
 	@FindBy(xpath = "//div[@id='dce.member']/div/div[5]/div/div/form/div/div/div[1]/div[1]/div[3]")
@@ -48,7 +47,7 @@ public class SelectPharmacyPage extends UhcDriver {
 	@FindBy(className = "viewDrugCost")
 	private WebElement drugCostTable;
 
-	@FindBy(className = "dcePharmacyTable")
+	@FindBy(className = "tablePharmacy")
 	private WebElement pharmacyTable;
 
 	@FindBy(className = "milesSelection")
@@ -59,9 +58,6 @@ public class SelectPharmacyPage extends UhcDriver {
 
 	@FindBy(linkText = "select")
 	private WebElement selectPharmacyButton;
-	
-	@FindBy(xpath = ".//*[@id='dceMemberUlayer']/div/div[1]/div[2]/div[5]/a[3]/span")
-	private WebElement viewDrugCostBtn;
 	
 	@FindBy(xpath = "//*[@id='dceMemberUlayer']/div/div[1]/div[3]/div[2]/table/tbody/tr[2]/td[3]/div")
 	private WebElement drugCostsValue;
@@ -77,7 +73,7 @@ public class SelectPharmacyPage extends UhcDriver {
 		System.out.println("filename"+fileName);
 		selectPharmacy = CommonUtility.readPageData(fileName,
 				CommonConstants.PAGE_OBJECT_DIRECTORY_BLUELAYER_MEMBER);
-		//openAndValidate();
+		openAndValidate();
 	}
 
 	public SelectPharmacyPage(WebDriver driver, String category) {
@@ -91,8 +87,8 @@ public class SelectPharmacyPage extends UhcDriver {
 	}
 
 	public SelectPharmacyPage selectTypeDistance(String pharmacyType,
-			String distance) {
-		((JavascriptExecutor) driver).executeScript("scroll(0, -250);");
+			String distance, String category) {
+
 		List<WebElement> pharmacies = pharmacyOptions.findElements(By
 				.tagName("input"));
 		for (WebElement pharmacy : pharmacies) {
@@ -106,13 +102,16 @@ public class SelectPharmacyPage extends UhcDriver {
 
 		select(distances, distance);
 
-		 if(pharmacyHeading.getText().contains("select a pharmacy")){
+		if (pharmacyHeading.getText().contains("select a pharmacy") && category.equalsIgnoreCase(CommonConstants.GROUP)) {
+			return new SelectPharmacyPage(driver,category);
+		}
+		else if(pharmacyHeading.getText().contains("select a pharmacy")){
 			return new SelectPharmacyPage(driver);
 		}
 		return null;
 	}
 
-	public ViewDrugCostPage selectPharmacy(String pharmacyName) {
+	public ViewDrugCostPage selectPharmacy(String pharmacyName, String category) {
 
 		CommonUtility.waitForPageLoad(driver, pharmacyTable,CommonConstants.TIMEOUT_30);
 		List<WebElement> pharmacyRows = pharmacyTable.findElements(By
@@ -146,61 +145,17 @@ public class SelectPharmacyPage extends UhcDriver {
 						e.printStackTrace();
 					}
 				}
-				
+
+				if(category.equalsIgnoreCase(CommonConstants.GROUP)){
+					return new ViewDrugCostPage(driver,category);
+				}
+				else{
 					return new ViewDrugCostPage(driver);
-				
+				}
 
 			}
 		}
 		return null;
-	}
-	@FindBy(xpath = ".//*[@id='dceMemberUlayer']/div/div[1]/div[2]/div[2]/div[5]/a[1]")
-	private WebElement zipcodeLink;
-	
-	@FindBy(xpath = ".//*[@id='dceMemberUlayer']/div/div[1]/div[2]/div[2]/div[5]/a[2]/span")
-	private WebElement enterZipBtn;
-	
-	@FindBy(xpath = ".//*[@id='dceMemberUlayer']/div/div[1]/div[2]/div[2]/div[5]/span[3]/input")
-	private WebElement zipcodeField;
-	
-	@FindBy(xpath = ".//*[@id='dceMemberUlayer']/div/div[1]/div[2]/div[2]/div[7]/table/tbody/tr[2]/td[5]/a/span")
-	private WebElement select_first_btn;
-	
-	public void selectPharmacy(){
-		if(select_first_btn.isDisplayed())
-			select_first_btn.click();
-	}
-	@FindBy(xpath = ".//*[@id='dceMemberUlayer']/div/div[1]/div[3]/div[2]/table/tbody/tr[2]/td[1]")
-	private WebElement descBox;
-	
-	public ViewDrugCostPage navigateToStep3(){
-		JavascriptExecutor js = (JavascriptExecutor)driver;
-		js.executeScript("arguments[0].click();", viewDrugCostTab1);
-		if(descBox.getText().contains("Total estimated annual drug costs"))
-			return new ViewDrugCostPage(driver);
-		return null;
-	}
-	public void changeZipcode(String zipcode){
-		
-		try {
-			Thread.sleep(3000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		JavascriptExecutor js = (JavascriptExecutor)driver;
-		js.executeScript("arguments[0].click();", zipcodeLink);
-		zipcodeField.click();
-		zipcodeField.sendKeys(zipcode);
-		enterZipBtn.click();
-		try {
-			Thread.sleep(3000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-		
 	}
 
 

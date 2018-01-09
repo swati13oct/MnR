@@ -27,12 +27,11 @@ import acceptancetests.atdd.data.member.PageConstants;
 import acceptancetests.login.data.LoginCommonConstants;
 import acceptancetests.plansummary.data.PlanSummaryCommonConstants;
 import atdd.framework.MRScenario;
-import cucumber.api.DataTable;
-import cucumber.api.java.After;
-import cucumber.api.java.en.And;
-import cucumber.api.java.en.Given;
-import cucumber.api.java.en.Then;
-import cucumber.api.java.en.When;
+import cucumber.annotation.After;
+import cucumber.annotation.en.Given;
+import cucumber.annotation.en.Then;
+import cucumber.annotation.en.When;
+import cucumber.table.DataTable;
 
 /**
  * @author pagarwa5
@@ -250,7 +249,7 @@ public class PlanSummaryUmsStepDefintion {
 	public void user_click_on_view_details_button() {
 		PlanSummaryPage planSummaryPage = (PlanSummaryPage) getLoginScenario()
 				.getBean(PageConstants.PLAN_SUMMARY_PAGE);
-		// planSummaryPage.navigateToViewDetails();
+		 planSummaryPage.navigateToViewDetails();
 		
 		// planSummaryPage.logOut();     
 		 

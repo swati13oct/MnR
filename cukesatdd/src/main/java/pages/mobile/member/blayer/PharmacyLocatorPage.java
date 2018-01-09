@@ -1,9 +1,13 @@
 package pages.mobile.member.blayer;
 
+import java.util.List;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.junit.Assert;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.Alert;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -13,6 +17,7 @@ import acceptancetests.atdd.data.PageData;
 import acceptancetests.atdd.mobile.data.CommonConstants;
 import acceptancetests.atdd.util.CommonUtility;
 import atdd.framework.UhcDriver;
+import pages.mobile.member.ulayer.PharmacyLocatorFilterPage;
 
 /**
  * @author Bhaji Shaik
@@ -109,7 +114,30 @@ public class PharmacyLocatorPage extends UhcDriver {
 			System.out.println("logout button not found on page");
 		}
 	}
-
+	
+	public void narrowSearchValidation(){
+		btnFilter.click();
+		List<WebElement> elements = driver.findElements(By.xpath("//span"));
+		for(int i=0; i<elements.size();i++){
+			System.out.println(elements.get(i).getText());
+			if(elements.get(i).getText().contains("Mail Service")){
+				System.out.println("--------------Failed due to Presence of Mail Service CheckBox--------------");
+				Assert.fail();
+			}
+		}
+		System.out.println("narrow search radio button verified");
+		toolTip.click();
+		List<WebElement> toolTipElement = driver.findElements(By.xpath("//b"));
+		for(int i=0; i<toolTipElement.size();i++){
+			System.out.println(toolTipElement.get(i).getText());
+			if(toolTipElement.get(i).getText().contains("Mail Service")){
+				System.out.println("---------------Failed due to presence of Mail Service in Tool Tip------------");
+				Assert.fail();
+			}
+		}
+		System.out.println("tool tip verified");
+	}
+	
 	public JSONObject getBrowserCheck() {
 
 		String fileName = CommonConstants.MOBILE_BROWSER_CHECK_DATA_BLUELAYER;
@@ -136,8 +164,6 @@ public class PharmacyLocatorPage extends UhcDriver {
 		return browserCheckJson;
 
 	}
-	
-	
 	/**
 	 * This method gives the colour based on the rgb colour coding
 	 * @param colour
@@ -153,6 +179,7 @@ public class PharmacyLocatorPage extends UhcDriver {
 		}else{
 			return "";
 		}
+		
 		/*switch (colour.toLowerCase()) {
 		case "rgb(229, 115, 115)":
 			return "Red";
@@ -160,7 +187,8 @@ public class PharmacyLocatorPage extends UhcDriver {
 			return "Blue";
 		default:
 			break;
-		}*/
+		}
+		return "";*/
 	}
 	
 	/**
@@ -209,9 +237,11 @@ public class PharmacyLocatorPage extends UhcDriver {
 		Assert.assertEquals(expectedFirstPharmacyResultText, actualFirstPharmacyResultText);
 		back.click();
 		validateStandardNetworkPharmacy();
-		//validatePharmacySaverPharmacy();
-		validatePreferredPharmacyNetwork();
+		validatePharmacySaverPharmacy();
 	}
-	
-
+	public PharmacyLocatorFilterPage clickOnFilterButton(){
+		waitforElement(btnFilter);
+		btnFilter.click();
+		return new PharmacyLocatorFilterPage(driver);
+	}
 }

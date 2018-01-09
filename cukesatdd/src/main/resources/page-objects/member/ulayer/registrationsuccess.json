@@ -24,6 +24,10 @@
 "emailAddress" :{
 "identifier": "id",
 "elementName": "consumerEmail"
+},
+"goGreen" :{
+"identifier": "className",
+"elementName": "paperlessAcknowledgementFlagGOVT"
 }
 }
 }

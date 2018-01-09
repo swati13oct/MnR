@@ -13,7 +13,6 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
 import acceptancetests.atdd.data.CommonConstants;
-import acceptancetests.atdd.data.ElementData;
 import acceptancetests.atdd.data.PageData;
 import acceptancetests.atdd.util.CommonUtility;
 import atdd.framework.UhcDriver;
@@ -24,7 +23,7 @@ import atdd.framework.UhcDriver;
  */
 public class IntroductionInformationPage extends UhcDriver{
 	
-	@FindBy(id="firstnametextbox")
+	@FindBy(xpath = "//input[@id='firstnametextbox']")
 	private WebElement firstNameField;
 	
 	@FindBy(id = "middlenametextbox")
@@ -48,14 +47,8 @@ public class IntroductionInformationPage extends UhcDriver{
 	@FindBy(id="disclaimerAgreeBtndisclaimer")
 	private WebElement disclaimeragreebtn;
 	
-	@FindBy(id="beginOnlineEnrollmentbtn")
+	@FindBy(xpath = "//*[@id='beginOnlineEnrollmentbtn']")
 	private WebElement enrollmentNext;
-	
-	@FindBy(id = "beginOnlineEnrollmentBtn")
-	private WebElement beginOnlineEnrBtn;
-	
-	@FindBy(xpath = "//div[@id='beginOnlineEnrollment']/span")
-	private WebElement alreadyEnrolledErrorMsg;
 	
 	@FindBy(xpath = "//div[@id='disclaimer']/div/p")
 	private WebElement disclaimerHeading;
@@ -69,22 +62,22 @@ public class IntroductionInformationPage extends UhcDriver{
 	public IntroductionInformationPage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
-		String fileName = CommonConstants.INTRODUCTION_INFORMATION_PAGE_DATA;
-		introductionInformation = CommonUtility.readPageData(fileName,
-				CommonConstants.PAGE_OBJECT_DIRECTORY_ULAYER_ACQ);
-		openAndValidate();
+//		String fileName = CommonConstants.INTRODUCTION_INFORMATION_PAGE_DATA;
+//		introductionInformation = CommonUtility.readPageData(fileName,
+//				CommonConstants.PAGE_OBJECT_DIRECTORY_ULAYER_ACQ);
+//		openAndValidate();
 	}
 
 	@Override
 	public void openAndValidate() {
 		
-		/*validate(firstNameField);
+		validate(firstNameField);
 		validate(middleInitialField);
 		validate(lastNameField);
 		validate(claimNumberField);
 		validate(partAStartDateField);
 		validate(partBStartDateField);
-		validate(viewEnrollDisclaimer);*/
+		validate(viewEnrollDisclaimer);
 		
 		JSONObject jsonObject = new JSONObject();
 		for (String key : introductionInformation.getExpectedData().keySet()) {
@@ -143,51 +136,31 @@ public class IntroductionInformationPage extends UhcDriver{
 
 	public BeneficiaryInformationPage navigatesToNextStep() {
 		enrollmentNext.click();
-		
 		try {
 			Thread.sleep(10000);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
-/*		ElementData elementData = new ElementData("id","step2Heading");
-		try {
-			CommonUtility.waitForElementToDisappear(driver, enrollmentNext,
-					CommonConstants.TIMEOUT_30);
-			CommonUtility.waitForPageLoad(driver, findElement(elementData),
-					CommonConstants.TIMEOUT_30);
-		}
-		catch(Exception e)
-		{
-			return null;
-		}*/
-		
-		ElementData elementData = new ElementData("id","step2Heading");
-		
-		
-		if(null !=findElement(elementData)  && findElement(elementData).getText().equalsIgnoreCase("Step 2: Personal Information"))
-		{
-			return new BeneficiaryInformationPage(driver);
-		}
-		
-		return null;
-        
+        return new BeneficiaryInformationPage(driver);
 	}
 	
-
+	@FindBy(id = "beginOnlineEnrollmentBtn")
+	private WebElement beginOnlineEnrBtn;
 	
 	public boolean validateIntroPage(){
+		try {
+			Thread.sleep(5000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 		boolean flag = false;
 		if(validate(firstNameField) && validate(middleInitialField) && validate(lastNameField) &&validate(claimNumberField) &&
 		   validate(partAStartDateField)&&validate(partBStartDateField)&&validate(viewEnrollDisclaimer) && !validate(beginOnlineEnrBtn)){
 			flag = true;
 		}
 		return flag;
-	}
-
-	public boolean hasEnrolledInLast24hrs() {
-		return validate(alreadyEnrolledErrorMsg);
-	
 	}
 }

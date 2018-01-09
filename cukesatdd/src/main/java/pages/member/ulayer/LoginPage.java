@@ -4,8 +4,10 @@
 package pages.member.ulayer;
 
 
+
 import org.json.JSONException;
 import org.json.JSONObject;
+
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.NoAlertPresentException;
 import org.openqa.selenium.UnhandledAlertException;
@@ -33,10 +35,8 @@ public class LoginPage extends UhcDriver {
 
 	// Page URL
 	private static String PAGE_URL = MRConstants.AARPM_URL;
-	private static String REDESIGN_PAGE_URL = MRConstants.REDESIGN_AARPM_URL;
-	private static String PAGE_URL_TEST_HARNESS = MRConstants.AARPM_URL_TEAMB_TESTHARNESS;
-	private static String PAGE_URL_OFFLINE = MRConstants.AARPM_URL_OFFLINE;
-		
+	private static String REDESIGN_PAGE_URL = MRConstants.REDESIGN_AARPM_URL;	private static String PAGE_URL_TEST_HARNESS = MRConstants.AARPM_URL_TEAMB_TESTHARNESS;
+	
 	private static String PAGE_URL_TEAM_H_TEST_HARNESS = MRConstants.TEAMH_URL_TESTHARNES;
 	private static String PAGE_URL_TEAM_MEDICARE_TESTHARNESS = MRConstants.TEAM_MEDICARE_TESTHARNESS;
 	
@@ -47,23 +47,14 @@ public class LoginPage extends UhcDriver {
 	@FindBy(id = "loginPOPUPuser")
 	private WebElement userNameField;
 
-	@FindBy(xpath = "//div[@id='IPEinvL']/map/area[@alt='close']")
-	private WebElement alertClosebutton;
-
 	@FindBy(id = "loginPOPUPpass")
 	private WebElement passwordField;
 
-	@FindBy(xpath = ".//*[@id='fd_signInPanel']/div[2]/div[4]/button")
+	@FindBy(xpath = "//div[@class='fd_userPassSection']/button")
 	private WebElement signInButton;
 
 	@FindBy(linkText = "Forgot your username or password?")
 	private WebElement forgotUsernamePasswordLink;
-	
-	@FindBy(xpath = "//*[@id='gogreenlogin_box']/div[4]/div")
-	private WebElement gogreenPopup;
-	
-	@FindBy(xpath = "//*[@id='gogreenlogin_box']/div[4]/div/a")
-	private WebElement gogreenPopupClose;
 
 	@FindBy(id = "usercheckbox")
 	private WebElement userNameCheckBox;
@@ -109,45 +100,20 @@ public class LoginPage extends UhcDriver {
 
 		if (MRScenario.environment.equals("awe-dev-b") || MRScenario.environment.equals("dev-a") || MRScenario.environment.equals("dev-c") || MRScenario.environment.equals("team-b") || MRScenario.environment.equals("team-a") || MRScenario.environment.equals("team-c") || MRScenario.environment.equals("team-e")) {
 
+			while(isAlertPresent(driver));
+			
+		}
+
+		
+
+		if (MRScenario.environment.equals("team-d")) {
+
 			Alert alert = driver.switchTo().alert();
 			alert.accept();
 			Alert alert1 = driver.switchTo().alert();
 			alert1.accept();
+			        }
 
-			/*if (!(MRScenario.environment.equals("awe-dev-b") || MRScenario.environment.equals("dev-c") || MRScenario.environment.equals("team-b"))){
-				Alert alert2 = driver.switchTo().alert();
-				alert2.accept();
-			}*/
-		}
-		/*
-		if ( MRScenario.environment.equals("dev-a") || MRScenario.environment.equals("dev-c")
-		|| MRScenario.environment.equals("team-a")) {
-		Alert alert = driver.switchTo().alert();
-        alert.accept();
-        Alert alert1 = driver.switchTo().alert();
-        alert1.accept();        
-        	if (!MRScenario.environment.equals("dev-c")){
-        		Alert alert2 = driver.switchTo().alert();
-        		alert2.accept();
- 			}
-
- 		}*/
-
-		try {
-			Thread.sleep(5000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		if(alertClosebutton!=null) {
-			try{
-				if(alertClosebutton.isDisplayed())
-					alertClosebutton.click();
-			} catch (Exception e) {
-				System.out.println("Alert is not displayed");
-			}
-		}
-		
 		if(currentUrl().contains("home/my-account-home.html"))
 
 		{
@@ -178,12 +144,14 @@ public class LoginPage extends UhcDriver {
 
 	@Override
 	public void openAndValidate() {
-		if (( MRScenario.environment.equals("offline"))) {
-			start(PAGE_URL_OFFLINE);
+if(MRScenario.environment.equals("team-e")){
+			start(MRConstants.NEW_REDESIGN_URL);
+			
 		}else{
 			start(PAGE_URL);
-		}
-	}
+			validate(loginIn);
+		}	}
+
 	public JSONObject getBrowserCheck() {
 		String fileName = CommonConstants.AARPM_BROWSER_CHECK_DATA;
 		browserCheckData = CommonUtility.readPageData(fileName,
@@ -208,14 +176,6 @@ public class LoginPage extends UhcDriver {
 
 		return browserCheckJson;
 
-	}
-
-	public LoginPage validateLoginPage(){
-		if (driver.getTitle().equalsIgnoreCase(
-				"AARP Medicare Plans | Home")) {
-			return new LoginPage(driver);
-		} else
-			return null;
 	}
 	
 	public static boolean isAlertPresent(WebDriver wd) {

@@ -418,7 +418,7 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 		// TODO Auto-generated method stub
 		JavascriptExecutor jse = (JavascriptExecutor) driver;
 		jse.executeScript("window.scrollBy(0,3000)", "");
-		validate(disclaimersLink);
+		validateNew(disclaimersLink);
 		disclaimersLink.click();
 		try {
 			Thread.sleep(10000);
@@ -768,65 +768,65 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 	public void validatePlanOverview() {
 		// TODO Auto-generated method stub
 
-		validate(planName);
-		validate(nameLabel);
-		validate(memberID);
-		validate(effective_Date);
-		validate(Monthly_Premium);
+		validateNew(planName);
+		validateNew(nameLabel);
+		validateNew(memberID);
+		validateNew(effective_Date);
+		validateNew(Monthly_Premium);
 
 	}
 
 	public void validatePlanOverviewLis() {
-		validate(planName);
-		validate(nameLabel);
-		validate(memberID);
-		validate(effective_Date);
-		validate(Monthly_Premium);
-		// validate(ExtraHelp);
+		validateNew(planName);
+		validateNew(nameLabel);
+		validateNew(memberID);
+		validateNew(effective_Date);
+		validateNew(Monthly_Premium);
+		// validateNew(ExtraHelp);
 
 	}
 
 	public void validateHeaders() {
-		validate(BenefitsSummaryHeader);
-		validate(Copayscoinsuranceheader);
-		validate(HospitalVisits);
-		validate(OfficeVisits);
-		validate(OutpatientSurgeryCenter);
+		validateNew(BenefitsSummaryHeader);
+		validateNew(Copayscoinsuranceheader);
+		validateNew(HospitalVisits);
+		validateNew(OfficeVisits);
+		validateNew(OutpatientSurgeryCenter);
 
 	}
 
 	public void validateHeadersGroup() {
-		validate(BenefitsSummaryHeader);
-		validate(Copayscoinsuranceheader);
-		validate(EmergencyHeader);
-		validate(AmbulanceHeader);
-		validate(HospitalVisits);
-		validate(OfficeVisits);
-		validate(OutpatientSurgeryCenter);
+		validateNew(BenefitsSummaryHeader);
+		validateNew(Copayscoinsuranceheader);
+		validateNew(EmergencyHeader);
+		validateNew(AmbulanceHeader);
+		validateNew(HospitalVisits);
+		validateNew(OfficeVisits);
+		validateNew(OutpatientSurgeryCenter);
 
 	}
 
 	public void validatePrimaryCareProvider() {
 
-		validate(PrimaryCareProviderHeader);
-		validate(YourPrimaryCareProvider);
-		validate(ChangeYourPcpButton);
-		validate(SearchforaPhysician);
-		validate(StartSearch);
+		validateNew(PrimaryCareProviderHeader);
+		validateNew(YourPrimaryCareProvider);
+		validateNew(ChangeYourPcpButton);
+		validateNew(SearchforaPhysician);
+		validateNew(StartSearch);
 
 	}
 
 	public void validatePrimaryCareProviderForGroup() {
 	
-		validate(PrimaryCareProviderHeaderHMO);
+		validateNew(PrimaryCareProviderHeaderHMO);
 		
 		
 	}
 	
 	public void validateOutofPocketMax() {
-		validate(OutofPocketMaximum);
-		validate(INNETWORK);
-		validate(OUTOFNETWORK);
+		validateNew(OutofPocketMaximum);
+		validateNew(INNETWORK);
+		validateNew(OUTOFNETWORK);
 		
 	}
 

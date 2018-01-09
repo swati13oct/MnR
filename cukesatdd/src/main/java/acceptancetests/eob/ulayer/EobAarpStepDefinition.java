@@ -30,12 +30,12 @@ import acceptancetests.eob.data.EobCommonConstants;
 import acceptancetests.formsandresources.data.FnRCommonConstants;
 import acceptancetests.login.data.LoginCommonConstants;
 import atdd.framework.MRScenario;
-import cucumber.api.DataTable;
-import cucumber.api.java.After;
-import cucumber.api.java.en.And;
-import cucumber.api.java.en.Given;
-import cucumber.api.java.en.Then;
-import cucumber.api.java.en.When;
+import cucumber.annotation.After;
+import cucumber.annotation.en.And;
+import cucumber.annotation.en.Given;
+import cucumber.annotation.en.Then;
+import cucumber.annotation.en.When;
+import cucumber.table.DataTable;
 
 /**
  * @author pperugu
@@ -538,7 +538,7 @@ public class EobAarpStepDefinition {
 		
 		getLoginScenario().saveBean(CommonConstants.PLAN_TYPE, planType);
 
- /*	     //Pass the direct URL to validate the page
+ 	     //Pass the direct URL to validate the page
 		AccountHomePage accountHomePage =  (AccountHomePage) getLoginScenario().getBean(PageConstants.ACCOUNT_HOME_PAGE);
 		MedicalEobPage eobPage = accountHomePage.navigateDirectToEOBPage();
 		eobPage.selectDateRange(dateRange, planType, eobTypeData);
@@ -594,7 +594,7 @@ public class EobAarpStepDefinition {
 		WebDriver wd = (WebDriver) getLoginScenario().getBean("webDriver");
 		if(wd!=null){
 		wd.quit();
-		}*/
+		}
 		
 	}
 

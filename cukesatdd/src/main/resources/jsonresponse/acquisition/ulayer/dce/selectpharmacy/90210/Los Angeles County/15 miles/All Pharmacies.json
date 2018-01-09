@@ -1,0 +1,86 @@
+{
+   "pharmacyTypes":[
+      {
+         "pharmacyDropDown":"Available Pharmacies"
+      },
+      {
+         "pharmacyDropDown":"Mail Service Pharmacy"
+      }
+   ],
+   "previousLink":"Previous 10 results",
+   "pharmacies":[
+      {
+         "pharmacyDistance":"1.2",
+         "selectLink":"Select",
+         "pharmacyName":"Men's Health Foundation"
+      },
+      {
+         "pharmacyDistance":"1.22",
+         "selectLink":"Select",
+         "pharmacyName":"Horton And Converse Pharmacy"
+      },
+      {
+         "pharmacyDistance":"1.72",
+         "selectLink":"Select",
+         "pharmacyName":"Vons Pharmacy #2739"
+      },
+      {
+         "pharmacyDistance":"1.77",
+         "selectLink":"Select",
+         "pharmacyName":"Great Earth Compounds"
+      },
+      {
+         "pharmacyDistance":"1.92",
+         "selectLink":"Select",
+         "pharmacyName":"Garfield Pharmacy"
+      },
+      {
+         "pharmacyDistance":"1.96",
+         "selectLink":"Select",
+         "pharmacyName":"Rite Aid Pharmacy 05461"
+      },
+      {
+         "pharmacyDistance":"1.98",
+         "selectLink":"Select",
+         "pharmacyName":"Uzzi Reiss MD"
+      },
+      {
+         "pharmacyDistance":"1.98",
+         "selectLink":"Select",
+         "pharmacyName":"Camden Pharmacy And Gift Emporium"
+      },
+      {
+         "pharmacyDistance":"1.98",
+         "selectLink":"Select",
+         "pharmacyName":"Beverly Hills Apothecary"
+      },
+      {
+         "pharmacyDistance":"1.98",
+         "selectLink":"Select",
+         "pharmacyName":"Foot & Ankle Specialty Group"
+      }
+   ],
+   "zipcode":"90210",
+   "editZipCodeLink":"Edit ZIP code",
+   "miles":[
+      {
+         "milesDropDown":"1 mile"
+      },
+      {
+         "milesDropDown":"2 miles"
+      },
+      {
+         "milesDropDown":"5 miles"
+      },
+      {
+         "milesDropDown":"10 miles"
+      },
+      {
+         "milesDropDown":"15 miles"
+      },
+      {
+         "milesDropDown":"25 miles"
+      }
+   ],
+   "nextLink":"Next 10 results"
+}

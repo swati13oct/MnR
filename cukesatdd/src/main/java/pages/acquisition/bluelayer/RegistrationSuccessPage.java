@@ -9,8 +9,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-
-//import pages.member.bluelayer.AccountHomePage;
+import pages.member.bluelayer.AccountHomePage;
 import acceptancetests.atdd.data.CommonConstants;
 import acceptancetests.atdd.data.PageData;
 import acceptancetests.atdd.util.CommonUtility;
@@ -54,7 +53,7 @@ public class RegistrationSuccessPage extends UhcDriver {
 
 	}
 
-	/*public AccountHomePage navigateToHomePage() {
+	public AccountHomePage navigateToHomePage() {
 		if (homePageLink.isEnabled()) {
 			homePageLink.click();
 
@@ -65,7 +64,7 @@ public class RegistrationSuccessPage extends UhcDriver {
 		else
 			return null;
 
-	}*/
+	}
 
 	@Override
 	public void openAndValidate() {
@@ -131,26 +130,7 @@ public JSONObject getExpectedData(Map<String, JSONObject> expectedDataMap, JSONO
 		return registrationSuccessExpectedJson;
 	}
 
-public boolean validateRegistrationSuccessPage() {
-	
-	boolean flag = false;
-	for (String key : registrationSuccess.getExpectedData().keySet()) {
-
-		WebElement element = findElement(registrationSuccess.getExpectedData()
-				.get(key));
-
-		if (validate(element) && null != element.getText()
-				&& element.getText() != "") {
-			flag = true;
-		} else {
-			return false;
-		}
-	}
-
-	return flag;
-}
-
-	/*public AccountHomePage navigateToHomePage(String category) {
+	public AccountHomePage navigateToHomePage(String category) {
 		if (homePageLink.isEnabled()) {
 			homePageLink.click();
 		}
@@ -160,6 +140,6 @@ public boolean validateRegistrationSuccessPage() {
 			return new AccountHomePage(driver);
 		}
 		return null;
-	}*/
+	}
 
 }

@@ -26,8 +26,7 @@ public class PrimaryCareProviderPage extends UhcDriver {
 
 	@FindBy(id = "pcpsaveandcont")
 	private WebElement pcpsaveandcont;
-	
-	
+
 	@FindBy(id = "pcpcancel")
 	private WebElement pcpcancel;
 
@@ -71,27 +70,23 @@ public class PrimaryCareProviderPage extends UhcDriver {
 		return null;
 
 	}
+
 	@FindBy(xpath = ".//*[@id='pcpInfo']/p")
 	private WebElement pcpHeader;
-	
-	@FindBy(xpath = ".//*[@id='enrollment-step-1-part-7']/div[1]/div/div[2]/a")
+
+	@FindBy(xpath = ".//*[@id='enrollment-step-1-part-7']/div[1]/div/div[2]/fieldset/a")
 	private WebElement lookupProviderBtn;
-	
-	public boolean validatePCPPage(){
+
+	public boolean validatePCPPage() {
 		boolean flag = false;
-		if(validate(pcpHeader)&&validate(saveandcontinuepcp)&&validate(pcpcancel)&&validate(pcpprevious)&&
-		validate(lookupProviderBtn))
+		if (validate(pcpHeader) && validate(saveandcontinuepcp) && validate(pcpcancel) && validate(pcpprevious)
+				&& validate(lookupProviderBtn))
 			flag = true;
 		return flag;
 	}
-	
-	public void clickOnLookupProviderBtn(){
+
+	public void clickOnLookupProviderBtn() {
 		lookupProviderBtn.click();
 	}
-	
-		
-	
-	
-	}
 
-
+}

@@ -94,7 +94,7 @@ public class ReviewAndSubmitPage extends UhcDriver{
 	public void selectauthRepresentative(Map<String, String> personalAttributesMap) {
 		String authRepresent = personalAttributesMap.get("authRepresent");
 		if(authRepresent.equalsIgnoreCase("Agree")){
-		authRepresentOptionAgreeBtn.click(); 
+		authRepresentOptionAgreeBtn.click();
 		}else{
 			authRepresentOptiondisagreeBtn.click();
 		}

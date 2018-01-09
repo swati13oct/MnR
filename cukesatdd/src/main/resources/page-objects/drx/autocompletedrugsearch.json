@@ -1,9 +1,0 @@
-{
-"url":null,
-"expectedData":{
-"drugOptionsAvailable":{
-"identifier":"className",
-"elementName":"ui-autocomplete"
-}
-}
-}

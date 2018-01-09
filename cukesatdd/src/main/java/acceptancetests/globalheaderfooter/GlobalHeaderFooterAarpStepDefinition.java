@@ -16,12 +16,10 @@ import acceptancetests.atdd.data.CommonConstants;
 import acceptancetests.atdd.data.acquisition.PageConstants;
 import acceptancetests.globalfooter.data.AcquistionCommonConstants;
 import atdd.framework.MRScenario;
-import cucumber.api.DataTable;
-import cucumber.api.java.After;
-import cucumber.api.java.en.And;
-import cucumber.api.java.en.Given;
-import cucumber.api.java.en.Then;
-import cucumber.api.java.en.When;
+import cucumber.annotation.en.And;
+import cucumber.annotation.en.Given;
+import cucumber.annotation.en.Then;
+import cucumber.annotation.en.When;
 import pages.acquisition.ulayer.AboutUsAARPPage;
 import pages.acquisition.ulayer.AcquisitionHomePage;
 import pages.acquisition.ulayer.AgentsnBrokersAARPPage;
@@ -234,7 +232,21 @@ public class GlobalHeaderFooterAarpStepDefinition {
 	
 	/* Navigation link Section Test Cases -  Start - Column 2 links */
 	
-
+	@And("^user clicks on medicare advantage plan link from footer of the AARP Medicare Plans home page$")
+	public void click_medicare_advantage_plans() {
+		AcquisitionHomePage aquisitionhomepage  = (AcquisitionHomePage) getLoginScenario()
+				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+		MedicareAdvantagePlansPage medicareAdvantagePlansPage = aquisitionhomepage.medicareAdvantagePlansClick();
+		if(medicareAdvantagePlansPage!= null){
+			getLoginScenario().saveBean(PageConstants.MEDICARE_ADVANTAGE_PLANS_PAGE,
+					medicareAdvantagePlansPage);
+			
+			Assert.assertTrue(true);
+		} else {
+			Assert.fail("home page not found");
+		}
+	}
+	
 	@And("^user clicks on medicare supplement insurance plans link from footer of the AARP Medicare Plans home page$")
 	public void click_supplement_insurance_plans() {
 		MedicareAdvantagePlansPage medicareAdvantagePlanPage  = (MedicareAdvantagePlansPage) getLoginScenario()
@@ -392,7 +404,28 @@ public class GlobalHeaderFooterAarpStepDefinition {
 	@When("^user accesses brand section of the AARP Medicare Plans home page$")
 	public void access_brand_section() {
 		
+		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
+				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+		JSONObject globalFooterActual = aquisitionhomepage.accessBrandSection();
+		/* Get expected data */
+		String fileName = "headerexpected";
+		String directory = CommonConstants.ACQUISITION_EXPECTED_DIRECTORY
+				+ File.separator + CommonConstants.SITE_ULAYER
+				+ File.separator
+				+ AcquistionCommonConstants.HEADER_FLOW_NAME
+				+ File.separator;
+		JSONObject globalFooterExpectedJson = MRScenario.readExpectedJson(
+				fileName, directory);
+
+		getLoginScenario().saveBean(
+				AcquistionCommonConstants.HEADER_ACTUAL,
+				globalFooterActual);
+		getLoginScenario().saveBean(
+				AcquistionCommonConstants.HEADER_EXPECTED,
+				globalFooterExpectedJson);
+	
 	}
+	
 	@Then("^user validates all the links in brand section$")
 	public void validate_all_links_brand_section(){
 		
@@ -416,7 +449,16 @@ public class GlobalHeaderFooterAarpStepDefinition {
 	
 	@And("^user clicks on Important Disclosures link of AARP Medicare Plans home page$")
 	public void click_importantDisclosures() {
-		
+		AcquisitionHomePage aquisitionhomepage  = (AcquisitionHomePage) getLoginScenario()
+				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+		DisclaimersAARPPage  disclaimersAARPPage= aquisitionhomepage.importantDisclosuresClick();
+		if(disclaimersAARPPage!= null){
+			getLoginScenario().saveBean(PageConstants.AARP_DISCLAIMERS_PAGE,
+					disclaimersAARPPage);
+			Assert.assertTrue(true);
+		} else {
+			Assert.fail("Disclaimers page not found");
+		}
 	}
 	
 	@And("^user clicks on AARP logo on Disclaimer page$")
@@ -436,7 +478,17 @@ public class GlobalHeaderFooterAarpStepDefinition {
 	@And("^user clicks on our plans link in navigation section on AARP Medicareplns Site page$")
 	public void user_clicks_OurPlans_navigation_aarp() {
 		
-		
+		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
+				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+		OurPlansPage ourPlansPage = aquisitionhomepage.navigationSectionOurPlansLinkClick();
+		if(ourPlansPage != null){
+			getLoginScenario().saveBean(PageConstants.OUR_PLANS_PAGE,
+					ourPlansPage);
+			Assert.assertTrue(true);
+		}
+		else{
+			Assert.fail("Error in disclaimers page");
+		}
 	}
 	
 	@And("^user clicks text  in global search field in navigation section on AARP Medicareplans Site page$")
@@ -479,7 +531,33 @@ public class GlobalHeaderFooterAarpStepDefinition {
 	@When("^user hovers on Our Plans section of the AARP Medicare Plans home page$")
 	public void hover_ourPlans(){
 		
-	
+		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
+				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+		if(aquisitionhomepage != null){
+			JSONObject ourPlansDropdownActualJson = aquisitionhomepage
+					.accessingOurPlansNav();
+
+			/* Get expected data */
+			String fileName = "ourPlansDropdownExpected";
+			String directory = CommonConstants.ACQUISITION_EXPECTED_DIRECTORY
+					+ File.separator + CommonConstants.SITE_ULAYER
+					+ File.separator
+					+ AcquistionCommonConstants.HEADER_FLOW_NAME
+					+ File.separator;
+			JSONObject ourPlansDropdownExpectedJson = MRScenario.readExpectedJson(
+					fileName, directory);
+
+			getLoginScenario().saveBean(
+					AcquistionCommonConstants.OUR_PLANS_ACTUAL,
+					ourPlansDropdownActualJson);
+			getLoginScenario().saveBean(
+					AcquistionCommonConstants.OUR_PLANS_EXPECTED,
+					ourPlansDropdownExpectedJson);
+			Assert.assertTrue(true);
+			}
+			else{
+				Assert.fail("Error in Home page");
+			}
 
 		
 		}
@@ -506,7 +584,18 @@ public class GlobalHeaderFooterAarpStepDefinition {
 	
 	@And("^user clicks on medicare advantage plans link of our plans drop down from home page of U layer$")
 	public void click_medicareAdvantage(){
-	
+		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
+				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+		MedicareAdvantagePlansPage medicareAdvantagePlansuhcPage = aquisitionhomepage.medicareAdvantagePlansClick();
+		if(medicareAdvantagePlansuhcPage != null){
+			getLoginScenario().saveBean(PageConstants.MEDICARE_ADVANTAGE_PLANS_UHC_PAGE,
+					medicareAdvantagePlansuhcPage);
+			Assert.assertTrue(true);
+		}
+		else{
+			Assert.fail("Error in  medicare advantage plans page");
+		}
+		
 	}
 	
 	@And("^user clicks on medicare advantage Request Personal Help & Information link of our plans drop down from medicare advantage plans page of U layer$")
@@ -622,7 +711,37 @@ public class GlobalHeaderFooterAarpStepDefinition {
 	
 	public void the_user_accesses_OurPlansDropdown_link() {
 
+		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
+				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+		if(aquisitionhomepage != null){
+		JSONObject ourplansdropdownactualJson = aquisitionhomepage
+				.accessingOurPlanslink();
+
 		
+		
+		/* Get expected data */
+		String fileName = "ourplansdropdownexpected";
+		String directory = CommonConstants.ACQUISITION_EXPECTED_DIRECTORY
+				+ File.separator + CommonConstants.SITE_ULAYER
+				+ File.separator
+				+ AcquistionCommonConstants.HEADER_FLOW_NAME
+				+ File.separator;
+		JSONObject ourplansdropdownexpectedJson = MRScenario.readExpectedJson(
+				fileName, directory);
+
+		getLoginScenario().saveBean(
+				AcquistionCommonConstants.OUR_PLANS_DROPDOWN_ACTUAL,
+				ourplansdropdownactualJson);
+		getLoginScenario().saveBean(
+				AcquistionCommonConstants.OUR_PLANS_DROPDOWN_EXPECTED,
+				ourplansdropdownexpectedJson);
+		
+		Assert.assertTrue(true);
+		}
+		else{
+			Assert.fail("Error in Home page");
+		}
+
 	
 	}
 	
@@ -652,7 +771,18 @@ public class GlobalHeaderFooterAarpStepDefinition {
 	
 	public void the_user_clicks_on_lookupzipcodelink() {
 		
-		
+		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
+				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+	
+		OurPlansPage ourPlansPage = aquisitionhomepage.lookupzipcodeclick();
+		if(ourPlansPage != null){
+			getLoginScenario().saveBean(PageConstants.OUR_PLANS_PAGE,
+					ourPlansPage);
+			Assert.assertTrue(true);
+		}
+		else {
+			Assert.fail("Error in page");
+		}
 
 	}
 	
@@ -802,16 +932,43 @@ public class GlobalHeaderFooterAarpStepDefinition {
 	@When("^user accesses Medicare Education section AARP Medicareplans Site$")
 	public void medicare_education() {
 		
-		
+		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
+				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+		JSONObject medicareEducationDropDowmActual = aquisitionhomepage.accessMedicareEducationDropDown();
+		/* Get expected data */
+		String fileName = "medicareeducationdropdownexpected";
+		String directory = CommonConstants.ACQUISITION_EXPECTED_DIRECTORY
+				+ File.separator + CommonConstants.SITE_ULAYER
+				+ File.separator
+				+ AcquistionCommonConstants.MEDICARE_EDUCATION_DROP_DOWN_NAME
+				+ File.separator;
+		JSONObject medicareEducationDropDownExpectedJson = MRScenario.readExpectedJson(
+				fileName, directory);
+
+		getLoginScenario().saveBean(
+				AcquistionCommonConstants.MEDICARE_EDUCATION_DROP_DOWN_ACTUAL,
+				medicareEducationDropDowmActual);
+		getLoginScenario().saveBean(
+				AcquistionCommonConstants.MEDICARE_EDUCATION_DROP_DOWN_EXPECTED,
+				medicareEducationDropDownExpectedJson);
+	
 	}
 	
 	@And("^user clicks on LearnAboutMedicare link by hovering on Medicare Education of the AARP Medicare Plans home page$")
 	public void click_learnaboutmedicare() {
-		
+		AcquisitionHomePage aquisitionhomepage  = (AcquisitionHomePage) getLoginScenario()
+				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+		LearnAboutMedicarePage learnAboutMedicarePage = aquisitionhomepage.learnAboutMedicareClick();
+		if(learnAboutMedicarePage!= null){
+			getLoginScenario().saveBean(PageConstants.LEARN_ABOUT_MEDICARE_PAGE,
+					learnAboutMedicarePage);
+			Assert.assertTrue(true);
+		} else {
+			Assert.fail("Learn about us page not found");
 		}
 			
 		
-	
+	}
 	
 	@And("^user clicks on ExploreChangingPlans link by hovering on Medicare Education of the AARP Medicare Plans home page$")
 	public void click_exploreChangingPlans() {
@@ -887,7 +1044,33 @@ public class GlobalHeaderFooterAarpStepDefinition {
 	@And("^user clicks on Already a member button in its inactive state on the Brand section of AARP site$")
 	public void click_alreadyPlanMember()
 	{
+		AcquisitionHomePage aquisitionhomepage  = (AcquisitionHomePage) getLoginScenario()
+				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+		Boolean state = aquisitionhomepage.validate_alreadyPlanMemberButton_active();
+		//getting actual json object 
+		JSONObject alreadyPlanMemberActualJson = aquisitionhomepage.getAlreadyPlanMemberJSON();
+		/* Get expected data */
+		String fileName = "alreadyPlanMemberExpected";
+		String directory = CommonConstants.ACQUISITION_EXPECTED_DIRECTORY
+				+ File.separator + CommonConstants.SITE_ULAYER
+				+ File.separator
+				+ AcquistionCommonConstants.HEADER_FLOW_NAME
+				+ File.separator;
+		JSONObject alreadyPlanMemberExpectedJson = MRScenario.readExpectedJson(
+				fileName, directory);
+
+		getLoginScenario().saveBean(
+				AcquistionCommonConstants.ALREADY_PLAN_MEMBER_ACTUAL,
+				alreadyPlanMemberActualJson);
+		getLoginScenario().saveBean(
+				AcquistionCommonConstants.ALREADY_PLAN_MEMBER_EXPECTED,
+				alreadyPlanMemberExpectedJson);
 		
+		if(state!=null && state==true ){
+			Assert.assertTrue(true);
+		} else {
+			Assert.fail("Already a Member button dropdown is not displayed");
+		}
 	}
 	
 	@And("^user clicks on user name, password text field in the Already a plan member drop down of AARP site$")
@@ -907,7 +1090,17 @@ public class GlobalHeaderFooterAarpStepDefinition {
 	@And("^user clicks on forgot your username or password link of AARP site$")
 	public void click_forgotUsernamePassword()
 	{
-		
+		AcquisitionHomePage aquisitionhomepage  = (AcquisitionHomePage) getLoginScenario()
+				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+		LoginAssistancePage loginAssistancePage =aquisitionhomepage.forgotUsernamePasswordClick();
+		if(loginAssistancePage!= null){
+			getLoginScenario().saveBean(PageConstants.LOGIN_ASSISTANCE_PAGE,
+					loginAssistancePage);
+			Assert.assertTrue(true);
+			
+		} else {
+			Assert.fail("Login Assistance page not found");
+		}
 			
 	}
 	
@@ -931,7 +1124,14 @@ public class GlobalHeaderFooterAarpStepDefinition {
 	@And("^user clicks on register here link of AARP site$")
 	public void click_registerHere()
 	{
-		
+		AcquisitionHomePage aquisitionhomepage  = (AcquisitionHomePage) getLoginScenario()
+				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+		RegistrationHomePage registrationHomePage=aquisitionhomepage.registerHereLinkClick();
+		if(registrationHomePage!= null){
+			Assert.assertTrue(true);
+		} else {
+			Assert.fail("Registration page not found");
+		}
 		
 	}
 	
@@ -1016,7 +1216,16 @@ public class GlobalHeaderFooterAarpStepDefinition {
 	
 	@Then("^user clicks on sign in button and validates if it is landed on member my account home page of AARP site$")
 	public void clickSignInForValidCreds() {
-		
+		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
+				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+		AccountHomePage accountHomePage = aquisitionhomepage.signInValid();
+		if (accountHomePage != null) {
+			getLoginScenario().saveBean(acceptancetests.atdd.data.member.PageConstants.ACCOUNT_HOME_PAGE,
+					accountHomePage);
+			Assert.assertTrue(true);
+		} else {
+			Assert.fail("failed");
+		}
 
 	}
 	

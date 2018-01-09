@@ -36,12 +36,12 @@ import acceptancetests.contactus.data.ContactUsCommonConstants;
 import acceptancetests.formsandresources.data.FnRCommonConstants;
 import acceptancetests.login.data.LoginCommonConstants;
 import atdd.framework.MRScenario;
-import cucumber.api.DataTable;
-import cucumber.api.java.After;
-import cucumber.api.java.en.And;
-import cucumber.api.java.en.Given;
-import cucumber.api.java.en.Then;
-import cucumber.api.java.en.When;
+import cucumber.annotation.After;
+import cucumber.annotation.en.And;
+import cucumber.annotation.en.Given;
+import cucumber.annotation.en.Then;
+import cucumber.annotation.en.When;
+import cucumber.table.DataTable;
 import pages.member.ulayer.ValueAddedServicepage;
 
 /**
@@ -218,7 +218,7 @@ public class PlanBenefitsAndCoverageAarpStepDefinition {
 			Assert.assertTrue(true);
 			formsAndResourcesActualJson = formsAndResourcesPage.formsAndResourcesJson;
 		}
-		getLoginScenario().saveBean(CommonConstants.FORMS_AND_RESOURCES_ACTUAL, formsAndResourcesActualJson);
+		getLoginScenario().saveBean(FnRCommonConstants.FORMS_AND_RESOURCES_ACTUAL, formsAndResourcesActualJson);
 	}
 
 	@Given("^registered member to login in AARP site$")
@@ -260,7 +260,7 @@ public class PlanBenefitsAndCoverageAarpStepDefinition {
 
 	}
 
-/*	@When("^the user navigates to Benefits and coverage page$")
+	@When("^the user navigates to Benefits and coverage page$")
 	public void views_benefits_and_Coverage() {
 		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstants.ACCOUNT_HOME_PAGE);
 		BenefitsAndCoveragePage bncPage = accountHomePage.navigatesToBandCpage();
@@ -274,7 +274,7 @@ public class PlanBenefitsAndCoverageAarpStepDefinition {
 		{
 			System.out.println(" Variable is NULL" );
 		}
-*/
+
 		/*if (bncPage != null) {
 			// Get actual data
 			JSONObject actualJsonObj = bncPage.benefitsandcoverageJson;
@@ -293,7 +293,7 @@ public class PlanBenefitsAndCoverageAarpStepDefinition {
 		
 	
 
-	
+	}
 
 	@When("^the user navigates to benefits and coverage page under my plans in AARP site$")
 	public void benefits_and_coverage_AARP() {
@@ -430,7 +430,7 @@ public class PlanBenefitsAndCoverageAarpStepDefinition {
 		}
 	}
 @Then("^the user view benefits and coverage in AARP site$")
-	/*public void user_views_BenefitsAndCoverages() {
+	public void user_views_BenefitsAndCoverages() {
 
 		AccountHomePage accounthomepage = (AccountHomePage) getLoginScenario().getBean(
 				PageConstants.ACCOUNT_HOME_PAGE);
@@ -452,7 +452,7 @@ public class PlanBenefitsAndCoverageAarpStepDefinition {
 			loginScenario.saveBean(PlanBenefitsAndCoverageCommonConstants.BENEFITS_AND_COVERAGE_EXPECTED, benefitsandcoverageExectedJson);
 			System.out.println("Benefits and coverage expected ==============>"+benefitsandcoverageExectedJson.toString());
 		}
-	}*/
+	}
 //	@Then("^the user validates the content on benefits and coverage page")
 	public void validateContentOnBenefitsAndCoveragePage() {
 		
@@ -609,7 +609,7 @@ public class PlanBenefitsAndCoverageAarpStepDefinition {
 
 
 	@Then("^the user validates the sorting link on mydocument page$")
-	/*public void view_sorting_search_aarp_site(){
+	public void view_sorting_search_aarp_site(){
 		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstants.ACCOUNT_HOME_PAGE);
 		
 		FormsandresourcesPage formsAndResourcesPage = accountHomePage.navigateTosortingsearchlinkAarpPage();		
@@ -618,10 +618,10 @@ public class PlanBenefitsAndCoverageAarpStepDefinition {
 		WebDriver wd = (WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
 		if(wd!=null){
 			wd.quit();
-		}*/
+		}
 
 
-	
+	}
 
 	@And("^the user validates view and documents label$")
 	public void validate_labels()
@@ -979,7 +979,7 @@ public class PlanBenefitsAndCoverageAarpStepDefinition {
 			.getBean(PageConstants.BENEFITS_AND_COVERAGE_PAGE);
 	benefitsnCoveragepage.learnmorebutton();
 	}
-	/*
+	
 	@And("the user validates elements on account home page")
 	public void user_validate_accounhomepage() {
 		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstants.ACCOUNT_HOME_PAGE);
@@ -989,7 +989,7 @@ public class PlanBenefitsAndCoverageAarpStepDefinition {
 	@And("the user clicks on profile and preferences and profile page should come")
 	public void user_validate_mymenuandprofileandprefernecs() {
 		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstants.ACCOUNT_HOME_PAGE);
-		ProfileandPreferencesPage profile = accountHomePage.validatemymenufunctionality();*/
+		ProfileandPreferencesPage profile = accountHomePage.validatemymenufunctionality();
 	}
 	
 	
@@ -998,4 +998,4 @@ public class PlanBenefitsAndCoverageAarpStepDefinition {
 	
 	
 
-	
+	}

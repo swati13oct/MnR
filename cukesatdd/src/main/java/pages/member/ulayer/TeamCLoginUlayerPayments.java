@@ -52,7 +52,7 @@ public class TeamCLoginUlayerPayments extends UhcDriver {
 			System.out.println("Sign In clicked");
 			
 
-			if(MRScenario.environment.equals("team-c")) {
+			if(MRScenario.TeamCEnvironment.equals("team-c")) {
 				try{
 				Alert alert = driver.switchTo().alert();
 				alert.accept();

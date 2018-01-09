@@ -18,8 +18,6 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
 
-import pages.dashboard.member.blayer.AddDrugDetails;
-import pages.dashboard.member.blayer.AddNewDrugModal;
 import acceptancetests.atdd.data.CommonConstants;
 import acceptancetests.atdd.data.PageData;
 import acceptancetests.atdd.util.CommonUtility;
@@ -843,7 +841,7 @@ public class DrugCostEstimatorPage extends UhcDriver {
 		// addNewDrugModal.selectDrug(drug);
 		AddDrugDetails addDrugDetails = new AddDrugDetails(driver);
 
-//		SavingsOppurtunity savingsOppurtunity = addDrugDetails.continueAddDrugDetailsModal();
+		SavingsOppurtunity savingsOppurtunity = addDrugDetails.continueAddDrugDetailsModal();
 
 		// if(addDrugDetails.continueAddDrugDetails()!=null){
 		 SavingsOppurtunity savingsOppurtunity1 = new SavingsOppurtunity(driver);
@@ -925,7 +923,7 @@ public class DrugCostEstimatorPage extends UhcDriver {
 		// addNewDrugModal.selectDrug(drug);
 		AddDrugDetails addDrugDetails = new AddDrugDetails(driver);
 		//addDrugDetails.selectQnty(60 + "");
-	//	SavingsOppurtunity savingsOppurtunity = addDrugDetails.continueAddDrugDetails();
+		SavingsOppurtunity savingsOppurtunity = addDrugDetails.continueAddDrugDetails();
 		SavingsOppurtunity savingsOppurtunity1 = new SavingsOppurtunity(driver);
 		savingsOppurtunity1.switchToGeneric();
 		savingsOppurtunity1.savedrugbutton();

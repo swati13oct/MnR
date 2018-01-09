@@ -37,7 +37,7 @@ public class SignInPage extends GlobalWebElements {
 		validate(signInButton);
 	}
 	
-/*	public AboutUsPage navigateToAboutUs() {
+	public AboutUsPage navigateToAboutUs() {
 		aboutUsLink.click();
 		if (driver.getTitle().equalsIgnoreCase(
 				"UnitedHealthcare Medicare Solutions | About Us")) {
@@ -54,6 +54,6 @@ public class SignInPage extends GlobalWebElements {
 			return new RegistrationHomePage(driver);
 		}
 		return null;
-	}*/
+	}
 
 }

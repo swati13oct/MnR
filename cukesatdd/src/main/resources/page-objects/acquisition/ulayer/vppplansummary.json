@@ -3,7 +3,7 @@
 "expectedData":{
 "maPlanCount":{
 "identifier":"xpath",
-"elementName":"//div[@class='maplans_planbutton']/div[1]/p"
+"elementName":"//*[@class='title' and contains(text(),'Medicare Advantage')]/span"
 },
 "msPlanCount":{
 "identifier":"xpath",
@@ -11,21 +11,15 @@
 },
 "pdpPlanCount":{
 "identifier":"xpath",
-"elementName":"//div[@class='pdpplans_planbutton']/div[1]/p"
+"elementName":"//*[@class='title' and contains(text(),'Medicare Prescription')]/span"
 },
 "vppSummary":{
 "identifier":"xpath",
 "elementName":"//h2[contains(text(),'We have')]"
-"zipCodeDisplayed":{
-"identifier":"id",
-"elementName":"zipcode"
 },
 "changeLocationLink":{
 "identifier":"linkText",
 "elementName":"Change Location"
-"countyDisplayed":{
-"identifier":"id",
-"elementName":"county"
 }
 }
 }

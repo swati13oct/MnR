@@ -26,12 +26,12 @@ import acceptancetests.login.data.LoginCommonConstants;
 import acceptancetests.benefitsandcoverage.data.PlanBenefitsAndCoverageCommonConstants;
 import acceptancetests.pharmacylocator.data.PharmacySearchCommonConstants;
 import atdd.framework.MRScenario;
-import cucumber.api.DataTable;
-import cucumber.api.java.After;
-import cucumber.api.java.en.And;
-import cucumber.api.java.en.Given;
-import cucumber.api.java.en.Then;
-import cucumber.api.java.en.When;
+import cucumber.annotation.After;
+import cucumber.annotation.en.And;
+import cucumber.annotation.en.Given;
+import cucumber.annotation.en.Then;
+import cucumber.annotation.en.When;
+import cucumber.table.DataTable;
 
 /**
  * @author pagarwa5
@@ -149,7 +149,7 @@ public class PharmacyLocatorMemberUmsStepDefinition {
 		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario()
 				.getBean(PageConstants.ACCOUNT_HOME_PAGE);
 		PharmacySearchPage pharmacySearchPage = accountHomePage
-				.navigateToPharmacyLocator();	
+				.navigateToPharmacyLocatorSearchResults();	
 	}
 	
 	@Then("^the user validate Pharmacy Saver pharmacies and red balloon marker available in UMS site$")
