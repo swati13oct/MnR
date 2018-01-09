@@ -226,6 +226,27 @@ public class BenefitsAndCoveragePage extends UhcDriver {
   
   @FindBy(className = "atdd-gopaperless")
   private WebElement gopaperlessbutton;
+  
+	@FindBy(className = "atdd-bnc-anclry-disclaimer")
+	private WebElement Exclusivedisclaimer;
+	
+	@FindBy(className = "atdd-exclsvehearing-arrowdwn")
+	private WebElement Disclaimertext;
+	
+	@FindBy(className = "atdd-bnc-ancilry-learnmorbtn")
+	private WebElement LearnmoreButton;
+
+	@FindBy(className = "atdd-bnc-exclusivehrng-leavingpopuptxt")
+	private WebElement popup;
+	
+	@FindBy(className = "atdd-anclrysection-leavingpopup-proceedbtn")
+	private WebElement ProceedButton;
+	
+	@FindBy(className = "atdd-anclrysection-leavingpopup")
+	private WebElement cancelbutton;
+	
+	@FindBy(className = "atdd-exclusivehearing-levngpopup")
+	private WebElement cancelbutton1;
     
 	
 	
@@ -535,6 +556,101 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 
 		try {
 			validate(chiropracticsection);
+		} catch (Exception e) {
+			System.out.println("Elements is not found ...");
+		}
+	}
+	
+	public void ExclusiveDisclaimers() {
+
+		try {
+			validate(Exclusivedisclaimer);
+			Exclusivedisclaimer.click();
+			try {
+				Thread.sleep(30000);
+			} catch (InterruptedException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+			validate(Disclaimertext);
+			System.out.println("text" + Disclaimertext.getText());
+			
+		} catch (Exception e) {
+			System.out.println("Elements is not found ...");
+		}
+	}
+	public void Exclusivelearnmore() {
+		try{
+		validate(LearnmoreButton);
+		LearnmoreButton.click();
+	
+		try {
+			Thread.sleep(30000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		//validate(disclaimersLink);
+		System.out.println("text" + LearnmoreButton.getText());
+	} catch(Exception e) {
+		System.out.println("Elements is not found ...");
+	}
+	}
+		/*//LearnmoreButton.click();
+		WebElement TxtBoxContent = driver.findElement(By.className(LearnmoreButton));
+		TxtBoxContent.getText();
+		LearnmoreButton.click();
+		System.out.println("Printing "+TxtBoxContent);*/
+		//LearnmoreButton.click();
+		/*if (LearnmoreButton.isDisplayed()) {
+			Assert.assertTrue(true);
+			} else
+			Assert.fail("Button not displayed");*/
+		/*if (driver.getCurrentUrl().contains("www.hihealthinnovations.com/medicare")) {
+			return;
+			} else {
+			Assert.fail("The element " + ProceedButton.getText() + "is not found");
+			}*/
+		//LearnmoreButton.click();
+		
+	public void Leavingpopup() {
+
+		try {
+			validate(popup);
+		} catch (Exception e) {
+			System.out.println("Elements is not found ...");
+		}
+	}
+	public boolean Proceedbutton() {
+		//LearnmoreButton.click();
+		validate(ProceedButton);
+		ProceedButton.click();
+		try {
+			Thread.sleep(40000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		ArrayList<String> tabs2 = new ArrayList<String> (driver.getWindowHandles());
+	    driver.switchTo().window(tabs2.get(1));
+		System.out.println(driver.getCurrentUrl());
+		if (driver.getCurrentUrl().contains("hihealthinnovations.com/medicare")) {
+		Assert.assertTrue(true);
+		} 
+		else {
+		Assert.fail("The element " + ProceedButton.getText() + "is not found");
+		}
+		return true;
+		}
+	public void Cancelbutton() {
+
+		try {
+			validate(cancelbutton );
+			validate(cancelbutton1 );
+			cancelbutton.click();
+			
+			System.out.println("text" + cancelbutton.getText());
+			
 		} catch (Exception e) {
 			System.out.println("Elements is not found ...");
 		}

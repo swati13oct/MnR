@@ -819,8 +819,45 @@ public class BenefitsAndCoverageUmsStepDefinition {
 				.getBean(PageConstants.BENEFITS_AND_COVERAGE_PAGE);
 		benefitsCoveragePage.chiropracticsection();
 	}
+	
+	@And("^user validates and clicks on Disclaimers link under Exclusive hearing$")
+	public void user_validates__disclaimerlink() {
+		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario()
+				.getBean(PageConstants.BENEFITS_AND_COVERAGE_PAGE);
+		benefitsCoveragePage.ExclusiveDisclaimers();
+	}
 
-	@And("^the user validates Drug coverage header and text under the section")
+	@And("^user validates and clicks on Learn More button under Exclusive hearing section$")
+	public void user_validates__learnmorebutton() {
+		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario()
+				.getBean(PageConstants.BENEFITS_AND_COVERAGE_PAGE);
+		benefitsCoveragePage.Exclusivelearnmore();
+	}
+
+	@And("^user validates the Leaving  popup$")
+	public void user_validates__leavingpopup() {
+		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario()
+				.getBean(PageConstants.BENEFITS_AND_COVERAGE_PAGE);
+		benefitsCoveragePage.Leavingpopup();
+
+	}
+
+	@And("^user validates and click on Cancel button$")
+	public void user_validates__cacenbutton() {
+		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario()
+				.getBean(PageConstants.BENEFITS_AND_COVERAGE_PAGE);
+		benefitsCoveragePage.Cancelbutton();
+	}
+	
+	@And("^user validates and clicks on Proceed button and navigate to heathnavigationpage$")
+	public void user_validates__proceedbutton() {
+		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario()
+				.getBean(PageConstants.BENEFITS_AND_COVERAGE_PAGE);
+		benefitsCoveragePage.Proceedbutton();
+	}
+	
+	
+    @And("^the user validates Drug coverage header and text under the section")
 	public void user_validates__drugcoverage_section() {
 		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario()
 				.getBean(PageConstants.BENEFITS_AND_COVERAGE_PAGE);
