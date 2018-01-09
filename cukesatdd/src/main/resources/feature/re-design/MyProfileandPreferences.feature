@@ -1,6 +1,6 @@
-@profilepreferences
+@profilepreferencesPage
 Feature: Save profile preferences
-
+ @profilepreferences
   Scenario Outline: To verify My Preferences and edit preferences
     Given Login to the application
       | memberNumber | <memberNumber> |
