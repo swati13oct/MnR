@@ -66,7 +66,7 @@ public class DashboardPage extends UhcDriver {
 	@FindBy(xpath = "(//nav[@id='utility-nav']//a/span[contains(text(),'Help')])[1]")
 	private WebElement ContactUsLink;
 	
-	private static String PAGE_URL2 = MRConstants.Dashboard_URL;
+
 
 	@Override
 	public void openAndValidate() {

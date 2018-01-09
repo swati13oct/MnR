@@ -127,7 +127,7 @@ public class LoginPage2 extends UhcDriver {
 			counter++;
 		} while (!(currentUrl().contains("terminated-plan.html") | currentUrl().contains("/dashboard")));
 	
-		if (currentUrl().contains("medicare/dashboard")) {
+		if (currentUrl().contains("/dashboard")) {
 			System.out.println("yes yes");
 			return new DashboardPage(driver);
 		} else if (currentUrl().contains("terminated-plan.html")) {
@@ -137,7 +137,7 @@ public class LoginPage2 extends UhcDriver {
 		return null;
 	}
 
-	public Object loginWith(String username, String password, String category) {
+	public Object loginWith(String username, String password, String category) throws InterruptedException {
 		// driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 		// WebElement loginInEle =
 		// this.driver.findElement(By.id("fd_memberSignInButton"));
@@ -146,12 +146,7 @@ public class LoginPage2 extends UhcDriver {
 		sendkeys(userNameField, username);
 		sendkeys(passwordField, password);
 		signInButton.click();
-		try {
-			Thread.sleep(1000000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		
 
 		if (MRScenario.environment.equals("dev-a") || MRScenario.environment.equals("team-a")) {
 			while (!isAlertPresent(driver))
@@ -172,7 +167,18 @@ public class LoginPage2 extends UhcDriver {
 		}
 
 		System.out.println("here");
-		if (currentUrl().contains("medicare/dashboard")) {
+
+		CommonUtility.checkPageIsReady(driver);
+		int counter = 0;
+		do {
+			if (counter <= 12)
+				Thread.sleep(5000);
+			else
+				return null;
+			counter++;
+		} while (!(currentUrl().contains("terminated-plan.html") | currentUrl().contains("/dashboard")));
+	
+		if (currentUrl().contains("/dashboard")) {
 			System.out.println("yes yes");
 			return new DashboardPage(driver);
 		} else if (currentUrl().contains("terminated-plan.html")) {

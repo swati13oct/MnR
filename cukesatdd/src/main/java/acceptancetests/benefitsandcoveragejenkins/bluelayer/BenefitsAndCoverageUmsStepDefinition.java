@@ -21,10 +21,12 @@ import org.openqa.selenium.By;
 
 import pages.member.bluelayer.AccountHomePage;
 import pages.member.bluelayer.BenefitsCoveragePage;
+import pages.member.bluelayer.DashboardPage;
 import pages.member.bluelayer.LoginPage;
 import pages.member.bluelayer.BenefitsAndCoveragePage;
 import pages.member.bluelayer.FormsandresourcesPage;
 import pages.member.bluelayer.LoginPage2;
+import pages.member.bluelayer.ProfilePreferencesPage;
 import pages.member.ulayer.PlanBenefitsCoveragePage;
 import acceptancetests.atdd.data.CommonConstants;
 import acceptancetests.atdd.data.member.PageConstants;
@@ -56,7 +58,7 @@ public class BenefitsAndCoverageUmsStepDefinition {
 	}
 
 	@Given("^registered member with following details logins in the member portal$")
-	public void login_with_member(DataTable memberAttributes) {
+	public void login_with_member(DataTable memberAttributes) throws InterruptedException {
 		List<DataTableRow> memberAttributesRow = memberAttributes.getGherkinRows();
 		Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
 		for (int i = 0; i < memberAttributesRow.size(); i++) {
@@ -94,21 +96,17 @@ public class BenefitsAndCoverageUmsStepDefinition {
 		}
 
 		WebDriver wd = getLoginScenario().getWebDriver();
-		//MRScenario.keyEvent(wd);
+		// MRScenario.keyEvent(wd);
 
 		LoginPage2 loginPage = new LoginPage2(wd);
-		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) loginPage.loginWith(userName, pwd, category);
-		
-		try {
-			Thread.sleep(30000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		if (benefitsCoveragePage!= null) {
-			System.out.println("test");
+		DashboardPage dashboardPage = (DashboardPage) loginPage.loginWith(userName, pwd, category);
+
+		if (dashboardPage != null) {
 			getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
-			getLoginScenario().saveBean(PageConstants.BENEFITS_COVERAGE_PAGE, benefitsCoveragePage);
+			getLoginScenario().saveBean(PageConstants.dashboardPage, dashboardPage);
+
+		} else {
+			System.out.println("NULL");
 		}
 
 		// JSONObject accountHomeActualJson = null;
@@ -132,47 +130,38 @@ public class BenefitsAndCoverageUmsStepDefinition {
 		 * 
 		 * getLoginScenario().saveBean(CommonConstants.EXPECTED_DATA_MAP,
 		 * expectedDataMap);
-
+		 * 
 		 */
 
 	}
-	
-	
-	
+
 	@Then("^the user goes to dashbard BnC$")
 	public void user_views_BenefitsAndCoveragedashboard() {
-		
-		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario().getBean(PageConstants.BENEFITS_COVERAGE_PAGE);
+
+		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario()
+				.getBean(PageConstants.BENEFITS_AND_COVERAGE_PAGE);
 		benefitsCoveragePage.validateBnCPag();
 
-		
 	}
-	
+
 	@Then("^the user navigates to Benefits and coverage page$")
 	public void user_views_BenefitsAndCoveragejenkins1() {
 
-		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstants.ACCOUNT_HOME_PAGE);
-		BenefitsAndCoveragePage benefitsCoveragePage = accountHomePage.navigateDirectToBnCPag();
+		DashboardPage dashboardPage = (DashboardPage) getLoginScenario().getBean(PageConstants.dashboardPage);
+
+		BenefitsAndCoveragePage benefitsCoveragePage = dashboardPage.navigateDirectToBnCPag();
 
 		if (benefitsCoveragePage != null) {
-			getLoginScenario().saveBean(PageConstants.BENEFITS_COVERAGE_PAGE, benefitsCoveragePage);
+			getLoginScenario().saveBean(PageConstants.BENEFITS_AND_COVERAGE_PAGE, benefitsCoveragePage);
 
-			// Get actual data
-/*
-			JSONObject actualJsonObj = benefitsCoveragePage.benefitsandcoverageJson;
-			loginScenario.saveBean(PlanBenefitsAndCoverageCommonConstants.BENEFITS_AND_COVERAGE_ACTUAL, actualJsonObj);
-			System.out.println("Benefits and coverage actual ==============>" + actualJsonObj.toString());
-			// Get expected data
-			String fileName = this.userName;
-			String directory = CommonConstants.BENEFITS_AND_COVERAGE_PAGE_BLAYER_DIRECTORY;
-			JSONObject benefitsandcoverageExectedJson = MRScenario.readExpectedJson(fileName, directory);
-			loginScenario.saveBean(PlanBenefitsAndCoverageCommonConstants.BENEFITS_AND_COVERAGE_EXPECTED,
-					benefitsandcoverageExectedJson);
-			System.out.println(
-					"Benefits and coverage expected ==============>" + benefitsandcoverageExectedJson.toString());
-			loginScenario.saveBean(PlanBenefitsAndCoverageCommonConstants.BENEFITS_AND_COVERAGE_EXPECTED,
-					benefitsandcoverageExectedJson);*/
 		}
+
+		else
+
+		{
+			System.out.println("NULL BNC ");
+		}
+
 	}
 
 	@Given("^registered UHC with following details for plan benefits and coverage flow in UMS site Mobile view$")
@@ -214,7 +203,7 @@ public class BenefitsAndCoverageUmsStepDefinition {
 		}
 
 		WebDriver wd = getLoginScenario().getWebDriver();
-		//MRScenario.keyEvent(wd);
+		// MRScenario.keyEvent(wd);
 
 		LoginPage2 loginPage = new LoginPage2(wd);
 
@@ -279,30 +268,22 @@ public class BenefitsAndCoverageUmsStepDefinition {
 	@Then("^the user navigates to Benefits coverage page$")
 	public void user_views_BenefitsAndCoveragejenkins() {
 
-		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstants.ACCOUNT_HOME_PAGE);
-		BenefitsAndCoveragePage benefitsCoveragePage = accountHomePage.navigateDirectToBnCPag();
+		DashboardPage dashboardPage = (DashboardPage) getLoginScenario().getBean(PageConstants.dashboardPage);
+
+		BenefitsAndCoveragePage benefitsCoveragePage = dashboardPage.navigateDirectToBnCPag();
 
 		if (benefitsCoveragePage != null) {
 			getLoginScenario().saveBean(PageConstants.BENEFITS_AND_COVERAGE_PAGE, benefitsCoveragePage);
 
-			// Get actual data
-
-			/*JSONObject actualJsonObj = benefitsCoveragePage.benefitsandcoverageJson;
-			loginScenario.saveBean(PlanBenefitsAndCoverageCommonConstants.BENEFITS_AND_COVERAGE_ACTUAL, actualJsonObj);
-			System.out.println("Benefits and coverage actual ==============>" + actualJsonObj.toString());
-			// Get expected data
-			String fileName = this.userName;
-			String directory = CommonConstants.BENEFITS_AND_COVERAGE_PAGE_BLAYER_DIRECTORY;
-			JSONObject benefitsandcoverageExectedJson = MRScenario.readExpectedJson(fileName, directory);
-			loginScenario.saveBean(PlanBenefitsAndCoverageCommonConstants.BENEFITS_AND_COVERAGE_EXPECTED,
-					benefitsandcoverageExectedJson);
-			System.out.println(
-					"Benefits and coverage expected ==============>" + benefitsandcoverageExectedJson.toString());
-			loginScenario.saveBean(PlanBenefitsAndCoverageCommonConstants.BENEFITS_AND_COVERAGE_EXPECTED,
-					benefitsandcoverageExectedJson);*/
 		}
-	}
 
+		else
+
+		{
+			System.out.println("NULL BNC ");
+		}
+
+	}
 
 	@When("^the user navigates to benefits and coverage page under my plans in UMS site$")
 	public void navigates_benefits_and_Coverage_UMS() {
@@ -639,13 +620,10 @@ public class BenefitsAndCoverageUmsStepDefinition {
 
 	}
 
-	
-
-
 	@Then("^the user validates Plan Documents section")
 	public void validateContentOnBenefitsAndCoveragePage1() {
 		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario()
-				.getBean(PageConstants.BENEFITS_COVERAGE_PAGE);
+				.getBean(PageConstants.BENEFITS_AND_COVERAGE_PAGE);
 		benefitsCoveragePage.PlanDocumentssection();
 	}
 
@@ -653,9 +631,11 @@ public class BenefitsAndCoverageUmsStepDefinition {
 	public void validatecontentonbnc() {
 		try {
 
-			//JSONObject actual = (JSONObject) loginScenario.getBean(PlanBenefitsAndCoverageCommonConstants.BENEFITS_AND_COVERAGE_ACTUAL);
+			// JSONObject actual = (JSONObject)
+			// loginScenario.getBean(PlanBenefitsAndCoverageCommonConstants.BENEFITS_AND_COVERAGE_ACTUAL);
 
-			//JSONObject expected = (JSONObject) loginScenario.getBean(PlanBenefitsAndCoverageCommonConstants.BENEFITS_AND_COVERAGE_EXPECTED);
+			// JSONObject expected = (JSONObject)
+			// loginScenario.getBean(PlanBenefitsAndCoverageCommonConstants.BENEFITS_AND_COVERAGE_EXPECTED);
 
 			// if(actual!=null && expected !=null){
 			// JSONAssert.assertEquals(expected, actual, true);
@@ -667,14 +647,14 @@ public class BenefitsAndCoverageUmsStepDefinition {
 	}
 
 	// }
-	
+
 	@Then("^the user validates Needhelp header and disclaimer link")
 	public void validateneedhelpheader() {
 		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario()
 				.getBean(PageConstants.BENEFITS_AND_COVERAGE_PAGE);
 		benefitsCoveragePage.validateNeedhelpheader();
 	}
-	
+
 	@Then("^the user validates contactus section")
 	public void validatecontactussection() {
 		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario()
@@ -683,14 +663,12 @@ public class BenefitsAndCoverageUmsStepDefinition {
 		benefitsCoveragePage.contactUslink();
 	}
 
-
 	@Then("^the user clicks on Disclaimers link$")
 	public void the_user_clicks_on_Disclaimers_link() {
 		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario()
 				.getBean(PageConstants.BENEFITS_AND_COVERAGE_PAGE);
 		benefitsCoveragePage.clickOnDisclaimers();
 	}
-
 
 	@Then("^the user view mydocument in UMS site$")
 	public void views_mydocument_ums_site() {
@@ -759,7 +737,7 @@ public class BenefitsAndCoverageUmsStepDefinition {
 	@And("^the user validates view and document label$")
 	public void user_validates_view_and_document_label() {
 		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario()
-				.getBean(PageConstants.BENEFITS_COVERAGE_PAGE);
+				.getBean(PageConstants.BENEFITS_AND_COVERAGE_PAGE);
 
 		benefitsCoveragePage.getdocuments_label();
 		benefitsCoveragePage.getview_label();
@@ -769,7 +747,7 @@ public class BenefitsAndCoverageUmsStepDefinition {
 	@And("the user validates spanish and chinese should not display in dropdown")
 	public void user_validates_spanish_chinese_notvisible() {
 		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario()
-				.getBean(PageConstants.BENEFITS_COVERAGE_PAGE);
+				.getBean(PageConstants.BENEFITS_AND_COVERAGE_PAGE);
 		benefitsCoveragePage.languagevalidation();
 
 	}
@@ -777,7 +755,7 @@ public class BenefitsAndCoverageUmsStepDefinition {
 	@And("^the user validates the language dropdown and the value displayed by default and selects new value in dropdown successfully$")
 	public void validate_languagedropdown(DataTable givenAttributes) {
 		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario()
-				.getBean(PageConstants.BENEFITS_COVERAGE_PAGE);
+				.getBean(PageConstants.BENEFITS_AND_COVERAGE_PAGE);
 		benefitsCoveragePage.validate_langdropdown_first_selection();
 		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
 		Map<String, String> memberAttributesMap = new HashMap<String, String>();
@@ -793,7 +771,7 @@ public class BenefitsAndCoverageUmsStepDefinition {
 	@And("the user validates the language dropdown and the value displayed by default should be English")
 	public void user_validates_englishlanguage() {
 		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario()
-				.getBean(PageConstants.BENEFITS_COVERAGE_PAGE);
+				.getBean(PageConstants.BENEFITS_AND_COVERAGE_PAGE);
 		benefitsCoveragePage.validate_langdropdown_first_selection();
 	}
 
@@ -835,14 +813,13 @@ public class BenefitsAndCoverageUmsStepDefinition {
 
 	}
 
-	
 	@And("^the user validates chiropractic section$")
 	public void user_validates__chiropractic_section() {
 		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario()
 				.getBean(PageConstants.BENEFITS_AND_COVERAGE_PAGE);
 		benefitsCoveragePage.chiropracticsection();
 	}
-	
+
 	@And("^the user validates Drug coverage header and text under the section")
 	public void user_validates__drugcoverage_section() {
 		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario()
@@ -872,7 +849,7 @@ public class BenefitsAndCoverageUmsStepDefinition {
 
 	}
 
-        @And("the user view the LIS Drug Copays & Discounts header")
+	@And("the user view the LIS Drug Copays & Discounts header")
 	public void user_validate_lisdrugcopaydiscounttable() {
 		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario()
 				.getBean(PageConstants.BENEFITS_AND_COVERAGE_PAGE);
@@ -906,14 +883,15 @@ public class BenefitsAndCoverageUmsStepDefinition {
 				.getBean(PageConstants.BENEFITS_AND_COVERAGE_PAGE);
 		benefitsCoveragePage.validate_tierlinknotdisplay();
 	}
-	
-	 @And("^the user validates dropdown selection functionality") 
-	 public void user_validate_dropdwonvalues() 
-	 { BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage)getLoginScenario().getBean( PageConstants.BENEFITS_AND_COVERAGE_PAGE);
-	  //JSONObject benefitsandcoverageExectedJson=(JSONObject)loginScenario.getBean(PlanBenefitsAndCoverageCommonConstants.BENEFITS_AND_COVERAGE_EXPECTED);
-	  benefitsCoveragePage.validate_drugcostdropdownoptions();
-	  }
-	 
+
+	@And("^the user validates dropdown selection functionality")
+	public void user_validate_dropdwonvalues() {
+		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario()
+				.getBean(PageConstants.BENEFITS_AND_COVERAGE_PAGE);
+		// JSONObject
+		// benefitsandcoverageExectedJson=(JSONObject)loginScenario.getBean(PlanBenefitsAndCoverageCommonConstants.BENEFITS_AND_COVERAGE_EXPECTED);
+		benefitsCoveragePage.validate_drugcostdropdownoptions();
+	}
 
 	@And("the drugcost dropdown should not display")
 	public void user_validate_dropdownshouldnotdisplay() {
@@ -940,7 +918,8 @@ public class BenefitsAndCoverageUmsStepDefinition {
 	public void user_validate_linksworking() {
 		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario()
 				.getBean(PageConstants.BENEFITS_AND_COVERAGE_PAGE);
-		//JSONObject benefitsandcoverageExectedJson = (JSONObject) loginScenario.getBean(PlanBenefitsAndCoverageCommonConstants.BENEFITS_AND_COVERAGE_EXPECTED);
+		// JSONObject benefitsandcoverageExectedJson = (JSONObject)
+		// loginScenario.getBean(PlanBenefitsAndCoverageCommonConstants.BENEFITS_AND_COVERAGE_EXPECTED);
 		benefitsCoveragePage.clickOnLearnmoreaboutlinkstage();
 		benefitsCoveragePage.clickOnLearnmoreaboutlinktier();
 	}
@@ -958,63 +937,61 @@ public class BenefitsAndCoverageUmsStepDefinition {
 				.getBean(PageConstants.BENEFITS_AND_COVERAGE_PAGE);
 		benefitsCoveragePage.validatedrugcosttable();
 	}
+
 	@And("the user should see Ways to save Option")
 	public void user_validate_waysToSave() {
 		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario()
-				.getBean(PageConstants.BENEFITS_COVERAGE_PAGE);
+				.getBean(PageConstants.BENEFITS_AND_COVERAGE_PAGE);
 		benefitsCoveragePage.validateWaystoSave();
 	}
 
 	@And("the user validates plan overview section")
 	public void user_validate_planOverview() {
 		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario()
-				.getBean(PageConstants.BENEFITS_COVERAGE_PAGE);
+				.getBean(PageConstants.BENEFITS_AND_COVERAGE_PAGE);
 		benefitsCoveragePage.validatePlanOverview();
 	}
-	
-	
-	
-	
+
 	@And("the user validates plan overview section for a Lis member")
 	public void user_validate_planOverviewLis() {
 		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario()
-				.getBean(PageConstants.BENEFITS_COVERAGE_PAGE);
+				.getBean(PageConstants.BENEFITS_AND_COVERAGE_PAGE);
 		benefitsCoveragePage.validatePlanOverviewLis();
 	}
-	
+
 	@And("the user validates headers on Bnc page for indi members")
 	public void user_validate_Headers() {
 		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario()
-				.getBean(PageConstants.BENEFITS_COVERAGE_PAGE);
+				.getBean(PageConstants.BENEFITS_AND_COVERAGE_PAGE);
 		benefitsCoveragePage.validateHeaders();
 	}
-	
-@And("the user validates headers on Bnc page for group members")
+
+	@And("the user validates headers on Bnc page for group members")
 	public void user_validate_Headers_Group() {
 		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario()
-				.getBean(PageConstants.BENEFITS_COVERAGE_PAGE);
+				.getBean(PageConstants.BENEFITS_AND_COVERAGE_PAGE);
 		benefitsCoveragePage.validateHeadersGroup();
-	}	
+	}
 
-@And("the user validates the Primarycare Provider section")
-public void user_validate_PrimaryCareProv() {
-	BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario()
-			.getBean(PageConstants.BENEFITS_COVERAGE_PAGE);
-	benefitsCoveragePage.validatePrimaryCareProvider();
-}	
+	@And("the user validates the Primarycare Provider section")
+	public void user_validate_PrimaryCareProv() {
+		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario()
+				.getBean(PageConstants.BENEFITS_AND_COVERAGE_PAGE);
+		benefitsCoveragePage.validatePrimaryCareProvider();
+	}
 
-@And("the user validates the Primarycare Provider section for Group")
-public void user_validate_PrimaryCareProvForHmo() {
-	BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario()
-			.getBean(PageConstants.BENEFITS_COVERAGE_PAGE);
-	benefitsCoveragePage.validatePrimaryCareProviderForGroup();
-}	
+	@And("the user validates the Primarycare Provider section for Group")
+	public void user_validate_PrimaryCareProvForHmo() {
+		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario()
+				.getBean(PageConstants.BENEFITS_AND_COVERAGE_PAGE);
+		benefitsCoveragePage.validatePrimaryCareProviderForGroup();
+	}
 
-@And("the user validates the Out of Pocket Max section")
-public void user_validate_OutofPocket() {
-	BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario()
-			.getBean(PageConstants.BENEFITS_COVERAGE_PAGE);
-	benefitsCoveragePage.validateOutofPocketMax();
-}
+	@And("the user validates the Out of Pocket Max section")
+	public void user_validate_OutofPocket() {
+		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario()
+				.getBean(PageConstants.BENEFITS_AND_COVERAGE_PAGE);
+		benefitsCoveragePage.validateOutofPocketMax();
+	}
 
 }

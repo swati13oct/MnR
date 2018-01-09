@@ -89,7 +89,7 @@ public class ProfileandPreferencesUMSStepDefinition {
 		}
 		else
 		{
-		System.out.println("NULL BHAI");
+		System.out.println("NULL here");
 		}
 		
 
