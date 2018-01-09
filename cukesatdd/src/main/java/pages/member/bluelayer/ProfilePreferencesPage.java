@@ -574,7 +574,7 @@ public class ProfilePreferencesPage extends UhcDriver {
 		validate(Seemorewaystext);
 	}
 
-	public boolean clickcontactUslink() {
+	public  void clickcontactUslink() {
 		validate(contactUs);
 		contactUs.click();
 		try {
@@ -583,12 +583,14 @@ public class ProfilePreferencesPage extends UhcDriver {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		if (driver.getCurrentUrl().contains("/content/uhcm/home/contact.html")) {
-			return true;
+		
+		System.out.println(driver.getCurrentUrl());
+		if (driver.getCurrentUrl().contains("/member/contact-us/")) {
+			Assert.assertTrue(true);
 		} else {
 			Assert.fail("The element " + contactuslink.getText() + "is not found");
 		}
-		return false;
+		
 		
 	}
 
@@ -656,7 +658,8 @@ public class ProfilePreferencesPage extends UhcDriver {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		if (driver.getCurrentUrl().contains("content/uhcm/home/contact.html")) {
+		if (driver.getCurrentUrl().contains("member/contact-us/")) {
+			System.out.println("Inside here ");
 			return true;
 		} else {
 			Assert.fail("The element " + contactuslink.getText() + "is not found");
