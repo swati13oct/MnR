@@ -35,7 +35,7 @@ public class ContactusRedesignStepDefinition {
 		}
 		
 		@Given("^registered UMS member with following attributes$")
-		public void registered_member_orderplanmaterials_ums(DataTable givenAttributes) {
+		public void registered_member_orderplanmaterials_ums(DataTable givenAttributes) throws InterruptedException {
 
 			List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
 			Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();

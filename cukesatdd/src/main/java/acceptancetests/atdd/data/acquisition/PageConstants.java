@@ -191,6 +191,8 @@ public class PageConstants {
 	public static final String PDP_REQUEST_MORE_HELP_INFORMATION_PAGE = "pdpRequestHelpAndInformationPage";
 
 	public static final String PDP_ENROLLMENT_GUIDE_PAGE = "pdpEnrollementGuidePage";
+	
+	public static final String NEW_LOGIN_PAGE = "newLoginPage";
 
 	public static final String LOGIN_ASSISTANCE_PAGE = "loginAssistancePage";
 
