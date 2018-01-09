@@ -15,7 +15,7 @@ import cucumber.junit.Cucumber;
 @Cucumber.Options(glue = { "atdd.framework","acceptancetests.redesign" }, 
 		features = { "feature/re-design" }, 
 		format = {
-		"pretty", "html:reports/test-report" }, tags ={"@profilepreferences"})
+		"pretty", "html:reports/test-report","json:target/cucumber.json" }, tags ={"@profilepreferences"})
 public class RunAtddMyProfileandPreferences {
 	
 }
