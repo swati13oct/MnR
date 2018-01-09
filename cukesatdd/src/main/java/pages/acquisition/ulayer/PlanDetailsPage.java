@@ -10,6 +10,8 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.NoSuchElementException;
+import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -19,7 +21,7 @@ import acceptancetests.atdd.data.CommonConstants;
 import acceptancetests.atdd.data.PageData;
 import acceptancetests.atdd.util.CommonUtility;
 import atdd.framework.UhcDriver;
-import pages.acquisition.dce.ulayer.DrugCostEstimatorPage;
+import pages.acquisition.ulayer.DrugCostEstimatorPage;
 
 /**
  * @author gumeshna
@@ -118,24 +120,11 @@ public class PlanDetailsPage extends UhcDriver {
 	
 	public JSONObject planDocPDFAcqJson;
 
-	 public PlanDetailsPage(WebDriver driver, String planType) {
-         super(driver);
-         PageFactory.initElements(driver, this);
-         CommonUtility.waitForPageLoad(driver, plandetails, CommonConstants.TIMEOUT_30);
-         String fileName = null;
-         if(planType.equalsIgnoreCase("MA")||planType.equalsIgnoreCase("MAPD"))
-         {
-                 fileName = "maplandetails.json";
-         }
-         else
-         {
-                 fileName = planType.toLowerCase()+"plandetails.json";
-         }
-
-         vppPlanDetails = CommonUtility.readPageData(fileName,
-                         CommonConstants.PAGE_OBJECT_DIRECTORY_ULAYER_ACQ);
-         openAndValidate();
- }
+	public PlanDetailsPage(WebDriver driver) {
+		super(driver);
+		PageFactory.initElements(driver, this);
+		openAndValidate();
+	}
 
 	public String getContent() {
 		return plandetails.getText();
@@ -320,7 +309,7 @@ public class PlanDetailsPage extends UhcDriver {
 		JavascriptExecutor je = ((JavascriptExecutor) driver);
 		je.executeScript("arguments[0].scrollIntoView(true);",compareChkBox);
 		CommonUtility.waitForPageLoad(driver, drugBenefitsSection, 20);
-		compareChkBox.click();
+		je.executeScript("arguments[0].click();",compareChkBox);
 		try {
 			Thread.sleep(1000);
 		} catch (InterruptedException e) {
@@ -332,8 +321,8 @@ public class PlanDetailsPage extends UhcDriver {
 		return false;
 	}
 
+   	
 
 
-	
 
 }

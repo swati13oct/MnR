@@ -3,6 +3,8 @@
  */
 package pages.member.ulayer;
 
+import gherkin.formatter.model.DataTableRow;
+
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
@@ -21,14 +23,12 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-import pages.member.bluelayer.PharmacySearchPage;
 import acceptancetests.atdd.data.CommonConstants;
 import acceptancetests.atdd.data.ElementData;
 import acceptancetests.atdd.data.PageData;
 import acceptancetests.atdd.util.CommonUtility;
 import atdd.framework.UhcDriver;
-import cucumber.table.DataTable;
-import gherkin.formatter.model.DataTableRow;
+import cucumber.api.DataTable;
 
 /**
  * @author pagarwa5
@@ -63,18 +63,7 @@ public class PlanBenefitsCoveragePage extends UhcDriver {
 	@FindBy(xpath="//*[@id='planBenefitsApp']/div/div/div[2]/div[1]/div/div[4]/div[1]/span")
 	private WebElement effectiveDate;
 	
-	@FindBy(xpath="//a[contains(text(),'Passport Flyer') and contains(text(),'PDF')]")
-	private WebElement passportFlyerPdf;
-	
-	
-	public void verifyPassportFlyerPdf(){
-		try {
-		validate(passportFlyerPdf);
 
-		} catch (Exception e) {
-			System.out.println("PASSPORT PDF NOT FOUND ...");
-		}
-	}
 
 
 

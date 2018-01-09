@@ -37,7 +37,6 @@ public class SavingsOppurtunity extends UhcDriver{
 		super(driver);
 		PageFactory.initElements(driver, this);
 		CommonUtility.waitForPageLoad(driver, SwitchGenericPage, 10);
-		String fileName = CommonConstants.SWITCH_GENERIC_PAGE_DATA;
 		//switchgeneric = CommonUtility.readPageData(fileName,
 			//	CommonConstants.PAGE_OBJECT_DIRECTORY_BLAYER_MEMBER);
 		//openAndValidate();
@@ -62,13 +61,13 @@ public class SavingsOppurtunity extends UhcDriver{
 
 		System.out.println("addnewdrugJson----->" + switchgenericJson);
 	}
-	public JSONObject getExpectedData(Map<String, JSONObject> expectedDataMap) {
+	/*public JSONObject getExpectedData(Map<String, JSONObject> expectedDataMap) {
 
 		JSONObject newPaymentHistoryExpectedJson = expectedDataMap
 				.get(CommonConstants.SWITCH_GENERIC);
 
 		return newPaymentHistoryExpectedJson;
-	}
+	}*/
 	public void savedrugbutton() throws InterruptedException {
 		Thread.sleep(10000);
 		waitforElement(savedrugbutton);

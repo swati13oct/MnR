@@ -213,9 +213,5 @@ public class PharmacyLocatorPage extends UhcDriver {
 		validatePreferredPharmacyNetwork();
 	}
 	
-	public PharmacyLocatorFilterPage clickOnFilterButton(){
-		waitforElement(btnFilter);
-		btnFilter.click();
-		return new PharmacyLocatorFilterPage(driver);
-	}
+
 }

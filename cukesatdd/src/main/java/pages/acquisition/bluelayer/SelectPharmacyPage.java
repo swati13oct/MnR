@@ -14,6 +14,9 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.Select;
+
+import com.sun.jna.platform.win32.WinNT.WELL_KNOWN_SID_TYPE;
 
 import acceptancetests.atdd.data.CommonConstants;
 import acceptancetests.atdd.data.ElementData;
@@ -42,24 +45,69 @@ public class SelectPharmacyPage extends UhcDriver {
 	@FindBy(className = "select_link")
 	WebElement selectLink;
 
+	@FindBy(linkText = "Edit ZIP code")
+	private WebElement editzipCodeLink;
+	
+	@FindBy(xpath = "//div[@id='dcemodal']/div/div/form/div[5]/div[12]/div/a/span")
+	private WebElement upgradeButton;
+	
+	@FindBy(className = "ZIPCodeBox")
+	WebElement zipCodeField;
+	
+	@FindBy(xpath="//div[@class='tabsHead']/div")
+	WebElement manageDrugTab;
+	
 	private PageData pharmacies;
 
 	public JSONObject availablePharmaciesJson;
 
 	public PageData pharmacyInfo;
+	
+	
 
 	public SelectPharmacyPage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
+/*
 		String fileName = CommonConstants.SELECT_PHARMACIES_PAGE_DATA;
 		pharmacies = CommonUtility.readPageData(fileName,
 				CommonConstants.PAGE_OBJECT_DIRECTORY_BLUELAYER_ACQ);
 		String pharmacyInfoFileName = CommonConstants.PHARMACY_INFORMATION_PAGE_DATA;
 		pharmacyInfo = CommonUtility.readPageData(pharmacyInfoFileName,
 				CommonConstants.PAGE_OBJECT_DIRECTORY_BLUELAYER_ACQ);
-		openAndValidate();
+*/
+//		openAndValidate();
+	}
+	
+	public boolean validatePharamacyPage(){
+		boolean flag = true;
+		
+		ElementData elementData = new ElementData("className", "rowBorder");
+		List<WebElement> pharmacyNames = findElements(elementData);
+
+		for (WebElement pharmacy : pharmacyNames) {
+			System.out.println(pharmacy.getText().split("\n")[1]);
+			if(pharmacy.getText().split("\n")[1].length()==0){
+				flag = false;
+			}
+		}
+		return flag;
+	}
+	
+	public void editZipcode(String zipCode){
+		editzipCodeLink.click();
+		sendkeys(zipCodeField, zipCode);
+		upgradeButton.click();
 	}
 
+	public ManageDrugPage naviageToManageDrugTab(){
+		manageDrugTab.click();
+		if (currentUrl().contains("manageDrugList")) {
+			return new ManageDrugPage(driver);
+		} else {
+			return null;
+		}
+	}
 	public void selectPharmacyType(String pharmacyType, String distance) {
 
 		String pharmacyPath = "//div[@id='dcemodal']/div/div/form/div[5]/div[12]/select[1]/*[. = '"
@@ -106,7 +154,7 @@ public class SelectPharmacyPage extends UhcDriver {
 		}
 		try {
 			if (pharmacyDropDown.isDisplayed()) {
-				CommonUtility.waitForElementToDisappear(driver, pharmacyTable,
+				CommonUtility.waitForElementToDisappear(driver, pharmacyDropDown,
 						CommonConstants.TIMEOUT_30);
 			}
 		} catch (NoSuchElementException e) {
@@ -258,4 +306,25 @@ public class SelectPharmacyPage extends UhcDriver {
 		return new SelectPharmacyPage(driver);
 	}
 
+	public boolean validatePharmacyTypeselection(String expectedPharmacyType, String expectedDistance){
+		boolean flag = true;
+		
+		Select selectPharmacytype = new Select(driver.findElement(By.className("pharmacyDropDown")));
+		WebElement actualPharmacytype = selectPharmacytype.getFirstSelectedOption();
+		System.out.println(actualPharmacytype.getText());
+		System.out.println(expectedPharmacyType);
+		Select selectDistance = new Select(driver.findElement(By.className("milesDropDown")));
+		WebElement actualDistance = selectDistance.getFirstSelectedOption();
+		System.out.println(actualDistance.getText());
+		System.out.println(expectedDistance);
+		if(!actualPharmacytype.getText().trim().equals(expectedPharmacyType.trim())){
+			flag = false;
+		}
+		
+		if(!actualDistance.getText().trim().equals(expectedDistance.trim())){
+			flag = false;
+		}
+		
+		return flag;
+	}
 }

@@ -13,6 +13,7 @@ import org.openqa.selenium.support.PageFactory;
 
 import pages.acquisition.ulayer.GetStartedPage;
 import pages.acquisition.ulayer.AddDrugPage;
+import pages.acquisition.ulayer.LocationSearchPage;
 import atdd.framework.UhcDriver;
 
 

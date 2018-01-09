@@ -10,8 +10,6 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
 import pages.acquisition.ulayer.AgentAppointmentConfirmationPage;
-import pages.acquisition.ulayer.ZipcodeLookupHomePage;
-import pages.acquisition.ulayer.ZipcodeSelectionHomePage;
 import acceptancetests.atdd.data.CommonConstants;
 import acceptancetests.atdd.data.ElementData;
 import acceptancetests.atdd.util.CommonUtility;

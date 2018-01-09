@@ -65,7 +65,7 @@ public class TeamCLoginBLayer extends UhcDriver {
 		signInButton.click();
 		
 
-		if(MRScenario.TeamCEnvironment.equals("team-h") || MRScenario.TeamCEnvironment.equals("team-c")) {
+		if(MRScenario.environment.equals("team-h") || MRScenario.environment.equals("team-c")) {
 			try{
 			Alert alert = driver.switchTo().alert();
 			alert.accept();
