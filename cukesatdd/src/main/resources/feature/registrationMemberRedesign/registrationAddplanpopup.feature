@@ -2,8 +2,7 @@
 Feature: To test add a plan flow and error for registration flow in redesign portal
 
   Scenario Outline: To verify member with additional plan is navigated to step 3 (Create Account) after adding another plan on Step2(Plan Information Page)
-    Given the member is on sign in page
-    And User click on the register button
+    Given the member is on registration page of new portal part of redesign
     When the member enter the member ID into Member ID field
       | Plan Member ID | <planMemberId> |
     And member enter date of birth in the date of birth dropdown

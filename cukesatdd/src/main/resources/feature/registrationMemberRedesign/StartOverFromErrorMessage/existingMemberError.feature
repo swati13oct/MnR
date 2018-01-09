@@ -2,8 +2,7 @@
 Feature: To test Start Over link present on existing member error page
 
   Scenario Outline: To verify member is navigated to the personal Information page on clicking start over link
-    Given the member is on sign in page
-    And User click on the register button
+    Given the member is on registration page of new portal part of redesign
     When the member enter the member ID into Member ID field
       | Plan Member ID | <planMemberId> |
     And member enter date of birth in the date of birth dropdown
@@ -22,8 +21,7 @@ Feature: To test Start Over link present on existing member error page
    #team-h member 
    | 914429086    | 08-28-1927  |
   Scenario Outline: To verify member is navigated to the username and password help page
-    Given the member is on sign in page
-    And User click on the register button
+    Given the member is on registration page of new portal part of redesign
     When the member enter the member ID into Member ID field
       | Plan Member ID | <planMemberId> |
     And member enter date of birth in the date of birth dropdown

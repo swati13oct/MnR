@@ -54,9 +54,7 @@ public class RegistrationDashboardCreateAccountErrorsStepDefinition {
                                 RegistrationInformationPage registrationInformationPage = (RegistrationInformationPage) 
                                                                 getLoginScenario().getBean(PageConstants.REGISTRATION_INFORMATION_PAGE);
                                 
-                                Thread.sleep(2000);
-                                registrationInformationPage.scrollUp();
-                                Thread.sleep(2000);
+                                
                                 registrationInformationPage.getblankusernameError().isDisplayed();
                                 Thread.sleep(2000);
                                 Assert.assertTrue(registrationInformationPage.getblankusernameError().getText().contains("username"));
@@ -69,11 +67,9 @@ public class RegistrationDashboardCreateAccountErrorsStepDefinition {
                                 RegistrationInformationPage registrationInformationPage = (RegistrationInformationPage) 
                                                                 getLoginScenario().getBean(PageConstants.REGISTRATION_INFORMATION_PAGE);
                                 
-                                Thread.sleep(3000);
-                                registrationInformationPage.scrollUp();
-                                Thread.sleep(3000);
+                                
                                 registrationInformationPage.getincorrectusernameError().isDisplayed();
-                                Thread.sleep(3000);
+                                Thread.sleep(2000);
                                 Assert.assertTrue(registrationInformationPage.getincorrectusernameError().getText().contains("Username"));
 
                 }
@@ -84,9 +80,7 @@ public class RegistrationDashboardCreateAccountErrorsStepDefinition {
                                 // navigate to registration page
                                 RegistrationInformationPage registrationInformationPage = (RegistrationInformationPage) 
                                                                 getLoginScenario().getBean(PageConstants.REGISTRATION_INFORMATION_PAGE);
-                                Thread.sleep(2000);
-                                registrationInformationPage.scrollUp();
-                                Thread.sleep(2000);
+                                
                                 registrationInformationPage.getincorrectusernameError().isDisplayed();
                                 Thread.sleep(5000);
                                 Assert.assertTrue(registrationInformationPage.getincorrectusernameError().getText().contains("Username"));
@@ -98,7 +92,7 @@ public class RegistrationDashboardCreateAccountErrorsStepDefinition {
                                 // navigate to registration page
                                 RegistrationInformationPage registrationInformationPage = (RegistrationInformationPage) 
                                                                 getLoginScenario().getBean(PageConstants.REGISTRATION_INFORMATION_PAGE);
-                                Thread.sleep(2000);
+                                
                                 registrationInformationPage.getblankpasswordError().isDisplayed();
                                 Thread.sleep(5000);
                                 Assert.assertTrue(registrationInformationPage.getblankpasswordError().getText().contains("password"));
@@ -109,7 +103,7 @@ public class RegistrationDashboardCreateAccountErrorsStepDefinition {
                                 // navigate to registration page
                                 RegistrationInformationPage registrationInformationPage = (RegistrationInformationPage) 
                                                                 getLoginScenario().getBean(PageConstants.REGISTRATION_INFORMATION_PAGE);
-                                Thread.sleep(2000);
+                                
                                 registrationInformationPage.getincorrectpasswordError().isDisplayed();
                                 Thread.sleep(5000);
                                 Assert.assertTrue(registrationInformationPage.getincorrectpasswordError().getText().contains("Password"));
@@ -121,7 +115,7 @@ public class RegistrationDashboardCreateAccountErrorsStepDefinition {
                                 // navigate to registration page
                                 RegistrationInformationPage registrationInformationPage = (RegistrationInformationPage) 
                                                                 getLoginScenario().getBean(PageConstants.REGISTRATION_INFORMATION_PAGE);
-                                Thread.sleep(2000);
+                
                                 registrationInformationPage.getconfirmpassworderrormessage().isDisplayed();
                                 Thread.sleep(5000);
                                 Assert.assertTrue(registrationInformationPage.getconfirmpassworderrormessage().getText().contains("Your password and password confirmation"));
@@ -132,7 +126,7 @@ public class RegistrationDashboardCreateAccountErrorsStepDefinition {
                                 // navigate to registration page
                                 RegistrationInformationPage registrationInformationPage = (RegistrationInformationPage) 
                                                                 getLoginScenario().getBean(PageConstants.REGISTRATION_INFORMATION_PAGE);
-                                Thread.sleep(2000);
+                                
                                 registrationInformationPage.getconfirmEmailError().isDisplayed();
                                 Thread.sleep(5000);
                                 Assert.assertTrue(registrationInformationPage.getconfirmEmailError().getText().contains("Your email confirmation and email address"));
@@ -144,7 +138,7 @@ public class RegistrationDashboardCreateAccountErrorsStepDefinition {
                                 // navigate to registration page
                                 RegistrationInformationPage registrationInformationPage = (RegistrationInformationPage) 
                                                                 getLoginScenario().getBean(PageConstants.REGISTRATION_INFORMATION_PAGE);
-                                Thread.sleep(2000);
+                                
                                 registrationInformationPage.getemailerrormessage().isDisplayed();
                                 Thread.sleep(5000);
                                 Assert.assertTrue(registrationInformationPage.getemailerrormessage().getText().contains("Enter your email address like this:"));

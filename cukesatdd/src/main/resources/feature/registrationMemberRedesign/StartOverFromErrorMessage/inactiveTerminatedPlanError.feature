@@ -2,8 +2,7 @@
 Feature: To test links present on inactive Terminated Plan page
 
   Scenario Outline: To verify member is navigated to the personal Information page
-    Given the member is on sign in page
-    And User click on the register button
+    Given the member is on registration page of new portal part of redesign
     When the member enter the member ID into Member ID field
       | Plan Member ID | <planMemberId> |
     And member enter date of birth in the date of birth dropdown

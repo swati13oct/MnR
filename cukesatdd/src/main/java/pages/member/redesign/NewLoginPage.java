@@ -6,6 +6,7 @@ package pages.member.redesign;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.NoAlertPresentException;
 import org.openqa.selenium.UnhandledAlertException;
@@ -16,10 +17,6 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
 import pages.acquisition.ulayer.LoginAssistancePage;
-import pages.dashboard.acquisition.RegistrationInformationPage;
-import pages.member.ulayer.RallyDashboard;
-import pages.member.ulayer.TerminatedHomePage;
-import pages.member.ulayer.UNPWAssistancePage;
 import acceptancetests.atdd.data.CommonConstants;
 import acceptancetests.atdd.data.MRConstants;
 import acceptancetests.atdd.data.PageData;
@@ -34,7 +31,8 @@ import atdd.framework.UhcDriver;
 public class NewLoginPage extends UhcDriver {
 
 	// Page URL
-	private static String PAGE_URL = MRConstants.Dashboard_URL;
+	private static String PAGE_URL = MRConstants.AARPM_URL;
+	private static String REDESIGN_PAGE_URL = MRConstants.REDESIGN_AARPM_URL;
 
 	@FindBy(id = "sign-in-btn")
 	private WebElement btnSignIn;
@@ -44,9 +42,6 @@ public class NewLoginPage extends UhcDriver {
 
 	@FindBy(id = "password")
 	private WebElement passwordField;
-	
-	@FindBy(id = "regbutton")
-	private WebElement registerButton;
 
 	@FindBy(linkText = "Forgot your username or password?")
 	private WebElement forgotUsernamePasswordLink;
@@ -64,45 +59,37 @@ public class NewLoginPage extends UhcDriver {
 		openAndValidate();
 	}
 
-	public Object loginWith(String username, String password) throws InterruptedException {
-		//loginIn.click(); 
-		sendkeys(userNameField,username);
-		sendkeys(passwordField,password);
-		btnSignIn.click();
-		System.out.println("Sign In clicked");
-
-
-
+	public Object loginWith(String username, String password) {
+			
 		try{
-		System.out.println();
-		Alert alert = driver.switchTo().alert();
-		alert.accept();
-		Alert alert1 = driver.switchTo().alert();
-		alert1.accept();
-		}catch(Exception e) {
-		System.out.println("No Such alert displayed");
+			sendkeys(userNameField,username);
+			sendkeys(passwordField,password);
+			btnSignIn.click();
+			Thread.sleep(40000);
+			if (MRScenario.environment.equals("team-e")/* || MRScenario.environment.equals("team-h")*/){
+					Alert alert2 = driver.switchTo().alert();
+					alert2.accept();
+			}
+			Thread.sleep(5000);
+            if (validate(iPerceptionPopUp)) {
+                iPerceptionPopUp.click();
+                System.out.println("iPerception Pop Up displayed");
+         }
+		Thread.sleep(20000);
+		}catch (InterruptedException e) {
+				e.printStackTrace();
 		}
-		/*if (!(MRScenario.environment.equals("awe-dev-b") || MRScenario.environment.equals("dev-c") || MRScenario.environment.equals("team-b"))){
-		Alert alert2 = driver.switchTo().alert();
-		alert2.accept();
-		}*/
-		          
-		Thread.sleep(30000);
-		System.out.println("30 secondss completed");
-		if(currentUrl().contains("/dashboard"))
-
+		if(currentUrl().contains("member/testharness.html"))
 		{
-		return new RallyDashboard(driver);
-		}
-		else if (currentUrl().contains("terminated-plan.html")) {
-		return new TerminatedHomePage(driver); 
+			return new TestHarnessPage(driver);
 		}
 		return null;
-		}
+	}
 	@Override
 	public void openAndValidate() {
-		start(PAGE_URL);
-		}
+		start(MRConstants.NEW_REDESIGN_URL);
+		validate(btnSignIn);
+	}
 
 	public static boolean isAlertPresent(WebDriver wd) {
 		try {
@@ -116,26 +103,4 @@ public class NewLoginPage extends UhcDriver {
 			return false;
 		}
 	}
-	
-	
-    /**
-     * Navigate to registration page
-     *
-     * @return the registration page
-     */
-    public RegistrationInformationPage navigateToRegistration() {
-    	registerButton.click();
-    	return new RegistrationInformationPage(super.driver);
-    }
-    
-    /** Navigate to username password assisatnce page
-    *
-    * @return the username password assisatnce page
-    */
-    
-    public UNPWAssistancePage navigateToUNPWassistance(){
-    	forgotUsernamePasswordLink.click();    	
-    	return new UNPWAssistancePage(super.driver);
-    }
-    
 }
