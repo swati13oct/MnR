@@ -67,7 +67,7 @@ public class ProfilePreferencesPage extends UhcDriver {
     @FindBy(id = "passwordNew-error")
 	private WebElement passworderrormessage2;
     
-    @FindBy(id = "passwordNewConfirm-error")
+    @FindBy(xpath = "//label[@id='passwordNewConfirm-error']")
 	private WebElement passworderrormessage3;
     
 	@FindBy(xpath = ".//*[@id='email']/div[1]/p")
@@ -441,7 +441,9 @@ public class ProfilePreferencesPage extends UhcDriver {
 			e.printStackTrace();
 		}
 		SaveButton.click();
-		if (passworderrormessage3.getText().contentEquals("Please Enter the same value again.")) {
+		validate(passworderrormessage3);
+		
+		if (passworderrormessage3.getText().contentEquals("Your password and password confirmation do not match.")) {
 			System.out.println("The element" + passworderrormessage3.getText() + "is found");
 			return true;
 		} else {

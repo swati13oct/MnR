@@ -90,7 +90,7 @@ CommonUtility.waitForPageLoad(driver, panelHome, 60);
 		System.out.println(driver.getTitle());
 
 		if (driver.getTitle().equalsIgnoreCase("Profile")) {
-			System.out.println("Pass!");
+			
 			return new ProfilePreferencesPage(driver);
 		}
 		JavascriptExecutor jse = (JavascriptExecutor) driver;
