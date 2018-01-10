@@ -70,7 +70,7 @@ public class ProfilePreferencesPage extends UhcDriver {
     @FindBy(xpath = "//label[@id='passwordNewConfirm-error']")
 	private WebElement passworderrormessage3;
     
-	@FindBy(xpath = ".//*[@id='email']/div[1]/p")
+	@FindBy(xpath = "//div[@id='email']//*[contains(text(),'EMAIL')]")
 	private WebElement EmailLabel;
 
 	@FindBy(xpath = ".//*[@id='email']/div[3]/div[1]/div/div/span[1]")
@@ -106,7 +106,7 @@ public class ProfilePreferencesPage extends UhcDriver {
 	@FindBy(id = "updateEmail")
 	private WebElement SaveEmailButton;
 
-	@FindBy(xpath = ".//*[@id='email-form']/div[3]/div/a")
+	@FindBy(className = "atdd-email-bottomcancel")
 	private WebElement CanceEmaillButton;
 
 	@FindBy(className = "edit-btn-email")
@@ -141,10 +141,10 @@ public class ProfilePreferencesPage extends UhcDriver {
 
 	public static final String Disclaimerlinkcontent_xpath = ".//*[@id='collapseDisclaimer']";
 
-	@FindBy(id = "permanenet")
+	@FindBy(xpath = "//*[@id='permanenetCardHeight']//*[contains(text(),'CONTACT US')]")
 	private WebElement permanentaddress;
 
-	@FindBy(className = "text-link")
+	@FindBy(xpath = "//div[@id='permanenet']//*[contains(text(),'CONTACT US')]")
 	private WebElement contactuslink;
 
 	@FindBy(className = "atdd-profile-communicationpreference")
@@ -533,7 +533,7 @@ public class ProfilePreferencesPage extends UhcDriver {
 		} else {
 			Assert.fail("The element " + mandatorymessage.getText() + "is not found");
 		}
-
+         validate(CanceEmaillButton);
 		CanceEmaillButton.click();
 	}
 
@@ -542,7 +542,7 @@ public class ProfilePreferencesPage extends UhcDriver {
 		NewEmail.sendKeys("nikitajain4@gmail.com");
 		emailConfirm.sendKeys("nikitajain4@gmal.com");
 		SaveEmailButton.click();
-		if (emailerrormessage.getText().contentEquals("Please enter the same value again.")) {
+		if (emailerrormessage.getText().contentEquals("Your email confirmation and email address do not match.")) {
 			System.out.println("The element" + emailerrormessage.getText() + "is found");
 			return true;
 		} else {
@@ -651,22 +651,12 @@ public class ProfilePreferencesPage extends UhcDriver {
 
 	}
 
-	public boolean validatecontactuslink() {
+	public void validatecontactuslink() {
 		validate(contactuslink);
 		contactuslink.click();
-		try {
-			Thread.sleep(20000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		if (driver.getCurrentUrl().contains("member/contact-us/")) {
-			System.out.println("Inside here ");
-			return true;
-		} else {
-			Assert.fail("The element " + contactuslink.getText() + "is not found");
-		}
-		return false;
+	
+		
+		
 	}
 
 	public void validatecommunicationpreferences() {
