@@ -95,52 +95,7 @@
 		},
 	"riderTypeDetails":{
 		"identifier":"xpath",
-		"elementName":".//*[@id='planBenefitsApp']/div[7]/div[2]/div/div[2]/div/div[2]/div/div"
-		},
-	"activeRider1":{
-		"identifier":"xpath",
-		"elementName":".//*[@id='planBenefitsApp']/div[7]/div[1]/div/div[2]/div[1]/div[2]/div/div[1]/div/div"
-		},
-	"activeRider2":{
-		"identifier":"xpath",
-		"elementName":".//*[@id='planBenefitsApp']/div[7]/div[1]/div/div[2]/div[1]/div[2]/div/div[2]/div/div"
-		},	
-	"availableRider1":{
-		"identifier":"xpath",
-		"elementName":".//*[@id='planBenefitsApp']/div[7]/div[1]/div/div[2]/div[2]/div[2]/div/div[1]/div/div"
-		},
-	"availableRider2":{
-		"identifier":"xpath",
-		"elementName":".//*[@id='planBenefitsApp']/div[7]/div[1]/div/div[2]/div[2]/div[2]/div/div[2]/div/div"
-		},
-	"needHelpSection":{
-		"identifier":"xpath",
-		"elementName":".//*[@id='_content_campaigns_medicaremember_contactus_macosmos_jcr_content_par_teaser']/div/section"
-		},
-	"disclaimersSection":{
-		"identifier":"xpath",
-		"elementName":"html/body/div[3]/div/div[3]/div[2]/div/div/div"
-
-	},	
-        "vasSection":{
-		"identifier":"xpath",
-		"elementName":".//*[@id='planBenefitsApp']/div"
-		},	
-        "nurseHealthLine":{
-		"identifier":"xpath",
-		"elementName":"Nursehealth"
-		},
-        "SilverSneaker":{
-		"identifier":"id",
-		"elementName":"silverSneaker"
-		},
-        "mycarePath":{
-		"identifier":"id",
-		"elementName":"mycarePath"
-	        },
-        "visionDiscount":{
-		"identifier":"id",
-		"elementName":"visionDiscount"
-		}			
+		"elementName":".//*[@id='planBenefitsApp']/div[7]/div[2]/div/div[2]/div/div/div/div"
+		}
 }
 }

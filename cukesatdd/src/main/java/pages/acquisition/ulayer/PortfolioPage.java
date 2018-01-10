@@ -6,6 +6,7 @@ package pages.acquisition.ulayer;
 
 import java.util.List;
 import java.util.concurrent.TimeUnit;
+
 import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
@@ -21,6 +22,7 @@ import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import pages.acquisition.bluelayer.ZipcodeLookupPage;
 import acceptancetests.atdd.data.MRConstants;
 import atdd.framework.UhcDriver;
 

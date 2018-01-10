@@ -43,11 +43,34 @@ public class SubmitApplicationPage extends UhcDriver{
                 PageFactory.initElements(driver, this);
                 String fileName = CommonConstants.SUBMIT_APPLICATION_PAGE_DATA;
                 submitApplication = CommonUtility.readPageData(fileName,
-                                CommonConstants.PAGE_OBJECT_DIRECTORY_ULAYER_ACQ);
+                                CommonConstants.PAGE_OBJECT_DIRECTORY_BLUELAYER_ACQ);
                 
                 openAndValidate();
                 
         }        
+        
+        public boolean validateSubmitApplicationPage(JSONObject actualJson, String planName, String zipCountyInfo){
+        	boolean flag = true;
+        	
+        	try {
+				if(!actualJson.get("planName").toString().contains(planName))
+					flag = false;
+				if(!actualJson.get("zipCountyInfo").toString().contains(zipCountyInfo))
+					flag = false;
+				if(!actualJson.get("premium").toString().contains("$"))
+					flag = false;
+				if(!actualJson.get("authorizedRepresentativeHeader").toString().contains("Statement of Understanding"))
+					flag = false;
+				if(!actualJson.get("statementOfUnderstandingHeader").toString().contains("Submit Application"))
+					flag = false;
+				
+			} catch (JSONException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+        	
+        	return flag;
+        }
 
         @Override
         public void openAndValidate() {

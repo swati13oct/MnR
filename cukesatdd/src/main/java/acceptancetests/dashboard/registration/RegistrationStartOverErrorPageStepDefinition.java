@@ -5,8 +5,12 @@ import org.junit.Assert;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import pages.dashboard.acquisition.RegistrationInformationPage;
-import cucumber.annotation.en.Then;
-import cucumber.annotation.en.When;
+import cucumber.api.DataTable;
+import cucumber.api.java.After;
+import cucumber.api.java.en.And;
+import cucumber.api.java.en.Given;
+import cucumber.api.java.en.Then;
+import cucumber.api.java.en.When;
 import acceptancetests.atdd.data.acquisition.PageConstants;
 import atdd.framework.MRScenario;
 

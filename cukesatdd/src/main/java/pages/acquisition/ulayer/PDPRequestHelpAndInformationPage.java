@@ -8,6 +8,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
+import acceptancetests.atdd.util.CommonUtility;
 import atdd.framework.UhcDriver;
 
 /**
@@ -17,7 +18,7 @@ import atdd.framework.UhcDriver;
 public class PDPRequestHelpAndInformationPage extends UhcDriver{
 	
 	
-	@FindBy(linkText = "Request Plan Information and Enrollment Materials")
+	@FindBy(xpath = ".//*[@id='subPageLeft']/div/div/div/div[2]/div/div[1]/p[2]/a")
 	private WebElement pdpEnquiryKitLink;
 
 	public PDPRequestHelpAndInformationPage(WebDriver driver) {
@@ -33,6 +34,7 @@ public class PDPRequestHelpAndInformationPage extends UhcDriver{
 	}
 
 	public PDPEnrollementGuidePage navigatesToPdpEnquiryKit() {
+		CommonUtility.waitForPageLoad(driver, pdpEnquiryKitLink, 20);
 		pdpEnquiryKitLink.click();
 		try {
 			Thread.sleep(15000);

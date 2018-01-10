@@ -9,6 +9,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
 
 import acceptancetests.agentappointment.data.RequestAgentAppointmentConstants;
 import acceptancetests.atdd.data.CommonConstants;
@@ -23,6 +24,12 @@ import atdd.framework.UhcDriver;
  */
 public class AgentAppointmentConfirmationPage extends UhcDriver {
 
+	@FindBy(xpath=".//*[@id='subPageLeft']")
+	private WebElement confirmationHeader;
+	
+	@FindBy(xpath=".//*[@id='subPageRight']/div/div/div/div/div")
+	private WebElement rightRail;
+	
 	public JSONObject agentConfirmationJson;
 
 	private PageData agentConfirmation;
@@ -65,5 +72,13 @@ public class AgentAppointmentConfirmationPage extends UhcDriver {
 		JSONObject agentappointmentconfirmation = MRScenario.readExpectedJson(
 				fileName, directory);
 		return agentappointmentconfirmation;
+	}
+	
+	public boolean validateConfirmationPage(){
+		CommonUtility.waitForPageLoad(driver, confirmationHeader,CommonConstants.TIMEOUT_30);
+		//System.out.println("text:"+confirmationHeader.getText());
+		if(validate(rightRail))//.getText().contains("Thank You for Your Appointment Request"))
+			return true;
+		return false;
 	}
 }

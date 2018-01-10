@@ -1,9 +1,0 @@
-{
-"url":null,
-"expectedData":{
-"planName1":{
-"identifier":"xpath",
-"elementName":"//html/body/nav/div/div/div/div/div[1]"
-}
-}
-}

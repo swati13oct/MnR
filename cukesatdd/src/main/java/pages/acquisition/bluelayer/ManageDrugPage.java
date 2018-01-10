@@ -4,9 +4,8 @@
 package pages.acquisition.bluelayer;
 
 import java.util.List;
+import java.util.Map;
 
-import org.json.JSONArray;
-import org.json.JSONException;
 import org.json.JSONObject;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
@@ -15,7 +14,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-import pages.acquisition.bluelayer.SelectPharmacyPage;
+
 import acceptancetests.atdd.data.CommonConstants;
 import acceptancetests.atdd.data.ElementData;
 import acceptancetests.atdd.data.PageData;
@@ -31,7 +30,7 @@ public class ManageDrugPage extends UhcDriver {
 
 	@FindBy(xpath = "//div[@class='costSavingsDrawer cb']")
 	private WebElement switchTogenericButton;
-	
+
 	@FindBy(css = "div > img[alt=\"Plus Image\"]")
 	WebElement plusSign;
 
@@ -40,13 +39,13 @@ public class ManageDrugPage extends UhcDriver {
 
 	@FindBy(linkText = "Reduce costs")
 	WebElement reduceCostLink;
-	
+
 	@FindBy(linkText = "Switch to generic")
 	WebElement switchToGenericLink;
 
 	@FindBy(linkText = "View plan results")
 	private WebElement viewPlansLink;
-	
+
 	@FindBy(linkText = "Close and apply changes")
 	private WebElement closeAndApplyChangesLink;
 
@@ -56,30 +55,45 @@ public class ManageDrugPage extends UhcDriver {
 	@FindBy(xpath = "//div[@id='dcemodal']/div/div/div[8]/div[4]/a[2]")
 	private WebElement pharmacySearchButton;
 
+	@FindBy(xpath = "//span[@class='dceOrangeBtn']")
+	private WebElement pharmacySearchButton2;
+
 	@FindBy(linkText = "Close and apply changes")
 	WebElement applyChangesButton;
 
 	@FindBy(xpath="//div[@class='delete']/a")
 	WebElement drugDelete;
-	
+
 	@FindBy(xpath = "//div[@class='addDrugBox']")
 	WebElement adddrugdiv;
-	
+
 	@FindBy(xpath="//div[@class='tabsHead']/div[2]")
 	WebElement selectPharmacyTab;
-	
+
 	@FindBy(xpath="//div[@class='tabsHead']/div")
 	WebElement manageDrugTab;
-	
+
 	@FindBy(className = "drugSearchBox")
 	WebElement drugSearchBox;
-	
+
 	@FindBy(xpath = "/html/body/div[3]/div/table/tbody/tr[3]/td/div/div/div/div/div[7]/form/div[2]/span[3]/p/span")
 	private WebElement expectedTooltip;
-	
+
 	@FindBy(xpath = "//span[@class='tooltipalign']/p/span")
 	private WebElement addtooltip;
 
+	@FindBy(xpath = "//div[contains(@class, 'drugDetailsMessage')]")
+	private WebElement drugdetailMsg;
+
+	@FindBy(className = "drugDetailsMessage")
+	private WebElement drugdetailMsg1;
+	
+	@FindBy(linkText = "Edit Pharmacy")
+	WebElement editPharmacyLink;
+
+	@FindBy(xpath = "//span[@class='current-pharmacy']")
+	private WebElement pharmacyNameElement;
+	
 	public JSONObject manageDrugJson;
 
 	private PageData drugInfo;
@@ -89,7 +103,7 @@ public class ManageDrugPage extends UhcDriver {
 	public ManageDrugPage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
-		String manageDrugFile = CommonConstants.MANAGE_DRUG_PAGE_DATA;
+		/*		String manageDrugFile = CommonConstants.MANAGE_DRUG_PAGE_DATA;
 		manageDrug = CommonUtility.readPageData(manageDrugFile,
 				CommonConstants.PAGE_OBJECT_DIRECTORY_BLUELAYER_ACQ);
 		if (!selectedDrug.isEmpty()) {
@@ -97,10 +111,63 @@ public class ManageDrugPage extends UhcDriver {
 			drugInfo = CommonUtility.readPageData(drugInfoFile,
 					CommonConstants.PAGE_OBJECT_DIRECTORY_BLUELAYER_ACQ);
 		}
+		 */
 		openAndValidate();
 
 	}
 
+
+	public boolean validateDruginformation(String drugSelected,Map<String, String> dosageMap){
+		boolean flag = true;
+		try {
+			Thread.sleep(5000);	
+		} catch (InterruptedException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		System.out.println("*************");
+		System.out.println(drugdetailMsg1.getText());
+		if(!drugdetailMsg1.getText().equals("You added "+drugSelected+" to your Drug List.")){
+			flag = false;
+		}
+
+		String selectedDrugdetailsExpected=dosageMap.get("Drug Dosage")+"\n"+"Qty "+dosageMap.get("Quantity")+" "+dosageMap.get("Drug Frequency")+
+				"\nSwitch to generic\nEdit\nDelete";
+		String selectedDrugdetailsActual = selectedDrug.get(0).getText();	
+		System.out.println(selectedDrugdetailsActual);
+		if(!selectedDrugdetailsActual.equals(selectedDrugdetailsExpected)){
+			flag = false;
+		}
+		return flag;
+	}
+	
+	public boolean validateSelectedpharmacy(String pharmacyName, String pharmacyType){
+		boolean flag = true;
+		String expectedPharmacytype = null;
+		if(pharmacyType.equals("Available Pharmacies")){
+			 expectedPharmacytype = "Standard Network Pharmacy";
+		}
+		ElementData elementData = new ElementData("className", "current-pharmacy");
+		List<WebElement> selectedPharmacyname = findElements(elementData);
+		System.out.println(selectedPharmacyname.get(0).getText());
+		if(!selectedPharmacyname.get(0).getText().equals(pharmacyName)){
+			flag = false;
+		}
+		
+		ElementData elementData_type = new ElementData("className", "current-pharmacy-type");
+		List<WebElement> selectedPharmacytype = findElements(elementData_type);
+		for (WebElement pharmacy : selectedPharmacytype) {
+			System.out.println(pharmacy.getText());
+			if (!pharmacy.getText().equals(expectedPharmacytype)){
+				flag = false;
+			}
+		}
+		
+		if(!editPharmacyLink.isDisplayed()){
+			flag = false;
+		}
+		return flag;
+	}
 
 	public AddDrugPage navigateToAddDrug() {
 		plusSign.click();
@@ -124,12 +191,37 @@ public class ManageDrugPage extends UhcDriver {
 	}
 
 	public SelectPharmacyPage navigateToPharmacyPage() {
-		pharmacySearchButton.click();
+		pharmacySearchButton2.click();
 		try {
-			if (pharmacySearchButton.isDisplayed()) {
+			if (pharmacySearchButton2.isDisplayed()) {
 				CommonUtility.waitForElementToDisappear(driver,
-						pharmacySearchButton, CommonConstants.TIMEOUT_30);
+						pharmacySearchButton2, CommonConstants.TIMEOUT_30);
 			}
+			Thread.sleep(2000);
+		} catch (NoSuchElementException e) {
+			System.out.println("pharmacySearchButton not found");
+		} catch (TimeoutException ex) {
+			System.out.println("pharmacySearchButton not found");
+		} catch (Exception e) {
+			System.out.println("pharmacySearchButton not found");
+		}
+
+		if (currentUrl().contains("selectPharmacy")) {
+			return new SelectPharmacyPage(driver);
+		} else {
+			return null;
+		}
+
+	}
+	
+	public SelectPharmacyPage navigateToPharmacyPageByclickingEditPharmacy() {
+		editPharmacyLink.click();
+		try {
+			if (editPharmacyLink.isDisplayed()) {
+				CommonUtility.waitForElementToDisappear(driver,
+						editPharmacyLink, CommonConstants.TIMEOUT_30);
+			}
+			Thread.sleep(2000);
 		} catch (NoSuchElementException e) {
 			System.out.println("pharmacySearchButton not found");
 		} catch (TimeoutException ex) {
@@ -228,7 +320,7 @@ public class ManageDrugPage extends UhcDriver {
 
 	public void switchToGeneric() {
 		switchTogenericButton.findElement(By.linkText("Switch to generic"))
-				.click();
+		.click();
 		System.out.println();
 	}
 
@@ -249,7 +341,7 @@ public class ManageDrugPage extends UhcDriver {
 	public void openAndValidate() {
 
 		//validate(plusSign);
-
+		/*
 		if (!selectedDrug.isEmpty()) {
 			JSONObject jsonObject = new JSONObject();
 			for (String key : manageDrug.getExpectedData().keySet()) {
@@ -357,7 +449,7 @@ public class ManageDrugPage extends UhcDriver {
 					+ manageDrugJson);
 		}
 
-	
+		 */
 
 	}
 
@@ -375,7 +467,7 @@ public class ManageDrugPage extends UhcDriver {
 				switchToGenericLink.click();
 			}
 		}
-		
+
 		try {
 			if (switchToGenericLink.isDisplayed()) {
 				CommonUtility.waitForElementToDisappear(driver, switchToGenericLink,
@@ -396,6 +488,10 @@ public class ManageDrugPage extends UhcDriver {
 		}
 	}
 
+	public void performSwitchtoGenericfunctionality(){
+		switchToGenericLink.click();
+		drugDelete.click();
+	}
 	public VPPPlanSummaryPage applieschanges() {
 		closeAndApplyChangesLink.click();
 		try {
@@ -415,9 +511,9 @@ public class ManageDrugPage extends UhcDriver {
 		}		
 		return null;
 
-	
+
 	}
-	
+
 	public PlanDetailsPage applieschanges(String planName) {
 		closeAndApplyChangesLink.click();
 		try {
@@ -434,34 +530,34 @@ public class ManageDrugPage extends UhcDriver {
 		}
 
 		if(currentUrl().contains("plan-detail.html")){
-			return new PlanDetailsPage(driver,planName);
+			//return new PlanDetailsPage(driver,planName);
 		}
-		
+
 		return null;
 
-	
-		}
-	
+
+	}
+
 	public AddDrugPage addDrugFlowCheck() {		
 		drugDelete.click();
 		if(currentUrl().contains("drugSearch"))
 		{
 			return new AddDrugPage(driver);
 		}		
-		
+
 		return null;
 	}
-	
+
 	public void clickAddImage() {       
-        validate(adddrugdiv);
-        adddrugdiv.click();
+		validate(adddrugdiv);
+		adddrugdiv.click();
 	}
-	
+
 	public void swithedToSelectPharmacyTab(){
 		selectPharmacyTab.click();
 	}
-	
-	
+
+
 
 	public void toolTipValidation() {
 		try {
@@ -475,7 +571,7 @@ public class ManageDrugPage extends UhcDriver {
 		System.out.println("Tool tips validated");
 	}
 
-	
+
 	public SelectPharmacyPage navigateToUpdatedPharmacyPage() {
 		if (currentUrl().contains("selectPharmacy")) {
 			return new SelectPharmacyPage(driver);
@@ -484,13 +580,13 @@ public class ManageDrugPage extends UhcDriver {
 		}
 
 	}
-	
+
 	public void validateAddDrugFlow(){
 		validate(drugSearchBox);
 		selectPharmacyTab.click();
 		manageDrugTab.click();
 		validate(drugSearchBox);
-		
+
 	}
 
 

@@ -18,11 +18,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import pages.dashboard.member.blayer.ClaimsSummary;
 import pages.member.bluelayer.AccountHomePage;
 import pages.member.bluelayer.LoginPage;
-import cucumber.annotation.en.And;
-import cucumber.annotation.en.Given;
-import cucumber.annotation.en.Then;
-import cucumber.annotation.en.When;
-import cucumber.table.DataTable;
+import cucumber.api.DataTable;
+import cucumber.api.java.After;
+import cucumber.api.java.en.And;
+import cucumber.api.java.en.Given;
+import cucumber.api.java.en.Then;
+import cucumber.api.java.en.When;
 import acceptancetests.atdd.data.CommonConstants;
 import acceptancetests.atdd.data.member.PageConstants;
 import acceptancetests.login.data.LoginCommonConstants;
@@ -106,7 +107,7 @@ public class ClaimsUHCStepDefinition {
 	
 	@When("^I navigate to the Claims Summary page in UHC site$")
 	public void navigate_to_Claims_Summary_page_UHC(){
-		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstants.ACCOUNT_HOME_PAGE);
+		/*AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstants.ACCOUNT_HOME_PAGE);
 		ClaimsSummary newClaimsSummaryPage = accountHomePage.navigateToClaimsSummaryPage();			
 
 		if(newClaimsSummaryPage == null){
@@ -119,7 +120,7 @@ public class ClaimsUHCStepDefinition {
 		}
 		
 		String planType = (String) getLoginScenario().getBean(LoginCommonConstants.PLANTYPE);
-		newClaimsSummaryPage.navigateToRequiredPlan(planType);
+		newClaimsSummaryPage.navigateToRequiredPlan(planType);*/
 
 	}
 
