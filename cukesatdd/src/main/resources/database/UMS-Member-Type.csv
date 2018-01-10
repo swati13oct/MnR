@@ -1,17 +1,17 @@
 q4_dec_uhc075/Password@1,MAPD,Individual,LIS 1
 q4_dec_aarp428/Password@1,PDP,Individual,LIS 4
 q4_dec_aarp169/Password@1,MA,Individual,LIS 1
+q4_dec_grp095/Password@1,MAPD,Group,NON LIS
+q4_dec_grp272/Password@1,PDP,Group,NON LIS
+q4_dec_grp045/Password@1,MA,Group,HMO
+q4_dec_aarp295/Password@1,PDP,Individual,NON LIS
+q4_dec_uhc015/Password@1,MAPD,Individual,NON LIS
 q4_dec_grp286/Password@1,PDP,Group,LIS 3
-q4_dec_grp055/Password@1,MA,Group,LIS 1
+q4_dec_grp010/Password@1,MA,Group,LIS 1
 q4_dec_grp004/Password@1,MAPD,Group,HMO
 q4_dec_grp025/Password@1,MAPD,Group,PPO
 q4_dec_grp014/Password@1,MA,Group,HMO
 q4_dec_grp015/Password@1,MA,Group,PPO
-q4_dec_aarp295/Password@1,PDP,Individual,NON LIS
-q4_dec_uhc015/Password@1,MAPD,Individual,NON LIS
-q4_dec_grp272/Password@1,PDP,Group,NON LIS
-q4_dec_grp095/Password@1,MAPD,Group,NON LIS
-q4_dec_grp010/Password@1,MA,Group,NON LIS
 q4_dec_uhc009/Password@1,MAPD,,
 q4_dec_aarp277/Password@1,GroupMAPD,,
 q4_dec_grp010/Password@1,GroupMA,,

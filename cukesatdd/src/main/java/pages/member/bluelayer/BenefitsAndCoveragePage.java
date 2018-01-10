@@ -242,10 +242,10 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 	@FindBy(className = "atdd-anclrysection-leavingpopup-proceedbtn")
 	private WebElement ProceedButton;
 	
-	@FindBy(className = "atdd-anclrysection-leavingpopup")
+	@FindBy(className = "atdd-anclrysection-leavingpopup-cancelbtn")
 	private WebElement cancelbutton;
 	
-	@FindBy(className = "atdd-exclusivehearing-levngpopup")
+	@FindBy(className = "atdd-exclusivehearing-levngpopup-topcancelbtn")
 	private WebElement cancelbutton1;
     
 	
@@ -623,6 +623,19 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 	}
 	public boolean Proceedbutton() {
 		//LearnmoreButton.click();
+		try {
+			Thread.sleep(30000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		LearnmoreButton.click();
+		try {
+			Thread.sleep(30000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		validate(ProceedButton);
 		ProceedButton.click();
 		try {

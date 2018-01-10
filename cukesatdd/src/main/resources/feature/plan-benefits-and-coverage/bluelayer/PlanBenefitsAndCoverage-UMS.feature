@@ -833,9 +833,9 @@ Examples:
    
      Examples: 
        | planType|  memberType  | copayCategory |
-       #| PDP     |  Group       |  NON LIS      | 
+       | PDP     |  Group       |  NON LIS      | 
        | MAPD    |  Group       |  NON LIS      |
-       | MA      |  Group       |  NON LIS      |
+       | MA      |  Group       |  HMO          |
   
 
 
@@ -854,7 +854,7 @@ Examples:
        | planType|  memberType  | copayCategory |
        | PDP     |  Group       |  NON LIS      |
        | MAPD    |  Group       |  NON LIS      |
-       | MA      |  Group       |  NON LIS      |    
+       | MA      |  Group       |  HMO          |    
 
  @CMvalidatePdfsectionindividual
     Scenario Outline: Verify PDF section is in place on Benefits and     Coverage page
@@ -894,9 +894,9 @@ Examples:
     
      Examples: 
        | planType|  memberType  | copayCategory |
-       #| PDP     |  Group       |  NON LIS      |
+      #| PDP     |  Group       |  NON LIS      |
        | MAPD    |  Group       |  NON LIS      |
-       | MA      |  Group       |  NON LIS      | 
+       | MA      |  Group       |  HMO          | 
       
       
    @CMAncillarysection2
@@ -915,9 +915,10 @@ Examples:
      
      Examples: 
        | planType|  memberType  | copayCategory |
-       #| PDP     |  Group       |  NON LIS      |
+       | MA      |  Group       |  HMO          |
+      #| PDP     |  Group       |  NON LIS      |
        | MAPD    |  Group       |  NON LIS      |
-       | MA      |  Group       |  NON LIS      |    
+            
      
       
    @CMdrugcopaysectionnonlis
