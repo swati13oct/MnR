@@ -1,4 +1,4 @@
-@planSummaryPage
+@spartans
 Feature: To vefify mobile responsive
 
   @fixed
@@ -141,7 +141,7 @@ Feature: To vefify mobile responsive
       | zipCode | county             | planType | planName                                          |
       |   90210 | Los Angeles County | MA       | AARP MedicareComplete SecureHorizons Plan 1 (HMO) |
 
-  @US557073
+  @US557073 @Regression
   Scenario Outline: To validate disclaimer text for MA/MAPD plan in vpp compare page
     Given the user is on the vpp portfolio page
     Then the user performs plan serach using zipcode
@@ -173,7 +173,7 @@ Feature: To vefify mobile responsive
       | zipCode | county             | planType | planName                                          |
       |   90210 | Los Angeles County | MA       | AARP MedicareComplete SecureHorizons Plan 2 (HMO) |
 
-  @US519611
+  @US519611 @Regression
   Scenario Outline: To validate remove plan in vpp compare page
     Given the user is on the vpp portfolio page
     Then the user performs plan serach using zipcode
@@ -189,7 +189,7 @@ Feature: To vefify mobile responsive
       | zipCode | county             | planType |
       |   90210 | Los Angeles County | MA       |
 
-  @US540565
+  @US540565 @Regression
   Scenario Outline: To validate footnote section in vpp compare page
     Given the user is on the vpp portfolio page
     Then the user performs plan serach using zipcode
@@ -205,7 +205,7 @@ Feature: To vefify mobile responsive
       | zipCode | county             | planType |
       |   90210 | Los Angeles County | MA       |
 
-  @US519614
+  @US519614 @Regression
   Scenario Outline: To validate plan view details in vpp compare page
     Given the user is on the vpp portfolio page
     Then the user performs plan serach using zipcode
@@ -236,7 +236,7 @@ Feature: To vefify mobile responsive
       | zipCode | county             | planType |
       |   90210 | Los Angeles County | MA       |
 
-  @US544283
+  @US544283 @Regression
   Scenario Outline: To validate Add to Compare Checboxes
     Given the user is on the vpp portfolio page
     Then the user performs plan serach using zipcode
@@ -250,7 +250,7 @@ Feature: To vefify mobile responsive
       | zipCode | county           | planType |
       |   35004 | St. Clair County | MA       |
 
-  @medicalbenefits
+  @medicalbenefits @Regression
   Scenario Outline: To validate medical benefits in compare page
     Given the user is on the vpp portfolio page
     Then the user performs plan serach using zipcode
@@ -612,7 +612,7 @@ Feature: To vefify mobile responsive
       | zipCode | county             | planType | firstname | lastname | emailaddress           |
       |   90210 | Los Angeles County | PDP      | Eva       | Zhong    | weixin.zhong@optum.com |
 
-  @Prescriptionbenefits
+  @Prescriptionbenefits @Regression
   Scenario Outline: To validate prescription drug benefits in compare page
     Given the user is on the vpp portfolio page
     Then the user performs plan serach using zipcode
@@ -632,7 +632,7 @@ Feature: To vefify mobile responsive
       | zipCode | county             | planType | deducPlan1 | deducPlan2 | tier1Plan1 | tier1Plan2 |
       |   90210 | Los Angeles County | MA       | $0         | $0         | $4 co-pay  | $4 co-pay  |
 
-  @OptionalServices
+  @OptionalServices @Regression
   Scenario Outline: To validate Optional Services in compare page
     Given the user is on the vpp portfolio page
     Then the user performs plan serach using zipcode
@@ -652,7 +652,7 @@ Feature: To vefify mobile responsive
       | zipCode | county             | planType | opDenPlan1 | opDenPlan2 | highOpDenPlan1 | highOpDenPlan2 |
       |   90210 | Los Angeles County | MA       | $2.50      | $2.50      | $12.50         | $12.50         |
 
-  @PlanCosts
+  @PlanCosts @Regression
   Scenario Outline: To validate Plan Costs in compare page
     Given the user is on the vpp portfolio page
     Then the user performs plan serach using zipcode
