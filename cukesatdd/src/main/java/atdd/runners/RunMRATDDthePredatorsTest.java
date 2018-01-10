@@ -8,7 +8,7 @@ import com.github.mkolisnyk.cucumber.runner.ExtendedCucumberOptions;
 import cucumber.api.CucumberOptions;
 
 /**
- * this file is to run test cases for predators with tag id @predators
+ * this file is to run test cases for predators with tag id @thePredators
  */
 
 
@@ -18,7 +18,7 @@ jsonReport = "target/cucumber-RunMRATDDthePredatorsTest.json",detailedReport = t
 	overviewReport = true, toPDF = true, outputFolder = "target/RunMRATDDthePredatorsTest")
 @CucumberOptions(glue = { "atdd.framework", "acceptancetests" }, 
 features = { "src/main/resources/feature" }, plugin = {"pretty", "html:reports/test-report", 
-		"json:target/cucumber-RunMRATDDthePredators.json" }, tags = { "@predators" })
+		"json:target/cucumber-RunMRATDDthePredators.json" }, tags = { "@thePredators" })
 public class RunMRATDDthePredatorsTest {
 
 }
