@@ -63,7 +63,7 @@ public class UlayerLoginPage extends UhcDriver {
 		openAndValidate();
 	}
 
-	public Object loginWith(String username, String password) {
+	public Object loginWith(String username, String password) throws InterruptedException {
 		loginIn.click();	
 		sendkeys(userNameField,username);
 		sendkeys(passwordField,password);
@@ -74,7 +74,7 @@ public class UlayerLoginPage extends UhcDriver {
 		alert.accept();
 		Alert alert1 = driver.switchTo().alert();
 		alert1.accept();
-		driver.manage().timeouts().implicitlyWait(300, TimeUnit.SECONDS);
+		Thread.sleep(3000);
 		CommonUtility.checkPageIsReady(driver);
 		if (currentUrl().contains("home/testharness.html")){
 			System.out.println("@@@@@@@@@@@@ Ulayer Test-Harness Home Page Displayed @@@@@@@@@@@@");
