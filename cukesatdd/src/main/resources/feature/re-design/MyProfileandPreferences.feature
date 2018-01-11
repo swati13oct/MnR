@@ -1,3 +1,4 @@
+@theSpartans
 @profilepreferencesPage
 Feature: Save profile preferences
  @profilepreferences
