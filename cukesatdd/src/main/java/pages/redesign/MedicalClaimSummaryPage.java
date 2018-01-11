@@ -24,6 +24,9 @@ import atdd.framework.UhcDriver;
  *
  */
 public class MedicalClaimSummaryPage extends UhcDriver {
+	
+	@FindBy(xpath = "//area[@href='javascript:clWin()'][@alt = 'close']")
+	private WebElement FeedbackModal;
 
 	@FindBy(xpath = "//h1[contains(text(), 'My Claims')]")
 	private WebElement ClaimsPageHeader;
@@ -35,11 +38,26 @@ public class MedicalClaimSummaryPage extends UhcDriver {
 
 	public JSONObject medicalClaimsSummaryJson;
 
-	public MedicalClaimSummaryPage(WebDriver driver) {
+	public MedicalClaimSummaryPage(WebDriver driver) throws InterruptedException {
 		super(driver);
 		String fileName = CommonConstants.MEDICAL_CLAIMS_SUMMARY_PAGE_DATA;
 		medicalClaimsSummary = CommonUtility.readPageData(fileName,
 				CommonConstants.PAGE_OBJECT_DIRECTORY_ULAYER_MEMBER);
+		PageFactory.initElements(driver, this);
+		CommonUtility.checkPageIsReady(driver);
+		Thread.sleep(5000);
+		CommonUtility.checkPageIsReady(driver);
+		try{
+			FeedbackModal.click();
+			System.out.println("FeedBack Modal Present");
+			if (validate(FeedbackModal)){
+				System.out.println("FeedBack Modal NOT CLOSING - Close button is clicked");
+			}
+			System.out.println("FeedBack Modal Closed");
+		}
+		catch (Exception e) {
+			System.out.println("FeedBack Modal NOT Present");
+		}
 		openAndValidate();
 	}
 

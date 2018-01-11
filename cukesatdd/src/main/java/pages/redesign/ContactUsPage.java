@@ -25,6 +25,9 @@ import atdd.framework.UhcDriver;
  */
 public class ContactUsPage extends UhcDriver{
 	
+	@FindBy(xpath = "//area[@href='javascript:clWin()'][@alt = 'close']")
+	private WebElement FeedbackModal;
+	
 	@FindBy(xpath = "//h1[contains(text(), 'Explanation of Benefits')]")
 	private WebElement ContactUsPageHeader;
 
@@ -39,12 +42,29 @@ public class ContactUsPage extends UhcDriver{
 	
 	public JSONObject contactUsJson;
 	
-	public ContactUsPage(WebDriver driver) {
+	public ContactUsPage(WebDriver driver) throws InterruptedException {
 		super(driver);
 		PageFactory.initElements(driver, this);
 		String fileName = CommonConstants.CONTACT_US_PAGE_DATA;
 		contactUs = CommonUtility.readPageData(fileName,
 				CommonConstants.PAGE_OBJECT_DIRECTORY_ULAYER_MEMBER);
+		Thread.sleep(5000);
+		CommonUtility.checkPageIsReady(driver);
+		try{
+			FeedbackModal.click();
+			System.out.println("FeedBack Modal Present");
+			if (validate(FeedbackModal)){
+				System.out.println("FeedBack Modal NOT CLOSING - Close button is clicked");
+			}
+			System.out.println("FeedBack Modal Closed");
+			//Thread.sleep(3000);
+			
+		}
+		catch (Exception e) {
+			System.out.println("FeedBack Modal NOT Present");
+
+		}
+
 		//openAndValidate();
 		
 	}

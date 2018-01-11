@@ -1,3 +1,4 @@
+@TeamPredators
 @pharmacylocator
 Feature:To test Locate a Pharmacy in acqusition flow UMS site@multicounty
   Scenario Outline: To verify pharmacy locator multi county lookup modal in UHC site
@@ -9,7 +10,8 @@ When the user navigates to pharmacy search page in UMS Site
       | County Name | <county>   |
 Examples: 
       | zipcode | distance | county       |
-      |   80002 |       15 | Adams County |@sanity
+      |   80002 |       15 | Adams County |
+ @sanity
   Scenario Outline: To verify pharmacy search functionality for 2017 in UHC Blue Layer
     Given the user is on the UMS Medicare Site landing page
     Then the user navigates to pharmacy search page in UMS Site
@@ -50,7 +52,9 @@ Scenario Outline: To verify pharmacy search functionality for 2018 in UHC Blue L
     And validate Standard Network pharmacy
  Examples: 
       | year | zipcode | planName                                          |
-      | 2018 |   90210 | AARP MedicareComplete SecureHorizons Plan 1 (HMO) |@languageselection
+      | 2018 |   90210 | AARP MedicareComplete SecureHorizons Plan 1 (HMO) |
+      
+      @languageselection
   Scenario Outline: To verify pharmacy locator language in UHC site
 Given the user is on the UMS Medicare Site landing page
 When the user navigates to pharmacy search page in UMS Site

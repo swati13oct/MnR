@@ -28,7 +28,9 @@ import junit.framework.Assert;
 public class GoGreenPreferencesPage extends UhcDriver{
 	
 	//h1[@class="h4 margin-none"]
-		
+	@FindBy(xpath = "//area[@href='javascript:clWin()'][@alt = 'close']")
+	private WebElement FeedbackModal;
+
 	@FindBy(xpath = "//*[@class = 'h3 medium margin-small atdd-goGreenHeader']")
 	private WebElement myPreferencesHeader;
 	
@@ -68,13 +70,30 @@ public class GoGreenPreferencesPage extends UhcDriver{
 
 	public JSONObject myProfilesJson;
 
-	public GoGreenPreferencesPage(WebDriver driver) {
+	public GoGreenPreferencesPage(WebDriver driver) throws InterruptedException {
 		super(driver);
 		PageFactory.initElements(driver, this);
 		String fileName = CommonConstants.MY_PREFERENCES_PAGE_DATA;
 		myProfiles = CommonUtility.readPageData(fileName,
 				CommonConstants.PAGE_OBJECT_DIRECTORY_ULAYER_MEMBER);
-	openAndValidate();
+		Thread.sleep(5000);
+		CommonUtility.checkPageIsReady(driver);
+		try{
+			FeedbackModal.click();
+			System.out.println("FeedBack Modal Present");
+			if (validate(FeedbackModal)){
+				System.out.println("FeedBack Modal NOT CLOSING - Close button is clicked");
+			}
+			System.out.println("FeedBack Modal Closed");
+			//Thread.sleep(3000);
+			
+		}
+		catch (Exception e) {
+			System.out.println("FeedBack Modal NOT Present");
+
+		}
+
+		openAndValidate();
 	}
 
 	public boolean Validate_Single_Tab_SHIP(){
@@ -91,7 +110,8 @@ public class GoGreenPreferencesPage extends UhcDriver{
 	@Override
 	public void openAndValidate() {
 		
-		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+		//Thread.sleep(3000);
+		
 		validate(myPreferencesHeader);
 		validate(GoToProfilePageLink);
 		
@@ -109,9 +129,10 @@ public class GoGreenPreferencesPage extends UhcDriver{
 	}
 
 
-	public boolean navigatePlanTabs(String PlanType){
+	public boolean navigatePlanTabs(String PlanType) throws InterruptedException{
 		
-		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+		Thread.sleep(5000);
+		
 		System.out.println("Plan Type : "+PlanType);
 
 		if (PlanType.contentEquals("MA") || PlanType.contentEquals("MAPD")) {
@@ -198,11 +219,12 @@ public class GoGreenPreferencesPage extends UhcDriver{
 		return false;
 	}
 	
-	public MyProfilesPage NavigateTo_MyProfilePreferences_Page(){
-		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+	public MyProfilesPage NavigateTo_MyProfilePreferences_Page() throws InterruptedException{
+		Thread.sleep(3000);
+		
 		GoToProfilePageLink.click();
-		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
-		CommonUtility.checkPageIsReady(driver);
+		Thread.sleep(3000);
+				CommonUtility.checkPageIsReady(driver);
 		if (validate(myProfileHeader)){
 			return new MyProfilesPage(driver);
 		}
