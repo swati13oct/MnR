@@ -389,4 +389,6 @@ public static final String PORTFOLIO_PAGE_UHC = "ourPlans";
 	   public static final String UNIVERSITYOFMISSOURI_HOME_PAGE = "UniversityofMissouri";
 	   
 	   public static final String REGISTRATION_INFORMATION_PAGE = "RegistrationInformationPage";
+	   
+	   public static final String COMPARE_PLANS_PAGE = "comparePlansPage";
 }
