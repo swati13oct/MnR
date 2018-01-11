@@ -9,6 +9,7 @@ import java.util.Map;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -21,7 +22,7 @@ import atdd.framework.UhcDriver;
 
 public class ViewDrugCostPage extends UhcDriver {
 
-	@FindBy(linkText = "Edit")
+	@FindBy(xpath = "//table[@class='viewDrugCost']//td[@class='borderLeft_color druglistedit']/p/a")
 	private WebElement editLink;
 
 	@FindBy(className = "viewDrugCost")
@@ -32,29 +33,37 @@ public class ViewDrugCostPage extends UhcDriver {
 
 	@FindBy(linkText = "Delete")
 	private WebElement deleteLink;
+	
+	@FindBy(className= "borderLeft drugdosage ng-binding")
+	private WebElement descBox;
+	
+	@FindBy(linkText ="Edit pharmacy")
+	private WebElement editPharmacyLink;
+	
+	@FindBy(xpath =".//*[@id='dce.member']/div/div[7]/div/div/div/div/div[1]/div[3]/div[3]")
+	private WebElement descriptionTable;
 
 	private PageData viewDrugCost;
 
 	public JSONObject viewDrugCostJson;
 
-	public ViewDrugCostPage(WebDriver driver, String planType) {
+	public ViewDrugCostPage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
-		CommonUtility.waitForPageLoad(driver, drugCostContent, CommonConstants.TIMEOUT_30);
-		String fileName = null;
-		if (planType.equalsIgnoreCase("PDP")) {
-			fileName = CommonConstants.VIEW_DRUG_COST_PDP_PAGE_DATA;
-		}
-		if (planType.equalsIgnoreCase("MAPD")) {
-			fileName = CommonConstants.VIEW_DRUG_COST_MAPD_PAGE_DATA;
-		}
-		viewDrugCost = CommonUtility.readPageData(fileName,
-				CommonConstants.PAGE_OBJECT_DIRECTORY_ULAYER_MEMBER);
-		openAndValidate();
+		
+	
+		//openAndValidate();
 	}
 
 	public ManageDrugPage editDrugList() {
-		editLink.click();
+		try {
+			Thread.sleep(4000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		JavascriptExecutor js = (JavascriptExecutor)driver;
+		js.executeScript("arguments[0].click();", editLink);
 		try {
 			Thread.sleep(5000);
 		} catch (InterruptedException e) {
@@ -63,7 +72,7 @@ public class ViewDrugCostPage extends UhcDriver {
 		}
 		deleteLink.click();
 		System.out.println("Deleted drug from list");
-		if (driver.getTitle().equalsIgnoreCase("Drug Cost Estimator")) {
+		if (driver.getTitle().equalsIgnoreCase("Drug Lookup")) {
 			return new ManageDrugPage(driver);
 		} else {
 			return null;
@@ -111,5 +120,18 @@ public class ViewDrugCostPage extends UhcDriver {
 	public void logOut() {
 		logOut.click();
 
+	}
+	
+	public boolean validateViewDrugPage(String dosage) {
+		try {
+			Thread.sleep(4000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		if((descBox.getText().contains(dosage)))
+			return true;
+		else 
+			return false;
 	}
 }

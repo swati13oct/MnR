@@ -1,4 +1,4 @@
-@registrationRedesign
+@registrationRedesign @Gladiators
 Feature: To test registration flow in redesign portal
 
 

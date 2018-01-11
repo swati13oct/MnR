@@ -3,7 +3,6 @@ package pages.acquisition.ulayer;
 /*@author pagarwa5*/
 
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -39,9 +38,6 @@ public class AddDrugPage extends UhcDriver {
 	
 	@FindBy(xpath="//div[@class='tabsHead']/div")
 	WebElement manageDrugTab;
-	
-	@FindBy(xpath=".//*[@id='add-drug']/section")
-	WebElement addaDrug;
 
 	private PageData drugList;
 
@@ -61,6 +57,7 @@ public class AddDrugPage extends UhcDriver {
 		sendkeys(drugSearchBox, drugInitials);
 		CommonUtility.waitForPageLoad(driver, drugDropDown,
 				CommonConstants.TIMEOUT_40);
+/*
 		JSONObject jsonObject = new JSONObject();
 		for (String key : drugList.getExpectedData().keySet()) {
 			List<WebElement> elements = findElements(drugList.getExpectedData()
@@ -101,14 +98,27 @@ public class AddDrugPage extends UhcDriver {
 		}
 		drugListJson = jsonObject;
 		System.out.println("drugListJson------>" + drugListJson);
+*/	
 	}
-
+	
+	public boolean validateDrugInitialsSearch(String drugInitials) {
+		String[] dropDownValues = getDrugList().split("\n");
+		boolean flag = true;
+		for(int i=0;i<dropDownValues.length;i++){
+			if (!dropDownValues[i].toLowerCase().contains(drugInitials)){
+				flag=false;
+				break;
+			}
+		}
+		return flag;
+	}
+	
 	public String getDrugList() {
 		return drugDropDown.getText();
 
 	}
 
-	public SelectDosagePage selectDrug(String drugName) {
+	/*public SelectDosagePage selectDrug(String drugName) {
 		ElementData drugElement = new ElementData("xpath",
 				"//div[contains(text(), '" + drugName + "')]");
 		WebElement element = findElement(drugElement);
@@ -116,7 +126,7 @@ public class AddDrugPage extends UhcDriver {
 
 		return new SelectDosagePage(driver);
 
-	}
+	}*/
 
 	
 	public JSONObject getExpectedData(String fileName, String directory) {
@@ -145,11 +155,15 @@ public class AddDrugPage extends UhcDriver {
 		manageDrugTab.click();
 		validate(drugSearchBox);
 	}
-	
-	public void addDrug(){
-		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-		addaDrug.click();
-		System.out.println("Add a new drug popup should appear");
-	}
+	public SelectDosagePage selectDrug(String drugName) {
+        ElementData drugElement = new ElementData("xpath",
+                        "//div[contains(text(), '" + drugName + "')]");
+        WebElement element = findElement(drugElement);
+        element.click();
+
+        return new SelectDosagePage(driver);
+
+}
+
 
 }

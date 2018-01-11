@@ -144,7 +144,7 @@ public class ResponsivePlanSummary extends UhcDriver{
 		    private WebElement chkBoxAddtoCompare5;
 		    
 		    //@FindBy(xpath="//*[@id='plan-list-1']//div[@class='swiper-container']/div/div[4]//div[@class='content-secondary']//div[@class='compare-box']/span[4]/a")		  
-		    @FindBy(xpath="//*[@id='plan-list-1']/div/div[2]/div/div[4]/div[3]/div/div/span[4]/a")
+		    @FindBy(xpath="//*[@id='plan-list-1']/div/div[2]/div/div[4]/div[2]/div/div/span[4]/a")		                  
 		    private WebElement comparePlans;
 		    
 		   // @FindBy(xpath="(.//*[text()='View details'])[1]")

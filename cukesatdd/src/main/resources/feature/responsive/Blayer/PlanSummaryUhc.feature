@@ -1,4 +1,4 @@
-@planSummaryPage @sprint2
+@spartans
 Feature: To verify mobile responsive
 @planCount @sprint2
 Scenario Outline: To validate plan count from portfolio page
@@ -378,7 +378,7 @@ And User clicks on change location
 
 
 
-@US689310 @sprint5
+@US689310 @sprint5 @Regression
 Scenario Outline: To validate DCE Section on Plan Compare page
 Given the user is on the  team-c vpp portfolio page
 Then the user performs plan search TeamC using zipcode
@@ -393,7 +393,7 @@ Examples:
 |zipCode|county          |planType|
 |90210 |Los Angeles County| MA     |
 
-@US689260 @sprint5
+@US689260 @sprint5 @Regression
 Scenario Outline: To validate the Provider section is enabled
 Given the user is on the  team-c vpp portfolio page
 Then the user performs plan search TeamC using zipcode
@@ -409,7 +409,7 @@ Examples:
 |90210 |Los Angeles County| MA     |
 
 
-@US702406 @sprint5
+@US702406 @sprint5 @Regression
 Scenario Outline: To validate that user should not be able to see add another plan option for zipcode having only 2 plans
 Given the user is on the  team-c vpp portfolio page
 Then the user performs plan search TeamC using zipcode
@@ -425,7 +425,7 @@ Examples:
 |95545 |Humboldt County| MA     |
 
 
-@US699059 @sprint5
+@US699059 @sprint5 @Regression
 Scenario Outline: To validate the Provider section is enabled
 Given the user is on the  team-c vpp portfolio page
 Then the user performs plan search TeamC using zipcode
@@ -440,7 +440,7 @@ Examples:
 |zipCode|county          |planType|
 |90210 |Los Angeles County| MA     |
 
-@US699362 @sprint5
+@US699362 @sprint5 @Regression
 Scenario Outline: To validate the Provider section is enabled
 Given the user is on the  team-c vpp portfolio page
 Then the user performs plan search TeamC using zipcode
@@ -456,7 +456,7 @@ Examples:
 |28682 |Alexander| MA     |
 
 
-@US698836 @sprint5
+@US698836 @sprint5 @Regression
 Scenario Outline: To validate Outpatient Surgery row for AARPMedicareFocus Plans
 Given the user is on the  team-c vpp portfolio page
 Then the user performs plan search TeamC using zipcode

@@ -32,10 +32,19 @@ public class AgentsnBrokersAARPPage extends GlobalWebElements{
 		validate(footerHomeLink);
 		footerHomeLink.click();
 		validate(footerHomeLink);
-		if (driver.getTitle().equalsIgnoreCase("Medicare Plans | AARP® Medicare Plans from UnitedHealthcare®")) {
+		if (driver.getTitle().equalsIgnoreCase("AARP® Medicare Plans from UnitedHealthcare®")) {
 			return new AcquisitionHomePage(driver);
 		}
 		return null;
+	}
+	
+	public boolean validatHomeLink(){
+		boolean flag = true;
+		
+		if(!footerHomeLink.isDisplayed())
+			flag = false;
+		
+		return flag;
 	}
 
 }

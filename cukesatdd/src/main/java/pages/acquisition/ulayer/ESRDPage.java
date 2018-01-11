@@ -93,7 +93,6 @@ public class ESRDPage extends UhcDriver{
 				return new PrescriptionDrugCoveragePage(driver);
 		}
 		
-	
 	@FindBy(xpath = ".//*[@id='esrdInfo']/p")
 	private WebElement esrdHeader;
 	
@@ -107,5 +106,4 @@ public class ESRDPage extends UhcDriver{
 			flag = true;
 		return flag;
 	}
-	
 }

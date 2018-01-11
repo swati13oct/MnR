@@ -52,17 +52,33 @@ public class SelectDosagePage extends UhcDriver{
 		PageFactory.initElements(driver, this);
 		CommonUtility.waitForPageLoad(driver, quantityField,
 				CommonConstants.TIMEOUT_30);
-		String fileName = CommonConstants.DRUG_DOSAGE_PAGE_DATA;
+/*		String fileName = CommonConstants.DRUG_DOSAGE_PAGE_DATA;
 		drugDosageInfo = CommonUtility.readPageData(fileName,
 				CommonConstants.PAGE_OBJECT_DIRECTORY_BLUELAYER_ACQ);
+*/
 		openAndValidate();
+	}
+	
+	public boolean validateDosageinformation(String drugSelected){
+		boolean flag = true;
+		ElementData elementData = new ElementData("className", "drugListScroll");
+		List<WebElement> drugDosages = findElements(elementData);
+
+		for (WebElement dosage : drugDosages) {
+			System.out.println(dosage.getText());
+			if(!dosage.getText().contains(drugSelected)){
+				flag = false;
+				break;
+			}
+		}
+		return flag;
 	}
 
 	public Object selectDosage(String drugDosage, String drugQuantity,
 			String drugFrequency, String packages) {
 		ElementData elementData = new ElementData("className", "borderBtmGrey");
 		List<WebElement> drugDosages = findElements(elementData);
-
+		
 		for (WebElement dosage : drugDosages) {
 			if (dosage.getText().equalsIgnoreCase(drugDosage)) {
 				ElementData dosageElementData = new ElementData("className",
@@ -149,7 +165,7 @@ public class SelectDosagePage extends UhcDriver{
 	public void openAndValidate() {
 		validate(quantityField);
 		validate(continueButton);
-		JSONObject jsonObject = new JSONObject();
+/*		JSONObject jsonObject = new JSONObject();
 		for (String key : drugDosageInfo.getExpectedData().keySet()) {
 			List<WebElement> elements = findElements(drugDosageInfo
 					.getExpectedData().get(key));
@@ -194,7 +210,7 @@ public class SelectDosagePage extends UhcDriver{
 		}
 		drugDosageJson = jsonObject;
 		System.out.println("drugDosageJson----->" + drugDosageJson);
-
+*/
 	}
 
 }

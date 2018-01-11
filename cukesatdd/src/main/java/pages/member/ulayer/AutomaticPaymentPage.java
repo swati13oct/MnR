@@ -8,7 +8,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
 import atdd.framework.UhcDriver;
-import pages.member.bluelayer.ConfirmOneTimePaymentPage;
+import pages.member.ulayer.ConfirmOneTimePaymentPage;
 
 public class AutomaticPaymentPage extends UhcDriver{
 
