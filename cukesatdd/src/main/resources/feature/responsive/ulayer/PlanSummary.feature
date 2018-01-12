@@ -1,5 +1,4 @@
-@spartans
-Feature: To vefify mobile responsive
+Feature: To verify mobile responsive
 
   @fixed
   Scenario Outline: To validate plan highlights and provider searh link
@@ -141,7 +140,7 @@ Feature: To vefify mobile responsive
       | zipCode | county             | planType | planName                                          |
       |   90210 | Los Angeles County | MA       | AARP MedicareComplete SecureHorizons Plan 1 (HMO) |
 
-  @US557073 @Regression
+  @US557073 @Regression @theSpartans
   Scenario Outline: To validate disclaimer text for MA/MAPD plan in vpp compare page
     Given the user is on the vpp portfolio page
     Then the user performs plan serach using zipcode
@@ -173,7 +172,7 @@ Feature: To vefify mobile responsive
       | zipCode | county             | planType | planName                                          |
       |   90210 | Los Angeles County | MA       | AARP MedicareComplete SecureHorizons Plan 2 (HMO) |
 
-  @US519611 @Regression
+  @US519611 @Regression @theSpartans
   Scenario Outline: To validate remove plan in vpp compare page
     Given the user is on the vpp portfolio page
     Then the user performs plan serach using zipcode
@@ -189,7 +188,7 @@ Feature: To vefify mobile responsive
       | zipCode | county             | planType |
       |   90210 | Los Angeles County | MA       |
 
-  @US540565 @Regression
+  @US540565 @Regression @theSpartans
   Scenario Outline: To validate footnote section in vpp compare page
     Given the user is on the vpp portfolio page
     Then the user performs plan serach using zipcode
@@ -205,7 +204,7 @@ Feature: To vefify mobile responsive
       | zipCode | county             | planType |
       |   90210 | Los Angeles County | MA       |
 
-  @US519614 @Regression
+  @US519614 @Regression @theSpartans
   Scenario Outline: To validate plan view details in vpp compare page
     Given the user is on the vpp portfolio page
     Then the user performs plan serach using zipcode
@@ -236,7 +235,7 @@ Feature: To vefify mobile responsive
       | zipCode | county             | planType |
       |   90210 | Los Angeles County | MA       |
 
-  @US544283 @Regression
+  @US544283 @Regression @theSpartans
   Scenario Outline: To validate Add to Compare Checboxes
     Given the user is on the vpp portfolio page
     Then the user performs plan serach using zipcode
@@ -250,7 +249,7 @@ Feature: To vefify mobile responsive
       | zipCode | county           | planType |
       |   35004 | St. Clair County | MA       |
 
-  @medicalbenefits @Regression
+  @medicalbenefits @Regression @theSpartans
   Scenario Outline: To validate medical benefits in compare page
     Given the user is on the vpp portfolio page
     Then the user performs plan serach using zipcode
@@ -612,7 +611,7 @@ Feature: To vefify mobile responsive
       | zipCode | county             | planType | firstname | lastname | emailaddress           |
       |   90210 | Los Angeles County | PDP      | Eva       | Zhong    | weixin.zhong@optum.com |
 
-  @Prescriptionbenefits @Regression
+  @Prescriptionbenefits @Regression @theSpartans
   Scenario Outline: To validate prescription drug benefits in compare page
     Given the user is on the vpp portfolio page
     Then the user performs plan serach using zipcode
@@ -632,7 +631,7 @@ Feature: To vefify mobile responsive
       | zipCode | county             | planType | deducPlan1 | deducPlan2 | tier1Plan1 | tier1Plan2 |
       |   90210 | Los Angeles County | MA       | $0         | $0         | $4 co-pay  | $4 co-pay  |
 
-  @OptionalServices @Regression
+  @OptionalServices @Regression @theSpartans
   Scenario Outline: To validate Optional Services in compare page
     Given the user is on the vpp portfolio page
     Then the user performs plan serach using zipcode
@@ -652,7 +651,7 @@ Feature: To vefify mobile responsive
       | zipCode | county             | planType | opDenPlan1 | opDenPlan2 | highOpDenPlan1 | highOpDenPlan2 |
       |   90210 | Los Angeles County | MA       | $2.50      | $2.50      | $12.50         | $12.50         |
 
-  @PlanCosts @Regression
+  @PlanCosts @Regression @theSpartans
   Scenario Outline: To validate Plan Costs in compare page
     Given the user is on the vpp portfolio page
     Then the user performs plan serach using zipcode
