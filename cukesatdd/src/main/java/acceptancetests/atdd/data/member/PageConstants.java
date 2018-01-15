@@ -57,9 +57,9 @@ public class PageConstants {
 
 	public static final String FORMS_AND_RESOURCES_PAGE = "formsandresourcesAarpPage";
 
-	public static final String BENEFITS_AND_COVERAGE_PAGE = "planBenefitsCoveragePage";
-	
-	public static final String BENEFITS_COVERAGE_PAGE = "benefitsCoveragePage";
+	public static final String BENEFITS_AND_COVERAGE_PAGE = "BenefitsAndCoveragePage";
+	public static final String PLAN_BENEFITS_COVERAGE_PAGE = "PlanBenefitsCoveragePage";
+	public static final String BENEFITS_COVERAGE_PAGE = "BenefitsCoveragePage";
 
 	public static final String ORDER_PLAN_MATERIALS_PAGE = "orderplanmaterialsPage";
 
@@ -156,5 +156,36 @@ public class PageConstants {
 	public static final String REGISTRATION_ERROR_PAGE = "regErrorPage";
 
 	public static final String DASHBOARD_PAYMENT_HISTORY_PAGE = "dashboardPaymentOverview";	
+	public static final String REVIEW_ONE_TIME_PAYMENTS_DASHBOARD = "reviewOnetimePaymentsPageDashboard";
+	public static final String ONE_TIME_PAYMENTS_DASHBOARD = "onetimePaymentsPageDashboard";
+	public static final String TEST_HARNESS_PAGE = "TestHarnessPage";
+	public static final String PAYMENT_OVERVIEW = "PaymentOverview";
 
+	public static final String AUTOMATIC_PAYMENTS_DASHBOARD = "automaticPaymentsPageDashboard";	
+	public static final String REVIEW_AUTOMATIC_PAYMENTS_DASHBOARD = "reviewAutomaticPaymentsPageDashboard";
+	public static final String PDF_LINK = "PDFLink";
+public static final String PAYMENT_AMOUNT = "PaymentAmount";
+	
+	public static final String PAYMENT_TYPE = "PaymentType";
+	
+	public static final String MEMBER_NAME = "MemberName";
+	public static final String ONE_PAYMENT_PER_DAY_ERROR_MESSAGE = "onePaymentPerDayErrorMessage";
+
+	public static final String TIMESTAMP = "TimeStamp";
+	public static final String ProfilePreferencesPage = "ProfilePreferencesPage";	
+	//************************** New Constant **************************************
+	public static final String RALLY_DASHBOARD_PAGE = "RallyDashboardPage";
+	public static final String DRUG_COST_ESTIMATOR_PAGE = "drugcostestimatorPage";
+	public static final String SAVING_OPPORTUNITY = "savingopportunity";
+	public static final String ADD_DRUG_DETAILS = "addDrugDetails";
+
+	public static final String MEM_REDESIGN_HEALTH_AND_WELLNESS_PAGE = "memberRedesignHealthAndWellnessPage";
+	public static final String NEW_CLAIMS_SUMMARY_PAGE = "newClaimsSummaryPage";
+	public static final String NEW_CLAIM_DETAILS_PAGE = "newClaimDetailsPage";
+	public static final String MEM_REDESIGN_ACCOUNT_HOME_PAGE = "memberRedesignAccountHomePage";
+	public static final String MEM_REDESIGN_PROVIDER_SEARCH_PAGE = "providerSearchPage";
+	public static final String EOB_Page = "eobPage";
+	public static final String MEMBER_AUTHS_SEARCH_PAGE = "memberSearchPage";
+	
+	public static final String MEMBER_AUTH_INFORMATION_PAGE = "memberInformationPage";
 }

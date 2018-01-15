@@ -8,6 +8,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
 import atdd.framework.UhcDriver;
+import pages.dashboard.member.ulayer.RallyDashboardPage;
 
 /**
  * @author pperugu
@@ -54,6 +55,7 @@ public class OneTimePaymentPage extends UhcDriver{
 	public OneTimePaymentPage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
+		RallyDashboardPage.checkModelPopup(driver);
 		openAndValidate();
 	}
 

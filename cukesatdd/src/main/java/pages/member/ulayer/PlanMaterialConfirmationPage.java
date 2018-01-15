@@ -4,8 +4,8 @@
 package pages.member.ulayer;
 
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
-import org.json.JSONException;
 import org.json.JSONObject;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -30,12 +30,16 @@ public class PlanMaterialConfirmationPage extends UhcDriver {
 	
 	public JSONObject planMaterialsConfirmationJson;
 	
+	@FindBy(id="additionalMaterialsText")
+	private WebElement addordermaterialLink;
+
+	
 	public PlanMaterialConfirmationPage(WebDriver driver){
 		super(driver);
 		PageFactory.initElements(driver, this);
-		String fileName = CommonConstants.ORDER_PLAN_MATERIALS_PAGE_DATA;
+		/*String fileName = CommonConstants.ORDER_PLAN_MATERIALS_PAGE_DATA;
 		planMaterials = CommonUtility.readPageData(fileName,
-				CommonConstants.PAGE_OBJECT_DIRECTORY_ULAYER_MEMBER);
+				CommonConstants.PAGE_OBJECT_DIRECTORY_ULAYER_MEMBER);*/
 		openAndValidate();
 	   }
 	
@@ -44,13 +48,24 @@ public class PlanMaterialConfirmationPage extends UhcDriver {
 		
 	}
 
+	public boolean navigateToValidateOrderConfirmationInRedesignPage() {
+		driver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
+		addordermaterialLink.click();
+		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+		if(driver.getTitle().equalsIgnoreCase("Order Plan Materials")){
+			return true;
+		}
+	
+		return false;
+	}
+
 
 	@Override
 	public void openAndValidate() {
 		
-		validate(logOut);
+		validate(addordermaterialLink);
 		
-		JSONObject jsonObject = new JSONObject();
+/*		JSONObject jsonObject = new JSONObject();
 		for (String key : planMaterials.getExpectedData().keySet()) {
 			WebElement element = findElement(planMaterials.getExpectedData().get(key));
 			validate(element);
@@ -65,7 +80,7 @@ public class PlanMaterialConfirmationPage extends UhcDriver {
 		planMaterialsConfirmationJson = jsonObject;
 		
 		System.out.println("planMaterialsConfirmationJson----->"+planMaterialsConfirmationJson);
-		
+		*/
 	}
 
 	public JSONObject getExpectedData(Map<String, JSONObject> expectedDataMap) {
@@ -74,5 +89,4 @@ public class PlanMaterialConfirmationPage extends UhcDriver {
 		planMaterialsExpectedJson = CommonUtility.mergeJson(planMaterialsExpectedJson, globalExpectedJson);
 		return planMaterialsExpectedJson;
 	}
-
 }

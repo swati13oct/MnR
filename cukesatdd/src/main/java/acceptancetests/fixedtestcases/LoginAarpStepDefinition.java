@@ -237,7 +237,7 @@ public class LoginAarpStepDefinition {
 		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario()
 				.getBean(PageConstants.ACCOUNT_HOME_PAGE);
 		
-		accountHomePage.validatePreferredMailOderLink();
+		/*accountHomePage.validatePreferredMailOderLink();*/
 		accountHomePage.logOut();
 
 	}
@@ -249,7 +249,7 @@ public class LoginAarpStepDefinition {
 		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario()
 				.getBean(PageConstants.ACCOUNT_HOME_PAGE);
 		
-		accountHomePage.validateDrugsPreferredMailOderLink();
+		/*accountHomePage.validateDrugsPreferredMailOderLink();*/
 		accountHomePage.logOut();
 
 	}

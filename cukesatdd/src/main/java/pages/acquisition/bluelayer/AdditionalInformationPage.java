@@ -1,6 +1,3 @@
-/**
- * 
- */
 package pages.acquisition.bluelayer;
 
 import org.json.JSONException;

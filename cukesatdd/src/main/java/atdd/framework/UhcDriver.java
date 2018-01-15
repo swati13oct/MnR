@@ -5,14 +5,18 @@ package atdd.framework;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Cookie;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.Select;
@@ -38,16 +42,20 @@ public abstract class UhcDriver {
 		this.driver = driver;
 	}
 
-	public void waitforElement(WebElement element) {
-		WebDriverWait wait = new WebDriverWait(driver, 5000L);
-		wait.until(ExpectedConditions.visibilityOf(element));
-
-	}
+	
 
 	public void switchToNewTab() {
+		
+		int initialCount = driver.getWindowHandles().size();
+		waitForCountIncrement(initialCount);
 		ArrayList<String> tabs = new ArrayList<String>(
 				driver.getWindowHandles());
 		driver.switchTo().window(tabs.get(1));
+	}
+	
+	public void waitForCountIncrement(int initialCount){
+		WebDriverWait wait = new WebDriverWait(driver, 60);
+		wait.until(ExpectedConditions.numberOfWindowsToBe(initialCount+1));
 	}
 
 	public WebDriver switchToNewIframe(String iframeName) {
@@ -78,6 +86,7 @@ public abstract class UhcDriver {
 	}
 
 	public void sendkeys(WebElement element, String message) {
+		validate(element);
 		element.click();
 		element.clear();
 		element.sendKeys(message);
@@ -100,7 +109,7 @@ public abstract class UhcDriver {
 	}
 
 	public boolean validate(WebElement element) {
-		try {
+		/*try {
 			if (element.isDisplayed()) {
 				System.out.println("Element found!!!!");
 				return true;
@@ -111,8 +120,31 @@ public abstract class UhcDriver {
 			System.out.println("Exception: Element not found/not visible");
 
 		}
-		return false;
+		return false;*/
+		
+		//CM code
+		scrollToView(element);
+		JavascriptExecutor jse = (JavascriptExecutor)driver;
+		jse.executeScript("window.scrollBy(0,-50)", "");
+        try {
+        	waitforElement(element);
+            if (element.isDisplayed()) {
+
+                 /*  Actions actions = new Actions(driver);
+                   actions.moveToElement(element);
+                   actions.perform();*/
+                   Assert.assertTrue("@@@The element " + element.getText() + "is found@@@", element.isDisplayed());
+                   //System.out.println("@@@The element " + element.getText() + "is found@@@");
+            }
+     } catch (Exception e) {
+
+            Assert.fail("The element " + element.getText() + "is not  found");
+        	return false;
+     }
+     
+        return true;
 	}
+	
 
 	public WebElement findElement(ElementData elementData) {
 		WebElement element = null;
@@ -364,4 +396,105 @@ public abstract class UhcDriver {
 
 		return jsonObject;
 	}
+	
+	// ************************ New functions
+	public boolean validateElement(List<WebElement> elementList) {
+		/*try {
+			if (element.isDisplayed()) {
+				System.out.println("Element found!!!!");
+				return true;
+			} else {
+				System.out.println("Element not found/not visible");
+			}
+		} catch (Exception e) {
+			System.out.println("Exception: Element not found/not visible");
+
+		}
+		return false;*/
+		
+		//CM code
+        try {
+            if (0!=elementList.size()) {
+
+                   Actions actions = new Actions(driver);
+                   actions.moveToElement(elementList.get(0));
+                   actions.perform();
+                   System.out.println("@@@The element " + elementList.get(0).getText() + "is found@@@");
+            }
+            else{
+            	System.out.println("@@@The element is not found@@@");
+            	return false;
+            }
+     } catch (Exception e) {
+
+            Assert.fail("The element " + elementList.get(0).getText() + "is not  found");
+        	return false;
+     }
+     
+        return true;
+	}
+	/***
+	 * This method wait for the visibility of an element in the specified time.
+	 * @param element
+	 * @param timeInseconds
+	 */
+	public void waitforElement(WebElement element, long timeInseconds) {
+		WebDriverWait wait = new WebDriverWait(driver, timeInseconds);
+		wait.until(ExpectedConditions.visibilityOf(element));
+		
+	}
+	// Wait component updated
+	public void waitforElement(WebElement element) {
+		WebDriverWait wait = new WebDriverWait(driver, 30);
+		wait.until(ExpectedConditions.visibilityOf(element));
+
+		
+		
+	}
+	
+	public void jsClick(WebElement element){
+		JavascriptExecutor js = (JavascriptExecutor)driver;
+		js.executeScript("arguments[0].click();", element);
+	}
+	
+	public boolean scrollToView(WebElement element) {
+		
+		//CM code
+        try {
+        	
+        	JavascriptExecutor js = (JavascriptExecutor)driver;
+    		js.executeScript("arguments[0].scrollIntoView();", element);
+     } catch (Exception e) {
+
+            Assert.fail("The element " + element.getText() + "is not  found");
+        	return false;
+     }
+     
+        return true;
+	}
+	
+	public boolean clickUsingAction(WebElement element) {
+        try {
+            if (element.isDisplayed()) {
+
+                   Actions actions = new Actions(driver);
+                   actions.moveToElement(element);
+                   actions.click();                 
+                   actions.build().perform();
+                   System.out.println("@@@The element " + element+ "is clicked@@@");
+            }
+            else{
+            	System.out.println("@@@The element is not found@@@");
+            	return false;
+            }
+     } catch (Exception e) {
+
+            Assert.fail("The element " + element + "is not  found");
+        	return false;
+     }
+     
+        return true;
+	}
+	
+	
 }

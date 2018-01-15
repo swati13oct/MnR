@@ -140,7 +140,7 @@ public class MemberUlayerProviderSearchStepDefinition {
 	public void navigate_to_PanelNavigation()
 	{
 		AccountHomePage accountHomePage = (AccountHomePage)getLoginScenario().getBean(PageConstants.ACCOUNT_HOME_PAGE);
-		accountHomePage.panelNavigation();
+		/*accountHomePage.panelNavigation();*/
 	}
 	
 	
@@ -148,35 +148,35 @@ public class MemberUlayerProviderSearchStepDefinition {
 	public void navigate_to_PlanSummaryPage()
 	{
 		AccountHomePage accountHomePage = (AccountHomePage)getLoginScenario().getBean(PageConstants.ACCOUNT_HOME_PAGE);
-		accountHomePage.providerSearchRHandWidget();
+		/*accountHomePage.providerSearchRHandWidget();*/
 	}
 	
 	@Then("^the user navigate to Benefits and Coverage page and click on provider search$")
 	public void navigate_to_BenefitsandCoveragePage()
 	{
 		AccountHomePage accountHomePage = (AccountHomePage)getLoginScenario().getBean(PageConstants.ACCOUNT_HOME_PAGE);
-		accountHomePage.BenefitsandCoverageProviderSearch();
+		/*accountHomePage.BenefitsandCoverageProviderSearch();*/
 	}
 	
 	@Then("^the user navigate to Benefits and Coverage page and click on provider search in PCP Section$")
 	public void navigate_to_BenefitsandCoveragePageinPCP()
 	{
 		AccountHomePage accountHomePage = (AccountHomePage)getLoginScenario().getBean(PageConstants.ACCOUNT_HOME_PAGE);
-		accountHomePage.providerSearchLinkinPCPSection();
+		/*accountHomePage.providerSearchLinkinPCPSection();*/
 	}
 	
 	@Then("^the user navigate to Claims page and click on provider search$")
 	public void navigate_to_ClaimsPage()
 	{
 		AccountHomePage accountHomePage = (AccountHomePage)getLoginScenario().getBean(PageConstants.ACCOUNT_HOME_PAGE);
-		accountHomePage.providerSearchLinkinClaimsPage();
+		/*accountHomePage.providerSearchLinkinClaimsPage();*/
 	}
 	
 	@Then("^the user navigate to Forms and Resources page and click on provider search$")
 	public void navigate_to_FormsandResourcespage()
 	{
 		AccountHomePage accountHomePage = (AccountHomePage)getLoginScenario().getBean(PageConstants.ACCOUNT_HOME_PAGE);
-		accountHomePage.FormsandResourcesLinkinPlanSummaryPage();
+		/*accountHomePage.FormsandResourcesLinkinPlanSummaryPage();*/
 	}
 	
 	
@@ -185,7 +185,7 @@ public class MemberUlayerProviderSearchStepDefinition {
 	public void navigate_to_PHRpage()
 	{
 		AccountHomePage accountHomePage = (AccountHomePage)getLoginScenario().getBean(PageConstants.ACCOUNT_HOME_PAGE);
-		accountHomePage.PHR();
+		/*accountHomePage.PHR();*/
 	}
 	
 	

@@ -40,9 +40,14 @@ public class CommonUtility {
 	public static boolean checkPageIsReady(WebDriver driver) {
 
 		JavascriptExecutor js = (JavascriptExecutor) driver;
-
+			try {
+				Thread.sleep(5000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+				}
 		if (js.executeScript("return document.readyState").toString().equals("complete")) {
-			System.out.println("Page Is loaded.");
+			System.out.println("Browser Page -- "+driver.getTitle()+ " -- Is loaded.");
 			return true;
 		} else {
 			checkPageIsReady(driver);

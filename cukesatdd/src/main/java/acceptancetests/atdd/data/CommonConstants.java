@@ -790,4 +790,48 @@ public class CommonConstants {
 	public static final String NEW_PAYMENT_HISTORY_ACTUAL_JSON = "newPaymentHistoryActualJSON";
 	public static final String NEW_PAYMENT_HISTORY_EXPECTED_JSON = "newPaymentHistoryexpectedJSON";
 
+
+
+
+    //Browsers supported in MRScenario
+	public static final String BROWSER_NAME = "BROWSER_NAME";
+    public static final String JENKINS_BROWSER_PHANTOMJS = "PHANTOMJS";
+    public static final String HTMLUNIT_BROWSER = "HTMLUNIT";
+    public static final String FIREFOX_BROWSER = "FIREFOX";
+    public static final String CHROME_BROWSER = "CHROME";
+    public static final String IE_BROWSER = "IE";
+    public static final String MOBILE_BROWSER = "MOBILE";
+    
+    public static final String SAUCE_BROWSER_WEB = "SAUCE_BROWSER_WEB";
+
+    public static final String SAUCE_BROWSER_MOBILE = "SAUCE_BROWSER_MOBILE";
+    public static final String DESKTOP_WEBDRIVER = "WebDriver";
+    
+   
+    
+    //The following identify the browser to the website.   DESKTOP_BROWSER_AGENT_STRING is from 
+    //the config file, JENKINS_BROWSER_AGENT_STRING is a SYSTEM parameter set in Jenkins.
+    public static final String DESKTOP_BROWSER_AGENT_STRING = "BrowserAgentString";
+    public static final String JENKINS_BROWSER_AGENT_STRING = "JENKINS_BROWSER_AGENT_STRING";
+    public static final String REVIEW_ONE_TIME_PAGE_DATA = "reviewonetimeactual.json";
+
+
+	public static final String PROFILE_AND_PREFERENCES_REDESIGN_PAGE_DATA = "profilenpreferencesredesign.json";
+	public static final String PROFILE_AND_PREFERNCES_PAGE_DIRECTORY = "/jsonresponse/member/ulayer/profilesandprefereneces/";
+	public static final String BENEFITS_AND_COVERAGE = "benefitsandcoverage" ;
+	//**********************************************************************************************************************
+	public static final String SAVE_DRUG_PAGE_DATA="savedrugpagedata.json";
+	public static final String ADD_NEW_DRUG_MODAL = "addnewdrugmodal";
+	public static final String ADD_DRUG_DETAILS = "adddrugdetails";
+	public static final String ADD_NEW_DRUG_PAGE_DATA = "addnewdrugpagedata.json";
+	public static final String DRUGCOSTESTIMATORDATAPAGE = "DrugCostEstimatorPage.json";
+	public static final String ADD_DRUG_DETAILS_PAGE_DATA = "adddrugdetailspagedata.json";
+	public static final String SWITCH_GENERIC_PAGE_DATA = "switchgenericpagedata.json";
+	
+	public static final String DCEstimator = "DCEstimator.json";
+	public static final String SWITCH_GENERIC="switchgeneric.json";
+	public static final String PAGE_OBJECT_DIRECTORY_DCE_MEMBER = "/page-objects/member/dashboard/drugcostestimator/";
+
+	public static final String ACCOUNT_USER_NAME = null;
+
 }

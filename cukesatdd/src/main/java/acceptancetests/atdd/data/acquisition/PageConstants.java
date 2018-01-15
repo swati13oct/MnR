@@ -350,5 +350,12 @@ public class PageConstants {
 	public static final String LOGIN_ASSISTANCE_PERSONAL_IDENTIFICATION_ERROR_SCENARIO = "personalIdentificationErrorActualJson";
 
 	public static final String VPP_REQUEST_SEND_EMAIL_PAGE = "vppRequestSendEmailPage";
-
+	
+	public static final String PORTFOLIO_PAGE = "portfoliopage";
+	 public static final String RESPONSIVE_PLAN_SUMMARY_PAGE = "responsivePlanSummaryPage";
+	 public static final String RESPONSIVE_DETAILS_PAGE = "responsiveDetailsPage";
+	 
+	 public static final String REGISTRATION_INFORMATION_PAGE = "RegistrationInformationPage";
+		
+		public static final String DASHBOARD_FORMS_AND_RESOURCES_PAGE = "DashBoardFormsAndResourcesPage";
 }

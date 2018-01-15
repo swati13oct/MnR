@@ -16,6 +16,7 @@ import org.json.JSONObject;
 import org.junit.Assert;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
@@ -30,6 +31,7 @@ import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import acceptancetests.atdd.data.CommonConstants;
+import acceptancetests.atdd.data.MRConstants;
 import acceptancetests.atdd.data.PageData;
 import acceptancetests.atdd.util.CommonUtility;
 import acceptancetests.login.data.LoginCommonConstants;
@@ -290,12 +292,18 @@ private WebElement searchforproviderlinkinClaimsPage;
 	@FindBy(xpath="//span[text()='search providers']")
 	private WebElement searchProviderLinkinFormsandResourcePage;
 	
+	@FindBy(linkText = "Go to profile page")
+	private WebElement ProfileLink;
 
-	
+
+	@FindBy(linkText = "Go to benefits and coverage page")
+	private WebElement BnClink;
 	
 	private PageData myAccountHome;
 
 	public JSONObject accountHomeJson;
+	// Page URL
+	private static String PAGE_URL = MRConstants.TeamH_ULayer_Member_URL;
 
 	public AccountHomePage(WebDriver driver,String category) {
 		super(driver);
@@ -871,6 +879,80 @@ public void FormsandResourcesLinkinPlanSummaryPageBlayer()
 
 			return null;
 
+	}
+	
+	public pages.member.bluelayer.ProfilePreferencesPage navigateDirectToProfilePage() {
+		//driver.navigate().to(PAGE_URL);
+		System.out.println(driver.getTitle());
+		ProfileLink.click();
+		try {
+			Thread.sleep(30000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		System.out.println(driver.getTitle());
+
+		if (driver.getTitle().equalsIgnoreCase("Profile")) {
+			 System.out.println("Pass!");
+			return new ProfilePreferencesPage(driver);
+		}
+		JavascriptExecutor jse = (JavascriptExecutor)driver;
+		jse.executeScript("window.scrollBy(0,200)", "");
+		try {
+			Thread.sleep(30000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+	public BenefitsAndCoveragePage navigateDirectToBnCPag() {
+
+		driver.navigate().to(PAGE_URL);
+		BnClink.click();
+		try {
+			Thread.sleep(30000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		// driver.manage().timeouts().implicitlyWait(40, TimeUnit.SECONDS);
+		System.out.println(driver.getTitle());
+		if (driver.getTitle().equalsIgnoreCase("Benefits Overview")) {
+			return new BenefitsAndCoveragePage(driver);
+		}
+		return null;
+	}
+	
+	public BenefitsCoveragePage navigateToBnC() {
+
+		benefitsLink.click();
+		try {
+			Thread.sleep(90000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		String title = driver.getTitle().toString();
+		if (title.equalsIgnoreCase("UnitedHealthcare Medicare Solutions | Plan Benefits and Coverage")) {
+			return new BenefitsCoveragePage(driver);
+		} else
+			return null;
+	}
+	
+	public FormsandresourcesPage navigateToMydocumentUmsPage() {
+
+		MyDocumentLink.click();
+
+		return null;
+	}
+	
+	public FormsandresourcesPage navigatebackToformsandresourcesUmsPage() {
+
+		backTopreviouspageLink.click();
+		return null;
 	}
 
 }

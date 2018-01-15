@@ -16,6 +16,7 @@ import acceptancetests.atdd.data.CommonConstants;
 import acceptancetests.atdd.data.PageData;
 import acceptancetests.atdd.util.CommonUtility;
 import atdd.framework.UhcDriver;
+import pages.dashboard.member.ulayer.RallyDashboardPage;
 
 /**
  * @author pperugu
@@ -82,6 +83,7 @@ public class PaymentHistoryPage extends UhcDriver{
 	public PaymentHistoryPage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
+		RallyDashboardPage.checkModelPopup(driver);
 		CommonUtility.waitForPageLoad(driver, paymenthistorypage, CommonConstants.TIMEOUT_30);
 		String fileName = CommonConstants.PAYMENT_HISTORY_PAGE_DATA;
 		paymentHistory = CommonUtility.readPageData(fileName,
