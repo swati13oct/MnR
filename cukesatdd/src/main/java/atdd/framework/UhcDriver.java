@@ -303,7 +303,7 @@ public abstract class UhcDriver {
                 return driver.manage().getCookieNamed(cookieName);
         }
 
-        public abstract void openAndValidate();
+        public abstract void openAndValidate() throws InterruptedException;
         
         /*
          * Generic method to capture the dtm data both static and dynamic. The variable dtm files are kept under page-objects/dtm-common-data/

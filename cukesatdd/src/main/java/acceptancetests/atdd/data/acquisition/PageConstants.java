@@ -3,12 +3,17 @@
  */
 package acceptancetests.atdd.data.acquisition;
 
+//import pages.acquisition.bluelayer.MARightsAndResponsibilitiesPage;
 
 /**
  * @author pjaising
  *
  */
 public class PageConstants {
+	
+	public static final String SignIN_Page = "signinpage";
+	
+	public static final String Error_Message = "errorMessage";
 
 	public static final String ESTIMATE_DRUG_COST_PAGE = "estimateDrugCostPage";
 
@@ -19,6 +24,10 @@ public class PageConstants {
 	public static final String SELECT_GENERIC_PAGE = "selectGenericPage";
 
 	public static final String PHARMACY_SEARCH_PAGE = "pharmacySearchPage";
+	
+	public static final String UHCRETIREE_PHARMACY_RESULTS_PAGE = "pharmacyResultsPage";
+	
+	public static final String UHCRETIREE_PHARMACY_SEARCH_PAGE = "uhcRetireepharmacylocatorPage";
 
 	public static final String HEALTH_PLANS_PAGE = "healthPlansPage";
 
@@ -51,8 +60,6 @@ public class PageConstants {
 	public static final String VPP_PLAN_SUMMARY_PAGE = "vppPlanSummaryPage";
 
 	public static final String VPP_PLAN_DETAILS_PAGE = "vppPlanDetailsPage";
-	
-	public static final String COMPARE_PLANS_PAGE = "comparePlansPage";
 
 	public static final String UHC_ACQUISITION_HOME_PAGE = "umsAcquisitionHomePage";
 
@@ -63,6 +70,8 @@ public class PageConstants {
 	public static final String ZIP_LOOK_UP_HOME_PAGE = "zipcodeLookuphomePage";
 
 	public static final String ZIP_SELECTION_HOME_PAGE = "zipcodeSelectionhomePage";
+	
+	public static final String DRUG_COST_ESTIMATOR_PAGE = "drugCostEstimatorPage";
 
 	public static final String OUR_PLANS_PAGE = "ourPlansPage";
 
@@ -75,7 +84,7 @@ public class PageConstants {
 	public static final String BENEFICIARY_INFORMATION_PAGE = "beneficiaryInformationPage";
 
 	public static final String INTRODUCTION_INFORMATION_PAGE = "introductionInformationPage";
-
+	
 	public static final String ESRD_PAGE = "esrdPage";
 
 	public static final String PRESCRIPTION_DRUG_COVERAGE_PAGE = "prescriptiondrugcoveragePage";
@@ -121,8 +130,6 @@ public class PageConstants {
 	public static final String MS_VPP_PAGE = "msViewPlansAndPricingPage";
 
 	public static final String SITE_MAP_PAGE = "siteMapPage";
-	
-	public static final String DRUG_COST_ESTIMATOR_PAGE = "drugCostEstimatorPage";
 
 
 	public static final String ABOUT_US_PAGE = "aboutUsPage";
@@ -303,13 +310,19 @@ public class PageConstants {
 	public static final String PFIZER_SITE_MAP = "pfizersitemap";
 
 	public static final String NCSHP_HOME_PAGE = "ncshp";
+	
+	public static final String OELOCAL12_HOME_PAGE = "oelocal12";
+	
+	public static final String PEEHIP_HOME_PAGE = "peehip";
 
 	public static final String NCSHP_FIND_A_PROVIDER = "ncshpfindaprovider";
 
 	public static final String NCSHP_SITE_MAP = "ncshpsitemap";
 
 	public static final String UAW_HOME_PAGE = "uawhomepage";
-
+	
+	public static final String WELLSFARGO_HOME_PAGE = "wellsfargopage";
+			
 	public static final String UAW_PROVIDER_PAGE = "uawproviderpage";
 
 	public static final String UAW_SITE_MAP_PAGE = "uawsitemappage";
@@ -351,39 +364,31 @@ public class PageConstants {
 
 	public static final String VPP_REQUEST_SEND_EMAIL_PAGE = "vppRequestSendEmailPage";
 	
-	public static final String UHCRETIREE_PHARMACY_SEARCH_PAGE = "uhcRetireepharmacylocatorPage";
-
-	public static final String UHCRETIREE_PHARMACY_RESULTS_PAGE = "pharmacyResultsPage";
+	public static final String PORTFOLIO_PAGE = "portfoliopage";
 	
-	public static final String NOKIA_HOME_PAGE = "nokiahomepages";
-
-	public static final String Salesforce_PAGE = "salesforce";
+    public static final String RESPONSIVE_PLAN_SUMMARY_PAGE = "responsivePlanSummaryPage";
 	
-	public static final String EATON_HOME_PAGE = "eatonhomepages";
-
-	public static final String OELOCAL12_HOME_PAGE = "oelocal12";
-	
-	public static final String PEEHIP_HOME_PAGE = "peehip";
-	
-	public static final String NONCUSTOM_HOME_PAGE = "noncustom";
-
-	public static final String UNIVERSITYOFMISSOURI_HOME_PAGE = "UniversityofMissouri";
-
-	public static final String WELLSFARGO_HOME_PAGE = "wellsfargopage";
-
-	public static final String PORTFOLIO_PAGE_UHC = "ourPlans";
-
-	public static final String RESPONSIVE_PLAN_SUMMARY_PAGE_UHC = "vppPlan";
-
 	public static final String RESPONSIVE_DETAILS_PAGE = "responsiveDetailsPage";
-
-	public static final String TeamC_Plan_Compare_Page = "TeamCPlanComparePage";
-    
-	public static final String TeamC_FootNotes_Section = "TeamCFootNotesSection";
 	
 	public static final String RESPONSIVE_DETAILS_UHC_PAGE = "responsiveDetailsUHCPage";
-	
-	public static final String REGISTRATION_INFORMATION_PAGE = "RegistrationInformationPage";
+public static final String PORTFOLIO_PAGE_UHC = "ourPlans";
 
+	public static final String RESPONSIVE_PLAN_SUMMARY_PAGE_UHC = "vppPlan";
 	
+	public static final String TeamC_Plan_Compare_Page = "TeamCPlanComparePage";
+	
+	public static final String TeamC_FootNotes_Section = "TeamCFootNotesSection";
+	
+	public static final String SamePage = "SamePage";
+	
+	public static final String UNPWAssistancePage = "UNPWassPge";
+	public static final String EATON_HOME_PAGE = "eatonhomepages";
+	public static final String Salesforce_PAGE = "salesforce";
+	public static final String NOKIA_HOME_PAGE = "nokiahomepages";
+	   public static final String NONCUSTOM_HOME_PAGE = "noncustom";
+	   public static final String UNIVERSITYOFMISSOURI_HOME_PAGE = "UniversityofMissouri";
+	   
+	   public static final String REGISTRATION_INFORMATION_PAGE = "RegistrationInformationPage";
+	   
+	   public static final String COMPARE_PLANS_PAGE = "comparePlansPage";
 }

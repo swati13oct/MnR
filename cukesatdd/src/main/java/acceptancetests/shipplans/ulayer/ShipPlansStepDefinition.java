@@ -58,7 +58,7 @@ public class ShipPlansStepDefinition {
 	}
 
 	@Given("^registered AMP member with SHIP combo plans$")
-	public void registered_member_SHIPplans() {
+	public void registered_member_SHIPplans() throws InterruptedException {
 
 		/* Reading the given attribute from feature file */
 		/*List<DataTableRow> memberAttributesRow = memberAttributes
@@ -144,7 +144,7 @@ public class ShipPlansStepDefinition {
 	}
 	
 	@When("^the user navigates to mentioned page in AARP site$")
-	public void views_pages_in_Ums_site(DataTable givenAttributes) {
+	public void views_pages_in_Ums_site(DataTable givenAttributes) throws InterruptedException {
 		
 		List<DataTableRow> givenAttributesRow = givenAttributes
 				.getGherkinRows();

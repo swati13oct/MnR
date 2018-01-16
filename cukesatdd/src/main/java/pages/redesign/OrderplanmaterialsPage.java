@@ -22,6 +22,9 @@ import junit.framework.Assert;
  *
  */
 public class OrderplanmaterialsPage extends UhcDriver {
+
+	@FindBy(xpath = "//area[@href='javascript:clWin()'][@alt = 'close']")
+	private WebElement FeedbackModal;
 	
 	@FindBy(xpath = "//a[contains(text(), 'Medicare Advantage Plan')]")
 	private WebElement MAPlanTab;
@@ -107,15 +110,25 @@ public class OrderplanmaterialsPage extends UhcDriver {
 	@FindBy(id = "disclosure_link")
 	private WebElement logOut;
 
-	 @FindBy(id="addAnotherPlanLink")
-     private WebElement addPlansTab;
-      
-     @FindBy(className="selected")
-     private WebElement orderMaterial;
-     
-	public OrderplanmaterialsPage(WebDriver driver) {
+	public OrderplanmaterialsPage(WebDriver driver) throws InterruptedException {
 		super(driver);
 		PageFactory.initElements(driver, this);
+		Thread.sleep(5000);
+		CommonUtility.checkPageIsReady(driver);
+		try{
+			FeedbackModal.click();
+			System.out.println("FeedBack Modal Present");
+			if (validate(FeedbackModal)){
+				System.out.println("FeedBack Modal NOT CLOSING - Close button is clicked");
+			}
+			System.out.println("FeedBack Modal Closed");
+			//Thread.sleep(3000);
+			
+		}
+		catch (Exception e) {
+			System.out.println("FeedBack Modal NOT Present");
+
+		}
 		//openAndValidate();
 	}
 	
@@ -232,9 +245,9 @@ public class OrderplanmaterialsPage extends UhcDriver {
 			return false;}
 		
 	}
-	public boolean ValidateErrorMessage(){
-		driver.manage().timeouts().implicitlyWait(40, TimeUnit.SECONDS);
-		if (OrderMaterialsErrorMsg.isDisplayed()){
+	public boolean ValidateErrorMessage() throws InterruptedException{
+		Thread.sleep(3000);
+		if (validate(OrderMaterialsErrorMsg)){
 			System.out.println("*************Error Message Displayed displayed for Order materials Page***************");
 			System.out.println("*************Error Message : "+OrderMaterialsErrorMsg.getText()+" ***************");
 			return true;
@@ -247,7 +260,7 @@ public class OrderplanmaterialsPage extends UhcDriver {
 	public boolean ValidateSHIPErrorMessage(){
 		
 		if (SHIPerrorMsg.isDisplayed()){
-			if(SHIPerrorMsg.getText().contains("Your request cannot be processed at this time. For help, please contact Customer Service")){
+			if(SHIPerrorMsg.getText().contains("request cannot be processed at this time. For help, please contact Customer Service")){
 			System.out.println("*************Error Message Displayed displayed for SHIP invalid Selection in Order materials Page***************");
 			System.out.println("*************Error Message : "+SHIPerrorMsg.getText()+"***************");
 			return true;
@@ -263,7 +276,7 @@ public class OrderplanmaterialsPage extends UhcDriver {
 		
 	}
 	
-	public PlanMaterialConfirmationPage selectsOption(String option) {
+	public PlanMaterialConfirmationPage selectsOption(String option) throws InterruptedException {
 		
 		CommonUtility.checkPageIsReady(driver);
 
@@ -347,7 +360,7 @@ public class OrderplanmaterialsPage extends UhcDriver {
 			}
 
 		}
-		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+		Thread.sleep(5000);
 		
 		//submitButton.submit();
 		if(validate(submitButton)){
@@ -357,7 +370,7 @@ public class OrderplanmaterialsPage extends UhcDriver {
 			System.out.println("****** Submit Button Clicked ********");
 		}
 
-		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+		Thread.sleep(3000);
 		CommonUtility.checkPageIsReady(driver);
 		if (validate(OrderConfirmationHeader) || validate(OrderConfirmation_addordermaterialLink)) {
 			System.out.println("@@@@ Opder Plan Material COnfirmation Page is Displayed @@@@");
@@ -398,29 +411,5 @@ public class OrderplanmaterialsPage extends UhcDriver {
 		validate(memberMaterialsfield);
 		validate(logOut);
 	}
-	
-	public boolean validateAddPlanLink(){
-        boolean flag = false;
-        try{
-        waitforElement(orderMaterial);        
-        if(orderMaterial.getText().equals("Order Materials")){
-        if(addPlansTab.isDisplayed()){
-                System.out.println(addPlansTab.getText()+" is displayed, hence scenario failed");
-                //Assert.assertTrue(flag);
-                flag=true;
-                return flag;
-        }else{
-                System.out.println("addPlansTab is not displayed");
-                //Assert.fail();!
-                return flag;
-        }
-        }}
-        catch(Exception e){
-                System.out.println("Exception failing - element not visible");
-                //Assert.fail();
-        }
-        return flag;
-}
-
 
 }

@@ -13,33 +13,16 @@ Feature: To test order plan materials flow in UHC site
   #    | Option    | <option>   |
   #    | Plan Type | <planType> |
 
-Scenario Outline:Verify order plan materials in UHC site for federal members
-Given registered UHC member for order plan materials with following attributes 
-	| Plan Type    | <planType>   |
-	| Member Type  | <memberType> | 
-When the user navigates to order plan materials through mymenu tab in UHC site
-Examples:
-  	 | planType   | memberType     | option              |
-   # | MA         |  Individual    | Member Materials    | 
-   #  | MAPD       |  Individual    | Replacement ID card |
-   # | MA         | Group          | Replacement ID card |   
-   # | MAPD       | Group          | Member Materials    |
-   # | SSUP       | Group          | Replacement ID card |
-   # | PDP        | Group          | Member Materials    |
+  #  Examples: 
+  #    | planType | memberType | option           |
+  #    | MA       | Individual | Member Materials |
+  #    | MAPD     | Individual | Member Materials |
+  #    | MA       | Group      | Member Materials |
+  #    | PDP      | Group      | Welcome Guide |
+  #    | MAPD     | Group      | Member Materials |
 
-@ordermaterialsfnf  
-Scenario Outline:Verify order plan materials in UHC site for federal members
-Given registered UHC member for order plan materials with following attributes 
-	| Plan Type    | <planType>   |
-	| Member Type  | <memberType> | 
-	| Group Type    | <groupType> |
-When the user navigates to order plan materials through mymenu tab in UHC site
-Then the user validates add plan link on order and beneefits page
- 
-Examples:
-     | planType   | memberType     | groupType              |
-     | MAPD       | Group          | ALPEEHIP               |
-@ValidateOrderSelectionandConfirmation
+
+  @ValidateOrderSelectionandConfirmation
   Scenario Outline: Verify order plan materials in UHC site for radio button validation for ma and ssup member
     Given registered UHC member for order plan materials with following attributes
       | Plan Type   | <planType>   |
@@ -52,9 +35,22 @@ Examples:
 
     Examples: 
       | planType | memberType | option           |
-      | MA       | Individual | Member Materials |
-      | MAPD     | Individual | Member Materials |
-      | MA       | Group      | Member Materials |
+      | MA       | Individual | Replacement ID card |
+      | MAPD     | Individual | Replacement ID card |
+      | MA       | Group      | Replacement ID card |
       | PDP      | Group      | Welcome Guide |
-      | MAPD     | Group      | Member Materials |
+      | MAPD     | Group      | Replacement ID card |
 
+#  @PDPgroupComboValidateHeaderandTabs
+ # Scenario Outline: Verify UHC Aarp Order Materials Page Header - All  Plan Types for Group Members
+ #   Given registered UHC member for order plan materials with following attributes
+ #     | Plan Type   | <planType>   |
+ #     | Member Type | <memberType> |
+ #   When the user views order materials in UHC site
+ #   Then user navigates to Order Materials page for all Plans
+ #     | Combo Plans | <comboPlans> |
+ #   And user Validates Page Header and Sub-Header text
+
+#    Examples: 
+#      | planType | memberType | comboPlans |
+#      | PDPwithSSUP      | Group      | PDP,SSUP   |
