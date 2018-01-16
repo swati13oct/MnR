@@ -1,6 +1,7 @@
 @fixedTestCaseTest
-@memberpharmacylocatorblayer
+@memberpharmacylocatorUHCM
 Feature:To test Locate a Pharmacy tool in UMS site for all pharmacy types for default zipcode in UMS site
+@locatePharmacyDefaultZip
 Scenario Outline:To verify available pharmacies for default zipcode in UMS site
 Given registered member to verify locate a pharmacy in UMS Site
 	| Plan Type    | <plantype>   |
@@ -18,6 +19,7 @@ Examples:
 	| plantype | memberType   | distance  | countyName |planName|
 	| MAPD      |  Group     |    25      | Cayuga County|UnitedHealthcare MedicareComplete Choice Plan 1 (Regional PPO)|
 
+@locatePharmacyByZIPPharmacyType
 Scenario Outline:To verify available pharmacies for default zipcode in UMS site
 Given registered member to verify locate a pharmacy in UMS Site
 	| Plan Type    | <plantype>   |
@@ -37,6 +39,7 @@ Examples:
 	| plantype | memberType   | distance  | countyName |planName|pharmacyType						     |
 	| MAPD      |  Group     |   25      | Cayuga County|UnitedHealthcare MedicareComplete Choice Plan 1 (Regional PPO)|Standard Network Pharmacy |
 
+@locatePharmacyByZIPEntry
 Scenario Outline:To verify available pharmacies for particular zipcode in UMS site
 Given registered member to verify locate a pharmacy in UMS Site
 	| Plan Type    | <plantype>   |
@@ -55,6 +58,7 @@ Examples:
   | plantype | memberType  | zipCode     | distance | countyName        | planName 		           	           | pharmacyType						     |
   | MAPD    | 	Group	 | 90210       | 2        |       | AARP MedicareComplete SecureHorizons Plan 2 (HMO)  | Standard Network Pharmacy |
 
+@locatePharmacyByZIPEntryPharmacyType
 Scenario Outline:To verify available pharmacies for particular zipcode in UMS site
 Given registered member to verify locate a pharmacy in UMS Site
 	| Plan Type    | <plantype>   |
@@ -75,6 +79,8 @@ Examples:
   | plantype | memberType  | zipCode     | distance | countyName        | planName 		           	           | pharmacyType						     |
   | MAPD    | 	Group	 | 90210       | 2        |       | AARP MedicareComplete SecureHorizons Plan 2 (HMO)  | Standard Network Pharmacy |
 
+
+@locatePharmacyContentVerify
 Scenario Outline:To verify espanol and chinese contents
 Given registered member to verify locate a pharmacy in UMS Site
 	| Plan Type    | <plantype>   |
