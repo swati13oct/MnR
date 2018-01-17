@@ -1,4 +1,4 @@
- @planDetailUhc
+@fastandfurious
 Feature: To verify mobile responsive for plan details page
  @rightRail		
 Scenario Outline: To validate Need a step back from right rail

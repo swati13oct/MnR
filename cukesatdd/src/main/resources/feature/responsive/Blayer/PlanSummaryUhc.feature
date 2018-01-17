@@ -1,3 +1,4 @@
+@fastandfurious
 Feature: To verify mobile responsive
 
 @planCount @sprint2

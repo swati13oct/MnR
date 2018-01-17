@@ -1,4 +1,4 @@
-@ULayerVASPageFnF
+@fastandfurious
 Feature: IS VPP Header/Footer Integration - U Layer VAS Page
 
 Scenario Outline: To validate MedSupp Header and Footer on B Layer VAS Page

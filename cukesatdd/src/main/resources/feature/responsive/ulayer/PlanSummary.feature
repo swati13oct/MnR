@@ -1,5 +1,5 @@
+@fastandfurious
 Feature: To verify mobile responsive
-
   @fixed
   Scenario Outline: To validate plan highlights and provider searh link
     Given the user is on the vpp portfolio page
