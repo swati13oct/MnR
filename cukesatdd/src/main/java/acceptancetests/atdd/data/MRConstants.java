@@ -19,6 +19,10 @@ public class MRConstants {
 	public static final String UHCM_URL = "https://member."+MRScenario.environment+"-uhcmedicaresolutions." + getDomain() + "/guest/login.html";
 	public static final String UHCM_URL_OFFLINE = "https://member.offline.uhcmedicaresolutions.com";
 	
+	public static final String Dashboard_URL ="https://"+MRScenario.environment+"-medicare.uhc.com/";
+	
+	public static final String Dashboar_URL = "https://"+MRScenario.environment+"-medicare.uhc.com/?testharness=true ";
+
 	public static final String AARP_PLANPREVIEW_URL= "https://www."+MRScenario.environment+"-aarpmedicareplans." + getDomain() + "/plan-preview.html";
 	
 	public static final String UHC_PLANPREVIEW_URL= "https://www."+MRScenario.environment+"-uhcmedicaresolutions." + getDomain() + "/plan-preview.html";

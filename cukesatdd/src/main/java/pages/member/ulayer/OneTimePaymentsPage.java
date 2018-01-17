@@ -18,37 +18,37 @@ import atdd.framework.UhcDriver;
  *
  */
 public class OneTimePaymentsPage extends UhcDriver{
-        
-                
-        @FindBy(xpath="//*[@id='atdd_otheramount_label']/label")
-        private WebElement otherAmountRadio;
-        
-        @FindBy(id = "other-amount-number")
-        private WebElement otherAmountNumber;
-        
-        @FindBy(id = "routing-number")
-        private WebElement routingNumberField;
-        
-        @FindBy(id = "confirm-routing-number")
-        private WebElement confirmRoutingNumberField;
-        
-        @FindBy(id = "account-number")
-        private WebElement accountNumberField;
-        
-        @FindBy(id = "confirm-account-number")
-        private WebElement confirmAccountNumberField;
-        
-        @FindBy(id = "first-name")
-        private WebElement firstNameField;
-        
-        @FindBy(id = "last-name")
-        private WebElement lastNameField;        
-        
-        @FindBy(id = "review-continue")
-        private WebElement reviewContinue;        
-        
-        @FindBy(xpath = "//div[@class='longform__row']//div[@class='margin-medium']/a[2]")
-        private WebElement AutoreviewContinue;
+	
+		
+	@FindBy(xpath="//*[@id='atdd_otheramount_label']")
+	private WebElement otherAmountRadio;
+	
+	@FindBy(id = "other-amount-number")
+	private WebElement otherAmountNumber;
+	
+	@FindBy(id = "routing-number")
+	private WebElement routingNumberField;
+	
+	@FindBy(id = "confirm-routing-number")
+	private WebElement confirmRoutingNumberField;
+	
+	@FindBy(id = "account-number")
+	private WebElement accountNumberField;
+	
+	@FindBy(id = "confirm-account-number")
+	private WebElement confirmAccountNumberField;
+	
+	@FindBy(id = "first-name")
+	private WebElement firstNameField;
+	
+	@FindBy(id = "last-name")
+	private WebElement lastNameField;	
+	
+	@FindBy(id = "review-continue")
+	private WebElement reviewContinue;	
+	
+	@FindBy(xpath = "//div[@class='longform__row']//div[@class='margin-medium']/a[2]")
+	private WebElement AutoreviewContinue;
 
         @FindBy(className = "error-count")
         private WebElement ErrorMessageChkbox;
@@ -89,26 +89,27 @@ public class OneTimePaymentsPage extends UhcDriver{
         @FindBy(id = "other-amount-number")
         private WebElement amountToBePaidField;
 
-        public OneTimePaymentsPage(WebDriver driver) {
-                super(driver);
-                PageFactory.initElements(driver, this);
-                openAndValidate();
-        }
+	public OneTimePaymentsPage(WebDriver driver) throws InterruptedException {
+		super(driver);
+		PageFactory.initElements(driver, this);
+		//openAndValidate();
+	}
 
-        @Override
-        public void openAndValidate() {
-                validate(otherAmountRadio);
-                validate(otherAmountNumber);
-                validate(routingNumberField);
-                validate(confirmRoutingNumberField);
-                validate(accountNumberField);
-                validate(confirmAccountNumberField);
-                validate(firstNameField);
-                validate(lastNameField);
-                validate(electronicSignatureCheck);
-                validate(reviewContinue);
-                
-        }
+	@Override
+	public void openAndValidate() throws InterruptedException {
+		Thread.sleep(3000);
+		validate(otherAmountRadio);
+		validate(otherAmountNumber);
+		validate(routingNumberField);
+		validate(confirmRoutingNumberField);
+		validate(accountNumberField);
+		validate(confirmAccountNumberField);
+		validate(firstNameField);
+		validate(lastNameField);
+		validate(electronicSignatureCheck);
+		validate(reviewContinue);
+		
+	}
 
         public ReviewOneTimePaymentsPage enterInfoAndContinue() throws InterruptedException {
                 Thread.sleep(6000);

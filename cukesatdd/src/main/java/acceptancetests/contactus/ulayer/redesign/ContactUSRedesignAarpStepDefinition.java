@@ -47,7 +47,7 @@ public class ContactUSRedesignAarpStepDefinition {
 		
 		@Given("^registered UMS member with following attributes$")
 		public void ulayer_registered_member_with_following_attributes(
-				DataTable memberAttributes) {
+				DataTable memberAttributes) throws InterruptedException {
 
 			List<DataTableRow> memberAttributesRow = memberAttributes.getGherkinRows();
 			Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();

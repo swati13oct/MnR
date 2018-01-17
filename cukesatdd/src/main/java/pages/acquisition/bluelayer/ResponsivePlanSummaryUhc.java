@@ -269,6 +269,9 @@ public class ResponsivePlanSummaryUhc extends UhcDriver{
 			@FindBy(xpath="//div[@class='tab plancountheight active']/div/span/span")
             private WebElement planCount;
 			
+			@FindBy(xpath="//a[@class='cta-button secondary value-added-services']")
+            private WebElement vasButton;
+			
 			/*@FindBy(xpath="//div[@class='tab plancountheight'][1]/div/span/span")
             private WebElement maPlanCount;
 			
@@ -286,6 +289,9 @@ public class ResponsivePlanSummaryUhc extends UhcDriver{
 		
 		@FindBy(className="footer")
 		private WebElement footerElement;
+		
+		@FindBy(className="cta-button secondary compare-plans-button show")
+		private WebElement comparePlanLink;
 		
 			private static String CAMPAIGN_URL_1 = MRConstants.CAMPAIGN_PAGE_URL1;
 			
@@ -513,12 +519,12 @@ public ResponsivePlanSummaryUhc viewPlanSummary(String planType) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-		    if(driver.getTitle().equals("UnitedHealthcare Medicare Solutions | AARP Medicare Supplement Plans")){
+		   // if(driver.getTitle().equals("UnitedHealthcare Medicare Solutions | AARP Medicare Supplement Plans")){
  		    	return new ResponsivePlanSummaryUhc(driver);
-		    }else{
+		    /*}else{
 		    	System.out.println("MS plans header not displayed");
 		    	Assert.fail();
-		    }
+		    }*/
 		}else if(planType.equalsIgnoreCase("SNP")){
 			wait.until(ExpectedConditions.elementToBeClickable(viewSnpPlans));
 			viewSnpPlans.click();
@@ -532,7 +538,7 @@ public BLayerPlanComparePage TeamCviewPlanSummary(String planType) throws Interr
 //	JavascriptExecutor js = (JavascriptExecutor)driver;
 	
 		
-	Thread.sleep(5000);
+	Thread.sleep(9000);
 	if (planType.equalsIgnoreCase("PDP")) {
 		viewPdpPlans.click();
 		return new BLayerPlanComparePage(driver);
@@ -1817,5 +1823,22 @@ public void comparePlanslnk(){
 				return null;
 			}
 			
+			public PlanComparePage navigateToPlanCompare(String planName){
+				driver.findElement(By.xpath("//*[@id='compare-"+planName+"']/parent::span/following-sibling::p")).click();
+					return new PlanComparePage(driver);
 			
 			}
+			
+			
+			 public void selectPlanstoCompare(String planName){
+				 driver.findElement(By.xpath("//*[@id='compare-"+planName+"']/parent::span")).click();
+ 				 System.out.println("========="+planName+" is selected to compare===========");
+				 }
+			 
+			 public VASPage navigateToBLayerVASPage(){
+				 vasButton.click();
+ 				 return new VASPage(driver);
+				
+				}
+			 
+			 }
