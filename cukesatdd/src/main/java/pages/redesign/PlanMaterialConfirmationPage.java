@@ -50,10 +50,10 @@ public class PlanMaterialConfirmationPage extends UhcDriver {
 		
 	}
 
-	public OrderplanmaterialsPage navigateToValidateOrderConfirmationInRedesignPage() {
-		driver.manage().timeouts().implicitlyWait(600, TimeUnit.SECONDS);
+	public OrderplanmaterialsPage navigateToValidateOrderConfirmationInRedesignPage() throws InterruptedException {
+		Thread.sleep(5000);
 		addordermaterialLink.click();
-		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+		Thread.sleep(3000);
 		if(driver.getTitle().equalsIgnoreCase("Order Plan Materials")){
 			return new OrderplanmaterialsPage(driver);
 		}

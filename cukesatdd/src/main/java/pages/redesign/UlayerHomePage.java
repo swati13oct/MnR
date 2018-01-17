@@ -97,17 +97,17 @@ public class UlayerHomePage extends UhcDriver {
 
 	private JSONObject browserCheckJson;
 
-	public UlayerHomePage(WebDriver driver) {
+	public UlayerHomePage(WebDriver driver) throws InterruptedException {
 		super(driver);
 		PageFactory.initElements(driver, this);
 		String fileName = CommonConstants.ACCOUNT_HOME_PAGE_DATA;
 		myAccountHome = CommonUtility.readPageData(fileName, CommonConstants.PAGE_OBJECT_DIRECTORY_ULAYER_MEMBER);
-		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+		Thread.sleep(3000);
 		CommonUtility.checkPageIsReady(driver);
-		openAndValidate();
+		//openAndValidate();
 	}
 
-	public PaymentHistoryPage navigateToPayments() {
+	public PaymentHistoryPage navigateToPayments() throws InterruptedException {
 
 		driver.navigate().to("https://"+MRScenario.environment+"-medicare.uhc.com/content/medicare/member/payments/overview.html");
 /*		
@@ -123,7 +123,7 @@ public class UlayerHomePage extends UhcDriver {
 	}
 
 
-	public MyProfilesPage navigateToProfAndPref() {
+	public MyProfilesPage navigateToProfAndPref() throws InterruptedException {
 
 		//MyProfileLink.click();
 		driver.navigate().to("https://"+MRScenario.environment+"-medicare.uhc.com/content/medicare/member/account/profile.html");
@@ -153,7 +153,7 @@ public class UlayerHomePage extends UhcDriver {
 		return null;
 	}
 
-	public MedicalClaimSummaryPage navigateToMedicalClaimsSummary() {
+	public MedicalClaimSummaryPage navigateToMedicalClaimsSummary() throws InterruptedException {
 		//ClaimsLink.click();
 		
 		driver.navigate().to("https://"+MRScenario.environment+"-medicare.uhc.com/content/medicare/member/claims.html#/overview");
@@ -166,7 +166,7 @@ public class UlayerHomePage extends UhcDriver {
 		}
 	}
 
-	public EoBSearchPage navigateToBenefitsAndCoverage() {
+	public EoBSearchPage navigateToBenefitsAndCoverage() throws InterruptedException {
 		driver.navigate().to("https://"+MRScenario.environment+"-medicare.uhc.com/content/medicare/member/eob.html");
 		//EOBsearchLink.click();
 
@@ -210,7 +210,7 @@ public class UlayerHomePage extends UhcDriver {
 		return accountHomeExpectedJson;
 	}
 
-	public OrderplanmaterialsPage navigateToOrderPlanMaterialsPage() {
+	public OrderplanmaterialsPage navigateToOrderPlanMaterialsPage() throws InterruptedException {
 		driver.navigate().to("https://"+MRScenario.environment+"-medicare.uhc.com/content/medicare/member/order-materials/overview.html");
 		//OrderPlanMaterialslnk.click();
 		CommonUtility.checkPageIsReady(driver);
@@ -220,7 +220,7 @@ public class UlayerHomePage extends UhcDriver {
 		return null;
 	}
 
-	public ContactUsPage navigatesToContactUsPage() {
+	public ContactUsPage navigatesToContactUsPage() throws InterruptedException {
 
 		//GoToContactUsLnk.click();
 		driver.navigate().to("https://"+MRScenario.environment+"-medicare.uhc.com/content/medicare/member/contact-us/overview.html#/contact-us-two");
@@ -232,10 +232,10 @@ public class UlayerHomePage extends UhcDriver {
 		}
 	}
 
-	public OrderplanmaterialsPage navigateToValidateOrderConfirmationInAarpPage() {
-		driver.manage().timeouts().implicitlyWait(600, TimeUnit.SECONDS);
+	public OrderplanmaterialsPage navigateToValidateOrderConfirmationInAarpPage() throws InterruptedException {
+		Thread.sleep(9000);
 		addordermaterialLink.click();
-		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+		Thread.sleep(3000);
 		return null;
 	}
 

@@ -35,6 +35,9 @@ import gherkin.formatter.model.DataTableRow;
  */
 public class EoBSearchPage extends UhcDriver {
 
+	@FindBy(xpath = "//area[@href='javascript:clWin()'][@alt = 'close']")
+	private WebElement FeedbackModal;
+
 	@FindBy(xpath = "//h1[contains(text(), 'Explanation of Benefits')]")
 	private WebElement EOBPageHeader;
 
@@ -44,12 +47,29 @@ public class EoBSearchPage extends UhcDriver {
 	private PageData planBenefitsCoverage;
 
 	
-	public EoBSearchPage(WebDriver driver) {
+	public EoBSearchPage(WebDriver driver) throws InterruptedException {
 		super(driver);
 		PageFactory.initElements(driver, this);
 		String fileName = CommonConstants.MEDICAL_EOB_PAGE_DATA;
 		planBenefitsCoverage = CommonUtility.readPageData(fileName,
 				CommonConstants.PAGE_OBJECT_DIRECTORY_ULAYER_MEMBER);
+		Thread.sleep(5000);
+		CommonUtility.checkPageIsReady(driver);
+		try{
+			FeedbackModal.click();
+			System.out.println("FeedBack Modal Present");
+			if (validate(FeedbackModal)){
+				System.out.println("FeedBack Modal NOT CLOSING - Close button is clicked");
+			}
+			System.out.println("FeedBack Modal Closed");
+			//Thread.sleep(3000);
+			
+		}
+		catch (Exception e) {
+			System.out.println("FeedBack Modal NOT Present");
+
+		}
+
 		openAndValidate();
 	}
 
