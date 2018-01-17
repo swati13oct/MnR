@@ -1,4 +1,4 @@
-@planCompareFnF
+@fastandfurious
 Feature: IS VPP Header/Footer Integration - Plan Compare
 
 Scenario Outline: To validate MedSupp Header and Footer
