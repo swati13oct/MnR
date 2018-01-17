@@ -1,4 +1,4 @@
-@memberAuth
+@theSpartans
 Feature: To test Member Auth Dashboard page.
 
   @memb

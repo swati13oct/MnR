@@ -25,7 +25,7 @@ import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import gherkin.formatter.model.DataTableRow;
 import pages.acquisition.bluelayer.PlanComparePage;
-import pages.acquisition.bluelayer.ResponsivePlanSummaryUhc;
+
 import pages.acquisition.bluelayer.VASPage;
 import pages.acquisition.ulayer.AddDrugPage;
 import pages.acquisition.ulayer.GetStartedPage;
@@ -830,8 +830,7 @@ public class ResponsiveStepDefiniton {
             	public void user_search_pharmacies(){
             		ManageDrugPage manageDrugPage = (ManageDrugPage) getLoginScenario()
             				.getBean(PageConstants.MANAGE_DRUG_PAGE);
-            		SelectPharmacyPage selectPharmacyPage = manageDrugPage
-            				.navigateToPharmacyPage();
+            		pages.member.bluelayer.SelectPharmacyPage selectPharmacyPage = manageDrugPage.navigateToPharmacyPage();
             		if (selectPharmacyPage != null) {
             			getLoginScenario().saveBean(PageConstants.PHARMACY_SEARCH_PAGE,
             					selectPharmacyPage);
