@@ -130,7 +130,7 @@ public class VppAarpStepDefinitionUpdated {
 		plansummaryPage.checkAllMAPlans();
 		ComparePlansPage comparePlansPage = plansummaryPage.clickOnCompareLink();
 		if(comparePlansPage != null){
-			getLoginScenario().saveBean(PageConstants.COMPARE_PLANS_PAGE, comparePlansPage);
+			getLoginScenario().saveBean(PageConstants.TeamC_Plan_Compare_Page, comparePlansPage);
 			comparePlansPage.backToVPPPage();
 		}else
 			Assert.fail("Error in loading the compare plans page");
