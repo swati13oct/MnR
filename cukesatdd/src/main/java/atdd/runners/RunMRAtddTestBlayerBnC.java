@@ -15,7 +15,7 @@ import cucumber.junit.Cucumber;
 @Cucumber.Options(glue = { "atdd.framework","acceptancetests.benefitsandcoveragejenkins.bluelayer"}, 
 		features = {"feature/plan-benefits-and-coverage/bluelayer" }, 
 		format = {
-		"pretty", "html:reports/test-report","json:target/cucumber.json"}, tags ={"@drugcopaysectionlis"})
+		"pretty", "html:reports/test-report","json:target/cucumber.json"}, tags ={"@CMPlanOverviewGroup,@CMBncHeadersIndividual,@CMBncHeadersGroup,@CMPlanOverviewNonLis,@CMPlanOverviewLis,@CMPrimaryCareProviderIndi,@CMPrimaryCareProviderGroup,@CMOutOfPocketMax"})
 
 
 

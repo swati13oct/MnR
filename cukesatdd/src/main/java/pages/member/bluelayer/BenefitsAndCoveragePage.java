@@ -151,22 +151,25 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 	@FindBy(className = "atdd-document-text")
 	private WebElement documents_label;
 
-	@FindBy(xpath = "//*[@id='planBenefitsApp']/section/div/div[1]/div/div/div/div/h1")
+	@FindBy(className = "atdd-benefitsoverview-plantitle")
 	private WebElement planName;
 
-	@FindBy(xpath = "//*[@id='planBenefitsApp']/section/div/div[2]/div[1]/div/div[1]/div[1]/span")
+	@FindBy(className = "atdd-benefitsoverview-membernamelabel")
 	private WebElement nameLabel;
 
-	@FindBy(xpath = "//*[@id='planBenefitsApp']/section/div/div[2]/div[1]/div/div[2]/div[1]/span")
+	@FindBy(className = "atdd-benefitsoverview-memberidlabel")
 	private WebElement memberID;
 
-	@FindBy(xpath = "//*[@id='planBenefitsApp']/section/div/div[2]/div[1]/div/div[3]/div[1]/span")
+	@FindBy(className = "atdd-benefitsoverview-effectivedatelabel")
 	private WebElement effective_Date;
 
 	@FindBy(className = "atdd-benefitsoverview-monthlypremium-label")
 	private WebElement Monthly_Premium;
-
-	@FindBy(xpath = "//*[@id='planBenefitsApp']/section/div/div[2]/div[2]/div[1]/div/div[1]/div/span")
+	
+	@FindBy(className = "atdd-benefitsoverview-groupidlabel")
+	private WebElement GroupId;
+	
+	@FindBy(className = "atdd-benefitsoverview-extrahelplevel-ma-label")
 	private WebElement ExtraHelp;
 
 	@FindBy(className = "atdd-benefitssummary-headertitle")
@@ -191,7 +194,7 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 	private WebElement OutpatientSurgeryCenter;
 
 	
-	@FindBy(xpath = "//*[@id='planBenefitsApp']/div/div[1]/div[6]/div/div[2]/div[1]/div/header/span")
+	@FindBy(id = "pcpCard")
 	private WebElement YourPrimaryCareProvider;
 	
 	@FindBy(className = "changepcp-atdd")
@@ -205,18 +208,27 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 	
 	@FindBy(className = "atdd-bncsummary-primarycareprvdrheader")
 	private WebElement PrimaryCareProviderHeader;
+	
+	@FindBy(xpath = ".//*[@id='benefitsMain']/div[2]/div/div[1]/div/div/div/div/div[6]/div/div[1]/div/h2")
+	private WebElement PrimaryCareProviderHeaderInd;
 
    @FindBy(className= "atdd-bncsummary-primarycareprvdrheader")
-	private WebElement PrimaryCareProviderHeaderHMO;
+   private WebElement PrimaryCareProviderHeaderHMO;
    
-   @FindBy(xpath= "//*[@id='planBenefitsApp']/div[1]/div/div[4]/div/div[1]/div/div/div/div/div/h3/span")
- 	private WebElement OutofPocketMaximum;
+   @FindBy(xpath= ".//*[@id='benefitsMain']/div[2]/div/div[1]/div/div/div/div/div[6]/div/div/div/p")
+   private WebElement PCPtext;
    
-   @FindBy(className = "atdd-innetwrk-title")
- 	private WebElement INNETWORK;
-
-  @FindBy(className= "atdd-outnetwrktitle")
- 	private WebElement OUTOFNETWORK;
+   @FindBy(xpath= ".//*[@id='benefitsMain']/div[2]/div/div[1]/div/div/div/div/div[5]/div/div[1]/div/div/div/div/h3/span")
+   private WebElement OutofPocketMaximum;
+   
+   @FindBy(xpath= ".//*[@id='benefitsMain']/div[2]/div/div[1]/div/div/div/div/div[5]/div/div[1]/div/div/div/div/p")
+   private WebElement OutofPocketMaximumText;
+   
+   @FindBy(id = "oopInNetowrk")
+   private WebElement INNETWORK;
+   
+   @FindBy(id= "oopOutNetowrk")
+   private WebElement OUTOFNETWORK;
 
   @FindBy(xpath = "//button[@id='dropdown-toggle--1']/span[contains(text(),'Profile')]")
   private WebElement accountToggleDropdown;
@@ -915,6 +927,7 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 		validateNew(memberID);
 		validateNew(effective_Date);
 		validateNew(Monthly_Premium);
+		validateNew(GroupId);
 
 	}
 
@@ -950,10 +963,10 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 
 	public void validatePrimaryCareProvider() {
 
-		validateNew(PrimaryCareProviderHeader);
+		validateNew(PrimaryCareProviderHeaderInd);
 		validateNew(YourPrimaryCareProvider);
 		validateNew(ChangeYourPcpButton);
-		validateNew(SearchforaPhysician);
+		//validateNew(SearchforaPhysician);
 		validateNew(StartSearch);
 
 	}
@@ -961,6 +974,7 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 	public void validatePrimaryCareProviderForGroup() {
 	
 		validateNew(PrimaryCareProviderHeaderHMO);
+		validateNew(PCPtext);
 		
 		
 	}
@@ -969,6 +983,7 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 		validateNew(OutofPocketMaximum);
 		validateNew(INNETWORK);
 		validateNew(OUTOFNETWORK);
+		validateNew(OutofPocketMaximumText);
 		
 	}
 	

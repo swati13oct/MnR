@@ -943,7 +943,8 @@ Examples:
        | planType|  memberType  | copayCategory |
        | PDP     |  Group       |  NON LIS      |
        | MAPD    |  Group       |  NON LIS      |
-       | MAPD    |  Individual  |  NON LIS      |
+       | MAPD    |  Individual  |  NON LIS      | 
+       | PDP     |  Individual  |  NON LIS      |
 
       
     @CMdrugcopaysectionlis
@@ -962,24 +963,28 @@ Examples:
 
     Examples: 
       | planType|  memberType  | copayCategory |
-      | MAPD    |  Individual  |   LIS 1       |
-      | MAPD    |  Group       |   LIS 3       |
-      | PDP     |  Group       |   LIS 3       | 
+      | MAPD    |  Individual  |   LIS 1       | 
+      | MA      |  Individual  |   LIS 1       |
+      | PDP     |  Individual  |   LIS 4       |
            
       
       
-    @CMPlanOverview
+    @CMPlanOverviewGroup
     Scenario Outline: Verify that drug cost table  is in place on Benefits and Coverage page for LIS Members
+    Scenario Outline: Verify PDF section is in place on Benefits and     Coverage page
     Given registered member with following details logins in the member portal 
       | Plan Type      | <planType>  |
-      | Member Type    | <memberType>| 
+      | Member Type    | <memberType>|
+      | Copay Category | <copayCategory>|
     Then the user navigates to Benefits and coverage page
+     And the user validates plan overview section 
 
-    And the user validates plan overview section 
-
-    Examples: 
-      | planType|  memberType  | 
-      | MAPD    |  Group       | 
+    Examples:
+      
+      | planType|  memberType  | copayCategory | 
+      | MA      |  Group       |  HMO          |
+      | PDP     |  Group       |  NON LIS      |
+      | MAPD    |  Group       |  NON LIS      |
       
       
     
@@ -992,9 +997,12 @@ Examples:
     Then the user navigates to Benefits and coverage page
     And the user validates headers on Bnc page for indi members
      Examples: 
-    | planType|
-    | MAPD    |
-   #| MA    |
+      | planType|  memberType  | copayCategory |
+      | MAPD    |  Individual  |   LIS 1       | 
+      | MA      |  Individual  |   LIS 1       |
+      | MAPD    |  Individual  |  NON LIS      | 
+      | PDP     |  Individual  |  NON LIS      | 
+      | PDP     |  Individual  |   LIS 4       |
     
      
      @CMBncHeadersGroup
@@ -1007,8 +1015,10 @@ Examples:
     And the user validates headers on Bnc page for group members
     
      Examples: 
-  | planType|  memberType  | copayCategory |
-  | PDP     |  Group       |  NON LIS      | 
+     | planType|  memberType  | copayCategory |
+     | MA      |  Group       |  HMO          |
+    #| PDP     |  Group       |  NON LIS      |
+     | MAPD    |  Group       |  NON LIS      | 
       
       
   @CMPlanOverviewNonLis
@@ -1021,12 +1031,13 @@ Examples:
     And the user validates plan overview section 
 
     Examples: 
+      
       | planType|  memberType  | copayCategory |
-      #| MAPD    |  Individual  |  NON LIS      |
-      #| PDP     |  Individual  |  NON LIS      |  
-      #| MA      |  Individual  |  NON LIS      |
-      #| MAPD    |  Group       |  NON LIS      |
-      | PDP     |  Group       |  NON LIS      |  
+      | MAPD    |  Individual  |  NON LIS      | 
+      | PDP     |  Individual  |  NON LIS      | 
+      | MA      |  Group       |  HMO          |
+      | PDP     |  Group       |  NON LIS      |
+      | MAPD    |  Group       |  NON LIS      |  
       
     @CMPlanOverviewLis
     Scenario Outline: Verify that Plan Overview is in place on Benefits and Coverage page for LIS Members
@@ -1038,59 +1049,70 @@ Examples:
     And the user validates plan overview section for a Lis member
 
     Examples: 
-    | planType|  memberType  | copayCategory |
-    | MAPD    |  Individual  |   LIS 1       |
-    | MAPD    |  Group       |   LIS 3       |
+      | planType|  memberType  | copayCategory |
+      | MAPD    |  Individual  |   LIS 1       | 
+      | MA      |  Individual  |   LIS 1       | 
+      | PDP     |  Individual  |   LIS 4       | 
+      | MA      |  Group       |   LIS 1       |
+      
     
     
 
    @CMPrimaryCareProviderIndi
     Scenario Outline: Verify the Promary Care provider  is in place on Benefits and Coverage page
     Given registered member with following details logins in the member portal 
-       | Plan Type      | <planType>     |
+      | Plan Type      | <planType>  |
+      | Member Type    | <memberType>|
+      | Copay Category | <copayCategory>|
+    Then the user navigates to Benefits and coverage page
     Then the user navigates to Benefits and coverage page    
     And the user validates the Primarycare Provider section
     
-      Examples: 
-    | planType|
-    | MAPD    |
-   # | PDP     |
-   # | MA       |
-   
+    Examples: 
+      | planType|  memberType  | copayCategory |
+      | MAPD    |  Individual  |   LIS 1       | 
+      | MA      |  Individual  |   LIS 1       | 
+      | PDP     |  Individual  |   LIS 4       | 
+      | MA      |  Group       |   LIS 1       | 
+     
+     
     
     
    @CMPrimaryCareProviderGroup
     Scenario Outline: Verify the Promary Care provider  is in place on Benefits and Coverage page
     Given registered member with following details logins in the member portal 
-    | Plan Type          | <planType>   |
-| Member Type				 | <Member Type>	  |
-| Plan Name					 | <plan Name>		  |
-    Then the user navigates to Benefits and coverage page    
+      | Plan Type      | <planType>  |
+      | Member Type    | <memberType>|
+      | Copay Category | <copayCategory>|
+    Then the user navigates to Benefits and coverage page        
     And the user validates the Primarycare Provider section for Group
-    Examples:
-        |planType  |Member Type     | plan Name |
-        | MAPD     | Group				 | HMO       |
-        | MAPD     | Group				 | PPO       |
-        | MA     | Group					 | HMO       |    
-        | MA     | Group					 | PPO       |
+    Examples: 
+       | planType|  memberType  | copayCategory |
+       | MA      |  Group       |  HMO          |
+      #| PDP     |  Group       |  NON LIS      |
+       | MAPD    |  Group       |  NON LIS      |
     
    
     
       
  
       
-      @CMOutOfPocketMax
+     @CMOutOfPocketMax
     Scenario Outline: Verify the out of pocket section is in place on Benefits and Coverage page
     Given registered member with following details logins in the member portal 
-       | Plan Type      | <planType>     |
+      | Plan Type      | <planType>  |
+      | Member Type    | <memberType>|
+      | Copay Category | <copayCategory>|
     Then the user navigates to Benefits and coverage page    
     And the user validates the Out of Pocket Max section
     
       Examples: 
-    | planType|
-    | MAPD    |
-   # | PDP     |
-   # | MA       |
+      | planType|  memberType  | copayCategory |
+      | MAPD    |  Individual  |   LIS 1       | 
+      | MA      |  Individual  |   LIS 1       | 
+      | MAPD    |  Individual  |  NON LIS      | 
+      | MA      |  Group       |  HMO          |
+      | MAPD    |  Group       |  NON LIS      |
    
     
 
