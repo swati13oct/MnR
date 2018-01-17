@@ -45,6 +45,7 @@ Examples:
 #	| 90210   |  Los Angeles County	| lipi       	| Lipitor        |  Lipitor TAB 20MG   |   40		| Every 3 Months | null     |	yes				| Lipitor TAB 20MG (Qty 40 Every 3 Months)	| Available Pharmacies		| 15 miles	| Garfield Pharmacy  			| MAPD		| AARP MedicareComplete SecureHorizons Plan 2 (HMO)	|
 	| 80002   |   Adams County      | lipi		    | Lipitor        |  Lipitor TAB 20MG   |   40		| Every 3 Months | null     |	yes				| Lipitor TAB 20MG (Qty 40 Every 3 Months)	| Available Pharmacies		| 15 miles	| Costco Pharmacy				| PDP		| AARP MedicareRx Preferred (PDP) | 
 
+@dceVPPDrugsPlanAEP
 Scenario Outline: To Verify the drugs and plan summary for AEP period 
 Given the user is on the UHC medicare solutions site landing page
 When the user performs drug search using the following information in UMS site
@@ -88,6 +89,7 @@ Examples:
 #	| 90210   |  Los Angeles County	| lipi	    |  Lipitor      |  Lipitor TAB 10MG   |    30        | Every 1 Month | null     | Lipitor TAB 10MG         | Available Pharmacies 	 | 15 miles	       |  CVS PHARMACY  		        | AARP MedicareComplete SecureHorizons Plan 2 (HMO)    | 2015     |
 #	| 80002   |  Adams County       | lipi	    |  Lipitor      |  Lipitor TAB 10MG   |    30        | Every 1 Month | null     | Lipitor TAB 10MG         | Available Pharmacies 	 | 15 miles	       |  COSTCO PHARMACY 676 		    | AARP MedicareRx Preferred (PDP)    				   | 2015     | 
 
+@dceVPPDrugsPlanNonAEP
 Scenario Outline: To Verify the drugs and plan details for non AEP period 
 Given the user is on the UHC medicare solutions site landing page
 When the user performs drug search using the following information in UMS site
@@ -134,6 +136,7 @@ Examples:
 #	| 76270   | Montague County    | lipi	      |  Lipitor      |  Lipitor TAB 20MG   | 40       | Every 3 Months | null | yes              | Lipitor TAB 20MG (Qty 40 Every 3 Months) | Available Pharmacies  | 15 miles   |  CVS Pharmacy     | PDP      |    AARP MedicareRx Preferred (PDP)        |
 	| 80002   |  Adams County       | lipi		|  Lipitor      |  Lipitor TAB 20MG   |   40		| Every 3 Months	| null     |	yes		| Lipitor TAB 20MG (Qty 40 Every 3 Months)	| Available Pharmacies 		| 15 miles	| Costco Pharmacy		| PDP		| AARP MedicareRx Preferred (PDP) 	| 
 
+@dceGenericFlow
 Scenario Outline: To Verify the drugs and pharmacy model for new generic flow
 Given the user is on the UHC medicare solutions site landing page
 When the user performs drug search using the following information in UMS site
@@ -169,6 +172,7 @@ Examples:
 	| zipcode | county              | drugInitials	| drugName      |  drugDosage	      | quantity	| drugFrequency  | packages | genericAvailable	| brand/generic					| pharmacyType				| distance	| pharmacyName			| 
 	| 80002   | Adams County       | lipi		|  Lipitor      |  Lipitor TAB 20MG   |   40		| Every 3 Months | null     |	yes		| Lipitor TAB 20MG (Qty 40 Every 3 Months)	| Available Pharmacies 		| 15 miles	|  Costco Pharmacy		| 
 	
+@dceVppDrugsListPlanCost
 Scenario Outline: To Verify the drug list and plan cost sections in View Plan Details page 
 Given the user is on the UHC medicare solutions site landing page
 When the user performs drug search using the following information in UMS site
