@@ -1,4 +1,4 @@
-@TeamPredators
+@thePredators
 @ordermaterials
 Feature: To test order plan materials flow in UHC site
 

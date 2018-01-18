@@ -1,4 +1,4 @@
-@TeamPredators
+@thePredators
 @ordermaterials
 
 Feature: To test order materials in Redesign site

@@ -1,4 +1,4 @@
-@TeamPredators
+@thePredators
 @formsandresources
 Feature:To test forms and resources in UMS site
 #Scenario Outline:To verify pdfs displayed in forms and resources in UMS site
