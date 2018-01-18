@@ -1,4 +1,4 @@
-@TeamPredators
+@thePredators
 @GoGreenPage
 Feature: To test for Functionality and UI for Go Green Page in Redesign site
 
