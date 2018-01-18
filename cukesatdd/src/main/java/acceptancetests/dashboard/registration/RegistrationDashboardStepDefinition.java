@@ -5,24 +5,26 @@ import gherkin.formatter.model.DataTableRow;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+
 import junit.framework.Assert;
+
 import org.openqa.selenium.WebDriver;
 import org.springframework.beans.factory.annotation.Autowired;
+
 import pages.dashboard.acquisition.DeregisterPage;
 import pages.dashboard.acquisition.RegistrationInformationPage;
 import pages.member.redesign.NewLoginPage;
-import cucumber.annotation.en.And;
-import cucumber.annotation.en.Given;
-import cucumber.annotation.en.Then;
-import cucumber.annotation.en.When;
-import cucumber.table.DataTable;
 import acceptancetests.atdd.data.CommonConstants;
 import acceptancetests.atdd.data.acquisition.PageConstants;
 import atdd.framework.MRScenario;
+import cucumber.api.DataTable;
+import cucumber.api.java.en.And;
+import cucumber.api.java.en.Given;
+import cucumber.api.java.en.Then;
+import cucumber.api.java.en.When;
 
 /**
- * @author akuma103
- * 
+ * @author akuma103 
  */
 
 @SuppressWarnings("deprecation")
