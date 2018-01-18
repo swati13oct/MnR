@@ -6,6 +6,7 @@ package pages.acquisition.ulayer;
 
 import java.util.List;
 import java.util.concurrent.TimeUnit;
+
 import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
@@ -21,6 +22,7 @@ import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import pages.acquisition.bluelayer.ZipcodeLookupPage;
 import acceptancetests.atdd.data.MRConstants;
 import atdd.framework.UhcDriver;
 
@@ -269,6 +271,10 @@ public ResponsivePlanSummary searchPlans(String zipcode, String CountyName) thro
     
 //    sendkeys(element, zipcode);
 //    element.sendKeys(Keys.ENTER);
+	  Thread.sleep(10000);
+	  JavascriptExecutor jse = (JavascriptExecutor)driver;
+	  jse.executeScript("window.scrollBy(0,300)", "");
+	  Thread.sleep(2000);
     sendkeys(zipCodeField, zipcode);
     zipCodeField.sendKeys(Keys.ENTER);
     //remove thread once page is stable

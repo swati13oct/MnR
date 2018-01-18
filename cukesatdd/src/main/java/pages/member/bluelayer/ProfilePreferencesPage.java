@@ -356,10 +356,10 @@ public class ProfilePreferencesPage extends UhcDriver {
 	}
 
 	public void validateEmail() {
-		validateNew(EmailLabel);
-		validateNew(EmailAddressLabel);
-		validateNew(Emailform);
-		validateNew(email);
+		validate(EmailLabel);
+		validate(EmailAddressLabel);
+		validate(Emailform);
+		validate(email);
 
 	}
 
@@ -475,13 +475,13 @@ public class ProfilePreferencesPage extends UhcDriver {
 
 	public void validateEmailEditElements() {
 
-		validateNew(EmailEditbutton);
+		validate(EmailEditbutton);
 		EmailEditbutton.click();
-		validateNew(NewEmail);
-		validateNew(emailConfirm);
-		validateNew(SaveEmailButton);
-		validateNew(CanceEmaillButton);
-		validateNew(Emailform);
+		validate(NewEmail);
+		validate(emailConfirm);
+		validate(SaveEmailButton);
+		validate(CanceEmaillButton);
+		validate(Emailform);
 		//validate(email);
 		System.out.println(email.getText());
 
@@ -662,7 +662,7 @@ public class ProfilePreferencesPage extends UhcDriver {
 	public void validatecommunicationpreferences() {
 		validate(communicationpreferencesheader);
 		validate(gopaperlessbutton);
-		validateNew(communicationpreferncessection);
+		validate(communicationpreferncessection);
 	}
 
 	public GoGreenPage validategogreenbutton() {
@@ -706,20 +706,20 @@ public class ProfilePreferencesPage extends UhcDriver {
 
 	public void validatePhoneElements() {
 
-		validateNew(Phonesection);
-		validateNew(PhoneEditButton);
-		// validateNew(PhoneEditLink);
+		validate(Phonesection);
+		validate(PhoneEditButton);
+		// validate(PhoneEditLink);
 		
 }
 
 	public void validatePhoneEditElements() {
 		PhoneEditButton.click();
-		validateNew(PhoneForm);
-		/*validateNew(EveningTimePhoneTextField);
-		validateNew(DaytimePhoneTextField);
-		validateNew(PhoneTopCancelButton);
-		validateNew(PhoneCancelButton);
-		validateNew(PhoneSaveButton);*/
+		validate(PhoneForm);
+		/*validate(EveningTimePhoneTextField);
+		validate(DaytimePhoneTextField);
+		validate(PhoneTopCancelButton);
+		validate(PhoneCancelButton);
+		validate(PhoneSaveButton);*/
 	}
 
 	public void validatePhoneCancel() {
@@ -763,28 +763,28 @@ public class ProfilePreferencesPage extends UhcDriver {
 
 	public void validatetempaddressElements() {
 
-		validateNew(tempAddressHeader);
-		validateNew(tempEditButton);
+		validate(tempAddressHeader);
+		validate(tempEditButton);
 
 	}
 
 	public void validatetempaddressEditElements() {
 		// TODO Auto-generated method stub'
 		tempEditButton.click();
-		validateNew(Edittemporaryaddressform);
-		validateNew(StreetAddress2);
-		validateNew(City);
-		validateNew(State);
-		validateNew(Zip);
-		validateNew(startDateMM);
-		validateNew(startDateDD);
-		validateNew(startDateYr);
-		validateNew(endDateMM);
-		validateNew(endDateDD);
-		validateNew(endDateYYYY);
-		validateNew(SaveButtontempAddress);
-		validateNew(CancelButtontempAddress);
-		validateNew(CancelButtontoptempAddress);
+		validate(Edittemporaryaddressform);
+		validate(StreetAddress2);
+		validate(City);
+		validate(State);
+		validate(Zip);
+		validate(startDateMM);
+		validate(startDateDD);
+		validate(startDateYr);
+		validate(endDateMM);
+		validate(endDateDD);
+		validate(endDateYYYY);
+		validate(SaveButtontempAddress);
+		validate(CancelButtontempAddress);
+		validate(CancelButtontoptempAddress);
 
 	}
 
@@ -814,7 +814,7 @@ public class ProfilePreferencesPage extends UhcDriver {
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}validateNew(gopaperlessbutton);
+		}validate(gopaperlessbutton);
 		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 	}
 
@@ -828,13 +828,13 @@ public class ProfilePreferencesPage extends UhcDriver {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		validateNew(planNameGoGreen);
+		validate(planNameGoGreen);
 		
 	}
 
 	public void validatecommunicationpreferencesheader() {
 
-		validateNew(communicationPreferences);
+		validate(communicationPreferences);
 		if (communicationPreferences.isDisplayed()) {
 			String cp = communicationPreferences.getText();
 
@@ -847,7 +847,7 @@ public class ProfilePreferencesPage extends UhcDriver {
 
 	public void validateBacktoPNPlink() {
 
-		validateNew(backLink1);
+		validate(backLink1);
 		/*backLink1.click();
 		try {
 			Thread.sleep(20000);
@@ -862,7 +862,7 @@ public class ProfilePreferencesPage extends UhcDriver {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}*/
-		validateNew(backLink1);
+		validate(backLink1);
 		/*backLink2.click();
 		
 		if (driver.getTitle().equalsIgnoreCase("profile")) {
@@ -875,7 +875,7 @@ public class ProfilePreferencesPage extends UhcDriver {
 
 	public void validateNoteSection() {
 		
-		validateNew(NoteSection);
+		validate(NoteSection);
 		String noteContentActual = NoteSection.getText();
 		String noteContentExpected = "Note: it may take up to two mail cycles for your updated delivery preferences to take effect. Your mailing cycle-the length of time between documents-varies by document. When the paper mailings stop, you will receive an email notification alerting you that a new document has been posted to your online account. ";
 		//Assert.assertTrue(noteContentActual.equalsIgnoreCase(noteContentExpected));
@@ -884,23 +884,23 @@ public class ProfilePreferencesPage extends UhcDriver {
 
 	public void validateCheckbox() {
 		// TODO Auto-generated method stub
-		validateNew(iHavereadCheckbox);
+		validate(iHavereadCheckbox);
 		//iHavereadCheckbox.click();
 	}
 
 	public void validateSavePreferences() {
 		// TODO Auto-generated method stub
-		validateNew(savePreferencesButton);
+		validate(savePreferencesButton);
 		/*if (iHavereadCheckbox.isSelected()) {
 			savePreferencesButton.click();
-			validateNew(EditPreferenceButton);
+			validate(EditPreferenceButton);
 		}*/
 
 	}
 
 	public void validateGoGreenHeader() {
-		validateNew(GoGreenHeader);
-		validateNew(GoGreenText);
+		validate(GoGreenHeader);
+		validate(GoGreenText);
 
 		if (GoGreenText.isDisplayed())
 

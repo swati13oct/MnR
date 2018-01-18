@@ -21,7 +21,6 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
 
 import pages.redesign.OrderplanmaterialsPage;
-import pages.mypcp.SignInPage;
 import pages.member.bluelayer.ContactUsPage;
 import acceptancetests.atdd.data.CommonConstants;
 import acceptancetests.atdd.data.PageData;
@@ -122,7 +121,7 @@ public class BlueLayerHomePage extends UhcDriver {
 //		openAndValidate();
 	}
 
-	public PaymentHistoryPage navigateToPayments() {
+	public PaymentHistoryPage navigateToPayments() throws InterruptedException {
 
 		driver.navigate().to("https://"+MRScenario.environment+"-medicare.uhc.com/content/medicare/member/payments/overview.html");
 /*		
@@ -138,7 +137,7 @@ public class BlueLayerHomePage extends UhcDriver {
 	}
 
 
-	public MyProfilesPage navigateToProfAndPref() {
+	public MyProfilesPage navigateToProfAndPref() throws InterruptedException {
 
 		//MyProfileLink.click();
 		driver.navigate().to("https://"+MRScenario.environment+"-medicare.uhc.com/content/medicare/member/account/profile.html");
@@ -154,9 +153,8 @@ public class BlueLayerHomePage extends UhcDriver {
 
 	}
 
-	public PharmacySearchPage navigateToPharmacyLocator() {
-/*		driver.manage().timeouts().implicitlyWait(100, TimeUnit.SECONDS);
-		CommonUtility.checkPageIsReady(driver);
+	public PharmacySearchPage navigateToPharmacyLocator() throws InterruptedException {
+/*		CommonUtility.checkPageIsReady(driver);
 		PharmacyLocatorLink.click();
 */		
 		driver.navigate().to("https://"+MRScenario.environment+"-medicare.uhc.com/content/medicare/member/pharmacy-locator/overview.html#/Pharmacy-Search-English");
@@ -169,7 +167,7 @@ public class BlueLayerHomePage extends UhcDriver {
 		return null;
 	}
 
-	public MedicalClaimSummaryPage navigateToMedicalClaimsSummary() {
+	public MedicalClaimSummaryPage navigateToMedicalClaimsSummary() throws InterruptedException {
 		//ClaimsLink.click();
 		
 		driver.navigate().to("https://"+MRScenario.environment+"-medicare.uhc.com/content/medicare/member/claims.html#/overview");
@@ -182,7 +180,7 @@ public class BlueLayerHomePage extends UhcDriver {
 		}
 	}
 
-	public EoBSearchPage navigateToBenefitsAndCoverage() {
+	public EoBSearchPage navigateToBenefitsAndCoverage() throws InterruptedException {
 		driver.navigate().to("https://"+MRScenario.environment+"-medicare.uhc.com/content/medicare/member/eob.html");
 		//EOBsearchLink.click();
 
@@ -226,7 +224,7 @@ public class BlueLayerHomePage extends UhcDriver {
 		return accountHomeExpectedJson;
 	}
 
-	public OrderplanmaterialsPage navigateToOrderPlanMaterialsPage() {
+	public OrderplanmaterialsPage navigateToOrderPlanMaterialsPage() throws InterruptedException {
 		driver.navigate().to("https://"+MRScenario.environment+"-medicare.uhc.com/content/medicare/member/order-materials/overview.html");
 		//OrderPlanMaterialslnk.click();
 		CommonUtility.checkPageIsReady(driver);

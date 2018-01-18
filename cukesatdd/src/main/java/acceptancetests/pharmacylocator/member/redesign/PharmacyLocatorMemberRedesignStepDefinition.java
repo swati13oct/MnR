@@ -26,11 +26,12 @@ import acceptancetests.login.data.LoginCommonConstants;
 import acceptancetests.claims.data.ClaimsCommonConstants;
 import acceptancetests.pharmacylocator.data.PharmacySearchCommonConstants;
 import atdd.framework.MRScenario;
-import cucumber.annotation.en.And;
-import cucumber.annotation.en.Given;
-import cucumber.annotation.en.Then;
-import cucumber.annotation.en.When;
-import cucumber.table.DataTable;
+import cucumber.api.DataTable;
+import cucumber.api.java.After;
+import cucumber.api.java.en.And;
+import cucumber.api.java.en.Given;
+import cucumber.api.java.en.Then;
+import cucumber.api.java.en.When;
 
 /**
  * @author sdwaraka
@@ -47,7 +48,7 @@ public class PharmacyLocatorMemberRedesignStepDefinition {
 
 	@Given("^registered member to verify locate a pharmacy in Redesign Site$")
 	public void registered_member_located_pharmacy_aarp(
-			DataTable memberAttributes) {
+			DataTable memberAttributes) throws InterruptedException {
 
 		/* Reading the given attribute from feature file */
 		List<DataTableRow> memberAttributesRow = memberAttributes
@@ -135,7 +136,7 @@ public class PharmacyLocatorMemberRedesignStepDefinition {
 	}
 
 	@And("^the user enters distance details in Redesign site$")
-	public void user_enters_distance_details_aarp(DataTable zipAttributes) {
+	public void user_enters_distance_details_aarp(DataTable zipAttributes) throws InterruptedException {
 
 		List<DataTableRow> zipAttributesRow = zipAttributes.getGherkinRows();
 		Map<String, String> zipAttributesMap = new LinkedHashMap<String, String>();
@@ -164,7 +165,7 @@ public class PharmacyLocatorMemberRedesignStepDefinition {
 	}
 
 	@Then("^the user validates the pharmacies available in Redesign site$")
-	public void user_validates_pharmacies_available_aarp() {
+	public void user_validates_pharmacies_available_aarp() throws InterruptedException {
 
 		PharmacySearchPage pharmacySearchPage = (PharmacySearchPage) getLoginScenario()
 				.getBean(PageConstants.PHARMACY_SEARCH_PAGE);
@@ -182,7 +183,7 @@ public class PharmacyLocatorMemberRedesignStepDefinition {
 	}
 
 	@When("^the user selects Pharmacy Types to Filter in Redesign Site$")
-	public void the_user_selects_Pharmacy_Types_to_Filter_in_AARP_Site(DataTable pharmacyAttributes) {
+	public void the_user_selects_Pharmacy_Types_to_Filter_in_AARP_Site(DataTable pharmacyAttributes) throws InterruptedException {
 
 		List<DataTableRow> PharmacyAttributesRow = pharmacyAttributes.getGherkinRows();
 		Map<String, String> PharmacyAttributesMap = new LinkedHashMap<String, String>();
@@ -237,7 +238,7 @@ public class PharmacyLocatorMemberRedesignStepDefinition {
 	}
 
 	@Then("^the user Validates show on map link in Redesign Site$")
-	public void user_views_show_on_map_result_AARP() {
+	public void user_views_show_on_map_result_AARP() throws InterruptedException {
 		PharmacySearchPage pharmacySearchPage = (PharmacySearchPage) getLoginScenario()
 				.getBean(PageConstants.PHARMACY_SEARCH_PAGE);
 		PharmacyResultPage pharmacyResultPage = pharmacySearchPage
@@ -271,7 +272,7 @@ public class PharmacyLocatorMemberRedesignStepDefinition {
 	}
 
 	@And("^the user validate more information content based on plan type in Redesign Site$")
-	public void user_validate_more_information_content() {
+	public void user_validate_more_information_content() throws InterruptedException {
 		PharmacySearchPage pharmacySearchPage = (PharmacySearchPage) getLoginScenario()
 				.getBean(PageConstants.PHARMACY_SEARCH_PAGE);
 		PharmacyResultPage pharmacyResultPage = pharmacySearchPage.validateMoreInfoContent();
@@ -288,7 +289,7 @@ public class PharmacyLocatorMemberRedesignStepDefinition {
 
 
 	@And("^the user validates more information content for Limited Access Disclaimer$")
-	public void user_validate_limited_access_disclaimer(DataTable zipAttributes) {
+	public void user_validate_limited_access_disclaimer(DataTable zipAttributes) throws InterruptedException {
 		
 		List<DataTableRow> zipAttributesRow = zipAttributes.getGherkinRows();
 		Map<String, String> zipAttributesMap = new LinkedHashMap<String, String>();
@@ -344,7 +345,7 @@ public class PharmacyLocatorMemberRedesignStepDefinition {
 		}
 	}
 	@Then("^the user Selects Chinese Language in Redesign Site$")
-	public void selectchinese_chinese() {
+	public void selectchinese_chinese() throws InterruptedException {
 		PharmacySearchPage pharmacySearchPage = (PharmacySearchPage) getLoginScenario()
 				.getBean(PageConstants.PHARMACY_SEARCH_PAGE);
 		pharmacySearchPage = pharmacySearchPage.clickChinese();
@@ -356,7 +357,7 @@ public class PharmacyLocatorMemberRedesignStepDefinition {
 		}
 	}
 	@Then("^the user Selects Spanish Language in Redesign site$")
-	public void select_spanish() {
+	public void select_spanish() throws InterruptedException {
 		PharmacySearchPage pharmacySearchPage = (PharmacySearchPage) getLoginScenario()
 				.getBean(PageConstants.PHARMACY_SEARCH_PAGE);
 		PharmacySearchPage pharmacyResultPage = pharmacySearchPage
@@ -371,7 +372,7 @@ public class PharmacyLocatorMemberRedesignStepDefinition {
 	}
 
 	@And("^the user searches multi lang for pharmacy search results available in Redesign site$")
-	public void user_views_multi_lang_pharmacy_search_result() {
+	public void user_views_multi_lang_pharmacy_search_result() throws InterruptedException {
 		PharmacySearchPage pharmacySearchPage = (PharmacySearchPage) getLoginScenario()
 				.getBean(PageConstants.PHARMACY_SEARCH_PAGE);
 		PharmacyResultPage pharmacyResultPage = pharmacySearchPage.multilangPharmacySearchResult();
@@ -385,7 +386,7 @@ public class PharmacyLocatorMemberRedesignStepDefinition {
 		}
 	}
 	@And("^the user verify error messages in pharmacy locator page in Redesign site$")
-	public void user_verify_pharmacyerrormessages(){
+	public void user_verify_pharmacyerrormessages() throws InterruptedException{
 		PharmacySearchPage pharmacySearchPage = (PharmacySearchPage) getLoginScenario()
 				.getBean(PageConstants.PHARMACY_SEARCH_PAGE);
 		pharmacySearchPage = pharmacySearchPage.verifyPharmacyErrormessages();

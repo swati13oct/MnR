@@ -1,18 +1,26 @@
-q4_dec_aarp126/Password@1,MAPD,LIS2
-testgogreen001/Password@1,MAPD,Individual
-TESTDATARIDER1/Password@1,MAPD,LIS3
-q1_apr_ulayer095/Password@1,MAPD,LIS
-q4_dec_aarp004/Password@1,MAPD,,
-q4_dec_aarp003/Password@1,MA,,
-q4_dec_ship020/Password@1,SHIP,,
-q4_dec_aarp483/Password@1,PDP,,
-q4_dec_ship028/Password@1,EHIP,,
-q4_dec_ship119/Password@1,SHIPTX,,
-q4_dec_ship023/Password@1,SHIPMO,,
-q4_dec_ship020/Password@1,HIP,,
-q4_dec_aarp448/Password@1,MAPD,Individual,LIS 1
-q4_dec_aarp169/Password@1,MA,Individual,LIS 1
-q4_dec_aarp308/Password@1,PDP,Individual,LIS 4
-q4_dec_aarp102/Password@1,MAPD,Individual,NON LIS
-q4_dec_aarp188/Password@1,MA,Individual,NON LIS
-q4_dec_aarp384/Password@1,PDP,Individual,NON LIS
+q4_dec_aarp063/Password@1,MAPD,
+ATDD_ULAYER_PDP_01/Password@1,PDP,
+q4_dec_aarp034/Password@1,MAPD,Nice_med
+q4_dec_aarp157/Password@1,MAPD,drug,
+q3_sep_ulayer172/Password@1,MA,cosmos_eob
+ATDD_ULAYER_PDP_RX_EOB_01/Password@1,PDP,rx_eob,
+q3_sep_ulayer155/Password@1,MAPD-PHR,
+q3_sep_ulayer213/Password@1,MAPD,COSMOS_dce1,
+q4_dec_aarp030/Password@1,MAPD,COSMOS_dce2,q3_sep_ship084,SHIP,HIPwithRider
+q3_sep_ship033,SHIP,MedSuppwithRider
+q3_sep_phip_med001,SHIP,PHIP
+q3_sep_combo008,MA,MAwithHIP
+q4_dec_combo017,MAPD,MAPDwithHIP
+q3_sep_combo014,PDP,PDPwithHIP
+q4_dec_combo021,MA,MAwithMedSupp
+q3_sep_combo011,MAPD,MAPDwithMedSupp
+q4_dec_combo024,PDP,PDPwithMedSupp
+q3_sep_combo010,AARP,TerminatedPlan
+q4_dec_ship033,SHIP,Individual
+q4_dec_aarp145,MA,Individual
+q4_dec_aarp454,MAPD,Individual
+q4_dec_aarp319,PDP,Individual
+q4_dec_aarp998,PDP,SymphonixRx
+q4_dec_aarp999,PDP,WalgreensRx
+q4_dec_aarp474,PDP,MedicareRxSaverPlus
+q4_dec_aarp996,PDP,MedicareRxPreferred

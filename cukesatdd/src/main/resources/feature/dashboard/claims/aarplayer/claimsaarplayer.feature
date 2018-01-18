@@ -1,4 +1,4 @@
-@claimspage
+@claimspage @theTransformers
 Feature: To validate the new changes related to claims page on the member redesigned site
 
   @claimsHeader
@@ -117,7 +117,7 @@ Feature: To validate the new changes related to claims page on the member redesi
       | MAPD     |
       | PDP      |
 
-  @claimsSummaryFED @transformers
+  @claimsSummaryFED @theTransformers
   Scenario Outline: To validate the claims present for the Federal member on claims sumamry page for AARP site
     Given I am an AARP member on the redesigned site
       | Plan Type      | <planType>     |
@@ -139,7 +139,7 @@ Feature: To validate the new changes related to claims page on the member redesi
       | MAPD     | Last 24 Months | COSMOS | COSMOSCLAIMS |
       | MA       | Last 24 Months | NICE   | NICECLAIMS   |
 
-  @claimsSummarySHIP @transformers
+  @claimsSummarySHIP @theTransformers
   Scenario Outline: To validate the claims present for the SHIP member on claims sumamry page for AARP site
     Given I am an AARP member on the redesigned site
       | Plan Type      | <planType>     |
@@ -156,7 +156,7 @@ Feature: To validate the new changes related to claims page on the member redesi
       | planType | claimPeriod    | domain | claimssystem |
       | SHIP     | Last 24 Months | NA     | SHIPCALIMS   |
 
-  @claimsDetailsTableFED @transformers
+  @claimsDetailsTableFED @theTransformers
   Scenario Outline: To Verify Claim Table on Claims Details Page
     Given I am an AARP member on the redesigned site
       | Plan Type      | <planType>     |
@@ -176,7 +176,7 @@ Feature: To validate the new changes related to claims page on the member redesi
       | MAPD     | Last 24 Months | COSMOSCLAIMS |
 
   #| SHIP     |Last 24 Months |
-  @ClaimsDetailsSHIP @transformers
+  @ClaimsDetailsSHIP @theTransformers
   Scenario Outline: To Verify Learn more section on Claims Details Page
     Given I am an AARP member on the redesigned site
       | Plan Type | <planType> |

@@ -12,9 +12,11 @@ public class RallyDashboard extends UhcDriver{
 	@FindBy(id="hello-person")
 	private WebElement WelcomeMessage;
 	
-	@FindBy(xpath="//*[@class='fluid-nav ng-scope']/div/div/a[5]")
-	private WebElement PremiumPaymentsLink;
+	@FindBy(linkText="VIEW DOCUMENTS & RESOURCES")
+	private WebElement DOCUMENTSRESOURCES;
 	
+	@FindBy(xpath="//*[@class='fluid-nav ng-scope']/div/div/a[5]")
+    private WebElement PremiumPaymentsLink;	
 
 	public RallyDashboard(WebDriver driver) {
 		super(driver);
@@ -27,6 +29,13 @@ public class RallyDashboard extends UhcDriver{
 		validate(WelcomeMessage);
 		System.out.println("Welcome Message Displayed");		
 	}
+	
+	public void navigatetoFormsnResources()
+	{
+		DOCUMENTSRESOURCES.click();
+		
+	}
+ 
 	
 	public PaymentsOverview navigateToPaymentOverview() throws InterruptedException
 	{

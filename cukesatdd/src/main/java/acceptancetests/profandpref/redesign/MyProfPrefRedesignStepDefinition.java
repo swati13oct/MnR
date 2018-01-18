@@ -19,10 +19,12 @@ import acceptancetests.atdd.data.member.PageConstants;
 import acceptancetests.claims.data.ClaimsCommonConstants;
 import acceptancetests.login.data.LoginCommonConstants;
 import atdd.framework.MRScenario;
-import cucumber.annotation.en.Given;
-import cucumber.annotation.en.Then;
-import cucumber.annotation.en.When;
-import cucumber.table.DataTable;
+import cucumber.api.DataTable;
+import cucumber.api.java.After;
+import cucumber.api.java.en.And;
+import cucumber.api.java.en.Given;
+import cucumber.api.java.en.Then;
+import cucumber.api.java.en.When;
 import gherkin.formatter.model.DataTableRow;
 import pages.redesign.BlueLayerHomePage;
 import pages.redesign.BlueLayerLoginPage;
@@ -42,7 +44,7 @@ public class MyProfPrefRedesignStepDefinition {
 	}
 
 	@Given("^registered AMP member with following attributes$")
-	public void registered_AMP_member_with_following_attributes(DataTable memberAttributes) {
+	public void registered_AMP_member_with_following_attributes(DataTable memberAttributes) throws InterruptedException {
 		
 		/* Reading the given attribute from feature file */
 		List<DataTableRow> memberAttributesRow = memberAttributes
@@ -175,7 +177,7 @@ public class MyProfPrefRedesignStepDefinition {
 
 
 	@When("^the user Navigates to AARP Member Redesign My Profile and Preferences page$")
-	public void the_user_Navigates_to_Member_Redesign_My_Profile_and_Preferences_page() {
+	public void the_user_Navigates_to_Member_Redesign_My_Profile_and_Preferences_page() throws InterruptedException {
 		UlayerHomePage accountHomePage = (UlayerHomePage) getLoginScenario().getBean(PageConstants.ACCOUNT_HOME_PAGE);
 		MyProfilesPage myProfilepage = accountHomePage.navigateToProfAndPref();
 		if (myProfilepage != null) {
@@ -189,7 +191,7 @@ public class MyProfPrefRedesignStepDefinition {
 	}
 
 	@When("^the user Navigates to BlueLayer Member Redesign My Profile and Preferences page$")
-	public void the_user_Navigates_to_UMS_Member_Redesign_My_Profile_and_Preferences_page() {
+	public void the_user_Navigates_to_UMS_Member_Redesign_My_Profile_and_Preferences_page() throws InterruptedException {
 		BlueLayerHomePage accountHomePage = (BlueLayerHomePage) getLoginScenario().getBean(PageConstants.ACCOUNT_HOME_PAGE);
 		MyProfilesPage myProfilepage = accountHomePage.navigateToProfAndPref();
 		if (myProfilepage != null) {
@@ -204,7 +206,7 @@ public class MyProfPrefRedesignStepDefinition {
 	
 	
 	@When("^user navigates to Redesign Go Green Page from My Profile Page$")
-	public void the_user_Navigates_to_UMS_Member_Redesign_GoGreen_page() {
+	public void the_user_Navigates_to_UMS_Member_Redesign_GoGreen_page() throws InterruptedException {
 		MyProfilesPage myProfilepage = (MyProfilesPage) getLoginScenario().getBean(PageConstants.PROF_AND_PREF_PAGE);
 		GoGreenPreferencesPage goGreenPage = myProfilepage.NavigateTo_GoGreen_MyPreferences_Page();
 		if (goGreenPage != null) {
@@ -219,7 +221,7 @@ public class MyProfPrefRedesignStepDefinition {
 
 
 	@Then("^the user Validates all Error Messages for Edit Email scenarios$")
-	public void the_user_Validates_all_Error_Messages_for_Edit_Email_scenarios() {
+	public void the_user_Validates_all_Error_Messages_for_Edit_Email_scenarios() throws InterruptedException {
 		MyProfilesPage myProfilepage = (MyProfilesPage) getLoginScenario().getBean(PageConstants.PROF_AND_PREF_PAGE);
 		boolean flag = myProfilepage.ValidateEmailErrorMessages();
 
@@ -233,7 +235,7 @@ public class MyProfPrefRedesignStepDefinition {
 	}
 
 	@Then("^the user Validates all Error Messages for Alt/Temp Address scenarios$")
-	public void the_user_Validates_all_Error_Messages_for_Alt_Temp_Address_scenarios() {
+	public void the_user_Validates_all_Error_Messages_for_Alt_Temp_Address_scenarios() throws InterruptedException {
 		MyProfilesPage myProfilepage = (MyProfilesPage) getLoginScenario().getBean(PageConstants.PROF_AND_PREF_PAGE);
 		boolean flag = myProfilepage.ValidateAddTempAddressModal();
 		if (flag) {

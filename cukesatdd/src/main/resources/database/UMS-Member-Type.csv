@@ -1,20 +1,17 @@
-q4_dec_uhc075/Password@1,MAPD,Individual,LIS 1
-q4_dec_aarp428/Password@1,PDP,Individual,LIS 4
-q4_dec_aarp169/Password@1,MA,Individual,LIS 1
-q4_dec_grp095/Password@1,MAPD,Group,NON LIS
-q4_dec_grp272/Password@1,PDP,Group,NON LIS
-q4_dec_grp045/Password@1,MA,Group,HMO
-q4_dec_aarp295/Password@1,PDP,Individual,NON LIS
-q4_dec_uhc015/Password@1,MAPD,Individual,NON LIS
-q4_dec_grp286/Password@1,PDP,Group,LIS 3
-q4_dec_grp010/Password@1,MA,Group,LIS 1
-q4_dec_grp004/Password@1,MAPD,Group,HMO
-q4_dec_grp025/Password@1,MAPD,Group,PPO
-q4_dec_grp014/Password@1,MA,Group,HMO
-q4_dec_grp015/Password@1,MA,Group,PPO
-q1_feb_uhc001/Password@1,MAPD,,
-q4_dec_aarp277/Password@1,GroupMAPD,,
-q4_dec_grp010/Password@1,GroupMA,,
-q1_feb_uhc154/Password@1,MA,,
-q4_dec_grp382/Password@1,GroupPDP,,
-q4_dec_grp140/Password@1,MAPD,Group,LIS 3
+ATDD_BLAYER_MAPD_GROUP_01/Password@1,MAPD,Group,
+q4_dec_uhc115/Password@1,MAPD,
+q4_dec_uhc085/Password@1,MAPD,Individual,Nice_med,
+q4_dec_uhc003/Password@1,MAPD,Individual,Drug,
+q4_dec_uhc002/Password@1,MAPD,Individual,Med_EOB
+ATDD_MAPD_IND_RX_EOB_01/Password@1,MAPD,Individual,rx_Eob,
+q3_sep_blayer149/Password@1,MAPD-PHR,Individual,
+ATDD_q2_jun_blayer123/Password@1,MAPD,COSMOS_dce,
+q3_sep_blayer061,MAPD,
+q4_dec_grp511/Password@1,MA,Group,
+q4_dec_uhc151/Password@1,MA,Individual,
+q3_sep_grp351/Password@1,SSUP,Group,
+q4_dec_uhc012/Password@1,MAPD,Individual,
+q4_dec_grp306/Password@1,PDP,Group,
+q3_sep_grp279/Password@1,Peehip,Group,
+q4_dec_grp086/Password@1,MAPD,Group
+q4_dec_grp337,PDPwithSSUP,Group

@@ -2,6 +2,8 @@ package acceptancetests.responsive.bluelayer;
 
 import gherkin.formatter.model.DataTableRow;
 import pages.acquisition.bluelayer.BLayerPlanComparePage;
+import pages.acquisition.bluelayer.PlanComparePage;
+import pages.acquisition.bluelayer.VASPage;
 import pages.acquisition.bluelayer.PortfolioPageUhc;
 import pages.acquisition.bluelayer.PortfolioTeamCUhc;
 import pages.acquisition.bluelayer.ResponsivePlanDetailsUhc;
@@ -25,11 +27,12 @@ import acceptancetests.atdd.data.CommonConstants;
 import acceptancetests.atdd.data.acquisition.PageConstants;
 import acceptancetests.vpp.data.VPPCommonConstants;
 import atdd.framework.MRScenario;
-import cucumber.annotation.en.And;
-import cucumber.annotation.en.Given;
-import cucumber.annotation.en.Then;
-import cucumber.annotation.en.When;
-import cucumber.table.DataTable;
+import cucumber.api.DataTable;
+import cucumber.api.java.After;
+import cucumber.api.java.en.And;
+import cucumber.api.java.en.Given;
+import cucumber.api.java.en.Then;
+import cucumber.api.java.en.When;
 import pages.acquisition.bluelayer.BLayerPlanComparePage;
 
 
@@ -150,7 +153,7 @@ public class ResponsiveUhcStepDefiniton {
 
 		ResponsivePlanSummaryUhc vppPlan =	plansummaryPage.viewPlanSummary(planType);
 		try {
-			Thread.sleep(6000);
+			Thread.sleep(20000);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -913,6 +916,52 @@ public class ResponsiveUhcStepDefiniton {
 		ResponsivePlanSummaryUhc planSummaryPage = (ResponsivePlanSummaryUhc) getLoginScenario().getBean(PageConstants.RESPONSIVE_PLAN_SUMMARY_PAGE_UHC);
 		planSummaryPage.navigateToEstimateDrugPage(planName, planType, drugName);
 		planSummaryPage.addDrug(drugName);
+	}
+	
+	@And("^the user selects plan to compare and validates header and footer$")
+	public void validate_header_and_footer(DataTable givenAttributes){
+		List<DataTableRow> memberAttributesRow = givenAttributes
+				.getGherkinRows();
+		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells()
+					.get(0), memberAttributesRow.get(i).getCells().get(1));
+		}
+
+		String firstPlan = memberAttributesMap.get("First Plan Name");
+		System.out.println(firstPlan);
+		String secondPlan = memberAttributesMap.get("Second Plan Name");
+		System.out.println(secondPlan);
+		ResponsivePlanSummaryUhc plansummaryPage = (ResponsivePlanSummaryUhc) getLoginScenario()
+				.getBean(PageConstants.RESPONSIVE_PLAN_SUMMARY_PAGE_UHC);
+		plansummaryPage.selectPlanstoCompare(firstPlan);
+		plansummaryPage.selectPlanstoCompare(secondPlan);
+		PlanComparePage planComparePage = plansummaryPage.navigateToPlanCompare(secondPlan);
+		planComparePage.validateHaderAndFooter();
+	}
+	
+	@And("^the user selects B Layer VAS Page and validates header and footer$")
+	public void validate_BLayerVASPage_header_and_footer(DataTable givenAttributes){
+		List<DataTableRow> memberAttributesRow = givenAttributes
+				.getGherkinRows();
+		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells()
+					.get(0), memberAttributesRow.get(i).getCells().get(1));
+		}
+
+		String firstPlan = memberAttributesMap.get("First Plan Name");
+		System.out.println(firstPlan);
+		String secondPlan = memberAttributesMap.get("Second Plan Name");
+		System.out.println(secondPlan);
+		ResponsivePlanSummaryUhc plansummaryPage = (ResponsivePlanSummaryUhc) getLoginScenario()
+				.getBean(PageConstants.RESPONSIVE_PLAN_SUMMARY_PAGE_UHC);
+		plansummaryPage.selectPlanstoCompare(firstPlan);
+		plansummaryPage.selectPlanstoCompare(secondPlan);
+		VASPage vasPage = plansummaryPage.navigateToBLayerVASPage();
+		vasPage.validateHaderAndFooter();
 	}
 }
 

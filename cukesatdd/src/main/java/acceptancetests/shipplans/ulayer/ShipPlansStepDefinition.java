@@ -38,13 +38,12 @@ import acceptancetests.claims.data.ClaimsCommonConstants;
 import acceptancetests.login.data.LoginCommonConstants;
 import acceptancetests.ordermaterials.data.OrderPlanMaterialsCommonConstants;
 import atdd.framework.MRScenario;
-import cucumber.annotation.After;
-import cucumber.annotation.en.And;
-import cucumber.annotation.en.Given;
-import cucumber.annotation.en.Then;
-import cucumber.annotation.en.When;
-import cucumber.table.DataTable;
-
+import cucumber.api.DataTable;
+import cucumber.api.java.After;
+import cucumber.api.java.en.And;
+import cucumber.api.java.en.Given;
+import cucumber.api.java.en.Then;
+import cucumber.api.java.en.When;
 /**
 * @author sdwaraka
 *
@@ -59,7 +58,7 @@ public class ShipPlansStepDefinition {
 	}
 
 	@Given("^registered AMP member with SHIP combo plans$")
-	public void registered_member_SHIPplans() {
+	public void registered_member_SHIPplans() throws InterruptedException {
 
 		/* Reading the given attribute from feature file */
 		/*List<DataTableRow> memberAttributesRow = memberAttributes
@@ -145,7 +144,7 @@ public class ShipPlansStepDefinition {
 	}
 	
 	@When("^the user navigates to mentioned page in AARP site$")
-	public void views_pages_in_Ums_site(DataTable givenAttributes) {
+	public void views_pages_in_Ums_site(DataTable givenAttributes) throws InterruptedException {
 		
 		List<DataTableRow> givenAttributesRow = givenAttributes
 				.getGherkinRows();

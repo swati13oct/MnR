@@ -33,7 +33,9 @@ Feature: To test Locate a Pharmacy in acqusition flow AARP site
 
  Examples: 
       | year | zipcode | planName                                          |
-      | 2018 |   90210 | AARP MedicareComplete SecureHorizons Plan 1 (HMO) | @multicounty
+      | 2018 |   90210 | AARP MedicareComplete SecureHorizons Plan 1 (HMO) | 
+      
+      @multicounty
   Scenario Outline: To verify pharmacy locator multi county lookup modal in AARP site
     Given the user is on the AARP Medicare Site landing page
     When the user navigates to Request more info page
@@ -43,13 +45,11 @@ Feature: To test Locate a Pharmacy in acqusition flow AARP site
       | Distance    | <distance> |
       | County Name | <county>   |
 
-
-
-
-
     Examples: 
       | zipcode | distance | county       |
-      |   80002 |       15 | Adams County |@zipcodeEntry
+      |   80002 |       15 | Adams County |
+      
+      @zipcodeEntry
   Scenario Outline: To verify pharmacy locator zipcode entry in AARP site
     Given the user is on the AARP Medicare Site landing page
     When the user navigates to Request more info page

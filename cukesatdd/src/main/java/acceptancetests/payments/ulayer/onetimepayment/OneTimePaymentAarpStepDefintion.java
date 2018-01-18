@@ -37,11 +37,12 @@ import acceptancetests.atdd.data.member.PageConstants;
 import acceptancetests.login.data.LoginCommonConstants;
 import acceptancetests.payments.data.PaymentCommonConstants;
 import atdd.framework.MRScenario;
-import cucumber.annotation.en.And;
-import cucumber.annotation.en.Given;
-import cucumber.annotation.en.Then;
-import cucumber.annotation.en.When;
-import cucumber.table.DataTable;
+import cucumber.api.DataTable;
+import cucumber.api.java.After;
+import cucumber.api.java.en.And;
+import cucumber.api.java.en.Given;
+import cucumber.api.java.en.Then;
+import cucumber.api.java.en.When;
 
 /**
  * @author pperugu
@@ -582,7 +583,7 @@ public class OneTimePaymentAarpStepDefintion {
 	public void user_navigates_to_TeamHTestHarness_page()
 	{
 		AccountHomePage accountHomePage = (AccountHomePage)getLoginScenario().getBean(PageConstants.ACCOUNT_HOME_PAGE);
-		TestHarness testHarness = accountHomePage.navigateToTeamHTestHarnesspage();
+		TestHarness testHarness = accountHomePage.navigateToTestHarnesspage();
 		if(testHarness!= null){
 			getLoginScenario().saveBean(PageConstants.TEST_HARNESS_PAGE,
 					testHarness);
@@ -598,7 +599,7 @@ public class OneTimePaymentAarpStepDefintion {
 	public void user_navigates_to_TeamC_TestHarness_page()
 	{
 		AccountHomePage accountHomePage = (AccountHomePage)getLoginScenario().getBean(PageConstants.ACCOUNT_HOME_PAGE);
-		TestHarness testHarness = accountHomePage.navigateToTeamCTestHarnesspage();
+		TestHarness testHarness = accountHomePage.navigateToTestHarnesspage();
 		if(testHarness!= null){
 			getLoginScenario().saveBean(PageConstants.TEST_HARNESS_PAGE,
 					testHarness);
@@ -662,7 +663,7 @@ public class OneTimePaymentAarpStepDefintion {
 	
 	
 	@And("^the user navigates to One Time Payments page$")
-	public void user_navigates_to_one_time_payments()
+	public void user_navigates_to_one_time_payments() throws InterruptedException
 	{
 		AccountHomePage accountHomePage = (AccountHomePage)getLoginScenario().getBean(PageConstants.ACCOUNT_HOME_PAGE);
 		OneTimePaymentsPage oneTimePaymentsPage = accountHomePage.navigateToOneTimePaymentsPage();
@@ -773,7 +774,7 @@ public class OneTimePaymentAarpStepDefintion {
 	public void user_clicks_AutoPay_and_navigates_to_Review_page() throws InterruptedException
 	{
 		OneTimePaymentsPage oneTimePaymentsPage = (OneTimePaymentsPage)getLoginScenario().getBean(PageConstants.AUTOMATIC_PAYMENTS_DASHBOARD);
-		ReviewOneTimePaymentsPage reviewOneTimePaymentsPage = oneTimePaymentsPage.AutoenterInfoAndContinue();
+		ReviewOneTimePaymentsPage reviewOneTimePaymentsPage = oneTimePaymentsPage.enterInfoAndContinue();
 		if(reviewOneTimePaymentsPage != null){
 			getLoginScenario().saveBean(PageConstants.REVIEW_ONE_TIME_PAYMENTS_DASHBOARD,
 					reviewOneTimePaymentsPage);

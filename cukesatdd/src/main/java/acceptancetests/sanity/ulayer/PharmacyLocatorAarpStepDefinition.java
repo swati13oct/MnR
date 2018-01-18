@@ -24,11 +24,12 @@ import acceptancetests.atdd.data.CommonConstants;
 import acceptancetests.atdd.data.acquisition.PageConstants;
 import acceptancetests.pharmacylocator.data.PharmacySearchCommonConstants;
 import atdd.framework.MRScenario;
-import cucumber.annotation.en.And;
-import cucumber.annotation.en.Given;
-import cucumber.annotation.en.Then;
-import cucumber.annotation.en.When;
-import cucumber.table.DataTable;
+import cucumber.api.DataTable;
+import cucumber.api.java.After;
+import cucumber.api.java.en.And;
+import cucumber.api.java.en.Given;
+import cucumber.api.java.en.Then;
+import cucumber.api.java.en.When;
 
 /**
  * @author pagarwa5
@@ -138,7 +139,7 @@ public class PharmacyLocatorAarpStepDefinition {
 		pharmacySearchPage.clickOnContinue();
 		getLoginScenario().saveBean(PageConstants.PHARMACY_SEARCH_PAGE, pharmacySearchPage);
     }
-    
+ /*   
     @And("^validate pharmacy search results$")
     public void validatePharmacySearchResults() {
 
@@ -165,7 +166,7 @@ public class PharmacyLocatorAarpStepDefinition {
     	PharmacyResultPage pharmacySearchResultsPage = (PharmacyResultPage) getLoginScenario().getBean(PageConstants.PHARMACY_RESULTS_PAGE);
 	pharmacySearchResultsPage.validateStandardNetworkInResults();
     }
-    
+ */   
 
 	@And("^the user enters following details for pharmacy search in AARP Site$")
 	public void user_enters_zipcode_distance_details_aarp(DataTable zipAttributes) {

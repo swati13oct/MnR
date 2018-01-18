@@ -34,6 +34,33 @@ public class PlanSummaryPage extends UhcDriver {
 
 	@FindBy(id = "disclosure_link")
 	private WebElement logOut;
+	
+	//@FindBy(xpath = ".//*[@id='plan_box']")
+	//private WebElement claimsPlanBox;
+	
+	@FindBy(id = "plan_box")
+	private WebElement claimsPlanBox;
+	
+	@FindBy(xpath = ".//*[@id='plan_box']/div[1]/div[2]/div/p[1]")
+	private WebElement claimsStatement;
+	
+	@FindBy(xpath = ".//*[@id='plan_box']/div[1]/div[2]/div/p[2]/a")
+	private WebElement medClaimsBtn;
+	
+	@FindBy(xpath =".//*[@id='plan_box']//a[@class='shipviewclaims']")
+	private WebElement medicalClaimsBtn;
+	
+	
+	@FindBy(xpath =".//*[@id='plan_box']//a[@class='shipviewclaims']")
+	private WebElement drugClaimsBtn;
+	
+	
+	//@FindBy(xpath = ".//*[@id='main_content']/div[1]/div[2]/div/div[3]/div[1]/div[2]/div/h3")
+	//private WebElement claimSectionHeading;
+	
+	@FindBy(xpath="//div[@id='main_content']//h3[contains(.,'Claim Activity')]")
+	private WebElement claimSectionHeading;
+	
 
 	private PageData planSummary;
 
@@ -42,10 +69,10 @@ public class PlanSummaryPage extends UhcDriver {
 	public PlanSummaryPage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
-		String fileName = CommonConstants.PLAN_SUMMARY_PAGE_DATA;
+		/*String fileName = CommonConstants.PLAN_SUMMARY_PAGE_DATA;
 		planSummary = CommonUtility.readPageData(fileName,
 				CommonConstants.PAGE_OBJECT_DIRECTORY_ULAYER_MEMBER);
-		openAndValidate();
+		openAndValidate();*/
 	}
 
 	public AddPlanPopUpPage clickAddPlan() {
@@ -126,6 +153,46 @@ public class PlanSummaryPage extends UhcDriver {
 		else
 			System.out.println("@@@@@@@@@ No Pharmacy Saver widget @@@@@@@@@");
 		
+	}
+	public boolean validateClaims() {
+		boolean flag = false;
+		CommonUtility.waitForPageLoad(driver, claimSectionHeading,20);
+		if(validate(claimSectionHeading)&&validate(claimsPlanBox)){
+			flag = true;
+		}
+		return flag;
+	}
+	
+	public MedicalClaimSummaryPage navigateToMedicalClaimsSummary() {
+		
+		medicalClaimsBtn.click();
+		try {
+			Thread.sleep(2000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		if (getTitle().equalsIgnoreCase(
+				"Claims")) {
+			return new MedicalClaimSummaryPage(driver);
+		}
+		return null;
+	}
+	
+	public DrugClaimSummaryPage navigateToDrugClaimsSummary() {
+
+		drugClaimsBtn.click();
+		try {
+			Thread.sleep(5000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		if (getTitle().equalsIgnoreCase(
+				"Claims")) {
+				return new DrugClaimSummaryPage(driver);
+		}
+		return null;
 	}
 
 }

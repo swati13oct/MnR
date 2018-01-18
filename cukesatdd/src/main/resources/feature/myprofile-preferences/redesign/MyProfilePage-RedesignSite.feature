@@ -1,3 +1,4 @@
+@TeamPredators
 @MyProfilePreferencePage
 Feature: To test for Functionality and UI for My Profile Page in Redesign site
 

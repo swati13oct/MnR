@@ -63,6 +63,12 @@ public class LowCostOptPage extends UhcDriver {
 		}
 
 		continueButton.click();
+		try {
+			Thread.sleep(4000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		if (driver.getTitle().equalsIgnoreCase("Drug Cost Estimator") && category.equalsIgnoreCase(CommonConstants.GROUP)) {
 			return new ManageDrugPage(driver,category);
 		} else if(driver.getTitle().equalsIgnoreCase("Drug Cost Estimator")){
@@ -127,5 +133,17 @@ public class LowCostOptPage extends UhcDriver {
 				lowCostOptionsExpectedJson, globalExpectedJson);
 		return lowCostOptionsExpectedJson;
 	}
-
+	
+	@FindBy(xpath = ".//*[@id='dce.member']div/div[3]/div/div/div[1]/p[2]")
+	private WebElement genericDrug;
+	
+	@FindBy(xpath = ".//*[@id='dce.member']div/div[3]/div/div/div[1]/p[1]/span/a")
+	private WebElement editLink;
+	
+	public boolean validateLowCostSection(){
+		boolean flag = false;
+		if(validate(genericDrug)&&validate(continueButton)&&validate(editLink))
+			flag = true;
+		return flag;
+	}
 }

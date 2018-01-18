@@ -103,4 +103,24 @@ public class PlanConfirmationPage extends UhcDriver {
 		System.out.println("planConfirmationJson----->"+planConfirmationJson);
 	}
 
+	public boolean validatePlanInformation() {
+
+		boolean flag = false;
+		for (String key : planConfirmation.getExpectedData().keySet()) {
+
+			WebElement element = findElement(planConfirmation.getExpectedData()
+					.get(key));
+
+			if (validate(element) && null != element.getText()
+					&& element.getText() != "") {
+				flag = true;
+			} else {
+				return false;
+			}
+		}
+
+		return flag;
+	
+	}
+
 }

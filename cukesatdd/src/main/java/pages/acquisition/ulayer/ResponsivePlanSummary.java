@@ -24,6 +24,8 @@ import acceptancetests.atdd.data.MRConstants;
 import acceptancetests.atdd.data.PageData;
 import acceptancetests.atdd.util.CommonUtility;
 import atdd.framework.UhcDriver;
+import pages.acquisition.bluelayer.PlanComparePage;
+import pages.acquisition.bluelayer.VASPage;
 import pages.member.ulayer.Rallytool_Page;
 import pages.mobile.acquisition.ulayer.VPPAarpNeedAStepBackWidget;
 import pages.mobile.acquisition.ulayer.VPPAarpNeedHelpWidgetPage;
@@ -110,7 +112,8 @@ public class ResponsivePlanSummary extends UhcDriver{
 		@FindBy(xpath="//*[@class='tab active' and contains(text(),'Medicare Advantage Plans')]/div[1]/span[3]")
 		private WebElement showMaPlansNotClickable;
 		
-		@FindBy(xpath = "//*[@class='tab med-supp']/div[1]/span[3]")
+		@FindBy(xpath = "//div[@class='tab med-supp plancountheight']/div")
+		//@FindBy(xpath = "(//*[@id='site-wrapper']//div[@class='content-section']//div[@class='parbase vppClient section']//div[@class='parsys planCountPar']//div[@class='tab-contents']/span[@class='trigger-closed'])[1]")
 		private WebElement showMsPlans;
 		
 		@FindBy(xpath="//*[contains(text(),'Start Plan Selector')]")
@@ -118,6 +121,9 @@ public class ResponsivePlanSummary extends UhcDriver{
 		
 		@FindBy(className="errmsgcolor")
 		private WebElement errmsgcolor;
+		
+		@FindBy(xpath="//a[@class='cta-button secondary value-added-services']")
+        private WebElement vasButton;
 		
 		/*@FindBy(xpath="//html/body/div[4]/div[2]/div[1]/div/div/div/div/div[1]/div/div/div/div[2]/div/div[2]/div[1]/div/span[1]")
 		private WebElement showMaPlans;*/
@@ -138,7 +144,7 @@ public class ResponsivePlanSummary extends UhcDriver{
 		    private WebElement chkBoxAddtoCompare5;
 		    
 		    //@FindBy(xpath="//*[@id='plan-list-1']//div[@class='swiper-container']/div/div[4]//div[@class='content-secondary']//div[@class='compare-box']/span[4]/a")		  
-		    @FindBy(xpath="//*[@id='plan-list-1']/div/div[2]/div/div[4]/div[3]/div/div/span[4]/a")
+		    @FindBy(xpath="//*[@id='plan-list-1']/div/div[2]/div/div[4]/div[2]/div/div/span[4]/a")		                  
 		    private WebElement comparePlans;
 		    
 		   // @FindBy(xpath="(.//*[text()='View details'])[1]")
@@ -277,7 +283,7 @@ public class ResponsivePlanSummary extends UhcDriver{
 
 		String fileName = CommonConstants.VPP_PLAN_SUMMARY_PAGE_DATA;
 		vppPlanSummary = CommonUtility.readPageData(fileName, CommonConstants.PAGE_OBJECT_DIRECTORY_ULAYER_ACQ);
-		openAndValidate();
+		//openAndValidate();
 	}
 	public ResponsivePlanSummary(WebDriver driver, String url) {
 		super(driver);
@@ -417,7 +423,7 @@ public void selectAddToCompareCheckboxes() throws InterruptedException  {
 	validate (chkBoxAddtoCompare3);
 	chkBoxAddtoCompare3.click();
 	Thread.sleep(2000);
-	jse.executeScript("window.scrollBy(0,750)", "");
+	jse.executeScript("window.scrollBy(0,600)", "");
 	Thread.sleep(1000);
 	validate (chkBoxAddtoCompare4);
 	chkBoxAddtoCompare4.click();
@@ -429,14 +435,14 @@ public void selectAddToCompareCheckboxes() throws InterruptedException  {
 public void viewdetailslnk() throws InterruptedException{
 	Thread.sleep(9000);
 	viewDetails.click();
-	validate(viewDetails);
+	//validate(viewDetails);
 	
 }
 
 public void removePlanlnk() throws InterruptedException{
 	Thread.sleep(9000);
 	removePlanlnk.click();
-	validate(removePlanlnk);
+	//validate(removePlanlnk);
 }
 
 public void removePlanlnk1() throws InterruptedException{
@@ -458,7 +464,7 @@ public void backtoAllPlans() throws InterruptedException{
 
 public void disclaimerText() throws InterruptedException{
 	JavascriptExecutor js = (JavascriptExecutor)driver;
-	js.executeScript("window.scrollBy(0,650)", "");
+	js.executeScript("window.scrollBy(0,750)", "");
 	Thread.sleep(8000);
 	String disclaimertxt = disclaimerTxt.getText();
 	System.out.println(disclaimertxt);
@@ -1189,5 +1195,20 @@ public void comparePlanslnk() throws InterruptedException{
                  }
                  return null;
          }
+				 
+				 public PlanComparePage navigateToPlanCompare(String planName){
+						driver.findElement(By.xpath("//*[@id='compare-"+planName+"']/parent::span/following-sibling::p")).click();
+							return new PlanComparePage(driver);
+					
+					}
+					
+					 public void selectPlanstoCompare(String planName){
+						 driver.findElement(By.xpath("//*[@id='compare-"+planName+"']/parent::span")).click();
+		 				 System.out.println("========="+planName+" is selected to compare===========");
+						 }
+					 
+					 public ULayerVASPage navigateToULayerVASPage(){
+						 vasButton.click();
+		 				 return new ULayerVASPage(driver);
 }
-			 
+}			 

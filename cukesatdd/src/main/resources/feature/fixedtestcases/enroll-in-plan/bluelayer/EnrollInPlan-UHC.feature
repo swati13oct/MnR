@@ -1,5 +1,6 @@
 @enrollInPlanUHC
 Feature: To test enroll in plan on UHC site 
+@OLE_MA
 Scenario Outline: Verify enroll in plan in UHC site for federal plan type member  
 Given the user is on the UHC medicare solutions landing page
 When user performs plan search using following information in UHC site
@@ -43,7 +44,7 @@ Then the user validates the enrollment application confimation in UHC site
 ## |80002  |Adams County | MA         |AARP MedicareComplete SecureHorizons Essential (HMO)|No    | john    |  l          |Abhra   |11/12/1988 |  Male                | 111-11-1111-B      |07/01/1989                   |07/01/1989                  |Dlf City   | UB    | a-11    |  No                |B2             | MUM           | C2             |TEXAS               |73301          |8800340918      |9414710603      |b@uhg.com   |b@uhg.com          |  English         |  Yes                  | 11/12/1999      | 11/12/1999  | Yes         |  11/12/1999      |   Yes           |11/12/1999 |   Yes                    | LIC                |  1212       | 123457       |       Yes                        | E     |F       | G     | H               | TEXAS        |73301    | 8800340918   | 11/12/1999    |     Yes                   |2222          |   Yes                    |   SAHARA                   |234    | 2222   |  Yes              | Yes                     |1113    |  yes                          |Xyz          |kumar           |agraw        | friend                    | b-11      | udaipur  | banglow1    | TEXAS        |73301   |9414710603     |  Agree          |                         
 ## |80002  |Adams County | PDP        |AARP MedicareRx Preferred (PDP)                     |No    | miller  |  j          |desh    |11/12/1989 |  Male                | 222-22-2222-C      |07/01/1989                   |07/01/1989                  |Ggn City   | Bang  | a-12    |  No                |B3             | DEL           | C3             |TEXAS               |73301          |8800340917      |9414710604      |c@uhg.com   |c@uhg.com          |  English         |  Yes                  | 11/12/1999      | 11/12/1999  | Yes         |  11/12/1999      |   Yes           |11/12/1999 |   Yes                    | LIC                |  1213       | 123458       |       Yes                        | I     |J       | K     | L               | TEXAS        |73301    | 8800340917   | 11/12/1999    |     Yes                   |3333          |   Yes                    |   ZEX                      |456    | 3333   |  Yes              | Yes                     |1114    |  yes                          |Abc          |kumar           |saini        | brother                   | b-12      | agra     | banglow2    | TEXAS        |73301   |9414710604     |  Agree          | 
     
-
+@OLE_PDP
 Scenario Outline: Verify enroll in plan in UHC site for federal plan type member  
 Given the user is on UHC medicare site landing page
 When user performs plan search using following information in UHC site
@@ -84,10 +85,7 @@ Then the user validates the enrollment application confimation in UHC site
   |zipcode |countyName   | planType   | planName                           |firstName|middleInitial|lastName|birthDate  |selectedGender        | medicareClaimNumber|hospitalEffectiveDate        |medicalEffectiveDate        |address    |  city          | apartment |mainPhoneNumber |otherPhoneNumber| emailAddress   | confirmEmailAddress | languagePreference |
   |78006   |Comal County | PDP         |AARP MedicareRx Preferred (PDP)    | First   |  m          |  last  |01/01/1940 |  Male                | 111-11-1111-A      |07/01/1988                   |07/01/1988                  |1234            | Colorado    | UHG       |9999911111      |1111199999      | test@uhc.com   | test@uhc.com        |  English           |
      
-    
-    
-    
-   
+@OLE_MAPD
 Scenario Outline: Verify enroll in plan  in UHC site for federal plan type member  
 Given the following zipcode for UHC site 
                  | Zip Code    | <zipcode>    |

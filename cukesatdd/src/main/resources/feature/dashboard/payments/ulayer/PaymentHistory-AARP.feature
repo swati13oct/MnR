@@ -1,4 +1,6 @@
-@payment_history
+
+
+@theSpartans
 Feature:To verify New Payment History page
 Scenario Outline:To Verify Payment History section including the header and payment date range dropdown so that I can view and search for the history of my payments without having to call customer service.
 Given I am an AARP Individual member on the Dashboard site

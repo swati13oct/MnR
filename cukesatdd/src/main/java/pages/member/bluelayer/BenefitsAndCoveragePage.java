@@ -463,7 +463,7 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 		// TODO Auto-generated method stub
 		JavascriptExecutor jse = (JavascriptExecutor) driver;
 		jse.executeScript("window.scrollBy(0,3000)", "");
-		validateNew(disclaimersLink);
+		validate(disclaimersLink);
 		disclaimersLink.click();
 		try {
 			Thread.sleep(10000);
@@ -922,11 +922,11 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 	public void validatePlanOverview() {
 		// TODO Auto-generated method stub
 
-		validateNew(planName);
-		validateNew(nameLabel);
-		validateNew(memberID);
-		validateNew(effective_Date);
-		validateNew(Monthly_Premium);
+		validate(planName);
+		validate(nameLabel);
+		validate(memberID);
+		validate(effective_Date);
+		validate(Monthly_Premium);
 		validateNew(GroupId);
 
 	}
@@ -942,22 +942,22 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 	}
 
 	public void validateHeaders() {
-		validateNew(BenefitsSummaryHeader);
-		validateNew(Copayscoinsuranceheader);
-		validateNew(HospitalVisits);
-		validateNew(OfficeVisits);
-		validateNew(OutpatientSurgeryCenter);
+		validate(BenefitsSummaryHeader);
+		validate(Copayscoinsuranceheader);
+		validate(HospitalVisits);
+		validate(OfficeVisits);
+		validate(OutpatientSurgeryCenter);
 
 	}
 
 	public void validateHeadersGroup() {
-		validateNew(BenefitsSummaryHeader);
-		validateNew(Copayscoinsuranceheader);
-		validateNew(EmergencyHeader);
-		validateNew(AmbulanceHeader);
-		validateNew(HospitalVisits);
-		validateNew(OfficeVisits);
-		validateNew(OutpatientSurgeryCenter);
+		validate(BenefitsSummaryHeader);
+		validate(Copayscoinsuranceheader);
+		validate(EmergencyHeader);
+		validate(AmbulanceHeader);
+		validate(HospitalVisits);
+		validate(OfficeVisits);
+		validate(OutpatientSurgeryCenter);
 
 	}
 
@@ -973,16 +973,16 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 
 	public void validatePrimaryCareProviderForGroup() {
 	
-		validateNew(PrimaryCareProviderHeaderHMO);
+		validate(PrimaryCareProviderHeaderHMO);
 		validateNew(PCPtext);
 		
 		
 	}
 	
 	public void validateOutofPocketMax() {
-		validateNew(OutofPocketMaximum);
-		validateNew(INNETWORK);
-		validateNew(OUTOFNETWORK);
+		validate(OutofPocketMaximum);
+		validate(INNETWORK);
+		validate(OUTOFNETWORK);
 		validateNew(OutofPocketMaximumText);
 		
 	}

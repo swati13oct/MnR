@@ -1,4 +1,4 @@
-@inactiveTerminatedPlanError
+@inactiveTerminatedPlanError @Gladiators
 Feature: To test links present on inactive Terminated Plan page
 
   Scenario Outline: To verify member is navigated to the personal Information page
@@ -16,5 +16,7 @@ Feature: To test links present on inactive Terminated Plan page
     Examples: 
       | planMemberId | dateOfBirth |
       # | 004560292    | 05-01-1945  |
-      #  | 0152322881   | 06-11-1949  |
-      | 0173439611 | 07-09-1958  |
+       #dev-c
+        | 015232288   | 06-11-1949  |
+     # and team-h
+      #| 017343961 | 07-09-1958  |

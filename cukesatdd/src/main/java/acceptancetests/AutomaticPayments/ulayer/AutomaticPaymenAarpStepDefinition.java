@@ -40,11 +40,12 @@ import acceptancetests.atdd.data.member.PageConstants;
 import acceptancetests.login.data.LoginCommonConstants;
 import acceptancetests.payments.data.PaymentCommonConstants;
 import atdd.framework.MRScenario;
-import cucumber.annotation.en.And;
-import cucumber.annotation.en.Given;
-import cucumber.annotation.en.Then;
-import cucumber.annotation.en.When;
-import cucumber.table.DataTable;
+import cucumber.api.DataTable;
+import cucumber.api.java.After;
+import cucumber.api.java.en.And;
+import cucumber.api.java.en.Given;
+import cucumber.api.java.en.Then;
+import cucumber.api.java.en.When;
 
 /**
  * @author tpravee2
@@ -333,7 +334,7 @@ public class AutomaticPaymenAarpStepDefinition {
 	public void user_navigates_to_automatic_payments_from_paymentsOverview() throws InterruptedException
 	{
 		PaymentsOverview paymentsOverview = (PaymentsOverview)getLoginScenario().getBean(PageConstants.PAYMENT_OVERVIEW);
-		AutomaticPaymentsPage automaticPaymentsPage = paymentsOverview.navigateToAutomaticPaymentpage();
+		OneTimePaymentsPage automaticPaymentsPage = paymentsOverview.navigateToComboTabPaymentpage();
 		if(automaticPaymentsPage!= null){
 			getLoginScenario().saveBean(PageConstants.AUTOMATIC_PAYMENTS_DASHBOARD,
 					automaticPaymentsPage);

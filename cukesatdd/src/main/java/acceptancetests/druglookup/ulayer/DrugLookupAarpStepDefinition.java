@@ -30,12 +30,12 @@ import acceptancetests.dceretiree.data.DCERetireeCommonConstants;
 import acceptancetests.druglookup.data.DceCommonConstants;
 import acceptancetests.login.data.LoginCommonConstants;
 import atdd.framework.MRScenario;
-import cucumber.annotation.After;
-import cucumber.annotation.en.And;
-import cucumber.annotation.en.Given;
-import cucumber.annotation.en.Then;
-import cucumber.annotation.en.When;
-import cucumber.table.DataTable;
+import cucumber.api.DataTable;
+import cucumber.api.java.After;
+import cucumber.api.java.en.And;
+import cucumber.api.java.en.Given;
+import cucumber.api.java.en.Then;
+import cucumber.api.java.en.When;
 
 
 /**
@@ -132,7 +132,7 @@ public class DrugLookupAarpStepDefinition {
 	public void attemp_to_view_drug_details() {
 		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario()
 				.getBean(PageConstants.ACCOUNT_HOME_PAGE);
-		EstimateYourDrugCostPage estimateYourDrugCostPage = accountHomePage.navigateToDrugLookup();
+		ManageDrugPage estimateYourDrugCostPage = accountHomePage.navigateToDrugLookup();
 
 		if (estimateYourDrugCostPage != null) {
 			getLoginScenario().saveBean(PageConstants.ESTIMATE_YOUR_DRUG_COST_PAGE,

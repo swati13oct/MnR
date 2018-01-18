@@ -126,4 +126,23 @@ public class RegistrationSuccessPage extends UhcDriver {
 		
 		return registrationSuccessExpectedJson;
 	}
+
+	public boolean validateRegistrationSuccessPage() {
+		
+		boolean flag = false;
+		for (String key : registrationSuccess.getExpectedData().keySet()) {
+			System.err.println("key::"+key);
+			WebElement element = findElement(registrationSuccess.getExpectedData()
+					.get(key));
+
+			if (validate(element) && null != element.getText()
+					&& element.getText() != "") {
+				flag = true;
+			} else {
+				return false;
+			}
+		}
+
+		return flag;
+	}
 }

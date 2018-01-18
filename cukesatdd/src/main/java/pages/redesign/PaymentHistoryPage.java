@@ -25,6 +25,9 @@ import atdd.framework.UhcDriver;
  */
 public class PaymentHistoryPage extends UhcDriver{
 	
+	@FindBy(xpath = "//area[@href='javascript:clWin()'][@alt = 'close']")
+	private WebElement FeedbackModal;
+	
 	@FindBy(id = "paymentHistoryApp")
 	private WebElement paymentHistoryApp;
 	
@@ -81,13 +84,27 @@ public class PaymentHistoryPage extends UhcDriver{
 	
 	public JSONObject paymentHistoryJson;
 
-	public PaymentHistoryPage(WebDriver driver) {
+	public PaymentHistoryPage(WebDriver driver) throws InterruptedException {
 		super(driver);
 		PageFactory.initElements(driver, this);
 		//CommonUtility.waitForPageLoad(driver, paymenthistorypage, CommonConstants.TIMEOUT_30);
 		String fileName = CommonConstants.PAYMENT_HISTORY_PAGE_DATA;
 		paymentHistory = CommonUtility.readPageData(fileName,
 				CommonConstants.PAGE_OBJECT_DIRECTORY_ULAYER_MEMBER);
+		Thread.sleep(5000);
+		CommonUtility.checkPageIsReady(driver);
+		try{
+			FeedbackModal.click();
+			System.out.println("FeedBack Modal Present");
+			if (validate(FeedbackModal)){
+				System.out.println("FeedBack Modal NOT CLOSING - Close button is clicked");
+			}
+			System.out.println("FeedBack Modal Closed");
+		}
+		catch (Exception e) {
+			System.out.println("FeedBack Modal NOT Present");
+		}
+
 		//openAndValidate();
 	}
 

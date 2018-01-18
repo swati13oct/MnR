@@ -11,16 +11,19 @@ import org.openqa.selenium.WebDriver;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import pages.acquisition.ulayer.AcquisitionHomePage;
+import pages.acquisition.ulayer.ComparePlansPage;
+import pages.acquisition.ulayer.PlanDetailsPage;
 import pages.acquisition.ulayer.VPPPlanSummaryPage;
 import acceptancetests.atdd.data.CommonConstants;
 import acceptancetests.atdd.data.acquisition.PageConstants;
 import acceptancetests.vpp.data.VPPCommonConstants;
 import atdd.framework.MRScenario;
-import cucumber.annotation.en.And;
-import cucumber.annotation.en.Given;
-import cucumber.annotation.en.Then;
-import cucumber.annotation.en.When;
-import cucumber.table.DataTable;
+import cucumber.api.DataTable;
+import cucumber.api.java.After;
+import cucumber.api.java.en.And;
+import cucumber.api.java.en.Given;
+import cucumber.api.java.en.Then;
+import cucumber.api.java.en.When;
 
 /**
  * @author pperugu
@@ -39,7 +42,6 @@ public class VppAarpStepDefinitionUpdated {
 	@Given("^the user is on AARP medicare acquisition site landing page$")
 	public void the_user_on_aarp_medicaresolutions_Site() {
 		WebDriver wd = getLoginScenario().getWebDriver();
-
 		AcquisitionHomePage aquisitionhomepage = new AcquisitionHomePage(wd);
 
 		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
@@ -72,6 +74,10 @@ public class VppAarpStepDefinitionUpdated {
 		if (plansummaryPage != null) {
 			getLoginScenario().saveBean(PageConstants.VPP_PLAN_SUMMARY_PAGE,
 					plansummaryPage);
+			if(plansummaryPage.validateVPPPlanSummaryPage())
+				Assert.assertTrue(true);
+			else
+				Assert.fail("Error in validating the Plan Summary Page");
 		} else {
 			Assert.fail("Error Loading VPP plan summary page");
 		}
@@ -82,7 +88,7 @@ public class VppAarpStepDefinitionUpdated {
 
 		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
-		if (plansummaryPage.validatePlansNumber()) {
+		if (plansummaryPage.validateVPPPlanSummaryPage()) {
 			Assert.assertTrue(true);
 		} else {
 			Assert.fail("Error validating plans in  VPP plan summary page");
@@ -104,14 +110,71 @@ public class VppAarpStepDefinitionUpdated {
 		getLoginScenario().saveBean(VPPCommonConstants.PLAN_TYPE, plantype);
 		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		
+		plansummaryPage = plansummaryPage.viewPlanSummary(plantype);
 
-		if (plansummaryPage.selectPlanType(plantype)) {
+		if (plansummaryPage != null) {
 			getLoginScenario().saveBean(PageConstants.VPP_PLAN_SUMMARY_PAGE,
 					plansummaryPage);
 		} else {
 			Assert.fail("Error loading plans of desired plantype in  VPP plan summary page");
 		}
 
+	}
+	
+	@And("^I select all 3 plans to compare in MA and click on compare plan link$")
+	public void I_select_all_3_plans_to_compare(){
+		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		plansummaryPage.clickonViewPlans();
+		plansummaryPage.checkAllMAPlans();
+		ComparePlansPage comparePlansPage = plansummaryPage.clickOnCompareLink();
+		if(comparePlansPage != null){
+			getLoginScenario().saveBean(PageConstants.TeamC_Plan_Compare_Page, comparePlansPage);
+			comparePlansPage.backToVPPPage();
+		}else
+			Assert.fail("Error in loading the compare plans page");
+	}
+	
+	@Then("^I click back to all plans button and verify that all 3 plans are still selected$")
+	public void verifyAllPlansStillSelected(){
+		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+			.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		plansummaryPage.clickonViewPlans();
+		if(plansummaryPage.validateAllPlansChecked()){
+			Assert.assertTrue(true);
+		}else
+			Assert.fail("Error in validating all plans are still selected");
+		
+	}
+	
+	@When("^the user view plan details of the above selected plan in AARP site and validates$")
+	public void user_views_plandetails_selected_plan_aarp(DataTable givenAttributes) {
+		List<DataTableRow> memberAttributesRow = givenAttributes
+				.getGherkinRows();
+		String planName = memberAttributesRow.get(0).getCells().get(1);
+		getLoginScenario().saveBean(
+				VPPCommonConstants.PLAN_NAME,planName);
+		
+		String zipcode = (String) getLoginScenario().getBean(
+				VPPCommonConstants.ZIPCODE);
+		String county = (String) getLoginScenario().getBean(
+				VPPCommonConstants.COUNTY);
+		VPPPlanSummaryPage vppPlanSummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+
+		String planType = (String)getLoginScenario().getBean(VPPCommonConstants.PLAN_TYPE);
+		PlanDetailsPage vppPlanDetailsPage = vppPlanSummaryPage
+				.navigateToPlanDetails(planName, planType);
+		if (vppPlanDetailsPage != null) {
+			getLoginScenario().saveBean(PageConstants.VPP_PLAN_DETAILS_PAGE,
+					vppPlanDetailsPage);
+			if(vppPlanDetailsPage.validatePlanDetailsPage()){
+				Assert.assertTrue(true);
+			}else
+				Assert.fail("Error in validating the Plan Details Page");
+		
+		}
 	}
 
 	@Then("^the user validates the available plans for selected plan types in the AARP site$")
@@ -152,4 +215,11 @@ public class VppAarpStepDefinitionUpdated {
 		}
 
 	}
+	
+/*	@After("@fixedTestCaseTest")
+	public void tearDown() {
+		WebDriver wd = (WebDriver) getLoginScenario().getBean(
+				CommonConstants.WEBDRIVER);
+		wd.quit();
+	}*/
 }
