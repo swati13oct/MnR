@@ -2,13 +2,9 @@
 Feature: To validate forms and resources page in dashboard site
 #Scenarios written for blue layer - Later will be modified to dashboard once dashboard site is set up
   Scenario Outline: 
-    Given registered member lands on forms and resources on member redesign Site
-    When member click on member sign in link
-    And the member enters userId and member enter password
-      | USER_ID  | <userId>   |
-      | PASSWORD | <password> |
-    And member click signin button and logs in
-    And open blue layer test harnesss page in a new tab
+        Given details of user to sign in on member redesign site to see forms and resources page
+          | userId   | <userId>  |
+      | password | <password> |
     And click on the forms and resource link and navigate to forms and resource page
     Then validate EOB section
       | EOB_MEDICAL_LINK | <EOBMedicalLinkVisible> |
@@ -21,11 +17,8 @@ Feature: To validate forms and resources page in dashboard site
     #Blue Layer Members
     Examples: 
       | userId           | password   | EOBMedicalLinkVisible | EOBDrugLinkVisible | MyDocumentVisible | RenewMagazineVisible |
-      | q3_sep_blayer006 | Password@1 | YES                   | YES                | YES               | YES                  |
-      | q3_sep_blayer142 | Password@1 | NO                    | YES                | YES               | YES                  |
-      | q3_sep_blayer144 | Password@1 | YES                   | NO                 | YES               | YES                  |
-      | q3_sep_grp076    | Password@1 | YES                   | YES                | YES               | YES                  |
-      | q3_sep_grp006    | Password@1 | NO                    | YES                | YES               | YES                  |
-      | q3_sep_grp162    | Password@1 | YES                   | NO                 | YES               | YES                  |
-      | q3_sep_grp157    | Password@1 | NO                    | NO                 | YES               | YES                  |
-      | q3_sep_grp425    | Password@1 | NO                    | YES                | YES               | YES                  |
+        # uhc
+      | q1_feb_uhc005 | Password@1 |  YES   | YES       | YES     | YES       |         
+   # aarp
+      | q1_feb_aarp001 | Password@1 |   YES  | YES       | YES     | YES        |               
+   
