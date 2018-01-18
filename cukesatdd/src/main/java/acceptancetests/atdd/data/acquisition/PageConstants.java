@@ -392,5 +392,8 @@ public static final String PORTFOLIO_PAGE_UHC = "ourPlans";
 	   
 	   public static final String REGISTRATION_INFORMATION_PAGE = "RegistrationInformationPage";
 	   
+	   public static final String RALLY_DASHBOARDPAGE = "RallyDashboardPage";
+	   
+	   public static final String DASHBOARD_FORMS_AND_RESOURCES_PAGE = "FormsAndResourcesPage";
 	   public static final String COMPARE_PLANS_PAGE = "comparePlansPage";
 }
