@@ -125,6 +125,9 @@ public class UNPWAssistancePage extends UhcDriver {
 
 		LastName.sendKeys(LstName);
 		ZIP.sendKeys(ZP);
+		
+		JavascriptExecutor jse = (JavascriptExecutor)driver;
+		jse.executeScript("window.scrollBy(0,70)", "");
 
 		ContinueButton.click();
 		Thread.sleep(10000);

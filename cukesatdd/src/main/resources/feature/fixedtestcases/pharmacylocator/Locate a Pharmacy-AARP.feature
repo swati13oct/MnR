@@ -20,6 +20,7 @@ Examples:
 	| 80002       | 25 miles     | Adams County      | AARP MedicareComplete SecureHorizons Plan 1 (HMO)  | MA |
 #	| 80002       | 15 miles     | Adams County      | AARP MedicareComplete SecureHorizons Plan 1 (HMO)  | MA |
 	
+@availablePharmAARP
 Scenario Outline:To verify available pharmacies in AARP site
 Given the user is on the AARP Medicare Site landing page
 When the user hovers to Our Plans and select Request More Help and Information for following plan type in AARP Site
@@ -42,6 +43,7 @@ Examples:
 	| 80002       | 15 miles     | Adams County      | AARP MedicareComplete SecureHorizons Plan 1 (HMO)  | MA |Spanish |
 #	| 90210       | 2        |      | AARP MedicareRx Preferred (PDP)                    | PDP |
 
+@pharmaciesServicesAARP
 Scenario Outline:To verify available pharmacies and Services in AARP site
 Given the user is on the AARP Medicare Site landing page
 When the user hovers to Our Plans and select Request More Help and Information for following plan type in AARP Site
@@ -64,7 +66,7 @@ Examples:
 	| zipcode     | distance  | county       |  planName 			               	  |  plantype| pharmacytype |servicetype|
 	| 80002       | 25 miles     | Adams County      | AARP MedicareComplete SecureHorizons Plan 1 (HMO)  | MA |Standard Network Pharmacy|Open 24 hours|
 
-
+@pharmaciesSelPharmacyTypesAARP
 Scenario Outline:To verify available pharmacies for particular pharmacy types in AARP site
 Given the user is on the AARP Medicare Site landing page
 When the user hovers to Our Plans and select Request More Help and Information for following plan type in AARP Site
@@ -86,6 +88,7 @@ Examples:
 #	| 80002       | 25        | Adams County      | AARP MedicareComplete SecureHorizons Plan 1 (HMO)  |  Standard Network Pharmacy,Long-term care|MA|
 #	| 90210       | 2        |       | AARP MedicareRx Preferred (PDP)                    |    Standard Network Pharmacy 				|PDP|
 
+@errorMessageNoPharamcyAARP
 Scenario Outline:To verify error message for no results found for pharmacy type in UMS site
 Given the user is on the AARP Medicare Site landing page
 When the user hovers to Our Plans and select Request More Help and Information for following plan type in AARP Site

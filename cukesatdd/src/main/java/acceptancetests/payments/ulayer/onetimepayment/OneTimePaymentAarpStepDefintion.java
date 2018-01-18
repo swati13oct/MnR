@@ -663,7 +663,7 @@ public class OneTimePaymentAarpStepDefintion {
 	
 	
 	@And("^the user navigates to One Time Payments page$")
-	public void user_navigates_to_one_time_payments()
+	public void user_navigates_to_one_time_payments() throws InterruptedException
 	{
 		AccountHomePage accountHomePage = (AccountHomePage)getLoginScenario().getBean(PageConstants.ACCOUNT_HOME_PAGE);
 		OneTimePaymentsPage oneTimePaymentsPage = accountHomePage.navigateToOneTimePaymentsPage();

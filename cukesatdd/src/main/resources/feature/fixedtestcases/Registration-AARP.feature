@@ -22,8 +22,8 @@ Examples:
 	| planMemberId | dateOfBirth | userName      		| password   | confirmPassword | email                   | confirmEmail            | availableDocs		                              |
 	| 0162832881   | 06-06-1963  | q3_sep_ulayer389		| Password@1 | Password@1      | UHCMNRPORTALS@GMAIL.COM | UHCMNRPORTALS@GMAIL.COM | Prescription Drug Explanation of Benefits (EOB) |	
 	#| 0041615931   | 02-25-1937  | ATDD_REG_ULAYER_01	| Password@1 | Password@1      | UHCMNRPORTALS@GMAIL.COM | UHCMNRPORTALS@GMAIL.COM | Prescription Drug Explanation of Benefits (EOB) |
-	
-	
+
+@verifyRegistrationShip
 Scenario Outline:To verify registration for Ship member in AARP site
 Given the user is on registration page of AARP site
 	|	User Name	|	<userName>	| 

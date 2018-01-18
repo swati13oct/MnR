@@ -271,6 +271,10 @@ public ResponsivePlanSummary searchPlans(String zipcode, String CountyName) thro
     
 //    sendkeys(element, zipcode);
 //    element.sendKeys(Keys.ENTER);
+	  Thread.sleep(10000);
+	  JavascriptExecutor jse = (JavascriptExecutor)driver;
+	  jse.executeScript("window.scrollBy(0,300)", "");
+	  Thread.sleep(2000);
     sendkeys(zipCodeField, zipcode);
     zipCodeField.sendKeys(Keys.ENTER);
     //remove thread once page is stable
