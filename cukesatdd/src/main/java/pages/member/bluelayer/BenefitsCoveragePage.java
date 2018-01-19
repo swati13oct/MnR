@@ -131,8 +131,8 @@ public class BenefitsCoveragePage extends UhcDriver {
 	}
 	public Rallytool_Page clickAndValidateProviderSearch(){
 		  // waitforElement(searchProviderButton);
-		   searchProviderButton.click();
-		   switchToNewTab();
+		   //searchProviderButton.click();
+		   switchToNewTab(searchProviderButton);
 		   if(currentUrl().contains("systest3.myuhc")){
 			   System.out.println("SSO Launched");
 			   System.out.println("--------------Page Title="+getTitle());

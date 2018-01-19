@@ -12,6 +12,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
 import atdd.framework.UhcDriver;
+import pages.dashboard.member.ulayer.RallyDashboardPage;
 
 /**
  * @author saduri
@@ -92,6 +93,7 @@ public class OneTimePaymentsPage extends UhcDriver{
 	public OneTimePaymentsPage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
+		RallyDashboardPage.checkModelPopup(driver);
 		openAndValidate();
 	}
 
@@ -111,10 +113,21 @@ public class OneTimePaymentsPage extends UhcDriver{
 	}
 
 	public ReviewOneTimePaymentsPage enterInfoAndContinue() throws InterruptedException {
-		Thread.sleep(20000);
-		Thread.sleep(1000);
-		
-		routingNumberField.sendKeys("123123000");
+
+		sendkeys(routingNumberField, "123123000");
+		sendkeys(confirmRoutingNumberField, "123123000");
+		sendkeys(accountNumberField, "1234");
+		sendkeys(confirmAccountNumberField, "1234");
+		sendkeys(firstNameField, "Test First");
+		sendkeys(lastNameField, "Test Last");
+		scrollToView(otherAmountRadio);
+		otherAmountRadio.click();
+		sendkeys(otherAmountNumber, "0.01");
+		scrollToView(electronicSignatureCheck);
+		electronicSignatureCheck.click();
+		validate(reviewContinue);
+		reviewContinue.click();
+		/*routingNumberField.sendKeys("123123000");
 		confirmRoutingNumberField.sendKeys("123123000");
 		accountNumberField.sendKeys("1234");
 		confirmAccountNumberField.sendKeys("1234");
@@ -129,7 +142,7 @@ public class OneTimePaymentsPage extends UhcDriver{
 		jse.executeScript("window.scrollBy(0,150)", "");
 		Thread.sleep(5000);
 		reviewContinue.click();
-		Thread.sleep(2000);
+		Thread.sleep(2000);*/
 		if(driver.getTitle().equalsIgnoreCase("overview") || driver.getTitle().equalsIgnoreCase("onetimepayments")){
 			return new ReviewOneTimePaymentsPage(driver);
 		}

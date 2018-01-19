@@ -44,9 +44,10 @@ public abstract class UhcDriver {
 
 	
 
-	public void switchToNewTab() {
+	public void switchToNewTab(WebElement Element) {
 		
 		int initialCount = driver.getWindowHandles().size();
+		Element.click();
 		waitForCountIncrement(initialCount);
 		ArrayList<String> tabs = new ArrayList<String>(
 				driver.getWindowHandles());

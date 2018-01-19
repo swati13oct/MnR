@@ -1,4 +1,3 @@
-@member_redesign_H&W
 Feature:Header/Navigation for Member Site Redesign
 
 @Sanity__H&W

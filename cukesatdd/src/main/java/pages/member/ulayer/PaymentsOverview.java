@@ -12,6 +12,7 @@ import org.openqa.selenium.support.ui.Select;
 
 import acceptancetests.atdd.util.CommonUtility;
 import atdd.framework.UhcDriver;
+import pages.dashboard.member.ulayer.RallyDashboardPage;
 import pages.member.bluelayer.ConfirmOneTimePaymentPage;
 
 public class PaymentsOverview extends UhcDriver{
@@ -47,6 +48,19 @@ public class PaymentsOverview extends UhcDriver{
 	@FindBy(xpath="//*[@id='paymentHistoryApp']/div[1]/div/div/div/div[3]")	              
 	private WebElement Payments_status_Error;
 	
+	@FindBy(id="paymentTable")	              
+	private WebElement PaymentsTable;
+	
+	@FindBy(xpath="//table[@id='paymentTable']/tbody/tr/th[contains(text(),'Due Date')]")	              
+	private WebElement dueDate;
+	
+	@FindBy(xpath="//table[@id='paymentTable']/tbody/tr/th[contains(text(),'Amount Paid')]")	              
+	private WebElement amountPaid;
+	
+	@FindBy(id="payment-date")	              
+	private WebElement paymentDropdown;
+	
+	
 	
 	public PaymentsOverview(WebDriver driver) {
 		super(driver);
@@ -57,6 +71,7 @@ public class PaymentsOverview extends UhcDriver{
 
 	@Override
 	public void openAndValidate() {	
+		RallyDashboardPage.checkModelPopup(driver);
 		CommonUtility.waitForPageLoad(driver, OneTimePaymentButton, 60);
 		validate(OneTimePaymentButton);
 		//validate(AutomaticPaymentButton);
@@ -75,15 +90,15 @@ public class PaymentsOverview extends UhcDriver{
 	
 	public OneTimePaymentsPage navigateToOneTimePaymentpage() throws InterruptedException
 	{
-		Thread.sleep(8000L);
-		JavascriptExecutor jse = (JavascriptExecutor)driver;
+		/*JavascriptExecutor jse = (JavascriptExecutor)driver;
 		jse.executeScript("window.scrollBy(0,100)", "");
-		Thread.sleep(15000L);
-		if(OneTimePaymentButton.isEnabled()){
+		Thread.sleep(15000L);*/
+		validate(OneTimePaymentButton);
 			OneTimePaymentButton.click();
-			System.out.println("One Time Payment button clicked");
+			CommonUtility.checkPageIsReady(driver);
+			if(driver.getCurrentUrl().contains("onetime/eft/overview.htm")){
 			return new OneTimePaymentsPage(driver);
-		}
+			}
 		return null;
 	}
 	
@@ -111,24 +126,17 @@ public class PaymentsOverview extends UhcDriver{
 		return null;
 	}
 	
-	public PaymentsOverview ScrollDownAndSelectRange() throws InterruptedException
+	public void ScrollDownAndSelectRange() throws InterruptedException
 	{
-		Thread.sleep(2000);
+		/*Thread.sleep(2000);
 		JavascriptExecutor jse = (JavascriptExecutor)driver;
 		jse.executeScript("window.scrollBy(0,400)", "");
 		System.out.println("Scrolled Down");
-		Thread.sleep(2000);
-		Select dropdown = new Select(driver.findElement(By.id("payment-date")));
-		dropdown.selectByIndex(5);
-		System.out.println("Custom Date range Selected");
-		
-		if(SearchButton.isEnabled()){
-			SearchButton.click();
-			return new PaymentsOverview(driver);
-		}
-		return null;
-	}
-	
+		Thread.sleep(2000);*/
+		scrollToView(paymentDropdown);
+		Select dropdown = new Select(paymentDropdown);
+		dropdown.selectByVisibleText("Last 24 months");
+	}	
 	
 	public PaymentsOverview UnselectPaidUnpaidCheck() throws InterruptedException
 	{
@@ -154,6 +162,15 @@ public class PaymentsOverview extends UhcDriver{
 			return new PaymentsOverview(driver);
 		}
 		return null;
+	}
+	
+	public void verifyPaymentTable()
+	{		
+		scrollToView(PaymentsTable);
+		if(PaymentsTable.isDisplayed()){
+			validate(dueDate);
+			validate(amountPaid);
+		}
 	}
 	
 }

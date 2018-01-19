@@ -38,8 +38,8 @@ public class MARightsAndResponsibilitiesPage extends GlobalWebElements {
 	public Rallytool_Page MAEnrollmentproviderclick() {
 		
 		validate(providerlink);
-		providerlink.click();
-		switchToNewTab();
+		//providerlink.click();
+		switchToNewTab(providerlink);
 		if (getTitle().equalsIgnoreCase(
 				"Enter Zip")) {
 	return new Rallytool_Page(driver);

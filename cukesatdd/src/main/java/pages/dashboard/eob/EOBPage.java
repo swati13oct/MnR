@@ -405,8 +405,8 @@ public class EOBPage extends UhcDriver{
 		validate(siteLeavingCancelButton);
 
 		//now click on proceed and validate new tab opens
-		siteLeavingProceedButton.click();
-		switchToNewTab();
+		//siteLeavingProceedButton.click();
+		switchToNewTab(siteLeavingProceedButton);
 		driver.manage().timeouts().implicitlyWait(20,TimeUnit.SECONDS);
 
 		//capture next page title

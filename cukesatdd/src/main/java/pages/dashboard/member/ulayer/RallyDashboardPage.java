@@ -13,6 +13,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import acceptancetests.atdd.data.MRConstants;
 import acceptancetests.atdd.data.PageData;
@@ -142,7 +144,7 @@ public class RallyDashboardPage extends UhcDriver{
 	@FindBy(id = "arcade-footer")
 	private WebElement footerSection;
 	
-	@FindBy(xpath = "//area[@href='javascript:clWin()'][@alt = 'no']")
+	@FindBy(xpath = "//*[@id='IPEinvL']/map/area[3]")
 	private static WebElement FeedbackModal;
 	
 	@FindBy(xpath = "//area[@href='javascript:clWin()'][@alt = 'no']")
@@ -207,7 +209,7 @@ public class RallyDashboardPage extends UhcDriver{
 
 	@Override
 	public void openAndValidate() {
-		CommonUtility.checkPageIsReady(driver);
+		//CommonUtility.checkPageIsReady(driver);
 		CommonUtility.waitForPageLoad(driver, panelHome, 60);		
 		validate(panelClaims);
 		validate(panelHome);
@@ -549,13 +551,21 @@ public static void checkModelPopup(WebDriver driver) {
 		int counter =0;
 
 		System.out.println("Initial value of conter: "+counter);
-		String ParentHandle = driver.getWindowHandle();
+		WebDriverWait wait = new WebDriverWait(driver, 15);
+		try {
+			wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//*[@id='IPEinvL']/map/area[3]")));
+		}
+		catch(Exception ex){
+			JavascriptExecutor js = (JavascriptExecutor)driver;
+			js.executeScript("arguments[0].click();", driver.findElement(By.xpath("//*[@id='IPEinvL']/map/area[3]")));
+		}
+		/*String ParentHandle = driver.getWindowHandle();
 		do{
 			
 			System.out.println("current value of conter: "+counter);
 			
-			if(driver.findElements(By.xpath("//area[@href='javascript:clWin()'][@alt = 'no']")).isEmpty()){
-				
+			//if(driver.findElements(By.xpath("//area[@href='javascript:clWin()'][@alt = 'no']")).isEmpty()){
+			if(driver.findElements(By.xpath("//*[@id='IPEinvL']/map/area[3]")).isEmpty()){
 				try {
 					Thread.sleep(5000);
 				} catch (InterruptedException e) {
@@ -565,8 +575,10 @@ public static void checkModelPopup(WebDriver driver) {
 			}
 			else{
 				System.out.println("FeedBack Modal Present and counter value is:"+counter);
-				driver.findElement(By.xpath("//area[@href='javascript:clWin()'][@alt = 'no']")).click();
-				try {
+				try {Thread.sleep(2000);
+					WebElement NoThanks = driver.findElement(By.xpath("//*[@id='IPEinvL']/map/area[3]"));
+					NoThanks.click();
+				//driver.findElement(By.xpath("//area[@href='javascript:clWin()'][@alt = 'no']")).click();				
 					Thread.sleep(5000);
 				} catch (InterruptedException e) {
 					e.printStackTrace();
@@ -575,12 +587,13 @@ public static void checkModelPopup(WebDriver driver) {
 			}
 			
 		}
-		while(counter<1);
+		while(counter<1);*/
 }
 
 public void validateSavedLink(){
 	Assert.assertTrue("Saved link is not clickable", saved.isDisplayed());
 }
+
 public EOBPage navigateToEOBPage() {
 	validate(EOB_Dashboard);
 	EOB_Dashboard.click();

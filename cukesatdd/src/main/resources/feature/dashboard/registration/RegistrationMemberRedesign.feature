@@ -1,7 +1,6 @@
 Feature: To test registration flow in redesign portal
 @Sanity_registrationRedesign
   Scenario Outline: To verify member with no additional plan is navigated to Create Account after clicking next button on Plan Information
-    #Given the member is on registration page of new portal part of redesign
     Given the member is on registration page of redesign portal
       | CREATE_ACCOUNT_USER_NAME        | <userName>        |
       | CREATE_ACCOUNT_PASSWORD         | <password>        |

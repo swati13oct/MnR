@@ -1,17 +1,4 @@
-@eob
 Feature:To test EOB on Dashboard page
-@fixed 
-Scenario Outline: Allowed Domains – Authors need ability to define messages and domains for leaving member sites (ATDD)
-Given registered AMP with for EOB flow
-	| Plan Type      |<planType>  |
-	| Member Type    |<memberType>|
-Then the user navigates to EOB page 
-Then the user validates site leaving pop up         
-Examples:
-       | planType  | memberType        |  
-       | MAPD      | q4_dec_uhc002   	 | 
-       | PDP			 | q4_dec_aarp292		 |
-       | MA				 | q4_dec_aarp507	   |   
 
 @Sanity_EOB 
 Scenario Outline: Allowed Domains – Authors need ability to define messages and domains for leaving member sites (ATDD)
@@ -35,8 +22,22 @@ Examples:
 	| MAPD      | AARPIndividualEOB    |18 Months		  | Medical 		  | 
 	| MAPD      | AARPIndividualEOB    |18 Months		  | Prescription Drug | 
 	| MAPD      | GroupRetireeEOB      |18 Months		  | Medical           | 
-	| MAPD      | GroupRetireeEOB      |18 Months		  | Prescription Drug | 
+	#| MAPD      | GroupRetireeEOB      |18 Months		  | Prescription Drug | 
  
+@fixed 
+Scenario Outline: Allowed Domains – Authors need ability to define messages and domains for leaving member sites (ATDD)
+Given registered AMP with for EOB flow
+	| Plan Type      |<planType>  |
+	| Member Type    |<memberType>|
+Then the user navigates to EOB page 
+Then the user validates site leaving pop up         
+Examples:
+       | planType  | memberType        |  
+       | MAPD      | q4_dec_uhc002   	 | 
+       | PDP			 | q4_dec_aarp292		 |
+       | MA				 | q4_dec_aarp507	   |   
+
+
 
 #@eobPdf        @workingFine
 #Scenario Outline: To verify How to read your medical EOB

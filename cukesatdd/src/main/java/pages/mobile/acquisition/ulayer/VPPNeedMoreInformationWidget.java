@@ -48,9 +48,9 @@ public class VPPNeedMoreInformationWidget extends UhcDriver{
 			}
 			if(chooseAVideoLink.isDisplayed()){
 				System.out.println("choose a videos link displayed");
-				chooseAVideoLink.click();
+				//chooseAVideoLink.click();
 				//validate that page name in new tab
-				switchToNewTab();
+				switchToNewTab(chooseAVideoLink);
 				if(driver.getTitle().equalsIgnoreCase("UnitedHealthcare Medicare Plans Video Guide")){
   					Assert.assertTrue("---------------video page displayed successfully---------",true);
 				}else{

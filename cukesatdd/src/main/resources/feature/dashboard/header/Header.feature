@@ -18,7 +18,7 @@ Then upon clicking the Premium Payments tab I should navigate to the Premium Pay
 Then I should be able to see and use the help button
 Then I should be able to see and use the Account/Profile dropdown and its options
 Then I should be able to see and use Health and Wellness page
-And I am on the member page then I should be able to see the footer sections 
+#And I am on the member page then I should be able to see the footer sections 
 And Member Support and links under it should be displayed
 And Quick links and links under it should be displayed
 And I have access to the Rally Provider Search Tool and I see the Saved option under Quick Links
@@ -27,7 +27,7 @@ Examples:
 |   memberType  	   |
 |  UhcMapdInd |
 |  AARPMapdInd |
-|  GroupRetireeMapd |
+|  GroupRetireePayment |
 
  
  

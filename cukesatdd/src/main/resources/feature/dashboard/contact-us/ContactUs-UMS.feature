@@ -1,5 +1,37 @@
-@velocityDashers
 Feature: To test Send us a question Widget and Click to call functionality in contact us redesign pages in UHCM site
+
+ @Sanity_contactusInd
+  Scenario Outline: Verify Send us a question Widget section in contact us redesign page
+    Given registered UMS member with following attributes
+      | UserName    | <userName>   |
+      | Password    | <password>   |
+      | Member Type | <memberType> |
+    When the user navigates to contact us page in UHC site
+    Then user validates secure email widget UI in redesign contact us page
+    Then user validates clickToCallButton display on contactUS redesign page
+ 	And user clicks on Request Confirmation Click
+    
+     Examples: 
+      | userName        |  | password   | memberType |
+       | q1_feb_uhc002 |  | Password@1 | UHC      |
+        | q1_aarp_feb015 |  | Password@1 | AARP      |
+        
+        
+ @Sanity_contactusGrp
+  Scenario Outline: Verify Send us a question Widget section in contact us redesign page
+    Given registered UMS member with following attributes
+      | UserName    | <userName>   |
+      | Password    | <password>   |
+      | Member Type | <memberType> |
+    When the user navigates to contact us page in UHC site
+    Then user validates Group secure email widget  in redesign contact us page
+    Then user validates clickToCallButton display on contactUS redesign page
+ 	And user clicks on Request Confirmation Click
+    
+     Examples: 
+      | userName        |  | password   | memberType |
+      | q1_grp_feb108 |  | Password@1 | Group      |
+
 
   #US634975
   Scenario Outline: Verify Send us a question Widget section in contact us redesign page
@@ -343,37 +375,5 @@ Feature: To test Send us a question Widget and Click to call functionality in co
       #| userName       |  | password   | memberType |
       #| q4_dec_combo024 |  | Password@1 | Federal    |
       
-  @Sanity_contactusInd
-  Scenario Outline: Verify Send us a question Widget section in contact us redesign page
-    Given registered UMS member with following attributes
-      | UserName    | <userName>   |
-      | Password    | <password>   |
-      | Member Type | <memberType> |
-    When the user navigates to contact us page in UHC site
-    Then user validates secure email widget UI in redesign contact us page
-    Then user validates clickToCallButton display on contactUS redesign page
- 	And user clicks on Request Confirmation Click
-    
-     Examples: 
-      | userName        |  | password   | memberType |
-      #| q4_dec_grp108 |  | Password@1 | Group      |
-       | q1_feb_uhc002 |  | Password@1 | UHC      |
-        | q4_dec_aarp015 |  | Password@1 | AARP      |
-        
-        
- @Sanity_contactusGrp
-  Scenario Outline: Verify Send us a question Widget section in contact us redesign page
-    Given registered UMS member with following attributes
-      | UserName    | <userName>   |
-      | Password    | <password>   |
-      | Member Type | <memberType> |
-    When the user navigates to contact us page in UHC site
-    Then user validates Group secure email widget  in redesign contact us page
-    Then user validates clickToCallButton display on contactUS redesign page
- 	And user clicks on Request Confirmation Click
-    
-     Examples: 
-      | userName        |  | password   | memberType |
-      | q4_dec_grp108 |  | Password@1 | Group      |
-
+ 
         

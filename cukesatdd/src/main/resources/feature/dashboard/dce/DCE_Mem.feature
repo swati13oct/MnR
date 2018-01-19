@@ -1,7 +1,31 @@
-@memRedsignVBF
-@drug_cost_estimator
 Feature:Drug Cost Estimator
 
+@Sanity_DceMem
+Scenario Outline: To Verify MR portal members using DCE on a desktop device, I want to be able to switch from branded to generic drug, given that a pharmacy is selected and it suggests the user with an appropriate save money message and cost savings are also updated
+Given I am a registered member using the new M&R member portal on a desktop computer
+| Plan Type   | <planType>   |
+| Member Type	  | <memberType> |
+When the above plantype user logs in UMS Site Desktop
+And I access the page containing the DCE tool
+And I have added a drug to my drug list and a generic equivalent is available for the drug I have selected
+ 	| Drug | <drug> |
+Then I should be presented the option to switch to the generic option
+And I navigate to step2 page
+Then I should see preferred mail service radio button under pharmacy type 
+And I enter a US other territory zip code and click select
+| USOTZipcode | <USOTZipcode> |
+Then I should see preferred mail service radio button under pharmacy type
+And I select first pharmacy from standard network pharmacy type
+And I navigate to step3 page
+Then I should see that total estimated annual drug costs in summary section matches with left rail value
+| totalAnnualDrugCost | <totalAnnualDrugCost> |
+
+Examples:
+ | planType| memberType| drug |USOTZipcode|totalAnnualDrugCost|
+ | MAPD|IndividualDCEmember|lipitor|90002|$4,050.24|
+ 
+ 
+ 
 #@467875
 @drug_cost_estimator1
 Scenario Outline: To Verify MR portal members using DCE on a desktop device will be able to edit drugs
@@ -145,29 +169,5 @@ And any cost savings will be applied to my total cost savings in Step3
 Examples:
  | planType| memberType| drug |
  | MAPD|IndividualDCEmember|lipitor|
- 
- @Sanity_DceMem
-Scenario Outline: To Verify MR portal members using DCE on a desktop device, I want to be able to switch from branded to generic drug, given that a pharmacy is selected and it suggests the user with an appropriate save money message and cost savings are also updated
-Given I am a registered member using the new M&R member portal on a desktop computer
-| Plan Type   | <planType>   |
-| Member Type	  | <memberType> |
-When the above plantype user logs in UMS Site Desktop
-And I access the page containing the DCE tool
-And I have added a drug to my drug list and a generic equivalent is available for the drug I have selected
- 	| Drug | <drug> |
-Then I should be presented the option to switch to the generic option
-And I navigate to step2 page
-Then I should see preferred mail service radio button under pharmacy type 
-And I enter a US other territory zip code and click select
-| USOTZipcode | <USOTZipcode> |
-Then I should see preferred mail service radio button under pharmacy type
-And I select first pharmacy from standard network pharmacy type
-And I navigate to step3 page
-Then I should see that total estimated annual drug costs in summary section matches with left rail value
-| totalAnnualDrugCost | <totalAnnualDrugCost> |
-
-Examples:
- | planType| memberType| drug |USOTZipcode|totalAnnualDrugCost|
- | MAPD|IndividualDCEmember|lipitor|90002|$4,050.24|
  
  

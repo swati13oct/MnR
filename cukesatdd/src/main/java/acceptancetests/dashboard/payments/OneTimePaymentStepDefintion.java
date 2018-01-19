@@ -1,4 +1,4 @@
-package acceptancetests.payments.ulayer;
+package acceptancetests.dashboard.payments;
 
 import gherkin.formatter.model.DataTableRow;
 
@@ -47,7 +47,7 @@ import cucumber.api.DataTable;
  * @author pperugu
  *
  */
-public class OneTimePaymentAarpStepDefintion {
+public class OneTimePaymentStepDefintion {
 
 	@Autowired
 	MRScenario loginScenario;
@@ -881,8 +881,8 @@ public class OneTimePaymentAarpStepDefintion {
 		OneTimePaymentPage reviewOneTimePaymentsPage = oneTimePaymentsPage.onetimepagecancelbtn();
 	}
 	
-	@And("^the user navigates to Rally Dashboard Page$")
-	public void user_navigates_to_RallyDashboardPage_Page() throws InterruptedException
+	@And("^the user navigates Premium Payment from Rally Dashboard Page$")
+	public void user_navigates_to_premium_payment_from_RallyDashboardPage_Page() throws InterruptedException
 	{
 		RallyDashboardPage rallyDashboardPage = (RallyDashboardPage)getLoginScenario().getBean(PageConstants.RALLY_DASHBOARD_PAGE);
 
@@ -922,7 +922,7 @@ public class OneTimePaymentAarpStepDefintion {
 		System.out.println("desiredAttributes.." + desiredAttributes);
 
 		Map<String,String> loginCreds = loginScenario
-				.getAMPMemberWithDesiredAttributes(desiredAttributes);
+				.getUMSMemberWithDesiredAttributes(desiredAttributes);
 		
 		String userName = null;
 		String pwd = null;
@@ -966,5 +966,12 @@ public class OneTimePaymentAarpStepDefintion {
 
 	}
 	
-	
+	@And("^User validates Premium Payment table$")
+	public void user_validates_premium_payment_tale() throws InterruptedException
+	{
+		PaymentsOverview paymentsOverview = (PaymentsOverview)getLoginScenario().getBean(PageConstants.PAYMENT_OVERVIEW);
+
+		paymentsOverview.ScrollDownAndSelectRange();
+		paymentsOverview.verifyPaymentTable();		
+	}
 }

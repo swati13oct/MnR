@@ -112,7 +112,7 @@ public class TeamHLoginUlayer extends UhcDriver{
 			if(driver.getTitle().contains("Internal Error") || driver.getTitle().contains("Sign In"))
 				return null;
 		}
-		while(!(driver.getTitle().contains("Home")));
+		while((driver.getTitle().contains("Home")));
 				
 		
 		System.out.println("Current URL: "+currentUrl());

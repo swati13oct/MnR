@@ -1,5 +1,38 @@
-@profileandpreferences
 Feature: To test My Profile & Preferences flow in UMS site
+
+@Sanity_ProfileAndPreference
+  Scenario Outline: To verify Plan Name, Member name, Member ID and account section in UMS site
+    Given registered member with following details for Profile and Preferences flow
+      | <planType> |
+    And the user navigates to Rally Dashboard Page
+    Then the user validates the Plan Name, Member name, Member ID and account section in UMS site
+
+    Examples: 
+         | planType|
+         | GroupRetireeMapd|
+       	 | UhcMapdInd     |
+         | AARPMapdInd       |
+
+ 
+  @Sanity_GoGreen
+    Scenario Outline: To verify Go Green page
+    Given registered member with following details for Profile and Preferences flow
+      | <planType> |
+    And the user navigates to Rally Dashboard Page
+    And the user clicks on Edit Preferences
+    Then the user validates the presence of Plan Name
+    Then the user validates the presence of Communication preferences header
+    Then the user validates the presence of Back to Profile and Preferences links
+    Then the user validates the Note section
+    Then the user validates the I have read checkbox and check it
+    Then the user validates the Save Preferences Button
+    Then the user validates the Go Green Header
+    
+     Examples: 
+      | planType |
+   	  | GroupRetireeMapd|
+      | UhcMapdInd     |
+      | AARPMapdInd       |
 
   Scenario Outline: To verify My Profiles in UMS site
     Given registered member for My Profile & Preferences in UMS site
@@ -365,37 +398,4 @@ Feature: To test My Profile & Preferences flow in UMS site
       |GroupMA |
       |GroupPDP|
       
-  @Sanity_ProfileAndPreference
-  Scenario Outline: To verify Plan Name, Member name, Member ID and account section in UMS site
-    Given registered member with following details for Profile and Preferences flow
-      | <planType> |
-    And the user navigates to Rally Dashboard Page
-    Then the user validates the Plan Name, Member name, Member ID and account section in UMS site
-
-    Examples: 
-         | planType|
-        # | GroupRetireeMapd|
-       #| UhcMapdInd     |
-         | AARPMapdInd       |
-
- 
-  @Sanity_GoGreen
-    Scenario Outline: To verify Go Green page
-    Given registered member with following details for Profile and Preferences flow
-      | <planType> |
-    And the user navigates to Rally Dashboard Page
-    And the user clicks on Edit Preferences
-    Then the user validates the presence of Plan Name
-    Then the user validates the presence of Communication preferences header
-    Then the user validates the presence of Back to Profile and Preferences links
-    Then the user validates the Note section
-    Then the user validates the I have read checkbox and check it
-    Then the user validates the Save Preferences Button
-    Then the user validates the Go Green Header
-    
-     Examples: 
-      | planType |
-   | GroupRetireeMapd|
-       | UhcMapdInd     |
-         | AARPMapdInd       |
-
+  

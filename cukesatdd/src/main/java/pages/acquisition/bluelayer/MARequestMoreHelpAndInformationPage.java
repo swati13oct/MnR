@@ -35,9 +35,9 @@ public class MARequestMoreHelpAndInformationPage extends UhcDriver {
 		
 		validate(MArequestmorehelpandinformationpageproviderlink);
 		
-		MArequestmorehelpandinformationpageproviderlink.click();
+		//MArequestmorehelpandinformationpageproviderlink.click();
 		
-		switchToNewTab();
+		switchToNewTab(MArequestmorehelpandinformationpageproviderlink);
 		
 		if (getTitle().equalsIgnoreCase(
 				"Enter Zip")) {

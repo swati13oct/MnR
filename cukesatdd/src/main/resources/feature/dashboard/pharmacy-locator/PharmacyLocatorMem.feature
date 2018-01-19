@@ -14,7 +14,6 @@ Then the user validate more information content based on plan type in Redesign S
 
 Examples:
 	| planType | memberType | distance |
-	#| PDP      | Individual  |  25       |
 	| MAPD	   | UhcIndOrderPlan  |   25      |
 	| MAPD	   | AARPIndOrderPlan  |   25      |
 	| MAPD	   | GrpRetireeOrderPlan  |   25      |

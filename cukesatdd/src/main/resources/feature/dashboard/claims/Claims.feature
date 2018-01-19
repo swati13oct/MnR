@@ -1,5 +1,36 @@
 Feature: To validate the new changes related to claims page on the member redesigned site
 
+ @Sanity_Claims
+Scenario Outline: To validate the claims present for the Federal member on claims sumamry page for AARP site
+    Given I am an AARP member on the redesigned site
+      | Plan Type      | <planType>     |
+      | Test Data Type | <claimssystem> |
+       | Member Type | <membertype> |
+    When I navigate to the claims Summary page in redesigned site
+    And the user search claims for the following claim period in AARP site
+      | Plan Type    | <planType>    |
+      | Claim Period | <claimPeriod> |
+    #And the user search claims for the following time interval in redesigned site
+    #| Claims To Date   | <claimToDate>   |
+    #| Claims From Date | <claimFromDate>  |
+    Then user validates the claims displayed based on the selection in redesigned site
+    And the user validates the EOB section based on domain in redesigned site
+      | Domain | <domain> |
+    And the user validates the DownloadMyData section in redesigned site
+    And I navigate to the Claim Details page in AARP site
+    Then I validate the Claims Table in claims details page in AARP site
+    And I validate the Claims Total in claims details page in AARP site
+
+    Examples: 
+ 	 | membertype 	 | planType | claimPeriod    | domain | claimssystem |
+     |  BlueLayerInd | MAPD     | Last 24 Months | COSMOS | COSMOSCLAIMS |
+     |  BlueLayerInd | MAPD     | Last 24 Months | NICE   | NICECLAIMS   |
+     |  ULayerInd 	 | MAPD     | Last 24 Months | COSMOS | COSMOSCLAIMS |
+     |  ULayerInd	 | MAPD     | Last 24 Months | NICE   | NICECLAIMS   |
+     |  GroupRetiree | MAPD     | Last 24 Months | COSMOS | COSMOSCLAIMS |
+     |  GroupRetiree | MAPD     | Last 24 Months | NICE   | NICECLAIMS   |
+     
+
   @claimsHeader
   Scenario Outline: To Verify Claims Page Header for
     Given I am an AARP member on the redesigned site
@@ -253,32 +284,4 @@ Feature: To validate the new changes related to claims page on the member redesi
       | planType | claimPeriod   | claimToDate | claimFromDate |
       | MAPD     | Custom Search | 10/10/2017  | 10/11/2017    |
 
-      @Sanity_Claims
-Scenario Outline: To validate the claims present for the Federal member on claims sumamry page for AARP site
-    Given I am an AARP member on the redesigned site
-      | Plan Type      | <planType>     |
-      | Test Data Type | <claimssystem> |
-       | Member Type | <membertype> |
-    When I navigate to the claims Summary page in redesigned site
-    And the user search claims for the following claim period in AARP site
-      | Plan Type    | <planType>    |
-      | Claim Period | <claimPeriod> |
-    #And the user search claims for the following time interval in redesigned site
-    #| Claims To Date   | <claimToDate>   |
-    #| Claims From Date | <claimFromDate>  |
-    Then user validates the claims displayed based on the selection in redesigned site
-    And the user validates the EOB section based on domain in redesigned site
-      | Domain | <domain> |
-    And the user validates the DownloadMyData section in redesigned site
-    And I navigate to the Claim Details page in AARP site
-    Then I validate the Claims Table in claims details page in AARP site
-    And I validate the Claims Total in claims details page in AARP site
-
-    Examples: 
- 	 | membertype 	 | planType | claimPeriod    | domain | claimssystem |
-     |  BlueLayerInd | MAPD     | Last 24 Months | COSMOS | COSMOSCLAIMS |
-     |  BlueLayerInd | MAPD     | Last 24 Months | NICE   | NICECLAIMS   |
-     |  ULayerInd 	 | MAPD     | Last 24 Months | COSMOS | COSMOSCLAIMS |
-     |  ULayerInd	 | MAPD     | Last 24 Months | NICE   | NICECLAIMS   |
-     |  GroupRetiree | MAPD     | Last 24 Months | COSMOS | COSMOSCLAIMS |
-     |  GroupRetiree | MAPD     | Last 24 Months | NICE   | NICECLAIMS   |
+     

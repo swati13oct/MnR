@@ -32,8 +32,8 @@ public class Rallytool_Page extends UhcDriver{
  		  userName.sendKeys("claimletter007");
 		  password.sendKeys("test2day");
 		  login.click();
-		  findDoctor.click();
-		  switchToNewTab();
+		  //findDoctor.click();
+		  switchToNewTab(findDoctor);
 		  if(currentUrl().contains("werally.in")){
 			  System.out.println("Rally Tool Launched Succesfully");
 		  }else{

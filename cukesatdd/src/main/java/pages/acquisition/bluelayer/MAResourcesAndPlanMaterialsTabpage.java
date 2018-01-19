@@ -35,9 +35,9 @@ public class MAResourcesAndPlanMaterialsTabpage extends UhcDriver {
 	public Rallytool_Page marequestmorehelpandinformationpageclick() {
 		validate(marequestmorehelpandinformationpageproviderlink);
 		
-		marequestmorehelpandinformationpageproviderlink.click();
+		//marequestmorehelpandinformationpageproviderlink.click();
 		
-	switchToNewTab();
+	switchToNewTab(marequestmorehelpandinformationpageproviderlink);
 		
 		if (getTitle().equalsIgnoreCase(
 				"Enter Zip")) {

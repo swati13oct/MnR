@@ -8,9 +8,9 @@ import cucumber.api.CucumberOptions;
 
 @RunWith(ExtendedCucumber.class)
 @ExtendedCucumberOptions(screenShotSize="", screenShotLocation="/screenshots/",jsonReport = "target/cucumber.json",detailedReport = true, detailedAggregatedReport = true, overviewReport = true, toPDF = true, outputFolder = "target")
-@CucumberOptions(glue = { "atdd.framework", "acceptancetests.payments.ulayer" }, features = { "src/main/resources/feature/Sanity" }, plugin = {
+@CucumberOptions(glue = { "atdd.framework", "acceptancetests.dashboard.payments" }, features = { "src/main/resources/feature/dashboard/payment" }, plugin = {
 		"pretty", "html:reports/test-report", "json:target/cucumber.json" }, tags = { "@Sanity_rallyDash" })
 
-public class RunMRAtddPaymentsSanity {
+public class SanityRunRedesignPayments {
 
 }

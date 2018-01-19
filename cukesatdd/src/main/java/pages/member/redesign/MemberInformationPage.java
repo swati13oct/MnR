@@ -39,8 +39,8 @@ public class MemberInformationPage extends UhcDriver {
 		WebDriverWait wait = new WebDriverWait(driver,120);
 		wait.until(ExpectedConditions.visibilityOf(btnLoginAsMember));
 		scrollToView(btnLoginAsMember);
-		btnLoginAsMember.click();
-		switchToNewTab();
+		//btnLoginAsMember.click();
+		switchToNewTab(btnLoginAsMember);
 		try {
 			Thread.sleep(30000);
 		} catch (InterruptedException e) {
