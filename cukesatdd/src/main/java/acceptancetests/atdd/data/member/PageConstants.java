@@ -11,6 +11,23 @@ public class PageConstants {
 
 	public static final String ACCOUNT_HOME_PAGE = "accountHomePage";
 
+
+	public static final String TEST_HARNESS_PAGE = "testHarnessPage";
+	
+	public static final String GO_GREEN_SPLASH_PAGE = "gogreensplashpage";
+	
+	public static final String PREFERENCES_PAGE = "preferencespage";
+	
+	public static final String PROFILEANDPREFERENCES_PAGE = "Profile&preferencespage";
+	
+	public static final String MEMBER_AUTHS_SEARCH_PAGE = "memberSearchPage";
+	
+	public static final String MEMBER_AUTH_INFORMATION_PAGE = "memberInformationPage";
+	
+	public static final String NEW_REGISTRATION_PAGE = "newRegistrationPage";
+
+	public static final String TIMESTAMP = "TimeStamp";
+	
 	public static final String PLAN_CONFIRMATION_PAGE = "planConfirmationPage";
 
 	public static final String CREATE_ACCOUNT_PAGE = "createAccountPage";
@@ -159,7 +176,7 @@ public class PageConstants {
 
 	public static final String AUTOMATIC_PAYMENTS_DASHBOARD = "automaticPaymentsPageDashboard";
 	
-	public static final String TEST_HARNESS_PAGE = "testHarnessPage";
+
 
 	public static final String PAYMENT_OVERVIEW = "PaymentOverview";
 
@@ -175,7 +192,7 @@ public class PageConstants {
 	
 	public static final String PAYMENT_TYPE = "PaymentType";
 	
-	public static final String TIMESTAMP = "TimeStamp";
+
 	
 	public static final String PAYMENT_AMOUNT = "PaymentAmount";
 	
@@ -183,19 +200,12 @@ public class PageConstants {
 	
 	public static final String USERNAME_PASSWORD_ASSISTANCE_PAGE = "usernamePasswordAssistancePage";
 	
-	public static final String NEW_REGISTRATION_PAGE = "newRegistrationPage";
+
 	
 	public static final String DRUG_COST_ESTIMATOR_PAGE = "drugcostestimatorPage";
 	
 	public static final String MEM_REDESIGN_ACCOUNT_HOME_PAGE = "memberRedesignAccountHomePage";
 	
-	public static final String MEMBER_AUTHS_SEARCH_PAGE = "memberSearchPage";
-	
-	public static final String MEMBER_AUTH_INFORMATION_PAGE = "memberInformationPage";
-	
-	public static final String PREFERENCES_PAGE = "preferencespage";
-
-	 public static final String GO_GREEN_SPLASH_PAGE = "gogreensplashpage";
 	 
 	 public static final String PROFILE_AND_PREFERENCES_PAGE = "ProfileandPreferencesPage";
 

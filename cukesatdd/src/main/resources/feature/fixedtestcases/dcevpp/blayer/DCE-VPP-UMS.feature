@@ -1,5 +1,6 @@
 @fixedTestCaseDCEVPP
 Feature: To test DCE to VPP plan Summary flow  in UMS site
+@dcevppnonaep
 Scenario Outline: To Verify the drugs and plan summary for non AEP period
 Given the user is on the UHC medicare solutions site landing page
 When the user performs drug search using the following information in UMS site
@@ -36,13 +37,13 @@ When the user views plans of the below plan type in UMS site
 Then the user validates the available plans for selected plan types in UMS site
 And the user validates the plan summary for the below plan in UMS site
 	| Plan Name | <planName> |
-
 Examples:
 	| zipcode | county              | drugInitials	| drugName      |  drugDosage	      | quantity	| drugFrequency  | packages | genericAvailable	| brand/generic					| pharmacyType				| distance	| pharmacyName			| plantype	| planName						|
 	| 90210   |  Los Angeles County	| lipi		|  Lipitor      |  Lipitor TAB 20MG   |   40		| Every 3 months | null     |	yes		| Lipitor TAB 20MG (Qty 40 Every 3 Months)	| Standard Network Pharmacy 		| 15 miles	|  Horton And Converse Pharmacy	| MAPD		| AARP MedicareComplete SecureHorizons Plan 2 (HMO)	|
 	| 80002   |  Adams County       | lipi		|  Lipitor      |  Lipitor TAB 20MG   |   40		| Every 3 months | null     |	yes		| Lipitor TAB 20MG (Qty 40 Every 3 Months)	| Standard Network Pharmacy 		| 15 miles	|  Costco Pharmacy		| MAPD		| AARP MedicareComplete SecureHorizons Plan 2 (HMO)	| 
 
  
+@dcevppaep
 Scenario Outline: To Verify the drugs and plan summary for AEP period 
 Given the user is on the UHC medicare solutions site landing page
 When the user performs drug search using the following information in UMS site
@@ -80,13 +81,13 @@ When the user views plans of the below plan type in UMS site
 Then the user validates the available plans for selected plan types in UMS site
 And the user validates the plan summary for the below plan in UMS site
 	| Plan Name | <planName> |
-
 Examples:
 	| Zipcode | county              | drugInitials| drugName      |  drugDosage	      | drugQuantity | drugFrequency | packages | brand/generic                   | pharmacyType	 	 		  | distance   | pharmacyName        		| planName 					                           | planYear |
 #	| 90210   |  Los Angeles County	| lipi	    |  Lipitor      |  Lipitor TAB 10MG   |    30        | Every 1 month | null     | Lipitor TAB 10MG         | Standard Network Pharmacy 	 | 15 miles	       |  CVS PHARMACY  		        | AARP MedicareComplete SecureHorizons Plan 2 (HMO)    | 2015     |
 #	| 80002   |  Adams County       | lipi	    |  Lipitor      |  Lipitor TAB 10MG   |    30        | Every 1 month | null     | Lipitor TAB 10MG         | Standard Network Pharmacy 	 | 15 miles	       |  COSTCO PHARMACY 676 		    | AARP MedicareRx Preferred (PDP)    				   | 2015     | 
 
 
+@dceVppnonAepDrugPlanDetails
 Scenario Outline: To Verify the drugs and plan details for non AEP period 
 Given the user is on the UHC medicare solutions site landing page
 When the user performs drug search using the following information in UMS site
@@ -125,11 +126,11 @@ And the user validates the plan summary for the below plan in UMS site
 	| Plan Name | <planName> |
 When the user view plan details of the above selected plan in UMS site
 Then the user validates the details of the selected plan in UMS site
-
 Examples:
 	| zipcode | county              | drugInitials	| drugName      |  drugDosage	      | quantity	| drugFrequency		| packages | genericAvailable	| brand/generic					| pharmacyType				| distance	| pharmacyName			| plantype	| planName						|
 	| 80002   |  Adams County       | lipi		|  Lipitor      |  Lipitor TAB 20MG   |   40		| Every 3 months	| null     |	yes		| Lipitor TAB 20MG (Qty 40 Every 3 Months)	| Standard Network Pharmacy 		| 15 miles	| Costco Pharmacy		| MAPD		| AARP MedicareComplete SecureHorizons Plan 2 (HMO)	| 
 	
+@dceGenericFlowDrugsPharmacy
 Scenario Outline: To Verify the drugs and pharmacy model for new generic flow
 Given the user is on the UHC medicare solutions site landing page
 When the user performs drug search using the following information in UMS site
@@ -165,6 +166,7 @@ Examples:
 	| zipcode | county              | drugInitials	| drugName      |  drugDosage	      | quantity	| drugFrequency  | packages | genericAvailable	| brand/generic					| pharmacyType				| distance	| pharmacyName			| 
 	| 80002   | Adams County       | lipi		|  Lipitor      |  Lipitor TAB 20MG   |   40		| Every 3 months | null     |	yes		| Lipitor TAB 20MG (Qty 40 Every 3 Months)	| Standard Network Pharmacy 		| 15 miles	|  Costco Pharmacy		| 
 	
+@dcevppDrugListPlanCost
 Scenario Outline: To Verify the drug list and plan cost sections in View Plan Details page 
 Given the user is on the UHC medicare solutions site landing page
 When the user performs drug search using the following information in UMS site
@@ -194,9 +196,6 @@ And the user selects the plan in UMS site
 Then the user view plan details of the selected plan in UMS site
 	| Plan Name    | <planName> |
 	|Error Message | <errorMessage> |
-
-
-
 Examples:
 	| zipcode | county             | drugInitials | drugName      |  drugDosage	    | packages | quantity | drugFrequency  | genericAvailable | brand/generic                            | pharmacyType	 	 | distance   |  pharmacyName               | plantype |planYear| planName 					                       |errorMessage                                                                                                                                   |
 #	| 76270   | Montague County    | lipi	      |  Lipitor      |  Lipitor TAB 20MG   | null     | 40       | Every 3 months | yes              | Lipitor TAB 20MG (Qty 40 Every 3 Months) | Available Pharmacies  | 25 miles   |  CVS Pharmacy               | PDP      | 2016   |AARP MedicareRx Preferred (PDP)                    |The pharmacy selected is not part of this plan's pharmacy network. Please edit your current pharmacy to estimate your drug costs for this plan.|

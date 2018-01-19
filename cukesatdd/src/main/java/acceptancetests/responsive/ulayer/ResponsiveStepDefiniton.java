@@ -25,6 +25,8 @@ import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import gherkin.formatter.model.DataTableRow;
 import pages.acquisition.bluelayer.PlanComparePage;
+
+import pages.acquisition.bluelayer.VASPage;
 import pages.acquisition.ulayer.AddDrugPage;
 import pages.acquisition.ulayer.GetStartedPage;
 import pages.acquisition.ulayer.ManageDrugPage;
@@ -77,7 +79,7 @@ public class ResponsiveStepDefiniton {
             String county = memberAttributesMap.get("County");
             getLoginScenario().saveBean(VPPCommonConstants.COUNTY, county);
             PortfolioPage portfolioPage = (PortfolioPage) getLoginScenario()
-                            .getBean(PageConstants.PORTFOLIO_PAGE);
+                            .getBean(PageConstants. PORTFOLIO_PAGE);
             ResponsivePlanSummary vppPlan = portfolioPage.searchPlans(zipcode, county);
             if(vppPlan!=null){
                     getLoginScenario().saveBean(PageConstants.RESPONSIVE_PLAN_SUMMARY_PAGE, vppPlan);
@@ -828,8 +830,7 @@ public class ResponsiveStepDefiniton {
             	public void user_search_pharmacies(){
             		ManageDrugPage manageDrugPage = (ManageDrugPage) getLoginScenario()
             				.getBean(PageConstants.MANAGE_DRUG_PAGE);
-            		pages.member.bluelayer.SelectPharmacyPage selectPharmacyPage = manageDrugPage
-            				.navigateToPharmacyPage();
+            		pages.member.bluelayer.SelectPharmacyPage selectPharmacyPage = manageDrugPage.navigateToPharmacyPage();
             		if (selectPharmacyPage != null) {
             			getLoginScenario().saveBean(PageConstants.PHARMACY_SEARCH_PAGE,
             					selectPharmacyPage);

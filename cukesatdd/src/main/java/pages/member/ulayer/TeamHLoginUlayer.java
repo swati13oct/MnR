@@ -69,7 +69,8 @@ public class TeamHLoginUlayer extends UhcDriver{
 				alert2.accept();
 			}*/
 		          
-		Thread.sleep(20000);
+		Thread.sleep(30000);
+		System.out.println("30 secondss completed");
 		if(currentUrl().contains("/dashboard"))
 
 		{
@@ -87,7 +88,7 @@ public class TeamHLoginUlayer extends UhcDriver{
 	@Override
 	public void openAndValidate() {
 		start(PAGE_URL);
-		validate(loginIn);
+		//validate(loginIn);
 
 	}
 

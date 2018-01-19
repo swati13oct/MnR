@@ -43,7 +43,7 @@ public class OneTimePaymentPageSubmitted extends UhcDriver{
 	public OneTimePaymentPageSubmitted(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);		
-		openAndValidate();
+		//openAndValidate();
 	}	
 
 	@Override

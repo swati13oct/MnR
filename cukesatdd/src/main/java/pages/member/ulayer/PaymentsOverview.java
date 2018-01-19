@@ -15,7 +15,7 @@ import pages.member.bluelayer.ConfirmOneTimePaymentPage;
 
 public class PaymentsOverview extends UhcDriver{
 
-	@FindBy(xpath="//div[@class='margin-small']//a[@id='onetimepayment']")
+	@FindBy(xpath="(//div[@class='margin-small']//a[@id='onetimepayment'])[2]")
 	private WebElement OneTimePaymentButton;
 	
 	@FindBy(xpath = "//div[@id='paymentOverviewApp']//span[@class='payment-method-btn'][2]/a")
@@ -55,7 +55,7 @@ public class PaymentsOverview extends UhcDriver{
 	public PaymentsOverview(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
-		openAndValidate();
+		//openAndValidate();
 	}
 	
 
@@ -65,31 +65,32 @@ public class PaymentsOverview extends UhcDriver{
 		validate(AutomaticPaymentButton);
 	}	
 	
-	public AutomaticPaymentsPage navigateToAutomaticPaymentpage() throws InterruptedException
+	public OneTimePaymentsPage navigateToComboTabPaymentpage() throws InterruptedException
 	{
-		Thread.sleep(5000);
+		Thread.sleep(8000);
+		
 		if(AutomaticPaymentButton.isEnabled()){
 			AutomaticPaymentButton.click();
-			return new AutomaticPaymentsPage(driver);
+			return new OneTimePaymentsPage(driver);
 		}
 		return null;
 	}
 	
 	public OneTimePaymentsPage navigateToOneTimePaymentpage() throws InterruptedException
 	{
-		Thread.sleep(8000);
+		Thread.sleep(12000);
 		try{
 		if(Popup.isDisplayed())	
 			Popup.click();		
-		Thread.sleep(2000);
+		Thread.sleep(4000);
 		}
 		catch(Exception e)
 		{
 			System.out.println("Pop up handled");
 		}
 		JavascriptExecutor jse = (JavascriptExecutor)driver;
-		jse.executeScript("window.scrollBy(0,100)", "");
-		Thread.sleep(5000);
+		jse.executeScript("window.scrollBy(0,50)", "");
+		Thread.sleep(3000);
 		if(OneTimePaymentButton.isEnabled()){
 			OneTimePaymentButton.click();
 			return new OneTimePaymentsPage(driver);
@@ -117,13 +118,20 @@ public class PaymentsOverview extends UhcDriver{
 		if(AutomaticPaymentButton.isEnabled()){
 			AutomaticPaymentButton.click();
 			Thread.sleep(2000);
-			//SetUpNewAutoPayment.click();
+			try{
+				if(SetUpNewAutoPayment.isDisplayed())
+					SetUpNewAutoPayment.click();	
+			}catch(Exception e)
+			{
+				System.out.println("Edit payment Pop up Handled");
+			}
+			
 			return new OneTimePaymentsPage(driver);
 		}
 		return null;
 	}
 	
-	public OneTimePaymentsPage TabValidation()
+	public OneTimePaymentsPage TabValidation() throws InterruptedException
 	{
 		if(Tab1.isEnabled() && Tab2.isEnabled()){
 			Tab1.click();

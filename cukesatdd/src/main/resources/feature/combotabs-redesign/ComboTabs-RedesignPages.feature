@@ -1,4 +1,4 @@
-@TeamPredators
+@thePredators
 @ComboTabsRedesignPages
 Feature: Test Combo Member Plan Tabs for Redesign Pages
 

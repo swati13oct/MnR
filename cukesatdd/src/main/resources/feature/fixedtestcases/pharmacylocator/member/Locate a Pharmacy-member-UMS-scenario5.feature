@@ -1,5 +1,5 @@
 @fixedTestCaseTest
-@memberpharmacylocatorblayerscenario5
+@pharmacylocatorUHCMContentVerify
 Feature:1.20.5-VBF-Member-To test Locate a Pharmacy tool in UMS site for all pharmacy types for default zipcode in UMS site-test5
 Scenario Outline:To verify espanol and chinese contents
 Given registered member to verify locate a pharmacy in UMS Site

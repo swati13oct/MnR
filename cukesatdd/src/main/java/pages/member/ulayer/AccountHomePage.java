@@ -830,7 +830,7 @@ driver.switchTo().window(mainwindow);
 	}
 	
 
-	public OneTimePaymentsPage navigateToOneTimePaymentsPage() {
+	public OneTimePaymentsPage navigateToOneTimePaymentsPage() throws InterruptedException {
 		driver.navigate().to("https://member."+MRScenario.environment+"-aarpmedicareplans.uhc.com/content/dashboard/home/one-time-payments.html");
 		System.out.println("title  "+driver.getTitle());
 		if(driver.getTitle().equalsIgnoreCase("one-time-payment")){

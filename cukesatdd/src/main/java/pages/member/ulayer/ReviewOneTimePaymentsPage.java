@@ -70,7 +70,7 @@ public class ReviewOneTimePaymentsPage extends UhcDriver{
 	public ReviewOneTimePaymentsPage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
-		openAndValidate();
+		//openAndValidate();
 	}
 
 	@Override

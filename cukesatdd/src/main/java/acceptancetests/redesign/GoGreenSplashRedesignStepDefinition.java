@@ -40,7 +40,7 @@ public class GoGreenSplashRedesignStepDefinition {
 		}
 		
 		@Given("^I am a member on the member redesign login page$")
-		public void I_am_a_member_on_the_member_redesign_login_page(DataTable givenAttributes) {
+		public void I_am_a_member_on_the_member_redesign_login_page(DataTable givenAttributes) throws InterruptedException {
 
 			List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
 			Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();

@@ -1,4 +1,4 @@
-@TeamPredators
+@thePredators
 @pharmacylocator
 Feature: To test Locate a Pharmacy in acqusition flow AARP site
 @sanity

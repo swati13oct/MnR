@@ -1,6 +1,7 @@
 @ssllabs
 @fixedTestCaseTest
 Feature:0.01-looking for A- response on ssllabs 
+@ssllabsAARP
 Scenario Outline:To verify AARP site getting A- response on ssllabs
 Given the user is on the ssllabs site home page
 When the user enters AARP site URL into text box
@@ -12,6 +13,7 @@ Examples:
 	|URL                     				  | 	   HOSTNAME				|
 	|https://www.ssllabs.com/ssltest		  |	www.aarpmedicareplans.com	|
 	
+@ssllabsUHC
 Scenario Outline:To verify UHC site getting A- response on ssllabs
 Given the user is on the ssllabs site home page for UHC
 When the user enters UHC site URL into text box

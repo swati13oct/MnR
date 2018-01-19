@@ -1,4 +1,4 @@
-@NewSignInPage
+@theSpartans
 Feature: To validate the new changes related to new SignIn page  on the member redesigned site
 @signInErrorMessages1 
   Scenario Outline: To Verify Error Messages In Both username and password fields

@@ -241,7 +241,7 @@ Examples:
 	| planType |
 	| SHIP     |
 
-@TeamHActual
+@TeamHActual @theSpartans
 Scenario Outline: Verify the Timestamp on OneTime Payment Submitted page
 Given the user is on the Team-H AARP medicare site login page
 When the user logs in TeamH with a registered AMP with following details in AARP site
@@ -257,7 +257,7 @@ Examples:
 	| FED      |
 
 
-@TeamHAuto
+@TeamHAuto @theSpartans
 Scenario Outline: Verify the Timestamp on Automatic Payment Submitted page
 Given the user is on the Team-H AARP medicare site login page
 When the user logs in TeamH with a registered AMP with following details in AARP site
@@ -272,7 +272,7 @@ Examples:
 	| planType |
 	| AARP     |	
 
-@TeamHError
+@TeamHError @theSpartans
 Scenario Outline: Verify the Timestamp on OneTime Payment Submitted page
 Given the user is on the Team-H AARP medicare site login page
 When the user logs in TeamH with a registered AMP with following details in AARP site
@@ -289,30 +289,25 @@ Examples:
 
 
 @US764275
-Scenario Outline: Verify the tabs on Payment history for Combo Members
-Given the user is on the Team-C AARP medicare site login page
-When the user logs in TeamC with a registered AMP with following details in AARP site
+Scenario Outline: Verify the Timestamp on OneTime Payment Submitted page
+Given the user is on the Team-H AARP medicare site login page
+When the user logs in TeamH with a registered AMP with following details in AARP site
 	| Plan Type   | <planType>  |
-And the user navigates to Team-c TestHarness Page
-And the user navigates to TeamCPaymentOverview Page
+And the user navigates to Stage PaymentOverview Page
 Then user lands on payment overview page validates the tabs for combo members
-
 
 Examples:
 	| planType |
 	| COMBO    |
 
-	
-	
-@US735645
-Scenario Outline: Verify the paid unpaid checkboxes for Ship Member
-Given the user is on the Team-C AARP medicare site login page
-When the user logs in TeamC with a registered AMP with following details in AARP site
-	| Plan Type   | <planType>  |
-And the user navigates to Team-c TestHarness Page
-And the user navigates to TeamCPaymentOverview Page
-Then user unchecks paid and unpaid checkbox and validates the result
 
+@US735645
+Scenario Outline: Verify the Timestamp on OneTime Payment Submitted page
+Given the user is on the Team-H AARP medicare site login page
+When the user logs in TeamH with a registered AMP with following details in AARP site
+	| Plan Type   | <planType>  |
+And the user navigates to Stage PaymentOverview Page
+Then user unchecks paid and unpaid checkbox and validates the result
 
 Examples:
 	| planType |
