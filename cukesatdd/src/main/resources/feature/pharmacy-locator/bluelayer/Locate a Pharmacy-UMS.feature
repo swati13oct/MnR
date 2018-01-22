@@ -1,4 +1,4 @@
-@TeamPredators
+@thePredators
 @pharmacylocator
 Feature:To test Locate a Pharmacy in acqusition flow UMS site@multicounty
   Scenario Outline: To verify pharmacy locator multi county lookup modal in UHC site

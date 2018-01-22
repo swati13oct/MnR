@@ -1,5 +1,7 @@
 package acceptancetests.fixedtestcases;
 
+import gherkin.formatter.model.DataTableRow;
+
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -8,17 +10,14 @@ import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import pages.member.bluelayer.MemberAuthPage;
+import pages.member.bluelayer.MemberRedesignPage;
 import acceptancetests.atdd.data.CommonConstants;
 import acceptancetests.atdd.data.member.PageConstants;
 import atdd.framework.MRScenario;
 import cucumber.api.DataTable;
 import cucumber.api.java.en.Given;
-import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
-import gherkin.formatter.model.DataTableRow;
-import pages.member.bluelayer.LoginPage;
-import pages.member.bluelayer.MemberAuthPage;
-import pages.member.bluelayer.MemberRedesignPage;
 
 public class MemberAuthStepDefinition {
 

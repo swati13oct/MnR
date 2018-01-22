@@ -6,6 +6,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
 import atdd.framework.UhcDriver;
+import pages.dashboard.formsandresources.FormsAndResourcesPage;
 
 public class RallyDashboard extends UhcDriver{
 	
@@ -30,11 +31,12 @@ public class RallyDashboard extends UhcDriver{
 		System.out.println("Welcome Message Displayed");		
 	}
 	
-	public void navigatetoFormsnResources()
-	{
-		DOCUMENTSRESOURCES.click();
-		
-	}
+	   public FormsAndResourcesPage navigatetoFormsnResources()
+       {
+                       DOCUMENTSRESOURCES.click();
+                       return new FormsAndResourcesPage(super.driver);
+                       
+       }
  
 	
 	public PaymentsOverview navigateToPaymentOverview() throws InterruptedException
@@ -46,5 +48,6 @@ public class RallyDashboard extends UhcDriver{
 		}
 		return null;
 	}
+
 
 }

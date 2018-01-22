@@ -43,10 +43,10 @@ public class ProfilePreferencesPage extends UhcDriver {
 	@FindBy(xpath = "//*[@id='tab-1']//div[1]//div//p[2]//text()")
 	private WebElement memberIdtext;
 
-	@FindBy(xpath = "//span[contains(text(),'Username')]")
+	@FindBy(xpath = ".//*[@id='profilePreferencesController']/div[1]/div/div/section/div/div[3]/div/div/div/div/div/div[1]/div/span[1]")
 	private WebElement Username;
 
-	@FindBy(xpath = "//span[contains(text(),'Username')]/following-sibling::span")
+	@FindBy(xpath = ".//*[@id='profilePreferencesController']/div[1]/div/div/section/div/div[3]/div/div/div/div/div/div[1]/div/span[2]")
 	private WebElement Usernametext;
 
 	@FindBy(xpath = ".//*[@id='password']/div/div/span[1]")
@@ -67,10 +67,10 @@ public class ProfilePreferencesPage extends UhcDriver {
     @FindBy(id = "passwordNew-error")
 	private WebElement passworderrormessage2;
     
-    @FindBy(xpath = "//label[@id='passwordNewConfirm-error']")
+    @FindBy(id = "passwordNewConfirm-error")
 	private WebElement passworderrormessage3;
     
-	@FindBy(xpath = "//div[@id='email']//*[contains(text(),'EMAIL')]")
+	@FindBy(xpath = ".//*[@id='email']/div[1]/p")
 	private WebElement EmailLabel;
 
 	@FindBy(xpath = ".//*[@id='email']/div[3]/div[1]/div/div/span[1]")
@@ -106,7 +106,7 @@ public class ProfilePreferencesPage extends UhcDriver {
 	@FindBy(id = "updateEmail")
 	private WebElement SaveEmailButton;
 
-	@FindBy(className = "atdd-email-bottomcancel")
+	@FindBy(xpath = ".//*[@id='email-form']/div[3]/div/a")
 	private WebElement CanceEmaillButton;
 
 	@FindBy(className = "edit-btn-email")
@@ -141,10 +141,10 @@ public class ProfilePreferencesPage extends UhcDriver {
 
 	public static final String Disclaimerlinkcontent_xpath = ".//*[@id='collapseDisclaimer']";
 
-	@FindBy(xpath = "//*[@id='permanenetCardHeight']//*[contains(text(),'CONTACT US')]")
+	@FindBy(id = "permanenet")
 	private WebElement permanentaddress;
 
-	@FindBy(xpath = "//div[@id='permanenet']//*[contains(text(),'CONTACT US')]")
+	@FindBy(className = "text-link")
 	private WebElement contactuslink;
 
 	@FindBy(className = "atdd-profile-communicationpreference")
@@ -400,7 +400,7 @@ public class ProfilePreferencesPage extends UhcDriver {
 		}
 
 		SaveButton.click();
-		if (passworderrormessage.getText().contentEquals("Enter your current password.")) {
+		if (passworderrormessage.getText().contentEquals("This field is required.")) {
 			System.out.println("The element" + passworderrormessage.getText() + "is found");
 			return true;
 		} else {
@@ -441,9 +441,7 @@ public class ProfilePreferencesPage extends UhcDriver {
 			e.printStackTrace();
 		}
 		SaveButton.click();
-		validate(passworderrormessage3);
-		
-		if (passworderrormessage3.getText().contentEquals("Your password and password confirmation do not match.")) {
+		if (passworderrormessage3.getText().contentEquals("Please Enter the same value again.")) {
 			System.out.println("The element" + passworderrormessage3.getText() + "is found");
 			return true;
 		} else {
@@ -496,7 +494,7 @@ public class ProfilePreferencesPage extends UhcDriver {
 			e.printStackTrace();
 		}
 		SaveEmailButton.click();
-		if (mandatorymessage.getText().contentEquals("Enter your email address like this: yourname@emailprovider.com")) {
+		if (mandatorymessage.getText().contentEquals("This field is required.")) {
 			System.out.println("The element" + mandatorymessage.getText() + "is found");
 			return true;
 		} else {
@@ -528,12 +526,12 @@ public class ProfilePreferencesPage extends UhcDriver {
 		EmailEditbutton.click();
 		NewEmail.sendKeys("nikitajain");
 		SaveEmailButton.click();
-		if (mandatorymessage.getText().contentEquals("Enter your email address like this: yourname@emailprovider.com")) {
+		if (mandatorymessage.getText().contentEquals("Please enter a valid email Address.")) {
 			System.out.println("The element" + mandatorymessage.getText() + "is found");
 		} else {
 			Assert.fail("The element " + mandatorymessage.getText() + "is not found");
 		}
-         validate(CanceEmaillButton);
+
 		CanceEmaillButton.click();
 	}
 
@@ -542,7 +540,7 @@ public class ProfilePreferencesPage extends UhcDriver {
 		NewEmail.sendKeys("nikitajain4@gmail.com");
 		emailConfirm.sendKeys("nikitajain4@gmal.com");
 		SaveEmailButton.click();
-		if (emailerrormessage.getText().contentEquals("Your email confirmation and email address do not match.")) {
+		if (emailerrormessage.getText().contentEquals("Please enter the same value again.")) {
 			System.out.println("The element" + emailerrormessage.getText() + "is found");
 			return true;
 		} else {
@@ -576,7 +574,7 @@ public class ProfilePreferencesPage extends UhcDriver {
 		validate(Seemorewaystext);
 	}
 
-	public  void clickcontactUslink() {
+	public boolean clickcontactUslink() {
 		validate(contactUs);
 		contactUs.click();
 		try {
@@ -585,14 +583,12 @@ public class ProfilePreferencesPage extends UhcDriver {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
-		System.out.println(driver.getCurrentUrl());
-		if (driver.getCurrentUrl().contains("/member/contact-us/")) {
-			Assert.assertTrue(true);
+		if (driver.getCurrentUrl().contains("/content/uhcm/home/contact.html")) {
+			return true;
 		} else {
 			Assert.fail("The element " + contactuslink.getText() + "is not found");
 		}
-		
+		return false;
 		
 	}
 
@@ -651,12 +647,21 @@ public class ProfilePreferencesPage extends UhcDriver {
 
 	}
 
-	public void validatecontactuslink() {
+	public boolean validatecontactuslink() {
 		validate(contactuslink);
 		contactuslink.click();
-	
-		
-		
+		try {
+			Thread.sleep(20000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		if (driver.getCurrentUrl().contains("content/uhcm/home/contact.html")) {
+			return true;
+		} else {
+			Assert.fail("The element " + contactuslink.getText() + "is not found");
+		}
+		return false;
 	}
 
 	public void validatecommunicationpreferences() {
@@ -911,30 +916,4 @@ public class ProfilePreferencesPage extends UhcDriver {
 			Assert.assertTrue(GoGreenContentActual.equalsIgnoreCase(GoGreenContentExpected));
 		}
 	}
-	
-	public void savefunctionality()
-	{
-		
-		List<WebElement> oRadioButton = driver.findElements(By.name("187"));
-		boolean bValue = false;
-		bValue = oRadioButton.get(0).isSelected();
-		if(bValue == true){
-			// This will select Second radio button, if the first radio button is selected by default
-			oRadioButton.get(1).click();
-		}else{
-			// If the first radio button is not selected by default, the first will be selected
-			oRadioButton.get(0).click();
-		}
-		iHavereadCheckbox.click();
-		try {
-			Thread.sleep(20000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-
-		savePreferencesButton.click();
-		
-		}
 }
