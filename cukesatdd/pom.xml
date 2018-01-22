@@ -114,6 +114,7 @@
                                   <testSourceDirectory>${basedir}/src/main/java/</testSourceDirectory>
                                   <testClassesDirectory>${project.build.directory}/classes/</testClassesDirectory>
                                   <testFailureIgnore>true</testFailureIgnore>
+                                  <printSummary>true</printSummary>
                                  <argLine>-Xmx512m -XX:MaxPermSize=512m</argLine>
                                  <systemPropertyVariables>
                                         <environment>${environment}</environment>
