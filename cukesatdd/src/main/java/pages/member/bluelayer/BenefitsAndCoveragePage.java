@@ -927,17 +927,17 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 		validate(memberID);
 		validate(effective_Date);
 		validate(Monthly_Premium);
-		validateNew(GroupId);
+		validate(GroupId);
 
 	}
 
 	public void validatePlanOverviewLis() {
-		validateNew(planName);
-		validateNew(nameLabel);
-		validateNew(memberID);
-		validateNew(effective_Date);
-		validateNew(Monthly_Premium);
-		validateNew(ExtraHelp);
+		validate(planName);
+		validate(nameLabel);
+		validate(memberID);
+		validate(effective_Date);
+		validate(Monthly_Premium);
+		validate(ExtraHelp);
 
 	}
 
@@ -963,18 +963,18 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 
 	public void validatePrimaryCareProvider() {
 
-		validateNew(PrimaryCareProviderHeaderInd);
-		validateNew(YourPrimaryCareProvider);
-		validateNew(ChangeYourPcpButton);
+		validate(PrimaryCareProviderHeaderInd);
+		validate(YourPrimaryCareProvider);
+		validate(ChangeYourPcpButton);
 		//validateNew(SearchforaPhysician);
-		validateNew(StartSearch);
+		validate(StartSearch);
 
 	}
 
 	public void validatePrimaryCareProviderForGroup() {
 	
 		validate(PrimaryCareProviderHeaderHMO);
-		validateNew(PCPtext);
+		validate(PCPtext);
 		
 		
 	}
@@ -983,7 +983,7 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 		validate(OutofPocketMaximum);
 		validate(INNETWORK);
 		validate(OUTOFNETWORK);
-		validateNew(OutofPocketMaximumText);
+		validate(OutofPocketMaximumText);
 		
 	}
 	
@@ -995,7 +995,7 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		validateNew(planName1);
+		validate(planName1);
 	   }
 
      public pages.member.bluelayer.ProfilePreferencesPage navigateDirectToProfilePagee() {

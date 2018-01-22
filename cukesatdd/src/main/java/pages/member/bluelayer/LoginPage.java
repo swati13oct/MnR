@@ -12,15 +12,13 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-
 import acceptancetests.atdd.data.CommonConstants;
 import acceptancetests.atdd.data.MRConstants;
 import acceptancetests.atdd.data.PageData;
 import acceptancetests.atdd.util.CommonUtility;
 import atdd.framework.MRScenario;
 import atdd.framework.UhcDriver;
-import pages.member.bluelayer.AccountHomePage;
-
+import pages.acquisition.bluelayer.LoginAssistancePage;
 
 /**
  * @author pagarwa5
@@ -29,37 +27,29 @@ import pages.member.bluelayer.AccountHomePage;
 public class LoginPage extends UhcDriver {
 
 
-	private static final String PAGE_URL_TEST_HARNESS = null;
-	private static final String PAGE_URL_TEAM_H_TEST_HARNESS = null;
 	private static String PAGE_URL = MRConstants.UHCM_URL;
 	private static String UHCM_PAGE_URL = MRConstants.UHCM_TEAM_E_URL;
 	
-	private static String PAGE_URL_OFFLINE = MRConstants.UHCM_URL;
-
+	private static String PAGE_URL_TEST_HARNESS = MRConstants.UHCM_URL_TEAMB_TESTHARNESS;
+	
+	private static String PAGE_URL_TEAM_H_TEST_HARNESS = MRConstants.TEAMH_URL_TESTHARNES;
+	
 
 	//@FindBy(xpath = "//button[@id='fd_memberSignInButton' or @id='accessURAccountBTN']")
-	
 	@FindBy(id = "fd_memberSignInButton")
 	private WebElement loginIn;
 
 	
-	@FindBy(xpath = "//div[@id='IPEinvL']/map/area[@alt='close']")
-	private WebElement alertClosebutton;
-
-	@FindBy(id = "loginPOPUPuser")
-	//@FindBy(xpath = "//*[@id='loginSTANDuser']")
+	@FindBy(xpath = "//*[@id='loginPOPUPuser']")
 	private WebElement userNameField;
 	
 
 	//@FindBy(id = "loginPOPUPpass")
 	@FindBy(xpath = "//*[@id='loginPOPUPpass']")
-	//@FindBy(xpath = "//*[@id='loginSTANDpass']")
 	private WebElement passwordField;
 
-	
 	//@FindBy(xpath = "//div[@class='fd_userPassSection']/button")
 	@FindBy(xpath = "//*[@id='accessURAccountBTN']")
-	//@FindBy(xpath = "//*[@id='accessURAccountBTN']")
 	private WebElement signInButton;
 	
 	@FindBy(xpath = "//*[@id='fd_signInPanel']/div[2]/div[4]/button")
@@ -85,7 +75,8 @@ public class LoginPage extends UhcDriver {
 
 	private JSONObject browserCheckJson;
 	
-	public LoginPage(WebDriver driver) {
+
+	public LoginPage(WebDriver driver) {		
 		super(driver);
 		PageFactory.initElements(driver, this);
 		openAndValidate();
@@ -93,20 +84,19 @@ public class LoginPage extends UhcDriver {
 
 	public Object loginWith(String username, String password, String category) {
 		//driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
-
 		/*WebElement loginInEle= this.driver.findElement(By.id("fd_memberSignInButton"));
 		loginInEle.click();*/
-
-		/*WebElement loginInEle= this.driver.findElement(By.id("fd_memberSignInButton"));*/
 		loginIn.click();
+		System.out.println(username);
+		System.out.println(password);
 		sendkeys(userNameField, username);
 		sendkeys(passwordField, password);
 System.out.println(signInButton.isEnabled());
 		signInButton.click();
-
+		
 		if (MRScenario.environment.equals("dev-a") || MRScenario.environment.equals("team-a") ) {
 			while (!isAlertPresent());
-		}
+        }
 
 
 		if (MRScenario.environment.equals("dev-a"))  {
@@ -114,36 +104,27 @@ System.out.println(signInButton.isEnabled());
 			while (!isAlertPresent());
 		}
 		if ( MRScenario.environment.equals("team-c") || MRScenario.environment.equals("team-b")) {
-
+			
 			Alert alert = driver.switchTo().alert();
-
-			alert.accept();
-			Alert alert1 = driver.switchTo().alert();
-			alert1.accept();
-		}
-
+	        alert.accept();
+	        Alert alert1 = driver.switchTo().alert();
+	        alert1.accept();
+	        } 
+		
 		try {
-			Thread.sleep(5000);
+			Thread.sleep(10000);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
-		try
-		{
-			if(alertClosebutton.isDisplayed())
-				alertClosebutton.click();
-		} catch (Exception e) {
-			System.out.println("Alert is not displayed");
-		}
-
-		if(currentUrl().contains("home/my-account-home.html") || currentUrl().contains("/guest/home.html") || currentUrl().contains("/login.html"))
+		if(currentUrl().contains("home/my-account-home.html") && category.equalsIgnoreCase("Group") || currentUrl().contains("/guest/home.html") || currentUrl().contains("/login.html"))
 
 		{
 			return new AccountHomePage(driver);
 		}
 		else if(currentUrl().contains("home/my-account-home.html") && category.equalsIgnoreCase("Individual") || currentUrl().contains("/login.html") ) {
-			return new AccountHomePage(driver, category);
+			return new AccountHomePage(driver);
 		}
 		else if(currentUrl().contains("home/testharness.html") && category.equalsIgnoreCase("Group") ) {
 			return new AccountHomePage(driver);
@@ -160,11 +141,12 @@ System.out.println(signInButton.isEnabled());
 
 	@Override
 	public void openAndValidate() {
-		if (( MRScenario.environment.equals("offline"))) {
-			start(PAGE_URL_OFFLINE);
+		if(MRScenario.environment.equals("team-e") || MRScenario.environment.equals("team-h")){
+			start(UHCM_PAGE_URL);
 		}else{
 			start(PAGE_URL);
 		}
+		
 		validate(loginIn);
 		System.out.println("@@@@@@@@@@@@@  Test Environment and URL  : "+PAGE_URL+"@@@@@@@@@@@@@@@@@@@@@@@");
 
@@ -209,24 +191,30 @@ System.out.println(signInButton.isEnabled());
 
 
 	}
-
+	
 	public boolean isAlertPresent(){ 
-		try{ 
-			Alert a = new WebDriverWait(driver, 5).until(ExpectedConditions.alertIsPresent());
-			if(a!=null){
-				System.out.println("Alert is present = " + a.getText());
-				driver.switchTo().alert().accept();
-				return true;
-			}else{
-				//throw new Throwable();
-				System.out.println("alert is not present 1");
-				return false;
-			}
-		} 
-		catch (Throwable e) {
-			System.err.println("Alert isn't present!!");
-			return false; 
-		} 
+	    try{ 
+	        Alert a = new WebDriverWait(driver, 5).until(ExpectedConditions.alertIsPresent());
+	        if(a!=null){
+	            System.out.println("Alert is present = " + a.getText());
+	            driver.switchTo().alert().accept();
+	            Alert a2 = new WebDriverWait(driver, 5).until(ExpectedConditions.alertIsPresent());
+	            if(a2!=null){
+		            System.out.println("Alert is present = " + a2.getText());
+		            
+		            driver.switchTo().alert().accept();
+	            }
+	            return true;
+	        }else{
+	            //throw new Throwable();
+	        	System.out.println("alert is not present 1");
+	        	return false;
+	        }
+	    } 
+	    catch (Throwable e) {
+	        System.err.println("Alert isn't present!!");
+	        return false; 
+	    } 
 
 	} 
 		

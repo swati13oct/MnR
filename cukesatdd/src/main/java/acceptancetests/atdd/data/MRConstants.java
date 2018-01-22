@@ -185,14 +185,14 @@ public class MRConstants {
 	//public static final String ILLINOIS_HOME_PAGE_URL = "https://www.awe-"+MRScenario.environment+"-uhcretiree.uhc.com/soi/home.html";
 
 
-    public static final String BNCBURL = "https://member." + MRScenario.environment + "-uhcmedicaresolutions.uhc.com/";
+    //public static final String BNCBURL = "https://member." + MRScenario.environment + "-uhcmedicaresolutions.uhc.com/";
     
-    public static final String Dashboard_URL = "https://" + MRScenario.environment + "-medicare.uhc.com/?TARGET=SMSR/member/benefits/overview.html%3fdeeplink=true";
+    //public static final String Dashboard_URL = "https://" + MRScenario.environment + "-medicare.uhc.com/?TARGET=SMSR/member/benefits/overview.html%3fdeeplink=true";
     public static final String Dashboard_URL1 = "https://" + MRScenario.environment + "-medicare.uhc.com/";
     
-    public static final String TEAMH_URL_TESTHARNES ="https://"+MRScenario.environment+"-werally.uhc.com/medicare/login/overview.html?testharness=true";
+    //public static final String TEAMH_URL_TESTHARNES ="https://"+MRScenario.environment+"-werally.uhc.com/medicare/login/overview.html?testharness=true";
     
-    public static final String STAGE_URL_TESTHARNES ="https://"+MRScenario.environment+"-medicare.uhc.com/?testharness=true";
+    //public static final String STAGE_URL_TESTHARNES ="https://"+MRScenario.environment+"-medicare.uhc.com/?testharness=true";
 
 	//public static final String MA_PLAN_INFORMATION_AND_PLANS_PAGE_URL = "https://www.awe-"+MRScenario.environment+"-uhcmedicaresolutions." + getDomain() + "/health-plans/medicare-advantage-plans/resources-plan-material/ma-medicare-forms.html";	
 	
@@ -279,8 +279,6 @@ public class MRConstants {
   
   public static final String MEMBER_AUTH = "https://"+MRScenario.environment+"-generic.uhc.com/content/dashboard/guest/memberauth.html#/memberAuthLogin";
 
-  public static final String PORTFOLIO_PAGE_URL = "https://www."+MRScenario.environment+"-aarpmedicareplans.uhc.com";
-
   public static String CAMPAIGN_PAGE_URL1 = "https://www."+MRScenario.environment+"-aarpmedicareplans.uhc.com/health-plans/medicare-advantage-plans/available-plans.html?msg=nonzero&lang=sp&zipcode=90003&WT.mc_id=832467";
   
   public static String CAMPAIGN_PAGE_URL2 = "https://www."+MRScenario.environment+"-aarpmedicareplans.uhc.com/health-plans/medicare-advantage-plans/available-plans.html?msg=zero&lang=en&zipcode=02211&WT.mc_id=832467";
@@ -300,22 +298,24 @@ public class MRConstants {
   public static final String PEEHIP_HOME_PAGE_URL = "https://www."+MRScenario.environment+"-uhcretiree.uhc.com/peehip/home.html";
 
   public static final String UNIVERSITYOFMISSOURI_HOME_PAGE_URL = "https://www."+MRScenario.environment+"-uhcretiree.uhc.com/umsystem/home.html";
-public static final String UHCM_MOBILE_TEAM_C_URL = null;
+
   public static final String WELLSFARGO_HOME_PAGE_URL = "https://www."+MRScenario.environment+"-uhcretiree.uhc.com/wf/home.html";
 
-public static final String TeamC_MultipleEmail_address_URL = null;
+
   
   public static String TeamC_UHC_VPP_URL = "https://www."+MRScenario.environment+"-uhcmedicaresolutions.uhc.com";
-public static final String TeamC_VPP_PAGE_AARPM_URL = null;
+
   public static final String Connector_model_url1 = "https://www."+MRScenario.environment+"-uhcmedicaresolutions.uhc.com/health-plans/medicare-advantage-plans/available-plans.html?WT.mc_id=897509&zipcode=32337&county=320&state=10&originatingSite=https%3A%2F%2Fwww.myuhcplans.com%2Foptions&subdomain=options";
   
-public static final String TeamC_UHC_VPP_URL = null;
+
 
   public static final String BLUE_LAYER_TEST_HARNESS_LINK = "https://member."+MRScenario.environment+"-uhcmedicaresolutions.uhc.com/content/uhcm/home/testharness.html";
 
   public static final String TEAM_G_DEREGISTER_URL = "http://partd-teamg.ose.optum.com/PartDPortalWeb/deregister.jsp";
   
   public static final String REDESIGN_REGISTRATION_URL = "https://"+MRScenario.environment+"-medicare.uhc.com/medicare/member-registration.html#/get-started";
+public static final String PORTFOLIO_PAGE_UHC_URL = null;
+public static final String SIGNINPAGE_MEMREDESIGN = null;
 
 
 
