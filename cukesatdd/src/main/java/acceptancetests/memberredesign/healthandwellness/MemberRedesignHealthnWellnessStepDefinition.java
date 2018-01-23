@@ -1,4 +1,4 @@
-package acceptancetests.member.redesign.footer;
+package acceptancetests.memberredesign.healthandwellness;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -24,9 +24,10 @@ import cucumber.api.java.en.When;
 import gherkin.formatter.model.DataTableRow;
 import pages.dashboard.member.drugcostestimator.blayer.DrugCostEstimatorPage;
 import pages.memberredesign.bluelayer.AccountHomePage;
+import pages.memberredesign.bluelayer.HealthAndWellness;
 import pages.memberredesign.bluelayer.LoginPage;
 
-public class MemberRedesignFooterStepDefinition {
+public class MemberRedesignHealthnWellnessStepDefinition {
 	
 	@Autowired
 	MRScenario loginScenario;
@@ -35,7 +36,7 @@ public class MemberRedesignFooterStepDefinition {
 		return loginScenario;
 	}
 	
-	@Given("^I am a authenticated member on the member redesign site Footer$")
+	@Given("^I am a authenticated member on the member redesign site HW$")
 	public void I_am_a_authenticated_member_on_the_member_redesign_site(DataTable memberAttributes) {
 		WebDriver wd = getLoginScenario().getWebDriver();
 		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
@@ -86,60 +87,73 @@ public class MemberRedesignFooterStepDefinition {
 
 	}
 	
-	@When("^the above plantype user logs in UMS Site Desktop Footer$")
+	@When("^the above plantype user logs in UMS Site Desktop HW$")
 	public void plantype_user_logs_in() {
 		String userName = (String) getLoginScenario().getBean(LoginCommonConstants.USERNAME);
 		String pwd = (String) getLoginScenario().getBean(LoginCommonConstants.PASSWORD);
 		String category = (String) getLoginScenario().getBean(LoginCommonConstants.CATOGERY);
 		WebDriver wd = (WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
 		LoginPage loginPage = new LoginPage(wd);
-		loginPage.loginToStageTestHarness();;
+		loginPage.loginToStageTestHarness();
 		getLoginScenario().saveBean(PageConstants.LOGIN_PAGE, loginPage);
 		AccountHomePage accountHomePage = (AccountHomePage) loginPage.thloginWith(userName, pwd,category);
-		getLoginScenario().saveBean(PageConstants.MEM_REDESIGN_ACCOUNT_HOME_PAGE, accountHomePage);
+		getLoginScenario().saveBean(PageConstants.ACCOUNT_HOME_PAGE, accountHomePage);
 	
 	}
 	
-	@When("^I view the global navigation Footer$")
+	@When("^I view the global navigation HW$")
 	public void I_view_the_global_navigation() throws InterruptedException {
 	    // Express the Regexp above with the code you wish you had
 		WebDriver wd = (WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
 
-		DrugCostEstimatorPage dce = new DrugCostEstimatorPage(wd);
-		dce.changeUrlToNewDCEPage();
-		AccountHomePage accountHomePage = new AccountHomePage(wd);
-		getLoginScenario().saveBean(PageConstants.MEM_REDESIGN_ACCOUNT_HOME_PAGE, accountHomePage);
+		//DrugCostEstimatorPage dce = new DrugCostEstimatorPage(wd);
+		//dce.changeUrlToNewDCEPage();
+		//AccountHomePage accountHomePage = new AccountHomePage(wd);
+		//getLoginScenario().saveBean(PageConstants.MEM_REDESIGN_ACCOUNT_HOME_PAGE, accountHomePage);
+		HealthAndWellness healthnWellnessPage = new HealthAndWellness(wd);
+		getLoginScenario().saveBean(PageConstants.MEM_REDESIGN_HEALTH_AND_WELLNESS_PAGE, healthnWellnessPage);
 	}
 	
-	@When("^I am on the member page then I should be able to see the footer sections Footer$")
-	public void I_am_on_the_member_page_then_I_should_be_able_to_see_the_footer_sections() {
+	@When("^then click the health and wellness tab HW$")
+	public void then_click_the_health_and_wellness_tab() {
 	    // Express the Regexp above with the code you wish you had
-		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstants.MEM_REDESIGN_ACCOUNT_HOME_PAGE);
-		accountHomePage.checkModelPopup();
-		accountHomePage.validateClaimsL2Tabs();
-		accountHomePage.checkModelPopup();
-		accountHomePage.validateFooterSection();
+		HealthAndWellness healthnWellnessPage = (HealthAndWellness) getLoginScenario().getBean(PageConstants.MEM_REDESIGN_HEALTH_AND_WELLNESS_PAGE);
+		healthnWellnessPage.clickHealthnWellnessTab();
 	}
 
-	@When("^Member Support and links under it should be displayed Footer$")
-	public void Member_Support_and_links_under_it_should_be_displayed() {
+	@When("^I should see the H&W Generic dashboard and lifestyle,learning and rewards L2 tabs HW$")
+	public void I_should_see_the_H_W_Generic_dashboard_and_tabs() {
 	    // Express the Regexp above with the code you wish you had
-		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstants.MEM_REDESIGN_ACCOUNT_HOME_PAGE);
-		accountHomePage.validateMemberSupport();
+		HealthAndWellness healthnWellnessPage = (HealthAndWellness) getLoginScenario().getBean(PageConstants.MEM_REDESIGN_HEALTH_AND_WELLNESS_PAGE);
+		healthnWellnessPage.validateHnWDashboardnL2Tabs();
+
 	}
 
-	@When("^Quick links and links under it should be displayed Footer$")
-	public void Quick_links_and_links_under_it_should_be_displayed() {
+
+	@When("^then click the Lifestyle tab and I should be directed to Lifestyle Page HW$")
+	public void then_click_the_Lifestyle_tab_and_I_should_be_directed_to_Lifestyle_Page() {
 	    // Express the Regexp above with the code you wish you had
-		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstants.MEM_REDESIGN_ACCOUNT_HOME_PAGE);
-		accountHomePage.validateQuickLinks();
+		HealthAndWellness healthnWellnessPage = (HealthAndWellness) getLoginScenario().getBean(PageConstants.MEM_REDESIGN_HEALTH_AND_WELLNESS_PAGE);
+		healthnWellnessPage.clickLifestyleTab();
+		healthnWellnessPage.validateLifestylePage();
+
 	}
 
-	@When("^I have access to the Rally Provider Search Tool and I see the Saved option under Quick Links Footer$")
-	public void I_have_access_to_the_Rally_Provider_Search_Tool_and_I_see_the_Saved_option_under_Quick_Links() {
+	@When("^then click the Learning tab and I should be directed to Learning Page HW$")
+	public void then_click_the_Learning_tab_and_I_should_be_directed_to_Learning_Page() {
 	    // Express the Regexp above with the code you wish you had
-		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstants.MEM_REDESIGN_ACCOUNT_HOME_PAGE);
-		accountHomePage.validateSavedLink();
+		HealthAndWellness healthnWellnessPage = (HealthAndWellness) getLoginScenario().getBean(PageConstants.MEM_REDESIGN_HEALTH_AND_WELLNESS_PAGE);
+		healthnWellnessPage.clickLearningTab();
+		healthnWellnessPage.validateLearningPage();
+
 	}
+
+	@When("^then click the Rewards tab and I should be directed to Rewards Page HW$")
+	public void then_click_the_Rewards_tab_and_I_should_be_directed_to_Rewards_Page() {
+	    // Express the Regexp above with the code you wish you had
+
+	}
+
+	
 
 }
