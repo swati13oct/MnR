@@ -43,6 +43,9 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 	@FindBy(xpath = "//*[@id='planBenefitsApp']/div/div/div[2]/div[1]/div/div[4]/div[1]/span")
 	private WebElement effectiveDate;
 	
+	 @FindBy(xpath = ".//*[@id='planBenefitsApp']/section/div/div[1]/div/div/div/div/h1")
+	 private WebElement planName1;
+	
 	@FindBy(className = "atdd-contact-us")
 	private WebElement contactUslink;
 	
@@ -63,7 +66,7 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 	@FindBy(xpath = ".//*[@id='plan_benefit_documents']/section/div/div[1]/div")
 	private WebElement planBenefitsDocuments;
 
-	@FindBy(xpath = ".//*[@id='lang-select-2']")
+	@FindBy(id = "lang-select-2")
 	private WebElement langdropdown;
 
 	@FindBy(xpath = ".//*[@id='ancillary']/div[2]/div[1]/div")
@@ -142,28 +145,31 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 	@FindBy(id = "waystosave")
 	private WebElement waysToSave;
 
-	@FindBy(xpath = ".//*[@id='plan_benefit_documents']/section/div/div[2]/div/form/span[1]")
+	@FindBy(xpath = ".//*[@id='plan_benefit_documents']/section[2]/div/div[2]/div/form/span[1]")
 	private WebElement view_label;
 
-	@FindBy(xpath = ".//*[@id='plan_benefit_documents']/section/div/div[2]/div/form/span[2]")
+	@FindBy(className = "atdd-document-text")
 	private WebElement documents_label;
 
-	@FindBy(xpath = "//*[@id='planBenefitsApp']/section/div/div[1]/div/div/div/div/h1")
+	@FindBy(className = "atdd-benefitsoverview-plantitle")
 	private WebElement planName;
 
-	@FindBy(xpath = "//*[@id='planBenefitsApp']/section/div/div[2]/div[1]/div/div[1]/div[1]/span")
+	@FindBy(className = "atdd-benefitsoverview-membernamelabel")
 	private WebElement nameLabel;
 
-	@FindBy(xpath = "//*[@id='planBenefitsApp']/section/div/div[2]/div[1]/div/div[2]/div[1]/span")
+	@FindBy(className = "atdd-benefitsoverview-memberidlabel")
 	private WebElement memberID;
 
-	@FindBy(xpath = "//*[@id='planBenefitsApp']/section/div/div[2]/div[1]/div/div[3]/div[1]/span")
+	@FindBy(className = "atdd-benefitsoverview-effectivedatelabel")
 	private WebElement effective_Date;
 
 	@FindBy(className = "atdd-benefitsoverview-monthlypremium-label")
 	private WebElement Monthly_Premium;
-
-	@FindBy(xpath = "//*[@id='planBenefitsApp']/section/div/div[2]/div[2]/div[1]/div/div[1]/div/span")
+	
+	@FindBy(className = "atdd-benefitsoverview-groupidlabel")
+	private WebElement GroupId;
+	
+	@FindBy(className = "atdd-benefitsoverview-extrahelplevel-ma-label")
 	private WebElement ExtraHelp;
 
 	@FindBy(className = "atdd-benefitssummary-headertitle")
@@ -188,7 +194,7 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 	private WebElement OutpatientSurgeryCenter;
 
 	
-	@FindBy(xpath = "//*[@id='planBenefitsApp']/div/div[1]/div[6]/div/div[2]/div[1]/div/header/span")
+	@FindBy(id = "pcpCard")
 	private WebElement YourPrimaryCareProvider;
 	
 	@FindBy(className = "changepcp-atdd")
@@ -202,18 +208,57 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 	
 	@FindBy(className = "atdd-bncsummary-primarycareprvdrheader")
 	private WebElement PrimaryCareProviderHeader;
+	
+	@FindBy(xpath = ".//*[@id='benefitsMain']/div[2]/div/div[1]/div/div/div/div/div[6]/div/div[1]/div/h2")
+	private WebElement PrimaryCareProviderHeaderInd;
 
    @FindBy(className= "atdd-bncsummary-primarycareprvdrheader")
-	private WebElement PrimaryCareProviderHeaderHMO;
+   private WebElement PrimaryCareProviderHeaderHMO;
    
-   @FindBy(xpath= "//*[@id='planBenefitsApp']/div[1]/div/div[4]/div/div[1]/div/div/div/div/div/h3/span")
- 	private WebElement OutofPocketMaximum;
+   @FindBy(xpath= ".//*[@id='benefitsMain']/div[2]/div/div[1]/div/div/div/div/div[6]/div/div/div/p")
+   private WebElement PCPtext;
    
-   @FindBy(className = "atdd-innetwrk-title")
- 	private WebElement INNETWORK;
+   @FindBy(xpath= ".//*[@id='benefitsMain']/div[2]/div/div[1]/div/div/div/div/div[5]/div/div[1]/div/div/div/div/h3/span")
+   private WebElement OutofPocketMaximum;
+   
+   @FindBy(xpath= ".//*[@id='benefitsMain']/div[2]/div/div[1]/div/div/div/div/div[5]/div/div[1]/div/div/div/div/p")
+   private WebElement OutofPocketMaximumText;
+   
+   @FindBy(id = "oopInNetowrk")
+   private WebElement INNETWORK;
+   
+   @FindBy(id= "oopOutNetowrk")
+   private WebElement OUTOFNETWORK;
 
-  @FindBy(className= "atdd-outnetwrktitle")
- 	private WebElement OUTOFNETWORK;
+  @FindBy(xpath = "//button[@id='dropdown-toggle--1']/span[contains(text(),'Profile')]")
+  private WebElement accountToggleDropdown;
+
+  @FindBy(xpath = "//a[@class='dropdown-option' and contains(text(),'Account Settings')]")
+  private WebElement accountSettingOption;
+  
+  @FindBy(className = "atdd-gopaperless")
+  private WebElement gopaperlessbutton;
+  
+	@FindBy(className = "atdd-bnc-anclry-disclaimer")
+	private WebElement Exclusivedisclaimer;
+	
+	@FindBy(className = "atdd-exclsvehearing-arrowdwn")
+	private WebElement Disclaimertext;
+	
+	@FindBy(className = "atdd-bnc-ancilry-learnmorbtn")
+	private WebElement LearnmoreButton;
+
+	@FindBy(className = "atdd-bnc-exclusivehrng-leavingpopuptxt")
+	private WebElement popup;
+	
+	@FindBy(className = "atdd-anclrysection-leavingpopup-proceedbtn")
+	private WebElement ProceedButton;
+	
+	@FindBy(className = "atdd-anclrysection-leavingpopup-cancelbtn")
+	private WebElement cancelbutton;
+	
+	@FindBy(className = "atdd-exclusivehearing-levngpopup-topcancelbtn")
+	private WebElement cancelbutton1;
     
 	
 	
@@ -460,6 +505,7 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 		if (langdropdown.isDisplayed()) {
 			Select langdropdwn = new Select(langdropdown);
 			if (langdropdwn.getFirstSelectedOption().getText().equals("ENGLISH")) {
+				System.out.println("Text"+langdropdwn.getFirstSelectedOption().getText());
 				Assert.assertTrue(true);
 			} else
 				Assert.fail("Issue in English selection");
@@ -522,6 +568,114 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 
 		try {
 			validate(chiropracticsection);
+		} catch (Exception e) {
+			System.out.println("Elements is not found ...");
+		}
+	}
+	
+	public void ExclusiveDisclaimers() {
+
+		try {
+			validate(Exclusivedisclaimer);
+			Exclusivedisclaimer.click();
+			try {
+				Thread.sleep(30000);
+			} catch (InterruptedException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+			validate(Disclaimertext);
+			System.out.println("text" + Disclaimertext.getText());
+			
+		} catch (Exception e) {
+			System.out.println("Elements is not found ...");
+		}
+	}
+	public void Exclusivelearnmore() {
+		try{
+		validate(LearnmoreButton);
+		LearnmoreButton.click();
+	
+		try {
+			Thread.sleep(30000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		//validate(disclaimersLink);
+		System.out.println("text" + LearnmoreButton.getText());
+	} catch(Exception e) {
+		System.out.println("Elements is not found ...");
+	}
+	}
+		/*//LearnmoreButton.click();
+		WebElement TxtBoxContent = driver.findElement(By.className(LearnmoreButton));
+		TxtBoxContent.getText();
+		LearnmoreButton.click();
+		System.out.println("Printing "+TxtBoxContent);*/
+		//LearnmoreButton.click();
+		/*if (LearnmoreButton.isDisplayed()) {
+			Assert.assertTrue(true);
+			} else
+			Assert.fail("Button not displayed");*/
+		/*if (driver.getCurrentUrl().contains("www.hihealthinnovations.com/medicare")) {
+			return;
+			} else {
+			Assert.fail("The element " + ProceedButton.getText() + "is not found");
+			}*/
+		//LearnmoreButton.click();
+		
+	public void Leavingpopup() {
+
+		try {
+			validate(popup);
+		} catch (Exception e) {
+			System.out.println("Elements is not found ...");
+		}
+	}
+	public boolean Proceedbutton() {
+		//LearnmoreButton.click();
+		try {
+			Thread.sleep(30000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		LearnmoreButton.click();
+		try {
+			Thread.sleep(30000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		validate(ProceedButton);
+		ProceedButton.click();
+		try {
+			Thread.sleep(40000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		ArrayList<String> tabs2 = new ArrayList<String> (driver.getWindowHandles());
+	    driver.switchTo().window(tabs2.get(1));
+		System.out.println(driver.getCurrentUrl());
+		if (driver.getCurrentUrl().contains("hihealthinnovations.com/medicare")) {
+		Assert.assertTrue(true);
+		} 
+		else {
+		Assert.fail("The element " + ProceedButton.getText() + "is not found");
+		}
+		return true;
+		}
+	public void Cancelbutton() {
+
+		try {
+			validate(cancelbutton );
+			validate(cancelbutton1 );
+			cancelbutton.click();
+			
+			System.out.println("text" + cancelbutton.getText());
+			
 		} catch (Exception e) {
 			System.out.println("Elements is not found ...");
 		}
@@ -773,6 +927,7 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 		validate(memberID);
 		validate(effective_Date);
 		validate(Monthly_Premium);
+		validate(GroupId);
 
 	}
 
@@ -782,7 +937,7 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 		validate(memberID);
 		validate(effective_Date);
 		validate(Monthly_Premium);
-		// validate(ExtraHelp);
+		validate(ExtraHelp);
 
 	}
 
@@ -808,10 +963,10 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 
 	public void validatePrimaryCareProvider() {
 
-		validate(PrimaryCareProviderHeader);
+		validate(PrimaryCareProviderHeaderInd);
 		validate(YourPrimaryCareProvider);
 		validate(ChangeYourPcpButton);
-		validate(SearchforaPhysician);
+		//validateNew(SearchforaPhysician);
 		validate(StartSearch);
 
 	}
@@ -819,6 +974,7 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 	public void validatePrimaryCareProviderForGroup() {
 	
 		validate(PrimaryCareProviderHeaderHMO);
+		validate(PCPtext);
 		
 		
 	}
@@ -827,7 +983,41 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 		validate(OutofPocketMaximum);
 		validate(INNETWORK);
 		validate(OUTOFNETWORK);
+		validate(OutofPocketMaximumText);
 		
+	}
+	
+	public void validateBnCPag()
+	   {
+		try {
+			Thread.sleep(20000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		validate(planName1);
+	   }
+
+     public pages.member.bluelayer.ProfilePreferencesPage navigateDirectToProfilePagee() {
+        System.out.println(driver.getTitle());
+        accountToggleDropdown.click();
+        validate(accountSettingOption);
+        accountSettingOption.click();
+        try {
+               Thread.sleep(30000);
+        } catch (InterruptedException e) {
+               // TODO Auto-generated catch block
+               e.printStackTrace();
+        }
+        System.out.println(driver.getTitle());
+
+        if (driver.getTitle().equalsIgnoreCase("Profile")) {
+               System.out.println("Pass!");
+               return new ProfilePreferencesPage(driver);
+        }
+        gopaperlessbutton.click();
+        return null;
+        
 	}
 
 }
