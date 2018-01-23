@@ -23,6 +23,7 @@ import acceptancetests.atdd.data.CommonConstants;
 import acceptancetests.atdd.data.PageData;
 import acceptancetests.atdd.util.CommonUtility;
 import atdd.framework.UhcDriver;
+import pages.member.ulayer.ValueAddedServicepage;
 
 /**
  * @author njain112
@@ -206,6 +207,33 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 	@FindBy(className = "start-search-atdd")
 	private WebElement StartSearch;
 	
+	@FindBy(xpath = "//*[@id='planBenefitsApp']/div[2]/div[3]/div/div/div/header/span")
+	private WebElement ParticipatingHospitalStays1;
+
+	@FindBy(xpath = "//*[@id='planBenefitsApp']/div[2]/div[4]/div/div/div/header/span")
+	private WebElement ParticipatingHospitalStays2;
+
+	@FindBy(xpath = "//*[@id='planBenefitsApp']/div[2]/div[5]/div/div/div/header")
+	private WebElement TravelBenefitHeader;
+
+	@FindBy(xpath = "//*[@id='planBenefitsApp']/div[2]/div[6]/div/div/div/header/span")
+	private WebElement BloodPackedRedBloodCellsPartA;
+
+	@FindBy(xpath = "//*[@id='planBenefitsApp']/div[2]/div[7]/div/div/div/header/span")
+	private WebElement SkilledNursingFacilityStays;
+
+	@FindBy(xpath = "//*[@id='planBenefitsApp']/div[2]/div[8]/div/div/div/header/span")
+	private WebElement HospiceCare;
+
+	@FindBy(xpath = "//*[@id='planBenefitsApp']/div[2]/div[9]/div/div/div/header/span")
+	private WebElement MedicalCare;
+
+	@FindBy(xpath = "//*[@id='planBenefitsApp']/div[2]/div[10]/div/div/div/header/span")
+	private WebElement BloodPackedRedBloodCellsPartB;
+
+	@FindBy(xpath = "//*[@id='planBenefitsApp']/div[2]/div[11]/div/div/div/header/span")
+	private WebElement EmergencyCare;
+	
 	@FindBy(className = "atdd-bncsummary-primarycareprvdrheader")
 	private WebElement PrimaryCareProviderHeader;
 	
@@ -259,9 +287,34 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 	
 	@FindBy(className = "atdd-exclusivehearing-levngpopup-topcancelbtn")
 	private WebElement cancelbutton1;
-    
 	
+	@FindBy(className = "atdd-bnc-handimg")
+	private WebElement handimage;
+
+	@FindBy(className = "atdd-bnc-discountsubtitle")
+	private WebElement textdiscountservices;
+
+	@FindBy(className = "atdd-bnc-specialdscnt-desc")
+	private WebElement textdiscountservices1;
+
+	@FindBy(className = "atdd-bnc-discounttitle")
+	private WebElement headerdiscountservices;
 	
+	@FindBy(xpath = ".//*[@id='planBenefitsApp']/div/div/div/div/div/div[2]/a")
+	private WebElement learnmorebutton;
+	
+	@FindBy(className = "atdd-need-help")
+	private WebElement NeedhelpShip;
+
+	@FindBy(className = "atdd-tech-header")
+	private WebElement TechnicalSupportShip;
+
+	@FindBy(className = "atdd-general-header")
+	private WebElement GeneralQuestionShip;
+
+	@FindBy(className = "atdd-claims-header")
+	private WebElement ClaimsSupportShip;
+   
 
 	public static final String learnmorestagetext_xpath = ".//*[@id='collapseStages']";
 
@@ -1018,6 +1071,109 @@ public class BenefitsAndCoveragePage extends UhcDriver {
         gopaperlessbutton.click();
         return null;
         
+	}
+     
+ 	public void validateHeadersShip() {
+		// TODO Auto-generated method stub
+
+		validate(BenefitsSummaryHeader);
+		validate(ParticipatingHospitalStays1);
+		validate(ParticipatingHospitalStays2);
+		validate(TravelBenefitHeader);
+		validate(BloodPackedRedBloodCellsPartA);
+		validate(SkilledNursingFacilityStays);
+		validate(HospiceCare);
+		validate(MedicalCare);
+		validate(BloodPackedRedBloodCellsPartB);
+		validate(EmergencyCare);
+
+	}
+ 	
+ 	public void handimage() {
+
+		validate(handimage);
+
+	}
+ 	
+	public void vasSection() {
+
+		validate(textdiscountservices);
+		validate(textdiscountservices1);
+		validate(headerdiscountservices);
+	}
+	
+	public void learnmorebutton() {
+
+		validate(learnmorebutton);
+
+	}
+ 	
+	public ValueAddedServicepage navigateToValueAddService() {
+		validate(learnmorebutton);
+		try {
+			Thread.sleep(30000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+                JavascriptExecutor jse = (JavascriptExecutor) driver;
+		jse.executeScript("window.scrollBy(0,3000)", "");
+		learnmorebutton.click();
+		try {
+			Thread.sleep(30000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		if (this.driver.getTitle().equalsIgnoreCase("Value Added Services")) {
+			System.out.println(driver.getTitle());
+			return new ValueAddedServicepage(driver);
+		}
+		return null;
+
+	}
+	
+	public void validateneedhelpheaderShip() {
+		validate(NeedhelpShip);
+		validate(TechnicalSupportShip);
+		validate(GeneralQuestionShip);
+		validate(ClaimsSupportShip);
+	}
+	
+	public void validateContactUsNeedHelp() {
+        try {
+			Thread.sleep(30000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		validate(Seemorewaystext);
+
+	}
+	
+	public void contactUslinkShip() 
+	{
+        try 
+        {
+			Thread.sleep(30000);
+		} 
+        catch (InterruptedException e) 
+        {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		validate(contactUslink);
+		contactUslink.click();
+		try {
+			Thread.sleep(30000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		System.out.println("Title is " + getTitle());
+
+		//Assert.assertTrue(getTitle().equalsIgnoreCase("Contact Us"));
+
 	}
 
 }
