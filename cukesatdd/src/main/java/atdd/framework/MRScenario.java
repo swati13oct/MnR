@@ -693,7 +693,7 @@ public class MRScenario {
 		return webDriver;
 	}*/
 	
-	public WebDriver getWebDriver() {
+	/*public WebDriver getWebDriver() {
 
         // !!!!! ATTENTION !!!!!
         /// If you're changing this code to get a browser to work the you're
@@ -738,7 +738,7 @@ public class MRScenario {
                // use HTMLUNIT.
                // This is the default browser when I checked out the code, so it's
                // the default
-               if (null == browser || browser.equalsIgnoreCase(CommonConstants.HTMLUNIT_BROWSER)) {/*
+               if (null == browser || browser.equalsIgnoreCase(CommonConstants.HTMLUNIT_BROWSER)) {
                       // use the HtmlUnit Driver
                       HtmlUnitDriver htmlUnitDriver = new HtmlUnitDriver(BrowserVersion.getDefault()) {
                             @Override
@@ -751,7 +751,7 @@ public class MRScenario {
 
                       webDriver = htmlUnitDriver;
                       webDriver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
-                      webDriver.manage().window().maximize();*/
+                      webDriver.manage().window().maximize();
                } else if (browser.equalsIgnoreCase(CommonConstants.JENKINS_BROWSER_PHANTOMJS)) {
                       // otherwise if we have a Jenkins browser defined, we use it.
                       DesiredCapabilities caps = new DesiredCapabilities();
@@ -784,7 +784,8 @@ public class MRScenario {
                       chromeOptions.put("binary", pathToBinary);
                       DesiredCapabilities capabilities = DesiredCapabilities.chrome();
                       capabilities.setCapability(ChromeOptions.CAPABILITY, chromeOptions);
-                      System.setProperty("webdriver.chrome.driver", props.get(CommonConstants.CHROME_DRIVER));
+                      System.setProperty("webdriver.chrome.driver", pathToBinary);
+                     // System.setProperty("webdriver.chrome.driver", props.get(CommonConstants.CHROME_DRIVER));
                       WebDriver webDriver = new ChromeDriver();
                       return webDriver;
 
@@ -808,47 +809,49 @@ public class MRScenario {
                       webDriver = new ChromeDriver(capabilities);
                       return webDriver;
                } else if (browser.equalsIgnoreCase(CommonConstants.SAUCE_BROWSER_WEB)) {
-                      System.out.println("Execution is Going to Start on SauceLabs Web.....!!!!!");
-                      DesiredCapabilities capabilities = null;
-                      if (browserName.equalsIgnoreCase("firefox")) {
-                            System.out.println("Inside firefox");
-                            capabilities = DesiredCapabilities.firefox();
-                            capabilities.setCapability("platform", "Windows 7");
-                            capabilities.setCapability("version", "48");
-                            capabilities.setCapability("idleTimeout", 180);
-                      } else if (browserName.equalsIgnoreCase("IE")) {
-                            capabilities = DesiredCapabilities.internetExplorer();
-                            capabilities.setCapability("platform", "Windows 7");
-                            capabilities.setCapability("version", "11.0");
-                            capabilities.setCapability("screenResolution", "1024x768");
-                      } else if (browserName.equalsIgnoreCase("chrome")) {
-                            System.out.println("Inside chrome");
-                            capabilities = DesiredCapabilities.chrome();
-                            capabilities.setCapability("platform", "Windows 7");
-                            capabilities.setCapability("version", "52.0");
-                            capabilities.setCapability("screenResolution", "800x600");
-                      }
-                      capabilities.setCapability("autoAcceptsAlerts", true);
-                      capabilities.setCapability("parent-tunnel", "sauce_admin");
-                      capabilities.setCapability("tunnelIdentifier", "OptumSharedTunnel-Prd");
-                      String USERNAME = "njain112";
-                      String ACCESS_KEY = "13284fe0-5132-4a64-8558-1ddfa10b32e8";
-                      String URL = "http://" + USERNAME + ":" + ACCESS_KEY + "@ondemand.saucelabs.com:80/wd/hub";
-                      if (USERNAME == null || ACCESS_KEY == null) {
-                            Assert.fail(
-                                          "Missing value for environment variable(s) SAUCE_USERNAME or SAUCE_ACCESS_KEY.  Check environment configuration and try again");
-                      }
-                      try {
-                            webDriver = new RemoteWebDriver(new URL(URL), capabilities);
-                      } catch (MalformedURLException e) {
-                            Assert.fail("Invalid Sauce URL: [" + URL + "]");
-                      }
-               }
+				System.out.println("Execution is Going to Start on SauceLabs Web.....!!!!!");
+                DesiredCapabilities capabilities = null;
+                if(browserName.equalsIgnoreCase("firefox")){
+                	System.out.println("Inside firefox");
+                capabilities = DesiredCapabilities.firefox();
+                capabilities.setCapability("platform", "Windows 7");
+                capabilities.setCapability("version", "43");
+                capabilities.setCapability("idleTimeout", 180);
+                }else if(browserName.equalsIgnoreCase("IE")){
+                	capabilities = DesiredCapabilities.internetExplorer();
+                	capabilities.setCapability("platform", "Windows 7");
+                	capabilities.setCapability("version", "11.0");
+                	capabilities.setCapability("screenResolution", "1024x768");
+                }else if(browserName.equalsIgnoreCase("chrome")){
+                	System.out.println("Inside chrome");
+                	capabilities = DesiredCapabilities.chrome();
+                	capabilities.setCapability("platform", "Windows 7");
+                	capabilities.setCapability("version", "52.0");
+                	capabilities.setCapability("screenResolution", "800x600");
+                }
+                capabilities.setCapability("autoAcceptsAlerts", true);
+                capabilities.setCapability("parent-tunnel", "sauce_admin");
+                capabilities.setCapability("tunnelIdentifier", "OptumSharedTunnel-Prd");
+                String SAUCE_USERNAME = props.get("SAUCE_USERNAME");
+	            String SAUCE_ACCESS_KEY = props.get("SAUCE_ACCESS_KEY");
+                //String URL = "http://" + USERNAME + ":" + ACCESS_KEY + "@ondemand.saucelabs.com:80/wd/hub";
+                String URL = "http://" + SAUCE_USERNAME + ":" + SAUCE_ACCESS_KEY + "@ondemand.saucelabs.com:80/wd/hub";
+                if (SAUCE_USERNAME == null || SAUCE_ACCESS_KEY == null) {
+                       Assert.fail(
+                                     "Missing value for environment variable(s) SAUCE_USERNAME or SAUCE_ACCESS_KEY.  Check environment configuration and try again");
+                }
+                try {
+                       webDriver = new RemoteWebDriver(new URL(URL), capabilities);
+                } catch (MalformedURLException e) {
+                       Assert.fail("Invalid Sauce URL: [" + URL + "]");
+                }
+                return webDriver;
+ 			}
         }
                       return webDriver;
                
         
-          /*if (null == webDriver) {              
+          if (null == webDriver) {              
              File pathToBinary = new File("C:\\Program Files (x86)\\Google\\Chrome\\Application\\Chrome.exe");
              Map<String, Object> chromeOptions = new HashMap<String, Object>();
              chromeOptions.put("binary", pathToBinary);
@@ -857,10 +860,30 @@ public class MRScenario {
              System.setProperty("webdriver.chrome.driver","C:\\Users\\njain112\\Videos\\chromedriver.exe");
              webDriver = new ChromeDriver();
          }
-             return webDriver;*/
+             return webDriver;
 
-  }
+  }*/
 
+	public WebDriver getWebDriver() {
+        DesiredCapabilities capabilities = DesiredCapabilities
+                                      .firefox();
+        capabilities.setCapability("platform", "Windows 7");
+        capabilities.setCapability("version", "45.0");
+        capabilities.setCapability("parent-tunnel", "sauce_admin");
+        capabilities.setCapability("tunnelIdentifier",
+                                      "OptumSharedTunnel-Prd");
+        //capabilities.setCapability("name", "MRATDD-TestSuite");
+        capabilities.setCapability("build", System.getenv("JOB_NAME") + "__" + System.getenv("RUNNER_NUMBER"));
+        String jobName = "VBF Execution - Using " + capabilities.getBrowserName() + " in  " + System.getProperty("environment") +" environment";
+capabilities.setCapability("name", jobName);
+        try {
+                       webDriver = new RemoteWebDriver(new URL(URL), capabilities);
+        } catch (MalformedURLException e) {
+                       // TODO Auto-generated catch block
+                       e.printStackTrace();
+        }
+        return webDriver;
+        }
 
 	public WebDriver getIEDriver() {
 		System.setProperty("webdriver.ie.driver",

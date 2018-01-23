@@ -1028,13 +1028,5 @@ public void user_navigates_to_RallyDashboardPage_Page() throws InterruptedExcept
 	
 }
 
-@After
-public void tearDown() {
 
-	WebDriver wd = (WebDriver) getLoginScenario().getBean("webDriver");
-	if(wd!=null){
-	wd.quit();
-	}
-	
-}
 }

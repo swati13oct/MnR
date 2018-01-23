@@ -553,15 +553,15 @@ public static void checkModelPopup(WebDriver driver) {
 
 		System.out.println("Initial value of conter: "+counter);
 		WebDriverWait wait = new WebDriverWait(driver, 15);
-		try {
+		/*try {
 			wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id='IPEinvL']/map/area[3]")));
 			JavascriptExecutor js = (JavascriptExecutor)driver;
 			js.executeScript("arguments[0].click();", driver.findElement(By.xpath("//*[@id='IPEinvL']/map/area[3]")));
 		}
 		catch(Exception ex){
 			ex.printStackTrace();
-		}
-		/*String ParentHandle = driver.getWindowHandle();
+		}*/
+		String ParentHandle = driver.getWindowHandle();
 		do{
 			
 			System.out.println("current value of conter: "+counter);
@@ -573,23 +573,28 @@ public static void checkModelPopup(WebDriver driver) {
 				} catch (InterruptedException e) {
 					System.out.println(e.getMessage());
 				}
-				counter++;
+				
 			}
+		
 			else{
 				System.out.println("FeedBack Modal Present and counter value is:"+counter);
 				try {Thread.sleep(2000);
 					WebElement NoThanks = driver.findElement(By.xpath("//*[@id='IPEinvL']/map/area[3]"));
-					NoThanks.click();
+					JavascriptExecutor js = (JavascriptExecutor)driver;
+		    		js.executeScript("arguments[0].scrollIntoView();", NoThanks);
+		    		js.executeScript("arguments[0].click();", NoThanks);
+		    		driver.switchTo().window(ParentHandle);
+		    		break;
 				//driver.findElement(By.xpath("//area[@href='javascript:clWin()'][@alt = 'no']")).click();				
-					Thread.sleep(5000);
+					//Thread.sleep(5000);
 				} catch (InterruptedException e) {
 					e.printStackTrace();
 				}
-				driver.switchTo().window(ParentHandle);
+				
 			}
-			
+			counter++;
 		}
-		while(counter<1);*/
+		while(counter<2);
 }
 
 public void validateSavedLink(){

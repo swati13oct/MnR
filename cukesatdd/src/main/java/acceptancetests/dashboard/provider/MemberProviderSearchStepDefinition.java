@@ -122,13 +122,5 @@ public class MemberProviderSearchStepDefinition {
 		ProviderSearchPage providerSearchPage = (ProviderSearchPage) getLoginScenario().getBean(PageConstants.MEM_REDESIGN_PROVIDER_SEARCH_PAGE);
 		providerSearchPage.validateZipCodePage();	
 	}
-	@After
-	public void tearDown() {
 
-		WebDriver wd = (WebDriver) getLoginScenario().getBean("webDriver");
-		if(wd!=null){
-		wd.quit();
-		}
-		
-	}
 }

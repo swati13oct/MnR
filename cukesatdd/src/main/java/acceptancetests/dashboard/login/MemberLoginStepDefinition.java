@@ -95,7 +95,10 @@ public class MemberLoginStepDefinition {
 		RallyDashboardPage rallyDashboard = (RallyDashboardPage) THloginPage.loginWith(userName, pwd);
 		if (rallyDashboard != null) {
 			getLoginScenario().saveBean(PageConstants.RALLY_DASHBOARD_PAGE,
-					rallyDashboard);		}	
+					rallyDashboard);		}
+		else{
+			Assert.fail("Login not successful...");
+		}
 	}
 	
 	@Then("^User should be able to validate Dashboard elements$")
@@ -144,13 +147,4 @@ public class MemberLoginStepDefinition {
 
 	}
 	
-	@After
-	public void tearDown() {
-
-		WebDriver wd = (WebDriver) getLoginScenario().getBean("webDriver");
-		if(wd!=null){
-		wd.quit();
-		}
-		
-	}
 }

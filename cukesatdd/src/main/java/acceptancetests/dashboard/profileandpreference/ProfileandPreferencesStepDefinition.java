@@ -591,15 +591,6 @@ public class ProfileandPreferencesStepDefinition {
 		ProfilePreferencesPage.clickEditPreferencesButton();
 		
 	}
-	@After
-	public void tearDown() {
-
-		WebDriver wd = (WebDriver) getLoginScenario().getBean("webDriver");
-		if(wd!=null){
-		wd.quit();
-		}
-		
-	}	
 	
 }
 	

@@ -54,6 +54,7 @@ public class TeamHLoginUlayer extends UhcDriver{
 
 	@Override
 	public void openAndValidate() {
+		System.out.println("URL:"+PAGE_URL);
 		start(PAGE_URL);
 		validate(signInButton);
 		//validate(loginIn);
