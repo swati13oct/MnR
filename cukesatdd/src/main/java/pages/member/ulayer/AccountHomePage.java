@@ -24,6 +24,7 @@ import acceptancetests.atdd.data.PageData;
 import acceptancetests.atdd.util.CommonUtility;
 import atdd.framework.MRScenario;
 import atdd.framework.UhcDriver;
+import pages.dashboard.member.ulayer.ClaimSummarypage;
 
 /**
  * @author pjaising
@@ -937,6 +938,36 @@ driver.switchTo().window(mainwindow);
 		return flag;
 	}
 	
-	
+public pages.dashboard.member.ulayer.ClaimSummarypage navigateToClaimsSummaryPage() {
+		
+		if (MRScenario.environment.equalsIgnoreCase("team-h") || MRScenario.environment.equalsIgnoreCase("test-a")) {
+			System.out.println("Go to claims link is present "+driver.findElement(By.xpath("//a[text()='Go to Claims page']")).isDisplayed());
+			driver.findElement(By.xpath("//a[text()='Go to Claims page']")).click();
+			
+		}
+
+		else if (MRScenario.environment.equalsIgnoreCase("stage")) {
+			//currently stage login is not working . once it start working will update the logic accordingly 
+		}
+		else 
+		{
+			System.out.println("This script is only intended to be run using test harness on team-b or team-h. Update condition for your own environment");	
+		}
+		System.out.println(driver.getTitle());
+
+		if (driver.getTitle().equalsIgnoreCase("Claims")) {
+			try {
+				Thread.sleep(10000);
+				ClaimSummarypage comboTab = new ClaimSummarypage(driver).comboTabSelection();
+                comboTab.comboTabSelection();
+                
+			} catch (InterruptedException e) {
+				
+				e.printStackTrace();
+			}	
+
+}
+		return new ClaimSummarypage(driver);
+}
 
 }
