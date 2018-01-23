@@ -51,8 +51,8 @@ public class LoginAssistanceAarpStepDefintion {
 		return loginScenario;
 	}
 
-	@Given("^user navigates to login assistance page from member AARP site$")
-	public void user_navigates_login_assistance_member_aarp() {
+	@Given("^UnPwdAssTheSpartans user navigates to login assistance page from member AARP site$")
+	public void UnPwdAssTheSpartans_user_navigates_login_assistance_member_aarp() {
 
 		WebDriver wd = getLoginScenario().getWebDriver();
 		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
@@ -69,8 +69,8 @@ public class LoginAssistanceAarpStepDefintion {
 
 	}
 
-	@When("^select username and password$")
-	public void user_pwd_select() throws InterruptedException {
+	@When("^UnPwdAssTheSpartans select username and password$")
+	public void UnPwdAssTheSpartans_user_pwd_select() throws InterruptedException {
 		// LoginPage loginPage = (LoginPage) getLoginScenario()
 		// .getBean(PageConstants.LOGIN_PAGE);
 
@@ -88,8 +88,8 @@ public class LoginAssistanceAarpStepDefintion {
 
 	}
 
-	@Then("^confirmation page need to be displayed$")
-	public void login_validation(DataTable memberAttributes)
+	@Then("^UnPwdAssTheSpartans confirmation page need to be displayed$")
+	public void UnPwdAssTheSpartans_login_validation(DataTable memberAttributes)
 			throws InterruptedException {
 
 		/* Reading the given attribute from feature file */
