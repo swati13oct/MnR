@@ -2,7 +2,7 @@
 @ExplanationOfBenefits
 Feature: Save profile preferences
  @EOB
-  Scenario Outline: To verify Explanation of Benefits
+  Scenario Outline: To verify Explanation of Benefit Preferences
     Given EOBspartans Login to the applicationEOB
       | memberNumber | <memberNumber> |
     When EOBspartans the user navigates to EOB page 

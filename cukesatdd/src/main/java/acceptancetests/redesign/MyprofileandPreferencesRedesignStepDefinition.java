@@ -50,6 +50,7 @@ public class MyprofileandPreferencesRedesignStepDefinition {
 		}
 		// get parameter username and password
 		String userName = memberAttributesMap.get("memberNumber");
+		//password
 		String passWord = "Password@1";
 
 		WebDriver wd = getLoginScenario().getWebDriver();

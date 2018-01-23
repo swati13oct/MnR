@@ -112,7 +112,7 @@ public class ExplanationOfBenefitsPage extends UhcDriver {
 					}
 				}
 			} else
-				Assert.fail("Need Help Details are not displayed!");
+				Assert.fail("Need Help-Details are not displayed!");
 
 		}
 	}
