@@ -1,4 +1,4 @@
-package acceptancetests.member.redesign.healthandwellness;
+package acceptancetests.memberredesign.footer;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -24,10 +24,9 @@ import cucumber.api.java.en.When;
 import gherkin.formatter.model.DataTableRow;
 import pages.dashboard.member.drugcostestimator.blayer.DrugCostEstimatorPage;
 import pages.memberredesign.bluelayer.AccountHomePage;
-import pages.memberredesign.bluelayer.HealthAndWellness;
 import pages.memberredesign.bluelayer.LoginPage;
 
-public class MemberRedesignHealthnWellnessStepDefinition {
+public class MemberRedesignFooterStepDefinition {
 	
 	@Autowired
 	MRScenario loginScenario;
@@ -94,10 +93,10 @@ public class MemberRedesignHealthnWellnessStepDefinition {
 		String category = (String) getLoginScenario().getBean(LoginCommonConstants.CATOGERY);
 		WebDriver wd = (WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
 		LoginPage loginPage = new LoginPage(wd);
-		loginPage.loginToStageTestHarness();
+		loginPage.loginToStageTestHarness();;
 		getLoginScenario().saveBean(PageConstants.LOGIN_PAGE, loginPage);
 		AccountHomePage accountHomePage = (AccountHomePage) loginPage.thloginWith(userName, pwd,category);
-		getLoginScenario().saveBean(PageConstants.ACCOUNT_HOME_PAGE, accountHomePage);
+		getLoginScenario().saveBean(PageConstants.MEM_REDESIGN_ACCOUNT_HOME_PAGE, accountHomePage);
 	
 	}
 	
@@ -106,54 +105,41 @@ public class MemberRedesignHealthnWellnessStepDefinition {
 	    // Express the Regexp above with the code you wish you had
 		WebDriver wd = (WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
 
-		//DrugCostEstimatorPage dce = new DrugCostEstimatorPage(wd);
-		//dce.changeUrlToNewDCEPage();
-		//AccountHomePage accountHomePage = new AccountHomePage(wd);
-		//getLoginScenario().saveBean(PageConstants.MEM_REDESIGN_ACCOUNT_HOME_PAGE, accountHomePage);
-		HealthAndWellness healthnWellnessPage = new HealthAndWellness(wd);
-		getLoginScenario().saveBean(PageConstants.MEM_REDESIGN_HEALTH_AND_WELLNESS_PAGE, healthnWellnessPage);
+		DrugCostEstimatorPage dce = new DrugCostEstimatorPage(wd);
+		dce.changeUrlToNewDCEPage();
+		AccountHomePage accountHomePage = new AccountHomePage(wd);
+		getLoginScenario().saveBean(PageConstants.MEM_REDESIGN_ACCOUNT_HOME_PAGE, accountHomePage);
 	}
 	
-	@When("^then click the health and wellness tab$")
-	public void then_click_the_health_and_wellness_tab() {
+	@When("^I am on the member page then I should be able to see the footer sections$")
+	public void I_am_on_the_member_page_then_I_should_be_able_to_see_the_footer_sections() {
 	    // Express the Regexp above with the code you wish you had
-		HealthAndWellness healthnWellnessPage = (HealthAndWellness) getLoginScenario().getBean(PageConstants.MEM_REDESIGN_HEALTH_AND_WELLNESS_PAGE);
-		healthnWellnessPage.clickHealthnWellnessTab();
+		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstants.MEM_REDESIGN_ACCOUNT_HOME_PAGE);
+		accountHomePage.checkModelPopup();
+		accountHomePage.validateClaimsL2Tabs();
+		accountHomePage.checkModelPopup();
+		accountHomePage.validateFooterSection();
 	}
 
-	@When("^I should see the H&W Generic dashboard and lifestyle,learning and rewards L2 tabs$")
-	public void I_should_see_the_H_W_Generic_dashboard_and_tabs() {
+	@When("^Member Support and links under it should be displayed$")
+	public void Member_Support_and_links_under_it_should_be_displayed() {
 	    // Express the Regexp above with the code you wish you had
-		HealthAndWellness healthnWellnessPage = (HealthAndWellness) getLoginScenario().getBean(PageConstants.MEM_REDESIGN_HEALTH_AND_WELLNESS_PAGE);
-		healthnWellnessPage.validateHnWDashboardnL2Tabs();
-
+		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstants.MEM_REDESIGN_ACCOUNT_HOME_PAGE);
+		accountHomePage.validateMemberSupport();
 	}
 
-
-	@When("^then click the Lifestyle tab and I should be directed to Lifestyle Page$")
-	public void then_click_the_Lifestyle_tab_and_I_should_be_directed_to_Lifestyle_Page() {
+	@When("^Quick links and links under it should be displayed$")
+	public void Quick_links_and_links_under_it_should_be_displayed() {
 	    // Express the Regexp above with the code you wish you had
-		HealthAndWellness healthnWellnessPage = (HealthAndWellness) getLoginScenario().getBean(PageConstants.MEM_REDESIGN_HEALTH_AND_WELLNESS_PAGE);
-		healthnWellnessPage.clickLifestyleTab();
-		healthnWellnessPage.validateLifestylePage();
-
+		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstants.MEM_REDESIGN_ACCOUNT_HOME_PAGE);
+		accountHomePage.validateQuickLinks();
 	}
 
-	@When("^then click the Learning tab and I should be directed to Learning Page$")
-	public void then_click_the_Learning_tab_and_I_should_be_directed_to_Learning_Page() {
+	@When("^I have access to the Rally Provider Search Tool and I see the Saved option under Quick Links$")
+	public void I_have_access_to_the_Rally_Provider_Search_Tool_and_I_see_the_Saved_option_under_Quick_Links() {
 	    // Express the Regexp above with the code you wish you had
-		HealthAndWellness healthnWellnessPage = (HealthAndWellness) getLoginScenario().getBean(PageConstants.MEM_REDESIGN_HEALTH_AND_WELLNESS_PAGE);
-		healthnWellnessPage.clickLearningTab();
-		healthnWellnessPage.validateLearningPage();
-
+		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstants.MEM_REDESIGN_ACCOUNT_HOME_PAGE);
+		accountHomePage.validateSavedLink();
 	}
-
-	@When("^then click the Rewards tab and I should be directed to Rewards Page$")
-	public void then_click_the_Rewards_tab_and_I_should_be_directed_to_Rewards_Page() {
-	    // Express the Regexp above with the code you wish you had
-
-	}
-
-	
 
 }

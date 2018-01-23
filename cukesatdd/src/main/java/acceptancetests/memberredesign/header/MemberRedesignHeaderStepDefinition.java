@@ -1,4 +1,4 @@
-package acceptancetests.member.redesign.header;
+package acceptancetests.memberredesign.header;
 
 import java.util.ArrayList;
 import java.util.Iterator;
