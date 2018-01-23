@@ -705,9 +705,9 @@ public class MRScenario {
         // Is system propery exists defining JENKINS_BROWSER, we're running in
         // JENKINS and
         // will prefer those browser properties.
-        String browser = (null == System.getProperty(CommonConstants.JENKINS_BROWSER_PHANTOMJS)
+        String browser = (null == System.getProperty(CommonConstants.JENKINS_BROWSER)
                       ? props.get(CommonConstants.DESKTOP_WEBDRIVER)
-                      : System.getProperty(CommonConstants.JENKINS_BROWSER_PHANTOMJS));
+                      : System.getProperty(CommonConstants.JENKINS_BROWSER));
 
         String browserName = (null == System.getProperty(CommonConstants.BROWSER_NAME) ? props.get("BrowserName")
                       : System.getProperty(CommonConstants.BROWSER_NAME));

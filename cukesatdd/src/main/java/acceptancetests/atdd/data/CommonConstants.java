@@ -834,4 +834,6 @@ public class CommonConstants {
 
 	public static final String ACCOUNT_USER_NAME = null;
 
+	public static final String JENKINS_BROWSER = "JENKINS_BROWSER";
+
 }
