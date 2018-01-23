@@ -1,13 +1,14 @@
-@theSpartans
-@profilepreferencesPage
+@theSpartans @profilepreferencesPage
 Feature: Save profile preferences
- @profilepreferences
+
+  @profilepreferences
   Scenario Outline: To verify My Preferences and edit preferences
-    Given Login to the application
+    Given PreferencesSpartans Login to the application
       | memberNumber | <memberNumber> |
-    When the user navigates to Prefrences page 
-    Then the user changes delivery preferences
+    When PreferencesSpartans the user navigates to Prefrences page
+    Then PreferencesSpartans the user changes delivery preferences
 
     Examples: 
-      | memberNumber   |
-      | q4_dec_aarp004 |
+      | memberNumber        |
+      | q4_dec_aarp004      |
+      | q1_jan_mapd_nice_01 |

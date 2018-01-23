@@ -37,8 +37,8 @@ public class MyprofileandPreferencesRedesignStepDefinition {
 		return loginScenario;
 	}
 
-	@Given("^Login to the application$")
-	public void Login_to_the_application(DataTable givenAttributes)
+	@Given("^PreferencesSpartans Login to the application$")
+	public void PreferencesSpartans_Login_to_the_application(DataTable givenAttributes)
 			throws InterruptedException {
 
 		List<DataTableRow> memberAttributesRow = givenAttributes
@@ -68,8 +68,8 @@ public class MyprofileandPreferencesRedesignStepDefinition {
 		}
 	}
 
-	@When("^the user navigates to Prefrences page$")
-	public void the_user_navigates_to_Prefrences_page()
+	@When("^PreferencesSpartans the user navigates to Prefrences page$")
+	public void PreferencesSpartans_the_user_navigates_to_Prefrences_page()
 			throws InterruptedException {
 
 		CommunicationPreferences compp = (CommunicationPreferences) getLoginScenario()
@@ -84,8 +84,8 @@ public class MyprofileandPreferencesRedesignStepDefinition {
 		}
 	}
 
-	@Then("^the user changes delivery preferences$")
-	public void the_user_changes_delivery_preferences() throws InterruptedException {
+	@Then("^PreferencesSpartans the user changes delivery preferences$")
+	public void PreferencesSpartans_the_user_changes_delivery_preferences() throws InterruptedException {
 		CommunicationPreferences compp = (CommunicationPreferences) getLoginScenario()
 				.getBean(PageConstants.PROFILEANDPREFERENCES_PAGE);
 
