@@ -35,7 +35,7 @@ public class MemberRedesignFooterStepDefinition {
 		return loginScenario;
 	}
 	
-	@Given("^I am a authenticated member on the member redesign site$")
+	@Given("^I am a authenticated member on the member redesign site Footer$")
 	public void I_am_a_authenticated_member_on_the_member_redesign_site(DataTable memberAttributes) {
 		WebDriver wd = getLoginScenario().getWebDriver();
 		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
@@ -86,7 +86,7 @@ public class MemberRedesignFooterStepDefinition {
 
 	}
 	
-	@When("^the above plantype user logs in UMS Site Desktop$")
+	@When("^the above plantype user logs in UMS Site Desktop Footer$")
 	public void plantype_user_logs_in() {
 		String userName = (String) getLoginScenario().getBean(LoginCommonConstants.USERNAME);
 		String pwd = (String) getLoginScenario().getBean(LoginCommonConstants.PASSWORD);
@@ -100,7 +100,7 @@ public class MemberRedesignFooterStepDefinition {
 	
 	}
 	
-	@When("^I view the global navigation$")
+	@When("^I view the global navigation Footer$")
 	public void I_view_the_global_navigation() throws InterruptedException {
 	    // Express the Regexp above with the code you wish you had
 		WebDriver wd = (WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
@@ -111,7 +111,7 @@ public class MemberRedesignFooterStepDefinition {
 		getLoginScenario().saveBean(PageConstants.MEM_REDESIGN_ACCOUNT_HOME_PAGE, accountHomePage);
 	}
 	
-	@When("^I am on the member page then I should be able to see the footer sections$")
+	@When("^I am on the member page then I should be able to see the footer sections Footer$")
 	public void I_am_on_the_member_page_then_I_should_be_able_to_see_the_footer_sections() {
 	    // Express the Regexp above with the code you wish you had
 		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstants.MEM_REDESIGN_ACCOUNT_HOME_PAGE);
@@ -121,21 +121,21 @@ public class MemberRedesignFooterStepDefinition {
 		accountHomePage.validateFooterSection();
 	}
 
-	@When("^Member Support and links under it should be displayed$")
+	@When("^Member Support and links under it should be displayed Footer$")
 	public void Member_Support_and_links_under_it_should_be_displayed() {
 	    // Express the Regexp above with the code you wish you had
 		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstants.MEM_REDESIGN_ACCOUNT_HOME_PAGE);
 		accountHomePage.validateMemberSupport();
 	}
 
-	@When("^Quick links and links under it should be displayed$")
+	@When("^Quick links and links under it should be displayed Footer$")
 	public void Quick_links_and_links_under_it_should_be_displayed() {
 	    // Express the Regexp above with the code you wish you had
 		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstants.MEM_REDESIGN_ACCOUNT_HOME_PAGE);
 		accountHomePage.validateQuickLinks();
 	}
 
-	@When("^I have access to the Rally Provider Search Tool and I see the Saved option under Quick Links$")
+	@When("^I have access to the Rally Provider Search Tool and I see the Saved option under Quick Links Footer$")
 	public void I_have_access_to_the_Rally_Provider_Search_Tool_and_I_see_the_Saved_option_under_Quick_Links() {
 	    // Express the Regexp above with the code you wish you had
 		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstants.MEM_REDESIGN_ACCOUNT_HOME_PAGE);
