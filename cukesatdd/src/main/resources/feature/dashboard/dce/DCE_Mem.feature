@@ -3,7 +3,6 @@ Feature:Drug Cost Estimator
 @Sanity_DceMem
 Scenario Outline: To Verify MR portal members using DCE on a desktop device, I want to be able to switch from branded to generic drug, given that a pharmacy is selected and it suggests the user with an appropriate save money message and cost savings are also updated
 Given I am a registered member using the new M&R member portal on a desktop computer
-| Plan Type   | <planType>   |
 | Member Type	  | <memberType> |
 When the above plantype user logs in UMS Site Desktop
 And I access the page containing the DCE tool
@@ -21,8 +20,8 @@ Then I should see that total estimated annual drug costs in summary section matc
 | totalAnnualDrugCost | <totalAnnualDrugCost> |
 
 Examples:
- | planType| memberType| drug |USOTZipcode|totalAnnualDrugCost|
- | MAPD|IndividualDCEmember|lipitor|90002|$4,050.24|
+| memberType| drug |USOTZipcode|totalAnnualDrugCost|
+| UhcMapdInd |lipitor|90002|$4,050.24|
  
  
  

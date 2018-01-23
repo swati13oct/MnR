@@ -810,8 +810,10 @@ System.out.println("value - "+memberAttributesRow.get(i).getCells().get(1));
 		}
 
 		String zipcode = memberAttributesMap.get("USOTZipcode");
-		WebDriver wd = (WebDriver)getLoginScenario().getBean(CommonConstants.WEBDRIVER);
-		DrugCostEstimatorPage dce = new DrugCostEstimatorPage(wd);
+		/*WebDriver wd = (WebDriver)getLoginScenario().getBean(CommonConstants.WEBDRIVER);
+		DrugCostEstimatorPage dce = new DrugCostEstimatorPage(wd);*/
+		DrugCostEstimatorPage dce = (DrugCostEstimatorPage) getLoginScenario()
+				.getBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE);
 		dce.pharmacyInformation(zipcode);
 	}
 
@@ -910,7 +912,7 @@ System.out.println("value - "+memberAttributesRow.get(i).getCells().get(1));
 		}
 		//System.out.println("Map values"+memberAttributesMap);
 		String totalAnnualDrugCost = memberAttributesMap.get("totalAnnualDrugCost");
-		WebDriver wd = (WebDriver)getLoginScenario().getBean(CommonConstants.WEBDRIVER);
+		//WebDriver wd = (WebDriver)getLoginScenario().getBean(CommonConstants.WEBDRIVER);
 		DrugCostEstimatorPage dce = (DrugCostEstimatorPage) getLoginScenario()
 				.getBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE);
 		
@@ -1030,10 +1032,10 @@ System.out.println("value - "+memberAttributesRow.get(i).getCells().get(1));
 	@And("^I navigate to step3 page$")
 	public void I_navigate_to_step3_page() throws InterruptedException {
 		
-		WebDriver wd = (WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
-		DrugCostEstimatorPage dce = new DrugCostEstimatorPage(wd);
-		//DrugCostEstimatorPage dce = (DrugCostEstimatorPage) getLoginScenario()
-		//		.getBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE);
+		/*WebDriver wd = (WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
+		DrugCostEstimatorPage dce = new DrugCostEstimatorPage(wd);*/
+		DrugCostEstimatorPage dce = (DrugCostEstimatorPage) getLoginScenario()
+			.getBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE);
 		dce.navigateToStep3();
 
 	}

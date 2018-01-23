@@ -35,7 +35,7 @@ public class DrugCostEstimatorPage extends UhcDriver {
 			noThanksImage.get(0).click();
 		}*/
 		if(loadingImages.size()>0){
-		CommonUtility.waitForElementToDisappear(driver, loadingImages.get(0), 60);
+		CommonUtility.waitForElementToDisappear(driver, loadingImages.get(0), 120);
 		}
 		String fileName = CommonConstants.SAVE_DRUG_PAGE_DATA;
 		// savedrugpage = CommonUtility.readPageData(fileName,
@@ -150,7 +150,7 @@ public class DrugCostEstimatorPage extends UhcDriver {
 	@FindBy(xpath = "//div[@id='pharmacy-results']//span[contains(@class,'pharmacy-name')]")
 	public List<WebElement> pharmacies;
 
-	@FindBy(xpath = "(//a[@id='select-pharmacy-button'])[2]") 
+	@FindBy(xpath = "//ul[@class='pharmacy-list']/li//a[@id='select-pharmacy-button' and text()=' SELECT']") 
 	public WebElement select_btn_first; 
 
 	@FindBy(id = "saverSavingSpan")
@@ -303,7 +303,7 @@ public class DrugCostEstimatorPage extends UhcDriver {
 	}
 
 	public AddNewDrugModal clickOnAddDrug() throws InterruptedException {
-		Thread.sleep(20000);
+		//Thread.sleep(20000);
 		validate(addDrug);
 		//waitforElement(addDrug);
 		addDrug.click();
@@ -429,12 +429,13 @@ public class DrugCostEstimatorPage extends UhcDriver {
 
 	public void navigateToStep2() throws InterruptedException {
 		//waitforElement(step2Pharmacy);
-		Thread.sleep(10000);
+		//Thread.sleep(10000);
 		/*JavascriptExecutor jse = (JavascriptExecutor)driver;
 		jse.executeScript("window.scrollBy(0,-200)", "");*/
 		validate(step2Pharmacy);		
 		step2Pharmacy.click();
-		Thread.sleep(10000);
+		//Thread.sleep(10000);
+		CommonUtility.waitForPageLoad(driver, pharmacy_form, 20);
 		waitforElement(pharmacy_form);
 
 	}
@@ -615,7 +616,7 @@ public class DrugCostEstimatorPage extends UhcDriver {
 	}
 
 	public void selectPharmacyType(String pharmacy) throws InterruptedException {
-		CommonUtility.waitForElementToDisappear(driver, loadingImage, 60);
+		CommonUtility.waitForElementToDisappear(driver, loadingImage, 120);
 		WebElement rbtn = driver.findElement(By.xpath(".//*[@id='pharmacy-type']/div/label/p[contains(text(),'" + pharmacy + "')]"));
 		validate(rbtn);
 		rbtn.isDisplayed();
@@ -662,15 +663,15 @@ public class DrugCostEstimatorPage extends UhcDriver {
 	}
 
 	public void select_first_pharmacy() throws InterruptedException {
-		Thread.sleep(40000);
+		//Thread.sleep(40000);
 		
-		JavascriptExecutor jse = (JavascriptExecutor)driver;
-		jse.executeScript("window.scrollBy(0,900)", "");
+		/*JavascriptExecutor jse = (JavascriptExecutor)driver;
+		jse.executeScript("window.scrollBy(0,900)", "");*/
+		//scrollToView(select_btn_first);
+		CommonUtility.waitForElementToDisappear(driver, loadingImage, 180);
 		scrollToView(select_btn_first);
 		validate(select_btn_first);
-		if (select_btn_first.isDisplayed()) {
 			select_btn_first.click();
-		}
 		Thread.sleep(5000);
 	}
 
@@ -757,7 +758,7 @@ public class DrugCostEstimatorPage extends UhcDriver {
 		validate(zipcodeInput);
 		sendkeys(zipcodeInput, zipcode);
 		btnZipCodeSearch.click();
-		Thread.sleep(10000);
+		//Thread.sleep(10000);
 	}
 
 	public void validatePreferredMailServiceNotPresent() {
@@ -771,6 +772,7 @@ public class DrugCostEstimatorPage extends UhcDriver {
 
 	public void validatePreferredMailServiceRD() {
 		try {
+			validate(lbPreferredMailService);
 			Assert.assertTrue(lbPreferredMailService.isDisplayed());
 		} catch (org.openqa.selenium.NoSuchElementException e) {
 			Assert.assertFalse(false);
@@ -834,7 +836,7 @@ public class DrugCostEstimatorPage extends UhcDriver {
 		validate(step3);
 		//waitforElement(step2);
 		step3.click();
-		Thread.sleep(10000);
+		//Thread.sleep(10000);
 	}
 
 	public void delete_all_drugs() throws InterruptedException {

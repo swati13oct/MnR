@@ -295,9 +295,10 @@ public class RallyDashboardPage extends UhcDriver{
 	}
 	
 	public DrugCostEstimatorPage navigateToDCEPage() throws InterruptedException {
-		waitforElement(DCE_Dashboard);
-		DCE_Dashboard.click();	
-	    Thread.sleep(10000);
+		validate(DCE_Dashboard);
+		DCE_Dashboard.click();
+		CommonUtility.checkPageIsReady(driver);
+	    //Thread.sleep(10000);
 		if (driver.getTitle().contains("Overview")) {
 			return new DrugCostEstimatorPage(driver);
 		}
@@ -553,11 +554,12 @@ public static void checkModelPopup(WebDriver driver) {
 		System.out.println("Initial value of conter: "+counter);
 		WebDriverWait wait = new WebDriverWait(driver, 15);
 		try {
-			wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//*[@id='IPEinvL']/map/area[3]")));
-		}
-		catch(Exception ex){
+			wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id='IPEinvL']/map/area[3]")));
 			JavascriptExecutor js = (JavascriptExecutor)driver;
 			js.executeScript("arguments[0].click();", driver.findElement(By.xpath("//*[@id='IPEinvL']/map/area[3]")));
+		}
+		catch(Exception ex){
+			ex.printStackTrace();
 		}
 		/*String ParentHandle = driver.getWindowHandle();
 		do{
