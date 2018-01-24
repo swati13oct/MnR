@@ -1,5 +1,5 @@
 
-package acceptancetests.memberrdesign;
+package acceptancetests.memberredesign;
 
 import gherkin.formatter.model.DataTableRow;
 
