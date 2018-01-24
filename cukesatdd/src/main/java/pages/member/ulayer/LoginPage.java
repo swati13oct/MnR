@@ -39,6 +39,7 @@ public class LoginPage extends UhcDriver {
 		
 	private static String PAGE_URL_TEAM_H_TEST_HARNESS = MRConstants.TEAMH_URL_TESTHARNES;
 	private static String PAGE_URL_TEAM_MEDICARE_TESTHARNESS = MRConstants.TEAM_MEDICARE_TESTHARNESS;
+	private static String STAGE_DASHBOARD_URL = MRConstants.STAGE_DASHBOARD_NEW_DOMAIN_URL;
 	
 
 	@FindBy(id = "fd_memberSignInButton")
@@ -270,12 +271,17 @@ public class LoginPage extends UhcDriver {
 		validate(thSignIn);
 	}
 	
-	public void navigateToTeamMedicareTestHarness(){
-		start(PAGE_URL_TEAM_MEDICARE_TESTHARNESS);
-		System.out.println("User is on Medicare Test harness page");
-		//validate(thUserName);
-		//validate(thPassword);
-		//validate(thSignIn);
+	public void navigateToNewDashboardUrl(){
+		if (MRScenario.environment.equalsIgnoreCase("stage"))
+		{
+			start(STAGE_DASHBOARD_URL);
+			System.out.println("User is Navigating to Stage Dashboard");
+		}
+		else
+		{
+			start(PAGE_URL_TEAM_MEDICARE_TESTHARNESS);
+			System.out.println("User is on Medicare Test harness page");	
+		}
 	}
 	
 	public Object thloginWith(String username, String password, String category) {
