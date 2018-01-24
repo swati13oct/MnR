@@ -52,8 +52,8 @@ public class OrderPlanMaterialsAarpStepDefinition {
 		return loginScenario;
 	}
 
-	@Given("^registered AMP member with following attributes$")
-	public void registered_member_orderplanmaterials_aarp(
+	@Given("^registered Redesign member for Order Plan Materials with following attributes$")
+	public void registered_member_orderplanmaterials_redesign(
 			DataTable memberAttributes) throws InterruptedException {
 
 		/* Reading the given attribute from feature file */

@@ -19,7 +19,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import pages.redesign.UlayerHomePage;
 import pages.redesign.PharmacySearchPage;
 import pages.redesign.RedesignLoginPage;
-import pages.redesign.PharmacyResultPage;
+import pages.redesign.PharmacySearchPage;
 import acceptancetests.atdd.data.CommonConstants;
 import acceptancetests.atdd.data.member.PageConstants;
 import acceptancetests.login.data.LoginCommonConstants;
@@ -170,10 +170,10 @@ public class PharmacyLocatorMemberRedesignStepDefinition {
 		PharmacySearchPage pharmacySearchPage = (PharmacySearchPage) getLoginScenario()
 				.getBean(PageConstants.PHARMACY_SEARCH_PAGE);
 
-		PharmacyResultPage pharmacyResultPage = pharmacySearchPage.searchesPharmacy();
-		if (pharmacyResultPage != null) {
+		PharmacySearchPage PharmacySearchPage = pharmacySearchPage.searchesPharmacy();
+		if (PharmacySearchPage != null) {
 			getLoginScenario().saveBean(PageConstants.PHARMACY_RESULT_PAGE,
-					pharmacyResultPage);
+					PharmacySearchPage);
 			Assert.assertTrue(true);
 
 		}
@@ -241,11 +241,11 @@ public class PharmacyLocatorMemberRedesignStepDefinition {
 	public void user_views_show_on_map_result_AARP() throws InterruptedException {
 		PharmacySearchPage pharmacySearchPage = (PharmacySearchPage) getLoginScenario()
 				.getBean(PageConstants.PHARMACY_SEARCH_PAGE);
-		PharmacyResultPage pharmacyResultPage = pharmacySearchPage
+		PharmacySearchPage PharmacySearchPage = pharmacySearchPage
 				.ValidateShowOnMapLinks();
-		if (pharmacyResultPage != null) {
+		if (PharmacySearchPage != null) {
 			getLoginScenario().saveBean(PageConstants.PHARMACY_RESULT_PAGE,
-					pharmacyResultPage);
+					PharmacySearchPage);
 			Assert.assertTrue(true);
 
 		}
@@ -258,11 +258,11 @@ public class PharmacyLocatorMemberRedesignStepDefinition {
 	public void user_views_search_pdf_result_AARP() throws InterruptedException {
 		PharmacySearchPage pharmacySearchPage = (PharmacySearchPage) getLoginScenario()
 				.getBean(PageConstants.PHARMACY_SEARCH_PAGE);
-		PharmacyResultPage pharmacyResultPage = pharmacySearchPage
+		PharmacySearchPage PharmacySearchPage = pharmacySearchPage
 				.ValidateSearchPdfResult();
-		if (pharmacyResultPage != null) {
+		if (PharmacySearchPage != null) {
 			getLoginScenario().saveBean(PageConstants.PHARMACY_RESULT_PAGE,
-					pharmacyResultPage);
+					PharmacySearchPage);
 			Assert.assertTrue(true);
 			System.out.println("PDF Result Page is Displayed");
 		}
@@ -275,10 +275,10 @@ public class PharmacyLocatorMemberRedesignStepDefinition {
 	public void user_validate_more_information_content() throws InterruptedException {
 		PharmacySearchPage pharmacySearchPage = (PharmacySearchPage) getLoginScenario()
 				.getBean(PageConstants.PHARMACY_SEARCH_PAGE);
-		PharmacyResultPage pharmacyResultPage = pharmacySearchPage.validateMoreInfoContent();
-		if (pharmacyResultPage != null) {
+		PharmacySearchPage PharmacySearchPage = pharmacySearchPage.validateMoreInfoContent();
+		if (PharmacySearchPage != null) {
 			getLoginScenario().saveBean(PageConstants.PHARMACY_RESULT_PAGE,
-					pharmacyResultPage);
+					PharmacySearchPage);
 			Assert.assertTrue(true);
 			System.out.println("More Info Disclaimer is Displayed");
 		}
@@ -301,10 +301,10 @@ public class PharmacyLocatorMemberRedesignStepDefinition {
 		String DisclaimerText = zipAttributesMap.get("Disclaimer Text");
 		PharmacySearchPage pharmacySearchPage = (PharmacySearchPage) getLoginScenario()
 				.getBean(PageConstants.PHARMACY_SEARCH_PAGE);
-		PharmacyResultPage pharmacyResultPage = pharmacySearchPage.validateLimitedAccessDisclaimer(DisclaimerText);
-		if (pharmacyResultPage != null) {
+		PharmacySearchPage PharmacySearchPage = pharmacySearchPage.validateLimitedAccessDisclaimer(DisclaimerText);
+		if (PharmacySearchPage != null) {
 			getLoginScenario().saveBean(PageConstants.PHARMACY_RESULT_PAGE,
-					pharmacyResultPage);
+					PharmacySearchPage);
 			Assert.assertTrue(true);
 			System.out.println("Limited Access Disclaimer is Displayed");
 		}
@@ -314,13 +314,13 @@ public class PharmacyLocatorMemberRedesignStepDefinition {
 	}
 
 	@And("^the user validate chat widget in Redesign Site$")
-	public void user_validate_chat_widget() {
+	public void user_validate_chat_widget() throws InterruptedException {
 		PharmacySearchPage pharmacySearchPage = (PharmacySearchPage) getLoginScenario()
 				.getBean(PageConstants.PHARMACY_SEARCH_PAGE);
-		PharmacyResultPage pharmacyResultPage = pharmacySearchPage.validateChatWidget();
-		if (pharmacyResultPage != null) {
+		PharmacySearchPage PharmacySearchPage = pharmacySearchPage.validateChatWidget();
+		if (PharmacySearchPage != null) {
 			getLoginScenario().saveBean(PageConstants.PHARMACY_RESULT_PAGE,
-					pharmacyResultPage);
+					PharmacySearchPage);
 			Assert.assertTrue(true);
 			System.out.println("Chat Widget is Displayed");
 		}
@@ -330,13 +330,13 @@ public class PharmacyLocatorMemberRedesignStepDefinition {
 	}
 
 	@And("^the user validate TFN widget in Redesign Site$")
-	public void user_validate_tfn_widget() {
+	public void user_validate_tfn_widget() throws InterruptedException {
 		PharmacySearchPage pharmacySearchPage = (PharmacySearchPage) getLoginScenario()
 				.getBean(PageConstants.PHARMACY_SEARCH_PAGE);
-		PharmacyResultPage pharmacyResultPage = pharmacySearchPage.validateTfnWidget();
-		if (pharmacyResultPage != null) {
+		PharmacySearchPage PharmacySearchPage = pharmacySearchPage.validateTfnWidget();
+		if (PharmacySearchPage != null) {
 			getLoginScenario().saveBean(PageConstants.PHARMACY_RESULT_PAGE,
-					pharmacyResultPage);
+					PharmacySearchPage);
 			Assert.assertTrue(true);
 			System.out.println("TFN Widget is Displayed");
 		}
@@ -360,9 +360,9 @@ public class PharmacyLocatorMemberRedesignStepDefinition {
 	public void select_spanish() throws InterruptedException {
 		PharmacySearchPage pharmacySearchPage = (PharmacySearchPage) getLoginScenario()
 				.getBean(PageConstants.PHARMACY_SEARCH_PAGE);
-		PharmacySearchPage pharmacyResultPage = pharmacySearchPage
+		PharmacySearchPage PharmacySearchPage = pharmacySearchPage
 				.selectspanLanguage();
-		if (pharmacyResultPage != null) {
+		if (PharmacySearchPage != null) {
 			getLoginScenario().saveBean(PageConstants.PHARMACY_SEARCH_PAGE, pharmacySearchPage);
 			Assert.assertTrue(true);
 		} 
@@ -375,9 +375,9 @@ public class PharmacyLocatorMemberRedesignStepDefinition {
 	public void user_views_multi_lang_pharmacy_search_result() throws InterruptedException {
 		PharmacySearchPage pharmacySearchPage = (PharmacySearchPage) getLoginScenario()
 				.getBean(PageConstants.PHARMACY_SEARCH_PAGE);
-		PharmacyResultPage pharmacyResultPage = pharmacySearchPage.multilangPharmacySearchResult();
-		if (pharmacyResultPage != null) {
-			getLoginScenario().saveBean(PageConstants.PHARMACY_RESULT_PAGE, pharmacyResultPage);
+		PharmacySearchPage PharmacySearchPage = pharmacySearchPage.multilangPharmacySearchResult();
+		if (PharmacySearchPage != null) {
+			getLoginScenario().saveBean(PageConstants.PHARMACY_RESULT_PAGE, PharmacySearchPage);
 			Assert.assertTrue(true);
 			System.out.println("Pharmacy Results are Displayed");
 		}
