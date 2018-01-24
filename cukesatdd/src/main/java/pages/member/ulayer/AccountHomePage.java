@@ -24,6 +24,8 @@ import acceptancetests.atdd.data.PageData;
 import acceptancetests.atdd.util.CommonUtility;
 import atdd.framework.MRScenario;
 import atdd.framework.UhcDriver;
+import pages.dashboard.member.ulayer.ClaimDetailsPage;
+import pages.dashboard.member.ulayer.ClaimSummarypage;
 
 /**
  * @author pjaising
@@ -244,7 +246,12 @@ public class AccountHomePage extends UhcDriver {
 	  
 	  @FindBy(xpath="//a[@class='searchforproviders margin_top_5px']")
 		private WebElement searchProviderinFormsandResourcePage;
-	
+	  
+	  @FindBy(xpath = "//div[@class='claim-results']//table[not (contains(@class,'ng-hide'))]//tbody//tr[2]//a[text()='MORE INFO']")
+	  private WebElement claimstablemoreinfolink;
+	  
+	  @FindBy (css = ".claimDetTableMainSection")
+		private WebElement claimDetTableMainSection;	
 	
 	
 	@FindBy(xpath="//span[text()='search providers']")
@@ -937,6 +944,54 @@ driver.switchTo().window(mainwindow);
 		return flag;
 	}
 	
-	
+public pages.dashboard.member.ulayer.ClaimSummarypage navigateToClaimsSummaryPage() {
+		
+		if (MRScenario.environment.equalsIgnoreCase("team-h") || MRScenario.environment.equalsIgnoreCase("test-a")) {
+			System.out.println("Go to claims link is present "+driver.findElement(By.xpath("//a[text()='Go to Claims page']")).isDisplayed());
+			driver.findElement(By.xpath("//a[text()='Go to Claims page']")).click();
+			
+		}
+
+		else if (MRScenario.environment.equalsIgnoreCase("stage")) {
+			//currently stage login is not working . once it start working will update the logic accordingly 
+		}
+		else 
+		{
+			System.out.println("This script is only intended to be run using test harness on team-b or team-h. Update condition for your own environment");	
+		}
+		System.out.println(driver.getTitle());
+
+		if (driver.getTitle().equalsIgnoreCase("Claims")) {
+			try {
+				Thread.sleep(10000);
+				ClaimSummarypage comboTab = new ClaimSummarypage(driver).comboTabSelection();
+                comboTab.comboTabSelection();
+                
+			} catch (InterruptedException e) {
+				
+				e.printStackTrace();
+			}	
+
+}
+		return new ClaimSummarypage(driver);
+}
+
+public pages.dashboard.member.ulayer.ClaimDetailsPage navigateToClaimDetailsPage() {
+	CommonUtility.waitForPageLoad(driver, claimstablemoreinfolink, 60);
+	claimstablemoreinfolink.click();
+	CommonUtility.waitForPageLoad(driver, claimDetTableMainSection, 30);
+
+	//driver.findElement(By.xpath("//a[contains(text(),'MORE INFO')]")).click();
+	/*
+	 * try { Thread.sleep(1000); } catch (InterruptedException e) { // TODO
+	 * Auto-generated catch block e.printStackTrace(); }
+	 */
+	System.out.println(driver.getTitle());
+	if (driver.getTitle().equalsIgnoreCase("claims   ")) {
+		return new pages.dashboard.member.ulayer.ClaimDetailsPage(driver);
+
+	}
+	return new pages.dashboard.member.ulayer.ClaimDetailsPage(driver);
+}
 
 }
