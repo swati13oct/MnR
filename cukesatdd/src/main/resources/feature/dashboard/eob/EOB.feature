@@ -1,3 +1,4 @@
+@fastandfurious
 @eob
 Feature:To test EOB on Dashboard page
 @fixed 

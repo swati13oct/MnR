@@ -191,6 +191,8 @@ public class PageConstants {
 	public static final String PDP_REQUEST_MORE_HELP_INFORMATION_PAGE = "pdpRequestHelpAndInformationPage";
 
 	public static final String PDP_ENROLLMENT_GUIDE_PAGE = "pdpEnrollementGuidePage";
+	
+	public static final String NEW_LOGIN_PAGE = "newLoginPage";
 
 	public static final String LOGIN_ASSISTANCE_PAGE = "loginAssistancePage";
 
@@ -390,5 +392,8 @@ public static final String PORTFOLIO_PAGE_UHC = "ourPlans";
 	   
 	   public static final String REGISTRATION_INFORMATION_PAGE = "RegistrationInformationPage";
 	   
+	   public static final String RALLY_DASHBOARDPAGE = "RallyDashboardPage";
+	   
+	   public static final String DASHBOARD_FORMS_AND_RESOURCES_PAGE = "FormsAndResourcesPage";
 	   public static final String COMPARE_PLANS_PAGE = "comparePlansPage";
 }
