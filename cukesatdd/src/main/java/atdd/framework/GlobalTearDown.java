@@ -62,7 +62,8 @@ public class GlobalTearDown {
 			scenario.embed(screenshot, "image/png");
 			
 			//Clean up the existing webdriver.
-		    wd.quit();
+			getLoginScenario().nullifyWebDriver();
+		   // wd.quit();
 		}
 
 	}

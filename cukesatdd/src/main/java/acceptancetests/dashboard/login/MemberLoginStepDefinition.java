@@ -105,7 +105,7 @@ public class MemberLoginStepDefinition {
 	public void user_validate_dashboard_elements() throws InterruptedException {
 		RallyDashboardPage rallyDashboard = (RallyDashboardPage) getLoginScenario().getBean(PageConstants.RALLY_DASHBOARD_PAGE);
 		validateURLNavigation();
-		rallyDashboard.validateDashboardElements();	
+		rallyDashboard.validateDashboardElements(category);	
 	}
 	
 	@And("^User should be ale to navigate to secondary page$")

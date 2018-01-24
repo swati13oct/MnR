@@ -693,7 +693,7 @@ public class MRScenario {
 		return webDriver;
 	}*/
 	
-	/*public WebDriver getWebDriver() {
+	public WebDriver getWebDriver() {
 
         // !!!!! ATTENTION !!!!!
         /// If you're changing this code to get a browser to work the you're
@@ -712,13 +712,13 @@ public class MRScenario {
         String browserName = (null == System.getProperty(CommonConstants.BROWSER_NAME) ? props.get("BrowserName")
                       : System.getProperty(CommonConstants.BROWSER_NAME));
 
-        String agent = (null == System.getProperty(CommonConstants.JENKINS_BROWSER_AGENT_STRING)
+       /* String agent = (null == System.getProperty(CommonConstants.JENKINS_BROWSER_AGENT_STRING)
                       ? props.get(CommonConstants.DESKTOP_BROWSER_AGENT_STRING)
-                      : System.getProperty(CommonConstants.JENKINS_BROWSER_AGENT_STRING));
+                      : System.getProperty(CommonConstants.JENKINS_BROWSER_AGENT_STRING));*/
 
-        if (browser.equalsIgnoreCase(CommonConstants.JENKINS_BROWSER_PHANTOMJS)) {
+       /* if (browser.equalsIgnoreCase(CommonConstants.JENKINS_BROWSER_PHANTOMJS)) {
                System.out.println("PHANTOMJS Agent: " + agent);
-        }
+        }*/
 
         // Again, Jenkins takes precedent.
         String pathToBinary = (null == System.getProperty("phantomjs") ? props.get("BrowserPathToBinary")
@@ -738,7 +738,7 @@ public class MRScenario {
                // use HTMLUNIT.
                // This is the default browser when I checked out the code, so it's
                // the default
-               if (null == browser || browser.equalsIgnoreCase(CommonConstants.HTMLUNIT_BROWSER)) {
+               /*if (null == browser || browser.equalsIgnoreCase(CommonConstants.HTMLUNIT_BROWSER)) {
                       // use the HtmlUnit Driver
                       HtmlUnitDriver htmlUnitDriver = new HtmlUnitDriver(BrowserVersion.getDefault()) {
                             @Override
@@ -752,7 +752,8 @@ public class MRScenario {
                       webDriver = htmlUnitDriver;
                       webDriver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
                       webDriver.manage().window().maximize();
-               } else if (browser.equalsIgnoreCase(CommonConstants.JENKINS_BROWSER_PHANTOMJS)) {
+               } */
+                if (browser.equalsIgnoreCase(CommonConstants.JENKINS_BROWSER_PHANTOMJS)) {
                       // otherwise if we have a Jenkins browser defined, we use it.
                       DesiredCapabilities caps = new DesiredCapabilities();
                       caps.setCapability(PhantomJSDriverService.PHANTOMJS_EXECUTABLE_PATH_PROPERTY, pathToBinary);
@@ -815,7 +816,7 @@ public class MRScenario {
                 	System.out.println("Inside firefox");
                 capabilities = DesiredCapabilities.firefox();
                 capabilities.setCapability("platform", "Windows 7");
-                capabilities.setCapability("version", "43");
+                capabilities.setCapability("version", "45");
                 capabilities.setCapability("idleTimeout", 180);
                 }else if(browserName.equalsIgnoreCase("IE")){
                 	capabilities = DesiredCapabilities.internetExplorer();
@@ -850,21 +851,10 @@ public class MRScenario {
         }
                       return webDriver;
                
-        
-          if (null == webDriver) {              
-             File pathToBinary = new File("C:\\Program Files (x86)\\Google\\Chrome\\Application\\Chrome.exe");
-             Map<String, Object> chromeOptions = new HashMap<String, Object>();
-             chromeOptions.put("binary", pathToBinary);
-             DesiredCapabilities capabilities = DesiredCapabilities.chrome();
-             capabilities.setCapability(ChromeOptions.CAPABILITY, chromeOptions);
-             System.setProperty("webdriver.chrome.driver","C:\\Users\\njain112\\Videos\\chromedriver.exe");
-             webDriver = new ChromeDriver();
-         }
-             return webDriver;
 
-  }*/
+  }
 
-	public WebDriver getWebDriver() {
+/*	public WebDriver getWebDriver() {
         DesiredCapabilities capabilities = DesiredCapabilities
                                       .firefox();
         capabilities.setCapability("platform", "Windows 7");
@@ -883,7 +873,7 @@ capabilities.setCapability("name", jobName);
                        e.printStackTrace();
         }
         return webDriver;
-        }
+        }*/
 
 	public WebDriver getIEDriver() {
 		System.setProperty("webdriver.ie.driver",
@@ -916,7 +906,7 @@ capabilities.setCapability("name", jobName);
 
 	public void nullifyWebDriver() {
 		if (null != webDriver) {
-			webDriver.close();
+			webDriver.quit();
 			webDriver = null;
 		}
 

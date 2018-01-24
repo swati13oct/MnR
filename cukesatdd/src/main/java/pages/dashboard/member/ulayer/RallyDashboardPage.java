@@ -627,9 +627,14 @@ public ProviderSearchPage navigateToProviderSearch(){
 	return null;
 }
 
-public void validateDashboardElements(){
+public void validateDashboardElements(String Category){
 	CommonUtility.checkPageIsReady(driver);
+	if(Category!="Ship"){
 	validate(panelFindCareCost);
+	}
+	if(Category!="GroupRetiree"){
+	validate(panelPremiumPayment);
+	}
 	validate(panelClaims);
 	validate(panelHealth);
 	validate(accountToggleDropdown);
