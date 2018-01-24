@@ -16,10 +16,9 @@ import cucumber.api.CucumberOptions;
 @ExtendedCucumberOptions(retryCount=2,screenShotSize="", screenShotLocation="/screenshots/",
 jsonReport = "target/cucumber-RunMRATDDcodeMonkeysTest.json",detailedReport = true, detailedAggregatedReport = true, 
 	overviewReport = true, toPDF = true, outputFolder = "target/RunMRATDDcodeMonkeysTest")
-@CucumberOptions(glue = { "atdd.framework", "acceptancetests.memberrdesign" }, 
-features = { "src/main/resources/feature/memberrdesign" }, plugin = {"pretty", "html:reports/test-report", 
+@CucumberOptions(glue = { "atdd.framework", "acceptancetests.memberredesign" }, 
+features = { "src/main/resources/feature/memberredesign" }, plugin = {"pretty", "html:reports/test-report", 
 		"json:target/cucumber-RunMRATDDcodeMonkeys.json" }, tags = { "@codeMonkeys" })
-
 public class RunMRATDDcodeMonkeysTest {
 
 }
