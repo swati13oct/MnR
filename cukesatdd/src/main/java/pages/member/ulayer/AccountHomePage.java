@@ -24,6 +24,7 @@ import acceptancetests.atdd.data.PageData;
 import acceptancetests.atdd.util.CommonUtility;
 import atdd.framework.MRScenario;
 import atdd.framework.UhcDriver;
+import pages.dashboard.member.ulayer.ClaimDetailsPage;
 import pages.dashboard.member.ulayer.ClaimSummarypage;
 
 /**
@@ -245,7 +246,12 @@ public class AccountHomePage extends UhcDriver {
 	  
 	  @FindBy(xpath="//a[@class='searchforproviders margin_top_5px']")
 		private WebElement searchProviderinFormsandResourcePage;
-	
+	  
+	  @FindBy(xpath = "//div[@class='claim-results']//table[not (contains(@class,'ng-hide'))]//tbody//tr[2]//a[text()='MORE INFO']")
+	  private WebElement claimstablemoreinfolink;
+	  
+	  @FindBy (css = ".claimDetTableMainSection")
+		private WebElement claimDetTableMainSection;	
 	
 	
 	@FindBy(xpath="//span[text()='search providers']")
@@ -968,6 +974,24 @@ public pages.dashboard.member.ulayer.ClaimSummarypage navigateToClaimsSummaryPag
 
 }
 		return new ClaimSummarypage(driver);
+}
+
+public pages.dashboard.member.ulayer.ClaimDetailsPage navigateToClaimDetailsPage() {
+	CommonUtility.waitForPageLoad(driver, claimstablemoreinfolink, 60);
+	claimstablemoreinfolink.click();
+	CommonUtility.waitForPageLoad(driver, claimDetTableMainSection, 30);
+
+	//driver.findElement(By.xpath("//a[contains(text(),'MORE INFO')]")).click();
+	/*
+	 * try { Thread.sleep(1000); } catch (InterruptedException e) { // TODO
+	 * Auto-generated catch block e.printStackTrace(); }
+	 */
+	System.out.println(driver.getTitle());
+	if (driver.getTitle().equalsIgnoreCase("claims   ")) {
+		return new pages.dashboard.member.ulayer.ClaimDetailsPage(driver);
+
+	}
+	return new pages.dashboard.member.ulayer.ClaimDetailsPage(driver);
 }
 
 }

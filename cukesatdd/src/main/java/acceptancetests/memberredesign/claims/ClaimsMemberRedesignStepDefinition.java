@@ -313,10 +313,10 @@ public class ClaimsMemberRedesignStepDefinition {
 
 	@When("^I navigate to the Claim Details page in AARP site$")	
 	public void i_navigate_to_member_redesign_claim_details_page(){
-		/*AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstants.ACCOUNT_HOME_PAGE);
+		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstants.ACCOUNT_HOME_PAGE);
 		ClaimDetailsPage newClaimDetailsPage = accountHomePage.navigateToClaimDetailsPage();
 		getLoginScenario().saveBean(PageConstants.NEW_CLAIM_DETAILS_PAGE, newClaimDetailsPage);
-*/
+
 	}
 
 	@Then("^I validate the Learn more section in claims details page in AARP site$")

@@ -1,32 +1,6 @@
 @claimspage @theTransformers
 Feature: To validate the new changes related to claims page on the member redesigned site
 
- #US495101
-  @claimDetailsHeader
-  Scenario Outline: To Verify Claim Details Page Header for
-    Given I am an AARP member on the redesigned site
-      | Plan Type | <planType> |
-    When I navigate to the Claim Details page in AARP site
-    Then I can view a claim search back button in Claims Details page in AARP site
-    And A Page Header in Claims Details page in AARP site
-    And A Date range in Claims Details page in AARP site
-    And A Provider name in Claims Details page in AARP site
-    And A Claim number label in Claims Details page in AARP site
-    And A Claim number with dynamic value in Claims Details page in AARP site
-    And A Claim type label with dynamic value in Claims Details page in AARP site
-    And A Claim type with dynamic value in Claims Details page in AARP site
-    And A Claim status label with dynamic value in Claims Details page in AARP site
-    And A Claim status with dynamic value in Claims Details page in AARP site
-    And A Medical EOB for MAPD Cosmos type in Claims Details page in AARP site
-      | Domain | <domain> |
-
-    Examples: 
-      | planType | domain |
-      | MA       | COSMOS |
-      | MAPD     | COSMOS |
-
-  
-
   @claimsSummaryFED @theTransformers
   Scenario Outline: To validate the claims present for the Federal member on claims sumamry page for AARP site
     Given I am an AARP member on the redesigned site
@@ -73,8 +47,8 @@ Feature: To validate the new changes related to claims page on the member redesi
       | Test Data Type | <claimssystem> |
     When I navigate to the claims Summary page in redesigned site
     And the user search claims for the following claim period in AARP site
-      | Plan Type    | <planType>    |
-      | Claim Period | <claimPeriod> |
+    | Claim Period | <claimPeriod> |
+      | Plan Type    | <planType>    |      
     Then user validates the claims displayed based on the selection in redesigned site
     And I navigate to the Claim Details page in AARP site
     Then I validate the Claims Table in claims details page in AARP site
@@ -82,7 +56,7 @@ Feature: To validate the new changes related to claims page on the member redesi
 
     Examples: 
       | planType | claimPeriod    | claimssystem |
-      | MA       | Last 24 Months | NICECLAIMS   |
+      #| MA       | Last 24 Months | NICECLAIMS   |
       | MAPD     | Last 24 Months | COSMOSCLAIMS |
 
   #| SHIP     |Last 24 Months |
@@ -101,10 +75,11 @@ Feature: To validate the new changes related to claims page on the member redesi
     Examples: 
       | planType | claimPeriod    |
       | SHIP     | Last 24 Months |
-
+      
+      
+ # This Scenario can only execute when max claims indicator as true
   @MaxClaimsResultsError
-  Scenario Outline: To Verify the Drug Claims History: Reached Maximum Claim Results Error
-    # This Scenario can only execute when max claims indicator as true
+  Scenario Outline: To Verify the Drug Claims History: Reached Maximum Claim Results Error   
     Given I am an AARP member on the redesigned site
       | Plan Type | <planType> |
     When I navigate to the claims Summary page in redesigned site
@@ -148,18 +123,4 @@ Feature: To validate the new changes related to claims page on the member redesi
       | planType | claimPeriod   | claimToDate | claimFromDate |
       | MAPD     | Custom Search | 10/10/2017  | 06/14/2012    |
 
-  @fromdatGreaterThanToDate
-  Scenario Outline: To Verify the SHIP Date Range Greater Than 24-Months Error
-    Given I am an AARP member on the redesigned site
-      | Plan Type | <planType> |
-    When I navigate to the claims Summary page in redesigned site
-    And the user search claims for the following claim period in AARP site
-      | Claim Period | <claimPeriod> |
-    And the user search claims for the following time interval in redesigned site
-      | Claims To Date   | <claimToDate>   |
-      | Claims From Date | <claimFromDate> |
-    Then the user should be able to see the from date is greater than to date error message
-
-    Examples: 
-      | planType | claimPeriod   | claimToDate | claimFromDate |
-      | MAPD     | Custom Search | 10/10/2017  | 10/11/2017    |
+  
