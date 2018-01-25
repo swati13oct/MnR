@@ -59,18 +59,17 @@ public class DashboardPage extends UhcDriver {
 	@FindBy(xpath = "//div[@id='ui view page']//span[contains(text(),'Look up Drugs')]")
 	private WebElement DCE_Dashboard;
 
-	@FindBy(xpath = "//sticky[@id='sticky nav']//nav[@id='main nav']//a[contains(text(),'Coverage & Benefits')]")
+	@FindBy(xpath = "//sticky[@id='sticky-nav']//nav[@id='main-nav']//a[contains(text(),'Coverage & Benefits')]")
 	private WebElement BnClink;
 
-	@FindBy(xpath = "(//nav[@id='utility nav']//a/span[contains(text(),'Help')])[1]")
-	private WebElement ContactUsLink;
+
 
 	@Override
 	public void openAndValidate() {
 
 		CommonUtility.waitForPageLoad(driver, panelHome, 60);
 		System.out.println(driver.getCurrentUrl());
-		validate(panelHome);
+		//validate(panelHome);
 	}
 
 	public pages.member.bluelayer.ProfilePreferencesPage navigateDirectToProfilePage() {
