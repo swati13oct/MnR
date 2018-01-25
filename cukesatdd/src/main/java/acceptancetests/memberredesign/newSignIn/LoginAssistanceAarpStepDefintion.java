@@ -1,7 +1,7 @@
 /**
  * 
  */
-package acceptancetests.loginassistance.ulayer;
+package acceptancetests.memberredesign.newSignIn;
 
 import gherkin.formatter.model.DataTableRow;
 import pages.acquisition.ulayer.LoginAssistancePage;

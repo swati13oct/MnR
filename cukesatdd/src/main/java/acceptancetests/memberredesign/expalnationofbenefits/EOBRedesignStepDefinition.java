@@ -1,4 +1,4 @@
-package acceptancetests.redesign;
+package acceptancetests.memberredesign.expalnationofbenefits;
 
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import acceptancetests.atdd.data.CommonConstants;
 import acceptancetests.atdd.data.member.PageConstants;
 import atdd.framework.MRScenario;
+import cucumber.api.java.en.And;
 import cucumber.api.DataTable;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
@@ -24,9 +25,9 @@ import pages.member.redesign.PreferencesPage;
 import pages.member.redesign.RegistrationConfirmationPage;
 import pages.member.redesign.TestHarnessPage;
 import pages.member.ulayer.UNPWAssistancePage;
-import pages.redesign.CommunicationPreferences;
+import pages.redesign.ExplanationOfBenefitsPage;
 
-public class MyprofileandPreferencesRedesignStepDefinition {
+public class EOBRedesignStepDefinition {
 	/**
 	 * 
 	 */
@@ -37,8 +38,8 @@ public class MyprofileandPreferencesRedesignStepDefinition {
 		return loginScenario;
 	}
 
-	@Given("^PreferencesSpartans Login to the application$")
-	public void PreferencesSpartans_Login_to_the_application(DataTable givenAttributes)
+	@Given("^EOBspartans Login to the applicationEOB$")
+	public void EOBspartans_Login_to_the_applicationEOB(DataTable givenAttributes)
 			throws InterruptedException {
 
 		List<DataTableRow> memberAttributesRow = givenAttributes
@@ -50,51 +51,49 @@ public class MyprofileandPreferencesRedesignStepDefinition {
 		}
 		// get parameter username and password
 		String userName = memberAttributesMap.get("memberNumber");
-		//password
 		String passWord = "Password@1";
 
 		WebDriver wd = getLoginScenario().getWebDriver();
 		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
 
 		NewLoginPage loginPage = new NewLoginPage(wd);
-		CommunicationPreferences compp = new CommunicationPreferences(wd);
-		CommunicationPreferences compp1 = new CommunicationPreferences(wd);
-		compp1 = (CommunicationPreferences) loginPage.loginWith(userName,
+		ExplanationOfBenefitsPage eobp = new ExplanationOfBenefitsPage(wd);
+		ExplanationOfBenefitsPage eobp1 = new ExplanationOfBenefitsPage(wd);
+		eobp1 = (ExplanationOfBenefitsPage) loginPage.loginWith(userName,
 				passWord);
 
-		if (compp != null) {
+		if (eobp != null) {
 			getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
-			getLoginScenario().saveBean(PageConstants.TEST_HARNESS_PAGE, compp);
+			getLoginScenario().saveBean(PageConstants.TEST_HARNESS_PAGE, eobp);
 			Assert.assertTrue(true);
 		}
 	}
 
-	@When("^PreferencesSpartans the user navigates to Prefrences page$")
-	public void PreferencesSpartans_the_user_navigates_to_Prefrences_page()
-			throws InterruptedException {
+	@When("^EOBspartans the user navigates to EOB page$")
+	public void EOBspartans_the_user_navigates_to_EOB_page() throws InterruptedException {
 
-		CommunicationPreferences compp = (CommunicationPreferences) getLoginScenario()
+		ExplanationOfBenefitsPage eobp = (ExplanationOfBenefitsPage) getLoginScenario()
 				.getBean(PageConstants.TEST_HARNESS_PAGE);
 
-		compp.navigateToPreferencesPage();
+		eobp.navigateToEOBPage();
 
-		if (compp != null) {
+		if (eobp != null) {
 			getLoginScenario().saveBean(
-					PageConstants.PROFILEANDPREFERENCES_PAGE, compp);
+					PageConstants.EOB_Page, eobp);
 			Assert.assertTrue(true);
 		}
 	}
 
-	@Then("^PreferencesSpartans the user changes delivery preferences$")
-	public void PreferencesSpartans_the_user_changes_delivery_preferences() throws InterruptedException {
-		CommunicationPreferences compp = (CommunicationPreferences) getLoginScenario()
-				.getBean(PageConstants.PROFILEANDPREFERENCES_PAGE);
+	@Then("^EOBspartans validate the EOB Elements$")
+	public void EOBspartans_validate_the_EOB_Elements() throws InterruptedException {
+		ExplanationOfBenefitsPage eobp = (ExplanationOfBenefitsPage) getLoginScenario()
+				.getBean(PageConstants.EOB_Page);
 
-		compp.SelectPreferences();
+		eobp.validateEOB();
 
-		if (compp != null)
+		if (eobp != null)
 			getLoginScenario().saveBean(
-					PageConstants.PROFILEANDPREFERENCES_PAGE, compp);
+					PageConstants.EOB_Page, eobp);
 	}
 
 }
