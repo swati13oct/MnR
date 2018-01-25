@@ -41,16 +41,16 @@ public class DashboardPage extends UhcDriver {
 	@FindBy(id = "premiumpayment")
 	private WebElement panelPremiumPayment;
 
-	@FindBy(xpath = "(//nav[@id='main nav']//a[contains(text(),'Home')])[1]")
+	@FindBy(xpath = "(//nav[@id='main-nav']//a[contains(text(),'Home')])[1])")
 	private WebElement panelHome;
 
 	@FindBy(xpath = "(//nav[@id='main nav']//a[contains(text(),'Claims')])[1]")
 	private WebElement panelClaims;
 
-	@FindBy(xpath = "//button[@id='dropdown toggle  1']/span[contains(text(),'Profile')]")
+	@FindBy(xpath = "//button[@id='dropdown-toggle--1']/span[contains(text(),'Profile')]")
 	private WebElement accountToggleDropdown;
 
-	@FindBy(xpath = "//a[@class='dropdown option' and contains(text(),'Account Settings')]")
+	@FindBy(xpath = "//a[@class='dropdown-option' and contains(text(),'Account Settings')]")
 	private WebElement accountSettingOption;
 
 	@FindBy(xpath = "//header//h1")
