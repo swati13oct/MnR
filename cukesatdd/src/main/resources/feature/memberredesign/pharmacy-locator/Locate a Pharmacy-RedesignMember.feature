@@ -20,7 +20,7 @@ And the user Validates view search PDF link in Redesign Site
 Examples:
 	| planType | memberType 			| distance |pharmacyType			|
 	| MAPD      | AARPIndividual  |  10       |Open 24 hours |
-	| PDP	   | AARPIndividual  |   25      |Standard Network Pharmacy (90-day) |
+	| PDP	   | AARPIndividual  |   25      | E-Prescribing |
 #	| MAPD	   | AARPIndividual  | 25        | Long-term care |
 
 @ValidateLanguageandZIPcode
