@@ -201,6 +201,31 @@ Feature: To test Profile and Preferences page .
       | planType |
       | MAPD     |
        | MA       |
+       
+       @CMGoGreen
+    Scenario Outline: To verify Go Green page
+    Given registered member with following details for Profile and Preferences flow
+      | <planType> |
+    Then the user navigates to Profile and Preferences page
+    Then the user validates Go paperless button and on clicking button go green page should come
+    Then the user validates the presence of Communication preferences header
+    Then the user validates headers on green page
+    ##Then the user validates the Go Green Header
+    Then the user validates the presence of Plan Name
+    Then the user validates the Note section
+    Then the user validates the I have read checkbox and check it
+    Then the user validates the Save Preferences Button
+    Then the user validates the presence of Back to Profile and Preferences links
+    
+    
+    
+     Examples: 
+       | planType |
+      | MAPD     |
+      | MA       |
+       #|PDP       |
+     #|SHIP      |
+       
          
 
 
