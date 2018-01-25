@@ -1,4 +1,4 @@
-package acceptancetests.dashboard.claims.aarplayer;
+package acceptancetests.memberredesign.claims;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -39,7 +39,7 @@ import pages.member.ulayer.AccountHomePage;
 import pages.member.ulayer.ClaimSummaryPage;
 import pages.member.ulayer.LoginPage;
 
-public class ClaimsAarpStepDefinition {
+public class ClaimsMemberRedesignStepDefinition {
 	@Autowired
 	MRScenario loginScenario;
 	Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
@@ -60,16 +60,6 @@ public class ClaimsAarpStepDefinition {
 		}
 		String planType = memberAttributesMap.get("Plan Type");
 		String businessType = null;
-		if (planType.equalsIgnoreCase("MA")
-				|| planType.equalsIgnoreCase("MAPD")
-				|| planType.equalsIgnoreCase("PDP")) {
-			businessType = "GOVT";
-		} else {
-			businessType = "SHIP";
-		}
-		getLoginScenario().saveBean(RedesignClaimsCommonConstants.BUSINESS_TYPE,
-				businessType);
-
 		Set<String> memberAttributesKeySet = memberAttributesMap.keySet();
 		List<String> desiredAttributes = new ArrayList<String>();
 		for (Iterator<String> iterator = memberAttributesKeySet.iterator(); iterator.hasNext();) {
@@ -102,32 +92,24 @@ public class ClaimsAarpStepDefinition {
 		
 		
 		{
-			loginPage.navigateToTeamMedicareTestHarness();
-			//loginPage.teamhloginWith(userName, pwd);
+			loginPage.navigateToNewDashboardUrl();
 			getLoginScenario().saveBean(PageConstants.LOGIN_PAGE, loginPage);
 			AccountHomePage accountHomePage = (AccountHomePage) loginPage.teamhloginWith(userName, pwd);
 			getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
 			getLoginScenario().saveBean(PageConstants.ACCOUNT_HOME_PAGE,accountHomePage);
 			Assert.assertTrue(true);
 		}
-		/*else {
-			loginPage.loginTo();
-			AccountHomePage accountHomePage = (AccountHomePage) loginPage.loginWith(userName, pwd);
-			getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
-			getLoginScenario().saveBean(PageConstants.ACCOUNT_HOME_PAGE,accountHomePage);
-			Assert.assertTrue(true);
-		}*/
-
+		
 	}
 
 	@When("^I navigate to the claims Summary page in redesigned site$")
 	public void navigate_Claims_Summary_redesigned(){
-		/*AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstants.ACCOUNT_HOME_PAGE);
+		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstants.ACCOUNT_HOME_PAGE);
 		ClaimSummarypage newClaimsSummaryPage = accountHomePage.navigateToClaimsSummaryPage();
 		
 
 		if(newClaimsSummaryPage != null)
-			getLoginScenario().saveBean(PageConstants.NEW_CLAIMS_SUMMARY_PAGE, newClaimsSummaryPage);*/
+			getLoginScenario().saveBean(PageConstants.NEW_CLAIMS_SUMMARY_PAGE, newClaimsSummaryPage);
 	}
 
 	@And("^the user search claims for the following time interval in redesigned site$")
@@ -219,14 +201,14 @@ public class ClaimsAarpStepDefinition {
 
 	@When("^I navigate to the Claims Summary page in AARP site$")	
 	public void i_navigate_to_member_redesign_claims_page(){
-		/*AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstants.ACCOUNT_HOME_PAGE);
+		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstants.ACCOUNT_HOME_PAGE);
 		ClaimSummarypage newClaimsSummaryPage = accountHomePage.navigateToClaimsSummaryPage();
 		getLoginScenario().saveBean(PageConstants.NEW_CLAIMS_SUMMARY_PAGE, newClaimsSummaryPage);
 		String planType = memberAttributesMap.get("Plan Type");
 		newClaimsSummaryPage.selectRequiredPlanType(planType);
 
 		getLoginScenario().saveBean(PageConstants.NEW_CLAIMS_SUMMARY_PAGE, newClaimsSummaryPage);			
-*/
+
 	}
 	@Then("^I can view a Page Header in Claims Sumamry page in AARP site$")
 	public void validate_the_header()
@@ -331,10 +313,10 @@ public class ClaimsAarpStepDefinition {
 
 	@When("^I navigate to the Claim Details page in AARP site$")	
 	public void i_navigate_to_member_redesign_claim_details_page(){
-		/*AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstants.ACCOUNT_HOME_PAGE);
+		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstants.ACCOUNT_HOME_PAGE);
 		ClaimDetailsPage newClaimDetailsPage = accountHomePage.navigateToClaimDetailsPage();
 		getLoginScenario().saveBean(PageConstants.NEW_CLAIM_DETAILS_PAGE, newClaimDetailsPage);
-*/
+
 	}
 
 	@Then("^I validate the Learn more section in claims details page in AARP site$")
