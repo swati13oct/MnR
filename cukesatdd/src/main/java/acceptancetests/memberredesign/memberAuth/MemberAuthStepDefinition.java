@@ -1,4 +1,4 @@
-package acceptancetests.dashboard.memberAuth;
+package acceptancetests.memberredesign.memberAuth;
 
 import java.util.LinkedHashMap;
 import java.util.List;
