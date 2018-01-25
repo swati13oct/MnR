@@ -19,9 +19,9 @@ And the user Validates view search PDF link in Redesign Site
 
 Examples:
 	| planType | memberType 			| distance |pharmacyType			|
-	| MAPD      | AARPIndividual  |  25       |Open 24 hours |
-	| PDP	   | AARPIndividual  |   10      |Long-term care |
-#	| MAPD	   | AARPIndividual  | 25        | Standard Network Pharmacy (90-day) |
+	| MAPD      | AARPIndividual  |  10       |Open 24 hours |
+	| PDP	   | AARPIndividual  |   25      |Standard Network Pharmacy (90-day) |
+#	| MAPD	   | AARPIndividual  | 25        | Long-term care |
 
 @ValidateLanguageandZIPcode
 Scenario Outline: To verify pharmacy Locator ZIP code entry and for Chinese and Spanish Language in Redesign site
