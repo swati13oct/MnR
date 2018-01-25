@@ -2,46 +2,32 @@ package acceptancetests.fixedtestcases;
 
 import gherkin.formatter.model.DataTableRow;
 
-import java.io.File;
-import java.util.Calendar;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.json.JSONException;
-import org.json.JSONObject;
 import org.junit.Assert;
 import org.openqa.selenium.NoAlertPresentException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
-import org.skyscreamer.jsonassert.JSONAssert;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import pages.acquisition.bluelayer.AcquisitionHomePage;
-import pages.acquisition.bluelayer.AddDrugPage;
-import pages.acquisition.bluelayer.GetStartedPage;
-import pages.acquisition.bluelayer.ManageDrugPage;
 import pages.acquisition.bluelayer.PlanDetailsPage;
-import pages.acquisition.bluelayer.SelectDosagePage;
-import pages.acquisition.bluelayer.SelectGenericPage;
-import pages.acquisition.bluelayer.SelectPharmacyPage;
 import pages.acquisition.bluelayer.VPPPlanSummaryPage;
 import acceptancetests.atdd.data.CommonConstants;
 import acceptancetests.atdd.data.acquisition.PageConstants;
-import acceptancetests.dce.data.DceCommonConstants;
 import acceptancetests.vpp.data.VPPCommonConstants;
 import atdd.framework.MRScenario;
 import cucumber.api.DataTable;
-import cucumber.api.java.After;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 
 /**
- * @author gumeshna
- *
+ * Functionality: VPP UHC site
  */
 
 public class VppUmsStepDefinition {

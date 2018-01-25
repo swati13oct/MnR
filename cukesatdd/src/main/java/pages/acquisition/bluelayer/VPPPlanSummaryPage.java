@@ -217,6 +217,9 @@ public class VPPPlanSummaryPage extends UhcDriver {
 
 	@FindBy(xpath = "//div[@class='module-closed-enrollment-alert']/span/a")
 	private WebElement viewPlansYearLink;
+	
+	@FindBy(xpath = "//a[text()='Passport Flyer (PDF)']")
+	private WebElement maplans;
 
 	@FindBy(xpath = ".//*[@class='swiper-container']")
 	List<WebElement> maPlanElement1;
@@ -1048,15 +1051,19 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	}
 
 	public void clickCompareChkBox(){
+		
+		
 		try {
 			Thread.sleep(3000);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		if(validate(maplans)){				
 		List<WebElement> allMAPlans = driver.findElements(By.xpath(".//*[@id='plan-list-1']//div[contains(@class,'compare-box')]"));
 
 		allMAPlans.get(1).click();
+		}
 
 	}
 	public boolean validatepassportData() {
@@ -1107,10 +1114,14 @@ public class VPPPlanSummaryPage extends UhcDriver {
 
 	public PlanDetailsPage clickViewDetails() {
 		List<WebElement> viewPlansLinks = driver.findElements(By.id("viewmoredetlinkma"));
-		viewPlansLinks.get(3).click();
-		if(getTitle().equalsIgnoreCase("Our Medicare Plan Types | UnitedHealthcare®"))
-			return new PlanDetailsPage(driver);
-		return null;
+		if(validate((WebElement) viewPlansLinks)){
+			viewPlansLinks.get(3).click();
+			if(getTitle().equalsIgnoreCase("Our Medicare Plan Types | UnitedHealthcare®"))
+				return new PlanDetailsPage(driver);
+			return null;
+		}else{
+			return null;
+		}
 	}
 
 	public PlanDetailsPage clickViewDetailsPDP() {
@@ -1127,7 +1138,9 @@ public class VPPPlanSummaryPage extends UhcDriver {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		if(validate(viewPlans)){
 		viewPlans.click();
+		}
 
 	}
 
