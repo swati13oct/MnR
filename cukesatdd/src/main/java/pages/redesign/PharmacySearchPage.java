@@ -91,6 +91,9 @@ public class PharmacySearchPage extends UhcDriver{
 	@FindBy(xpath = "//a[contains(text(),'VIEW RESULT AS PDF')]")
 	private WebElement viewsearchpdf;
 	
+	@FindBy(id = "outerContainer")
+	private WebElement PDFcontainer;
+	
 	@FindBy(xpath = ".//a[@class='display-block collapse-expand collapsed']")
 	private WebElement moreInfoLink;
 
@@ -295,8 +298,7 @@ public class PharmacySearchPage extends UhcDriver{
 
 			CommonUtility.checkPageIsReady(driver);
 
-			if (driver.getTitle().equalsIgnoreCase(
-					"pharmacyDirectory.pdf")) {
+			if (!driver.getTitle().contains("/member/pharmacy-locator/")) {
 				return new PharmacySearchPage(driver);
 				
 			}

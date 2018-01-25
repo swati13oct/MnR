@@ -1,7 +1,7 @@
 /**
  * 
  */
-package acceptancetests.pharmacylocator.member.redesign;
+package acceptancetests.memberredesign.pharmacylocator;
 
 import gherkin.formatter.model.DataTableRow;
 
