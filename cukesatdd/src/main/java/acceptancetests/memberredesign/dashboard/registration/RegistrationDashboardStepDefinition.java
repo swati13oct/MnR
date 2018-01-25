@@ -1,4 +1,4 @@
-package acceptancetests.dashboard.registration;
+package acceptancetests.memberredesign.dashboard.registration;
 
 import gherkin.formatter.model.DataTableRow;
 
@@ -136,6 +136,7 @@ public class RegistrationDashboardStepDefinition {
 		RegistrationInformationPage registrationInformationPage = (RegistrationInformationPage) getLoginScenario()
 				.getBean(PageConstants.REGISTRATION_INFORMATION_PAGE);
 		registrationInformationPage.scroll();
+		Thread.sleep(2000);
 		registrationInformationPage.clickNext();
 
 		try {
@@ -147,10 +148,11 @@ public class RegistrationDashboardStepDefinition {
 	}
 
 	@Then("^member will be navigated to registration plan information page$")
-	public void RegistrationPlanInformation() {
+	public void RegistrationPlanInformation() throws InterruptedException {
 		RegistrationInformationPage registrationInformationPage = (RegistrationInformationPage) getLoginScenario()
 				.getBean(PageConstants.REGISTRATION_INFORMATION_PAGE);
-		// Assert.assertTrue(registrationInformationPage.currentUrl().contains("memberRegistration-Step2"));
+		Thread.sleep(6000);
+		//Assert.assertTrue(registrationInformationPage.currentUrl().contains("memberRegistration-Step2"));
 		registrationInformationPage.waitForPlanInformationPage();
 		registrationInformationPage.getStepTwoText().isDisplayed();
 	}
@@ -284,17 +286,16 @@ public class RegistrationDashboardStepDefinition {
 	public void member_clicks_on_next_button() throws InterruptedException {
 		RegistrationInformationPage registrationInformationPage = (RegistrationInformationPage) getLoginScenario()
 				.getBean(PageConstants.REGISTRATION_INFORMATION_PAGE);
-		
-		Thread.sleep(2000);
+
 		registrationInformationPage.scroll();
 		Thread.sleep(4000);
 		registrationInformationPage.clickNext();
-		try {
+	/*	try {
 			Thread.sleep(5000);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
+		}*/
 	}
 
 	@Then("^the member navigate to the create account page$")
@@ -398,9 +399,10 @@ public class RegistrationDashboardStepDefinition {
 
 	@SuppressWarnings("deprecation")
 	@Then("^the member validate existing member error message$")
-	public void existingMemberErrorMessage() {
+	public void existingMemberErrorMessage() throws InterruptedException {
 		RegistrationInformationPage registrationInformationPage = (RegistrationInformationPage) getLoginScenario()
 				.getBean(PageConstants.REGISTRATION_INFORMATION_PAGE);
+		Thread.sleep(2000);
 		registrationInformationPage.getExistingMemberError().isDisplayed();
 		Assert.assertTrue(registrationInformationPage.getExistingMemberError()
 				.toString().contains("existing"));

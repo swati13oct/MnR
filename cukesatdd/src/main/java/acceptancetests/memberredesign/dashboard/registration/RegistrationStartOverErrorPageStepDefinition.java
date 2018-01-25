@@ -1,5 +1,5 @@
 
-package acceptancetests.dashboard.registration;
+package acceptancetests.memberredesign.dashboard.registration;
 
 import org.junit.Assert;
 import org.springframework.beans.factory.annotation.Autowired;

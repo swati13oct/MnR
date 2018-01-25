@@ -1,4 +1,4 @@
-package acceptancetests.dashboard.registration;
+package acceptancetests.memberredesign.dashboard.registration;
 
 import gherkin.formatter.model.DataTableRow;
 
