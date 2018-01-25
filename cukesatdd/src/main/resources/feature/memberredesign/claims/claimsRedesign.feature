@@ -47,8 +47,11 @@ Feature: To validate the new changes related to claims page on the member redesi
       | Test Data Type | <claimssystem> |
     When I navigate to the claims Summary page in redesigned site
     And the user search claims for the following claim period in AARP site
-    | Claim Period | <claimPeriod> |
-      | Plan Type    | <planType>    |      
+      | Plan Type    | <planType>    |
+      | Claim Period | <claimPeriod> |
+    #And the user search claims for the following time interval in redesigned site
+    #| Claims To Date   | <claimToDate>   |
+    #| Claims From Date | <claimFromDate>  |
     Then user validates the claims displayed based on the selection in redesigned site
     And I navigate to the Claim Details page in AARP site
     Then I validate the Claims Table in claims details page in AARP site

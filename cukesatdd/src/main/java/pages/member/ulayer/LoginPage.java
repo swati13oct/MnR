@@ -334,15 +334,9 @@ public class LoginPage extends UhcDriver {
 	public Object teamhloginWith(String username, String password) {
 		sendkeys(thUserName, username);
 		sendkeys(thPassword, password);
-		thSignIn.click();
-		try {
-			Thread.sleep(10000);
-		} catch (Exception e) {
-			// TODO: handle exception
-		}
-				
+		thSignIn.click();					
 		try{
-			//CommonUtility.waitForPageLoad(driver, iPerceptionPopUp, 90);
+			Thread.sleep(40000);
             if (validate(iPerceptionPopUp)) {
             	System.out.println("iPerceptionPopUp is Displayed");
                   iPerceptionPopUp.click();
@@ -351,7 +345,7 @@ public class LoginPage extends UhcDriver {
             System.out.println("iPerception Pop Up not displayed");
      }
 
-				if(currentUrl().contains("testharness.html"))
+				if(currentUrl().contains("testharness.html") || currentUrl().contains("/dashboard"))
 
 				{
 					return new AccountHomePage(driver);
@@ -363,7 +357,10 @@ public class LoginPage extends UhcDriver {
 					return new TerminatedHomePage(driver);
 				}
 				
+			System.out.println("teamhloginWith is returing null. Please Update the above condition As per your Needs");
+			
 				return null;
+		
 	}
 
 }
