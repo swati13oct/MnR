@@ -10,5 +10,4 @@ Feature: Save profile preferences
 
     Examples: 
       | memberNumber        |
-      | q4_dec_aarp004      |
-      | q1_jan_mapd_nice_01 |
+      | q1_aarp_eob105      |

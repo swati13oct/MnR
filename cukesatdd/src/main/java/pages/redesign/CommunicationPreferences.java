@@ -41,7 +41,7 @@ public class CommunicationPreferences extends UhcDriver {
 	@FindBy(xpath = "(//a[@title='Back to My Profile'])[1]")
 	private WebElement BackToMyProfileButton;
 
-	private static String PAGE_URL = "https://team-c-medicare.uhc.com/medicare/login/overview.html?testharness=true";
+	private static String PAGE_URL = "https://stage-medicare.uhc.com/medicare/login/overview.html?testharness=true";
 
 	// private static String PAGE_URL = TeamC_UNPWAssistancePage_URL;
 

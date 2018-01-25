@@ -44,7 +44,7 @@ public class ExplanationOfBenefitsPage extends UhcDriver {
 	@FindBy(xpath = ".//h3[contains(text(),'Plan Support')]")
 	private WebElement PlnSprt;
 
-	private static String PAGE_URL = "https://team-c-medicare.uhc.com/medicare/login/overview.html?testharness=true";
+	private static String PAGE_URL = "https://stage-medicare.uhc.com/medicare/login/overview.html?testharness=true";
 
 	// private static String PAGE_URL = TeamC_UNPWAssistancePage_URL;
 
