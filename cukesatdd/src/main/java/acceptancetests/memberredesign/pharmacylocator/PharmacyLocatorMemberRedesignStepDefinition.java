@@ -113,10 +113,10 @@ public class PharmacyLocatorMemberRedesignStepDefinition {
 			getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
 			getLoginScenario().saveBean(PageConstants.ACCOUNT_HOME_PAGE,
 					accountHomePage);
-			System.out.println("********* Ulayer Test Harness Page DIsplayed **************");
+			System.out.println("********* Account Landing Page Displayed for the Member **************");
 		}
 		else {
-			System.out.println("@@@@@@@ ULayer Test Harness Home page not Displayed @@@@@@@");
+			System.out.println("@@@@@@@  Error in loading  Redesign Account Landing Page @@@@@@@");
 			Assert.fail();
 		}
 	}

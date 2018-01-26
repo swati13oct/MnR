@@ -19,7 +19,7 @@ And the user Validates view search PDF link in Redesign Site
 
 Examples:
 	| planType | memberType 			| distance |pharmacyType			|
-	| MAPD      | AARPIndividual  |  10       |Open 24 hours |
+	| MAPD      | AARPIndividual  |  25       |Open 24 hours |
 	| PDP	   | AARPIndividual  |   25      | E-Prescribing |
 #	| MAPD	   | AARPIndividual  | 25        | Long-term care |
 
@@ -40,7 +40,7 @@ Then the user searches multi lang for pharmacy search results available in Redes
 
      Examples: 
     | planType | memberType  | zipcode | distance | 
-    | MAPD	   | AARPIndividual  |  10980 |       15 | 
+    | MAPD	   | AARPIndividual  |  10980 |       10 | 
     
     
 @ZipCodeErrorMessages
@@ -56,8 +56,8 @@ Then the user verify error messages in pharmacy locator page in Redesign site
  
      Examples: 
    | planType | memberType    | zipcode | distance | 
-      | MAPD	   | AARPIndividual  |         |       15 | 
-      | MAPD	   | AARPIndividual  |    9999 |       15 | 
+      | MAPD	   | AARPIndividual  |         |       5 | 
+      | MAPD	   | AARPIndividual  |    9999 |       10 | 
 
 #@zipcodeEntry
 #  Scenario Outline: To verify pharmacy locator zipcode entry in Redesign site

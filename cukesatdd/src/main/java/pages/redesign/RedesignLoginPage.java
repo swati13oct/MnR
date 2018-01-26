@@ -72,14 +72,16 @@ public class RedesignLoginPage extends UhcDriver {
 		System.out.println(signInButton.isEnabled());
 		signInButton.click();
 		if ( MRScenario.environment.equals("team-h") || MRScenario.environment.equals("team-a")) {
-			try{
+			while (!isAlertPresent());
+
+/*			try{
 				Alert alert = driver.switchTo().alert();
 				alert.accept();
 			}
 			catch(Throwable e) {
 				System.out.println("Alert isn't present!!");
 			} 
-		}
+*/		}
 		
 		Thread.sleep(15000);
 		CommonUtility.checkPageIsReady(driver);
@@ -111,17 +113,17 @@ public class RedesignLoginPage extends UhcDriver {
 
 		}
 
-/*		if (currentUrl().contains("/testharness.html")){
-			System.out.println("@@@@@@@@@@@@ Redesign Home Page Displayed for ULayer Member@@@@@@@@@@@@");
+		if (currentUrl().contains("/testharness")){
+			System.out.println("@@@@@@@@@@@@ Redesign Testharness Page Displayed for Member@@@@@@@@@@@@");
 			return new UlayerHomePage(driver);
 		}
-*/		
+		
 
 	if (currentUrl().contains("/dashboard")){
 			System.out.println("@@@@@@@@@@@@ Rally Dashboard Page Displayed for Member @@@@@@@@@@@@");
 			return new UlayerHomePage(driver);
 		}
-		System.out.println("@@@@@@@@@@@@ Rally Dashboard Page is NOT DISPLAYED @@@@@@@@@@@@");
+		System.out.println("@@@@@@@@@@@@ Account Home Page is NOT DISPLAYED @@@@@@@@@@@@");
 		return null;
 	}
 

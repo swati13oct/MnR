@@ -110,7 +110,6 @@ public class OrderPlanMaterialsAarpStepDefinition {
 
 		WebDriver wd = getLoginScenario().getWebDriver();
 		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
-		JSONObject accountHomeActualJson = null;
 		RedesignLoginPage loginPage = new RedesignLoginPage(wd);
 
 		UlayerHomePage accountHomePage = (UlayerHomePage)loginPage.loginWith(userName, pwd);

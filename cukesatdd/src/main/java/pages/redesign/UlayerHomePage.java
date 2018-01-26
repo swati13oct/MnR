@@ -91,11 +91,11 @@ public class UlayerHomePage extends UhcDriver {
 
 	private PageData myAccountHome;
 
-	public JSONObject accountHomeJson;
+/*	public JSONObject accountHomeJson;
 
 	private PageData browserCheckData;
 
-	private JSONObject browserCheckJson;
+	private JSONObject browserCheckJson;*/
 
 	public UlayerHomePage(WebDriver driver) throws InterruptedException {
 		super(driver);
