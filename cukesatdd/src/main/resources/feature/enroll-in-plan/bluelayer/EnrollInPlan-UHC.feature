@@ -3,18 +3,18 @@ Feature: To test enroll in plan on UHC site
 
 @OLEBlayerMapd
 Scenario Outline: Verify enroll in plan in UHC site for federal plan type member  
-Given the user is on the UHC medicare solutions landing page
-When user performs plan search using following information in UHC site
+Given the user is on the UHC medicare solutions landing page OLE UHC
+When user performs plan search using following information in UHC site OLE UHC
         | Zip Code    | <zipcode> |
         | County Name | <countyName>  |
-And the user views plans of the below plan type in UHC site
+And the user views plans of the below plan type in UHC site OLE UHC
         | Plan Type | <planType> |
-And the user enrolls for the below plan in UHC site
+And the user enrolls for the below plan in UHC site OLE UHC
         | <planName> |
-And the user select the answer of this question Do you have End-Stage Renal Disease in UHC site
+And the user select the answer of this question Do you have End-Stage Renal Disease in UHC site OLE UHC
         |<answer>|
-And the user navigates to Benefit information step in UHC site
-And the user fill following information in beneficiary information step in UHC site
+And the user navigates to Benefit information step in UHC site OLE UHC
+And the user fill following information in beneficiary information step in UHC site OLE UHC
      | First Name                        | <firstName>                    |
      | Middle Initial                    | <middleInitial>            |
      | Last Name                         | <lastName>                    |
@@ -32,12 +32,12 @@ And the user fill following information in beneficiary information step in UHC s
      | Email Address                         | <emailAddress>            |
      | Confirm Email Address                 | <confirmEmailAddress>    |
      | Language Preference                 | <languagePreference>     |
-And the user navigates to Additional Information step in UHC site
-And the user reviews the personal and plan data by naviagting to Review application step in UHC site
-And the user navigates to submit application step in UHC site
-And the user selects "I am the applicant listed on this enrollment application" for the question "What is your relationship to the applicant listed on this enrollment application" in UHC site
-And the user submits application by selecting agree to the Statement of Understanding in UHC site
-Then the user validates the enrollment application confimation in UHC site
+And the user navigates to Additional Information step in UHC site OLE UHC
+And the user reviews the personal and plan data by naviagting to Review application step in UHC site OLE UHC
+And the user navigates to submit application step in UHC site OLE UHC
+And the user selects "I am the applicant listed on this enrollment application" for the question "What is your relationship to the applicant listed on this enrollment application" in UHC site OLE UHC
+And the user submits application by selecting agree to the Statement of Understanding in UHC site OLE UHC
+Then the user validates the enrollment application confimation in UHC site OLE UHC
     
   Examples:
   |zipcode |countyName   | planType   | planName                                           |answer|firstName|middleInitial|lastName|birthDate  |selectedGender        | medicareClaimNumber|hospitalEffectiveDate        |medicalEffectiveDate        |address    |  city          | apartment |mainPhoneNumber |otherPhoneNumber| emailAddress   | confirmEmailAddress | languagePreference |
@@ -47,16 +47,16 @@ Then the user validates the enrollment application confimation in UHC site
     
 
 Scenario Outline: Verify enroll in plan in UHC site for federal plan type member  
-Given the user is on UHC medicare site landing page
-When user performs plan search using following information in UHC site
+Given the user is on UHC medicare site landing page OLE UHC
+When user performs plan search using following information in UHC site OLE UHC
         | Zip Code    | <zipcode> |
         | County Name | <countyName>  |
-And the user views plans of the below plan type in UHC site
+And the user views plans of the below plan type in UHC site OLE UHC
         | Plan Type | <planType> |
-And the user enrolls for the below plan in UHC site
+And the user enrolls for the below plan in UHC site OLE UHC
         | <planName> |
-And the user navigates to Benefit information step in UHC site
-And the user fill following information in beneficiary information step in UHC site
+And the user navigates to Benefit information step in UHC site OLE UHC
+And the user fill following information in beneficiary information step in UHC site OLE UHC
      | First Name                        | <firstName>                    |
      | Middle Initial                    | <middleInitial>            |
      | Last Name                         | <lastName>                    |
@@ -74,12 +74,12 @@ And the user fill following information in beneficiary information step in UHC s
      | Email Address                         | <emailAddress>            |
      | Confirm Email Address                 | <confirmEmailAddress>    |
      | Language Preference                 | <languagePreference>     |
-And the user navigates to Additional Information step in UHC site
-And the user reviews the personal and plan data by naviagting to Review application step in UHC site
-And the user navigates to submit application step in UHC site
-And the user selects "I am the applicant listed on this enrollment application" for the question "What is your relationship to the applicant listed on this enrollment application" in UHC site
-And the user submits application by selecting agree to the Statement of Understanding in UHC site
-Then the user validates the enrollment application confimation in UHC site
+And the user navigates to Additional Information step in UHC site OLE UHC
+And the user reviews the personal and plan data by naviagting to Review application step in UHC site OLE UHC
+And the user navigates to submit application step in UHC site OLE UHC
+And the user selects "I am the applicant listed on this enrollment application" for the question "What is your relationship to the applicant listed on this enrollment application" in UHC site OLE UHC
+And the user submits application by selecting agree to the Statement of Understanding in UHC site OLE UHC
+Then the user validates the enrollment application confimation in UHC site OLE UHC
 
     
   Examples:
@@ -91,26 +91,26 @@ Then the user validates the enrollment application confimation in UHC site
     
    
 Scenario Outline: Verify enroll in plan  in UHC site for federal plan type member  
-Given the following zipcode for UHC site 
+Given the following zipcode for UHC site OLE UHC
                  | Zip Code    | <zipcode>    |
                  | County Name | <countyName> |
-When the user performs a plan search in VPP flow for UHC site
+When the user performs a plan search in VPP flow for UHC site OLE UHC
          | Plan Type | <plantype> |
-And the user views enroll in plan in UHC site
+And the user views enroll in plan in UHC site OLE UHC
          | Plan Name  | <planName>  |         
 ##Then the user validate following plan information
 ##    | Plan     |
 ##    | ZIP      |
 ##    | Premium  |
-And the user click enroll in a plan in UHC site
-And the user performs to continue to online enrollment                                                                                                                                                                                                                                                        
+And the user click enroll in a plan in UHC site OLE UHC
+And the user performs to continue to online enrollment OLE UHC                                                                                                                                                                                                                                                    
 ##And the user select plan information after enrollment
 ##Then the user validate enrollment disclaimer information in plan information
-And the user select the answer of this question "Do you have End-Stage Renal Disease?"
+And the user select the answer of this question "Do you have End-Stage Renal Disease?"  OLE UHC
     |<answer>|
-And the user select next step
+And the user select next step OLE UHC
     |<nextStepSelected>|
-And the user fill following information in beneficiary information    
+And the user fill following information in beneficiary information OLE UHC    
      | First Name                        | <firstName>    |
      | Middle Initial                    | <middleInitial>|
      | Last Name                         | <lastName>     |
@@ -123,43 +123,43 @@ And the user fill following information in beneficiary information
      | City                              | <city>         |
      | Apartment                         | <apartment>    |
 
- And the user select the answer of this question "Is your mailing address the same as your permanent street address?" 
+ And the user select the answer of this question "Is your mailing address the same as your permanent street address?" OLE UHC 
      |<answerMailingAddress>|
      
- And the user fill following information after selecting answer 
+ And the user fill following information after selecting answer OLE UHC 
      |Main Phone Number      | <mainPhoneNumber>    |  
      |Other Phone Number     | <otherPhoneNumber>   |
      |Email Address          | <emailAddress>       |
      |Confirm Email Address  | <confirmEmailAddress>|
-  And the user select language in language preference 
+  And the user select language in language preference OLE UHC 
      |Language Preference    | <languagePreference> |     
-  And the user select next step
+  And the user select next step OLE UHC
      |<nextStepSelected>| 
   
-  And the user select the answer for special election period in Additional Information
+  And the user select the answer for special election period in Additional Information OLE UHC
      |<answerForElectionPeriod>|     
-  And the user select the answer for prescription drug coverage
+  And the user select the answer for prescription drug coverage OLE UHC
      |answerPrescriptionSelected|   
  
-  And the user select the answer for this question "Do you live in a nursing home or a long-term care facility?" in long-term care facility  
+  And the user select the answer for this question "Do you live in a nursing home or a long-term care facility?" in long-term care facility OLE UHC  
      |<answerLongTermCareFacilitySelected>     | 
       
-  And the user select the answer for this question "Are you enrolled in your State Medicaid program?" for state medicaid program
+  And the user select the answer for this question "Are you enrolled in your State Medicaid program?" for state medicaid program OLE UHC
      |<answerStateMedicaidSelected>|
          
-  And the user select the answer in other health insurance
+  And the user select the answer in other health insurance OLE UHC
      |<answerOtherHealthInsurance>|
    
  ## And the user select provider in primary care provider
  
-  And the user select the answer for this question "Do you want to add a dental supplemental benefit?" in supplemental benefits 
+  And the user select the answer for this question "Do you want to add a dental supplemental benefit?" in supplemental benefits OLE UHC 
      |answerRiderSelected|
       
-  And the user select option for plan payment options
+  And the user select option for plan payment options OLE UHC
      |<planPaymentOptionSelected>|      
-  And the user fill agent or broker id 
+  And the user fill agent or broker id OLE UHC 
      |Broker Id |<brokerId>|       
-  And the user select next step
+  And the user select next step OLE UHC
     |<nextStepSelected>|   
     
 
@@ -169,15 +169,15 @@ And the user fill following information in beneficiary information
   ##   |Beneficiary Information |  
  ##    |Additional Information  |  
  
-   And the user select next step
+   And the user select next step OLE UHC
     |<nextStepSelected>|  
-   And the user select the question "What is your relationship to the applicant listed on this enrollment application?" in authorized representative 
+   And the user select the question "What is your relationship to the applicant listed on this enrollment application?" in authorized representative OLE UHC 
     |<applicantRepresentativeSeleced>|
-  And the user select statement of understanding
+  And the user select statement of understanding OLE UHC
      |<statementSelected>|
      
 ##  And the user view submit application  
-  And the user select submit application
+  And the user select submit application OLE UHC
     |<submitApplicationSelected>|   
  ## Then the user validates following enrollment application confirmation information
  ##   | Plan                    |
