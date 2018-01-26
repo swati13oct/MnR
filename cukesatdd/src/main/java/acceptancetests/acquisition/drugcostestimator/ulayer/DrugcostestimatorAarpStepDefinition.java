@@ -164,7 +164,6 @@ public class DrugcostestimatorAarpStepDefinition {
 	public void the_above_plantype_user_logs_in_AARP_Site_Desktop() {
 		String userName = (String) getLoginScenario().getBean(LoginCommonConstants.USERNAME);
 		String pwd = (String) getLoginScenario().getBean(LoginCommonConstants.PASSWORD);
-		String category = (String) getLoginScenario().getBean(LoginCommonConstants.CATOGERY);
 		WebDriver wd = (WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
 		LoginPage loginPage = new LoginPage(wd);
 		getLoginScenario().saveBean(PageConstants.LOGIN_PAGE, loginPage);
@@ -610,7 +609,6 @@ public class DrugcostestimatorAarpStepDefinition {
 		}
 
 		String zipcode = memberAttributesMap.get("Zipcode");
-		String radius = memberAttributesMap.get("Radius");
 		String Pharmacy_type = memberAttributesMap.get("Pharmacy Type");
 		DrugCostEstimatorPage dce = (DrugCostEstimatorPage) getLoginScenario().getBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE);
 		//dce.validateZipcode(zipcode);
