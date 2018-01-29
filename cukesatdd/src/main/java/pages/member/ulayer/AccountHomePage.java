@@ -261,7 +261,12 @@ public class AccountHomePage extends UhcDriver {
 	  private WebElement claimstablemoreinfolink;
 	  
 	  @FindBy (css = ".claimDetTableMainSection")
-		private WebElement claimDetTableMainSection;	
+		private WebElement claimDetTableMainSection;
+	  
+	  @FindBy(xpath = "//*[@id='dashboard']//span[text()='View Your Claims']")
+	  private WebElement claimsDashboardLink;
+	  
+	  
 	
 	
 	@FindBy(xpath="//span[text()='search providers']")
@@ -975,7 +980,20 @@ public pages.dashboard.member.ulayer.ClaimSummarypage navigateToClaimsSummaryPag
 		}
 
 		else if (MRScenario.environment.equalsIgnoreCase("stage")) {
-			//currently stage login is not working . once it start working will update the logic accordingly 
+			System.out.println("user is on Stage login page");			
+			//CommonUtility.waitForPageLoad(driver, claimsDashboardLink, 90);			
+			if(driver.getCurrentUrl().contains("/dashboard"));
+			{
+				System.out.println("User is on dashboard page and URL is ====>"+driver.getCurrentUrl());
+				claimsDashboardLink.click();
+				try {
+					Thread.sleep(10000);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+				
 		}
 		else 
 		{
