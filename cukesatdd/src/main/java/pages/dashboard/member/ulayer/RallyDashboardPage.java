@@ -88,6 +88,9 @@ public class RallyDashboardPage extends UhcDriver{
 	@FindBy(xpath="//div[@id='ui-view-page']//a[@track='EOB_SEARCH']")
 	private WebElement EOB_Dashboard;
 	
+	@FindBy(xpath="//div[@id='ui-view-page']//a[@track='ORDER_MATERIALS']")
+	private WebElement OrderMaterial_Dashboard;
+	
 	@FindBy(className="promo-tile")
 	private WebElement promoTile_Dashboard;
 	
@@ -209,7 +212,7 @@ public class RallyDashboardPage extends UhcDriver{
 
 	@Override
 	public void openAndValidate() {
-		//CommonUtility.checkPageIsReady(driver);
+		checkModelPopup(driver);
 		CommonUtility.waitForPageLoad(driver, panelHome, 60);		
 		validate(panelClaims);
 		validate(panelHome);
@@ -222,8 +225,8 @@ public class RallyDashboardPage extends UhcDriver{
 /*		waitforElement(panelFindCareCost, 60);
 		if(panelClaims.isEnabled()){
 			panelClaims.click();*/
-			driver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
-			waitforElement(panelPremiumPayment, 60);
+			//driver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
+			//waitforElement(panelPremiumPayment, 60);
 			validate(panelPremiumPayment);
 			panelPremiumPayment.click();
 			CommonUtility.checkPageIsReady(driver);
@@ -267,13 +270,7 @@ public class RallyDashboardPage extends UhcDriver{
 		
 		validate(BnClink);
 		BnClink.click();
-		/*try {
-			Thread.sleep(30000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}*/
-		// driver.manage().timeouts().implicitlyWait(40, TimeUnit.SECONDS);
+
 		 CommonUtility.checkPageIsReady(driver);
 		System.out.println(driver.getTitle());
 		
@@ -323,10 +320,10 @@ public class RallyDashboardPage extends UhcDriver{
 	}
 	public OrderplanmaterialsPage navigateToOrderPlanMaterialsPage() {
 		//driver.navigate().to("https://"+MRScenario.environment+"-medicare.uhc.com/content/medicare/member/order-materials/overview.html");
-		validate(BnClink);
-		BnClink.click();
-		validate(OrderPlanMaterialslnk);
-		OrderPlanMaterialslnk.click();
+		/*validate(BnClink);
+		BnClink.click();*/
+		validate(OrderMaterial_Dashboard);
+		OrderMaterial_Dashboard.click();
 		//CommonUtility.checkPageIsReady(driver);
 		CommonUtility.waitForPageLoad(driver, orderplanHeadertxt, 30);
 		if (orderplanHeadertxt.isDisplayed()) {
@@ -338,7 +335,7 @@ public class RallyDashboardPage extends UhcDriver{
 				
 				CommonUtility.checkPageIsReady(driver);
 				PharmacyLocator_Dashboard.click();
-				driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+				//driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 				CommonUtility.checkPageIsReady(driver);
 
 				System.out.println(driver.getTitle());
@@ -363,17 +360,17 @@ public class RallyDashboardPage extends UhcDriver{
 	
 	public void validateHomeTab() {
 		CommonUtility.checkPageIsReady(driver);
-		driver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
+		//driver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
 		scrollToView(panelHome);
 /*		JavascriptExecutor jse = (JavascriptExecutor)driver;
 		jse.executeScript("window.scrollBy(0,-200)", "");*/
-		clickUsingAction(panelHome);
+		panelHome.click();
 		CommonUtility.checkPageIsReady(driver);
 		validate(HelloMessage);
 	}	
 	public ProviderSearchPage validateFindCareCostTab() {
 		CommonUtility.checkPageIsReady(driver);
-		driver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
+		//driver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
 		panelFindCareCost.click();
 		CommonUtility.checkPageIsReady(driver);
 		if (driver.getTitle().contains("Find Care")) {
@@ -383,7 +380,7 @@ public class RallyDashboardPage extends UhcDriver{
 	}	
 	public pages.dashboard.member.ulayer.ClaimSummarypage panelNavigateToClaimsSummaryPage() {
 		CommonUtility.checkPageIsReady(driver);
-		driver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
+		//driver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
 		panelClaims.click();
 		CommonUtility.checkPageIsReady(driver);
 		if (driver.getTitle().equalsIgnoreCase("Claims")) {
@@ -440,7 +437,7 @@ public PaymentsOverview validatePremiumPaymentPage() throws InterruptedException
 /*		waitforElement(panelFindCareCost, 60);
 	if(panelClaims.isEnabled()){
 		panelClaims.click();*/
-		driver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
+		//driver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
 		validate(premiumPayment);
 		premiumPayment.click();
 		CommonUtility.checkPageIsReady(driver);
@@ -552,7 +549,7 @@ public static void checkModelPopup(WebDriver driver) {
 		int counter =0;
 
 		System.out.println("Initial value of conter: "+counter);
-		WebDriverWait wait = new WebDriverWait(driver, 15);
+	//	WebDriverWait wait = new WebDriverWait(driver, 15);
 		/*try {
 			wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id='IPEinvL']/map/area[3]")));
 			JavascriptExecutor js = (JavascriptExecutor)driver;
@@ -561,13 +558,13 @@ public static void checkModelPopup(WebDriver driver) {
 		catch(Exception ex){
 			ex.printStackTrace();
 		}*/
-		String ParentHandle = driver.getWindowHandle();
+	//	String ParentHandle = driver.getWindowHandle();
 		do{
 			
 			System.out.println("current value of conter: "+counter);
 			
-			//if(driver.findElements(By.xpath("//area[@href='javascript:clWin()'][@alt = 'no']")).isEmpty()){
-			if(driver.findElements(By.xpath("//*[@id='IPEinvL']/map/area[3]")).isEmpty()){
+			if(driver.findElements(By.xpath("//area[@href='javascript:clWin()'][@alt = 'no']")).isEmpty()){
+			//if(driver.findElements(By.xpath("//*[@id='IPEinvL']/map/area[3]")).isEmpty()){
 				try {
 					Thread.sleep(5000);
 				} catch (InterruptedException e) {
@@ -583,7 +580,7 @@ public static void checkModelPopup(WebDriver driver) {
 					JavascriptExecutor js = (JavascriptExecutor)driver;
 		    		js.executeScript("arguments[0].scrollIntoView();", NoThanks);
 		    		js.executeScript("arguments[0].click();", NoThanks);
-		    		driver.switchTo().window(ParentHandle);
+		    		//driver.switchTo().window(ParentHandle);
 		    		break;
 				//driver.findElement(By.xpath("//area[@href='javascript:clWin()'][@alt = 'no']")).click();				
 					//Thread.sleep(5000);
@@ -594,7 +591,7 @@ public static void checkModelPopup(WebDriver driver) {
 			}
 			counter++;
 		}
-		while(counter<2);
+		while(counter<1);
 }
 
 public void validateSavedLink(){
@@ -629,10 +626,10 @@ public ProviderSearchPage navigateToProviderSearch(){
 
 public void validateDashboardElements(String Category){
 	CommonUtility.checkPageIsReady(driver);
-	if(Category!="Ship"){
+	if(!(("Ship").equalsIgnoreCase(Category))){
 	validate(panelFindCareCost);
 	}
-	if(Category!="GroupRetiree"){
+	if(!(("GroupRetireeMapd").equalsIgnoreCase(Category))){
 	validate(panelPremiumPayment);
 	}
 	validate(panelClaims);

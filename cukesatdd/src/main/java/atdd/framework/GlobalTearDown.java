@@ -4,6 +4,7 @@ package atdd.framework;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.remote.RemoteWebDriver;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import acceptancetests.atdd.data.CommonConstants;
@@ -55,15 +56,19 @@ public class GlobalTearDown {
 
 		if(null !=getLoginScenario()  && null!=getLoginScenario().getBean(CommonConstants.WEBDRIVER))
 		{
-		    WebDriver wd  =(WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
-			final byte[] screenshot = ((TakesScreenshot) wd).getScreenshotAs(OutputType.BYTES);
-			
+			//WebDriver wd  =(WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
+			getLoginScenario().CaptureScreenshot(scenario);
+			/*final byte[] screenshot = ((TakesScreenshot) wd).getScreenshotAs(OutputType.BYTES);
+			System.out.println("Screenshot captured!!!");
 			//To get the report embedded in the report
-			scenario.embed(screenshot, "image/png");
+			scenario.embed(screenshot, "image/png");*/
 			
 			//Clean up the existing webdriver.
 			getLoginScenario().nullifyWebDriver();
-		   // wd.quit();
+			/*wd.quit();
+			System.out.println("Driver Quitted!!!");
+			wd = null;
+			System.out.println("Webdriver reference made null!!!");*/
 		}
 
 	}

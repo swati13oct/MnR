@@ -463,12 +463,12 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 		jse.executeScript("window.scrollBy(0,3000)", "");
 		validate(disclaimersLink);
 		disclaimersLink.click();
-		try {
+		/*try {
 			Thread.sleep(10000);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
+		}*/
 	}
 
 
@@ -477,6 +477,7 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 	}
 
 	public boolean getdocuments_label() {
+		CommonUtility.waitForPageLoad(driver, documents_label, 15);
 		return validate(documents_label);
 	}
 

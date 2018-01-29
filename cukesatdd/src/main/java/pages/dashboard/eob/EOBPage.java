@@ -54,7 +54,7 @@ public class EOBPage extends UhcDriver{
 	@FindBy(xpath="//*[@id='collapseEOB']/ul/li/a")
 	private WebElement eobVideoBox;
 	
-	@FindBy(xpath=".//*[@id='error-results']/div[1]/div/h2/span[3]")
+	@FindBy(xpath="//h2[@class='h4 margin-none']")
 	private WebElement eobDetailsHeader;
 
 	@FindBy(xpath="//*[contains(text(),'Watch Video')]")
@@ -105,6 +105,18 @@ public class EOBPage extends UhcDriver{
 	@FindBy(xpath="//i[@class='rightarrow']")
 	private WebElement nextPageArrow;
 	
+	@FindBy(xpath=".//*[@id='eoblist0']/a")
+	private List<WebElement> listOfEOBs;
+	@FindBy(xpath=".//*[@id='eoblist0']/a/img")
+	private List<WebElement> pdfIcon;
+	@FindBy(xpath=".//*[@id='eoblist0']/a/span")
+	private List<WebElement> fileType;
+	@FindBy(xpath=".//*[@id='eoblist0']/p")
+	private List<WebElement> datesDisplayed;
+
+	@FindBy(className = "loading-block")
+	public List<WebElement> loadingImages;
+	
 	private static String EOB_DIRECT_URL = MRConstants.EOB_DIRECT_URL;
 
 	public EOBPage(WebDriver driver) {
@@ -120,18 +132,18 @@ public class EOBPage extends UhcDriver{
 		//
 	}
 
-	public EOBPage selectDateRange(String dateRange, String planType, String eobTypeData){
-        validate(eobMonthDateRange);	
-		if(planType.equalsIgnoreCase("MAPD")){
-			Select select = new Select(eobType);
-			select.selectByValue(eobTypeData);
-			System.out.println(eobTypeData);		 
-		}
+	public void selectDateRange(String dateRange, String planType, String eobTypeData){
+        validate(eobMonthDateRange);		
 		Select select = new Select(eobMonthDateRange);
 		System.out.println(dateRange);
 		select.selectByValue(dateRange);
+		validate(eobType);
+		if(planType.equalsIgnoreCase("MAPD")){
+			Select selectType = new Select(eobType);
+			selectType.selectByValue(eobTypeData);
+			System.out.println(eobTypeData);		 
+		}
 		validateDateRangeContentDisplayed(dateRange);
- 		return new EOBPage(driver);
 	}
 	public EOBPage validateEOBStatements(String dateRange,String planType,String eobTypeData, String fromDate, String toDate){
 		//	selectDateRange(dateRange, memberType, eobTypeData);		
@@ -194,12 +206,12 @@ public class EOBPage extends UhcDriver{
 		}
 		return null;
 	}
-	public EOBPage validateEachEOBonUI(){
+	public void validateEachEOBonUI(){
 		// this method validates size/date/link displayed on UI for each EOB
-		List<WebElement> listOfEOBs = driver.findElements(By.xpath(".//*[@id='eoblist0']/a"));
+		/*List<WebElement> listOfEOBs = driver.findElements(By.xpath(".//*[@id='eoblist0']/a"));
 		List<WebElement> pdfIcon = driver.findElements(By.xpath(".//*[@id='eoblist0']/a/img")); 
 		List<WebElement> fileType = driver.findElements(By.xpath(".//*[@id='eoblist0']/a/span"));
-		List<WebElement> datesDisplayed = driver.findElements(By.xpath(".//*[@id='eoblist0']/p"));
+		List<WebElement> datesDisplayed = driver.findElements(By.xpath(".//*[@id='eoblist0']/p"));*/
 		if(listOfEOBs.size()==pdfIcon.size()&& listOfEOBs.size()== fileType.size() &&
 				listOfEOBs.size()==datesDisplayed.size()){
 			driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS); 
@@ -239,12 +251,12 @@ public class EOBPage extends UhcDriver{
 						 Assert.fail();
  				     }
 				   }*/
-			return new EOBPage(driver);
+			//return new EOBPage(driver);
 		}else{
 			System.out.println("Count of PDFs and EOB doesn't match");
 			Assert.fail();
 		}
-		return null;
+		//return null;
 	}
 	public EOBPage validateDropDowns(String planType){
 		if(planType.equals("MAPD")){
@@ -327,16 +339,20 @@ public class EOBPage extends UhcDriver{
 	}
 	
 	public void validateDateRangeContentDisplayed(String dateRangeValue){
-	/*if(dateRangeValue.contains("custom")){
+		if(loadingImages.size()>0){
+			CommonUtility.waitForElementToDisappear(driver, loadingImages.get(0), 120);
+			}
+	if(dateRangeValue.contains("custom")){
 		
 	}else{
-		if(eobDetailsHeader.getText().contains(dateRangeValue)){
+		String modifiedDateRange = dateRangeValue.replace('m', 'M');
+		if(eobDetailsHeader.getText().contains(modifiedDateRange)){
 			System.out.println(dateRangeValue+" displayed correctly");
 		}else{
 			System.out.println("Desired value not displayed correctly for EOB statement header");
 			Assert.fail();
 		}
-	}	*/
+	}	
 	}
 	public EOBPage validateEobVideo(){
 		learnMoreLink.click();
@@ -385,8 +401,7 @@ public class EOBPage extends UhcDriver{
 		return new EOBPage(driver);
 	}
 
-	public EOBPage validateSiteLeaveingPopUP(){
-		driver.manage().timeouts().implicitlyWait(20,TimeUnit.SECONDS);
+	public void validateSiteLeaveingPopUP(){
 		String eobPageTitle = driver.getTitle();
 		System.out.println(eobPageTitle);
 		//adobeWebsiteLink.click();
@@ -407,7 +422,6 @@ public class EOBPage extends UhcDriver{
 		//now click on proceed and validate new tab opens
 		//siteLeavingProceedButton.click();
 		switchToNewTab(siteLeavingProceedButton);
-		driver.manage().timeouts().implicitlyWait(20,TimeUnit.SECONDS);
 
 		//capture next page title
 		String pageTitle = driver.getTitle();
@@ -415,10 +429,9 @@ public class EOBPage extends UhcDriver{
 		if(pageTitle!=null && pageTitle!=eobPageTitle){
 			System.out.println("Site leaving popup validated and working fine");
 		}else{
-			System.out.println("Site leaving popup validated and working fine");
-			Assert.fail();
+			System.out.println("Site leaving popup is not working!!!");
+			Assert.fail("Site leaving popup is not working!!!");
 		}
-		return null;
 	}
 
 	public boolean navigatePlanTabs(String PlanType){	
@@ -501,7 +514,7 @@ public class EOBPage extends UhcDriver{
 		return null;
 	}
 	
-	public EOBPage validateEOBStatements(){
+	public void validateEOBStatements(){
 		validate(eobCount);
 		System.out.println(eobCount.getText());
 		int eobCountInt = Integer.parseInt(eobCount.getText());
@@ -519,10 +532,9 @@ public class EOBPage extends UhcDriver{
 				}
 			}else{
 				System.out.println("EOB at "+ i +"not displayed");
-				Assert.fail();
+				Assert.fail("EOB at "+ i +"not displayed");
 			}
 		}
-		return null;
 	}
 
 	

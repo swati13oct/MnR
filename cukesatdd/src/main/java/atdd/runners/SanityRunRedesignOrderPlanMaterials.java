@@ -8,8 +8,8 @@ import cucumber.api.CucumberOptions;
 
 @RunWith(ExtendedCucumber.class)
 @ExtendedCucumberOptions(screenShotSize="", screenShotLocation="/screenshots/",jsonReport = "target/cucumber.json",detailedReport = true, detailedAggregatedReport = true, overviewReport = true, toPDF = true, outputFolder = "target")
-@CucumberOptions(glue = { "atdd.framework", "acceptancetests.dashboard.ordermaterials" }, features = { "src/main/resources/feature/dashboard/order-materials" }, plugin = {
-		"pretty", "html:reports/test-report", "json:target/cucumber.json" }, tags = { "@Sanity_OrderPlanMaterial" })
+@CucumberOptions(glue = { "atdd.framework", "acceptancetests.memberrdesign.ordermaterials" }, features = { "src/main/resources/feature/memberrdesign/order-materials" }, plugin = {
+		"pretty", "html:reports/test-report", "json:target/cucumber.json" }, tags = { "@smokeTest_OrderPlanMaterial" },monochrome = true)
 public class SanityRunRedesignOrderPlanMaterials {
 
 }

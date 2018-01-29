@@ -49,10 +49,10 @@ public class PlanMaterialConfirmationPage extends UhcDriver {
 	}
 
 	public boolean navigateToValidateOrderConfirmationInRedesignPage() {
-		driver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
+		CommonUtility.waitForPageLoad(driver, addordermaterialLink, 60);
 		addordermaterialLink.click();
-		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
-		if(driver.getTitle().equalsIgnoreCase("Order Plan Materials")){
+		CommonUtility.checkPageIsReady(driver);
+		if(driver.getTitle().contains("Order Plan Material")){
 			return true;
 		}
 	

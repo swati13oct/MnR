@@ -1,5 +1,6 @@
 package pages.member.ulayer;
 
+import java.util.List;
 import java.util.Map;
 
 import org.openqa.selenium.By;
@@ -60,7 +61,8 @@ public class PaymentsOverview extends UhcDriver{
 	@FindBy(id="payment-date")	              
 	private WebElement paymentDropdown;
 	
-	
+	@FindBy(className = "loading-block")
+	public List<WebElement> loadingImages;
 	
 	public PaymentsOverview(WebDriver driver) {
 		super(driver);
@@ -136,6 +138,9 @@ public class PaymentsOverview extends UhcDriver{
 		scrollToView(paymentDropdown);
 		Select dropdown = new Select(paymentDropdown);
 		dropdown.selectByVisibleText("Last 24 months");
+		if(loadingImages.size()>0){
+			CommonUtility.waitForElementToDisappear(driver, loadingImages.get(0), 120);
+			}
 	}	
 	
 	public PaymentsOverview UnselectPaidUnpaidCheck() throws InterruptedException

@@ -21,7 +21,11 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.springframework.beans.factory.annotation.Autowired;
 
+import com.itextpdf.text.log.SysoCounter;
+
+import acceptancetests.atdd.data.CommonConstants;
 import acceptancetests.atdd.data.ElementData;
 import acceptancetests.atdd.data.PageData;
 import acceptancetests.atdd.util.CommonUtility;
@@ -33,8 +37,9 @@ import acceptancetests.atdd.util.CommonUtility;
 public abstract class UhcDriver {
 
 	public WebDriver driver;
-
+	
 	public void start(String url) {
+		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 		driver.get(url);
 	}
 
@@ -135,7 +140,7 @@ public abstract class UhcDriver {
                    actions.moveToElement(element);
                    actions.perform();*/
                    Assert.assertTrue("@@@The element " + element.getText() + "is found@@@", element.isDisplayed());
-                   //System.out.println("@@@The element " + element.getText() + "is found@@@");
+                   System.out.println("@@@The element " + element.getText() + "is found@@@");
             }
      } catch (Exception e) {
 

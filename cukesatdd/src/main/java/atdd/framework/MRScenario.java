@@ -33,6 +33,8 @@ import org.json.JSONObject;
 import org.junit.Assert;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.Keys;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -46,6 +48,7 @@ import org.openqa.selenium.remote.RemoteWebDriver;
 import org.springframework.stereotype.Component;
 
 import acceptancetests.atdd.data.CommonConstants;
+import cucumber.api.Scenario;
 
 /**
  * 
@@ -100,7 +103,7 @@ public class MRScenario {
 		}
 	}
 
-	WebDriver webDriver;
+	public WebDriver webDriver;
 
 	public Object getBean(String id) {
 		Object result = scenarioObjectMap.get(id);
@@ -773,7 +776,7 @@ public class MRScenario {
                       System.setProperty("webdriver.gecko.driver", "pathToBinary");
                       DesiredCapabilities capabilities = DesiredCapabilities.firefox();
                       capabilities.setCapability("marionette", true);
-                      WebDriver webDriver = new FirefoxDriver(capabilities);
+                      webDriver = new FirefoxDriver(capabilities);
                
                       webDriver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
                       
@@ -787,7 +790,8 @@ public class MRScenario {
                       capabilities.setCapability(ChromeOptions.CAPABILITY, chromeOptions);
                       System.setProperty("webdriver.chrome.driver", pathToBinary);
                      // System.setProperty("webdriver.chrome.driver", props.get(CommonConstants.CHROME_DRIVER));
-                      WebDriver webDriver = new ChromeDriver();
+                      webDriver = new ChromeDriver();
+                      saveBean(CommonConstants.WEBDRIVER, webDriver);
                       return webDriver;
 
                } else if (browser.equalsIgnoreCase(CommonConstants.IE_BROWSER)) {
@@ -816,8 +820,8 @@ public class MRScenario {
                 	System.out.println("Inside firefox");
                 capabilities = DesiredCapabilities.firefox();
                 capabilities.setCapability("platform", "Windows 7");
-                capabilities.setCapability("version", "45");
-                capabilities.setCapability("idleTimeout", 180);
+                capabilities.setCapability("version", "52");
+               // capabilities.setCapability("idleTimeout", 180);
                 }else if(browserName.equalsIgnoreCase("IE")){
                 	capabilities = DesiredCapabilities.internetExplorer();
                 	capabilities.setCapability("platform", "Windows 7");
@@ -842,11 +846,13 @@ public class MRScenario {
                                      "Missing value for environment variable(s) SAUCE_USERNAME or SAUCE_ACCESS_KEY.  Check environment configuration and try again");
                 }
                 try {
-                       webDriver = new RemoteWebDriver(new URL(URL), capabilities);
+                	webDriver = new RemoteWebDriver(new URL(URL), capabilities);
+                       
+                       return webDriver;
                 } catch (MalformedURLException e) {
                        Assert.fail("Invalid Sauce URL: [" + URL + "]");
                 }
-                return webDriver;
+                
  			}
         }
                       return webDriver;
@@ -909,6 +915,14 @@ capabilities.setCapability("name", jobName);
 			webDriver.quit();
 			webDriver = null;
 		}
+
+	}
+	
+	public void CaptureScreenshot(Scenario scenario) {
+		final byte[] screenshot = ((TakesScreenshot) webDriver).getScreenshotAs(OutputType.BYTES);
+		System.out.println("Screenshot captured!!!");
+		//To get the report embedded in the report
+		scenario.embed(screenshot, "image/png");
 
 	}
 

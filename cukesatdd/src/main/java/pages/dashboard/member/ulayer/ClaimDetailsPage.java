@@ -203,13 +203,8 @@ public class ClaimDetailsPage extends UhcDriver{
 
 	@SuppressWarnings("deprecation")
 	public void validateClaimsTableInDetailsPage() {
-		validate(claimDetTableMainSection);
-		if(claimDetTableMainSection.isDisplayed()){
-			Assert.assertTrue(true);
-		}
-			else{
-				Assert.assertTrue("Claims Table is not present in Claims Details Page", false);
-		}
+		CommonUtility.waitForPageLoad(driver, claimDetTableMainSection, 40);
+			Assert.assertTrue(claimDetTableMainSection.isDisplayed());
 		
 	}
 
@@ -248,12 +243,12 @@ public class ClaimDetailsPage extends UhcDriver{
 	}
 
 	public void validateClaimsTotalInDetailsPage() {
-		try {
+		/*try {
 			Thread.sleep(9000);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
+		}*/
 		validate(claimstotalTable);
 		if(claimstotalTable.isDisplayed()){
 			Assert.assertTrue(true);			

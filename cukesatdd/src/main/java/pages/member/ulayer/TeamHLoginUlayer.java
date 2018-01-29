@@ -102,16 +102,22 @@ public class TeamHLoginUlayer extends UhcDriver{
 			}catch(Exception e)		{
 				System.out.println("No Such alert displayed");
 			}*/
-		CommonUtility.checkPageIsReady(driver);
+		//CommonUtility.checkPageIsReady(driver);
 		int counter =0;
 		do{
-			if(counter<=15)
+			if(counter<=20){
 			Thread.sleep(5000);
-			else
+			System.out.println("Time elapsed post sign In clicked --"+counter+"*5 sec.");
+			}
+			else{
+				System.out.println("TimeOut!!!");
 				return null;
+			}
 			counter++;
-			if(driver.getTitle().contains("Internal Error") || driver.getTitle().contains("Sign In"))
+			if(driver.getTitle().contains("Internal Error") || driver.getTitle().contains("Sign In")){
+				System.out.println("Error !!!");
 				return null;
+			}
 		}
 		while(!(driver.getTitle().contains("Home")));
 				

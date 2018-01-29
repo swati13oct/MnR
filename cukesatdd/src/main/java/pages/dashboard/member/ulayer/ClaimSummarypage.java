@@ -110,13 +110,13 @@ public class ClaimSummarypage extends UhcDriver{
 	@FindBy (xpath=".//*[@id='table-medical']/div[2]/div[2]/div/a")
 	private WebElement learnmorePdp;
 
-	@FindBy (xpath=".//a[@class='downloadMyDataLink']")
+	@FindBy (className="downloadLink")
 	private WebElement downloadmydatabutton;
 
 	@FindBy (xpath="//button[contains(.,'Proceed')]")
 	private WebElement proceedbutton;
 
-	@FindBy (xpath=".//*[@id='siteleaving-popup-overlay']")
+	@FindBy (id="siteleaving-popup-overlay")
 	private WebElement proceedToDownloadPopUp;
 
 	@FindBy(id="replace-current-rider")
@@ -153,12 +153,15 @@ public class ClaimSummarypage extends UhcDriver{
 	@FindBy (css = ".claimDetTableMainSection")
 	private WebElement claimDetTableMainSection;
 	
+	@FindBy(className = "loading-block")
+	public List<WebElement> loadingImages;
+	
 	public ClaimSummarypage(WebDriver driver) {
 		super(driver);
 
 		PageFactory.initElements(driver, this);
 		RallyDashboardPage.checkModelPopup(driver);
-		CommonUtility.waitForPageLoad(driver, viewClaimsFrom, 60);
+		
 		openAndValidate();
 
 		// TODO Auto-generated constructor stub
@@ -167,7 +170,7 @@ public class ClaimSummarypage extends UhcDriver{
 	@Override
 	public void openAndValidate() {
 		// TODO Auto-generated method stub
-	validate(viewClaimsFrom);
+		CommonUtility.waitForPageLoad(driver, viewClaimsFrom, 60);
 	}
 
 
@@ -340,53 +343,44 @@ public class ClaimSummarypage extends UhcDriver{
 	}
 	
 	public void searchClaimsByTimePeriod(String planType,String claimPeriod) {
-		System.out.println("The title of the page is-------->"+driver.getTitle());
-		System.out.println("The URL of the page is---------->"+driver.getCurrentUrl());
-		if(driver.getTitle().equalsIgnoreCase("Claims")){
-			
-			
-			try { Thread.sleep(10000); } 
-			catch (InterruptedException e) {						
-				// TODO Auto-generated catch block 
-				e.printStackTrace();
-				}
-			
+		
 			if(planType.contains("SHIP")){
 				System.out.println(planType+"SHIP plan type last 24 moths is going to select");
 						
 				last24months = driver.findElement(By.xpath("//div[@class='medical-claims shipCompSection']//div//*[@id='document-date']//option[contains(@value,'24 months')]"));
 			
 			}else{
-				
-				last24months = driver.findElement(By.xpath("//div[@class='medical-claims']//h2[@ng-bind-html='planName']/parent::div//*[@id='document-date']//option[contains(@value,'24 months')]"));
+				Select dateDropdown = new Select(viewClaimsFrom);
+				dateDropdown.selectByVisibleText(claimPeriod);
+				//last24months = driver.findElement(By.xpath("//div[@class='medical-claims']//h2[@ng-bind-html='planName']/parent::div//*[@id='document-date']//option[contains(@value,'24 months')]"));
 							}
 			
-			//Select dropdown = new Select(driver.findElement(By.xpath("//div[@class='medical-claims']//h2[@ng-bind-html='planName']/parent::div//*[@id='document-date']//option[contains(@value,'24 months')]")));
-			
-			//dropdown.selectByIndex(4);
 			//CommonUtility.waitForPageLoad(driver, last24months, 60);
-			last24months.click();
-			try { Thread.sleep(10000); } 
+			//last24months.click();
+			if(loadingImages.size()>0){
+				CommonUtility.waitForElementToDisappear(driver, loadingImages.get(0), 120);
+				}
+			/*try { Thread.sleep(10000); } 
 			catch (InterruptedException e) {			
 				
 				// TODO Auto-generated catch block 
 				e.printStackTrace();
-				}
+				}*/
 			
 			/*Select claimsFrom = new Select(viewClaimsFrom);
 			claimsFrom.selectByValue("24 months");*/
-		}
 	}
 
 	public void validateClaimsTable() {
 		CommonUtility.waitForPageLoad(driver, ClaimsSummaryPage,60);
 		
-		try {
+		/*try {
 			Thread.sleep(5000);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
+		}*/
+		scrollToView(ClaimsSummaryPage);
 		if(claimsTableMedical.isDisplayed() || claimsTablePrescriptionDrug.isDisplayed() || claimsTableSHIP.isDisplayed()){
 			System.out.println("!!!!!!!!! Able to find the claims table !!!!!!!!!");
 			
@@ -394,20 +388,19 @@ public class ClaimSummarypage extends UhcDriver{
 		else
 		{
 			System.out.println("!!!!!!!!! NOT Able to find the claim table !!!!!!!!!");
-		Assert.fail();
+		Assert.fail("!!!!!!!!! NOT Able to find the claim table !!!!!!!!!");
 		}
 	}
 
 	public void validateDownloadMyData() {
 		scrollToView(downloadmydatabutton);
 		CommonUtility.waitForPageLoad(driver, downloadmydatabutton, 60);
-		if (downloadmydatabutton.isDisplayed())
-
-		{			
-			downloadmydatabutton.click();		
+		if (downloadmydatabutton.isDisplayed()){				
+			downloadmydatabutton.click();
+			
 			waitforElement(proceedToDownloadPopUp);
 			System.out.println("Proceed button is displayed ===>"+(proceedToDownloadPopUp.isDisplayed()));
-			waitforElement(cancelButtonDownloadPopUp);
+			validate(cancelButtonDownloadPopUp);
 			cancelButtonDownloadPopUp.click();
 			/*if(proceedToDownloadPopUp.isDisplayed()){
 				proceedButtonDownloadPopUp.click();

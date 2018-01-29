@@ -3,6 +3,7 @@
  */
 package pages.member.ulayer;
 
+import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.concurrent.TimeUnit;
 
@@ -120,6 +121,8 @@ public class OrderplanmaterialsPage extends UhcDriver {
      @FindBy(xpath="//h2[@class='h3 medium margin-large']")
      private WebElement orderMaterialHeading2;
    
+ 	@FindBy(className = "loading-block")
+ 	public List<WebElement> loadingImages;
      
 	public OrderplanmaterialsPage(WebDriver driver) {
 		super(driver);
@@ -242,7 +245,7 @@ public class OrderplanmaterialsPage extends UhcDriver {
 		
 	}
 	public boolean ValidateErrorMessage(){
-		driver.manage().timeouts().implicitlyWait(40, TimeUnit.SECONDS);
+CommonUtility.waitForPageLoad(driver, OrderMaterialsErrorMsg, 30);
 		if (OrderMaterialsErrorMsg.isDisplayed()){
 			System.out.println("*************Error Message Displayed displayed for Order materials Page***************");
 			System.out.println("*************Error Message : "+OrderMaterialsErrorMsg.getText()+" ***************");
@@ -356,7 +359,6 @@ public class OrderplanmaterialsPage extends UhcDriver {
 			}
 
 		}
-		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 		
 		//submitButton.submit();
 		if(validate(submitButton)){
@@ -365,9 +367,11 @@ public class OrderplanmaterialsPage extends UhcDriver {
 			js.executeScript("arguments[0].click();", submitButton); 
 			System.out.println("****** Submit Button Clicked ********");
 		}
-
-		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 		CommonUtility.checkPageIsReady(driver);
+		if(loadingImages.size()>0){
+			CommonUtility.waitForElementToDisappear(driver, loadingImages.get(0), 120);
+			}
+
 		if (validate(OrderConfirmationHeader) || validate(OrderConfirmation_addordermaterialLink)) {
 			System.out.println("@@@@ Opder Plan Material COnfirmation Page is Displayed @@@@");
 			return new PlanMaterialConfirmationPage(driver);

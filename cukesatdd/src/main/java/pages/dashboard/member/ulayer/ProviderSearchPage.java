@@ -37,9 +37,9 @@ public class ProviderSearchPage extends UhcDriver {
 
 	@Override
 	public void openAndValidate() {
-		CommonUtility.checkPageIsReady(driver);
-		CommonUtility.waitForPageLoad(driver, providerSearch, 60);
-		validate(providerSearch);
+		//CommonUtility.checkPageIsReady(driver);
+		CommonUtility.waitForPageLoad(driver, providerSearch, 40);
+		//validate(providerSearch);
 
 	}	
 	

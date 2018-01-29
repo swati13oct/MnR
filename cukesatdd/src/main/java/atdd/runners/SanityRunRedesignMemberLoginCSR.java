@@ -8,8 +8,8 @@ import cucumber.api.CucumberOptions;
 
 @RunWith(ExtendedCucumber.class)
 @ExtendedCucumberOptions(screenShotSize="", screenShotLocation="/screenshots/",jsonReport = "target/cucumber.json",detailedReport = true, detailedAggregatedReport = true, overviewReport = true, toPDF = true, outputFolder = "target")
-@CucumberOptions(glue = { "atdd.framework", "acceptancetests.dashboard.login.csr" }, features = { "src/main/resources/feature/dashboard/member-auth" }, plugin = {
-		"pretty", "html:reports/test-report", "json:target/cucumber.json" }, tags = { "@Sanity_CsrLogin" })
+@CucumberOptions(glue = { "atdd.framework", "acceptancetests.memberrdesign.login.csr" }, features = { "src/main/resources/feature/memberrdesign/member-auth" }, plugin = {
+		"pretty", "html:reports/test-report", "json:target/cucumber.json" }, tags = { "@smokeTest_CsrLogin" },monochrome = true)
 
 public class SanityRunRedesignMemberLoginCSR {
 
