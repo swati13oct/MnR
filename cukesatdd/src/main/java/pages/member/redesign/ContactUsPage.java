@@ -108,6 +108,9 @@ public class ContactUsPage extends UhcDriver{
 	@FindBy(xpath="//header//h1")
 	private WebElement heading;
 	
+	@FindBy(xpath=".//*[@id='IPEinvL']/map/area[2]")
+    private WebElement iPerceptionPopUp;
+	
 	@FindBy(id = "addAnotherPlanLink")
 	private WebElement addPlan;
 	
@@ -164,21 +167,21 @@ public class ContactUsPage extends UhcDriver{
 	@FindBy(xpath="//*[@id='message-email-error2']")	
 	private WebElement messageEmailError;
 	
-	@FindBy(css="div.field.ask-question-message.field-has-error label#message-email-error.error")	
+	@FindBy(css="div.field.ask-question-message.field-has-error span")	
 	private WebElement questionEmailmessageError;
 	
 
-	@FindBy(xpath="//div[contains(@class,'request-email')]/div[not (contains(@class,'ng-hide'))][1]//input[@id='question-alt-email']/following::label[@id='message-email-error'][1]")
+	@FindBy(xpath="//div[contains(@class,'request-email')]/div[not (contains(@class,'ng-hide'))][1]//input[@id='question-alt-email']/following-sibling::span[1]")
 	private WebElement alternativemessageEmailError;
 	
 	
-	@FindBy(xpath="//div[contains(@class,'request-email')]/div[not (contains(@class,'ng-hide'))][1]//input[@id='question-alt-email-confirm']/following::label[@id='message-email-error'][1]")
+	@FindBy(xpath="//div[contains(@class,'request-email')]/div[not (contains(@class,'ng-hide'))][1]//input[@id='question-alt-email-confirm']/following-sibling::span[2]")
 	private WebElement confirmMsgEmailError;
 	
-	@FindBy(xpath="//div[contains(@class,'request-email')]/div[not (contains(@class,'ng-hide'))][1]//input[@id='question-alt-phone']/following::label[@id='message-email-error'][1]")
+	@FindBy(xpath="//div[contains(@class,'request-email')]/div[not (contains(@class,'ng-hide'))][1]//input[@id='question-alt-phone']/following-sibling::span[1]")
 	private WebElement invalidPhneErrorMsg;
 	
-	@FindBy(xpath="//div[contains(@class,'request-email')]/div[not (contains(@class,'ng-hide'))][1]//input[@id='question-alt-phone-confirm']/following::label[@id='message-email-error'][2]")
+	@FindBy(xpath="//div[contains(@class,'request-email')]/div[not (contains(@class,'ng-hide'))][1]//input[@id='question-alt-phone-confirm']/following-sibling::span[2]")
 	private WebElement confirmPhneErrorMsg;
 	
 	@FindBy(css="div.field.ask-question-message.field-has-error div.field-input label#message-email-error.error")
@@ -209,10 +212,13 @@ public class ContactUsPage extends UhcDriver{
 	
 	public ContactUsPage(WebDriver driver) {
 		super(driver);
+		if (validate(iPerceptionPopUp)) {
+            iPerceptionPopUp.click();
+            System.out.println("iPerception Pop Up displayed");
+		}
 		PageFactory.initElements(driver, this);
 		CommonUtility.waitForPageLoad(driver, heading, CommonConstants.TIMEOUT_30);
 		openAndValidate();
-		
 	}
 
 	@Override
@@ -518,7 +524,7 @@ public class ContactUsPage extends UhcDriver{
 			}
 			String alternativeerrorMessage=alternativemessageEmailError.getText();
 			System.out.println("alternativeerrorMessage::" +alternativeerrorMessage);
-			Assert.assertTrue("Email address not valid", alternativeerrorMessage.equalsIgnoreCase("Enter your email address like this: yourname@emailprovider.com"));
+			Assert.assertTrue("Email address not valid", alternativeerrorMessage.equalsIgnoreCase("Enter your email address like this: yourname@emailprovider.com."));
 		
 	}else
 	{
@@ -552,7 +558,6 @@ public class ContactUsPage extends UhcDriver{
 			addAlternativeEmail.click();
 			alternativeEmailAddress.sendKeys("abc");
 			confirmEmailAddress.sendKeys("xyz");
-			confirmEmailAddress.clear();
 			confirmEmailAddress.click();
 			jsClick(driver.findElement(By.xpath("//div[contains(@class,'request-email')]/div[not (contains(@class,'ng-hide'))][1]//input[@id='question-alt-email']/preceding::p[1]")));
 			driver.findElement(By.xpath
@@ -565,7 +570,7 @@ public class ContactUsPage extends UhcDriver{
 			}
 			String confirmErrMessage=confirmMsgEmailError.getText();		
 			 System.out.println("confirmErrMessage;;" + confirmErrMessage);
-			 Assert.assertTrue("Please enter same email id", confirmErrMessage.equalsIgnoreCase("This Field is Required."));
+			 Assert.assertTrue("Please enter same email id", confirmErrMessage.equalsIgnoreCase("Your email confirmation and email address do not match."));
 			
 			
 	}else
@@ -613,9 +618,9 @@ public class ContactUsPage extends UhcDriver{
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			/*String invalidPhnenumerErrmsg = invalidPhneErrorMsg.getText();
+			String invalidPhnenumerErrmsg = invalidPhneErrorMsg.getText();
 			System.out.println("invalidPhnenumerErrmsg::" +invalidPhnenumerErrmsg);
-			Assert.assertTrue("Phone number is not valid", invalidPhnenumerErrmsg.equals("Enter phone number like this: 111-111-1111."));*/
+			Assert.assertTrue("Phone number is not valid", invalidPhnenumerErrmsg.equals("Enter phone number like this: 111-111-1111."));
 			confirmAlternativePhneNumber.sendKeys("789");
 			jsClick(driver.findElement(By.xpath("//div[contains(@class,'request-email')]/div[not (contains(@class,'ng-hide'))][1]//input[@id='question-alt-email']/preceding::p[1]")));
 			driver.findElement(By.xpath
@@ -659,6 +664,7 @@ public class ContactUsPage extends UhcDriver{
 			}
 			questionMessage.sendKeys("hhh");
 			questionMessage.clear();
+			questionSubmit.click();
 			String questionErrorMessage=questionEmailmessageError.getText();
 			 Assert.assertTrue("Please dont leave it blank", questionErrorMessage.equalsIgnoreCase("Enter a question or comment."));
 			 //Assert.assertTrue("Please enter same email id", confirmErrMessage.equalsIgnoreCase("Please enter same email id"));

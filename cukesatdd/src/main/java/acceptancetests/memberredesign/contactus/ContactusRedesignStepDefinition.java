@@ -1,4 +1,4 @@
-package acceptancetests.redesign;
+package acceptancetests.memberredesign.contactus;
 
 
 
@@ -31,14 +31,14 @@ import pages.member.ulayer.AccountHomePage;
 import pages.member.ulayer.LoginPage;
 
 public class ContactusRedesignStepDefinition {
-	
-	Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
 	/**
 	 * 
 	 */
 		@Autowired
 		MRScenario loginScenario;
 
+		Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
+		
 		public MRScenario getLoginScenario() {
 			return loginScenario;
 		}
@@ -84,6 +84,8 @@ public class ContactusRedesignStepDefinition {
 			WebDriver wd = getLoginScenario().getWebDriver();
 
 			LoginPage loginPage = new LoginPage(wd);
+			
+			
 			{
 				loginPage.navigateToNewDashboardUrl();
 				getLoginScenario().saveBean(PageConstants.LOGIN_PAGE, loginPage);
@@ -97,9 +99,9 @@ public class ContactusRedesignStepDefinition {
 		@When("^the user navigates to contact us page in UHC site$")
 		public void validates_contactUs_Redesign_Page() {
 			
-			TestHarnessPage testHarnessPage = (TestHarnessPage) getLoginScenario().getBean(PageConstants.TEST_HARNESS_PAGE);
+			AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstants.ACCOUNT_HOME_PAGE);
 			
-			ContactUsPage contactUsPage = testHarnessPage.navigateToContactUsPage();
+			ContactUsPage contactUsPage = accountHomePage.navigateToContactUsPage();
 			if(contactUsPage != null)				
 				getLoginScenario().saveBean(PageConstants.CONTACT_US_PAGE,
 						contactUsPage);
@@ -242,9 +244,9 @@ public class ContactusRedesignStepDefinition {
 		@When("^the user validates the contact us redesign  page in AARP site$")
 		public void the_user_validates_the_contact_us_redesign_page_in_AARP_site() {
 			
-			TestHarnessPage testHarnessPage = (TestHarnessPage) getLoginScenario().getBean(PageConstants.TEST_HARNESS_PAGE);
+			AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstants.ACCOUNT_HOME_PAGE);
 			
-			ContactUsPage contactUsPage = testHarnessPage.navigateToContactUsPage();
+			ContactUsPage contactUsPage = accountHomePage.navigateToContactUsPage();
 			if(contactUsPage != null)				
 				getLoginScenario().saveBean(PageConstants.CONTACT_US_PAGE,
 						contactUsPage);
