@@ -13,12 +13,12 @@ import cucumber.api.CucumberOptions;
 
 
 @RunWith(ExtendedCucumber.class)
-@ExtendedCucumberOptions(retryCount=2,screenShotSize="", screenShotLocation="/screenshots/",
+@ExtendedCucumberOptions(screenShotSize="", screenShotLocation="/screenshots/",
 jsonReport = "target/cucumber-RunMRATDDthePredatorsTest.json",detailedReport = true, detailedAggregatedReport = true, 
 	overviewReport = true, toPDF = true, outputFolder = "target/RunMRATDDthePredatorsTest")
 @CucumberOptions(glue = { "atdd.framework", "acceptancetests.memberredesign" }, 
 features = { "src/main/resources/feature/memberredesign" }, plugin = {"pretty", "html:reports/test-report", 
-		"json:target/cucumber-RunMRATDDthePredators.json" }, tags = { "@thePredators" })
+		"json:target/cucumber-RunMRATDDthePredatorsTest.json" }, tags = { "@thePredators" })
 public class RunMRATDDthePredatorsTest {
-
+//retryCount=2,
 }
