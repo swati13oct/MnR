@@ -18,7 +18,7 @@ jsonReport = "target/cucumber-RunMRATDDcodeMonkeysTest.json",detailedReport = tr
 	overviewReport = true, toPDF = true, outputFolder = "target/RunMRATDDcodeMonkeysTest")
 @CucumberOptions(glue = { "atdd.framework", "acceptancetests" }, 
 features = { "src/main/resources/feature" }, plugin = {"pretty", "html:reports/test-report", 
-		"json:target/cucumber-RunMRATDDcodeMonkeys.json" }, tags = { "@codeMonkeys" })
+		"json:target/cucumber-RunMRATDDcodeMonkeysTest.json" }, tags = { "@codeMonkeys" })
 public class RunMRATDDcodeMonkeysTest {
 
 }

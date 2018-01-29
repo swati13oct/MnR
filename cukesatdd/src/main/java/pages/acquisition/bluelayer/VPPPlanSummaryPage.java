@@ -1114,14 +1114,12 @@ public class VPPPlanSummaryPage extends UhcDriver {
 
 	public PlanDetailsPage clickViewDetails() {
 		List<WebElement> viewPlansLinks = driver.findElements(By.id("viewmoredetlinkma"));
-		if(validate((WebElement) viewPlansLinks)){
-			viewPlansLinks.get(3).click();
-			if(getTitle().equalsIgnoreCase("Our Medicare Plan Types | UnitedHealthcare®"))
-				return new PlanDetailsPage(driver);
-			return null;
-		}else{
-			return null;
+		if(viewPlansLinks!=null){
+		viewPlansLinks.get(3).click();
+		if(getTitle().equalsIgnoreCase("Our Medicare Plan Types | UnitedHealthcare®"))
+			return new PlanDetailsPage(driver);
 		}
+		return null;
 	}
 
 	public PlanDetailsPage clickViewDetailsPDP() {
@@ -1151,7 +1149,9 @@ public class VPPPlanSummaryPage extends UhcDriver {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		viewPDPPlans.click();
+		if(validate(viewPDPPlans)){
+			viewPDPPlans.click();
+		}
 	}
 
 	public void clickOnViewPlans(String plantype) {

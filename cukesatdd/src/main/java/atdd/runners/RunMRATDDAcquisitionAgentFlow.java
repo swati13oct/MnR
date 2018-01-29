@@ -13,7 +13,7 @@ import cucumber.api.CucumberOptions;
 @RunWith(ExtendedCucumber.class)
 @ExtendedCucumberOptions(retryCount=2, screenShotSize="", screenShotLocation="/screenshots/",jsonReport = "target/cucumber-RunMRATDDFixedTestsPharmacy1.json",detailedReport = true, detailedAggregatedReport = true, overviewReport = true, toPDF = true, outputFolder = "target/RunMRATDDFixedTestsPharmacy1")
 @CucumberOptions(glue = { "atdd.framework", "acceptancetests.acquisitionvbf" }, features = { "src/main/resources/feature/acquisitionvbf" }, plugin = {
-		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDFixedTestsPharmacy1.json" }, tags = { "@agentAppointment,@attendCommunity,@pdpInquiryKit" })
+		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDAcquisitionAgentFlow.json" }, tags = { "@agentAppointment,@attendCommunity,@pdpInquiryKit" })
 public class RunMRATDDAcquisitionAgentFlow {
 
 }
