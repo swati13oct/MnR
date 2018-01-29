@@ -109,6 +109,9 @@ public class AccountHomePage extends UhcDriver {
 	@FindBy(xpath="//dashboard//a[contains(text(),'Contact')]")
 	private WebElement linkContactUs;
 	
+	@FindBy(xpath="//a[contains(text(),'Help')]")
+	private WebElement helpAndContactUslink;
+	
 	@FindBy(xpath="//header//h1")
 	private WebElement heading;
 	
@@ -332,7 +335,11 @@ public class AccountHomePage extends UhcDriver {
             iPerceptionPopUp.click();
             System.out.println("iPerception Pop Up displayed");
 		}
-		linkContactUs.click();
+		if (MRScenario.environment.equals("team-h") || MRScenario.environment.equals("test-a")) {
+			helpAndContactUslink.click();
+		}else{
+			linkContactUs.click();
+		}
 		CommonUtility.waitForPageLoad(driver, heading, 10);
 		if(driver.getTitle().equalsIgnoreCase("Overview"))
 		{
