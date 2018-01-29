@@ -1,6 +1,6 @@
 @theSpartans
 @ExplanationOfBenefits
-Feature: Save profile preferences
+Feature: Explanation Of Benefits Elements
  @EOB
   Scenario Outline: To verify Explanation of Benefit Preferences
     Given EOBspartans Login to the applicationEOB
