@@ -244,9 +244,9 @@ public class ContactusRedesignStepDefinition {
 		@When("^the user validates the contact us redesign  page in AARP site$")
 		public void the_user_validates_the_contact_us_redesign_page_in_AARP_site() {
 			
-			TestHarnessPage testHarnessPage = (TestHarnessPage) getLoginScenario().getBean(PageConstants.TEST_HARNESS_PAGE);
+			AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstants.ACCOUNT_HOME_PAGE);
 			
-			ContactUsPage contactUsPage = testHarnessPage.navigateToContactUsPage();
+			ContactUsPage contactUsPage = accountHomePage.navigateToContactUsPage();
 			if(contactUsPage != null)				
 				getLoginScenario().saveBean(PageConstants.CONTACT_US_PAGE,
 						contactUsPage);
