@@ -55,7 +55,7 @@ public class EnrollInPlanUhcStepDefinition {
                 return loginScenario;
         }
 
-        @Given("^the user is on the UHC medicare solutions landing page$")
+        @Given("^the user is on the UHC medicare solutions landing page OLE UHC$")
         public void the_user_on_UHC_Medicaresolutions_Site() {
                 WebDriver wd = getLoginScenario().getWebDriver();
 
@@ -66,7 +66,7 @@ public class EnrollInPlanUhcStepDefinition {
                                 aquisitionhomepage);
         }
 
-        @When("^user performs plan search using following information in UHC site$")
+        @When("^user performs plan search using following information in UHC site OLE UHC$")
         public void zipcode_details_in_uhc_site(DataTable givenAttributes) {
 
                 List<DataTableRow> memberAttributesRow = givenAttributes
@@ -120,7 +120,7 @@ public class EnrollInPlanUhcStepDefinition {
                 }
         }
 
-        @And("^the user views plans of the below plan type in UHC site$")
+        @And("^the user views plans of the below plan type in UHC site OLE UHC$")
         public void user_performs_planSearch_in_aarp_site(DataTable givenAttributes) {
                 List<DataTableRow> givenAttributesRow = givenAttributes
                                 .getGherkinRows();
@@ -201,7 +201,7 @@ public class EnrollInPlanUhcStepDefinition {
                 }
         }
 
-        @And("^the user enrolls for the below plan in UHC site$")
+        @And("^the user enrolls for the below plan in UHC site OLE UHC$")
         public void user_enrolls_for_plan(DataTable planAttributes) {
 
                 String planName = planAttributes.getGherkinRows().get(0).getCells()
@@ -289,7 +289,7 @@ public class EnrollInPlanUhcStepDefinition {
 
         }
 
-        @And("^the user select the answer of this question Do you have End-Stage Renal Disease in UHC site$")
+        @And("^the user select the answer of this question Do you have End-Stage Renal Disease in UHC site OLE UHC$")
         public void user_selects_answer_esrd_question(DataTable attributes) {
                 String answer = attributes.getGherkinRows().get(0).getCells().get(0);
                 PlanInformationPage planInformationPage = (PlanInformationPage) getLoginScenario()
@@ -299,7 +299,7 @@ public class EnrollInPlanUhcStepDefinition {
                                 planInformationPage);
         }
 
-        @And("^the user navigates to Benefit information step in UHC site$")
+        @And("^the user navigates to Benefit information step in UHC site OLE UHC$")
         public void the_user_navigates_benefit_information_step_aarp() {
 
                 PlanInformationPage planInformationPage = (PlanInformationPage) getLoginScenario()
@@ -354,7 +354,7 @@ public class EnrollInPlanUhcStepDefinition {
 
         }
 
-        @And("^the user fill following information in beneficiary information step in UHC site$")
+        @And("^the user fill following information in beneficiary information step in UHC site OLE UHC$")
         public void user_fill_information_beneficiary_information_aarp(
                         DataTable personalAttributes) {
 
@@ -375,7 +375,7 @@ public class EnrollInPlanUhcStepDefinition {
 
         }
 
-        @And("^the user navigates to Additional Information step in UHC site$")
+        @And("^the user navigates to Additional Information step in UHC site OLE UHC$")
         public void user_navigates_additional_information_aarp() {
 
                 BeneficiaryInformationPage beneficiaryInformationPage = (BeneficiaryInformationPage) getLoginScenario()
@@ -430,7 +430,7 @@ public class EnrollInPlanUhcStepDefinition {
 
         }
 
-        @And("^the user reviews the personal and plan data by naviagting to Review application step in UHC site$")
+        @And("^the user reviews the personal and plan data by naviagting to Review application step in UHC site OLE UHC$")
         public void user_reviews_personal_plan_data_on_review_application_page_aarp() {
                 AdditionalInformationPage additionalInformationPage = (AdditionalInformationPage) getLoginScenario()
                                 .getBean(PageConstants.ADDITIONAL_INFORMATION_PAGE);
@@ -478,7 +478,7 @@ public class EnrollInPlanUhcStepDefinition {
                 }
         }
 
-        @And("^the user navigates to submit application step in UHC site$")
+        @And("^the user navigates to submit application step in UHC site OLE UHC$")
         public void user_navigates_submit_application_aarp() {
                 ReviewApplicationPage reviewApplication = (ReviewApplicationPage) getLoginScenario()
                                 .getBean(PageConstants.REVIEW_APPLICATION_PAGE);
@@ -526,7 +526,7 @@ public class EnrollInPlanUhcStepDefinition {
                 }
         }
 
-        @And("^the user selects \"I am the applicant listed on this enrollment application\" for the question \"What is your relationship to the applicant listed on this enrollment application\" in UHC site$")
+        @And("^the user selects \"I am the applicant listed on this enrollment application\" for the question \"What is your relationship to the applicant listed on this enrollment application\" in UHC site OLE UHC$")
         public void user_selects_applicant_for_relationship_question() {
                 SubmitApplicationPage submitApplicationPage = (SubmitApplicationPage) getLoginScenario()
                                 .getBean(PageConstants.SUBMIT_APPLICATION_PAGE);
@@ -535,7 +535,7 @@ public class EnrollInPlanUhcStepDefinition {
                                 submitApplicationPage);
         }
 
-        @And("^the user submits application by selecting agree to the Statement of Understanding in UHC site$")
+        @And("^the user submits application by selecting agree to the Statement of Understanding in UHC site OLE UHC$")
         public void user_submits_application_aarp() {
                 SubmitApplicationPage submitApplicationPage = (SubmitApplicationPage) getLoginScenario()
                                 .getBean(PageConstants.SUBMIT_APPLICATION_PAGE);
@@ -580,7 +580,7 @@ public class EnrollInPlanUhcStepDefinition {
 
         }
 
-        @Then("^the user validates the enrollment application confimation in UHC site$")
+        @Then("^the user validates the enrollment application confimation in UHC site OLE UHC$")
         public void user_validates_enrollment_application_confirmation_aarp() {
 
                 JSONObject enrollmentConfirmationActual = (JSONObject) getLoginScenario()

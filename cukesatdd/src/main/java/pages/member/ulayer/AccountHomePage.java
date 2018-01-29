@@ -26,6 +26,7 @@ import atdd.framework.MRScenario;
 import atdd.framework.UhcDriver;
 import pages.dashboard.member.ulayer.ClaimDetailsPage;
 import pages.dashboard.member.ulayer.ClaimSummarypage;
+import pages.member.redesign.ContactUsPage;
 
 /**
  * @author pjaising
@@ -51,7 +52,7 @@ public class AccountHomePage extends UhcDriver {
 	@FindBy(className = "fd_myPersonalHealthRecord")
 	private WebElement phrTab;
 
-	@FindBy(linkText = "Plan Benefits")
+	@FindBy(linkText = "Coverage & Benefits")
 	private WebElement benefitsLink;
 
 	@FindBy(id = "disclosure_link")
@@ -104,6 +105,18 @@ public class AccountHomePage extends UhcDriver {
 
 	@FindBy(linkText = "Search drug claims")
 	private WebElement searchDrugClaims;
+	
+	@FindBy(xpath="//dashboard//a[contains(text(),'Contact')]")
+	private WebElement linkContactUs;
+	
+	@FindBy(xpath="//a[contains(text(),'Help')]")
+	private WebElement helpAndContactUslink;
+	
+	@FindBy(xpath="//header//h1")
+	private WebElement heading;
+	
+	@FindBy(xpath=".//*[@id='IPEinvL']/map/area[2]")
+    private WebElement iPerceptionPopUp;
 
 	@FindBy(linkText = "Supplemental Insurance Explanation of Benefits (EOB)")
 	private WebElement suppInsurancelEobLink;
@@ -251,7 +264,12 @@ public class AccountHomePage extends UhcDriver {
 	  private WebElement claimstablemoreinfolink;
 	  
 	  @FindBy (css = ".claimDetTableMainSection")
-		private WebElement claimDetTableMainSection;	
+		private WebElement claimDetTableMainSection;
+	  
+	  @FindBy(xpath = "//*[@id='dashboard']//span[text()='View Your Claims']")
+	  private WebElement claimsDashboardLink;
+	  
+	  
 	
 	
 	@FindBy(xpath="//span[text()='search providers']")
@@ -312,7 +330,23 @@ public class AccountHomePage extends UhcDriver {
 		
 	}
 
-
+	public ContactUsPage navigateToContactUsPage() {
+		if (validate(iPerceptionPopUp)) {
+            iPerceptionPopUp.click();
+            System.out.println("iPerception Pop Up displayed");
+		}
+		if (MRScenario.environment.equals("team-h") || MRScenario.environment.equals("test-a")) {
+			helpAndContactUslink.click();
+		}else{
+			linkContactUs.click();
+		}
+		CommonUtility.waitForPageLoad(driver, heading, 10);
+		if(driver.getTitle().equalsIgnoreCase("Overview"))
+		{
+			return new ContactUsPage(driver);
+		}
+		return null;
+	}
 	
 
 public void  rallytoolexist()
@@ -662,10 +696,10 @@ driver.switchTo().window(mainwindow);
 	@Override
 	public void openAndValidate() {
 		validate(benefitsLink);
-		validate(phrTab);
+		//validate(phrTab);
 		// validate(formsAndResourcesLink);
-		validate(benefitsLink);
-		validate(logOut);
+		/*validate(benefitsLink);
+		validate(logOut);*/
 
 	}
 
@@ -953,7 +987,20 @@ public pages.dashboard.member.ulayer.ClaimSummarypage navigateToClaimsSummaryPag
 		}
 
 		else if (MRScenario.environment.equalsIgnoreCase("stage")) {
-			//currently stage login is not working . once it start working will update the logic accordingly 
+			System.out.println("user is on Stage login page");			
+			//CommonUtility.waitForPageLoad(driver, claimsDashboardLink, 90);			
+			if(driver.getCurrentUrl().contains("/dashboard"));
+			{
+				System.out.println("User is on dashboard page and URL is ====>"+driver.getCurrentUrl());
+				claimsDashboardLink.click();
+				try {
+					Thread.sleep(10000);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+				
 		}
 		else 
 		{
