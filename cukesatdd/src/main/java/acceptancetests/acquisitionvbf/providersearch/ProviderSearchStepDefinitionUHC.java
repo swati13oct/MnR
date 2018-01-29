@@ -22,7 +22,7 @@ import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 
 /**
- * Functionality:
+ * Functionality:ProviderSearch 
  */
 
 public class ProviderSearchStepDefinitionUHC {
@@ -36,7 +36,7 @@ public class ProviderSearchStepDefinitionUHC {
 	}
 	
 	/**
-	 * @toDo:
+	 * @toDo:user is on UMS medicare acquisition site landing page
 	 */
 	@Given("^the user is on UMS medicare acquisition site landing page$")
 	public void user_UMS_Medicare()
@@ -51,7 +51,7 @@ public class ProviderSearchStepDefinitionUHC {
 	}
 	
 	/**
-	 * @toDo:
+	 * @toDo:the user performs plan search using following information in the UMS site
 	 */
 	@When("^the user performs plan search using following information in the UMS site$")
 	public void zipcode_details_in_UMS_site(DataTable givenAttributes) {
@@ -84,7 +84,7 @@ public class ProviderSearchStepDefinitionUHC {
 	}
 	
 	/**
-	 * @toDo:
+	 * @toDo:the user Click on Show Plans link
 	 */
 	@When("^the user Click on Show Plans link$")
 	public void clickonshowplans(DataTable planTypeAttribute)
@@ -116,7 +116,7 @@ public class ProviderSearchStepDefinitionUHC {
 	
 		
 	/**
-	 * @toDo:
+	 * @toDo:the user Click on Is my Provider covered link
 	 */
 	@When("^the user Click on Is my Provider covered link$")
 	public void clickonProvidercoveredlink(DataTable Planname )
@@ -140,7 +140,7 @@ public class ProviderSearchStepDefinitionUHC {
 	}
 	
 	/**
-	 * @toDo:
+	 * @toDo:Verify X out of Y provider covered information is displayed on Plan Summary page
 	 */
 	@Then("^Verify X out of Y provider covered information is displayed on Plan Summary page$")
 		public void verifyproviderscovered(DataTable Planname)

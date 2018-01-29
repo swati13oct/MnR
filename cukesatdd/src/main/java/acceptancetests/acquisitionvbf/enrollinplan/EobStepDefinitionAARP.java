@@ -29,7 +29,7 @@ import cucumber.api.java.en.Given;
 import cucumber.api.java.en.When;
 
 /**
- *Functionality:
+ *Functionality:EOB
  */
 public class EobStepDefinitionAARP {
 
@@ -41,7 +41,7 @@ public class EobStepDefinitionAARP {
 	}
 
 	/**
-	 * @toDo:
+	 * @toDo:registered AMP with following details for EOB
 	 */
 	@Given("^registered AMP with following details for EOB flow$")
 	public void registered_AMP_with_attributes_eob_aarp(
@@ -116,7 +116,7 @@ public class EobStepDefinitionAARP {
 	}
 	
 	/**
-	 * @toDo:
+	 * @toDo:user views forms and resources 
 	 */
 	@When("^the user views forms and resources in AARP site$")
 	public void user_views_forms_resources_page_aarp() {
@@ -133,12 +133,9 @@ public class EobStepDefinitionAARP {
 		}
 
 	}
-	
+
 	/**
-	 * @toDo:
-	 */
-	/**
-	 * @toDo:
+	 * @toDo:user clicks My Medical Explanation of Benefits link in forms and resources 
 	 */
 	@And("^the user clicks My Medical Explanation of Benefits link in forms and resources page in AARP site$")
 	public void user_clicks_medical_eob_forms_and_resources_aarp() {
@@ -157,7 +154,7 @@ public class EobStepDefinitionAARP {
 	}
 
 	/**
-	 * @toDo:
+	 * @toDo:the user searches EOB history for the date range
 	 */
 	@And("^the user searches EOB history for the date range in AARP site and validates$")
 	public void user_searches_eob_date_range_aarp(DataTable dateAttributes) {
@@ -186,9 +183,9 @@ public class EobStepDefinitionAARP {
 	}
 
 
-	/* Below methods are implemented for Prescription Drug EOB */
+	
 	/**
-	 * @toDo:
+	 * @toDo:Below methods are implemented for Prescription Drug EOB
 	 */
 	@And("^the user clicks My Prescription Drug Explanation of Benefits link in forms and resources page in AARP site$")
 	public void user_clicks_prescription_drug_eob_forms_and_resources_aarp(DataTable attributes) {
@@ -210,7 +207,7 @@ public class EobStepDefinitionAARP {
 	}
 	
 	/**
-	 * @toDo:
+	 * @toDo:user searches prescription drug EOB history for the date range 
 	 */
 	@And("^the user searches prescription drug EOB history for the date range in AARP site and validates$")
 	public void user_searches_prescription_drug_eob_date_range_aarp(

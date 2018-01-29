@@ -35,7 +35,7 @@ public class DCEAcqStepDefinitionUHC {
 	}
 	
 	/**
-	 * @toDo:
+	 * @toDo:user is on blayer medicare
 	 */
 	@Given("^the user is on blayer medicare acq site landing page$")
 	public void the_user_is_on_UMS_medicare_site_landing_page() {
@@ -53,7 +53,7 @@ public class DCEAcqStepDefinitionUHC {
 	}
 	
 	/**
-	 * @toDo:
+	 * @toDo:access the acquisition DCE tool from home page
 	 */
 	@When("^I access the acquisition DCE tool from home page on ums site$")
 	public void I_access_the_DCE_tool_home_page() throws InterruptedException {
@@ -63,7 +63,7 @@ public class DCEAcqStepDefinitionUHC {
 	}
 	
 	/**
-	 * @toDo:
+	 * @toDo:access the vpp page using below zipcode
 	 */
 	@When("^I access the vpp page using below zipcode on ums site$")
 	public void I_access_the__vpp_page(DataTable memberAttributes) throws InterruptedException {
@@ -85,7 +85,7 @@ public class DCEAcqStepDefinitionUHC {
 	}
 	
 	/**
-	 * @toDo:
+	 * @toDo:choose the 2017 plan and go to DCE
 	 */
 	@And("^I choose the 2017 plan and go to DCE page$")
 	public void choosing2017Plan(DataTable attributes){
@@ -113,7 +113,7 @@ public class DCEAcqStepDefinitionUHC {
 	}
 	
 	/**
-	 * @toDo:
+	 * @toDo:access the DCE 
 	 */
 	@And("^I access the DCE tool$")
 	public void accessDCETool(DataTable attributes){
@@ -136,7 +136,7 @@ public class DCEAcqStepDefinitionUHC {
 	}
 	
 	/**
-	 * @toDo:
+	 * @toDo:access the DCE tool after adding drug
 	 */
 	@And("^I access the DCE tool after adding drug$")
 	public void accessDCEToolAfterDrugAdded(DataTable attributes){
@@ -158,7 +158,7 @@ public class DCEAcqStepDefinitionUHC {
 	}
 	
 	/**
-	 * @toDo:
+	 * @toDo:ave added a drug to my drug list on ums site
 	 */
 	@When("^I have added a drug to my drug list on ums site$")
 	public void I_have_added_a_drug_to_my_drug_list(DataTable data) throws InterruptedException {
@@ -171,7 +171,7 @@ public class DCEAcqStepDefinitionUHC {
 	}
 
 	/**
-	 * @toDo:
+	 * @toDo:navigate to step2 page
 	 */
 	@And("^I navigate to step2 page on ums site$")
 	public void I_navigate_to_step2_page () throws InterruptedException
@@ -181,7 +181,7 @@ public class DCEAcqStepDefinitionUHC {
 	}
 	
 	/**
-	 * @toDo:
+	 * @toDo:user selects the pharmacy tab information
 	 */
 	@And("^the user selects the pharmacy tab information$")
 	public void navigate_drugcostestimator_pharmacytab(DataTable memberAttributes) throws InterruptedException {
@@ -203,7 +203,7 @@ public class DCEAcqStepDefinitionUHC {
 	}
 	
 	/**
-	 * @toDo:
+	 * @toDo:validate preferred retail pharmacy type is displayed
 	 */
 	@Then("^I validate preferred retail pharmacy type is displayed$")
 	public void validatePreferredRetailPharmacy(){
@@ -215,7 +215,7 @@ public class DCEAcqStepDefinitionUHC {
 	}
 	
 	/**
-	 * @toDo:
+	 * @toDo:validate pharmacy saver pharmacy type is displayed
 	 */
 	@Then("^I validate pharmacy saver pharmacy type is displayed$")
 	public void validatePharmacySaverPharmacy(){
@@ -230,7 +230,7 @@ public class DCEAcqStepDefinitionUHC {
 	}
 	
 	/**
-	 * @toDo:
+	 * @toDo:select the first pharmacy on there
 	 */
 	@When("^I select the first pharmacy on there$")
 	public void I_select_the_drug() throws InterruptedException {
@@ -241,7 +241,7 @@ public class DCEAcqStepDefinitionUHC {
 	}
 	
 	/**
-	 * @toDo:
+	 * @toDo:click on the return link
 	 */
 	@And("I click on the return link")
 	public void clickOnReturnLink(){
@@ -251,7 +251,7 @@ public class DCEAcqStepDefinitionUHC {
 	}
 	
 	/**
-	 * @toDo:
+	 * @toDo:verify that the drug is still there
 	 */
 	@Then("I verify that the drug is still there")
 	public void verifyDrugIsStillThere(DataTable attributes){
@@ -273,7 +273,7 @@ public class DCEAcqStepDefinitionUHC {
 	}
 	
 	/**
-	 * @toDo:
+	 * @toDo:navigate to step3 page and validate the drug info
 	 */
 	@Then("^I navigate to step3 page and validate the drug info$")
 	public void I_navigate_to_step_page(DataTable data) throws InterruptedException {
@@ -288,7 +288,7 @@ public class DCEAcqStepDefinitionUHC {
 	}
 	
 	/**
-	 * @toDo:
+	 * @toDo:switch to generic drug and validate on ums site
 	 */
 	@Then("^I switch to generic drug and validate on ums site$")
 	public void I_switch_to_generic_drug_and_validate() throws InterruptedException{

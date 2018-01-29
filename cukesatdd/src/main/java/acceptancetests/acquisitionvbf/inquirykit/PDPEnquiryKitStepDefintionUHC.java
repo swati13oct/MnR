@@ -23,7 +23,7 @@ import cucumber.api.java.en.Given;
 import cucumber.api.java.en.When;
 
 /**
- *Functionality:
+ *Functionality:PDP Enquiry Kit
  */
 public class PDPEnquiryKitStepDefintionUHC {
 
@@ -35,7 +35,7 @@ public class PDPEnquiryKitStepDefintionUHC {
 	}
 
 	/**
-	 * @toDo:
+	 * @toDo:the user is on the UHC acquisition Site
 	 */
 	@Given("^the user is on the UHC acquisition Site home page$")
 	public void the_user_is_on_uhc_acquisition_site_home_page()
@@ -52,7 +52,7 @@ public class PDPEnquiryKitStepDefintionUHC {
 	}
 	
 	/**
-	 * @toDo:
+	 * @toDo:the user navigates to Request More Help and Information page 
 	 */
 	@When("^the user navigates to Request More Help and Information page under pdp section in UHC Site$")
 	public void the_user_navigates_request_more_help_information_page_uhc()
@@ -69,7 +69,7 @@ public class PDPEnquiryKitStepDefintionUHC {
 	}
 	
 	/**
-	 * @toDo:
+	 * @toDo:the user accesses the Request Plan Information and Enrollment Materials 
 	 */
 	@And("^the user accesses the Request Plan Information and Enrollment Materials in UHC site$")
 	public void the_user_accessess_the_pdp_enquiry_kit_uhc()
@@ -88,7 +88,7 @@ public class PDPEnquiryKitStepDefintionUHC {
 	}
 	
 	/**
-	 * @toDo:
+	 * @toDo:the user submits by entering following details in Order Enrollment Information 
 	 */
 	@And("^the user submits by entering following details in Order Enrollment Information page in UHC Site$")
 	public void the_user_submits_entering_details_order_enrollment_information_uhc(DataTable attributes){

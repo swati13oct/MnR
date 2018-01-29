@@ -21,7 +21,7 @@ import cucumber.api.java.en.Given;
 import cucumber.api.java.en.When;
 
 /**
- *Functionality:
+ *Functionality: Global Header Footer
  */
 public class GlobalHeaderFooterStepDefinitionUHC {
 
@@ -33,7 +33,7 @@ public class GlobalHeaderFooterStepDefinitionUHC {
 	}
 
 	/**
-	 * @toDo:
+	 * @toDo:the user is on the UHC Medicaresolutions Site
 	 */
 	@Given("^the user is on the UHC Medicaresolutions Site$")
 	public void the_user_on_UHC_Medicaresolutions_Site() {
@@ -47,7 +47,7 @@ public class GlobalHeaderFooterStepDefinitionUHC {
 	}
 
 	/**
-	 * @toDo:
+	 * @toDo:user accesses global footer
 	 */
 	@When("^user accesses global footer UHC Medicaresolutions Site$")
 	public void the_user_accesses_GlobalFooter_UHC_Medicaresolutions_Site() {
@@ -72,7 +72,7 @@ public class GlobalHeaderFooterStepDefinitionUHC {
 	}
 
 	/**
-	 * @toDo:
+	 * @toDo:user clicks on Sitemap link from home page footer
 	 */
 	@And("^the user clicks on Sitemap link from home page footer UHC Medicaresolutions Site$")
 	public void user_clicks_Sitemap_links_ums() {
@@ -91,7 +91,7 @@ public class GlobalHeaderFooterStepDefinitionUHC {
 	}
 
 	/**
-	 * @toDo:
+	 * @toDo:user clicks on Aboutus link from home page footer
 	 */
 	@And("^the user clicks on Aboutus link from home page footer UHC Medicaresolutions Site$")
 	public void user_clicks_Aboutus_links_ums() {
@@ -112,7 +112,7 @@ public class GlobalHeaderFooterStepDefinitionUHC {
 	}
 
 	/**
-	 * @toDo:
+	 * @toDo:user clicks on Contactus link from about us page footer 
 	 */
 	@And("^the user clicks on Contactus link from about us page footer UHC Medicaresolutions Site$")
 	public void user_clicks_Contactus_link_ums() {
@@ -133,7 +133,7 @@ public class GlobalHeaderFooterStepDefinitionUHC {
 	}
 
 	/**
-	 * @toDo:
+	 * @toDo:user clicks on Privacy Policy link from Contactus page footer 
 	 */
 	@And("^the user clicks on Privacy Policy link from Contactus page footer UHC Medicaresolutions Site$")
 	public void user_clicks_PrivacyPolicy_link_ums() {
@@ -154,7 +154,7 @@ public class GlobalHeaderFooterStepDefinitionUHC {
 	}
 
 	/**
-	 * @toDo:
+	 * @toDo:user clicks on Terms of use link from Privacy Policy page footer
 	 */
 	@And("^the user clicks on Terms of use link from Privacy Policy page footer UHC Medicaresolutions Site$")
 	public void user_clicks_TermsOfUse_link_ums() {
@@ -175,7 +175,7 @@ public class GlobalHeaderFooterStepDefinitionUHC {
 	}
 
 	/**
-	 * @toDo:
+	 * @toDo:user clicks on Disclaimers link from Terms of use page footer
 	 */
 	@And("^the user clicks on Disclaimers link from Terms of use page footer UHC Medicaresolutions Site$")
 	public void user_clicks_Disclaimers_link_ums() {
@@ -196,7 +196,7 @@ public class GlobalHeaderFooterStepDefinitionUHC {
 	}
 
 	/**
-	 * @toDo:
+	 * @toDo:user clicks on Agents & Brokers link from Disclaimers page footer
 	 */
 	@And("^the user clicks on Agents & Brokers link from Disclaimers page footer UHC Medicaresolutions Site$")
 	public void user_clicks_AgentsAndBrokers_link_ums() {
@@ -215,7 +215,7 @@ public class GlobalHeaderFooterStepDefinitionUHC {
 	}
 
 	/**
-	 * @toDo:
+	 * @toDo:user verifies home link of agents&brokers
 	 */
 	@And("^user verifies home link of agents&brokers page bluelayer$")
 	public void user_clicks_on_home_link_of_agents_brokers_page_bluelayer() {

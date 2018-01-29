@@ -40,7 +40,7 @@ public class VppStepDefinitionUHC {
 	}
 
 	/**
-	 * @toDo:
+	 * @toDo:user is on the uhcmedicaresolutions site landing page
 	 */
 	@Given("^the user is on the uhcmedicaresolutions site landing page$")
 	public void the_user_on_UHC_Medicaresolutions_Site() {
@@ -92,7 +92,7 @@ public class VppStepDefinitionUHC {
 	}
 	
 	/**
-	 * @toDo:
+	 * @toDo:user views plans of the below plan type
 	 */
 	@When("user views plans of the below plan type in UMS site$")
 	public void user_performs_planSearch_in_UMS_site(DataTable givenAttributes) {
@@ -120,7 +120,7 @@ public class VppStepDefinitionUHC {
 	}
 	
 	/**
-	 * @toDo:
+	 * @toDo:user view plan details of the above selected plan
 	 */
 	@Then("^the user view plan details of the above selected plan in UMS site and validates$")
 	public void user_views_plandetails_selected_plan_ums(DataTable givenAttributes) {
@@ -146,7 +146,7 @@ public class VppStepDefinitionUHC {
 	}
 	
 	/**
-	 * @toDo:
+	 * @toDo:access the vpp page
 	 */
 	@When("^I access the vpp page$")
 	public void I_access_the_vpp_page(DataTable memberAttributes) throws InterruptedException {
@@ -169,7 +169,7 @@ public class VppStepDefinitionUHC {
 	}
 	
 	/**
-	 * @toDo:
+	 * @toDo:click on add to compare checkbox and click on view details 
 	 */
 	@And("^I click on add to compare checkbox and click on view details link$")
 	public void I_click_on_compare_checkbox(){
@@ -183,7 +183,7 @@ public class VppStepDefinitionUHC {
 	}
 	
 	/**
-	 * @toDo:
+	 * @toDo:select pdp plans and go to view details page
 	 */
 	@And("^I select pdp plans and go to view details page$")
 	public void I_select_pdp_plans_and_go_to_view_details_page(){
@@ -196,7 +196,7 @@ public class VppStepDefinitionUHC {
 	}
 	
 	/**
-	 * @toDo:
+	 * @toDo:check compare box and verify right info is shown
 	 */
 	@Then("^I check compare box and verify right info is shown$")
 	public void I_check_compare_box_and_verify(){
@@ -208,7 +208,7 @@ public class VppStepDefinitionUHC {
 	}
 	
 	/**
-	 * @toDo:
+	 * @toDo:user clicks on add to compare box and validates that info shows 2 plans added
 	 */
 	@Then("^the user clicks on add to compare box and validates that info shows 2 plans added$")
 	public void I_check_compare_box_and_verify_2_plans(){
@@ -220,7 +220,7 @@ public class VppStepDefinitionUHC {
 	}
 	
 	/**
-	 * @toDo:
+	 * @toDo:uncheck and recheck the compare box and verify the message and link exists
 	 */
 	@Then("^I uncheck and recheck the compare box and verify the message and link exists$")
 	public void verifyPlanDetailsPage(){
@@ -232,7 +232,7 @@ public class VppStepDefinitionUHC {
 	}
 	
 	/**
-	 * @toDo:
+	 * @toDo:uncheck and go back to the vpp page to validate
 	 */
 	@Then("^I uncheck and go back to the vpp page to validate$")
 	public void uncheck_and_validate_vpp_page(){
@@ -249,7 +249,7 @@ public class VppStepDefinitionUHC {
 	}
 	
 	/**
-	 * @toDo:
+	 * @toDo:isAlertPresent
 	 */
 	public static boolean isAlertPresent(FirefoxDriver wd) {
 		try {

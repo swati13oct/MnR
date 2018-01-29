@@ -26,7 +26,7 @@ import cucumber.api.java.en.When;
 
 
 /**
- * Functionality: 
+ * Functionality: PharmacyLocator
  */
 
 public class PharmacyLocatorStepDefinitionUHC {
@@ -39,7 +39,7 @@ public class PharmacyLocatorStepDefinitionUHC {
 	}
 
 	/**
-	 * @toDo:
+	 * @toDo:user is on the UMS Medicare Site landing page
 	 */
 	@Given("^the user is on the UMS Medicare Site landing page$")
 	public void registered_member_located_pharmacy_UMS() {
@@ -56,7 +56,7 @@ public class PharmacyLocatorStepDefinitionUHC {
 	}
 
 	/**
-	 * @toDo:
+	 * @toDo:user hovers to Our Plans and select Request More Help and Information for following plan type
 	 */
 	@When("^the user hovers to Our Plans and select Request More Help and Information for following plan type$")
 	public void user_hovers_to_our_plans_and_select_request_more_help_and_information(DataTable planAttributes){
@@ -70,7 +70,7 @@ public class PharmacyLocatorStepDefinitionUHC {
 	}
 
 	/**
-	 * @toDo:
+	 * @toDo:user navigates to pharmacy search page in UMS Site
 	 */
 	@When("^the user navigates to pharmacy search page in UMS Site$")
 	public void user_views_pharmacy_locator_UMS() {
@@ -92,7 +92,7 @@ public class PharmacyLocatorStepDefinitionUHC {
 	}
 
 	/**
-	 * @toDo:
+	 * @toDo: user enters following details for pharmacy search
 	 */
 	@And("^the user enters following details for pharmacy search in UMS Site$")
 	public void user_enters_zipcode_distance_details_UMS(DataTable zipAttributes) {
@@ -129,7 +129,7 @@ public class PharmacyLocatorStepDefinitionUHC {
 	}
 
 	/**
-	 * @toDo:
+	 * @toDo:user chooses a plan from dropdown 
 	 */
 	@And("^the user chooses a plan from dropdown in UMS Site$")
 	public void user_chooses_plan_dropdown_UMS(DataTable planAttributes) {
@@ -153,7 +153,7 @@ public class PharmacyLocatorStepDefinitionUHC {
 	}
 
 	/**
-	 * @toDo:
+	 * @toDo: user chooses the Pharmacy Type
 	 */
 	@Then("^the user chooses the Pharmacy Type blayer$")
 	public void the_user_chooses_the_pharmacy_type_blayer(DataTable pharmacyTypeAttribute){
@@ -174,7 +174,7 @@ public class PharmacyLocatorStepDefinitionUHC {
 	}
 	
 	/**
-	 * @toDo:
+	 * @toDo: user chooses the Service Type blayer
 	 */
 	@Then("^the user chooses the Service Type blayer$")
 	public void the_user_chooses_the_service_type_blayer(DataTable serviceTypeAttribute){
@@ -196,7 +196,7 @@ public class PharmacyLocatorStepDefinitionUHC {
 	}
 	
 	/**
-	 * @toDo:
+	 * @toDo: user searches available pharmacies by selecting Show pharmacies for ALL types
 	 */
 	@And("^the user searches available pharmacies by selecting \"Show pharmacies for ALL types\"$")
 	public void user_selects_show_pharmacy_for_all_pharmacy_types_ums() {
@@ -224,7 +224,7 @@ public class PharmacyLocatorStepDefinitionUHC {
 	}
 
 	/**
-	 * @toDo:
+	 * @toDo:user searches available pharmacies by selecting 
 	 */
 	@And("the user searches available pharmacies by selecting \"Show pharmacies for these services.\"$")
 	public void  user_searches_pharmacies_by_choosing_pharmacy_types_ums(DataTable pharmacyTypeAttributes)
@@ -253,7 +253,7 @@ public class PharmacyLocatorStepDefinitionUHC {
 	}
 
 	/**
-	 * @toDo:
+	 * @toDo: user validates the error message for no pharmacies found for below pharmacy
 	 */
 	@Then("^the user validates the error message for no pharmacies found for below pharmacy$")
 	public void validates_error_msg_for_no_pharmacies_found(DataTable pharmacyTypeAttributes){
@@ -265,7 +265,7 @@ public class PharmacyLocatorStepDefinitionUHC {
 	}
 
 	/**
-	 * @toDo:
+	 * @toDo:user clicks on SearchAgain and navigates to pharmacies search
 	 */
 	@Then("^the user clicks on SearchAgain and navigates to pharmacies search page$")
 	public void clicks_searchAgain_navigates_to_pharmaacies_search_page(){
@@ -281,7 +281,7 @@ public class PharmacyLocatorStepDefinitionUHC {
 	}
 
 	/**
-	 * @toDo:
+	 * @toDo:user validates the available pharmacies page 
 	 */
 	@Then("^the user validates the available pharmacies page in UMS site$")
 	public void user_validates_available_pharmacies_UMS() {
@@ -298,7 +298,7 @@ public class PharmacyLocatorStepDefinitionUHC {
 	}
 
 	/**
-	 * @toDo:
+	 * @toDo:user validates the right rail widget and logo slider
 	 */
 	@Then("^the user validates the right rail widget and logo slider$")
 	public void validates_Right_Rail_Widget_And_Logo_UMS(){
@@ -306,7 +306,7 @@ public class PharmacyLocatorStepDefinitionUHC {
 	}
 
 	/**
-	 * @toDo:
+	 * @toDo:user validates Pharmacy Locator tool plan dropdown menu for the Medica and PCP member
 	 */
 	@Then("^the user validates Pharmacy Locator tool plan dropdown menu for the Medica and PCP member plan$")
 	public void validates_Pharmacy_Locator_Tool_Plan_UMS(){
@@ -314,14 +314,14 @@ public class PharmacyLocatorStepDefinitionUHC {
 	}
 	
 	/**
-	 * @toDo:
+	 * @toDo: user validates Search checkbox displayed dynamically related to the pharmacy network
 	 */
 	@Then("^the user validates Search checkbox displayed dynamically related to the pharmacy network$")
 	public void validates_Pharmacy_Network_Displayed_Dynamically_UMS(){
 		}
 	
 	/**
-	 * @toDo:
+	 * @toDo:the user selects a language from dropdown in UMS Site
 	 */
 	@And("^the user selects a language from dropdown in UMS Site$")
 	public void user_selects_language_ums(DataTable languageAttributes) {
@@ -349,7 +349,7 @@ public class PharmacyLocatorStepDefinitionUHC {
 	}
 	
 	/**
-	 * @toDo:
+	 * @toDo:the user should see county popup
 	 */
 	@Then("^the user should see county popup in UMS site$")
 	public void user_should_see_county_popup_ums() {
@@ -363,7 +363,7 @@ public class PharmacyLocatorStepDefinitionUHC {
 	}
 	
 	/**
-	 * @toDo:
+	 * @toDo:the user selects the county
 	 */
 	@When("^the user selects the county in UMS site$")
 	public void user_selects_county_ums(DataTable countyAttributes){
@@ -375,7 +375,7 @@ public class PharmacyLocatorStepDefinitionUHC {
 	}
 	
 	/**
-	 * @toDo:
+	 * @toDo:the user should see choose a plan
 	 */
 	@Then("^the user should see choose a plan in UMS site$")
 	public void user_should_see_choose_plan_ums(){

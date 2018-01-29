@@ -34,7 +34,7 @@ import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 
 /**
- *Functionality:
+ *Functionality: Enroll In Plan
  */
 public class EnrollInPlanStepDefinitionUHC {
 
@@ -45,6 +45,9 @@ public class EnrollInPlanStepDefinitionUHC {
 		return loginScenario;
 	}
 
+	/**
+	 * @toDo:user is on the UHC medicare solutions landing page
+	 */
 	@Given("^the user is on the UHC medicare solutions landing page$")
 	public void the_user_on_UHC_Medicaresolutions_Site() {
 		WebDriver wd = getLoginScenario().getWebDriver();
@@ -56,6 +59,9 @@ public class EnrollInPlanStepDefinitionUHC {
 				aquisitionhomepage);
 	}
 
+	/**
+	 * @toDo:user performs plan search using following information
+	 */
 	@When("^user performs plan search using following information in UHC site$")
 	public void zipcode_details_in_uhc_site(DataTable givenAttributes) {
 
@@ -89,6 +95,9 @@ public class EnrollInPlanStepDefinitionUHC {
 		}
 	}
 
+	/**
+	 * @toDo:user views plans of the below plan type
+	 */
 	@And("^the user views plans of the below plan type in UHC site$")
 	public void user_performs_planSearch_in_aarp_site(DataTable givenAttributes) {
 		List<DataTableRow> givenAttributesRow = givenAttributes
@@ -117,6 +126,9 @@ public class EnrollInPlanStepDefinitionUHC {
 		}
 	}
 
+	/**
+	 * @toDo: user enrolls for the below plan 
+	 */
 	@And("^the user enrolls for the below plan in UHC site$")
 	public void user_enrolls_for_plan(DataTable planAttributes) {
 		String planName = planAttributes.getGherkinRows().get(0).getCells()
@@ -150,6 +162,9 @@ public class EnrollInPlanStepDefinitionUHC {
 
 	}
 
+	/**
+	 * @toDo:user select the answer of this question Do you have End-Stage Renal Disease
+	 */
 	@And("^the user select the answer of this question Do you have End-Stage Renal Disease in UHC site$")
 	public void user_selects_answer_esrd_question(DataTable attributes) {
 		String answer = attributes.getGherkinRows().get(0).getCells().get(0);
@@ -162,7 +177,10 @@ public class EnrollInPlanStepDefinitionUHC {
 					planInformationPage);
 		}
 	}
-
+	
+	/**
+	 * @toDo:user navigates to Benefit information 
+	 */
 	@And("^the user navigates to Benefit information step in UHC site$")
 	public void the_user_navigates_benefit_information_step_aarp() {
 
@@ -200,6 +218,9 @@ public class EnrollInPlanStepDefinitionUHC {
 
 	}
 
+	/**
+	 * @toDo:user fill following information in beneficiary information
+	 */
 	@And("^the user fill following information in beneficiary information step in UHC site$")
 	public void user_fill_information_beneficiary_information_aarp(
 			DataTable personalAttributes) {
@@ -259,6 +280,9 @@ public class EnrollInPlanStepDefinitionUHC {
 
 	}
 
+	/**
+	 * @toDo:user navigates to Additional Information step
+	 */
 	@And("^the user navigates to Additional Information step in UHC site$")
 	public void user_navigates_additional_information_aarp() {
 
@@ -293,6 +317,9 @@ public class EnrollInPlanStepDefinitionUHC {
 
 	}
 
+	/**
+	 * @toDo:user select the answer for special election period in Additional Information
+	 */
 	@And("^the user select the answer for special election period in Additional Information$")
 	public void user_selects_special_election_period_in_additional_information_page(DataTable attributes) {
 		String answer = attributes.getGherkinRows().get(0).getCells().get(0);
@@ -300,6 +327,10 @@ public class EnrollInPlanStepDefinitionUHC {
 				.getBean(PageConstants.ADDITIONAL_INFORMATION_PAGE);
 		additionalInformationPage.answerSpecialElectionQuestion(answer);
 	}
+	
+	/**
+	 * @toDo:user select the answer for prescription drug coverage in Additional Information
+	 */
 	@And("^the user select the answer for prescription drug coverage in Additional Information$")
 	public void the_user_select_the_answer_for_prescription_drug_coverage_in_Additional_Information(DataTable attributes) {
 		String answer = attributes.getGherkinRows().get(0).getCells().get(0);
@@ -307,6 +338,10 @@ public class EnrollInPlanStepDefinitionUHC {
 				.getBean(PageConstants.ADDITIONAL_INFORMATION_PAGE);
 		additionalInformationPage.answerPrescriptionDrugCoverageQuestion(answer);
 	}
+	
+	/**
+	 * @toDo:user select the answer for long-term care facility question in Additional Information
+	 */
 	@And("^the user select the answer for long-term care facility question in Additional Information$")
 	public void the_user_select_the_answer_for_long_term_care_facility_question_in_Additional_Information(DataTable attributes) {
 		String answer = attributes.getGherkinRows().get(0).getCells().get(0);
@@ -314,6 +349,10 @@ public class EnrollInPlanStepDefinitionUHC {
 				.getBean(PageConstants.ADDITIONAL_INFORMATION_PAGE);
 		additionalInformationPage.answerLongTermCareQuestion(answer);
 	}
+	
+	/**
+	 * @toDo:user select the answer for medicaid program question in Additional Information
+	 */
 	@And("^the user select the answer for medicaid program question in Additional Information$")
 	public void the_user_select_the_answer_for_medicaid_program_question_in_Additional_Information(DataTable attributes) {
 		String answer = attributes.getGherkinRows().get(0).getCells().get(0);
@@ -321,6 +360,10 @@ public class EnrollInPlanStepDefinitionUHC {
 				.getBean(PageConstants.ADDITIONAL_INFORMATION_PAGE);
 		additionalInformationPage.answerMedicaidProgramQuestion(answer);
 	}
+	
+	/**
+	 * @toDo:user select the answer for other health insurance question in Additional Information
+	 */
 	@And("^the user select the answer for other health insurance question in Additional Information$")
 	public void the_user_select_the_answer_for_other_health_insurance_question_in_Additional_Information(DataTable attributes) {
 		String answer = attributes.getGherkinRows().get(0).getCells().get(0);
@@ -328,6 +371,10 @@ public class EnrollInPlanStepDefinitionUHC {
 				.getBean(PageConstants.ADDITIONAL_INFORMATION_PAGE);
 		additionalInformationPage.answerOtherHealthInsuranceQuestion(answer);
 	}
+	
+	/**
+	 * @toDo:user select the answer for this question in supplemental benefits
+	 */
 	@And("^the user select the answer for this question \"([^\"]*)\" in supplemental benefits$")
 	public void the_user_select_the_answer_for_this_question_in_supplemental_benefits(String question,DataTable attributes) {
 		String answer = attributes.getGherkinRows().get(0).getCells().get(0);
@@ -336,6 +383,9 @@ public class EnrollInPlanStepDefinitionUHC {
 		additionalInformationPage.answerDentalSupplementQuestion(answer);
 	}
 	
+	/**
+	 * @toDo:user checks for Primary Care Provider by clicking on look up your provider link
+	 */
 	@And("^the user checks for Primary Care Provider by clicking on look up your provider link$")
 	public void user_checks_primary_care_provider_by_clicking_on_look_up_your_provider_link(){
 		AdditionalInformationPage additionalInformationPage = (AdditionalInformationPage) getLoginScenario()
@@ -350,6 +400,10 @@ public class EnrollInPlanStepDefinitionUHC {
 		}
 	}
 
+	
+	/**
+	 * @toDo:user select option for plan payment options
+	 */
 	@And("the user select option for plan payment options$")
 	public void user_select_payment_options(DataTable attributes) {
 		String answer = attributes.getGherkinRows().get(0).getCells().get(0);
@@ -358,6 +412,9 @@ public class EnrollInPlanStepDefinitionUHC {
 		additionalInformationPage.answerPaymentOptionsQuestion(answer);
 	}
 
+	/**
+	 * @toDo:user fill broker id
+	 */
 	@And("^the user fill broker id$")
 	public void user_fill_agent_or_broker_id(DataTable attributes) {
 		String brokerId = attributes.getGherkinRows().get(0).getCells().get(0);
@@ -366,7 +423,9 @@ public class EnrollInPlanStepDefinitionUHC {
 		additionalInformationPage.provideBrokerid(brokerId);
 	}
 
-
+	/**
+	 * @toDo:user reviews the personal and plan data by navigating to Review application 
+	 */
 	@And("^the user reviews the personal and plan data by navigating to Review application step in UHC site$")
 	public void user_reviews_personal_plan_data_on_review_application_page_aarp() {
 		AdditionalInformationPage additionalInformationPage = (AdditionalInformationPage) getLoginScenario()
@@ -413,6 +472,9 @@ public class EnrollInPlanStepDefinitionUHC {
 		}
 	}
 
+	/**
+	 * @toDo:user navigates to submit application step
+	 */
 	@And("^the user navigates to submit application step in UHC site$")
 	public void user_navigates_submit_application_aarp() {
 		ReviewApplicationPage reviewApplication = (ReviewApplicationPage) getLoginScenario()
@@ -445,6 +507,9 @@ public class EnrollInPlanStepDefinitionUHC {
 		}
 	}
 
+	/**
+	 * @toDo:user selects I am the applicant listed on this enrollment application
+	 */
 	@And("^the user selects \"I am the applicant listed on this enrollment application\" for the question \"What is your relationship to the applicant listed on this enrollment application\" in UHC site$")
 	public void user_selects_applicant_for_relationship_question() {
 		SubmitApplicationPage submitApplicationPage = (SubmitApplicationPage) getLoginScenario()
@@ -454,6 +519,9 @@ public class EnrollInPlanStepDefinitionUHC {
 				submitApplicationPage);
 	}
 
+	/**
+	 * @toDo:user submits application by selecting agree to the Statement of Understanding
+	 */
 	@And("^the user submits application by selecting agree to the Statement of Understanding in UHC site$")
 	public void user_submits_application_aarp() {
 		SubmitApplicationPage submitApplicationPage = (SubmitApplicationPage) getLoginScenario()
@@ -477,6 +545,9 @@ public class EnrollInPlanStepDefinitionUHC {
 
 	}
 
+	/**
+	 * @toDo:the user validates the enrollment application confirmation 
+	 */
 	@Then("^the user validates the enrollment application confirmation in UHC site$")
 	public void user_validates_enrollment_application_confirmation_aarp() {
 
@@ -501,6 +572,9 @@ public class EnrollInPlanStepDefinitionUHC {
 
 	}
 
+	/**
+	 * @toDo:isAlertPresent
+	 */
 	public static boolean isAlertPresent(FirefoxDriver wd) {
 		try {
 			wd.switchTo().alert();

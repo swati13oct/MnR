@@ -38,7 +38,7 @@ public class VppStepDefinitionUpdatedAARP {
 	}
 
 	/**
-	 * @toDo:
+	 * @toDo:user is on AARP medicare acquisition site landing page
 	 */
 	@Given("^the user is on AARP medicare acquisition site landing page$")
 	public void the_user_on_aarp_medicaresolutions_Site() {
@@ -51,7 +51,7 @@ public class VppStepDefinitionUpdatedAARP {
 	}
 
 	/**
-	 * @toDo:
+	 * @toDo: user performs plan search using following information
 	 */
 	@When("^the user performs plan search using following information in the AARP site$")
 	public void zipcode_details_in_aarp_site(DataTable givenAttributes) {
@@ -88,7 +88,7 @@ public class VppStepDefinitionUpdatedAARP {
 	}
 
 	/**
-	 * @toDo:
+	 * @toDo:user validates plan count for all plan types on plan summary page 
 	 */
 	@Then("^user validates plan count for all plan types on plan summary page in the AARP site$")
 	public void user_validates_following_benefits_ui_aarp() {
@@ -103,7 +103,7 @@ public class VppStepDefinitionUpdatedAARP {
 	}
 
 	/**
-	 * @toDo:
+	 * @toDo:user views the plans of the below plan type 
 	 */
 	@And("^the user views the plans of the below plan type in AARP site$")
 	public void user_performs_planSearch_in_aarp_site(DataTable givenAttributes) {
@@ -133,7 +133,7 @@ public class VppStepDefinitionUpdatedAARP {
 	}
 	
 	/**
-	 * @toDo:
+	 * @toDo:select all 3 plans to compare in MA and click on compare plan  link
 	 */
 	@And("^I select all 3 plans to compare in MA and click on compare plan link$")
 	public void I_select_all_3_plans_to_compare(){
@@ -150,7 +150,7 @@ public class VppStepDefinitionUpdatedAARP {
 	}
 	
 	/**
-	 * @toDo:
+	 * @toDo:click back to all plans button and verify that all 3 plans are still selected
 	 */
 	@Then("^I click back to all plans button and verify that all 3 plans are still selected$")
 	public void verifyAllPlansStillSelected(){
@@ -165,7 +165,7 @@ public class VppStepDefinitionUpdatedAARP {
 	}
 	
 	/**
-	 * @toDo:
+	 * @toDo:user view plan details of the above selected plan in AARP site and validates
 	 */
 	@When("^the user view plan details of the above selected plan in AARP site and validates$")
 	public void user_views_plandetails_selected_plan_aarp(DataTable givenAttributes) {
@@ -193,7 +193,7 @@ public class VppStepDefinitionUpdatedAARP {
 	}
 
 	/**
-	 * @toDo:
+	 * @toDo:user validates the available plans for selected plan types
 	 */
 	@Then("^the user validates the available plans for selected plan types in the AARP site$")
 	public void user_validates_available_plans_aarp() {
@@ -211,7 +211,7 @@ public class VppStepDefinitionUpdatedAARP {
 	}
 
 	/**
-	 * @toDo:
+	 * @toDo:user validates plan summary for the below plan
 	 */
 	@And("^the user validates plan summary for the below plan in the AARP site$")
 	public void user_validates_plan_summary(DataTable planAttributes) {

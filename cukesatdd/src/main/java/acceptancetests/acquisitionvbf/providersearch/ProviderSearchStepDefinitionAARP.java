@@ -37,7 +37,7 @@ public class ProviderSearchStepDefinitionAARP {
 	}
 	
 	/**
-	 * @toDo:
+	 * @toDo: user is on AARP Ulayer medicare acquisition site
 	 */
 	@Given("^the user is on AARP Ulayer medicare acquisition site landing page$")
 	public void user_AARP_Medicare()
@@ -52,7 +52,7 @@ public class ProviderSearchStepDefinitionAARP {
 	}
 	
 	/**
-	 * @toDo:
+	 * @toDo:user performs plan search using following information 
 	 */
 	@When("^the user performs plan search using following information in the Ulayer AARP site$")
 	public void zipcode_details_in_AARP_site(DataTable givenAttributes) 
@@ -86,7 +86,7 @@ public class ProviderSearchStepDefinitionAARP {
 	}
 	
 	/**
-	 * @toDo:
+	 * @toDo:user Click on Show Plans link 
 	 */
 	@When("^the user Click on Show Plans link Ulayer$")
 	public void clickonshowplans(DataTable planTypeAttribute)
@@ -116,7 +116,7 @@ public class ProviderSearchStepDefinitionAARP {
 	}
 	
 	/**
-	 * @toDo:
+	 * @toDo:user Click on Is my Provider covered link 
 	 */
 		@When("^the user Click on Is my Provider covered link Ulayer$")
 		public void clickonProvidercoveredlink(DataTable Planname ){
@@ -141,7 +141,7 @@ public class ProviderSearchStepDefinitionAARP {
 		}
 		
 		/**
-		 * @toDo:
+		 * @toDo:Verify X out of Y provider covered information is displayed on Plan Summary page
 		 */
 		@Then("^Verify X out of Y provider covered information is displayed on Plan Summary page Ulayer$")
 		public void verifyproviderscoveredulayer(DataTable Planname ){

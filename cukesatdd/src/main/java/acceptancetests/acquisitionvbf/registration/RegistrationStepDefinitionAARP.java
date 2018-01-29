@@ -33,7 +33,7 @@ import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 
 /**
- *Functionality:
+ *Functionality:Registration
  */
 public class RegistrationStepDefinitionAARP {
 
@@ -45,7 +45,7 @@ public class RegistrationStepDefinitionAARP {
 	}
 	
 	/**
-	 * @toDo:
+	 * @toDo:the user is on registration page
 	 */
 	@Given("^the user is on registration page of AARP site$")
 	public void registration_landing_page(DataTable memberAttributes) {
@@ -72,7 +72,7 @@ public class RegistrationStepDefinitionAARP {
 	}
 
 	/**
-	 * @toDo:
+	 * @toDo:user registers with below details 
 	 */
 	@When("^the user registers with below details in AARP site$")
 	public void user_registers(DataTable memberAttributes) {
@@ -99,7 +99,7 @@ public class RegistrationStepDefinitionAARP {
 	}	
 	
 	/**
-	 * @toDo:
+	 * @toDo: user validates the plan information on plan confirmation page 
 	 */
 	@Then("^the user validates the plan information on plan confirmation page in AARP site$")
 	public void validate_planInformation() {
@@ -114,7 +114,7 @@ public class RegistrationStepDefinitionAARP {
 	}
 
 	/**
-	 * @toDo:
+	 * @toDo: user confirms the personal and plan information
 	 */
 	@When("^the user confirms the personal and plan information in AARP site$")
 	public void confirm_plan() {
@@ -126,7 +126,7 @@ public class RegistrationStepDefinitionAARP {
 	}
 	
 	/**
-	 * @toDo:
+	 * @toDo:user registers with the following details
 	 */
 	@And("^the user registers with the following details in AARP site$")
 	public void create_account(DataTable memberAttributes) {
@@ -153,7 +153,7 @@ public class RegistrationStepDefinitionAARP {
 	}
 	
 	/**
-	 * @toDo:
+	 * @toDo:user registers successfully
 	 */
 	@Then("^the user registers successfully in AARP site$")
 	public void user_registers_successfully() {
@@ -167,7 +167,7 @@ public class RegistrationStepDefinitionAARP {
 	}
 	
 	/**
-	 * @toDo:
+	 * @toDo:user adds second plan with below information 
 	 */
 	@And("^the user adds second plan with below information in AARP site$")
 	public void add_second_plan(DataTable memberAttributes) {
@@ -197,7 +197,7 @@ public class RegistrationStepDefinitionAARP {
 	}
 
 	/**
-	 * @toDo:
+	 * @toDo:user validates the the plan information for both plans 
 	 */
 	@Then("^the user validates the the plan information for both plans in AARP site$")
 	public void validate_both_planInformation() {
@@ -223,7 +223,7 @@ public class RegistrationStepDefinitionAARP {
 	}
 
 	/**
-	 * @toDo:
+	 * @toDo:user confirms personal and plan information for both plans
 	 */
 	@When("^the user confirms personal and plan information for both plans in AARP site$")
 	public void confirm_planInformation_bothPlans() {
@@ -235,7 +235,7 @@ public class RegistrationStepDefinitionAARP {
 	}
 
 	/**
-	 * @toDo:
+	 * @toDo:user registers with dob and memberId
 	 */
 	@When("^the user registers with dob and memberId in AARP site$")
 	public void user_register(DataTable memberAttributes) {
@@ -258,7 +258,7 @@ public class RegistrationStepDefinitionAARP {
 	}
 
 	/**
-	 * @toDo:
+	 * @toDo: user navigate to registration error page
 	 */
 	@Then("^the user navigate to registration error page of AARP site$")
 	public void negativeScenario_aarp() {
@@ -289,7 +289,7 @@ public class RegistrationStepDefinitionAARP {
 	}
 
 	/**
-	 * @toDo:
+	 * @toDo:user validate registration error message
 	 */
 	@Then("^the user validate registration error message of AARP site$")
 	public void validate_ErrorMessage_aarp() {
@@ -312,6 +312,9 @@ public class RegistrationStepDefinitionAARP {
 		}
 	}
 	
+	/**
+	 * @toDo:getVersionData
+	 */
 	@After("@Registration")
 	public void getVersionData()
 	{

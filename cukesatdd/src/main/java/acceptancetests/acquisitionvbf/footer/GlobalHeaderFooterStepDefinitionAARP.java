@@ -21,7 +21,7 @@ import cucumber.api.java.en.Given;
 import cucumber.api.java.en.When;
 
 /**
- *Functionality:
+ *Functionality:Global Header Footer 
  */
 public class GlobalHeaderFooterStepDefinitionAARP {
 
@@ -33,7 +33,7 @@ public class GlobalHeaderFooterStepDefinitionAARP {
 	}
 
 	/**
-	 * @toDo:
+	 * @toDo:user is on acquisition home
 	 */
 	@Given("^user is on acquisition home page of AARP Site$")
 	public void user_is_on_acquisition_home_page_of_AARP_Site() {
@@ -47,7 +47,7 @@ public class GlobalHeaderFooterStepDefinitionAARP {
 	}
 
 	/**
-	 * @toDo:
+	 * @toDo:user accesses global footer
 	 */
 	@When("^user accesses global footer of the AARP Medicare Plans home page$")
 	public void access_global_footer() {
@@ -68,7 +68,7 @@ public class GlobalHeaderFooterStepDefinitionAARP {
 	}
 
 	/**
-	 * @toDo:
+	 * @toDo:user clicks on Aboutus link from footer 
 	 */
 	@And("^user clicks on Aboutus link from footer of the AARP Medicare Plans home page$")
 	public void click_aboutus() {
@@ -87,7 +87,7 @@ public class GlobalHeaderFooterStepDefinitionAARP {
 	}
 
 	/**
-	 * @toDo:
+	 * @toDo:user clicks on contactus link of aboutus
 	 */
 	@And("^user clicks on contactus link of aboutus page$")
 	public void click_contactus() {
@@ -105,7 +105,7 @@ public class GlobalHeaderFooterStepDefinitionAARP {
 	}
 
 	/**
-	 * @toDo:
+	 * @toDo:user clicks on sitemap link of contactus
 	 */
 	@And("^user clicks on sitemap link of contactus page$")
 	public void click_sitemap() {
@@ -123,7 +123,7 @@ public class GlobalHeaderFooterStepDefinitionAARP {
 	}
 	
 	/**
-	 * @toDo:
+	 * @toDo:user clicks on privacypolicy link of sitemap
 	 */
 	@And("^user clicks on privacypolicy link of sitemap page$")
 	public void click_privacypolicy() {
@@ -141,7 +141,7 @@ public class GlobalHeaderFooterStepDefinitionAARP {
 	}
 
 	/**
-	 * @toDo:
+	 * @toDo:user clicks on termsOfuse link of privacypolicy
 	 */
 	@And("^user clicks on termsOfuse link of privacypolicy page$")
 	public void click_termsnconditions() {
@@ -159,7 +159,7 @@ public class GlobalHeaderFooterStepDefinitionAARP {
 	}
 
 	/**
-	 * @toDo:
+	 * @toDo:user clicks on disclaimers link of terms&conditions
 	 */
 	@And("^user clicks on disclaimers link of terms&conditions page$")
 	public void click_disclaimers() {
@@ -177,7 +177,7 @@ public class GlobalHeaderFooterStepDefinitionAARP {
 	}
 
 	/**
-	 * @toDo:
+	 * @toDo:user clicks on agents&brokers link of disclaimers
 	 */
 	@And("^user clicks on agents&brokers link of disclaimers page$")
 	public void click_agentsnbrokers() {
@@ -195,7 +195,7 @@ public class GlobalHeaderFooterStepDefinitionAARP {
 	}
 
 	/**
-	 * @toDo:
+	 * @toDo:user clicks on home link of agents&brokers
 	 */
 	@And("^user clicks on home link of agents&brokers page$")
 	public void click_home() {
@@ -211,8 +211,9 @@ public class GlobalHeaderFooterStepDefinitionAARP {
 			Assert.fail("home page not found");
 		}
 	}	
+	
 	/**
-	 * @toDo:
+	 * @toDo:user verifies home link of agents&brokers
 	 */
 	@And("^user verifies home link of agents&brokers page ulayer$")
 	public void user_clicks_on_home_link_of_agents_brokers_page_ulayer() {

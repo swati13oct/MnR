@@ -23,7 +23,7 @@ import cucumber.api.java.en.Given;
 import cucumber.api.java.en.When;
 
 /**
- *Functionality:
+ *Functionality:PDP EnquiryKit
  */
 public class PDPEnquiryKitStepDefintionAARP {
 
@@ -35,7 +35,7 @@ public class PDPEnquiryKitStepDefintionAARP {
 	}
 
 	/**
-	 * @toDo:
+	 * @toDo:the user is on the AARP acquisition Site home 
 	 */	
 	@Given("^the user is on the AARP acquisition Site home page$")
 	public void the_user_on_aarp_medicare_site_landing_page()
@@ -52,7 +52,7 @@ public class PDPEnquiryKitStepDefintionAARP {
 	}
 	
 	/**
-	 * @toDo:
+	 * @toDo:user navigates to Request More Help and Information page under pdp section 
 	 */
 	@When("^the user navigates to Request More Help and Information page under pdp section in AARP Site$")
 	public void the_user_navigates_request_more_help_information_page_aarp()
@@ -69,7 +69,7 @@ public class PDPEnquiryKitStepDefintionAARP {
 	}
 	
 	/**
-	 * @toDo:
+	 * @toDo:the user accesses the Request Plan Information and Enrollment Materials 
 	 */
 	@And("^the user accesses the Request Plan Information and Enrollment Materials in AARP site$")
 	public void the_user_accessess_the_pdp_enquiry_kit_aarp()
@@ -88,7 +88,7 @@ public class PDPEnquiryKitStepDefintionAARP {
 	}
 	
 	/**
-	 * @toDo:
+	 * @toDo:user submits by entering following details in Order Enrollment Information page 
 	 */
 	@And("^the user submits by entering following details in Order Enrollment Information page in AARP Site$")
 	public void the_user_submits_entering_details_order_enrollment_information_aarp(DataTable attributes){

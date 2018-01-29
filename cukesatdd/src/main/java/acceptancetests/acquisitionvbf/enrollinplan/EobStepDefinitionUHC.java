@@ -28,7 +28,7 @@ import cucumber.api.java.en.Given;
 import cucumber.api.java.en.When;
 
 /**
- *Functionality:
+ *Functionality: EOB
  */
 public class EobStepDefinitionUHC {
 
@@ -39,6 +39,9 @@ public class EobStepDefinitionUHC {
 		return loginScenario;
 	}
 
+	/**
+	 * @toDo: registered UMS with following details for EOB flow
+	 */
 	@Given("^registered UMS with following details for EOB flow$")
 	public void registered_UMS_with_attributes_eob_ums(
 			DataTable memberAttributes) {
@@ -101,6 +104,9 @@ public class EobStepDefinitionUHC {
 		}
 	}
 
+	/**
+	 * @toDo:the user views forms and resources 
+	 */
 	@When("^the user views forms and resources in UMS site$")
 	public void user_views_forms_resources_page_ums() {
 		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario()
@@ -120,6 +126,9 @@ public class EobStepDefinitionUHC {
 		}
 	}
 	
+	/**
+	 * @toDo:the user clicks My Medical Explanation of Benefits link in forms and resources page 
+	 */
 	@And("^the user clicks My Medical Explanation of Benefits link in forms and resources page in UMS site$")
 	public void user_clicks_medical_eob_forms_and_resources_ums() {
 		FormsandresourcesPage formsandresourcesPage = (FormsandresourcesPage) getLoginScenario()
@@ -135,6 +144,9 @@ public class EobStepDefinitionUHC {
 		}
 	}
 
+	/**
+	 * @toDo:the user searches EOB history for the date range
+	 */
 	@And("^the user searches EOB history for the date range in UMS site and validates$")
 	public void user_searches_eob_date_range_ums(DataTable dateAttributes) {
 		List<DataTableRow> dateAttributesRow = dateAttributes.getGherkinRows();
@@ -161,9 +173,9 @@ public class EobStepDefinitionUHC {
 		}
 	}
 
-
-	/* Below methods are implemented for Prescription Drug EOB */
-	
+	/**
+	 * @toDo:Below methods are implemented for Prescription Drug EOB
+	 */
 	@And("^the user clicks My Prescription Drug Explanation of Benefits link in forms and resources page in UMS site$")
 	public void user_clicks_prescription_drug_eob_forms_and_resources_ums() {
 		FormsandresourcesPage formsandresourcesPage = (FormsandresourcesPage) getLoginScenario()
@@ -180,6 +192,9 @@ public class EobStepDefinitionUHC {
 		}
 	}
 	
+	/**
+	 * @toDo:user searches prescription drug EOB history
+	 */
 	@And("^the user searches prescription drug EOB history for the following interval in UMS site and validates$")
 	public void user_searches_prescription_drug_eob_date_range_ums(
 			DataTable dateAttributes) {

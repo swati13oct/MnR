@@ -32,7 +32,7 @@ import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 
 /**
- * Functionality: 
+ * Functionality: Registration
  */
 
 public class RegistrationStepDefinitionUHC {
@@ -45,7 +45,7 @@ public class RegistrationStepDefinitionUHC {
 	}
 	
 	/**
-	 * @toDo:
+	 * @toDo:the user is on registration page
 	 */
 	@Given("^the user is on registration page of UMS site$")
 	public void registration_landing_page(DataTable memberAttributes)
@@ -74,7 +74,7 @@ public class RegistrationStepDefinitionUHC {
 	}
 	
 	/**
-	 * @toDo:
+	 * @toDo:the user registers with below details
 	 */
 	@When("^the user registers with below details in UMS site$")
 	public void user_registers(DataTable memberAttributes)
@@ -105,7 +105,7 @@ public class RegistrationStepDefinitionUHC {
 	}
 	
 	/**
-	 * @toDo:
+	 * @toDo:user validates the plan information on plan confirmation page 
 	 */
 	@Then("^the user validates the plan information on plan confirmation page in UMS site$")
 	public void validate_planInformation(){
@@ -113,7 +113,7 @@ public class RegistrationStepDefinitionUHC {
 	}
 	
 	/**
-	 * @toDo:
+	 * @toDo:the user confirms the personal and plan information
 	 */
 	@When("^the user confirms the personal and plan information in UMS site$")
 	public void confirm_plan()
@@ -125,7 +125,7 @@ public class RegistrationStepDefinitionUHC {
 	}
 	
 	/**
-	 * @toDo:
+	 * @toDo:the user adds second plan with below information
 	 */
 	@And("^the user adds second plan with below information in UMS site$")
 	public void add_second_plan(DataTable memberAttributes){
@@ -151,7 +151,7 @@ public class RegistrationStepDefinitionUHC {
 	}
 	
 	/**
-	 * @toDo:
+	 * @toDo:the user validates the the plan information
 	 */
 	@Then("^the user validates the the plan information for both plans in UMS site$")
 	public void validate_both_planInformation()
@@ -172,7 +172,7 @@ public class RegistrationStepDefinitionUHC {
 
 
 	/**
-	 * @toDo:
+	 * @toDo:the user confirms personal and plan information
 	 */
 	@When("^the user confirms personal and plan information for both plans in UMS site$")
 	public void confirm_planInformation_bothPlans()
@@ -184,7 +184,7 @@ public class RegistrationStepDefinitionUHC {
 	}
 
 	/**
-	 * @toDo:
+	 * @toDo:the user registers with the following details
 	 */
 	@And("^the user registers with the following details in UMS site$")
 	public void create_account(DataTable memberAttributes){
@@ -213,7 +213,7 @@ public class RegistrationStepDefinitionUHC {
 	}
 	
 	/**
-	 * @toDo:
+	 * @toDo:the user registers successfully
 	 */
 	@Then("^the user registers successfully in UMS site$")
 	public void register_successfully()
@@ -227,7 +227,7 @@ public class RegistrationStepDefinitionUHC {
 	}
 	
 	/**
-	 * @toDo:
+	 * @toDo:the user registers with dob and memberId
 	 */
 	@When("^the user registers with dob and memberId in UMS site$")
 	public void user_register(DataTable memberAttributes)
@@ -246,7 +246,7 @@ public class RegistrationStepDefinitionUHC {
 	}
 	
 	/**
-	 * @toDo:
+	 * @toDo:the user navigate to error page
 	 */
 	@Then("^the user navigate to error page$")
 	public void negativeScenario() {
@@ -270,7 +270,7 @@ public class RegistrationStepDefinitionUHC {
 	}
 	
 	/**
-	 * @toDo:
+	 * @toDo:the user validate error message
 	 */
 	@Then("^the user validate error message$")
 	public void validate_ErrorMessage() {

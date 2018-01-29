@@ -25,7 +25,7 @@ import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 
 /**
- *Functionality:
+ *Functionality:PharmacyLocator
  */
 public class PharmacyLocatorStepDefinitionAARP {
 
@@ -37,7 +37,7 @@ public class PharmacyLocatorStepDefinitionAARP {
 	}
 
 	/**
-	 * @toDo:
+	 * @toDo: user is on the AARP Medicare Site landing page
 	 */
 	@Given("^the user is on the AARP Medicare Site landing page$")
 	public void registered_member_located_pharmacy_aarp() {
@@ -55,7 +55,7 @@ public class PharmacyLocatorStepDefinitionAARP {
 	}
 	
 	/**
-	 * @toDo:
+	 * @toDo:user hovers to Our Plans and select Request More Help and Information for following plan type
 	 */
 	@When("^the user hovers to Our Plans and select Request More Help and Information for following plan type in AARP Site$")
 	public void user_hovers_to_our_plans_and_select_request_more_help_and_information_aarp(DataTable planAttributes){
@@ -69,7 +69,7 @@ public class PharmacyLocatorStepDefinitionAARP {
 	}
 
 	/**
-	 * @toDo:
+	 * @toDo: user navigates to pharmacy search page
 	 */
 	@When("^the user navigates to pharmacy search page in AARP Site$")
 	public void user_views_pharmacy_locator_aarp() {
@@ -90,7 +90,7 @@ public class PharmacyLocatorStepDefinitionAARP {
 	}
 
 	/**
-	 * @toDo:
+	 * @toDo:user enters following details for pharmacy search
 	 */
 	@And("^the user enters following details for pharmacy search in AARP Site$")
 	public void user_enters_zipcode_distance_details_aarp(DataTable zipAttributes) {
@@ -127,7 +127,7 @@ public class PharmacyLocatorStepDefinitionAARP {
 	}
 	
 	/**
-	 * @toDo:
+	 * @toDo:user selects a language from dropdown 
 	 */
 	@And("^the user selects a language from dropdown in AARP Site$")
 	public void user_selects_language_aarp(DataTable languageAttributes) {
@@ -156,7 +156,7 @@ public class PharmacyLocatorStepDefinitionAARP {
 	
 	}
 	/**
-	 * @toDo:
+	 * @toDo:user chooses a plan from dropdown
 	 */
 	@And("^the user chooses a plan from dropdown in AARP Site$")
 	public void user_chooses_plan_dropdown_aarp(DataTable planAttributes) {
@@ -180,7 +180,7 @@ public class PharmacyLocatorStepDefinitionAARP {
 	}
 	
 	/**
-	 * @toDo:
+	 * @toDo:user chooses the Pharmacy Type
 	 */
 	@Then("^the user chooses the Pharmacy Type$")
 	public void the_user_chooses_the_pharmacy_type(DataTable pharmacyTypeAttribute){
@@ -201,7 +201,7 @@ public class PharmacyLocatorStepDefinitionAARP {
 	}
 	
 	/**
-	 * @toDo:
+	 * @toDo:user chooses the Service Type
 	 */
 	@Then("^the user chooses the Service Type$")
 	public void the_user_chooses_the_service_type(DataTable serviceTypeAttribute){
@@ -221,7 +221,7 @@ public class PharmacyLocatorStepDefinitionAARP {
 	}
 	
 	/**
-	 * @toDo:
+	 * @toDo:user searches available pharmacies by selecting 
 	 */
 	@And("^the user searches available pharmacies by selecting \"Show pharmacies for ALL types\" in AARP site$")
 	public void user_selects_show_pharmacy_for_all_pharmacy_types_aarp() {
@@ -248,7 +248,7 @@ public class PharmacyLocatorStepDefinitionAARP {
 	}
 
 	/**
-	 * @toDo:
+	 * @toDo:user searches available pharmacies by selecting
 	 */
 	@And("the user searches available pharmacies by selecting \"Show pharmacies for these services.\" in AARP site$")
 	public void  user_searches_pharmacies_by_choosing_pharmacy_types_aarp(DataTable pharmacyTypeAttributes)
@@ -279,7 +279,7 @@ public class PharmacyLocatorStepDefinitionAARP {
 	}
 	
 	/**
-	 * @toDo:
+	 * @toDo:user validates the error message for no pharmacies found for below pharmacy
 	 */
 	@Then("^the user validates the error message for no pharmacies found for below pharmacy in the AARP Site$")
 	public void validates_error_msg_for_no_pharmacies_found_aarp(DataTable pharmacyTypeAttributes){
@@ -291,7 +291,7 @@ public class PharmacyLocatorStepDefinitionAARP {
 	}
 	
 	/**
-	 * @toDo:
+	 * @toDo:user clicks on SearchAgain and navigates to pharmacies search page
 	 */
 	@Then("^the user clicks on SearchAgain and navigates to pharmacies search page in the AARP site$")
 	public void clicks_searchAgain_navigates_to_pharmaacies_search_page_aarp(){
@@ -308,7 +308,7 @@ public class PharmacyLocatorStepDefinitionAARP {
 	}
 	
 	/**
-	 * @toDo:
+	 * @toDo:user should see county popup
 	 */
 	@Then("^the user should see county popup in AARP site$")
 	public void user_should_see_county_popup_aarp() {
@@ -322,7 +322,7 @@ public class PharmacyLocatorStepDefinitionAARP {
 	}
 	
 	/**
-	 * @toDo:
+	 * @toDo:user selects the county
 	 */
 	@When("^the user selects the county in AARP site$")
 	public void user_selects_county_aarp(DataTable countyAttributes){
@@ -334,7 +334,7 @@ public class PharmacyLocatorStepDefinitionAARP {
 	}
 	
 	/**
-	 * @toDo:
+	 * @toDo:user should see choose a plan
 	 */
 	@Then("^the user should see choose a plan in AARP site$")
 	public void user_should_see_choose_plan_aarp(){
@@ -344,7 +344,7 @@ public class PharmacyLocatorStepDefinitionAARP {
 	}
 	
 	/**
-	 * @toDo:
+	 * @toDo:user validates the available pharmacies page
 	 */
 	@Then("^the user validates the available pharmacies page in AARP site$")
 	public void user_validates_available_pharmacies_aarp() {
