@@ -2,9 +2,12 @@ package acceptancetests.redesign;
 
 
 
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
@@ -12,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import acceptancetests.atdd.data.CommonConstants;
 import acceptancetests.atdd.data.member.PageConstants;
+import acceptancetests.login.data.LoginCommonConstants;
 import atdd.framework.MRScenario;
 import cucumber.api.DataTable;
 import cucumber.api.java.After;
@@ -23,8 +27,12 @@ import gherkin.formatter.model.DataTableRow;
 import pages.member.redesign.ContactUsPage;
 import pages.member.redesign.NewLoginPage;
 import pages.member.redesign.TestHarnessPage;
+import pages.member.ulayer.AccountHomePage;
+import pages.member.ulayer.LoginPage;
 
 public class ContactusRedesignStepDefinition {
+	
+	Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
 	/**
 	 * 
 	 */
@@ -38,32 +46,52 @@ public class ContactusRedesignStepDefinition {
 		@Given("^registered UMS member with following attributes$")
 		public void registered_member_orderplanmaterials_ums(DataTable givenAttributes) throws InterruptedException {
 
-			List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
-			Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
+			/* Reading the given attribute from feature file */
+			List<DataTableRow> memberAttributesRow = givenAttributes
+					.getGherkinRows();
 			for (int i = 0; i < memberAttributesRow.size(); i++) {
-			    memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0), memberAttributesRow.get(i).getCells().get(1));
+
+				memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0), memberAttributesRow.get(i).getCells().get(1));
 			}
-			// get parameter username and password
-			String userName = memberAttributesMap.get("UserName");
-			String passWord = memberAttributesMap.get("Password");
-			String category = memberAttributesMap.get("Member Type");
-			System.out.println("User is..." + userName);
-			System.out.println("Password is..." + passWord);
+			String planType = memberAttributesMap.get("Plan Type");
+			String businessType = null;
+			Set<String> memberAttributesKeySet = memberAttributesMap.keySet();
+			List<String> desiredAttributes = new ArrayList<String>();
+			for (Iterator<String> iterator = memberAttributesKeySet.iterator(); iterator.hasNext();) {
+				{
+					String key = iterator.next();
+					if (!memberAttributesMap.get(key).isEmpty()) {
+						desiredAttributes.add(memberAttributesMap.get(key));
+					}
+				}
+			}
+			System.out.println("desiredAttributes.." + desiredAttributes);
+			Map<String, String> loginCreds = loginScenario.getAMPMemberWithDesiredAttributes(desiredAttributes);
+			String userName = null;
+			String pwd = null;
+			if (loginCreds == null) {
+				// no match found
+				System.out.println("Member Type data could not be setup !!!");
+				Assert.fail("unable to find a " + desiredAttributes + " member");
+			} else {
+				userName = loginCreds.get("user");
+				pwd = loginCreds.get("pwd");
+				System.out.println("User is..." + userName);
+				System.out.println("Password is..." + pwd);
+				getLoginScenario().saveBean(LoginCommonConstants.USERNAME, userName);
+				getLoginScenario().saveBean(LoginCommonConstants.PASSWORD, pwd);			
+			}
 			WebDriver wd = getLoginScenario().getWebDriver();
-			getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
 
-			NewLoginPage loginPage = new NewLoginPage(wd);
-			
-			TestHarnessPage testHarnessPage = (TestHarnessPage) loginPage.loginWith(userName, passWord);
-
-			if (testHarnessPage != null) {
+			LoginPage loginPage = new LoginPage(wd);
+			{
+				loginPage.navigateToNewDashboardUrl();
+				getLoginScenario().saveBean(PageConstants.LOGIN_PAGE, loginPage);
+				AccountHomePage accountHomePage = (AccountHomePage) loginPage.teamhloginWith(userName, pwd);
 				getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
-				getLoginScenario().saveBean(PageConstants.TEST_HARNESS_PAGE,testHarnessPage);
+				getLoginScenario().saveBean(PageConstants.ACCOUNT_HOME_PAGE,accountHomePage);
 				Assert.assertTrue(true);
 			}
-			
-			getLoginScenario().saveBean(PageConstants.TEST_HARNESS_PAGE,
-					testHarnessPage);
 		}
 		
 		@When("^the user navigates to contact us page in UHC site$")
