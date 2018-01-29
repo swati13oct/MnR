@@ -1,7 +1,8 @@
 @registrationStepTwo @Gladiators
 Feature: To test registration step 2 flow in redesign portal
 
-  Scenario Outline: To verify member with no additional plan is navigated to Create Account after clicking next button on Plan Information
+@toCreateAccountNavigation
+Scenario Outline: To verify member with no additional plan is navigated to Create Account after clicking next button on Plan Information
     Given the member is on sign in page
     And User click on the register button
     When the member enter the member ID into Member ID field

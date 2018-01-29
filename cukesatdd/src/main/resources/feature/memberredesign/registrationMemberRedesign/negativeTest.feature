@@ -2,7 +2,8 @@
 @existingMemberErrorPage
 Feature: To test Start Over link present on existing member error page
 
-  Scenario Outline: To verify already existing member error message page
+@existinMemberError
+Scenario Outline: To verify already existing member error message page
     Given the member is on sign in page
     And User click on the register button
     When the member enter the member ID into Member ID field
@@ -19,6 +20,7 @@ Feature: To test Start Over link present on existing member error page
       | planMemberId | dateOfBirth |
       | 914429086    | 08-28-1927  |
 
+@navigationToPasswordHelpPage
   Scenario Outline: To verify member is navigated to the username and password help page from existing member error page
     Given the member is on sign in page
     And User click on the register button
@@ -35,6 +37,7 @@ Feature: To test Start Over link present on existing member error page
       | planMemberId | dateOfBirth |
       | 914429086    | 08-28-1927  |
 
+@navigationToSignInPage
   Scenario Outline: To verify member is navigated to the sign In page from existing member error page
     Given the member is on sign in page
     And User click on the register button

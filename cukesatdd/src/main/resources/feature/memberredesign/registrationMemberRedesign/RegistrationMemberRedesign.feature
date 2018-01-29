@@ -2,7 +2,8 @@
 @registrationAccConfirmation
 Feature: To test registration flow in redesign portal
 
-  Scenario Outline: To verify the member registration flow in redesign portal
+ @memberRegistrationFlow
+ Scenario Outline: To verify the member registration flow in redesign portal
     Given the member is on registration page of redesign portal
       | CREATE_ACCOUNT_USER_NAME | <userName> |
     When the member enter the member ID into Member ID field

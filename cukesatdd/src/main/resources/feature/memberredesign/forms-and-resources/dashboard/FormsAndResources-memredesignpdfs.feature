@@ -1,6 +1,7 @@
 @dashBoardFormsAndResourcespdfs @Gladiators
 Feature: To validate plan materials section on forms and resources page in dashboard site
 
+  @planMaterialsSectionValidation
   Scenario Outline: 
     Given details of user to sign in on member redesign site to see forms and resources page
           | userId   | <userId>  |

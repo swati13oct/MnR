@@ -1,5 +1,7 @@
 @dashBoardFormsAndResources @gladiators
 Feature: To validate forms and resources page in dashboard site
+
+@formsAndResourcesPageValidation
 #Scenarios written for blue layer - Later will be modified to dashboard once dashboard site is set up
   Scenario Outline: 
         Given details of user to sign in on member redesign site to see forms and resources page

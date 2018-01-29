@@ -1,6 +1,7 @@
 @registrationStepThreeErrormessages @gladiators
 Feature: To test the error messages on create account page in redesign portal
 
+@blankUsernameFieldError
   Scenario Outline: To verify correct error message appears if username field is left blank or incorrectly on create account page
     Given the member is on sign in page
     And User click on the register button
@@ -25,6 +26,7 @@ Feature: To test the error messages on create account page in redesign portal
       | Plantype | planMemberId | dateOfBirth | planname                                       | membername      | userName | password   | confirmPassword | email          | confirmEmail   |
       | PDP      | 000022829    | 06-13-1943  | UnitedHealthcare MedicareComplete Plan 1 (HMO) | DFADC BBCBEFCEE |          | Password@1 | Password@1      | member@uhc.com | member@uhc.com |
 
+ @incorrectUsernameError
   Scenario Outline: To verify correct error message appears if username field is filled incorrectly on create account page
     Given the member is on sign in page
     And User click on the register button
@@ -74,6 +76,8 @@ Feature: To test the error messages on create account page in redesign portal
   #dev-c and team-h
   #  | Plantype | planMemberId | dateOfBirth | planname                                       | membername      | userName   | password   | confirmPassword | email          | confirmEmail   |
   #  | PDP      |    829072104 | 09-03-1942  | UnitedHealthcare MedicareComplete Plan 1 (HMO) | DFADC BBCBEFCEE |  Username         | Password@1 | Password@1      | member@uhc.com | member@uhc.com |
+  
+  @blankPasswordFieldError
   Scenario Outline: To verify correct error message appears if password field is left blank on create account page
     Given the member is on sign in page
     And User click on the register button
@@ -98,6 +102,7 @@ Feature: To test the error messages on create account page in redesign portal
       | Plantype | planMemberId | dateOfBirth | planname                                       | membername      | userName | password | confirmPassword | email          | confirmEmail   |
       | PDP      | 000022829    | 06-13-1943  | UnitedHealthcare MedicareComplete Plan 1 (HMO) | DFADC BBCBEFCEE | Somya@01 |          | Password@1      | member@uhc.com | member@uhc.com |
 
+  @incorrectPasswordError
   Scenario Outline: To verify correct error message appears if password is entered in a wrong format
     Given the member is on sign in page
     And User click on the register button
@@ -126,6 +131,7 @@ Feature: To test the error messages on create account page in redesign portal
       | PDP      | 930096952    | 08-05-1950  | UnitedHealthcare MedicareComplete Plan 1 (HMO) | DFADC BBCBEFCEE | @1user   | Password@1 | Password@1      | member@uhc.com | member@uhc.com |
       | PDP      | 000022829    | 06-13-1943  | UnitedHealthcare MedicareComplete Plan 1 (HMO) | DFADC BBCBEFCEE | user 12@ | Password@1 | Password@1      | member@uhc.com | member@uhc.com |
 
+  @confirmPasswordFieldError
   Scenario Outline: To verify correct error message appears if confirm password field is left blank or entered incorrectly on create account page
     Given the member is on sign in page
     And User click on the register button
@@ -151,6 +157,7 @@ Feature: To test the error messages on create account page in redesign portal
       | PDP      | 000022829    | 06-13-1943  | UnitedHealthcare MedicareComplete Plan 1 (HMO) | DFADC BBCBEFCEE | Username@1 | Password@1 |                 | member@uhc.com | member@uhc.com |
       | PDP      | 930096952    | 08-05-1950  | UnitedHealthcare MedicareComplete Plan 1 (HMO) | DFADC BBCBEFCEE | Username@1 | Password@1 | Password        | member@uhc.com | member@uhc.com |
 
+  @emailFieldError
   Scenario Outline: To verify correct error message appears if confirm password field is left blank or entered incorrectly on create account page
     Given the member is on sign in page
     And User click on the register button
@@ -176,6 +183,7 @@ Feature: To test the error messages on create account page in redesign portal
       | PDP      | 000022829    | 06-13-1943  | UnitedHealthcare MedicareComplete Plan 1 (HMO) | DFADC BBCBEFCEE | Username@1 | Password@1 | Password@1      |            | member@uhc.com |
       | PDP      | 930096952    | 08-05-1950  | UnitedHealthcare MedicareComplete Plan 1 (HMO) | DFADC BBCBEFCEE | Username@1 | Password@1 | Password@1      | member@uhc | member@uhc.com |
 
+  @confirmEmailFieldError
   Scenario Outline: To verify correct error message appears if confirm email field is left blank or entered incorrectly on create account page
     Given the member is on sign in page
     And User click on the register button
