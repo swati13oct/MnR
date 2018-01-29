@@ -270,7 +270,7 @@ Then TimeStampTheSpartans the user lands on OneTime Payment Submitted Page and v
 
 Examples:
 	| planType |
-	| AARP     |	
+	| UHCFED     |	
 
 @TeamHError
 Scenario Outline: Verify the Timestamp on OneTime Payment Submitted page
