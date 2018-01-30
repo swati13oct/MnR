@@ -36,7 +36,7 @@ public class MyprofileandPreferencesRedesignStepDefinition {
 	public MRScenario getLoginScenario() {
 		return loginScenario;
 	}
-
+	// Login to the application
 	@Given("^PreferencesSpartans Login to the application$")
 	public void PreferencesSpartans_Login_to_the_application(DataTable givenAttributes)
 			throws InterruptedException {
@@ -68,7 +68,7 @@ public class MyprofileandPreferencesRedesignStepDefinition {
 			Assert.assertTrue(true);
 		}
 	}
-
+	// Navigate to preference page
 	@When("^PreferencesSpartans the user navigates to Prefrences page$")
 	public void PreferencesSpartans_the_user_navigates_to_Prefrences_page()
 			throws InterruptedException {
@@ -84,7 +84,7 @@ public class MyprofileandPreferencesRedesignStepDefinition {
 			Assert.assertTrue(true);
 		}
 	}
-
+	// change delivery preferences from mail to online or viceversa
 	@Then("^PreferencesSpartans the user changes delivery preferences$")
 	public void PreferencesSpartans_the_user_changes_delivery_preferences() throws InterruptedException {
 		CommunicationPreferences compp = (CommunicationPreferences) getLoginScenario()

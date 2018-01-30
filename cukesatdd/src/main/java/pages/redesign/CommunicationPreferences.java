@@ -44,7 +44,7 @@ public class CommunicationPreferences extends UhcDriver {
 	private static String PAGE_URL = "https://stage-medicare.uhc.com/medicare/login/overview.html?testharness=true";
 
 	// private static String PAGE_URL = TeamC_UNPWAssistancePage_URL;
-
+	
 	public CommunicationPreferences(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
@@ -55,7 +55,7 @@ public class CommunicationPreferences extends UhcDriver {
 	public void openAndValidate() {
 		start(PAGE_URL);
 	}
-
+	// Navigate to preferences page from testharness page
 	public void navigateToPreferencesPage() throws InterruptedException {
 
 		try {
@@ -77,7 +77,7 @@ public class CommunicationPreferences extends UhcDriver {
 		}
 		// return null;
 	}
-
+	// Select preferences from mail to online and viceversa
 	public void SelectPreferences() throws InterruptedException {
 
 		if (driver.getTitle().equalsIgnoreCase("Preferences")) {

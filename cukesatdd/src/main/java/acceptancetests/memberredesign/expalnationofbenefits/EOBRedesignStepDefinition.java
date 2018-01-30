@@ -37,7 +37,8 @@ public class EOBRedesignStepDefinition {
 	public MRScenario getLoginScenario() {
 		return loginScenario;
 	}
-
+	
+	// Login to the application
 	@Given("^EOBspartans Login to the applicationEOB$")
 	public void EOBspartans_Login_to_the_applicationEOB(DataTable givenAttributes)
 			throws InterruptedException {
@@ -68,7 +69,8 @@ public class EOBRedesignStepDefinition {
 			Assert.assertTrue(true);
 		}
 	}
-
+	
+	// Navigate to EOB page from testharness page
 	@When("^EOBspartans the user navigates to EOB page$")
 	public void EOBspartans_the_user_navigates_to_EOB_page() throws InterruptedException {
 
@@ -83,7 +85,8 @@ public class EOBRedesignStepDefinition {
 			Assert.assertTrue(true);
 		}
 	}
-
+	
+	// Navigate the EOB elements
 	@Then("^EOBspartans validate the EOB Elements$")
 	public void EOBspartans_validate_the_EOB_Elements() throws InterruptedException {
 		ExplanationOfBenefitsPage eobp = (ExplanationOfBenefitsPage) getLoginScenario()
