@@ -1,33 +1,34 @@
+@theIncredibles
 @drug_cost_estimator
 Feature:Drug Cost Estimator
 
 #@467875
 @drug_cost_estimator1
 Scenario Outline: To Verify MR portal members using DCE on a desktop device will be able to edit drugs
-Given I am a registered member using the new M&R member portal on a desktop computer
+Given I am a registered member using the new M&R member portal on a desktop computer blayer dce
 | Plan Type   | <planType>   |
 | Member Type	  | <memberType> |
-When the above plantype user logs in UMS Site Desktop
-When I use the DCE tool to enter one or more drugs to my drug list
+When the above plantype user logs in UMS Site Desktop blayer dce
+When I use the DCE tool to enter one or more drugs to my drug list blayer dce
 |drug|
 |Lipi|
-When I should be see dosage, package and frequency options returned from the DCE web service
-And I should be able to change those options at any time
-And I should have the ability to advance to the next step in the flow
+When I should be see dosage, package and frequency options returned from the DCE web service blayer dce
+And I should be able to change those options at any time blayer dce
+And I should have the ability to advance to the next step in the flow blayer dce
 Examples:
  | planType  | memberType  |
  | MAPD      |IndividualDCEmember |
  
  
 #@US502131
-@drug_cost_estimator2
+@drug_cost_estimator2 @IncrediblesDCE1
 Scenario Outline: To Verify MR portal members using DCE on a desktop device , Pharmacy search tab validation
-Given I am a registered member using the new M&R member portal on a desktop computer
+Given I am a registered member using the new M&R member portal on a desktop computer blayer dce
 | Plan Type   | <planType>   |
 | Member Type	  | <memberType> |
-When the above plantype user logs in UMS Site Desktop
-Then I should see the Pharmacy search tab as a clickable element within the DCE tool
-And I should be able to move forward or backward in the tool flow 
+When the above plantype user logs in UMS Site Desktop blayer dce
+Then I should see the Pharmacy search tab as a clickable element within the DCE tool blayer dce
+And I should be able to move forward or backward in the tool flow blayer dce 
 Examples:
  | planType  | memberType  |
  | MAPD       |IndividualDCEmember |
@@ -47,20 +48,20 @@ Examples:
 #| MA     |Group_non_pharmacy_saver |
 
  
-@drug_cost_estimator4
+@drug_cost_estimator4 @IncrediblesDCE2
 Scenario Outline: Pharmacy saver results
-Given I am a registered member using the new M&R member portal on a desktop computer
+Given I am a registered member using the new M&R member portal on a desktop computer blayer dce
 | Plan Type   | <planType>   |
 | Member Type	  | <memberType> |
-When the above plantype user logs in UMS Site Desktop
-And I access the page containing the DCE tool
+When the above plantype user logs in UMS Site Desktop blayer dce
+And I access the page containing the DCE tool blayer dce
 And I navigate to step2 page
-And we search the pharmacy within miles zipcode and pharmacy type
+And we search the pharmacy within miles zipcode and pharmacy type blayer dce
 | Zipcode| <zipcode> |
 | Radius | <radius>  |
 |Pharmacy Type|<pharmacytype>| 
-Then I should see pharmacy results as per the filter
-And I should see pharmacy saver pharmacies in results
+Then I should see pharmacy results as per the filter blayer dce
+And I should see pharmacy saver pharmacies in results blayer dce
 
  Examples:
 | planType | memberType| zipcode| radius|pharmacytype|
@@ -82,16 +83,16 @@ And I should see pharmacy saver pharmacies in results
  
  @drug_cost_estimator_with_mail_service
 Scenario Outline: To Verify MR portal members using DCE on a desktop device, will have preferred mail services option available depending on its member type.
-Given I am a registered member using the new M&R member portal on a desktop computer
+Given I am a registered member using the new M&R member portal on a desktop computer blayer dce
 | Plan Type   | <planType>   |
 | Member Type	  | <memberType> |
-When the above plantype user logs in UMS Site Desktop
-And I access the page containing the DCE tool
+When the above plantype user logs in UMS Site Desktop blayer dce
+And I access the page containing the DCE tool blayer dce
 And I navigate to step2 page
-Then I should see preferred mail service radio button under pharmacy type 
-And I enter a US other territory zip code and click select
+Then I should see preferred mail service radio button under pharmacy type blayer dce 
+And I enter a US other territory zip code and click select blayer dce
 | USOTZipcode | <USOTZipcode> |
-Then I should see preferred mail service radio button under pharmacy type
+Then I should see preferred mail service radio button under pharmacy type blayer dce
 
 Examples:
  | planType  | memberType  | USOTZipcode |
@@ -100,21 +101,21 @@ Examples:
  #-----------------------------------------------------------------
  #MAPD Grp q1_apr_grp091 (918084105-1, DOB - 1946-03-03)  US529088
  
-@drug_cost_estimator_switch_to_generic_case_1
+@drug_cost_estimator_switch_to_generic_case_1 @IncrediblesDCE3
 Scenario Outline: To Verify MR portal members using DCE on a desktop device, I want to be able to switch from branded to generic drug, given that no pharmacy is selected and it suggests the user with an appropriate save money message.
-Given I am a registered member using the new M&R member portal on a desktop computer
+Given I am a registered member using the new M&R member portal on a desktop computer blayer dce
 | Plan Type   | <planType>   |
 | Member Type	  | <memberType> |
-When the above plantype user logs in UMS Site Desktop
-And I access the page containing the DCE tool
-And I have added a drug to my drug list and a generic equivalent is available for the drug I have selected
+When the above plantype user logs in UMS Site Desktop blayer dce
+And I access the page containing the DCE tool blayer dce
+And I have added a drug to my drug list and a generic equivalent is available for the drug I have selected blayer dce
  	|Drug|<drug>|
-And I have not yet selected pharmacy
-Then I should be presented the option to switch to the generic option
-And I will see a SWITCH NOW link in the drug tile with appropriate save message
-And I will see a modal appear upon clicking on SWITCH NOW
-And when I click on the button to accept the generic
-Then the drug name will automatically update within the Drug List
+And I have not yet selected pharmacy blayer dce
+Then I should be presented the option to switch to the generic option blayer dce
+And I will see a SWITCH NOW link in the drug tile with appropriate save message blayer dce
+And I will see a modal appear upon clicking on SWITCH NOW blayer dce
+And when I click on the button to accept the generic blayer dce
+Then the drug name will automatically update within the Drug List blayer dce
 
 Examples:
  | planType| memberType| drug |
@@ -124,22 +125,22 @@ Examples:
   #---------------------------------------------
  #MAPD Grp q1_apr_grp357(971691002-1 / DOB- 5/29/1945)  US529088
  
-@drug_cost_estimator_switch_to_generic_case_2
+@drug_cost_estimator_switch_to_generic_case_2 @IncrediblesDCE4
 Scenario Outline: To Verify MR portal members using DCE on a desktop device, I want to be able to switch from branded to generic drug, given that a pharmacy is selected and it suggests the user with an appropriate save money message and cost savings are also updated
-Given I am a registered member using the new M&R member portal on a desktop computer
+Given I am a registered member using the new M&R member portal on a desktop computer blayer dce
 | Plan Type   | <planType>   |
 | Member Type	  | <memberType> |
-When the above plantype user logs in UMS Site Desktop
-And I access the page containing the DCE tool
-And I have added a drug to my drug list and a generic equivalent is available for the drug I have selected
+When the above plantype user logs in UMS Site Desktop blayer dce
+And I access the page containing the DCE tool blayer dce
+And I have added a drug to my drug list and a generic equivalent is available for the drug I have selected blayer dce
  	|Drug|<drug>|
-And I have selected pharmacy
-Then I should be presented the option to switch to the generic option
-And I will see a SWITCH NOW link in the drug tile with a pharmacy savings cost value
-And I will see a modal appear upon clicking on SWITCH NOW 
-And when I click on the button to accept the generic
-Then the drug name will automatically update within the Drug List
-And any cost savings will be applied to my total cost savings in Step3
+And I have selected pharmacy blayer dce
+Then I should be presented the option to switch to the generic option blayer dce
+And I will see a SWITCH NOW link in the drug tile with a pharmacy savings cost value blayer dce
+And I will see a modal appear upon clicking on SWITCH NOW blayer dce 
+And when I click on the button to accept the generic blayer dce
+Then the drug name will automatically update within the Drug List blayer dce
+And any cost savings will be applied to my total cost savings in Step3 blayer dce
 
 Examples:
  | planType| memberType| drug |
