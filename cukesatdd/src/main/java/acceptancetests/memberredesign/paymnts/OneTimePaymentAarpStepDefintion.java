@@ -347,6 +347,9 @@ public class OneTimePaymentAarpStepDefintion {
 		getLoginScenario().saveBean(PageConstants.LOGIN_PAGE, THloginPage);
 	}
 
+	/** 
+	 * @todo : User is taken to Stage login page 
+	 */	
 	@Given("^TimeStampTheSpartans the user is on the Team-H AARP medicare site login page$")
 	public void TimeStampTheSpartans_user_TeamHlogin_page() {
 		WebDriver wd = getLoginScenario().getWebDriver();
@@ -446,6 +449,8 @@ public class OneTimePaymentAarpStepDefintion {
 		}
 
 	}
+	
+	
 
 	@When("^the user logs in TeamH with a registered AMP with following details in AARP site$")
 	public void user_logs_inTeamH(DataTable memberAttributes)
@@ -522,6 +527,10 @@ public class OneTimePaymentAarpStepDefintion {
 		}
 
 	}
+	
+	/**
+	 * @todo : User logs in with the data from table and reached to Home page
+	 */
 
 	@When("^TimeStampTheSpartans the user logs in TeamH with a registered AMP with following details in AARP site$")
 	public void TimeStampTheSpartans_user_logs_inTeamH(
@@ -741,6 +750,10 @@ public class OneTimePaymentAarpStepDefintion {
 		}
 
 	}
+	
+	/**
+	 * @todo : User clicks on payment option in global header and is taken to paymnet overview page 
+	 */
 
 	@And("^TimeStampTheSpartans the user navigates to Stage PaymentOverview Page$")
 	public void TimeStampTheSpartans_user_navigates_to_TeamHPaymentOverview_Page()
@@ -897,6 +910,10 @@ public class OneTimePaymentAarpStepDefintion {
 
 	}
 
+	/**
+	 * @todo : User arrives at OneTimePayment page form
+	 */
+	
 	@And("^TimeStampTheSpartans the user navigates to Team H One Time Payments page$")
 	public void TimeStampTheSpartans_user_validates_TeamH_Payment_overview()
 			throws InterruptedException {
@@ -914,6 +931,10 @@ public class OneTimePaymentAarpStepDefintion {
 		}
 
 	}
+	
+	/**
+	 * User is Taken to Automatic Payments page form
+	 */
 
 	@And("^TimeStampTheSpartans the user navigates to Team H Automatic Payments page$")
 	public void TimeStampTheSpartans_user_validates_TeamHAuto_Payment_overview()
@@ -949,6 +970,11 @@ public class OneTimePaymentAarpStepDefintion {
 			Assert.fail("one time payments dashboard page not found");
 		}
 	}
+	
+	/**
+	 * User Enters the required details and click on continue to see review page
+	 */
+	
 	@And("^TimeStampTheSpartans the user enters details and click on continue button on One Time Payments Page for Dashboard$")
 	public void TimeStampTheSpartans_user_clicks_and_navigates_to_Review_page()
 			throws InterruptedException {
@@ -982,6 +1008,10 @@ public class OneTimePaymentAarpStepDefintion {
 		}
 	}
 
+	/**
+	 * User enters details on Automatic Payments form and navigates to AutomaticPaymentsReview page
+	 */
+	
 	@And("^TimeStampTheSpartans the user enters details and click on continue button on Automatic Payments Page for Dashboard$")
 	public void TimeStampTheSpartans_user_clicks_AutoPay_and_navigates_to_Review_page()
 			throws InterruptedException {
@@ -999,7 +1029,11 @@ public class OneTimePaymentAarpStepDefintion {
 		}
 	}
 
-	@And("^user lands on Review One time Payments Page and navigates to OTP Submitted Page$")
+	/**
+	 * @todo : User Lands on Review one time payment page , slects the checkbox and continue to One time Payment Submitted page
+	 */
+	
+	@And("^TimeStampTheSpartans user lands on Review One time Payments Page and navigates to OTP Submitted Page$")
 	public void Review_OneTime_Payment_Navigation_to_OTPSubmitted()
 			throws InterruptedException {
 		ReviewOneTimePaymentsPage reviewOneTimePaymentsPage = (ReviewOneTimePaymentsPage) getLoginScenario()
@@ -1032,8 +1066,12 @@ public class OneTimePaymentAarpStepDefintion {
 			Assert.fail("OTP Submitted page not found");
 		}
 	}
+	
+	/**
+	 * User is on Review Automatic payments page, checks the electronic signature box and move to Submit Page
+	 */
 
-	@And("^TimeStampTheSpartans user lands on Review One time Payments Page and navigates to Review Submitted Page$")
+	@And("^TimeStampTheSpartans user lands on Review Automatic Payments Page and navigates to Review Submitted Page$")
 	public void TimeStampTheSpartans_Review_OneTime_Payment_Navigation_to_ReviewSubmitted()
 			throws InterruptedException {
 		ReviewOneTimePaymentsPage reviewOneTimePaymentsPage = (ReviewOneTimePaymentsPage) getLoginScenario()
@@ -1065,6 +1103,10 @@ public class OneTimePaymentAarpStepDefintion {
 			Assert.fail("Error message not validated");
 		}
 	}
+	
+	/**
+	 * This step validates the error message for more than one payment per day
+	 */
 	
 	@Then("^TimeStampTheSpartans user lands on Review One time Payments Page and validates one payment per day error message$")
 	public void TimeStampTheSpartans_One_Payment_Per_Day_Error() throws InterruptedException {
@@ -1140,6 +1182,10 @@ public class OneTimePaymentAarpStepDefintion {
 			Assert.fail("Payment Amount not found");
 		}
 	}
+	
+	/**
+	 * User reaches the OnetimePaymentSubmittedPage and validates Timestamp
+	 */
 
 	@Then("^TimeStampTheSpartans the user lands on OneTime Payment Submitted Page and validates Timestamp$")
 	public void TimeStampTheSpartans_OTP_SubmittedPage_Timestamp()
