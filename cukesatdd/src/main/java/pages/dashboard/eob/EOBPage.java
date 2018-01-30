@@ -334,6 +334,7 @@ public class EOBPage extends UhcDriver{
 		}
 	}	*/
 	}
+	// the metho validates the EOB video link
 	public EOBPage validateEobVideo(){
 		learnMoreLink.click();
 		if(readEOBVideo.isDisplayed()){
@@ -365,6 +366,7 @@ public class EOBPage extends UhcDriver{
 		return new EOBPage(driver);
 	}
 
+	// the method navigates user to eob page
 	public EOBPage navigateDirectToEOBPag(){
 		/*WebDriverWait wait = new WebDriverWait(driver, 10);
 		wait.until(ExpectedConditions.elementToBeClickable(eobLink));*/
@@ -381,6 +383,7 @@ public class EOBPage extends UhcDriver{
 		return new EOBPage(driver);
 	}
 
+	// this method is to validate the site leaving popup on the eob page 
 	public EOBPage validateSiteLeaveingPopUP(){
 		driver.manage().timeouts().implicitlyWait(20,TimeUnit.SECONDS);
 		String eobPageTitle = driver.getTitle();
@@ -416,7 +419,7 @@ public class EOBPage extends UhcDriver{
 		}
 		return null;
 	}
-
+// this method is used to navigate plan tabs on the eob page
 	public boolean navigatePlanTabs(String PlanType){	
 		if (PlanType.contentEquals("MA") || PlanType.contentEquals("MAPD")) {
 			if (validate(MAPlanTab)){
@@ -484,6 +487,7 @@ public class EOBPage extends UhcDriver{
 		return false;
 	}
 	
+	// this method is used to enter the dates for Custom Search on eob page
 	public EOBPage enterCustomSearchDate(String fromDateValue, String toDateValue){
 		validate(toDate);
 		validate(fromDate);
@@ -496,7 +500,7 @@ public class EOBPage extends UhcDriver{
         
 		return null;
 	}
-	
+	// the method is to validate eob display on eob page
 	public EOBPage validateEOBStatements(){
 		System.out.println(eobCount.getText());
 		int eobCountInt = Integer.parseInt(eobCount.getText());
@@ -520,7 +524,7 @@ public class EOBPage extends UhcDriver{
 		return null;
 	}
 
-	
+	//  this method is to validate number of pages displayed
 	public int numberOfPageDisplayed(int eobCount){
 		float pageCount;
 		int numberOfPageDisplayed;
