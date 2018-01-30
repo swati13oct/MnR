@@ -795,14 +795,14 @@ public class CommonConstants {
 
     //Browsers supported in MRScenario
 	public static final String BROWSER_NAME = "BROWSER_NAME";
-    public static final String JENKINS_BROWSER_PHANTOMJS = "PHANTOMJS";
+    public static final String JENKINS_BROWSER_PHANTOMJS = "headless";
     public static final String HTMLUNIT_BROWSER = "HTMLUNIT";
     public static final String FIREFOX_BROWSER = "FIREFOX";
     public static final String CHROME_BROWSER = "CHROME";
     public static final String IE_BROWSER = "IE";
     public static final String MOBILE_BROWSER = "MOBILE";
     
-    public static final String SAUCE_BROWSER_WEB = "SAUCE_BROWSER_WEB";
+    public static final String SAUCE_BROWSER_WEB = "saucelabs";
 
     public static final String SAUCE_BROWSER_MOBILE = "SAUCE_BROWSER_MOBILE";
     public static final String DESKTOP_WEBDRIVER = "WebDriver";
@@ -834,6 +834,6 @@ public class CommonConstants {
 
 	public static final String ACCOUNT_USER_NAME = null;
 
-	public static final String JENKINS_BROWSER = "JENKINS_BROWSER";
+	public static final String JENKINS_BROWSER = "webdriverhost";
 
 }

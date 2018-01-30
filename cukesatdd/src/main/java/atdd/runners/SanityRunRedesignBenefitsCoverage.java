@@ -9,7 +9,7 @@ import cucumber.api.CucumberOptions;
 @RunWith(ExtendedCucumber.class)
 @ExtendedCucumberOptions(screenShotSize="", screenShotLocation="/screenshots/",jsonReport = "target/cucumber.json",detailedReport = true, detailedAggregatedReport = true, overviewReport = true, toPDF = true, outputFolder = "target")
 @CucumberOptions(glue = { "atdd.framework", "acceptancetests.memberrdesign.bnc" }, features = { "src/main/resources/feature/memberrdesign/bnc" }, plugin = {
-		"pretty", "html:reports/test-report", "json:target/cucumber.json" }, tags = { "@smokeTest_BenefitsAndCoverageGrp,@smokeTest_BenefitsAndCoverageInd" },monochrome = true)
+		"pretty", "html:reports/test-report", "json:target/cucumber-SanityRunRedesignBenefitsCoverage.json" }, tags = { "@smokeTest_BenefitsAndCoverageGrp,@smokeTest_BenefitsAndCoverageInd" },monochrome = true)
 
 public class SanityRunRedesignBenefitsCoverage {
 

@@ -9,7 +9,7 @@ import cucumber.api.CucumberOptions;
 @RunWith(ExtendedCucumber.class)
 @ExtendedCucumberOptions(screenShotSize="", screenShotLocation="/screenshots/",jsonReport = "target/cucumber.json",detailedReport = true, detailedAggregatedReport = true, overviewReport = true, toPDF = true, outputFolder = "target")
 @CucumberOptions(glue = { "atdd.framework", "acceptancetests.memberrdesign.drugcostestimator" }, features = { "src/main/resources/feature/memberrdesign/dce" }, plugin = {
-		"pretty", "html:reports/test-report", "json:target/cucumber.json" }, tags = { "@smokeTest_DceMem" }, monochrome = true)
+		"pretty", "html:reports/test-report", "json:target/cucumber-SanityRunRedesignMemberDCE.json" }, tags = { "@smokeTest_DceMem" }, monochrome = true)
 
 public class SanityRunRedesignMemberDCE {
 

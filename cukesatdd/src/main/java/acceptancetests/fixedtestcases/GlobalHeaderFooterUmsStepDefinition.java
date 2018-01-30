@@ -1,6 +1,3 @@
-/**
- * 
- */
 package acceptancetests.fixedtestcases;
 
 import org.json.JSONObject;
