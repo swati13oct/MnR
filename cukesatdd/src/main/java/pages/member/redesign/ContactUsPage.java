@@ -632,7 +632,7 @@ public class ContactUsPage extends UhcDriver{
 				e.printStackTrace();
 			}
 			String confirmPhoneErrmsg = confirmPhneErrorMsg.getText();
-			Assert.assertTrue("Please enter same Number", confirmPhoneErrmsg.equals("Enter a value that matches the value above."));
+			Assert.assertTrue("Please enter same Number", confirmPhoneErrmsg.equals("Your confirmation alternative phone number and alternative phone number do not match."));
 			
 	}else
 	{
