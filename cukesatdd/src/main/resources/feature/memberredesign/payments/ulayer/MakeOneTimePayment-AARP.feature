@@ -244,7 +244,7 @@ Examples:
 @TeamHActual @theSpartans
 Scenario Outline: Verify the Timestamp on OneTime Payment Submitted page
 Given TimeStampTheSpartans the user is on the Team-H AARP medicare site login page
-When the user logs in TeamH with a registered AMP with following details in AARP site
+When TimeStampTheSpartans the user logs in TeamH with a registered AMP with following details in AARP site
 	| Plan Type   | <planType>  |
 And TimeStampTheSpartans the user navigates to Stage PaymentOverview Page
 And TimeStampTheSpartans the user navigates to Team H One Time Payments page
