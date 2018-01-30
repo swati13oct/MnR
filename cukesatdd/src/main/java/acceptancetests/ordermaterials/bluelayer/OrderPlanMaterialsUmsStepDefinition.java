@@ -49,11 +49,11 @@ public class OrderPlanMaterialsUmsStepDefinition {
 		return loginScenario;
 	}
 
-	@Given("^registered UHC member for order plan materials with following attributes$")
+/*	@Given("^registered UHC member for order plan materials with following attributes$")
 	public void registered_member_orderplanmaterials_aarp(
 			DataTable memberAttributes) throws InterruptedException {
 
-		/* Reading the given attribute from feature file */
+		 Reading the given attribute from feature file 
 		List<DataTableRow> memberAttributesRow = memberAttributes
 				.getGherkinRows();
 		Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
@@ -94,47 +94,39 @@ public class OrderPlanMaterialsUmsStepDefinition {
 					.saveBean(LoginCommonConstants.USERNAME, userName);
 			getLoginScenario().saveBean(LoginCommonConstants.PASSWORD, pwd);
 		}
-
-		
-		
 		WebDriver wd = getLoginScenario().getWebDriver();
 
 		RedesignLoginPage loginPage = new RedesignLoginPage(wd);
 		BlueLayerHomePage accountHomePage = (BlueLayerHomePage)loginPage.loginWith(userName, pwd, category);
-		//JSONObject accountHomeActualJson = null;
-		
-		/* Get expected data */
-		/*Map<String, JSONObject> expectedDataMap = loginScenario
-				.getExpectedJson(userName);
-		JSONObject accountHomeExpectedJson = accountHomePage
-				.getExpectedData(expectedDataMap);*/
-
-		/* get actual data */
+		 get actual data 
 		if (accountHomePage != null) {
 			getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
 			getLoginScenario().saveBean(PageConstants.ACCOUNT_HOME_PAGE,
 					accountHomePage);
-			/*Assert.assertTrue(true);
-			accountHomeActualJson = accountHomePage.accountHomeJson;*/
-		}
-		/*System.out.println("accountHomeActualJson====>"
-				+ accountHomeActualJson.toString());
-		System.out.println("accountHomeExpectedJson====>"
-				+ accountHomeExpectedJson.toString());
-
-		try {
-			JSONAssert.assertEquals(accountHomeExpectedJson,
-					accountHomeActualJson, true);
-		} catch (JSONException e) {
-			e.printStackTrace();
 		}
 
-		getLoginScenario().saveBean(CommonConstants.EXPECTED_DATA_MAP,
-				expectedDataMap);*/
+	}*/
 
+/*	@When("^the user views order materials in UHC site$")
+	public void views_order_plan_materials_in_Ums_site() throws InterruptedException {
+		BlueLayerHomePage accountHomePage = (BlueLayerHomePage) getLoginScenario().getBean(PageConstants.ACCOUNT_HOME_PAGE);
+		OrderplanmaterialsPage orderPlanMaterialsPage = accountHomePage.navigateToOrderPlanMaterialsPage();
+	
+		if (orderPlanMaterialsPage != null) {
+		
+			getLoginScenario().saveBean(PageConstants.ORDER_PLAN_MATERIALS_PAGE,
+					orderPlanMaterialsPage);
+			System.out.println("@@@@ Order Plan Materials Page is Loaded @@@@");
+			Assert.assertTrue(true);
+		}
+		else {
+			Assert.fail("Error in loading  orderPlanMaterialsPage");
+		}
+		
 	}
+	*/
 
-	@And("^the user validate order additional material and click to add other order additional material in Order Confirmation Page$")
+/*	@And("^the user validate order additional material and click to add other order additional material in Order Confirmation Page$")
 	public void validate_add_order_additional_material_for_pdp_in_Redesign_site() throws InterruptedException {
 		PlanMaterialConfirmationPage planMaterialConfirmationPage = (PlanMaterialConfirmationPage) getLoginScenario()
 				.getBean(PageConstants.PLAN_MATERIALS_CONFIRMATION_PAGE);
@@ -152,8 +144,8 @@ public class OrderPlanMaterialsUmsStepDefinition {
 		Assert.assertTrue(true);
 		}
 	}
-
-
+*/
+/*
 	@And("^the user selects an option from the orderp list in Redesign site$")
 	public void user_selects_Options_Multiple_Plan_member_materials(DataTable givenAttributes) throws InterruptedException {
 
@@ -169,10 +161,10 @@ public class OrderPlanMaterialsUmsStepDefinition {
 		String plantype = givenAttributesMap.get("Plan Type");
 		String option = givenAttributesMap.get("Option");
 		
-/*			System.out.println("**************Plan Tab to to Select is : "+plantype+"+++++++++++++");
+			System.out.println("**************Plan Tab to to Select is : "+plantype+"+++++++++++++");
 			boolean TabPresent = orderPlanMaterialsPage.navigatePlanTabs(plantype);
 		
-*/		System.out.println("**************Radio Option to Select is : "+option+"+++++++++++++");
+		System.out.println("**************Radio Option to Select is : "+option+"+++++++++++++");
 		PlanMaterialConfirmationPage planMaterialConfirmationPage = orderPlanMaterialsPage.selectsOption(option);
 		if (planMaterialConfirmationPage != null) {
 			getLoginScenario().saveBean(PageConstants.PLAN_MATERIALS_CONFIRMATION_PAGE,
@@ -185,27 +177,8 @@ public class OrderPlanMaterialsUmsStepDefinition {
 			System.out.print("Order Plan Material Confirmation Page not displayed");
 		}
 	}
-	
-	@When("^the user views order materials in UHC site$")
-	public void views_order_plan_materials_in_Ums_site() throws InterruptedException {
-		BlueLayerHomePage accountHomePage = (BlueLayerHomePage) getLoginScenario().getBean(PageConstants.ACCOUNT_HOME_PAGE);
-		OrderplanmaterialsPage orderPlanMaterialsPage = accountHomePage.navigateToOrderPlanMaterialsPage();
-	
-		if (orderPlanMaterialsPage != null) {
-		
-			getLoginScenario().saveBean(PageConstants.ORDER_PLAN_MATERIALS_PAGE,
-					orderPlanMaterialsPage);
-			System.out.println("@@@@ Order Plan Materials Page is Loaded @@@@");
-			Assert.assertTrue(true);
-		}
-		else {
-			Assert.fail("Error in loading  orderPlanMaterialsPage");
-		}
-		
-	}
-	
-	
-	@Then("^user navigates to Order Materials page for all Plans$")
+*/	
+/*	@Then("^user navigates to Order Materials page for all Plans$")
 	public void user_navigates_Plan_Tabs(DataTable givenAttributes) {
 
 		OrderplanmaterialsPage orderPlanMaterialsPage = (OrderplanmaterialsPage) getLoginScenario().getBean(PageConstants.ORDER_PLAN_MATERIALS_PAGE);
@@ -230,8 +203,8 @@ public class OrderPlanMaterialsUmsStepDefinition {
 			}
 		}
 		
-	}
-	
+	}*/
+/*	
 	@And("^user Validates Page Header and Sub-Header text$")
 	public void user_validates_orderMaterialsHeader(){
 		OrderplanmaterialsPage orderPlanMaterialsPage = (OrderplanmaterialsPage) getLoginScenario().getBean(PageConstants.ORDER_PLAN_MATERIALS_PAGE);
@@ -239,10 +212,5 @@ public class OrderPlanMaterialsUmsStepDefinition {
 			System.out.println("Header Text and Subtext not displayed for Order materials Page");
 		}
 		
-	}
-	
-
-
-	
-
+	}*/
 }

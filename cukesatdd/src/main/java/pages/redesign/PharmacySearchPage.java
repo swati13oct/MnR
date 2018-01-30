@@ -17,8 +17,9 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
 
 import acceptancetests.atdd.util.CommonUtility;
+import atdd.framework.MRScenario;
 import atdd.framework.UhcDriver;
-import pages.redesign.PharmacyResultPage;
+import pages.redesign.PharmacySearchPage;
 
 /**
  * @author sdwaraka
@@ -52,6 +53,9 @@ public class PharmacySearchPage extends UhcDriver{
 
 	@FindBy(id = "plan-type")
 	private WebElement PlanNameDropDown;
+	
+	@FindBy(xpath = ".//*[@id='selectZiptable']/tbody[1]/tr//a")
+	private List<WebElement> countyList;
 
 	@FindBy(id = "plan-year")
 	private WebElement planYearDropDown;	
@@ -86,6 +90,9 @@ public class PharmacySearchPage extends UhcDriver{
 	
 	@FindBy(xpath = "//a[contains(text(),'VIEW RESULT AS PDF')]")
 	private WebElement viewsearchpdf;
+	
+	@FindBy(id = "outerContainer")
+	private WebElement PDFcontainer;
 	
 	@FindBy(xpath = ".//a[@class='display-block collapse-expand collapsed']")
 	private WebElement moreInfoLink;
@@ -143,7 +150,7 @@ public class PharmacySearchPage extends UhcDriver{
 	}
 
 
-	public PharmacyResultPage searchesPharmacy() throws InterruptedException {
+	public PharmacySearchPage searchesPharmacy() throws InterruptedException {
 		
 		Thread.sleep(20000);
 		CommonUtility.checkPageIsReady(driver);
@@ -154,7 +161,7 @@ public class PharmacySearchPage extends UhcDriver{
 			System.out.println("No of Pharmacies Displayed in Pharmacy Result Page 1 : "+PharmacyCount);
 			System.out.println("Total Pharmacy Count : "+PharmacyFoundCount.getText());
 
-			return new PharmacyResultPage(driver);
+			return new PharmacySearchPage(driver);
 
 		}
 		System.out.println("Pharmacy Result Not displayed  - Pharmacy Count =  "+PharmacyCount);
@@ -260,7 +267,7 @@ public class PharmacySearchPage extends UhcDriver{
 		return null;
 	}
 	
-	public PharmacyResultPage ValidateShowOnMapLinks() throws InterruptedException {
+	public PharmacySearchPage ValidateShowOnMapLinks() throws InterruptedException {
 		Thread.sleep(20000);
 		CommonUtility.checkPageIsReady(driver);
 		int showonmapCount = showonmap.size();
@@ -272,12 +279,12 @@ public class PharmacySearchPage extends UhcDriver{
 		if(showonmapCount==PharmacyCount){
 			System.out.println("Show on Map Links are Displayed for all Displayed Pharmacy Results");
 
-			return new PharmacyResultPage(driver);
+			return new PharmacySearchPage(driver);
 		}
 		return null;
 	}
 
-	public PharmacyResultPage ValidateSearchPdfResult() throws InterruptedException {
+	public PharmacySearchPage ValidateSearchPdfResult() throws InterruptedException {
 		
 		Thread.sleep(10000);
 		//Thread.sleep(160000);
@@ -291,9 +298,8 @@ public class PharmacySearchPage extends UhcDriver{
 
 			CommonUtility.checkPageIsReady(driver);
 
-			if (driver.getTitle().equalsIgnoreCase(
-					"pharmacyDirectory.pdf")) {
-				return new PharmacyResultPage(driver);
+			if (!driver.getTitle().contains("/member/pharmacy-locator/")) {
+				return new PharmacySearchPage(driver);
 				
 			}
 			else{
@@ -306,29 +312,29 @@ public class PharmacySearchPage extends UhcDriver{
 		return null;
 	}
 	
-	public PharmacyResultPage validateMoreInfoContent() throws InterruptedException {
+	public PharmacySearchPage validateMoreInfoContent() throws InterruptedException {
 		Thread.sleep(6000);
 		CommonUtility.checkPageIsReady(driver);
 
 		moreInfoLink.click();
 		if (moreInfoText.isDisplayed()) {
-			return new PharmacyResultPage(driver);
+			return new PharmacySearchPage(driver);
 		}
 		return null;
 	}
 	
-	public PharmacyResultPage validateLimitedAccessDisclaimer(String DisclaimerText) throws InterruptedException {
+	public PharmacySearchPage validateLimitedAccessDisclaimer(String DisclaimerText) throws InterruptedException {
 		Thread.sleep(5000);
 		CommonUtility.checkPageIsReady(driver);
 		moreInfoLink.click();
 		
 		if (moreInfoText.getText().contains(DisclaimerText)) {
-			return new PharmacyResultPage(driver);
+			return new PharmacySearchPage(driver);
 		}
 		return null;
 	}
 
-	public PharmacyResultPage validateChatWidget() {
+	public PharmacySearchPage validateChatWidget() throws InterruptedException {
 		boolean present;
 		try {
 		validate(chatwidget);
@@ -339,13 +345,13 @@ public class PharmacySearchPage extends UhcDriver{
 
 		if (present) {
 			System.out.println("@@@@@@@@@ Able to find Chat widget @@@@@@@@@");
-			return new PharmacyResultPage(driver);
+			return new PharmacySearchPage(driver);
 		}
 		System.out.println("@@@@@@@@@ No Chat widget @@@@@@@@@");
 		return null;
 	}
 
-	public PharmacyResultPage validateTfnWidget() {
+	public PharmacySearchPage validateTfnWidget() throws InterruptedException {
 		boolean present;
 		try {
 		validate(TFNwidget);
@@ -356,7 +362,7 @@ public class PharmacySearchPage extends UhcDriver{
 
 		if (present) {
 			System.out.println("@@@@@@@@@ Able to find TFN widget @@@@@@@@@");
-			return new PharmacyResultPage(driver);
+			return new PharmacySearchPage(driver);
 
 		}
 
@@ -384,17 +390,17 @@ public class PharmacySearchPage extends UhcDriver{
 		return new PharmacySearchPage(driver);
 	}
 
-    public PharmacyResultPage multilangPharmacySearchResult() throws InterruptedException {
+    public PharmacySearchPage multilangPharmacySearchResult() throws InterruptedException {
 		
     	Thread.sleep(3000);
 		System.out.println("Filter text is :*******"+filterLink.getText());
 		if (filterLink.getText().contains("FILTRAR")){
 			System.out.println("Spanish Language Filter displayed");
-			return new PharmacyResultPage(driver);
+			return new PharmacySearchPage(driver);
 		}
 		else if(!filterLink.getText().contains("Filter")){
 			System.out.println("Chinese Language Filter displayed");
-			return new PharmacyResultPage(driver);
+			return new PharmacySearchPage(driver);
 		}
 		return null;
 	}
@@ -420,5 +426,49 @@ public class PharmacySearchPage extends UhcDriver{
     	
     }
 
+	public PharmacySearchPage navigateToAARPpharmacyLocatorAcquisition() throws InterruptedException {
+	
+		driver.navigate().to("https://www.awe-"+MRScenario.environment+"-aarpmedicareplans.uhc.com/health-plans/aarp-pharmacy.html#/Pharmacy-Search-English");
+    	Thread.sleep(3000);
+    	if(validate(PharmacyLocatorPageHeader)){
+			return new PharmacySearchPage(driver);
+		}
+		return null;
+	}
+
+	public PharmacySearchPage navigateToUHCpharmacyLocatorAcquisition() throws InterruptedException {
+		
+		driver.navigate().to("https://www.awe-"+MRScenario.environment+"uhcmedicaresolutions.uhc.com/health-plans/aarp-pharmacy.html#/Pharmacy-Search-English");
+    	Thread.sleep(3000);
+    	if(validate(PharmacyLocatorPageHeader)){
+			return new PharmacySearchPage(driver);
+		}
+		return null;
+	}
+
+	public PharmacySearchPage enterZipDistanceDetails(String zipcode, String distance, String county) throws InterruptedException {
+		sendkeys(zipcodeField, zipcode);
+		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+		
+		searchbtn.click();
+		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+		System.out.println("*****Zipcode, distance and County details are entered******");
+
+		//selectFromDropDown(distanceDropDown, distance);
+
+		//continueField.click();
+		CommonUtility.checkPageIsReady(driver);
+		if (!PlanNameDropDown.isEnabled()) {
+			for (WebElement webElement : countyList) {
+				if (webElement.getText().contains(county)) {
+					webElement.click();
+					System.out.println("County Popup displayed / County Name Selected");
+					return new PharmacySearchPage(driver);
+				}
+			}
+		}
+		System.out.println("County Popup not displayed / County Name not displayed");
+		return null;
+	}
 
 }
