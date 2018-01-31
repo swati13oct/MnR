@@ -8,16 +8,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import org.json.JSONException;
-import org.json.JSONObject;
 import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
-import org.skyscreamer.jsonassert.JSONAssert;
 import org.springframework.beans.factory.annotation.Autowired;
-
-import com.google.common.base.Verify;
-import com.thoughtworks.selenium.webdriven.commands.GetText;
-import com.thoughtworks.selenium.webdriven.commands.GetValue;
 
 import acceptancetests.atdd.data.CommonConstants;
 import acceptancetests.atdd.data.member.PageConstants;
@@ -25,18 +18,14 @@ import acceptancetests.dashboard.claims.data.RedesignClaimsCommonConstants;
 import acceptancetests.login.data.LoginCommonConstants;
 import atdd.framework.MRScenario;
 import cucumber.api.DataTable;
-import cucumber.api.java.After;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import gherkin.formatter.model.DataTableRow;
-import pages.acquisition.uhcretiree.AcquisitionHomePage;
-import pages.acquisition.uhcretiree.RetireesOfSelectedPlans;
 import pages.dashboard.member.ulayer.ClaimDetailsPage;
 import pages.dashboard.member.ulayer.ClaimSummarypage;
 import pages.member.ulayer.AccountHomePage;
-import pages.member.ulayer.ClaimSummaryPage;
 import pages.member.ulayer.LoginPage;
 
 public class ClaimsMemberRedesignStepDefinition {
@@ -48,7 +37,7 @@ public class ClaimsMemberRedesignStepDefinition {
 		return loginScenario;
 	}
 
-	@Given("^I am an AARP member on the redesigned site$")
+	@Given("^I am an Individual or Group member on the redesigned site$")
 	public void i_am_an_arrp_member_on_the_member_site(DataTable memberAttributes) {
 
 		/* Reading the given attribute from feature file */
@@ -58,8 +47,6 @@ public class ClaimsMemberRedesignStepDefinition {
 
 			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0), memberAttributesRow.get(i).getCells().get(1));
 		}
-		String planType = memberAttributesMap.get("Plan Type");
-		String businessType = null;
 		Set<String> memberAttributesKeySet = memberAttributesMap.keySet();
 		List<String> desiredAttributes = new ArrayList<String>();
 		for (Iterator<String> iterator = memberAttributesKeySet.iterator(); iterator.hasNext();) {
@@ -130,7 +117,7 @@ public class ClaimsMemberRedesignStepDefinition {
 			getLoginScenario().saveBean(PageConstants.NEW_CLAIMS_SUMMARY_PAGE, newClaimsSummaryPage);
 	}
 
-	@And("^the user search claims for the following claim period in AARP site$")
+	@And("^I can search claims for the following claim period on redesigned site$")
 	public void search_claims_period_redesigned_site(DataTable timeAttributes){
 		List<DataTableRow> timeAttributesRow = timeAttributes.getGherkinRows();
 		Map<String, String> urlAttributesMap = new HashMap<String, String>();
@@ -146,10 +133,6 @@ public class ClaimsMemberRedesignStepDefinition {
 		String s=urlAttributesMap.get("Claim Period");
 		String planType = urlAttributesMap.get("Plan Type");
 		
-		//String claimPeriod = timeAttributesRow.get(0).getCells().get(0);
-		//String s = urlAttributesMap.get(key)
-		//System.out.println(claimPeriod);
-
 		ClaimSummarypage newClaimsSummaryPage = (ClaimSummarypage) getLoginScenario().getBean(PageConstants.NEW_CLAIMS_SUMMARY_PAGE);
 
 		newClaimsSummaryPage.searchClaimsByTimePeriod(planType,s);
@@ -160,7 +143,7 @@ public class ClaimsMemberRedesignStepDefinition {
 	}
 
 
-	@Then("^user validates the claims displayed based on the selection in redesigned site$")
+	@Then("^I can see the claims displayed based on the selection in redesigned site$")
 	public void validate_claims_table_redesigned_site(){
 		ClaimSummarypage newClaimsSummaryPage = (ClaimSummarypage) getLoginScenario().getBean(PageConstants.NEW_CLAIMS_SUMMARY_PAGE);
 		newClaimsSummaryPage.validateClaimsTable();
@@ -484,7 +467,3 @@ public class ClaimsMemberRedesignStepDefinition {
 
 
 }
-
-
-
-
