@@ -203,7 +203,7 @@ public class ClaimsMemberRedesignStepDefinition {
 			getLoginScenario().saveBean(PageConstants.NEW_CLAIMS_SUMMARY_PAGE, newclaimsSummarypage);
 	}	
 	/**
-	 * @toDo :
+	 * @toDo : on claims summary 
 	 */
 
 
