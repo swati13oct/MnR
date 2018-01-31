@@ -11,5 +11,5 @@ Feature: To test Member Auth Dashboard page.
 
     Examples: 
       | username  | password | errormessage                                    |
-      | qavgogine | password | Either your UserName or Password was incorrect. |
+      | qavgogine |          | Either your UserName or Password was incorrect. |
     # |       username   |   qavgogine           | Either your UserName or Password was incorrect.|

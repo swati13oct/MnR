@@ -69,9 +69,9 @@ Feature: To test Login Assistance flow on AARP site
 
   @US738867 @theSpartans
   Scenario Outline: Fetch Username and Password on missing
-    Given user navigates to login assistance page from member AARP site
-    When select username and password
-    Then confirmation page need to be displayed
+    Given UnPwdAssTheSpartans user navigates to login assistance page from member AARP site
+    When UnPwdAssTheSpartans select username and password
+    Then UnPwdAssTheSpartans confirmation page need to be displayed
       | memID    | <memberID> |
       | DBmm     | <DOBmm>    |
       | DBdd     | <DOBdd>    |

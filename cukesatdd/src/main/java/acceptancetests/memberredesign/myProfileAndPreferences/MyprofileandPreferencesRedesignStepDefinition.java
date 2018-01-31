@@ -1,4 +1,4 @@
-package acceptancetests.redesign;
+package acceptancetests.memberredesign.myProfileAndPreferences;
 
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -36,9 +36,9 @@ public class MyprofileandPreferencesRedesignStepDefinition {
 	public MRScenario getLoginScenario() {
 		return loginScenario;
 	}
-
-	@Given("^Login to the application$")
-	public void Login_to_the_application(DataTable givenAttributes)
+	// Login to the application
+	@Given("^PreferencesSpartans Login to the application$")
+	public void PreferencesSpartans_Login_to_the_application(DataTable givenAttributes)
 			throws InterruptedException {
 
 		List<DataTableRow> memberAttributesRow = givenAttributes
@@ -50,6 +50,7 @@ public class MyprofileandPreferencesRedesignStepDefinition {
 		}
 		// get parameter username and password
 		String userName = memberAttributesMap.get("memberNumber");
+		//password
 		String passWord = "Password@1";
 
 		WebDriver wd = getLoginScenario().getWebDriver();
@@ -67,9 +68,9 @@ public class MyprofileandPreferencesRedesignStepDefinition {
 			Assert.assertTrue(true);
 		}
 	}
-
-	@When("^the user navigates to Prefrences page$")
-	public void the_user_navigates_to_Prefrences_page()
+	// Navigate to preference page
+	@When("^PreferencesSpartans the user navigates to Prefrences page$")
+	public void PreferencesSpartans_the_user_navigates_to_Prefrences_page()
 			throws InterruptedException {
 
 		CommunicationPreferences compp = (CommunicationPreferences) getLoginScenario()
@@ -83,9 +84,9 @@ public class MyprofileandPreferencesRedesignStepDefinition {
 			Assert.assertTrue(true);
 		}
 	}
-
-	@Then("^the user changes delivery preferences$")
-	public void the_user_changes_delivery_preferences() throws InterruptedException {
+	// change delivery preferences from mail to online or viceversa
+	@Then("^PreferencesSpartans the user changes delivery preferences$")
+	public void PreferencesSpartans_the_user_changes_delivery_preferences() throws InterruptedException {
 		CommunicationPreferences compp = (CommunicationPreferences) getLoginScenario()
 				.getBean(PageConstants.PROFILEANDPREFERENCES_PAGE);
 

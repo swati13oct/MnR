@@ -1,4 +1,4 @@
-package acceptancetests.dashboard.newsignIn.aarplayer;
+package acceptancetests.memberredesign.newSignIn;
 
 import java.util.HashMap;
 import java.util.List;

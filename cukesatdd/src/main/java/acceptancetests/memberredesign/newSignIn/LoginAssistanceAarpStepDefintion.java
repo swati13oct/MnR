@@ -1,7 +1,7 @@
 /**
  * 
  */
-package acceptancetests.loginassistance.ulayer;
+package acceptancetests.memberredesign.newSignIn;
 
 import gherkin.formatter.model.DataTableRow;
 import pages.acquisition.ulayer.LoginAssistancePage;
@@ -50,9 +50,10 @@ public class LoginAssistanceAarpStepDefintion {
 	public MRScenario getLoginScenario() {
 		return loginScenario;
 	}
-
-	@Given("^user navigates to login assistance page from member AARP site$")
-	public void user_navigates_login_assistance_member_aarp() {
+	
+	// Login to the Application
+	@Given("^UnPwdAssTheSpartans user navigates to login assistance page from member AARP site$")
+	public void UnPwdAssTheSpartans_user_navigates_login_assistance_member_aarp() {
 
 		WebDriver wd = getLoginScenario().getWebDriver();
 		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
@@ -69,8 +70,9 @@ public class LoginAssistanceAarpStepDefintion {
 
 	}
 
-	@When("^select username and password$")
-	public void user_pwd_select() throws InterruptedException {
+	// Navigate to Username and password Assistance page
+	@When("^UnPwdAssTheSpartans select username and password$")
+	public void UnPwdAssTheSpartans_user_pwd_select() throws InterruptedException {
 		// LoginPage loginPage = (LoginPage) getLoginScenario()
 		// .getBean(PageConstants.LOGIN_PAGE);
 
@@ -88,8 +90,9 @@ public class LoginAssistanceAarpStepDefintion {
 
 	}
 
-	@Then("^confirmation page need to be displayed$")
-	public void login_validation(DataTable memberAttributes)
+	// Fill the details in UnPwdAssistance Page
+	@Then("^UnPwdAssTheSpartans confirmation page need to be displayed$")
+	public void UnPwdAssTheSpartans_login_validation(DataTable memberAttributes)
 			throws InterruptedException {
 
 		/* Reading the given attribute from feature file */

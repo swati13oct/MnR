@@ -243,14 +243,14 @@ Examples:
 
 @TeamHActual @theSpartans
 Scenario Outline: Verify the Timestamp on OneTime Payment Submitted page
-Given the user is on the Team-H AARP medicare site login page
+Given TimeStampTheSpartans the user is on the Team-H AARP medicare site login page
 When the user logs in TeamH with a registered AMP with following details in AARP site
 	| Plan Type   | <planType>  |
-And the user navigates to Stage PaymentOverview Page
-And the user navigates to Team H One Time Payments page
-And the user enters details and click on continue button on One Time Payments Page for Dashboard
-And user lands on Review One time Payments Page and navigates to OTP Submitted Page
-Then the user lands on OneTime Payment Submitted Page and validates Timestamp
+And TimeStampTheSpartans the user navigates to Stage PaymentOverview Page
+And TimeStampTheSpartans the user navigates to Team H One Time Payments page
+And TimeStampTheSpartans the user enters details and click on continue button on One Time Payments Page for Dashboard
+And TimeStampTheSpartans user lands on Review One time Payments Page and navigates to OTP Submitted Page
+Then TimeStampTheSpartans the user lands on OneTime Payment Submitted Page and validates Timestamp
 
 Examples:
 	| planType |
@@ -259,28 +259,28 @@ Examples:
 
 @TeamHAuto @theSpartans
 Scenario Outline: Verify the Timestamp on Automatic Payment Submitted page
-Given the user is on the Team-H AARP medicare site login page
-When the user logs in TeamH with a registered AMP with following details in AARP site
+Given TimeStampTheSpartans the user is on the Team-H AARP medicare site login page
+When TimeStampTheSpartans the user logs in TeamH with a registered AMP with following details in AARP site
 	| Plan Type   | <planType>  |
-And the user navigates to Stage PaymentOverview Page
-And the user navigates to Team H Automatic Payments page
-And the user enters details and click on continue button on Automatic Payments Page for Dashboard
-And user lands on Review One time Payments Page and navigates to Review Submitted Page
-Then the user lands on OneTime Payment Submitted Page and validates Timestamp
+And TimeStampTheSpartans the user navigates to Stage PaymentOverview Page
+And TimeStampTheSpartans the user navigates to Team H Automatic Payments page
+And TimeStampTheSpartans the user enters details and click on continue button on Automatic Payments Page for Dashboard
+And TimeStampTheSpartans user lands on Review One time Payments Page and navigates to Review Submitted Page
+Then TimeStampTheSpartans the user lands on OneTime Payment Submitted Page and validates Timestamp
 
 Examples:
 	| planType |
 	| AARP     |	
 
-@TeamHError @theSpartans
+@TeamHError
 Scenario Outline: Verify the Timestamp on OneTime Payment Submitted page
-Given the user is on the Team-H AARP medicare site login page
-When the user logs in TeamH with a registered AMP with following details in AARP site
+Given TimeStampTheSpartans the user is on the Team-H AARP medicare site login page
+When TimeStampTheSpartans the user logs in TeamH with a registered AMP with following details in AARP site
 	| Plan Type   | <planType>  |
-And the user navigates to Stage PaymentOverview Page
-And the user navigates to Team H One Time Payments page
-And the user enters details and click on continue button on One Time Payments Page for Dashboard
-Then user lands on Review One time Payments Page and validates one payment per day error message
+And TimeStampTheSpartans the user navigates to Stage PaymentOverview Page
+And TimeStampTheSpartans the user navigates to Team H One Time Payments page
+And TimeStampTheSpartans the user enters details and click on continue button on One Time Payments Page for Dashboard
+Then TimeStampTheSpartans user lands on Review One time Payments Page and validates one payment per day error message
 
 
 Examples:
@@ -288,13 +288,13 @@ Examples:
 	| FED     |
 
 
-@US764275
+@US764275 @theSpartans
 Scenario Outline: Verify the Timestamp on OneTime Payment Submitted page
-Given the user is on the Team-H AARP medicare site login page
-When the user logs in TeamH with a registered AMP with following details in AARP site
+Given TimeStampTheSpartans the user is on the Team-H AARP medicare site login page
+When TimeStampTheSpartans the user logs in TeamH with a registered AMP with following details in AARP site
 	| Plan Type   | <planType>  |
-And the user navigates to Stage PaymentOverview Page
-Then user lands on payment overview page validates the tabs for combo members
+And TimeStampTheSpartans the user navigates to Stage PaymentOverview Page
+Then TimeStampTheSpartans user lands on payment overview page validates the tabs for combo members
 
 Examples:
 	| planType |
@@ -302,12 +302,12 @@ Examples:
 
 
 @US735645
-Scenario Outline: Verify the Timestamp on OneTime Payment Submitted page
-Given the user is on the Team-H AARP medicare site login page
-When the user logs in TeamH with a registered AMP with following details in AARP site
+Scenario Outline:  Verify the Timestamp on OneTime Payment Submitted page
+Given TimeStampTheSpartans the user is on the Team-H AARP medicare site login page
+When TimeStampTheSpartans the user logs in TeamH with a registered AMP with following details in AARP site
 	| Plan Type   | <planType>  |
-And the user navigates to Stage PaymentOverview Page
-Then user unchecks paid and unpaid checkbox and validates the result
+And TimeStampTheSpartans the user navigates to Stage PaymentOverview Page
+Then TimeStampTheSpartans user unchecks paid and unpaid checkbox and validates the result
 
 Examples:
 	| planType |
