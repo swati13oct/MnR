@@ -41,16 +41,16 @@ public class DashboardPage extends UhcDriver {
 	@FindBy(id = "premiumpayment")
 	private WebElement panelPremiumPayment;
 
-	@FindBy(xpath = "(//nav[@id='main nav']//a[contains(text(),'Home')])[1]")
+	@FindBy(xpath = "(//nav[@id='main-nav']//a[contains(text(),'Home')])[1])")
 	private WebElement panelHome;
 
 	@FindBy(xpath = "(//nav[@id='main nav']//a[contains(text(),'Claims')])[1]")
 	private WebElement panelClaims;
 
-	@FindBy(xpath = "//button[@id='dropdown toggle  1']/span[contains(text(),'Profile')]")
+	@FindBy(xpath = "//button[@id='dropdown-toggle--1']/span[contains(text(),'Profile')]")
 	private WebElement accountToggleDropdown;
 
-	@FindBy(xpath = "//a[@class='dropdown option' and contains(text(),'Account Settings')]")
+	@FindBy(xpath = "//a[@class='dropdown-option' and contains(text(),'Account Settings')]")
 	private WebElement accountSettingOption;
 
 	@FindBy(xpath = "//header//h1")
@@ -59,18 +59,17 @@ public class DashboardPage extends UhcDriver {
 	@FindBy(xpath = "//div[@id='ui view page']//span[contains(text(),'Look up Drugs')]")
 	private WebElement DCE_Dashboard;
 
-	@FindBy(xpath = "//sticky[@id='sticky nav']//nav[@id='main nav']//a[contains(text(),'Coverage & Benefits')]")
+	@FindBy(xpath = "//sticky[@id='sticky-nav']//nav[@id='main-nav']//a[contains(text(),'Coverage & Benefits')]")
 	private WebElement BnClink;
 
-	@FindBy(xpath = "(//nav[@id='utility nav']//a/span[contains(text(),'Help')])[1]")
-	private WebElement ContactUsLink;
+
 
 	@Override
 	public void openAndValidate() {
 
 		CommonUtility.waitForPageLoad(driver, panelHome, 60);
 		System.out.println(driver.getCurrentUrl());
-		validate(panelHome);
+		//validate(panelHome);
 	}
 
 	public pages.member.bluelayer.ProfilePreferencesPage navigateDirectToProfilePage() {
