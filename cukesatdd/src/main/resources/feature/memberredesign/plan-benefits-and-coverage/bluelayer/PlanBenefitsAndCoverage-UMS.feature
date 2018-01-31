@@ -8,17 +8,14 @@ Feature: To test plan benefits and Coverage on UMS site
       | Copay Category | <copayCategory>|
     Then the user navigates to Benefits and coverage page
     And the user validates the content on benefits and coverage page
-    And the user validates Needhelp header and disclaimer link
-    And the user clicks on Disclaimers link
+    And the user validates Needhelp header
+    And the user clicks on More Information link
     And the user validates contactus section
     
     Examples: 
-      | planType | 
-      | MA       |  
-      | GroupMAPD| 
-      | GroupPDP | 
-      | GroupMA  | 
-      | MAPD     |  
+      | planType|  memberType  | copayCategory |
+      | MAPD    |  Individual  |  NON LIS      | 
+      | PDP     |  Individual  |  NON LIS      | 
 
       
  @CMvalidatePdfsectiongroupenglish
@@ -131,7 +128,7 @@ Feature: To test plan benefits and Coverage on UMS site
     When the user navigates to Benefits coverage page
     And the user validates the content on benefits and coverage page
     And the user view the Drug Copays & Discounts header 
-    And the user validates the Learn More section link for stage and tier
+    And the user validates the Learn More section for stage and tier
     And the user validates dropdown selection functionality
     And the user validates the user click on the link it expands and when user clicks it again it should collapse
     And the user validates Drug coverage header and text under the section
@@ -142,10 +139,10 @@ Feature: To test plan benefits and Coverage on UMS site
     And the user should see drug copay and discount table
     Examples: 
        | planType|  memberType  | copayCategory |
-       | PDP     |  Group       |  NON LIS      |
-       | MAPD    |  Group       |  NON LIS      |
-       | MAPD    |  Individual  |  NON LIS      | 
-       | PDP     |  Individual  |  NON LIS      |
+       #| PDP     |  Group       |  NON LIS      |
+       #| MAPD    |  Group       |  NON LIS      |
+        | MAPD    |  Individual  |  NON LIS      | 
+       #| PDP     |  Individual  |  NON LIS      |
 
       
     @CMdrugcopaysectionlis
@@ -352,6 +349,7 @@ Feature: To test plan benefits and Coverage on UMS site
       | Copay Category | <copayCategory>|
     When the user navigates to Benefits and coverage page
     And the user validates Needhelp header
+    And the user clicks on More Information link
     And the user validates contactus section
     
     Examples: 
@@ -361,15 +359,14 @@ Feature: To test plan benefits and Coverage on UMS site
       | PDP     |  Individual  |   LIS 4       | 
       
       
-   @CMneedHelpShipVAS
+   @CMneedHelpShip
   Scenario Outline: Verify Need Help section is in place on Benefits and Coverage page
     Given registered member with following details logins in the member portal 
       | Plan Type      | <planType>  |
       | Member Type    | <memberType>|
       | Copay Category | <copayCategory>|
     When the user navigates to Benefits and coverage page
-    And  the user validate Value Add Service page
-    And  the user validates the need help section for ship
+    And the user validates the need help section for ship
     And the user validates see more ways to contact us section for ship
     And the user validates on clicking contact us link it should route to contact us page for ship member
     
@@ -377,19 +374,7 @@ Feature: To test plan benefits and Coverage on UMS site
       | planType|  memberType  | copayCategory |
       | HIP     |  SHIP        |   NON LIS     | 
       | PHIP    |  SHIP        |   NON LIS     |
-      
-      
-      
-           
-     
-      
    
-    
-
-    
-  
-      
-      
     
     
 

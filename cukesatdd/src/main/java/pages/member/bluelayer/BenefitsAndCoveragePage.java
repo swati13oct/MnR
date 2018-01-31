@@ -88,32 +88,38 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 	@FindBy(xpath = ".//*[@id='ancillary']/div[2]/div[4]/div/div")
 	private WebElement chiropracticsection;
 
-	@FindBy(xpath = ".//*[@id='drug-benefits']/div/section/div[6]/div/span/div/div/div/div/p")
+	@FindBy(className = "atdd-bnc-drgcvrgeinfo")
 	private WebElement DrugCoveragetext;
 
-	@FindBy(xpath = ".//*[@id='drug-benefits']/div/section/div[6]/div/span/div/div/div/div/h3/span")
+	@FindBy(className = "atdd-bnc-drugcoverage-title")
 	private WebElement DrugCoverageHeader;
 
-        @FindBy(xpath = ".//*[@id='drug-benefits']/div/section/div[1]/div/div/div/div[2]/div/div/h2")
+    @FindBy(className = "atdd-bnc-drgcopaysdiscounts-title")
 	private WebElement lisDrugCopayHeader;
 
-	@FindBy(xpath = ".//*[@id='drug-benefits']/div/section/div[1]/div/div/div/div[2]/div/div/p")
+	@FindBy(className = "atdd-bnc-drgcopaysdiscounts-info")
 	private WebElement lisDrugCopayText;
 
-	@FindBy(xpath = ".//*[@id='drug-benefits']/div/section/div[7]/div[1]/div/div/div/div/p")
+	@FindBy(className = "atdd-bnc-lookupdrugs-info")
 	private WebElement LookupDrugstext;
 
-	@FindBy(xpath = ".//*[@id='drug-benefits']/div/section/div[7]/div[1]/a")
+	@FindBy(className = "atdd-bnc-lookupdrugbtn")
 	private WebElement LookUpDrugsButton;
 
-	@FindBy(xpath = ".//*[@id='drug-benefits']/div/section/div[1]/div/div/div/div/div/div/h2")
+	@FindBy(className = "atdd-bnc-drgcopaysdiscounts-title")
 	private WebElement DrugCopayHeader;
 
-	@FindBy(xpath = ".//*[@id='drug-benefits']/div/section/div[1]/div/div/div/div/div/div/p")
+	@FindBy(className = "atdd-bnc-drgcopaysdiscounts-info")
 	private WebElement DrugCopayText;
 
 	@FindBy(id = "drug-costs")
 	private WebElement DrugCostDropdown;
+	
+	@FindBy(className = "atdd-bnc-drugcostsheading")
+	private WebElement DrugCostHeader;
+	
+	@FindBy(className = "atdd-bnc-phrmcytext")
+	private WebElement DrugCostheadertext;
 
 	@FindBy(xpath = ".//*[@id='drug-benefits']/div/section/div[2]/div/div")
 	private WebElement DrugCostheaderandtext;
@@ -124,16 +130,16 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 	@FindBy(xpath = ".//*[@id='waystosave']/div/div/div[1]/div/h1")
 	private WebElement TextWaystoSave;
 
-	@FindBy(xpath = ".//*[@id='drug-benefits']/div/section/div[4]/div/div/div/div/div[1]/div/a")
+	@FindBy(className = "atdd-bnc-drgpricingtiers")
 	private WebElement Learnmoretierslink;
 
-	@FindBy(xpath = ".//*[@id='drug-benefits']/div/section/div[4]/div/div/div/div/div[2]/div/a")
+	@FindBy(className = "atdd-bnc-drgstgtiers")
 	private WebElement Learnmorestagelink;
 
-	@FindBy(xpath = ".//*[@id='drug-benefits']/div/section/div[7]/div[2]/div/div/div/div/p")
+	@FindBy(xpath = "atdd-bnc-locatephrmcy-info")
 	private WebElement locateapharmacysection;
 
-	@FindBy(xpath = ".//*[@id='drug-benefits']/div/section/div[7]/div[2]/a")
+	@FindBy(className = "atdd-bnc-locatepharmacybtn")
 	private WebElement locateapharmacybutton;
 
 	@FindBy(id = "mapdPageNonLis")
@@ -791,12 +797,7 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 		} else {
 			Assert.assertTrue(true);
 		}
-		if (DrugCostDropdown.isDisplayed()) {
-			Assert.fail("The element" + DrugCostDropdown.getText() + "should not display");
-			System.out.println("The element " + DrugCostDropdown.getText() + "should not display");
-		} else {
-			Assert.assertTrue(true);
-		}
+		
 
 	}
 
@@ -804,6 +805,7 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 
 	{
 	    validate(DrugCostDropdown);
+	    validate(DrugCostHeader);
                
             /*if (DrugCostDropdown.isDisplayed()) {
                 try {
@@ -953,7 +955,7 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 	public void validatedrugcopaytable() {
 		// Select langdropdwn = new Select(langdropdown);
 
-		//validate(drugcopaytable);
+		validate(drugcopaytable);
 
 	}
 
