@@ -188,7 +188,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	@FindBy(xpath=".//*[@class='img' and @src='/images/guidedSearch/gs_icn_pro_primarycarephysicians.svg']")
 	private WebElement Primary;
 
-	@FindBy(xpath="//*[contains(text(),'Primary Care Physician (PCP')] ")
+	@FindBy(xpath="//*[contains(text(),'Primary Care Physician')] ")
 	private WebElement Physician;
 
 	//@FindBy(xpath=".//*[contains(@ng-bind-html,'buttonText')  and contains(text(),'Save')]")
@@ -457,7 +457,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 			wait.until(ExpectedConditions.elementToBeClickable(By.xpath(".//*[@id='site-wrapper']/div[4]/div/div/div/div/div/div/div[1]/div/div/div[1]/div[2]/div/div[2]/div[3]/div/span[3]"))).click();
 		} else if (planType.equalsIgnoreCase("MA")
 				|| planType.equalsIgnoreCase("MAPD")) {
-			wait.until(ExpectedConditions.elementToBeClickable(By.xpath(".//*[@id='site-wrapper']/div[4]/div/div/div/div/div/div/div[1]/div/div/div[1]/div[2]/div/div[2]/div[1]/div/span[3]"))).click();
+			wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//div[@class='plan-overview-wrapper']/div[3]/div[1]/div/span[@class='trigger-closed']"))).click();
 		} else if (planType.equalsIgnoreCase("SNP")) {
 			wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//div[@class='snpplans_planbutton']/div[2]/div[2]/div"))).click();
 		} else {
