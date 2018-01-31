@@ -1,8 +1,8 @@
 @smokeTest
-Feature: To test plan benefits and Coverage on UMS site
+Feature: 1.01-To test plan benefits and Coverage functionality
 
 @smokeTest_BenefitsAndCoverageInd
-    Scenario Outline: Verify that drug cost table  is in place on Benefits and Coverage page for LIS Members
+    Scenario Outline: Verify multiple sections on Benefits and Coverage page for non-LIS federal members
     Given registered member with following details logins in the member portal
       #| Plan Type      | <planType>  |
       | Member Type    | <memberType>| 
@@ -27,7 +27,7 @@ Feature: To test plan benefits and Coverage on UMS site
       |  BncnonlisAARPIndividual       | 
 
   @smokeTest_BenefitsAndCoverageGrp
-    Scenario Outline: Verify that drug cost table  is in place on Benefits and Coverage page for LIS Members
+    Scenario Outline: Verify multiple sections on Benefits and Coverage page for non-LIS group member
     Given registered member with following details logins in the member portal
       | Member Type    | <memberType>| 
     And the user navigates to Rally Dashboard Page for bnc

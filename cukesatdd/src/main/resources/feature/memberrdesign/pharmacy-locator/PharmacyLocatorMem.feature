@@ -1,7 +1,7 @@
 @smokeTest
-Feature:To test Locate a Pharmacy tool in Redesign site
+Feature: 1.12-To test Locate a Pharmacy tool
 @smokeTest_PharmacyLocatorMem
-Scenario Outline:To verify all available pharmacies for default zipcode in Redesign site
+Scenario Outline: Verify all available pharmacies for default zipcode in Redesign site
 Given registered member to verify locate a pharmacy in Redesign Site
 	| Plan Type | <planType> |
   | Member Type  | <memberType> |

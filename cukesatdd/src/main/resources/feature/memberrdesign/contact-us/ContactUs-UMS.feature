@@ -1,7 +1,7 @@
 @smokeTest 
-Feature: To test Send us a question Widget and Click to call functionality in contact us redesign pages in UHCM site
+Feature: 1.03-To test contact us page
 @smokeTest_contactusInd
-  Scenario Outline: Verify Send us a question Widget section in contact us redesign page
+  Scenario Outline: Verify Click to Call and email Widget section on contact us page for Federal member
     Given registered UMS member with following attributes
       | UserName    | <userName>   |
       | Password    | <password>   |
@@ -17,7 +17,7 @@ Feature: To test Send us a question Widget and Click to call functionality in co
         | q1_aarp_feb015 |  | Password@1 | AARP      |
         
         @smokeTest_contactusGrp
-  Scenario Outline: Verify Send us a question Widget section in contact us redesign page
+  Scenario Outline: Verify Click to Call and email Widget section on contact us page for Group member
     Given registered UMS member with following attributes
       | UserName    | <userName>   |
       | Password    | <password>   |

@@ -1,7 +1,7 @@
 @smokeTest
-Feature:Header/Navigation for Member Site Redesign
+Feature: 1.07-To test Health and Wellness functionality
 @smokeTest__H&W
-Scenario Outline:As an authenticated member on the new Member site, I want to check health and wellness and its Lifestyle, Learning and Rewards tabs
+Scenario Outline:Validate that member can check health and wellness and its Lifestyle, Learning tabs
 Given I am a authenticated member on the member redesign site
 | Plan Type   | <planType>   |
 | Member Type	  | <memberType> |

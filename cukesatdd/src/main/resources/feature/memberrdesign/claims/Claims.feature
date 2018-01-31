@@ -1,7 +1,7 @@
 @smokeTest
-Feature: To validate the new changes related to claims page on the member redesigned site
+Feature: 1.02-To test claim functionality
 @smokeTest_Claims
-Scenario Outline: To validate the claims present for the Federal member on claims sumamry page for AARP site
+Scenario Outline: To validate that claims are present on claims summary page and claims details page
     Given I am an AARP member on the redesigned site
       | Plan Type      | <planType>     |
       | Test Data Type | <claimssystem> |

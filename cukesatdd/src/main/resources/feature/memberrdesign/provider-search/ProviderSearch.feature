@@ -1,5 +1,5 @@
 @smokeTest
-Feature:To test provider search (Rally) functionality
+Feature: 1.14-To test provider search (Rally) functionality
 @smokeTest_ProviderSearch
 Scenario Outline: To validate that provider search is opening up correctly
 Given I am a authenticated member on the member redesign site for Provider Search

@@ -1,7 +1,7 @@
 @smokeTest
-Feature:To test EOB on Dashboard page
+Feature: 1.05-To test EOB functionality
 @smokeTest_EOB
-Scenario Outline: Allowed Domains – Authors need ability to define messages and domains for leaving member sites (ATDD)
+Scenario Outline: Validate that member can search for eob statement
 Given I am a authenticated member on the member redesign site for EOB
 	| Plan Type      |<planType>  |
 	| Member Type    |<memberType>|

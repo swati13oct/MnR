@@ -27,10 +27,7 @@ import pages.member.bluelayer.AddNewDrugModal;
 import pages.member.bluelayer.DrugCostEstimatorPage;
 import pages.member.bluelayer.SavingsOppurtunity;
 import pages.member.ulayer.TeamHLoginUlayer;
-//import pages.member.bluelayer.AccountHomePage;
-/*import pages.memberredesign.bluelayer.AccountHomePage;
-import pages.memberredesign.bluelayer.LoginPage;
-import pages.mobile.member.blayer.BenefitsSummaryPage;*/
+
 
 public class DrugcostestimatorUhcStepDefinition {
 
@@ -903,9 +900,9 @@ System.out.println("value - "+memberAttributesRow.get(i).getCells().get(1));
 	}
 	
 	@Then("^I should see that total estimated annual drug costs in summary section matches with left rail value$")
-	public void I_should_see_that_total_estimated_annual_drug_costs_in_summary_section_matches_with_left_rail_value(DataTable memberAttributes) throws InterruptedException{
+	public void I_should_see_that_total_estimated_annual_drug_costs_in_summary_section_matches_with_left_rail_value() throws InterruptedException{
 		
-		List<DataTableRow> memberAttributesRow = memberAttributes
+/*		List<DataTableRow> memberAttributesRow = memberAttributes
 				.getGherkinRows();
 		Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
 		for (int i = 0; i < memberAttributesRow.size(); i++) {
@@ -913,13 +910,11 @@ System.out.println("value - "+memberAttributesRow.get(i).getCells().get(1));
 			memberAttributesMap.put(memberAttributesRow.get(i).getCells()
 					.get(0), memberAttributesRow.get(i).getCells().get(1));
 		}
-		//System.out.println("Map values"+memberAttributesMap);
-		String totalAnnualDrugCost = memberAttributesMap.get("totalAnnualDrugCost");
-		//WebDriver wd = (WebDriver)getLoginScenario().getBean(CommonConstants.WEBDRIVER);
+		String totalAnnualDrugCost = memberAttributesMap.get("totalAnnualDrugCost");*/
 		DrugCostEstimatorPage dce = (DrugCostEstimatorPage) getLoginScenario()
 				.getBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE);
 		
-		dce.validateTotalEstimatedAnnualDrugCosts(totalAnnualDrugCost);
+		dce.validateTotalEstimatedAnnualDrugCosts();
 		
 	}
 	

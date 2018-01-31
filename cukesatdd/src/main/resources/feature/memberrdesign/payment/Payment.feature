@@ -1,7 +1,7 @@
 @smokeTest
-Feature: To test the payment flow on AARP site 
+Feature: 1.11-To test the payment history
 @smokeTest_Payment
-Scenario Outline: Validate One Time Payment functionality
+Scenario Outline: Validate that member view Payment history table
 Given the user is on the Team-H AARP medicare site login page
 When the user logs in TeamH with a registered AMP with following details in AARP site
 	| Plan Type   | <planType>  |

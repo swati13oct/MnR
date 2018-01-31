@@ -1,5 +1,5 @@
 @smokeTest
-Feature: To test order materials in Redesign site
+Feature: 1.10-To test order materials functionality
 @smokeTest_OrderPlanMaterial
   Scenario Outline: Verify order materials confirmation page in Redesign site
     Given registered AMP member with following attributes

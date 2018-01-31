@@ -1,7 +1,7 @@
 @smokeTest
-Feature:To test sign functionality via member auth
+Feature: 1.08-To test sign functionality via member auth
 @smokeTest_CsrLogin
-Scenario Outline: To validate that member is successfully getting logged in to Rally Dashboard via CSR
+Scenario Outline: Validate that member is successfully getting logged in to Rally Dashboard via CSR
 Given I am a user of the member auth tool
     | Username | <username> |
   	| Password | <password> |

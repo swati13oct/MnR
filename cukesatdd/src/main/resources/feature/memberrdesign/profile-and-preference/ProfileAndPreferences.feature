@@ -1,7 +1,7 @@
 @smokeTest
-Feature: To test My Profile & Preferences flow in UMS site
+Feature: 1.13=To test My Profile & Preferences and Go Green flows
 @smokeTest_ProfileAndPreference
-  Scenario Outline: To verify Plan Name, Member name, Member ID and account section in UMS site
+  Scenario Outline: Verify Plan Name, Member name, Member ID and account section
     Given registered member with following details for Profile and Preferences flow
       | <planType> |
     And the user navigates to Rally Dashboard Page for profile and preference

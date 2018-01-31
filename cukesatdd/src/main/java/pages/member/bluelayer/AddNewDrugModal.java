@@ -130,11 +130,11 @@ public class AddNewDrugModal extends UhcDriver {
 	}
 	public AddDrugDetails submit() throws InterruptedException{
 		searchButton.click();
-		Thread.sleep(10000);
+		//Thread.sleep(10000);
 		validate(continueButton);
 		//waitforElement(continueButton);
 		continueButton.click();
-		Thread.sleep(10000);
+		//Thread.sleep(10000);
 		return new AddDrugDetails(driver);
 	}
 	

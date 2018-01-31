@@ -1,7 +1,7 @@
 @smokeTest
-Feature: To test registration flow in redesign portal
+Feature: 1.15-To test registration flow
 @smokeTest_registrationRedesign
-  Scenario Outline: To verify member with no additional plan is navigated to Create Account after clicking next button on Plan Information
+  Scenario Outline: Verify member with no additional plan is successfully registered and navigate to Home page
     Given the member is on registration page of redesign portal
       | CREATE_ACCOUNT_USER_NAME        | <userName>        |
       | CREATE_ACCOUNT_PASSWORD         | <password>        |

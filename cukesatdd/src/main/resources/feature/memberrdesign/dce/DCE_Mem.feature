@@ -1,7 +1,7 @@
 @smokeTest
-Feature:Drug Cost Estimator
+Feature: 1.04-To test Drug Cost Estimator functionality
 @smokeTest_DceMem
-Scenario Outline: To Verify MR portal members using DCE on a desktop device, I want to be able to switch from branded to generic drug, given that a pharmacy is selected and it suggests the user with an appropriate save money message and cost savings are also updated
+Scenario Outline: To Verify member is able to add drug, change pharmacy and view costs
 Given I am a registered member using the new M&R member portal on a desktop computer
 | Member Type	  | <memberType> |
 When the above plantype user logs in member redesign for DCE
@@ -17,11 +17,12 @@ Then I should see preferred mail service radio button under pharmacy type
 And I select first pharmacy from standard network pharmacy type
 And I navigate to step3 page
 Then I should see that total estimated annual drug costs in summary section matches with left rail value
-| totalAnnualDrugCost | <totalAnnualDrugCost> |
 
 Examples:
-| memberType| drug |USOTZipcode|totalAnnualDrugCost|
-| UhcMapdInd |lipitor|90002|$4,050.24|
+| memberType| drug |USOTZipcode|
+| UhcMapdInd |lipitor|90002|
+| AARPMapdInd |lipitor|90002|
+
  
  
  

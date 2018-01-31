@@ -1,7 +1,7 @@
 @smokeTest
-Feature:Header/Navigation for Member Site Redesign
+Feature: 1.06-To test Header/Navigation functionality
 @smokeTest_Header
-Scenario Outline:As an authenticated member on the new Member site, I want to check the L1 and L2 tabs and its navigation.
+Scenario Outline:Validate that member can check the L1 and L2 tabs and its navigation.
 Given I am a authenticated member on the member redesign site for Header
 | Member Type	  | <memberType> |
 When the above plantype user logs in member redesign for Header
