@@ -1,4 +1,6 @@
-package acceptancetests.benefitsandcoveragejenkins.bluelayer;
+package acceptancetests.memberredesign;
+
+
 
 import java.io.File;
 import java.util.ArrayList;
@@ -607,7 +609,7 @@ public class BenefitsAndCoverageUmsStepDefinition {
 
 	// }
 
-	@Then("^the user validates Needhelp header and disclaimer link")
+	@Then("^the user validates Needhelp header")
 	public void validateneedhelpheader() {
 		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario()
 				.getBean(PageConstants.BENEFITS_AND_COVERAGE_PAGE);
@@ -622,7 +624,7 @@ public class BenefitsAndCoverageUmsStepDefinition {
 		benefitsCoveragePage.contactUslink();
 	}
 
-	@Then("^the user clicks on Disclaimers link$")
+	@Then("^the user clicks on More Information link$")
 	public void the_user_clicks_on_Disclaimers_link() {
 		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario()
 				.getBean(PageConstants.BENEFITS_AND_COVERAGE_PAGE);
@@ -885,7 +887,7 @@ public class BenefitsAndCoverageUmsStepDefinition {
 		benefitsCoveragePage.validate_dropdownnotdisplay();
 	}
 
-	@And("^the user validates the Learn More section link for stage and tier")
+	@And("^the user validates the Learn More section for stage and tier")
 	public void user_validate_links() {
 		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario()
 				.getBean(PageConstants.BENEFITS_AND_COVERAGE_PAGE);
@@ -1010,7 +1012,7 @@ public class BenefitsAndCoverageUmsStepDefinition {
 		benefitsCoveragePage.learnmorebutton();
 	}
 
-	@Then("^the user validates Needhelp header")
+	@Then("^the user validates the Needhelp header")
 	public void validateneedhelpheaderFED() {
 		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario()
 				.getBean(PageConstants.BENEFITS_AND_COVERAGE_PAGE);

@@ -1,4 +1,5 @@
-package acceptancetests.ProfileandPreferencesredesign.bluelayer;
+
+package acceptancetests.memberredesign;
 
 import gherkin.formatter.model.DataTableRow;
 
@@ -16,7 +17,7 @@ import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.springframework.beans.factory.annotation.Autowired;
 import pages.member.bluelayer.AccountHomePage;
-
+import pages.member.bluelayer.DashboardPage;
 import pages.member.bluelayer.LoginPage2;
 import pages.member.bluelayer.ProfilePreferencesPage;
 import acceptancetests.atdd.data.CommonConstants;
@@ -25,12 +26,12 @@ import acceptancetests.atdd.util.CommonUtility;
 import acceptancetests.login.data.LoginCommonConstants;
 import acceptancetests.profandpref.data.ProfnPrefCommonConstants;
 import atdd.framework.MRScenario;
+import cucumber.*;
 import cucumber.api.DataTable;
-import cucumber.api.java.After;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
-import cucumber.api.java.en.When;
+
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.WebElement;
 
@@ -80,12 +81,18 @@ public class ProfileandPreferencesUMSStepDefinition {
 		// MRScenario.keyEvent(wd);
 
 		LoginPage2 loginPage = new LoginPage2(wd);
-		AccountHomePage accountHomePage = (AccountHomePage) loginPage.loginWith(userName, pwd);
+		DashboardPage dashboardPage = (DashboardPage) loginPage.loginWith(userName, pwd);
 
-		if (accountHomePage != null) {
+		if (dashboardPage != null) {
 			getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
-			getLoginScenario().saveBean(PageConstants.ACCOUNT_HOME_PAGE, accountHomePage);
+			getLoginScenario().saveBean(PageConstants.dashboardPage, dashboardPage);
+				
 		}
+		else
+		{
+		System.out.println("NULL here");
+		}
+		
 
 		// JSONObject accountHomeActualJson = null;
 
@@ -114,36 +121,37 @@ public class ProfileandPreferencesUMSStepDefinition {
 
 	@Then("^the user navigates to Profile and Preferences page")
 	public void user_navigate_toProfileandPreferencespage() {
-/*		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstants.ACCOUNT_HOME_PAGE);
-		ProfilePreferencesPage ProfilePreferencesPage = accountHomePage.navigateDirectToProfilePage();
 
-		if (ProfilePreferencesPage!= null) {
+		DashboardPage dashboardPage = (DashboardPage) getLoginScenario().getBean(PageConstants.dashboardPage);
+		ProfilePreferencesPage ProfilePreferencesPage = dashboardPage.navigateDirectToProfilePage();
+
+		if (ProfilePreferencesPage != null) {
 			getLoginScenario().saveBean(PageConstants.PROFILE_AND_PREFERENCES_PAGE, ProfilePreferencesPage);
-		}
-		if (ProfilePreferencesPage == null) {
-			System.out.println(" Variable is NULL!");
 
 		}
-*/	}
-	
-	
-	@Then("^the user navigates to Profile page")
+
+		else
+
+		{
+			System.out.println("NULL PNP ");
+		}
+
+	}
+
+	/*@Then("^the user navigates to Profile page")
 	public void user_navigate_toProfilepage() {
-/*		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstants.ACCOUNT_HOME_PAGE);
+		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstants.ACCOUNT_HOME_PAGE);
 		ProfilePreferencesPage ProfilePreferencesPage = accountHomePage.navigateDirectToProfilePage();
 
-		if (ProfilePreferencesPage!= null) {
+		if (ProfilePreferencesPage != null) {
 			getLoginScenario().saveBean(PageConstants.PROFILE_AND_PREFERENCES_PAGE, ProfilePreferencesPage);
 		}
 		if (ProfilePreferencesPage == null) {
 			System.out.println(" Variable is NULL!");
 
 		}
-*/	}
-	
-	
-	
-	
+	}*/
+
 	@And("^the user validates the Plan Name, Member name, Member ID and account section in UMS site")
 	public void user_Validates_FED_PROFILE_MEMBERNAME_ID_AccountProfile() {
 		ProfilePreferencesPage ProfilePreferencesPage = (ProfilePreferencesPage) getLoginScenario()
@@ -199,8 +207,7 @@ public class ProfileandPreferencesUMSStepDefinition {
 		ProfilePreferencesPage.validateCancelButton();
 
 	}
-	
-	
+
 	@Then("^the user enters invalid password in new password field and clicks save button and the user should see expected error message - Password does not meet requirements")
 	public void UserValidatesinvalidpassword() {
 		ProfilePreferencesPage ProfilePreferencesPage = (ProfilePreferencesPage) getLoginScenario()
@@ -209,7 +216,7 @@ public class ProfileandPreferencesUMSStepDefinition {
 		ProfilePreferencesPage.invalidpasswordvalidation();
 
 	}
-	
+
 	@Then("^the user enters different password in confirm password field and clicks save button and the user should see expected error message - Please enter the same value again")
 	public void UserValidatesinvalidpassword2() {
 		ProfilePreferencesPage ProfilePreferencesPage = (ProfilePreferencesPage) getLoginScenario()
@@ -218,7 +225,6 @@ public class ProfileandPreferencesUMSStepDefinition {
 		ProfilePreferencesPage.invalidpasswordvalidation2();
 
 	}
-	
 
 	@Then("^the user validates see more ways to contact us section")
 	public void Uservalidatesneedhelpsection() {
@@ -416,8 +422,7 @@ public class ProfileandPreferencesUMSStepDefinition {
 		ProfilePreferencesPage.validatePhoneCancel();
 
 	}
-	
-	
+
 	@Then("^the user validates the temporary address section")
 	public void tempaddress() {
 		ProfilePreferencesPage ProfilePreferencesPage = (pages.member.bluelayer.ProfilePreferencesPage) getLoginScenario()
@@ -462,8 +467,6 @@ public class ProfileandPreferencesUMSStepDefinition {
 		ProfilePreferencesPage.validatetempaddressCancel();
 
 	}
-	
-	
 
 	@Then("^the user validates the presence of Go Paperless button")
 	public void UserValidateGoPaperlessbutton() {
@@ -473,6 +476,7 @@ public class ProfileandPreferencesUMSStepDefinition {
 		ProfilePreferencesPage.validateGoPaperlessbutton();
 
 	}
+
 	@Then("^the user validates the presence of Plan Name")
 	public void UserValidatePlanName() {
 		ProfilePreferencesPage ProfilePreferencesPage = (pages.member.bluelayer.ProfilePreferencesPage) getLoginScenario()
@@ -481,6 +485,7 @@ public class ProfileandPreferencesUMSStepDefinition {
 		ProfilePreferencesPage.validatePlanName();
 
 	}
+
 	@Then("^the user validates the presence of Communication preferences header")
 	public void UserValidatescommunicationpreferencesheader() {
 		ProfilePreferencesPage ProfilePreferencesPage = (pages.member.bluelayer.ProfilePreferencesPage) getLoginScenario()
@@ -489,18 +494,16 @@ public class ProfileandPreferencesUMSStepDefinition {
 		ProfilePreferencesPage.validatecommunicationpreferencesheader();
 
 	}
+
 	@Then("^the user validates the presence of Back to Profile and Preferences links")
 	public void UserValidatesBacktoPNPlink() {
 		ProfilePreferencesPage ProfilePreferencesPage = (pages.member.bluelayer.ProfilePreferencesPage) getLoginScenario()
 				.getBean(PageConstants.PROFILE_AND_PREFERENCES_PAGE);
 
-		
-			ProfilePreferencesPage.validateBacktoPNPlink();
-		
+		ProfilePreferencesPage.validateBacktoPNPlink();
 
 	}
 
-	
 	@Then("^the user validates the Note section")
 	public void UserValidatesNoteSection() {
 		ProfilePreferencesPage ProfilePreferencesPage = (pages.member.bluelayer.ProfilePreferencesPage) getLoginScenario()
@@ -509,7 +512,7 @@ public class ProfileandPreferencesUMSStepDefinition {
 		ProfilePreferencesPage.validateNoteSection();
 
 	}
-	
+
 	@Then("^the user validates the I have read checkbox and check it")
 	public void UserValidatesCheckbox() {
 		ProfilePreferencesPage ProfilePreferencesPage = (pages.member.bluelayer.ProfilePreferencesPage) getLoginScenario()
@@ -518,7 +521,7 @@ public class ProfileandPreferencesUMSStepDefinition {
 		ProfilePreferencesPage.validateCheckbox();
 
 	}
-	
+
 	@Then("^the user validates the Save Preferences Button")
 	public void UserValidatesSavePreferences() {
 		ProfilePreferencesPage ProfilePreferencesPage = (pages.member.bluelayer.ProfilePreferencesPage) getLoginScenario()
@@ -527,8 +530,7 @@ public class ProfileandPreferencesUMSStepDefinition {
 		ProfilePreferencesPage.validateSavePreferences();
 
 	}
-	
-	
+
 	@Then("^the user validates the Go Green Header")
 	public void UserValidatesGoGreenHeader() {
 		ProfilePreferencesPage ProfilePreferencesPage = (pages.member.bluelayer.ProfilePreferencesPage) getLoginScenario()
@@ -537,8 +539,10 @@ public class ProfileandPreferencesUMSStepDefinition {
 		ProfilePreferencesPage.validateGoGreenHeader();
 
 	}
-}
-	
-	    
 
+
+    }
+
+	
+	
 
