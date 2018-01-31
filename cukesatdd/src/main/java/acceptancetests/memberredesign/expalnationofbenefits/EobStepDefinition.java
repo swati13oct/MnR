@@ -45,26 +45,58 @@ public class EobStepDefinition {
 	*/
 	
 	@Given("^registered AMP with for EOB flow$")
-	public void registered_AMP_with_attribute_eob_aarp(DataTable givenAttributes){
-			List<DataTableRow> memberAttributesRow = givenAttributes
-		.getGherkinRows();
-		Map<String, String> memberAttributesMap = new HashMap<String, String>();
-		for (int i = 0; i < memberAttributesRow.size(); i++) {
+	public void registered_AMP_with_attribute_eob_aarp(DataTable memberAttributes){
+		//get the required parameters from the feature files
+				WebDriver wd = getLoginScenario().getWebDriver();
+				getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
+				List<DataTableRow> memberAttributesRow = memberAttributes
+						.getGherkinRows();
+				Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
+				for (int i = 0; i < memberAttributesRow.size(); i++) {
 
-		memberAttributesMap.put(memberAttributesRow.get(i).getCells()
-			.get(0), memberAttributesRow.get(i).getCells().get(1));
-		}
+					memberAttributesMap.put(memberAttributesRow.get(i).getCells()
+							.get(0), memberAttributesRow.get(i).getCells().get(1));
+				}
 
-		String userName = memberAttributesMap.get("Member Type");	
-		WebDriver wd = getLoginScenario().getWebDriver();
-        getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
-        
-        EOBPage eobPage = new EOBPage(wd);
-        eobPage.loginToDashboardPage(userName);
-        if (eobPage != null) {
-        	getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
-        	getLoginScenario().saveBean(PageConstants.EOB_Page, eobPage);
-        }
+				String category = memberAttributesMap.get("Member Type");
+
+				Set<String> memberAttributesKeySet = memberAttributesMap.keySet();
+				List<String> desiredAttributes = new ArrayList<String>();
+				for (Iterator<String> iterator = memberAttributesKeySet.iterator(); iterator
+						.hasNext();) {
+					{
+						String key = iterator.next();
+						desiredAttributes.add(memberAttributesMap.get(key));
+					}
+
+				}
+				System.out.println("desiredAttributes.." + desiredAttributes);
+
+				Map<String, String> loginCreds = loginScenario
+						.getUMSMemberWithDesiredAttributes(desiredAttributes);
+
+				String userName = null;
+				String pwd = null;
+				if (loginCreds == null) {
+					// no match found
+					System.out.println("Member Type data could not be setup !!!");
+					Assert.fail("unable to find a " + desiredAttributes + " member");
+				} else {
+					userName = loginCreds.get("user");
+					pwd = loginCreds.get("pwd");
+					System.out.println("User is..." + userName);
+					System.out.println("Password is..." + pwd);
+					getLoginScenario()
+					.saveBean(LoginCommonConstants.USERNAME, userName);
+					getLoginScenario().saveBean(LoginCommonConstants.PASSWORD, pwd);
+					getLoginScenario().saveBean(LoginCommonConstants.CATOGERY, category);
+				}
+				EOBPage eobPage = new EOBPage(wd);
+		        eobPage.loginToDashboardPage(userName);
+		        if (eobPage != null) {
+		        	getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
+		        	getLoginScenario().saveBean(PageConstants.EOB_Page, eobPage);
+		        }
 
 	}
 	
