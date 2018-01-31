@@ -1,5 +1,5 @@
 
-       package acceptancetests.dashboard.formsandresources;
+       package acceptancetests.memberredesign.dashboard.formsandresources;
 
        import gherkin.formatter.model.DataTableRow;
 
