@@ -119,9 +119,7 @@ public class NewLoginPage extends UhcDriver {
 	
 	
     /**
-     * Navigate to registration page
-     *
-     * @return the registration page
+     * @toDo : Navigate to registration page
      */
     public RegistrationInformationPage navigateToRegistration() {
     	registerButton.click();

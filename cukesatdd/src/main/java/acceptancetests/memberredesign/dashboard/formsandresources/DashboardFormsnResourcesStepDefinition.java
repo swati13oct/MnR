@@ -26,10 +26,10 @@ import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 
-       /**
-       * @author 
-        *
-       */
+/**
+ * @Functionality : Forms and resources page navigation from dashboard and sections validation
+ */
+
 
        public class DashboardFormsnResourcesStepDefinition {
 
@@ -40,7 +40,9 @@ import cucumber.api.java.en.Then;
               public MRScenario getLoginScenario() {
                      return loginScenario;
               }
-              
+              /**
+               * @toDo : user logs in
+               */
               @Given("^details of user to sign in on member redesign site to see forms and resources page$")
                   public void details_of_user_for_member_redesign_site(DataTable givenAttributes) throws InterruptedException {
                      // get test variables
@@ -70,7 +72,9 @@ import cucumber.api.java.en.Then;
                   }
               
                               
-                             
+              /**
+               * @toDo : navigation to the forms and resources page from dashboard
+               */
                               @And("^click on the forms and resource link and navigate to forms and resource page$")
                               public void clickOnFormAndResourcesLink() throws InterruptedException {
                                    RallyDashboard rallydashboardpage = (RallyDashboard) loginScenario.getBean(PageConstants.RALLY_DASHBOARDPAGE);
@@ -79,7 +83,9 @@ import cucumber.api.java.en.Then;
                                   getLoginScenario().saveBean(PageConstants.DASHBOARD_FORMS_AND_RESOURCES_PAGE, formsAndResourcesPage);
                                               
                               }
-                              
+                              /**
+                               * @toDo : verifies the EOB section
+                               */
                               @SuppressWarnings("deprecation")
                               @And("^validate EOB section$")
                               public void validateEOBSection(DataTable givenAttributes) {
@@ -104,7 +110,9 @@ import cucumber.api.java.en.Then;
                                               Assert.assertEquals(eobDrugLink, isEOBDrugButtonVisible);
                                               
                               }
-                              
+                              /**
+                               * @toDo : verifies my document section
+                               */
                               @SuppressWarnings("deprecation")
                               @And("^validate my document section$")
                               public void validateMyDocumentSection(DataTable givenAttributes) {
@@ -120,7 +128,9 @@ import cucumber.api.java.en.Then;
                                               String isMyDocumentVisible = isButtonVisible(formsAndResourcesPage.getMyDocumentSection()) ?"YES": "NO";
                                               Assert.assertEquals(myDocumentSection, isMyDocumentVisible);
                               }
-
+                              /**
+                               * @toDo : verifies renew magazine section
+                               */
                               @SuppressWarnings("deprecation")
                               @And("^validate renew magazine section$")
                               public void validateRenewMagazineSection(DataTable givenAttributes) {
@@ -136,7 +146,9 @@ import cucumber.api.java.en.Then;
                                               Assert.assertEquals(renewMagazine, isRenewMagazineVisible);
                                               
                               }
-                              
+                              /**
+                               * @toDo : verifies the plan material section
+                               */
                               @Then("^validate plan materials section$")
                               public void validatePlanMaterialSection() {
                                               FormsAndResourcesPage formsAndResourcesPage = (FormsAndResourcesPage) getLoginScenario().getBean(PageConstants.DASHBOARD_FORMS_AND_RESOURCES_PAGE);
@@ -144,7 +156,9 @@ import cucumber.api.java.en.Then;
                                               
                                               
                               }
-                              
+                              /**
+                               * @toDo : clicks order plan materials and view temporary id card links
+                               */
                               @And("^click on the order plan materials and view temporary id card link$")
                               public void clicklinksonplanmaterials() throws InterruptedException  {
                                               FormsAndResourcesPage formsAndResourcesPage = (FormsAndResourcesPage) getLoginScenario().getBean(PageConstants.DASHBOARD_FORMS_AND_RESOURCES_PAGE);
@@ -157,14 +171,18 @@ import cucumber.api.java.en.Then;
                                               formsAndResourcesPage.validatenclickIDCard();
                                               
                               }
-                              
+                              /**
+                               * @toDo : verifies default language displayed in the drop down
+                               */
                               @Then("^validate that english is default language in dropdown$")
                               public void validatelanguage() {
                                               FormsAndResourcesPage formsAndResourcesPage = (FormsAndResourcesPage) getLoginScenario().getBean(PageConstants.DASHBOARD_FORMS_AND_RESOURCES_PAGE);
                                               
                                               formsAndResourcesPage.validateEngDefault();
                               }
-                              
+                              /**
+                               * @toDo : verifies the anoc section
+                               */
                               @Then("^validate the anoc section$")
                               public void validateAnocSection(DataTable givenAttributes) {
                                               FormsAndResourcesPage formsAndResourcesPage = (FormsAndResourcesPage) getLoginScenario().getBean(PageConstants.DASHBOARD_FORMS_AND_RESOURCES_PAGE);
@@ -179,14 +197,18 @@ import cucumber.api.java.en.Then;
                                               Assert.assertEquals(anocsection, isANOCSECTIONVisible);
                                               
                               }
-                              
+                              /**
+                               * @toDo : user switches to a different language than the default one
+                               */
                              @And("^change the language in the language dropdown$")
                               public void changelanguage() throws InterruptedException {
                                               FormsAndResourcesPage formsAndResourcesPage = (FormsAndResourcesPage) getLoginScenario().getBean(PageConstants.DASHBOARD_FORMS_AND_RESOURCES_PAGE);
                                               formsAndResourcesPage.changelanguage();
                                              
                               }
-                
+                             /**
+                              * @toDo : verifies the annual directories section
+                              */
                               @Then("^validate the annual directories section$")
                               public void validatePlanMaterialSection(DataTable givenAttributes) {
                                               FormsAndResourcesPage formsAndResourcesPage = (FormsAndResourcesPage) getLoginScenario().getBean(PageConstants.DASHBOARD_FORMS_AND_RESOURCES_PAGE);
@@ -214,7 +236,9 @@ import cucumber.api.java.en.Then;
                                               Assert.assertEquals(AnnualDirectoriesSection, isannualdirectoryVisible);
                                               
                               }
-                              
+                              /**
+                               * @toDo : verifies the forms and resources section
+                               */
                               @And("^validate that the forms and resources section is displayed$")
                               public void validateFNRSection(DataTable givenAttributes) {
                                               FormsAndResourcesPage formsAndResourcesPage = (FormsAndResourcesPage) getLoginScenario().getBean(PageConstants.DASHBOARD_FORMS_AND_RESOURCES_PAGE);

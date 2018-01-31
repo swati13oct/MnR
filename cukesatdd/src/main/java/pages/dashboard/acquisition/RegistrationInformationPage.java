@@ -389,21 +389,21 @@ public class RegistrationInformationPage extends UhcDriver {
 	 */
 
 	/**
-	 * @return the Personal Info text
+	 *@toDo : the Personal Info text
 	 */
 	public WebElement getStepOneText() {
 		return personalInfoText;
 	}
 
 	/**
-	 * @return the Plan Info text
+	 *@toDo : the Plan Info text
 	 */
 	public WebElement getStepTwoText() {
 		return planInfoText;
 	}
 
 	/**
-	 * @return the Create Account Text
+	 *@toDo : the Create Account Text
 	 */
 	public WebElement getStepThreeText() {
 		return createAccountText;
@@ -414,39 +414,42 @@ public class RegistrationInformationPage extends UhcDriver {
 	 */
 
 	/**
-	 * Enter member ID.
+	 *@toDo : Enter member ID.
 	 */
 	public void enterMemberID(String memberID) {
 		sendkeys(memberid, memberID);
 	}
 
 	/**
-	 * @return the member ID
+	 *@toDo : member ID
 	 */
 	public WebElement getMemberID() {
 		return memberid;
 	}
      
 	/**
-	 * Enter month.
+	 *@toDo : Enter month.
 	 */
 	public void enterMonth(String month) {
 		sendkeys(monthToEnterText, month);
 	}
 	/**
-	 * @return the month to enter
+	 *@toDo : the month to enter
 	 */
 	public WebElement getEnterMonth() {
 		return monthToEnter;
 	}
   
 	/**
-	 * @return the month to enter
+	 *@toDo : the month to enter
 	 */
 /*	public WebElement getEnterMonthText() {
 		return monthToEnterText;
 	}*/
 	
+	/**
+	 *@toDo : select month
+	 */
 	public void pressEnterMonth()
 	{
 		monthToEnterText.sendKeys(Keys.ENTER);
@@ -456,16 +459,22 @@ public class RegistrationInformationPage extends UhcDriver {
 	 /* Enter day.*/
 	
 	/**
-	 * @return the day to enter
+	 *@toDo : the day to enter
 	 */
 	public WebElement getEnterDay() {
 		return dayToEnter;
 	}
 	 
+	/**
+	 *@toDo : Enter day
+	 */
 	public void enterDay(String day) {
 		sendkeys(dateToEnterText, day);
 	} 
-	 
+	
+	/**
+	 *@toDo : select day
+	 */
 	public void pressEnterDay()
 	{
 		dateToEnterText.sendKeys(Keys.ENTER);
@@ -477,100 +486,106 @@ public class RegistrationInformationPage extends UhcDriver {
 	 */
 	
 	/**
-	 * @return the month to enter
+	 *@toDo : the year to enter
 	 */
 	public WebElement getEnterYear() {
 		return yearToEnter;
 	}
 	
+	/**
+	 *@toDo : Enter year
+	 */
 	public void enterYear(String year) {
 		sendkeys(yearToEnterText, year);
 	} 
 
+	/**
+	 *@toDo : select year
+	 */
 	public void pressEnterYear()
 	{
 		yearToEnterText.sendKeys(Keys.ENTER);
 		System.out.println(driver.getCurrentUrl());
 	}
 	/**
-	 * Click the continue button
+	 *@toDo : Click the continue button
 	 */
 	public void clickNext() {
 		nextButton.click();
 	}
 
 	/**
-	 * Click the previous button
+	 *@toDo : Click the previous button
 	 */
 	public void clickPreviousButtuon() {
 		previousButton.click();
 	}
 
 	/**
-	 * Click the cancel button
+	 *@toDo : Click the cancel button
 	 */
 	public void clickCancel() {
 		cancelButton.click();
 	}
 
 	/**
-	 * @return the medicare id to enter
+	 *@toDo : the medicare id to enter
 	 */
 	public WebElement getMedicareId() {
 		return medicareID;
 	}
 
 	/**
-	 * @return the zipcode field to enter
+	 *@toDo : the zipcode field to enter
 	 */
 	public WebElement getZipcode() {
 		return zipCode;
 	}
 
 	/**
-	 * @return the first name field to enter
+	 *@toDo : the first name field to enter
 	 */
 	public WebElement getFirstName() {
 		return firstName;
 	}
 
 	/**
-	 * @return the last name field to enter
+	 *@toDo : the last name field to enter
 	 */
 	public WebElement getLastName() {
 		return lastName;
 	}
 
 	/**
-	 * @return the get Personal info header for additional info is displayed
+	 *@toDo : the get Personal info header for additional info is displayed
 	 */
 	public WebElement getAdditionalInfoHeader() {
 		return personalInfoHeader;
 	}
 
 	/**
-	 * Enter Zip Code additional Information.
+	 *@toDo : Enter Zip Code additional Information.
 	 */
 	public void enterZip(String Zip) {
 		sendkeys(zipCode, Zip);
 	}
 
 	/**
-	 * Enter first name additional Information.
+	 *@toDo : Enter first name additional Information.
 	 */
 	public void enterFirstName(String fName) {
 		sendkeys(firstName, fName);
 	}
 
 	/**
-	 * Enter last name additional Information.
+	 *@toDo : Enter last name additional Information.
 	 */
 	public void enterLastName(String lNmae) {
 		sendkeys(lastName, lNmae);
 	}
 
 	/**
-	 * Enter medicareID.
+	 * @toDo : Enter medicareID.
 	 */
 	public void enterMedicareID(String medicare_id) {
 		sendkeys(medicareID, medicare_id);
@@ -581,7 +596,7 @@ public class RegistrationInformationPage extends UhcDriver {
 	 */
 	
 	/**
-	 * @return the member id blank error message
+	 *@toDo : the member id blank error message
 	 */
 	public WebElement getMemberIdBlankError() {
 		return memberIdBlank;
@@ -589,7 +604,7 @@ public class RegistrationInformationPage extends UhcDriver {
 	
 	
 	/**
-	 * @return the date of birth blank error message
+	 *@toDo : the date of birth blank error message
 	 */
 	public WebElement getDobBlankError() {
 		return dobBlank;
@@ -597,14 +612,14 @@ public class RegistrationInformationPage extends UhcDriver {
 	
 	
 	/**
-	 * @return the age is less than 13 years error message
+	 *@toDo : the age is less than 13 years error message
 	 */
 	public WebElement getAgeLessError() {
 		return ageLessError;
 	}
 	
 	/**
-	 * @return the SNP member not allowed to register error message
+	 *@toDo : the SNP member not allowed to register error message
 	 */
 	public WebElement getSnpMemberError() {
 		return snpError;
@@ -615,28 +630,28 @@ public class RegistrationInformationPage extends UhcDriver {
 	 */
 
 	/**
-	 * @return the member not found error message
+	 *@toDo : the member not found error message
 	 */
 	public WebElement getExistingMemberError() {
 		return existingMember;
 	}
 
 	/**
-	 * @return the inactive or terminated member error message
+	 *@toDo : the inactive or terminated member error message
 	 */
 	public WebElement getInactiveTerminatedError() {
 		return inactiveTerminatedMember;
 	}
 
 	/**
-	 * @return the inactive or terminated member error message
+	 *@toDo : the inactive or terminated member error message
 	 */
 	public WebElement getFutureEffectiveError() {
 		return futureEffectivePlanMember;
 	}
 
 	/**
-	 * @return the member not found error message
+	 *@toDo : the member not found error message
 	 */
 	public WebElement getmemberNotFoundError() {
 		return memberNotFound;
@@ -647,14 +662,14 @@ public class RegistrationInformationPage extends UhcDriver {
 	 */
 
 	/**
-	 * Click the existing Start Over link
+	 * @toDo : Click the existing Start Over link
 	 */
 	public void clickExistingStartOver() {
 		existingStartOverLink.click();
 	}
 
 	/**
-	 * Click the future Start Over link
+	 * @toDo : Click the future Start Over link
 	 * @throws InterruptedException 
 	 */
 	public void clickFutureStartOver()  {
@@ -663,28 +678,28 @@ public class RegistrationInformationPage extends UhcDriver {
 	}
 
 	/**
-	 * Click the inactive Start Over link
+	 * @toDo : Click the inactive Start Over link
 	 */
 	public void clickInactiveStartOver() {
 		inactiveStartOverLink.click();
 	}
 
 	/**
-	 * Click the not found Start Over link
+	 * @toDo : Click the not found Start Over link
 	 */
 	public void clickNotFoundStartOver() {
 		notFoundStartOverLink.click();
 	}
 
 	/**
-	 * Click the username and password link
+	 * @toDo : Click the username and password link
 	 */
 	public void clickUserNameAndPasswordLink() {
 		usernameAndPasswordHelpLink.click();
 	}
 
 	/**
-	 * Click the Sign in with existing link
+	 * @toDo : Click the Sign in with existing link
 	 */
 	public void clickSignInWithExistingLink() {
 		signInWithYourExistingCredentialsLink.click();
@@ -695,43 +710,42 @@ public class RegistrationInformationPage extends UhcDriver {
 	 */
 
 	/**
-	 * @return the plan name on plan info page
+	 *@toDo : the plan name on plan info page
 	 */
-
 	public WebElement getPlanName() {
 		return planName;
 	}
 
 	/**
-	 * @return the member id on plan info page
+	 *@toDo : the member id on plan info page
 	 */
 	public WebElement getMemberNumber() {
 		return mNumber;
 	}
 
 	/**
-	 * @return the Member name on plan info page
+	 *@toDo : the Member name on plan info page
 	 */
 	public WebElement getMemberName() {
 		return mName;
 	}
 
 	/**
-	 * @return the DOB on plan info page
+	 *@toDo : the DOB on plan info page
 	 */
 	public WebElement getPMemberDob() {
 		return mDOB;
 	}
 
 	/**
-	 * @return the previous button on plan info page
+	 *@toDo : the previous button on plan info page
 	 */
 	public WebElement getPreviousButton() {
 		return previousButton;
 	}
 
 	/**
-	 * @return the next button on plan info page
+	 *@toDo : the next button on plan info page
 	 */
 	public WebElement getNextButton() {
 		return nextButton;
@@ -751,7 +765,7 @@ public class RegistrationInformationPage extends UhcDriver {
 	}
 
 	/**
-	 * @return the additional plan information header plan info page
+	 *@toDo : the additional plan information header plan info page
 	 */
 	public WebElement getAdditionalPlanInfoHeader() {
 		return additionalInfoHeader;
@@ -769,7 +783,9 @@ public class RegistrationInformationPage extends UhcDriver {
 
 		}
 	}
-
+	/**
+	 *@toDo : pffs error message
+	 */
 	public WebElement getpffsError() {
 		return pffsErrorMessage;
 
@@ -792,21 +808,21 @@ public class RegistrationInformationPage extends UhcDriver {
 	}
 
 	/**
-	 * @return the Add Plan header
+	 *@toDo : the Add Plan header
 	 */
 	public WebElement getPlanPopupHeader() {
 		return addPlanPopUpHeader;
 	}
 
 	/**
-	 * @return the Confirm on Add Plan Popup
+	 *@toDo : the Confirm on Add Plan Popup
 	 */
 	public WebElement getConfirmonPopup() {
 		return addPlanConfirmButton;
 	}
 
 	/**
-	 * @return the Cancel link on Add Plan Popup
+	 *@toDo : the Cancel link on Add Plan Popup
 	 */
 	public WebElement getCancelLinkonPopup() {
 		return cancelLinkPopup;
@@ -835,42 +851,42 @@ public class RegistrationInformationPage extends UhcDriver {
 	}
 
 	/**
-	 * @return the invalid mem id error message on Adding a Plan
+	 *@toDo : the invalid mem id error message on Adding a Plan
 	 */
 	public WebElement getinvalidmemidError() {
 		return invalidMemberError;
 	}
 
 	/**
-	 * return the checkbox status
+	 *@toDo : return the checkbox status
 	 */
 	public WebElement getcheckbox1() {
 		return addtoaccount2;
 	}
 
 	/**
-	 * return the another checkbox status
+	 *@toDo : return the another checkbox status
 	 */
 	public WebElement getcheckbox2() {
 		return addtoaccount;
 	}
 
-	/*
-	 * @return the same mem plan error message on Adding a Plan
+	/**
+	 *@toDo : the same mem plan error message on Adding a Plan
 	 */
 	public WebElement getsameMemIdError() {
 		return samePlanError;
 	}
 
 	/**
-	 * @return the future effective plan error message on Adding a Plan
+	 *@toDo : the future effective plan error message on Adding a Plan
 	 */
 	public WebElement getFuturePlanError() {
 		return futureEffectiveError;
 	}
 
 	/**
-	 * @return the plan being terminated error message on Adding a Plan
+	 *@toDo : the plan being terminated error message on Adding a Plan
 	 */
 	public WebElement getplanterminatedError() {
 		return terminatedErrorMessage;
@@ -885,57 +901,92 @@ public class RegistrationInformationPage extends UhcDriver {
 		sendkeys(createAccountUserName, userName);
 	}
 	
+	/**
+	 *@toDo : password to enter on step 3 of registration
+	 */
 	public void enterPasswordToCreateAccount(String password) {
 		sendkeys(createAccountPassword, password);
 	}
 	
+	/**
+	 *@toDo : confirm password to enter on step 3 of registration
+	 */
 	public void enterConfirmPasswordToCreateAccount(String confirmPassword) {
 		sendkeys(createAccountConfirmPassword, confirmPassword);
 	}
 	
+	/**
+	 *@toDo : email to enter on step 3 of registration
+	 */
 	public void enterEmailToCreateAccount(String email) {
 		sendkeys(createAccountEmail, email);
 	}
 	
+	/**
+	 *@toDo : confirm email to enter on step 3 of registration
+	 */
 	public void enterConfirmEmailToCreateAccount(String confirmEmail) {
 		sendkeys(createAccountConfirmEmail, confirmEmail);
 	}
 	
+	/**
+	 *@toDo : the create account on confirm registration page
+	 */
 	public WebElement getAccountConfirmation() {
 		return createAccountConfirmRegistration;
 	}
 	
-	/*create account error messages functions*/
+	/**
+	 *@toDo : the blank user name error
+	 */
 	public WebElement getblankusernameError()
 	{	
 	return blankusernamemessage;  
 	}
+	
+	/**
+	 *@toDo : the incorrect user name error
+	 */
 	public WebElement getincorrectusernameError()
 	{
 	return incorrectusernamemessage;	
 	}
+	
+	/**
+	 *@toDo : the blank password error
+	 */
 	public WebElement getblankpasswordError()
 	{	
 	return blankpasswordmessage;
 	}
+	
+	/**
+	 *@toDo : the incorrect password error
+	 */
 	public WebElement getincorrectpasswordError()
 	{
 		return incorrectpasswordmessage;
 		
 	}
-	
+	/**
+	 *@toDo : the confirm password field error
+	 */
 	public WebElement getconfirmpassworderrormessage()
 	{
 		return confirmpasswordmessage;
 			
 	}
-	
+	/**
+	 *@toDo : the email error
+	 */
 	public WebElement getemailerrormessage()
 	{
 		return incorrectemailmessage;
 		
 	}
-	
+	/**
+	 *@toDo : the confirm email error
+	 */
 	public WebElement getconfirmEmailError()
 	{
 		return incorrectconfirmemailmessage;
@@ -947,63 +998,63 @@ public class RegistrationInformationPage extends UhcDriver {
 	 */
 	
 	/**
-	 * @return the first name on account confirmation page
+	 *@toDo : the first name on account confirmation page
 	 */
 	public WebElement getMemberFirstName() {
 		return accConfFirstName;
 	}
 	
 	/**
-	 * @return the last name on account confirmation page
+	 *@toDo : the last name on account confirmation page
 	 */
 	public WebElement getMemberLastName() {
 		return accConfLastName;
 	}
 	
 	/**
-	 * @return the date of birthirth on account confirmation page
+	 *@toDo : the date of birthirth on account confirmation page
 	 */
 	public WebElement getMemberDoB() {
 		return dateOfBirthText;
 	}
 	
 	/**
-	 * @return the user Name on account confirmation page
+	 *@toDo : the user Name on account confirmation page
 	 */
 	public WebElement getUserName() {
 		return userNameText;
 	}
 	
 	/**
-	 * @return the email address on account confirmation page
+	 *@toDo : the email address on account confirmation page
 	 */
 	public WebElement getEmailAddress() {
 		return emailIdText;
 	}
 	
 	/**
-	 * @return the Account Confirmation heading on account confirmation page
+	 *@toDo : the Account Confirmation heading on account confirmation page
 	 */
 	public WebElement getAccConfirmationHeading() {
 		return accountConfirmationHeading;
 	}
 	
 	/**
-	 * @return the account confirmation text on account confirmation page
+	 *@toDo : the account confirmation text on account confirmation page
 	 */
 	public WebElement getAccConfirmationText() {
 		return accountConfirmationText;
 	}
 	
 	/**
-	 * @return the print link on account confirmation page
+	 *@toDo : the print link on account confirmation page
 	 */
 	public WebElement getPrintLink() {
 		return printLink;
 	}
 	
 	/**
-	 * @return the go to my account haome button on account confirmation page
+	 *@toDo : the go to my account haome button on account confirmation page
 	 */
 	public WebElement getGoToMyAccountButton() {
 		return goToMyAccountHomeButton;
@@ -1041,6 +1092,9 @@ public class RegistrationInformationPage extends UhcDriver {
 	
 	
     /**
+	 *@toDo : wait to load create account page
+	 */
+    /**
      * Wait for page to load
      */
     public void waitForCreatePageAccountPage() {
@@ -1055,7 +1109,10 @@ public class RegistrationInformationPage extends UhcDriver {
     	});
     }
     
-	/**
+    /**
+	 *@toDo : wait to load account confirmation page
+	 */
+    /**
      * Wait for page to load
      */
     public void waitForAccountConfirmationPage() {
@@ -1073,8 +1130,8 @@ public class RegistrationInformationPage extends UhcDriver {
     }
     
 	/**
-     * Function to scroll page
-	 * @throws InterruptedException 
+     *@toDo : to scroll page
+	 *@throws InterruptedException 
      */
     public void scroll() {
     	JavascriptExecutor jse = (JavascriptExecutor)driver;
@@ -1083,8 +1140,8 @@ public class RegistrationInformationPage extends UhcDriver {
     }
 	
 	/**
-     * Function to scroll page
-	 * @throws InterruptedException 
+     *@toDo : to scroll page
+	 *@throws InterruptedException 
      */
     public void scrollUp() {
     	JavascriptExecutor jse = (JavascriptExecutor)driver;

@@ -26,8 +26,7 @@ import acceptancetests.atdd.data.acquisition.PageConstants;
 import atdd.framework.MRScenario;
 
 /**
-* @author sarora29
-* 
+ * @Functionality : Errors validation on Create Account page
  */
 
 public class RegistrationDashboardCreateAccountErrorsStepDefinition {
@@ -38,7 +37,9 @@ public class RegistrationDashboardCreateAccountErrorsStepDefinition {
                 public MRScenario getLoginScenario() {
                                 return loginScenario;
                 }
-                
+                /**
+                 * @toDo : user click the confirm registration button
+                 */
                 @And("^click on confirm registration$")
                 public void clickonconfirmregistration() throws InterruptedException {
                                 // navigate to registration page
@@ -48,7 +49,9 @@ public class RegistrationDashboardCreateAccountErrorsStepDefinition {
                                 registrationInformationPage.getAccountConfirmation().click();
 
                 }
-
+                /**
+                 * @toDo : to verify error message for blank user name field
+                 */
                 @Then("^error message for blank username field appears$")
                 public void usernameblankerrormessage() throws InterruptedException {
                                 // navigate to registration page
@@ -63,7 +66,9 @@ public class RegistrationDashboardCreateAccountErrorsStepDefinition {
                                 Assert.assertTrue(registrationInformationPage.getblankusernameError().getText().contains("username"));
 
                 }
-                
+                /**
+                 * @toDo : to verify error message for incorrect user name
+                 */
                 @Then("^error message for incorrect username field appears$")
                 public void usernameincorrecterrormessage() throws InterruptedException {
                                 // navigate to registration page
@@ -79,7 +84,9 @@ public class RegistrationDashboardCreateAccountErrorsStepDefinition {
 
                 }
                 
-                
+                /**
+                 * @toDo : to verify error message for not unique user name
+                 */
                 @Then("^error message for username not unique appears$")
                 public void usernamenotuniqueerrormessage() throws InterruptedException {
                                 // navigate to registration page
@@ -93,7 +100,9 @@ public class RegistrationDashboardCreateAccountErrorsStepDefinition {
                                 Assert.assertTrue(registrationInformationPage.getincorrectusernameError().getText().contains("Username"));
 
                 }
-                
+                /**
+                 * @toDo : to verify error message for blank password field
+                 */
                 @Then("^error message for blank password field appears$")
                 public void passwordblankerrormessage() throws InterruptedException {
                                 // navigate to registration page
@@ -104,7 +113,9 @@ public class RegistrationDashboardCreateAccountErrorsStepDefinition {
                                 Thread.sleep(5000);
                                 Assert.assertTrue(registrationInformationPage.getblankpasswordError().getText().contains("password"));
                 }
-                
+                /**
+                 * @toDo : to verify error message for incorrect password
+                 */
                 @Then("^error message for incorrect password field appears$")
                 public void passwordincorrecterrormessage() throws InterruptedException {
                                 // navigate to registration page
@@ -116,7 +127,9 @@ public class RegistrationDashboardCreateAccountErrorsStepDefinition {
                                 Assert.assertTrue(registrationInformationPage.getincorrectpasswordError().getText().contains("Password"));
                 }
                 
-                
+                /**
+                 * @toDo : to verify error message for confirm password field
+                 */
                 @Then("^error message for confirm password field appears$")
                 public void confirmpassworderrormessage() throws InterruptedException {
                                 // navigate to registration page
@@ -127,7 +140,9 @@ public class RegistrationDashboardCreateAccountErrorsStepDefinition {
                                 Thread.sleep(5000);
                                 Assert.assertTrue(registrationInformationPage.getconfirmpassworderrormessage().getText().contains("Your password and password confirmation"));
                 }
-                
+                /**
+                 * @toDo : to verify error message for confirm email address field
+                 */
                 @Then("^error message for confirm email field appears$")
                 public void confirmemailerrormessage() throws InterruptedException {
                                 // navigate to registration page
@@ -139,7 +154,9 @@ public class RegistrationDashboardCreateAccountErrorsStepDefinition {
                                 Assert.assertTrue(registrationInformationPage.getconfirmEmailError().getText().contains("Your email confirmation and email address"));
 
                 }
-                
+                /**
+                 * @toDo : to verify error message for blank email field
+                 */
                 @Then("^error message for email field appears$")
                 public void emailerrormessage() throws InterruptedException {
                                 // navigate to registration page

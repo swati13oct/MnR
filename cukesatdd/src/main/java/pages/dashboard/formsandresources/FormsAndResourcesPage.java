@@ -131,57 +131,83 @@ public class FormsAndResourcesPage extends UhcDriver {
                                 linkToFormsAndResources.click();
 
                 }
-
+                /**
+                 * @toDo : EOB medical button
+                 */
                 public WebElement getEOBMedicaButton() {
                                 return eobMedicalButton;
                 }
-
+                /**
+                 * @toDo : EOB drug button
+                 */
                 public WebElement getEOBDrugButton() {
                                 return eobDrugButton;
                 }
-                
+                /**
+                 * @toDo : renew magazine section
+                 */
                 public WebElement getRenewMagazineSection() {
                                 return renewMagazineSection;
                 }
-                
+                /**
+                 * @toDo : my document section
+                 */
                 public WebElement getMyDocumentSection() {
                                 return myDocumentSection;
                 }
-                
+                /**
+                 * @toDo : anoc section
+                 */
                 public WebElement getANOCSection()
                 {
                                 return AnocSection;
                 }
-                
+                /**
+                 * @toDo : forms and resources section
+                 */
                 public WebElement getFormsandResourcesSection()
                 {
                                 return FormsnResources ;
                 }
+                /**
+                 * @toDo : annual directory section
+                 */
                 public WebElement getAnnualDirectorySection()
                 {
                                 return AnnualDirectorySection;
                 }
-                
+                /**
+                 * @toDo : provider search link
+                 */
                 public WebElement getprovisesearchlink()
                 {
                            return  ProviderSearchLink;    
                 }
-                
+                /**
+                 * @toDo : pharmacy search link
+                 */
                 public WebElement getpharmacysearchlink()
                 {
                              return PharmacyLocatorLink;  
                 }
                 
-                
+                /**
+                 * @toDo : plan materials section
+                 */
                 public WebElement getplanmaterialsection()
                 {
                               return PlanMaterialSection;
                 }
-                
+                /**
+                 * @toDo : order plan material link
+                 */
                 public WebElement getOrderPlanMaterialLink()
                 {
                             return OrderPlanMaterialLink;   
                 }
+                /**
+                 * @toDo : to click order plan material link
+                 */
                 public void validatenclickOrderPlanMaterial() throws InterruptedException
                 {
                      getOrderPlanMaterialLink().click();
@@ -191,10 +217,16 @@ public class FormsAndResourcesPage extends UhcDriver {
                     Assert.assertEquals(expectedURL, actualURL);
                      driver.navigate().back();
                 }
+                /**
+                 * @toDo : temporary id card link
+                 */
                 public WebElement getTemporaryIdcardlink()
                 {
                         return  MemberIdCardlink;      
                 }
+                /**
+                 * @toDo : to click temporary id card link
+                 */
                 public void validatenclickIDCard() throws InterruptedException
                 {
                      getTemporaryIdcardlink().click();
@@ -204,7 +236,9 @@ public class FormsAndResourcesPage extends UhcDriver {
                     Assert.assertEquals(expectedURL, actualURL);
                      driver.navigate().back();
                 }   
-                
+                /**
+                 * @toDo : to verify english as a default language 
+                 */
                 public void validateEngDefault()
                 {
                      if(oselect.getFirstSelectedOption().getText()=="ENGLISH")
@@ -217,7 +251,9 @@ public class FormsAndResourcesPage extends UhcDriver {
                            System.out.println("false");
                      }
                 }
-                
+                /**
+                 * @toDo : switch language
+                 */
                 public void changelanguage() throws InterruptedException
                 {
                      oselect.selectByValue("SPANISH");
