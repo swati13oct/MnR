@@ -79,7 +79,6 @@ public class ExplanationOfBenefitsPage extends UhcDriver {
 				// return new CommunicationPreferences(driver);
 				Assert.assertTrue(true);
 			}
-
 		} else {
 			try {
 				Thread.sleep(10000);
