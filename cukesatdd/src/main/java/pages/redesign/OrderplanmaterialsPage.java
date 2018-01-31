@@ -370,7 +370,7 @@ public class OrderplanmaterialsPage extends UhcDriver {
 			System.out.println("****** Submit Button Clicked ********");
 		}
 
-		Thread.sleep(3000);
+		Thread.sleep(5000);
 		CommonUtility.checkPageIsReady(driver);
 		if (validate(OrderConfirmationHeader) || validate(OrderConfirmation_addordermaterialLink)) {
 			System.out.println("@@@@ Opder Plan Material COnfirmation Page is Displayed @@@@");

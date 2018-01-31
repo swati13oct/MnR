@@ -67,7 +67,7 @@ public class EnrollInPlanAarpStepDefinition {
 		//CommonUtility.changePartDTime(getLoginScenario(), date);
 	}
 	
-	@Given("^the user is on AARP medicare site landing page$")
+	@Given("^the user is on AARP medicare site landing page OLE aarp$")
 	public void the_user_on_UHC_Medicaresolutions_Site() {
 		WebDriver wd = getLoginScenario().getWebDriver();
 
@@ -78,7 +78,7 @@ public class EnrollInPlanAarpStepDefinition {
 				aquisitionhomepage);
 	}
 
-	@When("^user performs plan search using following information in AARP site$")
+	@When("^user performs plan search using following information in AARP site OLE aarp$")
 	public void zipcode_details_in_aarp_site(DataTable givenAttributes) {
 
 		List<DataTableRow> memberAttributesRow = givenAttributes
@@ -110,7 +110,7 @@ public class EnrollInPlanAarpStepDefinition {
 		}
 	}
 
-	@And("^the user views plans of the below plan type in AARP site$")
+	@And("^the user views plans of the below plan type in AARP site OLE aarp$")
 	public void user_performs_planSearch_in_aarp_site(DataTable givenAttributes) throws InterruptedException {
 		List<DataTableRow> givenAttributesRow = givenAttributes
 				.getGherkinRows();
@@ -148,7 +148,7 @@ public class EnrollInPlanAarpStepDefinition {
 		}
 	}
 
-	@And("^the user enrolls for the below plan in AARP site$")
+	@And("^the user enrolls for the below plan in AARP site OLE aarp$")
 	public void user_enrolls_for_plan(DataTable planAttributes) {
 		WebDriver wd = (WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
 		String planName = planAttributes.getGherkinRows().get(0).getCells()
@@ -169,7 +169,7 @@ public class EnrollInPlanAarpStepDefinition {
 
 	}
 
-	@And("^the user navigates to introduction information step in AARP site$")
+	@And("^the user navigates to introduction information step in AARP site OLE aarp$")
 	public void the_user_navigates_into_information_step_aarp() {
 		IntroductionInformationPage introInformationPage = (IntroductionInformationPage) getLoginScenario()
 				.getBean(PageConstants.INTRODUCTION_INFORMATION_PAGE);
@@ -187,7 +187,7 @@ public class EnrollInPlanAarpStepDefinition {
 	}
 
 
-	@And("^the user fill following information in introduction information step in AARP site$")
+	@And("^the user fill following information in introduction information step in AARP site OLE aarp$")
 	public void user_fill_information_introduction_information_aarp(
 			DataTable personalAttributes) {
 
@@ -205,7 +205,7 @@ public class EnrollInPlanAarpStepDefinition {
 
 	}
 
-	@And("^the user navigates to beneficiary information step in AARP site$")
+	@And("^the user navigates to beneficiary information step in AARP site OLE aarp$")
 	public void the_user_navigates_beneficiary_information_step_aarp() {
 		IntroductionInformationPage introInformationPage = (IntroductionInformationPage) getLoginScenario()
 				.getBean(PageConstants.INTRODUCTION_INFORMATION_PAGE);
@@ -227,7 +227,7 @@ public class EnrollInPlanAarpStepDefinition {
 	}
 
 
-	@And("^the user fill following information in beneficiary information step in AARP site$")
+	@And("^the user fill following information in beneficiary information step in AARP site OLE aarp$")
 	public void user_fill_information_beneficiary_information_aarp(
 			DataTable personalAttributes) {
 
@@ -247,7 +247,7 @@ public class EnrollInPlanAarpStepDefinition {
 
 	}
 	
-	@And("^the user navigates to sep step in AARP site$")
+	@And("^the user navigates to sep step in AARP site OLE aarp$")
 	public void user_navigates_to_sep_step(){
 		BeneficiaryInformationPage beneficiaryInformationPage = (BeneficiaryInformationPage) getLoginScenario()
 				.getBean(PageConstants.BENEFICIARY_INFORMATION_PAGE);
@@ -268,7 +268,7 @@ public class EnrollInPlanAarpStepDefinition {
 		
 	}
 
-	@And("^the user select no for Special Election Period$")
+	@And("^the user select no for Special Election Period OLE aarp$")
 	public void user_selects_no_for_SEPQuestion(DataTable SEPAttributes){
 		
 		List<DataTableRow> personalAttributesRow = SEPAttributes
@@ -298,7 +298,7 @@ public class EnrollInPlanAarpStepDefinition {
 		}		
 	}
 
-	@And("^the user select yes for Special Election Period$")
+	@And("^the user select yes for Special Election Period OLE aarp$")
 	public void user_selects_yes_for_SEPQuestion(DataTable SEPAttributes){		
 		
 		List<DataTableRow> SEPAttributesRow = SEPAttributes
@@ -331,7 +331,7 @@ public class EnrollInPlanAarpStepDefinition {
 		
 	}
 	
-	@And("^the user navigates to esrd step in AARP site$")	
+	@And("^the user navigates to esrd step in AARP site OLE aarp$")	
 	public void the_user_navigates_esrd_information_step_aarp() {
 		ESRDPage esrdPage = (ESRDPage) getLoginScenario().getBean(PageConstants.ESRD_PAGE);		
 
@@ -348,7 +348,7 @@ public class EnrollInPlanAarpStepDefinition {
 
 	}
 
-	@And("^the user fill following information in esrd information step in AARP site$")
+	@And("^the user fill following information in esrd information step in AARP site OLE aarp$")
     public void user_fill_information_esrd_information_aarp(DataTable personalAttributes) {
 
           List<DataTableRow> personalAttributesRow = personalAttributes.getGherkinRows();
@@ -367,7 +367,7 @@ public class EnrollInPlanAarpStepDefinition {
 
     }      
     
-    @And("^the user navigates to prescription drug coverage step in AARP site$")
+    @And("^the user navigates to prescription drug coverage step in AARP site OLE aarp$")
     public void the_user_navigates_prescription_drug_coverage_information_step_aarp() {
           
           PrescriptionDrugCoveragePage pdcPage = (PrescriptionDrugCoveragePage) getLoginScenario().getBean(PageConstants.PRESCRIPTION_DRUG_COVERAGE_PAGE);
@@ -383,7 +383,7 @@ public class EnrollInPlanAarpStepDefinition {
 
     }
 
-    @And("^the user fill following information in prescription drug coverage step in AARP site$")
+    @And("^the user fill following information in prescription drug coverage step in AARP site OLE aarp$")
     public void user_fill_information_prescription_drug_coverage_aarp(DataTable personalAttributes) {
 
           List<DataTableRow> personalAttributesRow = personalAttributes.getGherkinRows();
@@ -400,7 +400,7 @@ public class EnrollInPlanAarpStepDefinition {
            getLoginScenario().saveBean(PageConstants.LONG_TERM_CARE_PAGE,ltcPage);
     }
     
-    @And("^the user navigates to long term care step in AARP site$")
+    @And("^the user navigates to long term care step in AARP site OLE aarp$")
     public void the_user_navigates_long_term_care_information_step_aarp() {
           LongTermCarePage ltcPage = (LongTermCarePage) getLoginScenario().getBean(PageConstants.LONG_TERM_CARE_PAGE);
           if (ltcPage != null) {
@@ -415,7 +415,7 @@ public class EnrollInPlanAarpStepDefinition {
 
     }
 
-    @And("^the user fill following information in long term care step in AARP site$")
+    @And("^the user fill following information in long term care step in AARP site OLE aarp$")
     public void user_fill_information_long_term_care_aarp(DataTable personalAttributes) {
 
           List<DataTableRow> personalAttributesRow = personalAttributes.getGherkinRows();
@@ -440,7 +440,7 @@ public class EnrollInPlanAarpStepDefinition {
 
     }
 
-    @And("^the user navigates to medicaid step in AARP site$")
+    @And("^the user navigates to medicaid step in AARP site OLE aarp$")
     public void the_user_navigates_to_medicaid_aarp_information_step_aarp() {
     
           MedicaidPage medicaidPage = (MedicaidPage) getLoginScenario().getBean(PageConstants.MEDICAID_PAGE);
@@ -457,7 +457,7 @@ public class EnrollInPlanAarpStepDefinition {
 
     }
 
-    @And("^the user fill following information in medicaid step in AARP site$")
+    @And("^the user fill following information in medicaid step in AARP site OLE aarp$")
     public void user_fill_information_medicaid_aarp_step_aarp(DataTable personalAttributes) {
 
           List<DataTableRow> personalAttributesRow = personalAttributes.getGherkinRows();
@@ -483,7 +483,7 @@ public class EnrollInPlanAarpStepDefinition {
     }
     
     
-    @And("^the user navigates to other health insurance step in AARP site$")
+    @And("^the user navigates to other health insurance step in AARP site OLE aarp$")
     public void the_user_navigates_to_other_health_insurance_aarp_information_step_aarp() {
           OtherHealthInsurancePage othPage = (OtherHealthInsurancePage) getLoginScenario().getBean(PageConstants.OTHER_HEALTH_INSURANCE_PAGE);
     
@@ -499,7 +499,7 @@ public class EnrollInPlanAarpStepDefinition {
 
     }
 
-    @And("^the user fill following information in other health insurance step in AARP site$")
+    @And("^the user fill following information in other health insurance step in AARP site OLE aarp$")
     public void user_fill_information_other_health_insurance_aarp_step_aarp(DataTable personalAttributes) {
 
           List<DataTableRow> personalAttributesRow = personalAttributes.getGherkinRows();
@@ -519,7 +519,7 @@ public class EnrollInPlanAarpStepDefinition {
     }
 
 
-    @And("^the user navigates to primary care provider step in AARP site$")
+    @And("^the user navigates to primary care provider step in AARP site OLE aarp$")
     public void the_user_navigates_to_primary_care_provider_aarp_information_step_aarp() {
           PrimaryCareProviderPage pcpPage = (PrimaryCareProviderPage) getLoginScenario().getBean(PageConstants.PRIMARY_CARE_PROVIDER_PAGE);
        if(pcpPage!=null){
@@ -544,7 +544,7 @@ public class EnrollInPlanAarpStepDefinition {
 
 
     
-   @And("^the user navigates to plan payment options step in AARP site$")
+   @And("^the user navigates to plan payment options step in AARP site OLE aarp$")
    public void the_user_navigates_to_plan_payment_options_aarp_information_step_aarp() {
 	   
 	   PlanPaymentOptions ppoPage = (PlanPaymentOptions) getLoginScenario().getBean(PageConstants.PLAN_PAYMENT_OPTION_PAGE);
@@ -570,7 +570,7 @@ public class EnrollInPlanAarpStepDefinition {
                  
    }
 
-    @And("^the user fill following information in plan payment options step in AARP site$")
+    @And("^the user fill following information in plan payment options step in AARP site OLE aarp$")
     public void user_fill_information_plan_payment_options_aarp_step_aarp(DataTable personalAttributes) {
 
 	    List<DataTableRow> personalAttributesRow = personalAttributes.getGherkinRows();
@@ -598,7 +598,7 @@ public class EnrollInPlanAarpStepDefinition {
     }
     
     
-    @And("^the user navigates to optional Riders step in AARP site$")
+    @And("^the user navigates to optional Riders step in AARP site OLE aarp$")
     public void the_user_navigates_to_optional_riders_aarp_information_step_aarp() {
           OptionalRidersPage optPage = (OptionalRidersPage) getLoginScenario().getBean(PageConstants.OPTIONAL_RIDERS_PAGE);
           WebDriver driver = (WebDriver) getLoginScenario().getBean(
@@ -625,7 +625,7 @@ public class EnrollInPlanAarpStepDefinition {
 
     }
 
-    @And("^the user fill following information in optional Riders step in AARP site$")
+    @And("^the user fill following information in optional Riders step in AARP site OLE aarp$")
     public void user_fill_information_optional_riders_aarp_step_aarp(DataTable personalAttributes) {
 
           List<DataTableRow> personalAttributesRow = personalAttributes.getGherkinRows();
@@ -642,7 +642,7 @@ public class EnrollInPlanAarpStepDefinition {
 
     }
     
-    @And("^the user navigates to proposed effective date page$")
+    @And("^the user navigates to proposed effective date page OLE aarp$")
 	public void user_navigates_to_proposed_effective_date_page(){
 		
 		ProposedEffectiveDatePage pedPage = (ProposedEffectiveDatePage) getLoginScenario().getBean(PageConstants.PROPOSED_EFFECTIVE_DATE_PAGE);
@@ -662,7 +662,7 @@ public class EnrollInPlanAarpStepDefinition {
 		
 	}
 
-	@And("^the user selects proposed effective date$")
+	@And("^the user selects proposed effective date OLE aarp$")
 	public void user_selects_proposed_effective_date(DataTable pedAttributes){
 		
 		List<DataTableRow> pedAttributesRow = pedAttributes
@@ -691,7 +691,7 @@ public class EnrollInPlanAarpStepDefinition {
 		getLoginScenario().saveBean(PageConstants.REVIEW_APPLICATION_PAGE, revSubmitPage);
 		
 	}
-    @And("^the user navigates to review and submit application step in AARP site$")
+    @And("^the user navigates to review and submit application step in AARP site OLE aarp$")
     public void user_navigates_review_and_submit_application_aarp(DataTable reviewAttributes) {
           ReviewAndSubmitPage revSubmitPage = (ReviewAndSubmitPage) getLoginScenario()
                         .getBean(PageConstants.REVIEW_APPLICATION_PAGE);
@@ -715,7 +715,7 @@ public class EnrollInPlanAarpStepDefinition {
     
     }
     
-    @And("^the user reviews the information on review and submit application step in AARP site$")
+    @And("^the user reviews the information on review and submit application step in AARP site OLE aarp$")
     public void user_reviews_the_information_review_and_submit_applcation_aarp(DataTable personalAttributes) {
     IntroductionInformationPage introPage = (IntroductionInformationPage) getLoginScenario().getBean(PageConstants.INTRODUCTION_INFORMATION_PAGE);
      ReviewAndSubmitPage reviewandSubmitPage = (ReviewAndSubmitPage) getLoginScenario().getBean(PageConstants.REVIEW_APPLICATION_PAGE);
@@ -737,7 +737,7 @@ public class EnrollInPlanAarpStepDefinition {
      
     }
 	
-	@Then("^the user navigates to Confirmation Page$")
+	@Then("^the user navigates to Confirmation Page OLE aarp$")
 	public void user_navigates_to_Confirmation_Page(){
 
 		ConfirmationPage confirmationPage = (ConfirmationPage) getLoginScenario().getBean(PageConstants.CONFIRMATION_PAGE);

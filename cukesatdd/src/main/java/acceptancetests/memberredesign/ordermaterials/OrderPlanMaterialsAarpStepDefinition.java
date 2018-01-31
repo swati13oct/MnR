@@ -1,7 +1,7 @@
 /**
  * 
  */
-package acceptancetests.ordermaterials.ulayer;
+package acceptancetests.memberredesign.ordermaterials;
 
 import gherkin.formatter.model.DataTableRow;
 
@@ -52,8 +52,8 @@ public class OrderPlanMaterialsAarpStepDefinition {
 		return loginScenario;
 	}
 
-	@Given("^registered AMP member with following attributes$")
-	public void registered_member_orderplanmaterials_aarp(
+	@Given("^registered Redesign member for Order Plan Materials with following attributes$")
+	public void registered_member_orderplanmaterials_redesign(
 			DataTable memberAttributes) throws InterruptedException {
 
 		/* Reading the given attribute from feature file */
@@ -110,7 +110,6 @@ public class OrderPlanMaterialsAarpStepDefinition {
 
 		WebDriver wd = getLoginScenario().getWebDriver();
 		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
-		JSONObject accountHomeActualJson = null;
 		RedesignLoginPage loginPage = new RedesignLoginPage(wd);
 
 		UlayerHomePage accountHomePage = (UlayerHomePage)loginPage.loginWith(userName, pwd);
