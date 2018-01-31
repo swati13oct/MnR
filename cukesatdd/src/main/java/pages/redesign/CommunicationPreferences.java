@@ -41,10 +41,16 @@ public class CommunicationPreferences extends UhcDriver {
 	@FindBy(xpath = "(//a[@title='Back to My Profile'])[1]")
 	private WebElement BackToMyProfileButton;
 
-	private static String PAGE_URL = "https://stage-medicare.uhc.com/medicare/login/overview.html?testharness=true";
+	@FindBy(xpath = ".//h3[contains(text(),'Quick Links')]/following::a[contains(text(),'Account Settings')]")
+	private WebElement AccSettings;
+
+	@FindBy(xpath = ".//a[contains(text(),'SIGN UP TODAY')]")
+	private WebElement CommPreferencesBtn;
+
+	private static String PAGE_URL = MRConstants.STAGE_DASHBOARD_NEW_DOMAIN_URL;
 
 	// private static String PAGE_URL = TeamC_UNPWAssistancePage_URL;
-	
+
 	public CommunicationPreferences(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
@@ -55,28 +61,46 @@ public class CommunicationPreferences extends UhcDriver {
 	public void openAndValidate() {
 		start(PAGE_URL);
 	}
+
 	// Navigate to preferences page from testharness page
 	public void navigateToPreferencesPage() throws InterruptedException {
+		if (driver.getTitle().equalsIgnoreCase("UnitedHealthcare")) {
+			System.out.println("navigated to Homepage!");
+			Thread.sleep(5000);
+			AccSettings.click();
+			Thread.sleep(5000);
 
-		try {
-			Thread.sleep(10000);
-			if (validate(iPerceptionPopUp)) {
-				iPerceptionPopUp.click();
-				System.out.println("iPerception Pop Up displayed");
+			CommPreferencesBtn.click();
+			Thread.sleep(5000);
+
+			if (driver.getTitle().equalsIgnoreCase("Preferences")) {
+				System.out.println("navigated to Preferences page!");
+				// return new CommunicationPreferences(driver);
+				Assert.assertTrue(true);
 			}
-			linkPreferences.click();
-			Thread.sleep(5000);
-		} catch (Exception e) {
-			linkPreferences.click();
-			Thread.sleep(5000);
+		} else {
+
+			try {
+				Thread.sleep(10000);
+				if (validate(iPerceptionPopUp)) {
+					iPerceptionPopUp.click();
+					System.out.println("iPerception Pop Up displayed");
+				}
+				linkPreferences.click();
+				Thread.sleep(5000);
+			} catch (Exception e) {
+				linkPreferences.click();
+				Thread.sleep(5000);
+			}
+			if (driver.getTitle().equalsIgnoreCase("Preferences")) {
+				System.out.println("navigated to Preferences page!");
+				// return new CommunicationPreferences(driver);
+				Assert.assertTrue(true);
+			}
+			// return null;
 		}
-		if (driver.getTitle().equalsIgnoreCase("Preferences")) {
-			System.out.println("navigated to Preferences page!");
-			// return new CommunicationPreferences(driver);
-			Assert.assertTrue(true);
-		}
-		// return null;
 	}
+
 	// Select preferences from mail to online and viceversa
 	public void SelectPreferences() throws InterruptedException {
 
