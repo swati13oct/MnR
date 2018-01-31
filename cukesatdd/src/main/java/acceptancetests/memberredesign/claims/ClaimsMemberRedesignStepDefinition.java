@@ -28,6 +28,9 @@ import pages.dashboard.member.ulayer.ClaimSummarypage;
 import pages.member.ulayer.AccountHomePage;
 import pages.member.ulayer.LoginPage;
 
+/**
+ Functionality : Validating the Claims Summary & Claims Details Page on the redesigned site.
+ */
 public class ClaimsMemberRedesignStepDefinition {
 	@Autowired
 	MRScenario loginScenario;
@@ -36,6 +39,9 @@ public class ClaimsMemberRedesignStepDefinition {
 	public MRScenario getLoginScenario() {
 		return loginScenario;
 	}
+	/**
+	 * @toDo : Login as a member on the redesigned site.
+	 */
 
 	@Given("^I am an Individual or Group member on the redesigned site$")
 	public void i_am_an_arrp_member_on_the_member_site(DataTable memberAttributes) {
@@ -88,6 +94,9 @@ public class ClaimsMemberRedesignStepDefinition {
 		}
 		
 	}
+	/**
+	 * @toDo: Navigate to Claims Summary page.
+	 */
 
 	@When("^I navigate to the claims Summary page in redesigned site$")
 	public void navigate_Claims_Summary_redesigned(){
@@ -98,6 +107,9 @@ public class ClaimsMemberRedesignStepDefinition {
 		if(newClaimsSummaryPage != null)
 			getLoginScenario().saveBean(PageConstants.NEW_CLAIMS_SUMMARY_PAGE, newClaimsSummaryPage);
 	}
+	/**
+	 * 
+	 */
 
 	@And("^the user search claims for the following time interval in redesigned site$")
 	public void search_claims_redesigned_site(DataTable timeAttributes){
@@ -116,6 +128,9 @@ public class ClaimsMemberRedesignStepDefinition {
 		if(newClaimsSummaryPage != null)
 			getLoginScenario().saveBean(PageConstants.NEW_CLAIMS_SUMMARY_PAGE, newClaimsSummaryPage);
 	}
+	/**
+	 * @toDo: Member is able to select claims from the "View Claims From" drop-down. 
+	 */
 
 	@And("^I can search claims for the following claim period on redesigned site$")
 	public void search_claims_period_redesigned_site(DataTable timeAttributes){
@@ -141,8 +156,9 @@ public class ClaimsMemberRedesignStepDefinition {
 			getLoginScenario().saveBean(PageConstants.NEW_CLAIMS_SUMMARY_PAGE, newClaimsSummaryPage);
 
 	}
-
-
+	/**
+	 * @toDo : On Claims Summary page the member validates the Claims Summary table or claims.
+	 */
 	@Then("^I can see the claims displayed based on the selection in redesigned site$")
 	public void validate_claims_table_redesigned_site(){
 		ClaimSummarypage newClaimsSummaryPage = (ClaimSummarypage) getLoginScenario().getBean(PageConstants.NEW_CLAIMS_SUMMARY_PAGE);
@@ -152,6 +168,9 @@ public class ClaimsMemberRedesignStepDefinition {
 			getLoginScenario().saveBean(PageConstants.NEW_CLAIMS_SUMMARY_PAGE, newClaimsSummaryPage);
 
 	}
+	/**
+	 * @toDo : On Claims Summary page the member validates the EOB section based on the plan type.
+	 */
 
 	@And("^the user validates the EOB section based on domain in redesigned site$")
 	public void validates_EOB_redesigned_site(DataTable memberAttributes){
@@ -171,6 +190,9 @@ public class ClaimsMemberRedesignStepDefinition {
 		if(newclaimsSummarypage != null)
 			getLoginScenario().saveBean(PageConstants.NEW_CLAIMS_SUMMARY_PAGE, newclaimsSummarypage);
 	}
+	/**
+	 * @toDo: On Claims Summary page the member Validates the Download my data section.
+	 */
 
 	@And("^the user validates the DownloadMyData section in redesigned site$")
 	public void validates_DownloadMyData_redesigned_site(){
@@ -180,6 +202,9 @@ public class ClaimsMemberRedesignStepDefinition {
 		if(newclaimsSummarypage != null)
 			getLoginScenario().saveBean(PageConstants.NEW_CLAIMS_SUMMARY_PAGE, newclaimsSummarypage);
 	}	
+	/**
+	 * @toDo :
+	 */
 
 
 	@When("^I navigate to the Claims Summary page in AARP site$")	
