@@ -487,7 +487,9 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		WebDriverWait wait = new WebDriverWait(driver, 45000);
 
 		if (planType.equalsIgnoreCase("PDP")) {
-			wait.until(ExpectedConditions.elementToBeClickable(By.xpath(".//*[@id='site-wrapper']/div[4]/div/div/div/div/div/div/div[1]/div/div/div[1]/div[2]/div/div[2]/div[3]/div/span[3]"))).click();
+			if(viewPDPPlans.isDisplayed()){
+			wait.until(ExpectedConditions.elementToBeClickable(viewPDPPlans)).click();
+			}
 		} else if (planType.equalsIgnoreCase("MA")
 				|| planType.equalsIgnoreCase("MAPD")) {
 		
@@ -1085,7 +1087,10 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	}
 
 	public void UncheckAndVerifyCompareChkBox(){
-		compareChkBox3.click();
+		if(validate(compareChkBox3)){
+			compareChkBox3.click();
+		}
+		
 		Assert.assertEquals("compare_checkbox ng-scope ng-valid ng-dirty", compareChkBox3.getAttribute("class"));
 	}
 
@@ -1139,7 +1144,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		WebDriverWait wait = new WebDriverWait(driver, 45000);
 		boolean flag = false;
 		if(validate(viewPlans)){
-		viewPlans = wait.until(ExpectedConditions.elementToBeClickable(By.xpath(".//*[@id='site-wrapper']/div[4]/div/div/div/div/div/div/div[1]/div/div/div[1]/div[2]/div/div[2]/div[1]/div/span[3]")));
+		viewPlans = wait.until(ExpectedConditions.elementToBeClickable(viewPlans));
 		}
 		if(validate(viewPDPPlans)){
 		viewPDPPlans = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(".//*[@id='site-wrapper']/div[4]/div/div/div/div/div/div/div[1]/div/div/div[1]/div[2]/div/div[2]/div[3]/div/span[3]")));
