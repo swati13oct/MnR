@@ -18,7 +18,7 @@ Feature: To validate the new changes related to claims page on the member redesi
     Examples: 
       | planType | claimPeriod    | domain | claimssystem |
       | MAPD     | Last 24 Months | COSMOS | COSMOSCLAIMS |
-     #| MA       | Last 24 Months | NICE   | NICECLAIMS   |
+      | MA       | Last 24 Months | NICE   | NICECLAIMS   |
   @claimsSummarySHIP @theTransformers
   Scenario Outline: To validate the claims present for the SHIP member on claims sumamry page for AARP site
     Given I am an Individual or Group member on the redesigned site
@@ -74,8 +74,8 @@ Feature: To validate the new changes related to claims page on the member redesi
     And I validate the Claims Total in claims details page in AARP site
 
     Examples: 
-      | planType | claimPeriod    |
-      | SHIP     | Last 24 Months |
+      | planType | claimPeriod    |claimssystem |
+      | SHIP     | Last 24 Months |SHIPCALIMS   |
 
   # This Scenario can only execute when max claims indicator as true
   #@MaxClaimsResultsError
