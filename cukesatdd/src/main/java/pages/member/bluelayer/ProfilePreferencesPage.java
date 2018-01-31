@@ -1,33 +1,25 @@
-/**
- * 
- */
 package pages.member.bluelayer;
 
-import java.io.IOException;
-import java.util.List;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-import org.junit.Assert;
 
 import acceptancetests.atdd.data.CommonConstants;
 import acceptancetests.atdd.data.PageData;
 import acceptancetests.atdd.util.CommonUtility;
 import atdd.framework.UhcDriver;
-import pages.member.ulayer.ContactUsPage;
 
 /**
- * @author akapoo18
- *
+ * Functionality: Profile And Preferences page elements
  */
 public class ProfilePreferencesPage extends UhcDriver {
 
@@ -896,10 +888,10 @@ public class ProfilePreferencesPage extends UhcDriver {
 	public void validateSavePreferences() {
 		// TODO Auto-generated method stub
 		validate(savePreferencesButton);
-		/*if (iHavereadCheckbox.isSelected()) {
+		if (iHavereadCheckbox.isSelected()) {
 			savePreferencesButton.click();
 			validate(EditPreferenceButton);
-		}*/
+		}
 
 	}
 

@@ -1,31 +1,17 @@
 package pages.member.bluelayer;
 
-import java.util.List;
-import java.util.Map;
-import java.util.concurrent.TimeUnit;
-import org.json.JSONException;
-import org.json.JSONObject;
-import org.junit.Assert;
-import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.Select;
-import pages.member.bluelayer.OrderplanmaterialsPage;
-import pages.member.bluelayer.ContactUsPage;
-import acceptancetests.atdd.data.CommonConstants;
-import acceptancetests.atdd.data.MRConstants;
-import acceptancetests.atdd.data.PageData;
+
 import acceptancetests.atdd.util.CommonUtility;
-import acceptancetests.login.data.LoginCommonConstants;
 import atdd.framework.UhcDriver;
 
-import atdd.framework.MRScenario;
-import atdd.framework.UhcDriver;
-import pages.member.bluelayer.BenefitsAndCoveragePage;
-import pages.member.bluelayer.ProfilePreferencesPage;
+/**
+ * Functionality: Rally Dashboard page
+ */
 
 public class DashboardPage extends UhcDriver {
 

@@ -1,55 +1,46 @@
 
 package acceptancetests.memberredesign;
 
-import gherkin.formatter.model.DataTableRow;
-
-import java.io.File;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 import org.json.JSONObject;
 import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.springframework.beans.factory.annotation.Autowired;
-import pages.member.bluelayer.AccountHomePage;
-import pages.member.bluelayer.DashboardPage;
-import pages.member.bluelayer.LoginPage2;
-import pages.member.bluelayer.ProfilePreferencesPage;
+
 import acceptancetests.atdd.data.CommonConstants;
 import acceptancetests.atdd.data.member.PageConstants;
-import acceptancetests.atdd.util.CommonUtility;
 import acceptancetests.login.data.LoginCommonConstants;
 import acceptancetests.profandpref.data.ProfnPrefCommonConstants;
 import atdd.framework.MRScenario;
-import cucumber.*;
 import cucumber.api.DataTable;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
-
-import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.WebElement;
+import pages.member.bluelayer.DashboardPage;
+import pages.member.bluelayer.LoginPage2;
+import pages.member.bluelayer.ProfilePreferencesPage;
 
 /**
- * @author akapoo18
- *
+ * Functionality: Profile And Preferences page
  */
 public class ProfileandPreferencesUMSStepDefinition {
 
 	@Autowired
 	MRScenario loginScenario;
 
-	private String userName = null;
+	private String userName;
 
 	public MRScenario getLoginScenario() {
 		return loginScenario;
 	}
-
+	
+	
+/**
+ * @toDo : The user logs in to the member Redesign Portal
+ */
 	@Given("^registered member with following details for Profile and Preferences flow$")
 	public void login_with_member(DataTable memberAttributes) throws InterruptedException {
 		/* Reading the given attribute from feature file */
@@ -90,7 +81,7 @@ public class ProfileandPreferencesUMSStepDefinition {
 		}
 		else
 		{
-		System.out.println("NULL here");
+		System.out.println("NULL Dashboard page");
 		}
 		
 
@@ -119,6 +110,10 @@ public class ProfileandPreferencesUMSStepDefinition {
 
 	}
 
+	
+	/** 
+	 * @toDo : The user navigates to Profile and Preferences page from Rally Dashboard
+	 */
 	@Then("^the user navigates to Profile and Preferences page")
 	public void user_navigate_toProfileandPreferencespage() {
 
@@ -133,7 +128,7 @@ public class ProfileandPreferencesUMSStepDefinition {
 		else
 
 		{
-			System.out.println("NULL PNP ");
+			System.out.println("Null returned while opening profile and Preferences page from Dashboard");
 		}
 
 	}
@@ -152,18 +147,26 @@ public class ProfileandPreferencesUMSStepDefinition {
 		}
 	}*/
 
+	
+	/** 
+	 * @toDo : The user validates the Account information of the logged in member 
+	 */
+	
 	@And("^the user validates the Plan Name, Member name, Member ID and account section in UMS site")
 	public void user_Validates_FED_PROFILE_MEMBERNAME_ID_AccountProfile() {
 		ProfilePreferencesPage ProfilePreferencesPage = (ProfilePreferencesPage) getLoginScenario()
 				.getBean(PageConstants.PROFILE_AND_PREFERENCES_PAGE);
 
 		if (ProfilePreferencesPage == null) {
-			System.out.println(" Variable is NULL");
+			System.out.println("Profile and Preferences page variable is Null");
 		}
 		ProfilePreferencesPage.validatePlanNameMemberidNameAcountProfile();
 
 	}
 
+	/** 
+	 * @toDo : The user checks the email section 
+	 */
 	@Then("^the user validates the Email section in UMS site")
 	public void user_Validates_email() {
 		ProfilePreferencesPage ProfilePreferencesPage = (ProfilePreferencesPage) getLoginScenario()
@@ -174,6 +177,10 @@ public class ProfileandPreferencesUMSStepDefinition {
 
 	}
 
+	
+	/** 
+	 * @toDo : The user checks the elements that appear when the user clicks on edit link of Account section
+	 */
 	@Then("^the user validates the elements on clicking the edit link")
 	public void UserValidatesAccountEditOptions() {
 		ProfilePreferencesPage ProfilePreferencesPage = (ProfilePreferencesPage) getLoginScenario()
@@ -182,6 +189,9 @@ public class ProfileandPreferencesUMSStepDefinition {
 
 	}
 
+	/** 
+	 * @toDo : The user checks the Password Update functionality
+	 */
 	@Then("^the user validates the functionality of save Button")
 	public void UserValidatesAccountEditSaveButton() {
 		ProfilePreferencesPage ProfilePreferencesPage = (ProfilePreferencesPage) getLoginScenario()
@@ -192,6 +202,9 @@ public class ProfileandPreferencesUMSStepDefinition {
 
 	}
 
+	/** 
+	 * @toDo : The user checks the Password Update functionality  without entering the mandatory fields
+	 */
 	@Then("^the user clicks on save button without filling current and new password and the red mandatory message should come")
 	public void UserValidatesclickingbutton() {
 		ProfilePreferencesPage ProfilePreferencesPage = (ProfilePreferencesPage) getLoginScenario()
@@ -199,6 +212,9 @@ public class ProfileandPreferencesUMSStepDefinition {
 		ProfilePreferencesPage.validateSavebuttonclick();
 	}
 
+	/** 
+	 * @toDo : The user checks the functionality of cancel Button of the password update window
+	 */
 	@Then("^the user validates the functionality of Cancel Button")
 	public void UserValidatesAccountEditCancelButton() {
 		ProfilePreferencesPage ProfilePreferencesPage = (ProfilePreferencesPage) getLoginScenario()
@@ -208,6 +224,10 @@ public class ProfileandPreferencesUMSStepDefinition {
 
 	}
 
+	
+	/** 
+	 * @toDo :  The user checks the Password Update functionality by entering an invalid password
+	 */
 	@Then("^the user enters invalid password in new password field and clicks save button and the user should see expected error message - Password does not meet requirements")
 	public void UserValidatesinvalidpassword() {
 		ProfilePreferencesPage ProfilePreferencesPage = (ProfilePreferencesPage) getLoginScenario()
@@ -217,6 +237,10 @@ public class ProfileandPreferencesUMSStepDefinition {
 
 	}
 
+	
+	/** 
+	 * @toDo :  The user checks the Password Update functionality by entering different  password in confirm password field
+	 */
 	@Then("^the user enters different password in confirm password field and clicks save button and the user should see expected error message - Please enter the same value again")
 	public void UserValidatesinvalidpassword2() {
 		ProfilePreferencesPage ProfilePreferencesPage = (ProfilePreferencesPage) getLoginScenario()
@@ -225,6 +249,9 @@ public class ProfileandPreferencesUMSStepDefinition {
 		ProfilePreferencesPage.invalidpasswordvalidation2();
 
 	}
+	/** 
+	 * @toDo : checks the see more ways to contact us link in the Need help section
+	 */
 
 	@Then("^the user validates see more ways to contact us section")
 	public void Uservalidatesneedhelpsection() {
@@ -235,6 +262,10 @@ public class ProfileandPreferencesUMSStepDefinition {
 		ProfilePreferencesPage.validateseemorewaystext();
 	}
 
+	/** 
+	 * @toDo :  the user validates the page that opens up on  clicking the  see more ways to contact us link in the Need help section
+	 */
+	
 	@Then("^the user validates on clicking contact us link it should route to contact us page")
 	public void uservalidatescontactuslink() {
 		ProfilePreferencesPage ProfilePreferencesPage = (ProfilePreferencesPage) getLoginScenario()
@@ -242,6 +273,10 @@ public class ProfileandPreferencesUMSStepDefinition {
 
 		ProfilePreferencesPage.clickcontactUslink();
 	}
+	
+	/** 
+	 * @toDo :  Validates the disclaimer link and the way it expands and collapses
+	 */
 
 	@Then("^the user validates disclaimer link and on clicking disclaimer link it should expand and on again clicking it should collapse")
 	public void uservalidatesdisclaimerlink() {
@@ -276,6 +311,10 @@ public class ProfileandPreferencesUMSStepDefinition {
 		}
 	}
 
+	
+	/** 
+	 * @toDo :  Validates the need help section headers
+	 */
 	@Then("^the user validates the need help section")
 	public void uservalidatesneedhelpsection() {
 		ProfilePreferencesPage ProfilePreferencesPage = (ProfilePreferencesPage) getLoginScenario()
@@ -284,6 +323,10 @@ public class ProfileandPreferencesUMSStepDefinition {
 		ProfilePreferencesPage.validateneedhelpheader();
 
 	}
+	
+	/** 
+	 * @toDo :  Validates the permanent address section header
+	 */
 
 	@Then("^the user validates permanent address section")
 	public void uservalidatespermanentaddresssection() {
@@ -293,6 +336,9 @@ public class ProfileandPreferencesUMSStepDefinition {
 		ProfilePreferencesPage.validatepermanentaddress();
 
 	}
+	/** 
+	 * @toDo :  Validates the contact us link and the page that opens up on clicking the contact us link
+	 */
 
 	@Then("^the user clicks on contact us then contact us page should come")
 	public void uservalidatescontactuslinkpermanentadress() {
@@ -302,7 +348,9 @@ public class ProfileandPreferencesUMSStepDefinition {
 		ProfilePreferencesPage.validatecontactuslink();
 
 	}
-
+	/** 
+	 * @toDo :  Validates the elements of Email section
+	 */
 	@Then("^the user clicks on edit button")
 	public void userclickemailedit() {
 		ProfilePreferencesPage ProfilePreferencesPage = (ProfilePreferencesPage) getLoginScenario()
@@ -310,6 +358,10 @@ public class ProfileandPreferencesUMSStepDefinition {
 
 		ProfilePreferencesPage.validateEmail();
 	}
+
+	/** 
+	 * @toDo :  Validates the email edit functionality without filling any of the email text fields
+	 */
 
 	@Then("^the user clicks on save without filling both fields then the user should see red mandatory message")
 	public void uservalidatemandatorymessage() {
@@ -320,6 +372,10 @@ public class ProfileandPreferencesUMSStepDefinition {
 
 	}
 
+	
+	/** 
+	 * @toDo :  Validates the email edit functionality with valid email
+	 */
 	@Then("^the user fill new email address and click save then user should see new updated email on page")
 	public void uservalidatesemailsavefunctionality() {
 		ProfilePreferencesPage ProfilePreferencesPage = (ProfilePreferencesPage) getLoginScenario()
@@ -327,6 +383,10 @@ public class ProfileandPreferencesUMSStepDefinition {
 
 		ProfilePreferencesPage.validateemailsavefunctionality();
 	}
+	
+	/** 
+	 * @toDo :  Validates the email edit functionality with invalid email
+	 */
 
 	@Then("^the user fill invalid email and clicks on save button then the user should see error message for invalid email")
 	public void uservalidatesinvalidemailmessage() {
@@ -337,6 +397,10 @@ public class ProfileandPreferencesUMSStepDefinition {
 
 	}
 
+	
+	/** 
+	 * @toDo :  Validates the email edit functionality by entering different email id's in confirm email box from new email address
+	 */
 	@Then("^the user fill different email id in confirm email box from new email address then error message should come")
 	public void uservalidatesdifferentemail() {
 		ProfilePreferencesPage ProfilePreferencesPage = (ProfilePreferencesPage) getLoginScenario()
@@ -345,15 +409,19 @@ public class ProfileandPreferencesUMSStepDefinition {
 		ProfilePreferencesPage.validateduplicateerrormessage();
 	}
 
+	/** 
+	 * @toDo :  Validates the Communication Preferences section headers
+	 */
 	@Then("^the user validates Communication Preferences section")
 	public void uservalidatescommunicationpreferncessection() {
 		ProfilePreferencesPage ProfilePreferencesPage = (ProfilePreferencesPage) getLoginScenario()
 				.getBean(PageConstants.PROFILE_AND_PREFERENCES_PAGE);
-
 		ProfilePreferencesPage.validatecommunicationpreferences();
-
 	}
 
+	/** 
+	 * @toDo :  Validates the Go green button in Communication Preferences section 
+	 */
 	@Then("^the user validates Go paperless button and on clicking button go green page should come")
 	public void uservalidatesgogreenpagerouting() {
 		ProfilePreferencesPage ProfilePreferencesPage = (ProfilePreferencesPage) getLoginScenario()
@@ -362,6 +430,10 @@ public class ProfileandPreferencesUMSStepDefinition {
 		ProfilePreferencesPage.validategogreenbutton();
 	}
 
+	
+	/** 
+	 * @toDo :  Validates the headers on Go green page
+	 */
 	@Then("^the user validates headers on green page")
 	public void uservalidatesgogreenheader() {
 		ProfilePreferencesPage ProfilePreferencesPage = (ProfilePreferencesPage) getLoginScenario()
@@ -369,6 +441,11 @@ public class ProfileandPreferencesUMSStepDefinition {
 
 		ProfilePreferencesPage.validateheader();
 	}
+	
+
+	/** 
+	 * @toDo :  Validates the back Link functionality from Go green page to Profile page 
+	 */
 
 	@Then("^the user validates on clicking Profilenpreferences arrow user should route to Profile and Preferences page")
 	public void uservalidatespnplinkatthetop() {
@@ -377,6 +454,10 @@ public class ProfileandPreferencesUMSStepDefinition {
 
 		ProfilePreferencesPage.validatepnparrowlink();
 	}
+
+	/** 
+	 * @toDo :  Validates the elements of Phone section
+	 */
 
 	@Then("^the user validates the Phone section")
 	public void UserValidatesPhoneSection() {
@@ -387,6 +468,9 @@ public class ProfileandPreferencesUMSStepDefinition {
 
 	}
 
+	/** 
+	 * @toDo :  Validates the elements on clicking the Phone edit Button
+	 */
 	@Then("^the user Clicks on the the Edit Link and validates the elements")
 	public void UserClicksEditPhoneSection() {
 		ProfilePreferencesPage ProfilePreferencesPage = (pages.member.bluelayer.ProfilePreferencesPage) getLoginScenario()
@@ -395,6 +479,9 @@ public class ProfileandPreferencesUMSStepDefinition {
 		ProfilePreferencesPage.validatePhoneEditElements();
 
 	}
+	/** 
+	 * @toDo :  Validates the presence of Cancel Button post clicking the edit buttton of the Phone section
+	 */
 
 	@Then("^the user checks the Edit Button changes to Cancel Button")
 	public void UserChecksSaveCancelButton() {
@@ -405,6 +492,10 @@ public class ProfileandPreferencesUMSStepDefinition {
 
 	}
 
+	/** 
+	 * @toDo :  Validates the functionality of saving or updating Phone numbers in phone section
+	 */
+
 	@Then("^the user validates the functionality of save Button in Phoneeditsection")
 	public void UserValidatesPhoneSaveButton() {
 		ProfilePreferencesPage ProfilePreferencesPage = (pages.member.bluelayer.ProfilePreferencesPage) getLoginScenario()
@@ -413,6 +504,10 @@ public class ProfileandPreferencesUMSStepDefinition {
 		ProfilePreferencesPage.validatePhoneSave();
 
 	}
+	/** 
+	 * @toDo :  Validates the functionality of cancel Button which appears post clicking the edit button in phone section
+	 */
+
 
 	@Then("^the user validates the functionality of Cancel Button In phoneeditSection")
 	public void UserValidatesPhoneCancelButton() {
@@ -423,6 +518,9 @@ public class ProfileandPreferencesUMSStepDefinition {
 
 	}
 
+	/** 
+	 * @toDo :  Validates the elements of the temporary address section
+	 */
 	@Then("^the user validates the temporary address section")
 	public void tempaddress() {
 		ProfilePreferencesPage ProfilePreferencesPage = (pages.member.bluelayer.ProfilePreferencesPage) getLoginScenario()
@@ -431,6 +529,9 @@ public class ProfileandPreferencesUMSStepDefinition {
 		ProfilePreferencesPage.validatetempaddressElements();
 
 	}
+	/** 
+	 * @toDo : Validates the elements that appear on clicking the edit button of the temp address section
+	 */
 
 	@Then("^the user validates the fields and Buttons of temp address section")
 	public void UserClicksEdittempaddressSection() {
@@ -440,6 +541,9 @@ public class ProfileandPreferencesUMSStepDefinition {
 		ProfilePreferencesPage.validatetempaddressEditElements();
 
 	}
+	/** 
+	 * @toDo :  Validates the Cancel button that appear on clicking the edit button of the temp address section
+	 */
 
 	@Then("^the user checks the Edit Button on the top changes to Cancel Button")
 	public void UserChecksTopCancelButton() {
@@ -449,6 +553,9 @@ public class ProfileandPreferencesUMSStepDefinition {
 		ProfilePreferencesPage.validateTempAddressTopCancelElement();
 
 	}
+	/** 
+	 * @toDo :  Validates the Save Functionality of the Temporary address section
+	 */
 
 	@Then("^the user validates the functionality of save Button in Temporary adrress section")
 	public void UserValidatestempaddressSaveButton() {
@@ -459,6 +566,10 @@ public class ProfileandPreferencesUMSStepDefinition {
 
 	}
 
+	/** 
+	 * @toDo :  Validates the Cancel Functionality of the temp address section
+	 */
+	
 	@Then("^the user validates the functionality of Cancel Button In Temporary adrress section")
 	public void UserValidatestempaddressCancelButton() {
 		ProfilePreferencesPage ProfilePreferencesPage = (pages.member.bluelayer.ProfilePreferencesPage) getLoginScenario()
@@ -468,6 +579,9 @@ public class ProfileandPreferencesUMSStepDefinition {
 
 	}
 
+	/** 
+	 * @toDo :  Validates the presence of Go Paperless button
+	 */
 	@Then("^the user validates the presence of Go Paperless button")
 	public void UserValidateGoPaperlessbutton() {
 		ProfilePreferencesPage ProfilePreferencesPage = (pages.member.bluelayer.ProfilePreferencesPage) getLoginScenario()
@@ -477,6 +591,10 @@ public class ProfileandPreferencesUMSStepDefinition {
 
 	}
 
+	
+	/** 
+	 * @toDo :  Validates the plan name on the Go Green page
+	 */
 	@Then("^the user validates the presence of Plan Name")
 	public void UserValidatePlanName() {
 		ProfilePreferencesPage ProfilePreferencesPage = (pages.member.bluelayer.ProfilePreferencesPage) getLoginScenario()
@@ -485,6 +603,9 @@ public class ProfileandPreferencesUMSStepDefinition {
 		ProfilePreferencesPage.validatePlanName();
 
 	}
+	/** 
+	 * @toDo :  Validates the headers of the communication preferences section
+	 */
 
 	@Then("^the user validates the presence of Communication preferences header")
 	public void UserValidatescommunicationpreferencesheader() {
@@ -495,6 +616,9 @@ public class ProfileandPreferencesUMSStepDefinition {
 
 	}
 
+	/** 
+	 * @toDo :  Validates the  presence of Back to Profile and Preferences links on Go green page
+	 */
 	@Then("^the user validates the presence of Back to Profile and Preferences links")
 	public void UserValidatesBacktoPNPlink() {
 		ProfilePreferencesPage ProfilePreferencesPage = (pages.member.bluelayer.ProfilePreferencesPage) getLoginScenario()
@@ -504,6 +628,9 @@ public class ProfileandPreferencesUMSStepDefinition {
 
 	}
 
+	/** 
+	 * @toDo :  Validates the Note section on Go green page
+	 */
 	@Then("^the user validates the Note section")
 	public void UserValidatesNoteSection() {
 		ProfilePreferencesPage ProfilePreferencesPage = (pages.member.bluelayer.ProfilePreferencesPage) getLoginScenario()
@@ -513,6 +640,9 @@ public class ProfileandPreferencesUMSStepDefinition {
 
 	}
 
+	/** 
+	 * @toDo :  Validates the I have read checkbox  on Go green page
+	 */
 	@Then("^the user validates the I have read checkbox and check it")
 	public void UserValidatesCheckbox() {
 		ProfilePreferencesPage ProfilePreferencesPage = (pages.member.bluelayer.ProfilePreferencesPage) getLoginScenario()
@@ -522,6 +652,9 @@ public class ProfileandPreferencesUMSStepDefinition {
 
 	}
 
+	/** 
+	 * @toDo :  Validates the save preferences functionality on Go green page
+	 */
 	@Then("^the user validates the Save Preferences Button")
 	public void UserValidatesSavePreferences() {
 		ProfilePreferencesPage ProfilePreferencesPage = (pages.member.bluelayer.ProfilePreferencesPage) getLoginScenario()
@@ -530,6 +663,10 @@ public class ProfileandPreferencesUMSStepDefinition {
 		ProfilePreferencesPage.validateSavePreferences();
 
 	}
+	
+	/** 
+	 * @toDo :  Validates the Go green header on Go green page
+	 */
 
 	@Then("^the user validates the Go Green Header")
 	public void UserValidatesGoGreenHeader() {
