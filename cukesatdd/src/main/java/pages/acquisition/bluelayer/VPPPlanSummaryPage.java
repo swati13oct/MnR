@@ -264,15 +264,36 @@ public class VPPPlanSummaryPage extends UhcDriver {
 
 	public boolean validatePlanSummary(){
 		boolean flag = true;
-		int allPlans = Integer.valueOf(allPlansSize.getText().split(" ")[2]);
-		int maPlans = Integer.valueOf(maPlansCount.getText());
-		int msPlans = Integer.valueOf(msPlansCount.getText());
-		int pdpPlans = Integer.valueOf(pdpPlansCount.getText());
-		int msnPlans = Integer.valueOf(msnPlansCount.getText());
+		int allPlans = 0;
+		int maPlans = 0;
+		int msPlans = 0;
+		int pdpPlans =0;
+				int msnPlans = 0;
+		if(validate(allPlansSize)){
+			 allPlans = Integer.valueOf(allPlansSize.getText().split(" ")[2]);
+		}
 
+		if(validate(maPlansCount)){
+			 maPlans = Integer.valueOf(maPlansCount.getText());
+		}
+		
+		if(validate(msPlansCount)){
+			 msPlans = Integer.valueOf(msPlansCount.getText());
+		}
+		
+		if(validate(pdpPlansCount)){
+			 pdpPlans = Integer.valueOf(pdpPlansCount.getText());
+		}
+	
+		if(validate(msnPlansCount)){
+			 msnPlans = Integer.valueOf(msnPlansCount.getText());
+		}
+	
+		if(validate(msnPlansCount)){
 		if(!(allPlans == maPlans + msPlans + pdpPlans + msnPlans))
 		{
 			flag = false;
+		}
 		}
 
 		return flag;
@@ -1114,7 +1135,10 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	}
 
 	public PlanDetailsPage clickViewDetailsPDP() {
-		viewDetailsPDP.click();
+		if(validate(viewDetailsPDP)){
+			viewDetailsPDP.click();
+			}
+	
 		if(getTitle().equalsIgnoreCase("Our Medicare Plan Types | UnitedHealthcare®"))
 			return new PlanDetailsPage(driver);
 		return null;
@@ -1127,7 +1151,9 @@ public class VPPPlanSummaryPage extends UhcDriver {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		if(validate(viewPlans)){
 		viewPlans.click();
+		}
 
 	}
 
