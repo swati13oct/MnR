@@ -50,6 +50,9 @@ public class ExplanationOfBenefitsPage extends UhcDriver {
 	@FindBy(id = "eobC1")
 	private WebElement EOBPage;
 
+	@FindBy(xpath = ".//map[@name='IPEMap']/area[@alt='no']")
+	private WebElement EOBpopup;
+
 	private static String PAGE_URL = MRConstants.STAGE_DASHBOARD_NEW_DOMAIN_URL;
 
 	// private static String PAGE_URL = TeamC_UNPWAssistancePage_URL;
@@ -72,7 +75,19 @@ public class ExplanationOfBenefitsPage extends UhcDriver {
 			Thread.sleep(5000);
 			EOBdashboardLink.click();
 			Thread.sleep(5000);
-			EOBPage.click();
+
+			try {
+				if (validate(EOBpopup)) {
+					EOBpopup.click();
+					System.out.println("EOB Pop Up displayed");
+				}
+				EOBPage.click();
+				Thread.sleep(5000);
+			} catch (Exception e) {
+				EOBPage.click();
+				Thread.sleep(5000);
+			}
+
 			Thread.sleep(5000);
 			if (driver.getTitle().equalsIgnoreCase("EOB Search")) {
 				System.out.println("navigated to EOB page!");
