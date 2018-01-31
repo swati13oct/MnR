@@ -18,6 +18,8 @@ import pages.member.bluelayer.TerminatedHomePage;
 
 public class LoginPage extends UhcDriver {
 
+	private static String PAGE_URL_MEM_REDESIGN = MRConstants.REDESIGN_LOGIN_URL;
+
 	private static String PAGE_URL_TEST_HARNESS = MRConstants.UHCM_URL_TEAMB_TESTHARNESS;
 	
 	private static String PAGE_URL_TEAM_H_TEST_HARNESS = MRConstants.TEAMH_URL_TESTHARNES;
@@ -39,13 +41,14 @@ public class LoginPage extends UhcDriver {
 	public LoginPage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
-		//openAndValidate();
+		openAndValidate();
 	}
 
 	@Override
 	public void openAndValidate() {
 		// TODO Auto-generated method stub
-		start(PAGE_URL_TEST_HARNESS);
+		start(PAGE_URL_MEM_REDESIGN);
+		//start(PAGE_URL_TEST_HARNESS);
 		validate(thUserName);
 		validate(thPassword);
 		validate(thSignIn);

@@ -83,7 +83,8 @@ public class UNPWAssistancePage extends UhcDriver {
 	public void openAndValidate() {
 		start(PAGE_URL);
 	}
-
+	
+	// Validate the page navigated is Username password page or not
 	public void UNPWinfoMissing() throws InterruptedException {
 
 		Thread.sleep(8000);
@@ -103,7 +104,8 @@ public class UNPWAssistancePage extends UhcDriver {
 
 		}
 	}
-
+	
+	// Fill all the details for validating the member
 	public void FillDetails(String MemID, String DBmm, String DBdd,
 			String DByyyy, String LstName, String ZP)
 			throws InterruptedException {

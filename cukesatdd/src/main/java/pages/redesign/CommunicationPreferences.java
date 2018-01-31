@@ -35,13 +35,16 @@ public class CommunicationPreferences extends UhcDriver {
 	@FindBy(xpath = "//a[text()='Go to preferences page']")
 	private WebElement linkPreferences;
 
+	@FindBy(xpath = "(//legend[contains(text(),'Medical Explanation of Benefits (EOB)')])[1]")
+	private WebElement MedicalEOBPreference;
+
 	@FindBy(xpath = "(//a[@title='Back to My Profile'])[1]")
 	private WebElement BackToMyProfileButton;
 
-	private static String PAGE_URL = "https://team-c-medicare.uhc.com/medicare/login/overview.html?testharness=true";
+	private static String PAGE_URL = "https://stage-medicare.uhc.com/medicare/login/overview.html?testharness=true";
 
 	// private static String PAGE_URL = TeamC_UNPWAssistancePage_URL;
-
+	
 	public CommunicationPreferences(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
@@ -52,7 +55,7 @@ public class CommunicationPreferences extends UhcDriver {
 	public void openAndValidate() {
 		start(PAGE_URL);
 	}
-
+	// Navigate to preferences page from testharness page
 	public void navigateToPreferencesPage() throws InterruptedException {
 
 		try {
@@ -74,14 +77,19 @@ public class CommunicationPreferences extends UhcDriver {
 		}
 		// return null;
 	}
-
+	// Select preferences from mail to online and viceversa
 	public void SelectPreferences() throws InterruptedException {
 
 		if (driver.getTitle().equalsIgnoreCase("Preferences")) {
 			System.out.println("navigated to Preferences page!");
 
-			
-			for (int i=1;i<(paperlessPreferences.size()+1);i++) {
+			if (MedicalEOBPreference.isDisplayed()) {
+				System.out.println("Medical EOB Preference is displyed!");
+			} else {
+				System.out.println("Medical EOB Preference is not displyed!");
+				Assert.fail();
+			}
+			for (int i = 1; i < (paperlessPreferences.size() + 1); i++) {
 
 				JavascriptExecutor jse = (JavascriptExecutor) driver;
 				jse.executeScript(
@@ -101,8 +109,8 @@ public class CommunicationPreferences extends UhcDriver {
 				System.out.println("Submitted Preferences!");
 
 				Assert.assertTrue(true);
-			}
-			else Assert.fail();
+			} else
+				Assert.fail();
 		}
 	}
 }

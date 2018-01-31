@@ -20,8 +20,9 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import acceptancetests.atdd.data.MRConstants;
 import acceptancetests.atdd.util.CommonUtility;
 import atdd.framework.UhcDriver;
-
-
+/**
+* EOB Page Validation
+*/
 public class EOBPage extends UhcDriver{
 
 	@FindBy(id="eob-type")
@@ -113,7 +114,7 @@ public class EOBPage extends UhcDriver{
 	@Override
 	public void openAndValidate() {
 		// TODO Auto-generated method stub
-		//
+		
 	}
 
 	public EOBPage selectDateRange(String dateRange, String planType, String eobTypeData){
@@ -129,8 +130,11 @@ public class EOBPage extends UhcDriver{
 		validateDateRangeContentDisplayed(dateRange);
  		return new EOBPage(driver);
 	}
+	
+	/**
+	*@toDO: method to selectDateRange(dateRange, memberType, eobTypeData);
+	*/
 	public EOBPage validateEOBStatements(String dateRange,String planType,String eobTypeData, String fromDate, String toDate){
-		//	selectDateRange(dateRange, memberType, eobTypeData);		
 		if(dateRange.contains("Custom")){
 			fromDateInputBox.clear();
 			fromDateInputBox.click();
@@ -160,6 +164,10 @@ public class EOBPage extends UhcDriver{
 
 		return new EOBPage(driver);
 	}
+	
+	/**
+	*@toDo: the method to validate Read PDF
+	*/
 	public EOBPage validateReadPDF(){
 		learnMoreLink.click();
 		if(eobVideoBox.isDisplayed()){
@@ -190,8 +198,12 @@ public class EOBPage extends UhcDriver{
 		}
 		return null;
 	}
+	
+	/**
+	*@toDo: this method validates size/date/link displayed on UI for each EOB
+	*/
 	public EOBPage validateEachEOBonUI(){
-		// this method validates size/date/link displayed on UI for each EOB
+		
 		List<WebElement> listOfEOBs = driver.findElements(By.xpath(".//*[@id='eoblist0']/a"));
 		List<WebElement> pdfIcon = driver.findElements(By.xpath(".//*[@id='eoblist0']/a/img")); 
 		List<WebElement> fileType = driver.findElements(By.xpath(".//*[@id='eoblist0']/a/span"));
@@ -242,6 +254,11 @@ public class EOBPage extends UhcDriver{
 		}
 		return null;
 	}
+	
+	/**
+	*@toDo: this method validate the dropdowns on EOB page
+	*/
+	
 	public EOBPage validateDropDowns(String planType){
 		if(planType.equals("MAPD")){
 			validate(eobType);
@@ -334,7 +351,12 @@ public class EOBPage extends UhcDriver{
 		}
 	}	*/
 	}
-	public EOBPage validateEobVideo(){
+	
+	/**
+	*@toDo: this method validates the EOB video link
+	*/
+	
+		public EOBPage validateEobVideo(){
 		learnMoreLink.click();
 		if(readEOBVideo.isDisplayed()){
 			System.out.println("HOW TO READ YOUR MONTHLY MEDICAL EXPLANATION OF BENEFITS (VIDEO) link displayed correctly");
@@ -365,6 +387,10 @@ public class EOBPage extends UhcDriver{
 		return new EOBPage(driver);
 	}
 
+	/**
+	*@toDo: the method navigates user to eob page
+	*/
+	
 	public EOBPage navigateDirectToEOBPag(){
 		/*WebDriverWait wait = new WebDriverWait(driver, 10);
 		wait.until(ExpectedConditions.elementToBeClickable(eobLink));*/
@@ -381,6 +407,10 @@ public class EOBPage extends UhcDriver{
 		return new EOBPage(driver);
 	}
 
+	/**
+	*@toDo: this method is to validate the site leaving popup on the eob page
+	*/
+			 
 	public EOBPage validateSiteLeaveingPopUP(){
 		driver.manage().timeouts().implicitlyWait(20,TimeUnit.SECONDS);
 		String eobPageTitle = driver.getTitle();
@@ -416,8 +446,12 @@ public class EOBPage extends UhcDriver{
 		}
 		return null;
 	}
-
-	public boolean navigatePlanTabs(String PlanType){	
+	
+	/**
+	*@toDo: this method is used to navigate plan tabs on the eob page
+	*/
+	
+		public boolean navigatePlanTabs(String PlanType){	
 		if (PlanType.contentEquals("MA") || PlanType.contentEquals("MAPD")) {
 			if (validate(MAPlanTab)){
 				MAPlanTab.click();
@@ -484,7 +518,11 @@ public class EOBPage extends UhcDriver{
 		return false;
 	}
 	
-	public EOBPage enterCustomSearchDate(String fromDateValue, String toDateValue){
+		/**
+		*@toDo: this method is used to enter the dates for Custom Search on eob page
+		*/
+			
+		public EOBPage enterCustomSearchDate(String fromDateValue, String toDateValue){
 		validate(toDate);
 		validate(fromDate);
 		validate(customSearchButton);
@@ -496,8 +534,12 @@ public class EOBPage extends UhcDriver{
         
 		return null;
 	}
-	
-	public EOBPage validateEOBStatements(){
+		
+		/**
+		*@toDo: the method is to validate eob display on eob page
+		*/
+		
+		public EOBPage validateEOBStatements(){
 		System.out.println(eobCount.getText());
 		int eobCountInt = Integer.parseInt(eobCount.getText());
 		System.out.println(eobCountInt);
@@ -520,8 +562,11 @@ public class EOBPage extends UhcDriver{
 		return null;
 	}
 
-	
-	public int numberOfPageDisplayed(int eobCount){
+		/**
+		*@toDo: this method is to validate number of pages displayed
+		*/
+			
+		public int numberOfPageDisplayed(int eobCount){
 		float pageCount;
 		int numberOfPageDisplayed;
 		pageCount = eobCount/9;
