@@ -2,7 +2,6 @@ package pages.member.bluelayer;
 
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
-
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.junit.Assert;
@@ -12,7 +11,6 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-
 import acceptancetests.atdd.data.CommonConstants;
 import acceptancetests.atdd.data.PageData;
 import acceptancetests.atdd.util.CommonUtility;
@@ -269,7 +267,7 @@ public class ProfilePreferencesPage extends UhcDriver {
 
 	public JSONObject ProfileandPreferencesPageJson;
 
-	public ProfilePreferencesPage(WebDriver driver) {
+	public ProfilePreferencesPage(WebDriver driver) throws InterruptedException {
 		super(driver);
 		PageFactory.initElements(driver, this);
 		// String fileName =
@@ -279,42 +277,11 @@ public class ProfilePreferencesPage extends UhcDriver {
 		openAndValidate();
 	}
 
-	public void openAndValidate() {
+
+	@Override
+	public void openAndValidate() throws InterruptedException {
 		// TODO Auto-generated method stub
-
-		/*
-		 * JSONObject jsonObject = new JSONObject(); for (String key :
-		 * ProfileandPreferences.getExpectedData().keySet()) { List<WebElement>
-		 * elements =
-		 * findElements(ProfileandPreferences.getExpectedData().get(key));
-		 * 
-		 * 
-		 * if (elements.size() == 1) { validate(elements.get(0)); try {
-		 * jsonObject.put(key, elements.get(0).getText());
-		 * //System.out.println("Text"+elements.get(0).getText()); } catch
-		 * (JSONException e) { // TODO Auto-generated catch block
-		 * e.printStackTrace(); } } else if (elements.size() > 1) {
-		 * 
-		 * JSONArray jsonArray = new JSONArray(); for (WebElement element :
-		 * elements) {
-		 * 
-		 * validate(element); try { JSONObject jsonObjectForArray = new
-		 * JSONObject();
-		 * jsonObjectForArray.put(ProfileandPreferences.getExpectedData().get(
-		 * key).getElementName(), element.getText());
-		 * jsonArray.put(jsonObjectForArray); } catch (JSONException e) { //
-		 * TODO Auto-generated catch block e.printStackTrace(); } } try {
-		 * jsonObject.put(key, jsonArray); } catch (JSONException e) { // TODO
-		 * Auto-generated catch block e.printStackTrace(); }
-		 * 
-		 * }
-		 * 
-		 * ProfileandPreferencesPageJson = jsonObject;
-		 * 
-		 * System.out.println("ProfilePreferencesJson----->" +
-		 * ProfileandPreferencesPageJson);
-		 */
-
+		
 	}
 
 	public JSONObject getExpectedData(Map<String, JSONObject> expectedDataMap) {
@@ -757,9 +724,10 @@ public class ProfilePreferencesPage extends UhcDriver {
 
 	
 	/** 
+	 * @throws InterruptedException 
 	 * @toDo :  Validates the back Link functionality from Go green page to Profile page 
 	 */
-	public ProfilePreferencesPage validatepnparrowlink() {
+	public ProfilePreferencesPage validatepnparrowlink() throws InterruptedException {
 		try {
 			Thread.sleep(20000);
 		} catch (InterruptedException e) {
@@ -1056,4 +1024,7 @@ public class ProfilePreferencesPage extends UhcDriver {
 			Assert.assertTrue(GoGreenContentActual.equalsIgnoreCase(GoGreenContentExpected));
 		}
 	}
+
+
+
 }

@@ -1235,7 +1235,7 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 		validate(planName1);
 	   }
 
-     public pages.member.bluelayer.ProfilePreferencesPage navigateDirectToProfilePagee() {
+     public pages.member.bluelayer.ProfilePreferencesPage navigateDirectToProfilePagee() throws InterruptedException {
         System.out.println(driver.getTitle());
         accountToggleDropdown.click();
         validate(accountSettingOption);
