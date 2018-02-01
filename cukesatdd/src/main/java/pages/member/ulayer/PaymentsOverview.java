@@ -65,6 +65,9 @@ public class PaymentsOverview extends UhcDriver{
 		validate(AutomaticPaymentButton);
 	}	
 	
+	/** 
+	 * @todo : Navigate to combo tabpayment page 
+	 */
 	public OneTimePaymentsPage navigateToComboTabPaymentpage() throws InterruptedException
 	{
 		Thread.sleep(8000);
@@ -76,6 +79,9 @@ public class PaymentsOverview extends UhcDriver{
 		return null;
 	}
 	
+	/** 
+	 * @todo : Navigate to one time payment page 
+	 */
 	public OneTimePaymentsPage navigateToOneTimePaymentpage() throws InterruptedException
 	{
 		Thread.sleep(12000);
@@ -99,7 +105,9 @@ public class PaymentsOverview extends UhcDriver{
 		return null;
 	}
 	
-	
+	/** 
+	 * @todo : Navigate to Autopayment page 
+	 */
 	public OneTimePaymentsPage navigateToAutoPaymentpage() throws InterruptedException
 	{
 		Thread.sleep(8000);
@@ -131,6 +139,9 @@ public class PaymentsOverview extends UhcDriver{
 		return null;
 	}
 	
+	/** 
+	 * @todo : Navigate to tab validation payment page 
+	 */
 	public OneTimePaymentsPage TabValidation() throws InterruptedException
 	{
 		if(Tab1.isEnabled() && Tab2.isEnabled()){
@@ -140,7 +151,9 @@ public class PaymentsOverview extends UhcDriver{
 		}
 		return null;
 	}
-	
+	/** 
+	 * @todo : Navigate to the selection range
+	 */
 	public PaymentsOverview ScrollDownAndSelectRange() throws InterruptedException
 	{
 		Thread.sleep(2000);
@@ -159,7 +172,9 @@ public class PaymentsOverview extends UhcDriver{
 		return null;
 	}
 	
-	
+	/** 
+	 * @todo : unselect the paid and unpaid 
+	 */
 	public PaymentsOverview UnselectPaidUnpaidCheck() throws InterruptedException
 	{
 		Thread.sleep(2000);
