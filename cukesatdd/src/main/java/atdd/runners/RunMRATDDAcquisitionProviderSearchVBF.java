@@ -13,7 +13,7 @@ import cucumber.api.CucumberOptions;
 @RunWith(ExtendedCucumber.class)
 @ExtendedCucumberOptions(retryCount=2,screenShotSize="", screenShotLocation="/screenshots/",jsonReport = "target/cucumber-RunMRATDDFixedTests13.json",detailedReport = true, detailedAggregatedReport = true, overviewReport = true, toPDF = true, outputFolder = "target/RunMRATDDFixedTests13")
 @CucumberOptions(glue = { "atdd.framework", "acceptancetests.acquisitionvbf" }, features = { "src/main/resources/feature/acquisitionvbf" }, plugin = {
-		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDAcquisitionProviderSearch.json" }, tags = { "@AcqProviderSearchUlayer,@BlayerProviderSearch" })
-public class RunMRATDDAcquisitionProviderSearch {
+		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDAcquisitionProviderSearchVBF.json" }, tags = { "@AcqProviderSearchUlayer,@BlayerProviderSearch" })
+public class RunMRATDDAcquisitionProviderSearchVBF {
 
 }

@@ -27,10 +27,6 @@ public class PlanMaterialConfirmationPage extends UhcDriver {
 	
 	@FindBy(id ="disclosure_link")
 	private WebElement logOut;
-
-	private PageData planMaterials;
-	
-	public JSONObject planMaterialsConfirmationJson;
 	
 	@FindBy(id="additionalMaterialsText")
 	private WebElement addordermaterialLink;
@@ -40,8 +36,8 @@ public class PlanMaterialConfirmationPage extends UhcDriver {
 		super(driver);
 		PageFactory.initElements(driver, this);
 		String fileName = CommonConstants.ORDER_PLAN_MATERIALS_PAGE_DATA;
-		planMaterials = CommonUtility.readPageData(fileName,
-				CommonConstants.PAGE_OBJECT_DIRECTORY_ULAYER_MEMBER);
+//		planMaterials = CommonUtility.readPageData(fileName,
+//				CommonConstants.PAGE_OBJECT_DIRECTORY_ULAYER_MEMBER);
 		openAndValidate();
 	   }
 	
@@ -66,30 +62,6 @@ public class PlanMaterialConfirmationPage extends UhcDriver {
 	public void openAndValidate() {
 		
 		validate(addordermaterialLink);
-		
-/*		JSONObject jsonObject = new JSONObject();
-		for (String key : planMaterials.getExpectedData().keySet()) {
-			WebElement element = findElement(planMaterials.getExpectedData().get(key));
-			validate(element);
-			try {
-				jsonObject.put(key, element.getText());
-			} catch (JSONException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			
-		}
-		planMaterialsConfirmationJson = jsonObject;
-		
-		System.out.println("planMaterialsConfirmationJson----->"+planMaterialsConfirmationJson);
-		*/
-	}
-
-	public JSONObject getExpectedData(Map<String, JSONObject> expectedDataMap) {
-		JSONObject globalExpectedJson = expectedDataMap.get(CommonConstants.GLOBAL);
-		JSONObject planMaterialsExpectedJson = expectedDataMap.get(CommonConstants.ORDER_PLAN_MATERIALS);
-		planMaterialsExpectedJson = CommonUtility.mergeJson(planMaterialsExpectedJson, globalExpectedJson);
-		return planMaterialsExpectedJson;
 	}
 
 }

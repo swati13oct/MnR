@@ -36,6 +36,7 @@ import pages.member.bluelayer.DashboardPage;
 import pages.member.bluelayer.FormsandresourcesPage;
 import pages.member.bluelayer.LoginPage;
 import pages.member.bluelayer.LoginPage2;
+import pages.member.ulayer.ValueAddedServicepage;
 
 /**
  * @author pagarwa5
@@ -977,5 +978,82 @@ public class BenefitsAndCoverageUmsStepDefinition {
 				.getBean(PageConstants.BENEFITS_AND_COVERAGE_PAGE);
 		benefitsCoveragePage.validateOutofPocketMax();
 	}
+	
+	@And("the user validates headers on Bnc page for ship members")
+	public void user_validate_Headers_Ship() {
+		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario()
+				.getBean(PageConstants.BENEFITS_AND_COVERAGE_PAGE);
+		benefitsCoveragePage.validateHeadersShip();
+	}
+	
+	@And("^the user validates the Vas section on benefits and coverage page$")
+	public void validate_VAS_section()
+	{
+		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario()
+				.getBean(PageConstants.BENEFITS_AND_COVERAGE_PAGE);
+		benefitsCoveragePage.vasSection();
+	}
+	
+	
+	@And("^the user validates hand image under discount and services section$")
+	public void validate_hand_image()
+	{
+		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario()
+				.getBean(PageConstants.BENEFITS_AND_COVERAGE_PAGE);
+		benefitsCoveragePage.handimage();
+	}
+	
+	@And("the user validates learnmorebutton on Bnc page for ship members")
+	public void user_validate_learnmorebutton() {
+		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario()
+				.getBean(PageConstants.BENEFITS_AND_COVERAGE_PAGE);
+		benefitsCoveragePage.learnmorebutton();
+	}
 
+	@Then("^the user validates Needhelp header")
+	public void validateneedhelpheaderFED() {
+		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario()
+				.getBean(PageConstants.BENEFITS_AND_COVERAGE_PAGE);
+		benefitsCoveragePage.validateNeedhelpheader();
+		}
+	
+   
+	@And("^the user validate Value Add Service page$")
+	public void validate_Value_Add_page()
+	{
+		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario()
+				.getBean(PageConstants.BENEFITS_AND_COVERAGE_PAGE);
+		ValueAddedServicepage valueaddedservices= benefitsCoveragePage.navigateToValueAddService();
+		if (valueaddedservices!= null) {
+		getLoginScenario().saveBean(PageConstants.VALUE_ADDED_SERVICES, valueaddedservices);
+		}
+ }
+
+	@Then("^the user validates the need help section for ship")
+	public void uservalidatesneedhelpsectionShip() {
+		BenefitsAndCoveragePage benefitsnCoveragepage = (BenefitsAndCoveragePage) getLoginScenario()
+				.getBean(PageConstants.BENEFITS_AND_COVERAGE_PAGE);
+
+		benefitsnCoveragepage.validateneedhelpheaderShip();
+
+	}
+	
+	@Then("^the user validates see more ways to contact us section for ship")
+	public void uservalidatesseeMoreWaysShip() {
+		BenefitsAndCoveragePage benefitsnCoveragepage = (BenefitsAndCoveragePage) getLoginScenario()
+				.getBean(PageConstants.BENEFITS_AND_COVERAGE_PAGE);
+
+		benefitsnCoveragepage.validateContactUsNeedHelp();
+
+	}
+	
+	@Then("^the user validates on clicking contact us link it should route to contact us page for ship member")
+	public void uservalidatescontactus() {
+		BenefitsAndCoveragePage benefitsnCoveragepage = (BenefitsAndCoveragePage) getLoginScenario()
+				.getBean(PageConstants.BENEFITS_AND_COVERAGE_PAGE);
+
+		benefitsnCoveragepage.contactUslinkShip();
+	}
+	
+	
 }

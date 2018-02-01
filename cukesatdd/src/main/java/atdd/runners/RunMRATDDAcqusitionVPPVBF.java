@@ -14,7 +14,7 @@ import cucumber.api.CucumberOptions;
 @RunWith(ExtendedCucumber.class)
 @ExtendedCucumberOptions(retryCount=2,screenShotSize="", screenShotLocation="/screenshots/",jsonReport = "target/cucumber-RunMRATDDFixedTests10.json",detailedReport = true, detailedAggregatedReport = true, overviewReport = true, toPDF = true, outputFolder = "target/RunMRATDDFixedTests10")
 @CucumberOptions(glue = { "atdd.framework", "acceptancetests.acquisitionvbf" }, features = { "src/main/resources/feature/acquisitionvbf" }, plugin = {
-		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDAcquisitionVPP.json" }, tags = { "@vppBlayer,@vppUlayer" })
-public class RunMRATDDAcqusitionVPP {
+		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDAcqusitionVPPVBF.json" }, tags = { "@vppBlayer,@vppUlayer" })
+public class RunMRATDDAcqusitionVPPVBF {
 
 }

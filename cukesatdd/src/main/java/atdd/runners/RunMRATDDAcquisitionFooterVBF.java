@@ -13,7 +13,7 @@ import cucumber.api.CucumberOptions;
 @RunWith(ExtendedCucumber.class)
 @ExtendedCucumberOptions(retryCount=2,screenShotSize="", screenShotLocation="/screenshots/",jsonReport = "target/cucumber-RunMRATDDFixedTests8.json",detailedReport = true, detailedAggregatedReport = true, overviewReport = true, toPDF = true, outputFolder = "target/RunMRATDDFixedTests8")
 @CucumberOptions(glue = { "atdd.framework", "acceptancetests.acquisitionvbf" }, features = { "src/main/resources/feature/acquisitionvbf" }, plugin = {
-		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDAcquisitionFooter.json" }, tags = { "@globalfooter" })
-public class RunMRATDDAcquisitionFooter {
+		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDAcquisitionFooterVBF.json" }, tags = { "@globalfooter" })
+public class RunMRATDDAcquisitionFooterVBF {
 
 }

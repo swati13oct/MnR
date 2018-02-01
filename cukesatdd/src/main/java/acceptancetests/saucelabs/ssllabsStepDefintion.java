@@ -13,7 +13,7 @@ import cucumber.api.java.en.When;
 import cucumber.api.DataTable;
 
 /**
- *Functionality:
+ *Functionality: Checking for sauce labs
  */
 public class ssllabsStepDefintion {
 

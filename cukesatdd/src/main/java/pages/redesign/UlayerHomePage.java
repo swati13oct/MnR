@@ -91,11 +91,11 @@ public class UlayerHomePage extends UhcDriver {
 
 	private PageData myAccountHome;
 
-	public JSONObject accountHomeJson;
+/*	public JSONObject accountHomeJson;
 
 	private PageData browserCheckData;
 
-	private JSONObject browserCheckJson;
+	private JSONObject browserCheckJson;*/
 
 	public UlayerHomePage(WebDriver driver) throws InterruptedException {
 		super(driver);
@@ -191,7 +191,7 @@ public class UlayerHomePage extends UhcDriver {
 
 	}
 
-	public JSONObject getExpectedData(Map<String, JSONObject> expectedDataMap) {
+/*	public JSONObject getExpectedData(Map<String, JSONObject> expectedDataMap) {
 
 		JSONObject accountHomeExpectedJson = expectedDataMap.get(CommonConstants.MY_ACCOUNT_HOME);
 
@@ -209,7 +209,7 @@ public class UlayerHomePage extends UhcDriver {
 		accountHomeExpectedJson = CommonUtility.mergeJson(accountHomeExpectedJson, accountHomeComboExpectedJson);
 		return accountHomeExpectedJson;
 	}
-
+*/
 	public OrderplanmaterialsPage navigateToOrderPlanMaterialsPage() throws InterruptedException {
 		driver.navigate().to("https://"+MRScenario.environment+"-medicare.uhc.com/content/medicare/member/order-materials/overview.html");
 		//OrderPlanMaterialslnk.click();
