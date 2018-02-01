@@ -40,7 +40,7 @@ Then the user validates content displayed on EOB page without combo tabs
        | Plan Type      |<planType>  |
 Examples: 
 | planType    | memberType   					 |
-| MAPD      |IndividualMed_EOB  |  
+| PDP      |IndividualMed_EOB  |  
 
 
 
@@ -57,7 +57,7 @@ And the user selects the desired date range
 
 Examples:
 | planType    | memberType   					 |eobTypeData				 |dateRange			|
-| MAPD        |IndividualMed_EOB  		 | Prescription Drug |12 Months  	  |
+| MA        |IndividualMed_EOB  		 | Prescription Drug |12 Months  	  |
 
  
  
