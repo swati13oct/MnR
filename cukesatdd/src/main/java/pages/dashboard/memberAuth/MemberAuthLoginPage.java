@@ -42,7 +42,7 @@ public class MemberAuthLoginPage extends UhcDriver {
 		
 	}
 	/** 
-	 * @todo :Login to app
+	 * @todo : Login to app
 	 */
 	public MemberAuthLoginPage navigateToLoginURL(){
 		start(MEMBER_AUTH);
@@ -62,7 +62,7 @@ public class MemberAuthLoginPage extends UhcDriver {
 	}
 	
 	/** 
-	 * @todo :Validate Error message
+	 * @todo : Validate Error message
 	 */
 	public void validateErrorMessage(String loginname, String  loginpassword, String Errormessage) throws InterruptedException{
 		username.sendKeys(loginname);

@@ -85,7 +85,7 @@ public class UNPWAssistancePage extends UhcDriver {
 	}
 	
 	/** 
-	 * @todo :Validate the page navigated is Username password page or not
+	 * @todo : Validate the page navigated is Username password page or not
 	 */
 	public void UNPWinfoMissing() throws InterruptedException {
 
@@ -108,7 +108,7 @@ public class UNPWAssistancePage extends UhcDriver {
 	}
 	
 	/** 
-	 * @todo :Fill all the details for validating the member
+	 * @todo : Fill all the details for validating the member
 	 */
 	public void FillDetails(String MemID, String DBmm, String DBdd,
 			String DByyyy, String LstName, String ZP)

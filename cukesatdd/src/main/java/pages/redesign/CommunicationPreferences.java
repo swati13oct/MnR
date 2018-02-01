@@ -63,7 +63,7 @@ public class CommunicationPreferences extends UhcDriver {
 	}
 	
 	/** 
-	 * @todo :Navigate to preferences page from testharness page
+	 * @todo : Navigate to preferences page from testharness page
 	 */
 	public void navigateToPreferencesPage() throws InterruptedException {
 		if (driver.getTitle().equalsIgnoreCase("UnitedHealthcare")) {
@@ -104,7 +104,7 @@ public class CommunicationPreferences extends UhcDriver {
 	}
 
 	/** 
-	 * @todo :Select preferences from mail to online and viceversa
+	 * @todo : Select preferences from mail to online and viceversa
 	 */
 	public void SelectPreferences() throws InterruptedException {
 
