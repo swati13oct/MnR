@@ -31,6 +31,8 @@ public class RedesignLoginPage extends UhcDriver {
 
 
 	private static String PAGE_URL = MRConstants.MEDICARE_UHC_REDESIGN;
+	private static String CI_PAGE_URL = MRConstants.REDESIGN_LOGIN_URL; 
+	
 	
 	@FindBy(xpath = "//area[@href='javascript:clWin()'][@alt = 'close']")
 	private WebElement FeedbackModal;
@@ -71,7 +73,7 @@ public class RedesignLoginPage extends UhcDriver {
 		sendkeys(passwordField,password);
 		System.out.println(signInButton.isEnabled());
 		signInButton.click();
-		if ( MRScenario.environment.equals("team-h") || MRScenario.environment.equals("team-a")) {
+		if ( MRScenario.environment.equals("team-h") || MRScenario.environment.equals("team-a") || MRScenario.environment.equals("team-ci1")) {
 			while (!isAlertPresent());
 
 /*			try{
@@ -129,10 +131,14 @@ public class RedesignLoginPage extends UhcDriver {
 
 	@Override
 	public void openAndValidate() {
-		start(PAGE_URL);
+		if(MRScenario.environment.contentEquals("test-a") || MRScenario.environment.contentEquals("stage")){
+			start(PAGE_URL);
+		}
+		if(MRScenario.environment.contentEquals("team-ci1")){
+			start(CI_PAGE_URL);
+		}
 		validate(userNameField);
 		System.out.println("@@@@@@@@@@@@@  Test Environment and URL  : "+PAGE_URL+"  @@@@@@@@@@@@@@@@@@@@@@@");
-
 	}
 
 	public LoginAssistancePage navigateToLoginAssistance() {
