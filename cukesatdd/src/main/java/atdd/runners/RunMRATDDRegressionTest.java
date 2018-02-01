@@ -19,7 +19,7 @@ jsonReport = "target/cucumber-RunMRATDDRegressionTest.json",detailedReport = tru
 overviewReport = true, toPDF = true, outputFolder = "target/RunMRATDDRegressionTest")
 @CucumberOptions(glue = { "atdd.framework", "acceptancetests.fixedtestcases" }, 
 features = { "src/main/resources/feature/fixedtestcases" }, plugin = {
-		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDSmokeTest.json" }, tags = { "@regressionTest" })
+		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDRegressionTest.json" }, tags = { "@regressionTest" })
 public class RunMRATDDRegressionTest {
 
 }
