@@ -234,22 +234,13 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	@FindBy(name = "emailWidgetForm")
 	private WebElement emailWidgetForm;
 	
-	
-
-	private PageData vppPlanSummary;
-
 	public JSONObject vppPlanSummaryJson;
 
 	public VPPPlanSummaryPage(WebDriver driver) {
 		super(driver);
 		
 		PageFactory.initElements(driver, this);
-		//CommonUtility.waitForPageLoad(driver, vppplansummarypage, CommonConstants.TIMEOUT_30);
-		
-	/*	String fileName = CommonConstants.VPP_PLAN_SUMMARY_PAGE_DATA;
-		vppPlanSummary = CommonUtility.readPageData(fileName,
-				CommonConstants.PAGE_OBJECT_DIRECTORY_ULAYER_ACQ); */
-		openAndValidate();
+			openAndValidate();
 	}
 
 	public VPPPlanSummaryPage(WebDriver driver, String planType) {
@@ -319,30 +310,44 @@ public class VPPPlanSummaryPage extends UhcDriver {
 
 	public VPPPlanSummaryPage viewPlanSummary(String planType) {
 		if (planType.equalsIgnoreCase("PDP")) {
-			pdpPlansViewLink.click();
-			//validate(hidePdpPlans);
+			if(validate(hidePdpPlans)){
+				pdpPlansViewLink.click();
+			}
 		} else if (planType.equalsIgnoreCase("MA")
 				|| planType.equalsIgnoreCase("MAPD")) {
-			maPlansViewLink.click();
+			if(validate(hidePdpPlans)){
+				maPlansViewLink.click();
+			}
+			
 			//validate(hideMaPlans);
 		} else if (planType.equalsIgnoreCase("MS")) {
-			msPlansViewLink.click();
+			if(validate(hidePdpPlans)){
+				msPlansViewLink.click();
+			}
 		}
 		return new VPPPlanSummaryPage(driver, planType);
 	}
 	
 	public VPPPlanSummaryPage viewPlanSummaryButton(String planType) {
 		if (planType.equalsIgnoreCase("PDP")) {
+			if(validate(showPdpPlans)){
 			showPdpPlans.click();
-			validate(hidePdpPlans);
+			}
+			if(validate(hidePdpPlans)){
+				validate(hidePdpPlans);
+			}
 		} else if (planType.equalsIgnoreCase("MA")
 				|| planType.equalsIgnoreCase("MAPD")) {
-			//showMaPlans.click();
-			//viewMAPlans.click();
-			viewMAPlansC.click();
-			validate(hideMaPlans);
+			if(validate(viewMAPlansC)){
+				viewMAPlansC.click();
+			}
+			if(validate(hideMaPlans)){
+				validate(hideMaPlans);
+			}
 		} else if (planType.equalsIgnoreCase("MS")) {
-			showMsPlans.click();
+			if(validate(showMsPlans)){
+				showMsPlans.click();
+			}
 		}
 		return new VPPPlanSummaryPage(driver, planType);
 	}
@@ -350,6 +355,8 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	public VPPPlanSummaryPage clicksOnIsProviderCovered(String planName) {
 		if (planName.contains("HMO")) {
 			driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+			
+			if(maPlanElement1!=null){
 			for (WebElement plan : maPlanElement1) {
 				if (plan.getText().contains(planName)) {
 					//ElementData elementData = new ElementData("id",
@@ -370,6 +377,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 
 					
 				}
+			}
 			}
 		}
 		
@@ -440,7 +448,6 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	
 	public boolean providerinfo(String planName)
 	{
-		String providerinfo=provider.getText();
 		
 		WebElement ProviderSearchLink1 = driver.findElement
 				(By.xpath("//h2[contains(text(),'"+planName+"')]/following::span[contains(text(),'covered')][1]"));
@@ -479,7 +486,9 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
-		validate(toggleplanYear);
+		if(validate(toggleplanYear)){
+			validate(toggleplanYear);
+		}
 		if (toggleplanYear != null) {
 			toggleplanYear.click();
 			try {
@@ -496,7 +505,9 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	
 	public VPPPlanSummaryPage togglePlanYear(String planType) {
 
+		if(validate(toggleplanYear)){
 		validate(toggleplanYear);
+		}
 		if (toggleplanYear != null) {
 			toggleplanYear.click();
 		}
@@ -504,7 +515,9 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	}
 
 	public boolean clicksOnMAProviderCoveredLink() {
+		if(validate(previousYearLink)){
 		previousYearLink.click();
+		}
 		validate(MaProviderLink);
 		MaProviderLink.click();
 		ArrayList<String> tabs = new ArrayList<String>(driver.getWindowHandles());
@@ -547,8 +560,10 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	}
 	
 	public void clickCompareChkBox(){
+		if(validate(compareChkBox)){
 		waitforElement(compareChkBox);
 		compareChkBox.click();
+		}
 
 	}
 		
@@ -821,7 +836,12 @@ public class VPPPlanSummaryPage extends UhcDriver {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		if(validate(viewPlans)){
 		viewPlans.click();
+		}else{
+			Assert.assertTrue("This scenario is for AEP period", true);
+			
+		}
 		
 	}
 	
@@ -832,7 +852,12 @@ public class VPPPlanSummaryPage extends UhcDriver {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		if(validate(viewPDPPlans)){
 		viewPDPPlans.click();
+		}else{
+			Assert.assertTrue("This scenario is for AEP period", true);
+			
+		}
 	}
 	
 	public void checkAllMAPlans(){
@@ -844,14 +869,17 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		}
 		List<WebElement> allMAPlans = driver.findElements(By.xpath(".//*[@id='plan-list-1']//div[contains(@class,'compare-box')]"));	
 
+		if(allMAPlans !=null){
 		for(int i = 0; i<allMAPlans.size(); i++){
 			allMAPlans.get(i).click();
+		}
 		}
 		
 	}
 
 	public ComparePlansPage clickOnCompareLink(){
-		compareLink.click();
+
+
 		try {
 			Thread.sleep(6000);
 		} catch (InterruptedException e) {
@@ -884,13 +912,26 @@ public class VPPPlanSummaryPage extends UhcDriver {
 			e.printStackTrace();
 		}
 		if(plantype.equals("MA")||plantype.equals("MAPD")){
-			viewPlans.click();
-			List<WebElement> view2017Plans = driver.findElements(By.id("maDCELink"));
-			view2017Plans.get(0).click();
+			
+			if(validate(viewPlans)){
+				viewPlans.click();
+				List<WebElement> view2017Plans = driver.findElements(By.id("maDCELink"));
+				view2017Plans.get(0).click();
+				}else{
+					Assert.assertTrue("This scenario is for AEP period", true);
+					
+				}
+			
 		}else{
-			viewPDPPlans.click();
-			List<WebElement> view2017PDPPlans = driver.findElements(By.id("pdpDrugCostEstimatorLink"));
-			view2017PDPPlans.get(0).click();
+			if(validate(viewPDPPlans)){
+				viewPDPPlans.click();
+				List<WebElement> view2017PDPPlans = driver.findElements(By.id("pdpDrugCostEstimatorLink"));
+				view2017PDPPlans.get(0).click();
+				
+				}else{
+					Assert.assertTrue("This scenario is for AEP period", true);
+					
+				}
 			
 		}
 		try {
