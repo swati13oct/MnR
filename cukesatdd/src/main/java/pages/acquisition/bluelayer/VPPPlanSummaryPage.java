@@ -283,22 +283,37 @@ public class VPPPlanSummaryPage extends UhcDriver {
 				int msnPlans = 0;
 		if(validate(allPlansSize)){
 			 allPlans = Integer.valueOf(allPlansSize.getText().split(" ")[2]);
+		}else{
+			Assert.assertTrue("This scenario is for AEP period", true);
+			
 		}
 
 		if(validate(maPlansCount)){
 			 maPlans = Integer.valueOf(maPlansCount.getText());
+		}else{
+			Assert.assertTrue("This scenario is for AEP period", true);
+			
 		}
 		
 		if(validate(msPlansCount)){
 			 msPlans = Integer.valueOf(msPlansCount.getText());
+		}else{
+			Assert.assertTrue("This scenario is for AEP period", true);
+			
 		}
 		
 		if(validate(pdpPlansCount)){
 			 pdpPlans = Integer.valueOf(pdpPlansCount.getText());
+		}else{
+			Assert.assertTrue("This scenario is for AEP period", true);
+			
 		}
 	
 		if(validate(msnPlansCount)){
 			 msnPlans = Integer.valueOf(msnPlansCount.getText());
+		}else{
+			Assert.assertTrue("This scenario is for AEP period", true);
+			
 		}
 	
 		if(validate(msnPlansCount)){
@@ -306,6 +321,9 @@ public class VPPPlanSummaryPage extends UhcDriver {
 			{
 				flag = false;
 			}
+		}else{
+			Assert.assertTrue("This scenario is for AEP period", true);
+			
 		}
 
 		return flag;
