@@ -234,6 +234,10 @@ public class MyProfilesPage extends UhcDriver{
 //	openAndValidate();
 	}
 
+	/**
+	* @todo : Validate single tab for ship only members
+	*/
+
 	public boolean Validate_Single_Tab_SHIP(){
 		List<WebElement> PlanTabs = driver.findElements(By.xpath("//a[contains(text(),'Supplemental  Insurance Plans')]"));
 		System.out.println("No of tabs: "+PlanTabs.size());
@@ -244,7 +248,11 @@ public class MyProfilesPage extends UhcDriver{
 			return true;
 		}
 	}
+	/**
+	* @todo : Validate header info
+	*/
 
+	
 	@Override
 	public void openAndValidate() {
 		
@@ -254,6 +262,9 @@ public class MyProfilesPage extends UhcDriver{
 		
 		System.out.println("******** Page Header Displayed : "+myProfileHeader.getText()+"********");
 	}
+	/**
+	* @todo : Validate my profile page
+	*/
 
 	public JSONObject getExpectedData(Map<String, JSONObject> expectedDataMap) {
 		JSONObject globalExpectedJson = expectedDataMap
@@ -264,6 +275,9 @@ public class MyProfilesPage extends UhcDriver{
 				myProfilesPageExpectedJson, globalExpectedJson);
 		return myProfilesPageExpectedJson;
 	}
+	/**
+	* @todo : Validate error messages
+	*/
 
 	public boolean ValidateEmailErrorMessages() throws InterruptedException{
 		
@@ -330,6 +344,10 @@ public class MyProfilesPage extends UhcDriver{
 		return flag;
 	}
 	
+	/**
+	* @todo : Validation around temporary address 
+	*/
+
 	public boolean ValidateAddTempAddressModal() throws InterruptedException{
 		boolean flag = true;
 		Thread.sleep(3000);
@@ -345,6 +363,11 @@ public class MyProfilesPage extends UhcDriver{
 		}
 		return flag;
 	}
+	
+	/**
+	* @todo : Validation around temp adrress mandatory fields
+	*/
+
 	public boolean ValidateTempAddressMandatoryFieldsErrorMessages(){
 		boolean flag = true;
 		CommonUtility.checkPageIsReady(driver);
@@ -411,6 +434,10 @@ public class MyProfilesPage extends UhcDriver{
 		return flag;
 	}
 	
+	/**
+	* @todo : Validate special char error message
+	*/
+
 	public boolean ValidateSpecialCharsStreetFieldsErrorMessages(){
 		boolean flag = true;
 		System.out.println("******** VALIDATING ERROR MESSAGE FOR ACCEPTED CHARS IN STREET FIELDS **********");
@@ -454,6 +481,10 @@ public class MyProfilesPage extends UhcDriver{
 		return flag;
 	}
 	
+	/**
+	* @todo : Validate zip code mismatch error
+	*/
+
 	public boolean ValidateZipcodeMismatchError(){
 		Boolean flag = true;
 		TempAddressZip.clear();
@@ -486,7 +517,10 @@ public class MyProfilesPage extends UhcDriver{
 		}
 		return flag;
 	}
-	
+	/**
+	* @todo : Validate End date error message
+	*/
+
 	public boolean ValidateEndDateErrorMessages(){
 		boolean flag=true;
 		System.out.println("******* Validating if END DATE Error MEssages are Displayed ********");
@@ -547,7 +581,10 @@ public class MyProfilesPage extends UhcDriver{
 		return flag;
 	}
 	
-		
+	/**
+	* @todo : Verify blank password message
+	*/
+
 	public void editPasswordVerifyBlankPasswordErrorMsg(String currentPassword,String newPassError, String confPassError){
 		editPasswordlnk.click();
 		currentpassword.sendKeys(currentPassword);
@@ -557,6 +594,10 @@ public class MyProfilesPage extends UhcDriver{
 		
 	}
 	
+	/**
+	* @todo : Verify different pass error message
+	*/
+
 	public void diffPasswordErrorMsg(String currentPassword, String newPassword, String confirmnewPassword){
 		editPasswordlnk.click();
 		currentpassword.sendKeys(currentPassword);
@@ -568,6 +609,11 @@ public class MyProfilesPage extends UhcDriver{
 		
 	}
 	
+	/**
+	* @todo : Verify wrong password format error message
+	*/
+
+	
 	public void incorrectFormatPasswordErrormsg(String currentPassword, String newPassword, String incorrectformatErrorMsg){
 		editPasswordlnk.click();
 		currentpassword.sendKeys(currentPassword);
@@ -578,6 +624,10 @@ public class MyProfilesPage extends UhcDriver{
 		
 	}
 	
+	/**
+	* @todo : Verify wrong format of phone number
+	*/
+
 	public void phonemumberErrorMessage(String daytimephonenumber, String phoneerrormsg){
 		editphonelnk.click();
 		daytimephone.clear();
@@ -586,6 +636,10 @@ public class MyProfilesPage extends UhcDriver{
 		if(!(this.phoneerrormessage.getText().trim().equals(phoneerrormsg)))
 			Assert.fail("Phone number error message is not being displayed");
 		}
+
+	/**
+	* @todo : Displaying tab name based on plan type
+	*/
 
 	//@SuppressWarnings("deprecation")
 	public boolean navigatePlanTabs(String PlanType){
@@ -657,6 +711,10 @@ public class MyProfilesPage extends UhcDriver{
 		System.out.println("@@@@@@@@@@@@ Invalid Plan Type / Plan Tab not found @@@@@@@@@@@@@@");
 		return false;
 	}
+	/**
+	* @todo : Navigation to go green page 
+	*/
+
 	
 	public GoGreenPreferencesPage NavigateTo_GoGreen_MyPreferences_Page() throws InterruptedException{
 		
@@ -670,6 +728,10 @@ public class MyProfilesPage extends UhcDriver{
 		return null;
 	}
 	
+	/**
+	* @todo : Verify terminate tab is not displayed
+	*/
+
 	public boolean Validate_NoDisplay_TerminatedTabs(){
 		List<WebElement> PlanTabs = driver.findElements(By.xpath("//a[contains(text(),'(Terminated)')]"));
 		System.out.println("No of tabs: "+PlanTabs.size());

@@ -131,6 +131,9 @@ public class PharmacySearchPage extends UhcDriver{
 */		
 		openAndValidate();
 	}
+	/**
+	* @todo : Select the distance from drop down
+	*/
 
 	public PharmacySearchPage enterDistanceDetails(String distance) throws InterruptedException {
 		Thread.sleep(3000);
@@ -148,6 +151,10 @@ public class PharmacySearchPage extends UhcDriver{
 		return null;
 
 	}
+
+	/**
+	* @todo : Wait time for results to appear on UI
+	*/
 
 
 	public PharmacySearchPage searchesPharmacy() throws InterruptedException {
@@ -170,6 +177,10 @@ public class PharmacySearchPage extends UhcDriver{
 
 	}
 
+	/**
+	* @todo : Selection of Pharmacy filter type
+	*/
+	
 	public PharmacySearchPage selectsPharmacy(
 			String givenPharmacyTypes) throws InterruptedException {
 
@@ -206,6 +217,10 @@ public class PharmacySearchPage extends UhcDriver{
 		validate(continueField);
 	}
 
+	/**
+	* @todo : Changing of plan type in plan type filter
+	*/
+	
 	public PharmacySearchPage Select_PlanType_Filter(String PlanType) throws InterruptedException{
 		
 		Thread.sleep(3000);
@@ -222,7 +237,10 @@ public class PharmacySearchPage extends UhcDriver{
 		return null;
 	}
 	
-	
+	/**
+	* @todo : Enter Zip code and distance
+	*/
+
 	public PharmacySearchPage enterDistanceZipDetails(String distance, String zipcode) throws InterruptedException {
 
 		Thread.sleep(50000);
@@ -267,6 +285,10 @@ public class PharmacySearchPage extends UhcDriver{
 		return null;
 	}
 	
+	/**
+	* @todo : Validate show on map link appearance for search results 
+	*/
+	
 	public PharmacySearchPage ValidateShowOnMapLinks() throws InterruptedException {
 		Thread.sleep(20000);
 		CommonUtility.checkPageIsReady(driver);
@@ -284,6 +306,10 @@ public class PharmacySearchPage extends UhcDriver{
 		return null;
 	}
 
+	/**
+	* @todo : Verify PDF results
+	*/
+	
 	public PharmacySearchPage ValidateSearchPdfResult() throws InterruptedException {
 		
 		Thread.sleep(10000);
@@ -312,6 +338,10 @@ public class PharmacySearchPage extends UhcDriver{
 		return null;
 	}
 	
+	/**
+	* @todo : Validate More info section
+	*/
+	
 	public PharmacySearchPage validateMoreInfoContent() throws InterruptedException {
 		Thread.sleep(6000);
 		CommonUtility.checkPageIsReady(driver);
@@ -323,6 +353,10 @@ public class PharmacySearchPage extends UhcDriver{
 		return null;
 	}
 	
+	/**
+	* @todo : Validate limited dsiclaimer info
+	*/
+	
 	public PharmacySearchPage validateLimitedAccessDisclaimer(String DisclaimerText) throws InterruptedException {
 		Thread.sleep(5000);
 		CommonUtility.checkPageIsReady(driver);
@@ -333,6 +367,9 @@ public class PharmacySearchPage extends UhcDriver{
 		}
 		return null;
 	}
+	/**
+	* @todo : Verify chat widget
+	*/
 
 	public PharmacySearchPage validateChatWidget() throws InterruptedException {
 		boolean present;
@@ -350,6 +387,9 @@ public class PharmacySearchPage extends UhcDriver{
 		System.out.println("@@@@@@@@@ No Chat widget @@@@@@@@@");
 		return null;
 	}
+	/**
+	* @todo : Verify TFN widget
+	*/
 
 	public PharmacySearchPage validateTfnWidget() throws InterruptedException {
 		boolean present;
@@ -370,6 +410,9 @@ public class PharmacySearchPage extends UhcDriver{
 			System.out.println("@@@@@@@@@ No TFN widget @@@@@@@@@");
 		return null;
 	}
+	/**
+	* @todo : Verify page load in chinese language
+	*/
 
 	public PharmacySearchPage clickChinese() throws InterruptedException{
 		Thread.sleep(3000);
@@ -380,6 +423,10 @@ public class PharmacySearchPage extends UhcDriver{
 		Thread.sleep(3000);
 		return new PharmacySearchPage(driver);
 	}
+	/**
+	* @todo : Verify page load in spanish language
+	*/
+
 	public PharmacySearchPage selectspanLanguage() throws InterruptedException{
 		Thread.sleep(3000);
 		CommonUtility.checkPageIsReady(driver);
@@ -389,6 +436,9 @@ public class PharmacySearchPage extends UhcDriver{
 		Thread.sleep(3000);
 		return new PharmacySearchPage(driver);
 	}
+	/**
+	* @todo : Verify in multi language selection
+	*/
 
     public PharmacySearchPage multilangPharmacySearchResult() throws InterruptedException {
 		
@@ -404,6 +454,10 @@ public class PharmacySearchPage extends UhcDriver{
 		}
 		return null;
 	}
+    /**
+    * @todo : Verify error messages in pharmacy page
+    */
+
     public PharmacySearchPage verifyPharmacyErrormessages() throws InterruptedException{
     	boolean present;
     	Thread.sleep(3000);
@@ -425,6 +479,9 @@ public class PharmacySearchPage extends UhcDriver{
 		return null;
     	
     }
+    /**
+    * @todo : navigate pharmacy tool via aarp acquistion site
+    */
 
 	public PharmacySearchPage navigateToAARPpharmacyLocatorAcquisition() throws InterruptedException {
 	
@@ -435,7 +492,9 @@ public class PharmacySearchPage extends UhcDriver{
 		}
 		return null;
 	}
-
+	/**
+	    * @todo : navigate pharmacy tool via UHC acquistion site
+	    */
 	public PharmacySearchPage navigateToUHCpharmacyLocatorAcquisition() throws InterruptedException {
 		
 		driver.navigate().to("https://www.awe-"+MRScenario.environment+"uhcmedicaresolutions.uhc.com/health-plans/aarp-pharmacy.html#/Pharmacy-Search-English");
@@ -445,7 +504,9 @@ public class PharmacySearchPage extends UhcDriver{
 		}
 		return null;
 	}
-
+	/**
+	    * @todo : Changing zip code and distance info in acquistion site
+	    */
 	public PharmacySearchPage enterZipDistanceDetails(String zipcode, String distance, String county) throws InterruptedException {
 		sendkeys(zipcodeField, zipcode);
 		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
