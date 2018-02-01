@@ -35,7 +35,7 @@ import cucumber.api.java.en.When;
 
 /**
  * @author sdwaraka
- *
+ * Functionality: Pharmacy locator in New Member redesign
  */
 public class PharmacyLocatorMemberRedesignStepDefinition {
 
@@ -46,6 +46,9 @@ public class PharmacyLocatorMemberRedesignStepDefinition {
 		return loginScenario;
 	}
 
+/**
+	* @todo : verify Pharmacy tool for member redesign site
+*/
 	@Given("^registered member to verify locate a pharmacy in Redesign Site$")
 	public void registered_member_located_pharmacy_aarp(
 			DataTable memberAttributes) throws InterruptedException {
@@ -120,7 +123,11 @@ public class PharmacyLocatorMemberRedesignStepDefinition {
 			Assert.fail();
 		}
 	}
-
+	
+	/**
+	* @todo : Navigate to pharmacy tool from dashboard
+	*/
+	
 	@When("^the user navigates to pharmacy search page in Redesign site$")
 	public void user_views_pharmacy_locator_aarp() throws InterruptedException {
 		UlayerHomePage accountHomePage = (UlayerHomePage) getLoginScenario()
@@ -134,6 +141,10 @@ public class PharmacyLocatorMemberRedesignStepDefinition {
 			Assert.fail("Failed to load Pharmacy search page");
 		}
 	}
+
+	/**
+	* @todo : Changing the distance in pharmacy locator 
+	*/
 
 	@And("^the user enters distance details in Redesign site$")
 	public void user_enters_distance_details_aarp(DataTable zipAttributes) throws InterruptedException {
@@ -164,6 +175,10 @@ public class PharmacyLocatorMemberRedesignStepDefinition {
 
 	}
 
+	/**
+	* @todo : Verify the pharmacies as per the filter criteria
+	*/
+	
 	@Then("^the user validates the pharmacies available in Redesign site$")
 	public void user_validates_pharmacies_available_aarp() throws InterruptedException {
 
@@ -182,6 +197,10 @@ public class PharmacyLocatorMemberRedesignStepDefinition {
 		}
 	}
 
+	/**
+	* @todo : Choosing the different set of combination in Pharmacy filter
+	*/
+	
 	@When("^the user selects Pharmacy Types to Filter in Redesign Site$")
 	public void the_user_selects_Pharmacy_Types_to_Filter_in_AARP_Site(DataTable pharmacyAttributes) throws InterruptedException {
 
@@ -206,6 +225,11 @@ public class PharmacyLocatorMemberRedesignStepDefinition {
 		}
 	}
 
+	/**
+	* @todo : Filter criteria verification in pharmacy tool page
+	*/
+	
+	
 	@And("^the user enters following details for pharmacy search in Redesign Site$")
 	public void user_enters_zipcode_distance_details_aarp(DataTable zipAttributes) throws InterruptedException {
 		List<DataTableRow> zipAttributesRow = zipAttributes.getGherkinRows();
@@ -237,6 +261,10 @@ public class PharmacyLocatorMemberRedesignStepDefinition {
 		}
 	}
 
+	/**
+	* @todo : Verifying show on map link clickable for pharmacies appearing in the search results
+	*/
+	
 	@Then("^the user Validates show on map link in Redesign Site$")
 	public void user_views_show_on_map_result_AARP() throws InterruptedException {
 		PharmacySearchPage pharmacySearchPage = (PharmacySearchPage) getLoginScenario()
@@ -254,6 +282,10 @@ public class PharmacyLocatorMemberRedesignStepDefinition {
 		}
 	}
 
+/**
+	* @todo : Verify Create a PDF in pharmacy search page
+*/
+	
 	@Then("^the user Validates view search PDF link in Redesign Site$")
 	public void user_views_search_pdf_result_AARP() throws InterruptedException {
 		PharmacySearchPage pharmacySearchPage = (PharmacySearchPage) getLoginScenario()
@@ -271,6 +303,10 @@ public class PharmacyLocatorMemberRedesignStepDefinition {
 		}
 	}
 
+/**
+	* @todo : Verify search results based on plan type
+*/
+	
 	@And("^the user validate more information content based on plan type in Redesign Site$")
 	public void user_validate_more_information_content() throws InterruptedException {
 		PharmacySearchPage pharmacySearchPage = (PharmacySearchPage) getLoginScenario()
@@ -287,7 +323,9 @@ public class PharmacyLocatorMemberRedesignStepDefinition {
 		}
 	}
 
-
+	/**
+	* @todo : Verifying more information content appearing based on plan type
+*/
 	@And("^the user validates more information content for Limited Access Disclaimer$")
 	public void user_validate_limited_access_disclaimer(DataTable zipAttributes) throws InterruptedException {
 		
@@ -313,6 +351,9 @@ public class PharmacyLocatorMemberRedesignStepDefinition {
 		}
 	}
 
+/**
+	* @todo : Verifying chat widget 
+*/	
 	@And("^the user validate chat widget in Redesign Site$")
 	public void user_validate_chat_widget() throws InterruptedException {
 		PharmacySearchPage pharmacySearchPage = (PharmacySearchPage) getLoginScenario()
@@ -329,6 +370,9 @@ public class PharmacyLocatorMemberRedesignStepDefinition {
 		}
 	}
 
+/**
+	* @todo : Verifying TFN widget
+*/	
 	@And("^the user validate TFN widget in Redesign Site$")
 	public void user_validate_tfn_widget() throws InterruptedException {
 		PharmacySearchPage pharmacySearchPage = (PharmacySearchPage) getLoginScenario()
@@ -344,6 +388,10 @@ public class PharmacyLocatorMemberRedesignStepDefinition {
 			Assert.fail("TFN Widget is NOT Displayed");
 		}
 	}
+
+/**
+	* @todo : Verifying the pharmacy search tool in Chinese languages
+*/	
 	@Then("^the user Selects Chinese Language in Redesign Site$")
 	public void selectchinese_chinese() throws InterruptedException {
 		PharmacySearchPage pharmacySearchPage = (PharmacySearchPage) getLoginScenario()
@@ -356,6 +404,9 @@ public class PharmacyLocatorMemberRedesignStepDefinition {
 			Assert.fail("Failed to load Pharmacy search page - Chinese Language Selected");
 		}
 	}
+/**
+	* @todo : Verifying the pharmacy search tool in Spanish language
+*/	
 	@Then("^the user Selects Spanish Language in Redesign site$")
 	public void select_spanish() throws InterruptedException {
 		PharmacySearchPage pharmacySearchPage = (PharmacySearchPage) getLoginScenario()
@@ -370,7 +421,9 @@ public class PharmacyLocatorMemberRedesignStepDefinition {
 			Assert.fail("Failed to load Pharmacy search page - Spanish Language Selected");
 		}
 	}
-
+/**
+	* @todo : Verifying the pharmacy search tool in different languages
+*/	
 	@And("^the user searches multi lang for pharmacy search results available in Redesign site$")
 	public void user_views_multi_lang_pharmacy_search_result() throws InterruptedException {
 		PharmacySearchPage pharmacySearchPage = (PharmacySearchPage) getLoginScenario()
@@ -385,6 +438,9 @@ public class PharmacyLocatorMemberRedesignStepDefinition {
 			Assert.fail("Pharmacy Results are NOT Displayed");
 		}
 	}
+/**
+	* @todo : Verifying the error message in pharmacy search tool
+*/	
 	@And("^the user verify error messages in pharmacy locator page in Redesign site$")
 	public void user_verify_pharmacyerrormessages() throws InterruptedException{
 		PharmacySearchPage pharmacySearchPage = (PharmacySearchPage) getLoginScenario()
