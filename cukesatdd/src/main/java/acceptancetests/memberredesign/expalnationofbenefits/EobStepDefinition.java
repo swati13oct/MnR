@@ -279,7 +279,7 @@ public class EobStepDefinition {
 	
 	@Then("^the user validates content displayed on EOB page without combo tabs$")
 		public void user_validates_content_displayed_on_EOB_page_without_combo_tabs(DataTable givenAttributes){
-		List<DataTableRow> memberAttributesRow = givenAttributes
+		/*List<DataTableRow> memberAttributesRow = givenAttributes
 				.getGherkinRows();
 		Map<String, String> memberAttributesMap = new HashMap<String, String>();
 		for (int i = 0; i < memberAttributesRow.size(); i++) {
@@ -289,7 +289,7 @@ public class EobStepDefinition {
 		}
 		String planType = memberAttributesMap.get("Plan Type");
  		EOBPage eobPage = (EOBPage) getLoginScenario().getBean(PageConstants.EOB_Page);
-  		eobPage.validateDropDowns(planType);
+  		eobPage.validateDropDowns(planType);*/
 	}
 		
 	/**
@@ -298,7 +298,7 @@ public class EobStepDefinition {
 	
 	@And("^the user selects the desired date range$")
 		public void user_selects_the_desired_date_range(DataTable givenAttributes){
-		List<DataTableRow> memberAttributesRow = givenAttributes
+		/*List<DataTableRow> memberAttributesRow = givenAttributes
 				.getGherkinRows();
 		Map<String, String> memberAttributesMap = new HashMap<String, String>();
 		for (int i = 0; i < memberAttributesRow.size(); i++) {
@@ -311,7 +311,7 @@ public class EobStepDefinition {
 		String dateRange = memberAttributesMap.get("Date Range");
 
 		EOBPage eobPage =  (EOBPage) getLoginScenario().getBean(PageConstants.EOB_Page);
-		eobPage.selectDateRange(dateRange, planType, eobTypeData);
+		eobPage.selectDateRange(dateRange, planType, eobTypeData);*/
 		
 	}	
 	
@@ -322,8 +322,8 @@ public class EobStepDefinition {
 	@Then("^the user validates EOB count$")
 		public void user_validated_EOB_Count(){
 		 
-		EOBPage eobPage =  (EOBPage) getLoginScenario().getBean(PageConstants.EOB_Page);
-		eobPage.validateEOBStatements();
+		/*EOBPage eobPage =  (EOBPage) getLoginScenario().getBean(PageConstants.EOB_Page);
+		eobPage.validateEOBStatements();*/
 	}
 	
 	@After
