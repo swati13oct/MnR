@@ -26,7 +26,7 @@ And the user slects the desired date range
 Then the user validates EOB count
 	Examples:
 		| planType  | memberType        |dateRange			| eobType |
-		| MAPD      |IndividualMed_EOB  |12 Months		  | Medical |
+		| MAPD      |Individual5Med_EOB  |12 Months		  | Medical |
 
 
  
@@ -40,7 +40,7 @@ Then the user validates content displayed on EOB page without combo tabs
        | Plan Type      |<planType>  |
 Examples: 
 | planType    | memberType   					 |
-| MAPD        |IndividualMed_EOB  |  
+| MAPD      |IndividualMed_EOB  |  
 
 
 
@@ -57,7 +57,7 @@ And the user selects the desired date range
 
 Examples:
 | planType    | memberType   					 |eobTypeData				 |dateRange			|
-| MAPD        |IndividualMed_EOB  		 | Prescription Drug |12 Months  	 |
+| MAPD        |IndividualMed_EOB  		 | Prescription Drug |12 Months  	  |
 
  
  
