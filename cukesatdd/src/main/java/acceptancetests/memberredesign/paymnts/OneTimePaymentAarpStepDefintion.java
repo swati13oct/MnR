@@ -56,7 +56,8 @@ public class OneTimePaymentAarpStepDefintion {
 	public MRScenario getLoginScenario() {
 		return loginScenario;
 	}
-
+	
+	
 	@Given("^registered AARP with a planType member for AARP site$")
 	public void registered_AMP_with_attributes_payment(
 			DataTable memberAttributes) {

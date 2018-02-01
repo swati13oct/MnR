@@ -67,8 +67,9 @@ public class ExplanationOfBenefitsPage extends UhcDriver {
 	public void openAndValidate() {
 		start(PAGE_URL);
 	}
-
-	// Navigate to EOB Page
+	/** 
+	 * @todo :Navigate to EOB Page
+	 */
 	public void navigateToEOBPage() throws InterruptedException {
 		if (driver.getTitle().equalsIgnoreCase("UnitedHealthcare")) {
 			System.out.println("navigated to Homepage!");
@@ -115,8 +116,9 @@ public class ExplanationOfBenefitsPage extends UhcDriver {
 			// return null;
 		}
 	}
-
-	// Validate the EOB elements present in the page or not
+	/** 
+	 * @todo :Validate the EOB elements present in the page or not
+	 */
 	public void validateEOB() throws InterruptedException {
 
 		if (driver.getTitle().equalsIgnoreCase("EOB Search")) {
