@@ -51,7 +51,9 @@ public class LoginAssistanceAarpStepDefintion {
 		return loginScenario;
 	}
 	
-	// Login to the Application
+	/** 
+	 * @todo :Login to the Application
+	 */
 	@Given("^UnPwdAssTheSpartans user navigates to login assistance page from member AARP site$")
 	public void UnPwdAssTheSpartans_user_navigates_login_assistance_member_aarp() {
 
@@ -70,7 +72,9 @@ public class LoginAssistanceAarpStepDefintion {
 
 	}
 
-	// Navigate to Username and password Assistance page
+	/** 
+	 * @todo :Navigate to Username and password Assistance page
+	 */
 	@When("^UnPwdAssTheSpartans select username and password$")
 	public void UnPwdAssTheSpartans_user_pwd_select() throws InterruptedException {
 		// LoginPage loginPage = (LoginPage) getLoginScenario()
@@ -90,7 +94,9 @@ public class LoginAssistanceAarpStepDefintion {
 
 	}
 
-	// Fill the details in UnPwdAssistance Page
+	/** 
+	 * @todo :Fill the details in UnPwdAssistance Page
+	 */
 	@Then("^UnPwdAssTheSpartans confirmation page need to be displayed$")
 	public void UnPwdAssTheSpartans_login_validation(DataTable memberAttributes)
 			throws InterruptedException {
