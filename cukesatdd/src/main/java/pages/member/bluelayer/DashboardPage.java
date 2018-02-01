@@ -49,6 +49,9 @@ public class DashboardPage extends UhcDriver {
 	private WebElement BnClink;
 
 
+	/** 
+	 * @toDo :To check the Rally dashboard page 
+	 */
 
 	@Override
 	public void openAndValidate() {
@@ -58,6 +61,9 @@ public class DashboardPage extends UhcDriver {
 		//validate(panelHome);
 	}
 
+	/** 
+	 * @toDo : The user navigates to Profile  and Preferences  page from Rally Dashboard
+	 */
 	public pages.member.bluelayer.ProfilePreferencesPage navigateDirectToProfilePage() {
 		System.out.println(driver.getTitle());
 		accountToggleDropdown.click();
@@ -86,6 +92,10 @@ public class DashboardPage extends UhcDriver {
 		return null;
 	}
 
+	
+	/** 
+	 * @toDo : The user navigates to Benefits and coverage page from Rally Dashboard
+	 */
 	public BenefitsAndCoveragePage navigateDirectToBnCPag() {
 
 		// driver.navigate().to(PAGE_URL);

@@ -330,6 +330,10 @@ public class ProfilePreferencesPage extends UhcDriver {
 		return profilenpreferencesExpectedJson;
 
 	}
+	
+	/** 
+	 * @toDo : The user validates the Account information of the logged in member 
+	 */
 
 	public void validatePlanNameMemberidNameAcountProfile() {
 
@@ -346,6 +350,10 @@ public class ProfilePreferencesPage extends UhcDriver {
 		validate(EditButton);
 
 	}
+	
+	/** 
+	 * @toDo : The user checks the email section 
+	 */
 
 	public void validateEmail() {
 		validate(EmailLabel);
@@ -354,6 +362,10 @@ public class ProfilePreferencesPage extends UhcDriver {
 		validate(email);
 
 	}
+	
+	/** 
+	 * @toDo : The user checks the Password Update functionality
+	 */
 
 	public void validateAccountEdit(String password2) {
 
@@ -365,6 +377,10 @@ public class ProfilePreferencesPage extends UhcDriver {
 		SaveButton.click();
 
 	}
+	
+	/** 
+	 * @toDo : The user checks the elements that appear when the user clicks on edit link of Account section
+	 */
 
 	public void validateAccountEditElements() {
 		// TODO Auto-generated method stub
@@ -383,6 +399,9 @@ public class ProfilePreferencesPage extends UhcDriver {
         }
 
 	
+	/** 
+	 * @toDo : The user checks the Password Update functionality  without entering the mandatory fields
+	 */
 	public boolean validateSavebuttonclick() {
 		try {
 			Thread.sleep(30000);
@@ -401,6 +420,9 @@ public class ProfilePreferencesPage extends UhcDriver {
 		return false;
 	}
 	
+	/** 
+	 * @toDo :  The user checks the Password Update functionality by entering an invalid password
+	 */
 	public boolean invalidpasswordvalidation()
 	{
 		//EditButton.click();
@@ -421,6 +443,9 @@ public class ProfilePreferencesPage extends UhcDriver {
 		return false;
 	}
 	
+	/** 
+	 * @toDo :  The user checks the Password Update functionality by entering different  password in confirm password field
+	 */
 	public boolean invalidpasswordvalidation2()
 	{
 		//EditButton.click();
@@ -442,6 +467,9 @@ public class ProfilePreferencesPage extends UhcDriver {
 		return false;
 	}
 	
+	/** 
+	 * @toDo : The user checks the functionality of cancel Button of the password update window
+	 */
 	public void validateCancelButton() {
 		
 		try {
@@ -462,7 +490,9 @@ public class ProfilePreferencesPage extends UhcDriver {
 	}
 	
 	
-
+	/** 
+	 * @toDo : The user checks the options after clicking on email edit link
+	 */
 	public void validateEmailEditElements() {
 
 		validate(EmailEditbutton);
@@ -477,6 +507,10 @@ public class ProfilePreferencesPage extends UhcDriver {
 
 	}
 
+	
+	/** 
+	 * @toDo :  Validates the email edit functionality without filling any of the email text fields
+	 */
 	public boolean emailblankfieldsvalidation() {
 		EmailEditbutton.click();
 		try {
@@ -495,6 +529,10 @@ public class ProfilePreferencesPage extends UhcDriver {
 		return false;
 	}
 
+	
+	/** 
+	 * @toDo :  Validates the email edit functionality with valid email
+	 */
 	public boolean validateemailsavefunctionality() {
 		NewEmail.sendKeys("nikitajain4@gmail.com");
 		emailConfirm.sendKeys("nikitajain4@gmail.com");
@@ -514,6 +552,9 @@ public class ProfilePreferencesPage extends UhcDriver {
 		return false;
 	}
 
+	/** 
+	 * @toDo :  Validates the email edit functionality with invalid email
+	 */
 	public void validateinvalidemailerrormessage() {
 		EmailEditbutton.click();
 		NewEmail.sendKeys("nikitajain");
@@ -527,6 +568,10 @@ public class ProfilePreferencesPage extends UhcDriver {
 		CanceEmaillButton.click();
 	}
 
+	
+	/** 
+	 * @toDo :  Validates the email edit functionality by entering different email id's in confirm email box from new email address
+	 */
 	public boolean validateduplicateerrormessage() {
 		EmailEditbutton.click();
 		NewEmail.sendKeys("nikitajain4@gmail.com");
@@ -554,6 +599,10 @@ public class ProfilePreferencesPage extends UhcDriver {
 
 	}
 
+	
+	/** 
+	 * @toDo : checks the see more ways to contact us link in the Need help section
+	 */
 	public void validateseemorewaystext() {
 		JavascriptExecutor jse = (JavascriptExecutor) driver;
 		jse.executeScript("window.scrollBy(0,4000)", "");
@@ -566,6 +615,10 @@ public class ProfilePreferencesPage extends UhcDriver {
 		validate(Seemorewaystext);
 	}
 
+	
+	/** 
+	 * @toDo :  the user validates the page that opens up on  clicking the  see more ways to contact us link in the Need help section
+	 */
 	public boolean clickcontactUslink() {
 		validate(contactUs);
 		contactUs.click();
@@ -584,6 +637,9 @@ public class ProfilePreferencesPage extends UhcDriver {
 		
 	}
 
+	/** 
+	 * @toDo :  Validates the need help section headers
+	 */
 	public void validateneedhelpheader() {
 		validate(NeedHelpHeader);
 		validate(Technicalsupportsection);
@@ -626,6 +682,9 @@ public class ProfilePreferencesPage extends UhcDriver {
 		}
 	}
 
+	/** 
+	 * @toDo :  Validates the permanent address section header
+	 */
 	public void validatepermanentaddress() {
 		JavascriptExecutor jse = (JavascriptExecutor)driver;
 		jse.executeScript("window.scrollBy(0,400)", "");
@@ -638,6 +697,11 @@ public class ProfilePreferencesPage extends UhcDriver {
 		validate(permanentaddress);
 
 	}
+	
+	/** 
+	 * @toDo :  Validates the contact us link and the page that opens up on clicking the contact us link
+	 */
+
 
 	public boolean validatecontactuslink() {
 		validate(contactuslink);
@@ -655,12 +719,20 @@ public class ProfilePreferencesPage extends UhcDriver {
 		}
 		return false;
 	}
+	
+	/** 
+	 * @toDo :  Validates the Communication Preferences section headers
+	 */
 
 	public void validatecommunicationpreferences() {
 		validate(communicationpreferencesheader);
 		validate(gopaperlessbutton);
 		validate(communicationpreferncessection);
 	}
+	
+	/** 
+	 * @toDo :  Validates the Go green button in Communication Preferences section 
+	 */
 
 	public GoGreenPage validategogreenbutton() {
 		gopaperlessbutton.click();
@@ -670,6 +742,10 @@ public class ProfilePreferencesPage extends UhcDriver {
 		}
 		return null;
 	}
+	
+	/** 
+	 * @toDo :  Validates the headers on Go green page
+	 */
 
 	public void validateheader() {
 		validate(gogreenleaf);
@@ -679,6 +755,10 @@ public class ProfilePreferencesPage extends UhcDriver {
 
 	}
 
+	
+	/** 
+	 * @toDo :  Validates the back Link functionality from Go green page to Profile page 
+	 */
 	public ProfilePreferencesPage validatepnparrowlink() {
 		try {
 			Thread.sleep(20000);
@@ -701,6 +781,10 @@ public class ProfilePreferencesPage extends UhcDriver {
 	}
 	
 
+	/** 
+	 * @toDo :  Validates the elements of Phone section
+	 */
+
 	public void validatePhoneElements() {
 
 		validate(Phonesection);
@@ -708,6 +792,10 @@ public class ProfilePreferencesPage extends UhcDriver {
 		// validate(PhoneEditLink);
 		
 }
+	
+	/** 
+	 * @toDo :  Validates the elements on clicking the Phone edit Button
+	 */
 
 	public void validatePhoneEditElements() {
 		PhoneEditButton.click();
@@ -718,6 +806,10 @@ public class ProfilePreferencesPage extends UhcDriver {
 		validate(PhoneCancelButton);
 		validate(PhoneSaveButton);*/
 	}
+	
+	/** 
+	 * @toDo :  Validates the functionality of cancel Button which appears post clicking the edit button in phone section
+	 */
 
 	public void validatePhoneCancel() {
 		if (PhoneCancelButton.isDisplayed()) {
@@ -733,6 +825,9 @@ public class ProfilePreferencesPage extends UhcDriver {
 
 	}
 
+	/** 
+	 * @toDo :  Validates the functionality of saving or updating Phone numbers in phone section
+	 */
 	public void validatePhoneSave() {
 		if (PhoneSaveButton.isDisplayed()) {
 			String evetime = "2222222222";
@@ -752,12 +847,20 @@ public class ProfilePreferencesPage extends UhcDriver {
 
 	}
 
+	/** 
+	 * @toDo :  Validates the presence of Cancel Button post clicking the edit buttton of the Phone section
+	 */
+
 	public void validateCancelElement() {
 		// TODO Auto-generated method stub
 		Assert.assertTrue(PhoneTopCancelButton.getText().equalsIgnoreCase("CANCEL"));
 
 	}
 
+	
+	/** 
+	 * @toDo :  Validates the elements of the temporary address section
+	 */
 	public void validatetempaddressElements() {
 
 		validate(tempAddressHeader);
@@ -765,6 +868,10 @@ public class ProfilePreferencesPage extends UhcDriver {
 
 	}
 
+	
+	/** 
+	 * @toDo : Validates the elements that appear on clicking the edit button of the temp address section
+	 */
 	public void validatetempaddressEditElements() {
 		// TODO Auto-generated method stub'
 		tempEditButton.click();
@@ -785,15 +892,28 @@ public class ProfilePreferencesPage extends UhcDriver {
 
 	}
 
+	
+	/** 
+	 * @toDo :  Validates the Cancel button that appear on clicking the edit button of the temp address section
+	 */
+
 	public void validateTempAddressTopCancelElement() {
 		Assert.assertTrue(CancelButtontoptempAddress.getText().equalsIgnoreCase("CANCEL"));
 
 	}
+	
+	/** 
+	 * @toDo :  Validates the Save Functionality of the Temporary address section
+	 */
 
 	public void validatetempaddressSave() {
 
 	}
 
+	
+	/** 
+	 * @toDo :  Validates the Cancel Functionality of the temp address section
+	 */
 	public void validatetempaddressCancel() {
 
 		CancelButtontempAddress.click();
@@ -803,6 +923,10 @@ public class ProfilePreferencesPage extends UhcDriver {
 		}
 
 	}
+	
+	/** 
+	 * @toDo :  Validates the presence of Go Paperless button
+	 */
 
 	public void validateGoPaperlessbutton() {
 		// TODO Auto-generated method stub
@@ -815,7 +939,9 @@ public class ProfilePreferencesPage extends UhcDriver {
 		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 	}
 
-
+	/** 
+	 * @toDo :  Validates the plan name on the Go Green page
+	 */
 
 	public void validatePlanName() {
 		
@@ -829,6 +955,10 @@ public class ProfilePreferencesPage extends UhcDriver {
 		
 	}
 
+	/** 
+	 * @toDo :  Validates the headers of the communication preferences section
+	 */
+
 	public void validatecommunicationpreferencesheader() {
 
 		validate(communicationPreferences);
@@ -841,6 +971,10 @@ public class ProfilePreferencesPage extends UhcDriver {
 		
 
 	}
+	
+	/** 
+	 * @toDo :  Validates the  presence of Back to Profile and Preferences links on Go green page
+	 */
 
 	public void validateBacktoPNPlink() {
 
@@ -869,22 +1003,32 @@ public class ProfilePreferencesPage extends UhcDriver {
 		return null;*/
 
 	}
-
+	/** 
+	 * @toDo :  Validates the Note section on Go green page
+	 */
 	public void validateNoteSection() {
 		
 		validate(NoteSection);
 		String noteContentActual = NoteSection.getText();
 		String noteContentExpected = "Note: it may take up to two mail cycles for your updated delivery preferences to take effect. Your mailing cycle-the length of time between documents-varies by document. When the paper mailings stop, you will receive an email notification alerting you that a new document has been posted to your online account. ";
-		//Assert.assertTrue(noteContentActual.equalsIgnoreCase(noteContentExpected));
+		Assert.assertTrue(noteContentActual.equalsIgnoreCase(noteContentExpected));
 
 	}
 
+	
+	/** 
+	 * @toDo :  Validates the I have read checkbox  on Go green page
+	 */
 	public void validateCheckbox() {
 		// TODO Auto-generated method stub
 		validate(iHavereadCheckbox);
-		//iHavereadCheckbox.click();
+		iHavereadCheckbox.click();
 	}
 
+	
+	/** 
+	 * @toDo :  Validates the save preferences functionality on Go green page
+	 */
 	public void validateSavePreferences() {
 		// TODO Auto-generated method stub
 		validate(savePreferencesButton);
@@ -894,6 +1038,10 @@ public class ProfilePreferencesPage extends UhcDriver {
 		}
 
 	}
+	
+	/** 
+	 * @toDo :  Validates the Go green header on Go green page
+	 */
 
 	public void validateGoGreenHeader() {
 		validate(GoGreenHeader);
