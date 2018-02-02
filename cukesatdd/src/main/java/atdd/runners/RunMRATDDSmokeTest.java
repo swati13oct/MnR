@@ -15,7 +15,7 @@ import cucumber.api.CucumberOptions;
 
 @RunWith(ExtendedCucumber.class)
 @ExtendedCucumberOptions(retryCount=0,screenShotSize="", screenShotLocation="/screenshots/",jsonReport = "target/cucumber-RunMRATDDSmokeTest.json",detailedReport = true, detailedAggregatedReport = true, overviewReport = true, toPDF = true, outputFolder = "target/RunMRATDDSmokeTest")
-@CucumberOptions(glue = { "atdd.framework", "acceptancetests.fixedtestcases" }, features = { "src/main/resources/feature/fixedtestcases" }, plugin = {
+@CucumberOptions(glue = { "atdd.framework", "acceptancetests.acquisitionvbf" }, features = { "src/main/resources/feature/acquisitionvbf" }, plugin = {
 		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDSmokeTest.json" }, tags = { "@vppBlayerSmoke,@vppUlayerSmoke,@agentAppointmentUlayerSmoke,@agentAppointmentBlayerSmoke,@loginAarpSmoke,@loginUHCSmoke,@PharmacyLocatorBlayerSmoke,@pharmacylocatorulayerSmoke" })
 public class RunMRATDDSmokeTest {
 

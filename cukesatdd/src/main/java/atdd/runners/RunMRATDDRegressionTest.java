@@ -17,9 +17,9 @@ import cucumber.api.CucumberOptions;
 @ExtendedCucumberOptions(retryCount=0,screenShotSize="", screenShotLocation="/screenshots/",
 jsonReport = "target/cucumber-RunMRATDDRegressionTest.json",detailedReport = true, detailedAggregatedReport = true,
 overviewReport = true, toPDF = true, outputFolder = "target/RunMRATDDRegressionTest")
-@CucumberOptions(glue = { "atdd.framework", "acceptancetests.fixedtestcases" }, 
-features = { "src/main/resources/feature/fixedtestcases" }, plugin = {
-		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDSmokeTest.json" }, tags = { "@regressionTest" })
+@CucumberOptions(glue = { "atdd.framework", "acceptancetests.acquisitionvbf" }, 
+features = { "src/main/resources/feature/acquisitionvbf" }, plugin = {
+		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDRegressionTest.json" }, tags = { "@regressionTest" })
 public class RunMRATDDRegressionTest {
 
 }
