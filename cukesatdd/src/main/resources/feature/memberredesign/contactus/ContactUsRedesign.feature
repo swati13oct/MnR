@@ -47,7 +47,7 @@ Feature: To test Send us a question Widget and Click to call functionality in co
       #| plantype | memberType |
       #| MAPD     | Group      |
 
-	#@invalidEmail
+	@invalidEmail
   Scenario Outline: Validate  invalid aletrnative emailIds in contact us redesign page
   Given registered UMS member with following attributes
   	  | Plan Type   | <plantype>   |
@@ -59,7 +59,7 @@ Feature: To test Send us a question Widget and Click to call functionality in co
       | plantype | memberType |
       | MAPD     | Group      |
   
-  #@invalidConfirmEmail
+  @invalidConfirmEmail
   Scenario Outline: Validate  invalid confirm aletrnative emailIds in contact us redesign page
   Given registered UMS member with following attributes
   | Plan Type   | <plantype>   |
@@ -71,7 +71,7 @@ Feature: To test Send us a question Widget and Click to call functionality in co
       | plantype | memberType |
       | MAPD     | Group      |
 
-	#@blankSendUsQuestion
+	@blankSendUsQuestion
   Scenario Outline: validate user enters blank text  in sendUS A question  message widget in contact us redesign page
     Given registered UMS member with following attributes
       | Plan Type   | <plantype>   |
@@ -83,7 +83,7 @@ Feature: To test Send us a question Widget and Click to call functionality in co
       | plantype | memberType |
       | MAPD     | Group      |
 
-	#@invalidPhone
+	@invalidPhone
   Scenario Outline: validate user enters invalid phone number  in sendUS A question widget in contact us redesign page
     Given registered UMS member with following attributes
       | Plan Type   | <plantype>   |
@@ -95,18 +95,18 @@ Feature: To test Send us a question Widget and Click to call functionality in co
       | plantype | memberType |
       | MAPD     | Group      |
 
-  #@US635973
-  #Scenario Outline: Verify Group Email Widget Confirm Request in contact us redesign page
-  #Given registered UMS member with following attributes
-        #| Plan Type   | <plantype>   |
-  #		| Member Type | <memberType> |
-  #When the user navigates to contact us page in UHC site
-  #Then user clicks on submit question by selecting Finding a Physician option in redesign contact us page
-  #And UI should be replaced by a confirmation display
-  #
-  #Examples: 
-      #| plantype | memberType |
-      #| MAPD     | Group      |
+  @GroupEmailConfirmMessage
+  Scenario Outline: Verify Group Email Widget Confirm Request in contact us redesign page
+  Given registered UMS member with following attributes
+        | Plan Type   | <plantype>   |
+  		| Member Type | <memberType> |
+  When the user navigates to contact us page in UHC site
+  Then user clicks on submit question by selecting Finding a Physician option in redesign contact us page
+  And UI should be replaced by a confirmation display
+  
+  Examples: 
+      | plantype | memberType |
+      | MAPD     | Group      |
   
   #Scenario Outline: Verify secureEmail Widget page section in contact us redesign page for not opted in aarp member of  AARP site covers scenario 1,2,5,6,7
     #Given registered UMS member with following attributes

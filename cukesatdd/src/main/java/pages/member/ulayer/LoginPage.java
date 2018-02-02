@@ -280,7 +280,7 @@ public class LoginPage extends UhcDriver {
 		}
 		else if (MRScenario.environment.equalsIgnoreCase("team-ci1")) {
 			
-			start(TEAM_CI1_NEW_DASHBOARD_URL);
+			start(MRConstants.REDESIGN_LOGIN_URL);
 			System.out.println("user is on Team-Ci1 Environment");
 		}
 		else
