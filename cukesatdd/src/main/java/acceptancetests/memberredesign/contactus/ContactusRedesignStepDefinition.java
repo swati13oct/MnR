@@ -89,7 +89,7 @@ public class ContactusRedesignStepDefinition {
 			{
 				loginPage.navigateToNewDashboardUrl();
 				getLoginScenario().saveBean(PageConstants.LOGIN_PAGE, loginPage);
-				AccountHomePage accountHomePage = (AccountHomePage) loginPage.teamhloginWith(userName, pwd);
+				AccountHomePage accountHomePage = (AccountHomePage) loginPage.doLoginWith(userName, pwd);
 				getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
 				getLoginScenario().saveBean(PageConstants.ACCOUNT_HOME_PAGE,accountHomePage);
 				Assert.assertTrue(true);

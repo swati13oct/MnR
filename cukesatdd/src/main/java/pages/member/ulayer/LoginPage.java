@@ -362,5 +362,41 @@ public class LoginPage extends UhcDriver {
 				return null;
 		
 	}
+	
+	public Object doLoginWith(String username, String password) {
+		sendkeys(thUserName, username);
+		sendkeys(thPassword, password);
+		thSignIn.click();
+		if ( MRScenario.environment.equals("team-e")){
+
+			Alert alert = driver.switchTo().alert();
+			alert.accept();
+		} 
+		try{
+			Thread.sleep(40000);
+			if (validate(iPerceptionPopUp)) {
+				System.out.println("iPerceptionPopUp is Displayed");
+				iPerceptionPopUp.click();
+			}
+		}catch(Exception e)        {
+			System.out.println("iPerception Pop Up not displayed");
+		}
+
+		if(currentUrl().contains("testharness.html") || currentUrl().contains("/dashboard"))
+
+		{
+			return new AccountHomePage(driver);
+		}
+		else if(currentUrl().contains("home/my-account-home.html")  || currentUrl().contains("/login.html") ) {
+			return new AccountHomePage(driver);
+		}
+		else if (currentUrl().contains("terminated-plan.html")) {
+			return new TerminatedHomePage(driver);
+		}
+
+		System.out.println("teamhloginWith is returing null. Please Update the above condition As per your Needs");
+
+		return null;
+	}
 
 }
