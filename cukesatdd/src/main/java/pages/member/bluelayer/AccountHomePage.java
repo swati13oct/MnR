@@ -303,7 +303,7 @@ private WebElement searchforproviderlinkinClaimsPage;
 
 	public JSONObject accountHomeJson;
 	// Page URL
-	private static String PAGE_URL = MRConstants.TeamH_ULayer_Member_URL;
+	private static String PAGE_URL = MRConstants.TESTHARNESS;
 
 	public AccountHomePage(WebDriver driver,String category) {
 		super(driver);

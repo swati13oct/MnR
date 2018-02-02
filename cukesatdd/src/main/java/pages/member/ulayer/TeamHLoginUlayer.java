@@ -20,7 +20,8 @@ import pages.dashboard.member.ulayer.RallyDashboardPage;
 
 public class TeamHLoginUlayer extends UhcDriver{
 	
-	private static String PAGE_URL = MRConstants.TeamH_ULayer_Member_URL;
+	private static String PAGE_URL = null;
+	
 	// Commenting code
 /*	@FindBy(id = "fd_memberSignInButton")
 	private WebElement loginIn;*/
@@ -54,11 +55,20 @@ public class TeamHLoginUlayer extends UhcDriver{
 
 	@Override
 	public void openAndValidate() {
+		if("YES".equalsIgnoreCase(MRScenario.isTestHarness)){
+			if("teamci-1".equalsIgnoreCase(MRScenario.environment)){
+				PAGE_URL = MRConstants.TEAMCI1_TESTHARNESS;
+			}else{
+				PAGE_URL = MRConstants.TESTHARNESS;
+			}
+			
+		}
+		else{
+			PAGE_URL = MRConstants.DASHBOARD;
+		}
 		System.out.println("URL:"+PAGE_URL);
 		start(PAGE_URL);
 		validate(signInButton);
-		//validate(loginIn);
-
 	}
 
 	public JSONObject getBrowserCheck() {
@@ -119,15 +129,15 @@ public class TeamHLoginUlayer extends UhcDriver{
 				return null;
 			}
 		}
-		while(!(driver.getTitle().contains("Home")));
+		while(!((driver.getTitle().contains("Home"))||(driver.getTitle().contains("Test Harness"))));
 				
 		
 		System.out.println("Current URL: "+currentUrl());
-		/*if(currentUrl().contains("member/testharness.html"))
+		if(currentUrl().contains("member/testharness.html"))
 		{
 			return new TestHarness(driver);
-		}*/
-		if (currentUrl().contains("terminated-plan.html")) {
+		}
+		else if (currentUrl().contains("terminated-plan.html")) {
 			return new TerminatedHomePage(driver); 
 		}
 		else if (currentUrl().contains("/dashboard")) {

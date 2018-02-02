@@ -202,7 +202,7 @@ public class RallyDashboardPage extends UhcDriver{
 	
 	
 	// Page URL
-	private static String PAGE_URL = MRConstants.TeamH_ULayer_Member_URL;
+	//private static String PAGE_URL = MRConstants.TeamH_ULayer_Member_URL;
 	
 	public RallyDashboardPage(WebDriver driver) {
 		super(driver);

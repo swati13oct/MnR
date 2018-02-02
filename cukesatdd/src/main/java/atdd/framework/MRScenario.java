@@ -72,8 +72,7 @@ public class MRScenario {
 	private static Map<String, Map<String, JSONObject>> expectedDataMapUlayer = new LinkedHashMap<String, Map<String, JSONObject>>();
 
 	private static Map<String, Map<String, JSONObject>> expectedDataMapBluelayer = new LinkedHashMap<String, Map<String, JSONObject>>();
-	public static String environment, browser, TeamCEnvironment;
-
+	public static String environment, browser, TeamCEnvironment, isTestHarness;
 	private static final String DIRECTORY = "/src/main/resources/";
 
 	private static final String SQL_COMMIT = "COMMIT";
@@ -120,7 +119,7 @@ public class MRScenario {
 
 		/* Set acqusisition and member urls */
 		environment = props.get("Environment");
-		
+		isTestHarness =  props.get("isTestHarness");
 		
 		
 		// Setting permission to the scripts , so that jenkins server can access

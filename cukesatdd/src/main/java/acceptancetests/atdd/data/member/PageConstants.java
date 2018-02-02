@@ -158,7 +158,6 @@ public class PageConstants {
 	public static final String DASHBOARD_PAYMENT_HISTORY_PAGE = "dashboardPaymentOverview";	
 	public static final String REVIEW_ONE_TIME_PAYMENTS_DASHBOARD = "reviewOnetimePaymentsPageDashboard";
 	public static final String ONE_TIME_PAYMENTS_DASHBOARD = "onetimePaymentsPageDashboard";
-	public static final String TEST_HARNESS_PAGE = "TestHarnessPage";
 	public static final String PAYMENT_OVERVIEW = "PaymentOverview";
 
 	public static final String AUTOMATIC_PAYMENTS_DASHBOARD = "automaticPaymentsPageDashboard";	
@@ -175,6 +174,7 @@ public static final String PAYMENT_AMOUNT = "PaymentAmount";
 	public static final String ProfilePreferencesPage = "ProfilePreferencesPage";	
 	//************************** New Constant **************************************
 	public static final String RALLY_DASHBOARD_PAGE = "RallyDashboardPage";
+	public static final String TEST_HARNESS_PAGE = "TestHarnessPage";
 	public static final String DRUG_COST_ESTIMATOR_PAGE = "drugcostestimatorPage";
 	public static final String SAVING_OPPORTUNITY = "savingopportunity";
 	public static final String ADD_DRUG_DETAILS = "addDrugDetails";

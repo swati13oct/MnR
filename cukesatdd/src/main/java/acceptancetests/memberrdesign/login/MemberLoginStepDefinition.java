@@ -25,6 +25,7 @@ import pages.dashboard.member.ulayer.ProviderSearchPage;
 import pages.dashboard.member.ulayer.RallyDashboardPage;
 import pages.member.bluelayer.BenefitsAndCoveragePage;
 import pages.member.ulayer.TeamHLoginUlayer;
+import pages.member.ulayer.TestHarness;
 import atdd.framework.MRScenario;
 
 public class MemberLoginStepDefinition {
@@ -92,6 +93,18 @@ public class MemberLoginStepDefinition {
 		
 		TeamHLoginUlayer THloginPage = new TeamHLoginUlayer(wd);
 		getLoginScenario().saveBean(PageConstants.LOGIN_PAGE, THloginPage);
+		if(("YES").equalsIgnoreCase(MRScenario.isTestHarness)){
+			TestHarness testHarness = (TestHarness) THloginPage.loginWith(userName, pwd);
+			if (testHarness != null) {
+				getLoginScenario().saveBean(PageConstants.TEST_HARNESS_PAGE,
+						testHarness);		}
+			else{
+				Assert.fail("Login not successful...");
+			}
+		}
+		else{
+			
+		
 		RallyDashboardPage rallyDashboard = (RallyDashboardPage) THloginPage.loginWith(userName, pwd);
 		if (rallyDashboard != null) {
 			getLoginScenario().saveBean(PageConstants.RALLY_DASHBOARD_PAGE,
@@ -99,19 +112,36 @@ public class MemberLoginStepDefinition {
 		else{
 			Assert.fail("Login not successful...");
 		}
+		}
+		
 	}
 	
 	@Then("^User should be able to validate Dashboard elements$")
 	public void user_validate_dashboard_elements() throws InterruptedException {
-		RallyDashboardPage rallyDashboard = (RallyDashboardPage) getLoginScenario().getBean(PageConstants.RALLY_DASHBOARD_PAGE);
-		validateURLNavigation();
+		
+		if("YES".equalsIgnoreCase(MRScenario.isTestHarness)){
+			TestHarness testHarness = (TestHarness) getLoginScenario().getBean(PageConstants.TEST_HARNESS_PAGE);
+			
+			testHarness.validateTestHarnessElements(category);
+		}else{
+			RallyDashboardPage rallyDashboard = (RallyDashboardPage) getLoginScenario().getBean(PageConstants.RALLY_DASHBOARD_PAGE);
+			validateURLNavigation();
 		rallyDashboard.validateDashboardElements(category);	
+		}
 	}
 	
 	@And("^User should be ale to navigate to secondary page$")
 	public void user_validate_seconday_page_navigation() throws InterruptedException {
-		RallyDashboardPage rallyDashboard = (RallyDashboardPage) getLoginScenario().getBean(PageConstants.RALLY_DASHBOARD_PAGE);
-		BenefitsAndCoveragePage benefitsAndCoveragePage = rallyDashboard.navigateDirectToBnCPag();
+		BenefitsAndCoveragePage benefitsAndCoveragePage = null;
+		if("YES".equalsIgnoreCase(MRScenario.isTestHarness)){
+			TestHarness testHarness = (TestHarness) getLoginScenario().getBean(PageConstants.TEST_HARNESS_PAGE);
+			
+			benefitsAndCoveragePage = testHarness.navigateDirectToBnCPag();
+		}else{
+			RallyDashboardPage rallyDashboard = (RallyDashboardPage) getLoginScenario().getBean(PageConstants.RALLY_DASHBOARD_PAGE);
+			benefitsAndCoveragePage = rallyDashboard.navigateDirectToBnCPag();
+		}
+		
 		if (benefitsAndCoveragePage == null) {			
 			Assert.fail("BnC page is not loaded");
 		}
@@ -141,7 +171,7 @@ public class MemberLoginStepDefinition {
 		case "Medica": 
 			Assert.assertTrue(wd.getCurrentUrl().contains("/medica/dashboard"));
 		break;
-		default: System.out.println("Please specifiy a specific member type ");;
+		default: System.out.println("Please specifiy a specific member type ");
 		
 }
 

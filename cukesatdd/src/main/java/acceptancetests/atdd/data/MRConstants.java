@@ -224,7 +224,10 @@ public static String CAMPAIGN_PAGE_URL1 = "https://www."+MRScenario.environment+
 
   public static String TeamC_UndeliverableEmail_address_URL = "https://member."+MRScenario.TeamCEnvironment+"-aarpmedicareplans.uhc.com/content/dashboard/guest/undeliverable-email-address.html";
  // public static final String TeamH_ULayer_Member_URL = "https://team-h-medicare.uhc.com/medicare/login/overview.html?testharness=true";
-  public static final String TeamH_ULayer_Member_URL = "https://stage-medicare.uhc.com/";
+  //public static final String TeamH_ULayer_Member_URL = "https://stage-medicare.uhc.com/";
+	  public static final String TESTHARNESS = "https://"+ MRScenario.environment +"-medicare.uhc.com/content/medicare/login/overview.html/?testharness=true";
+	  public static final String TEAMCI1_TESTHARNESS ="https://team-ci1-medicare.ose-elr-core.optum.com/?testharness=true";
+	  public static final String DASHBOARD = "https://"+ MRScenario.environment +"-medicare.uhc.com/";
 	public static final String BNCBURL = "https://member." + MRScenario.environment + "-uhcmedicaresolutions.uhc.com/";
 	
 	  /** DeRegister URL for team-g */
