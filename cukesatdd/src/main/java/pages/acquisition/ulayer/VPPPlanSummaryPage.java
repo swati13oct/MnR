@@ -213,7 +213,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	private WebElement Primary;
 	
 	
-	@FindBy(xpath="//a[contains(text(),'Primary Care Physician (PCP')]")
+	@FindBy(xpath="//a[contains(text(),'Primary Care Physician')]")
 	private WebElement Physician;
 
 	@FindBy(xpath="//div[contains(@class,'first')]//div[@class='hidden-phone']/button[not(contains(@class,'hidden'))]/span")
