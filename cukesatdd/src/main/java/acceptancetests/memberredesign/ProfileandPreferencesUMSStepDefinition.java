@@ -36,11 +36,11 @@ public class ProfileandPreferencesUMSStepDefinition {
 	public MRScenario getLoginScenario() {
 		return loginScenario;
 	}
-	
-	
-/**
- * @toDo : The user logs in to the member Redesign Portal
- */
+
+
+	/**
+	 * @toDo : The user logs in to the member Redesign Portal
+	 */
 	@Given("^registered member with following details for Profile and Preferences flow$")
 	public void login_with_member(DataTable memberAttributes) throws InterruptedException {
 		/* Reading the given attribute from feature file */
@@ -77,13 +77,13 @@ public class ProfileandPreferencesUMSStepDefinition {
 		if (dashboardPage != null) {
 			getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
 			getLoginScenario().saveBean(PageConstants.dashboardPage, dashboardPage);
-				
+
 		}
 		else
 		{
-		System.out.println("NULL Dashboard page");
+			System.out.println("NULL Dashboard page");
 		}
-		
+
 
 		// JSONObject accountHomeActualJson = null;
 
@@ -110,12 +110,13 @@ public class ProfileandPreferencesUMSStepDefinition {
 
 	}
 
-	
+
 	/** 
+	 * @throws InterruptedException 
 	 * @toDo : The user navigates to Profile and Preferences page from Rally Dashboard
 	 */
 	@Then("^the user navigates to Profile and Preferences page")
-	public void user_navigate_toProfileandPreferencespage() {
+	public void user_navigate_toProfileandPreferencespage() throws InterruptedException {
 
 		DashboardPage dashboardPage = (DashboardPage) getLoginScenario().getBean(PageConstants.dashboardPage);
 		ProfilePreferencesPage ProfilePreferencesPage = dashboardPage.navigateDirectToProfilePage();
@@ -147,11 +148,11 @@ public class ProfileandPreferencesUMSStepDefinition {
 		}
 	}*/
 
-	
+
 	/** 
 	 * @toDo : The user validates the Account information of the logged in member 
 	 */
-	
+
 	@And("^the user validates the Plan Name, Member name, Member ID and account section in UMS site")
 	public void user_Validates_FED_PROFILE_MEMBERNAME_ID_AccountProfile() {
 		ProfilePreferencesPage ProfilePreferencesPage = (ProfilePreferencesPage) getLoginScenario()
@@ -177,7 +178,7 @@ public class ProfileandPreferencesUMSStepDefinition {
 
 	}
 
-	
+
 	/** 
 	 * @toDo : The user checks the elements that appear when the user clicks on edit link of Account section
 	 */
@@ -224,7 +225,7 @@ public class ProfileandPreferencesUMSStepDefinition {
 
 	}
 
-	
+
 	/** 
 	 * @toDo :  The user checks the Password Update functionality by entering an invalid password
 	 */
@@ -237,7 +238,7 @@ public class ProfileandPreferencesUMSStepDefinition {
 
 	}
 
-	
+
 	/** 
 	 * @toDo :  The user checks the Password Update functionality by entering different  password in confirm password field
 	 */
@@ -265,7 +266,7 @@ public class ProfileandPreferencesUMSStepDefinition {
 	/** 
 	 * @toDo :  the user validates the page that opens up on  clicking the  see more ways to contact us link in the Need help section
 	 */
-	
+
 	@Then("^the user validates on clicking contact us link it should route to contact us page")
 	public void uservalidatescontactuslink() {
 		ProfilePreferencesPage ProfilePreferencesPage = (ProfilePreferencesPage) getLoginScenario()
@@ -273,7 +274,7 @@ public class ProfileandPreferencesUMSStepDefinition {
 
 		ProfilePreferencesPage.clickcontactUslink();
 	}
-	
+
 	/** 
 	 * @toDo :  Validates the disclaimer link and the way it expands and collapses
 	 */
@@ -311,7 +312,7 @@ public class ProfileandPreferencesUMSStepDefinition {
 		}
 	}
 
-	
+
 	/** 
 	 * @toDo :  Validates the need help section headers
 	 */
@@ -323,7 +324,7 @@ public class ProfileandPreferencesUMSStepDefinition {
 		ProfilePreferencesPage.validateneedhelpheader();
 
 	}
-	
+
 	/** 
 	 * @toDo :  Validates the permanent address section header
 	 */
@@ -372,7 +373,7 @@ public class ProfileandPreferencesUMSStepDefinition {
 
 	}
 
-	
+
 	/** 
 	 * @toDo :  Validates the email edit functionality with valid email
 	 */
@@ -383,7 +384,7 @@ public class ProfileandPreferencesUMSStepDefinition {
 
 		ProfilePreferencesPage.validateemailsavefunctionality();
 	}
-	
+
 	/** 
 	 * @toDo :  Validates the email edit functionality with invalid email
 	 */
@@ -397,7 +398,7 @@ public class ProfileandPreferencesUMSStepDefinition {
 
 	}
 
-	
+
 	/** 
 	 * @toDo :  Validates the email edit functionality by entering different email id's in confirm email box from new email address
 	 */
@@ -430,7 +431,7 @@ public class ProfileandPreferencesUMSStepDefinition {
 		ProfilePreferencesPage.validategogreenbutton();
 	}
 
-	
+
 	/** 
 	 * @toDo :  Validates the headers on Go green page
 	 */
@@ -441,7 +442,7 @@ public class ProfileandPreferencesUMSStepDefinition {
 
 		ProfilePreferencesPage.validateheader();
 	}
-	
+
 
 	/** 
 	 * @throws InterruptedException 
@@ -570,7 +571,7 @@ public class ProfileandPreferencesUMSStepDefinition {
 	/** 
 	 * @toDo :  Validates the Cancel Functionality of the temp address section
 	 */
-	
+
 	@Then("^the user validates the functionality of Cancel Button In Temporary adrress section")
 	public void UserValidatestempaddressCancelButton() {
 		ProfilePreferencesPage ProfilePreferencesPage = (pages.member.bluelayer.ProfilePreferencesPage) getLoginScenario()
@@ -592,7 +593,7 @@ public class ProfileandPreferencesUMSStepDefinition {
 
 	}
 
-	
+
 	/** 
 	 * @toDo :  Validates the plan name on the Go Green page
 	 */
@@ -664,7 +665,7 @@ public class ProfileandPreferencesUMSStepDefinition {
 		ProfilePreferencesPage.validateSavePreferences();
 
 	}
-	
+
 	/** 
 	 * @toDo :  Validates the Go green header on Go green page
 	 */
@@ -679,8 +680,8 @@ public class ProfileandPreferencesUMSStepDefinition {
 	}
 
 
-    }
+}
 
-	
-	
+
+
 

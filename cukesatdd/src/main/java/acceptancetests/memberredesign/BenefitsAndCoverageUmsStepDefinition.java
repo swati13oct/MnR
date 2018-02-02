@@ -44,7 +44,7 @@ public class BenefitsAndCoverageUmsStepDefinition {
 		return loginScenario;
 	}
 
-	
+
 	/**
 	 * @toDo : The user logs in to the member Redesign Portal
 	 */
@@ -271,8 +271,8 @@ public class BenefitsAndCoverageUmsStepDefinition {
 	/** 
 	 * @toDo : The user checks the More Information link in the Need help section
 	 */
-	
-	
+
+
 	@Then("^the user clicks on More Information link$")
 	public void the_user_clicks_on_Disclaimers_link() {
 		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario()
@@ -280,7 +280,7 @@ public class BenefitsAndCoverageUmsStepDefinition {
 		benefitsCoveragePage.clickOnDisclaimers();
 	}
 
-	
+
 
 
 	public void views_mydoument_validation_ums_site() {
@@ -305,7 +305,7 @@ public class BenefitsAndCoverageUmsStepDefinition {
 	/** 
 	 * @toDo : The user checks the view and Document labels in Documents section
 	 */
-	
+
 	@And("^the user validates view and document label$")
 	public void user_validates_view_and_document_label() {
 		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario()
@@ -315,7 +315,7 @@ public class BenefitsAndCoverageUmsStepDefinition {
 		benefitsCoveragePage.getview_label();
 
 	}
-	
+
 	/** 
 	 * @toDo : The user validates the language dropdown in Documents section
 	 */
@@ -328,11 +328,11 @@ public class BenefitsAndCoverageUmsStepDefinition {
 
 	}
 
-	
+
 	/** 
 	 * @toDo : The user validates the language dropdown in Documents section and make a selection in the dropdown
 	 */
-	
+
 	@And("^the user validates the language dropdown and the value displayed by default and selects new value in dropdown successfully$")
 	public void validate_languagedropdown(DataTable givenAttributes) {
 		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario()
@@ -349,7 +349,7 @@ public class BenefitsAndCoverageUmsStepDefinition {
 		benefitsCoveragePage.validate_langdropdown_select(language);
 	}
 
-	
+
 	/** 
 	 * @toDo : The user validates the language dropdown in Documents section and validates the default selected language
 	 */
@@ -359,7 +359,7 @@ public class BenefitsAndCoverageUmsStepDefinition {
 				.getBean(PageConstants.BENEFITS_AND_COVERAGE_PAGE);
 		benefitsCoveragePage.validate_langdropdown_first_selection();
 	}
-	
+
 	/** 
 	 * @toDo : The user validates the Hearing section of Ancillary
 	 */
@@ -383,22 +383,22 @@ public class BenefitsAndCoverageUmsStepDefinition {
 		benefitsCoveragePage.HearingAid();
 	}
 
-	
+
 	/** 
 	 * @toDo : The user validates the Vision  section of Ancillary Benefits
 	 */
-	
+
 	@And("^the user validates the Vision section$")
 	public void user_validates__Vision_section() {
 		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario()
 				.getBean(PageConstants.BENEFITS_AND_COVERAGE_PAGE);
 		benefitsCoveragePage.Vision();
 	}
-	
+
 	/** 
 	 * @toDo : The user validates the Dental  section of Ancillary Benefits
 	 */
-	
+
 
 	@And("^the user validates the Dental section$")
 	public void user_validates__Dental_section() {
@@ -406,7 +406,7 @@ public class BenefitsAndCoverageUmsStepDefinition {
 				.getBean(PageConstants.BENEFITS_AND_COVERAGE_PAGE);
 		benefitsCoveragePage.Dental();
 	}
-	
+
 	/** 
 	 * @toDo : The user validates the Header  section 
 	 */
@@ -429,19 +429,19 @@ public class BenefitsAndCoverageUmsStepDefinition {
 				.getBean(PageConstants.BENEFITS_AND_COVERAGE_PAGE);
 		benefitsCoveragePage.chiropracticsection();
 	}
-	
+
 	/** 
 	 * @toDo : The user validates the Disclaimers link under Exclusive hearing section  of Ancillary benefits
 	 */
 
-	
+
 	@And("^user validates and clicks on Disclaimers link under Exclusive hearing$")
 	public void user_validates__disclaimerlink() {
 		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario()
 				.getBean(PageConstants.BENEFITS_AND_COVERAGE_PAGE);
 		benefitsCoveragePage.ExclusiveDisclaimers();
 	}
-	
+
 	/** 
 	 * @toDo : The user validates the Learn more button under Exclusive hearing section  of Ancillary benefits
 	 */
@@ -465,7 +465,7 @@ public class BenefitsAndCoverageUmsStepDefinition {
 
 	}
 
-	
+
 	/** 
 	 * @toDo : The user validates the cancel button  of the leaving popup in  Ancillary section
 	 */
@@ -480,25 +480,25 @@ public class BenefitsAndCoverageUmsStepDefinition {
 	 * @toDo : The user validates the proceed button  of the leaving popup in  Ancillary section
 	 */
 
-	
+
 	@And("^user validates and clicks on Proceed button and navigate to heathnavigationpage$")
 	public void user_validates__proceedbutton() {
 		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario()
 				.getBean(PageConstants.BENEFITS_AND_COVERAGE_PAGE);
 		benefitsCoveragePage.Proceedbutton();
 	}
-	
-	
+
+
 	/** 
 	 * @toDo : The user validates the DrugCoverage section headers and text
 	 */
-    @And("^the user validates Drug coverage header and text under the section")
+	@And("^the user validates Drug coverage header and text under the section")
 	public void user_validates__drugcoverage_section() {
 		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario()
 				.getBean(PageConstants.BENEFITS_AND_COVERAGE_PAGE);
 		benefitsCoveragePage.validatedrugcoverageheaderandtext();
 	}
-    /** 
+	/** 
 	 * @toDo : Validates the text for the Look Up Drugs section
 	 */
 
@@ -508,9 +508,9 @@ public class BenefitsAndCoverageUmsStepDefinition {
 				.getBean(PageConstants.BENEFITS_AND_COVERAGE_PAGE);
 		benefitsCoveragePage.validate_lookupdrugstext();
 	}
-	 /** 
+	/** 
 	 * @toDo : Validates Look Up Drugs button in  the DrugCosts  section
-	*/
+	 */
 
 	@And("^the user validates Look Up Drugs button should be visible")
 	public void user_validates_lookupdrugsbuuton() {
@@ -518,10 +518,10 @@ public class BenefitsAndCoverageUmsStepDefinition {
 				.getBean(PageConstants.BENEFITS_AND_COVERAGE_PAGE);
 		benefitsCoveragePage.validatelookupdrugsbutton();
 	}
-	
+
 	/** 
 	 * @toDo : Validates the headers in DrugCopays and Discount section
-	*/
+	 */
 
 	@And("^the user view the Drug Copays & Discounts header")
 	public void user_view_drugcopayanddiscountheader() {
@@ -533,7 +533,7 @@ public class BenefitsAndCoverageUmsStepDefinition {
 
 	/** 
 	 * @toDo : Validates the headers in DrugCopays and Discount section for a Lis member
-	*/
+	 */
 	@And("the user view the LIS Drug Copays & Discounts header")
 	public void user_validate_lisdrugcopaydiscounttable() {
 		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario()
@@ -543,7 +543,7 @@ public class BenefitsAndCoverageUmsStepDefinition {
 
 	/** 
 	 * @toDo : Validates the Drug Cost header and text
-	*/
+	 */
 	@And("^the user view the Drug Cost header and text")
 	public void user_view_drugcostheaderandtext() {
 		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario()
@@ -553,7 +553,7 @@ public class BenefitsAndCoverageUmsStepDefinition {
 
 	/** 
 	 * @toDo : Validates the text in locate a pharmacy section
-	*/
+	 */
 	@And("^the user validates text for the Locate a Pharmacy section")
 	public void user_validate_textforlocatepharmacy() {
 		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario()
@@ -563,7 +563,7 @@ public class BenefitsAndCoverageUmsStepDefinition {
 
 	/** 
 	 * @toDo : Validates the Locate a Pharmacy button in locate a pharmacy section
-	*/
+	 */
 	@And("^the user validates Locate a Pharmacy button should be visible")
 	public void user_validate_locatepharmacybutton() {
 		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario()
@@ -573,8 +573,8 @@ public class BenefitsAndCoverageUmsStepDefinition {
 
 	/** 
 	 * @toDo : Validates the Learnmore tiers links for a Lis member
-	*/
-	
+	 */
+
 	@And("^the user validates tier link should not display")
 	public void user_validate_tierinkshouldnotdisplay() {
 		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario()
@@ -584,8 +584,8 @@ public class BenefitsAndCoverageUmsStepDefinition {
 
 	/** 
 	 * @toDo : Validates the Pharmacy selection dropdown  for a non Lis member
-	*/
-	
+	 */
+
 	@And("^the user validates dropdown selection functionality")
 	public void user_validate_dropdwonvalues() {
 		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario()
@@ -594,12 +594,12 @@ public class BenefitsAndCoverageUmsStepDefinition {
 		// benefitsandcoverageExectedJson=(JSONObject)loginScenario.getBean(PlanBenefitsAndCoverageCommonConstants.BENEFITS_AND_COVERAGE_EXPECTED);
 		benefitsCoveragePage.validate_drugcostdropdownoptions();
 	}
-	
-	
+
+
 	/** 
 	 * @toDo : Validates the Pharmacy  selection dropdown for a Lis member
-	*/
-	
+	 */
+
 
 	@And("the drugcost dropdown should not display")
 	public void user_validate_dropdownshouldnotdisplay() {
@@ -610,7 +610,7 @@ public class BenefitsAndCoverageUmsStepDefinition {
 
 	/** 
 	 * @toDo : Validates the Learn More links for a Non Lis member
-	*/
+	 */
 	@And("^the user validates the Learn More section for stage and tier")
 	public void user_validate_links() {
 		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario()
@@ -620,7 +620,7 @@ public class BenefitsAndCoverageUmsStepDefinition {
 
 	/** 
 	 * @toDo : Validates the Learn More links for a  Lis member
-	*/
+	 */
 	@And("^the user validates the Learn More section link for stage")
 	public void user_validate_stagelink() {
 		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario()
@@ -630,7 +630,7 @@ public class BenefitsAndCoverageUmsStepDefinition {
 
 	/** 
 	 * @toDo : Validates that the learnmore links expand and collapse on clicking on the links one after one
-	*/
+	 */
 	@And("^the user validates the user click on the link it expands and when user clicks it again it should collapse")
 	public void user_validate_linksworking() {
 		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario()
@@ -643,7 +643,7 @@ public class BenefitsAndCoverageUmsStepDefinition {
 
 	/** 
 	 * @toDo : Validates the Drug costs table  for  a Non Lis member
-	*/
+	 */
 	@And("the user should see drug copay and discount table")
 	public void user_validate_drugcopaydiscounttable() {
 		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario()
@@ -652,7 +652,7 @@ public class BenefitsAndCoverageUmsStepDefinition {
 	}
 	/** 
 	 * @toDo : Validates the Drug costs table  for  a  Lis member
-	*/
+	 */
 
 	@And("the user should see drug cost table for Lis members")
 	public void user_validate_drugcosttable() {
@@ -663,7 +663,7 @@ public class BenefitsAndCoverageUmsStepDefinition {
 
 	/** 
 	 * @toDo : Validates the  Ways to save section
-	*/
+	 */
 	@And("the user should see Ways to save Option")
 	public void user_validate_waysToSave() {
 		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario()
@@ -673,7 +673,7 @@ public class BenefitsAndCoverageUmsStepDefinition {
 
 	/** 
 	 * @toDo : Validates the  Plan overview section for  a Non lis member 
-	*/
+	 */
 	@And("the user validates plan overview section")
 	public void user_validate_planOverview() {
 		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario()
@@ -683,7 +683,7 @@ public class BenefitsAndCoverageUmsStepDefinition {
 
 	/** 
 	 * @toDo : Validates the  Plan overview section for  a lis member
-	*/
+	 */
 	@And("the user validates plan overview section for a Lis member")
 	public void user_validate_planOverviewLis() {
 		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario()
@@ -693,7 +693,7 @@ public class BenefitsAndCoverageUmsStepDefinition {
 
 	/** 
 	 * @toDo : Validates the  headers section for individual members
-	*/
+	 */
 	@And("the user validates headers on Bnc page for indi members")
 	public void user_validate_Headers() {
 		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario()
@@ -703,7 +703,7 @@ public class BenefitsAndCoverageUmsStepDefinition {
 
 	/** 
 	 * @toDo : Validates the  headers section for group members
-	*/
+	 */
 	@And("the user validates headers on Bnc page for group members")
 	public void user_validate_Headers_Group() {
 		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario()
@@ -712,7 +712,7 @@ public class BenefitsAndCoverageUmsStepDefinition {
 	}
 	/** 
 	 * @toDo : Validates the  Primary care provider section
-	*/
+	 */
 
 	@And("the user validates the Primarycare Provider section")
 	public void user_validate_PrimaryCareProv() {
@@ -722,7 +722,7 @@ public class BenefitsAndCoverageUmsStepDefinition {
 	}
 	/** 
 	 * @toDo : Validates the  Primary care provider section for group members
-	*/
+	 */
 
 
 	@And("the user validates the Primarycare Provider section for Group")
@@ -734,19 +734,19 @@ public class BenefitsAndCoverageUmsStepDefinition {
 
 	/** 
 	 * @toDo : Validates the Out Of Pocket Maximum section
-	*/
+	 */
 
-	
+
 	@And("the user validates the Out of Pocket Max section")
 	public void user_validate_OutofPocket() {
 		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario()
 				.getBean(PageConstants.BENEFITS_AND_COVERAGE_PAGE);
 		benefitsCoveragePage.validateOutofPocketMax();
 	}
-	
+
 	/** 
 	 * @toDo : Validates the headers for ship members
-	*/
+	 */
 
 	@And("the user validates headers on Bnc page for ship members")
 	public void user_validate_Headers_Ship() {
@@ -754,10 +754,10 @@ public class BenefitsAndCoverageUmsStepDefinition {
 				.getBean(PageConstants.BENEFITS_AND_COVERAGE_PAGE);
 		benefitsCoveragePage.validateHeadersShip();
 	}
-	
+
 	/** 
 	 * @toDo : Validates the Value added services section for ship members
-	*/
+	 */
 	@And("^the user validates the Vas section on benefits and coverage page$")
 	public void validate_VAS_section()
 	{
@@ -765,11 +765,11 @@ public class BenefitsAndCoverageUmsStepDefinition {
 				.getBean(PageConstants.BENEFITS_AND_COVERAGE_PAGE);
 		benefitsCoveragePage.vasSection();
 	}
-	
+
 	/** 
 	 * @toDo : Validates the hand image in  discount and services section for ship members
-	*/
-	
+	 */
+
 	@And("^the user validates hand image under discount and services section$")
 	public void validate_hand_image()
 	{
@@ -777,11 +777,11 @@ public class BenefitsAndCoverageUmsStepDefinition {
 				.getBean(PageConstants.BENEFITS_AND_COVERAGE_PAGE);
 		benefitsCoveragePage.handimage();
 	}
-	
+
 	/** 
 	 * @toDo : Validates the Learnmore Button for ship members
-	*/
-	
+	 */
+
 	@And("the user validates learnmorebutton on Bnc page for ship members")
 	public void user_validate_learnmorebutton() {
 		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario()
@@ -790,19 +790,19 @@ public class BenefitsAndCoverageUmsStepDefinition {
 	}
 	/** 
 	 * @toDo : Validates the Need help headers of the Need help section
-	*/
+	 */
 
 	@Then("^the user validates the Needhelp header")
 	public void validateneedhelpheaderFED() {
 		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario()
 				.getBean(PageConstants.BENEFITS_AND_COVERAGE_PAGE);
 		benefitsCoveragePage.validateNeedhelpheader();
-		}
-	
+	}
+
 	/** 
 	 * @toDo : Validates the Value added services page  for ship members
-	*/
-   
+	 */
+
 	@And("^the user validate Value Add Service page$")
 	public void validate_Value_Add_page()
 	{
@@ -810,13 +810,13 @@ public class BenefitsAndCoverageUmsStepDefinition {
 				.getBean(PageConstants.BENEFITS_AND_COVERAGE_PAGE);
 		ValueAddedServicepage valueaddedservices= benefitsCoveragePage.navigateToValueAddService();
 		if (valueaddedservices!= null) {
-		getLoginScenario().saveBean(PageConstants.VALUE_ADDED_SERVICES, valueaddedservices);
+			getLoginScenario().saveBean(PageConstants.VALUE_ADDED_SERVICES, valueaddedservices);
 		}
- }
+	}
 
 	/** 
 	 * @toDo : Validates the Need help section headers for a ship member
-	*/
+	 */
 	@Then("^the user validates the need help section for ship")
 	public void uservalidatesneedhelpsectionShip() {
 		BenefitsAndCoveragePage benefitsnCoveragepage = (BenefitsAndCoveragePage) getLoginScenario()
@@ -825,10 +825,10 @@ public class BenefitsAndCoverageUmsStepDefinition {
 		benefitsnCoveragepage.validateneedhelpheaderShip();
 
 	}
-	
+
 	/** 
 	 * @toDo : Validates the see more ways to contact us section for ship members in Need help section
-	*/
+	 */
 	@Then("^the user validates see more ways to contact us section for ship")
 	public void uservalidatesseeMoreWaysShip() {
 		BenefitsAndCoveragePage benefitsnCoveragepage = (BenefitsAndCoveragePage) getLoginScenario()
@@ -839,8 +839,8 @@ public class BenefitsAndCoverageUmsStepDefinition {
 	}
 	/** 
 	 * @toDo : Validates the contact us page on clicking on the link of contact us in Need help section
-	*/
-	
+	 */
+
 	@Then("^the user validates on clicking contact us link it should route to contact us page for ship member")
 	public void uservalidatescontactus() {
 		BenefitsAndCoveragePage benefitsnCoveragepage = (BenefitsAndCoveragePage) getLoginScenario()
@@ -848,6 +848,6 @@ public class BenefitsAndCoverageUmsStepDefinition {
 
 		benefitsnCoveragepage.contactUslinkShip();
 	}
-	
-	
+
+
 }

@@ -689,7 +689,7 @@ public class ProfileandPreferencesPage extends UhcDriver {
 
 	}
 
-	public ProfilePreferencesPage validatepnparrowlink() {
+	public ProfilePreferencesPage validatepnparrowlink() throws InterruptedException {
 		Profilenprefernceslink.click();
 		if (driver.getTitle().equalsIgnoreCase("profileandpreferences")) {
 			System.out.println("Pass");
