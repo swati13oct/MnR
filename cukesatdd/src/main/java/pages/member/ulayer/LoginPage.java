@@ -40,6 +40,7 @@ public class LoginPage extends UhcDriver {
 	private static String PAGE_URL_TEAM_H_TEST_HARNESS = MRConstants.TEAMH_URL_TESTHARNES;
 	private static String PAGE_URL_TEAM_MEDICARE_TESTHARNESS = MRConstants.TEAM_MEDICARE_TESTHARNESS;
 	private static String STAGE_DASHBOARD_URL = MRConstants.STAGE_DASHBOARD_NEW_DOMAIN_URL;
+	private static String TEAM_CI1_NEW_DASHBOARD_URL = MRConstants.TEAM_CI1_NEW_DASBOARD_URL;
 	
 
 	@FindBy(id = "fd_memberSignInButton")
@@ -277,6 +278,11 @@ public class LoginPage extends UhcDriver {
 			start(STAGE_DASHBOARD_URL);
 			System.out.println("User is Navigating to Stage Dashboard");
 		}
+		else if (MRScenario.environment.equalsIgnoreCase("team-ci1")) {
+			
+			start(TEAM_CI1_NEW_DASHBOARD_URL);
+			System.out.println("user is on Team-Ci1 Environment");
+		}
 		else
 		{
 			start(PAGE_URL_TEAM_MEDICARE_TESTHARNESS);
@@ -335,14 +341,16 @@ public class LoginPage extends UhcDriver {
 		sendkeys(thUserName, username);
 		sendkeys(thPassword, password);
 		thSignIn.click();
-		try {
-			Thread.sleep(10000);
-		} catch (Exception e) {
-			// TODO: handle exception
-		}
-				
+		
 		try{
-			//CommonUtility.waitForPageLoad(driver, iPerceptionPopUp, 90);
+			
+			if (MRScenario.environment.equalsIgnoreCase("stage")) {
+				Thread.sleep(50000);	
+			}else {
+				
+				Thread.sleep(20000);
+			}
+			
             if (validate(iPerceptionPopUp)) {
             	System.out.println("iPerceptionPopUp is Displayed");
                   iPerceptionPopUp.click();
@@ -351,7 +359,7 @@ public class LoginPage extends UhcDriver {
             System.out.println("iPerception Pop Up not displayed");
      }
 
-				if(currentUrl().contains("testharness.html"))
+				if(currentUrl().contains("testharness.html") || currentUrl().contains("/dashboard"))
 
 				{
 					return new AccountHomePage(driver);
@@ -363,7 +371,10 @@ public class LoginPage extends UhcDriver {
 					return new TerminatedHomePage(driver);
 				}
 				
+			System.out.println("teamhloginWith is returing null. Please Update the above condition As per your Needs");
+			
 				return null;
+		
 	}
 
 }

@@ -107,7 +107,7 @@ public class ContactUsAarpStepDefinition {
 				accountHomePage);
 	}
 
-	@When("^the user navigates to contact us page in AARP site$")
+	/*@When("^the user navigates to contact us page in AARP site$")
 	public void views_order_materials_in_Ums_site() {
 		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario()
 				.getBean(PageConstants.ACCOUNT_HOME_PAGE);
@@ -115,27 +115,27 @@ public class ContactUsAarpStepDefinition {
 				.navigatesToContactUsPage();
 		if (contactUsPage != null) {
 
-			/* Get expected data */
-		/*	@SuppressWarnings("unchecked")
+			 Get expected data 
+			@SuppressWarnings("unchecked")
 			Map<String, JSONObject> expectedDataMap = (Map<String, JSONObject>) getLoginScenario()
 			.getBean(CommonConstants.EXPECTED_DATA_MAP);
 			JSONObject contactUsExpectedJson = contactUsPage
 					.getExpectedData(expectedDataMap);
 			getLoginScenario().saveBean(
 					ContactUsCommonConstants.CONTACT_US_EXPECTED_JSON,
-					contactUsExpectedJson); */
+					contactUsExpectedJson); 
 
-			/*JSONObject contactUsActualJson = contactUsPage.contactUsJson;
+			JSONObject contactUsActualJson = contactUsPage.contactUsJson;
 			getLoginScenario().saveBean(
 					ContactUsCommonConstants.CONTACT_US_ACTUAL_JSON,
-					contactUsActualJson); */
+					contactUsActualJson); 
 
 			getLoginScenario().saveBean(PageConstants.CONTACT_US_PAGE,
 					contactUsPage);
 
 		}
 
-	}
+	}*/
 
 	@Then("^the user validates the contact us page in AARP site$")
 	public void validates_plan_materials_plan_document_section_ums() {

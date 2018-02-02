@@ -108,6 +108,8 @@ public class VppUmsStepDefinition {
 					VPPCommonConstants.VPP_PLAN_SUMMARY_ACTUAL,
 					planSummaryActualJson);
 
+		}else{
+			Assert.assertTrue("AEP scenario links were not there",true);
 		}
 
 	}

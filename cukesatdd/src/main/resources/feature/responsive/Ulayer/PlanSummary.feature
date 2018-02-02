@@ -142,15 +142,15 @@ Feature: To verify mobile responsive
 
   @US557073 @Regression @theSpartans
   Scenario Outline: To validate disclaimer text for MA/MAPD plan in vpp compare page
-    Given the user is on the vpp portfolio page
-    Then the user performs plan serach using zipcode
+    Given PlanCompareSpartans the user is on the vpp portfolio page
+    Then PlanCompareSpartans the user performs plan serach using zipcode
       | Zip Code | <zipCode> |
       | County   | <county>  |
-    Then the user navigates to the following plan type
+    Then PlanCompareSpartans the user navigates to the following plan type
       | Plan Type | <planType> |
-    And the user select plan to compare in AARP site
-    And the user click compare plans in AARP site
-    And the user verify disclaimer text for MA/MAPD plan for plan compare page in AARP site
+    And PlanCompareSpartans the user select plan to compare in AARP site
+    And PlanCompareSpartans the user click compare plans in AARP site
+    And PlanCompareSpartans the user verify disclaimer text for MA/MAPD plan for plan compare page in AARP site
 
     Examples: 
       | zipCode | county             | planType |
@@ -174,15 +174,15 @@ Feature: To verify mobile responsive
 
   @US519611 @Regression @theSpartans
   Scenario Outline: To validate remove plan in vpp compare page
-    Given the user is on the vpp portfolio page
-    Then the user performs plan serach using zipcode
+    Given PlanCompareSpartans the user is on the vpp portfolio page
+    Then PlanCompareSpartans the user performs plan serach using zipcode
       | Zip Code | <zipCode> |
       | County   | <county>  |
-    Then the user navigates to the following plan type
+    Then PlanCompareSpartans the user navigates to the following plan type
       | Plan Type | <planType> |
-    And the user select plan to compare in AARP site
-    And the user click compare plans in AARP site
-    And the user remove plan link on compare page in AARP site
+    And PlanCompareSpartans the user select plan to compare in AARP site
+    And PlanCompareSpartans the user click compare plans in AARP site
+    And PlanCompareSpartans the user remove plan link on compare page in AARP site
 
     Examples: 
       | zipCode | county             | planType |
@@ -190,15 +190,15 @@ Feature: To verify mobile responsive
 
   @US540565 @Regression @theSpartans
   Scenario Outline: To validate footnote section in vpp compare page
-    Given the user is on the vpp portfolio page
-    Then the user performs plan serach using zipcode
+    Given PlanCompareSpartans the user is on the vpp portfolio page
+    Then PlanCompareSpartans the user performs plan serach using zipcode
       | Zip Code | <zipCode> |
       | County   | <county>  |
-    Then the user navigates to the following plan type
+    Then PlanCompareSpartans the user navigates to the following plan type
       | Plan Type | <planType> |
-    And the user select plan to compare in AARP site
-    And the user click compare plans in AARP site
-    And the user verify footnote section on compare page
+    And PlanCompareSpartans the user select plan to compare in AARP site
+    And PlanCompareSpartans the user click compare plans in AARP site
+    And PlanCompareSpartans the user verify footnote section on compare page
 
     Examples: 
       | zipCode | county             | planType |
@@ -206,15 +206,15 @@ Feature: To verify mobile responsive
 
   @US519614 @Regression @theSpartans
   Scenario Outline: To validate plan view details in vpp compare page
-    Given the user is on the vpp portfolio page
-    Then the user performs plan serach using zipcode
+    Given PlanCompareSpartans the user is on the vpp portfolio page
+    Then PlanCompareSpartans the user performs plan serach using zipcode
       | Zip Code | <zipCode> |
       | County   | <county>  |
-    Then the user navigates to the following plan type
+    Then PlanCompareSpartans the user navigates to the following plan type
       | Plan Type | <planType> |
-    And the user select plan to compare in AARP site
-    And the user click compare plans in AARP site
-    And the user click plan view details link on compare in AARP site
+    And PlanCompareSpartans the user select plan to compare in AARP site
+    And PlanCompareSpartans the user click compare plans in AARP site
+    And PlanCompareSpartans the user click plan view details link on compare in AARP site
 
     Examples: 
       | zipCode | county             | planType |
@@ -222,14 +222,14 @@ Feature: To verify mobile responsive
 
   @planSummaryPage1
   Scenario Outline: To validate Add to Compare Checboxes
-    Given the user is on the vpp portfolio page
-    Then the user performs plan serach using zipcode
+    Given PlanCompareSpartans the user is on the vpp portfolio page
+    Then PlanCompareSpartans the user performs plan serach using zipcode
       | Zip Code | <zipCode> |
       | County   | <county>  |
-    Then the user navigates to the following plan type
+    Then PlanCompareSpartans the user navigates to the following plan type
       | Plan Type | <planType> |
-    And the user select plan to compare in AARP site
-    And the user click compare plans in AARP site
+    And PlanCompareSpartans the user select plan to compare in AARP site
+    And PlanCompareSpartans the user click compare plans in AARP site
 
     Examples: 
       | zipCode | county             | planType |
@@ -237,13 +237,13 @@ Feature: To verify mobile responsive
 
   @US544283 @Regression @theSpartans
   Scenario Outline: To validate Add to Compare Checboxes
-    Given the user is on the vpp portfolio page
-    Then the user performs plan serach using zipcode
+    Given PlanCompareSpartans the user is on the vpp portfolio page
+    Then PlanCompareSpartans the user performs plan serach using zipcode
       | Zip Code | <zipCode> |
       | County   | <county>  |
-    Then the user navigates to the following plan type
+    Then PlanCompareSpartans the user navigates to the following plan type
       | Plan Type | <planType> |
-    And the user select two plan in AARP site
+    And PlanCompareSpartans the user select two plan in AARP site
 
     Examples: 
       | zipCode | county           | planType |
@@ -251,15 +251,15 @@ Feature: To verify mobile responsive
 
   @medicalbenefits @Regression @theSpartans
   Scenario Outline: To validate medical benefits in compare page
-    Given the user is on the vpp portfolio page
-    Then the user performs plan serach using zipcode
+    Given PlanCompareSpartans the user is on the vpp portfolio page
+    Then PlanCompareSpartans the user performs plan serach using zipcode
       | Zip Code | <zipCode> |
       | County   | <county>  |
-    Then the user navigates to the following plan type
+    Then PlanCompareSpartans the user navigates to the following plan type
       | Plan Type | <planType> |
-    And the user select plan to compare in AARP site
-    And the user click compare plans in AARP site
-    Then the user validates medical benefits
+    And PlanCompareSpartans the user select plan to compare in AARP site
+    And PlanCompareSpartans the user click compare plans in AARP site
+    Then PlanCompareSpartans the user validates medical benefits
       | MP Plan1  | <mpPlan1>  |
       | MP Plan2  | <mpPlan2>  |
       | Oop Plan1 | <oopPlan1> |
@@ -271,15 +271,15 @@ Feature: To verify mobile responsive
 
   @backtoAllPlans
   Scenario Outline: To validate Add to Compare Checboxes
-    Given the user is on the vpp portfolio page
-    Then the user performs plan serach using zipcode
+    Given PlanCompareSpartans the user is on the vpp portfolio page
+    Then PlanCompareSpartans the user performs plan serach using zipcode
       | Zip Code | <zipCode> |
       | County   | <county>  |
-    Then the user navigates to the following plan type
+    Then PlanCompareSpartans the user navigates to the following plan type
       | Plan Type | <planType> |
-    And the user select plan to compare in AARP site
-    And the user click compare plans in AARP site
-    And the user click back to all plans in AARP site
+    And PlanCompareSpartans the user select plan to compare in AARP site
+    And PlanCompareSpartans the user click compare plans in AARP site
+    And PlanCompareSpartans the user click back to all plans in AARP site
 
     Examples: 
       | zipCode | county             | planType |
