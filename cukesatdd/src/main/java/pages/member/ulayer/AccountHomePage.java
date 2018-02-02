@@ -331,6 +331,11 @@ public class AccountHomePage extends UhcDriver {
 	}
 
 	public ContactUsPage navigateToContactUsPage() {
+		try {
+			Thread.sleep(10000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
 		if (validate(iPerceptionPopUp)) {
             iPerceptionPopUp.click();
             System.out.println("iPerception Pop Up displayed");
