@@ -17,7 +17,8 @@ public class PlanBenefitsAndCoverageCommonConstants {
 	
 	public static final String MYDOCUMENT_ACTUAL = "MyDocumentActual";
 	public static final String MYDOCUMENT_EXPECTED = "MyDocumentExpected";
-   public static final String Language = "language";public static final String PHARMACYSEARCH_ACTUAL = "PharmacySearchActual";
+   public static final String Language = "language";
+   public static final String PHARMACYSEARCH_ACTUAL = "PharmacySearchActual";
 	public static final String PHARMACYSEARCH_EXPECTED = "PharmacySearchExpected";
 
 }

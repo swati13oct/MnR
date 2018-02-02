@@ -225,7 +225,9 @@ public class MRConstants {
   
   public static final String TEAM_MEDICARE_TESTHARNESS="https://"+MRScenario.environment+"-medicare.uhc.com/?testharness=true";
   
-  public static final String STAGE_DASHBOARD_NEW_DOMAIN_URL="https://"+MRScenario.environment+"-medicare.uhc.com/";  
+  public static final String STAGE_DASHBOARD_NEW_DOMAIN_URL="https://"+MRScenario.environment+"-medicare.uhc.com/";
+  
+  public static final String TEAM_CI1_NEW_DASBOARD_URL = "https://team-ci1-medicare.ose-elr-core.optum.com/";
 
   public static final String AARP_MOBILE_TEAM_URL = "https://member."+MRScenario.environment+"-aarpmedicareplans.uhc.com/mobile/guest/login.html";
   
@@ -308,6 +310,9 @@ public class MRConstants {
   public static final String REDESIGN_REGISTRATION_URL = "https://"+MRScenario.environment+"-medicare.uhc.com/medicare/member-registration.html#/get-started";
 
   public static final String DASHBOARD_URL ="https://"+MRScenario.environment+"-medicare.uhc.com/";
+  
+  public static final String REDESIGN_LOGIN_URL = "https://"+MRScenario.environment+"-medicare." + getDomain() + "/?testharness=true";
+   
 
   public static String getDomain() {
 		return (MRScenario.domain == null || MRScenario.domain.equals("")) ? "uhc.com" : MRScenario.domain;

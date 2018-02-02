@@ -50,6 +50,9 @@ import cucumber.api.java.en.When;
 * @author sdwaraka
 *
 */
+/**
+* Functionality: Combo tabs in redesign page
+*/
 public class ComboTabsRedesignPagesStepDefinition {
 
 	@Autowired
@@ -58,6 +61,9 @@ public class ComboTabsRedesignPagesStepDefinition {
 	public MRScenario getLoginScenario() {
 		return loginScenario;
 	}
+	/**
+	* @todo : Registration of combo members
+	*/
 
 	@Given("^registered Combo Plans member with following attribute$")
 	public void registered_member_with_following_attributes(DataTable memberAttributes) throws InterruptedException {
@@ -118,6 +124,10 @@ public class ComboTabsRedesignPagesStepDefinition {
 
 
 	}
+	
+	/**
+	* @todo : Navigation to different pages from dashboard
+	*/
 	
 	@When("^the user navigates to mentioned page in Redesign site$")
 	public void views_pages_in_Ums_site(DataTable givenAttributes) throws InterruptedException {
@@ -200,7 +210,10 @@ public class ComboTabsRedesignPagesStepDefinition {
 		}
 		else{System.out.println("Invalid Page Name selection");}
 	}
-	
+	/**
+	* @todo : Verifying terminated tab not coming for combo scenario
+	*/
+
 	@Then("^the user validates Terminated Plans Tab are Not Displayed in the Redesign Page$")
 	public void user_validates_TerminatedTabs_NotDIsplayed(DataTable givenAttributes) {
 		
@@ -243,7 +256,10 @@ public class ComboTabsRedesignPagesStepDefinition {
 			Assert.fail();
 		}
 	}
-		
+	/**
+	* @todo : Verifying only terminated tabs information
+	*/
+			
 	@Then("^the user validates Terminated Plan Tabs in the Redesign Page$")
 	public void user_validates_TerminatedTabs(DataTable givenAttributes) {
 		

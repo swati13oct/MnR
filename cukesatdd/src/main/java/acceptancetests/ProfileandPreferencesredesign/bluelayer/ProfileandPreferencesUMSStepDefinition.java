@@ -50,7 +50,7 @@ public class ProfileandPreferencesUMSStepDefinition {
 	}
 
 	@Given("^registered member with following details for Profile and Preferences flow$")
-	public void login_with_member(DataTable memberAttributes) {
+	public void login_with_member(DataTable memberAttributes) throws InterruptedException {
 		/* Reading the given attribute from feature file */
 		List<List<String>> dataTable = memberAttributes.raw();
 		List<String> desiredAttributes = new ArrayList<String>();
