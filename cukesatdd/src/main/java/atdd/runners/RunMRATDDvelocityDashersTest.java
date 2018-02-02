@@ -17,7 +17,7 @@ jsonReport = "target/cucumber-RunMRATDDvelocityDashersTest.json",detailedReport 
 	overviewReport = true, toPDF = true, outputFolder = "target/RunMRATDDvelocityDashersTest")
 @CucumberOptions(glue = { "atdd.framework", "acceptancetests.memberredesign" }, 
 features = { "src/main/resources/feature/memberredesign" }, plugin = {"pretty", "html:reports/test-report", 
-		"json:target/cucumber-RunMRATDDvelocityDashers.json" }, tags = { "@velocityDashers" })
+		"json:target/cucumber-RunMRATDDvelocityDashersTest.json" }, tags = { "@velocityDashers" })
 public class RunMRATDDvelocityDashersTest {
 
 }

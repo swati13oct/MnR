@@ -10,9 +10,8 @@ Then the user navigates to EOB page
 Then the user validates site leaving pop up         
 Examples:
        | planType  | memberType        |  
-  #    | MAPD      | q4_dec_uhc020   	 | 
-       | PDP			 | q1_aarp_feb345		 |
-       | MA				 | q1_aarp_feb284	   |   
+  	   | MAPD      |IndividualMed_EOB  | 
+     
 
   @eobCountdaterange
 Scenario Outline: To verify EOB result list
@@ -27,7 +26,7 @@ And the user slects the desired date range
 Then the user validates EOB count
 	Examples:
 		| planType  | memberType        |dateRange			| eobType |
-		| MA        | q4_dec_grp074     |12 Months		  | Medical |
+		| MAPD      |IndividualMed_EOB  |12 Months		  | Medical |
 
 
  
@@ -41,10 +40,9 @@ Then the user validates content displayed on EOB page without combo tabs
        | Plan Type      |<planType>  |
 Examples: 
 | planType    | memberType   					 |
-#WELLS FARGO
-#| PDP					| q4_dec_grp039          |  
+| MAPD        |IndividualMed_EOB  |  
 
-|	MAPD				|	q4_dec_grp074					 |
+
 
 @noComboTabNew
 Scenario Outline: To verify different plan types under non combo tabs
@@ -58,15 +56,9 @@ And the user selects the desired date range
 
 
 Examples:
-| planType    | memberType   					 |eobTypeData				|dateRange			|
-#5 	EOBS
-|	MAPD				|	q4_dec_grp074					 |Prescription Drug |12 Months  	 |
-#|	MAPD				|	q4_dec_grp074					 |Prescription Drug |18 Months  	 |
-|	MAPD				|	q4_dec_grp074					 |Prescription Drug |6 Months  	   |
-|	MAPD				|	q4_dec_grp074					 |Prescription Drug |custom-search |
+| planType    | memberType   					 |eobTypeData				 |dateRange			|
+| MAPD        |IndividualMed_EOB  		 | Prescription Drug |12 Months  	 |
 
- |	PDP				|	q4_dec_aarp327					 |na |12 Months |
- |	PDP	  		|	q4_dec_aarp327					 |na |18 Months|
  
  
  

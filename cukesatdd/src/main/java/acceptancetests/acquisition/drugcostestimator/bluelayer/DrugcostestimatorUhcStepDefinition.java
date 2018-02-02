@@ -638,14 +638,10 @@ public class DrugcostestimatorUhcStepDefinition {
 		}
 
 		String zipcode = memberAttributesMap.get("Zipcode");
-		String radius = memberAttributesMap.get("Radius");
-		String Pharmacy_type = memberAttributesMap.get("Pharmacy Type");
 		DrugCostEstimatorPage dce = (DrugCostEstimatorPage) getLoginScenario().getBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE);
-		//dce.validateZipcode(zipcode);
 		dce.selectRadius();
 		Thread.sleep(10000);
 		dce.selectZipcode(zipcode);
-		//dce.selectPharmacyType(Pharmacy_type);
 		Thread.sleep(2000);
 		dce.clickstep2Search();
 		Thread.sleep(10000);
@@ -907,7 +903,6 @@ public class DrugcostestimatorUhcStepDefinition {
 		}
 		//System.out.println("Map values"+memberAttributesMap);
 		String totalAnnualDrugCost = memberAttributesMap.get("totalAnnualDrugCost");
-		WebDriver wd = (WebDriver)getLoginScenario().getBean(CommonConstants.WEBDRIVER);
 		DrugCostEstimatorPage dce = (DrugCostEstimatorPage) getLoginScenario()
 				.getBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE);
 		
@@ -1231,12 +1226,6 @@ public class DrugcostestimatorUhcStepDefinition {
 	
 	@And("^user validates the Summary, functionality of Drugs link, Costs link and functionality of Return to Plans button DCE blayer acq$")
 	public void user_validates_step3_page() throws InterruptedException {
-		DrugCostEstimatorPage dce = new DrugCostEstimatorPage((WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER));
-		//dce.validateSummary();
-		//dce.validateDrugs();
-		//dce.validatePharmacy();
-		//dce.validateCosts();
-		//dce.validateFindAPlan();
 	}
 	
 	@When("^I access the acquisition DCE tool from vpp page using below zipcode DCE blayer acq$")

@@ -44,7 +44,16 @@ public class ExplanationOfBenefitsPage extends UhcDriver {
 	@FindBy(xpath = ".//h3[contains(text(),'Plan Support')]")
 	private WebElement PlnSprt;
 
-	private static String PAGE_URL = "https://stage-medicare.uhc.com/medicare/login/overview.html?testharness=true";
+	@FindBy(xpath = "//*[@id='dashboard']//span[text()='View Your Claims']")
+	private WebElement EOBdashboardLink;
+
+	@FindBy(id = "eobC1")
+	private WebElement EOBPage;
+
+	@FindBy(xpath = ".//map[@name='IPEMap']/area[@alt='no']")
+	private WebElement EOBpopup;
+
+	private static String PAGE_URL = MRConstants.STAGE_DASHBOARD_NEW_DOMAIN_URL;
 
 	// private static String PAGE_URL = TeamC_UNPWAssistancePage_URL;
 
@@ -58,28 +67,55 @@ public class ExplanationOfBenefitsPage extends UhcDriver {
 	public void openAndValidate() {
 		start(PAGE_URL);
 	}
+
 	// Navigate to EOB Page
 	public void navigateToEOBPage() throws InterruptedException {
+		if (driver.getTitle().equalsIgnoreCase("UnitedHealthcare")) {
+			System.out.println("navigated to Homepage!");
+			Thread.sleep(5000);
+			EOBdashboardLink.click();
+			Thread.sleep(5000);
 
-		try {
-			Thread.sleep(10000);
-			if (validate(iPerceptionPopUp)) {
-				iPerceptionPopUp.click();
-				System.out.println("iPerception Pop Up displayed");
+			try {
+				if (validate(EOBpopup)) {
+					EOBpopup.click();
+					System.out.println("EOB Pop Up displayed");
+				}
+				EOBPage.click();
+				Thread.sleep(5000);
+			} catch (Exception e) {
+				EOBPage.click();
+				Thread.sleep(5000);
 			}
-			linkEOB.click();
+
 			Thread.sleep(5000);
-		} catch (Exception e) {
-			linkEOB.click();
-			Thread.sleep(5000);
+			if (driver.getTitle().equalsIgnoreCase("EOB Search")) {
+				System.out.println("navigated to EOB page!");
+				// return new CommunicationPreferences(driver);
+				Assert.assertTrue(true);
+			}
+		} else {
+			try {
+				Thread.sleep(10000);
+				if (validate(iPerceptionPopUp)) {
+					iPerceptionPopUp.click();
+					System.out.println("iPerception Pop Up displayed");
+				}
+				linkEOB.click();
+				Thread.sleep(5000);
+			} catch (Exception e) {
+				linkEOB.click();
+				Thread.sleep(5000);
+			}
+			if (driver.getTitle().equalsIgnoreCase("EOB Search")) {
+				System.out.println("navigated to EOB page!");
+				// return new CommunicationPreferences(driver);
+				Assert.assertTrue(true);
+			}
+			// return null;
 		}
-		if (driver.getTitle().equalsIgnoreCase("EOB Search")) {
-			System.out.println("navigated to EOB page!");
-			// return new CommunicationPreferences(driver);
-			Assert.assertTrue(true);
-		}
-		// return null;
 	}
+
 	// Validate the EOB elements present in the page or not
 	public void validateEOB() throws InterruptedException {
 
