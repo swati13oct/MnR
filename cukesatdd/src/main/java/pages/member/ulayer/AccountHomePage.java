@@ -335,7 +335,7 @@ public class AccountHomePage extends UhcDriver {
             iPerceptionPopUp.click();
             System.out.println("iPerception Pop Up displayed");
 		}
-		if (MRScenario.environment.equals("team-h") || MRScenario.environment.equals("test-a") || MRScenario.environment.equals("team-e")) {
+		if (MRScenario.environment.equals("team-ci1") || MRScenario.environment.equals("team-h") || MRScenario.environment.equals("test-a") || MRScenario.environment.equals("team-e")) {
 			helpAndContactUslink.click();
 		}else{
 			linkContactUs.click();
