@@ -1,11 +1,10 @@
 @dashBoardFormsAndResources @gladiators
 Feature: To validate forms and resources page in dashboard site
 
-@formsAndResourcesPageValidation
-#Scenarios written for blue layer - Later will be modified to dashboard once dashboard site is set up
+  @formsAndResourcesPageValidation
   Scenario Outline: 
-        Given details of user to sign in on member redesign site to see forms and resources page
-          | userId   | <userId>  |
+    Given details of user to sign in on member redesign site to see forms and resources page
+      | userId   | <userId>   |
       | password | <password> |
     And click on the forms and resource link and navigate to forms and resource page
     Then validate EOB section
@@ -18,9 +17,8 @@ Feature: To validate forms and resources page in dashboard site
 
     #Blue Layer Members
     Examples: 
-      | userId           | password   | EOBMedicalLinkVisible | EOBDrugLinkVisible | MyDocumentVisible | RenewMagazineVisible |
-        # uhc
-      | q1_feb_uhc005 | Password@1 |  YES   | YES       | YES     | YES       |         
-   # aarp
-      | q1_feb_aarp001 | Password@1 |   YES  | YES       | YES     | YES        |               
-   
+      | userId         | password   | EOBMedicalLinkVisible | EOBDrugLinkVisible | MyDocumentVisible | RenewMagazineVisible |
+      # uhc
+      | q1_feb_uhc005  | Password@1 | YES                   | YES                | YES               | YES                  |
+      # aarp
+      | q1_feb_aarp001 | Password@1 | YES                   | YES                | YES               | YES                  |
