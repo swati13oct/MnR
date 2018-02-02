@@ -33,8 +33,10 @@ import atdd.framework.UhcDriver;
 public class RedesignLoginPage extends UhcDriver {
 
 
-	private static String PAGE_URL = MRConstants.MEDICARE_UHC_REDESIGN;
-	private static String CI_PAGE_URL = MRConstants.REDESIGN_LOGIN_URL; 
+	//private static String PAGE_URL = MRConstants.MEDICARE_UHC_REDESIGN;
+	private static String PAGE_URL = MRConstants.REDESIGN_LOGIN_URL;
+	
+	//private static String CI_PAGE_URL = MRConstants.REDESIGN_LOGIN_URL; 
 	
 	
 	@FindBy(xpath = "//area[@href='javascript:clWin()'][@alt = 'close']")
@@ -78,8 +80,10 @@ public class RedesignLoginPage extends UhcDriver {
 		sendkeys(passwordField,password);
 		System.out.println(signInButton.isEnabled());
 		signInButton.click();
+		Thread.sleep(25000);
+		
 		if ( MRScenario.environment.equals("team-h") || MRScenario.environment.equals("team-a") || MRScenario.environment.equals("team-ci1")) {
-			while (!isAlertPresent());
+			while (isAlertPresent());
 
 /*			try{
 				Alert alert = driver.switchTo().alert();
@@ -90,7 +94,7 @@ public class RedesignLoginPage extends UhcDriver {
 			} 
 */		}
 		
-		Thread.sleep(15000);
+		Thread.sleep(50000);
 		CommonUtility.checkPageIsReady(driver);
 /*		try{
 			if(validate(NewEmailTxtBox)){
@@ -138,12 +142,14 @@ public class RedesignLoginPage extends UhcDriver {
 	*/
 	@Override
 	public void openAndValidate() {
-		if(MRScenario.environment.contentEquals("test-a") || MRScenario.environment.contentEquals("stage")){
+/*		if(MRScenario.environment.contentEquals("test-a") || MRScenario.environment.contentEquals("stage")){
 			start(PAGE_URL);
 		}
 		if(MRScenario.environment.contentEquals("team-ci1")){
 			start(CI_PAGE_URL);
 		}
+*/		
+		start(PAGE_URL);
 		validate(userNameField);
 		System.out.println("@@@@@@@@@@@@@  Test Environment and URL  : "+PAGE_URL+"  @@@@@@@@@@@@@@@@@@@@@@@");
 	}
@@ -168,7 +174,7 @@ public class RedesignLoginPage extends UhcDriver {
 	public boolean isAlertPresent(){ 
 	    try{ 
 	        Alert a = new WebDriverWait(driver, 5).until(ExpectedConditions.alertIsPresent());
-	        if(a!=null){
+/*	        if(a!=null){
 	            System.out.println("Alert is present = " + a.getText());
 	            driver.switchTo().alert().accept();
 	            Alert a2 = new WebDriverWait(driver, 5).until(ExpectedConditions.alertIsPresent());
@@ -177,12 +183,17 @@ public class RedesignLoginPage extends UhcDriver {
 		            
 		            driver.switchTo().alert().accept();
 	            }
-	            return true;
-	        }else{
+	            //return true;
+	        }
+*/            
+	        System.out.println("Alert is present = " + a.getText());
+            driver.switchTo().alert().accept();
+	        return true;
+	        /*else{
 	            //throw new Throwable();
 	        	System.out.println("alert is not present 1");
 	        	return false;
-	        }
+	        }*/
 	    } 
 	    catch (Throwable e) {
 	        System.out.println("Alert isn't present!!");
