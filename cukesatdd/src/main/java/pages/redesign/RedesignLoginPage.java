@@ -27,6 +27,9 @@ import atdd.framework.UhcDriver;
  * @author pagarwa5
  *
  */
+/**
+* Functionality: Redesign login page
+*/
 public class RedesignLoginPage extends UhcDriver {
 
 
@@ -59,7 +62,9 @@ public class RedesignLoginPage extends UhcDriver {
 	@FindBy(xpath = "//*[@id='email-modal-form']//button")
 	private WebElement NewEmailContinueBtn;
 
-
+	/**
+	* @todo : Redesign login 
+	*/
 	public RedesignLoginPage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
@@ -126,7 +131,9 @@ public class RedesignLoginPage extends UhcDriver {
 		System.out.println("@@@@@@@@@@@@ Account Home Page is NOT DISPLAYED @@@@@@@@@@@@");
 		return null;
 	}
-
+	/**
+	* @todo : user name valdiation 
+	*/
 	@Override
 	public void openAndValidate() {
 		start(PAGE_URL);
@@ -134,7 +141,9 @@ public class RedesignLoginPage extends UhcDriver {
 		System.out.println("@@@@@@@@@@@@@  Test Environment and URL  : "+PAGE_URL+"  @@@@@@@@@@@@@@@@@@@@@@@");
 
 	}
-
+	/**
+	* @todo : click on forgot password
+	*/
 	public LoginAssistancePage navigateToLoginAssistance() {
 		forgotUsernamePasswordLink.click();
 		CommonUtility.waitForPageLoad(driver, userNameCheckBox, 5);
@@ -147,7 +156,9 @@ public class RedesignLoginPage extends UhcDriver {
 
 	}
 
-
+	/**
+	* @todo : wait for dashboard page to load
+	*/
 	public boolean isAlertPresent(){ 
 	    try{ 
 	        Alert a = new WebDriverWait(driver, 5).until(ExpectedConditions.alertIsPresent());

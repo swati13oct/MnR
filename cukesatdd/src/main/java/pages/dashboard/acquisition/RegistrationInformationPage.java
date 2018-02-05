@@ -490,7 +490,7 @@ public class RegistrationInformationPage extends UhcDriver {
 	public void pressEnterYear()
 	{
 		yearToEnterText.sendKeys(Keys.ENTER);
-		
+		System.out.println(driver.getCurrentUrl());
 	}
 	/**
 	 * Click the continue button
