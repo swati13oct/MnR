@@ -334,6 +334,8 @@ public class DrugCostEstimatorPage extends UhcDriver {
 			//           https://team-h-werally.uhc.com/content/medicare/member/drug-lookup/overview.html
 		}else if(evironment.equals("stage")){
 			NewDCEUrl = "https://stage-medicare.uhc.com/content/medicare/member/drug-lookup/overview.html#/drug-cost-estimator";
+		}else if(evironment.equals("team-ci1")){
+			NewDCEUrl = "https://team-ci1-medicare.ose-elr-core.optum.com/content/medicare/member/drug-lookup/overview.html#/drug-cost-estimator";
 		}
 
 		driver.get(NewDCEUrl);
