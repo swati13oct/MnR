@@ -34,7 +34,7 @@ import atdd.framework.UhcDriver;
 public class NewLoginPage extends UhcDriver {
 
 	// Page URL
-	private static String PAGE_URL = MRConstants.DASHBOARD_URL;
+	private static String PAGE_URL = MRConstants.REDESIGN_LOGIN_URL;
 
 	@FindBy(id = "sign-in-btn")
 	private WebElement btnSignIn;
