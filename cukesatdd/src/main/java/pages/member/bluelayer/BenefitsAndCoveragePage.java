@@ -26,7 +26,7 @@ import atdd.framework.UhcDriver;
 import pages.member.ulayer.ValueAddedServicepage;
 
 /**
- * @author njain112
+ * @Functionality : To check Benefits and Coverage page 
  *
  */
 public class BenefitsAndCoveragePage extends UhcDriver {
@@ -336,21 +336,11 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 		openAndValidate();
 	}
 
-	public JSONObject getExpectedData(Map<String, JSONObject> expectedDataMap) {
 
-		/* get PHR expected data */
-		JSONObject benefitsExpectedJson = expectedDataMap.get(CommonConstants.BENEFITS_AND_COVERAGE);
-		JSONObject commonExpectedJson = expectedDataMap.get(CommonConstants.COMMON);
-		// JSONObject globalExpectedJson =
-		// expectedDataMap.get(CommonConstants.GLOBAL);
-		benefitsExpectedJson = CommonUtility.mergeJson(benefitsExpectedJson, commonExpectedJson);
-		// benefitsExpectedJson = CommonUtility.mergeJson(benefitsExpectedJson,
-		// commonExpectedJson);
 
-		return benefitsExpectedJson;
-
-	}
-
+	/** 
+	 * @toDo : To check headers on Benfits and coverage page
+	 */
 	public void validateFieldsOnBenefitsAndCoveragePage() {
 
 		try {
@@ -366,6 +356,10 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 			System.out.println("Elements are not found ...");
 		}
 	}
+	
+	/** 
+	 * @toDo : To check benefits and coverage page has opened
+	 */
 
 	public void openAndValidate() {
 
@@ -408,6 +402,11 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 
 	}
 
+
+	/** 
+	 * @toDo : The user validates the PlanDocuments Section
+	 */
+
 	public void PlanDocumentssection() {
 
 		try {
@@ -417,6 +416,11 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 		}
 	}
 	
+	
+	/** 
+	 * @toDo : The user validates the headers in Need help section
+	 */
+
 	public void validateNeedhelpheader() {
 
 		JavascriptExecutor jse = (JavascriptExecutor) driver;
@@ -425,7 +429,9 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 			
 			
 	}
-
+	/** 
+	 * @toDo : The user validates the Contact us section in Need help section
+	 */
 
 	public void validatecontactussection() 
         {
@@ -448,6 +454,9 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 		
 	}
 	
+	/** 
+	 * @toDo : The user validates the Contact us link in Need help section
+	 */
 		public void  contactUslink() {
                 try {
 			Thread.sleep(20000);
@@ -482,6 +491,11 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 	
 		
 	}
+		
+		
+		/** 
+		 * @toDo : The user checks the disclaimers
+		 */
 
 
 	public void clickOnDisclaimers(JSONObject benefitsandcoverageExectedJson) {
@@ -518,6 +532,11 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 		}
 	}
 	
+	
+	/** 
+	 * @toDo : The user checks the More Information link in the Need help section
+	 */
+	
 	public void clickOnDisclaimers() {
 		// TODO Auto-generated method stub
 		JavascriptExecutor jse = (JavascriptExecutor) driver;
@@ -533,14 +552,23 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 	}
 
 
+	/** 
+	 * @toDo : The user checks the view label in Documents section
+	 */
 	public boolean getview_label() {
 		return validate(view_label);
 	}
 
+	/** 
+	 * @toDo : The user checks the get Document label in Documents section
+	 */
 	public boolean getdocuments_label() {
 		return validate(documents_label);
 	}
 
+	/** 
+	 * @toDo : The user validates the language dropdown in Documents section
+	 */
 	public void languagevalidation() {
 		if (langdropdown.isDisplayed()) {
 			List<String> listActual = new ArrayList<String>();
@@ -559,6 +587,10 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 
 	}
 
+	
+	/** 
+	 * @toDo : The user validates the language dropdown in Documents section and validates the default selected language
+	 */
 	public void validate_langdropdown_first_selection() {
 		// WebElement langdropdown;
 		if (langdropdown.isDisplayed()) {
@@ -573,11 +605,18 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 
 	}
 
+	/** 
+	 * @toDo : The user validates the language dropdown in Documents section and make a selection in the dropdown
+	 */
 	public void validate_langdropdown_select(String language) {
 		Select langdropdwn = new Select(langdropdown);
 		langdropdwn.selectByVisibleText(language);
 	}
 
+	
+	/** 
+	 * @toDo : The user validates the Hearing section of Ancillary
+	 */
 	public void HearingSection() {
 
 		try {
@@ -587,6 +626,10 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 		}
 	}
 
+	
+	/** 
+	 * @toDo : The user validates the Hearing aid section of Ancillary Benefits
+	 */
 	public void HearingAid() {
 
 		try {
@@ -595,6 +638,10 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 			System.out.println("Elements is not found ...");
 		}
 	}
+	
+	/** 
+	 * @toDo : The user validates the Vision  section of Ancillary Benefits
+	 */
 
 	public void Vision() {
 
@@ -605,6 +652,10 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 		}
 	}
 
+	/** 
+	 * @toDo : The user validates the Dental  section of Ancillary Benefits
+	 */
+	
 	public void Dental() {
 
 		try {
@@ -613,6 +664,10 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 			System.out.println("Elements is not found ...");
 		}
 	}
+	
+	/** 
+	 * @toDo : The user validates the Header  section 
+	 */
 
 	public void Header() {
 
@@ -623,6 +678,9 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 		}
 	}
 
+	/** 
+	 * @toDo : The user validates the chiropractic  section  of Ancillary benefits
+	 */
 	public void chiropracticsection() {
 
 		try {
@@ -632,6 +690,9 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 		}
 	}
 	
+	/** 
+	 * @toDo : The user validates the Disclaimers link under Exclusive hearing section  of Ancillary benefits
+	 */
 	public void ExclusiveDisclaimers() {
 
 		try {
@@ -650,6 +711,13 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 			System.out.println("Elements is not found ...");
 		}
 	}
+	
+	
+	
+	/** 
+	 * @toDo : The user validates the Learn more button under Exclusive hearing section  of Ancillary benefits
+	 */
+
 	public void Exclusivelearnmore() {
 		try{
 		validate(LearnmoreButton);
@@ -684,14 +752,24 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 			}*/
 		//LearnmoreButton.click();
 		
+	
+	
+	/** 
+	 * @toDo : The user validates the Leaving popup in  Ancillary section
+	 */
 	public void Leavingpopup() {
 
 		try {
 			validate(popup);
 		} catch (Exception e) {
-			System.out.println("Elements is not found ...");
+			System.out.println("Element is not found ...");
 		}
 	}
+	
+	/** 
+	 * @toDo : The user validates the proceed button  of the leaving popup in  Ancillary section
+	 */
+
 	public boolean Proceedbutton() {
 		//LearnmoreButton.click();
 		try {
@@ -726,6 +804,11 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 		}
 		return true;
 		}
+	
+	
+	/** 
+	 * @toDo : The user validates the cancel button  of the leaving popup in  Ancillary section
+	 */
 	public void Cancelbutton() {
 
 		try {
@@ -740,11 +823,19 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 		}
 	}
 
+	
+	/** 
+	 * @toDo : The user validates the DrugCoverage section headers and text
+	 */
 	public void validatedrugcoverageheaderandtext() {
 		validate(DrugCoverageHeader);
 		validate(DrugCoveragetext);
 	}
 
+	
+	 /** 
+		 * @toDo : Validates Look Up Drugs button in  the DrugCosts  section
+		*/
 	public void validatelookupdrugsbutton() {
 		if (LookUpDrugsButton.isDisplayed()) {
 			Assert.assertTrue(true);
@@ -752,28 +843,47 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 			Assert.fail("Button not displayed");
 	}
 
+	
+	 /** 
+		 * @toDo : Validates the text for the Look Up Drugs section
+		 */
+
 	public void validate_lookupdrugstext() {
 		validate(LookupDrugstext);
 
 	}
 
+	/** 
+	 * @toDo : Validates the headers in DrugCopays and Discount section
+	*/
 	public void validate_drugcopayheaderntext() {
 		validate(DrugCopayHeader);
 		validate(DrugCopayText);
 
 	}
+	
+	/** 
+	 * @toDo : Validates the Drug Cost header and text
+	*/
 
 	public void validate_drugcostheaderntext() {
 		validate(DrugCostheaderandtext);
 
 	}
 
+	/** 
+	 * @toDo : Validates the text in locate a pharmacy section
+	*/
 	public void validate_locateapharmacysection() {
 		validate(locateapharmacysection);
 		validate(locateapharmacybutton);
 
 	}
 
+	
+	/** 
+	 * @toDo : Validates the Learnmore tiers links for a Lis member
+	*/
 	public void validate_tierlinknotdisplay() {
 		if (Learnmoretierslink.isDisplayed()) {
 			Assert.fail("The element" + Learnmoretierslink.getText() + "should not display");
@@ -783,6 +893,11 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 		}
 
 	}
+	
+	/** 
+	 * @toDo : Validates the Pharmacy  selection dropdown for a Lis member
+	*/
+	
 
 	public void validate_dropdownnotdisplay() {
                 try {
@@ -801,6 +916,10 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 
 	}
 
+	
+	/** 
+	 * @toDo : Validates the Pharmacy selection dropdown  for a non Lis member
+	*/
 	public void validate_drugcostdropdownoptions()
 
 	{
@@ -845,6 +964,9 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 		}*/
 	}
 
+	/** 
+	 * @toDo : Validates the Learn More links for a Non Lis member
+	*/
 
 	public void validate_learnmoreaboutlink() {
 		validate(Learnmoretierslink);
@@ -852,11 +974,19 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 
 	}
 
+	
+	/** 
+	 * @toDo : Validates the Learn More links for a  Lis member
+	*/
 	public void validate_learnmoreaboutstagelink() {
 
 		validate(Learnmorestagelink);
 
 	}
+	/** 
+	 * @toDo : Validates that the learnmore tier link
+	 */
+	
 
 	public void clickOnLearnmoreaboutlinktier() {
 		// TODO Auto-generated method stub
@@ -904,6 +1034,10 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 		
 		 
 	}
+	
+	/** 
+	 * @toDo : Validates that the learnmore stage link 
+	*/
 
 	public void clickOnLearnmoreaboutlinkstage() {
 		// TODO Auto-generated method stub
@@ -944,6 +1078,9 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 		
 	}
 
+	/** 
+	 * @toDo : Validates the headers in DrugCopays and Discount section for a Lis member
+	*/
 
         public void validate_lisdrugcopayheaderntext() {
 		validate(lisDrugCopayHeader);
@@ -952,12 +1089,19 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 	}
 
 
+        /** 
+    	 * @toDo : Validates the Drug costs table  for  a Non Lis member
+    	*/
 	public void validatedrugcopaytable() {
 		// Select langdropdwn = new Select(langdropdown);
 
 		validate(drugcopaytable);
 
 	}
+	
+	/** 
+	 * @toDo : Validates the Drug costs table  for  a  Lis member
+	*/
 
 	public void validatedrugcosttable() {
 		// TODO Auto-generated method stub
@@ -965,6 +1109,10 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 
 	}
 
+	
+	/** 
+	 * @toDo : Validates the  Ways to save section
+	*/
 	public void validateWaystoSave() {
 		validate(waysToSave);
 		validate(TextWaystoSave);
@@ -974,6 +1122,10 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 
 	}
 
+	
+	/** 
+	 * @toDo : Validates the  Plan overview section for  a Non lis member 
+	*/
 	public void validatePlanOverview() {
 		// TODO Auto-generated method stub
 
@@ -985,6 +1137,10 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 		validate(GroupId);
 
 	}
+	
+	/** 
+	 * @toDo : Validates the  Plan overview section for  a lis member
+	*/
 
 	public void validatePlanOverviewLis() {
 		validate(planName);
@@ -995,6 +1151,10 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 		validate(ExtraHelp);
 
 	}
+	
+	/** 
+	 * @toDo : Validates the  headers section for individual members
+	*/
 
 	public void validateHeaders() {
 		validate(BenefitsSummaryHeader);
@@ -1005,6 +1165,10 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 
 	}
 
+	
+	/** 
+	 * @toDo : Validates the  headers section for group members
+	*/
 	public void validateHeadersGroup() {
 		validate(BenefitsSummaryHeader);
 		validate(Copayscoinsuranceheader);
@@ -1015,6 +1179,10 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 		validate(OutpatientSurgeryCenter);
 
 	}
+	/** 
+	 * @toDo : Validates the  Primary care provider section
+	*/
+
 
 	public void validatePrimaryCareProvider() {
 
@@ -1026,6 +1194,11 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 
 	}
 
+	
+	/** 
+	 * @toDo : Validates the  Primary care provider section for group members
+	*/
+
 	public void validatePrimaryCareProviderForGroup() {
 	
 		validate(PrimaryCareProviderHeaderHMO);
@@ -1034,6 +1207,11 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 		
 	}
 	
+	/** 
+	 * @toDo : Validates the Out Of Pocket Maximum section
+	*/
+
+	
 	public void validateOutofPocketMax() {
 		validate(OutofPocketMaximum);
 		validate(INNETWORK);
@@ -1041,6 +1219,10 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 		validate(OutofPocketMaximumText);
 		
 	}
+	/** 
+	 * @toDo : Validates the Benefits page
+	*/
+
 	
 	public void validateBnCPag()
 	   {
@@ -1053,7 +1235,7 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 		validate(planName1);
 	   }
 
-     public pages.member.bluelayer.ProfilePreferencesPage navigateDirectToProfilePagee() {
+     public pages.member.bluelayer.ProfilePreferencesPage navigateDirectToProfilePagee() throws InterruptedException {
         System.out.println(driver.getTitle());
         accountToggleDropdown.click();
         validate(accountSettingOption);
@@ -1075,6 +1257,9 @@ public class BenefitsAndCoveragePage extends UhcDriver {
         
 	}
      
+     /** 
+ 	 * @toDo : Validates the headers for ship members
+ 	*/
  	public void validateHeadersShip() {
 		// TODO Auto-generated method stub
 
@@ -1091,12 +1276,19 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 
 	}
  	
+ 	/** 
+	 * @toDo : Validates the hand image in  discount and services section for ship members
+	*/
  	public void handimage() {
 
 		validate(handimage);
 
 	}
  	
+ 	
+ 	/** 
+	 * @toDo : Validates the Value added services section for ship members
+	*/
 	public void vasSection() {
 
 		validate(textdiscountservices);
@@ -1104,12 +1296,19 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 		validate(headerdiscountservices);
 	}
 	
+	/** 
+	 * @toDo : Validates the Learnmore Button for ship members
+	*/
+	
 	public void learnmorebutton() {
 
 		validate(learnmorebutton);
 
 	}
  	
+	/** 
+	 * @toDo : Validates the Value added services page  for ship members
+	*/
 	public ValueAddedServicepage navigateToValueAddService() {
 		validate(learnmorebutton);
 		try {
@@ -1135,6 +1334,10 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 
 	}
 	
+
+	/** 
+	 * @toDo : Validates the Need help section headers for a ship member
+	*/
 	public void validateneedhelpheaderShip() {
 		validate(NeedhelpShip);
 		validate(TechnicalSupportShip);
@@ -1142,6 +1345,9 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 		validate(ClaimsSupportShip);
 	}
 	
+	/** 
+	 * @toDo : Validates the see more ways to contact us section for ship members in Need help section
+	*/
 	public void validateContactUsNeedHelp() {
         try {
 			Thread.sleep(30000);
@@ -1153,6 +1359,9 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 
 	}
 	
+	/** 
+	 * @toDo : Validates the contact us page on clicking on the link of contact us in Need help section
+	*/
 	public void contactUslinkShip() 
 	{
         try 

@@ -15,8 +15,8 @@ Feature: To test Profile and Preferences page .
          | planType|
          | MAPD     |
           | MA       |
-         # |PDP       |
-         # |SHIP      |
+         |PDP       |
+         |SHIP      |
        
        
         @CMValidatePlanNamemembernameIDAccountSectionUMS
@@ -30,8 +30,8 @@ Feature: To test Profile and Preferences page .
          | planType|
          | MAPD     |
           | MA       |
-        #  |PDP       |
-         # |SHIP      |
+         |PDP       |
+         |SHIP      |
 
 
   @CMPasswordEdit
@@ -47,8 +47,8 @@ Feature: To test Profile and Preferences page .
          | planType|
          | MAPD     |
           | MA       |
-        #  |PDP       |
-         # |SHIP      |
+         |PDP       |
+         |SHIP      |
           
           
             @CMPasswordEdit1
@@ -63,8 +63,8 @@ Feature: To test Profile and Preferences page .
          | planType|
          | MAPD     |
           | MA       |
-          #|PDP       |
-          #|SHIP      |
+          |PDP       |
+          |SHIP      |
           
           
      @CMPasswordEdit3
@@ -79,8 +79,8 @@ Feature: To test Profile and Preferences page .
          | planType|
          | MAPD     |
           | MA       |
-          #|PDP       |
-          #|SHIP      |
+         |PDP       |
+          |SHIP      |
           
         @CMTemporaryaddress
     Scenario Outline: To verify Temporary adrress and Edit Functionality
@@ -96,7 +96,7 @@ Feature: To test Profile and Preferences page .
     Examples: 
        | planType |
        | MAPD     |
-      #| MA       |
+      | MA       |
       
       
         @CMValidateEmail
@@ -110,8 +110,8 @@ Feature: To test Profile and Preferences page .
         | planType|
          | MAPD     |
           | MA       |
-         # |PDP       |
-          #|SHIP      |
+         |PDP       |
+          |SHIP      |
           
           
           
@@ -128,8 +128,8 @@ Feature: To test Profile and Preferences page .
         | planType|
          | MAPD     |
           | MA       |
-        #  |PDP       |
-         # |SHIP      |
+        |PDP       |
+         |SHIP      |
           
           
           
@@ -147,8 +147,8 @@ Feature: To test Profile and Preferences page .
          | planType|
          | MAPD     |
           | MA       |
-         # |PDP       |
-          #|SHIP      |
+         |PDP       |
+         |SHIP      |
           
           
             @CMCommunicationPreferences
@@ -164,8 +164,8 @@ Feature: To test Profile and Preferences page .
           | planType |
           | MAPD     |
           | MA       |
-       #   |PDP       |
-         # |SHIP      |
+        |PDP       |
+         |SHIP      |
          
          
           @CMPermanentAddress
@@ -200,7 +200,10 @@ Feature: To test Profile and Preferences page .
     Examples: 
       | planType |
       | MAPD     |
-       | MA       |
+      | MA       |
+      |PDP       |
+      |SHIP      |
+
        
        @CMGoGreen
     Scenario Outline: To verify Go Green page
@@ -223,7 +226,7 @@ Feature: To test Profile and Preferences page .
        | planType |
       | MAPD     |
       | MA       |
-       #|PDP       |
+      |PDP       |
      #|SHIP      |
        
          

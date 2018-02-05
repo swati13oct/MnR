@@ -365,7 +365,7 @@ public class ProfileandPreferencesUMSStepDefinition {
 	}
 
 	@Then("^the user validates on clicking Profilenpreferences arrow user should route to Profile and Preferences page")
-	public void uservalidatespnplinkatthetop() {
+	public void uservalidatespnplinkatthetop() throws InterruptedException {
 		ProfilePreferencesPage ProfilePreferencesPage = (ProfilePreferencesPage) getLoginScenario()
 				.getBean(PageConstants.PROFILE_AND_PREFERENCES_PAGE);
 
