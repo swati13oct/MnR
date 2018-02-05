@@ -237,7 +237,9 @@ public class ContactUsPage extends UhcDriver{
 		return contactUsExpectedJson;
 	}
 
-	
+	/**
+	 * validate the secure email widget display
+	 */
 	public void validatesecureemail()
 	{
 		if (securewidget.isDisplayed())
@@ -249,6 +251,10 @@ public class ContactUsPage extends UhcDriver{
 			System.out.println("Secure widget is not  displayed");
 		}
 	}
+	
+	/**
+	 * Validate Texas ERS plan name
+	 */
 	public void validatePlanName(){
     	String planName = LoginCommonConstants.PLAN_NAME;
     	System.out.println(planName);
@@ -266,6 +272,9 @@ public class ContactUsPage extends UhcDriver{
 	    		} 	  		 
     	}
  }
+	/**
+	 * Validate the success message 
+	 */
 	public void validateThankYouMessage(String expectedMessage){
 		
 		Assert.assertEquals("Your Request has Been Received", requestReceivedMessageHeader.getText().trim());
@@ -273,6 +282,9 @@ public class ContactUsPage extends UhcDriver{
 		
 	}
 	
+	/**
+	 * Validate send us question widget
+	 */
 	public void validateSendUaQuestionWidget()
 	{
 		if (fillOutFormButton.isDisplayed())
@@ -292,6 +304,9 @@ public class ContactUsPage extends UhcDriver{
 		}
 	}
 	
+	/**
+	 * Validate send us question widget functionality
+	 */
 	public void validateSendUsaQuestionWidgetfunctionality()
 	{
 		if (fillOutFormButton.isDisplayed())
@@ -311,24 +326,6 @@ public class ContactUsPage extends UhcDriver{
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			//fillOutFormButton.click();
-			
-			/*waitforElement(addAlternativeEmail);
-			addAlternativeEmail.click();
-			alternativeEmailAddress.sendKeys("jkij@ums.com");
-			confirmEmailAddress.sendKeys("jkij@ums.com");
-			waitforElement(addAlternativePhneNumberLink);
-			addAlternativePhneNumberLink.click();
-			waitforElement(alternativePhneNumber);
-			alternativePhneNumber.sendKeys("9023456121");
-			waitforElement(confirmAlternativePhneNumber);
-			confirmAlternativePhneNumber.sendKeys("9023456121");
-			try {
-				Thread.sleep(5000);
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}*/
 			System.out.println("end of the secure emial");
 		}
 		else
@@ -336,6 +333,9 @@ public class ContactUsPage extends UhcDriver{
 			System.out.println("send us Question is not  displayed");
 		}
 	}
+	/**
+	 * Validate the cancel link on send us question widget 
+	 */
 	public void validateSendUaQuestionWidgetCancelClick()
 	{
 		if (fillOutFormButton.isDisplayed())
@@ -362,32 +362,9 @@ public class ContactUsPage extends UhcDriver{
 		}
 	}
 	
-	public void SendUaQuestionWidgetfunctionality()
-	{
-		if (fillOutFormButton.isDisplayed())
-		{
-			System.out.println("send us Question is  displayed");
-			fillOutFormButton.click();
-			try {
-				Thread.sleep(5000);
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			questionCancelLink.click();
-			try {
-				Thread.sleep(5000);
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			
-		}
-		else
-		{
-			System.out.println("send us Question is not  displayed");
-		}
-	}
+	/**
+	 * This method used to fill the send us question details and click on submit button
+	 */
 	public void submitQuestionClick()
 	{
 		if (fillOutFormButton.isDisplayed())
@@ -434,57 +411,9 @@ public class ContactUsPage extends UhcDriver{
 		}
 	}
 	
-	public void submitQuestionClick_by_BillingInfo_option()
-	{
-		if (fillOutFormButton.isDisplayed())
-		{
-			System.out.println("send us Question is  displayed");
-			fillOutFormButton.click();
-			try {
-				Thread.sleep(5000);
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			Select dropdown = new Select(driver.findElement(By.xpath("//div[contains(@class,'request-email')]"
-					+ "/div[not (contains(@class,'ng-hide'))][1]//select[@id='question-about']")));
-			System.out.println("dropdown" +dropdown);
-			dropdown.selectByVisibleText("Payment Information");
-			try {
-				Thread.sleep(5000);
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			questionMessage.sendKeys("Billing Information");
-			/*entering email */
-			addAlternativeEmail.click();
-			alternativeEmailAddress.sendKeys("uuuuuyyy@gmail.com");
-			confirmEmailAddress.sendKeys("uuuuuyyy@gmail.com");
-			addAlternativePhneNumberLink.click();
-			alternativePhneNumber.sendKeys("9123456123");
-			confirmAlternativePhneNumber.sendKeys("9123456123");
-			try {
-				Thread.sleep(5000);
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			questionSubmit.click();
-			try {
-				Thread.sleep(5000);
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			System.out.println("questionSubmit Clicked");
-		}
-		else
-		{
-			System.out.println("send us Question is not  displayed");
-		}
-	}
-
+	/**
+	 * This method used to validate the send us question fields
+	 */
 	public void sendUsQuestion_Field_Validations(){
 		if (fillOutFormButton.isDisplayed())
 		{
@@ -531,6 +460,9 @@ public class ContactUsPage extends UhcDriver{
 		System.out.println("send us Question is not  displayed");
 	}
 	}
+	/**
+	 * This method is used to validate the confirm email ID in send us question
+	 */
 	public void sendUsQuestion_confirmEmailID_Validations(){
 		if (fillOutFormButton.isDisplayed())
 		{
@@ -583,6 +515,9 @@ public class ContactUsPage extends UhcDriver{
 		
 	}
 
+	/**
+	 * This method is used to validate the ivalid phone numbers in send us question
+	 */
 	public void sendUsQuestion_invalid_PhoneNumber_Validations(){
 		if (fillOutFormButton.isDisplayed())
 		{
@@ -640,6 +575,9 @@ public class ContactUsPage extends UhcDriver{
 	}
 	}
 	
+	/**
+	 * This method is used to validate the blank text in email ID in send us question
+	 */
 	public void sendUsQuestion_blankText_Message_Validations(){
 		if (fillOutFormButton.isDisplayed())
 		{
@@ -680,6 +618,9 @@ public class ContactUsPage extends UhcDriver{
 
 	}
 	
+	/**
+	 * This method is used to validate email us widget section
+	 */
 	public void validateEmailWidgetSection()
 	{
 		if (getStartedButton.isDisplayed())
@@ -734,6 +675,9 @@ public class ContactUsPage extends UhcDriver{
 		}
 	}
 	
+	/**
+	 * This method used to validate email us widget functional flow
+	 */
 	public void validateEmailWidgetfunctionality()
 	{
 		if (getStartedButton.isDisplayed())
@@ -806,7 +750,9 @@ public class ContactUsPage extends UhcDriver{
 		}
 	}
 	
-	
+	/**
+	 * This method is used to validate email address radio button in Email Us widget
+	 */
 	public void validateEmailby_Email_Address_RadioButton()
 	{
 		if (getStartedButton.isDisplayed())
@@ -848,6 +794,9 @@ public class ContactUsPage extends UhcDriver{
 		}
 	}
 	
+	/**
+	 * This method is used to validate secure email modal functionality
+	 */
 	public void validateSecureEmailModelfunctionality()
 	{
 		if (getStartedButton.isDisplayed())
@@ -932,7 +881,9 @@ public class ContactUsPage extends UhcDriver{
 		}*/
 	//}
 	
-	
+	/**
+	 * This method is used to validate cancel link in secure email modal functionality
+	 */
 	public void validateSecureEmailModel_Cancellink_Click()
 	{
 		if (getStartedButton.isDisplayed())
@@ -998,6 +949,9 @@ public class ContactUsPage extends UhcDriver{
 		}
 		}
 	
+	/**
+	 * this method is used to validate the go to inbox button
+	 */
 	public void goToInBoxButtonDisplay()
 	{
 		if (goToInboxButton.isDisplayed())
@@ -1017,11 +971,17 @@ public class ContactUsPage extends UhcDriver{
 		}
 	}
 	
+	/**
+	 * this method is used to validate the request to call widget
+	 */
 	public void validates_clickToCall_widget()
 	{
 		Assert.assertTrue("Request a call widget is displayed", requestACall.isDisplayed());
 	}
 	
+	/**
+	 * this method is used to send a request in request to call widget
+	 */
 	public void sendAreqclick()
 	{
 		if (requestACall.isDisplayed())
@@ -1064,6 +1024,9 @@ public class ContactUsPage extends UhcDriver{
 		}
 	}
 	
+	/**
+	 * this method is used to click on Request to call widget and validate for the confiramtion message
+	 */
 	public void reqCallclickConformation()
 	{
 		if (requestACall.isDisplayed())
@@ -1103,6 +1066,9 @@ public class ContactUsPage extends UhcDriver{
 		
 	}
 	
+	/**
+	 * this method is used to validate the send us question button
+	 */
 	public void validateSendUsAQuestionWidget()
 	{
 		if (fillOutFormButton.isDisplayed())
@@ -1146,25 +1112,25 @@ public class ContactUsPage extends UhcDriver{
 
 		return secureemailwidgetDataJson;
 	}
+	
+	/**
+	 * this method is used to validate PDP header text
+	 */
 	public void PdpPageDisplay(){
 		if(pdpHeader.isDisplayed()){
 			System.out.println("PDP page displayed");
 		}
 	}
-
-	public Boolean IsAddPlanLinkAvailable() {
-		boolean flag =true;
-		if(!validate(addPlan)){
-			flag =false;
-		}
-		
-		return flag;
-	}
-	
+	/**
+	 * this method is used to get discalimer text of member auth
+	 */
 	public String getDisclaimerTextForMemberAuth(){
 		return memberAuthMessage.getText().trim();
 	}
 
+	/**
+	 * this method is used to get the error message for member auth send us question functionality
+	 */
 	public String getMemberAuthNotAuthorizedToSendUsQuestionMessage(){
 		try {
 			Thread.sleep(35000);
@@ -1177,6 +1143,9 @@ public class ContactUsPage extends UhcDriver{
 		return memberAuthNotAuthorizedToSendUsQuestionMessage.getText().trim();
 	}
 	
+	/**
+	 * this method is used to get the error message for member auth request call functionality
+	 */
 	public String getMemberAuthNotAuthorizedToRequestACallMessage(){
 		try {
 			Thread.sleep(15000);
