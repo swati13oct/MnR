@@ -374,7 +374,7 @@ public class ProfileandPreferencesAARPStepDefinition {
 	}
 	
 	@Then("^the user validates on clicking Profilenpreferences arrow user should route to Profile and Preferences page") 
-	public void uservalidatespnplinkatthetop() 
+	public void uservalidatespnplinkatthetop() throws InterruptedException 
 	{
 		pages.member.ulayer.ProfileandPreferencesPage ProfileandPreferencespage = (pages.member.ulayer.ProfileandPreferencesPage) getLoginScenario()
 				.getBean(PageConstants.PROFILE_AND_PREFERENCES_PAGE);

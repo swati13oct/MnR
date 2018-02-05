@@ -23,9 +23,10 @@ import acceptancetests.atdd.data.CommonConstants;
 import acceptancetests.atdd.data.PageData;
 import acceptancetests.atdd.util.CommonUtility;
 import atdd.framework.UhcDriver;
+import pages.member.ulayer.ValueAddedServicepage;
 
 /**
- * @author njain112
+ * @Functionality : To check Benefits and Coverage page 
  *
  */
 public class BenefitsAndCoveragePage extends UhcDriver {
@@ -87,32 +88,38 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 	@FindBy(xpath = ".//*[@id='ancillary']/div[2]/div[4]/div/div")
 	private WebElement chiropracticsection;
 
-	@FindBy(xpath = ".//*[@id='drug-benefits']/div/section/div[6]/div/span/div/div/div/div/p")
+	@FindBy(className = "atdd-bnc-drgcvrgeinfo")
 	private WebElement DrugCoveragetext;
 
-	@FindBy(xpath = ".//*[@id='drug-benefits']/div/section/div[6]/div/span/div/div/div/div/h3/span")
+	@FindBy(className = "atdd-bnc-drugcoverage-title")
 	private WebElement DrugCoverageHeader;
 
-        @FindBy(xpath = ".//*[@id='drug-benefits']/div/section/div[1]/div/div/div/div[2]/div/div/h2")
+    @FindBy(className = "atdd-bnc-drgcopaysdiscounts-title")
 	private WebElement lisDrugCopayHeader;
 
-	@FindBy(xpath = ".//*[@id='drug-benefits']/div/section/div[1]/div/div/div/div[2]/div/div/p")
+	@FindBy(className = "atdd-bnc-drgcopaysdiscounts-info")
 	private WebElement lisDrugCopayText;
 
-	@FindBy(xpath = ".//*[@id='drug-benefits']/div/section/div[7]/div[1]/div/div/div/div/p")
+	@FindBy(className = "atdd-bnc-lookupdrugs-info")
 	private WebElement LookupDrugstext;
 
-	@FindBy(xpath = ".//*[@id='drug-benefits']/div/section/div[7]/div[1]/a")
+	@FindBy(className = "atdd-bnc-lookupdrugbtn")
 	private WebElement LookUpDrugsButton;
 
-	@FindBy(xpath = ".//*[@id='drug-benefits']/div/section/div[1]/div/div/div/div/div/div/h2")
+	@FindBy(className = "atdd-bnc-drgcopaysdiscounts-title")
 	private WebElement DrugCopayHeader;
 
-	@FindBy(xpath = ".//*[@id='drug-benefits']/div/section/div[1]/div/div/div/div/div/div/p")
+	@FindBy(className = "atdd-bnc-drgcopaysdiscounts-info")
 	private WebElement DrugCopayText;
 
 	@FindBy(id = "drug-costs")
 	private WebElement DrugCostDropdown;
+	
+	@FindBy(className = "atdd-bnc-drugcostsheading")
+	private WebElement DrugCostHeader;
+	
+	@FindBy(className = "atdd-bnc-phrmcytext")
+	private WebElement DrugCostheadertext;
 
 	@FindBy(xpath = ".//*[@id='drug-benefits']/div/section/div[2]/div/div")
 	private WebElement DrugCostheaderandtext;
@@ -123,16 +130,16 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 	@FindBy(xpath = ".//*[@id='waystosave']/div/div/div[1]/div/h1")
 	private WebElement TextWaystoSave;
 
-	@FindBy(xpath = ".//*[@id='drug-benefits']/div/section/div[4]/div/div/div/div/div[1]/div/a")
+	@FindBy(className = "atdd-bnc-drgpricingtiers")
 	private WebElement Learnmoretierslink;
 
-	@FindBy(xpath = ".//*[@id='drug-benefits']/div/section/div[4]/div/div/div/div/div[2]/div/a")
+	@FindBy(className = "atdd-bnc-drgstgtiers")
 	private WebElement Learnmorestagelink;
 
-	@FindBy(xpath = ".//*[@id='drug-benefits']/div/section/div[7]/div[2]/div/div/div/div/p")
+	@FindBy(xpath = "atdd-bnc-locatephrmcy-info")
 	private WebElement locateapharmacysection;
 
-	@FindBy(xpath = ".//*[@id='drug-benefits']/div/section/div[7]/div[2]/a")
+	@FindBy(className = "atdd-bnc-locatepharmacybtn")
 	private WebElement locateapharmacybutton;
 
 	@FindBy(id = "mapdPageNonLis")
@@ -206,6 +213,33 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 	@FindBy(className = "start-search-atdd")
 	private WebElement StartSearch;
 	
+	@FindBy(xpath = "//*[@id='planBenefitsApp']/div[2]/div[3]/div/div/div/header/span")
+	private WebElement ParticipatingHospitalStays1;
+
+	@FindBy(xpath = "//*[@id='planBenefitsApp']/div[2]/div[4]/div/div/div/header/span")
+	private WebElement ParticipatingHospitalStays2;
+
+	@FindBy(xpath = "//*[@id='planBenefitsApp']/div[2]/div[5]/div/div/div/header")
+	private WebElement TravelBenefitHeader;
+
+	@FindBy(xpath = "//*[@id='planBenefitsApp']/div[2]/div[6]/div/div/div/header/span")
+	private WebElement BloodPackedRedBloodCellsPartA;
+
+	@FindBy(xpath = "//*[@id='planBenefitsApp']/div[2]/div[7]/div/div/div/header/span")
+	private WebElement SkilledNursingFacilityStays;
+
+	@FindBy(xpath = "//*[@id='planBenefitsApp']/div[2]/div[8]/div/div/div/header/span")
+	private WebElement HospiceCare;
+
+	@FindBy(xpath = "//*[@id='planBenefitsApp']/div[2]/div[9]/div/div/div/header/span")
+	private WebElement MedicalCare;
+
+	@FindBy(xpath = "//*[@id='planBenefitsApp']/div[2]/div[10]/div/div/div/header/span")
+	private WebElement BloodPackedRedBloodCellsPartB;
+
+	@FindBy(xpath = "//*[@id='planBenefitsApp']/div[2]/div[11]/div/div/div/header/span")
+	private WebElement EmergencyCare;
+	
 	@FindBy(className = "atdd-bncsummary-primarycareprvdrheader")
 	private WebElement PrimaryCareProviderHeader;
 	
@@ -259,9 +293,34 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 	
 	@FindBy(className = "atdd-exclusivehearing-levngpopup-topcancelbtn")
 	private WebElement cancelbutton1;
-    
 	
+	@FindBy(className = "atdd-bnc-handimg")
+	private WebElement handimage;
+
+	@FindBy(className = "atdd-bnc-discountsubtitle")
+	private WebElement textdiscountservices;
+
+	@FindBy(className = "atdd-bnc-specialdscnt-desc")
+	private WebElement textdiscountservices1;
+
+	@FindBy(className = "atdd-bnc-discounttitle")
+	private WebElement headerdiscountservices;
 	
+	@FindBy(xpath = ".//*[@id='planBenefitsApp']/div/div/div/div/div/div[2]/a")
+	private WebElement learnmorebutton;
+	
+	@FindBy(className = "atdd-need-help")
+	private WebElement NeedhelpShip;
+
+	@FindBy(className = "atdd-tech-header")
+	private WebElement TechnicalSupportShip;
+
+	@FindBy(className = "atdd-general-header")
+	private WebElement GeneralQuestionShip;
+
+	@FindBy(className = "atdd-claims-header")
+	private WebElement ClaimsSupportShip;
+   
 
 	public static final String learnmorestagetext_xpath = ".//*[@id='collapseStages']";
 
@@ -277,21 +336,11 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 		openAndValidate();
 	}
 
-	public JSONObject getExpectedData(Map<String, JSONObject> expectedDataMap) {
 
-		/* get PHR expected data */
-		JSONObject benefitsExpectedJson = expectedDataMap.get(CommonConstants.BENEFITS_AND_COVERAGE);
-		JSONObject commonExpectedJson = expectedDataMap.get(CommonConstants.COMMON);
-		// JSONObject globalExpectedJson =
-		// expectedDataMap.get(CommonConstants.GLOBAL);
-		benefitsExpectedJson = CommonUtility.mergeJson(benefitsExpectedJson, commonExpectedJson);
-		// benefitsExpectedJson = CommonUtility.mergeJson(benefitsExpectedJson,
-		// commonExpectedJson);
 
-		return benefitsExpectedJson;
-
-	}
-
+	/** 
+	 * @toDo : To check headers on Benfits and coverage page
+	 */
 	public void validateFieldsOnBenefitsAndCoveragePage() {
 
 		try {
@@ -307,6 +356,10 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 			System.out.println("Elements are not found ...");
 		}
 	}
+	
+	/** 
+	 * @toDo : To check benefits and coverage page has opened
+	 */
 
 	public void openAndValidate() {
 
@@ -349,6 +402,11 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 
 	}
 
+
+	/** 
+	 * @toDo : The user validates the PlanDocuments Section
+	 */
+
 	public void PlanDocumentssection() {
 
 		try {
@@ -358,6 +416,11 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 		}
 	}
 	
+	
+	/** 
+	 * @toDo : The user validates the headers in Need help section
+	 */
+
 	public void validateNeedhelpheader() {
 
 		JavascriptExecutor jse = (JavascriptExecutor) driver;
@@ -366,7 +429,9 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 			
 			
 	}
-
+	/** 
+	 * @toDo : The user validates the Contact us section in Need help section
+	 */
 
 	public void validatecontactussection() 
         {
@@ -389,6 +454,9 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 		
 	}
 	
+	/** 
+	 * @toDo : The user validates the Contact us link in Need help section
+	 */
 		public void  contactUslink() {
                 try {
 			Thread.sleep(20000);
@@ -423,6 +491,11 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 	
 		
 	}
+		
+		
+		/** 
+		 * @toDo : The user checks the disclaimers
+		 */
 
 
 	public void clickOnDisclaimers(JSONObject benefitsandcoverageExectedJson) {
@@ -459,6 +532,11 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 		}
 	}
 	
+	
+	/** 
+	 * @toDo : The user checks the More Information link in the Need help section
+	 */
+	
 	public void clickOnDisclaimers() {
 		// TODO Auto-generated method stub
 		JavascriptExecutor jse = (JavascriptExecutor) driver;
@@ -474,14 +552,23 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 	}
 
 
+	/** 
+	 * @toDo : The user checks the view label in Documents section
+	 */
 	public boolean getview_label() {
 		return validate(view_label);
 	}
 
+	/** 
+	 * @toDo : The user checks the get Document label in Documents section
+	 */
 	public boolean getdocuments_label() {
 		return validate(documents_label);
 	}
 
+	/** 
+	 * @toDo : The user validates the language dropdown in Documents section
+	 */
 	public void languagevalidation() {
 		if (langdropdown.isDisplayed()) {
 			List<String> listActual = new ArrayList<String>();
@@ -500,6 +587,10 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 
 	}
 
+	
+	/** 
+	 * @toDo : The user validates the language dropdown in Documents section and validates the default selected language
+	 */
 	public void validate_langdropdown_first_selection() {
 		// WebElement langdropdown;
 		if (langdropdown.isDisplayed()) {
@@ -514,11 +605,18 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 
 	}
 
+	/** 
+	 * @toDo : The user validates the language dropdown in Documents section and make a selection in the dropdown
+	 */
 	public void validate_langdropdown_select(String language) {
 		Select langdropdwn = new Select(langdropdown);
 		langdropdwn.selectByVisibleText(language);
 	}
 
+	
+	/** 
+	 * @toDo : The user validates the Hearing section of Ancillary
+	 */
 	public void HearingSection() {
 
 		try {
@@ -528,6 +626,10 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 		}
 	}
 
+	
+	/** 
+	 * @toDo : The user validates the Hearing aid section of Ancillary Benefits
+	 */
 	public void HearingAid() {
 
 		try {
@@ -536,6 +638,10 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 			System.out.println("Elements is not found ...");
 		}
 	}
+	
+	/** 
+	 * @toDo : The user validates the Vision  section of Ancillary Benefits
+	 */
 
 	public void Vision() {
 
@@ -546,6 +652,10 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 		}
 	}
 
+	/** 
+	 * @toDo : The user validates the Dental  section of Ancillary Benefits
+	 */
+	
 	public void Dental() {
 
 		try {
@@ -554,6 +664,10 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 			System.out.println("Elements is not found ...");
 		}
 	}
+	
+	/** 
+	 * @toDo : The user validates the Header  section 
+	 */
 
 	public void Header() {
 
@@ -564,6 +678,9 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 		}
 	}
 
+	/** 
+	 * @toDo : The user validates the chiropractic  section  of Ancillary benefits
+	 */
 	public void chiropracticsection() {
 
 		try {
@@ -573,6 +690,9 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 		}
 	}
 	
+	/** 
+	 * @toDo : The user validates the Disclaimers link under Exclusive hearing section  of Ancillary benefits
+	 */
 	public void ExclusiveDisclaimers() {
 
 		try {
@@ -591,6 +711,13 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 			System.out.println("Elements is not found ...");
 		}
 	}
+	
+	
+	
+	/** 
+	 * @toDo : The user validates the Learn more button under Exclusive hearing section  of Ancillary benefits
+	 */
+
 	public void Exclusivelearnmore() {
 		try{
 		validate(LearnmoreButton);
@@ -625,14 +752,24 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 			}*/
 		//LearnmoreButton.click();
 		
+	
+	
+	/** 
+	 * @toDo : The user validates the Leaving popup in  Ancillary section
+	 */
 	public void Leavingpopup() {
 
 		try {
 			validate(popup);
 		} catch (Exception e) {
-			System.out.println("Elements is not found ...");
+			System.out.println("Element is not found ...");
 		}
 	}
+	
+	/** 
+	 * @toDo : The user validates the proceed button  of the leaving popup in  Ancillary section
+	 */
+
 	public boolean Proceedbutton() {
 		//LearnmoreButton.click();
 		try {
@@ -667,6 +804,11 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 		}
 		return true;
 		}
+	
+	
+	/** 
+	 * @toDo : The user validates the cancel button  of the leaving popup in  Ancillary section
+	 */
 	public void Cancelbutton() {
 
 		try {
@@ -681,11 +823,19 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 		}
 	}
 
+	
+	/** 
+	 * @toDo : The user validates the DrugCoverage section headers and text
+	 */
 	public void validatedrugcoverageheaderandtext() {
 		validate(DrugCoverageHeader);
 		validate(DrugCoveragetext);
 	}
 
+	
+	 /** 
+		 * @toDo : Validates Look Up Drugs button in  the DrugCosts  section
+		*/
 	public void validatelookupdrugsbutton() {
 		if (LookUpDrugsButton.isDisplayed()) {
 			Assert.assertTrue(true);
@@ -693,28 +843,47 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 			Assert.fail("Button not displayed");
 	}
 
+	
+	 /** 
+		 * @toDo : Validates the text for the Look Up Drugs section
+		 */
+
 	public void validate_lookupdrugstext() {
 		validate(LookupDrugstext);
 
 	}
 
+	/** 
+	 * @toDo : Validates the headers in DrugCopays and Discount section
+	*/
 	public void validate_drugcopayheaderntext() {
 		validate(DrugCopayHeader);
 		validate(DrugCopayText);
 
 	}
+	
+	/** 
+	 * @toDo : Validates the Drug Cost header and text
+	*/
 
 	public void validate_drugcostheaderntext() {
 		validate(DrugCostheaderandtext);
 
 	}
 
+	/** 
+	 * @toDo : Validates the text in locate a pharmacy section
+	*/
 	public void validate_locateapharmacysection() {
 		validate(locateapharmacysection);
 		validate(locateapharmacybutton);
 
 	}
 
+	
+	/** 
+	 * @toDo : Validates the Learnmore tiers links for a Lis member
+	*/
 	public void validate_tierlinknotdisplay() {
 		if (Learnmoretierslink.isDisplayed()) {
 			Assert.fail("The element" + Learnmoretierslink.getText() + "should not display");
@@ -724,6 +893,11 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 		}
 
 	}
+	
+	/** 
+	 * @toDo : Validates the Pharmacy  selection dropdown for a Lis member
+	*/
+	
 
 	public void validate_dropdownnotdisplay() {
                 try {
@@ -738,19 +912,19 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 		} else {
 			Assert.assertTrue(true);
 		}
-		if (DrugCostDropdown.isDisplayed()) {
-			Assert.fail("The element" + DrugCostDropdown.getText() + "should not display");
-			System.out.println("The element " + DrugCostDropdown.getText() + "should not display");
-		} else {
-			Assert.assertTrue(true);
-		}
+		
 
 	}
 
+	
+	/** 
+	 * @toDo : Validates the Pharmacy selection dropdown  for a non Lis member
+	*/
 	public void validate_drugcostdropdownoptions()
 
 	{
 	    validate(DrugCostDropdown);
+	    validate(DrugCostHeader);
                
             /*if (DrugCostDropdown.isDisplayed()) {
                 try {
@@ -790,6 +964,9 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 		}*/
 	}
 
+	/** 
+	 * @toDo : Validates the Learn More links for a Non Lis member
+	*/
 
 	public void validate_learnmoreaboutlink() {
 		validate(Learnmoretierslink);
@@ -797,11 +974,19 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 
 	}
 
+	
+	/** 
+	 * @toDo : Validates the Learn More links for a  Lis member
+	*/
 	public void validate_learnmoreaboutstagelink() {
 
 		validate(Learnmorestagelink);
 
 	}
+	/** 
+	 * @toDo : Validates that the learnmore tier link
+	 */
+	
 
 	public void clickOnLearnmoreaboutlinktier() {
 		// TODO Auto-generated method stub
@@ -849,6 +1034,10 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 		
 		 
 	}
+	
+	/** 
+	 * @toDo : Validates that the learnmore stage link 
+	*/
 
 	public void clickOnLearnmoreaboutlinkstage() {
 		// TODO Auto-generated method stub
@@ -889,6 +1078,9 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 		
 	}
 
+	/** 
+	 * @toDo : Validates the headers in DrugCopays and Discount section for a Lis member
+	*/
 
         public void validate_lisdrugcopayheaderntext() {
 		validate(lisDrugCopayHeader);
@@ -897,12 +1089,19 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 	}
 
 
+        /** 
+    	 * @toDo : Validates the Drug costs table  for  a Non Lis member
+    	*/
 	public void validatedrugcopaytable() {
 		// Select langdropdwn = new Select(langdropdown);
 
-		//validate(drugcopaytable);
+		validate(drugcopaytable);
 
 	}
+	
+	/** 
+	 * @toDo : Validates the Drug costs table  for  a  Lis member
+	*/
 
 	public void validatedrugcosttable() {
 		// TODO Auto-generated method stub
@@ -910,6 +1109,10 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 
 	}
 
+	
+	/** 
+	 * @toDo : Validates the  Ways to save section
+	*/
 	public void validateWaystoSave() {
 		validate(waysToSave);
 		validate(TextWaystoSave);
@@ -919,6 +1122,10 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 
 	}
 
+	
+	/** 
+	 * @toDo : Validates the  Plan overview section for  a Non lis member 
+	*/
 	public void validatePlanOverview() {
 		// TODO Auto-generated method stub
 
@@ -930,6 +1137,10 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 		validate(GroupId);
 
 	}
+	
+	/** 
+	 * @toDo : Validates the  Plan overview section for  a lis member
+	*/
 
 	public void validatePlanOverviewLis() {
 		validate(planName);
@@ -940,6 +1151,10 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 		validate(ExtraHelp);
 
 	}
+	
+	/** 
+	 * @toDo : Validates the  headers section for individual members
+	*/
 
 	public void validateHeaders() {
 		validate(BenefitsSummaryHeader);
@@ -950,6 +1165,10 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 
 	}
 
+	
+	/** 
+	 * @toDo : Validates the  headers section for group members
+	*/
 	public void validateHeadersGroup() {
 		validate(BenefitsSummaryHeader);
 		validate(Copayscoinsuranceheader);
@@ -960,6 +1179,10 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 		validate(OutpatientSurgeryCenter);
 
 	}
+	/** 
+	 * @toDo : Validates the  Primary care provider section
+	*/
+
 
 	public void validatePrimaryCareProvider() {
 
@@ -971,6 +1194,11 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 
 	}
 
+	
+	/** 
+	 * @toDo : Validates the  Primary care provider section for group members
+	*/
+
 	public void validatePrimaryCareProviderForGroup() {
 	
 		validate(PrimaryCareProviderHeaderHMO);
@@ -979,6 +1207,11 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 		
 	}
 	
+	/** 
+	 * @toDo : Validates the Out Of Pocket Maximum section
+	*/
+
+	
 	public void validateOutofPocketMax() {
 		validate(OutofPocketMaximum);
 		validate(INNETWORK);
@@ -986,6 +1219,10 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 		validate(OutofPocketMaximumText);
 		
 	}
+	/** 
+	 * @toDo : Validates the Benefits page
+	*/
+
 	
 	public void validateBnCPag()
 	   {
@@ -998,7 +1235,7 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 		validate(planName1);
 	   }
 
-     public pages.member.bluelayer.ProfilePreferencesPage navigateDirectToProfilePagee() {
+     public pages.member.bluelayer.ProfilePreferencesPage navigateDirectToProfilePagee() throws InterruptedException {
         System.out.println(driver.getTitle());
         accountToggleDropdown.click();
         validate(accountSettingOption);
@@ -1018,6 +1255,136 @@ public class BenefitsAndCoveragePage extends UhcDriver {
         gopaperlessbutton.click();
         return null;
         
+	}
+     
+     /** 
+ 	 * @toDo : Validates the headers for ship members
+ 	*/
+ 	public void validateHeadersShip() {
+		// TODO Auto-generated method stub
+
+		validate(BenefitsSummaryHeader);
+		validate(ParticipatingHospitalStays1);
+		validate(ParticipatingHospitalStays2);
+		validate(TravelBenefitHeader);
+		validate(BloodPackedRedBloodCellsPartA);
+		validate(SkilledNursingFacilityStays);
+		validate(HospiceCare);
+		validate(MedicalCare);
+		validate(BloodPackedRedBloodCellsPartB);
+		validate(EmergencyCare);
+
+	}
+ 	
+ 	/** 
+	 * @toDo : Validates the hand image in  discount and services section for ship members
+	*/
+ 	public void handimage() {
+
+		validate(handimage);
+
+	}
+ 	
+ 	
+ 	/** 
+	 * @toDo : Validates the Value added services section for ship members
+	*/
+	public void vasSection() {
+
+		validate(textdiscountservices);
+		validate(textdiscountservices1);
+		validate(headerdiscountservices);
+	}
+	
+	/** 
+	 * @toDo : Validates the Learnmore Button for ship members
+	*/
+	
+	public void learnmorebutton() {
+
+		validate(learnmorebutton);
+
+	}
+ 	
+	/** 
+	 * @toDo : Validates the Value added services page  for ship members
+	*/
+	public ValueAddedServicepage navigateToValueAddService() {
+		validate(learnmorebutton);
+		try {
+			Thread.sleep(30000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+                JavascriptExecutor jse = (JavascriptExecutor) driver;
+		jse.executeScript("window.scrollBy(0,3000)", "");
+		learnmorebutton.click();
+		try {
+			Thread.sleep(30000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		if (this.driver.getTitle().equalsIgnoreCase("Value Added Services")) {
+			System.out.println(driver.getTitle());
+			return new ValueAddedServicepage(driver);
+		}
+		return null;
+
+	}
+	
+
+	/** 
+	 * @toDo : Validates the Need help section headers for a ship member
+	*/
+	public void validateneedhelpheaderShip() {
+		validate(NeedhelpShip);
+		validate(TechnicalSupportShip);
+		validate(GeneralQuestionShip);
+		validate(ClaimsSupportShip);
+	}
+	
+	/** 
+	 * @toDo : Validates the see more ways to contact us section for ship members in Need help section
+	*/
+	public void validateContactUsNeedHelp() {
+        try {
+			Thread.sleep(30000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		validate(Seemorewaystext);
+
+	}
+	
+	/** 
+	 * @toDo : Validates the contact us page on clicking on the link of contact us in Need help section
+	*/
+	public void contactUslinkShip() 
+	{
+        try 
+        {
+			Thread.sleep(30000);
+		} 
+        catch (InterruptedException e) 
+        {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		validate(contactUslink);
+		contactUslink.click();
+		try {
+			Thread.sleep(30000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		System.out.println("Title is " + getTitle());
+
+		//Assert.assertTrue(getTitle().equalsIgnoreCase("Contact Us"));
+
 	}
 
 }

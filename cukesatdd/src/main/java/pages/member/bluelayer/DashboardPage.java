@@ -1,31 +1,17 @@
 package pages.member.bluelayer;
 
-import java.util.List;
-import java.util.Map;
-import java.util.concurrent.TimeUnit;
-import org.json.JSONException;
-import org.json.JSONObject;
-import org.junit.Assert;
-import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.Select;
-import pages.member.bluelayer.OrderplanmaterialsPage;
-import pages.member.bluelayer.ContactUsPage;
-import acceptancetests.atdd.data.CommonConstants;
-import acceptancetests.atdd.data.MRConstants;
-import acceptancetests.atdd.data.PageData;
+
 import acceptancetests.atdd.util.CommonUtility;
-import acceptancetests.login.data.LoginCommonConstants;
 import atdd.framework.UhcDriver;
 
-import atdd.framework.MRScenario;
-import atdd.framework.UhcDriver;
-import pages.member.bluelayer.BenefitsAndCoveragePage;
-import pages.member.bluelayer.ProfilePreferencesPage;
+/**
+ * Functionality: Rally Dashboard page
+ */
 
 public class DashboardPage extends UhcDriver {
 
@@ -41,16 +27,16 @@ public class DashboardPage extends UhcDriver {
 	@FindBy(id = "premiumpayment")
 	private WebElement panelPremiumPayment;
 
-	@FindBy(xpath = "(//nav[@id='main nav']//a[contains(text(),'Home')])[1]")
+	@FindBy(xpath = "(//nav[@id='main-nav']//a[contains(text(),'Home')])[1])")
 	private WebElement panelHome;
 
 	@FindBy(xpath = "(//nav[@id='main nav']//a[contains(text(),'Claims')])[1]")
 	private WebElement panelClaims;
 
-	@FindBy(xpath = "//button[@id='dropdown toggle  1']/span[contains(text(),'Profile')]")
+	@FindBy(xpath = "//button[@id='dropdown-toggle--1']/span[contains(text(),'Profile')]")
 	private WebElement accountToggleDropdown;
 
-	@FindBy(xpath = "//a[@class='dropdown option' and contains(text(),'Account Settings')]")
+	@FindBy(xpath = "//a[@class='dropdown-option' and contains(text(),'Account Settings')]")
 	private WebElement accountSettingOption;
 
 	@FindBy(xpath = "//header//h1")
@@ -59,21 +45,27 @@ public class DashboardPage extends UhcDriver {
 	@FindBy(xpath = "//div[@id='ui view page']//span[contains(text(),'Look up Drugs')]")
 	private WebElement DCE_Dashboard;
 
-	@FindBy(xpath = "//sticky[@id='sticky nav']//nav[@id='main nav']//a[contains(text(),'Coverage & Benefits')]")
+	@FindBy(xpath = "//sticky[@id='sticky-nav']//nav[@id='main-nav']//a[contains(text(),'Coverage & Benefits')]")
 	private WebElement BnClink;
 
-	@FindBy(xpath = "(//nav[@id='utility nav']//a/span[contains(text(),'Help')])[1]")
-	private WebElement ContactUsLink;
+
+	/** 
+	 * @toDo :To check the Rally dashboard page 
+	 */
 
 	@Override
 	public void openAndValidate() {
 
 		CommonUtility.waitForPageLoad(driver, panelHome, 60);
 		System.out.println(driver.getCurrentUrl());
-		validate(panelHome);
+		//validate(panelHome);
 	}
 
-	public pages.member.bluelayer.ProfilePreferencesPage navigateDirectToProfilePage() {
+	/** 
+	 * @throws InterruptedException 
+	 * @toDo : The user navigates to Profile  and Preferences  page from Rally Dashboard
+	 */
+	public pages.member.bluelayer.ProfilePreferencesPage navigateDirectToProfilePage() throws InterruptedException {
 		System.out.println(driver.getTitle());
 		accountToggleDropdown.click();
 		validate(accountSettingOption);
@@ -101,6 +93,10 @@ public class DashboardPage extends UhcDriver {
 		return null;
 	}
 
+	
+	/** 
+	 * @toDo : The user navigates to Benefits and coverage page from Rally Dashboard
+	 */
 	public BenefitsAndCoveragePage navigateDirectToBnCPag() {
 
 		// driver.navigate().to(PAGE_URL);
