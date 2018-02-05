@@ -358,7 +358,7 @@ if ( MRScenario.environment.equalsIgnoreCase("team-ci1") || (MRScenario.environm
 		
 		try{
 			
-			if (MRScenario.environment.equalsIgnoreCase("stage") || (MRScenario.environment.equalsIgnoreCase("team-t"))) {
+			if (MRScenario.environment.equalsIgnoreCase("stage") || (MRScenario.environment.equalsIgnoreCase("team-t")  || ( MRScenario.environment.equalsIgnoreCase("team-ci1")))) {
 				Thread.sleep(50000);	
 			}else {
 				
