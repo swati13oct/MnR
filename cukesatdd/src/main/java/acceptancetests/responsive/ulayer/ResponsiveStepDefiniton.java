@@ -54,6 +54,15 @@ public class ResponsiveStepDefiniton {
 	}
 	
 
+	@Given("^PlanCompareSpartans the user is on the vpp portfolio page$")
+    public void PlanCompareSpartans_user_on_aarp_ourPlans_page(){
+            WebDriver wd = getLoginScenario().getWebDriver();
+            PortfolioPage ourPlans = new PortfolioPage(wd);
+            
+            getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
+            getLoginScenario().saveBean(PageConstants. PORTFOLIO_PAGE, ourPlans);
+    }
+	
 	@Given("^the user is on the vpp portfolio page$")
     public void user_on_aarp_ourPlans_page(){
             WebDriver wd = getLoginScenario().getWebDriver();
@@ -61,6 +70,32 @@ public class ResponsiveStepDefiniton {
             
             getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
             getLoginScenario().saveBean(PageConstants. PORTFOLIO_PAGE, ourPlans);
+    }
+    
+    
+    @Then("^PlanCompareSpartans the user performs plan serach using zipcode$")
+    public void PlanCompareSpartans_user_planSearch_with_zipcode(DataTable givenAttributes) throws InterruptedException{
+            List<DataTableRow> memberAttributesRow = givenAttributes
+                            .getGherkinRows();
+            Map<String, String> memberAttributesMap = new HashMap<String, String>();
+            for (int i = 0; i < memberAttributesRow.size(); i++) {
+
+                    memberAttributesMap.put(memberAttributesRow.get(i).getCells()
+                                    .get(0), memberAttributesRow.get(i).getCells().get(1));
+            }
+
+            String zipcode = memberAttributesMap.get("Zip Code");
+            getLoginScenario().saveBean(VPPCommonConstants.ZIPCODE, zipcode);
+            String county = memberAttributesMap.get("County");
+            getLoginScenario().saveBean(VPPCommonConstants.COUNTY, county);
+            PortfolioPage portfolioPage = (PortfolioPage) getLoginScenario()
+                            .getBean(PageConstants. PORTFOLIO_PAGE);
+            ResponsivePlanSummary vppPlan = portfolioPage.searchPlans(zipcode, county);
+            if(vppPlan!=null){
+                    getLoginScenario().saveBean(PageConstants.RESPONSIVE_PLAN_SUMMARY_PAGE, vppPlan);
+            }else{
+                    Assert.fail();
+            }
     }
     
     @Then("^the user performs plan serach using zipcode$")
@@ -172,6 +207,33 @@ public class ResponsiveStepDefiniton {
                                         VPPCommonConstants.VPP_PLAN_SUMMARY_EXPECTED,
                                         planSummaryExpectedJson);
                 }
+        @Then("^PlanCompareSpartans the user navigates to the following plan type$")
+        public void PlanCompareSpartans_planType_details_in_aarp_site(DataTable givenAttributes) {
+
+                List<DataTableRow> memberAttributesRow = givenAttributes
+                                .getGherkinRows();
+                Map<String, String> memberAttributesMap = new HashMap<String, String>();
+                for (int i = 0; i < memberAttributesRow.size(); i++) {
+
+                        memberAttributesMap.put(memberAttributesRow.get(i).getCells()
+                                        .get(0), memberAttributesRow.get(i).getCells().get(1));
+                }
+
+                String planType = memberAttributesMap.get("Plan Type");
+                System.out.println(planType);
+                getLoginScenario().saveBean(VPPCommonConstants.PLAN_TYPE, planType);
+
+                ResponsivePlanSummary plansummaryPage = (ResponsivePlanSummary) getLoginScenario()
+                                .getBean(PageConstants.RESPONSIVE_PLAN_SUMMARY_PAGE);        
+                
+                ResponsivePlanSummary vpp = plansummaryPage.viewPlanSummary(planType);
+                if(vpp!=null){
+                        getLoginScenario().saveBean(PageConstants.RESPONSIVE_PLAN_SUMMARY_PAGE, vpp);
+                }else{
+                        Assert.fail();
+                }
+        }
+        
         @Then("^the user navigates to the following plan type$")
         public void planType_details_in_aarp_site(DataTable givenAttributes) {
 
@@ -198,6 +260,7 @@ public class ResponsiveStepDefiniton {
                         Assert.fail();
                 }
         }
+        
         
         @Then("^user validates county name on plan summary page$")        
         public void user_validates_county_name(){
@@ -256,6 +319,29 @@ public class ResponsiveStepDefiniton {
         
         }
         
+        @And("^PlanCompareSpartans the user select plan to compare in AARP site")
+        public void PlanCompareSpartans_the_user_select_plan_to_compare() throws InterruptedException{
+                {
+                        ResponsivePlanSummary planSummary = (ResponsivePlanSummary) getLoginScenario()
+                                        .getBean(PageConstants.RESPONSIVE_PLAN_SUMMARY_PAGE);
+                        Thread.sleep(10000);
+                        planSummary.selectAddToCompareCheckboxes();
+                        
+                }
+        
+        }
+        @And("^PlanCompareSpartans the user select two plan in AARP site")
+        public void PlanCompareSpartans_the_user_select_two_plans(){
+                {
+                        ResponsivePlanSummary planSummary = (ResponsivePlanSummary) getLoginScenario()
+                                        .getBean(PageConstants.RESPONSIVE_PLAN_SUMMARY_PAGE);
+                        planSummary.selecttwoplanCheckboxes();
+                        
+                }
+        
+        }
+        
+        
         @And("^the user select two plan in AARP site")
         public void the_user_select_two_plans(){
                 {
@@ -270,7 +356,6 @@ public class ResponsiveStepDefiniton {
         
         
         
-        
         @And("^the user validates Need a step back in right rail widgets$")
         public void the_user_validates_Need_step_back(){
                 ResponsivePlanSummary planSummary= (ResponsivePlanSummary) 
@@ -279,8 +364,8 @@ public class ResponsiveStepDefiniton {
                 stepBackWidget.validateStepBackWidget();
         }
         
-        @And("^the user click back to all plans in AARP site")
-        public void the_user_clic_backtoallplan() throws InterruptedException{
+        @And("^PlanCompareSpartans the user click back to all plans in AARP site")
+        public void PlanCompareSpartans_the_user_clic_backtoallplan() throws InterruptedException{
                 ResponsivePlanSummary planSummary = (ResponsivePlanSummary) getLoginScenario()
                                 .getBean(PageConstants.RESPONSIVE_PLAN_SUMMARY_PAGE);
                 planSummary.backtoAllPlans();        
@@ -357,6 +442,14 @@ public class ResponsiveStepDefiniton {
         }
         
         
+        @And("^PlanCompareSpartans the user click compare plans in AARP site")
+        public void PlanCompareSpartans_the_user_click_compare_plans_to_compare() throws InterruptedException{
+                ResponsivePlanSummary planSummary = (ResponsivePlanSummary) getLoginScenario()
+                                .getBean(PageConstants.RESPONSIVE_PLAN_SUMMARY_PAGE);
+                 planSummary.comparePlanslnk();
+                
+        }
+        
         @And("^the user click compare plans in AARP site")
         public void the_user_click_compare_plans_to_compare() throws InterruptedException{
                 ResponsivePlanSummary planSummary = (ResponsivePlanSummary) getLoginScenario()
@@ -373,8 +466,24 @@ public class ResponsiveStepDefiniton {
                                 
         }
         
+        @And("^PlanCompareSpartans the user click plan view details link on compare in AARP site")
+        public void PlanCompareSpartans_the_user_click_plan_viewdetails_link() throws InterruptedException{
+                ResponsivePlanSummary planSummary = (ResponsivePlanSummary) getLoginScenario()
+                                .getBean(PageConstants.RESPONSIVE_PLAN_SUMMARY_PAGE);
+                planSummary.viewdetailslnk();
+                                
+        }
         @And("^the user remove plan link on compare page in AARP site")
         public void the_user_remove_plan_link() throws InterruptedException{
+                ResponsivePlanSummary planSummary = (ResponsivePlanSummary) getLoginScenario()
+                                .getBean(PageConstants.RESPONSIVE_PLAN_SUMMARY_PAGE);
+                planSummary.removePlanlnk();
+                planSummary.removePlanlnk1();
+                                
+        }
+        
+        @And("^PlanCompareSpartans the user remove plan link on compare page in AARP site")
+        public void PlanCompareSpartans_the_user_remove_plan_link() throws InterruptedException{
                 ResponsivePlanSummary planSummary = (ResponsivePlanSummary) getLoginScenario()
                                 .getBean(PageConstants.RESPONSIVE_PLAN_SUMMARY_PAGE);
                 planSummary.removePlanlnk();
@@ -390,7 +499,15 @@ public class ResponsiveStepDefiniton {
                                 
         }
         
-        @And("^the user verify disclaimer text for MA/MAPD plan for plan compare page in AARP site")
+        @And("^PlanCompareSpartans the user verify footnote section on compare page")
+        public void PlanCompareSpartans_the_user_verify_footnotes_section_on_compare_page() throws InterruptedException{
+                ResponsivePlanSummary planSummary = (ResponsivePlanSummary) getLoginScenario()
+                                .getBean(PageConstants.RESPONSIVE_PLAN_SUMMARY_PAGE);
+                planSummary.footNoteSection();
+                                
+        }
+        
+        @And("^PlanCompareSpartans the user verify disclaimer text for MA/MAPD plan for plan compare page in AARP site")
         public void the_user_verify_disclaimer_text() throws InterruptedException{
                 ResponsivePlanSummary planSummary = (ResponsivePlanSummary) getLoginScenario()
                                 .getBean(PageConstants.RESPONSIVE_PLAN_SUMMARY_PAGE);
@@ -418,7 +535,28 @@ public class ResponsiveStepDefiniton {
                                 .getBean(PageConstants.RESPONSIVE_PLAN_SUMMARY_PAGE);
                 plansummaryPage.selectPlansToCompareTwoPlans(planName1, planName2);                                
         }
-        @Then("^the user validates medical benefits$")
+        @Then("^PlanCompareSpartans the user validates medical benefits$")
+        public void PlanCompareSpartans_user_validates_medical_benefits(DataTable givenAttributes){
+                List<DataTableRow> memberAttributesRow = givenAttributes 
+                                .getGherkinRows();
+                Map<String, String> memberAttributesMap = new HashMap<String, String>();
+                for (int i = 0; i < memberAttributesRow.size(); i++) {
+
+                        memberAttributesMap.put(memberAttributesRow.get(i).getCells()
+                                        .get(0), memberAttributesRow.get(i).getCells().get(1));
+                }
+
+                String monthlyPremium1 = memberAttributesMap.get("MP Plan1");
+                String monthlyPremium2 = memberAttributesMap.get("MP Plan2");
+                String outofpocket1 = memberAttributesMap.get("Oop Plan1");
+                String outofpocket2 = memberAttributesMap.get("Oop Plan2");
+                ResponsivePlanSummary plansummaryPage = (ResponsivePlanSummary) getLoginScenario()
+                                .getBean(PageConstants.RESPONSIVE_PLAN_SUMMARY_PAGE);
+                plansummaryPage.validateMedicalBenefitsTable(monthlyPremium1, monthlyPremium2, outofpocket1, outofpocket2);
+                
+        }
+        
+        @Then("^ the user validates medical benefits$")
         public void user_validates_medical_benefits(DataTable givenAttributes){
                 List<DataTableRow> memberAttributesRow = givenAttributes 
                                 .getGherkinRows();
@@ -438,6 +576,8 @@ public class ResponsiveStepDefiniton {
                 plansummaryPage.validateMedicalBenefitsTable(monthlyPremium1, monthlyPremium2, outofpocket1, outofpocket2);
                 
         }
+        
+        
         @Then("^the user clicks on Estimate drug link for the respetive plan$")
         public void the_user_clicks_on_Estimate_drug_link_for_the_respetive_plan(DataTable givenAttributes) {
                 ResponsivePlanSummary planSummary = (ResponsivePlanSummary) getLoginScenario().getBean(PageConstants.RESPONSIVE_PLAN_SUMMARY_PAGE);

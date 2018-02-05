@@ -43,6 +43,9 @@ import cucumber.api.java.en.When;
  * @author sdwaraka
  *
  */
+/**
+* Functionality: Order materials page
+*/
 public class OrderPlanMaterialsAarpStepDefinition {
 
 	@Autowired
@@ -51,7 +54,9 @@ public class OrderPlanMaterialsAarpStepDefinition {
 	public MRScenario getLoginScenario() {
 		return loginScenario;
 	}
-
+	/**
+	* @todo : Verifying order materials page based on plan type attributes
+	*/
 	@Given("^registered Redesign member for Order Plan Materials with following attributes$")
 	public void registered_member_orderplanmaterials_redesign(
 			DataTable memberAttributes) throws InterruptedException {
@@ -121,7 +126,9 @@ public class OrderPlanMaterialsAarpStepDefinition {
 			Assert.fail("***** Error in loading  Redesign Account Landing Page *****");
 		}
 	}
-	
+	/**
+	* @todo : Verifying the order materials in dashboard page
+	*/
 	@When("^the user views order materials in Member Redesign Order Materials page$")
 	public void views_order_materials_in_Ums_site() throws InterruptedException {
 		UlayerHomePage accountHomePage = (UlayerHomePage) getLoginScenario()
@@ -137,7 +144,9 @@ public class OrderPlanMaterialsAarpStepDefinition {
 			Assert.fail("Error in loading  orderPlanMaterialsPage");
 		}
 	}
-
+	/**
+	* @todo : User select any one of options available in order materials page
+	*/
 	@And("^the user selects an option from the orderp list in Redesign site$")
 	public void user_selects_member_materials(DataTable givenAttributes) throws InterruptedException {
 
@@ -174,7 +183,9 @@ public class OrderPlanMaterialsAarpStepDefinition {
 			System.out.print("Order Plan Material Confirmation Page not displayed");
 		}
 	}
-
+	/**
+	* @todo : Verify the submit button functionality in order materials page
+	*/
 	@And("^the user validate order additional material and click to add other order additional material in Order Confirmation Page$")
 	public void validate_add_order_additional_material_for_pdp_in_Redesign_site() throws InterruptedException {
 		PlanMaterialConfirmationPage planMaterialConfirmationPage = (PlanMaterialConfirmationPage) getLoginScenario()
@@ -193,6 +204,9 @@ public class OrderPlanMaterialsAarpStepDefinition {
 		Assert.assertTrue(true);
 	}
 	
+	/**
+	* @todo : Verify help component section in order materials confirmation page
+	*/
 	@Then("^the user verify need help component in Redesign site$")
 	public void validate_needhelp_component() throws InterruptedException{
 		UlayerHomePage accountHomePage = (UlayerHomePage) getLoginScenario()
@@ -200,7 +214,9 @@ public class OrderPlanMaterialsAarpStepDefinition {
 		OrderplanmaterialsPage orderPlanMaterialsPage = accountHomePage.navigateToOrderPlanMaterialsPage();
 	}
 	
-
+	/**
+	* @todo : Verify order materials coming for all plan types
+	*/
 	@Then("^user navigates to Order Materials page for all Plans$")
 	public void user_navigates_Plan_Tabs(DataTable givenAttributes) {
 
@@ -226,6 +242,9 @@ public class OrderPlanMaterialsAarpStepDefinition {
 		}
 	}
 	
+	/**
+	* @todo : Verify page header and footer in order materials page
+	*/	
 	@And("^user Validates Page Header and Sub-Header text$")
 	public void user_validates_orderMaterialsHeader(){
 		OrderplanmaterialsPage orderPlanMaterialsPage = (OrderplanmaterialsPage) getLoginScenario().getBean(PageConstants.ORDER_PLAN_MATERIALS_PAGE);
@@ -234,6 +253,10 @@ public class OrderPlanMaterialsAarpStepDefinition {
 		}
 		
 	}
+	
+	/**
+	* @todo : Verify ordermaterials sections for all plan types
+	*/
 	
 	@And("^user validates all Order material Options for the plantype$")
 	public void user_validates_orderMaterialsOptions(DataTable givenAttributes){
@@ -254,6 +277,9 @@ public class OrderPlanMaterialsAarpStepDefinition {
 		}
 	}
 	
+	/**
+	* @todo : Verify error message by clicking submit and not selection any option in ordermaterials page 
+	*/	
 	@And("^the user click Submit without any selection$")
 	public void user_submits_with_no_option_selected() throws InterruptedException{
 		OrderplanmaterialsPage orderPlanMaterialsPage = (OrderplanmaterialsPage) getLoginScenario().getBean(PageConstants.ORDER_PLAN_MATERIALS_PAGE);
@@ -270,7 +296,9 @@ public class OrderPlanMaterialsAarpStepDefinition {
 			Assert.fail("Fail : navigates to Order Confirmation page");
 		}
 	}
-
+	/**
+	* @todo : Verify error messages in order materials page
+	*/
 	@Then("^the user validates error message in Order Materials page$")
 	public void user_validates_error_message() throws InterruptedException{
 		OrderplanmaterialsPage orderPlanMaterialsPage = (OrderplanmaterialsPage) getLoginScenario().getBean(PageConstants.ORDER_PLAN_MATERIALS_PAGE);
@@ -281,7 +309,9 @@ public class OrderPlanMaterialsAarpStepDefinition {
 		}
 		
 	}
-	
+	/**
+	* @todo : Verify error messages in order materials page for ship member
+	*/
 	@Then("^the user validates error message for SHIP invalid selection in Order Materials page$")
 	public void user_validates_SHIP_error_message(){
 		OrderplanmaterialsPage orderPlanMaterialsPage = (OrderplanmaterialsPage) getLoginScenario().getBean(PageConstants.ORDER_PLAN_MATERIALS_PAGE);

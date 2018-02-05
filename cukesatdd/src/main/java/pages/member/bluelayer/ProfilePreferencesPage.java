@@ -88,7 +88,7 @@ public class ProfilePreferencesPage extends UhcDriver {
 	@FindBy(id = "passwordNew")
 	private WebElement NewPassword;
 
-	@FindBy(id = "passwordNewConfirm")
+	@FindBy(id = "validateConfirmNewPassword")
 	private WebElement ConfirmPassword;
 
 	@FindBy(id = "updatePassword")
@@ -124,7 +124,7 @@ public class ProfilePreferencesPage extends UhcDriver {
 	@FindBy(className = "margin-none")
 	private WebElement Seemorewaystext;
 
-	@FindBy(className = "atdd-contact-us")
+	@FindBy(linkText = "atdd-contact-us")
 	private WebElement contactUs;
 
 	@FindBy(className = "atdd-need-help")
@@ -400,7 +400,7 @@ public class ProfilePreferencesPage extends UhcDriver {
 		}
 
 		SaveButton.click();
-		if (passworderrormessage.getText().contentEquals("This field is required.")) {
+		if (passworderrormessage.getText().contentEquals("Enter your current password.")) {
 			System.out.println("The element" + passworderrormessage.getText() + "is found");
 			return true;
 		} else {
