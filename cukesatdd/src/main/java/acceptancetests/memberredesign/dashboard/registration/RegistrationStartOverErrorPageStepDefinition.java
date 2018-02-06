@@ -76,12 +76,14 @@ public class RegistrationStartOverErrorPageStepDefinition {
                                                                 getLoginScenario().getBean(PageConstants.REGISTRATION_INFORMATION_PAGE);
                 }
                 /**
+                 * @throws InterruptedException 
                  * @toDo : verifying the sign in link on existing member error page
                  */
                 @When("^member click on Sign in link on existing member page$")
-                public void clickSignInLink() {
+                public void clickSignInLink() throws InterruptedException {
                                 RegistrationInformationPage registrationInformationPage = (RegistrationInformationPage) 
                                                                 getLoginScenario().getBean(PageConstants.REGISTRATION_INFORMATION_PAGE);
+                               Thread.sleep(2000);
                                 registrationInformationPage.clickSignInWithExistingLink();
                 }
                 /**

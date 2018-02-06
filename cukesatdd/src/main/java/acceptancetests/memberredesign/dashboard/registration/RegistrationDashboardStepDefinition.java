@@ -123,7 +123,7 @@ public class RegistrationDashboardStepDefinition {
 		}
 		
 		registrationInformationPage.scroll();
-		Thread.sleep(2000);
+		Thread.sleep(4000);
 		registrationInformationPage.getEnterMonth().click();
 		registrationInformationPage.enterMonth(month);
 		Thread.sleep(2000);

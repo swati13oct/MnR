@@ -180,7 +180,7 @@ public class RegistrationInformationPage extends UhcDriver {
 	private WebElement usernameAndPasswordHelpLink;
 
 	/** The sign in with your existing credentials link on existing member page. */
-	@FindBy(linkText = "SIGN IN WITH YOUR EXISTING CREDENTIALS")
+	@FindBy(linkText = "SIGN IN")
 	private WebElement signInWithYourExistingCredentialsLink;
 
 	/**

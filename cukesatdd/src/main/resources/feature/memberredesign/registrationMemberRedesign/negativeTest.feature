@@ -12,7 +12,7 @@ Scenario Outline: To verify already existing member error message page
       | Date of birth | <dateOfBirth> |
     When member click Next
     Then the member validate existing member error message
-    When member click on start over link on existing member page
+    When member click on start over link on  existing member page
     Then the member navigate to the personal Information page
     And no previously information is retained
 
