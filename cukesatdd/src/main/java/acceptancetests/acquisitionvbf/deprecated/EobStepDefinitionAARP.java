@@ -1,4 +1,4 @@
-package acceptancetests.acquisitionvbf.enrollinplan;
+package acceptancetests.acquisitionvbf.deprecated;
 
 import gherkin.formatter.model.DataTableRow;
 
