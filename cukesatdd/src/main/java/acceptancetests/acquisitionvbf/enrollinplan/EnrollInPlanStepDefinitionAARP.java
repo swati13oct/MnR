@@ -115,13 +115,15 @@ public class EnrollInPlanStepDefinitionAARP {
 				CommonConstants.WEBDRIVER); //
 		String plantype = givenAttributesMap.get("Plan Type");
 		getLoginScenario().saveBean(VPPCommonConstants.PLAN_TYPE, plantype);
-		VPPPlanSummaryPage plansummaryPage = new VPPPlanSummaryPage(wd);
-		getLoginScenario().saveBean(PageConstants.VPP_PLAN_SUMMARY_PAGE, wd);
-		plansummaryPage = plansummaryPage.viewPlanSummary(plantype);
+		/*VPPPlanSummaryPage plansummaryPage = new VPPPlanSummaryPage(wd);
+		getLoginScenario().saveBean(PageConstants.VPP_PLAN_SUMMARY_PAGE, wd);*/
+		VPPPlanSummaryPage planSummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		planSummaryPage.viewPlanSummary(plantype);
 
-		if (plansummaryPage != null) {
+		if (planSummaryPage != null) {
 			getLoginScenario().saveBean(PageConstants.VPP_PLAN_SUMMARY_PAGE,
-					plansummaryPage);
+					planSummaryPage);
 
 		}
 	}
@@ -366,7 +368,7 @@ public class EnrollInPlanStepDefinitionAARP {
 			SpecialElectionPeriodPage specialElectionPeriodPage = (SpecialElectionPeriodPage) getLoginScenario()
 					.getBean(PageConstants.SPECIAL_ELECTION_PERIOD_PAGE);
 
-			specialElectionPeriodPage.yesForSEPQuestion(SEPAttributesMap);
+			specialElectionPeriodPage.noForSEPQuestion();
 
 			getLoginScenario().saveBean(
 					PageConstants.SPECIAL_ELECTION_PERIOD_PAGE,
@@ -872,7 +874,7 @@ public class EnrollInPlanStepDefinitionAARP {
 				if (pedPage.validateEffectiveDatePage()) {
 					Assert.assertTrue(true);
 				} else
-					Assert.fail("Error in validating the Riders Page");
+					Assert.fail("Error in validating the Effective Date Page");
 
 			} else {
 				Assert.fail("ERROR loading PED Page");
