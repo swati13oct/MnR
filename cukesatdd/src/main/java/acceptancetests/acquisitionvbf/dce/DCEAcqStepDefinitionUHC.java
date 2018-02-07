@@ -166,6 +166,7 @@ public class DCEAcqStepDefinitionUHC {
 		String drug = memberAttributesRow.get(0).getCells().get(1);
 
 		DrugCostEstimatorPage dce = (DrugCostEstimatorPage) loginScenario.getBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE);
+		System.out.println("drug: "+drug+"and "+drug.split(" ")[0]);
 			dce.addDrug(drug.split(" ")[0]);
 
 	}

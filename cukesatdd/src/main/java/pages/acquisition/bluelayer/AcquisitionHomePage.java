@@ -1041,7 +1041,12 @@ public class AcquisitionHomePage extends GlobalWebElements {
 
         public VPPPlanSummaryPage navigateToVpp(String zipcode)
         {
-                
+                try {
+					Thread.sleep(10000);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
                 sendkeys(zipCodeField, zipcode);
                 viewPlansButton.click();
                 
