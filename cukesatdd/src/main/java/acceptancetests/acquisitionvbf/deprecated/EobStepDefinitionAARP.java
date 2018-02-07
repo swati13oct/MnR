@@ -1,4 +1,4 @@
-package acceptancetests.acquisitionvbf.enrollinplan;
+package acceptancetests.acquisitionvbf.deprecated;
 
 import gherkin.formatter.model.DataTableRow;
 
@@ -13,13 +13,14 @@ import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import pages.member.bluelayer.AccountHomePage;
-import pages.member.bluelayer.FormsandresourcesPage;
-import pages.member.bluelayer.LoginPage;
-import pages.member.bluelayer.MedicalEobPage;
-import pages.member.bluelayer.PrescriptionDrugEobPage;
+import pages.member.ulayer.AccountHomePage;
+import pages.member.ulayer.FormsandresourcesPage;
+import pages.member.ulayer.LoginPage;
+import pages.member.ulayer.MedicalEobPage;
+import pages.member.ulayer.PrescriptionDrugEobPage;
 import acceptancetests.atdd.data.CommonConstants;
 import acceptancetests.atdd.data.member.PageConstants;
+import acceptancetests.claims.data.ClaimsCommonConstants;
 import acceptancetests.login.data.LoginCommonConstants;
 import atdd.framework.MRScenario;
 import cucumber.api.DataTable;
@@ -28,9 +29,9 @@ import cucumber.api.java.en.Given;
 import cucumber.api.java.en.When;
 
 /**
- *Functionality: EOB
+ *Functionality:EOB
  */
-public class EobStepDefinitionUHC {
+public class EobStepDefinitionAARP {
 
 	@Autowired
 	MRScenario loginScenario;
@@ -40,11 +41,12 @@ public class EobStepDefinitionUHC {
 	}
 
 	/**
-	 * @toDo: registered UMS with following details for EOB flow
+	 * @toDo:registered AMP with following details for EOB
 	 */
-	@Given("^registered UMS with following details for EOB flow$")
-	public void registered_UMS_with_attributes_eob_ums(
+	@Given("^registered AMP with following details for EOB flow$")
+	public void registered_AMP_with_attributes_eob_aarp(
 			DataTable memberAttributes) {
+		/* Reading the given attribute from feature file */
 		List<DataTableRow> memberAttributesRow = memberAttributes
 				.getGherkinRows();
 		Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
@@ -53,23 +55,32 @@ public class EobStepDefinitionUHC {
 			memberAttributesMap.put(memberAttributesRow.get(i).getCells()
 					.get(0), memberAttributesRow.get(i).getCells().get(1));
 		}
+		String planType = memberAttributesMap.get("Plan Type");
+		String businessType = null;
+		if (planType.equalsIgnoreCase("MA")
+				|| planType.equalsIgnoreCase("MAPD")
+				|| planType.equalsIgnoreCase("PDP")) {
+			businessType = "GOVT";
+		} else {
+			businessType = "SHIP";
+		}
+		getLoginScenario().saveBean(ClaimsCommonConstants.BUSINESS_TYPE,
+				businessType);
 
-		String category = memberAttributesMap.get("Member Type");
-		
 		Set<String> memberAttributesKeySet = memberAttributesMap.keySet();
 		List<String> desiredAttributes = new ArrayList<String>();
 		for (Iterator<String> iterator = memberAttributesKeySet.iterator(); iterator
 				.hasNext();) {
 			{
 				String key = iterator.next();
-				desiredAttributes.add(memberAttributesMap.get(key));
+				if (!memberAttributesMap.get(key).isEmpty()) {
+					desiredAttributes.add(memberAttributesMap.get(key));
+				}
 			}
-
 		}
 		System.out.println("desiredAttributes.." + desiredAttributes);
-
 		Map<String, String> loginCreds = loginScenario
-				.getUMSMemberWithDesiredAttributes(desiredAttributes);
+				.getAMPMemberWithDesiredAttributes(desiredAttributes);
 
 		String userName = null;
 		String pwd = null;
@@ -89,66 +100,64 @@ public class EobStepDefinitionUHC {
 
 		WebDriver wd = getLoginScenario().getWebDriver();
 		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
-
-		LoginPage loginPage = new LoginPage(wd);
-		AccountHomePage accountHomePage =(AccountHomePage)loginPage.loginWith(userName, pwd,category);
 		
+		LoginPage loginPage = new LoginPage(wd);
+
+		AccountHomePage accountHomePage = (AccountHomePage)loginPage.loginWith(userName, pwd);
+
 		if (accountHomePage != null) {
 			getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
 			getLoginScenario().saveBean(PageConstants.ACCOUNT_HOME_PAGE,
 					accountHomePage);
-			if(accountHomePage.validateAccountHome())
-				Assert.assertTrue(true);
-			else
-				Assert.fail("Error in validating the Account Home Page");			
+			Assert.assertTrue(true);
+			
 		}
-	}
 
-	/**
-	 * @toDo:the user views forms and resources 
-	 */
-	@When("^the user views forms and resources in UMS site$")
-	public void user_views_forms_resources_page_ums() {
-		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario()
-				.getBean(PageConstants.ACCOUNT_HOME_PAGE);
-		FormsandresourcesPage formsandresourcesPage = accountHomePage
-				.navigateToFormsandResourceUmsPage();
-
-		if (formsandresourcesPage != null) {
-			getLoginScenario().saveBean(PageConstants.FORMS_AND_RESOURCES_PAGE,
-					formsandresourcesPage);
-			if(formsandresourcesPage.validateMedEOBFormsPage())
-				Assert.assertTrue(true);
-			else
-				Assert.fail("Error in validating the Forms and Resources page for medical eob");
-		}else {
-			Assert.fail("Error in loading Forms and resources page");
-		}
 	}
 	
 	/**
-	 * @toDo:the user clicks My Medical Explanation of Benefits link in forms and resources page 
+	 * @toDo:user views forms and resources 
 	 */
-	@And("^the user clicks My Medical Explanation of Benefits link in forms and resources page in UMS site$")
-	public void user_clicks_medical_eob_forms_and_resources_ums() {
+	@When("^the user views forms and resources in AARP site$")
+	public void user_views_forms_resources_page_aarp() {
+		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario()
+				.getBean(PageConstants.ACCOUNT_HOME_PAGE);
+		FormsandresourcesPage formsAndResourcesPage = accountHomePage
+				.navigateToFormsandResourceAarpPage();
+
+		if (formsAndResourcesPage != null) {
+			getLoginScenario().saveBean(PageConstants.FORMS_AND_RESOURCES_PAGE,
+					formsAndResourcesPage);
+			Assert.assertTrue(true);
+			
+		}
+
+	}
+
+	/**
+	 * @toDo:user clicks My Medical Explanation of Benefits link in forms and resources 
+	 */
+	@And("^the user clicks My Medical Explanation of Benefits link in forms and resources page in AARP site$")
+	public void user_clicks_medical_eob_forms_and_resources_aarp() {
 		FormsandresourcesPage formsandresourcesPage = (FormsandresourcesPage) getLoginScenario()
 				.getBean(PageConstants.FORMS_AND_RESOURCES_PAGE);
 		MedicalEobPage medicalEobPage = formsandresourcesPage
 				.navigateToMedicalEob();
+
+		
 		if (medicalEobPage != null) {
 			getLoginScenario().saveBean(PageConstants.MEDICAL_EOB_PAGE,
 					medicalEobPage);
 			Assert.assertTrue(true);
-		} else {
-			Assert.fail("Error loading Eob Page");
+			
 		}
 	}
 
 	/**
 	 * @toDo:the user searches EOB history for the date range
 	 */
-	@And("^the user searches EOB history for the date range in UMS site and validates$")
-	public void user_searches_eob_date_range_ums(DataTable dateAttributes) {
+	@And("^the user searches EOB history for the date range in AARP site and validates$")
+	public void user_searches_eob_date_range_aarp(DataTable dateAttributes) {
 		List<DataTableRow> dateAttributesRow = dateAttributes.getGherkinRows();
 		Map<String, String> dateAttributesMap = new LinkedHashMap<String, String>();
 		for (int i = 0; i < dateAttributesRow.size(); i++) {
@@ -164,39 +173,44 @@ public class EobStepDefinitionUHC {
 		if (medicalEobPage != null) {
 			getLoginScenario().saveBean(PageConstants.MEDICAL_EOB_PAGE,
 					medicalEobPage);
-			if(medicalEobPage.medicalEobExists())
+			if(medicalEobPage.validateEob())
 				Assert.assertTrue(true);
 			else
-				Assert.fail("Error in validating Eobs exist");
+				Assert.fail("Error in validating the EOB's");
 		} else {
 			Assert.fail("Error loading Eob Page");
 		}
 	}
 
+
+	
 	/**
 	 * @toDo:Below methods are implemented for Prescription Drug EOB
 	 */
-	@And("^the user clicks My Prescription Drug Explanation of Benefits link in forms and resources page in UMS site$")
-	public void user_clicks_prescription_drug_eob_forms_and_resources_ums() {
+	@And("^the user clicks My Prescription Drug Explanation of Benefits link in forms and resources page in AARP site$")
+	public void user_clicks_prescription_drug_eob_forms_and_resources_aarp(DataTable attributes) {
 		FormsandresourcesPage formsandresourcesPage = (FormsandresourcesPage) getLoginScenario()
 				.getBean(PageConstants.FORMS_AND_RESOURCES_PAGE);
+		List<DataTableRow> attributesRow = attributes.getGherkinRows();
+		String planType = attributesRow.get(0).getCells().get(1);
 		PrescriptionDrugEobPage prescriptionDrugEobPage = formsandresourcesPage
-				.navigateToPresDrugEob();
+				.navigateToPresDrugEob(planType);
+
+		
 		if (prescriptionDrugEobPage != null) {
 			getLoginScenario().saveBean(
 					PageConstants.PRESCRIPTION_DRUG_EOB_PAGE,
 					prescriptionDrugEobPage);
 			Assert.assertTrue(true);
-		} else {
-			Assert.fail("Error loading Eob Page");
+			
 		}
 	}
 	
 	/**
-	 * @toDo:user searches prescription drug EOB history
+	 * @toDo:user searches prescription drug EOB history for the date range 
 	 */
-	@And("^the user searches prescription drug EOB history for the following interval in UMS site and validates$")
-	public void user_searches_prescription_drug_eob_date_range_ums(
+	@And("^the user searches prescription drug EOB history for the date range in AARP site and validates$")
+	public void user_searches_prescription_drug_eob_date_range_aarp(
 			DataTable dateAttributes) {
 		List<DataTableRow> dateAttributesRow = dateAttributes.getGherkinRows();
 		Map<String, String> dateAttributesMap = new LinkedHashMap<String, String>();
@@ -210,18 +224,19 @@ public class EobStepDefinitionUHC {
 				.getBean(PageConstants.PRESCRIPTION_DRUG_EOB_PAGE);
 		prescriptionDrugEobPage = prescriptionDrugEobPage
 				.searchesPresDrugEob(dateAttributesMap);
-		
+
+
 		if (prescriptionDrugEobPage != null) {
 			getLoginScenario().saveBean(
 					PageConstants.PRESCRIPTION_DRUG_EOB_PAGE,
 					prescriptionDrugEobPage);
-			if(prescriptionDrugEobPage.validateEOBs())
+			if(prescriptionDrugEobPage.validateRxEob())
 				Assert.assertTrue(true);
 			else
-				Assert.fail("Error in validating EOBs");
+				Assert.fail("Error in validating rx eobs");
+		}else
+			Assert.fail("Error in loading the Prescription Drug EOB Page");
 			
-		}
-
 	}
 
 }

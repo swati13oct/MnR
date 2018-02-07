@@ -47,7 +47,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	@FindBy(xpath = "//div[@class='overview-tabs module-tabs-tabs']/div[1]/div/span/span[@class='ng-binding']")
 	private WebElement maPlansNumber;
 	
-	@FindBy(xpath = "//div[@class='overview-tabs module-tabs-tabs']/div[1]//span[@class='trigger-closed']")
+	@FindBy(xpath = ".//*[@id='site-wrapper']//div[@class='uhc-container tfnclassadj']/div[1]/div[3]/div[1]//span[@class='trigger-closed']")
 	private WebElement maPlansViewLink;
 	
 	@FindBy(id = "plan-list-1")
@@ -141,7 +141,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	@FindBy(id = "providerSearchFrame")
 	private WebElement providerSearchIframe;
 	
-	@FindBy(xpath = ".//*[@id='site-wrapper']/div[4]/div/div[1]/div/div/div/div/div[1]/div/div/div[1]/div[2]/div/div[2]/div[1]/div")
+	@FindBy(xpath = ".//*[@id='site-wrapper']//div[@class='uhc-container tfnclassadj']/div[1]/div[3]/div[1]//span[@class='trigger-closed']")
 	private WebElement viewPlans;
 	
 	@FindBy(xpath = ".//*[@id='site-wrapper']/div[4]/div/div/div/div/div/div/div[1]/div/div/div[1]/div[2]/div/div[2]/div[3]")
@@ -213,7 +213,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	private WebElement Primary;
 	
 	
-	@FindBy(xpath="//a[contains(text(),'Primary Care Physician (PCP')]")
+	@FindBy(xpath="//a[contains(text(),'Primary Care Physician')]")
 	private WebElement Physician;
 
 	@FindBy(xpath="//div[contains(@class,'first')]//div[@class='hidden-phone']/button[not(contains(@class,'hidden'))]/span")
@@ -256,8 +256,14 @@ public class VPPPlanSummaryPage extends UhcDriver {
 			List<WebElement> planElement, ElementData elementData,
 			String planName) {
 		for (WebElement plan : planElement) {
+			
 			if (plan.getText().contains(planName)) {
-
+				try {
+					Thread.sleep(2000);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 				WebElement element = findChildElement(elementData,
 						plan);
 
@@ -315,9 +321,8 @@ public class VPPPlanSummaryPage extends UhcDriver {
 			}
 		} else if (planType.equalsIgnoreCase("MA")
 				|| planType.equalsIgnoreCase("MAPD")) {
-			if(validate(hidePdpPlans)){
 				maPlansViewLink.click();
-			}
+		
 			
 			//validate(hideMaPlans);
 		} else if (planType.equalsIgnoreCase("MS")) {
@@ -802,7 +807,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	}
 	
 	public PlanDetailsPage navigateToPlanDetails(String planName, String planType) {
-
+		driver.manage().window().maximize();
 		if (planType.equalsIgnoreCase("MA") || planType.equalsIgnoreCase("MAPD")) {
 			ElementData elementData = new ElementData("id", "viewmoredetlinkmapd");
 			WebElement element = getViewPlanDetailsElement(maPlanElement, elementData, planName);
@@ -842,7 +847,12 @@ public class VPPPlanSummaryPage extends UhcDriver {
 			Assert.assertTrue("This scenario is for AEP period", true);
 			
 		}
-		
+		try {
+			Thread.sleep(3000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 	public void clickOnPDPPlans(){

@@ -1,5 +1,4 @@
 package pages.dashboard.member.drugcostestimator.blayer;
-import java.util.List;
 import java.util.Map;
 
 import org.json.JSONException;
@@ -17,6 +16,9 @@ import acceptancetests.atdd.data.PageData;
 import acceptancetests.atdd.util.CommonUtility;
 import atdd.framework.UhcDriver;
 
+/**
+ * Functionality: Covers all elements and methods for Add Drugs Detail Modal
+ */
 public class AddDrugDetails extends UhcDriver {
 
 	private PageData adddrugdetails;
@@ -34,10 +36,10 @@ public class AddDrugDetails extends UhcDriver {
 
 	@FindBy(id = "quantity")
 	public WebElement quantityField;
-	
+
 	@FindBy(id = "drug-alt-back-button")
 	public WebElement backToSearchBtn;
-	
+
 	@FindBy(id = "frequency")
 	public WebElement selectYourFrequencyDropdown;
 	public AddDrugDetails(WebDriver driver) {
@@ -56,16 +58,16 @@ public class AddDrugDetails extends UhcDriver {
 		for (String key : adddrugdetails.getExpectedData().keySet()) {
 			WebElement element = findElement(adddrugdetails.getExpectedData().get(key));
 			if (null != element) {
-			validate(element);
-			try {
-				jsonObject.put(key, element.getText());
-			} catch (JSONException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+				validate(element);
+				try {
+					jsonObject.put(key, element.getText());
+				} catch (JSONException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 
+			}
 		}
-	}
 		adddrugdetailsJson = jsonObject;
 
 		System.out.println("addnewdrugJson----->" + adddrugdetailsJson);
@@ -77,19 +79,29 @@ public class AddDrugDetails extends UhcDriver {
 
 		return addDrugDetailsPageExpectedJson;
 	}
+
+	/** select dosage of the drug
+	 * 
+	 */
 	public void selectDosage(String dosage){
-	
+
 		WebElement element = driver.findElement(By.xpath("//input[@value='"+dosage+"']"));
 		if(!element.isSelected()){
 			element.click();
 		}
 	}
 
+	/** select qnty quantity of the drug
+	 * 
+	 */
 	public void selectQnty(String qnty){
 		waitforElement(quantityField);
 		sendkeys(quantityField, qnty);
 	}
 
+	/** select frequency of the drug
+	 * 
+	 */
 	public void selectFrequency(String frquency){
 		Select options = new Select(selectYourFrequencyDropdown);
 		if(frquency.equalsIgnoreCase("Every 1 month")){
@@ -100,22 +112,34 @@ public class AddDrugDetails extends UhcDriver {
 		}
 	}
 
+	/** Click on continue button 
+	 * For branded drug 
+	 * returns new SavingsOppurtunity
+	 */
 	public SavingsOppurtunity continueAddDrugDetailsModal() throws InterruptedException{
 		waitforElement(continueButton);
 		continueButton.click();
 		//continueButton.click();
 		Thread.sleep(12000);
 		return new SavingsOppurtunity(driver);
-		}
-	
+	}
+
+	/** Click on continue button 
+	 * For generic drug
+	 * returns new DrugCostEstimatorPage
+	 */
 	public DrugCostEstimatorPage continueAddDrugDetailsMod() throws InterruptedException{
 		waitforElement(continueButton);
 		continueButton.click();
 		Thread.sleep(12000);
 		return new DrugCostEstimatorPage(driver);
-		}
+	}
+
+	/** ToDo - Need to remove this method 
+	 * 
+	 */
 	public SavingsOppurtunity continueAddDrugDetails(){
-		
+
 		waitforElement(continueButton);
 		continueButton.click();
 		if (driver.getTitle().equalsIgnoreCase("SAVINGS OPPORTUNITY")) {
@@ -123,10 +147,19 @@ public class AddDrugDetails extends UhcDriver {
 		}
 		return null;
 	}
+
+	/** Click on backToSeach button 
+	 * 
+	 * returns new AddNewDrugModal
+	 */
 	public AddNewDrugModal backToSeach(){
 		backToSearchBtn.click();
 		return new AddNewDrugModal(driver);
 	}
+
+	/** Validation of addDrugDetailsPage
+	 *
+	 */
 	public void validateThePage(){
 		Assert.assertTrue(addDrugDetailsPage.isDisplayed());
 	}

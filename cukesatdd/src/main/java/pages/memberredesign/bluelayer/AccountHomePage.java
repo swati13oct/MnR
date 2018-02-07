@@ -1,16 +1,11 @@
 package pages.memberredesign.bluelayer;
 
-import java.util.List;
-
 import org.junit.Assert;
-import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-
-import com.google.common.collect.ClassToInstanceMap;
 
 import atdd.framework.UhcDriver;
 //import gherkin.lexer.i18n.EO;
@@ -123,22 +118,37 @@ public class AccountHomePage extends UhcDriver {
 		
 	}
 	
+	/**
+	 * Validate the Header of the page
+	 */
 	public void validateHeader(){
 		Assert.assertTrue("Header is not displayed", header.isDisplayed());
 	}
 	
+	/**
+	 * Validate Home Tab of the page
+	 */
 	public void validateHomeTab(){
 		Assert.assertTrue("Home tab is not displayed", home.isDisplayed());
 	}
 	
+	/**
+	 * validate Find Care Cost Tab
+	 */
 	public void validateFindCareCostTab(){
 		Assert.assertTrue("Find Care and Cost tab is not displayed", findCareCost.isDisplayed());
 	}
 	
+	/**
+	 * Validate claims Tab
+	 */
 	public void validateClaims(){
 		Assert.assertTrue("Claims tab is not displayed", claims.isDisplayed());
 	}
 	
+	/**
+	 * Validate claims level 2 tabs
+	 */
 	public void validateClaimsL2Tabs(){
 		if(claims.isDisplayed()){
 			claims.click();
@@ -153,6 +163,9 @@ public class AccountHomePage extends UhcDriver {
 		}
 	}
 	
+	/**
+	 * Validate Coverage and Benefits Level 2 Tabs
+	 */
 	public void validateCoverageBenefitsL2Tabs(){
 		waitforElement(coverageBenefits);
 		if(coverageBenefits.isDisplayed()){
@@ -169,6 +182,9 @@ public class AccountHomePage extends UhcDriver {
 		}
 	}
 	
+	/**
+	 * Click on claims summary
+	 */
 	public void clickClaimsSummary(){
 		if(claims.isDisplayed()){
 			claims.click();
@@ -178,12 +194,18 @@ public class AccountHomePage extends UhcDriver {
 		}
 	}
 	
+	/**
+	 * Click on premium payment
+	 */
 	public void clickPremiumPayment(){
 		if(premiumPayment.isDisplayed()){
 			premiumPayment.click();
 		}
 	}
 	
+	/**
+	 * Click on claims followed by EOB
+	 */
 	public void clickeob(){
 		if(claims.isDisplayed()){
 			claims.click();
@@ -193,6 +215,9 @@ public class AccountHomePage extends UhcDriver {
 		}
 	}
 	
+	/**
+	 * Validate coverage and Benefits tab
+	 */
 	public void validateCoverageBenefits(){
 		try {
 			Thread.sleep(2000);
@@ -204,6 +229,9 @@ public class AccountHomePage extends UhcDriver {
 		Assert.assertTrue("coverageBenefits tab is not displayed", coverageBenefits.isDisplayed());
 	}
 	
+	/**
+	 * Click coverage and Benefits tab, and verifies benefits Summary, forms And Resources and order Materials tab
+	 */
 	public void clickCoverageBenefits(){
 		if(coverageBenefits.isDisplayed()){
 			coverageBenefits.click();
@@ -213,6 +241,9 @@ public class AccountHomePage extends UhcDriver {
 		}
 	}
 	
+	/**
+	 * click on Benefits Summary
+	 */
 	public void clickBenefitsSummary(){
 		if(coverageBenefits.isDisplayed()){
 			coverageBenefits.click();
@@ -222,6 +253,9 @@ public class AccountHomePage extends UhcDriver {
 		}
 	}
 	
+	/**
+	 * click on forms And Resources
+	 */
 	public void clickFormsResources(){
 		if(coverageBenefits.isDisplayed()){
 			coverageBenefits.click();
@@ -231,6 +265,9 @@ public class AccountHomePage extends UhcDriver {
 		}
 	}
 	
+	/**
+	 * click on Order Materials
+	 */
 	public void clickOrderMaterials() {
 		try {
 			Thread.sleep(2000);
@@ -253,13 +290,18 @@ public class AccountHomePage extends UhcDriver {
 	public void validateAccountProfile(){
 		//Assert.assertTrue("Account/Profile tab is not displayed", accountProfile.isDisplayed());
 	}
-	
+	/**
+	 * Validate Footer section of the page
+	 */
 	public void validateFooterSection(){
 		JavascriptExecutor jse = (JavascriptExecutor) driver; 
 		jse.executeScript("window.scrollBy(0,document.body.scrollHeight || document.documentElement.scrollHeight)", "");
 		Assert.assertTrue("Footer section is not displayed", footerSection.isDisplayed());
 	}
 	
+	/**
+	 * Validate Member support content section
+	 */
 	public void validateMemberSupport(){
 //		List<WebElement> footerColumn = driver.findElements(By.id("memberSupportID"));
 //		System.out.println(footerColumn.size());
@@ -272,6 +314,9 @@ public class AccountHomePage extends UhcDriver {
 		validateMemberSupportFooterLinks();
 	}
 	
+	/**
+	 * Validate member support Footer links
+	 */
 	public void validateMemberSupportFooterLinks(){
 //		List<WebElement> footerlinksColumn = driver.findElements(By.id("footerLinksID"));
 //		System.out.println(footerlinksColumn.size());
@@ -283,6 +328,9 @@ public class AccountHomePage extends UhcDriver {
 		Assert.assertTrue("Terms of Use link is not displayed", termsOfUse.isDisplayed());
 	}
 	
+	/**
+	 * Validate quick links in footer section
+	 */
 	public void validateQuickLinksFooterLinks(){
 //		List<WebElement> footerlinksColumn = driver.findElements(By.id("footerLinksID"));
 //		System.out.println(footerlinksColumn.size());
@@ -293,6 +341,9 @@ public class AccountHomePage extends UhcDriver {
 		
 	}
 	
+	/**
+	 * Validate quick links
+	 */
 	public void validateQuickLinks(){
 //		List<WebElement> footerColumn = driver.findElements(By.id("memberSupportID"));
 //		System.out.println(footerColumn.size());
@@ -308,6 +359,9 @@ public class AccountHomePage extends UhcDriver {
 		validateQuickLinksFooterLinks();
 	}
 	
+	/**
+	 * Validate Feedback Model
+	 */
 	public void checkModelPopup() {
 		try {
 			FeedbackModal.click();
@@ -322,6 +376,9 @@ public class AccountHomePage extends UhcDriver {
 		}
 	}
 	
+	/**
+	 * Validate saved links
+	 */
 	public void validateSavedLink(){
 		Assert.assertTrue("Saved link is not clickable", saved.isDisplayed());
 	}
