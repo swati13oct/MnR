@@ -209,9 +209,17 @@ public class OrderPlanMaterialsAarpStepDefinition {
 	*/
 	@Then("^the user verify need help component in Redesign site$")
 	public void validate_needhelp_component() throws InterruptedException{
-		UlayerHomePage accountHomePage = (UlayerHomePage) getLoginScenario()
-				.getBean(PageConstants.ACCOUNT_HOME_PAGE);
-		OrderplanmaterialsPage orderPlanMaterialsPage = accountHomePage.navigateToOrderPlanMaterialsPage();
+		OrderplanmaterialsPage orderPlanMaterialsPage = (OrderplanmaterialsPage) getLoginScenario().getBean(PageConstants.ORDER_PLAN_MATERIALS_PAGE);
+		orderPlanMaterialsPage = orderPlanMaterialsPage.verifyneedHelpcomponent();
+		if (orderPlanMaterialsPage != null) {
+			getLoginScenario().saveBean(PageConstants.ORDER_PLAN_MATERIALS_PAGE,
+					orderPlanMaterialsPage);
+			Assert.assertTrue(true);
+		}
+		else {
+			Assert.fail("Need Help Component NOT Displayed");
+		}
+
 	}
 	
 	/**
