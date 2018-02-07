@@ -109,7 +109,7 @@ public class AccountHomePage extends UhcDriver {
 	@FindBy(xpath="//dashboard//a[contains(text(),'Contact')]")
 	private WebElement linkContactUs;
 	
-	@FindBy(xpath="//a[contains(text(),'Contact')]")
+	@FindBy(xpath="//a[contains(text(),'Contact Us page')]")
 	private WebElement helpAndContactUslink;
 	
 	@FindBy(xpath="//header//h1")
