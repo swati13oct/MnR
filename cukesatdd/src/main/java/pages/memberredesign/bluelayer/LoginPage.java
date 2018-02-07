@@ -88,7 +88,7 @@ public class LoginPage extends UhcDriver {
 
 			while (!isAlertPresent());
 		}
-		if (MRScenario.environment.equals("team-c") || MRScenario.environment.equals("team-b")) {
+		if (MRScenario.environment.equals("team-c") || MRScenario.environment.equals("team-b") || MRScenario.environment.equals("team-ci1")) {
 
 			Alert alert = driver.switchTo().alert();
 			alert.accept();

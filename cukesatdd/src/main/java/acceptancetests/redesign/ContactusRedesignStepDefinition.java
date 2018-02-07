@@ -164,7 +164,7 @@ public class ContactusRedesignStepDefinition {
 		{
 			ContactUsPage contactusPage=(ContactUsPage)getLoginScenario().getBean(PageConstants.CONTACT_US_PAGE);
 			
-			contactusPage.submitQuestionClick_by_BillingInfo_option();
+			//contactusPage.submitQuestionClick_by_BillingInfo_option();
 			 
 			if(contactusPage != null)				
 				getLoginScenario().saveBean(PageConstants.CONTACT_US_PAGE,

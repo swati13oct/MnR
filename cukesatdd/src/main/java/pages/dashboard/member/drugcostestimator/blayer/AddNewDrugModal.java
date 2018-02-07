@@ -4,19 +4,20 @@ import java.util.Map;
 
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.Select;
 
 import acceptancetests.atdd.data.CommonConstants;
 import acceptancetests.atdd.data.PageData;
 import acceptancetests.atdd.util.CommonUtility;
 import atdd.framework.UhcDriver;
-import pages.acquisition.bluelayer.VPPPlanSummaryPage;
+
+/**
+ * Functionality: Covers all elements and methods for Add New Drug Modal
+ */
 public class AddNewDrugModal extends UhcDriver {
 
 	private PageData addnewdrug;
@@ -32,26 +33,26 @@ public class AddNewDrugModal extends UhcDriver {
 
 	@FindBy(xpath = "//a[text()='Cancel']")
 	public WebElement cancelButton;
-	
+
 	@FindBy(id = "drug-search-input")
 	public WebElement drugsearchinput;
-	
+
 	@FindBy(id="radio-0")
 	public WebElement firstdrug; //its liptor
-	
+
 	@FindBy(xpath = "//span[contains(text(),'Please enter at least 4 characters to continue search')]")
 	public WebElement errorMessage;
 
 	@FindBy(id = "drug-alt-search-button")
 	public WebElement continueButton;
-	
+
 	@FindBy(xpath = "//span[contains(text(),'Your Drug List can contain a maximum of 25 drugs.')]")
 	public WebElement exceededError;
 
 	@FindBy(xpath = "//span[@class='color-red']")
 	public WebElement atleast_4_mesg;
-	
-	
+
+
 	public AddNewDrugModal(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
@@ -63,7 +64,7 @@ public class AddNewDrugModal extends UhcDriver {
 	@Override
 	public void openAndValidate() {
 
-		
+
 		JSONObject jsonObject = new JSONObject();
 		for (String key : addnewdrug.getExpectedData().keySet()) {
 			WebElement element = findElement(addnewdrug.getExpectedData()
@@ -80,8 +81,8 @@ public class AddNewDrugModal extends UhcDriver {
 		}
 		addnewdrugJson = jsonObject;
 		System.out.println("addDrugJson----->"+addnewdrugJson);
-	
-		
+
+
 	}
 
 	public JSONObject getExpectedData(Map<String, JSONObject> expectedDataMap) {
@@ -90,6 +91,11 @@ public class AddNewDrugModal extends UhcDriver {
 
 		return addnewdrugExpectedJson;
 	}
+
+	/** Click Search button 
+	 * 
+	 * returns new AddDrugDetails
+	 */
 	public AddDrugDetails clickonSearchButton(String DrugName) {
 		drugsearchinput.sendKeys(DrugName);
 		searchButton.click();     
@@ -98,10 +104,19 @@ public class AddNewDrugModal extends UhcDriver {
 		}
 		return null;
 	}
-	
+
+	/** Enter DrugName in drug search input textbox
+	 * 
+	 * returns new AddDrugDetails
+	 */
 	public void typeDrugName(String DrugName) {
 		drugsearchinput.sendKeys(DrugName);
 	}
+
+	/** Select Drug with drugname radio button
+	 * 
+	 * returns new AddDrugDetails
+	 */
 	public AddDrugDetails selectDrug(String drugname){
 		String xpath = "//label[contains(text(),'"+drugname+"')]/parent::div/input[contains(@id,'drugs-')]";
 		WebElement rdrug = driver.findElement(By.xpath(xpath));
@@ -112,19 +127,32 @@ public class AddNewDrugModal extends UhcDriver {
 		continueButton.click();
 		return new AddDrugDetails(driver);
 	}
+
+	/** Verifies errorMessage on the page
+	 * 
+	 */
 	public void verifyerror(){
 		errorMessage.isDisplayed();
 	}
+
+	/** selects drug on the modal from auto suggestions
+	 * 
+	 */
 	public void selectAdrugFromAutoCompleteSuggestions(String drug){
 		List<WebElement> elements = driver.findElements(By.className("autocomplete-suggestions"));
 		for(WebElement element : elements){
-			
+
 			if(drug.equalsIgnoreCase(element.getText())){
 				element.click();
 				break;
 			}
 		}
 	}
+
+	/** Click on search button followed by continue button in next modal
+	 * 
+	 * return new AddDrugDetails
+	 */
 	public AddDrugDetails submit() throws InterruptedException{
 		searchButton.click();
 		waitforElement(continueButton);
@@ -132,32 +160,48 @@ public class AddNewDrugModal extends UhcDriver {
 		Thread.sleep(5000);
 		return new AddDrugDetails(driver);
 	}
-	
+
+	/** Verifies exceed error of the drug list
+	 * 
+	 */
 	public void verifyExceededError(){
 		exceededError.isDisplayed();
 	}
+
+	/** Clicks on cancel button 
+	 * 
+	 * return new DrugCostEstimatorPage
+	 */
 	public DrugCostEstimatorPage cancel(){
 		waitforElement(cancelButton);
 		cancelButton.click();
 		return new DrugCostEstimatorPage(driver);
 	}
-	
+
+
+	/** Clicks on continue button 
+	 * 
+	 * return new AddDrugDetails
+	 */
 	public AddDrugDetails continueAddNewDrugModal(){
 		waitforElement(continueButton);
-//		try {
-//			Thread.sleep(20000);
-//		} catch (InterruptedException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
+		//		try {
+		//			Thread.sleep(20000);
+		//		} catch (InterruptedException e) {
+		//			// TODO Auto-generated catch block
+		//			e.printStackTrace();
+		//		}
 		continueButton.click();
 		return new AddDrugDetails(driver);
 	}
-	
+
+	/** Validates at least 4 character error message 
+	 * 
+	 */
 	public void validate_atleast_4_mesg()
 	{
 		waitforElement(atleast_4_mesg);
-		
+
 	}
 }
 

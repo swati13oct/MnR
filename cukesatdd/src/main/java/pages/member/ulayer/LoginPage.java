@@ -280,9 +280,8 @@ public class LoginPage extends UhcDriver {
 		}
 		else if (MRScenario.environment.equalsIgnoreCase("team-ci1")) {
 			
-			start(MRConstants.REDESIGN_LOGIN_URL);
-			System.out.println("user is on teamci1  Environment");
-		}
+start(MRConstants.REDESIGN_LOGIN_URL);
+			System.out.println("user is on Team-Ci1 Environment");		}
 		else if (MRScenario.environment.equalsIgnoreCase("team-t")) {
 			start(TEAM_T_NEW_DASHBOARD_URL);
 			System.out.println("User is on team-t Environment ");
@@ -389,6 +388,42 @@ if ( MRScenario.environment.equalsIgnoreCase("team-ci1") || (MRScenario.environm
 			
 				return null;
 		
+	}
+	
+	public Object doLoginWith(String username, String password) {
+		sendkeys(thUserName, username);
+		sendkeys(thPassword, password);
+		thSignIn.click();
+		if ( MRScenario.environment.equals("team-e")){
+
+			Alert alert = driver.switchTo().alert();
+			alert.accept();
+		} 
+		try{
+			Thread.sleep(40000);
+			if (validate(iPerceptionPopUp)) {
+				System.out.println("iPerceptionPopUp is Displayed");
+				iPerceptionPopUp.click();
+			}
+		}catch(Exception e)        {
+			System.out.println("iPerception Pop Up not displayed");
+		}
+
+		if(currentUrl().contains("testharness.html") || currentUrl().contains("/dashboard"))
+
+		{
+			return new AccountHomePage(driver);
+		}
+		else if(currentUrl().contains("home/my-account-home.html")  || currentUrl().contains("/login.html") ) {
+			return new AccountHomePage(driver);
+		}
+		else if (currentUrl().contains("terminated-plan.html")) {
+			return new TerminatedHomePage(driver);
+		}
+
+		System.out.println("teamhloginWith is returing null. Please Update the above condition As per your Needs");
+
+		return null;
 	}
 
 }

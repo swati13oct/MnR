@@ -92,10 +92,10 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	@FindBy(xpath="//div[contains(@ng-repeat,'plan in planModel.pdpPlans')]")
 	List<WebElement> pdpPlans;
 
-	@FindBy(xpath = ".//*[@id='site-wrapper']/div[4]/div/div/div/div/div/div/div[1]/div/div/div[1]/div[2]/div/div[2]/div[1]/div/span[3]")
+	@FindBy(xpath = ".//*[@id='site-wrapper']//div[@class='uhc-container tfnclassadj']/div[1]/div[3]/div[1]//span[@class='trigger-closed']")
 	private WebElement viewPlans;
-
-	@FindBy(xpath = ".//*[@id='site-wrapper']/div[4]/div/div/div/div/div/div/div[1]/div/div/div[1]/div[2]/div/div[2]/div[3]/div/span[3]")
+	
+	@FindBy(xpath = ".//*[@id='site-wrapper']//div[@class='uhc-container tfnclassadj']/div[1]/div[3]/div[3]/div[1]//span[@class='trigger-closed']")
 	private WebElement viewPDPPlans;
 
 	@FindBy(xpath = "//div[@id='snpplans_container']/h1/span[2]")
