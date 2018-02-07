@@ -935,7 +935,7 @@ public class DrugCostEstimatorPage extends UhcDriver {
 	public void addDrug(String drug) throws InterruptedException {
 
 		AddNewDrugModal addNewDrugModal = clickOnAddDrug();
-		//addNewDrugModal.typeDrugName(drug);
+		addNewDrugModal.typeDrugName(drug);
 		//addNewDrugModal.submit();
 		addNewDrugModal.clickonSearchButton(drug);
 		// addNewDrugModal.selectDrug(drug);
