@@ -374,14 +374,13 @@ public class LoginPage extends UhcDriver {
 			System.out.println("teamhloginWith is returing null. Please Update the above condition As per your Needs");
 			
 				return null;
-		
 	}
 	
 	public Object doLoginWith(String username, String password) {
 		sendkeys(thUserName, username);
 		sendkeys(thPassword, password);
 		thSignIn.click();
-		if ( MRScenario.environment.equals("team-e")){
+		if ( MRScenario.environment.equals("team-e") || MRScenario.environment.equals("team-ci1")){
 
 			Alert alert = driver.switchTo().alert();
 			alert.accept();
@@ -408,7 +407,7 @@ public class LoginPage extends UhcDriver {
 			return new TerminatedHomePage(driver);
 		}
 
-		System.out.println("teamhloginWith is returing null. Please Update the above condition As per your Needs");
+		System.out.println("login is returing null. Please Update the above condition As per your Needs");
 
 		return null;
 	}

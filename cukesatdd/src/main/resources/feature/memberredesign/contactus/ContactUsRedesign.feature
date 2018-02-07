@@ -10,8 +10,8 @@ Feature: To test Send us a question Widget and Click to call functionality in co
     Then user validates secure email widget UI in redesign contact us page
 
     Examples: 
-      | plantype | memberType |
-      | MAPD     | Group      |
+      | plantype | memberType 	|
+      | MAPD     | COSMOSCLAIMS |
 
   @secureEmailWidgetGroup
   Scenario Outline: Verify Send us a question Widget section in contact us redesign page which covers 1,3,4
@@ -22,8 +22,8 @@ Feature: To test Send us a question Widget and Click to call functionality in co
     Then user validates Group secure email widget  in redesign contact us page
 
     Examples: 
-      | plantype | memberType |
-      | MAPD     | Group      |
+      | plantype | memberType 			|
+      | MAPD     | SDCERAGroup      |
 
   @secureEmailWidgetCancelForGroup
   Scenario Outline: Verify cancel click on Group secure email widget  in redesign contact us page
@@ -34,8 +34,8 @@ Feature: To test Send us a question Widget and Click to call functionality in co
     Then user validates cancel click on Group secure email widget  in redesign contact us page
 
     Examples: 
-      | plantype | memberType |
-      | MAPD     | Group      |
+      | plantype | memberType 			|
+      | MAPD     | SDCERAGroup      |
 
   @invalidEmail
   Scenario Outline: Validate  invalid aletrnative emailIds in contact us redesign page
