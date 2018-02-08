@@ -213,6 +213,7 @@ public class LoginPage2 extends UhcDriver {
 		else if (MRScenario.environment.equalsIgnoreCase("team-ci1")) {
 			
 			start(MRConstants.REDESIGN_LOGIN_URL);
+			System.out.println(driver.getCurrentUrl());
 			System.out.println("user is on Team-Ci1 Environment");
 		}
 		else
@@ -289,14 +290,17 @@ public class LoginPage2 extends UhcDriver {
 		sendkeys(userNameField, username);
 		sendkeys(passwordField, password);
 		signInButton.click();
-		if ( MRScenario.environment.equals("team-ci1")){
+		
+		if ( MRScenario.environment.equals("team-Ci1")){
 
 			Alert alert = driver.switchTo().alert();
 			alert.accept();
 		} 
-		try{
+		try
+		   {
 			Thread.sleep(40000);
-			if (validate(iPerceptionPopUp)) {
+			if (validate(iPerceptionPopUp)) 
+			{
 				System.out.println("iPerceptionPopUp is Displayed");
 				iPerceptionPopUp.click();
 			}
