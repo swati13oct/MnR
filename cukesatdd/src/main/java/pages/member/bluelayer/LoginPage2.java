@@ -34,6 +34,10 @@ public class LoginPage2 extends UhcDriver {
 	private static String PAGE_URL = MRConstants.BNCBURL;
 
 	private static String PAGE_URL2 = MRConstants.DASHBOARD_URL;
+	
+	private static String PAGE_URL_TEAM_MEDICARE_TESTHARNESS = MRConstants.TEAM_MEDICARE_TESTHARNESS;
+	
+	private static String STAGE_DASHBOARD_URL = MRConstants.STAGE_DASHBOARD_NEW_DOMAIN_URL;
 
 	@FindBy(id = "fd_memberSignInButton")
 	private WebElement loginIn;
@@ -56,11 +60,14 @@ public class LoginPage2 extends UhcDriver {
 
 	@FindBy(id = "accessURAccountBTN")
 	private WebElement Signin;
+	
+	@FindBy(xpath=".//*[@id='IPEinvL']/map/area[1]")
+    private WebElement iPerceptionPopUp;
 
 	public LoginPage2(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
-		openAndValidate();
+		//openAndValidate();
 	}
 
 	public Object loginWith(String username, String password) throws InterruptedException {
@@ -196,6 +203,24 @@ public class LoginPage2 extends UhcDriver {
 		// validate(loginIn);
 
 	}
+	
+	public void navigateToNewDashboardUrl(){
+		if (MRScenario.environment.equalsIgnoreCase("stage"))
+		{
+			start(STAGE_DASHBOARD_URL);
+			System.out.println("User is Navigating to Stage Dashboard");
+		}
+		else if (MRScenario.environment.equalsIgnoreCase("team-ci1")) {
+			
+			start(MRConstants.REDESIGN_LOGIN_URL);
+			System.out.println("user is on Team-Ci1 Environment");
+		}
+		else
+		{
+			start(PAGE_URL_TEAM_MEDICARE_TESTHARNESS);
+			System.out.println("User is on Medicare Test harness page");	
+		}
+	}
 
 	public static boolean isAlertPresent(WebDriver wd) {
 		try {
@@ -256,6 +281,43 @@ public class LoginPage2 extends UhcDriver {
 		else if (currentUrl().contains("terminated-plan.html")) {
 			return new TerminatedHomePage(driver);
 		}
+		return null;
+	}
+	
+	public Object doLoginWith(String username, String password) {
+
+		sendkeys(userNameField, username);
+		sendkeys(passwordField, password);
+		signInButton.click();
+		if ( MRScenario.environment.equals("team-ci1")){
+
+			Alert alert = driver.switchTo().alert();
+			alert.accept();
+		} 
+		try{
+			Thread.sleep(40000);
+			if (validate(iPerceptionPopUp)) {
+				System.out.println("iPerceptionPopUp is Displayed");
+				iPerceptionPopUp.click();
+			}
+		}catch(Exception e)        {
+			System.out.println("iPerception Pop Up not displayed");
+		}
+
+		if(currentUrl().contains("testharness.html") || currentUrl().contains("/dashboard"))
+
+		{
+			return new AccountHomePage(driver);
+		}
+		else if(currentUrl().contains("home/my-account-home.html")  || currentUrl().contains("/login.html") ) {
+			return new AccountHomePage(driver);
+		}
+		else if (currentUrl().contains("terminated-plan.html")) {
+			return new TerminatedHomePage(driver);
+		}
+
+		System.out.println("teamhloginWith is returing null. Please Update the above condition As per your Needs");
+
 		return null;
 	}
 

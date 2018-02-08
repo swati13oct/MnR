@@ -33,6 +33,7 @@ import acceptancetests.atdd.data.CommonConstants;
 import acceptancetests.atdd.data.PageData;
 import acceptancetests.atdd.util.CommonUtility;
 import acceptancetests.login.data.LoginCommonConstants;
+import atdd.framework.MRScenario;
 import atdd.framework.UhcDriver;
 
 
@@ -294,7 +295,21 @@ private WebElement searchforproviderlinkinClaimsPage;
         private WebElement searchProviderLinkinFormsandResourcePage;
         
 
+        @FindBy(xpath="html/body/div[2]/div/div[4]/div[2]/div/table/tbody/tr[4]/td[2]/a")
+    	private WebElement linkbenefit;  
         
+        @FindBy(xpath=".//*[@id='IPEinvL']/map/area[2]")
+        private WebElement iPerceptionPopUp;
+        
+        @FindBy(xpath="html/body/div[2]/div/div[4]/div[2]/div/table/tbody/tr[4]/td[2]/a")
+    	private WebElement benefitcoveragelink;
+        
+        @FindBy(xpath="html/body/div[2]/div/div[4]/div[2]/div/table/tbody/tr[6]/td[2]/a")
+        private WebElement profilenpreferenceslink;
+        
+        
+        @FindBy(xpath="//header//h1")
+    	private WebElement heading;
         
         private PageData myAccountHome;
 
@@ -324,6 +339,49 @@ private WebElement searchforproviderlinkinClaimsPage;
                 PageFactory.initElements(driver, this);
 //                openAndValidate();
         }
+        
+        public BenefitsAndCoveragePage navigateDirectToBnCPag() {
+    		try {
+    			Thread.sleep(10000);
+    		} catch (InterruptedException e) {
+    			e.printStackTrace();
+    		}
+    		if (validate(iPerceptionPopUp)) {
+                iPerceptionPopUp.click();
+                System.out.println("iPerception Pop Up displayed");
+    		}
+    		if (MRScenario.environment.equals("team-ci1") || MRScenario.environment.equals("team-h") || MRScenario.environment.equals("test-a") || MRScenario.environment.equals("team-e")) {
+    			benefitcoveragelink.click();
+    		}else{
+    			linkbenefit.click();
+    		}
+    		CommonUtility.waitForPageLoad(driver, heading, 50);
+    		if(driver.getTitle().equalsIgnoreCase("Benefits Overview"))
+    		{
+    			return new BenefitsAndCoveragePage(driver);
+    		}
+    		return null;
+    	}
+        
+        public ProfilePreferencesPage navigateDirectToProfilePage() throws InterruptedException  {
+    		
+    		if (validate(iPerceptionPopUp)) {
+                iPerceptionPopUp.click();
+                System.out.println("iPerception Pop Up displayed");
+    		}
+    		if (MRScenario.environment.equals("team-ci1") || MRScenario.environment.equals("team-h") || MRScenario.environment.equals("test-a") || MRScenario.environment.equals("team-e")) {
+    			profilenpreferenceslink.click();
+    		}else{
+    			profilenpreferenceslink.click();
+    		}
+    		CommonUtility.waitForPageLoad(driver, heading, 50);
+    		if(driver.getTitle().equalsIgnoreCase("Profile"))
+    		{
+    			return new ProfilePreferencesPage(driver);
+    		}
+    		
+    		return null;
+    	}
 
         public String getMyPlans() {
                 return planBox.getText();

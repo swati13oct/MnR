@@ -1,9 +1,12 @@
 
-package acceptancetests.memberredesign;
+package acceptancetests.memberredesign.Profileandpreferences;
 
 import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import org.json.JSONObject;
 import org.junit.Assert;
@@ -19,6 +22,9 @@ import cucumber.api.DataTable;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
+import gherkin.formatter.model.DataTableRow;
+import pages.member.bluelayer.AccountHomePage;
+import pages.member.bluelayer.BenefitsAndCoveragePage;
 import pages.member.bluelayer.DashboardPage;
 import pages.member.bluelayer.LoginPage2;
 import pages.member.bluelayer.ProfilePreferencesPage;
@@ -44,11 +50,23 @@ public class ProfileandPreferencesUMSStepDefinition {
 	@Given("^registered member with following details for Profile and Preferences flow$")
 	public void login_with_member(DataTable memberAttributes) throws InterruptedException {
 		/* Reading the given attribute from feature file */
-		List<List<String>> dataTable = memberAttributes.raw();
-		List<String> desiredAttributes = new ArrayList<String>();
+		List<DataTableRow> memberAttributesRow = memberAttributes.getGherkinRows();
+		Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
 
-		for (List<String> data : dataTable) {
-			desiredAttributes.add(data.get(0));
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+					memberAttributesRow.get(i).getCells().get(1));
+		}
+
+		//String category = memberAttributesMap.get("Member Type");
+		Set<String> memberAttributesKeySet = memberAttributesMap.keySet();
+		List<String> desiredAttributes = new ArrayList<String>();
+		for (Iterator<String> iterator = memberAttributesKeySet.iterator(); iterator.hasNext();) {
+			{
+				String key = iterator.next();
+				desiredAttributes.add(memberAttributesMap.get(key));
+			}
+
 		}
 		System.out.println("desiredAttributes.." + desiredAttributes);
 
@@ -67,23 +85,24 @@ public class ProfileandPreferencesUMSStepDefinition {
 			getLoginScenario().saveBean(LoginCommonConstants.USERNAME, userName);
 			getLoginScenario().saveBean(LoginCommonConstants.PASSWORD, pwd);
 		}
-
 		WebDriver wd = getLoginScenario().getWebDriver();
 		// MRScenario.keyEvent(wd);
 
 		LoginPage2 loginPage = new LoginPage2(wd);
-		DashboardPage dashboardPage = (DashboardPage) loginPage.loginWith(userName, pwd);
-
-		if (dashboardPage != null) {
+		loginPage.navigateToNewDashboardUrl();
+		getLoginScenario().saveBean(PageConstants.LOGIN_PAGE, loginPage);
+		AccountHomePage accountHomePage = (AccountHomePage) loginPage.doLoginWith(userName, pwd);
+		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
+		getLoginScenario().saveBean(PageConstants.ACCOUNT_HOME_PAGE,accountHomePage);
+		Assert.assertTrue(true);
+		
+		if (accountHomePage!= null) {
 			getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
-			getLoginScenario().saveBean(PageConstants.dashboardPage, dashboardPage);
+			getLoginScenario().saveBean(PageConstants.ACCOUNT_HOME_PAGE, accountHomePage);
 
+		} else {
+			System.out.println("Null Dashboard page");
 		}
-		else
-		{
-			System.out.println("NULL Dashboard page");
-		}
-
 
 		// JSONObject accountHomeActualJson = null;
 
@@ -117,23 +136,20 @@ public class ProfileandPreferencesUMSStepDefinition {
 	 */
 	@Then("^the user navigates to Profile and Preferences page")
 	public void user_navigate_toProfileandPreferencespage() throws InterruptedException {
+        
+		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstants.ACCOUNT_HOME_PAGE);
 
-		DashboardPage dashboardPage = (DashboardPage) getLoginScenario().getBean(PageConstants.dashboardPage);
-		ProfilePreferencesPage ProfilePreferencesPage = dashboardPage.navigateDirectToProfilePage();
+		ProfilePreferencesPage ProfilePreferencesPage = accountHomePage.navigateDirectToProfilePage();
 
-		if (ProfilePreferencesPage != null) {
+		if (ProfilePreferencesPage!= null) {
 			getLoginScenario().saveBean(PageConstants.PROFILE_AND_PREFERENCES_PAGE, ProfilePreferencesPage);
-
 		}
-
 		else
-
-		{
-			System.out.println("Null returned while opening profile and Preferences page from Dashboard");
+        {
+			System.out.println("Benefits and Coverage page object is Null ");
 		}
 
 	}
-
 	/*@Then("^the user navigates to Profile page")
 	public void user_navigate_toProfilepage() {
 		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstants.ACCOUNT_HOME_PAGE);

@@ -333,7 +333,7 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 		PageFactory.initElements(driver, this);
 		String fileName = CommonConstants.BENEFITS_AND_COVERAGE_PAGE_DATA;
 		benefitsCoverage = CommonUtility.readPageData(fileName, CommonConstants.PAGE_OBJECT_DIRECTORY_BLAYER_MEMBER);
-		openAndValidate();
+		//openAndValidate();
 	}
 
 

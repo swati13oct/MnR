@@ -64,19 +64,15 @@ Feature: To test plan benefits and Coverage on UMS site
       | Member Type    | <memberType>|
       | Copay Category | <copayCategory>|
     Then the user navigates to Benefits and coverage page
-    And the user validates the content on benefits and coverage page
     And the user validates view and document label
     And the user validates the language dropdown and the value displayed by default and selects new value in dropdown successfully
        | Language | <language> |
        
     Examples:
       
-      | planType|  memberType  | copayCategory | language |
-      | MAPD    |  Individual  |   LIS 1       | SPANISH  |
-      | MA      |  Individual  |   LIS 1       | CHINESE  |
-      | MAPD    |  Individual  |  NON LIS      | SPANISH  |
-      | PDP     |  Individual  |  NON LIS      | CHINESE  |
-      | PDP     |  Individual  |   LIS 4       | CHINESE  |
+       | planType|  memberType  | copayCategory | language |
+       | MAPD    |  Individual  |  NON LIS      | SPANISH  |
+     
    
    
      @CMAncillarysection1

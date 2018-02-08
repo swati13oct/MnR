@@ -1,4 +1,4 @@
-package acceptancetests.memberredesign;
+package acceptancetests.memberredesign.benefitandcoverage;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -90,11 +90,17 @@ public class BenefitsAndCoverageUmsStepDefinition {
 		// MRScenario.keyEvent(wd);
 
 		LoginPage2 loginPage = new LoginPage2(wd);
-		DashboardPage dashboardPage = (DashboardPage) loginPage.loginWith(userName, pwd, category);
+		loginPage.navigateToNewDashboardUrl();
+		getLoginScenario().saveBean(PageConstants.LOGIN_PAGE, loginPage);
+		AccountHomePage accountHomePage = (AccountHomePage) loginPage.doLoginWith(userName, pwd);
+		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
+		getLoginScenario().saveBean(PageConstants.ACCOUNT_HOME_PAGE,accountHomePage);
+		Assert.assertTrue(true);
+		
 
-		if (dashboardPage != null) {
+		if (accountHomePage!= null) {
 			getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
-			getLoginScenario().saveBean(PageConstants.dashboardPage, dashboardPage);
+			getLoginScenario().saveBean(PageConstants.ACCOUNT_HOME_PAGE, accountHomePage);
 
 		} else {
 			System.out.println("Null Dashboard page");
@@ -133,15 +139,13 @@ public class BenefitsAndCoverageUmsStepDefinition {
 	@Then("^the user navigates to Benefits and coverage page$")
 	public void user_views_BenefitsAndCoveragejenkins1() {
 
-		DashboardPage dashboardPage = (DashboardPage) getLoginScenario().getBean(PageConstants.dashboardPage);
+		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstants.ACCOUNT_HOME_PAGE);
 
-		BenefitsAndCoveragePage benefitsCoveragePage = dashboardPage.navigateDirectToBnCPag();
+		BenefitsAndCoveragePage benefitsCoveragePage = accountHomePage.navigateDirectToBnCPag();
 
 		if (benefitsCoveragePage != null) {
 			getLoginScenario().saveBean(PageConstants.BENEFITS_AND_COVERAGE_PAGE, benefitsCoveragePage);
-
 		}
-
 		else
 
 		{
@@ -212,9 +216,9 @@ public class BenefitsAndCoverageUmsStepDefinition {
 	@Then("^the user navigates to Benefits coverage page$")
 	public void user_views_BenefitsAndCoveragejenkins() {
 
-		DashboardPage dashboardPage = (DashboardPage) getLoginScenario().getBean(PageConstants.dashboardPage);
+		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstants.dashboardPage);
 
-		BenefitsAndCoveragePage benefitsCoveragePage = dashboardPage.navigateDirectToBnCPag();
+		BenefitsAndCoveragePage benefitsCoveragePage = accountHomePage.navigateDirectToBnCPag();
 
 		if (benefitsCoveragePage != null) {
 			getLoginScenario().saveBean(PageConstants.BENEFITS_AND_COVERAGE_PAGE, benefitsCoveragePage);

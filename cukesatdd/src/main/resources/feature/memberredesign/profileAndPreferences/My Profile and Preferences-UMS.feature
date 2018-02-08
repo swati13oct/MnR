@@ -19,19 +19,18 @@ Feature: To test Profile and Preferences page .
          |SHIP      |
        
        
-        @CMValidatePlanNamemembernameIDAccountSectionUMS
-  Scenario Outline: To verify Plan Name, Member name, Member ID and account section in UMS site
+    @CMValidatePlanNamemembernameIDAccountSectionUMS
+   Scenario Outline: To verify Plan Name, Member name, Member ID and account section in UMS site
     Given registered member with following details for Profile and Preferences flow
-      | <planType> |
+      | Plan Type   | <plantype>   |
+      | Member Type | <memberType> |
     Then the user navigates to Profile and Preferences page
     Then the user validates the Plan Name, Member name, Member ID and account section in UMS site
 
     Examples: 
-         | planType|
-         | MAPD     |
-          | MA       |
-         |PDP       |
-         |SHIP      |
+      | plantype | memberType |
+      | MAPD     | Individual |
+      | MA       | Individual |
 
 
   @CMPasswordEdit
@@ -118,18 +117,16 @@ Feature: To test Profile and Preferences page .
             @CMEmailEdit1
   Scenario Outline: To verify Email section in AARP site
     Given registered member with following details for Profile and Preferences flow
-      | <planType> |
+      | Plan Type   | <plantype>   |
+      | Member Type | <memberType> |
     When the user navigates to Profile and Preferences page
     Then the user clicks on edit button
     Then the user clicks on save without filling both fields then the user should see red mandatory message
     Then the user fill new email address and click save then user should see new updated email on page
 
     Examples: 
-        | planType|
-         | MAPD     |
-          | MA       |
-        |PDP       |
-         |SHIP      |
+      | plantype | memberType |
+      | MAPD     | Individual |
           
           
           
