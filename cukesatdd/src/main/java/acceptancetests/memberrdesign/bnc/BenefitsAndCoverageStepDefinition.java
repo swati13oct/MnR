@@ -29,6 +29,7 @@ import pages.member.bluelayer.LoginPage2;
 import pages.member.bluelayer.ProfilePreferencesPage;
 import pages.member.ulayer.PlanBenefitsCoveragePage;
 import pages.member.ulayer.TeamHLoginUlayer;
+import pages.member.ulayer.TestHarness;
 import acceptancetests.atdd.data.CommonConstants;
 import acceptancetests.atdd.data.member.PageConstants;
 import acceptancetests.benefitsandcoverage.data.PlanBenefitsAndCoverageCommonConstants;
@@ -105,7 +106,7 @@ public class BenefitsAndCoverageStepDefinition {
 		
 		TeamHLoginUlayer THloginPage = new TeamHLoginUlayer(wd);
 		getLoginScenario().saveBean(PageConstants.LOGIN_PAGE, THloginPage);
-		RallyDashboardPage rallyDashboard = (RallyDashboardPage) THloginPage.loginWith(userName, pwd);
+/*		RallyDashboardPage rallyDashboard = (RallyDashboardPage) THloginPage.loginWith(userName, pwd);
 		if (rallyDashboard != null) {
 			getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
 			getLoginScenario().saveBean(PageConstants.RALLY_DASHBOARD_PAGE,
@@ -114,7 +115,28 @@ public class BenefitsAndCoverageStepDefinition {
 		}
 		else{
 			Assert.fail("Member login not successful....");
+		}*/
+		if(("YES").equalsIgnoreCase(MRScenario.isTestHarness)){
+			TestHarness testHarness = (TestHarness) THloginPage.loginWith(userName, pwd);
+			if (testHarness != null) {
+				getLoginScenario().saveBean(PageConstants.TEST_HARNESS_PAGE,
+						testHarness);		}
+			else{
+				Assert.fail("Login not successful...");
+			}
 		}
+		else{
+			
+		
+		RallyDashboardPage rallyDashboard = (RallyDashboardPage) THloginPage.loginWith(userName, pwd);
+		if (rallyDashboard != null) {
+			getLoginScenario().saveBean(PageConstants.RALLY_DASHBOARD_PAGE,
+					rallyDashboard);		}
+		else{
+			Assert.fail("Login not successful...");
+		}
+		}
+		
 		/*AccountHomePage accountHomePage = (AccountHomePage) loginPage.loginWith(userName, pwd, category);
 
 		if (accountHomePage != null) {
@@ -1017,17 +1039,23 @@ public void user_validate_OutofPocket() {
 }
 
 @And("^the user navigates to Rally Dashboard Page for bnc$")
-public void user_navigates_to_RallyDashboardPage_Page() throws InterruptedException
-{
+public void user_navigates_to_RallyDashboardPage_Page() throws InterruptedException{
+	BenefitsAndCoveragePage benefitsCoveragePage;
+	if("YES".equalsIgnoreCase(MRScenario.isTestHarness)){
+		TestHarness testHarness = (TestHarness) getLoginScenario().getBean(PageConstants.TEST_HARNESS_PAGE);
+		
+		benefitsCoveragePage= testHarness.navigateDirectToBnCPag();
+	}else{
 	RallyDashboardPage rallyDashboardPage = (RallyDashboardPage)getLoginScenario().getBean(PageConstants.RALLY_DASHBOARD_PAGE);
-	BenefitsAndCoveragePage benefitsCoveragePage= rallyDashboardPage.navigateDirectToBnCPag();
-
-	if (benefitsCoveragePage != null) {
-		getLoginScenario().saveBean(PageConstants.BENEFITS_AND_COVERAGE_PAGE, benefitsCoveragePage);
-}
-	if (benefitsCoveragePage == null) {
+	benefitsCoveragePage= rallyDashboardPage.navigateDirectToBnCPag();
+	}
+	
+	if (null == benefitsCoveragePage) {
 		System.out.println("Benefits and Coverage page is not loaded!!!");
 		Assert.fail("Benefits and Coverage page is not loaded!!!");
+	}
+	else{
+			getLoginScenario().saveBean(PageConstants.BENEFITS_AND_COVERAGE_PAGE, benefitsCoveragePage);
 	}
 	
 }

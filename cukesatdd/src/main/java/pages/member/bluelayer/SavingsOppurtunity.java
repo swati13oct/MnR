@@ -30,15 +30,17 @@ public class SavingsOppurtunity extends UhcDriver{
 	@FindBy(id="save-drug-button")
 	public WebElement savedrugbutton;
 	
-	@FindBy(xpath=".//*[@id='popup4']/header/span[contains(text(),' SAVINGS OPPORTUNITY')]")
+	@FindBy(xpath=".//*[@id='popup4']/header/span[contains(text(),'Save')]")
 	public WebElement SwitchGenericPage;
 	
+	@FindBy(className = "loading-dialog")
+	public List<WebElement> loadingImages;
 	
 	public SavingsOppurtunity(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
 		CommonUtility.waitForPageLoad(driver, SwitchGenericPage, 10);
-		String fileName = CommonConstants.SWITCH_GENERIC_PAGE_DATA;
+		//String fileName = CommonConstants.SWITCH_GENERIC_PAGE_DATA;
 		//switchgeneric = CommonUtility.readPageData(fileName,
 			//	CommonConstants.PAGE_OBJECT_DIRECTORY_BLAYER_MEMBER);
 		//openAndValidate();
@@ -71,11 +73,17 @@ public class SavingsOppurtunity extends UhcDriver{
 		return newPaymentHistoryExpectedJson;
 	}
 	public void savedrugbutton() throws InterruptedException {
-		Thread.sleep(10000);
+		if(!(loadingImages.isEmpty())){
+			CommonUtility.waitForElementToDisappear(driver, loadingImages.get(0), 15);
+			}
+		//Thread.sleep(10000);
 		validate(savedrugbutton);
 		//waitforElement(savedrugbutton);
 		savedrugbutton.click();
-		Thread.sleep(15000);
+		if(!(loadingImages.isEmpty())){
+			CommonUtility.waitForElementToDisappear(driver, loadingImages.get(0), 60);
+			}
+		//Thread.sleep(15000);
 		// TODO Auto-generated method stub
 		
 	}

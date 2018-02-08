@@ -23,10 +23,12 @@ import gherkin.formatter.model.DataTableRow;
 import pages.member.bluelayer.DrugCostEstimatorPage;
 import pages.dashboard.member.ulayer.RallyDashboardPage;
 import pages.member.bluelayer.AccountHomePage;
+import pages.member.bluelayer.BenefitsAndCoveragePage;
 import pages.member.bluelayer.HealthAndWellness;
 import pages.member.bluelayer.LoginPage;
 import pages.member.bluelayer.ProfilePreferencesPage;
 import pages.member.ulayer.TeamHLoginUlayer;
+import pages.member.ulayer.TestHarness;
 
 public class MemberRedesignHealthnWellnessStepDefinition {
 	
@@ -101,7 +103,7 @@ public class MemberRedesignHealthnWellnessStepDefinition {
 		WebDriver wd = (WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
 		TeamHLoginUlayer THloginPage = new TeamHLoginUlayer(wd);
 		getLoginScenario().saveBean(PageConstants.LOGIN_PAGE, THloginPage);
-		RallyDashboardPage rallyDashboard = (RallyDashboardPage) THloginPage.loginWith(userName, pwd);
+		/*RallyDashboardPage rallyDashboard = (RallyDashboardPage) THloginPage.loginWith(userName, pwd);
 		if (rallyDashboard != null) {
 			getLoginScenario().saveBean(PageConstants.RALLY_DASHBOARD_PAGE,
 					rallyDashboard);
@@ -109,6 +111,26 @@ public class MemberRedesignHealthnWellnessStepDefinition {
 		}
 		else{
 			Assert.fail("Member login not successful....");
+		}*/
+		if(("YES").equalsIgnoreCase(MRScenario.isTestHarness)){
+			TestHarness testHarness = (TestHarness) THloginPage.loginWith(userName, pwd);
+			if (testHarness != null) {
+				getLoginScenario().saveBean(PageConstants.TEST_HARNESS_PAGE,
+						testHarness);		}
+			else{
+				Assert.fail("Login not successful...");
+			}
+		}
+		else{
+			
+		
+		RallyDashboardPage rallyDashboard = (RallyDashboardPage) THloginPage.loginWith(userName, pwd);
+		if (rallyDashboard != null) {
+			getLoginScenario().saveBean(PageConstants.RALLY_DASHBOARD_PAGE,
+					rallyDashboard);		}
+		else{
+			Assert.fail("Login not successful...");
+		}
 		}
 		/*LoginPage loginPage = new LoginPage(wd);
 		loginPage.loginToStageTestHarness();
@@ -133,10 +155,15 @@ public class MemberRedesignHealthnWellnessStepDefinition {
 	
 	@When("^then click the health and wellness tab$")
 	public void then_click_the_health_and_wellness_tab() {
-	    // Express the Regexp above with the code you wish you had
+		HealthAndWellness healthAndWellness;
+		if("YES".equalsIgnoreCase(MRScenario.isTestHarness)){
+			TestHarness testHarness = (TestHarness) getLoginScenario().getBean(PageConstants.TEST_HARNESS_PAGE);
+			
+			healthAndWellness= testHarness.clickHealthnWellnessTab();
+		}else{
 		RallyDashboardPage rallyDashboardPage = (RallyDashboardPage)getLoginScenario().getBean(PageConstants.RALLY_DASHBOARD_PAGE);
-		HealthAndWellness healthAndWellness = rallyDashboardPage.clickHealthnWellnessTab();
-
+		healthAndWellness = rallyDashboardPage.clickHealthnWellnessTab();
+		}
 		if (healthAndWellness!= null) {
 			getLoginScenario().saveBean(PageConstants.MEM_REDESIGN_HEALTH_AND_WELLNESS_PAGE, healthAndWellness);
 		}

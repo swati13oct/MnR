@@ -214,7 +214,7 @@ public class EOBPage extends UhcDriver{
 		List<WebElement> datesDisplayed = driver.findElements(By.xpath(".//*[@id='eoblist0']/p"));*/
 		if(listOfEOBs.size()==pdfIcon.size()&& listOfEOBs.size()== fileType.size() &&
 				listOfEOBs.size()==datesDisplayed.size()){
-			driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS); 
+			//driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS); 
 			// Code optimization required for same logic
 			for(int i=0; i<=pdfIcon.size()-1;i++){
 				if(pdfIcon.get(i).isDisplayed()){			 
@@ -339,7 +339,7 @@ public class EOBPage extends UhcDriver{
 	}
 	
 	public void validateDateRangeContentDisplayed(String dateRangeValue){
-		if(loadingImages.size()>0){
+		if(!(loadingImages.isEmpty())){
 			CommonUtility.waitForElementToDisappear(driver, loadingImages.get(0), 120);
 			}
 	if(dateRangeValue.contains("custom")){

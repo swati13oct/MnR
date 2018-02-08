@@ -35,10 +35,12 @@ import pages.acquisition.uhcretiree.RetireesOfSelectedPlans;
 import pages.dashboard.member.ulayer.ClaimDetailsPage;
 import pages.dashboard.member.ulayer.ClaimSummarypage;
 import pages.dashboard.member.ulayer.RallyDashboardPage;
+import pages.member.bluelayer.BenefitsAndCoveragePage;
 import pages.member.ulayer.AccountHomePage;
 import pages.member.ulayer.ClaimSummaryPage;
 import pages.member.ulayer.LoginPage;
 import pages.member.ulayer.TeamHLoginUlayer;
+import pages.member.ulayer.TestHarness;
 
 public class ClaimsRedesignStepDefinition {
 	@Autowired
@@ -114,7 +116,7 @@ public class ClaimsRedesignStepDefinition {
 		}*/
 		TeamHLoginUlayer THloginPage = new TeamHLoginUlayer(wd);
 		getLoginScenario().saveBean(PageConstants.LOGIN_PAGE, THloginPage);
-		RallyDashboardPage rallyDashboard = (RallyDashboardPage) THloginPage.loginWith(userName, pwd);
+		/*RallyDashboardPage rallyDashboard = (RallyDashboardPage) THloginPage.loginWith(userName, pwd);
 		if (rallyDashboard != null) {
 			getLoginScenario().saveBean(PageConstants.RALLY_DASHBOARD_PAGE,
 					rallyDashboard);
@@ -122,19 +124,41 @@ public class ClaimsRedesignStepDefinition {
 		}
 		else{
 			Assert.fail("Member login not successful.....");
+		}*/
+		if(("YES").equalsIgnoreCase(MRScenario.isTestHarness)){
+			TestHarness testHarness = (TestHarness) THloginPage.loginWith(userName, pwd);
+			if (testHarness != null) {
+				getLoginScenario().saveBean(PageConstants.TEST_HARNESS_PAGE,
+						testHarness);		}
+			else{
+				Assert.fail("Login not successful...");
+			}
+		}
+		else{
+			
+		
+		RallyDashboardPage rallyDashboard = (RallyDashboardPage) THloginPage.loginWith(userName, pwd);
+		if (rallyDashboard != null) {
+			getLoginScenario().saveBean(PageConstants.RALLY_DASHBOARD_PAGE,
+					rallyDashboard);		}
+		else{
+			Assert.fail("Login not successful...");
+		}
 		}
 	}
 
 	@When("^I navigate to the claims Summary page in redesigned site$")
 	public void navigate_Claims_Summary_redesigned(){
-		//AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstants.ACCOUNT_HOME_PAGE);
-		
-		
-		//WebDriver wd = (WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
-		//RallyDashboardPage rallyDashboard = new RallyDashboardPage(wd);
+		ClaimSummarypage newClaimsSummaryPage;
+		if("YES".equalsIgnoreCase(MRScenario.isTestHarness)){
+			TestHarness testHarness = (TestHarness) getLoginScenario().getBean(PageConstants.TEST_HARNESS_PAGE);
+			
+			newClaimsSummaryPage= testHarness.navigateToClaimsSummaryPage();
+		}else{
 		RallyDashboardPage rallyDashboard = (RallyDashboardPage) getLoginScenario().getBean(PageConstants.RALLY_DASHBOARD_PAGE);
 
-		ClaimSummarypage newClaimsSummaryPage = rallyDashboard.navigateToClaimsSummaryPage();
+		newClaimsSummaryPage = rallyDashboard.navigateToClaimsSummaryPage();
+		}
 		if(newClaimsSummaryPage != null)
 			getLoginScenario().saveBean(PageConstants.NEW_CLAIMS_SUMMARY_PAGE, newClaimsSummaryPage);
 	}

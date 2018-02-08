@@ -41,13 +41,17 @@ public class AddDrugDetails extends UhcDriver {
 	
 	@FindBy(id = "frequency")
 	public WebElement selectYourFrequencyDropdown;
+	
+	@FindBy(className = "loading-dialog")
+	public List<WebElement> loadingImages;
+	
 	public AddDrugDetails(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
 		//CommonUtility.waitForPageLoad(driver, addDrugDetailsPage, 10);
-		String fileName = CommonConstants.ADD_DRUG_DETAILS_PAGE_DATA;
-		adddrugdetails = CommonUtility.readPageData(fileName, CommonConstants.PAGE_OBJECT_DIRECTORY_DCE_MEMBER);
-		openAndValidate();
+		//String fileName = CommonConstants.ADD_DRUG_DETAILS_PAGE_DATA;
+		//adddrugdetails = CommonUtility.readPageData(fileName, CommonConstants.PAGE_OBJECT_DIRECTORY_DCE_MEMBER);
+		//openAndValidate();
 	}
 
 	@Override
@@ -106,7 +110,10 @@ public class AddDrugDetails extends UhcDriver {
 		//waitforElement(continueButton);
 		continueButton.click();
 		//continueButton.click();
-		Thread.sleep(12000);
+		//Thread.sleep(12000);
+		if(!(loadingImages.isEmpty())){
+			CommonUtility.waitForElementToDisappear(driver, loadingImages.get(0), 120);
+			}
 		return new SavingsOppurtunity(driver);
 		}
 	

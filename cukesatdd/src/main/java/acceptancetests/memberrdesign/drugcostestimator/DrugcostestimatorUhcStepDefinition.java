@@ -24,9 +24,11 @@ import gherkin.formatter.model.DataTableRow;
 import pages.dashboard.member.ulayer.RallyDashboardPage;
 import pages.member.bluelayer.AddDrugDetails;
 import pages.member.bluelayer.AddNewDrugModal;
+import pages.member.bluelayer.BenefitsAndCoveragePage;
 import pages.member.bluelayer.DrugCostEstimatorPage;
 import pages.member.bluelayer.SavingsOppurtunity;
 import pages.member.ulayer.TeamHLoginUlayer;
+import pages.member.ulayer.TestHarness;
 
 
 public class DrugcostestimatorUhcStepDefinition {
@@ -156,7 +158,25 @@ System.out.println("value - "+memberAttributesRow.get(i).getCells().get(1));
 		
 		TeamHLoginUlayer THloginPage = new TeamHLoginUlayer(wd);
 		getLoginScenario().saveBean(PageConstants.LOGIN_PAGE, THloginPage);
+		if(("YES").equalsIgnoreCase(MRScenario.isTestHarness)){
+			TestHarness testHarness = (TestHarness) THloginPage.loginWith(userName, pwd);
+			if (testHarness != null) {
+				getLoginScenario().saveBean(PageConstants.TEST_HARNESS_PAGE,
+						testHarness);		}
+			else{
+				Assert.fail("Login not successful...");
+			}
+		}
+		else{	
 		RallyDashboardPage rallyDashboard = (RallyDashboardPage) THloginPage.loginWith(userName, pwd);
+		if (rallyDashboard != null) {
+			getLoginScenario().saveBean(PageConstants.RALLY_DASHBOARD_PAGE,
+					rallyDashboard);		}
+		else{
+			Assert.fail("Login not successful...");
+		}
+		}
+		/*RallyDashboardPage rallyDashboard = (RallyDashboardPage) THloginPage.loginWith(userName, pwd);
 		if (rallyDashboard != null) {
 			getLoginScenario().saveBean(PageConstants.RALLY_DASHBOARD_PAGE,
 					rallyDashboard);
@@ -164,7 +184,7 @@ System.out.println("value - "+memberAttributesRow.get(i).getCells().get(1));
 		}
 		else{
 			Assert.fail("Member login not successful....");
-		}
+		}*/
 		
 		/*LoginPage loginPage = new LoginPage(wd);
 		loginPage.loginToStageTestHarness();
@@ -178,12 +198,17 @@ System.out.println("value - "+memberAttributesRow.get(i).getCells().get(1));
 	
 	@When("^I access the page containing the DCE tool$")
 	public void I_access_the_page_containing_the_DCE_tool() throws InterruptedException {
-
+		DrugCostEstimatorPage dcePage;
+		if("YES".equalsIgnoreCase(MRScenario.isTestHarness)){
+			TestHarness testHarness = (TestHarness) getLoginScenario().getBean(PageConstants.TEST_HARNESS_PAGE);
+			
+			dcePage= testHarness.navigateToDCEPage();
+		}else{
 		RallyDashboardPage rallyDashBoard = (RallyDashboardPage) getLoginScenario().getBean(PageConstants.RALLY_DASHBOARD_PAGE);
 		//RallyDashboardPage dce = new RallyDashboardPage(wd);
-		DrugCostEstimatorPage dcePage = rallyDashBoard.navigateToDCEPage();
-		
-		if(dcePage!=null){
+		dcePage = rallyDashBoard.navigateToDCEPage();
+		}
+		if(null!=dcePage){
 			getLoginScenario().saveBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE, dcePage);
 		}
 

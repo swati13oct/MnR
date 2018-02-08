@@ -3,10 +3,16 @@ package pages.member.ulayer;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.openqa.selenium.Alert;
+import org.openqa.selenium.NoAlertPresentException;
+import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
+import com.itextpdf.text.log.SysoCounter;
 
 import acceptancetests.atdd.data.CommonConstants;
 import acceptancetests.atdd.data.MRConstants;
@@ -103,17 +109,19 @@ public class TeamHLoginUlayer extends UhcDriver{
 		sendkeys(passwordField,password);
 		signInButton.click();
 		System.out.println("Sign In clicked");
-			/*try{
-			System.out.println();
+			try{
 			Alert alert = driver.switchTo().alert();
 			alert.accept();
 			Alert alert1 = driver.switchTo().alert();
 			alert1.accept();
 			}catch(Exception e)		{
 				System.out.println("No Such alert displayed");
-			}*/
+			}
 		//CommonUtility.checkPageIsReady(driver);
+		WebDriverWait wait = new WebDriverWait(driver, 2);
+		Alert alert ;
 		int counter =0;
+		
 		do{
 			if(counter<=20){
 			Thread.sleep(5000);
@@ -124,6 +132,16 @@ public class TeamHLoginUlayer extends UhcDriver{
 				return null;
 			}
 			counter++;
+			try{
+				alert = wait.until(ExpectedConditions.alertIsPresent());
+				alert.accept();
+			}catch(NoAlertPresentException ex){
+				System.out.println("NoAlertPresentException - No Aert Presernt...");
+			}
+			catch(TimeoutException ex){
+				System.out.println("TimeoutException - No Aert Presernt...");
+			}
+			
 			if(driver.getTitle().contains("Internal Error") || driver.getTitle().contains("Sign In")){
 				System.out.println("Error !!!");
 				return null;

@@ -14,7 +14,7 @@ And the user slects the desired date range
   | EOB Type			 |<eobType>|
 Then the user validates EOB count
 Then the user validates EOB statments displayed
-Then the user validates site leaving pop up  	
+#Then the user validates site leaving pop up  	
 Examples:
 	| planType  | memberType           |dateRange		  | eobType 		  |
 	| MAPD      | UHCIndividualEOB     |18 Months		  | Medical 		  |          

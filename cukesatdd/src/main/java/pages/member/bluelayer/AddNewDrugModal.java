@@ -28,9 +28,9 @@ public class AddNewDrugModal extends UhcDriver {
 	public WebElement searchButton;
 
 
-	@FindBy(xpath = "//header[@class='add-drug-slide-header']/span[contains(text(),'ADD A NEW DRUG')]")
+	@FindBy(xpath = "//header[@class='add-drug-slide-header']/span[contains(text(),'Add') and contains(text(),'Drug')]")
 	public WebElement addNewDrugHeading;
-
+	
 	@FindBy(xpath = "//a[text()='Cancel']")
 	public WebElement cancelButton;
 	
@@ -57,9 +57,9 @@ public class AddNewDrugModal extends UhcDriver {
 		super(driver);
 		PageFactory.initElements(driver, this);
 		CommonUtility.waitForPageLoad(driver, addNewDrugHeading, 10);
-		String fileName = CommonConstants.ADD_NEW_DRUG_PAGE_DATA;
-		addnewdrug = CommonUtility.readPageData(fileName, CommonConstants.PAGE_OBJECT_DIRECTORY_DCE_MEMBER);
-		openAndValidate();
+		//String fileName = CommonConstants.ADD_NEW_DRUG_PAGE_DATA;
+		//addnewdrug = CommonUtility.readPageData(fileName, CommonConstants.PAGE_OBJECT_DIRECTORY_DCE_MEMBER);
+		//openAndValidate();
 	}
 	@Override
 	public void openAndValidate() {

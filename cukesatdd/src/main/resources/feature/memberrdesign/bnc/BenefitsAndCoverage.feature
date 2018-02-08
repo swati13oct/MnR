@@ -38,7 +38,6 @@ Feature: 1.01-To test plan benefits and Coverage functionality
     And the user view the Drug Copays & Discounts header 
     And user validates the Learn More section link for stage and tier
     And the user validates dropdown selection functionality
-    And the user validates Drug coverage header and text under the section
     And the user validates Look Up Drugs button should be visible
     And the user validates Locate a Pharmacy button should be visible
     #And the user should see drug copay and discount table(no code)

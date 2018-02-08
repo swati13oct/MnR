@@ -19,8 +19,10 @@ import cucumber.api.java.en.When;
 import cucumber.api.DataTable;
 import gherkin.formatter.model.DataTableRow;
 import pages.dashboard.member.ulayer.RallyDashboardPage;
+import pages.member.bluelayer.BenefitsAndCoveragePage;
 import pages.member.redesign.ContactUsPage;
 import pages.member.ulayer.TeamHLoginUlayer;
+import pages.member.ulayer.TestHarness;
 
 public class ContactusRedesignStepDefinition {
 	/**
@@ -51,7 +53,7 @@ public class ContactusRedesignStepDefinition {
 			getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
 			TeamHLoginUlayer THloginPage = new TeamHLoginUlayer(wd);
 			getLoginScenario().saveBean(PageConstants.LOGIN_PAGE, THloginPage);
-			RallyDashboardPage rallyDashboard = (RallyDashboardPage) THloginPage.loginWith(userName, passWord);
+			/*RallyDashboardPage rallyDashboard = (RallyDashboardPage) THloginPage.loginWith(userName, passWord);
 			if (rallyDashboard != null) {
 				getLoginScenario().saveBean(PageConstants.RALLY_DASHBOARD_PAGE,
 						rallyDashboard);
@@ -59,6 +61,26 @@ public class ContactusRedesignStepDefinition {
 			}
 			else{
 				Assert.fail("Member login not successful....");
+			}*/
+			if(("YES").equalsIgnoreCase(MRScenario.isTestHarness)){
+				TestHarness testHarness = (TestHarness) THloginPage.loginWith(userName, passWord);
+				if (testHarness != null) {
+					getLoginScenario().saveBean(PageConstants.TEST_HARNESS_PAGE,
+							testHarness);		}
+				else{
+					Assert.fail("Login not successful...");
+				}
+			}
+			else{
+				
+			
+			RallyDashboardPage rallyDashboard = (RallyDashboardPage) THloginPage.loginWith(userName, passWord);
+			if (rallyDashboard != null) {
+				getLoginScenario().saveBean(PageConstants.RALLY_DASHBOARD_PAGE,
+						rallyDashboard);		}
+			else{
+				Assert.fail("Login not successful...");
+			}
 			}
 			/*NewLoginPage loginPage = new NewLoginPage(wd);
 			
@@ -76,10 +98,17 @@ public class ContactusRedesignStepDefinition {
 		
 		@When("^the user navigates to contact us page in UHC site$")
 		public void validates_contactUs_Redesign_Page() {
-			
+			ContactUsPage contactUsPage;
+			if("YES".equalsIgnoreCase(MRScenario.isTestHarness)){
+				TestHarness testHarness = (TestHarness) getLoginScenario().getBean(PageConstants.TEST_HARNESS_PAGE);
+				
+				contactUsPage = testHarness.navigateToContactUsPage();
+
+			}else{
 			RallyDashboardPage rallyDashboardPage = (RallyDashboardPage) getLoginScenario().getBean(PageConstants.RALLY_DASHBOARD_PAGE);
 			
-			ContactUsPage contactUsPage = rallyDashboardPage.navigateToContactUsPage();
+			contactUsPage = rallyDashboardPage.navigateToContactUsPage();
+			}
 			if(contactUsPage != null)				
 				getLoginScenario().saveBean(PageConstants.CONTACT_US_PAGE,
 						contactUsPage);
@@ -92,9 +121,9 @@ public class ContactusRedesignStepDefinition {
 			
 			contactusPage.validateEmailWidgetfunctionality();
 			
-			if(contactusPage != null)				
+			/*if(contactusPage != null)				
 				getLoginScenario().saveBean(PageConstants.CONTACT_US_PAGE,
-						contactusPage);
+						contactusPage);*/
 			
 		}
 		
@@ -107,9 +136,9 @@ public class ContactusRedesignStepDefinition {
 			
 			contactusPage.validateEmailWidgetfunctionality();
 			
-			if(contactusPage != null)				
+			/*if(null!=contactusPage)				
 				getLoginScenario().saveBean(PageConstants.CONTACT_US_PAGE,
-						contactusPage);
+						contactusPage);*/
 			
 		}
 		@Then("^user validates cancel click on Group secure email widget  in redesign contact us page$")
@@ -119,9 +148,9 @@ public class ContactusRedesignStepDefinition {
 			
 			contactusPage.validateEmailWidgetSection();
 			
-			if(contactusPage != null)				
+			/*if(contactusPage != null)				
 				getLoginScenario().saveBean(PageConstants.CONTACT_US_PAGE,
-						contactusPage);
+						contactusPage);*/
 			
 		}
 		

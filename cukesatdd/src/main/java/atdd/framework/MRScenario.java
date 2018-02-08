@@ -43,6 +43,7 @@ import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.phantomjs.PhantomJSDriver;
 import org.openqa.selenium.phantomjs.PhantomJSDriverService;
+import org.openqa.selenium.remote.CapabilityType;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.springframework.stereotype.Component;
@@ -836,6 +837,9 @@ public class MRScenario {
                 capabilities.setCapability("autoAcceptsAlerts", true);
                 capabilities.setCapability("parent-tunnel", "sauce_admin");
                 capabilities.setCapability("tunnelIdentifier", "OptumSharedTunnel-Prd");
+                capabilities.setCapability(CapabilityType.ACCEPT_SSL_CERTS, true);
+               // capabilities.setCapability("--no-ssl-bump-domains", "all");
+                capabilities.setCapability("--no-ssl-bump-domains", "*.optum.com");
                 String SAUCE_USERNAME = props.get("SAUCE_USERNAME");
 	            String SAUCE_ACCESS_KEY = props.get("SAUCE_ACCESS_KEY");
                 //String URL = "http://" + USERNAME + ":" + ACCESS_KEY + "@ondemand.saucelabs.com:80/wd/hub";
@@ -845,9 +849,9 @@ public class MRScenario {
                                      "Missing value for environment variable(s) SAUCE_USERNAME or SAUCE_ACCESS_KEY.  Check environment configuration and try again");
                 }
                 try {
+                	
                 	webDriver = new RemoteWebDriver(new URL(URL), capabilities);
-                       
-                       return webDriver;
+                	webDriver.manage().deleteAllCookies();
                 } catch (MalformedURLException e) {
                        Assert.fail("Invalid Sauce URL: [" + URL + "]");
                 }

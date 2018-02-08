@@ -21,9 +21,11 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.skyscreamer.jsonassert.JSONAssert;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import pages.member.bluelayer.BenefitsAndCoveragePage;
 import pages.member.ulayer.OrderplanmaterialsPage;
 import pages.member.ulayer.PlanMaterialConfirmationPage;
 import pages.member.ulayer.TeamHLoginUlayer;
+import pages.member.ulayer.TestHarness;
 import pages.dashboard.member.ulayer.RallyDashboardPage;
 import acceptancetests.atdd.data.CommonConstants;
 import acceptancetests.atdd.data.member.PageConstants;
@@ -109,7 +111,7 @@ public class OrderPlanMaterialsRedesignStepDefinition {
 		//JSONObject accountHomeActualJson = null;
 		TeamHLoginUlayer THloginPage = new TeamHLoginUlayer(wd);
 		getLoginScenario().saveBean(PageConstants.LOGIN_PAGE, THloginPage);
-		RallyDashboardPage rallyDashboard = (RallyDashboardPage) THloginPage.loginWith(userName, pwd);
+		/*RallyDashboardPage rallyDashboard = (RallyDashboardPage) THloginPage.loginWith(userName, pwd);
 		if (rallyDashboard != null) {
 			getLoginScenario().saveBean(PageConstants.RALLY_DASHBOARD_PAGE,
 					rallyDashboard);
@@ -117,16 +119,40 @@ public class OrderPlanMaterialsRedesignStepDefinition {
 		}
 		else {
 			Assert.fail("***** Error in loading  Redesign Account Landing Page *****");
+		}*/
+		if(("YES").equalsIgnoreCase(MRScenario.isTestHarness)){
+			TestHarness testHarness = (TestHarness) THloginPage.loginWith(userName, pwd);
+			if (testHarness != null) {
+				getLoginScenario().saveBean(PageConstants.TEST_HARNESS_PAGE,
+						testHarness);		}
+			else{
+				Assert.fail("Login not successful...");
+			}
+		}
+		else{
+			
+		
+		RallyDashboardPage rallyDashboard = (RallyDashboardPage) THloginPage.loginWith(userName, pwd);
+		if (rallyDashboard != null) {
+			getLoginScenario().saveBean(PageConstants.RALLY_DASHBOARD_PAGE,
+					rallyDashboard);		}
+		else{
+			Assert.fail("Login not successful...");
+		}
 		}
 	}
 	
 	@When("^the user views order materials in Member Redesign Order Materials page$")
 	public void views_order_materials_in_Ums_site() {
+		OrderplanmaterialsPage orderPlanMaterialsPage;
+		if("YES".equalsIgnoreCase(MRScenario.isTestHarness)){
+			TestHarness testHarness = (TestHarness) getLoginScenario().getBean(PageConstants.TEST_HARNESS_PAGE);
+			
+			orderPlanMaterialsPage= testHarness.navigateToOrderPlanMaterialsPage();
+		}else{
 		RallyDashboardPage rallyDashboard = (RallyDashboardPage) getLoginScenario().getBean(PageConstants.RALLY_DASHBOARD_PAGE);
-		/*UlayerHomePage accountHomePage = (UlayerHomePage) getLoginScenario()
-				.getBean(PageConstants.ACCOUNT_HOME_PAGE);*/
-		OrderplanmaterialsPage orderPlanMaterialsPage = rallyDashboard
-				.navigateToOrderPlanMaterialsPage();
+		orderPlanMaterialsPage = rallyDashboard.navigateToOrderPlanMaterialsPage();
+		}
 		if (orderPlanMaterialsPage != null) {
 			getLoginScenario().saveBean(PageConstants.ORDER_PLAN_MATERIALS_PAGE,
 					orderPlanMaterialsPage);
@@ -230,8 +256,12 @@ public class OrderPlanMaterialsRedesignStepDefinition {
 		OrderplanmaterialsPage orderPlanMaterialsPage = (OrderplanmaterialsPage) getLoginScenario().getBean(PageConstants.ORDER_PLAN_MATERIALS_PAGE);
 		if(!orderPlanMaterialsPage.ValidateHeader()){
 			System.out.println("Header Text and Subtext not displayed for Order materials Page");
+			Assert.fail("Header Text and Subtext not displayed for Order materials Page");
+			
 		}
-		
+		else{
+			System.out.println("Header Text and Subtext displayed for Order materials Page");
+		}
 	}
 	
 	@And("^user validates all Order material Options for the plantype$")

@@ -23,7 +23,8 @@ Feature: 1.03-To test contact us page
       | Password    | <password>   |
       | Member Type | <memberType> |
     When the user navigates to contact us page in UHC site
-    Then user validates Group secure email widget  in redesign contact us page
+   # Then user validates Group secure email widget  in redesign contact us page
+   Then user validates secure email widget UI in redesign contact us page
     Then user validates clickToCallButton display on contactUS redesign page
  	And user clicks on Request Confirmation Click
     

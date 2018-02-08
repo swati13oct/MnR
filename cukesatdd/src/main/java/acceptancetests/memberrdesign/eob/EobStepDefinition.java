@@ -23,7 +23,9 @@ import cucumber.api.DataTable;
 import gherkin.formatter.model.DataTableRow;
 import pages.dashboard.eob.EOBPage;
 import pages.dashboard.member.ulayer.RallyDashboardPage;
+import pages.member.bluelayer.BenefitsAndCoveragePage;
 import pages.member.ulayer.TeamHLoginUlayer;
+import pages.member.ulayer.TestHarness;
 
  
 public class EobStepDefinition {
@@ -91,8 +93,15 @@ public class EobStepDefinition {
 	}
  	@Then("^the user navigates to EOB page$")
 	public void the_user_navigates_to_EOB_Page() {
+ 		EOBPage eobPage;
+ 		if("YES".equalsIgnoreCase(MRScenario.isTestHarness)){
+ 			TestHarness testHarness = (TestHarness) getLoginScenario().getBean(PageConstants.TEST_HARNESS_PAGE);
+ 			
+ 			eobPage= testHarness.navigateToEOBPage();
+ 		}else{
  		RallyDashboardPage rallyDashboard = (RallyDashboardPage) getLoginScenario().getBean(PageConstants.RALLY_DASHBOARD_PAGE);
- 		EOBPage eobPage= rallyDashboard.navigateToEOBPage();
+ 		eobPage= rallyDashboard.navigateToEOBPage();
+ 		}
  		if(null != eobPage){
  			getLoginScenario().saveBean(PageConstants.EOB_Page,
 					eobPage);
@@ -293,7 +302,7 @@ System.out.println(memberAttributesRow.get(i).getCells()
 		
 		TeamHLoginUlayer THloginPage = new TeamHLoginUlayer(wd);
 		getLoginScenario().saveBean(PageConstants.LOGIN_PAGE, THloginPage);
-		RallyDashboardPage rallyDashboard = (RallyDashboardPage) THloginPage.loginWith(userName, pwd);
+		/*RallyDashboardPage rallyDashboard = (RallyDashboardPage) THloginPage.loginWith(userName, pwd);
 		if (rallyDashboard != null) {
 			getLoginScenario().saveBean(PageConstants.RALLY_DASHBOARD_PAGE,
 					rallyDashboard);
@@ -301,6 +310,26 @@ System.out.println(memberAttributesRow.get(i).getCells()
 		}
 		else{
 			Assert.fail("Member login not successful....");
+		}*/
+		if(("YES").equalsIgnoreCase(MRScenario.isTestHarness)){
+			TestHarness testHarness = (TestHarness) THloginPage.loginWith(userName, pwd);
+			if (testHarness != null) {
+				getLoginScenario().saveBean(PageConstants.TEST_HARNESS_PAGE,
+						testHarness);		}
+			else{
+				Assert.fail("Login not successful...");
+			}
+		}
+		else{
+			
+		
+		RallyDashboardPage rallyDashboard = (RallyDashboardPage) THloginPage.loginWith(userName, pwd);
+		if (rallyDashboard != null) {
+			getLoginScenario().saveBean(PageConstants.RALLY_DASHBOARD_PAGE,
+					rallyDashboard);		}
+		else{
+			Assert.fail("Login not successful...");
+		}
 		}
 	}
 	

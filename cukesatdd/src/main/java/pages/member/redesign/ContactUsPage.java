@@ -35,7 +35,7 @@ public class ContactUsPage extends UhcDriver{
 	@FindBy(xpath="//*[@id='secureWidget']/div[1]")
 	private WebElement securewidget;
 	
-	@FindBy(xpath="//div[contains(@class,'request-email')]/div[not (contains(@class,'ng-hide'))][1]//a[@id='message-btn'][2]")
+	@FindBy(xpath="//div[contains(@class,'request-email')]/div[not (contains(@class,'ng-hide'))]//a[@id='message-btn'][1]")
 	private WebElement getStartedButton;
 
 	@FindBy(xpath="//*[@id='message-cancel']")
@@ -45,25 +45,25 @@ public class ContactUsPage extends UhcDriver{
 	private WebElement continueButton;
 	
 	
-	@FindBy(xpath="//*[@id='message-form']/fieldset/div[2]/div")
+	@FindBy(xpath="(//form[@id='message-form']//div[@class='field-input'])[2]")
 	private WebElement useDifferentEmailRadioButton;
 	
-	@FindBy(xpath = "//*[@id='message-email']")
+	@FindBy(id = "message-emails")
 	private WebElement newemailId;
 	
-	@FindBy(xpath = "//*[@id='message-email-confirm']") 
+	@FindBy(id = "message-email-confirms") 
 	private WebElement confirmemailId;
 	
 	@FindBy(xpath = "//*[@id='message-form']/fieldset/div[1]/div/div/label")
 	private WebElement emailAddressonFile;
 		
-	@FindBy(xpath = "//*[@id='message-btn']")
+	@FindBy(id = "message-btn")
 	private WebElement goToInboxButton;
 	
 	@FindBy(xpath = "//*[@id='confirmationWidget']/div")
 	private WebElement ConfirmationWidgetButton;
 	
-	@FindBy(xpath = "//*[@id='message-send']")
+	@FindBy(id = "message-send")
 	private WebElement sendAmessageButton;
 	
 	@FindBy(xpath = "//*[@id='messageModal']/div/div/div[1]")
@@ -94,11 +94,11 @@ public class ContactUsPage extends UhcDriver{
 	@FindBy(xpath = "//div[contains(@class,'click-to-call')]/div[not (contains(@class,'ng-hide'))][1]//button[@id='call-submit']")
 	private WebElement requestCall;
 	
-	@FindBy(xpath = "/*[@id='call-question-about'] ")
+	@FindBy(id = "call-question-about")
 	private WebElement contactoption;
 		
-	@FindBy(xpath = "//*[@id='call-question-about'] ")
-	private WebElement other;
+/*	@FindBy(xpath = "//*[@id='call-question-about'] ")
+	private WebElement other;*/
 	
 	@FindBy(xpath = "//div[contains(@class,'click-to-call')]/div[not (contains(@class,'ng-hide'))][1]//button/following-sibling::a")
 	private WebElement callCancel;
@@ -200,6 +200,9 @@ public class ContactUsPage extends UhcDriver{
 	@FindBy(xpath="//div[contains(@class,'request-email')]/div[not (contains(@class,'ng-hide'))]//div[contains(@class,'message-block-body')][1]//h3")
 	private WebElement memberAuthNotAuthorizedToSendUsQuestionMessage;
 	
+	@FindBy(xpath="//div[contains(@class,'click-to-call')]/div[not (contains(@class,'ng-hide'))][1]//input[@id='call-number']")
+	private WebElement clickToCallInputNum;
+	
 	private PageData contactUs;
 
 	public JSONObject contactUsJson;
@@ -236,6 +239,7 @@ public class ContactUsPage extends UhcDriver{
 	
 	public void validatesecureemail()
 	{
+		validate(securewidget);
 		if (securewidget.isDisplayed())
 		{
 			System.out.println("Secure widget is displayed");
@@ -243,6 +247,8 @@ public class ContactUsPage extends UhcDriver{
 		else
 		{
 			System.out.println("Secure widget is not  displayed");
+			Assert.fail("Secure widget is not  displayed");
+			
 		}
 	}
 	public void validatePlanName(){
@@ -271,6 +277,7 @@ public class ContactUsPage extends UhcDriver{
 	
 	public void validateSendUaQuestionWidget()
 	{
+		validate(fillOutFormButton);
 		if (fillOutFormButton.isDisplayed())
 		{
 			System.out.println("send us Question is  displayed");
@@ -285,28 +292,31 @@ public class ContactUsPage extends UhcDriver{
 		else
 		{
 			System.out.println("send us Question is not  displayed");
+			Assert.fail("send us Question is not  displayed");
 		}
 	}
 	
 	public void validateSendUsaQuestionWidgetfunctionality()
 	{
+		validate(fillOutFormButton);
 		if (fillOutFormButton.isDisplayed())
 		{
 			System.out.println("send us Question is  displayed");
 			fillOutFormButton.click();
-			try {
+			/*try {
 				Thread.sleep(5000);
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
-			}
+			}*/
+			validate(questionCancelLink);
 			questionCancelLink.click();
-			try {
+			/*try {
 				Thread.sleep(5000);
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
-			}
+			}*/
 			//fillOutFormButton.click();
 			
 			/*waitforElement(addAlternativeEmail);
@@ -330,6 +340,7 @@ public class ContactUsPage extends UhcDriver{
 		else
 		{
 			System.out.println("send us Question is not  displayed");
+			Assert.fail("send us Question is not  displayed");
 		}
 	}
 	public void validateSendUaQuestionWidgetCancelClick()
@@ -674,126 +685,132 @@ public class ContactUsPage extends UhcDriver{
 	
 	public void validateEmailWidgetSection()
 	{
-		if (getStartedButton.isDisplayed())
-		{
-			System.out.println("email widget is displayed");
+		try{
+		validate(getStartedButton);
 			getStartedButton.click();
-			try {
+			/*try {
 				Thread.sleep(5000);
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
-			}
+			}*/
 			
 			waitforElement(useDifferentEmailRadioButton);
 			useDifferentEmailRadioButton.click();
+			validate(emailAddressonFile);
 			emailAddressonFile.click();
+			validate(useDifferentEmailRadioButton);
 			useDifferentEmailRadioButton.click();
-			try {
+			/*try {
 				Thread.sleep(5000);
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
-			}
+			}*/
 			//newemailId.sendKeys("tiasdgaarp@gmail.com");
 			//confirmemailId.sendKeys("tiasdgaarp@gmail.com");
-			try {
+			/*try {
 				Thread.sleep(5000);
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
-			}
+			}*/
 			
-			waitforElement(cancelLink);
-			try {
+			validate(cancelLink);
+			/*try {
 				Thread.sleep(5000);
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
-			}
+			}*/
 			cancelLink.click();
-			try {
+			/*try {
 				Thread.sleep(5000);
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
-			}
+			}*/
 			
 		}
-		else
+		catch(Exception ex)
 		{
-			System.out.println("Secure widget is not  displayed");
+			System.out.println(ex.getMessage());
+			Assert.fail("Secure widget is not  displayed");
+			
 		}
 	}
 	
 	public void validateEmailWidgetfunctionality()
 	{
+		validate(getStartedButton);
 		if (getStartedButton.isDisplayed())
 		{
 			System.out.println("email widget is displayed");
 			getStartedButton.click();
-			try {
+			/*try {
 				Thread.sleep(5000);
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
-			}
+			}*/
 			
-			waitforElement(useDifferentEmailRadioButton);
+			validate(useDifferentEmailRadioButton);
 			useDifferentEmailRadioButton.click();
 			//emailAddressonFile.click();
 			//useDifferentEmailRadioButton.click();
-			try {
+			/*try {
 				Thread.sleep(5000);
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
-			}
-			driver.findElement(By.id("message-email")).click();
-			try {
+			}*/
+			//newemailId.click();
+			/*try {
 				Thread.sleep(1000);
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
-			}
-			driver.findElement(By.id("message-email")).sendKeys("miasdgaarp@gmail.com");
-			driver.findElement(By.id("message-email-confirm")).click();
-			try {
+			}*/
+			sendkeys(newemailId, "miasdgaarp@gmail.com");
+			//driver.findElement(By.id("message-email")).sendKeys("miasdgaarp@gmail.com");
+			//confirmemailId.click();
+			/*try {
 				Thread.sleep(1000);
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
-			}
-			driver.findElement(By.id("message-email-confirm")).sendKeys("miasdgaarp@gmail.com");
-			try {
+			}*/
+			sendkeys(confirmemailId, "miasdgaarp@gmail.com");
+			//driver.findElement(By.id("message-email-confirm")).sendKeys("miasdgaarp@gmail.com");
+			/*try {
 				Thread.sleep(5000);
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
-			}
+			}*/
 			
-			waitforElement(continueButton);
-			try {
+			validate(continueButton);
+			/*try {
 				Thread.sleep(5000);
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
-			}
+			}*/
 			continueButton.click();
-			waitforElement(ConfirmationWidgetButton);
+			validate(ConfirmationWidgetButton);
 			
-			waitforElement(sendAmessageButton);
+			validate(sendAmessageButton);
 			
-			try {
+			/*try {
 				Thread.sleep(5000);
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
-			}
+			}*/
 			sendAmessageButton.click();
 		}
 		else
-		{
+		{  Assert.fail("Secure widget is not  displayed");
 			System.out.println("Secure widget is not  displayed");
 		}
 	}
@@ -1063,28 +1080,28 @@ public class ContactUsPage extends UhcDriver{
 		{
 			System.out.println("send a req  is displayed");
 			jsClick(requestACall);
-			try {
+			/*try {
 				Thread.sleep(5000);
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
-			}
-			Select dropdown = new Select(driver.findElement(By.id("call-question-about")));
-			System.out.println("dropdown" +dropdown);
-			try {
+			}*/
+			validate(contactoption);
+	//	Select dropdown = new Select(contactoption);
+			/*try {
 				Thread.sleep(5000);
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
-			}
-			driver.findElement(By.xpath("//div[contains(@class,'click-to-call')]/div[not (contains(@class,'ng-hide'))][1]//input[@id='call-number']")).sendKeys("9023456121");
+			}*/
+			sendkeys(clickToCallInputNum, "9023456121");
 			requestCall.click();
-			try {
+			/*try {
 				Thread.sleep(5000);
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
-			}
+			}*/
 			//request confirmation:
 			
 			waitforElement(reqConfirmation);

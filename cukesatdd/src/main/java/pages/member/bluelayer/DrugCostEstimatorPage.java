@@ -279,8 +279,9 @@ public class DrugCostEstimatorPage extends UhcDriver {
 	@FindBy(id = "total_annualcost")
 	public WebElement totDrugCost_LeftRail;
 	
+	@FindBy(xpath = ".//*[@id='drugModal']/div/div/div[2]/div/section/div/button[2]")
+	public WebElement deleteButton;
 	
-
 	@Override
 	public void openAndValidate() {
 
@@ -314,7 +315,7 @@ public class DrugCostEstimatorPage extends UhcDriver {
 		//waitforElement(addDrug);
 		addDrug.click();
 		//addDrug.click();
-		System.out.println("Current Page title :: " + driver.getTitle());
+		//System.out.println("Current Page title :: " + driver.getTitle());
 
 		if (driver.getTitle().equalsIgnoreCase("drugcostestimatoracquisition") ||  driver.getTitle().equalsIgnoreCase("Overview")|| driver.getTitle().equalsIgnoreCase("Drug Cost Estimator")) {
 			return new AddNewDrugModal(driver);
@@ -869,10 +870,12 @@ public class DrugCostEstimatorPage extends UhcDriver {
 		AddNewDrugModal addNewDrugModal = clickOnAddDrug();
 		addNewDrugModal.typeDrugName(drug);
 		Thread.sleep(2000);
-		addNewDrugModal.submit();
+		AddDrugDetails addDrugDetails = addNewDrugModal.submit();
 		// addNewDrugModal.selectDrug(drug);
-		AddDrugDetails addDrugDetails = new AddDrugDetails(driver);
-
+		//AddDrugDetails addDrugDetails = new AddDrugDetails(driver);
+		if(!(loadingImages.isEmpty())){
+			CommonUtility.waitForElementToDisappear(driver, loadingImages.get(0), 20);
+			}
 		SavingsOppurtunity savingsOppurtunity = addDrugDetails.continueAddDrugDetailsModal();
 
 		// if(addDrugDetails.continueAddDrugDetails()!=null){
@@ -923,12 +926,10 @@ public class DrugCostEstimatorPage extends UhcDriver {
 			((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView();", deleteDrug);
 			
 			deleteDrug.click();
+			CommonUtility.waitForElementToDisappear(driver, loadingImage, 30);
 			System.out.println("drug deleted");
-			WebElement deleteButtonXpath = driver.findElement(By.xpath(".//*[@id='drugModal']/div/div/div[2]/div/section/div/button[2]"));
-			System.out.println("drug delete button");
-			waitforElement(deleteButtonXpath);
-			validate(deleteButtonXpath);
-			deleteButtonXpath.click();
+			validate(deleteButton);
+			deleteButton.click();
 			drugCount--;
 			Thread.sleep(5000);
 		}
@@ -1176,7 +1177,7 @@ public class DrugCostEstimatorPage extends UhcDriver {
 				Assert.assertTrue("Drug does not have switch to generic option ",false);
 			}
 		}else{
-			Assert.assertTrue("There are no drugs added ",false);
+			Assert.fail("There are no drugs added ");
 		}
 		
 
