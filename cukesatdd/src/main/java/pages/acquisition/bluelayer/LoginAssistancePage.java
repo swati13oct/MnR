@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-import acceptancetests.login.data.LoginCommonConstants;
+import acceptancetests.data.LoginCommonConstants;
 /**
  * @author rkodumur
  *

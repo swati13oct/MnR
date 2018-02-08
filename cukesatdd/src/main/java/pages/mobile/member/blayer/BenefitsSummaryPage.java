@@ -1,6 +1,3 @@
-/**
- * 
- */
 package pages.mobile.member.blayer;
 
 import java.util.List;
@@ -17,9 +14,9 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-import acceptancetests.atdd.data.PageData;
-import acceptancetests.atdd.mobile.data.CommonConstants;
-import acceptancetests.atdd.util.CommonUtility;
+import acceptancetests.data.PageData;
+import acceptancetests.deprecated.atdd.mobile.data.CommonConstants;
+import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
 import pages.dashboard.member.blayer.PaymentHistoryPage;
 import pages.mobile.member.blayer.MyDrugBenefitDetailsPage;
@@ -261,7 +258,7 @@ public class BenefitsSummaryPage extends UhcDriver{
 
 	public JSONObject getExpectedData(Map<String, JSONObject> expectedDataMap) {
 		JSONObject benefitsSummaryExpectedJson = expectedDataMap
-				.get(acceptancetests.atdd.data.CommonConstants.BENEFITS_SUMMARY_BLAYER);
+				.get(acceptancetests.data.CommonConstants.BENEFITS_SUMMARY_BLAYER);
 		
 		return benefitsSummaryExpectedJson;
 	}

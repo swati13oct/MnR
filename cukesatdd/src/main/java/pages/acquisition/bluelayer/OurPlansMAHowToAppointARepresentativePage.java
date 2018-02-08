@@ -10,7 +10,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
 import pages.acquisition.uhcretiree.Rallytool_Page;
-import acceptancetests.atdd.data.MRConstants;
+import acceptancetests.data.MRConstants;
 
 public class OurPlansMAHowToAppointARepresentativePage extends GlobalWebElements {
 	

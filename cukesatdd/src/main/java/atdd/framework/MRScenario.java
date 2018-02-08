@@ -43,7 +43,7 @@ import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.springframework.stereotype.Component;
 
-import acceptancetests.atdd.data.CommonConstants;
+import acceptancetests.data.CommonConstants;
 
 /**
 * 

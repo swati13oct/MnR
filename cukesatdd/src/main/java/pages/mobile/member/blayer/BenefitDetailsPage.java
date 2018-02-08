@@ -15,9 +15,9 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-import acceptancetests.atdd.data.PageData;
-import acceptancetests.atdd.mobile.data.CommonConstants;
-import acceptancetests.atdd.util.CommonUtility;
+import acceptancetests.data.PageData;
+import acceptancetests.deprecated.atdd.mobile.data.*;
+import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
 
 /**
@@ -123,14 +123,14 @@ public class BenefitDetailsPage extends UhcDriver{
 
 	public JSONObject getExpectedData(Map<String, JSONObject> expectedDataMap) {
 		JSONObject benefitsDetailExpectedJson = expectedDataMap
-				.get(acceptancetests.atdd.data.CommonConstants.BENEFITS_DETAIL);
+				.get(acceptancetests.data.CommonConstants.BENEFITS_DETAIL);
 		
 		return benefitsDetailExpectedJson;
 	}
 
 	public JSONObject getExpectedDataship(Map<String, JSONObject> expectedDataMap) {
 		JSONObject benefitsDetailExpectedJson = expectedDataMap
-				.get(acceptancetests.atdd.data.CommonConstants.BENEFITS_DETAIL);
+				.get(acceptancetests.data.CommonConstants.BENEFITS_DETAIL);
 		
 		return benefitsDetailExpectedJson;
 	}
