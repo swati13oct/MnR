@@ -837,9 +837,9 @@ public class MRScenario {
                 capabilities.setCapability("autoAcceptsAlerts", true);
                 capabilities.setCapability("parent-tunnel", "sauce_admin");
                 capabilities.setCapability("tunnelIdentifier", "OptumSharedTunnel-Prd");
-                capabilities.setCapability(CapabilityType.ACCEPT_SSL_CERTS, true);
+               // capabilities.setCapability(CapabilityType.ACCEPT_SSL_CERTS, true);
                // capabilities.setCapability("--no-ssl-bump-domains", "all");
-                capabilities.setCapability("--no-ssl-bump-domains", "*.optum.com");
+               // capabilities.setCapability("--no-ssl-bump-domains", "*.optum.com");
                 String SAUCE_USERNAME = props.get("SAUCE_USERNAME");
 	            String SAUCE_ACCESS_KEY = props.get("SAUCE_ACCESS_KEY");
                 //String URL = "http://" + USERNAME + ":" + ACCESS_KEY + "@ondemand.saucelabs.com:80/wd/hub";
