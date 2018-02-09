@@ -70,7 +70,7 @@ Feature: To validate the new changes related to claims page on the member redesi
     And I can search claims for the following claim period on redesigned site
       | Plan Type    | <planType>    |
       | Claim Period | <claimPeriod> |
-    Then user validates the claims displayed based on the selection in redesigned site
+    Then I can see the claims displayed based on the selection in redesigned site
     And I navigate to the Claim Details page in AARP site
     Then I validate the Claims Table in claims details page in AARP site
     And I validate the Claims Total in claims details page in AARP site
